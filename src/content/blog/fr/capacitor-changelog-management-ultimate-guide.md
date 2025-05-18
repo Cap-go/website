@@ -22,11 +22,11 @@ locale: fr
 next_blog: ''
 ---
 
-La gestion des journaux de modifications est essentielle pour maintenir la transparence et l'organisation des [mises à jour de votre application](https://capgoapp/plugins/capacitor-updater/) Ce guide explique comment créer, structurer et automatiser les journaux de modifications pour les [applications Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/), garantissant que les développeurs et les utilisateurs restent informés Voici ce que vous apprendrez :
+La gestion des journaux de modifications est essentielle pour maintenir la transparence et l'organisation des [mises à jour de votre application](https://capgo.app/plugins/capacitor-updater/) Ce guide explique comment créer, structurer et automatiser les journaux de modifications pour les [applications Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), garantissant que les développeurs et les utilisateurs restent informés Voici ce que vous apprendrez :
 
 -   **Pourquoi les journaux de modifications sont importants** : Ils simplifient le débogage, améliorent la communication et renforcent la confiance des utilisateurs
 -   **Comment structurer les journaux de modifications** : Utilisez des catégories comme "Ajouté", "Corrigé" et "Sécurité" pour plus de clarté
--   **Bonnes pratiques** : Mettez à jour les journaux avant les commits, automatisez avec des outils comme [Capgo](https://capgoapp/), et révisez les entrées lors des pull requests
+-   **Bonnes pratiques** : Mettez à jour les journaux avant les commits, automatisez avec des outils comme [Capgo](https://capgo.app/), et révisez les entrées lors des pull requests
 -   **Outils d'automatisation** : Utilisez des pipelines CI/CD et des standards de commit pour rationaliser la gestion des journaux
 -   **Mises à jour OTA** : Documentez les mises à jour en direct avec des détails comme les numéros de version, les horodatages et les taux de réussite
 
@@ -71,7 +71,7 @@ Listez toujours les versions dans l'ordre chronologique inverse pour que les mis
 L'incorporation des mises à jour du journal dans votre flux de travail garantit une documentation précise et à jour Voici quelques conseils pratiques :
 
 -   **Mises à jour pré-commit** : Mettez à jour le journal avant de valider les modifications de code Cela réduit le risque d'oublier des mises à jour importantes
--   **Intégration automatisée** : Des outils comme Capgo fonctionnent avec [GitHub Actions](https://docsgithubcom/actions), [GitLab CI](https://docsgitlabcom/ee/ci/), et [Jenkins](https://wwwjenkinsio/) [\[1\]](https://capgoapp/) pour simplifier le processus de mise à jour de votre journal
+-   **Intégration automatisée** : Des outils comme Capgo fonctionnent avec [GitHub Actions](https://docsgithubcom/actions), [GitLab CI](https://docsgitlabcom/ee/ci/), et [Jenkins](https://wwwjenkinsio/) [\[1\]](https://capgo.app/) pour simplifier le processus de mise à jour de votre journal
 -   **Processus de révision** : Intégrez la révision des entrées du journal dans votre processus de pull request Cela garantit que les mises à jour sont précises et approuvées avant la fusion
 
 ## Rédaction d'entrées claires dans le journal de modifications
@@ -151,7 +151,7 @@ Plusieurs outils peuvent gérer efficacement l'automatisation du changelog. Lors
 -   **Capacités d'intégration** : S'intègre parfaitement dans votre pipeline CI/CD existant
 -   **Options de personnalisation** : S'adapte aux besoins spécifiques de votre projet
 
-Capgo facilite l'automatisation du changelog en intégrant des mises à jour en direct [\[1\]](https://capgoapp/). Avec plus de 750 applications en production et 235 millions de mises à jour livrées [\[1\]](https://capgoapp/), il a prouvé sa fiabilité. Pour tirer le meilleur parti de ces outils, assurez-vous que vos messages de commit suivent une structure claire.
+Capgo facilite l'automatisation du changelog en intégrant des mises à jour en direct [\[1\]](https://capgo.app/). Avec plus de 750 applications en production et 235 millions de mises à jour livrées [\[1\]](https://capgo.app/), il a prouvé sa fiabilité. Pour tirer le meilleur parti de ces outils, assurez-vous que vos messages de commit suivent une structure claire.
 
 ### Standards des messages de commit
 
@@ -177,7 +177,7 @@ Voici quelques types de commits courants :
 
 En combinant des outils automatisés avec des messages de commit standardisés, vous pouvez intégrer la génération du changelog dans votre pipeline CI/CD. Cette configuration assure des mises à jour rapides et précises. Un pipeline correctement configuré peut générer automatiquement des changelogs, vérifier le formatage des messages, mettre à jour la documentation et notifier votre équipe.
 
-Les résultats parlent d'eux-mêmes : 95% des utilisateurs actifs reçoivent des mises à jour dans les 24 heures en utilisant le système de déploiement automatisé de Capgo [\[1\]](https://capgoapp/)## Gestion des Changements pour les Mises à Jour OTA
+Les résultats parlent d'eux-mêmes : 95% des utilisateurs actifs reçoivent des mises à jour dans les 24 heures en utilisant le système de déploiement automatisé de Capgo [\[1\]](https://capgo.app/)## Gestion des Changements pour les Mises à Jour OTA
 
 La gestion des journaux de modifications pour les mises à jour en direct (OTA) nécessite une attention particulière car ces mises à jour sont déployées instantanément. Contrairement aux mises à jour traditionnelles de l'App Store que les utilisateurs téléchargent manuellement, les mises à jour OTA atteignent les appareils automatiquement. Cela rend essentielle une documentation claire et détaillée pour maintenir la confiance des utilisateurs et assurer la transparence.
 
@@ -192,15 +192,15 @@ Lors de la gestion des mises à jour en direct, il est important de documenter l
 | Performance | Améliorations de la vitesse et optimisations | "Réduction du temps de chargement de l'application de 40%" |
 | Sécurité | Mises à jour pour renforcer la sécurité | "Amélioration du chiffrement des données pour les transferts de fichiers" |
 
-### Gestion des Mises à Jour [Capgo](https://capgoapp/)
+### Gestion des Mises à Jour [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Pour les mises à jour OTA en direct, une documentation détaillée est indispensable pour compléter votre stratégie globale de gestion des changements. Capgo simplifie ce processus en suivant automatiquement les versions, en surveillant les performances des mises à jour, en enregistrant les retours en arrière et en documentant les déploiements par canal.
 
 Un développeur gérant plus de 5 000 utilisateurs a partagé son expérience :
 
-> "Nous avons déployé les mises à jour OTA Capgo en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement de l'OTA sur @Capgo" – colenso [\[1\]](https://capgoapp/)
+> "Nous avons déployé les mises à jour OTA Capgo en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement de l'OTA sur @Capgo" – colenso [\[1\]](https://capgo.app/)
 
 **Meilleures Pratiques pour la Gestion des Changements OTA** :
 
@@ -210,7 +210,7 @@ Un développeur gérant plus de 5 000 utilisateurs a partagé son expérience :
 
 Rodrigo Mantica souligne l'importance de cette approche :
 
-> "Nous pratiquons le développement agile et @Capgo est crucial pour livrer en continu à nos utilisateurs !" – Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Nous pratiquons le développement agile et @Capgo est crucial pour livrer en continu à nos utilisateurs !" – Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 ## Résumé
 
@@ -220,9 +220,9 @@ Une gestion efficace des changements améliore la clarté et renforce la confian
 
 | Pratique | Description | Impact |
 | --- | --- | --- |
-| **Suivi des Versions** | Garder une trace des numéros de version (app et OTA) | 82% de taux de succès global pour les mises à jour suivies [\[1\]](https://capgoapp/) |
-| **Catégories de Mises à Jour** | [Classifier les mises à jour](https://capgoapp/docs/plugin/cloud-mode/hybrid-update) par type (corrections, fonctionnalités, sécurité) | 95% des utilisateurs actifs se mettent à jour dans les 24 heures [\[1\]](https://capgoapp/) |
-| **Enregistrements de Déploiement** | Documenter les horodatages, taux de succès et métriques | Supporte le suivi de 235M de mises à jour [\[1\]](https://capgoapp/) |
+| **Suivi des Versions** | Garder une trace des numéros de version (app et OTA) | 82% de taux de succès global pour les mises à jour suivies [\[1\]](https://capgo.app/) |
+| **Catégories de Mises à Jour** | [Classifier les mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) par type (corrections, fonctionnalités, sécurité) | 95% des utilisateurs actifs se mettent à jour dans les 24 heures [\[1\]](https://capgo.app/) |
+| **Enregistrements de Déploiement** | Documenter les horodatages, taux de succès et métriques | Supporte le suivi de 235M de mises à jour [\[1\]](https://capgo.app/) |
 | **Stratégie de Retour en Arrière** | Maintenir des journaux des versions précédentes avec intégration OTA | Permet une récupération immédiate si nécessaire |
 
 ### Outils Suggérés pour une Meilleure Gestion
@@ -233,4 +233,4 @@ Pour mettre en œuvre ces pratiques efficacement, l'utilisation des bons outils 
 -   **Analyses en Temps Réel** : Surveiller les performances des mises à jour et les taux d'adoption
 -   **Gestion des Canaux** : Activer les tests bêta et les déploiements progressifsEn combinant ces pratiques avec les bons outils, vous pouvez établir un système de changelog fiable qui prend en charge la livraison continue tout en tenant les utilisateurs informés
 
-> "Nous pratiquons le développement agile et @Capgo est essentiel dans la livraison continue à nos utilisateurs !" [\[1\]](https://capgoapp/)
+> "Nous pratiquons le développement agile et @Capgo est essentiel dans la livraison continue à nos utilisateurs !" [\[1\]](https://capgo.app/)

@@ -175,7 +175,7 @@ Es gibt mehrere Möglichkeiten, Push-Benachrichtigungen mit Firebase zu senden
 
 Nachdem du deine App auf einem Gerät bereitgestellt hast, kannst du die Konsolenprotokolle überprüfen, um das Token nach der Registrierung zu sehen. Verwende dieses Token, um einen gezielten Test-Push zu senden und deine Integration zu bestätigen. Gehe in Firebase zu **Cloud Messaging** und wähle **Testnachricht senden**. Füge das Geräte-Token aus den Protokollen hinzu.
 
-![firebase-test-push](/firebase-test-pushwebp)
+![firebase-test-push](/firebase-test-push.webp)
 
 Wenn alles korrekt eingerichtet ist, solltest du eine Push-Benachrichtigung auf deinem Gerät sehen
 
@@ -183,7 +183,7 @@ Wenn alles korrekt eingerichtet ist, solltest du eine Push-Benachrichtigung auf 
 
 Um eine Push-Benachrichtigung mit zusätzlichen Informationen zu testen, folge dem Assistenten auf derselben Seite, um allgemeine Informationen anzugeben und wähle die Plattform aus, die du ansprechen möchtest. Füge **zusätzliche Optionen** hinzu, um einen Payload mit deiner Push-Benachrichtigung zu senden.
 
-![firebase-push-payload](/firebase-push-payloadwebp)
+![firebase-push-payload](/firebase-push-payload.webp)
 
 Im Abschnitt **Erweiterte Optionen** füge ein Schlüssel-Wert-Paar für **Benutzerdefinierte Daten** hinzu. Zum Beispiel kannst du den Schlüssel `detailsId` und einen Wert deiner Wahl verwenden. Diese Daten werden in der App verwendet, um zur Detailseite mit der angegebenen ID zu navigieren.
 

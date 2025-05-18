@@ -12,7 +12,7 @@ locale: ja
 
 まず、Capacitorの移行ガイドに従ってください：
 
-[https://capacitorjscom/docs/updating/5-0](https://capacitorjscom/docs/updating/5-0/)
+[https://capacitorjs.com/docs/updating/5-0](https://capacitorjs.com/docs/updating/5-0/)
 
 ## インストール
 

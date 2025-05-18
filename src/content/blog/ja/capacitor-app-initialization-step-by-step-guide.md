@@ -21,20 +21,20 @@ locale: ja
 next_blog: ''
 ---
 
-**シングルコードベースでモバイルアプリを構築したいですか？** [Capacitor](https://capacitorjscom/)を使用すると、[React](https://reactdev/)、[Angular](https://angulario/)、[Vue](https://vuejsorg/)などのフレームワークを使用してiOS、Android、Webアプリを簡単に作成できます。このガイドでは、[Capacitor](https://capacitorjscom/)のセットアップ方法、プラットフォームの構成方法、効率的な更新のデプロイ方法について説明します。
+**シングルコードベースでモバイルアプリを構築したいですか？** [Capacitor](https://capacitorjs.com/)を使用すると、[React](https://reactdev/)、[Angular](https://angulario/)、[Vue](https://vuejsorg/)などのフレームワークを使用してiOS、Android、Webアプリを簡単に作成できます。このガイドでは、[Capacitor](https://capacitorjs.com/)のセットアップ方法、プラットフォームの構成方法、効率的な更新のデプロイ方法について説明します。
 
 ### 始めるための重要なステップ：
 
 - **ツールのインストール**: [Nodejs](https://nodejsorg/en)、npm、Git、[VS Code](https://codevisualstudiocom/)などのコードエディタ
 - **Capacitorのセットアップ**: Capacitor CLIをインストールしてプロジェクトを初期化
 - **プラットフォームの構成**: iOSとAndroidのサポートを追加し、設定を調整してコードを同期
-- **テストとデプロイ**: ビルド、デバイスでの実行、[Capgo](https://capgoapp/)などのライブ更新ツールを使用してシームレスな更新を実現
+- **テストとデプロイ**: ビルド、デバイスでの実行、[Capgo](https://capgo.app/)などのライブ更新ツールを使用してシームレスな更新を実現
 
 Capacitorは、Webアプリとネイティブデバイス機能を橋渡しし、プラットフォーム間でスムーズなパフォーマンスを確保します。このガイドに従って、アプリ開発プロセスを簡素化しましょう！
 
-## [CAPACITOR](https://capacitorjscom/)でネイティブアプリを作る5つのステップ | Ionicリリースガイド
+## [CAPACITOR](https://capacitorjs.com/)でネイティブアプリを作る5つのステップ | Ionicリリースガイド
 
-![CAPACITOR](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28jpg?auto=compress)
+![CAPACITOR](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28.jpg?auto=compress)
 
 <Steps>
 <Steps>
@@ -59,7 +59,7 @@ Capacitorを使用するには、以下のツールが必要です：
 - **NodejsとNPM**: 公式[Nodejsウェブサイト](https://nodejsorg)からダウンロードしてインストール
 - **コードエディタ**: VS Code、[WebStorm](https://wwwjetbrainscom/webstorm/)、[Sublime Text](https://wwwsublimetextcom/)などから選択して最新の安定版をインストール
 - **Git**: [git-scmcom](https://git-scmcom)から入手
-- **プラットフォーム固有のツール**: macOS用の[Xcode](https://developerapplecom/xcode/)やAndroid開発用の[Android Studio](https://developerandroidcom/studio)など、プラットフォーム固有のツールをインストール
+- **プラットフォーム固有のツール**: macOS用の[Xcode](https://developer.apple.com/xcode/)やAndroid開発用の[Android Studio](https://developerandroidcom/studio)など、プラットフォーム固有のツールをインストール
 
 これらをインストールしたら、Capacitor CLIのセットアップに進みます。
 
@@ -79,7 +79,7 @@ Capacitorを使用するには、以下のツールが必要です：
     
     [[CODE_BLOCK]]
     
-    これにより、[更新管理](https://capgoapp/docs/plugin/cloud-mode/manual-update/)に必要な設定が構成されます[\[1\]](https://capgoapp/)。アプリのビルド、テスト、デプロイのプロセスが簡素化されます。
+    これにより、[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)に必要な設定が構成されます[\[1\]](https://capgo.app/) 。アプリのビルド、テスト、デプロイのプロセスが簡素化されます。
 
 ## 新しいCapacitorプロジェクトの開始
 
@@ -191,7 +191,7 @@ Capacitorプロジェクトが初期化されたら、次のステップはiOS�
 
 ## ビルドとテスト
 
-前述のセットアップを使用して、[Capacitor アプリ](https://capgoapp/plugins/ivs-player/)を様々なデバイスで正しく動作するようビルドしてテストできます。
+前述のセットアップを使用して、[Capacitor アプリ](https://capgo.app/plugins/ivs-player/)を様々なデバイスで正しく動作するようビルドしてテストできます。
 
 ### ビルドと実行コマンド
 
@@ -213,7 +213,7 @@ Capacitorプロジェクトが初期化されたら、次のステップはiOS�
 
 ### Capacitor プラグインの追加
 
-[Capacitor プラグイン](https://capgoapp/plugins/)を使用すると、アプリにネイティブ機能を追加できます。例えば、カメラ、位置情報、ストレージ機能を含めるには、以下を実行します：
+[Capacitor プラグイン](https://capgo.app/plugins/)を使用すると、アプリにネイティブ機能を追加できます。例えば、カメラ、位置情報、ストレージ機能を含めるには、以下を実行します：
 
 [[CODE_BLOCK]]
 
@@ -221,10 +221,10 @@ Capacitorプロジェクトが初期化されたら、次のステップはiOS�
 
 | **プラグイン** | **iOS の設定** | **Android の設定** |
 | --- | --- | --- |
-| カメラ | [プライバシー説明](https://capgoapp/privacy/)を追加 | マニフェストに権限を追加 |
+| カメラ | [プライバシー説明](https://capgo.app/privacy/)を追加 | マニフェストに権限を追加 |
 | 位置情報 | 位置情報使用説明を追加 | 位置情報の権限を追加 |
 | ストレージ | 追加設定不要 | 追加設定不要 |
 
-### [Capgo](https://capgoapp/)でのライブアップデート
+### [Capgo](https://capgo.app/)でのライブアップデート
 
 ![Capgo](https://mars-imagesimgix

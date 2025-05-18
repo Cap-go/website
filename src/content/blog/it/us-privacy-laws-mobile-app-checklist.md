@@ -24,7 +24,7 @@ next_blog: ''
 
 **La conformità alla privacy è fondamentale per le app mobile.** Le leggi sulla privacy degli Stati Uniti come [CCPA](https://enwikipediaorg/wiki/California_Consumer_Privacy_Act), [VCDPA](https://probloomberglawcom/insights/privacy/virginia-consumer-data-protection-act-vcdpa/) e CPA richiedono che le app proteggano i dati degli utenti, garantiscano trasparenza e rispettino i diritti degli utenti. La non conformità può portare a multe fino a $7,500 per violazione e perdita della fiducia degli utenti. Ecco come mantenersi conformi:
 
-- **[Privacy Policy](https://capgoapp/dp/):** Spiegare chiaramente la raccolta, l'utilizzo, la condivisione dei dati e i diritti degli utenti
+- **[Privacy Policy](https://capgo.app/dp/):** Spiegare chiaramente la raccolta, l'utilizzo, la condivisione dei dati e i diritti degli utenti
 - **Permessi Utente:** Ottenere il consenso esplicito e permettere agli utenti di gestire i loro dati
 - **Richieste Dati:** Rispondere alle richieste degli utenti (accesso, cancellazione, opt-out) entro i termini legali
 - **Protezione Dati dei Minori:** Rispettare il [COPPA](https://enwikipediaorg/wiki/Children%27s_Online_Privacy_Protection_Act) per utenti sotto i 13 anni
@@ -32,11 +32,11 @@ next_blog: ''
 - **Verifiche Regolari:** Condurre revisioni trimestrali delle pratiche sui dati e dei permessi
 - **Formazione del Team:** Educare il team sulle leggi sulla privacy e sulla gestione sicura dei dati
 
-Mantenersi aggiornati sulle leggi in evoluzione e utilizzare strumenti come [Capgo](https://capgoapp/) per implementare aggiornamenti sicuri in modo efficiente. La conformità alla privacy non riguarda solo evitare sanzioni - si tratta di costruire fiducia con i propri utenti.
+Mantenersi aggiornati sulle leggi in evoluzione e utilizzare strumenti come [Capgo](https://capgo.app/) per implementare aggiornamenti sicuri in modo efficiente. La conformità alla privacy non riguarda solo evitare sanzioni - si tratta di costruire fiducia con i propri utenti.
 
 ## [USENIX Security](https://wwwusenixorg/conference/usenixsecurity25) '24 - Navigare nella Conformità alla Privacy
 
-![USENIX Security](https://mars-imagesimgixnet/seobot/screenshots/wwwusenixorg-d8a0181fef2b5e2513a1acfa3938daca-2025-03-23jpg?auto=compress)
+![USENIX Security](https://mars-images.imgix.net/seobot/screenshots/wwwusenixorg-d8a0181fef2b5e2513a1acfa3938daca-2025-03-23.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -66,7 +66,7 @@ Diversi stati hanno emanato le proprie normative sulla privacy:
 
 ### Leggi Federali e Regole [FTC](https://wwwftcgov/)
 
-![FTC](https://mars-imagesimgixnet/seobot/screenshots/wwwftcgov-ce439e87b8dcc2429a2bbfa28a3503d6-2025-03-23jpg?auto=compress)
+![FTC](https://mars-images.imgix.net/seobot/screenshots/wwwftcgov-ce439e87b8dcc2429a2bbfa28a3503d6-2025-03-23.jpg?auto=compress)
 
 Le leggi federali stabiliscono una base per la protezione della privacy in tutte le app USA, con la Federal Trade Commission (FTC) che applica linee guida chiave:
 

@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # @capgo/capacitor-uploader Tutorial
 
 This tutorial will guide you through the process of using the `@capgo/capacitor-uploader` package to upload files natively in your Ionic Capacitor app.

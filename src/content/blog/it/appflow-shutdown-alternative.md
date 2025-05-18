@@ -49,7 +49,7 @@ Invece di essere vincolato a un sistema CI/CD proprietario, Capgo ti permette di
 - Integrare con la tua infrastruttura CI/CD esistente
 - Utilizzare piattaforme popolari come GitHub Actions
 - Mantenere il controllo completo sul tuo processo di build
-- Seguire i nostri tutorial dettagliati per la configurazione [iOS](https://capgo.app/blog/github-action-capacitor/)
+- Seguire i nostri tutorial dettagliati per la configurazione [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
 - O lasciare che ci occupiamo di tutto noi con il nostro servizio [CI/CD Done For You](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you)
 
 ## Perché Scegliere Capgo?

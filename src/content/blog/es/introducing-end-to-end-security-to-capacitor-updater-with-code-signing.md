@@ -28,7 +28,7 @@ next_blog: ''
 
 Por defecto, el modelo de seguridad de Capgo es similar al de los proveedores de alojamiento web. Capgo almacena las actualizaciones [cifradas en reposo](https://cloudgooglecom/docs/security/encryption/default-encryption/) y las sirve a través de HTTPS usando cifrados modernos. De manera similar, la publicación de una actualización desde la computadora de un desarrollador siempre usa HTTPS.
 
-![Capgo obtiene una A+ en la prueba HTTPS de SSL Labs](/ssllabs_reportwebp)
+![Capgo obtiene una A+ en la prueba HTTPS de SSL Labs](/ssllabs_report.webp)
 
 La seguridad predeterminada de Capgo obtiene una A+ en la prueba HTTPS de SSL Labs (https://wwwssllabscom, noviembre 2022)
 
@@ -50,7 +50,7 @@ La firma de código de extremo a extremo de Capgo utiliza criptografía de clave
 
 Aquí hay un esquema simple* para explicar cómo funciona:
 
-![Esquema de cifrado de Capgo](/encryption_flowwebp)
+![Esquema de cifrado de Capgo](/encryption_flow.webp)
 
 * Complejo en la práctica, la criptografía es difícil
 

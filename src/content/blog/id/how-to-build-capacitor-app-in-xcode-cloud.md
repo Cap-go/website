@@ -32,9 +32,9 @@ Menggunakan Ionic adalah opsional, untuk Cordova mungkin bisa berfungsi, tapi sa
 
 ## Penting tentang harga
 
-![Price Xcode Cloud](/xcode_cloud_pricewebp)
+![Price Xcode Cloud](/xcode_cloud_price.webp)
 
-[https://developerapplecom/xcode-cloud/](https://developerapplecom/xcode-cloud/)
+[https://developer.apple.com/xcode-cloud/](https://developer.apple.com/xcode-cloud/)
 
 Layanan ini '_gratis_' sampai batas tertentu  
 Anda dapat melihat harga dan batas di screenshot (harga pada saat tutorial dibuat, bisa berubah di masa mendatang)
@@ -96,28 +96,28 @@ Kemudian buat file ini dapat dieksekusi dengan perintah `chmod +x ios/App/ci_scr
 Buka Xcode (ya, untuk menghapus Xcode Anda memerlukan Xcode)
 
 Dan pergi ke tab ini:
-![Xcode step 1](/xcode_step_1webp)
+![Xcode step 1](/xcode_step_1.webp)
 
 Klik create workflow, pilih aplikasi Anda, klik next seperti di bawah ini
 
-![Xcode step 2](/xcode_step_2webp)
+![Xcode step 2](/xcode_step_2.webp)
 
 Klik Edit workflow di sebelah kiri
-![Xcode step 2](/xcode_step_3webp)
+![Xcode step 2](/xcode_step_3.webp)
 
 Pergi ke tab environments dan pilih seperti di bawah Mac 124 dan centang opsi yang sesuai
-![Xcode step 3](/xcode_step_3webp)
+![Xcode step 3](/xcode_step_3.webp)
 
 Pilih kondisi mulai Anda
 Jika Anda menggunakan build yang sama seperti kami, saya sarankan menggunakan Tag daripada branch, untuk menghindari build ganda
 
 Atur variabel env Anda
-![Xcode step 4](/xcode_step_4webp)
+![Xcode step 4](/xcode_step_4.webp)
 
 Hubungkan akun GitHub Anda
-![Xcode step 5](/xcode_step_5webp)
+![Xcode step 5](/xcode_step_5.webp)
 
-![Xcode step 6](/xcode_step_6webp)
+![Xcode step 6](/xcode_step_6.webp)
 
 Kemudian aktifkan workflow dan commit perubahan pertama Anda, Anda seharusnya melihat build Anda berjalan di Xcode
 

@@ -19,7 +19,7 @@ locale: ja
 next_blog: ''
 ---
 
-[Appflow](https://ionicio/appflow/) CI/CDは、アプリの更新をOver-the-Air (OTA)で簡単に行え、**24時間以内に95%のユーザーに更新を届ける**ことができます。iOSとAndroidのビルド、アプリストアへのデプロイメント、コマンドライン管理のための自動化ツールを提供します。しかし、コストの上昇（年間最大6,000ドル）により、一部のチームは[Capgo](https://capgoapp/)のような代替手段を検討しています。Capgoは、より高速な更新と低価格を提供しています。
+[Appflow](https://ionicio/appflow/) CI/CDは、アプリの更新をOver-the-Air (OTA)で簡単に行え、**24時間以内に95%のユーザーに更新を届ける**ことができます。iOSとAndroidのビルド、アプリストアへのデプロイメント、コマンドライン管理のための自動化ツールを提供します。しかし、コストの上昇（年間最大6,000ドル）により、一部のチームは[Capgo](https://capgo.app/)のような代替手段を検討しています。Capgoは、より高速な更新と低価格を提供しています。
 
 ### 重要なポイント：
 
@@ -40,7 +40,7 @@ next_blog: ''
 
 ## [Appflow](https://ionicio/appflow/)をCICDパイプラインと統合する
 
-![Appflow](https://assetsseobotaicom/capgoapp/67fdc56b72a40527486c1de4/d621f8c4ec61e7471b0153517889f4ccjpg)
+![Appflow](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/d621f8c4ec61e7471b0153517889f4cc.jpg)
 
 ## Appflow CI/CDの主要機能
 
@@ -52,7 +52,7 @@ Appflowを使用すると、チームはアプリストアのレビューを待�
 
 ### iOSとAndroidのビルドツール
 
-Appflowは、iOSとAndroidの両プラットフォームのビルドプロセスを自動化します。iOSでは、コード署名、プロビジョニング、Xcodeの設定を管理します。Androidでは、Gradle自動化、キーストア管理を処理し、APKやアプリバンドルを生成します。これにより[React Native](https://reactnativedev/)や[Capacitor](https://capacitorjscom/)などのフレームワークで一貫したビルドが保証されます。
+Appflowは、iOSとAndroidの両プラットフォームのビルドプロセスを自動化します。iOSでは、コード署名、プロビジョニング、Xcodeの設定を管理します。Androidでは、Gradle自動化、キーストア管理を処理し、APKやアプリバンドルを生成します。これにより[React Native](https://reactnativedev/)や[Capacitor](https://capacitorjs.com/)などのフレームワークで一貫したビルドが保証されます。
 
 ### アプリストアデプロイメント
 
@@ -74,7 +74,7 @@ Appflowは、開発者がコマンドラインから直接ビルドとデプロ�
 -   **ステージング**: 最終テスト用の本番環境レプリカ
 -   **本番**: ライブアプリリリース用
 
-Appflowの組み込みの[暗号化ストレージ](https://capgoapp/docs/cli/migrations/encryption/)を使用して環境変数を安全に保存します。
+Appflowの組み込みの[暗号化ストレージ](https://capgo.app/docs/cli/migrations/encryption/)を使用して環境変数を安全に保存します。
 
 ### ビルドプロセスの自動化
 

@@ -22,14 +22,14 @@ locale: es
 next_blog: ''
 ---
 
-**Actualizar tu aplicación [Capacitor](https://capacitorjscom/) nunca ha sido más fácil** Al combinar actualizaciones Over-The-Air (OTA) con scripts npm, puedes automatizar despliegues, ahorrar tiempo y asegurar que tus usuarios siempre tengan la última versión - sin esperar aprobaciones de las tiendas de aplicaciones
+**Actualizar tu aplicación [Capacitor](https://capacitorjs.com/) nunca ha sido más fácil** Al combinar actualizaciones Over-The-Air (OTA) con scripts npm, puedes automatizar despliegues, ahorrar tiempo y asegurar que tus usuarios siempre tengan la última versión - sin esperar aprobaciones de las tiendas de aplicaciones
 
 **Esto es lo que aprenderás:**
 
 -   Cómo configurar scripts npm para actualizaciones OTA
 -   Integrar actualizaciones en pipelines CI/CD para automatización
 -   Gestionar versiones de apps, seguridad y pruebas de actualizaciones
--   Por qué [Capgo](https://capgoapp/) es una plataforma confiable para gestionar actualizaciones OTA
+-   Por qué [Capgo](https://capgo.app/) es una plataforma confiable para gestionar actualizaciones OTA
 
 **Beneficios Clave:**
 
@@ -46,19 +46,19 @@ next_blog: ''
 
 Con plataformas como Capgo ofreciendo actualizaciones rápidas (95% de adopción de usuarios en 24 horas) y precios accesibles, gestionar actualizaciones OTA nunca ha sido más eficiente
 
-## Explora la Nueva Actualización en Vivo de [Capawesome](https://capawesomeio/) para [Capacitor](https://capacitorjscom/) Ionic
+## Explora la Nueva Actualización en Vivo de [Capawesome](https://capawesomeio/) para [Capacitor](https://capacitorjs.com/) Ionic
 
-![Capawesome](https://assetsseobotaicom/capgoapp/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54jpg)
+![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 
 ## Configuración de Scripts npm para Actualizaciones OTA
 
-Aquí te mostramos cómo configurar scripts npm para gestionar [actualizaciones OTA de Capacitor](https://capgoapp/ja/) efectivamente. Esto implica instalar paquetes necesarios, configurar ajustes y crear scripts de despliegue
+Aquí te mostramos cómo configurar scripts npm para gestionar [actualizaciones OTA de Capacitor](https://capgo.app/ja/) efectivamente. Esto implica instalar paquetes necesarios, configurar ajustes y crear scripts de despliegue
 
 ### Instalando Paquetes Requeridos
 
-Primero, instala los paquetes requeridos. La [herramienta CLI de Capgo](https://capgoapp/docs/cli/commands) simplifica este proceso con comandos integrados:
+Primero, instala los paquetes requeridos. La [herramienta CLI de Capgo](https://capgo.app/docs/cli/commands) simplifica este proceso con comandos integrados:
 
 [[CODE_BLOCK]]
 
@@ -85,7 +85,7 @@ Agrega estos scripts npm a tu archivo `packagejson` para optimizar el proceso de
 -   **`deploy:update`**: Sube el paquete de actualización a Capgo
 -   **`deploy:production`**: Maneja el flujo completo de compilación y despliegue, ideal para lanzamientos de producción
 
-> "Configuramos tu pipeline CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI u otros. No alojamos CI/CD ni te cobramos por mantenerlo" - Capgo [\[1\]](https://capgoapp/)
+> "Configuramos tu pipeline CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI u otros. No alojamos CI/CD ni te cobramos por mantenerlo" - Capgo [\[1\]](https://capgo.app/)
 
 ### Configurando Variables de Entorno
 

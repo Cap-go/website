@@ -3,6 +3,7 @@ import matter from 'gray-matter'
 import { createSpinner } from 'nanospinner'
 import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
+import { commonReplacements } from './commonReplacements'
 import { translateText } from './translate'
 
 const batchSize = 20
@@ -71,7 +72,7 @@ for (const lang of languages) {
     htmlTags.forEach((match, _) => {
       translatedContent = translatedContent.replace('[[HTML_TAG]]', match[0])
     })
-    writeFileSync(destinationPath, translatedContent, 'utf8')
+    writeFileSync(destinationPath, commonReplacements(translatedContent), 'utf8')
     spinner.success({ text: `plugins-tutorials/${file} translated to ${lang} locale` })
   }
   for (let i = 0; i < blogFiles.length; i += batchSize) {

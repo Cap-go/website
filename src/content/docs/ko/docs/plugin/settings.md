@@ -109,7 +109,7 @@ Android와 iOS에서만 사용 가능
 
 Android와 iOS에서만 사용 가능
 
-기본값: `https://apicapgoapp/updates`
+기본값: `https://apicapgo.app/updates`
 
 ```json
 // capacitorconfigjson
@@ -128,7 +128,7 @@ Android와 iOS에서만 사용 가능
 
 Android와 iOS에서만 사용 가능. 통계 보고를 비활성화하려면 ""로 설정
 
-기본값: `https://apicapgoapp/stats`
+기본값: `https://apicapgo.app/stats`
 
 ```json
 // capacitorconfigjson
@@ -188,7 +188,7 @@ Android와 iOS에서만 사용 가능
 스토어 업데이트가 발생할 때, 네이티브 버전으로의 강제 재설정을 비활성화합니다
 :::
 
-[웹 앱](https://webcapgoapp/login)에서만 사용 가능한 더 많은 설정이 있습니다
+[웹 앱](https://webcapgo.app/login)에서만 사용 가능한 더 많은 설정이 있습니다
 
 플러그인을 구성하려면 다음 설정을 사용하세요:
 

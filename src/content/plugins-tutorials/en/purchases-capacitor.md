@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # @revenuecat/purchases-capacitor Tutorial
 
 This tutorial will guide you through the process of implementing in-app purchases and subscriptions in your Ionic Capacitor app using the `@revenuecat/purchases-capacitor` package.

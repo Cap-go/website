@@ -29,7 +29,7 @@ Bevor Sie mit dem Tutorial fortfahren…
 
 ## Wichtiges zum Preis
 
-![Preis GitHub Action](/price_github_actionswebp)
+![Preis GitHub Action](/price_github_actions.webp)
 
 [https://githubcom/features/actions](https://githubcom/features/actions/)
 
@@ -149,25 +149,25 @@ Wenn Sie einen neuen Dienstkonto-Schlüssel erstellen müssen, [folgen Sie den h
 
 Um ein neues Geheimnis zu GitHubs verschlüsselten Geheimnissen hinzuzufügen, navigieren Sie zunächst zum Android-Repository, dem Sie den GitHub Actions-Workflow hinzufügen möchten. Klicken Sie ganz rechts auf "Settings".
 
-![Einstellungen im GitHub-Repository](/github_project_settingswebp)
+![Einstellungen im GitHub-Repository](/github_project_settings.webp)
 
 Klicken Sie dann auf "Secrets",
 
-![Geheimnisse im GitHub-Repository, von den Einstellungen aus](/github_project_settings_secretswebp)
+![Geheimnisse im GitHub-Repository, von den Einstellungen aus](/github_project_settings_secrets.webp)
 
 dann auf "Actions" aus der Liste im linken Menü.
 
-![Actions unter Geheimnisse im GitHub-Repository](/github_project_settings_secrets_actionswebp)
+![Actions unter Geheimnisse im GitHub-Repository](/github_project_settings_secrets_actions.webp)
 
 Dies sind die verschlüsselten geheimen Umgebungsvariablen für das Repository. Alle Workflows, die im Repository eingerichtet sind, haben Zugriff auf diese Repository-Geheimnisse.
 
 Klicken Sie hier auf "New repository secret", um ein neues Geheimnis hinzuzufügen:
 
-![Aktion für neues Repository-Geheimnis in GitHub](/github_project_settings_secrets_actions_newwebp)
+![Aktion für neues Repository-Geheimnis in GitHub](/github_project_settings_secrets_actions_new.webp)
 
 Wenn Sie auf "New repository secret" klicken, sehen Sie ein Formular, das Sie auffordert, einen Namen für Ihr neues Geheimnis und seinen Wert einzugeben.
 
-![Hinzufügen von Name und Wert für neues Geheimnis in GitHub](/github_project_settings_secrets_actions_new_addwebp)
+![Hinzufügen von Name und Wert für neues Geheimnis in GitHub](/github_project_settings_secrets_actions_new_add.webp)
 
 GitHub-Geheimnisse akzeptieren nur Zeichenkettenwerte, daher müssen Sie für bestimmte Anmeldeinformationen (z.B. jks- oder json-Dateien) die Datei zuerst in eine base64-codierte Zeichenkette umwandeln, bevor Sie sie zu GitHub-Geheimnissen hinzufügen. Sie können dies von der Kommandozeile aus tun:
 
@@ -191,7 +191,7 @@ _Bitte beachten Sie, dass Sie eine Sicherungskopie Ihrer Geheimnisse an einem an
 
 Mit unserem Service-Account-Schlüssel, der zu den GitHub-Repository-Geheimnissen hinzugefügt wurde, können wir uns jetzt von jedem GitHub Actions Workflow, der dem Repository hinzugefügt wurde, mit der Google Play Developer API authentifizieren
 
-![Neues Geheimnis erfolgreich in GitHub hinzugefügt](/github_project_settings_secrets_addedwebp)
+![Neues Geheimnis erfolgreich in GitHub hinzugefügt](/github_project_settings_secrets_added.webp)
 
 ### Speichern Ihres Android-Signaturschlüssels
 
@@ -209,7 +209,7 @@ Fügen Sie Folgendes als Repository-Geheimnisse hinzu:
 
 Mit diesen zu GitHub's Repository-Geheimnissen hinzugefügten Geheimnissen sind wir bereit, unseren GitHub Actions Workflow für unsere Builds einzurichten
 
-![Mehrere Geheimnisse erfolgreich in GitHub hinzugefügt](/github_project_settings_multi_secrets_addedwebp)
+![Mehrere Geheimnisse erfolgreich in GitHub hinzugefügt](/github_project_settings_multi_secrets_added.webp)
 
 ## Einrichten Ihrer GitHub Actions Workflow yml-Datei
 

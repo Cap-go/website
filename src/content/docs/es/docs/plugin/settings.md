@@ -109,7 +109,7 @@ Predeterminado: `true`
 
 Solo disponible para Android e iOS
 
-Predeterminado: `https://apicapgoapp/updates`
+Predeterminado: `https://apicapgo.app/updates`
 
 ```json
 // capacitorconfigjson
@@ -128,7 +128,7 @@ Predeterminado: `https://apicapgoapp/updates`
 
 Solo disponible para Android e iOS. Establece como "" para deshabilitar el reporte de estadísticas
 
-Predeterminado: `https://apicapgoapp/stats`
+Predeterminado: `https://apicapgo.app/stats`
 
 ```json
 // capacitorconfigjson
@@ -188,7 +188,7 @@ Predeterminado: `undefined`
 Cuando ocurre una actualización de la tienda, deshabilita el reinicio forzado a la versión nativa
 :::
 
-Hay muchas más configuraciones disponibles solo en la [aplicación web](https://webcapgoapp/login)
+Hay muchas más configuraciones disponibles solo en la [aplicación web](https://webcapgo.app/login)
 
 Para configurar el plugin, usa estos ajustes:
 

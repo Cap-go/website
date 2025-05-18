@@ -22,13 +22,13 @@ locale: id
 next_blog: ''
 ---
 
-Memprofilkan aplikasi lintas platform yang dibangun dengan [Capacitor](https://capacitorjscom/) membantu Anda mengidentifikasi masalah kinerja di platform iOS, Android, dan web. Berikut panduan singkat untuk memulai:
+Memprofilkan aplikasi lintas platform yang dibangun dengan [Capacitor](https://capacitorjs.com/) membantu Anda mengidentifikasi masalah kinerja di platform iOS, Android, dan web. Berikut panduan singkat untuk memulai:
 
 -   **Alat yang Dibutuhkan**:
     
     -   [Nodejs](https://nodejsorg/en) v16+ dan npm v8+ untuk manajemen paket
     -   Capacitor CLI v50+ untuk membangun dan mendeploy aplikasi
-    -   [Xcode](https://developerapplecom/xcode/) 14+ (iOS) dan [Android Studio](https://developerandroidcom/studio) Electric Eel+ (Android) untuk pengembangan dan profiling platform tertentu
+    -   [Xcode](https://developer.apple.com/xcode/) 14+ (iOS) dan [Android Studio](https://developerandroidcom/studio) Electric Eel+ (Android) untuk pengembangan dan profiling platform tertentu
     -   [Chrome DevTools](https://developerchromecom/docs/devtools) untuk analisis kinerja web
 -   **Perangkat**:
     
@@ -46,7 +46,7 @@ Memprofilkan aplikasi lintas platform yang dibangun dengan [Capacitor](https://c
 -   **Optimisasi**:
     
     -   Terapkan pembaruan bundle parsial dan pembaruan langsung untuk meningkatkan kinerja dan pengalaman pengguna
-    -   Pantau metrik kinerja dan error secara real-time menggunakan alat seperti [Capgo](https://capgoapp/)
+    -   Pantau metrik kinerja dan error secara real-time menggunakan alat seperti [Capgo](https://capgo.app/)
 
 Artikel ini memandu Anda menggunakan alat khusus platform, menemukan bottleneck kinerja, dan menerapkan perbaikan untuk mengoptimalkan aplikasi Capacitor Anda
 

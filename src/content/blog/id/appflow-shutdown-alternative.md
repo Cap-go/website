@@ -49,7 +49,7 @@ Alih-alih terkunci pada sistem CI/CD proprietary, Capgo memungkinkan Anda untuk:
 - Integrasi dengan infrastruktur CI/CD yang sudah ada
 - Gunakan platform populer seperti GitHub Actions
 - Pertahankan kendali penuh atas proses build
-- Ikuti tutorial detail kami untuk pengaturan [iOS](https://capgo.app/blog/github-action-capacitor/)
+- Ikuti tutorial detail kami untuk pengaturan [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
 - Atau biarkan kami menangani semuanya dengan layanan [CI/CD Done For You](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you)
 
 ## Mengapa Memilih Capgo?

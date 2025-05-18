@@ -24,7 +24,7 @@ next_blog: ''
 
 Self-Hosting ist eine Form des Betreibens Ihrer eigenen Website oder Anwendung, indem Sie selbst einen Server und ein Netzwerk einrichten. Anstatt einen Platform as a Service oder einen Public Cloud Provider zu nutzen, betreiben Self-Hosting-Nutzer ihre eigenen Netzwerke und sind neben dem Aufbau ihrer Website oder Anwendung auch für die Wartung und Verfügbarkeit verantwortlich.
 
-Der einfachste Weg, mit Capgo zu beginnen, ist über unseren [offiziellen verwalteten Service in der Cloud](https://capgoapp/). Wenn Sie jedoch Ihre eigene Verwaltung übernehmen möchten, können Sie Capgo auch auf Ihrem eigenen Server selbst hosten.
+Der einfachste Weg, mit Capgo zu beginnen, ist über unseren [offiziellen verwalteten Service in der Cloud](https://capgo.app/). Wenn Sie jedoch Ihre eigene Verwaltung übernehmen möchten, können Sie Capgo auch auf Ihrem eigenen Server selbst hosten.
 
 ## Was ist Self-Hosting?
 
@@ -48,7 +48,7 @@ Es gibt viele Gründe, warum sich Menschen für Self-Hosting entscheiden. Einige
 
 Es gibt nur eine Version von Capgo. Sowohl meine Cloud- als auch meine Self-Hosted-Produkte sind völlig gleichwertig. Es gibt keine Premium- und exklusive kommerzielle Version mit besseren oder vollständigeren Funktionen.
 
-Sie erhalten dasselbe Dashboard, dieselben handlungsorientierten Metriken und dasselbe Engagement für den [Schutz der Privatsphäre Ihrer Besucher](https://capgoapp/privacy/) bei beiden Varianten.
+Sie erhalten dasselbe Dashboard, dieselben handlungsorientierten Metriken und dasselbe Engagement für den [Schutz der Privatsphäre Ihrer Besucher](https://capgo.app/privacy/) bei beiden Varianten.
 
 Ich begann mit der Entwicklung von Capgo im Dezember 2018 und startete das SaaS-Abonnementgeschäft im Mai 2019. Das Projekt ist sehr lebendig, wird aktiv weiterentwickelt und wächst schnell. Es ist auch robust und praxiserprobt.
 

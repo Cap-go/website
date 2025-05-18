@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Protegge gli Aggiornamenti**: La crittografia blocca l'intercettazione dei dati, la manomissione e l'accesso non autorizzato durante la distribuzione degli aggiornamenti
 -   **Segue le Regole degli App Store**:
-    -   Apple: Richiede HTTPS (TLS 12+), [App Transport Security](https://developerapplecom/documentation/security/preventing-insecure-network-connections) (ATS) e firma del codice
+    -   Apple: Richiede HTTPS (TLS 12+), [App Transport Security](https://developer.apple.com/documentation/security/preventing-insecure-network-connections) (ATS) e firma del codice
     -   Google: Impone SSL pinning, scansione [Play Protect](https://developersgooglecom/android/play-protect) e crittografia standard del settore
 -   **Utilizza [AES-256](https://enwikipediaorg/wiki/Advanced_Encryption_Standard)**: Uno standard di crittografia altamente sicuro con chiavi a 256 bit per una robusta protezione dei dati
 -   **Sicurezza End-to-End**: Gli aggiornamenti sono crittografati dalla creazione all'installazione, garantendo integrità e decrittografia specifica per dispositivo

@@ -76,19 +76,19 @@ App Storeや[GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulat
 | パッケージコンテンツ | AES-256 | 実際のアップデートファイルを保護 |
 | 鍵交換 | RSA-2048 | 暗号化キーの配信を保護 |
 
-各アップデートパッケージは、ユニークなAESキーで暗号化され、その後デバイスのパブリックRSAキーを使用して暗号化されます。Capgoはこの方法を自動的に適用し、各アップデート配布のために新しい暗号化キーを生成します [\[4\]](https://parsers.vc/news/250207-navigating-the-new-frontier-of-mobile-app/)。
+各アップデートパッケージは、ユニークなAESキーで暗号化され、その後デバイスのパブリックRSAキーを使用して暗号化されます。Capgoはこの方法を自動的に適用し、各アップデート配布のために新しい暗号化キーを生成します [\[4\]](https://parsers.vc/news/250207-navigating-the-new-frontier-of-mobile-app/) 。
 
 ### 暗号化キーのセキュリティ
 
 適切なキー管理は、暗号化されたアップデートを安全に保つために不可欠です：
 
 -   **キー生成**: 常に安全なランダムジェネレーターを使用して暗号化キーを作成します。
--   **キーの保管**: Androidの[StrongBox](https://source.android.com/docs/security/best-practices/hardware)やiOSの[Secure Enclave](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/web)のようなハードウェアバックの安全な環境にキーを保管します [\[5\]](https://sigmaos.com/tips/startups/internet-of-things-iot-terms-explained-over-the-air-ota-update)[\[7\]](https://www.sorinmustaca.com/implementing-secure-over-the-air-ota-updates-in-embedded-devices/)。
+-   **キーの保管**: Androidの[StrongBox](https://source.android.com/docs/security/best-practices/hardware)やiOSの[Secure Enclave](https://support.apple.com/guide/security/secure-enclave-sec59b0b31ff/web)のようなハードウェアバックの安全な環境にキーを保管します [\[5\]](https://sigmaos.com/tips/startups/internet-of-things-iot-terms-explained-over-the-air-ota-update)[\[7\]](https://www.sorinmustaca.com/implementing-secure-over-the-air-ota-updates-in-embedded-devices/) 。
 -   **キーのローテーション**: 90日ごとに暗号化キーを更新します。移行を段階的に行い、互換性を維持し、キーのローテーションをCI/CDパイプラインと整合させます。
 
 ### デバイスのセキュリティ機能
 
-現代のデバイスには、暗号化キーを保護するためのハードウェアセキュリティが組み込まれています。たとえば、AndroidのStrongBoxやiOSのSecure Enclaveは、暗号タスクのための隔離された環境を提供します [\[5\]](https://sigmaos.com/tips/startups/internet-of-things-iot-terms-explained-over-the-air-ota-update)[\[7\]](https://www.sorinmustaca.com/implementing-secure-over-the-air-ota-updates-in-embedded-devices/)。iOS開発者は、これらの機能をネイティブのSecurityフレームワークAPIを使用して活用できます。
+現代のデバイスには、暗号化キーを保護するためのハードウェアセキュリティが組み込まれています。たとえば、AndroidのStrongBoxやiOSのSecure Enclaveは、暗号タスクのための隔離された環境を提供します [\[5\]](https://sigmaos.com/tips/startups/internet-of-things-iot-terms-explained-over-the-air-ota-update)[\[7\]](https://www.sorinmustaca.com/implementing-secure-over-the-air-ota-updates-in-embedded-devices/) 。iOS開発者は、これらの機能をネイティブのSecurityフレームワークAPIを使用して活用できます。
 
 これらの暗号化プラクティスは、以下のセクションで取り上げる業界基準を満たすのに役立ちます。
 
@@ -133,7 +133,7 @@ GDPR違反は、最大€2000万の罰則を科せられる可能性がありま
 
 ## セキュリティ監視と対応
 
-継続的な監視は、新たに進化する脅威から保護する上で重要な役割を果たします。強力な監視システムを備えた組織は、違反を**74%早く**特定できます [\[2\]](https://www.iotinsider.com/industries/security/over-the-air-updates-ota-best-practices-for-device-safety/)。
+継続的な監視は、新たに進化する脅威から保護する上で重要な役割を果たします。強力な監視システムを備えた組織は、違反を**74%早く**特定できます [\[2\]](https://www.iotinsider.com/industries/security/over-the-air-updates-ota-best-practices-for-device-safety/) 。
 
 ### 脅威検出
 
@@ -145,11 +145,11 @@ GDPR違反は、最大€2000万の罰則を科せられる可能性がありま
 | ネットワーク監視 | 不正アクセスの試みを発見 | トラフィックフィルタリング |
 | ユーザー行動分析 | 疑わしいアップデート行動を特定 | 行動モデル |
 
-攻撃者の一歩先を行くためには、検出システムは常に更新が必要です。機械学習は新しい攻撃手法に適応することで重要な役割を果たします [\[1\]](https://github.com/capacitor-community/android-security-provider)[\[2\]](https://www.iotinsider.com/industries/security/over-the-air-updates-ota-best-practices-for-device-safety/)。Capgoはリアルタイムの整合性チェックと行動分析によってこのプロセスを強化します [\[4\]](https://parsers.vc/news/250207-navigating-the-new-frontier-of-mobile-app/)。
+攻撃者の一歩先を行くためには、検出システムは常に更新が必要です。機械学習は新しい攻撃手法に適応することで重要な役割を果たします [\[1\]](https://github.com/capacitor-community/android-security-provider)[\[2\]](https://www.iotinsider.com/industries/security/over-the-air-updates-ota-best-practices-for-device-safety/) 。Capgoはリアルタイムの整合性チェックと行動分析によってこのプロセスを強化します [\[4\]](https://parsers.vc/news/250207-navigating-the-new-frontier-of-mobile-app/) 。
 
 ### セキュリティレスポンスプラン
 
-OTA更新を使用するCapacitorアプリには、明確なレスポンスプランが不可欠です。これらのプランは、Appleのガイドライン2.5.2など、プラットフォーム固有のセキュリティ要件に沿うべきです。よく準備されたプランは、侵害コストを**38%**削減できます [\[10\]](https://www.ontotext.com/knowledgehub/fundamentals/information-extraction/)。
+OTA更新を使用するCapacitorアプリには、明確なレスポンスプランが不可欠です。これらのプランは、Appleのガイドライン2.5.2など、プラットフォーム固有のセキュリティ要件に沿うべきです。よく準備されたプランは、侵害コストを**38%**削減できます [\[10\]](https://www.ontotext.com/knowledgehub/fundamentals/information-extraction/) 。
 
 | フェーズ | 主なアクション |
 | --- | --- |
@@ -158,7 +158,7 @@ OTA更新を使用するCapacitorアプリには、明確なレスポンスプ�
 | 調査 | 根本原因分析を実施 |
 | 復旧 | システムとサービスを復元 |
 
-Capgoは、疑わしい更新を隔離し、より深い分析のためのフォレンジックログを作成するなどのアクションを自動化することで、Capacitorアプリのレスポンスを効率化します [\[4\]](https://parsers.vc/news/250207-navigating-the-new-frontier-of-mobile-app/)。
+Capgoは、疑わしい更新を隔離し、より深い分析のためのフォレンジックログを作成するなどのアクションを自動化することで、Capacitorアプリのレスポンスを効率化します [\[4\]](https://parsers.vc/news/250207-navigating-the-new-frontier-of-mobile-app/) 。
 
 これらの検出および応答措置は、暗号化および署名プロトコルと連携して、多層防御システムを提供します。
 

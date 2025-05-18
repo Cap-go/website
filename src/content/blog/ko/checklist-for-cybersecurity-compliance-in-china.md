@@ -217,7 +217,7 @@ MIIT에 등록하려면 개발자가 다음을 준비해야 합니다:
 
 민감한 데이터를 관리하는 플랫폼의 경우, 데이터 수집 방법이나 액세스 권한을 변경하는 업데이트는 규제 준수를 유지하기 위해 추가적인 테스트 및 검증이 필요합니다 [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 
-Capgo (https://capgo.app)와 같은 도구는 [라이브 업데이트 솔루션](https://capgo.app/blog/self-hosted-live-updates/)을 제공하여 암호화, 원활한 CI/CD 통합 및 자세한 버전 관리 기능을 포함합니다.
+Capgo (https://capgo.app)와 같은 도구는 [라이브 업데이트 솔루션](https://capgo.app/blog/self-hosted-live-updates/) 을 제공하여 암호화, 원활한 CI/CD 통합 및 자세한 버전 관리 기능을 포함합니다.
 
 이러한 규정을 준수하지 않을 경우, 이전 연도의 수익의 최대 5%에 해당하는 벌금 및 중국 앱 스토어에서 제외될 수 있는 심각한 결과가 초래될 수 있습니다 [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law).
 

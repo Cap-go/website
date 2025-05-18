@@ -22,13 +22,13 @@ next_blog: ''
 
 ## 서문
 
-먼저 Capacitor 앱을 Capgo에 추가했는지 확인하세요. 이 튜토리얼은 업로드 단계에만 초점을 맞추고 있습니다. Capgo에 앱을 추가하는 방법은 이 [Tutorial](https://capgoapp/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/)을 참고하세요.
+먼저 Capacitor 앱을 Capgo에 추가했는지 확인하세요. 이 튜토리얼은 업로드 단계에만 초점을 맞추고 있습니다. Capgo에 앱을 추가하는 방법은 이 [Tutorial](https://capgo.app/blog/update-your-capacitor-apps-seamlessly-using-capacitor-updater/)을 참고하세요.
 
 ## 커밋 규칙
 
 먼저 [conventional commits](https://wwwconventionalcommitsorg/en/v100/) 커밋 규칙을 따르기 시작해야 합니다. 이는 도구가 버전 번호를 어떻게 업그레이드할지 이해하는데 도움이 되며, 5분이면 배울 수 있습니다.
 
-![Conventional commits](/conventional_commitswebp)
+![Conventional commits](/conventional_commits.webp)
 
 ## 태그를 위한 GitLab CI/CD
 

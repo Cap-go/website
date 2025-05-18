@@ -22,7 +22,7 @@ next_blog: ''
 
 -   **验证用户身份**：使用手机号码或政府颁发的身份证。
 -   **本地存储数据**：所有中国用户数据必须存储在中国的服务器上。
--   **记录活动**：至少保存60天的用户[活动日志](https://capgo.app/docs/webapp/logs/)。
+-   **记录活动**：至少保存60天的用户[活动日志](https://capgo.app/docs/webapp/logs/) 。
 -   **保护数据**：加密静态数据（AES-256）和传输中的数据（TLS 1.3+）。
 -   **进行审计**：定期安全检查和年度审计是强制性的。
 -   **管理更新**：OTA更新必须经过加密、记录并获得用户批准。
@@ -40,7 +40,7 @@ next_blog: ''
 
 ### 中国网络安全法（CSL）
 
-中国网络安全法（CSL）规定了维护网络安全的基本要求。这些要求包括实名注册、实施强有力的安全措施、进行定期评估和及时报告事件。最近的修正案将于2025年3月生效，引入了更严格的违规处罚，以使其与不断发展的数据保护标准保持一致 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+中国网络安全法（CSL）规定了维护网络安全的基本要求。这些要求包括实名注册、实施强有力的安全措施、进行定期评估和及时报告事件。最近的修正案将于2025年3月生效，引入了更严格的违规处罚，以使其与不断发展的数据保护标准保持一致 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ### 个人信息保护法（PIPL）
 
@@ -62,7 +62,7 @@ PIPL还要求应用程序开发者采取清晰和开放的数据处理实践，�
 -   **技术保障**：对数据进行分类，实施访问控制，并加密敏感信息。
 -   **事件响应**：保持完善的文档和技术措施，以应对安全事件。
 
-这些更新旨在加强执法并应对新兴的网络安全挑战 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+这些更新旨在加强执法并应对新兴的网络安全挑战 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 对于正在进行更新和安全补丁的应用程序开发者，利用[安全更新平台](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)可以简化遵守这些法规的流程。例如，**Capgo** (https://capgo.app)提供端到端加密和实时[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)，在这个拥有超过400万个移动应用程序和全球最大移动互联网用户基础的市场中特别有价值 [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
 
@@ -76,7 +76,7 @@ PIPL还要求应用程序开发者采取清晰和开放的数据处理实践，�
 
 ### 数据存储要求
 
-所有来自中国用户的数据必须存储在位于中国大陆的服务器上，遵循将于2025年1月1日生效的网络数据安全管理条例 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。如果数据需要传输至境外，则必须首先经过政府安全审查或获得明确的用户同意 [\[3\]](https://www.dlapiperdataprotection.com/?t=law&c=CN)。
+所有来自中国用户的数据必须存储在位于中国大陆的服务器上，遵循将于2025年1月1日生效的网络数据安全管理条例 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。如果数据需要传输至境外，则必须首先经过政府安全审查或获得明确的用户同意 [\[3\]](https://www.dlapiperdataprotection.com/?t=law&c=CN)。
 
 为满足这些要求，与[阿里云](https://www.alibabacloud.com/)或[腾讯云](https://www.tencentcloud.com/)等授权的中国云服务提供商合作。这确保了用户数据保持在指定的地理边界内。
 
@@ -93,7 +93,7 @@ PIPL还要求应用程序开发者采取清晰和开放的数据处理实践，�
 
 对于管理更新的开发者，像Capgo这样的平台提供内置的端到端加密，符合这些安全要求。
 
-定期审计和测试至关重要，以确保所有安全措施始终有效和最新 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+定期审计和测试至关重要，以确保所有安全措施始终有效和最新 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ## 中国的网络安全与数据保护合规、挑战与建议
 
@@ -101,11 +101,11 @@ PIPL还要求应用程序开发者采取清晰和开放的数据处理实践，�
 
 ## 技术安全要求
 
-中国的网络安全法规要求组织实施详细的技术安全措施以保持合规。在2025年3月，[中国网络空间管理局](https://en.wikipedia.org/wiki/Cyberspace_Administration_of_China)（CAC）推出了对网络安全法（CSL）的修正案，概述了这些要求，将法律责任转化为可操作的实践 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+中国的网络安全法规要求组织实施详细的技术安全措施以保持合规。在2025年3月，[中国网络空间管理局](https://en.wikipedia.org/wiki/Cyberspace_Administration_of_China)（CAC）推出了对网络安全法（CSL）的修正案，概述了这些要求，将法律责任转化为可操作的实践 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 ### 安全扫描计划
 
-移动应用程序必须使用CAC批准的扫描工具进行每月安全检查 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。这些评估集中在应用程序安全的多个方面：
+移动应用程序必须使用CAC批准的扫描工具进行每月安全检查 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。这些评估集中在应用程序安全的多个方面：
 
 | **安全方面** | **评估频率** | **所需文档** |
 | --- | --- | --- |
@@ -117,7 +117,7 @@ PIPL还要求应用程序开发者采取清晰和开放的数据处理实践，�
 
 ### 用户权限控制
 
-基于角色的访问控制（RBAC）是中国运营的移动应用程序的不可谈判要求 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。开发者需：
+基于角色的访问控制（RBAC）是中国运营的移动应用程序的不可谈判要求 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。开发者需：
 
 -   根据用户角色设置精确的权限级别。
 -   维护访问活动的详细日志。
@@ -264,7 +264,7 @@ The Network Data Security Management Regulation outlines specific requirements f
     
     -   保存要求：至少60天 [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)
 
-未能维护这些日志可能导致最高5%的年收入罚款 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。此外，自动更新服务必须记录所有与更新相关的活动以示合规。
+未能维护这些日志可能导致最高5%的年收入罚款 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。此外，自动更新服务必须记录所有与更新相关的活动以示合规。
 
 适当的文档记录是所有其他合规措施的基础，包括员工培训和事件响应计划。
 
@@ -272,7 +272,7 @@ The Network Data Security Management Regulation outlines specific requirements f
 
 ### 违规响应计划
 
-2025年3月对《网络安全法》的修订强调了制定详细协议处理违规行为的重要性 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。一个可靠的响应计划通常包括以下关键阶段：
+2025年3月对《网络安全法》的修订强调了制定详细协议处理违规行为的重要性 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。一个可靠的响应计划通常包括以下关键阶段：
 
 | **响应阶段** | **所需行动** |
 | --- | --- |
@@ -301,7 +301,7 @@ CAC还引入了一个公共举报系统，强调了快速、完整记录响应�
 -   确保培训文档始终保持最新
 -   跟踪对监管更新的确认
 
-每当发生重大监管变更时，组织还必须提供额外的培训，例如计划于2025年3月28日生效的《网络安全法》修订 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/)。
+每当发生重大监管变更时，组织还必须提供额外的培训，例如计划于2025年3月28日生效的《网络安全法》修订 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
 **有效培训的实用步骤**
 

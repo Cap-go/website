@@ -39,7 +39,7 @@ Benutzerdefinierte Attributsegmentierung ist entscheidend für die Verbesserung 
     -   Datenregeln befolgen: Begrenzen Sie die Datenerfassung, gewährleisten Sie Transparenz und halten Sie Vorschriften wie [GDPR](https://enwikipediaorg/wiki/General_Data_Protection_Regulation) ein
 -   **Warum es wichtig ist**:
     
-    -   Tools wie [Capgo](https://capgoapp/) ermöglichen Echtzeit-Updates, sichere Datenverarbeitung und schnelle Auslieferungen, wodurch innerhalb von 24 Stunden eine Updateerfolgsrate von bis zu 95% erreicht wird. Die Einführung der richtigen Tools und Strategien kann die Segmentierung optimieren und das Nutzer-Targeting verbessern.
+    -   Tools wie [Capgo](https://capgo.app/) ermöglichen Echtzeit-Updates, sichere Datenverarbeitung und schnelle Auslieferungen, wodurch innerhalb von 24 Stunden eine Updateerfolgsrate von bis zu 95% erreicht wird. Die Einführung der richtigen Tools und Strategien kann die Segmentierung optimieren und das Nutzer-Targeting verbessern.
 
 ## Datenattribute, intelligente Listen und Segmentierungen | San
 
@@ -117,16 +117,16 @@ Bei der Auswahl von Tools für die Segmentierung nach benutzerdefinierten Attrib
 
 | Funktion | Capgo | Auswirkung auf Segmentierung |
 | --- | --- | --- |
-| **Update-Geschwindigkeit** | 114ms Download (5MB Bundle)[\[1\]](https://capgoapp/) | Schnellere Updates reduzieren veraltete Datenprobleme |
-| **Erfolgsrate** | 95% Update-Rate innerhalb 24 Stunden[\[1\]](https://capgoapp/) | Höhere Adoption gewährleistet bessere Segmentgenauigkeit |
-| **Sicherheit** | Ende-zu-Ende-Verschlüsselung[\[1\]](https://capgoapp/) | Schützt sensible Nutzerdaten effektiv |
-| **Analytik** | Echtzeit-Analytik[\[1\]](https://capgoapp/) | Liefert sofortiges Feedback zur Segmentleistung |
+| **Update-Geschwindigkeit** | 114ms Download (5MB Bundle)[\[1\]](https://capgo.app/) | Schnellere Updates reduzieren veraltete Datenprobleme |
+| **Erfolgsrate** | 95% Update-Rate innerhalb 24 Stunden[\[1\]](https://capgo.app/) | Höhere Adoption gewährleistet bessere Segmentgenauigkeit |
+| **Sicherheit** | Ende-zu-Ende-Verschlüsselung[\[1\]](https://capgo.app/) | Schützt sensible Nutzerdaten effektiv |
+| **Analytik** | Echtzeit-Analytik[\[1\]](https://capgo.app/) | Liefert sofortiges Feedback zur Segmentleistung |
 | **Hosting-Optionen** | Cloud und Self-Hosted | Unterstützt verschiedene Bereitstellungsanforderungen |
-| **Globale Abdeckung** | 434ms API-Antwortzeit weltweit[\[1\]](https://capgoapp/) | Bietet konsistente Leistung über Regionen hinweg |
+| **Globale Abdeckung** | 434ms API-Antwortzeit weltweit[\[1\]](https://capgo.app/) | Bietet konsistente Leistung über Regionen hinweg |
 
 Die Segmentierungstool-Landschaft hat sich in den letzten Jahren stark verändert. Zum Beispiel haben die Einstellung von [Microsoft Code Push](https://learnmicrosoftcom/en-us/appcenter/distribution/codepush/) in 2024 und die bevorstehende Abschaltung von [AppFlow](https://ionicio/appflow) in 2026 Entwickler dazu gebracht, zuverlässigere Alternativen zu erkunden. Diese Änderungen unterstreichen die Bedeutung von Tools, die Segmentierungsherausforderungen direkt angehen.
 
-Metriken wie Update-Geschwindigkeiten und Erfolgsraten betonen Zuverlässigkeit und stellen aktive und präzise ausgerichtete Nutzergruppen sicher. Auch die Preisgestaltung spielt eine wichtige Rolle - einige Plattformen kosten 5.000-6.000 € jährlich, während andere etwa 300 € pro Monat[\[1\]](https://capgoapp/) kosten. Diese Preisspanne macht fortschrittliche Tools auch für kleinere Teams zugänglich.
+Metriken wie Update-Geschwindigkeiten und Erfolgsraten betonen Zuverlässigkeit und stellen aktive und präzise ausgerichtete Nutzergruppen sicher. Auch die Preisgestaltung spielt eine wichtige Rolle - einige Plattformen kosten 5.000-6.000 € jährlich, während andere etwa 300 € pro Monat[\[1\]](https://capgo.app/) kosten. Diese Preisspanne macht fortschrittliche Tools auch für kleinere Teams zugänglich.
 
 Konzentrieren Sie sich auf Tools mit sofortiger Bereitstellung, sicherer Datenverarbeitung und reibungsloser CI/CD-Integration. Diese Funktionen sind essentiell für die Reduzierung von Fehlern und die Verbesserung der Segmentierungsergebnisse.
 

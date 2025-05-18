@@ -36,10 +36,10 @@ Segui semplicemente la guida passo dopo passo, oppure naviga direttamente nella 
   <a href="/docs/getting-started/deploy/"><Card title="Facile da integrare" icon="pencil">
     Integra Capgo con il tuo CI/CD e attiva il caricamento dei bundle su Capgo tramite commit
   </Card></a>
-  <a href="/docs/getting-started/live-updates"><Card title="Documentazione Aggiornamenti in Tempo Reale" icon="setting">
+  <a href="/docs/live-updates/"><Card title="Documentazione Aggiornamenti in Tempo Reale" icon="setting">
     Aggiorna la tua app da remoto in tempo reale senza ritardi dell'app store
   </Card></a>
-  <a href="/docs/getting-started/trouble-shooting"><Card title="Risoluzione Problemi" icon="open-book">
+  <a href="/docs/getting-started/troubleshooting"><Card title="Risoluzione Problemi" icon="open-book">
     Problemi comuni e come risolverli
   </Card></a>
 </CardGrid>
@@ -77,13 +77,13 @@ Questo permette completamente Capacitor-updater poiché aggiorna solo i bundle J
 
 ### App Store
 
-Il paragrafo **3.3.2** del [Apple Developer Program License Agreement](https://developerapplecom/programs/ios/information/) permette completamente di eseguire aggiornamenti over-the-air di JavaScript e asset - e nella sua ultima versione (20170605) [scaricabile qui](https://developerapplecom/terms/) questa regola è ancora più ampia:
+Il paragrafo **3.3.2** del [Apple Developer Program License Agreement](https://developer.apple.com/programs/ios/information/) permette completamente di eseguire aggiornamenti over-the-air di JavaScript e asset - e nella sua ultima versione (20170605) [scaricabile qui](https://developer.apple.com/terms/) questa regola è ancora più ampia:
 
 > Il codice interpretato può essere scaricato in un'Applicazione solo se tale codice: (a) non modifica lo scopo principale dell'Applicazione fornendo funzionalità non coerenti con lo scopo previsto e pubblicizzato dell'Applicazione come presentato all'App Store, (b) non crea un negozio o vetrina per altro codice o applicazioni, e (c) non aggira la firma, il sandbox o altre funzionalità di sicurezza del SO
 
 Capacitor-updater ti permette di seguire queste regole in piena conformità purché l'aggiornamento che distribuisci non si discosti significativamente dall'intento originale approvato dall'App Store del tuo prodotto
 
-Per rimanere ulteriormente in conformità con le linee guida di Apple suggeriamo che le app distribuite sull'App Store non abilitino lo scenario di "Aggiornamento forzato", poiché nelle [Linee guida per la revisione dell'App Store](https://developerapplecom/app-store/review/guidelines/) si afferma che:
+Per rimanere ulteriormente in conformità con le linee guida di Apple suggeriamo che le app distribuite sull'App Store non abilitino lo scenario di "Aggiornamento forzato", poiché nelle [Linee guida per la revisione dell'App Store](https://developer.apple.com/app-store/review/guidelines/) si afferma che:
 
 > Le app non devono forzare gli utenti a valutare l'app, recensire l'app, scaricare altre app o altre azioni simili per accedere alle funzionalità, ai contenuti o all'utilizzo dell'app
 

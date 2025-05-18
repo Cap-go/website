@@ -25,7 +25,7 @@ next_blog: ''
 
 Standardmäßig ähnelt Capgos Sicherheitsmodell dem von Web-Hosting-Anbietern. Capgo speichert Updates [verschlüsselt im Ruhezustand](https://cloudgooglecom/docs/security/encryption/default-encryption/) und stellt sie über HTTPS mit modernen Verschlüsselungsverfahren bereit. Auch das Veröffentlichen eines Updates vom Computer eines Entwicklers erfolgt immer über HTTPS.
 
-![Capgo erzielt A+ im HTTPS-Test von SSL Labs](/ssllabs_reportwebp)
+![Capgo erzielt A+ im HTTPS-Test von SSL Labs](/ssllabs_report.webp)
 
 Capgos Standardsicherheit erzielt A+ im HTTPS-Test von SSL Labs (https://wwwssllabscom, November 2022)
 
@@ -47,7 +47,7 @@ Capgos Ende-zu-Ende-Code-Signierung verwendet Public-Key-Kryptographie, um siche
 
 Hier ist ein einfaches* Schema zur Erklärung der Funktionsweise:
 
-![Capgo Verschlüsselungsschema](/encryption_flowwebp)
+![Capgo Verschlüsselungsschema](/encryption_flow.webp)
 
 * In der Praxis komplex, Kryptographie ist schwierig
 

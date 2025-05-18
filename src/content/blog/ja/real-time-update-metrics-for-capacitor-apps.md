@@ -30,7 +30,7 @@ next_blog: ''
     -   **ユーザーへの影響：** 更新後のクラッシュや機能使用状況。
 -   **追跡に役立つツール：**
     
-    -   **Capgo：** CI/CDサポートを備えた安全な [更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)。
+    -   **Capgo：** CI/CDサポートを備えた安全な [更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/) 。
     -   **[Firebase Performance Monitoring](https://firebase.google.com/docs/perf-mon)：** 無料のリアルタイムパフォーマンスインサイト。
     -   **[New Relic](https://newrelic.com/):** エラー、ネットワークリクエストなどを追跡します。
 -   **セットアップ手順：**
@@ -63,7 +63,7 @@ next_blog: ''
     
     ドキュメントに記載されたセットアップ手順に従ってください。
     
--   **New Relic：** このツールはJavaScriptエラー、ネットワークリクエスト、カスタムイベントを監視するのに役立ちます [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/)。Colensoのような企業は、わずか数分で5,000人以上のユーザーのほぼ全員を更新するために利用しています [\[1\]](https://capgo.app/)。
+-   **New Relic：** このツールはJavaScriptエラー、ネットワークリクエスト、カスタムイベントを監視するのに役立ちます [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/) 。Colensoのような企業は、わずか数分で5,000人以上のユーザーのほぼ全員を更新するために利用しています [\[1\]](https://capgo.app/) 。
     
 
 ### 追跡するコア指標
@@ -82,8 +82,8 @@ next_blog: ''
 
 追跡設定を調整して、最も関連性のあるデータを収集します。選択したツールに応じて、以下のことができます：
 
--   **New Relic：** 分析、カスタムロギング、クラッシュレポート、ネットワーク監視、HTTP応答ボディキャプチャなどの機能を提供します [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/)。
--   **Capgo：** [安全な更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)のための暗号化を有効にし、より良いターゲティングのために特定のユーザーに更新を割り当てることができます [\[1\]](https://capgo.app/)。
+-   **New Relic：** 分析、カスタムロギング、クラッシュレポート、ネットワーク監視、HTTP応答ボディキャプチャなどの機能を提供します [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/) 。
+-   **Capgo：** [安全な更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)のための暗号化を有効にし、より良いターゲティングのために特定のユーザーに更新を割り当てることができます [\[1\]](https://capgo.app/) 。
 
 > "Capgoは、生産性を向上させたい開発者にとって必須のツールです。バグ修正のためのレビューを避けることは非常に貴重です。" - ベッシー・クーパー [\[1\]](https://capgo.app/)
 
@@ -103,7 +103,7 @@ next_blog: ''
 
 ### ユーザー行動分析
 
-更新後のユーザー行動の分析は、更新がエンゲージメントにどのように影響を与えるかをより明確に示します。たとえば、四半期末までにユーザーのアクティベーションを47％増加させるなどの測定可能な目標を設定することは、進捗を効果的に追跡するのに役立ちます [\[3\]](https://userpilot.com/blog/user-behavioral-analysis/)。
+更新後のユーザー行動の分析は、更新がエンゲージメントにどのように影響を与えるかをより明確に示します。たとえば、四半期末までにユーザーのアクティベーションを47％増加させるなどの測定可能な目標を設定することは、進捗を効果的に追跡するのに役立ちます [\[3\]](https://userpilot.com/blog/user-behavioral-analysis/) 。
 
 考慮すべき主な指標：
 
@@ -186,7 +186,7 @@ Capgoのプラットフォームは、更新サイズを最適化するための
 | **CPU使用量** | 更新中のCPUアクティビティを監視します |
 | **ネットワークリクエスト** | 更新中のネットワークリクエストの成功率を追跡します |
 
-[UXCam](https://uxcam.com/)による研究では、3秒以上かかると53％のユーザーがアプリを放棄することが示されています [\[7\]](https://uxcam.com/blog/how-to-improve-mobile-app-performance/)。iOSとAndroidの両方のプラットフォームにおいて、これらの指標を厳密に監視することで、デバイス全体で一貫したパフォーマンスを確保します。
+[UXCam](https://uxcam.com/)による研究では、3秒以上かかると53％のユーザーがアプリを放棄することが示されています [\[7\]](https://uxcam.com/blog/how-to-improve-mobile-app-performance/) 。iOSとAndroidの両方のプラットフォームにおいて、これらの指標を厳密に監視することで、デバイス全体で一貫したパフォーマンスを確保します。
 
 指標を特定したら、それらを整理して明確で簡潔なレポートにまとめて、迅速な分析を可能にします。
 
@@ -227,8 +227,8 @@ Capgoのようなプラットフォームは、詳細な分析を提供し、必
 
 最新の更新トラッキングツールは、開発チームにとってゲームチェンジャーであることが証明されています：
 
--   世界中の開発チームはこれらのツールを使用して**5億1950万件の更新**を提供しました [\[1\]](https://capgo.app/)。
--   チームは、より迅速なリリースサイクルのおかげで**81%の効率向上**を報告しています [\[1\]](https://capgo.app/)。
+-   世界中の開発チームはこれらのツールを使用して**5億1950万件の更新**を提供しました [\[1\]](https://capgo.app/) 。
+-   チームは、より迅速なリリースサイクルのおかげで**81%の効率向上**を報告しています [\[1\]](https://capgo.app/) 。
 
 効果的なメトリック追跡とライブ更新を組み合わせることで、開発者はアプリの維持と改善の方法を再想像しました。NASAの[OSIRIS-REx](https://science.nasa.gov/mission/osiris-rex/)チームもこのアプローチを賞賛しています：
 

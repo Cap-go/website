@@ -44,7 +44,7 @@ CapacitorUpdater.notifyAppReady()
 
 ### Capgo CLOUD にログイン
 
-最初に、アカウントにある `all` [apikey](https://webcapgoapp/dashboard/apikeys/) を使用して CLI でログインします：
+最初に、アカウントにある `all` [apikey](https://webcapgo.app/dashboard/apikeys/) を使用して CLI でログインします：
 
 `npx @capgo/cli@latest login YOUR_KEY`
 
@@ -63,9 +63,9 @@ CapacitorUpdater.notifyAppReady()
 
 デフォルトでは、バージョン名は `packagejson` ファイルにあるものになります。
 
-[Capgo](https://webcapgoapp/) でビルドが存在するか確認してください。
+[Capgo](https://webcapgo.app/) でビルドが存在するか確認してください。
 
-私の [モバイルサンドボックスアプリ](https://capgoapp/app_mobile/) を使ってテストすることもできます。
+私の [モバイルサンドボックスアプリ](https://capgo.app/app_mobile/) を使ってテストすることもできます。
 
 ### チャンネルをデフォルトに設定
 

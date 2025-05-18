@@ -19,7 +19,7 @@ locale: fr
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) CLI simplifie la gestion des plugins pour le développement d'applications, permettant une intégration transparente des fonctionnalités natives de l'appareil. Associé à des outils comme [Capgo](https://capgoapp/), il rationalise les mises à jour, le déploiement et le dépannage. Voici ce que vous devez savoir :
+[Capacitor](https://capacitorjs.com/) CLI simplifie la gestion des plugins pour le développement d'applications, permettant une intégration transparente des fonctionnalités natives de l'appareil. Associé à des outils comme [Capgo](https://capgo.app/), il rationalise les mises à jour, le déploiement et le dépannage. Voici ce que vous devez savoir :
 
 **Fonctionnalités principales :**
 
@@ -28,7 +28,7 @@ next_blog: ''
 -   **Supprimer des plugins :** Désinstallez proprement avec `npm uninstall @capacitor/plugin-name` et synchronisez les configurations
 -   **Dépanner les problèmes :** Les commandes comme `npx cap doctor` et `npx cap sync --verbose` aident à détecter et résoudre les problèmes
 
-**[Avantages de Capgo](https://capgoapp/consulting/) :**
+**[Avantages de Capgo](https://capgo.app/consulting/) :**
 
 -   Mises à jour en temps réel
 -   Chiffrement de bout en bout
@@ -37,7 +37,7 @@ next_blog: ''
 
 Capgo prend en charge plus de 750 applications dans le monde, offrant des mises à jour rapides et le suivi des erreurs pour 12$/mois
 
-Commencez à gérer efficacement les [plugins Capacitor](https://capgoapp/plugins/) et améliorez votre flux de développement dès aujourd'hui !
+Commencez à gérer efficacement les [plugins Capacitor](https://capgo.app/plugins/) et améliorez votre flux de développement dès aujourd'hui !
 
 ## Développement Multi-plateformes : Explorer CapacitorJS avec
 
@@ -79,7 +79,7 @@ Voici comment assurer une installation sans problème de votre plugin :
 -   Suivez le versionnement sémantique pour éviter les problèmes de compatibilité
 -   Testez le plugin dans votre environnement de développement avant le déploiement
 
-> "Exécutez npx @capgo/cli init c'est tout !" - Capgo [\[1\]](https://capgoapp/)
+> "Exécutez npx @capgo/cli init c'est tout !" - Capgo [\[1\]](https://capgo.app/)
 
 Après l'installation, confirmez que tout est en ordre en examinant votre `packagejson` et les fichiers de configuration spécifiques à la plateforme. Pour toute étape supplémentaire, consultez la documentation du plugin.
 
@@ -123,9 +123,9 @@ Après avoir appliqué les mises à jour, suivez ces étapes pour gérer efficac
 
 Les utilisateurs de Capgo bénéficient de fonctionnalités avancées comme les déploiements contrôlésLeur système a fait ses preuves en termes de fiabilité :
 
--   95% des mises à jour sont effectuées en moins de 24 heures [\[1\]](https://capgoapp/)
--   82% de taux de réussite global pour les mises à jour [\[1\]](https://capgoapp/)
--   Compatibilité avec les versions 6 et 7 de Capacitor [\[1\]](https://capgoapp/)
+-   95% des mises à jour sont effectuées en moins de 24 heures [\[1\]](https://capgo.app/)
+-   82% de taux de réussite global pour les mises à jour [\[1\]](https://capgo.app/)
+-   Compatibilité avec les versions 6 et 7 de Capacitor [\[1\]](https://capgo.app/)
 
 Pour assurer des mises à jour fluides :
 
@@ -133,7 +133,7 @@ Pour assurer des mises à jour fluides :
 -   **Tests** : Appliquez d'abord les mises à jour dans un environnement de développement
 -   **Avertissements de dépendances** : Traitez rapidement les problèmes de dépendances
 
-Capgo fournit également une fonction de restauration pour annuler les mises à jour critiques en cas de problème [\[1\]](https://capgoapp/)
+Capgo fournit également une fonction de restauration pour annuler les mises à jour critiques en cas de problème [\[1\]](https://capgo.app/)
 
 ## Commandes de suppression de plugins
 

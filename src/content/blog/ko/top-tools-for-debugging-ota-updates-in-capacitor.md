@@ -17,10 +17,10 @@ locale: ko
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) 앱에서 Over-the-Air (OTA) 업데이트를 디버깅하는 것은 까다로울 수 있지만, 적절한 도구를 사용하면 큰 차이가 있습니다. 버전 충돌을 관리하거나, [보안 업데이트](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)를 보장하거나, 플랫폼 간 디버깅을 할 때 고려할만한 세 가지 도구가 있습니다:
+[Capacitor](https://capacitorjs.com/) 앱에서 Over-the-Air (OTA) 업데이트를 디버깅하는 것은 까다로울 수 있지만, 적절한 도구를 사용하면 큰 차이가 있습니다. 버전 충돌을 관리하거나, [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 보장하거나, 플랫폼 간 디버깅을 할 때 고려할만한 세 가지 도구가 있습니다:
 
-- **[Capgo](https://capgoapp/)**: 엔드투엔드 암호화, CI/CD 통합, 사용자별 출시가 가능한 보안 OTA 업데이트. 월 12달러부터 시작
-- **@capawesome/capacitor-live-update**: 자동 롤백이 있는 기본적인 OTA [업데이트 관리](https://capgoapp/docs/plugin/cloud-mode/manual-update/)를 위한 무료 심플 플러그인
+- **[Capgo](https://capgo.app/)**: 엔드투엔드 암호화, CI/CD 통합, 사용자별 출시가 가능한 보안 OTA 업데이트. 월 12달러부터 시작
+- **@capawesome/capacitor-live-update**: 자동 롤백이 있는 기본적인 OTA [업데이트 관리](https://capgo.app/docs/plugin/cloud-mode/manual-update/)를 위한 무료 심플 플러그인
 - **[Inspectdev](https://inspectdev/)**: [Chrome DevTools](https://developerchromecom/docs/devtools) 통합으로 Windows에서도 Android와 iOS 앱을 모두 디버깅. 연 49달러
 
 ### 빠른 비교
@@ -28,7 +28,7 @@ next_blog: ''
 | 기능 | Capgo | @capawesome/capacitor-live-update | Inspectdev |
 | --- | --- | --- | --- |
 | 업데이트 관리 | 고급 (암호화, CI/CD) | 기본 (클라우드 기반) | 해당 없음 |
-| [디버깅 도구](https://capgoapp/docs/plugin/debugging/) | 버전 관리, 롤백 | 자동 롤백 | Chrome DevTools |
+| [디버깅 도구](https://capgo.app/docs/plugin/debugging/) | 버전 관리, 롤백 | 자동 롤백 | Chrome DevTools |
 | 플랫폼 지원 | Android, iOS | Android, iOS | Android, iOS (Windows 지원) |
 | 가격 | 월 12달러 | 무료 | 연 49달러 |
 
@@ -38,7 +38,7 @@ next_blog: ''
 
 ### 플랫폼 요구사항
 
-[Capacitor OTA 업데이트](https://capgoapp/ja/)가 원활하게 작동하려면 적절한 네이티브 통합이 필요합니다. iOS의 경우 엄격한 코드 서명과 업데이트 검증이 필요합니다. Android에서는 업데이트 문제를 피하기 위해 버전 코드 관리와 호환성 보장이 중요합니다.
+[Capacitor OTA 업데이트](https://capgo.app/ja/)가 원활하게 작동하려면 적절한 네이티브 통합이 필요합니다. iOS의 경우 엄격한 코드 서명과 업데이트 검증이 필요합니다. Android에서는 업데이트 문제를 피하기 위해 버전 코드 관리와 호환성 보장이 중요합니다.
 
 주요 플랫폼 확인 사항:
 
@@ -50,11 +50,11 @@ next_blog: ''
 
 ### 업데이트 배포 방법
 
-[Capacitor 앱](https://capgoapp/blog/capacitor-comprehensive-guide/)은 여러 OTA 업데이트 방법을 지원합니다. Capgo와 같은 도구는 Apple과 Android 지침을 모두 준수합니다.
+[Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)은 여러 OTA 업데이트 방법을 지원합니다. Capgo와 같은 도구는 Apple과 Android 지침을 모두 준수합니다.
 
 | 배포 방법 | 주요 기능 | 최적의 사용처 |
 | --- | --- | --- |
-| [수동 업데이트](https://capgoapp/docs/plugin/cloud-mode/manual-update/) | 업데이트 프로세스의 완전한 제어, 커스텀 URL 지원 | 소규모 앱, 테스팅 |
+| [수동 업데이트](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | 업데이트 프로세스의 완전한 제어, 커스텀 URL 지원 | 소규모 앱, 테스팅 |
 | Capgo | 엔드투엔드 암호화, CI/CD 통합, 사용자 할당 제공 | 기업용 애플리케이션 |
 | @capawesome/capacitor-live-update | 버전 관리와 기본 업데이트 기능 제공 | 단순한 앱 |
 
@@ -62,7 +62,7 @@ next_blog: ''
 
 ### 개발 환경 설정
 
-개발 환경 설정에는 [Capacitor CLI 명령어](https://capgoapp/docs/cli/commands/)를 사용하고 설정을 올바르게 구성하는 것이 포함됩니다.
+개발 환경 설정에는 [Capacitor CLI 명령어](https://capgo.app/docs/cli/commands/)를 사용하고 설정을 올바르게 구성하는 것이 포함됩니다.
 
 중요한 설정 단계:
 
@@ -78,19 +78,19 @@ iOS 앱 검사를 위해 Inspectdev는 Windows와 Chrome DevTools와 호환되�
 
 [[HTML_TAG]][[HTML_TAG]]
 
-## [Capacitor](https://capacitorjscom/) OTA 업데이트를 위한 3가지 주요 디버깅 도구
+## [Capacitor](https://capacitorjs.com/) OTA 업데이트를 위한 3가지 주요 디버깅 도구
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
 
-이러한 도구들은 개발자가 OTA 업데이트를 관리하면서 특정 [디버깅 과제](https://capgoapp/docs/plugin/debugging/)를 효과적으로 해결하는 데 도움을 줍니다.
+이러한 도구들은 개발자가 OTA 업데이트를 관리하면서 특정 [디버깅 과제](https://capgo.app/docs/plugin/debugging/)를 효과적으로 해결하는 데 도움을 줍니다.
 
-### [Capgo](https://capgoapp)
+### [Capgo](https://capgo.app
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20.jpg?auto=compress)
 
 Capgo는 Capacitor 앱에서 OTA 업데이트를 처리하기 위한 안정적인 솔루션을 제공합니다. 플랫폼 가이드라인을 준수하면서 안전하고 빠른 업데이트를 보장합니다.
 
-#### [Capgo](https://capgoapp/) 기능 분석
+#### [Capgo](https://capgo.app/) 기능 분석
 
 | **기능** | **설명** | **이점** |
 | --- | --- | --- |
@@ -109,13 +109,13 @@ Capgo의 가격은 개인 개발자를 위한 월 12달러부터 시작하며, �
 
 #### @capawesome/capacitor-live-update의 주요 기능
 
-이 플러그인은 Android와 iOS를 모두 지원하는 [클라우드 기반 번들 관리 시스템](https://capgoapp/docs/webapp/bundles/)과 같은 필수 업데이트 기능에 중점을 둡니다. 또한 업데이트 실패 시 마지막 작동 버전으로 되돌리는 자동 롤백 기능도 포함되어 있습니다.
+이 플러그인은 Android와 iOS를 모두 지원하는 [클라우드 기반 번들 관리 시스템](https://capgo.app/docs/webapp/bundles/)과 같은 필수 업데이트 기능에 중점을 둡니다. 또한 업데이트 실패 시 마지막 작동 버전으로 되돌리는 자동 롤백 기능도 포함되어 있습니다.
 
-크로스 플랫폼 기능을 갖춘 [디버깅 도구](https://capgoapp/docs/plugin/debugging/)를 찾으신다면 **Inspectdev**를 살펴보세요.
+크로스 플랫폼 기능을 갖춘 [디버깅 도구](https://capgo.app/docs/plugin/debugging/)를 찾으신다면 **Inspectdev**를 살펴보세요.
 
 ### [Inspectdev](https://inspectdev/)
 
-![Inspectdev](https://mars-imagesimgixnet/seobot/screenshots/inspectdev-9bbcb0a3366f33fde5bbabd7b9e5d36a-2025-02-20jpg?auto=compress)
+![Inspectdev](https://mars-images.imgix.net/seobot/screenshots/inspectdev-9bbcb0a3366f33fde5bbabd7b9e5d36a-2025-02-20.jpg?auto=compress)
 
 Inspectdev는 개발자들에게 일반적인 과제인 Windows에서의 iOS 디버깅을 포함하여 Android와 iOS 모두를 위한 디버깅을 단순화하도록 설계되었습니다.
 

@@ -24,20 +24,20 @@ locale: es
 next_blog: ''
 ---
 
-**¿Quieres crear aplicaciones que se sientan nativas en iOS, Android y web?** [Capacitor](https://capacitorjscom/) lo hace posible combinando características web y nativas. Pero crear una experiencia fluida en todas las plataformas requiere un diseño UI/UX cuidadoso. Aquí te mostramos cómo hacerlo:
+**¿Quieres crear aplicaciones que se sientan nativas en iOS, Android y web?** [Capacitor](https://capacitorjs.com/) lo hace posible combinando características web y nativas. Pero crear una experiencia fluida en todas las plataformas requiere un diseño UI/UX cuidadoso. Aquí te mostramos cómo hacerlo:
 
 -   **Sigue las Pautas Específicas de Plataforma**: Respeta los estándares de iOS (Human Interface) y Android (Material Design) para navegación, tipografía y gestos
 -   **Usa un Sistema de Diseño**: Crea tokens de diseño reutilizables, componentes y documentación para mantener consistencia
 -   **Optimiza para Tamaños de Pantalla**: Utiliza cuadrículas responsivas, puntos de quiebre y componentes escalables para diseños fluidos en todos los dispositivos
 -   **Aprovecha Herramientas Como [Ionic](https://ionicframeworkcom/)**: Los componentes pre-construidos se adaptan a los estilos de la plataforma, ahorrando tiempo y esfuerzo
 -   **Prueba en Diferentes Dispositivos**: Cubre diferentes tamaños de pantalla, versiones de SO e interacciones de usuario para garantizar la fiabilidad
--   **Usa Actualizaciones en Vivo**: Herramientas como [Capgo](https://capgoapp/) entregan actualizaciones instantáneamente sin retrasos de la tienda de aplicaciones, manteniendo a los usuarios actualizados
+-   **Usa Actualizaciones en Vivo**: Herramientas como [Capgo](https://capgo.app/) entregan actualizaciones instantáneamente sin retrasos de la tienda de aplicaciones, manteniendo a los usuarios actualizados
 
 **Consejo Rápido**: Capgo ha habilitado 235 millones de actualizaciones para más de 750 aplicaciones, con 95% de usuarios actualizados en 24 horas
 
-## Construye Componentes Multiplataforma con [Stencil](https://stenciljscom/) y [Capacitor](https://capacitorjscom/)
+## Construye Componentes Multiplataforma con [Stencil](https://stenciljscom/) y [Capacitor](https://capacitorjs.com/)
 
-![Stencil](https://mars-imagesimgixnet/seobot/screenshots/stenciljscom-6020276454429265c3dac5ec0634b1fb-2025-03-24jpg?auto=compress)
+![Stencil](https://mars-images.imgix.net/seobot/screenshots/stenciljscom-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -89,6 +89,6 @@ Crear componentes UI de alto rendimiento requiere atención cuidadosa a la compa
 
 ### Usando Componentes de [Ionic](https://ionicframeworkcom/)
 
-![Ionic](https://mars-imagesimgixnet/seobot/screenshots/ionicframeworkcom-e736941a658f3b6da09d169d589f75bb-2025-03-24jpg?auto=compress)
+![Ionic](https://mars-images.imgix.net/seobot/screenshots/ionicframeworkcom-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
 
 Ionic ofrece componentes pre-construidos que simplifican el desarrollo multiplataforma. Estos componentes se alinean automáticamente con patrones de diseño específicos de plataforma mientras aseguran una funcionalidad consistente

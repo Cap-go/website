@@ -61,7 +61,7 @@ GitHub Actions es un servicio gratuito de integración y despliegue continuo inc
 
 Para configurar esto, primero crearías un repositorio GitHub para el código de tu aplicación. Luego, puedes crear un archivo de flujo de trabajo que defina los pasos a ejecutar cada vez que se envía código al repositorio. Estos pasos pueden incluir la construcción y prueba de la aplicación, y luego usar Capgo para crear e implementar una actualización en vivo.
 
-Esta configuración te permite construir, probar e implementar automáticamente tu aplicación con un esfuerzo mínimo, mientras aprovechas las capacidades de actualización en vivo ofrecidas por Capgo. Para instrucciones detalladas sobre la configuración de CI/CD con Capgo, puedes consultar nuestros tutoriales para [iOS](https://capgoapp/blog/automatic-capacitor-android-build-github-action/)
+Esta configuración te permite construir, probar e implementar automáticamente tu aplicación con un esfuerzo mínimo, mientras aprovechas las capacidades de actualización en vivo ofrecidas por Capgo. Para instrucciones detalladas sobre la configuración de CI/CD con Capgo, puedes consultar nuestros tutoriales para [iOS](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
 
 ## Vamos más allá
 

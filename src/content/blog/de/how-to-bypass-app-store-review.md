@@ -44,7 +44,7 @@ Ich sage das nur, weil es gut zu wissen ist, dass Tausende anderer Entwickler Li
 
 Apple und Google haben ihre eigenen Regeln, wie Apps aktualisiert werden sollen
 
-Für Apple [werfen Sie einen Blick auf Absatz 3.3.2](https://developerapplecom/programs/information/Apple_Developer_Program_Information_8_12_15pdf/)
+Für Apple [werfen Sie einen Blick auf Absatz 3.3.2](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15pdf/)
 [...] Die einzige Ausnahme von dem Vorstehenden sind Skripte und Code, die von Apples eingebautem WebKit-Framework oder JavascriptCore heruntergeladen und ausgeführt werden [...] __TLDR__: Wir sollten OTA-Updates nur verwenden, um Fehler zu beheben oder Verbesserungen vorzunehmen, ohne signifikante Änderungen vorzunehmen
 
 __Google__ Play ist weniger restriktiv - sie sagen, dass Apps, die von Google Play mit JavaScript-Bundles installiert werden, [nicht darauf beschränkt sind](https://supportgooglecom/googleplay/android-developer/answer/9888379/?hl=en), nur von Google-Diensten aktualisiert zu werden

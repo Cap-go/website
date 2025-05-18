@@ -50,11 +50,11 @@ iOSとAndroidは、OTA（over-the-air）更新の管理において、技術的�
 
 ### iOS App Store更新ルール
 
-Appleは、OTA更新に関して厳格なガイドラインを設けています。デバイスは特定の技術的条件を満たす必要があります：iOS 5以降を実行し、安定したWi-Fiネットワークに接続され、バッテリー残量が50%以上あるか、電源に接続されている必要があります[\[5\]](https://osxdaily.com/2011/11/10/ios-ota-update-not-working-fix/)。これらの技術要件に加えて、Appleは安全性、パフォーマンス、ビジネスコンプライアンス、デザイン、法的基準に関する厳格な審査プロセスを実施しています[\[4\]](https://developer.apple.com/app-store/review/guidelines/)。
+Appleは、OTA更新に関して厳格なガイドラインを設けています。デバイスは特定の技術的条件を満たす必要があります：iOS 5以降を実行し、安定したWi-Fiネットワークに接続され、バッテリー残量が50%以上あるか、電源に接続されている必要があります[\[5\]](https://osxdaily.com/2011/11/10/ios-ota-update-not-working-fix/) 。これらの技術要件に加えて、Appleは安全性、パフォーマンス、ビジネスコンプライアンス、デザイン、法的基準に関する厳格な審査プロセスを実施しています[\[4\]](https://developer.apple.com/app-store/review/guidelines/) 。
 
 ### Google Play Store更新ルール
 
-Google Playは異なる方式で運営され、ステージドロールアウトシステムを使用します。更新は最初に24-48時間かけてユーザーの1%に小規模リリースを行い、その後25%ずつ拡大し、1-2週間以内に完全展開に到達します[\[7\]](https://www.phonearena.com/news/Google-engineer-Dan-Morrill-talks-about-Android-OTA-updates-and-why-you-need-to-be-patient_id49573)。2023年8月以降、すべての新しいAndroidバージョンは利用可能な最高のAPIレベルをターゲットにする必要があります[\[3\]](https://applandeo.com/blog/upcoming-google-play-a-appstore-updates-how-will-they-affect-your-mobile-app/)。さらに、Androidはストリーミング更新を採用しており、[更新プロセス](https://capgo.app/docs/plugin/cloud-mode/manual-update/)中の追加ストレージスペースの必要性を軽減します[\[8\]](https://source.android.com/docs/core/ota/ab)。
+Google Playは異なる方式で運営され、ステージドロールアウトシステムを使用します。更新は最初に24-48時間かけてユーザーの1%に小規模リリースを行い、その後25%ずつ拡大し、1-2週間以内に完全展開に到達します[\[7\]](https://www.phonearena.com/news/Google-engineer-Dan-Morrill-talks-about-Android-OTA-updates-and-why-you-need-to-be-patient_id49573)。2023年8月以降、すべての新しいAndroidバージョンは利用可能な最高のAPIレベルをターゲットにする必要があります[\[3\]](https://applandeo.com/blog/upcoming-google-play-a-appstore-updates-how-will-they-affect-your-mobile-app/) 。さらに、Androidはストリーミング更新を採用しており、[更新プロセス](https://capgo.app/docs/plugin/cloud-mode/manual-update/)中の追加ストレージスペースの必要性を軽減します[\[8\]](https://source.android.com/docs/core/ota/ab)。
 
 ### プラットフォーム更新の違い
 
@@ -88,11 +88,11 @@ AndroidのA/B更新システムは、ユーザーを中断することなくバ�
 | 現在 | 既存のアプリはAndroid 13（API 33+）をターゲットにする必要がある |
 | レガシー | Android 12以下をターゲットにするアプリは既存のOSバージョンに準拠する必要がある |
 
-iOSの場合、AppleはRapid Security Response（RSR）を使用して、最新のOSバージョンに重要なパッチを直接配信します[\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web)。Capgoは、iOS 13.0+およびAndroid APIレベル22+を実行しているデバイスとの互換性を確保しています[\[9\]](https://capgo.app/docs/faq/)。
+iOSの場合、AppleはRapid Security Response（RSR）を使用して、最新のOSバージョンに重要なパッチを直接配信します[\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web)。Capgoは、iOS 13.0+およびAndroid APIレベル22+を実行しているデバイスとの互換性を確保しています[\[9\]](https://capgo.app/docs/faq/) 。
 
 ### 更新戦略の結果
 
-Androidの[Project Treble](https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html)は、セキュリティ更新に必要な時間を約7日短縮しました[\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346)。更新を効果的に管理するために、開発環境と本番環境の[更新チャネル](https://capgo.app/docs/webapp/channels/)を分離することが推奨されます[\[9\]](https://capgo.app/docs/faq/)。Capgoはパーセンテージベースの展開でプロセスを簡素化し、アプリストアのガイドライン内で制御された展開を可能にします。
+Androidの[Project Treble](https://android-developers.googleblog.com/2017/05/here-comes-treble-modular-base-for.html)は、セキュリティ更新に必要な時間を約7日短縮しました[\[11\]](https://dl.acm.org/doi/10.1145/3372297.3423346)。更新を効果的に管理するために、開発環境と本番環境の[更新チャネル](https://capgo.app/docs/webapp/channels/)を分離することが推奨されます[\[9\]](https://capgo.app/docs/faq/) 。Capgoはパーセンテージベースの展開でプロセスを簡素化し、アプリストアのガイドライン内で制御された展開を可能にします。
 
 更新プログラムは、効率的で安全な更新のために、ダウンロードされたバンドルをプラットフォーム固有のディレクトリにキャッシュします：
 
@@ -101,7 +101,7 @@ Androidの[Project Treble](https://android-developers.googleblog.com/2017/05/her
 -   **iOS**: `Library/Application Support/capgo`
     
 
-このキャッシングシステムは、スムーズで信頼性の高い更新を確保します[\[9\]](https://capgo.app/docs/faq/)。
+このキャッシングシステムは、スムーズで信頼性の高い更新を確保します[\[9\]](https://capgo.app/docs/faq/) 。
 
 ## 更新速度と効率性
 
@@ -109,7 +109,7 @@ OTA（Over-the-Air）更新の速度と効率性は、iOSとAndroid両方のユ�
 
 ### ファイルサイズとネットワーク管理
 
-スムーズなOTA更新のためには、ファイルサイズの最適化が重要です。例えば、Capgoの更新プログラムは、アプリ起動時にバックグラウンドスレッドで更新チェックを実行し、ユーザーインターフェースの応答性を維持します[\[9\]](https://capgo.app/docs/faq/)。また、安定性を維持するために、ネイティブコード（Java/KotlinやObjective-C/Swiftなど）をロックしながら、JavaScriptの更新をサポートします[\[9\]](https://capgo.app/docs/faq/)。
+スムーズなOTA更新のためには、ファイルサイズの最適化が重要です。例えば、Capgoの更新プログラムは、アプリ起動時にバックグラウンドスレッドで更新チェックを実行し、ユーザーインターフェースの応答性を維持します[\[9\]](https://capgo.app/docs/faq/) 。また、安定性を維持するために、ネイティブコード（Java/KotlinやObjective-C/Swiftなど）をロックしながら、JavaScriptの更新をサポートします[\[9\]](https://capgo.app/docs/faq/) 。
 
 ### 更新速度の比較
 
@@ -124,7 +124,7 @@ OTA（Over-the-Air）更新の速度と効率性は、iOSとAndroid両方のユ�
 
 OTA更新に関して、iOS
 
-Appleのアップデートプロセスは、厳格なセキュリティを念頭に置いて緊密に管理されています。iOSデバイスは、各デバイス固有の2つの内蔵AES 256ビットキーを使用する**ハードウェアベースの暗号化**に依存しています[\[17\]](https://mas.owasp.org/MASTG/0x06a-Platform-Overview/)。また、各デバイスには統合されたAES 256ビットキーを持つ固有のハードウェアベースのUIDが含まれています[\[17\]](https://mas.owasp.org/MASTG/0x06a-Platform-Overview/)。アップデートは整合性が検証され、個々のデバイスにカスタマイズされ、ダウングレード攻撃に対する保護機能が備わっています。Appleはまた、セキュリティリスクを防ぐためにアップデート中のユーザーデータを分離します[\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web)。注目すべき機能は、システム全体のアップデートを必要とせずにセキュリティパッチを迅速に展開できる**Rapid Security Responses**です[\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web)。
+Appleのアップデートプロセスは、厳格なセキュリティを念頭に置いて緊密に管理されています。iOSデバイスは、各デバイス固有の2つの内蔵AES 256ビットキーを使用する**ハードウェアベースの暗号化**に依存しています[\[17\]](https://mas.owasp.org/MASTG/0x06a-Platform-Overview/) 。また、各デバイスには統合されたAES 256ビットキーを持つ固有のハードウェアベースのUIDが含まれています[\[17\]](https://mas.owasp.org/MASTG/0x06a-Platform-Overview/) 。アップデートは整合性が検証され、個々のデバイスにカスタマイズされ、ダウングレード攻撃に対する保護機能が備わっています。Appleはまた、セキュリティリスクを防ぐためにアップデート中のユーザーデータを分離します[\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web)。注目すべき機能は、システム全体のアップデートを必要とせずにセキュリティパッチを迅速に展開できる**Rapid Security Responses**です[\[10\]](https://support.apple.com/guide/deployment/about-software-updates-depc4c80847a/web)。
 
 ### Androidのセキュリティ基準
 
@@ -149,11 +149,11 @@ Capgoのようなツールを使用する開発者にとって、これらの違
 
 Capgoは、プラットフォーム固有のOTAアップデートルールを1つの合理化されたアップデートプラットフォームにまとめています。
 
-iOSとAndroidのセキュリティプロトコルと連携することで、CapgoはシームレスなOTAアップデート管理を確保します。現在まで、**1,400の本番アプリ**に対して**9億4,760万回**のアップデートを配信しています[\[1\]](https://capgo.app/)。
+iOSとAndroidのセキュリティプロトコルと連携することで、CapgoはシームレスなOTAアップデート管理を確保します。現在まで、**1,400の本番アプリ**に対して**9億4,760万回**のアップデートを配信しています[\[1\]](https://capgo.app/) 。
 
 ### Capgoの主要機能
 
-Capgoは、安全で効率的、かつコンプライアンスに準拠した配信でアップデートの課題解決に重点を置いています。アップデートは**エンドツーエンドの暗号化**で保護され、復号化はユーザーデバイスでのみ行われます[\[1\]](https://capgo.app/)。iOSでは、Appleのインタープリタのみのアップデートルールに合わせてカスタムDartインタープリタを使用します[\[9\]](https://capgo.app/docs/faq/)。Androidでは、Capacitorの要件に沿ってAPI level 22以上をサポートしています[\[9\]](https://capgo.app/docs/faq/)。
+Capgoは、安全で効率的、かつコンプライアンスに準拠した配信でアップデートの課題解決に重点を置いています。アップデートは**エンドツーエンドの暗号化**で保護され、復号化はユーザーデバイスでのみ行われます[\[1\]](https://capgo.app/) 。iOSでは、Appleのインタープリタのみのアップデートルールに合わせてカスタムDartインタープリタを使用します[\[9\]](https://capgo.app/docs/faq/) 。Androidでは、Capacitorの要件に沿ってAPI level 22以上をサポートしています[\[9\]](https://capgo.app/docs/faq/) 。
 
 | 機能 | 実装 | プラットフォームサポート |
 | --- | --- | --- |
@@ -178,12 +178,12 @@ Capgoのチャネルシステムにより、開発者はiOSとAndroidのアッ�
 
 > "@Capgoは、ホットコードプッシュを行うスマートな方法です（@AppFlowのように世界中のお金を必要としません）:-)"[\[1\]](https://capgo.app/)
 
-Capgoは、アプリと生成されたコードを含むJavaScriptコードを調整できますが、ネイティブコード（AndroidのJava/KotlinやiOSのObjective-C/Swiftなど）の変更は厳密に避けています[\[9\]](https://capgo.app/docs/faq/)。
+Capgoは、アプリと生成されたコードを含むJavaScriptコードを調整できますが、ネイティブコード（AndroidのJava/KotlinやiOSのObjective-C/Swiftなど）の変更は厳密に避けています[\[9\]](https://capgo.app/docs/faq/) 。
 
 ## 結論
 
-[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)のOTAアップデートは、プラットフォーム固有のルールにより、iOSとAndroidで異なるアプローチが必要です。iOSでは、サーバーパスを"/Library/NoCloud/ionic\_built\_snapshots"に制限するファイルパス制限など、より厳格な制御があります[\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)。一方、Androidは、仮想マシンやインタープリタのAPIアクセスに関する制限が少なく、より多くの自由度があります[\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)。これらの違いは、各プラットフォームのフレームワークに沿ったアップデート戦略を作成することの重要性を強調しています。
+[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)のOTAアップデートは、プラットフォーム固有のルールにより、iOSとAndroidで異なるアプローチが必要です。iOSでは、サーバーパスを"/Library/NoCloud/ionic\_built\_snapshots"に制限するファイルパス制限など、より厳格な制御があります[\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/) 。一方、Androidは、仮想マシンやインタープリタのAPIアクセスに関する制限が少なく、より多くの自由度があります[\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/) 。これらの違いは、各プラットフォームのフレームワークに沿ったアップデート戦略を作成することの重要性を強調しています。
 
-Capgoのようなプラットフォームからのデータは、これらの戦略がいかに効果的であるかを示しています。開発者は1,400の本番アプリに対して9億4,760万回のアップデートを成功裏に配信し、適切に設計されたアップデートシステムのスケーラビリティを証明しています[\[1\]](https://capgo.app/)。ただし、成功は強力なセキュリティ対策を維持しながら、各プラットフォームの要件を満たすことに大きく依存します。
+Capgoのようなプラットフォームからのデータは、これらの戦略がいかに効果的であるかを示しています。開発者は1,400の本番アプリに対して9億4,760万回のアップデートを成功裏に配信し、適切に設計されたアップデートシステムのスケーラビリティを証明しています[\[1\]](https://capgo.app/) 。ただし、成功は強力なセキュリティ対策を維持しながら、各プラットフォームの要件を満たすことに大きく依存します。
 
-例えば、Appleは解釈されたコードがアプリの中核的な機能を変更したり、セキュリティを損なったりしてはならないと定めています[\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)。このルールは、開発者がOTAアップデートを効果的に実装するために従わなければならないプラットフォーム固有のガイドラインを明確に示しています。
+例えば、Appleは解釈されたコードがアプリの中核的な機能を変更したり、セキュリティを損なったりしてはならないと定めています[\[2\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/) 。このルールは、開発者がOTAアップデートを効果的に実装するために従わなければならないプラットフォーム固有のガイドラインを明確に示しています。

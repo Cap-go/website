@@ -48,7 +48,7 @@ next_blog: ''
 
 ### テスト環境のセットアップ
 
-iOS、Android、Webプラットフォーム用の個別のテスト環境を、Capacitorの公式ガイドラインに従って準備します[\[1\]](https://capgo.app/)。厳格なバージョン管理手法を実装してコードベースを保護します。
+iOS、Android、Webプラットフォーム用の個別のテスト環境を、Capacitorの公式ガイドラインに従って準備します[\[1\]](https://capgo.app/) 。厳格なバージョン管理手法を実装してコードベースを保護します。
 
 ### バージョン管理セットアップ
 
@@ -56,7 +56,7 @@ iOS、Android、Webプラットフォーム用の個別のテスト環境を、C
 
 -   新しいアップデートを分離するためにフィーチャーブランチを使用。
 -   自動ビルド用に[GitHub Actions](https://docs.github.com/actions)や[GitLab CI](https://docs.gitlab.com/ee/ci/)などのCI/CDシステムと統合。
--   必要な際の迅速な復帰のためにCapgoのワンクリックロールバック機能を活用[\[1\]](https://capgo.app/)。
+-   必要な際の迅速な復帰のためにCapgoのワンクリックロールバック機能を活用[\[1\]](https://capgo.app/) 。
 
 ### [Capgo](https://capgo.app/)セットアップ
 
@@ -64,13 +64,13 @@ iOS、Android、Webプラットフォーム用の個別のテスト環境を、C
 
 以下の手順でCapgoを設定します[\[1\]](https://capgo.app/)：
 
--   `npx @capgo/cli init`を使用して[Capgoを初期化](https://capgo.app/docs/webapp/)。
+-   `npx @capgo/cli init`を使用して[Capgoを初期化](https://capgo.app/docs/webapp/) 。
 -   特定のアップデートをターゲットにする[チャンネルシステム](https://capgo.app/docs/plugin/cloud-mode/channel-system/)を設定。
 -   セキュリティ強化のためのエンドツーエンド暗号化を有効化。
 -   エラートラッキングと分析を有効化。
 -   より良いコントロールのためのロールバックオプションを設定。
 -   ニーズに応じてクラウドまたは[セルフホスト展開](https://capgo.app/blog/self-hosted-capgo/)を選択。
 
-企業利用の場合、CapgoはCapacitor 6および7との互換性があり、クラウドとセルフホストの両方の展開をサポートしています[\[1\]](https://capgo.app/)。このセットアップが完了したら、機能とデバイスのテストに進みます。
+企業利用の場合、CapgoはCapacitor 6および7との互換性があり、クラウドとセルフホストの両方の展開をサポートしています[\[1\]](https://capgo.app/) 。このセットアップが完了したら、機能とデバイスのテストに進みます。
 
 [テキストは長いため、残りの部分は分割して翻訳を続けます。必要であればお申し付けください]

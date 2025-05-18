@@ -22,22 +22,22 @@ locale: it
 next_blog: ''
 ---
 
-La sicurezza della pipeline per le app [Capacitor](https://capacitorjscom/) è essenziale per proteggere i dati sensibili e garantire aggiornamenti affidabili. Ecco cosa devi sapere:
+La sicurezza della pipeline per le app [Capacitor](https://capacitorjs.com/) è essenziale per proteggere i dati sensibili e garantire aggiornamenti affidabili. Ecco cosa devi sapere:
 
-- **Proteggere i Segreti**: Utilizza la crittografia end-to-end e strumenti sicuri di gestione dei segreti per proteggere le credenziali come le [API keys](https://capgoapp/docs/webapp/api-keys/)
-- **Controllo Accessi**: Implementa il controllo degli accessi basato sui ruoli (RBAC), [autenticazione multi-fattore](https://capgoapp/docs/webapp/mfa/) (MFA) e monitoraggio in tempo reale per prevenire modifiche non autorizzate alla pipeline
+- **Proteggere i Segreti**: Utilizza la crittografia end-to-end e strumenti sicuri di gestione dei segreti per proteggere le credenziali come le [API keys](https://capgo.app/docs/webapp/api-keys/)
+- **Controllo Accessi**: Implementa il controllo degli accessi basato sui ruoli (RBAC), [autenticazione multi-fattore](https://capgo.app/docs/webapp/mfa/) (MFA) e monitoraggio in tempo reale per prevenire modifiche non autorizzate alla pipeline
 - **Integrità degli Aggiornamenti**: Cripta gli aggiornamenti OTA, verifica l'autenticità con firme digitali e abilita i rilasci graduali con opzioni di rollback
 - **Strumenti di Sicurezza**: Utilizza strumenti automatizzati di test di sicurezza per l'analisi statica del codice, controlli delle dipendenze e test delle API
 
-[Capgo](https://capgoapp/), una piattaforma OTA leader, migliora la sicurezza della pipeline Capacitor con funzionalità come il monitoraggio in tempo reale, rilasci graduali e crittografia end-to-end. Queste misure garantiscono aggiornamenti sicuri delle app proteggendo i dati degli utenti.
+[Capgo](https://capgo.app/), una piattaforma OTA leader, migliora la sicurezza della pipeline Capacitor con funzionalità come il monitoraggio in tempo reale, rilasci graduali e crittografia end-to-end. Queste misure garantiscono aggiornamenti sicuri delle app proteggendo i dati degli utenti.
 
 ## Cos'è la Sicurezza CI/CD? Strategie per rafforzarla
 
-## Rischi di Sicurezza nelle Pipeline delle App [Capacitor](https://capacitorjscom/)
+## Rischi di Sicurezza nelle Pipeline delle App [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assetsseobotaicom/capgoapp/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-Con l'evoluzione dello [sviluppo di app Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/), vengono introdotte specifiche sfide di sicurezza nelle pipeline CI/CD. Affrontare questi rischi è fondamentale per mantenere un ambiente di sviluppo sicuro.
+Con l'evoluzione dello [sviluppo di app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), vengono introdotte specifiche sfide di sicurezza nelle pipeline CI/CD. Affrontare questi rischi è fondamentale per mantenere un ambiente di sviluppo sicuro.
 
 ### Gestione di Segreti e Variabili
 
@@ -86,7 +86,7 @@ Per ridurre i rischi, segui queste linee guida per la sicurezza della pipeline.
 
 - Usa la **crittografia end-to-end** per proteggere i segreti e prevenire fughe di credenziali
 - Memorizza API key, token di accesso e variabili d'ambiente in un **servizio di gestione dei segreti** con accesso limitato e rotazione regolare-   Limitare l'ambito delle variabili a specifici ambienti per minimizzare i rischi di esposizione
--   [Crittografare i dati](https://capgoapp/docs/cli/migrations/encryption/) sia quando sono fermi che durante il transito per bloccare accessi non autorizzati
+-   [Crittografare i dati](https://capgo.app/docs/cli/migrations/encryption/) sia quando sono fermi che durante il transito per bloccare accessi non autorizzati
 
 ### Strumenti per i Test di Sicurezza
 
@@ -114,11 +114,11 @@ Per ridurre i rischi, segui queste linee guida per la sicurezza della pipeline.
 
 Le nuove piattaforme OTA ora danno priorità alla sicurezza nelle loro pipeline Capacitor. Questi strumenti implementano le misure di sicurezza discusse in precedenza
 
-### Funzionalità di Sicurezza di [Capgo](https://capgoapp/)
+### Funzionalità di Sicurezza di [Capgo](https://capgo.app/)
 
-![Capgo](https://assetsseobotaicom/capgoapp/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
 
-Capgo fornisce una configurazione orientata alla sicurezza progettata specificamente per le [app Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/). La sua crittografia end-to-end garantisce che gli aggiornamenti possano essere decrittati solo da utenti autorizzati, andando oltre la solita dipendenza dai pacchetti firmati. Le funzionalità chiave includono:
+Capgo fornisce una configurazione orientata alla sicurezza progettata specificamente per le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). La sua crittografia end-to-end garantisce che gli aggiornamenti possano essere decrittati solo da utenti autorizzati, andando oltre la solita dipendenza dai pacchetti firmati. Le funzionalità chiave includono:
 
 -   **Monitoraggio in tempo reale**: Traccia successi e fallimenti degli aggiornamenti in tempo reale
 -   **Controllo accessi granulare**: Permessi basati sui ruoli e gestione organizzativa per limitare l'accesso alla pipeline
@@ -137,7 +137,7 @@ Ecco come si confrontano le moderne piattaforme OTA con i metodi più datati:
 -   **Integrazione**: L'integrazione nativa CI/CD elimina la necessità di configurazioni manuali
 -   **Hosting**: Opzioni sia cloud che self-hosted, a differenza dei sistemi legacy spesso solo cloud
 
-> "@Capgo è un modo intelligente per fare hot code pushes (e non per tutti i soldi del mondo come con @AppFlow) :-)" – NASA's OSIRIS-REx [\[1\]](https://capgoapp/)
+> "@Capgo è un modo intelligente per fare hot code pushes (e non per tutti i soldi del mondo come con @AppFlow) :-)" – NASA's OSIRIS-REx [\[1\]](https://capgo.app/)
 
 ## Prospettive del Settore
 
@@ -145,7 +145,7 @@ Il campo della sicurezza delle pipeline si sta muovendo verso modelli più avanz
 
 ### Tendenze nella Sicurezza delle Pipeline
 
-La crittografia end-to-end è ora una caratteristica standard per i sistemi di aggiornamento OTA (over-the-air) [\[1\]](https://capgoapp/). Questo sviluppo evidenzia l'importanza di scalare le precedenti best practice per la gestione di segreti, accessi e aggiornamenti.
+La crittografia end-to-end è ora una caratteristica standard per i sistemi di aggiornamento OTA (over-the-air) [\[1\]](https://capgo.app/). Questo sviluppo evidenzia l'importanza di scalare le precedenti best practice per la gestione di segreti, accessi e aggiornamenti.
 
 ### Strumenti di Sicurezza Open-Source
 

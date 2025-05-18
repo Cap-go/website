@@ -22,7 +22,7 @@ locale: id
 next_blog: ''
 ---
 
-**Pembaruan App Store atau pembaruan OTA langsung?** Cara Anda mengirimkan [pembaruan aplikasi](https://capgoapp/plugins/capacitor-updater/) dapat berdampak signifikan pada kecepatan, kontrol, dan pengalaman pengguna. Berikut ringkasannya:
+**Pembaruan App Store atau pembaruan OTA langsung?** Cara Anda mengirimkan [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) dapat berdampak signifikan pada kecepatan, kontrol, dan pengalaman pengguna. Berikut ringkasannya:
 
 -   **Pembaruan App Store**: Melalui proses peninjauan, memastikan keamanan dan kepatuhan tetapi sering tertunda berjam-jam atau berhari-hari. Ideal untuk peluncuran global tetapi membatasi fleksibilitas
     
@@ -51,7 +51,7 @@ Pembaruan App Store adalah metode utama untuk mengirimkan pembaruan perangkat lu
 
 ### Bagaimana Pembaruan App Store Bekerja
 
-Mengirimkan pembaruan ke App Store berarti menyiapkan paket yang memenuhi persyaratan Apple dan melewati proses peninjauan. Apple memeriksa pembaruan untuk keamanan, kinerja, pedoman konten, dan fungsionalitas. Menggunakan [App Store Connect](https://developerapplecom/app-store-connect/), pengembang mengirimkan pembaruan mereka, yang menjalani evaluasi menyeluruh, termasuk pengujian pada perangkat yang didukung, pemeriksaan keamanan, dan tinjauan kepatuhan.
+Mengirimkan pembaruan ke App Store berarti menyiapkan paket yang memenuhi persyaratan Apple dan melewati proses peninjauan. Apple memeriksa pembaruan untuk keamanan, kinerja, pedoman konten, dan fungsionalitas. Menggunakan [App Store Connect](https://developer.apple.com/app-store-connect/), pengembang mengirimkan pembaruan mereka, yang menjalani evaluasi menyeluruh, termasuk pengujian pada perangkat yang didukung, pemeriksaan keamanan, dan tinjauan kepatuhan.
 
 ### Manfaat Pembaruan App Store
 
@@ -76,7 +76,7 @@ Pembaruan over-the-air (OTA) langsung memungkinkan pengembang melewati penundaan
 
 ### Apa itu Pembaruan OTA Langsung?
 
-Dengan pembaruan OTA langsung, pengembang dapat mendorong perubahan JavaScript, HTML, dan CSS tanpa perlu mengirimkan versi aplikasi baru ke app store. Menggunakan Capacitor, pembaruan ini dapat dikirim langsung ke perangkat pengguna, menyederhanakan seluruh [proses pembaruan](https://capgoapp/docs/plugin/cloud-mode/manual-update/).
+Dengan pembaruan OTA langsung, pengembang dapat mendorong perubahan JavaScript, HTML, dan CSS tanpa perlu mengirimkan versi aplikasi baru ke app store. Menggunakan Capacitor, pembaruan ini dapat dikirim langsung ke perangkat pengguna, menyederhanakan seluruh [proses pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 
 ### Mengapa Menggunakan Pembaruan OTA Langsung?
 
@@ -113,7 +113,7 @@ Memutuskan antara pembaruan App Store dan OTA secara langsung berdampak pada car
 
 Untuk aplikasi enterprise atau internal, pembaruan OTA langsung memberikan manfaat yang jelas. Mereka memungkinkan iterasi dan penyesuaian lebih cepat tanpa menunggu peninjauan app store.
 
-Saat bekerja dengan aplikasi lintas platform, [strategi pembaruan](https://capgoapp/docs/plugin/cloud-mode/hybrid-update) Anda menjadi semakin penting. Pengembang enterprise sering beralih ke pembaruan OTA langsung untuk situasi seperti:
+Saat bekerja dengan aplikasi lintas platform, [strategi pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) Anda menjadi semakin penting. Pengembang enterprise sering beralih ke pembaruan OTA langsung untuk situasi seperti:
 
 -   Perbaikan cepat tanpa penundaan app store
     
@@ -150,15 +150,15 @@ Capgo menyediakan pembaruan OTA yang aman dengan enkripsi dan alat manajemen yan
 
 Memilih metode pembaruan yang tepat sepenuhnya tergantung pada kebutuhan Anda. Seperti yang disorot dalam Forum Pengembang Apple:
 
-> "Jika Anda mengirimkan aplikasi macOS di luar Mac App Store, Anda harus menyediakan fungsi pembaruan sendiri" [\[3\]](https://forumsdeveloperapplecom/forums/thread/107576)
+> "Jika Anda mengirimkan aplikasi macOS di luar Mac App Store, Anda harus menyediakan fungsi pembaruan sendiri" [\[3\]](https://forumsdeveloper.apple.com/forums/thread/107576)
 
 ## Mengintegrasikan Pembaruan OTA ke Pipeline CI/CD
 
 Bagi pengembang yang mempertimbangkan pembaruan OTA langsung, mengintegrasikan pembaruan ini ke dalam alur kerja CI/CD dapat membantu Anda memanfaatkan sepenuhnya kecepatan dan fleksibilitasnya.
 
-### Menggunakan Alat Seperti [Capgo](https://capgoapp/)
+### Menggunakan Alat Seperti [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5)jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5).jpg?auto=compress)
 
 Mengirimkan pembaruan dengan cepat dan efisien adalah keharusan bagi tim pengembangan modern. Alat seperti **Capgo** menyederhanakan hal ini dengan menawarkan fitur seperti kontrol versi, analitik, dan peluncuran bertahap. Kemampuan ini memudahkan pengelolaan pembaruan OTA, terutama untuk tim enterprise yang menangani deployment skala besar. Penargetan pengguna dan opsi deployment yang fleksibel semakin meningkatkan prosesnya.
 

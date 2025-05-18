@@ -19,7 +19,7 @@ locale: ko
 next_blog: ''
 ---
 
-**[앱 업데이트](https://capgoapp/plugins/capacitor-updater/)와 버전 관리를 단순화하고 싶으신가요?** Semantic Versioning (SemVer)과 [Capgo](https://capgoapp/)의 무선 업데이트(OTA)를 결합하면 [Capacitor](https://capacitorjscom/) 앱 관리가 더 쉽고 빨라집니다. 방법은 다음과 같습니다:
+**[앱 업데이트](https://capgo.app/plugins/capacitor-updater/)와 버전 관리를 단순화하고 싶으신가요?** Semantic Versioning (SemVer)과 [Capgo](https://capgo.app/)의 무선 업데이트(OTA)를 결합하면 [Capacitor](https://capacitorjs.com/) 앱 관리가 더 쉽고 빨라집니다. 방법은 다음과 같습니다:
 
 -   **시맨틱 버전 관리 기본사항:** 버전은 `MAJORMINORPATCH` 형식을 사용합니다:
     
@@ -32,13 +32,13 @@ next_blog: ''
     -   더 스마트한 버전 관리
     -   의존성 충돌 방지
     -   체계적인 릴리스 계획
--   **[Capgo 설정](https://capgoapp/docs/cli/commands/) 단계:**
+-   **[Capgo 설정](https://capgo.app/docs/cli/commands/) 단계:**
     
     1.  Capgo 업데이터 플러그인 설치
     2.  `capacitorconfigjson`과 다른 파일에서 앱 버전 구성
     3.  API 키로 초기화
-    4.  [Capgo CLI](https://capgoapp/docs/cli/commands)를 사용하여 번들링 및 업데이트 업로드
--   **[버전과 채널 관리](https://capgoapp/docs/webapp/channels/):**
+    4.  [Capgo CLI](https://capgo.app/docs/cli/commands)를 사용하여 번들링 및 업데이트 업로드
+-   **[버전과 채널 관리](https://capgo.app/docs/webapp/channels/):**
     
     -   별도의 채널 사용 (예: 테스트용 "beta", 안정 릴리스용 "production")
     -   업데이트 정책 제어 (패치 자동 업데이트, 주요 변경사항은 수동 승인)
@@ -57,15 +57,15 @@ Capgo는 업데이트가 사용자에게 빠르고 안정적으로 도달하도�
 
 [[HTML_TAG]][[HTML_TAG]]
 
-## [Capgo](https://capgoapp/) 설정 가이드
+## [Capgo](https://capgo.app/) 설정 가이드
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
 
 OTA 업데이트와 버전 관리를 쉽게 관리하기 위한 Capgo 설정 방법입니다.
 
 ### 초기 설정 단계
 
-[Capgo 업데이터 플러그인](https://capgoapp/docs/plugin/self-hosted/manual-update/)을 설치하며 시작하세요:
+[Capgo 업데이터 플러그인](https://capgo.app/docs/plugin/self-hosted/manual-update/)을 설치하며 시작하세요:
 
 [[CODE_BLOCK]]
 
@@ -94,7 +94,7 @@ OTA 업데이트와 버전 관리를 쉽게 관리하기 위한 Capgo 설정 방
 
 ### 버전 관리 통합
 
-Capgo는 CI/CD 플랫폼과 잘 작동하여 [자동화된 업데이트](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)를 간단하게 만듭니다. 지원되는 플랫폼:
+Capgo는 CI/CD 플랫폼과 잘 작동하여 [자동화된 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 간단하게 만듭니다. 지원되는 플랫폼:
 
 -   [GitHub Actions](https://docsgithubcom/actions)
 -   [GitLab CI](https://docsgitlabcom/ee/ci/)

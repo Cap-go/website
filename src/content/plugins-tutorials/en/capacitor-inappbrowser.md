@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # @capgo/inappbrowser Package Tutorial
 
 The `@capgo/inappbrowser` package is a Capacitor plugin that allows you to open a URL in an in-app browser window. Here's a step-by-step guide on how to use this package:

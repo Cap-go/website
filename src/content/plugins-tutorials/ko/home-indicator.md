@@ -63,6 +63,6 @@ getWindow().setDecorFitsSystemWindows(false);
 
 ## 크레딧
 
-이 플러그인은 원래 [Capgo](https://capgoapp/)가 [Kickcom](https://kickcom/)용으로 제작했습니다.
+이 플러그인은 원래 [Capgo](https://capgo.app/)가 [Kickcom](https://kickcom/)용으로 제작했습니다.
 
-자세한 내용과 업데이트는 [Capgo](https://capgoapp/)에서 확인하세요.
+자세한 내용과 업데이트는 [Capgo](https://capgo.app/)에서 확인하세요.

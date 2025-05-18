@@ -20,19 +20,19 @@ locale: de
 next_blog: ''
 ---
 
-Das Verteilen von benutzerdefinierten [Capacitor](https://capacitorjscom/) Plugins kann die Funktionalität Ihrer App verbessern und gleichzeitig sicherstellen, dass Updates schnell bei den Nutzern ankommen. Hier ist eine kurze Anleitung zum Einstieg:
+Das Verteilen von benutzerdefinierten [Capacitor](https://capacitorjs.com/) Plugins kann die Funktionalität Ihrer App verbessern und gleichzeitig sicherstellen, dass Updates schnell bei den Nutzern ankommen. Hier ist eine kurze Anleitung zum Einstieg:
 
-1. **Entwickeln und Testen**: Entwickeln Sie Ihr Plugin mit der [Capacitor Plugin API](https://capgoapp/blog/capacitor-comprehensive-guide/), testen Sie es gründlich auf iOS- und Android-Geräten und behandeln Sie Randfälle effektiv
+1. **Entwickeln und Testen**: Entwickeln Sie Ihr Plugin mit der [Capacitor Plugin API](https://capgo.app/blog/capacitor-comprehensive-guide/), testen Sie es gründlich auf iOS- und Android-Geräten und behandeln Sie Randfälle effektiv
 2. **Distribution einrichten**: Erstellen Sie ein npm-Paket mit klarer Dokumentation, einschließlich Installationsschritte, API-Referenzen und Nutzungsbeispiele
 3. **Veröffentlichen**: Veröffentlichen Sie Ihr Plugin auf npm unter Verwendung der semantischen Versionierung und teilen Sie es auf GitHub für die Community-Sichtbarkeit
 4. **Integration**: Stellen Sie Einrichtungsanweisungen bereit, damit Entwickler Ihr Plugin einfach zu ihren Projekten hinzufügen und seine Funktionalität überprüfen können
-5. **Live-Updates hinzufügen (Optional)**: Nutzen Sie Tools wie [Capgo](https://capgoapp/) für sichere und effiziente Live-Updates, um sicherzustellen, dass 95% der Nutzer Änderungen innerhalb von 24 Stunden erhalten
+5. **Live-Updates hinzufügen (Optional)**: Nutzen Sie Tools wie [Capgo](https://capgo.app/) für sichere und effiziente Live-Updates, um sicherzustellen, dass 95% der Nutzer Änderungen innerhalb von 24 Stunden erhalten
 
 Dieser schrittweise Prozess stellt sicher, dass Ihr Plugin gut entwickelt, einfach zu integrieren und bereit für den Einsatz auf iOS- und Android-Plattformen ist
 
-## Wie man ein [Capacitor](https://capacitorjscom/) Plugin für iOS/Android erstellt
+## Wie man ein [Capacitor](https://capacitorjs.com/) Plugin für iOS/Android erstellt
 
-![Capacitor](https://assetsseobotaicom/capgoapp/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/Dq_BmheGAig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -42,7 +42,7 @@ Das Hauptziel ist hier, JavaScript mit nativen Funktionen zu verbinden und dabei
 
 ### Verwenden der Capacitor Plugin API
 
-Beginnen Sie mit der Erstellung Ihres Plugins mit der offiziellen [Capacitor Plugin](https://capgoapp/blog/capacitor-comprehensive-guide/) API. Dies gewährleistet eine konsistente Funktionalität über alle Plattformen hinweg. Konzentrieren Sie sich auf eine einzelne Funktion, um die Entwicklung und Wartung zu erleichtern
+Beginnen Sie mit der Erstellung Ihres Plugins mit der offiziellen [Capacitor Plugin](https://capgo.app/blog/capacitor-comprehensive-guide/) API. Dies gewährleistet eine konsistente Funktionalität über alle Plattformen hinweg. Konzentrieren Sie sich auf eine einzelne Funktion, um die Entwicklung und Wartung zu erleichtern
 
 Wichtige Punkte während der Entwicklung:
 

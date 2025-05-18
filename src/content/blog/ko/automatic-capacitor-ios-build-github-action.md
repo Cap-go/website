@@ -64,7 +64,7 @@ Capacitor 앱의 CI/CD 설정은 복잡하고 시간이 많이 소요될 수 있
 
 ## 가격에 대한 중요 정보
 
-![Price GitHub Action](/price_github_actionswebp)
+![Price GitHub Action](/price_github_actions.webp)
 
 [https://githubcom/features/actions](https://githubcom/features/actions/)
 
@@ -89,7 +89,7 @@ Capacitor 앱의 CI/CD 설정은 복잡하고 시간이 많이 소요될 수 있
 ## 1. Fastlane과 함께 App Store Connect API 사용하기
 
 > 2021년 2월부터 App Store Connect에 로그인하려면 2단계 인증 또는 2단계 확인이 필요합니다. Apple ID에 대한 이 추가 보안 계층은 계정에 접근할 수 있는 유일한 사람이 귀하임을 보장합니다.  
-> [Apple Support](https://developerapplecom/support/authentication/) 참조
+> [Apple Support](https://developer.apple.com/support/authentication/) 참조
 
 ### 요구사항
 
@@ -107,19 +107,19 @@ Fastlane이 App Store Connect API를 사용하여 앱을 업로드하려면 다�
 
 2. [사용자 및 액세스](https://appstoreconnectapplecom/access/users/) 선택
 
-![App Store Connect user access](/select_user_accesswebp)
+![App Store Connect user access](/select_user_access.webp)
 
 3. 통합 탭 선택
 
-![App Store Connect API Integration](/user_access_keyswebp)
+![App Store Connect API Integration](/user_access_keys.webp)
 
 4. API 키 생성 또는 추가(+) 버튼 클릭
 
-![App Store Connect API keys create](/user_accesswebp)
+![App Store Connect API keys create](/user_access.webp)
 
 5. 키의 이름을 입력합니다. 이름은 참조용이며 키 자체의 일부가 아닙니다
 
-![App Store Connect API keys create name](/gen_keywebp)
+![App Store Connect API keys create name](/gen_key.webp)
 
 6. 액세스에서 키의 역할 선택귀하의 팀의 사용자에게 적용되는 역할과 동일한 역할이 키에 적용됩니다. [역할 권한](https://helpapplecom/app-store-connect/#/deve5f9a89d7/)을 참조하세요. **App manager**를 선택하는 것을 권장합니다.
 
@@ -129,7 +129,7 @@ Fastlane이 App Store Connect API를 사용하여 앱을 업로드하려면 다�
 
 새 키의 이름, 키 ID, 다운로드 링크 및 기타 정보가 페이지에 나타납니다.
 
-![App Store Connect download keys](/download_keywebp)
+![App Store Connect download keys](/download_key.webp)
 
 여기서 필요한 세 가지 정보를 모두 얻을 수 있습니다:
 - Issue ID (`APPLE_ISSUER_ID` 시크릿)
@@ -154,7 +154,7 @@ _이제 API 키를 사용하여 Fastlane으로 App Store Connect를 관리할 �
 
 XCode를 열고 **설정** > **계정** > **Apple ID** > **팀**으로 이동하여 귀하의 팀을 선택하세요.
 
-![Code signing identities](/code_signing_identitieswebp)
+![Code signing identities](/code_signing_identities.webp)
 
 **인증서 관리**를 클릭하세요.
 
@@ -162,13 +162,13 @@ XCode를 열고 **설정** > **계정** > **Apple ID** > **팀**으로 이동하
 
 **+**를 클릭하고 **Apple Distribution**을 선택하세요.
 
-![Apple Distribution](/apple_distributionwebp)
+![Apple Distribution](/apple_distribution.webp)
 
 그런 다음 키체인에서 인증서를 `p12` 파일로 다운로드해야 합니다.
 
 이를 위해 키체인으로 이동하여 **로그인** 키체인으로 전환한 다음 **내 인증서** 탭으로 이동해야 합니다.
 
-![My Certificates](/my_certificateswebp)
+![My Certificates](/my_certificates.webp)
 
 그런 다음 다운로드하려는 인증서를 선택할 수 있습니다(인증서의 날짜를 확인하세요).
 
@@ -188,33 +188,33 @@ base64 -i BUILD_CERTIFICATE.p12 | pbcopy
 
 ## 3. 프로비저닝 프로필
 
-[Apple Developer](https://developerapplecom/account/resources/profiles/list)를 열고 올바른 팀을 선택하세요.
+[Apple Developer](https://developer.apple.com/account/resources/profiles/list)를 열고 올바른 팀을 선택하세요.
 
 그런 다음 **+**를 클릭하여 새 프로필을 생성하세요.
 
-![Create a new profile](/create_new_profilewebp)
+![Create a new profile](/create_new_profile.webp)
 
 그리고 **App Store Connect**를 선택하세요.
 
-![Select App Store Connect](/select_app_store_connectwebp)
+![Select App Store Connect](/select_app_store_connect.webp)
 
 그런 다음 올바른 앱을 선택해야 합니다. 서명이 실패할 수 있으므로 와일드카드를 사용할 수 없으니 주의하세요.
 
-![Select the right app](/select_appwebp)
+![Select the right app](/select_app.webp)
 
 이전에 생성한 올바른 인증서를 선택하고(만료 날짜를 확인하세요. 오늘과 같은 날짜여야 합니다) **계속**을 클릭하세요.
 
-![Select the right certificate](/select_certificatewebp)
+![Select the right certificate](/select_certificate.webp)
 
 마지막으로 프로필의 이름을 입력하고 **생성**을 클릭하세요.
 
 > 이 이름은 Fastlane에서 `APPLE_PROFILE_NAME` 값으로 프로필을 식별하는 데 사용됩니다.
 
-![Generate the profile](/generate_profilewebp)
+![Generate the profile](/generate_profile.webp)
 
 프로필을 `mobileprovision` 파일로 다운로드할 수 있습니다.
 
-![Download the profile](/download_profilewebp)
+![Download the profile](/download_profile.webp)
 
 Base64로 프로파일을 변환하여 시크릿(`BUILD_PROVISION_PROFILE_BASE64`)으로 저장하세요
 
@@ -528,11 +528,11 @@ _커밋_을 만드세요. 저장소에서 활성 워크플로우를 확인할 �
 
 `main` 또는 `developement` 브랜치에 새로운 커밋을 푸시하여 워크플로우를 실행하세요
 
-![Started with commit](/cd_startedwebp)
+![Started with commit](/cd_started.webp)
 
 몇 분 후에 App Store Connect 대시보드에서 빌드를 확인할 수 있습니다
 
-![Testflight Dashboard](/testflight_appwebp)
+![Testflight Dashboard](/testflight_app.webp)
 
 ## 9. 로컬 머신에서 배포할 수 있나요?
 

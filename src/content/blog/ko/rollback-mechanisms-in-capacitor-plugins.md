@@ -134,7 +134,7 @@ Capgo는 2024년 [Microsoft Code Push](https://learn.microsoft.com/en-us/appcent
 
 > "우리는 민첩한 개발을 실천하며, @Capgo는 사용자를 지속적으로 제공하는 데 필수적입니다!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-보다 수동적인 접근 방식을 선호하는 개발자를 위해 [Capacitor 라이브 업데이트 플러그인](https://capgo.app/confirm_email/)도 고려할만한 옵션입니다.
+보다 수동적인 접근 방식을 선호하는 개발자를 위해 [Capacitor 라이브 업데이트 플러그인](https://capgo.app/register/)도 고려할만한 옵션입니다.
 
 ### Capacitor 라이브 업데이트 플러그인
 

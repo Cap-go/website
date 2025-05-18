@@ -12,7 +12,7 @@ locale: ko
 
 먼저 Capacitor의 마이그레이션 가이드를 따르세요:
 
-[https://capacitorjscom/docs/updating/6-0](https://capacitorjscom/docs/updating/6-0/)
+[https://capacitorjs.com/docs/updating/6-0](https://capacitorjs.com/docs/updating/6-0/)
 
 ## 설치
 

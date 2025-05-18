@@ -4,6 +4,7 @@ import matter from 'gray-matter'
 import { createSpinner } from 'nanospinner'
 import { join } from 'path'
 import { defaultLocale, locales } from '../src/services/locale'
+import { commonReplacements } from './commonReplacements'
 import { translateText } from './translate'
 
 const contentDirectory = join(process.cwd(), 'src', 'content')
@@ -95,14 +96,14 @@ const processFile = async (file: string, lang: string, langBlogDirectory: string
     for (const sentence of sentences) {
       if ((currentChunk + sentence).length > 8000) {
         const tmp = await translateText(currentChunk, lang)
-        if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
+        if (tmp) appendFileSync(destinationPath, commonReplacements(tmp), 'utf8')
         else failedTranslations[file] = true
         currentChunk = sentence
       } else currentChunk += sentence
     }
     if (currentChunk) {
       const tmp = await translateText(currentChunk, lang)
-      if (tmp) appendFileSync(destinationPath, tmp, 'utf8')
+      if (tmp) appendFileSync(destinationPath, commonReplacements(tmp), 'utf8')
       else failedTranslations[file] = true
     }
     spinner.success({ text: `Blog translated in ${lang}: ${file}` })

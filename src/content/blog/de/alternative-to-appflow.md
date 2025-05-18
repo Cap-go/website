@@ -55,13 +55,13 @@ Deshalb haben wir für Sie eine klare und einfache Tabelle erstellt, die Ihnen b
 
 ## Continuous Integration Alternativen
 
-Wenn Sie an der Nutzung von [Capgo](https://capgoapp/pricing/) für Live-Updates interessiert sind, aber noch keine Continuous Integration-Lösung eingerichtet haben, können Sie einfach einen kostengünstigen Continuous Integration-Workflow mit GitHub Actions einrichten. GitHub Actions ist ein kostenloser, integrierter Continuous Integration- und Bereitstellungsdienst für GitHub-Repositories, der es Entwicklern ermöglicht, ihre Softwareentwicklungs-Workflows zu automatisieren.
+Wenn Sie an der Nutzung von [Capgo](https://capgo.app/pricing/) für Live-Updates interessiert sind, aber noch keine Continuous Integration-Lösung eingerichtet haben, können Sie einfach einen kostengünstigen Continuous Integration-Workflow mit GitHub Actions einrichten. GitHub Actions ist ein kostenloser, integrierter Continuous Integration- und Bereitstellungsdienst für GitHub-Repositories, der es Entwicklern ermöglicht, ihre Softwareentwicklungs-Workflows zu automatisieren.
 
 Um Continuous Integration mit GitHub Actions und Capgo einzurichten, müssen Sie zunächst ein GitHub-Repository für Ihren App-Code erstellen. Dann können Sie eine Workflow-Datei in Ihrem Repository erstellen, die die Schritte definiert, die bei jedem Push in das Repository ausgeführt werden sollen. Eine einfache Workflow-Datei könnte beispielsweise Schritte zum Erstellen und Testen der App enthalten und dann [Capgo](/register/) verwenden, um ein Live-Update zu erstellen und es an die App-Benutzer zu verteilen.
 
 Mit dieser Einrichtung wird jedes Mal, wenn Sie Änderungen an Ihrem App-Code vornehmen und in das GitHub-Repository pushen, die Workflow-Datei ausgelöst und die festgelegten Schritte werden ausgeführt. Dies ermöglicht es Ihnen, Ihre JS-App mit minimalem Aufwand automatisch zu erstellen, zu testen und bereitzustellen und dabei die Vorteile der Bequemlichkeit und Flexibilität von Live-Updates zu nutzen.
 
-Insgesamt können GitHub Actions und [Capgo](/register/) eine kostengünstige Lösung für diejenigen sein, die Live-Updates nutzen möchten, aber keine eigene Continuous Integration-Einrichtung haben. Durch die Nutzung dieser Tools können Kunden ihren App-Entwicklungsprozess automatisieren und Updates schnell und einfach an ihre Benutzer verteilen.Wenn Sie bereit sind, Ihr CI/CD mit Capgo einzurichten, können Sie diesem [Tutorial für IOS](https://capgoapp/blog/automatic-capacitor-android-build-github-action/) folgen
+Insgesamt können GitHub Actions und [Capgo](/register/) eine kostengünstige Lösung für diejenigen sein, die Live-Updates nutzen möchten, aber keine eigene Continuous Integration-Einrichtung haben. Durch die Nutzung dieser Tools können Kunden ihren App-Entwicklungsprozess automatisieren und Updates schnell und einfach an ihre Benutzer verteilen.Wenn Sie bereit sind, Ihr CI/CD mit Capgo einzurichten, können Sie diesem [Tutorial für IOS](https://capgo.app/blog/automatic-capacitor-android-build-github-action/) folgen
 
 ## Gehen wir weiter
 

@@ -22,23 +22,23 @@ locale: es
 next_blog: ''
 ---
 
-**¿Necesitas [actualizaciones de aplicaciones](https://capgoapp/plugins/capacitor-updater/) más rápidas sin retrasos de la tienda de aplicaciones?** [Capgo](https://capgoapp/) te permite entregar actualizaciones Over-the-Air (OTA) seguras instantáneamente a tus usuarios. Evita las revisiones de la tienda de aplicaciones y mantén tu aplicación actualizada fácilmente.
+**¿Necesitas [actualizaciones de aplicaciones](https://capgo.app/plugins/capacitor-updater/) más rápidas sin retrasos de la tienda de aplicaciones?** [Capgo](https://capgo.app/) te permite entregar actualizaciones Over-the-Air (OTA) seguras instantáneamente a tus usuarios. Evita las revisiones de la tienda de aplicaciones y mantén tu aplicación actualizada fácilmente.
 
 ### Puntos Clave:
 
--   **¿Qué es Capgo?** Una plataforma de código abierto para actualizaciones en vivo en aplicaciones de [Capacitor](https://capacitorjscom/)
+-   **¿Qué es Capgo?** Una plataforma de código abierto para actualizaciones en vivo en aplicaciones de [Capacitor](https://capacitorjs.com/)
 -   **¿Por qué actualizaciones OTA?** Ahorra tiempo, mejora la experiencia del usuario y corrige errores rápidamente
 -   **¿Cómo Empezar?**
-    -   Instala el [plugin de Capgo](https://capgoapp/plugins/): `npm install @capgo/capacitor-updater`
+    -   Instala el [plugin de Capgo](https://capgo.app/plugins/): `npm install @capgo/capacitor-updater`
     -   Configura tu aplicación con una clave API
     -   Usa canales como "production" o "beta" para despliegues dirigidos
 -   **Características Avanzadas:** Cifrado de extremo a extremo, manejo de errores e integración CI/CD
 
-La documentación de Capgo ([capgoapp/docs](https://capgoapp/docs)) proporciona instrucciones paso a paso para configuración, seguridad y solución de problemas. Desde la instalación hasta configuraciones avanzadas, es tu guía principal para actualizaciones sin problemas.
+La documentación de Capgo ([capgo.app/docs](https://capgo.app/docs)) proporciona instrucciones paso a paso para configuración, seguridad y solución de problemas. Desde la instalación hasta configuraciones avanzadas, es tu guía principal para actualizaciones sin problemas.
 
-## [Capgo](https://capgoapp/), plugin de CapacitorJs para actualización en vivo
+## [Capgo](https://capgo.app/), plugin de CapacitorJs para actualización en vivo
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-19jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-19.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/NzXXKoyhTIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -48,11 +48,11 @@ Navegar efectivamente por la documentación es esencial cuando se trabaja con ac
 
 ### Dónde Encontrar la Documentación
 
-Puedes acceder a la documentación de Capgo en [capgoapp/docs](https://capgoapp/docs) [\[1\]](https://githubcom/Cap-go/capacitor-updater). Está organizada en secciones según propósitos específicos:
+Puedes acceder a la documentación de Capgo en [capgo.app/docs](https://capgo.app/docs) [\[1\]](https://githubcom/Cap-go/capacitor-updater). Está organizada en secciones según propósitos específicos:
 
 | **Sección** | **Propósito** | **Temas Clave** |
 | --- | --- | --- |
-| Primeros Pasos | Configuración inicial | Pasos de instalación, [configuración de API key](https://capgoapp/docs/webapp/api-keys/) |
+| Primeros Pasos | Configuración inicial | Pasos de instalación, [configuración de API key](https://capgo.app/docs/webapp/api-keys/) |
 | Configuración | Ajustes principales | Configuración del plugin, configuración del entorno |
 | Referencia API | Detalles técnicos | Métodos, parámetros, valores de retorno |
 | Seguridad | Medidas de protección | Configuración de cifrado, verificación de firma |
@@ -347,11 +347,11 @@ Usando los recursos de Capgo, los desarrolladores pueden implementar caracterís
 | --- | --- | --- |
 | **Seguridad** | Encriptación y verificaciones de integridad | Sección _Características de seguridad_ |
 | **Cumplimiento** | Cumplir requisitos de Apple y Android | Guía de _Reglas de App Store_ |
-| **[Gestión de actualizaciones](https://capgoapp/docs/plugin/cloud-mode/manual-update/)** | Control de versiones y opciones de reversión | Guía de _[Métodos de actualización](https://capgoapp/docs/plugin/cloud-mode/hybrid-update)_ |
+| **[Gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/)** | Control de versiones y opciones de reversión | Guía de _[Métodos de actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)_ |
 | **Manejo de errores** | Registro y pasos de solución de problemas | _Guía de resolución de problemas_ |
 
 Estas áreas forman la columna vertebral del sistema de gestión de actualizaciones de Capgo
 
-Las herramientas CLI y de análisis de Capgo simplifican la [gestión de actualizaciones](https://capgoapp/docs/plugin/cloud-mode/manual-update/) durante todo el ciclo de vida de su aplicación [\[1\]](https://githubcom/Cap-go/capacitor-updater)
+Las herramientas CLI y de análisis de Capgo simplifican la [gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/) durante todo el ciclo de vida de su aplicación [\[1\]](https://githubcom/Cap-go/capacitor-updater)
 
 Para más apoyo, puede explorar recursos adicionales como **documentación de API**, **proyectos de ejemplo** y **foros de la comunidad** [\[2\]](https://devto/arnosolo/ionic-appflow-live-update-alternative-55c3)

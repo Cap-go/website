@@ -46,7 +46,7 @@ Capgoは、AppFlowの成熟した機能豊富な代替として以下を提供�
 - 既存のCI/CDインフラストラクチャとの統合
 - GitHub Actionsなどの一般的なプラットフォームの使用
 - ビルドプロセスの完全なコントロール
-- [iOS](https://capgo.app/blog/github-action-capacitor/)セットアップの詳細なチュートリアルに従う
+- [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)セットアップの詳細なチュートリアルに従う
 - または[CI/CD Done For You](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you)サービスで全てを任せる
 
 ## Capgoを選ぶ理由

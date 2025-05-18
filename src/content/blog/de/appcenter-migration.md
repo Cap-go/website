@@ -28,11 +28,11 @@ next_blog: automatic-build-and-release-with-github-actions
 
 ##### Hinweis
 
-Wenn Ihre App noch Cordova verwendet, ist es notwendig, [zuerst zu Capacitor zu migrieren](https://capacitorjscom/docs/cordova/migrating-from-cordova-to-capacitor/), bevor Sie zu Capgo migrieren
+Wenn Ihre App noch Cordova verwendet, ist es notwendig, [zuerst zu Capacitor zu migrieren](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor/), bevor Sie zu Capgo migrieren
 
 Von Ionic-Team als geistiger Nachfolger von Cordova entwickelt, ermöglicht Capacitor die Entwicklung näher an den nativen Werkzeugen und Fähigkeiten mit dem Ziel, eine noch bessere Benutzererfahrung und Leistung zu bieten
 
-Glücklicherweise ist der Migrationsprozess einfach und die Mehrheit der Cordova-Plugins ist rückwärtskompatibel mit Capacitor [Starten Sie hier mit der Migration](https://capacitorjscom/docs/cordova/migrating-from-cordova-to-capacitor/)
+Glücklicherweise ist der Migrationsprozess einfach und die Mehrheit der Cordova-Plugins ist rückwärtskompatibel mit Capacitor [Starten Sie hier mit der Migration](https://capacitorjs.com/docs/cordova/migrating-from-cordova-to-capacitor/)
 
 ## Über Capgo
 

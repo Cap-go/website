@@ -130,7 +130,7 @@ Capgo emerged as a strong rollback management solution after [Microsoft Code Pus
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-For those who prefer a more hands-on approach, the [Capacitor Live Update Plugin](https://capgo.app/confirm_email/) is another option worth considering.
+For those who prefer a more hands-on approach, the [Capacitor Live Update Plugin](https://capgo.app/register/) is another option worth considering.
 
 ### Capacitor Live Update Plugin
 

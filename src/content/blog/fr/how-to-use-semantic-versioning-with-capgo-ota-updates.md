@@ -24,7 +24,7 @@ locale: fr
 next_blog: ''
 ---
 
-**Vous souhaitez simplifier [les mises à jour d'applications](https://capgoapp/plugins/capacitor-updater/) et le contrôle de version ?** La gestion sémantique des versions (SemVer) combinée aux mises à jour Over-The-Air (OTA) de [Capgo](https://capgoapp/) rend la gestion des applications [Capacitor](https://capacitorjscom/) plus simple et plus rapide. Voici comment :
+**Vous souhaitez simplifier [les mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) et le contrôle de version ?** La gestion sémantique des versions (SemVer) combinée aux mises à jour Over-The-Air (OTA) de [Capgo](https://capgo.app/) rend la gestion des applications [Capacitor](https://capacitorjs.com/) plus simple et plus rapide. Voici comment :
 
 -   **Principes de base du versionnement sémantique :** Les versions utilisent le format `MAJOR.MINOR.PATCH` :
     
@@ -37,13 +37,13 @@ next_blog: ''
     -   Gestion plus intelligente des versions
     -   Évitement des conflits de dépendances
     -   Planification organisée des versions
--   **Étapes de [configuration de Capgo](https://capgoapp/docs/cli/commands/) :**
+-   **Étapes de [configuration de Capgo](https://capgo.app/docs/cli/commands/) :**
     
     1.  Installer le plugin updater de Capgo
     2.  Configurer la version de votre application dans `capacitor.config.json` et autres fichiers
     3.  Initialiser avec votre clé API
-    4.  Utiliser [Capgo CLI](https://capgoapp/docs/cli/commands) pour regrouper et télécharger les mises à jour
--   **[Gestion des versions et des canaux](https://capgoapp/docs/webapp/channels/) :**
+    4.  Utiliser [Capgo CLI](https://capgo.app/docs/cli/commands) pour regrouper et télécharger les mises à jour
+-   **[Gestion des versions et des canaux](https://capgo.app/docs/webapp/channels/) :**
     
     -   Utiliser des canaux séparés (ex. "beta" pour les tests, "production" pour les versions stables)
     -   Contrôler les politiques de mise à jour (mise à jour automatique des correctifs, approbation manuelle pour les changements majeurs)
@@ -64,7 +64,7 @@ Capgo garantit que les mises à jour atteignent les utilisateurs rapidement et d
 
 </Steps>
 
-## Guide de configuration de [Capgo](https://capgoapp/)
+## Guide de configuration de [Capgo](https://capgo.app/)
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
 
@@ -72,7 +72,7 @@ Voici comment configurer Capgo pour gérer facilement les mises à jour OTA et l
 
 ### Étapes de configuration initiale
 
-Commencez par installer le [plugin updater Capgo](https://capgoapp/docs/plugin/self-hosted/manual-update/) :
+Commencez par installer le [plugin updater Capgo](https://capgo.app/docs/plugin/self-hosted/manual-update/) :
 
 ```bash
 npm install @capgo/capacitor-updater
@@ -114,7 +114,7 @@ await CapacitorUpdater.initialize({ key: 'YOUR_API_KEY' })
 
 ### Intégration du contrôle de version
 
-Capgo fonctionne bien avec les plateformes CI/CD, rendant les [mises à jour automatisées](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/) simples. Les plateformes prises en charge incluent :
+Capgo fonctionne bien avec les plateformes CI/CD, rendant les [mises à jour automatisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) simples. Les plateformes prises en charge incluent :
 
 -   [GitHub Actions](https://docs.github.com/actions)
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)
@@ -150,7 +150,7 @@ Capgo utilise le versionnage sémantique (SemVer) pour gérer les versions d'app
 -   **Version Mineure (1X0)** : Augmentez le numéro MINOR pour les nouvelles fonctionnalités qui restent compatibles
 -   **Version Corrective (10X)** : Augmentez le numéro PATCH pour les corrections de bugs qui n'affectent pas la compatibilité
 
-| Type de Version | Quand Incrémenter | [Comportement de mise à jour automatique](https://capgoapp/docs/plugin/cloud-mode/auto-update/) |
+| Type de Version | Quand Incrémenter | [Comportement de mise à jour automatique](https://capgo.app/docs/plugin/cloud-mode/auto-update/) |
 | --- | --- | --- |
 | Majeure (X00) | Pour les changements d'API incompatibles | Nécessite une approbation manuelle |
 | Mineure (1X0) | Pour les nouvelles fonctionnalités | Configurable dans Capgo |
@@ -162,7 +162,7 @@ En respectant les règles SemVer, vous pouvez simplifier la gestion des versions
 
 Capgo vous permet de gérer efficacement les déploiements en configurant des canaux distincts pour différentes étapes de votre flux de travail.
 
--   **[Gestion des versions basée sur les canaux](https://capgoapp/docs/webapp/channels/)** : Organisez votre processus de déploiement en créant des canaux séparés pour les tests et la production. Par exemple :
+-   **[Gestion des versions basée sur les canaux](https://capgo.app/docs/webapp/channels/)** : Organisez votre processus de déploiement en créant des canaux séparés pour les tests et la production. Par exemple :
     
     -   Utilisez un canal "beta" (ex. 120-beta) pour tester les nouvelles fonctionnalités
     -   Gardez un canal "production" (ex. 120) pour les versions stables
@@ -194,7 +194,7 @@ Commencez par mettre à jour la version dans **package.json** et **capacitor.con
 
 Testez minutieusement votre build et confirmez que l'application communique avec le serveur en utilisant `notifyAppReady`.
 
-Ensuite, décidez de votre [stratégie de mise à jour](https://capgoapp/docs/plugin/cloud-mode/hybrid-update). Vous pouvez choisir entre :
+Ensuite, décidez de votre [stratégie de mise à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Vous pouvez choisir entre :
 
 -   **Mise à jour automatique** : Appliquer automatiquement les exigences de version minimale
 -   **Contrôle manuel** : Spécifier des exigences de version exactes pour les mises à jour

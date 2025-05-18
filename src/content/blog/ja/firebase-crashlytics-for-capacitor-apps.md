@@ -20,7 +20,7 @@ locale: ja
 next_blog: ''
 ---
 
-**[Firebase Crashlytics](https://firebasegooglecom/docs/crashlytics)** はアプリのクラッシュをリアルタイムで追跡し、問題を素早く修正するための詳細なレポートを提供します。[Capacitor](https://capacitorjscom/) を使用したiOSとAndroidアプリの両方にシームレスに統合できます。以下が重要なポイントです：
+**[Firebase Crashlytics](https://firebasegooglecom/docs/crashlytics)** はアプリのクラッシュをリアルタイムで追跡し、問題を素早く修正するための詳細なレポートを提供します。[Capacitor](https://capacitorjs.com/) を使用したiOSとAndroidアプリの両方にシームレスに統合できます。以下が重要なポイントです：
 
 -   **Crashlyticsを使用する理由：**
     
@@ -29,7 +29,7 @@ next_blog: ''
     -   重大なエラーを監視してアプリの安定性を維持
 -   **セットアップ要件：**
     
-    -   **[Nodejs](https://nodejsorg/en) (v16以上)**、**Capacitor (v4以上)**、**[Xcode](https://developerapplecom/xcode/) 14以上**と**[Android Studio](https://developerandroidcom/studio) Electric Eel**などのツールをインストール
+    -   **[Nodejs](https://nodejsorg/en) (v16以上)**、**Capacitor (v4以上)**、**[Xcode](https://developer.apple.com/xcode/) 14以上**と**[Android Studio](https://developerandroidcom/studio) Electric Eel**などのツールをインストール
     -   [Firebase](https://firebasegooglecom/)設定ファイル（iOS用の`GoogleService-Infoplist`、Android用の`google-servicesjson`）をダウンロード
     -   `Podfile`（iOS）や`buildgradle`（Android）などのプラットフォーム固有のファイルを更新
 -   **主要なステップ：**
@@ -48,13 +48,13 @@ next_blog: ''
         
         [[CODE_BLOCK]]
         
--   **ボーナスヒント：** **[Capgo](https://capgoapp/)** とCrashlyticsを組み合わせることで、アプリストアの遅延なしでインスタントライブアップデートが可能
+-   **ボーナスヒント：** **[Capgo](https://capgo.app/)** とCrashlyticsを組み合わせることで、アプリストアの遅延なしでインスタントライブアップデートが可能
 
 このガイドで、アプリのクラッシュを防ぎ、ユーザーフレンドリーにすることができます。今すぐFirebase Crashlyticsのセットアップを始めましょう！
 
 ## 2021年 Android ガイド：[Firebase Crashlytics](https://firebasegooglecom/docs/crashlytics) - カスタムクラッシュ
 
-![Firebase Crashlytics](https://assetsseobotaicom/capgoapp/6805ba51360079f947b8a1bf/3578d58943ebaf5b91a7f0e1afb1607fjpg)
+![Firebase Crashlytics](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/3578d58943ebaf5b91a7f0e1afb1607f.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -88,7 +88,7 @@ next_blog: ''
 
 ### [Firebase](https://firebasegooglecom/) コンソールのセットアップ
 
-![Firebase](https://assetsseobotaicom/capgoapp/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83jpg)
+![Firebase](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
 
 以下のステップでFirebaseをセットアップしCrashlyticsを有効化します：
 
@@ -115,7 +115,7 @@ next_blog: ''
 
 ### プラグインのインストール
 
-まず、プラグインをインストールし、[Capacitorと同期](https://capgoapp/plugins/capacitor-updater/)します：
+まず、プラグインをインストールし、[Capacitorと同期](https://capgo.app/plugins/capacitor-updater/)します：
 
 [[CODE_BLOCK]]
 

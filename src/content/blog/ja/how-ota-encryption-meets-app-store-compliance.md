@@ -23,7 +23,7 @@ next_blog: ''
 
 -   **更新の保護**：暗号化により、更新配信中のデータの傍受、改ざん、不正アクセスを防止します
 -   **アプリストアのルールに準拠**：
-    -   Apple：HTTPS（TLS 12+）、[App Transport Security](https://developerapplecom/documentation/security/preventing-insecure-network-connections)（ATS）、コード署名が必要
+    -   Apple：HTTPS（TLS 12+）、[App Transport Security](https://developer.apple.com/documentation/security/preventing-insecure-network-connections)（ATS）、コード署名が必要
     -   Google：SSLピンニング、[Play Protect](https://developersgooglecom/android/play-protect)スキャン、業界標準の暗号化を強制
 -   **[AES-256](https://enwikipediaorg/wiki/Advanced_Encryption_Standard)を使用**：256ビットキーを使用する高度に安全な暗号化標準で、堅牢なデータ保護を実現
 -   **エンドツーエンドのセキュリティ**：更新は作成から導入まで暗号化され、整合性とデバイス固有の復号化を保証

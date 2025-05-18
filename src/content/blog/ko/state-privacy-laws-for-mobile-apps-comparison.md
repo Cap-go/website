@@ -70,11 +70,11 @@ next_blog: ''
 
 자동화된 의사결정에 의존하는 앱의 경우, **CPRA**는 투명성을 요구합니다. 개발자는 알고리즘의 작동 방식, 결정이 내려지는 이유, 사용자에게 미치는 영향을 설명해야 합니다.
 
-캘리포니아의 개인정보보호법은 주 내에서 기준을 설정할 뿐만 아니라 전국의 [개인정보보호 정책](https://capgoapp/dp/)에 영향을 미치며, 개발자들이 컴플라이언스에 접근하는 방식을 형성합니다.
+캘리포니아의 개인정보보호법은 주 내에서 기준을 설정할 뿐만 아니라 전국의 [개인정보보호 정책](https://capgo.app/dp/)에 영향을 미치며, 개발자들이 컴플라이언스에 접근하는 방식을 형성합니다.
 
 ## 2. 버지니아 데이터 보호법 ([VCDPA](https://probloomberglawcom/insights/privacy/virginia-consumer-data-protection-act-vcdpa/))
 
-![VCDPA](https://mars-imagesimgixnet/seobot/screenshots/probloomberglawcom-e2d26366f154a86b70aef4e66139addc-2025-03-22)jpg?auto=compress)
+![VCDPA](https://mars-images.imgix.net/seobot/screenshots/probloomberglawcom-e2d26366f154a86b70aef4e66139addc-2025-03-22).jpg?auto=compress)
 
 2023년 1월 1일부터 버지니아 소비자 데이터 보호법(VCDPA)은 연간 최소 100,000명의 버지니아 주민의 개인 데이터를 처리하거나 관리하는 기업, 또는 데이터 처리로 수익의 절반 이상을 얻는 경우 25,000명의 주민에 대해 적용됩니다.
 

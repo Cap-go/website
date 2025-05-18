@@ -34,11 +34,11 @@ Android를 사용하는 경우 프로젝트에 몇 가지 추가 변경이 필�
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-자세한 도움말은 [Capacitor 문서](https://capacitorjscom/docs/android/configuration/#configuring-androidmanifestxml/)를 참조하세요.
+자세한 도움말은 [Capacitor 문서](https://capacitorjs.com/docs/android/configuration/#configuring-androidmanifestxml/)를 참조하세요.
 
 ### 추가 iOS 설치 단계
 
-iOS를 사용하는 경우 `Infoplist` 파일에 두 가지 권한을 추가해야 합니다. [Capacitor 설명서](https://capacitorjscom/docs/ios/configuration/#configuring-infoplist)에 따라 `NSCameraUsageDescription` 및 ` NSMicrophoneUsageDescription` 권한 `NSMicrophoneUsageDescription` 권한은 오디오를 사용할 경우에만 필요합니다. 오디오가 필요하지 않은 경우 `disableAudio` 옵션을 `true`로 설정하여 마이크 권한 요청을 비활성화할 수 있습니다.
+iOS를 사용하는 경우 `Infoplist` 파일에 두 가지 권한을 추가해야 합니다. [Capacitor 설명서](https://capacitorjs.com/docs/ios/configuration/#configuring-infoplist)에 따라 `NSCameraUsageDescription` 및 ` NSMicrophoneUsageDescription` 권한 `NSMicrophoneUsageDescription` 권한은 오디오를 사용할 경우에만 필요합니다. 오디오가 필요하지 않은 경우 `disableAudio` 옵션을 `true`로 설정하여 마이크 권한 요청을 비활성화할 수 있습니다.
 
 ### 추가 웹 설치 단계
 

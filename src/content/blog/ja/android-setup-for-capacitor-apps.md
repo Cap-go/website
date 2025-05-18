@@ -19,7 +19,7 @@ locale: ja
 next_blog: ''
 ---
 
-**[Capacitor](https://capacitorjscom/) でAndroidアプリを作りたいですか?** Android開発環境を迅速かつ効率的にセットアップするために必要なすべてをご紹介します。Capacitorはウェブ技術とネイティブのAndroid機能を橋渡しし、始めるには基本的なツールと設定が必要です。
+**[Capacitor](https://capacitorjs.com/) でAndroidアプリを作りたいですか?** Android開発環境を迅速かつ効率的にセットアップするために必要なすべてをご紹介します。Capacitorはウェブ技術とネイティブのAndroid機能を橋渡しし、始めるには基本的なツールと設定が必要です。
 
 ### 必要なもの:
 
@@ -44,7 +44,7 @@ next_blog: ''
 
 ### 活用すべき主な機能:
 
--   **ライブアップデート**: [Capgo](https://capgoapp/)などのツールを使用して即時更新
+-   **ライブアップデート**: [Capgo](https://capgo.app/)などのツールを使用して即時更新
 -   **ネイティブ機能**: 高度な機能のためのAndroid固有APIにアクセス
 -   **リアルタイムモニタリング**: 開発中の問題に素早く対応
 
@@ -87,7 +87,7 @@ Android Studioとエミュレータはシステムに負荷がかかることに
 
 ## [Android Studio](https://developerandroidcom/studio) のセットアップ
 
-![Android Studio](https://mars-imagesimgixnet/seobot/screenshots/developerandroidcom-4d08ca5be8f73216eb56e77cdafac129-2025-03-20jpg?auto=compress)
+![Android Studio](https://mars-images.imgix.net/seobot/screenshots/developerandroidcom-4d08ca5be8f73216eb56e77cdafac129-2025-03-20.jpg?auto=compress)
 
 Android StudioはAndroidでCapacitorを開発する際に必須です。正しくセットアップすることで、スムーズなワークフローとより良いパフォーマンスが確保されます。
 

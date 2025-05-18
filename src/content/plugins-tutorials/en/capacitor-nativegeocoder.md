@@ -1,3 +1,6 @@
+---
+locale: en
+---
 ## Using @capgo/nativegeocoder for Geocoding
 
 The `@capgo/nativegeocoder` package is a Capacitor plugin that provides native forward and reverse geocoding functionality. Geocoding is the process of converting addresses into geographic coordinates (latitude and longitude) and vice versa.

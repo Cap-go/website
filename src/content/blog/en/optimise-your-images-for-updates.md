@@ -9,7 +9,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-01-23T00:00:00.000Z
 updated_at: 2023-06-29T00:00:00.000Z
-head_image: /convert_webp.webp
+head_image: /convert.jpg.webp.webp
 head_image_alt: Convert to webp illustration
 keywords: mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Optimisation
@@ -22,7 +22,7 @@ WebP is a modern image format that can provide significant savings in file size 
 
 WebP is well-supported by most of the major mobile platforms and devices, including Android and iOS. Unlike JPEG, WebP provides a superior image quality at a lower file size, which results in faster download times, fewer data usage, and a better user experience. This is especially important for mobile apps that are used on cellular networks, where data usage and download times are major concerns.
 
-When it comes to converting your images to WebP, there are a few options available. One popular option is to use a command-line tool like `cwebp`, which can be easily integrated into your app's build process. Another option is to convert your images to WebP in [Android Studio](https://sites.google.com/a/android.com/tools/tech-docs/webp/), which can be used to manually convert your images. You can also use a plugin for your content management system (CMS) or an automated service like Kraken.io.
+When it comes to converting your images to WebP, there are a few options available. One popular option is to use a command-line tool like `c.webp`, which can be easily integrated into your app's build process. Another option is to convert your images to WebP in [Android Studio](https://sites.google.com/a/android.com/tools/tech-docs/.webp/), which can be used to manually convert your images. You can also use a plugin for your content management system (CMS) or an automated service like Kraken.io.
 
 Once you've converted your images to WebP, it's significant to test the performance of your app to see if there's any improvement. You can use tools like [the Firebase Performance Monitoring plugin](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/performance/) or other performance testing tools to measure the app's performance. You should also consider testing the app on different devices and networks to get a more accurate picture of how the conversion to WebP will affect the app's performance.
 

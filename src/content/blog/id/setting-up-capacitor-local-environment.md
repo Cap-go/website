@@ -21,7 +21,7 @@ locale: id
 next_blog: ''
 ---
 
-**Ingin membangun aplikasi iOS dan Android menggunakan teknologi web? Berikut cara menyiapkan lingkungan [Capacitor](https://capacitorjscom/) lokal dengan cepat dan efisien**
+**Ingin membangun aplikasi iOS dan Android menggunakan teknologi web? Berikut cara menyiapkan lingkungan [Capacitor](https://capacitorjs.com/) lokal dengan cepat dan efisien**
 
 ### Langkah-langkah Utama:
 
@@ -31,7 +31,7 @@ next_blog: ''
     -   Persyaratan sistem: RAM 8GB, penyimpanan 256GB, prosesor Intel i5/AMD Ryzen 5
 2.  **Pengaturan iOS** (khusus macOS):
     
-    -   macOS 13.0+ (Ventura), [Xcode](https://developerapplecom/xcode/) 16.0+, [CocoaPods](https://cocoapodsorg/) 1.12.0+, dan akun Apple Developer aktif
+    -   macOS 13.0+ (Ventura), [Xcode](https://developer.apple.com/xcode/) 16.0+, [CocoaPods](https://cocoapodsorg/) 1.12.0+, dan akun Apple Developer aktif
 3.  **Pengaturan Android**:
     
     -   [Android Studio](https://developerandroidcom/studio) Hedgehog (2023.1.1)+, Android SDK API level 23+, JDK 17, dan [Gradle](https://gradleorg/) 8.0+
@@ -52,11 +52,11 @@ next_blog: ''
     -   Build aset web (`npm run build`) dan sinkronkan dengan platform native (`npx cap sync`)
 8.  **Aktifkan Pembaruan Langsung**:
     
-    -   Gunakan [Capgo](https://capgoapp/) untuk pembaruan real-time dengan:
+    -   Gunakan [Capgo](https://capgo.app/) untuk pembaruan real-time dengan:
         
         [[CODE_BLOCK]]
         
-9.  **[Uji Aplikasi Anda](https://capgoapp/docs/plugin/debugging/)**:
+9.  **[Uji Aplikasi Anda](https://capgo.app/docs/plugin/debugging/)**:
     
     -   Gunakan iOS Simulator (`npx cap open ios`) atau Android Emulator (`npx cap open android`)
 

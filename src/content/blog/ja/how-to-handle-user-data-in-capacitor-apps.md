@@ -56,7 +56,7 @@ next_blog: ''
 
 各データの収集理由を明確にしましょう。すべてのデータポイントは特定の目的を持つべきです。例えば：
 
-天気機能を持つアプリの場合、完全な住所ではなく郵便番号のみが必要かもしれません。このアプローチにより、コアアプリ機能に必要な情報のみを収集することができます[\[1\]](https://capacitorjs.com/docs/guides/storage)[\[5\]](https://usercentrics.com/knowledge-hub/data-minimization/)。
+天気機能を持つアプリの場合、完全な住所ではなく郵便番号のみが必要かもしれません。このアプローチにより、コアアプリ機能に必要な情報のみを収集することができます[\[1\]](https://capacitorjs.com/docs/guides/storage)[\[5\]](https://usercentrics.com/knowledge-hub/data-minimization/) 。
 
 ### データ入力コントロール
 

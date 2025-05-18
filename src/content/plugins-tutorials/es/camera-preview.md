@@ -26,11 +26,11 @@ Si estás usando Android, necesitas hacer algunos cambios adicionales en tu proy
 
 [[BLOQUE_DE_CODIGO]]
 
-Para más ayuda, consulta la [documentación de Capacitor](https://capacitorjscom/docs/android/configuration/#configuring-androidmanifestxml/)
+Para más ayuda, consulta la [documentación de Capacitor](https://capacitorjs.com/docs/android/configuration/#configuring-androidmanifestxml/)
 
 ### Pasos adicionales de instalación en iOS
 
-Si estás usando iOS, necesitas agregar dos permisos a tu archivo `Info.plist`. Sigue la [documentación de Capacitor](https://capacitorjscom/docs/ios/configuration/#configuring-infoplist) y agrega los permisos `NSCameraUsageDescription` y `NSMicrophoneUsageDescription`. El permiso `NSMicrophoneUsageDescription` solo es necesario si vas a usar audio. Si no necesitas audio, puedes establecer la opción `disableAudio` en `true` para desactivar la solicitud de permiso del micrófono.
+Si estás usando iOS, necesitas agregar dos permisos a tu archivo `Info.plist`. Sigue la [documentación de Capacitor](https://capacitorjs.com/docs/ios/configuration/#configuring-infoplist) y agrega los permisos `NSCameraUsageDescription` y `NSMicrophoneUsageDescription`. El permiso `NSMicrophoneUsageDescription` solo es necesario si vas a usar audio. Si no necesitas audio, puedes establecer la opción `disableAudio` en `true` para desactivar la solicitud de permiso del micrófono.
 
 ### Pasos adicionales de instalación en la Web
 

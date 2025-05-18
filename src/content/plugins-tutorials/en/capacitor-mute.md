@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/capacitor-mute Package
 
 The `@capgo/capacitor-mute` package is a Capacitor plugin that allows you to detect if the mute switch is enabled or disabled on a device. It provides a simple API for checking the device's mute status.

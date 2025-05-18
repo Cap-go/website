@@ -91,7 +91,7 @@ Il futuro è cross-platform - inizia oggi e raggiungi i tuoi obiettivi di app mo
 
 Una delle sfide principali dello sviluppo di app mobile è mantenere la tua app aggiornata nel tempo. Anche con un approccio cross-platform, pubblicare una nuova versione per ogni aggiornamento può essere complesso.
 
-È qui che entrano in gioco soluzioni come [Capgo](https://capgoapp/). Capgo è un sistema di aggiornamento live open-source per app Capacitor. Permette di inviare aggiornamenti direttamente sui dispositivi degli utenti senza passare attraverso gli app store.
+È qui che entrano in gioco soluzioni come [Capgo](https://capgo.app/). Capgo è un sistema di aggiornamento live open-source per app Capacitor. Permette di inviare aggiornamenti direttamente sui dispositivi degli utenti senza passare attraverso gli app store.
 
 I principali vantaggi di Capgo includono:
 
@@ -104,4 +104,4 @@ Capgo si integra perfettamente con Capacitor, il runtime nativo che alimenta le 
 
 Combinando lo sviluppo cross-platform in Ionic con gli aggiornamenti live in Capgo, puoi massimizzare la tua agilità. Distribuisci nuove funzionalità più velocemente e con meno rischi.
 
-Per iniziare con Capgo, consulta la [documentazione ufficiale](https://docscapgoapp/). Capgo è gratuito e completamente open source - quindi puoi implementarlo come preferisci!
+Per iniziare con Capgo, consulta la [documentazione ufficiale](https://docscapgo.app/). Capgo è gratuito e completamente open source - quindi puoi implementarlo come preferisci!

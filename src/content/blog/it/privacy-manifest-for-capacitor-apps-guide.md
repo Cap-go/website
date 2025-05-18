@@ -21,7 +21,7 @@ locale: it
 next_blog: ''
 ---
 
-**Vuoi lanciare la tua app [Capacitor](https://capacitorjscom/) sull'[App Store](https://enwikipediaorg/wiki/App_Store_\(Apple\)) senza ritardi?** Inizia creando un Privacy Manifest. Apple ora richiede agli sviluppatori di includere questo documento per garantire che le app soddisfino rigidi standard di privacy. Ecco cosa devi sapere:
+**Vuoi lanciare la tua app [Capacitor](https://capacitorjs.com/) sull'[App Store](https://enwikipediaorg/wiki/App_Store_\(Apple\)) senza ritardi?** Inizia creando un Privacy Manifest. Apple ora richiede agli sviluppatori di includere questo documento per garantire che le app soddisfino rigidi standard di privacy. Ecco cosa devi sapere:
 
 -   **Cos'è un Privacy Manifest?**  
     Un file strutturato che delinea le pratiche di raccolta dati della tua app, l'utilizzo delle API e i domini di tracciamento
@@ -39,9 +39,9 @@ next_blog: ''
     
     -   Usa JSON per definire i dettagli della raccolta dati
     -   Posiziona il file `PrivacyInfo.xcprivacy` nella directory corretta del tuo progetto
-    -   Validalo con strumenti come [Xcode](https://developerapplecom/xcode/) per evitare errori
+    -   Validalo con strumenti come [Xcode](https://developer.apple.com/xcode/) per evitare errori
 -   **Strumenti per semplificare il processo:**  
-    Usa piattaforme come [Capgo](https://capgoapp/) per la validazione automatica del privacy manifest, aggiornamenti in tempo reale e tracciamento degli errori
+    Usa piattaforme come [Capgo](https://capgo.app/) per la validazione automatica del privacy manifest, aggiornamenti in tempo reale e tracciamento degli errori
     
 
 **Rimani conforme, proteggi la privacy degli utenti ed evita ritardi nell'app store seguendo questa guida**
@@ -78,13 +78,13 @@ Ecco gli elementi principali da includere nel tuo privacy manifest per allineart
     Questa sezione elenca tutti i domini coinvolti nel tracciamento, come quelli utilizzati per analytics, pubblicità o elaborazione dati di terze parti
     
 
-> "Conforme all'App Store" - Capgo [\[1\]](https://capgoapp/)
+> "Conforme all'App Store" - Capgo [\[1\]](https://capgo.app/)
 
-Secondo Capgo, il 95% degli utenti si adegua agli aggiornamenti entro 24 ore. Con oltre 235 milioni di aggiornamenti consegnati [\[1\]](https://capgoapp/), mantenere aggiornata la documentazione sulla privacy è essenziale per mantenere la fiducia degli utenti
+Secondo Capgo, il 95% degli utenti si adegua agli aggiornamenti entro 24 ore. Con oltre 235 milioni di aggiornamenti consegnati [\[1\]](https://capgo.app/), mantenere aggiornata la documentazione sulla privacy è essenziale per mantenere la fiducia degli utenti
 
-## Costruire Privacy Manifest per [Capacitor](https://capacitorjscom/)
+## Costruire Privacy Manifest per [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assetsseobotaicom/capgoapp/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Requisiti di configurazione
 
@@ -249,7 +249,7 @@ Questi strumenti rendono l'aggiunta di Capgo al tuo flusso di lavoro semplice ed
 
 ### Utilizzo di Capgo
 
-Per iniziare, [installa il plugin Capgo](https://capgoapp/docs/plugin/cloud-mode/getting-started/) con questo comando:
+Per iniziare, [installa il plugin Capgo](https://capgo.app/docs/plugin/cloud-mode/getting-started/) con questo comando:
 
 ```bash
 npx @capgo/cli init
@@ -274,7 +274,7 @@ Quando si tratta di gestire i manifesti della privacy, rimanere conformi e mante
 -   **Capacità di rollback istantaneo**: Funge da rete di sicurezza per correzioni rapide
 -   **Validazione automatizzata**: Garantisce che i tuoi aggiornamenti soddisfino gli standard di conformità
 
-Costruire un sistema di aggiornamento affidabile ti aiuta a stare al passo con i requisiti di privacy in evoluzione di Apple e Google. Questo approccio ha dimostrato di migliorare i tassi di approvazione dell'app store e rafforzare la fiducia degli utenti [\[1\]](https://capgoapp/)
+Costruire un sistema di aggiornamento affidabile ti aiuta a stare al passo con i requisiti di privacy in evoluzione di Apple e Google. Questo approccio ha dimostrato di migliorare i tassi di approvazione dell'app store e rafforzare la fiducia degli utenti [\[1\]](https://capgo.app/)
 
 ### Come Iniziare
 

@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/capacitor-navigation-bar
 
 ## Installation

@@ -22,7 +22,7 @@ locale: de
 next_blog: ''
 ---
 
-**Probleme mit Android-Build-Fehlern in [Capacitor](https://capacitorjscom/)?** Diese Fehler entstehen oft durch falsch konfigurierte Dateien, Abhängigkeitskonflikte oder [ProGuard](https://wwwguardsquarecom/manual/home) Probleme. Eine schnelle Behebung ist wichtig, damit Ihre App reibungslos läuft. Hier ist eine kurze Übersicht häufiger Probleme und deren Lösungen:
+**Probleme mit Android-Build-Fehlern in [Capacitor](https://capacitorjs.com/)?** Diese Fehler entstehen oft durch falsch konfigurierte Dateien, Abhängigkeitskonflikte oder [ProGuard](https://wwwguardsquarecom/manual/home) Probleme. Eine schnelle Behebung ist wichtig, damit Ihre App reibungslos läuft. Hier ist eine kurze Übersicht häufiger Probleme und deren Lösungen:
 
 -   **Setup-Probleme**: Überprüfen Sie `AndroidManifest.xml`, `capacitor.config.json` und [Gradle](https://gradle.org/) Einstellungen auf Unstimmigkeiten bei SDK-Versionen, Berechtigungen oder `minSdkVersion`
 -   **Abhängigkeitskonflikte**: Stimmen Sie Versionen von Capacitor Core, Plugins und nativen Bibliotheken ab. Nutzen Sie Tools wie `npx cap doctor` um Unstimmigkeiten zu erkennen

@@ -19,7 +19,7 @@ locale: ko
 next_blog: ''
 ---
 
-Over-the-air (OTA) 업데이트는 [Capacitor](https://capacitorjscom/) 앱을 앱스토어 지연 없이 개선할 수 있는 빠른 방법입니다. 하지만 코드 변조, 다운그레이드 공격, 데이터 유출과 같은 위험이 따릅니다. 다음은 업데이트를 안전하게 하는 방법입니다:
+Over-the-air (OTA) 업데이트는 [Capacitor](https://capacitorjs.com/) 앱을 앱스토어 지연 없이 개선할 수 있는 빠른 방법입니다. 하지만 코드 변조, 다운그레이드 공격, 데이터 유출과 같은 위험이 따릅니다. 다음은 업데이트를 안전하게 하는 방법입니다:
 
 1. **모든 것을 암호화**: 업데이트 파일에는 AES-256을, 보안 키 교환에는 RSA-2048을 사용
 2. **업데이트 번들 서명**: 개인/공개 키 쌍으로 업데이트를 인증하여 변조 방지
@@ -34,17 +34,17 @@ Over-the-air (OTA) 업데이트는 [Capacitor](https://capacitorjscom/) 앱을 �
 | 코드 주입 | 앱 손상 | 번들 서명, 파일 검사 |
 | 다운그레이드 공격 | 이전 취약점 악용 | 버전 관리, 무결성 검사 |
 
-앱스토어와 [GDPR](https://enwikipediaorg/wiki/General_Data_Protection_Regulation) 규정을 준수하기 위해 업데이트가 안전하고 투명하며 사용자 데이터를 보호하는지 확인하세요. [Capgo](https://capgoapp/)와 같은 도구를 사용하면 더 안전한 OTA 업데이트를 위한 암호화, 서명, 모니터링을 자동화할 수 있습니다.
+앱스토어와 [GDPR](https://enwikipediaorg/wiki/General_Data_Protection_Regulation) 규정을 준수하기 위해 업데이트가 안전하고 투명하며 사용자 데이터를 보호하는지 확인하세요. [Capgo](https://capgo.app/)와 같은 도구를 사용하면 더 안전한 OTA 업데이트를 위한 암호화, 서명, 모니터링을 자동화할 수 있습니다.
 
-## 기업용 [Capacitor](https://capacitorjscom/)
+## 기업용 [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/m2kFUvSFcSs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## OTA 업데이트를 위한 보안 기초
 
-2022년 연구자들은 OTA 기능이 있는 기기의 78%가 업데이트 과정에서 취약점이 있다는 것을 발견했습니다 [\[5\]](https://sigmaoscom/tips/startups/internet-of-things-iot-terms-explained-over-the-air-ota-update). 이를 해결하기 위해서는 **번들 서명**, **안전한 데이터 전송**, **파일 검증**에 중점을 둔 강력한 보안 프레임워크가 필수적입니다. 이러한 요소들은 나중에 논의될 [암호화 방법](https://capgoapp/docs/cli/migrations/encryption/)의 근간이 됩니다.
+2022년 연구자들은 OTA 기능이 있는 기기의 78%가 업데이트 과정에서 취약점이 있다는 것을 발견했습니다 [\[5\]](https://sigmaoscom/tips/startups/internet-of-things-iot-terms-explained-over-the-air-ota-update). 이를 해결하기 위해서는 **번들 서명**, **안전한 데이터 전송**, **파일 검증**에 중점을 둔 강력한 보안 프레임워크가 필수적입니다. 이러한 요소들은 나중에 논의될 [암호화 방법](https://capgo.app/docs/cli/migrations/encryption/)의 근간이 됩니다.
 
 ### 업데이트 번들 서명
 
@@ -99,7 +99,7 @@ Over-the-air (OTA) 업데이트는 [Capacitor](https://capacitorjscom/) 앱을 �
 
 ### 앱스토어 규칙
 
-Apple의 App Store 가이드라인 2.5.2는 [Capacitor 앱](https://capgoapp/blog/capacitor-comprehensive-guide/)의 OTA 업데이트에 대해 명확한 제한을 두고 있습니다. 업데이트는 앱 컨테이너 내의 HTML, CSS, JavaScript와 같은 웹 콘텐츠만 수정할 수 있으며 - 네이티브 기능을 변경하는 것은 허용되지 않습니다 [\[1\]](https://githubcom/capacitor-community/android-security-provider)
+Apple의 App Store 가이드라인 2.5.2는 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)의 OTA 업데이트에 대해 명확한 제한을 두고 있습니다. 업데이트는 앱 컨테이너 내의 HTML, CSS, JavaScript와 같은 웹 콘텐츠만 수정할 수 있으며 - 네이티브 기능을 변경하는 것은 허용되지 않습니다 [\[1\]](https://githubcom/capacitor-community/android-security-provider)
 
 | 플랫폼 | 요구사항 |
 | --- | --- |
@@ -117,7 +117,7 @@ Google Play는 더 많은 유연성을 제공하지만 여전히 엄격한 보�
 | 데이터 수집 | 필요 최소한의 데이터 | 전체 공개 필요 |
 | 사용자 권리 | 명시적 동의 필요 | 옵트아웃 옵션 필수 |
 | 보안 조치 | 종단간 암호화 | 합리적인 보안 |
-| 문서화 | [업데이트 프로세스](https://capgoapp/docs/plugin/cloud-mode/manual-update/) 문서 | 업데이트 프로세스 문서 |
+| 문서화 | [업데이트 프로세스](https://capgo.app/docs/plugin/cloud-mode/manual-update/) 문서 | 업데이트 프로세스 문서 |
 
 > "규정 준수를 유지하는 핵심은 처음부터 프라이버시 중심 설계 원칙을 구현하는 것입니다"라고 유럽 데이터 보호위원회 지침 문서는 설명합니다. "여기에는 업데이트 프로세스의 모든 측면에 데이터 보호 고려사항을 포함하는 것이 포함됩니다" [\[8\]](https://essayprocom/blog/article-review)
 
@@ -161,9 +161,9 @@ Capgo는 의심스러운 업데이트를 격리하고 심층 분석을 위한 �
 
 이러한 탐지 및 대응 조치는 암호화 및 서명 프로토콜과 함께 작동하여 다층적 방어 시스템을 제공합니다
 
-## [Capgo](https://capgoapp/) 보안 기능
+## [Capgo](https://capgo.app/) 보안 기능
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-02-13jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-13.jpg?auto=compress)
 
 Capgo는 모니터링 시스템과 함께 작동하는 세 가지 주요 접근 방식을 통해 보안을 보장합니다:
 

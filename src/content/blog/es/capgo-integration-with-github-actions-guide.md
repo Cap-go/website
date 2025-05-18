@@ -21,7 +21,7 @@ locale: es
 next_blog: ''
 ---
 
-[Capgo](https://capgoapp/) y [GitHub Actions](https://docsgithubcom/actions) juntos simplifican la implementación de actualizaciones para aplicaciones [Capacitor](https://capacitorjscom/). Aquí está por qué esta integración merece tu atención:
+[Capgo](https://capgo.app/) y [GitHub Actions](https://docsgithubcom/actions) juntos simplifican la implementación de actualizaciones para aplicaciones [Capacitor](https://capacitorjs.com/). Aquí está por qué esta integración merece tu atención:
 
 -   **Ahorra Dinero**: Reduce costos de CI/CD hasta $26,100 en 5 años comparado con [AppFlow](https://ionicio/appflow/)
 -   **Actualizaciones Rápidas**: Implementa actualizaciones instantáneamente con 95% de usuarios recibiéndolas en 24 horas
@@ -30,9 +30,9 @@ next_blog: ''
 
 ### Resumen Rápido
 
-1.  **Requisitos**: Cuenta GitHub, [cuenta Capgo](https://capgoapp/disclaimer/) (desde $12/mes), proyecto Capacitor, [Nodejs](https://nodejsorg/en)
-2.  **Configuración**: Instala [Capgo CLI](https://capgoapp/docs/cli/commands) con `npx @capgo/cli init`, configura GitHub Actions con un flujo de trabajo YAML
-3.  **Implementación**: Usa comandos como `npx @capgo/cli deploy` para [automatizar actualizaciones](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)
+1.  **Requisitos**: Cuenta GitHub, [cuenta Capgo](https://capgo.app/disclaimer/) (desde $12/mes), proyecto Capacitor, [Nodejs](https://nodejsorg/en)
+2.  **Configuración**: Instala [Capgo CLI](https://capgo.app/docs/cli/commands) con `npx @capgo/cli init`, configura GitHub Actions con un flujo de trabajo YAML
+3.  **Implementación**: Usa comandos como `npx @capgo/cli deploy` para [automatizar actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
 4.  **Pruebas**: Implementa en canales de prueba (ej. beta, staging) antes de producción
 
 **Ejemplo de Flujo de Trabajo (YAML)**:
@@ -43,13 +43,13 @@ Esta integración asegura actualizaciones rápidas, seguras y rentables, hacién
 
 ## Tutorial de [GitHub Actions](https://docsgithubcom/actions) - Conceptos Básicos y Pipeline CI/CD
 
-![GitHub Actions](https://mars-imagesimgixnet/seobot/screenshots/docsgithubcom-90237daad1b336de5d9b7f1a85aa7441-2025-03-16jpg?auto=compress)
+![GitHub Actions](https://mars-images.imgix.net/seobot/screenshots/docsgithubcom-90237daad1b336de5d9b7f1a85aa7441-2025-03-16.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
 ## Requisitos de Configuración
 
-[Integrar Capgo](https://capgoapp/docs/webapp/) con GitHub Actions implica configurar las herramientas y configuraciones necesarias
+[Integrar Capgo](https://capgo.app/docs/webapp/) con GitHub Actions implica configurar las herramientas y configuraciones necesarias
 
 ### Herramientas y Cuentas Requeridas
 
@@ -64,13 +64,13 @@ Asegúrate de tener las siguientes cuentas y herramientas listas:
 
 Una vez que estos estén listos, puedes proceder a agregar Capgo a tu proyecto para actualizaciones automatizadas en vivo
 
-### Agregando [Capgo](https://capgoapp/) a Tu Proyecto
+### Agregando [Capgo](https://capgo.app/) a Tu Proyecto
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16.jpg?auto=compress)
 
 Para integrar Capgo, instálalo en tu proyecto Capacitor usando su herramienta CLI. Según Martin Donadieu, fundador de Capgo:
 
-> "¡Ejecuta npx @capgo/cli init y eso es todo!" [\[1\]](https://capgoapp/)
+> "¡Ejecuta npx @capgo/cli init y eso es todo!" [\[1\]](https://capgo.app/)
 
 Este comando configurará el plugin y sus dependencias requeridas
 
@@ -78,21 +78,21 @@ Este comando configurará el plugin y sus dependencias requeridas
 
 Prepara tu repositorio GitHub para cumplir con los requisitos de integración CI/CD con Capgo. Como se menciona en su documentación:
 
-> "Configuramos tu pipeline CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI u otros. No alojamos CI/CD ni te cobramos por mantenerlo" [\[1\]](https://capgoapp/)
+> "Configuramos tu pipeline CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI u otros. No alojamos CI/CD ni te cobramos por mantenerlo" [\[1\]](https://capgo.app/)
 
-Capgo ofrece esta configuración por una tarifa única de $2,600 y ~$300/mes, que es más asequible comparado con la tarifa anual de $6,000 de AppFlow [\[1\]](https://capgoapp/)
+Capgo ofrece esta configuración por una tarifa única de $2,600 y ~$300/mes, que es más asequible comparado con la tarifa anual de $6,000 de AppFlow [\[1\]](https://capgo.app/)
 
 Aquí está cómo configurar tu repositorio:
 
 -   **Estructura del Repositorio**: Organiza tu repositorio con directorios separados para código fuente, activos y archivos de configuración para mantener todo limpio y manejable
 -   **Configuración de Entorno**: Crea entornos distintos para desarrollo, staging y producción, asegurando controles de acceso apropiados y medidas de seguridad
--   **Gestión de Acceso**: Configura los permisos del repositorio cuidadosamente para permitir la [integración con Capgo](https://capgoapp/consulting/) mientras mantienes la seguridad
+-   **Gestión de Acceso**: Configura los permisos del repositorio cuidadosamente para permitir la [integración con Capgo](https://capgo.app/consulting/) mientras mantienes la seguridad
 
 Estos pasos asegurarán que tu proyecto esté listo para el flujo de trabajo de GitHub Actions, que se detallará en la siguiente sección
 
 ## Configuración del Flujo de Trabajo de GitHub Actions
 
-Automatiza tus [implementaciones de Capgo](https://capgoapp/docs/cli/commands/) usando GitHub Actions para optimizar tu proceso de CI/CD
+Automatiza tus [implementaciones de Capgo](https://capgo.app/docs/cli/commands/) usando GitHub Actions para optimizar tu proceso de CI/CD
 
 ### Creando el Archivo de Workflow
 

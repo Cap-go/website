@@ -22,7 +22,7 @@ locale: fr
 next_blog: ''
 ---
 
-Le suivi automatisé du consentement est essentiel pour les applications [Capacitor](https://capacitorjscom/) afin de respecter les réglementations sur la confidentialité et les règles des plateformes. Voici pourquoi c'est important et comment le mettre en œuvre :
+Le suivi automatisé du consentement est essentiel pour les applications [Capacitor](https://capacitorjs.com/) afin de respecter les réglementations sur la confidentialité et les règles des plateformes. Voici pourquoi c'est important et comment le mettre en œuvre :
 
 -   **Pourquoi c'est important** :
     
@@ -39,20 +39,20 @@ Le suivi automatisé du consentement est essentiel pour les applications [Capaci
     
     1.  Utiliser des plugins comme `@capacitor/privacy` pour gérer le consentement
     2.  Créer des éléments d'interface utilisateur de consentement clairs et simples
-    3.  [Chiffrer et stocker de manière sécurisée](https://capgoapp/docs/cli/migrations/encryption/) les données de consentement
+    3.  [Chiffrer et stocker de manière sécurisée](https://capgo.app/docs/cli/migrations/encryption/) les données de consentement
     4.  Ajuster le suivi analytique selon les préférences utilisateur
     5.  Valider et mettre à jour régulièrement les paramètres de consentement
 -   **Conseils de conformité** :
     
     -   Divulguer clairement l'utilisation des données
     -   Permettre aux utilisateurs de retirer leur consentement et supprimer leurs données
-    -   Utiliser des outils comme [Capgo](https://capgoapp/) pour les mises à jour en direct et éviter les délais de l'App Store
+    -   Utiliser des outils comme [Capgo](https://capgo.app/) pour les mises à jour en direct et éviter les délais de l'App Store
 
 ## Permission de transparence du suivi des applications Apple - Ionic ou iOS
 
 ## Guide des exigences de consentement
 
-L'ajout du suivi du consentement aux [applications Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/) implique de respecter les règles établies par Apple et Google. Ces règles sont conçues pour garantir la confidentialité des utilisateurs et la conformité aux normes des plateformes.
+L'ajout du suivi du consentement aux [applications Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) implique de respecter les règles établies par Apple et Google. Ces règles sont conçues pour garantir la confidentialité des utilisateurs et la conformité aux normes des plateformes.
 
 ### Exigences des politiques de l'App Store
 
@@ -67,7 +67,7 @@ Apple et Google ont des attentes spécifiques concernant le suivi du consentemen
 **Exigences du Google Play Store** :
 
 -   Divulguer clairement les pratiques de collecte et de partage des données
--   Inclure un lien visible vers la [politique de confidentialité](https://capgoapp/dp/) dans la fiche de l'application et dans l'application elle-même
+-   Inclure un lien visible vers la [politique de confidentialité](https://capgo.app/dp/) dans la fiche de l'application et dans l'application elle-même
 -   Obtenir un consentement explicite avant de collecter des données sensibles
 -   Fournir un moyen simple pour les utilisateurs de retirer leur consentement
 -   Offrir aux utilisateurs l'option de supprimer leurs données s'ils révoquent leur consentement

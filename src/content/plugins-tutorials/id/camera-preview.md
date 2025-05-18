@@ -34,11 +34,11 @@ Jika Anda menggunakan Android, Anda perlu melakukan beberapa perubahan tambahan 
 <uses-permission android:name="android.permission.CAMERA" />
 ```
 
-Untuk bantuan lebih lanjut, rujuk pada [dokumentasi Capacitor](https://capacitorjscom/docs/android/configuration/#configuring-androidmanifestxml/)
+Untuk bantuan lebih lanjut, rujuk pada [dokumentasi Capacitor](https://capacitorjs.com/docs/android/configuration/#configuring-androidmanifestxml/)
 
 ### Langkah Instalasi Tambahan iOS
 
-Jika Anda menggunakan iOS, Anda perlu menambahkan dua izin ke file `Infoplist` Anda. Ikuti [dokumentasi Capacitor](https://capacitorjscom/docs/ios/configuration/#configuring-infoplist) dan tambahkan izin `NSCameraUsageDescription` dan `NSMicrophoneUsageDescription`. Izin `NSMicrophoneUsageDescription` hanya diperlukan jika Anda akan menggunakan audio. Jika Anda tidak memerlukan audio, Anda dapat mengatur opsi `disableAudio` ke `true` untuk menonaktifkan permintaan izin mikrofon.
+Jika Anda menggunakan iOS, Anda perlu menambahkan dua izin ke file `Infoplist` Anda. Ikuti [dokumentasi Capacitor](https://capacitorjs.com/docs/ios/configuration/#configuring-infoplist) dan tambahkan izin `NSCameraUsageDescription` dan `NSMicrophoneUsageDescription`. Izin `NSMicrophoneUsageDescription` hanya diperlukan jika Anda akan menggunakan audio. Jika Anda tidak memerlukan audio, Anda dapat mengatur opsi `disableAudio` ke `true` untuk menonaktifkan permintaan izin mikrofon.
 
 ### Langkah Instalasi Tambahan Web
 

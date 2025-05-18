@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/capacitor-crisp Package
 
 The `@capgo/capacitor-crisp` package allows you to integrate Crisp, a native SDK, into your Capacitor app. It provides methods for configuring Crisp, opening the chatbox, setting user details, sending events, and more.

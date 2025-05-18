@@ -22,7 +22,7 @@ locale: it
 next_blog: ''
 ---
 
-**Vuoi creare app Android con [Capacitor](https://capacitorjscom/)?** Ecco tutto ciò che ti serve per configurare rapidamente ed efficacemente il tuo ambiente di sviluppo. Capacitor collega le tecnologie web con le funzionalità native di Android e per iniziare sono necessari alcuni strumenti e configurazioni essenziali.
+**Vuoi creare app Android con [Capacitor](https://capacitorjs.com/)?** Ecco tutto ciò che ti serve per configurare rapidamente ed efficacemente il tuo ambiente di sviluppo. Capacitor collega le tecnologie web con le funzionalità native di Android e per iniziare sono necessari alcuni strumenti e configurazioni essenziali.
 
 ### Di cosa avrai bisogno:
 
@@ -47,7 +47,7 @@ next_blog: ''
 
 ### Funzionalità chiave da sfruttare:
 
--   **Aggiornamenti in tempo reale**: Distribuisci aggiornamenti istantaneamente usando strumenti come [Capgo](https://capgoapp/)
+-   **Aggiornamenti in tempo reale**: Distribuisci aggiornamenti istantaneamente usando strumenti come [Capgo](https://capgo.app/)
 -   **Funzionalità native**: Accedi alle API specifiche di Android per funzionalità avanzate
 -   **Monitoraggio in tempo reale**: Risolvi rapidamente i problemi durante lo sviluppo
 
@@ -90,7 +90,7 @@ Una volta che la configurazione è pronta, il prossimo passo è configurare Andr
 
 ## Configurazione di [Android Studio](https://developerandroidcom/studio)
 
-![Android Studio](https://mars-imagesimgixnet/seobot/screenshots/developerandroidcom-4d08ca5be8f73216eb56e77cdafac129-2025-03-20jpg?auto=compress)
+![Android Studio](https://mars-images.imgix.net/seobot/screenshots/developerandroidcom-4d08ca5be8f73216eb56e77cdafac129-2025-03-20.jpg?auto=compress)
 
 Android Studio è indispensabile per sviluppare con Capacitor su Android. Configurarlo correttamente garantisce un flusso di lavoro fluido e prestazioni migliori.
 
@@ -140,12 +140,12 @@ Alcune configurazioni chiave in Android Studio lo faranno funzionare in modo eff
     -   **Target**: x86\_64
 5. Regola le impostazioni AVD:
     -   RAM: 2048 MB
-    -   [Memoria Interna](https://capgoapp/plugins/capacitor-data-storage-sqlite/): 2048 MB
+    -   [Memoria Interna](https://capgo.app/plugins/capacitor-data-storage-sqlite/): 2048 MB
     -   Scheda SD: 512 MB
 
-> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per la distribuzione continua ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per la distribuzione continua ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Per maggiori dettagli sulle configurazioni specifiche di Capgo, consulta la sezione [Integrazione Capgo](https://capgoapp/consulting/) più avanti in questa guida
+Per maggiori dettagli sulle configurazioni specifiche di Capgo, consulta la sezione [Integrazione Capgo](https://capgo.app/consulting/) più avanti in questa guida
 
 ## Configurazione Android SDK
 
@@ -198,9 +198,9 @@ Se riscontri errori di permessi su macOS o Linux, risolvili eseguendo:
 
 [[CODE_BLOCK]]
 
-Dopo aver completato questi passaggi, il tuo Android SDK è pronto per essere utilizzato con Capacitor## Configurazione Android di [Capacitor](https://capacitorjscom/)
+Dopo aver completato questi passaggi, il tuo Android SDK è pronto per essere utilizzato con Capacitor## Configurazione Android di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 ### Installazione della Piattaforma
 
@@ -227,7 +227,7 @@ Ecco un esempio di configurazione:
 **Configurazioni importanti su cui concentrarsi:**
 
 -   **Sicurezza**: Assicurati che gli aggiornamenti in tempo reale siano crittografati end-to-end
--   **[Gestione degli Aggiornamenti](https://capgoapp/docs/plugin/cloud-mode/manual-update/)**: Configura i rilasci controllati con specifici [canali di aggiornamento](https://capgoapp/docs/webapp/channels/)
+-   **[Gestione degli Aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/manual-update/)**: Configura i rilasci controllati con specifici [canali di aggiornamento](https://capgo.app/docs/webapp/channels/)
 -   **Prestazioni**: Ottimizza le impostazioni WebView. Per esempio:
 
 [[CODE_BLOCK]]
@@ -281,15 +281,15 @@ Ecco alcuni problemi tipici e come risolverli:
 
 Risolvere questi problemi preparerà il tuo ambiente per funzionalità avanzate e un'integrazione fluida con Capgo. Una volta verificato, la tua configurazione sarà pronta per i prossimi passi del tuo progetto.
 
-## Integrazione con [Capgo](https://capgoapp/)
+## Integrazione con [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
-Una volta che il tuo ambiente Android è pronto, è il momento di integrare Capgo. Questo strumento semplifica il tuo [processo di aggiornamento](https://capgoapp/docs/plugin/cloud-mode/manual-update/) permettendoti di inviare aggiornamenti alla tua app Capacitor istantaneamente - senza necessità di revisione del Play Store.
+Una volta che il tuo ambiente Android è pronto, è il momento di integrare Capgo. Questo strumento semplifica il tuo [processo di aggiornamento](https://capgo.app/docs/plugin/cloud-mode/manual-update/) permettendoti di inviare aggiornamenti alla tua app Capacitor istantaneamente - senza necessità di revisione del Play Store.
 
 ### Caratteristiche Principali di Capgo
 
--   **Aggiornamenti in Tempo Reale**: Gli aggiornamenti raggiungono il 95% degli utenti attivi entro 24 ore [\[1\]](https://capgoapp/)
+-   **Aggiornamenti in Tempo Reale**: Gli aggiornamenti raggiungono il 95% degli utenti attivi entro 24 ore [\[1\]](https://capgo.app/)
 -   **Crittografia End-to-End**: Garantisce la sicurezza dei dati
--   **Risposta API Veloce**: Tempo di risposta medio globale di 434ms, con un tasso di successo dell'82% [\[1\]](https://capgoapp/)
+-   **Risposta API Veloce**: Tempo di risposta medio globale di 434ms, con un tasso di successo dell'82% [\[1\]](https://capgo.app/)
 -   **Aggiornamenti Parziali**: Minimizza l'utilizzo dei dati trasferendo solo le modifiche necessarie

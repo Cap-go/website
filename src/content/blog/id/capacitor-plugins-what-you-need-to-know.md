@@ -21,10 +21,10 @@ locale: id
 next_blog: ''
 ---
 
-[Capacitor](https://capacitorjscom/) plugin sangat penting untuk membangun aplikasi lintas platform, memungkinkan Anda menggunakan fitur perangkat native seperti kamera, sistem file, dan notifikasi dengan usaha minimal. Mereka menggabungkan API JavaScript dan kode native untuk integrasi yang mulus di platform iOS, Android, dan web. Berikut yang perlu Anda ketahui:
+[Capacitor](https://capacitorjs.com/) plugin sangat penting untuk membangun aplikasi lintas platform, memungkinkan Anda menggunakan fitur perangkat native seperti kamera, sistem file, dan notifikasi dengan usaha minimal. Mereka menggabungkan API JavaScript dan kode native untuk integrasi yang mulus di platform iOS, Android, dan web. Berikut yang perlu Anda ketahui:
 
 -   **Plugin Inti**: Dibuat oleh tim [Ionic](https://ionicframeworkcom/), mencakup dasar-dasar seperti penyimpanan file (`FilesystemwriteFile`) dan pemeriksaan jaringan (`NetworkgetStatus`)
--   **Plugin Komunitas**: Menawarkan fitur khusus seperti [Firebase Analytics](https://firebasegooglecom/docs/analytics), [pembelian dalam aplikasi](https://capgoapp/plugins/native-purchases/), dan pembaruan langsung
+-   **Plugin Komunitas**: Menawarkan fitur khusus seperti [Firebase Analytics](https://firebasegooglecom/docs/analytics), [pembelian dalam aplikasi](https://capgo.app/plugins/native-purchases/), dan pembaruan langsung
 -   **Plugin Kustom**: Buat sendiri untuk kebutuhan perangkat keras atau bisnis yang unik
 
 ### Gambaran Singkat
@@ -33,13 +33,13 @@ next_blog: ''
 | --- | --- | --- |
 | Kecepatan Pengembangan | Implementasi fitur lebih cepat | Menambahkan fungsi kamera dengan mudah |
 | Efisiensi Kode | Penggunaan ulang di berbagai platform | API bersama untuk iOS dan Android |
-| [Performa Native](https://capgoapp/plugins/native-audio/) | Akses langsung ke kemampuan perangkat | Optimisasi khusus platform |
+| [Performa Native](https://capgo.app/plugins/native-audio/) | Akses langsung ke kemampuan perangkat | Optimisasi khusus platform |
 
 Sistem plugin Capacitor menyederhanakan pengembangan aplikasi sambil mempertahankan performa native. Baik Anda menggunakan plugin yang sudah ada atau membuat yang kustom, mereka membantu Anda fokus membangun fitur, bukan menangani kompleksitas khusus platform.
 
-## Cara Membangun Plugin [Capacitor](https://capacitorjscom/) Anda Sendiri
+## Cara Membangun Plugin [Capacitor](https://capacitorjs.com/) Anda Sendiri
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
 
 <Steps>
 
@@ -52,7 +52,7 @@ Sistem plugin Capacitor menyederhanakan pengembangan aplikasi sambil mempertahan
 
 ## Struktur Teknis Plugin
 
-[Plugin Capacitor](https://capgoapp/plugins/) dibangun dengan desain jembatan lintas platform, memungkinkan interaksi yang mulus antara lingkungan web dan native. Memahami cara kerjanya dapat membantu pengembang membangun dan men-debug plugin lebih efisien.
+[Plugin Capacitor](https://capgo.app/plugins/) dibangun dengan desain jembatan lintas platform, memungkinkan interaksi yang mulus antara lingkungan web dan native. Memahami cara kerjanya dapat membantu pengembang membangun dan men-debug plugin lebih efisien.
 
 ### Komponen Plugin: Web dan Native
 
@@ -61,10 +61,10 @@ Plugin Capacitor menggunakan pengaturan dua lapis, memisahkan fungsionalitas web
 | Komponen | Implementasi |
 | --- | --- |
 | API JavaScript | Definisi [TypeScript](https://wwwtypescriptlangorg/) dengan metode yang diekspor |
-| Kode Native | [Swift](https://developerapplecom/swift/) (iOS) dan [Kotlin](https://kotlinlangorg/)/Java (Android) |
+| Kode Native | [Swift](https://developer.apple.com/swift/) (iOS) dan [Kotlin](https://kotlinlangorg/)/Java (Android) |
 | Lapisan Jembatan | Serialisasi pesan JSON |
 
-Struktur ini menyederhanakan tugas seperti mengkonversi tipe data antara lingkungan JavaScript dan native. Misalnya, plugin Filesystem secara otomatis mengkonversi data biner ke Base64 untuk transfer, sementara tipe data primitif ditangani menggunakan JSON [\[2\]](https://appstudyraidcom/en/read/11146/345591/understanding-the-plugin-system)[\[5\]](https://capacitorjscom/docs/plugins)
+Struktur ini menyederhanakan tugas seperti mengkonversi tipe data antara lingkungan JavaScript dan native. Misalnya, plugin Filesystem secara otomatis mengkonversi data biner ke Base64 untuk transfer, sementara tipe data primitif ditangani menggunakan JSON [\[2\]](https://appstudyraidcom/en/read/11146/345591/understanding-the-plugin-system)[\[5\]](https://capacitorjs.com/docs/plugins)
 
 ### Komunikasi Platform
 
@@ -81,9 +81,9 @@ LocalNotifications.schedule({
 Jembatan ini mencakup fitur keamanan seperti:
 
 -   **Validasi TypeScript** untuk memastikan integritas data
--   **Konteks eksekusi WebView bersandbox** untuk interaksi yang aman [\[1\]](https://appstudyraidcom/en/read/11146/345601/overview-of-built-in-plugins)[\[5\]](https://capacitorjscom/docs/plugins)
+-   **Konteks eksekusi WebView bersandbox** untuk interaksi yang aman [\[1\]](https://appstudyraidcom/en/read/11146/345601/overview-of-built-in-plugins)[\[5\]](https://capacitorjs.com/docs/plugins)
 
-Penanganan kesalahan mudah dilakukan, karena Capacitor menggunakan rantai promise untuk mengembalikan error. Misalnya, jika akses geolokasi ditolak karena izin yang hilang, pengembang mendapatkan kode error yang jelas untuk mengidentifikasi dan memperbaiki masalah [\[2\]](https://appstudyraidcom/en/read/11146/345591/understanding-the-plugin-system)[\[5\]](https://capacitorjscom/docs/plugins)
+Penanganan kesalahan mudah dilakukan, karena Capacitor menggunakan rantai promise untuk mengembalikan error. Misalnya, jika akses geolokasi ditolak karena izin yang hilang, pengembang mendapatkan kode error yang jelas untuk mengidentifikasi dan memperbaiki masalah [\[2\]](https://appstudyraidcom/en/read/11146/345591/understanding-the-plugin-system)[\[5\]](https://capacitorjs.com/docs/plugins)
 
 Untuk menangani perbedaan khusus platform, pengembang dapat menggunakan `CapacitorisPluginAvailable()` untuk memeriksa apakah fitur didukung sebelum menjalankannya. Pendekatan ini memastikan aplikasi bekerja di berbagai platform sambil memanfaatkan fitur native saat tersedia, tetap setia pada pendekatan lintas platform Capacitor [\[1\]](https://appstudyraidcom/id/read/11146/345601/overview-of-built-in-plugins)[\[2\]](https://appstudyraidcom/id/read/11146/345591/understanding-the-plugin-system)
 
@@ -159,10 +159,10 @@ Pengujian menyeluruh sangat penting untuk memastikan plugin berfungsi dengan bai
     | Kegagalan build native | Konfirmasi versi dependensi yang benar |
     | Error perizinan | Periksa ulang konfigurasi platform |
     
--   **Pengujian Otomatis**: Gunakan alat otomatis untuk mensimulasikan berbagai kondisi error dan kasus khusus, memastikan plugin berperilaku sesuai harapan [\[2\]](https://appstudyraidcom/en/read/11146/345591/understanding-the-plugin-system)[\[5\]](https://capacitorjscom/docs/plugins)
+-   **Pengujian Otomatis**: Gunakan alat otomatis untuk mensimulasikan berbagai kondisi error dan kasus khusus, memastikan plugin berperilaku sesuai harapan [\[2\]](https://appstudyraidcom/en/read/11146/345591/understanding-the-plugin-system)[\[5\]](https://capacitorjs.com/docs/plugins)
     
 
-Untuk plugin yang kritis bagi fungsionalitas aplikasi Anda, pertahankan versi yang telah diperbaiki dan pantau changelog resmi untuk pembaruan atau perubahan yang merusak [\[4\]](https://capacitorjscom/docs/plugins/creating-plugins)[\[5\]](https://capacitorjscom/docs/plugins). Ini akan membantu Anda mengantisipasi potensi masalah sambil menjaga aplikasi Anda tetap aman dan andal
+Untuk plugin yang kritis bagi fungsionalitas aplikasi Anda, pertahankan versi yang telah diperbaiki dan pantau changelog resmi untuk pembaruan atau perubahan yang merusak [\[4\]](https://capacitorjs.com/docs/plugins/creating-plugins)[\[5\]](https://capacitorjs.com/docs/plugins). Ini akan membantu Anda mengantisipasi potensi masalah sambil menjaga aplikasi Anda tetap aman dan andal
 
 ## Panduan Pemeliharaan Plugin
 
@@ -184,7 +184,7 @@ Saat meningkatkan versi major, ikuti langkah-langkah berikut:
 
 Dokumentasikan kustomisasi atau solusi sementara yang telah Anda implementasikan
 
-2. **[Strategi Pembaruan](https://capgoapp/docs/plugin/cloud-mode/hybrid-update)**
+2. **[Strategi Pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)**
 
 Kembangkan rencana pembaruan detail yang mencakup:
 
@@ -203,7 +203,7 @@ Melacak versi secara konsisten, dipasangkan dengan pengujian menyeluruh, membant
 
 Memiliki akses ke dukungan yang dapat diandalkan adalah kunci untuk pemeliharaan plugin yang efektif. Ekosistem Capacitor menyediakan beberapa sumber daya yang membantu:
 
-> "Komunitas GitHub Discussions Capacitor, dengan lebih dari 8.000 anggota, berfungsi sebagai pusat utama untuk dukungan pemeliharaan plugin dan pemecahan masalah" [\[5\]](https://capacitorjscom/docs/plugins)
+> "Komunitas GitHub Discussions Capacitor, dengan lebih dari 8.000 anggota, berfungsi sebagai pusat utama untuk dukungan pemeliharaan plugin dan pemecahan masalah" [\[5\]](https://capacitorjs.com/docs/plugins)
 
 Untuk tim yang menggunakan alat seperti Capgo untuk pembaruan langsung, fitur tambahan meliputi:
 
@@ -227,7 +227,7 @@ Untuk menghindari tantangan pemeliharaan umum, otomatiskan rutinitas pengujian u
 -   Konflik dependensi native
 -   Masalah perizinan spesifik platform
 
-Menggunakan `capacitor doctor` secara rutin dapat membantu menangkap potensi masalah lebih awal, memastikan aplikasi Anda tetap dalam kondisi prima [\[4\]](https://capacitorjscom/docs/plugins/creating-plugins)
+Menggunakan `capacitor doctor` secara rutin dapat membantu menangkap potensi masalah lebih awal, memastikan aplikasi Anda tetap dalam kondisi prima [\[4\]](https://capacitorjs.com/docs/plugins/creating-plugins)
 
 ## Ringkasan
 

@@ -61,7 +61,7 @@ next_blog: ''
 
 ### アップデート前の準備
 
-[UserVoice](https://www.uservoice.com/)などのプラットフォームでユーザーフィードバックを収集し、Google Analyticsを使用してロード時間やクラッシュ率などのパフォーマンス指標を分析することから始めます。このデータは、特に重要な問題に対処しユーザー体験を改善するアップデートの優先順位付けに役立ちます[\[1\]](https://www.nimbleappgenie.com/blogs/mobile-app-development-checklist/)。
+[UserVoice](https://www.uservoice.com/)などのプラットフォームでユーザーフィードバックを収集し、Google Analyticsを使用してロード時間やクラッシュ率などのパフォーマンス指標を分析することから始めます。このデータは、特に重要な問題に対処しユーザー体験を改善するアップデートの優先順位付けに役立ちます[\[1\]](https://www.nimbleappgenie.com/blogs/mobile-app-development-checklist/) 。
 
 監視すべき主要な指標の概要：
 
@@ -79,7 +79,7 @@ next_blog: ''
 
 Continuous Integration/Continuous Deployment（CI/CD）パイプライン用の適切なツールを選ぶことが重要です。[GitHub Actions](https://docs.github.com/actions)、[Bitrise](https://bitrise.io/)、[CircleCI](https://circleci.com/)などの人気のオプションにはそれぞれ独自のメリットがあります。例えば、[GitHub Actions](https://docs.github.com/actions)はGitHubリポジトリと直接統合されるため、多くの開発者にとって便利な選択肢となっています[\[2\]](https://www.poppinslabs.com/blog/mobile-app-ci-cd-pipeline)。
 
-Over-the-Air（OTA）アップデートについては、Capacitorなどのツールを使用することで、アプリストアの承認を待たずに変更を直接ユーザーに配信できます[\[3\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/)。OTAソリューションを選択する際は、以下の要因を考慮してください：
+Over-the-Air（OTA）アップデートについては、Capacitorなどのツールを使用することで、アプリストアの承認を待たずに変更を直接ユーザーに配信できます[\[3\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/) 。OTAソリューションを選択する際は、以下の要因を考慮してください：
 
 -   ダウンタイムを最小限に抑える**デプロイメント速度**。
     

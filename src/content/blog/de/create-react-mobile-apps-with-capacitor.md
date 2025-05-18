@@ -45,7 +45,7 @@ Dieser Ordner wird später von Capacitor verwendet, aber zunächst müssen wir i
 
 Um eine beliebige Web-App in einen nativen mobilen Container zu verpacken, müssen wir einige anfängliche Schritte befolgen, aber danach ist es so einfach wie die Ausführung eines einzigen `sync`-Befehls.
 
-Zunächst können wir die [Capacitor CLI](https://capacitorjscom/docs/cli/) als Entwicklungsabhängigkeit installieren und sie dann in unserem Projekt einrichten. Während der Einrichtung können Sie "Enter" drücken, um die Standardwerte für Name und Bundle-ID zu akzeptieren.
+Zunächst können wir die [Capacitor CLI](https://capacitorjs.com/docs/cli/) als Entwicklungsabhängigkeit installieren und sie dann in unserem Projekt einrichten. Während der Einrichtung können Sie "Enter" drücken, um die Standardwerte für Name und Bundle-ID zu akzeptieren.
 
 Als Nächstes müssen wir das Core-Paket und die relevanten Pakete für die iOS- und Android-Plattformen installieren.
 
@@ -55,7 +55,7 @@ An diesem Punkt sollten Sie neue **ios**- und **android**-Ordner in Ihrem React-
 
 **Das sind echte native Projekte!**
 
-Um später auf das Android-Projekt zugreifen zu können, müssen Sie [Android Studio](https://developerandroidcom/studio/) installieren. Für iOS benötigen Sie einen Mac und sollten [Xcode](https://developerapplecom/xcode/) installieren.
+Um später auf das Android-Projekt zugreifen zu können, müssen Sie [Android Studio](https://developerandroidcom/studio/) installieren. Für iOS benötigen Sie einen Mac und sollten [Xcode](https://developer.apple.com/xcode/) installieren.
 
 Zusätzlich sollten Sie eine **capacitorconfigts**-Datei in Ihrem Projekt finden, die einige grundlegende Capacitor-Einstellungen enthält, die während der Synchronisierung verwendet werden. Das Einzige, worauf Sie achten müssen, ist das **webDir**, das auf das Ergebnis Ihres Build-Befehls zeigen muss. Derzeit ist es ungenau.
 
@@ -67,7 +67,7 @@ Der erste Befehl `npm run build` wird einfach Ihr React-Projekt erstellen und de
 
 Der zweite Befehl `npx cap sync` wird den gesamten Web-Code an die richtigen Stellen der nativen Plattformen synchronisieren, damit sie in einer App angezeigt werden können.
 
-Zusätzlich kann der Sync-Befehl die nativen Plattformen aktualisieren und Plugins installieren, daher ist es Zeit, `npx cap sync` erneut auszuführen, wenn Sie ein neues [Capacitor-Plugin](https://capacitorjscom/docs/plugins/) installieren.Ohne es zu bemerken, sind Sie jetzt eigentlich fertig. Lassen Sie uns die App auf einem Gerät ansehen!
+Zusätzlich kann der Sync-Befehl die nativen Plattformen aktualisieren und Plugins installieren, daher ist es Zeit, `npx cap sync` erneut auszuführen, wenn Sie ein neues [Capacitor-Plugin](https://capacitorjs.com/docs/plugins/) installieren.Ohne es zu bemerken, sind Sie jetzt eigentlich fertig. Lassen Sie uns die App auf einem Gerät ansehen!
 
 ## Native Apps erstellen und bereitstellen
 

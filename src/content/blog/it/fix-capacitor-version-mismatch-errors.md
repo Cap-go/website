@@ -21,13 +21,13 @@ locale: it
 next_blog: ''
 ---
 
-**Gli errori di mancata corrispondenza delle versioni nelle app [Capacitor](https://capacitorjscom/) possono interrompere le build, causare crash durante l'esecuzione e ritardare gli aggiornamenti** Questi problemi si verificano quando i pacchetti core, i plugin o le dipendenze non sono allineati. Ecco come risolverli rapidamente:
+**Gli errori di mancata corrispondenza delle versioni nelle app [Capacitor](https://capacitorjs.com/) possono interrompere le build, causare crash durante l'esecuzione e ritardare gli aggiornamenti** Questi problemi si verificano quando i pacchetti core, i plugin o le dipendenze non sono allineati. Ecco come risolverli rapidamente:
 
 -   **Cause comuni**:
     
     -   Aggiornamenti parziali o conflitti di dipendenze
     -   Errori in `packagejson` o file pod
-    -   [Aggiornamenti automatici](https://capgoapp/docs/plugin/cloud-mode/auto-update/) che creano inconsistenze
+    -   [Aggiornamenti automatici](https://capgo.app/docs/plugin/cloud-mode/auto-update/) che creano inconsistenze
 -   **Soluzioni rapide**:
     
     -   Esegui `npx cap doctor` o `npm list @capacitor/*` per individuare le discrepanze
@@ -37,11 +37,11 @@ next_blog: ''
     
     -   Blocca le versioni in `packagejson` (es. `"@capacitor/core": "500"`)
     -   Automatizza i controlli delle versioni con strumenti CI/CD
-    -   Usa strumenti di aggiornamento live come [Capgo](https://capgoapp/) per correzioni più rapide
+    -   Usa strumenti di aggiornamento live come [Capgo](https://capgo.app/) per correzioni più rapide
 
-## Risoluzione dell'eccezione No Matching View in [Capacitor](https://capacitorjscom/)
+## Risoluzione dell'eccezione No Matching View in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assetsseobotaicom/capgoapp/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1jpg)
+![Capacitor](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -133,7 +133,7 @@ Quando passi a una nuova versione principale, segui questi passaggi:
     [[CODE_BLOCK]]
     
 
-Capgo fornisce aggiornamenti live per Capacitor 6 e 7, permettendoti di applicare correzioni senza necessità di approvazioni dell'app store [\[1\]](https://capgoapp/)
+Capgo fornisce aggiornamenti live per Capacitor 6 e 7, permettendoti di applicare correzioni senza necessità di approvazioni dell'app store [\[1\]](https://capgo.app/)
 
 ## Evitare futuri conflitti di versione
 

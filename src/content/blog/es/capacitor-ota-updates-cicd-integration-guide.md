@@ -22,12 +22,12 @@ locale: es
 next_blog: ''
 ---
 
-**¿Quieres actualizar tu app de [Capacitor](https://capacitorjscom/) instantáneamente sin retrasos de la tienda de aplicaciones?** Las actualizaciones Over-the-Air (OTA) te permiten enviar correcciones y funciones directamente a los dispositivos de los usuarios. Combina esto con un pipeline de CI/CD, y podrás automatizar los despliegues, acelerar la corrección de errores y mejorar la experiencia del usuario.
+**¿Quieres actualizar tu app de [Capacitor](https://capacitorjs.com/) instantáneamente sin retrasos de la tienda de aplicaciones?** Las actualizaciones Over-the-Air (OTA) te permiten enviar correcciones y funciones directamente a los dispositivos de los usuarios. Combina esto con un pipeline de CI/CD, y podrás automatizar los despliegues, acelerar la corrección de errores y mejorar la experiencia del usuario.
 
 ### Puntos Clave:
 
 -   **¿Por qué OTA + CI/CD?** Automatiza actualizaciones, permite rollbacks y asegura correcciones más rápidas
--   **Lo que Necesitas:** App de Capacitor, repositorio Git, plataforma CI/CD (ej. [GitHub Actions](https://docsgithubcom/actions)), y un servicio OTA como [Capgo](https://capgoapp/)
+-   **Lo que Necesitas:** App de Capacitor, repositorio Git, plataforma CI/CD (ej. [GitHub Actions](https://docsgithubcom/actions)), y un servicio OTA como [Capgo](https://capgo.app/)
 -   **Costos de Configuración:** Espera ~$300/mes para operaciones CI/CD; la tarifa única de configuración de Capgo es $2,600
 -   **Mejores Prácticas:** Usa versionado (major, minor, patch), despliegues graduales y seguimiento de errores para asegurar actualizaciones sin problemas
 -   **Principales Plataformas OTA:** Capgo destaca con actualizaciones rápidas (114ms), altas tasas de éxito (82%) y soporte global
@@ -74,11 +74,11 @@ Mantener las credenciales seguras es crítico para mantener la integridad de tu 
 
 Capgo enfatiza la importancia de la configuración adecuada en pipelines CI/CD:
 
-> "Configuramos tu pipeline CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI u otros. No alojamos CI/CD ni te cobramos por mantenerlo" – Capgo[\[1\]](https://capgoapp/)
+> "Configuramos tu pipeline CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI u otros. No alojamos CI/CD ni te cobramos por mantenerlo" – Capgo[\[1\]](https://capgo.app/)
 
 Al seleccionar herramientas, prioriza la independencia de plataforma, escalabilidad y medidas de seguridad sólidas como el cifrado de extremo a extremo para actualizaciones.
 
-Ejecutar operaciones CI/CD típicamente cuesta alrededor de $300 por mes[\[1\]](https://capgoapp/), pero esta inversión se compensa al acelerar los despliegues y reducir el trabajo manual.
+Ejecutar operaciones CI/CD típicamente cuesta alrededor de $300 por mes[\[1\]](https://capgo.app/), pero esta inversión se compensa al acelerar los despliegues y reducir el trabajo manual.
 
 Una vez que estos componentes están en su lugar, estás listo para integrarlos en tu pipeline CI/CD.
 
@@ -104,7 +104,7 @@ Configura tu pipeline para activar acciones basadas en cambios en la rama princi
 
 1. **Compilación**: Activada por cambios en el código para compilar y preparar tu aplicación
 2. **Pruebas**: Automatiza verificaciones de funcionalidad para asegurar la estabilidad
-3. **[Generación de Actualización](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)**: Empaqueta y optimiza activos para el despliegue
+3. **[Generación de Actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Empaqueta y optimiza activos para el despliegue
 
 Cuando tu pipeline esté listo, podrás desplegar tus paquetes de actualización sin problemas
 
@@ -115,7 +115,7 @@ El despliegue de actualizaciones implica enviar tus paquetes a través de un ser
 | **Etapa** | **Acción** | **Verificación** |
 | --- | --- | --- |
 | Pre-despliegue | Verificación de versión | Confirma el versionado correcto |
-| Despliegue | [Carga de paquete](https://capgoapp/docs/webapp/bundles/) | Envía la actualización al sistema de distribución |
+| Despliegue | [Carga de paquete](https://capgo.app/docs/webapp/bundles/) | Envía la actualización al sistema de distribución |
 | Post-despliegue | Comprobación de salud | Monitorea y verifica el estado de la actualización |
 
 **Consejos Profesionales para el Despliegue:**
@@ -124,9 +124,9 @@ El despliegue de actualizaciones implica enviar tus paquetes a través de un ser
 -   Configura **reversiones automáticas** para manejar problemas rápidamente
 -   Integra **seguimiento de errores** para mejor depuración
 
-> "Configuramos tu pipeline CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI u otros. No alojamos CI/CD ni te cobramos por mantenerlo" – Capgo [\[1\]](https://capgoapp/)
+> "Configuramos tu pipeline CI/CD directamente en tu plataforma preferida, ya sea GitHub Actions, GitLab CI u otros. No alojamos CI/CD ni te cobramos por mantenerlo" – Capgo [\[1\]](https://capgo.app/)
 
-Capgo ofrece una tarifa única de configuración de $2,600 [\[1\]](https://capgoapp/), haciendo el despliegue eficiente mientras mantiene los costos bajo control
+Capgo ofrece una tarifa única de configuración de $2,600 [\[1\]](https://capgo.app/), haciendo el despliegue eficiente mientras mantiene los costos bajo control
 
 ## Directrices de Actualización OTA
 
@@ -143,7 +143,7 @@ Utiliza un sistema de versionado estructurado para gestionar actualizaciones OTA
 | Versión de Parche | Cubre correcciones de errores | 211 |
 | Número de Compilación | Identifica la compilación CI/CD | 211-build123 |
 
-Incorpora [canales de actualización](https://capgoapp/docs/webapp/channels/) para gestionar lanzamientos beta y de producción. Una vez que tu sistema de versionado esté establecido, asegúrate de que todas las actualizaciones cumplan con las directrices específicas de la plataforma
+Incorpora [canales de actualización](https://capgo.app/docs/webapp/channels/) para gestionar lanzamientos beta y de producción. Una vez que tu sistema de versionado esté establecido, asegúrate de que todas las actualizaciones cumplan con las directrices específicas de la plataforma
 
 ### Reglas de App Store
 

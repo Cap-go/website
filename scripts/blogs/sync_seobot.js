@@ -9,6 +9,10 @@ const PAGE_SIZE = 10
 const iframe = `<iframe src="$1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>`
 const iframeRegex = /:::\s*@iframe\s+(.*?)\s*:::/g
 
+const keyToReplace = {
+  '/confirm_email': '/register',
+}
+
 const replaceFrontmatter = (text) => {
   if (!text) return ''
   // First clean the text
@@ -28,6 +32,16 @@ const replaceFrontmatter = (text) => {
   }
 
   return cleaned
+}
+
+// Helper function to replace all keys in keyToReplace with their values in a string
+function replaceKeysInContent(content, keyMap) {
+  let result = content
+  for (const [key, value] of Object.entries(keyMap)) {
+    // Use global replacement for all occurrences
+    result = result.split(key).join(value)
+  }
+  return result
 }
 
 async function main() {
@@ -77,7 +91,9 @@ async function main() {
         )
         const transformedMarkdown = cleanMarkdown.replace(iframeRegex, iframe).replace(/https:\/\/capgo\.app\/(de|en|es|fr|id|it|ja|ko)\/(.*?)\//g, 'https://capgo.app/$2/')
         // Combine frontmatter with markdown content
-        const content = `${frontmatter}${transformedMarkdown}`
+        let content = `${frontmatter}${transformedMarkdown}`
+        // Replace all keys in keyToReplace with their values in the content
+        content = replaceKeysInContent(content, keyToReplace)
         writeFileSync(filePath, content)
       }
       page++

@@ -135,7 +135,7 @@ Capgo muncul sebagai solusi manajemen rollback yang kuat setelah penutupan [Micr
 
 > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan secara berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Bagi yang lebih suka pendekatan hands-on, [Plugin Live Update Capacitor](https://capgo.app/confirm_email/) adalah pilihan lain yang patut dipertimbangkan.
+Bagi yang lebih suka pendekatan hands-on, [Plugin Live Update Capacitor](https://capgo.app/register/) adalah pilihan lain yang patut dipertimbangkan.
 
 ### Plugin Live Update Capacitor
 

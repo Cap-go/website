@@ -26,7 +26,7 @@ Anda juga dapat menugaskan perangkat langsung ke bundle
 
 ## Opsi Channel
 
-<figure><img src="/channel_setting_1webp" alt=""><figcaption></figcaption></figure>
+<figure><img src="/channel_setting_1.webp" alt=""><figcaption></figcaption></figure>
 
 Detail setiap opsi:
 

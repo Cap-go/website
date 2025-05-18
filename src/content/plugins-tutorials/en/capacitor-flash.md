@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # Using @capgo/capacitor-flash Package
 
 The `@capgo/capacitor-flash` package allows you to switch the flashlight/torch of your device on and off. In this tutorial, we will guide you through the process of installing and using this package in your Ionic Capacitor app.

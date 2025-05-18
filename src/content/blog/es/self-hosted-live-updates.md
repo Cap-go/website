@@ -32,7 +32,7 @@ Implementar Live Updates alojadas en Capgo es muy sencillo usando el [Capgo SDK]
 
 Para garantizar una entrega segura y coordinada de los últimos artefactos de compilación web a los usuarios finales, Capgo ahora permite que el plugin de Capacitor Live Updates emplee un par de claves pública/privada. Al usar Live Updates Auto-alojado, se realiza un handshake adicional para proporcionar la seguridad de que los artefactos descargados a través del plugin desde la infraestructura de la empresa no han sido modificados.
 
-![Capgo encryption schema](/encryption_flowwebp)
+![Capgo encryption schema](/encryption_flow.webp)
 
 A continuación se describen los pasos para establecer el par de claves y el proceso posterior para entregar la experiencia actualizada a los usuarios finales.
 

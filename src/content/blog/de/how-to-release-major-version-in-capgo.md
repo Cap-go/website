@@ -38,7 +38,7 @@ Diese Änderung bedeutet, dass alle Tools angepasst werden müssen, um die bahnb
 
 Deshalb folgt Capgo diesem System.
 Wenn Sie also eine Hauptversion veröffentlichen, wird Capgo sie nicht an einen Benutzer senden, der sie nicht aus dem Store installiert hat.
-Dieses Verhalten kann angepasst werden. Mehr darüber erfahren Sie [hier](/docs/tooling/cli/#disable-updates-strategy).
+Dieses Verhalten kann angepasst werden. Mehr darüber erfahren Sie [hier](/docs/cli/commands/#disable-updates-strategy).
 
 ### Versionen
 

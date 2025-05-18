@@ -44,7 +44,7 @@ Capgoは新機能や機能性をプッシュすることを意図していませ
 
 AppleとGoogleには、それぞれアプリを更新する際の独自のルールがあります。
 
-Appleについては、[パラグラフ3.3.2を参照してください](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15.pdf/)。
+Appleについては、[パラグラフ3.3.2を参照してください](https://developer.apple.com/programs/information/Apple_Developer_Program_Information_8_12_15.pdf/) 。
 \[…\] 上記の例外は、Appleの組み込みWebKitフレームワークまたはJavaScriptCoreによってダウンロードおよび実行されるスクリプトとコードのみです \[…\] __結論__：OTAアップデートは、重要な変更を加えることなく、バグ修正や改善のためにのみ使用すべきです。
 
 __Google__ Playはより制限が緩やかで、Google Playからインストールされ、JavaScriptバンドルを含むアプリは、[Googleサービスに限定されない](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)更新が可能だとしています。

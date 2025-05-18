@@ -40,10 +40,10 @@ La elección entre **lanzamientos graduales** y **lanzamientos completos** depen
 
 ### Cuándo Usar Cada Método
 
--   **Lanzamientos Graduales**: Mejor para [actualizaciones complejas](https://capgoapp/docs/plugin/cloud-mode/hybrid-update), grandes bases de usuarios o cuando minimizar riesgos es prioritario
+-   **Lanzamientos Graduales**: Mejor para [actualizaciones complejas](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), grandes bases de usuarios o cuando minimizar riesgos es prioritario
 -   **Lanzamientos Completos**: Ideal para correcciones urgentes de errores, parches de seguridad o actualizaciones simples que requieren adopción amplia
 
-Herramientas como **[Capgo](https://capgoapp/)** pueden soportar ambos métodos, ofreciendo funciones como análisis en tiempo real, reversión instantánea e implementación sin problemas. Elige el método que se alinee con los objetivos e infraestructura de tu app
+Herramientas como **[Capgo](https://capgo.app/)** pueden soportar ambos métodos, ofreciendo funciones como análisis en tiempo real, reversión instantánea e implementación sin problemas. Elige el método que se alinee con los objetivos e infraestructura de tu app
 
 ## Implementación Canaria: Explicación de Lanzamientos Más Seguros
 
@@ -81,7 +81,7 @@ Estas características se aplican a través de dos enfoques principales:
 | Actualizar en segundo plano | Requiere más recursos |
 | Opción fácil de reversión | Configuración inicial puede ser desafiante |
 
-Para implementar lanzamientos graduales efectivamente, herramientas como Capgo proporcionan análisis en tiempo real para monitorear el éxito y la participación del usuario [\[1\]](https://capgoapp/)
+Para implementar lanzamientos graduales efectivamente, herramientas como Capgo proporcionan análisis en tiempo real para monitorear el éxito y la participación del usuario [\[1\]](https://capgo.app/)
 
 ## Lanzamientos Completos Explicados
 
@@ -95,7 +95,7 @@ Mejoras recientes han hecho los lanzamientos completos más eficientes y confiab
 | --- | --- | --- |
 | **Distribución Instantánea** | Actualizaciones llegan a todos a la vez | Mantiene versiones consistentes |
 | **Experiencia Uniforme** | Todos los usuarios obtienen las mismas funciones | Simplifica procesos de soporte |
-| **[Actualizaciones Automáticas](https://capgoapp/docs/plugin/cloud-mode/auto-update/)** | Las actualizaciones ocurren en segundo plano | Reduce las interrupciones |
+| **[Actualizaciones Automáticas](https://capgo.app/docs/plugin/cloud-mode/auto-update/)** | Las actualizaciones ocurren en segundo plano | Reduce las interrupciones |
 | **Despliegue Directo** | Evita los retrasos de revisión de la tienda de aplicaciones | Acelera los plazos de lanzamiento |
 
 Ahora, veamos cómo los lanzamientos completos tradicionales se comparan con los métodos modernos
@@ -108,10 +108,10 @@ Los métodos antiguos de lanzamiento completo dependían de largas revisiones en
 | --- | --- | --- |
 | **Velocidad de Actualización** | Semanas para aprobación de la tienda | Despliegue inmediato |
 | **Seguimiento del Éxito** | Perspectivas limitadas | Análisis en tiempo real |
-| **Experiencia de Usuario** | Actualizaciones manuales por usuarios | [Actualizaciones automáticas en segundo plano](https://capgoapp/docs/plugin/self-hosted/auto-update/) |
+| **Experiencia de Usuario** | Actualizaciones manuales por usuarios | [Actualizaciones automáticas en segundo plano](https://capgo.app/docs/plugin/self-hosted/auto-update/) |
 | **Control de Lanzamiento** | Manejo básico de versiones | Controles de lanzamiento avanzados |
 
-> "¡No más esperas! Envía cambios de código en vivo directamente a los usuarios sin retrasos de la tienda de aplicaciones. Despliega correcciones críticas y funciones cuando estén listas" - Capgo [\[1\]](https://capgoapp/)
+> "¡No más esperas! Envía cambios de código en vivo directamente a los usuarios sin retrasos de la tienda de aplicaciones. Despliega correcciones críticas y funciones cuando estén listas" - Capgo [\[1\]](https://capgo.app/)
 
 Los enfoques modernos están remodelando cómo se gestionan los lanzamientos completos, ofreciendo mejor velocidad y control
 
@@ -125,9 +125,9 @@ Los enfoques modernos están remodelando cómo se gestionan los lanzamientos com
 | Más fácil de mantener y documentar | Opciones limitadas de reversión |
 | Proceso de despliegue más rápido | Posibles picos de carga del servidor |
 
-Capgo reporta un 82% de tasa de éxito global para actualizaciones, con un tiempo de respuesta promedio de API de 434ms en todo el mundo [\[1\]](https://capgoapp/)
+Capgo reporta un 82% de tasa de éxito global para actualizaciones, con un tiempo de respuesta promedio de API de 434ms en todo el mundo [\[1\]](https://capgo.app/)
 
-> "Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 ## Comparación Directa: Lanzamientos Graduales vs Completos
 
@@ -136,11 +136,11 @@ Aquí hay una mirada más cercana a cómo los lanzamientos graduales se comparan
 | Aspecto | Lanzamientos Graduales | Lanzamientos Completos |
 | --- | --- | --- |
 | Nivel de Riesgo | Menor – exposición limitada a un subconjunto de usuarios inicialmente | Mayor – actualización enviada a todos los usuarios a la vez |
-| Velocidad de Despliegue | 24 horas para 95% de cobertura de usuarios [\[1\]](https://capgoapp/) | Instantáneo para toda la base de usuarios |
-| Tasa de Éxito de Actualización | 82% de tasa de éxito global [\[1\]](https://capgoapp/) | Depende en gran medida de las capacidades de infraestructura |
+| Velocidad de Despliegue | 24 horas para 95% de cobertura de usuarios [\[1\]](https://capgo.app/) | Instantáneo para toda la base de usuarios |
+| Tasa de Éxito de Actualización | 82% de tasa de éxito global [\[1\]](https://capgo.app/) | Depende en gran medida de las capacidades de infraestructura |
 | Eficiencia de Costos | Más económico a largo plazo | Costos iniciales más bajos pero costos más altos para correcciones si surgen problemas |
 | Ciclo de Retroalimentación | Recolección gradual de comentarios | Retroalimentación inmediata de todos los usuarios |
-| Capacidad de Reversión | Reversión instantánea y selectiva disponible [\[1\]](https://capgoapp/) | Afecta a todos los usuarios si se revierte |
+| Capacidad de Reversión | Reversión instantánea y selectiva disponible [\[1\]](https://capgo.app/) | Afecta a todos los usuarios si se revierte |
 | Requisitos de Recursos | Carga del servidor equilibrada | Riesgo de sobrecarga de infraestructura |
 | Gestión de Versiones | Pueden coexistir múltiples versiones | Una sola versión desplegada universalmente |
 
@@ -148,6 +148,6 @@ Cada enfoque tiene su propio conjunto de compensaciones en cuanto a velocidad, c
 
 La distinción principal radica en la _gestión de riesgos_. Los lanzamientos graduales dan a los desarrolladores la capacidad de monitorear el rendimiento a menor escala antes de expandirse a toda la base de usuarios. Los lanzamientos completos, aunque más rápidos, exigen una preparación significativa para manejar posibles desafíos en todos los usuarios
 
-> "Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Los avances en las plataformas de despliegue han mejorado ambos métodos

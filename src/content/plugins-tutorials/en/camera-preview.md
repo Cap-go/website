@@ -1,3 +1,6 @@
+---
+locale: en
+---
 # @capgo/camera-preview Package Tutorial
 
 In this tutorial, we will walk through the steps to use the `@capgo/camera-preview` package in your Capacitor project. This package allows you to interact with the camera from your JavaScript and HTML code.

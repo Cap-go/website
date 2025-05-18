@@ -21,22 +21,22 @@ locale: ja
 next_blog: ''
 ---
 
-Over-The-Air (OTA) アップデートを使用すると、アプリストアの承認を待つことなく、アプリの修正や機能をユーザーに直接提供できます。[Capacitor](https://capacitorjscom/) CLIと[Capgo](https://capgoapp/)などのツールを使用することで、即座にアップデートをプッシュし、パフォーマンスを追跡し、必要に応じてロールバックすることも可能です。以下が重要なポイントです：
+Over-The-Air (OTA) アップデートを使用すると、アプリストアの承認を待つことなく、アプリの修正や機能をユーザーに直接提供できます。[Capacitor](https://capacitorjs.com/) CLIと[Capgo](https://capgo.app/)などのツールを使用することで、即座にアップデートをプッシュし、パフォーマンスを追跡し、必要に応じてロールバックすることも可能です。以下が重要なポイントです：
 
 ### OTAアップデートの主なメリット：
 
 -   **即時デプロイメント**：アプリストアの遅延なしで即座にアップデートをプッシュ
--   **[自動アップデート](https://capgoapp/docs/plugin/cloud-mode/auto-update/)**：ユーザーはバックグラウンドでアップデートを受信
+-   **[自動アップデート](https://capgo.app/docs/plugin/cloud-mode/auto-update/)**：ユーザーはバックグラウンドでアップデートを受信
 -   **バージョン管理**：バージョンの管理とロールバックが容易
 -   **選択的配布**：ベータテスターなど特定のユーザーグループをターゲット
 
 ### 要件：
 
--   **[Nodejs](https://nodejsorg/en)** (v14.0+)、**Capacitor CLI** (v6.0+または7.0+)、**[Android Studio](https://developerandroidcom/studio)**、および**[Xcode](https://developerapplecom/xcode/)** (iOS用)
+-   **[Nodejs](https://nodejsorg/en)** (v14.0+)、**Capacitor CLI** (v6.0+または7.0+)、**[Android Studio](https://developerandroidcom/studio)**、および**[Xcode](https://developer.apple.com/xcode/)** (iOS用)
 
 ### 開始手順：
 
-1.  **[Capgoプラグイン](https://capgoapp/plugins/)のインストール**：プロジェクトで`npx @capgo/cli init`を実行
+1.  **[Capgoプラグイン](https://capgo.app/plugins/)のインストール**：プロジェクトで`npx @capgo/cli init`を実行
 2.  **プラットフォームの設定**：
     -   Android：ネイティブビルドを有効化しGradleを更新
     -   iOS：Xcodeの設定を調整しバックグラウンドアップデートを有効化
@@ -51,15 +51,15 @@ Over-The-Air (OTA) アップデートを使用すると、アプリストアの�
 | **セキュリティ** | エンドツーエンド暗号化 | 基本的な署名 | 基本的な署名 | \-  |
 | **コスト** | 12ドル/月から | 同程度 | 約500ドル/月 | 無料だった |
 
-Capgoは、迅速なアップデート（24時間以内に95%）、強力なセキュリティ、CI/CD統合が特徴です。他のツールが段階的に終了する中、[Capacitorアプリ](https://capgoapp/blog/capacitor-comprehensive-guide/)の信頼できる選択肢となっています。
+Capgoは、迅速なアップデート（24時間以内に95%）、強力なセキュリティ、CI/CD統合が特徴です。他のツールが段階的に終了する中、[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)の信頼できる選択肢となっています。
 
 ### なぜ重要か：
 
 OTAアップデートは時間を節約し、ユーザー体験を向上させ、アプリの安定性を確保します。Capgoなどのツールを活用することで、アプリストアのルールに準拠しながら、迅速で安全なアップデートを提供できます。
 
-## [Capawesome](https://capawesomeio/)の新しいIonic [Capacitor](https://capacitorjscom/) ライブアップデートを探る
+## [Capawesome](https://capawesomeio/)の新しいIonic [Capacitor](https://capacitorjs.com/) ライブアップデートを探る
 
-![Capawesome](https://assetsseobotaicom/capgoapp/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bcjpg)
+![Capawesome](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -74,7 +74,7 @@ OTAアップデートは時間を節約し、ユーザー体験を向上させ�
 | ソフトウェア | バージョン | 目的 |
 | --- | --- | --- |
 | **Nodejs** | 14.0+ | JavaScriptランタイム環境 |
-| **Capacitor CLI** | 6.0+または7.0+ | [Capacitorアプリ開発のコアフレームワーク](https://capgoapp/blog/) |
+| **Capacitor CLI** | 6.0+または7.0+ | [Capacitorアプリ開発のコアフレームワーク](https://capgo.app/blog/) |
 | **Android Studio** | 最新 | Android アプリ開発 |
 | **Xcode** | 14.0+ | iOS アプリ開発（Macのみ） |
 
@@ -102,7 +102,7 @@ OTAアップデート用のCapgoプラグインを追加することから始め
 -   プロビジョニングプロファイルを設定
 -   バックグラウンドアップデート機能を有効化
 
-> "5000人以上のユーザーベースを持つ本番環境でCapgo OTAアップデートを展開しました。非常にスムーズに動作しており、OTAが@Capgoにデプロイされてから数分以内にほぼすべてのユーザーが最新状態になっています" - colenso [\[1\]](https://capgoapp/)
+> "5000人以上のユーザーベースを持つ本番環境でCapgo OTAアップデートを展開しました。非常にスムーズに動作しており、OTAが@Capgoにデプロイされてから数分以内にほぼすべてのユーザーが最新状態になっています" - colenso [\[1\]](https://capgo.app/)
 
 これらの手順により、プロジェクトがCapacitor v6/v7と互換性を持ち、シームレスなOTAアップデートの準備が整います。
 

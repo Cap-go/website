@@ -56,7 +56,7 @@ C'est pourquoi nous vous avons fait un tableau clair et simple pour vous aider �
 
 ## Alternatives d'intégration continue
 
-Si vous souhaitez utiliser [Capgo](https://capgoapp/pricing/) pour profiter des mises à jour en direct mais que vous n'avez pas de solution d'intégration continue en place, vous pouvez facilement configurer un workflow d'intégration continue à faible coût en utilisant GitHub Actions. GitHub Actions est un service d'intégration et de déploiement continus gratuit et intégré pour les dépôts GitHub qui permet aux développeurs d'automatiser leurs workflows de développement logiciel.
+Si vous souhaitez utiliser [Capgo](https://capgo.app/pricing/) pour profiter des mises à jour en direct mais que vous n'avez pas de solution d'intégration continue en place, vous pouvez facilement configurer un workflow d'intégration continue à faible coût en utilisant GitHub Actions. GitHub Actions est un service d'intégration et de déploiement continus gratuit et intégré pour les dépôts GitHub qui permet aux développeurs d'automatiser leurs workflows de développement logiciel.
 
 Pour configurer l'intégration continue avec GitHub Actions et Capgo, vous devrez d'abord créer un dépôt GitHub pour le code de votre application. Ensuite, vous pouvez créer un fichier de workflow dans votre dépôt qui définit les étapes à exécuter chaque fois que du code est poussé vers le dépôt. Par exemple, un fichier de workflow simple pourrait inclure des étapes pour construire et tester l'application, puis utiliser [Capgo](/register/) pour créer une mise à jour en direct et la déployer auprès des utilisateurs de l'application.
 
@@ -64,7 +64,7 @@ Une fois cette configuration en place, chaque fois que vous introduisez des modi
 
 Globalement, l'utilisation de GitHub Actions et [Capgo](/register/) peut être une solution rentable pour ceux qui veulent utiliser les mises à jour en direct mais n'ont pas leur propre configuration d'intégration continue en place.En utilisant ces outils, les clients peuvent automatiser leur processus de développement d'applications et déployer rapidement et facilement des mises à jour à leurs utilisateurs
 
-Si vous êtes prêt à configurer votre CI/CD avec Capgo, vous pouvez suivre ce [tutoriel pour IOS](https://capgoapp/blog/automatic-capacitor-android-build-github-action/)
+Si vous êtes prêt à configurer votre CI/CD avec Capgo, vous pouvez suivre ce [tutoriel pour IOS](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
 
 ## Allons plus loin
 

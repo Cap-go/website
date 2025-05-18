@@ -146,7 +146,7 @@ CI/CDパイプラインを設定して、アップデートメトリクスを自
 | iOS | アップデートのバージョン変更に注意 |
 | Android | ユーザー同意パターンを追跡 |
 
-これらのプラットフォーム固有のニーズが監視内容を形成します。例えば、iOSのバージョンアップデートの追跡やAndroidの同意傾向の監視が重要です[\[1\]](https://ionic.io/blog/capacitor-live-updates-sdk-is-now-ga) [\[2\]](https://nytlicensing.com/latest/methods/getting-started-thought-leadership-content-marketing/)。
+これらのプラットフォーム固有のニーズが監視内容を形成します。例えば、iOSのバージョンアップデートの追跡やAndroidの同意傾向の監視が重要です[\[1\]](https://ionic.io/blog/capacitor-live-updates-sdk-is-now-ga) [\[2\]](https://nytlicensing.com/latest/methods/getting-started-thought-leadership-content-marketing/) 。
 
 ### アップデートセキュリティ
 

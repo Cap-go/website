@@ -63,6 +63,6 @@ getWindow().setDecorFitsSystemWindows(false);
 
 ## Créditos
 
-Este plugin fue creado originalmente para [Kickcom](https://kickcom/) por [Capgo](https://capgoapp/).
+Este plugin fue creado originalmente para [Kickcom](https://kickcom/) por [Capgo](https://capgo.app/).
 
-Para más información y actualizaciones, visita [Capgo](https://capgoapp/).
+Para más información y actualizaciones, visita [Capgo](https://capgo.app/).

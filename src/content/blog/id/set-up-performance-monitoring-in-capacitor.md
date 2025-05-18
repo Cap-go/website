@@ -22,7 +22,7 @@ locale: id
 next_blog: ''
 ---
 
-**Ingin mengoptimalkan performa aplikasi [Capacitor](https://capacitorjscom/) Anda?** Alat pemantauan seperti [Firebase](https://firebasegooglecom/) dan [Sentry](https://sentryio/) dapat membantu Anda melacak crash, penggunaan sumber daya, dan waktu respons, memastikan pengalaman pengguna yang lebih baik. Berikut ringkasannya:
+**Ingin mengoptimalkan performa aplikasi [Capacitor](https://capacitorjs.com/) Anda?** Alat pemantauan seperti [Firebase](https://firebasegooglecom/) dan [Sentry](https://sentryio/) dapat membantu Anda melacak crash, penggunaan sumber daya, dan waktu respons, memastikan pengalaman pengguna yang lebih baik. Berikut ringkasannya:
 
 -   **Mengapa Memantau Performa**: Mengidentifikasi crash, mengoptimalkan penggunaan sumber daya, dan meningkatkan waktu respons
 -   **Alat yang Digunakan**:
@@ -42,11 +42,11 @@ next_blog: ''
 | Metrik Kustom | Dasar | Fleksibel |
 | Kompleksitas Integrasi | Alur kerja berbasis Google | Pengaturan SDK sederhana |
 
-Untuk pembaruan langsung, integrasikan alat seperti **[Capgo](https://capgoapp/)** untuk menerapkan perbaikan secara instan tanpa delay app store. Mulai pemantauan hari ini untuk meningkatkan efisiensi dan kepuasan pengguna aplikasi Anda.
+Untuk pembaruan langsung, integrasikan alat seperti **[Capgo](https://capgo.app/)** untuk menerapkan perbaikan secara instan tanpa delay app store. Mulai pemantauan hari ini untuk meningkatkan efisiensi dan kepuasan pengguna aplikasi Anda.
 
 ## Optimalkan kesehatan aplikasi dengan [Firebase](https://firebasegooglecom/) Performance Monitoring
 
-![Firebase](https://mars-imagesimgixnet/seobot/screenshots/firebasegooglecom-ab24bd47674782df651734052f495a0c-2025-03-23jpg?auto=compress)
+![Firebase](https://mars-images.imgix.net/seobot/screenshots/firebasegooglecom-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
 
 ## Pilih Alat Pemantauan
 
@@ -77,4 +77,4 @@ Saat memilih antara alat-alat ini, pertimbangkan hal berikut:
 
 ## Panduan Pengaturan Firebase
 
-Mengatur Firebase Performance Monitoring di [aplikasi Capacitor](https://capgoapp/plugins/ivs-player/) Anda memerlukan beberapa langkah jelas untuk memastikan pelacakan data yang akurat
+Mengatur Firebase Performance Monitoring di [aplikasi Capacitor](https://capgo.app/plugins/ivs-player/) Anda memerlukan beberapa langkah jelas untuk memastikan pelacakan data yang akurat

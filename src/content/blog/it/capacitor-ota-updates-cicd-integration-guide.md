@@ -21,12 +21,12 @@ locale: it
 next_blog: ''
 ---
 
-**Vuoi aggiornare la tua app [Capacitor](https://capacitorjscom/) istantaneamente senza ritardi dell'app store?** Gli aggiornamenti Over-the-Air (OTA) ti permettono di inviare correzioni e funzionalità direttamente sui dispositivi degli utenti. Combinalo con una pipeline CI/CD e potrai automatizzare i deployment, velocizzare la correzione dei bug e migliorare l'esperienza utente.
+**Vuoi aggiornare la tua app [Capacitor](https://capacitorjs.com/) istantaneamente senza ritardi dell'app store?** Gli aggiornamenti Over-the-Air (OTA) ti permettono di inviare correzioni e funzionalità direttamente sui dispositivi degli utenti. Combinalo con una pipeline CI/CD e potrai automatizzare i deployment, velocizzare la correzione dei bug e migliorare l'esperienza utente.
 
 ### Punti Chiave:
 
 -   **Perché OTA + CI/CD?** Automatizza gli aggiornamenti, abilita i rollback e garantisce correzioni più rapide dei bug
--   **Cosa ti Serve:** App Capacitor, repository Git, piattaforma CI/CD (es. [GitHub Actions](https://docsgithubcom/actions)) e un servizio OTA come [Capgo](https://capgoapp/)
+-   **Cosa ti Serve:** App Capacitor, repository Git, piattaforma CI/CD (es. [GitHub Actions](https://docsgithubcom/actions)) e un servizio OTA come [Capgo](https://capgo.app/)
 -   **Costi di Setup:** Prevedi ~$300/mese per operazioni CI/CD; il costo una tantum di setup di Capgo è di $2.600
 -   **Best Practice:** Usa il versioning (major, minor, patch), rollout graduali e tracciamento errori per aggiornamenti fluidi
 -   **Migliori Piattaforme OTA:** Capgo si distingue per aggiornamenti veloci (114ms), alto tasso di successo (82%) e supporto globale
@@ -73,11 +73,11 @@ Mantenere le credenziali sicure è fondamentale per preservare l'integrità dell
 
 Capgo enfatizza l'importanza di una corretta configurazione nelle pipeline CI/CD:
 
-> "Configuriamo la tua pipeline CI/CD direttamente nella tua piattaforma preferita, che sia GitHub Actions, GitLab CI o altri. Non ospitiamo CI/CD né ti addebitiamo costi per mantenerla" – Capgo[\[1\]](https://capgoapp/)
+> "Configuriamo la tua pipeline CI/CD direttamente nella tua piattaforma preferita, che sia GitHub Actions, GitLab CI o altri. Non ospitiamo CI/CD né ti addebitiamo costi per mantenerla" – Capgo[\[1\]](https://capgo.app/)
 
 Nella selezione degli strumenti, dai priorità all'indipendenza dalla piattaforma, scalabilità e misure di sicurezza robuste come la crittografia end-to-end per gli aggiornamenti.
 
-L'esecuzione delle operazioni CI/CD costa tipicamente circa €300 al mese[\[1\]](https://capgoapp/), ma questo investimento si ripaga velocizzando i deployment e riducendo il lavoro manuale.
+L'esecuzione delle operazioni CI/CD costa tipicamente circa €300 al mese[\[1\]](https://capgo.app/), ma questo investimento si ripaga velocizzando i deployment e riducendo il lavoro manuale.
 
 Una volta che questi componenti sono pronti, sei pronto per integrarli nella tua pipeline CI/CD.
 
@@ -101,7 +101,7 @@ Configura la tua pipeline per attivare azioni basate su modifiche nel branch pri
 
 1. **Build**: Attivato da modifiche al codice per compilare e preparare la tua app
 2. **Test**: Automatizza i controlli di funzionalità per garantire stabilità
-3. **[Generazione Aggiornamenti](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)**: Raggruppa e ottimizza gli asset per il deployment
+3. **[Generazione Aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Raggruppa e ottimizza gli asset per il deployment
 
 Quando la tua pipeline è pronta, puoi distribuire facilmente i tuoi pacchetti di aggiornamento
 
@@ -112,7 +112,7 @@ La distribuzione degli aggiornamenti prevede l'invio dei pacchetti attraverso un
 | **Fase** | **Azione** | **Verifica** |
 | --- | --- | --- |
 | Pre-deployment | Controllo versione | Conferma il versionamento corretto |
-| Deployment | [Caricamento pacchetto](https://capgoapp/docs/webapp/bundles/) | Invia l'aggiornamento al sistema di distribuzione |
+| Deployment | [Caricamento pacchetto](https://capgo.app/docs/webapp/bundles/) | Invia l'aggiornamento al sistema di distribuzione |
 | Post-deployment | Controllo salute | Monitora e verifica lo stato dell'aggiornamento |
 
 **Consigli Pro per il Deployment:**
@@ -121,9 +121,9 @@ La distribuzione degli aggiornamenti prevede l'invio dei pacchetti attraverso un
 - Configura **rollback automatici** per gestire rapidamente i problemi
 - Integra il **tracciamento errori** per un debug migliore
 
-> "Configuriamo la tua pipeline CI/CD direttamente nella tua piattaforma preferita, che sia GitHub Actions, GitLab CI o altre. Non ospitiamo CI/CD né ti addebitiamo costi per mantenerla" – Capgo [\[1\]](https://capgoapp/)
+> "Configuriamo la tua pipeline CI/CD direttamente nella tua piattaforma preferita, che sia GitHub Actions, GitLab CI o altre. Non ospitiamo CI/CD né ti addebitiamo costi per mantenerla" – Capgo [\[1\]](https://capgo.app/)
 
-Capgo offre una tariffa una tantum di $2.600 [\[1\]](https://capgoapp/), rendendo il deployment efficiente mantenendo i costi sotto controllo
+Capgo offre una tariffa una tantum di $2.600 [\[1\]](https://capgo.app/), rendendo il deployment efficiente mantenendo i costi sotto controllo
 
 ## Linee Guida Aggiornamenti OTA
 
@@ -140,7 +140,7 @@ Usa un sistema di versionamento strutturato per gestire gli aggiornamenti OTA. Q
 | Versione Patch | Copre correzioni bug | 211 |
 | Numero Build | Identifica la build CI/CD | 211-build123 |
 
-Incorpora [canali di aggiornamento](https://capgoapp/docs/webapp/channels/) per gestire i rollout beta e produzione. Una volta implementato il sistema di versionamento, assicurati che tutti gli aggiornamenti rispettino le linee guida specifiche della piattaforma
+Incorpora [canali di aggiornamento](https://capgo.app/docs/webapp/channels/) per gestire i rollout beta e produzione. Una volta implementato il sistema di versionamento, assicurati che tutti gli aggiornamenti rispettino le linee guida specifiche della piattaforma
 
 ### Regole App Store
 

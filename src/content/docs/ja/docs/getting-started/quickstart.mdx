@@ -36,10 +36,10 @@ Capgo!のクイックスタートチュートリアルでは、以下の主要�
   <a href="/docs/getting-started/deploy/"><Card title="簡単な統合" icon="pencil">
     CapgoをCI/CDと統合し、コミットのプッシュでバンドルアップロードをトリガーします
   </Card></a>
-  <a href="/docs/getting-started/live-updates"><Card title="ライブアップデートドキュメント" icon="setting">
+  <a href="/docs/live-updates/"><Card title="ライブアップデートドキュメント" icon="setting">
     アプリストアの遅延なしでリアルタイムにリモートでアプリを更新
   </Card></a>
-  <a href="/docs/getting-started/trouble-shooting"><Card title="トラブルシューティング" icon="open-book">
+  <a href="/docs/getting-started/troubleshooting"><Card title="トラブルシューティング" icon="open-book">
     一般的な問題とその解決方法
   </Card></a>
 </CardGrid>
@@ -77,13 +77,13 @@ Android Google PlayとiOS App Storeには、Capacitor-updaterソリューショ�
 
 ### App Store
 
-2015年の[Apple Developer Program License Agreement](https://developerapplecom/programs/ios/information/)の**332**段落以降、JavaScriptとアセットのOver-the-Airアップデートが完全に許可されており、最新バージョン(20170605) [ここからダウンロード可能](https://developerapplecom/terms/)ではこの規定はさらに広範になっています：
+2015年の[Apple Developer Program License Agreement](https://developer.apple.com/programs/ios/information/)の**332**段落以降、JavaScriptとアセットのOver-the-Airアップデートが完全に許可されており、最新バージョン(20170605) [ここからダウンロード可能](https://developer.apple.com/terms/)ではこの規定はさらに広範になっています：
 
 > インタープリタされるコードはアプリケーションにダウンロードできますが、次の条件を満たす場合に限ります：(a) App Storeに提出されたアプリケーションの意図された広告目的と一致しない機能や機能性を提供することによって、アプリケーションの主要な目的を変更しない、(b) 他のコードやアプリケーションのストアやストアフロントを作成しない、(c) OSの署名、サンドボックス、その他のセキュリティ機能をバイパスしない
 
 Capacitor-updaterを使用すると、プッシュするアップデートがApp Storeで承認された元の意図から大きく逸脱しない限り、これらのルールを完全に遵守することができます。
 
-Appleのガイドラインに更に準拠するため、App Storeで配布されるアプリでは `強制アップデート` シナリオを有効にしないことを提案します。[App Store審査ガイドライン](https://developerapplecom/app-store/review/guidelines/)には以下のように記載されているためです：
+Appleのガイドラインに更に準拠するため、App Storeで配布されるアプリでは `強制アップデート` シナリオを有効にしないことを提案します。[App Store審査ガイドライン](https://developer.apple.com/app-store/review/guidelines/)には以下のように記載されているためです：
 
 > アプリは、機能やコンテンツへのアクセス、またはアプリの使用のために、ユーザーにアプリの評価、レビュー、他のアプリのダウンロード、または同様のアクションを強制してはいけません。
 

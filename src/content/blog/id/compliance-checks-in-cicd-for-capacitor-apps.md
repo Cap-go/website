@@ -20,7 +20,7 @@ locale: id
 next_blog: ''
 ---
 
-**Pemeriksaan kepatuhan dalam pipeline CI/CD adalah solusi Anda** Mereka memastikan aplikasi [Capacitor](https://capacitorjscom/) Anda memenuhi persyaratan Apple dan [Google Play](https://supportgooglecom/googleplay/android-developer/answer/113513?hl=en), menjaga keamanan yang ketat dan pembaruan yang cepat
+**Pemeriksaan kepatuhan dalam pipeline CI/CD adalah solusi Anda** Mereka memastikan aplikasi [Capacitor](https://capacitorjs.com/) Anda memenuhi persyaratan Apple dan [Google Play](https://supportgooglecom/googleplay/android-developer/answer/113513?hl=en), menjaga keamanan yang ketat dan pembaruan yang cepat
 
 Berikut mengapa pemeriksaan kepatuhan penting:
 
@@ -30,22 +30,22 @@ Berikut mengapa pemeriksaan kepatuhan penting:
 
 ### Ringkasan Cepat:
 
--   Siapkan pipeline CI/CD dengan alat seperti [Capgo](https://capgoapp/) untuk kepatuhan yang lancar
+-   Siapkan pipeline CI/CD dengan alat seperti [Capgo](https://capgo.app/) untuk kepatuhan yang lancar
 -   Otomatisasi pemeriksaan untuk iOS (label privasi, HTTPS, validasi biner) dan Google Play (validasi APK, izin, level API)
 -   Integrasikan langkah-langkah keamanan seperti enkripsi, pemeriksaan dependensi, dan pengujian
 -   Gunakan tes kinerja dan aksesibilitas untuk meningkatkan pengalaman pengguna
 
-**Capgo menyederhanakan proses ini**, menawarkan alat untuk kepatuhan otomatis, pelacakan kesalahan real-time, dan [pembaruan aman](https://capgoapp/docs/plugin/cloud-mode/hybrid-update/)
+**Capgo menyederhanakan proses ini**, menawarkan alat untuk kepatuhan otomatis, pelacakan kesalahan real-time, dan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
 
-Tetap patuh, aman, dan efisien dengan praktik CI/CD yang tepat untuk [aplikasi Capacitor](https://capgoapp/blog/capacitor-comprehensive-guide/)
+Tetap patuh, aman, dan efisien dengan praktik CI/CD yang tepat untuk [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/)
 
 ## Menggunakan DevSecOps untuk Kepatuhan dan Keamanan Berkelanjutan
 
 [[HTML_TAG]][[HTML_TAG]]
 
-## Membangun Pipeline CI/CD untuk [Capacitor](https://capacitorjscom/)
+## Membangun Pipeline CI/CD untuk [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-imagesimgixnet/seobot/screenshots/capacitorjscom-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24jpg?auto=compress)
+![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
 
 Pipeline CI/CD yang dirancang dengan baik menyederhanakan penerapan dan membantu memastikan aplikasi Anda secara konsisten memenuhi pedoman app store
 
@@ -62,7 +62,7 @@ Setelah memilih platform, konfigurasikan pipeline Anda untuk memungkinkan build 
 
 ### Pengaturan Pipeline Dasar
 
-Siapkan dependensi build dan variabel lingkungan untuk mempertahankan kepatuhan. Capgo terintegrasi dengan sebagian besar platform CI/CD utama dan tidak memerlukan hosting [\[1\]](https://capgoapp/)
+Siapkan dependensi build dan variabel lingkungan untuk mempertahankan kepatuhan. Capgo terintegrasi dengan sebagian besar platform CI/CD utama dan tidak memerlukan hosting [\[1\]](https://capgo.app/)
 
 Langkah-langkah pengaturan inti meliputi:
 
@@ -72,14 +72,14 @@ Langkah-langkah pengaturan inti meliputi:
 
 ### Menambahkan Alat Kepatuhan
 
-Setelah pipeline Anda berjalan, sertakan alat untuk menegakkan standar app store. Pemeriksaan kepatuhan otomatis membantu memastikan pembaruan memenuhi persyaratan Apple dan Google Play sambil menjaga penerapan tetap cepat [\[1\]](https://capgoapp/)
+Setelah pipeline Anda berjalan, sertakan alat untuk menegakkan standar app store. Pemeriksaan kepatuhan otomatis membantu memastikan pembaruan memenuhi persyaratan Apple dan Google Play sambil menjaga penerapan tetap cepat [\[1\]](https://capgo.app/)
 
 Langkah-langkah untuk mengintegrasikan alat kepatuhan:
 
 -   **Otomatisasi pemindaian kode untuk mengidentifikasi dan memblokir pembaruan yang tidak patuh**
 -   **Gunakan alat pemantauan untuk melacak kepatuhan dan memberi tahu tim tentang masalah**
 
-> "Capgo adalah alat yang wajib dimiliki bagi pengembang yang ingin lebih produktif. Menghindari peninjauan untuk perbaikan bug sangatlah berharga" - Bessie Cooper [\[1\]](https://capgoapp/)
+> "Capgo adalah alat yang wajib dimiliki bagi pengembang yang ingin lebih produktif. Menghindari peninjauan untuk perbaikan bug sangatlah berharga" - Bessie Cooper [\[1\]](https://capgo.app/)
 
 ## Otomatisasi Kepatuhan App Store
 
@@ -96,7 +96,7 @@ Untuk aplikasi iOS, pemeriksaan otomatis harus mencakup:
 
 ### Persyaratan [Google Play](https://supportgooglecom/googleplay/android-developer/answer/113513?hl=en)
 
-![Google Play](https://mars-imagesimgixnet/seobot/screenshots/supportgooglecom-6a40cdc10f6ab14acd7c2475e5b73e8c-2025-03-24jpg?auto=compress)
+![Google Play](https://mars-images.imgix.net/seobot/screenshots/supportgooglecom-6a40cdc10f6ab14acd7c2475e5b73e8c-2025-03-24.jpg?auto=compress)
 
 Saat menargetkan Google Play, fokuskan pada verifikasi kunci berikut:
 
@@ -107,9 +107,9 @@ Saat menargetkan Google Play, fokuskan pada verifikasi kunci berikut:
 
 Menggunakan tools bawaan untuk otomatisasi kepatuhan dapat membuat proses ini lebih efisien
 
-### Tool Kepatuhan [Capgo](https://capgoapp/)
+### Tool Kepatuhan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-imagesimgixnet/seobot/screenshots/capgoapp-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24jpg?auto=compress)
+![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgo meningkatkan alur kerja kepatuhan dengan tools yang terintegrasi langsung ke pipeline CI/CD Anda. Berikut cara Capgo dapat membantu:
 
@@ -117,9 +117,9 @@ Capgo meningkatkan alur kerja kepatuhan dengan tools yang terintegrasi langsung 
 -   **Kontrol versi otomatis** memungkinkan rollback instan saat diperlukan  
 -   **Analitik real-time** memberikan wawasan tentang kinerja dan keberhasilan update
 
-> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgoapp/)
+> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Untuk tim yang menangani beberapa versi aplikasi, [sistem channel](https://capgoapp/docs/plugin/cloud-mode/channel-system/) Capgo mendukung pengujian beta yang ditargetkan dan peluncuran bertahap [\[1\]](https://capgoapp/)
+Untuk tim yang menangani beberapa versi aplikasi, [sistem channel](https://capgo.app/docs/plugin/cloud-mode/channel-system/) Capgo mendukung pengujian beta yang ditargetkan dan peluncuran bertahap [\[1\]](https://capgo.app/)
 
 ## Pemeriksaan Keamanan dan Privasi
 
@@ -141,7 +141,7 @@ Mengamankan data lebih dari sekadar memindai kerentanan. Ini membutuhkan praktik
 
 | Persyaratan Keamanan | Metode Implementasi | Proses Verifikasi |
 | --- | --- | --- |
-| [Enkripsi Data](https://capgoapp/docs/cli/migrations/encryption/) | Enkripsi end-to-end | Pemeriksaan sertifikat otomatis |
+| [Enkripsi Data](https://capgo.app/docs/cli/migrations/encryption/) | Enkripsi end-to-end | Pemeriksaan sertifikat otomatis |
 | Penyimpanan Aman | Penyimpanan lokal terenkripsi | Peninjauan izin penyimpanan |
 | Keamanan Jaringan | Menerapkan koneksi HTTPS | Validasi SSL/TLS |
 | Kontrol Akses | Izin berbasis peran | Pengujian autentikasi |
@@ -156,9 +156,9 @@ Beberapa fitur yang menonjol termasuk:
 -   **Rollback otomatis** untuk segera mengatasi masalah keamanan saat muncul
 -   **Pelacakan kesalahan real-time** untuk mendeteksi dan menyelesaikan potensi masalah dengan segera
 
-> "Satu-satunya solusi dengan enkripsi end-to-end sejati, yang lain hanya menandatangani update" - Capgo [\[1\]](https://capgoapp/)
+> "Satu-satunya solusi dengan enkripsi end-to-end sejati, yang lain hanya menandatangani update" - Capgo [\[1\]](https://capgo.app/)
 
-Capgo memiliki tingkat keberhasilan update 95% dalam 24 jam [\[1\]](https://capgoapp/), menggabungkan keamanan yang kuat dengan deployment cepat
+Capgo memiliki tingkat keberhasilan update 95% dalam 24 jam [\[1\]](https://capgo.app/), menggabungkan keamanan yang kuat dengan deployment cepat
 
 Untuk tim yang menyertakan pemeriksaan keamanan, Capgo terintegrasi dengan mulus dengan platform CI/CD populer seperti [GitHub Actions](https://docsgithubcom/actions), [GitLab CI](https://docsgitlabcom/ee/ci/), dan [Jenkins](https://wwwjenkinsio/) Ini memungkinkan pemeriksaan keamanan otomatis di setiap langkah deployment
 

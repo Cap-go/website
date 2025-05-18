@@ -49,7 +49,7 @@ Für jede Anwendung, ob mobil, Web oder Salesforce:
 
 Im Grunde ist dies der Gitlab Flow:
 
-![Gitlab Flow](/RBW_Gitlab_Flowwebp)
+![Gitlab Flow](/RBW_Gitlab_Flow.webp)
 
 *Gitlab Flow - Quelle https://faundev/c/stories/manuelherrera/git-branching-strategies-in-2022*
 

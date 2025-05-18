@@ -64,7 +64,7 @@ OTAアップデートはネットワークの問題やバージョンの競合�
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
 
-CapgoはOTAアップデート管理のための強力なツールです。組み込みのモニタリング、ロールバックオプション、エンドツーエンドの暗号化による安全な配信などの機能を提供します。さらに、CI/CD統合によりデプロイメントがスムーズになります[\[3\]](https://appinventiv.com/blog/how-ci-cd-helps-mobile-app-development/)。
+CapgoはOTAアップデート管理のための強力なツールです。組み込みのモニタリング、ロールバックオプション、エンドツーエンドの暗号化による安全な配信などの機能を提供します。さらに、CI/CD統合によりデプロイメントがスムーズになります[\[3\]](https://appinventiv.com/blog/how-ci-cd-helps-mobile-app-development/) 。
 
 Capgoの主な機能:
 
@@ -182,7 +182,7 @@ Capgoの分析ツールで主要な指標を追跡します:
 
 API更新に対処する際は、後方互換性を優先します。互換性レイヤーを使用することで、様々なOSバージョンを持つデバイス間でアップデートがスムーズに実行されるよう、APIバージョン間のギャップを埋めることができます。
 
-自動テストを活用するチームの場合、複数のAPIバージョンに対してアップデートを検証するようにCI/CDパイプラインを設定します。この予防的なアプローチにより、互換性の問題が本番環境に入り込むリスクを最小限に抑えることができます[\[3\]](https://appinventiv.com/blog/how-ci-cd-helps-mobile-app-development/)。
+自動テストを活用するチームの場合、複数のAPIバージョンに対してアップデートを検証するようにCI/CDパイプラインを設定します。この予防的なアプローチにより、互換性の問題が本番環境に入り込むリスクを最小限に抑えることができます[\[3\]](https://appinventiv.com/blog/how-ci-cd-helps-mobile-app-development/) 。
 
 ## セキュリティとルール
 
