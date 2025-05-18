@@ -1,6 +1,6 @@
 ---
 title: "Cordova"
-description: "Will capacitor-updater be available in Cordova?"
+description: "Exploring the potential availability of the capacitor-updater plugin for Cordova and the challenges involved in its development."
 sidebar:
   order: 8
 ---
