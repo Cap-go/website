@@ -105,15 +105,17 @@ const config: CapacitorConfig = {
   bundledWebRuntime: false,
   plugins: {
     CapacitorUpdater : {
-      statsUrl: "http://localhost:54321/functions/v1/stats",
-      channelUrl: "http://localhost:54321/functions/v1/channel_self",
-      updateUrl: "http://localhost:54321/functions/v1/updates"
+      statsUrl: "https://localhost:54321/functions/v1/stats",
+      channelUrl: "https://localhost:54321/functions/v1/channel_self",
+      updateUrl: "https://localhost:54321/functions/v1/updates"
     },
   },
 };
 ```
 
 This will enable you to use local capgo in development. However, by default, this is not enough.
+
+> You do need to setup HTTPS for Both os to be able to test
 
 # Conclusion
 
