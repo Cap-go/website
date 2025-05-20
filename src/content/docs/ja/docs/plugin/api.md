@@ -22,9 +22,9 @@ CapacitorUpdaterは以下のオプションで設定できます：
 | **`autoDeletePrevious`** | <code>boolean</code> | アップデート成功後に以前のバンドルを自動的に削除するかどうかを設定します。AndroidとiOSのみで利用可能です | <code>true</code> | |
 | **`autoUpdate`** | <code>boolean</code> | アップデートサーバーを介した自動アップデートを使用するかどうかを設定します。AndroidとiOSのみで利用可能です | <code>true</code> | |
 | **`resetWhenUpdate`** | <code>boolean</code> | 新しいネイティブアプリバンドルがデバイスにインストールされた時に、以前にダウンロードしたバンドルを自動的に削除します。AndroidとiOSのみで利用可能です | <code>true</code> | |
-| **`updateUrl`** | <code>string</code> | アップデートチェックが送信されるURL/エンドポイントを設定します。AndroidとiOSのみで利用可能です | <code>https://plugincapgo.app/updates</code> | |
-| **`channelUrl`** | <code>string</code> | チャンネル操作用のURL/エンドポイントを設定します。AndroidとiOSのみで利用可能です | <code>https://plugincapgo.app/channel_self</code> | |
-| **`statsUrl`** | <code>string</code> | アップデート統計が送信されるURL/エンドポイントを設定します。AndroidとiOSのみで利用可能です。統計レポートを無効にするには""に設定します | <code>https://plugincapgo.app/stats</code> | |
+| **`updateUrl`** | <code>string</code> | アップデートチェックが送信されるURL/エンドポイントを設定します。AndroidとiOSのみで利用可能です | <code>https://plugin.capgo.app/updates</code> | |
+| **`channelUrl`** | <code>string</code> | チャンネル操作用のURL/エンドポイントを設定します。AndroidとiOSのみで利用可能です | <code>https://plugin.capgo.app/channel_self</code> | |
+| **`statsUrl`** | <code>string</code> | アップデート統計が送信されるURL/エンドポイントを設定します。AndroidとiOSのみで利用可能です。統計レポートを無効にするには""に設定します | <code>https://plugin.capgo.app/stats</code> | |
 | **`privateKey`** | <code>string</code> | エンドツーエンドのライブアップデート暗号化用の秘密鍵を設定します。AndroidとiOSのみで利用可能です。バージョン620で非推奨となり、バージョン700で削除予定です | <code>undefined</code> | |
 | **`publicKey`** | <code>string</code> | エンドツーエンドのライブアップデート暗号化用の公開鍵を設定します（バージョン2）。AndroidとiOSのみで利用可能です | <code>undefined</code> | 620 |
 | **`version`** | <code>string</code> | アプリの現在のバージョンを設定します。これは最初のアップデートリクエストで使用されます。設定されていない場合、プラグインはネイティブコードからバージョンを取得します。AndroidとiOSのみで利用可能です | <code>undefined</code> | 41748 |

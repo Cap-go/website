@@ -44,7 +44,7 @@ Kemudian lakukan `npm run build && npx cap copy` untuk memperbarui aplikasi Anda
 
 ### Masuk ke Capgo CLOUD
 
-Pertama, gunakan `all` [apikey](https://webcapgo.app/dashboard/apikeys/) yang ada di akun Anda untuk masuk dengan CLI:
+Pertama, gunakan `all` [apikey](https://web.capgo.app/dashboard/apikeys/) yang ada di akun Anda untuk masuk dengan CLI:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
@@ -63,7 +63,7 @@ Jalankan perintah untuk membangun kode Anda dan mengirimkannya ke Capgo dengan:
 
 Secara default, nama versi akan menjadi nama yang ada di file `packagejson` Anda.
 
-Periksa di [Capgo](https://webcapgo.app/) jika build sudah ada.
+Periksa di [Capgo](https://web.capgo.app/) jika build sudah ada.
 
 Anda bahkan dapat mengujinya dengan [aplikasi sandbox mobile](https://capgo.app/app_mobile/) saya.
 

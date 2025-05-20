@@ -45,7 +45,7 @@ Ensuite, exécutez `npm run build && npx cap copy` pour mettre à jour votre app
 
 ### Connexion à Capgo CLOUD
 
-Tout d'abord, utilisez la `clé API` [apikey](https://webcapgo.app/dashboard/apikeys/) présente dans votre compte pour vous connecter avec la CLI :
+Tout d'abord, utilisez la `clé API` [apikey](https://web.capgo.app/dashboard/apikeys/) présente dans votre compte pour vous connecter avec la CLI :
 
 `npx @capgo/cli@latest login VOTRE_CLÉ`
 
@@ -64,7 +64,7 @@ Exécutez la commande pour construire votre code et l'envoyer à Capgo avec :
 
 Par défaut, le nom de la version sera celui figurant dans votre fichier `packagejson`.
 
-Vérifiez dans [Capgo](https://webcapgo.app/) si la construction est présente.
+Vérifiez dans [Capgo](https://web.capgo.app/) si la construction est présente.
 
 Vous pouvez même le tester avec mon [application mobile sandbox](https://capgo.app/app_mobile/).
 

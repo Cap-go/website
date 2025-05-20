@@ -44,7 +44,7 @@ Aquí hay una guía rápida para estructurar tu corrección:
 
 Con la capacidad de actualización instantánea de Capgo, puedes concentrarte en corregir el error sin preocuparte por agrupar cambios no relacionados. Este método ha demostrado ser efectivo, como destaca colenso:
 
-> "Implementamos [actualizaciones OTA de Capgo](https://webcapgo.app/resend_email) en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo" [\[1\]](https://capgo.app/)
+> "Implementamos [actualizaciones OTA de Capgo](https://web.capgo.app/resend_email) en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo" [\[1\]](https://capgo.app/)
 
 ### Prueba en Tu Dispositivo
 

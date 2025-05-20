@@ -188,7 +188,7 @@ Default: `undefined`
 Ketika pembaruan toko terjadi, nonaktifkan reset paksa ke versi native
 :::
 
-Ada banyak pengaturan lain yang tersedia hanya di [web app](https://webcapgo.app/login)
+Ada banyak pengaturan lain yang tersedia hanya di [web app](https://web.capgo.app/login)
 
 Untuk mengonfigurasi plugin, gunakan pengaturan ini:
 

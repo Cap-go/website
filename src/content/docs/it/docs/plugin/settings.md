@@ -188,7 +188,7 @@ Predefinito: `undefined`
 Quando avviene un aggiornamento del negozio, disabilita il reset forzato alla versione nativa
 :::
 
-Ci sono molte altre impostazioni disponibili solo sulla [web app](https://webcapgo.app/login)
+Ci sono molte altre impostazioni disponibili solo sulla [web app](https://web.capgo.app/login)
 
 Per configurare il plugin, usa queste impostazioni:
 
