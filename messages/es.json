@@ -7,6 +7,7 @@
   "GB_included": "GB incluido",
   "TB_included": "TB incluido",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "Un elemento específico de tu aplicación no funciona y no sabes dónde está el problema ni cómo solucionarlo.",
+  "aasa_tester": "Probador de AASA",
   "about": "Acerca de",
   "about_capgo": "Acerca de Capgo",
   "access_control": "Capgo hereda el control de acceso seguro y la autenticación de las plataformas Supabase y Cloudflare en las que está construido.",
@@ -136,6 +137,7 @@
   "contact_us_text": "Si tiene alguna pregunta sobre este descargo de responsabilidad, puede contactarnos:",
   "contact_us_title": "Contáctanos",
   "contact_us_website": "Al visitar esta página en el sitio web:",
+  "content_marketer": "Marketer de Contenido",
   "contributing": "Contribuyendo",
   "contributing_description": "Cómo contribuir al código abierto de Capgo",
   "control_access_levels": "Controlar los Niveles de Acceso",
@@ -1301,6 +1303,7 @@
   "without_capgo": "Sin Capgo",
   "without_capgo_description": "Esperando semanas para la aprobación de la tienda de aplicaciones, los usuarios quedan atrapados con errores",
   "worldwide_success_rate": "tasa de éxito mundial",
+  "written_by": "Escrito por",
   "wrong_app_testing": "Prueba de aplicación incorrecta, ida y vuelta inútil entre equipos",
   "yearly": "Anual",
   "yearly_plan": "Plan Anual",
@@ -1311,7 +1314,5 @@
   "you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to": "¿Quieres corregir un error o agregar una nueva función a <code>capacitor-updater</code>? Este es el repositorio al que deseas contribuir.",
   "your_challenges_are_my_challenges": "Tus desafíos son mis desafíos.",
   "your_live_update_solution_for_capacitor_apps": "Tu solución de actualización en vivo para aplicaciones de condensador",
-  "youre_in_good_company": "Estás en buena compañía.",
-  "written_by": "Escrito por",
-  "content_marketer": "Marketer de Contenido"
+  "youre_in_good_company": "Estás en buena compañía."
 }

@@ -7,6 +7,7 @@
   "GB_included": "Go inclus",
   "TB_included": "TB inclus",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "Un élément spécifique de votre application ne fonctionne pas et vous ne savez pas où se trouve le problème ni comment le résoudre.",
+  "aasa_tester": "Testeur AASA",
   "about": "À propos",
   "about_capgo": "À propos de Capgo",
   "access_control": "Capgo hérite du contrôle d'accès sécurisé et de l'authentification des plateformes Supabase et Cloudflare sur lesquelles il est construit.",
@@ -136,6 +137,7 @@
   "contact_us_text": "Si vous avez des questions concernant cette Clause de non-responsabilité, vous pouvez nous contacter :",
   "contact_us_title": "Nous Contacter",
   "contact_us_website": "En visitant cette page du site web :",
+  "content_marketer": "Marketer Content",
   "contributing": "Contribution",
   "contributing_description": "Comment contribuer à l'open source de Capgo",
   "control_access_levels": "Contrôle des niveaux d'accès",
@@ -1301,6 +1303,7 @@
   "without_capgo": "Sans Capgo",
   "without_capgo_description": "En attente de semaines pour l'approbation de l'App Store, les utilisateurs sont coincés avec des bugs",
   "worldwide_success_rate": "taux de réussite mondial",
+  "written_by": "Écrit par",
   "wrong_app_testing": "Test de l'application incorrect, va-et-vient inutile entre les équipes",
   "yearly": "Annuel",
   "yearly_plan": "Forfait annuel",
@@ -1311,7 +1314,5 @@
   "you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to": "Vous souhaitez corriger un bug ou ajouter une nouvelle fonctionnalité à <code>capacitor-updater</code> ? C'est le dépôt auquel vous souhaitez contribuer.",
   "your_challenges_are_my_challenges": "Vos défis sont mes défis",
   "your_live_update_solution_for_capacitor_apps": "Votre solution de mises à jour en direct pour les applications Capacitor",
-  "youre_in_good_company": "Vous êtes en bonne compagnie.",
-  "written_by": "Écrit par",
-  "content_marketer": "Marketer Content"
+  "youre_in_good_company": "Vous êtes en bonne compagnie."
 }

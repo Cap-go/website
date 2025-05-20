@@ -7,6 +7,7 @@
   "GB_included": "GB eingeschlossen",
   "TB_included": "TB enthalten",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "Ein bestimmtes Element Ihrer App funktioniert nicht und Sie wissen nicht, wo das Problem liegt und wie Sie es beheben können.",
+  "aasa_tester": "AASA Tester",
   "about": "Über",
   "about_capgo": "Über Capgo",
   "access_control": "Capgo erbt sichere Zugriffskontrolle und Authentifizierung von den Plattformen Supabase und Cloudflare, auf denen es aufgebaut ist.",
@@ -136,6 +137,7 @@
   "contact_us_text": "Wenn Sie Fragen zu diesem Haftungsausschluss haben, können Sie uns kontaktieren:",
   "contact_us_title": "Kontaktieren Sie uns",
   "contact_us_website": "Indem Sie diese Seite auf der Website besuchen:",
+  "content_marketer": "Content Marketer",
   "contributing": "Beitragen",
   "contributing_description": "Wie man zu Capgo Open Source beiträgt",
   "control_access_levels": "Zugriffslevel steuern",
@@ -1301,6 +1303,7 @@
   "without_capgo": "Ohne Capgo",
   "without_capgo_description": "Wochenlanges Warten auf die Genehmigung des App Stores, Benutzer stecken mit Fehlern fest",
   "worldwide_success_rate": "weltweite Erfolgsquote",
+  "written_by": "Geschrieben von",
   "wrong_app_testing": "Test falsche App, nutzloses Hin und Her zwischen Teams",
   "yearly": "Jährlich",
   "yearly_plan": "Jahresplan",
@@ -1311,7 +1314,5 @@
   "you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to": "Möchten Sie einen Fehler beheben oder eine neue Funktion zu <code>capacitor-updater</code> hinzufügen? Dies ist das Repository, zu dem Sie beitragen möchten.",
   "your_challenges_are_my_challenges": "Deine Herausforderungen sind meine Herausforderungen.",
   "your_live_update_solution_for_capacitor_apps": "Ihre Live-Update-Lösung für Capacitor-Apps",
-  "youre_in_good_company": "Du bist in guter Gesellschaft.",
-  "written_by": "Geschrieben von",
-  "content_marketer": "Content Marketer"
+  "youre_in_good_company": "Du bist in guter Gesellschaft."
 }

@@ -7,6 +7,7 @@
   "GB_included": "포함된 GB",
   "TB_included": "TB 포함",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "앱의 특정 요소가 작동하지 않고 문제가 어디에 있는지, 어떻게 해결해야 할지 모르겠습니다.",
+  "aasa_tester": "AASA 테스터",
   "about": "소개",
   "about_capgo": "Capgo 소개",
   "access_control": "Capgo는 그것이 구축된 Supabase와 Cloudflare 플랫폼으로부터 안전한 접근 제어 및 인증을 상속받습니다.",
@@ -136,6 +137,7 @@
   "contact_us_text": "이 면책 조항에 대해 궁금한 점이 있으시면 다음으로 연락 주시기 바랍니다:",
   "contact_us_title": "연락처",
   "contact_us_website": "다음 웹사이트 페이지를 방문하여:",
+  "content_marketer": "콘텐츠 마케터",
   "contributing": "기여하기",
   "contributing_description": "Capgo 오픈 소스에 기여하는 방법",
   "control_access_levels": "액세스 레벨 제어",
@@ -1301,6 +1303,7 @@
   "without_capgo": "Capgo 없이",
   "without_capgo_description": "앱 스토어 승인을 몇 주간 기다리는 동안, 사용자들은 버그에 갇혀 있습니다.",
   "worldwide_success_rate": "전 세계적인 성공률",
+  "written_by": "작성자",
   "wrong_app_testing": "테스트 잘못된 앱, 팀 간의 쓸모없는 왕복",
   "yearly": "연간",
   "yearly_plan": "연간 요금제",
@@ -1311,7 +1314,5 @@
   "you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to": "<code>capacitor-updater</code>의 버그를 수정하거나 새로운 기능을 추가하고 싶으신가요? 이 저장소가 바로 여러분이 기여하고자 하는 곳입니다.",
   "your_challenges_are_my_challenges": "당신의 도전은 곧 나의 도전입니다",
   "your_live_update_solution_for_capacitor_apps": "Capacitor 앱을 위한 실시간 업데이트 솔루션",
-  "youre_in_good_company": "당신은 좋은 동료와 함께 있습니다.",
-  "written_by": "작성자",
-  "content_marketer": "콘텐츠 마케터"
+  "youre_in_good_company": "당신은 좋은 동료와 함께 있습니다."
 }

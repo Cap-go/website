@@ -7,6 +7,7 @@
   "GB_included": "GB termasuk",
   "TB_included": "TB termasuk",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "Salah satu elemen spesifik dari aplikasi Anda tidak berfungsi dan Anda tidak tahu dimana masalahnya dan bagaimana cara memperbaikinya.",
+  "aasa_tester": "Penguji AASA",
   "about": "Tentang",
   "about_capgo": "Tentang Capgo",
   "access_control": "Capgo mewarisi kontrol akses yang aman dan otentikasi dari platform Supabase dan Cloudflare tempat ia dibangun.",
@@ -136,6 +137,7 @@
   "contact_us_text": "Jika Anda memiliki pertanyaan tentang Penafian ini, Anda dapat menghubungi Kami:",
   "contact_us_title": "Hubungi Kami",
   "contact_us_website": "Dengan mengunjungi halaman ini di situs web:",
+  "content_marketer": "Marketer Konten",
   "contributing": "Berkontribusi",
   "contributing_description": "Cara berkontribusi pada Capgo sumber terbuka",
   "control_access_levels": "Kontrol Tingkatan Akses",
@@ -1301,6 +1303,7 @@
   "without_capgo": "Tanpa Capgo",
   "without_capgo_description": "Menunggu berhari-hari untuk persetujuan app store, pengguna terjebak dengan bug",
   "worldwide_success_rate": "tingkat keberhasilan di seluruh dunia",
+  "written_by": "Ditulis oleh",
   "wrong_app_testing": "Uji aplikasi yang salah, sia-sia bolak-balik antara tim-tim",
   "yearly": "Tahunannya",
   "yearly_plan": "Rencana Tahunan",
@@ -1311,7 +1314,5 @@
   "you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to": "Anda ingin memperbaiki bug atau menambahkan fitur baru ke <code>capacitor-updater</code>? Ini adalah repositori yang ingin Anda kontribusikan.",
   "your_challenges_are_my_challenges": "Tantanganmu adalah tantanganku.",
   "your_live_update_solution_for_capacitor_apps": "Solusi Pembaruan Langsung Anda untuk Aplikasi Kapasitor",
-  "youre_in_good_company": "Anda tidak sendirian.",
-  "written_by": "Ditulis oleh",
-  "content_marketer": "Marketer Konten"
+  "youre_in_good_company": "Anda tidak sendirian."
 }

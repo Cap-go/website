@@ -7,6 +7,7 @@
   "GB_included": "GB incluido",
   "TB_included": "TB incluso",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "Un elemento específico de tu aplicación no funciona y no sabes dónde está el problema ni cómo solucionarlo.",
+  "aasa_tester": "Tester AASA",
   "about": "Info",
   "about_capgo": "A proposito di Capgo",
   "access_control": "Capgo eredita il controllo di accesso sicuro e l'autenticazione dalle piattaforme Supabase e Cloudflare su cui è costruito.",
@@ -136,6 +137,7 @@
   "contact_us_text": "Se você tiver alguma dúvida sobre este Aviso de Isenção de Responsabilidade, pode entrar em contato conosco:",
   "contact_us_title": "Contattaci",
   "contact_us_website": "Visitando esta página en el sitio web:",
+  "content_marketer": "Marketer di Contenuti",
   "contributing": "Contribuindo",
   "contributing_description": "Comment contribuer à Capgo open source",
   "control_access_levels": "Controlar Níveis de Acesso",
@@ -1301,6 +1303,7 @@
   "without_capgo": "Senza Capgo",
   "without_capgo_description": "In attesa di settimane per l'approvazione dell'app store, gli utenti sono bloccati con i bug",
   "worldwide_success_rate": "tasso di successo mondiale",
+  "written_by": "Scritto da",
   "wrong_app_testing": "Test dell'app errata, inutile vai e vieni tra i team",
   "yearly": "Anual",
   "yearly_plan": "Piano annuale",
@@ -1311,7 +1314,5 @@
   "you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to": "Volete risolvere un bug o aggiungere una nuova funzionalità a <code>capacitor-updater</code>? Questo è il repository a cui volete contribuire.",
   "your_challenges_are_my_challenges": "Tus desafíos son mis desafíos.",
   "your_live_update_solution_for_capacitor_apps": "La tua soluzione di aggiornamento live per le app con Capacitor",
-  "youre_in_good_company": "Sei in buona compagnia.",
-  "written_by": "Scritto da",
-  "content_marketer": "Marketer di Contenuti"
+  "youre_in_good_company": "Sei in buona compagnia."
 }

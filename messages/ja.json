@@ -7,6 +7,7 @@
   "GB_included": "GBを含む",
   "TB_included": "TBが含まれています",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "アプリの特定の要素が機能せず、問題の所在や修正方法がわからない。",
+  "aasa_tester": "AASAテスター",
   "about": "について",
   "about_capgo": "Capgoについて",
   "access_control": "Capgoは、それが構築されているSupabaseとCloudflareプラットフォームから安全なアクセス制御と認証を継承します。",
@@ -136,6 +137,7 @@
   "contact_us_text": "この免責事項について質問がある場合は、お問い合わせください。",
   "contact_us_title": "お問い合わせ",
   "contact_us_website": "このウェブサイトのページを訪れることで：",
+  "content_marketer": "コンテンツマーケター",
   "contributing": "貢献する",
   "contributing_description": "Capgoオープンソースに貢献する方法",
   "control_access_levels": "アクセスレベルを管理する",
@@ -1301,6 +1303,7 @@
   "without_capgo": "Capgoなしで",
   "without_capgo_description": "アプリストアの承認を数週間待って、ユーザーはバグに困っています",
   "worldwide_success_rate": "世界的な成功率",
+  "written_by": "著者",
   "wrong_app_testing": "テストが間違ったアプリ、チーム間の無駄な行き来",
   "yearly": "年次",
   "yearly_plan": "年次プラン",
@@ -1311,7 +1314,5 @@
   "you_want_to_fix_a_bug_or_add_a_new_feature_to_capacitor_updater_this_is_the_repository_you_want_to_contribute_to": "<code>capacitor-updater</code>にバグを修正したり新機能を追加したりしたいですか？これは貢献したいリポジトリです。",
   "your_challenges_are_my_challenges": "あなたの挑戦は私の挑戦です。",
   "your_live_update_solution_for_capacitor_apps": "キャパシタアプリのためのライブアップデートソリューション",
-  "youre_in_good_company": "あなたは良い仲間と一緒にいます。",
-  "written_by": "著者",
-  "content_marketer": "コンテンツマーケター"
+  "youre_in_good_company": "あなたは良い仲間と一緒にいます。"
 }
