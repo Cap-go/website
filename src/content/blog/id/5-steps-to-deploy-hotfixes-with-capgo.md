@@ -46,7 +46,7 @@ Berikut panduan singkat untuk menyusun hotfix Anda:
 
 Dengan kemampuan pembaruan instan Capgo, Anda dapat fokus memperbaiki bug tanpa khawatir tentang penggabungan perubahan yang tidak terkait. Metode ini terbukti efektif, seperti yang disoroti oleh colenso:
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://webcapgo.app/resend_email) dalam produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar, hampir semua pengguna kami sudah diperbarui dalam hitungan menit setelah OTA diterapkan ke @Capgo" [\[1\]](https://capgo.app/)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) dalam produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar, hampir semua pengguna kami sudah diperbarui dalam hitungan menit setelah OTA diterapkan ke @Capgo" [\[1\]](https://capgo.app/)
 
 ### Uji pada Perangkat Anda
 

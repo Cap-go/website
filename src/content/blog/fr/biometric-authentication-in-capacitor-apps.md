@@ -97,7 +97,7 @@ Pour configurer l'authentification biométrique sur Android, vous devrez apporte
     
     Mettez à jour le fichier `build.gradle` de votre application pour inclure les dépendances biométriques nécessaires :
     
-    ```gradle
+    ```kotlin
     dependencies {
         implementation "androidx.biometric:biometric:1.1.0"
     }

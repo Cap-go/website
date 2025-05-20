@@ -38,7 +38,7 @@ Sonra uygulamanızı güncellemek için `npm run build && npx cap copy` komutunu
 
 ### Capgo CLOUD'a Giriş Yap
 
-Öncelikle, CLI ile giriş yapmak için hesabınızdaki `all` [apikey](https://webcapgo.app/dashboard/apikeys/) kullanın:
+Öncelikle, CLI ile giriş yapmak için hesabınızdaki `all` [apikey](https://web.capgo.app/dashboard/apikeys/) kullanın:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
@@ -57,7 +57,7 @@ Kodunuzu derleyip Capgo'ya göndermek için komutu çalıştırın:
 
 Varsayılan olarak, sürüm adı `packagejson` dosyanızdaki ad olacaktır.
 
-Yapının mevcut olup olmadığını [Capgo](https://webcapgo.app/) kontrol edin.
+Yapının mevcut olup olmadığını [Capgo](https://web.capgo.app/) kontrol edin.
 
 Bunu, [mobil kumanda uygulamamla](https://capgo.app/app_mobile/) test edebilirsiniz.
 

@@ -44,7 +44,7 @@ CapacitorUpdater.notifyAppReady()
 
 ### Capgo CLOUD에 로그인하세요.
 
-먼저 계정에 있는 `all` [apikey](https://webcapgo.app/dashboard/apikeys/)를 사용하여 CLI로 로그인합니다.
+먼저 계정에 있는 `all` [apikey](https://web.capgo.app/dashboard/apikeys/)를 사용하여 CLI로 로그인합니다.
 
 `npx @capgo/cli@최신 로그인 YOU_KEY`
 
@@ -63,7 +63,7 @@ CapacitorUpdater.notifyAppReady()
 
 기본적으로 버전 이름은 `packagejson` 파일에 있는 이름입니다.
 
-빌드가 있는지 [Capgo](https://webcapgo.app/)에서 확인하세요.
+빌드가 있는지 [Capgo](https://web.capgo.app/)에서 확인하세요.
 
 내 [모바일 샌드박스 앱](https://capgo.app/app_mobile/)으로 테스트할 수도 있습니다.
 
