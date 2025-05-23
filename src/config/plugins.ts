@@ -211,6 +211,15 @@ export const actions = [
     title: 'Streamcall',
     icon: VideoCameraIcon,
   },
+  // @capgo/capacitor-autofill-save-password
+  {
+    name: '@capgo/capacitor-autofill-save-password',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for save password in autofill of the device',
+    href: 'https://github.com/Cap-go/capacitor-autofill-save-password/',
+    title: 'Autofill Save Password',
+    icon: UserCircleIcon,
+  },
   // add https://github.com/Cap-go/capacitor-social-login
   {
     name: '@capgo/capacitor-social-login',
