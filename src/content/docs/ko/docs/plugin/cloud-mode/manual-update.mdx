@@ -54,10 +54,7 @@ App.addListener('appStateChange', async (state: any) => {
     const latest = await CapacitorUpdater.getLatest()
     console.log('latest', latest)
     if (latest.url) {
-      data = await CapacitorUpdater.download({
-        url: latest.url,
-        version: latest.version,
-      })
+      data = await CapacitorUpdater.download(latest)
       console.log('download', data)
     }
   }

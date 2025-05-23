@@ -300,9 +300,7 @@ async function checkForUpdates() {
   const latest = await CapacitorUpdater.getLatest();
 
   if (current.version !== latest.version) {
-    await CapacitorUpdater.download({
-      version: latest.version
-    });
+    await CapacitorUpdater.download(latest);
   }
 }
 ```
