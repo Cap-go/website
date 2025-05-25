@@ -209,7 +209,7 @@ For iOS, update the `Info.plist` file:
 
 For Android, modify `android/app/build.gradle`:
 
-```gradle
+```kotlin
 android {
     defaultConfig {
         minSdkVersion 21
