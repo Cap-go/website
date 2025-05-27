@@ -123,7 +123,7 @@ const navigation: Record<string, NavigationItem[]> = {
 ---
 
 <footer class="bg-white" aria-labelledby="footer-heading">
-  <h2 id="footer-heading" class="sr-only">{m.footer({}, { locale: Astro.locals.locale })}</h2>
+  <p id="footer-heading" class="sr-only">{m.footer({}, { locale: Astro.locals.locale })}</p>
   <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
     <div class="xl:grid xl:grid-cols-3 xl:gap-8">
       <div class="space-y-8 xl:col-span-1">
@@ -183,7 +183,7 @@ const navigation: Record<string, NavigationItem[]> = {
       <div class="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
         <div class="md:grid md:grid-cols-2 md:gap-8">
           <div>
-            <h3 class="text-base font-medium text-gray-900">{m.solutions({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-base font-medium text-gray-900">{m.solutions({}, { locale: Astro.locals.locale })}</p>
             <ul role="list" class="mt-4 space-y-4">
               {
                 navigation.solutions.map((item) => (
@@ -202,7 +202,7 @@ const navigation: Record<string, NavigationItem[]> = {
             </ul>
           </div>
           <div class="mt-12 md:mt-0">
-            <h3 class="text-base font-medium text-gray-900">{m.support({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-base font-medium text-gray-900">{m.support({}, { locale: Astro.locals.locale })}</p>
             <ul role="list" class="mt-4 space-y-4">
               {
                 navigation.support.map((item) => (
@@ -224,7 +224,7 @@ const navigation: Record<string, NavigationItem[]> = {
         </div>
         <div class="md:grid md:grid-cols-2 md:gap-8">
           <div>
-            <h3 class="text-base font-medium text-gray-900">{m.company({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-base font-medium text-gray-900">{m.company({}, { locale: Astro.locals.locale })}</p>
             <ul role="list" class="mt-4 space-y-4">
               {
                 navigation.company.map((item) => (
@@ -241,7 +241,7 @@ const navigation: Record<string, NavigationItem[]> = {
             </ul>
           </div>
           <div class="mt-12 md:mt-0">
-            <h3 class="text-base font-medium text-gray-900">{m.legal({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-base font-medium text-gray-900">{m.legal({}, { locale: Astro.locals.locale })}</p>
             <ul role="list" class="mt-4 space-y-4">
               {
                 navigation.legal.map((item) => (

@@ -129,14 +129,11 @@ if (tmp.ok) {
           </div>
           <h3 class="font-inter mx-auto mt-12 hidden max-w-xl text-xl leading-7 text-gray-400 md:block">
             <span class="font-bold">&#128075; {m.no_more_wait({}, { locale: Astro.locals.locale })}</span>
+            <span class="hidden md:inline">{m.for_apple_and_google_app_updates_distribution({}, { locale: Astro.locals.locale })}</span>
+          </h3>
+          <p class="font-inter mx-auto block max-w-sm text-center text-xl leading-7 text-gray-400 md:hidden">
             {m.for_apple_and_google_app_updates_distribution({}, { locale: Astro.locals.locale })}
-          </h3>
-          <h3 class="font-inter mx-auto mt-12 block max-w-sm text-center text-xl leading-7 text-gray-400 md:hidden">
-            <span class="font-bold">&#128075; {m.no_more_wait({}, { locale: Astro.locals.locale })}</span>
-          </h3>
-          <h3 class="font-inter mx-auto block max-w-sm text-center text-xl leading-7 text-gray-400 md:hidden">
-            {m.for_apple_and_google_app_updates_distribution({}, { locale: Astro.locals.locale })}
-          </h3>
+          </p>
         </div>
       </section>
     </div>
