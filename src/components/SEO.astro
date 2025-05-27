@@ -127,7 +127,6 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <!-- Open Graph / Facebook -->
 <meta property="og:url" content={url} />
 <meta property="og:title" content={title} />
-<meta property="og:audio" content={audio} />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content={localeOGP} />
 <meta property="og:type" content="website" />
@@ -138,12 +137,18 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta property="og:image" content={image_unsecure} />
 <meta property="og:image:type" content="image/webp" />
 <meta property="og:article:author" content={author} />
-<meta property="og:audio:type" content="audio/mpeg" />
+{audio && (
+  <>
+    <meta property="og:audio" content={audio} />
+    <meta property="og:audio:type" content="audio/mpeg" />
+  </>
+)}
 <meta property="og:site_name" content={baseDomain()} />
 <meta property="og:description" content={displayDescription} />
 
 <!-- Twitter -->
 <meta property="twitter:url" content={url} />
+<meta property="twitter:site" content="@Capgo_app" />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:image" content={image} />
 <meta property="twitter:app:id:iphone" content={appName} />

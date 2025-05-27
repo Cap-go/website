@@ -87,7 +87,7 @@ export function createMeta(title: string, description: string, image: string | n
   }
   if (image) base.push(...createMetaImage(image))
 
-  if (audio) {
+  if (audio && audio.includes('https://')) {
     base.push(
       {
         hid: 'og:audio',
