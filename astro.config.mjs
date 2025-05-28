@@ -76,7 +76,11 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
-      plugins: [starlightImageZoom({ showCaptions: false }), starlightLlmsTxt()],
+      plugins: [starlightImageZoom({ showCaptions: false }), starlightLlmsTxt({
+        projectName: 'capgo',
+        description: 'Capgo is a platform for creating and managing Capacitorjs live app updates.',
+        exclude: locales.map((locale) => `**/${locale}/**`),
+      })],
       disable404Route: true,
       logo: { src: './logo.svg' },
       markdown: { headingLinks: false },

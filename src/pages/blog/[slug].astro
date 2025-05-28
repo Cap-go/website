@@ -215,7 +215,7 @@ content['ldJSON'] = {
                       <line x1="15" x2="3" y1="12" y2="12" />
                       <line x1="17" x2="3" y1="18" y2="18" />
                     </svg>
-                    On this page
+                    {m.table_of_contents({}, { locale: Astro.locals.locale })}
                   </p>
                   <div class="mt-4 grid gap-4 border-l border-gray-600">
                     {headings.map((k) => (
@@ -232,7 +232,7 @@ content['ldJSON'] = {
       </div>
       <GetStarted />
       <div class="mx-auto max-w-xl text-center">
-        <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{m.latest_from_news({}, { locale: Astro.locals.locale })}</h2>
+        <p class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{m.latest_from_news({}, { locale: Astro.locals.locale })}</p>
         <p class="mt-4 text-base leading-7 font-normal text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
           {m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app({}, { locale: Astro.locals.locale })}
         </p>
