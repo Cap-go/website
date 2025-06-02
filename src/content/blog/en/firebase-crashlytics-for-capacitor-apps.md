@@ -106,7 +106,7 @@ Set up Firebase and enable Crashlytics through these steps:
     
     **For Android (app-level `build.gradle`):**
     
-    ```gradle
+    ```kotlin
     dependencies {
         implementation platform('com.google.firebase:firebase-bom:32.0.0')
         implementation 'com.google.firebase:firebase-crashlytics'
@@ -149,7 +149,7 @@ Set up the required configurations for Android and iOS platforms.
 
 1.  Add the Crashlytics Gradle plugin to your app-level `build.gradle` file:
     
-    ```gradle
+    ```kotlin
     buildscript { 
         dependencies { 
             classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5' 
