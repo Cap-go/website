@@ -20,7 +20,7 @@ next_blog: ''
 
 -   **Common Causes**:
     
-    -   Partial updates or dependency conflicts.
+    -   Delta Updates or dependency conflicts.
     -   Errors in `package.json` or pod files.
     -   [Automatic updates](https://capgo.app/docs/plugin/cloud-mode/auto-update/) creating inconsistencies.
 -   **Quick Fixes**:

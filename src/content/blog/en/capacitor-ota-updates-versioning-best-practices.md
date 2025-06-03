@@ -93,7 +93,7 @@ Choosing the right delivery methods, testing strategies, and update policies is 
 
 ### Partial vs Complete Updates
 
-Deciding between partial and complete updates can affect both app performance and user experience. Partial updates focus on web assets like [JavaScript bundles](https://capgo.app/docs/webapp/bundles/), making them ideal for quick fixes or minor UI adjustments. On the other hand, complete updates are required when native code changes are involved, as they replace the entire app bundle.
+Deciding between partial and complete updates can affect both app performance and user experience. Delta Updates focus on web assets like [JavaScript bundles](https://capgo.app/docs/webapp/bundles/), making them ideal for quick fixes or minor UI adjustments. On the other hand, complete updates are required when native code changes are involved, as they replace the entire app bundle.
 
 | Update Type | Ideal For | Benefits | Things to Keep in Mind |
 | --- | --- | --- | --- |

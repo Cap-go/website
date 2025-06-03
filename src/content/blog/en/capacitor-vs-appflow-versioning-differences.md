@@ -111,7 +111,7 @@ Capgo offers a solution for teams looking to streamline version control without 
 
 -   **End-to-end encryption** to ensure secure update delivery
 -   **Real-time analytics**, boasting an 82% success rate globally
--   **Partial updates** to keep bundle sizes small and efficient
+-   **Delta Updates** to keep bundle sizes small and efficient
 -   **Seamless integration** with CI/CD platforms like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/)
 
 ### Current Market Status

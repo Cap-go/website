@@ -188,7 +188,7 @@ Using background updates can reduce user interruptions. Pairing analytics with e
 
 ### Partial Updates
 
-Partial updates streamline OTA processes by sending only the files that have changed. This approach means updates are deployed faster and use less bandwidth [\[1\]](https://capgo.app/).
+Delta Updates streamline OTA processes by sending only the files that have changed. This approach means updates are deployed faster and use less bandwidth [\[1\]](https://capgo.app/).
 
 | Update Type | Benefits | Implementation |
 | --- | --- | --- |

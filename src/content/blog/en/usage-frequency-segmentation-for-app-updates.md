@@ -68,7 +68,7 @@ This segmentation allows for a more tailored approach to improving user experien
 With your users grouped, you can design [update strategies](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) that cater to their specific needs. Here's how to approach each segment:
 
 -   **Power Users**: Create a beta channel where they can test new features and provide feedback before a full release.
--   **Regular Users**: Use staged rollouts to ensure stability. [Partial updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) can reduce bandwidth demands and speed up downloads.
+-   **Regular Users**: Use staged rollouts to ensure stability. [Delta Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) can reduce bandwidth demands and speed up downloads.
 -   **Inactive Users**: Focus on improving core features and stability. Offering one-click rollback options can encourage these users to re-engage.
 
 ## Using [Capgo](https://capgo.app/) for User Targeting

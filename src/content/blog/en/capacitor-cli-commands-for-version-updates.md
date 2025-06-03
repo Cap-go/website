@@ -322,7 +322,7 @@ Here’s a snapshot of Capgo’s performance metrics:
 Modern update tools offer several notable benefits:
 
 -   **End-to-end encryption** for secure delivery of updates
--   **Partial updates**, which save bandwidth by only downloading modified components
+-   **Delta Updates**, which save bandwidth by only downloading modified components
 -   **One-click rollback** for quick recovery in case of issues
 -   **Real-time analytics** to monitor update performance and user engagement
 
