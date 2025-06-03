@@ -15,6 +15,29 @@ Let's say you have:
 - Live update 1.2.4 (compatible with 1.2.3)
 - Live update 2.0.1 (compatible with 2.0.0)
 
+## Strategy: Always Use defaultChannel for Major Versions
+
+**Recommended approach:** Set a `defaultChannel` for every major version. This ensures you can always push updates to specific user groups without relying on dynamic channel assignment.
+
+```ts
+// Version 1.x releases
+defaultChannel: 'v1'
+
+// Version 2.x releases  
+defaultChannel: 'v2'
+
+// Version 3.x releases (future)
+defaultChannel: 'v3'
+```
+
+:::tip
+**Benefits of this approach:**
+- **Always have control** over which users receive updates
+- **No dynamic channel switching** needed in your app code
+- **Clear separation** between different app versions
+- **Flexibility** to push updates to any specific version group
+:::
+
 ## 1. Create Channel for New Version
 
 ```bash
@@ -43,6 +66,10 @@ const config: CapacitorConfig = {
 
 export default config;
 ```
+
+:::note
+**For version 1.x:** If you didn't set a `defaultChannel` initially, version 1.x users are on the `production` channel. For future major versions, always set a specific channel like `v3`, `v4`, etc.
+:::
 
 ## 3. Manage Separate Code Branches
 
@@ -91,6 +118,32 @@ Build and deploy version 2.0.0 to the app store. All users who download this ver
 :::note
 **No code changes needed!** Since `defaultChannel: 'v2'` is bundled with the app store version, all users downloading version 2.0.0 will automatically use the correct channel.
 :::
+
+## Scaling to Future Versions
+
+When you release version 3.0.0 with more breaking changes:
+
+```bash
+# Create channel for version 3.x
+npx @capgo/cli channel create v3
+```
+
+```ts
+// capacitor.config.ts for version 3.0.0
+const config: CapacitorConfig = {
+  // ...
+  plugins: {
+    CapacitorUpdater: {
+      defaultChannel: 'v3' // Version 3.x users
+    }
+  }
+};
+```
+
+Now you can push updates to any version:
+- `production` channel → Version 1.x users
+- `v2` channel → Version 2.x users  
+- `v3` channel → Version 3.x users
 
 ## 7. Cleanup (After Migration)
 
