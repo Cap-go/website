@@ -130,7 +130,7 @@ For enhanced security, encrypt your zip bundle before uploading:
 npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM
 
 # Using custom key file
-npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key ./path/to/private-key.pem
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key ./path/to/.capgo_key_v2
 
 # Using key data directly
 npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key-data "PRIVATE_KEY_CONTENT"

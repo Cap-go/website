@@ -13,7 +13,7 @@ Capgo provides robust end-to-end encryption for your app bundles, ensuring that 
 
 Capgo's encryption system uses industry-standard cryptographic methods to protect your bundles from unauthorized access. When encryption is enabled, your bundles are encrypted before leaving your development environment and remain encrypted until they're decrypted by your app on the user's device.
 
-**True End-to-End Encryption**: Unlike other OTA update platforms that only sign updates (leaving the code publicly readable), Capgo is the only solution that provides true end-to-end encryption. This means your bundle content remains completely private and unreadable by anyone - including Capgo itself - throughout the entire delivery process.
+**True End-to-End Encryption**: Unlike other OTA update platforms that only sign updates (leaving the code publicly readable), Capgo provides true end-to-end encryption. This means only your users can decrypt your updates - no one else, including Capgo itself. Your bundle content remains completely private and unreadable throughout the entire delivery process.
 
 <Aside type="tip">
 
@@ -32,8 +32,8 @@ Capgo uses a hybrid encryption approach that combines RSA and AES encryption for
 ![Capgo Encryption Flow](/encryption_flow.webp)
 
 ### 1. Key Generation
-- **Private Key**: Generated and stored securely in your development environment (used for decryption)
-- **Public Key**: Derived from your private key and uploaded to Capgo (used for encryption)
+- **Private Key**: Generated and stored securely in your development environment (used for encryption)
+- **Public Key**: Derived from your private key and stored in your app's Capacitor config (used for decryption)
 - **Session Keys**: Random AES keys generated for each bundle upload
 
 ### 2. Encryption Process
@@ -71,8 +71,8 @@ RSA cannot encrypt large amounts of data efficiently, so AES is used for the act
 
 **Why This Matters:**
 - **Code signing** only verifies that updates haven't been tampered with and come from the right source
-- **End-to-end encryption** additionally ensures that your actual code content remains private and unreadable during transmission and storage
-- With Capgo, even if someone gains access to the storage servers, your code remains completely protected
+- **End-to-end encryption** ensures that your actual code content remains private and unreadable during transmission and storage
+- With Capgo's true end-to-end encryption, only your users can decrypt updates - no one else, including Capgo itself
 
 ## Encryption Methods
 
@@ -103,52 +103,57 @@ Encryption V1 is no longer supported in the current Capgo CLI. If you're using V
 First, generate your encryption keys using the Capgo CLI:
 
 ```shell
-# Generate new encryption keys
+# Generate new encryption keys (creates files in current directory)
 npx @capgo/cli@latest key create
-
-# Or specify a custom path
-npx @capgo/cli@latest key create --path ./my-keys/
 ```
 
 This creates:
-- `private_key.pem`: Your private key (keep this secure!)
-- `public_key.pem`: Your public key (uploaded to Capgo)
+- `.capgo_key_v2`: Your private key (keep this secure!)
+- `.capgo_key_v2.pub`: Your public key (used by your app)
 
-### Step 2: Configure Your App
+These files are created in the current directory where you run the command.
 
-Add the public key to your app's configuration. In your `capacitor.config.ts`:
+<Aside type="caution">
 
-```ts
-import { CapacitorConfig } from '@capacitor/cli';
+**Important Storage Notes:**
+- **Private Key (`.capgo_key_v2`)**: Never commit this to version control. This file should be kept secure and used only for encryption during bundle uploads.
+- **Public Key (`.capgo_key_v2.pub`)**: This is safe to commit to version control as it's a backup of your public key.
+- **File Location**: Keys are created in the current directory where you run the `key create` command.
+- **Public Key in Config**: You must run `key save` to store the public key in your Capacitor config for the mobile app to use.
 
-const config: CapacitorConfig = {
-  plugins: {
-    CapacitorUpdater: {
-      publicKey: `-----BEGIN RSA PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
------END RSA PUBLIC KEY-----`,
-    },
-  },
-};
+For production use, store the private key securely (environment variables, key management services) and remove it from your local project after setup.
 
-export default config;
+</Aside>
+
+### Step 2: Save Your Public Key to Capacitor Config (Required)
+
+You **must** save your public key to the Capacitor config so your mobile app can decrypt bundles:
+
+```shell
+# Save public key from file to Capacitor config (required)
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+
+# Or save public key data directly
+npx @capgo/cli@latest key save --key-data "$CAPGO_PUBLIC_KEY"
+```
+
+### Step 3: Sync Capacitor Platform (Required)
+
+After saving the public key, you **must** sync the Capacitor platform to copy the updated config to the native layer:
+
+```shell
+# Sync the platform to copy config to native
+npx cap sync
 ```
 
 <Aside type="caution">
 
-The public key can be safely committed to version control as it's used for decryption on the device. Keep your private key secure and never commit it to version control - it's used for encryption during the upload process.
+**Required Steps**: 
+1. The `key save` command stores the public key in your Capacitor config
+2. `npx cap sync` copies this config to the native layer where the mobile app can access it
+3. Without both steps, your app won't be able to decrypt encrypted updates
 
 </Aside>
-
-### Step 3: Save Your Private Key for CLI
-
-Save your private key for use with the Capgo CLI (for encryption during uploads):
-
-```shell
-npx @capgo/cli@latest key save --key ./private_key.pem
-```
-
-This stores the private key securely for the CLI to use when encrypting bundles during upload.
 
 ## Encrypting Bundles
 
@@ -160,8 +165,7 @@ The simplest way is to encrypt during the upload process:
 # Upload with automatic encryption
 npx @capgo/cli@latest bundle upload --key-v2
 
-# Upload to custom storage with encryption
-npx @capgo/cli@latest bundle upload --external https://your-cdn.com/bundle.zip --key-v2
+# For external storage, you must encrypt first (see Manual Encryption Workflow below)
 ```
 
 ### Method 2: Manual Encryption Workflow
@@ -180,8 +184,12 @@ For more control, you can manually encrypt bundles:
    npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
    ```
 
-3. **Upload the encrypted bundle:**
+3. **Upload to your storage (e.g., S3) and register with Capgo:**
    ```shell
+   # First upload the encrypted bundle to your storage (e.g., AWS S3)
+   aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
+   
+   # Then register with Capgo using the external URL
    npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
    ```
 
@@ -191,16 +199,31 @@ For more control, you can manually encrypt bundles:
 
 ### Storing Keys Securely
 
-**Private Key (for CLI/CI):**
+**Private Key Options:**
+
+1. **File-based (local development):**
+   ```shell
+   # Key stored as .capgo_key_v2 file in project root
+   npx @capgo/cli@latest bundle upload --key-v2
+   ```
+
+2. **Environment variable (CI/CD):**
+   ```shell
+   # Store in environment variable for CI
+   export CAPGO_PRIVATE_KEY="$(cat .capgo_key_v2)"
+   npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
+   ```
+
+**Public Key Setup (Required):**
 ```shell
-# Store in environment variable for CI
-export CAPGO_PRIVATE_KEY="$(cat private_key.pem)"
+# Must save public key to Capacitor config for mobile app
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
 ```
 
 **Production Environment:**
 - Store private keys in secure key management services (AWS KMS, Azure Key Vault, etc.)
 - Use CI/CD secret management for private keys
-- Public keys can be safely stored in your app configuration
+- Never commit private keys to version control
 
 **Key Usage:**
 - **Private Key**: Used by CLI for encryption during bundle upload (keep secure)
@@ -214,12 +237,14 @@ Regularly rotate your encryption keys for enhanced security:
 
 1. **Generate new keys:**
    ```shell
-   npx @capgo/cli@latest key create --path ./new-keys/
+   # Navigate to desired directory first, then create keys
+   mkdir ./new-keys && cd ./new-keys
+   npx @capgo/cli@latest key create
    ```
 
-2. **Save the new private key for CLI:**
+2. **Save the new public key to Capacitor config:**
    ```shell
-   npx @capgo/cli@latest key save --key ./new-keys/private_key.pem
+   npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
    ```
 
 3. **Update your app configuration** with the new public key
@@ -274,14 +299,12 @@ Check encryption status:
 npx @capgo/cli@latest app debug
 ```
 
-Verify key configuration:
+Test encryption/decryption workflow:
 ```shell
-npx @capgo/cli@latest key check
-```
-
-Test encryption/decryption:
-```shell
-npx @capgo/cli@latest bundle encrypt ./test.zip CHECKSUM --json
+# Test the complete workflow: zip → encrypt → decrypt → unzip
+npx @capgo/cli@latest bundle zip com.example.app --key-v2
+npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM --json
+npx @capgo/cli@latest bundle decrypt ./encrypted-bundle.zip IV_SESSION_KEY
 ```
 
 ## Compliance and Standards
@@ -308,9 +331,10 @@ This makes Capgo suitable for applications requiring compliance with:
 
 ### Optimization Tips
 - Use differential updates to minimize encrypted data transfer
-- Consider bundle splitting for very large applications
+- Optimize your bundle size by converting images to WebP format
+- Minimize JavaScript and CSS files before bundling
+- Remove unused dependencies and code
 - Monitor device performance on older/slower devices
-- Cache decrypted bundles when possible
 
 ## Next Steps
 
