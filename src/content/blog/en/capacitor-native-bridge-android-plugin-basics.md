@@ -470,7 +470,7 @@ npx @capgo/cli init
 
 Add the plugin to your build process. Capgo automatically handles updates in the background, using its built-in analytics and rollback features.
 
-You can use the channel system to manage rollouts for production, beta, and development environments. Delta Updates are available to reduce bandwidth usage and deliver only the necessary changes.
+You can use the channel system to manage rollouts for production, beta, and development environments. Partial updates are available to reduce bandwidth usage and deliver only the necessary changes.
 
 Capgo supports Capacitor versions 6 and 7.
 

@@ -212,7 +212,7 @@ A channel-based system allows you to test updates in smaller groups, minimizing 
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." - Simon Flack [\[1\]](https://capgo.app/)
 
-Delta Updates are another great way to improve efficiency by reducing download sizes. They’re especially useful for quick bug fixes.
+Partial updates are another great way to improve efficiency by reducing download sizes. They’re especially useful for quick bug fixes.
 
 > "@Capgo is a must have tools for developers, who want to be more productive. Avoiding review for bugfix is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
 

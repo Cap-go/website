@@ -156,7 +156,7 @@ Capgo leverages live updates to simplify consent management for Capacitor apps. 
 Some of the standout features include:
 
 -   **End-to-end encryption** to ensure secure transmission of consent data.
--   **Delta Updates** to reduce bandwidth usage during consent-related changes.
+-   **Partial updates** to reduce bandwidth usage during consent-related changes.
 -   **[Channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** that allows testing updates with specific user groups.
 -   **Analytics dashboard** for tracking the success of consent implementations.
 
@@ -190,7 +190,7 @@ Modern update systems come with several benefits:
 
 -   **Quick Adjustments**: Instant update capabilities let teams address compliance issues right away.
 -   **Cost Savings**: Traditional CI/CD setups can cost around $300 per month [\[1\]](https://capgo.app/), making more streamlined options a smarter choice.
--   **Improved User Experience**: Delta Updates use less bandwidth while still meeting compliance standards.
+-   **Improved User Experience**: Partial updates use less bandwidth while still meeting compliance standards.
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

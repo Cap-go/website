@@ -179,7 +179,7 @@ When choosing an OTA platform for Capacitor apps, security and reliability are c
 | Update Success Rate | 82% worldwide | Limited data | Limited data |
 | Rollback Capability | Instant | Manual | Manual |
 | Market Experience | Since 2022 | Shutting down 2026 | Since 2024 |
-| Update Distribution | Delta Updates | Full bundle | Full bundle |
+| Update Distribution | Partial updates | Full bundle | Full bundle |
 | CI/CD Setup Cost | $2,600 one-time | Higher annual costs | Comparable |
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
