@@ -172,7 +172,7 @@ Here’s a breakdown of key features across popular OTA platforms for [Capacitor
 | CI/CD Integration | Native support | Basic | Advanced | N/A |
 | Monthly Cost | From $12 | Similar to Capgo | ~$500 | Was free |
 
-Capgo stands out with over 1.1 trillion updates delivered, a 95% user update rate, and a global CDN average API response time of 434ms [\[1\]](https://capgo.app/). These numbers demonstrate its ability to handle fast and secure OTA updates at scale.
+Capgo stands out with over 1.1 trillion updates delivered, a 95% user update rate, and a global CDN average API response time of 357ms [\[1\]](https://capgo.app/). These numbers demonstrate its ability to handle fast and secure OTA updates at scale.
 
 For CI/CD integration, here are some highlights:
 

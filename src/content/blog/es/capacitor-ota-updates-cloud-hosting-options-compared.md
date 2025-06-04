@@ -36,7 +36,7 @@ Las actualizaciones Over-the-Air (OTA) te permiten actualizar tus aplicaciones [
 
 | **Característica** | **AWS** | **Google Cloud** | **Azure** | **Capgo** |
 | --- | --- | --- | --- | --- |
-| **Velocidad (Paquete 5MB)** | 434ms | No reportado | No reportado | 114ms |
+| **Velocidad (Paquete 5MB)** | 357ms | No reportado | No reportado | 114ms |
 | **Seguridad** | Requiere configuración | Herramientas integradas | Herramientas sólidas | Cifrado de extremo a extremo |
 | **Facilidad de Integración** | Configuración manual | Complejidad moderada | APIs REST, CLI | CI/CD integrado |
 | **Tasa de Éxito de Actualización** | 82% | No reportado | No reportado | 82% |
@@ -78,7 +78,7 @@ Los servicios de AWS como **CodePipeline** y **CodeDeploy** permiten automatizar
 | --- | --- |
 | Adopción de Actualización | 95% en 24 horas |
 | Tasa de Éxito Global | 82% |
-| Tiempo de Respuesta Promedio | 434ms mundial |
+| Tiempo de Respuesta Promedio | 357ms mundial |
 
 Si bien estos números muestran un rendimiento sólido, alcanzarlos requiere un esfuerzo significativo en configuración y ajuste.
 

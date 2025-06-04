@@ -122,7 +122,7 @@ Bei der Auswahl von Tools für die Segmentierung nach benutzerdefinierten Attrib
 | **Sicherheit** | Ende-zu-Ende-Verschlüsselung[\[1\]](https://capgo.app/) | Schützt sensible Nutzerdaten effektiv |
 | **Analytik** | Echtzeit-Analytik[\[1\]](https://capgo.app/) | Liefert sofortiges Feedback zur Segmentleistung |
 | **Hosting-Optionen** | Cloud und Self-Hosted | Unterstützt verschiedene Bereitstellungsanforderungen |
-| **Globale Abdeckung** | 434ms API-Antwortzeit weltweit[\[1\]](https://capgo.app/) | Bietet konsistente Leistung über Regionen hinweg |
+| **Globale Abdeckung** | 357ms API-Antwortzeit weltweit[\[1\]](https://capgo.app/) | Bietet konsistente Leistung über Regionen hinweg |
 
 Die Segmentierungstool-Landschaft hat sich in den letzten Jahren stark verändert. Zum Beispiel haben die Einstellung von [Microsoft Code Push](https://learnmicrosoftcom/en-us/appcenter/distribution/codepush/) in 2024 und die bevorstehende Abschaltung von [AppFlow](https://ionicio/appflow) in 2026 Entwickler dazu gebracht, zuverlässigere Alternativen zu erkunden. Diese Änderungen unterstreichen die Bedeutung von Tools, die Segmentierungsherausforderungen direkt angehen.
 

@@ -362,7 +362,7 @@ Capgo provides robust version management capabilities, including:
 -   **23.5M successful updates delivered**
 -   **95% of users updated within 24 hours**
 -   **82% global success rate**
--   **434ms average API response time worldwide**
+-   **357ms average API response time worldwide**
 
 Here’s an example of how to use Capgo for version control:
 

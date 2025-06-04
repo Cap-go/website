@@ -125,7 +125,7 @@ Best practices for communication include:
 
 ## Conclusion
 
-Tackling CI/CD bottlenecks is crucial for ensuring smooth OTA delivery. Streamlined pipelines can lead to impressive results, such as 95% of active users receiving updates within 24 hours, a 5MB bundle downloading in just 114ms, and an average API response time of 434ms [\[1\]](https://capgo.app/).
+Tackling CI/CD bottlenecks is crucial for ensuring smooth OTA delivery. Streamlined pipelines can lead to impressive results, such as 95% of active users receiving updates within 24 hours, a 5MB bundle downloading in just 114ms, and an average API response time of 357ms [\[1\]](https://capgo.app/).
 
 > "Capgo is a smart way to make hot code pushes" [\[1\]](https://capgo.app/)
 

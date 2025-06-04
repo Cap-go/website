@@ -317,7 +317,7 @@ Berikut adalah snapshot metrik kinerja Capgo:
 
 | Metrik | Kinerja |
 | --- | --- |
-| Waktu Respons API Global | 434ms |
+| Waktu Respons API Global | 357ms |
 | Kecepatan Unduhan Bundle 5MB | 114ms |
 | Tingkat Keberhasilan Pembaruan | 82% |
 

@@ -119,7 +119,7 @@ Modern approaches are reshaping how full releases are managed, offering better s
 | Easier to support and document | Limited rollback options |
 | Faster deployment process | Potential server load spikes |
 
-Capgo reports an 82% global success rate for updates, with an average API response time of 434ms worldwide [\[1\]](https://capgo.app/).
+Capgo reports an 82% global success rate for updates, with an average API response time of 357ms worldwide [\[1\]](https://capgo.app/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
@@ -246,7 +246,7 @@ Here’s what Capgo offers for staged releases:
 
 ### Capgo Full Release Tools
 
-Capgo makes full releases fast and secure, using a global CDN, background updates, and seamless CI/CD integration. The platform delivers a 5MB bundle in just 114ms, with an average API response time of 434ms [\[1\]](https://capgo.app/).
+Capgo makes full releases fast and secure, using a global CDN, background updates, and seamless CI/CD integration. The platform delivers a 5MB bundle in just 114ms, with an average API response time of 357ms [\[1\]](https://capgo.app/).
 
 Key features for full releases include:
 

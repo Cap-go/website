@@ -269,7 +269,7 @@ if (tmp.ok) {
                 <p class="text-gray-300">{m.download_time_globally({}, { locale: Astro.locals.locale })}</p>
               </div>
               <div>
-                <p class="text-4xl font-bold text-[#FF44EC]">434ms</p>
+                <p class="text-4xl font-bold text-[#FF44EC]">357ms</p>
                 <p class="text-gray-300">{m.average_api_response_time({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
@@ -516,7 +516,7 @@ if (tmp.ok) {
           {m.everything_you_need_to_ship_updates_instantly({}, { locale: Astro.locals.locale })}
         </p>
         <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.ship_updates_fixes_changes_and_features({}, { locale: Astro.locals.locale })}</p>
-        <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-3">
+        <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-4">
           <div class="flex p-px lg:col-span-4">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]">
               <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-[#44BCFF]/20 via-[#FF44EC]/20 to-[#FF675E]/20">
@@ -531,6 +531,15 @@ if (tmp.ok) {
                 </p>
                 <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                   {m.push_live_code_changes_without_app_store_delays({}, { locale: Astro.locals.locale })}
+                  Our average response time is 
+                  <a
+                    href="https://status.capgo.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-blue-400 hover:text-blue-300 underline"
+                  >
+                    357ms
+                  </a>
                 </p>
               </div>
             </div>
@@ -569,7 +578,15 @@ if (tmp.ok) {
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.streamlined_deployment_process({}, { locale: Astro.locals.locale })}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">{m.build_and_deploy_updates_with_single_command({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                  {m.build_and_deploy_updates_with_single_command({}, { locale: Astro.locals.locale })}
+                  <a
+                    href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/overview')}
+                    class="ml-2 text-green-400 hover:text-green-300 underline"
+                  >
+                    CLI docs
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -605,7 +622,15 @@ if (tmp.ok) {
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.smart_differential_updates({}, { locale: Astro.locals.locale })}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">{m.only_download_what_changed({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                  {m.only_download_what_changed({}, { locale: Astro.locals.locale })}
+                  <a
+                    href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/differentials')}
+                    class="ml-2 text-yellow-400 hover:text-yellow-300 underline"
+                  >
+                    Learn more
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -623,7 +648,15 @@ if (tmp.ok) {
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.flexible_integration({}, { locale: Astro.locals.locale })}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">{m.manage_capgo_from_your_software({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                  {m.manage_capgo_from_your_software({}, { locale: Astro.locals.locale })}
+                  <a
+                    href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/public-api')}
+                    class="ml-2 text-cyan-400 hover:text-cyan-300 underline"
+                  >
+                    API docs
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -642,7 +675,15 @@ if (tmp.ok) {
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.advanced_update_distribution({}, { locale: Astro.locals.locale })}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">{m.target_specific_user_groups_with_channels({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                  {m.target_specific_user_groups_with_channels({}, { locale: Astro.locals.locale })}
+                  <a
+                    href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/channels')}
+                    class="ml-2 text-indigo-400 hover:text-indigo-300 underline"
+                  >
+                    Learn more
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -661,7 +702,15 @@ if (tmp.ok) {
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.open_source({}, { locale: Astro.locals.locale })}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">{m.choose_between_cloud_or_self_hosted({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                  {m.choose_between_cloud_or_self_hosted({}, { locale: Astro.locals.locale })}
+                  <a
+                    href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/custom-storage')}
+                    class="ml-2 text-red-400 hover:text-red-300 underline"
+                  >
+                    Custom storage
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -676,7 +725,15 @@ if (tmp.ok) {
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.seamless_automation({}, { locale: Astro.locals.locale })}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">{m.works_with_github_actions_gitlab_ci({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                  {m.works_with_github_actions_gitlab_ci({}, { locale: Astro.locals.locale })}
+                  <a
+                    href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/getting-started/cicd-integration')}
+                    class="ml-2 text-teal-400 hover:text-teal-300 underline"
+                  >
+                    CI/CD guide
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -690,7 +747,65 @@ if (tmp.ok) {
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.no_vendor_lock_in({}, { locale: Astro.locals.locale })}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">{m.completely_self_hostable_with_source_code({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                  {m.completely_self_hostable_with_source_code({}, { locale: Astro.locals.locale })}
+                  <a
+                    href="https://github.com/cap-go/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="ml-2 text-emerald-400 hover:text-emerald-300 underline"
+                  >
+                    View source
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-3">
+            <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+              <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-blue-600/20 to-indigo-600/20">
+                <svg class="mb-4 h-24 w-24 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  ></path>
+                </svg>
+                <h3 class="text-xl font-bold text-white">{m.soc2_certification({}, { locale: Astro.locals.locale })}</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.soc2_in_observation_phase({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                  {m.soc2_certification_description({}, { locale: Astro.locals.locale })}
+                  <a
+                    href="https://trust.capgo.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="ml-2 text-blue-400 hover:text-blue-300 underline"
+                  >
+                    Trust center
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex p-px lg:col-span-3">
+            <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+              <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-orange-500/20 to-red-500/20">
+                <svg class="mb-4 h-24 w-24 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  ></path>
+                </svg>
+                <h3 class="text-xl font-bold text-white">{m.lightning_fast_support({}, { locale: Astro.locals.locale })}</h3>
+              </div>
+              <div class="p-10">
+                <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.support_response_under_24h({}, { locale: Astro.locals.locale })}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Email or Discord support. Pay-as-you-go users get dedicated Slack shared channel access.</p>
               </div>
             </div>
           </div>

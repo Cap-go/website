@@ -101,7 +101,7 @@ Here’s a quick look at its performance metrics:
 
 | Metric | Performance |
 | --- | --- |
-| Average API Response Time | 434ms worldwide |
+| Average API Response Time | 357ms worldwide |
 | Bundle Download Speed | 114ms for 5MB |
 | Update Success Rate | 95% within 24 hours |
 

@@ -278,7 +278,7 @@ Pemantauan real-time Capgo mengawasi status build dan kemajuan deployment, menaw
 | --- | --- |
 | Pengiriman Update | 23.5M update terkirim |
 | Tingkat Keberhasilan | 95% pengguna diperbarui dalam 24 jam |
-| Waktu Respons API | Rata-rata 434ms di seluruh dunia |
+| Waktu Respons API | Rata-rata 357ms di seluruh dunia |
 | [Unduhan Bundle](https://capgo.app/docs/webapp/bundles/) | 114ms untuk bundle 5MB |
 
 Ketika masalah muncul, sistem rollback Capgo memastikan pemulihan cepat dengan fitur seperti:

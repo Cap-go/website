@@ -249,7 +249,7 @@ Capgo stands out by following these best practices, enabling reliable OTA update
 | Feature | Benefit | Performance Metric |
 | --- | --- | --- |
 | Global CDN | Speeds up delivery | 5MB bundle delivered in 114ms |
-| API Response | Quick synchronization | 434ms average worldwide response |
+| API Response | Quick synchronization | 357ms average worldwide response |
 | Update Distribution | Flexible deployment | 95% user adoption within 24 hours |
 
 > "NASA's OSIRIS-REx team noted: '@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂'" [\[1\]](https://capgo.app/)

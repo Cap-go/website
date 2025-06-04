@@ -360,7 +360,7 @@ Voici comment en tirer le meilleur parti :
     | Métrique | Performance |
     | --- | --- |
     | Vitesse de livraison des mises à jour | 114ms pour un bundle de 5MB |
-    | Temps de réponse API | 434ms dans le monde |
+    | Temps de réponse API | 357ms dans le monde |
     | Taux de mise à jour utilisateur | 95% en 24 heures |
 
 Le système de mise à jour partielle de Capgo ne télécharge que les fichiers modifiés, réduisant les perturbations pendant le débogage. Avec le chiffrement de bout en bout et la conformité aux directives des app stores, c'est un outil puissant pour maintenir votre application stable et résoudre rapidement les problèmes.

@@ -51,7 +51,7 @@ For most developers, **Capgo** offers the best mix of affordability, speed, and 
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
-Capgo supports over 1,900 production apps, delivering OTA updates with impressive speed - 5MB bundles in just 114ms and an average API response time of 434ms through its global CDN [\[1\]](https://capgo.app/).
+Capgo supports over 1,900 production apps, delivering OTA updates with impressive speed - 5MB bundles in just 114ms and an average API response time of 357ms through its global CDN [\[1\]](https://capgo.app/).
 
 Here’s what Capgo offers:
 

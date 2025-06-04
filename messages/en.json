@@ -1342,5 +1342,11 @@
   "one_hundred_percent_open_source": "100% Open Source",
   "no_vendor_lock_in": "No vendor lock-in",
   "completely_self_hostable_with_source_code": "Completely self-hostable with full access to the source code",
-  "push_live_code_changes_without_app_store_delays": "Push live code changes directly to users without app store delays. Deploy critical fixes and features when they're ready."
+  "push_live_code_changes_without_app_store_delays": "Push live code changes directly to users without app store delays. Deploy critical fixes and features when they're ready.",
+  "soc2_certification": "SOC 2 Certification",
+  "soc2_in_observation_phase": "Currently in observation phase",
+  "soc2_certification_description": "We're actively working towards SOC 2 Type II certification to provide independent verification of our security controls",
+  "lightning_fast_support": "Lightning Fast Support",
+  "support_response_under_24h": "< 24h response for 99% of issues",
+  "lightning_fast_support_description": "Dedicated team providing exceptional support with rapid response times and quick issue resolution"
 }

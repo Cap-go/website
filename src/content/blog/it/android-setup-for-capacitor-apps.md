@@ -291,5 +291,5 @@ Una volta che il tuo ambiente Android è pronto, è il momento di integrare Capg
 
 -   **Aggiornamenti in Tempo Reale**: Gli aggiornamenti raggiungono il 95% degli utenti attivi entro 24 ore [\[1\]](https://capgo.app/)
 -   **Crittografia End-to-End**: Garantisce la sicurezza dei dati
--   **Risposta API Veloce**: Tempo di risposta medio globale di 434ms, con un tasso di successo dell'82% [\[1\]](https://capgo.app/)
+-   **Risposta API Veloce**: Tempo di risposta medio globale di 357ms, con un tasso di successo dell'82% [\[1\]](https://capgo.app/)
 -   **Aggiornamenti Parziali**: Minimizza l'utilizzo dei dati trasferendo solo le modifiche necessarie

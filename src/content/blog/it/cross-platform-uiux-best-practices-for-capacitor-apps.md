@@ -249,7 +249,7 @@ Untuk mempertahankan pengalaman pengguna yang berkualitas tinggi, monitor metrik
 | Jenis Metrik | Apa yang Dipantau | Tolok Ukur Target |
 | --- | --- | --- |
 | Keberhasilan Pembaruan | Tingkat adopsi pengguna | 95% dalam 24 jam |
-| Waktu Respons | Kecepatan API | Di bawah 434ms secara global |
+| Waktu Respons | Kecepatan API | Di bawah 357ms secara global |
 | Pengalaman Pengguna | Interaksi antarmuka | Umpan balik waktu nyata |
 
 Analitik bawaan Capgo memberikan wawasan waktu nyata tentang keterlibatan pengguna, semuanya sambil memastikan keamanan dengan enkripsi ujung ke ujung.
@@ -275,6 +275,6 @@ Pengujian yang menyeluruh dan pelacakan kesalahan aktif juga penting untuk membe
 | Metrik | Kinerja |
 | --- | --- |
 | Adopsi Pembaruan | 95% dalam 24 jam |
-| Respons API Global | Rata-rata 434ms |
+| Respons API Global | Rata-rata 357ms |
 | Pengiriman Pembaruan | 114ms untuk bundel 5MB |
 | Tingkat Keberhasilan | 82% secara global |

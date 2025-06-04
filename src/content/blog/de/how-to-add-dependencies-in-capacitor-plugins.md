@@ -133,12 +133,12 @@ Die Verwendung von Live-Update-Tools wie Capgo kann diese Praktiken durch Echtze
 
 ### Capgo-Vorteile
 
-Capgo vereinfacht den Dependency-Management-Prozess bei gleichzeitiger hoher Leistung. Es erreicht eine beeindruckende **95% Nutzer-Update-Rate innerhalb von 24 Stunden** und hält eine globale API-Antwortzeit von **434ms** [\[1\]](https://capgo.app/). Mit Ende-zu-Ende-Verschlüsselung gewährleistet es sichere Updates, die sowohl den Apple- als auch den Android-Richtlinien entsprechen. Für Teams, die mehrere Plugin-Versionen verwalten, ermöglicht Capgos Kanalsystem gezielte Bereitstellungen für spezifische Benutzergruppen.
+Capgo vereinfacht den Dependency-Management-Prozess bei gleichzeitiger hoher Leistung. Es erreicht eine beeindruckende **95% Nutzer-Update-Rate innerhalb von 24 Stunden** und hält eine globale API-Antwortzeit von **357ms** [\[1\]](https://capgo.app/). Mit Ende-zu-Ende-Verschlüsselung gewährleistet es sichere Updates, die sowohl den Apple- als auch den Android-Richtlinien entsprechen. Für Teams, die mehrere Plugin-Versionen verwalten, ermöglicht Capgos Kanalsystem gezielte Bereitstellungen für spezifische Benutzergruppen.
 
 Hier ein kurzer Überblick über Capgos Leistung:
 
 | Metrik | Wert |
 | --- | --- |
-| Globale API-Antwortzeit | 434ms |
+| Globale API-Antwortzeit | 357ms |
 | Update-Erfolgsrate | 82% |
 | Nutzer-Update-Rate (24 Stunden) | 95% |

@@ -180,7 +180,7 @@ Usar herramientas en tiempo real como Capgo ofrece varios beneficios para el cum
     El cifrado de extremo a extremo de Capgo mantiene seguras las actualizaciones relacionadas con el consentimiento durante todo el proceso.
     
 -   **Insights de rendimiento**  
-    Analytics avanzados proporcionan seguimiento detallado de cambios en el consentimiento. Capgo, por ejemplo, entrega un tiempo promedio de respuesta de API de solo **434ms a nivel mundial** [\[1\]](https://capgo.app/).
+    Analytics avanzados proporcionan seguimiento detallado de cambios en el consentimiento. Capgo, por ejemplo, entrega un tiempo promedio de respuesta de API de solo **357ms a nivel mundial** [\[1\]](https://capgo.app/).
     
 
 ## Próximos pasos para el cumplimiento de aplicaciones

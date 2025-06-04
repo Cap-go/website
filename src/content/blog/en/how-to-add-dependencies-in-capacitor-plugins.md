@@ -449,7 +449,7 @@ Capgo simplifies managing plugin dependencies with these features:
 | Feature | What It Does | Key Metric |
 | --- | --- | --- |
 | Live Updates | Push updates in minutes | 95% user update rate in 24 hours |
-| Partial Updates | Download only changed files | 434ms average API response time |
+| Partial Updates | Download only changed files | 357ms average API response time |
 | Version Control | Manage multiple versions | 82% global success rate |
 | Channel System | Target specific user groups | Supports multiple deployment channels |
 
@@ -516,12 +516,12 @@ Using live update tools like Capgo can further simplify and improve these practi
 
 ### Capgo Benefits
 
-Capgo simplifies the dependency management process while delivering strong performance. It achieves an impressive **95% user update rate within 24 hours** and maintains a global API response time of **434ms** [\[1\]](https://capgo.app/). With end-to-end encryption, it ensures secure updates that comply with both Apple and Android guidelines. For teams managing multiple plugin versions, Capgo's channel system allows targeted deployments for specific user groups.
+Capgo simplifies the dependency management process while delivering strong performance. It achieves an impressive **95% user update rate within 24 hours** and maintains a global API response time of **357ms** [\[1\]](https://capgo.app/). With end-to-end encryption, it ensures secure updates that comply with both Apple and Android guidelines. For teams managing multiple plugin versions, Capgo's channel system allows targeted deployments for specific user groups.
 
 Here’s a quick look at Capgo’s performance:
 
 | Metric | Value |
 | --- | --- |
-| Global API Response Time | 434ms |
+| Global API Response Time | 357ms |
 | Update Success Rate | 82% |
 | User Update Rate (24 Hours) | 95% |

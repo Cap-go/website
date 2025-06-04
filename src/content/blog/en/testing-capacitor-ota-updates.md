@@ -89,12 +89,12 @@ This step focuses on verifying individual update mechanisms and their interactio
 
 | Test Type | Focus Area | Success Criteria |
 | --- | --- | --- |
-| Update Detection | Version checking | ~434ms response time |
+| Update Detection | Version checking | ~357ms response time |
 | Download Process | [Bundle download](https://capgo.app/docs/webapp/bundles/) | 5MB bundle in ~114ms |
 | Installation | Update application | Successful integration |
 | Rollback | Version reversion | Successful rollback |
 
-Capgo’s global CDN helps maintain steady download speeds, with an average API response time of 434ms [\[1\]](https://capgo.app/). These tests at the component level form the groundwork for evaluating overall system performance.
+Capgo’s global CDN helps maintain steady download speeds, with an average API response time of 357ms [\[1\]](https://capgo.app/). These tests at the component level form the groundwork for evaluating overall system performance.
 
 ### Full System Tests
 
@@ -222,7 +222,7 @@ Thanks to robust error handling and a reliable CDN, Capgo ensures that updates r
 
 ### Speed Issues
 
-Capgo’s global CDN delivers 5MB bundles in just 114ms, with an average API response time of 434ms. The platform’s smart differential updates further reduce bandwidth usage by downloading only the changed parts [\[1\]](https://capgo.app/).
+Capgo’s global CDN delivers 5MB bundles in just 114ms, with an average API response time of 357ms. The platform’s smart differential updates further reduce bandwidth usage by downloading only the changed parts [\[1\]](https://capgo.app/).
 
 > "Partial Updates: Smart differential updates. Only download what's changed, saving bandwidth and time" [\[1\]](https://capgo.app/).
 

@@ -329,7 +329,7 @@ Una vez que tu entorno Android esté listo, es momento de integrar Capgo. Esta h
 
 -   **Actualizaciones en tiempo real**: Las actualizaciones llegan al 95% de los usuarios activos en 24 horas [\[1\]](https://capgo.app/).
 -   **Cifrado de extremo a extremo**: Garantiza la seguridad de los datos.
--   **Respuesta rápida de API**: El tiempo de respuesta global promedio es 434ms, con una tasa de éxito del 82% [\[1\]](https://capgo.app/).
+-   **Respuesta rápida de API**: El tiempo de respuesta global promedio es 357ms, con una tasa de éxito del 82% [\[1\]](https://capgo.app/).
 -   **Actualizaciones parciales**: Minimiza el uso de datos transfiriendo solo los cambios necesarios.
 
 **Resumen de rendimiento**:

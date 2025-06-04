@@ -174,7 +174,7 @@ Adherirse a las pautas de la tienda de aplicaciones es crucial para evitar retra
 
 ### Funciones Principales de Capgo
 
-Capgo simplifica el proceso de gestión de actualizaciones OTA con su sistema seguro y encriptado y funcionalidad avanzada de canales. Las actualizaciones se entregan rápida y seguramente, gracias a su CDN global, que logra un **tiempo de descarga de 114ms para paquetes de 5MB** y un **tiempo promedio de respuesta de API de 434ms en todo el mundo** [\[1\]](https://capgo.app/). La plataforma también usa un sistema de actualización parcial, descargando solo los componentes cambiados. Este enfoque ha llevado a una impresionante **tasa de actualización del 95% entre usuarios activos dentro de 24 horas** [\[1\]](https://capgo.app/).
+Capgo simplifica el proceso de gestión de actualizaciones OTA con su sistema seguro y encriptado y funcionalidad avanzada de canales. Las actualizaciones se entregan rápida y seguramente, gracias a su CDN global, que logra un **tiempo de descarga de 114ms para paquetes de 5MB** y un **tiempo promedio de respuesta de API de 357ms en todo el mundo** [\[1\]](https://capgo.app/). La plataforma también usa un sistema de actualización parcial, descargando solo los componentes cambiados. Este enfoque ha llevado a una impresionante **tasa de actualización del 95% entre usuarios activos dentro de 24 horas** [\[1\]](https://capgo.app/).
 
 ### Ventajas para Desarrolladores
 
@@ -231,6 +231,6 @@ Para hacer que sus actualizaciones OTA sean seguras y eficientes, considere esto
 -   **Configure herramientas de monitoreo** para seguir métricas críticas en tiempo real.
 -   **Implemente despliegues graduales** comenzando con un pequeño grupo de usuarios antes de expandirse a todos los usuarios.
 
-Un entorno de staging bien preparado, respaldado por plataformas como Capgo, puede ayudarte a alcanzar estos objetivos. Por ejemplo, el 95% de los usuarios activos pueden actualizarse dentro de las 24 horas, con un tiempo promedio de respuesta global de API de 434ms [\[1\]](https://capgo.app/).
+Un entorno de staging bien preparado, respaldado por plataformas como Capgo, puede ayudarte a alcanzar estos objetivos. Por ejemplo, el 95% de los usuarios activos pueden actualizarse dentro de las 24 horas, con un tiempo promedio de respuesta global de API de 357ms [\[1\]](https://capgo.app/).
 
 > "¡Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" [\[1\]](https://capgo.app/)

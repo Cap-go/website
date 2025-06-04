@@ -237,4 +237,4 @@ Para mantener efectivo tu proceso de conformidad, concéntrate en estas áreas:
 | --- | --- | --- |
 | Seguimiento de Políticas | Monitoreo automatizado | Informe mensual de conformidad |
 | Distribución de Actualizaciones | Implementaciones graduales | 95% de actualizaciones exitosas |
-| Gestión de Errores | Seguimiento en tiempo real | Tiempo promedio de respuesta API: 434ms |
+| Gestión de Errores | Seguimiento en tiempo real | Tiempo promedio de respuesta API: 357ms |

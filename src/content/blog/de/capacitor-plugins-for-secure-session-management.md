@@ -221,7 +221,7 @@ Dieser mehrschichtige Ansatz gewährleistet nicht nur sichere Sitzungen, sondern
 Capgo kombiniert Sicherheit mit beeindruckenden Leistungsmetriken und gewährleistet zuverlässige und effiziente Update-Bereitstellungen:
 
 -   **Update-Geschwindigkeit**: Überträgt 5MB-Bundles in nur 114ms und minimiert die Anfälligkeit für Schwachstellen während Updates [\[13\]](https://capgo.app).
--   **API-Antwortzeit**: Hält eine durchschnittliche Antwortzeit von 434ms für kritische Sicherheitsoperationen [\[13\]](https://capgo.app).
+-   **API-Antwortzeit**: Hält eine durchschnittliche Antwortzeit von 357ms für kritische Sicherheitsoperationen [\[13\]](https://capgo.app).
 -   **Update-Erfolgsrate**: Sichert eine globale Erfolgsrate von 82% für Deployments [\[13\]](https://capgo.app).
 -   **Benutzerabdeckung**: Erreicht 95% der aktiven Benutzer mit Sicherheitsupdates innerhalb von 24 Stunden [\[13\]](https://capgo.app).
 

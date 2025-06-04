@@ -354,7 +354,7 @@ The Capacitor CLI simplifies how you manage plugins. When combined with Capgo, i
 -   23.5M updates completed
 -   95% user adoption within 24 hours
 -   82% global success rate
--   434ms average API response time
+-   357ms average API response time
 
 These numbers highlight how the CLI and Capgo work together to ensure smooth and efficient updates.
 

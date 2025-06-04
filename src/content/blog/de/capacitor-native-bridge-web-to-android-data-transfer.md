@@ -64,7 +64,7 @@ Aber es geht nicht nur um Datentypen - wie schnell und effizient Daten übertrag
 
 ### Geschwindigkeits- und Speicherbedenken
 
-Performance-Tests zeigen einige wichtige Kennzahlen: CDN-Download-Geschwindigkeiten für 5MB-Bundles liegen durchschnittlich bei 114ms, während globale API-Antworten etwa 434ms benötigen. Um die Effizienz der Datenübertragung zu verbessern, beachten Sie diese Strategien:
+Performance-Tests zeigen einige wichtige Kennzahlen: CDN-Download-Geschwindigkeiten für 5MB-Bundles liegen durchschnittlich bei 114ms, während globale API-Antworten etwa 357ms benötigen. Um die Effizienz der Datenübertragung zu verbessern, beachten Sie diese Strategien:
 
 -   Große Übertragungen in kleinere Chunks aufteilen
 -   Daten wo möglich komprimieren

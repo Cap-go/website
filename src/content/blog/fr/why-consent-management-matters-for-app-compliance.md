@@ -182,7 +182,7 @@ L'utilisation d'outils en temps réel comme Capgo offre plusieurs avantages en t
     Le chiffrement de bout en bout de Capgo maintient les mises à jour liées au consentement sécurisées tout au long du processus
     
 -   **Aperçus des performances**  
-    Les analyses avancées fournissent un suivi détaillé des modifications de consentement Capgo, par exemple, offre un temps de réponse API moyen de seulement **434ms dans le monde** [\[1\]](https://capgo.app/)
+    Les analyses avancées fournissent un suivi détaillé des modifications de consentement Capgo, par exemple, offre un temps de réponse API moyen de seulement **357ms dans le monde** [\[1\]](https://capgo.app/)
     
 
 ## Prochaines étapes pour la conformité des applications

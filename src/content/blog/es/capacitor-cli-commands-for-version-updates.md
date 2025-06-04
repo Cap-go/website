@@ -315,7 +315,7 @@ Aquí tienes un resumen de las métricas de rendimiento de Capgo:
 
 | Métrica | Rendimiento |
 | --- | --- |
-| Tiempo de respuesta global de la API | 434ms |
+| Tiempo de respuesta global de la API | 357ms |
 | Velocidad de descarga de 5MB | 114ms |
 | Tasa de éxito de actualización | 82% |
 

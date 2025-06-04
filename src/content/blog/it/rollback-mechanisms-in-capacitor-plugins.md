@@ -129,7 +129,7 @@ Capgo è emerso come una solida soluzione di gestione rollback dopo la chiusura 
 | Funzionalità | Vantaggio | Performance |
 | --- | --- | --- |
 | **Rollback con Un Click** | Ripristina rapidamente qualsiasi versione | 114ms download medio bundle |
-| **Crittografia End-to-End** | [Aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 434ms tempo di risposta API |
+| **Crittografia End-to-End** | [Aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 357ms tempo di risposta API |
 | **[Sistema dei Canali](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Distribuisci aggiornamenti beta a gruppi specifici | 235M aggiornamenti consegnati |
 | **Dashboard Analytics** | Traccia aggiornamenti in tempo reale | 750 app in produzione servite |
 

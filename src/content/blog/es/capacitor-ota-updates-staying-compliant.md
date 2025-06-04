@@ -67,7 +67,7 @@ A pesar de estos beneficios, implementar actualizaciones OTA puede presentar des
 
 > "Implementamos actualizaciones OTA de Capgo en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo." – Colenso [\[1\]](https://capgo.app/)
 
-Para garantizar actualizaciones OTA confiables, los desarrolladores deben enfocarse en el monitoreo proactivo y mantener opciones de reversión para una resolución rápida de problemas. Con un tiempo promedio de respuesta de API de 434ms, optimizar la infraestructura de entrega de actualizaciones también es crucial [\[1\]](https://capgo.app/).
+Para garantizar actualizaciones OTA confiables, los desarrolladores deben enfocarse en el monitoreo proactivo y mantener opciones de reversión para una resolución rápida de problemas. Con un tiempo promedio de respuesta de API de 357ms, optimizar la infraestructura de entrega de actualizaciones también es crucial [\[1\]](https://capgo.app/).
 
 ## Reglas de la Tienda de Aplicaciones para Actualizaciones OTA
 

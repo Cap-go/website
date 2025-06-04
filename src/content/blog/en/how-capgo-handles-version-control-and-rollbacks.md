@@ -132,7 +132,7 @@ For iOS, Capgo adheres to Apple’s strict rules by using an interpreter approac
 
 ### Real-Time Analytics and Monitoring
 
-Capgo’s real-time analytics and monitoring tools provide the data developers need to manage rollbacks effectively. These tools track critical metrics like an 82% global update success rate, 95% of active users being updated within 24 hours, and an average API response time of 434ms worldwide [\[1\]](https://capgo.app). With this data, developers can quickly identify problems and decide whether to initiate automatic or manual rollbacks during the critical first 24 hours of an update.
+Capgo’s real-time analytics and monitoring tools provide the data developers need to manage rollbacks effectively. These tools track critical metrics like an 82% global update success rate, 95% of active users being updated within 24 hours, and an average API response time of 357ms worldwide [\[1\]](https://capgo.app). With this data, developers can quickly identify problems and decide whether to initiate automatic or manual rollbacks during the critical first 24 hours of an update.
 
 ## Conclusion and Key Takeaways
 

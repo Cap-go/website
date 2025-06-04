@@ -221,7 +221,7 @@ La plataforma de automatización de Capgo ofrece un rendimiento sólido en escen
 
 | **Característica** | **Beneficio** | **Métrica de Rendimiento** |
 | --- | --- | --- |
-| Actualizaciones Instantáneas | Evita retrasos en la tienda de aplicaciones | 434ms tiempo promedio de respuesta API |
+| Actualizaciones Instantáneas | Evita retrasos en la tienda de aplicaciones | 357ms tiempo promedio de respuesta API |
 | CDN Global | Entrega rápida de contenido | 114ms para descarga de paquete de 5MB |
 | Control de Versiones | Seguimiento y gestión de cambios | 23.5M+ actualizaciones entregadas |
 | Analíticas | Monitoreo del éxito de implementación | 750+ aplicaciones en producción monitoreadas |
@@ -260,7 +260,7 @@ Aquí están los componentes principales para lograr una automatización eficien
 | **Componente** | **Mejor Práctica** | **Impacto** |
 | --- | --- | --- |
 | Estructura | Diseño modular con separación clara | Simplifica el mantenimiento |
-| Rendimiento | Operaciones asíncronas y ajuste de memoria | Logra 434ms de tiempo promedio de respuesta API |
+| Rendimiento | Operaciones asíncronas y ajuste de memoria | Logra 357ms de tiempo promedio de respuesta API |
 | Seguridad | Cifrado de extremo a extremo | Protege contra acceso no autorizado |
 | CI/CD | Pruebas automatizadas y despliegues por etapas | Asegura 95% de éxito en actualizaciones en 24 horas |
 

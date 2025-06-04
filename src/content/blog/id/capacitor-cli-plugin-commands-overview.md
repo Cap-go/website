@@ -306,7 +306,7 @@ Sistem plugin CLI Capgo memberikan statistik kinerja yang mengesankan:
 - **23,5 juta pembaruan** berhasil disampaikan
 - **82% tingkat keberhasilan global** untuk pembaruan
 - **95% pengguna aktif** diperbarui dalam 24 jam
-- **434ms** rata-rata waktu respons API global
+- **357ms** rata-rata waktu respons API global
 
 Untuk memulai dengan Capgo, jalankan perintah berikut:
 
@@ -353,7 +353,7 @@ CLI Capacitor menyederhanakan cara Anda mengelola plugin. Ketika digabungkan den
 -   23.5M pembaruan diselesaikan
 -   95% adopsi pengguna dalam waktu 24 jam
 -   82% tingkat keberhasilan global
--   434ms rata-rata waktu respons API
+-   357ms rata-rata waktu respons API
 
 Angka-angka ini menyoroti bagaimana CLI dan Capgo bekerja bersama untuk memastikan pembaruan yang lancar dan efisien.
 

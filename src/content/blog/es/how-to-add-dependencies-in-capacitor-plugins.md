@@ -180,12 +180,12 @@ Usar herramientas de actualización en vivo como Capgo puede simplificar y mejor
 
 ### Beneficios de Capgo
 
-Capgo simplifica el proceso de gestión de dependencias mientras ofrece un alto rendimiento. Logra una impresionante **tasa de actualización del 95% de usuarios en 24 horas** y mantiene un tiempo de respuesta global de API de **434ms** [\[1\]](https://capgo.app/). Con cifrado de extremo a extremo, asegura actualizaciones seguras que cumplen con las directrices tanto de Apple como de Android. Para equipos que gestionan múltiples versiones de plugins, el sistema de canales de Capgo permite implementaciones dirigidas a grupos específicos de usuarios.
+Capgo simplifica el proceso de gestión de dependencias mientras ofrece un alto rendimiento. Logra una impresionante **tasa de actualización del 95% de usuarios en 24 horas** y mantiene un tiempo de respuesta global de API de **357ms** [\[1\]](https://capgo.app/). Con cifrado de extremo a extremo, asegura actualizaciones seguras que cumplen con las directrices tanto de Apple como de Android. Para equipos que gestionan múltiples versiones de plugins, el sistema de canales de Capgo permite implementaciones dirigidas a grupos específicos de usuarios.
 
 Aquí hay un vistazo rápido al rendimiento de Capgo:
 
 | Métrica | Valor |
 | --- | --- |
-| Tiempo de Respuesta Global de API | 434ms |
+| Tiempo de Respuesta Global de API | 357ms |
 | Tasa de Éxito de Actualización | 82% |
 | Tasa de Actualización de Usuarios (24 Horas) | 95% |

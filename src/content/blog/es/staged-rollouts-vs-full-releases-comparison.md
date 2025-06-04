@@ -125,7 +125,7 @@ Los enfoques modernos están remodelando cómo se gestionan los lanzamientos com
 | Más fácil de mantener y documentar | Opciones limitadas de reversión |
 | Proceso de despliegue más rápido | Posibles picos de carga del servidor |
 
-Capgo reporta un 82% de tasa de éxito global para actualizaciones, con un tiempo de respuesta promedio de API de 434ms en todo el mundo [\[1\]](https://capgo.app/)
+Capgo reporta un 82% de tasa de éxito global para actualizaciones, con un tiempo de respuesta promedio de API de 357ms en todo el mundo [\[1\]](https://capgo.app/)
 
 > "Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

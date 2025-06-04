@@ -29,7 +29,7 @@ Over-the-Air (OTA) updates let you update your [Capacitor](https://capacitorjs.c
 
 | **Feature** | **AWS** | **Google Cloud** | **Azure** | **Capgo** |
 | --- | --- | --- | --- | --- |
-| **Speed (5MB Bundle)** | 434ms | Not reported | Not reported | 114ms |
+| **Speed (5MB Bundle)** | 357ms | Not reported | Not reported | 114ms |
 | **Security** | Requires setup | Built-in tools | Strong tools | End-to-end encryption |
 | **Ease of Integration** | Manual setup | Moderate complexity | REST APIs, CLI | Built-in CI/CD |
 | **Update Success Rate** | 82% | Not reported | Not reported | 82% |
@@ -71,7 +71,7 @@ AWS services like **CodePipeline** and **CodeDeploy** allow you to automate OTA 
 | --- | --- |
 | Update Adoption | 95% within 24 hours |
 | Global Success Rate | 82% |
-| Average Response Time | 434ms worldwide |
+| Average Response Time | 357ms worldwide |
 
 While these numbers show strong performance, achieving them requires significant effort in configuration and tuning.
 

@@ -359,7 +359,7 @@ Berikut cara memaksimalkan penggunaannya:
     | Metrik | Kinerja |
     | --- | --- |
     | Kecepatan Pengiriman Update | 114ms untuk bundle 5MB |
-    | Waktu Respon API | 434ms di seluruh dunia |
+    | Waktu Respon API | 357ms di seluruh dunia |
     | Tingkat Pembaruan Pengguna | 95% dalam 24 jam |
 
 Sistem pembaruan parsial Capgo hanya mengunduh file yang berubah, mengurangi gangguan selama debugging. Dengan enkripsi end-to-end dan kepatuhan terhadap pedoman app store, ini adalah alat yang ampuh untuk menjaga stabilitas aplikasi Anda dan menyelesaikan masalah dengan cepat.

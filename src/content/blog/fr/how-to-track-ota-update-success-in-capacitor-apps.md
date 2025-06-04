@@ -302,7 +302,7 @@ Lors de la comparaison des outils de suivi des mises à jour OTA, concentrez-vou
 Capgo se distingue avec un impressionnant taux de réussite global de 82% [\[1\]](https://capgo.app/), offrant des fonctionnalités qui couvrent tous les aspects de la [gestion des mises à jour](https://capgo.app/docs/plugin/cloud-mode/manual-update/) :
 
 -   **Analyses en Temps Réel**  
-    Capgo fournit une surveillance mondiale avec un temps de réponse API moyen de 434ms [\[1\]](https://capgo.app/). Cela vous aide à détecter et résoudre les problèmes rapidement.
+    Capgo fournit une surveillance mondiale avec un temps de réponse API moyen de 357ms [\[1\]](https://capgo.app/). Cela vous aide à détecter et résoudre les problèmes rapidement.
     
 -   **Infrastructure de Sécurité**  
     Les mises à jour sont livrées de manière sécurisée avec un chiffrement de bout en bout, répondant aux besoins des applications d'entreprise les plus exigeantes.

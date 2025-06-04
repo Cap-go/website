@@ -179,7 +179,7 @@ Une stratégie de distribution structurée garantit que les mises à jour sont l
 
 3\. **Systèmes de surveillance**
 
-L'analytique intégrée vous permet de suivre la performance des mises à jour. Avec un temps de réponse API moyen de 434ms dans le monde [\[1\]](https://capgo.app/), ces outils fournissent des insights en temps réel sur les taux de réussite de distribution.
+L'analytique intégrée vous permet de suivre la performance des mises à jour. Avec un temps de réponse API moyen de 357ms dans le monde [\[1\]](https://capgo.app/), ces outils fournissent des insights en temps réel sur les taux de réussite de distribution.
 
 ## Conclusion : Gestion des mises à jour conformes
 

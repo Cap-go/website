@@ -254,7 +254,7 @@ Capgo menonjol dengan mengikuti praktik terbaik ini, memungkinkan pembaruan OTA 
 | Fitur | Manfaat | Metrik Kinerja |
 | --- | --- | --- |
 | CDN Global | Mempercepat pengiriman | Bundle 5MB dikirim dalam 114ms |
-| Respons API | Sinkronisasi cepat | Respons rata-rata 434ms di seluruh dunia |
+| Respons API | Sinkronisasi cepat | Respons rata-rata 357ms di seluruh dunia |
 | Distribusi Pembaruan | Penerapan fleksibel | Adopsi pengguna 95% dalam 24 jam |
 
 > "Tim OSIRIS-REx NASA mencatat: '@Capgo adalah cara cerdas untuk melakukan hot code pushes (dan tidak untuk semua uang di dunia seperti dengan @AppFlow) 🙂'" [\[1\]](https://capgo.app/)

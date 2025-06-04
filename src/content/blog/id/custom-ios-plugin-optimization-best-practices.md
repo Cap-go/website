@@ -173,7 +173,7 @@ Tabel di bawah ini menyoroti area-area kritis optimisasi, dampak terukurnya, dan
 
 | **Area Optimisasi** | **Dampak** | **Manfaat Implementasi** |
 | --- | --- | --- |
-| **Komunikasi Bridge** | Rata-rata waktu respons API 434ms [\[1\]](https://capgo.app/) | Latensi lebih rendah dan aliran data lebih lancar |
+| **Komunikasi Bridge** | Rata-rata waktu respons API 357ms [\[1\]](https://capgo.app/) | Latensi lebih rendah dan aliran data lebih lancar |
 | **Manajemen Memori** | 95% tingkat pembaruan pengguna aktif dalam 24 jam [\[1\]](https://capgo.app/) | Stabilitas dan penggunaan sumber daya yang lebih baik |
 | **Performa Swift** | Kecepatan unduh 114ms untuk paket 5MB [\[1\]](https://capgo.app/) | Eksekusi lebih cepat dan pengalaman pengguna lebih baik |
 

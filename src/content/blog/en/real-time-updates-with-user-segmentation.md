@@ -80,7 +80,7 @@ For segmented updates to work smoothly, you need reliable tools that ensure comp
 -   **95% active user update adoption within 24 hours**
 -   **Global [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) performance**: 5MB bundle delivered in 114ms
 -   **82% worldwide update success rate**
--   **Global API response time**: 434ms
+-   **Global API response time**: 357ms
 
 With these tools in place, thorough testing is essential to confirm everything runs as planned.
 

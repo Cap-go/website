@@ -237,4 +237,4 @@ Um Ihren Compliance-Prozess effektiv zu halten, konzentrieren Sie sich auf diese
 | --- | --- | --- |
 | Richtlinien-Tracking | Automatisierte Überwachung | Monatlicher Compliance-Bericht |
 | Update-Verteilung | Gestaffelte Einführungen | 95% erfolgreiche Updates |
-| Fehlermanagement | Echtzeit-Tracking | Durchschnittliche API-Antwortzeit: 434ms |
+| Fehlermanagement | Echtzeit-Tracking | Durchschnittliche API-Antwortzeit: 357ms |

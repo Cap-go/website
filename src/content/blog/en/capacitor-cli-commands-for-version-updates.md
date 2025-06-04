@@ -313,7 +313,7 @@ Here’s a snapshot of Capgo’s performance metrics:
 
 | Metric | Performance |
 | --- | --- |
-| Global API Response Time | 434ms |
+| Global API Response Time | 357ms |
 | 5MB Bundle Download Speed | 114ms |
 | Update Success Rate | 82% |
 

@@ -241,7 +241,7 @@ To maintain a top-notch user experience, monitor these key metrics:
 | Metric Type | What to Monitor | Target Benchmark |
 | --- | --- | --- |
 | Update Success | User adoption rate | 95% within 24 hours |
-| Response Time | API speed | Under 434ms globally |
+| Response Time | API speed | Under 357ms globally |
 | User Experience | Interface interactions | Real-time feedback |
 
 Capgo’s built-in analytics provide real-time insights into user engagement, all while ensuring security with end-to-end encryption.
@@ -267,6 +267,6 @@ Thorough testing and active error tracking are also essential to delivering a sm
 | Metric | Performance |
 | --- | --- |
 | Update Adoption | 95% within 24 hours |
-| Global API Response | 434ms average |
+| Global API Response | 357ms average |
 | Update Delivery | 114ms for 5MB bundle |
 | Success Rate | 82% worldwide |

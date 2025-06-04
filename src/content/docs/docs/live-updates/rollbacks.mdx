@@ -9,7 +9,54 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 While Capgo's live updates allow you to quickly deliver improvements and fixes to your users, there may be situations where you need to roll back to a previous version of your app. Perhaps a new update introduced an unexpected critical issue, or maybe you want to revert a specific change while you work on a fix.
 
-Capgo provides several ways to manage a channel's builds and control the version of your app that users receive.
+Capgo provides several ways to manage a channel's builds and control the version of your app that users receive, including both manual rollback options and automatic safety mechanisms.
+
+## Automatic Rollback Protection
+
+Capgo includes a built-in safety mechanism to protect your users from broken updates. If a JavaScript error occurs before the `notifyAppReady()` method is called, the plugin will automatically roll back to the previous working version.
+
+### How Automatic Rollback Works
+
+When a new update is downloaded and applied, Capgo expects your app to call `notifyAppReady()` within a configurable timeframe to confirm that the update loaded successfully. This method signals that:
+
+- The JavaScript bundle loaded without critical errors
+- Your app's core functionality is working
+- The update is safe to keep
+
+If `notifyAppReady()` is not called due to a JavaScript crash or critical error, Capgo will:
+
+1. Detect that the update failed to initialize properly
+2. Automatically revert to the previous working bundle
+3. Mark the problematic update as failed to prevent it from being applied again
+
+<Aside type="tip">
+Make sure to call `notifyAppReady()` in your app's initialization code after your core components have loaded successfully. This ensures the automatic rollback protection works as intended.
+</Aside>
+
+```javascript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+// Call this after your app has successfully initialized
+await CapacitorUpdater.notifyAppReady()
+```
+
+This automatic protection helps ensure that even if you accidentally push a broken update, your users won't be stuck with a non-functional app.
+
+### Configuring the Timeout
+
+You can configure how long Capgo waits for `notifyAppReady()` to be called by setting the `appReadyTimeout` in your Capacitor configuration:
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "appReadyTimeout": 10000
+    }
+  }
+}
+```
+
+The `appReadyTimeout` value is specified in milliseconds. The default timeout is typically 10 seconds, but you can adjust this based on your app's initialization requirements. If your app takes longer to load due to complex initialization processes, you may want to increase this value.
 
 ## Rolling Back to a Previous Bundle
 

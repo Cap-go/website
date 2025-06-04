@@ -382,7 +382,7 @@ Performa pembaruan Capgo mengesankan:
 
 -   **95% pengguna aktif** menerima pembaruan dalam 24 jam.
 -   **82% tingkat keberhasilan** untuk pengiriman pembaruan di seluruh dunia.
--   Waktu respons API rata-rata **434ms secara global**.
+-   Waktu respons API rata-rata **357ms secara global**.
 
 Platform ini menggunakan pembaruan parsial, artinya hanya perubahan yang diunduh. Pendekatan ini mengurangi penggunaan bandwidth dan mempercepat proses pembaruan. Plus, seluruh proses build sepenuhnya otomatis, menghemat waktu dan usaha.
 

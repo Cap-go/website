@@ -57,7 +57,7 @@ Ma non si tratta solo di tipi di dati - anche la velocità e l'efficienza con cu
 
 ### Problemi di velocità e memoria
 
-I test delle prestazioni rivelano alcune metriche chiave: le velocità di download CDN per bundle da 5MB sono in media di circa 114ms, mentre le risposte API globali richiedono circa 434ms. Per migliorare l'efficienza del trasferimento dati, considera queste strategie:
+I test delle prestazioni rivelano alcune metriche chiave: le velocità di download CDN per bundle da 5MB sono in media di circa 114ms, mentre le risposte API globali richiedono circa 357ms. Per migliorare l'efficienza del trasferimento dati, considera queste strategie:
 
 -   Suddividi i trasferimenti di grandi dimensioni in blocchi più piccoli
 -   Comprimi i dati ove possibile

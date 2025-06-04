@@ -129,7 +129,7 @@ Capgo muncul sebagai solusi manajemen rollback yang kuat setelah penutupan [Micr
 | Fitur | Keunggulan | Kinerja |
 | --- | --- | --- |
 | **Rollback Satu Klik** | Cepat kembali ke versi manapun | 114ms rata-rata unduhan bundle |
-| **Enkripsi End-to-End** | [Pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 434ms waktu respons API |
+| **Enkripsi End-to-End** | [Pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 357ms waktu respons API |
 | **[Sistem Channel](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Distribusi pembaruan beta ke grup tertentu | 23.5M pembaruan terkirim |
 | **Dashboard Analitik** | Lacak pembaruan secara real-time | 750 aplikasi produksi dilayani |
 

@@ -171,7 +171,7 @@ Measuring key performance indicators (KPIs) is essential for assessing your [upd
 | Metric | Target Benchmark | Industry Average |
 | --- | --- | --- |
 | 24-hour Adoption Rate | 95% of active users | 82% worldwide |
-| Update Download Speed | Under 500ms | 434ms average |
+| Update Download Speed | Under 500ms | 357ms average |
 | Bundle Download Time (5MB) | Under 150ms | 114ms via CDN |
 
 You can integrate these metrics into your workflow with the following code snippet:

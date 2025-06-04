@@ -222,7 +222,7 @@ La piattaforma di automazione di Capgo offre prestazioni elevate in scenari real
 
 | **Funzionalità** | **Beneficio** | **Metrica di Performance** |
 | --- | --- | --- |
-| Aggiornamenti Istantanei | Evita ritardi dell'app store | 434ms tempo medio di risposta API |
+| Aggiornamenti Istantanei | Evita ritardi dell'app store | 357ms tempo medio di risposta API |
 | CDN Globale | Consegna rapida dei contenuti | 114ms per download bundle 5MB |
 | Controllo Versione | Traccia e gestisce le modifiche | 23.5M+ aggiornamenti distribuiti |
 | Analisi | Monitora successo distribuzione | 750+ app in produzione monitorate |
@@ -261,7 +261,7 @@ Ecco i componenti principali per ottenere un'efficiente automazione degli script
 | **Componente** | **Migliore Pratica** | **Impatto** |
 | --- | --- | --- |
 | Struttura | Design modulare con chiara separazione | Semplifica manutenzione |
-| Performance | Operazioni async e ottimizzazione memoria | Raggiunge 434ms tempo medio risposta API |
+| Performance | Operazioni async e ottimizzazione memoria | Raggiunge 357ms tempo medio risposta API |
 | Sicurezza | Crittografia end-to-end | Protegge da accessi non autorizzati |
 | CI/CD | Test automatizzati e rollout graduali | Garantisce 95% successo aggiornamenti in 24 ore |
 

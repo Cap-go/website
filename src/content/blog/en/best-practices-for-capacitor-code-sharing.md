@@ -209,7 +209,7 @@ These methods have been successfully implemented in over 750 production apps [\[
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67fc5744af1a45e500bc59a4/460b6a71189963262e0579d8af2972b5.jpg)
 
-Capgo aligns with these practices, optimizing Capacitor development with advanced over-the-air (OTA) updates and integrated CI/CD workflows. It delivers impressive results, including download speeds of 114ms for 5MB bundles via a global CDN, an average API response time of 434ms worldwide, and 23.5 million successful updates [\[1\]](https://capgo.app/).
+Capgo aligns with these practices, optimizing Capacitor development with advanced over-the-air (OTA) updates and integrated CI/CD workflows. It delivers impressive results, including download speeds of 114ms for 5MB bundles via a global CDN, an average API response time of 357ms worldwide, and 23.5 million successful updates [\[1\]](https://capgo.app/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

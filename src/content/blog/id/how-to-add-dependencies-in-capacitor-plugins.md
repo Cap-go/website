@@ -453,7 +453,7 @@ Capgo menyederhanakan manajemen ketergantungan plugin dengan fitur-fitur ini:
 | Fitur | Apa yang Dilakukan | Metrik Kunci |
 | --- | --- | --- |
 | Pembaruan Langsung | Dorong pembaruan dalam beberapa menit | 95% tingkat pembaruan pengguna dalam 24 jam |
-| Pembaruan Parsial | Unduh hanya file yang berubah | 434ms rata-rata waktu respons API |
+| Pembaruan Parsial | Unduh hanya file yang berubah | 357ms rata-rata waktu respons API |
 | Kontrol Versi | Kelola beberapa versi | 82% tingkat keberhasilan global |
 | Sistem Saluran | Targetkan kelompok pengguna tertentu | Mendukung beberapa saluran penyebaran |
 
@@ -520,12 +520,12 @@ Menggunakan alat pembaruan langsung seperti Capgo dapat lebih menyederhanakan da
 
 ### Manfaat Capgo
 
-Capgo menyederhanakan proses manajemen ketergantungan sambil memberikan kinerja yang kuat. Ini mencapai **tingkat pembaruan pengguna 95% dalam 24 jam** dan mempertahankan waktu respons API global **434ms** [\[1\]](https://capgo.app/). Dengan enkripsi end-to-end, ini memastikan pembaruan yang aman yang mematuhi pedoman Apple dan Android. Untuk tim yang mengelola beberapa versi plugin, sistem saluran Capgo memungkinkan penyebaran yang ditargetkan untuk kelompok pengguna tertentu.
+Capgo menyederhanakan proses manajemen ketergantungan sambil memberikan kinerja yang kuat. Ini mencapai **tingkat pembaruan pengguna 95% dalam 24 jam** dan mempertahankan waktu respons API global **357ms** [\[1\]](https://capgo.app/). Dengan enkripsi end-to-end, ini memastikan pembaruan yang aman yang mematuhi pedoman Apple dan Android. Untuk tim yang mengelola beberapa versi plugin, sistem saluran Capgo memungkinkan penyebaran yang ditargetkan untuk kelompok pengguna tertentu.
 
 Berikut adalah sekilas kinerja Capgo:
 
 | Metrik | Nilai |
 | --- | --- |
-| Waktu Respons API Global | 434ms |
+| Waktu Respons API Global | 357ms |
 | Tingkat Keberhasilan Pembaruan | 82% |
 | Tingkat Pembaruan Pengguna (24 Jam) | 95% |

@@ -52,7 +52,7 @@ Effiziente Bereitstellungs- und Update-Prozesse sind in der modernen Mobile-App-
 
 Capacitor CI/CD Plugins bieten einen Open-Source-Ansatz zur Verwaltung von [App-Updates](https://capgo.app/plugins/capacitor-updater/) und integrieren sich nahtlos in bestehende CI/CD-Systeme. Diese Methode gibt Entwicklern detaillierte Kontrolle über Bereitstellungsprozesse und macht sie zu einer anpassbareren Option im Vergleich zu All-in-One-Plattformen.
 
-[Capgo](https://capgo.app/) hat einige beeindruckende Statistiken veröffentlicht: **95% der Nutzer aktualisierten innerhalb von 24 Stunden**, eine **82% globale Erfolgsrate**, **434ms durchschnittliche API-Antwortzeit** und **5MB Bundles werden in nur 114ms ausgeliefert** [\[1\]](https://capgo.app/).
+[Capgo](https://capgo.app/) hat einige beeindruckende Statistiken veröffentlicht: **95% der Nutzer aktualisierten innerhalb von 24 Stunden**, eine **82% globale Erfolgsrate**, **357ms durchschnittliche API-Antwortzeit** und **5MB Bundles werden in nur 114ms ausgeliefert** [\[1\]](https://capgo.app/).
 
 Hier sind einige herausragende Funktionen:
 
@@ -80,7 +80,7 @@ Die Wahl zwischen granularer Kontrolle und einer All-in-One-Plattform hängt vom
 
 ### CI/CD Plugin-Funktionen
 
-Capacitor CI/CD-Plugins sind heute darauf ausgerichtet, die Anforderungen von Unternehmensanwendern zu erfüllen. Zum Beispiel liefert Capgos Implementierung ein 5MB-Bundle in nur 114ms, mit einer durchschnittlichen globalen API-Antwortzeit von 434ms [\[1\]](https://capgo.app/).
+Capacitor CI/CD-Plugins sind heute darauf ausgerichtet, die Anforderungen von Unternehmensanwendern zu erfüllen. Zum Beispiel liefert Capgos Implementierung ein 5MB-Bundle in nur 114ms, mit einer durchschnittlichen globalen API-Antwortzeit von 357ms [\[1\]](https://capgo.app/).
 
 Hier ein Überblick über die Funktionen dieser Plugins:
 

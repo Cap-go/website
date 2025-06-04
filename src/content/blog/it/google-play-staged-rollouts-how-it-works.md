@@ -114,7 +114,7 @@ L'utilizzo di strumenti di [gestione degli aggiornamenti](https://capgo.app/docs
 | Controllo versioni | Gestisce più rilasci | Mantiene organizzati i deployment |
 | Capacità di rollback | Annulla rapidamente gli aggiornamenti | Riduce l'impatto sugli utenti |
 
-Quando selezioni uno strumento, concentrati su quelli che offrono monitoraggio automatizzato. Strumenti con un tempo di risposta medio di **434ms a livello globale** [\[1\]](https://capgo.app/) permettono un'azione rapida quando sorgono problemi.
+Quando selezioni uno strumento, concentrati su quelli che offrono monitoraggio automatizzato. Strumenti con un tempo di risposta medio di **357ms a livello globale** [\[1\]](https://capgo.app/) permettono un'azione rapida quando sorgono problemi.
 
 Per un controllo ancora maggiore, considera l'utilizzo di un [sistema di canali](https://capgo.app/docs/plugin/cloud-mode/channel-system/) per la distribuzione degli aggiornamenti. Questo ti permette di targetizzare specifici gruppi di utenti con versioni diverse, rendendo il beta testing e i rollout graduali più fluidi. Inoltre, la capacità di pubblicare modifiche al codice dal vivo rimanendo conformi alle regole dell'app store può semplificare e velocizzare il tuo [processo di aggiornamento](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 

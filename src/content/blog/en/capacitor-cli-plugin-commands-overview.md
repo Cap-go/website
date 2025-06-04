@@ -302,7 +302,7 @@ Capgo's CLI plugin system delivers impressive performance stats:
 -   **23.5M updates** successfully delivered
 -   **82% global success rate** for updates
 -   **95% of active users** updated within 24 hours
--   **434ms** average global API response time
+-   **357ms** average global API response time
 
 To get started with Capgo, run the following command:
 
@@ -349,7 +349,7 @@ The Capacitor CLI simplifies how you manage plugins. When combined with Capgo, i
 -   23.5M updates completed
 -   95% user adoption within 24 hours
 -   82% global success rate
--   434ms average API response time
+-   357ms average API response time
 
 These numbers highlight how the CLI and Capgo work together to ensure smooth and efficient updates.
 

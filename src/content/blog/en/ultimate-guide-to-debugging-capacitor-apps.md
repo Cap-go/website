@@ -355,7 +355,7 @@ Here’s how you can make the most of it:
     | Metric | Performance |
     | --- | --- |
     | Update Delivery Speed | 114ms for a 5MB bundle |
-    | API Response Time | 434ms worldwide |
+    | API Response Time | 357ms worldwide |
     | User Update Rate | 95% within 24 hours |
     
 

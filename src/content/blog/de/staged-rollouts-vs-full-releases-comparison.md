@@ -124,7 +124,7 @@ Moderne Ansätze gestalten die Verwaltung vollständiger Releases neu und bieten
 | Einfacher zu unterstützen und dokumentieren | Begrenzte Rollback-Optionen |
 | Schnellerer Bereitstellungsprozess | Mögliche Server-Last-Spitzen |
 
-Capgo berichtet von einer globalen Erfolgsrate von 82% für Updates, mit einer durchschnittlichen API-Antwortzeit von 434ms weltweit [\[1\]](https://capgo.app/).
+Capgo berichtet von einer globalen Erfolgsrate von 82% für Updates, mit einer durchschnittlichen API-Antwortzeit von 357ms weltweit [\[1\]](https://capgo.app/).
 
 > "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch bei der kontinuierlichen Bereitstellung an unsere Nutzer!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
@@ -251,7 +251,7 @@ Hier ist, was Capgo für gestaffelte Veröffentlichungen bietet:
 
 ### Capgo Tools für vollständige Veröffentlichungen
 
-Capgo macht vollständige Veröffentlichungen schnell und sicher durch ein globales CDN, Hintergrund-Updates und nahtlose CI/CD-Integration. Die Plattform liefert ein 5MB-Bundle in nur 114ms, mit einer durchschnittlichen API-Antwortzeit von 434ms [\[1\]](https://capgo.app/).
+Capgo macht vollständige Veröffentlichungen schnell und sicher durch ein globales CDN, Hintergrund-Updates und nahtlose CI/CD-Integration. Die Plattform liefert ein 5MB-Bundle in nur 114ms, mit einer durchschnittlichen API-Antwortzeit von 357ms [\[1\]](https://capgo.app/).
 
 Wichtige Funktionen für vollständige Veröffentlichungen umfassen:
 

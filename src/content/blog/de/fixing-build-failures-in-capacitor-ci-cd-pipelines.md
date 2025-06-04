@@ -278,7 +278,7 @@ Capgos Echtzeit-Monitoring überwacht Build-Status und Deployment-Fortschritt un
 | --- | --- |
 | Update-Auslieferung | 23,5 Mio. ausgelieferte Updates |
 | Erfolgsrate | 95% der Nutzer innerhalb von 24 Stunden aktualisiert |
-| API-Antwortzeit | 434ms weltweiter Durchschnitt |
+| API-Antwortzeit | 357ms weltweiter Durchschnitt |
 | [Bundle-Download](https://capgo.app/docs/webapp/bundles/) | 114ms für ein 5MB Bundle |
 
 Wenn Probleme auftreten, gewährleistet Capgos Rollback-System eine schnelle Wiederherstellung mit Funktionen wie:

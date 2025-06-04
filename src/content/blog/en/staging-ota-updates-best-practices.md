@@ -169,7 +169,7 @@ Sticking to app store guidelines is crucial to avoid delays or disruptions durin
 
 ### Capgo Core Functions
 
-Capgo simplifies the process of managing OTA updates with its secure, encrypted system and advanced channel functionality. Updates are delivered quickly and securely, thanks to its global CDN, which achieves a **114ms download time for 5MB bundles** and an **average API response time of 434ms worldwide** [\[1\]](https://capgo.app/). The platform also uses a partial update system, downloading only the changed components. This approach has led to an impressive **95% update rate among active users within 24 hours** [\[1\]](https://capgo.app/).
+Capgo simplifies the process of managing OTA updates with its secure, encrypted system and advanced channel functionality. Updates are delivered quickly and securely, thanks to its global CDN, which achieves a **114ms download time for 5MB bundles** and an **average API response time of 357ms worldwide** [\[1\]](https://capgo.app/). The platform also uses a partial update system, downloading only the changed components. This approach has led to an impressive **95% update rate among active users within 24 hours** [\[1\]](https://capgo.app/).
 
 ### Developer Advantages
 
@@ -226,6 +226,6 @@ To make your OTA updates secure and efficient, consider these steps:
 -   **Set up monitoring tools** to track critical metrics in real time.
 -   **Implement phased rollouts** by starting with a small user group before expanding to all users.
 
-A well-prepared staging environment, supported by platforms like Capgo, can help you achieve these goals. For instance, 95% of active users can update within 24 hours, with an average global API response time of 434ms [\[1\]](https://capgo.app/).
+A well-prepared staging environment, supported by platforms like Capgo, can help you achieve these goals. For instance, 95% of active users can update within 24 hours, with an average global API response time of 357ms [\[1\]](https://capgo.app/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)

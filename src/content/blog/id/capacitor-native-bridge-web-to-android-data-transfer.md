@@ -57,7 +57,7 @@ Tetapi bukan hanya tentang tipe data - seberapa cepat dan efisien data ditransfe
 
 ### Kekhawatiran Kecepatan dan Memori
 
-Uji performa mengungkap beberapa metrik kunci: kecepatan unduh CDN untuk bundle 5MB rata-rata sekitar 114ms, sementara respons API global memakan waktu sekitar 434ms. Untuk meningkatkan efisiensi transfer data, pertimbangkan strategi berikut:
+Uji performa mengungkap beberapa metrik kunci: kecepatan unduh CDN untuk bundle 5MB rata-rata sekitar 114ms, sementara respons API global memakan waktu sekitar 357ms. Untuk meningkatkan efisiensi transfer data, pertimbangkan strategi berikut:
 
 -   Pisahkan transfer besar menjadi bagian yang lebih kecil
 -   Kompres data di mana pun memungkinkan

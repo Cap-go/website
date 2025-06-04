@@ -253,7 +253,7 @@ By combining platform-specific IDEs like Android Studio or Xcode with VS Code, d
 
 ### Update System Options
 
-Debugging tools help identify issues, but an efficient update system ensures fixes are deployed quickly. Capgo stands out by offering rapid update deployment. For instance, its global CDN delivers a 5MB bundle in just 114ms, with an average API response time of 434ms [\[1\]](https://capgo.app/).
+Debugging tools help identify issues, but an efficient update system ensures fixes are deployed quickly. Capgo stands out by offering rapid update deployment. For instance, its global CDN delivers a 5MB bundle in just 114ms, with an average API response time of 357ms [\[1\]](https://capgo.app/).
 
 Here's how update systems compare:
 

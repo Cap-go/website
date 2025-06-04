@@ -217,7 +217,7 @@ Capgo's automation platform delivers strong performance in real-world scenarios.
 
 | **Feature** | **Benefit** | **Performance Metric** |
 | --- | --- | --- |
-| Instant Updates | Avoid app store delays | 434ms average API response time |
+| Instant Updates | Avoid app store delays | 357ms average API response time |
 | Global CDN | Quick content delivery | 114ms for 5MB bundle download |
 | Version Control | Track and manage changes | 23.5M+ updates delivered |
 | Analytics | Monitor deployment success | 750+ production apps tracked |
@@ -256,7 +256,7 @@ Here are the core components for achieving efficient script automation:
 | **Component** | **Best Practice** | **Impact** |
 | --- | --- | --- |
 | Structure | Modular design with clear separation | Simplifies maintenance |
-| Performance | Async operations and memory tuning | Achieves 434ms average API response time |
+| Performance | Async operations and memory tuning | Achieves 357ms average API response time |
 | Security | End-to-end encryption | Protects against unauthorized access |
 | CI/CD | Automated testing and staged rollouts | Ensures 95% update success in 24 hours |
 

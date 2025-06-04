@@ -360,7 +360,7 @@ Así es como puedes aprovecharlo al máximo:
     | Métrica | Rendimiento |
     | --- | --- |
     | Velocidad de Entrega de Actualización | 114ms para un paquete de 5MB |
-    | Tiempo de Respuesta API | 434ms en todo el mundo |
+    | Tiempo de Respuesta API | 357ms en todo el mundo |
     | Tasa de Actualización de Usuarios | 95% dentro de 24 horas |
     
 

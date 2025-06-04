@@ -104,7 +104,7 @@ Berikut sekilas metrik kinerjanya:
 
 | Metrik | Kinerja |
 | --- | --- |
-| Waktu Respons API Rata-rata | 434ms di seluruh dunia |
+| Waktu Respons API Rata-rata | 357ms di seluruh dunia |
 | Kecepatan Unduh Bundle | 114ms untuk 5MB |
 | Tingkat Keberhasilan Pembaruan | 95% dalam 24 jam |
 

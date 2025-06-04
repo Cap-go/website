@@ -52,7 +52,7 @@ Efficient deployment and update processes are critical in modern mobile app deve
 
 Capacitor CI/CD plugins offer an open-source approach to managing [app updates](https://capgo.app/plugins/capacitor-updater/), integrating smoothly with existing CI/CD systems. This method gives developers detailed control over deployment processes, making it a more customizable option compared to all-in-one platforms.
 
-[Capgo](https://capgo.app/) has shared some impressive stats: **95% of users updated within 24 hours**, an **82% global success rate**, a **434ms average API response time**, and **5MB bundles delivered in just 114ms** [\[1\]](https://capgo.app/).
+[Capgo](https://capgo.app/) has shared some impressive stats: **95% of users updated within 24 hours**, an **82% global success rate**, a **357ms average API response time**, and **5MB bundles delivered in just 114ms** [\[1\]](https://capgo.app/).
 
 Here are some standout features:
 
@@ -80,7 +80,7 @@ The choice between granular control and an all-in-one platform depends on your t
 
 ### CI/CD Plugin Features
 
-Capacitor CI/CD plugins are now designed to meet the needs of enterprise users. For instance, Capgo's implementation delivers a 5MB bundle in just 114ms, with an average global API response time of 434ms [\[1\]](https://capgo.app/).
+Capacitor CI/CD plugins are now designed to meet the needs of enterprise users. For instance, Capgo's implementation delivers a 5MB bundle in just 114ms, with an average global API response time of 357ms [\[1\]](https://capgo.app/).
 
 Here’s a breakdown of what these plugins offer:
 

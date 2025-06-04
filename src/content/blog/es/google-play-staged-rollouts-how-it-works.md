@@ -115,7 +115,7 @@ Usar herramientas de [gestión de actualizaciones](https://capgo.app/docs/plugin
 | Control de Versiones | Gestiona múltiples lanzamientos | Mantiene organizadas las implementaciones |
 | Capacidad de Reversión | Revierte actualizaciones rápidamente | Reduce el impacto en usuarios |
 
-Al seleccionar una herramienta, enfócate en aquellas que ofrezcan monitoreo automatizado. Herramientas con un tiempo de respuesta promedio de **434ms globalmente** [\[1\]](https://capgo.app/) permiten una acción rápida cuando surgen problemas.
+Al seleccionar una herramienta, enfócate en aquellas que ofrezcan monitoreo automatizado. Herramientas con un tiempo de respuesta promedio de **357ms globalmente** [\[1\]](https://capgo.app/) permiten una acción rápida cuando surgen problemas.
 
 Para aún más control, considera usar un [sistema de canales](https://capgo.app/docs/plugin/cloud-mode/channel-system/) para la distribución de actualizaciones. Esto te permite dirigirte a grupos específicos de usuarios con diferentes versiones, facilitando las pruebas beta y los lanzamientos por etapas. Además, la capacidad de implementar cambios de código en vivo mientras se mantiene el cumplimiento con las reglas de la tienda de aplicaciones puede simplificar y acelerar tu [proceso de actualización](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 

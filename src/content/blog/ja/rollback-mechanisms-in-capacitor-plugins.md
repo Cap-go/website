@@ -128,7 +128,7 @@ Capgoは2024年の[Microsoft Code Push](https://learn.microsoft.com/en-us/appcen
 | 機能 | 利点 | パフォーマンス |
 | --- | --- | --- |
 | **ワンクリックロールバック** | 任意のバージョンに迅速に戻せる | バンドルダウンロード平均114ms |
-| **エンドツーエンド暗号化** | [セキュアな更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | API応答時間434ms |
+| **エンドツーエンド暗号化** | [セキュアな更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | API応答時間357ms |
 | **[チャネルシステム](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | 特定のグループにベータ更新を配信 | 2350万の更新を配信 |
 | **分析ダッシュボード** | リアルタイムで更新を追跡 | 750の本番アプリに対応 |
 

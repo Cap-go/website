@@ -93,12 +93,12 @@ Cette étape se concentre sur la vérification des mécanismes de mise à jour i
 
 | Type de test | Zone de focus | Critères de réussite |
 | --- | --- | --- |
-| Détection de mise à jour | Vérification de version | Temps de réponse ~434ms |
+| Détection de mise à jour | Vérification de version | Temps de réponse ~357ms |
 | Processus de téléchargement | [Téléchargement du bundle](https://capgo.app/docs/webapp/bundles/) | Bundle de 5MB en ~114ms |
 | Installation | Application de la mise à jour | Intégration réussie |
 | Rollback | Retour de version | Rollback réussi |
 
-Le CDN mondial de Capgo aide à maintenir des vitesses de téléchargement stables, avec un temps de réponse API moyen de 434ms [\[1\]](https://capgo.app/)Ces tests au niveau des composants constituent la base pour évaluer les performances globales du système.
+Le CDN mondial de Capgo aide à maintenir des vitesses de téléchargement stables, avec un temps de réponse API moyen de 357ms [\[1\]](https://capgo.app/)Ces tests au niveau des composants constituent la base pour évaluer les performances globales du système.
 
 ### Tests Système Complets
 

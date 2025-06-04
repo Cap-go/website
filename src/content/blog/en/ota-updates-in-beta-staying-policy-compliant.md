@@ -174,7 +174,7 @@ A structured distribution strategy ensures updates are delivered consistently wh
 
 3\. **Monitoring Systems**
 
-Built-in analytics allow you to track update performance. With an average API response time of 434ms worldwide [\[1\]](https://capgo.app/), these tools provide real-time insights into distribution success rates.
+Built-in analytics allow you to track update performance. With an average API response time of 357ms worldwide [\[1\]](https://capgo.app/), these tools provide real-time insights into distribution success rates.
 
 ## Conclusion: Managing Compliant Updates
 
