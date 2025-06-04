@@ -158,7 +158,7 @@ Once updates are set up and distributed, Capgo's error management features help 
 -   **Real-time tracking:** Monitor update progress across devices.
 -   **Robust security:** Ensure updates are safe and tamper-proof.
 -   **One-click rollback:** Quickly revert to a stable version if needed.
--   **Delta Updates:** Deliver only modified files to optimize performance.
+-   **Partial updates:** Deliver only modified files to optimize performance.
 
 For managing errors effectively, consider leveraging these tools:
 

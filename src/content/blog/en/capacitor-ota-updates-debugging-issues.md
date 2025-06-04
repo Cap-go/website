@@ -129,7 +129,7 @@ Capgo simplifies OTA updates with features designed to enhance efficiency:
 
 -   **Real-time analytics**: Global API response time averages 434ms [\[1\]](https://capgo.app/).
 -   **One-click rollback**: Quickly revert to previous versions if needed.
--   **Delta Updates**: Reduces bandwidth usage by updating only necessary components.
+-   **Partial updates**: Reduces bandwidth usage by updating only necessary components.
 -   **CI/CD integration**: Works seamlessly with platforms like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/).
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica [\[1\]](https://capgo.app/)

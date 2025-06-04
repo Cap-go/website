@@ -169,7 +169,7 @@ For Android, open the project in Android Studio and follow these steps:
 -   **Update Gradle Configuration**  
     Open your `build.gradle` file and confirm these settings are correctly configured:
     
-    ```kotlin
+    ```gradle
     android {
         compileSdkVersion 33
         defaultConfig {
@@ -322,7 +322,7 @@ Here’s a snapshot of Capgo’s performance metrics:
 Modern update tools offer several notable benefits:
 
 -   **End-to-end encryption** for secure delivery of updates
--   **Delta Updates**, which save bandwidth by only downloading modified components
+-   **Partial updates**, which save bandwidth by only downloading modified components
 -   **One-click rollback** for quick recovery in case of issues
 -   **Real-time analytics** to monitor update performance and user engagement
 

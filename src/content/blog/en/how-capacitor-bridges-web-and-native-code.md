@@ -289,7 +289,7 @@ The update system operates in three steps:
     
     Capgo's channel system makes distributing updates efficient by offering:
     
-    -   Delta Updates to save bandwidth
+    -   Partial updates to save bandwidth
     -   Background installations that don’t interrupt users
     -   Automatic version management with rollback options
 3.  **Security and Compliance**

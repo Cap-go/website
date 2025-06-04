@@ -70,7 +70,7 @@ Set up your Android Studio project with these steps:
 
 Update your `build.gradle` file with the following settings:
 
-```kotlin
+```gradle
 android {
     compileSdkVersion 33
     defaultConfig {
@@ -84,7 +84,7 @@ android {
 
 Include the required Capacitor dependencies in your `build.gradle` file:
 
-```kotlin
+```gradle
 dependencies {
     implementation '@capacitor/android:5.0.0'
     implementation '@capacitor/core:5.0.0'
@@ -470,7 +470,7 @@ npx @capgo/cli init
 
 Add the plugin to your build process. Capgo automatically handles updates in the background, using its built-in analytics and rollback features.
 
-You can use the channel system to manage rollouts for production, beta, and development environments. Delta Updates are available to reduce bandwidth usage and deliver only the necessary changes.
+You can use the channel system to manage rollouts for production, beta, and development environments. Partial updates are available to reduce bandwidth usage and deliver only the necessary changes.
 
 Capgo supports Capacitor versions 6 and 7.
 
