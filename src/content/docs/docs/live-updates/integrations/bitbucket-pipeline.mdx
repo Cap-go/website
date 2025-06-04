@@ -96,6 +96,37 @@ pipelines:
 
 </Aside>
 
+### Using Encryption
+
+If you're using [Capgo's encryption feature](/docs/live-updates/encryption/), you'll need to store your private key securely in your CI/CD environment.
+
+After [setting up encryption keys](/docs/live-updates/encryption/#setting-up-encryption) locally, add your private key to Bitbucket variables:
+
+```shell
+# Display your private key content (copy this output)
+cat .capgo_key_v2
+```
+
+Add this content as `CAPGO_PRIVATE_KEY` in your Bitbucket repository variables (mark as secured), then use it in pipelines:
+
+```yaml
+# Deploy with encryption
+- step:
+    name: Deploy to Capgo with Encryption
+    script:
+      - npm install -g @capgo/cli
+      - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**Security Best Practices:**
+- Never commit the `.capgo_key_v2` file to version control
+- Store the private key only in secure CI/CD secret management
+- Use different keys for different environments
+
+</Aside>
+
 ### Multi-Channel Configuration
 
 Complete configuration with multiple environments and pull request deployments:

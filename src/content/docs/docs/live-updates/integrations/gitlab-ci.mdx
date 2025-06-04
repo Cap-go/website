@@ -74,6 +74,7 @@ deploy_production:
   script:
     - npm install -g @capgo/cli
     - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+    # For encrypted uploads, add: --key-data-v2 "$CAPGO_PRIVATE_KEY"
   dependencies:
     - build
   only:
@@ -107,6 +108,36 @@ deploy_feature:
 <Aside type="tip">
 
 **Testing with Channels**: After deploying to a feature channel, you can test the update in your app by configuring it to use that specific channel. Learn more about [configuring channels in your app](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+
+</Aside>
+
+### Using Encryption
+
+If you're using [Capgo's encryption feature](/docs/live-updates/encryption/), you'll need to store your private key securely in your CI/CD environment.
+
+After [setting up encryption keys](/docs/live-updates/encryption/#setting-up-encryption) locally, add your private key to GitLab variables:
+
+```shell
+# Display your private key content (copy this output)
+cat .capgo_key_v2
+```
+
+Add this content as `CAPGO_PRIVATE_KEY` in your GitLab project variables (mark as protected and masked), then use it in pipelines:
+
+```yaml
+# Deploy with encryption
+deploy_production:
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**Security Best Practices:**
+- Never commit the `.capgo_key_v2` file to version control
+- Store the private key only in secure CI/CD secret management
+- Use different keys for different environments
 
 </Aside>
 

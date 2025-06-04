@@ -74,10 +74,11 @@ jobs:
           npm run test
           npm run build
 
-      - name: Deploy to Capgo
-        run: |
-          npm install -g @capgo/cli
-          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+             - name: Deploy to Capgo
+         run: |
+           npm install -g @capgo/cli
+           npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+           # For encrypted uploads, add: --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
 ```
 
 ## Advanced Multi-Channel Configuration
@@ -115,8 +116,38 @@ jobs:
           CHANNEL_NAME=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
           npm install -g @capgo/cli
           npx @capgo/cli channel create $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
-          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
+                     npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
 ```
+
+### Using Encryption
+
+If you're using [Capgo's encryption feature](/docs/live-updates/encryption/), you'll need to store your private key securely in your CI/CD environment.
+
+After [setting up encryption keys](/docs/live-updates/encryption/#setting-up-encryption) locally, add your private key to GitHub secrets:
+
+```shell
+# Display your private key content (copy this output)
+cat .capgo_key_v2
+```
+
+Add this content as `CAPGO_PRIVATE_KEY` in your GitHub repository secrets, then use it in workflows:
+
+```yaml
+# Deploy with encryption
+- name: Deploy to Capgo with Encryption
+  run: |
+    npm install -g @capgo/cli
+    npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}" --channel production
+```
+
+<Aside type="caution">
+
+**Security Best Practices:**
+- Never commit the `.capgo_key_v2` file to version control
+- Store the private key only in secure CI/CD secret management
+- Use different keys for different environments
+
+</Aside>
 
 ### Full Multi-Environment Setup
 
