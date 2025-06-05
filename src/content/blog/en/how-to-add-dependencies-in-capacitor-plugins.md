@@ -119,7 +119,7 @@ Use the Capacitor CLI to kick off your plugin project. This includes setting up 
         
     -   For **Android**, verify your `build.gradle` contains:
         
-        ```kotlin
+        ```gradle
         android {
             compileSdkVersion 33
             defaultConfig {
@@ -336,7 +336,7 @@ Set up Android dependencies to ensure smooth native integration. Here's how to m
 
 Add the following configurations to your `build.gradle` file:
 
-```kotlin
+```gradle
 android {
     defaultConfig {
         minSdkVersion 22
@@ -354,7 +354,7 @@ dependencies {
 
 Define additional versions in the `buildscript` block:
 
-```kotlin
+```gradle
 buildscript {
     ext {
         androidxCoreVersion = '1.10.1'
@@ -369,7 +369,7 @@ Once dependencies are configured, make sure to set up the necessary repositories
 
 In your project-level `build.gradle`, include the required Maven repositories:
 
-```kotlin
+```gradle
 allprojects {
     repositories {
         google()
@@ -381,7 +381,7 @@ allprojects {
 
 If you're using custom or private Maven repositories, add credentials like this:
 
-```kotlin
+```gradle
 maven {
     url "https://maven.example.com/releases"
     credentials {
@@ -397,7 +397,7 @@ With repositories set up, address any dependency conflicts that may arise.
 
 To handle dependency conflicts, apply version resolutions in your `build.gradle`:
 
-```kotlin
+```gradle
 configurations.all {
     resolutionStrategy {
         force "org.jetbrains.kotlin:kotlin-stdlib:1.8.20"
@@ -416,7 +416,7 @@ Here are strategies for resolving common dependency issues:
 
 For instance, you can exclude conflicting modules like this:
 
-```kotlin
+```gradle
 dependencies {
     implementation('library:name:1.0.0') {
         exclude group: 'com.conflicting.dependency'
@@ -449,7 +449,7 @@ Capgo simplifies managing plugin dependencies with these features:
 | Feature | What It Does | Key Metric |
 | --- | --- | --- |
 | Live Updates | Push updates in minutes | 95% user update rate in 24 hours |
-| Partial Updates | Download only changed files | 357ms average API response time |
+| Partial Updates | Download only changed files | 434ms average API response time |
 | Version Control | Manage multiple versions | 82% global success rate |
 | Channel System | Target specific user groups | Supports multiple deployment channels |
 
@@ -516,12 +516,12 @@ Using live update tools like Capgo can further simplify and improve these practi
 
 ### Capgo Benefits
 
-Capgo simplifies the dependency management process while delivering strong performance. It achieves an impressive **95% user update rate within 24 hours** and maintains a global API response time of **357ms** [\[1\]](https://capgo.app/). With end-to-end encryption, it ensures secure updates that comply with both Apple and Android guidelines. For teams managing multiple plugin versions, Capgo's channel system allows targeted deployments for specific user groups.
+Capgo simplifies the dependency management process while delivering strong performance. It achieves an impressive **95% user update rate within 24 hours** and maintains a global API response time of **434ms** [\[1\]](https://capgo.app/). With end-to-end encryption, it ensures secure updates that comply with both Apple and Android guidelines. For teams managing multiple plugin versions, Capgo's channel system allows targeted deployments for specific user groups.
 
 Here’s a quick look at Capgo’s performance:
 
 | Metric | Value |
 | --- | --- |
-| Global API Response Time | 357ms |
+| Global API Response Time | 434ms |
 | Update Success Rate | 82% |
 | User Update Rate (24 Hours) | 95% |

@@ -257,7 +257,7 @@ Capgo supports over 30 plugins and works seamlessly with CI/CD pipelines, making
 
 ### Main Points
 
-Managing channels effectively ensures app deployments run smoothly. Capgo's channel system showcases impressive results: **95% of updates are adopted within 24 hours**, supported by a global CDN that delivers a 5MB bundle in just 114ms, alongside an API response time of 357ms worldwide [\[1\]](https://capgo.app/).
+Managing channels effectively ensures app deployments run smoothly. Capgo's channel system showcases impressive results: **95% of updates are adopted within 24 hours**, supported by a global CDN that delivers a 5MB bundle in just 114ms, alongside an API response time of 434ms worldwide [\[1\]](https://capgo.app/).
 
 | Metric | Performance |
 | --- | --- |

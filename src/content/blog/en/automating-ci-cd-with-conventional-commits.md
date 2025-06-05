@@ -265,7 +265,7 @@ Capgo simplifies mobile CI/CD by enabling instant, compliant over-the-air (OTA) 
 Here’s a snapshot of Capgo's recent performance metrics:
 
 -   **82%** global update success rate
--   **357ms** average API response time
+-   **434ms** average API response time
 -   Support for **1.7K apps**
 -   Over **1.6 trillion updates delivered** [\[3\]](https://capgo.app)
 

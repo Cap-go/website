@@ -91,7 +91,7 @@ Capgo takes a different approach by embedding error tracking directly into its O
 | --- | --- |
 | Update Delivery | 23.5M updates delivered |
 | Success Rate | 95% of users updated within 24 hours |
-| API Response Time | 357ms worldwide average |
+| API Response Time | 434ms worldwide average |
 | Bundle Download | 114ms for a 5MB bundle |
 
 > "We rolled out Capgo OTA updates in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." – colenso [\[1\]](https://capgo.app/)

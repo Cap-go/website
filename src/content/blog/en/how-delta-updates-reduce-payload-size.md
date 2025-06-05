@@ -228,7 +228,7 @@ To ensure security, Capgo uses true end-to-end encryption for all updates. This 
 
 | Feature | Advantage | Performance Metric |
 | --- | --- | --- |
-| Partial Updates | Lowers bandwidth usage | 357ms average API response |
+| Partial Updates | Lowers bandwidth usage | 434ms average API response |
 | Global CDN | Faster downloads globally | 114ms for 5MB bundles |
 | E2E Encryption | Stronger data security | Full end-to-end encryption |
 
@@ -260,7 +260,7 @@ Performance metrics from real-world applications back up the value of delta upda
 | --- | --- |
 | **User Adoption** | 95% of users update within 24 hours |
 | **Success Rate** | 82% globally |
-| **API Response** | 357ms average |
+| **API Response** | 434ms average |
 | **Production Apps** | 750+ apps successfully using the technology |
 
 The user experience aligns with these numbers. For example, colenso, managing over 5,000 users, shared:

@@ -21,7 +21,7 @@ next_blog: ''
 ### Key Features:
 
 -   **Fast Updates**: 95% of active users updated within 24 hours.
--   **Instant Analytics**: API response time averages 357ms globally.
+-   **Instant Analytics**: API response time averages 434ms globally.
 -   **Security**: End-to-end encryption ensures data safety.
 -   **Custom Event Tracking**: Monitor user actions, screen views, and app performance.
 
@@ -243,7 +243,7 @@ Once you've confirmed your event flow is working as expected, it’s time to fin
 
 ### Data Transfer Settings
 
-After verifying your events using [debugging tools](https://capgo.app/docs/plugin/debugging/), you can optimize data transfer settings to ensure smooth and efficient performance. For example, Capgo’s CDN can transfer a 5MB bundle in just 114ms, with an API response time of 357ms.
+After verifying your events using [debugging tools](https://capgo.app/docs/plugin/debugging/), you can optimize data transfer settings to ensure smooth and efficient performance. For example, Capgo’s CDN can transfer a 5MB bundle in just 114ms, with an API response time of 434ms.
 
 **Security Configuration Example:**
 

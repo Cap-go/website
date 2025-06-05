@@ -173,7 +173,7 @@ Using real-time tools like Capgo offers several benefits for compliance and perf
     Capgo’s end-to-end encryption keeps consent-related updates secure throughout the process.
     
 -   **Performance Insights**  
-    Advanced analytics provide detailed tracking of consent changes. Capgo, for example, delivers an average API response time of just **357ms worldwide** [\[1\]](https://capgo.app/).
+    Advanced analytics provide detailed tracking of consent changes. Capgo, for example, delivers an average API response time of just **434ms worldwide** [\[1\]](https://capgo.app/).
     
 
 ## Next Steps for App Compliance

@@ -22,7 +22,7 @@ next_blog: ''
 
 -   **What is it?** A two-way communication system between JavaScript and Android, converting JavaScript calls into native Android methods and vice versa.
 -   **Performance Highlights:**
-    -   API response time: **357ms** (global average).
+    -   API response time: **434ms** (global average).
     -   Data transfer: **114ms** for 5MB bundles.
     -   Update adoption: **95% completed within 24 hours** using tools like [Capgo](https://capgo.app/).
 -   **How it works:**
@@ -254,7 +254,7 @@ For enterprise applications, Capgo includes powerful features tailored to large-
 | **Feature** | **Functionality** | **Advantage** |
 | --- | --- | --- |
 | Channel System | Targets specific user groups | Enables controlled rollout testing |
-| API Integration | Offers a 357ms average response time | Provides real-time update monitoring |
+| API Integration | Offers a 434ms average response time | Provides real-time update monitoring |
 | Hosting Options | Supports cloud or self-hosted deployment | Gives flexibility in infrastructure control |
 | Storage Capacity | Provides up to 20GB for enterprise plans | Simplifies version management |
 
@@ -269,7 +269,7 @@ In Capacitor Android apps, the native bridge acts as a key communication link be
 | Aspect | Performance Impact |
 | --- | --- |
 | **Update Delivery** | 95% user adoption within 24 hours |
-| **API Response** | 357ms average worldwide |
+| **API Response** | 434ms average worldwide |
 | **Success Rate** | 82% global deployment success |
 
 These numbers highlight the importance of secure communication and reducing bridge load to maintain top performance.

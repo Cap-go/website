@@ -169,7 +169,7 @@ For Android, open the project in Android Studio and follow these steps:
 -   **Update Gradle Configuration**  
     Open your `build.gradle` file and confirm these settings are correctly configured:
     
-    ```kotlin
+    ```gradle
     android {
         compileSdkVersion 33
         defaultConfig {
@@ -313,7 +313,7 @@ Here’s a snapshot of Capgo’s performance metrics:
 
 | Metric | Performance |
 | --- | --- |
-| Global API Response Time | 357ms |
+| Global API Response Time | 434ms |
 | 5MB Bundle Download Speed | 114ms |
 | Update Success Rate | 82% |
 

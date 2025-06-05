@@ -111,7 +111,7 @@ Using [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update
 | Version Control | Manages multiple releases | Keeps deployments organized |
 | Rollback Capability | Reverses updates swiftly | Reduces user impact |
 
-When selecting a tool, focus on those offering automated monitoring. Tools with an average response time of **357ms globally** [\[1\]](https://capgo.app/) allow for quick action when issues arise.
+When selecting a tool, focus on those offering automated monitoring. Tools with an average response time of **434ms globally** [\[1\]](https://capgo.app/) allow for quick action when issues arise.
 
 For even more control, consider using a [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) for update distribution. This lets you target specific user groups with different versions, making beta testing and staged rollouts smoother. Additionally, the ability to push live code changes while staying compliant with app store rules can simplify and speed up your [update process](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 

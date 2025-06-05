@@ -116,7 +116,7 @@ When choosing tools for custom attribute segmentation, look for features that mi
 | **Security** | End-to-end encryption[\[1\]](https://capgo.app/) | Protects sensitive user data effectively |
 | **Analytics** | Real-time analytics[\[1\]](https://capgo.app/) | Provides immediate feedback on segment performance |
 | **Hosting Options** | Cloud and self-hosted | Supports diverse deployment needs |
-| **Global Coverage** | 357ms API response time worldwide[\[1\]](https://capgo.app/) | Delivers consistent performance across regions |
+| **Global Coverage** | 434ms API response time worldwide[\[1\]](https://capgo.app/) | Delivers consistent performance across regions |
 
 The segmentation tool landscape has shifted significantly in recent years. For instance, the closure of [Microsoft Code Push](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) in 2024 and the upcoming shutdown of [AppFlow](https://ionic.io/appflow) in 2026 have driven developers to explore more reliable alternatives. These changes highlight the importance of tools that directly address segmentation challenges.
 

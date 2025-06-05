@@ -249,7 +249,7 @@ This layered approach ensures not only secure sessions but also the safe deliver
 Capgo combines security with impressive performance metrics, ensuring reliable and efficient update deployments:
 
 -   **Update Speed**: Transfers 5MB bundles in just 114ms, minimizing exposure to vulnerabilities during updates [\[13\]](https://capgo.app).
--   **API Response**: Maintains an average response time of 357ms for critical security operations [\[13\]](https://capgo.app).
+-   **API Response**: Maintains an average response time of 434ms for critical security operations [\[13\]](https://capgo.app).
 -   **Update Success Rate**: Secures an 82% global success rate for deployments [\[13\]](https://capgo.app).
 -   **User Coverage**: Reaches 95% of active users with security updates within 24 hours [\[13\]](https://capgo.app).
 

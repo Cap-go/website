@@ -324,7 +324,7 @@ Once your Android environment is ready, it's time to integrate Capgo. This tool 
 
 -   **Real-time Updates**: Updates reach 95% of active users within 24 hours [\[1\]](https://capgo.app/).
 -   **End-to-End Encryption**: Ensures data security.
--   **Fast API Response**: Global average response time is 357ms, with an 82% success rate [\[1\]](https://capgo.app/).
+-   **Fast API Response**: Global average response time is 434ms, with an 82% success rate [\[1\]](https://capgo.app/).
 -   **Partial Updates**: Minimizes data usage by transferring only necessary changes.
 
 **Performance Snapshot**:

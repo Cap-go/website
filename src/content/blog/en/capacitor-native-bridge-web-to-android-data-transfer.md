@@ -52,7 +52,7 @@ But it's not just about data types - how quickly and efficiently data is transfe
 
 ### Speed and Memory Concerns
 
-Performance tests reveal some key metrics: CDN download speeds for 5MB bundles average around 114ms, while global API responses take about 357ms. To improve data transfer efficiency, consider these strategies:
+Performance tests reveal some key metrics: CDN download speeds for 5MB bundles average around 114ms, while global API responses take about 434ms. To improve data transfer efficiency, consider these strategies:
 
 -   Break down large transfers into smaller chunks
 -   Compress data wherever possible
