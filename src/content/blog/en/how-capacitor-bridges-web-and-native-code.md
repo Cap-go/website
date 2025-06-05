@@ -56,7 +56,7 @@ The native bridge offers several advantages for cross-platform development:
 | Load Time | 114ms average for 5MB bundles [\[1\]](https://capgo.app/) | Faster app response times |
 | Update Reach | 95% of users updated within 24h [\[1\]](https://capgo.app/) | Rapid feature rollouts |
 | Market Coverage | 82% global success rate [\[1\]](https://capgo.app/) | Reliable performance worldwide |
-| API Response Time | 357ms average globally [\[1\]](https://capgo.app/) | Smooth and efficient interactions |
+| API Response Time | 434ms average globally [\[1\]](https://capgo.app/) | Smooth and efficient interactions |
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" – Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
@@ -66,7 +66,7 @@ The plugin system simplifies and secures data exchange between the web and nativ
 
 -   **Scale**: Used in 750 apps currently in production [\[1\]](https://capgo.app/)
 -   **Reliability**: Over 23.5 million updates delivered [\[1\]](https://capgo.app/)
--   **Performance**: 357ms average API response time globally [\[1\]](https://capgo.app/)
+-   **Performance**: 434ms average API response time globally [\[1\]](https://capgo.app/)
 
 This system also includes end-to-end encryption, ensuring secure data transfer. It gives developers the tools to create secure, high-performing apps that work seamlessly across platforms.
 

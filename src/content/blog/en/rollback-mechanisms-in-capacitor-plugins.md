@@ -124,7 +124,7 @@ Capgo emerged as a strong rollback management solution after [Microsoft Code Pus
 | Feature | Advantage | Performance |
 | --- | --- | --- |
 | **One-Click Rollback** | Quickly revert to any version | 114ms average bundle download |
-| **End-to-End Encryption** | [Secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 357ms API response time |
+| **End-to-End Encryption** | [Secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 434ms API response time |
 | **[Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Distribute beta updates to specific groups | 23.5M updates delivered |
 | **Analytics Dashboard** | Track updates in real-time | 750 production apps served |
 

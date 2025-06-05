@@ -22,7 +22,7 @@ next_blog: ''
 -   **Front-End Fixes**: Implement lazy loading, compress images (WebP or AVIF), and optimize React rendering with tools like `React.memo()`.
 -   **Server-Side Tweaks**: Use [SQLite](https://www.sqlite.org/) for offline data, edge computing for faster processing, and gRPC for quicker communication (7x faster than REST).
 -   **Live Updates**: Tools like [Capgo](https://capgo.app/) let you push updates instantly without app store delays, with 95% adoption in 24 hours.
--   **Monitor Performance**: Track metrics like API response times (<357ms) and [bundle download](https://capgo.app/docs/webapp/bundles/) speeds (<114ms) using tools like OpenTelemetry and Sentry.
+-   **Monitor Performance**: Track metrics like API response times (<434ms) and [bundle download](https://capgo.app/docs/webapp/bundles/) speeds (<114ms) using tools like OpenTelemetry and Sentry.
 
 **Quick Comparison**:
 
@@ -30,7 +30,7 @@ next_blog: ''
 | --- | --- | --- |
 | Network (CDN + HTTP/2) | Faster content delivery | Load time < 3 seconds |
 | Front-End (Lazy Loading) | Reduced initial page load time | Less than 1 second delay |
-| Server (Edge Computing) | Faster data processing | API response < 357ms |
+| Server (Edge Computing) | Faster data processing | API response < 434ms |
 | Live Updates (Capgo) | Instant bug fixes and features | 95% user adoption in 24h |
 
 **Actionable Tip**: Start by enabling a CDN and HTTP/2 in your app's configuration. These two steps alone can drastically reduce latency. Keep reading to learn how to implement these strategies step-by-step.
@@ -287,7 +287,7 @@ The benefits of this system are clear in the performance metrics:
 
 | **Metric** | **Performance** |
 | --- | --- |
-| API Response Time | 357ms worldwide |
+| API Response Time | 434ms worldwide |
 | 5MB Bundle Download | 114ms via CDN |
 | Update Success Rate | 82% worldwide |
 
@@ -363,7 +363,7 @@ To ensure your app meets performance expectations, aim for these benchmarks:
 
 | **Performance Metric** | **Target** | **Critical Threshold** |
 | --- | --- | --- |
-| API Response Time | < 357ms | \> 1000ms |
+| API Response Time | < 434ms | \> 1000ms |
 | Bundle Download (5MB) | < 114ms | \> 500ms |
 
 These targets are based on live deployment benchmarks observed with tools like Capgo [\[13\]](https://www.glassbox.com/platform/mobile-app-analytics). Keeping your app within these limits helps maintain a smooth user experience.
@@ -388,7 +388,7 @@ On the front-end, techniques like **lazy loading**, **media compression**, and *
 
 | Optimization Area | Target Metric | Achieved Result |
 | --- | --- | --- |
-| API Response Time | < 357ms | 82% worldwide success rate |
+| API Response Time | < 434ms | 82% worldwide success rate |
 | Update Distribution | 24-hour cycle | 95% user coverage |
 | Bundle Download (5MB) | < 114ms | Global CDN delivery |
 

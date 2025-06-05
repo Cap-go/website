@@ -23,7 +23,7 @@ next_blog: ''
 -   **Key features:**
     -   **Auto-update scheduling** for precise rollouts.
     -   **Channel support** for beta testing or staged releases.
-    -   **Performance stats:** 357ms API response, 114ms for 5MB downloads.
+    -   **Performance stats:** 434ms API response, 114ms for 5MB downloads.
 -   **Setup steps:** [Install the plugin](https://capgo.app/docs/plugin/cloud-mode/getting-started/), configure settings, and [enable auto-updates](https://capgo.app/docs/plugin/self-hosted/auto-update/) with `CapacitorUpdater.notifyAppReady()`.
 
 Capgo ensures updates are fast, secure, and user-friendly, making it a must-have for developers managing frequent app changes.
@@ -129,7 +129,7 @@ Focus your testing on these key areas: [update detection](https://capgo.app/docs
 
 | Test Type | Focus Area | Target Metrics |
 | --- | --- | --- |
-| **Update Detection** | Version checking | ~357ms response time |
+| **Update Detection** | Version checking | ~434ms response time |
 | **Download Process** | Bundle download | 5MB bundle in ~114ms |
 | **Installation** | Update application | Successful integration |
 | **Rollback** | Version reversion | Successful rollback |

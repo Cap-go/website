@@ -378,7 +378,7 @@ Capgo's update performance is impressive:
 
 -   **95% of active users** receive updates within 24 hours.
 -   **82% success rate** for update delivery worldwide.
--   An average API response time of **357ms globally**.
+-   An average API response time of **434ms globally**.
 
 The platform uses partial updates, meaning only the changes are downloaded. This approach reduces bandwidth usage and speeds up the update process. Plus, the entire build process is fully automated, saving time and effort.
 

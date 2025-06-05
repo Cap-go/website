@@ -127,7 +127,7 @@ Pairing this approach with the right tools ensures a robust OTA update process.
 
 Capgo simplifies OTA updates with features designed to enhance efficiency:
 
--   **Real-time analytics**: Global API response time averages 357ms [\[1\]](https://capgo.app/).
+-   **Real-time analytics**: Global API response time averages 434ms [\[1\]](https://capgo.app/).
 -   **One-click rollback**: Quickly revert to previous versions if needed.
 -   **Partial updates**: Reduces bandwidth usage by updating only necessary components.
 -   **CI/CD integration**: Works seamlessly with platforms like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/).
@@ -148,7 +148,7 @@ Here’s a breakdown of some critical [debugging features](https://capgo.app/doc
 | --- | --- |
 | End-to-End Encryption | Yes, fully encrypted |
 | Update Success Rate | 82% globally |
-| Response Time | 357ms on average |
+| Response Time | 434ms on average |
 | Rollback Support | Instant, one-click |
 | Error Tracking | Real-time |
 | Update Distribution | Channel-based system |

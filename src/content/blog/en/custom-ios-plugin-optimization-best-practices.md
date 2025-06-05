@@ -169,7 +169,7 @@ The table below highlights critical areas of optimization, their measurable impa
 
 | **Optimization Area** | **Impact** | **Implementation Benefit** |
 | --- | --- | --- |
-| **Bridge Communication** | 357ms average API response time [\[1\]](https://capgo.app/) | Lower latency and smoother data flow |
+| **Bridge Communication** | 434ms average API response time [\[1\]](https://capgo.app/) | Lower latency and smoother data flow |
 | **Memory Management** | 95% active user update rate within 24 hours [\[1\]](https://capgo.app/) | Improved stability and resource use |
 | **Swift Performance** | 114ms download speed for 5MB bundles [\[1\]](https://capgo.app/) | Faster execution and better user experience |
 

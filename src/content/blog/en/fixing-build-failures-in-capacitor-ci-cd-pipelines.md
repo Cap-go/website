@@ -273,7 +273,7 @@ Capgo’s real-time monitoring keeps an eye on build statuses and deployment pro
 | --- | --- |
 | Update Delivery | 23.5M updates delivered |
 | Success Rate | 95% of users updated within 24 hours |
-| API Response Time | 357ms worldwide average |
+| API Response Time | 434ms worldwide average |
 | [Bundle Download](https://capgo.app/docs/webapp/bundles/) | 114ms for a 5MB bundle |
 
 When issues arise, Capgo’s rollback system ensures quick recovery with features like:

@@ -299,7 +299,7 @@ When comparing OTA update tracking tools, focus on these features:
 Capgo stands out with an impressive 82% global success rate [\[1\]](https://capgo.app/), offering features that cover all aspects of [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/):
 
 -   **Real-time Analytics**  
-    Capgo provides worldwide monitoring with an average API response time of 357ms [\[1\]](https://capgo.app/). This helps you detect and address issues early.
+    Capgo provides worldwide monitoring with an average API response time of 434ms [\[1\]](https://capgo.app/). This helps you detect and address issues early.
     
 -   **Security Infrastructure**  
     Updates are delivered securely with end-to-end encryption, meeting the needs of even the most demanding enterprise applications.
