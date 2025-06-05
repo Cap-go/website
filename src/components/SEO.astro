@@ -4,6 +4,7 @@ import { appName } from '@/constants'
 import { AstroFont } from 'astro-font'
 import { join } from 'node:path'
 import * as m from '@/paraglide/messages'
+import { generateAlternateVersions } from '@/lib/alternateVersions'
 
 const {
   ldJSON = structuredData,
@@ -15,7 +16,7 @@ const {
   author = `Martin DONADIEU`,
   keywords = m.website_keywords({}, { locale: Astro.locals.locale }),
   audio = null,
-  alternateVersions = [],
+  alternateVersions = generateAlternateVersions(Astro),
 } = Astro.props
 
 const localeName_to_OGP = {
