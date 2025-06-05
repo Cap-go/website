@@ -1,0 +1,156 @@
+---
+import * as m from '@/paraglide/messages'
+
+export interface Props {
+  credits: {
+    id: number
+    step_min: number
+    step_max: number
+    price_per_unit: number
+    type: string
+  }[]
+}
+
+const { credits } = Astro.props
+
+// Group credits by type
+const creditsByType = credits.reduce((acc, credit) => {
+  if (!acc[credit.type]) {
+    acc[credit.type] = []
+  }
+  acc[credit.type].push(credit)
+  return acc
+}, {} as Record<string, typeof credits>)
+
+// Sort each type's credits by step_min
+Object.keys(creditsByType).forEach(type => {
+  creditsByType[type].sort((a, b) => a.step_min - b.step_min)
+})
+
+// Format large numbers
+function formatNumber(num: number, type?: string): string {
+  // Convert bytes to GB for bandwidth and storage
+  if (type === 'bandwidth' || type === 'storage') {
+    const gb = num / (1024 * 1024 * 1024) // Convert bytes to GB
+    if (gb >= 1000) {
+      return `${(gb / 1000).toFixed(0)} TB`
+    }
+    return `${gb.toFixed(0)} GB`
+  }
+  
+  if (num >= 1000000) {
+    return `${(num / 1000000).toFixed(0)}M`
+  }
+  if (num >= 1000) {
+    return `${(num / 1000).toFixed(0)}k`
+  }
+  return num.toString()
+}
+
+// Get type label
+function getTypeLabel(type: string): string {
+  switch (type) {
+    case 'mau':
+      return m.monthly_active_users_mau({}, { locale: Astro.locals.locale })
+    case 'bandwidth':
+      return m.bandwidth_gb({}, { locale: Astro.locals.locale })
+    case 'storage':
+      return m.storage_gb({}, { locale: Astro.locals.locale })
+    default:
+      return type
+  }
+}
+
+// Get unit label
+function getUnitLabel(type: string): string {
+  switch (type) {
+    case 'mau':
+      return m.per_mau({}, { locale: Astro.locals.locale })
+    case 'bandwidth':
+      return m.per_gb({}, { locale: Astro.locals.locale })
+    case 'storage':
+      return m.per_gb({}, { locale: Astro.locals.locale })
+    default:
+      return m.per_unit({}, { locale: Astro.locals.locale })
+  }
+}
+
+// Format price with max 4 decimals, removing trailing zeros
+function formatPrice(price: number): string {
+  return parseFloat(price.toFixed(4)).toString()
+}
+---
+
+<section class="mx-auto max-w-7xl px-0 py-12 sm:px-6 lg:px-8">
+  <div class="rounded-3xl bg-white p-6 shadow-xl sm:p-8 lg:p-12">
+    <div class="mb-6 text-center sm:mb-8">
+      <h2 class="inline-flex flex-col items-center gap-2 text-2xl font-bold text-gray-900 sm:flex-row sm:gap-3 sm:text-3xl">
+        {m.credit_pricing({}, { locale: Astro.locals.locale })}
+        <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800 sm:text-sm">{m.beta({}, { locale: Astro.locals.locale })}</span>
+      </h2>
+    </div>
+    
+    <div class="grid gap-6 sm:gap-8 md:grid-cols-3">
+      {Object.entries(creditsByType).map(([type, typeCredits]) => (
+        <div class="rounded-2xl border border-gray-200 p-4 sm:p-6">
+          <h3 class="mb-4 text-lg font-semibold text-gray-900 sm:text-xl flex items-center">
+            {type === 'mau' && (
+              <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            )}
+            {type === 'bandwidth' && (
+            <svg class="w-4 h-4 mr-2 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                </svg>
+            )}
+            {type === 'storage' && (
+              <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"/>
+              </svg>
+            )}
+            {getTypeLabel(type)}
+          </h3>
+          
+          <div class="space-y-3">
+            {typeCredits.map((credit, index) => (
+              <div class="flex flex-col space-y-1 border-b border-gray-100 pb-3 last:border-0 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+                <div class="text-xs text-gray-600 sm:text-sm">
+                  {index === 0 
+                    ? `${m.first({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max, type)}`
+                    : index === typeCredits.length - 1
+                    ? `${m.over({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_min, type)}`
+                    : `${m.next({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max - credit.step_min, type)}`
+                  }
+                </div>
+                <div class="text-xs font-medium text-gray-900 sm:text-sm">
+                  ${formatPrice(credit.price_per_unit)} {getUnitLabel(type)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-6 space-y-3 text-center sm:mt-8 sm:space-y-4">
+      <p class="text-xs text-gray-600 sm:text-sm">
+        {m.storage_calculated_info({}, { locale: Astro.locals.locale })}
+      </p>
+      <p class="text-xs text-gray-500 sm:text-sm">
+        {m.credits_usage_info({}, { locale: Astro.locals.locale })}
+      </p>
+      <p class="text-sm text-gray-700 sm:text-base">
+        {m.credits_beta_info({}, { locale: Astro.locals.locale })}
+        {' '}
+        <a 
+          href="https://cal.com/martindonadieu/meet" 
+          target="_blank"
+          class="inline-block font-medium text-blue-600 underline hover:text-blue-700"
+        >
+          {m.book_call_with_team({}, { locale: Astro.locals.locale })}
+        </a>.
+      </p>
+    </div>
+  </div>
+</section> 
