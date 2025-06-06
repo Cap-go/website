@@ -287,9 +287,9 @@ npx cap sync
 
 Sekarang, ketika Anda mengklik tombol "Share now!", dialog berbagi native akan muncul, memungkinkan Anda berbagi konten dengan aplikasi lain.
 
-<div className={styles.container}>
-  <Head>
-<title>
+<div class="mx-auto" style="width: 50%;">
+<img src="/next-capacitor-share.webp" alt="next-capacitor-share">
+</div>
 
 Untuk membuat tombol terlihat lebih ramah mobile, kita dapat menambahkan beberapa styling menggunakan library komponen UI favorit saya untuk aplikasi web - Next.js (tanpa bermaksud bercanda).
 
