@@ -190,6 +190,10 @@ Here's where to find the key information you'll need for integration:
 
 ## Using Facebook Login in Your App
 
+:::caution
+**Before You Start**: Remember that with the new Facebook SDK, the token type you receive depends entirely on the user's App Tracking choice, not on your code configuration. Always implement both access token and JWT token handling in your backend to ensure authentication works for all users.
+:::
+
 <Steps>
 1. Initialize the Facebook login in your app
 
@@ -276,18 +280,32 @@ Here's where to find the key information you'll need for integration:
    :::
 </Steps>
 
-## Understanding Facebook Login Token Types
+## ⚠️ Critical: Understanding Facebook Login Token Types
+
+:::danger
+**IMPORTANT**: With the new Facebook SDK, requesting a normal access token does **NOT** guarantee you'll receive one. The user must accept "App Tracking" permission. If they refuse or have opted out at the OS level, you will **ALWAYS** receive a JWT token instead, regardless of your request.
+
+This is **NEW** behavior with the current SDK. The old SDK will be deprecated soon.
+:::
 
 Facebook login behavior has changed significantly, especially on iOS with App Tracking Transparency (ATT). Your backend must handle two different token types depending on user permissions and tracking settings.
 
 ### Token Types Explained
 
-Facebook now returns different token types based on user consent and tracking permissions:
+Facebook now returns different token types based on **what you request** and **user consent**:
 
-| Scenario | Token Type | Backend Handling |
-|----------|------------|------------------|
-| **User allows tracking + Standard login** | Access Token | Use as OAuth credential |
-| **User denies tracking OR Limited login** | JWT Token | Validate as ID token |
+| Your Request + User Choice | What You Get | Backend Handling |
+|---------------------------|--------------|------------------|
+| **`limitedLogin: true`** | JWT Token | Validate as ID token |
+| **`limitedLogin: false` + User ALLOWS tracking** | Access Token | Use as OAuth credential |
+| **`limitedLogin: false` + User DENIES tracking** | JWT Token | Validate as ID token |
+
+:::warning
+**Key Points**: 
+- If you set `limitedLogin: true` → **Always JWT token** (guaranteed)
+- If you set `limitedLogin: false` → **User choice determines the result** (access token OR JWT token)
+- You cannot force an access token if tracking is denied
+:::
 
 ### iOS App Tracking Transparency Impact
 
@@ -342,17 +360,21 @@ When requesting tracking permission, you'll receive one of these status values:
          provider: 'facebook',
          options: {
            permissions: ['email', 'public_profile'],
-           tracking: 'limited', // or 'enabled' for standard tracking
+           limitedLogin: false, // true for limited login, false for standard tracking
            nonce: nonce
          }
        });
+
+       // ⚠️ IMPORTANT: Token type behavior:
+       // - limitedLogin: true → ALWAYS JWT token (guaranteed)
+       // - limitedLogin: false → depends on user's App Tracking choice
 
        if (loginResult.accessToken) {
          // Access token - user allowed tracking
          console.log('Received access token:', loginResult.accessToken.token);
          return handleAccessToken(loginResult.accessToken.token, nonce);
        } else if (loginResult.idToken) {
-         // JWT token - user denied tracking or limited login
+         // JWT token - user denied tracking, opted out at OS level, or limited login
          console.log('Received JWT token:', loginResult.idToken);
          return handleJWTToken(loginResult.idToken);
        } else {
@@ -496,25 +518,32 @@ When requesting tracking permission, you'll receive one of these status values:
 
 ### Key Considerations
 
-**Access Token (Standard Login)**:
-- Only available when user allows app tracking on iOS
-- Can be used to access Facebook Graph API
-- Longer expiration times
-- More user data available
-
-**JWT Token (Fallback)**:
-- Always available regardless of tracking permissions
-- Contains basic user info only
-- Shorter expiration times
-- No access to Facebook Graph API or additional profile data
-
-:::warning
-**Important**: The old method using `FacebookAuthProvider.credential(accessToken)` no longer works because Facebook now returns JWT tokens in many cases. Always check the token type first.
+:::danger
+**Critical Understanding**: You cannot control which token type you receive. The user's App Tracking choice determines this, NOT your code settings.
 :::
 
-   :::tip
-   Always implement both token handling methods in your app to ensure authentication works regardless of the user's tracking preferences.
-   :::
+**Access Token (Standard Login)**:
+- ✅ Only available when user **explicitly allows** app tracking on iOS
+- ✅ Can be used to access Facebook Graph API
+- ✅ Longer expiration times
+- ✅ More user data available
+- ❌ **Becoming less common** as users increasingly deny tracking
+
+**JWT Token (New Default)**:
+- ✅ Always available regardless of tracking permissions
+- ✅ Respects user privacy preferences
+- ❌ Contains basic user info only
+- ❌ Shorter expiration times
+- ❌ No access to Facebook Graph API or additional profile data
+- ⚠️ **Now the most common scenario** with iOS users
+
+:::warning
+**Important**: The old method using `FacebookAuthProvider.credential(accessToken)` no longer works because Facebook now returns JWT tokens in the majority of cases. Always check the token type first.
+:::
+
+:::tip
+**Essential**: You MUST implement both token handling methods in your app. Many developers assume they'll always get access tokens and their apps break when users deny tracking.
+:::
 
 ## Secure Context Requirements (Web/Capacitor)
 
@@ -580,18 +609,18 @@ async function sha256(message: string) {
 
 ### Firebase Integration Note
 
-Recent Firebase documentation requires JWT tokens with nonces for Facebook authentication, regardless of tracking settings. This approach works with both `limited` and `enabled` tracking:
+Recent Firebase documentation requires JWT tokens with nonces for Facebook authentication, regardless of login settings. This approach works with both `limitedLogin: true` and `limitedLogin: false`:
 
 ```typescript
-// Both tracking modes now return JWT tokens
-const loginResult = await SocialLogin.login({
-  provider: 'facebook',
-  options: {
-    permissions: ['email', 'public_profile'],
-    tracking: 'limited', // or 'enabled' - both work
-    nonce: nonce
-  }
-});
+   // Both modes can return JWT tokens depending on user choice
+   const loginResult = await SocialLogin.login({
+     provider: 'facebook',
+     options: {
+       permissions: ['email', 'public_profile'],
+       limitedLogin: false, // true = always JWT, false = depends on user tracking choice
+       nonce: nonce
+     }
+   });
 ```
 
 :::warning
