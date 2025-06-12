@@ -138,7 +138,7 @@ function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
                   <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                 </svg>
                 <span>
-                  <span class="font-bold">{numberWithSpaces(plan.bandwidth)}{plan.name === 'Pay as you go' ? '+' : ''}</span> GB/{m.month({}, { locale: Astro.locals.locale })}
+                  <span class="font-bold">{numberWithSpaces(plan.bandwidth)}{plan.name === 'Pay as you go' ? '+' : ''}</span> GiB/{m.month({}, { locale: Astro.locals.locale })}
                   {m.of_bandwidth({}, { locale: Astro.locals.locale })}
                 </span>
               </li>
@@ -147,7 +147,7 @@ function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
                   <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                 </svg>
                 <span>
-                  <span class="font-bold">{numberWithSpaces(plan.storage)}{plan.name === 'Pay as you go' ? '+' : ''}</span> GB {m.of_storage({}, { locale: Astro.locals.locale })}
+                  <span class="font-bold">{numberWithSpaces(plan.storage)}{plan.name === 'Pay as you go' ? '+' : ''}</span> GiB {m.of_storage({}, { locale: Astro.locals.locale })}
                 </span>
               </li>
               <li class="flex items-center">

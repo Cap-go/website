@@ -29,13 +29,13 @@ Object.keys(creditsByType).forEach(type => {
 
 // Format large numbers
 function formatNumber(num: number, type?: string): string {
-  // Convert bytes to GB for bandwidth and storage
+  // Convert bytes to GiB for bandwidth and storage
   if (type === 'bandwidth' || type === 'storage') {
-    const gb = num / (1024 * 1024 * 1024) // Convert bytes to GB
+    const gb = num / (1024 * 1024 * 1024) // Convert bytes to GiB
     if (gb >= 1000) {
       return `${(gb / 1000).toFixed(0)} TB`
     }
-    return `${gb.toFixed(0)} GB`
+    return `${gb.toFixed(0)} GiB`
   }
   
   if (num >= 1000000) {

@@ -8,8 +8,8 @@ const initialUpdatesByMonth = 1
 
 // Initial calculations
 const initialUpdates = initialMau * initialUpdatesByMonth
-const initialBandwidth = (initialUpdates * initialUpdatesSize) / 1024 // Convert MB to GB
-const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GB
+const initialBandwidth = (initialUpdates * initialUpdatesSize) / 1024 // Convert MB to GiB
+const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
 ---
 
 <section id="calculator" class="mx-auto max-w-7xl px-0 py-12 sm:px-6 lg:px-8">
@@ -204,7 +204,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GB
     step_min: number
     step_max: number
     unit_factor: number
-    units_used: number // billing units (GB for bandwidth/storage, count for MAU)
+    units_used: number // billing units (GiB for bandwidth/storage, count for MAU)
     price_per_unit: number // Price per billing unit
     cost: number
   }
@@ -235,10 +235,10 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GB
 
     let debounceTimer: NodeJS.Timeout
 
-    async function calculateCreditPrice(mau: number, bandwidthGB: number, storageGB: number) {
-      // Convert GB to bytes
-      const bandwidthBytes = bandwidthGB * 1024 * 1024 * 1024
-      const storageBytes = storageGB * 1024 * 1024 * 1024
+    async function calculateCreditPrice(mau: number, bandwidthGiB: number, storageGiB: number) {
+      // Convert GiB to bytes
+      const bandwidthBytes = bandwidthGiB * 1024 * 1024 * 1024
+      const storageBytes = storageGiB * 1024 * 1024 * 1024
 
       try {
         const response = await fetch('https://api.capgo.app/private/credits', {
@@ -267,21 +267,21 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GB
     }
 
     function formatNumber(num: number, type?: string): string {
-      // Convert bytes to GB for bandwidth and storage
+      // Convert bytes to GiB for bandwidth and storage
       if (type === 'bandwidth' || type === 'storage') {
-        const gb = num / (1024 * 1024 * 1024) // Convert bytes to GB
+        const gb = num / (1024 * 1024 * 1024) // Convert bytes to GiB
         if (gb >= 1000) {
           return `${(gb / 1000).toFixed(0)} TB`
         }
-        return `${gb.toFixed(0)} GB`
+        return `${gb.toFixed(0)} GiB`
       }
       
-      // Handle already-converted GB values for display
+      // Handle already-converted GiB values for display
       if (type === 'bandwidth-gb' || type === 'storage-gb') {
         if (num >= 1000) {
           return `${Math.ceil(num / 1000)} TB`
         }
-        return `${Math.ceil(num)} GB`
+        return `${Math.ceil(num)} GiB`
       }
       
       if (num >= 1000000) {
@@ -335,7 +335,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GB
           }
           
           // For MAU, add unit label since formatNumber doesn't include it
-          // For bandwidth/storage, formatNumber already includes units (GB/TB)
+          // For bandwidth/storage, formatNumber already includes units (GiB/TB)
           const displayRange = metricType === 'mau' ? `${formattedRange} MAU` : formattedRange
           
           tierHeader.innerHTML = `
@@ -347,9 +347,9 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GB
           const tierDetails = document.createElement('div')
           tierDetails.className = 'flex justify-between items-center text-xs text-gray-500'
           
-          const rateLabel = metricType === 'mau' ? '/MAU' : '/GB'
+          const rateLabel = metricType === 'mau' ? '/MAU' : '/GiB'
           // For MAU, add unit label since formatNumber doesn't include it
-          // For bandwidth/storage, formatNumber already includes units (GB/TB)
+          // For bandwidth/storage, formatNumber already includes units (GiB/TB)
           const usedDisplay = metricType === 'mau' ? `${formatNumber(tier.units_used)} MAU used` : `${formatNumber(tier.units_used)} used`
           
           tierDetails.innerHTML = `
@@ -370,8 +370,8 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GB
       const updatesByMonth = Number(updatesByMonthInput.value) || 0
 
       const updates = mau * updatesByMonth
-      const bandwidth = (updates * updatesSize) / 1024 // Convert MB to GB
-      const storage = updatesSize / 1024 // Convert MB to GB
+      const bandwidth = (updates * updatesSize) / 1024 // Convert MB to GiB
+      const storage = updatesSize / 1024 // Convert MB to GiB
 
       // Update displayed values
       const mauDisplay = document.querySelector('[data-mau-display]')
