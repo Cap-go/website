@@ -229,7 +229,292 @@ Here's where to find the key information you'll need for integration:
    :::note
    Set `limitedLogin` to true if you want to use Facebook's Limited Login feature. You can learn more about Limited Login [here](https://developers.facebook.com/docs/facebook-login/limited-login/).
    :::
+
+3. **Get User Profile Data**
+
+   After successful login, you can retrieve additional profile information:
+
+   ```typescript
+   async function getFacebookProfile() {
+     try {
+       const profileResponse = await SocialLogin.providerSpecificCall({
+         call: 'facebook#getProfile',
+         options: {
+           fields: ['id', 'name', 'email', 'first_name', 'last_name', 'picture']
+         }
+       });
+
+       console.log('Facebook profile:', profileResponse.profile);
+       return profileResponse.profile;
+     } catch (error) {
+       console.error('Failed to get Facebook profile:', error);
+       return null;
+     }
+   }
+
+   // Example usage after login
+   async function loginAndGetProfile() {
+     const loginResult = await loginWithFacebook();
+     if (loginResult) {
+       const profile = await getFacebookProfile();
+       if (profile) {
+         console.log('User ID:', profile.id);
+         console.log('Name:', profile.name);
+         console.log('Email:', profile.email);
+         console.log('Profile Picture:', profile.picture?.data?.url);
+       }
+     }
+   }
+   ```
+
+   :::tip
+   **Available Profile Fields**: You can request any fields available in Facebook's Graph API. Common fields include: `id`, `name`, `email`, `first_name`, `last_name`, `picture`, `birthday`, `gender`, `location`, `hometown`. Note that some fields may require additional permissions.
+   :::
+
+   :::warning
+   **Token Type Limitation**: The `getProfile` call only works when you have an **access token** (standard login with tracking allowed). If the user denied tracking or you're using limited login (JWT token only), this call will fail. In that case, use the profile data provided in the initial login response.
+   :::
 </Steps>
+
+## Understanding Facebook Login Token Types
+
+Facebook login behavior has changed significantly, especially on iOS with App Tracking Transparency (ATT). Your backend must handle two different token types depending on user permissions and tracking settings.
+
+### Token Types Explained
+
+Facebook now returns different token types based on user consent and tracking permissions:
+
+| Scenario | Token Type | Backend Handling |
+|----------|------------|------------------|
+| **User allows tracking + Standard login** | Access Token | Use as OAuth credential |
+| **User denies tracking OR Limited login** | JWT Token | Validate as ID token |
+
+### iOS App Tracking Transparency Impact
+
+On iOS, the user's App Tracking Transparency choice directly affects the token type you receive:
+
+- **Tracking Allowed**: You get an access token (if not using limited login)
+- **Tracking Denied**: Automatically falls back to JWT token, regardless of your settings
+
+#### ATT Status Values
+
+When requesting tracking permission, you'll receive one of these status values:
+
+| Status | Description | Login Behavior |
+|--------|-------------|----------------|
+| `authorized` | User granted tracking permission | Will receive access token |
+| `denied` | User explicitly denied tracking | Falls back to JWT token |
+| `notDetermined` | User hasn't been asked yet | Shows ATT prompt, then returns updated status |
+| `restricted` | Tracking restricted by device settings | Falls back to JWT token |
+
+### Implementation with Token Detection
+
+<Steps>
+1. **Frontend Implementation with ATT Check**
+
+   ```typescript
+   import { SocialLogin } from '@capgo/capacitor-social-login';
+   import { Capacitor } from '@capacitor/core';
+
+   async function loginWithFacebook() {
+     // Check ATT permission on iOS
+     let proceed = true;
+     if (Capacitor.getPlatform() === 'ios') {
+       const trackingResponse = await SocialLogin.providerSpecificCall({
+         call: 'facebook#requestTracking',
+         options: {}
+       });
+       
+       // Only proceed if user authorized tracking
+       proceed = trackingResponse.status === 'authorized';
+       if (!proceed) {
+         console.log(`App tracking status: ${trackingResponse.status}`);
+         // You can still attempt login - it will fall back to JWT
+       }
+     }
+
+     // Generate nonce for security
+     const nonce = Math.random().toString(36).substring(2, 10);
+     const hashedNonceHex = await sha256(nonce);
+
+     try {
+       const loginResult = await SocialLogin.login({
+         provider: 'facebook',
+         options: {
+           permissions: ['email', 'public_profile'],
+           tracking: 'limited', // or 'enabled' for standard tracking
+           nonce: nonce
+         }
+       });
+
+       if (loginResult.accessToken) {
+         // Access token - user allowed tracking
+         console.log('Received access token:', loginResult.accessToken.token);
+         return handleAccessToken(loginResult.accessToken.token, nonce);
+       } else if (loginResult.idToken) {
+         // JWT token - user denied tracking or limited login
+         console.log('Received JWT token:', loginResult.idToken);
+         return handleJWTToken(loginResult.idToken);
+       } else {
+         console.log('Facebook login failed - no token received');
+         return false;
+       }
+     } catch (error) {
+       console.error('Facebook login error:', error);
+       return false;
+     }
+   }
+
+   async function sha256(message: string) {
+     const msgBuffer = new TextEncoder().encode(message);
+     const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+     const hashArray = Array.from(new Uint8Array(hashBuffer));
+     const hashHex = hashArray
+       .map((b) => b.toString(16).padStart(2, "0"))
+       .join("");
+     return hashHex;
+   }
+   ```
+
+2. **Firebase Integration Example**
+
+   ```typescript
+   import { OAuthProvider, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
+
+   async function handleAccessToken(accessToken: string, nonce: string) {
+     // For access tokens, use OAuthProvider (new method)
+     const fbOAuth = new OAuthProvider("facebook.com");
+     const credential = fbOAuth.credential({
+       idToken: accessToken,
+       rawNonce: nonce
+     });
+
+     try {
+       const userResponse = await signInWithCredential(auth, credential);
+       return userResponse;
+     } catch (error) {
+       console.error('Firebase OAuth error:', error);
+       return false;
+     }
+   }
+
+   async function handleJWTToken(jwtToken: string) {
+     // For JWT tokens, send to your backend for validation
+     try {
+       const response = await fetch('/api/auth/facebook-jwt', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ jwtToken })
+       });
+
+       const result = await response.json();
+       return result;
+     } catch (error) {
+       console.error('JWT validation error:', error);
+       return false;
+     }
+   }
+   ```
+
+3. **Backend JWT Validation**
+
+   ```typescript
+   // Backend: Validate JWT token from Facebook
+   import jwt from 'jsonwebtoken';
+   import { Request, Response } from 'express';
+
+   app.post('/api/auth/facebook-jwt', async (req: Request, res: Response) => {
+     const { jwtToken } = req.body;
+
+     try {
+       // Verify JWT token with Facebook's public key
+       const decoded = jwt.verify(jwtToken, getApplePublicKey(), {
+         algorithms: ['RS256'],
+         audience: process.env.FACEBOOK_APP_ID,
+         issuer: 'https://appleid.apple.com'
+       });
+
+       // Extract user info from JWT
+       const userInfo = {
+         id: decoded.sub,
+         email: decoded.email,
+         name: decoded.name,
+         isJWTAuth: true
+       };
+
+       // Create your app's session/token
+       const sessionToken = createUserSession(userInfo);
+
+       res.json({
+         success: true,
+         token: sessionToken,
+         user: userInfo
+       });
+     } catch (error) {
+       console.error('JWT validation failed:', error);
+       res.status(401).json({ success: false, error: 'Invalid token' });
+     }
+   });
+   ```
+
+4. **Generic Backend Token Handler**
+
+   ```typescript
+   // Handle both token types in your backend
+   async function authenticateFacebookUser(tokenData: any) {
+     if (tokenData.accessToken) {
+       // Handle access token - validate with Facebook Graph API
+       const response = await fetch(`https://graph.facebook.com/me?access_token=${tokenData.accessToken}&fields=id,name,email`);
+       const userInfo = await response.json();
+       
+       return {
+         user: userInfo,
+         tokenType: 'access_token',
+         expiresIn: tokenData.expiresIn || 3600
+       };
+     } else if (tokenData.jwtToken) {
+       // Handle JWT token - decode and validate
+       const decoded = jwt.verify(tokenData.jwtToken, getFacebookPublicKey());
+       
+       return {
+         user: {
+           id: decoded.sub,
+           name: decoded.name,
+           email: decoded.email
+         },
+         tokenType: 'jwt',
+         expiresIn: decoded.exp - Math.floor(Date.now() / 1000)
+       };
+     } else {
+       throw new Error('No valid token provided');
+     }
+   }
+   ```
+</Steps>
+
+### Key Considerations
+
+**Access Token (Standard Login)**:
+- Only available when user allows app tracking on iOS
+- Can be used to access Facebook Graph API
+- Longer expiration times
+- More user data available
+
+**JWT Token (Fallback)**:
+- Always available regardless of tracking permissions
+- Contains basic user info only
+- Shorter expiration times
+- No access to Facebook Graph API or additional profile data
+
+:::warning
+**Important**: The old method using `FacebookAuthProvider.credential(accessToken)` no longer works because Facebook now returns JWT tokens in many cases. Always check the token type first.
+:::
+
+:::tip
+Always implement both token handling methods in your app to ensure authentication works regardless of the user's tracking preferences.
+:::
 
 ## Troubleshooting
 
