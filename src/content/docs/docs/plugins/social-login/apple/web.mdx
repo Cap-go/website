@@ -1,5 +1,5 @@
 ---
-title: Apple login on web browser
+title: Apple login for web browsers
 description: This guide provides a detailed walkthrough on setting up Apple Login using Capacitor for web applications, utilizing the @capgo/capacitor-social-login plugin to ensure a seamless integration process.
 sidebar:
     order: 4
@@ -29,265 +29,40 @@ Please follow the guide [here](/docs/plugins/social-login/apple/android/#creatin
    
    Click on `Configure` next to `Sign in with Apple`.
 
-3. **Add web domains and return URLs**
-   
-   - Add your web domain (e.g., `example.com`)
-   - Add your return URL (e.g., `https://example.com/login/callback`)
-   
-   :::warning
-   The return URL must use HTTPS in production.
+   ![apple_dev_configure_login](/social-login-assets/apple_dev_configure_login.webp)
+
+3. **Add the Return URLs**
+
+   Click on the `+` button to add a new return URL.
+
+   ![apple_dev_return_url_plus](/social-login-assets/apple_dev_return_url_plus.webp)
+
+4. **Add the Return URLs**
+
+   Add your domain for your web application in `Domains and Subdomains`.
+   :::caution
+   You **CANNOT** add `localhost` or `127.0.0.1` as a domain here.
    :::
 
-4. **Save the configuration**
-   
-   Click `Done`, then `Continue`, and finally `Save`.
+   Then, add your domain with the `https://` prefix and the path from which you will call Apple Login.
+   For example, if your domain is `https://my-app.com` and you will call Apple Login from `/login`, you should add `https://my-app.com/login` as the return URL.
 
+   :::caution
+   You **MUST** add both the domain with a trailing slash and without a trailing slash.
+   :::
+
+   ![apple_dev_return_url_add](/social-login-assets/apple_dev_return_url_add.webp)
+
+5. **Save the changes**
+
+   1. Click on the `Next` button to save the changes.
+   2. Click on the `Save` button to save the changes.
+
+6. You should be ready to test the login for JavaScript. Please note that you cannot test from localhost.
 </Steps>
 
-## Backend Configuration
 
-A backend is required for web Apple login to handle the OAuth callback and exchange the authorization code for tokens.
 
-### Environment Variables
 
-Set up the following environment variables for your backend:
 
-```bash
-PRIVATE_KEY_FILE="AuthKey_XXXXXXXX.p8"  # Downloaded Apple key file
-KEY_ID="XXXXXXXX"                       # Key ID from Apple Developer Portal
-TEAM_ID="XXXXXXXX"                      # Team ID from Apple Developer Portal  
-SERVICE_ID="your.service.id"            # Service ID created earlier
-REDIRECT_URI="https://your-domain.com/login/callback"
-SCOPE="name email"                      # Optional scopes
-```
 
-### Backend Implementation Example
-
-Here's a complete backend example using Hono and Node.js:
-
-```typescript
-import axios from 'axios';
-import { Hono } from 'hono';
-import { JSONFilePreset } from 'lowdb/node';
-import queryString from 'query-string';
-import { readFileSync } from 'node:fs';
-import jsonwebtoken from 'jsonwebtoken';
-import { logger } from 'hono/logger';
-import { cors } from 'hono/cors';
-
-const app = new Hono();
-app.use(logger());
-
-const db = await JSONFilePreset('db.json', {
-  users: [] as {
-    id: string;
-    email: string;
-    first_name: string;
-    last_name: string;
-  }[],
-});
-
-const getClientSecret = () => {
-  const time = new Date().getTime() / 1000; // Current time in seconds since Epoch
-  const privateKey = readFileSync(process.env.PRIVATE_KEY_FILE ?? '');
-
-  const headers = {
-    kid: process.env.KEY_ID,
-    typ: undefined,
-    alg: 'ES256',
-  };
-
-  const claims = {
-    iss: process.env.TEAM_ID ?? '',
-    iat: time, // The time the token was generated
-    exp: time + 86400 * 180, // Token expiration date
-    aud: 'https://appleid.apple.com',
-    sub: process.env.SERVICE_ID ?? '',
-  };
-
-  const token = jsonwebtoken.sign(claims, privateKey, {
-    algorithm: 'ES256',
-    header: headers,
-  });
-
-  return token;
-};
-
-app.post('/login/callback', async (c) => {
-  const body = await c.req.formData();
-  const clientSecret = getClientSecret();
-
-  const userStr = body.get('user');
-  
-  if (userStr) {
-    if (typeof userStr != 'string') {
-      console.error('Tried to upload file?');
-      return c.redirect('?success=false');
-    }
-
-    const user = JSON.parse(userStr) as {
-      name: { firstName: string; lastName: string };
-      email: string;
-    };
-
-    const requestBody = {
-      grant_type: 'authorization_code',
-      code: body.get('code'),
-      redirect_uri: process.env.REDIRECT_URI,
-      client_id: process.env.SERVICE_ID,
-      client_secret: clientSecret,
-      scope: process.env.SCOPE,
-    };
-
-    const appleRes = await axios.request({
-      method: 'POST',
-      url: 'https://appleid.apple.com/auth/token',
-      data: queryString.stringify(requestBody),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    });
-
-    if (!appleRes) {
-      return c.redirect('?success=false');
-    }
-
-    const appleData = appleRes.data as {
-      access_token: string;
-      refresh_token: string;
-      id_token: string;
-    };
-    
-    const parsedJwt = jsonwebtoken.decode(appleData.id_token, {
-      complete: true,
-    });
-    
-    if (
-      !parsedJwt ||
-      typeof parsedJwt.payload === 'string' ||
-      !parsedJwt.payload.sub ||
-      typeof parsedJwt.payload.sub != 'string'
-    ) {
-      return c.redirect('?success=false');
-    }
-
-    // Store user data
-    await db.update(({ users }) =>
-      users.push({
-        first_name: user.name.firstName,
-        last_name: user.name.lastName,
-        email: user.email,
-        id: parsedJwt.payload.sub as string,
-      }),
-    );
-
-    return c.redirect(
-      `?success=true&access_token=${appleData.access_token}&refresh_token=${appleData.refresh_token}&id_token=${appleData.id_token}`,
-    );
-  }
-
-  return c.redirect(`?success=true&code=${body.get('code')}&client_secret=${clientSecret}`);
-});
-
-export default {
-  port: 3000,
-  fetch: app.fetch,
-};
-```
-
-## Frontend Configuration
-
-### Initialize the Plugin
-
-Initialize the Social Login plugin with your Apple configuration:
-
-```typescript
-import { SocialLogin } from '@capgo/capacitor-social-login';
-
-await SocialLogin.initialize({
-  apple: {
-    clientId: 'your.service.id', // Service ID from Apple Developer Portal
-    redirectUrl: 'https://your-domain.com/login/callback'
-  }
-});
-```
-
-### Implement Login
-
-Create a login function that handles the Apple authentication:
-
-```typescript
-async function loginWithApple() {
-  try {
-    const result = await SocialLogin.login({
-      provider: 'apple',
-      options: {}
-    });
-    
-    // The result contains the ID token from Apple
-    const idToken = result.result.idToken;
-    
-    // Send the token to your backend for verification
-    const response = await fetch('/api/verify-apple-token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${idToken}`
-      }
-    });
-    
-    if (response.ok) {
-      const userData = await response.json();
-      console.log('User authenticated:', userData);
-    }
-  } catch (error) {
-    console.error('Apple login failed:', error);
-  }
-}
-```
-
-## Testing
-
-1. **Deploy your backend** to a server with HTTPS enabled
-2. **Update the return URL** in Apple Developer Portal to match your backend endpoint
-3. **Test the login flow** in a web browser
-
-:::tip
-Make sure your backend is accessible via HTTPS, as Apple requires secure connections for production use.
-:::
-
-## User Data Verification
-
-Add an endpoint to verify the JWT and return user data:
-
-```typescript
-app.use('/userdata', cors());
-app.get('/userdata', async (c) => {
-  let authHeader = c.req.header('Authorization');
-
-  if (!authHeader) {
-    return c.json({ error: 'No auth header' }, 401);
-  }
-
-  if (authHeader && authHeader.startsWith('Bearer ')) {
-    authHeader = authHeader.substring(7);
-  }
-
-  const parsedJwt = jsonwebtoken.decode(authHeader, { complete: true });
-  if (!parsedJwt?.payload?.sub) {
-    return c.json({ error: 'Invalid JWT' }, 403);
-  }
-
-  const userId = typeof parsedJwt.payload.sub == 'string' 
-    ? parsedJwt.payload.sub 
-    : parsedJwt.payload.sub();
-
-  // Verify JWT with Apple's public key (implementation details omitted)
-  // Return user data from your database
-  const userData = db.data.users.find((user) => user.id === userId);
-  
-  if (!userData) {
-    return c.json({ error: 'User not found' }, 404);
-  }
-
-  return c.json(userData);
-});
-```
