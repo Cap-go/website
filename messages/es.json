@@ -169,6 +169,7 @@
   "credit_15_percent": "15%",
   "credit_20_percent": "20%",
   "credit_30_percent": "30%",
+  "credit_based_usage": "Uso basado en crédito",
   "credit_percentage": "Porcentaje de crédito",
   "credit_pricing": "Precio del Crédito",
   "credit_requests_payment_desc": "Para solicitar un Crédito de Servicio, el Cliente debe enviar un correo electrónico a Capgo a support@capgo.app dentro de los treinta (30) días siguientes al final del mes en el que no se cumplió el Compromiso de Disponibilidad. El Cliente debe incluir ya sea su ID de cuenta o dirección de correo electrónico registrada, y las fechas y horas previamente reportadas en las que no hubo Disponibilidad de Servicio. Si Capgo confirma que el Cliente es elegible para un Crédito de Servicio, Capgo emitirá un crédito a la cuenta del Cliente dentro de los treinta (30) días. Los Créditos de Servicio no son reembolsos, no pueden ser intercambiados por una cantidad en efectivo y solo pueden utilizarse contra cargos de facturación futuros. Excepto lo establecido en la Sección 4 a continuación, los Créditos de Servicio serán el único y exclusivo remedio del Cliente, y la única y exclusiva responsabilidad de Capgo, por cualquier falla de Capgo en cumplir con el Compromiso de Disponibilidad.",

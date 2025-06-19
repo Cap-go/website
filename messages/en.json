@@ -749,6 +749,7 @@
   "pricing": "Pricing",
   "pricing_description": "Move forward with confidence. Capgo is the enterprise-grade cloud platform for Capacitor applications.",
   "prepaid_usage": "prepaid usage",
+  "credit_based_usage": "Credit-based usage",
   "price": "Price",
   "priority_plus_plan": "Priority Plus",
   "priority_support_for_all_capgo_plugins": "Priority support for all Capgo plugins <span class='font-bold'>(30+ plugins)</span>",

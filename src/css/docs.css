@@ -1,4 +1,3 @@
-@config "../../tailwind.config.mjs";
 @layer base, starlight, theme, components, utilities;
 
 @import '@astrojs/starlight-tailwind';
@@ -30,6 +29,137 @@ body,
   --color-gray-800: oklch(0.279 0.041 260.031);
   --color-gray-900: oklch(0.208 0.042 265.755);
   --color-gray-950: oklch(0.129 0.042 264.695);
+
+  /* Custom Font Sizes */
+  --font-size-tiny: 0.4rem;
+
+  /* Custom Breakpoints */
+  --breakpoint-vtab: (min-height: 361px);
+  --breakpoint-vix: (min-height: 812px);
+  --breakpoint-vip10: (min-height: 1024px);
+  --breakpoint-vip12: (min-height: 1112px);
+  --breakpoint-tab: 361px;
+  --breakpoint-iv: 402px;
+  --breakpoint-ise: 667px;
+  --breakpoint-i8: 736px;
+  --breakpoint-i8p: 736px;
+  --breakpoint-ix: 812px;
+  --breakpoint-ip10: 1024px;
+  --breakpoint-ip12: 1112px;
+  --breakpoint-mbp: 1440px;
+  --breakpoint-4xl: 1920px;
+
+  /* Pumpkin Orange */
+  --color-pumpkin-orange-50: #ffa443;
+  --color-pumpkin-orange-100: #ff9a39;
+  --color-pumpkin-orange-200: #ff902f;
+  --color-pumpkin-orange-300: #ff8625;
+  --color-pumpkin-orange-400: #ff7c1b;
+  --color-pumpkin-orange-500: #ff7211;
+  --color-pumpkin-orange-600: #f56807;
+  --color-pumpkin-orange-700: #eb5e00;
+  --color-pumpkin-orange-800: #e15400;
+  --color-pumpkin-orange-900: #d74a00;
+
+  /* Muted Blue */
+  --color-muted-blue-50: #779dcc;
+  --color-muted-blue-100: #6d93c2;
+  --color-muted-blue-200: #6389b8;
+  --color-muted-blue-300: #597fae;
+  --color-muted-blue-400: #4f75a4;
+  --color-muted-blue-500: #456b9a;
+  --color-muted-blue-600: #3b6190;
+  --color-muted-blue-700: #315786;
+  --color-muted-blue-800: #274d7c;
+  --color-muted-blue-900: #1d4372;
+
+  /* Azure */
+  --color-azure-50: #43d0ff;
+  --color-azure-100: #39c6ff;
+  --color-azure-200: #2fbcff;
+  --color-azure-300: #25b2ff;
+  --color-azure-400: #1ba8ff;
+  --color-azure-500: #119eff;
+  --color-azure-600: #0794f5;
+  --color-azure-700: #008aeb;
+  --color-azure-800: #0080e1;
+  --color-azure-900: #0076d7;
+
+  /* Vista Blue */
+  --color-vista-blue-50: #baffd8;
+  --color-vista-blue-100: #b0fcce;
+  --color-vista-blue-200: #a6f2c4;
+  --color-vista-blue-300: #9ce8ba;
+  --color-vista-blue-400: #92deb0;
+  --color-vista-blue-500: #88d4a6;
+  --color-vista-blue-600: #7eca9c;
+  --color-vista-blue-700: #74c092;
+  --color-vista-blue-800: #6ab688;
+  --color-vista-blue-900: #60ac7e;
+
+  /* Dusk */
+  --color-dusk-50: #8384a3;
+  --color-dusk-100: #797a99;
+  --color-dusk-200: #6f708f;
+  --color-dusk-300: #656685;
+  --color-dusk-400: #5b5c7b;
+  --color-dusk-500: #515271;
+  --color-dusk-600: #474867;
+  --color-dusk-700: #3d3e5d;
+  --color-dusk-800: #333453;
+  --color-dusk-900: #292a49;
+
+  /* Powder Blue */
+  --color-powder-blue-50: #e8ffff;
+  --color-powder-blue-100: #deffff;
+  --color-powder-blue-200: #d4fbfe;
+  --color-powder-blue-300: #caf1f4;
+  --color-powder-blue-400: #c0e7ea;
+  --color-powder-blue-500: #b6dde0;
+  --color-powder-blue-600: #acd3d6;
+  --color-powder-blue-700: #a2c9cc;
+  --color-powder-blue-800: #98bfc2;
+  --color-powder-blue-900: #8eb5b8;
+
+  /* Corn Flower */
+  --color-corn-flower-50: #9aa8ff;
+  --color-corn-flower-100: #909eff;
+  --color-corn-flower-200: #8694ff;
+  --color-corn-flower-300: #7c8af5;
+  --color-corn-flower-400: #7280eb;
+  --color-corn-flower-500: #6876e1;
+  --color-corn-flower-600: #5e6cd7;
+  --color-corn-flower-700: #5462cd;
+  --color-corn-flower-800: #4a58c3;
+  --color-corn-flower-900: #404eb9;
+
+  /* Misty Rose */
+  --color-misty-rose-50: #ffffff;
+  --color-misty-rose-100: #ffffff;
+  --color-misty-rose-200: #fffff9;
+  --color-misty-rose-300: #fff8ef;
+  --color-misty-rose-400: #ffeee5;
+  --color-misty-rose-500: #f8e4db;
+  --color-misty-rose-600: #eedad1;
+  --color-misty-rose-700: #e4d0c7;
+  --color-misty-rose-800: #dac6bd;
+  --color-misty-rose-900: #d0bcb3;
+
+  /* Custom Black */
+  --color-black: #000000;
+  --color-black-light: #333333;
+  --color-black-dark: #373738;
+
+  /* Custom White */
+  --color-white: #ffffff;
+
+  /* Custom Grey */
+  --color-grey: #999999;
+  --color-grey-medium: #1e1e1e;
+  --color-grey-dark: #515271;
+
+  /* Custom Green */
+  --color-green: #88D4A6;
 }
 
 .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {

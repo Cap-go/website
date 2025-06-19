@@ -169,6 +169,7 @@
   "credit_15_percent": "15 %",
   "credit_20_percent": "20 %",
   "credit_30_percent": "30 %",
+  "credit_based_usage": "Kreditbasierte Nutzung",
   "credit_percentage": "Kreditanteil",
   "credit_pricing": "Kreditpreisgestaltung",
   "credit_requests_payment_desc": "Um einen Service-Gutschrift zu beantragen, muss der Kunde innerhalb von dreißig (30) Tagen nach dem Ende des Monats, in dem das Uptime-Engagement nicht eingehalten wurde, eine E-Mail an Capgo unter support@capgo.app senden. Der Kunde muss entweder seine Kontonummer oder die registrierte E-Mail-Adresse angeben sowie die zuvor gemeldeten Daten und Zeiten, an denen keine Serviceverfügbarkeit bestand. Wenn Capgo bestätigt, dass der Kunde für eine Service-Gutschrift berechtigt ist, wird Capgo innerhalb von dreißig (30) Tagen eine Gutschrift auf das Konto des Kunden ausstellen. Service-Gutschriften sind keine Rückerstattungen, können nicht in einen Bargeldbetrag umgewandelt werden und dürfen nur für zukünftige Rechnungsgebühren verwendet werden. Sofern in Abschnitt 4 unten nicht anders angegeben, sind die Service-Gutschriften das einzige und ausschließliche Rechtsmittel des Kunden sowie die einzige und ausschließliche Haftung von Capgo für jegliches Versäumnis von Capgo, das Uptime-Engagement einzuhalten.",

@@ -93,7 +93,7 @@ function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
             <p class="mt-8" data-yearly-price style={yearly ? '' : 'display: none'}>
               <span class="text-gray-900">
                 {plan.name === 'Pay as you go' 
-                  ? `${m.billed_monthly({}, { locale: Astro.locals.locale })} + ${m.prepaid_usage({}, { locale: Astro.locals.locale })}`
+                  ? `${m.billed_monthly({}, { locale: Astro.locals.locale })} + ${m.credit_based_usage({}, { locale: Astro.locals.locale })}`
                   : `${m.billed_annually_at({}, { locale: Astro.locals.locale })} $${plan.price_y}`
                 }
               </span>
@@ -175,7 +175,7 @@ function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
             </ul>
             {plan.name === 'Pay as you go' && (
               <p class="mt-6 text-center">
-                <a class="border-b-1 border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600" href="#calculator">
+                <a class="border-b border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600" href="#calculator">
                   {m.calculate_your_usage({}, { locale: Astro.locals.locale })}
                 </a>
               </p>
