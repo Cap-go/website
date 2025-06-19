@@ -51,7 +51,7 @@ Lewati kerumitannya. [Capgo](https://capgo.app/docs/getting-started/cicd-integra
 - Bandingkan dengan solusi proprietary lainnya: $6,000/tahun
 - **Hemat $26,100 selama 5 tahun**
 
-[Setup CI/CD Sekarang](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
+[Setup CI/CD Sekarang](https://cal.com/capgo/mobile-ci-cd-done-for-you/)
 
 ## Panduan Setup Manual
 

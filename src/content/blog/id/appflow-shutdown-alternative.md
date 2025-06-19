@@ -50,7 +50,7 @@ Alih-alih terkunci pada sistem CI/CD proprietary, Capgo memungkinkan Anda untuk:
 - Gunakan platform populer seperti GitHub Actions
 - Pertahankan kendali penuh atas proses build
 - Ikuti tutorial detail kami untuk pengaturan [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
-- Atau biarkan kami menangani semuanya dengan layanan [CI/CD Done For You](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you)
+- Atau biarkan kami menangani semuanya dengan layanan [CI/CD Done For You](https://cal.com/team/capgo/mobile-ci-cd-done-for-you)
 
 ## Mengapa Memilih Capgo?
 
@@ -69,7 +69,7 @@ Transisi dari AppFlow ke Capgo sangat mudah. Ikuti [panduan migrasi detail](/doc
 3. Siapkan pipeline CI/CD menggunakan tutorial kami
 4. Mulai deploy pembaruan melalui Capgo
 
-Untuk tim enterprise yang membutuhkan dukungan khusus, [hubungi tim sales kami](https://cal.com/martindonadieu/capgo-enterprise-inquiry) untuk mendiskusikan kebutuhan spesifik dan strategi migrasi Anda.
+Untuk tim enterprise yang membutuhkan dukungan khusus, [hubungi tim sales kami](https://cal.com/team/capgo/capgo-enterprise-inquiry) untuk mendiskusikan kebutuhan spesifik dan strategi migrasi Anda.
 
 ## Lebih dari Sekadar Fungsionalitas Dasar
 
@@ -100,6 +100,6 @@ Kami bukan sekadar alternatif – kami aktif membangun masa depan pengembangan a
 
 Jangan biarkan penutupan AppFlow mengganggu alur kerja pengembangan Anda. [Mulai perjalanan Anda dengan Capgo hari ini](/register/) dan rasakan solusi yang lebih efisien dan hemat biaya untuk kebutuhan pengembangan aplikasi mobile Anda.
 
-Untuk solusi enterprise dan dukungan khusus, [jadwalkan panggilan dengan tim kami](https://cal.com/martindonadieu/capgo-enterprise-inquiry) untuk mendiskusikan strategi migrasi Anda.
+Untuk solusi enterprise dan dukungan khusus, [jadwalkan panggilan dengan tim kami](https://cal.com/team/capgo/capgo-enterprise-inquiry) untuk mendiskusikan strategi migrasi Anda.
 
 Ingat, Capgo bukan sekadar alternatif – ini adalah peningkatan untuk alur kerja pengembangan aplikasi mobile Anda, menawarkan lebih banyak fitur, kinerja lebih baik, dan penghematan biaya yang signifikan dibandingkan AppFlow.

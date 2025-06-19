@@ -49,7 +49,7 @@ Vor dem Start benötigen Sie:
 - Vergleich zu anderen proprietären Lösungen: 6.000 €/Jahr
 - **Sparen Sie 26.100 € über 5 Jahre**
 
-[CI/CD jetzt einrichten](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
+[CI/CD jetzt einrichten](https://cal.com/capgo/mobile-ci-cd-done-for-you/)
 
 ## Manuelle Einrichtungsanleitung
 

@@ -48,7 +48,7 @@ Salta la complejidad. [Capgo](https://capgo.app/docs/getting-started/cicd-integr
 - Comparar con otras soluciones propietarias: $6,000/año
 - **Ahorra $26,100 en 5 años**
 
-[Configurar CI/CD ahora](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
+[Configurar CI/CD ahora](https://cal.com/capgo/mobile-ci-cd-done-for-you/)
 
 ## Guía de configuración manual
 

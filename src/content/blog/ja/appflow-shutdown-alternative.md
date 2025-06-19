@@ -47,7 +47,7 @@ Capgoは、AppFlowの成熟した機能豊富な代替として以下を提供�
 - GitHub Actionsなどの一般的なプラットフォームの使用
 - ビルドプロセスの完全なコントロール
 - [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)セットアップの詳細なチュートリアルに従う
-- または[CI/CD Done For You](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you)サービスで全てを任せる
+- または[CI/CD Done For You](https://cal.com/team/capgo/mobile-ci-cd-done-for-you)サービスで全てを任せる
 
 ## Capgoを選ぶ理由
 
@@ -66,7 +66,7 @@ AppFlowからCapgoへの移行は簡単です。スムーズな移行のため�
 3. チュートリアルを使用してCI/CDパイプラインを設定
 4. Capgoを通じてアップデートのデプロイを開始
 
-専用サポートが必要なエンタープライズチームは、[セールスチーム](https://cal.com/martindonadieu/capgo-enterprise-inquiry)に連絡して、特定のニーズと移行戦略について相談してください。
+専用サポートが必要なエンタープライズチームは、[セールスチーム](https://cal.com/team/capgo/capgo-enterprise-inquiry)に連絡して、特定のニーズと移行戦略について相談してください。
 
 ## 基本機能を超えて
 
@@ -97,6 +97,6 @@ IonicとCapacitorのエコシステムは、依然として強力で活気に満
 
 AppFlowのシャットダウンで開発ワークフローが中断されないようにしましょう。[今すぐCapgoを始める](/register/)で、より効率的でコスト効果の高いモバイルアプリ開発ソリューションを体験してください。
 
-エンタープライズソリューションと専用サポートについては、[チームとの通話を予約](https://cal.com/martindonadieu/capgo-enterprise-inquiry)して、移行戦略について相談してください。
+エンタープライズソリューションと専用サポートについては、[チームとの通話を予約](https://cal.com/team/capgo/capgo-enterprise-inquiry)して、移行戦略について相談してください。
 
 覚えておいてください、Capgoは単なる代替手段ではありません - AppFlowと比較して、より多くの機能、より良いパフォーマンス、そして大幅なコスト削減を提供するモバイルアプリ開発ワークフローへのアップグレードです。

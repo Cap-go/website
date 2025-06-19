@@ -50,7 +50,7 @@ Invece di essere vincolato a un sistema CI/CD proprietario, Capgo ti permette di
 - Utilizzare piattaforme popolari come GitHub Actions
 - Mantenere il controllo completo sul tuo processo di build
 - Seguire i nostri tutorial dettagliati per la configurazione [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
-- O lasciare che ci occupiamo di tutto noi con il nostro servizio [CI/CD Done For You](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you)
+- O lasciare che ci occupiamo di tutto noi con il nostro servizio [CI/CD Done For You](https://cal.com/team/capgo/mobile-ci-cd-done-for-you)
 
 ## Perché Scegliere Capgo?
 
@@ -69,7 +69,7 @@ La transizione da AppFlow a Capgo è semplice. Segui la nostra [guida dettagliat
 3. Configura la tua pipeline CI/CD usando i nostri tutorial
 4. Inizia a distribuire aggiornamenti attraverso Capgo
 
-Per i team enterprise che richiedono supporto dedicato, [contatta il nostro team commerciale](https://cal.com/martindonadieu/capgo-enterprise-inquiry) per discutere le tue esigenze specifiche e la strategia di migrazione.
+Per i team enterprise che richiedono supporto dedicato, [contatta il nostro team commerciale](https://cal.com/team/capgo/capgo-enterprise-inquiry) per discutere le tue esigenze specifiche e la strategia di migrazione.
 
 ## Oltre le Funzionalità di Base
 
@@ -100,6 +100,6 @@ Non siamo solo un'alternativa - stiamo attivamente costruendo il futuro dello sv
 
 Non lasciare che la chiusura di AppFlow interrompa il tuo flusso di sviluppo. [Inizia il tuo percorso con Capgo oggi](/register/) e sperimenta una soluzione più efficiente ed economica per le tue esigenze di sviluppo di app mobili.
 
-Per soluzioni enterprise e supporto dedicato, [programma una chiamata con il nostro team](https://cal.com/martindonadieu/capgo-enterprise-inquiry) per discutere la tua strategia di migrazione.
+Per soluzioni enterprise e supporto dedicato, [programma una chiamata con il nostro team](https://cal.com/team/capgo/capgo-enterprise-inquiry) per discutere la tua strategia di migrazione.
 
 Ricorda, Capgo non è solo un'alternativa - è un upgrade al tuo flusso di sviluppo di app mobili, offrendo più funzionalità, migliori prestazioni e significativi risparmi sui costi rispetto ad AppFlow.
