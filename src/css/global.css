@@ -1,4 +1,3 @@
-
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
@@ -35,6 +34,10 @@ body,
 
   /* Custom Font Sizes */
   --font-size-tiny: 0.4rem;
+
+  /* Custom Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
 
   /* Custom Breakpoints */
   --breakpoint-vtab: (min-height: 361px);
@@ -163,6 +166,17 @@ body,
 
   /* Custom Green */
   --color-green: #88D4A6;
+}
+
+/* Custom Keyframes for Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .blog.prose table:not(:where(.not-content *)) {

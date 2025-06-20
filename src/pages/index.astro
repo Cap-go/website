@@ -7,6 +7,7 @@ import Testimonials from '@/components/Testimonials.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
 import * as m from '@/paraglide/messages'
+import CompaniesLogo from '@/components/companies-logo.astro'
 
 const config = Astro.locals.runtimeConfig
 
@@ -137,63 +138,7 @@ if (tmp.ok) {
         </div>
       </section>
     </div>
-    <section class="relative overflow-hidden bg-white py-12 sm:py-16 lg:py-20 xl:py-32">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 items-center xl:grid-cols-2">
-          <div class="px-8 text-center md:mx-auto md:max-w-2xl xl:max-w-none xl:pr-16 xl:text-left">
-            <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">{m.youre_in_good_company({}, { locale: Astro.locals.locale })}</h2>
-            <p class="font-pj mt-6 text-lg font-normal text-gray-800">
-              {m.capgo_enables_development_teams_at_some_of_the_most_innovative_companies({}, { locale: Astro.locals.locale })}
-            </p>
-          </div>
-          <div class="relative mt-8 sm:mt-12 lg:mx-auto lg:max-w-4xl xl:mt-0 xl:max-w-none">
-            <div class="absolute inset-16">
-              <div
-                class="mx-auto h-full w-full rotate-180 rounded-3xl opacity-30 blur-lg filter"
-                style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
-              >
-              </div>
-            </div>
-            <div class="relative space-y-5">
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/kick_logo.webp" alt="Kick" title="Kick" />
-                </div>
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut" />
-                </div>
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/remnote_logo.svg" alt="remnote" title="remnote" />
-                </div>
-              </div>
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-6">
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/revel_logo.svg" alt="hello revel" title="hello revel" />
-                </div>
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e" />
-                </div>
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/suez_logo.webp" alt="suez moneau" title="suez moneau" />
-                </div>
-              </div>
-              <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 xl:translate-x-12">
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/irec_logo.webp" alt="irec" title="irec" />
-                </div>
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/vella_logo.svg" alt="vella" title="vella" />
-                </div>
-                <div class="mx-auto flex w-44 items-center justify-center overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg md:w-full">
-                  <img loading="lazy" class="h-auto max-h-20 w-auto" src="/ourliving_logo.webp" alt="ourliving" title="ourliving" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-gray-500 xl:bg-linear-to-r"></div>
-    </section>
+    <CompaniesLogo />
     <section class="relative bg-gray-800 py-20 md:my-20">
       <svg class="absolute hidden opacity-30 md:-top-5 md:-left-1/3 md:m-0 md:block lg:-left-16" width="404" height="392" fill="none" viewBox="0 0 404 392">
         <defs>

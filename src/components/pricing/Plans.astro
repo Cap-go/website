@@ -93,7 +93,7 @@ function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
             <p class="mt-8" data-yearly-price style={yearly ? '' : 'display: none'}>
               <span class="text-gray-900">
                 {plan.name === 'Pay as you go' 
-                  ? `${m.billed_monthly({}, { locale: Astro.locals.locale })} + ${m.credit_based_usage({}, { locale: Astro.locals.locale })}`
+                  ? <span>{m.billed_monthly({}, { locale: Astro.locals.locale })} + <a href="#calculator" class="border-b border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600">{m.credit_based_usage({}, { locale: Astro.locals.locale })}</a></span>
                   : `${m.billed_annually_at({}, { locale: Astro.locals.locale })} $${plan.price_y}`
                 }
               </span>
@@ -150,12 +150,46 @@ function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
                   <span class="font-bold">{numberWithSpaces(plan.storage)}{plan.name === 'Pay as you go' ? '+' : ''}</span> GiB {m.of_storage({}, { locale: Astro.locals.locale })}
                 </span>
               </li>
-              <li class="flex items-center">
-                <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
-                  <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                </svg>
-                <span set:html={m.priority_support_for_all_capgo_plugins({}, { locale: Astro.locals.locale })} />
-              </li>
+              {plan.name === 'Solo' && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span >{m.community_support({}, { locale: Astro.locals.locale })}</span>
+                  </li>                
+                </>
+              )}
+              {(plan.name === 'Team' || plan.name === 'Pay as you go') && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span >{m.all_lower_tiers_benefits({}, { locale: Astro.locals.locale })}</span>
+                  </li>                
+                </>
+              )}
+              {plan.name === 'Maker' && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span >{m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale })}</span>
+                  </li>                
+                </>
+              )}
+              {(plan.name == 'Team') && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span >{m.priority_support({}, { locale: Astro.locals.locale })}</span>
+                  </li>                
+                </>
+              )}
               {plan.name === 'Pay as you go' && (
                 <>
                   <li class="flex items-center">
@@ -173,13 +207,6 @@ function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
                 </>
               )}
             </ul>
-            {plan.name === 'Pay as you go' && (
-              <p class="mt-6 text-center">
-                <a class="border-b border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600" href="#calculator">
-                  {m.calculate_your_usage({}, { locale: Astro.locals.locale })}
-                </a>
-              </p>
-            )}
           </div>
         </div>
       ))
