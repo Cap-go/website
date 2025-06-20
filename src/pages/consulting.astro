@@ -236,6 +236,17 @@ const plugins = [
                     { locale: Astro.locals.locale },
                   )
                 }<br />
+                <br />
+                <span class="text-indigo-600">
+                  First, check our 
+                  <a 
+                    href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
+                    class="underline hover:text-indigo-800 transition-colors duration-200 font-medium"
+                  >
+                    extensive plugin library
+                  </a>
+                  — you might find what you need already available!
+                </span>
               </p>
             </div>
             <div class="text-slate-900">
@@ -608,11 +619,20 @@ const plugins = [
         <a
           target="_blank"
           href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
-          class="inline-flex items-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-indigo-600 shadow-sm hover:bg-indigo-50"
+          class="inline-flex items-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-indigo-600 shadow-sm hover:bg-indigo-50 mr-4"
         >
           {m.get_your_custom_plugin_built({}, { locale: Astro.locals.locale })}
           <svg class="-mr-1 ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+        <a
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
+          class="inline-flex items-center rounded-md border-2 border-white bg-transparent px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-white hover:text-indigo-600 transition-colors duration-200"
+        >
+          Browse All Plugins
+          <svg class="-mr-1 ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0l-4-4m4 4l-4 4"></path>
           </svg>
         </a>
       </div>
