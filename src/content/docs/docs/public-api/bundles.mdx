@@ -146,6 +146,85 @@ curl -X DELETE \
 }
 ```
 
+### POST
+
+`https://api.capgo.app/bundle/metadata`
+
+Update bundle metadata such as link and comment information.
+
+#### Request Body
+
+```typescript
+interface UpdateMetadataBody {
+  app_id: string
+  version_id: number
+  link?: string
+  comment?: string
+}
+```
+
+#### Example Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "version_id": 456,
+    "link": "https://github.com/myorg/myapp/releases/tag/v1.0.0",
+    "comment": "Fixed critical bug in authentication"
+  }' \
+  https://api.capgo.app/bundle/metadata
+```
+
+#### Success Response
+
+```json
+{
+  "status": "success"
+}
+```
+
+### PUT
+
+`https://api.capgo.app/bundle/`
+
+Set a bundle to a specific channel. This links a bundle version to a channel for distribution.
+
+#### Request Body
+
+```typescript
+interface SetChannelBody {
+  app_id: string
+  version_id: number
+  channel_id: number
+}
+```
+
+#### Example Request
+
+```bash
+curl -X PUT \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "version_id": 456,
+    "channel_id": 789
+  }' \
+  https://api.capgo.app/bundle/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "success",
+  "message": "Bundle 1.0.0 set to channel production"
+}
+```
+
 ## Error Handling
 
 Common error scenarios and their responses:
