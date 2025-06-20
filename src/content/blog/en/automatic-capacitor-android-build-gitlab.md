@@ -50,7 +50,7 @@ Skip the complexity. [Capgo](https://capgo.app/docs/getting-started/cicd-integra
 - Compare to Other proprietary solution: $6,000/year
 - **Save $26,100 over 5 years**
 
-[Setup CI/CD Now](https://cal.com/capgo/mobile-ci-cd-done-for-you/)
+[Setup CI/CD Now](https://cal.com/team/capgo/mobile-ci-cd-done-for-you/)
 
 ## Manual Setup Guide
 

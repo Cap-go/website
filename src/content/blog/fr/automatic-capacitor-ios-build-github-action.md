@@ -48,7 +48,7 @@ Avant de commencer, vous aurez besoin de :
 - Comparé aux autres solutions propriétaires : 6 000 $/an
 - **Économisez 26 100 $ sur 5 ans**
 
-[Configurez CI/CD maintenant](https://cal.com/capgo/mobile-ci-cd-done-for-you/)
+[Configurez CI/CD maintenant](https://cal.com/team/capgo/mobile-ci-cd-done-for-you/)
 
 ## Guide de configuration manuelle
 
