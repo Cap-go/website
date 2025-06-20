@@ -78,7 +78,7 @@ const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go'
       </div>
       <div class="pb-24 sm:pb-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 class="text-center text-lg/8 font-semibold text-gray-900">Trusted by the biggest Capacitor apps</h2>
+          <h2 class="text-center text-lg/8 font-semibold text-gray-900">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
           <div class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-2xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
             <div class="flex flex-col items-center space-y-2">
               <div class="rounded-2xl bg-gray-100 shadow-sm">
@@ -86,7 +86,7 @@ const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go'
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Nana</p>
-                <p class="text-xs text-gray-500">2.5M downloads</p>
+                <p class="text-xs text-gray-500">2.5M {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
@@ -95,7 +95,7 @@ const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go'
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Snowqueen</p>
-                <p class="text-xs text-gray-500">1.8M downloads</p>
+                <p class="text-xs text-gray-500">1.8M {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
@@ -104,7 +104,7 @@ const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go'
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Shelf</p>
-                <p class="text-xs text-gray-500">950K downloads</p>
+                <p class="text-xs text-gray-500">950K {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
@@ -113,7 +113,7 @@ const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go'
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Suez</p>
-                <p class="text-xs text-gray-500">3.2M downloads</p>
+                <p class="text-xs text-gray-500">3.2M {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
@@ -122,7 +122,7 @@ const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go'
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Janitor</p>
-                <p class="text-xs text-gray-500">750K downloads</p>
+                <p class="text-xs text-gray-500">750K {m.downloads({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
           </div>
