@@ -156,6 +156,8 @@ Capgo uses Semantic Versioning (SemVer) to manage app versions, formatted as **M
 
 By sticking to SemVer rules, you can simplify version management and ensure smoother updates across your deployment channels.
 
+**💡 Pro Tip:** Use our [Semver Tester tool](/semver_tester/) to test how different version combinations work with Capgo's update logic and channel configurations. This interactive tool helps you understand exactly when updates will be applied based on your settings.
+
 ### Version Control Guidelines
 
 Capgo allows you to manage deployments effectively by setting up distinct channels for different stages of your workflow.

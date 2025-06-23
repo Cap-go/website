@@ -36,6 +36,26 @@ I use Capgo in all my projects I build. That allows me to put less time in the A
 
 You can read more about it [here](https://capgo.app/).
 
+## Understanding Semantic Versioning with Capgo
+
+Capgo uses semantic versioning (semver) to determine when and how updates should be applied to your app. This ensures that your users only receive compatible updates and prevents breaking changes from being automatically deployed.
+
+Semantic versioning follows the format `MAJOR.MINOR.PATCH`:
+
+- **MAJOR**: Breaking changes that require a native app store release
+- **MINOR**: New features that are backward compatible
+- **PATCH**: Bug fixes that are backward compatible
+
+For example, if your app is at version `1.0.0` and you want to update to `1.0.1` (a patch), Capgo will automatically apply this update. However, if you want to update from `1.0.0` to `2.0.0` (a major version), this would require a native app store release since it indicates breaking changes.
+
+Capgo's channel settings allow you to configure which types of updates are automatically applied:
+- **Major strategy**: Allows all updates (use with caution)
+- **Minor strategy**: Allows minor and patch updates only
+- **Patch strategy**: Only allows patch updates
+- **Metadata strategy**: Requires minimum version requirements to be met
+
+You can test how different version combinations work with Capgo's update logic using our [Semver Tester tool](/semver_tester/). This tool helps you understand exactly when updates will be applied based on your channel configuration.
+
 ## Are there any limitations?
 
 As good as it may sound, there are a few things that we need to keep in mind.
