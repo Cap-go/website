@@ -1,5 +1,5 @@
 ---
-
+import * as m from '@/paraglide/messages'
 ---
 
 <section class="relative bg-linear-to-br from-slate-900 via-blue-900 to-indigo-900 rounded-3xl shadow-2xl border border-slate-700/50 overflow-hidden">
@@ -19,26 +19,24 @@
                 <!-- Badge -->
                 <div class="inline-flex items-center gap-2 bg-linear-to-r from-blue-500/20 to-indigo-500/20 backdrop-blur-sm border border-blue-400/30 rounded-full px-4 py-2">
                     <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span class="text-blue-200 text-sm font-medium">Enterprise Ready</span>
+                    <span class="text-blue-200 text-sm font-medium">{m.enterprise_ready()}</span>
                 </div>
 
                 <div>
                     <h2 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                         <span class="bg-linear-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
-                            Enterprise
+                            {m.enterprise_title()}
                         </span>
                     </h2>
                     <p class="text-xl text-slate-300 mb-8 leading-relaxed">
-                        For enterprise teams building <span class="text-blue-300 font-semibold">mission-critical apps</span> 
-                        who need advanced security, compliance, and dedicated support with 
-                        <span class="text-indigo-300 font-semibold">full control</span> over their mobile DevOps infrastructure.
+                        {m.enterprise_description()}
                     </p>
                 </div>
 
                 <!-- CTA Section -->
                 <div class="space-y-6">
                     <button class="group relative bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white px-10 py-5 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 flex items-center gap-3">
-                        <span>Get Enterprise Quote</span>
+                        <span>{m.get_enterprise_quote()}</span>
                         <svg class="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                         </svg>
@@ -49,14 +47,14 @@
                             <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="text-sm">Custom pricing</span>
+                            <span class="text-sm">{m.custom_pricing()}</span>
                         </div>
                         <div class="w-1 h-1 bg-slate-500 rounded-full"></div>
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="text-sm">No commitment required</span>
+                            <span class="text-sm">{m.no_commitment_required()}</span>
                         </div>
                     </div>
                 </div>
@@ -72,7 +70,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
                         </div>
-                        Security & Compliance
+                        {m.security_and_compliance()}
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors duration-200">
@@ -81,7 +79,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Single Sign-On (SSO)</span>
+                            <span class="font-medium">{m.single_sign_on_sso()}</span>
                         </div>
                         <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0">
@@ -89,7 +87,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Advanced Access Levels</span>
+                            <span class="font-medium">{m.advanced_access_levels()}</span>
                         </div>
                         <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0">
@@ -97,7 +95,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Extended Security</span>
+                            <span class="font-medium">{m.extended_security()}</span>
                         </div>
                         <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0">
@@ -105,7 +103,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">SOC 2 Compliance</span>
+                            <span class="font-medium">{m.soc2_compliance_short()}</span>
                         </div>
                     </div>
                 </div>
@@ -118,7 +116,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
                         </div>
-                        Integration & API
+                        {m.integration_and_api()}
                     </h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors duration-200">
@@ -127,7 +125,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Custom Webhooks</span>
+                            <span class="font-medium">{m.custom_webhooks()}</span>
                         </div>
                         <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0">
@@ -135,7 +133,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Full API Access</span>
+                            <span class="font-medium">{m.full_api_access()}</span>
                         </div>
                         <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0">
@@ -143,7 +141,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">CI/CD Integration</span>
+                            <span class="font-medium">{m.ci_cd_integration()}</span>
                         </div>
                         <div class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0">
@@ -151,7 +149,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Custom Features</span>
+                            <span class="font-medium">{m.custom_features()}</span>
                         </div>
                     </div>
                 </div>
@@ -164,7 +162,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
                             </svg>
                         </div>
-                        Infrastructure & Support
+                        {m.infrastructure_and_support()}
                     </h3>
                     <div class="space-y-4">
                         <div class="flex items-start gap-3 text-slate-300 hover:text-white transition-colors duration-200">
@@ -173,7 +171,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Deploy on AWS, GCP, or your cloud provider</span>
+                            <span class="font-medium">{m.deploy_on_cloud_providers()}</span>
                         </div>
                         <div class="flex items-start gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
@@ -181,7 +179,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Per-country hosting (GDPR compliance)</span>
+                            <span class="font-medium">{m.per_country_hosting_gdpr()}</span>
                         </div>
                         <div class="flex items-start gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
@@ -189,7 +187,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Self-hosted storage options</span>
+                            <span class="font-medium">{m.self_hosted_storage_options()}</span>
                         </div>
                         <div class="flex items-start gap-3 text-slate-300 hover:text-white transition-colors duration-200">
                             <div class="w-6 h-6 bg-linear-to-br from-green-400 to-green-500 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
@@ -197,7 +195,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <span class="font-medium">Priority Support & Dedicated SLA</span>
+                            <span class="font-medium">{m.priority_support_dedicated_sla()}</span>
                         </div>
                     </div>
                 </div>
@@ -209,15 +207,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div class="space-y-2">
                     <div class="text-3xl font-bold text-white">99.9%</div>
-                    <div class="text-slate-400">Uptime SLA</div>
+                    <div class="text-slate-400">{m.uptime_sla()}</div>
                 </div>
                 <div class="space-y-2">
                     <div class="text-3xl font-bold text-white">24/7</div>
-                    <div class="text-slate-400">Priority Support</div>
+                    <div class="text-slate-400">{m.priority_support_24_7()}</div>
                 </div>
                 <div class="space-y-2">
                     <div class="text-3xl font-bold text-white">SOC 2</div>
-                    <div class="text-slate-400">Type II Certified</div>
+                    <div class="text-slate-400">{m.type_ii_certified()}</div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 ---
-title: "Handling Updates"
-description: "How to use the auto-update plugin in self-hosted mode, how to handle the update and any issue who could occur, it's fully DIY"
+title: "Update API Endpoint"
+description: "How to build your update server API endpoint to respond to Capgo plugin requests with proper bundle information and checksums"
 sidebar:
   order: 6
 ---
@@ -43,12 +43,14 @@ export const handler: Handler = async (event) => {
     return {
       version: '1.0.1',
       url: 'https://apiurl.com/mybuild_101.zip',
+      checksum: 'sha256_checksum_of_bundle',
     }
   }
   else if (version_name === '1.0.1') {
     return {
       version: '1.0.2',
       url: 'https://apiurl.com/mybuild_102.zip',
+      checksum: 'sha256_checksum_of_bundle',
     }
   }
   else {
@@ -61,22 +63,48 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-This endpoint should return a JSON:
+## Response Format
+
+For **non-encrypted bundles**, your endpoint should return:
 
 ```json
 {
   "version": "1.0.2",
-  "url": "https://apiurl.com/mybuild_102.zip"
+  "url": "https://apiurl.com/mybuild_102.zip",
+  "checksum": "sha256_checksum_of_bundle"
 }
 ```
 
-And if no update or error, add the `message` key and optionally an `error`
+For **encrypted bundles**, you also need to include the session key:
+
+```json
+{
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip",
+  "checksum": "encrypted_checksum_from_encrypt_command",
+  "session_key": "ivSessionKey_from_encrypt_command"
+}
+```
+
+And if no update or error, add the `message` key and optionally an `error`:
 
 ```json
 {
   "message": "Version not found",
   "error": "The backend crashed",
   "version": "1.0.2",
-  "url": "https://apiurl.com/mybuild_102.zip"
 }
 ```
+
+## Field Descriptions
+
+- **`checksum`**: SHA256 hash of your bundle zip file for integrity verification
+- **`session_key`**: Required only for encrypted bundles - this is the `ivSessionKey` returned by the encrypt command
+- **`version`**: Version identifier in semver format
+- **`url`**: HTTPS URL where the bundle can be downloaded
+
+## Bundle Creation
+
+To learn how to create compatible bundles and generate checksums, see the [Auto Update documentation](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
+
+For encrypted bundles, see the [Encrypted Bundles documentation](/docs/plugin/self-hosted/encrypted-bundles/) which explains the complete encryption workflow.

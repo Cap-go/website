@@ -17,7 +17,7 @@ Code push, also referred to as "over the air updates" (OTA) is a cloud service e
 
 We use the term "release" to mean preparing a binary for the app stores. In order to later generate a bundle Capgo needs to know the exact binary that was shipped to the app stores.
 
-We use the term "bundle" to mean a patch that can be applied to a release to update it to new code. The `npx @capgo/cli app update` command is used to generate a bundle from your new local code which is then shipped to your users.
+We use the term "bundle" to mean a patch that can be applied to a release to update it to new code. The `npx @capgo/cli@latest bundle upload` command is used to generate a bundle from your new local code which is then shipped to your users.
 
 ### What is the roadmap?[](https://capgo.app/docs/faq/#what-is-the-roadmap "Direct link to What is the roadmap?")
 
@@ -33,7 +33,11 @@ See [Teams](https://capgo.app/pricing/) for more information.
 
 ### Does Capgo store my source code?[](https://capgo.app/docs/faq/#does-capgo-store-my-source-code "Direct link to Does Capgo store my source code?")
 
-No. Capgo servers never see your source code. When you run `npx @capgo/cli app update` the `npx @capgo/cli` tool only uploads the same compiled code that you send to the app stores. If you desire additional security, you can use End to End encryption to encrypt your bundle before uploading it to Capgo servers.
+No. Capgo servers never see your source code. When you run `npx @capgo/cli@latest bundle upload`, Capgo stores a zip file of the minified/compiled code - the same code that a browser would receive, not your source code. 
+
+For additional security, you have two options:
+- **End-to-End Encryption**: Encrypt your bundle before uploading, making it impossible for Capgo to read or modify the contents
+- **External URL Upload**: Store the bundle on your own server and only provide Capgo with the download link with the option `--external <url>`
 
 See also our privacy policy: [https://capgo.app/privacy](https://capgo.app/privacy/)
 
@@ -95,7 +99,7 @@ You can use our [CI guide Android](https://capgo.app/blog/automatic-capacitor-an
 
 The Capgo updater (included in your application when you build your app) caches the latest downloaded bundle in the only directory that capacitor allow to load code. On Android, this is located in `/data/user/0/com.example.app/code_cache/capgo_updater` although the base of that path is provided by the Android system and can change dynamically at runtime. On iOS devices, data is stored under `Library/Application Support/capgo`.
 
-The Capgo command line tools (e.g. `npx @capgo/cli app update`) are installed on disk in npm caches, your logins are stored in your home directory in `~/.capgo`.
+The Capgo command line tools (e.g. `npx @capgo/cli@latest bundle upload`) are installed on disk in npm caches, your logins are stored in your home directory in `~/.capgo`.
 
 ### How does this relate to Capacitor Hot Reload?[](https://capgo.app/docs/faq/#how-does-this-relate-to-capacitor-hot-reload "Direct link to How does this relate to Capacitor Hot Reload?")
 
@@ -111,7 +115,7 @@ Capgo can change any JS code in your application. This includes app code and gen
 
 We do not have plans to support changing native code (e.g. Java/Kotlin on Android or Objective-C/Swift on iOS), and the tool will warn you if it detects that you have changed native code as it will not be included in the bundle.
 
-### Does this support Web?[](https://capgo.app/docs/faq/#does-this-support-web "Direct link to Does this support Flutter Web?")
+### Does this support Web?[](https://capgo.app/docs/faq/#does-this-support-web "Direct link to Does this support Web?")
 
 Code push isn't needed for web as the web already works this way. When a user opens a web app it downloads the latest version from the server if needed.
 
@@ -129,11 +133,11 @@ Capgo supports the same versions of Android that Capacitor supports.
 
 Capacitor currently supports Android API level 22+ and iOS 13.0+: [https://capacitorjs.com/docs/main/reference/support-policy](https://capacitorjs.com/docs/main/reference/support-policy/)
 
-### What versions of Capacitor does Capgo support?[](https://capgo.app/docs/faq/#what-versions-of-flutter-does-capgo-support "Direct link to What versions of Flutter does Capgo support?")
+### What versions of Capacitor does Capgo support?[](https://capgo.app/docs/faq/#what-versions-of-capacitor-does-capgo-support "Direct link to What versions of Capacitor does Capgo support?")
 
 Capgo currently supports only recent stable releases of Capacitor. We could support older versions of Capacitor as well, we just haven't built out the infrastructure necessary to maintain such over time. We intend to support more versions of Capacitor in the future, including any version for our enterprise customers. [https://github.com/Cap-go/capgo/issues/1100](https://github.com/Cap-go/capgo/issues/1100/)
 
-Capgo tracks Flutter stable and generally updates within a few hours of any stable release. Our system for doing these updates is automated takes a few minutes to run. We then do an extra manual verification step before publishing to our servers.
+Capgo tracks Capacitor stable and generally updates within a few hours of any stable release. Our system for doing these updates is automated takes a few minutes to run. We then do an extra manual verification step before publishing to our servers.
 
 ### How does this relate to the App/Play Store review process or policies?[](https://capgo.app/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies "Direct link to How does this relate to the App/Play Store review process or policies?")
 
@@ -149,7 +153,7 @@ Yes.
 
 The Play Store offers two restrictions relating to update tools.
 
-1.  Updates must use an interpreter or virtual machine (Capgo uses the Dart Virtual Machine). [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
+1.  Updates must use an interpreter or virtual machine (Capgo uses JavaScript in a WebView). [https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
 
 ```
 <span><span>    An app distributed via Google Play may not modify, replace, or update itself</span><br></span><span><span>    using any method other than Google Play's update mechanism. Likewise, an app</span><br></span><span><span>    may not download executable code (such as dex, JAR, .so files) from a</span><br></span><span><span>    source other than Google Play. *This restriction does not apply to code</span><br></span><span><span>    that runs in a virtual machine or an interpreter* where either provides</span><br></span><span><span>    indirect access to Android APIs (such as JavaScript in a webview or</span><br></span><span><span>    browser).</span><br></span><span><span></span><br></span><span><span>    Apps or third-party code, like SDKs, with interpreted languages (JavaScript,</span><br></span><span><span>    Python, Lua, etc.) loaded at run time (for example, not packaged with the</span><br></span><span><span>    app) must not allow potential violations of Google Play policies.</span><br></span>
@@ -173,7 +177,7 @@ Similar to the Play Store, the App Store offers both technical and policy restri
 <span><span>3.2.2</span><br></span><span><span>... interpreted code may be downloaded to an Application but only so long as</span><br></span><span><span>such code:</span><br></span><span><span>(a) does not change the primary purpose of the Application by providing</span><br></span><span><span>features or functionality that are inconsistent with the intended and</span><br></span><span><span>advertised purpose of the Application as submitted to the App Store,</span><br></span><span><span>(b) does not create a store or storefront for other code or applications, and</span><br></span><span><span>(c) does not bypass signing, sandbox, or other security features of the OS.</span><br></span>
 ```
 
-Capgo uses a custom Dart interpreter to comply with the interpreter-only restriction for updates on iOS. So long as your application is not engaging in deceptive behavior via updates (e.g. changing the purpose of the app via update), updating via Capgo (or any other code push solution) is standard industry practice and compliant with App Store guidelines.
+Capgo uses JavaScript in a WebView to comply with the interpreter-only restriction for updates on iOS. So long as your application is not engaging in deceptive behavior via updates (e.g. changing the purpose of the app via update), updating via Capgo (or any other code push solution) is standard industry practice and compliant with App Store guidelines.
 
 Deliberately abusing Capgo to violate App Store guidelines is in violation of the Capgo [Terms of Service](https://capgo.app/tos/) and can result in termination of your account.
 
@@ -208,7 +212,7 @@ Capgo updater (included in your application when you build your app with Capgo) 
 
 In the default update behavior, when the application launches it alerts the Capgo updater, which spawns a separate thread to make a network request to Capgo's servers and ask for an update. We intentionally use a separate thread to avoid affecting blocking anything else the application might be doing. If the network request fails or times out, the updater will simply try to check again next time the application launches.
 
-Capgo command line tools (e.g. `npx @capgo/cli app update`) require network connectivity to function. If you are using Capgo to distribute your app, you should ensure that your CI system has network connectivity.
+Capgo command line tools (e.g. `npx @capgo/cli@latest bundle upload`) require network connectivity to function. If you are using Capgo to distribute your app, you should ensure that your CI system has network connectivity.
 
 ### What happens if a user doesn't update for a long time and misses an update?[](https://capgo.app/docs/faq/#what-happens-if-a-user-doesnt-update-for-a-long-time-and-misses-an-update "Direct link to What happens if a user doesn't update for a long time and misses an update?")
 
@@ -226,7 +230,7 @@ We track the latest stable release of Capacitor and update our code push plugin 
 
 By default, the Capgo updater checks for updates on app startup. It runs on a background thread and does not block the UI thread. Any updates will be installed while the user is using the app and will be applied the next time the app is restarted.
 
-It is also possible to run the Capgo updater manually using [package:capgo\_code\_push](https://pub.dev/packages/capgo_code_push/), through which it is possible to trigger updates at any time, including via a push notification.
+It is also possible to run the Capgo updater manually using the `@capgo/capacitor-updater` package, through which it is possible to trigger updates at any time, including via a push notification.
 
 The Capgo updater is designed such that when the network is not available, or the server is down or otherwise unreachable, the app will continue to run as normal. Should you ever choose to delete an update from our servers, all your clients will continue to run as normal.
 
@@ -247,7 +251,7 @@ Requests sent from the app to Capgo servers include:
 -   app\_id (specified `capacitor.config.json`)
 -   channel (optional in `capacitor.config.json`)
 -   release\_version (versionName from AndroidManifest.xml or CFBundleShortVersionString from Info.plist or `capacitor.config.json` if set in [`CapacitorUpdater.version`](/docs/plugin/settings/#version) )
--   version\_number (generated as part of `npx @capgo/cli app update`)
+-   version\_number (generated as part of `npx @capgo/cli@latest bundle upload`)
 -   os_version (e.g. '11.2.1')
 -   platform (e.g. 'android', needed to send down the right patch) That's it. The code for this is in `updater/library/src/network.rs`
 -   device\_id (generated on the device on first run, used to de-duplicate per-device installs and allow us to charge based on users installed to (e.g. monthly active users), rather than total patches or total patch installs)
@@ -270,7 +274,7 @@ Unfortunately, these not all of these mechanisms allow 3rd parties to detect whe
 If you'd like to segment availability of Capgo bundle, there are 4 potential options:
 
 1.  Use separate channel for each group. This is the most straightforward approach, but requires you to manage multiple channels. You may already have a dev channels and prod channels with different availability. You can thus update your dev channels, verify it and then separately update your prod channels. We recommend using branches / tags in your version control to help keep track of the sources associated with each release.
-2.  Track your own set of opt-in users, disable automatic updates, and trigger updates only for certain users via package:capgo\_code\_push. This works today, but requires you to manage your own opt-in list.
+2.  Track your own set of opt-in users, disable automatic updates, and trigger updates only for certain users via the `@capgo/capacitor-updater` package. This works today, but requires you to manage your own opt-in list.
 3.  Capgo allow creare its own opt-in mechanism on a per-device basis (similar to Test Tracks or TestFlight, just platform agnostic). This allow your QA team to opt-in to bundle before they're promoted to the general public.
 4.  Capgo have percentage based rollouts. This does not let you choose which devices to send to, but can help you roll out incrementally and roll-back on sight of any problems.
 
