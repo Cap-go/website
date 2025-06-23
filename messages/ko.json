@@ -1066,6 +1066,7 @@
   "see_in_play_store": "Play 스토어에서 보기",
   "see_the_difference_for_yourself": "직접 차이를 확인해보세요",
   "self_hosted_storage_options": "자체 호스팅 저장 옵션",
+  "semver_tester": "SemVer 테스터",
   "send_your_first_update": "첫 번째 업데이트 보내기",
   "service_credits_desc": "구독 기간 동안 특정 월에 가동 시간 약정이 충족되지 않은 경우, 고객은 서비스 크레딧(\"서비스 크레딧\")을 받을 자격이 있습니다. 단, 고객이 Capgo에 가동 시간 약정 미달을 보고하고 본 별첨에 따라 해당 서비스 크레딧을 요청해야 합니다. 이에 따른 서비스 크레딧 금액은 다음과 같이 계산됩니다: X * Y, 여기서 X = 해당 월에 대해 영향을 받은 서비스에 대해 고객이 Capgo에 지불해야 하는 총 요금(청구 또는 지불 시기와 무관), Y = 해당 월에 제공된 실제 가용성(총 시간의 백분율로)에 해당하는 크레딧 비율로, 아래 표에 명시되어 있습니다.",
   "service_credits_title": "2. 서비스 크레딧",

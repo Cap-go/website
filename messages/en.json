@@ -1015,6 +1015,7 @@
   "service_credits_title": "2. Service Credits",
   "service_definition": "<strong>Service</strong> refers to the Application.",
   "services": "Services",
+  "semver_tester": "SemVer Tester",
   "setup_ci_cd_now": "Setup CI/CD now →",
   "severity_level": "Severity Level",
   "ship_updates_fixes_changes_and_features": "Ship updates, fixes, changes, and features",

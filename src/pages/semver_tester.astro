@@ -1,0 +1,739 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Semver Check - Capgo">
+  <main class="min-h-screen bg-gray-50 py-8 px-4 text-black">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">
+          Capgo Semver Tester
+        </h1>
+        <p class="text-gray-600 text-lg">
+          Check semantic versioning compatibility for your Capacitor app updates
+        </p>
+      </div>
+
+      <!-- Main comparison tool -->
+      <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-8">
+        <div class="p-6 border-b border-gray-200">
+          <!-- Basic Version Inputs -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Local Version
+              </label>
+              <input
+                type="text"
+                id="version1"
+                placeholder="1.0.0"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-mono"
+              />
+              <div id="version1-status" class="mt-1 text-sm"></div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Remote Version
+              </label>
+              <input
+                type="text"
+                id="version2"
+                placeholder="1.1.0"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-mono"
+              />
+              <div id="version2-status" class="mt-1 text-sm"></div>
+            </div>
+          </div>
+
+          <!-- Advanced Settings Toggle -->
+          <div class="border-t border-gray-200 pt-4">
+            <button
+              type="button"
+              id="advanced-toggle"
+              class="flex items-center justify-between w-full text-left hover:bg-gray-50 p-2 rounded-md"
+            >
+              <span class="text-sm font-medium text-gray-700">Advanced Settings</span>
+              <svg id="advanced-chevron" class="w-5 h-5 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <!-- Advanced Settings Panel -->
+            <div id="advanced-panel" class="hidden mt-4">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Local Version & App Context -->
+                <div class="space-y-6">
+                  <div class="border-t border-gray-200 pt-4">
+                    <h4 class="text-md font-semibold text-gray-900 mb-4">App Context</h4>
+                    <div class="space-y-4">
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Platform</label>
+                        <select id="platform-select" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                          <option value="ios">iOS</option>
+                          <option value="android">Android</option>
+                        </select>
+                      </div>
+
+                      <div class="flex items-center">
+                        <input type="checkbox" id="is-dev-build" class="mr-2">
+                        <label class="text-sm text-gray-700">Development Build</label>
+                      </div>
+
+                      <div class="flex items-center">
+                        <input type="checkbox" id="is-emulator" class="mr-2">
+                        <label class="text-sm text-gray-700">Running on Emulator</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Remote Version & Channel Settings -->
+                <div class="space-y-6">
+                  <div class="border-t border-gray-200 pt-4">
+                    <h4 class="text-md font-semibold text-gray-900 mb-4">Channel Settings</h4>
+                    <div class="space-y-4">
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <label class="text-sm font-medium text-gray-700">iOS</label>
+                          <div class="text-xs text-gray-500">Allow updates for iOS devices</div>
+                        </div>
+                        <button type="button" id="ios-toggle" class="bg-blue-600 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2" role="switch" aria-checked="true">
+                          <span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                        </button>
+                      </div>
+
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <label class="text-sm font-medium text-gray-700">Android</label>
+                          <div class="text-xs text-gray-500">Allow updates for Android devices</div>
+                        </div>
+                        <button type="button" id="android-toggle" class="bg-blue-600 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2" role="switch" aria-checked="true">
+                          <span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                        </button>
+                      </div>
+
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <label class="text-sm font-medium text-gray-700">Allow development build</label>
+                          <div class="text-xs text-gray-500">Allow updates for development builds</div>
+                        </div>
+                        <button type="button" id="dev-build-toggle" class="bg-blue-600 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2" role="switch" aria-checked="true">
+                          <span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                        </button>
+                      </div>
+
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <label class="text-sm font-medium text-gray-700">Allow Emulators</label>
+                          <div class="text-xs text-gray-500">Allow updates for emulator devices</div>
+                        </div>
+                        <button type="button" id="emulator-toggle" class="bg-blue-600 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2" role="switch" aria-checked="true">
+                          <span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                        </button>
+                      </div>
+
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <label class="text-sm font-medium text-gray-700">Disable auto downgrade under native</label>
+                          <div class="text-xs text-gray-500">Prevents downgrading when running native code</div>
+                        </div>
+                        <button type="button" id="disable-downgrade-toggle" class="bg-blue-600 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2" role="switch" aria-checked="true">
+                          <span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                        </button>
+                      </div>
+
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Disable auto update</label>
+                        <select id="update-strategy" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                          <option value="major" selected>Major</option>
+                          <option value="minor">Minor</option>
+                          <option value="patch">Patch</option>
+                          <option value="metadata">Metadata</option>
+                          <option value="none">None</option>
+                        </select>
+                        <div class="mt-1 text-xs text-gray-500">Controls which version updates are allowed</div>
+                      </div>
+
+                      <div id="metadata-input-container" class="hidden">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Metadata Value</label>
+                        <input type="text" id="metadata-value" placeholder="1.0.1" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono">
+                        <div class="mt-1 text-xs text-gray-500">Minimum version requirement for local app</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results section -->
+        <div id="results" class="p-6">
+          <div class="text-center text-gray-400 py-8">
+            Enter two semantic versions to see comparison
+          </div>
+        </div>
+      </div>
+
+      <!-- Why Capgo uses semver -->
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-blue-800">
+              Why Capgo uses Semantic Versioning
+            </h3>
+            <div class="mt-2 text-sm text-blue-700">
+              <p class="mb-2">
+                <a href="https://semver.org/" target="_blank" rel="noopener" class="underline">Semantic Versioning</a> is the most widely adopted versioning standard in software development. 
+                By using semver, Capgo ensures compatibility and safety when delivering live updates to your Capacitor apps.
+              </p>
+              <p class="mb-2">
+                The semver standard allows Capgo to understand exactly what changes are included in each update:
+              </p>
+              <ul class="list-disc list-inside space-y-1 ml-4">
+                <li><strong>Patch updates (1.0.0 → 1.0.1):</strong> Bug fixes, safe to apply automatically</li>
+                <li><strong>Minor updates (1.0.0 → 1.1.0):</strong> New features, backward compatible</li>
+                <li><strong>Major updates (1.0.0 → 2.0.0):</strong> Breaking changes, require native app store release</li>
+              </ul>
+              <p class="mt-2">
+                This prevents Capgo from ever sending an incompatible update to your native code, 
+                protecting your users from crashes and ensuring your app remains stable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Important notice about npm semver -->
+      <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-yellow-800">
+              Important: Capgo uses strict semantic versioning
+            </h3>
+            <div class="mt-2 text-sm text-yellow-700">
+              <p class="mb-2">
+                Unlike npm's semver implementation, Capgo follows the official SemVer specification strictly. 
+                npm's node-semver has known deviations from the spec, which can cause unexpected behavior.
+              </p>
+              <p>
+                For example, npm treats versions like <code class="bg-yellow-100 px-1 rounded">1.0.0-alpha.1</code> 
+                differently than the specification requires. See our 
+                <a href="https://github.com/npm/node-semver/issues/376" target="_blank" rel="noopener" class="underline">
+                  reported issue
+                </a> and 
+                <a href="https://github.com/npm/node-semver/pull/476" target="_blank" rel="noopener" class="underline">
+                  attempted fix
+                </a> that was never merged.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reference tables -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Valid versions -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Valid Semantic Versions</h3>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">1.0.0</code>
+                <span class="text-green-600 text-sm">✓ Standard release</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">2.1.3-alpha</code>
+                <span class="text-green-600 text-sm">✓ Pre-release</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">1.0.0-beta.1</code>
+                <span class="text-green-600 text-sm">✓ Pre-release with number</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">1.0.0+build.1</code>
+                <span class="text-green-600 text-sm">✓ Build metadata</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">1.0.0-rc.1+build.1</code>
+                <span class="text-green-600 text-sm">✓ Complete version</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invalid versions -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Invalid Semantic Versions</h3>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">v1.0.0</code>
+                <span class="text-red-600 text-sm">✗ Leading 'v' not allowed</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">1.0</code>
+                <span class="text-red-600 text-sm">✗ Missing patch version</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">1.0.0.0</code>
+                <span class="text-red-600 text-sm">✗ Too many version parts</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">1.0.0-</code>
+                <span class="text-red-600 text-sm">✗ Empty pre-release</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <code class="text-sm bg-gray-100 px-2 py-1 rounded font-mono">1.0.0+</code>
+                <span class="text-red-600 text-sm">✗ Empty build metadata</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Capgo behavior -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 lg:col-span-2">
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Capgo Update Behavior</h3>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-3 text-sm text-gray-600">
+                <div class="flex items-start">
+                  <span class="text-green-600 mr-2">✓</span>
+                  <span>Patch updates are automatically applied (1.0.0 → 1.0.1)</span>
+                </div>
+                <div class="flex items-start">
+                  <span class="text-green-600 mr-2">✓</span>
+                  <span>Minor updates require channel configuration (1.0.0 → 1.1.0)</span>
+                </div>
+              </div>
+              <div class="space-y-3 text-sm text-gray-600">
+                <div class="flex items-start">
+                  <span class="text-red-600 mr-2">✗</span>
+                  <span>Major updates require native app store release (1.0.0 → 2.0.0)</span>
+                </div>
+                <div class="flex items-start">
+                  <span class="text-yellow-600 mr-2">⚠</span>
+                  <span>Pre-release versions require explicit configuration</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer note -->
+      <div class="mt-8 text-center text-sm text-gray-500">
+        <p>
+          This tool follows the official 
+          <a href="https://semver.org/" target="_blank" rel="noopener" class="underline">Semantic Versioning specification</a>
+          unlike npm's implementation.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    import { parse, canParse, compare } from '@std/semver'
+
+    function validateVersion(version: string): { valid: boolean; error?: string } {
+      if (!version.trim()) {
+        return { valid: false, error: 'Version cannot be empty' }
+      }
+
+      // Check for leading 'v' which is invalid
+      if (version.startsWith('v') || version.startsWith('V')) {
+        return { valid: false, error: 'Leading "v" is not allowed in semantic versions' }
+      }
+
+      try {
+        const isValid = canParse(version)
+        
+        if (isValid) {
+          return { valid: true }
+        } else {
+          return { valid: false, error: 'Invalid semantic version format' }
+        }
+      } catch (error) {
+        return { valid: false, error: 'Invalid semantic version format' }
+      }
+    }
+
+    function updateVersionStatus(inputId: string, statusId: string) {
+      const input = document.getElementById(inputId) as HTMLInputElement
+      const status = document.getElementById(statusId) as HTMLElement
+      
+      if (!input || !status) return
+
+      const version = input.value.trim()
+      if (!version) {
+        status.textContent = ''
+        input.className = 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-mono'
+        return
+      }
+
+      const validation = validateVersion(version)
+      
+      if (validation.valid) {
+        status.textContent = '✓ Valid'
+        status.className = 'mt-1 text-sm text-green-600'
+        input.className = 'w-full px-3 py-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-mono'
+      } else {
+        status.textContent = `✗ ${validation.error || 'Invalid semantic version format'}`
+        status.className = 'mt-1 text-sm text-red-600'
+        input.className = 'w-full px-3 py-2 border border-red-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-mono'
+      }
+    }
+
+    function compareVersions() {
+      const version1 = (document.getElementById('version1') as HTMLInputElement).value.trim()
+      const version2 = (document.getElementById('version2') as HTMLInputElement).value.trim()
+      
+      if (!version1 || !version2) return
+
+      const valid1 = validateVersion(version1)
+      const valid2 = validateVersion(version2)
+
+      const resultsDiv = document.getElementById('results') as HTMLElement
+      if (!resultsDiv) return
+
+      if (!valid1.valid || !valid2.valid) {
+        resultsDiv.innerHTML = `
+          <div class="text-center text-red-600 py-4">
+            Both versions must be valid to compare
+          </div>
+        `
+        return
+      }
+
+      try {
+        const comparison = compare(parse(version1), parse(version2))
+        const updateStrategy = (document.getElementById('update-strategy') as HTMLSelectElement).value
+        const disableDowngrade = (document.getElementById('disable-downgrade-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+        
+        let resultIcon = ''
+        let resultText = ''
+        let resultColor = ''
+        let updateInfo = ''
+        let canUpdate = false
+
+        if (comparison === 0) {
+          resultIcon = '='
+          resultText = 'Versions are equal'
+          resultColor = 'text-blue-600'
+          updateInfo = 'No update needed'
+          canUpdate = false
+        } else {
+          const isUpgrade = comparison < 0
+          const isDowngrade = comparison > 0
+
+          if (isUpgrade) {
+            resultIcon = '<'
+            resultText = `${version1} is older than ${version2}`
+            resultColor = 'text-green-600'
+            
+            // Check if upgrade is allowed based on strategy and platform settings
+            canUpdate = checkUpdateAllowed(version1, version2, updateStrategy) && checkPlatformCompatibility()
+          } else {
+            resultIcon = '>'
+            resultText = `${version1} is newer than ${version2}`
+            resultColor = 'text-orange-600'
+            
+            // Check downgrade settings
+            if (disableDowngrade) {
+              canUpdate = false
+              updateInfo = 'Downgrade blocked by channel settings'
+            } else {
+              canUpdate = checkUpdateAllowed(version1, version2, updateStrategy) && checkPlatformCompatibility()
+            }
+          }
+
+          if (canUpdate && !updateInfo) {
+            updateInfo = isUpgrade ? 'Update would be applied' : 'Downgrade would be applied'
+          } else if (!canUpdate && !updateInfo) {
+            const blockReason = getBlockReason(version1, version2, updateStrategy)
+            updateInfo = blockReason
+          }
+        }
+
+        const statusColor = canUpdate ? 'text-green-600' : 'text-red-600'
+        const statusIcon = canUpdate ? '✓' : '✗'
+
+        resultsDiv.innerHTML = `
+          <div class="text-center">
+            <div class="text-6xl font-bold ${resultColor} mb-4">${resultIcon}</div>
+            <div class="text-xl font-semibold ${resultColor} mb-2">${resultText}</div>
+            <div class="text-sm ${statusColor} mb-2">${statusIcon} ${updateInfo}</div>
+            <div class="text-xs text-gray-500">Strategy: ${updateStrategy} | Downgrade protection: ${disableDowngrade ? 'ON' : 'OFF'}</div>
+          </div>
+        `
+      } catch (error) {
+        resultsDiv.innerHTML = `
+          <div class="text-center text-red-600 py-4">
+            Error comparing versions
+          </div>
+        `
+      }
+    }
+
+    function checkUpdateAllowed(local: string, remote: string, strategy: string): boolean {
+      if (strategy === 'none') return true
+
+      try {
+        const localParsed = parse(local)
+        const remoteParsed = parse(remote)
+
+        switch (strategy) {
+          case 'major':
+            return true // Major strategy allows all updates
+          
+          case 'minor':
+            // Allow minor and patch, but not major version changes
+            return localParsed.major === remoteParsed.major
+          
+          case 'patch':
+            // Only allow patch updates
+            return localParsed.major === remoteParsed.major && 
+                   localParsed.minor === remoteParsed.minor
+          
+          case 'metadata':
+            // For metadata strategy, local version must be >= metadata minimum
+            const metadataInput = document.getElementById('metadata-value') as HTMLInputElement
+            const metadataValue = metadataInput?.value.trim()
+            
+            if (!metadataValue || !canParse(metadataValue)) {
+              return false // Invalid metadata value
+            }
+            
+            // Local version must be >= metadata minimum
+            const comparison = compare(localParsed, parse(metadataValue))
+            return comparison >= 0
+          
+          default:
+            return false
+        }
+      } catch (error) {
+        return false
+      }
+    }
+
+    function getBlockReason(local: string, remote: string, strategy: string): string {
+      try {
+        // Check platform compatibility first
+        const platformReason = getPlatformBlockReason()
+        if (platformReason) return platformReason
+
+        const localParsed = parse(local)
+        const remoteParsed = parse(remote)
+
+        switch (strategy) {
+          case 'minor':
+            if (localParsed.major !== remoteParsed.major) {
+              return 'Major version change blocked by minor strategy'
+            }
+            break
+          
+          case 'patch':
+            if (localParsed.major !== remoteParsed.major) {
+              return 'Major version change blocked by patch strategy'
+            }
+            if (localParsed.minor !== remoteParsed.minor) {
+              return 'Minor version change blocked by patch strategy'
+            }
+            break
+          
+          case 'metadata':
+            const metadataInput = document.getElementById('metadata-value') as HTMLInputElement
+            const metadataValue = metadataInput?.value.trim()
+            
+            if (!metadataValue || !canParse(metadataValue)) {
+              return 'Invalid metadata value'
+            }
+            
+            const comparison = compare(localParsed, parse(metadataValue))
+            if (comparison < 0) {
+              return `Local version ${local} below minimum metadata requirement ${metadataValue}`
+            }
+            break
+        }
+        
+        return `Update blocked by ${strategy} strategy`
+      } catch (error) {
+        return 'Error checking update rules'
+      }
+    }
+
+    function checkPlatformCompatibility(): boolean {
+      const platform = (document.getElementById('platform-select') as HTMLSelectElement).value
+      const isDevBuild = (document.getElementById('is-dev-build') as HTMLInputElement).checked
+      const isEmulator = (document.getElementById('is-emulator') as HTMLInputElement).checked
+
+      const iosEnabled = (document.getElementById('ios-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+      const androidEnabled = (document.getElementById('android-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+      const devBuildAllowed = (document.getElementById('dev-build-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+      const emulatorAllowed = (document.getElementById('emulator-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+
+      // Check platform compatibility
+      if (platform === 'ios' && !iosEnabled) return false
+      if (platform === 'android' && !androidEnabled) return false
+
+      // Check development build compatibility
+      if (isDevBuild && !devBuildAllowed) return false
+
+      // Check emulator compatibility
+      if (isEmulator && !emulatorAllowed) return false
+
+      return true
+    }
+
+    function getPlatformBlockReason(): string | null {
+      const platform = (document.getElementById('platform-select') as HTMLSelectElement).value
+      const isDevBuild = (document.getElementById('is-dev-build') as HTMLInputElement).checked
+      const isEmulator = (document.getElementById('is-emulator') as HTMLInputElement).checked
+
+      const iosEnabled = (document.getElementById('ios-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+      const androidEnabled = (document.getElementById('android-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+      const devBuildAllowed = (document.getElementById('dev-build-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+      const emulatorAllowed = (document.getElementById('emulator-toggle') as HTMLButtonElement).getAttribute('aria-checked') === 'true'
+
+      if (platform === 'ios' && !iosEnabled) return 'iOS updates disabled in channel settings'
+      if (platform === 'android' && !androidEnabled) return 'Android updates disabled in channel settings'
+      if (isDevBuild && !devBuildAllowed) return 'Development build updates disabled in channel settings'
+      if (isEmulator && !emulatorAllowed) return 'Emulator updates disabled in channel settings'
+
+      return null
+    }
+
+    function toggleMetadataInput() {
+      const strategy = (document.getElementById('update-strategy') as HTMLSelectElement).value
+      const metadataContainer = document.getElementById('metadata-input-container') as HTMLElement
+      
+      if (strategy === 'metadata') {
+        metadataContainer.classList.remove('hidden')
+      } else {
+        metadataContainer.classList.add('hidden')
+      }
+    }
+
+    function toggleSwitch(toggleId: string) {
+      const toggle = document.getElementById(toggleId) as HTMLButtonElement
+      if (!toggle) return
+      
+      const isEnabled = toggle.getAttribute('aria-checked') === 'true'
+      const newState = !isEnabled
+      
+      toggle.setAttribute('aria-checked', newState.toString())
+      
+      if (newState) {
+        toggle.classList.add('bg-blue-600')
+        toggle.classList.remove('bg-gray-200')
+        toggle.querySelector('span')?.classList.add('translate-x-5')
+        toggle.querySelector('span')?.classList.remove('translate-x-0')
+      } else {
+        toggle.classList.remove('bg-blue-600')
+        toggle.classList.add('bg-gray-200')
+        toggle.querySelector('span')?.classList.remove('translate-x-5')
+        toggle.querySelector('span')?.classList.add('translate-x-0')
+      }
+      
+      compareVersions()
+    }
+
+    function toggleAdvancedSettings() {
+      const panel = document.getElementById('advanced-panel') as HTMLElement
+      const chevron = document.getElementById('advanced-chevron') as HTMLElement
+      
+      if (!panel || !chevron) return
+      
+      const isHidden = panel.classList.contains('hidden')
+      
+      if (isHidden) {
+        panel.classList.remove('hidden')
+        chevron.classList.add('rotate-180')
+      } else {
+        panel.classList.add('hidden')
+        chevron.classList.remove('rotate-180')
+      }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      const inputs = ['version1', 'version2']
+      inputs.forEach(id => {
+        const input = document.getElementById(id) as HTMLInputElement
+        if (input) {
+          input.addEventListener('input', () => {
+            updateVersionStatus(id, `${id}-status`)
+            compareVersions()
+          })
+        }
+      })
+
+      // Advanced settings toggle
+      const advancedToggle = document.getElementById('advanced-toggle') as HTMLButtonElement
+      if (advancedToggle) {
+        advancedToggle.addEventListener('click', toggleAdvancedSettings)
+      }
+
+      // Strategy selector
+      const strategySelect = document.getElementById('update-strategy') as HTMLSelectElement
+      if (strategySelect) {
+        strategySelect.addEventListener('change', () => {
+          toggleMetadataInput()
+          compareVersions()
+        })
+      }
+
+      // Metadata input
+      const metadataInput = document.getElementById('metadata-value') as HTMLInputElement
+      if (metadataInput) {
+        metadataInput.addEventListener('input', compareVersions)
+      }
+
+      // All toggle switches
+      const toggleIds = ['ios-toggle', 'android-toggle', 'dev-build-toggle', 'emulator-toggle', 'disable-downgrade-toggle']
+      toggleIds.forEach(toggleId => {
+        const toggle = document.getElementById(toggleId) as HTMLButtonElement
+        if (toggle) {
+          toggle.addEventListener('click', () => toggleSwitch(toggleId))
+        }
+      })
+
+      // App context controls
+      const platformSelect = document.getElementById('platform-select') as HTMLSelectElement
+      if (platformSelect) {
+        platformSelect.addEventListener('change', compareVersions)
+      }
+
+      const isDevBuild = document.getElementById('is-dev-build') as HTMLInputElement
+      if (isDevBuild) {
+        isDevBuild.addEventListener('change', compareVersions)
+      }
+
+      const isEmulator = document.getElementById('is-emulator') as HTMLInputElement
+      if (isEmulator) {
+        isEmulator.addEventListener('change', compareVersions)
+      }
+
+      // Initialize metadata input visibility
+      toggleMetadataInput()
+    })
+  </script>
+</Layout>

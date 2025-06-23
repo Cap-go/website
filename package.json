@@ -28,6 +28,7 @@
     "@astrojs/starlight": "^0.34.1",
     "@astrojs/starlight-tailwind": "^4.0.1",
     "@orama/wc-components": "^0.8.0",
+    "@std/semver": "npm:@jsr/std__semver@1.0.5",
     "@supabase/supabase-js": "^2.49.1",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.10",

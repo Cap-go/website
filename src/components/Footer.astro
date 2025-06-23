@@ -35,6 +35,10 @@ const navigation: Record<string, NavigationItem[]> = {
       href: 'https://aasa-tester.capgo.app/',
       target: '_blank',
     },
+    {
+      name: m.semver_tester({}, { locale: Astro.locals.locale }),
+      href: getRelativeLocaleUrl(Astro.locals.locale, 'semver_tester'),
+    },
   ],
   support: [
     {
