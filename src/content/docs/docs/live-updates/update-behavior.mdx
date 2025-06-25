@@ -113,7 +113,11 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-With `directUpdate` enabled, Capgo will immediately apply an update as soon as the download completes, even if the user is actively using the app.
+<Aside type="note">
+**Important**: `directUpdate` only applies updates when the app actually checks for them. By default, this happens only at app startup or when resuming from background. Note that `periodCheckDelay` is not compatible with `directUpdate`.
+</Aside>
+
+With `directUpdate` enabled, Capgo will immediately apply an update as soon as the download completes during an update check, even if the user is actively using the app. Without periodic checking enabled, this means updates will only be applied when the app starts or resumes from background.
 
 Note that because `directUpdate` is a native configuration, it requires some additional handling in your JavaScript code.
 
