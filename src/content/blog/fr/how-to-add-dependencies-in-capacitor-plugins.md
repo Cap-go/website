@@ -236,7 +236,7 @@ Capgo simplifie la gestion des dépendances des plugins avec ces fonctionnalité
 | Fonctionnalité | Ce qu'elle fait | Métrique clé |
 | --- | --- | --- |
 | Mises à jour en direct | Pousse les mises à jour en minutes | 95% de taux de mise à jour utilisateur en 24h |
-| Mises à jour partielles | Télécharge uniquement les fichiers modifiés | 357ms de temps de réponse API moyen |
+| Mises à jour partielles | Télécharge uniquement les fichiers modifiés | 57ms de temps de réponse API moyen |
 | Contrôle de version | Gère plusieurs versions | 82% de taux de succès global |
 | Système de canaux | Cible des groupes d'utilisateurs spécifiques | Prend en charge plusieurs canaux de déploiement |
 
@@ -306,12 +306,12 @@ L'utilisation d'outils de mise à jour en direct comme Capgo peut simplifier et 
 
 ### Avantages de Capgo
 
-Capgo simplifie le processus de gestion des dépendances tout en offrant de solides performances. Il atteint un impressionnant **taux de mise à jour de 95% des utilisateurs en 24 heures** et maintient un temps de réponse API global de **357ms** [\[1\]](https://capgo.app/). Avec le chiffrement de bout en bout, il assure des mises à jour sécurisées conformes aux directives Apple et Android. Pour les équipes gérant plusieurs versions de plugins, le système de canaux de Capgo permet des déploiements ciblés pour des groupes d'utilisateurs spécifiques.
+Capgo simplifie le processus de gestion des dépendances tout en offrant de solides performances. Il atteint un impressionnant **taux de mise à jour de 95% des utilisateurs en 24 heures** et maintient un temps de réponse API global de **57ms** [\[1\]](https://capgo.app/). Avec le chiffrement de bout en bout, il assure des mises à jour sécurisées conformes aux directives Apple et Android. Pour les équipes gérant plusieurs versions de plugins, le système de canaux de Capgo permet des déploiements ciblés pour des groupes d'utilisateurs spécifiques.
 
 Voici un aperçu rapide des performances de Capgo :
 
 | Métrique | Valeur |
 | --- | --- |
-| Temps de réponse API global | 357ms |
+| Temps de réponse API global | 57ms |
 | Taux de réussite des mises à jour | 82% |
 | Taux de mise à jour utilisateur (24 heures) | 95% |

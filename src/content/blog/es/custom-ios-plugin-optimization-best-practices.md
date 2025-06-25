@@ -174,7 +174,7 @@ La tabla siguiente destaca áreas críticas de optimización, sus impactos medib
 
 | **Área de Optimización** | **Impacto** | **Beneficio de Implementación** |
 | --- | --- | --- |
-| **Comunicación del Puente** | 357ms tiempo promedio de respuesta API [\[1\]](https://capgo.app/) | Menor latencia y flujo de datos más fluido |
+| **Comunicación del Puente** | 57ms tiempo promedio de respuesta API [\[1\]](https://capgo.app/) | Menor latencia y flujo de datos más fluido |
 | **Gestión de Memoria** | 95% tasa de actualización de usuarios activos en 24 horas [\[1\]](https://capgo.app/) | Mejor estabilidad y uso de recursos |
 | **Rendimiento Swift** | 114ms velocidad de descarga para paquetes de 5MB [\[1\]](https://capgo.app/) | Ejecución más rápida y mejor experiencia de usuario |
 

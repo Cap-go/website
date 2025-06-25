@@ -83,7 +83,7 @@ Agar pembaruan tersegmentasi berjalan lancar, Anda memerlukan tools yang andal y
 -   **95% adopsi pembaruan pengguna aktif dalam 24 jam**
 -   **Kinerja [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) global**: bundle 5MB terkirim dalam 114ms
 -   **82% tingkat keberhasilan pembaruan di seluruh dunia**
--   **Waktu respons API global**: 357ms
+-   **Waktu respons API global**: 57ms
 
 Dengan tools ini siap, pengujian menyeluruh sangat penting untuk memastikan semuanya berjalan sesuai rencana.
 

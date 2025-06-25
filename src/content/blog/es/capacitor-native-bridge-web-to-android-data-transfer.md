@@ -64,7 +64,7 @@ Pero no se trata solo de tipos de datos - la velocidad y eficiencia con la que s
 
 ### Preocupaciones de Velocidad y Memoria
 
-Las pruebas de rendimiento revelan algunas métricas clave: las velocidades de descarga CDN para paquetes de 5MB promedian alrededor de 114ms, mientras que las respuestas API globales toman alrededor de 357ms. Para mejorar la eficiencia de transferencia de datos, considera estas estrategias:
+Las pruebas de rendimiento revelan algunas métricas clave: las velocidades de descarga CDN para paquetes de 5MB promedian alrededor de 114ms, mientras que las respuestas API globales toman alrededor de 57ms. Para mejorar la eficiencia de transferencia de datos, considera estas estrategias:
 
 -   Divide las transferencias grandes en fragmentos más pequeños
 -   Comprime datos cuando sea posible

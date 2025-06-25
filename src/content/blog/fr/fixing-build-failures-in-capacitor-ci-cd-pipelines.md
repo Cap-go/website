@@ -287,7 +287,7 @@ La surveillance en temps réel de Capgo surveille les statuts des builds et la p
 | --- | --- |
 | Livraison des mises à jour | 23,5M de mises à jour livrées |
 | Taux de réussite | 95% des utilisateurs mis à jour en 24h |
-| Temps de réponse API | 357ms en moyenne mondiale |
+| Temps de réponse API | 57ms en moyenne mondiale |
 | [Téléchargement du bundle](https://capgo.app/docs/webapp/bundles/) | 114ms pour un bundle de 5MB |
 
 Lorsque des problèmes surviennent, le système de rollback de Capgo assure une récupération rapide avec des fonctionnalités comme :

@@ -175,7 +175,7 @@ Misurare gli indicatori chiave di prestazione (KPI) è essenziale per valutare l
 | Metrica | Benchmark target | Media del settore |
 | --- | --- | --- |
 | Tasso di adozione 24 ore | 95% degli utenti attivi | 82% mondiale |
-| Velocità download aggiornamento | Sotto 500ms | 357ms media |
+| Velocità download aggiornamento | Sotto 500ms | 57ms media |
 | Tempo download bundle (5MB) | Sotto 150ms | 114ms via CDN |
 
 Puoi integrare queste metriche nel tuo flusso di lavoro con il seguente snippet di codice:

@@ -61,7 +61,7 @@ Capgo fornisce robuste capacità di gestione delle versioni, tra cui:
 -   **23.5M aggiornamenti completati con successo**
 -   **95% degli utenti aggiornati entro 24 ore**
 -   **82% tasso di successo globale**
--   **357ms tempo medio di risposta API in tutto il mondo**
+-   **57ms tempo medio di risposta API in tutto il mondo**
 
 > "Attualmente stiamo provando @Capgo dato che Appcenter ha interrotto il supporto per gli aggiornamenti live sulle app ibride e @AppFlow è decisamente troppo costoso." - Simon Flack [\[1\]](https://capgo.app/)
 

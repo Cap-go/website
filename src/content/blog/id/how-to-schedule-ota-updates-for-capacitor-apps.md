@@ -175,7 +175,7 @@ Mengukur indikator kinerja utama (KPI) sangat penting untuk menilai [strategi pe
 | Metrik | Target Tolok Ukur | Rata-rata Industri |
 | --- | --- | --- |
 | Tingkat Adopsi 24 jam | 95% pengguna aktif | 82% di seluruh dunia |
-| Kecepatan Unduh Pembaruan | Di bawah 500ms | Rata-rata 357ms |
+| Kecepatan Unduh Pembaruan | Di bawah 500ms | Rata-rata 57ms |
 | Waktu Unduh Bundle (5MB) | Di bawah 150ms | 114ms melalui CDN |
 
 Anda dapat mengintegrasikan metrik ini ke dalam alur kerja Anda dengan cuplikan kode berikut:

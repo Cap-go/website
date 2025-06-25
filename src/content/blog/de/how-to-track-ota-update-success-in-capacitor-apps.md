@@ -300,7 +300,7 @@ Beim Vergleich von OTA-Update-Tracking-Tools sollten Sie auf diese Funktionen ac
 Capgo zeichnet sich durch eine beeindruckende globale Erfolgsrate von 82% [\[1\]](https://capgo.app/) aus und bietet Funktionen, die alle Aspekte des [Update-Managements](https://capgo.app/docs/plugin/cloud-mode/manual-update/) abdecken:
 
 -   **Echtzeit-Analytik**  
-    Capgo bietet weltweites Monitoring mit einer durchschnittlichen API-Antwortzeit von 357ms [\[1\]](https://capgo.app/). Dies hilft Ihnen, Probleme frühzeitig zu erkennen und zu beheben.
+    Capgo bietet weltweites Monitoring mit einer durchschnittlichen API-Antwortzeit von 57ms [\[1\]](https://capgo.app/). Dies hilft Ihnen, Probleme frühzeitig zu erkennen und zu beheben.
     
 -   **Sicherheitsinfrastruktur**  
     Updates werden sicher mit Ende-zu-Ende-Verschlüsselung geliefert und erfüllen die Anforderungen selbst anspruchsvollster Unternehmensanwendungen.

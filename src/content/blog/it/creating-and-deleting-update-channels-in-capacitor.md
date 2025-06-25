@@ -261,7 +261,7 @@ Capgo supporta oltre 30 plugin e funziona perfettamente con le pipeline CI/CD, r
 
 ### Punti Principali
 
-La gestione efficace dei canali garantisce che le distribuzioni delle app procedano senza intoppi. Il sistema di canali di Capgo mostra risultati impressionanti: **il 95% degli aggiornamenti viene adottato entro 24 ore**, supportato da una CDN globale che consegna un bundle di 5MB in soli 114ms, insieme a un tempo di risposta API di 357ms in tutto il mondo [\[1\]](https://capgo.app/).
+La gestione efficace dei canali garantisce che le distribuzioni delle app procedano senza intoppi. Il sistema di canali di Capgo mostra risultati impressionanti: **il 95% degli aggiornamenti viene adottato entro 24 ore**, supportato da una CDN globale che consegna un bundle di 5MB in soli 114ms, insieme a un tempo di risposta API di 57ms in tutto il mondo [\[1\]](https://capgo.app/).
 
 | Metrica | Prestazione |
 | --- | --- |

@@ -302,7 +302,7 @@ Al comparar herramientas de seguimiento de actualizaciones OTA, enfócate en est
 Capgo se destaca con una impresionante tasa de éxito global del 82% [\[1\]](https://capgo.app/), ofreciendo características que cubren todos los aspectos de la [gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/):
 
 -   **Análisis en Tiempo Real**  
-    Capgo proporciona monitoreo mundial con un tiempo de respuesta promedio de API de 357ms [\[1\]](https://capgo.app/). Esto te ayuda a detectar y abordar problemas temprano.
+    Capgo proporciona monitoreo mundial con un tiempo de respuesta promedio de API de 57ms [\[1\]](https://capgo.app/). Esto te ayuda a detectar y abordar problemas temprano.
     
 -   **Infraestructura de Seguridad**  
     Las actualizaciones se entregan de forma segura con cifrado de extremo a extremo, satisfaciendo las necesidades de las aplicaciones empresariales más exigentes.

@@ -94,12 +94,12 @@ Dieser Schritt konzentriert sich auf die Überprüfung einzelner Update-Mechanis
 
 | Testtyp | Fokusbereich | Erfolgskriterien |
 | --- | --- | --- |
-| Update-Erkennung | Versionsprüfung | ~357ms Antwortzeit |
+| Update-Erkennung | Versionsprüfung | ~57ms Antwortzeit |
 | Download-Prozess | [Bundle-Download](https://capgo.app/docs/webapp/bundles/) | 5MB Bundle in ~114ms |
 | Installation | Update-Anwendung | Erfolgreiche Integration |
 | Rollback | Versionsrücksetzung | Erfolgreicher Rollback |
 
-Capgos globales CDN hilft dabei, stabile Download-Geschwindigkeiten mit einer durchschnittlichen API-Antwortzeit von 357ms [\[1\]](https://capgo.app/) aufrechtzuerhalten. Diese Tests auf Komponentenebene bilden die Grundlage für die Bewertung der Gesamtsystemleistung.
+Capgos globales CDN hilft dabei, stabile Download-Geschwindigkeiten mit einer durchschnittlichen API-Antwortzeit von 57ms [\[1\]](https://capgo.app/) aufrechtzuerhalten. Diese Tests auf Komponentenebene bilden die Grundlage für die Bewertung der Gesamtsystemleistung.
 
 ### Vollständige Systemtests
 
@@ -227,7 +227,7 @@ Dank robuster Fehlerbehandlung und einem zuverlässigen CDN stellt Capgo sicher,
 
 ### Geschwindigkeitsprobleme
 
-Capgos globales CDN liefert 5MB-Bundles in nur 114ms, mit einer durchschnittlichen API-Antwortzeit von 357ms. Die intelligenten differentiellen Updates der Plattform reduzieren zusätzlich die Bandbreitennutzung, indem nur die geänderten Teile heruntergeladen werden [\[1\]](https://capgo.app/).
+Capgos globales CDN liefert 5MB-Bundles in nur 114ms, mit einer durchschnittlichen API-Antwortzeit von 57ms. Die intelligenten differentiellen Updates der Plattform reduzieren zusätzlich die Bandbreitennutzung, indem nur die geänderten Teile heruntergeladen werden [\[1\]](https://capgo.app/).
 
 > "Teilaktualisierungen: Intelligente differentielle Updates. Laden Sie nur die Änderungen herunter und sparen Sie Bandbreite und Zeit" [\[1\]](https://capgo.app/).
 

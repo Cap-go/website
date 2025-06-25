@@ -104,7 +104,7 @@ Hier ein schneller Überblick über die Leistungsmetriken:
 
 | Metrik | Leistung |
 | --- | --- |
-| Durchschnittliche API-Antwortzeit | 357ms weltweit |
+| Durchschnittliche API-Antwortzeit | 57ms weltweit |
 | Bundle-Download-Geschwindigkeit | 114ms für 5MB |
 | Update-Erfolgsrate | 95% innerhalb von 24 Stunden |
 

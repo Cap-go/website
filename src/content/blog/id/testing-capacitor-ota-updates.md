@@ -94,12 +94,12 @@ Langkah ini berfokus pada verifikasi mekanisme pembaruan individual dan interaks
 
 | Jenis Pengujian | Area Fokus | Kriteria Keberhasilan |
 | --- | --- | --- |
-| Deteksi Pembaruan | Pengecekan versi | Waktu respons ~357ms |
+| Deteksi Pembaruan | Pengecekan versi | Waktu respons ~57ms |
 | Proses Unduhan | [Unduhan bundle](https://capgo.app/docs/webapp/bundles/) | Bundle 5MB dalam ~114ms |
 | Instalasi | Aplikasi pembaruan | Integrasi berhasil |
 | Rollback | Pembalikan versi | Rollback berhasil |
 
-CDN global Capgo membantu mempertahankan kecepatan unduhan yang stabil, dengan waktu respons API rata-rata 357ms [\[1\]](https://capgo.app/). Pengujian di tingkat komponen ini membentuk dasar untuk mengevaluasi kinerja sistem secara keseluruhan.
+CDN global Capgo membantu mempertahankan kecepatan unduhan yang stabil, dengan waktu respons API rata-rata 57ms [\[1\]](https://capgo.app/). Pengujian di tingkat komponen ini membentuk dasar untuk mengevaluasi kinerja sistem secara keseluruhan.
 
 ### Pengujian Sistem Penuh
 
@@ -227,7 +227,7 @@ Berkat penanganan kesalahan yang kuat dan CDN yang andal, Capgo memastikan pemba
 
 ### Masalah Kecepatan
 
-CDN global Capgo mengirimkan bundle 5MB hanya dalam 114ms, dengan waktu respons API rata-rata 357ms. Platform ini menggunakan pembaruan diferensial pintar yang lebih lanjut mengurangi penggunaan bandwidth dengan hanya mengunduh bagian yang berubah [\[1\]](https://capgo.app/).
+CDN global Capgo mengirimkan bundle 5MB hanya dalam 114ms, dengan waktu respons API rata-rata 57ms. Platform ini menggunakan pembaruan diferensial pintar yang lebih lanjut mengurangi penggunaan bandwidth dengan hanya mengunduh bagian yang berubah [\[1\]](https://capgo.app/).
 
 > "Pembaruan Parsial: Pembaruan diferensial pintar. Hanya unduh yang berubah, menghemat bandwidth dan waktu" [\[1\]](https://capgo.app/).
 

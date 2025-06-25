@@ -164,7 +164,7 @@ Dengan menggabungkan IDE spesifik platform seperti Android Studio atau Xcode den
 
 ### Opsi Sistem Pembaruan
 
-Alat debugging membantu mengidentifikasi masalah, tetapi sistem pembaruan yang efisien memastikan perbaikan diterapkan cepat. Capgo menonjol dengan menawarkan pengiriman pembaruan yang cepat. Sebagai contoh, CDN globalnya mengirimkan bundel 5MB hanya dalam 114ms, dengan waktu respons API rata-rata 357ms [\[1\]](https://capgo.app/).
+Alat debugging membantu mengidentifikasi masalah, tetapi sistem pembaruan yang efisien memastikan perbaikan diterapkan cepat. Capgo menonjol dengan menawarkan pengiriman pembaruan yang cepat. Sebagai contoh, CDN globalnya mengirimkan bundel 5MB hanya dalam 114ms, dengan waktu respons API rata-rata 57ms [\[1\]](https://capgo.app/).
 
 Berikut adalah perbandingan sistem pembaruan:
 

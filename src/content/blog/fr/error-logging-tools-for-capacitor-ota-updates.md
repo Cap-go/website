@@ -87,7 +87,7 @@ Capgo adopte une approche différente en intégrant directement le suivi des err
 | --- | --- |
 | Livraison des mises à jour | 235M mises à jour livrées |
 | Taux de réussite | 95% des utilisateurs mis à jour en 24 heures |
-| Temps de réponse API | 357ms en moyenne mondiale |
+| Temps de réponse API | 57ms en moyenne mondiale |
 | Téléchargement du bundle | 114ms pour un bundle de 5MB |
 
 > "Nous avons déployé les mises à jour OTA Capgo en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement de l'OTA sur @Capgo" – colenso [\[1\]](https://capgo.app/)

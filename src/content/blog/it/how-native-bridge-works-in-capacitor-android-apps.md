@@ -27,7 +27,7 @@ next_blog: ''
 
 -   **Cos'è?** Un sistema di comunicazione bidirezionale tra JavaScript e Android, che converte le chiamate JavaScript in metodi Android nativi e viceversa
 -   **Prestazioni principali:**
-    -   Tempo di risposta API: **357ms** (media globale)
+    -   Tempo di risposta API: **57ms** (media globale)
     -   Trasferimento dati: **114ms** per bundle da 5MB
     -   Adozione aggiornamenti: **95% completato entro 24 ore** utilizzando strumenti come [Capgo](https://capgo.app/)
 -   **Come funziona:**

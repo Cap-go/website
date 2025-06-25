@@ -318,7 +318,7 @@ Nansi isithombe sesikhumbuzo sellé Capgo:
 
 | Metric | Performance |
 | --- | --- |
-| Global API Response Time | 357ms |
+| Global API Response Time | 57ms |
 | 5MB Bundle Download Speed | 114ms |
 | Update Success Rate | 82% |
 

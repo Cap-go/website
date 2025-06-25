@@ -83,7 +83,7 @@ Per far funzionare bene gli aggiornamenti segmentati, servono strumenti affidabi
 -   **95% di adozione aggiornamenti utenti attivi entro 24 ore**
 -   **Performance [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) globale**: bundle 5MB consegnato in 114ms
 -   **82% tasso di successo aggiornamenti worldwide**
--   **Tempo risposta API globale**: 357ms
+-   **Tempo risposta API globale**: 57ms
 
 Con questi strumenti implementati, il testing approfondito è essenziale per confermare che tutto funzioni come previsto.
 

@@ -67,7 +67,7 @@ Meskipun ada manfaat ini, implementasi pembaruan OTA bisa menghadapi tantangan. 
 
 > "Kami meluncurkan pembaruan OTA Capgo dalam produksi untuk basis pengguna kami yang +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami up to date dalam hitungan menit setelah OTA disebarkan ke @Capgo." – Colenso [\[1\]](https://capgo.app/)
 
-Untuk memastikan pembaruan OTA yang andal, pengembang harus fokus pada pemantauan proaktif dan mempertahankan opsi rollback untuk penyelesaian masalah yang cepat. Dengan waktu respons API rata-rata 357ms, mengoptimalkan infrastruktur pengiriman pembaruan juga sangat penting [\[1\]](https://capgo.app/).
+Untuk memastikan pembaruan OTA yang andal, pengembang harus fokus pada pemantauan proaktif dan mempertahankan opsi rollback untuk penyelesaian masalah yang cepat. Dengan waktu respons API rata-rata 57ms, mengoptimalkan infrastruktur pengiriman pembaruan juga sangat penting [\[1\]](https://capgo.app/).
 
 ## Aturan App Store untuk Pembaruan OTA
 

@@ -210,7 +210,7 @@ Capgo semplifica la gestione delle dipendenze dei plugin con queste funzionalit�
 | Funzionalità | Cosa fa | Metrica chiave |
 | --- | --- | --- |
 | Aggiornamenti live | Pubblica aggiornamenti in minuti | 95% tasso di aggiornamento utenti in 24 ore |
-| Aggiornamenti parziali | Scarica solo i file modificati | 357ms tempo medio di risposta API |
+| Aggiornamenti parziali | Scarica solo i file modificati | 57ms tempo medio di risposta API |
 | Controllo versioni | Gestisce versioni multiple | 82% tasso di successo globale |
 | Sistema di canali | Target gruppi specifici di utenti | Supporta canali di distribuzione multipli |
 
@@ -281,12 +281,12 @@ L'utilizzo di strumenti di aggiornamento live come Capgo può ulteriormente semp
 
 ### Benefici di Capgo
 
-Capgo semplifica il processo di gestione delle dipendenze mantenendo prestazioni elevate. Raggiunge un impressionante **tasso di aggiornamento del 95% degli utenti entro 24 ore** e mantiene un tempo di risposta API globale di **357ms** [\[1\]](https://capgo.app/). Con la crittografia end-to-end, garantisce aggiornamenti sicuri conformi alle linee guida sia di Apple che di Android. Per i team che gestiscono più versioni di plugin, il sistema di canali di Capgo permette distribuzioni mirate per gruppi specifici di utenti.
+Capgo semplifica il processo di gestione delle dipendenze mantenendo prestazioni elevate. Raggiunge un impressionante **tasso di aggiornamento del 95% degli utenti entro 24 ore** e mantiene un tempo di risposta API globale di **57ms** [\[1\]](https://capgo.app/). Con la crittografia end-to-end, garantisce aggiornamenti sicuri conformi alle linee guida sia di Apple che di Android. Per i team che gestiscono più versioni di plugin, il sistema di canali di Capgo permette distribuzioni mirate per gruppi specifici di utenti.
 
 Ecco una rapida panoramica delle prestazioni di Capgo:
 
 | Metrica | Valore |
 | --- | --- |
-| Tempo di Risposta API Globale | 357ms |
+| Tempo di Risposta API Globale | 57ms |
 | Tasso di Successo Aggiornamenti | 82% |
 | Tasso di Aggiornamento Utenti (24 Ore) | 95% |

@@ -50,7 +50,7 @@ Les métriques de performance des applications en conditions réelles confirment
 | --- | --- |
 | **Adoption Utilisateur** | 95% des utilisateurs se mettent à jour dans les 24 heures |
 | **Taux de Réussite** | 82% globalement |
-| **Réponse API** | 357ms en moyenne |
+| **Réponse API** | 57ms en moyenne |
 | **Applications en Production** | Plus de 750 applications utilisent la technologie avec succès |
 
 L'expérience utilisateur correspond à ces chiffres. Par exemple, colenso, qui gère plus de 5 000 utilisateurs, a partagé :

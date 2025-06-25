@@ -277,7 +277,7 @@ Il monitoraggio in tempo reale di Capgo tiene sotto controllo lo stato delle bui
 | --- | --- |
 | Consegna Aggiornamenti | 23.5M aggiornamenti consegnati |
 | Tasso di Successo | 95% degli utenti aggiornati entro 24 ore |
-| Tempo di Risposta API | 357ms di media mondiale |
+| Tempo di Risposta API | 57ms di media mondiale |
 | [Download Bundle](https://capgo.app/docs/webapp/bundles/) | 114ms per un bundle di 5MB |
 
 Quando sorgono problemi, il sistema di rollback di Capgo assicura un rapido ripristino con funzionalità come:

@@ -260,7 +260,7 @@ Ikuti langkah-langkah ini untuk dengan cepat mengatasi error build Android:
     
 -   **Build dan Deploy**: CDN Capgo memastikan bundle 5MB diunduh hanya dalam 114ms [\[1\]](https://capgo.app/).
     
--   **Monitor Pembaruan**: Gunakan dashboard Capgo untuk melacak kemajuan, dengan waktu respons API rata-rata 357ms [\[1\]](https://capgo.app/).
+-   **Monitor Pembaruan**: Gunakan dashboard Capgo untuk melacak kemajuan, dengan waktu respons API rata-rata 57ms [\[1\]](https://capgo.app/).
     
 
 Proses penerapan cepat ini menghilangkan penundaan yang terkait dengan pembaruan app store tradisional, memungkinkan Anda menyelesaikan masalah lebih cepat sambil mempertahankan kontrol penuh.
@@ -281,6 +281,6 @@ Dengan lebih dari 23,5 juta pembaruan sukses di 750 aplikasi produksi [\[1\]](ht
 
 ## Ringkasan
 
-Mengatasi error build Android di Capacitor memerlukan pendekatan terstruktur dan berfokus pada data yang menggabungkan pemantauan efektif dengan pembaruan cepat. Data dari 750 aplikasi produksi menunjukkan bahwa melacak error dan menerapkan pembaruan dengan cepat dapat secara signifikan mengurangi waktu debugging sambil meningkatkan stabilitas aplikasi. Alat seperti Capgo telah terbukti mencapai tingkat keberhasilan 82% untuk perbaikan darurat, memastikan 95% pengguna aktif menerima pembaruan dalam 24 jam, dengan waktu respons API rata-rata 357ms [\[1\]](https://capgo.app/).
+Mengatasi error build Android di Capacitor memerlukan pendekatan terstruktur dan berfokus pada data yang menggabungkan pemantauan efektif dengan pembaruan cepat. Data dari 750 aplikasi produksi menunjukkan bahwa melacak error dan menerapkan pembaruan dengan cepat dapat secara signifikan mengurangi waktu debugging sambil meningkatkan stabilitas aplikasi. Alat seperti Capgo telah terbukti mencapai tingkat keberhasilan 82% untuk perbaikan darurat, memastikan 95% pengguna aktif menerima pembaruan dalam 24 jam, dengan waktu respons API rata-rata 57ms [\[1\]](https://capgo.app/).
 
 Mempertahankan build Android yang stabil bergantung pada pelacakan error yang kuat dan pembaruan tepat waktu. Dengan menggabungkan perbaikan segera dengan peningkatan proses berkelanjutan, Anda dapat meminimalkan gangguan bagi pengguna dan memberikan pengalaman aplikasi yang lebih lancar.

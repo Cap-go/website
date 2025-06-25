@@ -174,7 +174,7 @@ Die folgende Tabelle hebt kritische Optimierungsbereiche, ihre messbaren Auswirk
 
 | **Optimierungsbereich** | **Auswirkung** | **Implementierungsvorteil** |
 | --- | --- | --- |
-| **Bridge-Kommunikation** | 357ms durchschnittliche API-Antwortzeit [\[1\]](https://capgo.app/) | Geringere Latenz und flüssigerer Datenfluss |
+| **Bridge-Kommunikation** | 57ms durchschnittliche API-Antwortzeit [\[1\]](https://capgo.app/) | Geringere Latenz und flüssigerer Datenfluss |
 | **Speicherverwaltung** | 95% aktive Benutzer-Updaterate innerhalb von 24 Stunden [\[1\]](https://capgo.app/) | Verbesserte Stabilität und Ressourcennutzung |
 | **Swift-Leistung** | 114ms Downloadgeschwindigkeit für 5MB-Bundles [\[1\]](https://capgo.app/) | Schnellere Ausführung und bessere Benutzererfahrung |
 

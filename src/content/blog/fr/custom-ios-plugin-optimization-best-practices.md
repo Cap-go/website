@@ -174,7 +174,7 @@ Le tableau ci-dessous met en évidence les domaines critiques d'optimisation, le
 
 | **Zone d'optimisation** | **Impact** | **Avantage de mise en œuvre** |
 | --- | --- | --- |
-| **Communication Bridge** | 357ms de temps de réponse API moyen [\[1\]](https://capgo.app/) | Latence réduite et flux de données plus fluide |
+| **Communication Bridge** | 57ms de temps de réponse API moyen [\[1\]](https://capgo.app/) | Latence réduite et flux de données plus fluide |
 | **Gestion de la mémoire** | 95% de taux de mise à jour des utilisateurs actifs en 24 heures [\[1\]](https://capgo.app/) | Stabilité et utilisation des ressources améliorées |
 | **Performance Swift** | 114ms de vitesse de téléchargement pour les bundles de 5MB [\[1\]](https://capgo.app/) | Exécution plus rapide et meilleure expérience utilisateur |
 

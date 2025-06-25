@@ -130,7 +130,7 @@ Le migliori pratiche per la comunicazione includono:
 
 ## Conclusione
 
-Affrontare i colli di bottiglia CI/CD è cruciale per garantire una distribuzione OTA fluida. Pipeline ottimizzati possono portare a risultati impressionanti, come il 95% degli utenti attivi che ricevono aggiornamenti entro 24 ore, un bundle di 5MB che si scarica in soli 114ms e un tempo di risposta API medio di 357ms [\[1\]](https://capgo.app/).
+Affrontare i colli di bottiglia CI/CD è cruciale per garantire una distribuzione OTA fluida. Pipeline ottimizzati possono portare a risultati impressionanti, come il 95% degli utenti attivi che ricevono aggiornamenti entro 24 ore, un bundle di 5MB che si scarica in soli 114ms e un tempo di risposta API medio di 57ms [\[1\]](https://capgo.app/).
 
 > "Capgo è un modo intelligente per fare hot code pushes" [\[1\]](https://capgo.app/)
 

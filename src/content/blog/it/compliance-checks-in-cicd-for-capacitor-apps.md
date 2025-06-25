@@ -237,4 +237,4 @@ Para mantener tu proceso de cumplimiento efectivo, concéntrate en estas áreas:
 | --- | --- | --- |
 | Seguimiento de Políticas | Monitoreo automatizado | Informe de cumplimiento mensual |
 | Distribución de Actualizaciones | Implementaciones por etapas | 95% de actualizaciones exitosas |
-| Gestión de Errores | Monitoreo en tiempo real | Tiempo promedio de respuesta de API: 357ms |
+| Gestión de Errores | Monitoreo en tiempo real | Tiempo promedio de respuesta de API: 57ms |

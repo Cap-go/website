@@ -129,7 +129,7 @@ Praktik terbaik untuk komunikasi meliputi:
 
 ## Kesimpulan
 
-Mengatasi bottleneck CI/CD sangat penting untuk memastikan pengiriman OTA yang lancar. Pipeline yang efisien dapat menghasilkan hasil mengesankan, seperti 95% pengguna aktif menerima pembaruan dalam 24 jam, bundle 5MB diunduh dalam waktu 114ms, dan waktu respons API rata-rata 357ms [\[1\]](https://capgo.app/).
+Mengatasi bottleneck CI/CD sangat penting untuk memastikan pengiriman OTA yang lancar. Pipeline yang efisien dapat menghasilkan hasil mengesankan, seperti 95% pengguna aktif menerima pembaruan dalam 24 jam, bundle 5MB diunduh dalam waktu 114ms, dan waktu respons API rata-rata 57ms [\[1\]](https://capgo.app/).
 
 > "Capgo adalah cara cerdas untuk melakukan hot code pushes" [\[1\]](https://capgo.app/)
 

@@ -322,7 +322,7 @@ Capgos Update-Leistung ist beeindruckend:
 
 -   **95% der aktiven Nutzer** erhalten Updates innerhalb von 24 Stunden.
 -   **82% Erfolgsrate** bei der Update-Zustellung weltweit.
--   Eine durchschnittliche API-Antwortzeit von **357ms global**.
+-   Eine durchschnittliche API-Antwortzeit von **57ms global**.
 
 Die Plattform verwendet Teil-
 

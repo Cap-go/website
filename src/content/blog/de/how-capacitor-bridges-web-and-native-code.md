@@ -61,7 +61,7 @@ Die native Bridge bietet mehrere Vorteile für die plattformübergreifende Entwi
 | Ladezeit | 114ms Durchschnitt für 5MB Bundles [\[1\]](https://capgo.app/) | Schnellere App-Reaktionszeiten |
 | Update-Reichweite | 95% der Benutzer innerhalb von 24h aktualisiert [\[1\]](https://capgo.app/) | Schnelle Feature-Einführungen |
 | Marktabdeckung | 82% globale Erfolgsrate [\[1\]](https://capgo.app/) | Zuverlässige Leistung weltweit |
-| API-Antwortzeit | 357ms Durchschnitt global [\[1\]](https://capgo.app/) | Reibungslose und effiziente Interaktionen |
+| API-Antwortzeit | 57ms Durchschnitt global [\[1\]](https://capgo.app/) | Reibungslose und effiziente Interaktionen |
 
 > "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch bei der kontinuierlichen Auslieferung an unsere Benutzer!" – Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
@@ -71,7 +71,7 @@ Das Plugin-System vereinfacht und sichert den Datenaustausch zwischen Web- und N
 
 -   **Skalierung**: In 750 Apps derzeit in Produktion verwendet [\[1\]](https://capgo.app/)
 -   **Zuverlässigkeit**: Über 23,5 Millionen Updates ausgeliefert [\[1\]](https://capgo.app/)
--   **Leistung**: 357ms durchschnittliche API-Antwortzeit weltweit [\[1\]](https://capgo.app/)
+-   **Leistung**: 57ms durchschnittliche API-Antwortzeit weltweit [\[1\]](https://capgo.app/)
 
 Dieses System beinhaltet auch Ende-zu-Ende-Verschlüsselung für sicheren Datentransfer. Es gibt Entwicklern die Werkzeuge, um sichere, leistungsstarke Apps zu erstellen, die nahtlos über Plattformen hinweg funktionieren.
 

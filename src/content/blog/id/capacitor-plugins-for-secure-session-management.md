@@ -130,7 +130,7 @@ Pendekatan berlapis ini memastikan tidak hanya sesi yang aman tetapi juga pengir
 Capgo menggabungkan keamanan dengan metrik performa yang mengesankan, memastikan penerapan update yang andal dan efisien:
 
 -   **Kecepatan Update**: Mentransfer bundle 5MB hanya dalam 114ms, meminimalkan paparan terhadap kerentanan selama update [\[13\]](https://capgo.app).
--   **Respon API**: Menjaga waktu respon rata-rata 357ms untuk operasi keamanan kritis [\[13\]](https://capgo.app).
+-   **Respon API**: Menjaga waktu respon rata-rata 57ms untuk operasi keamanan kritis [\[13\]](https://capgo.app).
 -   **Tingkat Keberhasilan Update**: Mengamankan tingkat keberhasilan global 82% untuk penerapan [\[13\]](https://capgo.app).
 -   **Cakupan Pengguna**: Mencapai 95% pengguna aktif dengan update keamanan dalam 24 jam [\[13\]](https://capgo.app).
 

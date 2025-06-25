@@ -40,7 +40,7 @@ next_blog: ''
 
 | Característica | Capacitor (Capgo) | Appflow |
 | --- | --- | --- |
-| **Velocidad de Actualización** | 95% en 24 horas, API 357ms | Varía |
+| **Velocidad de Actualización** | 95% en 24 horas, API 57ms | Varía |
 | **Seguridad** | Cifrado de extremo a extremo | Firma estándar |
 | **Alojamiento** | Nube o auto-alojado | Solo nube |
 | **Disponibilidad Futura** | En desarrollo activo | Termina en 2026 |
@@ -112,7 +112,7 @@ Esta tabla destaca las principales diferencias entre Capgo y Appflow:
 
 | Característica | Capgo | Appflow |
 | --- | --- | --- |
-| **Velocidad de Entrega de Actualizaciones** | 95% de usuarios actualizados en 24 horas, 357ms promedio de respuesta API | Rendimiento varía |
+| **Velocidad de Entrega de Actualizaciones** | 95% de usuarios actualizados en 24 horas, 57ms promedio de respuesta API | Rendimiento varía |
 | **Seguridad** | Cifrado de extremo a extremo | Firma estándar |
 | **Tasa de Éxito de Actualización** | 82% globalmente | No compartido públicamente |
 | **Integración CI/CD** | GitHub Actions, GitLab CI, Jenkins | Herramientas específicas de Ionic |

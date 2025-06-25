@@ -95,7 +95,7 @@ ionic cap run android -l --external   # Live reload for Android
     | Metrik | Leistung |
     | --- | --- |
     | Update-Bereitstellungsgeschwindigkeit | 114ms für ein 5MB-Paket |
-    | API-Antwortzeit | 357ms weltweit |
+    | API-Antwortzeit | 57ms weltweit |
     | Benutzer-Update-Rate | 95% innerhalb von 24 Stunden |
 
 Capgos partielles Update-System lädt nur geänderte Dateien herunter und reduziert so Störungen während der Fehlersuche. Mit Ende-zu-Ende-Verschlüsselung und Konformität mit App-Store-Richtlinien ist es ein leistungsstarkes Werkzeug, um Ihre App stabil zu halten und Probleme schnell zu lösen.

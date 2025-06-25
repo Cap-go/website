@@ -66,7 +66,7 @@ Nonostante questi vantaggi, l'implementazione degli aggiornamenti OTA può prese
 
 > "Abbiamo implementato gli aggiornamenti OTA di Capgo in produzione per la nostra base utenti di +5000. Stiamo riscontrando un funzionamento molto fluido con quasi tutti i nostri utenti aggiornati entro minuti dal rilascio OTA su @Capgo." – Colenso [\[1\]](https://capgo.app/)
 
-Per garantire aggiornamenti OTA affidabili, gli sviluppatori dovrebbero concentrarsi sul monitoraggio proattivo e mantenere opzioni di rollback per una rapida risoluzione dei problemi. Con un tempo medio di risposta API di 357ms, è anche cruciale ottimizzare l'infrastruttura di distribuzione degli aggiornamenti [\[1\]](https://capgo.app/).
+Per garantire aggiornamenti OTA affidabili, gli sviluppatori dovrebbero concentrarsi sul monitoraggio proattivo e mantenere opzioni di rollback per una rapida risoluzione dei problemi. Con un tempo medio di risposta API di 57ms, è anche cruciale ottimizzare l'infrastruttura di distribuzione degli aggiornamenti [\[1\]](https://capgo.app/).
 
 ## Regole dell'App Store per gli Aggiornamenti OTA
 

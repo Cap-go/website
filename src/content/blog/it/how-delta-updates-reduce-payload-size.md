@@ -231,7 +231,7 @@ Per garantire la sicurezza, Capgo usa vera crittografia end-to-end per tutti gli
 
 | Funzionalità | Vantaggio | Metrica prestazioni |
 | --- | --- | --- |
-| Aggiornamenti parziali | Riduce uso banda | 357ms risposta media API |
+| Aggiornamenti parziali | Riduce uso banda | 57ms risposta media API |
 | CDN globale | Download più veloci globalmente | 114ms per bundle 5MB |
 | Crittografia E2E | Maggiore sicurezza dati | Crittografia end-to-end completa |
 
@@ -263,7 +263,7 @@ Le metriche di performance dalle applicazioni reali confermano il valore degli a
 | --- | --- |
 | **Adozione Utenti** | 95% degli utenti aggiorna entro 24 ore |
 | **Tasso di Successo** | 82% globalmente |
-| **Risposta API** | 357ms in media |
+| **Risposta API** | 57ms in media |
 | **App in Produzione** | Oltre 750 app utilizzano con successo la tecnologia |
 
 L'esperienza utente riflette questi numeri. Per esempio, colenso, che gestisce oltre 5.000 utenti, ha condiviso:

@@ -237,4 +237,4 @@ Pour maintenir l'efficacité de votre processus de conformité, concentrez-vous 
 | --- | --- | --- |
 | Suivi des politiques | Surveillance automatisée | Rapport mensuel de conformité |
 | Distribution des mises à jour | Déploiements progressifs | 95% de mises à jour réussies |
-| Gestion des erreurs | Suivi en temps réel | Temps de réponse API moyen : 357ms |
+| Gestion des erreurs | Suivi en temps réel | Temps de réponse API moyen : 57ms |

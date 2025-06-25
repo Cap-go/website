@@ -60,7 +60,7 @@ Native bridge menawarkan beberapa keuntungan untuk pengembangan lintas platform:
 | Waktu Muat | Rata-rata 114ms untuk paket 5MB [\[1\]](https://capgo.app/) | Waktu respons aplikasi lebih cepat |
 | Jangkauan Update | 95% pengguna diperbarui dalam 24 jam [\[1\]](https://capgo.app/) | Peluncuran fitur yang cepat |
 | Cakupan Pasar | Tingkat keberhasilan global 82% [\[1\]](https://capgo.app/) | Performa yang andal di seluruh dunia |
-| Waktu Respon API | Rata-rata global 357ms [\[1\]](https://capgo.app/) | Interaksi yang lancar dan efisien |
+| Waktu Respon API | Rata-rata global 57ms [\[1\]](https://capgo.app/) | Interaksi yang lancar dan efisien |
 
 > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" – Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
@@ -70,7 +70,7 @@ Sistem plugin menyederhanakan dan mengamankan pertukaran data antara lapisan web
 
 -   **Skala**: Digunakan di 750 aplikasi yang sedang berjalan di produksi [\[1\]](https://capgo.app/)
 -   **Keandalan**: Lebih dari 23,5 juta pembaruan telah dikirimkan [\[1\]](https://capgo.app/)
--   **Performa**: Waktu respon API rata-rata global 357ms [\[1\]](https://capgo.app/)
+-   **Performa**: Waktu respon API rata-rata global 57ms [\[1\]](https://capgo.app/)
 
 Sistem ini juga mencakup enkripsi end-to-end, memastikan transfer data yang aman. Ini memberikan pengembang alat untuk membuat aplikasi yang aman, berkinerja tinggi yang bekerja dengan lancar di berbagai platform.
 

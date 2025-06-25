@@ -124,7 +124,7 @@ ionic cap run android -l --external   # Live reload for Android
     | Metrica | Prestazioni |
     | --- | --- |
     | Velocità di distribuzione aggiornamenti | 114ms per un bundle di 5MB |
-    | Tempo di risposta API | 357ms in tutto il mondo |
+    | Tempo di risposta API | 57ms in tutto il mondo |
     | Tasso di aggiornamento utenti | 95% entro 24 ore |
 
 Il sistema di aggiornamento parziale di Capgo scarica solo i file modificati, riducendo le interruzioni durante il debugging. Con la crittografia end-to-end e la conformità alle linee guida degli app store, è uno strumento potente per mantenere la tua app stabile e risolvere rapidamente i problemi.

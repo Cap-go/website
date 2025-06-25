@@ -314,7 +314,7 @@ Capgo bietet robuste Versionsverwaltungsfunktionen, darunter:
 -   **23,5 Mio. erfolgreich durchgeführte Updates**
 -   **95% der Nutzer innerhalb von 24 Stunden aktualisiert**
 -   **82% globale Erfolgsrate**
--   **357ms durchschnittliche API-Antwortzeit weltweit**
+-   **57ms durchschnittliche API-Antwortzeit weltweit**
 
 > "Wir testen derzeit @Capgo, da Appcenter die Live-Update-Unterstützung für Hybrid-Apps eingestellt hat und @AppFlow viel zu teuer ist." - Simon Flack [\[1\]](https://capgo.app/)
 

@@ -35,7 +35,7 @@ Pembaruan Over-the-Air (OTA) memungkinkan Anda memperbarui aplikasi [Capacitor](
 
 | **Fitur** | **AWS** | **Google Cloud** | **Azure** | **Capgo** |
 | --- | --- | --- | --- | --- |
-| **Kecepatan (Bundle 5MB)** | 357ms | Tidak dilaporkan | Tidak dilaporkan | 114ms |
+| **Kecepatan (Bundle 5MB)** | 57ms | Tidak dilaporkan | Tidak dilaporkan | 114ms |
 | **Keamanan** | Memerlukan setup | Tools bawaan | Tools yang kuat | Enkripsi end-to-end |
 | **Kemudahan Integrasi** | Setup manual | Kompleksitas moderat | REST APIs, CLI | CI/CD bawaan |
 | **Tingkat Keberhasilan Update** | 82% | Tidak dilaporkan | Tidak dilaporkan | 82% |
@@ -77,7 +77,7 @@ Layanan AWS seperti **CodePipeline** dan **CodeDeploy** memungkinkan Anda mengot
 | --- | --- |
 | Adopsi Update | 95% dalam 24 jam |
 | Tingkat Keberhasilan Global | 82% |
-| Waktu Respons Rata-rata | 357ms di seluruh dunia |
+| Waktu Respons Rata-rata | 57ms di seluruh dunia |
 
 Meski angka-angka ini menunjukkan performa yang kuat, mencapainya membutuhkan upaya signifikan dalam konfigurasi dan penyetelan.
 

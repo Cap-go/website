@@ -257,7 +257,7 @@ Le funzionalità di Capgo forniscono un vantaggio competitivo, come evidenziato 
 | Utenti Attivi Mensili | Fino a 1.000.000 | Limitato dal piano |
 | Capacità di Storage | Fino a 20 GB | Variabile |
 | Banda | Fino a 10 TB | Spesso limitata |
-| Velocità Aggiornamento | 357ms risposta media [\[1\]](https://capgo.app/) | Tipicamente più lenta |
+| Velocità Aggiornamento | 57ms risposta media [\[1\]](https://capgo.app/) | Tipicamente più lenta |
 | Struttura Costi | Parte da 12$/mese | Generalmente più alta |
 
 > "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgo.app/)

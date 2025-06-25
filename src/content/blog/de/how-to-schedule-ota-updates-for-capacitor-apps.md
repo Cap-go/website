@@ -175,7 +175,7 @@ Die Messung von Key Performance Indicators (KPIs) ist essentiell für die Bewert
 | Metrik | Zielbenchmark | Branchendurchschnitt |
 | --- | --- | --- |
 | 24-Stunden-Adoptionsrate | 95% der aktiven Nutzer | 82% weltweit |
-| Update-Download-Geschwindigkeit | Unter 500ms | 357ms durchschnittlich |
+| Update-Download-Geschwindigkeit | Unter 500ms | 57ms durchschnittlich |
 | Bundle-Download-Zeit (5MB) | Unter 150ms | 114ms via CDN |
 
 Sie können diese Metriken mit folgendem Code-Snippet in Ihren Workflow integrieren:

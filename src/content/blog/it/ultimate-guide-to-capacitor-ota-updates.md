@@ -254,7 +254,7 @@ Capgo si distingue seguendo queste migliori pratiche, consentendo aggiornamenti 
 | Caratteristica | Vantaggio | Indice di Prestazione |
 | --- | --- | --- |
 | CDN Globale | Accelerare la consegna | Pacchetto da 5MB consegnato in 114ms |
-| Risposta API | Sincronizzazione rapida | 357ms di risposta media globale |
+| Risposta API | Sincronizzazione rapida | 57ms di risposta media globale |
 | Distribuzione Aggiornamenti | Distribuzione flessibile | 95% di adozione degli utenti entro 24 ore |
 
 > "Il team OSIRIS-REx della NASA ha notato: '@Capgo è un modo intelligente per effettuare hot code pushes (e non per tutti i soldi del mondo come con @AppFlow) 🙂'" [\[1\]](https://capgo.app/)

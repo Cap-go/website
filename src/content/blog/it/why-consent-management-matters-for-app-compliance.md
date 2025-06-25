@@ -176,7 +176,7 @@ L'utilizzo di strumenti in tempo reale come Capgo offre diversi vantaggi per con
     La crittografia end-to-end di Capgo mantiene sicuri gli aggiornamenti relativi al consenso durante tutto il processo.
     
 -   **Informazioni sulle prestazioni**  
-    Analytics avanzati forniscono un monitoraggio dettagliato delle modifiche al consenso. Capgo, per esempio, offre un tempo medio di risposta API di soli **357ms in tutto il mondo** [\[1\]](https://capgo.app/).
+    Analytics avanzati forniscono un monitoraggio dettagliato delle modifiche al consenso. Capgo, per esempio, offre un tempo medio di risposta API di soli **57ms in tutto il mondo** [\[1\]](https://capgo.app/).
     
 
 ## Prossimi passi per la conformità delle app

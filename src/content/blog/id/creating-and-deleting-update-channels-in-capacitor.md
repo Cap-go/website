@@ -260,7 +260,7 @@ Capgo mendukung lebih dari 30 plugin dan bekerja secara mulus dengan pipeline CI
 
 ### Poin Utama
 
-Mengelola kanal secara efektif memastikan deployment aplikasi berjalan lancar. Sistem kanal Capgo menunjukkan hasil mengesankan: **95% pembaruan diadopsi dalam 24 jam**, didukung oleh CDN global yang mengirimkan bundle 5MB hanya dalam 114ms, dengan waktu respons API 357ms di seluruh dunia [\[1\]](https://capgo.app/).
+Mengelola kanal secara efektif memastikan deployment aplikasi berjalan lancar. Sistem kanal Capgo menunjukkan hasil mengesankan: **95% pembaruan diadopsi dalam 24 jam**, didukung oleh CDN global yang mengirimkan bundle 5MB hanya dalam 114ms, dengan waktu respons API 57ms di seluruh dunia [\[1\]](https://capgo.app/).
 
 | Metrik | Kinerja |
 | --- | --- |

@@ -124,7 +124,7 @@ Gli approcci moderni stanno ridefinendo come vengono gestiti i rilasci completi,
 | Più facile da supportare e documentare | Opzioni di rollback limitate |
 | Processo di distribuzione più veloce | Potenziali picchi di carico server |
 
-Capgo riporta un tasso di successo globale dell'82% per gli aggiornamenti, con un tempo di risposta API medio di 357ms in tutto il mondo [\[1\]](https://capgo.app/).
+Capgo riporta un tasso di successo globale dell'82% per gli aggiornamenti, con un tempo di risposta API medio di 57ms in tutto il mondo [\[1\]](https://capgo.app/).
 
 > "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per distribuire continuamente ai nostri utenti!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
@@ -251,7 +251,7 @@ Ecco cosa offre Capgo per i rilasci graduali:
 
 ### Strumenti per Rilasci Completi di Capgo
 
-Capgo rende i rilasci completi veloci e sicuri, utilizzando una CDN globale, aggiornamenti in background e integrazione CI/CD senza interruzioni. La piattaforma consegna un bundle da 5MB in soli 114ms, con un tempo di risposta API medio di 357ms [\[1\]](https://capgo.app/).
+Capgo rende i rilasci completi veloci e sicuri, utilizzando una CDN globale, aggiornamenti in background e integrazione CI/CD senza interruzioni. La piattaforma consegna un bundle da 5MB in soli 114ms, con un tempo di risposta API medio di 57ms [\[1\]](https://capgo.app/).
 
 Le funzionalità chiave per i rilasci completi includono:
 

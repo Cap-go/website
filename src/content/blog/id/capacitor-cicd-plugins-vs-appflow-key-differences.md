@@ -51,7 +51,7 @@ Proses deployment dan pembaruan yang efisien sangat penting dalam pengembangan a
 
 Plugin CI/CD Capacitor menawarkan pendekatan open-source untuk mengelola [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/), terintegrasi dengan mulus dengan sistem CI/CD yang ada. Metode ini memberikan pengembang kontrol detail atas proses deployment, menjadikannya opsi yang lebih dapat disesuaikan dibandingkan platform all-in-one.
 
-[Capgo](https://capgo.app/) telah membagikan statistik mengesankan: **95% pengguna diperbarui dalam 24 jam**, **tingkat keberhasilan global 82%**, **waktu respons API rata-rata 357ms**, dan **bundle 5MB dikirim hanya dalam 114ms** [\[1\]](https://capgo.app/).
+[Capgo](https://capgo.app/) telah membagikan statistik mengesankan: **95% pengguna diperbarui dalam 24 jam**, **tingkat keberhasilan global 82%**, **waktu respons API rata-rata 57ms**, dan **bundle 5MB dikirim hanya dalam 114ms** [\[1\]](https://capgo.app/).
 
 Berikut beberapa fitur unggulan:
 
@@ -79,7 +79,7 @@ Pilihan antara kontrol rinci dan platform all-in-one tergantung pada alur kerja 
 
 ### Fitur Plugin CI/CD
 
-Plugin CI/CD Capacitor kini dirancang untuk memenuhi kebutuhan pengguna enterprise. Misalnya, implementasi Capgo mengirimkan bundle 5MB hanya dalam 114ms, dengan waktu respons API global rata-rata 357ms [\[1\]](https://capgo.app/).
+Plugin CI/CD Capacitor kini dirancang untuk memenuhi kebutuhan pengguna enterprise. Misalnya, implementasi Capgo mengirimkan bundle 5MB hanya dalam 114ms, dengan waktu respons API global rata-rata 57ms [\[1\]](https://capgo.app/).
 
 Berikut rincian yang ditawarkan plugin ini:
 

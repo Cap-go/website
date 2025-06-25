@@ -130,7 +130,7 @@ Best Practices für die Kommunikation umfassen:
 
 ## Fazit
 
-Die Bewältigung von CI/CD-Engpässen ist entscheidend für eine reibungslose OTA-Bereitstellung. Optimierte Pipelines können zu beeindruckenden Ergebnissen führen, wie zum Beispiel 95% der aktiven Nutzer, die Updates innerhalb von 24 Stunden erhalten, ein 5MB-Bundle, das in nur 114ms heruntergeladen wird, und eine durchschnittliche API-Antwortzeit von 357ms [\[1\]](https://capgo.app/).
+Die Bewältigung von CI/CD-Engpässen ist entscheidend für eine reibungslose OTA-Bereitstellung. Optimierte Pipelines können zu beeindruckenden Ergebnissen führen, wie zum Beispiel 95% der aktiven Nutzer, die Updates innerhalb von 24 Stunden erhalten, ein 5MB-Bundle, das in nur 114ms heruntergeladen wird, und eine durchschnittliche API-Antwortzeit von 57ms [\[1\]](https://capgo.app/).
 
 > "Capgo ist eine intelligente Möglichkeit, Hot-Code-Pushes durchzuführen" [\[1\]](https://capgo.app/)
 
