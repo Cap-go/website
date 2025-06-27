@@ -93,7 +93,7 @@ Launch Android Studio and adjust the following settings:
 
 Update the `android/build.gradle` file with these settings to include AAR file support:
 
-```kotlin
+```gradle
 android {
     compileSdkVersion 33
     defaultConfig {
@@ -204,7 +204,7 @@ Keeping configuration files in vendor-specific subdirectories helps maintain org
 
 To integrate AAR files into your Capacitor plugin, you need to configure Gradle appropriately. Start by adding these repository settings to `android/build.gradle`:
 
-```kotlin
+```gradle
 repositories {
     google()
     mavenCentral()
@@ -216,7 +216,7 @@ repositories {
 
 Then, include the AAR dependencies in the `dependencies` block:
 
-```kotlin
+```gradle
 dependencies {
     implementation files('libs/your-library.aar')
     implementation fileTree(dir: 'libs', include: ['**/*.aar'])
@@ -235,7 +235,7 @@ CAPACITOR_VERSION=5.5.0
 
 If the AAR file comes with additional dependencies, declare them in `android/build.gradle` like this:
 
-```kotlin
+```gradle
 android {
     defaultConfig {
         minSdkVersion 21
@@ -265,7 +265,7 @@ After syncing, verify the following:
 
 If the sync fails, double-check your configuration. For instance, ensure these settings are in place:
 
-```kotlin
+```gradle
 android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -392,7 +392,7 @@ With these methods in place, your native bridge is ready. Test your implementati
 
 To debug your AAR integration in Android Studio, start by enabling debug mode in your project's `build.gradle` file:
 
-```kotlin
+```gradle
 android {
     buildTypes {
         debug {
@@ -434,7 +434,7 @@ When debugging alone isn't enough, use these steps to address common problems:
 
 Check for version conflicts in your `build.gradle` file. You can force specific versions to resolve conflicts:
 
-```kotlin
+```gradle
 configurations.all {
     resolutionStrategy {
         force 'com.google.android:android:4.1.1.4'
