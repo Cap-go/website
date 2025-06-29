@@ -40,6 +40,8 @@ CapacitorUpdater can be configured with these options:
 | **`defaultChannel`**         | <code>string</code>  | Set the default channel for the app in the config. Case sensitive. This will setting will override the default channel set in the cloud, but will still respect overrides made in the cloud.    | <code>undefined</code>                             | 5.5.0   |
 | **`appId`**                  | <code>string</code>  | Configure the app id for the app in the config.                                                                                                                                                 | <code>undefined</code>                             | 6.0.0   |
 | **`keepUrlPathAfterReload`** | <code>boolean</code> | Configure the plugin to keep the URL path after a reload. WARNING: When a reload is triggered, 'window.history' will be cleared.                                                                | <code>false</code>                                 | 6.8.0   |
+| **`disableJSLogging`**       | <code>boolean</code> | Disable the JavaScript logging of the plugin. if true, the plugin will not log to the JavaScript console. only the native log will be done                                                      | <code>false</code>                                 | 7.3.0   |
+| **`shakeMenu`**              | <code>boolean</code> | Enable shake gesture to show update menu for debugging/testing purposes                                                                                                                         | <code>false</code>                                 | 7.5.0   |
 
 ## Examples
 
@@ -72,7 +74,9 @@ In `capacitor.config.json`:
       "allowModifyUrl": undefined,
       "defaultChannel": undefined,
       "appId": undefined,
-      "keepUrlPathAfterReload": undefined
+      "keepUrlPathAfterReload": undefined,
+      "disableJSLogging": undefined,
+      "shakeMenu": undefined
     }
   }
 }
@@ -112,6 +116,8 @@ const config: CapacitorConfig = {
       defaultChannel: undefined,
       appId: undefined,
       keepUrlPathAfterReload: undefined,
+      disableJSLogging: undefined,
+      shakeMenu: undefined,
     },
   },
 };
@@ -141,6 +147,7 @@ export default config;
 * [`setChannel(...)`](#setchannel)
 * [`unsetChannel(...)`](#unsetchannel)
 * [`getChannel()`](#getchannel)
+* [`listChannels()`](#listchannels)
 * [`setCustomId(...)`](#setcustomid)
 * [`getBuiltinVersion()`](#getbuiltinversion)
 * [`getDeviceId()`](#getdeviceid)
@@ -158,6 +165,8 @@ export default config;
 * [`addListener('appReady', ...)`](#addlistenerappready-)
 * [`isAutoUpdateAvailable()`](#isautoupdateavailable)
 * [`getNextBundle()`](#getnextbundle)
+* [`setShakeMenu(...)`](#setshakemenu)
+* [`isShakeMenuEnabled()`](#isshakemenuenabled)
 * [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 
@@ -464,6 +473,21 @@ Get the channel for this device
 --------------------
 
 
+## listChannels()
+
+```typescript
+listChannels() => Promise<ListChannelsResult>
+```
+
+List all channels available for this device that allow self-assignment
+
+**Returns:** <code>Promise&lt;<a href="#listchannelsresult">ListChannelsResult</a>&gt;</code>
+
+**Since:** 7.5.0
+
+--------------------
+
+
 ## setCustomId(...)
 
 ```typescript
@@ -758,6 +782,38 @@ Returns null if no next bundle is set.
 --------------------
 
 
+## setShakeMenu(...)
+
+```typescript
+setShakeMenu(options: SetShakeMenuOptions) => Promise<void>
+```
+
+Enable or disable the shake menu for debugging/testing purposes
+
+| Param         | Type                                                                | Description                                              |
+| ------------- | ------------------------------------------------------------------- | -------------------------------------------------------- |
+| **`options`** | <code><a href="#setshakemenuoptions">SetShakeMenuOptions</a></code> | Contains enabled boolean to enable or disable shake menu |
+
+**Since:** 7.5.0
+
+--------------------
+
+
+## isShakeMenuEnabled()
+
+```typescript
+isShakeMenuEnabled() => Promise<ShakeMenuEnabled>
+```
+
+Get the current state of the shake menu
+
+**Returns:** <code>Promise&lt;<a href="#shakemenuenabled">ShakeMenuEnabled</a>&gt;</code>
+
+**Since:** 7.5.0
+
+--------------------
+
+
 ## Interfaces
 
 
@@ -805,12 +861,22 @@ Returns null if no next bundle is set.
 This URL and versions are used to download the bundle from the server, If you use backend all information will be gived by the method getLatest.
 If you don't use backend, you need to provide the URL and version of the bundle. Checksum and sessionKey are required if you encrypted the bundle with the CLI command encrypt, you should receive them as result of the command.
 
-| Prop             | Type                | Description                                                                                                                                                      | Default                | Since |
-| ---------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----- |
-| **`url`**        | <code>string</code> | The URL of the bundle zip file (e.g: dist.zip) to be downloaded. (This can be any URL. E.g: Amazon S3, a GitHub tag, any other place you've hosted your bundle.) |                        |       |
-| **`version`**    | <code>string</code> | The version code/name of this bundle/version                                                                                                                     |                        |       |
-| **`sessionKey`** | <code>string</code> | The session key for the update, when the bundle is encrypted with a session key                                                                                  | <code>undefined</code> | 4.0.0 |
-| **`checksum`**   | <code>string</code> | The checksum for the update, it should be in sha256 and encrypted with private key if the bundle is encrypted                                                    | <code>undefined</code> | 4.0.0 |
+| Prop             | Type                         | Description                                                                                                                                                      | Default                | Since |
+| ---------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----- |
+| **`url`**        | <code>string</code>          | The URL of the bundle zip file (e.g: dist.zip) to be downloaded. (This can be any URL. E.g: Amazon S3, a GitHub tag, any other place you've hosted your bundle.) |                        |       |
+| **`version`**    | <code>string</code>          | The version code/name of this bundle/version                                                                                                                     |                        |       |
+| **`sessionKey`** | <code>string</code>          | The session key for the update, when the bundle is encrypted with a session key                                                                                  | <code>undefined</code> | 4.0.0 |
+| **`checksum`**   | <code>string</code>          | The checksum for the update, it should be in sha256 and encrypted with private key if the bundle is encrypted                                                    | <code>undefined</code> | 4.0.0 |
+| **`manifest`**   | <code>ManifestEntry[]</code> | The manifest for multi-file downloads                                                                                                                            | <code>undefined</code> | 6.1.0 |
+
+
+### ManifestEntry
+
+| Prop               | Type                        |
+| ------------------ | --------------------------- |
+| **`file_name`**    | <code>string \| null</code> |
+| **`file_hash`**    | <code>string \| null</code> |
+| **`download_url`** | <code>string \| null</code> |
 
 
 ### BundleId
@@ -879,15 +945,6 @@ If you don't use backend, you need to provide the URL and version of the bundle.
 | **`manifest`**   | <code>ManifestEntry[]</code> |                            | 6.1   |
 
 
-### ManifestEntry
-
-| Prop               | Type                        |
-| ------------------ | --------------------------- |
-| **`file_name`**    | <code>string \| null</code> |
-| **`file_hash`**    | <code>string \| null</code> |
-| **`download_url`** | <code>string \| null</code> |
-
-
 ### GetLatestOptions
 
 | Prop          | Type                | Description                                                                                     | Default                | Since |
@@ -928,6 +985,23 @@ If you don't use backend, you need to provide the URL and version of the bundle.
 | **`message`**  | <code>string</code>  |                               |       |
 | **`status`**   | <code>string</code>  |                               |       |
 | **`allowSet`** | <code>boolean</code> |                               |       |
+
+
+### ListChannelsResult
+
+| Prop           | Type                       | Description                | Since |
+| -------------- | -------------------------- | -------------------------- | ----- |
+| **`channels`** | <code>ChannelInfo[]</code> | List of available channels | 7.5.0 |
+
+
+### ChannelInfo
+
+| Prop                 | Type                 | Description                                     | Since |
+| -------------------- | -------------------- | ----------------------------------------------- | ----- |
+| **`id`**             | <code>string</code>  | The channel ID                                  | 7.5.0 |
+| **`name`**           | <code>string</code>  | The channel name                                | 7.5.0 |
+| **`public`**         | <code>boolean</code> | Whether this is a public channel                | 7.5.0 |
+| **`allow_self_set`** | <code>boolean</code> | Whether devices can self-assign to this channel | 7.5.0 |
 
 
 ### SetCustomIdOptions
@@ -1035,6 +1109,20 @@ If you don't use backend, you need to provide the URL and version of the bundle.
 | Prop            | Type                 |
 | --------------- | -------------------- |
 | **`available`** | <code>boolean</code> |
+
+
+### SetShakeMenuOptions
+
+| Prop          | Type                 |
+| ------------- | -------------------- |
+| **`enabled`** | <code>boolean</code> |
+
+
+### ShakeMenuEnabled
+
+| Prop          | Type                 |
+| ------------- | -------------------- |
+| **`enabled`** | <code>boolean</code> |
 
 
 ## Type Aliases
