@@ -106,6 +106,9 @@ const config: CapacitorConfig = {
       autoUpdate: true,
       directUpdate: true,
     },
+    SplashScreen: {
+      launchAutoHide: false,
+    },
   },
   keepUrlPathAfterReload: true,
 };
@@ -120,6 +123,10 @@ export default config;
 With `directUpdate` enabled, Capgo will immediately apply an update as soon as the download completes during an update check, even if the user is actively using the app. Without periodic checking enabled, this means updates will only be applied when the app starts or resumes from background.
 
 Note that because `directUpdate` is a native configuration, it requires some additional handling in your JavaScript code.
+
+<Aside type="caution">
+When using `directUpdate`, you must set `launchAutoHide: false` in the SplashScreen configuration (as shown above) to prevent the splash screen from hiding automatically. This ensures you have full control over when the splash screen is hidden after the update process completes.
+</Aside>
 
 When using `directUpdate`, you need to listen for the `appReady` event and hide your app's splash screen in response:
 
