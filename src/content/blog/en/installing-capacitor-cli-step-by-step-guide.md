@@ -198,7 +198,7 @@ If you're facing Gradle-related problems, try these steps:
     
 2.  Update the Gradle version in `android/build.gradle`:
     
-    ```kotlin
+    ```gradle
     buildscript {
         ext {
             gradleVersion = '8.1.0'
