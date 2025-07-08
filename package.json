@@ -60,7 +60,7 @@
     "@types/semver": "^7.5.8",
     "@types/toastify-js": "^1.12.4",
     "astro-font": "^1.1.0",
-    "cheerio": "1.0.0",
+    "cheerio": "1.1.0",
     "dayjs": "^1.11.13",
     "faiss-node": "^0.5.1",
     "fast-glob": "^3.3.3",
