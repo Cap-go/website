@@ -130,7 +130,7 @@ const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go'
       </div>
       <Enterprise />
       {credits && credits.length > 0 && <CreditPricing credits={credits} />}
-      <Calculator />
+      <!-- <Calculator /> -->
       <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
         {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />
         {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}

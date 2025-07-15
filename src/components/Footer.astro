@@ -24,6 +24,7 @@ const navigation: Record<string, NavigationItem[]> = {
       href: getRelativeLocaleUrl(Astro.locals.locale, 'docs'),
     },
     { name: m.plugins({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'plugins') },
+    { name: m.ci_cd_integration({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'ci_cd') },
     {
       name: m.awesome_capacitor({}, { locale: Astro.locals.locale }),
       href: 'https://github.com/riderx/awesome-capacitor/',
@@ -50,7 +51,7 @@ const navigation: Record<string, NavigationItem[]> = {
       name: m.pricing({}, { locale: Astro.locals.locale }),
       href: getRelativeLocaleUrl(Astro.locals.locale, 'pricing'),
     },
-    { name: m.guides({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
+    { name: m.blog({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'blog') },
     {
       name: () => m.all_systems_normal({}, { locale: Astro.locals.locale }),
       href: 'https://status.capgo.app/',
@@ -70,6 +71,7 @@ const navigation: Record<string, NavigationItem[]> = {
   ],
   company: [
     { name: m.about({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'about') },
+    { name: m.enterprise_title({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise') },
     { name: m.imprint({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'imprint') },
     { name: m.jobs({}, { locale: Astro.locals.locale }), href: 'https://console.algora.io/org/capgo/bounties?status=open/' },
     { name: m.contributing({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'contributing') },

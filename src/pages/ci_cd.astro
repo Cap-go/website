@@ -1,0 +1,1033 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '@/paraglide/messages'
+
+const pageTitle = 'CI/CD Integration | Capgo'
+const pageDescription = 'Seamlessly integrate Capgo live updates into your CI/CD pipeline. Support for GitHub Actions, GitLab CI, Jenkins, and more.'
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <div>
+    <!-- Hero Section -->
+    <section class="relative py-20 sm:py-24 lg:py-32 overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
+      <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+      
+      <!-- Animated CI/CD Pipeline Lines -->
+      <div class="absolute inset-0 overflow-hidden">
+        {
+          Array.from({ length: 8 }).map((_, i) => (
+            <div
+              class="pipeline-flow absolute h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30"
+              style={{
+                top: `${20 + i * 10}%`,
+                left: `-50%`,
+                width: '200%',
+                animationDelay: `${i * 0.5}s`,
+                animation: 'pipeline-flow 4s ease-in-out infinite',
+              }}
+            />
+          ))
+        }
+      </div>
+      
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <!-- Badge -->
+          <div class="inline-flex items-center rounded-full bg-red-500/10 px-4 py-2 text-sm font-medium text-red-400 ring-1 ring-inset ring-red-500/20 mb-8">
+            <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+            Stop Manual Deployments
+          </div>
+          
+          <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
+            <span class="text-red-400">Tired of Waiting 2+ Weeks</span><br/>
+            <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+              For App Store Approval?
+            </span>
+          </h1>
+          
+          <p class="mx-auto mt-6 max-w-4xl text-xl leading-relaxed text-gray-300">
+            <span class="text-red-400 font-semibold">You found a critical bug.</span> Your users are frustrated. App store review takes 1-2 weeks. 
+            Your 5-star rating drops every day you wait.
+          </p>
+          
+          <div class="mx-auto mt-8 max-w-3xl">
+            <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
+              <h3 class="text-2xl font-bold text-white mb-4">
+                What if you could deploy fixes in <span class="text-green-400">under 5 minutes?</span>
+              </h3>
+              <p class="text-gray-300 text-lg">
+                Capgo's CI/CD automation lets you push updates instantly. No app store approval. No waiting. No frustrated users.
+              </p>
+            </div>
+          </div>
+          
+          <!-- CTA Buttons -->
+          <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <div class="group relative">
+              <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
+              >
+                Fix This Problem Now - Free Trial
+                <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </a>
+            </div>
+            <a
+              href="#how-it-works"
+              class="inline-flex items-center justify-center rounded-xl bg-gray-800 border border-gray-600 px-8 py-4 text-lg font-medium text-white hover:bg-gray-700 transition-all duration-200"
+            >
+              See How It Works
+            </a>
+          </div>
+          
+          <p class="mt-6 text-sm text-gray-400">
+            <span class="text-green-400">✓</span> Deploy in 3 minutes • <span class="text-green-400">✓</span> No app store delays • <span class="text-green-400">✓</span> 15-day free trial
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="bg-gray-50 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl leading-tight font-bold text-gray-900 sm:text-4xl">
+            The Mobile Developer's Nightmare
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            Every mobile developer has lived this horror story. Here's how Capgo's CI/CD automation solves it forever.
+          </p>
+        </div>
+
+        <!-- Problem vs Solution Grid -->
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 mb-16">
+          <!-- Problem Side -->
+          <div class="relative">
+            <div class="absolute inset-0 bg-red-500/5 rounded-2xl blur-xl"></div>
+            <div class="relative bg-white rounded-2xl border-2 border-red-200 shadow-lg p-8">
+              <div class="flex items-center mb-6">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                  </svg>
+                </div>
+                <h3 class="ml-4 text-2xl font-bold text-gray-900">Without Capgo CI/CD</h3>
+              </div>
+              
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-red-100 mt-1">
+                    <svg class="h-4 w-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900">2-week app store approval wait</p>
+                    <p class="text-gray-600 text-sm">Critical bugs remain unfixed while users suffer</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-red-100 mt-1">
+                    <svg class="h-4 w-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900">Manual deployment hell</p>
+                    <p class="text-gray-600 text-sm">Human errors, forgotten steps, inconsistent releases</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-red-100 mt-1">
+                    <svg class="h-4 w-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900">No rollback safety net</p>
+                    <p class="text-gray-600 text-sm">Bad releases stay broken until next app store approval</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-red-100 mt-1">
+                    <svg class="h-4 w-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900">Angry users & low ratings</p>
+                    <p class="text-gray-600 text-sm">1-star reviews pile up while you wait helplessly</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-6 p-4 bg-red-50 rounded-xl">
+                <p class="text-red-800 font-semibold text-center">Result: Lost users, damaged reputation, slow business</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solution Side -->
+          <div class="relative">
+            <div class="absolute inset-0 bg-green-500/10 rounded-2xl blur-xl"></div>
+            <div class="relative bg-white rounded-2xl border-2 border-green-200 shadow-lg p-8">
+              <div class="flex items-center mb-6">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <h3 class="ml-4 text-2xl font-bold text-gray-900">With Capgo CI/CD</h3>
+              </div>
+              
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-1">
+                    <svg class="h-4 w-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900">Deploy fixes in under 5 minutes</p>
+                    <p class="text-gray-600 text-sm">From git push to user devices instantly</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-1">
+                    <svg class="h-4 w-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900">100% automated deployments</p>
+                    <p class="text-gray-600 text-sm">Zero human error, consistent releases every time</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-1">
+                    <svg class="h-4 w-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900">Instant rollback protection</p>
+                    <p class="text-gray-600 text-sm">One-click return to previous version if issues arise</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-1">
+                    <svg class="h-4 w-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <div class="ml-4">
+                    <p class="font-semibold text-gray-900">Happy users & 5-star ratings</p>
+                    <p class="text-gray-600 text-sm">Fast fixes mean satisfied customers and better reviews</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-6 p-4 bg-green-50 rounded-xl">
+                <p class="text-green-800 font-semibold text-center">Result: Loyal users, great ratings, growing business</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Platforms Support -->
+        <div class="text-center">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8">
+            Works with your existing CI/CD setup
+          </h3>
+          <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
+            <div class="flex items-center space-x-2">
+              <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              <span class="font-medium">GitHub Actions</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="h-8 w-8 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.423-.73-.423-.867 0L16.418 9.45H7.582L4.919 1.263c-.135-.423-.73-.423-.867 0L1.388 9.452.046 13.587c-.121.375.014.793.331 1.023L12 23.054l11.623-8.443c.318-.235.453-.653.332-1.024"/>
+              </svg>
+              <span class="font-medium">GitLab CI</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="h-8 w-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.314 16.19c-.447.067-.894.067-1.341 0-.633-.089-1.117-.424-1.453-.983-.336-.56-.504-1.273-.504-2.14v-1.072c0-.558-.156-.983-.468-1.275-.312-.292-.729-.438-1.251-.438h-.804v-1.564h.804c.522 0 .939-.146 1.251-.438.312-.292.468-.717.468-1.275V6.933c0-.867.168-1.58.504-2.14.336-.559.82-.894 1.453-.983.447-.067.894-.067 1.341 0 .633.089 1.117.424 1.453.983.336.56.504 1.273.504 2.14v1.072c0 .558.156.983.468 1.275.312.292.729.438 1.251.438h.804v1.564h-.804c-.522 0-.939.146-1.251.438-.312.292-.468.717-.468 1.275v1.072c0 .867-.168 1.58-.504 2.14-.336.559-.82.894-1.453.983z"/>
+              </svg>
+              <span class="font-medium">Jenkins</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-6a6 6 0 100-12 6 6 0 000 12z"/>
+              </svg>
+              <span class="font-medium">CircleCI</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="font-medium text-gray-600">+ Any CI/CD platform</span>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="bg-gray-900 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
+            From Code to Users in <span class="text-green-400">Under 5 Minutes</span>
+          </h2>
+          <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+            <span class="text-red-400">Stop waiting weeks</span> for app store approval. Here's how you'll deploy fixes instantly:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+          <!-- Step 1 -->
+          <div class="text-center">
+            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/20 ring-2 ring-blue-500/30 mx-auto mb-6">
+              <span class="text-2xl font-bold text-blue-400">1</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-4">Setup Once (5 minutes)</h3>
+            <p class="text-gray-300">
+              Add 3 lines to your existing CI/CD config. That's it. <span class="text-blue-400 font-semibold">No complex setup, no migration headaches.</span>
+            </p>
+            <div class="mt-4 text-sm text-blue-400">✓ Works with your current workflow</div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="text-center">
+            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-500/20 ring-2 ring-purple-500/30 mx-auto mb-6">
+              <span class="text-2xl font-bold text-purple-400">2</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-4">Push Code & Relax</h3>
+            <p class="text-gray-300">
+              Git push triggers automatic deployment. <span class="text-purple-400 font-semibold">No manual steps, no forgotten processes, no human errors.</span>
+            </p>
+            <div class="mt-4 text-sm text-purple-400">✓ 100% automated, 0% stress</div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="text-center">
+            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-500/20 ring-2 ring-green-500/30 mx-auto mb-6">
+              <span class="text-2xl font-bold text-green-400">3</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-4">Users Get Fixes Instantly</h3>
+            <p class="text-gray-300">
+              Your users receive updates in seconds. <span class="text-green-400 font-semibold">No app store wait, no angry reviews, no lost customers.</span>
+            </p>
+            <div class="mt-4 text-sm text-green-400">✓ Happy users = 5-star ratings</div>
+          </div>
+        </div>
+        
+        <!-- Urgency CTA -->
+        <div class="mt-16 text-center">
+          <div class="mx-auto max-w-2xl bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+            <h3 class="text-2xl font-bold text-white mb-4">
+              How much is each day of delay costing you?
+            </h3>
+            <p class="text-gray-300 mb-6">
+              Every day your critical bug stays unfixed, you lose users and damage your app's reputation. 
+              <span class="text-red-400 font-semibold">The longer you wait, the more expensive it gets.</span>
+            </p>
+            <div class="group relative inline-flex">
+              <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
+              >
+                Stop Losing Users - Fix This Now
+                <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Examples Section -->
+    <section class="bg-gray-50 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl leading-tight font-bold text-gray-900 sm:text-4xl">
+            Quick Setup Examples
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            Get started in minutes with these copy-paste configurations
+          </p>
+        </div>
+
+        <!-- Tab Section -->
+        <div class="max-w-5xl mx-auto">
+          <!-- GitHub Actions Example -->
+          <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-900 mr-3">
+                <svg class="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </div>
+              GitHub Actions (.github/workflows/deploy.yml)
+            </h3>
+            <div class="rounded-xl bg-gray-900 border border-gray-700 overflow-hidden">
+              <div class="flex items-center justify-between px-4 py-3 bg-gray-800">
+                <div class="flex space-x-2">
+                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div class="text-gray-300 text-sm font-mono">deploy.yml</div>
+                <button class="text-gray-400 hover:text-white text-sm">Copy</button>
+              </div>
+              <div class="p-6 overflow-x-auto">
+                                 <pre class="text-sm text-gray-300 font-mono"><code>name: Deploy to Capgo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build app
+        run: npm run build
+        
+      - name: Deploy to Capgo
+        uses: Cap-go/action-deploy@v1
+        with:
+          api-key: $&#123;&#123; secrets.CAPGO_API_KEY &#125;&#125;
+          app-id: $&#123;&#123; secrets.CAPGO_APP_ID &#125;&#125;
+          channel: $&#123;&#123; github.ref == 'refs/heads/main' && 'production' || 'staging' &#125;&#125;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- GitLab CI Example -->
+          <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500 mr-3">
+                <svg class="h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.423-.73-.423-.867 0L16.418 9.45H7.582L4.919 1.263c-.135-.423-.73-.423-.867 0L1.388 9.452.046 13.587c-.121.375.014.793.331 1.023L12 23.054l11.623-8.443c.318-.235.453-.653.332-1.024"/>
+                </svg>
+              </div>
+              GitLab CI (.gitlab-ci.yml)
+            </h3>
+            <div class="rounded-xl bg-gray-900 border border-gray-700 overflow-hidden">
+              <div class="flex items-center justify-between px-4 py-3 bg-gray-800">
+                <div class="flex space-x-2">
+                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div class="text-gray-300 text-sm font-mono">.gitlab-ci.yml</div>
+                <button class="text-gray-400 hover:text-white text-sm">Copy</button>
+              </div>
+              <div class="p-6 overflow-x-auto">
+                <pre class="text-sm text-gray-300 font-mono"><code>stages:
+  - build
+  - deploy
+
+variables:
+  NODE_VERSION: "18"
+
+build:
+  stage: build
+  image: node:$NODE_VERSION
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+
+deploy_staging:
+  stage: deploy
+  image: node:$NODE_VERSION
+  dependencies:
+    - build
+  script:
+    - npm install -g @capgo/cli
+    - capgo bundle upload --channel staging
+  environment:
+    name: staging
+  only:
+    - develop
+
+deploy_production:
+  stage: deploy
+  image: node:$NODE_VERSION
+  dependencies:
+    - build
+  script:
+    - npm install -g @capgo/cli
+    - capgo bundle upload --channel production
+  environment:
+    name: production
+  only:
+    - main</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLI Quick Start -->
+          <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 mr-3">
+                <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              CLI Commands for Any Platform
+            </h3>
+            <div class="rounded-xl bg-gray-900 border border-gray-700 overflow-hidden">
+              <div class="flex items-center justify-between px-4 py-3 bg-gray-800">
+                <div class="flex space-x-2">
+                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div class="text-gray-300 text-sm font-mono">terminal</div>
+                <button class="text-gray-400 hover:text-white text-sm">Copy</button>
+              </div>
+              <div class="p-6 overflow-x-auto">
+                <pre class="text-sm text-gray-300 font-mono"><code># Install the CLI
+npm install -g @capgo/cli
+
+# Authenticate
+export CAPGO_API_KEY="your-api-key"
+
+# Build your app
+npm run build
+
+# Upload bundle to specific channel
+capgo bundle upload --channel production
+
+# Deploy to users
+capgo channel set production --bundle latest
+
+# Advanced: Upload with metadata
+capgo bundle upload \
+  --channel staging \
+  --name "v1.2.3" \
+  --bundle ./dist \
+  --compatible-update</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="bg-gray-900 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
+            Why Automate with CI/CD?
+          </h2>
+          <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+            Transform your mobile deployment workflow with these powerful benefits
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <!-- Faster Deployments -->
+          <div class="group relative">
+            <div class="absolute inset-0 bg-blue-500/10 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-blue-500/15"></div>
+            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/20">
+              <div class="flex items-center mb-6">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 ring-1 ring-blue-500/30">
+                  <svg class="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <h3 class="ml-4 text-xl font-bold text-white">Lightning Fast Deployments</h3>
+              </div>
+              <p class="text-gray-300 mb-4">
+                Deploy updates in seconds instead of waiting weeks for app store approval. Your users get fixes and features immediately.
+              </p>
+              <div class="flex items-center text-sm text-blue-400">
+                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                From commit to users in under 5 minutes
+              </div>
+            </div>
+          </div>
+
+          <!-- Zero Downtime -->
+          <div class="group relative">
+            <div class="absolute inset-0 bg-green-500/10 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-green-500/15"></div>
+            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-green-500/20">
+              <div class="flex items-center mb-6">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/20 ring-1 ring-green-500/30">
+                  <svg class="h-6 w-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h3 class="ml-4 text-xl font-bold text-white">Zero Downtime Updates</h3>
+              </div>
+              <p class="text-gray-300 mb-4">
+                Updates happen in the background while your app is running. Users never experience interruptions or forced updates.
+              </p>
+              <div class="flex items-center text-sm text-green-400">
+                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Seamless background installation
+              </div>
+            </div>
+          </div>
+
+          <!-- Automated Testing -->
+          <div class="group relative">
+            <div class="absolute inset-0 bg-purple-500/10 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-purple-500/15"></div>
+            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20">
+              <div class="flex items-center mb-6">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30">
+                  <svg class="h-6 w-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                  </svg>
+                </div>
+                <h3 class="ml-4 text-xl font-bold text-white">Automated Quality Gates</h3>
+              </div>
+              <p class="text-gray-300 mb-4">
+                Only deploy when tests pass. Integrate with your existing test suites and quality checks for bulletproof releases.
+              </p>
+              <div class="flex items-center text-sm text-purple-400">
+                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Deploy only when tests pass
+              </div>
+            </div>
+          </div>
+
+          <!-- Rollback Safety -->
+          <div class="group relative">
+            <div class="absolute inset-0 bg-red-500/10 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-red-500/15"></div>
+            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-red-500/20">
+              <div class="flex items-center mb-6">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/20 ring-1 ring-red-500/30">
+                  <svg class="h-6 w-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                </div>
+                <h3 class="ml-4 text-xl font-bold text-white">Instant Rollback Safety</h3>
+              </div>
+              <p class="text-gray-300 mb-4">
+                If something goes wrong, rollback to the previous version instantly. Automate rollbacks based on error rates or metrics.
+              </p>
+              <div class="flex items-center text-sm text-red-400">
+                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                One-click rollback in emergencies
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advanced Features Section -->
+    <section class="bg-gray-50 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl leading-tight font-bold text-gray-900 sm:text-4xl">
+            Advanced CI/CD Features
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            Take your deployment strategy to the next level with these powerful features
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <!-- Multi-Environment -->
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-500/20 mb-6">
+              <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Multi-Environment Deployment</h3>
+            <p class="text-gray-600 mb-4">
+              Deploy to different channels based on branch, environment, or custom conditions. Perfect for staging, beta, and production workflows.
+            </p>
+            <ul class="space-y-2 text-sm text-gray-500">
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Branch-based deployments
+              </li>
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Environment-specific channels
+              </li>
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Conditional deployments
+              </li>
+            </ul>
+          </div>
+
+          <!-- Gradual Rollouts -->
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/10 ring-1 ring-purple-500/20 mb-6">
+              <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Gradual Rollouts</h3>
+            <p class="text-gray-600 mb-4">
+              Start with a small percentage of users and gradually increase. Monitor metrics and automatically halt problematic deployments.
+            </p>
+            <ul class="space-y-2 text-sm text-gray-500">
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Percentage-based rollouts
+              </li>
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Automatic halt on errors
+              </li>
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Metrics-based decisions
+              </li>
+            </ul>
+          </div>
+
+          <!-- API Integration -->
+          <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/10 ring-1 ring-green-500/20 mb-6">
+              <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">REST API Integration</h3>
+            <p class="text-gray-600 mb-4">
+              Full API access for custom integrations. Build your own deployment tools or integrate with existing systems.
+            </p>
+            <ul class="space-y-2 text-sm text-gray-500">
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Complete REST API
+              </li>
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Custom integrations
+              </li>
+              <li class="flex items-center">
+                <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Webhook notifications
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expert CI/CD Setup Service -->
+    <section class="relative bg-gray-900 py-12 sm:py-16 lg:py-20 overflow-hidden">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, #60a5fa 1px, transparent 0); background-size: 32px 32px;"></div>
+      </div>
+      
+      <!-- Floating Orbs -->
+      <div class="absolute top-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-20 right-10 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 left-1/4 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mx-auto max-w-4xl text-center">
+          <div class="inline-flex items-center rounded-full bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-8">
+            <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+            </svg>
+            Expert CI/CD Setup
+          </div>
+          
+          <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+            <span class="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+              Effortless CI/CD Solutions
+            </span>
+          </h2>
+          
+          <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
+            Configure your CI/CD pipeline with our expert team. <span class="text-blue-400 font-medium">Own the complete setup with zero vendor lock-in</span> - no hosting or maintenance charges from us.
+          </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="mt-12 grid grid-cols-1 gap-6 sm:mt-16 lg:grid-cols-2 lg:gap-6">
+          
+          <!-- Feature 1: Seamless Integration -->
+          <div class="group relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-3xl blur-xl transition-all duration-300 group-hover:from-blue-500/15 group-hover:to-cyan-500/15"></div>
+            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-blue-500/10">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 ring-1 ring-blue-500/30">
+                <svg class="h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                </svg>
+              </div>
+              <h3 class="mt-4 text-xl font-bold text-white">Seamless Integration</h3>
+              <p class="mt-3 text-gray-300 leading-relaxed text-sm">
+                We set up your CI/CD workflow to work seamlessly with your current development process. No need to switch platforms or learn new tools.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 2: Tailored Configuration -->
+          <div class="group relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl blur-xl transition-all duration-300 group-hover:from-purple-500/15 group-hover:to-pink-500/15"></div>
+            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-purple-500/10">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30">
+                <svg class="h-6 w-6 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </div>
+              <h3 class="mt-4 text-xl font-bold text-white">Tailored Configuration</h3>
+              <p class="mt-3 text-gray-300 leading-relaxed text-sm">
+                Our team customizes the CI/CD setup to match your specific project requirements, ensuring optimal performance and efficiency.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 3: Platform Independence (Highlighted) -->
+          <div class="group relative lg:col-span-1">
+            <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/15 to-orange-500/15 rounded-3xl blur-2xl transition-all duration-300 group-hover:from-yellow-500/20 group-hover:to-orange-500/20"></div>
+            <div class="relative bg-gray-800 rounded-2xl border-2 border-yellow-500/30 p-6 transition-all duration-300 hover:border-yellow-500/40 hover:shadow-2xl hover:shadow-yellow-500/10">
+              <div class="absolute top-3 right-3">
+                <div class="inline-flex items-center rounded-full bg-yellow-500/20 px-2 py-1 text-xs font-medium text-yellow-300">
+                  Most Popular
+                </div>
+              </div>
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-500/20 ring-1 ring-yellow-500/30">
+                <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                  <path d="M2 12h20"></path>
+                </svg>
+              </div>
+              <h3 class="mt-4 text-xl font-bold text-white">Platform Independence</h3>
+               <p class="mt-3 text-gray-300 leading-relaxed text-sm">
+                 Adapt configuration to your infrastructure. <span class="text-yellow-400 font-medium">Own the complete pipeline, modify anytime</span> - zero vendor lock-in, pay your provider directly.
+               </p>
+            </div>
+          </div>
+
+          <!-- Feature 4: Expert Guidance -->
+          <div class="group relative lg:col-span-1">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-3xl blur-xl transition-all duration-300 group-hover:from-green-500/15 group-hover:to-emerald-500/15"></div>
+            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-green-500/10">
+              <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-500/20 ring-1 ring-green-500/30">
+                <svg class="h-8 w-8 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                  <path d="M9 18h6"></path>
+                  <path d="M10 22h4"></path>
+                </svg>
+              </div>
+              <h3 class="mt-6 text-2xl font-bold text-white">Expert Guidance</h3>
+              <p class="mt-4 text-gray-300 leading-relaxed">
+                Benefit from our deep expertise in mobile app CI/CD best practices, without the need to build and maintain a complex system yourself.
+              </p>
+              <div class="mt-6 flex items-center">
+                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20">
+                  <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <p class="ml-3 text-green-300 font-medium">
+                  We've already setup CI/CD for 50+ apps
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="mt-20 relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 rounded-3xl blur-2xl"></div>
+          <div class="relative bg-gray-800/50 backdrop-blur-sm rounded-3xl border border-white/10 p-8 lg:p-12">
+            <div class="text-center">
+              <div class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 px-4 py-2 text-sm font-medium text-blue-300 ring-1 ring-inset ring-blue-500/30 mb-6">
+                <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+                Pricing
+              </div>
+              
+              <h3 class="text-3xl font-bold text-white mb-6">Smart Investment, Massive Savings</h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Managed Solutions Cost -->
+                <div class="bg-red-500/10 rounded-2xl border border-red-500/20 p-6">
+                  <div class="text-red-400 text-sm font-medium mb-2">Managed Solutions</div>
+                  <div class="text-red-300 text-2xl font-bold">$499/month</div>
+                  <div class="text-red-300/70 text-sm mt-1">Appflow or similar</div>
+                </div>
+                
+                <!-- Our Solution -->
+                <div class="bg-green-500/10 rounded-2xl border border-green-500/20 p-6 relative">
+                  <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                    <span class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Best Value</span>
+                  </div>
+                  <div class="text-green-400 text-sm font-medium mb-2">Our Setup - You Own It</div>
+                  <div class="text-green-300 text-2xl font-bold">$2,600 + $30/mo</div>
+                  <div class="text-green-300/70 text-sm mt-1">Setup fee + GitHub/GitLab CI</div>
+                </div>
+                
+                <!-- Savings -->
+                <div class="bg-blue-500/10 rounded-2xl border border-blue-500/20 p-6">
+                  <div class="text-blue-400 text-sm font-medium mb-2">5-Year Savings</div>
+                  <div class="text-blue-300 text-2xl font-bold">$25,340</div>
+                  <div class="text-blue-300/70 text-sm mt-1">Massive cost reduction</div>
+                </div>
+              </div>
+              
+              <div class="text-gray-300 mb-8 max-w-3xl mx-auto space-y-3">
+                <p>One-time setup fee of $2,600 saves you $25,340+ over 5 years vs managed solutions.</p>
+                <p><span class="text-green-400 font-medium">Own your setup with zero vendor lock-in</span></p>
+                <p>Break even in just 6 months, then pure savings.</p>
+              </div>
+              
+              <!-- CTA Button -->
+              <div class="group relative inline-flex">
+                <div class="transitiona-all animate-tilt absolute -inset-px rounded-2xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
+                <a
+                  href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
+                  class="relative inline-flex items-center justify-center rounded-2xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+                >
+                  Setup CI/CD Now
+                  <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="relative bg-gray-900 py-24 sm:py-32 overflow-hidden">
+      <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">
+            Ready to Automate Your Mobile Deployments?
+          </h2>
+          <p class="mx-auto mt-6 max-w-3xl text-xl leading-relaxed text-gray-300">
+            Start deploying updates automatically with your existing CI/CD pipeline in under 15 minutes.
+          </p>
+          
+          <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <div class="group relative">
+              <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
+              >
+                Start Free Trial
+                <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </a>
+            </div>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/getting-started/cicd-integration')}
+              class="inline-flex items-center justify-center rounded-xl bg-gray-800 border border-gray-600 px-8 py-4 text-lg font-medium text-white hover:bg-gray-700 transition-all duration-200"
+            >
+              View Documentation
+            </a>
+          </div>
+          
+          <p class="mt-6 text-sm text-gray-400">
+            No credit card required • 15-day free trial • Set up in minutes
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .bg-grid-pattern {
+    background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+
+  @keyframes pipeline-flow {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+</style>

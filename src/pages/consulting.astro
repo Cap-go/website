@@ -54,6 +54,39 @@ const plugins = [
   },
 ]
 
+const customPluginFeatures = [
+  {
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+    title: 'Native API Access',
+    description: 'Direct access to any iOS and Android native functionality your app needs'
+  },
+  {
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    title: 'Performance Optimized',
+    description: 'Built for speed and efficiency, following platform-specific best practices'
+  },
+  {
+    icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
+    title: 'TypeScript Support',
+    description: 'Full TypeScript definitions and type safety for your development workflow'
+  },
+  {
+    icon: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z',
+    title: 'Cross-Platform',
+    description: 'Single codebase supporting both iOS and Android with unified JavaScript interface'
+  },
+  {
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+    title: 'Documentation & Support',
+    description: 'Complete documentation, examples, and ongoing support for seamless integration'
+  },
+  {
+    icon: 'M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2M7 4a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2M7 4h10M11 14l4-4m0 0l-4-4m4 4H3',
+    title: 'Open Source Ready',
+    description: 'Option to open-source your plugin to benefit the community and gain contributors'
+  }
+]
+
 const useCases = [
   {
     number: "01",
@@ -99,49 +132,109 @@ const useCases = [
       <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8">
           <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          {m.expert_capacitorjs_consulting({}, { locale: Astro.locals.locale })}
+          Custom Capacitor Plugin Development
         </div>
   
         <h1 class="text-5xl md:text-7xl font-bold mb-6">
-          <span class="text-white">CapacitorJS</span>
-          <span class="text-blue-400">
-            {m.code_review_and_consulting({}, { locale: Astro.locals.locale })}
-          </span>
-          <span class="text-white">{m.services({}, { locale: Astro.locals.locale })}</span>
+          <span class="text-white">Custom</span>
+          <span class="text-blue-400">Capacitor Plugins</span>
+          <span class="text-white">& Expert Consulting</span>
         </h1>
   
         <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-          {m.consult_your_capacitor_apps_and_review_the_code_with_us_to_deliver_bug_free_apps({}, { locale: Astro.locals.locale })}
+          Need a native feature that doesn't exist? We build custom Capacitor plugins and provide expert consulting to bring any native functionality to your app.
         </p>
   
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
-            href="https://cal.com/team/capgo/capacitor-consulting-services"
+            href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
             target="_blank"
             class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-blue-500/25"
           >
-            {m.book_a_consultation({}, { locale: Astro.locals.locale })}
+            Get Your Custom Plugin Built
             <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
           <a 
-            href="#use-cases" 
+            href="https://cal.com/team/capgo/capacitor-consulting-services"
+            target="_blank"
             class="inline-flex items-center px-8 py-4 border-2 border-gray-600 text-white hover:bg-white hover:text-gray-900 font-semibold rounded-xl transition-all duration-200 text-lg"
           >
-            {m.learn_more({}, { locale: Astro.locals.locale })}
+            {m.book_a_consultation({}, { locale: Astro.locals.locale })}
             <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
           </a>
         </div>
       </div>
     </section>
+
+    <!-- Custom Plugin Development Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Custom Plugin <span class="text-blue-600">Development</span>
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Access any native iOS or Android functionality from your Capacitor app. We build battle-tested, production-ready plugins tailored to your specific needs.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {customPluginFeatures.map((feature) => (
+            <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
+              <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-4">
+                {feature.title}
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Process Steps -->
+        <div class="bg-blue-50 rounded-3xl p-8 md:p-12">
+          <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">
+            Our Plugin Development Process
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">1</div>
+              <h4 class="font-bold text-gray-900 mb-2">Requirements Analysis</h4>
+              <p class="text-gray-600">We analyze your native functionality needs and define the plugin specifications</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">2</div>
+              <h4 class="font-bold text-gray-900 mb-2">Native Development</h4>
+              <p class="text-gray-600">Build the native iOS (Swift) and Android (Kotlin/Java) implementations</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">3</div>
+              <h4 class="font-bold text-gray-900 mb-2">JavaScript Bridge</h4>
+              <p class="text-gray-600">Create the TypeScript interface and ensure seamless communication</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">4</div>
+              <h4 class="font-bold text-gray-900 mb-2">Testing & Documentation</h4>
+              <p class="text-gray-600">Comprehensive testing, documentation, and integration support</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   
     <!-- Testimonial Section -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-gray-50">
       <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <div class="relative">
           <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" >"</p>
@@ -158,9 +251,72 @@ const useCases = [
         </div>
       </div>
     </section>
+
+    <!-- Plugin Showcase Section -->
+    <section class="py-20 bg-blue-600">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            {m.consulting_forged_plugins_community_embraced({}, { locale: Astro.locals.locale })}
+          </h2>
+          <p class="text-xl text-blue-100 max-w-4xl mx-auto">
+            Our custom-built plugins power millions of apps worldwide. Each solution represents a success story, battle-tested and refined for the community.
+          </p>
+        </div>
+  
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {plugins.map((plugin) => (
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center mr-4">
+                  <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={plugin.icon} />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white">{plugin.name}</h3>
+                  <div class="flex items-center text-sm text-blue-200">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    {plugin.stars}
+                  </div>
+                </div>
+              </div>
+              <p class="text-blue-100 mb-4">{plugin.description}</p>
+              <span class="text-sm text-blue-200">{plugin.language}</span>
+            </div>
+          ))}
+        </div>
+  
+        <div class="text-center">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
+              target="_blank"
+              class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors duration-200"
+            >
+              {m.get_your_custom_plugin_built({}, { locale: Astro.locals.locale })}
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a 
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
+              class="inline-flex items-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold rounded-xl transition-colors duration-200"
+            >
+              {m.browse_all_plugins({}, { locale: Astro.locals.locale })}
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0l-4-4m4 4l-4 4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   
     <!-- Use Cases Section -->
-    <section id="use-cases" class="py-20 bg-gray-50">
+    <section id="use-cases" class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-16">
           <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -173,8 +329,8 @@ const useCases = [
         </div>
   
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {useCases.map((useCase) => (
-            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          {useCases.slice(0, 5).map((useCase) => (
+            <div class="bg-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div class="flex items-center mb-6">
                 <span class="inline-flex items-center justify-center w-12 h-12 bg-blue-600 text-white font-bold rounded-xl text-lg">
                   {useCase.number}
@@ -203,7 +359,7 @@ const useCases = [
               <p class="text-gray-700 mb-4">
                 {m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it({}, { locale: Astro.locals.locale })}
               </p>
-              <div class="bg-blue-100 rounded-lg p-4">
+              <div class="bg-blue-100 rounded-lg p-4 mb-4">
                 <p class="text-blue-800 font-medium">
                   💡 First, check our 
                   <a 
@@ -215,6 +371,16 @@ const useCases = [
                   — you might find what you need already available!
                 </p>
               </div>
+              <a 
+                href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
+                target="_blank"
+                class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200"
+              >
+                Get Custom Plugin Quote
+                <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -222,14 +388,14 @@ const useCases = [
     </section>
   
     <!-- Benefits Section -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-gray-50">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-16">
           <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             {m.why_is_it_important({}, { locale: Astro.locals.locale })}
           </h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            {m.code_consulting_and_review_is_more_than_just_a_bug_check_it_helps_to({}, { locale: Astro.locals.locale })}
+            Custom plugins and code consulting help your team build better apps faster
           </p>
         </div>
   
@@ -241,29 +407,29 @@ const useCases = [
               </svg>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-4">
-              {m.minimize_mistakes_and_their_impact_on_the_project({}, { locale: Astro.locals.locale })}
+              Access Any Native Feature
             </h3>
           </div>
   
           <div class="text-center">
             <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <svg class="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-4">
-              {m.ensure_that_the_project_requirements_are_fulfilled({}, { locale: Astro.locals.locale })}
+              Faster Development
             </h3>
           </div>
   
           <div class="text-center">
             <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <svg class="w-10 h-10 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
               </svg>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-4">
-              {m.improve_overall_code_quality({}, { locale: Astro.locals.locale })}
+              Production Ready
             </h3>
           </div>
   
@@ -274,64 +440,8 @@ const useCases = [
               </svg>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-4">
-              {m.achieve_consistent_design_and_implementation({}, { locale: Astro.locals.locale })}
+              Ongoing Support
             </h3>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Technical Benefits Section -->
-    <section class="py-20 bg-blue-600">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-            {m.technological_benefits({}, { locale: Astro.locals.locale })}
-          </h2>
-        </div>
-  
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-            <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-4">
-              {m.better_code_quality({}, { locale: Astro.locals.locale })}
-            </h3>
-            <p class="text-blue-100">
-              {m.let_more_experienced_people_review_your_work_and_give_your_team_an_opportunity_to_learn_from_the_experts({}, { locale: Astro.locals.locale })}
-            </p>
-          </div>
-  
-          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-            <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-4">
-              {m.improved_code_readability({}, { locale: Astro.locals.locale })}
-            </h3>
-            <p class="text-blue-100">
-              {m.it_s_possible_that_different_developers_will_read_your_code_in_the_future_reduce_unnecessary_pieces_of_it_to_make_it_shorter_and_more_expressive({}, { locale: Astro.locals.locale })}
-            </p>
-          </div>
-  
-          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-            <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-4">
-              {m.bugs_reduction({}, { locale: Astro.locals.locale })}
-            </h3>
-            <p class="text-blue-100">
-              {m.eliminate_the_number_of_bugs_before_passing_the_code_to_production({}, { locale: Astro.locals.locale })}
-            </p>
           </div>
         </div>
       </div>
@@ -396,118 +506,9 @@ const useCases = [
         </div>
       </div>
     </section>
-  
-    <!-- Plugin Showcase Section -->
-    <section class="py-20 bg-blue-600">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-            {m.consulting_forged_plugins_community_embraced({}, { locale: Astro.locals.locale })}
-          </h2>
-          <p class="text-xl text-blue-100 max-w-4xl mx-auto">
-            {m.consulting_forged_plugins_community_embraced_description({}, { locale: Astro.locals.locale })}
-            {m.each_solution_represents_a_consulting_success_story_battle_tested_and_refined_for_the_community({}, { locale: Astro.locals.locale })}
-          </p>
-        </div>
-  
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {plugins.map((plugin) => (
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
-              <div class="flex items-center mb-4">
-                <div class="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center mr-4">
-                  <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={plugin.icon} />
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white">{plugin.name}</h3>
-                  <div class="flex items-center text-sm text-blue-200">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    {plugin.stars}
-                  </div>
-                </div>
-              </div>
-              <p class="text-blue-100 mb-4">{plugin.description}</p>
-              <span class="text-sm text-blue-200">{plugin.language}</span>
-            </div>
-          ))}
-        </div>
-  
-        <div class="text-center">
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
-              target="_blank"
-              class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors duration-200"
-            >
-              {m.get_your_custom_plugin_built({}, { locale: Astro.locals.locale })}
-              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-            <a 
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-              class="inline-flex items-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold rounded-xl transition-colors duration-200"
-            >
-              {m.browse_all_plugins({}, { locale: Astro.locals.locale })}
-              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0l-4-4m4 4l-4 4" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Business Benefits Section -->
-    <section class="py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            {m.business_benefits({}, { locale: Astro.locals.locale })}
-          </h2>
-        </div>
-  
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div class="flex">
-            <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
-              <svg class="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">
-                {m.lower_cost_of_fixing_bugs({}, { locale: Astro.locals.locale })}
-              </h3>
-              <p class="text-gray-600 leading-relaxed">
-                {m.the_faster_you_find_the_bug_the_cheaper_you_can_fix_it_if_the_bug_is_spotted_during_the_development_process_it_s_easier_and_cheaper_to_remove_it({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-  
-          <div class="flex">
-            <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
-              <svg class="w-10 h-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">
-                {m.opportunity_for_juniors_to_develop_skills({}, { locale: Astro.locals.locale })}
-              </h3>
-              <p class="text-gray-600 leading-relaxed">
-                {m.help_your_junior_developers_extend_their_knowledge_by_giving_them_the_opportunity_to_cooperate_with_more_experienced_developers({}, { locale: Astro.locals.locale })}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  
+
     <!-- Second Testimonial -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-20 bg-white">
       <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <div class="relative">
           <svg class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8 w-16 h-16 text-blue-600" fill="currentColor" viewBox="0 0 32 32">
@@ -532,7 +533,7 @@ const useCases = [
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center">
           <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8">
-            {m.contact({}, { locale: Astro.locals.locale })}
+            Ready to get started?
           </div>
           
           <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
@@ -540,19 +541,31 @@ const useCases = [
           </h2>
           
           <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
-            {m.need_help_with_cordova_or_capacitorjs_let_us_know({}, { locale: Astro.locals.locale })}
+            Whether you need a custom plugin built or expert consulting for your Capacitor app, we're here to make it happen.
           </p>
   
-          <a 
-            href="https://cal.com/team/capgo/capacitor-consulting-services"
-            target="_blank"
-            class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-blue-500/25"
-          >
-            {m.book_a_consultation({}, { locale: Astro.locals.locale })}
-            <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
+              target="_blank"
+              class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-blue-500/25"
+            >
+              Get Your Custom Plugin Built
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a 
+              href="https://cal.com/team/capgo/capacitor-consulting-services"
+              target="_blank"
+              class="inline-flex items-center px-8 py-4 border-2 border-gray-600 text-white hover:bg-white hover:text-gray-900 font-semibold rounded-xl transition-all duration-200 text-lg"
+            >
+              {m.book_a_consultation({}, { locale: Astro.locals.locale })}
+              <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>

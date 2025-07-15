@@ -1,0 +1,610 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Testimonials from '@/components/Testimonials.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '@/paraglide/messages'
+
+const title = [Astro.locals.runtimeConfig.public.brand, 'Enterprise'].join(' | ')
+const description = 'Enterprise-grade live updates for Capacitor apps. Built for teams that need advanced security, compliance, and dedicated support at scale.'
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <!-- Hero Section -->
+  <section class="relative bg-gray-900 py-16 sm:py-20">
+    <!-- Animated teleport lines -->
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      {
+        Array.from({ length: 20 }).map((_, i) => (
+          <div
+            class="teleport-line-animation absolute w-full"
+            style={{
+              top: `${i * 5 - 2}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              height: `${Math.random() * 1 + 1}px`,
+              opacity: Math.random() * 0.5 + 0.3,
+            }}
+          />
+        ))
+      }
+    </div>
+
+    <!-- Glowing portal effect -->
+    <div class="portal-glow-animation pointer-events-none absolute top-1/2 right-0 h-3/5 w-1/5 -translate-y-1/2"></div>
+
+    <!-- Vertical data streams -->
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      {
+        Array.from({ length: 10 }).map((_, i) => (
+          <div
+            class="data-stream-animation absolute h-full w-px"
+            style={{
+              left: `${i * 10}%`,
+              animationDuration: `${Math.random() * 4 + 6}s`,
+              animationDelay: `${Math.random() * 2}s`,
+              opacity: Math.random() * 0.3 + 0.1,
+            }}
+          />
+        ))
+      }
+    </div>
+    
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <!-- Badge -->
+        <p class="font-pj inline-flex rounded-full border border-gray-200 bg-gray-900 px-4 py-2 text-base mb-8">
+          <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+            {m.enterprise_ready()}
+          </span>
+        </p>
+
+        <h1 class="font-pj text-3xl leading-tight font-bold text-white sm:text-4xl sm:leading-tight lg:leading-tight xl:text-6xl mb-8">
+          <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+            Deliver updates to your Capacitor app
+          </span>
+          <br />
+          <span class="text-white">at scale</span>
+        </h1>
+        
+        <h2 class="font-inter mx-auto mt-6 max-w-4xl text-base leading-7 text-gray-400 text-xl">
+          Deploy over-the-air (OTA) updates to millions of users with enterprise-grade security, scalability, and support that your organization demands
+        </h2>
+
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div class="group relative inline-flex">
+            <div
+              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+            >
+            </div>
+            <a
+              href="https://cal.com/team/capgo/demo"
+              target="_blank"
+              class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+              role="button"
+            >
+              Request a Demo
+              <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+          
+          <a 
+            href="mailto:enterprise@capgo.app"
+            class="font-pj inline-flex items-center justify-center rounded-xl border border-gray-200 bg-transparent px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:outline-none"
+          >
+            <span>Contact Sales</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trusted By Section -->
+  <section class="bg-gray-800 py-12 sm:py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <h2 class="text-center text-lg/8 font-semibold text-blue-400">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
+      <div class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-2xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+        <div class="flex flex-col items-center space-y-2">
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 object-contain grayscale rounded-xl" src="/nana-logo-trasnparent.webp" alt="Nana" width="48" height="48" />
+          </div>
+          <div class="text-center">
+            <p class="text-sm font-medium text-gray-200">Nana</p>
+            <p class="text-xs text-gray-400">2.5M {m.downloads({}, { locale: Astro.locals.locale })}</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center space-y-2">
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 object-contain grayscale brightness-90 contrast-75 rounded-xl" src="/snowqueen.webp" alt="Snowqueen" width="48" height="48" />
+          </div>
+          <div class="text-center">
+            <p class="text-sm font-medium text-gray-200">Snowqueen</p>
+            <p class="text-xs text-gray-400">1.8M {m.downloads({}, { locale: Astro.locals.locale })}</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center space-y-2">
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 object-contain grayscale brightness-90 contrast-75 rounded-xl" src="/shelf_app.webp" alt="Shelf" width="48" height="48" />
+          </div>
+          <div class="text-center">
+            <p class="text-sm font-medium text-gray-200">Shelf</p>
+            <p class="text-xs text-gray-400">950K {m.downloads({}, { locale: Astro.locals.locale })}</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center space-y-2">
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 object-contain grayscale brightness-90 contrast-75 rounded-xl" src="/suez.webp" alt="Suez" width="48" height="48" />
+          </div>
+          <div class="text-center">
+            <p class="text-sm font-medium text-gray-200">Suez</p>
+            <p class="text-xs text-gray-400">3.2M {m.downloads({}, { locale: Astro.locals.locale })}</p>
+          </div>
+        </div>
+        <div class="flex flex-col items-center space-y-2">
+          <div class="rounded-2xl bg-gray-600 shadow-sm">
+            <img class="h-12 w-12 object-contain grayscale rounded-xl" src="/janitor_app.webp" alt="Janitor" width="48" height="48" />
+          </div>
+          <div class="text-center">
+            <p class="text-sm font-medium text-gray-200">Janitor</p>
+            <p class="text-xs text-gray-400">750K {m.downloads({}, { locale: Astro.locals.locale })}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise Features Section -->
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-base/7 font-semibold text-blue-400">Enterprise Features</h2>
+      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
+        Built for enterprise teams
+      </p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">Advanced collaboration, security, and compliance features that grow with your organization</p>
+      
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6">
+        <!-- Organizations and Teams -->
+        <div class="flex p-px lg:col-span-2">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-blue-500/20 to-purple-500/20">
+              <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Organizations and Teams</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Centralized Management</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Organize your projects across multiple teams and departments with centralized management and billing.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role-Based Access Control -->
+        <div class="flex p-px lg:col-span-2">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-purple-500/20 to-pink-500/20">
+              <svg class="mb-4 h-24 w-24 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Role-Based Access Control</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Fine-grained Permissions</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Control who can access, deploy, and manage your live updates with enterprise-grade permissions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enterprise Billing -->
+        <div class="flex p-px lg:col-span-2">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-green-500/20 to-blue-500/20">
+              <svg class="mb-4 h-24 w-24 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Enterprise Billing</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Flexible Payment Terms</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Consolidated invoicing, purchase orders, and flexible payment terms to meet your procurement requirements.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SSO + 2FA -->
+        <div class="flex p-px lg:col-span-3">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-orange-500/20 to-red-500/20">
+              <svg class="mb-4 h-24 w-24 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">SSO + 2FA</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Enterprise Authentication</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Integrate with your identity provider and enforce multi-factor authentication across your organization.
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/plugin/cloud-mode/authentication')}
+                  class="ml-2 text-orange-400 hover:text-orange-300 underline"
+                >
+                  Learn more
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Open Source -->
+        <div class="flex p-px lg:col-span-3">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-[#44BCFF]/20 via-[#FF44EC]/20 to-[#FF675E]/20">
+              <svg class="mb-4 h-24 w-24 text-[#44BCFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Open Source</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Transparency & Security</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Our Live Update SDK is open source, providing transparency and community-driven development.
+                <a
+                  href="https://github.com/cap-go/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="ml-2 text-[#44BCFF] hover:text-blue-300 underline"
+                >
+                  View source
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scalability Section -->
+  <section class="relative bg-gray-800 py-16 sm:py-20 overflow-hidden">
+    <!-- Enhanced Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 30px 30px;"></div>
+    </div>
+    
+    <!-- Dynamic Floating Elements -->
+    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 1.5s;"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-8">
+          <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Global Infrastructure
+        </div>
+        
+        <h2 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl mb-6">
+          <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+            Global infrastructure
+          </span>
+          <br />
+          <span class="text-white">that grows with you</span>
+        </h2>
+        
+        <p class="mt-6 text-lg leading-relaxed text-gray-300 max-w-3xl mx-auto">
+          Powered by serverless edge computing and distributed databases across 300+ cities and 13,000+ networks for ultra-fast global delivery
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="group relative">
+          <div class="absolute inset-0 bg-linear-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
+            <div class="text-6xl font-bold mb-4">
+              <span class="bg-linear-to-r from-[#44BCFF] to-[#FF44EC] bg-clip-text text-transparent">300+</span>
+            </div>
+            <div class="text-gray-300">Cities worldwide<br />for ultra-fast delivery</div>
+          </div>
+        </div>
+        <div class="group relative">
+          <div class="absolute inset-0 bg-linear-to-br from-green-500/20 via-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
+            <div class="text-6xl font-bold mb-4">
+              <span class="bg-linear-to-r from-[#00AA5E] to-[#44BCFF] bg-clip-text text-transparent">13,000+</span>
+            </div>
+            <div class="text-gray-300">Network connections<br />direct peering worldwide</div>
+          </div>
+        </div>
+        <div class="group relative">
+          <div class="absolute inset-0 bg-linear-to-br from-yellow-500/20 via-orange-500/20 to-red-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
+            <div class="text-6xl font-bold mb-4">
+              <span class="bg-linear-to-r from-[#FF675E] to-[#FF44EC] bg-clip-text text-transparent">50ms</span>
+            </div>
+            <div class="text-gray-300">From 95% of users<br />ultra-low latency</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & Compliance Section -->
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-base/7 font-semibold text-blue-400">Security & Compliance</h2>
+      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
+        Enterprise-grade security you can trust
+      </p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">Industry-leading security and compliance features that meet the highest enterprise standards</p>
+      
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
+        <!-- SOC 2 Compliance -->
+        <div class="flex p-px">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-blue-600/20 to-indigo-600/20">
+              <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">SOC 2 Compliance</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Type II Certified</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                SOC 2 Type II certified infrastructure ensuring the highest security and privacy standards
+                <a
+                  href="https://trust.capgo.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="ml-2 text-blue-400 hover:text-blue-300 underline"
+                >
+                  Trust center
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zero-Trust Security -->
+        <div class="flex p-px">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-purple-500/20 to-pink-500/20">
+              <svg class="mb-4 h-24 w-24 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Zero-Trust Security</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Signed & Verified</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Every Live Update is signed and verified, ensuring integrity and authenticity of your deployments
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multi-Factor Authentication -->
+        <div class="flex p-px">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-green-500/20 to-cyan-500/20">
+              <svg class="mb-4 h-24 w-24 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Multi-Factor Authentication</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Enterprise Identity</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Mandatory MFA and integration with enterprise identity providers for secure access control
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise Support Section -->
+  <section class="bg-gray-800 py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-base/7 font-semibold text-blue-400">Enterprise Support</h2>
+      <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
+        First-class support when you need it
+      </p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">Dedicated support channels and SLA guarantees for your peace of mind</p>
+      
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
+        <!-- Priority Support -->
+        <div class="flex p-px">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-orange-500/20 to-red-500/20">
+              <svg class="mb-4 h-24 w-24 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Priority Support</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Guaranteed Response</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Fast-track support with guaranteed response times and priority escalation for critical issues
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dedicated Support Channels -->
+        <div class="flex p-px">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-blue-500/20 to-cyan-500/20">
+              <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Dedicated Channels</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Direct Engineering Access</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Direct access to our engineering team through dedicated Slack channels and phone support
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service Level Agreement -->
+        <div class="flex p-px">
+          <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
+            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-indigo-500/20 to-purple-500/20">
+              <svg class="mb-4 h-24 w-24 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              <h3 class="text-xl font-bold text-white">Service Level Agreement</h3>
+            </div>
+            <div class="p-10">
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">Contractual Guarantees</p>
+              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+                Contractual SLA guarantees for uptime, response times, and resolution commitments
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'sla')}
+                  class="ml-2 text-indigo-400 hover:text-indigo-300 underline"
+                >
+                  View SLA
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <Testimonials />
+
+  <!-- Final CTA Section -->
+  <section class="relative bg-gray-900 py-16 sm:py-20">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="text-center">
+        <div class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-8">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          Ready to Scale
+        </div>
+        
+        <h2 class="text-4xl font-bold text-white sm:text-5xl lg:text-6xl mb-6">
+          <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+            Ready to deliver
+          </span>
+          <br />
+          <span class="text-white">updates at scale?</span>
+        </h2>
+        
+        <p class="mt-6 text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+          Join leading enterprises who trust Capgo to deliver secure, scalable live updates to millions of users worldwide.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div class="group relative">
+            <div class="absolute -inset-1 bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-200"></div>
+            <a
+              href="https://cal.com/team/capgo/demo"
+              target="_blank"
+              class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
+            >
+              Request a Demo
+              <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+          
+          <a
+            href="mailto:enterprise@capgo.app"
+            class="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-transparent px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-gray-800 hover:border-gray-200 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
+          >
+            Contact Sales
+          </a>
+        </div>
+        
+        <p class="mt-6 text-sm text-gray-400">
+          Get started with a personalized demo today. No commitment required.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  /* Reuse animations from index.astro */
+  .teleport-line-animation {
+    left: -100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.1) 10%, rgba(56, 189, 248, 0.3) 50%, rgba(56, 189, 248, 0.1) 90%, transparent 100%);
+    animation: teleport-line 5s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+  }
+
+  @keyframes teleport-line {
+    0% {
+      transform: translateX(0) scaleX(0.1);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateX(200%) scaleX(1);
+      opacity: 0;
+    }
+  }
+
+  .portal-glow-animation {
+    background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0.05) 40%, transparent 70%);
+    filter: blur(20px);
+    animation: portal-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes portal-pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: translateY(-50%) scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translateY(-50%) scale(1.1);
+    }
+  }
+
+  .data-stream-animation {
+    top: -100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(56, 189, 248, 0.1) 10%, rgba(56, 189, 248, 0.3) 50%, rgba(56, 189, 248, 0.1) 90%, transparent 100%);
+    animation: data-stream 8s linear infinite;
+  }
+
+  @keyframes data-stream {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(200%);
+      opacity: 0;
+    }
+  }
+</style>
