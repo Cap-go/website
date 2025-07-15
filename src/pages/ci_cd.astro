@@ -15,24 +15,6 @@ const pageDescription = 'Seamlessly integrate Capgo live updates into your CI/CD
       <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
       <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
       
-      <!-- Animated CI/CD Pipeline Lines -->
-      <div class="absolute inset-0 overflow-hidden">
-        {
-          Array.from({ length: 8 }).map((_, i) => (
-            <div
-              class="pipeline-flow absolute h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30"
-              style={{
-                top: `${20 + i * 10}%`,
-                left: `-50%`,
-                width: '200%',
-                animationDelay: `${i * 0.5}s`,
-                animation: 'pipeline-flow 4s ease-in-out infinite',
-              }}
-            />
-          ))
-        }
-      </div>
-      
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <!-- Badge -->
@@ -71,10 +53,10 @@ const pageDescription = 'Seamlessly integrate Capgo live updates into your CI/CD
             <div class="group relative">
               <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
               <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
                 class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
               >
-                Fix This Problem Now - Free Trial
+                Fix This Problem Now
                 <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                 </svg>
@@ -255,28 +237,24 @@ const pageDescription = 'Seamlessly integrate Capgo live updates into your CI/CD
           </h3>
           <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
             <div class="flex items-center space-x-2">
-              <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="h-8 w-8 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
               </svg>
-              <span class="font-medium">GitHub Actions</span>
+              <span class="font-medium text-gray-700">GitHub Actions</span>
             </div>
             <div class="flex items-center space-x-2">
-              <svg class="h-8 w-8 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="h-8 w-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.423-.73-.423-.867 0L16.418 9.45H7.582L4.919 1.263c-.135-.423-.73-.423-.867 0L1.388 9.452.046 13.587c-.121.375.014.793.331 1.023L12 23.054l11.623-8.443c.318-.235.453-.653.332-1.024"/>
               </svg>
-              <span class="font-medium">GitLab CI</span>
+              <span class="font-medium text-gray-700">GitLab CI</span>
             </div>
             <div class="flex items-center space-x-2">
-              <svg class="h-8 w-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.314 16.19c-.447.067-.894.067-1.341 0-.633-.089-1.117-.424-1.453-.983-.336-.56-.504-1.273-.504-2.14v-1.072c0-.558-.156-.983-.468-1.275-.312-.292-.729-.438-1.251-.438h-.804v-1.564h.804c.522 0 .939-.146 1.251-.438.312-.292.468-.717.468-1.275V6.933c0-.867.168-1.58.504-2.14.336-.559.82-.894 1.453-.983.447-.067.894-.067 1.341 0 .633.089 1.117.424 1.453.983.336.56.504 1.273.504 2.14v1.072c0 .558.156.983.468 1.275.312.292.729.438 1.251.438h.804v1.564h-.804c-.522 0-.939.146-1.251.438-.312.292-.468.717-.468 1.275v1.072c0 .867-.168 1.58-.504 2.14-.336.559-.82.894-1.453.983z"/>
-              </svg>
-              <span class="font-medium">Jenkins</span>
+              <img src="/icons/jenkins.svg" alt="Jenkins" class="h-8 w-8" />
+              <span class="font-medium text-gray-700">Jenkins</span>
             </div>
             <div class="flex items-center space-x-2">
-              <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-6a6 6 0 100-12 6 6 0 000 12z"/>
-              </svg>
-              <span class="font-medium">CircleCI</span>
+              <img src="/icons/circleci.svg" alt="CircleCI" class="h-8 w-8" />
+              <span class="font-medium text-gray-700">CircleCI</span>
             </div>
             <div class="flex items-center space-x-2">
               <span class="font-medium text-gray-600">+ Any CI/CD platform</span>
@@ -351,7 +329,7 @@ const pageDescription = 'Seamlessly integrate Capgo live updates into your CI/CD
             <div class="group relative inline-flex">
               <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
               <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
                 class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
               >
                 Stop Losing Users - Fix This Now
@@ -985,10 +963,10 @@ capgo bundle upload \
             <div class="group relative">
               <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
               <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
                 class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
               >
-                Start Free Trial
+                Book CI/CD Setup
                 <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                 </svg>
@@ -1003,7 +981,7 @@ capgo bundle upload \
           </div>
           
           <p class="mt-6 text-sm text-gray-400">
-            No credit card required • 15-day free trial • Set up in minutes
+            One-time setup fee • Own your infrastructure • Expert configuration
           </p>
         </div>
       </div>
@@ -1017,17 +995,52 @@ capgo bundle upload \
     background-size: 20px 20px;
   }
 
-  @keyframes pipeline-flow {
+  @keyframes flow-right {
     0% {
-      transform: translateX(-100%);
+      transform: translateX(-20px);
       opacity: 0;
     }
-    50% {
+    20% {
+      opacity: 1;
+    }
+    80% {
       opacity: 1;
     }
     100% {
-      transform: translateX(100%);
+      transform: translateX(calc(100vw + 20px));
       opacity: 0;
     }
+  }
+
+  @keyframes pulse-gentle {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes bounce-subtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  .animate-flow-right {
+    animation: flow-right 6s linear infinite;
+  }
+
+  .animate-pulse-gentle {
+    animation: pulse-gentle 2s ease-in-out infinite;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s ease-in-out infinite;
   }
 </style>
