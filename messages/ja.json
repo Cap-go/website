@@ -672,7 +672,7 @@
   "instant_rollback": "インスタントロールバック",
   "instant_rollback_if_something_goes_wrong": "何か問題が発生した場合の即時ロールバック",
   "instant_updates": "インスタントアップデート",
-  "instant_updates_for_capacitor": "キャパシターの即時更新",
+  "instant_updates_for_capacitor": "CapacitorJSアプリのための即時更新",
   "instant_updates_for_capacitor_apps": "CapacitorJSアプリのための即時更新",
   "instant_updates_for_capacitor_apps_description": "CapacitorJSアプリに即座に更新、修正、機能をプッシュし、アプリストアの遅延を回避します。Capgoでシームレスな統合、エンドツーエンドの暗号化、リアルタイムの更新を体験してください。",
   "instant_updates_to_all_users": "すべてのユーザーに即時更新",

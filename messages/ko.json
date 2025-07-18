@@ -672,7 +672,7 @@
   "instant_rollback": "즉시 롤백",
   "instant_rollback_if_something_goes_wrong": "문제가 발생하면 즉시 롤백",
   "instant_updates": "즉시 업데이트",
-  "instant_updates_for_capacitor": "Capacitor를 위한 즉시 업데이트",
+  "instant_updates_for_capacitor": "CapacitorJS 앱을 위한 즉시 업데이트",
   "instant_updates_for_capacitor_apps": "CapacitorJS 앱을 위한 즉시 업데이트",
   "instant_updates_for_capacitor_apps_description": "앱 스토어의 지연 없이 CapacitorJS 앱에 즉시 업데이트, 수정 사항 및 기능을 푸시하세요. Capgo를 사용하여 원활한 통합, 종단 간 암호화 및 실시간 업데이트를 경험해 보세요.",
   "instant_updates_to_all_users": "모든 사용자에게 즉시 업데이트",

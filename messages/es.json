@@ -672,7 +672,7 @@
   "instant_rollback": "Reversión Instantánea",
   "instant_rollback_if_something_goes_wrong": "Reversión instantánea si algo sale mal",
   "instant_updates": "Actualizaciones instantáneas",
-  "instant_updates_for_capacitor": "Actualizaciones instantáneas para Capacitor",
+  "instant_updates_for_capacitor": "Actualizaciones instantáneas para aplicaciones CapacitorJS",
   "instant_updates_for_capacitor_apps": "Actualizaciones Instantáneas para Aplicaciones CapacitorJS",
   "instant_updates_for_capacitor_apps_description": "Envía actualizaciones, correcciones y características instantáneamente a tus aplicaciones CapacitorJS sin demoras en la tienda de aplicaciones. Experimenta una integración perfecta, cifrado de extremo a extremo y actualizaciones en tiempo real con Capgo.",
   "instant_updates_to_all_users": "Actualizaciones instantáneas para todos los usuarios",
