@@ -40,7 +40,7 @@ Including API keys directly in source code can lead to exposure through decompil
 
 For iOS, consider using **XCConfig files** to separate configurations from your codebase. On Android, you can manage keys using `gradle.properties`:
 
-```kotlin
+```gradle
 # Store in ~/.gradle/gradle.properties
 API_KEY=your_key_here
 
