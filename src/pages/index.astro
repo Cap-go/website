@@ -528,29 +528,38 @@ if (tmp.ok) {
 
                 <!-- Lazy loaded video (initially hidden) -->
                 <div id="video-container" class="relative mx-auto max-w-xs hidden">
-                  <video 
-                    id="capgo-demo-video"
-                    class="w-full h-auto rounded-2xl shadow-2xl border border-gray-200"
-                    muted 
-                    loop 
-                    playsinline
-                    preload="none"
-                  >
-                    <source src="/capgo_demo.mov" type="video/quicktime">
-                    <source src="/capgo_demo.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                  
-                  <!-- Play/Pause overlay button -->
-                  <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                    <button 
-                      class="bg-black/50 text-white rounded-full p-4 backdrop-blur-sm hover:bg-black/70 transition-colors duration-200"
-                      onclick="const video = this.parentElement.previousElementSibling; video.paused ? video.play() : video.pause();"
-                    >
-                      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                      </svg>
-                    </button>
+                  <!-- iPhone frame -->
+                  <div class="relative mx-auto w-64 h-[28rem] bg-gray-900 rounded-3xl shadow-2xl border-2 border-gray-800 overflow-hidden">
+                    <!-- Phone notch -->
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gray-800 rounded-b-2xl z-10"></div>
+                    
+                    <!-- Video screen area -->
+                    <div class="absolute inset-1 bg-black rounded-2xl overflow-hidden">
+                      <video 
+                        id="capgo-demo-video"
+                        class="w-full h-full object-cover"
+                        muted 
+                        loop 
+                        playsinline
+                        preload="none"
+                      >
+                        <source src="/capgo_demo.mov" type="video/quicktime">
+                        <source src="/capgo_demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    
+                    <!-- Play/Pause overlay button -->
+                    <div class="absolute inset-4 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-2xl">
+                      <button 
+                        class="bg-black/50 text-white rounded-full p-3 backdrop-blur-sm hover:bg-black/70 transition-colors duration-200"
+                        onclick="const video = this.parentElement.parentElement.querySelector('#capgo-demo-video'); video.paused ? video.play() : video.pause();"
+                      >
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
