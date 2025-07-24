@@ -482,44 +482,75 @@ if (tmp.ok) {
               </div>
             </div>
             <div class="order-1 lg:order-2">
-                             <!-- Mobile App Mockup -->
-               <div class="relative">
-                 <div class="mx-auto w-64 h-[28rem] bg-gray-900 rounded-3xl shadow-2xl border-8 border-gray-800 relative overflow-hidden">
-                  <!-- Phone notch -->
-                  <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-2xl"></div>
-                  
-                  <!-- Screen content -->
-                  <div class="pt-8 px-4 h-full bg-white rounded-2xl">
-                    <!-- App header -->
-                    <div class="flex items-center justify-between mb-6">
-                      <div class="w-8 h-8 bg-blue-500 rounded-lg"></div>
-                      <div class="text-gray-800 font-semibold">My App</div>
-                      <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
-                    </div>
+              <!-- Mobile App Demo Container -->
+              <div class="relative" id="demo-container">
+                <!-- Initial fake device placeholder -->
+                <div id="device-placeholder" class="relative mx-auto max-w-xs">
+                  <div class="mx-auto w-64 h-[28rem] bg-gray-900 rounded-3xl shadow-2xl border-8 border-gray-800 relative overflow-hidden">
+                    <!-- Phone notch -->
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-2xl"></div>
                     
-                    <!-- Update indicator -->
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
-                      <div class="flex items-center">
-                        <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500 mr-2"></div>
-                        <span class="text-green-700 text-sm font-medium">Updating in background...</span>
+                    <!-- Screen content -->
+                    <div class="pt-8 px-4 h-full bg-white rounded-2xl">
+                      <!-- App header -->
+                      <div class="flex items-center justify-between mb-6">
+                        <div class="w-8 h-8 bg-blue-500 rounded-lg"></div>
+                        <div class="text-gray-800 font-semibold">My App</div>
+                        <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+                      </div>
+                      
+                      <!-- Update indicator -->
+                      <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+                        <div class="flex items-center">
+                          <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500 mr-2"></div>
+                          <span class="text-green-700 text-sm font-medium">Updating in background...</span>
+                        </div>
+                      </div>
+                      
+                      <!-- App content -->
+                      <div class="space-y-4">
+                        <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                        <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                        <div class="h-24 bg-gray-100 rounded-lg"></div>
+                        <div class="h-4 bg-gray-200 rounded w-2/3"></div>
                       </div>
                     </div>
-                    
-                    <!-- App content -->
-                    <div class="space-y-4">
-                      <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-                      <div class="h-4 bg-gray-200 rounded w-1/2"></div>
-                      <div class="h-24 bg-gray-100 rounded-lg"></div>
-                      <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+                  </div>
+                  
+                  <!-- Update arrow -->
+                  <div class="absolute -left-8 top-1/2 transform -translate-y-1/2">
+                    <div class="bg-blue-500 text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap">
+                      Update v1.0.1
+                      <div class="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2 w-0 h-0 border-l-8 border-l-blue-500 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
                     </div>
                   </div>
                 </div>
-                
-                <!-- Update arrow -->
-                <div class="absolute -left-8 top-1/2 transform -translate-y-1/2">
-                  <div class="bg-blue-500 text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap">
-                    Update v1.0.1
-                    <div class="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2 w-0 h-0 border-l-8 border-l-blue-500 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
+
+                <!-- Lazy loaded video (initially hidden) -->
+                <div id="video-container" class="relative mx-auto max-w-xs hidden">
+                  <video 
+                    id="capgo-demo-video"
+                    class="w-full h-auto rounded-2xl shadow-2xl border border-gray-200"
+                    muted 
+                    loop 
+                    playsinline
+                    preload="none"
+                  >
+                    <source src="/capgo_demo.mov" type="video/quicktime">
+                    <source src="/capgo_demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  
+                  <!-- Play/Pause overlay button -->
+                  <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                    <button 
+                      class="bg-black/50 text-white rounded-full p-4 backdrop-blur-sm hover:bg-black/70 transition-colors duration-200"
+                      onclick="const video = this.parentElement.previousElementSibling; video.paused ? video.play() : video.pause();"
+                    >
+                      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1415,6 +1446,43 @@ if (tmp.ok) {
 </section>
   </div>
 </Layout>
+
+<script>
+  // Lazy load video and replace fake device when in view
+  document.addEventListener('DOMContentLoaded', function() {
+    const demoContainer = document.getElementById('demo-container');
+    const devicePlaceholder = document.getElementById('device-placeholder');
+    const videoContainer = document.getElementById('video-container');
+    const video = document.getElementById('capgo-demo-video') as HTMLVideoElement;
+
+    if (!demoContainer || !devicePlaceholder || !videoContainer || !video) return;
+
+    // Intersection Observer to detect when the demo section is in view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Start loading the video
+          video.load();
+          
+          // Once video can play, switch from device to video
+          video.addEventListener('canplay', function() {
+            devicePlaceholder.classList.add('hidden');
+            videoContainer.classList.remove('hidden');
+            video.play();
+          }, { once: true });
+
+          // Stop observing once loaded
+          observer.unobserve(demoContainer);
+        }
+      });
+    }, {
+      threshold: 0.3, // Trigger when 30% of the element is visible
+      rootMargin: '50px' // Start loading 50px before it comes into view
+    });
+
+    observer.observe(demoContainer);
+  });
+</script>
 
 <style is:global>
   /* Minimum required CSS for animations */
