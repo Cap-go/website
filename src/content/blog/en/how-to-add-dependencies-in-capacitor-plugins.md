@@ -119,7 +119,7 @@ Use the Capacitor CLI to kick off your plugin project. This includes setting up 
         
     -   For **Android**, verify your `build.gradle` contains:
         
-        ```gradle
+        ```kotlin
         android {
             compileSdkVersion 33
             defaultConfig {
@@ -336,7 +336,7 @@ Set up Android dependencies to ensure smooth native integration. Here's how to m
 
 Add the following configurations to your `build.gradle` file:
 
-```gradle
+```kotlin
 android {
     defaultConfig {
         minSdkVersion 22
@@ -354,7 +354,7 @@ dependencies {
 
 Define additional versions in the `buildscript` block:
 
-```gradle
+```kotlin
 buildscript {
     ext {
         androidxCoreVersion = '1.10.1'
@@ -369,7 +369,7 @@ Once dependencies are configured, make sure to set up the necessary repositories
 
 In your project-level `build.gradle`, include the required Maven repositories:
 
-```gradle
+```kotlin
 allprojects {
     repositories {
         google()
@@ -381,7 +381,7 @@ allprojects {
 
 If you're using custom or private Maven repositories, add credentials like this:
 
-```gradle
+```kotlin
 maven {
     url "https://maven.example.com/releases"
     credentials {
@@ -397,7 +397,7 @@ With repositories set up, address any dependency conflicts that may arise.
 
 To handle dependency conflicts, apply version resolutions in your `build.gradle`:
 
-```gradle
+```kotlin
 configurations.all {
     resolutionStrategy {
         force "org.jetbrains.kotlin:kotlin-stdlib:1.8.20"
@@ -416,7 +416,7 @@ Here are strategies for resolving common dependency issues:
 
 For instance, you can exclude conflicting modules like this:
 
-```gradle
+```kotlin
 dependencies {
     implementation('library:name:1.0.0') {
         exclude group: 'com.conflicting.dependency'
