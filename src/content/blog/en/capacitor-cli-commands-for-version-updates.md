@@ -169,7 +169,7 @@ For Android, open the project in Android Studio and follow these steps:
 -   **Update Gradle Configuration**  
     Open your `build.gradle` file and confirm these settings are correctly configured:
     
-    ```kotlin
+    ```gradle
     android {
         compileSdkVersion 33
         defaultConfig {
