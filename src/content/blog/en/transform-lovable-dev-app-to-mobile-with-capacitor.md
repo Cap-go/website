@@ -1,7 +1,7 @@
 ---
 slug: transform-lovable-dev-app-to-mobile-with-capacitor
 title: >-
-  2025 Transform Your Lovable.dev Next.js App into Native Mobile Apps with Capacitor
+  Transform Your Lovable.dev Next.js App into Native Mobile Apps with Capacitor
 description: >-
   Learn how to export your Lovable.dev project and transform it into native mobile apps using Capacitor. A complete step-by-step guide for 2025.
 author: Martin Donadieu

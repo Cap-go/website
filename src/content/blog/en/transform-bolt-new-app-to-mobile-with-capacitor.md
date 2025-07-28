@@ -1,7 +1,7 @@
 ---
 slug: transform-bolt-new-app-to-mobile-with-capacitor
 title: >-
-  2025 Transform Your Bolt.new Project into Native Mobile Apps with Capacitor
+  Transform Your Bolt.new Project into Native Mobile Apps with Capacitor
 description: >-
   Learn how to export your Bolt.new web application and transform it into native mobile apps using Capacitor. Complete guide for React, Vue, and other frameworks.
 author: Martin Donadieu
