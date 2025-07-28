@@ -32,6 +32,22 @@ Whether your Bolt.new project uses React, Vue, or another supported framework, t
 - **Offline Capabilities**: Work offline with native storage solutions
 - **Push Notifications**: Engage users with native push notification support
 
+### Why Capacitor Over Expo?
+
+If you're considering mobile development options, Capacitor offers significant advantages over Expo, especially for web-first development:
+
+- **One Codebase, Three Platforms**: Your existing React, Next.js, or Vue.js website becomes iOS, Android, AND web app with zero conversion needed
+- **No Rebuilding Required**: Take your Bolt.new project as-is - no need to rewrite for a different framework like Expo requires
+- **True Web-First Approach**: Unlike Expo which is mobile-first and clunky on web, Capacitor treats web as a first-class citizen
+- **Seamless Development**: Continue using your familiar web development tools and workflows
+- **Framework Freedom**: Works with any web framework (React, Vue, Svelte, Next.js, etc.) - not locked into React Native like Expo
+
+**The Key Difference:**
+- **With Capacitor**: Build your website → Add mobile support (same codebase)
+- **With Expo**: Build for mobile → Try to make web work (different approach, often clunky)
+
+Since your Bolt.new project is already a web application, Capacitor lets you extend it to mobile without changing a single line of code. Expo would require rebuilding your entire project for their framework.
+
 ## Step 1: Export Your Bolt.new Project
 
 First, let's get your project code from Bolt.new to your local development environment.
