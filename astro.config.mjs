@@ -137,6 +137,7 @@ export default defineConfig({
           label: 'Plugins',
           collapsed: true,
           items: [
+   
             {
               label: 'Updater',
               collapsed: true,
@@ -203,6 +204,14 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: 'Browse All Plugins',
+              link: '/plugins/',
+            },
+            {
+              label: '🚀 Need a Plugin?',
+              link: '/consulting/',
+            },
           ],
         },
         {
@@ -221,6 +230,10 @@ export default defineConfig({
         {
           label: 'How to get support',
           link: '/docs/getting-help/',
+        },
+        {
+          label: '💬 Consult us',
+          link: '/consulting/',
         },
       ],
     }),
