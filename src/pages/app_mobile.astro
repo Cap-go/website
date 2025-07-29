@@ -1,6 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 const title = [Astro.locals.runtimeConfig.public.brand, m.Capacitor_Sanbox_App({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.Capacitor_Sanbox_App_description({}, { locale: Astro.locals.locale })
@@ -16,67 +17,510 @@ const brand = config.public.brand
 ---
 
 <Layout content={content}>
-  <section class="font-fira-sans mx-4 lg:max-w-[85%] xl:mx-auto">
-    <div class="flex justify-between md:my-20">
-      <div class="w-full md:w-1/2">
-        <div class="pr-4">
-          <h1 class="text-[2.504rem] font-bold">{m.$1_app({}, { locale: Astro.locals.locale }).replace('$1', brand)}</h1>
-          <p class="mt-8 text-lg text-gray-300">
-            {m.run_your_projects_on_your_own_device_faster_than_ever_and_share_those_projects_across_your_whole_team({}, { locale: Astro.locals.locale })}
+  <div>
+    <div class="relative">
+      <!-- Animated background elements -->
+      <div class="pointer-events-none absolute inset-0 overflow-hidden">
+        {
+          Array.from({ length: 15 }).map((_, i) => (
+            <div
+              class="mobile-wave-animation absolute w-full"
+              style={{
+                top: `${i * 7}%`,
+                animationDelay: `${Math.random() * 4}s`,
+                height: `${Math.random() * 2 + 1}px`,
+                opacity: Math.random() * 0.3 + 0.2,
+              }}
+            />
+          ))
+        }
+      </div>
+
+      <!-- Hero Section -->
+      <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="relative z-10 mx-auto max-w-4xl text-center">
+            <p class="font-pj inline-flex rounded-full border border-gray-200 bg-gray-900 px-4 py-2 text-base">
+              <svg class="mr-2 h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+              {m.now_available_on_mobile({}, { locale: Astro.locals.locale })}
+            </p>
+            <h1 class="font-pj mt-5 text-3xl leading-tight font-bold sm:text-4xl sm:leading-tight lg:leading-tight xl:text-5xl">
+              <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+                {m.manage_your_releases({}, { locale: Astro.locals.locale })}
+              </span>
+              <br />
+              {m.on_the_go({}, { locale: Astro.locals.locale })}
+            </h1>
+            <h2 class="font-inter mx-auto mt-6 max-w-2xl text-base leading-7 text-gray-400">
+              {m.test_deploy_and_monitor_your_capacitor_apps({}, { locale: Astro.locals.locale })}
+              <br />
+              <span class="font-bold">{m.directly_from_your_phone({}, { locale: Astro.locals.locale })}</span>
+            </h2>
+            
+            <!-- Download buttons -->
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a href="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank" class="transform hover:scale-105 transition-transform duration-200">
+                <img src="/play-store-button.webp" class="h-14 w-auto sm:h-16" alt="Google Play Store download" />
+              </a>
+              <a href="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank" class="transform hover:scale-105 transition-transform duration-200">
+                <img src="/app-store-button.webp" class="h-14 w-auto sm:h-16" alt="Apple App Store download" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid Section -->
+      <section class="bg-gray-900 py-12 sm:py-16 lg:py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl">
+              {m.everything_you_need_in_your_pocket({}, { locale: Astro.locals.locale })}
+            </h2>
+            <p class="mt-4 text-lg text-gray-400">
+              {m.full_control_of_your_capacitor_apps_from_anywhere({}, { locale: Astro.locals.locale })}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Test Releases -->
+            <div class="group relative">
+              <div class="absolute inset-0 bg-blue-500/10 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 ring-1 ring-blue-500/30 mb-4">
+                  <svg class="h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">{m.test_releases_instantly({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-gray-400 text-sm">
+                  {m.install_and_test_any_version_directly({}, { locale: Astro.locals.locale })}
+                </p>
+              </div>
+            </div>
+
+            <!-- Manage Channels -->
+            <div class="group relative">
+              <div class="absolute inset-0 bg-green-500/10 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-green-500/20 hover:border-green-500/40 transition-all duration-300">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/20 ring-1 ring-green-500/30 mb-4">
+                  <svg class="h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">{m.manage_channels({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-gray-400 text-sm">
+                  {m.switch_between_development_staging_production({}, { locale: Astro.locals.locale })}
+                </p>
+              </div>
+            </div>
+
+            <!-- Deploy Updates -->
+            <div class="group relative">
+              <div class="absolute inset-0 bg-purple-500/10 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30 mb-4">
+                  <svg class="h-6 w-6 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">{m.deploy_with_confidence({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-gray-400 text-sm">
+                  {m.push_updates_to_production_from_anywhere({}, { locale: Astro.locals.locale })}
+                </p>
+              </div>
+            </div>
+
+            <!-- View Statistics -->
+            <div class="group relative">
+              <div class="absolute inset-0 bg-yellow-500/10 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/40 transition-all duration-300">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-500/20 ring-1 ring-yellow-500/30 mb-4">
+                  <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">{m.real_time_statistics({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-gray-400 text-sm">
+                  {m.monitor_downloads_active_users_success_rates({}, { locale: Astro.locals.locale })}
+                </p>
+              </div>
+            </div>
+
+            <!-- Team Collaboration -->
+            <div class="group relative">
+              <div class="absolute inset-0 bg-pink-500/10 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-pink-500/20 hover:border-pink-500/40 transition-all duration-300">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-pink-500/20 ring-1 ring-pink-500/30 mb-4">
+                  <svg class="h-6 w-6 text-pink-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">{m.team_collaboration({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-gray-400 text-sm">
+                  {m.share_test_builds_with_your_team({}, { locale: Astro.locals.locale })}
+                </p>
+              </div>
+            </div>
+
+            <!-- Instant Rollback -->
+            <div class="group relative">
+              <div class="absolute inset-0 bg-red-500/10 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-red-500/20 hover:border-red-500/40 transition-all duration-300">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/20 ring-1 ring-red-500/30 mb-4">
+                  <svg class="h-6 w-6 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">{m.instant_rollback({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-gray-400 text-sm">
+                  {m.revert_to_previous_version_with_one_tap({}, { locale: Astro.locals.locale })}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- How It Works Section -->
+    <section class="bg-gray-50 py-16 sm:py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center mb-16">
+          <h2 class="text-3xl leading-tight font-bold text-black sm:text-4xl xl:text-5xl">
+            {m.how_the_app_works({}, { locale: Astro.locals.locale })}
+          </h2>
+          <p class="mx-auto mt-4 max-w-lg text-base leading-relaxed text-gray-600">
+            {m.seamless_integration_with_your_capgo_account({}, { locale: Astro.locals.locale })}
           </p>
-          <p class="mt-10 mb-20 text-sm text-gray-300">{m.test_version_in_the_sandbox_app_manage_version_and_channel({}, { locale: Astro.locals.locale })}</p>
         </div>
-        <div class="flex items-center space-x-10">
-          <span class="flex items-center rounded-[1.125rem] bg-[#EAEAEA] px-4 py-1">
-            <svg class="text-pumpkinOrange-500 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 7H7V13H13V7Z"></path>
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M7 2C7 1.73478 7.10536 1.48043 7.29289 1.29289C7.48043 1.10536 7.73478 1 8 1C8.26522 1 8.51957 1.10536 8.70711 1.29289C8.89464 1.48043 9 1.73478 9 2V3H11V2C11 1.73478 11.1054 1.48043 11.2929 1.29289C11.4804 1.10536 11.7348 1 12 1C12.2652 1 12.5196 1.10536 12.7071 1.29289C12.8946 1.48043 13 1.73478 13 2V3H15C15.5304 3 16.0391 3.21071 16.4142 3.58579C16.7893 3.96086 17 4.46957 17 5V7H18C18.2652 7 18.5196 7.10536 18.7071 7.29289C18.8946 7.48043 19 7.73478 19 8C19 8.26522 18.8946 8.51957 18.7071 8.70711C18.5196 8.89464 18.2652 9 18 9H17V11H18C18.2652 11 18.5196 11.1054 18.7071 11.2929C18.8946 11.4804 19 11.7348 19 12C19 12.2652 18.8946 12.5196 18.7071 12.7071C18.5196 12.8946 18.2652 13 18 13H17V15C17 15.5304 16.7893 16.0391 16.4142 16.4142C16.0391 16.7893 15.5304 17 15 17H13V18C13 18.2652 12.8946 18.5196 12.7071 18.7071C12.5196 18.8946 12.2652 19 12 19C11.7348 19 11.4804 18.8946 11.2929 18.7071C11.1054 18.5196 11 18.2652 11 18V17H9V18C9 18.2652 8.89464 18.5196 8.70711 18.7071C8.51957 18.8946 8.26522 19 8 19C7.73478 19 7.48043 18.8946 7.29289 18.7071C7.10536 18.5196 7 18.2652 7 18V17H5C4.46957 17 3.96086 16.7893 3.58579 16.4142C3.21071 16.0391 3 15.5304 3 15V13H2C1.73478 13 1.48043 12.8946 1.29289 12.7071C1.10536 12.5196 1 12.2652 1 12C1 11.7348 1.10536 11.4804 1.29289 11.2929C1.48043 11.1054 1.73478 11 2 11H3V9H2C1.73478 9 1.48043 8.89464 1.29289 8.70711C1.10536 8.51957 1 8.26522 1 8C1 7.73478 1.10536 7.48043 1.29289 7.29289C1.48043 7.10536 1.73478 7 2 7H3V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H7V2ZM5 5H15V15H5V5Z"
-              ></path>
-            </svg>
-            <p class="pl-4 text-black">{m.speed({}, { locale: Astro.locals.locale })}</p>
-          </span>
-          <span class="flex items-center rounded-[1.125rem] bg-[#EAEAEA] px-4 py-1">
-            <svg class="text-pumpkinOrange-500 h-10" fill="currentColor" viewBox="0 0 16 18" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M0.166 3.999C3.06114 3.963 5.84481 2.87746 8 0.944C10.155 2.87782 12.9387 3.96373 15.834 4C15.944 4.65 16 5.32 16 6.001C16 11.226 12.66 15.671 8 17.318C3.34 15.67 0 11.225 0 6C0 5.318 0.0569999 4.65 0.166 3.999ZM11.707 7.707C11.8892 7.5184 11.99 7.2658 11.9877 7.0036C11.9854 6.7414 11.8802 6.49059 11.6948 6.30518C11.5094 6.11977 11.2586 6.0146 10.9964 6.01233C10.7342 6.01005 10.4816 6.11084 10.293 6.293L7 9.586L5.707 8.293C5.5184 8.11084 5.2658 8.01005 5.0036 8.01233C4.7414 8.0146 4.49059 8.11977 4.30518 8.30518C4.11977 8.49059 4.0146 8.7414 4.01233 9.0036C4.01005 9.2658 4.11084 9.5184 4.293 9.707L6.293 11.707C6.48053 11.8945 6.73484 11.9998 7 11.9998C7.26516 11.9998 7.51947 11.8945 7.707 11.707L11.707 7.707Z"
-              ></path>
-            </svg>
-            <p class="pl-4 text-black">{m.security({}, { locale: Astro.locals.locale })}</p>
-          </span>
-          <span class="flex items-center rounded-[1.125rem] bg-[#EAEAEA] px-4 py-1">
-            <svg class="text-pumpkinOrange-500 h-10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path
-                d="M256 352C293.2 352 319.2 334.5 334.4 318.1C343.3 308.4 358.5 307.7 368.3 316.7C378 325.7 378.6 340.9 369.6 350.6C347.7 374.5 309.7 400 256 400C202.3 400 164.3 374.5 142.4 350.6C133.4 340.9 133.1 325.7 143.7 316.7C153.5 307.7 168.7 308.4 177.6 318.1C192.8 334.5 218.8 352 256 352zM208.4 208C208.4 225.7 194 240 176.4 240C158.7 240 144.4 225.7 144.4 208C144.4 190.3 158.7 176 176.4 176C194 176 208.4 190.3 208.4 208zM304.4 208C304.4 190.3 318.7 176 336.4 176C354 176 368.4 190.3 368.4 208C368.4 225.7 354 240 336.4 240C318.7 240 304.4 225.7 304.4 208zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z"
-              ></path>
-            </svg>
-            <p class="pl-4 text-black">{m.simplicity({}, { locale: Astro.locals.locale })}</p>
-          </span>
-        </div>
-        <div class="mt-8 mb-16">
-          <p class="text-sm text-[#bfbfbf]">{m.start_building_rich_experiences_with_your_device_and_your_computer({}, { locale: Astro.locals.locale })}</p>
-        </div>
-        <div class="flex space-x-6">
-          <a href="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank">
-            <img src="/play-store-button.webp" height="4rem;" class="boder-2 h-11 w-auto rounded border border-white sm:h-16" alt="Apple store download link" />
-          </a>
-          <a href="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank">
-            <img src="/app-store-button.webp" height="4rem;" class="boder-2 h-11 w-auto rounded border border-white sm:h-16" alt="Apple store download link" />
-          </a>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div class="text-center">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 text-white font-bold text-xl mb-4">
+              1
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{m.connect_your_account({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-gray-600">
+              {m.login_with_your_capgo_credentials({}, { locale: Astro.locals.locale })}
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="text-center">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 text-white font-bold text-xl mb-4">
+              2
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{m.select_your_app({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-gray-600">
+              {m.choose_from_your_capgo_projects({}, { locale: Astro.locals.locale })}
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="text-center">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 text-white font-bold text-xl mb-4">
+              3
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{m.manage_on_the_go({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-gray-600">
+              {m.test_deploy_monitor_from_anywhere({}, { locale: Astro.locals.locale })}
+            </p>
+          </div>
         </div>
       </div>
-      <div class="hidden w-1/2 justify-end space-x-8 md:flex">
-        <div class="h-128 w-[18rem] rounded-3xl border-5 border-[#EAEAEA] bg-cover" style="background-image: url(/seeit.webp)">
-          <span class="mx-auto mt-2 flex h-3 w-20 items-center rounded-xl bg-[#d8d8d8]"></span>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="bg-gray-900 py-16 sm:py-20 lg:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl xl:text-5xl">
+            {m.perfect_for({}, { locale: Astro.locals.locale })}
+          </h2>
         </div>
-        <div class="h-128 w-[18rem] rounded-[2.5rem] border-5 border-[#EAEAEA] bg-cover" style="background-image: url(/seeit.webp)">
-          <span class="mx-auto flex h-3 w-36 items-center rounded-b-lg bg-[#d8d8d8]"></span>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- QA Teams -->
+          <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center mb-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 ring-1 ring-blue-500/30">
+                <svg class="h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="ml-4 text-2xl font-bold text-white">{m.qa_teams({}, { locale: Astro.locals.locale })}</h3>
+            </div>
+            <p class="text-gray-300 mb-4">
+              {m.test_different_versions_and_channels({}, { locale: Astro.locals.locale })}
+            </p>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.instant_version_switching({}, { locale: Astro.locals.locale })}
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.test_on_real_devices({}, { locale: Astro.locals.locale })}
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.report_issues_directly({}, { locale: Astro.locals.locale })}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Product Managers -->
+          <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center mb-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30">
+                <svg class="h-6 w-6 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 class="ml-4 text-2xl font-bold text-white">{m.product_managers({}, { locale: Astro.locals.locale })}</h3>
+            </div>
+            <p class="text-gray-300 mb-4">
+              {m.monitor_adoption_and_performance({}, { locale: Astro.locals.locale })}
+            </p>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.real_time_analytics({}, { locale: Astro.locals.locale })}
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.update_success_tracking({}, { locale: Astro.locals.locale })}
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.quick_decision_making({}, { locale: Astro.locals.locale })}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Developers -->
+          <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center mb-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/20 ring-1 ring-green-500/30">
+                <svg class="h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <h3 class="ml-4 text-2xl font-bold text-white">{m.developers({}, { locale: Astro.locals.locale })}</h3>
+            </div>
+            <p class="text-gray-300 mb-4">
+              {m.deploy_and_test_anywhere_anytime({}, { locale: Astro.locals.locale })}
+            </p>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.emergency_fixes_on_the_go({}, { locale: Astro.locals.locale })}
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.test_pr_builds({}, { locale: Astro.locals.locale })}
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.channel_management({}, { locale: Astro.locals.locale })}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support Teams -->
+          <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700">
+            <div class="flex items-center mb-6">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-500/20 ring-1 ring-yellow-500/30">
+                <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+              </div>
+              <h3 class="ml-4 text-2xl font-bold text-white">{m.support_teams({}, { locale: Astro.locals.locale })}</h3>
+            </div>
+            <p class="text-gray-300 mb-4">
+              {m.help_customers_with_app_issues({}, { locale: Astro.locals.locale })}
+            </p>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.diagnose_version_issues({}, { locale: Astro.locals.locale })}
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.guide_rollback_process({}, { locale: Astro.locals.locale })}
+              </li>
+              <li class="flex items-start">
+                <svg class="h-5 w-5 text-green-400 mr-2 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                {m.verify_fixes_instantly({}, { locale: Astro.locals.locale })}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile App Preview -->
+    <section class="bg-gray-50 py-16 sm:py-20 lg:py-28 overflow-hidden">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl leading-tight font-bold text-gray-900 sm:text-4xl xl:text-5xl mb-6">
+              {m.beautiful_native_experience({}, { locale: Astro.locals.locale })}
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+              {m.designed_for_mobile_first({}, { locale: Astro.locals.locale })}
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 mt-0.5">
+                  <svg class="h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-gray-800 font-medium">{m.lightning_fast({}, { locale: Astro.locals.locale })}</p>
+                  <p class="text-gray-500 text-sm">{m.native_performance_smooth_experience({}, { locale: Astro.locals.locale })}</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-green-100 mt-0.5">
+                  <svg class="h-5 w-5 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-gray-800 font-medium">{m.offline_support({}, { locale: Astro.locals.locale })}</p>
+                  <p class="text-gray-500 text-sm">{m.work_without_internet_connection({}, { locale: Astro.locals.locale })}</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100 mt-0.5">
+                  <svg class="h-5 w-5 text-purple-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-gray-800 font-medium">{m.push_notifications({}, { locale: Astro.locals.locale })}</p>
+                  <p class="text-gray-500 text-sm">{m.get_notified_about_updates({}, { locale: Astro.locals.locale })}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative">
+            <!-- Phone mockups -->
+            <div class="flex justify-center gap-4 lg:gap-8">
+              <div class="relative w-60 lg:w-72 h-[26rem] lg:h-[32rem] bg-gray-900 rounded-[3rem] shadow-2xl border-[10px] border-gray-800 overflow-hidden transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-2xl"></div>
+                <div class="h-full bg-white">
+                  <img src="/seeit.webp" class="w-full h-full object-cover" alt="Capgo mobile app screen" />
+                </div>
+              </div>
+              <div class="relative w-60 lg:w-72 h-[26rem] lg:h-[32rem] bg-gray-900 rounded-[3rem] shadow-2xl border-[10px] border-gray-800 overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-2xl"></div>
+                <div class="h-full bg-white">
+                  <img src="/seeit.webp" class="w-full h-full object-cover" alt="Capgo mobile app screen" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <div class="relative bg-gray-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-12 shadow-xl sm:px-12 sm:py-24">
+          <div aria-hidden="true" class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
+            <svg class="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360">
+              <path class="text-white text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"></path>
+              <path class="text-white text-opacity-20" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"></path>
+            </svg>
+          </div>
+          <div class="relative text-center">
+            <h2 class="text-3xl tracking-tight text-white sm:text-4xl xl:text-5xl">
+              {m.ready_to_go_mobile({}, { locale: Astro.locals.locale })}
+            </h2>
+            <p class="mx-auto mt-6 max-w-3xl text-xl text-white opacity-90">
+              {m.download_the_app_and_take_control({}, { locale: Astro.locals.locale })}
+            </p>
+            
+            <div class="bg-black/20 backdrop-blur-sm rounded-lg px-6 py-4 mt-4 inline-block">
+              <p class="text-base text-white">
+                {m.requires_capgo_account({}, { locale: Astro.locals.locale })}.
+                <a href={getRelativeLocaleUrl(Astro.locals.locale, 'register')} class="ml-1 text-white font-bold underline hover:text-blue-200 transition-colors">
+                  {m.sign_up_for_free({}, { locale: Astro.locals.locale })}
+                </a>
+              </p>
+            </div>
+            <div class="mt-10 mb-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a href="https://play.google.com/store/apps/details?id=ee.forgr.capacitor_go" target="_blank" class="transform hover:scale-105 transition-transform duration-200">
+                <img src="/play-store-button.webp" class="h-14 w-auto sm:h-16" alt="Google Play Store download" />
+              </a>
+              <a href="https://apps.apple.com/pt/app/capgo/id1602316563" target="_blank" class="transform hover:scale-105 transition-transform duration-200">
+                <img src="/app-store-button.webp" class="h-14 w-auto sm:h-16" alt="Apple App Store download" />
+              </a>
+            </div>
+            
+
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </Layout>
+
+<style is:global>
+  /* Mobile wave animation */
+  .mobile-wave-animation {
+    left: -100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(68, 188, 255, 0.1) 10%, rgba(255, 68, 236, 0.1) 50%, rgba(255, 103, 94, 0.1) 90%, transparent 100%);
+    animation: mobile-wave 6s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+  }
+
+  @keyframes mobile-wave {
+    0% {
+      transform: translateX(0) scaleX(0.1);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateX(200%) scaleX(1);
+      opacity: 0;
+    }
+  }
+</style>
