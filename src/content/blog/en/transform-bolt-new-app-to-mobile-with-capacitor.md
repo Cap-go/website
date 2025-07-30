@@ -48,30 +48,80 @@ If you're considering mobile development options, Capacitor offers significant a
 
 Since your Bolt.new project is already a web application, Capacitor lets you extend it to mobile without changing a single line of code. Expo would require rebuilding your entire project for their framework.
 
-## Step 1: Export Your Bolt.new Project
+## Step 1: Set Up Your Development Environment
 
-First, let's get your project code from Bolt.new to your local development environment.
+### Get Cursor - Your AI-Powered Code Editor
 
-### Downloading Your Project
+To work efficiently with your Bolt.new project, we'll use [Cursor](https://cursor.sh/), an intelligent code editor that simplifies development:
 
-1. Open your Bolt.new project in the browser
-2. Look for the **Download** or **Export** option in the Bolt interface
+1. Head to [cursor.sh](https://cursor.sh/) and grab the installer for your OS
+2. Run through the installation process
+3. Launch Cursor once it's ready
+
+![Start Cursor](/start_in_cursor.webp)
+
+### Configure Cursor for Maximum Productivity
+
+Getting the most out of Cursor requires some initial setup:
+
+1. **Consider Getting Cursor Pro** - The free version works, but Pro ($20/month) unlocks:
+   - Unlimited AI assistance
+   - Premium models (GPT-4, Claude)
+   - Instant responses
+   - Premium support
+
+2. **Access Settings** with `Command+,` (Mac) or `Ctrl+,` (Windows)
+
+![Cursor Settings](/cursor_settings.webp)
+
+3. **Activate AI Features** - Ensure AI assistance is turned on:
+
+![Allow Models](/allow_models.webp)
+
+4. **Pick Your AI Model** - We recommend Claude or GPT-4:
+
+![Select Cursor Model](/select_cursor_model.webp)
+
+5. **Enable Command Running** - Let Cursor execute commands automatically:
+
+![Allow Run Commands](/allow_run_commands.webp)
+
+## Step 2: Export Your Bolt.new Project
+
+Now let's bring your Bolt.new project into Cursor.
+
+### Download Your Project
+
+1. Navigate to your Bolt.new project in your browser
+2. Find the **Download** or **Export** button in Bolt's interface
 
 ![Bolt.new download button](/bolt-download-button.webp)
 
-3. Click **Download ZIP** to get your complete project files
-4. Extract the ZIP file to your development directory
+3. Download the ZIP file containing your project
+4. Extract it to a folder on your computer
 
 ![Bolt.new project files](/bolt-project-files.webp)
 
-### Alternative: Git Repository Export
+### Open in Cursor
 
-If your Bolt.new project is connected to a Git repository:
+Once extracted, open the project in Cursor:
 
-```shell
-git clone https://github.com/yourusername/your-bolt-project.git
-cd your-bolt-project
-```
+1. Use `File > Open Folder` in Cursor
+2. Select your extracted Bolt.new project folder
+3. Cursor will load your project
+
+![Open in Cursor](/open_in_cursor.webp)
+
+### Alternative: Clone from GitHub
+
+If you've connected Bolt.new to GitHub:
+
+1. Press `Shift+Command+P` (Mac) or `Shift+Ctrl+P` (Windows)
+2. Search for "Git: Clone"
+3. Enter your repository URL
+4. Pick a location to save it
+
+![Clone in Cursor](/clone_in_cursor.webp)
 
 ## Step 2: Identify Your Project Framework
 
@@ -90,18 +140,55 @@ Common Bolt.new project types:
 - **Next.js**: Full-stack React apps
 - **Vanilla JS**: Plain JavaScript apps
 
-## Step 3: Set Up Your Development Environment
+## Step 3: Install Development Tools
 
-Navigate to your project directory and install dependencies:
+### Option A: Let Cursor AI Handle Everything
 
+1. Press `Command+K` (Mac) or `Ctrl+K` (Windows) in Cursor
+2. Type this request:
+   ```
+   Install all necessary development tools including Node.js, then install project dependencies and start the dev server
+   ```
+
+Cursor AI will automatically:
+- Install Node.js and npm if needed
+- Set up Homebrew on macOS
+- Install all project dependencies
+- Launch your development server
+
+![Install Homebrew](/install_brew.webp)
+
+### Option B: Manual Installation Process
+
+If you prefer manual control or the AI approach encounters issues:
+
+**First, open Cursor's terminal** with `Shift+Command+T` (Mac) or `Shift+Ctrl+T` (Windows)
+
+**For macOS users:**
+```shell
+# Get Homebrew package manager
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Node.js via Homebrew
+brew install node
+
+# Move to your project folder
+cd your-bolt-project
+
+# Install project packages
+npm install
+
+# Launch development server
+npm run dev
+```
+
+**For Windows users:**
+1. Download Node.js installer from [nodejs.org](https://nodejs.org/)
+2. Complete the installation wizard
+3. In Cursor's terminal:
 ```shell
 cd your-bolt-project
 npm install
-```
-
-Start the development server to verify everything works:
-
-```shell
 npm run dev
 ```
 
@@ -111,12 +198,22 @@ Your Bolt.new app should now be running (typically at `http://localhost:5173` fo
 
 ## Step 4: Configure Build for Mobile
 
-The configuration depends on your project framework:
+Your configuration will vary based on your project framework.
 
-### For React + Vite Projects
+### Option A: Automatic Configuration with Cursor AI
 
-Update your `vite.config.js`:
+Ask Cursor AI to handle the configuration:
+```
+Configure my Bolt.new project for mobile deployment with proper build settings
+```
 
+Cursor will detect your framework and apply the right configuration.
+
+### Option B: Manual Configuration by Framework
+
+**For React + Vite Projects:**
+
+Edit `vite.config.js`:
 ```javascript
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -136,10 +233,9 @@ export default defineConfig({
 })
 ```
 
-### For Vue + Vite Projects
+**For Vue + Vite Projects:**
 
-Update your `vite.config.js`:
-
+Modify `vite.config.js`:
 ```javascript
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -186,60 +282,76 @@ module.exports = nextConfig
 
 ## Step 5: Build Your Project
 
-Build your Bolt.new project for production:
+Time to create the production build of your Bolt.new app.
 
-### For Vite Projects (React/Vue/Svelte)
+### Option A: Build with Cursor AI
 
+Simply ask Cursor:
+```
+Build my Bolt.new project for production deployment
+```
+
+Cursor will run the appropriate build command based on your framework.
+
+### Option B: Build Manually
+
+**For Vite-based Projects (React/Vue/Svelte):**
 ```shell
 npm run build
 ```
 
 ![Bolt.new Vite build success](/bolt-vite-build.webp)
 
-### For Next.js Projects
-
+**For Next.js Applications:**
 ```shell
 npm run static
 ```
 
-### Verify Build Output
+### Confirm Build Success
 
-Check that your build created the appropriate output directory:
-- Vite projects: `dist` folder
-- Next.js projects: `out` folder
+Ensure your build generated the correct output:
+- **Vite projects**: Look for a `dist` directory
+- **Next.js projects**: Check for an `out` directory
 
 ![Bolt.new build output](/bolt-build-output.webp)
 
 ## Step 6: Add Capacitor to Your Bolt.new Project
 
-Now let's transform your web app into a native mobile app.
+Let's transform your web application into native mobile apps.
 
-### Install Capacitor CLI
+### Option A: Quick Setup with Cursor AI
 
+Press `Command+K` (Mac) or `Ctrl+K` (Windows) and request:
+```
+Add Capacitor to my project and set up iOS and Android platforms
+```
+
+Cursor AI will handle the entire setup process.
+
+### Option B: Step-by-Step Manual Setup
+
+**Install Capacitor's command-line tools:**
 ```shell
 npm install -D @capacitor/cli
 ```
 
-### Initialize Capacitor
-
+**Initialize your Capacitor project:**
 ```shell
 npx cap init
 ```
 
 ![Capacitor initialization Bolt](/capacitor-init-bolt.webp)
 
-When prompted:
-- **App name**: Use your Bolt.new project name
-- **Bundle ID**: Use format like `com.yourcompany.yourapp`
+You'll be prompted for:
+- **App name**: Your Bolt.new project name
+- **Bundle ID**: Format like `com.yourcompany.yourapp`
 
-### Install Core Capacitor Packages
-
+**Continue with manual setup - install essential packages:**
 ```shell
 npm install @capacitor/core @capacitor/ios @capacitor/android
 ```
 
-### Add Native Platforms
-
+**Add mobile platform support:**
 ```shell
 npx cap add ios
 npx cap add android
@@ -249,9 +361,18 @@ npx cap add android
 
 ## Step 7: Configure Capacitor
 
-Update `capacitor.config.ts` based on your build output:
+Time to configure Capacitor for your specific framework.
 
-### For Vite Projects
+### Option A: Auto-Configuration with Cursor
+
+Request Cursor's help:
+```
+Configure capacitor.config.ts for my Bolt.new project build output
+```
+
+### Option B: Manual Configuration
+
+**For Vite-Based Applications:**
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -269,7 +390,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-### For Next.js Projects
+**For Next.js Applications:**
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -289,8 +410,18 @@ export default config;
 
 ## Step 8: Build and Sync
 
-Build your project and sync with Capacitor:
+Prepare your app for mobile deployment.
 
+### Option A: Using Cursor AI
+
+Tell Cursor:
+```
+Build my project and sync it with Capacitor for mobile deployment
+```
+
+### Option B: Manual Process
+
+Execute these commands in sequence:
 ```shell
 npm run build
 npx cap sync
@@ -300,16 +431,30 @@ npx cap sync
 
 ## Step 9: Open Native IDEs
 
-### For iOS Development
+Access the native development environments for your app.
 
+### iOS Development
+
+**Option A: Via Cursor AI**
+```
+Open my iOS project in Xcode
+```
+
+**Option B: Terminal Command**
 ```shell
 npx cap open ios
 ```
 
 ![Xcode opening Bolt project](/xcode-bolt-project.webp)
 
-### For Android Development
+### Android Development
 
+**Option A: Via Cursor AI**
+```
+Open my Android project in Android Studio
+```
+
+**Option B: Terminal Command**
 ```shell
 npx cap open android
 ```
@@ -335,19 +480,30 @@ npx cap open android
 
 ## Step 11: Enable Live Reload (Development)
 
-For faster development iterations:
+Speed up your development workflow with hot reloading.
 
-1. Find your local IP address:
+### Option A: Automatic Setup with Cursor
+
+Ask Cursor:
+```
+Enable live reload for my Capacitor app development
+```
+
+Cursor will configure everything automatically.
+
+### Option B: Manual Configuration
+
+1. **Get your local IP address:**
 
 ```shell
 # macOS
 ipconfig getifaddr en0
 
-# Windows
+# Windows  
 ipconfig
 ```
 
-2. Update `capacitor.config.ts`:
+2. **Update your `capacitor.config.ts`:**
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -366,8 +522,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-3. Apply changes:
-
+3. **Apply the configuration:**
 ```shell
 npx cap copy
 ```
@@ -376,17 +531,25 @@ npx cap copy
 
 ## Step 12: Add Native Features
 
-Enhance your Bolt.new app with native capabilities:
+Enhance your Bolt.new app with device-specific capabilities.
 
-### Install Common Plugins
+### Option A: AI-Powered Integration
 
+Request from Cursor:
+```
+Add native share, camera, and geolocation features to my Bolt.new app
+```
+
+Cursor will install plugins and create the integration code.
+
+### Option B: Manual Plugin Installation
+
+**Install popular native plugins:**
 ```shell
 npm i @capacitor/share @capacitor/camera @capacitor/geolocation
 ```
 
-### Add Native Functionality
-
-For React projects, create a utilities file:
+**Create a utilities file for React projects:**
 
 ```javascript
 // utils/capacitor.js
@@ -452,6 +615,12 @@ export default MyComponent;
 
 ### Sync Changes
 
+**With Cursor AI:**
+```
+Sync my native feature changes to all platforms
+```
+
+**Manual command:**
 ```shell
 npx cap sync
 ```
@@ -462,18 +631,25 @@ npx cap sync
 
 ### App Icons and Splash Screens
 
-1. Install Capacitor Assets:
+**Option A: Cursor AI Setup**
 
+Request:
+```
+Create app icons and splash screens for my mobile app
+```
+
+**Option B: Manual Asset Creation**
+
+1. **Get the assets tool:**
 ```shell
 npm install -D @capacitor/assets
 ```
 
-2. Create assets folder and add:
-   - `assets/icon.png` (1024x1024px)
-   - `assets/splash.png` (2732x2732px)
+2. **Prepare your graphics:**
+   - Create `assets/icon.png` (1024x1024px)
+   - Create `assets/splash.png` (2732x2732px)
 
-3. Generate all required assets:
-
+3. **Generate all sizes automatically:**
 ```shell
 npx capacitor-assets generate
 ```
@@ -511,6 +687,12 @@ export default defineConfig({
 
 ### Final Build
 
+**Option A: Build with Cursor AI**
+```
+Create the final production build and prepare for app store deployment
+```
+
+**Option B: Manual Build Process**
 ```shell
 npm run build
 npx cap sync
