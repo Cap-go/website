@@ -24,6 +24,26 @@ next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 
 By the end of this guide, you'll have your Lovable.dev web app running natively on both iOS and Android devices, with access to native device features like camera, storage, and push notifications.
 
+### Prerequisites & Time Estimate
+
+**Time Required**: 2-4 hours for first-time setup
+
+**System Requirements**:
+- **For iOS**: Mac computer running macOS 12.0+
+- **For Android**: Windows, Mac, or Linux
+- **Storage**: 20GB free space
+- **RAM**: 8GB minimum
+
+**Costs**:
+- **iOS App Store**: $99/year (Apple Developer Account)
+- **Android Play Store**: $25 one-time (Google Play Developer)
+- **Cursor Pro**: $20/month (optional but recommended)
+
+**Required Software** (we'll help you install):
+- Node.js 16+
+- Xcode (iOS only)
+- Android Studio (Android only)
+
 ### Why Transform Your Lovable.dev App to Mobile?
 
 - **Expanded Reach**: Access mobile users who prefer native apps over web browsers
@@ -272,6 +292,26 @@ npx cap add android
 
 ![Capacitor platforms added](/capacitor-platforms-added.webp)
 
+### Understanding Your New Project Structure
+
+After adding platforms, your project now has:
+
+```
+your-lovable-project/
+├── src/           # Your Next.js source code
+├── public/        # Static assets
+├── out/           # Build output (after npm run static)
+├── ios/           # iOS native project (NEW)
+├── android/       # Android native project (NEW)
+├── capacitor.config.ts  # Capacitor settings
+└── package.json   # Dependencies
+```
+
+**Key Points**:
+- You'll mostly work in `src/` for app changes
+- The `ios/` and `android/` folders are auto-generated
+- Don't edit native folders directly unless necessary
+
 ## Step 5: Configure Capacitor
 
 #### Method 1: Using Cursor AI (Recommended)
@@ -355,17 +395,67 @@ npx cap open android
 
 ### Running on iOS
 
-1. In Xcode, select your target device or simulator
-2. Click the **Play** button to build and run
+#### First-Time Xcode Setup
+
+1. **Select a Simulator**:
+   - Click the device selector next to the Play button
+   - Choose "iPhone 14" or any available simulator
+   - If none appear: Xcode > Settings > Platforms > Download iOS Simulator
+
+2. **Handle Code Signing** (for real devices only):
+   - Click your project name in the navigator
+   - Select "Signing & Capabilities"
+   - Check "Automatically manage signing"
+   - Select your Apple Developer account
+   - If you see errors, you need to enroll in Apple Developer Program ($99/year)
+
+3. **Build and Run**:
+   - Click the ▶️ Play button
+   - First build takes 5-10 minutes
+   - Simulator will launch automatically
+
+**Common Issues**:
+- **"Command PhaseScriptExecution failed"**: Run `cd ios && pod install`
+- **"No simulator available"**: Download one in Xcode Settings
+- **"Signing requires a development team"**: Need Apple Developer account
 
 ![Lovable app running on iOS](/lovable-ios-app.webp)
 
 ### Running on Android
 
-1. In Android Studio, select your target device or emulator
-2. Click the **Run** button to build and deploy
+#### First-Time Android Studio Setup
+
+1. **Install Android SDK** (if prompted):
+   - Android Studio will show "Missing SDK" 
+   - Click "Install missing SDK packages"
+   - Accept licenses and wait for download
+
+2. **Create an Emulator**:
+   - Click "Device Manager" (phone icon)
+   - Click "Create Device"
+   - Select "Pixel 6" > Next
+   - Select "API 33" (or latest) > Download > Next
+   - Click Finish
+
+3. **Build and Run**:
+   - Select your emulator from dropdown
+   - Click green ▶️ Run button
+   - First build takes 5-15 minutes
+   - Emulator will start automatically
+
+**Common Issues**:
+- **"SDK not found"**: Let Android Studio install it
+- **"Gradle sync failed"**: File > Sync Project
+- **Emulator won't start**: Check virtualization is enabled in BIOS
 
 ![Lovable app running on Android](/lovable-android-app.webp)
+
+### Success Indicators
+
+✅ **iOS Success**: App opens in simulator showing your Lovable.dev content
+✅ **Android Success**: App opens in emulator with your web app running
+
+If you see a white screen, check the terminal for errors.
 
 ## Step 9: Enable Live Reload (Development)
 
@@ -457,6 +547,16 @@ npx cap sync
 ```
 
 ![Native features added](/lovable-native-features.webp)
+
+### Quick Test: Verify Native Features Work
+
+Test your new native capabilities:
+
+1. **Share Button**: Click it and see native share dialog
+2. **Camera Access**: Test on real device (simulators have limited camera)
+3. **Check Console**: No errors should appear
+
+If features don't work, ensure you've run `npx cap sync` after adding plugins.
 
 ## Step 11: Optimize for Production
 

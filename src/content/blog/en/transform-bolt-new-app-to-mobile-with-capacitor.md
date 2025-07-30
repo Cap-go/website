@@ -24,6 +24,27 @@ next_blog: building-a-native-mobile-app-with-nextjs-and-capacitor
 
 Whether your Bolt.new project uses React, Vue, or another supported framework, this guide will help you create native iOS and Android apps with access to device features like camera, storage, and push notifications.
 
+### Before You Start: Requirements & Time
+
+**Estimated Time**: 3-5 hours for complete setup
+
+**System Requirements**:
+- **iOS Development**: Mac with macOS 12.0+ (required, no workaround)
+- **Android Development**: Any OS (Windows/Mac/Linux)
+- **Free Space**: 20-30GB for development tools
+- **Memory**: 8GB RAM minimum, 16GB recommended
+
+**Budget Needed**:
+- **Apple Developer**: $99/year (for iOS App Store)
+- **Google Play**: $25 one-time fee
+- **Cursor Pro**: $20/month (optional, speeds up development)
+
+**What We'll Install**:
+- Node.js & npm
+- Xcode (Mac only, for iOS)
+- Android Studio (for Android)
+- Various command-line tools
+
 ### Why Transform Your Bolt.new App to Mobile?
 
 - **Cross-Platform Reach**: Deploy your AI-generated app to mobile app stores
@@ -359,6 +380,28 @@ npx cap add android
 
 ![Capacitor platforms added Bolt](/capacitor-platforms-bolt.webp)
 
+### What Just Happened?
+
+Your Bolt.new project structure now looks like:
+
+```
+your-bolt-project/
+├── src/           # Your app source (React/Vue/etc)
+├── public/        # Static files  
+├── dist/          # Build output (Vite)
+├── out/           # Build output (Next.js)
+├── ios/           # iOS Xcode project (NEW!)
+├── android/       # Android Studio project (NEW!)
+├── capacitor.config.ts  # Mobile configuration
+└── package.json   # Dependencies
+```
+
+**Important Notes**:
+- Your web code stays in `src/` - edit there
+- `ios/` and `android/` are generated - don't edit
+- After changes, always run `npx cap sync`
+- Each platform has its own build process
+
 ## Step 7: Configure Capacitor
 
 Time to configure Capacitor for your specific framework.
@@ -465,18 +508,71 @@ npx cap open android
 
 ### Running on iOS
 
-1. In Xcode, select your target device or simulator
-2. Configure signing (Apple Developer account required for device deployment)
-3. Click the **Play** button to build and run
+#### Setting Up Xcode (First Time)
+
+1. **Choose Your Target**:
+   - Next to the Play button, click the device selector
+   - For testing: Choose any iPhone simulator
+   - For real device: Connect your iPhone via USB
+
+2. **Configure Code Signing**:
+   - Click your project name in left sidebar
+   - Go to "Signing & Capabilities" tab
+   - Enable "Automatically manage signing"
+   - Sign in with your Apple ID
+   - **Note**: Real devices require Apple Developer Program ($99/year)
+
+3. **Build Your App**:
+   - Click the ▶️ Play button
+   - First build: 5-10 minutes (be patient!)
+   - Watch the progress bar at top
+
+**Troubleshooting iOS**:
+- **"No account found"**: Add Apple ID in Xcode > Settings > Accounts
+- **"Failed to build"**: Clean build folder (Shift+Command+K) and retry
+- **Simulator issues**: Restart simulator via Device > Restart
 
 ![Bolt app running on iOS](/bolt-ios-app.webp)
 
 ### Running on Android
 
-1. In Android Studio, select your target device or emulator
-2. Click the **Run** button to build and deploy
+#### Setting Up Android Studio (First Time)
+
+1. **SDK Setup** (automatic):
+   - Android Studio will detect missing components
+   - Click "Install missing SDK" when prompted
+   - This downloads ~2-3GB of files
+
+2. **Create Virtual Device**:
+   - Open AVD Manager (phone icon in toolbar)
+   - Click "+ Create Virtual Device"
+   - Select "Pixel 6" (good default)
+   - Download system image when prompted
+   - Finish setup with default options
+
+3. **Run Your App**:
+   - Select your emulator from dropdown
+   - Click green ▶️ Run button  
+   - First build: 10-15 minutes
+   - Emulator starts automatically
+
+**Troubleshooting Android**:
+- **"Gradle sync failed"**: Try File > Invalidate Caches
+- **Slow emulator**: Enable hardware acceleration in AVD settings
+- **Build errors**: Update Gradle via suggested fixes
 
 ![Bolt app running on Android](/bolt-android-app.webp)
+
+### Verification Checklist
+
+After successful build, verify:
+
+✅ App launches without crashing
+✅ Your Bolt.new content displays correctly
+✅ Buttons and interactions work
+✅ Console shows no red errors
+
+**Still having issues?** The error messages usually tell you exactly what's wrong - read them carefully!
 
 ## Step 11: Enable Live Reload (Development)
 
