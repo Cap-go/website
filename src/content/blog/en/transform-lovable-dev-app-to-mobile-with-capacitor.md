@@ -51,6 +51,10 @@ To export your project from Lovable.dev, you need to link it to GitHub first, as
 
 ![Lovable.dev repository setup](/lovable_github_step_3.webp)
 
+5. Once connected, your project is now backed up to GitHub
+
+![Lovable.dev project exported](/lovable_github_done.webp)
+
 ### Download and Install Cursor
 
 Before we can work with your code, you'll need a code editor. We recommend [Cursor](https://cursor.sh/), an AI-powered code editor that makes development easier:
@@ -101,8 +105,6 @@ Now let's get your Lovable.dev project into Cursor:
 5. Cursor will clone and open your project
 
 ![Open in Cursor](/open_in_cursor.webp)
-
-![Lovable.dev project exported](/lovable_github_done.webp)
 
 ## Step 2: Set Up Your Development Environment
 
