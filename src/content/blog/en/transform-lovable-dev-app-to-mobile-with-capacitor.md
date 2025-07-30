@@ -51,29 +51,110 @@ To export your project from Lovable.dev, you need to link it to GitHub first, as
 
 ![Lovable.dev repository setup](/lovable_github_step_3.webp)
 
-### Clone Your Repository
+### Download and Install Cursor
 
-Once your project is linked to GitHub, clone it to your local machine:
+Before we can work with your code, you'll need a code editor. We recommend [Cursor](https://cursor.sh/), an AI-powered code editor that makes development easier:
 
-```shell
-git clone https://github.com/yourusername/your-lovable-project.git
-cd your-lovable-project
-```
+1. Visit [cursor.sh](https://cursor.sh/) and download the version for your operating system
+2. Install Cursor following the installation wizard
+3. Once installed, open Cursor
+
+![Start Cursor](/start_in_cursor.webp)
+
+### Configure Cursor for AI Development
+
+For the best experience, we recommend configuring Cursor properly:
+
+1. **Buy a Cursor Plan** - While Cursor offers a free tier, purchasing a Pro plan ($20/month) gives you:
+   - Unlimited AI completions
+   - Access to GPT-4 and Claude models
+   - Faster response times
+   - Priority support
+
+2. **Open Cursor Settings** by pressing `Command+,` (Mac) or `Ctrl+,` (Windows)
+
+![Cursor Settings](/cursor_settings.webp)
+
+3. **Enable AI Models** - Make sure AI features are enabled:
+
+![Allow Models](/allow_models.webp)
+
+4. **Select Your Preferred Model** - Choose Claude or GPT-4 for best results:
+
+![Select Cursor Model](/select_cursor_model.webp)
+
+5. **Allow Command Execution** - Enable Cursor to run commands for you:
+
+![Allow Run Commands](/allow_run_commands.webp)
+
+### Clone Your Repository in Cursor
+
+Now let's get your Lovable.dev project into Cursor:
+
+1. In Cursor, press `Shift+Command+P` (Mac) or `Shift+Ctrl+P` (Windows) to open the command palette
+2. Type "clone" and select **"Git: Clone"**
+3. Paste your GitHub repository URL: `https://github.com/yourusername/your-lovable-project.git`
+4. Choose a folder where you want to save the project
+
+![Clone in Cursor](/clone_in_cursor.webp)
+
+5. Cursor will clone and open your project
+
+![Open in Cursor](/open_in_cursor.webp)
 
 ![Lovable.dev project exported](/lovable_github_done.webp)
 
 ## Step 2: Set Up Your Development Environment
 
-Navigate to your extracted project directory and install dependencies:
+### Install Required Tools
 
+#### Method 1: Using Cursor AI (Recommended)
+
+1. Open Cursor's AI tab by pressing `Command+K` (Mac) or `Ctrl+K` (Windows)
+2. Type the following command:
+   ```
+   Install Homebrew, Node.js and npm on my system, then install dependencies and run the dev server
+   ```
+
+The AI will automatically:
+- Detect your operating system
+- Install Homebrew (on macOS)
+- Install Node.js and npm
+- Navigate to your project directory
+- Run `npm install` to install dependencies
+- Start your development server with `npm run dev`
+
+![Install Homebrew](/install_brew.webp)
+
+#### Method 2: Manual Installation (If AI doesn't work)
+
+Open the terminal in Cursor by pressing `Shift+Command+T` (Mac) or `Shift+Ctrl+T` (Windows), then:
+
+**For macOS:**
+```shell
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Node.js
+brew install node
+
+# Navigate to your project
+cd your-lovable-project
+
+# Install dependencies
+npm install
+
+# Run dev server
+npm run dev
+```
+
+**For Windows:**
+1. Download Node.js from [nodejs.org](https://nodejs.org/)
+2. Run the installer
+3. Open terminal and run:
 ```shell
 cd your-lovable-project
 npm install
-```
-
-Verify that your app runs correctly:
-
-```shell
 npm run dev
 ```
 
@@ -85,10 +166,21 @@ Your Lovable.dev app should now be running at `http://localhost:3000`.
 
 Lovable.dev projects are built with Next.js, so we need to configure static export for mobile deployment.
 
-### Update package.json
+### Configure Your Project
 
-Add a static export script to your `package.json`:
+#### Method 1: Using Cursor AI (Recommended)
 
+1. Press `Command+K` (Mac) or `Ctrl+K` (Windows)
+2. Type this request:
+   ```
+   Add a static export script to package.json and configure next.config.js for mobile export with Capacitor
+   ```
+
+The AI will automatically update your files.
+
+#### Method 2: Manual Configuration
+
+1. Open `package.json` and add to scripts:
 ```json
 {
   "scripts": {
@@ -101,10 +193,7 @@ Add a static export script to your `package.json`:
 }
 ```
 
-### Configure next.config.js
-
-Most Lovable.dev projects already have a `next.config.js` file. Update it to support static export:
-
+2. Update `next.config.js`:
 ```javascript
 /** @type {import('next').NextConfig} */
 const isMobile = process.env.NEXT_PUBLIC_IS_MOBILE === 'true';
@@ -114,7 +203,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Keep any existing Lovable.dev specific configurations
   trailingSlash: true,
 };
 
@@ -123,8 +211,12 @@ module.exports = nextConfig;
 
 ### Test Static Export
 
-Run the static export command:
+**With Cursor AI:**
+```
+Run the static export and verify it creates an 'out' folder
+```
 
+**Manually:**
 ```shell
 npm run static
 ```
@@ -135,35 +227,43 @@ You should see a new `out` folder containing your static files.
 
 ## Step 4: Add Capacitor to Your Lovable.dev Project
 
-Now let's transform your Lovable.dev app into a native mobile app.
+Now let's transform your Lovable.dev app into a native mobile app using Cursor AI.
 
-### Install Capacitor CLI
+### Install and Initialize Capacitor
 
-```shell
-npm install -D @capacitor/cli
-```
+#### Method 1: Using Cursor AI (Recommended)
 
-### Initialize Capacitor
+1. Press `Command+K` (Mac) or `Ctrl+K` (Windows)
+2. Type this command:
+   ```
+   Install Capacitor CLI, initialize it for my app, and add iOS and Android platforms
+   ```
 
-```shell
-npx cap init
-```
+The AI will handle everything automatically, asking you for:
+- **App name**: Your Lovable.dev project name
+- **Bundle ID**: Like `com.yourcompany.yourapp`
 
 ![Capacitor initialization](/capacitor-init-lovable.webp)
 
-When prompted:
-- **App name**: Use your Lovable.dev project name
-- **Bundle ID**: Use a reverse domain format like `com.yourcompany.yourapp`
+#### Method 2: Manual Installation
 
-### Install Core Capacitor Packages
+Open terminal (`Shift+Command+T` or `Shift+Ctrl+T`) and run:
 
 ```shell
+# Install Capacitor CLI
+npm install -D @capacitor/cli
+
+# Initialize Capacitor
+npx cap init
+
+# When prompted, enter:
+# - App name: Your Lovable App
+# - Bundle ID: com.yourcompany.yourapp
+
+# Install core packages
 npm install @capacitor/core @capacitor/ios @capacitor/android
-```
 
-### Add Native Platforms
-
-```shell
+# Add platforms
 npx cap add ios
 npx cap add android
 ```
@@ -172,8 +272,16 @@ npx cap add android
 
 ## Step 5: Configure Capacitor
 
-Update the `capacitor.config.ts` file to point to your build output:
+#### Method 1: Using Cursor AI (Recommended)
 
+Ask Cursor AI:
+```
+Update capacitor.config.ts to use 'out' as webDir and set up for HTTPS
+```
+
+#### Method 2: Manual Configuration
+
+Open `capacitor.config.ts` and update:
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
 
@@ -192,10 +300,20 @@ export default config;
 
 ## Step 6: Build and Sync
 
-Build your Lovable.dev app and sync with Capacitor:
+#### Method 1: Using Cursor AI (Recommended)
+
+Tell Cursor AI:
+```
+Build the static export and sync it with Capacitor platforms
+```
+
+#### Method 2: Manual Commands
 
 ```shell
+# Build static export
 npm run static
+
+# Sync with native projects
 npx cap sync
 ```
 
@@ -205,6 +323,12 @@ npx cap sync
 
 ### For iOS Development
 
+#### Method 1: Using Cursor AI (Recommended)
+```
+Open the iOS project in Xcode
+```
+
+#### Method 2: Manual Command
 ```shell
 npx cap open ios
 ```
@@ -213,6 +337,12 @@ npx cap open ios
 
 ### For Android Development
 
+#### Method 1: Using Cursor AI (Recommended)
+```
+Open the Android project in Android Studio
+```
+
+#### Method 2: Manual Command
 ```shell
 npx cap open android
 ```
@@ -237,10 +367,18 @@ npx cap open android
 
 ## Step 9: Enable Live Reload (Development)
 
-For faster development, enable live reload:
+### Method 1: Using Cursor AI (Recommended)
+
+Tell Cursor AI:
+```
+Set up live reload for Capacitor development with my local IP address
+```
+
+The AI will automatically configure everything.
+
+### Method 2: Manual Setup
 
 1. Find your local IP address:
-
 ```shell
 # macOS
 ipconfig getifaddr en0
@@ -250,7 +388,6 @@ ipconfig
 ```
 
 2. Update `capacitor.config.ts`:
-
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
 
@@ -269,7 +406,6 @@ export default config;
 ```
 
 3. Apply changes:
-
 ```shell
 npx cap copy
 ```
@@ -278,18 +414,23 @@ npx cap copy
 
 ## Step 10: Add Native Features
 
-Enhance your Lovable.dev app with native capabilities:
+### Method 1: Using Cursor AI (Recommended)
 
-### Install Share Plugin
-
-```shell
-npm i @capacitor/share
+Tell Cursor AI:
+```
+Add native share functionality to my app using Capacitor Share plugin
 ```
 
-### Update Your Component
+The AI will handle everything automatically.
 
-Add native sharing to any Lovable.dev component:
+### Method 2: Manual Implementation
 
+1. Install the Share plugin:
+```shell
+npm install @capacitor/share
+```
+
+2. Add to your component:
 ```javascript
 import { Share } from '@capacitor/share';
 
@@ -308,8 +449,7 @@ const shareContent = async () => {
 </button>
 ```
 
-### Sync Changes
-
+3. Sync changes:
 ```shell
 npx cap sync
 ```
@@ -320,15 +460,23 @@ npx cap sync
 
 ### App Icons and Splash Screens
 
-1. Generate app icons using the [Capacitor Assets tool](https://capacitorjs.com/docs/guides/splash-screens-and-icons):
+#### Method 1: Using Cursor AI (Recommended)
+```
+Set up app icons and splash screens for my Capacitor app
+```
 
+#### Method 2: Manual Setup
+
+1. Install Capacitor Assets:
 ```shell
 npm install -D @capacitor/assets
 ```
 
-2. Add your app icon as `assets/icon.png` (1024x1024px)
-3. Add splash screen as `assets/splash.png` (2732x2732px)
+2. Create your assets:
+   - Add `assets/icon.png` (1024x1024px)
+   - Add `assets/splash.png` (2732x2732px)
 
+3. Generate all sizes:
 ```shell
 npx capacitor-assets generate
 ```
@@ -337,6 +485,12 @@ npx capacitor-assets generate
 
 ### Build for Production
 
+#### Method 1: Using Cursor AI (Recommended)
+```
+Build my app for production and sync all platforms
+```
+
+#### Method 2: Manual Build
 ```shell
 npm run static
 npx cap sync
