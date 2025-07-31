@@ -4,7 +4,7 @@ title: チャネルを使用して機能フラグおよびA/Bテストを行う�
 description: CapGoのチャンネルを使用して、ユーザーを自己割り当てまたはバックエンドを使用して、機能フラグやA/Bテストを行う方法を学びましょう
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
-author_url: 'https://twitter.com/martindonadieu'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2025-04-15T00:00:00.000Z
 updated_at: 2025-04-15T00:00:00.000Z
 head_image: /capgo-feature-image.webp

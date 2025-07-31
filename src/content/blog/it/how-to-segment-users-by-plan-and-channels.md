@@ -6,7 +6,7 @@ description: >-
   auto-atribuindo usuários ou utilizando seu backend.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
-author_url: 'https://twitter.com/martindonadieu'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2025-04-15T00:00:00.000Z
 updated_at: 2025-04-15T00:00:00.000Z
 head_image: /capgo-feature-image.webp

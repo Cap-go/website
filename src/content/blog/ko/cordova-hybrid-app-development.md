@@ -7,7 +7,7 @@ description: >-
   비교해보세요.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
-author_url: 'https://twitter.com/martindonadieu'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2024-06-02T00:00:00.000Z
 updated_at: 2024-06-14T00:00:00.000Z
 head_image: /what-is-cordova-phone-gap.webp

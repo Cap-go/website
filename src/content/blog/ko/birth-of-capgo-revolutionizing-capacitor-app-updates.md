@@ -6,7 +6,7 @@ description: >-
   위한 것으로 커뮤니티 피드백에 의해 형성되었습니다.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
-author_url: 'https://twitter.com/martindonadieu'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2024-07-13T00:00:00.000Z
 updated_at: 2024-07-13T00:00:00.000Z
 head_image: /capgo-birth-story.webp

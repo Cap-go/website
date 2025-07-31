@@ -4,7 +4,7 @@ title: iOS 16에서 앱 테스트를 위한 개발자 모드 활성화 방법
 description: iOS 16 이상에서 개발자 모드를 활성화하여 내부 배포 빌드 및 로컬 개발 빌드를 기기에서 실행하기 위한 단계별 가이드입니다.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
-author_url: 'https://twitter.com/martindonadieu'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z
 head_image: /enable-ios-developer-mode-ios16.webp

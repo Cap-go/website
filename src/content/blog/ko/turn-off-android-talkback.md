@@ -4,7 +4,7 @@ title: Android 기기에서 TalkBack을 끄고 사용하는 방법
 description: 'TalkBack, 시각 장애가 있는 사용자를 위한 Android 기본 제공 스크린 리더를 활성화하고 탐색하는 단계별 가이드입니다.'
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
-author_url: 'https://twitter.com/martindonadieu'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2023-11-27T00:00:00.000Z
 updated_at: 2023-11-27T00:00:00.000Z
 head_image: /android_talkback.webp
