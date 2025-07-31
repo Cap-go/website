@@ -87,4 +87,4 @@ Capacitor 프로젝트에서 Capgo 실시간 업데이트를 구현하려면 다
 
 ## 결론
 
-이 가이드가 Cordova에서 Capacitor로 웹 앱을 마이그레이션하는 데 도움이 되었기를 바랍니다. 마이그레이션 과정에 대해 질문이 있거나 도움이 필요하다면 우리의 [discord](https://discord.gg/VnYRvBfgA6) 서버에서 연락해 주세요.
+이 가이드가 Cordova에서 Capacitor로 웹 앱을 마이그레이션하는 데 도움이 되었기를 바랍니다. 마이그레이션 과정에 대해 질문이 있거나 도움이 필요하다면 우리의 [discord](https://discord.capgo.app) 서버에서 연락해 주세요.

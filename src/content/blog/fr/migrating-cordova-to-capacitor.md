@@ -90,4 +90,4 @@ Pour mettre en œuvre des mises à jour en direct Capgo dans votre projet Capaci
 
 ## Conclusion
 
-Nous espérons que ce guide vous a aidé à migrer votre application web de Cordova vers Capacitor. Si vous avez des questions ou avez besoin d'assistance pour le processus de migration, n'hésitez pas à nous contacter sur notre serveur [discord](https://discord.gg/VnYRvBfgA6).
+Nous espérons que ce guide vous a aidé à migrer votre application web de Cordova vers Capacitor. Si vous avez des questions ou avez besoin d'assistance pour le processus de migration, n'hésitez pas à nous contacter sur notre serveur [discord](https://discord.capgo.app).
