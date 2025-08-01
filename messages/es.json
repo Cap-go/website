@@ -1,11 +1,11 @@
 {
-  "$1_app": "$1 Aplicación",
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "$1_app": "$1 Aplicación",
   "2_3_week_delivery": "Entrega de 2-3 semanas",
   "30_day_support_included": "Soporte de 30 días incluido",
   "3_4_week_delivery": "Entrega de 3-4 semanas",
   "API_access": "Acceso a la API",
-  "Capacitor_Sanbox_App": "Aplicación Sanbox de Capacitor",
+  "Capacitor_Sanbox_App": "Aplicación Sandbox de Capacitor",
   "Capacitor_Sanbox_App_description": "Prueba cada versión de tu app directamente en la app de sandbox en un segundo. Administra actualizaciones OTA para tu app de capacitor desde tu bolsillo, disponible en iOS y Android.",
   "GiB_included": "GiB incluido",
   "TB_included": "TB incluido",
