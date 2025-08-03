@@ -9,9 +9,7 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+      - development
 
 jobs:
   build:
@@ -30,17 +28,14 @@ jobs:
       - name: Set deployment variables
         id: vars
         run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            # For PR: use sanitized branch name
-            branch_name="${{ github.head_ref }}"
-            # Sanitize branch name for URL (replace special chars with hyphens, lowercase)
-            sanitized_branch=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
-            echo "branch=$sanitized_branch" >> $GITHUB_OUTPUT
-            echo "deployment_url=https://$sanitized_branch.capgo-website.pages.dev" >> $GITHUB_OUTPUT
-          else
-            # For main branch
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            # Production deployment
             echo "branch=main" >> $GITHUB_OUTPUT
             echo "deployment_url=https://capgo.app" >> $GITHUB_OUTPUT
+          elif [ "${{ github.ref_name }}" == "development" ]; then
+            # Development deployment
+            echo "branch=development" >> $GITHUB_OUTPUT
+            echo "deployment_url=https://development.capgo-website.pages.dev" >> $GITHUB_OUTPUT
           fi
           
       - name: Deploy to Cloudflare Pages
