@@ -33,7 +33,12 @@ next_blog: ''
 4.  **Optimize performance**: Use caching, parallel builds, and conditional workflows.
 5.  **Add live updates**: Integrate Capgo for secure, OTA updates with phased rollouts.
 
-With CI/CD, Capacitor apps achieve faster, smoother releases while minimizing errors and manual intervention. Ready to optimize your workflow? Let’s dive in!
+With CI/CD, Capacitor apps achieve faster, smoother releases while minimizing errors and manual intervention. Ready to optimize your workflow? Let's dive in!
+
+**Before you start, you might find these related guides helpful:**
+- [Ultimate Guide to Debugging Capacitor Apps](https://capgo.app/blog/ultimate-guide-to-debugging-capacitor-apps/) - Essential for troubleshooting build issues
+- [Ultimate Guide to Capacitor Plugin Development](https://capgo.app/blog/ultimate-guide-to-capacitor-plugin-development/) - If you're using custom plugins in your CI/CD
+- [OTA Security Checklist](https://capgo.app/blog/ota-security-checklist-for-capacitor-apps/) - Secure your automated deployments
 
 ## Integrate Your Existing CI/CD Pipelines with Mobile Capabilities
 
