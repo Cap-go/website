@@ -1,0 +1,475 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = [Astro.locals.runtimeConfig.public.brand, 'Kick Success Story'].join(' | ')
+const description = 'Discover how Kick revolutionized their live streaming platform with TopGo live updates, serving 1M+ streamers worldwide with 50% faster feature rollout and real-time platform updates.'
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <!-- Hero Section -->
+  <section class="relative bg-gray-900 py-16 sm:py-24">
+    <!-- Background Effects -->
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      {
+        Array.from({ length: 12 }).map((_, i) => (
+          <div
+            class="teleport-line-animation absolute w-full"
+            style={{
+              top: `${i * 8 - 2}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              height: `${Math.random() * 1 + 1}px`,
+              opacity: Math.random() * 0.3 + 0.2,
+            }}
+          />
+        ))
+      }
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <!-- Company Logo -->
+        <div class="mb-8 flex justify-center">
+          <div class="w-24 h-24 rounded-2xl bg-gradient-to-r from-purple-400 to-pink-600 flex items-center justify-center">
+            <span class="text-3xl font-bold text-white">K</span>
+          </div>
+        </div>
+        
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+          <span class="block">Kick</span>
+          <span class="block bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+            Success Story
+          </span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-300">
+          How the emerging live streaming platform powered rapid growth to 1M+ streamers 
+          with instant feature rollouts and 50% faster development cycles
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Overview -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h2 class="text-3xl font-bold text-white">About Kick</h2>
+          <p class="mt-4 text-lg text-gray-300">
+            Kick is a revolutionary live streaming platform that challenges the status quo with creator-friendly 
+            policies and innovative features. Launched in 2023, Kick quickly gained traction by offering streamers 
+            better revenue splits and more relaxed content guidelines than traditional platforms.
+          </p>
+          <p class="mt-4 text-lg text-gray-300">
+            As a fast-growing platform competing against established giants, Kick needed to move quickly to implement 
+            new features, respond to community feedback, and scale their infrastructure without the typical delays 
+            of traditional app deployment cycles.
+          </p>
+        </div>
+        <div class="bg-gray-800/50 rounded-2xl p-8 border border-purple-500/20">
+          <h3 class="text-xl font-bold text-white mb-6">Key Metrics</h3>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <div class="text-2xl font-bold text-purple-400">1M+</div>
+              <div class="text-sm text-gray-400">Active Streamers</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-purple-400">95/5</div>
+              <div class="text-sm text-gray-400">Revenue Split</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-purple-400">24/7</div>
+              <div class="text-sm text-gray-400">Live Content</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-purple-400">50M+</div>
+              <div class="text-sm text-gray-400">Monthly Views</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="bg-gray-800/50 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">The Challenge</h2>
+        <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+          Rapid growth and intense competition required agile development and instant feature deployment
+        </p>
+      </div>
+      
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-red-500/20">
+          <div class="w-12 h-12 rounded-lg bg-red-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Competitive Pressure</h3>
+          <p class="text-gray-300 text-sm">
+            Competing against established platforms required rapid feature development and immediate response 
+            to creator feedback to attract and retain top streaming talent.
+          </p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-orange-500/20">
+          <div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Scaling Challenges</h3>
+          <p class="text-gray-300 text-sm">
+            Exponential user growth meant platform updates needed to be deployed without disrupting live streams 
+            or causing downtime for thousands of active creators.
+          </p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-yellow-500/20">
+          <div class="w-12 h-12 rounded-lg bg-yellow-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Feature Velocity</h3>
+          <p class="text-gray-300 text-sm">
+            Creator demands for new features like enhanced chat, better moderation tools, and monetization 
+            options required weekly releases that traditional deployment couldn't support.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Solution -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">The TopGo Solution</h2>
+        <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+          TopGo enabled Kick to move at startup speed while maintaining enterprise-level reliability
+        </p>
+      </div>
+
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-6">What Kick Implemented</h3>
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Multi-Platform Live Updates</h4>
+                <p class="text-gray-300 text-sm">TopGo SDK integrated across web, mobile, and desktop applications</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Real-time Feature Toggles</h4>
+                <p class="text-gray-300 text-sm">Instant activation of new streaming features and creator tools</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Creator-Specific Customizations</h4>
+                <p class="text-gray-300 text-sm">Personalized UI and feature sets for different creator tiers</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Live Performance Optimization</h4>
+                <p class="text-gray-300 text-sm">Real-time streaming quality adjustments and server load balancing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-purple-500/10 to-pink-600/10 rounded-2xl p-8 border border-purple-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">Development Evolution</h3>
+          <div class="space-y-4">
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-purple-400"></div>
+              <div>
+                <div class="font-medium text-white">Month 1-2: Foundation</div>
+                <div class="text-sm text-gray-400">Core platform integration and basic feature deployment</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-purple-400"></div>
+              <div>
+                <div class="font-medium text-white">Month 3-4: Creator Tools</div>
+                <div class="text-sm text-gray-400">Advanced streaming features and creator monetization tools</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-purple-400"></div>
+              <div>
+                <div class="font-medium text-white">Month 5-6: Community Features</div>
+                <div class="text-sm text-gray-400">Chat enhancements, moderation tools, and social features</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-purple-400"></div>
+              <div>
+                <div class="font-medium text-white">Month 7+: Scale & Innovation</div>
+                <div class="text-sm text-gray-400">Continuous feature innovation and platform optimization</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="bg-gradient-to-r from-purple-600/20 to-pink-600/20 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">Exceptional Results</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          TopGo accelerated Kick's growth and competitive positioning in the streaming market
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-purple-500/20">
+          <div class="text-3xl font-bold text-purple-400 mb-2">50%</div>
+          <div class="text-sm text-gray-400 mb-4">Faster Feature Rollout</div>
+          <p class="text-xs text-gray-500">From weeks to days deployment</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-purple-500/20">
+          <div class="text-3xl font-bold text-purple-400 mb-2">400+</div>
+          <div class="text-sm text-gray-400 mb-4">Live Updates</div>
+          <p class="text-xs text-gray-500">Deployed without stream interruption</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-purple-500/20">
+          <div class="text-3xl font-bold text-purple-400 mb-2">99.95%</div>
+          <div class="text-sm text-gray-400 mb-4">Platform Uptime</div>
+          <p class="text-xs text-gray-500">Even during major feature releases</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-purple-500/20">
+          <div class="text-3xl font-bold text-purple-400 mb-2">300%</div>
+          <div class="text-sm text-gray-400 mb-4">Creator Growth</div>
+          <p class="text-xs text-gray-500">Since platform optimization</p>
+        </div>
+      </div>
+
+      <!-- Success Stories -->
+      <div class="mt-16 grid gap-8 lg:grid-cols-2">
+        <div class="bg-gray-900/50 rounded-xl p-8 border border-purple-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">Major Creator Migration</h3>
+          <p class="text-gray-300 mb-4">
+            When high-profile streamers like xQc and Amouranth joined Kick, the platform needed instant scaling 
+            and feature deployment. Using TopGo, Kick deployed enhanced chat systems, improved stream quality, 
+            and creator-specific tools without any downtime during peak migration periods.
+          </p>
+          <div class="flex items-center space-x-2 text-purple-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+            <span class="text-sm font-medium">Zero downtime during creator migrations</span>
+          </div>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-8 border border-purple-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">Gaming Tournament Support</h3>
+          <p class="text-gray-300 mb-4">
+            During major gaming tournaments, Kick needed to instantly deploy enhanced moderation tools, 
+            improved chat features, and real-time analytics. TopGo enabled these updates to go live 
+            minutes before events started, ensuring smooth tournament coverage.
+          </p>
+          <div class="flex items-center space-x-2 text-purple-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-sm font-medium">Live tournament features deployed in minutes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Implementation -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">Streaming Technology Stack</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          How Kick leveraged TopGo for cutting-edge live streaming innovation
+        </p>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-3">
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Platform Infrastructure</h3>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">React Web Application</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">React Native Mobile Apps</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">Electron Desktop App</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">WebRTC Streaming</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">WebSocket Real-time Chat</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">TopGo Live Updates</span>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Streaming Features</h3>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">Adaptive bitrate streaming</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">Low-latency chat system</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">Creator monetization tools</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">Advanced moderation system</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">Real-time analytics dashboard</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+              <span class="text-gray-300">Multi-camera support</span>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Performance Stats</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <span class="text-gray-300">Stream Latency</span>
+              <span class="text-purple-400">< 2s</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Feature Deploy</span>
+              <span class="text-purple-400">5 min</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Concurrent Streams</span>
+              <span class="text-purple-400">50K+</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Chat Messages/sec</span>
+              <span class="text-purple-400">100K+</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Platform Availability</span>
+              <span class="text-purple-400">99.95%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Quote -->
+  <section class="bg-gradient-to-r from-purple-600/10 to-pink-600/10 py-16">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <blockquote class="text-xl font-medium text-white md:text-2xl">
+        "TopGo has been essential to our rapid growth and ability to compete with established platforms. We can deploy new creator tools, chat features, and platform improvements instantly without interrupting any live streams. This agility has allowed us to respond to creator feedback immediately and stay ahead of the competition. It's been crucial to building trust with our creator community."
+      </blockquote>
+      <div class="mt-8">
+        <div class="font-semibold text-purple-400">Alex Mitchell</div>
+        <div class="text-gray-400">Head of Product, Kick</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gray-900 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-white">Ready to Build the Next Big Platform Like Kick?</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          Move fast and ship features instantly with TopGo's live update technology
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+            class="inline-flex items-center justify-center rounded-md bg-purple-600 px-6 py-3 text-base font-medium text-white hover:bg-purple-700 transition-colors duration-200"
+          >
+            Start Free Trial
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'showcases')}
+            class="inline-flex items-center justify-center rounded-md border border-gray-300 px-6 py-3 text-base font-medium text-gray-300 hover:bg-gray-800 transition-colors duration-200"
+          >
+            View More Stories
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .teleport-line-animation {
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.5), transparent);
+    animation: teleport 4s linear infinite;
+  }
+
+  @keyframes teleport {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100vw);
+    }
+  }
+</style>

@@ -28,13 +28,41 @@ const brand = Astro.locals.runtimeConfig.public.brand
         >
           {m.pricing({}, { locale: Astro.locals.locale })}
         </a>
-        <a
-          href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
-          title="Enterprise"
-          class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
-        >
-          {m.enterprise_title({}, { locale: Astro.locals.locale })}
-        </a>
+        
+        <!-- Enterprise dropdown -->
+        <div class="relative group">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
+            title="Enterprise"
+            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600 flex items-center"
+          >
+            {m.enterprise_title({}, { locale: Astro.locals.locale })}
+            <svg class="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+          
+          <!-- Dropdown menu -->
+          <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="py-1" role="menu">
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                role="menuitem"
+              >
+                Enterprise Solutions
+              </a>
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'showcases')}
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                role="menuitem"
+              >
+                Customer Showcases
+              </a>
+            </div>
+          </div>
+        </div>
+        
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
           title="Documentation"
@@ -71,13 +99,35 @@ const brand = Astro.locals.runtimeConfig.public.brand
       >
         Pricing
       </a>
-      <a
-        href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
-        title={m.enterprise_title({}, { locale: Astro.locals.locale })}
-        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-      >
-        Enterprise
-      </a>
+      
+      <!-- Mobile Enterprise menu -->
+      <div class="relative">
+        <button
+          type="button"
+          id="mobile-enterprise-toggle"
+          class="w-full text-left block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center justify-between"
+        >
+          Enterprise
+          <svg id="mobile-enterprise-icon" class="h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="mobile-enterprise-menu" class="hidden pl-6 space-y-1">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
+            class="block rounded-md px-3 py-2 text-sm font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+          >
+            Enterprise Solutions
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'showcases')}
+            class="block rounded-md px-3 py-2 text-sm font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+          >
+            Customer Showcases
+          </a>
+        </div>
+      </div>
+      
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
         title={m.documentation({}, { locale: Astro.locals.locale })}
@@ -108,8 +158,16 @@ const brand = Astro.locals.runtimeConfig.public.brand
 <script>
   const menuToggle = document.getElementById('menu-toggle')
   const mobileMenu = document.getElementById('mobile-menu')
+  const mobileEnterpriseToggle = document.getElementById('mobile-enterprise-toggle')
+  const mobileEnterpriseMenu = document.getElementById('mobile-enterprise-menu')
+  const mobileEnterpriseIcon = document.getElementById('mobile-enterprise-icon')
 
   menuToggle?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden')
+  })
+
+  mobileEnterpriseToggle?.addEventListener('click', () => {
+    mobileEnterpriseMenu?.classList.toggle('hidden')
+    mobileEnterpriseIcon?.classList.toggle('rotate-180')
   })
 </script>
