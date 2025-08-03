@@ -26,31 +26,74 @@ jobs:
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
-      - name: Set branch name
+      
+      - name: Set deployment variables
         id: vars
         run: |
-          ref=${{ github.event.pull_request.head.ref }}
-          if [ "$ref" == "refs/heads/main" ]; then
-            echo "branch=main" >> $GITHUB_OUTPUT
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # For PR: use sanitized branch name
+            branch_name="${{ github.head_ref }}"
+            # Sanitize branch name for URL (replace special chars with hyphens, lowercase)
+            sanitized_branch=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
+            echo "branch=$sanitized_branch" >> $GITHUB_OUTPUT
+            echo "deployment_url=https://$sanitized_branch.capgo-website.pages.dev" >> $GITHUB_OUTPUT
           else
-            echo "branch=${ref}" >> $GITHUB_OUTPUT
+            # For main branch
+            echo "branch=main" >> $GITHUB_OUTPUT
+            echo "deployment_url=https://capgo.app" >> $GITHUB_OUTPUT
           fi
-      - run: bunx wrangler@latest pages deploy dist --project-name capgo-website --branch ${{ steps.vars.outputs.branch }}
+          
+      - name: Deploy to Cloudflare Pages
+        run: bunx wrangler@latest pages deploy dist --project-name capgo-website --branch ${{ steps.vars.outputs.branch }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      - name: Comment deployed link on PR
+      
+      - name: Comment deployment URL on PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const deploymentUrl = '${{ steps.vars.outputs.deployment_url }}';
             const branch = '${{ steps.vars.outputs.branch }}';
-            const url = `https://${branch}.capgo-website.pages.dev`;
-            const body = `🚀 Preview deployed: [${url}](${url})`;
-            await github.rest.issues.createComment({
-              body,
-              repo: context.repo.repo,
+            const prNumber = context.issue.number;
+            
+            // Check if comment already exists
+            const comments = await github.rest.issues.listComments({
               owner: context.repo.owner,
-              issue_number: context.issue.number,
+              repo: context.repo.repo,
+              issue_number: prNumber,
             });
+            
+            const botComment = comments.data.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('🚀 Preview deployed')
+            );
+            
+            const body = `🚀 **Preview deployed successfully!**
+
+📝 **PR**: #${prNumber}
+🌐 **Preview URL**: [${deploymentUrl}](${deploymentUrl})
+🔧 **Branch**: \`${branch}\`
+✅ **Status**: Ready for review
+
+_This preview will be updated automatically when you push new commits to this PR._`;
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: body
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: body
+              });
+            }
