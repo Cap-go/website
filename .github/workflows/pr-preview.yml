@@ -86,21 +86,23 @@ jobs:
               comment.body.includes('🚀 **PR Preview**')
             );
             
-            const body = `🚀 **PR Preview**
-
-| Field | Value |
-|-------|-------|
-| 🌐 **Preview URL** | [${previewUrl}](${previewUrl}) |
-| 🔧 **Preview ID** | \`${previewName}\` |
-| 📝 **PR Number** | #${prNumber} |
-| 🎯 **Commit** | [\`${shortSha}\`](https://github.com/${{ github.repository }}/commit/${commitSha}) |
-| ⏰ **Updated** | ${new Date().toLocaleString('en-US', { timeZone: 'UTC' })} UTC |
-
----
-✅ **Status**: Preview is ready for review!
-
-_This preview will be automatically updated when you push new commits._
-_The preview will be automatically deleted when this PR is closed._`;
+            const body = [
+              '🚀 **PR Preview**',
+              '',
+              '| Field | Value |',
+              '|-------|-------|',
+              `| 🌐 **Preview URL** | [${previewUrl}](${previewUrl}) |`,
+              `| 🔧 **Preview ID** | \\\`${previewName}\\\` |`,
+              `| 📝 **PR Number** | #${prNumber} |`,
+              `| 🎯 **Commit** | [\\\`${shortSha}\\\`](https://github.com/${{ github.repository }}/commit/${commitSha}) |`,
+              `| ⏰ **Updated** | ${new Date().toLocaleString('en-US', { timeZone: 'UTC' })} UTC |`,
+              '',
+              '---',
+              '✅ **Status**: Preview is ready for review!',
+              '',
+              '_This preview will be automatically updated when you push new commits._',
+              '_The preview will be automatically deleted when this PR is closed._'
+            ].join('\\n');
 
             if (botComment) {
               await github.rest.issues.updateComment({
@@ -167,13 +169,15 @@ _The preview will be automatically deleted when this PR is closed._`;
             );
             
             if (botComment) {
-              const cleanupBody = `🧹 **PR Preview Cleanup**
-
-✅ Preview deployment cleanup has been initiated.
-🗑️ The preview URL will be automatically deactivated by Cloudflare.
-
----
-_PR #${prNumber} has been closed._`;
+              const cleanupBody = [
+                '🧹 **PR Preview Cleanup**',
+                '',
+                '✅ Preview deployment cleanup has been initiated.',
+                '🗑️ The preview URL will be automatically deactivated by Cloudflare.',
+                '',
+                '---',
+                `_PR #${prNumber} has been closed._`
+              ].join('\\n');
 
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
