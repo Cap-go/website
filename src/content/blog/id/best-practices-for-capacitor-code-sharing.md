@@ -214,7 +214,7 @@ Metode ini telah berhasil diterapkan di lebih dari 750 aplikasi produksi [\[1\]]
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67fc5744af1a45e500bc59a4/460b6a71189963262e0579d8af2972b5.jpg)
 
-Capgo selaras dengan praktik ini, mengoptimalkan pengembangan Capacitor dengan pembaruan over-the-air (OTA) yang canggih dan alur kerja CI/CD terintegrasi. Ini memberikan hasil yang mengesankan, termasuk kecepatan unduh 114ms untuk bundel 5MB melalui CDN global, waktu respons API rata-rata 434ms di seluruh dunia, dan 23,5 juta pembaruan yang berhasil [\[1\]](https://capgo.app/).
+Capgo selaras dengan praktik ini, mengoptimalkan pengembangan Capacitor dengan pembaruan over-the-air (OTA) yang canggih dan alur kerja CI/CD terintegrasi. Ini memberikan hasil yang mengesankan, termasuk kecepatan unduh 114ms untuk bundel 5MB melalui CDN global, waktu respons API rata-rata 57ms di seluruh dunia, dan 23,5 juta pembaruan yang berhasil [\[1\]](https://capgo.app/).
 
 > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan secara terus-menerus kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

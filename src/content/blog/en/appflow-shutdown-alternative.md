@@ -46,7 +46,7 @@ Instead of being locked into a proprietary CI/CD system, Capgo allows you to:
 - Use popular platforms like GitHub Actions
 - Maintain full control over your build process
 - Follow our detailed tutorials for [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/) setup
-- Or let us handle it all with our [CI/CD Done For You](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you) service
+- Or let us handle it all with our [CI/CD Done For You](https://cal.com/team/capgo/mobile-ci-cd-done-for-you) service
 
 ## Why Choose Capgo?
 
@@ -65,7 +65,7 @@ Transitioning from AppFlow to Capgo is straightforward. Follow our [detailed mig
 3. Set up your CI/CD pipeline using our tutorials
 4. Start deploying updates through Capgo
 
-For enterprise teams requiring dedicated support, [contact our sales team](https://cal.com/martindonadieu/capgo-enterprise-inquiry) to discuss your specific needs and migration strategy.
+For enterprise teams requiring dedicated support, [contact our sales team](https://cal.com/team/capgo/capgo-enterprise-inquiry) to discuss your specific needs and migration strategy.
 
 ## Beyond Basic Functionality
 
@@ -97,6 +97,6 @@ We're not just an alternative – we're actively building the future of mobile a
 
 Don't let AppFlow's shutdown disrupt your development workflow. [Start your journey with Capgo today](/register/) and experience a more efficient, cost-effective solution for your mobile app development needs.
 
-For enterprise solutions and dedicated support, [schedule a call with our team](https://cal.com/martindonadieu/capgo-enterprise-inquiry) to discuss your migration strategy.
+For enterprise solutions and dedicated support, [schedule a call with our team](https://cal.com/team/capgo/capgo-enterprise-inquiry) to discuss your migration strategy.
 
 Remember, Capgo isn't just an alternative – it's an upgrade to your mobile app development workflow, offering more features, better performance, and significant cost savings compared to AppFlow.

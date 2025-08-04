@@ -4,7 +4,7 @@ title: 기능 플래그와 A/B 테스팅을 위한 채널 사용법
 description: CapGo의 채널을 사용하여 기능 플래그와 A/B 테스팅을 직접 사용자에게 할당하거나 백엔드를 활용하는 방법 알아보기
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
-author_url: 'https://twitter.com/martindonadieu'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2025-04-15T00:00:00.000Z
 updated_at: 2025-04-15T00:00:00.000Z
 head_image: /capgo-feature-image.webp

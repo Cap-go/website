@@ -61,7 +61,8 @@ The server API should respond, in JSON, to the capacitor-updater plugin. With th
 ```json
 {
 "version": "1.2.3",
-"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip"
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
+"checksum": "sha256_checksum_of_bundle"
 }
 ```
 
@@ -79,3 +80,29 @@ You can use the command of the CLI to zip your bundle:
 ```bash title="Create a bundle with your files to serve from your server"
 npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 ```
+
+## Generating Bundle Checksum
+
+**Important:** You must use the Capgo CLI to create your bundle zip file. The Capgo plugin requires a specific zip format and structure that is only guaranteed when using the official CLI tool. Standard zip utilities may create incompatible archives.
+
+To generate the checksum for your bundle, use the Capgo CLI zip command with the `--json` flag:
+
+```bash title="Create bundle with checksum information"
+npx @capgo/cli bundle zip [appId] --json
+```
+
+This command will:
+- Create a properly formatted zip file compatible with the Capgo plugin
+- Generate the SHA256 checksum for integrity verification
+- Output bundle information in JSON format
+
+Example output:
+```json
+{
+  "version": "1.2.3",
+  "checksum": "a1b2c3d4e5f6789...",
+  "size": 1234567
+}
+```
+
+Use the `checksum` value from this output in your API response to ensure the plugin can verify the bundle integrity before installation.

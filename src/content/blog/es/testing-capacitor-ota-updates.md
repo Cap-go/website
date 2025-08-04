@@ -94,12 +94,12 @@ Este paso se enfoca en verificar mecanismos individuales de actualización y sus
 
 | Tipo de prueba | Área de enfoque | Criterio de éxito |
 | --- | --- | --- |
-| Detección de actualización | Verificación de versión | Tiempo de respuesta ~434ms |
+| Detección de actualización | Verificación de versión | Tiempo de respuesta ~57ms |
 | Proceso de descarga | [Descarga de paquete](https://capgo.app/docs/webapp/bundles/) | Paquete de 5MB en ~114ms |
 | Instalación | Aplicación de actualización | Integración exitosa |
 | Reversión | Reversión de versión | Reversión exitosa |
 
-El CDN global de Capgo ayuda a mantener velocidades de descarga estables, con un tiempo promedio de respuesta API de 434ms [\[1\]](https://capgo.app/). Estas pruebas a nivel de componente forman la base para evaluar el rendimiento general del sistema.
+El CDN global de Capgo ayuda a mantener velocidades de descarga estables, con un tiempo promedio de respuesta API de 57ms [\[1\]](https://capgo.app/). Estas pruebas a nivel de componente forman la base para evaluar el rendimiento general del sistema.
 
 ### Pruebas completas del sistema
 
@@ -227,7 +227,7 @@ Gracias al manejo robusto de errores y un CDN confiable, Capgo asegura que las a
 
 ### Problemas de Velocidad
 
-El CDN global de Capgo entrega paquetes de 5MB en solo 114ms, con un tiempo de respuesta promedio de API de 434ms. Las actualizaciones diferenciales inteligentes de la plataforma reducen aún más el uso de ancho de banda al descargar solo las partes modificadas [\[1\]](https://capgo.app/).
+El CDN global de Capgo entrega paquetes de 5MB en solo 114ms, con un tiempo de respuesta promedio de API de 57ms. Las actualizaciones diferenciales inteligentes de la plataforma reducen aún más el uso de ancho de banda al descargar solo las partes modificadas [\[1\]](https://capgo.app/).
 
 > "Actualizaciones Parciales: Actualizaciones diferenciales inteligentes. Solo descarga lo que ha cambiado, ahorrando ancho de banda y tiempo" [\[1\]](https://capgo.app/).
 

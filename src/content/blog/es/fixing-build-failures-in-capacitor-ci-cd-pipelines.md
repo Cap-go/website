@@ -278,7 +278,7 @@ El monitoreo en tiempo real de Capgo supervisa los estados de compilación y el 
 | --- | --- |
 | Entrega de Actualizaciones | 23.5M actualizaciones entregadas |
 | Tasa de Éxito | 95% de usuarios actualizados en 24 horas |
-| Tiempo de Respuesta API | 434ms promedio mundial |
+| Tiempo de Respuesta API | 57ms promedio mundial |
 | [Descarga de Bundle](https://capgo.app/docs/webapp/bundles/) | 114ms para un bundle de 5MB |
 
 Cuando surgen problemas, el sistema de rollback de Capgo asegura una recuperación rápida con características como:

@@ -115,7 +115,7 @@ Menggunakan alat [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/
 | Kontrol Versi | Mengelola berbagai rilis | Menjaga pengiriman terorganisir |
 | Kemampuan Rollback | Membalikkan pembaruan dengan cepat | Mengurangi dampak pengguna |
 
-Saat memilih alat, fokus pada yang menawarkan pemantauan otomatis. Alat dengan waktu respons rata-rata **434ms secara global** [\[1\]](https://capgo.app/) memungkinkan tindakan cepat saat masalah muncul.
+Saat memilih alat, fokus pada yang menawarkan pemantauan otomatis. Alat dengan waktu respons rata-rata **57ms secara global** [\[1\]](https://capgo.app/) memungkinkan tindakan cepat saat masalah muncul.
 
 Untuk kontrol lebih besar, pertimbangkan menggunakan [sistem channel](https://capgo.app/docs/plugin/cloud-mode/channel-system/) untuk distribusi pembaruan. Ini memungkinkan Anda menargetkan grup pengguna tertentu dengan versi berbeda, membuat pengujian beta dan staged rollout lebih lancar. Selain itu, kemampuan untuk mendorong perubahan kode langsung sambil tetap mematuhi aturan app store dapat menyederhanakan dan mempercepat [proses pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) Anda.
 

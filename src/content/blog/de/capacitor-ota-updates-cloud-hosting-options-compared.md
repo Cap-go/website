@@ -34,7 +34,7 @@ Over-the-Air (OTA) Updates ermöglichen es Ihnen, Ihre [Capacitor](https://capac
 
 | **Funktion** | **AWS** | **Google Cloud** | **Azure** | **Capgo** |
 | --- | --- | --- | --- | --- |
-| **Geschwindigkeit (5MB Paket)** | 434ms | Nicht angegeben | Nicht angegeben | 114ms |
+| **Geschwindigkeit (5MB Paket)** | 57ms | Nicht angegeben | Nicht angegeben | 114ms |
 | **Sicherheit** | Einrichtung erforderlich | Integrierte Tools | Starke Tools | Ende-zu-Ende-Verschlüsselung |
 | **Integrationseinfachheit** | Manuelle Einrichtung | Moderate Komplexität | REST APIs, CLI | Integrierte CI/CD |
 | **Update-Erfolgsrate** | 82% | Nicht angegeben | Nicht angegeben | 82% |
@@ -76,7 +76,7 @@ AWS-Dienste wie **CodePipeline** und **CodeDeploy** ermöglichen die Automatisie
 | --- | --- |
 | Update-Übernahme | 95% innerhalb von 24 Stunden |
 | Globale Erfolgsrate | 82% |
-| Durchschnittliche Antwortzeit | 434ms weltweit |
+| Durchschnittliche Antwortzeit | 57ms weltweit |
 
 Während diese Zahlen eine starke Leistung zeigen, erfordert ihre Erreichung erheblichen Konfigurations- und Abstimmungsaufwand.
 

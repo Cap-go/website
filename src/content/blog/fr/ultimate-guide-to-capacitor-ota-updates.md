@@ -251,7 +251,7 @@ Capgo se démarque en suivant ces meilleures pratiques, permettant des mises à 
 | Fonctionnalité | Avantage | Métrique de Performance |
 | --- | --- | --- |
 | CDN Mondial | Accélère la livraison | Bundle de 5MB livré en 114ms |
-| Réponse API | Synchronisation rapide | 434ms de réponse moyenne mondiale |
+| Réponse API | Synchronisation rapide | 57ms de réponse moyenne mondiale |
 | Distribution des mises à jour | Déploiement flexible | 95% d'adoption utilisateur en 24 heures |
 
 > "L'équipe OSIRIS-REx de la NASA a noté : '@Capgo est une solution intelligente pour faire des mises à jour de code à chaud (et pas pour tout l'argent du monde comme avec @AppFlow) 🙂'" [\[1\]](https://capgo.app/)

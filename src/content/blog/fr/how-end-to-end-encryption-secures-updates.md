@@ -104,7 +104,7 @@ Voici un aperçu rapide de ses métriques de performance :
 
 | Métrique | Performance |
 | --- | --- |
-| Temps de réponse moyen de l'API | 434ms dans le monde |
+| Temps de réponse moyen de l'API | 57ms dans le monde |
 | Vitesse de téléchargement du bundle | 114ms pour 5MB |
 | Taux de réussite des mises à jour | 95% en 24 heures |
 

@@ -27,7 +27,7 @@ next_blog: ''
 
 -   **¿Qué es?** Un sistema de comunicación bidireccional entre JavaScript y Android, convirtiendo llamadas JavaScript en métodos nativos de Android y viceversa.
 -   **Aspectos Destacados del Rendimiento:**
-    -   Tiempo de respuesta API: **434ms** (promedio global).
+    -   Tiempo de respuesta API: **57ms** (promedio global).
     -   Transferencia de datos: **114ms** para paquetes de 5MB.
     -   Adopción de actualizaciones: **95% completado en 24 horas** usando herramientas como [Capgo](https://capgo.app/).
 -   **Cómo funciona:**
@@ -241,7 +241,7 @@ Capgo utiliza el puente nativo para entregar actualizaciones eficientemente mien
 | **Característica** | **Cómo Funciona** | **Impacto en Rendimiento** |
 | --- | --- | --- |
 | Actualizaciones en Segundo Plano | Instala actualizaciones automáticamente sin entrada del usuario | 95% de usuarios actualizados en 24 horas |
-| API de Integración | Ofrece un tiempo de respuesta promedio de 434ms | Proporciona monitoreo de actualizaciones en tiempo real |
+| API de Integración | Ofrece un tiempo de respuesta promedio de 57ms | Proporciona monitoreo de actualizaciones en tiempo real |
 | Opciones de Alojamiento | Soporta despliegue en la nube o autoalojado | Da flexibilidad en el control de infraestructura |
 | Capacidad de Almacenamiento | Proporciona hasta 20GB para planes empresariales | Simplifica la gestión de versiones |
 
@@ -264,7 +264,7 @@ Para aplicaciones empresariales, Capgo incluye características potentes adaptad
 | **Característica** | **Funcionalidad** | **Ventaja** |
 | --- | --- | --- |
 | Sistema de Canales | Dirige a grupos específicos de usuarios | Permite pruebas de despliegue controladas |
-| Integración API | Ofrece tiempo de respuesta promedio de 434ms | Proporciona monitoreo de actualizaciones en tiempo real |
+| Integración API | Ofrece tiempo de respuesta promedio de 57ms | Proporciona monitoreo de actualizaciones en tiempo real |
 | Opciones de Alojamiento | Soporta despliegue en nube o autoalojado | Da flexibilidad en control de infraestructura |
 | Capacidad de Almacenamiento | Proporciona hasta 20GB para planes empresariales | Simplifica gestión de versiones |
 
@@ -279,7 +279,7 @@ En apps Android de Capacitor, el puente nativo actúa como un enlace de comunica
 | Aspecto | Impacto en Rendimiento |
 | --- | --- |
 | **Entrega de Actualizaciones** | 95% adopción de usuarios en 24 horas |
-| **Respuesta API** | 434ms promedio mundial |
+| **Respuesta API** | 57ms promedio mundial |
 | **Tasa de Éxito** | 82% éxito global en despliegue |
 
 Estos números resaltan la importancia de la comunicación segura y la reducción de carga del puente para mantener un rendimiento óptimo.

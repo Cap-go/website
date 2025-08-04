@@ -245,7 +245,7 @@ Um eine erstklassige Nutzererfahrung aufrechtzuerhalten, überwachen Sie diese S
 | Metrik-Typ | Was zu überwachen ist | Ziel-Benchmark |
 | --- | --- | --- |
 | Update-Erfolg | Nutzerakzeptanzrate | 95% innerhalb 24 Stunden |
-| Antwortzeit | API-Geschwindigkeit | Unter 434ms weltweit |
+| Antwortzeit | API-Geschwindigkeit | Unter 57ms weltweit |
 | Nutzererfahrung | Interface-Interaktionen | Echtzeit-Feedback |
 
 Capgos integrierte Analysefunktionen bieten Echtzeit-Einblicke in das Nutzerengagement, während gleichzeitig die Sicherheit durch Ende-zu-Ende-Verschlüsselung gewährleistet wird.
@@ -271,6 +271,6 @@ Gründliche Tests und aktive Fehlerüberwachung sind ebenfalls essentiell, um ei
 | Metrik | Leistung |
 | --- | --- |
 | Update-Übernahme | 95% innerhalb 24 Stunden |
-| Globale API-Antwort | 434ms Durchschnitt |
+| Globale API-Antwort | 57ms Durchschnitt |
 | Update-Bereitstellung | 114ms für 5MB Bundle |
 | Erfolgsrate | 82% weltweit |

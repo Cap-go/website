@@ -49,7 +49,7 @@ CapacitorアプリのCI/CDのセットアップは複雑で時間がかかるこ
 - 他の独自ソリューションとの比較: 年間$6,000
 - **5年間で$26,100の節約**
 
-[CI/CDを今すぐセットアップ](https://cal.com/martindonadieu/mobile-ci-cd-done-for-you/)
+[CI/CDを今すぐセットアップ](https://cal.com/team/capgo/mobile-ci-cd-done-for-you/)
 
 ## 手動セットアップガイド
 

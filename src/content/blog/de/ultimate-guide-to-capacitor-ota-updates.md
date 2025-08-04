@@ -108,7 +108,7 @@ Capgo zeichnet sich durch die Befolgung dieser Best Practices aus und ermöglich
 | Funktion | Vorteil | Leistungsmetrik |
 | --- | --- | --- |
 | Globales CDN | Beschleunigt die Bereitstellung | 5MB Bundle in 114ms geliefert |
-| API-Antwort | Schnelle Synchronisation | 434ms durchschnittliche weltweite Antwortzeit |
+| API-Antwort | Schnelle Synchronisation | 57ms durchschnittliche weltweite Antwortzeit |
 | Update-Verteilung | Flexible Bereitstellung | 95% Nutzerakzeptanz innerhalb von 24 Stunden |
 
 > "Das NASA OSIRIS-REx-Team bemerkte: '@Capgo ist eine intelligente Möglichkeit, Hot-Code-Pushes durchzuführen (und nicht für alles Geld der Welt wie bei @AppFlow) 🙂'" [\[1\]](https://capgo.app/)

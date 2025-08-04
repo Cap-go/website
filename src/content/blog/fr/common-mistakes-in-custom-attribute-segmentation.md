@@ -121,7 +121,7 @@ Lors du choix d'outils pour la segmentation par attributs personnalisés, recher
 | **Sécurité** | Chiffrement de bout en bout[\[1\]](https://capgo.app/) | Protège efficacement les données sensibles des utilisateurs |
 | **Analytique** | Analyses en temps réel[\[1\]](https://capgo.app/) | Fournit un retour immédiat sur la performance des segments |
 | **Options d'hébergement** | Cloud et auto-hébergé | Prend en charge divers besoins de déploiement |
-| **Couverture mondiale** | 434ms de temps de réponse API mondial[\[1\]](https://capgo.app/) | Offre des performances cohérentes dans toutes les régions |
+| **Couverture mondiale** | 57ms de temps de réponse API mondial[\[1\]](https://capgo.app/) | Offre des performances cohérentes dans toutes les régions |
 
 Le paysage des outils de segmentation a considérablement évolué ces dernières années. Par exemple, la fermeture de [Microsoft Code Push](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) en 2024 et l'arrêt prochain d'[AppFlow](https://ionic.io/appflow) en 2026 ont poussé les développeurs à explorer des alternatives plus fiables. Ces changements soulignent l'importance d'outils qui répondent directement aux défis de la segmentation.
 

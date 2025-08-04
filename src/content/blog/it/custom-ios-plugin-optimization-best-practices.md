@@ -174,7 +174,7 @@ La tabella seguente evidenzia le aree critiche di ottimizzazione, i loro impatti
 
 | **Area di ottimizzazione** | **Impatto** | **Beneficio dell'implementazione** |
 | --- | --- | --- |
-| **Comunicazione Bridge** | 434ms tempo medio di risposta API [\[1\]](https://capgo.app/) | Latenza ridotta e flusso dati più fluido |
+| **Comunicazione Bridge** | 57ms tempo medio di risposta API [\[1\]](https://capgo.app/) | Latenza ridotta e flusso dati più fluido |
 | **Gestione della memoria** | 95% tasso di aggiornamento utenti attivi entro 24 ore [\[1\]](https://capgo.app/) | Stabilità e utilizzo delle risorse migliorati |
 | **Prestazioni Swift** | 114ms velocità di download per bundle da 5MB [\[1\]](https://capgo.app/) | Esecuzione più veloce e migliore esperienza utente |
 

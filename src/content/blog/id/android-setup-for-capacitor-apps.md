@@ -329,7 +329,7 @@ Setelah lingkungan Android Anda siap, saatnya mengintegrasikan Capgo. Alat ini m
 
 -   **Pembaruan Real-time**: Pembaruan mencapai 95% pengguna aktif dalam 24 jam [\[1\]](https://capgo.app/).
 -   **Enkripsi End-to-End**: Memastikan keamanan data.
--   **Respons API Cepat**: Waktu respons rata-rata global adalah 434ms, dengan tingkat keberhasilan 82% [\[1\]](https://capgo.app/).
+-   **Respons API Cepat**: Waktu respons rata-rata global adalah 57ms, dengan tingkat keberhasilan 82% [\[1\]](https://capgo.app/).
 -   **Pembaruan Parsial**: Meminimalkan penggunaan data dengan mentransfer hanya perubahan yang diperlukan.
 
 **Snapshot Kinerja**:

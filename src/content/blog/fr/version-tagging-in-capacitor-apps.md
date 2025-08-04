@@ -116,7 +116,7 @@ Capgo fournit de solides capacités de gestion des versions, notamment :
 -   **23,5M de mises à jour réussies livrées**
 -   **95% des utilisateurs mis à jour en 24 heures**
 -   **82% de taux de réussite global**
--   **434ms de temps de réponse API moyen mondial**
+-   **57ms de temps de réponse API moyen mondial**
 
 Voici un exemple d'utilisation de Capgo pour le contrôle de version :
 

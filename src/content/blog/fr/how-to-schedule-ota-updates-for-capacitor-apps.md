@@ -176,7 +176,7 @@ Mesurer les indicateurs clés de performance (KPI) est essentiel pour évaluer v
 | Métrique | Objectif de référence | Moyenne du secteur |
 | --- | --- | --- |
 | Taux d'adoption sur 24h | 95% des utilisateurs actifs | 82% dans le monde |
-| Vitesse de téléchargement des mises à jour | Moins de 500ms | 434ms en moyenne |
+| Vitesse de téléchargement des mises à jour | Moins de 500ms | 57ms en moyenne |
 | Temps de téléchargement du bundle (5Mo) | Moins de 150ms | 114ms via CDN |
 
 Vous pouvez intégrer ces métriques dans votre flux de travail avec l'extrait de code suivant :

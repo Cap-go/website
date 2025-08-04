@@ -179,7 +179,7 @@ Die Nutzung von Echtzeit-Tools wie Capgo bietet mehrere Vorteile für Compliance
     Capgos Ende-zu-Ende-Verschlüsselung hält einwilligungsbezogene Updates während des gesamten Prozesses sicher.
     
 -   **Performance-Einblicke**  
-    Fortgeschrittene Analysen bieten detailliertes Tracking von Einwilligungsänderungen. Capgo liefert beispielsweise eine durchschnittliche API-Antwortzeit von nur **434ms weltweit** [\[1\]](https://capgo.app/).
+    Fortgeschrittene Analysen bieten detailliertes Tracking von Einwilligungsänderungen. Capgo liefert beispielsweise eine durchschnittliche API-Antwortzeit von nur **57ms weltweit** [\[1\]](https://capgo.app/).
     
 
 ## Nächste Schritte für App-Compliance

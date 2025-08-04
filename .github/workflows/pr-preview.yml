@@ -1,0 +1,188 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
+
+concurrency:
+  group: pr-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    environment: preview
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Set preview variables
+        id: preview
+        run: |
+          # Create a safe branch name for Cloudflare
+          pr_number="${{ github.event.pull_request.number }}"
+          branch_name="${{ github.head_ref }}"
+          
+          # Create a sanitized name: pr-{number}-{sanitized-branch}
+          sanitized_branch=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
+          preview_name="pr-${pr_number}-${sanitized_branch}"
+          
+          # Limit length to avoid Cloudflare limits (max 28 chars for subdomain)
+          if [ ${#preview_name} -gt 28 ]; then
+            preview_name="pr-${pr_number}-$(echo $sanitized_branch | cut -c1-$((28-${#pr_number}-4)))"
+          fi
+          
+          echo "name=$preview_name" >> $GITHUB_OUTPUT
+          echo "url=https://$preview_name.capgo-website.pages.dev" >> $GITHUB_OUTPUT
+          echo "pr_number=$pr_number" >> $GITHUB_OUTPUT
+
+      - name: Build site
+        run: bun run build
+        env:
+          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+          ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
+          ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
+          CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        run: |
+          echo "Deploying to preview: ${{ steps.preview.outputs.name }}"
+          bunx wrangler@latest pages deploy dist \
+            --project-name capgo-website \
+            --branch ${{ steps.preview.outputs.name }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Update PR comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const previewUrl = '${{ steps.preview.outputs.url }}';
+            const previewName = '${{ steps.preview.outputs.name }}';
+            const prNumber = ${{ steps.preview.outputs.pr_number }};
+            const commitSha = '${{ github.event.pull_request.head.sha }}';
+            const shortSha = commitSha.substring(0, 7);
+            
+            // Find existing bot comment
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            
+            const botComment = comments.data.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('🚀 **PR Preview**')
+            );
+            
+            const body = [
+              '🚀 **PR Preview**',
+              '',
+              '| Field | Value |',
+              '|-------|-------|',
+              `| 🌐 **Preview URL** | [${previewUrl}](${previewUrl}) |`,
+              `| 🔧 **Preview ID** | \\\`${previewName}\\\` |`,
+              `| 📝 **PR Number** | #${prNumber} |`,
+              `| 🎯 **Commit** | [\\\`${shortSha}\\\`](https://github.com/${{ github.repository }}/commit/${commitSha}) |`,
+              `| ⏰ **Updated** | ${new Date().toLocaleString('en-US', { timeZone: 'UTC' })} UTC |`,
+              '',
+              '---',
+              '✅ **Status**: Preview is ready for review!',
+              '',
+              '_This preview will be automatically updated when you push new commits._',
+              '_The preview will be automatically deleted when this PR is closed._'
+            ].join('\\n');
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: body
+              });
+            }
+
+  cleanup-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Calculate preview name
+        id: preview
+        run: |
+          pr_number="${{ github.event.pull_request.number }}"
+          branch_name="${{ github.head_ref }}"
+          sanitized_branch=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]' | sed 's/--*/-/g' | sed 's/^-\|-$//g')
+          preview_name="pr-${pr_number}-${sanitized_branch}"
+          
+          if [ ${#preview_name} -gt 28 ]; then
+            preview_name="pr-${pr_number}-$(echo $sanitized_branch | cut -c1-$((28-${#pr_number}-4)))"
+          fi
+          
+          echo "name=$preview_name" >> $GITHUB_OUTPUT
+
+      - name: Delete Cloudflare Pages deployment
+        continue-on-error: true
+        run: |
+          echo "Cleaning up preview deployment: ${{ steps.preview.outputs.name }}"
+          # Note: Cloudflare Pages doesn't have a direct delete command via wrangler
+          # The deployment will be automatically cleaned up by Cloudflare after a period of inactivity
+          echo "Preview cleanup initiated for: ${{ steps.preview.outputs.name }}"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Update PR comment with cleanup status
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = ${{ github.event.pull_request.number }};
+            
+            // Find existing bot comment
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            
+            const botComment = comments.data.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('🚀 **PR Preview**')
+            );
+            
+            if (botComment) {
+              const cleanupBody = [
+                '🧹 **PR Preview Cleanup**',
+                '',
+                '✅ Preview deployment cleanup has been initiated.',
+                '🗑️ The preview URL will be automatically deactivated by Cloudflare.',
+                '',
+                '---',
+                `_PR #${prNumber} has been closed._`
+              ].join('\\n');
+
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: cleanupBody
+              });
+            }

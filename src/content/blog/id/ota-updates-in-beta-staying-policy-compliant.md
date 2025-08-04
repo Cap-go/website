@@ -179,7 +179,7 @@ Strategi distribusi yang terstruktur memastikan pembaruan dikirimkan secara kons
 
 3\. **Sistem Pemantauan**
 
-Analitik bawaan memungkinkan Anda melacak kinerja pembaruan. Dengan waktu respons API rata-rata 434ms di seluruh dunia [\[1\]](https://capgo.app/), alat-alat ini memberikan wawasan real-time tentang tingkat keberhasilan distribusi.
+Analitik bawaan memungkinkan Anda melacak kinerja pembaruan. Dengan waktu respons API rata-rata 57ms di seluruh dunia [\[1\]](https://capgo.app/), alat-alat ini memberikan wawasan real-time tentang tingkat keberhasilan distribusi.
 
 ## Kesimpulan: Mengelola Pembaruan yang Sesuai
 

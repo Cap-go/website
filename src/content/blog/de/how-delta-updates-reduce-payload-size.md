@@ -85,7 +85,7 @@ Leistungskennzahlen aus realen Anwendungen bestätigen den Wert von Delta-Update
 | --- | --- |
 | **Nutzerakzeptanz** | 95% der Nutzer aktualisieren innerhalb von 24 Stunden |
 | **Erfolgsrate** | 82% weltweit |
-| **API-Antwortzeit** | 434ms durchschnittlich |
+| **API-Antwortzeit** | 57ms durchschnittlich |
 | **Produktiv-Apps** | Über 750 Apps nutzen die Technologie erfolgreich |
 
 Die Nutzererfahrung stimmt mit diesen Zahlen überein. Zum Beispiel teilte colenso, der über 5.000 Nutzer verwaltet, mit:

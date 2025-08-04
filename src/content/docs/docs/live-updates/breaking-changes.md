@@ -15,6 +15,29 @@ Let's say you have:
 - Live update 1.2.4 (compatible with 1.2.3)
 - Live update 2.0.1 (compatible with 2.0.0)
 
+## Strategy: Always Use defaultChannel for Major Versions
+
+**Recommended approach:** Set a `defaultChannel` for every major version. This ensures you can always push updates to specific user groups without relying on dynamic channel assignment.
+
+```ts
+// Version 1.x releases
+defaultChannel: 'v1'
+
+// Version 2.x releases  
+defaultChannel: 'v2'
+
+// Version 3.x releases (future)
+defaultChannel: 'v3'
+```
+
+:::tip
+**Benefits of this approach:**
+- **Always have control** over which users receive updates
+- **No dynamic channel switching** needed in your app code
+- **Clear separation** between different app versions
+- **Flexibility** to push updates to any specific version group
+:::
+
 ## 1. Create Channel for New Version
 
 ```bash
@@ -22,7 +45,9 @@ Let's say you have:
 npx @capgo/cli channel create v2
 ```
 
-## 2. Update Capacitor Config
+## 2. Update Capacitor Config for Version 2.0.0
+
+Update your Capacitor config before building version 2.0.0 for the app store:
 
 ```ts
 // capacitor.config.ts
@@ -34,7 +59,7 @@ const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
       // ... other options
-      defaultChannel: 'v2' // New apps will use v2 channel
+      defaultChannel: 'v2' // All 2.0.0 users will use v2 channel
     }
   }
 };
@@ -42,52 +67,100 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-## 3. Upload Bundles to Respective Channels
+:::note
+**For version 1.x:** If you didn't set a `defaultChannel` initially, version 1.x users are on the `production` channel. For future major versions, always set a specific channel like `v3`, `v4`, etc.
+:::
+
+## 3. Manage Separate Code Branches
+
+Create separate git branches to maintain compatibility between app versions:
 
 ```bash
-# Upload 1.2.4 to production channel (for 1.2.3 users)
+# Create and maintain a branch for version 1.x updates
+git checkout -b v1-maintenance
+git push origin v1-maintenance
+
+# Your main branch continues with version 2.x development
+git checkout main
+```
+
+:::warning
+**Critical:** Never push JavaScript bundles to older apps that expect native code/APIs they don't have. Always build updates from the appropriate branch:
+- **v1-maintenance branch**: For updates to 1.x apps (production channel)
+- **main branch**: For updates to 2.x apps (v2 channel)
+:::
+
+## 4. Upload Bundles to Respective Channels
+
+```bash
+# For 1.x updates: Build from v1-maintenance branch
+git checkout v1-maintenance
+# Make your 1.x compatible changes here
 npx @capgo/cli bundle upload --channel production
 
-# Upload 2.0.1 to v2 channel (for 2.0.0 users)
+# For 2.x updates: Build from main branch  
+git checkout main
+# Make your 2.x changes here
 npx @capgo/cli bundle upload --channel v2
 ```
 
-## 4. Enable Self-Assignment
+## 5. Enable Self-Assignment
 
 ```bash
 # Allow apps to self-assign to v2 channel
 npx @capgo/cli channel set v2 --self-assign
 ```
 
-## 5. Update App Code
+## 6. Deploy to App Store
 
-Add version check in your app to assign users to the correct channel:
+Build and deploy version 2.0.0 to the app store. All users who download this version (whether new users or existing users upgrading) will automatically use the v2 channel because it's configured in the app bundle.
 
-```ts
-// src/utils/updater.ts
-import { CapacitorUpdater } from '@capgo/capacitor-updater'
+:::note
+**No code changes needed!** Since `defaultChannel: 'v2'` is bundled with the app store version, all users downloading version 2.0.0 will automatically use the correct channel.
+:::
 
-export async function setupUpdater() {
-  const { appVersion } = await CapacitorUpdater.getCurrentVersion()
-  const majorVersion = appVersion.split('.')[0]
-  
-  // Version 1.x uses default production channel
-  // Only assign v2 channel for version 2.x
-  if (majorVersion === '2') {
-    await CapacitorUpdater.setChannel('v2')
-  }
-}
+## Scaling to Future Versions
+
+When you release version 3.0.0 with more breaking changes:
+
+```bash
+# Create channel for version 3.x
+npx @capgo/cli channel create v3
 ```
 
-## 6. Cleanup (After Migration)
+```ts
+// capacitor.config.ts for version 3.0.0
+const config: CapacitorConfig = {
+  // ...
+  plugins: {
+    CapacitorUpdater: {
+      defaultChannel: 'v3' // Version 3.x users
+    }
+  }
+};
+```
 
-Once all users have migrated to version 2.x ( count 3/4 months):
+Now you can push updates to any version:
+- `production` channel → Version 1.x users
+- `v2` channel → Version 2.x users  
+- `v3` channel → Version 3.x users
+
+## 7. Cleanup (After Migration)
+
+Once all users have migrated to version 2.x (count 3-4 months):
 
 1. Remove `defaultChannel` from your Capacitor config
 2. Delete the v2 channel:
 
 ```bash
 npx @capgo/cli channel delete v2
+```
+
+3. Delete the v1-maintenance branch:
+
+```bash
+git branch -d v1-maintenance
+git push origin --delete v1-maintenance
 ```
 
 :::tip
@@ -106,15 +179,17 @@ You can safely delete the v2 channel in Capgo even if some users still have the 
 
 To send updates compatible with version 1.x:
 
-1. Create a git tag for version 1.x:
+1. Switch to the v1-maintenance branch:
 ```bash
-git tag v1.2.4
-git push origin v1.2.4
+git checkout v1-maintenance
 ```
 
-2. Switch to the tag:
+2. Make your changes and commit:
 ```bash
-git checkout v1.2.4
+# Make 1.x compatible changes
+git add .
+git commit -m "Fix for v1.x"
+git push origin v1-maintenance
 ```
 
 3. Build and upload to production channel:
@@ -123,5 +198,5 @@ npx @capgo/cli bundle upload --channel production
 ```
 
 :::tip
-Your main branch can continue targeting the latest version (2.x) while you maintain 1.x updates through git tags
+Keep your v1-maintenance branch up to date with bug fixes that are compatible with version 1.x, but never merge breaking changes from main
 ::: 

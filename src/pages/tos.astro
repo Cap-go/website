@@ -18,8 +18,8 @@ const domain = config.public.baseUrl
     {
       Astro.locals.locale !== defaultLocale && (
         <span class="text-xs">
-          Note: This is an automatic translated page from it's English source. Only the English version should be used for legal actions, associated with only link to English
-          source.
+          Note: This is an automatically translated page from its English source. Only the English version should be used for legal actions. Please refer to the English
+          source for legal matters.
         </span>
       )
     }
@@ -197,6 +197,12 @@ const domain = config.public.baseUrl
       {m.tos_in_app_purchases_text_5({}, { locale: Astro.locals.locale })}
     </p>
     <p>{m.tos_in_app_purchases_text_6({}, { locale: Astro.locals.locale })}</p>
+    <h2>{m.tos_right_to_refuse_or_terminate_service_title({}, { locale: Astro.locals.locale })}</h2>
+    <p>{m.tos_right_to_refuse_or_terminate_service_text_1({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.tos_right_to_refuse_or_terminate_service_text_2({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.tos_right_to_refuse_or_terminate_service_text_3({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.tos_right_to_refuse_or_terminate_service_text_4({}, { locale: Astro.locals.locale })}</p>
+    <p>{m.tos_right_to_refuse_or_terminate_service_text_5({}, { locale: Astro.locals.locale })}</p>
     <h2>{m.tos_user_accounts_title({}, { locale: Astro.locals.locale })}</h2>
     <p>
       {m.tos_user_accounts_text_1({}, { locale: Astro.locals.locale })}
@@ -310,9 +316,9 @@ const domain = config.public.baseUrl
     <ul>
       <li>
         {m.tos_contact_us_website({}, { locale: Astro.locals.locale })}
-        <a href="mailto:support@capgo.app" rel="external nofollow noopener" target="_blank">{domain}#support</a>
+        <a href="https://support.capgo.app" rel="external nofollow noopener" target="_blank">{domain}#support</a>
       </li>
     </ul>
-    <div class="mt-8 h-[1px] w-full"></div>
+    <div class="mt-8 h-px w-full"></div>
   </div>
 </Layout>

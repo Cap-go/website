@@ -116,7 +116,7 @@ Die Verwendung von [Update-Management](https://capgo.app/docs/plugin/cloud-mode/
 | Versionskontrolle | Verwaltet mehrere Releases | Hält Deployments organisiert |
 | Rollback-Fähigkeit | Kehrt Updates schnell um | Reduziert Nutzerauswirkungen |
 
-Bei der Auswahl eines Tools konzentrieren Sie sich auf solche mit automatisierter Überwachung. Tools mit einer durchschnittlichen Antwortzeit von **434ms weltweit** [\[1\]](https://capgo.app/) ermöglichen schnelles Handeln bei Problemen.
+Bei der Auswahl eines Tools konzentrieren Sie sich auf solche mit automatisierter Überwachung. Tools mit einer durchschnittlichen Antwortzeit von **57ms weltweit** [\[1\]](https://capgo.app/) ermöglichen schnelles Handeln bei Problemen.
 
 Für noch mehr Kontrolle erwägen Sie die Verwendung eines [Kanalsystems](https://capgo.app/docs/plugin/cloud-mode/channel-system/) für die Update-Verteilung. Dies ermöglicht es Ihnen, bestimmte Nutzergruppen mit verschiedenen Versionen anzusprechen, was Beta-Tests und gestufte Rollouts reibungsloser macht. Zusätzlich kann die Möglichkeit, Live-Code-Änderungen zu pushen und dabei konform mit App-Store-Regeln zu bleiben, Ihren [Update-Prozess](https://capgo.app/docs/plugin/cloud-mode/manual-update/) vereinfachen und beschleunigen.
 

@@ -7,7 +7,23 @@ prev: false
 locale: de
 ---
 
+import { Card } from '@astrojs/starlight/components';
+
 Hier sind einige häufige Probleme, auf die Sie bei der Verwendung von Capgo stoßen könnten, und wie Sie diese lösen können
+
+<Card title="🚀 Benötigen Sie Experten-Hilfe?" icon="rocket">
+  <p>
+    Stecken Sie bei einem komplexen Problem fest? Unser Expertenteam ist hier, um zu helfen! Erhalten Sie persönlichen Support, Code-Reviews und maßgeschneiderte Lösungen für Ihre spezifischen Bedürfnisse.
+  </p>
+  <div style="margin-top: 1rem;">
+    <a href="/de/consulting/" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: #2563eb; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s;">
+      Professionellen Support erhalten
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+    </a>
+  </div>
+</Card>
 
 ### Upload-Fehler
 
@@ -33,7 +49,7 @@ Die Capgo CLI bietet einige zusätzliche Flags zur Lösung häufiger Upload-Prob
 
 Sie können diese Flags mit anderen Optionen wie `--channel` nach Bedarf kombinieren. Siehe die [Capgo CLI Dokumentation](/docs/cli/overview/) für vollständige Details zu den verfügbaren Upload-Optionen
 
-Wenn Sie immer noch Probleme mit Uploads haben, wenden Sie sich an den [Capgo Support](mailto:support@capgo.app) für weitere Unterstützung
+Wenn Sie immer noch Probleme mit Uploads haben, wenden Sie sich an den [Capgo Support](https://support.capgo.app) für weitere Unterstützung
 
 ### Updates debuggen
 

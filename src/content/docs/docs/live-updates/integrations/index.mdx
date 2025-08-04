@@ -1,0 +1,81 @@
+---
+title: CI/CD Integrations
+description: "Integrate Capgo Live Updates with your favorite CI/CD platform for automated deployment workflows."
+sidebar:
+  order: 1
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Automate your Capgo Live Updates deployment process by integrating with popular CI/CD platforms. These integrations allow you to automatically deploy app updates whenever you push code changes, test feature branches, and manage multiple deployment environments.
+
+## Available Integrations
+
+Choose your CI/CD platform to get started with automated deployments:
+
+<CardGrid>
+  <LinkCard
+    title="Azure DevOps"
+    description="Integrate with Azure DevOps Pipelines for automated builds, testing, and deployment workflows."
+    href="/docs/live-updates/integrations/azure-devops/"
+  />
+  <LinkCard
+    title="GitLab CI/CD"
+    description="Set up GitLab CI/CD pipelines to automatically deploy your app updates with comprehensive environment management."
+    href="/docs/live-updates/integrations/gitlab-ci/"
+  />
+  <LinkCard
+    title="GitHub Actions"
+    description="Use GitHub Actions for powerful automation with multi-channel deployments and environment protection."
+    href="/docs/live-updates/integrations/github-actions/"
+  />
+  <LinkCard
+    title="Bitbucket Pipelines"
+    description="Deploy with Bitbucket Pipelines using simple or advanced configurations for multiple environments."
+    href="/docs/live-updates/integrations/bitbucket-pipeline/"
+  />
+</CardGrid>
+
+## What You'll Get
+
+All integration guides include:
+
+- **Simple Setup**: Basic configuration to get started quickly
+- **Advanced Workflows**: Multi-environment deployments with staging and production
+- **Feature Branch Testing**: Automatic deployment of feature branches to test channels
+- **Security Best Practices**: Secure secret management and environment protection
+- **Monitoring**: Notifications and logging for deployment status
+
+<Aside type="tip">
+
+**New to CI/CD?** Start with the simple configuration for your platform, then gradually add more advanced features like multi-channel deployments and automated testing as your needs grow.
+
+</Aside>
+
+## Common Features
+
+Each integration supports:
+
+- **Automated Builds**: Trigger deployments on code changes
+- **Multi-Channel Support**: Deploy to different channels (development, staging, production)
+- **Pull Request/Merge Request Testing**: Test changes in isolated environments
+- **Encryption Support**: Secure deployments with Capgo's encryption feature
+- **Environment Protection**: Manual approvals and restricted access for production
+- **Notifications**: Slack, email, and other notification integrations
+
+## Prerequisites
+
+Before setting up any integration, ensure you have:
+
+- A Capgo account with an app configured
+- Your app's source code in a Git repository
+- A Capgo API token from [web.capgo.app/apikeys](https://web.capgo.app/apikeys)
+- Node.js and npm/yarn configured in your project
+
+## Related Documentation
+
+- [Channels](/docs/live-updates/channels/) - Learn how to manage different deployment environments
+- [Encryption](/docs/live-updates/encryption/) - Secure your deployments with end-to-end encryption
+- [Update Behavior](/docs/live-updates/update-behavior/) - Customize how updates are applied to your apps
+
+Choose your CI/CD platform above to start automating your Capgo deployments!

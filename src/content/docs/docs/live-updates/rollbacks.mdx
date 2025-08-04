@@ -9,13 +9,64 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 While Capgo's live updates allow you to quickly deliver improvements and fixes to your users, there may be situations where you need to roll back to a previous version of your app. Perhaps a new update introduced an unexpected critical issue, or maybe you want to revert a specific change while you work on a fix.
 
-Capgo provides several ways to manage a channel's builds and control the version of your app that users receive.
+Capgo provides several ways to manage a channel's builds and control the version of your app that users receive, including both manual rollback options and automatic safety mechanisms.
+
+## Automatic Rollback Protection
+
+Capgo includes a built-in safety mechanism to protect your users from broken updates. If a JavaScript error occurs before the `notifyAppReady()` method is called, the plugin will automatically roll back to the previous working version.
+
+### How Automatic Rollback Works
+
+When a new update is downloaded and applied, Capgo expects your app to call `notifyAppReady()` within a configurable timeframe to confirm that the update loaded successfully. This method signals that:
+
+- The JavaScript bundle loaded without critical errors
+- Your app's core functionality is working
+- The update is safe to keep
+
+If `notifyAppReady()` is not called due to a JavaScript crash or critical error, Capgo will:
+
+1. Detect that the update failed to initialize properly
+2. Automatically revert to the previous working bundle
+3. Mark the problematic update as failed to prevent it from being applied again
+
+<Aside type="tip">
+Make sure to call `notifyAppReady()` in your app's initialization code after your core components have loaded successfully. This ensures the automatic rollback protection works as intended.
+</Aside>
+
+```javascript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+// Call this after your app has successfully initialized
+await CapacitorUpdater.notifyAppReady()
+```
+
+This automatic protection helps ensure that even if you accidentally push a broken update, your users won't be stuck with a non-functional app.
+
+### Configuring the Timeout
+
+You can configure how long Capgo waits for `notifyAppReady()` to be called by setting the `appReadyTimeout` in your Capacitor configuration:
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "appReadyTimeout": 10000
+    }
+  }
+}
+```
+
+The `appReadyTimeout` value is specified in milliseconds. The default timeout is typically 10 seconds, but you can adjust this based on your app's initialization requirements. If your app takes longer to load due to complex initialization processes, you may want to increase this value.
 
 ## Rolling Back to a Previous Bundle
 
 Every time you upload a new build and assign it to a channel, Capgo keeps a history of those builds. If you need to revert a specific update, you can select one of these previous builds to redeploy to the channel.
 
-To roll back to a previous build:
+![Rollback UI interface](/rollback_ui.webp)
+
+The primary way to roll back is through the rollback interface, which is located in the 4th tab (History) when viewing a channel in the Capgo Dashboard. This tab provides a comprehensive view of all available builds for the channel, allowing you to easily select and revert to any previous version.
+
+To roll back using the History tab:
 
 <Steps>
 
@@ -25,12 +76,25 @@ To roll back to a previous build:
 
 3. Click the name of the channel you want to roll back.
 
-4. Find the build you want to revert to in the channel's build history.
+4. Go to the 4th tab (History) in the channel view.
 
-5. Click the crown icon next to that build to make it the active build for the channel.
-   ![Channel management options](/select_bundle.webp)
+5. Find the build you want to revert to in the build history.
 
-6. Confirm that you want to roll back to this build.
+6. Select that build to make it the active build for the channel.
+
+7. Confirm that you want to roll back to this build.
+
+</Steps>
+
+### Alternative Method: Using the Crown Icon
+
+As a second way, you can also roll back directly from the first tab by clicking the crown icon next to any build in the channel's build history:
+
+<Steps>
+
+1. In the first tab of the channel view, find the build you want to revert to.
+2. Click the crown icon next to that build to make it the active build for the channel. ![Channel management options](/select_bundle.webp)
+3. Confirm that you want to roll back to this build.
 
 </Steps>
 
@@ -46,11 +110,14 @@ If you want to temporarily halt updates on a channel while you investigate an is
 
 To unlink a channel:
 
+<Steps>
 1. Navigate to the channel in the Capgo Dashboard.
 
 2. Click the "Unlink" button next to the current build.
 
 3. Confirm that you want to unlink the channel.
+
+</Steps>
 
 Once a channel is unlinked, it will not distribute any new updates. Devices configured to that channel will stay on their current build until the channel is linked to a build again.
 
@@ -62,11 +129,15 @@ In more severe situations, you may want to revert all devices on a channel back 
 
 To force the built-in bundle on a channel:
 
+<Steps>
+
 1. Navigate to the channel in the Capgo Dashboard.
 
 2. Click the "Built-in Bundle" button.
 
 3. Confirm that you want to force the built-in bundle.
+
+</Steps>
 
 When you force the built-in bundle, all devices configured to that channel will revert back to the original packaged web build on their next update check. This happens regardless of what build they're currently on.
 

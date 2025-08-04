@@ -146,7 +146,7 @@ Questo approccio stratificato garantisce non solo sessioni sicure ma anche la di
 Capgo combina la sicurezza con metriche di prestazioni impressionanti, garantendo distribuzioni di aggiornamenti affidabili ed efficienti:
 
 - **Velocità di Aggiornamento**: Trasferisce bundle da 5MB in soli 114ms, minimizzando l'esposizione alle vulnerabilità durante gli aggiornamenti [\[13\]](https://capgo.app).
-- **Risposta API**: Mantiene un tempo medio di risposta di 434ms per le operazioni di sicurezza critiche [\[13\]](https://capgo.app).
+- **Risposta API**: Mantiene un tempo medio di risposta di 57ms per le operazioni di sicurezza critiche [\[13\]](https://capgo.app).
 - **Tasso di Successo degli Aggiornamenti**: Garantisce un tasso di successo globale dell'82% per le distribuzioni [\[13\]](https://capgo.app).
 - **Copertura Utenti**: Raggiunge il 95% degli utenti attivi con aggiornamenti di sicurezza entro 24 ore [\[13\]](https://capgo.app).
 

@@ -131,7 +131,7 @@ Combinar este enfoque con las herramientas adecuadas asegura un proceso robusto 
 
 Capgo simplifica las actualizaciones OTA con características diseñadas para mejorar la eficiencia:
 
--   **Análisis en tiempo real**: El tiempo de respuesta global de la API promedia 434ms [\[1\]](https://capgo.app/)
+-   **Análisis en tiempo real**: El tiempo de respuesta global de la API promedia 57ms [\[1\]](https://capgo.app/)
 -   **Reversión con un clic**: Vuelve rápidamente a versiones anteriores si es necesario
 -   **Actualizaciones parciales**: Reduce el uso de ancho de banda actualizando solo los componentes necesarios
 -   **Integración CI/CD**: Funciona perfectamente con plataformas como [GitHub Actions](https://docsgithubcom/actions) y [GitLab CI](https://docsgitlabcom/ee/ci/)
@@ -152,7 +152,7 @@ Aquí hay un desglose de algunas [características de depuración](https://capgo
 | --- | --- |
 | Cifrado de Extremo a Extremo | Sí, totalmente cifrado |
 | Tasa de Éxito de Actualización | 82% globalmente |
-| Tiempo de Respuesta | 434ms en promedio |
+| Tiempo de Respuesta | 57ms en promedio |
 | Soporte de Reversión | Instantáneo, un clic |
 | Seguimiento de Errores | Tiempo real |
 | Distribución de Actualizaciones | Sistema basado en canales |

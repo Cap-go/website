@@ -174,7 +174,7 @@ Mematuhi pedoman toko aplikasi sangat penting untuk menghindari keterlambatan at
 
 ### Fungsi Inti Capgo
 
-Capgo menyederhanakan proses manajemen pembaruan OTA dengan sistemnya yang aman dan terenkripsi serta fungsionalitas saluran yang canggih. Pembaruan disampaikan dengan cepat dan aman, berkat CDN globalnya, yang mencapai **waktu unduh 114ms untuk bundel 5MB** dan **rata-rata waktu respons API 434ms di seluruh dunia** [\[1\]](https://capgo.app/). Platform ini juga menggunakan sistem pembaruan parsial, mengunduh hanya komponen yang berubah. Pendekatan ini menyebabkan **tingkat pembaruan 95% di antara pengguna aktif dalam waktu 24 jam** [\[1\]](https://capgo.app/).
+Capgo menyederhanakan proses manajemen pembaruan OTA dengan sistemnya yang aman dan terenkripsi serta fungsionalitas saluran yang canggih. Pembaruan disampaikan dengan cepat dan aman, berkat CDN globalnya, yang mencapai **waktu unduh 114ms untuk bundel 5MB** dan **rata-rata waktu respons API 57ms di seluruh dunia** [\[1\]](https://capgo.app/). Platform ini juga menggunakan sistem pembaruan parsial, mengunduh hanya komponen yang berubah. Pendekatan ini menyebabkan **tingkat pembaruan 95% di antara pengguna aktif dalam waktu 24 jam** [\[1\]](https://capgo.app/).
 
 ### Keuntungan bagi Pengembang
 
@@ -231,6 +231,6 @@ Untuk membuat pembaruan OTA Anda aman dan efisien, pertimbangkan langkah-langkah
 -   **Atur alat pemantauan** untuk melacak metrik kritis secara real time.
 -   **Terapkan peluncuran bertahap** dengan memulai dari kelompok pengguna kecil sebelum memperluas ke semua pengguna.
 
-Lingkungan staging yang dipersiapkan dengan baik, didukung oleh platform seperti Capgo, dapat membantu Anda mencapai tujuan ini. Sebagai contoh, 95% pengguna aktif dapat memperbarui dalam waktu 24 jam, dengan waktu respons API global rata-rata 434ms [\[1\]](https://capgo.app/).
+Lingkungan staging yang dipersiapkan dengan baik, didukung oleh platform seperti Capgo, dapat membantu Anda mencapai tujuan ini. Sebagai contoh, 95% pengguna aktif dapat memperbarui dalam waktu 24 jam, dengan waktu respons API global rata-rata 57ms [\[1\]](https://capgo.app/).
 
 > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam mengirimkan terus-menerus kepada pengguna kami!" [\[1\]](https://capgo.app/)

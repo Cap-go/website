@@ -40,7 +40,7 @@ next_blog: ''
 
 | Funktion | Capacitor (Capgo) | Appflow |
 | --- | --- | --- |
-| **Update-Geschwindigkeit** | 95% in 24 Stunden, 434ms API | Variiert |
+| **Update-Geschwindigkeit** | 95% in 24 Stunden, 57ms API | Variiert |
 | **Sicherheit** | Ende-zu-Ende-Verschlüsselung | Standard-Signierung |
 | **Hosting** | Cloud oder Self-Hosted | Nur Cloud |
 | **Zukünftige Verfügbarkeit** | Aktiv entwickelt | Endet 2026 |

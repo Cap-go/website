@@ -124,7 +124,7 @@ Pendekatan modern membentuk ulang cara full releases dikelola, menawarkan kecepa
 | Lebih mudah didukung dan didokumentasikan | Opsi rollback terbatas |
 | Proses penyebaran lebih cepat | Potensi lonjakan beban server |
 
-Capgo melaporkan tingkat keberhasilan global 82% untuk pembaruan, dengan waktu respons API rata-rata 434ms di seluruh dunia [\[1\]](https://capgo.app/).
+Capgo melaporkan tingkat keberhasilan global 82% untuk pembaruan, dengan waktu respons API rata-rata 57ms di seluruh dunia [\[1\]](https://capgo.app/).
 
 > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
@@ -251,7 +251,7 @@ Berikut yang ditawarkan Capgo untuk staged releases:
 
 ### Perangkat Full Release Capgo
 
-Capgo membuat full releases cepat dan aman, menggunakan CDN global, pembaruan latar belakang, dan integrasi CI/CD yang mulus. Platform ini mengirimkan bundle 5MB hanya dalam 114ms, dengan waktu respons API rata-rata 434ms [\[1\]](https://capgo.app/).
+Capgo membuat full releases cepat dan aman, menggunakan CDN global, pembaruan latar belakang, dan integrasi CI/CD yang mulus. Platform ini mengirimkan bundle 5MB hanya dalam 114ms, dengan waktu respons API rata-rata 57ms [\[1\]](https://capgo.app/).
 
 Fitur utama untuk full releases meliputi:
 

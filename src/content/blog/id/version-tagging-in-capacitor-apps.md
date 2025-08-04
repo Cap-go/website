@@ -364,7 +364,7 @@ Capgo menyediakan kemampuan manajemen versi yang kuat, termasuk:
 - **23.5M pembaruan berhasil disampaikan**
 - **95% pengguna diperbarui dalam 24 jam**
 - **82% tingkat keberhasilan global**
-- **434ms waktu respons API rata-rata di seluruh dunia**
+- **57ms waktu respons API rata-rata di seluruh dunia**
 
 Berikut adalah contoh cara menggunakan Capgo untuk kontrol versi:
 

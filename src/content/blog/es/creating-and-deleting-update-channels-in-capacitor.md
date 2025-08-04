@@ -262,7 +262,7 @@ Capgo admite más de 30 complementos y funciona perfectamente con pipelines de C
 
 ### Puntos Principales
 
-La gestión eficaz de canales asegura que las implementaciones de aplicaciones funcionen sin problemas. El sistema de canales de Capgo muestra resultados impresionantes: **95% de las actualizaciones son adoptadas en 24 horas**, respaldado por una CDN global que entrega un paquete de 5MB en solo 114ms, junto con un tiempo de respuesta de API de 434ms a nivel mundial [\[1\]](https://capgo.app/).
+La gestión eficaz de canales asegura que las implementaciones de aplicaciones funcionen sin problemas. El sistema de canales de Capgo muestra resultados impresionantes: **95% de las actualizaciones son adoptadas en 24 horas**, respaldado por una CDN global que entrega un paquete de 5MB en solo 114ms, junto con un tiempo de respuesta de API de 57ms a nivel mundial [\[1\]](https://capgo.app/).
 
 | Métrica | Rendimiento |
 | --- | --- |

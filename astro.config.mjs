@@ -76,7 +76,11 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
-      plugins: [starlightImageZoom({ showCaptions: false }), starlightLlmsTxt()],
+      plugins: [starlightImageZoom({ showCaptions: false }), starlightLlmsTxt({
+        projectName: 'capgo',
+        description: 'Capgo is a platform for creating and managing Capacitorjs live app updates.',
+        exclude: locales.map((locale) => `**/${locale}/**`),
+      })],
       disable404Route: true,
       logo: { src: './logo.svg' },
       markdown: { headingLinks: false },
@@ -133,6 +137,7 @@ export default defineConfig({
           label: 'Plugins',
           collapsed: true,
           items: [
+   
             {
               label: 'Updater',
               collapsed: true,
@@ -173,8 +178,9 @@ export default defineConfig({
                     { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
                     { label: 'Manual Update', link: '/docs/plugin/self-hosted/manual-update' },
                     { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
-                    { label: 'Handling Updates', link: '/docs/plugin/self-hosted/handling-updates' },
-                    { label: 'Handling Stats', link: '/docs/plugin/self-hosted/handling-stats' },
+                    { label: 'Update API Endpoint', link: '/docs/plugin/self-hosted/handling-updates' },
+                    { label: 'Statistics API Endpoint', link: '/docs/plugin/self-hosted/handling-stats' },
+                    { label: 'Channel API Endpoint', link: '/docs/plugin/self-hosted/handling-channels' },
                     { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true },
                   ],
                   collapsed: true,
@@ -198,6 +204,14 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              label: 'Browse All Plugins',
+              link: '/plugins/',
+            },
+            {
+              label: '🚀 Need a Plugin?',
+              link: '/consulting/',
+            },
           ],
         },
         {
@@ -216,6 +230,10 @@ export default defineConfig({
         {
           label: 'How to get support',
           link: '/docs/getting-help/',
+        },
+        {
+          label: '💬 Consult us',
+          link: '/consulting/',
         },
       ],
     }),

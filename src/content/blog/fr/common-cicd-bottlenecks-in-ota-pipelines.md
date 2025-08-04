@@ -130,7 +130,7 @@ Les meilleures pratiques pour la communication incluent :
 
 ## Conclusion
 
-Résoudre les goulots d'étranglement CI/CD est crucial pour assurer une livraison OTA fluide. Des pipelines optimisés peuvent mener à des résultats impressionnants, comme 95% des utilisateurs actifs recevant des mises à jour en 24 heures, un bundle de 5MB téléchargé en seulement 114ms, et un temps de réponse API moyen de 434ms [\[1\]](https://capgo.app/).
+Résoudre les goulots d'étranglement CI/CD est crucial pour assurer une livraison OTA fluide. Des pipelines optimisés peuvent mener à des résultats impressionnants, comme 95% des utilisateurs actifs recevant des mises à jour en 24 heures, un bundle de 5MB téléchargé en seulement 114ms, et un temps de réponse API moyen de 57ms [\[1\]](https://capgo.app/).
 
 > "Capgo est une façon intelligente de faire des mises à jour de code à chaud" [\[1\]](https://capgo.app/)
 

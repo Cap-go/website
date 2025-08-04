@@ -177,7 +177,7 @@ Berikut perincian fitur utama di berbagai platform OTA populer untuk [aplikasi C
 | Integrasi CI/CD | Dukungan native | Dasar | Lanjutan | N/A |
 | Biaya Bulanan | Dari $12 | Mirip Capgo | ~$500 | Dulu gratis |
 
-Capgo menonjol dengan lebih dari 1,1 triliun pembaruan yang telah disampaikan, tingkat pembaruan pengguna 95%, dan waktu respons API CDN global rata-rata 434ms [\[1\]](https://capgo.app/). Angka-angka ini menunjukkan kemampuannya untuk menangani pembaruan OTA yang cepat dan aman dalam skala besar.
+Capgo menonjol dengan lebih dari 1,1 triliun pembaruan yang telah disampaikan, tingkat pembaruan pengguna 95%, dan waktu respons API CDN global rata-rata 57ms [\[1\]](https://capgo.app/). Angka-angka ini menunjukkan kemampuannya untuk menangani pembaruan OTA yang cepat dan aman dalam skala besar.
 
 Untuk integrasi CI/CD, berikut beberapa highlightnya:
 

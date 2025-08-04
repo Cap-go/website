@@ -254,7 +254,7 @@ Este enfoque por capas asegura no solo sesiones seguras sino también la entrega
 Capgo combina seguridad con métricas de rendimiento impresionantes, asegurando despliegues de actualizaciones confiables y eficientes:
 
 -   **Velocidad de Actualización**: Transfiere paquetes de 5MB en solo 114ms, minimizando la exposición a vulnerabilidades durante actualizaciones [\[13\]](https://capgo.app).
--   **Respuesta de API**: Mantiene un tiempo de respuesta promedio de 434ms para operaciones críticas de seguridad [\[13\]](https://capgo.app).
+-   **Respuesta de API**: Mantiene un tiempo de respuesta promedio de 57ms para operaciones críticas de seguridad [\[13\]](https://capgo.app).
 -   **Tasa de Éxito de Actualizaciones**: Asegura una tasa de éxito global del 82% para despliegues [\[13\]](https://capgo.app).
 -   **Cobertura de Usuarios**: Alcanza al 95% de usuarios activos con actualizaciones de seguridad dentro de 24 horas [\[13\]](https://capgo.app).
 

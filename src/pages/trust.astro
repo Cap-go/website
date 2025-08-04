@@ -19,7 +19,10 @@ const content = { title, description }
         <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
           <h2 class="text-3xl font-bold text-gray-900">{m.product_security({}, { locale: Astro.locals.locale })}</h2>
           <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
-            <li>{m.trust_soc2_certification({}, { locale: Astro.locals.locale })}</li>
+            <li>
+              {m.trust_soc2_certification({}, { locale: Astro.locals.locale })}
+              <a href="https://trust.capgo.app" class="underline-current text-blue-500 underline" target="_blank">View our compliance status</a>.
+            </li>
             <li>
               {m.source_code_protection_1({}, { locale: Astro.locals.locale })}
               <a href="https://github.com/Cap-go/capgo" class="underline-current text-blue-500 underline" target="_blank">GitHub</a>.
@@ -29,6 +32,11 @@ const content = { title, description }
               <a href="https://snyk.io/test/github/Cap-go/capgo" class="underline-current text-blue-500 underline" target="_blank">Snyk</a>
               {m.source_code_protection_3({}, { locale: Astro.locals.locale })}
             </li>
+            <li>
+              Infrastructure security monitoring and verification through 
+              <a href="https://hosting-checker.net/websites/api.capgo.app" class="underline-current text-blue-500 underline" target="_blank">hosting security checks</a>
+              to ensure our API endpoints maintain the highest security standards.
+            </li>
             <li class="flex items-center gap-2">
               SonarCloud:
               <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
@@ -36,6 +44,12 @@ const content = { title, description }
               </a>
               <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
                 <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=vulnerabilities" alt="Vulnerabilities" />
+              </a>
+            </li>
+            <li class="flex items-center gap-2">
+              Snyk:
+              <a href="https://snyk.io/test/github/Cap-go/capgo" target="_blank">
+                <img src="https://snyk.io/test/github/Cap-go/capgo/badge.svg" alt="Known Vulnerabilities" />
               </a>
             </li>
             <li>{m.access_control({}, { locale: Astro.locals.locale })}</li>
@@ -68,6 +82,18 @@ const content = { title, description }
             </li>
             <li>{m.application_penetration_testing({}, { locale: Astro.locals.locale })}</li>
           </ul>
+        </div>
+
+        <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
+          <h2 class="text-3xl font-bold text-gray-900">Privacy & Compliance</h2>
+          <p class="mt-4 text-lg text-gray-600">
+            For detailed information about our privacy practices, data collection, and compliance with regulations like GDPR, CCPA, and app store guidelines, please review our comprehensive compliance documentation.
+          </p>
+          <div class="mt-6">
+            <a href="/docs/live-updates/compliance/" class="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
+              View Compliance Documentation
+            </a>
+          </div>
         </div>
       </div>
     </div>

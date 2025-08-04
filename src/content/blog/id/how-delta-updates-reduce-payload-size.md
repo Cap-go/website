@@ -231,7 +231,7 @@ Untuk memastikan keamanan, Capgo menggunakan enkripsi end-to-end yang sebenarnya
 
 | Fitur | Keunggulan | Metrik Kinerja |
 | --- | --- | --- |
-| Pembaruan Parsial | Menurunkan penggunaan bandwidth | Respons API rata-rata 434ms |
+| Pembaruan Parsial | Menurunkan penggunaan bandwidth | Respons API rata-rata 57ms |
 | CDN Global | Unduhan lebih cepat secara global | 114ms untuk bundle 5MB |
 | Enkripsi E2E | Keamanan data lebih kuat | Enkripsi end-to-end penuh |
 
@@ -263,7 +263,7 @@ Metrik performa dari aplikasi dunia nyata mendukung nilai dari delta update:
 | --- | --- |
 | **Adopsi Pengguna** | 95% pengguna memperbarui dalam 24 jam |
 | **Tingkat Keberhasilan** | 82% secara global |
-| **Respons API** | Rata-rata 434ms |
+| **Respons API** | Rata-rata 57ms |
 | **Aplikasi Produksi** | 750+ aplikasi berhasil menggunakan teknologi ini |
 
 Pengalaman pengguna selaras dengan angka-angka ini. Sebagai contoh, colenso, yang mengelola lebih dari 5.000 pengguna, membagikan:

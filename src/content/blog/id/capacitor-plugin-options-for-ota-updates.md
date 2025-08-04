@@ -55,7 +55,7 @@ Untuk kebanyakan pengembang, **Capgo** menawarkan kombinasi terbaik dari segi ke
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
-Capgo mendukung lebih dari 1.900 aplikasi produksi, mengirimkan pembaruan OTA dengan kecepatan mengesankan - bundle 5MB hanya dalam 114ms dan waktu respons API rata-rata 434ms melalui CDN globalnya [\[1\]](https://capgo.app/).
+Capgo mendukung lebih dari 1.900 aplikasi produksi, mengirimkan pembaruan OTA dengan kecepatan mengesankan - bundle 5MB hanya dalam 114ms dan waktu respons API rata-rata 57ms melalui CDN globalnya [\[1\]](https://capgo.app/).
 
 Berikut yang ditawarkan Capgo:
 

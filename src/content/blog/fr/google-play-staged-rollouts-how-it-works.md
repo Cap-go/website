@@ -116,7 +116,7 @@ L'utilisation d'outils de [gestion des mises à jour](https://capgo.app/docs/plu
 | Contrôle de version | Gère plusieurs versions | Maintient les déploiements organisés |
 | Capacité de retour en arrière | Inverse rapidement les mises à jour | Réduit l'impact sur les utilisateurs |
 
-Lors de la sélection d'un outil, concentrez-vous sur ceux offrant une surveillance automatisée. Les outils avec un temps de réponse moyen de **434ms globalement** [\[1\]](https://capgo.app/) permettent une action rapide en cas de problème.
+Lors de la sélection d'un outil, concentrez-vous sur ceux offrant une surveillance automatisée. Les outils avec un temps de réponse moyen de **57ms globalement** [\[1\]](https://capgo.app/) permettent une action rapide en cas de problème.
 
 Pour encore plus de contrôle, envisagez d'utiliser un [système de canaux](https://capgo.app/docs/plugin/cloud-mode/channel-system/) pour la distribution des mises à jour. Cela vous permet de cibler des groupes d'utilisateurs spécifiques avec différentes versions, rendant les tests beta et les déploiements progressifs plus fluides. De plus, la capacité à pousser des changements de code en direct tout en restant conforme aux règles de l'app store peut simplifier et accélérer votre [processus de mise à jour](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
 

@@ -288,9 +288,9 @@ npx cap sync
 
 Maintenant, lorsque vous cliquez sur le bouton "Partager maintenant !", la boîte de dialogue de partage native apparaîtra, vous permettant de partager le contenu avec d'autres applications.
 
-<div className={styles.container}>
-  <Head>
-<title>
+<div class="mx-auto" style="width: 50%;">
+<img src="/next-capacitor-share.webp" alt="next-capacitor-share">
+</div>
 
 Pour rendre le bouton plus convivial pour les mobiles, nous pouvons ajouter quelques styles en utilisant ma bibliothèque de composants UI préférée pour les applications web - Next.js (sans jeux de mots).
 

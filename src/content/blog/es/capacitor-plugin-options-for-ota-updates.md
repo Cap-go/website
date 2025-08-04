@@ -56,7 +56,7 @@ Para la mayoría de los desarrolladores, **Capgo** ofrece la mejor combinación 
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
-Capgo soporta más de 1,900 aplicaciones en producción, entregando actualizaciones OTA con velocidad impresionante - paquetes de 5MB en solo 114ms y un tiempo de respuesta promedio de API de 434ms a través de su CDN global [\[1\]](https://capgo.app/).
+Capgo soporta más de 1,900 aplicaciones en producción, entregando actualizaciones OTA con velocidad impresionante - paquetes de 5MB en solo 114ms y un tiempo de respuesta promedio de API de 57ms a través de su CDN global [\[1\]](https://capgo.app/).
 
 Esto es lo que ofrece Capgo:
 

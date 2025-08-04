@@ -128,7 +128,7 @@ Capgo entwickelte sich nach der Einstellung von [Microsoft Code Push](https://le
 | Funktion | Vorteil | Leistung |
 | --- | --- | --- |
 | **Ein-Klick-Rollback** | Schnelle Rückkehr zu jeder Version | 114ms durchschnittliche Bundle-Download-Zeit |
-| **Ende-zu-Ende-Verschlüsselung** | [Sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 434ms API-Antwortzeit |
+| **Ende-zu-Ende-Verschlüsselung** | [Sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 57ms API-Antwortzeit |
 | **[Kanal-System](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Beta-Updates an spezifische Gruppen verteilen | 23,5M ausgelieferte Updates |
 | **Analyse-Dashboard** | Echtzeit-Update-Tracking | 750 Production-Apps bedient |
 

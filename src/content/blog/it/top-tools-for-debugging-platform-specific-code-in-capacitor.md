@@ -258,7 +258,7 @@ Combinando IDE specifici per piattaforma come Android Studio o Xcode con VS Code
 
 ### Opzioni Sistema di Aggiornamento
 
-Gli strumenti di debug aiutano a identificare i problemi, ma un sistema di aggiornamento efficiente assicura che le correzioni vengano distribuite rapidamente. Capgo si distingue offrendo una rapida distribuzione degli aggiornamenti. Per esempio, il suo CDN globale consegna un bundle da 5MB in soli 114ms, con un tempo di risposta API medio di 434ms [\[1\]](https://capgo.app/).
+Gli strumenti di debug aiutano a identificare i problemi, ma un sistema di aggiornamento efficiente assicura che le correzioni vengano distribuite rapidamente. Capgo si distingue offrendo una rapida distribuzione degli aggiornamenti. Per esempio, il suo CDN globale consegna un bundle da 5MB in soli 114ms, con un tempo di risposta API medio di 57ms [\[1\]](https://capgo.app/).
 
 Ecco come si confrontano i sistemi di aggiornamento:
 

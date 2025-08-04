@@ -95,7 +95,12 @@ Note that the `kill` condition currently triggers the update after the first kil
 
 For critical updates or apps with very simple state, you may want to apply an update as soon as it's downloaded, without waiting for a background or kill event. Capgo supports this via the `directUpdate` configuration option.
 
-`directUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code:
+`directUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code. It supports three values:
+
+- `false` (default): Never do direct updates, use normal background update behavior
+- `'atInstall'`: Direct update only when the app is installed or updated from the store, otherwise use normal behavior
+- `'always'`: Always do direct updates immediately when available
+- `true` (deprecated): Same as `'always'` for backward compatibility
 
 ```typescript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -104,7 +109,11 @@ const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
       autoUpdate: true,
-      directUpdate: true,
+      directUpdate: 'always', // or 'atInstall' for updates only on app install/update
+      autoSplashscreen: true, // NEW: Automatically handle splashscreen
+    },
+    SplashScreen: {
+      launchAutoHide: false, // Still required when using directUpdate
     },
   },
   keepUrlPathAfterReload: true,
@@ -113,11 +122,46 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-With `directUpdate` enabled, Capgo will immediately apply an update as soon as the download completes, even if the user is actively using the app.
+<Aside type="note">
+**Important**: `directUpdate` only applies updates when the app actually checks for them. By default, this happens only at app startup or when resuming from background. Note that `periodCheckDelay` is not compatible with `directUpdate`.
+</Aside>
+
+With `directUpdate` enabled, Capgo will immediately apply an update as soon as the download completes during an update check, even if the user is actively using the app. Without periodic checking enabled, this means updates will only be applied when the app starts or resumes from background.
 
 Note that because `directUpdate` is a native configuration, it requires some additional handling in your JavaScript code.
 
-When using `directUpdate`, you need to listen for the `appReady` event and hide your app's splash screen in response:
+<Aside type="caution">
+When using `directUpdate`, you must set `launchAutoHide: false` in the SplashScreen configuration (as shown above) to prevent the splash screen from hiding automatically. This ensures you have full control over when the splash screen is hidden after the update process completes.
+</Aside>
+
+## Automatic Splashscreen Handling
+
+To make `directUpdate` easier to use, Capgo provides an `autoSplashscreen` option that automatically handles hiding the splashscreen for you (available since version 7.6.0):
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: 'always', // or 'atInstall' 
+      autoSplashscreen: true, // Automatically hide splashscreen
+    },
+    SplashScreen: {
+      launchAutoHide: false,
+    },
+  },
+  keepUrlPathAfterReload: true,
+};
+```
+
+When `autoSplashscreen` is enabled:
+- The plugin automatically hides the splashscreen when an update is applied
+- The plugin automatically hides the splashscreen when no update is needed
+- You don't need to manually listen for `appReady` events or call `SplashScreen.hide()`
+
+### Manual Splashscreen Handling
+
+If you prefer manual control or need custom logic, you can disable `autoSplashscreen` and handle it yourself:
 
 ```js
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
@@ -139,14 +183,14 @@ If you don't handle the `appReady` event and set `keepUrlPathAfterReload` when u
 
 Using `directUpdate` can be useful for delivering critical bug fixes or security patches, but it comes with some tradeoffs:
 
-- The user may see a brief flicker or loading state as the update is applied if you don't properly handle the `appReady` event.
+- The user may see a brief flicker or loading state as the update is applied if you don't properly handle the splashscreen (either with `autoSplashscreen` or manual `appReady` event handling).
 - If the update modifies the app state or UI, the user may see a disruptive change in the middle of a session.
 - The user's location in the app may be lost if `keepUrlPathAfterReload` is not set, potentially disorienting them.
 - You'll need to carefully handle saving and restoring state to ensure a smooth transition.
 
 If you do enable `directUpdate`, we recommend:
 
-- Handling the `appReady` event to control when your app's UI is shown.
+- Using `autoSplashscreen: true` for the simplest setup, or manually handling the `appReady` event if you need custom logic.
 - Setting `keepUrlPathAfterReload` to `true` to preserve the user's location in the app.
 - Saving and restoring the app state as needed to avoid losing user progress.
 - Thoroughly testing your app's update behavior to ensure there are no jarring transitions, lost state, or disorienting location changes.

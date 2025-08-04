@@ -177,7 +177,7 @@ Hier ist eine Übersicht der wichtigsten Funktionen verschiedener OTA-Plattforme
 | CI/CD-Integration | Native Unterstützung | Basic | Fortgeschritten | N/A |
 | Monatliche Kosten | Ab 12$ | Ähnlich wie Capgo | ~500$ | War kostenlos |
 
-Capgo zeichnet sich mit über 1,1 Billionen ausgelieferten Updates, einer 95%igen Benutzer-Update-Rate und einer globalen CDN-durchschnittlichen API-Antwortzeit von 434ms aus [\[1\]](https://capgo.app/). Diese Zahlen demonstrieren die Fähigkeit, schnelle und sichere OTA-Updates im großen Maßstab zu handhaben.
+Capgo zeichnet sich mit über 1,1 Billionen ausgelieferten Updates, einer 95%igen Benutzer-Update-Rate und einer globalen CDN-durchschnittlichen API-Antwortzeit von 57ms aus [\[1\]](https://capgo.app/). Diese Zahlen demonstrieren die Fähigkeit, schnelle und sichere OTA-Updates im großen Maßstab zu handhaben.
 
 Für CI/CD-Integration hier einige Highlights:
 

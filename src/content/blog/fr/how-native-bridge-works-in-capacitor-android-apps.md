@@ -29,7 +29,7 @@ next_blog: ''
 
 -   **Qu'est-ce que c'est ?** Un système de communication bidirectionnel entre JavaScript et Android, convertissant les appels JavaScript en méthodes Android natives et vice versa.
 -   **Points forts des performances :**
-    -   Temps de réponse API : **434ms** (moyenne globale).
+    -   Temps de réponse API : **57ms** (moyenne globale).
     -   Transfert de données : **114ms** pour des paquets de 5MB.
     -   Adoption des mises à jour : **95% complétées en 24 heures** en utilisant des outils comme [Capgo](https://capgo.app/).
 -   **Comment ça fonctionne :**
@@ -265,7 +265,7 @@ Pour les applications d'entreprise, Capgo inclut des fonctionnalités puissantes
 | **Fonctionnalité** | **Fonctionnalité** | **Avantage** |
 | --- | --- | --- |
 | Système de canaux | Cible des groupes d'utilisateurs spécifiques | Permet des tests de déploiement contrôlés |
-| Intégration API | Offre un temps de réponse moyen de 434ms | Fournit une surveillance en temps réel des mises à jour |
+| Intégration API | Offre un temps de réponse moyen de 57ms | Fournit une surveillance en temps réel des mises à jour |
 | Options d'hébergement | Supporte le déploiement cloud ou auto-hébergé | Donne de la flexibilité dans le contrôle de l'infrastructure |
 | Capacité de stockage | Fournit jusqu'à 20GB pour les plans entreprise | Simplifie la gestion des versions |
 
@@ -280,7 +280,7 @@ Dans les applications Android Capacitor, le pont natif agit comme un lien de com
 | Aspect | Impact sur les performances |
 | --- | --- |
 | **Livraison des mises à jour** | 95% d'adoption utilisateur en 24 heures |
-| **Réponse API** | 434ms en moyenne mondiale |
+| **Réponse API** | 57ms en moyenne mondiale |
 | **Taux de réussite** | 82% de succès de déploiement global |
 
 Ces chiffres soulignent l'importance d'une communication sécurisée et de la réduction de la charge du pont pour maintenir des performances optimales.

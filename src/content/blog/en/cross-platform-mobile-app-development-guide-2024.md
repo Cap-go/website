@@ -6,7 +6,7 @@ description: >-
   development in 2024. Build iOS, Android and web apps from a single codebase.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
-author_url: 'https://twitter.com/martindonadieu'
+author_url: 'https://x.com/martindonadieu'
 created_at: 2024-06-15T00:00:00.000Z
 updated_at: 2024-06-15T00:00:00.000Z
 head_image: /cross-platform-app-dev-2024.webp

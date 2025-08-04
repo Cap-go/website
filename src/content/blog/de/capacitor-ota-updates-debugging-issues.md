@@ -129,7 +129,7 @@ Die Kombination dieses Ansatzes mit den richtigen Werkzeugen gewährleistet eine
 
 Capgo vereinfacht OTA-Updates mit Funktionen zur Effizienzsteigerung:
 
--   **Echtzeit-Analysen**: Globale API-Antwortzeit durchschnittlich 434ms [\[1\]](https://capgo.app/)
+-   **Echtzeit-Analysen**: Globale API-Antwortzeit durchschnittlich 57ms [\[1\]](https://capgo.app/)
 -   **Ein-Klick-Rollback**: Schnelle Rückkehr zu vorherigen Versionen bei Bedarf
 -   **Teilaktualisierungen**: Reduziert Bandbreitennutzung durch Aktualisierung nur notwendiger Komponenten
 -   **CI/CD-Integration**: Arbeitet nahtlos mit Plattformen wie [GitHub Actions](https://docsgithubcom/actions) und [GitLab CI](https://docsgitlabcom/ee/ci/)
@@ -150,7 +150,7 @@ Hier ist eine Übersicht einiger wichtiger [Debugging-Funktionen](https://capgo.
 | --- | --- |
 | Ende-zu-Ende-Verschlüsselung | Ja, vollständig verschlüsselt |
 | Update-Erfolgsrate | 82% global |
-| Antwortzeit | Durchschnittlich 434ms |
+| Antwortzeit | Durchschnittlich 57ms |
 | Rollback-Unterstützung | Sofort, mit einem Klick |
 | Fehlerverfolgung | Echtzeit |
 | Update-Verteilung | Kanalbasiertes System |

@@ -19,6 +19,8 @@ function descToText(desc: string) {
       return m.plan_maker_desc({}, { locale: Astro.locals.locale })
     case 'plan.team.desc':
       return m.plan_team_desc({}, { locale: Astro.locals.locale })
+    case 'plan.payasyougo.desc':
+      return m.plan_payasyougo_desc({}, { locale: Astro.locals.locale })
     default:
       return desc
   }
@@ -32,14 +34,26 @@ function descToEmoji(desc: string) {
       return '💪'
     case 'plan.team.desc':
       return '🚀'
+    case 'plan.payasyougo.desc':
+      return '📈'
     default:
       return desc
   }
 }
+
+function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
+  if (name === 'Pay as you go') {
+    return `$${monthlyPrice}+`
+  }
+  if (yearly) {
+    return `$${(yearlyPrice / 12).toFixed(0)}`
+  }
+  return `$${monthlyPrice}`
+}
 ---
 
 <section id="plans">
-  <div class="mt-6 grid grid-cols-1 space-y-14 sm:mt-8 sm:space-y-0 lg:mt-10 lg:grid-cols-3 lg:gap-8">
+  <div class="mt-8 grid grid-cols-1 space-y-14 sm:mt-14 sm:space-y-0 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4 lg:gap-6 xl:gap-8">
     {
       pricing.map((plan) => (
         <div
@@ -53,11 +67,11 @@ function descToEmoji(desc: string) {
           data-plan={plan.name}
         >
           {plan.name === 'Maker' && (
-            <div class="absolute top-0 right-0 -mt-8 flex items-start">
+            <div class="absolute top-0 right-0 -mt-10 sm:-mt-12 lg:-mt-16 flex items-start border-0">
               <svg class="h-16 w-auto text-blue-600" viewBox="0 0 83 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4.27758 62.7565C4.52847 63.5461 5.37189 63.9827 6.16141 63.7318L19.0274 59.6434C19.817 59.3925 20.2536 58.5491 20.0027 57.7595C19.7518 56.97 18.9084 56.5334 18.1189 56.7842L6.68242 60.4184L3.04824 48.982C2.79735 48.1924 1.95394 47.7558 1.16441 48.0067C0.374889 48.2576 -0.0617613 49.101 0.189127 49.8905L4.27758 62.7565ZM13.4871 47.8215L12.229 47.0047L13.4871 47.8215ZM39.0978 20.5925L38.1792 19.4067L39.0978 20.5925ZM7.03921 62.9919C8.03518 61.0681 13.1417 51.1083 14.7453 48.6383L12.229 47.0047C10.5197 49.6376 5.30689 59.8127 4.37507 61.6126L7.03921 62.9919ZM14.7453 48.6383C22.0755 37.3475 29.8244 29.6738 40.0164 21.7784L38.1792 19.4067C27.7862 27.4579 19.7827 35.3698 12.229 47.0047L14.7453 48.6383ZM40.0164 21.7784C52.6582 11.9851 67.634 7.57932 82.2576 3.44342L81.4412 0.556653C66.8756 4.67614 51.3456 9.20709 38.1792 19.4067L40.0164 21.7784Z" />
               </svg>
-              <span class="-mt-2 ml-2 text-sm font-semibold text-blue-600">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
+              <span class="-mt-2 -ml-1 text-sm font-semibold text-white bg-blue-600 px-4 py-1 rounded-md">{m.most_popular({}, { locale: Astro.locals.locale })}</span>
             </div>
           )}
           <div class="rounded-t-2xl bg-gray-50 px-4 py-5 sm:rounded-t-3xl sm:p-6">
@@ -72,13 +86,16 @@ function descToEmoji(desc: string) {
           <div class="px-4 py-5 sm:p-6">
             <div class="flex items-end">
               <p class="text-5xl font-semibold text-gray-900" data-price>
-                ${yearly ? (plan.price_y / 12).toFixed() : plan.price_m}
+                {priceDisplay(plan.price_m, plan.price_y, plan.name)}
               </p>
               <p class="py-1 text-sm font-normal text-gray-500">/{m.month({}, { locale: Astro.locals.locale })}</p>
             </div>
             <p class="mt-8" data-yearly-price style={yearly ? '' : 'display: none'}>
               <span class="text-gray-900">
-                {m.billed_annually_at({}, { locale: Astro.locals.locale })} ${plan.price_y}
+                {plan.name === 'Pay as you go' 
+                  ? <span>{m.billed_monthly({}, { locale: Astro.locals.locale })} + <a href="#calculator" class="border-b border-blue-600 font-medium text-black hover:text-blue-600 focus:text-blue-600">{m.credit_based_usage({}, { locale: Astro.locals.locale })}</a></span>
+                  : `${m.billed_annually_at({}, { locale: Astro.locals.locale })} $${plan.price_y}`
+                }
               </span>
             </p>
             <div class="mt-6">
@@ -113,7 +130,7 @@ function descToEmoji(desc: string) {
                   <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                 </svg>
                 <span>
-                  <span class="font-bold">{numberWithSpaces(plan.mau)}</span> {m.monthly_active_users({}, { locale: Astro.locals.locale })}
+                  <span class="font-bold">{numberWithSpaces(plan.mau)}{plan.name === 'Pay as you go' ? '+' : ''}</span> {m.monthly_active_users({}, { locale: Astro.locals.locale })}
                 </span>
               </li>
               <li class="flex items-center">
@@ -121,7 +138,7 @@ function descToEmoji(desc: string) {
                   <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                 </svg>
                 <span>
-                  <span class="font-bold">{numberWithSpaces(plan.bandwidth)}</span> GB/{m.month({}, { locale: Astro.locals.locale })}
+                  <span class="font-bold">{numberWithSpaces(plan.bandwidth)}{plan.name === 'Pay as you go' ? '+' : ''}</span> GiB/{m.month({}, { locale: Astro.locals.locale })}
                   {m.of_bandwidth({}, { locale: Astro.locals.locale })}
                 </span>
               </li>
@@ -130,15 +147,71 @@ function descToEmoji(desc: string) {
                   <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                 </svg>
                 <span>
-                  <span class="font-bold">{numberWithSpaces(plan.storage)}</span> GB {m.of_storage({}, { locale: Astro.locals.locale })}
+                  <span class="font-bold">{numberWithSpaces(plan.storage)}{plan.name === 'Pay as you go' ? '+' : ''}</span> GiB {m.of_storage({}, { locale: Astro.locals.locale })}
                 </span>
               </li>
-              <li class="flex items-center">
-                <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
-                  <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                </svg>
-                <span set:html={m.priority_support_for_all_capgo_plugins({}, { locale: Astro.locals.locale })} />
-              </li>
+              {plan.name === 'Solo' && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span >{m.community_support({}, { locale: Astro.locals.locale })}</span>
+                  </li>                
+                </>
+              )}
+              {(plan.name === 'Team' || plan.name === 'Pay as you go') && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span >{m.all_lower_tiers_benefits({}, { locale: Astro.locals.locale })}</span>
+                  </li>                
+                </>
+              )}
+              {plan.name === 'Maker' && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span >{m.priority_bug_fixes_on_our_plugins({}, { locale: Astro.locals.locale })}</span>
+                  </li>                
+                </>
+              )}
+              {(plan.name == 'Team') && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span >{m.priority_support({}, { locale: Astro.locals.locale })}</span>
+                  </li>                
+                </>
+              )}
+              {plan.name === 'Pay as you go' && (
+                <>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span>{m.custom_domain({}, { locale: Astro.locals.locale })}</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span>{m.direct_slack_channel_support({}, { locale: Astro.locals.locale })}</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
+                    <span>{m.soc2_compliance({}, { locale: Astro.locals.locale })}</span>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
@@ -163,7 +236,11 @@ function descToEmoji(desc: string) {
         const yearlyPriceElement = planElement.querySelector('[data-yearly-price]')
 
         if (priceElement) {
-          priceElement.textContent = `$${isYearly ? (plan.price_y / 12).toFixed() : plan.price_m}`
+          if (planName === 'Pay as you go') {
+            priceElement.textContent = `$${plan.price_m}+`
+          } else {
+            priceElement.textContent = `$${isYearly ? (plan.price_y / 12).toFixed() : plan.price_m}`
+          }
         }
 
         if (yearlyPriceElement) {

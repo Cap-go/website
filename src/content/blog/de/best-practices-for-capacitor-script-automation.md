@@ -222,7 +222,7 @@ Die Automatisierungsplattform von Capgo bietet starke Leistungen in realen Szena
 
 | **Merkmal** | **Vorteil** | **Leistungskennzahl** |
 | --- | --- | --- |
-| Sofortige Updates | Verzögerungen im App-Store vermeiden | 434ms durchschnittliche API-Antwortzeit |
+| Sofortige Updates | Verzögerungen im App-Store vermeiden | 57ms durchschnittliche API-Antwortzeit |
 | Globales CDN | Schnelle Inhaltslieferung | 114ms für den Download eines 5MB-Bundles |
 | Versionskontrolle | Änderungen verfolgen und verwalten | 23,5M+ gelieferte Updates |
 | Analytik | Überwachung des Bereitstellungserfolgs | 750+ Produktionsanwendungen nachverfolgt |
@@ -261,7 +261,7 @@ Hier sind die Kernkomponenten für eine effiziente Skriptautomatisierung:
 | **Komponente** | **Best Practice** | **Einfluss** |
 | --- | --- | --- |
 | Struktur | Modularer Entwurf mit klarer Trennung | Vereinfacht die Wartung |
-| Leistung | Asynchrone Operationen und Speichereinstellungen | Erreicht 434ms durchschnittliche API-Antwortzeit |
+| Leistung | Asynchrone Operationen und Speichereinstellungen | Erreicht 57ms durchschnittliche API-Antwortzeit |
 | Sicherheit | Ende-zu-Ende-Verschlüsselung | Schützt vor unbefugtem Zugriff |
 | CI/CD | Automatisierte Tests und gestaffelte Rollouts | Stellt 95% Update-Erfolg in 24 Stunden sicher |
 

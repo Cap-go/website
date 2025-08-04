@@ -27,7 +27,7 @@ next_blog: ''
 
 -   **Apa itu?** Sistem komunikasi dua arah antara JavaScript dan Android, mengonversi panggilan JavaScript menjadi metode Android asli dan sebaliknya.
 -   **Sorotan Kinerja:**
-    -   Waktu respons API: **434ms** (rata-rata global).
+    -   Waktu respons API: **57ms** (rata-rata global).
     -   Transfer data: **114ms** untuk bundel 5MB.
     -   Adopsi pembaruan: **95% diselesaikan dalam 24 jam** menggunakan alat seperti [Capgo](https://capgo.app/).
 -   **Bagaimana cara kerjanya:**
@@ -259,7 +259,7 @@ Untuk aplikasi perusahaan, Capgo mencakup fitur kuat yang disesuaikan untuk kebu
 | **Fitur** | **Fungsionalitas** | **Keuntungan** |
 | --- | --- | --- |
 | Sistem Saluran | Menargetkan grup pengguna tertentu | Memungkinkan pengujian peluncuran yang terkontrol |
-| Integrasi API | Menawarkan waktu respons rata-rata 434ms | Menyediakan pemantauan pembaruan waktu nyata |
+| Integrasi API | Menawarkan waktu respons rata-rata 57ms | Menyediakan pemantauan pembaruan waktu nyata |
 | Opsi Hosting | Mendukung penyebaran cloud atau mandiri | Memberikan fleksibilitas dalam kontrol infrastruktur |
 | Kapasitas Penyimpanan | Menyediakan hingga 20GB untuk rencana perusahaan | Menyederhanakan manajemen versi |
 
@@ -274,7 +274,7 @@ Dalam aplikasi Android Capacitor, jembatan native bertindak sebagai penghubung k
 | Aspek | Dampak Kinerja |
 | --- | --- |
 | **Pengiriman Pembaruan** | 95% adopsi pengguna dalam 24 jam |
-| **Respons API** | Rata-rata 434ms di seluruh dunia |
+| **Respons API** | Rata-rata 57ms di seluruh dunia |
 | **Tingkat Keberhasilan** | 82% keberhasilan penyebaran global |
 
 Angka-angka ini menyoroti pentingnya komunikasi yang aman dan mengurangi beban jembatan untuk mempertahankan kinerja puncak.

@@ -130,7 +130,7 @@ Menggabungkan pendekatan ini dengan alat yang tepat memastikan proses pembaruan 
 
 Capgo menyederhanakan pembaruan OTA dengan fitur yang dirancang untuk meningkatkan efisiensi:
 
--   **Analitik real-time**: Waktu respon API global rata-rata 434ms [\[1\]](https://capgo.app/).
+-   **Analitik real-time**: Waktu respon API global rata-rata 57ms [\[1\]](https://capgo.app/).
 -   **Rollback satu klik**: Cepat kembali ke versi sebelumnya jika diperlukan.
 -   **Pembaruan parsial**: Mengurangi penggunaan bandwidth dengan hanya memperbarui komponen yang diperlukan.
 -   **Integrasi CI/CD**: Bekerja mulus dengan platform seperti [GitHub Actions](https://docs.github.com/actions) dan [GitLab CI](https://docs.gitlab.com/ee/ci/).
@@ -151,7 +151,7 @@ Berikut rincian beberapa [fitur debugging](https://capgo.app/docs/plugin/debuggi
 | --- | --- |
 | Enkripsi End-to-End | Ya, terenkripsi penuh |
 | Tingkat Keberhasilan Pembaruan | 82% secara global |
-| Waktu Respons | Rata-rata 434ms |
+| Waktu Respons | Rata-rata 57ms |
 | Dukungan Rollback | Instan, satu klik |
 | Pelacakan Kesalahan | Real-time |
 | Distribusi Pembaruan | Sistem berbasis saluran |

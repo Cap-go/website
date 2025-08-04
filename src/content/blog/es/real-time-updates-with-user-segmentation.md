@@ -83,7 +83,7 @@ Para que las actualizaciones segmentadas funcionen sin problemas, necesitas herr
 -   **95% de adopción de actualización por usuarios activos dentro de 24 horas**
 -   **Rendimiento global de [CDN](https://en.wikipedia.org/wiki/Content_delivery_network)**: paquete de 5MB entregado en 114ms
 -   **82% de tasa de éxito de actualización mundial**
--   **Tiempo de respuesta global de API**: 434ms
+-   **Tiempo de respuesta global de API**: 57ms
 
 Con estas herramientas en su lugar, las pruebas exhaustivas son esenciales para confirmar que todo funciona según lo planeado.
 

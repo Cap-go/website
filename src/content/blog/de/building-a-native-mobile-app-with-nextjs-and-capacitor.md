@@ -288,9 +288,9 @@ npx cap sync
 
 Jetzt erscheint das native Freigabedialogfeld, wenn Sie auf die Schaltfläche "Jetzt teilen!" klicken, und ermöglicht es Ihnen, den Inhalt mit anderen Apps zu teilen.
 
-<div className={styles.container}>
-  <Head>
-<title>
+<div class="mx-auto" style="width: 50%;">
+<img src="/next-capacitor-share.webp" alt="next-capacitor-share">
+</div>
 
 Um die Schaltfläche mobiltauglicher zu gestalten, können wir einige Stile hinzufügen, indem wir meine Lieblings-Benutzeroberflächenkomponentenbibliothek für Webanwendungen - Next.js (kein Wortspiel beabsichtigt) verwenden.
 

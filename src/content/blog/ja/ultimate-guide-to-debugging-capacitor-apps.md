@@ -224,7 +224,7 @@ ionic cap run android -l --external   # Live reload for Android
     | メトリクス | パフォーマンス |
     | --- | --- |
     | アップデート配信速度 | 5MBバンドルで114ms |
-    | APIレスポンス時間 | 世界中で434ms |
+    | APIレスポンス時間 | 世界中で57ms |
     | ユーザーアップデート率 | 24時間以内に95% |
     
 

@@ -1,214 +1,451 @@
 ---
-import { roundNumber } from '@/services/misc'
-import type { Database } from '@/services/supabase.types'
 import * as m from '@/paraglide/messages'
 
-interface Props {
-  pricing: Database['public']['Tables']['plans']['Row'][]
-  paygBase: {
-    mau: number
-    storage: number
-    bandwidth: number
-  }
-  paygUnits: {
-    mau: number
-    storage: number
-    bandwidth: number
-  }
-  yearly: boolean
-}
-
-const { pricing, paygBase, paygUnits, yearly } = Astro.props
-
-const solo = pricing.find((plan) => plan.name === 'Solo')!
-const team = pricing.find((plan) => plan.name === 'Team')!
-const maker = pricing.find((plan) => plan.name === 'Maker')!
-const payg = pricing.find((plan) => plan.name === 'Pay as you go')!
-const basePrice = payg.price_m
-
 // Initial values for the calculator
-const initialMau = maker.mau
+const initialMau = 5000000
 const initialUpdatesSize = 4
-const initialUpdatesByMonth = 5
+const initialUpdatesByMonth = 1
 
 // Initial calculations
 const initialUpdates = initialMau * initialUpdatesByMonth
-const initialBandwidth = (initialUpdates * initialUpdatesSize) / 1000
-const initialStorage = (initialUpdatesByMonth * initialUpdatesSize * 12) / 1000
-
-// Initial suggestion
-const initialSuggestion = (() => {
-  if (initialMau <= solo.mau && initialStorage <= solo.storage && initialBandwidth <= solo.bandwidth) return 'Solo'
-  else if (initialMau <= maker.mau && initialStorage <= maker.storage && initialBandwidth <= maker.bandwidth) return 'Maker'
-  else if (initialMau <= team.mau && initialStorage <= team.storage && initialBandwidth <= team.bandwidth) return 'Team'
-  return 'Pay as you go'
-})()
-
-// Initial price calculation
-const initialTotalPrice = (() => {
-  const mauPrice = initialMau > paygBase.mau ? (initialMau - paygBase.mau) * paygUnits.mau : 0
-  const storagePrice = initialStorage > paygBase.storage ? (initialStorage - paygBase.storage) * paygUnits.storage : 0
-  const bandwidthPrice = initialBandwidth > paygBase.bandwidth ? (initialBandwidth - paygBase.bandwidth) * paygUnits.bandwidth : 0
-  const sum = mauPrice + storagePrice + bandwidthPrice
-  if (sum > 0) return roundNumber(basePrice + sum) * (yearly ? 12 : 1)
-  return (initialSuggestion ? roundNumber(pricing.find((plan) => plan.name === initialSuggestion)!.price_m) : basePrice) * (yearly ? 12 : 1)
-})()
+const initialBandwidth = (initialUpdates * initialUpdatesSize) / 1024 // Convert MB to GiB
+const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
 ---
 
-<section id="calculator">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl text-center xl:max-w-4xl">
-      <h2 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">
-        {m.calculate_your_usage({}, { locale: Astro.locals.locale })}<br />
-      </h2>
-      <p class="font-pj mt-6 text-sm font-normal text-gray-600">
-        {m.enter_your_estimated_monthly_active_users({}, { locale: Astro.locals.locale })}
+<section id="calculator" class="mx-auto max-w-7xl px-0 py-12 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-3">
+        {m.calculate_your_usage({}, { locale: Astro.locals.locale })}
+      </h1>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        {m.calculate_your_usage_description({}, { locale: Astro.locals.locale })}
       </p>
     </div>
-    <div class="relative mt-6 lg:mx-auto lg:mt-12 lg:max-w-5xl">
-      <div class="absolute -inset-2">
-        <div
-          class="mx-auto h-full w-full opacity-30 blur-lg filter"
-          style="background: linear-gradient(90deg, #44ff9a -0.55%, #44b0ff 22.86%, #8b44ff 48.36%, #ff6644 73.33%, #ebff70 99.34%)"
-        >
+
+    <!-- Main Calculator -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+      
+      <!-- User Inputs Section -->
+      <div class="bg-blue-50 px-8 py-6 border-b border-gray-200">
+        <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+          </svg>
+{m.your_configuration({}, { locale: Astro.locals.locale })}
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              {m.monthly_active_users_mau({}, { locale: Astro.locals.locale })}
+            </label>
+            <input 
+              id="mau-input"
+              type="number" 
+              value={initialMau}
+              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              placeholder="5,000,000"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              {m.updates_per_month({}, { locale: Astro.locals.locale })}
+            </label>
+            <input 
+              id="updates-by-month-input"
+              type="number" 
+              value={initialUpdatesByMonth}
+              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              placeholder="1"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              {m.update_size_mb({}, { locale: Astro.locals.locale })}
+            </label>
+            <input 
+              id="updates-size-input"
+              type="number" 
+              step="0.1"
+              value={initialUpdatesSize}
+              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              placeholder="4"
+            />
+          </div>
         </div>
       </div>
-      <div class="relative grid grid-cols-1 gap-x-20 gap-y-12 overflow-hidden rounded-2xl bg-gray-900 px-16 py-12 text-center text-white md:grid-cols-3">
-        <div class="flex flex-col items-center">
-          <p class="calc-label">
-            MAU<br /><span class="text-[0.6rem]">{m.monthly_active_users({}, { locale: Astro.locals.locale })}</span>
-          </p>
-          <input
-            id="mau-input"
-            value={initialMau}
-            placeholder="0"
-            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
-          />
+
+      <!-- Calculated Results Section -->
+      <div class="px-8 py-6">
+        <h2 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          </svg>
+{m.calculated_usage_pricing({}, { locale: Astro.locals.locale })}
+        </h2>
+
+        <!-- Usage Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <!-- MAU -->
+          <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+            <div class="flex items-center mb-2">
+              <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+              <span class="text-sm font-medium text-blue-700">MAU</span>
+            </div>
+            <p class="text-2xl font-bold text-gray-900" data-mau-display>{initialMau.toLocaleString()}</p>
+            <p class="text-xs text-gray-500 mt-1">{m.monthly_active_users_mau({}, { locale: Astro.locals.locale })}</p>
+          </div>
+
+          <!-- Bandwidth -->
+          <div class="bg-orange-50 rounded-xl p-4 border border-orange-100">
+            <div class="flex items-center mb-2">
+              <svg class="w-4 h-4 mr-2 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+              </svg>
+              <span class="text-sm font-medium text-orange-700">Bandwidth</span>
+            </div>
+            <p class="text-2xl font-bold text-gray-900"><span data-bandwidth>{Math.round(initialBandwidth).toLocaleString()}</span></p>
+            <p class="text-xs text-gray-500 mt-1">{m.total_data_transfer({}, { locale: Astro.locals.locale })}</p>
+          </div>
+
+          <!-- Storage -->
+          <div class="bg-purple-50 rounded-xl p-4 border border-purple-100">
+            <div class="flex items-center mb-2">
+              <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"/>
+              </svg>
+              <span class="text-sm font-medium text-purple-700">Storage</span>
+            </div>
+            <p class="text-2xl font-bold text-gray-900"><span data-storage>{initialStorage.toFixed(3)}</span></p>
+            <p class="text-xs text-gray-500 mt-1">{m.required_storage_space({}, { locale: Astro.locals.locale })}</p>
+          </div>
+
+          <!-- Total Credits Cost -->
+          <div class="bg-gray-900 rounded-xl p-4 border border-gray-200">
+            <div class="flex items-center mb-2">
+              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+              </svg>
+              <span class="text-sm font-medium text-gray-300">{m.credits_cost({}, { locale: Astro.locals.locale })}</span>
+            </div>
+            <p class="text-2xl font-bold text-white" data-total-price>
+              <span class="loading-spinner">...</span>
+            </p>
+            <p class="text-xs text-gray-400 mt-1">{m.monthly_total({}, { locale: Astro.locals.locale })}</p>
+          </div>
         </div>
-        <div class="flex flex-col items-center">
-          <p class="calc-label" set:html={m.updates_by_month({}, { locale: Astro.locals.locale })} />
-          <input
-            id="updates-by-month-input"
-            value={initialUpdatesByMonth}
-            placeholder="0"
-            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
-          />
-        </div>
-        <div class="flex flex-col items-center">
-          <p class="calc-label" set:html={m.updates_size({}, { locale: Astro.locals.locale })} />
-          <input
-            id="updates-size-input"
-            value={initialUpdatesSize}
-            placeholder="0"
-            class="w-full cursor-text border-b border-gray-300 bg-gray-900 p-2 text-center text-3xl font-bold break-all hover:bg-gray-800 lg:mt-3"
-          />
-        </div>
-        <div class="flex flex-col items-center">
-          <p class="calc-label" set:html={m.updates_total({}, { locale: Astro.locals.locale })} />
-          <p class="font-pj mt-3 text-3xl font-bold break-all text-white" data-updates>
-            {initialUpdates.toLocaleString()}
-          </p>
-        </div>
-        <div class="flex flex-col items-center">
-          <p class="calc-label" set:html={m.bandwidth_gb({}, { locale: Astro.locals.locale })} />
-          <p class="font-pj mt-3 text-3xl font-bold break-all text-white" data-bandwidth>
-            {initialBandwidth.toLocaleString()}
-          </p>
-        </div>
-        <div class="flex flex-col items-center">
-          <p class="calc-label" set:html={m.storage({}, { locale: Astro.locals.locale })} />
-          <p class="font-pj mt-3 text-3xl font-bold break-all text-white" data-storage>
-            {initialStorage.toLocaleString()}
-          </p>
-        </div>
-        <div class="col-span-1 flex flex-col items-center md:col-span-3">
-          <p class="text-md font-pj mt-0 mt-5 font-bold tracking-widest text-white uppercase">
-            {yearly ? m.yearly({}, { locale: Astro.locals.locale }) : m.monthly({}, { locale: Astro.locals.locale })} Price
-          </p>
-          <p class="font-pj mt-3 rounded-xl bg-white p-2 text-3xl font-bold break-all text-gray-900" data-total-price>
-            {initialTotalPrice}€
-          </p>
-          {
-            initialSuggestion && (
-              <p class="font-pj mt-0 mt-5 text-sm font-bold tracking-widest text-white">
-                {m.we_suggest_you_to_choose_the({}, { locale: Astro.locals.locale })}
-                <button id="suggestion-button" class="underline-current cursor-pointer font-bold text-red-400 uppercase underline" data-suggestion={initialSuggestion}>
-                  {initialSuggestion}
-                </button>
-                {m.plan({}, { locale: Astro.locals.locale })}
-              </p>
-            )
-          }
+
+        <!-- Pricing Tiers -->
+        <div class="border border-gray-200 rounded-xl">
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="font-medium text-gray-900">{m.cost_breakdown_pricing_tiers({}, { locale: Astro.locals.locale })}</h3>
+          </div>
+          
+          <div class="px-6 py-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <!-- MAU Tiers -->
+              <div data-mau-tiers>
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="font-medium text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    {m.mau({}, { locale: Astro.locals.locale })}:
+                  </h4>
+                  <span class="text-lg font-bold text-blue-600" data-mau-total>$0.00</span>
+                </div>
+                <div class="space-y-2" data-mau-tier-list></div>
+              </div>
+
+              <!-- Bandwidth Tiers -->
+              <div data-bandwidth-tiers>
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="font-medium text-gray-900 flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                    </svg>
+                    {m.bandwidth({}, { locale: Astro.locals.locale })}:
+                  </h4>
+                  <span class="text-lg font-bold text-orange-600" data-bandwidth-total>$0.00</span>
+                </div>
+                <div class="space-y-2" data-bandwidth-tier-list></div>
+              </div>
+
+              <!-- Storage Tiers -->
+              <div data-storage-tiers>
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="font-medium text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"/>
+                    </svg>
+                    {m.storage({}, { locale: Astro.locals.locale })}:
+                  </h4>
+                  <span class="text-lg font-bold text-purple-600" data-storage-total>$0.00</span>
+                </div>
+                <div class="space-y-2" data-storage-tier-list></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<script define:vars={{ solo, team, maker, paygBase, pricing, basePrice, paygUnits }}>
+<script>
+  interface TierUsage {
+    tier_id: number
+    step_min: number
+    step_max: number
+    unit_factor: number
+    units_used: number // billing units (GiB for bandwidth/storage, count for MAU)
+    price_per_unit: number // Price per billing unit
+    cost: number
+  }
+
+  interface MetricBreakdown {
+    cost: number
+    tiers: TierUsage[]
+  }
+
+  interface CostCalculationResponse {
+    total_cost: number
+    breakdown: {
+      mau: MetricBreakdown
+      bandwidth: MetricBreakdown
+      storage: MetricBreakdown
+    }
+    usage: {
+      mau: number
+      bandwidth: number
+      storage: number
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
-    const roundNumber = (number) => Math.round(number * 100) / 100
+    const mauInput = document.getElementById('mau-input') as HTMLInputElement
+    const updatesSizeInput = document.getElementById('updates-size-input') as HTMLInputElement
+    const updatesByMonthInput = document.getElementById('updates-by-month-input') as HTMLInputElement
 
-    const mauInput = document.getElementById('mau-input')
-    const yearlyRadio = document.getElementById('yearly')
-    const monthlyRadio = document.getElementById('monthly')
-    const suggestionButton = document.getElementById('suggestion-button')
-    const updatesSizeInput = document.getElementById('updates-size-input')
-    const updatesByMonthInput = document.getElementById('updates-by-month-input')
+    let debounceTimer: NodeJS.Timeout
 
-    function updateCalculations() {
-      const mau = Number(mauInput.value)
-      const updatesSize = Number(updatesSizeInput.value)
-      const updatesByMonth = Number(updatesByMonthInput.value)
+    async function calculateCreditPrice(mau: number, bandwidthGiB: number, storageGiB: number) {
+      // Convert GiB to bytes
+      const bandwidthBytes = bandwidthGiB * 1024 * 1024 * 1024
+      const storageBytes = storageGiB * 1024 * 1024 * 1024
+
+      try {
+        const response = await fetch('https://api.capgo.app/private/credits', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Accept-Encoding': 'gzip, zlib, deflate, zstd, br'
+          },
+          body: JSON.stringify({
+            mau: mau.toString(),
+            bandwidth: bandwidthBytes.toString(),
+            storage: storageBytes.toString()
+          })
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to calculate price')
+        }
+
+        const data: CostCalculationResponse = await response.json()
+        return data
+      } catch (error) {
+        console.error('Error calculating credit price:', error)
+        return null
+      }
+    }
+
+    function formatNumber(num: number, type?: string): string {
+      // Convert bytes to GiB for bandwidth and storage
+      if (type === 'bandwidth' || type === 'storage') {
+        const gb = num / (1024 * 1024 * 1024) // Convert bytes to GiB
+        if (gb >= 1000) {
+          return `${(gb / 1000).toFixed(0)} TB`
+        }
+        return `${gb.toFixed(0)} GiB`
+      }
+      
+      // Handle already-converted GiB values for display
+      if (type === 'bandwidth-gb' || type === 'storage-gb') {
+        if (num >= 1000) {
+          return `${Math.ceil(num / 1000)} TB`
+        }
+        return `${Math.ceil(num)} GiB`
+      }
+      
+      if (num >= 1000000) {
+        return `${(num / 1000000).toFixed(1)}M`
+      }
+      if (num >= 1000) {
+        return `${(num / 1000).toFixed(0)}k`
+      }
+      return num.toString()
+    }
+
+    function formatPrice(price: number): string {
+      return price.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })
+    }
+
+    function formatPricePerUnit(price: number, metricType: string): string {
+      const decimals = metricType === 'mau' ? 4 : 3
+      return price.toLocaleString('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: decimals
+      })
+    }
+
+    function renderTiers(tiers: TierUsage[], containerSelector: string, metricType: string) {
+      const container = document.querySelector(containerSelector)
+      if (!container || !tiers || tiers.length === 0) return
+
+      container.innerHTML = ''
+      
+      tiers.forEach((tier, index) => {
+        if (tier.units_used > 0) {
+          const tierDiv = document.createElement('div')
+          tierDiv.className = 'bg-gray-50 rounded-lg p-3 border border-gray-200'
+          
+          // Tier range and usage
+          const tierHeader = document.createElement('div')
+          tierHeader.className = 'flex justify-between items-center mb-2'
+          
+          // Check if this is the last tier and has a very large step_max
+          const isLastTier = index === tiers.length - 1
+          const isVeryLargeMax = tier.step_max > 1000000 // 1M+ units indicates unlimited tier
+          
+          let formattedRange
+          if (isLastTier && isVeryLargeMax) {
+            formattedRange = `over ${formatNumber(tier.step_min, metricType)}`
+          } else {
+            formattedRange = `${formatNumber(tier.step_min, metricType)}-${formatNumber(tier.step_max, metricType)}`
+          }
+          
+          // For MAU, add unit label since formatNumber doesn't include it
+          // For bandwidth/storage, formatNumber already includes units (GiB/TB)
+          const displayRange = metricType === 'mau' ? `${formattedRange} MAU` : formattedRange
+          
+          tierHeader.innerHTML = `
+            <span class="text-sm font-medium text-gray-700">${displayRange}</span>
+            <span class="text-sm font-bold text-gray-900">$${formatPrice(tier.cost)}</span>
+          `
+          
+          // Usage details
+          const tierDetails = document.createElement('div')
+          tierDetails.className = 'flex justify-between items-center text-xs text-gray-500'
+          
+          const rateLabel = metricType === 'mau' ? '/MAU' : '/GiB'
+          // For MAU, add unit label since formatNumber doesn't include it
+          // For bandwidth/storage, formatNumber already includes units (GiB/TB)
+          const usedDisplay = metricType === 'mau' ? `${formatNumber(tier.units_used)} MAU used` : `${formatNumber(tier.units_used)} used`
+          
+          tierDetails.innerHTML = `
+            <span>${usedDisplay}</span>
+            <span>$${formatPricePerUnit(tier.price_per_unit, metricType)}${rateLabel}</span>
+          `
+          
+          tierDiv.appendChild(tierHeader)
+          tierDiv.appendChild(tierDetails)
+          container.appendChild(tierDiv)
+        }
+      })
+    }
+
+    async function updateCalculations() {
+      const mau = Number(mauInput.value) || 0
+      const updatesSize = Number(updatesSizeInput.value) || 0
+      const updatesByMonth = Number(updatesByMonthInput.value) || 0
 
       const updates = mau * updatesByMonth
-      const bandwidth = (updates * updatesSize) / 1000
-      const storage = (updatesByMonth * updatesSize * 12) / 1000
+      const bandwidth = (updates * updatesSize) / 1024 // Convert MB to GiB
+      const storage = updatesSize / 1024 // Convert MB to GiB
 
       // Update displayed values
-      const updatesElement = document.querySelector('[data-updates]')
+      const mauDisplay = document.querySelector('[data-mau-display]')
       const storageElement = document.querySelector('[data-storage]')
       const bandwidthElement = document.querySelector('[data-bandwidth]')
       const totalPriceElement = document.querySelector('[data-total-price]')
 
-      if (storageElement) storageElement.textContent = storage.toLocaleString()
-      if (updatesElement) updatesElement.textContent = updates.toLocaleString()
-      if (bandwidthElement) bandwidthElement.textContent = bandwidth.toLocaleString()
+      if (mauDisplay) mauDisplay.textContent = formatNumber(mau)
+      if (storageElement) storageElement.textContent = formatNumber(storage, 'storage-gb')
+      if (bandwidthElement) bandwidthElement.textContent = formatNumber(Math.round(bandwidth), 'bandwidth-gb')
 
-      // Calculate suggestion
-      let suggestion = 'Pay as you go'
-      if (mau <= solo.mau && storage <= solo.storage && bandwidth <= solo.bandwidth) suggestion = 'Solo'
-      else if (mau <= maker.mau && storage <= maker.storage && bandwidth <= maker.bandwidth) suggestion = 'Maker'
-      else if (mau <= team.mau && storage <= team.storage && bandwidth <= team.bandwidth) suggestion = 'Team'
-
-      // Update suggestion button if it exists
-      if (suggestionButton) {
-        suggestionButton.textContent = suggestion
-        suggestionButton.dataset.suggestion = suggestion
-      }
-
-      // Calculate and update total price
+      // Show loading state
       if (totalPriceElement) {
-        const mauPrice = Number(mau > paygBase.mau ? (mau - paygBase.mau) * paygUnits.mau : 0)
-        const storagePrice = Number(storage > paygBase.storage ? (storage - paygBase.storage) * paygUnits.storage : 0)
-        const bandwidthPrice = Number(bandwidth > paygBase.bandwidth ? (bandwidth - paygBase.bandwidth) * paygUnits.bandwidth : 0)
-        const sum = mauPrice + storagePrice + bandwidthPrice
-        const factor = yearlyRadio.checked ? 12 : 1
-        let totalPrice = factor * roundNumber(pricing.find((plan) => plan.name === suggestion).price_m)
-        if (sum > 0) totalPrice = factor * roundNumber(basePrice + sum)
-        totalPriceElement.textContent = `${totalPrice}€`
+        totalPriceElement.innerHTML = '<span class="loading-spinner">...</span>'
       }
+
+      // Debounce API calls
+      clearTimeout(debounceTimer)
+      debounceTimer = setTimeout(async () => {
+        const creditData = await calculateCreditPrice(mau, bandwidth, storage)
+        
+        if (creditData && totalPriceElement) {
+          totalPriceElement.textContent = `$${formatPrice(creditData.total_cost)}`
+          
+
+
+          // Render tier details and update totals
+          if (creditData.breakdown) {
+            // MAU Tiers
+            if (creditData.breakdown.mau.tiers && creditData.breakdown.mau.tiers.length > 0) {
+              renderTiers(creditData.breakdown.mau.tiers, '[data-mau-tier-list]', 'mau')
+              const mauTotalElement = document.querySelector('[data-mau-total]')
+              if (mauTotalElement) mauTotalElement.textContent = `$${formatPrice(creditData.breakdown.mau.cost)}`
+            }
+
+            // Bandwidth Tiers
+            if (creditData.breakdown.bandwidth.tiers && creditData.breakdown.bandwidth.tiers.length > 0) {
+              renderTiers(creditData.breakdown.bandwidth.tiers, '[data-bandwidth-tier-list]', 'bandwidth')
+              const bandwidthTotalElement = document.querySelector('[data-bandwidth-total]')
+              if (bandwidthTotalElement) bandwidthTotalElement.textContent = `$${formatPrice(creditData.breakdown.bandwidth.cost)}`
+            }
+
+            // Storage Tiers
+            if (creditData.breakdown.storage.tiers && creditData.breakdown.storage.tiers.length > 0) {
+              renderTiers(creditData.breakdown.storage.tiers, '[data-storage-tier-list]', 'storage')
+              const storageTotalElement = document.querySelector('[data-storage-total]')
+              if (storageTotalElement) storageTotalElement.textContent = `$${formatPrice(creditData.breakdown.storage.cost)}`
+            }
+          }
+        }
+      }, 500)
     }
 
     mauInput.addEventListener('input', updateCalculations)
-    yearlyRadio.addEventListener('change', updateCalculations)
-    monthlyRadio.addEventListener('change', updateCalculations)
     updatesSizeInput.addEventListener('input', updateCalculations)
     updatesByMonthInput.addEventListener('input', updateCalculations)
 
-    suggestionButton?.addEventListener('click', () => {
-      const suggestion = suggestionButton.dataset.suggestion
-      document.getElementById(suggestion === 'Pay as you go' ? 'pay-as-you-go' : 'plans')?.scrollIntoView({ behavior: 'smooth' })
-    })
+    // Initial calculation
+    updateCalculations()
   })
 </script>
+
+<style>
+  .loading-spinner {
+    display: inline-block;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+</style>

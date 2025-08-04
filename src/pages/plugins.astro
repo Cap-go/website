@@ -34,35 +34,399 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
 ---
 
 <Layout content={content}>
-  <div class="z-10 mt-24 mb-24 flex w-full flex-col md:items-center">
-    <h1 class="px-10 text-4xl font-bold md:text-center md:text-6xl">
-      {plugins.length}
-      {m.powerful_app_plugins({}, { locale: Astro.locals.locale })}
-    </h1>
-    <h2 class="mt-8 max-w-full px-10 text-2xl font-light md:text-center lg:max-w-[75%]">
-      {m.powerful_app_plugins_description({}, { locale: Astro.locals.locale })}
-    </h2>
-    <div class="mt-12 flex w-full flex-col items-start px-10 sm:mt-24 sm:flex-row sm:justify-center lg:max-w-6xl xl:px-0">
-      <div class="mt-8 grid grid-cols-1 gap-4 sm:mt-0 md:grid-cols-2 xl:grid-cols-3">
-        {
-          plugins.map((item) => (
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
-              class="group flex flex-col overflow-hidden rounded border border-gray-600 shadow hover:shadow-white md:max-w-sm"
-            >
-              <div class="flex flex-col px-5 py-3">
-                {item.icon && <item.icon class="mt-3 mb-6 w-[30px] fill-gray-400 group-hover:fill-white" />}
-                <div class="text-lg font-bold text-white">{item.title}</div>
-                <div class="mt-3 line-clamp-2 w-full text-sm break-all text-gray-200" set:html={item.description} />
-              </div>
-              <div class="mt-auto mb-3 flex flex-row items-center justify-between px-5 pb-3">
-                <span class="text-sm font-light text-gray-400">by {item.author}</span>
-                {<ArrowUpRightIcon class="h-[18px] w-[18px] fill-gray-500 group-hover:fill-white" />}
-              </div>
-            </a>
-          ))
-        }
+  <div class="relative min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-16 px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl text-center">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8">
+          <span class="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></span>
+          {plugins.length}+ {m.plugins({}, { locale: Astro.locals.locale })} available
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent pb-6">
+          {m.supercharge_your_app({}, { locale: Astro.locals.locale })}
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+          {m.powerful_app_plugins_description({}, { locale: Astro.locals.locale })}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <a 
+            href="#plugins" 
+            class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-blue-500/25"
+          >
+            {m.browse_plugin_library({}, { locale: Astro.locals.locale })}
+            <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </a>
+          <a 
+            href="#custom-development" 
+            class="inline-flex items-center px-8 py-4 border-2 border-gray-600 text-white hover:bg-white hover:text-gray-900 font-semibold rounded-xl transition-all duration-200 text-lg"
+          >
+            {m.need_something_custom({}, { locale: Astro.locals.locale })}
+            <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Featured Stats -->
+    <section class="py-16 border-y border-gray-800">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-3xl md:text-4xl font-bold text-blue-400 mb-2">{plugins.length}+</div>
+            <div class="text-gray-400">{m.ready_to_use_plugins({}, { locale: Astro.locals.locale })}</div>
+          </div>
+          <div>
+            <div class="text-3xl md:text-4xl font-bold text-green-400 mb-2">500K+</div>
+            <div class="text-gray-400">{m.downloads({}, { locale: Astro.locals.locale })}</div>
+          </div>
+          <div>
+            <div class="text-3xl md:text-4xl font-bold text-purple-400 mb-2">100+</div>
+            <div class="text-gray-400">{m.happy_developers({}, { locale: Astro.locals.locale })}</div>
+          </div>
+          <div>
+            <div class="text-3xl md:text-4xl font-bold text-orange-400 mb-2">24/7</div>
+            <div class="text-gray-400">{m.community_support({}, { locale: Astro.locals.locale })}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Development Section -->
+    <section id="custom-development" class="py-20 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-6">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            {m.enterprise_solutions({}, { locale: Astro.locals.locale })}
+          </div>
+          
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+            {m.cant_find_what_you_need({}, { locale: Astro.locals.locale })}
+          </h2>
+          
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+            {m.expert_team_builds_custom_plugins({}, { locale: Astro.locals.locale })}
+            <br/><br/>
+            <span class="text-blue-400">
+              Need a custom plugin developed for your specific needs? 
+              <a 
+                href={getRelativeLocaleUrl(Astro.locals.locale, 'consulting')}
+                class="underline hover:text-blue-300 transition-colors duration-200"
+              >
+                Get expert plugin development
+              </a>
+            </span>
+          </p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <!-- Custom Plugin Development -->
+          <div class="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:bg-white/10">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative">
+              <div class="inline-flex items-center justify-center w-14 h-14 bg-blue-600 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">{m.custom_plugins({}, { locale: Astro.locals.locale })}</h3>
+              <p class="text-gray-300 mb-6 leading-relaxed">
+                {m.native_ios_android_functionality({}, { locale: Astro.locals.locale })}
+              </p>
+              <div class="flex items-baseline mb-4">
+                <span class="text-3xl font-bold text-blue-400">$10k</span>
+                <span class="text-gray-400 ml-2">{m.starting_from({}, { locale: Astro.locals.locale })}</span>
+              </div>
+              <ul class="text-sm text-gray-400 space-y-2">
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m.full_source_code_included({}, { locale: Astro.locals.locale })}
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m["2_3_week_delivery"]({}, { locale: Astro.locals.locale })}
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m["30_day_support_included"]({}, { locale: Astro.locals.locale })}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- SDK Integration -->
+          <div class="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-green-500/50 transition-all duration-300 hover:bg-white/10">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative">
+              <div class="inline-flex items-center justify-center w-14 h-14 bg-green-600 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">{m.sdk_bridges({}, { locale: Astro.locals.locale })}</h3>
+              <p class="text-gray-300 mb-6 leading-relaxed">
+                {m.seamless_third_party_sdk({}, { locale: Astro.locals.locale })}
+              </p>
+              <div class="flex items-baseline mb-4">
+                <span class="text-3xl font-bold text-green-400">$7k</span>
+                <span class="text-gray-400 ml-2">{m.starting_from({}, { locale: Astro.locals.locale })}</span>
+              </div>
+              <ul class="text-sm text-gray-400 space-y-2">
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m.complete_documentation({}, { locale: Astro.locals.locale })}
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m.typescript_definitions({}, { locale: Astro.locals.locale })}
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m["3_4_week_delivery"]({}, { locale: Astro.locals.locale })}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Enterprise Consultation -->
+          <div class="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-purple-500/50 transition-all duration-300 hover:bg-white/10">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative">
+              <div class="inline-flex items-center justify-center w-14 h-14 bg-purple-600 rounded-xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-4">{m.expert_consultation({}, { locale: Astro.locals.locale })}</h3>
+              <p class="text-gray-300 mb-6 leading-relaxed">
+                {m.architecture_review_optimization({}, { locale: Astro.locals.locale })}
+              </p>
+              <div class="flex items-baseline mb-4">
+                <span class="text-3xl font-bold text-purple-400">{m.custom({}, { locale: Astro.locals.locale })}</span>
+                <span class="text-gray-400 ml-2">{m.quote({}, { locale: Astro.locals.locale })}</span>
+              </div>
+              <ul class="text-sm text-gray-400 space-y-2">
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m.free_initial_consultation({}, { locale: Astro.locals.locale })}
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m.flexible_engagement({}, { locale: Astro.locals.locale })}
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-4 h-4 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {m.ongoing_support_available({}, { locale: Astro.locals.locale })}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Proof -->
+        <div class="bg-white/5 rounded-2xl p-8 mb-12 border border-gray-700">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-white mb-4">{m.trusted_by_developers_worldwide({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-gray-300">{m.open_source_plugins_power_apps({}, { locale: Astro.locals.locale })}</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a 
+              href="https://github.com/Cap-go/capacitor-updater"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors duration-200 block"
+            >
+              <div class="text-lg font-semibold text-white mb-2">capacitor-updater</div>
+              <div class="flex items-center justify-center text-yellow-400 mb-2">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                608 stars
+              </div>
+              <div class="text-sm text-gray-400">{m.instant_ota_updates_capacitor({}, { locale: Astro.locals.locale })}</div>
+            </a>
+            <a 
+              href="https://github.com/Cap-go/capacitor-purchases"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors duration-200 block"
+            >
+              <div class="text-lg font-semibold text-white mb-2">purchases-capacitor</div>
+              <div class="flex items-center justify-center text-yellow-400 mb-2">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                187 stars
+              </div>
+              <div class="text-sm text-gray-400">{m.in_app_purchases_acquired({}, { locale: Astro.locals.locale })}</div>
+            </a>
+            <a 
+              href="https://github.com/Cap-go/capacitor-native-biometric"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors duration-200 block"
+            >
+              <div class="text-lg font-semibold text-white mb-2">capacitor-native-biometric</div>
+              <div class="flex items-center justify-center text-yellow-400 mb-2">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                53 stars
+              </div>
+              <div class="text-sm text-gray-400">{m.secure_biometric_authentication({}, { locale: Astro.locals.locale })}</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center">
+          <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            {m.ready_to_bring_vision_to_life({}, { locale: Astro.locals.locale })}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+            <a 
+              href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-blue-500/25"
+            >
+              {m.start_your_project({}, { locale: Astro.locals.locale })}
+              <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <a 
+              href="https://cal.com/team/capgo/capacitor-consulting-services"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-8 py-4 border-2 border-gray-600 text-white hover:bg-white hover:text-gray-900 font-semibold rounded-xl transition-all duration-200 text-lg"
+            >
+              {m.free_consultation({}, { locale: Astro.locals.locale })}
+              <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+          <p class="text-sm text-gray-500">
+            {m.no_upfront_costs_guarantee({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plugins Grid -->
+    <section id="plugins" class="py-20">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-6">{m.browse_plugin_library({}, { locale: Astro.locals.locale })}</h2>
+          <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            {m.discover_ready_plugins({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {
+            plugins.map((item) => (
+              <a
+                href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
+                class="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:bg-white/10 hover:scale-[1.02]"
+              >
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative">
+                  {item.icon && <item.icon class="inline-flex items-center justify-center w-12 h-12 p-2 bg-gray-800 rounded-xl mb-4 group-hover:bg-blue-600 transition-colors duration-300 fill-gray-400 group-hover:fill-white" />}
+                  <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">
+                    {item.title}
+                  </h3>
+                  <div class="text-gray-300 mb-4 line-clamp-3 leading-relaxed" set:html={item.description} />
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">by {item.author}</span>
+                    <ArrowUpRightIcon class="h-5 w-5 fill-gray-500 group-hover:fill-blue-400 transition-colors duration-300" />
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- More Options Section -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <!-- GitHub Link -->
+          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 text-center">
+            <svg class="w-12 h-12 mb-4 text-gray-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <h3 class="text-2xl font-bold text-white mb-2">Looking for more plugins?</h3>
+            <p class="text-gray-300 mb-6">
+              Explore our GitHub organization for more open-source Capacitor plugins.
+            </p>
+            <a 
+              href="https://github.com/Cap-go"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-xl transition-all duration-200 border border-gray-600"
+            >
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              Browse Cap-go GitHub
+              <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Custom Plugin Development -->
+          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 text-center">
+            <svg class="w-12 h-12 mb-4 text-blue-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <h3 class="text-2xl font-bold text-white mb-2">Need a custom plugin?</h3>
+            <p class="text-gray-300 mb-6">
+              Our expert team can build the perfect plugin for your specific needs.
+            </p>
+            <a 
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'consulting')}
+              class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-blue-500/25"
+            >
+              Get Custom Plugin Built
+              <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </Layout>

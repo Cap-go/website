@@ -177,7 +177,7 @@ Capacitor 코드 공유 시 강력한 보안 조치와 효율
 
 ![Capgo](https://assets.seobotai.com/capgo.app/67fc5744af1a45e500bc59a4/460b6a71189963262e0579d8af2972b5.jpg)
 
-Capgo는 이러한 관행들과 일치하며, 고급 OTA(Over-the-Air) 업데이트와 통합된 CI/CD 워크플로우로 Capacitor 개발을 최적화합니다. 글로벌 CDN을 통해 5MB 번들의 114ms 다운로드 속도, 전 세계적으로 434ms의 평균 API 응답 시간, 2,350만 건의 성공적인 업데이트를 포함한 인상적인 결과를 제공합니다 [\[1\]](https://capgo.app/).
+Capgo는 이러한 관행들과 일치하며, 고급 OTA(Over-the-Air) 업데이트와 통합된 CI/CD 워크플로우로 Capacitor 개발을 최적화합니다. 글로벌 CDN을 통해 5MB 번들의 114ms 다운로드 속도, 전 세계적으로 57ms의 평균 API 응답 시간, 2,350만 건의 성공적인 업데이트를 포함한 인상적인 결과를 제공합니다 [\[1\]](https://capgo.app/).
 
 > "우리는 애자일 개발을 실천하고 있으며 @Capgo는 사용자에게 지속적으로 전달하는 데 매우 중요합니다!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 

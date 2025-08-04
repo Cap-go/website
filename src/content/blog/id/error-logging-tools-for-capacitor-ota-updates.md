@@ -94,7 +94,7 @@ Capgo mengambil pendekatan berbeda dengan mengintegrasikan pelacakan kesalahan l
 | --- | --- |
 | Pengiriman Pembaruan | 23,5 juta pembaruan yang disampaikan |
 | Tingkat Keberhasilan | 95% pengguna diperbarui dalam waktu 24 jam |
-| Waktu Respon API | 434ms rata-rata di seluruh dunia |
+| Waktu Respon API | 57ms rata-rata di seluruh dunia |
 | Unduhan Bundle | 114ms untuk bundle 5MB |
 
 > "Kami meluncurkan pembaruan OTA Capgo di produksi untuk basis pengguna kami yang berjumlah +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami diperbarui dalam hitungan menit setelah OTA diterapkan di @Capgo." – colenso [\[1\]](https://capgo.app/)

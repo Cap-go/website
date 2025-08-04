@@ -61,7 +61,7 @@ El puente nativo ofrece varias ventajas para el desarrollo multiplataforma:
 | Tiempo de carga | 114ms promedio para paquetes de 5MB [\[1\]](https://capgo.app/) | Tiempos de respuesta más rápidos |
 | Alcance de actualización | 95% de usuarios actualizados en 24h [\[1\]](https://capgo.app/) | Implementación rápida de funciones |
 | Cobertura de mercado | 82% tasa de éxito global [\[1\]](https://capgo.app/) | Rendimiento confiable mundial |
-| Tiempo de respuesta API | 434ms promedio global [\[1\]](https://capgo.app/) | Interacciones suaves y eficientes |
+| Tiempo de respuesta API | 57ms promedio global [\[1\]](https://capgo.app/) | Interacciones suaves y eficientes |
 
 > "Practicamos desarrollo ágil y @Capgo es crucial para entregar continuamente a nuestros usuarios!" – Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
@@ -71,7 +71,7 @@ El sistema de plugins simplifica y asegura el intercambio de datos entre las cap
 
 -   **Escala**: Usado en 750 aplicaciones actualmente en producción [\[1\]](https://capgo.app/)
 -   **Fiabilidad**: Más de 23.5 millones de actualizaciones entregadas [\[1\]](https://capgo.app/)
--   **Rendimiento**: 434ms tiempo promedio de respuesta API global [\[1\]](https://capgo.app/)
+-   **Rendimiento**: 57ms tiempo promedio de respuesta API global [\[1\]](https://capgo.app/)
 
 Este sistema también incluye cifrado de extremo a extremo, asegurando la transferencia segura de datos. Proporciona a los desarrolladores las herramientas para crear aplicaciones seguras y de alto rendimiento que funcionan perfectamente en todas las plataformas.
 

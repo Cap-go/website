@@ -2,6 +2,7 @@
 import Footer from '@/components/Footer.astro'
 import Header from '@/components/Header.astro'
 import SEO from '@/components/SEO.astro'
+import PostHog from '@/components/posthog.astro'
 import '@/css/global.css'
 
 const { content } = Astro.props
@@ -13,6 +14,7 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
 <html lang={Astro.locals.locale.toLowerCase()}>
   <head>
     <SEO {...content} />
+    <PostHog />
   </head>
   <body>
     <div class="overflow-x-hidden bg-gray-900 text-white">
@@ -27,11 +29,12 @@ const isLocalhost = Astro.url.origin.includes('localhost:')
           async="true"
           defer="true"
           data-domain="capgo.app"
-          src="https://pls.digitalshift-ee.workers.dev/js/script.js"
+          src="https://pls.digitalshift-ee.workers.dev/js/script.outbound-links.js"
           data-api="https://pls.digitalshift-ee.workers.dev/api/event"
         />
       )
     }
-    <script is:inline defer data-website-id="66bcb7fa4038d5b1e5ea89eb" data-domain="capgo.app" src="https://datafa.st/js/script.js"></script>
+        <script is:inline type="text/javascript" src="https://widget.senja.io/js/iframeResizer.min.js"></script>
+        <script is:inline defer data-website-id="66bcb7fa4038d5b1e5ea89eb" data-domain="capgo.app" src="https://datafa.st/js/script.js"></script>
   </body>
 </html>

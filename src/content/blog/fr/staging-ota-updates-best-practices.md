@@ -174,7 +174,7 @@ Le respect des directives de l'app store est crucial pour éviter les retards ou
 
 ### Fonctions principales de Capgo
 
-Capgo simplifie le processus de gestion des mises à jour OTA avec son système sécurisé et crypté et sa fonctionnalité de canaux avancée. Les mises à jour sont livrées rapidement et de manière sécurisée, grâce à son CDN mondial, qui atteint un **temps de téléchargement de 114ms pour des bundles de 5MB** et un **temps de réponse API moyen de 434ms dans le monde entier** [\[1\]](https://capgo.app/). La plateforme utilise également un système de mise à jour partielle, ne téléchargeant que les composants modifiés. Cette approche a conduit à un impressionnant **taux de mise à jour de 95% parmi les utilisateurs actifs en 24 heures** [\[1\]](https://capgo.app/).
+Capgo simplifie le processus de gestion des mises à jour OTA avec son système sécurisé et crypté et sa fonctionnalité de canaux avancée. Les mises à jour sont livrées rapidement et de manière sécurisée, grâce à son CDN mondial, qui atteint un **temps de téléchargement de 114ms pour des bundles de 5MB** et un **temps de réponse API moyen de 57ms dans le monde entier** [\[1\]](https://capgo.app/). La plateforme utilise également un système de mise à jour partielle, ne téléchargeant que les composants modifiés. Cette approche a conduit à un impressionnant **taux de mise à jour de 95% parmi les utilisateurs actifs en 24 heures** [\[1\]](https://capgo.app/).
 
 ### Avantages pour les développeurs
 
@@ -231,6 +231,6 @@ Pour rendre vos mises à jour OTA sécurisées et efficaces, considérez ces ét
 -   **Mettez en place des outils de surveillance** pour suivre les métriques critiques en temps réel.
 -   **Implémentez des déploiements progressifs** en commençant par un petit groupe d'utilisateurs avant d'étendre à tous.
 
-Un environnement de pré-production bien préparé, soutenu par des plateformes comme Capgo, peut vous aider à atteindre ces objectifs. Par exemple, 95% des utilisateurs actifs peuvent se mettre à jour en 24 heures, avec un temps de réponse API global moyen de 434ms [\[1\]](https://capgo.app/).
+Un environnement de pré-production bien préparé, soutenu par des plateformes comme Capgo, peut vous aider à atteindre ces objectifs. Par exemple, 95% des utilisateurs actifs peuvent se mettre à jour en 24 heures, avec un temps de réponse API global moyen de 57ms [\[1\]](https://capgo.app/).
 
 > "Nous pratiquons le développement agile et @Capgo est essentiel pour livrer en continu à nos utilisateurs !" [\[1\]](https://capgo.app/)

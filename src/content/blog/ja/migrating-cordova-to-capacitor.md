@@ -86,4 +86,4 @@ CapgoライブアップデートをCapacitorプロジェクトで実装するに
 
 ## 結論
 
-このガイドが、あなたのWebアプリをCordovaからCapacitorに移行するのに役立ったことを願っています。質問や移行プロセスに関して支援が必要な場合は、[discord](https://discord.gg/VnYRvBfgA6)サーバーでお気軽にお問い合わせください。
+このガイドが、あなたのWebアプリをCordovaからCapacitorに移行するのに役立ったことを願っています。質問や移行プロセスに関して支援が必要な場合は、[discord](https://discord.capgo.app)サーバーでお気軽にお問い合わせください。

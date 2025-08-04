@@ -29,11 +29,11 @@ const brand = Astro.locals.runtimeConfig.public.brand
           {m.pricing({}, { locale: Astro.locals.locale })}
         </a>
         <a
-          href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
-          title="Blog"
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
+          title="Enterprise"
           class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
         >
-          {m.blog({}, { locale: Astro.locals.locale })}
+          {m.enterprise_title({}, { locale: Astro.locals.locale })}
         </a>
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
@@ -72,11 +72,11 @@ const brand = Astro.locals.runtimeConfig.public.brand
         Pricing
       </a>
       <a
-        href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
-        title={m.blog({}, { locale: Astro.locals.locale })}
+        href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
+        title={m.enterprise_title({}, { locale: Astro.locals.locale })}
         class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
       >
-        Blog
+        Enterprise
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}

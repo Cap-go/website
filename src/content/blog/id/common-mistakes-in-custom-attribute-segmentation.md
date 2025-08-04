@@ -120,7 +120,7 @@ Ketika memilih alat untuk segmentasi atribut kustom, carilah fitur yang meminima
 | **Keamanan** | Enkripsi dari ujung ke ujung[\[1\]](https://capgo.app/) | Melindungi data sensitif pengguna secara efektif |
 | **Analitik** | Analitik waktu nyata[\[1\]](https://capgo.app/) | Memberikan umpan balik langsung tentang kinerja segmen |
 | **Opsi Hosting** | Cloud dan self-hosted | Mendukung kebutuhan penyebaran yang beragam |
-| **Cakupan Global** | 434ms waktu respons API di seluruh dunia[\[1\]](https://capgo.app/) | Menyediakan kinerja yang konsisten di berbagai wilayah |
+| **Cakupan Global** | 57ms waktu respons API di seluruh dunia[\[1\]](https://capgo.app/) | Menyediakan kinerja yang konsisten di berbagai wilayah |
 
 Lanskap alat segmentasi telah berubah secara signifikan dalam beberapa tahun terakhir. Misalnya, penutupan [Microsoft Code Push](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) pada tahun 2024 dan penutupan yang akan datang dari [AppFlow](https://ionic.io/appflow) pada tahun 2026 telah mendorong pengembang untuk menjelajahi alternatif yang lebih andal. Perubahan ini menyoroti pentingnya alat yang secara langsung menangani tantangan segmentasi.
 

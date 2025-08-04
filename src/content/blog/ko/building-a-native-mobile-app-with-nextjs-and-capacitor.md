@@ -285,9 +285,9 @@ npx cap sync
 
 이제 "Share now!" 버튼을 클릭하면 네이티브 공유 다이얼로그가 나타나며, 다른 앱과 콘텐츠를 공유할 수 있습니다.
 
-<div className={styles.container}>
-  <Head>
-<title>
+<div class="mx-auto" style="width: 50%;">
+<img src="/next-capacitor-share.webp" alt="next-capacitor-share">
+</div>
 
 버튼을 더 모바일 친화적으로 보이게 하려면 제가 좋아하는 웹 앱용 UI 구성 요소 라이브러리를 사용하여 약간 스타일링을 추가할 수 있습니다 - Next.js(농담 아님).
 
