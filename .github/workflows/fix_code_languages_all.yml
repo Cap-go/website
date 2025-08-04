@@ -16,7 +16,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add -A
-          git commit -m "chore: fix code langauges of all blogs"
+          git commit -m "chore: fix code languages of all blogs"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:

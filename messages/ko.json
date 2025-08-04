@@ -1,6 +1,6 @@
 {
-  "$1_app": "$1 앱",
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "$1_app": "$1 앱",
   "2_3_week_delivery": "2-3 주 배송",
   "30_day_support_included": "30일 지원 포함",
   "3_4_week_delivery": "3-4 주 배송",

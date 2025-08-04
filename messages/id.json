@@ -1,6 +1,6 @@
 {
-  "$1_app": "Aplikasi $1",
   "$schema": "https://inlang.com/schema/inlang-message-format",
+  "$1_app": "Aplikasi $1",
   "2_3_week_delivery": "Pengiriman 2-3 minggu",
   "30_day_support_included": "Dukungan 30 hari termasuk",
   "3_4_week_delivery": "Pengiriman 3-4 minggu",
