@@ -29,6 +29,7 @@ next_blog: ''
 | **Rollback** | One-click rollback | Manual |
 | **Security** | End-to-end encryption, SOC II compliant | Signature-based |
 | **Version Control** | Multi-version support via channels | Multi-version support via channels |
+| **Versioning System** | Semantic Versioning (semver) | Custom version system |
 | **Pricing** | Starting at $12/month | Starting at $7.5/month |
 | **Target Audience** | Global, enterprise-ready (US & EU entities) | Global, enterprise-ready |
 
@@ -40,7 +41,7 @@ Both platforms support large-scale, complex deployments. Keep reading for a deta
 
 ## Key Features Comparison
 
-Capgo and Capawesome take different approaches when it comes to update delivery, version control, and development tools, catering to distinct user needs.
+Capgo and Capawesome take different approaches when it comes to update delivery, version control, and development tools. A key technical difference is that Capgo uses industry-standard semantic versioning (semver) while Capawesome implements a custom version system, which can impact how developers manage and track their updates.
 
 ### How Updates Work
 
@@ -52,12 +53,13 @@ The two platforms handle version control in notably different ways:
 
 | Feature | Capgo | Capawesome |
 | --- | --- | --- |
+| Versioning System | Semantic Versioning (semver) | Custom version system |
 | Rollback Capability | One-click rollback to any previous version | [Manual bundle management](https://capgo.app/docs/plugin/self-hosted/encrypted-bundles/) |
 | Version Targeting | Channel-based distribution system | Channel-based distribution system |
 | Update Analytics | Real-time tracking with success metrics | Limited tracking features |
 | Multi-version Support | Simultaneous version deployment | Simultaneous version deployment |
 
-Capgo’s one-click rollback feature is a standout, offering quick recovery from issues without disrupting users.
+Capgo's use of semantic versioning (semver) follows industry standards, making it easier for developers to manage version compatibility and dependencies. Combined with its one-click rollback feature, this provides a robust system for version management and quick recovery from issues without disrupting users.
 
 ### Development Tools
 
@@ -99,7 +101,7 @@ When it comes to OTA update plugins, ensuring security and meeting app store sta
 
 Capgo takes security seriously by implementing **end-to-end encryption** for update packages and maintaining **SOC II compliance**, safeguarding the entire update process [\[1\]](https://capgo.app). This not only protects updates but also aligns with the compliance requirements of Apple and Google [\[1\]](https://capgo.app). Additionally, Capgo operates with both US and EU entities, providing flexibility for data residency requirements. 
 
-To ensure continuous security, Capgo is **publicly audited at each commit** by CodeRabbit and SonarCloud, maintaining an **A score in SonarCloud** for code quality and security. They have also undergone **private auditing as part of their SOC II certification process**. On the other hand, Capawesome relies on **signature-based verification** without the same level of compliance certification or continuous auditing.
+To ensure continuous security, Capgo is **publicly audited at each commit** by CodeRabbit and SonarCloud, maintaining an **A score in SonarCloud** for code quality and security. We have also undergone **private auditing as part of our SOC II certification process**. On the other hand, Capawesome relies on **signature-based verification** without the same level of compliance certification or continuous auditing.
 
 | Security Feature | Capgo | Capawesome |
 | --- | --- | --- |
@@ -144,7 +146,7 @@ Capawesome offers similar tiered pricing:
 -   **PROFESSIONAL**: $24.17/month, accommodates 10,000 MAU, 5 GB storage, and 500 GB bandwidth.
 -   **TEAM**: $82.5/month, supports 100,000 MAU, 10 GB storage, and 2 TB bandwidth.
 
-For usage beyond the Team tier, Capawesome does not provide public pricing information. In contrast, Capgo offers transparent pricing with their **PAY-AS-YOU-GO** plan at $249/month plus credit-based usage. Their credit system is designed to support companies of any size with fair pricing at any scale, with [detailed pricing for credits available on their pricing page](https://capgo.app/pricing/).
+For usage beyond the Team tier, Capawesome does not provide public pricing information. In contrast, Capgo offers transparent pricing with our **PAY-AS-YOU-GO** plan at $249/month plus credit-based usage. Our credit system is designed to support companies of any size with fair pricing at any scale, with [detailed pricing for credits available on our pricing page](https://capgo.app/pricing/).
 
 > "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue. Loving Capgo so far. Thanks for @Capgo, it's a great product." - jermaine [\[1\]](https://capgo.app)
 
@@ -157,7 +159,7 @@ Here are some additional long-term cost factors:
 -   **Bandwidth**: The Pay-As-You-Go (PAYG) plan is priced at $249/month for 10 TB.
 -   **Storage**: Options scale from 2 GB to 20 GB, ensuring flexibility as your needs grow.
 -   **Support**: Includes priority support for over 30 plugins, providing added value for teams requiring assistance.
--   **Pricing Transparency**: Unlike Capawesome, Capgo publicly lists all pricing tiers including enterprise PAYG options. Their credit system scales fairly for any company size - from indie developers to enterprise giants - allowing for accurate budget forecasting. See their [pricing page](https://capgo.app/pricing/) for detailed credit costs.
+-   **Pricing Transparency**: Unlike Capawesome, Capgo publicly lists all pricing tiers including enterprise PAYG options. Our credit system scales fairly for any company size - from indie developers to enterprise giants - allowing for accurate budget forecasting. See our [pricing page](https://capgo.app/pricing/) for detailed credit costs.
 
 > "@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂" - NASA's OSIRIS-REx [\[1\]](https://capgo.app)
 
@@ -206,7 +208,7 @@ Performance highlights for enterprise users:
 -   **82% worldwide success rate** for update delivery [\[1\]](https://capgo.app).
 -   Supports up to **1,000,000 MAU** with the PAYG plan.
 
-For growing enterprises, the TEAM plan at $83/month offers support for 100,000 MAU and includes 2,000 GB of bandwidth. When organizations exceed this threshold, Capgo provides transparent PAYG pricing at $249/month plus credit-based usage, supporting up to 1,000,000 MAU and beyond. Their credit system ensures fair pricing regardless of company size - from startups to Fortune 500 companies - with full details available on their [pricing page](https://capgo.app/pricing/), ensuring budget predictability at any scale.
+For growing enterprises, the TEAM plan at $83/month offers support for 100,000 MAU and includes 2,000 GB of bandwidth. When organizations exceed this threshold, Capgo provides transparent PAYG pricing at $249/month plus credit-based usage, supporting up to 1,000,000 MAU and beyond. Our credit system ensures fair pricing regardless of company size - from startups to Fortune 500 companies - with full details available on our [pricing page](https://capgo.app/pricing/), ensuring budget predictability at any scale.
 
 ## Making Your Choice
 
@@ -219,12 +221,13 @@ When deciding between Capgo and Capawesome, it's important to weigh the options 
 | **Geographic Focus** | Global reach, 434 ms API response time [\[1\]](https://capgo.app) | Global reach |
 | **Self-hosting Option** | Yes, fully open-source [\[1\]](https://capgo.app) | Limited self-hosting options |
 | **Update Speed** | 95% of users updated within 24 hours [\[1\]](https://capgo.app) | Data not available |
+| **Versioning System** | Industry-standard semver | Custom version system |
 | **Compliance** | SOC II certified | Not SOC II certified |
 | **Security Auditing** | Public audits per commit (A score) + SOC II audit | No public auditing |
 | **Legal Entities** | US & EU entities | Standard business structure |
 | **Enterprise Pricing** | Transparent PAYG at $249/mo + [fair credit system](https://capgo.app/pricing/) for any scale | No public pricing above Team tier |
 
-Both platforms are designed to handle OTA (over-the-air) updates and support enterprise-scale deployments. Capgo differentiates itself with SOC II compliance, continuous security auditing (CodeRabbit and SonarCloud with A score), end-to-end encryption, and presence in both US and EU markets. Capawesome offers competitive features at a lower starting price point.
+Both platforms are designed to handle OTA (over-the-air) updates and support enterprise-scale deployments. Capgo differentiates itself with industry-standard semantic versioning, SOC II compliance, continuous security auditing (CodeRabbit and SonarCloud with A score), end-to-end encryption, and presence in both US and EU markets. Capawesome offers competitive features at a lower starting price point with a custom version system.
 
 ### Matching the Platform to Your Team
 
@@ -261,6 +264,7 @@ When choosing between them, consider:
 - **Security Requirements**: Capgo offers SOC II compliance and end-to-end encryption
 - **Geographic Needs**: Capgo operates with US and EU entities for data residency flexibility
 - **Budget**: Capawesome has a lower entry price and a free tier for testing
+- **Version Management**: Capgo uses industry-standard semver while Capawesome uses a custom system
 - **Enterprise Pricing Transparency**: Capgo provides public pricing for all tiers including PAYG at $249/mo + credits
 - **Track Record**: Capgo has been proven since 2022 with 1.7K production apps
 
