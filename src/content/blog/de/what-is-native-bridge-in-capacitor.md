@@ -254,7 +254,7 @@ Mit der nativen Brücke von Capacitor erhalten Entwickler Zugang zu einer einhei
 
 ## FAQs
 
-::: faq
+:::faq
 ### Was ist die Native Bridge in Capacitor und wie ermöglicht sie eine sichere Kommunikation zwischen Web- und nativen Schichten?
 
 Die Native Bridge in Capacitor spielt eine entscheidende Rolle bei der Verbindung der Webebene Ihrer App (Frontend) mit der nativen Ebene (plattformspezifische Funktionen). Denken Sie daran als einen sicheren Kommunikationskanal, der es Ihrer App ermöglicht, auf native Gerätefunktionen zuzugreifen, während die Leistung auf verschiedenen Plattformen konsistent bleibt.
@@ -262,7 +262,7 @@ Die Native Bridge in Capacitor spielt eine entscheidende Rolle bei der Verbindun
 Das Sicherheitsniveau hängt davon ab, wie die Brücke in Ihrer App eingerichtet ist. Plattformen wie **Capgo** verbessern Capacitor-Apps, indem sie Tools wie **Ende-zu-Ende-Verschlüsselung** für Live-Updates anbieten. Das bedeutet, dass empfindliche Daten und Updates sicher an Ihre Benutzer übertragen werden können, ohne ihre Privatsphäre zu gefährden oder Compliance-Regeln zu brechen.
 :::
 
-::: faq
+:::faq
 ### Was ist der Zweck der Native Bridge in Capacitor und wie wird sie in der plattformübergreifenden App-Entwicklung genutzt?
 
 Die **Native Bridge** in Capacitor dient als Verbindungspunkt zwischen der Webebene Ihrer App (Frontend) und der nativen Ebene (plattformspezifische Funktionen). Diese Brücke ermöglicht es Entwicklern, direkt von einer web-basierten App auf native Gerätefunktionen - wie die Kamera oder GPS - zuzugreifen. Es ist ein praktisches Tool zum Erstellen plattformübergreifender Apps, die auf jedem Gerät natürlich erscheinen.
@@ -272,7 +272,7 @@ Mit der Native Bridge können Sie plattformspezifische Funktionen in Ihre App in
 Wenn Sie mit Capacitor arbeiten, können Tools wie **Capgo** Ihr Leben noch einfacher machen. Capgo ermöglicht Live-Updates, sodass Sie Änderungen an Ihrer App sofort bereitstellen können - keine Genehmigung im App Store erforderlich. Das bedeutet, dass Ihre Benutzer immer gleich die neuesten Funktionen und Fehlerbehebungen erhalten.
 :::
 
-::: faq
+:::faq
 ### Wie können Entwickler die Leistung der Native Bridge verbessern, wenn sie fortschrittliche native Funktionen in Capacitor-Apps verwenden?
 
 Die Optimierung der Native Bridge in Capacitor besteht darin, eine effiziente Kommunikation zwischen den Web- und nativen Schichten zu gewährleisten. Ein effektiver Ansatz besteht darin, **die Anzahl der Brückenaufrufe zu minimieren**. Statt häufig einzelner Aufrufe, versuchen Sie, Vorgänge zusammenzufassen, um die Belastung der Leistung zu reduzieren. Ein weiterer Tipp? Verwenden Sie leichte Datenformate wie JSON für Datenübertragungen. Dies hilft, unnötige Überlastungen zu vermeiden.

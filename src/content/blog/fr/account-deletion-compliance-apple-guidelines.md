@@ -216,7 +216,7 @@ Des outils comme Capgo peuvent simplifier les mises à jour en permettant des aj
 
 ## FAQ
 
-::: faq
+:::faq
 ### Comment les développeurs peuvent-ils s'assurer que leur application répond aux exigences de suppression de compte d'Apple ?
 
 Pour répondre aux directives de suppression de compte d'Apple, les développeurs doivent offrir aux utilisateurs un moyen simple et clair de supprimer leurs comptes directement dans l'application. Le processus doit être facile à trouver, simple à suivre et ne doit pas obliger les utilisateurs à visiter des sites externes ou à contacter les équipes de support.
@@ -224,7 +224,7 @@ Pour répondre aux directives de suppression de compte d'Apple, les développeur
 Pour ceux qui utilisent Capacitor, des outils comme **Capgo** peuvent faciliter la conformité. Capgo permet des mises à jour en temps réel de votre application, ce qui signifie que vous pouvez rapidement implémenter des modifications - comme des ajustements à la fonction de suppression de compte - sans attendre les approbations de l'App Store. En assurant la conformité, vous réduisez non seulement le risque de rejets d'applications mais renforcez également la confiance des utilisateurs.
 :::
 
-::: faq
+:::faq
 ### Comment les développeurs peuvent-ils assurer une suppression correcte des données sur toutes les plateformes tout en évitant les problèmes de synchronisation ?
 
 La gestion de la suppression des données sur différentes plateformes n'est pas toujours simple, particulièrement lors de la conformité à des directives spécifiques comme celles établies par Apple. Pour résoudre ce problème, les développeurs doivent établir des systèmes backend fiables qui traitent les demandes de suppression de données uniformément sur toutes les plateformes intégrées. Cela implique souvent l'utilisation d'APIs ou de services qui exécutent les suppressions simultanément, assurant la cohérence et évitant les incohérences.
@@ -232,7 +232,7 @@ La gestion de la suppression des données sur différentes plateformes n'est pas
 Pour les applications créées avec Capacitor, des outils comme **Capgo** peuvent simplifier cette tâche. Capgo prend en charge les mises à jour en temps réel et s'aligne sur les exigences d'Apple, aidant les développeurs à gérer les mises à jour et les fonctionnalités des applications tout en respectant les normes de suppression des données. En utilisant des outils qui assurent une synchronisation fluide, les développeurs peuvent minimiser les erreurs et renforcer la confiance des utilisateurs.
 :::
 
-::: faq
+:::faq
 ### Comment les développeurs d'applications peuvent-ils s'assurer que leurs applications sont conformes aux exigences de suppression de compte d'Apple ?
 
 ## Assurer la conformité avec les exigences de suppression de compte d'Apple

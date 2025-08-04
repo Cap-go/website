@@ -275,7 +275,7 @@ Pour s'appuyer sur ces pratiques, commencez par :
 
 ## FAQs
 
-::: faq
+:::faq
 ### Comment les développeurs d'applications mobiles peuvent-ils déterminer si leur application doit se conformer à la California Consumer Privacy Act (CCPA) ?
 
 Pour déterminer si votre application mobile doit se conformer à la **California Consumer Privacy Act (CCPA)**, considérez les facteurs clés suivants :
@@ -289,7 +289,7 @@ Si votre application ou votre entreprise répond à l'un de ces critères, elle 
 Pour les développeurs utilisant **Capgo**, sa solution de mise à jour en direct pour les applications Capacitor assure des mises à jour sans faille tout en respectant les directives d'Apple et d'Android, ce qui peut soutenir la stratégie globale de conformité de votre application.
 :::
 
-::: faq
+:::faq
 ### Comment les applications mobiles peuvent-elles garantir leur conformité à la California Consumer Privacy Act (CCPA) tout en protégeant les données des utilisateurs ?
 
 Pour se conformer à la **California Consumer Privacy Act (CCPA)** et protéger les données des utilisateurs, les applications mobiles devraient se concentrer sur quelques pratiques clés :
@@ -301,7 +301,7 @@ Pour se conformer à la **California Consumer Privacy Act (CCPA)** et protéger 
 De plus, des outils comme **Capgo** peuvent améliorer les efforts de conformité de votre application en permettant des mises à jour instantanées pour traiter les vulnérabilités de sécurité ou les changements liés à la confidentialité sans nécessiter d'approbations des magasins d'applications. Cela garantit que votre application reste conforme en temps réel tout en offrant une expérience utilisateur fluide. Consultez toujours des experts juridiques pour garantir le respect intégral des exigences du CCPA.
 :::
 
-::: faq
+:::faq
 ### Quel impact le CCPA a-t-il sur l'utilisation des services tiers par les développeurs d'applications mobiles ?
 
 La California Consumer Privacy Act (CCPA) exige que les développeurs d'applications mobiles veillent à ce que tous les services tiers qu'ils utilisent respectent ses réglementations sur la confidentialité des données. Cela signifie que les développeurs doivent évaluer attentivement comment les fournisseurs tiers gèrent les données des utilisateurs, s'assurant qu'ils respectent les directives du CCPA concernant la collecte, le stockage et le partage des données. De plus, les développeurs devraient établir des accords clairs avec ces fournisseurs pour protéger les droits des utilisateurs, tels que la possibilité d'accéder à, de supprimer ou de se désinscrire de la collecte de données.

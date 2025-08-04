@@ -204,7 +204,7 @@ Um die CPRA-Vorschriften einzuhalten und die notwendigen technischen Schutzmaßn
 
 ## Häufig gestellte Fragen
 
-::: faq
+:::faq
 ### Wie können App-Entwickler die Anforderungen der CPRA zur Datenminimierung erfüllen?
 
 Um die **Datenminimierungsstandards** der CPRA zu erfüllen, sollten App-Entwickler sich darauf konzentrieren, nur die personenbezogenen Daten zu erfassen, die für das effektive Funktionieren ihrer App unerlässlich sind. Überprüfen Sie regelmäßig Ihre Datenerfassungspraktiken, um sicherzustellen, dass sie relevant bleiben und streng mit dem Zweck der App verbunden sind.
@@ -214,7 +214,7 @@ Ebenso wichtig ist die Festlegung klarer Richtlinien für die Datenspeicherung. 
 Für diejenigen, die Tools wie Capgo nutzen, können Echtzeit-Updates ein entscheidender Vorteil sein. Diese Tools ermöglichen es Entwicklern, Compliance-Probleme schnell zu beheben, indem sie Korrekturen oder Updates implementieren können, ohne auf die App-Store-Genehmigung warten zu müssen, was dazu beiträgt, dass Ihre App mit den Datenschutzvorschriften konform bleibt.
 :::
 
-::: faq
+:::faq
 ### Wie können App-Entwickler Benutzeranfragen für Datenzugriff, -löschung oder -korrektur gemäß CPRA-Richtlinien effizient handhaben?
 
 Um die Anforderungen des California Privacy Rights Act (CPRA) zu erfüllen, müssen App-Entwickler ein unkompliziertes und zuverlässiges System für die Bearbeitung von Benutzeranfragen bezüglich Datenzugriff, -löschung oder -korrektur einrichten. **Entwickler müssen Anfragen innerhalb von 10 Tagen bestätigen** und innerhalb von 45 Tagen bearbeiten. Falls zusätzliche Zeit benötigt wird, ist eine Verlängerung um bis zu 45 Tage möglich, sofern der Benutzer über die Verzögerung informiert wird.
@@ -228,7 +228,7 @@ So können Entwickler die Compliance vereinfachen:
 Die Nutzung von Tools wie Capgo, die Echtzeit-Updates ermöglichen, kann Entwicklern helfen, Probleme oder Korrekturen im Zusammenhang mit Benutzerdaten schnell zu lösen und dabei die Einhaltung der Plattformstandards sicherzustellen. Durch proaktives Handeln bei diesen Anforderungen können Entwickler nicht nur regulatorische Verpflichtungen erfüllen, sondern auch stärkeres Vertrauen bei ihren Nutzern aufbauen.
 :::
 
-::: faq
+:::faq
 ### Wie können App-Entwickler effektive Einwilligungsverwaltungssysteme implementieren, um die CPRA-Compliance-Anforderungen zu erfüllen?
 
 Um die **CPRA**-Standards zu erfüllen, müssen App-Entwickler Transparenz und Einfachheit bei der Verwaltung der Benutzereinwilligung priorisieren. Beginnen Sie mit klaren, verständlichen Einwilligungsbannern, die den Zweck der Datenerhebung und die Verwendung der Daten erklären. Es ist wichtig, vor der Verarbeitung jeglicher Daten die ausdrückliche Einwilligung der Benutzer einzuholen.

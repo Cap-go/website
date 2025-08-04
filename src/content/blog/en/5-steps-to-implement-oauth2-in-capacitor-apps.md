@@ -289,7 +289,7 @@ Stay ahead by conducting regular security audits and keeping your implementation
 
 ## FAQs
 
-::: faq
+:::faq
 ### Why should I use the Authorization Code Flow with PKCE for OAuth2 in mobile apps?
 
 ## Why Use the Authorization Code Flow with PKCE for Mobile Apps?
@@ -299,7 +299,7 @@ The **Authorization Code Flow with PKCE** is a go-to choice for mobile apps beca
 Mobile apps, classified as public clients, can't securely store client secrets. That’s where PKCE comes in - it allows you to securely authenticate users without exposing sensitive data. The result? A safer, more reliable login process that improves the overall user experience.
 :::
 
-::: faq
+:::faq
 ### What’s the best way to securely store OAuth2 tokens in iOS, Android, and web apps?
 
 To keep OAuth2 tokens safe across different platforms, it's essential to use **secure storage solutions tailored to each platform**. For iOS, the go-to option is Keychain Services, while Android users should rely on the Android Keystore system. These tools are specifically built to protect sensitive data, including tokens. On the web, secure cookies or encrypted browser storage can serve as effective alternatives.
@@ -307,7 +307,7 @@ To keep OAuth2 tokens safe across different platforms, it's essential to use **s
 Adding encryption, such as AES-256, provides an additional layer of security for tokens. Using **short-lived tokens** and securely refreshing them when needed further reduces risk. Implementing **PKCE (Proof Key for Code Exchange)** during the OAuth2 process is another smart move to block unauthorized access. For even stronger protection, consider integrating biometric authentication, ensuring that only the rightful user can access the stored tokens.
 :::
 
-::: faq
+:::faq
 ### What are the most common issues when testing OAuth2 integration in Capacitor apps, and how can they be fixed?
 
 When testing OAuth2 integration in Capacitor apps, developers might run into a few common roadblocks. Here's a quick rundown of what to watch out for:

@@ -421,7 +421,7 @@ Seiring teknologi Capacitor terus berkembang, menjaga saluran komunikasi web-nat
 
 ## FAQs
 
-::: faq
+:::faq
 ### Bagaimana komunikasi dua arah meningkatkan koneksi antara lapisan web dan native dalam aplikasi Capacitor?
 
 Komunikasi dua arah dalam aplikasi Capacitor memperlancar interaksi antara lapisan web dan native, memungkinkan integrasi fitur dan pembaruan real-time yang mulus. Pendekatan ini memungkinkan pengembang untuk mendorong perbaikan, peningkatan, dan fitur baru langsung ke pengguna tanpa menunggu persetujuan app store.
@@ -429,7 +429,7 @@ Komunikasi dua arah dalam aplikasi Capacitor memperlancar interaksi antara lapis
 Dengan memanfaatkan fungsionalitas ini, pengembang dapat meningkatkan kinerja aplikasi, merespons umpan balik pengguna lebih cepat, dan mempertahankan keunggulan kompetitif. Alat seperti Capgo dapat lebih meningkatkan proses ini dengan menawarkan pembaruan langsung, enkripsi end-to-end, dan kepatuhan dengan persyaratan platform, memastikan alur kerja pengembangan yang lancar dan efisien.
 :::
 
-::: faq
+:::faq
 ### Apa beberapa praktik terbaik untuk membuat plugin kustom untuk meningkatkan kinerja dalam aplikasi Capacitor?
 
 Membuat plugin kustom dalam aplikasi Capacitor dapat secara signifikan meningkatkan kinerja dan menyesuaikan fungsionalitas dengan kebutuhan spesifik aplikasi Anda. Berikut beberapa praktik terbaik yang harus diikuti:
@@ -441,7 +441,7 @@ Membuat plugin kustom dalam aplikasi Capacitor dapat secara signifikan meningkat
 Jika Anda ingin merampingkan pembaruan dan mempertahankan kinerja aplikasi yang mulus, platform seperti Capgo dapat membantu. Capgo memungkinkan Anda mendorong pembaruan secara instan, memastikan plugin dan aplikasi Anda tetap optimal tanpa memerlukan persetujuan app store.
 :::
 
-::: faq
+:::faq
 ### Bagaimana pengembang dapat mengamankan data saat mengaktifkan komunikasi dua arah antara lapisan web dan native dalam aplikasi Capacitor?
 
 Memastikan keamanan data selama komunikasi dua arah dalam aplikasi Capacitor melibatkan penerapan praktik terbaik utama. Gunakan **enkripsi end-to-end** untuk melindungi data sensitif saat berpindah antara lapisan web dan native. Selain itu, validasi dan sanitasi semua input untuk mencegah kerentanan seperti serangan injeksi.

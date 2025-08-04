@@ -149,7 +149,7 @@ Dank seiner technischen Stärken und strategischen Vorteile ist Capgo eine ausge
 
 ## FAQs
 
-::: faq
+:::faq
 ### Warum sollte ich mich für Capgo anstelle von Appflow für Over-the-Air (OTA) App-Updates entscheiden?
 
 Capgo bietet eine schnelle und zuverlässige Möglichkeit, Over-the-Air (OTA) Updates für Ihre Capacitor-Apps bereitzustellen. Mit **Echtzeit-Updates**, die sowohl den Apple- als auch den Android-Richtlinien entsprechen, können Sie sofort Fehlerbehebungen, neue Funktionen und Verbesserungen ausrollen - ganz ohne Genehmigung der App-Stores.
@@ -157,14 +157,14 @@ Capgo bietet eine schnelle und zuverlässige Möglichkeit, Over-the-Air (OTA) Up
 Was Capgo von anderen abhebt, sind seine herausragenden Merkmale wie **End-to-End-Verschlüsselung** für sichere Updates, **reibungslose CI/CD-Integration** zur Optimierung Ihres Workflows und **benutzerspezifische Update-Zielgruppen** für maßgeschneiderte Bereitstellungen. Zudem bietet es als Open-Source-Plattform Transparenz und Flexibilität, um den Anforderungen Ihrer App-Bereitstellung gerecht zu werden.
 :::
 
-::: faq
+:::faq
 ### Wie schützt Capgo App-Updates im Vergleich zu Appflow?
 
 Capgo priorisiert die [Sicherheit von App-Updates](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) durch die Verwendung von **End-to-End-Verschlüsselung**, die sicherstellt, dass Daten geschützt bleiben, während sie zwischen Entwicklern und Nutzern übertragen werden. Diese Methode schützt Updates effektiv vor unbefugtem Zugriff und erfüllt gleichzeitig die Compliance-Standards der Plattform.
 
 Auf der anderen Seite, während Appflow Funktionen bietet, fehlen die gleichen fortschrittlichen Verschlüsselungsmaßnahmen. Dies macht Capgo zu einer stärkeren und sichereren Option für Entwickler, die darauf fokussiert sind, ihre Updates zu sichern.
 
-::: faq
+:::faq
 ### Was sollten Entwickler berücksichtigen, wenn sie zwischen Capgos Cloud- und selbstgehosteten Bereitstellungsoptionen wählen?
 
 Der Artikel geht nicht auf die Einzelheiten von Capgos Cloud- und selbstgehosteten Bereitstellungsoptionen ein. Um detailliertere Informationen zu erhalten, ist es ratsam, die offiziellen Ressourcen von Capgo zu konsultieren oder sich direkt an deren Team zu wenden. Sie können eine Beratung anbieten, die auf Ihre spezifischen Bedürfnisse zugeschnitten ist.

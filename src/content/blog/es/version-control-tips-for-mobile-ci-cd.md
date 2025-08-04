@@ -104,7 +104,7 @@ Mirando hacia el futuro, los equipos que adopten prácticas disciplinadas de con
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Cuál es la diferencia entre las estrategias de ramificación por características, lanzamientos y basada en tronco en CI/CD móvil?
 
 Las estrategias de ramificación son una parte esencial de los flujos de trabajo de CI/CD móvil, ayudando a los equipos a gestionar el código de manera efectiva y agilizar el proceso de implementación. Aquí hay una mirada más detallada a algunos enfoques comunes:
@@ -119,7 +119,7 @@ Las estrategias de ramificación son una parte esencial de los flujos de trabajo
 Cada una de estas estrategias tiene sus ventajas, y la mejor opción depende del flujo de trabajo y las necesidades de tu equipo. Para equipos que trabajan con aplicaciones Capacitor, herramientas como **Capgo** pueden elevar tu proceso de CI/CD al permitir actualizaciones instantáneas en vivo. Esto elimina la necesidad de aprobaciones de la tienda de aplicaciones y asegura una integración fluida con tus prácticas de control de versiones.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo mejora Capgo los flujos de trabajo de CI/CD de aplicaciones móviles y qué ventajas ofrece en comparación con los enfoques tradicionales?
 
 Capgo optimiza los flujos de trabajo de CI/CD móvil ofreciendo **actualizaciones instantáneas por aire (OTA)**. Esto significa que los desarrolladores pueden evitar las molestias de envíos constantes a la tienda de aplicaciones, entregando correcciones de errores, nuevas características y actualizaciones mucho más rápido - todo mientras cumplen con las pautas de Apple y Android.
@@ -127,7 +127,7 @@ Capgo optimiza los flujos de trabajo de CI/CD móvil ofreciendo **actualizacione
 A diferencia de los enfoques tradicionales, Capgo se destaca con beneficios como tiempo de inactividad minimizado, una experiencia de usuario más fluida y una integración sin esfuerzo en los canales de CI/CD existentes. Las actualizaciones se pueden enviar de forma segura y en tiempo real, haciendo la gestión de aplicaciones más eficiente y adaptable. Con características avanzadas como encriptación de extremo a extremo y actualizaciones adaptadas a usuarios específicos, Capgo asegura tanto la seguridad como la personalización del proceso de actualización.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo puedo garantizar la seguridad y permitir reversiones rápidas en un canal de CI/CD móvil?
 
 Para mantener tu canal de CI/CD móvil seguro y preparado para reversiones rápidas, concéntrate en **prácticas sólidas de control de versiones**. Esto significa mantener notas de lanzamiento exhaustivas, aprovechar las banderas de características para controlar los lanzamientos de funciones y ejecutar pruebas automatizadas para identificar vulnerabilidades antes del despliegue.

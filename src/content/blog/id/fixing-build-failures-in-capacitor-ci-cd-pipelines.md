@@ -336,7 +336,7 @@ Seiring perkembangan Capacitor terus maju, mengikuti strategi-strategi ini akan 
 
 ## FAQ
 
-::: faq
+:::faq
 ### Bagaimana cara menjaga pipeline CI/CD Capacitor tetap stabil di berbagai lingkungan?
 
 Untuk menjaga pipeline CI/CD Capacitor berjalan lancar di berbagai lingkungan, pertimbangkan tips praktis berikut:
@@ -348,7 +348,7 @@ Untuk menjaga pipeline CI/CD Capacitor berjalan lancar di berbagai lingkungan, p
 Menggunakan tools seperti Capgo dapat membuat proses ini lebih mudah. Capgo mendukung integrasi CI/CD yang mulus, menawarkan update instan, dan menyediakan opsi rollback cepat bila diperlukan. Ini membantu memastikan deployment yang lebih lancar dan kinerja yang andal di semua lingkungan.
 :::
 
-::: faq
+:::faq
 ### Bagaimana cara mengelola dependensi secara efektif untuk menghindari kegagalan build dalam proyek Capacitor?
 
 Untuk menjaga proyek Capacitor berjalan lancar dan menghindari kegagalan build, **mengelola dependensi secara efektif** adalah kunci. Secara rutin perbarui dependensi Anda untuk memperbaiki masalah keamanan dan tetap kompatibel dengan fitur terbaru. Tools seperti Capacitor CLI, npm, atau yarn dapat membuat proses ini lebih mudah dan efisien.
@@ -358,7 +358,7 @@ Untuk kebutuhan khusus platform, andalkan tools seperti **CocoaPods** untuk iOS 
 Mengadopsi praktik-praktik ini akan membantu memastikan aplikasi Capacitor Anda dibangun di atas fondasi yang stabil dengan lebih sedikit hambatan pengembangan.
 :::
 
-::: faq
+:::faq
 ### Bagaimana Capgo dapat membantu menyelesaikan kegagalan build dalam pipeline CI/CD Capacitor?
 
 Capgo menghilangkan kerumitan dalam mendiagnosis dan memperbaiki kegagalan build di pipeline CI/CD Capacitor. Ini menawarkan tools seperti **pelacakan error otomatis**, **resolusi konflik dependensi**, dan **validasi variabel lingkungan** untuk menangkap masalah lebih awal dan meminimalkan error build.

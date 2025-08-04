@@ -305,7 +305,7 @@ Guardando al futuro, i team che adottano pratiche disciplinate di controllo vers
 
 ## FAQ
 
-::: faq
+:::faq
 ### Qual è la differenza tra le strategie di branching feature, release e trunk-based nel CI/CD mobile?
 
 Le strategie di branching sono una parte essenziale dei workflow CI/CD mobile, aiutando i team a gestire il codice in modo efficace e semplificare il processo di deployment. Ecco uno sguardo più approfondito ad alcuni approcci comuni:
@@ -320,7 +320,7 @@ Le strategie di branching sono una parte essenziale dei workflow CI/CD mobile, a
 Ognuna di queste strategie ha i suoi vantaggi, e la scelta migliore dipende dal workflow e dalle esigenze del tuo team. Per i team che lavorano con app Capacitor, strumenti come **Capgo** possono elevare il tuo processo CI/CD abilitando aggiornamenti live istantanei. Questo elimina la necessità di approvazioni degli app store e garantisce un'integrazione fluida con le tue pratiche di controllo versione.
 :::
 
-::: faq
+:::faq
 ### Come migliora Capgo i workflow CI/CD per app mobile e quali vantaggi offre rispetto agli approcci tradizionali?
 
 Capgo semplifica i workflow CI/CD per app mobile offrendo **aggiornamenti over-the-air (OTA) istantanei**. Questo significa che gli sviluppatori possono evitare il fastidio delle continue sottomissioni agli app store, distribuendo correzioni di bug, nuove funzionalità e aggiornamenti molto più velocemente - il tutto rispettando le linee guida di Apple e Android.
@@ -328,7 +328,7 @@ Capgo semplifica i workflow CI/CD per app mobile offrendo **aggiornamenti over-t
 A differenza degli approcci tradizionali, Capgo si distingue con benefici come downtime minimizzato, un'esperienza utente più fluida e un'integrazione senza sforzo nelle pipeline CI/CD esistenti. Gli aggiornamenti possono essere distribuiti in modo sicuro e in tempo reale, rendendo la gestione delle app più efficiente e adattabile. Con funzionalità avanzate come la crittografia end-to-end e aggiornamenti personalizzati per specifici utenti, Capgo garantisce sia la sicurezza che la personalizzazione del processo di aggiornamento.
 :::
 
-::: faq
+:::faq
 ### Come posso garantire la sicurezza e abilitare rollback rapidi in una pipeline CI/CD mobile?
 
 Per mantenere sicura la tua pipeline CI/CD mobile e preparata per rollback rapidi, concentrati su **solide pratiche di controllo versione**. Questo significa mantenere note di rilascio complete, sfruttare i feature flag per controllare il rilascio delle funzionalità ed eseguire test automatizzati per identificare vulnerabilità prima del deployment.

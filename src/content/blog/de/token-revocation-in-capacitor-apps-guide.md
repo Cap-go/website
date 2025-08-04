@@ -221,7 +221,7 @@ Konsequente Wartung, wachsame Echtzeit-Überwachung und die Fähigkeit zur sofor
 
 ## FAQs
 
-::: faq
+:::faq
 ### Warum ist Token-Widerrufung wichtig für die Verbesserung der Sicherheit einer Capacitor App?
 
 Token-Widerrufung ist eine wichtige Sicherheitsmaßnahme für Capacitor Apps, die es Entwicklern ermöglicht, Zugriffs-Tokens bei Bedarf sofort ungültig zu machen. Ob nach der Abmeldung eines Benutzers oder als Reaktion auf ein erkanntes Sicherheitsproblem, die Widerrufung von Tokens stellt sicher, dass kompromittierte Anmeldedaten nicht wiederverwendet werden können. Dieser Schritt reduziert die Chancen auf unbefugten Zugriff auf sensible Benutzerdaten erheblich.
@@ -229,7 +229,7 @@ Token-Widerrufung ist eine wichtige Sicherheitsmaßnahme für Capacitor Apps, di
 Sich ausschließlich auf Token-Ablauf zu verlassen kann ein Fenster der Verwundbarkeit hinterlassen, aber Token-Widerrufung adressiert Bedrohungen **in Echtzeit**. Dieser Ansatz stärkt nicht nur den Datenschutz, sondern entspricht auch modernen Sicherheitserwartungen. Für Capacitor Apps ist die Integration der Token-Widerrufung ein kritischer Schritt zum Schutz von Benutzerinformationen und zur Aufrechterhaltung einer sicheren App-Umgebung.
 :::
 
-::: faq
+:::faq
 ### Wie kann ich sichere Token-Widerrufung in hochfrequentierten Capacitor Apps implementieren?
 
 Um eine sichere Token-Widerrufung in [hochfrequentierten Capacitor Apps](https://capgo.app/blog/) zu gewährleisten, beginnen Sie mit der Implementierung von **kurzlebigen Zugriffs-Tokens**. Diese Tokens reduzieren das Missbrauchsrisiko, da sie schnell ablaufen und das Zeitfenster für potenzielle Angreifer begrenzen.
@@ -241,7 +241,7 @@ Für zusätzliche Sicherheit verwenden Sie **OAuth 2.0**. Dieses Framework biete
 Durch die Anwendung dieser Praktiken können Sie Ihre Capacitor App vor unbefugtem Zugriff schützen und gleichzeitig sicherstellen, dass sie auch unter hoher Belastung gut funktioniert.
 :::
 
-::: faq
+:::faq
 ### Wie kann ich meine Capacitor App absichern und die Sicherheitsanforderungen des App Stores mit Token-Widerrufung einhalten?
 
 Um Ihre Capacitor App sicher zu halten und die Sicherheitsstandards des App Stores einzuhalten, ist es wichtig, **Token-Widerrufungsstrategien** zusammen mit starken Authentifizierungsmethoden wie OAuth 2.0 oder OpenID Connect zu implementieren. Diese Maßnahmen schützen Benutzerdaten und erfüllen gleichzeitig die von Apple und Google Play festgelegten Anforderungen.

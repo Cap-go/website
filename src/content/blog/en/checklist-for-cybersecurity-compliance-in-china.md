@@ -333,7 +333,7 @@ Failure to comply can lead to penalties ranging from formal warnings to the remo
 
 ## FAQs
 
-::: faq
+:::faq
 ### What steps should developers follow to ensure their mobile apps comply with China's cybersecurity regulations in 2025?
 
 To align with China's cybersecurity regulations set for 2025, developers need to prioritize compliance with the latest legal standards and ensure their apps meet stringent data protection requirements. Here are some key areas to focus on:
@@ -346,7 +346,7 @@ To align with China's cybersecurity regulations set for 2025, developers need to
 Capgo supports developers in achieving compliance by providing **end-to-end encryption** and **real-time updates** for Capacitor apps. This ensures that updates, whether for fixes or new features, are deployed instantly without waiting for app store approvals - keeping your app secure and compliant with ease.
 :::
 
-::: faq
+:::faq
 ### What steps can developers take to securely store and transmit user data while complying with China's cybersecurity regulations?
 
 To align with China's cybersecurity regulations, developers must focus on the **secure storage and transmission of user data**. Here's how this can be achieved:
@@ -359,7 +359,7 @@ To align with China's cybersecurity regulations, developers must focus on the **
 Platforms such as Capgo can simplify compliance efforts by offering real-time updates. This allows apps to stay secure and current without the need for app store approvals. Additionally, Capgo’s end-to-end encryption strengthens data protection, making it easier to meet regulatory demands.
 :::
 
-::: faq
+:::faq
 ### What are the risks of not complying with China's cybersecurity regulations, and how can businesses address them?
 
 Failing to follow China's cybersecurity regulations can result in serious repercussions, such as **hefty fines**, **removal of apps from app stores**, **data breaches**, and even **legal action**. Beyond these, non-compliance can severely harm a company's reputation, making it challenging to maintain a foothold in the Chinese market.

@@ -200,7 +200,7 @@ Achieving compliance isn’t a one-time task. It requires constant updates and c
 
 ## FAQs
 
-::: faq
+:::faq
 ### How can app developers stay compliant with evolving privacy laws like GDPR and CCPA?
 
 To stay compliant with changing privacy laws such as GDPR and CCPA, app developers need to prioritize **user consent management**. This includes obtaining clear, informed consent from users before collecting or processing their data, providing options to manage or withdraw consent, and ensuring transparency about how data is used.
@@ -208,7 +208,7 @@ To stay compliant with changing privacy laws such as GDPR and CCPA, app develope
 For developers using Capacitor apps, tools like **Capgo** can make compliance easier. Capgo enables instant updates to your app without requiring app store approvals, ensuring you can quickly implement changes to meet new privacy requirements. With features like end-to-end encryption and real-time updates, Capgo helps you maintain compliance while delivering a seamless user experience.
 :::
 
-::: faq
+:::faq
 ### How can live update platforms improve consent management and app compliance compared to traditional updates?
 
 Live update platforms like **Capgo** enable developers to push updates, fixes, and new features instantly, bypassing the lengthy app store approval process. This ensures your app remains compliant with evolving data privacy laws while addressing issues or implementing new consent requirements quickly.
@@ -216,7 +216,7 @@ Live update platforms like **Capgo** enable developers to push updates, fixes, a
 With features such as **end-to-end encryption**, seamless **CI/CD integration**, and real-time updates, these platforms make it easier to manage compliance while maintaining a secure and efficient workflow. Unlike traditional update methods that can take weeks, live updates allow you to respond to regulatory changes or user feedback in minutes, keeping your app up-to-date and your users protected.
 :::
 
-::: faq
+:::faq
 ### How can I properly document and manage user consent to ensure compliance with data privacy laws?
 
 To comply with data privacy laws, it's essential to properly document and manage user consent. Start by implementing a **clear and user-friendly consent form** within your app that explains what data is being collected and how it will be used. Ensure users can easily provide, modify, or withdraw their consent at any time.

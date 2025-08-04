@@ -334,7 +334,7 @@ Concentrati sul mantenere la **crittografia end-to-end**, il **monitoraggio cont
 
 ## FAQ
 
-::: faq
+:::faq
 ### Come posso implementare OAuth 2.0 nella mia app Capacitor per soddisfare gli standard di sicurezza dell'app store?
 
 Per implementare **OAuth 2.0** nella tua app Capacitor garantendo la conformità agli standard di sicurezza dell'app store, dovrai seguire alcuni passaggi chiave:
@@ -347,7 +347,7 @@ Per implementare **OAuth 2.0** nella tua app Capacitor garantendo la conformità
 Seguendo questi passaggi, puoi garantire che la tua app soddisfi gli standard di sicurezza fornendo un'esperienza di autenticazione fluida. Piattaforme come **Capgo** possono anche migliorare il processo di aggiornamento della tua app, garantendo la conformità con i requisiti Apple e Google mentre distribuiscono aggiornamenti in tempo reale agli utenti.
 :::
 
-::: faq
+:::faq
 ### Quali passi posso intraprendere per garantire che la mia API soddisfi gli standard di sicurezza di Apple e Google per la conformità all'app store?
 
 Per garantire che la tua API si allinei con gli standard di sicurezza di Apple e Google, concentrati sull'implementazione di robuste pratiche di sicurezza come la **crittografia end-to-end**, metodi di autenticazione sicuri e misure per la privacy dei dati. Questi sono fondamentali per soddisfare i requisiti di conformità.
@@ -355,7 +355,7 @@ Per garantire che la tua API si allinei con gli standard di sicurezza di Apple e
 Se stai sviluppando app Capacitor, strumenti come Capgo possono semplificare la conformità. Capgo ti permette di distribuire istantaneamente aggiornamenti, correzioni e funzionalità senza necessità di approvazioni dell'app store, il tutto rispettando le linee guida Apple e Android. Questo garantisce che la tua app rimanga sicura e aggiornata senza sforzo.
 :::
 
-::: faq
+:::faq
 ### Quali sono i migliori strumenti e pratiche per monitorare e gestire la sicurezza API nella mia app?
 
 Per una gestione efficace della sicurezza API nella tua app, considera strumenti che consentano aggiornamenti in tempo reale, crittografia e integrazione fluida con i flussi di lavoro di sviluppo. **Capgo** fornisce una potente soluzione per le app Capacitor, permettendo agli sviluppatori di distribuire aggiornamenti, correzioni e nuove funzionalità istantaneamente senza attendere le approvazioni dell'app store. Questo garantisce che la tua app rimanga conforme e aggiornata.

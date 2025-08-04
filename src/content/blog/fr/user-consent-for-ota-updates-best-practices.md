@@ -31,7 +31,7 @@ Le fait de ne pas obtenir le consentement des utilisateurs pour les mises à jou
 Au-delà des risques juridiques, la mise à jour des applications sans le consentement des utilisateurs peut nuire à la confiance des utilisateurs et porter atteinte à la réputation de votre marque. Pour éviter ces risques, il est préférable de mettre en place des mécanismes de consentement clairs et conviviaux pour les mises à jour OTA. Des plateformes comme **Capgo** peuvent aider à garantir la conformité tout en offrant des solutions de mise à jour en direct adaptées aux applications Capacitor.
 :::
 
-::: faq
+:::faq
 ### Quelles sont les meilleures pratiques pour créer des demandes de consentement conformes et conviviales pour les mises à jour OTA ?
 
 Pour garantir que vos demandes de consentement pour les mises à jour Over-the-Air (OTA) soient à la fois conformes et conviviales, concentrez-vous sur la clarté, la transparence et la simplicité. Expliquez clairement ce que comprend la mise à jour, pourquoi elle est nécessaire et comment elle profite à l'utilisateur. Évitez le jargon technique et utilisez un langage simple et facile à comprendre.
@@ -39,7 +39,7 @@ Pour garantir que vos demandes de consentement pour les mises à jour Over-the-A
 Assurez-vous de donner aux utilisateurs le choix clair d'accepter ou de refuser la mise à jour, et respectez leur décision. De plus, conformez-vous aux directives de la plateforme (par exemple, Apple et Android) et aux réglementations sur la confidentialité des données comme le RGPD ou le CCPA. Des outils comme Capgo peuvent aider à rationaliser le processus en offrant des fonctionnalités telles que l'attribution d'utilisateurs pour les mises à jour et la conformité en temps réel aux exigences de la plateforme, garantissant une expérience fluide et sécurisée pour les développeurs et les utilisateurs.
 :::
 
-::: faq
+:::faq
 ### Quelles mesures de sécurité garantissent la protection des données des utilisateurs pendant les mises à jour OTA ?
 
 Pour protéger les données des utilisateurs pendant les mises à jour Over-the-Air (OTA), la mise en œuvre du **chiffrement de bout en bout** est essentielle. Cela garantit que seuls les utilisateurs prévus peuvent déchiffrer et accéder aux mises à jour, maintenant les informations sensibles sécurisées.

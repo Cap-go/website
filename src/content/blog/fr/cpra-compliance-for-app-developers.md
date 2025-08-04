@@ -207,7 +207,7 @@ Pour s'aligner sur les réglementations CPRA et garantir la mise en place des ga
 
 ## FAQs
 
-::: faq
+:::faq
 ### Comment les développeurs d'applications peuvent-ils répondre aux exigences de minimisation des données du CPRA ?
 
 Pour répondre aux normes de **minimisation des données** établies par le CPRA, les développeurs d'applications doivent privilégier la collecte uniquement des données personnelles essentielles au fonctionnement efficace de leur application. Évaluez régulièrement vos pratiques de collecte de données pour confirmer qu'elles restent pertinentes et strictement liées à l'objectif de l'application.
@@ -217,7 +217,7 @@ Il est tout aussi important d'établir des politiques claires de conservation de
 Pour ceux qui utilisent des outils comme Capgo, les mises à jour en temps réel peuvent être un véritable atout. Ces outils permettent aux développeurs de résoudre rapidement les problèmes de conformité en déployant des correctifs ou des mises à jour sans attendre l'approbation de l'app store, aidant ainsi votre application à rester alignée avec les réglementations de confidentialité.
 :::
 
-::: faq
+:::faq
 ### Comment les développeurs d'applications peuvent-ils gérer efficacement les demandes des utilisateurs concernant l'accès, la suppression ou la correction des données selon les directives CPRA ?
 
 Pour répondre aux exigences de la California Privacy Rights Act (CPRA), les développeurs d'applications doivent créer un système simple et fiable pour gérer les demandes des utilisateurs concernant l'accès, la suppression ou la correction des données. **Les développeurs doivent accuser réception des demandes dans les 10 jours** et les résoudre dans les 45 jours. Si un délai supplémentaire est nécessaire, une prolongation de 45 jours est autorisée, à condition que l'utilisateur soit informé du retard.
@@ -231,7 +231,7 @@ Voici comment les développeurs peuvent simplifier la conformité :
 L'utilisation d'outils comme Capgo, qui offrent des mises à jour en temps réel, peut aider les développeurs à résoudre rapidement les problèmes ou à appliquer des correctifs liés aux données utilisateur tout en assurant la conformité aux normes de la plateforme. En anticipant ces exigences, les développeurs peuvent non seulement respecter les obligations réglementaires mais aussi renforcer la confiance avec leurs utilisateurs.
 :::
 
-::: faq
+:::faq
 ### Comment les développeurs d'applications peuvent-ils mettre en œuvre des systèmes efficaces de gestion du consentement pour répondre aux exigences de conformité CPRA ?
 
 Pour répondre aux normes **CPRA**, les développeurs d'applications doivent privilégier la transparence et la simplicité dans la gestion du consentement des utilisateurs. Commencez par des bannières de consentement claires et directes qui expliquent l'objectif de la collecte de données et comment les données seront utilisées. Il est essentiel d'obtenir le consentement explicite des utilisateurs avant de traiter toute donnée.

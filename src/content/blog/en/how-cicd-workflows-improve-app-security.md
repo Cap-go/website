@@ -167,7 +167,7 @@ In today’s fast-paced environment, the real question isn’t whether CI/CD sho
 
 ## FAQs
 
-::: faq
+:::faq
 ### How does automation in CI/CD workflows make apps more secure compared to traditional methods?
 
 ## How Automation in CI/CD Enhances App Security
@@ -177,7 +177,7 @@ Automation in CI/CD workflows plays a key role in boosting app security by weavi
 Another advantage of CI/CD is the ability to roll out updates and patches quickly - essential for tackling emerging threats. Traditional methods, with their slower release cycles, often leave applications vulnerable for longer periods. CI/CD workflows, on the other hand, streamline updates and integrate security into every phase of development. This approach not only strengthens security but also keeps the development process agile and efficient.
 :::
 
-::: faq
+:::faq
 ### What challenges might organizations face when moving from traditional deployment methods to CI/CD workflows?
 
 Transitioning from older deployment methods to CI/CD workflows comes with its share of hurdles. A big one? **Resistance to change.** Team members might feel uneasy about shifting to new processes, whether it’s due to concerns about job security or simply the fear of the unknown. This hesitation can lead to friction between development and operations teams, making collaboration harder than it needs to be.
@@ -187,7 +187,7 @@ Another major obstacle is the **integration of CI/CD tools** into existing syste
 And then there’s the challenge of maintaining **security and compliance** in a fast-moving deployment environment. Traditional methods often rely on rigid controls, but CI/CD’s rapid cycles demand a more flexible approach. Striking the right balance between speed and safeguarding data, while staying compliant with regulations, requires meticulous planning and execution.
 :::
 
-::: faq
+:::faq
 ### How does Capgo's CI/CD integration help ensure compliance with regulations like GDPR and HIPAA during app updates?
 
 Capgo's CI/CD integration strengthens adherence to regulations like **GDPR** and **HIPAA** by automating critical security steps during app updates. This involves implementing **end-to-end encryption** to protect sensitive data, using secure delivery methods for updates, and conducting compliance checks at every stage of deployment.

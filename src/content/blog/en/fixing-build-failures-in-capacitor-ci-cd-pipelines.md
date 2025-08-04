@@ -331,7 +331,7 @@ As Capacitor development continues to advance, following these strategies will e
 
 ## FAQs
 
-::: faq
+:::faq
 ### How can I keep my Capacitor CI/CD pipeline stable across different environments?
 
 To keep your Capacitor CI/CD pipeline running smoothly across different environments, consider these practical tips:
@@ -343,7 +343,7 @@ To keep your Capacitor CI/CD pipeline running smoothly across different environm
 Using tools like Capgo can make these processes easier. Capgo supports seamless CI/CD integration, offers instant updates, and provides quick rollback options when necessary. This helps ensure smoother deployments and reliable performance across all environments.
 :::
 
-::: faq
+:::faq
 ### How can I manage dependencies effectively to avoid build failures in Capacitor projects?
 
 To keep your Capacitor projects running smoothly and avoid build failures, **managing dependencies effectively** is key. Regularly update your dependencies to patch security issues and stay compatible with the latest features. Tools like the Capacitor CLI, npm, or yarn can make this process easier and more efficient.
@@ -353,7 +353,7 @@ For platform-specific needs, rely on tools like **CocoaPods** for iOS and **Grad
 Adopting these practices will help ensure your Capacitor apps are built on a stable foundation with fewer development hiccups.
 :::
 
-::: faq
+:::faq
 ### How can Capgo assist with resolving build failures in Capacitor CI/CD pipelines?
 
 Capgo takes the hassle out of diagnosing and fixing build failures in Capacitor CI/CD pipelines. It offers tools like **automated error tracking**, **dependency conflict resolution**, and **environment variable validation** to catch issues early and minimize build errors.

@@ -185,7 +185,7 @@ Seiring kebijakan privasi menjadi lebih ketat dan praktik peluncuran berkembang,
 
 ## FAQ
 
-::: faq
+:::faq
 ### Bagaimana kebijakan privasi Apple dan Google mempengaruhi penggunaan data pihak ketiga oleh pengembang aplikasi?
 
 Apple dan Google memiliki pendekatan berbeda terhadap privasi, yang secara signifikan mempengaruhi cara pengembang aplikasi menangani data pihak ketiga. Apple menekankan privasi pengguna dengan kebijakan yang lebih ketat, seperti App Tracking Transparency (ATT), yang memerlukan persetujuan eksplisit pengguna untuk berbagi data. Ini dapat membatasi akses pengembang ke data pengguna yang detail tetapi membantu membangun kepercayaan dengan pengguna yang sadar privasi.
@@ -195,7 +195,7 @@ Google, meskipun juga memprioritaskan privasi, cenderung menawarkan fleksibilita
 Untuk pengembang yang menggunakan platform seperti **Capgo**, yang mendukung pembaruan real-time dengan kepatuhan terhadap persyaratan Apple dan Google, menavigasi kebijakan privasi ini menjadi lebih lancar. Enkripsi end-to-end dan fitur pembaruan langsung Capgo dapat membantu pengembang mempertahankan kepatuhan sambil memberikan pembaruan secara efisien.
 :::
 
-::: faq
+:::faq
 ### Tantangan apa yang dihadapi pengembang saat mematuhi standar privasi Apple dan Google untuk data pihak ketiga?
 
 Pengembang sering menghadapi tantangan signifikan saat memastikan kepatuhan dengan standar privasi Apple dan Google, terutama dalam menangani data pihak ketiga. Kedua perusahaan memiliki kebijakan yang ketat dan berkembang, seperti kerangka kerja **App Tracking Transparency (ATT)** Apple dan **Bagian Keamanan Data** Google, yang mengharuskan pengembang mengungkapkan dan membatasi praktik pengumpulan data.
@@ -203,7 +203,7 @@ Pengembang sering menghadapi tantangan signifikan saat memastikan kepatuhan deng
 Menavigasi kebijakan ini bisa kompleks, terutama untuk aplikasi yang bergantung pada integrasi atau analitik pihak ketiga. Pengembang harus memastikan transparansi dalam cara data dikumpulkan, digunakan, dan dibagikan sambil menerapkan langkah-langkah keamanan yang kuat untuk melindungi privasi pengguna. Alat seperti **Capgo** dapat membantu memperlancar proses ini dengan menawarkan pembaruan real-time dan solusi ramah kepatuhan untuk pengembang aplikasi, memastikan kepatuhan terhadap persyaratan Apple dan Google tanpa pengajuan ulang ke app store yang sering.
 :::
 
-::: faq
+:::faq
 ### Bagaimana alat seperti Capgo dapat membantu pengembang memastikan kepatuhan privasi dan merampingkan pembaruan di platform Apple dan Android?
 
 Capgo memberdayakan pengembang dengan menyederhanakan pembaruan aplikasi dan memastikan kepatuhan dengan persyaratan privasi Apple dan Android. Ini memungkinkan pembaruan instan untuk aplikasi Capacitor tanpa memerlukan persetujuan app store, memungkinkan penerapan perbaikan bug, fitur baru, dan peningkatan yang lebih cepat.

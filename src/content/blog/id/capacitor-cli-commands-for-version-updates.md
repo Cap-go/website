@@ -336,7 +336,7 @@ Apakah Anda sedang mengerjakan aplikasi kecil atau memperbesar penyebaran yang l
 
 ## FAQ
 
-::: faq
+:::faq
 ### Tantangan apa yang mungkin saya hadapi saat memperbarui aplikasi saya dengan Capacitor CLI, dan bagaimana saya dapat mengatasinya?
 
 Saat Anda memperbarui aplikasi Anda dengan Capacitor CLI, Anda mungkin akan menemui beberapa rintangan di sepanjang jalan. Tantangan umum termasuk **konflik ketergantungan**, **perubahan yang merusak dalam plugin**, atau **masalah konfigurasi spesifik platform**. Masalah ini sering muncul akibat perbedaan antara versi Capacitor atau pembaruan pada plugin pihak ketiga.
@@ -350,7 +350,7 @@ Berikut adalah cara untuk mengatasi tantangan ini:
 Untuk pengalaman pembaruan yang lebih lancar, Anda mungkin ingin mencoba alat seperti _Capgo_. Alat ini memungkinkan Anda mengirimkan perbaikan dan fitur baru langsung kepada pengguna tanpa perlu persetujuan dari toko aplikasi. Ini adalah cara yang baik untuk menjaga aplikasi Anda tetap terbaru dengan waktu henti minimal.
 :::
 
-::: faq
+:::faq
 ### Bagaimana Capgo menyederhanakan pembaruan aplikasi, dan apa fitur andalannya?
 
 Capgo menyederhanakan cara pengembang menyampaikan [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) dengan memungkinkan mereka untuk mengirimkan perubahan, perbaikan, dan fitur baru langsung kepada pengguna - tanpa perlu persetujuan dari toko aplikasi. Dengan ini, pengguna Anda dapat menikmati pembaruan terbaru dalam beberapa menit, menciptakan pengalaman yang lebih lancar dan efisien.
@@ -365,7 +365,7 @@ Berikut adalah yang membuat Capgo menonjol:
 Capgo sepenuhnya sumber terbuka dan mematuhi standar Apple dan Android, menawarkan solusi yang dapat diandalkan untuk [pembaruan aplikasi waktu nyata](https://capgo.app/blog/live-updates-for-flutter-app/).
 :::
 
-::: faq
+:::faq
 ### Bagaimana saya dapat memeriksa apakah plugin saya kompatibel dengan versi terbaru dari Capacitor sebelum memperbarui?
 
 Sebelum melompat ke versi terbaru dari Capacitor, sangat penting untuk memeriksa kembali apakah plugin Anda siap untuk menangani pembaruan. Mulailah dengan menggali dokumentasi atau repositori plugin untuk melihat apakah ada persyaratan atau pembaruan spesifik versi. Sebagian besar plugin dengan jelas menunjukkan versi Capacitor mana yang mereka dukung, jadi langkah ini bisa menghindarkan Anda dari sakit kepala yang tidak perlu.

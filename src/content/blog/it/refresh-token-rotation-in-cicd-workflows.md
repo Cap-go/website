@@ -264,7 +264,7 @@ Per un processo più snello, strumenti come Capgo incorporano la rotazione dei t
 
 ## FAQ
 
-::: faq
+:::faq
 ### Cos'è la rotazione dei token di aggiornamento, e come migliora la sicurezza nei flussi di lavoro CI/CD?
 
 La rotazione dei token di aggiornamento è una funzionalità di sicurezza in cui viene emesso un nuovo token di aggiornamento ogni volta che quello precedente viene utilizzato. Questo metodo aiuta a ridurre il rischio di uso improprio dei token poiché qualsiasi token compromesso diventa non valido dopo essere stato ruotato.
@@ -272,7 +272,7 @@ La rotazione dei token di aggiornamento è una funzionalità di sicurezza in cui
 Nei flussi di lavoro CI/CD, utilizzare la rotazione dei token di aggiornamento aggiunge un ulteriore livello di protezione per compiti automatizzati come [l'aggiornamento delle app](https://capgo.app/plugins/capacitor-updater/) o le distribuzioni. Limita l'esposizione di token a lungo termine, rafforzando la sicurezza della tua pipeline. Strumenti come Capgo possono integrarsi perfettamente nei sistemi CI/CD, fornendo aggiornamenti sicuri e automatizzati per [le app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) rispettando le linee guida della piattaforma.
 :::
 
-::: faq
+:::faq
 ### Come posso implementare la rotazione dei token di aggiornamento nelle pipeline CI/CD per garantire distribuzioni sicure e senza interruzioni?
 
 Implementare la rotazione dei token di aggiornamento nelle tue pipeline CI/CD è una mossa intelligente per mantenere le tue distribuzioni sicure mentre funzionano senza intoppi. Ecco alcuni suggerimenti pratici per farlo correttamente:
@@ -284,7 +284,7 @@ Implementare la rotazione dei token di aggiornamento nelle tue pipeline CI/CD è
 Se stai sviluppando con le app Capacitor, **Capgo** semplifica l'integrazione CI/CD. Garantisce che la gestione degli aggiornamenti delle app in tempo reale sia sia sicura che efficiente. Abbinare la rotazione dei token a strumenti come Capgo può rendere il tuo processo di distribuzione più sicuro e più snello.
 :::
 
-::: faq
+:::faq
 ### Come garantisce Capgo la rotazione sicura dei token e l'integrazione CI/CD rimanendo conveniente rispetto agli standard del settore?
 
 Capgo fornisce un modo sicuro ed efficiente per gestire la rotazione dei token e integrare i flussi di lavoro CI/CD, allineandosi agli standard del settore e ponendo l'accento sull'automazione. Integrando la rotazione dei token di aggiornamento nei processi CI/CD, Capgo assicura che gli sviluppatori possano mantenere sicuri gli aggiornamenti delle app senza compromettere la facilità d'uso.

@@ -275,7 +275,7 @@ Per costruire su queste pratiche, inizia con:
 
 ## FAQ
 
-::: faq
+:::faq
 ### Come possono gli sviluppatori di app mobili determinare se la loro app deve conformarsi alla California Consumer Privacy Act (CCPA)?
 
 Per determinare se la tua app mobile deve conformarsi alla **California Consumer Privacy Act (CCPA)**, considera i seguenti fattori chiave:
@@ -289,7 +289,7 @@ Se la tua app o azienda soddisfa uno di questi criteri, è probabile che sia sog
 Per gli sviluppatori che utilizzano **Capgo**, la sua soluzione di aggiornamento live per app Capacitor garantisce aggiornamenti senza interruzioni mantenendo la conformità con sia le linee guida di Apple che quelle di Android, supportando così la strategia complessiva di conformità della tua app.
 :::
 
-::: faq
+:::faq
 ### Come possono le app mobili garantire la conformità con la California Consumer Privacy Act (CCPA) proteggendo i dati degli utenti?
 
 Per conformarsi alla **California Consumer Privacy Act (CCPA)** e proteggere i dati degli utenti, le app mobili dovrebbero concentrarsi su alcune pratiche chiave:
@@ -301,7 +301,7 @@ Per conformarsi alla **California Consumer Privacy Act (CCPA)** e proteggere i d
 Inoltre, strumenti come **Capgo** possono migliorare gli sforzi di conformità della tua app abilitando aggiornamenti istantanei per affrontare vulnerabilità di sicurezza o modifiche relative alla privacy senza la necessità di approvazioni da parte degli app store. Questo garantisce che la tua app rimanga conforme in tempo reale mentre offre esperienze senza interruzioni agli utenti. Consulta sempre esperti legali per garantire la piena conformità ai requisiti del CCPA.
 :::
 
-::: faq
+:::faq
 ### Qual è l'impatto della CCPA sull'uso di servizi di terze parti da parte degli sviluppatori di app mobili?
 
 La California Consumer Privacy Act (CCPA) richiede agli sviluppatori di app mobili di garantire che qualsiasi servizio di terze parti utilizzato sia conforme alle sue normative sulla privacy dei dati. Ciò significa che gli sviluppatori devono valutare attentamente come i fornitori di terze parti gestiscono i dati degli utenti, assicurandosi che seguano le linee guida del CCPA per la raccolta, l'archiviazione e la condivisione dei dati. Inoltre, gli sviluppatori dovrebbero stabilire accordi chiari con questi fornitori per proteggere i diritti degli utenti, come la possibilità di accedere, eliminare o rinunciare alla raccolta dei dati.

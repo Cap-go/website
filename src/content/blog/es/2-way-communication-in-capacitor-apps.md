@@ -422,7 +422,7 @@ A medida que la tecnología Capacitor continúa avanzando, mantener canales de c
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Cómo mejora la comunicación bidireccional la conexión entre las capas web y nativas en las apps de Capacitor?
 
 La comunicación bidireccional en las apps de Capacitor agiliza la interacción entre las capas web y nativas, permitiendo una integración fluida de características y actualizaciones en tiempo real. Este enfoque permite a los desarrolladores enviar arreglos, mejoras y nuevas características directamente a los usuarios sin esperar la aprobación de las tiendas de aplicaciones.
@@ -430,7 +430,7 @@ La comunicación bidireccional en las apps de Capacitor agiliza la interacción 
 Al aprovechar esta funcionalidad, los desarrolladores pueden mejorar el rendimiento de la app, responder más rápido a la retroalimentación de los usuarios y mantener una ventaja competitiva. Herramientas como Capgo pueden mejorar aún más este proceso al ofrecer actualizaciones en vivo, encriptación de extremo a extremo y cumplimiento con los requisitos de la plataforma, asegurando un flujo de trabajo de desarrollo suave y eficiente.
 :::
 
-::: faq
+:::faq
 ### ¿Cuáles son algunas mejores prácticas para crear plugins personalizados que mejoren el rendimiento en las apps de Capacitor?
 
 Crear plugins personalizados en las apps de Capacitor puede mejorar significativamente el rendimiento y adaptar la funcionalidad a las necesidades específicas de tu app. Aquí hay algunas mejores prácticas a seguir:
@@ -442,7 +442,7 @@ Crear plugins personalizados en las apps de Capacitor puede mejorar significativ
 Si buscas agilizar las actualizaciones y mantener un rendimiento fluido de la app, plataformas como Capgo pueden ayudar. Capgo te permite enviar actualizaciones al instante, asegurando que tus plugins y app permanezcan optimizados sin requerir aprobaciones de la tienda de aplicaciones.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores asegurar los datos al habilitar la comunicación bidireccional entre las capas web y nativas en las apps de Capacitor?
 
 Asegurar la seguridad de los datos durante la comunicación bidireccional en las apps de Capacitor implica implementar mejores prácticas clave. Utiliza **encriptación de extremo a extremo** para proteger datos sensibles a medida que se mueven entre las capas web y nativas. Además, valida y sanitiza todas las entradas para prevenir vulnerabilidades como ataques de inyección.

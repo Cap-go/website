@@ -189,7 +189,7 @@ Um diese Leistungsverbesserungen zu erreichen, sollten Entwickler Prioritäten s
 
 ## FAQs
 
-::: faq
+:::faq
 ### Wie verbessert die Optimierung der Bridge-Kommunikation in benutzerdefinierten iOS-Plugins die App-Leistung?
 
 Die Optimierung der Bridge-Kommunikation in benutzerdefinierten iOS-Plugins ist ein kluger Weg, um die App-Leistung zu steigern. Durch Reduzierung der Latenz und Verbesserung des Datenflusses zwischen den nativen und JavaScript-Schichten können Sie reibungslosere Interaktionen, schnellere Reaktionen und eine insgesamt bessere Benutzererfahrung erreichen.
@@ -197,7 +197,7 @@ Die Optimierung der Bridge-Kommunikation in benutzerdefinierten iOS-Plugins ist 
 Um dies zu erreichen, ist es wichtig, die über die Bridge gesendeten Daten zu begrenzen, mehrere Aufrufe wenn möglich zu bündeln und unnötige Hin-und-Her-Kommunikation zu reduzieren. Tools wie **Capgo** können diesen Prozess noch einfacher machen. Sie ermöglichen sofortige Updates und helfen Ihrer App, schnell und aktuell zu bleiben, ohne ständige App-Store-Einreichungen.
 :::
 
-::: faq
+:::faq
 ### Was sind die Best Practices für die Optimierung der Speichernutzung in benutzerdefinierten iOS-Plugins zur Vermeidung von Abstürzen?
 
 Um Ihre benutzerdefinierten iOS-Plugins reibungslos laufen zu lassen und speicherbedingte Abstürze zu vermeiden, ist es wichtig, sich auf effizientes, gut strukturiertes Code-Schreiben zu konzentrieren und dabei iOS-spezifische Best Practices zu befolgen. Beginnen Sie mit **effektivem Speichermanagement** - das bedeutet, Objektlebenszyklen zu überwachen und Tools wie Xcode Instruments zu nutzen, um Retain Cycles zu identifizieren und zu beheben, die zu Speicherlecks führen könnten. Ein weiterer wichtiger Tipp? Belasten Sie den Hauptthread nicht mit schweren Aufgaben. Verlagern Sie stattdessen ressourcenintensive Operationen in Hintergrund-Threads, um die App reaktionsfähig zu halten.
@@ -205,7 +205,7 @@ Um Ihre benutzerdefinierten iOS-Plugins reibungslos laufen zu lassen und speiche
 Darüber hinaus sollten Sie sorgfältig darauf achten, Ressourcen - seien es Dateien, Bilder oder Netzwerkverbindungen - freizugeben, sobald sie nicht mehr benötigt werden. Wenn Sie mit **Capacitor** für Ihre App arbeiten, können Plattformen wie Capgo Ihnen die Arbeit erleichtern, indem sie Updates und Fehlerbehebungen vereinfachen. Das bedeutet, Sie können Leistungsprobleme schnell angehen, ohne auf App-Store-Genehmigungen warten zu müssen. Die Befolgung dieser Schritte wird dazu beitragen, die Stabilität und Zuverlässigkeit Ihrer benutzerdefinierten iOS-Plugins zu verbessern.
 :::
 
-::: faq
+:::faq
 ### Wie können Xcodes Leistungseinstellungen und Test-Tools bei der Optimierung von benutzerdefinierten iOS-Plugins in Capacitor helfen?
 
 ## Xcodes Leistungseinstellungen und Test-Tools

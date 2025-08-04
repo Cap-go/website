@@ -263,7 +263,7 @@ Perlu diingat, **Capacitor Preferences API** hanya boleh digunakan untuk data mi
 
 ## FAQ
 
-::: faq
+:::faq
 ### Fitur apa yang ditawarkan plugin Capacitor untuk manajemen sesi yang aman, termasuk enkripsi dan autentikasi biometrik?
 
 Plugin Capacitor yang dirancang untuk manajemen sesi yang aman mengambil pendekatan berbeda ketika berkaitan dengan enkripsi dan autentikasi biometrik. Banyak yang mengandalkan **enkripsi AES-256** untuk mengamankan data sesi, memberikan pertahanan yang kuat terhadap akses tidak sah. Untuk [fitur biometrik](https://capgo.app/plugins/capacitor-native-biometric/), tingkat dukungan dapat bervariasi. Misalnya, plugin Capacitor Native Biometric terintegrasi langsung dengan sistem biometrik tingkat perangkat seperti sidik jari atau pengenalan wajah, menambahkan lapisan perlindungan tambahan untuk sesi pengguna.
@@ -271,7 +271,7 @@ Plugin Capacitor yang dirancang untuk manajemen sesi yang aman mengambil pendeka
 Capgo melangkah lebih jauh dengan menggabungkan **enkripsi end-to-end** dengan autentikasi biometrik yang lancar. Kombinasi ini memastikan keamanan data yang kuat dan pengalaman pengguna yang lancar, menjadikannya pilihan unggulan bagi pengembang yang bertujuan meningkatkan keamanan aplikasi tanpa mengorbankan kegunaan.
 :::
 
-::: faq
+:::faq
 ### Bagaimana cara mengintegrasikan autentikasi biometrik secara aman ke dalam aplikasi Capacitor menggunakan Plugin Keamanan Biometrik?
 
 Untuk [mengintegrasikan autentikasi biometrik](https://capgo.app/plugins/capacitor-native-biometric/) secara aman ke dalam aplikasi Capacitor, mulailah dengan memanfaatkan **fitur keamanan bawaan** yang ditawarkan oleh sistem operasi mobile, seperti iOS Keychain dan Android Keystore. Sistem ini menyediakan perlindungan berbasis perangkat keras untuk data sensitif seperti kunci enkripsi dan token sesi, memastikan keamanannya.
@@ -281,7 +281,7 @@ Saat mengatur autentikasi biometrik, gunakan metode `authenticate()` dari Plugin
 Sangat penting untuk menghindari hardcoding rahasia secara langsung dalam aplikasi Anda. Sebaliknya, enkripsi token yang disimpan untuk memperkuat keamanan lebih lanjut. Selain itu, alat seperti Capgo dapat meningkatkan manajemen sesi yang aman dengan menawarkan pembaruan terenkripsi secara real-time untuk aplikasi Capacitor Anda.
 :::
 
-::: faq
+:::faq
 ### Bagaimana Capgo menjaga keamanan pembaruan langsung sambil mengelola sesi aplikasi?
 
 Capgo memprioritaskan keamanan dengan **enkripsi end-to-end** untuk pembaruan langsung. Ini berarti bundle aplikasi Anda dienkripsi sebelum dikirim ke cloud dan hanya didekripsi di perangkat pengguna, memastikan data Anda tetap terlindungi sepanjang proses.

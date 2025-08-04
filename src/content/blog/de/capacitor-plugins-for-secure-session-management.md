@@ -354,7 +354,7 @@ Beachten Sie, dass die **Capacitor Preferences API** nur für minimale, nicht-se
 
 ## FAQs
 
-::: faq
+:::faq
 ### Welche Funktionen bieten Capacitor-Plugins für sicheres Session-Management, einschließlich Verschlüsselung und biometrischer Authentifizierung?
 
 Capacitor-Plugins für sicheres Session-Management verfolgen unterschiedliche Ansätze bei Verschlüsselung und biometrischer Authentifizierung. Viele nutzen **AES-256-Verschlüsselung** zum Schutz von Sitzungsdaten vor unbefugtem Zugriff. Bei [biometrischen Funktionen](https://capgo.app/plugins/capacitor-native-biometric/) kann der Unterstützungsumfang variieren. Das Capacitor Native Biometric Plugin integriert sich beispielsweise direkt mit gerätebasierten biometrischen Systemen wie Fingerabdruck oder Gesichtserkennung und fügt Benutzersitzungen eine zusätzliche Schutzebene hinzu.
@@ -362,7 +362,7 @@ Capacitor-Plugins für sicheres Session-Management verfolgen unterschiedliche An
 Capgo geht noch einen Schritt weiter, indem es **Ende-zu-Ende-Verschlüsselung** mit reibungsloser biometrischer Authentifizierung kombiniert. Diese Kombination gewährleistet sowohl robuste Datensicherheit als auch eine unkomplizierte Benutzererfahrung und macht es zu einer herausragenden Option für Entwickler, die die App-Sicherheit verbessern möchten, ohne die Benutzerfreundlichkeit zu beeinträchtigen.
 :::
 
-::: faq
+:::faq
 ### Wie kann ich biometrische Authentifizierung sicher in eine Capacitor-App mit dem Biometric Security Plugin integrieren?
 
 Um [biometrische Authentifizierung](https://capgo.app/plugins/capacitor-native-biometric/) sicher in eine Capacitor-App zu integrieren, beginnen Sie mit der Nutzung der **eingebauten Sicherheitsfunktionen** der mobilen Betriebssysteme wie iOS Keychain und Android Keystore. Diese Systeme bieten hardwaregestützten Schutz für sensible Daten wie Verschlüsselungsschlüssel und Sitzungs-Tokens und gewährleisten deren Sicherheit.
@@ -372,7 +372,7 @@ Bei der Einrichtung der biometrischen Authentifizierung verwenden Sie die `authe
 Es ist wichtig, keine Geheimnisse direkt in Ihre App zu codieren. Verschlüsseln Sie stattdessen gespeicherte Tokens, um die Sicherheit weiter zu erhöhen. Zusätzlich können Tools wie Capgo das sichere Session-Management verbessern, indem sie verschlüsselte Echtzeit-Updates für Ihre Capacitor-App anbieten.
 :::
 
-::: faq
+:::faq
 ### Wie hält Capgo Live-Updates sicher, während App-Sitzungen verwaltet werden?
 
 Capgo priorisiert Sicherheit mit **Ende-zu-Ende-Verschlüsselung** für Live-Updates. Das bedeutet, dass Ihr App-Bundle verschlüsselt wird, bevor es in die Cloud gesendet wird, und erst auf dem Gerät des Benutzers entschlüsselt wird, wodurch Ihre Daten während des gesamten Prozesses geschützt bleiben.

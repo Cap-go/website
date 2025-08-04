@@ -75,7 +75,7 @@ La mancata acquisizione del consenso dell'utente per gli aggiornamenti Over-the-
 Oltre ai rischi legali, aggiornare le app senza il consenso dell'utente può danneggiare la fiducia degli utenti e danneggiare la reputazione del tuo brand. Per evitare questi rischi, è meglio implementare meccanismi di consenso chiari e user-friendly per gli aggiornamenti OTA. Piattaforme come **Capgo** possono aiutare a garantire la conformità offrendo soluzioni di aggiornamento in tempo reale su misura per le app Capacitor.
 :::
 
-::: faq
+:::faq
 ### Quali sono le migliori pratiche per creare richieste di consenso conformi e user-friendly per gli aggiornamenti OTA?
 
 Per garantire che le richieste di consenso per gli aggiornamenti Over-the-Air (OTA) siano sia conformi che user-friendly, concentrati su chiarezza, trasparenza e semplicità. Spiega chiaramente in cosa consiste l'aggiornamento, perché è necessario e come beneficia l'utente. Evita il gergo tecnico e usa un linguaggio semplice e facile da capire.
@@ -83,7 +83,7 @@ Per garantire che le richieste di consenso per gli aggiornamenti Over-the-Air (O
 Assicurati di fornire agli utenti una chiara scelta di accettare o rifiutare l'aggiornamento e rispetta la loro decisione. Inoltre, rispetta le linee guida della piattaforma (es. Apple e Android) e le normative sulla privacy dei dati come GDPR o CCPA. Strumenti come Capgo possono aiutare a semplificare il processo offrendo funzionalità come l'assegnazione degli utenti per gli aggiornamenti e la conformità in tempo reale con i requisiti della piattaforma, garantendo un'esperienza fluida e sicura sia per gli sviluppatori che per gli utenti.
 :::
 
-::: faq
+:::faq
 ### Quali misure di sicurezza garantiscono la protezione dei dati degli utenti durante gli aggiornamenti OTA?
 
 Per proteggere i dati degli utenti durante gli aggiornamenti Over-the-Air (OTA), è essenziale implementare la **crittografia end-to-end**. Questo garantisce che solo gli utenti previsti possano decrittare e accedere agli aggiornamenti, mantenendo al sicuro le informazioni sensibili.

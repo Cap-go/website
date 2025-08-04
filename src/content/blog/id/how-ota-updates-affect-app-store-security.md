@@ -213,7 +213,7 @@ Platform OTA modern membuktikan bahwa keamanan dan efisiensi dapat berjalan beri
 
 ## FAQ
 
-::: faq
+:::faq
 ### Apa risiko yang ditimbulkan pembaruan OTA terhadap keamanan aplikasi, dan bagaimana pengembang dapat mengatasinya?
 
 Pembaruan OTA (Over-The-Air) dapat membuat aplikasi rentan terhadap potensi kerentanan, seperti akses tidak sah atau integritas data yang terganggu, terutama jika pembaruan tidak diamankan dengan benar. Risiko ini dapat memengaruhi kepatuhan app store dan kepercayaan pengguna.
@@ -221,7 +221,7 @@ Pembaruan OTA (Over-The-Air) dapat membuat aplikasi rentan terhadap potensi kere
 Untuk mengurangi risiko ini, pengembang harus menerapkan langkah-langkah keamanan yang kuat seperti **enkripsi end-to-end**, pengujian rutin, dan praktik deployment yang aman. Alat seperti Capgo dapat membantu memperlancar proses ini dengan mengaktifkan pembaruan instan untuk aplikasi Capacitor tanpa memerlukan persetujuan app store. Fitur Capgo, seperti integrasi CI/CD yang mulus dan penugasan pembaruan khusus pengguna, memastikan pembaruan aman dan sesuai dengan standar Apple dan Android.
 :::
 
-::: faq
+:::faq
 ### Bagaimana pembaruan OTA membantu menjaga kepatuhan keamanan app store, dan apa yang terjadi jika kepatuhan tidak terpenuhi?
 
 Pembaruan OTA (Over-The-Air) memainkan peran penting dalam menjaga kepatuhan keamanan app store dengan memungkinkan pengembang untuk dengan cepat memberikan pembaruan, perbaikan bug, dan fitur baru tanpa menunggu proses persetujuan app store yang panjang. Ini memastikan aplikasi tetap aman dan up-to-date dengan persyaratan terbaru dari Apple dan Android.
@@ -229,7 +229,7 @@ Pembaruan OTA (Over-The-Air) memainkan peran penting dalam menjaga kepatuhan kea
 Kegagalan mematuhi standar keamanan app store dapat menyebabkan konsekuensi serius, seperti aplikasi dihapus dari toko, hilangnya kepercayaan pengguna, atau bahkan sanksi hukum. Solusi seperti **Capgo** memudahkan pengelolaan pembaruan OTA sambil mematuhi semua persyaratan kepatuhan, menawarkan fitur seperti enkripsi end-to-end dan integrasi mulus dengan alur kerja pengembangan.
 :::
 
-::: faq
+:::faq
 ### Fitur kunci apa yang harus diprioritaskan pengembang dalam platform OTA untuk memastikan pembaruan aplikasi yang aman dan mulus?
 
 Untuk memastikan pembaruan aplikasi yang aman dan mulus, pengembang harus memprioritaskan fitur seperti **enkripsi end-to-end**, **integrasi dengan pipeline CI/CD**, dan kemampuan untuk menetapkan pembaruan ke grup pengguna tertentu. Kemampuan ini membantu melindungi data aplikasi, memperlancar proses pembaruan, dan memberikan kontrol lebih besar atas siapa yang menerima pembaruan.

@@ -254,7 +254,7 @@ Con el puente nativo de Capacitor, los desarrolladores obtienen acceso a una cap
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Qué es el Puente Nativo en Capacitor y cómo permite una comunicación segura entre las capas web y nativas?
 
 El Puente Nativo en Capacitor juega un papel crucial en la conexión de la capa web de tu aplicación (el frontend) con la capa nativa (funcionalidades específicas de la plataforma). Piensa en él como un canal de comunicación seguro que permite que tu aplicación acceda a características nativas del dispositivo mientras mantiene un rendimiento consistente en diferentes plataformas.
@@ -262,7 +262,7 @@ El Puente Nativo en Capacitor juega un papel crucial en la conexión de la capa 
 El nivel de seguridad depende de cómo se configura el puente en tu aplicación. Por ejemplo, plataformas como **Capgo** mejoran las aplicaciones de Capacitor al ofrecer herramientas como **cifrado de extremo a extremo** para actualizaciones en vivo. Esto significa que los datos sensitivos y las actualizaciones pueden ser transmitidos de manera segura a tus usuarios sin arriesgar su privacidad ni romper las reglas de cumplimiento.
 :::
 
-::: faq
+:::faq
 ### ¿Cuál es el propósito del Puente Nativo en Capacitor y cómo se utiliza en el desarrollo de aplicaciones multiplataforma?
 
 El **Puente Nativo** en Capacitor sirve como un punto de conexión entre la capa web de tu aplicación (el frontend) y la capa nativa (características específicas de la plataforma). Este puente permite a los desarrolladores acceder a funcionalidades nativas del dispositivo - como la cámara o GPS - directamente desde una aplicación basada en la web. Es una herramienta útil para construir aplicaciones multiplataforma que se sientan naturales en cualquier dispositivo.
@@ -272,7 +272,7 @@ Con el Puente Nativo, puedes incorporar características específicas de la plat
 Si estás trabajando con Capacitor, herramientas como **Capgo** pueden facilitarte aún más la vida. Capgo permite actualizaciones en vivo, por lo que puedes implementar cambios en tu aplicación al instante - sin necesidad de aprobación de la tienda de aplicaciones. Esto significa que tus usuarios siempre obtienen las características y arreglos más recientes de inmediato.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores mejorar el rendimiento del Puente Nativo al usar características nativas avanzadas en aplicaciones de Capacitor?
 
 Optimizar el Puente Nativo en Capacitor se trata de asegurar una comunicación eficiente entre las capas web y nativas. Un enfoque efectivo es **minimizar el número de llamadas al puente**. En lugar de realizar llamadas individuales frecuentes, trata de agrupar operaciones para reducir la carga en el rendimiento. Otro consejo? Adhiérete a formatos de datos ligeros como JSON para las transferencias de datos. Esto ayuda a reducir el overhead innecesario.

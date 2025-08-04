@@ -326,7 +326,7 @@ Focus on maintaining **end-to-end encryption**, **continuous monitoring**, **sta
 
 ## FAQs
 
-::: faq
+:::faq
 ### How can I implement OAuth 2.0 in my Capacitor app to meet app store security standards?
 
 To implement **OAuth 2.0** in your Capacitor app while ensuring compliance with app store security standards, you’ll need to follow a few key steps:
@@ -339,7 +339,7 @@ To implement **OAuth 2.0** in your Capacitor app while ensuring compliance with 
 By following these steps, you can ensure your app meets security standards while providing a smooth authentication experience. Platforms like **Capgo** can also enhance your app's update process, ensuring compliance with Apple and Google requirements while delivering real-time updates to users.
 :::
 
-::: faq
+:::faq
 ### What steps can I take to ensure my API meets Apple and Google security standards for app store compliance?
 
 To ensure your API aligns with Apple and Google security standards, focus on implementing robust security practices like **end-to-end encryption**, secure authentication methods, and data privacy measures. These are critical for meeting compliance requirements.
@@ -347,7 +347,7 @@ To ensure your API aligns with Apple and Google security standards, focus on imp
 If you're developing Capacitor apps, tools like Capgo can simplify compliance. Capgo allows you to instantly push updates, fixes, and features without needing app store approvals, all while adhering to Apple and Android guidelines. This ensures your app stays secure and up-to-date effortlessly.
 :::
 
-::: faq
+:::faq
 ### What are the best tools and practices for monitoring and managing API security in my app?
 
 For effective API security management in your app, consider tools that enable real-time updates, encryption, and seamless integration with development workflows. **Capgo** provides a powerful solution for Capacitor apps, allowing developers to push updates, fixes, and new features instantly without waiting for app store approvals. This ensures your app stays compliant and up-to-date.

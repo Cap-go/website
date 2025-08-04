@@ -170,13 +170,13 @@ Integrate features like end-to-end encryption, CI/CD pipelines, and detailed use
 
 ## FAQs
 
-::: faq
+:::faq
 ### How can I roll back an update in my Capacitor app if a version conflict occurs?
 
 Unfortunately, the article does not provide specific guidance on rolling back updates in the event of version conflicts. For best practices, consider maintaining a stable baseline version of your app and testing updates thoroughly before deployment. Tools like **Capgo** can also help streamline [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) by offering features like real-time updates and user assignment, helping you mitigate potential conflicts effectively.
 :::
 
-::: faq
+:::faq
 ### How can I make sure all users get the latest updates for my app without running into version conflicts?
 
 To avoid version conflicts and ensure all users receive the latest updates, consider using a live update solution like **Capgo**. It allows you to instantly push updates, fixes, and new features without waiting for app store approvals, helping you maintain a consistent app version across your user base.
@@ -184,7 +184,7 @@ To avoid version conflicts and ensure all users receive the latest updates, cons
 With features like targeted user assignment, you can roll out updates to specific groups or gradually release changes, reducing the risk of issues. Capgo also supports real-time updates and complies with Apple and Android guidelines, making it a reliable choice for managing app updates efficiently.
 :::
 
-::: faq
+:::faq
 ### How can I test updates across platforms to prevent version conflicts in my Capacitor app?
 
 To avoid version conflicts when testing updates on your Capacitor app, it’s essential to follow a few best practices:

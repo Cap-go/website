@@ -209,7 +209,7 @@ La conformité n'est pas une tâche ponctuelle Elle nécessite des mises à jour
 
 ## FAQ
 
-::: faq
+:::faq
 ### Comment les développeurs d'applications peuvent-ils rester conformes aux lois sur la confidentialité en évolution comme le RGPD et le CCPA ?
 
 Pour rester conformes aux lois sur la confidentialité changeantes comme le RGPD et le CCPA, les développeurs d'applications doivent prioriser la **gestion du consentement des utilisateurs** Cela inclut l'obtention d'un consentement clair et éclairé des utilisateurs avant de collecter ou de traiter leurs données, la fourniture d'options pour gérer ou retirer le consentement, et la garantie de transparence sur l'utilisation des données

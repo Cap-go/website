@@ -186,7 +186,7 @@ A medida que las políticas de privacidad se vuelven más estrictas y las práct
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Cómo influyen las políticas de privacidad de Apple y Google en el uso de datos de terceros por parte de los desarrolladores de aplicaciones?
 
 Apple y Google adoptan diferentes enfoques sobre la privacidad, lo que impacta significativamente en cómo los desarrolladores de aplicaciones manejan los datos de terceros. Apple enfatiza la privacidad del usuario con políticas más estrictas, como App Tracking Transparency (ATT), requiriendo el consentimiento explícito del usuario para compartir datos. Esto puede limitar el acceso de los desarrolladores a datos detallados del usuario pero ayuda a construir confianza con usuarios conscientes de la privacidad.
@@ -196,7 +196,7 @@ Google, si bien también prioriza la privacidad, tiende a ofrecer más flexibili
 Para los desarrolladores que utilizan plataformas como **Capgo**, que admite actualizaciones en tiempo real cumpliendo con los requisitos tanto de Apple como de Google, navegar por estas políticas de privacidad se vuelve más fluido. El cifrado de extremo a extremo y las funciones de actualización en vivo de Capgo pueden ayudar a los desarrolladores a mantener el cumplimiento mientras entregan actualizaciones de manera eficiente.
 :::
 
-::: faq
+:::faq
 ### ¿Qué desafíos enfrentan los desarrolladores al cumplir con los estándares de privacidad de Apple y Google para datos de terceros?
 
 Los desarrolladores a menudo enfrentan desafíos significativos al asegurar el cumplimiento de los estándares de privacidad de Apple y Google, particularmente cuando se trata de manejar datos de terceros. Ambas compañías tienen políticas estrictas y en evolución, como el marco de **App Tracking Transparency (ATT)** de Apple y la **sección de Seguridad de Datos** de Google, que requieren que los desarrolladores divulguen y limiten las prácticas de recopilación de datos.
@@ -204,7 +204,7 @@ Los desarrolladores a menudo enfrentan desafíos significativos al asegurar el c
 Navegar por estas políticas puede ser complejo, especialmente para aplicaciones que dependen de integraciones o análisis de terceros. Los desarrolladores deben garantizar la transparencia en la forma en que se recopilan, utilizan y comparten los datos, al tiempo que implementan medidas de seguridad sólidas para proteger la privacidad del usuario. Herramientas como **Capgo** pueden ayudar a agilizar este proceso al ofrecer actualizaciones en tiempo real y soluciones compatibles con el cumplimiento para desarrolladores de aplicaciones, asegurando el cumplimiento de los requisitos de Apple y Google sin necesidad de envíos frecuentes a la tienda de aplicaciones.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden las herramientas como Capgo ayudar a los desarrolladores a garantizar el cumplimiento de la privacidad y agilizar las actualizaciones en las plataformas de Apple y Android?
 
 Capgo permite a los desarrolladores simplificar las actualizaciones de aplicaciones y garantizar el cumplimiento de los requisitos de privacidad tanto de Apple como de Android. Permite actualizaciones instantáneas para aplicaciones Capacitor sin necesidad de aprobaciones de la tienda de aplicaciones, permitiendo un despliegue más rápido de correcciones de errores, nuevas funciones y mejoras.

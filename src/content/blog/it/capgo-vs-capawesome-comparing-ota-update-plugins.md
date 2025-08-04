@@ -224,7 +224,7 @@ Si te inclinas hacia implementaciones localizadas, Capawesome podría ser una op
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Cuáles son las principales diferencias entre Capgo y Capawesome en gestión de actualizaciones y seguridad?
 
 ## Capgo vs. Capawesome: Una Comparación Rápida
@@ -238,7 +238,7 @@ Por otro lado, **Capawesome**, lanzado en 2024, está más orientado al mercado 
 Aunque ambos complementos tienen precios similares, el lanzamiento anterior de Capgo y sus capacidades más amplias lo convierten en una mejor opción para desarrolladores que necesitan una solución versátil y segura.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo se compara el precio de Capgo con el de Capawesome y qué factores debo considerar al elegir entre ellos?
 
 Se dice que Capgo y Capawesome tienen precios similares, pero el artículo no proporciona detalles exactos sobre sus modelos de precios. Al elegir entre los dos, es importante sopesar factores como las características que ofrecen, los requisitos específicos de tu aplicación y el tipo de soporte que necesitarás.
@@ -246,7 +246,7 @@ Se dice que Capgo y Capawesome tienen precios similares, pero el artículo no pr
 Capgo aporta varias características destacadas, incluyendo **actualizaciones en tiempo real**, **cifrado de extremo a extremo** y una **integración fluida de CI/CD**, lo que lo convierte en una opción sólida para desarrolladores que valoran la flexibilidad y la seguridad. Al haber estado presente desde 2022, Capgo también tiene un historial más largo en comparación con Capawesome, que solo entró al mercado en 2024. Evaluar las necesidades de tu aplicación y los objetivos a largo plazo te ayudará a tomar la decisión correcta.
 :::
 
-::: faq
+:::faq
 ### ¿Qué complemento de actualización OTA es mejor para equipos pequeños o grandes empresas?
 
 El complemento de actualización OTA adecuado para tu equipo depende de tus necesidades y tamaño específicos. **Capgo** se destaca como una opción versátil, ofreciendo actualizaciones en tiempo real, cumplimiento con los estándares de Apple y Android, y características como cifrado de extremo a extremo, integración de CI/CD y actualizaciones específicas para usuarios. Estas capacidades lo convierten en un fuerte competidor para varios escenarios.

@@ -154,7 +154,7 @@ Capgo's **100% open-source** approach offers transparency and flexibility that p
 
 ## FAQs
 
-::: faq
+:::faq
 ### How does Capgo stay compliant with Apple and Google Play Store policies while offering instant updates?
 
 Capgo takes the hassle out of staying compliant with Apple and Google Play Store policies by focusing on **security** and strict **guideline adherence**. Every update is protected with end-to-end encryption, ensuring that only authorized users can access the updates. To meet store requirements, the platform also supports targeted rollouts and maintains detailed logs of update distributions.
@@ -162,7 +162,7 @@ Capgo takes the hassle out of staying compliant with Apple and Google Play Store
 What’s more, Capgo’s architecture is designed to block any unapproved changes during updates, keeping everything in line with the app store's stringent policies. This means developers can roll out instant updates with confidence - no waiting around for app store review delays.
 :::
 
-::: faq
+:::faq
 ### What makes Capgo's channel management system ideal for app updates?
 
 Capgo's channel management system simplifies the process of app updates by offering **targeted rollouts** for specific user groups, like beta testers or phased deployments. This method bypasses the typical delays tied to app store approvals, delivering **instant over-the-air (OTA) updates**. As a result, users can access bug fixes and new features without waiting.
@@ -170,7 +170,7 @@ Capgo's channel management system simplifies the process of app updates by offer
 The system also includes **one-click rollback options**, allowing developers to quickly undo problematic updates, minimizing risks and downtime. Additionally, it helps boost user engagement by tailoring the update experience, all while adhering to Apple and Android guidelines. These tools ensure app updates are delivered faster, with greater reliability and ease.
 :::
 
-::: faq
+:::faq
 ### How does Capgo ensure app stability with its rollback system after updates?
 
 Capgo's rollback system is built to keep your app running smoothly by automatically switching back to the last stable version if an update runs into trouble. Before rolling out any changes, the system saves a backup of the current version. Once the update goes live, it runs health checks to spot any potential issues. If something's off, the system quickly reverts to the previous version to prevent disruptions.

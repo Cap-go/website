@@ -305,7 +305,7 @@ Ke depannya, tim yang mengadopsi praktik kontrol versi yang disiplin dan memanfa
 
 ## FAQ
 
-::: faq
+:::faq
 ### Apa perbedaan antara strategi percabangan fitur, rilis, dan berbasis trunk dalam CI/CD mobile?
 
 Strategi percabangan adalah bagian penting dari alur kerja CI/CD mobile, membantu tim mengelola kode secara efektif dan merampingkan proses deployment. Berikut penjelasan lebih detail tentang beberapa pendekatan umum:
@@ -320,7 +320,7 @@ Strategi percabangan adalah bagian penting dari alur kerja CI/CD mobile, membant
 Setiap strategi ini memiliki keunggulannya, dan pilihan terbaik tergantung pada alur kerja dan kebutuhan tim Anda. Untuk tim yang bekerja dengan aplikasi Capacitor, alat seperti **Capgo** dapat meningkatkan proses CI/CD Anda dengan memungkinkan pembaruan langsung secara instan. Ini menghilangkan kebutuhan persetujuan app store dan memastikan integrasi yang mulus dengan praktik kontrol versi Anda.
 :::
 
-::: faq
+:::faq
 ### Bagaimana Capgo meningkatkan alur kerja CI/CD aplikasi mobile, dan apa keunggulannya dibandingkan pendekatan tradisional?
 
 Capgo merampingkan alur kerja CI/CD aplikasi mobile dengan menawarkan **pembaruan over-the-air (OTA) instan**. Ini berarti pengembang dapat melewati kerumitan pengajuan app store yang terus-menerus, memberikan perbaikan bug, fitur baru, dan pembaruan lebih cepat - semuanya sambil mematuhi pedoman Apple dan Android.
@@ -328,7 +328,7 @@ Capgo merampingkan alur kerja CI/CD aplikasi mobile dengan menawarkan **pembarua
 Berbeda dengan pendekatan tradisional, Capgo menonjol dengan manfaat seperti waktu henti yang minimal, pengalaman pengguna yang lebih lancar, dan integrasi mudah ke dalam pipeline CI/CD yang ada. Pembaruan dapat didorong secara aman dan real-time, membuat manajemen aplikasi lebih efisien dan adaptif. Dengan fitur canggih seperti enkripsi end-to-end dan pembaruan yang disesuaikan untuk pengguna tertentu, Capgo memastikan keamanan dan personalisasi proses pembaruan.
 :::
 
-::: faq
+:::faq
 ### Bagaimana cara memastikan keamanan dan memungkinkan rollback cepat dalam pipeline CI/CD mobile?
 
 Untuk menjaga pipeline CI/CD mobile Anda aman dan siap untuk rollback cepat, fokuskan pada **praktik kontrol versi yang solid**. Ini berarti memelihara catatan rilis yang menyeluruh, memanfaatkan fitur flag untuk mengontrol peluncuran fitur, dan menjalankan tes otomatis untuk mengidentifikasi kerentanan sebelum deployment.

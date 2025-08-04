@@ -422,7 +422,7 @@ Alors que la technologie Capacitor continue d'avancer, le maintien de canaux de 
 
 ## FAQs
 
-::: faq
+:::faq
 ### Comment la communication bidirectionnelle améliore-t-elle la connexion entre les couches web et natives dans les applications Capacitor ?
 
 La communication bidirectionnelle dans les applications Capacitor rationalise l'interaction entre les couches web et natives, permettant une intégration fluide des fonctionnalités et des mises à jour en temps réel. Cette approche permet aux développeurs de pousser des corrections, des améliorations et de nouvelles fonctionnalités directement aux utilisateurs sans attendre les approbations de l'App Store.
@@ -430,7 +430,7 @@ La communication bidirectionnelle dans les applications Capacitor rationalise l'
 En tirant parti de cette fonctionnalité, les développeurs peuvent améliorer les performances de l'application, répondre plus rapidement aux retours des utilisateurs et maintenir un avantage concurrentiel. Des outils comme Capgo peuvent encore améliorer ce processus en offrant des mises à jour en direct, un chiffrement de bout en bout et une conformité aux exigences de la plateforme, garantissant un flux de développement fluide et efficace.
 :::
 
-::: faq
+:::faq
 ### Quelles sont quelques meilleures pratiques pour créer des plugins personnalisés afin d'améliorer la performance dans les applications Capacitor ?
 
 Créer des plugins personnalisés dans les applications Capacitor peut considérablement améliorer la performance et adapter la fonctionnalité aux besoins spécifiques de votre application. Voici quelques meilleures pratiques à suivre :
@@ -442,7 +442,7 @@ Créer des plugins personnalisés dans les applications Capacitor peut considér
 Si vous souhaitez rationaliser les mises à jour et maintenir une performance d'application fluide, des plateformes comme Capgo peuvent vous aider. Capgo vous permet de pousser des mises à jour instantanément, garantissant que vos plugins et votre application restent optimisés sans nécessiter l'approbation de l'App Store.
 :::
 
-::: faq
+:::faq
 ### Comment les développeurs peuvent-ils sécuriser les données lors de l'activation de la communication bidirectionnelle entre les couches web et natives dans les applications Capacitor ?
 
 Assurer la sécurité des données lors de la communication bidirectionnelle dans les applications Capacitor implique de mettre en œuvre des meilleures pratiques clés. Utilisez **le chiffrement de bout en bout** pour protéger les données sensibles lorsqu'elles circulent entre les couches web et natives. De plus, validez et nettoyez toutes les entrées pour prévenir les vulnérabilités telles que les attaques par injection.

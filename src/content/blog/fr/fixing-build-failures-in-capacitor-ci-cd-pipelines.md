@@ -345,7 +345,7 @@ Alors que le développement Capacitor continue d'avancer, suivre ces stratégies
 
 ## FAQ
 
-::: faq
+:::faq
 ### Comment puis-je maintenir mon pipeline CI/CD Capacitor stable à travers différents environnements ?
 
 Pour maintenir votre pipeline CI/CD Capacitor opérationnel à travers différents environnements, considérez ces conseils pratiques :
@@ -357,7 +357,7 @@ Pour maintenir votre pipeline CI/CD Capacitor opérationnel à travers différen
 L'utilisation d'outils comme Capgo peut faciliter ces processus. Capgo supporte l'intégration CI/CD transparente, offre des mises à jour instantanées et fournit des options de rollback rapide si nécessaire. Cela aide à assurer des déploiements plus fluides et des performances fiables à travers tous les environnements.
 :::
 
-::: faq
+:::faq
 ### Comment puis-je gérer efficacement les dépendances pour éviter les échecs de build dans les projets Capacitor ?
 
 Pour maintenir vos projets Capacitor opérationnels et éviter les échecs de build, **gérer efficacement les dépendances** est clé. Mettez régulièrement à jour vos dépendances pour corriger les problèmes de sécurité et rester compatible avec les dernières fonctionnalités. Des outils comme le CLI Capacitor, npm, ou yarn peuvent rendre ce processus plus facile et plus efficace.
@@ -367,7 +367,7 @@ Pour les besoins spécifiques aux plateformes, appuyez-vous sur des outils comme
 L'adoption de ces pratiques aidera à garantir que vos applications Capacitor sont construites sur une base stable avec moins de problèmes de développement.
 :::
 
-::: faq
+:::faq
 ### Comment Capgo peut-il aider à résoudre les échecs de build dans les pipelines CI/CD Capacitor ?
 
 Capgo simplifie le diagnostic et la correction des échecs de build dans les pipelines CI/CD Capacitor. Il offre des outils comme le **suivi automatisé des erreurs**, la **résolution des conflits de dépendances** et la **validation des variables d'environnement** pour détecter les problèmes tôt et minimiser les erreurs de build.

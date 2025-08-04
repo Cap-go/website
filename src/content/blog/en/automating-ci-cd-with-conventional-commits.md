@@ -350,7 +350,7 @@ Capgo complements the Conventional Commits workflow by offering:
 
 ## FAQs
 
-::: faq
+:::faq
 ### How can using Conventional Commits optimize your CI/CD process?
 
 Conventional Commits bring order to CI/CD workflows by providing a clear, standardized way to structure commit messages. This format helps automated tools easily interpret changes, making tasks like testing, building, and deployment more accurate. With less room for confusion, errors are reduced, resulting in a smoother development pipeline.
@@ -360,7 +360,7 @@ Another benefit of structured commit messages is the ability to automatically ge
 For developers building [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/), tools like **Capgo** take CI/CD processes to the next level. They offer seamless integration, real-time updates, and ensure compliance with Apple and Android requirements. This speeds up the delivery of updates without needing app store approvals, making the entire process more efficient.
 :::
 
-::: faq
+:::faq
 ### What tools are essential for automating CI/CD with Conventional Commits?
 
 To set up [automated CI/CD](https://capgo.app/blog/automatic-build-and-release-with-gitlab/) using the **Conventional Commits** approach, you'll need a few essential tools to make the process smoother and more efficient:
@@ -372,7 +372,7 @@ To set up [automated CI/CD](https://capgo.app/blog/automatic-build-and-release-w
 Together, these tools help you maintain a well-organized CI/CD pipeline with a standardized commit history. For teams working with Capacitor apps, platforms like **Capgo** can be a great addition, offering smooth live updates that integrate seamlessly into your CI/CD workflow.
 :::
 
-::: faq
+:::faq
 ### How does Capgo streamline CI/CD for mobile apps?
 
 Capgo streamlines the CI/CD process for mobile apps by offering **instant updates** that bypass the need for app store approvals. This means developers can roll out fixes, new features, and updates much faster, ensuring apps stay current with minimal effort.

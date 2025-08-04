@@ -162,7 +162,7 @@ Capgo facilite l'exploitation des avantages de la segmentation avec sa solution 
 
 ## FAQ
 
-::: faq
+:::faq
 ### Comment la segmentation par fréquence d'utilisation peut-elle améliorer les stratégies de mise à jour des applications ?
 
 La segmentation de la fréquence d'utilisation aide les développeurs à affiner les mises à jour des applications en fonction de la fréquence à laquelle les utilisateurs interagissent avec l'application. En divisant les utilisateurs en catégories telles que les utilisateurs fréquents, occasionnels ou rares, les développeurs peuvent se concentrer sur la livraison de mises à jour qui résonnent avec les besoins spécifiques de chaque groupe, augmentant ainsi la satisfaction et la fidélisation.
@@ -170,7 +170,7 @@ La segmentation de la fréquence d'utilisation aide les développeurs à affiner
 Prenons les utilisateurs fréquents, par exemple - ils pourraient apprécier des mises à jour qui améliorent les performances ou introduisent des fonctionnalités avancées. D'un autre côté, les utilisateurs occasionnels pourraient bénéficier davantage de mises à jour qui simplifient la navigation ou résolvent des frustrations courantes. Des outils tels que **Capgo** rationalisent ce processus en permettant des mises à jour en temps réel pour les applications [Capacitor](https://capacitorjs.com/), garantissant que les utilisateurs reçoivent les bonnes mises à jour instantanément, sans le tracas des approbations de l'App Store.
 :::
 
-::: faq
+:::faq
 ### Quels sont les outils et les indicateurs clés pour suivre le comportement des utilisateurs afin de créer une segmentation d'utilisation efficace ?
 
 Pour faire fonctionner la segmentation d'utilisation de manière efficace, vous devez garder un œil attentif sur le comportement des utilisateurs à l'aide d'outils et d'indicateurs qui offrent des informations exploitables. Des plateformes comme **[Google Analytics](https://marketingplatform.google.com/about/analytics/)** ou **[Mixpanel](https://mixpanel.com/)** sont idéales pour suivre les interactions des utilisateurs, la durée des sessions et comment les fonctionnalités sont utilisées. De plus, le **suivi des événements dans l'application** peut vous montrer exactement comment les utilisateurs interagissent avec des fonctionnalités spécifiques, tandis que **l'analyse de cohorte** aide à dévoiler les tendances du comportement des utilisateurs au fil du temps.
@@ -178,7 +178,7 @@ Pour faire fonctionner la segmentation d'utilisation de manière efficace, vous 
 Les indicateurs clés sur lesquels se concentrer incluent les **taux de fidélisation**, **la fréquence à laquelle les utilisateurs s'engagent avec l'application**, et **les niveaux d'activité globaux**. Si vous travaillez avec des applications Capacitor, des outils comme **Capgo** peuvent faciliter ce processus en livrant des mises à jour et des fonctionnalités directement aux groupes d'utilisateurs ciblés. Cela permet une expérience plus personnalisée et des cycles d'itération plus rapides, en maintenant votre application alignée avec les besoins des utilisateurs.
 :::
 
-::: faq
+:::faq
 ### Comment Capgo aide-t-il les développeurs à rationaliser les mises à jour des applications et à améliorer l'expérience utilisateur ?
 
 Capgo donne aux développeurs la capacité de pousser des mises à jour, des correctifs et de nouvelles fonctionnalités à leurs applications instantanément - aucune attente d'approbation de l'App Store requise. Cela signifie que vous pouvez répondre aux retours des utilisateurs et résoudre les problèmes dès qu'ils se présentent, créant une expérience fluide pour vos utilisateurs.

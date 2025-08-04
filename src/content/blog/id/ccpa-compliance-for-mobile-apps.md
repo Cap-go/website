@@ -277,7 +277,7 @@ Untuk membangun praktik-praktik ini, mulailah dengan:
 
 ## FAQ
 
-::: faq
+:::faq
 ### Bagaimana pengembang aplikasi seluler dapat menentukan apakah aplikasi mereka harus mematuhi California Consumer Privacy Act (CCPA)?
 
 Untuk menentukan apakah aplikasi seluler Anda harus mematuhi **California Consumer Privacy Act (CCPA)**, pertimbangkan faktor-faktor kunci berikut:
@@ -291,7 +291,7 @@ Jika aplikasi atau bisnis Anda memenuhi salah satu kriteria ini, kemungkinan bes
 Bagi pengembang yang menggunakan **Capgo**, solusi pembaruan langsung untuk aplikasi Capacitor memastikan pembaruan yang mulus sambil mempertahankan kepatuhan terhadap pedoman Apple dan Android, yang dapat mendukung strategi kepatuhan aplikasi Anda secara keseluruhan.
 :::
 
-::: faq
+:::faq
 ### Bagaimana aplikasi seluler dapat memastikan kepatuhan terhadap California Consumer Privacy Act (CCPA) sambil melindungi data pengguna?
 
 Untuk mematuhi **California Consumer Privacy Act (CCPA)** dan melindungi data pengguna, aplikasi seluler harus fokus pada beberapa praktik kunci:
@@ -303,7 +303,7 @@ Untuk mematuhi **California Consumer Privacy Act (CCPA)** dan melindungi data pe
 Selain itu, alat seperti **Capgo** dapat meningkatkan upaya kepatuhan aplikasi Anda dengan memungkinkan pembaruan instan untuk mengatasi kerentanan keamanan atau perubahan terkait privasi tanpa memerlukan persetujuan app store. Ini memastikan aplikasi Anda tetap patuh secara real-time sambil menawarkan pengalaman pengguna yang mulus. Selalu konsultasikan dengan ahli hukum untuk memastikan kepatuhan penuh terhadap persyaratan CCPA.
 :::
 
-::: faq
+:::faq
 ### Bagaimana CCPA memengaruhi penggunaan layanan pihak ketiga oleh pengembang aplikasi seluler?
 
 California Consumer Privacy Act (CCPA) mengharuskan pengembang aplikasi seluler untuk memastikan bahwa layanan pihak ketiga yang mereka gunakan mematuhi peraturan privasi datanya. Ini berarti pengembang harus mengevaluasi dengan cermat bagaimana penyedia pihak ketiga menangani data pengguna, memastikan mereka mengikuti pedoman CCPA untuk pengumpulan, penyimpanan, dan berbagi data. Selain itu, pengembang harus membuat perjanjian yang jelas dengan penyedia ini untuk melindungi hak pengguna, seperti kemampuan untuk mengakses, menghapus, atau memilih untuk tidak mengumpulkan data.

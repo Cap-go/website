@@ -149,7 +149,7 @@ Grâce à ses points forts techniques et ses avantages stratégiques, Capgo est 
 
 ## FAQ
 
-::: faq
+:::faq
 ### Pourquoi devrais-je choisir Capgo plutôt qu'Appflow pour les mises à jour d'applications Over-the-Air (OTA) ?
 
 Capgo offre un moyen rapide et fiable de livrer des mises à jour Over-the-Air (OTA) à vos applications Capacitor. Avec des **mises à jour en temps réel** qui respectent à la fois les directives d'Apple et d'Android, vous pouvez déployer instantanément des correctifs, des nouvelles fonctionnalités et des améliorations - en évitant la nécessité d'approbations des magasins d'applications.
@@ -157,7 +157,7 @@ Capgo offre un moyen rapide et fiable de livrer des mises à jour Over-the-Air (
 Ce qui distingue Capgo, ce sont ses caractéristiques exceptionnelles comme **le cryptage de bout en bout** pour des mises à jour sécurisées, **une intégration CI/CD fluide** pour rationaliser votre flux de travail, et **une ciblage de mise à jour spécifique à l'utilisateur** pour des déploiements personnalisés. De plus, étant une plateforme open-source, elle offre transparence et flexibilité pour répondre aux exigences de déploiement de votre application.
 :::
 
-::: faq
+:::faq
 ### Comment Capgo protège-t-il les mises à jour d'applications par rapport à Appflow ?
 
 Capgo priorise la [sécurité des mises à jour d'applications](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) en utilisant **un cryptage de bout en bout**, garantissant que les données restent protégées lorsqu'elles transitent entre développeurs et utilisateurs. Cette méthode protège efficacement les mises à jour contre l'accès non autorisé tout en respectant les normes de conformité des plateformes.
@@ -165,7 +165,7 @@ Capgo priorise la [sécurité des mises à jour d'applications](https://capgo.ap
 D'un autre côté, bien qu'Appflow offre des fonctionnalités, il manque les mêmes mesures de cryptage avancées. Cela rend Capgo une option plus forte et plus sécurisée pour les développeurs soucieux de protéger leurs mises à jour.
 :::
 
-::: faq
+:::faq
 ### Que doivent considérer les développeurs en choisissant entre les options de déploiement cloud et auto-hébergées de Capgo ?
 
 L'article ne traite pas des spécificités des options de déploiement cloud et auto-hébergées de Capgo. Pour obtenir des informations plus détaillées, il est conseillé de consulter les ressources officielles de Capgo ou de contacter leur équipe directement. Ils peuvent fournir des conseils adaptés à vos besoins spécifiques.

@@ -267,7 +267,7 @@ Um auf diesen Praktiken aufzubauen, beginnen Sie mit:
 
 ## FAQs
 
-::: faq
+:::faq
 ### Wie können Mobile-App-Entwickler feststellen, ob ihre App dem California Consumer Privacy Act (CCPA) entsprechen muss?
 
 Um festzustellen, ob Ihre Mobile App dem **California Consumer Privacy Act (CCPA)** entsprechen muss, berücksichtigen Sie folgende Hauptfaktoren:
@@ -281,7 +281,7 @@ Wenn Ihre App oder Ihr Unternehmen eines dieser Kriterien erfüllt, unterliegt s
 Für Entwickler, die **Capgo** nutzen, gewährleistet dessen Live-Update-Lösung für Capacitor-Apps nahtlose Updates unter Einhaltung der Apple- und Android-Richtlinien, was Ihre App-Compliance-Strategie unterstützen kann.
 :::
 
-::: faq
+:::faq
 ### Wie können Mobile Apps die Einhaltung des California Consumer Privacy Act (CCPA) sicherstellen und gleichzeitig Benutzerdaten schützen?
 
 Um den **California Consumer Privacy Act (CCPA)** einzuhalten und Benutzerdaten zu schützen, sollten sich Mobile Apps auf einige wichtige Praktiken konzentrieren:
@@ -293,7 +293,7 @@ Um den **California Consumer Privacy Act (CCPA)** einzuhalten und Benutzerdaten 
 Zusätzlich können Tools wie **Capgo** Ihre Compliance-Bemühungen verbessern, indem sie sofortige Updates ermöglichen, um Sicherheitslücken oder datenschutzbezogene Änderungen ohne App-Store-Genehmigungen zu beheben. Dies gewährleistet, dass Ihre App in Echtzeit compliant bleibt und gleichzeitig nahtlose Benutzererlebnisse bietet. Konsultieren Sie immer Rechtsexperten, um die vollständige Einhaltung der CCPA-Anforderungen sicherzustellen.
 :::
 
-::: faq
+:::faq
 ### Wie wirkt sich der CCPA auf die Nutzung von Drittanbieterdiensten durch Mobile-App-Entwickler aus?
 
 Der California Consumer Privacy Act (CCPA) verlangt von Mobile-App-Entwicklern sicherzustellen, dass alle von ihnen genutzten Drittanbieterdienste seinen Datenschutzvorschriften entsprechen. Dies bedeutet, dass Entwickler sorgfältig prüfen müssen, wie Drittanbieter mit Benutzerdaten umgehen und dabei die CCPA-Richtlinien für Datenerfassung, -speicherung und -weitergabe einhalten. Zusätzlich sollten Entwickler klare Vereinbarungen mit diesen Anbietern treffen, um Benutzerrechte zu schützen, wie etwa die Möglichkeit auf Zugriff, Löschung oder Opt-out der Datenerfassung.

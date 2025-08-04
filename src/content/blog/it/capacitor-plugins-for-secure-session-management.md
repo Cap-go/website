@@ -279,7 +279,7 @@ Tieni presente che l'**API Preferences di Capacitor** dovrebbe essere utilizzata
 
 ## FAQ
 
-::: faq
+:::faq
 ### Quali funzionalità offrono i plugin Capacitor per la gestione sicura delle sessioni, inclusa la crittografia e l'autenticazione biometrica?
 
 I plugin Capacitor progettati per la gestione sicura delle sessioni adottano approcci diversi quando si tratta di crittografia e autenticazione biometrica. Molti si affidano alla **crittografia AES-256** per proteggere i dati delle sessioni, fornendo una forte difesa contro l'accesso non autorizzato. Quando si tratta di [funzionalità biometriche](https://capgo.app/plugins/capacitor-native-biometric/), il livello di supporto può variare. Ad esempio, il plugin Capacitor Native Biometric si integra direttamente con i sistemi biometrici a livello di dispositivo come l'impronta digitale o il riconoscimento facciale, aggiungendo un ulteriore livello di protezione alle sessioni degli utenti.
@@ -287,7 +287,7 @@ I plugin Capacitor progettati per la gestione sicura delle sessioni adottano app
 Capgo va oltre combinando la **crittografia end-to-end** con un'autenticazione biometrica fluida. Questa combinazione garantisce sia una robusta sicurezza dei dati che un'esperienza utente senza intoppi, rendendolo un'opzione eccezionale per gli sviluppatori che mirano a migliorare la sicurezza delle app senza sacrificare l'usabilità.
 :::
 
-::: faq
+:::faq
 ### Come posso integrare in modo sicuro l'autenticazione biometrica in un'app Capacitor utilizzando il Plugin di Sicurezza Biometrica?
 
 Per [integrare l'autenticazione biometrica](https://capgo.app/plugins/capacitor-native-biometric/) in modo sicuro in un'app Capacitor, inizia sfruttando le **funzionalità di sicurezza integrate** offerte dai sistemi operativi mobili, come iOS Keychain e Android Keystore. Questi sistemi forniscono protezione hardware per dati sensibili come chiavi di crittografia e token di sessione, assicurando che rimangano sicuri.
@@ -297,7 +297,7 @@ Durante la configurazione dell'autenticazione biometrica, utilizza il metodo `au
 È cruciale evitare di inserire direttamente nel codice i segreti. Invece, cripta qualsiasi token memorizzato per rafforzare ulteriormente la sicurezza. Inoltre, strumenti come Capgo possono migliorare la gestione sicura delle sessioni offrendo aggiornamenti crittati in tempo reale per la tua app Capacitor.
 :::
 
-::: faq
+:::faq
 ### Come mantiene Capgo gli aggiornamenti live sicuri durante la gestione delle sessioni delle app?
 
 Capgo dà priorità alla sicurezza con la **crittografia end-to-end** per gli aggiornamenti live. Questo significa che il bundle della tua app viene crittografato prima di essere inviato al cloud e decrittografato solo sul dispositivo dell'utente, garantendo che i tuoi dati rimangano protetti durante l'intero processo.

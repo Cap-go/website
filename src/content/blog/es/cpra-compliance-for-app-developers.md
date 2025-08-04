@@ -198,7 +198,7 @@ Para alinearse con las regulaciones CPRA y asegurar que las salvaguardas técnic
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores de aplicaciones cumplir con los requisitos de minimización de datos de la CPRA?
 
 Para cumplir con los estándares de **minimización de datos** establecidos por la CPRA, los desarrolladores de aplicaciones deben priorizar la recopilación únicamente de los datos personales esenciales para que su aplicación funcione efectivamente. Evalúa regularmente tus prácticas de recopilación de datos para confirmar que siguen siendo relevantes y están estrictamente vinculadas al propósito de la aplicación.
@@ -208,7 +208,7 @@ Igualmente importante es establecer políticas claras para la retención de dato
 Para aquellos que utilizan herramientas como Capgo, las actualizaciones en tiempo real pueden marcar la diferencia. Estas herramientas permiten a los desarrolladores abordar problemas de cumplimiento rápidamente mediante la implementación de correcciones o actualizaciones sin esperar la aprobación de la tienda de aplicaciones, ayudando a que tu aplicación se mantenga alineada con las regulaciones de privacidad.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores de aplicaciones manejar eficientemente las solicitudes de los usuarios para acceder, eliminar o corregir datos según las pautas de la CPRA?
 
 Para cumplir con los requisitos de la Ley de Derechos de Privacidad de California (CPRA), los desarrolladores de aplicaciones deben crear un sistema directo y confiable para manejar las solicitudes de los usuarios relacionadas con el acceso, eliminación o corrección de datos. **Los desarrolladores deben reconocer las solicitudes dentro de 10 días** y resolverlas dentro de 45 días. Si se necesita tiempo adicional, se permite una extensión de hasta 45 días, siempre que se notifique al usuario sobre el retraso.
@@ -222,7 +222,7 @@ Aquí se muestra cómo los desarrolladores pueden simplificar el cumplimiento:
 El uso de herramientas como Capgo, que ofrecen actualizaciones en tiempo real, puede ayudar a los desarrolladores a resolver problemas o aplicar correcciones relacionadas con los datos de los usuarios rápidamente mientras se asegura el cumplimiento con los estándares de la plataforma. Al mantenerse adelante de estos requisitos, los desarrolladores pueden no solo cumplir con las obligaciones regulatorias sino también construir una mayor confianza con sus usuarios.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores de aplicaciones implementar sistemas efectivos de gestión de consentimiento para cumplir con los requisitos de la CPRA?
 
 Para cumplir con los estándares de la **CPRA**, los desarrolladores de aplicaciones necesitan priorizar la transparencia y simplicidad al gestionar el consentimiento del usuario. Comienza con banners de consentimiento claros y directos que expliquen el propósito de la recopilación de datos y cómo se utilizarán los datos. Es esencial obtener el consentimiento explícito de los usuarios antes de procesar cualquier dato.

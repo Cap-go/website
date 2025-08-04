@@ -194,7 +194,7 @@ Untuk proses yang lebih terstruktur, alat seperti Capgo menggabungkan rotasi tok
 
 ## FAQ
 
-::: faq
+:::faq
 ### Apa itu rotasi token refresh, dan bagaimana hal ini meningkatkan keamanan dalam alur kerja CI/CD?
 
 Rotasi token refresh adalah fitur keamanan di mana token refresh baru dikeluarkan setiap kali token sebelumnya digunakan. Metode ini membantu mengurangi risiko penyalahgunaan token karena token yang dikompromikan menjadi tidak valid setelah diputar.
@@ -202,7 +202,7 @@ Rotasi token refresh adalah fitur keamanan di mana token refresh baru dikeluarka
 Dalam alur kerja CI/CD, menggunakan rotasi token refresh menambah lapisan perlindungan ekstra untuk tugas otomatis seperti [pembaruan aplikasi](https://capgo.app/plugins/capacitor-updater/) atau penerapan. Ini membatasi paparan token yang bertahan lama, memperkuat keamanan pipeline Anda. Alat seperti Capgo dapat terintegrasi dengan lancar ke dalam sistem CI/CD, memberikan pembaruan otomatis dan aman untuk [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) sambil mematuhi pedoman platform.
 :::
 
-::: faq
+:::faq
 ### Bagaimana saya dapat menerapkan rotasi token refresh dalam pipeline CI/CD untuk memastikan penerapan yang aman dan tidak terputus?
 
 Menerapkan rotasi token refresh dalam pipeline CI/CD Anda adalah langkah cerdas untuk menjaga keamanan penerapan Anda sambil berjalan dengan lancar. Berikut adalah beberapa tips praktis untuk mencapainya:
@@ -214,7 +214,7 @@ Menerapkan rotasi token refresh dalam pipeline CI/CD Anda adalah langkah cerdas 
 Jika Anda mengembangkan dengan aplikasi Capacitor, **Capgo** menyederhanakan integrasi CI/CD. Ini memastikan pengelolaan pembaruan aplikasi langsung aman dan efisien. Menggabungkan rotasi token dengan alat seperti Capgo dapat membuat proses penerapan Anda lebih aman dan lebih terstruktur.
 :::
 
-::: faq
+:::faq
 ### Bagaimana Capgo memastikan rotasi token yang aman dan integrasi CI/CD sambil tetap hemat biaya dibandingkan standar industri?
 
 Capgo menyediakan cara yang aman dan efisien untuk menangani rotasi token dan mengintegrasikan alur kerja CI/CD, selaras dengan standar industri sambil menekankan otomatisasi. Dengan menggabungkan rotasi token refresh ke dalam proses CI/CD, Capgo memastikan pengembang dapat menjaga pembaruan aplikasi tetap aman tanpa mengorbankan kemudahan penggunaan.

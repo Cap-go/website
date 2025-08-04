@@ -215,7 +215,7 @@ Alat seperti Capgo dapat menyederhanakan pembaruan dengan memungkinkan penyesuai
 
 ## FAQ
 
-::: faq
+:::faq
 ### Bagaimana pengembang dapat memastikan aplikasi mereka memenuhi persyaratan penghapusan akun Apple?
 
 Untuk memenuhi pedoman penghapusan akun Apple, pengembang perlu menawarkan cara yang sederhana dan jelas bagi pengguna untuk menghapus akun mereka langsung di dalam aplikasi. Prosesnya harus mudah ditemukan, mudah diikuti, dan tidak mengharuskan pengguna mengunjungi situs web eksternal atau menghubungi tim dukungan.
@@ -223,7 +223,7 @@ Untuk memenuhi pedoman penghapusan akun Apple, pengembang perlu menawarkan cara 
 Bagi yang menggunakan Capacitor, alat seperti **Capgo** dapat mempermudah kepatuhan. Capgo memungkinkan pembaruan real-time ke aplikasi Anda, artinya Anda dapat dengan cepat menerapkan perubahan - seperti penyesuaian fitur penghapusan akun - tanpa menunggu persetujuan app store. Dengan memastikan kepatuhan, Anda tidak hanya mengurangi risiko penolakan aplikasi tetapi juga memperkuat kepercayaan pengguna.
 :::
 
-::: faq
+:::faq
 ### Bagaimana pengembang dapat memastikan penghapusan data yang tepat di semua platform sambil menghindari masalah sinkronisasi?
 
 Mengelola penghapusan data di berbagai platform tidak selalu mudah, terutama saat mematuhi pedoman khusus seperti yang ditetapkan oleh Apple. Untuk mengatasi ini, pengembang perlu membangun sistem backend yang andal yang memproses permintaan penghapusan data secara seragam di semua platform terintegrasi. Ini sering melibatkan penggunaan API atau layanan yang mengeksekusi penghapusan secara bersamaan, memastikan konsistensi dan mencegah ketidakcocokan.
@@ -231,7 +231,7 @@ Mengelola penghapusan data di berbagai platform tidak selalu mudah, terutama saa
 Untuk aplikasi yang dibuat dengan Capacitor, alat seperti **Capgo** dapat menyederhanakan tugas ini. Capgo mendukung pembaruan real-time dan selaras dengan persyaratan Apple, membantu pengembang mengelola pembaruan dan fitur aplikasi sambil memenuhi standar penghapusan data. Dengan menggunakan alat yang memastikan sinkronisasi yang lancar, pengembang dapat meminimalkan kesalahan dan membangun kepercayaan pengguna yang lebih kuat.
 :::
 
-::: faq
+:::faq
 ### Bagaimana pengembang aplikasi dapat memastikan aplikasi mereka mematuhi persyaratan penghapusan akun Apple?
 
 ## Memastikan Kepatuhan dengan Persyaratan Penghapusan Akun Apple

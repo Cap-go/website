@@ -207,7 +207,7 @@ Lograr el cumplimiento no es una tarea única. Requiere actualizaciones constant
 
 ## Preguntas frecuentes
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores de aplicaciones mantenerse en cumplimiento con las leyes de privacidad en evolución como GDPR y CCPA?
 
 Para mantenerse en cumplimiento con las leyes de privacidad cambiantes como GDPR y CCPA, los desarrolladores de aplicaciones necesitan priorizar la **gestión del consentimiento del usuario**. Esto incluye obtener un consentimiento claro e informado de los usuarios antes de recopilar o procesar sus datos, proporcionar opciones para gestionar o retirar el consentimiento, y asegurar la transparencia sobre cómo se utilizan los datos.
@@ -215,7 +215,7 @@ Para mantenerse en cumplimiento con las leyes de privacidad cambiantes como GDPR
 Para los desarrolladores que utilizan aplicaciones Capacitor, herramientas como **Capgo** pueden facilitar el cumplimiento. Capgo permite actualizaciones instantáneas de su aplicación sin requerir aprobaciones de la tienda de aplicaciones, asegurando que pueda implementar rápidamente cambios para cumplir con nuevos requisitos de privacidad. Con características como el cifrado de extremo a extremo y actualizaciones en tiempo real, Capgo le ayuda a mantener el cumplimiento mientras ofrece una experiencia de usuario perfecta.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden las plataformas de actualización en vivo mejorar la gestión del consentimiento y el cumplimiento de la aplicación en comparación con las actualizaciones tradicionales?
 
 Las plataformas de actualización en vivo como **Capgo** permiten a los desarrolladores implementar actualizaciones, correcciones y nuevas funciones instantáneamente, evitando el largo proceso de aprobación de la tienda de aplicaciones. Esto asegura que su aplicación permanezca en cumplimiento con las leyes de privacidad de datos en evolución mientras aborda problemas o implementa nuevos requisitos de consentimiento rápidamente.
@@ -223,7 +223,7 @@ Las plataformas de actualización en vivo como **Capgo** permiten a los desarrol
 Con características como **cifrado de extremo a extremo**, integración perfecta de **CI/CD** y actualizaciones en tiempo real, estas plataformas facilitan la gestión del cumplimiento mientras mantienen un flujo de trabajo seguro y eficiente. A diferencia de los métodos tradicionales de actualización que pueden tomar semanas, las actualizaciones en vivo le permiten responder a cambios regulatorios o comentarios de usuarios en minutos, manteniendo su aplicación actualizada y sus usuarios protegidos.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo puedo documentar y gestionar adecuadamente el consentimiento del usuario para asegurar el cumplimiento con las leyes de privacidad de datos?
 
 Para cumplir con las leyes de privacidad de datos, es esencial documentar y gestionar adecuadamente el consentimiento del usuario. Comience implementando un **formulario de consentimiento claro y fácil de usar** dentro de su aplicación que explique qué datos se están recopilando y cómo se utilizarán. Asegúrese de que los usuarios puedan proporcionar, modificar o retirar fácilmente su consentimiento en cualquier momento.

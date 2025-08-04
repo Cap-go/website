@@ -53,7 +53,7 @@ Das Versäumnis, die Zustimmung der Nutzer für Over-the-Air (OTA) Updates einzu
 Über rechtliche Risiken hinaus kann das Aktualisieren von Apps ohne Nutzerzustimmung das Vertrauen der Nutzer schädigen und dem Ruf Ihrer Marke schaden. Um diese Risiken zu vermeiden, ist es am besten, klare und benutzerfreundliche Zustimmungsmechanismen für OTA-Updates zu implementieren. Plattformen wie **Capgo** können dabei helfen, die Compliance sicherzustellen und bieten gleichzeitig nahtlose Live-Update-Lösungen speziell für Capacitor-Apps.
 :::
 
-::: faq
+:::faq
 ### Was sind die Best Practices für die Erstellung konformer und benutzerfreundlicher Einwilligungsanfragen für OTA-Updates?
 
 Um sicherzustellen, dass Ihre Einwilligungsanfragen für Over-the-Air (OTA) Updates sowohl konform als auch benutzerfreundlich sind, konzentrieren Sie sich auf Klarheit, Transparenz und Einfachheit. Erklären Sie deutlich, was das Update beinhaltet, warum es erforderlich ist und wie es dem Nutzer nützt. Vermeiden Sie technischen Fachjargon und verwenden Sie eine verständliche Sprache.
@@ -61,7 +61,7 @@ Um sicherzustellen, dass Ihre Einwilligungsanfragen für Over-the-Air (OTA) Upda
 Stellen Sie sicher, dass Nutzer eine klare Wahl haben, das Update anzunehmen oder abzulehnen, und respektieren Sie ihre Entscheidung. Halten Sie außerdem die Plattform-Richtlinien (z.B. Apple und Android) und Datenschutzbestimmungen wie DSGVO oder CCPA ein. Tools wie Capgo können den Prozess optimieren, indem sie Funktionen wie Nutzerzuweisung für Updates und Echtzeit-Compliance mit Plattformanforderungen anbieten und so eine nahtlose und sichere Erfahrung für Entwickler und Nutzer gewährleisten.
 :::
 
-::: faq
+:::faq
 ### Welche Sicherheitsmaßnahmen gewährleisten den Schutz von Nutzerdaten während OTA-Updates?
 
 Um Nutzerdaten während Over-the-Air (OTA) Updates zu schützen, ist die Implementierung von **Ende-zu-Ende-Verschlüsselung** unerlässlich. Dies stellt sicher, dass nur die vorgesehenen Nutzer die Updates entschlüsseln und darauf zugreifen können, wodurch sensible Informationen geschützt bleiben.

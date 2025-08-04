@@ -200,7 +200,7 @@ Ne pas se conformer ne signifie pas seulement de lourdes amendes allant jusqu'à
 
 ## FAQ
 
-::: faq
+:::faq
 ### Que se passe-t-il si une application mobile ne respecte pas les normes de conformité PCI DSS ?
 
 Le non-respect des **normes PCI DSS** peut avoir de graves conséquences pour les entreprises. Les pénalités financières seules peuvent aller de **5 000 $ à 100 000 $ par mois**, selon la gravité de la non-conformité et sa durée. Au-delà des amendes, les entreprises peuvent faire face à des frais de transaction accrus, des défis juridiques, ou même perdre leur capacité à traiter les paiements.
@@ -208,7 +208,7 @@ Le non-respect des **normes PCI DSS** peut avoir de graves conséquences pour le
 Mais l'impact ne s'arrête pas là. La non-conformité peut également avoir un impact lourd sur la réputation d'une entreprise. Une **violation de données** pourrait briser la confiance des clients, perturber les opérations quotidiennes et entraîner des revers financiers à long terme. Rester conforme n'est pas seulement une question d'éviter les pénalités - il s'agit de protéger votre entreprise, maintenir la confiance des clients et protéger l'intégrité de votre marque.
 :::
 
-::: faq
+:::faq
 ### Comment l'intégration de la sécurité dans le pipeline CI/CD soutient-elle la conformité PCI DSS continue ?
 
 L'intégration de la sécurité dans votre pipeline CI/CD est indispensable pour maintenir la **conformité PCI DSS** dans le temps. En intégrant des contrôles de sécurité à chaque étape du développement, vous pouvez détecter et traiter les vulnérabilités tôt, réduisant les risques de non-conformité. Des pratiques comme les **tests de sécurité automatisés**, les **revues de code régulières** et les **évaluations de vulnérabilité** jouent un rôle crucial pour garantir que les mises à jour respectent les normes PCI DSS avant leur déploiement.
@@ -216,7 +216,7 @@ L'intégration de la sécurité dans votre pipeline CI/CD est indispensable pour
 Adopter une **approche DevSecOps** - où la sécurité devient une partie centrale de chaque phase de développement - va encore plus loin. Cette méthode réduit non seulement les risques mais assure aussi une conformité constante avec PCI DSS et renforce la sécurité de vos applications. Des outils comme Capgo peuvent simplifier ce processus en permettant des mises à jour sécurisées en temps réel pour les applications mobiles tout en restant dans les directives de conformité.
 :::
 
-::: faq
+:::faq
 ### Comment les entreprises peuvent-elles s'assurer que leur code tiers et leurs API respectent les normes de sécurité et de conformité PCI DSS ?
 
 Pour maintenir la sécurité du code tiers et des API tout en respectant les normes PCI DSS, les entreprises doivent prendre plusieurs mesures clés :

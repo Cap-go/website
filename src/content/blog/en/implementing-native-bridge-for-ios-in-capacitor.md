@@ -357,7 +357,7 @@ Additionally, tools like Capgo can simplify the process of managing updates for 
 
 ## FAQs
 
-::: faq
+:::faq
 ### How can I securely and efficiently implement a native bridge in Capacitor for iOS?
 
 ## Best Practices for Implementing a Native Bridge in Capacitor for iOS
@@ -378,7 +378,7 @@ When building a native bridge in Capacitor for iOS, security and efficiency shou
 By following these practices, you can build a native bridge that is both secure and efficient, setting a strong foundation for your Capacitor-based iOS app.
 :::
 
-::: faq
+:::faq
 ### What are the best practices for testing and debugging a native bridge in iOS with Capacitor?
 
 To test and debug a native bridge in iOS using Capacitor, it's important to focus on **unit testing**, **integration testing**, and using the right tools for the job.
@@ -391,7 +391,7 @@ For debugging, you’ll rely on **Xcode** to troubleshoot native components, whi
 If you’re using live update services like _Capgo_, you can push fixes and updates instantly, bypassing the usual delays of app store approvals. This can be a game-changer for resolving issues quickly and efficiently.
 :::
 
-::: faq
+:::faq
 ### How does Capgo enable updates for native bridges in Capacitor apps without requiring app store approval?
 
 Capgo simplifies the process of updating native bridges in Capacitor apps with **Over-the-Air (OTA) updates**. This feature lets developers deploy changes instantly, bypassing the need for app store submissions. Whether it's bug fixes, new features, or asset updates, you can deliver them directly to your users in real time.

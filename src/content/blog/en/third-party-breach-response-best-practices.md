@@ -170,7 +170,7 @@ The consequences of not being prepared can be severe. For example, AT&T faced a 
 
 ## FAQs
 
-::: faq
+:::faq
 ### What are the best ways to detect third-party data breaches early and reduce potential damage?
 
 Detecting third-party data breaches early demands a hands-on and vigilant strategy. Organizations should focus on **continuous monitoring** and conducting **risk assessments** for all their third-party vendors. Start by grouping vendors based on their risk levels, defining clear tolerance limits, and leveraging automated tools to keep an eye on their security measures.
@@ -180,7 +180,7 @@ Regular audits and [security reviews](https://capgo.app/security/) play a key ro
 By adopting these practices, organizations can reduce potential damage and stay in line with regulatory requirements. Tools like Capgo can further support these efforts by offering real-time updates and fixes for mobile applications, helping businesses respond swiftly to new threats.
 :::
 
-::: faq
+:::faq
 ### What should an organization do immediately after discovering a third-party data breach?
 
 If your organization faces a third-party data breach, acting quickly and systematically is essential to reduce harm and comply with legal requirements. Start by **containing the breach** to halt any unauthorized access and secure the affected systems. This might mean disabling compromised accounts, shutting down impacted platforms, or revoking permissions to prevent further exposure of sensitive information.
@@ -190,7 +190,7 @@ Next, **evaluate the scope and impact** of the breach. Identify what data was ac
 Once the immediate crisis is under control, take the opportunity to **review your response** and strengthen your security measures to guard against future incidents. For example, tools like Capgo are particularly useful for mobile apps, allowing for real-time updates and fixes while staying compliant with Apple and Android guidelines.
 :::
 
-::: faq
+:::faq
 ### How does a zero-trust security model help protect against third-party data breaches?
 
 A **zero-trust security model** is designed to guard against third-party data breaches by implementing strict access controls and continuously verifying every user and device, no matter where they are. This "never trust, always verify" principle means that every access request must be authenticated and authorized before any sensitive systems or data are accessible.

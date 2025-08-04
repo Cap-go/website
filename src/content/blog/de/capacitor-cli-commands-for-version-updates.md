@@ -337,7 +337,7 @@ Egal, ob Sie an einer kleinen App arbeiten oder ein größeres Deployment skalie
 
 ## FAQs
 
-::: faq
+:::faq
 ### Welche Herausforderungen könnte ich beim Aktualisieren meiner App mit Capacitor CLI antreffen und wie kann ich sie angehen?
 
 Wenn Sie Ihre App mit dem Capacitor CLI aktualisieren, könnten Sie auf einige Schwierigkeiten stoßen. Zu den häufigsten Herausforderungen gehören **Abhängigkeitskonflikte**, **Breaking Changes in Plugins** oder **plattform-spezifische Konfigurationsprobleme**. Diese Probleme entstehen oft aus Unterschieden zwischen Capacitor-Versionen oder Aktualisierungen von Drittanbieter-Plugins.
@@ -351,7 +351,7 @@ So können Sie diese Herausforderungen angehen:
 Für ein noch reibungsloseres Update-Erlebnis möchten Sie vielleicht Tools wie _Capgo_ ausprobieren. Mit diesem Tool können Sie Korrekturen und neue Funktionen direkt an Ihre Nutzer senden, ohne Genehmigungen aus dem App Store einzuholen. Es ist eine großartige Möglichkeit, Ihre App mit minimalen Ausfallzeiten aktuell zu halten.
 :::
 
-::: faq
+:::faq
 ### Wie vereinfacht Capgo App-Updates und welche herausragenden Funktionen hat es?
 
 Capgo vereinfacht die Art und Weise, wie Entwickler [App-Updates](https://capgo.app/plugins/capacitor-updater/) bereitstellen, indem es ihnen ermöglicht, Änderungen, Korrekturen und neue Funktionen direkt an die Nutzer zu senden - ohne die Notwendigkeit von Genehmigungen aus dem App Store. Damit können Ihre Nutzer in nur wenigen Minuten die neuesten Updates genießen, was ein reibungsloseres und effizienteres Erlebnis schafft.
@@ -366,7 +366,7 @@ Das macht Capgo besonders:
 Capgo ist vollständig Open Source und erfüllt sowohl die Apple- als auch die Android-Standards und bietet eine zuverlässige Lösung für [Echtzeit-App-Updates](https://capgo.app/blog/live-updates-for-flutter-app/).
 :::
 
-::: faq
+:::faq
 ### Wie kann ich überprüfen, ob meine Plugins mit der neuesten Version von Capacitor kompatibel sind, bevor ich aktualisiere?
 
 Bevor Sie den Sprung zur neuesten Version von Capacitor wagen, ist es wichtig, sicherzustellen, dass Ihre Plugins bereit sind, das Update zu verarbeiten. Beginnen Sie damit, die Dokumentation oder das Repository des Plugins zu durchsuchen, um herauszufinden, ob es spezifische Anforderungen oder Updates für bestimmte Versionen gibt. Die meisten Plugins geben klar an, welche Capacitor-Versionen sie unterstützen, sodass dieser Schritt Ihnen unnötige Kopfschmerzen ersparen kann.

@@ -72,7 +72,7 @@ Il sistema di rollback automatizzato di Capgo dimostra la sua efficacia, con **1
 
 ## Domande frequenti
 
-::: faq
+:::faq
 ### Quali sono i passaggi essenziali per creare una strategia di rollback affidabile per gli aggiornamenti live nelle app Capacitor?
 
 Una strategia di rollback efficace per gli aggiornamenti live nelle app Capacitor richiede una pianificazione e un'esecuzione attenta per garantire la stabilità dell'app e un'esperienza utente fluida. I componenti chiave includono:
@@ -84,7 +84,7 @@ Una strategia di rollback efficace per gli aggiornamenti live nelle app Capacito
 L'utilizzo di strumenti come Capgo può semplificare questo processo offrendo aggiornamenti in tempo reale, assegnazioni specifiche per utente e conformità agli standard Apple e Android, garantendo un sistema di gestione degli aggiornamenti ottimizzato e sicuro.
 :::
 
-::: faq
+:::faq
 ### Come i sistemi di rollback automatizzati riducono le interruzioni durante gli aggiornamenti delle app?
 
 I sistemi di rollback automatizzati aiutano a ridurre le interruzioni durante gli aggiornamenti delle app permettendo agli sviluppatori di tornare rapidamente a una versione stabile se un aggiornamento causa problemi. Questo assicura che gli utenti possano continuare a utilizzare l'app con interruzioni minime, mantenendo un'esperienza fluida.
@@ -92,7 +92,7 @@ I sistemi di rollback automatizzati aiutano a ridurre le interruzioni durante gl
 Questi sistemi sono particolarmente preziosi per gli aggiornamenti live nelle app Capacitor, poiché forniscono una rete di sicurezza per affrontare problemi imprevisti senza richiedere interventi manuali dispendiosi in termini di tempo o nuove sottomissioni all'app store. Automatizzando i rollback, gli sviluppatori possono concentrarsi sulla risoluzione dei problemi minimizzando l'impatto sugli utenti.
 :::
 
-::: faq
+:::faq
 ### Perché dovrei utilizzare un canale di test prima di distribuire gli aggiornamenti a tutti gli utenti?
 
 Utilizzare un canale di test prima di distribuire gli aggiornamenti all'intera base utenti è cruciale per garantire un'esperienza utente fluida. Permette di identificare e correggere potenziali bug, problemi di compatibilità o di prestazioni in un ambiente controllato, minimizzando il rischio di interruzioni diffuse.

@@ -219,7 +219,7 @@ Sistem rollback otomatis Capgo membuktikan efektivitasnya, dengan **1.4K aplikas
 
 ## FAQ
 
-::: faq
+:::faq
 ### Apa saja langkah penting untuk membuat strategi rollback yang andal untuk pembaruan langsung di aplikasi Capacitor?
 
 Strategi rollback yang efektif untuk pembaruan langsung di aplikasi Capacitor melibatkan perencanaan dan eksekusi yang cermat untuk memastikan stabilitas aplikasi dan pengalaman pengguna yang lancar. Komponen utama meliputi:
@@ -231,7 +231,7 @@ Strategi rollback yang efektif untuk pembaruan langsung di aplikasi Capacitor me
 Menggunakan alat seperti Capgo dapat menyederhanakan proses ini dengan menawarkan pembaruan real-time, penugasan khusus pengguna, dan kepatuhan dengan standar Apple dan Android, memastikan sistem manajemen pembaruan yang efisien dan aman.
 :::
 
-::: faq
+:::faq
 ### Bagaimana sistem rollback otomatis mengurangi gangguan selama pembaruan aplikasi?
 
 Sistem rollback otomatis membantu mengurangi gangguan selama pembaruan aplikasi dengan memungkinkan pengembang untuk dengan cepat beralih kembali ke versi stabil jika pembaruan menyebabkan masalah. Ini memastikan pengguna dapat terus menggunakan aplikasi dengan gangguan minimal, mempertahankan pengalaman yang lancar.
@@ -239,7 +239,7 @@ Sistem rollback otomatis membantu mengurangi gangguan selama pembaruan aplikasi 
 Sistem ini sangat berharga untuk pembaruan langsung di aplikasi Capacitor, karena menyediakan jaring pengaman untuk mengatasi masalah tak terduga tanpa memerlukan intervensi manual yang memakan waktu atau pengajuan ulang ke app store. Dengan mengotomatisasi rollback, pengembang dapat fokus pada penyelesaian masalah sambil meminimalkan dampak pada pengguna.
 :::
 
-::: faq
+:::faq
 ### Mengapa saya harus menggunakan channel pengujian sebelum meluncurkan pembaruan ke semua pengguna?
 
 Menggunakan channel pengujian sebelum menerapkan pembaruan ke seluruh basis pengguna Anda sangat penting untuk memastikan pengalaman pengguna yang lancar. Ini memungkinkan Anda mengidentifikasi dan memperbaiki potensi bug, masalah kompatibilitas, atau masalah kinerja dalam lingkungan yang terkendali, meminimalkan risiko gangguan yang meluas.

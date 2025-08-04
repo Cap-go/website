@@ -254,7 +254,7 @@ Avec le pont natif de Capacitor, les développeurs ont accès à une couche API 
 
 ## FAQ
 
-::: faq
+:::faq
 ### Qu'est-ce que le pont natif dans Capacitor, et comment permet-il une communication sécurisée entre les couches web et natives ?
 
 Le pont natif dans Capacitor joue un rôle crucial en connectant la couche web de votre application (le frontend) avec la couche native (fonctionnalités spécifiques à la plateforme). Pensez-y comme à un canal de communication sécurisé qui permet à votre application d'exploiter les fonctionnalités natives de l'appareil tout en maintenant une performance cohérente sur différentes plateformes.
@@ -262,7 +262,7 @@ Le pont natif dans Capacitor joue un rôle crucial en connectant la couche web d
 Niveau de sécurité dépend de la manière dont le pont est configuré dans votre application. Par exemple, des plateformes comme **Capgo** améliorent les applications Capacitor en offrant des outils tels que **le chiffrement de bout en bout** pour les mises à jour en direct. Cela signifie que les données sensibles et les mises à jour peuvent être transmises en toute sécurité à vos utilisateurs sans risquer leur vie privée ou enfreindre les règles de conformité.
 :::
 
-::: faq
+:::faq
 ### Quel est l'objectif du pont natif dans Capacitor, et comment est-il utilisé dans le développement d'applications multiplateformes ?
 
 Le **pont natif** dans Capacitor sert de point de connexion entre la couche web de votre application (le frontend) et la couche native (fonctionnalités spécifiques à la plateforme). Ce pont permet aux développeurs d'accéder aux fonctionnalités natives de l'appareil - comme la caméra ou le GPS - directement depuis une application web. C'est un outil pratique pour construire des applications multiplateformes qui semblent naturelles sur n'importe quel appareil.
@@ -272,7 +272,7 @@ Avec le pont natif, vous pouvez intégrer des fonctionnalités spécifiques à l
 Si vous travaillez avec Capacitor, des outils comme **Capgo** peuvent faciliter encore plus votre vie. Capgo permet des mises à jour en direct, vous pouvez donc apporter des modifications à votre application instantanément - sans validation nécessaire par l'App Store. Cela signifie que vos utilisateurs obtiennent toujours les dernières fonctionnalités et corrections immédiatement.
 :::
 
-::: faq
+:::faq
 ### Comment les développeurs peuvent-ils améliorer les performances du pont natif lors de l'utilisation de fonctionnalités natives avancées dans les applications Capacitor ?
 
 Optimiser le pont natif dans Capacitor consiste à garantir une communication efficace entre les couches web et natives. Une approche efficace consiste à **minimiser le nombre d'appels au pont**. Au lieu d'effectuer des appels individuels fréquents, essayez de regrouper les opérations pour réduire la pression sur la performance. Une autre astuce ? Restez sur des formats de données légers comme JSON pour les transferts de données. Cela aide à réduire le surcoût inutile.

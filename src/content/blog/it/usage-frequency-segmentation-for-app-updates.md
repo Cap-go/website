@@ -160,7 +160,7 @@ Capgo facilita aprovechar los beneficios de la segmentación con su solución de
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Cómo puede la segmentación por frecuencia de uso mejorar las estrategias de actualización de apps?
 
 La segmentazione della frequenza di utilizzo aiuta gli sviluppatori a perfezionare gli aggiornamenti delle app in base a quanto spesso gli utenti interagiscono con l'app. Suddividendo gli utenti in categorie come utenti frequenti, occasionali o rari, gli sviluppatori possono concentrarsi sulla distribuzione di aggiornamenti che rispondano ai bisogni specifici di ciascun gruppo, aumentando infine la soddisfazione e la fidelizzazione.
@@ -168,7 +168,7 @@ La segmentazione della frequenza di utilizzo aiuta gli sviluppatori a perfeziona
 Prendiamo, ad esempio, gli utenti frequenti: potrebbero apprezzare aggiornamenti che migliorano le prestazioni o introducono funzionalità avanzate. D'altro canto, gli utenti occasionali potrebbero trarre maggiori benefici dagli aggiornamenti che semplificano la navigazione o risolvono frustrazioni comuni. Strumenti come **Capgo** semplificano questo processo consentendo aggiornamenti in tempo reale per le app [Capacitor](https://capacitorjs.com/), garantendo che gli utenti ricevano gli aggiornamenti giusti istantaneamente, senza il fastidio delle approvazioni del negozio di app.
 :::
 
-::: faq
+:::faq
 ### Quali sono gli strumenti e le metriche chiave per monitorare il comportamento degli utenti al fine di creare una segmentazione efficace dell'utilizzo?
 
 Per far funzionare efficacemente la segmentazione dell'utilizzo, è necessario tenere d'occhio da vicino il comportamento degli utenti attraverso strumenti e metriche che offrono approfondimenti utili. Piattaforme come **[Google Analytics](https://marketingplatform.google.com/about/analytics/)** o **[Mixpanel](https://mixpanel.com/)** sono ottime per tracciare le interazioni degli utenti, la durata delle sessioni e come vengono utilizzate le funzionalità. Inoltre, il **monitoraggio degli eventi in-app** può mostrarti esattamente come gli utenti interagiscono con funzionalità specifiche, mentre l'**analisi delle coorti** aiuta a scoprire le tendenze nel comportamento degli utenti nel tempo.
@@ -176,7 +176,7 @@ Per far funzionare efficacemente la segmentazione dell'utilizzo, è necessario t
 Le metriche chiave su cui concentrarsi includono **tassi di retention**, **quanto spesso gli utenti interagiscono con l'app** e **livelli complessivi di attività**. Se stai lavorando con app Capacitor, strumenti come **Capgo** possono rendere questo processo più fluido offrendo aggiornamenti e funzionalità direttamente a gruppi di utenti mirati. Questo consente un'esperienza più personalizzata e cicli di iterazione più rapidi, mantenendo l'app allineata con le esigenze degli utenti.
 :::
 
-::: faq
+:::faq
 ### Come aiuta Capgo gli sviluppatori a semplificare gli aggiornamenti delle app e migliorare l'esperienza dell'utente?
 
 Capgo offre agli sviluppatori la possibilità di inviare aggiornamenti, correzioni e nuove funzionalità alle loro app istantaneamente, senza ritardi per l'approvazione del negozio di app. Ciò significa che puoi affrontare i feedback degli utenti e risolvere i problemi man mano che si presentano, creando un'esperienza fluida per i tuoi utenti.

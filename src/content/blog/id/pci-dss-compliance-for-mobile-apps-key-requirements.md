@@ -199,7 +199,7 @@ Kegagalan untuk mematuhi tidak hanya berarti denda besar hingga $500.000 per ins
 
 ## FAQ
 
-::: faq
+:::faq
 ### Apa yang terjadi jika aplikasi seluler tidak memenuhi standar kepatuhan PCI DSS?
 
 Kegagalan memenuhi **standar PCI DSS** dapat memiliki konsekuensi serius bagi bisnis. Denda finansial saja bisa berkisar antara **$5.000 hingga $100.000 per bulan**, tergantung pada seberapa parah ketidakpatuhan tersebut dan berapa lama berlangsung. Di luar denda, perusahaan mungkin menghadapi peningkatan biaya transaksi, tantangan hukum, atau bahkan kehilangan kemampuan untuk memproses pembayaran sama sekali.
@@ -207,7 +207,7 @@ Kegagalan memenuhi **standar PCI DSS** dapat memiliki konsekuensi serius bagi bi
 Tapi dampaknya tidak berhenti di situ. Ketidakpatuhan juga dapat berdampak berat pada reputasi perusahaan. **Pelanggaran data** bisa menghancurkan kepercayaan pelanggan, mengganggu operasi sehari-hari, dan menyebabkan kemunduran finansial jangka panjang. Menjaga kepatuhan bukan hanya tentang menghindari penalti - ini tentang mengamankan bisnis Anda, mempertahankan kepercayaan pelanggan, dan melindungi integritas merek Anda.
 :::
 
-::: faq
+:::faq
 ### Bagaimana mengintegrasikan keamanan ke dalam pipeline CI/CD mendukung kepatuhan PCI DSS yang berkelanjutan?
 
 Mengintegrasikan keamanan ke dalam pipeline CI/CD Anda adalah keharusan untuk mempertahankan **kepatuhan PCI DSS** dari waktu ke waktu. Dengan menyisipkan pemeriksaan keamanan di setiap tahap pengembangan, Anda dapat menangkap dan mengatasi kerentanan lebih awal, mengurangi kemungkinan ketidakpatuhan. Praktik seperti **pengujian keamanan otomatis**, **tinjauan kode rutin**, dan **penilaian kerentanan** memainkan peran penting dalam memastikan pembaruan sesuai dengan standar PCI DSS sebelum diterapkan.
@@ -215,7 +215,7 @@ Mengintegrasikan keamanan ke dalam pipeline CI/CD Anda adalah keharusan untuk me
 Mengadopsi pendekatan **DevSecOps** - di mana keamanan menjadi bagian inti dari setiap fase pengembangan - membawa ini selangkah lebih maju. Metode ini tidak hanya mengurangi risiko tetapi juga memastikan kepatuhan yang konsisten dengan PCI DSS dan memperkuat keamanan aplikasi Anda. Alat seperti Capgo dapat menyederhanakan proses ini dengan memungkinkan pembaruan yang aman dan real-time untuk aplikasi seluler sambil tetap mematuhi pedoman kepatuhan.
 :::
 
-::: faq
+:::faq
 ### Bagaimana bisnis dapat memastikan kode pihak ketiga dan API mereka memenuhi standar keamanan dan kepatuhan PCI DSS?
 
 Untuk menjaga keamanan kode pihak ketiga dan API sambil memenuhi standar PCI DSS, bisnis perlu mengambil beberapa langkah kunci:

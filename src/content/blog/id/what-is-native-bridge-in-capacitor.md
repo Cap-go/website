@@ -254,7 +254,7 @@ Dengan jembatan native Capacitor, para pengembang mendapatkan akses ke lapisan A
 
 ## Pertanyaan Umum
 
-::: faq
+:::faq
 ### Apa itu Jembatan Native di Capacitor, dan bagaimana ini memungkinkan komunikasi yang aman antara lapisan web dan native?
 
 Jembatan Native di Capacitor memainkan peran penting dalam menghubungkan lapisan web aplikasi Anda (frontend) dengan lapisan native (fungsi spesifik platform). Anggaplah ini sebagai saluran komunikasi yang aman yang memungkinkan aplikasi Anda memanfaatkan fitur-fitur perangkat native sambil menjaga kinerja tetap konsisten di berbagai platform.
@@ -262,7 +262,7 @@ Jembatan Native di Capacitor memainkan peran penting dalam menghubungkan lapisan
 Tingkat keamanan tergantung pada bagaimana jembatan diatur dalam aplikasi Anda. Misalnya, platform seperti **Capgo** meningkatkan aplikasi Capacitor dengan menawarkan alat seperti **enkripsi end-to-end** untuk pembaruan langsung. Ini berarti data sensitif dan pembaruan dapat dikirimkan dengan aman kepada pengguna Anda tanpa mengorbankan privasi mereka atau melanggar aturan kepatuhan.
 :::
 
-::: faq
+:::faq
 ### Apa tujuan Jembatan Native di Capacitor, dan bagaimana ini digunakan dalam pengembangan aplikasi lintas platform?
 
 **Jembatan Native** di Capacitor berfungsi sebagai titik koneksi antara lapisan web aplikasi Anda (frontend) dan lapisan native (fitur spesifik platform). Jembatan ini memungkinkan para pengembang memanfaatkan fungsionalitas perangkat native - seperti kamera atau GPS - langsung dari aplikasi berbasis web. Ini adalah alat yang berguna untuk membangun aplikasi lintas platform yang terasa alami di perangkat mana pun.
@@ -272,7 +272,7 @@ Dengan Jembatan Native, Anda dapat membawa fitur-fitur spesifik platform ke dala
 Jika Anda bekerja dengan Capacitor, alat seperti **Capgo** dapat membuat hidup Anda lebih mudah. Capgo memungkinkan pembaruan langsung, jadi Anda dapat mengirimkan perubahan ke aplikasi Anda secara instan - tanpa perlu persetujuan dari app store. Ini berarti pengguna Anda selalu mendapatkan fitur dan perbaikan terbaru segera.
 :::
 
-::: faq
+:::faq
 ### Bagaimana para pengembang dapat meningkatkan kinerja Jembatan Native saat menggunakan fitur native canggih dalam aplikasi Capacitor?
 
 Mengoptimalkan Jembatan Native di Capacitor semua tentang memastikan komunikasi yang efisien antara lapisan web dan native. Salah satu pendekatan yang efektif adalah dengan **meminimalkan jumlah panggilan jembatan**. Alih-alih membuat panggilan individual yang sering, coba gabungkan operasi bersama untuk mengurangi beban pada kinerja. Tips lainnya? Gunakan format data ringan seperti JSON untuk transfer data. Ini membantu mengurangi overhead yang tidak perlu.

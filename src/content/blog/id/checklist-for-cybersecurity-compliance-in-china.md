@@ -335,7 +335,7 @@ Kegagalan untuk mematuhi dapat menyebabkan sanksi mulai dari peringatan formal h
 
 ## FAQ
 
-::: faq
+:::faq
 ### Langkah-langkah apa yang harus diikuti pengembang untuk memastikan aplikasi seluler mereka mematuhi regulasi siber Tiongkok pada tahun 2025?
 
 Untuk menyesuaikan dengan regulasi siber Tiongkok yang ditetapkan untuk tahun 2025, pengembang perlu memprioritaskan kepatuhan terhadap standar hukum terbaru dan memastikan aplikasi mereka memenuhi persyaratan perlindungan data yang ketat. Berikut adalah beberapa area kunci yang perlu difokuskan:
@@ -348,7 +348,7 @@ Untuk menyesuaikan dengan regulasi siber Tiongkok yang ditetapkan untuk tahun 20
 Capgo mendukung pengembang dalam mencapai kepatuhan dengan menyediakan **enkripsi end-to-end** dan **pembaruan waktu nyata** untuk aplikasi Capacitor. Ini memastikan bahwa pembaruan, baik untuk perbaikan atau fitur baru, diterapkan secara instan tanpa menunggu persetujuan dari toko aplikasi - menjaga aplikasi Anda tetap aman dan patuh dengan mudah.
 :::
 
-::: faq
+:::faq
 ### Langkah-langkah apa yang dapat diambil pengembang untuk menyimpan dan mentransmisikan data pengguna secara aman sambil mematuhi regulasi siber Tiongkok?
 
 Untuk menyesuaikan dengan regulasi siber Tiongkok, pengembang harus fokus pada **penyimpanan dan transmisi data pengguna yang aman**. Berikut adalah cara mencapainya:
@@ -361,7 +361,7 @@ Untuk menyesuaikan dengan regulasi siber Tiongkok, pengembang harus fokus pada *
 Platform seperti Capgo dapat menyederhanakan upaya kepatuhan dengan menawarkan pembaruan waktu nyata. Ini memungkinkan aplikasi tetap aman dan terbaru tanpa memerlukan persetujuan dari toko aplikasi. Selain itu, enkripsi end-to-end dari Capgo memperkuat perlindungan data, memudahkan untuk memenuhi tuntutan regulasi.
 :::
 
-::: faq
+:::faq
 ### Apa saja risiko dari tidak mematuhi regulasi siber Tiongkok, dan bagaimana bisnis dapat mengatasinya?
 
 Gagal mengikuti regulasi siber Tiongkok dapat mengakibatkan konsekuensi serius, seperti **denda besar**, **penghapusan aplikasi dari toko aplikasi**, **pelanggaran data**, dan bahkan **tindakan hukum**. Selain itu, ketidakpatuhan dapat sangat merusak reputasi perusahaan, membuatnya sulit untuk mempertahankan pijakan di pasar Tiongkok.

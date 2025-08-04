@@ -99,7 +99,7 @@ When it comes to OTA update plugins, ensuring security and meeting app store sta
 
 ### Security Features
 
-Capgo takes security seriously by implementing **end-to-end encryption** for update packages and maintaining **SOC II compliance**, safeguarding the entire update process [\[1\]](https://capgo.app). This not only protects updates but also aligns with the compliance requirements of Apple and Google [\[1\]](https://capgo.app). Additionally, Capgo operates with both US and EU entities, providing flexibility for data residency requirements. 
+Capgo takes security seriously by implementing **end-to-end encryption** for update packages and maintaining **SOC II compliance**, safeguarding the entire update process [\[1\]](https://capgo.app). This not only protects updates but also aligns with the compliance requirements of Apple and Google [\[1\]](https://capgo.app). Additionally, Capgo operates with both US and EU entities, providing flexibility for data residency requirements. Capawesome offers EU or global data residency options but does not have a US legal entity. 
 
 To ensure continuous security, Capgo is **publicly audited at each commit** by CodeRabbit and SonarCloud, maintaining an **A score in SonarCloud** for code quality and security. We have also undergone **private auditing as part of our SOC II certification process**. On the other hand, Capawesome relies on **signature-based verification** without the same level of compliance certification or continuous auditing.
 
@@ -107,7 +107,7 @@ To ensure continuous security, Capgo is **publicly audited at each commit** by C
 | --- | --- | --- |
 | Encryption Approach | End-to-end encryption | Signature-based |
 | Compliance | SOC II certified | Not SOC II certified |
-| Data Residency | US & EU entities | Standard hosting |
+| Data Residency | US & EU entities | EU or global (no US entity) |
 | Security Auditing | Public audits per commit (CodeRabbit, SonarCloud A score) + SOC II audit | No public auditing |
 
 > "The only solution with true end-to-end encryption, others just sign updates" – Capgo [\[1\]](https://capgo.app)
@@ -224,7 +224,7 @@ When deciding between Capgo and Capawesome, it's important to weigh the options 
 | **Versioning System** | Industry-standard semver | Custom version system |
 | **Compliance** | SOC II certified | Not SOC II certified |
 | **Security Auditing** | Public audits per commit (A score) + SOC II audit | No public auditing |
-| **Legal Entities** | US & EU entities | Standard business structure |
+| **Legal Entities** | US & EU entities | EU entity (no US entity) |
 | **Enterprise Pricing** | Transparent PAYG at $249/mo + [fair credit system](https://capgo.app/pricing/) for any scale | No public pricing above Team tier |
 
 Both platforms are designed to handle OTA (over-the-air) updates and support enterprise-scale deployments. Capgo differentiates itself with industry-standard semantic versioning, SOC II compliance, continuous security auditing (CodeRabbit and SonarCloud with A score), end-to-end encryption, and presence in both US and EU markets. Capawesome offers competitive features at a lower starting price point with a custom version system.
@@ -241,7 +241,7 @@ For teams that need proven reliability, compliance certifications, and a compreh
 
 ## FAQs
 
-::: faq
+:::faq
 ### What are the main differences between Capgo and Capawesome in update management and security?
 
 ## Capgo vs. Capawesome: A Quick Comparison
@@ -255,14 +255,14 @@ Both **Capgo** and **Capawesome** are plugins designed to handle updates in [Cap
 While both plugins offer enterprise-grade features, Capgo's SOC II compliance, continuous security auditing, end-to-end encryption, and established market presence make it particularly attractive for security-conscious organizations.
 :::
 
-::: faq
+:::faq
 ### How does Capgo's pricing compare to Capawesome, and what factors should I consider when choosing between them?
 
 Both Capgo and Capawesome offer tiered pricing models. Capawesome starts at $7.5/month for their Starter plan (1,000 MAU), while Capgo's SOLO plan begins at $12/month with the same MAU limit. Both scale up to $82.5-$83/month for their Team plans supporting 100,000 MAU.
 
 When choosing between them, consider:
 - **Security Requirements**: Capgo offers SOC II compliance and end-to-end encryption
-- **Geographic Needs**: Capgo operates with US and EU entities for data residency flexibility
+- **Geographic Needs**: Capgo operates with US and EU entities for data residency flexibility, while Capawesome offers EU or global options but no US entity
 - **Budget**: Capawesome has a lower entry price and a free tier for testing
 - **Version Management**: Capgo uses industry-standard semver while Capawesome uses a custom system
 - **Enterprise Pricing Transparency**: Capgo provides public pricing for all tiers including PAYG at $249/mo + credits
@@ -271,7 +271,7 @@ When choosing between them, consider:
 Capgo brings several standout features including **real-time analytics**, **one-click rollbacks**, and **advanced team management**, making it ideal for organizations prioritizing security and compliance.
 :::
 
-::: faq
+:::faq
 ### Which OTA update plugin is better for small teams or large enterprises?
 
 Both **Capgo** and **Capawesome** support teams of all sizes, from startups to enterprises. The choice depends on your specific requirements:

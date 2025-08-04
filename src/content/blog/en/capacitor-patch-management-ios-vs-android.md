@@ -233,7 +233,7 @@ Rodrigo Mantica emphasizes its importance, saying:
 
 ## FAQs
 
-::: faq
+:::faq
 ### What challenges do developers face when managing updates for Capacitor apps on iOS and Android?
 
 Managing updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) on both iOS and Android can feel like navigating a maze. On Android, the sheer variety of devices and OS versions creates a fragmented ecosystem. This inconsistency makes testing and resolving issues more complex, as updates might behave differently depending on the device.
@@ -243,7 +243,7 @@ For iOS, the challenge lies in Apple's more stringent app review process. While 
 Adding to the mix are caching problems, where updates don’t immediately reflect on user devices. This often forces users (or developers) to resort to manual fixes like clearing app data - a frustrating experience for everyone involved. These hurdles underscore the importance of crafting **effective update strategies** to ensure deployments are as seamless and timely as possible across both platforms.
 :::
 
-::: faq
+:::faq
 ### How does Capgo simplify updating Capacitor apps on iOS and Android?
 
 Capgo simplifies the process of updating Capacitor apps by offering **over-the-air (OTA) updates** for iOS and Android. This means developers can roll out updates, bug fixes, or new features instantly - no need to wait for lengthy app store approvals. It’s a huge time-saver and makes the release process much smoother.
@@ -251,7 +251,7 @@ Capgo simplifies the process of updating Capacitor apps by offering **over-the-a
 Capgo also provides tools like **real-time monitoring**, **instant rollback options**, and the ability to send updates to specific user groups. These features give developers full control over updates, ensuring everything runs seamlessly. Plus, it integrates effortlessly with CI/CD workflows and uses **end-to-end encryption** to keep updates secure and aligned with platform rules.
 :::
 
-::: faq
+:::faq
 ### Why do iOS users adopt updates faster than Android users?
 
 The difference in how quickly iOS and Android users adopt updates boils down to how each platform manages its update process. Apple has a clear advantage here, as it controls both the hardware and software for its devices. This tight integration allows Apple to release updates swiftly and consistently across all supported iPhones. Thanks to this streamlined approach, about **85% of iPhone users** had upgraded to the latest iOS version by May 2025.

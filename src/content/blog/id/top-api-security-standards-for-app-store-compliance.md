@@ -330,7 +330,7 @@ Fokus pada mempertahankan **enkripsi end-to-end**, **pemantauan berkelanjutan**,
 
 ## FAQ
 
-::: faq
+:::faq
 ### Bagaimana cara mengimplementasikan OAuth 2.0 di aplikasi Capacitor saya untuk memenuhi standar keamanan app store?
 
 Untuk mengimplementasikan **OAuth 2.0** di aplikasi Capacitor Anda sambil memastikan kepatuhan dengan standar keamanan app store, Anda perlu mengikuti beberapa langkah kunci:
@@ -343,7 +343,7 @@ Untuk mengimplementasikan **OAuth 2.0** di aplikasi Capacitor Anda sambil memast
 Dengan mengikuti langkah-langkah ini, Anda dapat memastikan aplikasi Anda memenuhi standar keamanan sambil menyediakan pengalaman autentikasi yang lancar. Platform seperti **Capgo** juga dapat meningkatkan proses pembaruan aplikasi Anda, memastikan kepatuhan dengan persyaratan Apple dan Google sambil memberikan pembaruan real-time kepada pengguna.
 :::
 
-::: faq
+:::faq
 ### Langkah apa yang dapat saya ambil untuk memastikan API saya memenuhi standar keamanan Apple dan Google untuk kepatuhan app store?
 
 Untuk memastikan API Anda selaras dengan standar keamanan Apple dan Google, fokus pada menerapkan praktik keamanan yang kuat seperti **enkripsi end-to-end**, metode autentikasi yang aman, dan langkah-langkah privasi data. Ini penting untuk memenuhi persyaratan kepatuhan.
@@ -351,7 +351,7 @@ Untuk memastikan API Anda selaras dengan standar keamanan Apple dan Google, foku
 Jika Anda mengembangkan aplikasi Capacitor, alat seperti Capgo dapat menyederhanakan kepatuhan. Capgo memungkinkan Anda langsung mendorong pembaruan, perbaikan, dan fitur tanpa memerlukan persetujuan app store, semuanya sambil mematuhi pedoman Apple dan Android. Ini memastikan aplikasi Anda tetap aman dan terbaru dengan mudah.
 :::
 
-::: faq
+:::faq
 ### Apa alat dan praktik terbaik untuk memantau dan mengelola keamanan API di aplikasi saya?
 
 Untuk pengelolaan keamanan API yang efektif di aplikasi Anda, pertimbangkan alat yang memungkinkan pembaruan real-time, enkripsi, dan integrasi yang mulus dengan alur kerja pengembangan. **Capgo** menyediakan solusi yang kuat untuk aplikasi Capacitor, memungkinkan pengembang untuk mendorong pembaruan, perbaikan, dan fitur baru secara instan tanpa menunggu persetujuan app store. Ini memastikan aplikasi Anda tetap patuh dan terbaru.

@@ -141,7 +141,7 @@ When evaluating OTA methods, teams should pay attention to key factors such as:
 
 ## FAQs
 
-::: faq
+:::faq
 ### How do OTA updates improve security for Capacitor apps compared to traditional app store updates?
 
 Over-the-air (OTA) updates bring a major advantage to Capacitor apps by allowing developers to push out critical fixes and security patches immediately. There's no need to wait for app store reviews, which means vulnerabilities can be addressed as soon as they're discovered. This quick response greatly reduces the risk of potential security threats.
@@ -149,7 +149,7 @@ Over-the-air (OTA) updates bring a major advantage to Capacitor apps by allowing
 Another key benefit is that OTA updates ensure every user is running the same secure version of the app. This consistency eliminates gaps in protection and reduces the chances of outdated versions exposing users to risks. By keeping user data safe and staying aligned with security standards, OTA updates have become a crucial part of modern app development.
 :::
 
-::: faq
+:::faq
 ### What makes Capgo a better choice for OTA updates in Capacitor apps compared to native options?
 
 Capgo is an excellent option for over-the-air (OTA) updates, delivering **instant updates** without the hassle of waiting for app store approvals. With **end-to-end encryption**, it ensures updates are secure and offers robust tools like rollback capabilities, error tracking, and [user-specific update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/).
@@ -157,7 +157,7 @@ Capgo is an excellent option for over-the-air (OTA) updates, delivering **instan
 Being an **open-source platform**, Capgo works effortlessly with CI/CD workflows, streamlining the update process for developers. This not only speeds up deployment but also gives developers more control and flexibility over app updates - all while staying compliant with Apple and Android guidelines.
 :::
 
-::: faq
+:::faq
 ### What are the advantages of Capgo's one-click rollback feature for enterprises during large-scale updates?
 
 Enterprises stand to gain a lot from Capgo's **one-click rollback** feature, especially during large-scale updates. If something goes wrong, teams can swiftly revert to a stable version, keeping downtime to a minimum, easing user frustrations, and ensuring business operations stay on track.

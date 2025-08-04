@@ -144,7 +144,7 @@ Establishing clear branch rules, review guidelines, and live-update workflows he
 
 ## FAQs
 
-::: faq
+:::faq
 ### What are the best practices for setting up merge policies in a Capacitor app development team?
 
 To establish effective merge policies for a [Capacitor app development](https://capgo.app/blog/capacitor-comprehensive-guide/) team, focus on creating guidelines that ensure code quality, streamline collaboration, and minimize conflicts in CI/CD workflows. Here are some key practices:
@@ -157,7 +157,7 @@ To establish effective merge policies for a [Capacitor app development](https://
 By following these practices, your team can maintain a smooth development process while delivering high-quality [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) efficiently.
 :::
 
-::: faq
+:::faq
 ### How can I handle version conflicts when using multiple plugins in a Capacitor app?
 
 Version conflicts in Capacitor apps often occur when plugins depend on different versions of the same library. To manage this effectively:
@@ -169,7 +169,7 @@ Version conflicts in Capacitor apps often occur when plugins depend on different
 If you're working in a CI/CD environment, consider using a live update solution like **Capgo** to streamline updates and avoid app store delays. Capgo also supports seamless integration with CI/CD pipelines, making it easier to manage plugin updates and conflicts efficiently.
 :::
 
-::: faq
+:::faq
 ### How can I ensure smooth and reliable live updates for my Capacitor app?
 
 To ensure your Capacitor app updates are seamless and reliable, use a robust live update solution like **Capgo**. It enables you to deliver updates, fixes, and new features instantly, without waiting for app store approvals.

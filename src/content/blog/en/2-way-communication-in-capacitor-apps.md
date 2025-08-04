@@ -417,7 +417,7 @@ As Capacitor technology continues to advance, keeping secure and efficient web-n
 
 ## FAQs
 
-::: faq
+:::faq
 ### How does two-way communication improve the connection between web and native layers in Capacitor apps?
 
 Two-way communication in Capacitor apps streamlines the interaction between web and native layers, allowing seamless integration of features and real-time updates. This approach enables developers to push fixes, enhancements, and new features directly to users without waiting for app store approvals.
@@ -425,7 +425,7 @@ Two-way communication in Capacitor apps streamlines the interaction between web 
 By leveraging this functionality, developers can improve app performance, respond to user feedback faster, and maintain a competitive edge. Tools like Capgo can further enhance this process by offering live updates, end-to-end encryption, and compliance with platform requirements, ensuring a smooth and efficient development workflow.
 :::
 
-::: faq
+:::faq
 ### What are some best practices for creating custom plugins to enhance performance in Capacitor apps?
 
 Creating custom plugins in Capacitor apps can significantly improve performance and tailor functionality to your app's specific needs. Here are a few best practices to follow:
@@ -437,7 +437,7 @@ Creating custom plugins in Capacitor apps can significantly improve performance 
 If you're looking to streamline updates and maintain seamless app performance, platforms like Capgo can help. Capgo allows you to push updates instantly, ensuring your plugins and app remain optimized without requiring app store approvals.
 :::
 
-::: faq
+:::faq
 ### How can developers secure data when enabling two-way communication between web and native layers in Capacitor apps?
 
 Ensuring data security during two-way communication in Capacitor apps involves implementing key best practices. Use **end-to-end encryption** to protect sensitive data as it moves between the web and native layers. Additionally, validate and sanitize all inputs to prevent vulnerabilities like injection attacks.

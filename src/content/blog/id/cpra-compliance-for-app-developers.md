@@ -203,7 +203,7 @@ Untuk menyelaraskan dengan peraturan CPRA dan memastikan pengamanan teknis yang 
 
 ## FAQ
 
-::: faq
+:::faq
 ### Bagaimana pengembang aplikasi dapat memenuhi persyaratan minimalisasi data CPRA?
 
 Untuk memenuhi standar **minimalisasi data** yang ditetapkan oleh CPRA, pengembang aplikasi harus memprioritaskan pengumpulan data pribadi yang hanya penting untuk fungsi aplikasi mereka secara efektif. Secara teratur menilai praktik pengumpulan data Anda untuk memastikan tetap relevan dan terkait erat dengan tujuan aplikasi.
@@ -213,7 +213,7 @@ Sama pentingnya adalah menetapkan kebijakan yang jelas untuk penyimpanan data. D
 Bagi yang menggunakan alat seperti Capgo, pembaruan real-time bisa menjadi terobosan penting. Alat-alat ini memungkinkan pengembang untuk menangani masalah kepatuhan dengan cepat dengan menerapkan perbaikan atau pembaruan tanpa menunggu persetujuan app store, membantu aplikasi Anda tetap selaras dengan peraturan privasi.
 :::
 
-::: faq
+:::faq
 ### Bagaimana pengembang aplikasi dapat menangani permintaan pengguna untuk akses, penghapusan, atau koreksi data secara efisien berdasarkan pedoman CPRA?
 
 Untuk memenuhi persyaratan California Privacy Rights Act (CPRA), pengembang aplikasi harus membuat sistem yang mudah dan andal untuk menangani permintaan pengguna terkait akses, penghapusan, atau koreksi data. **Pengembang diharuskan untuk mengakui permintaan dalam waktu 10 hari** dan menyelesaikannya dalam waktu 45 hari. Jika diperlukan waktu tambahan, perpanjangan hingga 45 hari diperbolehkan, asalkan pengguna diberitahu tentang keterlambatan tersebut.
@@ -227,7 +227,7 @@ Berikut cara pengembang dapat menyederhanakan kepatuhan:
 Memanfaatkan alat seperti Capgo, yang menawarkan pembaruan real-time, dapat membantu pengembang menyelesaikan masalah atau menerapkan perbaikan terkait data pengguna dengan cepat sambil memastikan kepatuhan dengan standar platform. Dengan tetap mengikuti persyaratan ini, pengembang tidak hanya dapat memenuhi kewajiban regulasi tetapi juga membangun kepercayaan yang lebih kuat dengan pengguna mereka.
 :::
 
-::: faq
+:::faq
 ### Bagaimana pengembang aplikasi dapat menerapkan sistem manajemen persetujuan yang efektif untuk memenuhi persyaratan kepatuhan CPRA?
 
 Untuk memenuhi standar **CPRA**, pengembang aplikasi perlu memprioritaskan transparansi dan kesederhanaan saat mengelola persetujuan pengguna. Mulai dengan banner persetujuan yang jelas dan mudah dipahami yang menjelaskan tujuan pengumpulan data dan bagaimana data akan digunakan. Penting untuk mendapatkan persetujuan eksplisit dari pengguna sebelum memproses data apa pun.

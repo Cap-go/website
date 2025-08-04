@@ -149,7 +149,7 @@ Berkat kekuatan teknis dan keuntungan strategisnya, Capgo adalah pilihan yang sa
 
 ## FAQ
 
-::: faq
+:::faq
 ### Mengapa saya harus memilih Capgo daripada Appflow untuk pembaruan aplikasi over-the-air (OTA)?
 
 Capgo menawarkan cara yang cepat dan dapat diandalkan untuk memberikan pembaruan over-the-air (OTA) kepada aplikasi Capacitor Anda. Dengan **pembaruan real-time** yang sesuai dengan pedoman Apple dan Android, Anda dapat meluncurkan perbaikan, fitur baru, dan peningkatan secara instan - menghindari kebutuhan untuk persetujuan dari toko aplikasi.
@@ -157,7 +157,7 @@ Capgo menawarkan cara yang cepat dan dapat diandalkan untuk memberikan pembaruan
 Apa yang membedakan Capgo adalah fitur-fitur unggulannya seperti **enkripsi end-to-end** untuk pembaruan yang aman, **integrasi CI/CD yang lancar** untuk menyederhanakan alur kerja Anda, dan **penargetan pembaruan spesifik pengguna** untuk penyebaran yang disesuaikan. Selain itu, sebagai platform open-source, ia memberikan transparansi dan fleksibilitas untuk memenuhi tuntutan penyebaran aplikasi Anda.
 :::
 
-::: faq
+:::faq
 ### Bagaimana Capgo melindungi pembaruan aplikasi dibandingkan dengan Appflow?
 
 Capgo memprioritaskan [keamanan pembaruan aplikasi](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) dengan menggunakan **enkripsi end-to-end**, memastikan bahwa data tetap terlindungi saat bepergian antara pengembang dan pengguna. Metode ini secara efektif melindungi pembaruan dari akses yang tidak sah sambil memenuhi standar kepatuhan platform.
@@ -165,7 +165,7 @@ Capgo memprioritaskan [keamanan pembaruan aplikasi](https://capgo.app/blog/intro
 Di sisi lain, sementara Appflow menyediakan fungsionalitas, ia tidak memiliki langkah-langkah enkripsi canggih yang sama. Ini membuat Capgo menjadi opsi yang lebih kuat dan lebih aman untuk pengembang yang fokus pada menjaga keamanan pembaruan mereka.
 :::
 
-::: faq
+:::faq
 ### Apa yang harus dipertimbangkan pengembang saat memilih antara opsi penyebaran cloud Capgo dan penyebaran mandiri?
 
 Artikel ini tidak membahas secara rinci tentang opsi penyebaran cloud dan mandiri dari Capgo. Untuk mendapatkan informasi yang lebih rinci, ada baiknya untuk memeriksa sumber resmi Capgo atau menghubungi tim mereka secara langsung. Mereka dapat memberikan panduan yang sesuai dengan kebutuhan spesifik Anda.

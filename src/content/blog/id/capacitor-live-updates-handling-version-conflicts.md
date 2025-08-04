@@ -174,13 +174,13 @@ Integrasikan fitur seperti enkripsi end-to-end, pipeline CI/CD, dan kontrol peng
 
 ## FAQ
 
-::: faq
+:::faq
 ### Bagaimana cara melakukan rollback update di aplikasi Capacitor jika terjadi konflik versi?
 
 Sayangnya, artikel ini tidak memberikan panduan spesifik tentang rollback update jika terjadi konflik versi. Untuk praktik terbaik, pertimbangkan untuk mempertahankan versi dasar aplikasi yang stabil dan menguji update secara menyeluruh sebelum deployment. Alat seperti **Capgo** juga dapat membantu menyederhanakan [manajemen update](https://capgo.app/docs/plugin/cloud-mode/manual-update/) dengan menawarkan fitur seperti update real-time dan penugasan pengguna, membantu Anda mengurangi potensi konflik secara efektif.
 :::
 
-::: faq
+:::faq
 ### Bagaimana cara memastikan semua pengguna mendapatkan update terbaru untuk aplikasi saya tanpa mengalami konflik versi?
 
 Untuk menghindari konflik versi dan memastikan semua pengguna menerima update terbaru, pertimbangkan untuk menggunakan solusi live update seperti **Capgo**. Ini memungkinkan Anda untuk langsung mendorong update, perbaikan, dan fitur baru tanpa menunggu persetujuan app store, membantu Anda mempertahankan versi aplikasi yang konsisten di seluruh basis pengguna Anda.
@@ -188,7 +188,7 @@ Untuk menghindari konflik versi dan memastikan semua pengguna menerima update te
 Dengan fitur seperti penugasan pengguna yang ditargetkan, Anda dapat meluncurkan update ke grup tertentu atau merilis perubahan secara bertahap, mengurangi risiko masalah. Capgo juga mendukung update real-time dan mematuhi pedoman Apple dan Android, menjadikannya pilihan yang andal untuk mengelola update aplikasi secara efisien.
 :::
 
-::: faq
+:::faq
 ### Bagaimana cara menguji pembaruan di berbagai platform untuk mencegah konflik versi di aplikasi Capacitor saya?
 
 Untuk menghindari konflik versi saat menguji pembaruan pada aplikasi Capacitor Anda, penting untuk mengikuti beberapa praktik terbaik:

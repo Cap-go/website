@@ -341,7 +341,7 @@ For further guidance, these resources are indispensable:
 
 ## FAQs
 
-::: faq
+:::faq
 ### What happens if iOS app developers don’t meet Apple’s Privacy Manifest requirements by May 1, 2024?
 
 Failing to meet Apple’s Privacy Manifest requirements by May 1, 2024, could have **serious repercussions** for iOS app developers. Your app might face rejection during the App Store review process, lose certain features, or even be removed from the store altogether.
@@ -349,7 +349,7 @@ Failing to meet Apple’s Privacy Manifest requirements by May 1, 2024, could ha
 Beyond that, non-compliance could subject future app submissions to **greater scrutiny**, potentially delaying approval times. These setbacks don’t just affect your app’s availability - they can also erode user trust and diminish your app’s presence in the marketplace. Staying ahead of the deadline helps ensure your app remains compliant and accessible to your audience.
 :::
 
-::: faq
+:::faq
 ### How can developers ensure third-party SDKs in their iOS apps meet Apple's Privacy Manifest requirements?
 
 To meet Apple's **Privacy Manifest** requirements, developers must include a `PrivacyInfo.xcprivacy` file in their app or SDK. This file needs to clearly detail the types of data being collected and explain the purpose behind using specific APIs. Additionally, developers should confirm whether the third-party SDKs they rely on fall under Apple's guidelines for requiring a privacy manifest and signature.
@@ -357,7 +357,7 @@ To meet Apple's **Privacy Manifest** requirements, developers must include a `Pr
 Starting May 1, 2024, every app submitted to the App Store must comply with these rules. It's important for developers to work closely with their SDK providers to ensure accurate reporting of data practices, making it easier to align with the app's privacy manifest. Following these steps not only helps avoid App Store rejections but also fosters user trust by promoting transparency in data handling.
 :::
 
-::: faq
+:::faq
 ### How can developers create and maintain a Privacy Manifest for their iOS apps to comply with Apple's policies?
 
 Developers working on iOS apps can create and manage a Privacy Manifest by adhering to Apple's guidelines and utilizing available tools. Apple's official documentation provides detailed instructions on setting up a **PrivacyInfo.xcprivacy** file, which specifies the data your app collects and any third-party SDKs in use. For step-by-step assistance, Apple’s WWDC23 video on privacy manifests is an excellent resource, covering how to identify privacy practices and generate privacy reports using Xcode 15 or later.

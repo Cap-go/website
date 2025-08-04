@@ -367,7 +367,7 @@ Le SSL pinning joue un rôle clé dans la protection des données des utilisateu
 
 ## FAQs
 
-::: faq
+:::faq
 ### Quels risques pourraient survenir si le SSL pinning n'est pas utilisé dans une application Capacitor ?
 
 Si le SSL pinning n'est pas configuré dans une application Capacitor, l'application devient une cible plus facile pour les **attaques Man-in-the-Middle (MITM)**. Ces attaques permettent aux acteurs malveillants d'intercepter et de manipuler les données circulant entre l'application et son serveur. Cela pourrait entraîner l'exposition d'informations sensibles comme les identifiants utilisateur ou les [clés API](https://capgo.app/docs/webapp/api-keys/).
@@ -375,7 +375,7 @@ Si le SSL pinning n'est pas configuré dans une application Capacitor, l'applica
 De plus, sans SSL pinning, les attaquants pourraient utiliser de faux certificats ou des certificats compromis pour se faire passer pour un serveur de confiance. Cela augmente les chances de violations de données. En mettant en œuvre le SSL pinning, vous pouvez garantir une communication sécurisée et protéger vos utilisateurs de ces risques.
 :::
 
-::: faq
+:::faq
 ### Quelles sont les principales différences dans la mise en œuvre et le maintien du SSL pinning pour Android et iOS dans les applications Capacitor ?
 
 Le SSL pinning fonctionne un peu différemment sur Android et iOS, grâce à leurs API uniques et à leurs configurations de sécurité.
@@ -387,7 +387,7 @@ Sur **iOS**, le SSL pinning est généralement géré via URLSession ou avec l'a
 Les deux plateformes nécessitent une attention continue à l'expiration des certificats et aux mises à jour pour maintenir les connexions API sécurisées. Des tests réguliers sont essentiels pour détecter les problèmes de compatibilité tôt et se prémunir contre les **attaques Man-in-the-Middle (MITM)**.
 :::
 
-::: faq
+:::faq
 ### Comment puis-je automatiser les mises à jour de certificats SSL et garantir que mon application Capacitor respecte les exigences de sécurité de l'app store ?
 
 Bien que l'article ne traite pas des outils ou des stratégies pour automatiser les mises à jour de certificats SSL ou garantir la conformité aux directives de sécurité de l'app store, il existe des étapes que vous pouvez suivre pour renforcer la sécurité de votre application. Une mesure efficace est de mettre en œuvre le **SSL pinning** dans votre application Capacitor. Cela aide à protéger votre application contre les **attaques Man-in-the-Middle (MITM)**, qui peuvent compromettre des données sensibles.

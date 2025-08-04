@@ -300,7 +300,7 @@ Looking forward, teams that adopt disciplined version control practices and leve
 
 ## FAQs
 
-::: faq
+:::faq
 ### What’s the difference between feature, release, and trunk-based branching strategies in mobile CI/CD?
 
 Branching strategies are an essential part of mobile CI/CD workflows, helping teams manage code effectively and streamline the deployment process. Here's a closer look at some common approaches:
@@ -315,7 +315,7 @@ Branching strategies are an essential part of mobile CI/CD workflows, helping te
 Each of these strategies has its advantages, and the best fit depends on your team's workflow and needs. For teams working with Capacitor apps, tools like **Capgo** can elevate your CI/CD process by enabling instant live updates. This eliminates the need for app store approvals and ensures smooth integration with your version control practices.
 :::
 
-::: faq
+:::faq
 ### How does Capgo improve mobile app CI/CD workflows, and what advantages does it offer compared to traditional approaches?
 
 Capgo streamlines mobile app CI/CD workflows by offering **instant over-the-air (OTA) updates**. This means developers can bypass the hassle of constant app store submissions, delivering bug fixes, new features, and updates much faster - all while adhering to Apple and Android guidelines.
@@ -323,7 +323,7 @@ Capgo streamlines mobile app CI/CD workflows by offering **instant over-the-air 
 Unlike traditional approaches, Capgo stands out with benefits like minimized downtime, a smoother user experience, and effortless integration into existing CI/CD pipelines. Updates can be pushed securely and in real-time, making app management more efficient and adaptable. With advanced features such as end-to-end encryption and updates tailored to specific users, Capgo ensures both the safety and personalization of the update process.
 :::
 
-::: faq
+:::faq
 ### How can I ensure security and enable quick rollbacks in a mobile CI/CD pipeline?
 
 To keep your mobile CI/CD pipeline secure and prepared for quick rollbacks, focus on **solid version control practices**. This means maintaining thorough release notes, leveraging feature flags to control feature rollouts, and running automated tests to identify vulnerabilities before deployment.

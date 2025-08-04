@@ -39,7 +39,7 @@ Para asegurar que la política de privacidad de tu aplicación cumpla con las le
 Si tu aplicación utiliza actualizaciones en vivo o funciones similares, asegúrate de que estas actualizaciones también cumplan con los requisitos de localización de datos. Herramientas como Capgo pueden ayudar proporcionando actualizaciones seguras en tiempo real mientras mantienen el cumplimiento tanto de las regulaciones rusas como de las políticas de la tienda de aplicaciones. Siempre consulta a un experto legal familiarizado con las leyes de datos rusas para verificar el cumplimiento de tu aplicación.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo puedo asegurar que mi aplicación Capacitor se mantenga en cumplimiento con las leyes rusas de localización de datos a lo largo del tiempo?
 
 Para mantener el cumplimiento con las leyes rusas de localización de datos, es esencial revisar regularmente las prácticas de almacenamiento y procesamiento de datos de tu aplicación. Asegúrate de que todos los datos personales de los usuarios rusos se almacenen en servidores ubicados dentro de Rusia, según lo requieren las regulaciones locales. Realiza auditorías periódicas para verificar el cumplimiento y abordar cualquier posible brecha.

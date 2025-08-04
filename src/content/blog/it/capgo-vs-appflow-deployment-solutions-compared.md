@@ -149,7 +149,7 @@ Gracias a sus fortalezas técnicas y ventajas estratégicas, Capgo es una excele
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Por qué debería elegir Capgo sobre Appflow para actualizaciones de aplicaciones over-the-air (OTA)?
 
 Capgo ofrece una forma rápida y fiable de entregar actualizaciones over-the-air (OTA) a tus aplicaciones de Capacitor. Con **actualizaciones en tiempo real** que cumplen con las directrices de Apple y Android, puedes implementar correcciones, nuevas características y mejoras al instante, omitiendo la necesidad de aprobaciones por parte de la tienda de aplicaciones.
@@ -157,7 +157,7 @@ Capgo ofrece una forma rápida y fiable de entregar actualizaciones over-the-air
 Lo que distingue a Capgo son sus características destacadas como **encriptación de extremo a extremo** para actualizaciones seguras, **integración fluida de CI/CD** para agilizar tu flujo de trabajo y **objetivos de actualización específicos para usuarios** para despliegues personalizados. Además, al ser una plataforma de código abierto, proporciona transparencia y flexibilidad para satisfacer las demandas de despliegue de tu aplicación.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo protege Capgo las actualizaciones de aplicaciones en comparación con Appflow?
 
 Capgo prioriza la [seguridad de las actualizaciones de aplicaciones](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) al utilizar **encriptación de extremo a extremo**, asegurando que los datos permanezcan protegidos mientras viajan entre desarrolladores y usuarios. Este método protege efectivamente las actualizaciones de accesos no autorizados mientras cumple con los estándares de cumplimiento de la plataforma.
@@ -165,7 +165,7 @@ Capgo prioriza la [seguridad de las actualizaciones de aplicaciones](https://cap
 D'altra parte, mentre Appflow offre funzionalità, manca delle stesse misure avanzate di crittografia. Questo rende Capgo un'opzione più forte e sicura per gli sviluppatori orientati alla protezione delle loro aggiornamenti.
 :::
 
-::: faq
+:::faq
 ### Cosa dovrebbero considerare gli sviluppatori quando scelgono tra le opzioni di distribuzione cloud e auto-ospitate di Capgo?
 
 L'articolo non approfondisce i dettagli delle opzioni di distribuzione cloud e auto-ospitate di Capgo. Per ottenere informazioni più dettagliate, è una buona idea consultare le risorse ufficiali di Capgo o contattare direttamente il loro team. Possono fornire indicazioni che si allineano alle tue esigenze specifiche.

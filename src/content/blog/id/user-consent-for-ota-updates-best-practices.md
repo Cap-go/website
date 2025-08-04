@@ -60,7 +60,7 @@ Kegagalan dalam memperoleh persetujuan pengguna untuk pembaruan Over-the-Air (OT
 Di luar risiko hukum, memperbarui aplikasi tanpa persetujuan pengguna dapat merusak kepercayaan pengguna dan merusak reputasi merek Anda. Untuk menghindari risiko ini, sangat disarankan untuk menerapkan mekanisme persetujuan yang jelas dan ramah pengguna untuk pembaruan OTA. Platform seperti **Capgo** dapat membantu memastikan kepatuhan sambil menawarkan solusi pembaruan langsung yang disesuaikan untuk aplikasi Capacitor.
 :::
 
-::: faq
+:::faq
 ### Apa praktik terbaik untuk membuat permintaan persetujuan yang patuh dan ramah pengguna untuk pembaruan OTA?
 
 Untuk memastikan permintaan persetujuan untuk pembaruan Over-the-Air (OTA) patuh dan ramah pengguna, fokus pada kejelasan, transparansi, dan kesederhanaan. Jelaskan dengan jelas apa yang tercakup dalam pembaruan, mengapa diperlukan, dan bagaimana manfaatnya bagi pengguna. Hindari jargon teknis dan gunakan bahasa yang lugas dan mudah dipahami.
@@ -68,7 +68,7 @@ Untuk memastikan permintaan persetujuan untuk pembaruan Over-the-Air (OTA) patuh
 Pastikan untuk memberikan pengguna pilihan yang jelas untuk menerima atau menolak pembaruan, dan hormati keputusan mereka. Selain itu, patuhi pedoman platform (misalnya, Apple dan Android) dan peraturan privasi data seperti GDPR atau CCPA. Alat seperti Capgo dapat membantu memperlancar proses dengan menawarkan fitur seperti penugasan pengguna untuk pembaruan dan kepatuhan real-time dengan persyaratan platform, memastikan pengalaman yang lancar dan aman bagi pengembang dan pengguna.
 :::
 
-::: faq
+:::faq
 ### Langkah keamanan apa yang memastikan data pengguna terlindungi selama pembaruan OTA?
 
 Untuk melindungi data pengguna selama pembaruan Over-the-Air (OTA), menerapkan **enkripsi end-to-end** sangat penting. Ini memastikan bahwa hanya pengguna yang dituju yang dapat mendekripsi dan mengakses pembaruan, menjaga keamanan informasi sensitif.

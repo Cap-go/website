@@ -31,7 +31,7 @@ To ensure your privacy policy meets Russian data laws, you need to:
 4\. Provide clear information about user consent and rights
 :::
 
-::: faq
+:::faq
 ### How often do I need to update my app to stay compliant?
 
 Regular updates are crucial for maintaining compliance:
@@ -50,7 +50,7 @@ Untuk memastikan kebijakan privasi aplikasi Anda mematuhi undang-undang data Rus
 Jika aplikasi Anda menggunakan pembaruan langsung atau fitur serupa, pastikan pembaruan ini juga mematuhi persyaratan lokalisasi data. Alat seperti Capgo dapat membantu dengan menyediakan pembaruan real-time yang aman sambil mempertahankan kepatuhan terhadap peraturan Rusia dan kebijakan app store. Selalu konsultasikan dengan ahli hukum yang familiar dengan undang-undang data Rusia untuk memverifikasi kepatuhan aplikasi Anda.
 :::
 
-::: faq
+:::faq
 ### Bagaimana saya memastikan aplikasi Capacitor tetap mematuhi undang-undang lokalisasi data Rusia dari waktu ke waktu?
 
 Untuk mempertahankan kepatuhan terhadap undang-undang lokalisasi data Rusia, penting untuk secara rutin meninjau praktik penyimpanan dan pemrosesan data aplikasi Anda. Pastikan setiap data pribadi pengguna Rusia disimpan di server yang berlokasi di Rusia, sesuai dengan peraturan setempat. Lakukan audit berkala untuk memverifikasi kepatuhan dan mengatasi setiap potensi kesenjangan.

@@ -226,7 +226,7 @@ Si vous penchez vers des déploiements localisés, Capawesome pourrait être une
 
 ## FAQ
 
-::: faq
+:::faq
 ### Quelles sont les principales différences entre Capgo et Capawesome en matière de gestion des mises à jour et de sécurité ?
 
 ## Capgo vs. Capawesome : Une Comparaison Rapide
@@ -240,7 +240,7 @@ D'autre part, **Capawesome**, lancé en 2024, est davantage adapté au marché a
 Bien que les deux plugins aient des prix similaires, le lancement antérieur de Capgo et ses capacités plus larges en font un meilleur choix pour les développeurs ayant besoin d'une solution polyvalente et sécurisée.
 :::
 
-::: faq
+:::faq
 ### Comment le prix de Capgo se compare-t-il à celui de Capawesome, et quels facteurs devrais-je considérer en choisissant entre eux ?
 
 Capgo et Capawesome seraient proches au niveau des prix, mais l'article ne fournit pas de détails exacts sur leurs modèles de prix. Lors de votre choix entre les deux, il est important de peser des facteurs tels que les fonctionnalités qu'ils offrent, les besoins spécifiques de votre application et le type de support dont vous aurez besoin.
@@ -248,7 +248,7 @@ Capgo et Capawesome seraient proches au niveau des prix, mais l'article ne fourn
 Capgo apporte plusieurs fonctionnalités remarquables, y compris **des mises à jour en temps réel**, **le cryptage de bout en bout**, et une **intégration fluide CI/CD**, en faisant un choix solide pour les développeurs qui apprécient la flexibilité et la sécurité. Étant sur le marché depuis 2022, Capgo a également un bilan plus long par rapport à Capawesome, qui n'est entré sur le marché qu'en 2024. Évaluer les besoins de votre application et vos objectifs à long terme vous aidera à faire le bon choix.
 :::
 
-::: faq
+:::faq
 ### Quel plugin de mise à jour OTA est meilleur pour les petites équipes ou les grandes entreprises ?
 
 Le bon plugin de mise à jour OTA pour votre équipe dépend de vos besoins spécifiques et de votre taille. **Capgo** se distingue comme un choix polyvalent, offrant des mises à jour en temps réel, la conformité avec les normes Apple et Android, et des fonctionnalités telles que le cryptage de bout en bout, l'intégration CI/CD, et des mises à jour spécifiques aux utilisateurs. Ces capacités en font un concurrent solide pour divers scénarios.

@@ -223,7 +223,7 @@ El mantenimiento constante, el monitoreo vigilante en tiempo real y la capacidad
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Por qué es importante la revocación de tokens para mejorar la seguridad de una aplicación Capacitor?
 
 La revocación de tokens es una medida de seguridad clave para las aplicaciones Capacitor, permitiendo a los desarrolladores invalidar instantáneamente los tokens de acceso cuando sea necesario. Ya sea después de que un usuario cierre sesión o en respuesta a un problema de seguridad detectado, revocar tokens asegura que las credenciales comprometidas no puedan ser reutilizadas. Este paso reduce significativamente las posibilidades de acceso no autorizado a datos sensibles del usuario.
@@ -231,7 +231,7 @@ La revocación de tokens es una medida de seguridad clave para las aplicaciones 
 Confiar únicamente en la expiración de tokens puede dejar una ventana de vulnerabilidad, pero la revocación de tokens aborda las amenazas **en tiempo real**. Este enfoque no solo fortalece la protección de datos sino que también se alinea con las expectativas modernas de seguridad. Para las aplicaciones Capacitor, integrar la revocación de tokens es un paso crítico hacia la protección de la información del usuario y el mantenimiento de un entorno de aplicación seguro.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo puedo implementar la revocación segura de tokens en aplicaciones Capacitor de alto tráfico?
 
 Para asegurar la revocación segura de tokens en [aplicaciones Capacitor de alto tráfico](https://capgo.app/blog/), comienza implementando **tokens de acceso de corta duración**. Estos tokens reducen el riesgo de mal uso ya que expiran rápidamente, limitando la ventana de oportunidad para potenciales atacantes.
@@ -243,7 +243,7 @@ Para seguridad adicional, usa **OAuth 2.0**. Este marco ofrece herramientas conf
 Al adoptar estas prácticas, puedes proteger tu aplicación Capacitor contra acceso no autorizado mientras aseguras que funcione bien, incluso bajo condiciones de tráfico pesado.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo puedo asegurar mi aplicación Capacitor y mantener el cumplimiento de los requisitos de seguridad de la tienda de aplicaciones usando revocación de tokens?
 
 Para mantener tu aplicación Capacitor segura y en línea con los estándares de seguridad de la tienda de aplicaciones, es importante implementar estrategias de **revocación de tokens** junto con métodos de autenticación fuertes como OAuth 2.0 o OpenID Connect. Estas medidas protegen los datos del usuario mientras cumplen con los requisitos establecidos por Apple y Google Play.

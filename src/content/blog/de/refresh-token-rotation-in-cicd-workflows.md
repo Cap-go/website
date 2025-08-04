@@ -264,7 +264,7 @@ Für einen effizienteren Prozess integrieren Tools wie Capgo die Token-Rotation 
 
 ## FAQs
 
-::: faq
+:::faq
 ### Was ist die Rotation von Refresh-Tokens und wie verbessert sie die Sicherheit in CI/CD-Workflows?
 
 Die Rotation von Refresh-Tokens ist eine Sicherheitsfunktion, bei der jedes Mal, wenn das vorherige Token verwendet wird, ein frisch ausgestelltes Refresh-Token ausgegeben wird. Dieses Verfahren hilft, das Risiko des Missbrauchs von Tokens zu verringern, da jedes kompromittierte Token nach der Rotation ungültig wird.
@@ -272,7 +272,7 @@ Die Rotation von Refresh-Tokens ist eine Sicherheitsfunktion, bei der jedes Mal,
 In CI/CD-Workflows fügt die Verwendung der Rotation von Refresh-Tokens eine zusätzliche Schutzschicht für automatisierte Aufgaben wie [App-Updates](https://capgo.app/plugins/capacitor-updater/) oder Bereitstellungen hinzu. Es begrenzt die Exponierung langfristig gültiger Tokens und stärkt die Sicherheit Ihrer Pipeline. Tools wie Capgo können nahtlos in CI/CD-Systeme integriert werden und bieten sichere und automatisierte Updates für [Capacitor-Apps](https://capgo.app/blog/capacitor-comprehensive-guide/), während sie die Richtlinien der Plattform einhalten.
 :::
 
-::: faq
+:::faq
 ### Wie kann ich die Rotation von Refresh-Tokens in CI/CD-Pipelines implementieren, um sichere und unterbrechungsfreie Bereitstellungen zu gewährleisten?
 
 Die Implementierung der Rotation von Refresh-Tokens in Ihren CI/CD-Pipelines ist ein intelligenter Schritt, um Ihre Bereitstellungen sicher und reibungslos zu halten. Hier sind einige praktische Tipps, um es richtig zu machen:
@@ -284,7 +284,7 @@ Die Implementierung der Rotation von Refresh-Tokens in Ihren CI/CD-Pipelines ist
 Wenn Sie mit Capacitor-Apps entwickeln, vereinfacht **Capgo** die CI/CD-Integration. Es sorgt dafür, dass die Verwaltung von Live-App-Updates sowohl sicher als auch effizient ist. Die Kombination von Token-Rotation mit Tools wie Capgo kann Ihren Bereitstellungsprozess sicherer und effizienter machen.
 :::
 
-::: faq
+:::faq
 ### Wie gewährleistet Capgo eine sichere Token-Rotation und CI/CD-Integration, während es kosteneffektiv im Vergleich zu Branchenstandards bleibt?
 
 Capgo bietet eine sichere und effiziente Möglichkeit, die Token-Rotation zu handhaben und CI/CD-Workflows zu integrieren, und zwar in Übereinstimmung mit den Branchenstandards und mit einem Fokus auf Automatisierung. Durch die Integration der Rotation von Refresh-Tokens in CI/CD-Prozesse stellt Capgo sicher, dass Entwickler App-Updates sicher halten können, ohne die Benutzerfreundlichkeit zu beeinträchtigen.

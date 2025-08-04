@@ -201,7 +201,7 @@ To stay ahead, conduct regular audits, train your team, and review policies freq
 
 ## FAQs
 
-::: faq
+:::faq
 ### How do Apple's OTA update restrictions help protect my device's security and privacy?
 
 Apple's [over-the-air (OTA) update policies](https://capgo.app/blog/open-source-licecing/) are designed to keep your device secure and your data private. These rules ensure updates are delivered through safe channels, blocking any unauthorized changes that could lead to malware or data breaches. For instance, Apple mandates that updates use secure protocols like HTTPS and adhere to strict compliance standards before they’re made available to users.
@@ -209,7 +209,7 @@ Apple's [over-the-air (OTA) update policies](https://capgo.app/blog/open-source-
 With robust authentication and encryption in place, Apple minimizes threats like code injection or man-in-the-middle attacks. This not only protects your personal information but also maintains the integrity of the operating system by addressing vulnerabilities swiftly and reliably. These safeguards ensure your device stays secure and operates with the latest protections.
 :::
 
-::: faq
+:::faq
 ### What battery level and storage space are required for iPhone updates, and why do these matter?
 
 To update your iPhone, make sure the battery is at least **50% charged** or keep it plugged into a power source. This precaution helps avoid interruptions during the update process, which could otherwise result in incomplete installations - or, in rare cases, leave your device unusable.
@@ -217,7 +217,7 @@ To update your iPhone, make sure the battery is at least **50% charged** or keep
 You'll also need enough **free storage space** on your iPhone to download and install the update. If storage is too limited, the update may fail to start or finish properly. Meeting these conditions is essential for a [smooth update process](https://capgo.app/docs/plugin/cloud-mode/hybrid-update), ensuring your device stays secure and performs optimally.
 :::
 
-::: faq
+:::faq
 ### How can businesses use MDM tools to manage OTA updates effectively?
 
 Businesses can simplify OTA updates by using **Mobile Device Management (MDM)** tools. These tools automate deployment, enforce compliance, and handle user consent, making it easier to keep devices updated while adhering to security and regulatory standards. For example, Apple's MDM features allow administrators to manage updates on supervised devices, tailoring settings to align with company policies.

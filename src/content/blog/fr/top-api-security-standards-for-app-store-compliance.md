@@ -331,7 +331,7 @@ Concentrez-vous sur le maintien de **chiffrement de bout en bout**, **surveillan
 
 ## FAQs
 
-::: faq
+:::faq
 ### Comment puis-je implémenter OAuth 2.0 dans mon application Capacitor pour répondre aux normes de sécurité des magasins d'applications ?
 
 Pour implémenter **OAuth 2.0** dans votre application Capacitor tout en garantissant la conformité aux normes de sécurité des magasins d'applications, vous devrez suivre quelques étapes clés :
@@ -344,7 +344,7 @@ Pour implémenter **OAuth 2.0** dans votre application Capacitor tout en garanti
 En suivant ces étapes, vous pouvez garantir que votre application respecte les normes de sécurité tout en offrant une expérience d'authentification fluide. Des plateformes comme **Capgo** peuvent également améliorer le processus de mise à jour de votre application, garantissant la conformité avec les exigences d'Apple et de Google tout en fournissant des mises à jour en temps réel aux utilisateurs.
 :::
 
-::: faq
+:::faq
 ### Quelles étapes puis-je entreprendre pour garantir que mon API respecte les normes de sécurité d'Apple et de Google pour la conformité aux magasins d'applications ?
 
 Pour garantir que votre API s'aligne sur les normes de sécurité d'Apple et de Google, concentrez-vous sur la mise en œuvre de pratiques de sécurité robustes comme **le chiffrement de bout en bout**, les méthodes d'authentification sécurisées, et les mesures de protection de la vie privée des données. Celles-ci sont essentielles pour répondre aux exigences de conformité.
@@ -352,7 +352,7 @@ Pour garantir que votre API s'aligne sur les normes de sécurité d'Apple et de 
 Si vous développez des applications Capacitor, des outils comme Capgo peuvent simplifier la conformité. Capgo vous permet de pousser instantanément des mises à jour, des corrections, et des fonctionnalités sans avoir besoin d'approbations des magasins d'applications, tout en respectant les directives d'Apple et d'Android. Cela garantit que votre application reste sécurisée et à jour sans effort.
 :::
 
-::: faq
+:::faq
 ### Quels sont les meilleurs outils et pratiques pour surveiller et gérer la sécurité de l'API dans mon application ?
 
 Pour une gestion efficace de la sécurité de l'API dans votre application, envisagez des outils qui permettent des mises à jour en temps réel, le chiffrement, et une intégration fluide avec les flux de travail de développement. **Capgo** fournit une solution puissante pour les applications Capacitor, permettant aux développeurs de pousser instantanément des mises à jour, des corrections, et de nouvelles fonctionnalités sans attendre les approbations des magasins d'applications. Cela garantit que votre application reste conforme et à jour.

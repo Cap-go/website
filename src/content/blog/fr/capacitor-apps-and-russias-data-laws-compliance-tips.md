@@ -33,7 +33,7 @@ Your app's privacy policy should be available in Russian, with clear details abo
 Have a qualified legal expert review your policy to ensure full compliance with both app store guidelines and Russian regulations.
 :::
 
-::: faq
+:::faq
 ### What are the best practices for handling updates in the Russian market?
 
 For effective update management in Russia:
@@ -56,7 +56,7 @@ Pour garantir que la politique de confidentialité de votre application soit con
 Si votre application utilise des mises à jour en direct ou des fonctionnalités similaires, assurez-vous que ces mises à jour respectent également les exigences de localisation des données. Des outils comme Capgo peuvent vous aider en fournissant des mises à jour sécurisées en temps réel tout en maintenant la conformité avec les réglementations russes et les politiques des stores d'applications. Consultez toujours un expert juridique familier avec les lois russes sur les données pour vérifier la conformité de votre application.
 :::
 
-::: faq
+:::faq
 ### Comment puis-je m'assurer que mon application Capacitor reste conforme aux lois russes sur la localisation des données au fil du temps ?
 
 Pour maintenir la conformité avec les lois russes sur la localisation des données, il est essentiel d'examiner régulièrement les pratiques de stockage et de traitement des données de votre application. Assurez-vous que toutes les données personnelles des utilisateurs russes sont stockées sur des serveurs situés en Russie, comme l'exigent les réglementations locales. Effectuez des audits périodiques pour vérifier la conformité et combler les éventuelles lacunes.

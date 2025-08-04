@@ -428,7 +428,7 @@ Während sich die Capacitor-Technologie weiterentwickelt, wird die Aufrechterhal
 
 ## Häufig gestellte Fragen
 
-::: faq
+:::faq
 ### Wie verbessert die bidirektionale Kommunikation die Verbindung zwischen Web- und Native-Schichten in Capacitor-Apps?
 
 Die bidirektionale Kommunikation in Capacitor-Apps optimiert die Interaktion zwischen Web- und Native-Schichten und ermöglicht eine nahtlose Integration von Funktionen und Echtzeit-Updates. Dieser Ansatz ermöglicht es Entwicklern, Fehlerbehebungen, Verbesserungen und neue Funktionen direkt an Benutzer zu übermitteln, ohne auf App-Store-Genehmigungen warten zu müssen.
@@ -436,7 +436,7 @@ Die bidirektionale Kommunikation in Capacitor-Apps optimiert die Interaktion zwi
 Durch die Nutzung dieser Funktionalität können Entwickler die App-Leistung verbessern, schneller auf Benutzerfeedback reagieren und einen Wettbewerbsvorteil aufrechterhalten. Tools wie Capgo können diesen Prozess durch Live-Updates, Ende-zu-Ende-Verschlüsselung und Einhaltung von Plattformanforderungen weiter verbessern und einen reibungslosen und effizienten Entwicklungsworkflow gewährleisten.
 :::
 
-::: faq
+:::faq
 ### Was sind bewährte Praktiken für die Erstellung benutzerdefinierter Plugins zur Leistungsverbesserung in Capacitor-Apps?
 
 Die Erstellung benutzerdefinierter Plugins in Capacitor-Apps kann die Leistung erheblich verbessern und die Funktionalität an die spezifischen Bedürfnisse Ihrer App anpassen. Hier sind einige bewährte Praktiken:
@@ -448,7 +448,7 @@ Die Erstellung benutzerdefinierter Plugins in Capacitor-Apps kann die Leistung e
 Wenn Sie Updates optimieren und eine nahtlose App-Leistung aufrechterhalten möchten, können Plattformen wie Capgo helfen. Capgo ermöglicht es Ihnen, Updates sofort zu pushen und stellt sicher, dass Ihre Plugins und App ohne App-Store-Genehmigungen optimiert bleiben.
 :::
 
-::: faq
+:::faq
 ### Wie können Entwickler Daten bei der Aktivierung der bidirektionalen Kommunikation zwischen Web- und Native-Schichten in Capacitor-Apps sichern?
 
 Die Gewährleistung der Datensicherheit während der bidirektionalen Kommunikation in Capacitor-Apps erfordert die Implementierung wichtiger bewährter Praktiken. Verwenden Sie **Ende-zu-Ende-Verschlüsselung**, um sensible Daten beim Transport zwischen Web- und Native-Schichten zu schützen. Validieren und bereinigen Sie außerdem alle Eingaben, um Schwachstellen wie Injection-Angriffe zu verhindern.

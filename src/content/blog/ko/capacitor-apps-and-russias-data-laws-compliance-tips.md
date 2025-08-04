@@ -29,7 +29,7 @@ A compliant privacy policy must:
 Use Capgo's self-hosted solution to maintain control over where user data is stored and processed.
 :::
 
-::: faq
+:::faq
 ### What are the best practices for updating my app while maintaining compliance?
 
 To maintain compliance during updates:
@@ -43,7 +43,7 @@ To maintain compliance during updates:
 These practices help ensure smooth updates while meeting legal requirements.
 :::
 
-::: faq
+:::faq
 ### How do I implement proper user consent mechanisms in my app?
 
 To implement proper consent:
@@ -62,7 +62,7 @@ Regular audits help ensure consent mechanisms remain compliant.
 앱에서 실시간 업데이트나 유사한 기능을 사용하는 경우, 이러한 업데이트도 데이터 현지화 요구사항을 준수하도록 해야 합니다. Capgo와 같은 도구는 러시아 규정과 앱스토어 정책을 모두 준수하면서 안전한 실시간 업데이트를 제공하는 데 도움이 될 수 있습니다. 앱의 규정 준수를 확인하기 위해 항상 러시아 데이터법에 익숙한 법률 전문가와 상담하십시오.
 :::
 
-::: faq
+:::faq
 ### 시간이 지남에 따라 Capacitor 앱이 러시아 데이터 현지화법을 준수하도록 보장하려면 어떻게 해야 하나요?
 
 러시아의 데이터 현지화법을 준수하기 위해서는 앱의 데이터 저장 및 처리 관행을 정기적으로 검토하는 것이 필수적입니다. 현지 규정에서 요구하는 대로 러시아 사용자의 개인 데이터가 러시아 내에 위치한 서버에 저장되도록 해야 합니다. 정기적인 감사를 실시하여 규정 준수를 확인하고 잠재적인 문제를 해결하십시오.

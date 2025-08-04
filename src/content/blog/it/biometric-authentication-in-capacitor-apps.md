@@ -242,7 +242,7 @@ Segui questi passi per integrare l'autenticazione biometrica nella tua app:
 
 ## FAQ
 
-::: faq
+:::faq
 ### Quali sono le differenze tra i plugin biometrici per Capacitor e come posso selezionare il migliore per la mia app?
 
 Quando scegli un plugin biometrico per la tua app Capacitor, è cruciale allineare la scelta con i requisiti specifici del tuo progetto. Considera fattori come la **compatibilità della piattaforma** (se hai bisogno di supporto per iOS, Android o entrambi), quanto è semplice il processo di integrazione e se il plugin supporta metodi biometrici avanzati come **Face ID** o **autenticazione tramite impronta digitale**.
@@ -250,7 +250,7 @@ Quando scegli un plugin biometrico per la tua app Capacitor, è cruciale allinea
 Sebbene questa guida si concentri sull'implementazione dell'autenticazione biometrica nelle [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), strumenti come **Capgo** possono giocare un ruolo prezioso. Ti permettono di distribuire aggiornamenti in tempo reale alla tua app senza bisogno di approvazioni degli app store. Questo significa che la tua app può rimanere aggiornata con le ultime funzionalità di sicurezza, inclusi gli aggiornamenti biometrici, rimanendo conforme agli standard sia Apple che Android.
 :::
 
-::: faq
+:::faq
 ### Come posso assicurarmi che l'autenticazione biometrica nella mia app Capacitor soddisfi gli standard di sicurezza e le linee guida degli app store?
 
 Per assicurarti che l'autenticazione biometrica nella tua app Capacitor soddisfi gli standard di sicurezza attuali e le regole degli app store, attieniti a queste pratiche chiave:
@@ -262,7 +262,7 @@ Per assicurarti che l'autenticazione biometrica nella tua app Capacitor soddisfi
 Utilizzare un servizio di aggiornamento live come **Capgo** può rendere questo processo più fluido. Ti permette di distribuire aggiornamenti di sicurezza o miglioramenti alla tua app istantaneamente, evitando i ritardi di approvazione degli app store. Questo mantiene la tua app sicura, conforme e aggiornata con le policy Apple e Android.
 :::
 
-::: faq
+:::faq
 ### Quali sfide potrebbero affrontare gli sviluppatori quando integrano l'autenticazione biometrica nelle app Capacitor e come possono superarle?
 
 L'implementazione dell'autenticazione biometrica nelle app Capacitor presenta le sue sfide. Queste possono includere garantire la compatibilità tra dispositivi, gestire efficacemente i permessi degli utenti e gestire in modo sicuro i dati sensibili. Ecco come puoi affrontare questi problemi:

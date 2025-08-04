@@ -173,13 +173,13 @@ Integrieren Sie Funktionen wie Ende-zu-Ende-Verschlüsselung, CI/CD-Pipelines un
 
 ## FAQs
 
-::: faq
+:::faq
 ### Wie kann ich ein Update in meiner Capacitor-App zurücksetzen, wenn ein Versionskonflikt auftritt?
 
 Leider bietet der Artikel keine spezifischen Anleitungen zum Zurücksetzen von Updates im Falle von Versionskonflikten. Für bewährte Verfahren sollten Sie in Betracht ziehen, eine stabile Baseline-Version Ihrer App aufrechtzuerhalten und Updates gründlich zu testen, bevor Sie sie bereitstellen. Tools wie **Capgo** können auch helfen, das [Update-Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) zu optimieren, indem sie Funktionen wie Echtzeit-Updates und Benutzereinweisung anbieten, um potenzielle Konflikte effektiv zu mildern.
 :::
 
-::: faq
+:::faq
 ### Wie kann ich sicherstellen, dass alle Benutzer die neuesten Updates für meine App erhalten, ohne auf Versionskonflikte zu stoßen?
 
 Um Versionskonflikte zu vermeiden und sicherzustellen, dass alle Benutzer die neuesten Updates erhalten, sollten Sie in Erwägung ziehen, eine Live-Update-Lösung wie **Capgo** zu verwenden. Damit können Sie Updates, Fehlerbehebungen und neue Funktionen sofort bereitstellen, ohne auf Genehmigungen im App Store zu warten, was Ihnen hilft, eine konsistente App-Version über Ihre Benutzerbasis hinweg aufrechtzuerhalten.
@@ -187,7 +187,7 @@ Um Versionskonflikte zu vermeiden und sicherzustellen, dass alle Benutzer die ne
 Mit Funktionen wie gezielter Benutzerzuweisung können Sie Updates an bestimmte Gruppen ausrollen oder Änderungen schrittweise veröffentlichen, was das Risiko von Problemen verringert. Capgo unterstützt auch Echtzeit-Updates und entspricht den Richtlinien von Apple und Android, was es zu einer zuverlässigen Wahl für die effiziente Verwaltung von App-Updates macht.
 :::
 
-::: faq
+:::faq
 ### Wie kann ich Updates plattformübergreifend testen, um Versionskonflikte in meiner Capacitor-App zu verhindern?
 
 Um Versionskonflikte beim Testen von Updates in Ihrer Capacitor-App zu vermeiden, ist es wichtig, einige bewährte Verfahren zu befolgen:

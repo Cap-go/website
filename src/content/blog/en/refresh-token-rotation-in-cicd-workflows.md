@@ -259,7 +259,7 @@ For a more streamlined process, tools like Capgo incorporate token rotation dire
 
 ## FAQs
 
-::: faq
+:::faq
 ### What is refresh token rotation, and how does it improve security in CI/CD workflows?
 
 Refresh token rotation is a security feature where a fresh refresh token is issued each time the previous one is used. This method helps reduce the risk of token misuse since any compromised token becomes invalid after being rotated.
@@ -267,7 +267,7 @@ Refresh token rotation is a security feature where a fresh refresh token is issu
 In CI/CD workflows, using refresh token rotation adds an extra layer of protection for automated tasks like [app updates](https://capgo.app/plugins/capacitor-updater/) or deployments. It limits the exposure of long-lasting tokens, strengthening the security of your pipeline. Tools such as Capgo can integrate smoothly into CI/CD systems, providing secure and automated updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) while adhering to platform guidelines.
 :::
 
-::: faq
+:::faq
 ### How can I implement refresh token rotation in CI/CD pipelines to ensure secure and uninterrupted deployments?
 
 Implementing refresh token rotation in your CI/CD pipelines is a smart move to keep your deployments secure while running smoothly. Here are some practical tips to get it right:
@@ -279,7 +279,7 @@ Implementing refresh token rotation in your CI/CD pipelines is a smart move to k
 If you're developing with Capacitor apps, **Capgo** simplifies CI/CD integration. It ensures managing live app updates is both secure and efficient. Pairing token rotation with tools like Capgo can make your deployment process safer and more streamlined.
 :::
 
-::: faq
+:::faq
 ### How does Capgo ensure secure token rotation and CI/CD integration while remaining cost-effective compared to industry standards?
 
 Capgo provides a secure and efficient way to handle token rotation and integrate CI/CD workflows, aligning with industry standards while emphasizing automation. By weaving refresh token rotation into CI/CD processes, Capgo ensures developers can keep app updates secure without compromising on ease of use.

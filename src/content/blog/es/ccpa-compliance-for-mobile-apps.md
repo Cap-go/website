@@ -277,7 +277,7 @@ Para construir sobre estas prácticas, comienza por:
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores de aplicaciones móviles determinar si su aplicación debe cumplir con la Ley de Privacidad del Consumidor de California (CCPA)?
 
 Para determinar si tu aplicación móvil debe cumplir con la **Ley de Privacidad del Consumidor de California (CCPA)**, considera los siguientes factores clave:
@@ -291,7 +291,7 @@ Si tu aplicación o negocio cumple con cualquiera de estos criterios, probableme
 Para desarrolladores que usan **Capgo**, su solución de actualización en vivo para aplicaciones Capacitor asegura actualizaciones fluidas mientras mantiene el cumplimiento con las pautas de Apple y Android, lo cual puede apoyar la estrategia general de cumplimiento de tu aplicación.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden las aplicaciones móviles asegurar el cumplimiento con la Ley de Privacidad del Consumidor de California (CCPA) mientras protegen los datos de los usuarios?
 
 Para cumplir con la **Ley de Privacidad del Consumidor de California (CCPA)** y proteger los datos de los usuarios, las aplicaciones móviles deben enfocarse en algunas prácticas clave:
@@ -303,7 +303,7 @@ Para cumplir con la **Ley de Privacidad del Consumidor de California (CCPA)** y 
 Adicionalmente, herramientas como **Capgo** pueden mejorar los esfuerzos de cumplimiento de tu aplicación permitiendo actualizaciones instantáneas para abordar vulnerabilidades de seguridad o cambios relacionados con la privacidad sin requerir aprobaciones de la tienda de aplicaciones. Esto asegura que tu aplicación se mantenga en cumplimiento en tiempo real mientras ofrece experiencias de usuario fluidas. Siempre consulta con expertos legales para asegurar el cumplimiento total con los requisitos de CCPA.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo impacta la CCPA el uso de servicios de terceros por parte de los desarrolladores de aplicaciones móviles?
 
 La Ley de Privacidad del Consumidor de California (CCPA) requiere que los desarrolladores de aplicaciones móviles aseguren que cualquier servicio de terceros que utilicen cumpla con sus regulaciones de privacidad de datos. Esto significa que los desarrolladores deben evaluar cuidadosamente cómo los proveedores de terceros manejan los datos de usuario, asegurando que sigan las pautas de CCPA para la recolección, almacenamiento y compartición de datos. Además, los desarrolladores deben establecer acuerdos claros con estos proveedores para proteger los derechos de los usuarios, como la capacidad de acceder, eliminar u optar por no participar en la recolección de datos.

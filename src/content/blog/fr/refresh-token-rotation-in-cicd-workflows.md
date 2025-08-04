@@ -262,7 +262,7 @@ Pour un processus plus rationalisé, des outils comme Capgo intègrent la rotati
 
 ## FAQ
 
-::: faq
+:::faq
 ### Qu'est-ce que la rotation des jetons d'actualisation et comment améliore-t-elle la sécurité dans les workflows CI/CD ?
 
 La rotation des jetons d'actualisation est une fonctionnalité de sécurité où un nouveau jeton d'actualisation est émis chaque fois que le précédent est utilisé. Cette méthode aide à réduire le risque d'usage abusif des jetons, puisque tout jeton compromis devient invalide après avoir été roté.
@@ -270,7 +270,7 @@ La rotation des jetons d'actualisation est une fonctionnalité de sécurité où
 Dans les workflows CI/CD, l'utilisation de la rotation des jetons d'actualisation ajoute une couche supplémentaire de protection pour les tâches automatisées comme les [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) ou les déploiements. Elle limite l'exposition des jetons de longue durée, renforçant ainsi la sécurité de votre pipeline. Des outils tels que Capgo peuvent s'intégrer parfaitement dans les systèmes CI/CD, fournissant des mises à jour sécurisées et automatisées pour les [applications Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) tout en respectant les directives de la plateforme.
 :::
 
-::: faq
+:::faq
 ### Comment puis-je mettre en œuvre la rotation des jetons d'actualisation dans les pipelines CI/CD pour garantir des déploiements sécurisés et ininterrompus ?
 
 La mise en œuvre de la rotation des jetons d'actualisation dans vos pipelines CI/CD est un choix judicieux pour maintenir la sécurité de vos déploiements tout en assurant leur bon fonctionnement. Voici quelques conseils pratiques pour bien procéder :
@@ -282,7 +282,7 @@ La mise en œuvre de la rotation des jetons d'actualisation dans vos pipelines C
 Si vous développez avec des applications Capacitor, **Capgo** simplifie l'intégration CI/CD. Il garantit que la gestion des mises à jour d'applications en direct est à la fois sécurisée et efficace. Associer la rotation des jetons avec des outils comme Capgo peut rendre votre processus de déploiement plus sûr et plus rationalisé.
 :::
 
-::: faq
+:::faq
 ### Comment Capgo assure-t-il une rotation sécurisée des jetons et une intégration CI/CD tout en restant rentable par rapport aux normes de l'industrie ?
 
 Capgo propose une manière sécurisée et efficace de gérer la rotation des jetons et d'intégrer les workflows CI/CD, tout en s'alignant sur les normes de l'industrie et en mettant l'accent sur l'automatisation. En intégrant la rotation des jetons d'actualisation dans les processus CI/CD, Capgo s'assure que les développeurs peuvent maintenir la sécurité des mises à jour des applications sans compromettre la facilité d'utilisation.

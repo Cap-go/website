@@ -172,13 +172,13 @@ Integra características como cifrado de extremo a extremo, pipelines de CI/CD y
 
 ## Preguntas frecuentes
 
-::: faq
+:::faq
 ### ¿Cómo puedo revertir una actualización en mi aplicación Capacitor si ocurre un conflicto de versiones?
 
 Desafortunadamente, el artículo no proporciona una guía específica sobre cómo revertir actualizaciones en caso de conflictos de versiones. Como mejores prácticas, considera mantener una versión base estable de tu aplicación y probar exhaustivamente las actualizaciones antes del despliegue. Herramientas como **Capgo** también pueden ayudar a optimizar la [gestión de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/manual-update/) ofreciendo características como actualizaciones en tiempo real y asignación de usuarios, ayudándote a mitigar conflictos potenciales de manera efectiva.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo puedo asegurarme de que todos los usuarios reciban las últimas actualizaciones de mi aplicación sin encontrar conflictos de versiones?
 
 Para evitar conflictos de versiones y asegurar que todos los usuarios reciban las últimas actualizaciones, considera usar una solución de actualización en vivo como **Capgo**. Te permite enviar instantáneamente actualizaciones, correcciones y nuevas características sin esperar aprobaciones de las tiendas de aplicaciones, ayudándote a mantener una versión consistente de la aplicación en toda tu base de usuarios.
@@ -186,7 +186,7 @@ Para evitar conflictos de versiones y asegurar que todos los usuarios reciban la
 Con características como la asignación dirigida de usuarios, puedes implementar actualizaciones a grupos específicos o lanzar cambios gradualmente, reduciendo el riesgo de problemas. Capgo también soporta actualizaciones en tiempo real y cumple con las pautas de Apple y Android, haciéndola una opción confiable para gestionar actualizaciones de aplicaciones eficientemente.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo puedo probar actualizaciones en todas las plataformas para prevenir conflictos de versiones en mi aplicación Capacitor?
 
 Para evitar conflictos de versiones al probar actualizaciones en tu aplicación Capacitor, es esencial seguir algunas mejores prácticas:

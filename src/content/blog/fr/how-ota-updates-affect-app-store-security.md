@@ -213,7 +213,7 @@ Les plateformes OTA modernes prouvent que sécurité et efficacité peuvent alle
 
 ## FAQs
 
-::: faq
+:::faq
 ### Quels risques les mises à jour OTA posent-elles pour la sécurité des applications, et comment les développeurs peuvent-ils y faire face ?
 
 Les mises à jour OTA (Over-The-Air) peuvent exposer les applications à des vulnérabilités potentielles, comme l'accès non autorisé ou l'intégrité compromise des données, en particulier si les mises à jour ne sont pas correctement sécurisées. Ces risques peuvent impacter la conformité aux app stores et la confiance des utilisateurs.
@@ -221,7 +221,7 @@ Les mises à jour OTA (Over-The-Air) peuvent exposer les applications à des vul
 Pour atténuer ces risques, les développeurs doivent mettre en œuvre des mesures de sécurité robustes comme le **chiffrement de bout en bout**, des tests réguliers et des pratiques de déploiement sécurisées. Des outils comme Capgo peuvent aider à simplifier ce processus en permettant des mises à jour instantanées pour les applications Capacitor sans nécessiter d'approbations des app stores. Les fonctionnalités de Capgo, comme l'intégration CI/CD transparente et l'attribution de mises à jour spécifiques aux utilisateurs, garantissent que les mises à jour sont à la fois sécurisées et conformes aux normes Apple et Android.
 :::
 
-::: faq
+:::faq
 ### Comment les mises à jour OTA aident-elles à maintenir la conformité de sécurité des app stores, et que se passe-t-il si la conformité n'est pas respectée ?
 
 Les mises à jour OTA (Over-The-Air) jouent un rôle crucial dans le maintien de la conformité de sécurité des app stores en permettant aux développeurs de livrer rapidement des mises à jour, des corrections de bugs et de nouvelles fonctionnalités sans attendre les longs processus d'approbation des app stores. Cela garantit que les applications restent sécurisées et à jour avec les dernières exigences d'Apple et Android.
@@ -229,7 +229,7 @@ Les mises à jour OTA (Over-The-Air) jouent un rôle crucial dans le maintien de
 Le non-respect des normes de sécurité des app stores peut entraîner de graves conséquences, comme le retrait des applications du store, la perte de confiance des utilisateurs, ou même des sanctions légales. Des solutions comme **Capgo** facilitent la gestion des mises à jour OTA tout en respectant toutes les exigences de conformité, offrant des fonctionnalités comme le chiffrement de bout en bout et une intégration transparente avec les flux de développement.
 :::
 
-::: faq
+:::faq
 ### Quelles fonctionnalités clés les développeurs devraient-ils prioriser dans une plateforme OTA pour garantir des mises à jour d'applications sécurisées et fluides ?
 
 Pour garantir des mises à jour d'applications sécurisées et fluides, les développeurs doivent prioriser des fonctionnalités comme le **chiffrement de bout en bout**, **l'intégration avec les pipelines CI/CD**, et la capacité d'attribuer des mises à jour à des groupes d'utilisateurs spécifiques. Ces capacités aident à protéger les données des applications, simplifier le processus de mise à jour et offrir un meilleur contrôle sur qui reçoit les mises à jour.

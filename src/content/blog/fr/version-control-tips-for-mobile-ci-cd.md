@@ -305,7 +305,7 @@ Pour l'avenir, les équipes qui adoptent des pratiques disciplinées de contrôl
 
 ## FAQ
 
-::: faq
+:::faq
 ### Quelle est la différence entre les stratégies de branches par fonctionnalité, par version et trunk-based dans le CI/CD mobile ?
 
 Les stratégies de branches sont une partie essentielle des flux de travail CI/CD mobiles, aidant les équipes à gérer efficacement le code et à rationaliser le processus de déploiement. Voici un aperçu plus détaillé de quelques approches courantes :
@@ -320,7 +320,7 @@ Les stratégies de branches sont une partie essentielle des flux de travail CI/C
 Chacune de ces stratégies a ses avantages, et le meilleur choix dépend du flux de travail et des besoins de votre équipe. Pour les équipes travaillant avec des applications Capacitor, des outils comme **Capgo** peuvent améliorer votre processus CI/CD en permettant des mises à jour instantanées en direct. Cela élimine le besoin d'approbations des app stores et assure une intégration fluide avec vos pratiques de contrôle de version.
 :::
 
-::: faq
+:::faq
 ### Comment Capgo améliore-t-il les flux de travail CI/CD d'applications mobiles, et quels avantages offre-t-il par rapport aux approches traditionnelles ?
 
 Capgo simplifie les flux de travail CI/CD mobiles en offrant des **mises à jour over-the-air (OTA) instantanées**. Cela signifie que les développeurs peuvent contourner les contraintes des soumissions constantes aux app stores, livrant les corrections de bugs, nouvelles fonctionnalités et mises à jour beaucoup plus rapidement - tout en respectant les directives d'Apple et Android.
@@ -328,7 +328,7 @@ Capgo simplifie les flux de travail CI/CD mobiles en offrant des **mises à jour
 Contrairement aux approches traditionnelles, Capgo se distingue par des avantages comme un temps d'arrêt minimisé, une expérience utilisateur plus fluide et une intégration sans effort dans les pipelines CI/CD existants. Les mises à jour peuvent être déployées de manière sécurisée et en temps réel, rendant la gestion des applications plus efficace et adaptable. Avec des fonctionnalités avancées comme le chiffrement de bout en bout et des mises à jour adaptées à des utilisateurs spécifiques, Capgo assure à la fois la sécurité et la personnalisation du processus de mise à jour.
 :::
 
-::: faq
+:::faq
 ### Comment puis-je assurer la sécurité et permettre des retours en arrière rapides dans un pipeline CI/CD mobile ?
 
 Pour maintenir votre pipeline CI/CD mobile sécurisé et préparé pour des retours en arrière rapides, concentrez-vous sur des **pratiques solides de contrôle de version**. Cela signifie maintenir des notes de version détaillées, utiliser des feature flags pour contrôler les déploiements de fonctionnalités et exécuter des tests automatisés pour identifier les vulnérabilités avant le déploiement.

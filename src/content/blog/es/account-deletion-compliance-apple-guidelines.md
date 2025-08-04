@@ -218,7 +218,7 @@ Herramientas como Capgo pueden simplificar las actualizaciones permitiendo ajust
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores asegurarse de que su aplicación cumpla con los requisitos de eliminación de cuenta de Apple?
 
 Para cumplir con las pautas de eliminación de cuenta de Apple, los desarrolladores deben ofrecer a los usuarios una forma simple y clara de eliminar sus cuentas directamente dentro de la aplicación. El proceso debe ser fácil de encontrar, sencillo de seguir y no debe requerir que los usuarios visiten sitios web externos o se comuniquen con equipos de soporte.
@@ -226,7 +226,7 @@ Para cumplir con las pautas de eliminación de cuenta de Apple, los desarrollado
 Para aquellos que usan Capacitor, herramientas como **Capgo** pueden facilitar el cumplimiento. Capgo permite actualizaciones en tiempo real de tu aplicación, lo que significa que puedes implementar cambios rápidamente - como ajustes en la función de eliminación de cuenta - sin esperar aprobaciones de la tienda de aplicaciones. Al garantizar el cumplimiento, no solo reduces el riesgo de rechazos de aplicaciones sino que también fortaleces la confianza del usuario.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores garantizar la eliminación adecuada de datos en todas las plataformas mientras evitan problemas de sincronización?
 
 Gestionar la eliminación de datos en varias plataformas no siempre es sencillo, especialmente cuando se debe cumplir con pautas específicas como las establecidas por Apple. Para abordar esto, los desarrolladores necesitan establecer sistemas backend confiables que procesen las solicitudes de eliminación de datos de manera uniforme en todas las plataformas integradas. Esto a menudo implica utilizar APIs o servicios que ejecuten eliminaciones simultáneamente, asegurando consistencia y previniendo desajustes.
@@ -234,7 +234,7 @@ Gestionar la eliminación de datos en varias plataformas no siempre es sencillo,
 Para aplicaciones creadas con Capacitor, herramientas como **Capgo** pueden simplificar esta tarea. Capgo admite actualizaciones en tiempo real y se alinea con los requisitos de Apple, ayudando a los desarrolladores a gestionar actualizaciones y funciones de la aplicación mientras cumplen con los estándares de eliminación de datos. Al usar herramientas que garantizan una sincronización fluida, los desarrolladores pueden minimizar errores y construir una mayor confianza del usuario.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo pueden los desarrolladores de aplicaciones asegurar que sus aplicaciones cumplan con los requisitos de eliminación de cuenta de Apple?
 
 ## Asegurando el Cumplimiento de los Requisitos de Eliminación de Cuenta de Apple

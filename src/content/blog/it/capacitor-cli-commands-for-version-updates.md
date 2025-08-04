@@ -337,7 +337,7 @@ Noma usebenza ku-app encane noma unweba ukufakwa okukhulu, ukuhlanganisa i-Capac
 
 ## FAQs
 
-::: faq
+:::faq
 ### Yiziphi izinselelo engizohlangabezana nazo uma ngivuselela i-app yami nge-Capacitor CLI, futhi ngingazixazulula kanjani?
 
 Uma uvuselela i-app yakho nge-Capacitor CLI, ungase uhlangabezane nezithiyo ezithile. Izinselelo ezivamile zifaka **ukungqubuzana kwezidingo**, **izinguquko ezibuhlungu kumapulagi**, noma **izinkinga zokuhlela ezimbalwa ezithile zeplatifomu**. Lezi zinkinga zivamile ukuvela ngenxa yeziqu ezahlukahlukene phakathi kwezinguqulo ze-Capacitor noma izibuyekezo kumapulagi wesithathu.
@@ -351,7 +351,7 @@ Nansi indlela ongabhekana ngayo nalezi zinkinga:
 Ukuze uthole okuhlangenwe nakho okubuyekeza okukhanya kakhulu, ungase ufune ukuzama amathuluzi afana _Capgo_. Lolu thuluzi likuvumela ukuthi uphumeze izixazululo nezici ezintsha ngqo kubasebenzisi bakho ngaphandle kokudingeka izivumelelo zezokuthengisa. Kuyindaba enhle yokugcina i-app yakho ibuyekeziwe ngaphandle kwesikhathi sokuphumula.
 :::
 
-::: faq
+:::faq
 ### I-Capgo ilula kanjani izibuyekezo ze-app, futhi yiziphi izici zayo eziphawulekayo?
 
 I-Capgo iyenza lula indlela abathuthukisi abahambisa ngayo [izibuyekezo ze-app](https://capgo.app/plugins/capacitor-updater/) ngokubavumela ukuthi bathumele izinguquko, izixazululo, nezici ezintsha ngqo kubasebenzisi - bezodlula isidingo sokuthola izivumelelo ze-app store. Ngalokhu, abasebenzisi bakho bangathokozela izibuyekezo zakamuva ngemizuzu nje, kudala okuhlangenwe nakho okungcono nokuphumelelayo.
@@ -366,7 +366,7 @@ Nansi okwenza i-Capgo ibonakale:
 I-Capgo yokwazi ifaka yonke imithombo evulekile futhi ihambisana nezindinganiso zika-Apple no-Android, inikeza isixazululo esithembekile sokubuyekezwa [kwesikhathi sangempela](https://capgo.app/blog/live-updates-for-flutter-app/).
 :::
 
-::: faq
+:::faq
 ### Ngendlela engiyicela kanjani ukuba izilungiselelo zami zihambisane nezinguqulo ezintsha ze-Capacitor ngaphambi kokuvuselela?
 
 Ngaphambi kokwenza ukwenziwa kwezibuyekezo ku-Capacitor, kubalulekile ukuba uqinisekise ukuthi izilungiselelo zakho zikhona ukubhekana nezibuyekezo. Qala ngokuhlola imibhalo noma i-repository ye-plugin ukuze ubone uma kukhona izidingo ezithile phakathi kwezinguqulo. Iziphakamiso eziningi zikhombisa ngokucacile ukuthi izinguqulo ze-Capacitor ezifanele, ngakho leli zinyathelo lingakusiza ukusindisa ezinkingeni ezingadingekile.

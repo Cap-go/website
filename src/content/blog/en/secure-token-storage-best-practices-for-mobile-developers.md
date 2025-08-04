@@ -221,7 +221,7 @@ Your users are entrusting you with their data - make sure your token storage pra
 
 ## FAQs
 
-::: faq
+:::faq
 ### Why should mobile developers use iOS Keychain and Android Keystore for secure token storage?
 
 Using platform-native secure storage, such as iOS Keychain and Android Keystore, plays a crucial role in safeguarding sensitive data within mobile apps. These tools come with **[built-in encryption](https://capgo.app/docs/cli/migrations/encryption/)**, ensuring that tokens remain protected from unauthorized access. On top of that, they incorporate **user authentication**, requiring users to confirm their identity before accessing stored data. This adds an extra layer of security.
@@ -229,7 +229,7 @@ Using platform-native secure storage, such as iOS Keychain and Android Keystore,
 One of their standout features is that cryptographic keys are **non-exportable**. In other words, these keys cannot be removed from the device, which significantly lowers the risk of them being compromised. Because these systems are designed to integrate seamlessly with their respective platforms, developers can implement them with ease, avoiding the hassle of handling complex encryption processes manually. Leveraging these tools not only strengthens app security but also helps developers meet **modern security standards** and follow **industry-recommended practices**.
 :::
 
-::: faq
+:::faq
 ### What are the best practices for securely managing token lifecycles in mobile apps?
 
 To handle token lifecycles securely in mobile apps, developers should stick to a few essential practices. Start by using **short-lived tokens**, such as those with a 15-minute expiration. This minimizes the window of opportunity for misuse if a token is compromised. To maintain user convenience without sacrificing security, implement **refresh tokens**. These allow new tokens to be issued without forcing users to log in repeatedly.
@@ -239,7 +239,7 @@ Proper storage of tokens is critical to prevent unauthorized access. Always rely
 By integrating these practices, developers can enhance the security of token management in mobile applications and protect users from potential vulnerabilities.
 :::
 
-::: faq
+:::faq
 ### What challenges can arise with custom encryption for token storage, and when should it be considered over native solutions?
 
 When it comes to storing tokens in mobile apps, using custom encryption can be a double-edged sword. While it might seem like a tailored solution offers more control, it often brings added complexity, opens the door to potential security gaps, and demands ongoing maintenance to keep up with new threats. Unlike the built-in encryption tools provided by platforms, custom solutions typically lack extensive testing, detailed documentation, and the backing of a strong developer community. This can make debugging and integration a much bigger headache.

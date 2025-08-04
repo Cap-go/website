@@ -149,7 +149,7 @@ Gracias a sus fortalezas técnicas y ventajas estratégicas, Capgo es una excele
 
 ## Preguntas Frecuentes
 
-::: faq
+:::faq
 ### ¿Por qué debería elegir Capgo sobre Appflow para actualizaciones de aplicaciones por aire (OTA)?
 
 Capgo ofrece una manera rápida y confiable de entregar actualizaciones por aire (OTA) a tus aplicaciones de Capacitor. Con **actualizaciones en tiempo real** que se alinean con las pautas de Apple y Android, puedes implementar correcciones, nuevas funciones y mejoras al instante, omitiendo la necesidad de aprobaciones de la tienda de aplicaciones.
@@ -157,7 +157,7 @@ Capgo ofrece una manera rápida y confiable de entregar actualizaciones por aire
 Lo que distingue a Capgo son sus características destacadas como **cifrado de extremo a extremo** para actualizaciones seguras, **integración fluida de CI/CD** para simplificar tu flujo de trabajo, y **objetivos de actualización específicos para usuarios** para despliegues adaptados. Además, al ser una plataforma de código abierto, proporciona transparencia y flexibilidad para satisfacer las demandas de despliegue de tu aplicación.
 :::
 
-::: faq
+:::faq
 ### ¿Cómo protege Capgo las actualizaciones de aplicaciones en comparación con Appflow?
 
 Capgo prioriza la [seguridad de las actualizaciones de aplicaciones](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) mediante el uso de **cifrado de extremo a extremo**, asegurando que los datos permanezcan protegidos mientras viajan entre desarrolladores y usuarios. Este método protege efectivamente las actualizaciones de accesos no autorizados mientras cumple con los estándares de cumplimiento de la plataforma.
@@ -165,7 +165,7 @@ Capgo prioriza la [seguridad de las actualizaciones de aplicaciones](https://cap
 Por otro lado, aunque Appflow proporciona funcionalidad, carece de las mismas medidas de cifrado avanzado. Esto hace que Capgo sea una opción más fuerte y segura para los desarrolladores enfocados en proteger sus actualizaciones.
 :::
 
-::: faq
+:::faq
 ### ¿Qué deben considerar los desarrolladores al elegir entre las opciones de implementación en la nube y autoalojadas de Capgo?
 
 El artículo no profundiza en los detalles de las opciones de implementación en la nube y autoalojadas de Capgo. Para obtener información más detallada, es una buena idea consultar los recursos oficiales de Capgo o comunicarse directamente con su equipo. Ellos pueden proporcionar orientación que se ajuste a tus necesidades específicas.

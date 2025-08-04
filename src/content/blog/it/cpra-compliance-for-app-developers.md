@@ -198,7 +198,7 @@ Per allinearsi alle normative CPRA e garantire che le necessarie tutele tecniche
 
 ## Domande Frequenti
 
-::: faq
+:::faq
 ### Come possono gli sviluppatori di app soddisfare i requisiti di minimizzazione dei dati del CPRA?
 
 Per soddisfare gli standard di **minimizzazione dei dati** stabiliti dal CPRA, gli sviluppatori di app dovrebbero dare priorità alla raccolta dei soli dati personali essenziali per il funzionamento efficace della loro app. Valutare regolarmente le pratiche di raccolta dati per confermare che rimangano pertinenti e siano strettamente legate allo scopo dell'app.
@@ -208,7 +208,7 @@ Altrettanto importante è stabilire politiche chiare per la conservazione dei da
 Per chi utilizza strumenti come Capgo, gli aggiornamenti in tempo reale possono fare la differenza. Questi strumenti permettono agli sviluppatori di affrontare rapidamente i problemi di conformità implementando correzioni o aggiornamenti senza attendere l'approvazione degli app store, aiutando la tua app a rimanere allineata con le normative sulla privacy.
 :::
 
-::: faq
+:::faq
 ### Come possono gli sviluppatori di app gestire efficientemente le richieste degli utenti per l'accesso, la cancellazione o la correzione dei dati secondo le linee guida CPRA?
 
 Per soddisfare i requisiti del California Privacy Rights Act (CPRA), gli sviluppatori di app devono creare un sistema chiaro e affidabile per gestire le richieste degli utenti riguardanti l'accesso, la cancellazione o la correzione dei dati. **Gli sviluppatori sono tenuti a confermare le richieste entro 10 giorni** e risolverle entro 45 giorni. Se è necessario più tempo, è consentita una proroga fino a 45 giorni, a condizione che l'utente sia informato del ritardo.
@@ -222,7 +222,7 @@ Ecco come gli sviluppatori possono semplificare la conformità:
 Sfruttare strumenti come Capgo, che offrono aggiornamenti in tempo reale, può aiutare gli sviluppatori a risolvere problemi o applicare correzioni relative ai dati degli utenti rapidamente garantendo la conformità con gli standard della piattaforma. Rimanendo al passo con questi requisiti, gli sviluppatori possono non solo soddisfare gli obblighi normativi ma anche costruire una maggiore fiducia con i loro utenti.
 :::
 
-::: faq
+:::faq
 ### Come possono gli sviluppatori di app implementare sistemi efficaci di gestione del consenso per soddisfare i requisiti di conformità CPRA?
 
 Per soddisfare gli standard **CPRA**, gli sviluppatori di app devono dare priorità alla trasparenza e alla semplicità nella gestione del consenso degli utenti. Inizia con banner di consenso chiari e diretti che spiegano lo scopo della raccolta dati e come i dati verranno utilizzati. È essenziale ottenere il consenso esplicito degli utenti prima di elaborare qualsiasi dato.

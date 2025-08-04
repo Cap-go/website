@@ -249,7 +249,7 @@ Finally, test rollback procedures and conduct quarterly security reviews to stay
 
 ## FAQs
 
-::: faq
+:::faq
 ### What are the key security risks of OTA updates in CI/CD pipelines, and how can developers address them?
 
 Over-the-air (OTA) updates in CI/CD pipelines come with their share of risks, including **data interception**, **code tampering**, and **server breaches**. These vulnerabilities can jeopardize app integrity, expose sensitive user information, or even allow unauthorized updates to slip through.
@@ -259,7 +259,7 @@ To address these challenges, developers should focus on key security measures li
 By implementing these strategies, developers can keep OTA updates secure and reliable, ensuring a safer experience for users while meeting industry standards.
 :::
 
-::: faq
+:::faq
 ### How does cryptographic signing protect OTA updates, and what is the role of Public Key Infrastructure (PKI)?
 
 Cryptographic signing plays a crucial role in ensuring OTA updates are secure and trustworthy. By leveraging **Public Key Infrastructure (PKI)**, developers use a private key to sign update packages. Devices receiving these updates then rely on the corresponding public key to confirm two things: the update originates from a trusted source, and it hasn’t been tampered with during transmission.
@@ -267,7 +267,7 @@ Cryptographic signing plays a crucial role in ensuring OTA updates are secure an
 This method effectively blocks unauthorized or malicious updates, protecting both the device's functionality and its security. Integrating PKI into your CI/CD pipeline is an essential measure for maintaining secure OTA updates.
 :::
 
-::: faq
+:::faq
 ### What are the best practices for securing credentials and API keys in a CI/CD pipeline during OTA updates?
 
 To keep credentials and API keys safe in a CI/CD pipeline during OTA updates, here are some key steps to follow:

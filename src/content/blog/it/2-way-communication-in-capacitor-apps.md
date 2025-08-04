@@ -422,7 +422,7 @@ Dados sensíveis são gerenciados com segurança enquanto se movem entre camadas
 
 ## Perguntas Frequentes
 
-::: faq
+:::faq
 ### Como a comunicação em duas vias melhora a conexão entre as camadas web e nativas em aplicativos Capacitor?
 
 A comunicação em duas vias em aplicativos Capacitor simplifica a interação entre camadas web e nativas, permitindo integração sem costura de recursos e atualizações em tempo real. Essa abordagem permite que os desenvolvedores enviem correções, melhorias e novos recursos diretamente aos usuários sem esperar pela aprovação das lojas de aplicativos.
@@ -430,7 +430,7 @@ A comunicação em duas vias em aplicativos Capacitor simplifica a interação e
 Ao aproveitar essa funcionalidade, os desenvolvedores podem melhorar o desempenho do aplicativo, responder mais rapidamente ao feedback dos usuários e manter uma vantagem competitiva. Ferramentas como Capgo podem ainda mais aprimorar esse processo, oferecendo atualizações ao vivo, criptografia de ponta a ponta e conformidade com os requisitos da plataforma, garantindo um fluxo de trabalho de desenvolvimento suave e eficiente.
 :::
 
-::: faq
+:::faq
 ### Quais são algumas boas práticas para criar plugins personalizados para aprimorar o desempenho em aplicativos Capacitor?
 
 Criar plugins personalizados em aplicativos Capacitor pode melhorar significativamente o desempenho e adaptar funcionalidades às necessidades específicas do seu aplicativo. Aqui estão algumas boas práticas a seguir:
@@ -442,7 +442,7 @@ Criar plugins personalizados em aplicativos Capacitor pode melhorar significativ
 Se você está procurando otimizar atualizações e manter o desempenho do aplicativo sem interrupções, plataformas como Capgo podem ajudar. O Capgo permite que você envie atualizações instantaneamente, garantindo que seus plugins e aplicativo permaneçam otimizados sem exigir aprovações das lojas de aplicativos.
 :::
 
-::: faq
+:::faq
 ### Como os desenvolvedores podem garantir a segurança dos dados ao habilitar a comunicação em duas vias entre camadas web e nativas em aplicativos Capacitor?
 
 Garantir a segurança dos dados durante a comunicação em duas vias em aplicativos Capacitor envolve a implementação de práticas recomendadas. Use **criptografia de ponta a ponta** para proteger dados sensíveis enquanto se movem entre as camadas web e nativas. Além disso, valide e sanitize todas as entradas para prevenir vulnerabilidades como ataques de injeção.

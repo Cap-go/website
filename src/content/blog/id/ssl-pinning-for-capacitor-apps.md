@@ -244,7 +244,7 @@ SSL pinning memainkan peran kunci dalam melindungi data pengguna dan mempertahan
 
 ## FAQ
 
-::: faq
+:::faq
 ### Apa risiko yang dapat muncul jika SSL pinning tidak digunakan dalam aplikasi Capacitor?
 
 Jika SSL pinning tidak diterapkan dalam aplikasi Capacitor, aplikasi tersebut menjadi target yang lebih mudah untuk **serangan Man-in-the-Middle (MITM)**. Serangan ini memungkinkan pelaku jahat untuk mencegat dan mengubah data yang mengalir antara aplikasi dan servernya. Ini bisa mengakibatkan pengungkapan informasi sensitif seperti kredensial pengguna atau [kunci API](https://capgo.app/docs/webapp/api-keys/).
@@ -252,7 +252,7 @@ Jika SSL pinning tidak diterapkan dalam aplikasi Capacitor, aplikasi tersebut me
 Selain itu, tanpa SSL pinning, penyerang dapat menggunakan sertifikat palsu atau yang telah dikompromikan untuk menyamar sebagai server tepercaya. Ini meningkatkan kemungkinan terjadinya pelanggaran data. Dengan menerapkan SSL pinning, Anda dapat memastikan komunikasi yang aman dan melindungi pengguna Anda dari risiko ini.
 :::
 
-::: faq
+:::faq
 ### Apa perbedaan utama dalam menerapkan dan memelihara SSL pinning untuk Android dan iOS dalam aplikasi Capacitor?
 
 SSL pinning bekerja sedikit berbeda di Android dan iOS, berkat API unik dan pengaturan keamanan mereka.
@@ -264,7 +264,7 @@ Di **iOS**, SSL pinning biasanya ditangani melalui URLSession atau dengan bantua
 Kedua platform memerlukan perhatian terus-menerus terhadap kedaluwarsa sertifikat dan pembaruan untuk menjaga koneksi API tetap aman. Pengujian reguler sangat penting untuk menangkap masalah kompatibilitas lebih awal dan untuk melindungi terhadap **serangan man-in-the-middle (MITM)**.
 :::
 
-::: faq
+:::faq
 ### Bagaimana saya dapat mengotomatiskan pembaruan sertifikat SSL dan memastikan aplikasi Capacitor saya mematuhi persyaratan keamanan aplikasi toko?
 
 Meskipun artikel ini tidak membahas alat atau strategi untuk mengotomatiskan pembaruan sertifikat SSL atau memastikan kepatuhan dengan pedoman keamanan aplikasi toko, ada langkah-langkah yang dapat Anda ambil untuk meningkatkan keamanan aplikasi Anda. Salah satu langkah efektif adalah menerapkan **SSL pinning** dalam aplikasi Capacitor Anda. Ini membantu melindungi aplikasi Anda dari **serangan man-in-the-middle (MITM)**, yang dapat membahayakan data sensitif.

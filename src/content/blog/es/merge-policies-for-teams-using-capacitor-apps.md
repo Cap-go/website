@@ -35,7 +35,7 @@ Using a dedicated platform like Capgo can help streamline this process with feat
 This ensures your updates reach users quickly and reliably while maintaining app stability.
 :::
 
-::: faq
+:::faq
 ### What's the recommended workflow for managing app updates through a CI/CD pipeline?
 
 The recommended workflow for managing Capacitor app updates through a CI/CD pipeline includes:

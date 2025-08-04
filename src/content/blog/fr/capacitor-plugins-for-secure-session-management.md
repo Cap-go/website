@@ -262,7 +262,7 @@ Gardez à l'esprit que l'**API Preferences de Capacitor** ne doit être utilisé
 
 ## FAQ
 
-::: faq
+:::faq
 ### Quelles fonctionnalités les plugins Capacitor offrent-ils pour la gestion sécurisée des sessions, y compris le chiffrement et l'authentification biométrique ?
 
 Les plugins Capacitor conçus pour la gestion sécurisée des sessions adoptent différentes approches en matière de chiffrement et d'authentification biométrique. Beaucoup s'appuient sur le **chiffrement AES-256** pour protéger les données de session, offrant une forte protection contre les accès non autorisés. En ce qui concerne les [fonctionnalités biométriques](https://capgo.app/plugins/capacitor-native-biometric/), le niveau de support peut varier. Par exemple, le plugin Capacitor Native Biometric s'intègre directement aux systèmes biométriques au niveau de l'appareil comme l'empreinte digitale ou la reconnaissance faciale, ajoutant une couche supplémentaire de protection aux sessions utilisateur.
@@ -270,7 +270,7 @@ Les plugins Capacitor conçus pour la gestion sécurisée des sessions adoptent 
 Capgo va plus loin en combinant le **chiffrement de bout en bout** avec une authentification biométrique fluide. Cette combinaison assure à la fois une sécurité robuste des données et une expérience utilisateur sans friction, ce qui en fait une option remarquable pour les développeurs cherchant à renforcer la sécurité de l'application sans sacrifier l'utilisabilité.
 :::
 
-::: faq
+:::faq
 ### Comment puis-je intégrer de manière sécurisée l'authentification biométrique dans une application Capacitor en utilisant le Plugin de Sécurité Biométrique ?
 
 Pour [intégrer l'authentification biométrique](https://capgo.app/plugins/capacitor-native-biometric/) de manière sécurisée dans une application Capacitor, commencez par exploiter les **fonctionnalités de sécurité intégrées** offertes par les systèmes d'exploitation mobiles, tels que le Keychain iOS et le Keystore Android. Ces systèmes fournissent une protection matérielle pour les données sensibles comme les clés de chiffrement et les jetons de session, garantissant leur sécurité.
@@ -280,7 +280,7 @@ Lors de la configuration de l'authentification biométrique, utilisez la méthod
 Il est crucial d'éviter de coder en dur les secrets directement dans votre application. À la place, chiffrez tous les jetons stockés pour renforcer davantage la sécurité. De plus, des outils comme Capgo peuvent améliorer la gestion sécurisée des sessions en offrant des mises à jour chiffrées en temps réel pour votre application Capacitor.
 :::
 
-::: faq
+:::faq
 ### Comment Capgo maintient-il la sécurité des mises à jour en direct tout en gérant les sessions d'application ?
 
 Capgo priorise la sécurité avec un **chiffrement de bout en bout** pour les mises à jour en direct. Cela signifie que votre bundle d'application est chiffré avant d'être envoyé dans le cloud et n'est déchiffré que sur l'appareil de l'utilisateur, garantissant que vos données restent protégées tout au long du processus.

@@ -235,7 +235,7 @@ Pemeliharaan konsisten, pemantauan real-time yang waspada, dan kemampuan mencabu
 
 ## FAQs
 
-::: faq
+:::faq
 ### Mengapa pencabutan token penting untuk meningkatkan keamanan aplikasi Capacitor?
 
 Pencabutan token adalah langkah keamanan kunci untuk aplikasi Capacitor, memungkinkan pengembang untuk segera membatalkan token akses saat diperlukan. Baik setelah pengguna keluar atau menanggapi masalah keamanan yang terdeteksi, mencabut token memastikan bahwa kredensial yang dikompromikan tidak dapat digunakan kembali. Langkah ini secara signifikan mengurangi kemungkinan akses tidak sah ke data pengguna yang sensitif.
@@ -243,7 +243,7 @@ Pencabutan token adalah langkah keamanan kunci untuk aplikasi Capacitor, memungk
 Hanya mengandalkan kedaluwarsa token dapat meninggalkan celah kerentanan, tetapi pencabutan token mengatasi ancaman **secara real-time**. Pendekatan ini tidak hanya memperkuat perlindungan data tetapi juga selaras dengan harapan keamanan modern. Untuk aplikasi Capacitor, mengintegrasikan pencabutan token adalah langkah penting menuju perlindungan informasi pengguna dan mempertahankan lingkungan aplikasi yang aman.
 :::
 
-::: faq
+:::faq
 ### Bagaimana cara mengimplementasikan pencabutan token yang aman dalam aplikasi Capacitor lalu lintas tinggi?
 
 Untuk memastikan pencabutan token yang aman dalam [aplikasi Capacitor lalu lintas tinggi](https://capgo.app/blog/), mulai dengan menerapkan **token akses berumur pendek**. Token ini mengurangi risiko penyalahgunaan karena cepat kedaluwarsa, membatasi jendela kesempatan bagi penyerang potensial.
@@ -255,7 +255,7 @@ Untuk keamanan tambahan, gunakan **OAuth 2.0**. Framework ini menawarkan alat ya
 Dengan mengadopsi praktik ini, Anda dapat melindungi aplikasi Capacitor Anda dari akses tidak sah sambil memastikan kinerjanya baik, bahkan dalam kondisi lalu lintas tinggi.
 :::
 
-::: faq
+:::faq
 ### Bagaimana cara mengamankan aplikasi Capacitor dan tetap mematuhi persyaratan keamanan app store menggunakan pencabutan token?
 
 Untuk menjaga keamanan aplikasi Capacitor dan sesuai dengan standar keamanan app store, penting untuk menerapkan strategi **pencabutan token** bersama metode autentikasi yang kuat seperti OAuth 2.0 atau OpenID Connect. Langkah-langkah ini melindungi data pengguna sambil memenuhi persyaratan yang ditetapkan oleh Apple dan Google Play.

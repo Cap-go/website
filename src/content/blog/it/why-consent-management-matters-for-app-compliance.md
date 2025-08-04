@@ -203,7 +203,7 @@ Raggiungere la conformità non è un compito una tantum. Richiede aggiornamenti 
 
 ## Domande frequenti
 
-::: faq
+:::faq
 ### Come possono gli sviluppatori di app rimanere conformi alle leggi sulla privacy in evoluzione come GDPR e CCPA?
 
 Per rimanere conformi alle leggi sulla privacy in evoluzione come GDPR e CCPA, gli sviluppatori di app devono dare priorità alla **gestione del consenso degli utenti**. Ciò include l'ottenimento di un consenso chiaro e informato dagli utenti prima di raccogliere o elaborare i loro dati, fornire opzioni per gestire o revocare il consenso e garantire la trasparenza sull'utilizzo dei dati.
@@ -211,7 +211,7 @@ Per rimanere conformi alle leggi sulla privacy in evoluzione come GDPR e CCPA, g
 Per gli sviluppatori che utilizzano app Capacitor, strumenti come **Capgo** possono rendere più facile la conformità. Capgo consente aggiornamenti istantanei alla tua app senza richiedere approvazioni dell'app store, garantendo di poter implementare rapidamente le modifiche per soddisfare i nuovi requisiti di privacy. Con funzionalità come la crittografia end-to-end e gli aggiornamenti in tempo reale, Capgo ti aiuta a mantenere la conformità offrendo un'esperienza utente senza interruzioni.
 :::
 
-::: faq
+:::faq
 ### Come possono le piattaforme di aggiornamento live migliorare la gestione del consenso e la conformità delle app rispetto agli aggiornamenti tradizionali?
 
 Le piattaforme di aggiornamento live come **Capgo** consentono agli sviluppatori di distribuire aggiornamenti, correzioni e nuove funzionalità istantaneamente, evitando il lungo processo di approvazione dell'app store. Questo garantisce che la tua app rimanga conforme alle leggi sulla privacy dei dati in evoluzione mentre affronta rapidamente problemi o implementa nuovi requisiti di consenso.
@@ -219,7 +219,7 @@ Le piattaforme di aggiornamento live come **Capgo** consentono agli sviluppatori
 Con funzionalità come la **crittografia end-to-end**, l'integrazione **CI/CD** senza interruzioni e gli aggiornamenti in tempo reale, queste piattaforme rendono più facile gestire la conformità mantenendo un flusso di lavoro sicuro ed efficiente. A differenza dei metodi di aggiornamento tradizionali che possono richiedere settimane, gli aggiornamenti live ti permettono di rispondere ai cambiamenti normativi o al feedback degli utenti in pochi minuti, mantenendo la tua app aggiornata e i tuoi utenti protetti.
 :::
 
-::: faq
+:::faq
 ### Come posso documentare e gestire correttamente il consenso degli utenti per garantire la conformità alle leggi sulla privacy dei dati?
 
 Per conformarsi alle leggi sulla privacy dei dati, è essenziale documentare e gestire correttamente il consenso degli utenti. Inizia implementando un **modulo di consenso chiaro e user-friendly** all'interno della tua app che spieghi quali dati vengono raccolti e come verranno utilizzati. Assicurati che gli utenti possano facilmente fornire, modificare o revocare il loro consenso in qualsiasi momento.

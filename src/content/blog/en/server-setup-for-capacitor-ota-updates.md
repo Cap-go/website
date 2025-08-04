@@ -345,7 +345,7 @@ For efficient [update management](https://capgo.app/docs/plugin/cloud-mode/manua
 
 ## FAQs
 
-::: faq
+:::faq
 ### What are the main advantages of using Capacitor OTA updates instead of traditional app store updates?
 
 Capacitor Over-the-Air (OTA) updates offer a **quicker and more adaptable** way to deploy changes than relying solely on app store updates. With OTA, developers can deliver updates directly to users in just 5–10 minutes, skipping the typical app store review process, which often takes 24–72 hours. This means bugs can be fixed, new features can be introduced, and updates can happen more frequently - all while keeping users happy and improving app performance.
@@ -353,7 +353,7 @@ Capacitor Over-the-Air (OTA) updates offer a **quicker and more adaptable** way 
 What’s even better? Updates happen automatically. Users don’t need to go to the app store and manually download anything. This streamlined approach not only saves time but also cuts down on the expenses tied to app store submissions. For developers focused on speed and flexibility, OTA updates are a powerful tool.
 :::
 
-::: faq
+:::faq
 ### How can I securely deploy OTA updates for my Capacitor app?
 
 To roll out OTA updates safely, start by using **strong encryption methods** like AES-256 to safeguard your update data from prying eyes. Incorporate **public/private key authentication** to confirm the legitimacy of updates and block any unauthorized changes. Always check the **integrity of update packages** to ensure they haven’t been tampered with before deployment.
@@ -361,7 +361,7 @@ To roll out OTA updates safely, start by using **strong encryption methods** lik
 Equally crucial is establishing **strict access controls** for your update servers to limit who can make changes. Don’t skip **rigorous testing** of updates before making them available to users. Lastly, make it a habit to regularly review and improve your security measures to address emerging vulnerabilities and stay ahead of potential risks.
 :::
 
-::: faq
+:::faq
 ### How can I optimize my server setup to handle high traffic and frequent updates for Capacitor OTA updates?
 
 To make sure your server can handle heavy traffic and frequent updates smoothly, focus on these key areas:

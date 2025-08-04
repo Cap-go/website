@@ -189,7 +189,7 @@ Per ottenere questi miglioramenti delle prestazioni, gli sviluppatori dovrebbero
 
 ## FAQ
 
-::: faq
+:::faq
 ### Come l'ottimizzazione della comunicazione bridge nei plugin iOS personalizzati migliora le prestazioni dell'app?
 
 L'ottimizzazione della comunicazione bridge nei plugin iOS personalizzati è un modo intelligente per migliorare le prestazioni dell'app. Riducendo la latenza e migliorando il flusso dei dati tra i layer nativi e JavaScript, puoi ottenere interazioni più fluide, risposte più veloci e un'esperienza utente complessivamente migliore.
@@ -197,7 +197,7 @@ L'ottimizzazione della comunicazione bridge nei plugin iOS personalizzati è un 
 Per raggiungere questo obiettivo, è importante limitare i dati inviati attraverso il bridge, combinare più chiamate in batch quando possibile e ridurre gli scambi non necessari. Strumenti come **Capgo** possono rendere questo processo ancora più semplice. Permettono aggiornamenti istantanei, aiutando la tua app a rimanere veloce e aggiornata senza il fastidio di continue submission all'app store.
 :::
 
-::: faq
+:::faq
 ### Quali sono le migliori pratiche per ottimizzare l'uso della memoria nei plugin iOS personalizzati per evitare crash?
 
 Per far funzionare i tuoi plugin iOS personalizzati in modo fluido ed evitare crash legati alla memoria, è essenziale concentrarsi sulla scrittura di codice efficiente e ben strutturato, rispettando le migliori pratiche specifiche per iOS. Inizia con una **gestione efficace della memoria** - questo significa monitorare i cicli di vita degli oggetti e utilizzare strumenti come Xcode Instruments per identificare e correggere i cicli di retention che potrebbero causare memory leak. Un altro consiglio importante? Non sovraccaricare il thread principale con attività pesanti. Invece, sposta le operazioni che richiedono molte risorse su thread in background per mantenere l'app reattiva.
@@ -205,7 +205,7 @@ Per far funzionare i tuoi plugin iOS personalizzati in modo fluido ed evitare cr
 Inoltre, sii diligente nel rilasciare le risorse - che si tratti di file, immagini o connessioni di rete - una volta che non sono più in uso. Se stai lavorando con **Capacitor** per la tua app, piattaforme come Capgo possono semplificarti la vita rendendo più facili gli aggiornamenti e le correzioni. Questo significa che puoi affrontare i problemi di prestazioni rapidamente senza attendere le approvazioni dell'app store. Seguire questi passaggi aiuterà a migliorare la stabilità e l'affidabilità dei tuoi plugin iOS personalizzati.
 :::
 
-::: faq
+:::faq
 ### Come possono le impostazioni di prestazione di Xcode e gli strumenti di test aiutare a ottimizzare i plugin iOS personalizzati in Capacitor?
 
 ## Impostazioni di prestazione e strumenti di test di Xcode

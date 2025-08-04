@@ -188,7 +188,7 @@ Untuk mencapai peningkatan kinerja ini, pengembang harus memprioritaskan:
 
 ## FAQ
 
-::: faq
+:::faq
 ### Bagaimana mengoptimalkan komunikasi bridge dalam plugin iOS kustom meningkatkan kinerja aplikasi?
 
 Mengoptimalkan komunikasi bridge dalam plugin iOS kustom adalah cara cerdas untuk meningkatkan kinerja aplikasi. Dengan mengurangi latensi dan meningkatkan aliran data antara lapisan native dan JavaScript, Anda dapat mencapai interaksi yang lebih lancar, respons lebih cepat, dan pengalaman pengguna yang lebih baik secara keseluruhan.
@@ -196,7 +196,7 @@ Mengoptimalkan komunikasi bridge dalam plugin iOS kustom adalah cara cerdas untu
 Untuk mencapainya, penting untuk membatasi data yang dikirim melalui bridge, menggabungkan beberapa panggilan menjadi batch jika memungkinkan, dan mengurangi pertukaran bolak-balik yang tidak perlu. Alat seperti **Capgo** dapat mempermudah proses ini. Mereka memungkinkan pembaruan instan, membantu aplikasi Anda tetap cepat dan terkini tanpa kesulitan pengajuan ke app store terus-menerus.
 :::
 
-::: faq
+:::faq
 ### Apa praktik terbaik untuk mengoptimalkan penggunaan memori dalam plugin iOS kustom untuk menghindari crash?
 
 Untuk membuat plugin iOS kustom Anda berjalan lancar dan menghindari crash terkait memori, penting untuk fokus pada penulisan kode yang efisien dan terstruktur dengan baik sambil mengikuti praktik terbaik khusus iOS. Mulailah dengan **mengelola memori secara efektif** - ini berarti memperhatikan siklus hidup objek dan menggunakan alat seperti Xcode Instruments untuk mengidentifikasi dan memperbaiki siklus retain yang mungkin menyebabkan kebocoran memori. Tips penting lainnya? Jangan membebani thread utama dengan tugas berat. Sebaliknya, pindahkan operasi yang membutuhkan banyak sumber daya ke thread latar belakang agar aplikasi tetap responsif.
@@ -204,7 +204,7 @@ Untuk membuat plugin iOS kustom Anda berjalan lancar dan menghindari crash terka
 Selain itu, berhati-hatilah dalam melepaskan sumber daya - baik itu file, gambar, atau koneksi jaringan - setelah tidak digunakan lagi. Jika Anda bekerja dengan **Capacitor** untuk aplikasi Anda, platform seperti Capgo dapat mempermudah hidup Anda dengan menyederhanakan pembaruan dan perbaikan. Ini berarti Anda dapat mengatasi masalah kinerja dengan cepat tanpa menunggu persetujuan app store. Mengikuti langkah-langkah ini akan membantu meningkatkan stabilitas dan keandalan plugin iOS kustom Anda.
 :::
 
-::: faq
+:::faq
 ### Bagaimana pengaturan kinerja dan alat pengujian Xcode dapat membantu mengoptimalkan plugin iOS kustom di Capacitor?
 
 ## Pengaturan Kinerja dan Alat Pengujian Xcode
