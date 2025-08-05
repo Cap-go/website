@@ -214,7 +214,7 @@ Capgo’s automated rollback system proves its effectiveness, with **1.4K produc
 
 ## FAQs
 
-:::faq
+::: faq
 ### What are the essential steps for creating a reliable rollback strategy for live updates in Capacitor apps?
 
 An effective rollback strategy for live updates in Capacitor apps involves careful planning and execution to ensure app stability and a smooth user experience. Key components include:
@@ -226,7 +226,7 @@ An effective rollback strategy for live updates in Capacitor apps involves caref
 Using tools like Capgo can simplify this process by offering real-time updates, user-specific assignments, and compliance with Apple and Android standards, ensuring a streamlined and secure update management system.
 :::
 
-:::faq
+::: faq
 ### How do automated rollback systems reduce disruptions during app updates?
 
 Automated rollback systems help reduce disruptions during app updates by allowing developers to quickly switch back to a stable version if an update causes issues. This ensures users can continue using the app with minimal interruptions, maintaining a smooth experience.
@@ -234,7 +234,7 @@ Automated rollback systems help reduce disruptions during app updates by allowin
 These systems are especially valuable for live updates in Capacitor apps, as they provide a safety net for addressing unexpected problems without requiring time-consuming manual intervention or app store resubmissions. By automating rollbacks, developers can focus on resolving issues while minimizing the impact on users.
 :::
 
-:::faq
+::: faq
 ### Why should I use a testing channel before rolling out updates to all users?
 
 Using a testing channel before deploying updates to your entire user base is crucial for ensuring a smooth user experience. It allows you to identify and fix potential bugs, compatibility issues, or performance problems in a controlled environment, minimizing the risk of widespread disruptions.

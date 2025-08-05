@@ -195,7 +195,7 @@ Failing to comply doesn’t just mean hefty fines of up to $500,000 per incident
 
 ## FAQs
 
-:::faq
+::: faq
 ### What happens if a mobile app doesn’t meet PCI DSS compliance standards?
 
 Failing to meet **PCI DSS standards** can have serious consequences for businesses. Financial penalties alone can range from **$5,000 to $100,000 per month**, depending on how severe the non-compliance is and how long it lasts. Beyond fines, companies might face increased transaction fees, legal challenges, or even lose their ability to process payments altogether.
@@ -203,7 +203,7 @@ Failing to meet **PCI DSS standards** can have serious consequences for business
 But the impact doesn’t stop there. Non-compliance can also take a heavy toll on a company’s reputation. A **data breach** could shatter customer trust, disrupt daily operations, and lead to long-term financial setbacks. Staying compliant isn’t just about avoiding penalties - it’s about safeguarding your business, maintaining customer confidence, and protecting your brand’s integrity.
 :::
 
-:::faq
+::: faq
 ### How does integrating security into the CI/CD pipeline support ongoing PCI DSS compliance?
 
 Integrating security into your CI/CD pipeline is a must for maintaining **PCI DSS compliance** over time. By weaving security checks into every stage of development, you can catch and address vulnerabilities early, cutting down the chances of non-compliance. Practices like **automated security testing**, **regular code reviews**, and **vulnerability assessments** play a crucial role in ensuring that updates align with PCI DSS standards before they’re deployed.
@@ -211,7 +211,7 @@ Integrating security into your CI/CD pipeline is a must for maintaining **PCI DS
 Taking on a **DevSecOps approach** - where security becomes a core part of every development phase - takes this a step further. This method not only reduces risks but also ensures consistent compliance with PCI DSS and strengthens the security of your applications. Tools like Capgo can simplify this process by enabling secure, real-time updates for mobile apps while staying within compliance guidelines.
 :::
 
-:::faq
+::: faq
 ### How can businesses ensure their third-party code and APIs meet PCI DSS security and compliance standards?
 
 To keep third-party code and APIs secure while meeting PCI DSS standards, businesses need to take a few key steps:

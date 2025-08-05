@@ -206,7 +206,7 @@ Confirm your development environment includes:
 
 ## FAQs
 
-:::faq
+::: faq
 ### What happens if my Capacitor app doesn’t comply with Russia’s data localization laws?
 
 Non-compliance with Russia's data localization laws can lead to serious consequences for your Capacitor app. Authorities may block access to your app within Russia, impose fines, or even revoke necessary operating licenses. Additionally, non-compliance could harm your app's reputation and user trust.
@@ -214,7 +214,7 @@ Non-compliance with Russia's data localization laws can lead to serious conseque
 To avoid these risks, ensure your app stores and processes Russian user data on servers located within Russia, as required by law. Tools like **Capgo** can help streamline compliance by enabling real-time updates and ensuring your app remains functional and secure without frequent app store approvals.
 :::
 
-:::faq
+::: faq
 ### How can I make sure my app’s privacy policy complies with Russian data laws?
 
 To ensure your app’s privacy policy complies with Russian data laws, you need to focus on **data localization** and **user consent**. Russian laws require that personal data of Russian users be stored on servers located within Russia. Additionally, your privacy policy should clearly outline how user data is collected, processed, and stored, and it must comply with local legal frameworks.
@@ -222,7 +222,7 @@ To ensure your app’s privacy policy complies with Russian data laws, you need 
 If your app uses live updates or similar features, ensure that these updates also adhere to data localization requirements. Tools like Capgo can assist by providing secure, real-time updates while maintaining compliance with both Russian regulations and app store policies. Always consult a legal expert familiar with Russian data laws to verify your app’s compliance.
 :::
 
-:::faq
+::: faq
 ### How can I ensure my Capacitor app stays compliant with Russian data localization laws over time?
 
 To maintain compliance with Russia's data localization laws, it's essential to regularly review your app's data storage and processing practices. Ensure that any personal data of Russian users is stored on servers located within Russia, as required by local regulations. Conduct periodic audits to verify compliance and address any potential gaps.

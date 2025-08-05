@@ -272,7 +272,7 @@ To build on these practices, start by:
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can mobile app developers determine if their app must comply with the California Consumer Privacy Act (CCPA)?
 
 To determine if your mobile app must comply with the **California Consumer Privacy Act (CCPA)**, consider the following key factors:
@@ -286,7 +286,7 @@ If your app or business meets any of these criteria, it is likely subject to CCP
 For developers using **Capgo**, its live update solution for Capacitor apps ensures seamless updates while maintaining compliance with both Apple and Android guidelines, which can support your app's overall compliance strategy.
 :::
 
-:::faq
+::: faq
 ### How can mobile apps ensure compliance with the California Consumer Privacy Act (CCPA) while protecting user data?
 
 To comply with the **California Consumer Privacy Act (CCPA)** and protect user data, mobile apps should focus on a few key practices:
@@ -298,7 +298,7 @@ To comply with the **California Consumer Privacy Act (CCPA)** and protect user d
 Additionally, tools like **Capgo** can enhance your app's compliance efforts by enabling instant updates to address security vulnerabilities or privacy-related changes without requiring app store approvals. This ensures your app stays compliant in real-time while offering seamless user experiences. Always consult legal experts to ensure full adherence to CCPA requirements.
 :::
 
-:::faq
+::: faq
 ### How does the CCPA impact mobile app developers' use of third-party services?
 
 The California Consumer Privacy Act (CCPA) requires mobile app developers to ensure that any third-party services they use comply with its data privacy regulations. This means developers must carefully evaluate how third-party providers handle user data, ensuring they follow CCPA guidelines for data collection, storage, and sharing. Additionally, developers should establish clear agreements with these providers to protect user rights, such as the ability to access, delete, or opt out of data collection.

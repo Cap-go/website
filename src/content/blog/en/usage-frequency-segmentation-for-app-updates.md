@@ -155,7 +155,7 @@ Capgo makes it easy to harness the benefits of segmentation with its live update
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can usage frequency segmentation improve app update strategies?
 
 Usage frequency segmentation helps developers fine-tune app updates based on how often users interact with the app. By dividing users into categories like frequent, occasional, or rare users, developers can focus on delivering updates that resonate with each group's specific needs, ultimately boosting satisfaction and retention.
@@ -163,7 +163,7 @@ Usage frequency segmentation helps developers fine-tune app updates based on how
 Take frequent users, for instance - they might appreciate updates that enhance performance or introduce advanced features. On the other hand, occasional users may benefit more from updates that simplify navigation or resolve common frustrations. Tools such as **Capgo** streamline this process by enabling real-time updates for [Capacitor](https://capacitorjs.com/) apps, ensuring that users receive the right updates instantly, without the hassle of app store approvals.
 :::
 
-:::faq
+::: faq
 ### What are the key tools and metrics for tracking user behavior to create effective usage segmentation?
 
 To make usage segmentation work effectively, you need to keep a close eye on user behavior through tools and metrics that offer actionable insights. Platforms like **[Google Analytics](https://marketingplatform.google.com/about/analytics/)** or **[Mixpanel](https://mixpanel.com/)** are great for tracking user interactions, session lengths, and how features are being used. On top of that, **in-app event tracking** can show you exactly how users interact with specific features, while **cohort analysis** helps uncover trends in user behavior over time.
@@ -171,7 +171,7 @@ To make usage segmentation work effectively, you need to keep a close eye on use
 Key metrics to focus on include **retention rates**, **how often users engage with the app**, and **overall activity levels**. If you're working with Capacitor apps, tools like **Capgo** can make this process smoother by delivering updates and features directly to targeted user groups. This allows for a more tailored experience and quicker iteration cycles, keeping your app aligned with user needs.
 :::
 
-:::faq
+::: faq
 ### How does Capgo help developers streamline app updates and improve the user experience?
 
 Capgo gives developers the ability to push updates, fixes, and new features to their apps instantly - no app store approval delays required. This means you can address user feedback and fix issues as they arise, creating a seamless experience for your users.

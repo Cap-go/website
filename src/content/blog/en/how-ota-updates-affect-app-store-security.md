@@ -210,7 +210,7 @@ Modern OTA platforms prove that security and efficiency can go hand in hand. Bal
 
 ## FAQs
 
-:::faq
+::: faq
 ### What risks do OTA updates pose to app security, and how can developers address them?
 
 OTA (Over-The-Air) updates can expose apps to potential vulnerabilities, such as unauthorized access or compromised data integrity, especially if updates are not properly secured. These risks can impact app store compliance and user trust.
@@ -218,7 +218,7 @@ OTA (Over-The-Air) updates can expose apps to potential vulnerabilities, such as
 To mitigate these risks, developers should implement robust security measures like **end-to-end encryption**, regular testing, and secure deployment practices. Tools like Capgo can help streamline this process by enabling instant updates for Capacitor apps without requiring app store approvals. Capgo’s features, such as seamless CI/CD integration and user-specific update assignments, ensure updates are both secure and compliant with Apple and Android standards.
 :::
 
-:::faq
+::: faq
 ### How do OTA updates help maintain app store security compliance, and what happens if compliance is not met?
 
 OTA (Over-The-Air) updates play a crucial role in maintaining app store security compliance by allowing developers to quickly deliver updates, bug fixes, and new features without waiting for lengthy app store approval processes. This ensures that apps stay secure and up-to-date with the latest requirements from Apple and Android.
@@ -226,7 +226,7 @@ OTA (Over-The-Air) updates play a crucial role in maintaining app store security
 Failing to comply with app store security standards can lead to serious consequences, such as apps being removed from the store, loss of user trust, or even legal penalties. Solutions like **Capgo** make it easier to manage OTA updates while adhering to all compliance requirements, offering features like end-to-end encryption and seamless integration with development workflows.
 :::
 
-:::faq
+::: faq
 ### What key features should developers prioritize in an OTA platform to ensure secure and seamless app updates?
 
 To ensure secure and seamless app updates, developers should prioritize features like **end-to-end encryption**, **integration with CI/CD pipelines**, and the ability to assign updates to specific user groups. These capabilities help safeguard app data, streamline the update process, and provide greater control over who receives updates.

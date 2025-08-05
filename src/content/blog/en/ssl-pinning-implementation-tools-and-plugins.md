@@ -229,7 +229,7 @@ These insights underscore the importance of selecting the right pinning strategy
 
 ## FAQs
 
-:::faq
+::: faq
 ### What’s the difference between certificate pinning and public key pinning, and how do I choose the right one for my app?
 
 Certificate pinning and public key pinning are two methods used to secure SSL/TLS connections, but they operate in distinct ways.
@@ -241,7 +241,7 @@ Certificate pinning and public key pinning are two methods used to secure SSL/TL
 Choosing between the two depends on your app's needs. If your certificates are updated regularly, public key pinning can save you from constant updates. But if you’re looking for tighter security and greater control, certificate pinning might be the way to go.
 :::
 
-:::faq
+::: faq
 ### How can I keep my SSL pinning secure and functional, especially when certificates change?
 
 To keep your SSL pinning both secure and functional, especially when certificates are updated, it's smart to use **multiple certificate pins** with staggered expiration dates. This way, your app can switch to another valid certificate without disruption if one expires.
@@ -249,7 +249,7 @@ To keep your SSL pinning both secure and functional, especially when certificate
 Make it a habit to update pinned certificates in your app's code whenever your server's SSL certificates change. Automating this step with a **[CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/)** can make the process smoother and reduce the chances of security gaps. Tools and libraries specifically built for SSL pinning can also simplify the setup while maintaining strong security practices. For Capacitor apps, platforms like Capgo offer an added advantage by allowing real-time updates while staying compliant with Apple and Android guidelines.
 :::
 
-:::faq
+::: faq
 ### What are the best practices for testing SSL pinning in mobile apps to prevent man-in-the-middle (MITM) attacks?
 
 To properly test SSL pinning in mobile apps and protect against **man-in-the-middle (MITM)** attacks, developers should focus on a few essential steps. Start by using both **certificate pinning** and **public key pinning**. This approach ensures the app only accepts trusted certificates or public keys, making it harder for attackers to intercept sensitive information.

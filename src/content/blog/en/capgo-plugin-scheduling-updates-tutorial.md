@@ -217,7 +217,7 @@ Start implementing these strategies today to make your update process more effic
 
 ## FAQs
 
-:::faq
+::: faq
 ### How does Capgo keep over-the-air updates secure for Capacitor apps?
 
 Capgo secures over-the-air (OTA) updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) through **end-to-end encryption**, ensuring update data stays protected from creation to delivery on the user’s device. This approach prevents any interception or tampering during transmission.
@@ -227,7 +227,7 @@ To strengthen security further, Capgo uses advanced key management techniques. B
 With these measures in place, developers can deliver updates confidently, keeping user data safe while meeting platform security standards.
 :::
 
-:::faq
+::: faq
 ### What are the best practices for testing and monitoring scheduled updates with Capgo?
 
 To make scheduled updates with Capgo as smooth and effective as possible, here are some practical tips to keep in mind:
@@ -239,7 +239,7 @@ To make scheduled updates with Capgo as smooth and effective as possible, here a
 By following these steps, developers can manage updates efficiently while keeping users happy.
 :::
 
-:::faq
+::: faq
 ### How do I use Capgo's channel system to prioritize updates for different user groups?
 
 With Capgo's channel system, you can tailor updates for different user groups by creating specific channels like **production**, **beta**, or **staging**. This method allows you to deliver updates to targeted users, test new features with smaller audiences, and push urgent fixes quickly - bypassing the need for app store approvals.

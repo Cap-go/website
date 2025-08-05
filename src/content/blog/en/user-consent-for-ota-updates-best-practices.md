@@ -159,7 +159,7 @@ This approach - combining user control, security, and compliance - creates a sys
 
 ## FAQs
 
-:::faq
+::: faq
 ### What are the risks of not getting user consent for OTA updates?
 
 Failing to obtain user consent for Over-the-Air (OTA) updates can lead to serious legal and ethical issues. Many jurisdictions, including the United States, have strict privacy and consumer protection laws that require transparency and user agreement when modifying software on their devices. Ignoring this can result in penalties, lawsuits, or removal from app stores for non-compliance with platform guidelines.
@@ -167,7 +167,7 @@ Failing to obtain user consent for Over-the-Air (OTA) updates can lead to seriou
 Beyond legal risks, updating apps without user consent can harm user trust and damage your brand's reputation. To avoid these risks, it's best to implement clear and user-friendly consent mechanisms for OTA updates. Platforms like **Capgo** can help ensure compliance while offering seamless live update solutions tailored for Capacitor apps.
 :::
 
-:::faq
+::: faq
 ### What are the best practices for creating compliant and user-friendly consent requests for OTA updates?
 
 To ensure your consent requests for Over-the-Air (OTA) updates are both compliant and user-friendly, focus on clarity, transparency, and simplicity. Clearly explain what the update entails, why it’s needed, and how it benefits the user. Avoid technical jargon and use straightforward language that is easy to understand.
@@ -175,7 +175,7 @@ To ensure your consent requests for Over-the-Air (OTA) updates are both complian
 Make sure to provide users with a clear choice to accept or decline the update, and respect their decision. Additionally, comply with platform guidelines (e.g., Apple and Android) and data privacy regulations like GDPR or CCPA. Tools like Capgo can help streamline the process by offering features such as user assignment for updates and real-time compliance with platform requirements, ensuring a seamless and secure experience for both developers and users.
 :::
 
-:::faq
+::: faq
 ### What security measures ensure user data is protected during OTA updates?
 
 To safeguard user data during Over-the-Air (OTA) updates, implementing **end-to-end encryption** is essential. This ensures that only the intended users can decrypt and access the updates, keeping sensitive information secure.

@@ -382,7 +382,7 @@ Keep in mind, the **Capacitor Preferences API** should only be used for minimal,
 
 ## FAQs
 
-:::faq
+::: faq
 ### What features do Capacitor plugins offer for secure session management, including encryption and biometric authentication?
 
 Capacitor plugins designed for secure session management take different approaches when it comes to encryption and biometric authentication. Many rely on **AES-256 encryption** to safeguard session data, providing a strong defense against unauthorized access. When it comes to [biometric features](https://capgo.app/plugins/capacitor-native-biometric/), the level of support can vary. For instance, the Capacitor Native Biometric plugin integrates directly with device-level biometric systems like fingerprint or facial recognition, adding an extra layer of protection to user sessions.
@@ -390,7 +390,7 @@ Capacitor plugins designed for secure session management take different approach
 Capgo takes things a step further by combining **end-to-end encryption** with smooth biometric authentication. This combination ensures both robust data security and a hassle-free user experience, making it a standout option for developers aiming to boost app security without sacrificing usability.
 :::
 
-:::faq
+::: faq
 ### How can I securely integrate biometric authentication into a Capacitor app using the Biometric Security Plugin?
 
 To [integrate biometric authentication](https://capgo.app/plugins/capacitor-native-biometric/) securely into a Capacitor app, start by taking advantage of the **built-in security features** offered by mobile operating systems, such as the iOS Keychain and Android Keystore. These systems provide hardware-backed protection for sensitive data like encryption keys and session tokens, ensuring they remain secure.
@@ -400,7 +400,7 @@ When setting up biometric authentication, use the `authenticate()` method from t
 It's crucial to avoid hardcoding secrets directly in your app. Instead, encrypt any stored tokens to strengthen security further. Additionally, tools like Capgo can enhance secure session management by offering encrypted, real-time updates for your Capacitor app.
 :::
 
-:::faq
+::: faq
 ### How does Capgo keep live updates secure while managing app sessions?
 
 Capgo prioritizes security with **end-to-end encryption** for live updates. This means your app bundle is encrypted before it’s sent to the cloud and only decrypted on the user’s device, ensuring your data stays protected throughout the process.

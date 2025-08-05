@@ -213,7 +213,7 @@ Tools like Capgo can simplify updates by enabling live adjustments to your app. 
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can developers ensure their app meets Apple's account deletion requirements?
 
 To meet Apple's account deletion guidelines, developers need to offer users a simple and clear way to delete their accounts directly within the app. The process should be easy to find, straightforward to follow, and shouldn't require users to visit external websites or reach out to support teams.
@@ -221,7 +221,7 @@ To meet Apple's account deletion guidelines, developers need to offer users a si
 For those using Capacitor, tools like **Capgo** can make staying compliant easier. Capgo allows real-time updates to your app, meaning you can quickly implement changes - like adjustments to the account deletion feature - without waiting for app store approvals. By ensuring compliance, you not only reduce the risk of app rejections but also strengthen user trust.
 :::
 
-:::faq
+::: faq
 ### How can developers ensure proper data deletion across platforms while avoiding synchronization issues?
 
 Managing data deletion across various platforms isn't always straightforward, especially when complying with specific guidelines like those set by Apple. To address this, developers need to establish reliable backend systems that process data deletion requests uniformly across all integrated platforms. This often involves utilizing APIs or services that execute deletions simultaneously, ensuring consistency and preventing mismatches.
@@ -229,7 +229,7 @@ Managing data deletion across various platforms isn't always straightforward, es
 For apps created with Capacitor, tools like **Capgo** can streamline this task. Capgo supports real-time updates and aligns with Apple’s requirements, helping developers manage app updates and features while meeting data deletion standards. By using tools that ensure smooth synchronization, developers can minimize errors and build stronger user trust.
 :::
 
-:::faq
+::: faq
 ### How can app developers ensure their apps comply with Apple’s account deletion requirements?
 
 ## Ensuring Compliance with Apple’s Account Deletion Requirements

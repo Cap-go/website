@@ -212,7 +212,7 @@ Adopting component-based architectures can reduce development time by 30–40% [
 
 ## FAQs
 
-:::faq
+::: faq
 ### What are the key security differences between iOS and Android in Capacitor build pipelines?
 
 When setting up build pipelines with Capacitor, it's important to understand that **iOS** and **Android** come with their own distinct security protocols.
@@ -224,7 +224,7 @@ On the other hand, **Android** relies on Verified Boot and SELinux to maintain s
 While both platforms are serious about security, their methods differ. iOS leans toward controlled, tightly regulated environments, whereas Android gives developers more freedom to manage updates. To navigate these differences, tools like Capgo can help by facilitating live updates that comply with each platform's unique requirements.
 :::
 
-:::faq
+::: faq
 ### What are the cost differences in developing and maintaining iOS and Android apps with Capacitor?
 
 The cost of creating and maintaining apps with Capacitor can differ significantly between iOS and Android, mainly due to each platform's specific requirements. For iOS, developer rates usually fall between **$50 and $150 per hour**, while Android development tends to be more affordable, ranging from **$40 to $100 per hour**. Beyond the initial development, annual maintenance typically adds another **15% to 20%** of the original costs, depending on the app's complexity and the features it includes.
@@ -232,7 +232,7 @@ The cost of creating and maintaining apps with Capacitor can differ significantl
 Although Capacitor streamlines cross-platform development, developers still need to tackle platform-specific challenges. These include navigating compliance requirements and adhering to unique design guidelines for each operating system. Such factors can impact overall expenses, making thorough planning a crucial step to keep costs under control.
 :::
 
-:::faq
+::: faq
 ### How can developers optimize build pipelines for iOS and Android in Capacitor apps?
 
 To fine-tune build pipelines for iOS and Android in Capacitor apps, developers can adopt several effective strategies. First, make use of platform-specific runners. These tools are tailored to meet the distinct needs of each platform, helping to boost compatibility and speed up the build process while reducing errors.

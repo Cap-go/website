@@ -93,7 +93,7 @@ To configure biometric authentication on Android, you'll need to make a few adju
     
     Update your app's `build.gradle` file to include the necessary biometric dependencies:
     
-    ```kotlin
+    ```gradle
     dependencies {
         implementation "androidx.biometric:biometric:1.1.0"
     }
@@ -475,7 +475,7 @@ Follow these steps to integrate biometric authentication into your app:
 
 ## FAQs
 
-:::faq
+::: faq
 ### What are the differences between biometric plugins for Capacitor, and how can I select the best one for my app?
 
 When picking a biometric plugin for your Capacitor app, it's crucial to align the choice with your project's specific requirements. Consider factors like **platform compatibility** (whether you need support for iOS, Android, or both), how simple the integration process is, and whether the plugin supports advanced biometric methods such as **Face ID** or **fingerprint authentication**.
@@ -483,7 +483,7 @@ When picking a biometric plugin for your Capacitor app, it's crucial to align th
 Although this guide centers on implementing biometric authentication in [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/), tools like **Capgo** can play a valuable role. They allow you to push real-time updates to your app without needing app store approvals. This means your app can stay current with the latest security features, including biometric updates, while remaining compliant with both Apple and Android standards.
 :::
 
-:::faq
+::: faq
 ### How do I ensure biometric authentication in my Capacitor app meets security standards and app store guidelines?
 
 To make sure biometric authentication in your Capacitor app meets current security standards and app store rules, stick to these key practices:
@@ -495,7 +495,7 @@ To make sure biometric authentication in your Capacitor app meets current securi
 Using a live update service such as **Capgo** can make this process smoother. It allows you to push security updates or improvements to your app instantly, bypassing app store approval delays. This keeps your app secure, compliant, and up-to-date with Apple and Android policies.
 :::
 
-:::faq
+::: faq
 ### What challenges might developers face when integrating biometric authentication into Capacitor apps, and how can they overcome them?
 
 Implementing biometric authentication in Capacitor apps comes with its fair share of challenges. These can include ensuring compatibility across devices, managing user permissions effectively, and securely handling sensitive data. Here’s how you can tackle these issues:

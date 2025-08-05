@@ -400,7 +400,7 @@ These optimizations aren’t just about speed - they also save money. For exampl
 
 ## FAQs
 
-:::faq
+::: faq
 ### How do CDNs and HTTP/2 help improve performance and reduce latency in Capacitor apps?
 
 Using a **Content Delivery Network (CDN)** can drastically cut down on latency by storing cached content on servers located closer to your users. By reducing the physical distance that data has to travel, load times improve significantly. CDNs also help balance traffic across multiple servers, easing network congestion and boosting reliability.
@@ -408,7 +408,7 @@ Using a **Content Delivery Network (CDN)** can drastically cut down on latency b
 On the other hand, **HTTP/2** plays a key role in optimizing data transfer. It allows multiple requests to be sent at the same time over a single connection, cutting down on round-trip delays. Features like header compression and stream prioritization further enhance efficiency. When combined, CDNs and HTTP/2 work together to deliver faster, more reliable app performance, ensuring a smoother experience for users.
 :::
 
-:::faq
+::: faq
 ### How does gRPC help reduce latency compared to REST in server-side communication?
 
 gRPC cuts down latency in a big way compared to REST, thanks to its use of **HTTP/2**. Unlike traditional methods that require setting up a new connection for each request, HTTP/2 lets multiple requests share a single connection. This approach makes communication much more efficient.
@@ -416,7 +416,7 @@ gRPC cuts down latency in a big way compared to REST, thanks to its use of **HTT
 On top of that, gRPC relies on **Protocol Buffers** for serialization. These create compact, efficient messages that are quicker to process. This is especially useful when dealing with larger payloads, where REST often struggles to keep up. For high-performance applications, gRPC can be up to 10 times faster, making it a standout option for speeding up server-side communication.
 :::
 
-:::faq
+::: faq
 ### How do live update platforms like Capgo improve app performance and user experience compared to traditional app store updates?
 
 Live update tools like **Capgo** have changed the game for app developers, making it possible to roll out updates instantly without waiting for traditional app store approvals. This means bugs can be fixed on the fly, new features can be introduced quickly, and apps can be improved in real time. For users, this translates to always having the most up-to-date version of an app - no [manual updates](https://capgo.app/docs/plugin/cloud-mode/manual-update/) required.

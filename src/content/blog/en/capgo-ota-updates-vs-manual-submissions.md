@@ -241,7 +241,7 @@ This strategy combines the speed and flexibility of OTA updates with the thoroug
 
 ## FAQs
 
-:::faq
+::: faq
 ### How does Capgo stay compliant with app store rules while offering fast OTA updates?
 
 Capgo stays within app store guidelines by limiting updates to JavaScript and asset files, aligning perfectly with Apple's policies. This ensures that updates don’t alter the app’s core functionality or native code, eliminating the hassle of seeking app store re-approvals.
@@ -249,7 +249,7 @@ Capgo stays within app store guidelines by limiting updates to JavaScript and as
 To ensure security and compliance, Capgo employs **end-to-end encryption**, making sure that only authorized users can access updates. It also meets both Apple and Google’s requirements, allowing developers to push real-time updates while staying fully compliant with app store rules and maintaining user confidence.
 :::
 
-:::faq
+::: faq
 ### When should I use Capgo OTA updates instead of submitting updates manually to app stores?
 
 Capgo's OTA updates are a smart way to deliver **minor updates**, **bug fixes**, or **new features** directly to users without the hassle of waiting for app store approval. This means your app stays current with minimal downtime, which is especially handy for teams working in fast-paced, agile environments where quick adjustments are key.
@@ -259,7 +259,7 @@ For **major updates** - like overhauls to your app's functionality, design, or s
 What sets Capgo apart is its ability to push updates in real time. You can test changes with select user groups, monitor their performance, and even roll back updates instantly if something doesn’t go as planned. This level of control helps ensure your app remains stable while delivering a smoother experience for your users.
 :::
 
-:::faq
+::: faq
 ### How does the cost of Capgo's OTA updates compare to traditional app store update costs?
 
 Capgo's OTA updates provide a **more budget-friendly option** compared to the traditional app store update process. With Capgo, you’re looking at about **$300 per month** and a **one-time setup fee of $2,600**. When you stack that up against competitors like [Appflow](https://ionic.io/appflow/), which charges roughly **$6,000 annually** for similar services, the savings become clear.

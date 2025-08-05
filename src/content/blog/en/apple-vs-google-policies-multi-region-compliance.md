@@ -235,7 +235,7 @@ To tackle these complexities, tools like **Capgo** have proven invaluable. For i
 
 ## FAQs
 
-:::faq
+::: faq
 ### How does Apple's manual app review process compare to Google's automated system when launching apps in multiple regions?
 
 Apple employs a **manual app review process**, where real people assess each app submission against strict guidelines. This typically takes between 24 to 48 hours, though it can take longer if any issues arise. Even minor updates or changes must go through the same process, which can lead to delays - especially when launching apps across multiple regions.
@@ -243,7 +243,7 @@ Apple employs a **manual app review process**, where real people assess each app
 On the other hand, Google uses a combination of **automated checks and manual reviews**, enabling much quicker approval times, often within just a few hours. This approach allows developers to roll out updates and launch apps faster across different regions, making it a more convenient choice for those who prioritize speed and efficiency in meeting multi-region requirements.
 :::
 
-:::faq
+::: faq
 ### How can developers ensure their apps meet compliance requirements for Apple and Google across different regions?
 
 To meet compliance standards across various regions, developers must tailor their approach to align with the specific policies of both Apple and Google. For Apple, adhering to the **App Store Review Guidelines** is crucial. These guidelines emphasize user privacy, app performance, and transparency in data practices. A key area to watch is the privacy manifest requirements, as failure to comply has caused many app rejections in recent years.
@@ -253,7 +253,7 @@ Google takes a slightly different approach by offering tools like the **Data Saf
 For apps requiring frequent updates, platforms such as **Capgo** can be a game-changer. Capgo allows developers to deploy live updates without waiting for app store approvals, all while staying within the rules set by Apple and Google. This not only keeps your app current but also ensures it complies with regional policies seamlessly.
 :::
 
-:::faq
+::: faq
 ### How can tools like Capgo help developers comply with Apple and Google policies for over-the-air (OTA) updates in multi-region app deployments?
 
 Tools like **Capgo** make it easier for developers to stay compliant with Apple and Google’s OTA update policies. It offers a secure and efficient way to manage live updates, allowing developers to instantly push bug fixes, updates, and new features without needing app store approval. This ensures updates align with both platforms' rules.

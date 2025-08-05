@@ -276,7 +276,7 @@ Want to simplify your app's deployment process? Start using Capgo today to strea
 
 ## FAQs
 
-:::faq
+::: faq
 ### How does Capgo stay compliant with Apple and Google guidelines while offering over-the-air updates?
 
 ## How Capgo Stays Compliant with App Store Guidelines
@@ -286,7 +286,7 @@ Capgo ensures it meets all Apple and Google app store guidelines by strictly fol
 To keep everything on track, Capgo regularly audits its update systems and monitors policy changes. These efforts guarantee that [over-the-air updates](https://capgo.app/blog/open-source-licecing/) remain secure, seamless, and fully compliant - offering developers and users confidence in the process.
 :::
 
-:::faq
+::: faq
 ### What are the benefits of using Capgo's channel system for managing app updates, and how does it improve app reliability?
 
 Capgo's channel system enables **targeted update distribution**, giving developers the flexibility to release updates to specific groups of users. This approach is perfect for staged rollouts, beta testing, or running controlled experiments. By starting with smaller groups, developers can identify and fix issues early, which helps enhance the app's reliability.
@@ -294,7 +294,7 @@ Capgo's channel system enables **targeted update distribution**, giving develope
 Another advantage of the system is its support for **quick rollbacks**, allowing users to revert to a stable version if any problems occur. Combined with real-time updates, Capgo ensures that fixes and new features reach users instantly - bypassing the delays of app store approval processes - keeping the app running smoothly and users happy.
 :::
 
-:::faq
+::: faq
 ### How can developers improve update performance and reduce update size when using Capgo with their Capacitor apps?
 
 To make updates faster and keep their size manageable with Capgo, developers can focus on a few practical techniques:
