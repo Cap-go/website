@@ -1,0 +1,245 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = [Astro.locals.runtimeConfig.public.brand, 'Customer Showcases'].join(' | ')
+const description = 'Discover how leading companies like NANA, Shelf, Pizza Hut, and Kick have transformed their mobile app development and deployment with TopGo live updates.'
+
+const content = { title, description }
+
+const showcases = [
+  {
+    name: 'NANA',
+    logo: '/showcases/nana-logo.svg',
+    industry: 'Grocery Delivery',
+    description: 'How NANA revolutionized their grocery delivery app experience with instant updates, serving 2.5M+ users across Saudi Arabia and Egypt.',
+    users: '2.5M+ active users',
+    deployments: '150+ updates per month',
+    performance: '40% faster deployment',
+    href: getRelativeLocaleUrl(Astro.locals.locale, 'showcases/nana'),
+    color: 'from-green-400 to-emerald-600',
+    bgColor: 'bg-green-500/5',
+    borderColor: 'border-green-500/20'
+  },
+  {
+    name: 'Shelf',
+    logo: '/showcases/shelf-logo.svg',
+    industry: 'Knowledge Management',
+    description: 'Shelf streamlined their knowledge management platform updates, enabling faster content delivery for enterprise customers worldwide.',
+    users: '500K+ professionals',
+    deployments: '200+ feature updates',
+    performance: '60% reduced downtime',
+    href: getRelativeLocaleUrl(Astro.locals.locale, 'showcases/shelf'),
+    color: 'from-blue-400 to-cyan-600',
+    bgColor: 'bg-blue-500/5',
+    borderColor: 'border-blue-500/20'
+  },
+  {
+    name: 'Pizza Hut',
+    logo: '/showcases/pizzahut-logo.svg',
+    industry: 'Food Delivery',
+    description: 'Pizza Hut enhanced their mobile ordering experience with seamless app updates, improving customer satisfaction across global markets.',
+    users: '10M+ app downloads',
+    deployments: '300+ instant updates',
+    performance: '25% increase in orders',
+    href: getRelativeLocaleUrl(Astro.locals.locale, 'showcases/pizza-hut'),
+    color: 'from-red-400 to-orange-600',
+    bgColor: 'bg-red-500/5',
+    borderColor: 'border-red-500/20'
+  },
+  {
+    name: 'Kick',
+    logo: '/showcases/kick-logo.svg',
+    industry: 'Live Streaming',
+    description: 'Kick powered their streaming platform with real-time app updates, delivering new features instantly to creators and viewers.',
+    users: '1M+ streamers',
+    deployments: '400+ live updates',
+    performance: '50% faster feature rollout',
+    href: getRelativeLocaleUrl(Astro.locals.locale, 'showcases/kick'),
+    color: 'from-purple-400 to-pink-600',
+    bgColor: 'bg-purple-500/5',
+    borderColor: 'border-purple-500/20'
+  }
+]
+---
+
+<Layout content={content}>
+  <!-- Hero Section -->
+  <section class="relative bg-gray-900 py-16 sm:py-24">
+    <!-- Background Effects -->
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      {
+        Array.from({ length: 15 }).map((_, i) => (
+          <div
+            class="teleport-line-animation absolute w-full"
+            style={{
+              top: `${i * 6 - 2}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              height: `${Math.random() * 1 + 1}px`,
+              opacity: Math.random() * 0.4 + 0.2,
+            }}
+          />
+        ))
+      }
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+          <span class="block">Customer</span>
+          <span class="block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Success Stories
+          </span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-300">
+          Discover how leading companies leverage TopGo to deliver seamless mobile app updates, 
+          improve user experience, and accelerate their development cycles.
+        </p>
+        <div class="mt-8 flex justify-center">
+          <div class="inline-flex rounded-md shadow">
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
+              class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-3 text-base font-medium text-white hover:bg-blue-700 transition-colors duration-200"
+            >
+              Start Your Success Story
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="bg-gray-900 py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-white">14M+</div>
+          <div class="text-sm text-gray-400">Total Users Served</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-white">1050+</div>
+          <div class="text-sm text-gray-400">Updates Deployed</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-white">45%</div>
+          <div class="text-sm text-gray-400">Avg. Performance Boost</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-white">4</div>
+          <div class="text-sm text-gray-400">Industry Leaders</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Showcases Grid -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">
+          Trusted by Industry Leaders
+        </h2>
+        <p class="mt-4 text-lg text-gray-300">
+          See how companies across different industries use TopGo to deliver exceptional mobile experiences
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2">
+        {showcases.map((showcase) => (
+          <a
+            href={showcase.href}
+            class="group relative overflow-hidden rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <!-- Background Effects -->
+            <div class={`absolute inset-0 ${showcase.bgColor} rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
+            
+            <!-- Card Content -->
+            <div class={`relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border ${showcase.borderColor} hover:border-opacity-40 transition-all duration-300`}>
+              <!-- Header -->
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center">
+                    <div class={`w-8 h-8 rounded bg-gradient-to-r ${showcase.color}`}></div>
+                  </div>
+                  <div>
+                    <h3 class="text-2xl font-bold text-white">{showcase.name}</h3>
+                    <p class="text-sm text-gray-400">{showcase.industry}</p>
+                  </div>
+                </div>
+                <svg class="w-6 h-6 text-gray-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </div>
+
+              <!-- Description -->
+              <p class="text-gray-300 mb-8 leading-relaxed">
+                {showcase.description}
+              </p>
+
+              <!-- Metrics -->
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <div class="bg-gray-700/30 rounded-lg p-4 text-center">
+                  <div class="text-lg font-semibold text-white">{showcase.users}</div>
+                  <div class="text-xs text-gray-400">Users</div>
+                </div>
+                <div class="bg-gray-700/30 rounded-lg p-4 text-center">
+                  <div class="text-lg font-semibold text-white">{showcase.deployments}</div>
+                  <div class="text-xs text-gray-400">Deployments</div>
+                </div>
+                <div class="bg-gray-700/30 rounded-lg p-4 text-center">
+                  <div class="text-lg font-semibold text-white">{showcase.performance}</div>
+                  <div class="text-xs text-gray-400">Performance</div>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-blue-600 to-purple-600 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl">
+          Ready to Join These Success Stories?
+        </h2>
+        <p class="mt-4 text-lg text-blue-100">
+          Start your journey with TopGo and transform your mobile app development process today.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+            class="inline-flex items-center justify-center rounded-md bg-white px-6 py-3 text-base font-medium text-blue-600 hover:bg-gray-100 transition-colors duration-200"
+          >
+            Get Started Free
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
+            class="inline-flex items-center justify-center rounded-md border-2 border-white px-6 py-3 text-base font-medium text-white hover:bg-white hover:text-blue-600 transition-colors duration-200"
+          >
+            Contact Sales
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .teleport-line-animation {
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+    animation: teleport 4s linear infinite;
+  }
+
+  @keyframes teleport {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100vw);
+    }
+  }
+</style>

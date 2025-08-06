@@ -1,0 +1,471 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = [Astro.locals.runtimeConfig.public.brand, 'Shelf Success Story'].join(' | ')
+const description = 'Discover how Shelf revolutionized their knowledge management platform with TopGo live updates, serving 500K+ professionals worldwide with 60% reduced downtime and instant content delivery.'
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <!-- Hero Section -->
+  <section class="relative bg-gray-900 py-16 sm:py-24">
+    <!-- Background Effects -->
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      {
+        Array.from({ length: 12 }).map((_, i) => (
+          <div
+            class="teleport-line-animation absolute w-full"
+            style={{
+              top: `${i * 8 - 2}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              height: `${Math.random() * 1 + 1}px`,
+              opacity: Math.random() * 0.3 + 0.2,
+            }}
+          />
+        ))
+      }
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <!-- Company Logo -->
+        <div class="mb-8 flex justify-center">
+          <div class="w-24 h-24 rounded-2xl bg-gradient-to-r from-blue-400 to-cyan-600 flex items-center justify-center">
+            <span class="text-3xl font-bold text-white">S</span>
+          </div>
+        </div>
+        
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+          <span class="block">Shelf</span>
+          <span class="block bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">
+            Success Story
+          </span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-300">
+          How the leading knowledge management platform accelerated content delivery to 500K+ professionals 
+          with instant updates and 60% reduced downtime
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Overview -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h2 class="text-3xl font-bold text-white">About Shelf</h2>
+          <p class="mt-4 text-lg text-gray-300">
+            Shelf is a cutting-edge knowledge management platform that empowers customer support teams with 
+            intelligent content discovery and AI-powered search capabilities. Trusted by enterprise companies 
+            worldwide, Shelf helps organizations reduce support resolution times and improve customer satisfaction.
+          </p>
+          <p class="mt-4 text-lg text-gray-300">
+            With teams distributed globally and knowledge bases that require constant updates, Shelf needed a 
+            robust system to push critical content updates and feature improvements to their platform without 
+            disrupting customer operations.
+          </p>
+        </div>
+        <div class="bg-gray-800/50 rounded-2xl p-8 border border-blue-500/20">
+          <h3 class="text-xl font-bold text-white mb-6">Key Metrics</h3>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <div class="text-2xl font-bold text-blue-400">500K+</div>
+              <div class="text-sm text-gray-400">Professionals Served</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-blue-400">20%</div>
+              <div class="text-sm text-gray-400">Faster Resolution</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-blue-400">1M+</div>
+              <div class="text-sm text-gray-400">Articles Managed</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-blue-400">150+</div>
+              <div class="text-sm text-gray-400">Enterprise Clients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="bg-gray-800/50 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">The Challenge</h2>
+        <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+          Rapid platform growth and enterprise demands created deployment challenges that impacted customer experience
+        </p>
+      </div>
+      
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-red-500/20">
+          <div class="w-12 h-12 rounded-lg bg-red-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Content Update Delays</h3>
+          <p class="text-gray-300 text-sm">
+            Critical knowledge base updates and AI algorithm improvements took weeks to deploy, 
+            causing outdated information to persist in customer support workflows.
+          </p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-orange-500/20">
+          <div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-14 0h2m-2 0h-2m18 0h2M5 7h6m4 0h6M5 11h12M5 15h12"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Enterprise Downtime</h3>
+          <p class="text-gray-300 text-sm">
+            Scheduled maintenance windows for platform updates disrupted customer support operations, 
+            especially for global enterprises operating across multiple time zones.
+          </p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-yellow-500/20">
+          <div class="w-12 h-12 rounded-lg bg-yellow-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Feature Rollout Complexity</h3>
+          <p class="text-gray-300 text-sm">
+            New AI features and interface improvements required careful A/B testing with different customer 
+            segments, but traditional deployment methods made this process slow and risky.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Solution -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">The TopGo Solution</h2>
+        <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+          TopGo enabled Shelf to deliver continuous improvements without interrupting customer workflows
+        </p>
+      </div>
+
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-6">What Shelf Implemented</h3>
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Progressive Web App Updates</h4>
+                <p class="text-gray-300 text-sm">TopGo SDK integrated into React-based platform for seamless browser updates</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">AI Model Hotswapping</h4>
+                <p class="text-gray-300 text-sm">Live updates to machine learning models and search algorithms without downtime</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Customer-Specific Configurations</h4>
+                <p class="text-gray-300 text-sm">Tailored feature sets and UI customizations for enterprise clients</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Real-time Content Sync</h4>
+                <p class="text-gray-300 text-sm">Instant knowledge base updates and content improvements across all instances</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-blue-500/10 to-cyan-600/10 rounded-2xl p-8 border border-blue-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">Implementation Flow</h3>
+          <div class="space-y-4">
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+              <div>
+                <div class="font-medium text-white">Phase 1: Core Integration</div>
+                <div class="text-sm text-gray-400">TopGo SDK integrated into main platform infrastructure</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+              <div>
+                <div class="font-medium text-white">Phase 2: Content Pipeline</div>
+                <div class="text-sm text-gray-400">AI model and content delivery system configuration</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+              <div>
+                <div class="font-medium text-white">Phase 3: Enterprise Rollout</div>
+                <div class="text-sm text-gray-400">Gradual deployment to enterprise customers with monitoring</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+              <div>
+                <div class="font-medium text-white">Phase 4: Full Automation</div>
+                <div class="text-sm text-gray-400">Automated testing and deployment pipeline integration</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">Outstanding Results</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          TopGo revolutionized Shelf's platform delivery and customer experience
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-blue-500/20">
+          <div class="text-3xl font-bold text-blue-400 mb-2">60%</div>
+          <div class="text-sm text-gray-400 mb-4">Reduced Downtime</div>
+          <p class="text-xs text-gray-500">From 4 hours to 40 minutes monthly</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-blue-500/20">
+          <div class="text-3xl font-bold text-blue-400 mb-2">200+</div>
+          <div class="text-sm text-gray-400 mb-4">Feature Updates</div>
+          <p class="text-xs text-gray-500">Deployed seamlessly per quarter</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-blue-500/20">
+          <div class="text-3xl font-bold text-blue-400 mb-2">99.97%</div>
+          <div class="text-sm text-gray-400 mb-4">Platform Uptime</div>
+          <p class="text-xs text-gray-500">Including during major updates</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-blue-500/20">
+          <div class="text-3xl font-bold text-blue-400 mb-2">45%</div>
+          <div class="text-sm text-gray-400 mb-4">Faster Feature Delivery</div>
+          <p class="text-xs text-gray-500">From concept to production</p>
+        </div>
+      </div>
+
+      <!-- Success Stories -->
+      <div class="mt-16 grid gap-8 lg:grid-cols-2">
+        <div class="bg-gray-900/50 rounded-xl p-8 border border-blue-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">HelloFresh Integration</h3>
+          <p class="text-gray-300 mb-4">
+            When HelloFresh needed urgent improvements to their knowledge base for handling 300% increased 
+            customer inquiries during peak season, Shelf deployed enhanced AI search capabilities instantly 
+            using TopGo, reducing average handle time by 20%.
+          </p>
+          <div class="flex items-center space-x-2 text-blue-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+            <span class="text-sm font-medium">20% reduction in handle time achieved instantly</span>
+          </div>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-8 border border-blue-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">Global Enterprise Deployment</h3>
+          <p class="text-gray-300 mb-4">
+            A Fortune 500 client needed region-specific compliance features across 15 countries. 
+            Shelf used TopGo's feature flags to gradually roll out localized content and compliance 
+            tools without disrupting existing operations.
+          </p>
+          <div class="flex items-center space-x-2 text-blue-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-sm font-medium">15 countries deployed in 3 weeks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Implementation -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">Technical Architecture</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          How Shelf leveraged TopGo's advanced capabilities for enterprise-grade knowledge management
+        </p>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-3">
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Platform Stack</h3>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">React + TypeScript Frontend</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">Node.js Microservices</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">Elasticsearch Search Engine</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">PostgreSQL Database</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">AWS Cloud Infrastructure</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">TopGo Live Updates</span>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">AI Features Enhanced</h3>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">Natural language search</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">Content recommendation engine</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">Auto-tagging and categorization</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">Real-time answer suggestions</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+              <span class="text-gray-300">Sentiment analysis</span>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Deployment Metrics</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <span class="text-gray-300">Update Frequency</span>
+              <span class="text-blue-400">Daily</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Rollout Time</span>
+              <span class="text-blue-400">< 2 min</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Rollback Speed</span>
+              <span class="text-blue-400">15s</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Test Coverage</span>
+              <span class="text-blue-400">95%+</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Customer Impact</span>
+              <span class="text-blue-400">Zero</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Quote -->
+  <section class="bg-gradient-to-r from-blue-600/10 to-cyan-600/10 py-16">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <blockquote class="text-xl font-medium text-white md:text-2xl">
+        "TopGo has transformed how we deliver value to our enterprise customers. We can now push AI improvements, content updates, and new features without any service interruption. Our customers love the continuous improvements, and our development team can focus on innovation rather than deployment logistics. It's been a game-changer for our platform reliability."
+      </blockquote>
+      <div class="mt-8">
+        <div class="font-semibold text-blue-400">Sarah Chen</div>
+        <div class="text-gray-400">VP of Engineering, Shelf</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gray-900 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-white">Ready to Transform Your Platform Like Shelf?</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          Deliver continuous improvements to your customers without the deployment complexity
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+            class="inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700 transition-colors duration-200"
+          >
+            Start Free Trial
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'showcases')}
+            class="inline-flex items-center justify-center rounded-md border border-gray-300 px-6 py-3 text-base font-medium text-gray-300 hover:bg-gray-800 transition-colors duration-200"
+          >
+            View More Stories
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .teleport-line-animation {
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+    animation: teleport 4s linear infinite;
+  }
+
+  @keyframes teleport {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100vw);
+    }
+  }
+</style>
