@@ -249,7 +249,7 @@ As discussed earlier, maintaining these pillars requires not only advanced techn
 
 ## FAQs
 
-:::faq
+::: faq
 ### What steps can organizations take to secure their OTA updates against cyber threats?
 
 To protect OTA updates from cyber threats, organizations need a **layered security approach**. Begin with **strong encryption methods**, such as AES-256, to secure update packages during transmission and prevent tampering or unauthorized access. Pair this with **authentication protocols** like Public Key Infrastructure (PKI) to ensure updates are only accepted from verified sources.
@@ -257,7 +257,7 @@ To protect OTA updates from cyber threats, organizations need a **layered securi
 Incorporate **secure boot processes** to check software integrity before execution and enforce **strict version control** to prevent unauthorized downgrades or version spoofing. Regularly assess your security setup and conduct vulnerability scans to spot and fix potential weaknesses. These combined steps help protect OTA systems while maintaining user confidence.
 :::
 
-:::faq
+::: faq
 ### What should I consider when scaling OTA update systems for a growing number of connected devices?
 
 When expanding **OTA (Over-the-Air) update systems** to handle a growing fleet of connected devices, there are three critical factors to prioritize:
@@ -272,7 +272,7 @@ When expanding **OTA (Over-the-Air) update systems** to handle a growing fleet o
 By tackling these areas, your OTA update system can stay reliable, secure, and prepared to scale with your growing IoT network. For developers working with Capacitor apps, tools like Capgo can simplify the process by offering real-time updates, end-to-end encryption, and seamless CI/CD integration.
 :::
 
-:::faq
+::: faq
 ### How does disaster recovery help reduce downtime during OTA updates, and what are the best strategies for implementation?
 
 ## Disaster Recovery for OTA Updates

@@ -397,7 +397,7 @@ As you develop plugins, consider integrating tools like Capgo into your workflow
 
 ## FAQs
 
-:::faq
+::: faq
 ### What are the main advantages of using Capacitor plugins in mobile app development?
 
 Capacitor plugins bring **major benefits** to [mobile app development](https://capgo.app/blog/cross-platform-mobile-app-development-guide-2024/) by letting developers use familiar web technologies like JavaScript, HTML, and CSS to build native apps. This approach allows for a **single codebase** that runs smoothly across iOS, Android, and the web, cutting down both development time and expenses.
@@ -407,7 +407,7 @@ Beyond that, Capacitor provides simple access to **native device features** like
 For teams aiming to simplify updates and deployments, tools like **Capgo** can take the process to the next level. They allow instant updates without needing app store approvals while staying compliant with Apple and Android guidelines.
 :::
 
-:::faq
+::: faq
 ### What are the best practices for optimizing my Capacitor plugin for performance and security on multiple platforms?
 
 To get the best **performance** out of your Capacitor plugin, start with strategies like lazy loading. This means deferring the loading of non-essential components, which can make your app feel faster right from the start. Also, cut down on WebView overhead by fine-tuning your CSS and JavaScript. Focus on loading the most important features first, and handle data efficiently to keep memory usage low and maintain smooth interactions.
@@ -415,7 +415,7 @@ To get the best **performance** out of your Capacitor plugin, start with strateg
 When it comes to **security**, steer clear of hardcoding sensitive details and always rely on HTTPS for network communications to protect against potential threats. Regularly check your app for vulnerabilities, especially in areas like data storage and user authentication. Secure session management is crucial - use [encrypted storage](https://capgo.app/docs/cli/migrations/encryption/) and consider adding [biometric authentication](https://capgo.app/plugins/capacitor-native-biometric/) for an extra layer of protection. By following these steps, your plugin can deliver both reliable performance and robust security on any platform.
 :::
 
-:::faq
+::: faq
 ### How do I test and deploy a Capacitor plugin to ensure it works smoothly on both iOS and Android devices?
 
 To get a Capacitor plugin ready for both iOS and Android, you'll need to set up your development environment with tools like **Node.js**, **Xcode**, and **Android Studio**. After creating your plugin, use `npm link` in the plugin's directory to connect it to a Capacitor project. This step ensures the plugin is properly linked and ready for integration.

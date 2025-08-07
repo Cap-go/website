@@ -181,7 +181,7 @@ As privacy policies become stricter and rollout practices evolve, these trends w
 
 ## FAQs
 
-:::faq
+::: faq
 ### How do Apple and Google’s privacy policies influence app developers’ use of third-party data?
 
 Apple and Google take different approaches to privacy, which significantly impacts how app developers handle third-party data. Apple emphasizes user privacy with stricter policies, such as App Tracking Transparency (ATT), requiring explicit user consent for data sharing. This can limit developers’ access to detailed user data but helps build trust with privacy-conscious users.
@@ -191,7 +191,7 @@ Google, while also prioritizing privacy, tends to offer more flexibility for dev
 For developers using platforms like **Capgo**, which supports real-time updates with compliance to both Apple and Google requirements, navigating these privacy policies becomes more seamless. Capgo’s end-to-end encryption and live update features can help developers maintain compliance while delivering updates efficiently.
 :::
 
-:::faq
+::: faq
 ### What challenges do developers face when complying with Apple and Google's privacy standards for third-party data?
 
 Developers often face significant challenges when ensuring compliance with Apple and Google's privacy standards, particularly when it comes to handling third-party data. Both companies have strict and evolving policies, such as Apple's **App Tracking Transparency (ATT)** framework and Google's **Data Safety section**, which require developers to disclose and limit data collection practices.
@@ -199,7 +199,7 @@ Developers often face significant challenges when ensuring compliance with Apple
 Navigating these policies can be complex, especially for apps that rely on third-party integrations or analytics. Developers must ensure transparency in how data is collected, used, and shared while also implementing robust security measures to protect user privacy. Tools like **Capgo** can help streamline this process by offering real-time updates and compliance-friendly solutions for app developers, ensuring adherence to Apple and Google requirements without frequent app store resubmissions.
 :::
 
-:::faq
+::: faq
 ### How can tools like Capgo help developers ensure privacy compliance and streamline updates on Apple and Android platforms?
 
 Capgo empowers developers by simplifying app updates and ensuring compliance with both Apple and Android privacy requirements. It allows instant updates for Capacitor apps without needing app store approvals, enabling faster deployment of bug fixes, new features, and improvements.

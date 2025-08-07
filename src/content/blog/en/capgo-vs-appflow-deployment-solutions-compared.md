@@ -144,7 +144,7 @@ Thanks to its technical strengths and strategic advantages, Capgo is an excellen
 
 ## FAQs
 
-:::faq
+::: faq
 ### Why should I choose Capgo over Appflow for over-the-air (OTA) app updates?
 
 Capgo offers a quick and dependable way to deliver over-the-air (OTA) updates to your Capacitor apps. With **real-time updates** that align with both Apple and Android guidelines, you can roll out fixes, new features, and improvements instantly - skipping the need for app store approvals.
@@ -152,7 +152,7 @@ Capgo offers a quick and dependable way to deliver over-the-air (OTA) updates to
 What sets Capgo apart are its standout features like **end-to-end encryption** for secure updates, **smooth CI/CD integration** to streamline your workflow, and **user-specific update targeting** for tailored deployments. Plus, being an open-source platform, it provides transparency and flexibility to meet your app's deployment demands.
 :::
 
-:::faq
+::: faq
 ### How does Capgo protect app updates compared to Appflow?
 
 Capgo prioritizes the [security of app updates](https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/) by using **end-to-end encryption**, ensuring that data remains protected as it travels between developers and users. This method effectively shields updates from unauthorized access while meeting platform compliance standards.
@@ -160,7 +160,7 @@ Capgo prioritizes the [security of app updates](https://capgo.app/blog/introduci
 On the other hand, while Appflow provides functionality, it lacks the same advanced encryption measures. This makes Capgo a stronger and more secure option for developers focused on safeguarding their updates.
 :::
 
-:::faq
+::: faq
 ### What should developers consider when choosing between Capgo's cloud and self-hosted deployment options?
 
 The article doesn’t delve into the specifics of Capgo's cloud and self-hosted deployment options. To get more detailed information, it’s a good idea to check out Capgo's official resources or reach out to their team directly. They can provide guidance that aligns with your specific needs.

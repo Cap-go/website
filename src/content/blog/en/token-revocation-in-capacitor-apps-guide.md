@@ -222,7 +222,7 @@ Consistent maintenance, vigilant real-time monitoring, and the ability to revoke
 
 ## FAQs
 
-:::faq
+::: faq
 ### Why is token revocation important for improving the security of a Capacitor app?
 
 Token revocation is a key security measure for Capacitor apps, allowing developers to instantly invalidate access tokens when needed. Whether it's after a user logs out or in response to a detected security issue, revoking tokens ensures that compromised credentials can't be reused. This step significantly reduces the chances of unauthorized access to sensitive user data.
@@ -230,7 +230,7 @@ Token revocation is a key security measure for Capacitor apps, allowing develope
 Relying solely on token expiration can leave a window of vulnerability, but token revocation addresses threats **in real time**. This approach not only strengthens data protection but also aligns with modern security expectations. For Capacitor apps, integrating token revocation is a critical step toward protecting user information and maintaining a secure app environment.
 :::
 
-:::faq
+::: faq
 ### How can I implement secure token revocation in high-traffic Capacitor apps?
 
 To ensure secure token revocation in [high-traffic Capacitor apps](https://capgo.app/blog/), start by implementing **short-lived access tokens**. These tokens reduce the risk of misuse since they expire quickly, limiting the window of opportunity for potential attackers.
@@ -242,7 +242,7 @@ For added security, use **OAuth 2.0**. This framework offers reliable tools for 
 By adopting these practices, you can protect your Capacitor app from unauthorized access while ensuring it performs well, even under heavy traffic conditions.
 :::
 
-:::faq
+::: faq
 ### How can I secure my Capacitor app and stay compliant with app store security requirements using token revocation?
 
 To keep your Capacitor app secure and in line with app store security standards, it's important to implement **token revocation** strategies alongside strong authentication methods like OAuth 2.0 or OpenID Connect. These measures safeguard user data while meeting the requirements set by Apple and Google Play.

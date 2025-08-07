@@ -234,7 +234,7 @@ The key to success lies in writing clean, modular code that avoids unnecessary r
 
 ## FAQs
 
-:::faq
+::: faq
 ### How do I optimize background tasks in Capacitor for iOS and Android?
 
 To get the most out of background tasks in Capacitor for both iOS and Android, it's essential to use **platform-specific tools** and follow best practices. On Android, tools like **[JobScheduler](https://developer.android.com/reference/android/app/job/JobScheduler)** or **[WorkManager](https://developer.android.com/develop/background-work/background-tasks/persistent/getting-started)** can help you schedule tasks more effectively. For iOS, it's crucial to work within the platform's background execution limits to prevent draining the battery unnecessarily.
@@ -244,7 +244,7 @@ A good strategy to reduce resource consumption is **batching network requests** 
 If you're looking for a way to simplify updates and make optimizations easier, platforms like **Capgo** can be a game-changer. They enable live updates and help ensure your app stays compliant with both iOS and Android requirements.
 :::
 
-:::faq
+::: faq
 ### How can I prevent errors and manage resources effectively in Capacitor background tasks to keep my app running smoothly?
 
 To keep your Capacitor background tasks running smoothly, here are some practical tips to follow:
@@ -256,7 +256,7 @@ To keep your Capacitor background tasks running smoothly, here are some practica
 By sticking to these practices, your app can maintain strong performance and reliability, even when handling background operations.
 :::
 
-:::faq
+::: faq
 ### How does Capgo improve the handling of background tasks in Capacitor apps?
 
 Capgo simplifies handling background tasks in Capacitor apps by allowing **instant updates** that don’t need app store approvals. Developers can roll out fixes, new features, or optimizations in real time, ensuring background tasks stay current and meet platform requirements.

@@ -362,7 +362,7 @@ SSL pinning plays a key role in safeguarding user data and maintaining the integ
 
 ## FAQs
 
-:::faq
+::: faq
 ### What risks could arise if SSL pinning is not used in a Capacitor app?
 
 If SSL pinning isn't set up in a Capacitor app, the app becomes an easier target for **Man-in-the-Middle (MITM) attacks**. These attacks allow bad actors to intercept and tamper with the data flowing between the app and its server. This could result in exposing sensitive information like user credentials or [API keys](https://capgo.app/docs/webapp/api-keys/).
@@ -370,7 +370,7 @@ If SSL pinning isn't set up in a Capacitor app, the app becomes an easier target
 Moreover, without SSL pinning, attackers could use fake or compromised certificates to pose as a trusted server. This increases the chances of data breaches. By implementing SSL pinning, you can ensure secure communication and protect your users from these risks.
 :::
 
-:::faq
+::: faq
 ### What are the key differences in implementing and maintaining SSL pinning for Android and iOS in Capacitor apps?
 
 SSL pinning works a bit differently on Android and iOS, thanks to their unique APIs and security setups.
@@ -382,7 +382,7 @@ On **iOS**, SSL pinning is typically handled via URLSession or with the help of 
 Both platforms demand ongoing attention to certificate expiration and updates to keep API connections secure. Regular testing is essential to catch compatibility issues early and to guard against **man-in-the-middle (MITM)** attacks.
 :::
 
-:::faq
+::: faq
 ### How can I automate SSL certificate updates and ensure my Capacitor app complies with app store security requirements?
 
 While the article doesn't dive into tools or strategies for automating SSL certificate updates or ensuring compliance with app store security guidelines, there are steps you can take to boost your app's security. One effective measure is implementing **SSL pinning** in your Capacitor app. This helps safeguard your app from **man-in-the-middle (MITM) attacks**, which can compromise sensitive data.

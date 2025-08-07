@@ -302,7 +302,7 @@ Regular assessments, policy updates, and ongoing staff training are essential fo
 
 ## FAQs
 
-:::faq
+::: faq
 ### How does Saudi Arabia's PDPL focus on explicit consent differ from the GDPR's multiple legal bases for data processing?
 
 Saudi Arabia's [Personal Data Protection](https://capgo.app/dp/) Law (PDPL) prioritizes **explicit consent** as the main requirement for processing personal data. This means businesses must secure clear, affirmative approval from individuals before handling their data. On the other hand, the EU's GDPR provides more options, with **six legal bases** for data processing. These include consent, contractual necessity, legal obligations, vital interests, public tasks, and legitimate interests, giving organizations greater flexibility.
@@ -310,7 +310,7 @@ Saudi Arabia's [Personal Data Protection](https://capgo.app/dp/) Law (PDPL) prio
 With the PDPL, compliance becomes more demanding. Businesses must ensure that consent is not only explicit but also properly recorded and revocable at any time. This adds layers of complexity to data management, especially when compared to GDPR, which allows companies to rely on other legal grounds for processing data.
 :::
 
-:::faq
+::: faq
 ### What challenges do businesses face with cross-border data transfers under Saudi Arabia's PDPL and the EU's GDPR?
 
 Managing cross-border data transfers under **Saudi Arabia’s Personal Data Protection Law (PDPL)** and the **EU’s General Data Protection Regulation (GDPR)** can be a daunting task for businesses. While both laws aim to safeguard personal data, their distinct requirements often create hurdles for organizations operating globally.
@@ -322,7 +322,7 @@ Similarly, GDPR requires that data transfers to countries outside the EU provide
 Balancing the requirements of these two frameworks demands careful coordination and strategic planning. Companies must ensure compliance with each law while striving to keep international operations running smoothly.
 :::
 
-:::faq
+::: faq
 ### What steps can organizations take to comply with both Saudi Arabia's PDPL and the EU's GDPR when appointing Data Protection Officers and managing data breach notifications?
 
 To meet the requirements of both **Saudi Arabia's Personal Data Protection Law (PDPL)** and the **EU's General Data Protection Regulation (GDPR)**, organizations should streamline their policies for appointing Data Protection Officers (DPOs) and managing data breach notifications.

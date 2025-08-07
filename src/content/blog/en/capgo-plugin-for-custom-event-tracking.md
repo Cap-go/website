@@ -354,7 +354,7 @@ When setting up custom event tracking, prioritize the following:
 
 ## FAQs
 
-:::faq
+::: faq
 ### How does the Capgo plugin protect user data and comply with privacy regulations like GDPR?
 
 Capgo places a strong emphasis on **data privacy** and adherence to regulations like GDPR. By utilizing **end-to-end encryption**, the platform ensures that user data remains secure during transmission. It also requires users to provide explicit consent before any data is collected, giving them full control over how their information is managed.
@@ -362,7 +362,7 @@ Capgo places a strong emphasis on **data privacy** and adherence to regulations 
 To reinforce its commitment to privacy, Capgo conducts regular evaluations to identify and address potential risks. This proactive approach aligns with the strict data protection standards set by the European Union, helping to protect user trust while staying fully compliant with privacy laws.
 :::
 
-:::faq
+::: faq
 ### How can I improve event tracking performance with the Capgo plugin?
 
 To get better results with event tracking using the Capgo plugin, try a few smart approaches. First, focus on minimizing the size of the data you send. Break down large datasets into smaller, manageable pieces and compress them. This not only speeds up the process but also helps reduce memory consumption.
@@ -372,7 +372,7 @@ Another tip: use caching for data that’s accessed frequently. This can make a 
 By using these strategies, you can improve event tracking performance without compromising the user experience.
 :::
 
-:::faq
+::: faq
 ### How can I troubleshoot and resolve issues with custom event tracking using Capgo tools?
 
 To address custom event tracking issues in your Capacitor app, several tools and strategies from Capgo can come in handy. Start by using [web debugging tools](https://capgo.app/docs/plugin/debugging/) like **Chrome DevTools** or **Safari Web Inspector**. These are great for inspecting API calls, tracking resource loading, and identifying JavaScript errors. For native components, rely on platform-specific tools such as **Xcode** for iOS or **Android Studio** for Android to dig deeper into potential problems.

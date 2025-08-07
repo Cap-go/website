@@ -184,7 +184,7 @@ To achieve these performance improvements, developers should prioritize:
 
 ## FAQs
 
-:::faq
+::: faq
 ### How does optimizing bridge communication in custom iOS plugins improve app performance?
 
 Optimizing bridge communication in custom iOS plugins is a smart way to boost app performance. By reducing latency and improving how data flows between the native and JavaScript layers, you can achieve smoother interactions, faster responses, and an overall better user experience.
@@ -192,7 +192,7 @@ Optimizing bridge communication in custom iOS plugins is a smart way to boost ap
 To get there, it's important to limit the data sent through the bridge, combine multiple calls into batches when possible, and cut down on unnecessary back-and-forth exchanges. Tools like **Capgo** can make this process even easier. They allow for instant updates, helping your app stay fast and current without the hassle of constant app store submissions.
 :::
 
-:::faq
+::: faq
 ### What are the best practices for optimizing memory usage in custom iOS plugins to avoid crashes?
 
 To make your custom iOS plugins run smoothly and avoid memory-related crashes, it's essential to focus on writing efficient, well-structured code while sticking to iOS-specific best practices. Start by **managing memory effectively** - this means keeping an eye on object lifecycles and using tools like Xcode Instruments to identify and fix retain cycles that might lead to memory leaks. Another key tip? Don’t bog down the main thread with heavy tasks. Instead, move resource-intensive operations to background threads to keep the app responsive.
@@ -200,7 +200,7 @@ To make your custom iOS plugins run smoothly and avoid memory-related crashes, i
 On top of that, be diligent about releasing resources - whether it’s files, images, or network connections - once they’re no longer in use. If you’re working with **Capacitor** for your app, platforms like Capgo can make your life easier by simplifying updates and fixes. This means you can tackle performance issues quickly without waiting for app store approvals. Following these steps will help boost the stability and reliability of your custom iOS plugins.
 :::
 
-:::faq
+::: faq
 ### How can Xcode's performance settings and testing tools help optimize custom iOS plugins in Capacitor?
 
 ## Xcode's Performance Settings and Testing Tools

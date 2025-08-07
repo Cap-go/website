@@ -245,7 +245,7 @@ Expand on your testing framework by incorporating:
 
 ## FAQs
 
-:::faq
+::: faq
 ### What are the main differences in session management requirements for iOS and Android apps?
 
 The way session management is handled on **iOS** and **Android** reflects their different priorities, especially when it comes to security and privacy.
@@ -257,7 +257,7 @@ The way session management is handled on **iOS** and **Android** reflects their 
 Both platforms demand strong session management practices, but iOS enforces these rules more rigidly, while Android offers room for customization. Tools like Capgo can simplify this process by allowing developers to push updates and fixes instantly, all while staying aligned with Apple and Android’s respective requirements.
 :::
 
-:::faq
+::: faq
 ### What are the best practices for managing app sessions while staying compliant with standards like PCI DSS v4.0?
 
 To effectively manage app sessions and comply with standards like **PCI DSS v4.0**, developers should stick to a few essential practices. Start by aligning your processes with the latest security requirements. This includes using a **risk-based approach**, implementing **multi-factor authentication**, and running regular security assessments to identify and address potential vulnerabilities.
@@ -267,7 +267,7 @@ When it comes to session management, assign a **unique session identifier** for 
 For those working with Capacitor, tools like **Capgo** can make compliance easier by allowing real-time updates without needing app store approvals. This helps keep your app secure and aligned with evolving standards.
 :::
 
-:::faq
+::: faq
 ### What are the best practices to secure user sessions in mobile apps and comply with app store policies?
 
 To keep user sessions secure in mobile apps and comply with app store requirements, developers should follow several key practices:

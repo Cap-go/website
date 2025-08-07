@@ -249,7 +249,7 @@ With Capacitor's native bridge, developers gain access to a unified API layer th
 
 ## FAQs
 
-:::faq
+::: faq
 ### What is the Native Bridge in Capacitor, and how does it enable secure communication between web and native layers?
 
 The Native Bridge in Capacitor plays a crucial role in connecting the web layer of your app (the frontend) with the native layer (platform-specific functionalities). Think of it as a secure communication channel that lets your app tap into native device features while keeping performance consistent across different platforms.
@@ -257,7 +257,7 @@ The Native Bridge in Capacitor plays a crucial role in connecting the web layer 
 The level of security depends on how the bridge is set up in your app. For instance, platforms like **Capgo** enhance Capacitor apps by offering tools such as **end-to-end encryption** for live updates. This means sensitive data and updates can be transmitted safely to your users without risking their privacy or breaking compliance rules.
 :::
 
-:::faq
+::: faq
 ### What is the purpose of the Native Bridge in Capacitor, and how is it used in cross-platform app development?
 
 The **Native Bridge** in Capacitor serves as a connection point between your app's web layer (the frontend) and the native layer (platform-specific features). This bridge lets developers tap into native device functionalities - like the camera or GPS - directly from a web-based app. It’s a handy tool for building cross-platform apps that feel natural on any device.
@@ -267,7 +267,7 @@ With the Native Bridge, you can bring platform-specific features into your app w
 If you're working with Capacitor, tools like **Capgo** can make your life even easier. Capgo allows for live updates, so you can push changes to your app instantly - no app store approval needed. This means your users always get the latest features and fixes right away.
 :::
 
-:::faq
+::: faq
 ### How can developers improve the performance of the Native Bridge when using advanced native features in Capacitor apps?
 
 Optimizing the Native Bridge in Capacitor is all about ensuring efficient communication between the web and native layers. One effective approach is to **minimize the number of bridge calls**. Instead of making frequent individual calls, try batching operations together to reduce the strain on performance. Another tip? Stick to lightweight data formats like JSON for data transfers. This helps cut down on unnecessary overhead.

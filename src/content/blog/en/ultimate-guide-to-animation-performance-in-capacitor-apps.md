@@ -309,7 +309,7 @@ To bring these strategies into your workflow, follow these actionable steps:
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can I optimize animation performance in Capacitor apps across various Android devices?
 
 To keep animations running smoothly in Capacitor apps across various Android devices, **hardware acceleration** is key. This ensures animations can achieve higher frame rates. Opt for **CSS animations and transitions**, as they are usually hardware-accelerated on modern Android devices.
@@ -319,7 +319,7 @@ Simplify your animations to reduce rendering load. Keeping them less complex can
 If you need real-time updates or quick fixes without waiting for app store approvals, tools like **Capgo** can be a game-changer. They allow for instant updates while adhering to Android's compliance standards.
 :::
 
-:::faq
+::: faq
 ### How can I improve animation performance in Capacitor apps to create a smoother user experience?
 
 To ensure smooth animations in Capacitor apps, focus on using **hardware-accelerated properties** like `transform` and `opacity`. These properties are handled by the GPU, which helps improve performance. On the other hand, avoid relying on resource-intensive properties like `box-shadow` or animations involving complex layouts, as they can slow down rendering.
@@ -327,7 +327,7 @@ To ensure smooth animations in Capacitor apps, focus on using **hardware-acceler
 Keep your animations straightforward, and whenever possible, remove any unnecessary elements from the DOM to lighten the load. It’s also important to test your animations on a range of devices to make sure they respond well and provide a consistent experience for all users. Tools like **Capgo** can simplify updates and fixes, allowing you to maintain high performance without needing app store approvals.
 :::
 
-:::faq
+::: faq
 ### How does Capgo ensure smooth animation performance in Capacitor apps after deployment, and what makes it better than traditional update methods?
 
 Capgo takes animation performance in Capacitor apps to the next level by allowing developers to push updates, bug fixes, and new features instantly - no waiting for app store approvals. This means users get access to the latest enhancements right away, ensuring smooth animations and consistent app performance.

@@ -245,7 +245,7 @@ When problems occur, Capgo ensures you’re ready to resolve them instantly.
 
 ## FAQs
 
-:::faq
+::: faq
 ### How does Capgo keep app updates secure during rollbacks?
 
 Capgo employs **end-to-end encryption** to safeguard app updates at every stage, from creation to delivery. This ensures that updates stay protected, with access strictly limited to authorized users through stringent access controls.
@@ -253,7 +253,7 @@ Capgo employs **end-to-end encryption** to safeguard app updates at every stage,
 To guarantee the integrity of updates, Capgo uses **cryptographic checks** such as hashes and digital signatures. These tools confirm that updates remain untampered. If any problems occur, the platform’s automated rollback feature lets you swiftly and securely revert to an earlier version. Together, these features ensure your app updates are both secure and dependable.
 :::
 
-:::faq
+::: faq
 ### What are the benefits of using automated rollbacks with Capgo instead of manual rollbacks?
 
 Automated rollbacks with **Capgo** offer a faster, more reliable, and error-free alternative to manual rollbacks. When something goes wrong after an update, these rollbacks can quickly return your app to a stable version, reducing downtime and keeping the user experience seamless.
@@ -261,7 +261,7 @@ Automated rollbacks with **Capgo** offer a faster, more reliable, and error-free
 What sets automation apart is its ability to remove human error from the equation. By sticking to predefined best practices, it ensures consistency every time. This not only saves valuable time but also fosters a more stable and efficient way to manage your app. For developers working with Capacitor apps, automated rollbacks provide a stress-free, dependable way to handle updates.
 :::
 
-:::faq
+::: faq
 ### How can I test rollback functionality with Capgo before releasing updates to production?
 
 To effectively test rollback functionality with Capgo, begin by setting up a **staging environment**. This allows you to test updates in a controlled setting before they go live. Involve **beta testers** to catch potential issues early, and ensure you have **real-time monitoring** to track performance and detect errors quickly. It's also important to define clear **rollback triggers**, like reaching a certain error rate or receiving specific user feedback, so you know exactly when to revert an update.

@@ -185,7 +185,7 @@ With cybersecurity regulations, including those effective from January 1, 2025 [
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can app developers navigate longer update review times under China's Cybersecurity Law?
 
 China's Cybersecurity Law has brought about tighter regulations, resulting in longer review times for app updates. To navigate these changes while ensuring a smooth user experience, developers need to prioritize [smart update management strategies](https://capgo.app/docs/plugin/cloud-mode/hybrid-update).
@@ -193,7 +193,7 @@ China's Cybersecurity Law has brought about tighter regulations, resulting in lo
 One practical approach is using live update tools like **Capgo**. These tools enable developers to deliver updates, fixes, and new features directly to users without waiting for app store approvals. This approach not only cuts down on delays but also ensures updates align with platform requirements. By implementing such tools, developers can save valuable time, keep users happy, and effectively manage regulatory hurdles.
 :::
 
-:::faq
+::: faq
 ### What challenges do developers face with data residency and security audits under China's updated cybersecurity law?
 
 ## Navigating China's Cybersecurity Law: Challenges for Developers
@@ -203,7 +203,7 @@ China's revised cybersecurity law introduces some tough hurdles for developers, 
 On top of that, developers must undergo detailed **security audits** to prove their apps meet China's cybersecurity standards. These audits can be a drain on time and resources, often slowing down updates and delaying new features. However, tools like Capgo can simplify the process. By streamlining updates and ensuring compliance, Capgo helps developers push fixes and improvements efficiently - without the usual app store bottlenecks.
 :::
 
-:::faq
+::: faq
 ### How can live update systems help developers meet China's cybersecurity requirements while keeping apps functional?
 
 Live update systems give developers the ability to roll out updates, bug fixes, and new features directly to users without waiting for app store approvals. This is especially useful when meeting China's cybersecurity regulations, as it helps keep apps secure and up-to-date without unnecessary delays. With real-time updates, developers can quickly fix vulnerabilities, stay compliant, and ensure a smooth experience for users.

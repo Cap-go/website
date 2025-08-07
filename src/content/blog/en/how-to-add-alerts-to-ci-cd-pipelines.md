@@ -198,7 +198,7 @@ Monitoring adds another layer of value by uncovering inefficiencies in the pipel
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can I reduce alert fatigue in my CI/CD pipeline while ensuring critical issues are handled quickly?
 
 To cut down on alert fatigue in your CI/CD pipeline and make sure the most critical issues get the attention they deserve, focus on **ranking alerts by severity and importance**. Techniques like deduplication and aggregation can help filter out the noise, making it easier to zero in on what truly matters.
@@ -206,7 +206,7 @@ To cut down on alert fatigue in your CI/CD pipeline and make sure the most criti
 For lower-priority alerts, consider automating responses wherever you can. This not only saves time but also reduces the burden on your team. It’s also a good idea to regularly review and tweak alert thresholds to keep up with the changing needs of your pipeline. This way, your alert system remains efficient and aligned with your objectives. Simplifying your alert process ensures you strike the right balance between being responsive and staying efficient.
 :::
 
-:::faq
+::: faq
 ### How can I secure alerts in my CI/CD pipeline to prevent unauthorized access and vulnerabilities?
 
 To keep alerts secure in your CI/CD pipeline, start by applying the principle of **least privilege access**. This limits access to alert configurations and sensitive data to only those team members who absolutely need it, reducing the likelihood of unauthorized actions.
@@ -216,7 +216,7 @@ Leverage **secrets management tools** to safely store sensitive information like
 For developers using tools like Capgo, features such as smooth CI/CD integration and **end-to-end encryption** can add an extra layer of security. Plus, they help ensure real-time updates comply with Apple and Android requirements.
 :::
 
-:::faq
+::: faq
 ### How can I set up meaningful alerts for mobile app deployments to ensure they're helpful and actionable?
 
 To set up effective alerts for your mobile app deployments, start by pinpointing the **key performance indicators (KPIs)** that reflect your deployment objectives. Prioritize critical factors like build failures, deployment times, and user experience metrics. Make sure to establish alert thresholds that activate only when genuinely necessary - this helps prevent notification overload. Regularly revisit and fine-tune these thresholds based on past performance and changes in your app's behavior.

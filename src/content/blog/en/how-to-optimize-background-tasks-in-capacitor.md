@@ -227,7 +227,7 @@ Instant deployment tools like Capgo take these efforts further by addressing per
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can I optimize background tasks in my Capacitor app to reduce battery drain on iOS and Android?
 
 To make your Capacitor app's background tasks more efficient and reduce battery consumption on both iOS and Android, the **Capacitor Background Runner plugin** is a great tool to consider. It allows tasks to run outside the web view, improving how resources are managed.
@@ -237,7 +237,7 @@ For iOS, you'll need to enable **Background Modes** in Xcode. Specifically, acti
 Additionally, integrating a tool like **Capgo** can make a big difference. It provides real-time updates, bug fixes, and new features without requiring app store approvals, helping your app stay efficient and up-to-date with minimal effort.
 :::
 
-:::faq
+::: faq
 ### How can I optimize background tasks in my Capacitor app using the capacitor.config.ts file?
 
 ## Managing Background Tasks in Your Capacitor App
@@ -254,7 +254,7 @@ To keep your Capacitor app running efficiently while managing background tasks, 
 For seamless updates and easy deployment, tools like _Capgo_ can be a game changer. They allow you to roll out live updates while staying compliant with Apple and Android guidelines. By following these practices, you’ll ensure your app’s background processes perform reliably without overburdening the system.
 :::
 
-:::faq
+::: faq
 ### How can Capgo's over-the-air updates improve background task optimization in Capacitor apps?
 
 Capgo's over-the-air (OTA) update system streamlines the process of managing updates for Capacitor apps. Developers can push updates, fixes, and new features directly to users without waiting for app store approvals. This keeps apps current effortlessly, eliminating the hassle of manual updates and improving the overall user experience.

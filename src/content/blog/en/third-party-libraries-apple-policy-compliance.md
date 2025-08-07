@@ -272,7 +272,7 @@ As Apple’s policies continue to evolve, having a dependable live update soluti
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can developers ensure third-party libraries in their Capacitor apps meet Apple’s App Store requirements?
 
 To make sure the third-party libraries in your Capacitor app align with Apple’s App Store policies, here’s what you need to do:
@@ -285,7 +285,7 @@ To make sure the third-party libraries in your Capacitor app align with Apple’
 By following these steps, you’ll stay compliant with Apple’s policies and build trust with your users. Tools like **Capgo** can make this process easier by allowing real-time updates to your Capacitor app without needing app store re-approvals, keeping your app compliant and up-to-date without the hassle.
 :::
 
-:::faq
+::: faq
 ### How does Capgo's live update system help ensure compliance with Apple's App Store policies?
 
 Capgo's live update system offers developers a way to stay aligned with Apple's App Store policies by allowing **instant updates**. This means bugs can be fixed, security can be tightened, and performance can be improved - all without waiting for app store review. It’s an efficient way to ensure apps remain adaptable to Apple's shifting guidelines, especially when it comes to **privacy rules** and **user data protection**.
@@ -293,7 +293,7 @@ Capgo's live update system offers developers a way to stay aligned with Apple's 
 With Capgo, developers can keep their apps running smoothly and in line with regulations while avoiding unnecessary delays. Features like end-to-end encryption and real-time updates ensure updates comply with both Apple and Android standards, making it a dependable choice for maintaining compliance over time.
 :::
 
-:::faq
+::: faq
 ### What happens if my app doesn’t include the required privacy manifests by May 1, 2024?
 
 If your app doesn’t have the necessary privacy manifests submitted by the **May 1, 2024** deadline, it will be rejected by App Store Connect. This means you won’t be able to release new apps or push updates to the App Store.

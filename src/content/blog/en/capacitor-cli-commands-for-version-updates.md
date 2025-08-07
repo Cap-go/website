@@ -332,7 +332,7 @@ Whether you’re working on a small app or scaling a larger deployment, combinin
 
 ## FAQs
 
-:::faq
+::: faq
 ### What challenges might I encounter when updating my app with Capacitor CLI, and how can I address them?
 
 When you're updating your app with the Capacitor CLI, you might run into a few bumps along the way. Common challenges include **dependency conflicts**, **breaking changes in plugins**, or **platform-specific configuration issues**. These problems often arise from differences between Capacitor versions or updates to third-party plugins.
@@ -346,7 +346,7 @@ Here’s how you can tackle these challenges:
 For an even smoother update experience, you might want to try tools like _Capgo_. This tool lets you push fixes and new features directly to your users without needing app store approvals. It’s a great way to keep your app up-to-date with minimal downtime.
 :::
 
-:::faq
+::: faq
 ### How does Capgo simplify app updates, and what are its standout features?
 
 Capgo simplifies the way developers deliver [app updates](https://capgo.app/plugins/capacitor-updater/) by allowing them to push changes, fixes, and new features directly to users - bypassing the need for app store approvals. With this, your users can enjoy the latest updates in just minutes, creating a smoother and more efficient experience.
@@ -361,7 +361,7 @@ Here’s what makes Capgo stand out:
 Capgo is fully open-source and complies with both Apple and Android standards, offering a dependable solution for [real-time app updates](https://capgo.app/blog/live-updates-for-flutter-app/).
 :::
 
-:::faq
+::: faq
 ### How can I check if my plugins are compatible with the latest version of Capacitor before updating?
 
 Before making the leap to the latest version of Capacitor, it's crucial to double-check that your plugins are ready to handle the update. Start by digging into the plugin's documentation or repository to see if there are any version-specific requirements or updates. Most plugins clearly indicate which Capacitor versions they support, so this step can save you from unnecessary headaches.

@@ -193,7 +193,7 @@ To align with CPRA regulations and ensure the necessary technical safeguards are
 
 ## FAQs
 
-:::faq
+::: faq
 ### How can app developers meet the CPRA's data minimization requirements?
 
 To meet the **data minimization** standards set by the CPRA, app developers should prioritize gathering only the personal data essential for their app to function effectively. Regularly assess your data collection practices to confirm they remain relevant and are strictly tied to the app’s purpose.
@@ -203,7 +203,7 @@ Equally important is establishing clear policies for data retention. Personal da
 For those utilizing tools like Capgo, real-time updates can be a game-changer. These tools allow developers to address compliance issues quickly by deploying fixes or updates without waiting for app store approval, helping your app stay aligned with privacy regulations.
 :::
 
-:::faq
+::: faq
 ### How can app developers efficiently handle user requests for data access, deletion, or correction under CPRA guidelines?
 
 To meet the requirements of the California Privacy Rights Act (CPRA), app developers must create a straightforward and reliable system for handling user requests regarding data access, deletion, or correction. **Developers are required to acknowledge requests within 10 days** and resolve them within 45 days. If additional time is needed, an extension of up to 45 days is allowed, provided the user is notified of the delay.
@@ -217,7 +217,7 @@ Here’s how developers can simplify compliance:
 Leveraging tools like Capgo, which offer real-time updates, can help developers resolve issues or apply fixes related to user data quickly while ensuring compliance with platform standards. By staying ahead of these requirements, developers can not only meet regulatory obligations but also build stronger trust with their users.
 :::
 
-:::faq
+::: faq
 ### How can app developers implement effective consent management systems to meet CPRA compliance requirements?
 
 To meet **CPRA** standards, app developers need to prioritize transparency and simplicity when managing user consent. Start with clear, straightforward consent banners that explain the purpose of data collection and how the data will be used. It's essential to obtain explicit consent from users before processing any data.

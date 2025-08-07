@@ -204,7 +204,7 @@ Whether you choose to enhance your current approach or leverage platforms like C
 
 ## FAQs
 
-:::faq
+::: faq
 ### What are the benefits of using staged rollouts for Capacitor app updates?
 
 Staged rollouts give developers the chance to release updates to a smaller group of users first, making it easier to catch and fix any issues before the update is shared with everyone. This method minimizes the chances of widespread app problems and helps create a smoother experience for all users.
@@ -214,7 +214,7 @@ During this initial phase, teams can monitor the app’s performance, collect us
 For those seeking tools to simplify this process, **Capgo** provides a live update solution. It supports real-time updates, adheres to app store guidelines, and includes features like end-to-end encryption and the ability to assign updates to specific users.
 :::
 
-:::faq
+::: faq
 ### What are the advantages of using delta updates in Capacitor apps, and how can developers implement them efficiently?
 
 Delta updates bring a major advantage: **smaller update sizes**. This means faster downloads and less data consumption, which is a game-changer for users on slower networks or those with older devices. By focusing only on the files that have changed instead of replacing the entire app, developers can push updates quickly - sometimes within minutes - while keeping interruptions to a minimum.
@@ -222,7 +222,7 @@ Delta updates bring a major advantage: **smaller update sizes**. This means fast
 For developers looking to streamline this process, tools like the **Capgo plugin** are incredibly helpful. Capgo offers features like secure update delivery, compliance with platform requirements, and options for targeting specific user groups. This allows updates to roll out in real time without needing app store approvals. The result? Developers save time, and users stay engaged with the most up-to-date version of the app.
 :::
 
-:::faq
+::: faq
 ### How does Capgo make updating Capacitor apps faster and more reliable than traditional app store updates?
 
 Capgo simplifies the update process for Capacitor apps with **instant over-the-air (OTA) updates**, cutting out the usual 3-5 day wait for app store approvals. Updates can go live in just 1-2 hours, making it easier for developers to fix bugs, roll out new features, or address issues without delay.
