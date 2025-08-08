@@ -56,7 +56,7 @@
     "@inlang/paraglide-js": "2.2.0",
     "@types/js-yaml": "^4.0.9",
     "@types/marked": "^6.0.0",
-    "@types/node": "^22.13.0",
+    "@types/node": "^24.0.0",
     "@types/semver": "^7.5.8",
     "@types/toastify-js": "^1.12.4",
     "astro-font": "^1.1.0",
