@@ -1,0 +1,350 @@
+---
+title: Getting Started
+description: Learn how to install and use the InAppBrowser plugin with URL change events for embedded web content in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/inappbrowser" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Usage
+
+Import the plugin and use its methods to open web content:
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+// Open a URL
+const openBrowser = async () => {
+  await InAppBrowser.open({
+    url: 'https://capgo.app',
+    showTitle: true,
+    toolbarColor: '#000000',
+    showToolbar: true,
+    showReload: true
+  });
+};
+
+// Listen for URL changes
+const setupListeners = async () => {
+  // URL change event
+  await InAppBrowser.addListener('urlChangeEvent', (event) => {
+    console.log('URL changed to:', event.url);
+    
+    // Handle OAuth callbacks
+    if (event.url.startsWith('myapp://oauth-callback')) {
+      InAppBrowser.close();
+      // Process OAuth response
+    }
+  });
+  
+  // Browser closed event
+  await InAppBrowser.addListener('closeEvent', () => {
+    console.log('Browser closed');
+  });
+  
+  // Browser opened event
+  await InAppBrowser.addListener('openEvent', () => {
+    console.log('Browser opened');
+  });
+};
+
+// Close the browser
+const closeBrowser = async () => {
+  await InAppBrowser.close();
+};
+
+// Reload current page
+const reloadPage = async () => {
+  await InAppBrowser.reload();
+};
+
+// Navigate to a new URL
+const navigateTo = async (url: string) => {
+  await InAppBrowser.openWebView({ url });
+};
+```
+
+## API Reference
+
+### open(options)
+
+Opens a URL in the in-app browser.
+
+```typescript
+interface OpenOptions {
+  url: string;
+  showTitle?: boolean;
+  toolbarColor?: string;
+  showToolbar?: boolean;
+  showReload?: boolean;
+  closeButtonText?: string;
+  closeButtonColor?: string;
+  presentationStyle?: 'fullscreen' | 'popover';
+  transitionStyle?: 'coververtical' | 'crossdissolve' | 'fliphorizontal';
+  enableBarsCollapsing?: boolean;
+}
+
+await InAppBrowser.open({
+  url: 'https://example.com',
+  showTitle: true,
+  toolbarColor: '#1976d2',
+  showToolbar: true
+});
+```
+
+### close()
+
+Closes the in-app browser.
+
+```typescript
+await InAppBrowser.close();
+```
+
+### reload()
+
+Reloads the current page.
+
+```typescript
+await InAppBrowser.reload();
+```
+
+### openWebView(options)
+
+Navigates to a new URL in the already open browser.
+
+```typescript
+interface OpenWebViewOptions {
+  url: string;
+}
+
+await InAppBrowser.openWebView({
+  url: 'https://new-page.com'
+});
+```
+
+### goBack()
+
+Navigates back in the browser history.
+
+```typescript
+await InAppBrowser.goBack();
+```
+
+### goForward()
+
+Navigates forward in the browser history.
+
+```typescript
+await InAppBrowser.goForward();
+```
+
+## Events
+
+### urlChangeEvent
+
+Fired when the URL changes in the browser.
+
+```typescript
+interface UrlChangeEvent {
+  url: string;
+}
+
+InAppBrowser.addListener('urlChangeEvent', (event) => {
+  console.log('New URL:', event.url);
+});
+```
+
+### closeEvent
+
+Fired when the browser is closed.
+
+```typescript
+InAppBrowser.addListener('closeEvent', () => {
+  console.log('Browser closed');
+});
+```
+
+### openEvent
+
+Fired when the browser is opened.
+
+```typescript
+InAppBrowser.addListener('openEvent', () => {
+  console.log('Browser opened');
+});
+```
+
+## Advanced Usage
+
+### OAuth Flow Implementation
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class OAuthService {
+  private listeners: any[] = [];
+  
+  async authenticate(authUrl: string, redirectUri: string) {
+    return new Promise<string>((resolve, reject) => {
+      // Listen for URL changes
+      const urlListener = InAppBrowser.addListener('urlChangeEvent', (event) => {
+        if (event.url.startsWith(redirectUri)) {
+          // Extract OAuth code/token from URL
+          const url = new URL(event.url);
+          const code = url.searchParams.get('code');
+          
+          if (code) {
+            InAppBrowser.close();
+            resolve(code);
+          } else {
+            const error = url.searchParams.get('error');
+            reject(new Error(error || 'OAuth failed'));
+          }
+        }
+      });
+      
+      this.listeners.push(urlListener);
+      
+      // Open OAuth provider
+      InAppBrowser.open({
+        url: authUrl,
+        showTitle: true,
+        toolbarColor: '#1976d2'
+      });
+    });
+  }
+  
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+### Custom Browser UI
+
+```typescript
+const openCustomBrowser = async () => {
+  await InAppBrowser.open({
+    url: 'https://example.com',
+    showTitle: true,
+    toolbarColor: '#FF5722',
+    showToolbar: true,
+    showReload: true,
+    closeButtonText: 'Done',
+    closeButtonColor: '#FFFFFF',
+    presentationStyle: 'fullscreen',
+    transitionStyle: 'coververtical',
+    enableBarsCollapsing: true
+  });
+};
+```
+
+### Handling External Links
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class LinkHandler {
+  async openExternalLink(url: string) {
+    // Check if URL should open in browser
+    if (this.shouldOpenInBrowser(url)) {
+      await InAppBrowser.open({
+        url,
+        showTitle: true,
+        showToolbar: true
+      });
+    } else {
+      // Handle internally
+      window.location.href = url;
+    }
+  }
+  
+  private shouldOpenInBrowser(url: string): boolean {
+    // External domains
+    const externalDomains = ['youtube.com', 'twitter.com', 'facebook.com'];
+    const urlDomain = new URL(url).hostname;
+    
+    return externalDomains.some(domain => urlDomain.includes(domain));
+  }
+}
+```
+
+## Best Practices
+
+1. **Always remove listeners**
+   ```typescript
+   const listener = await InAppBrowser.addListener('urlChangeEvent', handler);
+   // When done
+   listener.remove();
+   ```
+
+2. **Handle browser states**
+   ```typescript
+   let browserOpen = false;
+   
+   InAppBrowser.addListener('openEvent', () => {
+     browserOpen = true;
+   });
+   
+   InAppBrowser.addListener('closeEvent', () => {
+     browserOpen = false;
+   });
+   ```
+
+3. **Validate URLs before opening**
+   ```typescript
+   const isValidUrl = (url: string): boolean => {
+     try {
+       new URL(url);
+       return true;
+     } catch {
+       return false;
+     }
+   };
+   
+   if (isValidUrl(url)) {
+     await InAppBrowser.open({ url });
+   }
+   ```
+
+4. **Customize for platform**
+   ```typescript
+   import { Capacitor } from '@capacitor/core';
+   
+   const options = {
+     url: 'https://example.com',
+     showTitle: true,
+     toolbarColor: Capacitor.getPlatform() === 'ios' ? '#007AFF' : '#1976D2'
+   };
+   ```
+
+## Platform Notes
+
+### iOS
+- Uses `SFSafariViewController`
+- Supports iOS 11.0+
+- Respects Safe Area insets
+- Supports custom presentation styles
+
+### Android
+- Uses Chrome Custom Tabs
+- Falls back to WebView if Chrome not available
+- Supports Android 5.0 (API 21)+
+- Toolbar customization supported
+
+### Web
+- Opens in new browser tab/window
+- Limited customization options
+- No URL change events

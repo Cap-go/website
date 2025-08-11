@@ -1,0 +1,40 @@
+---
+title: "@capgo/capacitor-native-biometric"
+description: Capacitor plugin for native biometric authentication using fingerprint, Face ID, and other biometric sensors.
+template: splash
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Access native biometric authentication APIs for Android and iOS, providing secure and convenient user authentication.
+  image:
+    file: /fingerprint.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-biometric/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-native-biometric/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Multiple biometrics" icon="rocket">
+    Supports fingerprint, Face ID, Touch ID, and other biometric sensors 🚀
+  </Card>
+  <Card title="Secure authentication" icon="lock">
+    Provides secure biometric authentication for sensitive operations 🔒
+  </Card>
+  <Card title="Fallback options" icon="setting">
+    Includes device passcode fallback when biometrics are unavailable 😊
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/native-biometric/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>

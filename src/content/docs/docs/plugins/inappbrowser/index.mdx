@@ -1,0 +1,40 @@
+---
+title: "@capgo/inappbrowser"
+description: In-app browser plugin with URL change event support for Capacitor apps.
+template: splash
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Open web content in your app with a fully-featured in-app browser that supports URL change events and navigation controls.
+  image:
+    file: /browser.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/inappbrowser/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/inappbrowser/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="URL change events" icon="rocket">
+    Track navigation with URL change event listeners 🔗
+  </Card>
+  <Card title="Full navigation control" icon="arrows-right-left">
+    Back, forward, reload, and close controls 🎮
+  </Card>
+  <Card title="Customizable UI" icon="paint-brush">
+    Toolbar color, buttons, and display options 🎨
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/inappbrowser/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>

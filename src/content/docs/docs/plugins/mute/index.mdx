@@ -1,0 +1,40 @@
+---
+title: "@capgo/capacitor-mute"
+description: Detect and control the mute switch state on iOS devices and check volume states on Android.
+template: splash
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Check if a device is muted or set to silent mode. Detects mute switch on iOS and volume state on Android.
+  image:
+    file: /mute.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/mute/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mute/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Silent mode detection" icon="rocket">
+    Detect if device is in silent/mute mode 🔇
+  </Card>
+  <Card title="Cross-platform" icon="device-mobile">
+    Works on both iOS (mute switch) and Android (volume) 📱
+  </Card>
+  <Card title="Simple API" icon="code">
+    Easy to use with straightforward methods 🎯
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/mute/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>

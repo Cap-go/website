@@ -1,0 +1,40 @@
+---
+title: "@capgo/capacitor-uploader"
+description: Background file upload plugin for Capacitor apps with progress tracking and resumable uploads.
+template: splash
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Upload files in the background with progress tracking, resumable uploads, and network-aware handling for Capacitor apps.
+  image:
+    file: /upload.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/uploader/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-uploader/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Background uploads" icon="rocket">
+    Continue uploads even when app is in background 🚀
+  </Card>
+  <Card title="Progress tracking" icon="chart-bar">
+    Real-time upload progress with detailed statistics 📊
+  </Card>
+  <Card title="Resumable uploads" icon="refresh">
+    Automatically resume interrupted uploads 🔄
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/uploader/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>

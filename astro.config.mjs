@@ -137,7 +137,7 @@ export default defineConfig({
           label: 'Plugins',
           collapsed: true,
           items: [
-   
+
             {
               label: 'Updater',
               collapsed: true,
@@ -187,22 +187,106 @@ export default defineConfig({
                 },
               ],
             },
+
             {
-              label: 'Other Plugins',
-              collapsed: true,
+              label: 'Social Login',
               items: [
-                {
-                  label: 'Social Login',
-                  items: [
-                    { label: 'Overview', link: '/docs/plugins/social-login/' },
-                    { label: 'Getting started', link: '/docs/plugins/social-login/getting-started' },
-                    { label: 'Google', autogenerate: { directory: 'docs/plugins/social-login/google' } },
-                    { label: 'Apple', autogenerate: { directory: 'docs/plugins/social-login/apple' } },
-                    { label: 'Facebook', link: '/docs/plugins/social-login/facebook' },
-                    { label: 'Migrations', autogenerate: { directory: 'docs/plugins/social-login/migrations' } },
-                  ],
-                },
+                { label: 'Overview', link: '/docs/plugins/social-login/' },
+                { label: 'Getting started', link: '/docs/plugins/social-login/getting-started' },
+                { label: 'Google', autogenerate: { directory: 'docs/plugins/social-login/google' } },
+                { label: 'Apple', autogenerate: { directory: 'docs/plugins/social-login/apple' } },
+                { label: 'Facebook', link: '/docs/plugins/social-login/facebook' },
+                { label: 'Migrations', autogenerate: { directory: 'docs/plugins/social-login/migrations' } },
               ],
+              collapsed: true,
+            },
+            {
+              label: 'Native Market',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/native-market/' },
+                { label: 'Getting started', link: '/docs/plugins/native-market/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Native Biometric',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/native-biometric/' },
+                { label: 'Getting started', link: '/docs/plugins/native-biometric/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Camera Preview',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/camera-preview/' },
+                { label: 'Getting started', link: '/docs/plugins/camera-preview/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Uploader',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/uploader/' },
+                { label: 'Getting started', link: '/docs/plugins/uploader/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Flash',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/flash/' },
+                { label: 'Getting started', link: '/docs/plugins/flash/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Screen Recorder',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/screen-recorder/' },
+                { label: 'Getting started', link: '/docs/plugins/screen-recorder/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Crisp',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/crisp/' },
+                { label: 'Getting started', link: '/docs/plugins/crisp/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Native Geocoder',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/nativegeocoder/' },
+                { label: 'Getting started', link: '/docs/plugins/nativegeocoder/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'InAppBrowser',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/inappbrowser/' },
+                { label: 'Getting started', link: '/docs/plugins/inappbrowser/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Mute',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/mute/' },
+                { label: 'Getting started', link: '/docs/plugins/mute/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Native Audio',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/native-audio/' },
+                { label: 'Getting started', link: '/docs/plugins/native-audio/getting-started' },
+              ],
+              collapsed: true,
             },
             {
               label: 'Browse All Plugins',

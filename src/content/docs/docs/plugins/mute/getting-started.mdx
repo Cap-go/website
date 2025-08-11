@@ -1,0 +1,276 @@
+---
+title: Getting Started
+description: Learn how to install and use the Mute plugin to detect silent mode state in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Usage
+
+Import the plugin and use its methods to check mute state:
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+// Check if device is muted
+const checkMuteState = async () => {
+  const { value } = await CapacitorMute.isMuted();
+  
+  if (value) {
+    console.log('Device is muted/silent');
+    // Adjust app behavior for silent mode
+  } else {
+    console.log('Device sound is on');
+  }
+};
+
+// Listen for mute state changes (iOS only)
+const listenForChanges = async () => {
+  await CapacitorMute.addListener('muteChanged', (state) => {
+    console.log('Mute state changed:', state.value);
+    updateUIForMuteState(state.value);
+  });
+};
+
+// Check if feature is available
+const checkAvailability = async () => {
+  const { value } = await CapacitorMute.isAvailable();
+  console.log('Mute detection available:', value);
+};
+```
+
+## API Reference
+
+### isMuted()
+
+Checks if the device is currently muted/in silent mode.
+
+```typescript
+const result = await CapacitorMute.isMuted();
+// Returns: { value: boolean }
+```
+
+### isAvailable()
+
+Checks if mute detection is available on the device.
+
+```typescript
+const result = await CapacitorMute.isAvailable();
+// Returns: { value: boolean }
+```
+
+## Events
+
+### muteChanged
+
+Fired when the mute state changes (iOS only).
+
+```typescript
+interface MuteChangedEvent {
+  value: boolean;
+}
+
+CapacitorMute.addListener('muteChanged', (event) => {
+  console.log('Is muted:', event.value);
+});
+```
+
+## Complete Example
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+export class SoundManager {
+  private isMuted = false;
+  private listener: any;
+
+  async initialize() {
+    // Check if mute detection is available
+    const { value: isAvailable } = await CapacitorMute.isAvailable();
+    
+    if (!isAvailable) {
+      console.log('Mute detection not available');
+      return;
+    }
+
+    // Get initial mute state
+    await this.checkMuteState();
+
+    // Listen for changes (iOS only)
+    this.setupListener();
+  }
+
+  async checkMuteState() {
+    try {
+      const { value } = await CapacitorMute.isMuted();
+      this.isMuted = value;
+      this.updateAppBehavior();
+    } catch (error) {
+      console.error('Failed to check mute state:', error);
+    }
+  }
+
+  private setupListener() {
+    this.listener = CapacitorMute.addListener('muteChanged', (event) => {
+      this.isMuted = event.value;
+      this.updateAppBehavior();
+    });
+  }
+
+  private updateAppBehavior() {
+    if (this.isMuted) {
+      // Device is muted - adjust app behavior
+      this.disableSoundEffects();
+      this.showVisualNotifications();
+    } else {
+      // Device sound is on
+      this.enableSoundEffects();
+      this.useAudioNotifications();
+    }
+  }
+
+  private disableSoundEffects() {
+    // Disable in-app sounds
+    console.log('Disabling sound effects');
+  }
+
+  private enableSoundEffects() {
+    // Enable in-app sounds
+    console.log('Enabling sound effects');
+  }
+
+  private showVisualNotifications() {
+    // Use visual feedback instead of audio
+    console.log('Using visual notifications');
+  }
+
+  private useAudioNotifications() {
+    // Use audio notifications
+    console.log('Using audio notifications');
+  }
+
+  cleanup() {
+    if (this.listener) {
+      this.listener.remove();
+    }
+  }
+}
+
+// Usage
+const soundManager = new SoundManager();
+await soundManager.initialize();
+```
+
+## Platform Behavior
+
+### iOS
+- Detects the physical mute switch state
+- Provides real-time change events
+- Works on iPhone and iPad with mute switch
+
+### Android
+- Checks if ringer mode is set to silent or vibrate
+- No change events (polling required)
+- Based on AudioManager ringer mode
+
+## Best Practices
+
+1. **Check availability first**
+   ```typescript
+   const { value } = await CapacitorMute.isAvailable();
+   if (!value) {
+     // Fallback to default behavior
+   }
+   ```
+
+2. **Respect user preferences**
+   Always honor the mute state and adjust your app's audio behavior accordingly.
+
+3. **Provide visual alternatives**
+   ```typescript
+   if (isMuted) {
+     // Show visual notifications
+     showToast('New message received');
+   } else {
+     // Play sound notification
+     playNotificationSound();
+   }
+   ```
+
+4. **Handle platform differences**
+   ```typescript
+   import { Capacitor } from '@capacitor/core';
+   
+   if (Capacitor.getPlatform() === 'ios') {
+     // Set up change listener
+     CapacitorMute.addListener('muteChanged', handler);
+   } else {
+     // Poll periodically on Android
+     setInterval(checkMuteState, 5000);
+   }
+   ```
+
+## Use Cases
+
+1. **Game Sound Management**
+   ```typescript
+   const shouldPlaySound = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     return !isMuted && userPreferences.soundEnabled;
+   };
+   ```
+
+2. **Notification Handling**
+   ```typescript
+   const sendNotification = async (message: string) => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     
+     if (isMuted) {
+       // Use vibration or visual notification
+       await Haptics.vibrate();
+       showBanner(message);
+     } else {
+       // Play notification sound
+       await playSound('notification.mp3');
+     }
+   };
+   ```
+
+3. **Video Player**
+   ```typescript
+   const initVideoPlayer = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     
+     videoPlayer.setMuted(isMuted);
+     if (isMuted) {
+       showSubtitles(true);
+       showMuteIndicator();
+     }
+   };
+   ```
+
+## Troubleshooting
+
+1. **Always returns false on Android**
+   - Check if device ringer mode is actually set to silent
+   - Some Android devices may have different behavior
+
+2. **No change events on Android**
+   - This is expected - Android doesn't provide mute switch events
+   - Implement polling if real-time detection is needed
+
+3. **Not working on simulator**
+   - iOS Simulator doesn't have a mute switch
+   - Test on real devices for accurate results

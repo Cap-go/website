@@ -1,0 +1,309 @@
+---
+title: Getting Started
+description: Learn how to install and use the Background Uploader plugin for reliable file uploads in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure permissions**
+   
+   ### iOS
+   Add background modes to your `Info.plist`:
+   ```xml
+   <key>UIBackgroundModes</key>
+   <array>
+     <string>processing</string>
+   </array>
+   ```
+   
+   ### Android
+   Add permissions to your `AndroidManifest.xml`:
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+   ```
+</Steps>
+
+## Usage
+
+Import the plugin and use its methods to upload files:
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+// Start an upload
+const startUpload = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/your/file.jpg',
+    serverUrl: 'https://your-server.com/upload',
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer your-token'
+    },
+    parameters: {
+      'userId': '12345',
+      'type': 'profile'
+    },
+    notificationTitle: 'Uploading Photo'
+  });
+  
+  console.log('Upload ID:', upload.id);
+};
+
+// Monitor upload progress
+const monitorProgress = async (uploadId: string) => {
+  const listener = await Uploader.addListener(
+    'progressEvent', 
+    (progress) => {
+      if (progress.id === uploadId) {
+        console.log(`Progress: ${progress.progress}%`);
+        console.log(`Bytes sent: ${progress.bytesSent}/${progress.bytesTotal}`);
+      }
+    }
+  );
+  
+  // Remember to remove listener when done
+  // listener.remove();
+};
+
+// Handle upload completion
+const handleCompletion = async () => {
+  const listener = await Uploader.addListener(
+    'completedEvent',
+    (result) => {
+      console.log('Upload completed:', result.id);
+      console.log('Server response:', result.response);
+    }
+  );
+};
+
+// Handle upload errors
+const handleErrors = async () => {
+  const listener = await Uploader.addListener(
+    'errorEvent',
+    (error) => {
+      console.error('Upload failed:', error.id);
+      console.error('Error:', error.error);
+    }
+  );
+};
+
+// Cancel an upload
+const cancelUpload = async (uploadId: string) => {
+  await Uploader.cancelUpload({ id: uploadId });
+};
+
+// Get all active uploads
+const getActiveUploads = async () => {
+  const uploads = await Uploader.getUploads();
+  console.log('Active uploads:', uploads);
+};
+```
+
+## API Reference
+
+### startUpload(options)
+
+Starts a new file upload.
+
+```typescript
+interface UploadOptions {
+  filePath: string;
+  serverUrl: string;
+  method?: 'POST' | 'PUT';
+  headers?: { [key: string]: string };
+  parameters?: { [key: string]: string };
+  notificationTitle?: string;
+  notificationBody?: string;
+  useUtf8Charset?: boolean;
+  maxRetries?: number;
+}
+```
+
+### cancelUpload(options)
+
+Cancels an ongoing upload.
+
+```typescript
+interface CancelOptions {
+  id: string;
+}
+```
+
+### getUploads()
+
+Returns all active uploads.
+
+### removeUpload(options)
+
+Removes an upload from the queue.
+
+```typescript
+interface RemoveOptions {
+  id: string;
+}
+```
+
+## Events
+
+### progressEvent
+
+Fired during upload progress.
+
+```typescript
+interface ProgressEvent {
+  id: string;
+  progress: number; // 0-100
+  bytesSent: number;
+  bytesTotal: number;
+}
+```
+
+### completedEvent
+
+Fired when upload completes successfully.
+
+```typescript
+interface CompletedEvent {
+  id: string;
+  response: string;
+  statusCode: number;
+}
+```
+
+### errorEvent
+
+Fired when upload fails.
+
+```typescript
+interface ErrorEvent {
+  id: string;
+  error: string;
+  statusCode?: number;
+}
+```
+
+## Advanced Features
+
+### Multipart Form Upload
+
+```typescript
+const uploadWithFormData = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/photo.jpg',
+    serverUrl: 'https://api.example.com/upload',
+    method: 'POST',
+    parameters: {
+      'name': 'profile-photo',
+      'description': 'User profile photo'
+    },
+    headers: {
+      'X-API-Key': 'your-api-key'
+    }
+  });
+};
+```
+
+### Binary Upload
+
+```typescript
+const uploadBinary = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/data.bin',
+    serverUrl: 'https://api.example.com/binary',
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/octet-stream'
+    }
+  });
+};
+```
+
+### Network-Aware Uploading
+
+```typescript
+import { Network } from '@capacitor/network';
+
+const smartUpload = async () => {
+  const status = await Network.getStatus();
+  
+  if (status.connectionType === 'wifi') {
+    // Start large file uploads on WiFi
+    await startLargeUpload();
+  } else if (status.connectionType === 'cellular') {
+    // Queue for later or warn user
+    console.log('Using cellular data');
+  }
+};
+```
+
+## Best Practices
+
+1. **Handle all events**
+   ```typescript
+   const setupUploadHandlers = () => {
+     Uploader.addListener('progressEvent', handleProgress);
+     Uploader.addListener('completedEvent', handleCompleted);
+     Uploader.addListener('errorEvent', handleError);
+   };
+   ```
+
+2. **Clean up listeners**
+   ```typescript
+   const listeners: PluginListenerHandle[] = [];
+   
+   // Add listeners
+   listeners.push(await Uploader.addListener(...));
+   
+   // Clean up when done
+   listeners.forEach(listener => listener.remove());
+   ```
+
+3. **Retry failed uploads**
+   ```typescript
+   const retryUpload = async (filePath: string, serverUrl: string) => {
+     try {
+       await Uploader.startUpload({
+         filePath,
+         serverUrl,
+         maxRetries: 3
+       });
+     } catch (error) {
+       console.error('Upload failed after retries:', error);
+     }
+   };
+   ```
+
+4. **Show upload notifications**
+   ```typescript
+   await Uploader.startUpload({
+     filePath: 'file:///path/to/file',
+     serverUrl: 'https://server.com/upload',
+     notificationTitle: 'Uploading File',
+     notificationBody: 'Your file is being uploaded...'
+   });
+   ```
+
+## Platform Notes
+
+### iOS
+- Uses `URLSession` for background uploads
+- Requires background processing capability
+- Uploads continue when app is suspended
+
+### Android
+- Uses `WorkManager` for reliable uploads
+- Shows foreground service notification during uploads
+- Respects battery optimization settings

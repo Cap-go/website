@@ -1,0 +1,192 @@
+---
+title: Getting Started
+description: Learn how to install and use the Flash plugin to control your device's flashlight in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Usage
+
+Import the plugin and use its methods to control the flashlight:
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// Check if flashlight is available
+const checkFlashlight = async () => {
+  const { value } = await CapacitorFlash.isAvailable();
+  console.log('Flashlight available:', value);
+};
+
+// Turn on flashlight
+const turnOn = async () => {
+  await CapacitorFlash.switchOn();
+};
+
+// Turn off flashlight
+const turnOff = async () => {
+  await CapacitorFlash.switchOff();
+};
+
+// Check if flashlight is on
+const checkStatus = async () => {
+  const { value } = await CapacitorFlash.isSwitchedOn();
+  console.log('Flashlight is on:', value);
+};
+
+// Toggle flashlight
+const toggle = async () => {
+  await CapacitorFlash.toggle();
+};
+```
+
+## API Reference
+
+### isAvailable()
+
+Checks if flashlight is available on the device.
+
+```typescript
+const result = await CapacitorFlash.isAvailable();
+// Returns: { value: boolean }
+```
+
+### switchOn(options?)
+
+Turns the flashlight on.
+
+```typescript
+interface SwitchOnOptions {
+  intensity?: number; // 0.0 to 1.0 (iOS only)
+}
+
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+### switchOff()
+
+Turns the flashlight off.
+
+```typescript
+await CapacitorFlash.switchOff();
+```
+
+### isSwitchedOn()
+
+Checks if the flashlight is currently on.
+
+```typescript
+const result = await CapacitorFlash.isSwitchedOn();
+// Returns: { value: boolean }
+```
+
+### toggle()
+
+Toggles the flashlight on/off.
+
+```typescript
+await CapacitorFlash.toggle();
+```
+
+## Complete Example
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+export class FlashlightService {
+  private isOn = false;
+
+  async init() {
+    const { value } = await CapacitorFlash.isAvailable();
+    if (!value) {
+      throw new Error('Flashlight not available on this device');
+    }
+  }
+
+  async toggle() {
+    if (this.isOn) {
+      await CapacitorFlash.switchOff();
+    } else {
+      await CapacitorFlash.switchOn();
+    }
+    this.isOn = !this.isOn;
+  }
+
+  async turnOn(intensity?: number) {
+    await CapacitorFlash.switchOn({ intensity });
+    this.isOn = true;
+  }
+
+  async turnOff() {
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+
+  async strobe(intervalMs: number = 100, duration: number = 3000) {
+    const endTime = Date.now() + duration;
+    
+    while (Date.now() < endTime) {
+      await CapacitorFlash.toggle();
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+    
+    // Ensure flashlight is off after strobe
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+}
+```
+
+## Best Practices
+
+1. **Check availability first**
+   Always verify flashlight availability before using it:
+   ```typescript
+   const { value } = await CapacitorFlash.isAvailable();
+   if (!value) {
+     // Show alternative UI or disable flashlight features
+   }
+   ```
+
+2. **Handle errors gracefully**
+   ```typescript
+   try {
+     await CapacitorFlash.switchOn();
+   } catch (error) {
+     console.error('Failed to turn on flashlight:', error);
+   }
+   ```
+
+3. **Turn off when not needed**
+   Always turn off the flashlight when your app goes to background or when the feature is no longer needed to save battery.
+
+4. **Avoid rapid toggling**
+   Implement debouncing to prevent rapid on/off switching which could damage the LED or drain battery.
+
+## Platform Notes
+
+### iOS
+- Requires iOS 10.0+
+- Uses `AVCaptureDevice` torch mode
+- Supports intensity control (0.0 to 1.0)
+
+### Android
+- Requires Android 6.0 (API 23)+
+- Uses Camera2 API
+- Intensity control not supported (uses default brightness)
+
+### Web
+- Not supported on web platform
+- Will return `isAvailable: false`

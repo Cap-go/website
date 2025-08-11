@@ -1,0 +1,477 @@
+---
+title: Getting Started
+description: Learn how to install and use the Native Audio plugin for high-performance audio playback in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/native-audio" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Add audio files**
+   Place your audio files in the appropriate platform folders:
+   - **iOS**: `ios/App/App/sounds/`
+   - **Android**: `android/app/src/main/res/raw/`
+</Steps>
+
+## Usage
+
+Import the plugin and preload audio files before playing:
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+// Preload audio files
+const preloadAudio = async () => {
+  // Simple preload for short sounds
+  await NativeAudio.preload({
+    assetId: 'click',
+    assetPath: 'sounds/click.mp3',
+    audioChannelNum: 1,
+    isUrl: false
+  });
+  
+  // Complex preload for music/longer audio
+  await NativeAudio.preloadComplex({
+    assetId: 'background-music',
+    assetPath: 'sounds/background.mp3',
+    audioChannelNum: 1,
+    volume: 0.5,
+    delay: 0,
+    isUrl: false
+  });
+};
+
+// Play audio
+const playSound = async () => {
+  await NativeAudio.play({
+    assetId: 'click'
+  });
+};
+
+// Play with options
+const playMusic = async () => {
+  await NativeAudio.play({
+    assetId: 'background-music',
+    time: 0 // Start from beginning
+  });
+};
+
+// Loop audio
+const loopMusic = async () => {
+  await NativeAudio.loop({
+    assetId: 'background-music'
+  });
+};
+
+// Stop audio
+const stopMusic = async () => {
+  await NativeAudio.stop({
+    assetId: 'background-music'
+  });
+};
+
+// Unload when done
+const cleanup = async () => {
+  await NativeAudio.unload({
+    assetId: 'click'
+  });
+  await NativeAudio.unload({
+    assetId: 'background-music'
+  });
+};
+```
+
+## API Reference
+
+### preload(options)
+
+Preloads an audio file for simple playback (best for short sounds).
+
+```typescript
+interface PreloadOptions {
+  assetId: string;
+  assetPath: string;
+  audioChannelNum?: number;
+  isUrl?: boolean;
+}
+
+await NativeAudio.preload({
+  assetId: 'sound-effect',
+  assetPath: 'sounds/effect.mp3',
+  audioChannelNum: 1,
+  isUrl: false
+});
+```
+
+### preloadComplex(options)
+
+Preloads audio with advanced options (best for music/background audio).
+
+```typescript
+interface PreloadComplexOptions {
+  assetId: string;
+  assetPath: string;
+  volume?: number; // 0.0 to 1.0
+  audioChannelNum?: number;
+  delay?: number;
+  isUrl?: boolean;
+  fadeDuration?: number;
+}
+
+await NativeAudio.preloadComplex({
+  assetId: 'theme-song',
+  assetPath: 'sounds/theme.mp3',
+  volume: 0.7,
+  audioChannelNum: 2,
+  isUrl: false
+});
+```
+
+### play(options)
+
+Plays a preloaded audio file.
+
+```typescript
+interface PlayOptions {
+  assetId: string;
+  time?: number; // Start time in seconds
+}
+
+await NativeAudio.play({
+  assetId: 'sound-effect',
+  time: 0
+});
+```
+
+### loop(options)
+
+Loops a preloaded audio file continuously.
+
+```typescript
+await NativeAudio.loop({
+  assetId: 'background-music'
+});
+```
+
+### stop(options)
+
+Stops playing an audio file.
+
+```typescript
+await NativeAudio.stop({
+  assetId: 'background-music'
+});
+```
+
+### pause(options)
+
+Pauses audio playback.
+
+```typescript
+await NativeAudio.pause({
+  assetId: 'background-music'
+});
+```
+
+### resume(options)
+
+Resumes paused audio.
+
+```typescript
+await NativeAudio.resume({
+  assetId: 'background-music'
+});
+```
+
+### setVolume(options)
+
+Sets the volume for an audio asset.
+
+```typescript
+interface SetVolumeOptions {
+  assetId: string;
+  volume: number; // 0.0 to 1.0
+}
+
+await NativeAudio.setVolume({
+  assetId: 'background-music',
+  volume: 0.3
+});
+```
+
+### getDuration(options)
+
+Gets the duration of an audio file in seconds.
+
+```typescript
+const { duration } = await NativeAudio.getDuration({
+  assetId: 'background-music'
+});
+console.log(`Duration: ${duration} seconds`);
+```
+
+### getCurrentTime(options)
+
+Gets the current playback time in seconds.
+
+```typescript
+const { currentTime } = await NativeAudio.getCurrentTime({
+  assetId: 'background-music'
+});
+console.log(`Current time: ${currentTime} seconds`);
+```
+
+### isPlaying(options)
+
+Checks if audio is currently playing.
+
+```typescript
+const { isPlaying } = await NativeAudio.isPlaying({
+  assetId: 'background-music'
+});
+console.log(`Is playing: ${isPlaying}`);
+```
+
+### unload(options)
+
+Unloads an audio file from memory.
+
+```typescript
+await NativeAudio.unload({
+  assetId: 'sound-effect'
+});
+```
+
+## Advanced Usage
+
+### Sound Manager Class
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+export class SoundManager {
+  private sounds: Map<string, boolean> = new Map();
+  private volume = 1.0;
+  
+  async init() {
+    // Preload all sounds
+    await this.preloadSound('click', 'sounds/click.mp3');
+    await this.preloadSound('success', 'sounds/success.mp3');
+    await this.preloadSound('error', 'sounds/error.mp3');
+    
+    // Preload music
+    await this.preloadMusic('background', 'sounds/background.mp3', 0.5);
+  }
+  
+  private async preloadSound(id: string, path: string) {
+    try {
+      await NativeAudio.preload({
+        assetId: id,
+        assetPath: path,
+        audioChannelNum: 1,
+        isUrl: false
+      });
+      this.sounds.set(id, true);
+    } catch (error) {
+      console.error(`Failed to preload ${id}:`, error);
+    }
+  }
+  
+  private async preloadMusic(id: string, path: string, volume: number) {
+    try {
+      await NativeAudio.preloadComplex({
+        assetId: id,
+        assetPath: path,
+        volume,
+        audioChannelNum: 2,
+        isUrl: false
+      });
+      this.sounds.set(id, true);
+    } catch (error) {
+      console.error(`Failed to preload ${id}:`, error);
+    }
+  }
+  
+  async playSound(id: string) {
+    if (!this.sounds.has(id)) {
+      console.warn(`Sound ${id} not preloaded`);
+      return;
+    }
+    
+    try {
+      await NativeAudio.play({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to play ${id}:`, error);
+    }
+  }
+  
+  async playMusic(id: string) {
+    if (!this.sounds.has(id)) return;
+    
+    try {
+      await NativeAudio.loop({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to play music ${id}:`, error);
+    }
+  }
+  
+  async stopMusic(id: string) {
+    try {
+      await NativeAudio.stop({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to stop ${id}:`, error);
+    }
+  }
+  
+  async setMasterVolume(volume: number) {
+    this.volume = Math.max(0, Math.min(1, volume));
+    
+    // Update all loaded sounds
+    for (const [id] of this.sounds) {
+      await NativeAudio.setVolume({
+        assetId: id,
+        volume: this.volume
+      });
+    }
+  }
+  
+  async cleanup() {
+    for (const [id] of this.sounds) {
+      await NativeAudio.unload({ assetId: id });
+    }
+    this.sounds.clear();
+  }
+}
+```
+
+### Loading from URLs
+
+```typescript
+// Load audio from URL
+await NativeAudio.preloadComplex({
+  assetId: 'remote-audio',
+  assetPath: 'https://example.com/audio.mp3',
+  isUrl: true,
+  volume: 0.8
+});
+```
+
+### Fade In/Out Effects
+
+```typescript
+const fadeIn = async (assetId: string, duration: number) => {
+  const steps = 20;
+  const stepDuration = duration / steps;
+  
+  await NativeAudio.setVolume({ assetId, volume: 0 });
+  await NativeAudio.play({ assetId });
+  
+  for (let i = 1; i <= steps; i++) {
+    await new Promise(resolve => setTimeout(resolve, stepDuration));
+    await NativeAudio.setVolume({
+      assetId,
+      volume: i / steps
+    });
+  }
+};
+
+const fadeOut = async (assetId: string, duration: number) => {
+  const steps = 20;
+  const stepDuration = duration / steps;
+  
+  for (let i = steps; i >= 0; i--) {
+    await NativeAudio.setVolume({
+      assetId,
+      volume: i / steps
+    });
+    await new Promise(resolve => setTimeout(resolve, stepDuration));
+  }
+  
+  await NativeAudio.stop({ assetId });
+};
+```
+
+## Best Practices
+
+1. **Preload during app initialization**
+   ```typescript
+   import { App } from '@capacitor/app';
+   
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       await soundManager.init();
+     }
+   });
+   ```
+
+2. **Handle errors gracefully**
+   ```typescript
+   try {
+     await NativeAudio.play({ assetId: 'sound' });
+   } catch (error) {
+     console.log('Audio playback failed, continuing silently');
+   }
+   ```
+
+3. **Unload unused audio**
+   ```typescript
+   // Unload sounds when leaving a screen
+   ionViewWillLeave() {
+     this.unloadScreenSounds();
+   }
+   ```
+
+4. **Use appropriate preload methods**
+   - `preload()` for short sound effects (< 5 seconds)
+   - `preloadComplex()` for music and longer audio
+
+## Platform Notes
+
+### iOS
+- Supports AAC, MP3, WAV, and other Core Audio formats
+- Uses AVAudioPlayer for complex audio
+- Uses System Sound Services for simple audio
+- Supports background audio with proper configuration
+
+### Android
+- Supports MP3, OGG, WAV formats
+- Uses SoundPool for simple audio
+- Uses MediaPlayer for complex audio
+- May require WAKE_LOCK permission for background playback
+
+### File Placement
+
+#### iOS
+Place files in `ios/App/App/sounds/` or create a folder reference in Xcode.
+
+#### Android
+Place files in `android/app/src/main/res/raw/`. 
+Note: File names must be lowercase with no special characters.
+
+## Common Issues
+
+1. **Audio not playing**
+   - Ensure files are in correct directories
+   - Check file format compatibility
+   - Verify assetId matches exactly
+
+2. **Delay in playback**
+   - Use `preload()` for sound effects
+   - Preload before you need to play
+
+3. **Memory issues**
+   - Unload audio files when not needed
+   - Don't preload too many large files
+
+4. **Background playback**
+   - Configure background audio capability on iOS
+   - Handle audio focus on Android

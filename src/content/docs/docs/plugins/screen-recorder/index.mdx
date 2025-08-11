@@ -1,0 +1,40 @@
+---
+title: "@capgo/capacitor-screen-recorder"
+description: Record your device's screen with audio support for creating tutorials, demos, and app previews.
+template: splash
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Record your device's screen with this powerful Capacitor plugin, perfect for creating tutorials, demos, and capturing app interactions.
+  image:
+    file: /video-camera.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/screen-recorder/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/riderx/capacitor-screen-recorder/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="High quality recording" icon="rocket">
+    Record screen in high quality with customizable settings 🎥
+  </Card>
+  <Card title="Audio support" icon="microphone">
+    Record with microphone audio and system sounds 🎤
+  </Card>
+  <Card title="Easy integration" icon="setting">
+    Simple API with start/stop recording methods 😊
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/screen-recorder/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>
