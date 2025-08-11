@@ -1,0 +1,288 @@
+---
+title: "Events"
+description: "All events you can listen to in the Capacitor Updater plugin for monitoring update status and progress"
+sidebar:
+  order: 9
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Capacitor Updater plugin provides several events you can listen to for monitoring the update process and responding to different states.
+
+## Event Listener Setup
+
+To listen to events, use the `addListener` method on the `CapacitorUpdater` object:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Add a listener
+const listener = await CapacitorUpdater.addListener('eventName', (event) => {
+  // Handle the event
+});
+
+// Remove the listener when no longer needed
+listener.remove();
+
+// Remove all listeners
+await CapacitorUpdater.removeAllListeners();
+```
+
+## Available Events
+
+### `download`
+
+Fired during the bundle download process. Provides download progress information.
+
+```typescript
+CapacitorUpdater.addListener('download', (event) => {
+  console.log(`Download progress: ${event.percent}%`);
+  console.log('Bundle info:', event.bundle);
+});
+```
+
+**Event Data:**
+- `percent`: number - Download progress percentage (0-100)
+- `bundle`: BundleInfo - Information about the bundle being downloaded
+
+<Aside>
+This event fires multiple times during download to report progress.
+</Aside>
+
+### `noNeedUpdate`
+
+Fired when a check for updates determines that no update is needed.
+
+```typescript
+CapacitorUpdater.addListener('noNeedUpdate', (event) => {
+  console.log('App is up to date');
+  console.log('Current bundle:', event.bundle);
+});
+```
+
+**Event Data:**
+- `bundle`: BundleInfo - Information about the current bundle
+
+### `updateAvailable`
+
+Fired when a new update is available for download.
+
+```typescript
+CapacitorUpdater.addListener('updateAvailable', (event) => {
+  console.log('Update available');
+  console.log('New bundle:', event.bundle);
+  // You can trigger a download here if needed
+});
+```
+
+**Event Data:**
+- `bundle`: BundleInfo - Information about the available update bundle
+
+### `downloadComplete`
+
+Fired when a bundle download has completed successfully.
+
+```typescript
+CapacitorUpdater.addListener('downloadComplete', (event) => {
+  console.log('Download completed');
+  console.log('Downloaded bundle:', event.bundle);
+  // You might want to set this bundle as next
+});
+```
+
+**Event Data:**
+- `bundle`: BundleInfo - Information about the downloaded bundle
+
+### `majorAvailable`
+
+Fired when a major update is available but blocked by auto-update settings.
+
+```typescript
+CapacitorUpdater.addListener('majorAvailable', (event) => {
+  console.log('Major update available:', event.version);
+  // Notify user about major update
+});
+```
+
+**Event Data:**
+- `version`: string - The version number of the major update
+
+<Aside type="tip">
+Major updates typically require user confirmation or app store updates. Use this event to notify users appropriately.
+</Aside>
+
+### `updateFailed`
+
+Fired when an update has failed to install at the next app start.
+
+```typescript
+CapacitorUpdater.addListener('updateFailed', (event) => {
+  console.error('Update failed to install');
+  console.log('Failed bundle:', event.bundle);
+  // Handle rollback or retry logic
+});
+```
+
+**Event Data:**
+- `bundle`: BundleInfo - Information about the bundle that failed to install
+
+### `downloadFailed`
+
+Fired when a bundle download has failed.
+
+```typescript
+CapacitorUpdater.addListener('downloadFailed', (event) => {
+  console.error('Download failed for version:', event.version);
+  // Handle download retry logic
+});
+```
+
+**Event Data:**
+- `version`: string - The version that failed to download
+
+### `appReloaded`
+
+Fired when the app has been reloaded.
+
+```typescript
+CapacitorUpdater.addListener('appReloaded', () => {
+  console.log('App has been reloaded');
+  // Perform any necessary reinitialization
+});
+```
+
+**Event Data:** None
+
+### `appReady`
+
+Fired when the app is ready to use after an update.
+
+```typescript
+CapacitorUpdater.addListener('appReady', (event) => {
+  console.log('App is ready');
+  console.log('Current bundle:', event.bundle);
+  console.log('Status:', event.status);
+});
+```
+
+**Event Data:**
+- `bundle`: BundleInfo - Information about the current bundle
+- `status`: string - The ready status
+
+<Aside type="caution">
+Remember to call `notifyAppReady()` within the configured timeout (default 10 seconds) to prevent automatic rollback.
+</Aside>
+
+## BundleInfo Object
+
+Many events include a `BundleInfo` object with the following properties:
+
+```typescript
+interface BundleInfo {
+  id: string;           // Unique bundle identifier
+  version: string;      // Bundle version
+  downloaded: string;   // Download timestamp
+  checksum?: string;    // Bundle checksum (if available)
+  status: BundleStatus; // Bundle status
+}
+```
+
+Where `BundleStatus` can be:
+- `'success'` - Bundle downloaded successfully
+- `'error'` - Bundle download/installation failed
+- `'pending'` - Bundle is pending to be set as next
+- `'downloading'` - Bundle is currently downloading
+
+## Example: Complete Update Flow
+
+Here's an example of handling the complete update flow with events:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+export class UpdateManager {
+  private listeners: any[] = [];
+
+  async setupListeners() {
+    // Listen for available updates
+    this.listeners.push(
+      await CapacitorUpdater.addListener('updateAvailable', async (event) => {
+        console.log('Update available:', event.bundle.version);
+        // Auto-download the update
+        await CapacitorUpdater.download({ 
+          url: event.bundle.url,
+          version: event.bundle.version 
+        });
+      })
+    );
+
+    // Monitor download progress
+    this.listeners.push(
+      await CapacitorUpdater.addListener('download', (event) => {
+        console.log(`Downloading: ${event.percent}%`);
+        // Update UI progress bar
+        this.updateProgressBar(event.percent);
+      })
+    );
+
+    // Handle download completion
+    this.listeners.push(
+      await CapacitorUpdater.addListener('downloadComplete', async (event) => {
+        console.log('Download complete:', event.bundle.version);
+        // Set as next bundle
+        await CapacitorUpdater.next({ id: event.bundle.id });
+      })
+    );
+
+    // Handle failures
+    this.listeners.push(
+      await CapacitorUpdater.addListener('downloadFailed', (event) => {
+        console.error('Download failed:', event.version);
+        this.showError('Update download failed. Please try again later.');
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorUpdater.addListener('updateFailed', (event) => {
+        console.error('Update installation failed:', event.bundle.version);
+        this.showError('Update installation failed. The app has been rolled back.');
+      })
+    );
+
+    // Handle app ready
+    this.listeners.push(
+      await CapacitorUpdater.addListener('appReady', async (event) => {
+        console.log('App ready with bundle:', event.bundle.version);
+        // Notify that app is ready
+        await CapacitorUpdater.notifyAppReady();
+      })
+    );
+  }
+
+  cleanup() {
+    // Remove all listeners when no longer needed
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+
+  private updateProgressBar(percent: number) {
+    // Update your UI progress bar
+  }
+
+  private showError(message: string) {
+    // Show error to user
+  }
+}
+```
+
+## Best Practices
+
+1. **Always call `notifyAppReady()`**: When using auto-update, always call this method after your app initializes to prevent rollback.
+
+2. **Handle failures gracefully**: Implement proper error handling for download and update failures.
+
+3. **Provide user feedback**: Use the download progress event to show update progress to users.
+
+4. **Clean up listeners**: Remove event listeners when they're no longer needed to prevent memory leaks.
+
+5. **Test update scenarios**: Test various update scenarios including failures, rollbacks, and major updates.

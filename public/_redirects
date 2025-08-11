@@ -14,3 +14,4 @@
 /en/* /:splat 302
 /login/ /register/ 302
 /robots.txt/ /robots.txt 301
+/docs/plugin/* /docs/plugins/updater/:splat 301

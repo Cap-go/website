@@ -68,7 +68,7 @@ With the Capgo SDK installed and configured, you're ready to upload your first l
           - name: Build
             run: npm run build
           - name: Deploy to Capgo
-            run: bunx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
+            run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
             env:
               CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
       ```

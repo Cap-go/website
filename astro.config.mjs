@@ -33,9 +33,9 @@ export default defineConfig({
   redirects: {
     '/docs/getting-started/': {
       status: 302,
-      destination: '/docs/plugin/cloud-mode/getting-started/',
+      destination: '/docs/plugins/updater/cloud-mode/getting-started/',
     },
-    '/docs/plugin/cloud-mode/getting-started/': {
+    '/docs/plugins/updater/cloud-mode/getting-started/': {
       status: 302,
       destination: '/docs/getting-started/quickstart',
     },
@@ -93,7 +93,7 @@ export default defineConfig({
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
       },
       social: [
-        { icon: 'discord', label: 'Discord', href: 'https://discord.com/invite/VnYRvBfgA6' },
+        { icon: 'discord', label: 'Discord', href: 'https://discord.capgo.app' },
         { icon: 'github', label: 'GitHub', href: 'https://github.com/Cap-go/' },
       ],
       sidebar: [
@@ -137,54 +137,41 @@ export default defineConfig({
           label: 'Plugins',
           collapsed: true,
           items: [
-            { label: 'All Plugins', link: '/docs/plugins/' },
-
+            { label: 'Getting Started', link: '/docs/plugins/' },
             {
               label: 'Updater',
               collapsed: true,
               items: [
-                { label: 'Overview', link: '/docs/plugin/overview' },
+                { label: 'Plugin Overview', link: '/docs/plugins/updater/overview' },
+                { label: 'Events', link: '/docs/plugins/updater/events' },
+                { label: 'API Reference', link: '/docs/plugins/updater/api' },
+                { label: 'Configuration', link: '/docs/plugins/updater/settings' },
+                { label: 'Known Issues', link: '/docs/plugins/updater/known-issues' },
+                { label: 'Debugging', link: '/docs/plugins/updater/debugging' },
+                { label: 'Cordova Migration', link: '/docs/plugins/updater/cordova' },
                 {
-                  label: 'Cloud Mode',
+                  label: 'Local Development',
+                  collapsed: true,
+                  autogenerate: { directory: '/docs/plugins/updater/local-dev' },
+                },
+                {
+                  label: 'Self-Hosted Mode',
                   items: [
-                    { label: 'Getting Started', link: '/docs/plugin/cloud-mode/getting-started' },
-                    { label: 'Auto Update', link: '/docs/plugin/cloud-mode/auto-update' },
-                    { label: 'Channel System', link: '/docs/plugin/cloud-mode/channel-system' },
-                    { label: 'Hybrid Update', link: '/docs/plugin/cloud-mode/hybrid-update' },
-                    { label: 'Manual Update', link: '/docs/plugin/cloud-mode/manual-update' },
+                    { label: 'Getting Started', link: '/docs/plugins/updater/self-hosted/getting-started' },
+                    { label: 'Contributing', link: '/docs/plugins/updater/self-hosted/contributing' },
+                    { label: 'Auto Update', link: '/docs/plugins/updater/self-hosted/auto-update' },
+                    { label: 'Manual Update', link: '/docs/plugins/updater/self-hosted/manual-update' },
+                    { label: 'Encrypted Bundles', link: '/docs/plugins/updater/self-hosted/encrypted-bundles' },
+                    { label: 'Update API Endpoint', link: '/docs/plugins/updater/self-hosted/handling-updates' },
+                    { label: 'Statistics API Endpoint', link: '/docs/plugins/updater/self-hosted/handling-stats' },
+                    { label: 'Channel API Endpoint', link: '/docs/plugins/updater/self-hosted/handling-channels' },
                   ],
                   collapsed: true,
                 },
-                { label: 'Plugin methods', link: '/docs/plugin/api' },
-                { label: 'Known Issues', link: '/docs/plugin/known-issues' },
-                { label: 'Cordova', link: '/docs/plugin/cordova' },
-                { label: 'Options', link: '/docs/plugin/settings' },
-                { label: 'Statistics', link: '/docs/plugin/statistics-api' },
-                { label: 'Debugging', link: '/docs/plugin/debugging' },
                 {
                   label: 'Migrations',
                   collapsed: true,
                   autogenerate: { directory: 'docs/upgrade' },
-                },
-                {
-                  label: 'Local Development',
-                  collapsed: true,
-                  autogenerate: { directory: 'docs/plugin/local-dev' },
-                },
-                {
-                  label: 'Self Hosted',
-                  items: [
-                    { label: 'Getting Started', link: '/docs/plugin/self-hosted/getting-started' },
-                    { label: 'Contributing', link: '/docs/plugin/self-hosted/contributing' },
-                    { label: 'Auto Update', link: '/docs/plugin/self-hosted/auto-update' },
-                    { label: 'Manual Update', link: '/docs/plugin/self-hosted/manual-update' },
-                    { label: 'Encrypted Bundles', link: '/docs/plugin/self-hosted/encrypted-bundles' },
-                    { label: 'Update API Endpoint', link: '/docs/plugin/self-hosted/handling-updates' },
-                    { label: 'Statistics API Endpoint', link: '/docs/plugin/self-hosted/handling-stats' },
-                    { label: 'Channel API Endpoint', link: '/docs/plugin/self-hosted/handling-channels' },
-                    { label: 'Local Development', autogenerate: { directory: 'docs/plugin/self-hosted/local-dev' }, collapsed: true },
-                  ],
-                  collapsed: true,
                 },
               ],
             },
@@ -290,11 +277,7 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'Browse All Plugins',
-              link: '/plugins/',
-            },
-            {
-              label: '🚀 Need a Plugin?',
+              label: '👋 Get a custom plugin',
               link: '/consulting/',
             },
           ],
