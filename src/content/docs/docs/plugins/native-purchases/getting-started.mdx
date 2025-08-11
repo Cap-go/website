@@ -1,0 +1,354 @@
+---
+title: Getting Started
+description: Learn how to install and configure the Capacitor Native Purchases plugin to implement in-app purchases and subscriptions.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+import MicroCard from '@/components/MicroCard.astro'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/native-purchases" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure the plugin**
+   
+   <CardGrid>
+     <MicroCard>
+       <span slot="title">Initialize Purchases</span>
+       ```typescript
+       import { NativePurchases } from '@capgo/native-purchases';
+
+       // Initialize with your app's API keys
+       await NativePurchases.configure({
+         apiKey: 'your_api_key_here',
+         appUserID: 'user123' // Optional custom user ID
+       });
+       ```
+     </MicroCard>
+     <MicroCard>
+       <span slot="title">Get Products</span>
+       ```typescript
+       // Fetch available products
+       const { products } = await NativePurchases.getProducts({
+         productIdentifiers: [
+           'premium_monthly',
+           'premium_yearly'
+         ]
+       });
+
+       console.log('Available products:', products);
+       ```
+     </MicroCard>
+   </CardGrid>
+
+   <Tabs>
+     <TabItem label="iOS">
+       1. Configure in App Store Connect:
+          - Create your in-app purchases
+          - Submit for review
+       
+       2. Add to `Info.plist`:
+       ```xml
+       <key>SKAdNetworkItems</key>
+       <array>
+         <dict>
+           <key>SKAdNetworkIdentifier</key>
+           <string>your-network-id.skadnetwork</string>
+         </dict>
+       </array>
+       ```
+     </TabItem>
+     <TabItem label="Android">
+       1. Configure in Google Play Console:
+          - Create in-app products
+          - Add your app's signing certificate
+       
+       2. Add to `AndroidManifest.xml`:
+       ```xml
+       <uses-permission android:name="com.android.vending.BILLING" />
+       ```
+     </TabItem>
+   </Tabs>
+
+4. **Making purchases**
+   ```typescript
+   import { NativePurchases } from '@capgo/native-purchases';
+
+   // Purchase a product
+   try {
+     const { customerInfo } = await NativePurchases.purchaseProduct({
+       productIdentifier: 'premium_monthly'
+     });
+
+     console.log('Purchase successful:', customerInfo);
+     
+     // Check if user has active entitlements
+     if (customerInfo.entitlements.active['premium']) {
+       console.log('User has premium access!');
+     }
+   } catch (error) {
+     console.error('Purchase failed:', error);
+   }
+
+   // Restore purchases
+   const { customerInfo } = await NativePurchases.restorePurchases();
+   console.log('Restored purchases:', customerInfo);
+   ```
+
+5. **Advanced implementation**
+   ```typescript
+   import { NativePurchases } from '@capgo/native-purchases';
+
+   export class PurchaseService {
+     private products: any[] = [];
+     private customerInfo: any = null;
+
+     async initialize(userId?: string) {
+       try {
+         // Configure SDK
+         await NativePurchases.configure({
+           apiKey: process.env.PURCHASES_API_KEY,
+           appUserID: userId,
+           observerMode: false, // Set true if using with other purchase SDKs
+           userDefaultsSuiteName: 'group.com.yourapp'
+         });
+
+         // Set user attributes
+         await NativePurchases.setAttributes({
+           '$email': 'user@example.com',
+           'user_level': 'gold',
+           'app_version': '1.0.0'
+         });
+
+         // Get initial customer info
+         await this.syncCustomerInfo();
+         
+         // Listen for updates
+         this.setupListeners();
+       } catch (error) {
+         console.error('Failed to initialize purchases:', error);
+       }
+     }
+
+     private setupListeners() {
+       // Listen for customer info updates
+       NativePurchases.addListener('customerInfoUpdate', (info) => {
+         this.customerInfo = info.customerInfo;
+         this.checkSubscriptionStatus();
+       });
+
+       // Listen for promotional purchases (iOS)
+       NativePurchases.addListener('shouldPurchasePromoProduct', async (data) => {
+         // Handle App Store promotional purchases
+         const { product } = data;
+         const shouldPurchase = await this.showPromotionalOffer(product);
+         
+         if (shouldPurchase) {
+           await this.purchaseProduct(product.identifier);
+         }
+       });
+     }
+
+     async loadProducts() {
+       const { products } = await NativePurchases.getProducts({
+         productIdentifiers: [
+           'premium_monthly',
+           'premium_yearly',
+           'lifetime_access'
+         ]
+       });
+
+       this.products = products;
+       return products;
+     }
+
+     async purchaseProduct(productId: string) {
+       try {
+         // Show loading
+         this.showLoading(true);
+
+         const { customerInfo } = await NativePurchases.purchaseProduct({
+           productIdentifier: productId
+         });
+
+         this.customerInfo = customerInfo;
+         
+         // Handle successful purchase
+         if (this.hasActiveSubscription()) {
+           this.unlockPremiumFeatures();
+           this.showSuccessMessage();
+         }
+
+         return customerInfo;
+       } catch (error: any) {
+         // Handle different error cases
+         if (error.userCancelled) {
+           console.log('User cancelled purchase');
+         } else if (error.code === 'PRODUCT_ALREADY_PURCHASED') {
+           await this.restorePurchases();
+         } else {
+           this.showErrorMessage(error.message);
+         }
+         throw error;
+       } finally {
+         this.showLoading(false);
+       }
+     }
+
+     async restorePurchases() {
+       const { customerInfo } = await NativePurchases.restorePurchases();
+       this.customerInfo = customerInfo;
+       
+       if (this.hasActiveSubscription()) {
+         this.showSuccessMessage('Purchases restored!');
+         this.unlockPremiumFeatures();
+       } else {
+         this.showInfoMessage('No purchases to restore');
+       }
+
+       return customerInfo;
+     }
+
+     async checkTrialOrIntroductoryPrice(productId: string) {
+       const { eligible } = await NativePurchases.checkTrialOrIntroductoryPriceEligibility({
+         productIdentifiers: [productId]
+       });
+
+       return eligible[productId];
+     }
+
+     hasActiveSubscription(): boolean {
+       return this.customerInfo?.entitlements?.active?.['premium'] !== undefined;
+     }
+
+     getSubscriptionExpirationDate(): Date | null {
+       const premium = this.customerInfo?.entitlements?.active?.['premium'];
+       return premium ? new Date(premium.expirationDate) : null;
+     }
+
+     async syncCustomerInfo() {
+       const { customerInfo } = await NativePurchases.getCustomerInfo();
+       this.customerInfo = customerInfo;
+       return customerInfo;
+     }
+
+     private unlockPremiumFeatures() {
+       // Enable premium features in your app
+       localStorage.setItem('isPremium', 'true');
+       // Update UI, enable features, etc.
+     }
+
+     private showLoading(show: boolean) {
+       // Show/hide loading indicator
+     }
+
+     private showSuccessMessage(message = 'Purchase successful!') {
+       // Show success notification
+     }
+
+     private showErrorMessage(message: string) {
+       // Show error notification
+     }
+
+     private showInfoMessage(message: string) {
+       // Show info notification
+     }
+
+     private async showPromotionalOffer(product: any): Promise<boolean> {
+       // Show UI for promotional offer
+       return true; // or false based on user choice
+     }
+   }
+   ```
+</Steps>
+
+## API Reference
+
+### Methods
+
+#### `configure(options: ConfigureOptions)`
+Initialize the SDK with your credentials.
+
+**Parameters:**
+- `options.apiKey`: string - Your app's API key
+- `options.appUserID`: string (optional) - Custom user identifier
+- `options.observerMode`: boolean (optional) - Disable automatic transaction finishing
+- `options.userDefaultsSuiteName`: string (optional) - iOS App Group name
+
+#### `getProducts(options: GetProductsOptions)`
+Fetch product details from the store.
+
+**Returns:** Promise<{ products: Product[] }>
+
+#### `purchaseProduct(options: PurchaseOptions)`
+Initiate a purchase.
+
+**Returns:** Promise<{ customerInfo: CustomerInfo }>
+
+#### `restorePurchases()`
+Restore previous purchases.
+
+**Returns:** Promise<{ customerInfo: CustomerInfo }>
+
+#### `getCustomerInfo()`
+Get current customer information.
+
+**Returns:** Promise<{ customerInfo: CustomerInfo }>
+
+### Events
+
+- `customerInfoUpdate`: Fired when customer info changes
+- `shouldPurchasePromoProduct`: iOS promotional purchase events
+
+## Platform Notes
+
+### iOS
+- Requires iOS 11.0 or later
+- App Store receipt validation
+- Support for promotional offers
+- StoreKit 2 support on iOS 15+
+
+### Android
+- Requires Android 5.0 (API 21) or later
+- Google Play Billing Library
+- Supports immediate and deferred purchases
+
+## Common Use Cases
+
+1. **Subscriptions**: Monthly/yearly premium access
+2. **One-time Purchases**: Remove ads, unlock features
+3. **Consumables**: In-game currency, credits
+4. **Free Trials**: Introductory offers for new users
+5. **Family Sharing**: Shared subscriptions (iOS)
+
+## Best Practices
+
+1. **Always Restore**: Provide restore functionality
+2. **Cache Products**: Store product info locally
+3. **Handle Errors**: Graceful error handling
+4. **Receipt Validation**: Always validate on your server
+5. **Test Thoroughly**: Use sandbox/test accounts
+
+## Troubleshooting
+
+**Products not loading:**
+- Verify product IDs match store configuration
+- Ensure agreements are signed in store consoles
+- Check products are approved/active
+
+**Purchases failing:**
+- Check internet connectivity
+- Verify test accounts are configured
+- Ensure billing permissions are granted
+
+**Subscription status incorrect:**
+- Call `syncCustomerInfo()` to refresh
+- Check timezone/date settings
+- Verify receipt validation

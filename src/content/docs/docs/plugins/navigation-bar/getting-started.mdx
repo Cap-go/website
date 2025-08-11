@@ -1,0 +1,205 @@
+---
+title: Getting Started
+description: Learn how to install and configure the Capacitor Navigation Bar plugin to customize the Android navigation bar color and style.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+import MicroCard from '@/components/MicroCard.astro'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure the plugin**
+   
+   <CardGrid>
+     <MicroCard>
+       <span slot="title">Set Navigation Bar Color</span>
+       ```typescript
+       import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+       // Set navigation bar color
+       await NavigationBar.setColor({
+         color: '#FF0000', // Red color
+         darkButtons: false // Use light buttons
+       });
+       ```
+     </MicroCard>
+     <MicroCard>
+       <span slot="title">Dynamic Theme Support</span>
+       ```typescript
+       // Set color based on theme
+       const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+       
+       await NavigationBar.setColor({
+         color: isDarkMode ? '#000000' : '#FFFFFF',
+         darkButtons: !isDarkMode
+       });
+       ```
+     </MicroCard>
+   </CardGrid>
+
+   <Tabs>
+     <TabItem label="Android">
+       **Minimum Requirements:**
+       - Android 5.0 (API level 21) or higher
+       - The plugin only works on Android devices
+       
+       No additional setup required in AndroidManifest.xml.
+     </TabItem>
+     <TabItem label="iOS">
+       This plugin is Android-only. iOS does not have a customizable navigation bar.
+     </TabItem>
+   </Tabs>
+
+4. **Advanced usage**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   export class ThemeService {
+     // Set transparent navigation bar
+     async setTransparent() {
+       await NavigationBar.setColor({
+         color: '#00000000', // Transparent
+         darkButtons: true
+       });
+     }
+
+     // Match app theme
+     async matchAppTheme(primaryColor: string, isLight: boolean) {
+       await NavigationBar.setColor({
+         color: primaryColor,
+         darkButtons: isLight
+       });
+     }
+
+     // Get current navigation bar color
+     async getCurrentColor() {
+       const result = await NavigationBar.getColor();
+       console.log('Current color:', result.color);
+       return result.color;
+     }
+
+     // Reset to default
+     async resetToDefault() {
+       await NavigationBar.setColor({
+         color: '#000000',
+         darkButtons: false
+       });
+     }
+   }
+   ```
+
+5. **Integration with app lifecycle**
+   ```typescript
+   import { App } from '@capacitor/app';
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Update navigation bar on app state changes
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       // Restore your app's navigation bar color
+       await NavigationBar.setColor({
+         color: '#YourAppColor',
+         darkButtons: true
+       });
+     }
+   });
+
+   // Handle theme changes
+   window.matchMedia('(prefers-color-scheme: dark)')
+     .addEventListener('change', async (e) => {
+       await NavigationBar.setColor({
+         color: e.matches ? '#121212' : '#FFFFFF',
+         darkButtons: !e.matches
+       });
+     });
+   ```
+</Steps>
+
+## API Reference
+
+### Methods
+
+#### `setColor(options: ColorOptions)`
+Set the navigation bar color and button style.
+
+**Parameters:**
+- `options`: Configuration object
+  - `color`: string - Hex color code (e.g., '#FF0000')
+  - `darkButtons`: boolean - Use dark buttons (true) or light buttons (false)
+
+**Returns:** Promise<void>
+
+#### `getColor()`
+Get the current navigation bar color.
+
+**Returns:** Promise<{ color: string }>
+
+### Interfaces
+
+```typescript
+interface ColorOptions {
+  color: string;      // Hex color code
+  darkButtons: boolean; // Button style
+}
+
+interface ColorResult {
+  color: string;      // Current hex color
+}
+```
+
+## Platform Notes
+
+### Android
+- Requires Android 5.0 (API level 21) or higher
+- Color changes are immediate
+- Transparent colors are supported (use alpha channel)
+- The navigation bar might not be visible on devices with gesture navigation
+
+### iOS
+- This plugin has no effect on iOS devices
+- iOS does not provide APIs to customize the system navigation
+
+## Common Use Cases
+
+1. **Brand Consistency**: Match navigation bar with your app's primary color
+2. **Theme Support**: Adapt to light/dark themes dynamically
+3. **Immersive Experiences**: Use transparent navigation for full-screen content
+4. **Status Indication**: Change color to indicate app states (recording, errors, etc.)
+
+## Best Practices
+
+1. **Color Contrast**: Ensure sufficient contrast between navigation bar and buttons
+   ```typescript
+   // Good contrast examples
+   setColor({ color: '#FFFFFF', darkButtons: true });  // White bar, dark buttons
+   setColor({ color: '#000000', darkButtons: false }); // Black bar, light buttons
+   ```
+
+2. **Theme Consistency**: Update navigation bar when theme changes
+3. **Accessibility**: Consider users with visual impairments when choosing colors
+4. **Performance**: Avoid frequent color changes that might distract users
+
+## Troubleshooting
+
+**Navigation bar not changing:**
+- Verify the device is running Android 5.0+
+- Check if the device has gesture navigation enabled
+- Ensure color format is valid hex (e.g., '#FF0000')
+
+**Buttons not visible:**
+- Check the `darkButtons` parameter matches your background color
+- Light backgrounds need `darkButtons: true`
+- Dark backgrounds need `darkButtons: false`
+
+**Color appears different:**
+- Some Android versions may modify the color slightly
+- Use fully opaque colors for best results

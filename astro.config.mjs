@@ -137,6 +137,7 @@ export default defineConfig({
           label: 'Plugins',
           collapsed: true,
           items: [
+            { label: 'All Plugins', link: '/docs/plugins/' },
 
             {
               label: 'Updater',

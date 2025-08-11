@@ -1,36 +1,70 @@
 ---
-title: Welcome to Capgo
-description: Capgo is a open-source live update platform for Capacitor dev teams that enables you to deliver updates to your users in matter of minutes instead of days.
+title: Welcome to Capgo Documentation
+description: Your comprehensive guide to Capgo Cloud live updates and our complete suite of Capacitor plugins for building powerful mobile apps.
 template: splash
 next: false
 hero:
-  tagline: Capgo is a open source live update platform for Capacitor and mobile development teams that enables you to deliver live updates to your users in matter of minutes instead of days
+  tagline: Master Capgo Cloud for instant app updates and explore our comprehensive collection of Capacitor plugins to enhance your mobile development
   image:
     file: /logo.svg
   actions:
-    - text: Get started
+    - text: Get started with Capgo Cloud
       link: /docs/getting-started/quickstart/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: https://github.com/Cap-go/Capgo/
-      icon: external
+    - text: Browse All Plugins
+      link: /docs/plugins/
+      icon: puzzle
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## 🚀 Capgo Cloud - Live Updates Made Simple
 
 <CardGrid stagger>
-  <Card title="The power of Live Update" icon="rocket">
-    Seamlessly deliver live app updates, critical bug fixes, content changes, beta features, and more to give your users the best experience possible.
+  <Card title="Instant Updates" icon="rocket">
+    Deploy JavaScript, HTML, and CSS updates directly to users without app store delays. Fix bugs and ship features in minutes, not days.
   </Card>
-  <Card title="Easy to integrate" icon="pencil">
-    The plugin take 3 steps to integrate in your codebase and allow you to send update to your user in matter of minutes instead of days !
+  <Card title="3-Step Integration" icon="pencil">
+    Get started with just `npx @capgo/cli@latest init [APIKEY]` and start pushing updates immediately with our simple integration.
   </Card>
-  <Card title="Install" icon="setting">
-    Run `npx @capgo/cli@latest init [APIKEY]` to get started
+  <Card title="Advanced Features" icon="setting">
+    Channels for A/B testing, automatic rollbacks, update analytics, encrypted bundles, and enterprise-grade security features.
   </Card>
-  <Card title="Extensive documentation" icon="open-book">
-    Learn in the [Documentation](/docs/getting-started/quickstart/) how to Master the plugin in 5 mins with our onboarding video.
+  <Card title="Complete Guide" icon="open-book">
+    Learn everything from [quick setup](/docs/getting-started/quickstart/) to advanced deployment strategies in our comprehensive documentation.
   </Card>
 </CardGrid>
+
+## 📚 What's in This Documentation
+
+<CardGrid>
+  <LinkCard 
+    title="Capgo Cloud Setup"
+    description="Complete guides for integrating live updates, managing channels, CI/CD integration, and monitoring your deployments."
+    href="/docs/getting-started/quickstart/"
+  />
+  <LinkCard 
+    title="20+ Capacitor Plugins" 
+    description="Explore our collection of production-ready plugins for biometrics, purchases, camera, storage, and more native features."
+    href="/docs/plugins/"
+  />
+  <LinkCard 
+    title="CLI & Public API"
+    description="Automate your workflow with our CLI tools and integrate Capgo into your existing systems with our REST API."
+    href="/docs/cli/overview/"
+  />
+  <LinkCard 
+    title="Enterprise Solutions"
+    description="Dedicated support, SLAs, custom features, and advanced security options for teams that need more."
+    href="/enterprise/"
+  />
+</CardGrid>
+
+## 🎯 Quick Links
+
+- **First time?** Start with the [5-minute quickstart](/docs/getting-started/quickstart/)
+- **Need a plugin?** Browse our [plugin collection](/docs/plugins/) or request [custom development](/consulting/)
+- **Having issues?** Check the [FAQ](/docs/faq/) or join our [Discord](https://discord.com/invite/VnYRvBfgA6)
+- **Enterprise needs?** Check our [enterprise solutions](/enterprise/) or [contact us](mailto:support@capgo.app)
