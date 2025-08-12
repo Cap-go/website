@@ -155,10 +155,9 @@ export default defineConfig({
                   autogenerate: { directory: '/docs/plugins/updater/local-dev' },
                 },
                 {
-                  label: 'Self-Hosted Mode',
+                  label: 'Self-Hosting',
                   items: [
                     { label: 'Getting Started', link: '/docs/plugins/updater/self-hosted/getting-started' },
-                    { label: 'Contributing', link: '/docs/plugins/updater/self-hosted/contributing' },
                     { label: 'Auto Update', link: '/docs/plugins/updater/self-hosted/auto-update' },
                     { label: 'Manual Update', link: '/docs/plugins/updater/self-hosted/manual-update' },
                     { label: 'Encrypted Bundles', link: '/docs/plugins/updater/self-hosted/encrypted-bundles' },

@@ -15,3 +15,4 @@
 /login/ /register/ 302
 /robots.txt/ /robots.txt 301
 /docs/plugin/* /docs/plugins/updater/:splat 301
+/docs/plugins/updater/self-hosted/contributing.mdx /docs/plugins/updater/local-dev/contributing.mdx 301
