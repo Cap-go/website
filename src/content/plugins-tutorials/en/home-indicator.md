@@ -46,7 +46,7 @@ isHidden() => Promise<{ hidden: boolean; }>
 
 Get the home indicator status.
 
-**Returns:** Promise<{ hidden: boolean; }>
+**Returns:** `Promise<{ hidden: boolean; }>`
 
 **Since:** 0.0.1
 
