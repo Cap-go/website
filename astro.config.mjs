@@ -82,7 +82,7 @@ export default defineConfig({
         exclude: locales.map((locale) => `**/${locale}/**`),
       })],
       disable404Route: true,
-      logo: { src: './logo.svg' },
+      logo: { src: '~public/logo.svg' },
       markdown: { headingLinks: false },
       customCss: ['./src/css/docs.css'],
       expressiveCode: { themes: ['github-dark'] },
@@ -142,7 +142,7 @@ export default defineConfig({
               label: 'Updater',
               collapsed: true,
               items: [
-                { label: 'Plugin Overview', link: '/docs/plugins/updater/overview' },
+                { label: 'Getting Started', link: '/docs/plugins/updater' },
                 { label: 'Events', link: '/docs/plugins/updater/events' },
                 { label: 'API Reference', link: '/docs/plugins/updater/api' },
                 { label: 'Configuration', link: '/docs/plugins/updater/settings' },
