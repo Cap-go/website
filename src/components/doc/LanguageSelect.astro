@@ -1,21 +1,23 @@
 ---
+// @ts-nocheck
 import { locales } from '@/services/locale'
 ---
 
 <div class="relative flex flex-row items-center">
   <button
     id="language-menu-button"
-    class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none"
+    type="button"
+    class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
   >
     Language
     <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
     </svg>
   </button>
-  <div id="language-menu" class="absolute hidden w-56 origin-top-right rounded-md border border-gray-400 bg-white shadow-lg" style="top: 100%; right: 0;">
+  <div id="language-menu" class="absolute hidden z-50 w-56 origin-top-right rounded-md border border-gray-400 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800" style="top: 100%; right: 0;">
     {
       locales.map((j) => (
-        <a id={`language_${j}`} class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" tabindex="-1">
+        <a id={`language_${j}`} class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-100" role="menuitem" tabindex="-1">
           {j.toUpperCase()}
         </a>
       ))
@@ -23,32 +25,37 @@ import { locales } from '@/services/locale'
   </div>
 </div>
 
-<script define:vars={{ locales, currentLocale: Astro.locals.locale }}>
-  let test = 0
+<script is:inline define:vars={{ locales, currentLocale: Astro.locals.locale }}>
   const languageMenu = document.getElementById('language-menu')
   const button = document.getElementById('language-menu-button')
-  const adjustMenuPosition = () => {
-    if (test % 2 === 0) document.getElementById('language-menu').classList.remove('hidden')
-    else document.getElementById('language-menu').classList.add('hidden')
-    test += 1
-    const rect = button.getBoundingClientRect()
-    const viewportHeight = window.innerHeight
-    const menuHeight = languageMenu.offsetHeight
-    if (rect.bottom + menuHeight > viewportHeight) {
-      languageMenu.style.top = 'auto'
-      languageMenu.style.bottom = '100%'
-    } else {
-      languageMenu.style.top = '100%'
-      languageMenu.style.bottom = 'auto'
+  if (languageMenu && button) {
+    const adjustMenuPosition = () => {
+      if (languageMenu.classList.contains('hidden')) return
+      const rect = button.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+      const menuHeight = languageMenu.offsetHeight
+      if (rect.bottom + menuHeight > viewportHeight) {
+        languageMenu.style.top = 'auto'
+        languageMenu.style.bottom = '100%'
+      } else {
+        languageMenu.style.top = '100%'
+        languageMenu.style.bottom = 'auto'
+      }
     }
-  }
-  window.addEventListener('resize', adjustMenuPosition)
-  button.addEventListener('click', adjustMenuPosition)
-  locales.forEach((j) => {
-    document.getElementById(`language_${j}`).addEventListener('click', () => {
-      const tmp = new URL(window.location.href).pathname.replace(`/${currentLocale}/`, '/')
-      if (j === 'en') window.location.href = tmp
-      else window.location.href = `/${j}${tmp}`
+    // window.addEventListener('resize', adjustMenuPosition)
+    button.onclick = () => {
+      const willShow = languageMenu.classList.contains('hidden')
+      languageMenu.classList.toggle('hidden')
+      if (willShow) adjustMenuPosition()
+    }
+    locales.forEach((j) => {
+      const item = document.getElementById(`language_${j}`)
+      if (!item) return
+      item.addEventListener('click', () => {
+        const tmp = new URL(window.location.href).pathname.replace(`/${currentLocale}/`, '/')
+        if (j === 'en') window.location.href = tmp
+        else window.location.href = `/${j}${tmp}`
+      })
     })
-  })
+  }
 </script>
