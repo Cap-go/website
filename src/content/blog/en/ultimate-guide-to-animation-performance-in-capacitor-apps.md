@@ -32,9 +32,14 @@ next_blog: ''
 | Capacitor on iOS | WKWebView with JavaScript runtime | Good, occasional frame drops |
 | Capacitor on Android | System WebView (varies by device) | Variable, device-dependent |
 
-### What’s Next?
+### What's Next?
 
 Learn how to measure, optimize, and ensure cross-platform consistency for animations in your Capacitor app. This guide will walk you through practical tips, tools, and real-world examples to help you deliver a seamless user experience.
+
+**Related guides that complement this performance optimization:**
+- [Ultimate Guide to Debugging Capacitor Apps](https://capgo.app/blog/ultimate-guide-to-debugging-capacitor-apps/) - Debug performance issues and bottlenecks
+- [Performance Monitoring in Capacitor](https://capgo.app/blog/set-up-performance-monitoring-in-capacitor/) - Set up monitoring to track animation performance in production
+- [Capacitor OTA Updates](https://capgo.app/blog/ultimate-guide-to-capacitor-ota-updates/) - Deploy performance improvements instantly
 
 ## 🛠️ Front-end Performance: Optimizing a Marquee-style effect using CSS Animation and JavaScript
 
