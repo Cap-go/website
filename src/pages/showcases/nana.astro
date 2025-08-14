@@ -1,0 +1,466 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const title = [Astro.locals.runtimeConfig.public.brand, 'NANA Success Story'].join(' | ')
+const description = 'Discover how NANA revolutionized their grocery delivery app with TopGo live updates, serving 2.5M+ users across Saudi Arabia and Egypt with instant app updates and 40% faster deployment.'
+
+const content = { title, description }
+---
+
+<Layout content={content}>
+  <!-- Hero Section -->
+  <section class="relative bg-gray-900 py-16 sm:py-24">
+    <!-- Background Effects -->
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      {
+        Array.from({ length: 12 }).map((_, i) => (
+          <div
+            class="teleport-line-animation absolute w-full"
+            style={{
+              top: `${i * 8 - 2}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              height: `${Math.random() * 1 + 1}px`,
+              opacity: Math.random() * 0.3 + 0.2,
+            }}
+          />
+        ))
+      }
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <!-- Company Logo -->
+        <div class="mb-8 flex justify-center">
+          <div class="w-24 h-24 rounded-2xl bg-gradient-to-r from-green-400 to-emerald-600 flex items-center justify-center">
+            <span class="text-3xl font-bold text-white">N</span>
+          </div>
+        </div>
+        
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+          <span class="block">NANA</span>
+          <span class="block bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+            Success Story
+          </span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-300">
+          How the leading Middle Eastern grocery delivery platform scaled to 2.5M+ users 
+          with instant app updates and seamless user experience
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Company Overview -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h2 class="text-3xl font-bold text-white">About NANA</h2>
+          <p class="mt-4 text-lg text-gray-300">
+            NANA is the premier on-demand grocery delivery platform serving customers across Saudi Arabia and Egypt. 
+            Founded with a mission to make grocery shopping effortless, NANA has revolutionized how people access 
+            fresh groceries and household essentials.
+          </p>
+          <p class="mt-4 text-lg text-gray-300">
+            Operating in two distinct markets with different customer preferences, regulations, and supply chains, 
+            NANA needed a robust mobile platform that could rapidly adapt to changing market conditions and 
+            customer demands.
+          </p>
+        </div>
+        <div class="bg-gray-800/50 rounded-2xl p-8 border border-green-500/20">
+          <h3 class="text-xl font-bold text-white mb-6">Key Metrics</h3>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <div class="text-2xl font-bold text-green-400">2.5M+</div>
+              <div class="text-sm text-gray-400">Active Users</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-green-400">15 min</div>
+              <div class="text-sm text-gray-400">Avg. Delivery Time</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-green-400">20,000+</div>
+              <div class="text-sm text-gray-400">Products Available</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-green-400">2</div>
+              <div class="text-sm text-gray-400">Countries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="bg-gray-800/50 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">The Challenge</h2>
+        <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+          Rapid growth and market expansion created complex technical challenges that required innovative solutions
+        </p>
+      </div>
+      
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-red-500/20">
+          <div class="w-12 h-12 rounded-lg bg-red-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Slow App Store Updates</h3>
+          <p class="text-gray-300 text-sm">
+            Traditional app store deployment process took 3-7 days, causing delayed bug fixes and 
+            missed opportunities during peak demand periods like Ramadan and holidays.
+          </p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-orange-500/20">
+          <div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Multi-Market Complexity</h3>
+          <p class="text-gray-300 text-sm">
+            Different features, languages, and business rules for Saudi Arabia and Egypt required 
+            separate code branches and complicated deployment processes.
+          </p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-yellow-500/20">
+          <div class="w-12 h-12 rounded-lg bg-yellow-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Peak Traffic Management</h3>
+          <p class="text-gray-300 text-sm">
+            Sudden demand spikes during religious holidays and promotional events often overwhelmed 
+            the app, requiring immediate feature toggles and optimization updates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Solution -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">The TopGo Solution</h2>
+        <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
+          TopGo's live update platform transformed NANA's development and deployment workflow
+        </p>
+      </div>
+
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-6">What NANA Implemented</h3>
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">TopGo Live Updates SDK</h4>
+                <p class="text-gray-300 text-sm">Integrated into React Native mobile app for both iOS and Android platforms</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Regional Feature Flags</h4>
+                <p class="text-gray-300 text-sm">Market-specific features controlled remotely for Saudi Arabia and Egypt</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">A/B Testing Framework</h4>
+                <p class="text-gray-300 text-sm">Real-time testing of new features and user interface changes</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white">Emergency Response System</h4>
+                <p class="text-gray-300 text-sm">Instant rollback capabilities and critical bug fixes without app store delays</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-green-500/10 to-emerald-600/10 rounded-2xl p-8 border border-green-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">Implementation Timeline</h3>
+          <div class="space-y-4">
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+              <div>
+                <div class="font-medium text-white">Week 1-2: SDK Integration</div>
+                <div class="text-sm text-gray-400">TopGo SDK integrated into existing React Native codebase</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+              <div>
+                <div class="font-medium text-white">Week 3-4: Testing & Configuration</div>
+                <div class="text-sm text-gray-400">Setup regional configurations and testing framework</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+              <div>
+                <div class="font-medium text-white">Week 5-6: Gradual Rollout</div>
+                <div class="text-sm text-gray-400">Phased deployment to 10% of users, then full rollout</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+              <div>
+                <div class="font-medium text-white">Week 7+: Live Updates</div>
+                <div class="text-sm text-gray-400">Full production deployment with live update capabilities</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="bg-gradient-to-r from-green-600/20 to-emerald-600/20 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">Impressive Results</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          TopGo transformed NANA's operational efficiency and user experience
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-green-500/20">
+          <div class="text-3xl font-bold text-green-400 mb-2">40%</div>
+          <div class="text-sm text-gray-400 mb-4">Faster Deployment</div>
+          <p class="text-xs text-gray-500">From 3-7 days to instant updates</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-green-500/20">
+          <div class="text-3xl font-bold text-green-400 mb-2">150+</div>
+          <div class="text-sm text-gray-400 mb-4">Updates per Month</div>
+          <p class="text-xs text-gray-500">Compared to 4-6 previous app store releases</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-green-500/20">
+          <div class="text-3xl font-bold text-green-400 mb-2">99.8%</div>
+          <div class="text-sm text-gray-400 mb-4">App Uptime</div>
+          <p class="text-xs text-gray-500">Even during peak holiday seasons</p>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-6 text-center border border-green-500/20">
+          <div class="text-3xl font-bold text-green-400 mb-2">35%</div>
+          <div class="text-sm text-gray-400 mb-4">Faster Bug Resolution</div>
+          <p class="text-xs text-gray-500">Critical issues fixed within hours</p>
+        </div>
+      </div>
+
+      <!-- Success Stories -->
+      <div class="mt-16 grid gap-8 lg:grid-cols-2">
+        <div class="bg-gray-900/50 rounded-xl p-8 border border-green-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">Ramadan Success</h3>
+          <p class="text-gray-300 mb-4">
+            During Ramadan 2024, NANA experienced a 300% increase in orders. Using TopGo, they instantly deployed 
+            server capacity optimizations and UI improvements to handle the surge without any app store delays.
+          </p>
+          <div class="flex items-center space-x-2 text-green-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+            <span class="text-sm font-medium">300% order increase handled seamlessly</span>
+          </div>
+        </div>
+        
+        <div class="bg-gray-900/50 rounded-xl p-8 border border-green-500/20">
+          <h3 class="text-xl font-bold text-white mb-4">Regional Expansion</h3>
+          <p class="text-gray-300 mb-4">
+            When expanding to new cities in Egypt, NANA used TopGo's feature flags to gradually enable services 
+            region by region, testing delivery logistics and payment methods without affecting existing users.
+          </p>
+          <div class="flex items-center space-x-2 text-green-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            </svg>
+            <span class="text-sm font-medium">5 new cities launched in 2 weeks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Details -->
+  <section class="bg-gray-900 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-white">Technical Implementation</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          How NANA leveraged TopGo's technology stack for maximum efficiency
+        </p>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-3">
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Technology Stack</h3>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">React Native (iOS & Android)</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">Node.js Backend Services</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">MongoDB Database</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">AWS Cloud Infrastructure</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">TopGo Live Updates SDK</span>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">User Flow Optimization</h3>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">Real-time cart optimization</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">Dynamic delivery slot updates</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">Instant payment method changes</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">Live promotional banners</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 rounded-full bg-green-400"></div>
+              <span class="text-gray-300">Emergency service notifications</span>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-white mb-4">Performance Metrics</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <span class="text-gray-300">App Launch Time</span>
+              <span class="text-green-400">2.1s</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Update Download</span>
+              <span class="text-green-400">15s avg</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Feature Toggle</span>
+              <span class="text-green-400">Instant</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Rollback Time</span>
+              <span class="text-green-400">30s</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-300">Success Rate</span>
+              <span class="text-green-400">99.9%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Quote -->
+  <section class="bg-gradient-to-r from-green-600/10 to-emerald-600/10 py-16">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <blockquote class="text-xl font-medium text-white md:text-2xl">
+        "TopGo has been a game-changer for our business. The ability to push instant updates has allowed us to respond to market demands immediately, whether it's fixing critical bugs during peak hours or rolling out new features for specific regions. Our development velocity has increased by 40%, and our users love the seamless experience."
+      </blockquote>
+      <div class="mt-8">
+        <div class="font-semibold text-green-400">Ahmed Al-Rashid</div>
+        <div class="text-gray-400">CTO & Co-founder, NANA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gray-900 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-white">Ready to Scale Like NANA?</h2>
+        <p class="mt-4 text-lg text-gray-300">
+          Join thousands of companies using TopGo to deliver exceptional mobile experiences
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+            class="inline-flex items-center justify-center rounded-md bg-green-600 px-6 py-3 text-base font-medium text-white hover:bg-green-700 transition-colors duration-200"
+          >
+            Start Free Trial
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'showcases')}
+            class="inline-flex items-center justify-center rounded-md border border-gray-300 px-6 py-3 text-base font-medium text-gray-300 hover:bg-gray-800 transition-colors duration-200"
+          >
+            View More Stories
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .teleport-line-animation {
+    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.5), transparent);
+    animation: teleport 4s linear infinite;
+  }
+
+  @keyframes teleport {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100vw);
+    }
+  }
+</style>
