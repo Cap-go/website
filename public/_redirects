@@ -16,3 +16,4 @@
 /robots.txt/ /robots.txt 301
 /docs/plugin/* /docs/plugins/updater/:splat 301
 /docs/plugins/updater/self-hosted/contributing.mdx /docs/plugins/updater/local-dev/contributing.mdx 301
+/blog/building-a-native-mobile-app-with-nuxt-3-and-capacitor/ /blog/building-a-native-mobile-app-with-nuxt-and-capacitor/ 301

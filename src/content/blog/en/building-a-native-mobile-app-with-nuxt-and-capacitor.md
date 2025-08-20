@@ -1,5 +1,5 @@
 ---
-slug: building-a-native-mobile-app-with-nuxt-4-and-capacitor
+slug: building-a-native-mobile-app-with-nuxt-and-capacitor
 title: '2025 Guide: Creating Mobile Apps with Nuxt 4 and Capacitor'
 description: How to create a mobile app with Nuxt 4, Capacitor, Tailwind CSS 4, and implement native UI with Konsta UI 5.
 author: Martin Donadieu
@@ -20,7 +20,7 @@ In this tutorial, we will start with a new [Nuxt 4](https://nuxt.com/) app and m
 
 By using Capacitor, you can easily convert your Nuxt 4 web application into a native mobile app without requiring significant modifications or learning a new skill like React Native. 
 
-With just a few simple steps, most Nuxt 3 applications can be transformed into mobile apps. 
+With just a few simple steps, most Nuxt 4 applications can be transformed into mobile apps. 
 
 This tutorial will guide you through the process, starting with a new Nuxt 4 app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI v5](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS 4.
 
