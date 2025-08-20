@@ -317,22 +317,19 @@ npm i konsta
 @import 'konsta/theme.css';
 ```
 
-3. Update the `tailwind.config.js` file for Tailwind CSS 4:
+3. Configure Tailwind CSS 4 for Next.js (PostCSS):
 
-```javascript
-const konstaConfig = require('konsta/config');
+Create `postcss.config.mjs` at the project root:
 
-module.exports = konstaConfig({
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
-  theme: {
-    extend: {},
+```js
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
   },
-  plugins: [],
-});
+}
 ```
+
+Tailwind v4 uses PostCSS directly in Next.js. Keep your global imports in `styles/globals.css` (already added above).
 
 4. Wrap your app with the Konsta UI v5 `App` component in `pages/_app.js`:
 

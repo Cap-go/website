@@ -267,13 +267,34 @@ After hitting the button, you can witness the beautiful native share dialog in a
 
 ## Adding Konsta UI v5 with Tailwind CSS 4
 
-To use Konsta UI v5 in your Nuxt 4 app, you need to have [Tailwind CSS 4 already installed](https://tailwindcss.com/docs/guides/nuxtjs/) and to install the package:
+To use Konsta UI v5 in your Nuxt 4 app, you need to have [Tailwind CSS 4 installed](https://tailwindcss.com/docs/installation/framework-guides/nuxt/) and to install the package:
 
 ```shell
 npm i konsta
 ```
 
-First, import the Konsta UI v5 theme in your main CSS file (e.g., `app/assets/css/main.css`):
+Install Tailwind for Nuxt (Vite plugin):
+
+```shell
+npm install tailwindcss @tailwindcss/vite
+```
+
+Configure the Vite plugin and add global CSS in `nuxt.config.ts`:
+
+```ts
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineNuxtConfig({
+  compatibilityDate: '2025-07-15',
+  devtools: { enabled: true },
+  css: ['~/assets/css/main.css'],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+})
+```
+
+Create `app/assets/css/main.css` and import Tailwind & Konsta UI theme:
 
 ```css
 @import 'tailwindcss';
@@ -281,30 +302,7 @@ First, import the Konsta UI v5 theme in your main CSS file (e.g., `app/assets/cs
 @import 'konsta/theme.css';
 ```
 
-Additionally, you need to modify your `tailwind.config.js` file for Tailwind CSS 4:
-
-```javascript
-// import konstaConfig config
-const konstaConfig = require('konsta/config')
-
-// wrap config with konstaConfig config
-module.exports = konstaConfig({
-  content: [
-    './app/**/*.{vue,js,ts}',
-    './components/**/*.{vue,js,ts}',
-  ],
-  darkMode: 'media', // or 'class'
-  theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
-})
-```
-
-`konstaConfig` will extend the default (or your custom one) Tailwind CSS 4 config with some extra variants and helper utilities required for Konsta UI v5.
+Konsta UI v5 is already imported via CSS (`@import 'konsta/theme.css'`), no Tailwind config file is required in v4.
 
 Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
 

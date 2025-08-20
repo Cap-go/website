@@ -1,8 +1,8 @@
 ---
 slug: angular-mobile-app-capacitor
-title: Creazione di app mobili con Angular e Capacitor
+title: Creare App Mobile con Angular e Capacitor
 description: >-
-  Impara come creare un'app mobile con Angular, Capacitor e migliorare
+  Scopri come creare un'app mobile con Angular, Capacitor e migliorare
   l'interfaccia utente nativa con Konsta UI.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
@@ -19,19 +19,19 @@ published: true
 locale: it
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
-In questo tutorial, inizieremo con una nuova app [Angular](https://angular.io/) e passeremo al mondo delle app mobile native utilizzando Capacitor. Opzionalmente, puoi anche aggiungere [Konsta UI](https://konstaui.com/) per migliorare l'interfaccia mobile con Tailwind CSS.
+In questo tutorial, inizieremo con una nuova app [Angular](https://angular.io/) e la trasformeremo in un'app mobile nativa utilizzando Capacitor. Opzionalmente, potrai anche aggiungere [Konsta UI](https://konstaui.com/) per migliorare l'interfaccia mobile con Tailwind CSS.
 
 Capacitor ti permette di convertire facilmente la tua applicazione web Angular in un'app mobile nativa senza richiedere modifiche significative o imparare una nuova competenza come React Native.
 
-Con pochi semplici passaggi, la maggior parte delle applicazioni Angular possono essere trasformate in app mobile.
+Con pochi semplici passaggi, la maggior parte delle applicazioni Angular può essere trasformata in app mobile.
 
 Questo tutorial ti guiderà attraverso il processo, partendo da una nuova app Angular e poi incorporando Capacitor per entrare nel mondo delle app mobile native. Inoltre, puoi opzionalmente utilizzare [Konsta UI](https://konstaui.com/) per migliorare la tua UI mobile con Tailwind CSS.
 
-## Riguardo Capacitor
+## Informazioni su Capacitor
 
-CapacitorJS è rivoluzionario! Puoi incorporarlo facilmente in qualsiasi progetto web, e avvolgerà la tua applicazione in una webview nativa, generando il progetto nativo Xcode e Android Studio per te. Inoltre, i suoi plugin forniscono accesso alle funzionalità native del dispositivo come la fotocamera tramite un bridge JS.
+Capacitor è rivoluzionario! Puoi incorporarlo facilmente in qualsiasi progetto web, e avvolgerà la tua applicazione in una webview nativa, generando il progetto nativo per Xcode e Android Studio. Inoltre, i suoi plugin forniscono accesso alle funzionalità native del dispositivo come la fotocamera tramite un bridge JS.
 
-Con Capacitor, ottieni un'eccellente app mobile nativa senza setup complicati o curve di apprendimento ripide. La sua API snella e le funzionalità ottimizzate lo rendono facilissimo da integrare nel tuo progetto. Fidati, rimarrai stupito da quanto sia semplice ottenere un'app nativa completamente funzionante con Capacitor!
+Con Capacitor, ottieni un'ottima app mobile nativa senza configurazioni complicate o curve di apprendimento ripide. La sua API snella e le funzionalità ottimizzate lo rendono facilissimo da integrare nel tuo progetto. Fidati, rimarrai stupito da quanto sia semplice ottenere un'app nativa completamente funzionante con Capacitor!
 
 ## Preparare la tua App Angular
 
@@ -42,9 +42,9 @@ ng new my-app
 cd my-app
 ```
 
-Scegli "Angular" quando ti viene richiesta la versione di Angular.
+Scegli "Angular" quando ti viene chiesta la versione di Angular.
 
-Per creare un'app mobile nativa, abbiamo bisogno di un **export** del nostro progetto. Quindi, includiamo uno script semplice nel nostro **package.json** che può essere utilizzato per buildare e copiare il progetto Angular:
+Per creare un'app mobile nativa, abbiamo bisogno di un **export** del nostro progetto. Quindi, aggiungiamo uno script semplice nel nostro **package.json** che può essere utilizzato per buildare e copiare il progetto Angular:
 
 ```json
 {
@@ -57,17 +57,17 @@ Per creare un'app mobile nativa, abbiamo bisogno di un **export** del nostro pro
 
 Dopo aver eseguito il comando `build`, dovresti vedere una nuova cartella `dist` nella root del tuo progetto.
 
-Questa cartella verrà utilizzata da Capacitor più tardi, ma per ora dobbiamo configurarla correttamente.
+Questa cartella sarà utilizzata da Capacitor più tardi, ma per ora dobbiamo configurarla correttamente.
 
 ## Aggiungere Capacitor alla tua App Angular
 
-Per pacchettizzare qualsiasi app web in un container mobile nativo, dobbiamo seguire alcuni passaggi iniziali, ma successivamente sarà semplice come eseguire un singolo comando `sync`.
+Per impacchettare qualsiasi app web in un container mobile nativo, dobbiamo seguire alcuni passaggi iniziali, ma successivamente sarà semplice come eseguire un singolo comando `sync`.
 
 Per prima cosa, possiamo installare il [Capacitor CLI](https://capacitorjs.com/docs/cli/) come dipendenza di sviluppo, e poi configurarlo nel nostro progetto. Durante la configurazione, puoi premere "invio" per accettare i valori predefiniti per nome e bundle ID.
 
 Successivamente, dobbiamo installare il pacchetto core e i pacchetti relativi per le piattaforme iOS e Android.
 
-Infine, possiamo aggiungere le piattaforme, e Capacitor creerà cartelle per ciascuna piattaforma nella root del nostro progetto:
+Infine, possiamo aggiungere le piattaforme, e Capacitor creerà cartelle per ogni piattaforma nella root del nostro progetto:
 
 ```shell
 # Install the Capacitor CLI locally
@@ -88,7 +88,7 @@ A questo punto, dovresti vedere nuove cartelle **ios** e **android** nel tuo pro
 
 **Questi sono progetti nativi reali!**
 
-Per accedere al progetto Android successivamente, devi installare [Android Studio](https://developer.android.com/studio/). Per iOS, hai bisogno di un Mac e devi installare [Xcode](https://developer.apple.com/xcode/).
+Per accedere al progetto Android più tardi, devi installare [Android Studio](https://developer.android.com/studio/). Per iOS, hai bisogno di un Mac e devi installare [Xcode](https://developer.apple.com/xcode/).
 
 Inoltre, dovresti trovare un file **capacitor.config.ts** nel tuo progetto, che contiene alcune impostazioni fondamentali di Capacitor utilizzate durante la sincronizzazione. L'unica cosa a cui devi prestare attenzione è il **webDir**, che deve puntare al risultato del tuo comando di build. Attualmente, non è corretto.
 
@@ -115,7 +115,7 @@ Inoltre, il comando sync potrebbe aggiornare le piattaforme native e installare 
 
 Senza accorgertene, hai finito, quindi vediamo l'app su un dispositivo!
 
-## Build e Deploy delle app native
+## Build e Deploy di app native
 
 Per sviluppare app iOS, devi avere **Xcode** installato, e per le app Android, devi avere **Android Studio** installato. Inoltre, se prevedi di distribuire la tua app sull'app store, devi iscriverti all'Apple Developer Program per iOS e alla Google Play Console per Android.
 
@@ -148,7 +148,7 @@ A questo punto, probabilmente sei abituato ad avere l'hot reload con tutti i fra
 
 Abilita l'accesso alla tua applicazione ospitata localmente con live reload **sulla tua rete** facendo caricare all'app Capacitor il contenuto dall'URL specifico.
 
-Il primo passo è determinare il tuo indirizzo IP locale. Se stai usando un Mac, puoi scoprirlo eseguendo il seguente comando nel terminale:
+Il primo passo è scoprire il tuo indirizzo IP locale. Se stai usando un Mac, puoi scoprirlo eseguendo il seguente comando nel terminale:
 
 ```shell
 ipconfig getifaddr en0
@@ -162,7 +162,7 @@ ipconfig
 
 Poi cerca l'indirizzo IPv4.
 
-Possiamo istruire Capacitor a caricare l'app direttamente dal server aggiungendo un'altra voce al nostro file `capacitor.config.ts`:
+Possiamo istruire Capacitor per caricare l'app direttamente dal server aggiungendo un'altra voce al nostro file `capacitor.config.ts`:
 
 ```javascript
 import { CapacitorConfig } from '@capacitor/cli';
@@ -193,19 +193,19 @@ Il comando `copy` è simile a `sync`, ma copierà solo **le modifiche apportate 
 
 Ora puoi distribuire la tua app ancora una volta attraverso Android Studio o Xcode. Dopo di che, se cambi qualcosa nella tua app Angular, **l'app si ricaricherà automaticamente** e mostrerà le modifiche!
 
-**Tieni presente** che se installi nuovi plugin come la fotocamera, è ancora necessaria una ricostruzione del tuo progetto nativo. Questo perché i file nativi vengono modificati, e non può essere fatto al volo.
+**Tieni presente** che se installi nuovi plugin come la fotocamera, è ancora necessaria una ricompilazione del tuo progetto nativo. Questo perché i file nativi vengono modificati, e non può essere fatto al volo.
 
-Nota che dovresti utilizzare l'IP e la porta corretti nella tua configurazione. Il blocco di codice sopra mostra la porta predefinita di Angular a scopo dimostrativo.
+Nota che dovresti usare l'IP e la porta corretti nella tua configurazione. Il blocco di codice sopra mostra la porta predefinita di Angular a scopo dimostrativo.
 
 ## Utilizzare i Plugin di Capacitor
 
-Diamo un'occhiata a come utilizzare un plugin Capacitor in azione, di cui abbiamo parlato alcune volte prima. Per fare questo, possiamo installare un plugin abbastanza semplice eseguendo:
+Diamo un'occhiata a come utilizzare un plugin Capacitor in azione, di cui abbiamo parlato alcune volte prima. Per farlo, possiamo installare un plugin abbastanza semplice eseguendo:
 
 ```shell
 npm i @capacitor/share
 ```
 
-Non c'è niente di speciale nel [plugin Share](https://capacitorjs.com/docs/apis/share/), ma comunque fa apparire il dialog di condivisione nativo! Per questo ora dobbiamo solo importare il pacchetto e chiamare la funzione `share()` dalla nostra app, quindi modifichiamo il file **src/app/app.component.ts** in questo modo:
+Non c'è niente di particolare nel [plugin Share](https://capacitorjs.com/docs/apis/share/), ma comunque fa apparire il dialogo di condivisione nativo! Per questo ora dobbiamo solo importare il pacchetto e chiamare la funzione `share()` dalla nostra app, quindi modifichiamo il file **src/app/app.component.ts** in questo modo:
 
 ```typescript
 import { Component } from '@angular/core';
@@ -230,13 +230,13 @@ export class AppComponent {
 }
 ```
 
-Come menzionato prima, quando installiamo nuovi plugin, dobbiamo eseguire un'operazione di sync e poi ridistribuire l'app sul nostro dispositivo. Per fare questo, esegui il seguente comando:
+Come menzionato prima, quando installiamo nuovi plugin, dobbiamo eseguire un'operazione di sync e poi ridistribuire l'app sul nostro dispositivo. Per farlo, esegui il seguente comando:
 
 ```
 npx cap sync
 ```
 
-Dopo aver premuto il pulsante, potrai vedere in azione il bellissimo dialog di condivisione nativo!
+Dopo aver premuto il pulsante, puoi vedere in azione il bellissimo dialogo di condivisione nativo!
 
 ## Aggiungere Konsta UI
 
@@ -321,7 +321,7 @@ Dovresti vedere la seguente pagina come risultato:
 
 ## Conclusione
 
-Capacitor è un'eccellente opzione per costruire applicazioni native basate su un progetto web esistente, offrendo un modo semplice per condividere codice e mantenere un'UI consistente.
+Capacitor è un'ottima opzione per costruire applicazioni native basate su un progetto web esistente, offrendo un modo semplice per condividere il codice e mantenere un'UI coerente.
 
 E con l'aggiunta di [Capgo](https://capgo.app/), è ancora più facile aggiungere aggiornamenti live alla tua app, assicurando che i tuoi utenti abbiano sempre accesso alle ultime funzionalità e correzioni di bug.
 

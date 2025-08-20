@@ -2,9 +2,9 @@
 slug: 5-steps-to-deploy-hotfixes-with-capgo
 title: 5 Schritte zum Bereitstellen von Hotfixes mit Capgo
 description: >-
-  Erfahren Sie, wie Sie Hotfixes schnell und sicher bereitstellen können, indem
-  Sie einen optimierten Prozess nutzen, der Verzögerungen im App Store vermeidet
-  und die Einhaltung von Vorschriften gewährleistet.
+  Erfahren Sie, wie Sie Hotfixes schnell und sicher mit einem optimierten
+  Prozess bereitstellen können, der App-Store-Verzögerungen vermeidet und
+  Compliance gewährleistet.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -19,54 +19,54 @@ published: true
 locale: de
 next_blog: ''
 ---
-[Capgo](https://capgo.app/) macht das Bereitstellen von Hotfixes schnell und einfach, umgeht Verzögerungen im App Store und bleibt gleichzeitig sicher und konform mit den Richtlinien von Apple und Google. Hier ist eine kurze Übersicht über den Prozess:
+[Capgo](https://capgo.app/) ermöglicht schnelle und einfache Bereitstellung von Hotfixes und umgeht dabei App-Store-Verzögerungen, während Updates sicher und konform mit den Apple- und Google-Richtlinien bleiben. Hier ein kurzer Überblick über den Prozess:
 
-1.  **Erstellen und Testen Sie Ihren Hotfix**: Schreiben Sie präzise Codeänderungen, testen Sie gründlich auf Geräten und stellen Sie die Kompatibilität sicher.
-2.  **[Capgo einrichten](https://capgo.app/docs/webapp/)**: Installieren Sie die [Capgo CLI](https://capgo.app/docs/cli/commands) mit `npx @capgo/cli init`, konfigurieren Sie die Verschlüsselung und integrieren Sie CI/CD-Tools.
-3.  **Laden Sie Ihren Hotfix hoch**: Verwenden Sie die CLI, um Ihr Update sicher hochzuladen, kennzeichnen Sie es deutlich und bereiten Sie es für die Bereitstellung vor.
-4.  **Wählen Sie Update-Einstellungen aus**: Richten Sie gezielte Benutzer oder Gruppen ein, planen Sie Rollouts und definieren Sie Versionsanforderungen.
-5.  **Verfolgen Sie Ihr Update**: Überwachen Sie die Lieferquoten, die Update-Geschwindigkeit und die Benutzerabdeckung. Rollen Sie sofort zurück, wenn dies erforderlich ist.
+1. **Hotfix erstellen und testen**: Präzise Codeänderungen schreiben, gründlich auf Geräten testen und Kompatibilität sicherstellen.
+2. **[Capgo einrichten](https://capgo.app/docs/webapp/)**: Installieren Sie die [Capgo CLI](https://capgo.app/docs/cli/commands) mit `npx @capgo/cli init`, konfigurieren Sie die Verschlüsselung und integrieren Sie CI/CD-Tools.
+3. **Hotfix hochladen**: Nutzen Sie die CLI, um Ihr Update sicher hochzuladen, kennzeichnen Sie es deutlich und bereiten Sie die Bereitstellung vor.
+4. **Update-Einstellungen wählen**: Zielen Sie auf bestimmte Nutzer oder Gruppen, planen Sie Rollouts und definieren Sie Versionsanforderungen.
+5. **Update verfolgen**: Überwachen Sie Zustellraten, Update-Geschwindigkeit und Nutzerabdeckung. Bei Bedarf sofort zurückrollen.
 
-Capgo hat weltweit über 947,6 Millionen Updates geliefert und die Effizienz der Veröffentlichungen um 81 % für seine Benutzer verbessert. Es ist das bevorzugte Werkzeug für agile Teams, die schnelle, sichere Hotfix-Bereitstellungen benötigen.
+Capgo hat weltweit über 947,6 Millionen Updates ausgeliefert und die Release-Effizienz für seine Nutzer um 81% verbessert. Es ist das bevorzugte Werkzeug für agile Teams, die schnelle, sichere Hotfix-Bereitstellungen benötigen.
 
-## Schritt 1: Erstellen und Testen Sie Ihren Hotfix
+## Schritt 1: Hotfix erstellen und testen
 
-### Schreiben Sie den Hotfix-Code
+### Hotfix-Code schreiben
 
-Konzentrieren Sie sich darauf, präzise Änderungen vorzunehmen, die den Fehler beheben, ohne die Stabilität der App zu gefährden.
+Konzentrieren Sie sich darauf, präzise Änderungen vorzunehmen, die den Bug beheben, ohne die Stabilität der App zu gefährden.
 
-Hier ist eine kurze Anleitung zur Strukturierung Ihres Hotfixes:
+Hier ist ein schneller Leitfaden zur Strukturierung Ihres Hotfix:
 
-| Beste Praxis | Anwendung |
+| Best Practice | Wie anzuwenden |
 | --- | --- |
-| **Isolierte Änderungen** | Halten Sie Änderungen auf die betroffenen Komponenten beschränkt. |
-| **Versionskontrolle** | Nutzen Sie einen speziellen Branch für die Entwicklung des Hotfixes. |
-| **Dokumentation** | Fügen Sie klare Kommentare zur Lösung und ihren Auswirkungen hinzu. |
+| **Isolierte Änderungen** | Beschränken Sie Änderungen auf die betroffenen Komponenten. |
+| **Versionskontrolle** | Nutzen Sie einen dedizierten Branch für Hotfix-Entwicklung. |
+| **Dokumentation** | Fügen Sie klare Kommentare über die Korrektur und deren Auswirkungen hinzu. |
 | **Abhängigkeiten** | Stellen Sie die Kompatibilität mit bestehenden App-Abhängigkeiten sicher. |
 
-Mit der sofortigen Aktualisierungsfähigkeit von Capgo können Sie sich darauf konzentrieren, den Fehler zu beheben, ohne sich um die Bündelung nicht zusammenhängender Änderungen sorgen zu müssen. Diese Methode hat sich als effektiv erwiesen, wie von Colenso hervorgehoben:
+Mit Capgos sofortiger Update-Fähigkeit können Sie sich auf die Fehlerbehebung konzentrieren, ohne sich Sorgen um die Bündelung nicht verwandter Änderungen machen zu müssen. Diese Methode hat sich als effektiv erwiesen, wie colenso hervorhebt:
 
-> "Wir haben [Capgo OTA-Updates](https://web.capgo.app/resend_email) in der Produktion für unsere Benutzerbasis von über 5000 ausgeführt. Wir beobachten einen sehr reibungslosen Betrieb, fast alle unsere Benutzer sind innerhalb von Minuten nach der Bereitstellung des OTA bei @Capgo auf dem neuesten Stand." [\[1\]](https://capgo.app/).
+> "Wir haben [Capgo OTA-Updates](https://web.capgo.app/resend_email) in Produktion für unsere Nutzerbasis von +5000 ausgerollt. Wir sehen einen sehr reibungslosen Betrieb, fast alle unsere Nutzer sind innerhalb von Minuten nach der OTA-Bereitstellung bei @Capgo auf dem neuesten Stand" [\[1\]](https://capgo.app/).
 
-### Testen Sie auf Ihrem Gerät
+### Auf Ihrem Gerät testen
 
-Gründliche Tests sind entscheidend, um sicherzustellen, dass der Hotfix reibungslos funktioniert. Verwenden Sie diese Schritte:
+Gründliches Testen ist entscheidend, um sicherzustellen, dass der Hotfix nahtlos funktioniert. Verwenden Sie diese Schritte:
 
--   **Entwicklungstests:** Führen Sie die Lösung in Ihrer lokalen Entwicklungsumgebung aus.
--   **Gerätetests:** Überprüfen Sie die Lösung auf verschiedenen Geräten und Betriebssystemversionen.
--   **Integrationstests:** Bestätigen Sie, dass der Fix nicht mit anderen Funktionen in Konflikt steht.
+- **Entwicklungstest:** Führen Sie die Korrektur in Ihrer lokalen Entwicklungsumgebung aus.
+- **Gerätetest:** Überprüfen Sie die Korrektur auf verschiedenen Geräten und Betriebssystemversionen.
+- **Integrationstest:** Bestätigen Sie, dass die Korrektur keine anderen Funktionen beeinträchtigt.
 
-Automatisieren Sie so viel wie möglich des Testprozesses mit CI/CD-Tools.
+Automatisieren Sie so viel wie möglich vom Testprozess mit CI/CD-Tools.
 
-> "Wir praktizieren agile Entwicklung, und @Capgo ist für die kontinuierliche Bereitstellung an unsere Benutzer von entscheidender Bedeutung!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+> "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch bei der kontinuierlichen Auslieferung an unsere Nutzer!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
 Sobald Ihr Hotfix alle Tests bestanden hat, sind Sie bereit, Capgo für die Bereitstellung einzurichten.
 
-## Schritt 2: Richten Sie [Capgo](https://capgo.app/) ein
+## Schritt 2: [Capgo](https://capgo.app/) einrichten
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13.jpg?auto=compress)
 
-### Installieren Sie erforderliche Pakete
+### Erforderliche Pakete installieren
 
 Um mit Capgo in Ihrem Capacitor-Projekt zu beginnen, verwenden Sie das CLI-Tool. Führen Sie einfach den folgenden Befehl aus:
 
@@ -76,151 +76,151 @@ npx @capgo/cli init
 
 Dieser Befehl erledigt die schwere Arbeit für Sie:
 
--   Installiert das [Capgo-Plugin](https://capgo.app/plugins/)
--   Konfiguriert Ihr Projekt automatisch
--   Bereitet Ihr Projekt für Capgo-Dienste vor
+- Installiert das [Capgo Plugin](https://capgo.app/plugins/)
+- Konfiguriert Ihr Projekt automatisch
+- Bereitet Ihr Projekt für Capgo-Dienste vor
 
-Sobald die Installation abgeschlossen ist, können Sie mit der Konfiguration Ihres Projekts mit den Verschlüsselungs- und Compliance-Funktionen von Capgo fortfahren.
+Nach Abschluss der Installation können Sie mit der Konfiguration Ihres Projekts mit Capgos Verschlüsselungs- und Compliance-Funktionen fortfahren.
 
-### Richten Sie Ihr Projekt ein
+### Projekt einrichten
 
-Capgo sorgt dafür, dass Ihr Projekt mit den Verschlüsselungs- und Compliance-Standards sowohl für Apple als auch für Google bereit ist. Es funktioniert nahtlos mit CI/CD-Tools, verschlüsselt Updates zur Sicherheit und entspricht den Richtlinien des App Stores.
+Capgo stellt sicher, dass Ihr Projekt mit Verschlüsselung und Compliance-Standards für Apple und Google bereit ist. Es arbeitet nahtlos mit CI/CD-Tools zusammen, verschlüsselt Updates für Sicherheit und richtet sich nach App-Store-Richtlinien.
 
-| Integrationsschritt | Zweck | Vorteil |
+| Integrationsschritt | Zweck | Nutzen |
 | --- | --- | --- |
-| **CI/CD-Einrichtung** | Verbindung zu CI/CD-Tools | Vereinfacht Bereitstellungen |
-| **E2E-Verschlüsselung** | Sichert die Update-Lieferung | Bewahrt die Code-Integrität |
-| **Plattformkonformität** | Entspricht den App-Store-Standards | Ermöglicht eine reibungslose Verteilung |
+| **CI/CD-Setup** | Verbindet sich mit CI/CD-Tools | Vereinfacht Bereitstellungen |
+| **E2E-Verschlüsselung** | Sichert Update-Auslieferung | Erhält Code-Integrität |
+| **Plattform-Compliance** | Erfüllt App-Store-Standards | Ermöglicht reibungslose Distribution |
 
 Dieses Setup wurde von Entwicklern validiert. Wie Bessie Cooper erklärt:
 
-> "@Capgo ist ein unverzichtbares Werkzeug für Entwickler, die produktiver sein möchten. Die Vermeidung von Überprüfungen für Fehlerbehebungen ist goldwert." [\[1\]](https://capgo.app/)
+> "@Capgo ist ein Muss für Entwickler, die produktiver sein wollen. Die Vermeidung von Reviews für Bugfixes ist Gold wert." [\[1\]](https://capgo.app/)
 
-Für größere Teams bietet Capgo Funktionen wie Multi-Organisations-Setups und detailliertes Berechtigungsmanagement. Es integriert sich in Plattformen wie [GitHub](https://github.com/about), [GitLab](https://about.gitlab.com/), [Azure DevOps](https://azure.microsoft.com/en-us/products/devops) und [Jenkins](https://www.jenkins.io/), was automatisierte Bereitstellungsworkflows unkompliziert macht. Rodrigo Mantica hebt die Bedeutung für agile Teams hervor:
+Für größere Teams bietet Capgo Funktionen wie Multi-Organisations-Setups und detailliertes Berechtigungsmanagement. Es integriert sich mit Plattformen wie [GitHub](https://github.com/about), [GitLab](https://about.gitlab.com/), [Azure DevOps](https://azure.microsoft.com/en-us/products/devops) und [Jenkins](https://www.jenkins.io/), wodurch automatisierte Deployment-Workflows unkompliziert werden. Rodrigo Mantica hebt dessen Bedeutung für agile Teams hervor:
 
-> "Wir praktizieren agile Entwicklung, und @Capgo ist von entscheidender Bedeutung für die kontinuierliche Bereitstellung an unsere Benutzer!" [\[1\]](https://capgo.app/)
+> "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch bei der kontinuierlichen Auslieferung an unsere Nutzer!" [\[1\]](https://capgo.app/)
 
-Mit Ihrem vollständig eingerichteten Projekt sind Sie bereit, Ihren Hotfix hochzuladen und ihn sofort bereitzustellen.
+Mit Ihrem vollständig eingerichteten Projekt sind Sie bereit, Ihren Hotfix hochzuladen und sofort bereitzustellen.
 
-## Schritt 3: Laden Sie Ihren Hotfix hoch
+## Schritt 3: Hotfix hochladen
 
-### Senden Sie Dateien an Capgo
+### Dateien an Capgo senden
 
-Nachdem Sie Ihr Projekt eingerichtet haben, ist es Zeit, Ihren Hotfix mit dem [Capgo CLI-Tool](https://capgo.app/docs/cli/commands/) hochzuladen. Dies gewährleistet einen sicheren und effizienten Transfer Ihres Updates. Beginnen Sie damit, Ihre App wie gewohnt während der Entwicklung zu erstellen.
+Nach der Einrichtung Ihres Projekts ist es Zeit, Ihren Hotfix mit dem [Capgo CLI-Tool](https://capgo.app/docs/cli/commands/) hochzuladen. Dies gewährleistet eine sichere und effiziente Übertragung Ihres Updates. Beginnen Sie damit, Ihre App wie gewohnt während der Entwicklung zu bauen.
 
 So funktioniert es:
 
--   Erstellen Sie Ihre App mit Ihrem Standardprozess.
--   Überprüfen Sie, ob alle Dateien ohne Fehler kompiliert werden.
--   Verwenden Sie das Capgo CLI-Tool, um Ihr Update hochzuladen.
+- Bauen Sie Ihre App mit Ihrem Standardprozess.
+- Überprüfen Sie nochmals, dass alle Dateien ohne Fehler kompilieren.
+- Verwenden Sie das Capgo CLI-Tool zum Hochladen Ihres Updates.
 
-### Kennzeichnen Sie Ihre Updates
+### Updates kennzeichnen
 
-Eine klare Kennzeichnung ist entscheidend für das Management und die Verfolgung Ihrer Hotfixes. Fügen Sie beim Hochladen Ihres Updates zu Capgo spezifische Versionsdetails und beschreibende Labels hinzu. Dies hilft, Ihre Updates zu organisieren und alle auf dem gleichen Stand zu halten.
+Klare Kennzeichnung ist der Schlüssel für die Verwaltung und Verfolgung Ihrer Hotfixes. Beim Hochladen Ihres Updates zu Capgo fügen Sie spezifische Versionsdetails und beschreibende Labels hinzu. Dies hilft bei der Organisation Ihrer Updates und hält alle auf dem gleichen Stand.
 
-| **Kennzeichnungselement** | **Zweck** | **Beste Praxis** |
+| **Kennzeichnungselement** | **Zweck** | **Best Practice** |
 | --- | --- | --- |
-| Versionsnummer | Verfolgt die Update-Reihenfolge | Verwenden Sie semantische Versionierung |
-| Updatebeschreibung | Hebt wichtige Änderungen hervor | Konzentrieren Sie sich auf die wichtigsten Fehlerbehebungen und Updates |
-| Versionshinweise | Kommuniziert Änderungen | Detaillierte spezifische Verbesserungen |
+| Versionsnummer | Verfolgt Update-Sequenz | Semantische Versionierung verwenden |
+| Update-Beschreibung | Hebt Hauptänderungen hervor | Fokus auf Hauptkorrekturen und Updates |
+| Release Notes | Kommuniziert Änderungen | Spezifische Verbesserungen detaillieren |
 
-Martin Donadieu, der Gründer von Capgo, hat ein Versionierungssystem entworfen, das sich nahtlos in CI/CD-Workflows integriert. Dieses System erleichtert das Verfolgen von Updates und das Zurückrollen bei Bedarf.
+Martin Donadieu, Capgos Gründer, hat ein Versionierungssystem entwickelt, das sich nahtlos in CI/CD-Workflows integriert. Dieses System macht es einfach, Updates zu verfolgen und bei Bedarf zurückzurollen.
 
-Das [Update-Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) von Capgo umfasst auch Funktionen wie End-to-End-Verschlüsselung und sofortige Bereitstellung, um sicherzustellen, dass Ihre Hotfixes schnell erreicht werden und dabei sicher sind.
+Capgos [Update-Management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) enthält auch Funktionen wie Ende-zu-Ende-Verschlüsselung und sofortige Bereitstellung, wodurch Ihre Hotfixes sicher sind und Nutzer schnell erreichen.
 
-Sobald Ihr Hotfix hochgeladen und gekennzeichnet ist, fahren Sie mit Schritt 4 fort, um Ihre Update-Einstellungen zu konfigurieren.
+Sobald Ihr Hotfix hochgeladen und gekennzeichnet ist, gehen Sie zu Schritt 4 über, um Ihre Update-Einstellungen zu konfigurieren.
 
 ###### sbb-itb-f9944d2
 
-## Capgo Live Update-System für [Capacitor](https://capacitorjs.com/) Apps
+## Capgo Live Update System für [Capacitor](https://capacitorjs.com/) Apps
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/NzXXKoyhTIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
-## Schritt 4: Wählen Sie Update-Einstellungen aus
+## Schritt 4: Update-Einstellungen wählen
 
-Nachdem Sie Ihren Hotfix hochgeladen haben, ist es an der Zeit, die Einstellungen für die Zielgruppen und die Kriterien für Rollouts zu konfigurieren. Dies gewährleistet eine kontrollierte und effektive Bereitstellung.
+Nachdem Sie Ihren Hotfix hochgeladen haben, ist es Zeit, die Einstellungen für das Targeting von Nutzern und die Definition von Rollout-Kriterien zu konfigurieren. Dies gewährleistet eine kontrollierte und effektive Bereitstellung.
 
-### Wählen Sie Benutzer und Geräte aus
+### Nutzer und Geräte auswählen
 
-Die Benutzerzuweisungstools von Capgo ermöglichen es Ihnen, genau zu bestimmen, wer den Hotfix erhalten soll. Es stehen zwei Hauptstrategien zur Verfügung:
+Capgos Nutzer-Zuweisungstools ermöglichen es Ihnen, genau festzulegen, wer den Hotfix erhalten soll. Es stehen zwei Hauptstrategien zur Verfügung:
 
 | Bereitstellungstyp | Ideal für | Vorteile |
 | --- | --- | --- |
-| **Private Tests** | Beta-Tester, QA-Teams | Ermöglicht kontrolliertes Testen mit frühem Feedback |
-| **Öffentliche Veröffentlichung** | Alle Benutzer, gestaffelte Rollouts | Erlaubt breite Verteilung mit schrittweiser Bereitstellung |
+| **Privates Testen** | Beta-Tester, QA-Teams | Ermöglicht kontrolliertes Testen mit frühem Feedback |
+| **Öffentliche Freigabe** | Alle Nutzer, stufenweise Rollouts | Erlaubt breite Distribution mit gradueller Bereitstellung |
 
-Wenn beispielsweise ein Fehler Benutzer in einer bestimmten Region betrifft, können Sie diese Gruppe für eine schnellere Validierung priorisieren. Nachdem Sie Ihre Zielgruppe ausgewählt haben, können Sie detaillierte Veröffentlichungsregeln festlegen.
+Wenn beispielsweise ein Bug Nutzer in einer bestimmten Region betrifft, können Sie diese Gruppe für eine schnellere Validierung priorisieren. Nach der Auswahl Ihrer Zielgruppe können Sie mit der Festlegung detaillierter Release-Regeln fortfahren.
 
-### Setzen Sie Veröffentlichungsregeln
+### Release-Regeln festlegen
 
-Über die Weboberfläche von Capgo können Sie den Veröffentlichungsprozess verfeinern, indem Sie Parameter wie Zeitplan, App-Versionen für die Kompatibilität und die schrittweise Ausrollung des Updates festlegen.
+Über Capgos Web-Interface können Sie den Release-Prozess durch Parameter wie Zeitplan, App-Versionskompatibilität und die graduelle Ausrollung des Updates fein abstimmen.
 
-Hier sind die wichtigsten Einstellungen, die Sie konfigurieren sollten:
+Hier sind die wichtigsten Einstellungen zur Konfiguration:
 
--   **Bereitstellungszeitplan**: Wählen Sie spezifische Zeiten, zu denen das Update live gehen soll.
--   **Versionsanforderungen**: Definieren Sie, welche App-Versionen das Update erhalten sollen.
--   **Rollout-Prozentsatz**: Steuern Sie das Tempo der Veröffentlichung, indem Sie mit einer kleineren Gruppe beginnen und dann schrittweise erweitern.
+- **Bereitstellungszeitplan**: Wählen Sie spezifische Zeiten für das Live-Schalten des Updates.
+- **Versionsanforderungen**: Definieren Sie, welche App-Versionen das Update erhalten sollen.
+- **Rollout-Prozentsatz**: Steuern Sie das Tempo der Freigabe, beginnend mit einer kleineren Gruppe und schrittweiser Erweiterung.
 
-Für dringende Fehlerbehebungen können Sie die sofortige Bereitstellung wählen, um Probleme sofort zu beheben. Für weniger kritische Updates ermöglichen gestaffelte Rollouts die Überwachung der Leistung und die Behebung potenzieller Probleme, während sie auftreten. Darüber hinaus bietet Capgo Optionen zur Erstellung dedizierter Testgruppen, um die Koordination reibungsloser und effizienter zu gestalten.
+Für dringende Korrekturen können Sie sich für sofortige Bereitstellung entscheiden, um Probleme umgehend zu beheben. Für weniger kritische Updates erlauben stufenweise Rollouts die Überwachung der Performance und die Lösung potenzieller Probleme bei ihrem Auftreten. Zusätzlich bietet Capgo Optionen zur Erstellung dedizierter Testgruppen, was die Koordination reibungsloser und effizienter macht.
 
-## Schritt 5: Verfolgen Sie Ihr Update
+## Schritt 5: Update verfolgen
 
-Behalten Sie den Fortschritt Ihres Hotfixes im Auge und beheben Sie Probleme, sobald sie auftreten.
+Behalten Sie den Fortschritt Ihres Hotfix im Auge und gehen Sie aufkommende Probleme sofort an.
 
-### Überprüfen Sie den Aktualisierungsstatus
+### Update-Status prüfen
 
-Die Analysen von Capgo bieten Einblicke in wichtige Update-Metriken:
+Capgos Analysen liefern Einblicke in wichtige Update-Metriken:
 
 | Metrik | Was zu überwachen ist | Warum es wichtig ist |
 | --- | --- | --- |
-| **Lieferquote** | Prozentsatz erfolgreicher Updates | Zeigt, wie gut Ihre Bereitstellung funktioniert |
-| **Update-Geschwindigkeit** | Zeit bis zum Erreichen der Zielbenutzer | Hebt Verzögerungen oder Engpässe hervor |
-| **Benutzerabdeckung** | Anzahl der aktualisierten Geräte | Gibt an, wie viele Benutzer die Lösung erhalten haben |
+| **Zustellrate** | Prozentsatz erfolgreicher Updates | Zeigt wie gut Ihre Bereitstellung funktioniert |
+| **Update-Geschwindigkeit** | Zeit bis zum Erreichen der Zielnutzer | Hebt Verlangsamungen oder Engpässe hervor |
+| **Nutzerabdeckung** | Anzahl aktualisierter Geräte | Zeigt an, wie viele Nutzer die Korrektur erhielten |
 
 ### Probleme behandeln
 
-Nachdem Sie diese Metriken überprüft haben, seien Sie bereit, schnell auf Herausforderungen zu reagieren.
+Nach Überprüfung dieser Metriken seien Sie bereit, Herausforderungen schnell anzugehen.
 
--   **Sofortige Rücksetzung**  
-    Wenn etwas schiefgeht, können Sie mit der Rollback-Funktion von Capgo sofort zur vorherigen Version zurückkehren.
+- **Sofortiges Zurückrollen**  
+    Wenn etwas schief geht, ermöglicht Capgos Rollback-Funktion sofortiges Zurückkehren zur vorherigen Version.
     
--   **Benutzerzuweisungen analysieren**  
-    Überprüfen Sie, wie die Updates verteilt werden, um festzustellen, ob bestimmte Gruppen oder Geräte Probleme haben.
+- **Nutzer-Zuweisungen analysieren**  
+    Prüfen Sie wie Updates verteilt werden, um zu erkennen, ob bestimmte Gruppen oder Geräte Probleme erfahren.
     
--   **Leistung überwachen**  
-    Verwenden Sie Echtzeitmetriken, um Probleme zu erkennen und zu beheben. Die Tools von Capgo können helfen, festzustellen, ob das Problem in der Lieferung, Installation oder Kompatibilität liegt.
+- **Performance überwachen**  
+    Nutzen Sie Echtzeit-Metriken zur Identifizierung und Lösung von Problemen. Capgos Tools können helfen zu erkennen, ob das Problem bei der Zustellung, Installation oder Kompatibilität liegt.
     
 
-Rodrigo Mantica, ein Geschäftsentwickler, hebt die Bedeutung von Capgo hervor:
+Rodrigo Mantica, ein Business Developer, hebt Capgos Bedeutung hervor:
 
-> "Wir praktizieren agile Entwicklung, und @Capgo ist von entscheidender Bedeutung für die kontinuierliche Bereitstellung an unsere Benutzer!" [\[1\]](https://capgo.app/)
+> "Wir praktizieren agile Entwicklung und @Capgo ist mission-kritisch bei der kontinuierlichen Auslieferung an unsere Nutzer!" [\[1\]](https://capgo.app/)
 
-Die Weboberfläche von Capgo erleichtert es Ihnen, den Fortschritt Ihres Updates mit detaillierten Protokollen und Leistungsmetriken zu überwachen. Die Tracking-Funktionen haben Organisationen geholfen, die Effizienz der Veröffentlichungen um bis zu 81 % zu verbessern [\[1\]](https://capgo.app/), wodurch eine stabile App-Leistung gewährleistet wird, während Probleme schnell angegangen werden.
+Capgos Web-Interface macht es einfach, den Fortschritt Ihres Updates mit detaillierten Logs und Performance-Metriken zu überwachen. Seine Tracking-Funktionen haben Organisationen geholfen, die Release-Effizienz um bis zu 81% [\[1\]](https://capgo.app/) zu verbessern, während stabile App-Performance sichergestellt und Probleme schnell adressiert werden.
 
 ## Zusammenfassung
 
 ### Hauptpunkte
 
-Capgo vereinfacht den Prozess der schnellen und effektiven Bereitstellung von Hotfixes und hat eine nachgewiesene Erfolgsbilanz bei der Bereitstellung von **947,6 Millionen Updates** über **1.400 Produktionsapps** [\[1\]](https://capgo.app/).
+Capgo vereinfacht den Prozess der schnellen und effektiven Bereitstellung von Hotfixes, mit nachgewiesener Erfolgsbilanz von **947,6 Millionen Updates** über **1.400 Produktions-Apps** [\[1\]](https://capgo.app/).
 
 | Schritt | Aktion | Ziel |
 | --- | --- | --- |
-| 1. | Erstellen & Testen | Hotfix lokal entwickeln und überprüfen | Codequalität sicherstellen |
-| 2. | Capgo einrichten | Das Plugin mit `npx @capgo/cli init` installieren | Konfiguration vereinfachen |
-| 3. | Hochladen | Dateien über die CLI übertragen | Schnelle Verteilung ermöglichen |
-| 4. | Konfigurieren | Benutzer zuweisen und Regeln festlegen | Updates präzise bereitstellen |
-| 5. | Überwachen | Leistung verfolgen und Probleme lösen | Effizienz verbessern |
+| Erstellen & Testen | Hotfix lokal entwickeln und verifizieren | Codequalität sicherstellen |
+| Capgo einrichten | Plugin mit `npx @capgo/cli init` installieren | Konfiguration vereinfachen |
+| Hochladen | Dateien über CLI übertragen | Schnelle Verteilung ermöglichen |
+| Konfigurieren | Benutzer zuweisen und Regeln festlegen | Updates präzise bereitstellen |
+| Überwachen | Leistung verfolgen und Probleme lösen | Effizienz verbessern |
 
-Befolgen Sie diese Schritte, um Capgo in Ihren Workflow zu integrieren und Ihren Aktualisierungsprozess zu optimieren.
+Befolgen Sie diese Schritte, um Capgo in Ihren Arbeitsablauf zu integrieren und Ihren Update-Prozess zu optimieren.
 
 ### Erste Schritte
 
-Bevor Sie starten, nehmen Sie sich einen Moment Zeit, um die oben genannten Schritte zu überprüfen. Sie unterteilen den Bereitstellungsprozess in überschaubare Aktionen, was die Umsetzung erleichtert.
+Nehmen Sie sich einen Moment Zeit, um die obigen Schritte zu überprüfen. Sie unterteilen den Bereitstellungsprozess in überschaubare Aktionen und erleichtern so die Implementierung.
 
-Starten Sie Ihre Capgo-Integration, indem Sie die Capgo CLI zu Ihrem Projekt hinzufügen. Mit **Ende-zu-Ende-Verschlüsselung** sorgt die Plattform jedes Mal für sichere und zuverlässige Updates.
+Beginnen Sie Ihre Capgo-Integration, indem Sie die Capgo CLI zu Ihrem Projekt hinzufügen. Mit **Ende-zu-Ende-Verschlüsselung** gewährleistet die Plattform sichere und zuverlässige Updates.
 
 > "Capgo ist eine intelligente Möglichkeit, Hot-Code-Pushes durchzuführen."
 
-Für noch mehr Effizienz integrieren Sie Capgo mit Ihren CI/CD-Tools wie Azure DevOps, GitLab oder GitHub. Diese Konfiguration ermöglicht automatisierte Bereitstellungen und gibt Ihnen Kontrolle über die Verteilung von Updates durch Funktionen zur Benutzerzuweisung.
+Für noch mehr Effizienz integrieren Sie Capgo mit Ihren CI/CD-Tools wie Azure DevOps, GitLab oder GitHub. Diese Einrichtung ermöglicht automatisierte Bereitstellungen und gibt Ihnen gleichzeitig die Kontrolle über die Update-Verteilung durch Benutzerzuweisungsfunktionen.

@@ -1,9 +1,9 @@
 ---
 slug: 2-way-communication-in-capacitor-apps
-title: Comunicación bidireccional en aplicaciones de Capacitor
+title: Comunicación bidireccional en aplicaciones Capacitor
 description: >-
-  Explora cómo la comunicación bidireccional en aplicaciones de Capacitor mejora
-  el intercambio de datos en tiempo real, mejorando el rendimiento y la
+  Explore cómo la comunicación bidireccional en aplicaciones Capacitor mejora el
+  intercambio de datos en tiempo real, optimizando el rendimiento y la
   experiencia del usuario.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
@@ -21,44 +21,52 @@ published: true
 locale: es
 next_blog: ''
 ---
-La comunicación bidireccional en apps de [Capacitor](https://capacitorjs.com/) une las capas web y nativas, permitiendo el intercambio de datos en tiempo real. Esto permite que las tecnologías web accedan a funciones nativas del dispositivo como la cámara o GPS mientras las capas nativas interactúan con elementos web. Aquí está por qué es importante:
+La comunicación bidireccional en aplicaciones [Capacitor](https://capacitorjs.com/) conecta las capas web y nativas, permitiendo el intercambio de datos en tiempo real. Esto permite que las tecnologías web accedan a características nativas del dispositivo como la cámara o el GPS mientras las capas nativas interactúan con elementos web. Aquí por qué es importante:
 
--   **Actualizaciones Instantáneas**: Despliega arreglos y características sin demoras en la tienda de aplicaciones.
--   **Mejor Rendimiento**: Combina la eficiencia web con el acceso directo nativo.
+-   **Actualizaciones Instantáneas**: Implementa correcciones y funciones sin retrasos de la tienda de aplicaciones.
+-   **Mejor Rendimiento**: Combina la eficiencia web con acceso nativo directo.
 -   **Experiencia de Usuario Mejorada**: Integración fluida de características web y nativas.
 -   **Alcance Global**: Sistemas como [Capgo](https://capgo.app/) entregan millones de actualizaciones con tasas de éxito del 82%.
 
 ### Datos Rápidos:
 
--   **[Actualizaciones de Capgo](https://capgo.app/docs/)**: 947.6M actualizaciones en 1,400 apps.
--   **Velocidad de Actualización**: El 95% de los usuarios se actualizó en menos de 24 horas.
--   **Seguridad**: La encriptación de extremo a extremo asegura transferencias de datos seguras.
+-   **[Actualizaciones Capgo](https://capgo.app/docs/)**: 947.6M de actualizaciones en 1,400 aplicaciones.
+-   **Velocidad de Actualización**: 95% de usuarios actualizados en 24 horas.
+-   **Seguridad**: El cifrado de extremo a extremo garantiza transferencias seguras.
 
-Esta guía explica cómo configurar la comunicación bidireccional, implementar plugins personalizados y optimizar el rendimiento para tus [apps de Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/).
+Esta guía explica cómo configurar la comunicación bidireccional, implementar plugins personalizados y optimizar el rendimiento para tus [aplicaciones Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/).
 
 ## Cómo crear un plugin de [Capacitor](https://capacitorjs.com/) para iOS/Android
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/680c247c5a08fca89178b068/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<iframe src="https://www.youtube.com/embed/Dq_BmheGAig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<Steps>
 
-## Conceptos Básicos y Estructura
+1.  **Configura la Estructura del Proyecto**
 
-El puente de Capacitor actúa como la columna vertebral para una comunicación fluida entre aplicaciones web y funciones nativas del dispositivo en apps multiplataforma.
+2.  **Configura las Plataformas Nativas**
 
-### Cómo Funciona el Puente de Capacitor
+3.  **Implementa el Puente**
 
-El puente de Capacitor actúa como intermediario, facilitando la comunicación entre tu aplicación web y la funcionalidad nativa del dispositivo. Utiliza una cola de mensajes bidireccional para asegurar que los mensajes se entreguen de manera confiable, incluso durante un alto tráfico.
+</Steps>
+
+## Conceptos Centrales y Estructura
+
+El puente Capacitor sirve como columna vertebral para una comunicación fluida entre aplicaciones web y características nativas del dispositivo en aplicaciones multiplataforma.
+
+### Cómo Funciona el Puente Capacitor
+
+El puente Capacitor actúa como intermediario, facilitando la comunicación entre tu aplicación web y la funcionalidad nativa del dispositivo. Utiliza una cola de mensajes bidireccional para garantizar que los mensajes se entreguen de manera confiable, incluso durante el tráfico alto.
 
 | Capa | Función | Manejo de Datos |
 | --- | --- | --- |
-| **Capa Web** | Inicia llamadas de JavaScript | Convierte datos en formato JSON |
-| **Núcleo del Puente** | Gestiona el enrutamiento y la cola de mensajes | Valida y transforma datos |
-| **Capa Nativa** | Ejecuta operaciones específicas de la plataforma | Procesa y deserializa datos |
+| **Capa Web** | Inicia llamadas JavaScript | Convierte datos a formato JSON |
+| **Núcleo del Puente** | Gestiona el enrutamiento y cola de mensajes | Valida y transforma datos |
+| **Capa Nativa** | Ejecuta operaciones específicas de plataforma | Procesa y deserializa datos |
 
-El puente asegura una comunicación fluida validando los formatos de mensajes, convirtiendo tipos de datos y enrutando llamadas a los manejadores nativos apropiados. También proporciona respuestas basadas en promesas, facilitando el manejo de operaciones asíncronas. Este sistema requiere una configuración cuidadosa para integrarse con éxito en tu proyecto.
+El puente asegura una comunicación fluida mediante la validación de formatos de mensajes, conversión de tipos de datos y enrutamiento de llamadas a los manejadores nativos apropiados. También proporciona respuestas basadas en promesas, facilitando el manejo de operaciones asíncronas. Este sistema requiere una configuración cuidadosa para integrarse exitosamente en tu proyecto.
 
-### Pasos para Configurar el Proyecto
+### Pasos de Configuración del Proyecto
 
 Sigue estos pasos para configurar tu proyecto para la comunicación web-nativa:
 
@@ -76,7 +84,7 @@ Sigue estos pasos para configurar tu proyecto para la comunicación web-nativa:
     └── capacitor.config.json
     ```
     
-2.  **Configura las Plataformas Nativas**
+2.  **Configura Plataformas Nativas**
     
     Ajusta la configuración del puente para cada plataforma en el archivo de configuración de Capacitor. Por ejemplo:
     
@@ -97,16 +105,15 @@ Sigue estos pasos para configurar tu proyecto para la comunicación web-nativa:
     
 3.  **Implementa el Puente**
     
-    Configura el puente para un rendimiento óptimo. Por ejemplo, activa el modo 'async' en Android para mejorar la velocidad y asegurar estabilidad durante la operación.
-    
+    Configura el puente para un rendimiento óptimo. Por ejemplo, habilita el modo 'async' en Android para mejorar la velocidad y asegurar la estabilidad durante la operación.
 
 ## Métodos de Comunicación
 
 Habilita una comunicación bidireccional fluida entre las capas web y nativas utilizando métodos específicos para transferir datos en ambas direcciones.
 
-### Llamadas Web-a-Nativa
+### Llamadas Web a Nativo
 
-Aquí se explica cómo implementar la comunicación web-a-nativa:
+Aquí cómo implementar la comunicación web a nativo:
 
 ```typescript
 // Custom plugin implementation
@@ -124,13 +131,13 @@ await MyPlugin.echo({ value: "Hello Native!" });
 
 | Aspecto | Implementación | Mejor Práctica |
 | --- | --- | --- |
-| Tipos de Datos | Serializables en JSON | Adhiérete a tipos primitivos cuando sea posible |
-| Manejo de Errores | Devuelve promesas | Envuelve las llamadas en bloques try-catch |
-| Rendimiento | Operaciones en lote | Combina llamadas relacionadas para eficiencia |
+| Tipos de Datos | JSON-serializable | Usa tipos primitivos cuando sea posible |
+| Manejo de Errores | Retorna promesas | Envuelve llamadas en bloques try-catch |
+| Rendimiento | Operaciones por lotes | Combina llamadas relacionadas para eficiencia |
 
-### Transferencia de Datos Nativa-a-Web
+### Transferencia de Datos Nativo a Web
 
-El código nativo puede enviar datos a la capa web y activar eventos. Así es como:
+El código nativo puede enviar datos a la capa web y disparar eventos. Aquí cómo:
 
 ```typescript
 // Set up a custom event listener in web code
@@ -146,15 +153,15 @@ notifyWebView("myCustomEvent", {
 });
 ```
 
-### Manejo del Flujo de Datos Asíncronos
+### Gestión del Flujo de Datos Asíncrono
 
-Manejar operaciones asíncronas entre las capas web y nativas requiere una planificación cuidadosa. Utiliza estas estrategias:
+El manejo de operaciones asíncronas entre capas web y nativas requiere una planificación cuidadosa. Usa estas estrategias:
 
--   **Gestión de la Cola**: Mantén una cola de mensajes para manejar múltiples solicitudes asíncronas.
--   **Sincronización de Estado**: Mantén el estado consistente entre las capas web y nativas.
--   **Recuperación de Errores**: Utiliza mecanismos de reintento para manejar comunicaciones fallidas.
+-   **Gestión de Cola**: Mantén una cola de mensajes para manejar múltiples solicitudes asíncronas.
+-   **Sincronización de Estado**: Mantén el estado consistente entre capas web y nativas.
+-   **Recuperación de Errores**: Usa mecanismos de reintento para manejar comunicaciones fallidas.
 
-Aquí tienes un ejemplo de una cola de mensajes en acción:
+Aquí un ejemplo de una cola de mensajes en acción:
 
 ```typescript
 class MessageQueue {
@@ -182,7 +189,7 @@ class MessageQueue {
 
 ## Guía de Implementación
 
-### Creación de Plugins Personalizados
+### Construyendo Plugins Personalizados
 
 Para habilitar una comunicación bidireccional fluida, puedes crear [plugins personalizados de Capacitor](https://capgo.app/plugins/):
 
@@ -205,9 +212,9 @@ export class MyCustomPluginImplementation implements MyCustomPlugin {
 }
 ```
 
-### Integración JavaScript-Nativa
+### Integración JavaScript-Nativo
 
-Una vez que has construido el plugin personalizado, puedes integrarlo para permitir que JavaScript se comunique directamente con la capa nativa:
+Una vez que hayas construido el plugin personalizado, puedes integrarlo para permitir que JavaScript se comunique directamente con la capa nativa:
 
 ```typescript
 class NativeIntegration {
@@ -251,11 +258,11 @@ class NativeIntegration {
 }
 ```
 
-Esta configuración asegura un canal de comunicación confiable entre JavaScript y el código nativo.
+Esta configuración asegura un canal de comunicación confiable entre JavaScript y código nativo.
 
 ### Manejo de Eventos Nativos
 
-Para manejar eventos que se originan desde el lado nativo, utiliza un administrador de eventos para gestionar los oyentes de eventos y la distribución de datos:
+Para manejar eventos originados desde el lado nativo, usa un gestor de eventos para administrar los oyentes de eventos y el despacho de datos:
 
 ```typescript
 class EventManager {
@@ -290,15 +297,15 @@ eventManager.dispatchEvent('dataReceived', {
 });
 ```
 
-Para mejorar el rendimiento, considera agrupar eventos o reducir el tamaño de los datos transmitidos. Esta estrategia de gestión de eventos complementa los métodos de comunicación web-a-nativa y nativa-a-web descritos anteriormente.
+Para mejorar el rendimiento, considera agrupar eventos o reducir el tamaño de los datos transmitidos. Esta estrategia de gestión de eventos complementa los métodos de comunicación web a nativo y nativo a web descritos anteriormente.
 
-## Directrices Técnicas
+## Pautas Técnicas
 
 ### Seguridad de Datos
 
-Para proteger los datos intercambiados entre las capas web y nativas, implementa protocolos de seguridad sólidos y utiliza encriptación de extremo a extremo.
+Para proteger los datos intercambiados entre capas web y nativas, implementa protocolos de seguridad fuertes y usa cifrado de extremo a extremo.
 
-Aquí hay un ejemplo en TypeScript:
+Aquí un ejemplo en TypeScript:
 
 ```typescript
 class SecureDataTransfer {
@@ -327,13 +334,13 @@ class SecureDataTransfer {
 }
 ```
 
-Este enfoque asegura que los datos sensibles estén encriptados durante la transmisión, reduciendo las vulnerabilidades potenciales.
+Este enfoque asegura que los datos sensibles estén cifrados durante la transmisión, reduciendo vulnerabilidades potenciales.
 
 ### Optimización de Código
 
-Un código eficiente mejora el rendimiento de la app y se alinea con los requisitos de la plataforma. Las métricas de Capgo validan el impacto de estas optimizaciones [\[1\]](https://capgo.app/).
+El código eficiente mejora el rendimiento de la aplicación y se alinea con los requisitos de la plataforma. Las métricas de Capgo validan el impacto de estas optimizaciones [\[1\]](https://capgo.app/).
 
-A continuación se muestra un ejemplo de procesos en lote para mejorar la eficiencia:
+A continuación un ejemplo de procesamiento por lotes para mejorar la eficiencia:
 
 ```typescript
 class OptimizedDataTransfer {
@@ -364,13 +371,13 @@ class OptimizedDataTransfer {
 
 Este método minimiza el uso de recursos y asegura una operación fluida, incluso bajo cargas de trabajo pesadas.
 
-### Reglas y Actualizaciones de la Tienda de Apps
+### Reglas de App Store y Actualizaciones
 
 Sigue las pautas de [Apple App Store](https://developer.apple.com/app-store/) y [Google Play Store](https://play.google.com/console/signup) para evitar problemas de cumplimiento durante las actualizaciones.
 
-> "Cumplimiento con la App Store" - Capgo [\[1\]](https://capgo.app/)
+> "Compatible con App Store" - Capgo [\[1\]](https://capgo.app/)
 
-Para una mejor gestión de actualizaciones, incluye control de versiones con capacidades de reversión:
+Para una mejor gestión de actualizaciones, incluye control de versiones con capacidad de reversión:
 
 ```typescript
 class UpdateManager {
@@ -394,57 +401,59 @@ class UpdateManager {
 }
 ```
 
-Como menciona Rodrigo Mantica:
+Como señala Rodrigo Mantica:
 
-> "Practicamos desarrollo ágil y @Capgo es crítico para entregas continuas a nuestros usuarios!" [\[1\]](https://capgo.app/)
+> "¡Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" [\[1\]](https://capgo.app/)
 
 Esta configuración asegura que puedas adaptarte rápidamente a los cambios mientras mantienes una experiencia de usuario fluida.
 
 ## Conclusión
 
-La comunicación bidireccional en apps de Capacitor juega un papel clave en asegurar actualizaciones rápidas y un rendimiento constante. La conexión fluida entre capas web y nativas permite arreglos rápidos, lanzamientos de nuevas características más rápidos y una mejor experiencia de usuario en general.
+La comunicación bidireccional en aplicaciones Capacitor juega un papel clave en asegurar actualizaciones rápidas y rendimiento estable. La conexión fluida entre capas web y nativas permite correcciones rápidas, implementaciones más rápidas de funciones y una mejor experiencia general del usuario.
 
-El impacto de plataformas de actualización en vivo como Capgo se refleja claramente en los números:
+El impacto de plataformas de actualización en vivo como Capgo es claro en los números:
 
 | Métrica | Resultado |
 | --- | --- |
-| Velocidad de Actualización | El 95% de los usuarios se actualizó en menos de 24 horas |
-| Alcance Global | 947.6 millones de actualizaciones en 1,400 apps de producción |
-| Fiabilidad | 82% tasa de éxito a nivel mundial |
+| Velocidad de Actualización | 95% de usuarios actualizados en 24 horas |
+| Alcance Global | 947.6 millones de actualizaciones en 1,400 aplicaciones de producción |
+| Fiabilidad | 82% de tasa de éxito mundial |
 
 Los desarrolladores respaldan estos resultados con sus experiencias. Rodrigo Mantica compartió:
 
-> "Practicamos desarrollo ágil y @Capgo es crítico para entregas continuas a nuestros usuarios!" [\[1\]](https://capgo.app/)
+> "¡Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" [\[1\]](https://capgo.app/)
 
-Los datos sensibles se gestionan de forma segura a medida que se mueven entre las capas web y nativas, asegurando la seguridad de la información para las muchas apps que ya utilizan estos sistemas en producción [\[1\]](https://capgo.app/).
+Los datos sensibles se gestionan de forma segura mientras se mueven entre capas web y nativas, garantizando la seguridad de la información para las muchas aplicaciones que ya utilizan estos sistemas en producción [\[1\]](https://capgo.app/).
 
-A medida que la tecnología Capacitor continúa avanzando, mantener canales de comunicación web-nativa seguros y eficientes seguirá siendo una prioridad principal para el desarrollo de apps futuras.
+A medida que la tecnología Capacitor continúa avanzando, mantener canales de comunicación web-nativos seguros y eficientes seguirá siendo una prioridad para el desarrollo futuro de aplicaciones.
 
 ## Preguntas Frecuentes
 
-:::faq
-### ¿Cómo mejora la comunicación bidireccional la conexión entre las capas web y nativas en las apps de Capacitor?
+::: faq
+### ¿Cómo mejora la comunicación bidireccional la conexión entre capas web y nativas en aplicaciones Capacitor?
 
-La comunicación bidireccional en las apps de Capacitor agiliza la interacción entre las capas web y nativas, permitiendo una integración fluida de características y actualizaciones en tiempo real. Este enfoque permite a los desarrolladores enviar arreglos, mejoras y nuevas características directamente a los usuarios sin esperar la aprobación de las tiendas de aplicaciones.
+La comunicación bidireccional en aplicaciones Capacitor agiliza la interacción entre capas web y nativas, permitiendo una integración fluida de funciones y actualizaciones en tiempo real. Este enfoque permite a los desarrolladores implementar correcciones, mejoras y nuevas funciones directamente a los usuarios sin esperar aprobaciones de la tienda de aplicaciones.
 
-Al aprovechar esta funcionalidad, los desarrolladores pueden mejorar el rendimiento de la app, responder más rápido a la retroalimentación de los usuarios y mantener una ventaja competitiva. Herramientas como Capgo pueden mejorar aún más este proceso al ofrecer actualizaciones en vivo, encriptación de extremo a extremo y cumplimiento con los requisitos de la plataforma, asegurando un flujo de trabajo de desarrollo suave y eficiente.
+Al aprovechar esta funcionalidad, los desarrolladores pueden mejorar el rendimiento de la aplicación, responder más rápido a los comentarios de los usuarios y mantener una ventaja competitiva. Herramientas como Capgo pueden mejorar aún más este proceso ofreciendo actualizaciones en vivo, cifrado de extremo a extremo y cumplimiento con los requisitos de la plataforma, asegurando un flujo de trabajo de desarrollo fluido y eficiente.
 :::
 
-:::faq
-### ¿Cuáles son algunas mejores prácticas para crear plugins personalizados que mejoren el rendimiento en las apps de Capacitor?
+::: faq
+### ¿Cuáles son algunas mejores prácticas para crear plugins personalizados que mejoren el rendimiento en aplicaciones Capacitor?
 
-Crear plugins personalizados en las apps de Capacitor puede mejorar significativamente el rendimiento y adaptar la funcionalidad a las necesidades específicas de tu app. Aquí hay algunas mejores prácticas a seguir:
+Crear plugins personalizados en aplicaciones Capacitor puede mejorar significativamente el rendimiento y adaptar la funcionalidad a las necesidades específicas de tu aplicación. Aquí hay algunas mejores prácticas a seguir:
 
--   **Optimiza el Código Nativo:** Asegúrate de que tu código nativo sea eficiente y evite cálculos innecesarios. Utiliza optimizaciones específicas del lenguaje para iOS ([Swift](https://en.wikipedia.org/wiki/Swift_\(programming_language\))/Objective-C) y Android (Java/[Kotlin](https://kotlinlang.org/)).
--   **Minimiza el Sobrecoste de Comunicación:** Reduce la frecuencia y el tamaño de los intercambios de datos entre las capas web y nativas para mejorar la capacidad de respuesta.
--   **Prueba en Dispositivos Reales:** Siempre prueba tus plugins en dispositivos reales para identificar cuellos de botella de rendimiento que podrían no aparecer en emuladores.
+-   **Optimizar Código Nativo:** Asegura que tu código nativo sea eficiente y evite cálculos innecesarios. Usa optimizaciones específicas del lenguaje para iOS ([Swift](https://en.wikipedia.org/wiki/Swift_\(programming_language\))/Objective-C) y Android (Java/[Kotlin](https://kotlinlang.org/)).
+-   **Minimizar Sobrecarga de Comunicación:** Reduce la frecuencia y tamaño de los intercambios de datos entre las capas web y nativas para mejorar la capacidad de respuesta.
+-   **Probar en Dispositivos Reales:** Siempre prueba tus plugins en dispositivos reales para identificar cuellos de botella de rendimiento que podrían no aparecer en emuladores.
 
-Si buscas agilizar las actualizaciones y mantener un rendimiento fluido de la app, plataformas como Capgo pueden ayudar. Capgo te permite enviar actualizaciones al instante, asegurando que tus plugins y app permanezcan optimizados sin requerir aprobaciones de la tienda de aplicaciones.
+Si buscas agilizar las actualizaciones y mantener un rendimiento fluido de la aplicación, plataformas como Capgo pueden ayudar. Capgo te permite implementar actualizaciones instantáneamente, asegurando que tus plugins y aplicación permanezcan optimizados sin requerir aprobaciones de la tienda de aplicaciones.
 :::
 
-:::faq
-### ¿Cómo pueden los desarrolladores asegurar los datos al habilitar la comunicación bidireccional entre las capas web y nativas en las apps de Capacitor?
+::: faq
+### ¿Cómo pueden los desarrolladores asegurar los datos al habilitar la comunicación bidireccional entre capas web y nativas en aplicaciones Capacitor?
 
-Asegurar la seguridad de los datos durante la comunicación bidireccional en las apps de Capacitor implica implementar mejores prácticas clave. Utiliza **encriptación de extremo a extremo** para proteger datos sensibles a medida que se mueven entre las capas web y nativas. Además, valida y sanitiza todas las entradas para prevenir vulnerabilidades como ataques de inyección.
+Asegurar los datos durante la comunicación bidireccional en aplicaciones Capacitor implica implementar las mejores prácticas clave. Usa **cifrado de extremo a extremo** para proteger datos sensibles mientras se mueven entre las capas web y nativas. Además, valida y sanitiza todas las entradas para prevenir vulnerabilidades como ataques de inyección.
+:::
 
-Las aplicaciones de Capacitor también pueden beneficiarse de soluciones de almacenamiento seguro para información sensible y aprovechar HTTPS para toda la comunicación de red. Si bien el artículo destaca herramientas como Capgo para actualizaciones en vivo seguras, estas prácticas fundamentales son críticas para mantener una robusta seguridad en las aplicaciones.
+Los apps de Capacitor también pueden beneficiarse de soluciones de almacenamiento seguro para información sensible y aprovechar HTTPS para todas las comunicaciones de red. Si bien el artículo destaca herramientas como Capgo para actualizaciones en vivo seguras, estas prácticas fundamentales son críticas para mantener una seguridad robusta en la aplicación.
+:::

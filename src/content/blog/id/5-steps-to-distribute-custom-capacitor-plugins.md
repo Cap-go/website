@@ -2,7 +2,7 @@
 slug: 5-steps-to-distribute-custom-capacitor-plugins
 title: 5 Langkah untuk Mendistribusikan Plugin Capacitor Kustom
 description: >-
-  Pelajari cara mendistribusikan plugin kustom secara efektif untuk meningkatkan
+  Pelajari cara mendistribusikan plugin khusus secara efektif untuk meningkatkan
   fungsionalitas aplikasi di platform iOS dan Android.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
@@ -21,8 +21,8 @@ next_blog: ''
 Mendistribusikan plugin [Capacitor](https://capacitorjs.com/) kustom dapat meningkatkan fungsionalitas aplikasi Anda sambil memastikan pembaruan cepat sampai ke pengguna. Berikut panduan singkat untuk memulai:
 
 1. **Bangun dan Uji**: Kembangkan plugin Anda menggunakan [Capacitor Plugin API](https://capgo.app/blog/capacitor-comprehensive-guide/), uji secara menyeluruh pada perangkat iOS dan Android, dan tangani kasus-kasus khusus secara efektif.
-2. **Siapkan Distribusi**: Buat paket npm dengan dokumentasi yang jelas, termasuk langkah instalasi, referensi API, dan contoh penggunaan.
-3. **Rilis**: Publikasikan plugin Anda ke npm menggunakan versi semantik dan bagikan di GitHub untuk visibilitas komunitas.
+2. **Siapkan Distribusi**: Buat paket npm dengan dokumentasi yang jelas, termasuk langkah-langkah instalasi, referensi API, dan contoh penggunaan.
+3. **Rilis**: Publikasikan plugin Anda ke npm menggunakan semantic versioning dan bagikan di GitHub untuk visibilitas komunitas.
 4. **Integrasi**: Sediakan instruksi pengaturan agar pengembang dapat dengan mudah menambahkan plugin Anda ke proyek mereka dan memverifikasi fungsionalitasnya.
 5. **Tambahkan Pembaruan Langsung (Opsional)**: Gunakan alat seperti [Capgo](https://capgo.app/) untuk pembaruan langsung yang aman dan efisien, memastikan 95% pengguna menerima perubahan dalam 24 jam.
 
@@ -42,11 +42,11 @@ Tujuan utama di sini adalah menghubungkan JavaScript dengan fitur native sambil 
 
 Mulailah dengan membuat plugin Anda menggunakan [Capacitor Plugin](https://capgo.app/blog/capacitor-comprehensive-guide/) API resmi. Ini memastikan fungsionalitas yang konsisten di semua platform. Fokus pada satu fitur untuk memudahkan pengembangan dan pemeliharaan.
 
-Poin-poin penting yang perlu diingat selama pengembangan:
+Poin penting yang perlu diingat selama pengembangan:
 
 - Tentukan signature metode yang jelas.
 - Terapkan penanganan kesalahan yang kuat.
-- Dukung fitur khusus platform jika diperlukan.
+- Dukung fitur khusus platform saat diperlukan.
 - Dokumentasikan persyaratan platform dengan jelas.
 
 ### Uji pada Platform Berbeda
@@ -92,19 +92,15 @@ Publikasikan plugin Anda ke dunia dengan menerbitkannya di npm dan membagikannya
 
 ### Publikasi ke Registry npm
 
-Ikuti pedoman versi semantik saat merilis plugin Anda: gunakan versi **major** untuk perubahan yang memutus kompatibilitas, **minor** untuk fitur baru, dan **patch** untuk perbaikan bug. Kemudian, publikasikan plugin Anda menggunakan perintah berikut:
-
-```bash
-npm publish
-```
+Ikuti pedoman semantic versioning saat merilis plugin Anda: gunakan versi **major** untuk perubahan yang memutus kompatibilitas, **minor** untuk fitur baru, dan **patch** untuk perbaikan bug. Kemudian, publikasikan plugin Anda menggunakan perintah berikut:
 
 ### Bagikan dengan Komunitas Capacitor
 
-Unggah repositori plugin Anda ke GitHub dan pertimbangkan untuk menambahkannya ke organisasi Komunitas Capacitor. Ini memberikan visibilitas lebih pada plugin Anda dan membuka pintu bagi orang lain untuk berkontribusi.
+Unggah repositori plugin Anda ke GitHub dan pertimbangkan untuk menambahkannya ke organisasi Capacitor Community. Ini memberikan plugin Anda lebih banyak visibilitas dan membuka pintu bagi orang lain untuk berkontribusi.
 
 ## Langkah 4: Panduan Integrasi Proyek
 
-Setelah plugin Anda dipublikasikan ke npm, langkah selanjutnya adalah mengintegrasikannya ke dalam proyek. Berikut cara melakukannya:
+Setelah plugin Anda dipublikasikan ke npm, langkah selanjutnya adalah mengintegrasikannya ke dalam proyek. Berikut caranya:
 
 ### Instruksi Pengaturan
 
@@ -114,14 +110,14 @@ Setelah plugin Anda dipublikasikan ke npm, langkah selanjutnya adalah mengintegr
 
 ### Uji Instalasi
 
-- Uji plugin dalam proyek Capacitor baru untuk memastikan semuanya berfungsi sesuai harapan.
-- Panggil metode plugin dasar dan verifikasi bahwa hasilnya sesuai yang diharapkan.
+- Uji plugin dalam proyek Capacitor yang baru untuk memastikan semuanya berjalan sesuai harapan.
+- Panggil metode plugin dasar dan verifikasi bahwa hasilnya sesuai harapan.
 
 Setelah Anda memastikan semuanya berfungsi, Anda siap untuk melanjutkan dengan mengintegrasikan plugin Anda ke dalam proyek.
 
 ## Langkah 5: Tambahkan Pembaruan Langsung
 
-Perluas proses distribusi Anda dengan menambahkan pembaruan langsung. Menggunakan Capgo, Anda dapat memastikan plugin Anda tetap mutakhir tanpa menunggu persetujuan app store.
+Perluas proses distribusi Anda dengan menambahkan pembaruan langsung. Menggunakan Capgo, Anda dapat memastikan plugin Anda tetap terkini tanpa menunggu persetujuan app store.
 
 ### Menyiapkan Pembaruan Langsung [Capgo](https://capgo.app/)
 
@@ -129,22 +125,18 @@ Perluas proses distribusi Anda dengan menambahkan pembaruan langsung. Menggunaka
 
 Untuk memulai, jalankan perintah berikut:
 
-```bash
-npm install @capgo/cli
-```
-
 **Mengapa menggunakan Capgo?** Ini menawarkan berbagai fitur untuk memperlancar pembaruan:
 
 - **Pengiriman aman** dengan enkripsi end-to-end
 - **Distribusi efisien** melalui pembaruan delta
 - **Alat pemantauan** melalui dashboard analitik
 - **Opsi rollback** untuk perbaikan cepat
-- **Manajemen kanal** untuk rilis terorganisir
+- **Manajemen saluran** untuk rilis terorganisir
 
 Berikut cara mengkonfigurasi pembaruan Anda:
 
 - Integrasikan dengan alat CI/CD seperti [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), atau [Jenkins](https://www.jenkins.io/).
-- Siapkan kanal distribusi untuk lingkungan pengembangan, beta, dan produksi.
+- Siapkan saluran distribusi untuk lingkungan pengembangan, beta, dan produksi.
 - Aktifkan rollback satu klik untuk mengatasi masalah dengan cepat.
 
 Menurut metrik Capgo, 95% pengguna aktif menerima pembaruan dalam 24 jam [\[1\]](https://capgo.app/), menjadikan pembaruan langsung cara yang efektif untuk mendistribusikan perubahan secara efisien.

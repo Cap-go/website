@@ -2,8 +2,8 @@
 slug: 5-steps-for-resolving-version-conflicts-in-capacitor-apps
 title: 5 Langkah untuk Menyelesaikan Konflik Versi di Aplikasi Capacitor
 description: >-
-  Atasi konflik versi dalam aplikasi Capacitor dengan lima langkah jelas ini
-  untuk memastikan stabilitas dan mencegah masalah di masa depan.
+  Selesaikan konflik versi dalam aplikasi Capacitor dengan lima langkah jelas
+  ini untuk memastikan stabilitas dan mencegah masalah di masa mendatang.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -11,24 +11,24 @@ created_at: 2025-03-25T00:59:24.268Z
 updated_at: 2025-03-25T00:59:37.185Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67e1f3a47856e801f1f25733-1742864377185.jpg
-head_image_alt: Pengembangan Seluler
+head_image_alt: Pengembangan Mobile
 keywords: 'Capacitor, version conflicts, mobile development, plugin issues, app stability'
 tag: 'Development, Mobile, Updates'
 published: true
 locale: id
 next_blog: ''
 ---
-**Bingung dengan konflik versi di aplikasi [Capacitor](https://capacitorjs.com/)?** Masalah ini dapat menyebabkan kegagalan build, kesalahan runtime, dan kerusakan plugin. Panduan ini menyederhanakan proses menjadi **5 langkah yang dapat ditindaklanjuti** untuk mengidentifikasi, menyelesaikan, dan mencegah konflik ini:
+**Mengalami masalah konflik versi di aplikasi [Capacitor](https://capacitorjs.com/)?** Masalah ini dapat menyebabkan kegagalan build, error runtime, dan malfungsi plugin. Panduan ini menyederhanakan proses menjadi **5 langkah praktis** untuk mengidentifikasi, menyelesaikan, dan mencegah konflik tersebut:
 
-1.  **Temukan Konflik**: Gunakan `npx cap doctor` dan log kesalahan untuk mendeteksi versi yang tidak cocok.
-2.  **Periksa Ketergantungan**: Tinjau `package.json` dan jalankan perintah seperti `npm outdated` untuk menemukan ketidakcocokan.
-3.  **Perbarui Capacitor Core**: Sinkronkan dan perbarui komponen inti sambil mengelola perubahan yang merusak.
-4.  **Perbaiki Masalah Plugin**: Sesuaikan versi plugin dengan inti dan kunci mereka untuk menghindari masalah di masa mendatang.
-5.  **Uji Perubahan**: Bersihkan, instal ulang ketergantungan, dan uji di perangkat nyata untuk memastikan stabilitas.
+1. **Temukan Konflik**: Gunakan `npx cap doctor` dan log error untuk mendeteksi ketidakcocokan versi.
+2. **Periksa Dependensi**: Tinjau `package.json` dan jalankan perintah seperti `npm outdated` untuk menemukan inkonsistensi.
+3. **Perbarui Capacitor Core**: Sinkronkan dan perbarui komponen inti sambil mengelola perubahan yang merusak.
+4. **Perbaiki Masalah Plugin**: Selaraskan versi plugin dengan core dan kunci untuk menghindari masalah di masa depan.
+5. **Uji Perubahan**: Bersihkan, pasang ulang dependensi, dan uji pada perangkat nyata untuk memastikan stabilitas.
 
-**Tip Cepat**: Alat seperti [Capgo](https://capgo.app/) dapat menyederhanakan pengujian langsung dan manajemen versi.
+**Tips Cepat**: Alat seperti [Capgo](https://capgo.app/) dapat menyederhanakan pengujian langsung dan manajemen versi.
 
-## ✅ \[Teratasi\] [npm](https://www.npmjs.com/) ERR! ERESOLVE tidak dapat menyelesaikan ...
+## ✅ \[Solved\] [npm](https://www.npmjs.com/) ERR! ERESOLVE tidak dapat menyelesaikan ...
 
 ![npm](https://mars-images.imgix.net/seobot/screenshots/www.npmjs.com-ac76028e07fa565ed4006978107f5ce6-2025-03-25.jpg?auto=compress)
 
@@ -36,25 +36,25 @@ next_blog: ''
 
 ## Langkah 1: Temukan Konflik Versi
 
-Menemukan konflik versi lebih awal dapat menghemat waktu Anda dalam debugging dan mencegah kemungkinan kerusakan. Berikut cara Anda dapat mengidentifikasi masalah ini secara efektif.
+Mendeteksi konflik versi sejak awal dapat menghemat waktu debugging dan mencegah potensi crash. Berikut cara mengidentifikasi masalah ini secara efektif.
 
-### Periksa Versi dengan [Capacitor](https://capacitorjs.com/) CLI
+### Periksa Versi dengan CLI [Capacitor](https://capacitorjs.com/)
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
-CLI Capacitor menyediakan perintah yang berguna untuk memeriksa versi ketergantungan proyek Anda. Buka terminal Anda, navigasikan ke direktori proyek Anda, dan jalankan:
+CLI Capacitor menyediakan perintah yang membantu untuk memeriksa versi dependensi proyek Anda. Buka terminal, navigasi ke direktori proyek Anda, dan jalankan:
 
 ```bash
 npx cap doctor
 ```
 
-Perintah ini memeriksa kesehatan pengaturan Capacitor Anda dan menandai ketidakcocokan versi antara:
+Perintah ini memeriksa kesehatan setup Capacitor Anda dan menandai ketidakcocokan versi antara:
 
--   Paket inti Capacitor
--   Ketergantungan spesifik platform
--   Plugin yang diinstal
+- Paket Capacitor Core
+- Dependensi khusus platform
+- Plugin yang terpasang
 
-Untuk penjelasan yang lebih mendetail tentang pengaturan Anda, gunakan:
+Untuk rincian lebih detail tentang setup Anda, gunakan:
 
 ```bash
 npx cap ls
@@ -62,50 +62,50 @@ npx cap ls
 
 Ini akan menampilkan:
 
--   Platform yang telah Anda instal (misalnya, iOS, Android)
--   Versi plugin
--   Versi paket inti
+- Platform yang telah Anda pasang (mis., iOS, Android)
+- Versi plugin
+- Versi paket core
 
-Meskipun CLI adalah titik awal yang bagus, log kesalahan sering kali memberikan petunjuk tambahan tentang konflik.
+Meskipun CLI adalah titik awal yang bagus, log error sering memberikan petunjuk tambahan tentang konflik.
 
-### Baca Log Kesalahan
+### Baca Log Error
 
-Log kesalahan dapat mengungkapkan konflik versi yang tersembunyi. Berikut beberapa pola kesalahan umum dan penyebabnya:
+Log error dapat mengungkapkan konflik versi tersembunyi. Berikut beberapa pola error umum dan penyebabnya:
 
-| **Jenis Kesalahan** | **Deskripsi** | **Penyebab** |
+| **Tipe Error** | **Deskripsi** | **Penyebab** |
 | --- | --- | --- |
-| Kesalahan Build | `Versi plugin tidak kompatibel` | Versi plugin tidak sesuai dengan inti Capacitor |
-| Kesalahan Runtime | `Metode tidak ditemukan` | Plugin menggunakan metode usang |
-| Kesalahan Platform | `Sinkronisasi gradle gagal` | Ketergantungan Android bertentangan |
+| Error Build | `Versi plugin tidak kompatibel` | Versi plugin tidak cocok dengan Capacitor core |
+| Error Runtime | `Metode tidak ditemukan` | Plugin menggunakan metode yang sudah usang |
+| Error Platform | `Sinkronisasi Gradle gagal` | Konflik dependensi Android |
 
-Saat menganalisis log kesalahan, fokuslah pada:
+Saat menganalisis log error, fokus pada:
 
--   **Stack traces**: Ini sering menunjukkan plugin atau ketergantungan spesifik yang menyebabkan masalah.
--   **Nomor versi**: Cari persyaratan versi yang disebutkan di log.
--   **Pesan spesifik platform**: Perhatikan kesalahan yang terkait dengan iOS atau Android.
+- **Stack trace**: Ini sering menunjuk ke plugin atau dependensi spesifik yang menyebabkan masalah.
+- **Nomor versi**: Perhatikan persyaratan versi yang disebutkan dalam log.
+- **Pesan khusus platform**: Perhatikan dengan seksama error yang terkait dengan iOS atau Android.
 
 Beberapa tanda konflik versi meliputi:
 
--   Kerusakan selama operasi plugin
--   Fitur yang berfungsi di satu platform tetapi gagal di platform lain
--   Perilaku yang tidak terduga setelah pembaruan
+- Crash saat operasi plugin
+- Fitur bekerja di satu platform tapi gagal di platform lain
+- Perilaku tidak terduga setelah pembaruan
 
-**Tip pro**: Gunakan logging verbose untuk mendapatkan informasi kesalahan yang lebih detail. Jalankan perintah ini untuk mendapatkan wawasan yang lebih mendalam:
+**Pro tip**: Gunakan logging verbose untuk mendapatkan informasi error yang lebih detail. Jalankan perintah ini untuk wawasan lebih dalam:
 
 ```bash
 npx cap run android --verbose
 npx cap run ios --verbose
 ```
 
-Log verbose dapat membantu Anda menemukan penyebab utama konflik dengan lebih cepat dan akurat.
+Log verbose dapat membantu Anda menemukan akar penyebab konflik lebih cepat dan dengan akurasi lebih tinggi.
 
-## Langkah 2: Periksa Ketergantungan Proyek
+## Langkah 2: Periksa Dependensi Proyek
 
-Setelah mengidentifikasi konflik menggunakan CLI dan log kesalahan, saatnya untuk memeriksa ketergantungan proyek Anda untuk menghindari masalah di masa mendatang.
+Setelah mengidentifikasi konflik menggunakan CLI dan log error, saatnya memeriksa dependensi proyek Anda untuk menghindari masalah di masa depan.
 
 ### Tinjau `package.json`
 
-File `package.json` Anda mencantumkan semua ketergantungan proyek Anda. Berikut adalah contoh:
+File `package.json` Anda mencantumkan semua dependensi proyek Anda. Berikut contohnya:
 
 ```json
 {
@@ -118,13 +118,13 @@ File `package.json` Anda mencantumkan semua ketergantungan proyek Anda. Berikut 
 }
 ```
 
-Hal-hal kunci yang perlu diperiksa:
+Hal-hal penting untuk diperiksa:
 
--   **Ketergantungan inti**: Pastikan `@capacitor/core`, `@capacitor/ios`, dan `@capacitor/android` dalam versi yang sama.
--   **Versi plugin**: Verifikasi bahwa versi plugin kompatibel dengan versi inti Capacitor Anda.
--   **Ketergantungan sejawat**: Cari peringatan tentang konflik ketergantungan sejawat.
+- **Dependensi core**: Pastikan `@capacitor/core`, `@capacitor/ios`, dan `@capacitor/android` berada pada versi yang sama.
+- **Versi plugin**: Verifikasi bahwa versi plugin kompatibel dengan versi Capacitor core Anda.
+- **Peer dependencies**: Perhatikan peringatan tentang konflik peer dependency.
 
-Untuk meninjau pohon ketergantungan Anda, gunakan perintah ini:
+Untuk meninjau pohon dependensi Anda, gunakan perintah ini:
 
 ```bash
 npm ls @capacitor/*
@@ -134,37 +134,37 @@ npm ls @capacitor/*
 
 ![Yarn](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
 
-Manajer paket seperti npm dan Yarn menawarkan perintah yang berguna untuk mendeteksi dan mengatasi masalah ketergantungan. Berikut cara mereka dapat membantu:
+Package manager seperti npm dan Yarn menawarkan perintah yang membantu untuk mendeteksi dan mengatasi masalah dependensi. Berikut cara mereka dapat membantu:
 
-| Perintah | Tujuan | Keluaran |
+| Perintah | Tujuan | Output |
 | --- | --- | --- |
-| `npm outdated` | Mencantumkan paket usang | Menampilkan versi saat ini dan terbaru |
-| `npm audit` | Memeriksa kerentanan keamanan | Menandai risiko ketergantungan |
-| `yarn why package-name` | Menjelaskan mengapa paket diinstal | Menunjukkan jalur ketergantungan |
+| `npm outdated` | Menampilkan paket yang usang | Menampilkan versi saat ini dan terbaru |
+| `npm audit` | Memeriksa kerentanan keamanan | Menandai risiko dependensi |
+| `yarn why package-name` | Menjelaskan mengapa sebuah paket dipasang | Menampilkan jalur dependensi |
 
-Jalankan perintah berikut untuk pemeriksaan kesehatan penuh lingkungan [Node.js](https://nodejs.org/en) Anda dan ketergantungan proyek:
+Jalankan perintah berikut untuk pemeriksaan kesehatan lengkap lingkungan [Node.js](https://nodejs.org/en) dan dependensi proyek Anda:
 
 ```bash
 npm doctor
 ```
 
-**Tips kunci untuk dipertimbangkan:**
+**Tips penting untuk dipertimbangkan:**
 
--   Selalu commit file lock Anda ke kontrol versi.
--   Tentukan versi Capacitor yang tepat (misalnya, `5.5.1`) di `package.json` Anda.
--   Uji pembaruan secara menyeluruh di platform iOS dan Android.
+- Selalu commit file lock ke version control.
+- Tentukan versi Capacitor yang tepat (mis., `5.5.1`) di `package.json` Anda.
+- Uji pembaruan secara menyeluruh pada platform iOS dan Android.
 
 Untuk mengelola pembaruan real-time dan kontrol versi, Anda dapat menggunakan alat seperti Capgo.
 
-Setelah ketergantungan Anda teratur, Anda dapat melanjutkan untuk memperbarui komponen inti Capacitor.
+Setelah dependensi Anda teratur, Anda dapat melanjutkan untuk memperbarui komponen Capacitor core.
 
 ## Langkah 3: Perbarui Capacitor Core
 
-Mempertahankan komponen inti Capacitor Anda tetap terbaru memastikan aplikasi Anda berjalan dengan lancar dan menghindari masalah kompatibilitas. Proses ini membantu menyelesaikan konflik versi dan menjaga semuanya berfungsi bersama dengan lancar.
+Menjaga komponen Capacitor core Anda tetap up to date memastikan aplikasi Anda berjalan lancar dan menghindari masalah kompatibilitas. Proses ini membantu menyelesaikan konflik versi dan menjaga semuanya bekerja sama dengan lancar.
 
 ### Sinkronkan Pembaruan Platform
 
-Untuk memperbarui komponen inti Capacitor, gunakan perintah berikut:
+Untuk memperbarui komponen Capacitor core, gunakan perintah berikut:
 
 ```bash
 npm install @capacitor/core@latest
@@ -172,17 +172,17 @@ npm install @capacitor/cli@latest
 npx cap sync
 ```
 
-Menjalankan perintah `sync` memperbarui file native, menyelaraskan ketergantungan plugin, menyesuaikan konfigurasi platform, dan menghasilkan ulang file proyek native. Sebelum melakukan sinkronisasi, cadangkan folder `ios` dan `android` Anda untuk menghindari kehilangan data yang tidak disengaja.
+Menjalankan perintah `sync` memperbarui file native, menyelaraskan dependensi plugin, menyesuaikan konfigurasi platform, dan membuat ulang file proyek native. Sebelum sinkronisasi, cadangkan folder `ios` dan `android` Anda untuk menghindari kehilangan data yang tidak disengaja.
 
-Pertimbangkan untuk menggunakan Capgo untuk pembaruan langsung agar versi tetap konsisten. Setelah sinkronisasi selesai, periksa perubahan API untuk mengatasi masalah potensial.
+Pertimbangkan menggunakan Capgo untuk pembaruan langsung agar versi tetap konsisten. Setelah sinkronisasi selesai, periksa perubahan API untuk mengatasi masalah potensial.
 
-### Selesaikan Perubahan yang Merusak
+### Atasi Perubahan yang Merusak
 
-Memperbarui inti Capacitor mungkin memperkenalkan perubahan yang merusak. Ikuti langkah-langkah ini untuk menanganinya secara efektif:
+Memperbarui Capacitor core mungkin memperkenalkan perubahan yang merusak. Ikuti langkah-langkah ini untuk menanganinya secara efektif:
 
 1. **Tinjau Perubahan API**
 
-Periksa changelog Capacitor untuk perubahan yang merusak. Misalnya:
+Periksa changelog Capacitor untuk perubahan yang merusak. Contohnya:
 
 ```typescript
 // Old API (Capacitor 4)
@@ -192,11 +192,11 @@ Plugins.Camera.getPhoto()
 Camera.getPhoto()
 ```
 
-Perbarui kode Anda agar sesuai dengan API baru sesuai kebutuhan.
+Perbarui kode Anda untuk menyesuaikan dengan API baru sesuai kebutuhan.
 
 2. **Perbarui Konfigurasi Platform**
 
-Tinjau file `capacitor.config.json` Anda untuk memastikan sudah sesuai dengan inti yang diperbarui. Misalnya:
+Tinjau file `capacitor.config.json` Anda untuk memastikan selaras dengan core yang diperbarui. Contohnya:
 
 ```json
 {
@@ -214,15 +214,15 @@ Tinjau file `capacitor.config.json` Anda untuk memastikan sudah sesuai dengan in
 
 3. **Verifikasi Kompatibilitas Plugin**
 
-| Komponen | Apa yang Harus Dilakukan | Cara Memverifikasi |
+| Komponen | Yang Harus Dilakukan | Cara Memverifikasi |
 | --- | --- | --- |
-| Plugin Native | Perbarui untuk mencocokkan versi inti yang baru | Uji fungsionalitas native |
-| Plugin Kustom | Periksa perubahan antarmuka | Jalankan tes spesifik plugin |
-| Implementasi Web | Perbarui panggilan plugin berbasis web | Uji di browser |
+| Plugin Native | Perbarui agar sesuai dengan versi core baru | Uji fungsionalitas native |
+| Plugin Kustom | Periksa perubahan interface | Jalankan tes khusus plugin |
+| Implementasi Web | Perbarui pemanggilan plugin berbasis web | Uji di browser |
 
-**Tip Pro**: Untuk pembaruan versi besar (seperti berpindah dari 4.x ke 5.x), perbarui satu versi pada satu waktu. Ini memudahkan untuk menemukan dan memperbaiki masalah.
+**Pro Tip**: Untuk pembaruan versi major (seperti berpindah dari 4.x ke 5.x), perbarui satu versi pada satu waktu. Ini memudahkan untuk menemukan dan memperbaiki masalah.
 
-Setelah Anda menyelesaikan langkah-langkah ini, uji aplikasi Anda secara menyeluruh untuk memastikan semua fitur berfungsi dengan baik dengan inti yang diperbarui.
+Setelah menyelesaikan langkah-langkah ini, uji aplikasi Anda secara menyeluruh untuk memastikan semua fitur berfungsi dengan benar dengan core yang diperbarui.
 
 ## Langkah 4: Perbaiki Masalah Versi Plugin
 
@@ -230,7 +230,7 @@ Konflik versi plugin dapat mengganggu kinerja aplikasi Capacitor Anda. Berikut c
 
 ### Perbarui Plugin
 
-Simpan plugin Anda selaras dengan inti Capacitor dengan menjalankan perintah ini:
+Jaga plugin Anda selaras dengan Capacitor core dengan menjalankan perintah ini:
 
 ```bash
 npx npm-check-updates "@capacitor/*" --target latest
@@ -242,19 +242,19 @@ Untuk pembaruan lengkap plugin Capacitor, gunakan:
 npm install @capacitor/core@latest @capacitor/cli@latest @capacitor/ios@latest @capacitor/android@latest
 ```
 
-Setelah memperbarui, pastikan untuk menguji fitur native untuk memastikan kompatibilitas.
+Setelah memperbarui, pastikan untuk menguji fitur native untuk mengkonfirmasi kompatibilitas.
 
-| Jenis Pembaruan | Perintah | Tujuan |
+| Tipe Pembaruan | Perintah | Tujuan |
 | --- | --- | --- |
 | Plugin Tunggal | `npm install @capacitor/plugin-name@version` | Perbarui satu plugin |
 | Semua Plugin | `npx npm-check-updates "@capacitor/*" -u` | Perbarui semuanya |
-| Versi Spesifik | `npm install @capacitor/plugin-name@x.x.x` | Kunci ke versi tertentu |
+| Versi Spesifik | `npm install @capacitor/plugin-name@x.x.x` | Kunci ke versi spesifik |
 
 ### Kunci Versi Plugin
 
-Untuk menghindari konflik di masa mendatang, kunci versi plugin Anda di `package.json`. Ini memastikan perilaku yang konsisten di sepanjang lingkungan pengembangan dan produksi.
+Untuk menghindari konflik di masa depan, kunci versi plugin Anda di `package.json`. Ini memastikan perilaku yang konsisten di lingkungan pengembangan dan produksi.
 
-Tambahkan bidang "resolutions" ke file `package.json` Anda:
+Tambahkan field "resolutions" ke file `package.json` Anda:
 
 ```json
 {
@@ -266,34 +266,34 @@ Tambahkan bidang "resolutions" ke file `package.json` Anda:
 }
 ```
 
-Untuk pengguna Yarn, terapkan resolusi ini dengan:
+Untuk pengguna Yarn, tegakkan resolusi ini dengan:
 
 ```bash
 yarn install --force
 ```
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) di produksi untuk basis pengguna kami yang berjumlah lebih dari 5000. Kami melihat operasi yang sangat lancar dan hampir semua pengguna kami diperbarui dalam beberapa menit setelah OTA dikerahkan ke @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) di produksi untuk basis pengguna kami +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami up to date dalam hitungan menit setelah OTA dikerahkan ke @Capgo." - colenso [\[1\]](https://capgo.app/)
 
-Menggunakan alat seperti Capgo dapat membantu mengelola pembaruan plugin dan menjaga konsistensi versi, terutama saat memperkenalkan perubahan kritis.
+Menggunakan alat seperti Capgo dapat membantu mengelola pembaruan plugin dan menjaga konsistensi versi, terutama saat memperkenalkan perubahan penting.
 
 **Tips untuk Mengelola Versi**:
 
--   Uji pembaruan secara menyeluruh di lingkungan pengembangan Anda.
--   Dokumentasikan versi plugin yang kompatibel dan catat perubahan yang merusak.
--   Ikuti penetapan versi semantik untuk merencanakan pembaruan secara efektif.
--   Simpan cadangan konfigurasi yang berfungsi.
+- Uji pembaruan secara menyeluruh di lingkungan pengembangan Anda.
+- Dokumentasikan versi plugin yang kompatibel dan catat perubahan yang merusak.
+- Ikuti semantic versioning untuk merencanakan pembaruan secara efektif.
+- Simpan cadangan konfigurasi Anda yang berfungsi.
 
-Lanjutkan ke Langkah 5 untuk menguji perubahan Anda di semua lingkungan.
+Lanjut ke Langkah 5 untuk menguji perubahan Anda di semua lingkungan.
 
 ## Langkah 5: Periksa Perubahan Anda
 
-Setelah menyelesaikan konflik versi, sangat penting untuk menguji secara menyeluruh untuk memastikan aplikasi Anda tetap stabil dan siap untuk pembaruan di semua lingkungan.
+Setelah menyelesaikan konflik versi, penting untuk menguji secara menyeluruh untuk memastikan aplikasi Anda tetap stabil dan siap untuk pembaruan di semua lingkungan.
 
 ### Pengujian Lokal
 
-Mulailah dengan menjalankan perintah-perintah ini untuk memastikan semuanya berfungsi seperti yang diharapkan:
+Mulai dengan menjalankan perintah ini untuk memastikan semuanya berfungsi seperti yang diharapkan:
 
--   **Bersihkan dan instal ulang ketergantungan:**
+- **Bersihkan dan pasang ulang dependensi:**
 
 ```bash
 npm cache clean --force
@@ -301,36 +301,36 @@ rm -rf node_modules
 npm install
 ```
 
--   **Verifikasi build platform:**
+- **Verifikasi build platform:**
 
 ```bash
 npm run build
 npx cap sync
 ```
 
--   **Buka IDE native untuk pengujian lebih lanjut:**
+- **Buka IDE native untuk pengujian lebih lanjut:**
 
 ```bash
 npx cap open ios
 npx cap open android
 ```
 
-**Apa yang Harus Diverifikasi:**
+**Yang Perlu Diverifikasi:**
 
-| Area Uji | Apa yang Perlu Diperiksa |
+| Area Pengujian | Yang Perlu Diperiksa |
 | --- | --- |
-| Fitur Utama | Navigasi, persistensi data, panggilan API |
-| Fungsi Native | Kamera, geolocation, akses sistem file |
+| Fitur Inti | Navigasi, persistensi data, panggilan API |
+| Fungsi Native | Kamera, geolokasi, akses sistem file |
 | Integrasi Plugin | Fungsionalitas setiap plugin yang diperbarui |
-| Performa | Waktu peluncuran aplikasi, transisi, penggunaan memori |
+| Kinerja | Waktu peluncuran aplikasi, transisi, penggunaan memori |
 
-Setelah pengujian lokal mengonfirmasi bahwa fungsionalitas dasar aplikasi tetap utuh, lanjutkan dengan pengujian di perangkat nyata melalui saluran Over-the-Air (OTA).
+Setelah pengujian lokal mengkonfirmasi bahwa fungsionalitas dasar aplikasi utuh, lanjutkan ke pengujian pada perangkat nyata melalui saluran Over-the-Air (OTA).
 
 ### Pengujian Langsung dengan [Capgo](https://capgo.app/)
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
 
-Setelah memverifikasi perubahan Anda secara lokal, saatnya untuk menguji di lingkungan langsung. Atur saluran pengujian dengan perintah berikut:
+Setelah memverifikasi perubahan Anda secara lokal, saatnya menguji di lingkungan live. Siapkan channel pengujian dengan perintah berikut:
 
 ```bash
 npx @capgo/cli init
@@ -339,27 +339,27 @@ npx @capgo/cli create-channel beta
 
 **Alur Kerja Pengujian:**
 
--   Deploy perbaikan Anda ke saluran beta dan pantau kinerja menggunakan alat analitik Capgo.
--   Lacak tingkat keberhasilan pembaruan melalui dasbor Capgo, yang telah memberikan lebih dari 23,5 juta pembaruan di 750 aplikasi produksi [\[1\]](https://capgo.app/).
--   Jika ada masalah yang muncul, gunakan fitur rollback satu klik Capgo untuk membatalkan perubahan dengan cepat.
+-   Deploy perbaikan Anda ke channel beta dan pantau kinerja menggunakan tools analitik Capgo.
+-   Lacak tingkat keberhasilan update melalui dashboard Capgo, yang telah mengirimkan lebih dari 23,5 juta update di 750 aplikasi produksi [\[1\]](https://capgo.app/).
+-   Jika timbul masalah, gunakan fitur rollback satu klik dari Capgo untuk mengembalikan perubahan secara instan.
 
-> "Kami melakukan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan secara terus-menerus kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
+> "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam pengiriman berkelanjutan kepada pengguna kami!" - Rodrigo Mantica [\[1\]](https://capgo.app/)
 
-Capgo memiliki tingkat keberhasilan global 82%, dengan pembaruan menjangkau 95% pengguna aktif hanya dalam 24 jam [\[1\]](https://capgo.app/). Gunakan pemilih saluran untuk menguji permintaan tarik langsung dalam aplikasi, memastikan semuanya berjalan dengan lancar sebelum menggabungkan perubahan Anda.
+Capgo memiliki tingkat keberhasilan global 82%, dengan update mencapai 95% pengguna aktif hanya dalam 24 jam [\[1\]](https://capgo.app/). Gunakan pemilih channel untuk menguji pull request langsung dalam aplikasi, memastikan semuanya berjalan lancar sebelum menggabungkan perubahan Anda.
 
-## Kesimpulan: Jaga Versi Aplikasi Anda
+## Kesimpulan: Jaga Versi Aplikasi Anda Tetap Terkendali
 
-Mengelola konflik versi dalam [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) memerlukan pendekatan yang jelas dan terorganisir. Proses lima langkah yang dibagikan dalam panduan ini menawarkan cara yang dapat diandalkan untuk menjaga stabilitas aplikasi dan menangani tantangan terkait versi secara efektif.
+Mengelola konflik versi dalam [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) membutuhkan pendekatan yang jelas dan terorganisir. Proses lima langkah yang dibagikan dalam panduan ini menawarkan cara yang andal untuk menjaga stabilitas aplikasi dan mengatasi tantangan terkait versi secara efektif.
 
-Dengan mengikuti langkah-langkah ini, tim dapat memastikan aplikasi mereka tetap stabil seiring waktu. Misalnya, menggunakan alat pembaruan langsung seperti Capgo memungkinkan untuk deployment yang cepat dan efisien, membantu tim tetap berada di depan [\[1\]](https://capgo.app/).
+Dengan mengambil langkah-langkah ini, tim dapat memastikan aplikasi mereka tetap stabil seiring waktu. Misalnya, menggunakan tools live update seperti Capgo memungkinkan deployment yang cepat dan efisien, membantu tim tetap unggul [\[1\]](https://capgo.app/).
 
-Berikut adalah fokus tim yang sukses:
+Berikut yang menjadi fokus tim sukses:
 
 | Praktik | Manfaat |
 | --- | --- |
-| Pemeriksaan CLI reguler | Menemukan masalah ketergantungan lebih awal |
+| Pemeriksaan CLI rutin | Mendeteksi masalah dependensi sejak dini |
 | Pengujian otomatis | Menangkap masalah terkait versi sebelum peluncuran |
-| Pemantauan pembaruan langsung | Dengan cepat membatalkan pembaruan yang bermasalah |
-| Penetapan versi | Menjaga konsistensi ketergantungan |
+| Pemantauan live update | Melakukan rollback update bermasalah dengan cepat |
+| Penentuan versi tetap | Menjaga konsistensi dependensi |
 
-Mengelola versi aplikasi melampaui hanya menyelesaikan konflik - ini tentang memastikan pengalaman pengguna yang mulus dan dapat diandalkan. Dengan mematuhi praktik ini dan memanfaatkan alat pembaruan langsung, Anda dapat menjaga aplikasi Capacitor Anda berjalan dengan lancar.
+Mengelola versi aplikasi lebih dari sekadar menyelesaikan konflik - ini tentang memastikan pengalaman pengguna yang lancar dan andal. Dengan mematuhi praktik-praktik ini dan memanfaatkan tools live update, Anda dapat menjaga aplikasi Capacitor Anda berjalan dengan lancar.

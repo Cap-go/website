@@ -1,10 +1,10 @@
 ---
 slug: 5-steps-to-distribute-custom-capacitor-plugins
-title: 5 Schritte zur Verteilung von benutzerdefinierten Capacitor-Plugins
+title: 5 Schritte zum Verteilen von benutzerdefinierten Capacitor-Plugins
 description: >-
-  Erfahren Sie, wie Sie benutzerdefinierte Plugins effizient verteilen, um die
-  Funktionalität Ihrer Anwendungen auf iOS- und Android-Plattformen zu
-  verbessern.
+  Lernen Sie, wie Sie benutzerdefinierte Plugins für erweiterte
+  App-Funktionalität effektiv über iOS- und Android-Plattformen verteilen
+  können.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
@@ -19,147 +19,131 @@ published: true
 locale: de
 next_blog: ''
 ---
+Die Verteilung von benutzerdefinierten [Capacitor](https://capacitorjs.com/) Plugins kann die Funktionalität Ihrer App verbessern und gleichzeitig sicherstellen, dass Updates die Nutzer schnell erreichen. Hier ist eine kurze Anleitung zum Einstieg:
 
-Das Verteilen von benutzerdefinierten [Capacitor](https://capacitorjs.com/) Plugins kann die Funktionalität Ihrer App verbessern und gleichzeitig sicherstellen, dass Updates schnell bei den Nutzern ankommen. Hier ist eine kurze Anleitung zum Einstieg:
+1. **Entwicklung und Test**: Entwickeln Sie Ihr Plugin mit der [Capacitor Plugin API](https://capgo.app/blog/capacitor-comprehensive-guide/), testen Sie es gründlich auf iOS- und Android-Geräten und behandeln Sie Grenzfälle effektiv.
+2. **Verteilung einrichten**: Erstellen Sie ein npm-Paket mit klarer Dokumentation, einschließlich Installationsschritte, API-Referenzen und Anwendungsbeispielen.
+3. **Veröffentlichung**: Veröffentlichen Sie Ihr Plugin auf npm unter Verwendung der semantischen Versionierung und teilen Sie es auf GitHub für die Community-Sichtbarkeit.
+4. **Integration**: Stellen Sie Einrichtungsanweisungen für Entwickler bereit, damit diese Ihr Plugin einfach zu ihren Projekten hinzufügen und seine Funktionalität überprüfen können.
+5. **Live-Updates hinzufügen (Optional)**: Nutzen Sie Tools wie [Capgo](https://capgo.app/) für sichere und effiziente Live-Updates, um sicherzustellen, dass 95% der Nutzer Änderungen innerhalb von 24 Stunden erhalten.
 
-1. **Entwickeln und Testen**: Entwickeln Sie Ihr Plugin mit der [Capacitor Plugin API](https://capgo.app/blog/capacitor-comprehensive-guide/), testen Sie es gründlich auf iOS- und Android-Geräten und behandeln Sie Randfälle effektiv
-2. **Distribution einrichten**: Erstellen Sie ein npm-Paket mit klarer Dokumentation, einschließlich Installationsschritte, API-Referenzen und Nutzungsbeispiele
-3. **Veröffentlichen**: Veröffentlichen Sie Ihr Plugin auf npm unter Verwendung der semantischen Versionierung und teilen Sie es auf GitHub für die Community-Sichtbarkeit
-4. **Integration**: Stellen Sie Einrichtungsanweisungen bereit, damit Entwickler Ihr Plugin einfach zu ihren Projekten hinzufügen und seine Funktionalität überprüfen können
-5. **Live-Updates hinzufügen (Optional)**: Nutzen Sie Tools wie [Capgo](https://capgo.app/) für sichere und effiziente Live-Updates, um sicherzustellen, dass 95% der Nutzer Änderungen innerhalb von 24 Stunden erhalten
-
-Dieser schrittweise Prozess stellt sicher, dass Ihr Plugin gut entwickelt, einfach zu integrieren und bereit für den Einsatz auf iOS- und Android-Plattformen ist
+Dieser schrittweise Prozess stellt sicher, dass Ihr Plugin gut entwickelt, einfach zu integrieren und bereit für den Einsatz auf iOS- und Android-Plattformen ist.
 
 ## Wie man ein [Capacitor](https://capacitorjs.com/) Plugin für iOS/Android erstellt
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<iframe src="https://www.youtube.com/embed/Dq_BmheGAig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<Steps>
 
-## Schritt 1: Plugin entwickeln und testen
+## Schritt 1: Plugin erstellen und testen
 
-Das Hauptziel ist hier, JavaScript mit nativen Funktionen zu verbinden und dabei sicherzustellen, dass es sowohl auf iOS als auch auf Android reibungslos funktioniert
+Das Hauptziel hier ist die Verbindung von JavaScript mit nativen Funktionen, während die nahtlose Funktion auf iOS und Android sichergestellt wird.
 
-### Verwenden der Capacitor Plugin API
+### Verwendung der Capacitor Plugin API
 
-Beginnen Sie mit der Erstellung Ihres Plugins mit der offiziellen [Capacitor Plugin](https://capgo.app/blog/capacitor-comprehensive-guide/) API. Dies gewährleistet eine konsistente Funktionalität über alle Plattformen hinweg. Konzentrieren Sie sich auf eine einzelne Funktion, um die Entwicklung und Wartung zu erleichtern
+Beginnen Sie mit der Erstellung Ihres Plugins mit der offiziellen [Capacitor Plugin](https://capgo.app/blog/capacitor-comprehensive-guide/) API. Dies gewährleistet eine einheitliche Funktionalität über alle Plattformen hinweg. Konzentrieren Sie sich auf eine einzelne Funktion, um Entwicklung und Wartung zu erleichtern.
 
 Wichtige Punkte während der Entwicklung:
 
--   Definieren Sie klare Methodensignaturen
--   Implementieren Sie robuste Fehlerbehandlung
--   Unterstützen Sie plattformspezifische Funktionen bei Bedarf
--   Dokumentieren Sie alle Plattformanforderungen klar
+- Definieren Sie klare Methodensignaturen.
+- Implementieren Sie robuste Fehlerbehandlung.
+- Unterstützen Sie plattformspezifische Funktionen bei Bedarf.
+- Dokumentieren Sie Plattformanforderungen klar.
 
 ### Testen auf verschiedenen Plattformen
 
-Gründliches Testen ist entscheidend vor der Veröffentlichung Ihres Plugins. Verwenden Sie lokale Tools, um die Leistung sowohl auf echten Geräten als auch auf Emulatoren zu überprüfen:
+Gründliches Testen ist vor der Veröffentlichung Ihres Plugins entscheidend. Verwenden Sie lokale Tools, um die Leistung sowohl auf echten Geräten als auch auf Emulatoren zu überprüfen:
 
--   Testen Sie auf iOS-Simulatoren und physischen Geräten über verschiedene iOS-Versionen hinweg
--   Testen Sie auf Android-Geräten über verschiedene API-Level hinweg, um die ordnungsgemäße Integration und Leistung zu bestätigen
+- Testen Sie auf iOS-Simulatoren und physischen Geräten über verschiedene iOS-Versionen hinweg.
+- Testen Sie auf Android-Geräten über verschiedene API-Level hinweg, um die ordnungsgemäße Integration und Leistung zu bestätigen.
 
-Bevor Sie abschließen, stellen Sie sicher, dass Sie:
+Bevor Sie abschließen, stellen Sie sicher:
 
--   JavaScript-zu-Native-Aufrufe und Datenkonvertierungen validieren
--   Fehlerbehandlung und Gesamtleistung überprüfen
--   Randfälle testen, um sicherzustellen, dass Ihr Plugin unerwartete Eingaben verarbeiten und klare Fehlermeldungen liefern kann
+- Validieren Sie JavaScript-zu-Native-Aufrufe und Datenkonvertierungen.
+- Überprüfen Sie die Fehlerbehandlung und Gesamtleistung.
+- Testen Sie Grenzfälle, um sicherzustellen, dass Ihr Plugin unerwartete Eingaben verarbeiten und klare Fehlermeldungen liefern kann.
 
-Sobald Sie diese Schritte abgeschlossen haben, sind Sie bereit für Schritt 2, wo Sie Ihre Distributionsdateien vorbereiten
+Sobald Sie diese Schritte abgeschlossen haben, können Sie zu Schritt 2 übergehen, wo Sie Ihre Verteilungsdateien vorbereiten.
 
-## Schritt 2: Distributionsdateien einrichten
+## Schritt 2: Verteilungsdateien einrichten
 
-Organisieren Sie Ihr npm-Paket und die Dokumentation für eine reibungslose Distribution
+Organisieren Sie Ihr npm-Paket und die Dokumentation für eine reibungslose Verteilung.
 
 ### Erstellen Sie Ihr npm-Paket
 
-Beginnen Sie mit dem Befehl: `npm init @capacitor/plugin@latest`. Aktualisieren Sie dann die `packagejson`-Datei mit dem Namen des Plugins, der Version und allen erforderlichen Abhängigkeiten
+Beginnen Sie mit dem Befehl: `npm init @capacitor/plugin@latest`. Aktualisieren Sie dann die `package.json`-Datei mit dem Namen des Plugins, der Version und allen erforderlichen Abhängigkeiten.
 
-### Schreiben Sie klare Dokumentation
+### Klare Dokumentation schreiben
 
-Fügen Sie eine `READMEmd`-Datei hinzu, die Folgendes enthält:
+Fügen Sie eine `README.md`-Datei hinzu, die Folgendes enthält:
 
--   **Installationsanweisungen**: Stellen Sie Schritte sowohl für npm als auch yarn bereit
--   **API-Referenz**: Detaillierte Methodenbeschreibungen und Parametertypen
--   **Nutzungsbeispiele**: Zeigen Sie, wie das Plugin in gängigen Szenarien verwendet wird
+- **Installationsanweisungen**: Stellen Sie Schritte für npm und yarn bereit.
+- **API-Referenz**: Detaillierte Methodenbeschreibungen und Parametertypen.
+- **Anwendungsbeispiele**: Zeigen Sie, wie das Plugin in häufigen Szenarien verwendet wird.
 
-### Überprüfen Sie Plattformanforderungen
+### Plattformanforderungen überprüfen
 
-Stellen Sie sicher, dass alle Datenschutz- und Berechtigungserklärungen den Richtlinien von Apple und Google entsprechen
+Stellen Sie sicher, dass alle Datenschutz- und Berechtigungserklärungen den Richtlinien von Apple und Google entsprechen.
 
-Sobald diese Schritte abgeschlossen sind, sind Sie bereit für Schritt 3 und können Ihr Plugin auf npm veröffentlichen, um es mit der Community zu teilen
+Sobald diese Schritte abgeschlossen sind, können Sie zu Schritt 3 übergehen und Ihr Plugin auf npm veröffentlichen, um es mit der Community zu teilen.
 
 ## Schritt 3: Plugin veröffentlichen
 
-Bringen Sie Ihr Plugin in die Welt, indem Sie es auf npm veröffentlichen und es mit der Capacitor-Community teilen
+Bringen Sie Ihr Plugin in die Welt, indem Sie es auf npm veröffentlichen und mit der Capacitor-Community teilen.
 
 ### Auf npm Registry veröffentlichen
 
-Befolgen Sie die Richtlinien der semantischen Versionierung bei der Veröffentlichung Ihres Plugins: Verwenden Sie **major** Versionen für Breaking Changes, **minor** für neue Funktionen und **patch** für BugfixesDann veröffentlichen Sie Ihr Plugin mit diesen Befehlen:
+Befolgen Sie die Richtlinien der semantischen Versionierung bei der Veröffentlichung Ihres Plugins: Verwenden Sie **major** Versionen für Breaking Changes, **minor** für neue Funktionen und **patch** für Bugfixes. Veröffentlichen Sie dann Ihr Plugin mit diesen Befehlen:
 
-```bash
-npm publish           # For a production release
-npm publish --tag beta  # For a prerelease
-```
-
-### Mit der Capacitor-Community teilen
-
-Laden Sie Ihr Plugin-Repository auf GitHub hoch und erwägen Sie, es zur Capacitor Community Organisation hinzuzufügen. Dies gibt Ihrem Plugin mehr Sichtbarkeit und ermöglicht anderen, einen Beitrag zu leisten.
-
-## Step 4: Projekt-Integration anleiten
+## Schritt 4: Projektintegration anleiten
 
 Nachdem Ihr Plugin auf npm veröffentlicht wurde, ist der nächste Schritt die Integration in Projekte. So geht's:
 
 ### Einrichtungsanweisungen
 
-1. Ausführen: `npm install your-plugin-name`
-2. [Synchronisieren mit Capacitor](https://capgo.app/plugins/capacitor-updater/): `npx cap sync`
-3. Geben Sie erforderliche native Konfigurationen an, wie Manifest-Updates oder Plugin-Registrierung
+- Ausführen: `npm install your-plugin-name`
+- [Synchronisieren mit Capacitor](https://capgo.app/plugins/capacitor-updater/): `npx cap sync`
+- Geben Sie erforderliche native Konfigurationen an, wie Manifest-Updates oder Plugin-Registrierung.
 
 ### Installation testen
 
-1. Testen Sie das Plugin in einem neuen Capacitor-Projekt, um sicherzustellen, dass alles wie erwartet funktioniert
-2. Rufen Sie eine grundlegende Plugin-Methode auf und überprüfen Sie, ob sie das erwartete Ergebnis liefert
+- Testen Sie das Plugin in einem neuen Capacitor-Projekt, um sicherzustellen, dass alles wie erwartet funktioniert.
+- Rufen Sie eine grundlegende Plugin-Methode auf und überprüfen Sie, ob sie das erwartete Ergebnis liefert.
 
 Sobald Sie bestätigt haben, dass alles funktioniert, können Sie mit der Integration Ihres Plugins in Projekte fortfahren.
 
-## Step 5: Live-Updates hinzufügen
+## Schritt 5: Live-Updates hinzufügen
 
-Erweitern Sie Ihren Vertriebsprozess durch die Integration von Live-Updates. Mit Capgo können Sie sicherstellen, dass Ihr Plugin aktuell bleibt, ohne auf App-Store-Genehmigungen warten zu müssen.
+Erweitern Sie Ihren Verteilungsprozess durch die Integration von Live-Updates. Mit Capgo können Sie sicherstellen, dass Ihr Plugin aktuell bleibt, ohne auf App-Store-Genehmigungen warten zu müssen.
 
 ### Einrichten von [Capgo](https://capgo.app/) Live-Updates
 
-![Capgo](https://assets.seobot.ai/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
-Führen Sie zum Beginnen den folgenden Befehl aus:
+**Warum Capgo verwenden?** Es bietet eine Reihe von Funktionen zur Optimierung von Updates:
 
-```bash
-npx @capgo/cli init
-```
-
-**Warum Capgo verwenden?** Es bietet verschiedene Funktionen zur Optimierung von Updates:
-
-1. **Sichere Bereitstellung** mit Ende-zu-Ende-Verschlüsselung
-2. **Effiziente Verteilung** durch Delta-Updates
-3. **Überwachungstools** über ein Analytics-Dashboard
-4. **Rollback-Optionen** für schnelle Korrekturen
-5. **Channel-Management** für organisierte Releases
+- **Sichere Bereitstellung** mit Ende-zu-Ende-Verschlüsselung
+- **Effiziente Verteilung** durch Delta-Updates
+- **Überwachungstools** über ein Analytics-Dashboard
+- **Rollback-Optionen** für schnelle Korrekturen
+- **Kanalmanagement** für organisierte Releases
 
 So konfigurieren Sie Ihre Updates:
 
-1. Integration mit CI/CD-Tools wie [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), oder [Jenkins](https://www.jenkins.io/)
-2. Einrichten von Vertriebskanälen für Entwicklungs-, Beta- und Produktionsumgebungen
-3. Aktivieren Sie Ein-Klick-Rollback, um Probleme schnell zu beheben
+- Integration mit CI/CD-Tools wie [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/) oder [Jenkins](https://www.jenkins.io/).
+- Einrichten von Verteilungskanälen für Entwicklungs-, Beta- und Produktionsumgebungen.
+- Aktivieren Sie One-Click-Rollback, um Probleme schnell zu beheben.
 
-Laut Capgo-Metriken erhalten 95% der aktiven Nutzer Updates innerhalb von 24 Stunden [\[1\]](https://capgo.app/), was Live-Updates zu einer leistungsstarken Methode für die effiziente Verteilung von Änderungen macht.
+Laut Capgo-Metriken erhalten 95% der aktiven Nutzer Updates innerhalb von 24 Stunden [\[1\]](https://capgo.app/), was Live-Updates zu einer leistungsstarken Methode macht, um Änderungen effizient zu verteilen.
 
-Sobald Live-Updates konfiguriert sind, können Sie Ihren Vertriebsworkflow abschließen.
+Sobald Live-Updates konfiguriert sind, können Sie Ihren Verteilungsworkflow abschließen.
 
-[\[1\]](https://capgo.app/) Basierend auf Capgo-Plattform-Metriken von aktiven Produktions-Apps
+[\[1\]](https://capgo.app/) Basierend auf Capgo-Plattform-Metriken von aktiven Produktions-Apps.
 
 ## Fazit
 
-Indem Sie diese fünf Schritte befolgen, können Sie ein [benutzerdefiniertes Capacitor-Plugin](https://capgo.app/blog/release-of-a-brand-new-capacitor-social-login/) erstellen, das gut entwickelt, einfach zu integrieren und bereit für den Einsatz ist.
+Durch Befolgen dieser fünf Schritte können Sie ein [benutzerdefiniertes Capacitor Plugin](https://capgo.app/blog/release-of-a-brand-new-capacitor-social-login/) erstellen, das gut entwickelt, einfach zu integrieren und bereit für den Einsatz ist.
 
-Von der Entwicklung und Tests bis hin zu Packaging, Veröffentlichung, Integration und optionalen Live-Updates gewährleistet dieser strukturierte Prozess, dass Ihre Plugins nahtlos auf iOS- und Android-Plattformen funktionieren.
+Von der Entwicklung und dem Testen bis hin zur Paketierung, Veröffentlichung, Integration und sogar optionalen Live-Updates stellt dieser strukturierte Prozess sicher, dass Ihre Plugins nahtlos auf iOS- und Android-Plattformen funktionieren.
 
-Denken Sie daran, dass erfolgreiche Plugin-Distribution über die erste Veröffentlichung hinausgeht - es geht darum, einen effizienten und zuverlässigen Prozess aufrechtzuerhalten, der sowohl Entwicklern als auch Benutzern zugute kommt. Nutzen Sie diese Anleitung, um die Plugin-Bereitstellung über Plattformen hinweg zu optimieren.
+Bedenken Sie, dass erfolgreiche Plugin-Verteilung über die erste Veröffentlichung hinausgeht - es geht darum, einen effizienten und zuverlässigen Prozess zu pflegen, der sowohl Entwicklern als auch Nutzern zugutekommt. Nutzen Sie diese Anleitung, um die Plugin-Bereitstellung über Plattformen hinweg zu optimieren.
