@@ -1,28 +1,28 @@
 ---
-slug: building-a-native-mobile-app-with-nuxt-3-and-capacitor
-title: '2025 Guide: Creating Mobile Apps with Nuxt 3.17 and Capacitor.'
-description: How to create a mobile app with Nuxt 3.17, Capacitor and implement native UI with Konsta UI.
+slug: building-a-native-mobile-app-with-nuxt-4-and-capacitor
+title: '2025 Guide: Creating Mobile Apps with Nuxt 4 and Capacitor'
+description: How to create a mobile app with Nuxt 4, Capacitor, Tailwind CSS 4, and implement native UI with Konsta UI 5.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-03T00:00:00.000Z
-updated_at: 2025-05-12T00:00:00.000Z
+updated_at: 2025-01-20T00:00:00.000Z
 head_image: /nuxt_capgo.webp
-head_image_alt: Nuxt 3 and Capgo illustration
-keywords: Nuxt 3, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
+head_image_alt: Nuxt 4 and Capgo illustration
+keywords: Nuxt 4, Capacitor, Tailwind CSS 4, Konsta UI 5, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en
 next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 ---
 
-In this tutorial, we will start with a new [Nuxt 3.17](https://nuxtjs.org/) app and move into native land using Capacitor and eventually also add [Konsta UI](https://konstaui.com/) for an improved Tailwind CSS mobile UI, although the last step is completely optional.
+In this tutorial, we will start with a new [Nuxt 4](https://nuxt.com/) app and move into native land using Capacitor and eventually also add [Konsta UI v5](https://konstaui.com/) for an improved Tailwind CSS 4 mobile UI, although the last step is completely optional.
 
-By using Capacitor, you can easily convert your Nuxt 3 web application into a native mobile app without requiring significant modifications or learning a new skill like React Native. 
+By using Capacitor, you can easily convert your Nuxt 4 web application into a native mobile app without requiring significant modifications or learning a new skill like React Native. 
 
 With just a few simple steps, most Nuxt 3 applications can be transformed into mobile apps. 
 
-This tutorial will guide you through the process, starting with a new Nuxt 3 app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS.
+This tutorial will guide you through the process, starting with a new Nuxt 4 app and then incorporating Capacitor to move into the realm of native mobile apps. Additionally, you can optionally use [Konsta UI v5](https://konstaui.com/) to enhance your mobile UI with Tailwind CSS 4.
 
 ## About Capacitor
 
@@ -30,17 +30,39 @@ CapacitorJS is truly a game-changer! You can effortlessly incorporate it into an
 
 With Capacitor, you get a fantastic native mobile app without any complicated setup or steep learning curve. Its slim API and streamlined functionality make it a breeze to integrate into your project. Trust me, you'll be amazed at how effortless it is to achieve a fully functional native app with Capacitor!
 
-## Preparing Your Nuxt 3 App
+## Preparing Your Nuxt 4 App
 
-To create a new Nuxt 3 app, run the following command:
+To create a new Nuxt 4 app, run the following command:
 
 ```shell
-npx nuxi init my-app
+npx nuxi@latest init my-app
 cd my-app
 npm install
 ```
 
-Choose "Nuxt 3" when prompted for the Nuxt version.
+### Nuxt 4 Directory Structure
+
+Nuxt 4 introduces a new default directory structure. The main application code now lives in the `app/` directory:
+
+```
+my-app/
+  app/
+    assets/
+    components/
+    composables/
+    layouts/
+    middleware/
+    pages/
+    plugins/
+    utils/
+    app.vue
+  public/
+  server/
+  nuxt.config.ts
+  package.json
+```
+
+This new structure improves performance and provides better IDE type-safety by separating server and app contexts.
 
 In order to create a native mobile app, we require an **export** of our project. Thus, let's include a straightforward script in our **package.json** that can be utilized to build and copy the Nuxt project:
 
@@ -53,11 +75,11 @@ In order to create a native mobile app, we require an **export** of our project.
 }
 ```
 
-After executing the command `generate`, you should be able to spot a fresh `dist` folder at your project's root.
+After executing the command `generate`, you should be able to spot a fresh `.output/public` folder at your project's root. In Nuxt 4, this is the new location for static output (previously `dist`).
 
 This folder will be used by Capacitor later on, but for now, we must set it up correctly.
 
-## Adding Capacitor to Your Nuxt 3 App
+## Adding Capacitor to Your Nuxt 4 App
 
 To package any web app into a native mobile container, we must follow a few initial steps, but afterward it's as simple as executing a single `sync` command.
 
@@ -82,7 +104,7 @@ npx cap add ios
 npx cap add android
 ```
 
-By this point, you should be able to observe new **ios** and **android** folders in your Nuxt 3 project.
+By this point, you should be able to observe new **ios** and **android** folders in your Nuxt 4 project.
 
 **Those are real native projects!**
 
@@ -90,14 +112,20 @@ To access the Android project later, you must install [Android Studio](https://d
 
 Additionally, you should find a **capacitor.config.ts** file in your project, which contains some fundamental Capacitor settings utilized during the sync. The only thing you need to pay attention to is the **webDir**, which must point to the result of your build command. Currently, it is inaccurate.
 
-To rectify this, open the **capacitor.config.json** file and update the **webDir**:
+For Nuxt 4, the static generation output is located at `.output/public` instead of the old `dist` directory.
 
-```json
-{
-  "appId": "com.example.app",
-  "appName": "my-app",
-  "webDir": "dist"
-}
+To rectify this, open the **capacitor.config.ts** file and update the **webDir**:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'my-app',
+  webDir: '.output/public'
+};
+
+export default config;
 ```
 
 You can try it out by executing the following commands:
@@ -107,7 +135,7 @@ npm run generate
 npx cap sync
 ```
 
-The first command `npm run generate` will simply build your Nuxt 3 project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
+The first command `npm run generate` will simply build your Nuxt 4 project and copy the static build, while the second command `npx cap sync` will sync all the web code into the right places of the native platforms so they can be displayed in an app.
 
 Additionally, the sync command might update the native platforms and install plugins, so when you install a new [Capacitor plugins](https://capacitorjs.com/docs/plugins/) it’s time to run `npx cap sync` again.
 
@@ -132,7 +160,7 @@ In Xcode, you need to set up your signing account to deploy your app to a real d
 
 ![xcode-run](/xcode-run.webp)
 
-Congratulations! You have successfully deployed your Nuxt 3 web app to a mobile device. Here's an example:
+Congratulations! You have successfully deployed your Nuxt 4 web app to a mobile device. Here's an example:
 
 <div class="mx-auto" style="width: 50%;">
   <img src="/nuxtjs-mobile-app.webp" alt="nuxtjs-mobile-app">
@@ -168,7 +196,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.example.app',
   appName: 'my-app',
-  webDir: 'dist',
+  webDir: '.output/public',
   bundledWebRuntime: false,
   server: {
     url: 'http://192.168.x.xx:3000',
@@ -179,7 +207,7 @@ const config: CapacitorConfig = {
 export default config;
 ```
 
-Be sure to use **the correct IP and port**, I have used the default Nuxt 3 port in this example.
+Be sure to use **the correct IP and port**, I have used the default Nuxt 4 port in this example.
 
 Now, we can apply these changes by copying them over to our native project:
 
@@ -193,7 +221,7 @@ You can now deploy your app one more time through Android Studio or Xcode. After
 
 **Keep in mind** that if you install new plugins such as the camera, it still requires a rebuild of your native project. This is because native files are changed, and it can't be done on the fly.
 
-Note that you should use the correct IP and port in your configuration. The code block above shows the default Nuxt 3 port for demonstration purposes.
+Note that you should use the correct IP and port in your configuration. The code block above shows the default Nuxt 4 port for demonstration purposes.
 
 ## Using Capacitor Plugins
 
@@ -203,12 +231,14 @@ Let's take a look at how to use a Capacitor plugin in action, which we've mentio
 npm i @capacitor/share
 ```
 
-There’s nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share/), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app, so let’s change the **pages/index.vue** to this:
+There's nothing fancy about the [Share plugin](https://capacitorjs.com/docs/apis/share/), but it anyway brings up the native share dialog! For this we now only need to import the package and call the according `share()` function from our app. 
+
+In Nuxt 4, pages go in the `app/pages/` directory, so let's create **app/pages/index.vue** with this content:
 
 ```html
 <template>
   <div>
-    <h1>Welcome to Nuxt 3 and Capacitor!</h1>
+    <h1>Welcome to Nuxt 4 and Capacitor!</h1>
     <button @click="share">Share now!</button>
   </div>
 </template>
@@ -235,15 +265,23 @@ npx cap sync
 
 After hitting the button, you can witness the beautiful native share dialog in action!
 
-## Adding Konsta UI
+## Adding Konsta UI v5 with Tailwind CSS 4
 
-To use Konsta UI in your Nuxt 3 app, you need to have [tailwind already install](https://tailwindcss.com/docs/guides/nuxtjs/) and to install the package:
+To use Konsta UI v5 in your Nuxt 4 app, you need to have [Tailwind CSS 4 already installed](https://tailwindcss.com/docs/guides/nuxtjs/) and to install the package:
 
 ```shell
 npm i konsta
 ```
 
-Additionally, you need to modify your `tailwind.config.js` file:
+First, import the Konsta UI v5 theme in your main CSS file (e.g., `app/assets/css/main.css`):
+
+```css
+@import 'tailwindcss';
+/* import Konsta UI v5 theme */
+@import 'konsta/theme.css';
+```
+
+Additionally, you need to modify your `tailwind.config.js` file for Tailwind CSS 4:
 
 ```javascript
 // import konstaConfig config
@@ -252,8 +290,8 @@ const konstaConfig = require('konsta/config')
 // wrap config with konstaConfig config
 module.exports = konstaConfig({
   content: [
-    './pages/**/*.{vue}',
-    './components/**/*.{vue}',
+    './app/**/*.{vue,js,ts}',
+    './components/**/*.{vue,js,ts}',
   ],
   darkMode: 'media', // or 'class'
   theme: {
@@ -266,16 +304,16 @@ module.exports = konstaConfig({
 })
 ```
 
-`konstaConfig` will extend the default (or your custom one) Tailwind CSS config with some extra variants and helper utilities required for Konsta UI.
+`konstaConfig` will extend the default (or your custom one) Tailwind CSS 4 config with some extra variants and helper utilities required for Konsta UI v5.
 
 Now we need to set up the main [App](https://konstaui.com/vue/app/) component so we can set some global parameters (like `theme`).
 
-We need to wrap the whole app with `App` in the `pages/_app.vue`:
+We need to wrap the whole app with `App` in the `app.vue`:
 
 ```html
 <template>
   <App theme="ios">
-    <Nuxt />
+    <NuxtPage />
   </App>
 </template>
 
@@ -284,11 +322,34 @@ import { App } from 'konsta/vue';
 </script>
 ```
 
+### Roboto Font for Material Design
+
+Konsta UI v5 uses system font for iOS theme and Roboto font for Material Design theme. If you're developing a web app, add the Roboto font to your app:
+
+In your `nuxt.config.ts`, add the font links to the app head:
+
+```javascript
+export default defineNuxtConfig({
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap'
+        }
+      ]
+    }
+  }
+})
+```
+
 ### Example Page
 
-Now when everything is set up, we can use Konsta UI Vue components in our Nuxt 3 pages.
+Now when everything is set up, we can use Konsta UI v5 Vue components in our Nuxt 4 pages.
 
-For example, let's open `pages/index.vue` and change it to the following:
+For example, let's create `app/pages/index.vue` with the following content:
 
 ```html
 <template>
@@ -297,7 +358,7 @@ For example, let's open `pages/index.vue` and change it to the following:
 
     <Block strong>
       <p>
-        Here is your Nuxt 3 & Konsta UI app. Let's see what we have here.
+        Here is your Nuxt 4 & Konsta UI app. Let's see what we have here.
       </p>
     </Block>
     <BlockTitle>Navigation</BlockTitle>
@@ -327,7 +388,7 @@ import {
 </script>
 ```
 
-If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with Nuxt 3 and Capacitor!
+If the live reload is out of sync after installing all the necessary components, try restarting everything. Once you have done that, you should see a mobile app with a somewhat native look, built with Nuxt 4, Capacitor, Tailwind CSS 4, and Konsta UI v5!
 
 You should see the following page as a result:
 
@@ -345,4 +406,4 @@ If you would like to learn how to add Capgo to your Next.js app, take a look at 
 
 ## Credits
 
-Thanks a lot to Simon, this article is based on [this article](https://devdactic.com/nextjs-and-capacitor/) rewroted for nuxt3 with chat-gpt-4 and adapted.
+Thanks a lot to Simon, this article is based on [this article](https://devdactic.com/nextjs-and-capacitor/) rewritten for Nuxt 4 and adapted.

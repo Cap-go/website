@@ -4,17 +4,17 @@ title: >-
   2025 Build Native Mobile Apps with Next.js 15 and Capacitor: A Step-by-Step
   Guide
 description: >-
-  Learn how to create native mobile apps using Next.js 15 and Capacitor in this
+  Learn how to create native mobile apps using Next.js 15, Capacitor, Tailwind CSS 4, and Konsta UI 5 in this
   guide. Discover the latest best practices for
-  building high-performance, feature-rich mobile applications.
+  building high-performance, feature-rich mobile applications with modern UI frameworks.
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-02-21T00:00:00.000Z
-updated_at: 2025-05-12T00:00:00.000Z
+updated_at: 2025-08-20T00:00:00.000Z
 head_image: /next_capgo.webp
 head_image_alt: Next.js 15 and Capacitor illustration
-keywords: Next.js 15, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
+keywords: Next.js 15, Capacitor, Tailwind CSS 4, Konsta UI 5, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
 tag: Tutorial
 published: true
 locale: en
@@ -23,7 +23,7 @@ next_blog: update-your-capacitor-apps-seamlessly-using-capacitor-updater
 
 ## Introduction
 
-In this tutorial, we'll explore how to create native mobile apps using the powerful combination of [Next.js](https://nextjs.org/) 15 and [Capacitor](https://capacitorjs.com/) in 2024. By leveraging the latest versions of these technologies, you can build high-performance, feature-rich mobile applications with ease. We'll also demonstrate how to enhance the mobile UI using [Konsta UI](https://konstaui.com/) and Tailwind CSS, although this step is optional.
+In this tutorial, we'll explore how to create native mobile apps using the powerful combination of [Next.js](https://nextjs.org/) 15 and [Capacitor](https://capacitorjs.com/) in 2025. By leveraging the latest versions of these technologies, you can build high-performance, feature-rich mobile applications with ease. We'll also demonstrate how to enhance the mobile UI using [Konsta UI](https://konstaui.com/) v5 and Tailwind CSS 4, although this step is optional.
 
 Next.js, a popular React framework, provides a solid foundation for building web applications, while Capacitor allows you to transform your Next.js app into a native mobile app without significant modifications or the need to learn new skills like React Native. This tutorial will guide you through the process, starting with setting up a new Next.js app and integrating Capacitor to create a native mobile experience.
 
@@ -292,24 +292,32 @@ Now, when you click the "Share now!" button, the native share dialog will appear
 
 To make the button look more mobile-friendly, we can add some styling using my favorite UI component library for web apps - Next.js (no pun intended). 
 
-## Adding Konsta UI
+## Adding Konsta UI v5 with Tailwind CSS 4
 
-I’ve worked years with [Ionic](https://ionicframework.com/) to build awesome cross platform applications and it was one of the best choices for years.
-But now i don't recommend it anymore it's very hacky to integrate it with Next.js and it's not really worth it when you have already [tailwindcss](https://tailwindcss.com/).
+I've worked years with [Ionic](https://ionicframework.com/) to build awesome cross platform applications and it was one of the best choices for years.
+But now i don't recommend it anymore it's very hacky to integrate it with Next.js and it's not really worth it when you have already [Tailwind CSS 4](https://tailwindcss.com/).
 
 
-if you want a really great looking mobile UI that adapts to iOS and Android specific styling i recommend kosta UI.
+if you want a really great looking mobile UI that adapts to iOS and Android specific styling i recommend Konsta UI v5.
 
-You need to have [tailwind already install](https://tailwindcss.com/docs/guides/nextjs/) 
-To enhance the mobile UI of your Next.js app, you can use [Konsta UI](https://konstaui.com/), a mobile-friendly UI component library that adapts to iOS and Android styling. Follow these steps to integrate Konsta UI:
+You need to have [Tailwind CSS 4 already installed](https://tailwindcss.com/docs/guides/nextjs/) 
+To enhance the mobile UI of your Next.js app, you can use [Konsta UI v5](https://konstaui.com/), a mobile-friendly UI component library that adapts to iOS and Android styling. Follow these steps to integrate Konsta UI v5:
 
-1. Install the required packages:
+1. Install the required packages (Konsta UI v5):
 
 ```shell
 npm i konsta
 ```
 
-2. Update the `tailwind.config.js` file:
+2. Import Konsta UI theme in your main CSS file (e.g., `styles/globals.css`):
+
+```css
+@import 'tailwindcss';
+/* import Konsta UI v5 theme */
+@import 'konsta/theme.css';
+```
+
+3. Update the `tailwind.config.js` file for Tailwind CSS 4:
 
 ```javascript
 const konstaConfig = require('konsta/config');
@@ -326,7 +334,7 @@ module.exports = konstaConfig({
 });
 ```
 
-3. Wrap your app with the Konsta UI `App` component in `pages/_app.js`:
+4. Wrap your app with the Konsta UI v5 `App` component in `pages/_app.js`:
 
 ```javascript
 import { App } from 'konsta/react';
@@ -344,9 +352,9 @@ export default MyApp;
 ```
 ### Example Page
 
-Now when everything is set up, we can use Konsta UI React components in our Next.js pages.
+Now when everything is set up, we can use Konsta UI v5 React components in our Next.js pages.
 
-4. Update the `pages/index.js` file to use Konsta UI components:
+5. Update the `pages/index.js` file to use Konsta UI v5 components:
 
 ```javascript
 import {
@@ -384,9 +392,22 @@ export default function Home() {
 }
 ```
 
-5. Restart the development server and rebuild the app.
+6. Add Roboto font for Material Design theme (required for Konsta UI v5):
 
-Your Next.js app should now have a native-looking mobile UI powered by Konsta UI.
+In your `pages/_document.js` or main HTML file, add:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+  rel="stylesheet"
+/>
+```
+
+7. Restart the development server and rebuild the app.
+
+Your Next.js app should now have a native-looking mobile UI powered by Konsta UI v5 and styled with Tailwind CSS 4.
 
 ## Performance Optimization
 
@@ -412,7 +433,7 @@ By following the best practices and techniques outlined in this guide, you'll be
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Capacitor Documentation](https://capacitorjs.com/docs)
-- [Konsta UI Documentation](https://konstaui.com/docs)
+- [Konsta UI v5 Documentation](https://konstaui.com/docs)
 - [Capgo - Live Updates for Capacitor Apps](https://capgo.app/)
 
 Happy app building!
