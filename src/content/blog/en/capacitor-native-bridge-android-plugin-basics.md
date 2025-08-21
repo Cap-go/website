@@ -70,7 +70,7 @@ Set up your Android Studio project with these steps:
 
 Update your `build.gradle` file with the following settings:
 
-```gradle
+```kotlin
 android {
     compileSdkVersion 33
     defaultConfig {
@@ -84,7 +84,7 @@ android {
 
 Include the required Capacitor dependencies in your `build.gradle` file:
 
-```gradle
+```kotlin
 dependencies {
     implementation '@capacitor/android:5.0.0'
     implementation '@capacitor/core:5.0.0'
