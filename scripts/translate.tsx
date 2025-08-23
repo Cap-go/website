@@ -1,6 +1,9 @@
 import { localeNames } from '@/services/locale'
 import '@dotenvx/dotenvx/config'
 
+export const ANTHROPIC_MODEL = 'claude-3-5-haiku-20241022'
+export const OPENAI_MODEL = 'gpt-5-nano-2025-08-07'
+
 export const translateTextOpenAI = async (text: string, lang: string) => {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -9,7 +12,7 @@ export const translateTextOpenAI = async (text: string, lang: string) => {
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
     },
     body: JSON.stringify({
-      model: 'gpt-4o-mini',
+      model: OPENAI_MODEL,
       messages: [
         {
           role: 'system',
@@ -21,7 +24,6 @@ export const translateTextOpenAI = async (text: string, lang: string) => {
           content: `Translate the following text to ${lang} locale:\n\n${text}`,
         },
       ],
-      max_tokens: 4000,
     }),
   })
   if (response.status !== 200) {
@@ -65,7 +67,7 @@ const makeAnthropicRequest = async (body: any) => {
 export const translateTextAnthropic = async (text: string, lang: string) => {
   const data = await makeAnthropicRequest({
     max_tokens: 4000,
-    model: 'claude-3-5-sonnet-20241022',
+    model: ANTHROPIC_MODEL,
     system:
       'Only respond with the translation of the text. No other or unrelated text or characters. Make sure to keep links, HTML tags, code blocks, image links, do not translate them. when Capacitor is used it refers to the CapacitorJs so do not translate that. Re-verify your output to not have additional code block or declaration. Make sure to have the list items in <Steps> component have decimal, such as "1" should be modified to keep "1." in every kind of output. If you see imports but no code block declaration, do not add them by yourself un-necessarily.',
     messages: [
@@ -85,7 +87,7 @@ export const translateTextsAnthropic = async (texts: string[], lang: string) => 
   const translateBatch = async (batch: string[]) => {
     const data = await makeAnthropicRequest({
       max_tokens: MAX_TOKENS,
-      model: 'claude-3-5-sonnet-20240620',
+      model: ANTHROPIC_MODEL,
       system: `Translate the given sentences. Respond with a JSON array of translated sentences. Preserve the order. Don't translate links, HTML tags, code blocks, image links, or the word 'Capacitor' when it refers to CapacitorJs.`,
       messages: [
         {

@@ -3,6 +3,7 @@ import fg from 'fast-glob'
 import matter from 'gray-matter'
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { relative } from 'path'
+import { ANTHROPIC_MODEL } from '../translate'
 
 const localeToLanguage: Record<string, string> = {
   ja: 'Japanese',
@@ -72,7 +73,7 @@ async function main() {
         const resultText = await callAnthropic({
           max_tokens: 4000,
           system: systemPrompt,
-          model: 'claude-3-5-sonnet-20241022',
+          model: ANTHROPIC_MODEL,
           messages: [
             {
               role: 'user',
