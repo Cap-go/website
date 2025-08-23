@@ -2,14 +2,95 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { createLdJsonGraph, createCapgoOrganization, createPersonLdJson } from '@/lib/ldJson'
+
 const title = [Astro.locals.runtimeConfig.public.brand, m.about_capgo({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.about_capgo({}, { locale: Astro.locals.locale })
 
+// Create enhanced organization schema with founder details
+const organization = createCapgoOrganization(Astro.locals.runtimeConfig.public)
+
+// Add founder information to organization
+organization.founder = createPersonLdJson(
+  'Martin Donadieu',
+  'https://x.com/martindonadieu',
+  `${Astro.locals.runtimeConfig.public.baseUrl}/martindonadieu.webp`,
+  'Founder & CEO'
+)
+
+// Enhanced organization with additional properties
+const enhancedOrg = {
+  ...organization,
+  foundingDate: '2023-01-01',
+  numberOfEmployees: '1-10',
+  location: {
+    '@type': 'Place',
+    name: 'Madeira, Portugal',
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: '32.6669',
+      longitude: '-16.9241'
+    }
+  },
+  knowsAbout: [
+    'Capacitor Development',
+    'Mobile App Updates',
+    'Over-the-Air Updates',
+    'JavaScript',
+    'TypeScript',
+    'iOS Development',
+    'Android Development'
+  ],
+  slogan: 'Instant updates for Capacitor apps',
+  mission: 'To empower developers with instant, reliable over-the-air updates for Capacitor applications, making app deployment seamless and efficient.',
+  awards: [
+    'Largest ecosystem of open-source plugins for Capacitor'
+  ]
+}
+
+// Create comprehensive LD+JSON for about page
 const content = {
   title,
   description,
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/app_demo.webp`,
+  ldJSON: createLdJsonGraph(
+    Astro.locals.runtimeConfig.public,
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/about/#aboutpage`,
+      name: title,
+      description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet founder Martin Donadieu.',
+      url: `${Astro.locals.runtimeConfig.public.baseUrl}/about/`,
+      mainEntity: enhancedOrg,
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: Astro.locals.runtimeConfig.public.baseUrl
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'About',
+            item: `${Astro.locals.runtimeConfig.public.baseUrl}/about/`
+          }
+        ]
+      }
+    },
+    {
+      includeOrganization: false, // We're including the enhanced org as mainEntity
+      includeBreadcrumbs: false // We're including custom breadcrumbs
+    }
+  )
 }
+
+// Add the enhanced organization and founder as separate entities
+content.ldJSON['@graph'].push(enhancedOrg)
+content.ldJSON['@graph'].push(organization.founder)
 ---
 
 <Layout content={content}>

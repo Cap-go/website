@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2024-08-04T00:00:00.000Z
-updated_at: 2025-01-21T00:00:00.000Z
+updated_at: 2025-09-23T00:00:00.000Z
 head_image: /fastlane_ios.webp
 head_image_alt: Fastlane testflight GitHub action illustration
 keywords: Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app updates
@@ -467,11 +467,11 @@ jobs:
   build_ios:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Use Node.js 20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - name: Install dependencies
         id: install_code

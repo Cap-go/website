@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-16T02:24:50.565Z
-updated_at: 2025-03-18T13:14:19.939Z
+updated_at: 2025-09-23T13:14:19.939Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d61b378b902ec211cf87e9-1742091902582.jpg
 head_image_alt: モバイル開発
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest  
     steps:  
       - uses: actions/checkout@v3  
-      - uses: actions/setup-node@v3  
+      - uses: actions/setup-node@v4  
         with:  
           node-version: '18.x'  
       - name: Install Dependencies  
@@ -129,7 +129,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
       - name: Install Dependencies

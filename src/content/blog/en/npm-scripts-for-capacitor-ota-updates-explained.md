@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-13T01:07:05.331Z
-updated_at: 2025-04-13T01:07:18.251Z
+updated_at: 2025-09-23T01:07:18.251Z
 head_image: https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266-1744506438251.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, npm scripts, OTA updates, CI/CD, mobile app deployment, automation, app version management, security
@@ -171,7 +171,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 

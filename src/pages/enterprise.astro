@@ -3,11 +3,112 @@ import Layout from '@/layouts/Layout.astro'
 import Testimonials from '@/components/Testimonials.astro'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import * as m from '@/paraglide/messages'
+import { createLdJsonGraph, createServiceLdJson, createProductLdJson } from '@/lib/ldJson'
 
 const title = [Astro.locals.runtimeConfig.public.brand, 'Enterprise'].join(' | ')
 const description = 'Enterprise-grade live updates for Capacitor apps. Built for teams that need advanced security, compliance, and dedicated support at scale.'
 
-const content = { title, description }
+// Create enterprise service schema
+const enterpriseService = createServiceLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Enterprise - Professional Live Updates',
+  description: 'Enterprise-grade live update platform for Capacitor applications with advanced security, compliance features, and dedicated support for large-scale deployments.',
+  url: `${Astro.locals.runtimeConfig.public.baseUrl}/enterprise/`,
+  serviceType: 'Enterprise Software Service',
+  areaServed: ['Worldwide']
+})
+
+// Create enterprise product offering
+const enterpriseProduct = createProductLdJson(Astro.locals.runtimeConfig.public, {
+  name: 'Capgo Enterprise Plan',
+  description: 'Complete enterprise solution with advanced security, compliance, dedicated support, and unlimited scalability for professional teams.',
+  url: `${Astro.locals.runtimeConfig.public.baseUrl}/enterprise/`,
+  sku: 'capgo-enterprise',
+  offers: [
+    {
+      price: 'Custom',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 1 year from now
+    }
+  ]
+})
+
+// Enhanced enterprise product with additional properties
+const enhancedEnterpriseProduct = {
+  ...enterpriseProduct,
+  category: 'Enterprise Software',
+  audience: {
+    '@type': 'BusinessAudience',
+    audienceType: 'Enterprise Teams',
+    geographicArea: 'Global'
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Enterprise Features',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Advanced Security & Compliance',
+          description: 'SOC 2 Type II compliance, end-to-end encryption, and enterprise-grade security controls.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Dedicated Support',
+          description: '24/7 priority support with dedicated account management and SLA guarantees.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Custom Deployment Options',
+          description: 'On-premise, hybrid cloud, or dedicated cloud deployments tailored to your infrastructure needs.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Advanced Analytics & Reporting',
+          description: 'Comprehensive deployment analytics, performance monitoring, and custom reporting dashboards.'
+        }
+      }
+    ]
+  }
+}
+
+// Create comprehensive LD+JSON for enterprise page
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+  ldJSON: createLdJsonGraph(
+    Astro.locals.runtimeConfig.public,
+    enhancedEnterpriseProduct,
+    {
+      includeOrganization: true,
+      includeBreadcrumbs: true,
+      breadcrumbs: [
+        {
+          name: 'Home',
+          url: Astro.locals.runtimeConfig.public.baseUrl,
+        },
+        {
+          name: 'Enterprise',
+          url: `${Astro.locals.runtimeConfig.public.baseUrl}/enterprise/`,
+        }
+      ]
+    }
+  )
+}
+
+// Add the enterprise service as additional entity
+content.ldJSON['@graph'].push(enterpriseService)
 ---
 
 <Layout content={content}>

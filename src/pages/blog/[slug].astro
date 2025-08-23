@@ -3,6 +3,7 @@ import Blog from '@/components/Blog.astro'
 import GetStarted from '@/components/GetStarted.astro'
 import { formatTime } from '@/config/app'
 import Layout from '@/layouts/Layout.astro'
+import { createNewsArticleLdJson, validateLdJson } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
@@ -85,34 +86,31 @@ if (alternateVersions.length > 0) content['alternateVersions'] = alternateVersio
 const dateModified = entry.data.updated_at
 const datePublished = entry.data.created_at
 
-content['ldJSON'] = {
-  dateModified,
+// Create improved ldJSON using helper function
+const articleUrl = `${Astro.locals.runtimeConfig.public.baseUrl}/blog/${entry.data.slug}/`
+
+content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
+  title: entry.data.title,
+  description: entry.data.description,
+  url: articleUrl,
+  image: content['image'] ? [content['image']] : undefined,
   datePublished,
-  '@type': 'NewsArticle',
-  image: [content['image']],
-  author: {
-    '@type': 'Person',
-    name: entry.data?.author,
-    url: entry.data?.author_url,
-  },
-  inLanguage: Astro.locals.locale,
-  headline: content['description'],
-  '@context': 'https://schema.org',
-  keywords: entry.data?.keywords || [],
-  articleSection: entry.data?.tag || [],
+  dateModified,
+  author: entry.data.author || 'Capgo',
+  authorUrl: entry.data.author_url,
+  authorImage: entry.data.author_image_url,
+  keywords: entry.data.keywords ? entry.data.keywords.split(',').map(k => k.trim()) : undefined,
+  articleSection: entry.data.tag ? entry.data.tag.split(',').map(t => t.trim()) : undefined,
   articleBody: striptags(entry.rendered?.html || ''),
-  publisher: {
-    name: 'Capgo',
-    '@type': 'Organization',
-    logo: {
-      '@type': 'ImageObject',
-      url: `${Astro.locals.runtimeConfig.public.baseUrl}/icon.webp`,
-    },
-  },
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/${entry.data?.slug}`,
-  },
+  locale: Astro.locals.locale,
+})
+
+// Validate ldJSON in development
+if (import.meta.env.DEV) {
+  const validation = validateLdJson(content['ldJSON'])
+  if (!validation.isValid) {
+    console.warn('ldJSON validation errors:', validation.errors)
+  }
 }
 ---
 

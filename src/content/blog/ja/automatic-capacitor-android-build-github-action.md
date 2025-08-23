@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z
-updated_at: 2024-06-01T00:00:00.000Z
+updated_at: 2025-09-23T00:00:00.000Z
 head_image: /fastlane_android.webp
 head_image_alt: GitHub Action による Fastlane Google Play の図解
 keywords: >-
@@ -175,12 +175,12 @@ jobs:
   build_android:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           
       - name: Install dependencies

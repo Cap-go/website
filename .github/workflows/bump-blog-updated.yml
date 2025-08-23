@@ -1,0 +1,69 @@
+name: Bump Blog Updated Date
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump-blog-updated:
+    runs-on: ubuntu-latest
+    # Skip if the commit message contains our auto-bump signature
+    if: "!contains(github.event.head_commit.message, 'chore: auto-bump updated_at dates')"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get changed blog files
+        id: changed-files
+        run: |
+          # Get files changed in the last commit
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^src/content/blog/.*\.md$' || echo "")
+          echo "Changed blog files: $CHANGED_FILES"
+          
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            # Convert to space-separated string for easier processing
+            echo "files<<EOF" >> $GITHUB_OUTPUT
+            echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update blog dates
+        if: steps.changed-files.outputs.has_changes == 'true'
+        run: |
+          CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+          echo "Updating blog dates to: $CURRENT_DATE"
+          
+          # Read the changed files and update each one
+          while IFS= read -r file; do
+            if [ -n "$file" ] && [ -f "$file" ]; then
+              echo "Processing: $file"
+              
+              # Use sed to update the updated_at field in the frontmatter
+              # This looks for lines like "updated_at: YYYY-MM-DDTHH:MM:SS.000Z" and replaces the date
+              sed -i "s/^updated_at: [0-9T:.-]*Z$/updated_at: $CURRENT_DATE/" "$file"
+              
+              echo "Updated $file"
+            fi
+          done <<< "${{ steps.changed-files.outputs.files }}"
+
+      - name: Commit changes
+        if: steps.changed-files.outputs.has_changes == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Check if there are any changes to commit
+          if [ -n "$(git status --porcelain)" ]; then
+            git add src/content/blog/
+            git commit -m "chore: auto-bump updated_at dates for modified blog posts"
+            git push
+          else
+            echo "No changes to commit"
+          fi

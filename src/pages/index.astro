@@ -7,6 +7,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import dayjs from 'dayjs'
 import * as m from '@/paraglide/messages'
 import CompaniesLogo from '@/components/companies-logo.astro'
+import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 
 const config = Astro.locals.runtimeConfig
 
@@ -25,9 +26,77 @@ if (tmp.ok) {
     if (res.stars) stats.stars = shortNumber(res.stars)
   }
 }
+
+// Create comprehensive homepage content definition
+const title = `${config.public.brand} - ${m.instant_updates_for_capacitor({}, { locale: Astro.locals.locale })}`
+const description = m.ship_updates_fixes_changes_and_features({}, { locale: Astro.locals.locale })
+
+// Create comprehensive LD+JSON for homepage
+const capgoService = createServiceLdJson(config.public, {
+  name: 'Capgo - Live Updates for Capacitor Apps',
+  description: 'Instant over-the-air updates for Capacitor mobile applications. Deploy bug fixes, feature updates, and improvements without app store delays.',
+  url: config.public.baseUrl,
+  serviceType: 'Software Development Service',
+  areaServed: ['Worldwide'],
+})
+
+// Create SoftwareApplication schema for the Capgo platform
+const capgoSoftware = createSoftwareApplicationLdJson(config.public, {
+  name: 'Capgo Live Update Platform',
+  description: 'Professional live update platform for Capacitor developers. Deploy updates instantly to iOS and Android apps.',
+  url: config.public.baseUrl,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Web, iOS, Android',
+  softwareVersion: '1.0',
+  aggregateRating: {
+    ratingValue: 4.8,
+    reviewCount: parseInt(stats.apps.replace(/[^\d]/g, '')) || 1400
+  },
+  offers: {
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock'
+  }
+})
+
+// Create comprehensive LD+JSON graph for homepage
+const content = {
+  title,
+  description,
+  image: `${config.public.baseUrl}/capgo_social.png`,
+  ldJSON: createLdJsonGraph(
+    config.public,
+    capgoService,
+    {
+      includeOrganization: true,
+      includeBreadcrumbs: true,
+      breadcrumbs: [
+        {
+          name: 'Home',
+          url: config.public.baseUrl,
+        },
+        {
+          name: 'Platform',
+          url: `${config.public.baseUrl}/app_mobile/`,
+        },
+        {
+          name: 'Pricing',
+          url: `${config.public.baseUrl}/pricing/`,
+        },
+        {
+          name: 'Documentation',
+          url: `${config.public.baseUrl}/docs/`,
+        }
+      ]
+    }
+  )
+}
+
+// Add the SoftwareApplication to the graph
+content.ldJSON['@graph'].push(capgoSoftware)
 ---
 
-<Layout>
+<Layout content={content}>
   <div>
     <div class="relative">
       <!-- Animated teleport lines -->

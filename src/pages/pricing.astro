@@ -4,6 +4,7 @@ import Calculator from '@/components/pricing/Calculator.astro'
 import CreditPricing from '@/components/pricing/CreditPricing.astro'
 import Faq from '@/components/pricing/Faq.astro'
 import Plans from '@/components/pricing/Plans.astro'
+import { createLdJsonGraph, createProductLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
 import * as m from '@/paraglide/messages'
 import Enterprise from '@/components/enterprise.astro'
@@ -11,7 +12,7 @@ import Enterprise from '@/components/enterprise.astro'
 const title = [Astro.locals.runtimeConfig.public.brand, m.pricing({}, { locale: Astro.locals.locale })].join(' | ')
 const description = m.pricing_description({}, { locale: Astro.locals.locale })
 
-const content = { title, description }
+const content: { title: string; description: string; ldJSON?: any } = { title, description }
 
 const config = Astro.locals.runtimeConfig
 
@@ -30,6 +31,43 @@ credits = await creditsResponse.json()
 // Filter plans
 const plans = plansAll.length ? plansAll.filter((p) => p.name !== 'Free') : []
 const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go')[0] : undefined
+
+// Create ldJSON for pricing plans
+if (plans.length > 0) {
+  const pricingUrl = `${Astro.locals.runtimeConfig.public.baseUrl}/pricing/`
+
+  // Create product schemas for each plan
+  const planProducts = plans.map(plan =>
+    createProductLdJson(Astro.locals.runtimeConfig.public, {
+      name: plan.name,
+      description: plan.description || `Capgo ${plan.name} plan`,
+      url: pricingUrl,
+      sku: plan.id.toString(),
+      offers: [
+        {
+          price: (plan as any).price_monthly?.toString() || plan.price_m?.toString() || '0',
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
+          priceValidUntil: (plan as any).trial_days ? new Date(Date.now() + (plan as any).trial_days * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : undefined,
+        }
+      ]
+    })
+  )
+
+  // Create ldJSON graph with organization and products
+  content['ldJSON'] = createLdJsonGraph(
+    Astro.locals.runtimeConfig.public,
+    planProducts[0], // Use first plan as main entity
+    {
+      includeOrganization: true,
+      includeBreadcrumbs: true,
+      breadcrumbs: [
+        { name: 'Home', url: Astro.locals.runtimeConfig.public.baseUrl },
+        { name: 'Pricing', url: pricingUrl },
+      ]
+    }
+  )
+}
 
 ---
 

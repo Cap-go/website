@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-06-16T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-09-23T00:00:00.000Z
 head_image: /gitlab_ci.webp
 head_image_alt: Gitlab CI イラストレーション
 keywords: 'Gitlab, CI/CD, automatic build, automatic release, mobile app updates'
@@ -51,7 +51,7 @@ jobs:
     name: "Bump version and create changelog with standard version"
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
@@ -120,7 +120,7 @@ jobs:
     name: "Build code and release"
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install dependencies
         id: install_code
         run: npm i

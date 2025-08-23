@@ -27,5 +27,6 @@
     // "src/content/docs/it": true,
     // "src/content/docs/ja": true,
     // "src/content/docs/ko": true
-  }
+  },
+  "claudeCodeChat.permissions.yoloMode": true
 }
