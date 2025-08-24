@@ -21,7 +21,7 @@ We use the term "bundle" to mean a patch that can be applied to a release to upd
 
 ### What is the roadmap?[](https://capgo.app/docs/faq/#what-is-the-roadmap "Direct link to What is the roadmap?")
 
-Our project boards are also public an found at: [https://github.com/orgs/Cap-go/projects](https://github.com/orgs/Cap-go/projects/)
+Our project boards are also public and found at: [https://github.com/orgs/Cap-go/projects](https://github.com/orgs/Cap-go/projects/)
 
 Our team also operates in the public, so you can see what we're working on at any time. We're happy to answer any questions you have about our roadmap or priorities via Github issues or [Discord](https://discord.capgo.app).
 
@@ -43,7 +43,7 @@ See also our privacy policy: [https://capgo.app/privacy](https://capgo.app/priva
 
 ### Can I use Capgo from my CI system?[](https://capgo.app/docs/faq/#can-i-use-capgo-from-my-ci-system "Direct link to Can I use Capgo from my CI system?")
 
-Yes. Capgo is intended to be used from CI systems. We've published a guide for [Android and Github Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/) and [IOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), And for [Gitlab](https://capgo.app/blog/setup-ci-and-cd-gitlab/) other CI systems should be similar.
+Yes. Capgo is intended to be used from CI systems. We've published a guide for [Android and Github Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/) and [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/), and for [GitLab](https://capgo.app/blog/setup-ci-and-cd-gitlab/). Other CI systems should be similar.
 
 Please don't hesitate to reach out over GitHub issues or Discord if you encounter any issues.
 
@@ -57,7 +57,7 @@ I haven't measured recently, but I expect the code push library to add less than
 
 ### Does code push work with large applications?[](https://capgo.app/docs/faq/#does-code-push-work-with-large-applications "Direct link to Does code push work with large applications?")
 
-Yes. There is no limit on the size of the application that can be updated with code push. As noted [below](https://capgo.app/docs/faq/#what-types-of-changes-does-capgo-code-push-support), Capgo can change any JS code in your application no matter of size.
+Yes. There is no limit on the size of the application that can be updated with code push. As noted [below](https://capgo.app/docs/faq/#what-types-of-changes-does-capgo-code-push-support), Capgo can change any JS code in your application regardless of size.
 
 To note: A bigger size make it harder for users to download updates. We recommend keeping your app as small as possible.
 
@@ -73,15 +73,15 @@ Note that most app stores prohibit shipping code that changes the behavior of th
 
 ### What counts as a "MAU" for Capgo?[](https://capgo.app/docs/faq/#what-counts-as-a-mau-for-capgo "Direct link to What counts as a \"MAU\" for Capgo?")
 
-A MAU is a "Monthly Active User". We count a MAU as any device that has contacted our servers in the last 30 days. We do not count devices that have not contacted our servers in the last 30 days.
+A MAU is a "Monthly Active User". In Capgo's context, this actually refers to a Monthly Active Device. We count a MAU as any device that has contacted our servers in the last 30 days. We do not count devices that have not contacted our servers in the last 30 days.
 
-Each time a device install your app again, a new MAU is counted, this happen because Apple store limitation about privacy. We cannot track the same device if the user reinstall the app.
+Each time a device installs your app again, a new MAU is counted, this happen because Apple store limitation about privacy. We cannot track the same device if the user reinstall the app.
 
 During development, each time you reinstall the app, a new MAU is counted.
 
 Same for testflight download or switch channel in Android. Updating the app do not create a new Device ID.
 
-> We recommend after first setup, to disabled dev devices and emulator to reduce the ammount of duplicated devices.
+> We recommend after first setup, to disable dev devices and emulators to reduce the amount of duplicated devices.
 
 ### What can't we use Capgo code push for?[](https://capgo.app/docs/faq/#what-cant-we-use-capgo-code-push-for "Direct link to What can't we use Capgo code push for?")
 
@@ -111,7 +111,7 @@ Code push is a feature that allows you to change code on the device in productio
 
 ### What types of changes does Capgo code push support?[](https://capgo.app/docs/faq/#what-types-of-changes-does-capgo-code-push-support "Direct link to What types of changes does Capgo code push support?")
 
-Capgo can change any JS code in your application. This includes app code and generated code. You can also update dependencies in `packages.json` as long as they don't require native code changes.
+Capgo can change any JS code in your application. This includes app code and generated code. You can also update dependencies in `package.json` as long as they don't require native code changes.
 
 We do not have plans to support changing native code (e.g. Java/Kotlin on Android or Objective-C/Swift on iOS), and the tool will warn you if it detects that you have changed native code as it will not be included in the bundle.
 
@@ -119,13 +119,13 @@ We do not have plans to support changing native code (e.g. Java/Kotlin on Androi
 
 Code push isn't needed for web as the web already works this way. When a user opens a web app it downloads the latest version from the server if needed.
 
-If you have a use case for code push with web, we'd love to know !
+If you have a use case for code push with web, we'd love to know!
 
 ### Will this work on iOS, Android, Mac, Windows, Linux, etc?[](https://capgo.app/docs/faq/#will-this-work-on-ios-android-mac-windows-linux-etc "Direct link to Will this work on iOS, Android, Mac, Windows, Linux, etc?")
 
 Yes.
 
-So far we've focused on Android and iOS support, but code push will eventually work everywhere Capacitor works. We're ensuring we've built all the infrastructure needed to provide code push reliably, safely first before expanding to more platforms.
+So far we've focused on Android and iOS support, but code push will eventually work everywhere Capacitor works. We're ensuring we've built all the infrastructure needed to provide code push reliably and safely before expanding to more platforms.
 
 ### What OS versions does Capgo support?[](https://capgo.app/docs/faq/#what-os-versions-does-capgo-support "Direct link to What OS versions does Capgo support?")
 

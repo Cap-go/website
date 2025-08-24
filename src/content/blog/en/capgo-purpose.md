@@ -2,8 +2,8 @@
 slug: capgo-purpose
 title: Purpose of Capgo
 description: >-
-  The blog article should be described as a comprehensive guide for developers
-  on how to use Capgo to manage Capacitor app updates and tests
+  A comprehensive guide for developers on how to use Capgo to manage and deploy
+  Over-The-Air (OTA) updates for Capacitor apps
 author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
@@ -20,22 +20,23 @@ next_blog: ''
 
 ## Overview
 
-Capgo is a cloud-based platform that can help developers to streamline their Capacitor app development process by making it easy to manage OTA updates and testing. In this blog article, we will cover all of the key features and benefits of Capgo, as well as how to use it to deploy updates, create tests, manage users, and manage configurations. We will also discuss Capgo's use cases and pricing.
+Capgo is a cloud-based platform that helps developers streamline their Capacitor app development process by making it easy to manage and deploy Over-The-Air (OTA) updates. In this blog article, we will cover all of the key features and benefits of Capgo, including how to deploy updates, manage channels, track devices, and configure update strategies. We will also discuss Capgo's use cases and pricing.
 
 By the end of this article, you will have a deep understanding of how Capgo can help you to improve your Capacitor app development process and deliver better apps to your users.
 
 ## Feature
 
-Capgo offers a variety of features that make it easy to manage Capacitor app updates and tests, including:
+Capgo offers a variety of features that make it easy to manage Capacitor app updates, including:
 
 * OTA updates: Capgo makes it easy to deploy updates to your users' devices without having to re-install the app. You can simply create a new release in Capgo and upload the update bundle. Capgo will then automatically deploy the update to your users' devices.
 
-* Testing: Capgo allows you to create and run tests on your app before deploying it to production. This can help you to catch bugs early and ensure that your app is working properly.
+* Channel Management: Capgo provides channels (like Production, Staging, Dev) that allow you to test updates with specific groups of devices before rolling them out to all users. This helps you catch bugs early and ensure updates work properly.
 
-* Integration: Capgo can be easily integrated with your CI/CD pipeline. This allows you to automate the deployment of updates and tests.
+* CI/CD Integration: Capgo can be easily integrated with your CI/CD pipeline. This allows you to automate the upload and deployment of update bundles.
 
-* User management: Capgo allows you to assign users to different groups and control who can receive updates. This can be useful for beta testing or rolling out updates to a specific group of users.
-Configuration management: Capgo allows you to manage all of your configurations in a central location. This can make it easier to keep track of your changes and to make sure that all of your devices are using the same configuration.
+* Device Management: Capgo tracks devices that have your app installed and allows you to control which devices receive updates through channels. This is useful for beta testing or rolling out updates to specific device groups.
+
+* Update Configuration: Capgo allows you to manage update strategies, rollback settings, and channel configurations in a central location. This makes it easier to control how and when updates are delivered to your users.
 
 ## Benefits
 
