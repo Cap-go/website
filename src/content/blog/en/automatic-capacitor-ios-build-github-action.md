@@ -546,6 +546,22 @@ Yes, you can, and it is effortless.
 
 You can use Xcode to build and sign your app, as always.
 
+## Related Articles
+
+### CI/CD Setup Guides
+- [Automatic Capacitor Android Build with GitHub Actions](/blog/automatic-capacitor-android-build-github-action/) - Complete Android CI/CD setup
+- [Automatic Build and Release with GitHub Actions](/blog/automatic-build-and-release-with-github-actions/) - Full CI/CD pipeline tutorial
+- [Manage Dev and Prod Builds with GitHub Actions](/blog/manage-dev-and-prod-build-with-github-actions/) - Environment management
+- [Automatic Capacitor iOS Build with Match](/blog/automatic-capacitor-ios-build-github-action-with-match/) - Alternative using Fastlane Match
+
+### Alternative CI/CD Platforms
+- [Build with GitLab CI](/blog/automatic-build-and-release-with-gitlab/) - GitLab alternative
+- [Build with CodeMagic](/blog/automatic-capacitor-ios-build-codemagic/) - CodeMagic setup guide
+
+### Live Updates & Deployment
+- [Capgo Live Updates Documentation](/docs/plugin/cloud-mode/getting-started/) - Add OTA updates to your app
+- [CI/CD Integration with Capgo](/docs/getting-started/cicd-integration/) - Integrate live updates in your pipeline
+
 ### Thanks
 
 This blog is based on the following articles:

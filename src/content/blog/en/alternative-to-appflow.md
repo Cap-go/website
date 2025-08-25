@@ -79,8 +79,26 @@ I can help you to configure your build for native code as well, you don't need t
 
 If you like open-source self-service community-driven tool,
 
-Join use here 👇
+Join us here 👇
 
 ## Register here to get your account
 
 [Capgo](/register/)
+
+## Related Articles
+
+### Alternative Comparisons
+- [Alternative to CapAwesome](/blog/alternative-to-capawesome/) - Compare with CapAwesome's approach
+- [Alternative to Expo EAS](/blog/alternative-to-expo/) - Comparison with Expo's update service
+- [Alternative to Voltbuilder](/blog/alternative-to-voltbuilder/) - How Capgo compares to Voltbuilder
+- [Migrating from Microsoft App Center](/blog/appcenter-migration/) - Transition guide from App Center
+
+### CI/CD & Build Automation
+- [Automatic Build with GitHub Actions](/blog/automatic-build-and-release-with-github-actions/) - Set up your CI/CD pipeline
+- [Automatic iOS Build](/blog/automatic-capacitor-ios-build-github-action/) - iOS specific setup
+- [Automatic Android Build](/blog/automatic-capacitor-android-build-github-action/) - Android specific setup
+
+### Live Updates & OTA
+- [How OTA Updates Work](/docs/live-updates/) - Understanding live updates
+- [Getting Started with Capgo](/docs/getting-started/quickstart/) - Quick setup guide
+- [CI/CD Integration](/docs/getting-started/cicd-integration/) - Integrate with your pipeline

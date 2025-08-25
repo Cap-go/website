@@ -75,7 +75,7 @@ This will release a tag for every commit in your main branch. And add a changelo
 
 Don't worry if you don't have this file, it will be created for you.
 
-To make this work, create a [PERSONAL_ACCESS](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token/) _it in_ your GitHub [secret](https://docs.github.com/en/actions/security-guides/encrypted-secrets "GitHub secrets") as `PERSONAL_ACCESS_TOKEN`.
+To make this work, create a [PERSONAL ACCESS TOKEN](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) and add it to your GitLab CI/CD variables as `PERSONAL_ACCESS_TOKEN`.
 
 This is necessary to let the CI commit the changelog.
 

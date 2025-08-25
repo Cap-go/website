@@ -246,6 +246,21 @@ jobs:
 - Cost for private repos: ~$0.04 per build
 - Free for open-source projects
 
+## Related Articles
+
+### CI/CD Setup Guides
+- [Automatic Capacitor iOS Build with GitHub Actions](/blog/automatic-capacitor-ios-build-github-action/) - Complete iOS CI/CD setup
+- [Automatic Build and Release with GitHub Actions](/blog/automatic-build-and-release-with-github-actions/) - Full CI/CD pipeline tutorial
+- [Manage Dev and Prod Builds with GitHub Actions](/blog/manage-dev-and-prod-build-with-github-actions/) - Environment management
+
+### Alternative CI/CD Platforms
+- [Build with GitLab CI](/blog/automatic-capacitor-android-build-gitlab/) - GitLab alternative for Android
+- [Build with CodeMagic](/blog/automatic-capacitor-ios-build-codemagic/) - CodeMagic setup guide
+
+### Live Updates & Deployment
+- [Capgo Live Updates Documentation](/docs/plugin/cloud-mode/getting-started/) - Add OTA updates to your app
+- [CI/CD Integration with Capgo](/docs/getting-started/cicd-integration/) - Integrate live updates in your pipeline
+
 ## Resources
 
 - [GitHub Actions Documentation](https://docs.github.com/en/actions/)
