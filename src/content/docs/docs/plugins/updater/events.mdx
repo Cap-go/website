@@ -197,6 +197,11 @@ Where `BundleStatus` can be:
 
 Here's an example of handling the complete update flow with events:
 
+<Aside type="caution">
+This `UpdateManager` class does not include the `CapacitorUpdater.notifyAppReady()` call required for auto-update flow.
+Please see the [placing notifyAppReady call correctly](/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly) docs for more information.
+</Aside>
+
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
@@ -253,8 +258,6 @@ export class UpdateManager {
     this.listeners.push(
       await CapacitorUpdater.addListener('appReady', async (event) => {
         console.log('App ready with bundle:', event.bundle.version);
-        // Notify that app is ready
-        await CapacitorUpdater.notifyAppReady();
       })
     );
   }
