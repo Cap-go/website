@@ -109,22 +109,27 @@ to find your logs on Android studio
 To debug on iOS, you need to dump the app on your computer, you can do it like this:
 
 Xcode has a built-in feature for inspecting the file system of developer-installed apps on an iOS device.
+![image](/ios_debug_update_1.webp)
 
 To achieve this:
 
 * Connect your device to your Mac and select Window > Devices in the Xcode menubar.
 * Select your device in the left pane under the Devices section.
 * This will show a list of developer-installed apps for that device.
-* Select the app you want to inspect and then select the gear icon near the bottom of the screen.
-* Here you can view the current file system by selecting Show Container or download a snapshot of it.
+* Select the app you want to inspect and then select the 3 dots icon near the bottom of the screen.
+* Here you can view the current file system by selecting download a snapshot of it.
+
+![image](/ios_debug_update_2.webp)
 
 Selecting Download Container... will download and export a snapshot of the file system as a .xcappdata file that you can browse through.
+
+![image](/ios_debug_update_3.webp)
 
 Right-click on this file and select Show Package Contents to open the folder.
 
 Open the App Data folder, and you should now see a few folders like Documents, Library, tmp, etc.
 
-![image](https://user-images.githubusercontent.com/4084527/166708589-8d500351-e140-41c3-bea2-a037fe35243e.webp/)
+![image](/ios_debug_update_4.webp)
 
 Then you will find a version in 2 folders:
 
@@ -140,7 +145,7 @@ To debug on Android, you need to access the device from Android Studio:
 * Select a device from the dropdown list.
 * Open the path **data/data/APP\_NAME/** where **APP\_NAME is your app ID.**
 
-![image](https://user-images.githubusercontent.com/4084527/166708728-8f96fc73-5d90-426f-8d27-301697347a5f.webp/)
+![image](/android_debug_update.webp)
 
 Then Find the `versions` folder to see all the versions
 
