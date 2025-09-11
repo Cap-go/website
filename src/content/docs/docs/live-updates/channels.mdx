@@ -53,6 +53,41 @@ The `defaultChannel` property will always override the cloud default channel. Bu
 </Aside>
 
 
+## Channel Options and Strategies
+
+Channels have several options that control who can receive updates and how updates are delivered. The most important ones are below. You can configure these from the web app, the CLI, or the Public API.
+
+- Default channel: Mark one channel as the default for new devices. New devices will be assigned to this channel unless overridden.
+- Platform filters: Enable or disable delivery to `iOS` and/or `Android` devices per channel.
+- Disable auto downgrade under native: Prevents sending an update when the device’s native app version is newer than the channel’s bundle (for example, device on 1.2.3 while channel has 1.2.2).
+- Allow development builds: Permit updates to development builds (useful for testing).
+- Allow emulator devices: Permit updates to emulators/simulators (useful for testing).
+- Allow device self‑assignment: Lets the app switch to this channel at runtime using `setChannel`. If disabled, `setChannel` will fail for this channel.
+
+### Disable Auto Update strategies
+
+Use this to restrict which kinds of updates the channel will automatically deliver. Options:
+
+- major: Block cross‑major updates (0.0.0 → 1.0.0). Minor and patch updates still allowed.
+- minor: Block cross‑minor updates (e.g., 1.1.0 → 1.2.0) and majors. Patch updates still allowed. Note: does not block 0.1.0 → 1.1.0.
+- patch: Very strict. Allows only increasing patch versions within the same major and minor. Examples: 0.0.311 → 0.0.314 ✅, 0.1.312 → 0.0.314 ❌, 1.0.312 → 0.0.314 ❌.
+- metadata: Require a minimum update version metadata on each bundle. Configure via CLI using `--min-update-version` or `--auto-min-update-version`. If missing, the channel is marked misconfigured and updates will be rejected until set.
+- none: Allow all updates according to semver compatibility.
+
+Learn more details and examples in Disable updates strategy at /docs/cli/commands/#disable-updates-strategy.
+
+Example (CLI):
+
+```bash
+# Block major updates on the Production channel
+npx @capgo/cli@latest channel set production com.example.app \
+  --disable-auto-update major
+
+# Allow devices to self-assign to the Beta channel
+npx @capgo/cli@latest channel set beta com.example.app --self-assign
+```
+
+
 ## Assigning a Bundle to a Channel
 
 To deploy a live update, you need to upload a new JS bundle build and assign it to a channel. You can do this in one step with the Capgo CLI:
