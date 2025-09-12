@@ -55,6 +55,12 @@ Code push allows adding new code / replacing code on the device. Firebase Remote
 
 I haven't measured recently, but I expect the code push library to add less than one megabyte to Capacitor apps. We know of ways we can make this smaller when that becomes a priority. If size is a blocker for you, please let us know!
 
+### Does Capgo work on the iOS 18.4 Simulator?[](https://capgo.app/docs/faq/#does-capgo-work-on-the-ios-18-4-simulator "Direct link to Does Capgo work on the iOS 18.4 Simulator?")
+
+No. Due to an upstream issue affecting the iOS 18.4 Simulator, Capgo does not run reliably there. Please test on a real device or use a different iOS simulator version.
+
+See details in the React Native issue: [facebook/react-native#50510](https://github.com/facebook/react-native/issues/50510)
+
 ### Does code push work with large applications?[](https://capgo.app/docs/faq/#does-code-push-work-with-large-applications "Direct link to Does code push work with large applications?")
 
 Yes. There is no limit on the size of the application that can be updated with code push. As noted [below](https://capgo.app/docs/faq/#what-types-of-changes-does-capgo-code-push-support), Capgo can change any JS code in your application regardless of size.
@@ -334,4 +340,3 @@ On ios channel disable android updates and on android channel disable ios update
 Then upload a bundle to each channel to have different update for each platform.
 
 If you need to have the same update for both platform, you can link one bundle to multiple channels. No need to duplicate the bundle.
-
