@@ -9,6 +9,24 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 A Live Update channel points to a specific JS bundle build of your app that will be shared with any devices configured to listen to that channel for updates. When you [install the Capgo Live Updates SDK](/docs/getting-started/quickstart/) in your app, any native binary configured to that channel will check for available updates whenever the app is launched. You can change the build a channel points to at any time and can also roll back to previous builds if needed.
 
+## How a device picks a channel (precedence)
+
+When a device checks for an update, Capgo decides which channel to use in this strict order (highest priority first):
+
+1. **Forced device mapping (Dashboard)** – Manually pin a specific device ID to a channel. Use for urgent debugging or controlled testing with a single real user. This always wins.
+2. **Cloud override (per‑device) via `setChannel()` or Dashboard** – Created when your app calls `setChannel()` (often exposed in a QA/debug menu) or you change the device's channel in the dashboard. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device entry does.
+3. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
+4. **Cloud Default Channel (primary path ~99% of users)** – The default channel you marked in the dashboard. All normal end‑users (no force, no override, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary.
+
+Best practice:
+- Treat 1–3 as exception / testing layers; real users should flow into the Cloud Default.
+- Only configure `defaultChannel` in binaries you explicitly ship to testers. Leaving it unset keeps production logic centralized in the dashboard.
+- Use `setChannel()` sparingly in production—mainly for QA or targeted diagnostics.
+
+If a channel is disabled for the platform (iOS/Android toggles) when it would otherwise be chosen, the selection process skips it and continues down the list.
+
+> Summary: Force > Override > Config `defaultChannel` > Cloud Default.
+
 ## Setting up a Channel
 
 Every app comes with a default channel called "Production" that cannot be deleted. To add new channels:
@@ -28,7 +46,7 @@ Channel names can be anything you'd like. A common strategy is to match channels
 
 With your channels created, you need to configure your app to listen to the appropriate channel. In this example, we'll use the `Development` channel.
 
-Open your `capacitor.config.ts` (or `capacitor.config.json`) file. Under the `plugins` section, set the `channel` property of the `CapacitorUpdater` plugin to the name of your desired channel:
+Open your `capacitor.config.ts` (or `capacitor.config.json`) file. Under the `plugins` section, optionally set `defaultChannel` for **test builds** (internal / QA). For production builds, prefer omitting it so devices use the Cloud Default unless explicitly overridden.
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli';
@@ -36,7 +54,9 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
+      // For a QA/TestFlight build – testers start on the Development channel automatically.
       defaultChannel: 'Development',
+      // Production builds usually omit this so users attach to the Cloud Default channel.
     },
   },
 };
@@ -45,11 +65,13 @@ const config: CapacitorConfig = {
 Next, build your web app and run `npx cap sync` to copy the updated config file to your iOS and Android projects. If you skip this sync step, your native projects will continue to use whichever channel they were previously configured for.
 
 <Aside type="caution">
+Channel selection order: Force > Override (`setChannel` / dashboard) > Config `defaultChannel` > Cloud Default.
 
-The `defaultChannel` property will always override the cloud default channel. But you can still force the deviceId to a channel in Cloud.
+Use `defaultChannel` only in test/internal builds; leave it out for production so ~99% of users inherit the Cloud Default.
 
-> The channel name is case sensitive
+You can still force (pin) a device or apply an override later—those immediately supersede the config value.
 
+> Channel names are case sensitive.
 </Aside>
 
 
