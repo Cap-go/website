@@ -111,12 +111,12 @@ const config: CapacitorConfig = {
       autoUpdate: true,
       directUpdate: 'always', // or 'atInstall' for updates only on app install/update
       autoSplashscreen: true, // NEW: Automatically handle splashscreen
+      keepUrlPathAfterReload: true,
     },
     SplashScreen: {
       launchAutoHide: false, // Still required when using directUpdate
     },
   },
-  keepUrlPathAfterReload: true,
 };
 
 export default config;
@@ -145,12 +145,12 @@ const config: CapacitorConfig = {
       autoUpdate: true,
       directUpdate: 'always', // or 'atInstall' 
       autoSplashscreen: true, // Automatically hide splashscreen
+      keepUrlPathAfterReload: true,
     },
     SplashScreen: {
       launchAutoHide: false,
     },
   },
-  keepUrlPathAfterReload: true,
 };
 ```
 
