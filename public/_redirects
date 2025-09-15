@@ -1,5 +1,4 @@
 /.well-known/* /deepLink/:splat 200
-/api/auto_update https://api.capgo.app/updates 200
 /docs/plugin/auto-update /docs/plugin/cloud-mode/getting-started 200
 /docs/self-hosted/auto-update /docs/plugin/self-hosted/getting-started 200
 /docs/v3/plugin-api /docs/upgrade/api-v3/ 200
