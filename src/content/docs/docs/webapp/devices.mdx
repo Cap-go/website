@@ -22,7 +22,11 @@ To configure a specific device click on it in the table and then you should see 
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="show one device" /><figcaption></figcaption></figure>
 
-First the `Custom ID`. This is not really that useful, and right now it does nothing. You can ignore it.
+First the `Custom ID`. This is a very useful field that helps you connect the device to an ID you can recognize for your own users. 
+
+Use it to easily identify which device belongs to which user. 
+
+You can set it from the WebUI or from the device with `CapacitorUpdater.setCustomId({ customId: user });`
 
 Next the force version. If this is set then this device will **ALWAYS** receive this version. It takes precedence over the channel.
 
