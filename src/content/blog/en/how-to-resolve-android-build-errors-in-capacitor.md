@@ -45,7 +45,7 @@ next_blog: ''
     
 -   Add ProGuard rules:
     
-    ```proguard
+    ```java
     -keep class com.getcapacitor.** { *; }
     -dontwarn com.google.android.gms.**
     ```
@@ -111,7 +111,7 @@ ProGuard, used in release builds, can introduce additional issues:
 
 To address these problems, you can add the following ProGuard rules:
 
-```proguard
+```java
 -keep class com.getcapacitor.** { *; }
 -keep class org.apache.cordova.* { *; }
 -dontwarn com.google.android.gms.**
