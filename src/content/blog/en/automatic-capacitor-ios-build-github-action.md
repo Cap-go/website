@@ -269,7 +269,8 @@ platform :ios do
 		api_key = app_store_connect_api_key(
       key_id: ENV['APPLE_KEY_ID'],
       issuer_id: ENV['APPLE_ISSUER_ID'],
-      key_content: Base64.decode64(ENV['APPLE_KEY_CONTENT']),
+      key_content: ENV['APPLE_KEY_CONTENT'],
+      is_key_content_base64: true,
       duration: 1200,
       in_house: false
     )
@@ -357,7 +358,8 @@ platform :ios do
     api_key = app_store_connect_api_key(
       key_id: ENV['APPLE_KEY_ID'],
       issuer_id: ENV['APPLE_ISSUER_ID'],
-      key_content: Base64.decode64(ENV['APPLE_KEY_CONTENT']),
+      key_content: ENV['APPLE_KEY_CONTENT'],
+      is_key_content_base64: true,
       duration: 1200,
       in_house: false
     )
