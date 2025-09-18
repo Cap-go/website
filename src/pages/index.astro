@@ -250,7 +250,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
             </svg>
-            Real-time Stats
+            {m.home_real_time_stats_badge({}, { locale: Astro.locals.locale })}
           </div>
           
           <h2 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-7xl mb-4">
@@ -409,13 +409,13 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </h3>
               </div>
               <p class="text-lg text-gray-600 mb-6">
-                Install the Capgo CLI and initialize your project with a single command. It's that simple!
+                {m.home_install_cli_desc({}, { locale: Astro.locals.locale })}
               </p>
               <div class="flex items-center space-x-2 text-sm text-gray-500">
                 <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                <span>Takes less than 30 seconds</span>
+                <span>{m.home_install_cli_hint({}, { locale: Astro.locals.locale })}</span>
               </div>
             </div>
             <div class="order-1 lg:order-2">
@@ -429,15 +429,15 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                       <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
                       <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
-                    <div class="text-gray-300 text-sm font-mono">terminal</div>
+                    <div class="text-gray-300 text-sm font-mono">{m.home_terminal_label({}, { locale: Astro.locals.locale })}</div>
                     <div class="w-12"></div>
                   </div>
                   <!-- Terminal Content -->
                   <div class="p-4 font-mono text-sm">
                     <div class="text-green-400">$ <span class="text-white">npx @capgo/cli init</span></div>
-                    <div class="text-gray-400 mt-2">✓ Plugin installed successfully</div>
-                    <div class="text-gray-400">✓ Configuration created</div>
-                    <div class="text-gray-400">✓ Project initialized</div>
+                    <div class="text-gray-400 mt-2">{m.home_cli_plugin_success({}, { locale: Astro.locals.locale })}</div>
+                    <div class="text-gray-400">{m.home_cli_configuration_created({}, { locale: Astro.locals.locale })}</div>
+                    <div class="text-gray-400">{m.home_cli_project_initialized({}, { locale: Astro.locals.locale })}</div>
                     <div class="text-green-400 mt-3">$ <span class="animate-pulse bg-gray-600 text-gray-600">|</span></div>
                   </div>
                 </div>
@@ -458,18 +458,18 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                       <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
                       <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
-                    <div class="text-gray-300 text-sm font-mono">terminal</div>
+                    <div class="text-gray-300 text-sm font-mono">{m.home_terminal_label({}, { locale: Astro.locals.locale })}</div>
                     <div class="w-12"></div>
                   </div>
                   <!-- Terminal Content -->
                   <div class="p-4 font-mono text-sm">
                     <div class="text-green-400">$ <span class="text-white">npm run build</span></div>
-                    <div class="text-gray-400 mt-2">Building your app...</div>
-                    <div class="text-gray-400">✓ Build completed</div>
+                    <div class="text-gray-400 mt-2">{m.home_cli_building({}, { locale: Astro.locals.locale })}</div>
+                    <div class="text-gray-400">{m.home_cli_build_completed({}, { locale: Astro.locals.locale })}</div>
                     <div class="text-green-400 mt-3">$ <span class="text-white">npx @capgo/cli bundle upload</span></div>
-                    <div class="text-blue-400 mt-2">📦 Uploading bundle...</div>
-                    <div class="text-gray-400">✓ Bundle uploaded successfully</div>
-                    <div class="text-gray-400">✓ Version 1.0.1 is now live</div>
+                    <div class="text-blue-400 mt-2">{m.home_cli_uploading_bundle({}, { locale: Astro.locals.locale })}</div>
+                    <div class="text-gray-400">{m.home_cli_bundle_uploaded({}, { locale: Astro.locals.locale })}</div>
+                    <div class="text-gray-400">{m.home_cli_version_live({}, { locale: Astro.locals.locale })}</div>
                     <div class="text-green-400 mt-3">$ <span class="animate-pulse bg-gray-600 text-gray-600">|</span></div>
                   </div>
                 </div>
@@ -485,13 +485,13 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </h3>
               </div>
               <p class="text-lg text-gray-600 mb-6">
-                Build your app as usual, then deploy your update with our CLI. No complex configuration needed.
+                {m.home_deploy_cli_desc({}, { locale: Astro.locals.locale })}
               </p>
               <div class="flex items-center space-x-2 text-sm text-gray-500">
                 <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                <span>Deployed globally in seconds</span>
+                <span>{m.home_deploy_hint({}, { locale: Astro.locals.locale })}</span>
               </div>
             </div>
           </div>
@@ -508,26 +508,26 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </h3>
               </div>
               <p class="text-lg text-gray-600 mb-6">
-                Users receive updates instantly in the background. No app store approval, no user interaction required.
+                {m.home_users_get_update_desc({}, { locale: Astro.locals.locale })}
               </p>
               <div class="space-y-2">
                 <div class="flex items-center space-x-2 text-sm text-gray-500">
                   <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span>Automatic background updates</span>
+                  <span>{m.home_users_background_updates({}, { locale: Astro.locals.locale })}</span>
                 </div>
                 <div class="flex items-center space-x-2 text-sm text-gray-500">
                   <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span>No user interaction required</span>
+                  <span>{m.home_users_no_interaction({}, { locale: Astro.locals.locale })}</span>
                 </div>
                 <div class="flex items-center space-x-2 text-sm text-gray-500">
                   <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span>Rollback if needed with one click</span>
+                  <span>{m.home_users_rollback({}, { locale: Astro.locals.locale })}</span>
                 </div>
               </div>
             </div>
@@ -545,7 +545,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                       <!-- App header -->
                       <div class="flex items-center justify-between mb-6">
                         <div class="w-8 h-8 bg-blue-500 rounded-lg"></div>
-                        <div class="text-gray-800 font-semibold">My App</div>
+                        <div class="text-gray-800 font-semibold">{m.home_demo_app_title({}, { locale: Astro.locals.locale })}</div>
                         <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
                       </div>
                       
@@ -553,7 +553,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                       <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
                         <div class="flex items-center">
                           <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-green-500 mr-2"></div>
-                          <span class="text-green-700 text-sm font-medium">Updating in background...</span>
+                          <span class="text-green-700 text-sm font-medium">{m.home_demo_updating({}, { locale: Astro.locals.locale })}</span>
                         </div>
                       </div>
                       
@@ -570,7 +570,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   <!-- Update arrow -->
                   <div class="absolute -left-8 top-1/2 transform -translate-y-1/2">
                     <div class="bg-blue-500 text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap">
-                      Update v1.0.1
+                      {m.home_demo_update_badge({}, { locale: Astro.locals.locale })}
                       <div class="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2 w-0 h-0 border-l-8 border-l-blue-500 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
                     </div>
                   </div>
@@ -595,7 +595,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                       >
                         <source src="/capgo_demo.mov" type="video/quicktime">
                         <source src="/capgo_demo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
+                        {m.home_video_fallback({}, { locale: Astro.locals.locale })}
                       </video>
                     </div>
                     
@@ -634,20 +634,6 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           </div>
           <p class="text-sm text-gray-500">{ctaSubtext}</p>
         </div>
-        <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-center">
-          <div class="flex flex-col items-center gap-2">
-            <img src="/soc2.svg" alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })} class="h-12 w-auto" loading="lazy" />
-            <span class="text-sm font-semibold text-gray-300">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
-          </div>
-          <div class="flex flex-col items-center gap-2">
-            <img src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-12 w-auto" loading="lazy" />
-            <span class="text-sm font-semibold text-gray-300">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
-          </div>
-          <div class="flex flex-col items-center gap-2">
-            <img src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-12 w-auto" loading="lazy" />
-            <span class="text-sm font-semibold text-gray-300">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
-          </div>
-        </div>
       </div>
     </section>
     <section class="relative bg-gray-900 py-24 sm:py-32 overflow-hidden">
@@ -684,7 +670,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            Global Infrastructure
+            {m.home_global_infrastructure_badge({}, { locale: Astro.locals.locale })}
           </div>
           
           <h2 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl mb-6">
@@ -693,11 +679,11 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             </span>
           </h2>
           <h2 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            Worldwide
+            {m.home_worldwide_heading({}, { locale: Astro.locals.locale })}
           </h2>
           
           <p class="mt-6 text-lg leading-relaxed text-gray-300 max-w-3xl mx-auto">
-            Powered by serverless edge computing and distributed databases across 300+ cities and 13,000+ networks for ultra-fast global delivery.
+            {m.home_global_infrastructure_desc({}, { locale: Astro.locals.locale })}
           </p>
         </div>
 
@@ -714,7 +700,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 <div class="relative w-full h-96 flex items-center justify-center">
                   <img 
                     src="/maps_server.svg" 
-                    alt="Capgo Global Infrastructure Network Map" 
+                    alt={m.home_global_infrastructure_map_alt({}, { locale: Astro.locals.locale })} 
                     class="w-full h-full object-contain opacity-90 filter brightness-110 contrast-110"
                     style="filter: brightness(1.1) contrast(1.1) hue-rotate(10deg);"
                   />
@@ -725,24 +711,24 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 
                 <!-- Live Network Status -->
                 <div class="absolute top-4 right-4 text-right">
-                  <div class="text-xs text-gray-400 mb-1">Global Network</div>
+                  <div class="text-xs text-gray-400 mb-1">{m.home_global_network_label({}, { locale: Astro.locals.locale })}</div>
                   <div class="flex items-center justify-end space-x-2">
                     <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span class="text-xs text-green-400">300+ Locations Active</span>
+                    <span class="text-xs text-green-400">{m.home_locations_active({}, { locale: Astro.locals.locale })}</span>
                   </div>
                 </div>
                 
                 <!-- Performance Stats -->
                 <div class="absolute bottom-4 left-4">
-                  <div class="text-xs text-gray-400 mb-2">Real-time Performance</div>
+                  <div class="text-xs text-gray-400 mb-2">{m.home_real_time_performance_label({}, { locale: Astro.locals.locale })}</div>
                   <div class="space-y-1">
                     <div class="flex items-center space-x-2">
                       <div class="w-1 h-1 bg-blue-400 rounded-full animate-pulse"></div>
-                      <span class="text-xs text-blue-400">50ms avg latency</span>
+                      <span class="text-xs text-blue-400">{m.home_avg_latency({}, { locale: Astro.locals.locale })}</span>
                     </div>
                     <div class="flex items-center space-x-2">
                       <div class="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
-                      <span class="text-xs text-green-400">99.99% uptime</span>
+                      <span class="text-xs text-green-400">{m.home_uptime({}, { locale: Astro.locals.locale })}</span>
                     </div>
                   </div>
                 </div>
@@ -765,10 +751,10 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                                      <div class="ml-4">
                      <h3 class="text-4xl font-bold text-white">300+</h3>
-                     <p class="text-blue-400 font-medium">Cities Worldwide</p>
-                   </div>
-                 </div>
-                 <p class="text-gray-300 text-sm">Closer to users than ever before</p>
+                     <p class="text-blue-400 font-medium">{m.home_cities_worldwide({}, { locale: Astro.locals.locale })}</p>
+                  </div>
+                </div>
+                 <p class="text-gray-300 text-sm">{m.home_cities_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
 
@@ -784,12 +770,12 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                                      <div class="ml-4">
                      <h3 class="text-4xl font-bold text-white">13,000+</h3>
-                     <p class="text-green-400 font-medium">Network Connections</p>
-                   </div>
-                 </div>
-                 <p class="text-gray-300 text-sm">Direct peering worldwide</p>
-               </div>
-             </div>
+                     <p class="text-green-400 font-medium">{m.home_network_connections({}, { locale: Astro.locals.locale })}</p>
+                  </div>
+                </div>
+                 <p class="text-gray-300 text-sm">{m.home_network_desc({}, { locale: Astro.locals.locale })}</p>
+              </div>
+            </div>
 
              <!-- Countries Coverage -->
              <div class="group relative">
@@ -803,12 +789,12 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                    </div>
                    <div class="ml-4">
                      <h3 class="text-4xl font-bold text-white">122+</h3>
-                     <p class="text-purple-400 font-medium">Countries Covered</p>
-                   </div>
-                 </div>
-                 <p class="text-gray-300 text-sm">Global presence everywhere</p>
-               </div>
-             </div>
+                     <p class="text-purple-400 font-medium">{m.home_countries_covered({}, { locale: Astro.locals.locale })}</p>
+                  </div>
+                </div>
+                 <p class="text-gray-300 text-sm">{m.home_countries_desc({}, { locale: Astro.locals.locale })}</p>
+              </div>
+            </div>
 
              <!-- Latency Performance -->
              <div class="group relative">
@@ -822,10 +808,10 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                    </div>
                    <div class="ml-4">
                      <h3 class="text-4xl font-bold text-white">50ms</h3>
-                     <p class="text-yellow-400 font-medium">From 95% of users</p>
-                   </div>
-                 </div>
-                 <p class="text-gray-300 text-sm">Ultra-low latency worldwide</p>
+                     <p class="text-yellow-400 font-medium">{m.home_latency_from_users({}, { locale: Astro.locals.locale })}</p>
+                  </div>
+                </div>
+                 <p class="text-gray-300 text-sm">{m.home_latency_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
           </div>
@@ -842,11 +828,11 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
                   </svg>
                 </div>
-                                 <h3 class="ml-3 text-xl font-bold text-white">Edge Computing Power</h3>
-               </div>
-               <p class="text-gray-300 text-sm leading-relaxed">
-                 Serverless functions and Workers that run at the edge for maximum performance
-               </p>
+                <h3 class="ml-3 text-xl font-bold text-white">{m.home_edge_computing_power({}, { locale: Astro.locals.locale })}</h3>
+              </div>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                {m.home_edge_computing_desc({}, { locale: Astro.locals.locale })}
+              </p>
              </div>
            </div>
 
@@ -859,31 +845,13 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
                    </svg>
                  </div>
-                 <h3 class="ml-3 text-xl font-bold text-white">Distributed Database</h3>
+                 <h3 class="ml-3 text-xl font-bold text-white">{m.home_distributed_database({}, { locale: Astro.locals.locale })}</h3>
                </div>
-               <p class="text-gray-300 text-sm leading-relaxed">
-                 Replicated database across all regions for consistent global performance
-               </p>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                {m.home_distributed_database_desc({}, { locale: Astro.locals.locale })}
+              </p>
             </div>
           </div>
-        </div>
-
-        <!-- Call to Action -->
-        <div class="mt-16 flex flex-col items-center gap-3 text-center">
-          <div class="group relative inline-flex">
-            <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              title={m.cta_view_live_rollouts({}, { locale: Astro.locals.locale })}
-              class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-            >
-              {m.cta_view_live_rollouts({}, { locale: Astro.locals.locale })}
-              <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
-            </a>
-          </div>
-          <p class="text-sm text-gray-400">{ctaSubtext}</p>
         </div>
       </div>
     </section>
@@ -924,7 +892,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
                 <div class="ml-4">
                   <h3 class="text-2xl font-bold text-gray-900">{m.without_capgo({}, { locale: Astro.locals.locale })}</h3>
-                  <p class="text-red-600 font-medium">The traditional painful way</p>
+                  <p class="text-red-600 font-medium">{m.home_without_capgo_badge({}, { locale: Astro.locals.locale })}</p>
                 </div>
               </div>
 
@@ -938,7 +906,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.app_store_rating_bad({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">Frustrated users leave negative reviews</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_without_capgo_frustrated({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
                 
@@ -950,7 +918,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.users_stuck_with_bugs_for_weeks({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">App store approval takes 7-14 days</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_without_capgo_delay({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
                 
@@ -962,7 +930,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.no_way_to_track_update_success({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">Flying blind without insights</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_without_capgo_insights({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
                 
@@ -974,7 +942,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.high_risk_of_bad_user_experience({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">No way to test or rollback quickly</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_without_capgo_no_rollback({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
                 
@@ -986,14 +954,14 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.wrong_app_testing({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">Inefficient team communication</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_without_capgo_comm({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
               </div>
 
               <!-- Bottom impact -->
               <div class="mt-8 p-4 bg-red-50 rounded-xl border border-red-100">
-                <p class="text-red-800 font-medium text-center">Result: Lost users, poor ratings, slow development</p>
+                <p class="text-red-800 font-medium text-center">{m.home_without_capgo_result({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
           </div>
@@ -1011,7 +979,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
                 <div class="ml-4">
                   <h3 class="text-2xl font-bold text-gray-900">{m.with_capgo({}, { locale: Astro.locals.locale })}</h3>
-                  <p class="text-blue-600 font-medium">The modern, efficient way</p>
+                  <p class="text-blue-600 font-medium">{m.home_with_capgo_badge({}, { locale: Astro.locals.locale })}</p>
                 </div>
               </div>
 
@@ -1025,7 +993,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.app_store_rating_good({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">Happy users with latest features</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_with_capgo_happy_users({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
                 
@@ -1037,7 +1005,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.instant_updates_to_all_users({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">Deploy fixes in seconds, not weeks</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_with_capgo_fast_fixes({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
                 
@@ -1049,7 +1017,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.detailed_analytics_and_error_tracking({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">Real-time insights and monitoring</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_with_capgo_real_time({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
                 
@@ -1061,7 +1029,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.instant_rollback_if_something_goes_wrong({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">One-click safety with instant rollback</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_with_capgo_rollback({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
                 
@@ -1073,14 +1041,14 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </div>
                   <div class="ml-4">
                     <p class="text-gray-800 font-medium">{m.test_pr_in_production({}, { locale: Astro.locals.locale })}</p>
-                    <p class="text-gray-500 text-sm mt-1">Seamless testing and collaboration</p>
+                    <p class="text-gray-500 text-sm mt-1">{m.home_with_capgo_collaboration({}, { locale: Astro.locals.locale })}</p>
                   </div>
                 </div>
               </div>
 
               <!-- Bottom impact -->
               <div class="mt-8 p-4 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl border border-blue-100">
-                <p class="text-blue-800 font-medium text-center">Result: Happy users, 5-star ratings, rapid development</p>
+                <p class="text-blue-800 font-medium text-center">{m.home_with_capgo_result({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
           </div>
@@ -1089,7 +1057,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
         <!-- VS Indicator -->
         <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden lg:block">
           <div class="bg-white rounded-full w-16 h-16 shadow-lg border-4 border-gray-100 flex items-center justify-center">
-            <span class="text-gray-600 font-bold text-lg">VS</span>
+            <span class="text-gray-600 font-bold text-lg">{m.home_vs_label({}, { locale: Astro.locals.locale })}</span>
           </div>
         </div>
         <div class="mt-16 flex flex-col items-center gap-3 text-center">
@@ -1132,7 +1100,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </p>
                 <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
                   {m.push_live_code_changes_without_app_store_delays({}, { locale: Astro.locals.locale })}
-                  Our average response time is 
+                  {' '}
+                  {m.home_average_response_time({}, { locale: Astro.locals.locale })}{' '}
                   <a
                     href="https://status.capgo.app"
                     target="_blank"
@@ -1185,7 +1154,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/overview')}
                     class="ml-2 text-green-400 hover:text-green-300 underline"
                   >
-                    CLI docs
+                    {m.home_cli_docs_label({}, { locale: Astro.locals.locale })}
                   </a>
                 </p>
               </div>
@@ -1229,7 +1198,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/differentials')}
                     class="ml-2 text-yellow-400 hover:text-yellow-300 underline"
                   >
-                    Learn more
+                    {m.learn_more({}, { locale: Astro.locals.locale })}
                   </a>
                 </p>
               </div>
@@ -1255,7 +1224,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/public-api')}
                     class="ml-2 text-cyan-400 hover:text-cyan-300 underline"
                   >
-                    API docs
+                    {m.home_api_docs_label({}, { locale: Astro.locals.locale })}
                   </a>
                 </p>
               </div>
@@ -1282,7 +1251,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/channels')}
                     class="ml-2 text-indigo-400 hover:text-indigo-300 underline"
                   >
-                    Learn more
+                    {m.learn_more({}, { locale: Astro.locals.locale })}
                   </a>
                 </p>
               </div>
@@ -1309,7 +1278,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/custom-storage')}
                     class="ml-2 text-red-400 hover:text-red-300 underline"
                   >
-                    Custom storage
+                    {m.home_custom_storage_label({}, { locale: Astro.locals.locale })}
                   </a>
                 </p>
               </div>
@@ -1334,7 +1303,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     rel="noopener noreferrer"
                     class="ml-2 text-emerald-400 hover:text-emerald-300 underline"
                   >
-                    View source
+                    {m.home_view_source({}, { locale: Astro.locals.locale })}
                   </a>
                 </p>
               </div>
@@ -1362,7 +1331,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     rel="noopener noreferrer"
                     class="ml-2 text-blue-400 hover:text-blue-300 underline"
                   >
-                    Trust center
+                    {m.home_trust_center_label({}, { locale: Astro.locals.locale })}
                   </a>
                 </p>
               </div>
@@ -1383,7 +1352,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
               </div>
               <div class="p-10">
                 <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.support_response_under_24h({}, { locale: Astro.locals.locale })}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">Email or Discord support. Pay-as-you-go users get dedicated Slack shared channel access.</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-400">{m.home_support_channels({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
           </div>
@@ -1444,27 +1413,30 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <svg class="mr-2 h-4 w-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            Important Update
+            {m.home_important_update_badge({}, { locale: Astro.locals.locale })}
           </div>
           
           <h2 class="text-3xl leading-tight font-bold text-gray-900 sm:text-4xl xl:text-5xl mb-6">
-            Ionic Appflow is shutting down,<br />
+            {m.home_appflow_shutdown_heading({}, { locale: Astro.locals.locale })}<br />
             <span class="bg-linear-to-r from-[#44BCFF] to-[#FF44EC] bg-clip-text text-transparent">
-              Capgo is here to stay
+              {m.home_capgo_here_to_stay({}, { locale: Astro.locals.locale })}
             </span>
           </h2>
           
           <div class="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-gray-700 mb-12">
             <p class="text-xl font-medium text-gray-800">
-              While Ionic Appflow announced its shutdown, Capgo continues to grow stronger every day.
+              {m.home_appflow_notice_intro({}, { locale: Astro.locals.locale })}
             </p>
             <p>
-              Unlike venture-backed services that can disappear overnight, <strong class="text-blue-600">Capgo is fully bootstrapped and profitable</strong>. 
-              We've been generating consistent revenue since day one, ensuring long-term stability for your apps.
+              {m.home_appflow_bootstrapped_prefix({}, { locale: Astro.locals.locale })}{' '}
+              <strong class="text-blue-600">{m.home_appflow_bootstrapped_highlight({}, { locale: Astro.locals.locale })}</strong>.
+              {' '}
+              {m.home_appflow_bootstrapped_suffix({}, { locale: Astro.locals.locale })}
             </p>
             <p>
-              Our sustainable business model means we're not dependent on investor funding or acquisition deals. 
-              <strong class="text-green-600">We're built to last</strong>, with a growing customer base and proven track record.
+              {m.home_appflow_sustainable_prefix({}, { locale: Astro.locals.locale })}{' '}
+              <strong class="text-green-600">{m.home_appflow_sustainable_highlight({}, { locale: Astro.locals.locale })}</strong>,{' '}
+              {m.home_appflow_sustainable_suffix({}, { locale: Astro.locals.locale })}
             </p>
           </div>
 
@@ -1477,8 +1449,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2">Fully Bootstrapped</h3>
-              <p class="text-gray-600 text-sm">No investors, no pressure to sell. Built with our own resources and customer revenue.</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">{m.home_bootstrapped_title({}, { locale: Astro.locals.locale })}</h3>
+              <p class="text-gray-600 text-sm">{m.home_bootstrapped_desc({}, { locale: Astro.locals.locale })}</p>
             </div>
 
             <!-- Profitable -->
@@ -1488,8 +1460,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2">Revenue Generating</h3>
-              <p class="text-gray-600 text-sm">Profitable from day one with consistent growth. Our success depends on your success.</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">{m.home_revenue_title({}, { locale: Astro.locals.locale })}</h3>
+              <p class="text-gray-600 text-sm">{m.home_revenue_desc({}, { locale: Astro.locals.locale })}</p>
             </div>
 
             <!-- Long-term -->
@@ -1499,20 +1471,19 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2">Built to Last</h3>
-              <p class="text-gray-600 text-sm">Sustainable business model ensures we'll be here for the long haul. Your apps are safe with us.</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">{m.home_built_to_last_title({}, { locale: Astro.locals.locale })}</h3>
+              <p class="text-gray-600 text-sm">{m.home_built_to_last_desc({}, { locale: Astro.locals.locale })}</p>
             </div>
           </div>
 
           <!-- Migration CTA -->
           <div class="bg-gray-900 rounded-2xl p-8 text-white">
-            <h3 class="text-2xl font-bold mb-4">Ready to migrate from Ionic Appflow?</h3>
+            <h3 class="text-2xl font-bold mb-4">{m.home_migration_cta_title({}, { locale: Astro.locals.locale })}</h3>
             <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Join thousands of developers who've already made the switch to a more reliable, 
-              feature-rich alternative that's built to last.
+              {m.home_migration_cta_desc({}, { locale: Astro.locals.locale })}
             </p>
-            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <div class="flex flex-col items-center gap-3">
+            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:items-start">
+              <div class="flex flex-col items-center gap-3 sm:items-start">
                 <div class="group relative inline-flex">
                   <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
                   <a
@@ -1530,12 +1501,12 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
               </div>
               <a
                 href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
-                class="inline-flex items-center text-gray-300 hover:text-white transition-colors duration-200"
+                class="inline-flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 sm:self-start"
               >
-                <svg class="mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                 </svg>
-                Migration Guide
+                {m.migration_guide({}, { locale: Astro.locals.locale })}
               </a>
             </div>
           </div>

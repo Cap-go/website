@@ -17,7 +17,7 @@ import * as m from '@/paraglide/messages'
                   <!-- Badge -->
                   <div class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 border border-blue-200/50 rounded-full px-4 py-2">
                       <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                      <span class="text-blue-700 text-sm font-medium">Trusted Worldwide</span>
+                      <span class="text-blue-700 text-sm font-medium">{m.trusted_by_developers_worldwide({}, { locale: Astro.locals.locale })}</span>
                   </div>
 
                   <div>
@@ -32,16 +32,16 @@ import * as m from '@/paraglide/messages'
                   <!-- Stats -->
                   <div class="grid grid-cols-3 gap-8 pt-8">
                       <div class="text-center">
-                          <div class="text-3xl font-bold text-slate-900 mb-2">3500+</div>
-                          <div class="text-sm text-slate-600">Companies</div>
+                          <div class="text-3xl font-bold text-slate-900 mb-2">{m.companies_logo_stat_companies_value({}, { locale: Astro.locals.locale })}</div>
+                          <div class="text-sm text-slate-600">{m.companies_logo_stat_companies_label({}, { locale: Astro.locals.locale })}</div>
                       </div>
                       <div class="text-center">
-                          <div class="text-3xl font-bold text-slate-900 mb-2">50M+</div>
-                          <div class="text-sm text-slate-600">Devices tracked</div>
+                          <div class="text-3xl font-bold text-slate-900 mb-2">{m.companies_logo_stat_devices_value({}, { locale: Astro.locals.locale })}</div>
+                          <div class="text-sm text-slate-600">{m.companies_logo_stat_devices_label({}, { locale: Astro.locals.locale })}</div>
                       </div>
                       <div class="text-center">
-                          <div class="text-3xl font-bold text-slate-900 mb-2">99.9%</div>
-                          <div class="text-sm text-slate-600">Uptime</div>
+                          <div class="text-3xl font-bold text-slate-900 mb-2">{m.companies_logo_stat_uptime_value({}, { locale: Astro.locals.locale })}</div>
+                          <div class="text-sm text-slate-600">{m.companies_logo_stat_uptime_label({}, { locale: Astro.locals.locale })}</div>
                       </div>
                   </div>
               </div>
@@ -122,26 +122,20 @@ import * as m from '@/paraglide/messages'
           <div class="mt-20 pt-12 border-t border-slate-200/50">
               <div class="text-center space-y-6">
                   <p class="text-slate-600 text-lg">
-                      Join thousands of developers who trust Capgo for their mobile app deployments
+                      {m.companies_logo_bottom_text({}, { locale: Astro.locals.locale })}
                   </p>
                   <div class="flex items-center justify-center gap-8 text-sm text-slate-500">
-                      <div class="flex items-center gap-2">
-                          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                          </svg>
-                          <span>SOC 2 Certified</span>
+                      <div class="flex flex-col items-center gap-1">
+                          <img loading="lazy" src="/soc2.svg" alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })} class="h-10 w-auto" />
+                          <span class="text-xs font-semibold text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
                       </div>
-                      <div class="flex items-center gap-2">
-                          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                          </svg>
-                          <span>GDPR Compliant</span>
+                      <div class="flex flex-col items-center gap-1">
+                          <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-10 w-auto" />
+                          <span class="text-xs font-semibold text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
                       </div>
-                      <div class="flex items-center gap-2">
-                          <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                          </svg>
-                          <span>24/7 Support</span>
+                      <div class="flex flex-col items-center gap-1">
+                          <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-10 w-auto" />
+                          <span class="text-xs font-semibold text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
                       </div>
                   </div>
               </div>
