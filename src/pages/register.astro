@@ -97,6 +97,10 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
             >
               {m.sign_up_button({}, { locale: Astro.locals.locale })}
             </button>
+            <p
+              class="mt-2 text-center text-xs text-gray-400"
+              set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })}
+            ></p>
           </form>
           <div class="relative">
             <div class="absolute inset-0 flex items-center">
@@ -188,14 +192,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
         data: {
           first_name: firstName.value,
           last_name: lastName.value,
-          activation: {
-            formFilled: true,
-            enableNotifications: false,
-            legal: false,
-            optForNewsletters: false,
-          },
         },
-        emailRedirectTo: 'https://web.capgo.app/onboarding/verify_email',
       },
     })
     if (error) {

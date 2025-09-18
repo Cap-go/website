@@ -1005,6 +1005,7 @@
   "register": "S'inscrire",
   "register_code": "Code d'inscription",
   "register_title": "Inscrivez-vous à Capgo",
+  "register_tos_notice": "En vous inscrivant, vous acceptez nos <a href=\"https://capgo.app/tos/\" target=\"_blank\" rel=\"noopener noreferrer\">Conditions d'utilisation</a>.",
   "reimbursement_policy": "Nous vous rembourserons au plus tard 14 jours à compter du jour où nous recevons les marchandises retournées. Nous utiliserons le même moyen de paiement que celui que vous avez utilisé pour la commande, et vous n'encourrez aucun frais pour ce remboursement.",
   "remove_modify_content": "supprimer, désactiver l'accès ou modifier tout contenu ou ressource qui viole cette Politique ou tout autre accord que nous avons avec vous pour l'utilisation des Services ou du Site Capgo.",
   "report_violations_desc": "Nous pouvons signaler toute activité que nous soupçonnons d'enfreindre une loi ou un règlement aux forces de l'ordre, aux autorités de réglementation ou à d'autres tiers appropriés.",

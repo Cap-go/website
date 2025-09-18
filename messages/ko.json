@@ -1005,6 +1005,7 @@
   "register": "등록",
   "register_code": "코드 등록",
   "register_title": "Capgo에 가입하기",
+  "register_tos_notice": "회원가입 시 당사의 <a href=\"https://capgo.app/tos/\" target=\"_blank\" rel=\"noopener noreferrer\">서비스 약관</a>에 동의하게 됩니다.",
   "reimbursement_policy": "당사는 반품된 상품을 받은 날로부터 14일 이내에 환불해 드릴 것입니다. 주문 시 사용하신 것과 동일한 결제 수단을 사용할 것이며, 이러한 환불에 대해 어떠한 수수료도 부과되지 않습니다.",
   "remove_modify_content": "본 정책이나 서비스 또는 Capgo 사이트 사용에 관한 귀하와의 기타 계약을 위반하는 콘텐츠나 리소스를 제거하거나, 접근을 비활성화하거나, 수정할 수 있습니다.",
   "report_violations_desc": "우리는 법률이나 규정을 위반한다고 의심되는 모든 활동을 적절한 법 집행 기관, 규제 기관 또는 기타 적절한 제3자에게 보고할 수 있습니다.",

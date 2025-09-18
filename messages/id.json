@@ -1005,6 +1005,7 @@
   "register": "Daftar",
   "register_code": "Kode pendaftaran",
   "register_title": "Daftar ke Capgo",
+  "register_tos_notice": "Dengan mendaftar, Anda menyetujui <a href=\"https://capgo.app/tos/\" target=\"_blank\" rel=\"noopener noreferrer\">Ketentuan Layanan</a> kami.",
   "reimbursement_policy": "Kami akan mengembalikan dana Anda paling lambat 14 hari setelah hari kami menerima Barang yang dikembalikan. Kami akan menggunakan cara pembayaran yang sama seperti yang Anda gunakan untuk Pesanan, dan Anda tidak akan dikenakan biaya apapun untuk pengembalian dana tersebut.",
   "remove_modify_content": "hapus, nonaktifkan akses ke, atau modifikasi konten atau sumber daya apa pun yang melanggar Kebijakan ini atau perjanjian lain yang kami miliki dengan Anda untuk penggunaan Layanan atau Situs Capgo.",
   "report_violations_desc": "Kami dapat melaporkan aktivitas apa pun yang kami duga melanggar undang-undang atau peraturan kepada pihak berwenang penegak hukum, regulator, atau pihak ketiga yang sesuai.",
