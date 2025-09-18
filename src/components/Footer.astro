@@ -148,6 +148,20 @@ const navigation: Record<string, NavigationItem[]> = {
             ))
           }
         </ul>
+        <div class="flex flex-wrap items-center gap-4 text-center">
+          <div class="flex flex-col items-center gap-1">
+            <img src="/soc2.svg" alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })} class="h-10 w-auto" loading="lazy" />
+            <span class="text-xs font-semibold text-gray-400">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <img src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-10 w-auto" loading="lazy" />
+            <span class="text-xs font-semibold text-gray-400">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
+          </div>
+          <div class="flex flex-col items-center gap-1">
+            <img src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-10 w-auto" loading="lazy" />
+            <span class="text-xs font-semibold text-gray-400">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
+          </div>
+        </div>
         <div class="relative inline-block text-left">
           <div>
             <button

@@ -94,6 +94,8 @@ const content = {
 
 // Add the SoftwareApplication to the graph
 content.ldJSON['@graph'].push(capgoSoftware)
+
+const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
 ---
 
 <Layout content={content}>
@@ -146,19 +148,22 @@ content.ldJSON['@graph'].push(capgoSoftware)
               {m.ship_updates_fixes_changes_and_features({}, { locale: Astro.locals.locale })}
               <br /><span class="font-bold">{m.within_minutes({}, { locale: Astro.locals.locale })}</span><br />
             </h2>
-            <div class="group relative mt-10 inline-flex">
-              <div
-                class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
-              >
+            <div class="mt-10 flex flex-col items-center gap-3">
+              <div class="group relative inline-flex">
+                <div
+                  class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+                >
+                </div>
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                  title={m.cta_ship_update_now({}, { locale: Astro.locals.locale })}
+                  class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+                  role="button"
+                >
+                  {m.cta_ship_update_now({}, { locale: Astro.locals.locale })}
+                </a>
               </div>
-              <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                title={m.get_quote_now({}, { locale: Astro.locals.locale })}
-                class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-                role="button"
-              >
-                {m.try_for_free({}, { locale: Astro.locals.locale })}
-              </a>
+              <p class="font-inter text-sm leading-6 text-gray-400">{ctaSubtext}</p>
             </div>
           </div>
         </div>
@@ -220,15 +225,6 @@ content.ldJSON['@graph'].push(capgoSoftware)
               {m.manifesto_behind_every_movie({}, { locale: Astro.locals.locale })}
             </p>
           </div>
-          <div class="mt-10">
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-            >
-              {m.join_the_community({}, { locale: Astro.locals.locale })}
-            </a>
-          </div>
-        </div>
       </div>
     </section>
     <section class="relative bg-gray-900 py-24 sm:py-32 overflow-hidden">
@@ -384,21 +380,6 @@ content.ldJSON['@graph'].push(capgoSoftware)
           </div>
         </div>
 
-        <!-- Call to Action -->
-        <div class="mt-16 text-center">
-          <div class="group relative inline-flex">
-            <div class="transitiona-all animate-tilt absolute -inset-px rounded-2xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
-            <a
-              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-              class="relative inline-flex items-center justify-center rounded-2xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-            >
-              {m.join_these_numbers({}, { locale: Astro.locals.locale })}
-              <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
       </div>
     </section>
     <section class="bg-gray-50 py-16 sm:py-20 lg:py-28">
@@ -637,18 +618,34 @@ content.ldJSON['@graph'].push(capgoSoftware)
         </div>
 
         <!-- CTA -->
-        <div class="mx-auto max-w-3xl text-center mt-16">
+        <div class="mx-auto mt-16 flex max-w-3xl flex-col items-center gap-3 text-center">
           <div class="group relative inline-flex">
             <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+              title={m.cta_send_update_now({}, { locale: Astro.locals.locale })}
               class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
             >
-              {m.join_these_numbers({}, { locale: Astro.locals.locale })}
+              {m.cta_send_update_now({}, { locale: Astro.locals.locale })}
               <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </a>
+          </div>
+          <p class="text-sm text-gray-500">{ctaSubtext}</p>
+        </div>
+        <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-center">
+          <div class="flex flex-col items-center gap-2">
+            <img src="/soc2.svg" alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })} class="h-12 w-auto" loading="lazy" />
+            <span class="text-sm font-semibold text-gray-300">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <img src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-12 w-auto" loading="lazy" />
+            <span class="text-sm font-semibold text-gray-300">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <img src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-12 w-auto" loading="lazy" />
+            <span class="text-sm font-semibold text-gray-300">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
           </div>
         </div>
       </div>
@@ -872,19 +869,21 @@ content.ldJSON['@graph'].push(capgoSoftware)
         </div>
 
         <!-- Call to Action -->
-        <div class="mt-16 text-center">
+        <div class="mt-16 flex flex-col items-center gap-3 text-center">
           <div class="group relative inline-flex">
             <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
-                          <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-              >
-                {m.try_for_free({}, { locale: Astro.locals.locale })}
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+              title={m.cta_view_live_rollouts({}, { locale: Astro.locals.locale })}
+              class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+            >
+              {m.cta_view_live_rollouts({}, { locale: Astro.locals.locale })}
               <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </a>
           </div>
+          <p class="text-sm text-gray-400">{ctaSubtext}</p>
         </div>
       </div>
     </section>
@@ -1092,6 +1091,22 @@ content.ldJSON['@graph'].push(capgoSoftware)
           <div class="bg-white rounded-full w-16 h-16 shadow-lg border-4 border-gray-100 flex items-center justify-center">
             <span class="text-gray-600 font-bold text-lg">VS</span>
           </div>
+        </div>
+        <div class="mt-16 flex flex-col items-center gap-3 text-center">
+          <div class="group relative inline-flex">
+            <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+              title={m.cta_delight_users({}, { locale: Astro.locals.locale })}
+              class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+            >
+              {m.cta_delight_users({}, { locale: Astro.locals.locale })}
+              <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
+          <p class="text-sm text-gray-400">{ctaSubtext}</p>
         </div>
       </div>
     </section>
@@ -1403,15 +1418,18 @@ content.ldJSON['@graph'].push(capgoSoftware)
             </div>
             <div class="sm:text-center md:w-1/2">
               <p class="text-xl tracking-tight text-white">
-                {m.try_risk_free_with_a_15_days_free_trial({}, { locale: Astro.locals.locale })}
+                Deploy straight from your CI without app store delays.
               </p>
-              <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                class="mx-auto mt-5 inline-block w-auto rounded-md border border-transparent bg-gray-900 px-5 py-3 text-base font-medium text-white shadow hover:bg-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 focus:outline-none sm:px-10"
-              >
-                {m.get_started({}, { locale: Astro.locals.locale })} &RightArrow;
-              </a>
-              <p class="pt-4 tracking-tight text-white">{m.no_credit_card_required({}, { locale: Astro.locals.locale })}</p>
+              <div class="mt-6 flex flex-col items-center gap-3 sm:items-center">
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                  title={m.cta_launch_workspace({}, { locale: Astro.locals.locale })}
+                  class="mx-auto inline-block w-auto rounded-md border border-transparent bg-gray-900 px-5 py-3 text-base font-medium text-white shadow transition-colors duration-200 hover:bg-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 focus:outline-none sm:px-10"
+                >
+                  {m.cta_launch_workspace({}, { locale: Astro.locals.locale })}
+                </a>
+                <p class="text-sm tracking-tight text-white">{ctaSubtext}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -1493,18 +1511,22 @@ content.ldJSON['@graph'].push(capgoSoftware)
               Join thousands of developers who've already made the switch to a more reliable, 
               feature-rich alternative that's built to last.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <div class="group relative inline-flex">
-                <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
-                <a
-                  href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                  class="relative inline-flex items-center justify-center rounded-xl bg-white text-gray-900 px-8 py-4 text-lg font-bold transition-all duration-200 hover:bg-gray-100 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
-                >
-                  Start Free Migration
-                  <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                  </svg>
-                </a>
+            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <div class="flex flex-col items-center gap-3">
+                <div class="group relative inline-flex">
+                  <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
+                  <a
+                    href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+                    title={m.cta_start_migration({}, { locale: Astro.locals.locale })}
+                    class="relative inline-flex items-center justify-center rounded-xl bg-white text-gray-900 px-8 py-4 text-lg font-bold transition-all duration-200 hover:bg-gray-100 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
+                  >
+                    {m.cta_start_migration({}, { locale: Astro.locals.locale })}
+                    <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                  </a>
+                </div>
+                <p class="text-sm text-gray-300">{ctaSubtext}</p>
               </div>
               <a
                 href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
