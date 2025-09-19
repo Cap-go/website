@@ -87,11 +87,11 @@ const dateModified = entry.data.updated_at
 const datePublished = entry.data.created_at
 
 // Create improved ldJSON using helper function
-const articleUrl = `${Astro.locals.runtimeConfig.public.baseUrl}/blog/${entry.data.slug}/`
+const articleUrl = getRelativeLocaleUrl(Astro.locals.locale, `/blog/${entry.data.slug}/`)
 
 content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
   title: entry.data.title,
-  description: entry.data.description,
+  description: entry.data.description || '',
   url: articleUrl,
   image: content['image'] ? [content['image']] : undefined,
   datePublished,

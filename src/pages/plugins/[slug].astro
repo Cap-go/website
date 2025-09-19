@@ -4,7 +4,7 @@ import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import { createSoftwareApplicationLdJson, validateLdJson } from '@/lib/ldJson'
 import * as m from '@/paraglide/messages'
-import { fetchWithToken, getSlug } from '@/services/github'
+import { getSlug } from '@/services/github'
 import { defaultLocale } from '@/services/locale'
 import type { GetStaticPaths } from 'astro'
 import type { CollectionEntry } from 'astro:content'
@@ -121,7 +121,7 @@ if (plugin.title) content['title'] = plugin.title
 if (plugin.description) content['description'] = plugin.description
 
 // Create improved ldJSON using helper function for SoftwareApplication
-const pluginUrl = `${Astro.locals.runtimeConfig.public.baseUrl}/plugins/${id}`
+const pluginUrl = getRelativeLocaleUrl(Astro.locals.locale, `/plugins/${id}`)
 
 content['ldJSON'] = createSoftwareApplicationLdJson(Astro.locals.runtimeConfig.public, {
   name: plugin.title,

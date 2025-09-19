@@ -1,8 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Calculator from '@/components/pricing/Calculator.astro'
 import CreditPricing from '@/components/pricing/CreditPricing.astro'
 import Faq from '@/components/pricing/Faq.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 import Plans from '@/components/pricing/Plans.astro'
 import { createLdJsonGraph, createProductLdJson } from '@/lib/ldJson'
 import type { Database } from '@/services/supabase.types'
@@ -34,7 +34,7 @@ const payg = plansAll.length ? plansAll.filter((p) => p.name === 'Pay as you go'
 
 // Create ldJSON for pricing plans
 if (plans.length > 0) {
-  const pricingUrl = `${Astro.locals.runtimeConfig.public.baseUrl}/pricing/`
+  const pricingUrl = getRelativeLocaleUrl(Astro.locals.locale, '/pricing/')
 
   // Create product schemas for each plan
   const planProducts = plans.map(plan =>
@@ -62,7 +62,7 @@ if (plans.length > 0) {
       includeOrganization: true,
       includeBreadcrumbs: true,
       breadcrumbs: [
-        { name: 'Home', url: Astro.locals.runtimeConfig.public.baseUrl },
+        { name: 'Home', url: getRelativeLocaleUrl(Astro.locals.locale, '/') },
         { name: 'Pricing', url: pricingUrl },
       ]
     }

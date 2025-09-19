@@ -12,7 +12,7 @@ const description = 'Enterprise-grade live updates for Capacitor apps. Built for
 const enterpriseService = createServiceLdJson(Astro.locals.runtimeConfig.public, {
   name: 'Capgo Enterprise - Professional Live Updates',
   description: 'Enterprise-grade live update platform for Capacitor applications with advanced security, compliance features, and dedicated support for large-scale deployments.',
-  url: `${Astro.locals.runtimeConfig.public.baseUrl}/enterprise/`,
+  url: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/'),
   serviceType: 'Enterprise Software Service',
   areaServed: ['Worldwide']
 })
@@ -21,7 +21,7 @@ const enterpriseService = createServiceLdJson(Astro.locals.runtimeConfig.public,
 const enterpriseProduct = createProductLdJson(Astro.locals.runtimeConfig.public, {
   name: 'Capgo Enterprise Plan',
   description: 'Complete enterprise solution with advanced security, compliance, dedicated support, and unlimited scalability for professional teams.',
-  url: `${Astro.locals.runtimeConfig.public.baseUrl}/enterprise/`,
+  url: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/'),
   sku: 'capgo-enterprise',
   offers: [
     {
@@ -96,11 +96,11 @@ const content = {
       breadcrumbs: [
         {
           name: 'Home',
-          url: Astro.locals.runtimeConfig.public.baseUrl,
+          url: getRelativeLocaleUrl(Astro.locals.locale, '/'),
         },
         {
           name: 'Enterprise',
-          url: `${Astro.locals.runtimeConfig.public.baseUrl}/enterprise/`,
+          url: getRelativeLocaleUrl(Astro.locals.locale, 'enterprise/'),
         }
       ]
     }
@@ -162,14 +162,14 @@ content.ldJSON['@graph'].push(enterpriseService)
 
         <h1 class="font-pj text-3xl leading-tight font-bold text-white sm:text-4xl sm:leading-tight lg:leading-tight xl:text-6xl mb-8">
           <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
-            Deliver updates to your Capacitor app
+            {m.deliver_updates({}, { locale: Astro.locals.locale })}
           </span>
           <br />
-          <span class="text-white">at scale</span>
+          <span class="text-white">{m.at_scale({}, { locale: Astro.locals.locale })}</span>
         </h1>
         
         <h2 class="font-inter mx-auto mt-6 max-w-4xl text-base leading-7 text-gray-400 text-xl">
-          Deploy over-the-air (OTA) updates to millions of users with enterprise-grade security, scalability, and support that your organization demands
+          {m.deploy_ota({}, { locale: Astro.locals.locale })}
         </h2>
 
         <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -184,7 +184,7 @@ content.ldJSON['@graph'].push(enterpriseService)
               class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
               role="button"
             >
-              Request a Demo
+              {m.request_demo({}, { locale: Astro.locals.locale })}
               <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
@@ -195,7 +195,7 @@ content.ldJSON['@graph'].push(enterpriseService)
             href="mailto:enterprise@capgo.app"
             class="font-pj inline-flex items-center justify-center rounded-xl border border-gray-200 bg-transparent px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 focus:outline-none"
           >
-            <span>Contact Sales</span>
+            <span>{m.contact_sales({}, { locale: Astro.locals.locale })}</span>
           </a>
         </div>
       </div>
@@ -259,11 +259,11 @@ content.ldJSON['@graph'].push(enterpriseService)
   <!-- Enterprise Features Section -->
   <section class="bg-gray-900 py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-blue-400">Enterprise Features</h2>
+      <h2 class="text-base/7 font-semibold text-blue-400">{m.enterprise_features({}, { locale: Astro.locals.locale })}</h2>
       <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-        Built for enterprise teams
+        {m.built_for_enterprise_teams({}, { locale: Astro.locals.locale })}
       </p>
-      <p class="mt-4 max-w-2xl text-lg text-gray-400">Advanced collaboration, security, and compliance features that grow with your organization</p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.advanced_collaboration_security_compliance({}, { locale: Astro.locals.locale })}</p>
       
       <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6">
         <!-- Organizations and Teams -->
@@ -273,12 +273,12 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Organizations and Teams</h3>
+              <h3 class="text-xl font-bold text-white">{m.organizations_and_teams({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Centralized Management</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.centralized_management({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Organize your projects across multiple teams and departments with centralized management and billing.
+                {m.organize_projects_across_teams({}, { locale: Astro.locals.locale })}
               </p>
             </div>
           </div>
@@ -291,12 +291,12 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Role-Based Access Control</h3>
+              <h3 class="text-xl font-bold text-white">{m.role_based_access_control({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Fine-grained Permissions</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.fine_grained_permissions({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Control who can access, deploy, and manage your live updates with enterprise-grade permissions.
+                {m.control_access_deploy_manage({}, { locale: Astro.locals.locale })}
               </p>
             </div>
           </div>
@@ -309,12 +309,12 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Enterprise Billing</h3>
+              <h3 class="text-xl font-bold text-white">{m.enterprise_billing({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Flexible Payment Terms</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.flexible_payment_terms({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Consolidated invoicing, purchase orders, and flexible payment terms to meet your procurement requirements.
+                {m.consolidated_invoicing_purchase_orders({}, { locale: Astro.locals.locale })}
               </p>
             </div>
           </div>
@@ -327,17 +327,17 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">SSO + 2FA</h3>
+              <h3 class="text-xl font-bold text-white">{m.sso_2fa({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Enterprise Authentication</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.enterprise_authentication({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Integrate with your identity provider and enforce multi-factor authentication across your organization.
+                {m.integrate_identity_provider_mfa({}, { locale: Astro.locals.locale })}
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/plugin/cloud-mode/authentication')}
                   class="ml-2 text-orange-400 hover:text-orange-300 underline"
                 >
-                  Learn more
+                  {m.learn_more({}, { locale: Astro.locals.locale })}
                 </a>
               </p>
             </div>
@@ -351,19 +351,19 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-[#44BCFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Open Source</h3>
+              <h3 class="text-xl font-bold text-white">{m.open_source({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Transparency & Security</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.transparency_security({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Our Live Update SDK is open source, providing transparency and community-driven development.
+                {m.live_update_sdk_open_source({}, { locale: Astro.locals.locale })}
                 <a
                   href="https://github.com/cap-go/"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="ml-2 text-[#44BCFF] hover:text-blue-300 underline"
                 >
-                  View source
+                  {m.view_source({}, { locale: Astro.locals.locale })}
                 </a>
               </p>
             </div>
@@ -377,17 +377,17 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Enterprise Plugins</h3>
+              <h3 class="text-xl font-bold text-white">{m.enterprise_plugins({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Premium Plugin Suite</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.premium_plugin_suite({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Access and maintain our enterprise-grade Capacitor plugins with priority support and dedicated maintenance.
+                {m.access_maintain_enterprise_plugins({}, { locale: Astro.locals.locale })}
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
                   class="ml-2 text-indigo-400 hover:text-indigo-300 underline"
                 >
-                  Explore plugins
+                  {m.explore_plugins({}, { locale: Astro.locals.locale })}
                 </a>
               </p>
             </div>
@@ -414,19 +414,19 @@ content.ldJSON['@graph'].push(enterpriseService)
           <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          Global Infrastructure
+          {m.global_infrastructure({}, { locale: Astro.locals.locale })}
         </div>
         
         <h2 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl mb-6">
           <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
-            Global infrastructure
+            {m.global_infrastructure_lowercase({}, { locale: Astro.locals.locale })}
           </span>
           <br />
-          <span class="text-white">that grows with you</span>
+          <span class="text-white">{m.that_grows_with_you({}, { locale: Astro.locals.locale })}</span>
         </h2>
         
         <p class="mt-6 text-lg leading-relaxed text-gray-300 max-w-3xl mx-auto">
-          Powered by serverless edge computing and distributed databases across 300+ cities and 13,000+ networks for ultra-fast global delivery
+          {m.powered_by_serverless_edge_computing({}, { locale: Astro.locals.locale })}
         </p>
       </div>
 
@@ -437,7 +437,7 @@ content.ldJSON['@graph'].push(enterpriseService)
             <div class="text-6xl font-bold mb-4">
               <span class="bg-linear-to-r from-[#44BCFF] to-[#FF44EC] bg-clip-text text-transparent">300+</span>
             </div>
-            <div class="text-gray-300">Cities worldwide<br />for ultra-fast delivery</div>
+            <div class="text-gray-300">{m.cities_worldwide({}, { locale: Astro.locals.locale })}<br />{m.for_ultra_fast_delivery({}, { locale: Astro.locals.locale })}</div>
           </div>
         </div>
         <div class="group relative">
@@ -446,7 +446,7 @@ content.ldJSON['@graph'].push(enterpriseService)
             <div class="text-6xl font-bold mb-4">
               <span class="bg-linear-to-r from-[#00AA5E] to-[#44BCFF] bg-clip-text text-transparent">13,000+</span>
             </div>
-            <div class="text-gray-300">Network connections<br />direct peering worldwide</div>
+            <div class="text-gray-300">{m.network_connections({}, { locale: Astro.locals.locale })}<br />{m.direct_peering_worldwide({}, { locale: Astro.locals.locale })}</div>
           </div>
         </div>
         <div class="group relative">
@@ -455,7 +455,7 @@ content.ldJSON['@graph'].push(enterpriseService)
             <div class="text-6xl font-bold mb-4">
               <span class="bg-linear-to-r from-[#FF675E] to-[#FF44EC] bg-clip-text text-transparent">50ms</span>
             </div>
-            <div class="text-gray-300">From 95% of users<br />ultra-low latency</div>
+            <div class="text-gray-300">{m.from_95_percent_users({}, { locale: Astro.locals.locale })}<br />{m.ultra_low_latency({}, { locale: Astro.locals.locale })}</div>
           </div>
         </div>
       </div>
@@ -465,11 +465,11 @@ content.ldJSON['@graph'].push(enterpriseService)
   <!-- Security & Compliance Section -->
   <section class="bg-gray-900 py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-blue-400">Security & Compliance</h2>
+      <h2 class="text-base/7 font-semibold text-blue-400">{m.security_compliance({}, { locale: Astro.locals.locale })}</h2>
       <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-        Enterprise-grade security you can trust
+        {m.enterprise_grade_security_trust({}, { locale: Astro.locals.locale })}
       </p>
-      <p class="mt-4 max-w-2xl text-lg text-gray-400">Industry-leading security and compliance features that meet the highest enterprise standards</p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.industry_leading_security_compliance({}, { locale: Astro.locals.locale })}</p>
       
       <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
         <!-- SOC 2 Compliance -->
@@ -479,19 +479,19 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">SOC 2 Compliance</h3>
+              <h3 class="text-xl font-bold text-white">{m.soc2_compliance({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Type II Certified</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.type_ii_certified({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                SOC 2 Type II certified infrastructure ensuring the highest security and privacy standards
+                {m.soc2_type_ii_certified_infrastructure({}, { locale: Astro.locals.locale })}
                 <a
                   href="https://trust.capgo.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="ml-2 text-blue-400 hover:text-blue-300 underline"
                 >
-                  Trust center
+                  {m.trust_center({}, { locale: Astro.locals.locale })}
                 </a>
               </p>
             </div>
@@ -505,12 +505,12 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Zero-Trust Security</h3>
+              <h3 class="text-xl font-bold text-white">{m.zero_trust_security({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Signed & Verified</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.signed_verified({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Every Live Update is signed and verified, ensuring integrity and authenticity of your deployments
+                {m.every_live_update_signed_verified({}, { locale: Astro.locals.locale })}
               </p>
             </div>
           </div>
@@ -523,12 +523,12 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Multi-Factor Authentication</h3>
+              <h3 class="text-xl font-bold text-white">{m.multi_factor_authentication({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Enterprise Identity</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.enterprise_identity({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Mandatory MFA and integration with enterprise identity providers for secure access control
+                {m.mandatory_mfa_integration({}, { locale: Astro.locals.locale })}
               </p>
             </div>
           </div>
@@ -540,11 +540,11 @@ content.ldJSON['@graph'].push(enterpriseService)
   <!-- Enterprise Support Section -->
   <section class="bg-gray-800 py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-blue-400">Enterprise Support</h2>
+      <h2 class="text-base/7 font-semibold text-blue-400">{m.enterprise_support({}, { locale: Astro.locals.locale })}</h2>
       <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-        First-class support when you need it
+        {m.first_class_support_when_needed({}, { locale: Astro.locals.locale })}
       </p>
-      <p class="mt-4 max-w-2xl text-lg text-gray-400">Dedicated support channels and SLA guarantees for your peace of mind</p>
+      <p class="mt-4 max-w-2xl text-lg text-gray-400">{m.dedicated_support_channels_sla({}, { locale: Astro.locals.locale })}</p>
       
       <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-3">
         <!-- Priority Support -->
@@ -554,12 +554,12 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Priority Support</h3>
+              <h3 class="text-xl font-bold text-white">{m.priority_support({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Guaranteed Response</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.guaranteed_response({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Fast-track support with guaranteed response times and priority escalation for critical issues
+                {m.fast_track_support_guaranteed_response({}, { locale: Astro.locals.locale })}
               </p>
             </div>
           </div>
@@ -572,12 +572,12 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Dedicated Channels</h3>
+              <h3 class="text-xl font-bold text-white">{m.dedicated_channels({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Direct Engineering Access</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.direct_engineering_access({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Direct access to our engineering team through dedicated Slack channels and phone support
+                {m.direct_access_engineering_team({}, { locale: Astro.locals.locale })}
               </p>
             </div>
           </div>
@@ -590,17 +590,17 @@ content.ldJSON['@graph'].push(enterpriseService)
               <svg class="mb-4 h-24 w-24 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
-              <h3 class="text-xl font-bold text-white">Service Level Agreement</h3>
+              <h3 class="text-xl font-bold text-white">{m.service_level_agreement({}, { locale: Astro.locals.locale })}</h3>
             </div>
             <div class="p-10">
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Contractual Guarantees</p>
+              <p class="mt-2 text-lg font-medium tracking-tight text-white">{m.contractual_guarantees({}, { locale: Astro.locals.locale })}</p>
               <p class="mt-2 max-w-lg text-sm/6 text-gray-400">
-                Contractual SLA guarantees for uptime, response times, and resolution commitments
+                {m.contractual_sla_guarantees({}, { locale: Astro.locals.locale })}
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'sla')}
                   class="ml-2 text-indigo-400 hover:text-indigo-300 underline"
                 >
-                  View SLA
+                  {m.view_sla({}, { locale: Astro.locals.locale })}
                 </a>
               </p>
             </div>
@@ -627,19 +627,19 @@ content.ldJSON['@graph'].push(enterpriseService)
           <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
-          Ready to Scale
+          {m.ready_to_scale({}, { locale: Astro.locals.locale })}
         </div>
         
         <h2 class="text-4xl font-bold text-white sm:text-5xl lg:text-6xl mb-6">
           <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
-            Ready to deliver
+            {m.ready_to_deliver({}, { locale: Astro.locals.locale })}
           </span>
           <br />
-          <span class="text-white">updates at scale?</span>
+          <span class="text-white">{m.updates_at_scale({}, { locale: Astro.locals.locale })}</span>
         </h2>
         
         <p class="mt-6 text-xl text-gray-300 max-w-3xl mx-auto mb-10">
-          Join leading enterprises who trust Capgo to deliver secure, scalable live updates to millions of users worldwide.
+          {m.join_leading_enterprises({}, { locale: Astro.locals.locale })}
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -650,7 +650,7 @@ content.ldJSON['@graph'].push(enterpriseService)
               target="_blank"
               class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
             >
-              Request a Demo
+              {m.request_demo({}, { locale: Astro.locals.locale })}
               <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
@@ -661,12 +661,12 @@ content.ldJSON['@graph'].push(enterpriseService)
             href="mailto:enterprise@capgo.app"
             class="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-transparent px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-gray-800 hover:border-gray-200 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
           >
-            Contact Sales
+            {m.contact_sales({}, { locale: Astro.locals.locale })}
           </a>
         </div>
         
         <p class="mt-6 text-sm text-gray-400">
-          Get started with a personalized demo today. No commitment required.
+          {m.get_started_personalized_demo({}, { locale: Astro.locals.locale })}
         </p>
       </div>
     </div>

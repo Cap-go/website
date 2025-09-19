@@ -57,12 +57,11 @@ const content = {
     Astro.locals.runtimeConfig.public,
     {
       '@context': 'https://schema.org',
-      '@type': 'AboutPage',
-      '@id': `${Astro.locals.runtimeConfig.public.baseUrl}/about/#aboutpage`,
+      '@type': 'WebPage',
+      '@id': getRelativeLocaleUrl(Astro.locals.locale, '/about/#aboutpage'),
       name: title,
       description: 'Learn about Capgo, the live update solution for Capacitor apps, and meet founder Martin Donadieu.',
-      url: `${Astro.locals.runtimeConfig.public.baseUrl}/about/`,
-      mainEntity: enhancedOrg,
+      url: getRelativeLocaleUrl(Astro.locals.locale, '/about/'),
       breadcrumb: {
         '@type': 'BreadcrumbList',
         itemListElement: [
@@ -70,13 +69,13 @@ const content = {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: Astro.locals.runtimeConfig.public.baseUrl
+            item: getRelativeLocaleUrl(Astro.locals.locale, '/')
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'About',
-            item: `${Astro.locals.runtimeConfig.public.baseUrl}/about/`
+            item: getRelativeLocaleUrl(Astro.locals.locale, '/about/')
           }
         ]
       }
