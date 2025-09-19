@@ -156,11 +156,11 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                  title={m.cta_ship_update_now({}, { locale: Astro.locals.locale })}
+                  title={m.cta_start_free({}, { locale: Astro.locals.locale })}
                   class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
                   role="button"
                 >
-                  {m.cta_ship_update_now({}, { locale: Astro.locals.locale })}
+                  {m.cta_start_free({}, { locale: Astro.locals.locale })}
                 </a>
               </div>
               <p class="font-inter text-sm leading-6 text-gray-400">{ctaSubtext}</p>
@@ -1387,18 +1387,26 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             </div>
             <div class="sm:text-center md:w-1/2">
               <p class="text-xl tracking-tight text-white">
-                Deploy straight from your CI without app store delays.
+                {m.deploy_without_delays({}, { locale: Astro.locals.locale })}
               </p>
               <div class="mt-6 flex flex-col items-center gap-3 sm:items-center">
+              <div class="group relative inline-flex">
+                <div
+                  class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+                >
+                </div>
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-                  title={m.cta_launch_workspace({}, { locale: Astro.locals.locale })}
-                  class="mx-auto inline-block w-auto rounded-md border border-transparent bg-gray-900 px-5 py-3 text-base font-medium text-white shadow transition-colors duration-200 hover:bg-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 focus:outline-none sm:px-10"
+                  title={m.cta_push_updates({}, { locale: Astro.locals.locale })}
+                  class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+                  role="button"
                 >
-                  {m.cta_launch_workspace({}, { locale: Astro.locals.locale })}
+                  {m.cta_push_updates({}, { locale: Astro.locals.locale })}
                 </a>
+              </div>
                 <p class="text-sm tracking-tight text-white">{ctaSubtext}</p>
               </div>
+
             </div>
           </div>
         </div>
@@ -1498,16 +1506,17 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   </a>
                 </div>
                 <p class="text-sm text-gray-300">{ctaSubtext}</p>
-              </div>
               <a
                 href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
-                class="inline-flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 sm:self-start"
+                class="inline-flex items-center mx-auto gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 sm:self-start"
               >
                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                 </svg>
                 {m.migration_guide({}, { locale: Astro.locals.locale })}
               </a>
+              </div>
+
             </div>
           </div>
         </div>
