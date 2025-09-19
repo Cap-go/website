@@ -41,9 +41,9 @@ Falls der Init-Befehl für Sie nicht funktioniert, können Sie eine App manuell 
 
 2. Fügen Sie die App mit diesem Befehl zu Ihrem Konto hinzu: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. Installieren Sie das Plugin in Ihrer App: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3. Installieren Sie das Plugin in Ihrer App: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
 
-4. Rufen Sie die Init-Methode so früh wie möglich in Ihrer App auf: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+4. Rufen Sie die Init-Methode so früh wie möglich in Ihrer App auf: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
 5. Deployment eines Live-Updates <LinkCard href="/docs/getting-started/deploy/" title="Deploy a live update" description="Erfahren Sie, wie Sie ein Live-Update für Ihre App bereitstellen" />
 

@@ -39,9 +39,9 @@ init 명령어가 작동하지 않는 경우, 수동으로 앱을 추가할 수 
 
 2. 이 명령어로 계정에 앱을 추가하세요: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. 앱에 플러그인을 설치하세요: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3. 앱에 플러그인을 설치하세요: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
 
-4. 앱에서 가능한 한 빨리 init 메소드를 호출하세요: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+4. 앱에서 가능한 한 빨리 init 메소드를 호출하세요: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
 5. 실시간 업데이트 배포하기 <LinkCard href="/docs/getting-started/deploy/" title="실시간 업데이트 배포" description="앱에 실시간 업데이트를 배포하는 방법 알아보기" />
 

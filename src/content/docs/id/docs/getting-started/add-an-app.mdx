@@ -39,9 +39,9 @@ Jika perintah init tidak berhasil, Anda dapat menambahkan aplikasi secara manual
 
 2. Tambahkan aplikasi ke akun Anda dengan perintah ini: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. Pasang plugin di aplikasi Anda: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3. Pasang plugin di aplikasi Anda: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
 
-4. Panggil metode init sedini mungkin di aplikasi Anda: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+4. Panggil metode init sedini mungkin di aplikasi Anda: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
 5. Deploy live update <LinkCard href="/docs/getting-started/deploy/" title="Deploy live update" description="Pelajari cara deploy live update ke aplikasi Anda" />
 
