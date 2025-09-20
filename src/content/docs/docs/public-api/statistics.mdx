@@ -71,6 +71,7 @@ Get statistics for a specific organization. Useful for monitoring organization-l
 interface StatsQuery {
   from: Date  // Start date for the statistics (format: YYYY-MM-DD)
   to: Date    // End date for the statistics (format: YYYY-MM-DD)
+  breakdown: boolean  // optional if true it return the breakdown by app
 }
 ```
 
