@@ -41,9 +41,9 @@ Si la commande init ne fonctionne pas pour vous, vous pouvez ajouter une applica
 
 2. Ajoutez l'application à votre compte avec cette commande : <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. Installez le plugin dans votre application : <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3. Installez le plugin dans votre application : <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
 
-4. Appelez la méthode init le plus tôt possible dans votre application : <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+4. Appelez la méthode init le plus tôt possible dans votre application : <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
 5. Déployez une mise à jour en direct <LinkCard href="/docs/getting-started/deploy/" title="Déployer une mise à jour en direct" description="Apprenez comment déployer une mise à jour en direct pour votre application" />
 

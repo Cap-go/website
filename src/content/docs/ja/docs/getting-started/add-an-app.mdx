@@ -39,9 +39,9 @@ import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
 2. このコマンドでアプリをアカウントに追加: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. アプリにプラグインをインストール: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+3. アプリにプラグインをインストール: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
 
-4. アプリでできるだけ早く初期化メソッドを呼び出す: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdaternotifyAppReady();`} lang="typescript" />
+4. アプリでできるだけ早く初期化メソッドを呼び出す: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
 
 5. ライブアップデートをデプロイ <LinkCard href="/docs/getting-started/deploy/" title="ライブアップデートをデプロイ" description="アプリにライブアップデートをデプロイする方法を学ぶ" />
 
