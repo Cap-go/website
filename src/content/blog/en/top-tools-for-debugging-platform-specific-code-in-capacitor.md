@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-17T11:27:03.103Z
-updated_at: 2025-04-17T11:31:36.415Z
+updated_at: 2025-09-23T11:54:39.000Z
 head_image: https://assets.seobotai.com/capgo.app/680053ff28980901df1e733b-1744889496415.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, debugging tools, platform-specific code, VS Code, Android Studio, Xcode, live updates, web debugging
