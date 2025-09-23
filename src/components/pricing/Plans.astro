@@ -208,6 +208,12 @@ function priceDisplay(monthlyPrice: number, yearlyPrice: number, name: string) {
                     <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
                       <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
                     </svg>
+                    <span>{m.SLA({}, { locale: Astro.locals.locale })}</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                      <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                    </svg>
                     <span>{m.soc2_compliance({}, { locale: Astro.locals.locale })}</span>
                   </li>
                 </>

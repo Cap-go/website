@@ -8,6 +8,7 @@
   "Capacitor_Sanbox_App": "电容器沙盒应用",
   "Capacitor_Sanbox_App_description": "将您的应用程序的每个版本直接在沙箱应用中进行尝试。从口袋里管理您的电容器应用的OTA更新，适用于iOS和Android。",
   "GiB_included": "包含在GiB中",
+  "SLA": "服务级别协议（SLA）",
   "TB_included": "包括TiB",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "您的应用中有一个特定元素无法正常工作，而您不知道问题出在哪里以及如何解决它。",
   "aasa_tester": "AASA测试员",

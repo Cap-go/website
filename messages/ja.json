@@ -8,6 +8,7 @@
   "Capacitor_Sanbox_App": "キャパシタサンドボックスアプリ",
   "Capacitor_Sanbox_App_description": "サンドボックスアプリでアプリの各バージョンをすぐに試せます。ポケットからキャパシタアプリのOTAアップデートを管理でき、iOSとAndroidで利用可能です。",
   "GiB_included": "GiBを含む",
+  "SLA": "サービスレベルアグリーメント（SLA）",
   "TB_included": "TBが含まれています",
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "アプリの特定の要素が機能せず、問題の所在や修正方法がわからない。",
   "aasa_tester": "AASAテスター",

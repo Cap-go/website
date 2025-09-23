@@ -12,6 +12,7 @@
   "a_specific_element_of_your_app_doesn_t_work_and_you_don_t_know_where_the_problem_is_and_how_to_fix_it": "A specific element of your app doesn't work and you don't know where the problem is and how to fix it.",
   "aasa_tester": "AASA Tester",
   "about": "About",
+  "SLA": "Service Level Agreements (SLA)",
   "about_capgo": "About Capgo",
   "access_control": "Capgo inherits secure access control and authentication from the Supabase and Cloudflare platforms it is built on.",
   "achieve_consistent_design_and_implementation": "Achieve consistent design and implementation",
