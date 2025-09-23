@@ -1,0 +1,102 @@
+---
+title: Capacitor LLM Plugin
+description: Run LLM models locally in iOS and Android with Apple Intelligence support
+sidebar:
+  order: 1
+---
+
+import { LinkCard, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Capacitor LLM Plugin
+
+Run Large Language Models (LLMs) locally on iOS and Android devices, with support for Apple Intelligence.
+
+## Features
+
+- 🤖 Run LLM models directly on device
+- 🍎 Apple Intelligence integration on iOS
+- 🔒 Privacy-first: all processing happens locally
+- ⚡ Fast inference with hardware acceleration
+- 📱 Support for iOS and Android platforms
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Configuration
+
+### iOS Configuration
+
+No additional configuration required for iOS.
+
+### Android Configuration
+
+No additional configuration required for Android.
+
+## Usage
+
+```typescript
+import { CapacitorLLM } from '@capgo/capacitor-llm';
+
+// Initialize the LLM
+await CapacitorLLM.initialize({
+  modelPath: 'path/to/model'
+});
+
+// Generate text
+const result = await CapacitorLLM.generate({
+  prompt: 'What is the meaning of life?',
+  maxTokens: 100
+});
+
+console.log(result.text);
+```
+
+## API Reference
+
+Visit the [GitHub repository](https://github.com/Cap-go/capacitor-llm) for the full API documentation.
+
+## Platform Support
+
+| Platform | Supported |
+|----------|-----------|
+| iOS      | ✅        |
+| Android  | ✅        |
+| Web      | ❌        |
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](https://github.com/Cap-go/capacitor-llm/blob/main/CONTRIBUTING.md) for more details.
+
+## License
+
+This plugin is licensed under the MIT License. See [LICENSE](https://github.com/Cap-go/capacitor-llm/blob/main/LICENSE) for more information.
+
+## Support
+
+If you encounter any issues or have questions, please file an issue on our [GitHub repository](https://github.com/Cap-go/capacitor-llm/issues).

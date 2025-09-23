@@ -1,0 +1,104 @@
+---
+title: Capacitor GTM Plugin
+description: Google Tag Manager integration for analytics and tracking in Capacitor apps
+sidebar:
+  order: 1
+---
+
+import { LinkCard, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Capacitor GTM Plugin
+
+Integrate Google Tag Manager (GTM) into your Capacitor application for comprehensive analytics and tracking.
+
+## Features
+
+- 📊 Full Google Tag Manager integration
+- 🎯 Event tracking and custom dimensions
+- 📱 Native implementation for iOS and Android
+- 🔄 Real-time data collection
+- 🛠️ Easy configuration and setup
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Configuration
+
+### iOS Configuration
+
+Add your GTM configuration file to your iOS project.
+
+### Android Configuration
+
+Add your GTM configuration file to your Android project.
+
+## Usage
+
+```typescript
+import { CapacitorGTM } from '@capgo/capacitor-gtm';
+
+// Initialize GTM
+await CapacitorGTM.initialize({
+  containerId: 'GTM-XXXXXX'
+});
+
+// Track an event
+await CapacitorGTM.trackEvent({
+  event: 'purchase',
+  parameters: {
+    value: 99.99,
+    currency: 'USD',
+    transaction_id: '12345'
+  }
+});
+```
+
+## API Reference
+
+Visit the [GitHub repository](https://github.com/Cap-go/capacitor-gtm) for the full API documentation.
+
+## Platform Support
+
+| Platform | Supported |
+|----------|-----------|
+| iOS      | ✅        |
+| Android  | ✅        |
+| Web      | ✅        |
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](https://github.com/Cap-go/capacitor-gtm/blob/main/CONTRIBUTING.md) for more details.
+
+## License
+
+This plugin is licensed under the MIT License. See [LICENSE](https://github.com/Cap-go/capacitor-gtm/blob/main/LICENSE) for more information.
+
+## Support
+
+If you encounter any issues or have questions, please file an issue on our [GitHub repository](https://github.com/Cap-go/capacitor-gtm/issues).

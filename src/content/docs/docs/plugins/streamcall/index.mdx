@@ -1,0 +1,114 @@
+---
+title: Capacitor StreamCall Plugin
+description: Stream video calls with advanced streaming capabilities
+sidebar:
+  order: 1
+---
+
+import { LinkCard, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Capacitor StreamCall Plugin
+
+Enable high-quality video streaming and calling capabilities in your Capacitor application.
+
+## Features
+
+- 📹 High-quality video streaming
+- 🎤 Audio/video call support
+- 🔄 Real-time communication
+- 📱 Optimized for mobile devices
+- 🔒 Secure peer-to-peer connections
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-streamcall
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-streamcall
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-streamcall
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-streamcall
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Configuration
+
+### iOS Configuration
+
+Add camera and microphone permissions to your `Info.plist`:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>This app needs access to camera for video calls</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs access to microphone for calls</string>
+```
+
+### Android Configuration
+
+Add permissions to your `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+## Usage
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-streamcall';
+
+// Initialize a call
+const call = await StreamCall.initCall({
+  roomId: 'room-123',
+  userId: 'user-456'
+});
+
+// Start streaming
+await StreamCall.startStream();
+
+// End call
+await StreamCall.endCall();
+```
+
+## API Reference
+
+Visit the [GitHub repository](https://github.com/Cap-go/capacitor-streamcall) for the full API documentation.
+
+## Platform Support
+
+| Platform | Supported |
+|----------|-----------|
+| iOS      | ✅        |
+| Android  | ✅        |
+| Web      | ❌        |
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](https://github.com/Cap-go/capacitor-streamcall/blob/main/CONTRIBUTING.md) for more details.
+
+## License
+
+This plugin is licensed under the MIT License. See [LICENSE](https://github.com/Cap-go/capacitor-streamcall/blob/main/LICENSE) for more information.
+
+## Support
+
+If you encounter any issues or have questions, please file an issue on our [GitHub repository](https://github.com/Cap-go/capacitor-streamcall/issues).

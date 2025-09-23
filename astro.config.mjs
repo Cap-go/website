@@ -40,13 +40,6 @@ export default defineConfig({
       destination: '/docs/getting-started/quickstart',
     },
   },
-  plugins: [
-    paraglideVitePlugin({
-      outdir: './src/paraglide',
-      project: './project.inlang',
-      disableAsyncLocalStorage: true,
-    }),
-  ],
   i18n: {
     locales,
     defaultLocale,
@@ -277,6 +270,159 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Shake',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/shake/' },
+                { label: 'Getting started', link: '/docs/plugins/shake/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Data Storage SQLite',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/data-storage-sqlite/' },
+                { label: 'Getting started', link: '/docs/plugins/data-storage-sqlite/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Native Purchases',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/native-purchases/' },
+                { label: 'Getting started', link: '/docs/plugins/native-purchases/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Navigation Bar',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/navigation-bar/' },
+                { label: 'Getting started', link: '/docs/plugins/navigation-bar/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Home Indicator',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/home-indicator/' },
+                { label: 'Getting started', link: '/docs/plugins/home-indicator/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'IVS Player',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ivs-player/' },
+                { label: 'Getting started', link: '/docs/plugins/ivs-player/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'LLM',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/llm/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'GTM',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/gtm/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'StreamCall',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/streamcall/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'JW Player',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/jw-player/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Ricoh 360 Camera',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ricoh360-camera/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Background Geolocation',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/background-geolocation/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Alarm',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/alarm/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Twilio Voice',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/twilio-voice/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Is Root',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/is-root/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Persistent Account',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/persistent-account/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Android Usage Stats',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/android-usagestatsmanager/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Android Inline Install',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/android-inline-install/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Downloader',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/downloader/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Launch Navigator',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/launch-navigator/' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Autofill Save Password',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/autofill-save-password/' },
+              ],
+              collapsed: true,
+            },
+            {
               label: '👋 Get a custom plugin',
               link: '/consulting/',
             },
@@ -317,6 +463,13 @@ export default defineConfig({
     host: '0.0.0.0',
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),     
+      paraglideVitePlugin({
+        outdir: './src/paraglide',
+        project: './project.inlang',
+        disableAsyncLocalStorage: true,
+      }),
+    ],
   },
 })
