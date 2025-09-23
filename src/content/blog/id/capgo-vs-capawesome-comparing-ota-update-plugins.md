@@ -20,7 +20,7 @@ published: true
 locale: id
 next_blog: ''
 ---
-**Ingin memperbarui aplikasi Anda tanpa menunggu persetujuan toko aplikasi?** Plugin pembaruan Over-the-Air (OTA) menjadikannya mungkin. Dua opsi terkemuka adalah **[Capgo](https://capgo.app/)** dan **[Capawesome](https://capawesome.io/plugins/live-update/)**. Berikut adalah ringkasan cepat untuk membantu Anda memilih:
+**Ingin memperbarui aplikasi Anda tanpa menunggu persetujuan toko aplikasi?** Plugin pembaruan Over-the-Air (OTA) menjadikannya mungkin. Dua opsi terkemuka adalah **[Capgo](https://capgo.app/)** dan **Capawesome*. Berikut adalah ringkasan cepat untuk membantu Anda memilih:
 
 -   **Capgo**: Terbaik untuk tim yang membutuhkan fitur canggih seperti [pembaruan berbasis saluran](https://capgo.app/docs/webapp/channels/), pengembalian dengan satu klik, analitik real-time, dan enkripsi end-to-end. Paket mulai dari $12/bulan.
 -   **Capawesome**: Setup yang lebih sederhana, bagus untuk tim kecil atau penerapan lokal, terutama populer di Jerman.

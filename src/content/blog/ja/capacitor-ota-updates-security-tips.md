@@ -28,7 +28,7 @@ next_blog: ''
 
 ### OTAプラットフォームの比較:
 
-| 機能 | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | [Capawesome](https://cloud.capawesome.io/) |
+| 機能 | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | エンドツーエンド暗号化 | あり | なし | なし |
 | ロールバック機能 | 即時 | 手動 | 手動 |

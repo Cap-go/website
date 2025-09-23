@@ -262,7 +262,7 @@ Gli strumenti di debug aiutano a identificare i problemi, ma un sistema di aggio
 
 Ecco come si confrontano i sistemi di aggiornamento:
 
-| Metrica Chiave | Capgo | [Appflow](https://ionic.io/appflow/) | [Capawesome](https://capawesome.io/) |
+| Metrica Chiave | Capgo | [Appflow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | Velocità Aggiornamento | 114ms media consegna per bundle 5MB [\[1\]](https://capgo.app/) | Non divulgato pubblicamente | Non divulgato pubblicamente |
 | Adozione Utenti | 95% entro 24h [\[1\]](https://capgo.app/) | Non divulgato pubblicamente | Non divulgato pubblicamente |

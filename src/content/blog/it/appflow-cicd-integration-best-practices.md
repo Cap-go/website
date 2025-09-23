@@ -160,7 +160,7 @@ Capgo distribuisce aggiornamenti in modo impressionante veloce, raggiungendo 114
 
 Mentre Capgo offre prezzi e prestazioni competitivi, altre piattaforme si rivolgono a regioni specifiche o si basano su metodi più datati.
 
-### Focus di Mercato di [Capawesome](https://capawesome.io/)
+### Focus di Mercato di Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

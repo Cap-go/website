@@ -27,7 +27,7 @@ next_blog: ''
 
 ### OTAツールの比較
 
-| 機能 | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) |
+| 機能 | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | **開始年** | 2022 | 2024 | 2026年終了予定 |
 | **エンドツーエンド暗号化** | あり | なし | なし |

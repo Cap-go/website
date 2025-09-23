@@ -21,7 +21,7 @@ published: true
 locale: es
 next_blog: ''
 ---
-**¿Quieres actualizar tu aplicación sin esperar las aprobaciones de la tienda de aplicaciones?** Los complementos de actualización por aire (OTA) lo hacen posible. Dos opciones líderes son **[Capgo](https://capgo.app/)** y **[Capawesome](https://capawesome.io/plugins/live-update/)**. Aquí tienes un resumen rápido para ayudarte a elegir:
+**¿Quieres actualizar tu aplicación sin esperar las aprobaciones de la tienda de aplicaciones?** Los complementos de actualización por aire (OTA) lo hacen posible. Dos opciones líderes son **[Capgo](https://capgo.app/)** y **Capawesome*. Aquí tienes un resumen rápido para ayudarte a elegir:
 
 -   **Capgo**: Mejor para equipos que necesitan funciones avanzadas como [actualizaciones basadas en canales](https://capgo.app/docs/webapp/channels/), retrocesos con un clic, análisis en tiempo real y cifrado de extremo a extremo. Los planes comienzan en $12/mes.
 -   **Capawesome**: Configuración más simple, ideal para equipos más pequeños o implementaciones localizadas, especialmente popular en Alemania.

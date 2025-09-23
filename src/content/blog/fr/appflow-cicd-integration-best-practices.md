@@ -160,7 +160,7 @@ Capgo fournit des mises à jour de manière impressionnante rapide, avec un temp
 
 Bien que Capgo offre des prix et des performances compétitifs, d'autres plates-formes s'adressent à des régions spécifiques ou s'appuient sur des méthodes plus anciennes.
 
-### [Capawesome](https://capawesome.io/) Focalisation du Marché
+### Capawesome Focalisation du Marché
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

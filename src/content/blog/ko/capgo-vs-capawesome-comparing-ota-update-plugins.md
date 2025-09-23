@@ -18,7 +18,7 @@ published: true
 locale: ko
 next_blog: ''
 ---
-**앱 스토어 승인 없이 앱을 업데이트하고 싶으신가요?** OTA(Over-the-Air) 업데이트 플러그인이 이를 가능하게 합니다. 두 가지 주요 옵션은 **[Capgo](https://capgo.app/)**와 **[Capawesome](https://capawesome.io/plugins/live-update/)**입니다. 선택할 수 있도록 간략한 요약을 제공합니다:
+**앱 스토어 승인 없이 앱을 업데이트하고 싶으신가요?** OTA(Over-the-Air) 업데이트 플러그인이 이를 가능하게 합니다. 두 가지 주요 옵션은 **[Capgo](https://capgo.app/)**와 **Capawesome*입니다. 선택할 수 있도록 간략한 요약을 제공합니다:
 
 1. **Capgo**: [채널 기반 업데이트](https://capgo.app/docs/webapp/channels/), 원클릭 롤백, 실시간 분석 및 종단 간 암호화와 같은 고급 기능이 필요한 팀에 가장 적합합니다. 요금제는 월 $12부터 시작합니다.
 2. **Capawesome**: 설정이 간단하고, 소규모 팀이나 로컬 배포에 적합하며, 특히 독일에서 인기가 많습니다.

@@ -166,7 +166,7 @@ Quando si valutano le piattaforme per aggiornamenti OTA, è essenziale considera
 
 ### Matrice delle Funzionalità delle Piattaforme
 
-| Funzionalità | Capgo | [Capawesome](https://cloud.capawesome.io/) | Appflow | CodePush |
+| Funzionalità | Capgo | Capawesome | Appflow | CodePush |
 |---|---|---|---|---|
 | **Stato Attivo** | Operativa dal 2022 | Operativa dal 2024 | Chiusura 2026 | Chiuso 2024 |
 | **Crittografia End-to-End** | Sì | No | No | No |

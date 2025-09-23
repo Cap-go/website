@@ -40,7 +40,7 @@ next_blog: ''
 
 **プロのヒント:** 完全なデプロイメントの前に、小規模なユーザーグループでアップデートをテストするために段階的なロールアウトを使用してください。Capgoのツールでこのプロセスをスムーズかつ安全に行えます。
 
-## [Capawesome](https://capawesome.io/)の新しいIonic [Capacitor](https://capacitorjs.com/) ライブアップデート...
+## Capawesomeの新しいIonic [Capacitor](https://capacitorjs.com/) ライブアップデート...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

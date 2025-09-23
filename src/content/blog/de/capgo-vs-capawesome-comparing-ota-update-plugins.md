@@ -21,7 +21,7 @@ published: true
 locale: de
 next_blog: ''
 ---
-**Möchten Sie Ihre App aktualisieren, ohne auf die Genehmigungen des App-Stores warten zu müssen?** Over-the-Air (OTA) Update-Plugins machen dies möglich. Zwei führende Optionen sind **[Capgo](https://capgo.app/)** und **[Capawesome](https://capawesome.io/plugins/live-update/)**. Hier ist eine kurze Übersicht, die Ihnen bei der Auswahl hilft:
+**Möchten Sie Ihre App aktualisieren, ohne auf die Genehmigungen des App-Stores warten zu müssen?** Over-the-Air (OTA) Update-Plugins machen dies möglich. Zwei führende Optionen sind **[Capgo](https://capgo.app/)** und **Capawesome*. Hier ist eine kurze Übersicht, die Ihnen bei der Auswahl hilft:
 
 1. **Capgo**: Am besten für Teams, die erweiterte Funktionen wie [kanalbasierte Updates](https://capgo.app/docs/webapp/channels/), Ein-Klick-Rollbacks, Echtzeitanalysen und Ende-zu-Ende-Verschlüsselung benötigen. Die Pläne beginnen bei 12 USD/Monat.
 2. **Capawesome**: Einfachere Einrichtung, ideal für kleinere Teams oder lokale Bereitstellungen, besonders beliebt in Deutschland.

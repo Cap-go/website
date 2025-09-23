@@ -160,7 +160,7 @@ Capgo entrega actualizaciones de manera sorprendentemente rápida, con un tiempo
 
 Mientras Capgo ofrece precios y rendimiento competitivos, otras plataformas atienden regiones específicas o dependen de métodos más antiguos.
 
-### Enfoque de Mercado de [Capawesome](https://capawesome.io/)
+### Enfoque de Mercado de Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

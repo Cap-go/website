@@ -31,7 +31,7 @@ next_blog: ''
 
 ### Confronto Rapido delle Piattaforme OTA:
 
-| Funzionalità | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | [Capawesome](https://cloud.capawesome.io/) |
+| Funzionalità | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | Crittografia End-to-End | Sì | No | No |
 | Capacità di Rollback | Istantaneo | Manuale | Manuale |

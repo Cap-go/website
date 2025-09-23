@@ -33,7 +33,7 @@ next_blog: ''
 
 **Comparaison rapide** :
 
-| Fonctionnalité | Capgo (Plan TEAM) | [Appflow](https://ionic.io/appflow/) | [Capawesome](https://capawesome.io/) |
+| Fonctionnalité | Capgo (Plan TEAM) | [Appflow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | Coût annuel | 996 € | 6 000 € | Similaire à Capgo |
 | Chiffrement | Bout en bout | Signature basique | Signature basique |

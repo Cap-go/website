@@ -45,7 +45,7 @@ next_blog: ''
 
 Avec des plateformes comme Capgo offrant des mises à jour rapides (95% d'adoption par les utilisateurs en 24 heures) et des prix abordables, la gestion des mises à jour OTA n'a jamais été aussi efficace.
 
-## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) Ionic de [Capawesome](https://capawesome.io/) ...
+## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) Ionic de Capawesome ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

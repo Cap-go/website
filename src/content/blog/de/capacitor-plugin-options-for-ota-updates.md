@@ -33,7 +33,7 @@ next_blog: ''
 ### Top-Plugins für OTA-Updates:
 
 1.  **[Capgo](https://capgo.app/)**: Schnelle Updates (5 MB in 114 ms), End-to-End-Verschlüsselung, Echtzeitanalysen und flexible Preisgestaltung (ab 12 $/Monat).
-2.  **[Capawesome](https://capawesome.io/plugins/live-update/)**: Fokussiert auf den deutschen Markt mit wettbewerbsfähigen Preisen und moderner Architektur (veröffentlicht 2024).
+2.  **Capawesome*: Fokussiert auf den deutschen Markt mit wettbewerbsfähigen Preisen und moderner Architektur (veröffentlicht 2024).
 3.  **[Appflow](https://ionic.io/appflow/)**: Funktionen auf Unternehmensniveau für 6.000 $/Jahr, aber Einstellung 2026.
 4.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: 2024 eingestellt.
 
@@ -68,7 +68,7 @@ Hier ist, was Capgo bietet:
 
 Andere Plugins richten sich ebenfalls an spezifische Bedürfnisse und Regionen.
 
-### [Capawesome](https://capawesome.io/plugins/live-update/) Live-Update-Plugin
+### CapawesomeLive-Update-Plugin
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/b001a5727fc0f3dc796b9522055deb7e.jpg)
 

@@ -155,7 +155,7 @@ Capgo delivers updates impressively fast, clocking in at 114 ms for 5 MB bundles
 
 While Capgo offers competitive pricing and performance, other platforms cater to specific regions or rely on older methods.
 
-### [Capawesome](https://capawesome.io/) Market Focus
+### Capawesome Market Focus
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

@@ -41,7 +41,7 @@ next_blog: ''
 
 **Kiat Pro:** Gunakan peluncuran bertahap untuk menguji pembaruan pada kelompok pengguna kecil sebelum penerapan penuh. Alat Capgo membuat proses ini lancar dan aman.
 
-## Jelajahi Pembaruan Langsung [Capacitor](https://capacitorjs.com/) Ionic Baru dari [Capawesome](https://capawesome.io/) ...
+## Jelajahi Pembaruan Langsung [Capacitor](https://capacitorjs.com/) Ionic Baru dari Capawesome ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

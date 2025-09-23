@@ -33,7 +33,7 @@ next_blog: ''
 ### Migliori Plugin per Aggiornamenti OTA:
 
 1. **[Capgo](https://capgo.app/)**: Aggiornamenti veloci (5MB in 114ms), crittografia end-to-end, analytics in tempo reale e prezzi flessibili (a partire da 12€/mese).
-2. **[Capawesome](https://capawesome.io/plugins/live-update/)**: Focalizzato sul mercato tedesco con prezzi competitivi e architettura moderna (lanciato nel 2024).
+2. **Capawesome*: Focalizzato sul mercato tedesco con prezzi competitivi e architettura moderna (lanciato nel 2024).
 3. **[Appflow](https://ionic.io/appflow/)**: Funzionalità enterprise a 6.000€/anno ma chiuderà nel 2026.
 4. **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: Discontinuato nel 2024.
 

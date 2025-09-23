@@ -31,7 +31,7 @@ next_blog: ''
 
 ### Schneller Vergleich von OTA-Plattformen:
 
-| Funktion | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | [Capawesome](https://cloud.capawesome.io/) |
+| Funktion | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | Ende-zu-Ende-Verschlüsselung | Ja | Nein | Nein |
 | Rollback-Funktion | Sofort | Manuell | Manuell |

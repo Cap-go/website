@@ -40,7 +40,7 @@ next_blog: ''
 
 **프로 팁:** 전체 배포 전에 작은 사용자 그룹에서 업데이트를 테스트하기 위해 단계적 출시를 사용하세요. Capgo의 도구로 이 프로세스를 원활하고 안전하게 만들 수 있습니다.
 
-## [Capawesome](https://capawesome.io/)의 새로운 Ionic [Capacitor](https://capacitorjs.com/) 라이브 업데이트 살펴보기...
+## Capawesome의 새로운 Ionic [Capacitor](https://capacitorjs.com/) 라이브 업데이트 살펴보기...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

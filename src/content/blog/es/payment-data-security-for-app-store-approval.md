@@ -24,7 +24,7 @@ next_blog: ''
 **¿Quieres que tu aplicación sea aprobada por Apple o Google? Comienza con datos de pago seguros.** Las tiendas de aplicaciones exigen **cifrado de extremo a extremo** para los datos de pago para cumplir con los estándares de cumplimiento. Sin ello, tu aplicación podría enfrentar rechazo o eliminación. Esto es lo que necesitas saber:
 
 -   **[Capgo](https://capgo.app/)**: Ofrece cifrado de extremo a extremo verdadero, controles de reversión y [opciones de autoalojamiento](https://capgo.app/blog/self-hosted-capgo/). Cuesta $2,600 por adelantado + $300/mes.
--   **[Capawesome](https://capawesome.io/)**: Utiliza firma criptográfica pero carece de cifrado completo. Está dirigido al mercado alemán.
+-   **Capawesome**: Utiliza firma criptográfica pero carece de cifrado completo. Está dirigido al mercado alemán.
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: Cifrado parcial, rendimiento inconsistente y $6,000/año. Programado para retirarse en 2026.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: Discontinuado en 2024, sin cifrado de extremo a extremo.
 
@@ -62,7 +62,7 @@ Al descargar solo los componentes que han cambiado, Capgo minimiza riesgos y red
 
 A continuación, veamos cómo Capawesome aborda la seguridad de los datos de pago.
 
-## 2. [Capawesome](https://capawesome.io/)
+## 2. Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

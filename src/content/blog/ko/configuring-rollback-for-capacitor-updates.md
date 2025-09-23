@@ -37,7 +37,7 @@ next_blog: ''
 
 ### 플랫폼 비교:
 
-**[Capgo](https://capgo.app/)**는 원클릭 롤백, 암호화, 실시간 분석 및 유연한 호스팅을 제공합니다. **[Capawesome](https://cloud.capawesome.io/)**이나 **[Appflow](https://ionic.io/appflow/)**와 같은 대안은 기능이 부족하거나 비용이 더 높습니다.
+**[Capgo](https://capgo.app/)**는 원클릭 롤백, 암호화, 실시간 분석 및 유연한 호스팅을 제공합니다. **Capawesome**이나 **[Appflow](https://ionic.io/appflow/)**와 같은 대안은 기능이 부족하거나 비용이 더 높습니다.
 
 **빠른 비교표:**
 

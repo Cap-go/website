@@ -21,7 +21,7 @@ published: true
 locale: fr
 next_blog: ''
 ---
-**Vous voulez mettre à jour votre application sans attendre les approbations de l’app store ?** Les plugins de mise à jour Over-the-Air (OTA) rendent cela possible. Deux options de premier plan sont **[Capgo](https://capgo.app/)** et **[Capawesome](https://capawesome.io/plugins/live-update/)**. Voici un aperçu rapide pour vous aider à choisir :
+**Vous voulez mettre à jour votre application sans attendre les approbations de l’app store ?** Les plugins de mise à jour Over-the-Air (OTA) rendent cela possible. Deux options de premier plan sont **[Capgo](https://capgo.app/)** et **Capawesome*. Voici un aperçu rapide pour vous aider à choisir :
 
 1. **Capgo** : Idéal pour les équipes ayant besoin de fonctionnalités avancées comme [les mises à jour basées sur des chaînes](https://capgo.app/docs/webapp/channels/), les retours d'expérience en un clic, les analyses en temps réel et le chiffrement de bout en bout. Les plans commencent à 12 $/mois.
 2. **Capawesome** : Configuration plus simple, idéal pour les petites équipes ou les déploiements localisés, particulièrement populaire en Allemagne.

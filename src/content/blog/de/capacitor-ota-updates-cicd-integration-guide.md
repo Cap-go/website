@@ -33,7 +33,7 @@ next_blog: ''
 
 ### Schneller Vergleich von OTA-Plattformen:
 
-| Funktion | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| Funktion | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Status | Aktiv | Aktiv | Einstellung 2026 | Eingestellt 2024 |
 | Update-Geschwindigkeit | 114ms | Standard | Schwankend | N/A |

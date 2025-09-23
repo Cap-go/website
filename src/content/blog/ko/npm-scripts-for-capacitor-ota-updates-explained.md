@@ -42,7 +42,7 @@ next_blog: ''
 
 Capgo와 같은 플랫폼은 빠른 업데이트(24시간 내 95% 사용자 적용)와 합리적인 가격을 제공하여 OTA 업데이트 관리가 그 어느 때보다 효율적이 되었습니다.
 
-## [Capawesome](https://capawesome.io/)의 새로운 Ionic [Capacitor](https://capacitorjs.com/) 라이브 업데이트 탐색...
+## Capawesome의 새로운 Ionic [Capacitor](https://capacitorjs.com/) 라이브 업데이트 탐색...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

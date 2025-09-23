@@ -38,7 +38,7 @@ next_blog: ''
 
 Capgo a déjà géré **23,5M de mises à jour sur 750 applications** avec des vitesses de téléchargement rapides (114ms pour un bundle de 5MB). Commencez à surveiller vos mises à jour aujourd'hui pour une gestion plus fluide des applications.
 
-## Découvrez la nouvelle mise à jour en direct [Capawesome](https://capawesome.io/) pour [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) ...
+## Découvrez la nouvelle mise à jour en direct Capawesome pour [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 

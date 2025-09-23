@@ -36,7 +36,7 @@ next_blog: ''
 
 ### プラットフォーム比較：
 
-**[Capgo](https://capgo.app/)** は、ワンクリックロールバック、暗号化、リアルタイム分析、柔軟なホスティングを提供します。**[Capawesome](https://cloud.capawesome.io/)** や **[Appflow](https://ionic.io/appflow/)** のような代替品は、機能が不足しているか、コストが高くなっています。
+**[Capgo](https://capgo.app/)** は、ワンクリックロールバック、暗号化、リアルタイム分析、柔軟なホスティングを提供します。**Capawesome** や **[Appflow](https://ionic.io/appflow/)** のような代替品は、機能が不足しているか、コストが高くなっています。
 
 **クイック比較表：**
 

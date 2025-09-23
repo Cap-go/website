@@ -45,11 +45,11 @@ To make the most of your [Capacitor update rollouts](https://capgo.app/plugins/c
 
 ### Core Components of Capacitor Updates
 
-Capacitor apps consist of two main layers: a **web layer** (built with HTML, CSS, and JavaScript) that handles the user interface and logic, and a **native layer** (written in Java or Swift)[\[1\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work) that provides access to device features through a native bridge.
+Capacitor apps consist of two main layers: a **web layer** (built with HTML, CSS, and JavaScript) that handles the user interface and logic, and a **native layer** (written in Java or Swift)\[1\] that provides access to device features through a native bridge.
 
-One major advantage of Capacitor is its ability to update web assets at runtime, as these assets aren’t part of the compiled app binary[\[1\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work). This means you can refresh your app’s design or functionality without altering the native code or waiting for app store approvals.
+One major advantage of Capacitor is its ability to update web assets at runtime, as these assets aren’t part of the compiled app binary\[1\]. This means you can refresh your app’s design or functionality without altering the native code or waiting for app store approvals.
 
-The native bridge plays a crucial role by enabling communication between the web layer and the device’s native features. Capacitor also includes tools to manage [WebView](https://en.wikipedia.org/wiki/WebView) behavior, allowing you to specify which files to load - whether from the current or a new server path[\[1\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work). This ensures you have precise control over how updates are deployed and loaded efficiently.
+The native bridge plays a crucial role by enabling communication between the web layer and the device’s native features. Capacitor also includes tools to manage [WebView](https://en.wikipedia.org/wiki/WebView) behavior, allowing you to specify which files to load - whether from the current or a new server path\[1\]. This ensures you have precise control over how updates are deployed and loaded efficiently.
 
 ## Strategies for Faster Update Rollouts
 

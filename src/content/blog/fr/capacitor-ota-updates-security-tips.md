@@ -31,7 +31,7 @@ next_blog: ''
 
 ### Comparaison rapide des plateformes OTA :
 
-| Fonctionnalité | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | [Capawesome](https://cloud.capawesome.io/) |
+| Fonctionnalité | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | Chiffrement de bout en bout | Oui | Non | Non |
 | Capacité de restauration | Instantanée | Manuelle | Manuelle |

@@ -54,7 +54,7 @@ Continua a leggere per i passi dettagliati di integrazione, le funzionalità e l
 
 ![Firebase Auth](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/20003c863a77b942b90536c0e5cde156.jpg)
 
-Firebase Authentication offre un modo potente per gestire sessioni sicure per le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Integrando gli SDK nativi di Firebase (Swift per iOS, Java per Android) insieme all'SDK JavaScript di Firebase per web, garantisce un'esperienza di autenticazione fluida e coerente su tutte le piattaforme [\[4\]](https://capawesome.io/plugins/firebase/authentication).
+Firebase Authentication offre un modo potente per gestire sessioni sicure per le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Integrando gli SDK nativi di Firebase (Swift per iOS, Java per Android) insieme all'SDK JavaScript di Firebase per web, garantisce un'esperienza di autenticazione fluida e coerente su tutte le piattaforme [\[4\]](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication).
 
 Ecco alcune delle caratteristiche di sicurezza più rilevanti:
 

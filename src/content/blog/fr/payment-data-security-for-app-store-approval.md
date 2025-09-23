@@ -24,7 +24,7 @@ next_blog: ''
 **Vous voulez faire approuver votre application par Apple ou Google ? Commencez par des données de paiement sécurisées.** Les stores d'applications exigent un **chiffrement de bout en bout** pour les données de paiement afin de respecter les normes de conformité. Sans cela, votre application pourrait être rejetée ou retirée. Voici ce que vous devez savoir :
 
 -   **[Capgo](https://capgo.app/)** : Offre un véritable chiffrement de bout en bout, des contrôles de retour en arrière et des [options d'auto-hébergement](https://capgo.app/blog/self-hosted-capgo/). Coûte 2 600 $ d'avance + 300 $/mois.
--   **[Capawesome](https://capawesome.io/)** : Utilise une signature cryptographique mais manque de chiffrement complet. Vise le marché allemand.
+-   **Capawesome** : Utilise une signature cryptographique mais manque de chiffrement complet. Vise le marché allemand.
 -   **[Appflow](https://ionic.io/appflow/live-updates)** : Chiffrement partiel, performance incohérente, et 6 000 $/an. Prévu pour être retiré en 2026.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)** : Arrêté en 2024, pas de chiffrement de bout en bout.
 
@@ -62,7 +62,7 @@ En téléchargeant uniquement les composants qui ont changé, Capgo minimise les
 
 Ensuite, examinons comment Capawesome aborde la sécurité des données de paiement.
 
-## 2. [Capawesome](https://capawesome.io/)
+## 2. Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

@@ -19,7 +19,7 @@ next_blog: ''
 **Want your app approved by Apple or Google? Start with secure payment data.** App stores demand **end-to-end encryption** for payment data to meet compliance standards. Without it, your app could face rejection or removal. Here's what you need to know:
 
 -   **[Capgo](https://capgo.app/)**: Offers true end-to-end encryption, rollback controls, and [self-hosting options](https://capgo.app/blog/self-hosted-capgo/). Costs $2,600 upfront + $300/month.
--   **[Capawesome](https://capawesome.io/)**: Uses cryptographic signing but lacks full encryption. Targets the German market.
+-   **Capawesome**: Uses cryptographic signing but lacks full encryption. Targets the German market.
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: Partial encryption, inconsistent performance, and $6,000/year. Scheduled to retire in 2026.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: Discontinued in 2024, no end-to-end encryption.
 
@@ -57,7 +57,7 @@ By downloading only the components that have changed, Capgo minimizes risks and 
 
 Next, let’s look at how Capawesome addresses payment data security.
 
-## 2\. [Capawesome](https://capawesome.io/)
+## 2\. Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

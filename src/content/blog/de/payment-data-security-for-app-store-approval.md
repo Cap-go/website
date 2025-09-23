@@ -24,7 +24,7 @@ next_blog: ''
 **Möchten Sie, dass Ihre App von Apple oder Google genehmigt wird? Beginnen Sie mit sicheren Zahlungsdaten.** App Stores verlangen **Ende-zu-Ende-Verschlüsselung** für Zahlungsdaten, um Compliance-Standards zu erfüllen. Ohne diese könnte Ihre App abgelehnt oder entfernt werden. Hier ist, was Sie wissen müssen:
 
 -   **[Capgo](https://capgo.app/)**: Bietet echte Ende-zu-Ende-Verschlüsselung, Rollback-Kontrollen und [Self-Hosting-Optionen](https://capgo.app/blog/self-hosted-capgo/). Kostet 2.600 $ Einrichtung + 300 $/Monat.
--   **[Capawesome](https://capawesome.io/)**: Verwendet kryptografische Signierung, aber keine vollständige Verschlüsselung. Zielt auf den deutschen Markt ab.
+-   **Capawesome**: Verwendet kryptografische Signierung, aber keine vollständige Verschlüsselung. Zielt auf den deutschen Markt ab.
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: Teilweise Verschlüsselung, unbeständige Leistung und 6.000 $/Jahr. Wird 2026 eingestellt.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: 2024 eingestellt, keine Ende-zu-Ende-Verschlüsselung.
 
@@ -62,7 +62,7 @@ Durch das Herunterladen nur der geänderten Komponenten minimiert Capgo Risiken 
 
 Als Nächstes schauen wir uns an, wie Capawesome die Sicherheit von Zahlungsdaten handhabt.
 
-## 2. [Capawesome](https://capawesome.io/)
+## 2. Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

@@ -45,7 +45,7 @@ Les mises à jour Over-The-Air (OTA) vous permettent de livrer des correctifs et
 
 ### Comparaison des outils :
 
-| Fonctionnalité | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) (Fermeture en 2026) | Microsoft CodePush (Arrêté en 2024) |
+| Fonctionnalité | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) (Fermeture en 2026) | Microsoft CodePush (Arrêté en 2024) |
 | --- | --- | --- | --- | --- |
 | **Focus marché** | Global | Marché allemand | Entreprise | \- |
 | **Sécurité** | Chiffrement de bout en bout | Signature basique | Signature basique | \- |
@@ -57,6 +57,6 @@ Capgo se démarque avec des mises à jour rapides (95% dans les 24 heures), une 
 
 Les mises à jour OTA font gagner du temps, améliorent l'expérience utilisateur et assurent la stabilité des applications. En utilisant des outils comme Capgo, vous pouvez livrer des mises à jour rapides et sécurisées tout en respectant les règles des stores.
 
-## Explorez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) de [Capawesome](https://capawesome.io/) pour Ionic...
+## Explorez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) de Capawesome pour Ionic...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)

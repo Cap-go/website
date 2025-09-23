@@ -33,7 +33,7 @@ next_blog: ''
 
 ### Perbandingan Cepat Platform OTA:
 
-| Fitur | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| Fitur | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Status | Aktif | Aktif | Tutup 2026 | Dihentikan 2024 |
 | Kecepatan Update | 114ms | Standar | Berfluktuasi | N/A |

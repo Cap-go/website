@@ -45,7 +45,7 @@ next_blog: ''
 
 Dengan platform seperti Capgo yang menawarkan pembaruan cepat (95% adopsi pengguna dalam 24 jam) dan harga terjangkau, mengelola pembaruan OTA belum pernah seefisien ini.
 
-## Jelajahi [Capawesome](https://capawesome.io/) Live Update [Capacitor](https://capacitorjs.com/) Ionic Baru ...
+## Jelajahi Capawesome Live Update [Capacitor](https://capacitorjs.com/) Ionic Baru ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

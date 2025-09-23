@@ -30,7 +30,7 @@ next_blog: ''
 
 ### Comparaison rapide des outils OTA
 
-| Fonctionnalité | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) |
+| Fonctionnalité | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | **Année de lancement** | 2022 | 2024 | Fermeture en 2026 |
 | **Chiffrement de bout en bout** | Oui | Non | Non |

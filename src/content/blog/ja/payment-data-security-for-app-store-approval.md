@@ -22,7 +22,7 @@ next_blog: ''
 **AppleやGoogleによるアプリの承認がほしいですか？安全な支払いデータから始めましょう。** アプリストアは、コンプライアンス基準を満たすために **エンドツーエンド暗号化**を支払いデータに求めています。それがないと、アプリは拒否されたり、削除されたりする可能性があります。知っておくべきことは以下の通りです：
 
 -   **[Capgo](https://capgo.app/)**: 真のエンドツーエンド暗号化、ロールバックコントロール、および [セルフホスティングオプション](https://capgo.app/blog/self-hosted-capgo/)を提供します。初期費用は$2,600 + 月額$300です。
--   **[Capawesome](https://capawesome.io/)**: 暗号署名を使用していますが、完全な暗号化はありません。ドイツ市場をターゲットとしています。
+-   **Capawesome**: 暗号署名を使用していますが、完全な暗号化はありません。ドイツ市場をターゲットとしています。
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: 部分的な暗号化、一貫性のないパフォーマンス、年額$6,000です。2026年に廃止予定です。
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: 2024年に終了、エンドツーエンド暗号化なし。
 
@@ -60,7 +60,7 @@ Capgoのアプローチは、アップデートデプロイメントの82%のグ
 
 次に、Capawesomeが支払いデータのセキュリティにどのように対処しているかを見ていきましょう。
 
-## 2. [Capawesome](https://capawesome.io/)
+## 2. Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

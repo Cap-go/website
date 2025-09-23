@@ -41,7 +41,7 @@ next_blog: ''
 
 **Profi-Tipp:** Nutzen Sie stufenweise Rollouts, um Updates an kleinen Nutzergruppen zu testen, bevor Sie sie vollständig ausrollen. Capgos Tools machen diesen Prozess reibungslos und sicher.
 
-## Entdecken Sie [Capawesome](https://capawesome.io/)'s neues Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
+## Entdecken Sie Capawesome's neues Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

@@ -124,7 +124,7 @@ Capgo ofrece una solución para equipos que buscan agilizar el control de versio
 El mercado de control de versiones está cambiando a medida que los servicios más antiguos se eliminan gradualmente. Los equipos ahora necesitan enfocarse en el costo, la velocidad y el cumplimiento al elegir una estrategia. Aquí hay una instantánea de las opciones actuales:
 
 -   **Capgo** (lanzado 2022): Activo, desde $12/mes, soporta actualizaciones en vivo
--   **[Capawesome](https://capawesome.io/)** (lanzado 2024): Activo, precio similar, pero con menos opciones de actualización
+-   **Capawesome** (lanzado 2024): Activo, precio similar, pero con menos opciones de actualización
 -   **Appflow**: Cierra en 2026, precio de $6,000/año [\[1\]](https://capgo.app/), ofrece [actualizaciones automatizadas](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
 
 Estas herramientas están llegando para llenar el vacío dejado por el cierre de CodePush en 2024 y el próximo fin de Appflow en 2026.

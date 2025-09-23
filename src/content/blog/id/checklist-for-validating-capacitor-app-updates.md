@@ -29,7 +29,7 @@ next_blog: ''
 
 ### Perbandingan Cepat Alat OTA
 
-| Fitur | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) |
+| Fitur | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | **Tahun Peluncuran** | 2022 | 2024 | Berhenti 2026 |
 | **Enkripsi End-to-End** | Ya | Tidak | Tidak |

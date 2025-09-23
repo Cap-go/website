@@ -55,7 +55,7 @@ Les conflits de version peuvent causer une série de problèmes qui affectent n�
 -   Longs processus de dépannage qui retardent les corrections et laissent les utilisateurs sur des versions problématiques.
 -   Les efforts de récupération nécessitent d'identifier les segments affectés, de rétrograder les mises à jour, de publier des corrections et de surveiller l'activité des utilisateurs. Des outils comme Capgo simplifient ce processus avec des rétrogradations automatisées, le suivi des erreurs et la gestion des canaux[\[1\]](https://capgo.app/).
 
-## Explorez le [Capawesome](https://capawesome.io/)'s New Ionic Capacitor Live Update ...
+## Explorez le Capawesome's New Ionic Capacitor Live Update ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/5d1ba8681722600db788c5ef0c9fe764.jpg)
 

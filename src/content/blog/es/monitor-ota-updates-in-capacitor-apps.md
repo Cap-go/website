@@ -38,7 +38,7 @@ next_blog: ''
 
 Capgo ya ha gestionado **23.5M de actualizaciones en 750 aplicaciones** con velocidades de descarga rápidas (114ms para un paquete de 5MB). Comienza a monitorear tus actualizaciones hoy para una gestión más fluida de tu aplicación.
 
-## Explora las Nuevas Actualizaciones en Vivo de [Capawesome](https://capawesome.io/) para [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) ...
+## Explora las Nuevas Actualizaciones en Vivo de Capawesome para [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 

@@ -157,7 +157,7 @@ Capgo는 글로벌 CDN을 통해 5 MB 번들을 114 ms라는 인상적인 속도
 
 Capgo가 경쟁력 있는 가격과 성능을 제공하는 반면, 다른 플랫폼들은 특정 지역을 대상으로 하거나 더 오래된 방식에 의존합니다.
 
-### [Capawesome](https://capawesome.io/) 시장 중점
+### Capawesome 시장 중점
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

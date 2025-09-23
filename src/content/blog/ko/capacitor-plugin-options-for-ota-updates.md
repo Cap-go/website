@@ -30,7 +30,7 @@ next_blog: ''
 ### OTA 업데이트를 위한 주요 플러그인:
 
 1.  **[Capgo](https://capgo.app/)**: 빠른 업데이트(5MB를 114ms에), 엔드투엔드 암호화, 실시간 분석, 유연한 가격 책정(월 12달러부터)
-2.  **[Capawesome](https://capawesome.io/plugins/live-update/)**: 독일 시장에 중점을 둔 경쟁력 있는 가격과 현대적인 아키텍처(2024년 출시)
+2.  **Capawesome*: 독일 시장에 중점을 둔 경쟁력 있는 가격과 현대적인 아키텍처(2024년 출시)
 3.  **[Appflow](https://ionic.io/appflow/)**: 연간 6,000달러의 엔터프라이즈급 기능이지만 2026년에 종료 예정
 4.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: 2024년에 중단됨
 

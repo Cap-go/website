@@ -18,7 +18,7 @@ published: true
 locale: ja
 next_blog: ''
 ---
-**問題のあるアプリの更新を元に戻すための迅速で信頼できる方法を探していますか？** ここでの重要なポイントは次の通りです：[Capgo](https://capgo.app/)のようなプラットフォームは、ワンクリックでのロールバック、強力な暗号化、CI/CD統合を提供し、他のプラットフォーム（[Appflow](https://ionic.io/docs/appflow)や[Capawesome](https://capawesome.io/)など）は制限があったり高コストです。[Microsoft CodePush](https://microsoft.github.io/code-push/)は、かつては無料のオプションでしたが、2024年にサービス終了となりました。
+**問題のあるアプリの更新を元に戻すための迅速で信頼できる方法を探していますか？** ここでの重要なポイントは次の通りです：[Capgo](https://capgo.app/)のようなプラットフォームは、ワンクリックでのロールバック、強力な暗号化、CI/CD統合を提供し、他のプラットフォーム（[Appflow](https://ionic.io/docs/appflow)やCapawesomeなど）は制限があったり高コストです。[Microsoft CodePush](https://microsoft.github.io/code-push/)は、かつては無料のオプションでしたが、2024年にサービス終了となりました。
 
 ### 重要なポイント：
 
@@ -73,7 +73,7 @@ Capgoは帯域幅の使用を減らすために部分的な更新をサポート
 
 高速なロールバック機能をリアルタイムの分析とエラー追跡と組み合わせることで、Capgoはチームが迅速に生産問題に対処し、スムーズなデリバリーサイクルを維持できるようにします。次に、Capgoのロールバック方法がCapawesomeの地域特有のアプローチとどのように比較されるかを探ります。
 
-## 2. [Capawesome](https://capawesome.io/)
+## 2. Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/6806ece2e572faef86999f28/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

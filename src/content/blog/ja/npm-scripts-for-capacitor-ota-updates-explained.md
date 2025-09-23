@@ -42,7 +42,7 @@ next_blog: ''
 
 Capgoのようなプラットフォームが迅速な更新を提供し（24時間で95％のユーザー採用）、手頃な価格でOTA更新を管理するのはかつてないほど効率的です。
 
-## [Capawesome](https://capawesome.io/)の新しいIonic [Capacitor](https://capacitorjs.com/)ライブ更新を探る...
+## Capawesomeの新しいIonic [Capacitor](https://capacitorjs.com/)ライブ更新を探る...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

@@ -32,7 +32,7 @@ next_blog: ''
 
 Platform seperti [Capgo](https://capgo.app/) menawarkan pembaruan cepat (114ms untuk 5MB), tingkat keberhasilan tinggi (82%), dan solusi hemat biaya (mulai $12/bulan). Mereka juga mendukung otomatisasi rollback, pelacakan real-time, dan segmentasi pengguna, menjadikannya pilihan yang andal untuk mengelola pembaruan langsung.
 
-| **Fitur** | **Capgo** | **[Capawesome](https://capawesome.io/)** | **[Appflow](https://ionic.io/appflow/)** |
+| **Fitur** | **Capgo** | **Capawesome** | **[Appflow](https://ionic.io/appflow/)** |
 | --- | --- | --- | --- |
 | Kecepatan Update | 114ms | Standar | Standar |
 | Tingkat Keberhasilan | 82% | Tidak Dipublikasikan | Tidak Dipublikasikan |

@@ -53,7 +53,7 @@ next_blog: ''
 
 ![Firebase Auth](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/20003c863a77b942b90536c0e5cde156.jpg)
 
-Firebase Authenticationは、[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)のセキュアなセッションを管理する強力な方法を提供します。FirebaseのネイティブSDK（iOSにはSwift、AndroidにはJava）とウェブ用のFirebase JavaScript SDKを統合することで、プラットフォーム全体で一貫した認証体験を確保します[\[4\]](https://capawesome.io/plugins/firebase/authentication)。
+Firebase Authenticationは、[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)のセキュアなセッションを管理する強力な方法を提供します。FirebaseのネイティブSDK（iOSにはSwift、AndroidにはJava）とウェブ用のFirebase JavaScript SDKを統合することで、プラットフォーム全体で一貫した認証体験を確保します[\[4\]](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication)。
 
 主なセキュリティ機能は以下の通りです：
 
@@ -74,13 +74,13 @@ Firebaseプロジェクトは APIキーで識別されますが、アクセス�
 
 Sharathdevの2023年12月の分析では、ログアウト時のトークン取り消しを実装することで、アカウント乗っ取りのリスクを大幅に軽減できることが強調されています[\[6\]](https://medium.com/@DEVEN99/securing-firebase-authentication-mitigating-vulnerabilities-and-best-practices-593981e61b98)。
 
-このプラグインは、ネイティブとウェブの両方の認証フローをサポートしています。ただし、モバイルアプリの場合、WebViewの本質的な制限により、ネイティブ認証が推奨されるオプションです[\[4\]](https://capawesome.io/plugins/firebase/authentication)。
+このプラグインは、ネイティブとウェブの両方の認証フローをサポートしています。ただし、モバイルアプリの場合、WebViewの本質的な制限により、ネイティブ認証が推奨されるオプションです[\[4\]](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication)。
 
 他のセッション管理ツールと比較すると、Firebase Authは容易な統合と広範なセキュリティ機能で際立っており、強力な認証機能を必要とするCapacitorアプリにとって優れた選択肢となっています。
 
 ## 2. 生体認証セキュリティプラグイン
 
-Capacitor生体認証セキュリティプラグインを使用すると、開発者は生体認証とデバイス認証情報認証をアプリに統合して、セキュアなユーザーセッションを確保できます。指紋、顔認証、虹彩スキャンなどの[生体認証オプション](https://capgo.app/plugins/capacitor-native-biometric/)、およびPIN、パターン、パスワードなどのデバイス認証情報など、様々な認証方法をサポートしています。この機能はAndroidとiOSの両プラットフォームで利用可能です[\[7\]](https://capawesome.io/blog/announcing-the-capacitor-biometrics-plugin)。
+Capacitor生体認証セキュリティプラグインを使用すると、開発者は生体認証とデバイス認証情報認証をアプリに統合して、セキュアなユーザーセッションを確保できます。指紋、顔認証、虹彩スキャンなどの[生体認証オプション](https://capgo.app/plugins/capacitor-native-biometric/)、およびPIN、パターン、パスワードなどのデバイス認証情報など、様々な認証方法をサポートしています。この機能はAndroidとiOSの両プラットフォームで利用可能です[\[7\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics)。
 
 | **認証機能** | **iOSサポート** | **Androidサポート** |
 | --- | --- | --- |
@@ -110,7 +110,7 @@ const options = {
 -   **iOS**: Face IDを使用する理由を説明するため、`Info.plist`ファイルに`NSFaceIDUsageDescription`を追加します。
 -   **Android**: `AndroidManifest.xml`ファイルに`android.permission.USE_BIOMETRIC`権限を含めます。
 
-これらの手順は、プラグインがシームレスに動作し、セキュアなセッション管理戦略と整合することを確保するために不可欠です[\[8\]](https://capawesome.io/plugins/biometrics)[\[10\]](https://www.npmjs.com/package/capacitor-native-biometric)。
+これらの手順は、プラグインがシームレスに動作し、セキュアなセッション管理戦略と整合することを確保するために不可欠です[\[8\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics)[\[10\]](https://www.npmjs.com/package/capacitor-native-biometric)。
 
 > "すべてのCapacitor開発者は、アプリがセキュリティのベストプラクティスに従っていることを確認する責任があります。適切な注意を払わないと、非常に損害が大きく高価な重大なセキュリティ問題が発生する可能性があります。" – Capacitorドキュメント[\[1\]](https://capacitorjs.com/docs/guides/security)
 
@@ -122,7 +122,7 @@ const options = {
 
 ### 高度なセキュリティ対策
 
-セッションをさらに保護するため、開発者は自動セッションタイムアウトを実装し、生体認証の変更を監視する必要があります。変更が検出された場合、不正アクセスを防ぐために認証トークンを無効化する必要があります[\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta)。このプラグインには詳細なエラー処理システムも備わっており、開発者がフォールバックメカニズムを作成し、認証が失敗した場合にユーザーに通知するのに役立つフィードバックコードを提供します[\[8\]](https://capawesome.io/plugins/biometrics)。
+セッションをさらに保護するため、開発者は自動セッションタイムアウトを実装し、生体認証の変更を監視する必要があります。変更が検出された場合、不正アクセスを防ぐために認証トークンを無効化する必要があります[\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta)。このプラグインには詳細なエラー処理システムも備わっており、開発者がフォールバックメカニズムを作成し、認証が失敗した場合にユーザーに通知するのに役立つフィードバックコードを提供します[\[8\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics)。
 
 このプラグインは、モダンなアプリに生体認証セキュリティを統合するための堅固なソリューションを提供し、ユーザーの利便性と保護の両方を確保します。
 

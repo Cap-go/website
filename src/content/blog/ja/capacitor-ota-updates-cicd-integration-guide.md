@@ -30,7 +30,7 @@ next_blog: ''
 
 ### OTA プラットフォームの簡単な比較:
 
-| 機能 | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| 機能 | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | ステータス | アクティブ | アクティブ | 2026年に終了予定 | 2024年に中止 |
 | 更新速度 | 114ms | 標準 | 変動 | N/A |

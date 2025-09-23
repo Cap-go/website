@@ -30,7 +30,7 @@ next_blog: ''
 
 ### Perbandingan Cepat Platform OTA:
 
-| Fitur | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | [Capawesome](https://cloud.capawesome.io/) |
+| Fitur | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | Enkripsi End-to-End | Ya | Tidak  | Tidak  |
 | Kemampuan Rollback | Instan | Manual | Manual |

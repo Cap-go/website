@@ -36,7 +36,7 @@ next_blog: ''
 
 Capgoはすでに**750のアプリで2350万のアップデートを管理**しており、高速なダウンロード速度（5MBバンドルで114ms）を実現しています。今日からアップデートを監視して、アプリ管理をスムーズに始めましょう。
 
-## [Capawesome](https://capawesome.io/)の新しい[Ionic](https://ionicframework.com/)[Capacitor](https://capacitorjs.com/)ライブアップデートを探る…
+## Capawesomeの新しい[Ionic](https://ionicframework.com/)[Capacitor](https://capacitorjs.com/)ライブアップデートを探る…
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 

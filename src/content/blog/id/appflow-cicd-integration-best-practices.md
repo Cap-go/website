@@ -160,7 +160,7 @@ Capgo memberikan pembaruan dengan sangat cepat, mencapai 114 ms untuk paket 5 MB
 
 Sementara Capgo menawarkan harga dan kinerja yang kompetitif, platform lain melayani wilayah tertentu atau mengandalkan metode yang lebih lama.
 
-### Fokus Pasar [Capawesome](https://capawesome.io/)
+### Fokus Pasar Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

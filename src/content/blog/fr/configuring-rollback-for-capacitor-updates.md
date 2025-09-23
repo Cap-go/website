@@ -38,7 +38,7 @@ Le retour arrière dans [Capacitor](https://capacitorjs.com/) garantit que votre
 
 ### Comparaison des plateformes :
 
-**[Capgo](https://capgo.app/)** offre des retours arrière en un clic, le chiffrement, des analyses en temps réel et un hébergement flexible. Des alternatives comme **[Capawesome](https://cloud.capawesome.io/)** et **[Appflow](https://ionic.io/appflow/)** manquent de fonctionnalités ou entraînent des coûts plus élevés.
+**[Capgo](https://capgo.app/)** offre des retours arrière en un clic, le chiffrement, des analyses en temps réel et un hébergement flexible. Des alternatives comme **Capawesome** et **[Appflow](https://ionic.io/appflow/)** manquent de fonctionnalités ou entraînent des coûts plus élevés.
 
 **Tableau de comparaison rapide :**
 

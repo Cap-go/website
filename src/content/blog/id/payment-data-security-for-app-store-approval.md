@@ -24,7 +24,7 @@ next_blog: ''
 **Ingin aplikasi Anda disetujui oleh Apple atau Google? Mulai dengan data pembayaran yang aman.** Toko aplikasi menuntut **enkripsi end-to-end** untuk data pembayaran guna memenuhi standar kepatuhan. Tanpa itu, aplikasi Anda bisa ditolak atau dihapus. Berikut yang perlu Anda ketahui:
 
 -   **[Capgo](https://capgo.app/)**: Menawarkan enkripsi end-to-end sejati, kontrol rollback, dan [opsi self-hosting](https://capgo.app/blog/self-hosted-capgo/). Biaya $2.600 di awal + $300/bulan.
--   **[Capawesome](https://capawesome.io/)**: Menggunakan penandatanganan kriptografis tapi kurang enkripsi penuh. Menargetkan pasar Jerman.
+-   **Capawesome**: Menggunakan penandatanganan kriptografis tapi kurang enkripsi penuh. Menargetkan pasar Jerman.
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: Enkripsi parsial, performa tidak konsisten, dan $6.000/tahun. Dijadwalkan pensiun pada 2026.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: Dihentikan pada 2024, tanpa enkripsi end-to-end.
 
@@ -62,7 +62,7 @@ Dengan hanya mengunduh komponen yang berubah, Capgo meminimalkan risiko dan meng
 
 Selanjutnya, mari kita lihat bagaimana Capawesome menangani keamanan data pembayaran.
 
-## 2. [Capawesome](https://capawesome.io/)
+## 2. Capawesome
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

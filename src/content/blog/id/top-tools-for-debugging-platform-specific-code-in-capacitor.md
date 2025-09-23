@@ -168,7 +168,7 @@ Alat debugging membantu mengidentifikasi masalah, tetapi sistem pembaruan yang e
 
 Berikut adalah perbandingan sistem pembaruan:
 
-| Metri Kunci | Capgo | [Appflow](https://ionic.io/appflow/) | [Capawesome](https://capawesome.io/) |
+| Metri Kunci | Capgo | [Appflow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | Kecepatan Pembaruan | 114ms rata-rata pengiriman untuk bundel 5MB [\[1\]](https://capgo.app/) | Tidak diungkapkan secara publik | Tidak diungkapkan secara publik |
 | Adopsi Pengguna | 95% dalam 24 jam [\[1\]](https://capgo.app/) | Tidak diungkapkan secara publik | Tidak diungkapkan secara publik |

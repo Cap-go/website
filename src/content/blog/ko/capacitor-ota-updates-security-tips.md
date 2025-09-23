@@ -28,7 +28,7 @@ next_blog: ''
 
 ### OTA 플랫폼 빠른 비교:
 
-| 기능 | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | [Capawesome](https://cloud.capawesome.io/) |
+| 기능 | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | 종단간 암호화 | 예 | 아니오 | 아니오 |
 | 롤백 기능 | 즉시 | 수동 | 수동 |

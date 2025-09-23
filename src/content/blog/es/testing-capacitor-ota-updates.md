@@ -41,7 +41,7 @@ next_blog: ''
 
 **Consejo Pro:** Usa despliegues graduales para probar actualizaciones en grupos pequeños de usuarios antes del despliegue completo. Las herramientas de Capgo hacen este proceso fluido y seguro.
 
-## Explora las nuevas actualizaciones en vivo de [Capawesome](https://capawesome.io/) para Ionic [Capacitor](https://capacitorjs.com/) ...
+## Explora las nuevas actualizaciones en vivo de Capawesome para Ionic [Capacitor](https://capacitorjs.com/) ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
