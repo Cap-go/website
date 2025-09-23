@@ -6,9 +6,8 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
-import MicroCard from '@/components/MicroCard.astro'
 
 <Steps>
 1. **Install the package**
@@ -18,35 +17,30 @@ import MicroCard from '@/components/MicroCard.astro'
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 3. **Configure the plugin**
-   
-   <CardGrid>
-     <MicroCard>
-       <span slot="title">Initialize Purchases</span>
-       ```typescript
-       import { NativePurchases } from '@capgo/native-purchases';
 
-       // Initialize with your app's API keys
-       await NativePurchases.configure({
-         apiKey: 'your_api_key_here',
-         appUserID: 'user123' // Optional custom user ID
-       });
-       ```
-     </MicroCard>
-     <MicroCard>
-       <span slot="title">Get Products</span>
-       ```typescript
-       // Fetch available products
-       const { products } = await NativePurchases.getProducts({
-         productIdentifiers: [
-           'premium_monthly',
-           'premium_yearly'
-         ]
-       });
+   **Initialize Purchases:**
+   ```typescript
+   import { NativePurchases } from '@capgo/native-purchases';
 
-       console.log('Available products:', products);
-       ```
-     </MicroCard>
-   </CardGrid>
+   // Initialize with your app's API keys
+   await NativePurchases.configure({
+     apiKey: 'your_api_key_here',
+     appUserID: 'user123' // Optional custom user ID
+   });
+   ```
+
+   **Get Products:**
+   ```typescript
+   // Fetch available products
+   const { products } = await NativePurchases.getProducts({
+     productIdentifiers: [
+       'premium_monthly',
+       'premium_yearly'
+     ]
+   });
+
+   console.log('Available products:', products);
+   ```
 
    <Tabs>
      <TabItem label="iOS">

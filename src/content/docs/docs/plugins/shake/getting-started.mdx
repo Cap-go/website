@@ -5,10 +5,8 @@ sidebar:
   order: 2
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
-import MicroCard from '@/components/MicroCard.astro'
 
 <Steps>
 1. **Install the package**
@@ -18,33 +16,28 @@ import MicroCard from '@/components/MicroCard.astro'
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 3. **Configure the plugin**
-   
-   <CardGrid>
-     <MicroCard>
-       <span slot="title">Basic Usage</span>
-       ```typescript
-       import { Shake } from '@capgo/capacitor-shake';
 
-       // Start listening for shake gestures
-       await Shake.start();
+   **Basic Usage Example:**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
 
-       // Listen for shake events
-       Shake.addListener('shake', () => {
-         console.log('Device was shaken!');
-         // Perform your action here
-       });
-       ```
-     </MicroCard>
-     <MicroCard>
-       <span slot="title">Sensitivity Configuration</span>
-       ```typescript
-       // Configure shake sensitivity
-       await Shake.start({
-         threshold: 3.5 // Adjust sensitivity (default: 3.5)
-       });
-       ```
-     </MicroCard>
-   </CardGrid>
+   // Start listening for shake gestures
+   await Shake.start();
+
+   // Listen for shake events
+   Shake.addListener('shake', () => {
+     console.log('Device was shaken!');
+     // Perform your action here
+   });
+   ```
+
+   **Sensitivity Configuration:**
+   ```typescript
+   // Configure shake sensitivity
+   await Shake.start({
+     threshold: 3.5 // Adjust sensitivity (default: 3.5)
+   });
+   ```
 
    <Tabs>
      <TabItem label="iOS">

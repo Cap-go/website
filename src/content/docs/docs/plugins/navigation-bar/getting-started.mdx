@@ -6,9 +6,8 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
-import MicroCard from '@/components/MicroCard.astro'
 
 <Steps>
 1. **Install the package**
@@ -18,33 +17,28 @@ import MicroCard from '@/components/MicroCard.astro'
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
 3. **Configure the plugin**
-   
-   <CardGrid>
-     <MicroCard>
-       <span slot="title">Set Navigation Bar Color</span>
-       ```typescript
-       import { NavigationBar } from '@capgo/capacitor-navigation-bar';
 
-       // Set navigation bar color
-       await NavigationBar.setColor({
-         color: '#FF0000', // Red color
-         darkButtons: false // Use light buttons
-       });
-       ```
-     </MicroCard>
-     <MicroCard>
-       <span slot="title">Dynamic Theme Support</span>
-       ```typescript
-       // Set color based on theme
-       const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-       
-       await NavigationBar.setColor({
-         color: isDarkMode ? '#000000' : '#FFFFFF',
-         darkButtons: !isDarkMode
-       });
-       ```
-     </MicroCard>
-   </CardGrid>
+   **Set Navigation Bar Color:**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Set navigation bar color
+   await NavigationBar.setColor({
+     color: '#FF0000', // Red color
+     darkButtons: false // Use light buttons
+   });
+   ```
+
+   **Dynamic Theme Support:**
+   ```typescript
+   // Set color based on theme
+   const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+   await NavigationBar.setColor({
+     color: isDarkMode ? '#000000' : '#FFFFFF',
+     darkButtons: !isDarkMode
+   });
+   ```
 
    <Tabs>
      <TabItem label="Android">
