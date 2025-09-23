@@ -1,48 +1,40 @@
 ---
-title: Capacitor StreamCall Plugin
-description: Stream video calls with advanced streaming capabilities
+title: Capacitor Stream Call Plugin
+description: A Capacitor plugin that uses the Stream Video SDK to enable video calling functionality in your app
 sidebar:
   order: 1
 ---
 
 import { LinkCard, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
 
-# Capacitor StreamCall Plugin
+# @capgo/capacitor-stream-call
 
-Enable high-quality video streaming and calling capabilities in your Capacitor application.
-
-## Features
-
-- 📹 High-quality video streaming
-- 🎤 Audio/video call support
-- 🔄 Real-time communication
-- 📱 Optimized for mobile devices
-- 🔒 Secure peer-to-peer connections
+A Capacitor plugin that uses the [Stream Video SDK](https://getstream.io/) to enable video calling functionality in your app.
 
 ## Installation
 
 <Tabs>
   <TabItem label="npm">
     ```bash
-    npm install @capgo/capacitor-streamcall
+    npm install @capgo/capacitor-stream-call
     npx cap sync
     ```
   </TabItem>
   <TabItem label="yarn">
     ```bash
-    yarn add @capgo/capacitor-streamcall
+    yarn add @capgo/capacitor-stream-call
     npx cap sync
     ```
   </TabItem>
   <TabItem label="pnpm">
     ```bash
-    pnpm add @capgo/capacitor-streamcall
+    pnpm add @capgo/capacitor-stream-call
     npx cap sync
     ```
   </TabItem>
   <TabItem label="bun">
     ```bash
-    bun add @capgo/capacitor-streamcall
+    bun add @capgo/capacitor-stream-call
     npx cap sync
     ```
   </TabItem>
@@ -50,65 +42,411 @@ Enable high-quality video streaming and calling capabilities in your Capacitor a
 
 ## Configuration
 
-### iOS Configuration
+### iOS Setup
 
-Add camera and microphone permissions to your `Info.plist`:
-
-```xml
-<key>NSCameraUsageDescription</key>
-<string>This app needs access to camera for video calls</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>This app needs access to microphone for calls</string>
-```
-
-### Android Configuration
-
-Add permissions to your `AndroidManifest.xml`:
+#### 1. API Key Configuration
+Add your Stream Video API key to `ios/App/App/Info.plist`:
 
 ```xml
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.RECORD_AUDIO" />
-<uses-permission android:name="android.permission.INTERNET" />
+<dict>
+  <key>CAPACITOR_STREAM_VIDEO_APIKEY</key>
+  <string>your_api_key_here</string>
+  <!-- other keys -->
+</dict>
 ```
 
-## Usage
+#### 2. Localization (Optional)
+To support multiple languages:
+
+1. Add localization files to your Xcode project:
+   - `/App/App/en.lproj/Localizable.strings`
+   - `/App/App/en.lproj/Localizable.stringsdict`
+
+2. Add translations in `Localizable.strings`:
+```swift
+"stream.video.call.incoming" = "Incoming call from %@";
+"stream.video.call.accept" = "Accept";
+"stream.video.call.reject" = "Reject";
+"stream.video.call.hangup" = "Hang up";
+"stream.video.call.joining" = "Joining...";
+"stream.video.call.reconnecting" = "Reconnecting...";
+```
+
+3. Configure localization in your `AppDelegate.swift`:
+```swift
+import StreamVideo
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        Appearance.localizationProvider = { key, table in
+            Bundle.main.localizedString(forKey: key, value: nil, table: table)
+        }
+        return true
+    }
+}
+```
+
+### Android Setup
+
+#### 1. API Key Configuration
+Add your Stream Video API key to `android/app/src/main/res/values/strings.xml`:
+
+```xml
+<string name="CAPACITOR_STREAM_VIDEO_APIKEY">your_api_key_here</string>
+```
+
+#### 2. MainActivity Configuration
+Modify your `MainActivity.java` to handle incoming calls:
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+
+  // Enable activity to show over lock screen
+  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O_MR1) {
+    setShowWhenLocked(true);
+    setTurnScreenOn(true);
+  } else {
+    getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+  }
+}
+```
+
+#### 3. Application Class Configuration
+Create or modify your Application class to initialize the plugin:
+
+```java
+import ee.forgr.capacitor.streamcall.StreamCallPlugin;
+
+@Override
+public void onCreate() {
+  super.onCreate();
+
+  // Initialize Firebase
+  com.google.firebase.FirebaseApp.initializeApp(this);
+
+  // Pre-initialize StreamCall plugin
+  try {
+    StreamCallPlugin.preLoadInit(this, this);
+  } catch (Exception e) {
+    Log.e("App", "Failed to pre-initialize StreamVideo Plugin", e);
+  }
+}
+```
+
+> **Note:** If you don't have an Application class, you need to create one and reference it in your `AndroidManifest.xml` with `android:name=".YourApplicationClass"`.
+
+#### 4. Localization (Optional)
+Add string resources for different languages:
+
+**Default (`values/strings.xml`):**
+```xml
+<resources>
+    <string name="stream_video_call_incoming">Incoming call from %1$s</string>
+    <string name="stream_video_call_accept">Accept</string>
+    <string name="stream_video_call_reject">Reject</string>
+    <string name="stream_video_call_hangup">Hang up</string>
+    <string name="stream_video_call_joining">Joining...</string>
+    <string name="stream_video_call_reconnecting">Reconnecting...</string>
+</resources>
+```
+
+**French (`values-fr/strings.xml`):**
+```xml
+<resources>
+    <string name="stream_video_call_incoming">Appel entrant de %1$s</string>
+    <string name="stream_video_call_accept">Accepter</string>
+    <string name="stream_video_call_reject">Refuser</string>
+    <string name="stream_video_call_hangup">Raccrocher</string>
+    <string name="stream_video_call_joining">Connexion...</string>
+    <string name="stream_video_call_reconnecting">Reconnexion...</string>
+</resources>
+```
+
+## Displaying Caller Information
+
+When receiving incoming calls, you can access caller information including name, user ID, and profile image. This information is automatically extracted from the call data and passed through the event system.
+
+### Getting Caller Information
+
+The caller information is available in two ways:
+
+**1. Through Call Events**
+
+The `callEvent` listener provides caller information for incoming calls:
 
 ```typescript
-import { StreamCall } from '@capgo/capacitor-streamcall';
-
-// Initialize a call
-const call = await StreamCall.initCall({
-  roomId: 'room-123',
-  userId: 'user-456'
+StreamCall.addListener('callEvent', (event) => {
+  if (event.state === 'ringing' && event.caller) {
+    console.log('Incoming call from:', event.caller.name || event.caller.userId);
+    console.log('Caller image:', event.caller.imageURL);
+    // Update your UI to show caller information
+    showIncomingCallUI(event.caller);
+  }
 });
-
-// Start streaming
-await StreamCall.startStream();
-
-// End call
-await StreamCall.endCall();
 ```
 
-## API Reference
+**2. Through Incoming Call Events (Android lock-screen)**
 
-Visit the [GitHub repository](https://github.com/Cap-go/capacitor-streamcall) for the full API documentation.
+The `incomingCall` listener also includes caller information:
 
-## Platform Support
+```typescript
+StreamCall.addListener('incomingCall', (payload) => {
+  if (payload.caller) {
+    console.log('Lock-screen call from:', payload.caller.name || payload.caller.userId);
+    // Update your lock-screen UI
+    updateLockScreenUI(payload.caller);
+  }
+});
+```
 
-| Platform | Supported |
-|----------|-----------|
-| iOS      | ✅        |
-| Android  | ✅        |
-| Web      | ❌        |
+### Caller Information Structure
 
-## Contributing
+```typescript
+interface CallMember {
+  userId: string;      // User ID (always present)
+  name?: string;       // Display name (optional)
+  imageURL?: string;   // Profile image URL (optional)
+  role?: string;       // User role (optional)
+}
+```
 
-We welcome contributions! Please see our [Contributing Guide](https://github.com/Cap-go/capacitor-streamcall/blob/main/CONTRIBUTING.md) for more details.
+## API
+
+### login(...)
+
+```typescript
+login(options: LoginOptions) => Promise<SuccessResponse>
+```
+
+Login to Stream Video service
+
+| Param         | Type                                                  | Description           |
+| ------------- | ----------------------------------------------------- | --------------------- |
+| **`options`** | `LoginOptions` | Login configuration |
+
+### logout()
+
+```typescript
+logout() => Promise<SuccessResponse>
+```
+
+Logout from Stream Video service
+
+### call(...)
+
+```typescript
+call(options: CallOptions) => Promise<SuccessResponse>
+```
+
+Initiate a call to another user
+
+| Param         | Type                                                | Description          |
+| ------------- | --------------------------------------------------- | -------------------- |
+| **`options`** | `CallOptions` | Call configuration |
+
+### endCall()
+
+```typescript
+endCall() => Promise<SuccessResponse>
+```
+
+End the current call
+
+### setMicrophoneEnabled(...)
+
+```typescript
+setMicrophoneEnabled(options: { enabled: boolean; }) => Promise<SuccessResponse>
+```
+
+Enable or disable microphone
+
+| Param         | Type                               | Description        |
+| ------------- | ---------------------------------- | ------------------ |
+| **`options`** | `{ enabled: boolean; }` | Microphone state |
+
+### setCameraEnabled(...)
+
+```typescript
+setCameraEnabled(options: { enabled: boolean; }) => Promise<SuccessResponse>
+```
+
+Enable or disable camera
+
+| Param         | Type                               | Description    |
+| ------------- | ---------------------------------- | -------------- |
+| **`options`** | `{ enabled: boolean; }` | Camera state |
+
+### addListener('callEvent', ...)
+
+```typescript
+addListener(eventName: 'callEvent', listenerFunc: (event: CallEvent) => void) => Promise<{ remove: () => Promise<void>; }>
+```
+
+Add listener for call events
+
+| Param              | Type                                                                | Description                       |
+| ------------------ | ------------------------------------------------------------------- | --------------------------------- |
+| **`eventName`**    | `'callEvent'`                                            | Name of the event to listen for |
+| **`listenerFunc`** | `(event: CallEvent) => void` | Callback function               |
+
+### addListener('incomingCall', ...)
+
+```typescript
+addListener(eventName: 'incomingCall', listenerFunc: (event: IncomingCallPayload) => void) => Promise<{ remove: () => Promise<void>; }>
+```
+
+Listen for lock-screen incoming call (Android only).
+Fired when the app is shown by full-screen intent before user interaction.
+
+| Param              | Type                                                                                    |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| **`eventName`**    | `'incomingCall'`                                                             |
+| **`listenerFunc`** | `(event: IncomingCallPayload) => void` |
+
+### acceptCall()
+
+```typescript
+acceptCall() => Promise<SuccessResponse>
+```
+
+Accept an incoming call
+
+### rejectCall()
+
+```typescript
+rejectCall() => Promise<SuccessResponse>
+```
+
+Reject an incoming call
+
+### isCameraEnabled()
+
+```typescript
+isCameraEnabled() => Promise<CameraEnabledResponse>
+```
+
+Check if camera is enabled
+
+### getCallStatus()
+
+```typescript
+getCallStatus() => Promise<CallEvent>
+```
+
+Get the current call status
+
+### setSpeaker(...)
+
+```typescript
+setSpeaker(options: { name: string; }) => Promise<SuccessResponse>
+```
+
+Set speakerphone on
+
+| Param         | Type                           | Description         |
+| ------------- | ------------------------------ | ------------------- |
+| **`options`** | `{ name: string; }` | Speakerphone name |
+
+### switchCamera(...)
+
+```typescript
+switchCamera(options: { camera: 'front' | 'back'; }) => Promise<SuccessResponse>
+```
+
+Switch camera
+
+| Param         | Type                                        | Description           |
+| ------------- | ------------------------------------------- | --------------------- |
+| **`options`** | `{ camera: 'front' \| 'back'; }` | Camera to switch to |
+
+### getCallInfo(...)
+
+```typescript
+getCallInfo(options: { callId: string; }) => Promise<CallEvent>
+```
+
+Get detailed information about an active call including caller details
+
+| Param         | Type                             | Description                      |
+| ------------- | -------------------------------- | -------------------------------- |
+| **`options`** | `{ callId: string; }` | Options containing the call ID |
+
+### setDynamicStreamVideoApikey(...)
+
+```typescript
+setDynamicStreamVideoApikey(options: { apiKey: string; }) => Promise<SuccessResponse>
+```
+
+Set a dynamic Stream Video API key that overrides the static one
+
+| Param         | Type                             | Description          |
+| ------------- | -------------------------------- | -------------------- |
+| **`options`** | `{ apiKey: string; }` | The API key to set |
+
+### getDynamicStreamVideoApikey()
+
+```typescript
+getDynamicStreamVideoApikey() => Promise<DynamicApiKeyResponse>
+```
+
+Get the currently set dynamic Stream Video API key
+
+### getCurrentUser()
+
+```typescript
+getCurrentUser() => Promise<CurrentUserResponse>
+```
+
+Get the current user's information
+
+## Usage Example
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+// Login to Stream Video service
+await StreamCall.login({
+  token: 'your_stream_token',
+  userId: 'user123',
+  name: 'John Doe',
+  imageURL: 'https://example.com/avatar.jpg',
+  apiKey: 'your_stream_api_key',
+  magicDivId: 'video-container',
+  pushNotificationsConfig: {
+    pushProviderName: 'firebase',
+    voipProviderName: 'apns'
+  }
+});
+
+// Set up event listeners
+StreamCall.addListener('callEvent', (event) => {
+  console.log('Call event:', event.state);
+  if (event.state === 'ringing' && event.caller) {
+    console.log('Incoming call from:', event.caller.name);
+  }
+});
+
+// Make a call
+await StreamCall.call({
+  userIds: ['user456'],
+  type: 'default',
+  ring: true,
+  video: true
+});
+
+// Accept an incoming call
+await StreamCall.acceptCall();
+
+// End the call
+await StreamCall.endCall();
+
+// Logout
+await StreamCall.logout();
+```
 
 ## License
 
-This plugin is licensed under the MIT License. See [LICENSE](https://github.com/Cap-go/capacitor-streamcall/blob/main/LICENSE) for more information.
-
-## Support
-
-If you encounter any issues or have questions, please file an issue on our [GitHub repository](https://github.com/Cap-go/capacitor-streamcall/issues).
+MIT

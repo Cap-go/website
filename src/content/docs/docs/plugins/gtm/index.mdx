@@ -1,104 +1,240 @@
 ---
-title: Capacitor GTM Plugin
-description: Google Tag Manager integration for analytics and tracking in Capacitor apps
+title: Capacitor Google Tag Manager Plugin
+description: A Capacitor plugin for integrating Google Tag Manager into your mobile applications
 sidebar:
   order: 1
 ---
 
 import { LinkCard, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
 
-# Capacitor GTM Plugin
+# Capacitor Google Tag Manager Plugin
 
-Integrate Google Tag Manager (GTM) into your Capacitor application for comprehensive analytics and tracking.
+A Capacitor plugin for integrating Google Tag Manager into your mobile applications.
 
-## Features
-
-- 📊 Full Google Tag Manager integration
-- 🎯 Event tracking and custom dimensions
-- 📱 Native implementation for iOS and Android
-- 🔄 Real-time data collection
-- 🛠️ Easy configuration and setup
+> **Note**: This plugin uses the official Google Tag Manager SDK directly for both iOS and Android platforms.
 
 ## Installation
 
 <Tabs>
   <TabItem label="npm">
     ```bash
-    npm install @capgo/capacitor-gtm
+    npm install capacitor-gtm
     npx cap sync
     ```
   </TabItem>
   <TabItem label="yarn">
     ```bash
-    yarn add @capgo/capacitor-gtm
+    yarn add capacitor-gtm
     npx cap sync
     ```
   </TabItem>
   <TabItem label="pnpm">
     ```bash
-    pnpm add @capgo/capacitor-gtm
+    pnpm add capacitor-gtm
     npx cap sync
     ```
   </TabItem>
   <TabItem label="bun">
     ```bash
-    bun add @capgo/capacitor-gtm
+    bun add capacitor-gtm
     npx cap sync
     ```
   </TabItem>
 </Tabs>
 
-## Configuration
+## Platform Setup
 
-### iOS Configuration
+### iOS Setup
 
-Add your GTM configuration file to your iOS project.
+1. **Add GTM container file**
+   - Download your container from Google Tag Manager console (GTM-XXXXXX.json)
+   - In Xcode, add the file to your project
+   - Make sure to add it to your app target
 
-### Android Configuration
+### Android Setup
 
-Add your GTM configuration file to your Android project.
+1. **Add GTM container file**
+   - Download your container from Google Tag Manager console (GTM-XXXXXX.json)
+   - Place the file in `android/app/src/main/assets/containers/`
+   - Create the `containers` directory if it doesn't exist
 
-## Usage
+## API
+
+### initialize(...)
 
 ```typescript
-import { CapacitorGTM } from '@capgo/capacitor-gtm';
+initialize(options: { containerId: string; timeout?: number; }) => Promise<void>
+```
+
+Initializes Google Tag Manager with the specified container ID.
+
+| Param         | Type                                                    | Description                   |
+| ------------- | ------------------------------------------------------- | ----------------------------- |
+| **`options`** | `{ containerId: string; timeout?: number; }` | The initialization options. |
+
+### push(...)
+
+```typescript
+push(options: { event: string; parameters?: Record<string, any>; }) => Promise<void>
+```
+
+Pushes an event to the Google Tag Manager dataLayer.
+
+| Param         | Type                                                                                          | Description          |
+| ------------- | --------------------------------------------------------------------------------------------- | -------------------- |
+| **`options`** | `{ event: string; parameters?: Record<string, any>; }` | The event options. |
+
+### setUserProperty(...)
+
+```typescript
+setUserProperty(options: { key: string; value: string | number | boolean; }) => Promise<void>
+```
+
+Sets a user property in the Google Tag Manager dataLayer.
+
+| Param         | Type                                                              | Description                  |
+| ------------- | ----------------------------------------------------------------- | ---------------------------- |
+| **`options`** | `{ key: string; value: string \| number \| boolean; }` | The user property options. |
+
+### getValue(...)
+
+```typescript
+getValue(options: { key: string; }) => Promise<{ value: any; }>
+```
+
+Gets a value from the Google Tag Manager dataLayer.
+Searches through the dataLayer for the most recent value of the specified key.
+
+| Param         | Type                          | Description                           |
+| ------------- | ----------------------------- | ------------------------------------- |
+| **`options`** | `{ key: string; }` | The options for retrieving a value. |
+
+**Returns:** `Promise<{ value: any; }>`
+
+### reset()
+
+```typescript
+reset() => Promise<void>
+```
+
+Resets the Google Tag Manager instance and clears all data.
+This will remove all data from the dataLayer and require re-initialization.
+
+## Usage Example
+
+```typescript
+import { GoogleTagManager } from 'capacitor-gtm';
 
 // Initialize GTM
-await CapacitorGTM.initialize({
-  containerId: 'GTM-XXXXXX'
+await GoogleTagManager.initialize({
+  containerId: 'GTM-XXXXXX',
+  timeout: 2000 // optional, defaults to 2000ms
 });
 
 // Track an event
-await CapacitorGTM.trackEvent({
+await GoogleTagManager.push({
   event: 'purchase',
   parameters: {
-    value: 99.99,
+    value: 29.99,
     currency: 'USD',
-    transaction_id: '12345'
+    items: ['item1', 'item2']
+  }
+});
+
+// Set user property
+await GoogleTagManager.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+
+// Get a value from container
+const result = await GoogleTagManager.getValue({ key: 'api_key' });
+console.log('API Key:', result.value);
+
+// Reset data layer
+await GoogleTagManager.reset();
+```
+
+## Common Use Cases
+
+### E-commerce Tracking
+
+```typescript
+// Track product view
+await GoogleTagManager.push({
+  event: 'view_item',
+  parameters: {
+    currency: 'USD',
+    value: 15.99,
+    items: [{
+      item_id: 'SKU123',
+      item_name: 'Product Name',
+      price: 15.99,
+      quantity: 1
+    }]
+  }
+});
+
+// Track purchase
+await GoogleTagManager.push({
+  event: 'purchase',
+  parameters: {
+    transaction_id: '12345',
+    value: 45.99,
+    currency: 'USD',
+    items: [{
+      item_id: 'SKU123',
+      item_name: 'Product Name',
+      price: 15.99,
+      quantity: 2
+    }]
   }
 });
 ```
 
-## API Reference
+### User Engagement
 
-Visit the [GitHub repository](https://github.com/Cap-go/capacitor-gtm) for the full API documentation.
+```typescript
+// Track screen view
+await GoogleTagManager.push({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Home',
+    screen_class: 'HomeViewController'
+  }
+});
 
-## Platform Support
+// Track custom event
+await GoogleTagManager.push({
+  event: 'level_complete',
+  parameters: {
+    level: 5,
+    score: 1000,
+    time_spent: 300
+  }
+});
+```
 
-| Platform | Supported |
-|----------|-----------|
-| iOS      | ✅        |
-| Android  | ✅        |
-| Web      | ✅        |
+## Troubleshooting
 
-## Contributing
+### iOS Issues
 
-We welcome contributions! Please see our [Contributing Guide](https://github.com/Cap-go/capacitor-gtm/blob/main/CONTRIBUTING.md) for more details.
+1. **Container not loading**: Ensure the GTM container JSON file is properly added to your Xcode project and included in the app bundle.
+
+2. **Build errors**: Make sure you've run `npx cap sync` after installation.
+
+### Android Issues
+
+1. **Container not found**: Verify the container file is in the correct location: `android/app/src/main/assets/containers/GTM-XXXXXX.json`
+
+2. **Initialization failures**: Check that the container ID matches your GTM container exactly.
+
+### General Issues
+
+1. **Events not appearing in GTM**: Remember that GTM has a delay in showing real-time events. Also ensure your GTM container is published.
+
+2. **Values returning null**: Make sure the keys exist in your GTM container configuration.
 
 ## License
 
-This plugin is licensed under the MIT License. See [LICENSE](https://github.com/Cap-go/capacitor-gtm/blob/main/LICENSE) for more information.
-
-## Support
-
-If you encounter any issues or have questions, please file an issue on our [GitHub repository](https://github.com/Cap-go/capacitor-gtm/issues).
+MIT

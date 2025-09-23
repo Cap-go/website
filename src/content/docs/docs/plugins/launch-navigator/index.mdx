@@ -24,17 +24,222 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+## Overview
+
+The Capacitor Launch Navigator plugin enables launching native navigation apps on iOS and Android devices with coordinate-based navigation. This plugin provides seamless integration with popular mapping applications and supports multiple transportation modes for comprehensive navigation solutions.
+
 <CardGrid stagger>
-  <Card title="Multi-platform" icon="rocket">
-    Support for Google Maps, Apple Maps, Waze 🗺️
+  <Card title="Multi-app support" icon="rocket">
+    Google Maps, Apple Maps, Waze, Citymapper and more 🗺️
   </Card>
-  <Card title="Navigation options" icon="compass">
-    Driving, walking, transit directions 🧭
+  <Card title="Transport modes" icon="compass">
+    Driving, walking, transit, and cycling directions 🧭
   </Card>
-  <Card title="Custom routes" icon="route">
-    Waypoints and custom routing preferences 🛣️
+  <Card title="App detection" icon="search">
+    Check availability and list installed navigation apps 🔍
   </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/launch-navigator/getting-started/) to master the plugin in just a few minutes.
+  <Card title="Coordinate-based" icon="location">
+    Navigate using latitude/longitude coordinates 📍
   </Card>
 </CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-launch-navigator
+npx cap sync
+```
+
+## iOS Configuration
+
+Add URL schemes to your `Info.plist` to detect installed navigation apps:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <!-- Add other navigation app schemes -->
+</array>
+```
+
+## Core API Methods
+
+### Navigation
+- `navigate(options)` - Launch navigation to specified coordinates
+- `isAppAvailable(options)` - Check if a specific navigation app is installed
+- `getAvailableApps()` - List all available navigation apps on device
+- `getSupportedApps()` - Get all supported apps for current platform
+
+## Usage Example
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// Basic navigation to coordinates
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // San Francisco coordinates
+});
+
+// Advanced navigation with options
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // Optional starting point
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // Preferred navigation app
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// Check if specific app is available
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps is installed');
+} else {
+  console.log('Google Maps is not available');
+}
+
+// Get all available navigation apps
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('Available navigation apps:', availableApps);
+
+// Get all supported apps for platform
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('Supported apps:', supportedApps);
+```
+
+## Navigation Options
+
+```typescript
+interface NavigationOptions {
+  start?: [number, number];      // Starting coordinates [lat, lng]
+  transportMode?: TransportMode; // Transportation method
+  app?: string;                  // Preferred navigation app
+  appDisplayName?: string;       // Display name for app
+  launchMode?: LaunchMode;       // How to launch the app
+}
+```
+
+## Transport Modes
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## Supported Navigation Apps
+
+### iOS
+- Apple Maps (built-in)
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- And many more...
+
+### Android
+- Google Maps (built-in)
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- And many more...
+
+## Coordinate Requirements
+
+> ⚠️ **Important**: This plugin only accepts latitude/longitude coordinates for navigation. Use [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) to convert addresses to coordinates.
+
+```typescript
+// Example with geocoding
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+// Convert address to coordinates
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // Launch navigation with geocoded coordinates
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## App Detection and Selection
+
+```typescript
+// Check multiple apps and use the first available
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('No supported navigation apps found');
+}
+```
+
+## Error Handling
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('Navigation failed:', error);
+  // Handle error - app not available, invalid coordinates, etc.
+}
+```
+
+## Use Cases
+
+- **Location-based services**: Navigate users to points of interest
+- **Delivery apps**: Guide drivers to delivery locations
+- **Event apps**: Direct attendees to venue locations
+- **Real estate apps**: Navigate to property locations
+- **Travel apps**: Guide tourists to attractions
+
+## Best Practices
+
+- Always check app availability before attempting navigation
+- Provide fallback options when preferred apps aren't available
+- Use meaningful app display names for user selection
+- Handle errors gracefully with user-friendly messages
+- Consider user preferences for default navigation apps
+
+## Documentation
+
+Check the [complete documentation](/docs/plugins/launch-navigator/getting-started/) for detailed implementation guides and advanced navigation patterns.

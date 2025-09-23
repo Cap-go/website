@@ -24,17 +24,108 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+## Overview
+
+The Capacitor Persistent Account plugin enables secure storage and persistence of user account data between app installations. This plugin ensures that user account information remains available even after app reinstalls, providing seamless user experience and account continuity.
+
 <CardGrid stagger>
-  <Card title="Persistent storage" icon="rocket">
-    Secure storage of user account data 💾
+  <Card title="Cross-install persistence" icon="rocket">
+    Data survives app uninstall/reinstall cycles 💾
   </Card>
-  <Card title="Session management" icon="key">
-    Handle authentication sessions seamlessly 🔐
+  <Card title="Secure storage" icon="key">
+    Secure account data storage with system integration 🔐
   </Card>
-  <Card title="Data persistence" icon="database">
-    User data persists across app restarts 📊
+  <Card title="Simple API" icon="database">
+    Clean read/write interface for account management 📊
   </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/persistent-account/getting-started/) to master the plugin in just a few minutes.
+  <Card title="Cross-platform" icon="mobile">
+    Native iOS and Android implementation 📱
   </Card>
 </CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## Core API Methods
+
+### Data Management
+- `saveAccount(options: { data: unknown })` - Securely save account data to persistent storage
+- `readAccount()` - Retrieve stored account data, returns `Promise<{ data: unknown | null }>`
+
+## Key Features
+
+- **Cross-installation persistence**: Account data survives app uninstall and reinstall
+- **Secure storage**: Uses platform-specific secure storage mechanisms
+- **Type flexibility**: Store any serializable account data structure
+- **Cross-platform support**: Native implementation for both iOS and Android
+
+## Usage Example
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Define your account data structure
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Save account data
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Read account data
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Restored account:', account.username);
+} else {
+  console.log('No account data found');
+}
+```
+
+## Use Cases
+
+- **User onboarding**: Preserve user progress through app reinstalls
+- **Account recovery**: Restore user sessions after app updates
+- **Preferences storage**: Maintain user settings and configurations
+- **Offline-first apps**: Store essential user data locally
+
+## Platform Implementation
+
+### iOS
+- Utilizes iOS Keychain Services for secure, persistent storage
+- Data survives app deletion and device restores
+
+### Android
+- Uses Android Account Manager or shared preferences with backup
+- Maintains data across app reinstalls and device migrations
+
+## Security Considerations
+
+- Account data is stored using platform-specific secure storage
+- Consider data encryption for sensitive information
+- Implement proper data validation when reading stored accounts
+- Follow platform guidelines for user data handling
+
+## Documentation
+
+Check the [complete documentation](/docs/plugins/persistent-account/getting-started/) for detailed implementation guides and best practices.

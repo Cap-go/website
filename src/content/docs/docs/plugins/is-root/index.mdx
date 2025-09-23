@@ -24,17 +24,98 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+## Overview
+
+The Capacitor Is Root plugin provides comprehensive root and jailbreak detection for Android devices and emulator detection. This plugin helps enhance app security by identifying compromised devices and emulated environments that may pose security risks.
+
 <CardGrid stagger>
   <Card title="Root detection" icon="rocket">
-    Detect rooted Android and jailbroken iOS devices 🔒
+    Advanced Android root detection with multiple methods 🔒
   </Card>
-  <Card title="Security checks" icon="shield">
-    Multiple detection methods for enhanced accuracy 🛡️
+  <Card title="Emulator detection" icon="shield">
+    Identify emulated environments and testing frameworks 🛡️
   </Card>
-  <Card title="Device integrity" icon="check">
-    Validate device integrity and system modifications ✅
+  <Card title="Security validation" icon="check">
+    Multiple detection techniques for enhanced accuracy ✅
   </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Documentation](/docs/plugins/is-root/getting-started/) to master the plugin in just a few minutes.
+  <Card title="Android focused" icon="android">
+    Specialized detection for Android security assessment 🤖
   </Card>
 </CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-is-root
+npx cap sync
+```
+
+## Core API Methods
+
+### Root Detection
+- `isRooted()` - Performs comprehensive root detection using default methods
+- `isRootedWithBusyBox()` - Extended detection including BusyBox checks
+- `detectRootManagementApps()` - Identifies installed root management applications
+- `checkForSuBinary()` - Checks for `su` binary presence in system paths
+
+### Emulator Detection
+- `isRunningOnEmulator()` - Detects common Android emulator fingerprints
+
+## Detection Techniques
+
+The plugin employs multiple detection methods:
+
+### Root Detection
+- Checks for root management applications (SuperSU, Magisk, etc.)
+- Scans for suspicious system properties
+- Identifies test build tags and debug flags
+- Validates dangerous binary locations
+- Examines system path permissions
+
+### Emulator Detection
+- Hardware fingerprint analysis
+- Build property inspection
+- Emulator-specific characteristics
+- Virtual environment indicators
+
+## Usage Example
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// Basic root detection
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('Device is rooted');
+  // Handle rooted device appropriately
+}
+
+// Extended root detection with BusyBox
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('Device is rooted (extended check)');
+}
+
+// Check for emulator
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('Running on emulator');
+}
+
+// Detect root management apps
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('Root management apps detected');
+}
+```
+
+## Security Considerations
+
+- Use multiple detection methods for higher accuracy
+- Implement graceful degradation for detected environments
+- Consider user privacy when implementing security measures
+- Regular updates recommended as detection methods evolve
+
+## Documentation
+
+Check the [complete documentation](/docs/plugins/is-root/getting-started/) for detailed implementation guides and advanced security patterns.
