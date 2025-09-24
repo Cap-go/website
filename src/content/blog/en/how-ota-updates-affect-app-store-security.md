@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-26T02:34:12.739Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-04-26T02:35:08.381Z
 head_image: https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78-1745634908381.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, app security, app store compliance, encryption, vulnerabilities
@@ -163,7 +163,7 @@ When evaluating OTA update platforms, it's essential to consider stability, secu
 
 ### Platform Features Matrix
 
-| Feature | Capgo | Capawesome | Appflow | CodePush |
+| Feature | Capgo | [Capawesome](https://cloud.capawesome.io/) | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | **Active Status** | Operating since 2022 | Operating since 2024 | Closing 2026 | Closed 2024 |
 | **End-to-End Encryption** | Yes | No  | No  | No  |

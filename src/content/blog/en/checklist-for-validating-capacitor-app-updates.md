@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T01:48:44.409Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-04-20T01:50:09.661Z
 head_image: https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6-1745113809661.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, app updates, OTA updates, testing checklist, mobile development
@@ -27,7 +27,7 @@ next_blog: ''
 
 ### Quick Comparison of OTA Tools
 
-| Feature | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) |
+| Feature | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | **Launch Year** | 2022 | 2024 | Shutting down 2026 |
 | **End-to-End Encryption** | Yes | No  | No  |

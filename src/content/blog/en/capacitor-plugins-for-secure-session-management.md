@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-16T12:14:04.681Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-05-16T12:15:05.731Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6827226c0209458b3ff58b06-1747397705731.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, session management, biometric authentication, secure storage, Firebase Auth, Identity Vault, mobile security
@@ -51,7 +51,7 @@ Keep reading for detailed integration steps, features, and best practices to kee
 
 ![Firebase Auth](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/20003c863a77b942b90536c0e5cde156.jpg)
 
-Firebase Authentication offers a powerful way to manage secure sessions for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/). By integrating Firebase's native SDKs (Swift for iOS, Java for Android) alongside the Firebase JavaScript SDK for web, it ensures a smooth and consistent authentication experience across platforms [\[4\]](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication).
+Firebase Authentication offers a powerful way to manage secure sessions for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/). By integrating Firebase's native SDKs (Swift for iOS, Java for Android) alongside the Firebase JavaScript SDK for web, it ensures a smooth and consistent authentication experience across platforms [\[4\]](https://capawesome.io/plugins/firebase/authentication).
 
 Here are some of the standout security features:
 
@@ -72,13 +72,13 @@ Firebase projects are identified by API keys, but securing access depends heavil
 
 Sharathdev's December 2023 analysis highlighted that implementing token revocation during logout can significantly reduce the risk of account takeovers [\[6\]](https://medium.com/@DEVEN99/securing-firebase-authentication-mitigating-vulnerabilities-and-best-practices-593981e61b98).
 
-The plugin supports both native and web authentication flows. However, for mobile apps, native authentication is the preferred option due to WebView's inherent limitations [\[4\]](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication).
+The plugin supports both native and web authentication flows. However, for mobile apps, native authentication is the preferred option due to WebView's inherent limitations [\[4\]](https://capawesome.io/plugins/firebase/authentication).
 
 When compared to other session management tools, Firebase Auth stands out with its easy integration and extensive security features, making it an excellent choice for Capacitor apps that demand strong authentication capabilities.
 
 ## 2\. Biometric Security Plugin
 
-The Capacitor Biometric Security Plugin allows developers to integrate biometric and device credential authentication into their apps, ensuring secure user sessions. It supports various authentication methods, including [biometric options](https://capgo.app/plugins/capacitor-native-biometric/) like fingerprint, face recognition, and iris scanning, as well as device credentials such as PINs, patterns, and passwords. This functionality is available for both Android and iOS platforms [\[7\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics).
+The Capacitor Biometric Security Plugin allows developers to integrate biometric and device credential authentication into their apps, ensuring secure user sessions. It supports various authentication methods, including [biometric options](https://capgo.app/plugins/capacitor-native-biometric/) like fingerprint, face recognition, and iris scanning, as well as device credentials such as PINs, patterns, and passwords. This functionality is available for both Android and iOS platforms [\[7\]](https://capawesome.io/blog/announcing-the-capacitor-biometrics-plugin).
 
 | **Authentication Feature** | **iOS Support** | **Android Support** |
 | --- | --- | --- |
@@ -108,7 +108,7 @@ To implement the plugin, you’ll need to make some platform-specific adjustment
 -   **iOS**: Add `NSFaceIDUsageDescription` to the `Info.plist` file to explain why Face ID is being used.
 -   **Android**: Include the `android.permission.USE_BIOMETRIC` permission in the `AndroidManifest.xml` file.
 
-These steps are essential for ensuring the plugin works seamlessly and aligns with secure session management strategies [\[8\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics)[\[10\]](https://www.npmjs.com/package/capacitor-native-biometric).
+These steps are essential for ensuring the plugin works seamlessly and aligns with secure session management strategies [\[8\]](https://capawesome.io/plugins/biometrics)[\[10\]](https://www.npmjs.com/package/capacitor-native-biometric).
 
 > "Every Capacitor developer is responsible for making sure their app is following security best practices. Without proper care, major security issues can crop up which can prove extremely damaging and expensive." – Capacitor Documentation [\[1\]](https://capacitorjs.com/docs/guides/security)
 
@@ -120,7 +120,7 @@ Version 9.0.0, released in April 2025, introduced compatibility with Capacitor 7
 
 ### Advanced Security Measures
 
-To further secure sessions, developers should implement automatic session timeouts and monitor for biometric changes. If changes are detected, authentication tokens should be invalidated to prevent unauthorized access [\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta). The plugin also features a detailed error-handling system, providing feedback codes that help developers create fallback mechanisms and inform users when authentication fails [\[8\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics).
+To further secure sessions, developers should implement automatic session timeouts and monitor for biometric changes. If changes are detected, authentication tokens should be invalidated to prevent unauthorized access [\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta). The plugin also features a detailed error-handling system, providing feedback codes that help developers create fallback mechanisms and inform users when authentication fails [\[8\]](https://capawesome.io/plugins/biometrics).
 
 This plugin offers a robust solution for integrating biometric security into modern apps, ensuring both convenience and protection for users.
 

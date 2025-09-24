@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-11T23:09:38.686Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-05-11T23:10:31.775Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682128fc5e3fe4823b5f2e23-1747005031775.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capgo, Capawesome, app deployment, update management, mobile development, version control
@@ -16,7 +16,7 @@ locale: en
 next_blog: ''
 ---
 
-**Want to update your app without waiting for app store approvals?** Over-the-Air (OTA) update plugins make it possible. Two leading options are **[Capgo](https://capgo.app/)** and **Capawesome*. Here's a quick rundown to help you choose:
+**Want to update your app without waiting for app store approvals?** Over-the-Air (OTA) update plugins make it possible. Two leading options are **[Capgo](https://capgo.app/)** and **[Capawesome](https://capawesome.io/plugins/live-update/)**. Here's a quick rundown to help you choose:
 
 -   **Capgo**: Best for teams needing advanced features like [channel-based updates](https://capgo.app/docs/webapp/channels/), one-click rollbacks, real-time analytics, and end-to-end encryption. Plans start at $12/month.
 -   **Capawesome**: Simpler setup, great for smaller teams or localized deployments, especially popular in Germany.

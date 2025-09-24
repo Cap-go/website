@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T20:31:21.521Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-05-18T20:32:39.936Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682a1cea5642a17d106e7413-1747600359936.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, iOS development, Android development, build pipelines, security, deployment, mobile apps, developer accounts
@@ -126,31 +126,31 @@ Both platforms require developers to follow specific security protocols to ensur
 
 ![Capgo](https://assets.seobotai.com/capgo.app/682a1cea5642a17d106e7413/3f08bf3ebb984c6cd433c331def99e48.jpg)
 
-Managing live updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) involves [platform-specific storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/) and configuration. On **iOS**, update paths are stored in `UserDefaults` under `/Library/NoCloud/ionic_built_snapshots`. For **Android**, updates rely on `SharedPreferences` and are deployed using the `serverBasePath` in `CapWebViewSettings` [9].
+Managing live updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) involves [platform-specific storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/) and configuration. On **iOS**, update paths are stored in `UserDefaults` under `/Library/NoCloud/ionic_built_snapshots`. For **Android**, updates rely on `SharedPreferences` and are deployed using the `serverBasePath` in `CapWebViewSettings` [\[9\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work).
 
 To ensure secure content delivery, the update system uses end-to-end encryption. Performance data reveals that 95% of users receive updates within 24 hours, with an average API response time of 434 ms.
 
 | Component | iOS Implementation | Android Implementation |
 | --- | --- | --- |
 | **Storage Location** | UserDefaults | SharedPreferences |
-| **Update Path** | `/Library/NoCloud/ionic_built_snapshots` | Managed via `serverBasePath` in CapWebViewSettings [9] |
+| **Update Path** | `/Library/NoCloud/ionic_built_snapshots` | Managed via `serverBasePath` in CapWebViewSettings [\[9\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work) |
 | **Deployment Speed** | 2–4 hours (App Store approval) [\[10\]](https://stackoverflow.com/questions/5068501/how-often-i-can-update-my-application-on-app-store) | Immediate WebView updates |
 
 These technical details highlight how each platform handles live updates differently. Understanding these nuances is key to navigating platform-specific rules.
 
 ### Platform Update Policies
 
-Apple and Google take distinct stances when it comes to live updates in Capacitor apps. Apple’s guidelines focus heavily on ensuring that downloaded code does not compromise the app’s integrity or its intended purpose. The Apple Developer Program License Agreement [9] states:
+Apple and Google take distinct stances when it comes to live updates in Capacitor apps. Apple’s guidelines focus heavily on ensuring that downloaded code does not compromise the app’s integrity or its intended purpose. The Apple Developer Program License Agreement [\[9\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work) states:
 
 > "Interpreted code may be downloaded to an Application but only so long as such code: (a) does not change the primary purpose of the Application by providing features or functionality that are inconsistent with the intended and advertised purpose of the Application as submitted to the App Store, (b) does not create a store or storefront for other code or applications, and (c) does not bypass signing, sandbox, or other security features of the OS."
 > 
-> -   Apple Developer Program License Agreement [9]
+> -   Apple Developer Program License Agreement [\[9\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work)
 
-On the other hand, Google’s policies are more flexible regarding live updates, particularly for code running within a WebView. According to [Google Play Policies](https://capgo.app/blog/do-google-allow-live-updates/) [9]:
+On the other hand, Google’s policies are more flexible regarding live updates, particularly for code running within a WebView. According to [Google Play Policies](https://capgo.app/blog/do-google-allow-live-updates/) [\[9\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work):
 
 > "This restriction does not apply to code that runs in a virtual machine or an interpreter where either provides indirect access to Android APIs (such as JavaScript in a webview or browser)."
 > 
-> -   Google Play Policies [9]
+> -   Google Play Policies [\[9\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work)
 
 In practice, this means that while Android supports immediate WebView updates, iOS developers must align with App Store policies to ensure updates don’t alter the app’s core functionality. Both platforms, however, allow web content updates, making live updates a practical choice for Capacitor apps [\[8\]](https://capacitorjs.com/docs/guides/deploying-updates).
 
