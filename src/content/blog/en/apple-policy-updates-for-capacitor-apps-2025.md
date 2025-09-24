@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-03T03:02:24.801Z
-updated_at: 2025-09-24T22:28:21.000Z
+updated_at: 2025-09-24T22:53:26.000Z
 head_image: https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580-1743649359050.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, Apple policies, app compliance, security standards, performance benchmarks, OTA updates, encryption
