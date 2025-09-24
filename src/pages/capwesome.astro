@@ -1,0 +1,447 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '@/paraglide/messages'
+
+const locale = Astro.locals.locale
+const title = m.capwesome_title({}, { locale })
+const description = m.capwesome_meta_description({}, { locale })
+
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+}
+
+const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawesome-to-capgo/')
+
+const statusLink = {
+  href: 'https://status.capgo.app/history',
+  label: 'status.capgo.app/history',
+}
+
+const trustLink = {
+  href: 'https://capgo.app/trust',
+  label: 'capgo.app/trust',
+}
+
+const highlightCards = [
+  {
+    eyebrow: m.capwesome_highlight_maturity_title,
+    value: m.capwesome_highlight_maturity_value,
+    description: m.capwesome_highlight_maturity_desc,
+  },
+  {
+    eyebrow: m.capwesome_highlight_community_title,
+    value: m.capwesome_highlight_community_value,
+    description: m.capwesome_highlight_community_desc,
+  },
+  {
+    eyebrow: m.capwesome_highlight_scale_title,
+    value: m.capwesome_highlight_scale_value,
+    description: m.capwesome_highlight_scale_desc,
+  },
+  {
+    eyebrow: m.capwesome_highlight_performance_title,
+    value: m.capwesome_highlight_performance_value,
+    description: m.capwesome_highlight_performance_desc,
+  },
+  {
+    eyebrow: m.capwesome_highlight_usage_title,
+    value: m.capwesome_highlight_usage_value,
+    description: m.capwesome_highlight_usage_desc,
+  },
+  {
+    eyebrow: m.capwesome_highlight_team_title,
+    value: m.capwesome_highlight_team_value,
+    description: m.capwesome_highlight_team_desc,
+  },
+]
+
+const comparisonRows = [
+  {
+    capability: m.capwesome_row_launch,
+    capgo: m.capwesome_row_launch_capgo,
+    capawesome: m.capwesome_row_launch_cawesome,
+  },
+  {
+    capability: m.capwesome_row_customers,
+    capgo: m.capwesome_row_customers_capgo,
+    capawesome: m.capwesome_row_customers_cawesome,
+  },
+  {
+    capability: m.capwesome_row_geography,
+    capgo: m.capwesome_row_geography_capgo,
+    capawesome: m.capwesome_row_geography_cawesome,
+  },
+  {
+    capability: m.capwesome_row_npm_downloads,
+    capgo: m.capwesome_row_npm_downloads_capgo,
+    capawesome: m.capwesome_row_npm_downloads_cawesome,
+  },
+  {
+    capability: m.capwesome_row_devices,
+    capgo: m.capwesome_row_devices_capgo,
+    capawesome: m.capwesome_row_devices_cawesome,
+  },
+  {
+    capability: m.capwesome_row_scale,
+    capgo: m.capwesome_row_scale_capgo,
+    capawesome: m.capwesome_row_scale_cawesome,
+  },
+  {
+    capability: m.capwesome_row_latency,
+    capgo: m.capwesome_row_latency_capgo,
+    capawesome: m.capwesome_row_latency_cawesome,
+    capgoLinks: [statusLink],
+  },
+  {
+    capability: m.capwesome_row_uptime,
+    capgo: m.capwesome_row_uptime_capgo,
+    capawesome: m.capwesome_row_uptime_cawesome,
+  },
+  {
+    capability: m.capwesome_row_pricing,
+    capgo: m.capwesome_row_pricing_capgo,
+    capawesome: m.capwesome_row_pricing_cawesome,
+    capgoClass: 'text-gray-200',
+    capawesomeClass: 'text-gray-300',
+  },
+  {
+    capability: m.capwesome_row_maintenance,
+    capgo: m.capwesome_row_maintenance_capgo,
+    capawesome: m.capwesome_row_maintenance_cawesome,
+  },
+  {
+    capability: m.capwesome_row_marketing,
+    capgo: m.capwesome_row_marketing_capgo,
+    capawesome: m.capwesome_row_marketing_cawesome,
+  },
+  {
+    capability: m.capwesome_row_update_type,
+    capgo: m.capwesome_row_update_type_capgo,
+    capawesome: m.capwesome_row_update_type_cawesome,
+  },
+  {
+    capability: m.capwesome_row_open_source,
+    capgo: m.capwesome_row_open_source_capgo,
+    capawesome: m.capwesome_row_open_source_cawesome,
+  },
+  {
+    capability: m.capwesome_row_features,
+    capgo: m.capwesome_row_features_capgo,
+    capawesome: m.capwesome_row_features_cawesome,
+  },
+  {
+    capability: m.capwesome_row_plugin_strategy,
+    capgo: m.capwesome_row_plugin_strategy_capgo,
+    capawesome: m.capwesome_row_plugin_strategy_cawesome,
+  },
+  {
+    capability: m.capwesome_row_business_model,
+    capgo: m.capwesome_row_business_model_capgo,
+    capawesome: m.capwesome_row_business_model_cawesome,
+  },
+  {
+    capability: m.capwesome_row_analytics,
+    capgo: m.capwesome_row_analytics_capgo,
+    capawesome: m.capwesome_row_analytics_cawesome,
+  },
+  {
+    capability: m.capwesome_row_audit_logs,
+    capgo: m.capwesome_row_audit_logs_capgo,
+    capawesome: m.capwesome_row_audit_logs_cawesome,
+  },
+  {
+    capability: m.capwesome_row_retention,
+    capgo: m.capwesome_row_retention_capgo,
+    capawesome: m.capwesome_row_retention_cawesome,
+  },
+  {
+    capability: m.capwesome_row_env,
+    capgo: m.capwesome_row_env_capgo,
+    capawesome: m.capwesome_row_env_cawesome,
+  },
+  {
+    capability: m.capwesome_row_legal,
+    capgo: m.capwesome_row_legal_capgo,
+    capawesome: m.capwesome_row_legal_cawesome,
+    capawesomeClass: 'text-gray-300',
+  },
+  {
+    capability: m.capwesome_row_whitelabel,
+    capgo: m.capwesome_row_whitelabel_capgo,
+    capawesome: m.capwesome_row_whitelabel_cawesome,
+  },
+  {
+    capability: m.capwesome_row_cli,
+    capgo: m.capwesome_row_cli_capgo,
+    capawesome: m.capwesome_row_cli_cawesome,
+  },
+  {
+    capability: m.capwesome_row_transparency,
+    capgo: m.capwesome_row_transparency_capgo,
+    capawesome: m.capwesome_row_transparency_cawesome,
+  },
+  {
+    capability: m.capwesome_row_community,
+    capgo: m.capwesome_row_community_capgo,
+    capawesome: m.capwesome_row_community_cawesome,
+  },
+  {
+    capability: m.capwesome_row_team,
+    capgo: m.capwesome_row_team_capgo,
+    capawesome: m.capwesome_row_team_cawesome,
+  },
+  {
+    capability: m.capwesome_row_fit,
+    capgo: m.capwesome_row_fit_capgo,
+    capawesome: m.capwesome_row_fit_cawesome,
+  },
+]
+
+const differentiators = [
+  m.capwesome_differentiator_native_updates,
+  m.capwesome_differentiator_innovation,
+  m.capwesome_differentiator_cli,
+  m.capwesome_differentiator_white_label,
+  m.capwesome_differentiator_analytics,
+  m.capwesome_differentiator_ecology,
+]
+
+const implementationInsights = [
+  m.capwesome_implementation_point_account,
+  m.capwesome_implementation_point_config,
+  m.capwesome_implementation_point_js_native,
+  m.capwesome_implementation_point_business,
+]
+
+const sources = [
+  {
+    label: m.capwesome_source_status,
+    href: 'https://status.capgo.app/history',
+    linkLabel: 'status.capgo.app/history',
+  },
+  {
+    label: m.capwesome_source_github,
+    href: 'https://github.com/Cap-go/capacitor-updater',
+    linkLabel: 'github.com/Cap-go/capacitor-updater',
+  },
+  {
+    label: m.capwesome_source_api,
+    href: 'https://docs.capgo.app/docs/api/',
+    linkLabel: 'docs.capgo.app/docs/api/',
+  },
+  {
+    label: m.capwesome_source_cli,
+    href: 'https://docs.capgo.app/docs/cli/',
+    linkLabel: 'docs.capgo.app/docs/cli/',
+  },
+  {
+    label: m.capwesome_source_climate,
+    href: 'https://climate.stripe.com/',
+    linkLabel: 'climate.stripe.com',
+  },
+  {
+    label: m.capwesome_source_trust,
+    href: 'https://capgo.app/trust',
+    linkLabel: 'capgo.app/trust',
+  },
+  {
+    label: m.capwesome_source_migration,
+    href: migrationGuideUrl,
+    linkLabel: 'capgo.app/docs/upgrade/from-capawesome-to-capgo',
+  },
+  {
+    label: m.capwesome_source_team,
+    href: getRelativeLocaleUrl(locale, 'about'),
+    linkLabel: 'capgo.app/about',
+  },
+]
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          {m.capwesome_title({}, { locale })}
+        </h1>
+        <p class="mx-auto mt-6 max-w-3xl text-lg text-gray-300">
+          {m.capwesome_intro({}, { locale })}
+        </p>
+        <p class="mx-auto mt-4 max-w-2xl text-sm text-gray-400">
+          {m.capwesome_affection_note({}, { locale })}
+        </p>
+      </div>
+
+      <!-- Highlights -->
+      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {highlightCards.map((card) => (
+          <div class="rounded-2xl bg-gray-800 p-6 ring-1 ring-white/10">
+            <p class="text-sm text-blue-300">{card.eyebrow({}, { locale })}</p>
+            <h3 class="mt-2 text-xl font-semibold text-emerald-400" set:html={card.value({}, { locale })}></h3>
+            <p class="mt-2 text-gray-300" set:html={card.description({}, { locale })}></p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Comparison Table (concise) -->
+      <div class="mt-12 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <table class="min-w-full divide-y divide-white/10">
+          <thead class="bg-gray-800/60">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capwesome_table_capability({}, { locale })}</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capwesome_table_capgo({}, { locale })}</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capwesome_table_capawesome({}, { locale })}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10 bg-gray-800/20">
+            {comparisonRows.map((row) => (
+              <tr>
+                <td class="px-6 py-4 text-gray-300">{row.capability({}, { locale })}</td>
+                <td class={`px-6 py-4 font-semibold ${row.capgoClass ?? 'text-emerald-400'}`}>
+                  <span set:html={row.capgo({}, { locale })}></span>
+                  {row.capgoLinks && (
+                    <span class="ml-1 text-sm text-blue-300">
+                      (
+                      {' '}
+                      {row.capgoLinks.map((link, index) => (
+                        <span>
+                          {index > 0 ? ', ' : ''}
+                          <a
+                            class="text-blue-300 underline decoration-dotted hover:text-blue-200"
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener"
+                          >
+                            {link.label}
+                          </a>
+                        </span>
+                      ))}
+                      {' '}
+                      )
+                    </span>
+                  )}
+                </td>
+                <td
+                  class={`px-6 py-4 font-medium ${row.capawesomeClass ?? 'text-rose-400'}`}
+                  set:html={row.capawesome({}, { locale })}
+                ></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Implementation Insights -->
+      <div class="mt-12 rounded-2xl bg-gray-800 p-8 ring-1 ring-white/10">
+        <h2 class="text-2xl font-semibold text-white">{m.capwesome_implementation_title({}, { locale })}</h2>
+        <p class="mt-3 text-gray-300" set:html={m.capwesome_implementation_intro({}, { locale })}></p>
+        <ul class="mt-6 space-y-3 text-gray-200">
+          {implementationInsights.map((item) => (
+            <li class="flex items-start gap-3">
+              <span aria-hidden="true" class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-emerald-400"></span>
+              <span set:html={item({}, { locale })}></span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-emerald-300">
+          {m.capwesome_implementation_cta({}, { locale })}{' '}
+          <a class="underline hover:text-emerald-200" href={migrationGuideUrl}>
+            {m.capwesome_implementation_cta_link({}, { locale })}
+          </a>
+        </p>
+      </div>
+
+      <!-- Differentiators -->
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-2xl bg-gray-800 p-8 ring-1 ring-white/10">
+          <h2 class="text-2xl font-semibold text-white">{m.capwesome_differentiators_title({}, { locale })}</h2>
+          <p class="mt-3 text-gray-300">{m.capwesome_differentiators_intro({}, { locale })}</p>
+          <ul class="mt-6 space-y-3 text-gray-200">
+            {differentiators.map((item) => (
+              <li class="flex items-start gap-3">
+                <span aria-hidden="true" class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-blue-400"></span>
+                <span set:html={item({}, { locale })}></span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="relative overflow-hidden rounded-2xl border border-blue-500/30 bg-gradient-to-br from-blue-900/60 via-slate-900/50 to-black/60 p-8 shadow-[0_40px_70px_-30px_rgba(37,99,235,0.75)]">
+          <div class="pointer-events-none absolute -top-10 -right-6 h-32 w-32 rounded-full bg-blue-500/40 blur-3xl"></div>
+          <div class="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-purple-500/30 blur-3xl"></div>
+          <div class="inline-flex items-center gap-2 rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-100 ring-1 ring-inset ring-blue-300/40">
+            <span aria-hidden="true">🤝</span>
+            <span>{m.capwesome_ionic_title({}, { locale })}</span>
+          </div>
+          <h3 class="mt-4 text-2xl font-semibold text-white">{m.capwesome_ionic_desc({}, { locale })}</h3>
+          <p class="mt-4 text-sm leading-relaxed text-blue-100/90">{m.capwesome_ionic_note({}, { locale })}</p>
+        </div>
+      </div>
+
+      <div class="mt-12 overflow-hidden rounded-3xl bg-gradient-to-r from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 p-1 ring-1 ring-white/10">
+        <div class="relative overflow-hidden rounded-[1.45rem] bg-gray-900 px-8 py-12 sm:px-12 sm:py-16">
+          <div class="pointer-events-none absolute -top-24 -left-10 h-48 w-48 rounded-full bg-[#44BCFF]/30 blur-3xl"></div>
+          <div class="pointer-events-none absolute -bottom-28 -right-16 h-56 w-56 rounded-full bg-[#FF44EC]/20 blur-3xl"></div>
+          <div class="relative grid gap-6 lg:grid-cols-[1.5fr_auto] lg:items-center">
+            <div>
+              <span class="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-200 ring-1 ring-white/10">
+                {m.capwesome_switch_cta_title({}, { locale })}
+              </span>
+              <h2
+                class="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-[2.6rem]"
+                set:html={m.capwesome_switch_cta_desc({}, { locale })}
+              ></h2>
+              <p
+                class="mt-4 max-w-xl text-sm text-gray-300"
+                set:html={m.capwesome_switch_cta_subtext({}, { locale })}
+              ></p>
+            </div>
+            <div class="flex flex-col items-start gap-3 lg:items-end">
+              <div class="group relative inline-flex">
+                <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
+                <a
+                  href={getRelativeLocaleUrl(locale, 'register')}
+                  class="relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                >
+                  {m.capwesome_switch_cta_button({}, { locale })}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes & Sources -->
+      <div class="mt-12 rounded-2xl bg-gray-800/80 p-8 ring-1 ring-white/10">
+        <p class="text-sm text-gray-300">{m.capwesome_notes({}, { locale })}</p>
+        <ul class="mt-6 grid gap-3 text-sm text-gray-400 sm:grid-cols-2">
+          {sources.map((source) => (
+            <li class="flex flex-col gap-1 rounded-lg border border-white/5 bg-gray-900/30 p-4">
+              <span class="text-gray-200">{source.label({}, { locale })}</span>
+              <a class="text-blue-300 underline decoration-dotted hover:text-blue-200" href={source.href} target="_blank" rel="noopener">{source.linkLabel}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row">
+        <a
+          href="https://cal.com/team/capgo/demo"
+          target="_blank"
+          class="inline-flex items-center justify-center rounded-xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/20 hover:bg-white/15"
+        >
+          {m.capwesome_cta_book_demo({}, { locale })}
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, 'docs/')}
+          class="inline-flex items-center justify-center rounded-xl bg-gray-800 px-6 py-3 font-semibold text-white ring-1 ring-white/10 hover:bg-gray-700"
+        >
+          {m.capwesome_cta_explore_docs({}, { locale })}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

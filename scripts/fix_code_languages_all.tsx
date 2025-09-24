@@ -1,5 +1,5 @@
 import fg from 'fast-glob'
-import { promises as fs } from 'fs'
+import { promises as fs } from 'node:fs'
 import { commonReplacements } from './commonReplacements'
 
 const files = await fg(['src/content/**/*.md*'], { absolute: true, onlyFiles: true })

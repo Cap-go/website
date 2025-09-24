@@ -111,7 +111,7 @@ Node.jsモジュールを[**Vite**](https://vitejs.dev/)でバンドルするた
 
 ```javascript
 import { defineConfig } from 'vite';
-import path from 'path';
+import path from 'node:path';
 
 export default defineConfig({
   build: {

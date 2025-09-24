@@ -114,7 +114,7 @@ Pour regrouper nos modules Node.js avec [**Vite**](https://vitejs.dev/), nous av
 
 ```javascript
 import { defineConfig } from 'vite';
-import path from 'path';
+import path from 'node:path';
 
 export default defineConfig({
   build: {

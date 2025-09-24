@@ -1,6 +1,6 @@
 import fg from 'fast-glob'
-import { readFileSync, unlinkSync } from 'fs'
-import path from 'path'
+import { readFileSync, unlinkSync } from 'node:fs'
+import path from 'node:path'
 
 const unusedFiles = new Set<string>()
 const [publicFiles, srcFiles] = await Promise.all([

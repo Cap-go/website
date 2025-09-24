@@ -806,7 +806,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             </div>
           </div>
 
-          <div class="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
+          <div class="grid gap-8 sm:grid-cols-2">
             <div class="group relative">
               <div class="absolute inset-0 rounded-2xl bg-blue-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div class="relative h-full rounded-2xl border border-blue-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
@@ -843,132 +843,134 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 <p class="text-sm text-gray-300">{m.home_network_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div class="group relative">
-              <div class="absolute inset-0 rounded-2xl bg-purple-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="relative h-full rounded-2xl border border-purple-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
-                <div class="mb-4 flex items-center">
-                  <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30">
-                    <svg class="h-6 w-6 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-4xl font-bold text-white">122+</h3>
-                    <p class="text-purple-400 font-medium">{m.home_countries_covered({}, { locale: Astro.locals.locale })}</p>
-                  </div>
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
+          <div class="group relative">
+            <div class="absolute inset-0 rounded-2xl bg-purple-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative h-full rounded-2xl border border-purple-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
+              <div class="mb-4 flex items-center">
+                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30">
+                  <svg class="h-6 w-6 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
                 </div>
-                <p class="text-sm text-gray-300">{m.home_countries_desc({}, { locale: Astro.locals.locale })}</p>
-              </div>
-            </div>
-
-            <div class="group relative">
-              <div class="absolute inset-0 rounded-2xl bg-red-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="relative h-full rounded-2xl border border-red-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
-                <div class="mb-4 flex items-center">
-                  <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/20 ring-1 ring-red-500/30">
-                    <svg class="h-6 w-6 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22c4.97 0 9-4.03 9-9V5l-9-3-9 3v8c0 4.97 4.03 9 9 9z"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-4xl font-bold text-white">2</h3>
-                    <p class="text-red-400 font-medium">{m.home_legal_regions_heading({}, { locale: Astro.locals.locale })}</p>
-                  </div>
+                <div>
+                  <h3 class="text-4xl font-bold text-white">122+</h3>
+                  <p class="text-purple-400 font-medium">{m.home_countries_covered({}, { locale: Astro.locals.locale })}</p>
                 </div>
-                <p class="text-sm text-gray-300">{m.home_legal_regions_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
+              <p class="text-sm text-gray-300">{m.home_countries_desc({}, { locale: Astro.locals.locale })}</p>
             </div>
+          </div>
 
-            <div class="group relative">
-              <div class="absolute inset-0 rounded-2xl bg-yellow-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="relative h-full rounded-2xl border border-yellow-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
-                <div class="mb-4 flex items-center">
-                  <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-500/20 ring-1 ring-yellow-500/30">
-                    <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-4xl font-bold text-white">
-                      <a
-                        href="https://status.capgo.app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="hover:underline"
-                      >
-                        44ms
-                      </a>
-                    </h3>
-                    <p class="text-yellow-400 font-medium">{m.home_latency_from_users({}, { locale: Astro.locals.locale })}</p>
-                  </div>
+          <div class="group relative">
+            <div class="absolute inset-0 rounded-2xl bg-red-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative h-full rounded-2xl border border-red-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
+              <div class="mb-4 flex items-center">
+                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/20 ring-1 ring-red-500/30">
+                  <svg class="h-6 w-6 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22c4.97 0 9-4.03 9-9V5l-9-3-9 3v8c0 4.97 4.03 9 9 9z"></path>
+                  </svg>
                 </div>
-                <p class="text-sm text-gray-300">{m.home_latency_desc({}, { locale: Astro.locals.locale })}</p>
-              </div>
-            </div>
-
-            <div class="group relative">
-              <div class="absolute inset-0 rounded-2xl bg-cyan-500/5 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="relative h-full rounded-2xl border border-cyan-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
-                <div class="mb-4 flex items-center">
-                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/20">
-                    <svg class="h-5 w-5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-bold text-white">{m.home_edge_computing_power({}, { locale: Astro.locals.locale })}</h3>
+                <div>
+                  <h3 class="text-4xl font-bold text-white">2</h3>
+                  <p class="text-red-400 font-medium">{m.home_legal_regions_heading({}, { locale: Astro.locals.locale })}</p>
                 </div>
-                <p class="text-sm leading-relaxed text-gray-300">{m.home_edge_computing_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
+              <p class="text-sm text-gray-300">{m.home_legal_regions_desc({}, { locale: Astro.locals.locale })}</p>
             </div>
+          </div>
 
-            <div class="group relative">
-              <div class="absolute inset-0 rounded-2xl bg-orange-500/5 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="relative h-full rounded-2xl border border-orange-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
-                <div class="mb-4 flex items-center">
-                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/20">
-                    <svg class="h-5 w-5 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-bold text-white">{m.home_distributed_database({}, { locale: Astro.locals.locale })}</h3>
+          <div class="group relative">
+            <div class="absolute inset-0 rounded-2xl bg-yellow-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative h-full rounded-2xl border border-yellow-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
+              <div class="mb-4 flex items-center">
+                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-500/20 ring-1 ring-yellow-500/30">
+                  <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
                 </div>
-                <p class="text-sm leading-relaxed text-gray-300">{m.home_distributed_database_desc({}, { locale: Astro.locals.locale })}</p>
-              </div>
-            </div>
-
-            <div class="group relative">
-              <div class="absolute inset-0 rounded-2xl bg-blue-500/5 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="relative h-full rounded-2xl border border-blue-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
-                <div class="mb-4 flex items-center">
-                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-                    <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 014-4h1a5 5 0 019.9 1H19a3 3 0 010 6H7a4 4 0 01-4-4z"></path>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12V7a3 3 0 016 0v5"></path>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-bold text-white">{m.home_advanced_release_control({}, { locale: Astro.locals.locale })}</h3>
+                <div>
+                  <h3 class="text-4xl font-bold text-white">
+                    <a
+                      href="https://status.capgo.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:underline"
+                    >
+                      44ms
+                    </a>
+                  </h3>
+                  <p class="text-yellow-400 font-medium">{m.home_latency_from_users({}, { locale: Astro.locals.locale })}</p>
                 </div>
-                <p class="text-sm leading-relaxed text-gray-300">{m.home_advanced_release_control_desc({}, { locale: Astro.locals.locale })}</p>
               </div>
+              <p class="text-sm text-gray-300">{m.home_latency_desc({}, { locale: Astro.locals.locale })}</p>
             </div>
+          </div>
 
-            <div class="group relative">
-              <div class="absolute inset-0 rounded-2xl bg-slate-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="relative h-full rounded-2xl border border-slate-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
-                <div class="mb-4 flex items-center">
-                  <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-500/20">
-                    <svg class="h-5 w-5 text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6l7 4v4c0 4-3 7-7 8-4-1-7-4-7-8V10l7-4z"/>
-                    </svg>
-                  </div>
-                  <h3 class="text-xl font-bold text-white">{m.home_security_audits_title({}, { locale: Astro.locals.locale })}</h3>
+          <div class="group relative">
+            <div class="absolute inset-0 rounded-2xl bg-cyan-500/5 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative h-full rounded-2xl border border-cyan-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
+              <div class="mb-4 flex items-center">
+                <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/20">
+                  <svg class="h-5 w-5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                  </svg>
                 </div>
-                <p class="text-sm leading-relaxed text-gray-300">{m.home_security_audits_desc({}, { locale: Astro.locals.locale })}</p>
+                <h3 class="text-xl font-bold text-white">{m.home_edge_computing_power({}, { locale: Astro.locals.locale })}</h3>
               </div>
+              <p class="text-sm leading-relaxed text-gray-300">{m.home_edge_computing_desc({}, { locale: Astro.locals.locale })}</p>
             </div>
+          </div>
 
+          <div class="group relative">
+            <div class="absolute inset-0 rounded-2xl bg-orange-500/5 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative h-full rounded-2xl border border-orange-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
+              <div class="mb-4 flex items-center">
+                <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/20">
+                  <svg class="h-5 w-5 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white">{m.home_distributed_database({}, { locale: Astro.locals.locale })}</h3>
+              </div>
+              <p class="text-sm leading-relaxed text-gray-300">{m.home_distributed_database_desc({}, { locale: Astro.locals.locale })}</p>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <div class="absolute inset-0 rounded-2xl bg-blue-500/5 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative h-full rounded-2xl border border-blue-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
+              <div class="mb-4 flex items-center">
+                <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
+                  <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 014-4h1a5 5 0 019.9 1H19a3 3 0 010 6H7a4 4 0 01-4-4z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12V7a3 3 0 016 0v5"></path>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white">{m.home_advanced_release_control({}, { locale: Astro.locals.locale })}</h3>
+              </div>
+              <p class="text-sm leading-relaxed text-gray-300">{m.home_advanced_release_control_desc({}, { locale: Astro.locals.locale })}</p>
+            </div>
+          </div>
+
+          <div class="group relative">
+            <div class="absolute inset-0 rounded-2xl bg-slate-500/10 blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative h-full rounded-2xl border border-slate-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
+              <div class="mb-4 flex items-center">
+                <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-500/20">
+                  <svg class="h-5 w-5 text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6l7 4v4c0 4-3 7-7 8-4-1-7-4-7-8V10l7-4z"/>
+                  </svg>
+                </div>
+                <h3 class="text-xl font-bold text-white">{m.home_security_audits_title({}, { locale: Astro.locals.locale })}</h3>
+              </div>
+              <p class="text-sm leading-relaxed text-gray-300">{m.home_security_audits_desc({}, { locale: Astro.locals.locale })}</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

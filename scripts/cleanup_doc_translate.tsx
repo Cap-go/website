@@ -1,7 +1,7 @@
 import fg from 'fast-glob'
-import { existsSync, unlinkSync, rmSync, statSync } from 'fs'
+import { existsSync, unlinkSync, rmSync, statSync } from 'node:fs'
 import { createSpinner } from 'nanospinner'
-import { join, dirname } from 'path'
+import { join, dirname } from 'node:path'
 import { defaultLocale, locales } from '../src/services/locale'
 
 const contentDirectory = join(process.cwd(), 'src', 'content')

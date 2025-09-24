@@ -1,5 +1,5 @@
 import fg from 'fast-glob'
-import { readFileSync, unlinkSync } from 'fs'
+import { readFileSync, unlinkSync } from 'node:fs'
 import matter from 'gray-matter'
 
 const blogFiles = fg.sync(['src/content/blog/**/*.md*'], { dot: true, absolute: true })

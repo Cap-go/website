@@ -112,7 +112,7 @@ Para agrupar nuestros módulos de Node.js con [**Vite**](https://vitejs.dev/), n
 
 ```javascript
 import { defineConfig } from 'vite';
-import path from 'path';
+import path from 'node:path';
 
 export default defineConfig({
   build: {

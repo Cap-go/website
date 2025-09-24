@@ -2,7 +2,7 @@ import '@dotenvx/dotenvx/config'
 import fg from 'fast-glob'
 import matter from 'gray-matter'
 import { existsSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
-import { relative } from 'path'
+import { relative } from 'node:path'
 import { ANTHROPIC_MODEL } from '../translate'
 
 const localeToLanguage: Record<string, string> = {

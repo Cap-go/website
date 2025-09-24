@@ -1,240 +1,169 @@
 ---
 title: Migrate from AppFlow to Capgo
-description: This comprehensive guide provides detailed instructions on how to successfully transition your application from the Ionic AppFlow platform to the Capgo system, ensuring a smooth and efficient migration process.
+description: Detailed walkthrough for moving an Ionic AppFlow project to Capgo. Each step maps to the standard AppFlow migration tasks so you can compare line by line—and see which ones Capgo already handles for you.
 sidebar:
   order: 7
 ---
 
-## AppFlow Configuration Reference
+> 🚦 Ionic announced that AppFlow’s commercial products—including Live Updates—are winding down. Existing projects can run until **31 December 2027**, but no new customers are accepted and no new features are planned. This guide walks you through the actions required to migrate to Capgo and highlights the native automation you gain.
 
-Before migrating, note your current AppFlow configuration in `capacitor.config.ts`:
+## Migration overview
 
-```typescript
-import { CapacitorConfig } from '@capacitor/cli';
+Capgo handles channels, bundle retention, rollbacks, analytics, and CLI uploads for you. Migration boils down to installing the plugin, calling `CapacitorUpdater.notifyAppReady()`, and—if desired—configuring optional manual controls. The sections below walk through each task directly.
 
-const config: CapacitorConfig = {
-  plugins: {
-    LiveUpdates: {
-      appId: 'your-app-id',
-      channel: 'Production',
-      autoUpdateMethod: 'background', // or 'always latest', 'force update'
-      maxVersions: 2
-    }
-  }
-};
-```
+## Step 0 – Capture your current AppFlow setup
 
-This configuration will help map AppFlow features to Capgo equivalents.
+- Note your AppFlow **App ID**, existing channels, and signing keys.
+- Export any bundle history you want to archive.
+- If you are using GitHub Actions or another CI provider, keep those pipelines—they will keep working with Capgo.
 
-## Update Strategy Migration
+## Step 1 – Replace the AppFlow SDK with Capgo
 
-### Background Updates (Default)
-If using AppFlow's default background updates:
-
-```typescript
-// Capgo equivalent in capacitor.config.ts
-{
-  plugins: {
-    CapacitorUpdater: {
-      autoUpdate: true,
-      directUpdate: false,
-      autoDeletePrevious: true
-    }
-  }
-}
-```
-
-### Force Updates
-If using AppFlow's force update strategy:
-
-```typescript
-// Capgo equivalent in capacitor.config.ts
-{
-  plugins: {
-    CapacitorUpdater: {
-      autoUpdate: true,
-      directUpdate: true,
-      keepUrlPathAfterReload: true
-    }
-  }
-}
-
-// Required JavaScript code
-import { CapacitorUpdater } from '@capgo/capacitor-updater';
-import { SplashScreen } from '@capacitor/splash-screen';
-
-CapacitorUpdater.addListener('appReady', () => {
-  SplashScreen.hide();
-});
-
-CapacitorUpdater.notifyAppReady();
-```
-
-### Always Latest Updates
-If using AppFlow's always latest strategy, implement with Capgo:
-
-```typescript
-import { CapacitorUpdater } from '@capgo/capacitor-updater';
-import { App } from '@capacitor/app';
-
-async function setupAlwaysLatest() {
-  App.addListener('resume', async () => {
-    const result = await CapacitorUpdater.download({
-      url: 'your-update-url'
-    });
-    if (result) {
-      await CapacitorUpdater.set({ id: result.id });
-    }
-  });
-}
-```
-
-## API Method Migration
-
-| AppFlow Method | Capgo Equivalent | Notes |
-|---------------|------------------|-------|
-| `sync()` | `download()` | Downloads new updates |
-| `reload()` | `set()` | Applies updates immediately |
-| `setConfig()` | `setChannel()` | Updates channel configuration |
-
-### Example Migration
-
-```typescript
-// AppFlow code
-import * as LiveUpdates from '@capacitor/live-updates';
-const result = await LiveUpdates.sync();
-if (result.activeApplicationPathChanged) {
-  await LiveUpdates.reload();
-}
-
-// Capgo equivalent
-import { CapacitorUpdater } from '@capgo/capacitor-updater';
-const bundle = await CapacitorUpdater.download({
-  url: 'your-update-url'
-});
-if (bundle) {
-  await CapacitorUpdater.set({ id: bundle.id });
-}
-```
-
-
-## Why migrate to Capgo?
-
-With Ionic AppFlow's shutdown announcement, migrating to Capgo provides a seamless transition for your mobile app development workflow. Capgo offers enhanced features, better performance, and significant cost savings while maintaining all the critical functionality you need.
-
-### Key Benefits
-- Faster update delivery (< 1 minute vs 10 minutes)
-- More affordable pricing ($14/month vs $499/month)
-- End-to-end encryption included in all plans
-- Enhanced control over update channels
-- Comprehensive CI/CD integration options
-
-## Migration Steps
-
-### 1. Live Updates Migration
-
-#### Remove Previous Dependencies
 ```bash
-npm uninstall @ionic/appflow
-# Remove any AppFlow-specific configurations from capacitor.config.json
-```
-
-#### Install Capgo
-```bash
+npm uninstall @capacitor/live-updates
 npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-#### Update Configuration
-Add Capgo configuration to your `capacitor.config.json`:
-```json
-{
-  "plugins": {
-    "CapacitorUpdater": {
-      "autoUpdate": true
-    }
-  }
+That’s it. Capgo bundles the native code for both iOS and Android; no extra JavaScript helpers are required.
+
+## Step 2 – Minimal configuration (no manual fields)
+
+The existing configuration block is extensive. Capgo auto-detects your project and channels, so the minimal configuration is:
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli'
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      autoDeletePrevious: true,
+    },
+  },
 }
+
+export default config
 ```
 
-### 2. CI/CD Migration
+### Configuration quick reference
 
-Capgo provides flexible CI/CD options:
+| Ionic AppFlow setting | Capgo equivalent | Do you need to set it? |
+| --- | --- | --- |
+| `appId` | Managed in the Capgo dashboard | Automatically supplied when you create the project |
+| `channel` / `defaultChannel` | Channel rules in the dashboard/API | Optional override; defaults come from the server |
+| `autoUpdateMethod` | `autoUpdate: true` | Enabled by default |
+| `maxVersions` | Retention policy | Configured centrally (1 month default, 24 months max) |
+| `enabled` | Not required | Capgo toggles availability per channel |
 
-#### Option 1: Use Your Existing CI/CD
-Follow our detailed tutorials for setting up CI/CD with popular platforms:
-- [iOS Build Setup](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
-- [Android Build Setup](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
-- [GitHub Actions Integration](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
+## Step 3 – Call `notifyAppReady()` (the only required hook)
 
-#### Option 2: CI/CD Done For You
-Let us handle your CI/CD setup with our [managed service](https://cal.com/team/capgo/mobile-ci-cd-done-for-you).
+In Ionic’s guide you wire `sync`, `download`, and `reload`, then hide the splash screen manually. Capgo performs those actions natively. You only need to confirm the app is ready:
 
-### 3. Channel Setup
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-1. Create channels in Capgo dashboard:
+CapacitorUpdater.notifyAppReady()
+```
+
+If the confirmation never arrives, Capgo rolls the bundle back automatically.
+
+**That's it—Capgo handles the background checks, splash visibility, and rollbacks for you.**
+
+<details>
+<summary>Optional: run logic before the splash screen hides</summary>
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Log diagnostics or run custom code if needed
+  SplashScreen.hide()
+})
+
+CapacitorUpdater.notifyAppReady()
+```
+
+</details>
+
+## Step 4 – Update strategies translated
+
+AppFlow documents three strategies. Here is how they map to Capgo:
+
+### Background (default)
+- **AppFlow**: configure `autoUpdateMethod = background`, call `sync()` manually.
+- **Capgo**: enabled by default. No JavaScript required.
+
+### Always latest
+- **AppFlow**: add an `App.addListener('resume')` handler that downloads and reloads.
+- **Capgo**: auto-update runs on resume already. Add the handler only if you want a custom timing window.
+
+<details>
+<summary>Optional: manual resume check</summary>
+
+```ts
+import { App } from '@capacitor/app'
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+App.addListener('resume', async () => {
+  const bundle = await CapacitorUpdater.download()
+  if (bundle) {
+    await CapacitorUpdater.set({ id: bundle.id })
+  }
+})
+```
+
+</details>
+
+### Force update
+- **AppFlow**: prompt the user and call `reload()`.
+- **Capgo**: mark the bundle as “mandatory” in the dashboard. The SDK enforces it automatically after `notifyAppReady()`.
+
+## Step 5 – Mapping API calls
+
+| AppFlow method | Capgo equivalent | Do you need it? |
+| --- | --- | --- |
+| `LiveUpdates.sync()` | `CapacitorUpdater.sync()` | Optional; native auto-update already syncs |
+| `LiveUpdates.download()` | `CapacitorUpdater.download()` | Optional for custom flows |
+| `LiveUpdates.reload()` | `CapacitorUpdater.set()` | Optional; dashboard toggles handle forced updates |
+| `LiveUpdates.getVersion()` | `CapacitorUpdater.current()` | Optional diagnostics |
+
+## Step 6 – Deploy using the Capgo CLI or API
+
+Finish the migration by uploading bundles with the Capgo CLI or API. The workflow mirrors what you may have scripted before, but now includes native safeguards:
+
 ```bash
-npx @capgo/cli channel create production
-npx @capgo/cli channel create staging
+capgo login                # authenticate once
+capgo bundle upload \
+  --path dist \
+  --channel production     # automatically tags platform/version
 ```
 
-2. Configure channel settings:
-```bash
-# Set up production channel
-npx @capgo/cli channel update production --no-downgrade --no-upgrade
+Capgo automatically:
+- Keeps device-level audit logs for every install.
+- Sends proactive emails when you approach plan limits.
+- Provides burst credits so you are never blocked mid-release.
+- Publishes latency metrics for 18 global regions at [status.capgo.app/history](https://status.capgo.app/history).
 
-# Set up staging channel
-npx @capgo/cli channel update staging
-```
+## Frequently asked questions
 
-### 4. Testing the Migration
+### Why is AppFlow shutting down live updates?
+Ionic is discontinuing commercial products, including AppFlow, to focus on their open-source framework. Existing customers can continue using live updates until **31 December 2027**, but no new features or customers are accepted. Capgo fills that gap with a dedicated native OTA platform.
 
-1. **Test Live Updates**
-```bash
-# Create and upload a test bundle
-npx @capgo/cli bundle create --channel staging
-```
+### How long does migration take?
+Most teams complete the move in under a day. Concepts such as channels, deployments, and release rules map directly, and our team provides documentation plus hands-on support. In many cases you simply install the plugin, call `notifyAppReady()`, and upload your first bundle.
 
-2. **Verify Update Reception**
-- Install the app on a test device
-- Check that updates are received correctly
-- Verify update installation process
-- Test recovery functionality
+### Will we save money?
+Yes. AppFlow live updates start at **$499/mo**. Capgo starts at **$14/mo** with usage-based pricing that drops to roughly **$0.001 per MAU**. You also gain encryption, automatic rollbacks, and worldwide latency monitoring.
 
-3. **Validate CI/CD Pipeline**
-- Make a test commit
-- Verify build process
-- Check automatic deployment
-- Confirm channel assignment
+### When should we migrate?
+Because AppFlow is now in maintenance mode, migrating sooner gives you access to ongoing Capgo innovation. We recommend switching when it fits your release schedule. Our engineering team will help you plan the changeover so your CI/CD and deployments keep running.
 
-## Troubleshooting
+## Need help?
 
-### Common Issues
+- Book a migration session: [cal.com/team/capgo/demo](https://cal.com/team/capgo/demo)
+- Join the community: [Capgo Discord](https://discord.gg/VCXxSVjefW)
+- Track issues / request features: [github.com/Cap-go/capacitor-updater](https://github.com/Cap-go/capacitor-updater)
 
-#### Updates Not Received
-- Verify channel configuration
-- Check device logs
-- Ensure proper network connectivity
-- Validate bundle version format
-
-#### Build Pipeline Issues
-- Verify GitHub Actions configuration
-- Check signing certificates
-- Validate environment variables
-- Review build logs
-
-#### Version Conflicts
-- Check version numbering
-- Verify channel constraints
-- Review update conditions
-
-## Next Steps
-
-1. [Register for a Capgo account](/register/)
-2. Follow our [quickstart guide](/docs/getting-started/quickstart/)
-3. Set up [CI/CD integration](/docs/getting-started/cicd-integration/)
-4. Configure [live updates](/docs/live-updates/)
-
-For enterprise teams requiring dedicated support during migration, [schedule a call with our team](https://cal.com/team/capgo/capgo-enterprise-inquiry).
-
-Remember to test thoroughly in a staging environment before deploying to production. Our support team is available to help if you encounter any issues during migration.
+Capgo is engineered for enterprises that need native delta updates, encrypted bundles, and continuous innovation. Once you migrate you can delete the AppFlow glue code, rely on native automation, and keep shipping without interruption.

@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import fg from 'fast-glob'
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import { locales } from '../src/services/locale'
 
 const newLocale = 'fr'

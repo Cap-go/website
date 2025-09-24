@@ -114,7 +114,7 @@ Untuk membundel modul Node.js dengan [**Vite**](https://vitejs.dev/), kita memer
 
 ```javascript
 import { defineConfig } from 'vite';
-import path from 'path';
+import path from 'node:path';
 
 export default defineConfig({
   build: {

@@ -111,7 +111,7 @@ To bundle our Node.js modules with [**Vite**](https://vitejs.dev/), we need a co
 
 ```javascript
 import { defineConfig } from 'vite';
-import path from 'path';
+import path from 'node:path';
 
 export default defineConfig({
   build: {

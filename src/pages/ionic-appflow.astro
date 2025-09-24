@@ -1,0 +1,412 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '@/paraglide/messages'
+
+const locale = Astro.locals.locale
+const title = m.capflow_title({}, { locale })
+const description = m.capflow_meta_description({}, { locale })
+
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+}
+
+const highlightCards = [
+  {
+    eyebrow: m.capflow_highlight_maturity_title,
+    value: m.capflow_highlight_maturity_value,
+    description: m.capflow_highlight_maturity_desc,
+  },
+  {
+    eyebrow: m.capflow_highlight_scale_title,
+    value: m.capflow_highlight_scale_value,
+    description: m.capflow_highlight_scale_desc,
+  },
+  {
+    eyebrow: m.capflow_highlight_performance_title,
+    value: m.capflow_highlight_performance_value,
+    description: m.capflow_highlight_performance_desc,
+  },
+  {
+    eyebrow: m.capflow_highlight_open_source_title,
+    value: m.capflow_highlight_open_source_value,
+    description: m.capflow_highlight_open_source_desc,
+  },
+]
+
+const comparisonRows = [
+  {
+    capability: m.capflow_row_launch,
+    capgo: m.capflow_row_launch_capgo,
+    appflow: m.capflow_row_launch_appflow,
+  },
+  {
+    capability: m.capflow_row_pioneer,
+    capgo: m.capflow_row_pioneer_capgo,
+    appflow: m.capflow_row_pioneer_appflow,
+    capgoClass: 'text-gray-300',
+    appflowClass: 'text-emerald-300',
+  },
+  {
+    capability: m.capflow_row_update_layer,
+    capgo: m.capflow_row_update_layer_capgo,
+    appflow: m.capflow_row_update_layer_appflow,
+  },
+  {
+    capability: m.capflow_row_native_support,
+    capgo: m.capflow_row_native_support_capgo,
+    appflow: m.capflow_row_native_support_appflow,
+  },
+  {
+    capability: m.capflow_row_cli,
+    capgo: m.capflow_row_cli_capgo,
+    appflow: m.capflow_row_cli_appflow,
+  },
+  {
+    capability: m.capflow_row_ci_strategy,
+    capgo: m.capflow_row_ci_strategy_capgo,
+    appflow: m.capflow_row_ci_strategy_appflow,
+  },
+  {
+    capability: m.capflow_row_npm,
+    capgo: m.capflow_row_npm_capgo,
+    appflow: m.capflow_row_npm_appflow,
+    capgoLinks: [{ href: 'https://npmtrends.com/@capacitor/live-updates-vs-@capgo/capacitor-updater', label: 'npm trends' }],
+    appflowLinks: [{ href: 'https://npmtrends.com/@capacitor/live-updates-vs-@capgo/capacitor-updater', label: 'npm trends' }],
+  },
+  {
+    capability: m.capflow_row_automation,
+    capgo: m.capflow_row_automation_capgo,
+    appflow: m.capflow_row_automation_appflow,
+  },
+  {
+    capability: m.capflow_row_audit,
+    capgo: m.capflow_row_audit_capgo,
+    appflow: m.capflow_row_audit_appflow,
+  },
+  {
+    capability: m.capflow_row_security,
+    capgo: m.capflow_row_security_capgo,
+    appflow: m.capflow_row_security_appflow,
+  },
+  {
+    capability: m.capflow_row_transparency,
+    capgo: m.capflow_row_transparency_capgo,
+    appflow: m.capflow_row_transparency_appflow,
+    capgoLinks: [
+      { href: 'https://status.capgo.app/history', label: 'status.capgo.app/history' },
+      { href: 'https://capgo.app/trust', label: 'capgo.app/trust' },
+    ],
+  },
+  {
+    capability: m.capflow_row_business_model,
+    capgo: m.capflow_row_business_model_capgo,
+    appflow: m.capflow_row_business_model_appflow,
+  },
+  {
+    capability: m.capflow_row_pricing,
+    capgo: m.capflow_row_pricing_capgo,
+    appflow: m.capflow_row_pricing_appflow,
+    appflowClass: 'text-rose-400',
+  },
+  {
+    capability: m.capflow_row_support,
+    capgo: m.capflow_row_support_capgo,
+    appflow: m.capflow_row_support_appflow,
+  },
+  {
+    capability: m.capflow_row_scale,
+    capgo: m.capflow_row_scale_capgo,
+    appflow: m.capflow_row_scale_appflow,
+  },
+  {
+    capability: m.capflow_row_roadmap,
+    capgo: m.capflow_row_roadmap_capgo,
+    appflow: m.capflow_row_roadmap_appflow,
+    appflowClass: 'text-rose-400',
+  },
+  {
+    capability: m.capflow_row_maintenance,
+    capgo: m.capflow_row_maintenance_capgo,
+    appflow: m.capflow_row_maintenance_appflow,
+  },
+]
+
+const differentiators = [
+  m.capflow_differentiator_native,
+  m.capflow_differentiator_scale,
+  m.capflow_differentiator_security,
+  m.capflow_differentiator_open_source,
+  m.capflow_differentiator_ci,
+]
+
+const implementationInsights = [
+  m.capflow_implementation_point_config,
+  m.capflow_implementation_point_cli,
+  m.capflow_implementation_point_assets,
+  m.capflow_implementation_point_support,
+]
+
+const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflow-to-capgo/')
+
+const sources = [
+  {
+    label: m.capflow_source_appflow_compare,
+    href: 'https://ionic.io/appflow/live-updates',
+    linkLabel: 'ionic.io/appflow/live-updates',
+  },
+]
+---
+
+<Layout content={content}>
+  <section class="bg-gray-900 py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          {m.capflow_title({}, { locale })}
+        </h1>
+        <p class="mx-auto mt-6 max-w-3xl text-lg text-gray-300">
+          {m.capflow_intro({}, { locale })}
+        </p>
+        <p class="mx-auto mt-4 max-w-2xl text-sm text-gray-300">
+          {m.capflow_story_note({}, { locale })}
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {highlightCards.map((card) => (
+          <div class="rounded-2xl bg-gray-800 p-6 ring-1 ring-white/10">
+            <p class="text-sm text-blue-300">{card.eyebrow({}, { locale })}</p>
+            <h3 class="mt-2 text-xl font-semibold text-emerald-400">{card.value({}, { locale })}</h3>
+            <p class="mt-2 text-gray-300">{card.description({}, { locale })}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <table class="min-w-full divide-y divide-white/10">
+          <thead class="bg-gray-800/60">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capflow_table_capability({}, { locale })}</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capflow_table_capgo({}, { locale })}</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capflow_table_appflow({}, { locale })}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10 bg-gray-800/20">
+            {comparisonRows.map((row) => (
+              <tr>
+                <td class="px-6 py-4 text-gray-300">{row.capability({}, { locale })}</td>
+                <td class={`px-6 py-4 font-semibold ${row.capgoClass ?? 'text-emerald-400'}`}>
+                  <span set:html={row.capgo({}, { locale })}></span>
+                  {row.capgoLinks && (
+                    <span class="ml-1 text-sm text-blue-300">
+                      (
+                      {row.capgoLinks.map((link, index) => (
+                        <span>
+                          {index > 0 ? ', ' : ''}
+                          <a
+                            class="text-blue-300 underline decoration-dotted hover:text-blue-200"
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener"
+                          >
+                            {link.label}
+                          </a>
+                        </span>
+                      ))}
+                      )
+                    </span>
+                  )}
+                </td>
+                <td class={`px-6 py-4 font-medium ${row.appflowClass ?? 'text-rose-400'}`}>
+                  <span set:html={row.appflow({}, { locale })}></span>
+                  {row.appflowLinks && (
+                    <span class="ml-1 text-sm text-blue-300">
+                      (
+                      {row.appflowLinks.map((link, index) => (
+                        <span>
+                          {index > 0 ? ', ' : ''}
+                          <a
+                            class="text-blue-300 underline decoration-dotted hover:text-blue-200"
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener"
+                          >
+                            {link.label}
+                          </a>
+                        </span>
+                      ))}
+                      )
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-12 overflow-hidden rounded-3xl bg-gradient-to-r from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 p-1 ring-1 ring-white/10">
+        <div class="relative overflow-hidden rounded-[1.45rem] bg-gray-900 px-8 py-12 sm:px-12 sm:py-16">
+          <div class="pointer-events-none absolute -top-24 -left-10 h-48 w-48 rounded-full bg-[#44BCFF]/30 blur-3xl"></div>
+          <div class="pointer-events-none absolute -bottom-28 -right-16 h-56 w-56 rounded-full bg-[#FF44EC]/20 blur-3xl"></div>
+          <div class="relative grid gap-6 lg:grid-cols-[1.5fr_auto] lg:items-center">
+            <div>
+              <span class="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-200 ring-1 ring-white/10">
+                {m.capflow_switch_cta_title({}, { locale })}
+              </span>
+              <h2
+                class="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-[2.6rem]"
+                set:html={m.capflow_switch_cta_desc({}, { locale })}
+              ></h2>
+              <p
+                class="mt-4 max-w-xl text-sm text-gray-300"
+                set:html={m.capflow_switch_cta_subtext({}, { locale })}
+              ></p>
+            </div>
+            <div class="flex flex-col items-start gap-3 lg:items-end">
+              <div class="group relative inline-flex">
+                <div class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
+                <a
+                  href={getRelativeLocaleUrl(locale, 'register')}
+                  class="relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                >
+                  {m.capflow_switch_cta_button({}, { locale })}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 rounded-2xl bg-gray-800 p-8 ring-1 ring-white/10">
+        <h2 class="text-2xl font-semibold text-white">{m.capflow_implementation_title({}, { locale })}</h2>
+        <p class="mt-3 text-gray-300">{m.capflow_implementation_intro({}, { locale })}</p>
+        <ul class="mt-6 space-y-3 text-gray-200">
+          {implementationInsights.map((item) => (
+            <li class="flex items-start gap-3">
+              <span aria-hidden="true" class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-emerald-400"></span>
+              <span>{item({}, { locale })}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-sm text-emerald-300">
+          {m.capflow_implementation_cta({}, { locale })}{' '}
+          <a class="underline hover:text-emerald-200" href={migrationGuideUrl}>
+            {m.capflow_implementation_cta_link({}, { locale })}
+          </a>
+        </p>
+        <p class="mt-3 text-sm text-gray-300">
+          {m.capflow_migration_calendar_cta({}, { locale })}{' '}
+          <a
+            class="text-blue-300 underline decoration-dotted hover:text-blue-200"
+            href="https://cal.com/team/capgo/appflow-migration"
+            target="_blank"
+            rel="noopener"
+          >
+            cal.com/team/capgo/appflow-migration
+          </a>
+        </p>
+      </div>
+
+      <div class="mt-12 rounded-2xl bg-gray-800 p-8 ring-1 ring-white/10">
+        <h2 class="text-2xl font-semibold text-white">{m.capflow_testimonial_title({}, { locale })}</h2>
+        <div class="mt-6 space-y-4">
+          <iframe
+            id="wall-of-love-Ngmn41b"
+            src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
+            title="Wall of Love"
+            frameborder="0"
+            scrolling="no"
+            width="100%"
+          ></iframe>
+          <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+              if (typeof iFrameResize === 'function') {
+                iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-Ngmn41b')
+              }
+            })
+          </script>
+        </div>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <div class="rounded-2xl bg-gray-800 p-8 ring-1 ring-white/10">
+          <h2 class="text-2xl font-semibold text-white">{m.capflow_differentiators_title({}, { locale })}</h2>
+          <p class="mt-3 text-gray-300">{m.capflow_differentiators_intro({}, { locale })}</p>
+          <ul class="mt-6 space-y-3 text-gray-200">
+            {differentiators.map((item) => (
+              <li class="flex items-start gap-3">
+                <span aria-hidden="true" class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-blue-400"></span>
+                <span>{item({}, { locale })}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="relative overflow-hidden rounded-2xl border border-blue-500/30 bg-gradient-to-br from-blue-900/60 via-slate-900/50 to-black/60 p-8 shadow-[0_40px_70px_-30px_rgba(37,99,235,0.75)]">
+          <div class="pointer-events-none absolute -top-10 -right-6 h-32 w-32 rounded-full bg-blue-500/40 blur-3xl"></div>
+          <div class="pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full bg-purple-500/30 blur-3xl"></div>
+          <div class="inline-flex items-center gap-2 rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-100 ring-1 ring-inset ring-blue-300/40">
+            <span aria-hidden="true">🤝</span>
+            <span>{m.capwesome_ionic_title({}, { locale })}</span>
+          </div>
+          <h3 class="mt-4 text-2xl font-semibold text-white">{m.capwesome_ionic_desc({}, { locale })}</h3>
+          <p class="mt-4 text-sm leading-relaxed text-blue-100/90">{m.capwesome_ionic_note({}, { locale })}</p>
+        </div>
+      </div>
+
+      <div class="mt-12 rounded-2xl bg-gray-800 p-8 ring-1 ring-white/10">
+        <h2 class="text-2xl font-semibold text-white">{m.capflow_faq_title({}, { locale })}</h2>
+        <p class="mt-3 text-gray-300">{m.capflow_faq_intro({}, { locale })}</p>
+        <dl class="mt-6 space-y-6 text-gray-200">
+          <div>
+            <dt class="text-lg font-semibold text-white">{m.capflow_faq_q1({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300">{m.capflow_faq_a1({}, { locale })}</dd>
+          </div>
+          <div>
+            <dt class="text-lg font-semibold text-white">{m.capflow_faq_q2({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300">{m.capflow_faq_a2({}, { locale })}</dd>
+          </div>
+          <div>
+            <dt class="text-lg font-semibold text-white">{m.capflow_faq_q3({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300">{m.capflow_faq_a3({}, { locale })}</dd>
+          </div>
+          <div>
+            <dt class="text-lg font-semibold text-white">{m.capflow_faq_q4({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300">{m.capflow_faq_a4({}, { locale })}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="mt-10 text-sm text-gray-400">
+        <p>{m.capflow_notes({}, { locale })}</p>
+        <ul class="mt-4 space-y-2">
+          {sources.map((source) => (
+            <li>
+              <span class="text-gray-300">{source.label({}, { locale })}: </span>
+              <a class="text-blue-400 underline" href={source.href} target="_blank" rel="noopener">{source.linkLabel}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row">
+        <a
+          href="https://cal.com/team/capgo/demo"
+          target="_blank"
+          class="inline-flex items-center justify-center rounded-xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/20 hover:bg-white/15"
+        >
+          {m.capflow_cta_book_demo({}, { locale })}
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, 'docs/')}
+          class="inline-flex items-center justify-center rounded-xl bg-gray-800 px-6 py-3 font-semibold text-white ring-1 ring-white/10 hover:bg-gray-700"
+        >
+          {m.capflow_cta_explore_docs({}, { locale })}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
