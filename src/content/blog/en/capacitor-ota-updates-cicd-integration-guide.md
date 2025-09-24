@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-04-17T01:04:06.737Z
 head_image: https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, CI/CD, app deployment, automation, mobile development, versioning, error tracking
@@ -28,7 +28,7 @@ next_blog: ''
 
 ### Quick Comparison of OTA Platforms:
 
-| Feature | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| Feature | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Status | Active | Active | Shutting down 2026 | Discontinued 2024 |
 | Update Speed | 114ms | Standard | Fluctuates | N/A |

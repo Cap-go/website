@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-16T02:50:46.694Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-04-16T03:30:47.069Z
 head_image: https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, mobile apps, app deployment, Capgo, Capawesome, Appflow, CodePush
@@ -28,7 +28,7 @@ next_blog: ''
 ### Top Plugins for OTA Updates:
 
 1.  **[Capgo](https://capgo.app/)**: Fast updates (5MB in 114ms), end-to-end encryption, real-time analytics, and flexible pricing (starting at $12/month).
-2.  **Capawesome*: Focused on the German market with competitive pricing and modern architecture (launched in 2024).
+2.  **[Capawesome](https://capawesome.io/plugins/live-update/)**: Focused on the German market with competitive pricing and modern architecture (launched in 2024).
 3.  **[Appflow](https://ionic.io/appflow/)**: Enterprise-grade features at $6,000/year but shutting down in 2026.
 4.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: Discontinued in 2024.
 
@@ -63,7 +63,7 @@ Here’s what Capgo offers:
 
 Other plugins also cater to specific needs and regions.
 
-### CapawesomeLive Update Plugin
+### [Capawesome](https://capawesome.io/plugins/live-update/) Live Update Plugin
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/b001a5727fc0f3dc796b9522055deb7e.jpg)
 

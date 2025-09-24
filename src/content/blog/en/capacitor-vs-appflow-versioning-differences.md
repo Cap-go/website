@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-21T04:20:03.700Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-04-21T04:20:16.757Z
 head_image: https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac-1745209216757.jpg
 head_image_alt: Mobile Development
 keywords: version control, app updates, manual versioning, automated versioning, CI/CD, live updates, mobile development, app release management
@@ -119,7 +119,7 @@ Capgo offers a solution for teams looking to streamline version control without 
 The version control market is shifting as older services phase out. Teams now need to focus on cost, speed, and compliance when choosing a strategy. Here's a snapshot of the current options:
 
 -   **Capgo** (launched 2022): Active, starting at $12/month, supports live updates
--   **Capawesome** (launched 2024): Active, similar pricing, but with fewer update options
+-   **[Capawesome](https://capawesome.io/)** (launched 2024): Active, similar pricing, but with fewer update options
 -   **Appflow**: Shutting down in 2026, priced at $6,000/year [\[1\]](https://capgo.app/), offers [automated updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
 
 These tools are stepping in to fill the void left by the closure of CodePush in 2024 and the upcoming end of Appflow in 2026.

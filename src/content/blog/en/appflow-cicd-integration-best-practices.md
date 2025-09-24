@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-15T02:52:14.301Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-04-15T02:52:57.460Z
 head_image: https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4-1744685577460.jpg
 head_image_alt: Mobile Development
 keywords: CI/CD, mobile app development, Appflow, Capgo, OTA updates, build automation, deployment, security
@@ -155,7 +155,7 @@ Capgo delivers updates impressively fast, clocking in at 114 ms for 5 MB bundles
 
 While Capgo offers competitive pricing and performance, other platforms cater to specific regions or rely on older methods.
 
-### Capawesome Market Focus
+### [Capawesome](https://capawesome.io/) Market Focus
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

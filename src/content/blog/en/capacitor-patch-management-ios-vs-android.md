@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T08:40:26.161Z
-updated_at: 2025-09-23T11:54:39.000Z
+updated_at: 2025-05-20T08:41:29.188Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682b2ab25642a17d106fc1f4-1747730489188.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, mobile updates, iOS, Android, patch management, app deployment, version control, Capgo
@@ -169,7 +169,7 @@ For iOS, follow these steps to manage updates effectively:
     Update the `CFBundleShortVersionString` in the `ios/App/App/Info.plist` file. Automation tools like `capacitor-set-version` can simplify this process [\[7\]](https://stackoverflow.com/questions/58252699/how-do-you-update-the-ios-android-app-version-in-ionic-w-capacitor).
     
 -   **Prepare the Update Bundle**  
-    Package the full production output (typically found in `dist/` or `www/`) and include digital signatures to ensure security\[16\].
+    Package the full production output (typically found in `dist/` or `www/`) and include digital signatures to ensure security [\[16\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work).
     
 -   **Verify Implementation**  
     Before deployment, confirm that the update:
@@ -187,7 +187,7 @@ Android updates provide more flexibility but come with specific requirements:
     Adjust the `versionName` variable in the `android/app/build.gradle` file to track app versions accurately [\[7\]](https://stackoverflow.com/questions/58252699/how-do-you-update-the-ios-android-app-version-in-ionic-w-capacitor).
     
 -   **Optimize Deployment Strategy**  
-    Efficient deployment can save both time and resources. For instance, Capgo's EcoTrack reduced deployment time from two weeks to just 15 minutes, resulting in savings of $50,000 \[16\].
+    Efficient deployment can save both time and resources. For instance, Capgo's EcoTrack reduced deployment time from two weeks to just 15 minutes, resulting in savings of $50,000 [\[16\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work).
     
 -   **Address Platform-Specific Needs**  
     When managing Android updates, focus on:
@@ -198,7 +198,7 @@ Android updates provide more flexibility but come with specific requirements:
     
     Google's policy on interpreted code offers some leniency for Android apps:
     
-    > "This restriction does not apply to code that runs in a virtual machine or an interpreter where either provides indirect access to Android APIs (such as JavaScript in a webview or browser)" \[16\].
+    > "This restriction does not apply to code that runs in a virtual machine or an interpreter where either provides indirect access to Android APIs (such as JavaScript in a webview or browser)" [\[16\]](https://capawesome.io/blog/how-live-updates-for-capacitor-work).
     
 
 ## Summary and Recommendations
