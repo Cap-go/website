@@ -1,6 +1,72 @@
 ---
 import * as m from '@/paraglide/messages'
 
+const partnerLogos = [
+  {
+    name: 'Kick',
+    logo: '/kick_logo.webp',
+    alt: 'Kick',
+    badgeKey: 'companies_logo_downloads_kick',
+    floatDelay: null,
+  },
+  {
+    name: 'Pizza Hut',
+    logo: '/pizza_hut_logo.webp',
+    alt: 'Pizza Hut',
+    badgeKey: 'companies_logo_downloads_pizzahut',
+    floatDelay: '0.5s',
+  },
+  {
+    name: 'Remnote',
+    logo: '/remnote_logo.svg',
+    alt: 'Remnote',
+    badgeKey: 'companies_logo_downloads_remnote',
+    floatDelay: null,
+  },
+  {
+    name: 'Hello Revel',
+    logo: '/revel_logo.svg',
+    alt: 'Hello Revel',
+    badgeKey: 'companies_logo_downloads_revel',
+    floatDelay: '1s',
+  },
+  {
+    name: 'Nana',
+    logo: '/nana-logo-trasnparent.webp',
+    alt: 'Nana',
+    badgeKey: 'companies_logo_downloads_nana',
+    floatDelay: null,
+  },
+  {
+    name: 'Suez',
+    logo: '/suez_logo.webp',
+    alt: 'Suez',
+    badgeKey: 'companies_logo_downloads_suez',
+    floatDelay: '1.5s',
+  },
+  {
+    name: 'IREC',
+    logo: '/irec_logo.webp',
+    alt: 'IREC',
+    badgeKey: 'companies_logo_downloads_irec',
+    floatDelay: null,
+  },
+  {
+    name: 'Vella',
+    logo: '/vella_logo.svg',
+    alt: 'Vella',
+    badgeKey: 'companies_logo_downloads_vella',
+    floatDelay: '2s',
+  },
+  {
+    name: 'OurLiving',
+    logo: '/ourliving_logo.webp',
+    alt: 'OurLiving',
+    badgeKey: 'companies_logo_downloads_ourliving',
+    floatDelay: null,
+  },
+]
+
 ---
 
 <section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-24">
@@ -40,8 +106,17 @@ import * as m from '@/paraglide/messages'
                           <div class="text-sm text-slate-600">{m.companies_logo_stat_devices_label({}, { locale: Astro.locals.locale })}</div>
                       </div>
                       <div class="text-center">
-                          <div class="text-3xl font-bold text-slate-900 mb-2">{m.companies_logo_stat_uptime_value({}, { locale: Astro.locals.locale })}</div>
-                          <div class="text-sm text-slate-600">{m.companies_logo_stat_uptime_label({}, { locale: Astro.locals.locale })}</div>
+                        <div class="text-3xl font-bold text-slate-900 mb-2">
+                          <a
+                            href="https://status.capgo.app"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hover:underline"
+                          >
+                            {m.companies_logo_stat_uptime_value({}, { locale: Astro.locals.locale })}
+                          </a>
+                        </div>
+                        <div class="text-sm text-slate-600">{m.companies_logo_stat_uptime_label({}, { locale: Astro.locals.locale })}</div>
                       </div>
                   </div>
               </div>
@@ -53,62 +128,27 @@ import * as m from '@/paraglide/messages'
                   
                   <div class="relative p-8 lg:p-12">
                       <div class="grid grid-cols-3 gap-6">
-                          <!-- Row 1 -->
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/kick_logo.webp" alt="Kick" title="Kick" />
+                        {
+                          partnerLogos.map((company) => (
+                            <div
+                              class={`company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50 ${company.floatDelay ? 'animate-float' : ''}`}
+                              style={company.floatDelay ? `animation-delay: ${company.floatDelay};` : undefined}
+                            >
+                              <div class="relative flex items-center justify-center h-16">
+                                <img
+                                  loading="lazy"
+                                  class="h-auto max-h-12 w-auto"
+                                  src={company.logo}
+                                  alt={company.alt}
+                                  title={company.name}
+                                />
+                                <span class="absolute -top-3 -right-3 rounded-full bg-blue-600 px-2.5 py-0.5 text-[10px] font-semibold text-white shadow-md border border-white/60 whitespace-nowrap">
+                                  {m[company.badgeKey]({}, { locale: Astro.locals.locale })}
+                                </span>
                               </div>
-                          </div>
-                          
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50 animate-float" style="animation-delay: 0.5s;">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/pizza_hut_logo.webp" alt="Pizza hut" title="Pizza hut" />
-                              </div>
-                          </div>
-                          
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/remnote_logo.svg" alt="remnote" title="remnote" />
-                              </div>
-                          </div>
-
-                          <!-- Row 2 -->
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50 animate-float" style="animation-delay: 1s;">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/revel_logo.svg" alt="hello revel" title="hello revel" />
-                              </div>
-                          </div>
-                          
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/xbe_logo.webp" alt="x-b-e" title="x-b-e" />
-                              </div>
-                          </div>
-                          
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50 animate-float" style="animation-delay: 1.5s;">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/suez_logo.webp" alt="suez moneau" title="suez moneau" />
-                              </div>
-                          </div>
-
-                          <!-- Row 3 -->
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/irec_logo.webp" alt="irec" title="irec" />
-                              </div>
-                          </div>
-                          
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50 animate-float" style="animation-delay: 2s;">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/vella_logo.svg" alt="vella" title="vella" />
-                              </div>
-                          </div>
-                          
-                          <div class="company-logo bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-slate-200/50">
-                              <div class="flex items-center justify-center h-16">
-                                  <img loading="lazy" class="h-auto max-h-12 w-auto" src="/ourliving_logo.webp" alt="ourliving" title="ourliving" />
-                              </div>
-                          </div>
+                            </div>
+                          ))
+                        }
                       </div>
                   </div>
 
@@ -138,6 +178,21 @@ import * as m from '@/paraglide/messages'
                           <span class="text-xs font-semibold text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
                       </div>
                   </div>
+                  <div class="mt-6">
+                    <a
+                      href="https://trust.capgo.app"
+                      class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-500"
+                    >
+                      {m.trust_center({}, { locale: Astro.locals.locale })}
+                      <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7m0 0v7m0-7L10 14" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10v11h11" />
+                      </svg>
+                    </a>
+                  </div>
+                  <p class="mx-auto mt-4 max-w-2xl text-center text-xs text-slate-500">
+                    {m.enterprise_security_audit_desc({}, { locale: Astro.locals.locale })}
+                  </p>
               </div>
           </div>
       </div>

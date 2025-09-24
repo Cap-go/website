@@ -177,7 +177,7 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
           {
             githubStars && (
               <div class="mt-8 flex flex-row items-center justify-between border-t border-white/10 pt-2">
-                <span class="text-sm font-semibold text-gray-400">GitHub Stars</span> <span class="text-gray-600">{githubStars}</span>
+                <span class="text-sm font-semibold text-gray-400">GitHub Stars</span> <a class="text-gray-600 hover:underline" href={href} target="_blank" rel="noopener noreferrer">{githubStars}</a>
               </div>
             )
           }
