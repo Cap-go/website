@@ -100,21 +100,6 @@ Android에서 생체 인증을 구성하려면 프로젝트 파일을 몇 가지
         implementation "androidx.biometric:biometric:1.1.0"
     }
     ```
-    
-3.  **플러그인 등록**
-    
-    `MainActivity.java` 파일에 생체인식 플러그인을 등록하세요:
-    
-    ```java
-    public class MainActivity extends BridgeActivity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            registerPlugin(NativeBiometricPlugin.class);
-        }
-    }
-    ```
-    
 
 ### iOS 설정 단계
 

@@ -242,18 +242,6 @@ public void processData(PluginCall call) {
 }
 ```
 
-Infine, registra il tuo plugin nell'activity principale:
-
-```java
-public class MainActivity extends BridgeActivity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        registerPlugin(YourPlugin.class);
-    }
-}
-```
-
 ### Test del Tuo Plugin
 
 Usa gli [strumenti di debug](https://capgo.app/docs/plugin/debugging/) di Android Studio per testare accuratamente ogni metodo. Assicurati che i tuoi metodi siano focalizzati su compiti specifici per mantenere il codice pulito e facile da mantenere. Una volta completato il debug, testa il tuo plugin su dispositivi Android reali per confermare che tutto funzioni come previsto.

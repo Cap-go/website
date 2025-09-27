@@ -98,21 +98,6 @@ To configure biometric authentication on Android, you'll need to make a few adju
         implementation "androidx.biometric:biometric:1.1.0"
     }
     ```
-    
-3.  **Plugin Registration**
-    
-    Register the biometric plugin in your `MainActivity.java` file:
-    
-    ```java
-    public class MainActivity extends BridgeActivity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            registerPlugin(NativeBiometricPlugin.class);
-        }
-    }
-    ```
-    
 
 ### iOS Setup Steps
 
@@ -402,20 +387,7 @@ To make the most of your biometric system’s performance:
 
 ![Capgo](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
-Capgo simplifies biometric updates. Configure it like this:
-
-```typescript
-// Set Capgo parameters for biometric updates
-{
-  "plugins": {
-    "BiometricAuth": {
-      "version": "latest",
-      "updateStrategy": "immediate",
-      "rollbackEnabled": true
-    }
-  }
-}
-```
+Capgo simplifies app updates.
 
 Here’s why Capgo is a great tool for managing updates:
 

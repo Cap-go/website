@@ -100,20 +100,6 @@ Scegli un [plugin biometrico](https://capgo.app/plugins/capacitor-native-biometr
         implementation "androidx.biometric:biometric:1.1.0"
     }
     ```
-    
-3.  **Registrazione Plugin**
-    
-    Registra il plugin biometrico nel tuo file `MainActivity.java`:
-    
-    ```java
-    public class MainActivity extends BridgeActivity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            registerPlugin(NativeBiometricPlugin.class);
-        }
-    }
-    ```
 
 ### Passi di configurazione iOS
 

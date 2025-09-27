@@ -102,20 +102,6 @@ Pour configurer l'authentification biométrique sur Android, vous devrez apporte
         implementation "androidx.biometric:biometric:1.1.0"
     }
     ```
-    
-3.   **Enregistrement du plugin**
-    
-    Enregistrez le plugin biométrique dans votre fichier `MainActivity.java` :
-    
-    ```java
-    public class MainActivity extends BridgeActivity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            registerPlugin(BiometricAuth.class);
-        }
-    }
-    ```
 
 ### Étapes de configuration iOS
 

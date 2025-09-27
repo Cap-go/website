@@ -98,20 +98,7 @@ Androidで生体認証を設定するには、プロジェクトファイルに�
         implementation "androidx.biometric:biometric:1.1.0"
     }
     ```
-    
-3.   **プラグイン登録**
-    
-    `MainActivity.java`ファイルに生体認証プラグインを登録：
-    
-    ```java
-    public class MainActivity extends BridgeActivity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            registerPlugin(NativeBiometricPlugin.class);
-        }
-    }
-    ```
+
     
 
 ### iOSセットアップ手順
@@ -401,20 +388,7 @@ async function optimizedBiometricCheck() {
 
 ![Capgo](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
-Capgoはバイオメトリック更新を簡素化します。以下のように設定してください:
-
-```typescript
-// Set Capgo parameters for biometric updates
-{
-  "plugins": {
-    "BiometricAuth": {
-      "version": "latest",
-      "updateStrategy": "immediate",
-      "rollbackEnabled": true
-    }
-  }
-}
-```
+Capgoはバイオメトリック更新を簡素化します。
 
 Capgoが更新管理に優れているツールである理由:
 

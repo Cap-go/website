@@ -103,21 +103,7 @@ Untuk mengkonfigurasi otentikasi biometrik di Android, Anda perlu melakukan bebe
         implementation "androidx.biometric:biometric:1.1.0"
     }
     ```
-    
-3.   **Pendaftaran Plugin**
-    
-    Daftarkan plugin biometrik di file `MainActivity.java` Anda:
-    
-    ```java
-    public class MainActivity extends BridgeActivity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            registerPlugin(NativeBiometricPlugin.class);
-        }
-    }
-    ```
-    
+
 
 ### Langkah-langkah Pengaturan iOS
 

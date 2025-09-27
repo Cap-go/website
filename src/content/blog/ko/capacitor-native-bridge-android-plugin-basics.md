@@ -241,18 +241,6 @@ public void processData(PluginCall call) {
 }
 ```
 
-마지막으로 메인 액티비티에서 플러그인을 등록하세요:
-
-```java
-public class MainActivity extends BridgeActivity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        registerPlugin(YourPlugin.class);
-    }
-}
-```
-
 ### 플러그인 테스트
 
 Android Studio의 [디버깅 도구](https://capgo.app/docs/plugin/debugging/)를 사용하여 각 메서드를 철저히 테스트하세요. 코드를 깔끔하고 유지보수하기 쉽게 유지하기 위해 메서드가 특정 작업에 집중하도록 하세요. 디버깅이 완료되면 실제 Android 기기에서 플러그인을 테스트하여 모든 것이 예상대로 작동하는지 확인하세요.

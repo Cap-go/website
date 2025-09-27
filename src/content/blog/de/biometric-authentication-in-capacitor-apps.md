@@ -104,21 +104,6 @@ Um die biometrische Authentifizierung unter Android zu konfigurieren, müssen Si
     }
     ```
     
-3.  **Plugin-Registrierung**
-    
-    Registrieren Sie das biometrische Plugin in Ihrer `MainActivity.java` Datei:
-    
-    ```java
-    public class MainActivity extends BridgeActivity {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            registerPlugin(NativeBiometricPlugin.class);
-        }
-    }
-    ```
-    
-
 ### iOS-Setup-Schritte
 
 Für iOS müssen Sie diese Schritte befolgen, um die biometrische Authentifizierung zu konfigurieren:
@@ -407,20 +392,7 @@ So optimieren Sie die Leistung Ihres biometrischen Systems:
 
 ![Capgo](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4d
 
-Capgo vereinfacht biometrische Updates. Konfigurieren Sie es wie folgt:
-
-```typescript
-// Set Capgo parameters for biometric updates
-{
-  "plugins": {
-    "BiometricAuth": {
-      "version": "latest",
-      "updateStrategy": "immediate",
-      "rollbackEnabled": true
-    }
-  }
-}
-```
+Capgo vereinfacht Updates.
 
 Hier sind die Gründe, warum Capgo ein großartiges Tool für die Verwaltung von Updates ist:
 
