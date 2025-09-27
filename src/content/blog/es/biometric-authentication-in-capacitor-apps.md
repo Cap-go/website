@@ -204,7 +204,7 @@ async function setupBiometricAuth() {
 Para gestionar credenciales seguras, el plugin **capacitor-native-biometric** ofrece un enfoque directo:
 
 ```typescript
-import { NativeBiometric } from 'capacitor-native-biometric';
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 async function secureCredentialStorage(credentials) {
   try {
@@ -307,7 +307,7 @@ Asegurar una fuerte seguridad en la autenticación biométrica significa prioriz
 En iOS, los datos biométricos se cifran y almacenan usando **Keychain**, mientras que Android usa el **Keystore**. Si estás usando el plugin `capacitor-native-biometric`, puedes almacenar de forma segura las credenciales del usuario así:
 
 ```typescript
-import { NativeBiometric } from 'capacitor-native-biometric';
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 async function securelyStoreCredentials(username, password) {
   const server = "api.yourapp.com";

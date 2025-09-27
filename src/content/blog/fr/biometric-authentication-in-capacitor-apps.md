@@ -187,7 +187,7 @@ async function authenticateUser() {
 Pour gérer les identifiants sécurisés, le plugin **capacitor-native-biometric** offre une approche simple :
 
 ```typescript
-import { NativeBiometric } from 'capacitor-native-biometric';
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 async function setCredentials() {
   try {

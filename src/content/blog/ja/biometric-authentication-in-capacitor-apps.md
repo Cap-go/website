@@ -200,7 +200,7 @@ async function setupBiometricAuth() {
 安全な認証情報を管理するために、**capacitor-native-biometric**プラグインは簡単なアプローチを提供します：
 
 ```typescript
-import { NativeBiometric } from 'capacitor-native-biometric';
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 async function secureCredentialStorage(credentials) {
   try {
@@ -303,7 +303,7 @@ async function secureCredentialStorage(credentials) {
 iOSでは生体認証データは**Keychain**を使用して暗号化・保存され、Androidでは**Keystore**を使用します。`capacitor-native-biometric`プラグインを使用している場合、以下のようにユーザー認証情報を安全に保存できます：
 
 ```typescript
-import { NativeBiometric } from 'capacitor-native-biometric';
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 async function securelyStoreCredentials(username, password) {
   const server = "api.yourapp.com";

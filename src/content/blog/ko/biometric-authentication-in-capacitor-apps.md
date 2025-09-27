@@ -203,7 +203,7 @@ async function setupBiometricAuth() {
 보안 자격증명 관리를 위해 **capacitor-native-biometric** 플러그인은 간단한 접근 방식을 제공합니다:
 
 ```typescript
-import { NativeBiometric } from 'capacitor-native-biometric';
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 async function secureCredentialStorage(credentials) {
   try {
@@ -306,7 +306,7 @@ async function secureCredentialStorage(credentials) {
 iOS에서는 생체 데이터가 **Keychain**을 사용하여 암호화되고 저장되며, Android에서는 **Keystore**를 사용합니다. `capacitor-native-biometric` 플러그인을 사용하는 경우 다음과 같이 사용자 자격증명을 안전하게 저장할 수 있습니다:
 
 ```typescript
-import { NativeBiometric } from 'capacitor-native-biometric';
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
 
 async function securelyStoreCredentials(username, password) {
   const server = "api.yourapp.com";
