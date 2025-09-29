@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T20:31:21.521Z
-updated_at: 2025-05-18T20:32:39.936Z
+updated_at: 2025-09-29T17:31:46.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682a1cea5642a17d106e7413-1747600359936.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, iOS development, Android development, build pipelines, security, deployment, mobile apps, developer accounts
