@@ -26,7 +26,7 @@ next_blog: ''
 
 ### Quick Comparison of OTA Platforms:
 
-| Feature | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | [Capawesome](https://cloud.capawesome.io/) |
+| Feature | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | End-to-End Encryption | Yes | No  | No  |
 | Rollback Capability | Instant | Manual | Manual |

@@ -36,7 +36,7 @@ next_blog: ''
 
 **Pro Tip:** Use staged rollouts to test updates on small user groups before full deployment. Capgo's tools make this process smooth and secure.
 
-## Explore [Capawesome](https://capawesome.io/)'s New Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
+## Explore Capawesome's New Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 

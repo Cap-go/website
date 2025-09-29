@@ -257,7 +257,7 @@ Debugging tools help identify issues, but an efficient update system ensures fix
 
 Here's how update systems compare:
 
-| Key Metric | Capgo | [Appflow](https://ionic.io/appflow/) | [Capawesome](https://capawesome.io/) |
+| Key Metric | Capgo | [Appflow](https://ionic.io/appflow/) | Capawesome |
 | --- | --- | --- | --- |
 | Update Speed | 114ms avg delivery for a 5MB bundle [\[1\]](https://capgo.app/) | Not publicly disclosed | Not publicly disclosed |
 | User Adoption | 95% within 24h [\[1\]](https://capgo.app/) | Not publicly disclosed | Not publicly disclosed |

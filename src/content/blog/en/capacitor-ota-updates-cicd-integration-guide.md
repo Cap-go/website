@@ -28,7 +28,7 @@ next_blog: ''
 
 ### Quick Comparison of OTA Platforms:
 
-| Feature | Capgo | [Capawesome](https://capawesome.io/) | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| Feature | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Status | Active | Active | Shutting down 2026 | Discontinued 2024 |
 | Update Speed | 114ms | Standard | Fluctuates | N/A |

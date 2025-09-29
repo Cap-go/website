@@ -35,7 +35,7 @@ Rollback in [Capacitor](https://capacitorjs.com/) ensures your app stays stable 
 
 ### Platform Comparison:
 
-**[Capgo](https://capgo.app/)** offers one-click rollbacks, encryption, real-time analytics, and flexible hosting. Alternatives like **[Capawesome](https://cloud.capawesome.io/)** and **[Appflow](https://ionic.io/appflow/)** lack features or come with higher costs.
+**[Capgo](https://capgo.app/)** offers one-click rollbacks, encryption, real-time analytics, and flexible hosting. Alternatives like **Capawesome** and **[Appflow](https://ionic.io/appflow/)** lack features or come with higher costs.
 
 **Quick Comparison Table:**
 

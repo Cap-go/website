@@ -27,7 +27,7 @@ next_blog: ''
 
 Platforms like [Capgo](https://capgo.app/) offer fast updates (114ms for 5MB), high success rates (82%), and cost-effective solutions (from $12/month). They also support rollback automation, real-time tracking, and user segmentation, making them a reliable choice for managing live updates.
 
-| **Feature** | **Capgo** | **[Capawesome](https://capawesome.io/)** | **[Appflow](https://ionic.io/appflow/)** |
+| **Feature** | **Capgo** | **Capawesome** | **[Appflow](https://ionic.io/appflow/)** |
 | --- | --- | --- | --- |
 | Update Speed | 114ms | Standard | Standard |
 | Success Rate | 82% | Not Published | Not Published |
