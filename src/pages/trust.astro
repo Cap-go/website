@@ -2,99 +2,291 @@
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 
-const title = [Astro.locals.runtimeConfig.public.brand, m.trust({}, { locale: Astro.locals.locale })].join(' | ')
-const description = m.consulting_description({}, { locale: Astro.locals.locale })
+const locale = Astro.locals.locale
+const title = [Astro.locals.runtimeConfig.public.brand, m.trust({}, { locale })].join(' | ')
+const description = m.trust_meta_description({}, { locale })
 
 const content = { title, description }
+
+const heroPoints = [
+  m.trust_hero_point_one({}, { locale }),
+  m.trust_hero_point_two({}, { locale }),
+  m.trust_hero_point_three({}, { locale }),
+  m.trust_hero_point_four({}, { locale }),
+]
+
+const securityHighlights = [
+  {
+    title: m.trust_highlight_soc2_title({}, { locale }),
+    description: m.trust_highlight_soc2_description({}, { locale }),
+  },
+  {
+    title: m.trust_highlight_transparency_title({}, { locale }),
+    description: m.trust_highlight_transparency_description({}, { locale }),
+  },
+  {
+    title: m.trust_highlight_data_residency_title({}, { locale }),
+    description: m.trust_highlight_data_residency_description({}, { locale }),
+  },
+]
+
+const securityPillars = [
+  {
+    title: m.trust_foundation_application_title({}, { locale }),
+    description: m.trust_foundation_application_description({}, { locale }),
+  },
+  {
+    title: m.trust_foundation_platform_title({}, { locale }),
+    description: m.trust_foundation_platform_description({}, { locale }),
+  },
+  {
+    title: m.trust_foundation_data_title({}, { locale }),
+    description: m.trust_foundation_data_description({}, { locale }),
+  },
+  {
+    title: m.trust_foundation_operations_title({}, { locale }),
+    description: m.trust_foundation_operations_description({}, { locale }),
+  },
+]
+
+const programSteps = [
+  {
+    title: m.trust_program_step_assess_title({}, { locale }),
+    description: m.trust_program_step_assess_description({}, { locale }),
+  },
+  {
+    title: m.trust_program_step_harden_title({}, { locale }),
+    description: m.trust_program_step_harden_description({}, { locale }),
+  },
+  {
+    title: m.trust_program_step_monitor_title({}, { locale }),
+    description: m.trust_program_step_monitor_description({}, { locale }),
+  },
+  {
+    title: m.trust_program_step_evolve_title({}, { locale }),
+    description: m.trust_program_step_evolve_description({}, { locale }),
+  },
+]
+
+const trustResources = [
+  {
+    title: m.trust_resource_trust_center_title({}, { locale }),
+    description: m.trust_resource_trust_center_description({}, { locale }),
+    href: 'https://trust.capgo.app',
+    cta: m.trust_resource_trust_center_cta({}, { locale }),
+    external: true,
+  },
+  {
+    title: m.trust_resource_status_title({}, { locale }),
+    description: m.trust_resource_status_description({}, { locale }),
+    href: 'https://status.capgo.app/',
+    cta: m.trust_resource_status_cta({}, { locale }),
+    external: true,
+  },
+  {
+    title: m.trust_resource_contact_title({}, { locale }),
+    description: m.trust_resource_contact_description({}, { locale }),
+    href: 'mailto:security@capgo.app',
+    cta: m.trust_resource_contact_cta({}, { locale }),
+    external: false,
+  },
+]
 ---
 
 <Layout content={content}>
-  <section class="bg-gray-50 py-12 sm:py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto text-center">
-        <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">{m.trust_and_security({}, { locale: Astro.locals.locale })}</h1>
-        <p class="font-pj mt-6 text-xl font-normal text-gray-600">{m.trust_and_security_description({}, { locale: Astro.locals.locale })}</p>
-      </div>
-      <div class="mt-16 space-y-16">
-        <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{m.product_security({}, { locale: Astro.locals.locale })}</h2>
-          <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
-            <li>
-              {m.trust_soc2_certification({}, { locale: Astro.locals.locale })}
-              <a href="https://trust.capgo.app" class="underline-current text-blue-500 underline" target="_blank">View our compliance status</a>.
-            </li>
-            <li>
-              {m.source_code_protection_1({}, { locale: Astro.locals.locale })}
-              <a href="https://github.com/Cap-go/capgo" class="underline-current text-blue-500 underline" target="_blank">GitHub</a>.
-              {m.source_code_protection_2({}, { locale: Astro.locals.locale })}
-              <a href="https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main" class="underline-current text-blue-500 underline" target="_blank">SonarCloud</a>
-              {m.and({}, { locale: Astro.locals.locale })}
-              <a href="https://snyk.io/test/github/Cap-go/capgo" class="underline-current text-blue-500 underline" target="_blank">Snyk</a>
-              {m.source_code_protection_3({}, { locale: Astro.locals.locale })}
-            </li>
-            <li>
-              Infrastructure security monitoring and verification through 
-              <a href="https://hosting-checker.net/websites/api.capgo.app" class="underline-current text-blue-500 underline" target="_blank">hosting security checks</a>
-              to ensure our API endpoints maintain the highest security standards.
-            </li>
-            <li class="flex items-center gap-2">
-              SonarCloud:
-              <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
-                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=security_rating" alt="Security Rating" />
-              </a>
-              <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank">
-                <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=vulnerabilities" alt="Vulnerabilities" />
-              </a>
-            </li>
-            <li class="flex items-center gap-2">
-              Snyk:
-              <a href="https://snyk.io/test/github/Cap-go/capgo" target="_blank">
-                <img src="https://snyk.io/test/github/Cap-go/capgo/badge.svg" alt="Known Vulnerabilities" />
-              </a>
-            </li>
-            <li>{m.access_control({}, { locale: Astro.locals.locale })}</li>
-          </ul>
-        </div>
-
-        <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{m.data_security({}, { locale: Astro.locals.locale })}</h2>
-          <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
-            <li>{m.encryption_communication({}, { locale: Astro.locals.locale })}</li>
-            <li>{m.source_code_encryption({}, { locale: Astro.locals.locale })}</li>
-          </ul>
-        </div>
-
-        <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{m.network_security({}, { locale: Astro.locals.locale })}</h2>
-          <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
-            <li>{m.vulnerability_scanning({}, { locale: Astro.locals.locale })}</li>
-            <li>{m.architecture({}, { locale: Astro.locals.locale })}</li>
-          </ul>
-        </div>
-
-        <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">{m.application_security({}, { locale: Astro.locals.locale })}</h2>
-          <ul class="mt-8 list-inside list-disc space-y-5 text-lg text-gray-600">
-            <li>{m.secure_coding({}, { locale: Astro.locals.locale })}</li>
-            <li>
-              {m.site_reliability({}, { locale: Astro.locals.locale })}
-              <a href="https://status.capgo.app/" class="underline-current text-blue-500 underline" target="_blank">Uptime Monitoring</a>.
-            </li>
-            <li>{m.application_penetration_testing({}, { locale: Astro.locals.locale })}</li>
-          </ul>
-        </div>
-
-        <div class="rounded-3xl bg-white p-8 shadow-xl sm:p-12">
-          <h2 class="text-3xl font-bold text-gray-900">Privacy & Compliance</h2>
-          <p class="mt-4 text-lg text-gray-600">
-            For detailed information about our privacy practices, data collection, and compliance with regulations like GDPR, CCPA, and app store guidelines, please review our comprehensive compliance documentation.
+  <section class="relative overflow-hidden bg-slate-950 py-20 sm:py-24">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.3),_transparent_55%)]" aria-hidden="true"></div>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-12 lg:items-start">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-sm font-semibold uppercase tracking-wide text-blue-200 ring-1 ring-inset ring-white/20">
+            {m.trust_hero_badge({}, { locale })}
+          </div>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            {m.trust_hero_title({}, { locale })}
+          </h1>
+          <p class="mt-6 text-lg leading-8 text-slate-300 sm:text-xl">
+            {m.trust_hero_description({}, { locale })}
           </p>
-          <div class="mt-6">
-            <a href="/docs/live-updates/compliance/" class="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
-              View Compliance Documentation
+          <ul class="mt-10 grid gap-3 sm:grid-cols-2">
+            {heroPoints.map((point) => (
+              <li class="flex items-start gap-3 rounded-2xl bg-white/5 px-4 py-3 text-sm text-slate-200 ring-1 ring-white/10" role="listitem">
+                <span class="mt-1 h-2 w-2 flex-none rounded-full bg-sky-400" aria-hidden="true"></span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-12 flex flex-wrap gap-4">
+            <a
+              href="/docs/live-updates/compliance/"
+              class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5 hover:bg-slate-100"
+            >
+              {m.trust_hero_primary_cta({}, { locale })}
+            </a>
+            <a
+              href="https://status.capgo.app/"
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/40 hover:text-sky-200"
+            >
+              {m.trust_hero_secondary_cta({}, { locale })}
             </a>
           </div>
         </div>
+        <div class="lg:col-span-5">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-sky-500/10 backdrop-blur">
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-200">
+              {m.trust_highlights_heading({}, { locale })}
+            </h2>
+            <div class="mt-6 grid gap-6">
+              {securityHighlights.map((item) => (
+                <div class="rounded-2xl border border-white/5 bg-white/5 p-6">
+                  <p class="text-base font-semibold text-white">{item.title}</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-300">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          {m.trust_foundation_title({}, { locale })}
+        </h2>
+        <p class="mt-4 text-lg leading-8 text-slate-600">
+          {m.trust_foundation_description({}, { locale })}
+        </p>
+      </div>
+      <div class="mt-16 grid gap-6 sm:grid-cols-2">
+        {securityPillars.map((pillar) => (
+          <div class="flex flex-col rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+            <h3 class="text-xl font-semibold text-slate-900">{pillar.title}</h3>
+            <p class="mt-4 text-base leading-7 text-slate-600">{pillar.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-900 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-5">
+          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            {m.trust_continuous_validation_title({}, { locale })}
+          </h2>
+          <p class="mt-4 text-base leading-7 text-slate-300">
+            {m.trust_continuous_validation_description({}, { locale })}
+          </p>
+          <p class="mt-6 text-sm leading-6 text-slate-300">
+            {m.source_code_protection_1({}, { locale })}
+            {' '}
+            <a href="https://github.com/Cap-go/capgo" class="text-sky-200 underline-offset-4 hover:text-white hover:underline" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            . {m.source_code_protection_2({}, { locale })}
+            <a href="https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main" class="text-sky-200 underline-offset-4 hover:text-white hover:underline" target="_blank" rel="noreferrer">
+              SonarCloud
+            </a>
+            {` ${m.and({}, { locale })} `}
+            <a href="https://snyk.io/test/github/Cap-go/capgo" class="text-sky-200 underline-offset-4 hover:text-white hover:underline" target="_blank" rel="noreferrer">
+              Snyk
+            </a>
+            {m.source_code_protection_3({}, { locale })}
+          </p>
+        </div>
+        <div class="lg:col-span-7">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-sky-500/10 backdrop-blur">
+            <div class="grid gap-6 sm:grid-cols-2">
+              <div class="rounded-2xl bg-slate-950/60 p-6 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wide text-sky-200">
+                  {m.trust_continuous_validation_sonar_label({}, { locale })}
+                </p>
+                <div class="mt-4 flex flex-col items-center gap-4">
+                  <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank" rel="noreferrer" class="inline-flex">
+                    <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=security_rating" alt="Security Rating" />
+                  </a>
+                  <a href="https://sonarcloud.io/summary/new_code?id=Cap-go_capgo" target="_blank" rel="noreferrer" class="inline-flex">
+                    <img src="https://sonarcloud.io/api/project_badges/measure?project=Cap-go_capgo&metric=vulnerabilities" alt="Vulnerabilities" />
+                  </a>
+                </div>
+              </div>
+              <div class="rounded-2xl bg-slate-950/60 p-6 text-center">
+                <p class="text-sm font-semibold uppercase tracking-wide text-sky-200">
+                  {m.trust_continuous_validation_snyk_label({}, { locale })}
+                </p>
+                <div class="mt-4 flex justify-center">
+                  <a href="https://snyk.io/test/github/Cap-go/capgo" target="_blank" rel="noreferrer" class="inline-flex">
+                    <img src="https://snyk.io/test/github/Cap-go/capgo/badge.svg" alt="Known Vulnerabilities" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="lg:flex lg:items-start lg:gap-16">
+        <div class="lg:w-1/3">
+          <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            {m.trust_program_title({}, { locale })}
+          </h2>
+          <p class="mt-4 text-base leading-7 text-slate-600">
+            {m.trust_program_description({}, { locale })}
+          </p>
+        </div>
+        <div class="mt-12 w-full lg:mt-0 lg:flex-1">
+          <ol class="grid gap-8 sm:grid-cols-2">
+            {programSteps.map((step, index) => (
+              <li class="flex h-full flex-col rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
+                <span class="flex h-10 w-10 items-center justify-center rounded-full bg-sky-600 text-sm font-semibold text-white">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 class="mt-6 text-lg font-semibold text-slate-900">{step.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-950 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          {m.trust_resources_title({}, { locale })}
+        </h2>
+        <p class="mt-4 text-base leading-7 text-slate-300">
+          {m.trust_resources_description({}, { locale })}
+        </p>
+      </div>
+      <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {trustResources.map((resource) => (
+          <div class="flex h-full flex-col rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-sky-500/10">
+            <h3 class="text-xl font-semibold text-white">{resource.title}</h3>
+            <p class="mt-4 text-sm leading-6 text-slate-200">{resource.description}</p>
+            <a
+              href={resource.href}
+              class="mt-8 inline-flex items-center text-sm font-semibold text-sky-200 transition hover:text-white"
+              target={resource.external ? '_blank' : undefined}
+              rel={resource.external ? 'noreferrer' : undefined}
+            >
+              {resource.cta}
+              <span aria-hidden="true" class="ml-2">→</span>
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   </section>
