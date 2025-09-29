@@ -99,10 +99,7 @@ interface Device {
     updated_at?: string | undefined;
     device_id: string;
     custom_id: string;
-    version: {
-        id: number,
-        name: string
-    };
+    version: number;
     channel?: string;
     app_id: string;
     platform?: "ios" | "android" | undefined;
@@ -122,10 +119,7 @@ interface Device {
     {
       "device_id": "device_456",
       "custom_id": "test-device-1",
-      "version": {
-        "id": 1,
-        "name": "1.0.0"
-      },
+      "version": 1,
       "app_id": "app_123",
       "platform": "ios",
       "plugin_version": "5.0.0",
