@@ -230,6 +230,6 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
         last_name: lastName.value,
       })
     }
-    window.location.href = `https://web.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}`
+    window.location.href = `https://web.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
   })
 </script>
