@@ -214,7 +214,7 @@ App.addListener('resume', async () => {
 
 ### Force update
 - **Previous workflow**: wire prompt logic and enforce reload.
-- **Capgo**: mark the bundle as “mandatory” in the dashboard. The SDK enforces it automatically after `notifyAppReady()`.
+- **Capgo**: mark the bundle as “mandatory” in the dashboard, then listen for the `majorAvailable` event (emitted after `notifyAppReady()`) to require users to upgrade inside your app.
 
 ## Step 6 – Deploying bundles
 

@@ -118,13 +118,13 @@ App.addListener('resume', async () => {
 
 ### Force update
 - **AppFlow**: prompt the user and call `reload()`.
-- **Capgo**: mark the bundle as “mandatory” in the dashboard. The SDK enforces it automatically after `notifyAppReady()`.
+- **Capgo**: mark the bundle as “mandatory” in the dashboard, then listen for the `majorAvailable` event (emitted after `notifyAppReady()`) to prompt or force users inside your app.
 
 ## Step 5 – Mapping API calls
 
 | AppFlow method | Capgo equivalent | Do you need it? |
 | --- | --- | --- |
-| `LiveUpdates.sync()` | `CapacitorUpdater.sync()` | Optional; native auto-update already syncs |
+| `LiveUpdates.sync()` | Handled automatically | Capgo’s native auto-update runs without a manual sync call |
 | `LiveUpdates.download()` | `CapacitorUpdater.download()` | Optional for custom flows |
 | `LiveUpdates.reload()` | `CapacitorUpdater.set()` | Optional; dashboard toggles handle forced updates |
 | `LiveUpdates.getVersion()` | `CapacitorUpdater.current()` | Optional diagnostics |
