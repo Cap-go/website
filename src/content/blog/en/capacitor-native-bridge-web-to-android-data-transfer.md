@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-16T01:10:13.731Z
-updated_at: 2025-04-16T01:11:27.424Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d-1744765887424.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, data transfer, JSON serialization, mobile apps, Android, performance optimization, encryption, error handling

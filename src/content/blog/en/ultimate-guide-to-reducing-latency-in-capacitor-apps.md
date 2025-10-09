@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-21T12:35:22.443Z
-updated_at: 2025-05-21T12:36:17.716Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682dbf604fa53d42207ee932-1747830977716.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, latency reduction, network optimization, front-end performance, server-side improvements, live updates, app speed

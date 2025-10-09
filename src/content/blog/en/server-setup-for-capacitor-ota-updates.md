@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-22T11:56:26.311Z
-updated_at: 2025-05-22T11:57:34.503Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682f07854fa53d422080d523-1747915054503.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, server setup, mobile app, security, deployment, web server

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-23T05:58:21.536Z
-updated_at: 2025-03-23T05:58:34.062Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/capgo.app/67df9ec1ffe25179c9af3a48-1742709514062.jpg
 head_image_alt: Mobile Development
 keywords: privacy compliance, mobile apps, CCPA, data protection, user rights, COPPA, VCDPA, CPA

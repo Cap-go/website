@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T21:23:23.545Z
-updated_at: 2025-05-18T21:25:34.475Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682a44fe5642a17d106eb21b-1747603534475.jpg
 head_image_alt: Mobile Development
 keywords: SSL pinning, mobile app security, MITM attacks, certificate pinning, public key pinning, TrustKit, OkHttp, Capacitor

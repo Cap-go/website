@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-04T03:07:29.101Z
-updated_at: 2025-04-04T03:07:41.198Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ef49e0ebbb9dc806422d61-1743736061198.jpg
 head_image_alt: Mobile Development
 keywords: China Cybersecurity Law, app developers, data localization, security compliance, user privacy, data protection

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-26T01:11:37.156Z
-updated_at: 2025-04-26T01:12:41.179Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/capgo.app/680c247c5a08fca89178b068-1745629961179.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, two-way communication, native features, web integration, app updates, performance optimization

@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-20T00:50:40.782Z
-updated_at: 2025-04-20T00:51:01.303Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e-1745110261303.jpg
 head_image_alt: Tecnología
