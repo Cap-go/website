@@ -36,7 +36,7 @@ next_blog: ''
 
 ![Ionic](https://assets.seobotai.com/capgo.app/6836bd7bd3b96619818630a6/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
-<iframe src="https://www.youtube.com/embed/SMW1FQz3Yrc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/SMW1FQz3Yrc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Key Features of Capacitor's Background Task API
 

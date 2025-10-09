@@ -69,19 +69,19 @@ const partnerLogos = [
 
 ---
 
-<section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-24">
+<section class="relative overflow-hidden bg-slate-50 py-24">
   <div class="container mx-auto px-4">
       <!-- Background Elements -->
-      <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-indigo-500/5 rounded-3xl"></div>
-      <div class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-bl from-blue-400/10 to-transparent rounded-full blur-3xl"></div>
-      <div class="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-indigo-400/10 to-transparent rounded-full blur-3xl"></div>
+      <div class="absolute inset-0 bg-white/60 rounded-3xl"></div>
+      <div class="absolute top-0 right-0 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-72 h-72 bg-indigo-400/10 rounded-full blur-3xl"></div>
       
       <div class="relative max-w-7xl mx-auto">
           <div class="grid lg:grid-cols-2 gap-16 items-center">
               <!-- Left Column - Content -->
               <div class="space-y-8">
                   <!-- Badge -->
-                  <div class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 border border-blue-200/50 rounded-full px-4 py-2">
+                  <div class="inline-flex items-center gap-2 bg-blue-100 border border-blue-200/50 rounded-full px-4 py-2">
                       <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
                       <span class="text-blue-700 text-sm font-medium">{m.trusted_by_developers_worldwide({}, { locale: Astro.locals.locale })}</span>
                   </div>
@@ -124,7 +124,7 @@ const partnerLogos = [
               <!-- Right Column - Company Logos -->
               <div class="relative">
                   <!-- Floating background elements -->
-                  <div class="absolute inset-0 bg-gradient-to-br from-white/80 to-blue-50/80 backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl"></div>
+                  <div class="absolute inset-0"></div>
                   
                   <div class="relative p-8 lg:p-12">
                       <div class="grid grid-cols-3 gap-6">
@@ -140,7 +140,7 @@ const partnerLogos = [
                                   class="h-auto max-h-12 w-auto"
                                   src={company.logo}
                                   alt={company.alt}
-                                  title={company.name}
+                                  aria-label={company.name}
                                 />
                                 <span class="absolute -top-3 -right-3 rounded-full bg-blue-600 px-2.5 py-0.5 text-[10px] font-semibold text-white shadow-md border border-white/60 whitespace-nowrap">
                                   {m[company.badgeKey]({}, { locale: Astro.locals.locale })}
@@ -152,14 +152,11 @@ const partnerLogos = [
                       </div>
                   </div>
 
-                  <!-- Decorative elements -->
-                  <div class="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full opacity-60"></div>
-                  <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full opacity-60"></div>
               </div>
           </div>
 
           <!-- Bottom section with additional trust indicators -->
-          <div class="mt-20 pt-12 border-t border-slate-200/50">
+          <div class="mt-10">
               <div class="text-center space-y-6">
                   <p class="text-slate-600 text-lg">
                       {m.companies_logo_bottom_text({}, { locale: Astro.locals.locale })}

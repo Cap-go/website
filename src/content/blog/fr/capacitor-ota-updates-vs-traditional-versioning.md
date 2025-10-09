@@ -44,7 +44,7 @@ Les mises à jour OTA de Capacitor, soutenues par des outils comme [Capgo](https
 
 ## Comment forcer la mise à jour des applications Ionic
 
-<iframe src="https://www.youtube.com/embed/NJwBNWwNlTk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NJwBNWwNlTk" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Mises à jour standard de l'App Store
 

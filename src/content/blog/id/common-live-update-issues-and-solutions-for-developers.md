@@ -36,7 +36,7 @@ Ingin pembaruan lebih lancar? Mulai dengan mengatasi masalah umum ini untuk meng
 
 ## Appflow Live Updates: Deploy pembaruan instan langsung ke pengguna Anda
 
-<iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Memperbaiki Masalah Update OTA
 

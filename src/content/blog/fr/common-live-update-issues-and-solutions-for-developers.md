@@ -35,7 +35,7 @@ Voulez-vous des mises à jour plus fluides ? Commencez par résoudre ces problè
 
 ## Mises à jour en direct Appflow : déployez des mises à jour instantanées directement auprès de vos utilisateurs
 
-<iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Résolution des problèmes de mise à jour OTA
 

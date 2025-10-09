@@ -58,7 +58,7 @@ next_blog: ''
 
 ## [GitLab CI](https://docs.gitlab.com/ee/ci/)를 [HashiCorp Vault](https://www.hashicorp.com/products/vault)와 통합하여 검색하는 방법...
 
-<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 비밀 정보 관리 도구
 

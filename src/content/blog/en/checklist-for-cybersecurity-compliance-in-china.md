@@ -95,7 +95,7 @@ Regular audits and testing are crucial to ensure all security measures remain ef
 
 ## Cybersecurity and Data Protection in China Compliance, Challenges and Tips
 
-<iframe src="https://www.youtube.com/embed/cNYATmph4sw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/cNYATmph4sw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Technical Security Requirements
 

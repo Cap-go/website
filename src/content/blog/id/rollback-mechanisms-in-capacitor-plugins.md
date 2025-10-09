@@ -114,7 +114,7 @@ Untuk pemulihan lebih cepat, hubungkan sistem rollback Anda ke pipeline CI/CD. I
 
 ## Apa itu Plugin Capacitor? #shorts
 
-<iframe src="https://www.youtube.com/embed/h7x1vIE42X8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/h7x1vIE42X8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Alat Manajemen Rollback
 

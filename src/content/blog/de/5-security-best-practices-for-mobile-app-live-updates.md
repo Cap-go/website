@@ -42,7 +42,7 @@ Lassen Sie uns jede Praktik genauer betrachten, um zu verstehen, wie sie Ihre Ap
 
 ## Wie man mit OTA-Updates erfolgreich ist
 
-<iframe src="https://www.youtube-nocookie.com/embed/GO-RZ_ZcvN4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/GO-RZ_ZcvN4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. Sichere Übermittlung von Updates
 

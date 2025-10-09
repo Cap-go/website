@@ -79,7 +79,7 @@ This setup ensures smooth development, testing, and deployment for your Capacito
 
 ## Ionic Capacitor - Create new App - Run in Android & iOS ...
 
-<iframe src="https://www.youtube.com/embed/krTN38Z-Ux4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/krTN38Z-Ux4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Required Setup
 

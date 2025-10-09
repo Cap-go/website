@@ -82,7 +82,7 @@ A strong OTA system relies on a skilled team with well-defined roles. Here's a b
 
 ## OTA Updates and Fleet Management at Scale
 
-<iframe src="https://www.youtube.com/embed/KsIbRKoTh-Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/KsIbRKoTh-Q" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Disaster Recovery Guidelines
 

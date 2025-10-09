@@ -52,7 +52,7 @@ Capgo ensures updates reach users quickly and reliably, with tools to handle dis
 
 ## Semantic Versioning | Level Up
 
-<iframe src="https://www.youtube.com/embed/FNmzO-8Pu0A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/FNmzO-8Pu0A" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capgo](https://capgo.app/) Setup Guide
 

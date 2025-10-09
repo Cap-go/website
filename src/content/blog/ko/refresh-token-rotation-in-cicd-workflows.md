@@ -34,7 +34,7 @@ next_blog: ''
 
 ## GitLab 17.7 - UI를 통한 토큰 회전
 
-<iframe src="https://www.youtube.com/embed/V-N-V-1JWQw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/V-N-V-1JWQw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## CI/CD에서 토큰 회전 설정
 

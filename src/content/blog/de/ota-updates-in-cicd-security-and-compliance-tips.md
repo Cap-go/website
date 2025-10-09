@@ -47,7 +47,7 @@ Beginnen Sie mit der Auswahl einer sicheren OTA-Plattform, integrieren Sie sie m
 
 ## Praktische Tipps & Tricks zur Sicherung Ihrer CI/CD-Pipelines
 
-<iframe src="https://www.youtube.com/embed/4hKqanFEu34" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/4hKqanFEu34" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Sichere OTA-Update-Einrichtung
 

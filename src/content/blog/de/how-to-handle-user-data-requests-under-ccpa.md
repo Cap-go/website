@@ -39,7 +39,7 @@ Der California Consumer Privacy Act ([CCPA](https://en.wikipedia.org/wiki/Califo
 
 ## Wie man den California Consumer Privacy Act einhält ...
 
-<iframe src="https://www.youtube.com/embed/8NY0qFaVWwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/8NY0qFaVWwo" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Verstehen der [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) Nutzerrechte
 

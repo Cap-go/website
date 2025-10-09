@@ -68,7 +68,7 @@ For developers, navigating privacy requirements means tailoring strategies to ea
 
 ## Apple vs Google: Who’s Better on Privacy?
 
-<iframe src="https://www.youtube.com/embed/FHhqQPlffGY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/FHhqQPlffGY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Privacy Tools and Features
 

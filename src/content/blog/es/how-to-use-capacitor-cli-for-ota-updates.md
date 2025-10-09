@@ -61,7 +61,7 @@ Las actualizaciones OTA ahorran tiempo, mejoran la experiencia del usuario y ase
 
 ![Capawesome](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Requisitos de configuración
 

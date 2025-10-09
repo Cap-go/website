@@ -61,7 +61,7 @@ De plus, faites tourner les secrets selon un calendrier régulier et maintenez u
 
 ## Comment intégrer [GitLab CI](https://docs.gitlab.com/ee/ci/) avec [HashiCorp Vault](https://www.hashicorp.com/products/vault) pour récupérer ...
 
-<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Outils de Gestion des Secrets
 

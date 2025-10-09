@@ -33,7 +33,7 @@ next_blog: ''
 
 ![CodePush](https://mars-images.imgix.net/seobot/screenshots/learn.microsoft.com-87c8945e309a8c280c425352c4f329fa.jpg?auto=compress)
 
-<iframe src="https://www.youtube.com/embed/DpzWfrRE_XY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/DpzWfrRE_XY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 업데이트 도전 과제 극복하기
 

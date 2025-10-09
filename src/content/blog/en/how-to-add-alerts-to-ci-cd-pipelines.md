@@ -28,7 +28,7 @@ Alerts save time, reduce downtime, and improve collaboration. Let’s dive into 
 
 ## How We Gained Observability Into Our CI CD Pipeline by Dotan Horovits
 
-<iframe src="https://www.youtube.com/embed/1yILccgK3cE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/1yILccgK3cE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Adding Alerts to CI/CD Pipelines
 

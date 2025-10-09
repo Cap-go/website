@@ -32,7 +32,7 @@ Pipeline-Sicherheit für [Capacitor](https://capacitorjs.com/)-Apps ist wichtig,
 
 ## Was ist CI/CD-Sicherheit? Strategien zur Stärkung Ihrer ...
 
-<iframe src="https://www.youtube.com/embed/Uavb-FMNXtI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Uavb-FMNXtI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Sicherheitsrisiken in [Capacitor](https://capacitorjs.com/) App-Pipelines
 

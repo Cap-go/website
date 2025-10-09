@@ -32,7 +32,7 @@ API 속도 제한은 앱이 Apple과 Google 가이드라인을 준수하면서 �
 
 ## API 속도 제한 이해하기: 목적, 유형 및 필수 사항...
 
-<iframe src="https://www.youtube.com/embed/LVl2Lftj8A8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/LVl2Lftj8A8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 앱 스토어 API 가이드라인
 

@@ -36,7 +36,7 @@ next_blog: ''
 
 ## 세분화 블루프린트: 귀하의 앱을 위한 사용자 유지 원동력 식별하기
 
-<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 사용 빈도 세분화 설정 방법
 

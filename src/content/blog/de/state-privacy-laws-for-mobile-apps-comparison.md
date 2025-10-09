@@ -39,7 +39,7 @@ Die Nichteinhaltung dieser Gesetze kann zu Geldstrafen und Reputationsschäden f
 
 ## 2023 Datenschutz-Update: Briefing zu neuen staatlichen Datenschutzgesetzen
 
-<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. Kalifornische Datenschutzgesetze ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)/[CPRA](https://en.wikipedia.org/wiki/CPRA))
 

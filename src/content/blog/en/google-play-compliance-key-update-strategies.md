@@ -54,7 +54,7 @@ Up next, we'll dive into the 2025 policy updates and practical tips to ensure yo
 
 ![PolicyBytes](https://assets.seobotai.com/capgo.app/6806fd96e572faef8699cea8/81241892df8a0b3e1d59d8ca79389c8a.jpg)
 
-<iframe src="https://www.youtube.com/embed/74kce4nodWk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/74kce4nodWk" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 2025 Policy Changes
 

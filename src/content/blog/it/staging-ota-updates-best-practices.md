@@ -56,7 +56,7 @@ Piattaforme come **[Capgo](https://capgo.app/)** semplificano lo staging con fun
 
 ## Ambiente di Staging e Produzione - Test Software ...
 
-<iframe src="https://www.youtube.com/embed/HN8D8IHLb9s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HN8D8IHLb9s" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Costruire un Ambiente di Staging
 

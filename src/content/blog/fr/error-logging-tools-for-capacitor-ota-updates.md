@@ -140,7 +140,7 @@ Each tool offers unique benefits depending on your team's needs, budget, and exp
 
 ![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
 
-<iframe src="https://www.youtube.com/embed/shzKcE79GXI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen> "J'ai réussi à mettre en place les mises à jour auto-hébergées avec très peu d'effort !" – SP-CMingay [\[1\]](https://capgo.app/)
+<iframe src="https://www.youtube.com/embed/shzKcE79GXI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen> "J'ai réussi à mettre en place les mises à jour auto-hébergées avec très peu d'effort !" – SP-CMingay [\[1\]](https://capgo.app/)
 
 > "J'ai configuré @Capgo et je teste cette excellente alternative à @AppFlow ! Merci pour le travail accompli, ça a été facile jusqu'ici. Prêt à publier sur les app stores 🤞" – jaythegeek [\[1\]](https://capgo.app/)
 

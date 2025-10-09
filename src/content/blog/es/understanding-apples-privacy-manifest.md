@@ -36,7 +36,7 @@ Sigue leyendo para aprender cómo configurar y verificar tu Privacy Manifest, ev
 
 ## WWDC23: Comienza con los manifiestos de privacidad | Apple
 
-<iframe src="https://www.youtube.com/embed/OQMF4LDqscc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/OQMF4LDqscc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Elementos Principales del Privacy Manifest
 

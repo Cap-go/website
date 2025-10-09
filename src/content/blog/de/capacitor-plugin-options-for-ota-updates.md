@@ -99,7 +99,7 @@ Microsoft CodePush, einst eine beliebte Wahl, wurde 2024 eingestellt. Entwickler
 
 ## Erkunden Sie Capawesome's neues Ionic Capacitor Live Update ...
 
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Plugin-Funktionen Vergleich
 

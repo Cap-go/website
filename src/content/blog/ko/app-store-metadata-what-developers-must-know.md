@@ -36,7 +36,7 @@ next_blog: ''
 
 ## 앱 스토어에서 순위를 매기기 위한 메타데이터 최적화 - 2부
 
-<iframe src="https://www.youtube.com/embed/zOqr-quX_LM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/zOqr-quX_LM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 핵심 메타데이터 요소
 

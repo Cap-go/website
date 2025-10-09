@@ -30,7 +30,7 @@ Dependency management impacts your app's stability and efficiency. Focus on cons
 
 ## Dependency Management in a Multi-Module Project
 
-<iframe src="https://www.youtube.com/embed/Z97sl7MrrzE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Z97sl7MrrzE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Types of Dependencies in [Capacitor](https://capacitorjs.com/)
 

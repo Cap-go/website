@@ -47,7 +47,7 @@ next_blog: ''
 
 ![Identity Vault](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/c5fae6eb414f2040557b847eda54d313.jpg)
 
-<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 [계속...]
 

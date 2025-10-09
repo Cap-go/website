@@ -41,7 +41,7 @@ Start by auditing your app's current token storage methods and implement these b
 
 ## Faux Disk Encryption Realities of Secure Storage on Mobile Devices - Daniel Mayer & Drew Suarez
 
-<iframe src="https://www.youtube.com/embed/rJbDRvfqc1I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/rJbDRvfqc1I" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Basic Rules for Secure Token Storage
 

@@ -44,7 +44,7 @@ Une fois tout cela prêt, définissez vos déclencheurs de construction et étap
 
 ## Intégrer Appflow avec votre pipeline CICD
 
-<iframe src="https://www.youtube.com/embed/CakTj3A3wbM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/CakTj3A3wbM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Étapes de configuration du pipeline
 

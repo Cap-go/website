@@ -37,7 +37,7 @@ Let’s dive deeper into each practice to understand how they protect your app a
 
 ## How to win with OTA updates
 
-<iframe src="https://www.youtube-nocookie.com/embed/GO-RZ_ZcvN4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/GO-RZ_ZcvN4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1\. Secure Delivery of Updates
 

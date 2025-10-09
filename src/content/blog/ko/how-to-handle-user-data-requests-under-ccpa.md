@@ -36,7 +36,7 @@ next_blog: ''
 
 ## 캘리포니아 소비자 개인정보 보호법 준수 방법 ...
 
-<iframe src="https://www.youtube.com/embed/8NY0qFaVWwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/8NY0qFaVWwo" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act) 사용자 권리 이해하기
 

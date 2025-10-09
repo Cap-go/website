@@ -38,7 +38,7 @@ Las actualizaciones delta son ideales para aplicaciones de [Capacitor](https://c
 
 ## Cómo obtener MÁS FPS y un mejor rendimiento en Warzone ...
 
-<iframe src="https://www.youtube.com/embed/G4X7XGYj0Mg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/G4X7XGYj0Mg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Actualizaciones Delta en aplicaciones de [Capacitor](https://capacitorjs.com/)
 

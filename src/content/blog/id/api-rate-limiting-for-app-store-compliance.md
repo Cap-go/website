@@ -34,7 +34,7 @@ Pembatasan laju API memastikan aplikasi Anda memenuhi pedoman Apple dan Google s
 
 ## Memahami Batas Laju API: Tujuan, Jenis, dan Hal Penting ...
 
-<iframe src="https://www.youtube.com/embed/LVl2Lftj8A8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/LVl2Lftj8A8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Pedoman API App Store
 

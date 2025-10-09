@@ -91,7 +91,7 @@ PIPLは個人データの取り扱いについて詳細な規制を提供しま�
 
 ## 中国の個人情報の域外適用...
 
-<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 開発者のリスクと障壁
 

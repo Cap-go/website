@@ -43,7 +43,7 @@ Praktik-praktik ini tidak hanya menghemat waktu tetapi juga mengurangi kesalahan
 
 ## Bagaimana Kami Membangun Kontrol Versi Aplikasi Dengan Git
 
-<iframe src="https://www.youtube.com/embed/7kkeX-qLu9g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/7kkeX-qLu9g" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Metode Kontrol Versi Terbaik untuk Mobile CI/CD
 

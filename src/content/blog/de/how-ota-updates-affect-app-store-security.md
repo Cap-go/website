@@ -38,7 +38,7 @@ Plattformen wie [Capgo](https://capgo.app/) bieten Tools zur Gewährleistung der
 
 ## Over-the-Air (OTA) Updates mit EAS Update senden | Schritt ...
 
-<iframe src="https://www.youtube.com/embed/DWpcD6bvTRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/DWpcD6bvTRA" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Sicherheitsrisiken bei OTA-Updates
 

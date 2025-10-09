@@ -38,7 +38,7 @@ Capgo is ideal for quick fixes and feature tweaks, while major updates or native
 
 ## Explore Capawesome's New Ionic Capacitor Live Update Plugin: Features & How to Get Started
 
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capgo](https://capgo.app/) OTA vs Manual Updates: Core Differences
 

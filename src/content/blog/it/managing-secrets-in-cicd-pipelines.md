@@ -60,7 +60,7 @@ Inoltre, ruota i segreti secondo una programmazione regolare e mantieni un **reg
 
 ## Come integrare [GitLab CI](https://docs.gitlab.com/ee/ci/) con [HashiCorp Vault](https://www.hashicorp.com/products/vault) per recuperare ...
 
-<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Strumenti per la Gestione dei Segreti
 

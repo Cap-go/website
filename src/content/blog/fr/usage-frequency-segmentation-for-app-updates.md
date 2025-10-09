@@ -41,7 +41,7 @@ Cette approche améliore non seulement la satisfaction des utilisateurs, mais re
 
 ## Le Plan de Segmentation : Identifier Ce Qui Favorise la Rétention des Utilisateurs pour Votre Application
 
-<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Comment Mettre en Place une Segmentation par Fréquence d'Utilisation
 

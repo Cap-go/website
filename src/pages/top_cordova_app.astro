@@ -48,7 +48,7 @@ try {
             <div class="overflow-hidden rounded bg-white shadow">
               <div class="p-5">
                 <div class="relative">
-                  <a href={app.url} title={app.title} class="aspect-w-4 aspect-h-3 block">
+                  <a href={app.url} aria-label={app.title} class="aspect-w-4 aspect-h-3 block">
                     <img class="h-full w-full rounded-lg object-cover" src={app.icon} alt={`app icon ${app.title}`} />
                   </a>
                   <div class="absolute top-4 left-4">
@@ -62,13 +62,13 @@ try {
                   {shortNumber(app.installs)} {m.downloads({}, { locale: Astro.locals.locale })}
                 </span>
                 <p class="mt-5 text-2xl font-semibold">
-                  <a href={app.url} title={app.title} class="text-black">
+                  <a href={app.url} aria-label={app.title} class="text-black">
                     {app.title}
                   </a>
                 </p>
                 <a
                   href={app.url}
-                  title={app.title}
+                  aria-label={app.title}
                   class="mt-5 inline-flex items-center justify-center border-b-2 border-transparent pb-0.5 text-base font-semibold text-gray-600 transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
                 >
                   {m.see_in_play_store({}, { locale: Astro.locals.locale })}

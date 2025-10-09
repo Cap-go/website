@@ -47,7 +47,7 @@ Comienza eligiendo una plataforma OTA segura, intégrala con tu pipeline CI/CD y
 
 ## Consejos Prácticos y Trucos Para Asegurar Tus Pipelines CI/CD
 
-<iframe src="https://www.youtube.com/embed/4hKqanFEu34" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/4hKqanFEu34" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configuración Segura de Actualización OTA
 

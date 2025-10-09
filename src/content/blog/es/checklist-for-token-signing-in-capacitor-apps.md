@@ -53,7 +53,7 @@ La firma de tokens asegura actualizaciones en vivo seguras mientras cumple con l
 
 ## Firma y Validación de Token JWT Usando RSA público y ...
 
-<iframe src="https://www.youtube.com/embed/mtZS6Cg6Nd8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/mtZS6Cg6Nd8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configuración Requerida para la Firma de Tokens
 

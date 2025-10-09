@@ -50,7 +50,7 @@ next_blog: ''
 
 ## RSA 공개 및 개인 키를 사용한 JWT 토큰 서명 및 검증
 
-<iframe src="https://www.youtube.com/embed/mtZS6Cg6Nd8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/mtZS6Cg6Nd8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 토큰 서명에 필요한 설정
 

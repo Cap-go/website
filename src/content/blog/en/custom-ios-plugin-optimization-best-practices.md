@@ -28,7 +28,7 @@ Custom iOS plugin optimization is essential for improving [Capacitor](https://ca
 
 ![Instruments](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
 
-<iframe src="https://www.youtube.com/embed/HIsECG5s4DU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HIsECG5s4DU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Core Optimization Methods
 

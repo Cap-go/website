@@ -38,7 +38,7 @@ Platform seperti [Capgo](https://capgo.app/) menyediakan alat untuk memastikan k
 
 ## Mengirim Pembaruan Over-the-Air (OTA) dengan EAS Update | Langkah ...
 
-<iframe src="https://www.youtube.com/embed/DWpcD6bvTRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/DWpcD6bvTRA" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Risiko Keamanan dalam Pembaruan OTA
 

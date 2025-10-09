@@ -46,7 +46,7 @@ next_blog: ''
 
 ## Apple 앱 추적 투명성 권한 - Ionic 또는 iOS ...
 
-<iframe src="https://www.youtube.com/embed/BVEcp7FEWPY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/BVEcp7FEWPY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 동의 요구사항 가이드
 

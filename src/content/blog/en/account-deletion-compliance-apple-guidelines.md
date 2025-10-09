@@ -209,7 +209,7 @@ Tools like Capgo can simplify updates by enabling live adjustments to your app. 
 
 ## How to Implement Delete Account in Your App
 
-<iframe src="https://www.youtube.com/embed/TC6d4pub1jU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/TC6d4pub1jU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## FAQs
 

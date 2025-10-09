@@ -35,7 +35,7 @@ La rotación de tokens es una forma simple pero efectiva de asegurar tus pipelin
 
 ## GitLab 17.7 - Rotación de Token a través de la UI
 
-<iframe src="https://www.youtube.com/embed/V-N-V-1JWQw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/V-N-V-1JWQw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configurando la Rotación de Token en CI/CD
 

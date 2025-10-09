@@ -58,7 +58,7 @@ next_blog: ''
 
 ## [GitLab CI](https://docs.gitlab.com/ee/ci/)と[HashiCorp Vault](https://www.hashicorp.com/products/vault)を統合して取得する方法...
 
-<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 機密情報管理ツール
 

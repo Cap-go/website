@@ -38,7 +38,7 @@ next_blog: ''
 
 ![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21.jpg?auto=compress)
 
-<iframe src="https://www.youtube.com/embed/3gj54AewoC8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capacitor](https://capacitorjs.com/) OTA更新の説明
 

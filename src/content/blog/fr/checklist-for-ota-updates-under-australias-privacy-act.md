@@ -124,7 +124,7 @@ Une surveillance constante et une action rapide sont cruciales pour maintenir la
 
 ## Partie 1 - Cadre juridique australien pour la sécurité des données et la vie privée
 
-<iframe src="https://www.youtube.com/embed/mNR3VJXK3ss" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/mNR3VJXK3ss" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Exigences du marché australien
 

@@ -109,7 +109,7 @@ Forbes는 효과적인 동의 관리를 위해 다음과 같은 관행을 강조
 
 ## CPRA 준비 방법: 주요 단계 및 전문가 인사이트
 
-<iframe src="https://www.youtube.com/embed/uZbXEqWFiJw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/uZbXEqWFiJw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 지속적인 준수 관리
 

@@ -50,7 +50,7 @@ SSL pinning is a must-have for any [Capacitor](https://capacitorjs.com/) app to 
 
 ## TLS/SSL Certificate Pinning Explained
 
-<iframe src="https://www.youtube.com/embed/3coPpYJgFro" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/3coPpYJgFro" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Setup Requirements
 

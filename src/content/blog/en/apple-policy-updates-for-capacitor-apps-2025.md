@@ -40,7 +40,7 @@ Developers should act now to ensure compliance and avoid disruptions. Update you
 
 ## How to Integrate Apps & Books Token with Addigy
 
-<iframe src="https://www.youtube.com/embed/GMkQvHQcnFw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/GMkQvHQcnFw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Major Policy Updates for 2025
 

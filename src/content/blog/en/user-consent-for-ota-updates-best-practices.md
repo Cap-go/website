@@ -30,7 +30,7 @@ next_blog: ''
 
 ![React Native Expo](https://assets.seobotai.com/capgo.app/680c46c45a08fca89178f92d/5bbbc463dee1a90ef7df08a5483e9a7f.jpg)
 
-<iframe src="https://www.youtube.com/embed/BDeKTPQzvR4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/BDeKTPQzvR4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Platform and Legal Requirements
 

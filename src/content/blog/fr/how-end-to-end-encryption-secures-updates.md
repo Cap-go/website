@@ -38,7 +38,7 @@ La solution de Capgo a livré 23,5 millions de mises à jour dans le monde, atte
 
 ## Mises à jour OTA sécurisées pour [ESP32](https://en.wikipedia.org/wiki/ESP32) - Configurer la signature de code avec ...
 
-<iframe src="https://www.youtube.com/embed/z7nqbCQQBp8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/z7nqbCQQBp8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Comment fonctionne le chiffrement de bout en bout dans les mises à jour OTA
 

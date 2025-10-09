@@ -100,7 +100,7 @@ Des audits et des tests réguliers sont cruciaux pour s'assurer que toutes les m
 
 ## Conformité, défis et conseils en matière de cybersécurité et de protection des données en Chine
 
-<iframe src="https://www.youtube.com/embed/cNYATmph4sw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/cNYATmph4sw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Exigences de sécurité techniques
 

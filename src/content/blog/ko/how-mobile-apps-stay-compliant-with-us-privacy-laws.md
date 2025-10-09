@@ -41,7 +41,7 @@ next_blog: ''
 
 ## 모바일 앱 개인정보 보호 현황: 규정 준수 동향 및 시사점
 
-<iframe src="https://www.youtube.com/embed/KodK0fIQhks" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/KodK0fIQhks" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 모바일 앱에 필요한 개인정보 보호 기능
 

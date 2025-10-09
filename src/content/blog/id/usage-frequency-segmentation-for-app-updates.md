@@ -38,7 +38,7 @@ Pendekatan ini tidak hanya meningkatkan kepuasan pengguna tetapi juga memperkuat
 
 ## Cetak Biru Segmentasi: Mengidentifikasi Apa yang Mendorong Retensi Pengguna untuk Aplikasi Anda
 
-<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Cara Mengatur Segmentasi Frekuensi Penggunaan
 

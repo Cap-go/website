@@ -51,7 +51,7 @@ next_blog: ''
 
 ## 스테이징 및 프로덕션 환경 - 소프트웨어 테스트 ...
 
-<iframe src="https://www.youtube.com/embed/HN8D8IHLb9s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HN8D8IHLb9s" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 스테이징 환경 구축하기
 

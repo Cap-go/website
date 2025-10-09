@@ -41,7 +41,7 @@ Pronto a semplificare i tuoi [aggiornamenti OTA Capacitor](https://capgo.app/ja/
 
 ## Semantic Versioning
 
-<iframe src="https://www.youtube.com/embed/rEgevIkqp2o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/rEgevIkqp2o" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Linee guida per il controllo versione per [Capacitor](https://capacitorjs.com/)
 

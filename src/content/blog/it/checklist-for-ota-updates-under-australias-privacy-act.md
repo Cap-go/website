@@ -122,7 +122,7 @@ Il monitoraggio costante e l'azione rapida sono cruciali per mantenere la sicure
 
 ## Parte 1 - Quadro legale australiano per la sicurezza e la privacy dei dati
 
-<iframe src="https://www.youtube.com/embed/mNR3VJXK3ss" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/mNR3VJXK3ss" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Requisiti del Mercato Australiano
 

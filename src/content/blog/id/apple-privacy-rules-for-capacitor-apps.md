@@ -34,7 +34,7 @@ Aturan ini menekankan kontrol pengguna, transparansi, dan pembaruan aplikasi yan
 
 ## Mencegah Penolakan App Store: Tambahkan Manifes Privasi Apple ...
 
-<iframe src="https://www.youtube.com/embed/D7R87wm9IJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/D7R87wm9IJE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Penjelasan Aturan Privasi Apple
 

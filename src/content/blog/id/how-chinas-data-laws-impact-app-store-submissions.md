@@ -33,7 +33,7 @@ Hukum data yang ketat di Cina membuat pengembang aplikasi sulit untuk memasuki p
 
 ## Penjelasan [Hukum Perlindungan Informasi Pribadi](https://en.wikipedia.org/wiki/Personal_Information_Protection_Law_of_the_People%27s_Republic_of_China) (PIPL) di Cina ...
 
-<iframe src="https://www.youtube.com/embed/2mwwDS1fXDY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/2mwwDS1fXDY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Hukum Data Utama Cina
 

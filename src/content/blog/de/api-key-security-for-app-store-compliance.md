@@ -96,7 +96,7 @@ Speichern Sie umgebungsspezifische Schlüssel in **sicheren CI/CD-Variablen** un
 
 ## Erweiterte mobile iOS-Sicherheit – Laufzeitangriffe & API-Schlüssel ...
 
-<iframe src="https://www.youtube.com/embed/HfRP0lCbqZA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HfRP0lCbqZA" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## API-Schlüssel-Transport-Sicherheit
 

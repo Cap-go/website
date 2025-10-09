@@ -36,7 +36,7 @@ next_blog: ''
 
 ## 2023年プライバシー更新: 新しい州データプライバシー法に関するブリーフィング
 
-<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. カリフォルニア州プライバシー法 ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)/[CPRA](https://en.wikipedia.org/wiki/CPRA))
 

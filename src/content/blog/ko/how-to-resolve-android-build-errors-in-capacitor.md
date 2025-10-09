@@ -57,7 +57,7 @@ next_blog: ''
 
 ## 안드로이드와 iOS에서 Ionic 앱 디버깅을 위한 궁극적인 가이드 ...
 
-<iframe src="https://www.youtube.com/embed/HmXM5t8DIPA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HmXM5t8DIPA" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 주요 안드로이드 빌드 오류
 

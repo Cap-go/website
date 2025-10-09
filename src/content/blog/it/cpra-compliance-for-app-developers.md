@@ -112,7 +112,7 @@ Altre misure per rafforzare la conformità includono:
 
 ## Come Prepararsi al CPRA: Passaggi Chiave e Approfondimenti degli Esperti
 
-<iframe src="https://www.youtube.com/embed/uZbXEqWFiJw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/uZbXEqWFiJw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Gestione Continua della Conformità
 

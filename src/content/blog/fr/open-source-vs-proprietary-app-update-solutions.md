@@ -52,7 +52,7 @@ Votre décision doit s'aligner sur les besoins de votre application, votre budge
 
 ## Open Source Vs Propriétaire - Qui Règnera en Maître !
 
-<iframe src="https://www.youtube.com/embed/Z9jsSAPvTvc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Z9jsSAPvTvc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Solutions de mise à jour Open Source
 

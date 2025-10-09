@@ -52,7 +52,7 @@ Con una configuración adecuada y herramientas como Capgo, puedes garantizar act
 
 ## MAD24 304 Aprovechando Actualizaciones Atómicas con [OSTree](https://en.wikipedia.org/wiki/OSTree) para ...
 
-<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Cómo Funciona el Rollback en [Capacitor](https://capacitorjs.com/)
 

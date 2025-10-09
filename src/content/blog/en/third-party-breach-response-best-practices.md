@@ -27,7 +27,7 @@ Quick action and strong vendor management are critical to minimizing damage and 
 
 ## Steps to Take in the First 24 Hours After a Third-Party Security Incident
 
-<iframe src="https://www.youtube.com/embed/muKCENCGTXQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/muKCENCGTXQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Common Response Obstacles
 

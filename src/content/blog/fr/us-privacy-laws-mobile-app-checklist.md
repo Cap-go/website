@@ -39,7 +39,7 @@ Restez informé des changements de lois et utilisez des outils comme [Capgo](htt
 
 ![USENIX Security](https://mars-images.imgix.net/seobot/screenshots/www.usenix.org-d8a0181fef2b5e2513a1acfa3938daca-2025-03-23.jpg?auto=compress)
 
-<iframe src="https://www.youtube.com/embed/8EDue3as8No" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/8EDue3as8No" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Principales lois américaines sur la confidentialité pour les applications
 

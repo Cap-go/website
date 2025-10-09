@@ -33,7 +33,7 @@ En résolvant ces goulots d'étranglement, vous pouvez obtenir des mises à jour
 
 ## Votre Pipeline DevOps vous RALENTIT ? Voici la SOLUTION !
 
-<iframe src="https://www.youtube.com/embed/90033Mv9VF8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/90033Mv9VF8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Principaux ralentissements du pipeline CI/CD
 

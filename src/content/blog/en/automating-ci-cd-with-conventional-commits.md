@@ -43,7 +43,7 @@ This setup ensures your team spends less time managing commits and more time bui
 
 ![Github Actions](https://assets.seobotai.com/capgo.app/682a83945642a17d106f059a/4854c45b6ea9937116872b738990f451.jpg)
 
-<iframe src="https://www.youtube.com/embed/jq3ruE-Coes" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/jq3ruE-Coes" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## CI/CD Pipeline Setup Guide
 

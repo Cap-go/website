@@ -52,7 +52,7 @@ Avec une configuration adéquate et des outils comme Capgo, vous pouvez garantir
 
 ## MAD24 304 Profiter des mises à niveau atomiques avec [OSTree](https://en.wikipedia.org/wiki/OSTree) pour ...
 
-<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Comment fonctionne le retour arrière dans [Capacitor](https://capacitorjs.com/)
 

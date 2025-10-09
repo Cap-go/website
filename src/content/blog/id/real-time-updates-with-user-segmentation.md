@@ -149,7 +149,7 @@ Metrik utama yang perlu difokuskan meliputi:
 
 ## Panduan Langkah demi Langkah untuk PLG Real-Time dengan Segment dan ...
 
-<iframe src="https://www.youtube.com/embed/4h1BQ5Z8tIA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/4h1BQ5Z8tIA" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Langkah Selanjutnya
 

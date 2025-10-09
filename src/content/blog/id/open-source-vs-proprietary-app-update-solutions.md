@@ -52,7 +52,7 @@ Keputusan Anda harus sesuai dengan kebutuhan aplikasi, anggaran, dan keahlian ti
 
 ## Open Source Vs Proprietary - Siapa yang Akan Berkuasa!
 
-<iframe src="https://www.youtube.com/embed/Z9jsSAPvTvc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Z9jsSAPvTvc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Solusi Update Open Source
 

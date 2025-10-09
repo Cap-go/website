@@ -88,7 +88,7 @@ Diese Funktionen machen OTA-Updates unglaublich nützlich für die Wartung und V
 
 ## Können Sie OTA-Updates für iOS-Apps durchführen? Apple-Richtlinien erklärt
 
-<iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## App Store Update-Regeln
 

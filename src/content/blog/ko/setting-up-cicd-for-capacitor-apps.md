@@ -39,7 +39,7 @@ CI/CD를 통해 Capacitor 앱은 오류와 수동 개입을 최소화하면서 �
 
 ## 기존 CI/CD 파이프라인에 모바일 기능 통합하기
 
-<iframe src="https://www.youtube.com/embed/rIPnuVwvbb0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/rIPnuVwvbb0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## CI/CD 환경 준비하기
 

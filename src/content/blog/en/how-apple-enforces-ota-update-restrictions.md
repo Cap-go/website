@@ -40,7 +40,7 @@ Apple’s approach prioritizes security and compliance, making it essential for 
 
 ![Addigy](https://assets.seobotai.com/capgo.app/6833b5d5d3b9661981815dee/568560f115a15a979e72dd3ac2cf30a2.jpg)
 
-<iframe src="https://www.youtube.com/embed/uMJX9Xl4kQk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/uMJX9Xl4kQk" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## How Apple Enforces OTA Update Restrictions
 

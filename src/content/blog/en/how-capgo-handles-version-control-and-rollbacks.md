@@ -29,7 +29,7 @@ Capgo supports 2,000+ apps, delivering updates to 95% of users within 24 hours. 
 
 ## Explore Capawesome's New Ionic Capacitor Live Update Plugin: Features & How to Get Started
 
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## How [Capgo](https://capgo.app/)'s Version Control Works
 

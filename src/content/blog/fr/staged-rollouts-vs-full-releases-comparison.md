@@ -46,7 +46,7 @@ Des outils comme **[Capgo](https://capgo.app/)** peuvent soutenir les deux méth
 
 ## Déploiement Canary : Explication des Versions Plus Sures
 
-<iframe src="https://www.youtube.com/embed/dRAJVUaV958" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/dRAJVUaV958" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Déploiements Progressifs Expliqués
 

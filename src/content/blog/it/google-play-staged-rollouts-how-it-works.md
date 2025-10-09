@@ -156,7 +156,7 @@ Per aggiornamenti urgenti, considera l'utilizzo di strumenti come Capgo per gest
 
 ## Rilascia con fiducia con la nuova Play Console
 
-<iframe src="https://www.youtube.com/embed/vyReHI1eSSU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/vyReHI1eSSU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Riepilogo
 

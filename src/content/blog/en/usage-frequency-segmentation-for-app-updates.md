@@ -34,7 +34,7 @@ This approach not only improves user satisfaction but also strengthens your app'
 
 ## The Segmentation Blueprint: Identifying What Drives User Retention for Your App
 
-<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## How to Set Up Usage Frequency Segmentation
 

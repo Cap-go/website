@@ -172,7 +172,7 @@ Untuk pembaruan langsung, pastikan pengaturan privasi tetap utuh. Alat seperti C
 
 ## Risiko privasi yang terlewatkan yang disajikan oleh aplikasi seluler
 
-<iframe src="https://www.youtube.com/embed/aY-rICZi_Ms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/aY-rICZi_Ms" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Alat untuk Kepatuhan CCPA
 

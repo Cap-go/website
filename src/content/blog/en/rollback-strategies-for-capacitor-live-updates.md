@@ -41,7 +41,7 @@ Set up rollback tools today to ensure smooth updates and maintain user trust.
 
 ![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
-<iframe src="https://www.youtube.com/embed/d5H729a-rBM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/d5H729a-rBM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Building Strong Rollback Strategies
 

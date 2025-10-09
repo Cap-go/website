@@ -67,7 +67,7 @@ CCPA는 앱 사용자에게 특정 권리를 부여하며, 개발자는 지정�
 
 ## CA 법무장관의 모바일 앱 개인정보 보호 집행 강화
 
-<iframe src="https://www.youtube.com/embed/sBckRKsf0yY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/sBckRKsf0yY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## CCPA 집행 사례
 

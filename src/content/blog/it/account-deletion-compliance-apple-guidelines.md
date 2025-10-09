@@ -213,7 +213,7 @@ Strumenti come Capgo possono semplificare gli aggiornamenti consentendo modifich
 
 ## Come Implementare l'Eliminazione dell'Account nella Tua App
 
-<iframe src="https://www.youtube.com/embed/TC6d4pub1jU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/TC6d4pub1jU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Domande Frequenti
 

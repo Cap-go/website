@@ -47,7 +47,7 @@ next_blog: ''
 
 ## L'état de la confidentialité des applications mobiles : Tendances et enseignements en matière de conformité
 
-<iframe src="https://www.youtube.com/embed/KodK0fIQhks" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/KodK0fIQhks" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Fonctionnalités de confidentialité requises pour les applications mobiles
 

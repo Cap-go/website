@@ -34,7 +34,7 @@ next_blog: ''
 
 ## "Over the Air (OTA)" 업데이트 심층 이해하기
 
-<iframe src="https://www.youtube.com/embed/aFFRkMnifxM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/aFFRkMnifxM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## OTA 업데이트의 보안 위험
 

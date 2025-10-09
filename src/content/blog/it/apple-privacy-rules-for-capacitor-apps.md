@@ -35,7 +35,7 @@ Ces règles soulignent le contrôle des utilisateurs, la transparence et les mis
 
 ## Prévenir le rejet de l'App Store : Ajoutez le Manifeste de confidentialité d'Apple ...
 
-<iframe src="https://www.youtube.com/embed/D7R87wm9IJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/D7R87wm9IJE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Règles de confidentialité d'Apple expliquées
 

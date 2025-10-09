@@ -37,7 +37,7 @@ next_blog: ''
 
 ![App Store Connect](https://assets.seobotai.com/capgo.app/68316df8d3b96619817fa763/99832300656e946b38b49d1f2beeddd7.jpg)
 
-<iframe src="https://www.youtube.com/embed/XVn1x0sqdk8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/XVn1x0sqdk8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Apple's Third-Party SDK and Privacy Requirements
 

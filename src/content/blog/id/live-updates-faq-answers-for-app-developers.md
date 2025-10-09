@@ -203,7 +203,7 @@ Saat memberi tahu pengguna, targetkan kejelasan dan relevansi. Gunakan changelog
 
 ## Appflow Deploy: Kirim pembaruan real-time kepada pengguna aplikasi Ionic Anda
 
-<iframe src="https://www.youtube.com/embed/3gj54AewoC8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Panduan Alat Pembaruan Langsung
 

@@ -40,7 +40,7 @@ Capgoは世界中で750以上のアプリをサポートし、月額12ドルで�
 
 ## クロスプラットフォーム開発：CapacitorJSの探求...
 
-<iframe src="https://www.youtube.com/embed/73YWZ1G_DX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/73YWZ1G_DX4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## プラグインインストールコマンド
 

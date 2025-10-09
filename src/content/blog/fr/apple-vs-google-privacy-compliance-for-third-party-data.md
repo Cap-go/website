@@ -73,7 +73,7 @@ Pour les développeurs, naviguer dans les exigences en matière de confidentiali
 
 ## Apple vs Google : Qui Est Mieux en Matière de Confidentialité ?
 
-<iframe src="https://www.youtube.com/embed/FHhqQPlffGY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/FHhqQPlffGY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Outils et Fonctionnalités de Confidentialité
 

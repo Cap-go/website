@@ -37,7 +37,7 @@ Both platforms require developers to adapt to evolving policies and regional law
 
 ## Apple Reacts to Their New EU App Store Rules
 
-<iframe src="https://www.youtube.com/embed/CfEbMmWU8NY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/CfEbMmWU8NY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## App Review Requirements
 

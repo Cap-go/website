@@ -117,7 +117,7 @@ Both Capgo and Appflow include features designed to improve collaboration, but t
 
 ![Appflow](https://assets.seobotai.com/capgo.app/68217b4a5e3fe4823b5fc0bc/d621f8c4ec61e7471b0153517889f4cc.jpg)
 
-<iframe src="https://www.youtube.com/embed/b3zaNyJJFwk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/b3zaNyJJFwk" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Platform Selection Guide
 

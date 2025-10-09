@@ -33,7 +33,7 @@ Capacitor makes it easy for web developers to build native-like apps with one co
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6832a665d3b96619818090ef/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<iframe src="https://www.youtube.com/embed/Dq_BmheGAig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Dq_BmheGAig" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Setting Up Your Development Environment
 

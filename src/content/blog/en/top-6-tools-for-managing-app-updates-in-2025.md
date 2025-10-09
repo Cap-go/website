@@ -40,7 +40,7 @@ These tools cater to different needs, from small teams to large enterprises. Cho
 
 ## How to Force Update Ionic Apps
 
-<iframe src="https://www.youtube.com/embed/NJwBNWwNlTk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NJwBNWwNlTk" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1\. [Capgo](https://capgo.app/)
 

@@ -32,7 +32,7 @@ La seguridad del pipeline para aplicaciones [Capacitor](https://capacitorjs.com/
 
 ## ¿Qué es la Seguridad CI/CD? Estrategias para fortalecer tu ...
 
-<iframe src="https://www.youtube.com/embed/Uavb-FMNXtI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Uavb-FMNXtI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Riesgos de Seguridad en Pipelines de Aplicaciones [Capacitor](https://capacitorjs.com/)
 

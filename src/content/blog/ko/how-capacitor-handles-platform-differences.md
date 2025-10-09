@@ -40,7 +40,7 @@ Capacitor는 웹과 네이티브 앱 개발 간의 간격을 메워주어 플랫
 
 ## 교차 플랫폼 개발: CapacitorJS 탐색 ...
 
-<iframe src="https://www.youtube.com/embed/73YWZ1G_DX4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/73YWZ1G_DX4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capacitor](https://capacitorjs.com/)이 플랫폼 코드를 처리하는 방법
 

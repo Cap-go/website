@@ -39,7 +39,7 @@ La Ley de Privacidad del Consumidor de California ([CCPA](https://en.wikipedia.o
 
 ## Cómo Cumplir Con la Ley de Privacidad del Consumidor de California ...
 
-<iframe src="https://www.youtube.com/embed/8NY0qFaVWwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/8NY0qFaVWwo" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Entendiendo los Derechos del Usuario bajo [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)
 

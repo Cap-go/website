@@ -177,7 +177,7 @@ Capgo와 같은 도구를 사용하면 앱을 실시간으로 조정할 수 있�
 
 ## 앱에서 계정 삭제 구현 방법
 
-<iframe src="https://www.youtube.com/embed/TC6d4pub1jU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/TC6d4pub1jU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 자주 묻는 질문
 

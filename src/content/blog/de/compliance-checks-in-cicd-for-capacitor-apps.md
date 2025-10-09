@@ -40,7 +40,7 @@ Bleiben Sie konform, sicher und effizient mit angemessenen CI/CD-Praktiken für 
 
 ## DevSecOps für kontinuierliche Compliance und Sicherheit verwenden ...
 
-<iframe src="https://www.youtube.com/embed/HTMuZfv6JS0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HTMuZfv6JS0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## CI/CD-Pipelines für [Capacitor](https://capacitorjs.com/) aufbauen
 

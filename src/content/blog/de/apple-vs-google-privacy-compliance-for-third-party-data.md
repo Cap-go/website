@@ -73,7 +73,7 @@ Für Entwickler bedeutet die Navigation der Datenschutzanforderungen, Strategien
 
 ## Apple gegen Google: Wer hat die besseren Datenschutzrichtlinien?
 
-<iframe src="https://www.youtube.com/embed/FHhqQPlffGY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/FHhqQPlffGY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Datenschutztools und -funktionen
 

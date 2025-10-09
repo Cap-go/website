@@ -46,7 +46,7 @@ Las herramientas de Capacitor como [Capgo](https://capgo.app/) pueden optimizar 
 
 ## Ionic y Capacitor para construir aplicaciones móviles nativas
 
-<iframe src="https://www.youtube.com/embed/K7ghUiXLef8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/K7ghUiXLef8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configuración y configuración del entorno
 

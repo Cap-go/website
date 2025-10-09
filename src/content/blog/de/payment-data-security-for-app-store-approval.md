@@ -39,7 +39,7 @@ next_blog: ''
 
 ## Swift Reduce, Sind MVPs tot?, Apple Ads, App-Sicherheit und ...
 
-<iframe src="https://www.youtube.com/embed/FsVbZftrPTQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/FsVbZftrPTQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. [Capgo](https://capgo.app/)
 

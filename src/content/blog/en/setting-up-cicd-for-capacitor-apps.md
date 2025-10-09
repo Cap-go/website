@@ -37,7 +37,7 @@ With CI/CD, Capacitor apps achieve faster, smoother releases while minimizing er
 
 ## Integrate Your Existing CI/CD Pipelines with Mobile Capabilities
 
-<iframe src="https://www.youtube.com/embed/rIPnuVwvbb0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/rIPnuVwvbb0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Preparing Your CI/CD Environment
 

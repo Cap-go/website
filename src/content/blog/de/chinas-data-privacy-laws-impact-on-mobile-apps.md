@@ -93,7 +93,7 @@ Die Einreichung einer App in China umfasst mehrere Schritte. Sie benötigen veri
 
 ## Extraterritoriale Anwendung von Chinas personenbezogenen Daten ...
 
-<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Risiken und Hindernisse für Entwickler
 

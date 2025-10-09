@@ -45,7 +45,7 @@ Les développeurs doivent agir maintenant pour assurer la conformité et éviter
 
 ## Comment intégrer le jeton Apps & Books avec Addigy
 
-<iframe src="https://www.youtube.com/embed/GMkQvHQcnFw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/GMkQvHQcnFw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Mises à jour majeures des politiques pour 2025
 

@@ -37,7 +37,7 @@ Continuez la lecture pour des stratégies détaillées permettant d'optimiser le
 
 ## Capacitor 2.0 : Applications mobiles et PWA à partir d'une seule base de code
 
-<iframe src="https://www.youtube.com/embed/8KQb4u_FqOw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/8KQb4u_FqOw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configuration de la Structure du Code
 

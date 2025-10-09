@@ -37,7 +37,7 @@ Al implementar estos estándares, asegurarás que tu [aplicación Capacitor](htt
 
 ## Asegurar la Clave API en la Aplicación Frontend usando Servidor Proxy y Usuario ...
 
-<iframe src="https://www.youtube.com/embed/-HJeBV70zIE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-HJeBV70zIE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. Implementación de [OAuth 2.0](https://oauth.net/2/)
 

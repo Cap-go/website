@@ -48,7 +48,7 @@ Over-the-Air (OTA) 업데이트를 통해 앱스토어 지연 없이 [Capacitor]
 
 ![AWS](https://mars-images.imgix.net/seobot/screenshots/awsamazoncom-b122ef446c917f923466f58329a1ff9c-2025-03-17.jpg?auto=compress)
 
-<iframe src="https://www.youtube.com/embed/ftnGqNQzLNU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/ftnGqNQzLNU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. AWS의 OTA 업데이트
 

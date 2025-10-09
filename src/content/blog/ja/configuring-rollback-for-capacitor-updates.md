@@ -50,7 +50,7 @@ next_blog: ''
 
 ## MAD24 304 [OSTree](https://en.wikipedia.org/wiki/OSTree)を活用した原子アップグレードの...
 
-<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capacitor](https://capacitorjs.com/)におけるロールバックの仕組み
 

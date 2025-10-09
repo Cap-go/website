@@ -35,7 +35,7 @@ Estas reglas enfatizan el control del usuario, la transparencia y las actualizac
 
 ## Evitar el Rechazo de la App Store: Agrega el Manifiesto de Privacidad de Apple ...
 
-<iframe src="https://www.youtube.com/embed/D7R87wm9IJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/D7R87wm9IJE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Reglas de Privacidad de Apple Explicadas
 

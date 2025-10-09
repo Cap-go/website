@@ -172,7 +172,7 @@ Für Live-Updates stellen Sie sicher, dass Datenschutzeinstellungen intakt bleib
 
 ## Übersehene Datenschutzrisiken bei mobilen Apps
 
-<iframe src="https://www.youtube.com/embed/aY-rICZi_Ms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/aY-rICZi_Ms" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Tools für CCPA-Compliance
 

@@ -119,7 +119,7 @@ Toutes ces mises à jour techniques doivent être mises en œuvre avant de soume
 
 ## Conformité en matière de données et de cybersécurité en Chine
 
-<iframe src="https://www.youtube.com/embed/wb1ODBAOuRU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/wb1ODBAOuRU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Conséquences du non-respect
 

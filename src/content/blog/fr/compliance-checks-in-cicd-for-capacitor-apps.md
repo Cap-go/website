@@ -40,7 +40,7 @@ Restez conforme, sécurisé et efficace avec des pratiques CI/CD appropriées po
 
 ## Utilisation de DevSecOps pour la conformité et la sécurité continues...
 
-<iframe src="https://www.youtube.com/embed/HTMuZfv6JS0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HTMuZfv6JS0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Construction de pipelines CI/CD pour [Capacitor](https://capacitorjs.com/)
 

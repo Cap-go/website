@@ -70,7 +70,7 @@ next_blog: ''
 
 ## 애플 vs 구글: 개인정보 보호에서 누가 더 나은가?
 
-<iframe src="https://www.youtube.com/embed/FHhqQPlffGY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/FHhqQPlffGY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 개인정보 보호 도구 및 기능
 

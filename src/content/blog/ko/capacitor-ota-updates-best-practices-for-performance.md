@@ -47,7 +47,7 @@ Capgo는 백그라운드 업데이트, 엔드-투-엔드 암호화, 성능 추�
 
 ## Ionic 앱 사용자에게 실시간 업데이트 배포
 
-<iframe src="https://www.youtube.com/embed/3gj54AewoC8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## OTA 업데이트 성능 팁
 

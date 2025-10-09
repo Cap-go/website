@@ -41,7 +41,7 @@ Le non-respect de ces lois peut entraîner des amendes et nuire à la réputatio
 
 ## Mise à jour de la confidentialité 2023 : Briefing sur les nouvelles lois sur la confidentialité des données des États
 
-<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. Lois sur la confidentialité en Californie ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)/[CPRA](https://en.wikipedia.org/wiki/CPRA))
 

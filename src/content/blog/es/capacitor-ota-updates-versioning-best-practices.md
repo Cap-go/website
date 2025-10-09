@@ -41,7 +41,7 @@ Esto es lo que aprenderás en esta guía:
 
 ## Versionado Semántico
 
-<iframe src="https://www.youtube.com/embed/rEgevIkqp2o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/rEgevIkqp2o" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Directrices de Control de Versiones para [Capacitor](https://capacitorjs.com/)
 

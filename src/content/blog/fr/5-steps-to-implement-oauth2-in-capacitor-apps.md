@@ -45,7 +45,7 @@ Voici comment intégrer OAuth2 dans votre [application Capacitor](https://capgo.
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/683598e6d3b96619818496d3/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<iframe src="https://www.youtube.com/embed/GwtpoWZ_78E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/GwtpoWZ_78E" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Étape 1 : Configurer votre fournisseur [OAuth2](https://en.wikipedia.org/?title=OAuth2&redirect=no)
 

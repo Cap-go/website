@@ -31,7 +31,7 @@ next_blog: ''
 
 ## 완벽한 Ionic 디버깅 가이드 (브라우저 & 네이티브 앱)
 
-<iframe src="https://www.youtube.com/embed/akh6V6Yw1lw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/akh6V6Yw1lw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 주요 OTA 업데이트 문제
 

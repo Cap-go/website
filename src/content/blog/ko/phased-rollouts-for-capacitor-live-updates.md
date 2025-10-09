@@ -49,7 +49,7 @@ Capgo는 사용자 세분화, 분석 및 롤백 도구와 같은 기능으로 �
 
 ## 탄력적인 클라우드 네이티브 앱: 배포 및 런타임 패턴
 
-<iframe src="https://www.youtube.com/embed/h4DDl0hmq3o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/h4DDl0hmq3o" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 롤아웃 전략 계획
 

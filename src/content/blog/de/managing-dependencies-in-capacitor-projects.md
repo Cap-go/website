@@ -33,7 +33,7 @@ Die Verwaltung von Abhängigkeiten hat Auswirkungen auf die Stabilität und Effi
 
 ## Verwaltung von Abhängigkeiten in einem Multi-Modul-Projekt
 
-<iframe src="https://www.youtube.com/embed/Z97sl7MrrzE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Z97sl7MrrzE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Arten von Abhängigkeiten in [Capacitor](https://capacitorjs.com/)
 

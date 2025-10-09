@@ -47,7 +47,7 @@ Your decision should align with your app's needs, budget, and team expertise. Le
 
 ## Open Source Vs Proprietary - Who Will Reign Supreme!
 
-<iframe src="https://www.youtube.com/embed/Z9jsSAPvTvc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Z9jsSAPvTvc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Open-Source Update Solutions
 

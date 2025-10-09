@@ -40,7 +40,7 @@ SSL pinning is vital for secure app communication. Choose the right tool based o
 
 ## SSL Pinning Explained
 
-<iframe src="https://www.youtube.com/embed/efIPpIYBNTc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/efIPpIYBNTc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## SSL Pinning Tools and Libraries
 

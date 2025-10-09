@@ -49,7 +49,7 @@ Para tener éxito, enfócate en el cumplimiento, herramientas seguras y orientac
 
 ## Konstantinos Karagiannis | ¿Rompió China el cifrado ...
 
-<iframe src="https://www.youtube.com/embed/Ay_Qxy3bBI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Ay_Qxy3bBI0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Desafíos de la Gestión de Claves en China
 

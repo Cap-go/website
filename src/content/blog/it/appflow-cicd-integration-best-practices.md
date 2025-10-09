@@ -44,7 +44,7 @@ next_blog: ''
 
 ![Appflow](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/d621f8c4ec61e7471b0153517889f4cc.jpg)
 
-<iframe src="https://www.youtube.com/embed/CakTj3A3wbM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/CakTj3A3wbM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Funzionalità Principali di Appflow CI/CD
 

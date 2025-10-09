@@ -9,12 +9,12 @@ const brand = Astro.locals.runtimeConfig.public.brand
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between">
       <div class="shrink-0">
-        <a href={getRelativeLocaleUrl(Astro.locals.locale)} title="Capgo home" aria-label="Capgo home" class="font-prompt flex items-center pr-3 text-4xl font-medium">
-          <img class="h-18 w-auto pr-1" loading="eager" height="72" width="133" alt={`${brand} logo`} title={`${brand} logo`} src="/capgo_logo.webp" />
+        <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label="Capgo home" class="font-prompt flex items-center pr-3 text-4xl font-medium">
+          <img class="h-18 w-auto pr-1" loading="eager" height="72" width="133" alt={`${brand} logo`} aria-label={`${brand} logo`} src="/capgo_logo.webp" />
         </a>
       </div>
       <div class="flex lg:hidden">
-        <button type="button" class="text-white" title="Expand menu" id="menu-toggle">
+        <button type="button" class="text-white" aria-label="Expand menu" id="menu-toggle">
           <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -23,28 +23,28 @@ const brand = Astro.locals.runtimeConfig.public.brand
       <div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10">
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
-          title="Pricing"
+          aria-label="Pricing"
           class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
         >
           {m.pricing({}, { locale: Astro.locals.locale })}
         </a>
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
-          title="Enterprise"
+          aria-label="Enterprise"
           class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
         >
           {m.enterprise_title({}, { locale: Astro.locals.locale })}
         </a>
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
-          title="Documentation"
+          aria-label="Documentation"
           class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
         >
           {m.documentation({}, { locale: Astro.locals.locale })}
         </a>
         <a
           href="https://web.capgo.app/login/"
-          title="Login"
+          aria-label="Login"
           target="_blank"
           class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
         >
@@ -53,7 +53,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
           target="_blank"
-          title="Register"
+          aria-label="Register"
           class="font-pj rounded-xl border border-gray-300 bg-transparent px-5 py-2 text-base leading-7 font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
           role="button"
         >
@@ -66,21 +66,21 @@ const brand = Astro.locals.runtimeConfig.public.brand
     <div class="mt-2 space-y-1 bg-gray-700 px-2 pt-2 pb-3">
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
-        title={m.pricing({}, { locale: Astro.locals.locale })}
+        aria-label={m.pricing({}, { locale: Astro.locals.locale })}
         class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
       >
         Pricing
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
-        title={m.enterprise_title({}, { locale: Astro.locals.locale })}
+        aria-label={m.enterprise_title({}, { locale: Astro.locals.locale })}
         class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
       >
         Enterprise
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
-        title={m.documentation({}, { locale: Astro.locals.locale })}
+        aria-label={m.documentation({}, { locale: Astro.locals.locale })}
         class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
       >
         Documentation
@@ -88,14 +88,14 @@ const brand = Astro.locals.runtimeConfig.public.brand
       <a
         href="https://web.capgo.app/login/"
         target="_blank"
-        title={m.login({}, { locale: Astro.locals.locale })}
+        aria-label={m.login({}, { locale: Astro.locals.locale })}
         class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
       >
         Login
       </a>
       <a
         target="_blank"
-        title={m.register({}, { locale: Astro.locals.locale })}
+        aria-label={m.register({}, { locale: Astro.locals.locale })}
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
         class="font-pj block rounded-md border border-gray-300 bg-gray-900 px-5 py-2 text-base leading-7 font-medium text-gray-300 transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
       >

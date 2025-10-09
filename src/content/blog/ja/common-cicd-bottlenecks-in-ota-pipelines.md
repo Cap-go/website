@@ -30,7 +30,7 @@ next_blog: ''
 
 ## DevOpsパイプラインが遅い？解決策はこちら！
 
-<iframe src="https://www.youtube.com/embed/90033Mv9VF8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/90033Mv9VF8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## CI/CDパイプラインの主な遅延要因
 

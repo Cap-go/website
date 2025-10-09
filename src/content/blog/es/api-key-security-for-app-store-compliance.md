@@ -96,7 +96,7 @@ Almacene claves específicas del entorno en **variables CI/CD seguras** en lugar
 
 ## Seguridad Avanzada para iOS Móvil – Ataques en Tiempo de Ejecución & Clave API ...
 
-<iframe src="https://www.youtube.com/embed/HfRP0lCbqZA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HfRP0lCbqZA" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Seguridad en el Transporte de Claves API
 

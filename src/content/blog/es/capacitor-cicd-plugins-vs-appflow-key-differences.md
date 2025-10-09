@@ -42,7 +42,7 @@ next_blog: ''
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67f89c0a3ac261d346bd63f6/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<iframe src="https://www.youtube.com/embed/tkgNuSG5FJQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/tkgNuSG5FJQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Comprendiendo las Soluciones de CI/CD
 

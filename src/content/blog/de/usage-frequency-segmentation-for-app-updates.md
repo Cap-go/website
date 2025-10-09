@@ -38,7 +38,7 @@ Dieser Ansatz verbessert nicht nur die Nutzerzufriedenheit, sondern stärkt auch
 
 ## Der Segmentierungsplan: Herausfinden, was die Nutzerbindung für Ihre App antreibt
 
-<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-2NQV4TcZBU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## So richten Sie die Segmentierung nach Nutzungsfrequenz ein
 

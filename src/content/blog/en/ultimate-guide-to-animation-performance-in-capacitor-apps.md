@@ -38,7 +38,7 @@ Learn how to measure, optimize, and ensure cross-platform consistency for animat
 
 ## 🛠️ Front-end Performance: Optimizing a Marquee-style effect using CSS Animation and JavaScript
 
-<iframe src="https://www.youtube.com/embed/eVW0WgTdK3A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/eVW0WgTdK3A" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## How Animations Work in Capacitor Apps
 

@@ -38,7 +38,7 @@ CI/CD workflows, like those offered by [Capgo](https://capgo.app/), are essentia
 
 ![OpsMx](https://assets.seobotai.com/capgo.app/6832b835d3b966198180b547/819a8dffa2f263fb704841196ae14e0f.jpg)
 
-<iframe src="https://www.youtube.com/embed/S4gI4RirM60" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/S4gI4RirM60" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1\. Traditional Deployment Methods
 

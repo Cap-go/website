@@ -88,7 +88,7 @@ OTA 업데이트는 개발자와 사용자 모두에게 이점이 있습니다. 
 
 ## iOS 앱에서 OTA 업데이트를 수행할 수 있나요? Apple 가이드라인 설명
 
-<iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 앱스토어 업데이트 규정
 

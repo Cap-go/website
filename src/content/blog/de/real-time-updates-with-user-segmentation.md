@@ -149,7 +149,7 @@ Wichtige Kennzahlen, auf die Sie sich konzentrieren sollten, sind:
 
 ## Schritt-für-Schritt-Anleitung zu Echtzeit-PLG mit Segment und ...
 
-<iframe src="https://www.youtube.com/embed/4h1BQ5Z8tIA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/4h1BQ5Z8tIA" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Nächste Schritte
 

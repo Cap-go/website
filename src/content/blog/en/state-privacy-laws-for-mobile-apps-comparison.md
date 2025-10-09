@@ -34,7 +34,7 @@ Failing to comply with these laws can lead to fines and reputational harm. Devel
 
 ## 2023 Privacy Update: Briefing on New State Data Privacy Laws
 
-<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1\. California Privacy Laws ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)/[CPRA](https://en.wikipedia.org/wiki/CPRA))
 

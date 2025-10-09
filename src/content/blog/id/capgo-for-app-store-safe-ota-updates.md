@@ -45,7 +45,7 @@ Capgo ideal untuk pengembang yang membutuhkan **pembaruan cepat dan patuh** tanp
 
 ## Bisakah Anda Melakukan Pembaruan OTA untuk Aplikasi iOS? Penjelasan Pedoman Apple
 
-<iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. Fitur Capgo
 

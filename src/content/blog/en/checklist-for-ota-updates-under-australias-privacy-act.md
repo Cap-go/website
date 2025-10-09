@@ -117,7 +117,7 @@ Consistent monitoring and quick action are crucial for maintaining security and 
 
 ## Part 1 - Australia's legal framework for data security and privacy
 
-<iframe src="https://www.youtube.com/embed/mNR3VJXK3ss" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/mNR3VJXK3ss" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Australian Market Requirements
 

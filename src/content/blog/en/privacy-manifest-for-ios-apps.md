@@ -44,7 +44,7 @@ Non-compliance risks include App Store rejection, legal issues, and loss of user
 
 ## WWDC23: Get started with privacy manifests | Apple
 
-<iframe src="https://www.youtube.com/embed/OQMF4LDqscc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/OQMF4LDqscc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Apple's Privacy Manifest Rules
 

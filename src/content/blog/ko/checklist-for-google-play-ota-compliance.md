@@ -42,7 +42,7 @@ Follow these steps to keep your app updates fast, secure, and compliant.
 
 ## Stay Ahead with Google Play's Essential Policy Update for ...
 
-<iframe src="https://www.youtube.com/embed/qPpYJGGvljk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/qPpYJGGvljk" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 업데이트 패키지 생성
 

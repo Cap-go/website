@@ -68,7 +68,7 @@ Además, las empresas deben mantener registros de actividades relacionadas con l
 
 ## Impulso de aplicación de privacidad en aplicaciones móviles del Fiscal General de CA
 
-<iframe src="https://www.youtube.com/embed/sBckRKsf0yY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/sBckRKsf0yY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Ejemplos de aplicación de CCPA
 

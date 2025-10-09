@@ -75,7 +75,7 @@ Keep version control organized to track changes and simplify debugging. Use Capa
 
 ## Related video from YouTube
 
-<iframe src="https://www.youtube.com/embed/HmXM5t8DIPA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HmXM5t8DIPA" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 3 Main Debugging Tools for [Capacitor](https://capacitorjs.com/) OTA Updates
 

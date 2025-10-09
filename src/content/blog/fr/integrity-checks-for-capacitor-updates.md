@@ -38,7 +38,7 @@ Cet article explore la mise en place d'une infrastructure OTA sécurisée, des m
 
 ## Vidéo associée de YouTube
 
-<iframe src="https://www.youtube.com/embed/z7nqbCQQBp8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/z7nqbCQQBp8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Infrastructure de mise à jour OTA sécurisée
 

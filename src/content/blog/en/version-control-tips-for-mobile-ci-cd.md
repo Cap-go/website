@@ -38,7 +38,7 @@ These practices not only save time but also reduce errors, ensuring your mobile 
 
 ## How We Built App Version Control With Git
 
-<iframe src="https://www.youtube.com/embed/7kkeX-qLu9g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/7kkeX-qLu9g" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Best Version Control Methods for Mobile CI/CD
 

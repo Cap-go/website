@@ -33,7 +33,7 @@ La rotation des tokens est une manière simple mais efficace de sécuriser vos p
 
 ## GitLab 17.7 - Rotation de Token via l'UI
 
-<iframe src="https://www.youtube.com/embed/V-N-V-1JWQw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/V-N-V-1JWQw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configurer la Rotation des Tokens dans CI/CD
 

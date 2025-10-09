@@ -83,7 +83,7 @@ Esta configuración asegura un desarrollo, prueba y despliegue fluido para tus a
 
 ## Ionic Capacitor - Crear nueva App - Ejecutar en Android & iOS ...
 
-<iframe src="https://www.youtube.com/embed/krTN38Z-Ux4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/krTN38Z-Ux4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configuración Requerida
 

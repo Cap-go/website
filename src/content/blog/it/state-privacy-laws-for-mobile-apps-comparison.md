@@ -39,7 +39,7 @@ La non conformità a queste leggi può portare a multe e danni reputazionali. Gl
 
 ## Aggiornamento sulla Privacy 2023: Informativa sulle Nuove Leggi Statali sulla Privacy dei Dati
 
-<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/koQ3TEzkG-U" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. Leggi sulla Privacy della California ([CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)/[CPRA](https://en.wikipedia.org/wiki/CPRA))
 

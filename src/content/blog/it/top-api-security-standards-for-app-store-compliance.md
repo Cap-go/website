@@ -35,7 +35,7 @@ Implementando questi standard, garantirai che la tua [app Capacitor](https://cap
 
 ## Proteggere la Chiave API nell'App Front End utilizzando Proxy Server & Utente ...
 
-<iframe src="https://www.youtube.com/embed/-HJeBV70zIE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-HJeBV70zIE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. Implementazione di [OAuth 2.0](https://oauth.net/2/)
 

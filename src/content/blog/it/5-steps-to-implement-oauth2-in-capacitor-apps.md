@@ -237,7 +237,7 @@ Per una sicurezza aggiuntiva, considera l'uso di token di accesso a breve durata
 
 ### Configurazione delle Content Security Policy
 
-Oltre all'archiviazione sicura, l'implementazione di rigide Content Security Policy (CSP) può aiutare a proteggere la tua app da attacchi come cross-site scripting (XSS) e iniezione di codice. Puoi configurare CSP a livello server utilizzando l'header HTTP `Content-Security-Policy` o aggiungendo un tag `<iframe src="https://www.youtube.com/embed/GwtpoWZ_78E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen>` nel tuo HTML.
+Oltre all'archiviazione sicura, l'implementazione di rigide Content Security Policy (CSP) può aiutare a proteggere la tua app da attacchi come cross-site scripting (XSS) e iniezione di codice. Puoi configurare CSP a livello server utilizzando l'header HTTP `Content-Security-Policy` o aggiungendo un tag `<iframe src="https://www.youtube.com/embed/GwtpoWZ_78E" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen>` nel tuo HTML.
 
 Le direttive chiave su cui concentrarsi includono:
 

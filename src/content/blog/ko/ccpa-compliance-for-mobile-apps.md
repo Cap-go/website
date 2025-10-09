@@ -169,7 +169,7 @@ CCPA 권리와 관련된 사용자 요청을 처리하는 시스템을 구축하
 
 ## 모바일 앱이 제시하는 간과된 개인정보 보호 위험
 
-<iframe src="https://www.youtube.com/embed/aY-rICZi_Ms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/aY-rICZi_Ms" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## CCPA 준수 도구
 

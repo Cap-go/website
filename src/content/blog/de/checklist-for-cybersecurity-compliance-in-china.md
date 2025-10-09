@@ -99,7 +99,7 @@ Regelmäßige Audits und Tests sind entscheidend, um sicherzustellen, dass alle 
 
 ## Cybersicherheit und Datenschutz in China: Compliance, Herausforderungen und Tipps
 
-<iframe src="https://www.youtube.com/embed/cNYATmph4sw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/cNYATmph4sw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Technische Sicherheitsanforderungen
 

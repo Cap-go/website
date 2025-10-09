@@ -33,7 +33,7 @@ La gestión de dependencias impacta en la estabilidad y eficiencia de tu app. En
 
 ## Gestión de Dependencias en un Proyecto Multi-Módulo
 
-<iframe src="https://www.youtube.com/embed/Z97sl7MrrzE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Z97sl7MrrzE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Tipos de Dependencias en [Capacitor](https://capacitorjs.com/)
 

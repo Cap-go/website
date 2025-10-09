@@ -117,7 +117,7 @@ Actuellement, 750 applications utilisent avec succès ces systèmes d'autorisati
 
 ## Explication des autorisations des applications : Protégez votre vie privée et sécurisez ...
 
-<iframe src="https://www.youtube.com/embed/NSOJU5nV4v4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NSOJU5nV4v4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Outils de conformité
 

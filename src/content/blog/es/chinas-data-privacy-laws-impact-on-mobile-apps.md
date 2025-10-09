@@ -93,7 +93,7 @@ Enviar una aplicación en China involucra varios pasos. Necesitarás credenciale
 
 ## Aplicación Extraterritorial de la Información Personal de China...
 
-<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Riesgos y Obstáculos para Desarrolladores
 

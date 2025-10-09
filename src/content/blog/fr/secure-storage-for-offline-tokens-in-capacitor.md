@@ -34,7 +34,7 @@ Ces étapes protègent les données des utilisateurs, préviennent le vol de jet
 
 ![Ionic Identity Vault](https://assets.seobotai.com/capgo.app/6802fa419291ae98c5002559/e2484017084695edeec1f98ae40b009b.jpg)
 
-<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Normes de sécurité pour les jetons hors ligne
 

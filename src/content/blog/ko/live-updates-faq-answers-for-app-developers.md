@@ -201,7 +201,7 @@ Capgo의 CLI는 단 한 명령어로 배포를 간단하게 하여 안전하고 
 
 ## Appflow 배포: Ionic 앱 사용자에게 실시간 업데이트 제공
 
-<iframe src="https://www.youtube.com/embed/3gj54AewoC8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 라이브 업데이트 도구 가이드
 

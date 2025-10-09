@@ -31,7 +31,7 @@ next_blog: ''
 
 ![PIPEDA](https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd/058da1c33c3afe5c8597c27b588d4b3e.jpg)
 
-<iframe src="https://www.youtube.com/embed/87Vb-jnTtxM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/87Vb-jnTtxM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 10 Core PIPEDA Rules for Apps
 

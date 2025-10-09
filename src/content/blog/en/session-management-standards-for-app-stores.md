@@ -45,7 +45,7 @@ next_blog: ''
 
 ## Secure Coding Practices: Mastering Session Management, Web Application Security Essentials
 
-<iframe src="https://www.youtube.com/embed/pCA-iYFC3ZM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/pCA-iYFC3ZM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## App Store Session Management Rules
 

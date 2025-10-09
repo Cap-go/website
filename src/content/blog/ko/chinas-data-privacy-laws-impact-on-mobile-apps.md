@@ -90,7 +90,7 @@ PIPL은 개인정보 처리에 대한 상세한 규정을 제공합니다. 모�
 
 ## 중국 개인정보보호법의 역외 적용...
 
-<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/dh-CT5TDrFc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 개발자 위험 및 장애물
 

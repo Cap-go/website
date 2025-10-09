@@ -119,7 +119,7 @@ Capgo는 종단 간 암호화를 사용하여 OTA 업데이트 중 민감한 데
 
 ## 1부 - 호주의 데이터 보안 및 프라이버시를 위한 법적 프레임워크
 
-<iframe src="https://www.youtube.com/embed/mNR3VJXK3ss" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/mNR3VJXK3ss" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 호주 시장 요구 사항
 

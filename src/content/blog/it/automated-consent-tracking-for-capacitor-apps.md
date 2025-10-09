@@ -49,7 +49,7 @@ Il tracciamento automatico del consenso è essenziale per le app [Capacitor](htt
 
 ## Permesso di trasparenza nel tracciamento delle app Apple - Ionic o iOS ...
 
-<iframe src="https://www.youtube.com/embed/BVEcp7FEWPY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/BVEcp7FEWPY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Guida ai requisiti di consenso 
 

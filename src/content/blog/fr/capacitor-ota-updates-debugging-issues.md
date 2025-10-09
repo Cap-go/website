@@ -32,7 +32,7 @@ Ce guide couvre tout, de l'identification des erreurs de mise à jour à l'utili
 
 ## Le Guide Ultime de Débogage Ionic (Applications Navigator & Natives)
 
-<iframe src="https://www.youtube.com/embed/akh6V6Yw1lw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/akh6V6Yw1lw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Principaux Problèmes de Mise à Jour OTA
 

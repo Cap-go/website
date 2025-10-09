@@ -38,7 +38,7 @@ La soluzione di Capgo ha distribuito 23,5 milioni di aggiornamenti a livello glo
 
 ## Aggiornamenti OTA sicuri per [ESP32](https://en.wikipedia.org/wiki/ESP32) - Configurare la firma del codice con ...
 
-<iframe src="https://www.youtube.com/embed/z7nqbCQQBp8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/z7nqbCQQBp8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Come funziona la crittografia end-to-end negli aggiornamenti OTA
 

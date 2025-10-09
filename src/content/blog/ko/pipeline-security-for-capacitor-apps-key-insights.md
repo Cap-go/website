@@ -29,7 +29,7 @@ next_blog: ''
 
 ## CI/CD 보안이란? 당신의 보안을 강화하기 위한 전략...
 
-<iframe src="https://www.youtube.com/embed/Uavb-FMNXtI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Uavb-FMNXtI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capacitor](https://capacitorjs.com/) 앱 파이프라인의 보안 위험
 

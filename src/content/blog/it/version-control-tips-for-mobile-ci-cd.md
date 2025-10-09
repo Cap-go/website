@@ -43,7 +43,7 @@ Queste pratiche non solo fanno risparmiare tempo ma riducono anche gli errori, a
 
 ## Come Abbiamo Costruito il Controllo Versione delle App con Git
 
-<iframe src="https://www.youtube.com/embed/7kkeX-qLu9g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/7kkeX-qLu9g" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Migliori Metodi di Controllo Versione per CI/CD Mobile
 

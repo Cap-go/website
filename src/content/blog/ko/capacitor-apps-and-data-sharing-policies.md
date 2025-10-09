@@ -114,7 +114,7 @@ Capgo와 같은 보안 업데이트 시스템을 사용하면 규정 준수율�
 
 ## 앱 권한 설명: 개인정보 보호 및 보안...
 
-<iframe src="https://www.youtube.com/embed/NSOJU5nV4v4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NSOJU5nV4v4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 규정 준수 도구
 

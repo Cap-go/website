@@ -43,7 +43,7 @@ Estas prácticas no solo ahorran tiempo sino que también reducen errores, asegu
 
 ## Cómo Construimos el Control de Versiones de Aplicaciones con Git
 
-<iframe src="https://www.youtube.com/embed/7kkeX-qLu9g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/7kkeX-qLu9g" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Mejores Métodos de Control de Versiones para CI/CD Móvil
 

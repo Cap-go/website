@@ -42,7 +42,7 @@ Set up a robust monitoring system to ensure updates run smoothly, improve user r
 
 ## ESP32 OTA Tutorial with Tricks (Including OTA Debugging)
 
-<iframe src="https://www.youtube.com/embed/1pwqS_NUG7Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/1pwqS_NUG7Q" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Update Monitoring Tools
 

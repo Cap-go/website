@@ -46,7 +46,7 @@ next_blog: ''
 
 ## ESP32 OTA 튜토리얼 및 팁 (OTA 디버깅 포함)
 
-<iframe src="https://www.youtube.com/embed/1pwqS_NUG7Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/1pwqS_NUG7Q" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 업데이트 모니터링 도구
 

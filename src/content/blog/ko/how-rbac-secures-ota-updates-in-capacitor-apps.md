@@ -28,7 +28,7 @@ RBAC는 단순히 보안에 관한 것이 아니라, 앱 업데이트를 효율�
 
 ## 역할 기반 접근 제어(RBAC)란 무엇인가?
 
-<iframe src="https://www.youtube.com/embed/-aPHg0uRYUI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-aPHg0uRYUI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## OTA 업데이트의 보안 격차
 

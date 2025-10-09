@@ -43,7 +43,7 @@ This guide provides everything you need to identify and fix bugs, ensuring your 
 
 ## The Ultimate Ionic Debugging Guide
 
-<iframe src="https://www.youtube.com/embed/akh6V6Yw1lw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/akh6V6Yw1lw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Core Debugging Tools
 

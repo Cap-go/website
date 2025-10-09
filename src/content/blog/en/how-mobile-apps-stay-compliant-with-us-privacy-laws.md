@@ -39,7 +39,7 @@ next_blog: ''
 
 ## The State of Mobile App Privacy: Compliance Trends & Takeaways
 
-<iframe src="https://www.youtube.com/embed/KodK0fIQhks" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/KodK0fIQhks" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Required Privacy Features for Mobile Apps
 

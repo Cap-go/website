@@ -112,7 +112,7 @@ Currently, 750 apps are successfully using these permission systems in productio
 
 ## App Permissions Explained: Protect Your Privacy and Secure ...
 
-<iframe src="https://www.youtube.com/embed/NSOJU5nV4v4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NSOJU5nV4v4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Compliance Tools
 

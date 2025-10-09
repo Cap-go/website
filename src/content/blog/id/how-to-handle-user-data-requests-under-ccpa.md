@@ -38,7 +38,7 @@ California Consumer Privacy Act ([CCPA](https://en.wikipedia.org/wiki/California
 
 ## Cara Mematuhi California Consumer Privacy Act ...
 
-<iframe src="https://www.youtube.com/embed/8NY0qFaVWwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/8NY0qFaVWwo" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Memahami Hak Pengguna [CCPA](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)
 

@@ -44,7 +44,7 @@ Las actualizaciones OTA de Capacitor, impulsadas por herramientas como [Capgo](h
 
 ## Cómo Forzar la Actualización de Apps Ionic
 
-<iframe src="https://www.youtube.com/embed/NJwBNWwNlTk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NJwBNWwNlTk" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Actualizaciones Tradicionales de la Tienda de Apps
 

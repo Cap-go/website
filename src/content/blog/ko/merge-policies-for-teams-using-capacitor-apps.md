@@ -94,7 +94,7 @@ Capacitor의 독특한 설정, 라이브 업데이트 및 하이브리드 코드
 
 ## RHCSA EX200 연습 시험 질문 제1부: 이해하기 ...
 
-<iframe src="https://www.youtube.com/embed/Nf5Q1kMw6cM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Nf5Q1kMw6cM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 병합 워크플로우의 라이브 업데이트
 

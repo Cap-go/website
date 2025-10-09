@@ -49,7 +49,7 @@ next_blog: ''
 
 ## 오픈 소스 vs 상용 - 누가 최고가 될 것인가!
 
-<iframe src="https://www.youtube.com/embed/Z9jsSAPvTvc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Z9jsSAPvTvc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 오픈 소스 업데이트 솔루션
 

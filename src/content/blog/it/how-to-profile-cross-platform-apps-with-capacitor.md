@@ -50,7 +50,7 @@ Questo articolo ti guida attraverso l'uso di strumenti specifici per piattaforma
 
 ## Come trovare MEMORY LEAK nelle App Ionic Angular
 
-<iframe src="https://www.youtube.com/embed/vNGWpZlUOPM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/vNGWpZlUOPM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Requisiti di Setup
 

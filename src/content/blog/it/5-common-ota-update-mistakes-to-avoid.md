@@ -41,7 +41,7 @@ Gli aggiornamenti OTA (Over-the-Air) possono migliorare rapidamente le app, ma g
 
 ## È possibile eseguire aggiornamenti OTA per le app iOS? Apple ...
 
-<iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/aBZDJI6xQJg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. Violazione delle regole dell'[App Store](https://www.apple.com/app-store/)
 

@@ -113,7 +113,7 @@ Capacitor 플러그인의 롤백 시스템을 만들기 위해서는 버전 및 
 
 ## Capacitor 플러그인이란? #shorts
 
-<iframe src="https://www.youtube.com/embed/h7x1vIE42X8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/h7x1vIE42X8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 롤백 관리 도구
 

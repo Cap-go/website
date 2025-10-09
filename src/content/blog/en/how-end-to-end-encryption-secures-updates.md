@@ -35,7 +35,7 @@ Capgo's solution has delivered 23.5 million updates globally, achieving a **95% 
 
 ## Secure OTA updates for [ESP32](https://en.wikipedia.org/wiki/ESP32) – Set up code signing with ...
 
-<iframe src="https://www.youtube.com/embed/z7nqbCQQBp8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/z7nqbCQQBp8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## How End-to-End Encryption Works in OTA Updates
 

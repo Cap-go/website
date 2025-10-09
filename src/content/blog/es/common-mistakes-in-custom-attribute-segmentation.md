@@ -42,7 +42,7 @@ La segmentación por atributos personalizados es crucial para mejorar la partici
 
 ## ¡Atributos de Datos, Listas Inteligentes y Segmentaciones! | San ...
 
-<iframe src="https://www.youtube.com/embed/HzFUdPZzaGE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/HzFUdPZzaGE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Errores Comunes de Segmentación
 

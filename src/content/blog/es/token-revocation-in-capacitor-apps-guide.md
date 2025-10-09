@@ -83,7 +83,7 @@ Para aplicaciones empresariales, considera integrar plugins diseñados para alma
 
 ![Redis](https://assets.seobotai.com/capgo.app/68268a500209458b3ff4fe45/2e78e5b01f7fb6de1a584710a9d487ab.jpg)
 
-<iframe src="https://www.youtube.com/embed/e954e-i5DgQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/e954e-i5DgQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Métodos de Lista Negra de Tokens
 

@@ -41,7 +41,7 @@ next_blog: ''
 
 ## Cumplimiento de Exportación de Encriptación Unity | Cumplimiento de Exportación Apple iOS
 
-<iframe src="https://www.youtube.com/embed/m68LduQVRgE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/m68LduQVRgE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Métodos de Encriptación de Actualizaciones OTA
 

@@ -155,7 +155,7 @@ Google Play는 단계별 출시에 대해 다음과 같은 특정 기준을 설�
 
 ## 새로운 Play Console로 자신있게 출시하세요
 
-<iframe src="https://www.youtube.com/embed/vyReHI1eSSU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/vyReHI1eSSU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 요약
 

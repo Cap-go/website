@@ -58,7 +58,7 @@ Additionally, rotate secrets on a regular schedule and maintain an **audit log**
 
 ## How to integrate [GitLab CI](https://docs.gitlab.com/ee/ci/) with [HashiCorp Vault](https://www.hashicorp.com/products/vault) to retrieve ...
 
-<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/NsPcl4rqy9A" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Secret Management Tools
 

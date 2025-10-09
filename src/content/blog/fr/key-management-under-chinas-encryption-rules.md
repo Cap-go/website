@@ -49,7 +49,7 @@ Pour réussir, concentrez-vous sur la conformité, les outils sécurisés et les
 
 ## Konstantinos Karagiannis | La Chine a-t-elle cassé le chiffrement ...
 
-<iframe src="https://www.youtube.com/embed/Ay_Qxy3bBI0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/Ay_Qxy3bBI0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Défis de la gestion des clés en Chine
 

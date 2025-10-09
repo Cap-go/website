@@ -35,7 +35,7 @@ Sumérgete en la guía para configurar tu primer registro de cambios e integrarl
 
 ## Cómo Versionar y Registrar Cambios en tus proyectos automáticamente para ...
 
-<iframe src="https://www.youtube.com/embed/BbdFfvZNWNw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/BbdFfvZNWNw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Configurando Tu Primer Registro de Cambios
 

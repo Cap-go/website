@@ -31,7 +31,7 @@ RBAC geht nicht nur um Sicherheit; es geht darum, Vertrauen und Compliance aufre
 
 ## Was ist rollenbasierte Zugriffskontrolle (RBAC)?
 
-<iframe src="https://www.youtube.com/embed/-aPHg0uRYUI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/-aPHg0uRYUI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Sicherheitslücken in OTA-Updates
 

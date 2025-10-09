@@ -97,7 +97,7 @@ PIPL은 또한 앱 개발자가 명확하고 개방적인 데이터 처리 관�
 
 ## 중국의 사이버 보안 및 데이터 보호 준수, 도전 및 팁
 
-<iframe src="https://www.youtube.com/embed/cNYATmph4sw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/cNYATmph4sw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 기술 보안 요구 사항
 

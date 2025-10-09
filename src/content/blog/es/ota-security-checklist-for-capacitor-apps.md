@@ -36,7 +36,7 @@ next_blog: ''
 
 ## La Guía FÁCIL para Actualizaciones Over-The-Air (OTA) Con ...
 
-<iframe src="https://www.youtube.com/embed/7Xdsc1qqoro" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/7Xdsc1qqoro" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Planificación de Seguridad
 
