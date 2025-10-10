@@ -16,10 +16,10 @@ When a device checks for an update, Capgo decides which channel to use in this s
 1. **Forced device mapping (Dashboard)** – Manually pin a specific device ID to a channel. Use for urgent debugging or controlled testing with a single real user. This always wins.
 2. **Cloud override (per‑device) via `setChannel()` or Dashboard** – Created when your app calls `setChannel()` (often exposed in a QA/debug menu) or you change the device's channel in the dashboard. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device entry does.
 3. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
-4. **Cloud Default Channel (primary path ~99% of users)** – The default channel you marked in the dashboard. All normal end‑users (no force, no override, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary.
+4. **Cloud Default Channel (primary path ~99% of users)** – If you mark a default channel in the dashboard, all normal end‑users (no force, no override, no config defaultChannel) attach here. Change it to roll out or roll back instantly—no new binary. If you have platform-specific defaults (one iOS-only, one Android-only), each device lands on the default matching its platform. Leaving the cloud default unset is allowed; in that case the device must match on steps 1–3 to receive updates.
 
 Best practice:
-- Treat 1–3 as exception / testing layers; real users should flow into the Cloud Default.
+- Treat 1–3 as exception / testing layers; when you set a cloud default, real users should flow into it. If you choose not to set one, be deliberate about how users attach (typically via `defaultChannel` in config or per-device overrides).
 - Only configure `defaultChannel` in binaries you explicitly ship to testers. Leaving it unset keeps production logic centralized in the dashboard.
 - Use `setChannel()` sparingly in production—mainly for QA or targeted diagnostics.
 
@@ -27,9 +27,20 @@ If a channel is disabled for the platform (iOS/Android toggles) when it would ot
 
 > Summary: Force > Override > Config `defaultChannel` > Cloud Default.
 
+## Default Channel Behavior
+
+Setting a cloud default is optional, but it usually serves as the catch-all path for new devices. Without one, only devices that match on forced mappings, overrides, or a `defaultChannel` in the Capacitor config will receive updates. When you do choose to mark defaults, keep these patterns in mind:
+
+- **Single default (most common)** – If the channel has both iOS and Android enabled, it becomes the lone default; any device without overrides will attach here.
+- **Platform-specific defaults** – If you split channels by platform (for example, `ios-production` with only iOS enabled and `android-production` with only Android enabled), mark each one as the default for its platform. iOS devices go to the iOS default, Android devices go to the Android default.
+
+Remember that the cloud default and `defaultChannel` in `capacitor.config.*` both occupy the same decision layer. If you set a cloud default, you don't need to duplicate the value in your Capacitor config—leave `defaultChannel` empty for production builds. Reserve `defaultChannel` for binaries you intentionally ship to testers or QA when you want them to start on a non-production channel even if the cloud default is different.
+
+You can change defaults at any time in the dashboard. When you swap a default, new devices obey the new routing immediately and existing devices follow the normal precedence rules the next time they check in.
+
 ## Setting up a Channel
 
-Every app comes with a default channel called "Production" that cannot be deleted. To add new channels:
+During onboarding you create the first channel (most teams name it "Production"), but nothing is locked—you can rename or delete any channel at any time. To add additional channels later:
 
 1. Go to the "Channels" section of the Capgo dashboard 
 2. Click the "New Channel" button
@@ -67,7 +78,7 @@ Next, build your web app and run `npx cap sync` to copy the updated config file 
 <Aside type="caution">
 Channel selection order: Force > Override (`setChannel` / dashboard) > Config `defaultChannel` > Cloud Default.
 
-Use `defaultChannel` only in test/internal builds; leave it out for production so ~99% of users inherit the Cloud Default.
+Use `defaultChannel` only in test/internal builds; leave it out for production so users follow the Cloud Default (when set) instead of duplicating the routing in native config.
 
 You can still force (pin) a device or apply an override later—those immediately supersede the config value.
 
@@ -79,7 +90,7 @@ You can still force (pin) a device or apply an override later—those immediatel
 
 Channels have several options that control who can receive updates and how updates are delivered. The most important ones are below. You can configure these from the web app, the CLI, or the Public API.
 
-- Default channel: Mark one channel as the default for new devices. New devices will be assigned to this channel unless overridden.
+- Default channel: Optionally mark the channel or platform-specific channels that new devices attach to. See "Default Channel Behavior" for routing scenarios.
 - Platform filters: Enable or disable delivery to `iOS` and/or `Android` devices per channel.
 - Disable auto downgrade under native: Prevents sending an update when the device’s native app version is newer than the channel’s bundle (for example, device on 1.2.3 while channel has 1.2.2).
 - Allow development builds: Permit updates to development builds (useful for testing).
