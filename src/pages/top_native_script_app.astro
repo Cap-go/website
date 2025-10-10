@@ -24,7 +24,7 @@ let usage = 0.13
 const others = ['top_capacitor_app', 'top_flutter_app', 'top_cordova_app']
 
 try {
-  const response = await fetch(`${config.public.baseApiUrl}/private/store_top?mode=nativeScript`)
+  const response = await fetch(`https://api.capgo.app/private/private/store_top?mode=nativeScript`)
   if (response.ok) {
     const data = await response.json()
     apps = data.apps
