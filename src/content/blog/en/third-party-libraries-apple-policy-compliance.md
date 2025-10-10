@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-24T07:38:44.198Z
-updated_at: 2025-10-09T00:13:34.000Z
+updated_at: 2025-10-10T01:50:18.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68316df8d3b96619817fa763-1748072385825.jpg
 head_image_alt: Mobile Development
 keywords: Apple App Store, compliance, third-party libraries, privacy manifests, SDK guidelines, security, development

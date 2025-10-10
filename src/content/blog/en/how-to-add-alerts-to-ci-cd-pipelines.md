@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-23T08:26:42.946Z
-updated_at: 2025-10-09T00:13:34.000Z
+updated_at: 2025-10-10T01:50:18.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/683001c0d3b96619817df6c1-1747988887322.jpg
 head_image_alt: Software Development
 keywords: CI/CD, alerts, monitoring, DevOps, integration, performance, security, automation
