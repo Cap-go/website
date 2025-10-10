@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-27T02:14:50.081Z
-updated_at: 2025-10-10T01:50:18.000Z
+updated_at: 2025-10-10T02:17:19.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/680d81465a08fca8917a02c4-1745720205882.jpg
 head_image_alt: Mobile Development
 keywords: privacy compliance, third-party data, App Tracking Transparency, Privacy Sandbox, data protection
