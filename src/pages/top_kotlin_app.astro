@@ -11,14 +11,12 @@ const content = { title, description }
 let apps: any[] = []
 let usage = 30.77
 const others = ['top_capacitor_app', 'top_flutter_app', 'top_cordova_app']
-if (import.meta.env.PUBLIC_BASE_API_URL) {
-  // Fetch data
-  const response = await fetch(`${import.meta.env.PUBLIC_BASE_API_URL}/private/store_top?mode=kotlin`)
-  if (response.ok) {
-    const data = await response.json()
-    apps = data.apps
-    usage = data.usage
-  }
+// Fetch data
+const response = await fetch(`https://api.capgo.app/private/store_top/private/store_top?mode=kotlin`)
+if (response.ok) {
+  const data = await response.json()
+  apps = data.apps
+  usage = data.usage
 }
 ---
 
@@ -39,7 +37,7 @@ if (import.meta.env.PUBLIC_BASE_API_URL) {
       <div class="mx-auto mt-8 grid max-w-md grid-cols-1 gap-6 lg:mt-16 lg:max-w-full lg:grid-cols-3">
         {
           apps.map((app, index) => (
-            <div class="overflow-hidden rounded bg-white shadow">
+            <div class="overflow-hidden rounded bg-gray-100 shadow">
               <div class="p-5">
                 <div class="relative">
                   <a href={app.url} aria-label={app.title} class="aspect-w-4 aspect-h-3 block">
