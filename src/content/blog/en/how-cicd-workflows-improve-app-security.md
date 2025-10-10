@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T06:50:50.952Z
-updated_at: 2025-10-10T02:17:19.000Z
+updated_at: 2025-10-10T02:23:14.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6832b835d3b966198180b547-1748155908955.jpg
 head_image_alt: Software Development
 keywords: CI/CD, app security, automated checks, compliance, deployment, vulnerabilities, software development, security workflows

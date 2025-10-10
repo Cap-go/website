@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-28T07:28:44.833Z
-updated_at: 2025-10-10T02:17:19.000Z
+updated_at: 2025-10-10T02:23:14.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68365728d3b9661981859b67-1748417506096.jpg
 head_image_alt: Data Protection
 keywords: PDPL, GDPR, data privacy, consent requirements, cross-border data transfers, penalties, data protection

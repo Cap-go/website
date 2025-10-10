@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-04-01T03:38:09.282Z
-updated_at: 2025-10-10T02:17:19.000Z
+updated_at: 2025-10-10T02:23:14.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd-1743478700916.jpg
 head_image_alt: 모바일 개발

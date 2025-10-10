@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-24T06:53:44.733Z
-updated_at: 2025-10-10T02:17:19.000Z
+updated_at: 2025-10-10T02:23:14.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68314a58d3b96619817f6a5c-1748069679190.jpg
 head_image_alt: Security
 keywords: OTA updates, CI/CD security, cryptographic signing, end-to-end encryption, secure pipelines
