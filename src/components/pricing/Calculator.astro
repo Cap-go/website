@@ -28,9 +28,9 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
     <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
       
       <!-- User Inputs Section -->
-      <div class="bg-blue-50 px-8 py-6 border-b border-gray-200">
+      <div class="bg-gray-100 px-8 py-6 border-b border-gray-200">
         <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-          <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
           </svg>
 {m.your_configuration({}, { locale: Astro.locals.locale })}
@@ -45,7 +45,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
               id="mau-input"
               type="number" 
               value={initialMau}
-              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-blue-500 transition-colors"
               placeholder="5,000,000"
             />
           </div>
@@ -58,7 +58,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
               id="updates-by-month-input"
               type="number" 
               value={initialUpdatesByMonth}
-              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-blue-500 transition-colors"
               placeholder="1"
             />
           </div>
@@ -72,7 +72,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
               type="number" 
               step="0.1"
               value={initialUpdatesSize}
-              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-blue-500 transition-colors"
               placeholder="4"
             />
           </div>
@@ -82,7 +82,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
       <!-- Calculated Results Section -->
       <div class="px-8 py-6">
         <h2 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
-          <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
           </svg>
 {m.calculated_usage_pricing({}, { locale: Astro.locals.locale })}
@@ -91,36 +91,36 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
         <!-- Usage Metrics -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <!-- MAU -->
-          <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+          <div class="bg-gray-100 rounded-xl p-4 border border-gray-200">
             <div class="flex items-center mb-2">
-              <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
               </svg>
-              <span class="text-sm font-medium text-blue-700">MAU</span>
+              <span class="text-sm font-medium text-gray-200">MAU</span>
             </div>
             <p class="text-2xl font-bold text-gray-900" data-mau-display>{initialMau.toLocaleString()}</p>
             <p class="text-xs text-gray-500 mt-1">{m.monthly_active_users_mau({}, { locale: Astro.locals.locale })}</p>
           </div>
 
           <!-- Bandwidth -->
-          <div class="bg-orange-50 rounded-xl p-4 border border-orange-100">
+          <div class="bg-gray-100 rounded-xl p-4 border border-orange-100">
             <div class="flex items-center mb-2">
-              <svg class="w-4 h-4 mr-2 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 mr-2 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
               </svg>
-              <span class="text-sm font-medium text-orange-700">Bandwidth</span>
+              <span class="text-sm font-medium text-gray-200">Bandwidth</span>
             </div>
             <p class="text-2xl font-bold text-gray-900"><span data-bandwidth>{Math.round(initialBandwidth).toLocaleString()}</span></p>
             <p class="text-xs text-gray-500 mt-1">{m.total_data_transfer({}, { locale: Astro.locals.locale })}</p>
           </div>
 
           <!-- Storage -->
-          <div class="bg-purple-50 rounded-xl p-4 border border-purple-100">
+          <div class="bg-gray-100 rounded-xl p-4 border border-purple-100">
             <div class="flex items-center mb-2">
-              <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"/>
               </svg>
-              <span class="text-sm font-medium text-purple-700">Storage</span>
+              <span class="text-sm font-medium text-gray-300">Storage</span>
             </div>
             <p class="text-2xl font-bold text-gray-900"><span data-storage>{initialStorage.toFixed(3)}</span></p>
             <p class="text-xs text-gray-500 mt-1">{m.required_storage_space({}, { locale: Astro.locals.locale })}</p>
@@ -129,7 +129,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
           <!-- Total Credits Cost -->
           <div class="bg-gray-900 rounded-xl p-4 border border-gray-200">
             <div class="flex items-center mb-2">
-              <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
               </svg>
               <span class="text-sm font-medium text-gray-300">{m.credits_cost({}, { locale: Astro.locals.locale })}</span>
@@ -153,12 +153,12 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
               <div data-mau-tiers>
                 <div class="flex items-center justify-between mb-3">
                   <h4 class="font-medium text-gray-900 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
                     {m.mau({}, { locale: Astro.locals.locale })}:
                   </h4>
-                  <span class="text-lg font-bold text-blue-600" data-mau-total>$0.00</span>
+                  <span class="text-lg font-bold text-gray-200" data-mau-total>$0.00</span>
                 </div>
                 <div class="space-y-2" data-mau-tier-list></div>
               </div>
@@ -167,12 +167,12 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
               <div data-bandwidth-tiers>
                 <div class="flex items-center justify-between mb-3">
                   <h4 class="font-medium text-gray-900 flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 mr-2 text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
                     </svg>
                     {m.bandwidth({}, { locale: Astro.locals.locale })}:
                   </h4>
-                  <span class="text-lg font-bold text-orange-600" data-bandwidth-total>$0.00</span>
+                  <span class="text-lg font-bold text-gray-200" data-bandwidth-total>$0.00</span>
                 </div>
                 <div class="space-y-2" data-bandwidth-tier-list></div>
               </div>
@@ -181,12 +181,12 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
               <div data-storage-tiers>
                 <div class="flex items-center justify-between mb-3">
                   <h4 class="font-medium text-gray-900 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"/>
                     </svg>
                     {m.storage({}, { locale: Astro.locals.locale })}:
                   </h4>
-                  <span class="text-lg font-bold text-purple-600" data-storage-total>$0.00</span>
+                  <span class="text-lg font-bold text-gray-200" data-storage-total>$0.00</span>
                 </div>
                 <div class="space-y-2" data-storage-tier-list></div>
               </div>

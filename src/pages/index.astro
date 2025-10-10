@@ -102,7 +102,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
   <div>
     <div class="relative">
       <!-- Animated teleport lines -->
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
+     <div class="pointer-events-none absolute inset-0 overflow-hidden">
         {
           Array.from({ length: 20 }).map((_, i) => (
             <div
@@ -121,22 +121,6 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       <!-- Glowing portal effect -->
       <div class="portal-glow-animation pointer-events-none absolute top-1/2 right-0 h-3/5 w-1/5 -translate-y-1/2"></div>
 
-      <!-- Vertical data streams -->
-      <div class="pointer-events-none absolute inset-0 overflow-hidden">
-        {
-          Array.from({ length: 10 }).map((_, i) => (
-            <div
-              class="data-stream-animation absolute h-full w-px"
-              style={{
-                left: `${i * 10}%`,
-                animationDuration: `${Math.random() * 4 + 6}s`,
-                animationDelay: `${Math.random() * 2}s`,
-                opacity: Math.random() * 0.3 + 0.1,
-              }}
-            />
-          ))
-        }
-      </div>
       <section class="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
         <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="relative z-10 mx-auto max-w-3xl text-center">
@@ -245,7 +229,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             {m.our_numbers_are_shared_transparently_since_december_2021({}, { locale: Astro.locals.locale })}
           </p>
           <p class="mt-4 text-center text-sm text-gray-500 flex items-center justify-center">
-            <svg class="mr-2 h-4 w-4 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             {m.last_update({}, { locale: Astro.locals.locale })}: {dayjs().format('MMMM DD, YYYY')}
@@ -257,13 +241,13 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <!-- Updates Delivered -->
           <div class="group relative">
             <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
-              <div class="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-500/20 ring-1 ring-blue-500/30 mb-6">
-                <svg class="w-6 h-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div class="flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 ring-1 ring-white/20 mb-6">
+                <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
                 </svg>
               </div>
               <h3 class="text-6xl font-bold mb-4">
-                <span class="text-[#44BCFF]">{stats.updates}</span>
+                <span class="text-white">{stats.updates}</span>
               </h3>
               <p class="text-xl font-semibold text-white mb-2">{m.updates_delivered({}, { locale: Astro.locals.locale })}</p>
               <p class="text-sm text-gray-400">{m.all_around_the_globe({}, { locale: Astro.locals.locale })}</p>
@@ -273,13 +257,13 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <!-- Apps in Production -->
           <div class="group relative">
             <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
-              <div class="flex items-center justify-center w-12 h-12 rounded-2xl bg-green-500/20 ring-1 ring-green-500/30 mb-6">
-                <svg class="w-6 h-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div class="flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 ring-1 ring-white/20 mb-6">
+                <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                 </svg>
               </div>
               <h3 class="text-6xl font-bold mb-4">
-                <span class="text-[#00AA5E]">{stats.apps}</span>
+                <span class="text-white">{stats.apps}</span>
               </h3>
               <p class="text-xl font-semibold text-white mb-2">{m.apps({}, { locale: Astro.locals.locale })}</p>
               <p class="text-sm text-gray-400">{m.using_us_in_production({}, { locale: Astro.locals.locale })}</p>
@@ -289,8 +273,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <!-- GitHub Stars -->
           <div class="group relative">
             <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
-              <div class="flex items-center justify-center w-12 h-12 rounded-2xl bg-yellow-500/20 ring-1 ring-yellow-500/30 mb-6">
-                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div class="flex items-center justify-center w-12 h-12 rounded-2xl bg-white/10 ring-1 ring-white/20 mb-6">
+                <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
                 </svg>
               </div>
@@ -299,7 +283,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   href="https://github.com/Cap-go/capacitor-updater"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-[#FF675E] hover:underline"
+                  class="text-white hover:underline"
                 >
                   {stats.stars}★
                 </a>
@@ -312,7 +296,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   href="https://www.npmjs.com/package/@capgo/capacitor-updater"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-blue-400 underline hover:text-blue-300"
+                  class="text-gray-200 underline hover:text-white"
                 >
                   {m.home_stars_card_npm_link_label({}, { locale: Astro.locals.locale })}
                 </a>
@@ -328,7 +312,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative overflow-hidden rounded-2xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20">
               <div class="flex items-center mb-6">
                 <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-red-500/20 ring-1 ring-red-500/30 mr-4">
-                  <svg class="w-5 h-5 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                   </svg>
                 </div>
@@ -336,15 +320,15 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
               </div>
               <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
                 <div class="text-center">
-                  <p class="text-5xl font-bold text-[#FF675E] mb-2">95%</p>
+                  <p class="text-5xl font-bold text-white mb-2">95%</p>
                   <p class="text-sm text-gray-300 leading-relaxed">{m.active_users_up_to_date({}, { locale: Astro.locals.locale })}</p>
                 </div>
                 <div class="text-center">
-                  <p class="text-5xl font-bold text-[#44BCFF] mb-2">82%</p>
+                  <p class="text-5xl font-bold text-white mb-2">82%</p>
                   <p class="text-sm text-gray-300 leading-relaxed">{m.worldwide_success_rate({}, { locale: Astro.locals.locale })}</p>
                 </div>
                 <div class="text-center">
-                  <p class="text-5xl font-bold text-[#2570FA] mb-2">{'<3%'}</p>
+                  <p class="text-5xl font-bold text-white mb-2">{'<3%'}</p>
                   <p class="text-sm text-gray-300 leading-relaxed">{m.home_customer_churn_caption({}, { locale: Astro.locals.locale })}</p>
                 </div>
               </div>
@@ -356,7 +340,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative overflow-hidden rounded-2xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20">
               <div class="flex items-center mb-6">
                 <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-green-500/20 ring-1 ring-green-500/30 mr-4">
-                  <svg class="w-5 h-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                   </svg>
                 </div>
@@ -364,7 +348,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
               </div>
               <div class="grid grid-cols-2 gap-6">
                 <div class="text-center">
-                  <p class="text-5xl font-bold text-[#00AA5E] mb-2">
+                  <p class="text-5xl font-bold text-white mb-2">
                     <a
                       href="https://status.capgo.app"
                       target="_blank"
@@ -377,7 +361,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   <p class="text-sm text-gray-300 leading-relaxed">{m.download_time_globally({}, { locale: Astro.locals.locale })}</p>
                 </div>
                 <div class="text-center">
-                  <p class="text-5xl font-bold text-[#FF44EC] mb-2">
+                  <p class="text-5xl font-bold text-[#00AA5E] mb-2">
                     <a
                       href="https://status.capgo.app"
                       target="_blank"
@@ -446,7 +430,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 {m.home_install_cli_desc({}, { locale: Astro.locals.locale })}
               </p>
               <div class="flex items-center space-x-2 text-sm text-gray-500">
-                <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 <span>{m.home_install_cli_hint({}, { locale: Astro.locals.locale })}</span>
@@ -522,13 +506,13 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 {m.home_deploy_cli_desc({}, { locale: Astro.locals.locale })}
               </p>
               <div class="flex items-center space-x-2 text-sm text-gray-500">
-                <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 <span>{m.home_deploy_hint({}, { locale: Astro.locals.locale })}</span>
               </div>
               <div class="flex items-center space-x-2 text-sm text-gray-500 mt-2">
-                <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 <span>{m.home_cli_bundle_verification({}, { locale: Astro.locals.locale })}</span>
@@ -552,19 +536,19 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
               </p>
               <div class="space-y-2">
                 <div class="flex items-center space-x-2 text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                   <span>{m.home_users_background_updates({}, { locale: Astro.locals.locale })}</span>
                 </div>
                 <div class="flex items-center space-x-2 text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                   <span>{m.home_users_no_interaction({}, { locale: Astro.locals.locale })}</span>
                 </div>
                 <div class="flex items-center space-x-2 text-sm text-gray-500">
-                  <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                   <span>{m.home_users_rollback({}, { locale: Astro.locals.locale })}</span>
@@ -788,7 +772,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 <div class="relative h-full rounded-2xl border border-blue-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
                   <div class="mb-4 flex items-center">
                     <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 ring-1 ring-blue-500/30">
-                      <svg class="h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                       </svg>
@@ -807,7 +791,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 <div class="relative h-full rounded-2xl border border-green-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
                   <div class="mb-4 flex items-center">
                     <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/20 ring-1 ring-green-500/30">
-                      <svg class="h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
                       </svg>
                     </div>
@@ -826,7 +810,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
               <div class="relative h-full rounded-2xl border border-teal-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
                 <div class="mb-4 flex items-center">
                   <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-500/20 ring-1 ring-teal-500/30">
-                    <svg class="h-6 w-6 text-teal-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 014-4h1a5 5 0 019.9 1H19a3 3 0 010 6H7a4 4 0 01-4-4z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12V7a3 3 0 016 0v5" />
                     </svg>
@@ -845,7 +829,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative h-full rounded-2xl border border-purple-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
               <div class="mb-4 flex items-center">
                 <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30">
-                  <svg class="h-6 w-6 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                 </div>
@@ -863,7 +847,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative h-full rounded-2xl border border-red-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
               <div class="mb-4 flex items-center">
                 <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/20 ring-1 ring-red-500/30">
-                  <svg class="h-6 w-6 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22c4.97 0 9-4.03 9-9V5l-9-3-9 3v8c0 4.97 4.03 9 9 9z"></path>
                   </svg>
@@ -882,7 +866,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative h-full rounded-2xl border border-yellow-500/20 bg-gray-800/80 p-6 backdrop-blur-sm">
               <div class="mb-4 flex items-center">
                 <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-500/20 ring-1 ring-yellow-500/30">
-                  <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                   </svg>
                 </div>
@@ -909,7 +893,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative h-full rounded-2xl border border-cyan-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
               <div class="mb-4 flex items-center">
                 <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/20">
-                  <svg class="h-5 w-5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
                   </svg>
                 </div>
@@ -924,7 +908,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative h-full rounded-2xl border border-orange-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
               <div class="mb-4 flex items-center">
                 <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/20">
-                  <svg class="h-5 w-5 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
                   </svg>
                 </div>
@@ -939,7 +923,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative h-full rounded-2xl border border-blue-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
               <div class="mb-4 flex items-center">
                 <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20">
-                  <svg class="h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 014-4h1a5 5 0 019.9 1H19a3 3 0 010 6H7a4 4 0 01-4-4z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12V7a3 3 0 016 0v5"></path>
                   </svg>
@@ -955,7 +939,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <div class="relative h-full rounded-2xl border border-slate-500/20 bg-gray-800/50 p-6 backdrop-blur-sm">
               <div class="mb-4 flex items-center">
                 <div class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-500/20">
-                  <svg class="h-5 w-5 text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6l7 4v4c0 4-3 7-7 8-4-1-7-4-7-8V10l7-4z"/>
                   </svg>
                 </div>
@@ -1098,8 +1082,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
               <!-- Benefits List -->
               <div class="space-y-4">
                 <div class="flex items-start">
-                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-0.5">
-                    <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-200">
+                    <svg class="h-4 w-4 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
@@ -1110,8 +1094,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
                 
                 <div class="flex items-start">
-                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-0.5">
-                    <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-200">
+                    <svg class="h-4 w-4 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
@@ -1122,8 +1106,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
 
                 <div class="flex items-start">
-                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-0.5">
-                    <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-200">
+                    <svg class="h-4 w-4 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
@@ -1134,8 +1118,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
                 
                 <div class="flex items-start">
-                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-0.5">
-                    <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-200">
+                    <svg class="h-4 w-4 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
@@ -1146,8 +1130,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
                 
                 <div class="flex items-start">
-                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-0.5">
-                    <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-200">
+                    <svg class="h-4 w-4 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
@@ -1158,8 +1142,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                 </div>
                 
                 <div class="flex items-start">
-                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 mt-0.5">
-                    <svg class="h-4 w-4 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-200">
+                    <svg class="h-4 w-4 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
@@ -1214,7 +1198,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-4">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-t-4xl lg:rounded-tl-4xl">
               <div class="flex h-80 flex-col items-center justify-center bg-[#44BCFF]/20">
-                <svg class="mb-4 h-32 w-32 text-[#44BCFF]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-32 w-32 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
                 <h3 class="text-2xl font-bold text-white">{m.live_updates_in_real_time({}, { locale: Astro.locals.locale })}</h3>
@@ -1231,7 +1215,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     href="https://status.capgo.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-blue-400 hover:text-blue-300 underline"
+                    class="text-gray-200 hover:text-blue-300 underline"
                   >
                     57ms
                   </a>
@@ -1242,7 +1226,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-2">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-tr-4xl">
               <div class="flex h-80 flex-col items-center justify-center bg-blue-500/20">
-                <svg class="mb-4 h-24 w-24 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1261,7 +1245,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-3">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
               <div class="flex h-80 flex-col items-center justify-center bg-green-500/20">
-                <svg class="mb-4 h-24 w-24 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1277,7 +1261,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   {m.build_and_deploy_updates_with_single_command({}, { locale: Astro.locals.locale })}
                   <a
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli/overview')}
-                    class="ml-2 text-green-400 hover:text-green-300 underline"
+                    class="ml-2 text-gray-200 hover:text-green-300 underline"
                   >
                     {m.home_cli_docs_label({}, { locale: Astro.locals.locale })}
                   </a>
@@ -1289,7 +1273,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-3">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
               <div class="flex h-80 flex-col items-center justify-center bg-purple-500/20">
-                <svg class="mb-4 h-24 w-24 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1307,7 +1291,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-4">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
               <div class="flex h-80 flex-col items-center justify-center bg-yellow-500/20">
-                <svg class="mb-4 h-24 w-24 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1333,7 +1317,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-2">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
               <div class="flex h-80 flex-col items-center justify-center bg-cyan-500/20">
-                <svg class="mb-4 h-24 w-24 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1348,7 +1332,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   {m.manage_capgo_from_your_software({}, { locale: Astro.locals.locale })}
                   <a
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/public-api')}
-                    class="ml-2 text-cyan-400 hover:text-cyan-300 underline"
+                    class="ml-2 text-gray-200 hover:text-cyan-300 underline"
                   >
                     {m.home_api_docs_label({}, { locale: Astro.locals.locale })}
                   </a>
@@ -1359,7 +1343,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-2">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
               <div class="flex h-80 flex-col items-center justify-center bg-indigo-500/20">
-                <svg class="mb-4 h-24 w-24 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1375,7 +1359,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   {m.target_specific_user_groups_with_channels({}, { locale: Astro.locals.locale })}
                   <a
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/channels')}
-                    class="ml-2 text-indigo-400 hover:text-indigo-300 underline"
+                    class="ml-2 text-gray-200 hover:text-indigo-300 underline"
                   >
                     {m.learn_more({}, { locale: Astro.locals.locale })}
                   </a>
@@ -1386,7 +1370,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-4">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-bl-4xl">
               <div class="flex h-80 flex-col items-center justify-center bg-red-500/20">
-                <svg class="mb-4 h-24 w-24 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1402,7 +1386,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                   {m.choose_between_cloud_or_self_hosted({}, { locale: Astro.locals.locale })}
                   <a
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/live-updates/custom-storage')}
-                    class="ml-2 text-red-400 hover:text-red-300 underline"
+                    class="ml-2 text-gray-200 hover:text-red-300 underline"
                   >
                     {m.home_custom_storage_label({}, { locale: Astro.locals.locale })}
                   </a>
@@ -1414,7 +1398,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-3">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
               <div class="flex h-80 flex-col items-center justify-center bg-emerald-500/20">
-                <svg class="mb-4 h-24 w-24 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
                 </svg>
                 <h3 class="text-xl font-bold text-white">{m.one_hundred_percent_open_source({}, { locale: Astro.locals.locale })}</h3>
@@ -1427,7 +1411,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     href="https://github.com/cap-go/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="ml-2 text-emerald-400 hover:text-emerald-300 underline"
+                    class="ml-2 text-gray-200 hover:text-emerald-300 underline"
                   >
                     {m.home_view_source({}, { locale: Astro.locals.locale })}
                   </a>
@@ -1439,7 +1423,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-3">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
               <div class="flex h-80 flex-col items-center justify-center bg-orange-500/20">
-                <svg class="mb-4 h-24 w-24 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1458,7 +1442,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           <div class="flex p-px lg:col-span-6">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
               <div class="flex h-80 flex-col items-center justify-center bg-blue-600/20">
-                <svg class="mb-4 h-24 w-24 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mb-4 h-24 w-24 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -1475,7 +1459,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
                     href="https://trust.capgo.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="ml-2 text-blue-400 hover:text-blue-300 underline"
+                    class="ml-2 text-gray-200 hover:text-blue-300 underline"
                   >
                     {m.home_trust_center_label({}, { locale: Astro.locals.locale })}
                   </a>
@@ -1542,7 +1526,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
         <div class="mx-auto max-w-4xl text-center">
           <!-- Notice Badge -->
           <div class="inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-800 ring-1 ring-inset ring-blue-600/20 mb-8">
-            <svg class="mr-2 h-4 w-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="mr-2 h-4 w-4 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             {m.home_important_update_badge({}, { locale: Astro.locals.locale })}
@@ -1577,7 +1561,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <!-- Bootstrapped -->
             <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
               <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 mb-4 mx-auto">
-                <svg class="w-6 h-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-6 h-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                 </svg>
               </div>
@@ -1588,7 +1572,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <!-- Profitable -->
             <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
               <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-green-100 mb-4 mx-auto">
-                <svg class="w-6 h-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                 </svg>
               </div>
@@ -1599,7 +1583,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
             <!-- Long-term -->
             <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
               <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-purple-100 mb-4 mx-auto">
-                <svg class="w-6 h-6 text-purple-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="w-6 h-6 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                 </svg>
               </div>

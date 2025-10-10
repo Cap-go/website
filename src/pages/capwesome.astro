@@ -229,6 +229,22 @@ const comparisonRows = [
   },
 ]
 
+const getStatusMeta = (customClass, defaultClass) => {
+  const statusClass = customClass ?? defaultClass
+  let type = 'neutral'
+  let iconClass = 'text-slate-300'
+
+  if (statusClass.includes('emerald')) {
+    type = 'positive'
+    iconClass = 'text-emerald-400'
+  } else if (statusClass.includes('rose')) {
+    type = 'negative'
+    iconClass = 'text-rose-400'
+  }
+
+  return { type, iconClass }
+}
+
 const differentiators = [
   m.capwesome_differentiator_native_updates,
   m.capwesome_differentiator_innovation,
@@ -309,7 +325,7 @@ const sources = [
         {highlightCards.map((card) => (
           <div class="rounded-2xl bg-gray-800 p-6 ring-1 ring-white/10">
             <p class="text-sm text-blue-300">{card.eyebrow({}, { locale })}</p>
-            <h3 class="mt-2 text-xl font-semibold text-emerald-400" set:html={card.value({}, { locale })}></h3>
+            <h3 class="mt-2 text-xl font-semibold text-gray-100" set:html={card.value({}, { locale })}></h3>
             <p class="mt-2 text-gray-300" set:html={card.description({}, { locale })}></p>
           </div>
         ))}
@@ -326,39 +342,102 @@ const sources = [
             </tr>
           </thead>
           <tbody class="divide-y divide-white/10 bg-gray-800/20">
-            {comparisonRows.map((row) => (
-              <tr>
-                <td class="px-6 py-4 text-gray-300">{row.capability({}, { locale })}</td>
-                <td class={`px-6 py-4 font-semibold ${row.capgoClass ?? 'text-emerald-400'}`}>
-                  <span set:html={row.capgo({}, { locale })}></span>
-                  {row.capgoLinks && (
-                    <span class="ml-1 text-sm text-blue-300">
-                      (
-                      {' '}
-                      {row.capgoLinks.map((link, index) => (
-                        <span>
-                          {index > 0 ? ', ' : ''}
-                          <a
-                            class="text-blue-300 underline decoration-dotted hover:text-blue-200"
-                            href={link.href}
-                            target="_blank"
-                            rel="noopener"
-                          >
-                            {link.label}
-                          </a>
-                        </span>
-                      ))}
-                      {' '}
-                      )
-                    </span>
-                  )}
-                </td>
-                <td
-                  class={`px-6 py-4 font-medium ${row.capawesomeClass ?? 'text-rose-400'}`}
-                  set:html={row.capawesome({}, { locale })}
-                ></td>
-              </tr>
-            ))}
+            {comparisonRows.map((row) => {
+              const capgoStatus = getStatusMeta(row.capgoClass, 'text-emerald-400')
+              const capawesomeStatus = getStatusMeta(row.capawesomeClass, 'text-rose-400')
+
+              return (
+                <tr>
+                  <td class="px-6 py-4 text-gray-300">{row.capability({}, { locale })}</td>
+                  <td class="px-6 py-4 font-semibold text-gray-200">
+                    <div class="flex items-start gap-3">
+                      <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
+                        {capgoStatus.type === 'positive' ? (
+                          <svg class={`${capgoStatus.iconClass} h-4 w-4`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        ) : capgoStatus.type === 'negative' ? (
+                          <svg class={`${capgoStatus.iconClass} h-4 w-4`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M6 18L18 6M6 6l12 12"></path>
+                          </svg>
+                        ) : (
+                          <svg class={`${capgoStatus.iconClass} h-4 w-4`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M6 10h12M6 14h12"></path>
+                          </svg>
+                        )}
+                      </span>
+                      <div class="space-y-1">
+                        <div set:html={row.capgo({}, { locale })}></div>
+                        {row.capgoLinks && (
+                          <div class="text-sm text-blue-300">
+                            (
+                            {' '}
+                            {row.capgoLinks.map((link, index) => (
+                              <span>
+                                {index > 0 ? ', ' : ''}
+                                <a
+                                  class="text-blue-300 underline decoration-dotted hover:text-blue-200"
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noopener"
+                                >
+                                  {link.label}
+                                </a>
+                              </span>
+                            ))}
+                            {' '}
+                            )
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 font-medium text-gray-200">
+                    <div class="flex items-start gap-3">
+                      <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
+                        {capawesomeStatus.type === 'positive' ? (
+                          <svg class={`${capawesomeStatus.iconClass} h-4 w-4`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        ) : capawesomeStatus.type === 'negative' ? (
+                          <svg class={`${capawesomeStatus.iconClass} h-4 w-4`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M6 18L18 6M6 6l12 12"></path>
+                          </svg>
+                        ) : (
+                          <svg class={`${capawesomeStatus.iconClass} h-4 w-4`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M6 10h12M6 14h12"></path>
+                          </svg>
+                        )}
+                      </span>
+                      <div class="space-y-1">
+                        <div set:html={row.capawesome({}, { locale })}></div>
+                        {row.capawesomeLinks && (
+                          <div class="text-sm text-blue-300">
+                            (
+                            {' '}
+                            {row.capawesomeLinks.map((link, index) => (
+                              <span>
+                                {index > 0 ? ', ' : ''}
+                                <a
+                                  class="text-blue-300 underline decoration-dotted hover:text-blue-200"
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noopener"
+                                >
+                                  {link.label}
+                                </a>
+                              </span>
+                            ))}
+                            {' '}
+                            )
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

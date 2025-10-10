@@ -25,7 +25,7 @@ import * as m from '@/paraglide/messages'
           </p>
           <p class="mt-4 text-base text-gray-400">
             {m.capgo_usage_explanation({}, { locale: Astro.locals.locale })}
-            <a class="border-b-2 border-blue-600 hover:text-blue-600 focus:text-blue-600" href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/how-your-usage-is-counted')}>
+            <a class="border-b-2 border-blue-600 hover:text-gray-200 focus:text-gray-200" href={getRelativeLocaleUrl(Astro.locals.locale, 'blog/how-your-usage-is-counted')}>
               {m.here({}, { locale: Astro.locals.locale })}
             </a>
           </p>
@@ -69,7 +69,7 @@ import * as m from '@/paraglide/messages'
       <div class="rounded-full bg-gray-800 px-8 py-4 text-center">
         <p class="text-gray-50">
           {m.didnt_find_answer({}, { locale: Astro.locals.locale })}
-          <a class="text-yellow-300 transition-all duration-200 hover:text-yellow-400 hover:underline focus:text-yellow-400" href="https://support.capgo.app">
+          <a class="text-gray-200 transition-all duration-200 hover:text-gray-200 hover:underline focus:text-gray-200" href="https://support.capgo.app">
             {m.contact_support({}, { locale: Astro.locals.locale })}
           </a>
         </p>

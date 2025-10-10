@@ -10,15 +10,11 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 <Layout title={pageTitle} description={pageDescription}>
   <div>
     <!-- Hero Section -->
-    <section class="relative py-20 sm:py-24 lg:py-32 overflow-hidden">
-      <!-- Background Elements -->
-      <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
-      <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
-      
+    <section class="relative bg-gray-900 py-20 sm:py-24 lg:py-32 overflow-hidden">
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <!-- Badge -->
-          <div class="inline-flex items-center rounded-full bg-red-500/10 px-4 py-2 text-sm font-medium text-red-400 ring-1 ring-inset ring-red-500/20 mb-8">
+          <div class="inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-100 ring-1 ring-inset ring-white/15 mb-8">
             <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
             </svg>
@@ -26,21 +22,21 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
           </div>
           
           <h1 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl">
-            <span class="text-red-400">Still Building iOS & Android</span><br/>
-            <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+            <span class="text-gray-100">Still Building iOS & Android</span><br/>
+            <span class="text-gray-200">
               Apps Manually?
             </span>
           </h1>
           
           <p class="mx-auto mt-6 max-w-4xl text-xl leading-relaxed text-gray-300">
-            <span class="text-red-400 font-semibold">Hours wasted on manual builds.</span> Different environments causing bugs. Team members waiting for builds. 
+            <span class="text-gray-100 font-semibold">Hours wasted on manual builds.</span> Different environments causing bugs. Team members waiting for builds. 
             Your productivity suffers with every manual deployment.
           </p>
           
           <div class="mx-auto mt-8 max-w-3xl">
             <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
               <h3 class="text-2xl font-bold text-white mb-4">
-                What if builds happened <span class="text-green-400">automatically on every commit?</span>
+                What if builds happened <span class="text-gray-100">automatically on every commit?</span>
               </h3>
               <p class="text-gray-300 text-lg">
                 Expert CI/CD setup for native mobile apps. Automated iOS & Android builds, signing, and distribution. No more manual build processes.
@@ -50,11 +46,11 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
           
           <!-- CTA Buttons -->
           <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <div class="group relative">
-              <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
+            <div class="group relative inline-flex" role="presentation">
+              <div class="pointer-events-none absolute -inset-px rounded-xl bg-white/20 blur-lg opacity-65 transition-opacity duration-300 group-hover:opacity-90"></div>
               <a
                 href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
-                class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
+                class="inline-flex relative items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 border border-red-500 hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
               >
                 Get CI/CD Setup
                 <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -71,7 +67,7 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
           </div>
           
           <p class="mt-6 text-sm text-gray-400">
-            <span class="text-green-400">✓</span> Automated native builds • <span class="text-green-400">✓</span> iOS & Android CI/CD • <span class="text-green-400">✓</span> Expert setup service
+            <span class="text-gray-100">✓</span> Automated native builds • <span class="text-gray-100">✓</span> iOS & Android CI/CD • <span class="text-gray-100">✓</span> Expert setup service
           </p>
         </div>
       </div>
@@ -274,45 +270,45 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
             From Code to App Stores <span class="text-green-400">Automatically</span>
           </h2>
           <p class="mt-4 text-lg text-gray-300 max-w-3xl mx-auto">
-            <span class="text-red-400">Stop manual builds</span> and certificate management. Here's how CI/CD transforms your workflow:
+            <span class="text-gray-100">Stop manual builds</span> and certificate management. Here's how CI/CD transforms your workflow:
           </p>
         </div>
 
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
           <!-- Step 1 -->
           <div class="text-center">
-            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/20 ring-2 ring-blue-500/30 mx-auto mb-6">
-              <span class="text-2xl font-bold text-blue-400">1</span>
+            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-700/40 ring-2 ring-white/15 mx-auto mb-6">
+              <span class="text-2xl font-bold text-gray-100">1</span>
             </div>
             <h3 class="text-xl font-bold text-white mb-4">Professional Setup</h3>
             <p class="text-gray-300">
-              We configure Fastlane with your CI/CD platform. <span class="text-blue-400 font-semibold">Complete automation for iOS & Android builds, signing, and distribution.</span>
+              We configure Fastlane with your CI/CD platform. <span class="text-gray-100 font-semibold">Complete automation for iOS & Android builds, signing, and distribution.</span>
             </p>
-            <div class="mt-4 text-sm text-blue-400">✓ No Mac required for iOS builds</div>
+            <div class="mt-4 text-sm text-gray-100">✓ No Mac required for iOS builds</div>
           </div>
 
           <!-- Step 2 -->
           <div class="text-center">
-            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-500/20 ring-2 ring-purple-500/30 mx-auto mb-6">
-              <span class="text-2xl font-bold text-purple-400">2</span>
+            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-700/40 ring-2 ring-white/15 mx-auto mb-6">
+              <span class="text-2xl font-bold text-gray-100">2</span>
             </div>
             <h3 class="text-xl font-bold text-white mb-4">Push Code, Get Builds</h3>
             <p class="text-gray-300">
-              Git push triggers native builds automatically. <span class="text-purple-400 font-semibold">iOS and Android apps built, signed, and ready for testing.</span>
+              Git push triggers native builds automatically. <span class="text-gray-100 font-semibold">iOS and Android apps built, signed, and ready for testing.</span>
             </p>
-            <div class="mt-4 text-sm text-purple-400">✓ Consistent builds every time</div>
+            <div class="mt-4 text-sm text-gray-100">✓ Consistent builds every time</div>
           </div>
 
           <!-- Step 3 -->
           <div class="text-center">
-            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-500/20 ring-2 ring-green-500/30 mx-auto mb-6">
-              <span class="text-2xl font-bold text-green-400">3</span>
+            <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-700/40 ring-2 ring-white/15 mx-auto mb-6">
+              <span class="text-2xl font-bold text-gray-100">3</span>
             </div>
             <h3 class="text-xl font-bold text-white mb-4">Deploy to Stores Seamlessly</h3>
             <p class="text-gray-300">
-              Automatically upload to TestFlight & Play Console. <span class="text-green-400 font-semibold">Ready for review without manual uploads or form filling.</span>
+              Automatically upload to TestFlight & Play Console. <span class="text-gray-100 font-semibold">Ready for review without manual uploads or form filling.</span>
             </p>
-            <div class="mt-4 text-sm text-green-400">✓ Focus on coding, not deployment</div>
+            <div class="mt-4 text-sm text-gray-100">✓ Focus on coding, not deployment</div>
           </div>
         </div>
         
@@ -324,10 +320,10 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
             </h3>
             <p class="text-gray-300 mb-6">
               Every manual build is hours of developer time lost. Inconsistent environments cause bugs that take days to debug. 
-              <span class="text-red-400 font-semibold">Your team's productivity is suffering.</span>
+              <span class="text-gray-100 font-semibold">Your team's productivity is suffering.</span>
             </p>
             <div class="group relative inline-flex">
-              <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
+              <div class="pointer-events-none absolute -inset-px rounded-xl bg-white/20 blur-lg opacity-60 transition-all duration-300 group-hover:-inset-1 group-hover:opacity-85"></div>
               <a
                 href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
                 class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
@@ -528,11 +524,11 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <!-- Faster Deployments -->
           <div class="group relative">
-            <div class="absolute inset-0 bg-blue-500/10 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-blue-500/15"></div>
-            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/20">
+            <div class="absolute inset-0 bg-gray-800/40 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-gray-700/60"></div>
+            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-600/40">
               <div class="flex items-center mb-6">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 ring-1 ring-blue-500/30">
-                  <svg class="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                   </svg>
                 </div>
@@ -541,7 +537,7 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
               <p class="text-gray-300 mb-4">
                 Push code and get native iOS and Android builds automatically. No manual Xcode or Android Studio required - builds run in the cloud.
               </p>
-              <div class="flex items-center text-sm text-blue-400">
+              <div class="flex items-center text-sm text-gray-100">
                 <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
@@ -552,11 +548,11 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 
           <!-- Zero Downtime -->
           <div class="group relative">
-            <div class="absolute inset-0 bg-green-500/10 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-green-500/15"></div>
-            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-green-500/20">
+            <div class="absolute inset-0 bg-gray-800/40 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-gray-700/15"></div>
+            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-600/40">
               <div class="flex items-center mb-6">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/20 ring-1 ring-green-500/30">
-                  <svg class="h-6 w-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                 </div>
@@ -565,7 +561,7 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
               <p class="text-gray-300 mb-4">
                 Updates happen in the background while your app is running. Users never experience interruptions or forced updates.
               </p>
-              <div class="flex items-center text-sm text-green-400">
+              <div class="flex items-center text-sm text-gray-100">
                 <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
@@ -576,11 +572,11 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 
           <!-- Automated Testing -->
           <div class="group relative">
-            <div class="absolute inset-0 bg-purple-500/10 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-purple-500/15"></div>
-            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20">
+            <div class="absolute inset-0 bg-gray-800/40 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-gray-700/60"></div>
+            <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-600/40">
               <div class="flex items-center mb-6">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30">
-                  <svg class="h-6 w-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                   </svg>
                 </div>
@@ -589,7 +585,7 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
               <p class="text-gray-300 mb-4">
                 Only deploy when tests pass. Integrate with your existing test suites and quality checks for bulletproof releases.
               </p>
-              <div class="flex items-center text-sm text-purple-400">
+              <div class="flex items-center text-sm text-gray-100">
                 <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
@@ -600,11 +596,11 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 
           <!-- Rollback Safety -->
           <div class="group relative">
-            <div class="absolute inset-0 bg-red-500/10 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-red-500/15"></div>
+            <div class="absolute inset-0 bg-gray-800/40 rounded-2xl blur-xl transition-all duration-300 group-hover:bg-gray-700/50"></div>
             <div class="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-red-500/20">
               <div class="flex items-center mb-6">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/20 ring-1 ring-red-500/30">
-                  <svg class="h-6 w-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+                  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                   </svg>
                 </div>
@@ -613,7 +609,7 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
               <p class="text-gray-300 mb-4">
                 Build artifacts are automatically versioned and stored. Revert to any previous build instantly if issues are discovered after deployment.
               </p>
-              <div class="flex items-center text-sm text-red-400">
+              <div class="flex items-center text-sm text-gray-100">
                 <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
@@ -742,20 +738,15 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 
     <!-- Expert CI/CD Setup Service -->
     <section class="relative bg-gray-900 py-12 sm:py-16 lg:py-20 overflow-hidden">
-      <!-- Background Elements -->
-      <div class="absolute inset-0 opacity-5">
-        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, #60a5fa 1px, transparent 0); background-size: 32px 32px;"></div>
-      </div>
-      
       <!-- Floating Orbs -->
-      <div class="absolute top-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-      <div class="absolute bottom-20 right-10 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+      <div class="absolute top-20 left-10 w-64 h-64 bg-gray-800/40 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-20 right-10 w-48 h-48 bg-gray-800/40 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
       <div class="absolute top-1/2 left-1/4 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
 
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="mx-auto max-w-4xl text-center">
-          <div class="inline-flex items-center rounded-full bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-8">
+          <div class="inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-100 ring-1 ring-inset ring-white/15 mb-8">
             <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
             </svg>
@@ -763,13 +754,13 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
           </div>
           
           <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            <span class="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+            <span class="text-gray-200">
               Effortless CI/CD Solutions
             </span>
           </h2>
           
           <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
-            Configure your CI/CD pipeline with our expert team. <span class="text-blue-400 font-medium">Own the complete setup with zero vendor lock-in</span> - no hosting or maintenance charges from us.
+            Configure your CI/CD pipeline with our expert team. <span class="text-gray-100 font-medium">Own the complete setup with zero vendor lock-in</span> - no hosting or maintenance charges from us.
           </p>
         </div>
 
@@ -778,10 +769,9 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
           
           <!-- Feature 1: Seamless Integration -->
           <div class="group relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-3xl blur-xl transition-all duration-300 group-hover:from-blue-500/15 group-hover:to-cyan-500/15"></div>
-            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-blue-500/10">
-              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 ring-1 ring-blue-500/30">
-                <svg class="h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-white/20">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
                 </svg>
               </div>
@@ -794,10 +784,9 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 
           <!-- Feature 2: Tailored Configuration -->
           <div class="group relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl blur-xl transition-all duration-300 group-hover:from-purple-500/15 group-hover:to-pink-500/15"></div>
-            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-purple-500/10">
-              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 ring-1 ring-purple-500/30">
-                <svg class="h-6 w-6 text-purple-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-6 transition-all duration-300 hover:border-white/20">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-white/15">
+                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
                   <circle cx="12" cy="12" r="3"></circle>
                 </svg>
@@ -810,16 +799,15 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
           </div>
 
           <!-- Feature 3: Platform Independence (Highlighted) -->
-          <div class="group relative lg:col-span-1">
-            <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/15 to-orange-500/15 rounded-3xl blur-2xl transition-all duration-300 group-hover:from-yellow-500/20 group-hover:to-orange-500/20"></div>
-            <div class="relative bg-gray-800 rounded-2xl border-2 border-yellow-500/30 p-6 transition-all duration-300 hover:border-yellow-500/40 hover:shadow-2xl hover:shadow-yellow-500/10">
+        <div class="group relative lg:col-span-1">
+          <div class="relative bg-gray-800 rounded-2xl border-2 border-yellow-500/30 p-6 transition-all duration-300 hover:border-yellow-500/40">
               <div class="absolute top-3 right-3">
                 <div class="inline-flex items-center rounded-full bg-yellow-500/20 px-2 py-1 text-xs font-medium text-yellow-300">
                   Most Popular
                 </div>
               </div>
-              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-500/20 ring-1 ring-yellow-500/30">
-                <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-700/40 ring-1 ring-yellow-500/30">
+                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <circle cx="12" cy="12" r="10"></circle>
                   <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
                   <path d="M2 12h20"></path>
@@ -827,17 +815,16 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
               </div>
               <h3 class="mt-4 text-xl font-bold text-white">Platform Independence</h3>
                <p class="mt-3 text-gray-300 leading-relaxed text-sm">
-                 Adapt configuration to your infrastructure. <span class="text-yellow-400 font-medium">Own the complete pipeline, modify anytime</span> - zero vendor lock-in, pay your provider directly.
+                 Adapt configuration to your infrastructure. <span class="text-gray-100 font-medium">Own the complete pipeline, modify anytime</span> - zero vendor lock-in, pay your provider directly.
                </p>
             </div>
           </div>
 
           <!-- Feature 4: Expert Guidance -->
           <div class="group relative lg:col-span-1">
-            <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-3xl blur-xl transition-all duration-300 group-hover:from-green-500/15 group-hover:to-emerald-500/15"></div>
-            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-green-500/10">
-              <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-500/20 ring-1 ring-green-500/30">
-                <svg class="h-8 w-8 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="relative bg-gray-800 rounded-2xl border border-white/10 p-8 transition-all duration-300 hover:border-white/20">
+              <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-700/40 ring-1 ring-white/15">
+                <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
                   <path d="M9 18h6"></path>
                   <path d="M10 22h4"></path>
@@ -848,12 +835,12 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
                 Benefit from our deep expertise in mobile app CI/CD best practices, without the need to build and maintain a complex system yourself.
               </p>
               <div class="mt-6 flex items-center">
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/20">
-                  <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-700/40">
+                  <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
-                <p class="ml-3 text-green-300 font-medium">
+                <p class="ml-3 text-gray-200 font-medium">
                   We've already setup CI/CD for 50+ apps
                 </p>
               </div>
@@ -863,10 +850,9 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 
         <!-- Pricing Section -->
         <div class="mt-20 relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 rounded-3xl blur-2xl"></div>
           <div class="relative bg-gray-800/50 backdrop-blur-sm rounded-3xl border border-white/10 p-8 lg:p-12">
             <div class="text-center">
-              <div class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 px-4 py-2 text-sm font-medium text-blue-300 ring-1 ring-inset ring-blue-500/30 mb-6">
+              <div class="inline-flex items-center rounded-full bg-gray-800/50 px-4 py-2 text-sm font-medium text-gray-200 ring-1 ring-inset ring-white/15 mb-6">
                 <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                 </svg>
@@ -877,49 +863,49 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
               
               <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <!-- Managed Solutions Cost -->
-                <div class="bg-red-500/10 rounded-2xl border border-red-500/20 p-6">
-                  <div class="text-red-400 text-sm font-medium mb-2">Managed Solutions</div>
-                  <div class="text-red-300 text-2xl font-bold">$499/month</div>
-                  <div class="text-red-300/70 text-sm mt-1">Appflow or similar</div>
+                <div class="bg-gray-800/40 rounded-2xl border border-red-500/20 p-6">
+                  <div class="text-gray-100 text-sm font-medium mb-2">Managed Solutions</div>
+                  <div class="text-gray-200 text-2xl font-bold">$499/month</div>
+                  <div class="text-gray-200/70 text-sm mt-1">Appflow or similar</div>
                 </div>
                 
                 <!-- Our Solution -->
                 <div class="bg-green-500/10 rounded-2xl border border-green-500/20 p-6 relative">
                   <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Best Value</span>
+                    <span class="bg-gray-700 text-white text-xs font-bold px-3 py-1 rounded-full">Best Value</span>
                   </div>
-                  <div class="text-green-400 text-sm font-medium mb-2">Our Setup - You Own It</div>
-                  <div class="text-green-300 text-2xl font-bold">$2,600 + $30/mo</div>
-                  <div class="text-green-300/70 text-sm mt-1">Setup fee + GitHub/GitLab CI</div>
+                  <div class="text-gray-100 text-sm font-medium mb-2">Our Setup - You Own It</div>
+                  <div class="text-gray-200 text-2xl font-bold">$2,600 + $30/mo</div>
+                  <div class="text-gray-200/70 text-sm mt-1">Setup fee + GitHub/GitLab CI</div>
                 </div>
                 
                 <!-- Savings -->
-                <div class="bg-blue-500/10 rounded-2xl border border-blue-500/20 p-6">
-                  <div class="text-blue-400 text-sm font-medium mb-2">5-Year Savings</div>
-                  <div class="text-blue-300 text-2xl font-bold">$25,340</div>
-                  <div class="text-blue-300/70 text-sm mt-1">Massive cost reduction</div>
+                <div class="bg-gray-800/40 rounded-2xl border border-gray-600/40 p-6">
+                  <div class="text-gray-100 text-sm font-medium mb-2">5-Year Savings</div>
+                  <div class="text-gray-200 text-2xl font-bold">$25,340</div>
+                  <div class="text-gray-200/70 text-sm mt-1">Massive cost reduction</div>
                 </div>
               </div>
               
               <div class="text-gray-300 mb-8 max-w-3xl mx-auto space-y-3">
                 <p>One-time setup fee of $2,600 saves you $25,340+ over 5 years vs managed solutions.</p>
-                <p><span class="text-green-400 font-medium">Own your setup with zero vendor lock-in</span></p>
+                <p><span class="text-gray-100 font-medium">Own your setup with zero vendor lock-in</span></p>
                 <p>Break even in just 6 months, then pure savings.</p>
               </div>
               
               <!-- CTA Button -->
-              <div class="group relative inline-flex">
-                <div class="transitiona-all animate-tilt absolute -inset-px rounded-2xl bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"></div>
-                <a
-                  href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
-                  class="relative inline-flex items-center justify-center rounded-2xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-                >
-                  Get Started Today
-                  <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                  </svg>
-                </a>
-              </div>
+          <div class="group inline-flex relative">
+            <div class="pointer-events-none absolute -inset-px rounded-2xl bg-white/20 blur-lg opacity-60 transition-opacity duration-300 group-hover:opacity-85"></div>
+            <a
+              href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
+              class="inline-flex relative items-center justify-center rounded-2xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 border border-blue-500 hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+            >
+              Get Started Today
+              <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          </div>
             </div>
           </div>
         </div>
@@ -928,7 +914,6 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 
     <!-- CTA Section -->
     <section class="relative bg-gray-900 py-24 sm:py-32 overflow-hidden">
-      <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h2 class="text-3xl leading-tight font-bold text-white sm:text-4xl lg:text-5xl">
@@ -939,11 +924,11 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
           </p>
           
           <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <div class="group relative">
-              <div class="absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100"></div>
+            <div class="group relative inline-flex" role="presentation">
+              <div class="pointer-events-none absolute -inset-px rounded-xl bg-white/20 blur-lg opacity-60 transition-opacity duration-300 group-hover:opacity-90"></div>
               <a
                 href="https://cal.com/team/capgo/mobile-ci-cd-done-for-you"
-                class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200"
+                class="inline-flex relative items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 border border-red-500 hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
               >
                 Schedule Setup Call
                 <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -969,11 +954,6 @@ const pageDescription = 'Expert CI/CD setup for native mobile app builds. Automa
 </Layout>
 
 <style>
-  .bg-grid-pattern {
-    background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0);
-    background-size: 20px 20px;
-  }
-
   @keyframes flow-right {
     0% {
       transform: translateX(-20px);

@@ -7,21 +7,36 @@ const features = [
     title: m.manage_various_teams({}, { locale: Astro.locals.locale }),
     description: m.create_oversee_organizations_from_single_account({}, { locale: Astro.locals.locale }),
     icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
-    color: 'blue',
+    accent: {
+      panel: 'bg-blue-900/25',
+      icon: 'bg-blue-600/90 ring-1 ring-blue-300/30',
+      subtitle: 'text-blue-300',
+    },
+    highlightSubtitle: true,
   },
   {
     subtitle: m.granular_permissions({}, { locale: Astro.locals.locale }),
     title: m.control_access_levels({}, { locale: Astro.locals.locale }),
     description: m.assign_specific_rights_and_access_levels_to_each_user_within_your_organizations({}, { locale: Astro.locals.locale }),
     icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
-    color: 'purple',
+    accent: {
+      panel: 'bg-purple-900/25',
+      icon: 'bg-purple-600/90 ring-1 ring-purple-300/30',
+      subtitle: 'text-purple-300',
+    },
+    highlightSubtitle: true,
   },
   {
     subtitle: m.flexible_management({}, { locale: Astro.locals.locale }),
     title: m.adapt_as_you_grow({}, { locale: Astro.locals.locale }),
     description: m.easily_adjust_user_roles_and_permissions_as_your_team_and_projects_evolve_maintaining_optimal_organization_structure({}, { locale: Astro.locals.locale }),
     icon: '<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>',
-    color: 'teal',
+    accent: {
+      panel: 'bg-teal-900/25',
+      icon: 'bg-teal-600/90 ring-1 ring-teal-300/30',
+      subtitle: 'text-teal-300',
+    },
+    highlightSubtitle: false,
   },
 ]
 ---
@@ -30,7 +45,7 @@ const features = [
   <!-- Grid background pattern -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <svg
-      class="absolute top-0 left-[max(50%,25rem)] h-256 w-512 -translate-x-1/2 mask-[radial-gradient(64rem_64rem_at_top,white,transparent)] stroke-gray-600/70"
+      class="absolute top-0 left-[max(50%,25rem)] h-256 w-512 -translate-x-1/2 stroke-gray-600/70"
       aria-hidden="true"
     >
       <defs>
@@ -57,23 +72,21 @@ const features = [
         features.map((feature) => (
           <div class="flex overflow-hidden rounded-lg p-px">
             <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-              <div
-                class={`flex h-80 flex-col items-center justify-center bg-linear-to-br from-${feature.color}-500/20 to-${
-                  feature.color === 'blue' ? 'purple' : feature.color === 'purple' ? 'pink' : 'blue'
-                }-500/20`}
-              >
-                <div class={`mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-${feature.color}-900`}>
+              <div class={`flex h-80 flex-col items-center justify-center ${feature.accent.panel}`}>
+                <div class={`mb-6 flex h-16 w-16 items-center justify-center rounded-full ${feature.accent.icon}`}>
                   <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <g set:html={feature.icon} />
                   </svg>
                 </div>
-                <h3 class="text-sm font-normal tracking-widest uppercase">
-                  <span class={`text-${feature.color}-400`}>{feature.subtitle}</span>
+                <h3 class={`text-sm font-semibold tracking-widest uppercase ${feature.highlightSubtitle ? feature.accent.subtitle : 'text-gray-300'}`}>
+                  {feature.subtitle}
                 </h3>
                 <p class="mt-3 text-2xl font-bold text-white xl:text-3xl">{feature.title}</p>
               </div>
               <div class="p-10">
-                <p class="mt-2 text-base font-normal text-gray-400">{feature.description}</p>
+                <p class="text-base font-normal leading-relaxed text-gray-300">
+                  {feature.description}
+                </p>
               </div>
             </div>
           </div>

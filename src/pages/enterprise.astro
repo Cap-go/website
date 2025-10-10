@@ -130,38 +130,18 @@ content.ldJSON['@graph'].push(enterpriseService)
         ))
       }
     </div>
-
-    <!-- Glowing portal effect -->
-    <div class="portal-glow-animation pointer-events-none absolute top-1/2 right-0 h-3/5 w-1/5 -translate-y-1/2"></div>
-
-    <!-- Vertical data streams -->
-    <div class="pointer-events-none absolute inset-0 overflow-hidden">
-      {
-        Array.from({ length: 10 }).map((_, i) => (
-          <div
-            class="data-stream-animation absolute h-full w-px"
-            style={{
-              left: `${i * 10}%`,
-              animationDuration: `${Math.random() * 4 + 6}s`,
-              animationDelay: `${Math.random() * 2}s`,
-              opacity: Math.random() * 0.3 + 0.1,
-            }}
-          />
-        ))
-      }
-    </div>
     
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <!-- Badge -->
         <p class="font-pj inline-flex rounded-full border border-gray-200 bg-gray-900 px-4 py-2 text-base mb-8">
-          <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+          <span class="text-gray-200">
             {m.enterprise_ready()}
           </span>
         </p>
 
         <h1 class="font-pj text-3xl leading-tight font-bold text-white sm:text-4xl sm:leading-tight lg:leading-tight xl:text-6xl mb-8">
-          <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+          <span class="text-gray-200">
             {m.deliver_updates({}, { locale: Astro.locals.locale })}
           </span>
           <br />
@@ -173,15 +153,14 @@ content.ldJSON['@graph'].push(enterpriseService)
         </h2>
 
         <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <div class="group relative inline-flex">
+          <div class="group relative inline-flex" role="presentation">
             <div
-              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
-            >
-            </div>
+              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-[#44BCFF] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+            ></div>
             <a
               href="https://cal.com/team/capgo/demo"
               target="_blank"
-              class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
+              class="font-pj relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 border border-blue-500 hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
               role="button"
             >
               {m.request_demo({}, { locale: Astro.locals.locale })}
@@ -205,7 +184,7 @@ content.ldJSON['@graph'].push(enterpriseService)
   <!-- Trusted By Section -->
   <section class="bg-gray-800 py-12 sm:py-16">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <h2 class="text-center text-lg/8 font-semibold text-blue-400">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
+      <h2 class="text-center text-lg/8 font-semibold text-gray-200">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
       <div class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-2xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
         <div class="flex flex-col items-center space-y-2">
           <div class="rounded-2xl bg-gray-600 shadow-sm">
@@ -259,7 +238,7 @@ content.ldJSON['@graph'].push(enterpriseService)
   <!-- Enterprise Features Section -->
   <section class="bg-gray-900 py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-blue-400">{m.enterprise_features({}, { locale: Astro.locals.locale })}</h2>
+      <h2 class="text-base/7 font-semibold text-gray-200">{m.enterprise_features({}, { locale: Astro.locals.locale })}</h2>
       <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
         {m.built_for_enterprise_teams({}, { locale: Astro.locals.locale })}
       </p>
@@ -269,8 +248,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Organizations and Teams -->
         <div class="flex p-px lg:col-span-2">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-blue-500/20 to-purple-500/20">
-              <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.organizations_and_teams({}, { locale: Astro.locals.locale })}</h3>
@@ -287,8 +266,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Role-Based Access Control -->
         <div class="flex p-px lg:col-span-2">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-purple-500/20 to-pink-500/20">
-              <svg class="mb-4 h-24 w-24 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-purple-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.role_based_access_control({}, { locale: Astro.locals.locale })}</h3>
@@ -305,8 +284,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Enterprise Billing -->
         <div class="flex p-px lg:col-span-2">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-green-500/20 to-blue-500/20">
-              <svg class="mb-4 h-24 w-24 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-green-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.enterprise_billing({}, { locale: Astro.locals.locale })}</h3>
@@ -323,8 +302,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- SSO + 2FA -->
         <div class="flex p-px lg:col-span-3">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-orange-500/20 to-red-500/20">
-              <svg class="mb-4 h-24 w-24 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-orange-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.sso_2fa({}, { locale: Astro.locals.locale })}</h3>
@@ -335,7 +314,7 @@ content.ldJSON['@graph'].push(enterpriseService)
                 {m.integrate_identity_provider_mfa({}, { locale: Astro.locals.locale })}
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/plugin/cloud-mode/authentication')}
-                  class="ml-2 text-orange-400 hover:text-orange-300 underline"
+                  class="ml-2 text-gray-200 hover:text-gray-200 underline"
                 >
                   {m.learn_more({}, { locale: Astro.locals.locale })}
                 </a>
@@ -347,8 +326,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Open Source -->
         <div class="flex p-px lg:col-span-3">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-[#44BCFF]/20 via-[#FF44EC]/20 to-[#FF675E]/20">
-              <svg class="mb-4 h-24 w-24 text-[#44BCFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-slate-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.open_source({}, { locale: Astro.locals.locale })}</h3>
@@ -361,7 +340,7 @@ content.ldJSON['@graph'].push(enterpriseService)
                   href="https://github.com/cap-go/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="ml-2 text-[#44BCFF] hover:text-blue-300 underline"
+                  class="ml-2 text-[#44BCFF] hover:text-gray-200 underline"
                 >
                   {m.view_source({}, { locale: Astro.locals.locale })}
                 </a>
@@ -373,8 +352,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Enterprise Plugins -->
         <div class="flex p-px lg:col-span-6">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-indigo-500/20 via-purple-500/20 to-blue-500/20">
-              <svg class="mb-4 h-24 w-24 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-indigo-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.enterprise_plugins({}, { locale: Astro.locals.locale })}</h3>
@@ -399,18 +378,13 @@ content.ldJSON['@graph'].push(enterpriseService)
 
   <!-- Scalability Section -->
   <section class="relative bg-gray-800 py-16 sm:py-20 overflow-hidden">
-    <!-- Enhanced Background Pattern -->
-    <div class="absolute inset-0 opacity-5">
-      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 30px 30px;"></div>
-    </div>
-    
     <!-- Dynamic Floating Elements -->
-    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl animate-pulse"></div>
-    <div class="absolute bottom-10 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 1.5s;"></div>
+    <div class="absolute top-10 left-10 w-32 h-32 bg-gray-800/40 rounded-full blur-2xl animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-40 h-40 bg-gray-800/40 rounded-full blur-2xl animate-pulse" style="animation-delay: 1.5s;"></div>
 
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-8">
-        <div class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-8">
+        <div class="inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200 ring-1 ring-inset ring-white/15 mb-8">
           <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
@@ -418,7 +392,7 @@ content.ldJSON['@graph'].push(enterpriseService)
         </div>
         
         <h2 class="text-4xl leading-tight font-bold text-white sm:text-5xl lg:text-6xl mb-6">
-          <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+          <span class="text-gray-200">
             {m.global_infrastructure_lowercase({}, { locale: Astro.locals.locale })}
           </span>
           <br />
@@ -432,29 +406,20 @@ content.ldJSON['@graph'].push(enterpriseService)
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
         <div class="group relative">
-          <div class="absolute inset-0 bg-linear-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
-            <div class="text-6xl font-bold mb-4">
-              <span class="bg-linear-to-r from-[#44BCFF] to-[#FF44EC] bg-clip-text text-transparent">300+</span>
-            </div>
+            <div class="text-6xl font-bold mb-4 text-gray-200">300+</div>
             <div class="text-gray-300">{m.cities_worldwide({}, { locale: Astro.locals.locale })}<br />{m.for_ultra_fast_delivery({}, { locale: Astro.locals.locale })}</div>
           </div>
         </div>
         <div class="group relative">
-          <div class="absolute inset-0 bg-linear-to-br from-green-500/20 via-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
-            <div class="text-6xl font-bold mb-4">
-              <span class="bg-linear-to-r from-[#00AA5E] to-[#44BCFF] bg-clip-text text-transparent">13,000+</span>
-            </div>
+            <div class="text-6xl font-bold mb-4 text-gray-200">13,000+</div>
             <div class="text-gray-300">{m.network_connections({}, { locale: Astro.locals.locale })}<br />{m.direct_peering_worldwide({}, { locale: Astro.locals.locale })}</div>
           </div>
         </div>
         <div class="group relative">
-          <div class="absolute inset-0 bg-linear-to-br from-yellow-500/20 via-orange-500/20 to-red-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="relative overflow-hidden rounded-3xl bg-gray-800/80 backdrop-blur-sm ring-1 ring-white/10 p-8 transition-all duration-300 hover:ring-white/20 hover:bg-gray-800/90">
-            <div class="text-6xl font-bold mb-4">
-              <span class="bg-linear-to-r from-[#FF675E] to-[#FF44EC] bg-clip-text text-transparent">50ms</span>
-            </div>
+            <div class="text-6xl font-bold mb-4 text-green-300">50ms</div>
             <div class="text-gray-300">{m.from_95_percent_users({}, { locale: Astro.locals.locale })}<br />{m.ultra_low_latency({}, { locale: Astro.locals.locale })}</div>
           </div>
         </div>
@@ -465,7 +430,7 @@ content.ldJSON['@graph'].push(enterpriseService)
   <!-- Security & Compliance Section -->
   <section class="bg-gray-900 py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-blue-400">{m.security_compliance({}, { locale: Astro.locals.locale })}</h2>
+      <h2 class="text-base/7 font-semibold text-gray-200">{m.security_compliance({}, { locale: Astro.locals.locale })}</h2>
       <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
         {m.enterprise_grade_security_trust({}, { locale: Astro.locals.locale })}
       </p>
@@ -475,8 +440,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- SOC 2 Compliance -->
         <div class="flex p-px">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-blue-600/20 to-indigo-600/20">
-              <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.soc2_compliance({}, { locale: Astro.locals.locale })}</h3>
@@ -489,7 +454,7 @@ content.ldJSON['@graph'].push(enterpriseService)
                   href="https://trust.capgo.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="ml-2 text-blue-400 hover:text-blue-300 underline"
+                  class="ml-2 text-gray-200 hover:text-gray-200 underline"
                 >
                   {m.trust_center({}, { locale: Astro.locals.locale })}
                 </a>
@@ -501,8 +466,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Zero-Trust Security -->
         <div class="flex p-px">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-purple-500/20 to-pink-500/20">
-              <svg class="mb-4 h-24 w-24 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-purple-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.zero_trust_security({}, { locale: Astro.locals.locale })}</h3>
@@ -519,8 +484,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Multi-Factor Authentication -->
         <div class="flex p-px">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-green-500/20 to-cyan-500/20">
-              <svg class="mb-4 h-24 w-24 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-green-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.multi_factor_authentication({}, { locale: Astro.locals.locale })}</h3>
@@ -540,7 +505,7 @@ content.ldJSON['@graph'].push(enterpriseService)
   <!-- Enterprise Support Section -->
   <section class="bg-gray-800 py-16 sm:py-20">
     <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-blue-400">{m.enterprise_support({}, { locale: Astro.locals.locale })}</h2>
+      <h2 class="text-base/7 font-semibold text-gray-200">{m.enterprise_support({}, { locale: Astro.locals.locale })}</h2>
       <p class="mt-2 max-w-2xl text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
         {m.first_class_support_when_needed({}, { locale: Astro.locals.locale })}
       </p>
@@ -550,8 +515,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Priority Support -->
         <div class="flex p-px">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-orange-500/20 to-red-500/20">
-              <svg class="mb-4 h-24 w-24 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-orange-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.priority_support({}, { locale: Astro.locals.locale })}</h3>
@@ -568,8 +533,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Dedicated Support Channels -->
         <div class="flex p-px">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-blue-500/20 to-cyan-500/20">
-              <svg class="mb-4 h-24 w-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-blue-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.dedicated_channels({}, { locale: Astro.locals.locale })}</h3>
@@ -586,8 +551,8 @@ content.ldJSON['@graph'].push(enterpriseService)
         <!-- Service Level Agreement -->
         <div class="flex p-px">
           <div class="w-full overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15">
-            <div class="flex h-80 flex-col items-center justify-center bg-linear-to-br from-indigo-500/20 to-purple-500/20">
-              <svg class="mb-4 h-24 w-24 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex h-80 flex-col items-center justify-center bg-indigo-900/30">
+              <svg class="mb-4 h-24 w-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
               <h3 class="text-xl font-bold text-white">{m.service_level_agreement({}, { locale: Astro.locals.locale })}</h3>
@@ -617,13 +582,13 @@ content.ldJSON['@graph'].push(enterpriseService)
   <section class="relative bg-gray-900 py-16 sm:py-20">
     <!-- Background Effects -->
     <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute -top-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-      <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+      <div class="absolute -top-40 -left-40 w-80 h-80 bg-gray-800/40 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute -bottom-40 -right-40 w-80 h-80 bg-gray-800/40 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
     </div>
     
     <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
       <div class="text-center">
-        <div class="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2 text-sm font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20 mb-8">
+        <div class="inline-flex items-center rounded-full bg-gray-800/40 px-4 py-2 text-sm font-medium text-gray-200 ring-1 ring-inset ring-white/15 mb-8">
           <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
@@ -631,7 +596,7 @@ content.ldJSON['@graph'].push(enterpriseService)
         </div>
         
         <h2 class="text-4xl font-bold text-white sm:text-5xl lg:text-6xl mb-6">
-          <span class="bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] bg-clip-text text-transparent">
+          <span class="text-gray-200">
             {m.ready_to_deliver({}, { locale: Astro.locals.locale })}
           </span>
           <br />
@@ -643,12 +608,14 @@ content.ldJSON['@graph'].push(enterpriseService)
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <div class="group relative">
-            <div class="absolute -inset-1 bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-200"></div>
+          <div class="group relative inline-flex" role="presentation">
+            <div
+              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-[#44BCFF] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+            ></div>
             <a
               href="https://cal.com/team/capgo/demo"
               target="_blank"
-              class="relative inline-flex items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 hover:bg-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
+              class="inline-flex relative items-center justify-center rounded-xl bg-gray-900 px-8 py-4 text-lg font-bold text-white transition-all duration-200 border border-blue-500 hover:bg-gray-900 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
             >
               {m.request_demo({}, { locale: Astro.locals.locale })}
               <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -677,7 +644,7 @@ content.ldJSON['@graph'].push(enterpriseService)
   /* Reuse animations from index.astro */
   .teleport-line-animation {
     left: -100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.1) 10%, rgba(56, 189, 248, 0.3) 50%, rgba(56, 189, 248, 0.1) 90%, transparent 100%);
+    background-color: rgba(56, 189, 248, 0.3);
     animation: teleport-line 5s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
   }
 
@@ -695,27 +662,9 @@ content.ldJSON['@graph'].push(enterpriseService)
     }
   }
 
-  .portal-glow-animation {
-    background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0.05) 40%, transparent 70%);
-    filter: blur(20px);
-    animation: portal-pulse 8s ease-in-out infinite;
-  }
-
-  @keyframes portal-pulse {
-    0%,
-    100% {
-      opacity: 0.5;
-      transform: translateY(-50%) scale(1);
-    }
-    50% {
-      opacity: 0.7;
-      transform: translateY(-50%) scale(1.1);
-    }
-  }
-
   .data-stream-animation {
     top: -100%;
-    background: linear-gradient(to bottom, transparent 0%, rgba(56, 189, 248, 0.1) 10%, rgba(56, 189, 248, 0.3) 50%, rgba(56, 189, 248, 0.1) 90%, transparent 100%);
+    background-color: rgba(56, 189, 248, 0.3);
     animation: data-stream 8s linear infinite;
   }
 

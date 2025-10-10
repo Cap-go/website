@@ -18,13 +18,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
           <path
             opacity="0.5"
             d="M48.1169 329.705C48.1169 139.089 -73.495 -1.98068e-05 69.9555 -7.266e-06C213.406 5.27484e-06 444 499.666 444 690.282C444 880.898 213.406 690.282 69.9554 690.282C-73.4951 690.282 48.1168 520.321 48.1169 329.705Z"
-            fill="url(#elin)"></path>
-          <defs>
-            <linearGradient id="elin" x1="444" y1="775" x2="-60.7966" y2="733.139" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" style="stop-color: var(--color-cyan-500)"></stop>
-              <stop offset="100%" style="stop-color: var(--color-purple-500)"></stop>
-            </linearGradient>
-          </defs>
+            fill="rgba(59,130,246,0.35)"></path>
         </svg>
       </div>
       <div class="relative z-10 grid overflow-hidden rounded-lg bg-white shadow-xl md:grid-cols-2">
@@ -33,7 +27,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
             <h2 class="text-4xl font-bold text-gray-900">{m.register_title({}, { locale: Astro.locals.locale })}</h2>
             <p class="text-sm text-gray-500">
               {m.already_have_account({}, { locale: Astro.locals.locale })}
-              <a href="https://web.capgo.app/login/" target="_blank" class="text-blue-500 hover:underline">{m.sign_in({}, { locale: Astro.locals.locale })}</a>
+              <a href="https://web.capgo.app/login/" target="_blank" class="text-gray-200 hover:underline">{m.sign_in({}, { locale: Astro.locals.locale })}</a>
             </p>
           </div>
           <form id="registerForm" class="space-y-4 text-black">
@@ -44,7 +38,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
                 name="email"
                 type="email"
                 required
-                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-gray-500 focus:outline-none"
                 placeholder={m.email_placeholder({}, { locale: Astro.locals.locale })}
               />
             </div>
@@ -56,7 +50,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
                   name="firstName"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-gray-500 focus:outline-none"
                   placeholder={m.first_name_placeholder({}, { locale: Astro.locals.locale })}
                 />
               </div>
@@ -67,7 +61,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
                   name="lastName"
                   type="text"
                   required
-                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-gray-500 focus:outline-none"
                   placeholder={m.last_name_placeholder({}, { locale: Astro.locals.locale })}
                 />
               </div>
@@ -79,7 +73,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
                 name="password"
                 type="password"
                 required
-                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-gray-500 focus:outline-none"
                 placeholder={m.password_placeholder({}, { locale: Astro.locals.locale })}
               />
             </div>
@@ -93,7 +87,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
             }
             <button
               type="submit"
-              class="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+              class="flex w-full justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
             >
               {m.sign_up_button({}, { locale: Astro.locals.locale })}
             </button>
@@ -112,7 +106,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
           </div>
           <a
             href="https://support.capgo.app"
-            class="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+            class="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path
@@ -130,7 +124,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
             <p class="mb-4 text-2xl font-bold">
               {m.testimonial_title({}, { locale: Astro.locals.locale })}<br />
               After update,
-              <span class="rounded-full bg-orange-500 px-2 py-1 text-white">{m.testimonial_highlight({}, { locale: Astro.locals.locale })}</span>
+              <span class="rounded-full bg-gray-900 px-2 py-1 text-white">{m.testimonial_highlight({}, { locale: Astro.locals.locale })}</span>
             </p>
             <div class="mb-4 flex items-center">
               <img src="/avatar-male-2.webp" alt="User" class="mr-4 h-12 w-12 rounded-full" />

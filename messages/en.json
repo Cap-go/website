@@ -1805,7 +1805,7 @@
   "capwesome_highlight_maturity_value": "Shipping OTA since 2021",
   "capwesome_highlight_maturity_desc": "Four years of production experience serving mission-critical apps worldwide.",
   "capwesome_highlight_community_title": "Community Trust",
-  "capwesome_highlight_community_value": "<a class=\"text-blue-400 underline\" href=\"https://github.com/Cap-go/capacitor-updater\" target=\"_blank\" rel=\"noopener\">~700 GitHub stars</a>",
+  "capwesome_highlight_community_value": "<a class=\"text-gray-100 underline\" href=\"https://github.com/Cap-go/capacitor-updater\" target=\"_blank\" rel=\"noopener\">~700 GitHub stars</a>",
   "capwesome_highlight_community_desc": "Capacitor Updater is one of the most loved update plugins in the ecosystem.",
   "capwesome_highlight_scale_title": "Customer Base",
   "capwesome_highlight_scale_value": "+3500 organizations",
