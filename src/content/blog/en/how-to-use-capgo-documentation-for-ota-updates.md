@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-19T03:56:01.854Z
-updated_at: 2025-10-10T01:50:18.000Z
+updated_at: 2025-10-10T02:17:19.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b53306eac600a2c6713dad-1740671704703.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, Capgo, mobile app updates, documentation, app deployment, security features, error handling
