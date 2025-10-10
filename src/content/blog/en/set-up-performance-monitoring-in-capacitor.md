@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-23T05:36:41.635Z
-updated_at: 2025-10-09T00:13:34.000Z
+updated_at: 2025-10-10T01:50:18.000Z
 head_image: https://assets.seobotai.com/capgo.app/67df674387fa49042c75b4e1-1742708253934.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, performance monitoring, Firebase, Sentry, mobile app development, error tracking, monitoring tools

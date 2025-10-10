@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-23T02:26:25.949Z
-updated_at: 2025-10-09T00:13:34.000Z
+updated_at: 2025-10-10T01:50:18.000Z
 head_image: https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36-1745375221230.jpg
 head_image_alt: Mobile Development
 keywords: RBAC, OTA updates, security, mobile apps, end-to-end encryption, role-based access control, deployment permissions
