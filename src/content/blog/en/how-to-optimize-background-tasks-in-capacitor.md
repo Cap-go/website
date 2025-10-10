@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-25T05:05:50.854Z
-updated_at: 2025-05-25T05:06:51.644Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68326c08d3b9661981804b2c-1748149611644.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, background tasks, mobile optimization, performance, battery efficiency

@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-05-12T04:31:38.871Z
-updated_at: 2025-05-12T04:32:46.276Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: >-
   https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68214ae55e3fe4823b5f6cab-1747024366276.jpg
 head_image_alt: Softwareentwicklung

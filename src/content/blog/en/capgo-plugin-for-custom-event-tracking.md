@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-18T11:24:23.032Z
-updated_at: 2025-05-18T11:25:30.513Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6827d67c5642a17d106c5d28-1747567530513.jpg
 head_image_alt: Mobile Development
 keywords: custom event tracking, analytics, app performance, developer tools, real-time updates

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-30T02:43:03.273Z
-updated_at: 2025-03-30T02:43:13.642Z
+updated_at: 2025-10-09T00:13:34.000Z
 head_image: https://assets.seobotai.com/capgo.app/67e8ac6c283d21cbd67ac65e-1743302593642.jpg
 head_image_alt: Mobile Development
 keywords: API keys, security, encryption, app store compliance, HTTPS, key management, mobile security, transport security
