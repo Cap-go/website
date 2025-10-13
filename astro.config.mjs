@@ -449,6 +449,10 @@ export default defineConfig({
           label: '💬 Consult us',
           link: '/consulting/',
         },
+        {
+          label: 'LLMs-full.txt',
+          link: '/llms-full.txt',
+        },
       ],
     }),
   ],
