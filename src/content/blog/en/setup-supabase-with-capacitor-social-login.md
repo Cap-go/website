@@ -265,7 +265,7 @@ await SocialLogin.initialize({
     clientToken: 'YOUR_FACEBOOK_CLIENT_TOKEN', // From Facebook Developer Dashboard
     
     // Optional: Use Facebook Limited Login (for enhanced privacy)
-    limitedLogin: false // Set to true for limited login
+    limitedLogin: false // See our Facebook setup guide for important Limited Login details
   }
 });
 ```
@@ -273,7 +273,8 @@ await SocialLogin.initialize({
 **Key points for Facebook:**
 - Use the same App ID you configured in Supabase
 - Client Token is found in your Facebook App's Basic Settings
-- `limitedLogin: true` enables Facebook's privacy-focused Limited Login feature
+- `limitedLogin: true` enables Facebook's privacy-focused Limited Login feature (iOS only)
+- **Important**: See our [Facebook setup guide](/docs/plugins/social-login/facebook/#limited-login-ios-only) for detailed Limited Login information, including ATT considerations
 
 ### Complete Plugin Initialization
 
