@@ -1,5 +1,5 @@
-import { appDescription, appName } from '@/constants/index'
-import { createCapgoOrganization, createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
+import { appDescription } from '@/constants/index'
+import { createLdJsonGraph, createServiceLdJson } from '@/lib/ldJson'
 import dayjs from 'dayjs'
 import keys from '../../configs.json'
 
@@ -76,7 +76,7 @@ const capgoService = createServiceLdJson(
     url: getUrl(import.meta.env.BRANCH),
     serviceType: 'Software Development Service',
     areaServed: ['Worldwide'],
-  }
+  },
 )
 
 // Create comprehensive ldJSON graph
@@ -111,5 +111,5 @@ export const structuredData = createLdJsonGraph(
         url: `${getUrl(import.meta.env.BRANCH)}/pricing/`,
       },
     ],
-  }
+  },
 )

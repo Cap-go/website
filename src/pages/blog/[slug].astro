@@ -99,8 +99,8 @@ content['ldJSON'] = createNewsArticleLdJson(Astro.locals.runtimeConfig.public, {
   author: entry.data.author || 'Capgo',
   authorUrl: entry.data.author_url,
   authorImage: entry.data.author_image_url,
-  keywords: entry.data.keywords ? entry.data.keywords.split(',').map(k => k.trim()) : undefined,
-  articleSection: entry.data.tag ? entry.data.tag.split(',').map(t => t.trim()) : undefined,
+  keywords: entry.data.keywords ? entry.data.keywords.split(',').map((k) => k.trim()) : undefined,
+  articleSection: entry.data.tag ? entry.data.tag.split(',').map((t) => t.trim()) : undefined,
   articleBody: striptags(entry.rendered?.html || ''),
   locale: Astro.locals.locale,
 })

@@ -44,10 +44,7 @@ const features = [
 <section class="relative bg-gray-900 py-12 sm:py-16 lg:py-20 xl:py-24">
   <!-- Grid background pattern -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
-    <svg
-      class="absolute top-0 left-[max(50%,25rem)] h-256 w-512 -translate-x-1/2 stroke-gray-600/70"
-      aria-hidden="true"
-    >
+    <svg class="absolute top-0 left-[max(50%,25rem)] h-256 w-512 -translate-x-1/2 stroke-gray-600/70" aria-hidden="true">
       <defs>
         <pattern id="orgs-grid-pattern" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
           <path d="M100 200V.5M.5 .5H200" fill="none"></path>
@@ -78,15 +75,11 @@ const features = [
                     <g set:html={feature.icon} />
                   </svg>
                 </div>
-                <h3 class={`text-sm font-semibold tracking-widest uppercase ${feature.highlightSubtitle ? feature.accent.subtitle : 'text-gray-300'}`}>
-                  {feature.subtitle}
-                </h3>
+                <h3 class={`text-sm font-semibold tracking-widest uppercase ${feature.highlightSubtitle ? feature.accent.subtitle : 'text-gray-300'}`}>{feature.subtitle}</h3>
                 <p class="mt-3 text-2xl font-bold text-white xl:text-3xl">{feature.title}</p>
               </div>
               <div class="p-10">
-                <p class="text-base font-normal leading-relaxed text-gray-300">
-                  {feature.description}
-                </p>
+                <p class="text-base leading-relaxed font-normal text-gray-300">{feature.description}</p>
               </div>
             </div>
           </div>

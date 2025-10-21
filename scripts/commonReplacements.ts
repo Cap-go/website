@@ -1,4 +1,4 @@
-export const commonReplacements = (text: string) =>{
+export const commonReplacements = (text: string) => {
   return text
     .replace(/capgoapp/g, 'capgo.app')
     .replace(/([^.\s])png/g, '$1.png')
@@ -15,6 +15,10 @@ export const commonReplacements = (text: string) =>{
     .replace(/wwwrevenuecatcom/g, 'www.revenuecat.com')
     .replace(/assetsseobotaicom/g, 'assets.seobotai.com')
     .replace(/developerapplecom/g, 'developer.apple.com')
-    .replaceAll(`<div className={styles.container}>
+    .replaceAll(
+      `<div className={styles.container}>
   <Head>
-<title>`,`<div class="mx-auto" style="width: 50%;">\n<img src="/next-capacitor-share.webp" alt="next-capacitor-share">\n</div>`)}
+<title>`,
+      `<div class="mx-auto" style="width: 50%;">\n<img src="/next-capacitor-share.webp" alt="next-capacitor-share">\n</div>`,
+    )
+}

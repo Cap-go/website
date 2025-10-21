@@ -1,6 +1,6 @@
 ---
-import { Aside } from '@astrojs/starlight/components';
-import FrameworkSelector from '@/components/FrameworkSelector.astro';
+import { Aside } from '@astrojs/starlight/components'
+import FrameworkSelector from '@/components/FrameworkSelector.astro'
 
 // Question flow data structure
 const questionFlow = {
@@ -8,31 +8,31 @@ const questionFlow = {
     type: 'framework_selector',
     question: 'What language/framework do you primarily use in your app?',
     component: 'FrameworkSelector',
-                next: {
-              'js': 'q2_js_ts',
-              'ts': 'q2_js_ts',
-              'react': 'q2_react_framework',
-              'angular': 'q2_angular_framework',
-              'vue': 'q2_vue_framework',
-              'svelte': 'q2_svelte_framework',
-              'qwik': 'q2_qwik_framework'
-            }
+    next: {
+      js: 'q2_js_ts',
+      ts: 'q2_js_ts',
+      react: 'q2_react_framework',
+      angular: 'q2_angular_framework',
+      vue: 'q2_vue_framework',
+      svelte: 'q2_svelte_framework',
+      qwik: 'q2_qwik_framework',
+    },
   },
   q2_js_ts: {
     type: 'buttons',
     question: 'Where do you put your script in the HTML document?',
     answers: [
-      { 
-        id: 'head', 
+      {
+        id: 'head',
         text: 'In the &lt;head&gt; section',
-        next: 'q3_script_type'
+        next: 'q3_script_type',
       },
-      { 
-        id: 'body', 
+      {
+        id: 'body',
         text: 'At the end of &lt;body&gt; (before closing tag)',
-        next: 'q4_body_script'
-      }
-    ]
+        next: 'q4_body_script',
+      },
+    ],
   },
   q2_react_framework: {
     type: 'framework_buttons',
@@ -42,15 +42,15 @@ const questionFlow = {
       { id: 'nextjs', name: 'Next.js', icon: '/icons/nextjs.svg' },
       { id: 'vite', name: 'Vite + React SPA', icon: '/icons/vite.svg' },
       { id: 'react-router', name: 'React Router', icon: '/icons/react-router.svg' },
-      { id: 'create-react-app', name: 'Legacy Create React App', icon: '/icons/creact-react-app.svg' }
+      { id: 'create-react-app', name: 'Legacy Create React App', icon: '/icons/creact-react-app.svg' },
     ],
-                next: {
-              'ionic': 'q3_ionic_react',
-              'nextjs': 'q3_nextjs_final',
-              'vite': 'q3_vite_react',
-              'react-router': 'q3_react_router',
-              'create-react-app': 'q3_cra_react'
-            }
+    next: {
+      ionic: 'q3_ionic_react',
+      nextjs: 'q3_nextjs_final',
+      vite: 'q3_vite_react',
+      'react-router': 'q3_react_router',
+      'create-react-app': 'q3_cra_react',
+    },
   },
   q2_angular_framework: {
     type: 'framework_buttons',
@@ -58,13 +58,13 @@ const questionFlow = {
     frameworks: [
       { id: 'ionic-angular', name: 'Ionic', icon: '/icons/ionic.svg' },
       { id: 'vite-angular', name: 'Vite + Angular SPA', icon: '/icons/vite.svg' },
-      { id: 'ng-cli', name: 'Angular CLI (ng)', icon: '/icons/ng.svg' }
+      { id: 'ng-cli', name: 'Angular CLI (ng)', icon: '/icons/ng.svg' },
     ],
     next: {
       'ionic-angular': 'q3_ionic_angular',
       'vite-angular': 'q3_vite_angular',
-      'ng-cli': 'q3_ng_cli'
-    }
+      'ng-cli': 'q3_ng_cli',
+    },
   },
   q2_vue_framework: {
     type: 'framework_buttons',
@@ -72,37 +72,37 @@ const questionFlow = {
     frameworks: [
       { id: 'ionic-vue', name: 'Ionic', icon: '/icons/ionic.svg' },
       { id: 'vite-vue', name: 'Vite + Vue SPA', icon: '/icons/vite.svg' },
-      { id: 'nuxt', name: 'Nuxt', icon: '/icons/nuxt.svg' }
+      { id: 'nuxt', name: 'Nuxt', icon: '/icons/nuxt.svg' },
     ],
     next: {
       'ionic-vue': 'q3_ionic_vue',
       'vite-vue': 'q3_vite_vue',
-      'nuxt': 'q3_nuxt'
-    }
+      nuxt: 'q3_nuxt',
+    },
   },
   q2_svelte_framework: {
     type: 'framework_buttons',
     question: 'What Svelte framework/setup are you using?',
     frameworks: [
       { id: 'vite-svelte', name: 'Vite + Svelte SPA', icon: '/icons/vite.svg' },
-      { id: 'sveltekit', name: 'SvelteKit', icon: '/icons/svelte.svg' }
+      { id: 'sveltekit', name: 'SvelteKit', icon: '/icons/svelte.svg' },
     ],
     next: {
       'vite-svelte': 'q3_vite_svelte',
-      'sveltekit': 'q3_sveltekit'
-    }
+      sveltekit: 'q3_sveltekit',
+    },
   },
   q2_qwik_framework: {
     type: 'framework_buttons',
     question: 'What Qwik framework/setup are you using?',
     frameworks: [
       { id: 'vite-qwik', name: 'Vite + Qwik SPA', icon: '/icons/vite.svg' },
-      { id: 'qwik-city', name: 'Qwik City', icon: '/icons/qwik.svg' }
+      { id: 'qwik-city', name: 'Qwik City', icon: '/icons/qwik.svg' },
     ],
     next: {
       'vite-qwik': 'q3_vite_qwik',
-      'qwik-city': 'q3_qwik_city'
-    }
+      'qwik-city': 'q3_qwik_city',
+    },
   },
   q3_ionic_react: {
     type: 'final',
@@ -122,8 +122,8 @@ root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
-);`
-    }
+);`,
+    },
   },
   q3_react_final: {
     type: 'final',
@@ -136,8 +136,8 @@ root.render(
 // Call this first!
 CapacitorUpdater.notifyAppReady();
 
-// Your app initialization code here`
-    }
+// Your app initialization code here`,
+    },
   },
   q3_nextjs_final: {
     type: 'final',
@@ -150,8 +150,8 @@ CapacitorUpdater.notifyAppReady();
 // Call this first!
 CapacitorUpdater.notifyAppReady();
 
-// Rest of your instrumentation code here`
-    }
+// Rest of your instrumentation code here`,
+    },
   },
   q3_vite_react: {
     type: 'final',
@@ -170,8 +170,8 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
   </StrictMode>,
-)`
-    }
+)`,
+    },
   },
   q3_react_router: {
     type: 'final',
@@ -195,8 +195,8 @@ startTransition(() => {
       <HydratedRouter />
     </StrictMode>
   );
-});`
-    }
+});`,
+    },
   },
   q3_cra_react: {
     type: 'final',
@@ -224,8 +224,8 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();`
-    }
+reportWebVitals();`,
+    },
   },
   q3_ionic_angular: {
     type: 'final',
@@ -250,8 +250,8 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
   ],
-});`
-    }
+});`,
+    },
   },
   q3_vite_angular: {
     type: 'final',
@@ -268,8 +268,8 @@ import { App } from './app/app';
 + CapacitorUpdater.notifyAppReady();
 
 bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));`
-    }
+  .catch((err) => console.error(err));`,
+    },
   },
   q3_ng_cli: {
     type: 'final',
@@ -286,8 +286,8 @@ import { App } from './app/app';
 + CapacitorUpdater.notifyAppReady();
 
 bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));`
-    }
+  .catch((err) => console.error(err));`,
+    },
   },
   q3_ionic_vue: {
     type: 'final',
@@ -341,8 +341,8 @@ const app = createApp(App)
 
 router.isReady().then(() => {
   app.mount('#app');
-});`
-    }
+});`,
+    },
   },
   q3_vite_vue: {
     type: 'final',
@@ -358,8 +358,8 @@ import App from './App.vue'
 // Call the CapacitorUpdater.notifyAppReady() before any other code
 + CapacitorUpdater.notifyAppReady();
 
-createApp(App).mount('#app')`
-    }
+createApp(App).mount('#app')`,
+    },
   },
   q3_nuxt: {
     type: 'final',
@@ -370,8 +370,8 @@ createApp(App).mount('#app')`
 
 export default defineNuxtPlugin(() => {
   CapacitorUpdater.notifyAppReady()
-})`
-    }
+})`,
+    },
   },
   q3_vite_svelte: {
     type: 'final',
@@ -391,8 +391,8 @@ const app = mount(App, {
   target: document.getElementById('app')!,
 })
 
-export default app`
-    }
+export default app`,
+    },
   },
   q3_sveltekit: {
     type: 'final',
@@ -407,8 +407,8 @@ export const init: ClientInit = async () => {
     // Make sure you run CapacitorUpdater.notifyAppReady(); before any other code.
 +   CapacitorUpdater.notifyAppReady();
     console.log('Client init');
-};`
-    }
+};`,
+    },
   },
   q3_vite_qwik: {
     type: 'final',
@@ -426,8 +426,8 @@ import { App } from './app.tsx'
 // Call the CapacitorUpdater.notifyAppReady() before any other code
 + CapacitorUpdater.notifyAppReady();
 
-render(document.getElementById('app') as HTMLElement, <App />)`
-    }
+render(document.getElementById('app') as HTMLElement, <App />)`,
+    },
   },
   q3_qwik_city: {
     type: 'final',
@@ -472,34 +472,34 @@ export default component$(() => {
       </body>
     </QwikCityProvider>
   );
-});`
-    }
+});`,
+    },
   },
   q3_script_type: {
     type: 'buttons',
     question: 'How does your &lt;script&gt; tag look?',
     answers: [
-      { 
-        id: 'basic', 
+      {
+        id: 'basic',
         text: '&lt;script src="app.{ext}"&gt;&lt;/script&gt;',
-        next: 'q4_head_basic'
+        next: 'q4_head_basic',
       },
-      { 
-        id: 'defer', 
+      {
+        id: 'defer',
         text: '&lt;script src="app.{ext}" defer&gt;&lt;/script&gt;',
-        next: 'q4_head_defer'
+        next: 'q4_head_defer',
       },
-      { 
-        id: 'async', 
+      {
+        id: 'async',
         text: '&lt;script src="app.{ext}" async&gt;&lt;/script&gt;',
-        next: 'q4_head_async'
+        next: 'q4_head_async',
       },
-      { 
-        id: 'module', 
+      {
+        id: 'module',
         text: '&lt;script type="module" src="app.{ext}"&gt;&lt;/script&gt;',
-        next: 'q4_head_module'
-      }
-    ]
+        next: 'q4_head_module',
+      },
+    ],
   },
   q4_body_script: {
     type: 'final',
@@ -518,8 +518,8 @@ CapacitorUpdater.notifyAppReady();
 // Call this first!
 CapacitorUpdater.notifyAppReady();
 
-// Your app initialization code here`
-    }
+// Your app initialization code here`,
+    },
   },
   q4_head_basic: {
     type: 'final',
@@ -534,8 +534,8 @@ document.addEventListener('DOMContentLoaded', function() {
   CapacitorUpdater.notifyAppReady();
   
   // Your app initialization code here
-});`
-    }
+});`,
+    },
   },
   q4_head_defer: {
     type: 'final',
@@ -548,8 +548,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Call this first!
 CapacitorUpdater.notifyAppReady();
 
-// Your app initialization code here`
-    }
+// Your app initialization code here`,
+    },
   },
   q4_head_async: {
     type: 'final',
@@ -562,8 +562,8 @@ CapacitorUpdater.notifyAppReady();
 // Call this first!
 CapacitorUpdater.notifyAppReady();
 
-// Your app initialization code here`
-    }
+// Your app initialization code here`,
+    },
   },
   q4_head_module: {
     type: 'final',
@@ -576,13 +576,13 @@ CapacitorUpdater.notifyAppReady();
 // Call this first!
 CapacitorUpdater.notifyAppReady();
 
-// Your app initialization code here`
-    }
+// Your app initialization code here`,
+    },
   },
   q4_other_frameworks: {
     type: 'final',
     question: 'Place the <code>notifyAppReady()</code> call',
-    text: 'For your framework, place <code>CapacitorUpdater.notifyAppReady()</code> after your main app initialization, typically in your root component\'s lifecycle hook.',
+    text: "For your framework, place <code>CapacitorUpdater.notifyAppReady()</code> after your main app initialization, typically in your root component's lifecycle hook.",
     code: {
       react: `import { useEffect } from 'react';
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
@@ -641,10 +641,10 @@ export default component$(() => {
     // Your app initialization logic
   });
   return (/* ... */);
-});`
-    }
-  }
-};
+});`,
+    },
+  },
+}
 ---
 
 <!-- Custom Steps Component -->
@@ -654,18 +654,18 @@ export default component$(() => {
       <strong>{questionFlow.q1.question}</strong>
       <FrameworkSelector />
     </li>
-    
+
     <li id="step-2" style="display: none;">
       <strong id="step-2-question"></strong>
       <div id="step-2-buttons" class="question-buttons"></div>
     </li>
-    
+
     <li id="step-3" style="display: none;">
       <strong id="step-3-question"></strong>
       <div id="step-3-buttons" class="question-buttons"></div>
       <div id="step-3-content"></div>
     </li>
-    
+
     <li id="step-4" style="display: none;">
       <strong id="step-4-question"></strong>
       <div id="step-4-content"></div>
@@ -697,7 +697,7 @@ export default component$(() => {
     padding-bottom: 1px;
     min-height: calc(var(--bullet-size) + var(--bullet-margin));
   }
-  
+
   .sl-steps > ol > li + li {
     margin-top: 0;
   }
@@ -896,241 +896,270 @@ export default component$(() => {
 </style>
 
 <script define:vars={{ questionFlow }}>
-  document.addEventListener('DOMContentLoaded', function() {
-    let currentFramework = '';
+  document.addEventListener('DOMContentLoaded', function () {
+    let currentFramework = ''
 
     // Get step elements
-    const step2 = document.getElementById('step-2');
-    const step3 = document.getElementById('step-3');
-    const step4 = document.getElementById('step-4');
+    const step2 = document.getElementById('step-2')
+    const step3 = document.getElementById('step-3')
+    const step4 = document.getElementById('step-4')
 
     // Listen for framework selection
-    document.addEventListener('frameworkSelected', function(event) {
-      const customEvent = event;
-      currentFramework = customEvent.detail.framework;
-      
+    document.addEventListener('frameworkSelected', function (event) {
+      const customEvent = event
+      currentFramework = customEvent.detail.framework
+
       // Reset the entire questionnaire when framework changes
-      resetQuestionnaire();
-      
-      const nextStep = questionFlow.q1.next[currentFramework];
-      showStep(nextStep, 2);
-    });
+      resetQuestionnaire()
+
+      const nextStep = questionFlow.q1.next[currentFramework]
+      showStep(nextStep, 2)
+    })
 
     function showStep(stepId, stepNumber) {
-      console.log('showStep called with:', stepId, stepNumber);
-      const step = questionFlow[stepId];
+      console.log('showStep called with:', stepId, stepNumber)
+      const step = questionFlow[stepId]
       if (!step) {
-        console.log('Step not found in questionFlow:', stepId);
-        return;
+        console.log('Step not found in questionFlow:', stepId)
+        return
       }
-      console.log('Found step:', step);
+      console.log('Found step:', step)
 
-      const stepElement = document.getElementById(`step-${stepNumber}`);
-      const questionElement = document.getElementById(`step-${stepNumber}-question`);
-      const buttonsElement = document.getElementById(`step-${stepNumber}-buttons`);
-      const contentElement = document.getElementById(`step-${stepNumber}-content`);
+      const stepElement = document.getElementById(`step-${stepNumber}`)
+      const questionElement = document.getElementById(`step-${stepNumber}-question`)
+      const buttonsElement = document.getElementById(`step-${stepNumber}-buttons`)
+      const contentElement = document.getElementById(`step-${stepNumber}-content`)
 
-      console.log('Step elements:', { stepElement, questionElement, buttonsElement, contentElement });
+      console.log('Step elements:', { stepElement, questionElement, buttonsElement, contentElement })
 
-      if (stepElement) stepElement.style.display = 'list-item';
-      if (questionElement) questionElement.innerHTML = step.question;
+      if (stepElement) stepElement.style.display = 'list-item'
+      if (questionElement) questionElement.innerHTML = step.question
 
       if (step.type === 'buttons') {
         // Create buttons for this step
         if (buttonsElement) {
-          buttonsElement.innerHTML = '';
-          buttonsElement.className = stepId === 'q3_script_type' ? 'question-buttons script-type-buttons' : 'question-buttons';
-          
-          step.answers.forEach(function(answer) {
-            const button = document.createElement('button');
-            button.className = 'question-btn';
+          buttonsElement.innerHTML = ''
+          buttonsElement.className = stepId === 'q3_script_type' ? 'question-buttons script-type-buttons' : 'question-buttons'
+
+          step.answers.forEach(function (answer) {
+            const button = document.createElement('button')
+            button.className = 'question-btn'
             // Replace {ext} placeholder with correct file extension
-            let buttonText = answer.text;
+            let buttonText = answer.text
             if (buttonText.includes('{ext}')) {
-              const extension = currentFramework === 'ts' ? 'ts' : 'js';
-              buttonText = buttonText.replace('{ext}', extension);
+              const extension = currentFramework === 'ts' ? 'ts' : 'js'
+              buttonText = buttonText.replace('{ext}', extension)
             }
-            button.innerHTML = buttonText;
-            button.setAttribute('data-answer', answer.id);
-            button.setAttribute('data-next', answer.next);
-            
-            button.addEventListener('click', function() {
+            button.innerHTML = buttonText
+            button.setAttribute('data-answer', answer.id)
+            button.setAttribute('data-next', answer.next)
+
+            button.addEventListener('click', function () {
               // Remove selected class from all buttons in this step
-              buttonsElement.querySelectorAll('.question-btn').forEach(function(btn) {
-                btn.classList.remove('selected');
-              });
-              
+              buttonsElement.querySelectorAll('.question-btn').forEach(function (btn) {
+                btn.classList.remove('selected')
+              })
+
               // Add selected class to clicked button
-              button.classList.add('selected');
-              
+              button.classList.add('selected')
+
               // Hide subsequent steps
-              hideStepsAfter(stepNumber);
-              
+              hideStepsAfter(stepNumber)
+
               // Show next step
-              const nextStepId = button.getAttribute('data-next');
-              const nextStepNumber = getStepNumberForId(nextStepId);
+              const nextStepId = button.getAttribute('data-next')
+              const nextStepNumber = getStepNumberForId(nextStepId)
               if (nextStepNumber <= 4) {
-                showStep(nextStepId, nextStepNumber);
+                showStep(nextStepId, nextStepNumber)
               }
-            });
-            
-            buttonsElement.appendChild(button);
-          });
+            })
+
+            buttonsElement.appendChild(button)
+          })
         }
       } else if (step.type === 'framework_buttons') {
         // Create framework buttons similar to FrameworkSelector
         if (buttonsElement) {
-          buttonsElement.innerHTML = '';
-          buttonsElement.className = 'question-buttons react-framework-buttons';
-          
-          step.frameworks.forEach(function(framework) {
-            const button = document.createElement('button');
-            button.className = 'framework-button';
-            button.setAttribute('data-framework', framework.id);
-            const nextStepId = typeof step.next === 'object' ? step.next[framework.id] : step.next;
-            button.setAttribute('data-next', nextStepId);
-            button.setAttribute('aria-label', `Select ${framework.name}`);
-            console.log('Setting up button for', framework.id, 'with next step:', nextStepId);
-            
+          buttonsElement.innerHTML = ''
+          buttonsElement.className = 'question-buttons react-framework-buttons'
+
+          step.frameworks.forEach(function (framework) {
+            const button = document.createElement('button')
+            button.className = 'framework-button'
+            button.setAttribute('data-framework', framework.id)
+            const nextStepId = typeof step.next === 'object' ? step.next[framework.id] : step.next
+            button.setAttribute('data-next', nextStepId)
+            button.setAttribute('aria-label', `Select ${framework.name}`)
+            console.log('Setting up button for', framework.id, 'with next step:', nextStepId)
+
             // Create icon div
-            const iconDiv = document.createElement('div');
-            iconDiv.className = 'framework-icon';
-            const iconImg = document.createElement('img');
-            iconImg.src = framework.icon;
-            iconImg.alt = framework.name;
-            iconDiv.appendChild(iconImg);
-            
+            const iconDiv = document.createElement('div')
+            iconDiv.className = 'framework-icon'
+            const iconImg = document.createElement('img')
+            iconImg.src = framework.icon
+            iconImg.alt = framework.name
+            iconDiv.appendChild(iconImg)
+
             // Create name div
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'framework-name';
-            nameDiv.textContent = framework.name;
-            
-            button.appendChild(iconDiv);
-            button.appendChild(nameDiv);
-            
-            button.addEventListener('click', function() {
+            const nameDiv = document.createElement('div')
+            nameDiv.className = 'framework-name'
+            nameDiv.textContent = framework.name
+
+            button.appendChild(iconDiv)
+            button.appendChild(nameDiv)
+
+            button.addEventListener('click', function () {
               // Remove selected class from all buttons
-              buttonsElement.querySelectorAll('.framework-button').forEach(function(btn) {
-                btn.classList.remove('selected');
-              });
-              
+              buttonsElement.querySelectorAll('.framework-button').forEach(function (btn) {
+                btn.classList.remove('selected')
+              })
+
               // Add selected class to clicked button
-              button.classList.add('selected');
-              
+              button.classList.add('selected')
+
               // Hide subsequent steps
-              hideStepsAfter(stepNumber);
-              
+              hideStepsAfter(stepNumber)
+
               // Show next step
-              const nextStepId = button.getAttribute('data-next');
-              console.log('Clicked framework button:', button.getAttribute('data-framework'), 'next step:', nextStepId);
-              const nextStepNumber = getStepNumberForId(nextStepId);
+              const nextStepId = button.getAttribute('data-next')
+              console.log('Clicked framework button:', button.getAttribute('data-framework'), 'next step:', nextStepId)
+              const nextStepNumber = getStepNumberForId(nextStepId)
               if (nextStepNumber <= 4) {
-                showStep(nextStepId, nextStepNumber);
+                showStep(nextStepId, nextStepNumber)
               }
-            });
-            
-            buttonsElement.appendChild(button);
-          });
+            })
+
+            buttonsElement.appendChild(button)
+          })
         }
       } else if (step.type === 'final') {
         // Show final step content
         if (contentElement) {
-          let content = '';
-          
+          let content = ''
+
           if (step.text) {
             // Replace {ext} placeholder with correct file extension
-            let stepText = step.text;
+            let stepText = step.text
             if (stepText.includes('{ext}')) {
-              const extension = currentFramework === 'ts' ? 'ts' : 'js';
-              stepText = stepText.replace('{ext}', extension);
+              const extension = currentFramework === 'ts' ? 'ts' : 'js'
+              stepText = stepText.replace('{ext}', extension)
             }
-            content += `<p>${stepText}</p>`;
+            content += `<p>${stepText}</p>`
           }
-          
+
           if (step.warning) {
-            content += `<div class="sl-markdown-content questionnaire-warning"><aside aria-label="Caution" class="starlight-aside starlight-aside--caution"><p class="starlight-aside__title" aria-hidden="true">Caution</p><section class="starlight-aside__content">${step.warning}</section></aside></div>`;
+            content += `<div class="sl-markdown-content questionnaire-warning"><aside aria-label="Caution" class="starlight-aside starlight-aside--caution"><p class="starlight-aside__title" aria-hidden="true">Caution</p><section class="starlight-aside__content">${step.warning}</section></aside></div>`
           }
-          
+
           if (step.code) {
-            content += '<div class="questionnaire-code">';
-            
+            content += '<div class="questionnaire-code">'
+
             if (step.code[currentFramework]) {
-              content += `<pre data-language="js"><code>${formatDiffCode(step.code[currentFramework])}</code></pre>`;
+              content += `<pre data-language="js"><code>${formatDiffCode(step.code[currentFramework])}</code></pre>`
             } else if (step.code.js && currentFramework === 'js') {
-              content += `<pre data-language="js"><code>${formatDiffCode(step.code.js)}</code></pre>`;
+              content += `<pre data-language="js"><code>${formatDiffCode(step.code.js)}</code></pre>`
             } else if (step.code.ts && currentFramework === 'ts') {
-              content += `<pre data-language="js"><code>${formatDiffCode(step.code.ts)}</code></pre>`;
+              content += `<pre data-language="js"><code>${formatDiffCode(step.code.ts)}</code></pre>`
             } else if (step.code.default) {
-              content += `<pre data-language="js"><code>${formatDiffCode(step.code.default)}</code></pre>`;
+              content += `<pre data-language="js"><code>${formatDiffCode(step.code.default)}</code></pre>`
             }
-            
-            content += '</div>';
+
+            content += '</div>'
           }
-          
-          contentElement.innerHTML = content;
+
+          contentElement.innerHTML = content
         }
       }
     }
 
     function getStepNumberForId(stepId) {
       // Map step IDs to step numbers
-      if (stepId === 'q2_js_ts' || stepId === 'q2_react_framework' || stepId === 'q2_angular_framework' || stepId === 'q2_vue_framework' || stepId === 'q2_svelte_framework' || stepId === 'q2_qwik_framework') return 2;
-      if (stepId === 'q3_script_type' || stepId === 'q3_react_final' || stepId === 'q3_ionic_react' || stepId === 'q3_nextjs_final' || stepId === 'q3_vite_react' || stepId === 'q3_react_router' || stepId === 'q3_cra_react' || stepId === 'q3_ionic_angular' || stepId === 'q3_vite_angular' || stepId === 'q3_ng_cli' || stepId === 'q3_ionic_vue' || stepId === 'q3_vite_vue' || stepId === 'q3_nuxt' || stepId === 'q3_vite_svelte' || stepId === 'q3_sveltekit' || stepId === 'q3_vite_qwik' || stepId === 'q3_qwik_city') return 3;
-      if (stepId.startsWith('q4_')) return 4;
-      return 4; // Default to step 4 for final steps
+      if (
+        stepId === 'q2_js_ts' ||
+        stepId === 'q2_react_framework' ||
+        stepId === 'q2_angular_framework' ||
+        stepId === 'q2_vue_framework' ||
+        stepId === 'q2_svelte_framework' ||
+        stepId === 'q2_qwik_framework'
+      )
+        return 2
+      if (
+        stepId === 'q3_script_type' ||
+        stepId === 'q3_react_final' ||
+        stepId === 'q3_ionic_react' ||
+        stepId === 'q3_nextjs_final' ||
+        stepId === 'q3_vite_react' ||
+        stepId === 'q3_react_router' ||
+        stepId === 'q3_cra_react' ||
+        stepId === 'q3_ionic_angular' ||
+        stepId === 'q3_vite_angular' ||
+        stepId === 'q3_ng_cli' ||
+        stepId === 'q3_ionic_vue' ||
+        stepId === 'q3_vite_vue' ||
+        stepId === 'q3_nuxt' ||
+        stepId === 'q3_vite_svelte' ||
+        stepId === 'q3_sveltekit' ||
+        stepId === 'q3_vite_qwik' ||
+        stepId === 'q3_qwik_city'
+      )
+        return 3
+      if (stepId.startsWith('q4_')) return 4
+      return 4 // Default to step 4 for final steps
     }
 
     function hideStepsAfter(stepNumber) {
       for (let i = stepNumber + 1; i <= 4; i++) {
-        const stepElement = document.getElementById(`step-${i}`);
-        if (stepElement) stepElement.style.display = 'none';
+        const stepElement = document.getElementById(`step-${i}`)
+        if (stepElement) stepElement.style.display = 'none'
       }
     }
 
     function resetQuestionnaire() {
       // Hide all steps except step 1
       for (let i = 2; i <= 4; i++) {
-        const stepElement = document.getElementById(`step-${i}`);
-        if (stepElement) stepElement.style.display = 'none';
+        const stepElement = document.getElementById(`step-${i}`)
+        if (stepElement) stepElement.style.display = 'none'
       }
-      
+
       // Clear all button containers
-      const step2Buttons = document.getElementById('step-2-buttons');
-      const step3Buttons = document.getElementById('step-3-buttons');
-      const step4Content = document.getElementById('step-4-content');
-      
-      if (step2Buttons) step2Buttons.innerHTML = '';
-      if (step3Buttons) step3Buttons.innerHTML = '';
-      if (step4Content) step4Content.innerHTML = '';
-      
+      const step2Buttons = document.getElementById('step-2-buttons')
+      const step3Buttons = document.getElementById('step-3-buttons')
+      const step4Content = document.getElementById('step-4-content')
+
+      if (step2Buttons) step2Buttons.innerHTML = ''
+      if (step3Buttons) step3Buttons.innerHTML = ''
+      if (step4Content) step4Content.innerHTML = ''
+
       // Clear question text
-      const step2Question = document.getElementById('step-2-question');
-      const step3Question = document.getElementById('step-3-question');
-      const step4Question = document.getElementById('step-4-question');
-      
-      if (step2Question) step2Question.textContent = '';
-      if (step3Question) step3Question.textContent = '';
-      if (step4Question) step4Question.textContent = '';
+      const step2Question = document.getElementById('step-2-question')
+      const step3Question = document.getElementById('step-3-question')
+      const step4Question = document.getElementById('step-4-question')
+
+      if (step2Question) step2Question.textContent = ''
+      if (step3Question) step3Question.textContent = ''
+      if (step4Question) step4Question.textContent = ''
     }
 
     function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+      const div = document.createElement('div')
+      div.textContent = text
+      return div.innerHTML
     }
 
     function formatDiffCode(code) {
-      const lines = code.split('\n');
-      return lines.map(line => {
-        const escapedLine = escapeHtml(line);
-        if (line.startsWith('+ ')) {
-          return `<div class="diff-line diff-added">${escapedLine}</div>`;
-        } else if (line.startsWith('- ')) {
-          return `<div class="diff-line diff-removed">${escapedLine}</div>`;
-        } else {
-          return `<div class="diff-line">${escapedLine}</div>`;
-        }
-      }).join('');
+      const lines = code.split('\n')
+      return lines
+        .map((line) => {
+          const escapedLine = escapeHtml(line)
+          if (line.startsWith('+ ')) {
+            return `<div class="diff-line diff-added">${escapedLine}</div>`
+          } else if (line.startsWith('- ')) {
+            return `<div class="diff-line diff-removed">${escapedLine}</div>`
+          } else {
+            return `<div class="diff-line">${escapedLine}</div>`
+          }
+        })
+        .join('')
     }
-  });
+  })
 </script>

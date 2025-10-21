@@ -9,70 +9,73 @@ const initialUpdatesByMonth = 1
 // Initial calculations
 const initialUpdates = initialMau * initialUpdatesByMonth
 const initialBandwidth = (initialUpdates * initialUpdatesSize) / 1024 // Convert MB to GiB
-const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
+const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
 ---
 
 <section id="calculator" class="mx-auto max-w-7xl px-0 py-12 sm:px-6 lg:px-8">
-  <div class="max-w-7xl mx-auto">
+  <div class="mx-auto max-w-7xl">
     <!-- Header -->
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-3">
+    <div class="mb-8 text-center">
+      <h1 class="mb-3 text-3xl font-bold text-gray-900">
         {m.calculate_your_usage({}, { locale: Astro.locals.locale })}
       </h1>
-      <p class="text-gray-600 max-w-2xl mx-auto">
+      <p class="mx-auto max-w-2xl text-gray-600">
         {m.calculate_your_usage_description({}, { locale: Astro.locals.locale })}
       </p>
     </div>
 
     <!-- Main Calculator -->
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
-      
+    <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
       <!-- User Inputs Section -->
-      <div class="bg-gray-100 px-8 py-6 border-b border-gray-200">
-        <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-          <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+      <div class="border-b border-gray-200 bg-gray-100 px-8 py-6">
+        <h2 class="mb-4 flex items-center text-lg font-semibold text-gray-900">
+          <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
           </svg>
-{m.your_configuration({}, { locale: Astro.locals.locale })}
+          {m.your_configuration({}, { locale: Astro.locals.locale })}
         </h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
+            <label class="mb-2 block text-sm font-medium text-gray-700">
               {m.monthly_active_users_mau({}, { locale: Astro.locals.locale })}
             </label>
-            <input 
+            <input
               id="mau-input"
-              type="number" 
+              type="number"
               value={initialMau}
-              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-blue-500 transition-colors"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
               placeholder="5,000,000"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
+            <label class="mb-2 block text-sm font-medium text-gray-700">
               {m.updates_per_month({}, { locale: Astro.locals.locale })}
             </label>
-            <input 
+            <input
               id="updates-by-month-input"
-              type="number" 
+              type="number"
               value={initialUpdatesByMonth}
-              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-blue-500 transition-colors"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
               placeholder="1"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
+            <label class="mb-2 block text-sm font-medium text-gray-700">
               {m.update_size_mb({}, { locale: Astro.locals.locale })}
             </label>
-            <input 
+            <input
               id="updates-size-input"
-              type="number" 
+              type="number"
               step="0.1"
               value={initialUpdatesSize}
-              class="w-full px-4 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-blue-500 transition-colors"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
               placeholder="4"
             />
           </div>
@@ -81,80 +84,102 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
 
       <!-- Calculated Results Section -->
       <div class="px-8 py-6">
-        <h2 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
-          <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+        <h2 class="mb-6 flex items-center text-lg font-semibold text-gray-900">
+          <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
           </svg>
-{m.calculated_usage_pricing({}, { locale: Astro.locals.locale })}
+          {m.calculated_usage_pricing({}, { locale: Astro.locals.locale })}
         </h2>
 
         <!-- Usage Metrics -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-4">
           <!-- MAU -->
-          <div class="bg-gray-100 rounded-xl p-4 border border-gray-200">
-            <div class="flex items-center mb-2">
-              <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          <div class="rounded-xl border border-gray-200 bg-gray-100 p-4">
+            <div class="mb-2 flex items-center">
+              <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
               </svg>
               <span class="text-sm font-medium text-gray-200">MAU</span>
             </div>
             <p class="text-2xl font-bold text-gray-900" data-mau-display>{initialMau.toLocaleString()}</p>
-            <p class="text-xs text-gray-500 mt-1">{m.monthly_active_users_mau({}, { locale: Astro.locals.locale })}</p>
+            <p class="mt-1 text-xs text-gray-500">{m.monthly_active_users_mau({}, { locale: Astro.locals.locale })}</p>
           </div>
 
           <!-- Bandwidth -->
-          <div class="bg-gray-100 rounded-xl p-4 border border-orange-100">
-            <div class="flex items-center mb-2">
-              <svg class="w-4 h-4 mr-2 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+          <div class="rounded-xl border border-orange-100 bg-gray-100 p-4">
+            <div class="mb-2 flex items-center">
+              <svg class="mr-2 h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
               </svg>
               <span class="text-sm font-medium text-gray-200">Bandwidth</span>
             </div>
             <p class="text-2xl font-bold text-gray-900"><span data-bandwidth>{Math.round(initialBandwidth).toLocaleString()}</span></p>
-            <p class="text-xs text-gray-500 mt-1">{m.total_data_transfer({}, { locale: Astro.locals.locale })}</p>
+            <p class="mt-1 text-xs text-gray-500">{m.total_data_transfer({}, { locale: Astro.locals.locale })}</p>
           </div>
 
           <!-- Storage -->
-          <div class="bg-gray-100 rounded-xl p-4 border border-purple-100">
-            <div class="flex items-center mb-2">
-              <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"/>
+          <div class="rounded-xl border border-purple-100 bg-gray-100 p-4">
+            <div class="mb-2 flex items-center">
+              <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"></path>
               </svg>
               <span class="text-sm font-medium text-gray-300">Storage</span>
             </div>
             <p class="text-2xl font-bold text-gray-900"><span data-storage>{initialStorage.toFixed(3)}</span></p>
-            <p class="text-xs text-gray-500 mt-1">{m.required_storage_space({}, { locale: Astro.locals.locale })}</p>
+            <p class="mt-1 text-xs text-gray-500">{m.required_storage_space({}, { locale: Astro.locals.locale })}</p>
           </div>
 
           <!-- Total Credits Cost -->
-          <div class="bg-gray-900 rounded-xl p-4 border border-gray-200">
-            <div class="flex items-center mb-2">
-              <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+          <div class="rounded-xl border border-gray-200 bg-gray-900 p-4">
+            <div class="mb-2 flex items-center">
+              <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
               </svg>
               <span class="text-sm font-medium text-gray-300">{m.credits_cost({}, { locale: Astro.locals.locale })}</span>
             </div>
             <p class="text-2xl font-bold text-white" data-total-price>
               <span class="loading-spinner">...</span>
             </p>
-            <p class="text-xs text-gray-400 mt-1">{m.monthly_total({}, { locale: Astro.locals.locale })}</p>
+            <p class="mt-1 text-xs text-gray-400">{m.monthly_total({}, { locale: Astro.locals.locale })}</p>
           </div>
         </div>
 
         <!-- Pricing Tiers -->
-        <div class="border border-gray-200 rounded-xl">
-          <div class="px-6 py-4 border-b border-gray-200">
+        <div class="rounded-xl border border-gray-200">
+          <div class="border-b border-gray-200 px-6 py-4">
             <h3 class="font-medium text-gray-900">{m.cost_breakdown_pricing_tiers({}, { locale: Astro.locals.locale })}</h3>
           </div>
-          
+
           <div class="px-6 py-6">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <!-- MAU Tiers -->
               <div data-mau-tiers>
-                <div class="flex items-center justify-between mb-3">
-                  <h4 class="font-medium text-gray-900 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                <div class="mb-3 flex items-center justify-between">
+                  <h4 class="flex items-center font-medium text-gray-900">
+                    <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      ></path>
                     </svg>
                     {m.mau({}, { locale: Astro.locals.locale })}:
                   </h4>
@@ -165,10 +190,10 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
 
               <!-- Bandwidth Tiers -->
               <div data-bandwidth-tiers>
-                <div class="flex items-center justify-between mb-3">
-                  <h4 class="font-medium text-gray-900 flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                <div class="mb-3 flex items-center justify-between">
+                  <h4 class="flex items-center font-medium text-gray-900">
+                    <svg class="mr-2 h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
                     </svg>
                     {m.bandwidth({}, { locale: Astro.locals.locale })}:
                   </h4>
@@ -179,10 +204,14 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
 
               <!-- Storage Tiers -->
               <div data-storage-tiers>
-                <div class="flex items-center justify-between mb-3">
-                  <h4 class="font-medium text-gray-900 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"/>
+                <div class="mb-3 flex items-center justify-between">
+                  <h4 class="flex items-center font-medium text-gray-900">
+                    <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z"></path>
                     </svg>
                     {m.storage({}, { locale: Astro.locals.locale })}:
                   </h4>
@@ -245,13 +274,13 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
           method: 'POST',
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            'Accept-Encoding': 'gzip, zlib, deflate, zstd, br'
+            'Accept-Encoding': 'gzip, zlib, deflate, zstd, br',
           },
           body: JSON.stringify({
             mau: mau.toString(),
             bandwidth: bandwidthBytes.toString(),
-            storage: storageBytes.toString()
-          })
+            storage: storageBytes.toString(),
+          }),
         })
 
         if (!response.ok) {
@@ -275,7 +304,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
         }
         return `${gb.toFixed(0)} GiB`
       }
-      
+
       // Handle already-converted GiB values for display
       if (type === 'bandwidth-gb' || type === 'storage-gb') {
         if (num >= 1000) {
@@ -283,7 +312,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
         }
         return `${Math.ceil(num)} GiB`
       }
-      
+
       if (num >= 1000000) {
         return `${(num / 1000000).toFixed(1)}M`
       }
@@ -296,7 +325,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
     function formatPrice(price: number): string {
       return price.toLocaleString('en-US', {
         minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+        maximumFractionDigits: 2,
       })
     }
 
@@ -304,7 +333,7 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
       const decimals = metricType === 'mau' ? 4 : 3
       return price.toLocaleString('en-US', {
         minimumFractionDigits: 0,
-        maximumFractionDigits: decimals
+        maximumFractionDigits: decimals,
       })
     }
 
@@ -313,50 +342,50 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
       if (!container || !tiers || tiers.length === 0) return
 
       container.innerHTML = ''
-      
+
       tiers.forEach((tier, index) => {
         if (tier.units_used > 0) {
           const tierDiv = document.createElement('div')
           tierDiv.className = 'bg-gray-50 rounded-lg p-3 border border-gray-200'
-          
+
           // Tier range and usage
           const tierHeader = document.createElement('div')
           tierHeader.className = 'flex justify-between items-center mb-2'
-          
+
           // Check if this is the last tier and has a very large step_max
           const isLastTier = index === tiers.length - 1
           const isVeryLargeMax = tier.step_max > 1000000 // 1M+ units indicates unlimited tier
-          
+
           let formattedRange
           if (isLastTier && isVeryLargeMax) {
             formattedRange = `over ${formatNumber(tier.step_min, metricType)}`
           } else {
             formattedRange = `${formatNumber(tier.step_min, metricType)}-${formatNumber(tier.step_max, metricType)}`
           }
-          
+
           // For MAU, add unit label since formatNumber doesn't include it
           // For bandwidth/storage, formatNumber already includes units (GiB/TB)
           const displayRange = metricType === 'mau' ? `${formattedRange} MAU` : formattedRange
-          
+
           tierHeader.innerHTML = `
             <span class="text-sm font-medium text-gray-700">${displayRange}</span>
             <span class="text-sm font-bold text-gray-900">$${formatPrice(tier.cost)}</span>
           `
-          
+
           // Usage details
           const tierDetails = document.createElement('div')
           tierDetails.className = 'flex justify-between items-center text-xs text-gray-500'
-          
+
           const rateLabel = metricType === 'mau' ? '/MAU' : '/GiB'
           // For MAU, add unit label since formatNumber doesn't include it
           // For bandwidth/storage, formatNumber already includes units (GiB/TB)
           const usedDisplay = metricType === 'mau' ? `${formatNumber(tier.units_used)} MAU used` : `${formatNumber(tier.units_used)} used`
-          
+
           tierDetails.innerHTML = `
             <span>${usedDisplay}</span>
             <span>$${formatPricePerUnit(tier.price_per_unit, metricType)}${rateLabel}</span>
           `
-          
+
           tierDiv.appendChild(tierHeader)
           tierDiv.appendChild(tierDetails)
           container.appendChild(tierDiv)
@@ -392,11 +421,9 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
       clearTimeout(debounceTimer)
       debounceTimer = setTimeout(async () => {
         const creditData = await calculateCreditPrice(mau, bandwidth, storage)
-        
+
         if (creditData && totalPriceElement) {
           totalPriceElement.textContent = `$${formatPrice(creditData.total_cost)}`
-          
-
 
           // Render tier details and update totals
           if (creditData.breakdown) {
@@ -439,9 +466,10 @@ const initialStorage = (initialUpdatesSize / 1024) // Convert MB to GiB
     display: inline-block;
     animation: pulse 1.5s ease-in-out infinite;
   }
-  
+
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {

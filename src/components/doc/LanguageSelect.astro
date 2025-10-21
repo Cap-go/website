@@ -7,17 +7,26 @@ import { locales } from '@/services/locale'
   <button
     id="language-menu-button"
     type="button"
-    class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
+    class="inline-flex w-full flex-row items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-1 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
   >
     Language
     <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
     </svg>
   </button>
-  <div id="language-menu" class="absolute hidden z-50 w-56 origin-top-right rounded-md border border-gray-400 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800" style="top: 100%; right: 0;">
+  <div
+    id="language-menu"
+    class="absolute z-50 hidden w-56 origin-top-right rounded-md border border-gray-400 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800"
+    style="top: 100%; right: 0;"
+  >
     {
       locales.map((j) => (
-        <a id={`language_${j}`} class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-100" role="menuitem" tabindex="-1">
+        <a
+          id={`language_${j}`}
+          class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+          role="menuitem"
+          tabindex="-1"
+        >
           {j.toUpperCase()}
         </a>
       ))

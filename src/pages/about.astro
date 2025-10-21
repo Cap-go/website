@@ -11,12 +11,7 @@ const description = m.about_capgo({}, { locale: Astro.locals.locale })
 const organization = createCapgoOrganization(Astro.locals.runtimeConfig.public)
 
 // Add founder information to organization
-organization.founder = createPersonLdJson(
-  'Martin Donadieu',
-  'https://x.com/martindonadieu',
-  `${Astro.locals.runtimeConfig.public.baseUrl}/martindonadieu.webp`,
-  'Founder & CEO'
-)
+organization.founder = createPersonLdJson('Martin Donadieu', 'https://x.com/martindonadieu', `${Astro.locals.runtimeConfig.public.baseUrl}/martindonadieu.webp`, 'Founder & CEO')
 
 // Enhanced organization with additional properties
 const enhancedOrg = {
@@ -29,23 +24,13 @@ const enhancedOrg = {
     geo: {
       '@type': 'GeoCoordinates',
       latitude: '32.6669',
-      longitude: '-16.9241'
-    }
+      longitude: '-16.9241',
+    },
   },
-  knowsAbout: [
-    'Capacitor Development',
-    'Mobile App Updates',
-    'Over-the-Air Updates',
-    'JavaScript',
-    'TypeScript',
-    'iOS Development',
-    'Android Development'
-  ],
+  knowsAbout: ['Capacitor Development', 'Mobile App Updates', 'Over-the-Air Updates', 'JavaScript', 'TypeScript', 'iOS Development', 'Android Development'],
   slogan: 'Instant updates for Capacitor apps',
   mission: 'To empower developers with instant, reliable over-the-air updates for Capacitor applications, making app deployment seamless and efficient.',
-  awards: [
-    'Largest ecosystem of open-source plugins for Capacitor'
-  ]
+  awards: ['Largest ecosystem of open-source plugins for Capacitor'],
 }
 
 // Create comprehensive LD+JSON for about page
@@ -69,22 +54,22 @@ const content = {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: getRelativeLocaleUrl(Astro.locals.locale, '/')
+            item: getRelativeLocaleUrl(Astro.locals.locale, '/'),
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'About',
-            item: getRelativeLocaleUrl(Astro.locals.locale, '/about/')
-          }
-        ]
-      }
+            item: getRelativeLocaleUrl(Astro.locals.locale, '/about/'),
+          },
+        ],
+      },
     },
     {
       includeOrganization: false, // We're including the enhanced org as mainEntity
-      includeBreadcrumbs: false // We're including custom breadcrumbs
-    }
-  )
+      includeBreadcrumbs: false, // We're including custom breadcrumbs
+    },
+  ),
 }
 
 // Add the enhanced organization and founder as separate entities
@@ -106,51 +91,50 @@ content.ldJSON['@graph'].push(organization.founder)
 
     <!-- Corporate Stability & Trust Section -->
     <div class="relative mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="bg-gray-900 rounded-xl p-8 border border-gray-700">
-        <h2 class="text-3xl font-bold text-white mb-8 text-center">Built for Long-Term Enterprise Success</h2>
-        
-        <div class="grid md:grid-cols-3 gap-8 mb-8">
+      <div class="rounded-xl border border-gray-700 bg-gray-900 p-8">
+        <h2 class="mb-8 text-center text-3xl font-bold text-white">Built for Long-Term Enterprise Success</h2>
+
+        <div class="mb-8 grid gap-8 md:grid-cols-3">
           <!-- Self-Funded -->
           <div class="text-center">
-            <div class="mb-4 mx-auto w-20 h-20 rounded-full bg-blue-500/15 flex items-center justify-center">
+            <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-blue-500/15">
               <span class="text-3xl">💪</span>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">100% Self-Funded</h3>
-            <p class="text-gray-300 text-sm">
-              No VCs, no external pressure. We're profitable and growing sustainably, ensuring we're here for the long haul. 
-              Our decisions are driven by customer needs, not investor demands.
+            <h3 class="mb-2 text-xl font-bold text-white">100% Self-Funded</h3>
+            <p class="text-sm text-gray-300">
+              No VCs, no external pressure. We're profitable and growing sustainably, ensuring we're here for the long haul. Our decisions are driven by customer needs, not
+              investor demands.
             </p>
           </div>
-          
+
           <!-- Open Source -->
           <div class="text-center">
-            <div class="mb-4 mx-auto w-20 h-20 rounded-full bg-emerald-500/15 flex items-center justify-center">
+            <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15">
               <span class="text-3xl">🔓</span>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">Fully Open Source</h3>
-            <p class="text-gray-300 text-sm">
-              Our entire codebase is open source. You're never locked in - you can self-host, fork, or modify as needed. 
-              Your business continuity is guaranteed, regardless of what happens to us.
+            <h3 class="mb-2 text-xl font-bold text-white">Fully Open Source</h3>
+            <p class="text-sm text-gray-300">
+              Our entire codebase is open source. You're never locked in - you can self-host, fork, or modify as needed. Your business continuity is guaranteed, regardless of what
+              happens to us.
             </p>
           </div>
-          
+
           <!-- Long-term Contracts -->
           <div class="text-center">
-            <div class="mb-4 mx-auto w-20 h-20 rounded-full bg-purple-500/15 flex items-center justify-center">
+            <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-purple-500/15">
               <span class="text-3xl">📝</span>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">Enterprise Support Contracts</h3>
-            <p class="text-gray-300 text-sm">
-              Multiple Fortune 500 companies have long-term support contracts with us, ensuring Capgo and our 30+ plugins 
-              will be maintained and improved for years to come.
+            <h3 class="mb-2 text-xl font-bold text-white">Enterprise Support Contracts</h3>
+            <p class="text-sm text-gray-300">
+              Multiple Fortune 500 companies have long-term support contracts with us, ensuring Capgo and our 30+ plugins will be maintained and improved for years to come.
             </p>
           </div>
         </div>
-        
+
         <!-- Key Stats -->
-        <div class="bg-black/30 rounded-lg p-6">
-          <h3 class="text-xl font-bold text-white mb-4 text-center">Why Enterprises Trust Capgo</h3>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="rounded-lg bg-black/30 p-6">
+          <h3 class="mb-4 text-center text-xl font-bold text-white">Why Enterprises Trust Capgo</h3>
+          <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div class="text-center">
               <p class="text-2xl font-bold text-white">30+</p>
               <p class="text-xs text-gray-400">Open Source Plugins</p>
@@ -169,14 +153,13 @@ content.ldJSON['@graph'].push(organization.founder)
             </div>
           </div>
         </div>
-        
-        <div class="mt-6 p-4 bg-gray-800 rounded-lg border-l-4 border-blue-500/40">
-          <p class="text-white font-semibold mb-2">🛡️ Your Investment is Protected</p>
-          <p class="text-gray-300 text-sm">
-            As the largest ecosystem of Capacitor plugins with long-term enterprise contracts, we're committed to maintaining 
-            and improving our platform for the next decade and beyond. Our self-funded nature means we make decisions based 
-            on technical merit and customer success, not quarterly earnings calls. The open-source foundation ensures that 
-            even in the unlikely event of any disruption, your code and infrastructure remain fully accessible and functional.
+
+        <div class="mt-6 rounded-lg border-l-4 border-blue-500/40 bg-gray-800 p-4">
+          <p class="mb-2 font-semibold text-white">🛡️ Your Investment is Protected</p>
+          <p class="text-sm text-gray-300">
+            As the largest ecosystem of Capacitor plugins with long-term enterprise contracts, we're committed to maintaining and improving our platform for the next decade and
+            beyond. Our self-funded nature means we make decisions based on technical merit and customer success, not quarterly earnings calls. The open-source foundation ensures
+            that even in the unlikely event of any disruption, your code and infrastructure remain fully accessible and functional.
           </p>
         </div>
       </div>
@@ -184,109 +167,93 @@ content.ldJSON['@graph'].push(organization.founder)
 
     <!-- Visual Team Timeline -->
     <div class="relative mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-center text-3xl font-bold text-white mb-12">Meet Our Growing Team</h2>
-      
+      <h2 class="mb-12 text-center text-3xl font-bold text-white">Meet Our Growing Team</h2>
+
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         <!-- Martin - Founder -->
         <div class="relative">
-          <div class="rounded-lg bg-gray-800 p-6 h-full border border-gray-700">
-            <div class="absolute -top-3 -left-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-              Dec 2022 - Founder
-            </div>
-            <div class="text-center mt-4">
-              <div class="mb-4 mx-auto w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center">
+          <div class="h-full rounded-lg border border-gray-700 bg-gray-800 p-6">
+            <div class="absolute -top-3 -left-3 rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white">Dec 2022 - Founder</div>
+            <div class="mt-4 text-center">
+              <div class="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gray-700">
                 <span class="text-4xl">👨‍💼</span>
               </div>
               <h3 class="text-xl font-bold text-white">Martin Donadieu</h3>
-              <p class="text-gray-200 font-semibold">Founder & CEO</p>
-              <p class="mt-3 text-sm text-gray-300">
-                Started solo, now leads vision & strategy. Takes critical calls and ensures we stay true to our mission.
-              </p>
+              <p class="font-semibold text-gray-200">Founder & CEO</p>
+              <p class="mt-3 text-sm text-gray-300">Started solo, now leads vision & strategy. Takes critical calls and ensures we stay true to our mission.</p>
             </div>
           </div>
         </div>
 
         <!-- Michael - 2 years ago -->
         <div class="relative">
-          <div class="rounded-lg bg-gray-800 p-6 h-full border border-gray-700">
-            <div class="absolute -top-3 -left-3 bg-gray-700 text-white text-xs font-bold px-3 py-1 rounded-full">
-              Aug 2023
-            </div>
-            <div class="text-center mt-4">
-              <div class="mb-4 mx-auto w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center">
+          <div class="h-full rounded-lg border border-gray-700 bg-gray-800 p-6">
+            <div class="absolute -top-3 -left-3 rounded-full bg-gray-700 px-3 py-1 text-xs font-bold text-white">Aug 2023</div>
+            <div class="mt-4 text-center">
+              <div class="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gray-700">
                 <span class="text-4xl">🔧</span>
               </div>
               <h3 class="text-xl font-bold text-white">Michael</h3>
-              <p class="text-gray-200 font-semibold">Software Engineer</p>
-              <p class="mt-3 text-sm text-gray-300">
-                Joined Aug 2023. Native iOS/Android expert. Reduced update sizes by 40%, improved speed by 3x.
-              </p>
+              <p class="font-semibold text-gray-200">Software Engineer</p>
+              <p class="mt-3 text-sm text-gray-300">Joined Aug 2023. Native iOS/Android expert. Reduced update sizes by 40%, improved speed by 3x.</p>
             </div>
           </div>
         </div>
 
         <!-- Jordan - This year -->
         <div class="relative">
-          <div class="rounded-lg bg-gray-800 p-6 h-full border border-gray-700">
-            <div class="absolute -top-3 -left-3 bg-gray-700 text-white text-xs font-bold px-3 py-1 rounded-full">
-              2025 - This Year
-            </div>
-            <div class="text-center mt-4">
-              <div class="mb-4 mx-auto w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center">
+          <div class="h-full rounded-lg border border-gray-700 bg-gray-800 p-6">
+            <div class="absolute -top-3 -left-3 rounded-full bg-gray-700 px-3 py-1 text-xs font-bold text-white">2025 - This Year</div>
+            <div class="mt-4 text-center">
+              <div class="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gray-700">
                 <span class="text-4xl">🎨</span>
               </div>
               <h3 class="text-xl font-bold text-white">Jordan</h3>
-              <p class="text-gray-200 font-semibold">Full-Stack Engineer</p>
-              <p class="mt-3 text-sm text-gray-300">
-                Product-focused engineer. Redesigned webapp, improved UX by 35%.
-              </p>
+              <p class="font-semibold text-gray-200">Full-Stack Engineer</p>
+              <p class="mt-3 text-sm text-gray-300">Product-focused engineer. Redesigned webapp, improved UX by 35%.</p>
             </div>
           </div>
         </div>
 
         <!-- Valeria (Lera) - This year -->
         <div class="relative">
-          <div class="rounded-lg bg-gray-800 p-6 h-full border border-gray-700">
-            <div class="absolute -top-3 -left-3 bg-gray-700 text-white text-xs font-bold px-3 py-1 rounded-full">
-              2025 - This Year
-            </div>
-            <div class="text-center mt-4">
-              <div class="mb-4 mx-auto w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center">
+          <div class="h-full rounded-lg border border-gray-700 bg-gray-800 p-6">
+            <div class="absolute -top-3 -left-3 rounded-full bg-gray-700 px-3 py-1 text-xs font-bold text-white">2025 - This Year</div>
+            <div class="mt-4 text-center">
+              <div class="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-gray-700">
                 <span class="text-4xl">🤝</span>
               </div>
               <h3 class="text-xl font-bold text-white">Valeria (Lera)</h3>
-              <p class="text-gray-200 font-semibold">Project & Success Manager</p>
-              <p class="mt-3 text-sm text-gray-300">
-                Manages enterprise accounts with 5M+ users. Brings order to scale.
-              </p>
+              <p class="font-semibold text-gray-200">Project & Success Manager</p>
+              <p class="mt-3 text-sm text-gray-300">Manages enterprise accounts with 5M+ users. Brings order to scale.</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Note about full team photo -->
-      <div class="mt-8 p-6 bg-gray-800/70 rounded-lg border border-gray-700">
+      <div class="mt-8 rounded-lg border border-gray-700 bg-gray-800/70 p-6">
         <p class="text-center text-gray-300">
-          <span class="text-gray-200 font-semibold">Team Update:</span> We now have Valeria (Lera) featured in the photo above with Michael and Martin. 
-          A complete team photo including all four members (with Jordan) is coming soon!
+          <span class="font-semibold text-gray-200">Team Update:</span> We now have Valeria (Lera) featured in the photo above with Michael and Martin. A complete team photo including
+          all four members (with Jordan) is coming soon!
         </p>
       </div>
 
       <!-- Key Metrics -->
-      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="text-center p-4 bg-gray-800 rounded-lg">
+      <div class="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div class="rounded-lg bg-gray-800 p-4 text-center">
           <p class="text-3xl font-bold text-white">4</p>
           <p class="text-sm text-gray-400">Team Members</p>
         </div>
-        <div class="text-center p-4 bg-gray-800 rounded-lg">
+        <div class="rounded-lg bg-gray-800 p-4 text-center">
           <p class="text-3xl font-bold text-white">$10k+</p>
           <p class="text-sm text-gray-400">Monthly MRR</p>
         </div>
-        <div class="text-center p-4 bg-gray-800 rounded-lg">
+        <div class="rounded-lg bg-gray-800 p-4 text-center">
           <p class="text-3xl font-bold text-white">5M+</p>
           <p class="text-sm text-gray-400">End Users</p>
         </div>
-        <div class="text-center p-4 bg-gray-800 rounded-lg">
+        <div class="rounded-lg bg-gray-800 p-4 text-center">
           <p class="text-3xl font-bold text-white">2000s</p>
           <p class="text-sm text-gray-400">Apps Served</p>
         </div>
@@ -296,100 +263,83 @@ content.ldJSON['@graph'].push(organization.founder)
     <!-- The Evolution Story Section -->
     <div class="relative mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-lg bg-gray-800 p-8">
-        <h2 class="text-3xl font-bold text-white mb-6">📖 The Capgo Story: From Solo Maker to Growing Team</h2>
-        
+        <h2 class="mb-6 text-3xl font-bold text-white">📖 The Capgo Story: From Solo Maker to Growing Team</h2>
+
         <div class="space-y-6 text-gray-300">
           <div>
-            <h3 class="text-xl font-bold text-white mb-3">December 2022: The Solo Beginning</h3>
+            <h3 class="mb-3 text-xl font-bold text-white">December 2022: The Solo Beginning</h3>
             <p class="mb-3">
-              I started Capgo alone in December 2022, driven by a simple mission: make OTA updates accessible to every developer. 
-              The early days were intense - coding through nights, handling support calls, fixing bugs, and building features all by myself. 
-              Every customer interaction, every line of code, every decision was mine to make. It was exhausting but fulfilling, 
-              as each new customer validated the need for an affordable alternative to expensive enterprise solutions.
+              I started Capgo alone in December 2022, driven by a simple mission: make OTA updates accessible to every developer. The early days were intense - coding through
+              nights, handling support calls, fixing bugs, and building features all by myself. Every customer interaction, every line of code, every decision was mine to make. It
+              was exhausting but fulfilling, as each new customer validated the need for an affordable alternative to expensive enterprise solutions.
             </p>
-            <p class="italic text-gray-400">
+            <p class="text-gray-400 italic">
               "I remember taking customer calls at 3 AM from different time zones. I was tired, but their excitement about Capgo kept me going." - Martin
             </p>
           </div>
 
           <div>
-            <h3 class="text-xl font-bold text-white mb-3">August 2023: Michael Joins - The Native Expert</h3>
+            <h3 class="mb-3 text-xl font-bold text-white">August 2023: Michael Joins - The Native Expert</h3>
             <p class="mb-3">
-              As Capgo grew through early 2023, performance became crucial. Users needed faster updates, smaller bundle sizes, and better native integration. 
-              In August 2023, Michael joined as our Software Engineer specializing in native development. With his deep expertise in iOS and Android 
-              internals, he transformed how Capgo handles updates at the system level. Michael didn't just optimize our code - he reimagined 
-              our entire native architecture. His work reduced update sizes by 40% and improved installation speed by 3x, making Capgo 
-              competitive with solutions 10x our price. You can see Michael in both our team photos - he's been integral to our success.
+              As Capgo grew through early 2023, performance became crucial. Users needed faster updates, smaller bundle sizes, and better native integration. In August 2023,
+              Michael joined as our Software Engineer specializing in native development. With his deep expertise in iOS and Android internals, he transformed how Capgo handles
+              updates at the system level. Michael didn't just optimize our code - he reimagined our entire native architecture. His work reduced update sizes by 40% and improved
+              installation speed by 3x, making Capgo competitive with solutions 10x our price. You can see Michael in both our team photos - he's been integral to our success.
             </p>
-            <p class="italic text-gray-400">
-              "Michael brought the technical excellence we needed. He could see optimizations I didn't even know were possible." - Martin
-            </p>
+            <p class="text-gray-400 italic">"Michael brought the technical excellence we needed. He could see optimizations I didn't even know were possible." - Martin</p>
           </div>
 
           <div>
-            <h3 class="text-xl font-bold text-white mb-3">2025: Scaling Beyond $10k MRR - Jordan Arrives</h3>
+            <h3 class="mb-3 text-xl font-bold text-white">2025: Scaling Beyond $10k MRR - Jordan Arrives</h3>
             <p class="mb-3">
-              By early 2025, we crossed a major milestone: $10,000 monthly recurring revenue. But with growth came new challenges. 
-              Our web dashboard needed a complete overhaul, users demanded better analytics, and the product needed someone who could 
-              think like both an engineer and a product manager. Jordan joined as our Full-Stack Engineer, bringing years of product 
-              management experience. He didn't just code - he reimagined our entire user experience. Under his guidance, he redesigned 
-              the web application from scratch, making it intuitive for both indie developers and enterprise teams. User satisfaction 
-              scores jumped 35% within months of his improvements.
+              By early 2025, we crossed a major milestone: $10,000 monthly recurring revenue. But with growth came new challenges. Our web dashboard needed a complete overhaul,
+              users demanded better analytics, and the product needed someone who could think like both an engineer and a product manager. Jordan joined as our Full-Stack Engineer,
+              bringing years of product management experience. He didn't just code - he reimagined our entire user experience. Under his guidance, he redesigned the web application
+              from scratch, making it intuitive for both indie developers and enterprise teams. User satisfaction scores jumped 35% within months of his improvements.
             </p>
-            <p class="italic text-gray-400">
-              "Jordan sees the product through users' eyes. Every feature he builds solves a real problem our customers face." - Martin
-            </p>
+            <p class="text-gray-400 italic">"Jordan sees the product through users' eyes. Every feature he builds solves a real problem our customers face." - Martin</p>
           </div>
 
           <div>
-            <h3 class="text-xl font-bold text-white mb-3">2025: Enterprise Growth - Valeria's Impact</h3>
+            <h3 class="mb-3 text-xl font-bold text-white">2025: Enterprise Growth - Valeria's Impact</h3>
             <p class="mb-3">
-              Early 2025 brought unexpected but exciting challenges: major applications with over 5 million users started adopting Capgo. 
-              These weren't just regular customers - they were enterprise clients needing dedicated support, complex deployment strategies, 
-              and someone who could manage relationships at scale. Valeria (we call her Lera) joined as our Project Manager and Customer Success Manager. 
-              She brought order to what was becoming chaotic growth. She created onboarding playbooks, established support processes, 
-              and most importantly, ensured our biggest clients felt heard and supported. With Valeria managing these relationships, 
-              I could finally step back from day-to-day operations and focus on strategic growth.
+              Early 2025 brought unexpected but exciting challenges: major applications with over 5 million users started adopting Capgo. These weren't just regular customers -
+              they were enterprise clients needing dedicated support, complex deployment strategies, and someone who could manage relationships at scale. Valeria (we call her Lera)
+              joined as our Project Manager and Customer Success Manager. She brought order to what was becoming chaotic growth. She created onboarding playbooks, established
+              support processes, and most importantly, ensured our biggest clients felt heard and supported. With Valeria managing these relationships, I could finally step back
+              from day-to-day operations and focus on strategic growth.
             </p>
-            <p class="italic text-gray-400">
+            <p class="text-gray-400 italic">
               "Valeria is the reason our enterprise clients trust us with their critical infrastructure. She makes the impossible seem easy." - Martin
             </p>
           </div>
 
           <!-- Team Photo 1: The Engineering Trio at Climbing Offsite -->
           <div class="my-8">
-            <img
-              src="/capgo_michael_martin_jordan.webp"
-              alt="Jordan, Martin, and Michael during team climbing offsite"
-              class="w-full rounded-lg shadow-2xl"
-            />
-            <p class="text-center text-sm text-gray-400 mt-3 italic">
-              Jordan (Full-Stack), Martin (CEO), and Michael (Native) during our team offsite week - 
-              combining strategic planning with climbing adventures in Madeira
+            <img src="/capgo_michael_martin_jordan.webp" alt="Jordan, Martin, and Michael during team climbing offsite" class="w-full rounded-lg shadow-2xl" />
+            <p class="mt-3 text-center text-sm text-gray-400 italic">
+              Jordan (Full-Stack), Martin (CEO), and Michael (Native) during our team offsite week - combining strategic planning with climbing adventures in Madeira
             </p>
           </div>
 
           <div>
-            <h3 class="text-xl font-bold text-white mb-3">Today: A Team United by Purpose</h3>
+            <h3 class="mb-3 text-xl font-bold text-white">Today: A Team United by Purpose</h3>
             <p class="mb-3">
-              My role has completely transformed. I'm no longer the solo developer coding until dawn. As CEO, I focus on vision, 
-              strategy, and taking important customer calls when needed. Michael ensures our technology stays cutting-edge and performant. 
-              Jordan keeps our product delightful and powerful, always thinking about the user journey. Valeria (Lera) makes sure every customer, 
-              from indie hackers to Fortune 500 companies, succeeds with Capgo.
+              My role has completely transformed. I'm no longer the solo developer coding until dawn. As CEO, I focus on vision, strategy, and taking important customer calls when
+              needed. Michael ensures our technology stays cutting-edge and performant. Jordan keeps our product delightful and powerful, always thinking about the user journey.
+              Valeria (Lera) makes sure every customer, from indie hackers to Fortune 500 companies, succeeds with Capgo.
             </p>
             <p class="mb-3">
-              We're not just a team; we're a family united by a simple belief: every developer deserves access to instant, affordable updates. 
-              From our base in beautiful Madeira, Portugal - where we work hard and play harder, scaling mountains and 
-              climbing walls together - we serve thousands of applications and millions of end users worldwide. 
-              What started as my solo project has become a collaborative effort where each team member brings unique expertise that 
-              makes Capgo better than I could have ever imagined alone.
+              We're not just a team; we're a family united by a simple belief: every developer deserves access to instant, affordable updates. From our base in beautiful Madeira,
+              Portugal - where we work hard and play harder, scaling mountains and climbing walls together - we serve thousands of applications and millions of end users worldwide.
+              What started as my solo project has become a collaborative effort where each team member brings unique expertise that makes Capgo better than I could have ever
+              imagined alone.
             </p>
-            <p class="font-bold text-white text-lg">
+            <p class="text-lg font-bold text-white">
               The journey from 1 to 4 has been transformative, but this is just the beginning. Together, we're building the future of app deployment. 🚀
             </p>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -438,8 +388,7 @@ content.ldJSON['@graph'].push(organization.founder)
                 { locale: Astro.locals.locale },
               )
             }
-            With 30+ maintained plugins and long-term support contracts with multiple enterprises, we're building infrastructure that companies 
-            can depend on for the next decade.
+            With 30+ maintained plugins and long-term support contracts with multiple enterprises, we're building infrastructure that companies can depend on for the next decade.
           </p>
           <h3 class="mb-4 text-2xl font-bold text-white">💪 {m.practicing_what_we_preach({}, { locale: Astro.locals.locale })}</h3>
           <p class="mb-6 text-gray-300">
@@ -448,7 +397,8 @@ content.ldJSON['@graph'].push(organization.founder)
           </p>
           <h3 class="mb-4 text-2xl font-bold text-white">🚀 {m.our_dedication({}, { locale: Astro.locals.locale })}</h3>
           <p class="mb-6 text-gray-300">
-            Since December 2022, Capgo has been our full-time focus. With a dedicated team of experts, we ensure continuous development and premium support for our growing community of users.
+            Since December 2022, Capgo has been our full-time focus. With a dedicated team of experts, we ensure continuous development and premium support for our growing
+            community of users.
           </p>
         </div>
       </div>
@@ -456,21 +406,15 @@ content.ldJSON['@graph'].push(organization.founder)
 
     <!-- Team Photo Section - Sunset at Pico do Arieiro -->
     <div class="relative mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="rounded-lg overflow-hidden shadow-2xl">
-        <img
-          src="/capgo_val_michael_martin.webp"
-          alt="Valeria, Michael, and Martin watching sunset at Pico do Arieiro, Madeira"
-          class="w-full h-auto object-cover"
-        />
+      <div class="overflow-hidden rounded-lg shadow-2xl">
+        <img src="/capgo_val_michael_martin.webp" alt="Valeria, Michael, and Martin watching sunset at Pico do Arieiro, Madeira" class="h-auto w-full object-cover" />
         <div class="bg-orange-900 p-6">
-          <h3 class="text-2xl font-bold text-white mb-2">Sunset at Pico do Arieiro - Team Bonding at 1,818m</h3>
+          <h3 class="mb-2 text-2xl font-bold text-white">Sunset at Pico do Arieiro - Team Bonding at 1,818m</h3>
           <p class="text-gray-300">
-            This magical moment was captured during our team offsite week at Pico do Arieiro, Madeira's third-highest peak. 
-            Here, Valeria (Lera), Michael, and Martin watch the sunset above the clouds after a day of strategic planning. 
-            This same week included climbing adventures with Jordan, combining work sessions with Madeira's incredible nature. 
-            These offsites aren't just about work - they're about building trust, sharing adventures, and creating the bonds 
-            that make our remote-first team feel like family. From mountain peaks to climbing walls, we believe the best 
-            ideas come when we step outside the office and into nature.
+            This magical moment was captured during our team offsite week at Pico do Arieiro, Madeira's third-highest peak. Here, Valeria (Lera), Michael, and Martin watch the
+            sunset above the clouds after a day of strategic planning. This same week included climbing adventures with Jordan, combining work sessions with Madeira's incredible
+            nature. These offsites aren't just about work - they're about building trust, sharing adventures, and creating the bonds that make our remote-first team feel like
+            family. From mountain peaks to climbing walls, we believe the best ideas come when we step outside the office and into nature.
           </p>
         </div>
       </div>
@@ -478,33 +422,28 @@ content.ldJSON['@graph'].push(organization.founder)
 
     <!-- Founder's Note -->
     <div class="relative mx-auto my-20 max-w-3xl px-4 sm:px-6 lg:px-8">
-      <div class="bg-gray-800 rounded-lg p-6">
-        <div class="flex flex-col sm:flex-row items-center gap-6">
-          <img
-            src="/martindonadieu.webp"
-            alt="Martin Donadieu"
-            class="w-32 h-32 rounded-full object-cover border-4 border-gray-600"
-          />
+      <div class="rounded-lg bg-gray-800 p-6">
+        <div class="flex flex-col items-center gap-6 sm:flex-row">
+          <img src="/martindonadieu.webp" alt="Martin Donadieu" class="h-32 w-32 rounded-full border-4 border-gray-600 object-cover" />
           <div class="flex-1 text-center sm:text-left">
-            <p class="text-gray-300 mb-4">
-              "From a solo project in December 2022 to a team serving millions of users, Capgo has grown beyond my wildest dreams. 
-              With our self-funded model, open-source foundation, and incredible team, we're building something that will last for decades.
-              Thank you for trusting us with your applications."
+            <p class="mb-4 text-gray-300">
+              "From a solo project in December 2022 to a team serving millions of users, Capgo has grown beyond my wildest dreams. With our self-funded model, open-source
+              foundation, and incredible team, we're building something that will last for decades. Thank you for trusting us with your applications."
             </p>
             <div>
-              <p class="text-white font-bold text-lg">Martin Donadieu</p>
-              <p class="text-gray-200 text-sm">Founder & CEO</p>
-              <p class="text-gray-400 text-xs mt-1">
-                <a href="https://x.com/martindonadieu" class="hover:text-white">@martindonadieu</a> • 
+              <p class="text-lg font-bold text-white">Martin Donadieu</p>
+              <p class="text-sm text-gray-200">Founder & CEO</p>
+              <p class="mt-1 text-xs text-gray-400">
+                <a href="https://x.com/martindonadieu" class="hover:text-white">@martindonadieu</a> •
                 <a href="https://solos.ventures" class="ml-2 hover:text-white">solos.ventures podcast</a>
               </p>
             </div>
           </div>
         </div>
-        
+
         <div class="mt-6 text-center">
-          <div class="group inline-flex relative">
-            <div class="absolute -inset-px rounded-xl bg-gray-800/40 blur-lg opacity-60 transition-opacity duration-300 group-hover:opacity-80" aria-hidden="true"></div>
+          <div class="group relative inline-flex">
+            <div class="absolute -inset-px rounded-xl bg-gray-800/40 opacity-60 blur-lg transition-opacity duration-300 group-hover:opacity-80" aria-hidden="true"></div>
             <a
               href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
               aria-label={m.get_quote_now({}, { locale: Astro.locals.locale })}

@@ -13,23 +13,21 @@ const frameworks: FrameworkOption[] = [
   { id: 'angular', name: 'Angular', icon: '/icons/angular.svg' },
   { id: 'vue', name: 'Vue', icon: '/icons/vue.svg' },
   { id: 'svelte', name: 'Svelte', icon: '/icons/svelte.svg' },
-  { id: 'qwik', name: 'Qwik', icon: '/icons/qwik.svg' }
+  { id: 'qwik', name: 'Qwik', icon: '/icons/qwik.svg' },
 ]
 ---
 
 <div class="framework-selector">
-  {frameworks.map((framework) => (
-    <button 
-      class="framework-button" 
-      data-framework={framework.id}
-      aria-label={`Select ${framework.name}`}
-    >
-      <div class="framework-icon">
-        <img src={framework.icon} alt={framework.name} />
-      </div>
-      <div class="framework-name">{framework.name}</div>
-    </button>
-  ))}
+  {
+    frameworks.map((framework) => (
+      <button class="framework-button" data-framework={framework.id} aria-label={`Select ${framework.name}`}>
+        <div class="framework-icon">
+          <img src={framework.icon} alt={framework.name} />
+        </div>
+        <div class="framework-name">{framework.name}</div>
+      </button>
+    ))
+  }
 </div>
 
 <style>
@@ -108,42 +106,42 @@ const frameworks: FrameworkOption[] = [
   }
 
   /* Different colors for each framework */
-  .framework-button[data-framework="js"] {
+  .framework-button[data-framework='js'] {
     --framework-border: #fbbf24;
     --framework-border-rgb: 251, 191, 36;
   }
-  
+
   /* Black text for JS button when selected */
-  .framework-button[data-framework="js"].selected {
+  .framework-button[data-framework='js'].selected {
     color: black;
   }
 
-  .framework-button[data-framework="ts"] {
+  .framework-button[data-framework='ts'] {
     --framework-border: #2563eb;
     --framework-border-rgb: 37, 99, 235;
   }
 
-  .framework-button[data-framework="react"] {
+  .framework-button[data-framework='react'] {
     --framework-border: #61dafb;
     --framework-border-rgb: 97, 218, 251;
   }
 
-  .framework-button[data-framework="angular"] {
+  .framework-button[data-framework='angular'] {
     --framework-border: #ef4444;
     --framework-border-rgb: 239, 68, 68;
   }
 
-  .framework-button[data-framework="vue"] {
+  .framework-button[data-framework='vue'] {
     --framework-border: #4fc08d;
     --framework-border-rgb: 79, 192, 141;
   }
 
-  .framework-button[data-framework="svelte"] {
+  .framework-button[data-framework='svelte'] {
     --framework-border: #ff6b35;
     --framework-border-rgb: 255, 107, 53;
   }
 
-  .framework-button[data-framework="qwik"] {
+  .framework-button[data-framework='qwik'] {
     --framework-border: #ac7ef4;
     --framework-border-rgb: 172, 126, 244;
   }
@@ -183,12 +181,12 @@ const frameworks: FrameworkOption[] = [
       flex: 0 0 calc(50% - 5px); /* 2 buttons per row */
       height: 100px;
     }
-    
+
     .framework-icon {
       height: 2rem;
       width: 2rem;
     }
-    
+
     .framework-name {
       font-size: 0.75rem;
       height: 2em;
@@ -204,25 +202,25 @@ const frameworks: FrameworkOption[] = [
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const frameworkButtons = document.querySelectorAll('.framework-button');
-    
-    frameworkButtons.forEach(button => {
-      button.addEventListener('click', function(event) {
-        const clickedButton = event.currentTarget as HTMLElement;
-        
+  document.addEventListener('DOMContentLoaded', function () {
+    const frameworkButtons = document.querySelectorAll('.framework-button')
+
+    frameworkButtons.forEach((button) => {
+      button.addEventListener('click', function (event) {
+        const clickedButton = event.currentTarget as HTMLElement
+
         // Remove selected class from all buttons
-        frameworkButtons.forEach(btn => btn.classList.remove('selected'));
-        
+        frameworkButtons.forEach((btn) => btn.classList.remove('selected'))
+
         // Add selected class to clicked button
-        clickedButton.classList.add('selected');
-        
+        clickedButton.classList.add('selected')
+
         // Trigger the conditional step visibility
         const customEvent = new CustomEvent('frameworkSelected', {
-          detail: { framework: clickedButton.getAttribute('data-framework') }
-        });
-        document.dispatchEvent(customEvent);
-      });
-    });
-  });
+          detail: { framework: clickedButton.getAttribute('data-framework') },
+        })
+        document.dispatchEvent(customEvent)
+      })
+    })
+  })
 </script>

@@ -1,7 +1,7 @@
 import fg from 'fast-glob'
-import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import matter from 'gray-matter'
 import { createSpinner } from 'nanospinner'
+import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { defaultLocale, locales } from '../src/services/locale'
 import { commonReplacements } from './commonReplacements'

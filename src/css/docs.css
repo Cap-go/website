@@ -159,7 +159,7 @@ body,
   --color-grey-dark: #515271;
 
   /* Custom Green */
-  --color-green: #88D4A6;
+  --color-green: #88d4a6;
 }
 
 .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {

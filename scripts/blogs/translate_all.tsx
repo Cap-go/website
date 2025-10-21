@@ -1,6 +1,5 @@
-import { existsSync } from 'node:fs'
 import matter from 'gray-matter'
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { defaultLocale, locales } from '../../src/services/locale'

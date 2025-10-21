@@ -19,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const allPosts = Astro.props.posts as CollectionEntry<'blog'>[]
 // Filter posts by current locale
-const localePosts = allPosts.filter(post => post.data.locale === Astro.locals.locale)
+const localePosts = allPosts.filter((post) => post.data.locale === Astro.locals.locale)
 ---
 
 <BlogListing allPosts={localePosts} />

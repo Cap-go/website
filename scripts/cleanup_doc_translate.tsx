@@ -1,7 +1,7 @@
 import fg from 'fast-glob'
-import { existsSync, unlinkSync, rmSync, statSync } from 'node:fs'
 import { createSpinner } from 'nanospinner'
-import { join, dirname } from 'node:path'
+import { existsSync, rmSync, statSync, unlinkSync } from 'node:fs'
+import { dirname, join } from 'node:path'
 import { defaultLocale, locales } from '../src/services/locale'
 
 const contentDirectory = join(process.cwd(), 'src', 'content')
@@ -30,43 +30,43 @@ const removeEmptyDirectories = (dirPath: string): void => {
 
 const cleanupTranslations = async () => {
   console.log(`Starting cleanup for ${languages.length} languages`)
-  
+
   for (const lang of languages) {
     const langBlogDirectory = join(blogDirectory, lang)
     const langDocsDirectory = join(langBlogDirectory, 'docs')
-    
+
     if (!existsSync(langDocsDirectory)) {
       console.log(`No translations found for ${lang}, skipping...`)
       continue
     }
-    
+
     const spinner = createSpinner(`Cleaning up ${lang} translations...`).start()
-    
+
     try {
       const translatedFiles = fg.globSync(['**/*.md*'], { dot: true, cwd: langDocsDirectory })
       let deletedCount = 0
-      
+
       for (const file of translatedFiles) {
         const originalFilePath = join(defaultBlogDirectory, file)
         const translatedFilePath = join(langDocsDirectory, file)
-        
+
         if (!existsSync(originalFilePath)) {
           unlinkSync(translatedFilePath)
           deletedCount++
           console.log(`Deleted orphaned translation: ${lang}/docs/${file}`)
-          
+
           // Clean up empty directories
           const fileDir = dirname(translatedFilePath)
           removeEmptyDirectories(fileDir)
         }
       }
-      
+
       spinner.success({ text: `Cleaned up ${lang}: ${deletedCount} orphaned files deleted` })
     } catch (error) {
       spinner.error({ text: `Failed to cleanup ${lang}: ${error}` })
     }
   }
-  
+
   console.log('Cleanup completed')
 }
 

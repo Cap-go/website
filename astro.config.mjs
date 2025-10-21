@@ -1,9 +1,9 @@
+import cloudflare from '@astrojs/cloudflare'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
-import cloudflare from '@astrojs/cloudflare'
 import { defineConfig, envField } from 'astro/config'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
@@ -71,11 +71,14 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
-      plugins: [starlightImageZoom({ showCaptions: false }), starlightLlmsTxt({
-        projectName: 'capgo',
-        description: 'Capgo is a platform for creating and managing Capacitorjs live app updates.',
-        exclude: locales.map((locale) => `${locale}/**`),
-      })],
+      plugins: [
+        starlightImageZoom({ showCaptions: false }),
+        starlightLlmsTxt({
+          projectName: 'capgo',
+          description: 'Capgo is a platform for creating and managing Capacitorjs live app updates.',
+          exclude: locales.map((locale) => `${locale}/**`),
+        }),
+      ],
       disable404Route: true,
       logo: { src: '~public/logo.svg' },
       markdown: { headingLinks: false },
@@ -321,107 +324,77 @@ export default defineConfig({
             },
             {
               label: 'LLM',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/llm/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/llm/' }],
               collapsed: true,
             },
             {
               label: 'GTM',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/gtm/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/gtm/' }],
               collapsed: true,
             },
             {
               label: 'StreamCall',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/streamcall/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/streamcall/' }],
               collapsed: true,
             },
             {
               label: 'JW Player',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/jw-player/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/jw-player/' }],
               collapsed: true,
             },
             {
               label: 'Ricoh 360 Camera',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/ricoh360-camera/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/ricoh360-camera/' }],
               collapsed: true,
             },
             {
               label: 'Background Geolocation',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/background-geolocation/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/background-geolocation/' }],
               collapsed: true,
             },
             {
               label: 'Alarm',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/alarm/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/alarm/' }],
               collapsed: true,
             },
             {
               label: 'Twilio Voice',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/twilio-voice/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/twilio-voice/' }],
               collapsed: true,
             },
             {
               label: 'Is Root',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/is-root/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/is-root/' }],
               collapsed: true,
             },
             {
               label: 'Persistent Account',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/persistent-account/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/persistent-account/' }],
               collapsed: true,
             },
             {
               label: 'Android Usage Stats',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/android-usagestatsmanager/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/android-usagestatsmanager/' }],
               collapsed: true,
             },
             {
               label: 'Android Inline Install',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/android-inline-install/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/android-inline-install/' }],
               collapsed: true,
             },
             {
               label: 'Downloader',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/downloader/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/downloader/' }],
               collapsed: true,
             },
             {
               label: 'Launch Navigator',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/launch-navigator/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/launch-navigator/' }],
               collapsed: true,
             },
             {
               label: 'Autofill Save Password',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/autofill-save-password/' },
-              ],
+              items: [{ label: 'Overview', link: '/docs/plugins/autofill-save-password/' }],
               collapsed: true,
             },
             {
@@ -470,7 +443,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      tailwindcss(),     
+      tailwindcss(),
       paraglideVitePlugin({
         outdir: './src/paraglide',
         project: './project.inlang',

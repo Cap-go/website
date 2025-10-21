@@ -165,18 +165,29 @@ body,
   --color-grey-dark: #515271;
 
   /* Custom Green */
-  --color-green: #88D4A6;
+  --color-green: #88d4a6;
 }
 
 /* Custom Keyframes for Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .blog.prose table:not(:where(.not-content *)) {

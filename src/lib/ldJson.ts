@@ -135,13 +135,7 @@ export interface ServiceLdJson extends BaseLdJson {
   }
 }
 
-export type LdJsonType =
-  | NewsArticleLdJson
-  | WebPageLdJson
-  | SoftwareApplicationLdJson
-  | ProductLdJson
-  | ServiceLdJson
-  | OrganizationLdJson
+export type LdJsonType = NewsArticleLdJson | WebPageLdJson | SoftwareApplicationLdJson | ProductLdJson | ServiceLdJson | OrganizationLdJson
 
 /**
  * Create a complete Organization schema for Capgo
@@ -159,11 +153,7 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
       width: 512,
       height: 512,
     },
-    sameAs: [
-      'https://twitter.com/Capgo_app',
-      'https://github.com/Cap-go',
-      'https://www.linkedin.com/company/capgo',
-    ],
+    sameAs: ['https://twitter.com/Capgo_app', 'https://github.com/Cap-go', 'https://www.linkedin.com/company/capgo'],
     description: config.blog_description,
     contactPoint: {
       '@type': 'ContactPoint',
@@ -176,12 +166,7 @@ export function createCapgoOrganization(config: RuntimeConfig['public']): Organi
 /**
  * Create a Person schema for blog authors
  */
-export function createPersonLdJson(
-  name: string,
-  url?: string,
-  image?: string,
-  jobTitle?: string
-): PersonLdJson {
+export function createPersonLdJson(name: string, url?: string, image?: string, jobTitle?: string): PersonLdJson {
   const person: PersonLdJson = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -214,7 +199,7 @@ export function createNewsArticleLdJson(
     articleSection?: string[]
     articleBody?: string
     locale?: string
-  }
+  },
 ): NewsArticleLdJson {
   const organization = createCapgoOrganization(config)
 
@@ -266,7 +251,7 @@ export function createSoftwareApplicationLdJson(
       priceCurrency: string
       availability: string
     }
-  }
+  },
 ): SoftwareApplicationLdJson {
   const app: SoftwareApplicationLdJson = {
     '@context': 'https://schema.org',
@@ -281,14 +266,16 @@ export function createSoftwareApplicationLdJson(
   if (options.operatingSystem) app.operatingSystem = options.operatingSystem
   if (options.softwareVersion) app.softwareVersion = options.softwareVersion
   if (options.downloadUrl) app.downloadUrl = options.downloadUrl
-  if (options.aggregateRating) app.aggregateRating = {
-    '@type': 'AggregateRating',
-    ...options.aggregateRating,
-  }
-  if (options.offers) app.offers = {
-    '@type': 'Offer',
-    ...options.offers,
-  }
+  if (options.aggregateRating)
+    app.aggregateRating = {
+      '@type': 'AggregateRating',
+      ...options.aggregateRating,
+    }
+  if (options.offers)
+    app.offers = {
+      '@type': 'Offer',
+      ...options.offers,
+    }
 
   return app
 }
@@ -314,7 +301,7 @@ export function createProductLdJson(
       ratingValue: number
       reviewCount: number
     }
-  }
+  },
 ): ProductLdJson {
   const organization = createCapgoOrganization(config)
 
@@ -325,21 +312,25 @@ export function createProductLdJson(
     name: options.name,
     description: options.description,
     url: options.url,
-    brand: options.brand ? {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: options.brand,
-      url: options.url,
-    } : organization,
+    brand: options.brand
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: options.brand,
+          url: options.url,
+        }
+      : organization,
     sku: options.sku,
-    offers: options.offers.map(offer => ({
+    offers: options.offers.map((offer) => ({
       '@type': 'Offer',
       ...offer,
     })),
-    aggregateRating: options.aggregateRating ? {
-      '@type': 'AggregateRating',
-      ...options.aggregateRating,
-    } : undefined,
+    aggregateRating: options.aggregateRating
+      ? {
+          '@type': 'AggregateRating',
+          ...options.aggregateRating,
+        }
+      : undefined,
   }
 }
 
@@ -354,7 +345,7 @@ export function createServiceLdJson(
     url: string
     serviceType: string
     areaServed?: string[]
-  }
+  },
 ): ServiceLdJson {
   const organization = createCapgoOrganization(config)
 
@@ -431,7 +422,7 @@ export function createLdJsonGraph(
     includeOrganization?: boolean
     includeBreadcrumbs?: boolean
     breadcrumbs?: Array<{ name: string; url: string }>
-  }
+  },
 ) {
   const graph: any[] = []
 

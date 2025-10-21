@@ -138,13 +138,15 @@ const makeFontPath = (name: string) => join(process.cwd(), 'public', 'fonts', na
 <meta property="og:image" content={image_unsecure} />
 <meta property="og:image:type" content="image/webp" />
 <meta property="og:article:author" content={author} />
-<meta name="robots" content="index, follow">
-{audio && (
-  <>
-    <meta property="og:audio" content={audio} />
-    <meta property="og:audio:type" content="audio/mpeg" />
-  </>
-)}
+<meta name="robots" content="index, follow" />
+{
+  audio && (
+    <>
+      <meta property="og:audio" content={audio} />
+      <meta property="og:audio:type" content="audio/mpeg" />
+    </>
+  )
+}
 <meta property="og:site_name" content={baseDomain()} />
 <meta property="og:description" content={displayDescription} />
 

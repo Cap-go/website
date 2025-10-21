@@ -91,10 +91,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
             >
               {m.sign_up_button({}, { locale: Astro.locals.locale })}
             </button>
-            <p
-              class="mt-2 text-center text-xs text-gray-400"
-              set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })}
-            ></p>
+            <p class="mt-2 text-center text-xs text-gray-400" set:html={m.register_tos_notice({}, { locale: Astro.locals.locale })} />
           </form>
           <div class="relative">
             <div class="absolute inset-0 flex items-center">
@@ -218,7 +215,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
       ;(window as any).datafast('signup', { email: email.value })
     }
     if ((window as any).posthog) {
-      (window as any).posthog.capture('user_signed_up', {
+      ;(window as any).posthog.capture('user_signed_up', {
         email: email.value,
         first_name: firstName.value,
         last_name: lastName.value,
