@@ -29,7 +29,7 @@ next_blog: ''
 
 1.  **要件**: GitHubアカウント、[Capgoアカウント](https://capgo.app/disclaimer/)（月額$12から）、Capacitorプロジェクト、[Node.js](https://nodejs.org/en)。
 2.  **セットアップ**: `npx @capgo/cli init`で[Capgo CLI](https://capgo.app/docs/cli/commands)をインストール、YAMLワークフローでGitHub Actionsを設定。
-3.  **デプロイ**: `npx @capgo/cli deploy`などのコマンドを使用して[アップデートを自動化](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) 。
+3.  **デプロイ**: `npx @capgo/cli deploy`などのコマンドを使用して[アップデートを自動化](https://capgo.app/docs/live-updates/update-behavior/) 。
 4.  **テスト**: 本番環境前にテストチャンネル（ベータ、ステージングなど）にデプロイ。
 
 **ワークフロー例（YAML）**:

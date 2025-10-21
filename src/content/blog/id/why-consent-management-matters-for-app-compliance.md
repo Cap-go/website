@@ -60,7 +60,7 @@ Tantangan bertambah ketika aplikasi harus mengikuti aturan dari berbagai wilayah
 
 ### Penalti Ketidakpatuhan
 
-Kegagalan memenuhi standar privasi dapat menyebabkan denda besar dan masalah hukum. Bahkan kesalahan kecil dalam menangani persetujuan bisa mengakibatkan tindakan regulasi. Ini membuat penting untuk mengeluarkan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) dengan cepat agar tetap patuh.
+Kegagalan memenuhi standar privasi dapat menyebabkan denda besar dan masalah hukum. Bahkan kesalahan kecil dalam menangani persetujuan bisa mengakibatkan tindakan regulasi. Ini membuat penting untuk mengeluarkan [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) dengan cepat agar tetap patuh.
 
 ### Masalah Manajemen Pembaruan
 

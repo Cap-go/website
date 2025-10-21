@@ -193,7 +193,7 @@ Hier ist eine Übersicht über die aktuellen Wahlmöglichkeiten:
 
 | Plugin | Status | Hauptstärken | Am besten für |
 | --- | --- | --- | --- |
-| Capgo | Aktiv | End-to-End-Verschlüsselung, schnelle Updates | Teams, die sich auf [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) konzentrieren |
+| Capgo | Aktiv | End-to-End-Verschlüsselung, schnelle Updates | Teams, die sich auf [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) konzentrieren |
 | Capawesome | Aktiv (seit 2024) | Fokussierung auf den deutschen Markt, wettbewerbsfähige Preise | Projekte, die auf Europa abzielen |
 | Appflow | Abwicklung (2026) | Unternehmensfunktionen | Übergang von Legacy-Systemen |
 | CodePush | Eingestellt (2024) | Ehemals kostenlose Option | N/A |

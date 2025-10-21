@@ -34,7 +34,7 @@ Delta update membuat pembaruan aplikasi lebih cepat dan lebih kecil dengan hanya
 -   **Alat Otomatis**: Bekerja dengan sistem CI/CD seperti [GitHub Actions](https://docs.github.com/actions) dan [Jenkins](https://www.jenkins.io/).
 -   **Metrik Kinerja**: Melacak tingkat keberhasilan pembaruan, kecepatan unduhan, dan keterlibatan pengguna.
 
-Delta update sangat ideal untuk aplikasi [Capacitor](https://capacitorjs.com/), memungkinkan perbaikan bug cepat, peluncuran fitur, dan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) sambil menghemat bandwidth dan waktu.
+Delta update sangat ideal untuk aplikasi [Capacitor](https://capacitorjs.com/), memungkinkan perbaikan bug cepat, peluncuran fitur, dan [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) sambil menghemat bandwidth dan waktu.
 
 ## Cara Mendapatkan FPS LEBIH TINGGI dan Performa Lebih Baik di Warzone ...
 

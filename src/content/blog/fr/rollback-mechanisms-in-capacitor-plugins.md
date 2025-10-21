@@ -129,7 +129,7 @@ Capgo a émergé comme une solution de gestion des retours en arrière solide ap
 | Fonctionnalité | Avantage | Performance |
 | --- | --- | --- |
 | **Retour en arrière en un clic** | Revenez rapidement à n'importe quelle version | Temps de téléchargement du paquet moyen de 114 ms |
-| **Cryptage de bout en bout** | [Mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Temps de réponse API de 434 ms |
+| **Cryptage de bout en bout** | [Mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) | Temps de réponse API de 434 ms |
 | **[Système de canaux](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Distribuez des mises à jour bêta à des groupes spécifiques | 23,5 millions de mises à jour livrées |
 | **Tableau de bord d'analyses** | Suivi des mises à jour en temps réel | 750 applications de production servies |
 

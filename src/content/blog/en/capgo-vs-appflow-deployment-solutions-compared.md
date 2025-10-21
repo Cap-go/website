@@ -51,7 +51,7 @@ When it comes to security, Capgo and Appflow take different approaches. Capgo us
 
 | Security Feature | Capgo | Appflow |
 | --- | --- | --- |
-| [Update Protection](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | End-to-end encryption | Update signing |
+| [Update Protection](https://capgo.app/docs/live-updates/update-behavior/) | End-to-end encryption | Update signing |
 | Hosting Options | Cloud or self-hosted | SaaS only |
 | Source Code Access | 100% open-source | Proprietary |
 | Store Compliance | Full compliance | Full compliance |

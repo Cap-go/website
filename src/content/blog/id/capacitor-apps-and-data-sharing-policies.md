@@ -27,7 +27,7 @@ next_blog: ''
     -   Gunakan **enkripsi end-to-end** untuk keamanan data.
     -   Jelaskan dengan jelas data apa yang dikumpulkan dan mengapa.
     -   Biarkan pengguna mengontrol dan mengelola data mereka dengan mudah.
--   **Tools Seperti [Capgo](https://capgo.app/) Membantu**: Capgo menyederhanakan kepatuhan dengan fitur seperti [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), pelacakan kesalahan real-time, dan manajemen izin.
+-   **Tools Seperti [Capgo](https://capgo.app/) Membantu**: Capgo menyederhanakan kepatuhan dengan fitur seperti [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/), pelacakan kesalahan real-time, dan manajemen izin.
 
 ### Ringkasan Cepat Aturan Platform
 

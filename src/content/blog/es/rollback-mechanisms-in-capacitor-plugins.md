@@ -130,7 +130,7 @@ Capgo apareció como una fuerte solución de gestión de retrocesos tras el cier
 | Característica | Ventaja | Rendimiento |
 | --- | --- | --- |
 | **Retroceso con un Clic** | Vuelve rápidamente a cualquier versión | 114ms de descarga promedio del paquete |
-| **Cifrado de Extremo a Extremo** | [Actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 57ms de tiempo de respuesta de la API |
+| **Cifrado de Extremo a Extremo** | [Actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) | 57ms de tiempo de respuesta de la API |
 | **[Sistema de Canales](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | Distribuir actualizaciones beta a grupos específicos | 23.5M de actualizaciones entregadas |
 | **Tablero de Analíticas** | Rastrear actualizaciones en tiempo real | 750 aplicaciones de producción servidas |
 

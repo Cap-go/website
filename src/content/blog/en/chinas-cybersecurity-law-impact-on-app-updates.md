@@ -154,7 +154,7 @@ For example, **Capgo's platform** simplifies compliance tracking by automating r
 
 Given the fast pace of app updates under strict cybersecurity rules, regular security checks are a must. External audits and vulnerability assessments can identify potential gaps early, helping teams address issues before they escalate. Aim for quarterly audits to examine encryption methods, data storage policies, and update deployment processes.
 
-In addition, conduct weekly internal reviews to confirm compliance in areas such as data residency, [encryption updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), access controls, deployment logs, and user data protection. Keeping detailed records of these checks is crucial to avoid hefty penalties for non-compliance.
+In addition, conduct weekly internal reviews to confirm compliance in areas such as data residency, [encryption updates](https://capgo.app/docs/live-updates/update-behavior/), access controls, deployment logs, and user data protection. Keeping detailed records of these checks is crucial to avoid hefty penalties for non-compliance.
 
 > "Avoiding review for bugfix is golden." - Bessie Cooper [\[2\]](https://capgo.app)
 

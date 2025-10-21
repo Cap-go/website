@@ -144,7 +144,7 @@ Dalam produksi, prioritas bergeser ke menerapkan protokol keamanan lanjutan yang
 | --- | --- | --- |
 | Keamanan Pembaruan | Gunakan enkripsi end-to-end | Memastikan pembaruan hanya dapat diakses oleh pengguna yang berwenang |
 | Kontrol Akses | Pengaturan izin yang terperinci | Membatasi akses berdasarkan peran tim |
-| Otomasi Deployment | Pipeline CI/CD terintegrasi | Memungkinkan [pembaruan otomatis](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) yang aman |
+| Otomasi Deployment | Pipeline CI/CD terintegrasi | Memungkinkan [pembaruan otomatis](https://capgo.app/docs/live-updates/update-behavior/) yang aman |
 | Kepatuhan | Memenuhi standar Apple dan Google | Memastikan persetujuan app store |
 
 Pengaturan produksi juga melibatkan kebijakan khusus organisasi, dikelola melalui kontrol akses terpadu. Tim dapat membuat beberapa organisasi dengan izin pengguna yang disesuaikan dan berintegrasi dengan alat CI/CD seperti GitHub, GitLab, dan Azure DevOps untuk deployment yang aman dan mulus.

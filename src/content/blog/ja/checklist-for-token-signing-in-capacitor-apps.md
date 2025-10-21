@@ -37,7 +37,7 @@ next_blog: ''
 
 **ライブアップデート：**
 
--   署名付きトークンを使用して[アップデートを保護](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   署名付きトークンを使用して[アップデートを保護](https://capgo.app/docs/live-updates/update-behavior/)
 -   危険なアップデートに対するロールバックオプションを有効化
 -   ユーザーエンゲージメントとアップデート成功率を監視
 

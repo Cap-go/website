@@ -18,7 +18,7 @@ published: true
 locale: it
 next_blog: ''
 ---
-Il debug degli aggiornamenti Over-the-Air (OTA) nelle app [Capacitor](https://capacitorjs.com/) può essere complesso, ma gli strumenti giusti fanno una grande differenza. Che tu stia gestendo conflitti di versione, garantendo [aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), o facendo debug su diverse piattaforme, ecco tre strumenti da considerare:
+Il debug degli aggiornamenti Over-the-Air (OTA) nelle app [Capacitor](https://capacitorjs.com/) può essere complesso, ma gli strumenti giusti fanno una grande differenza. Che tu stia gestendo conflitti di versione, garantendo [aggiornamenti sicuri](https://capgo.app/docs/live-updates/update-behavior/), o facendo debug su diverse piattaforme, ecco tre strumenti da considerare:
 
 -   **[Capgo](https://capgo.app/)**: Aggiornamenti OTA sicuri con crittografia end-to-end, integrazione CI/CD e distribuzioni specifiche per utente. Parte da 12$/mese.
 -   **@capawesome/capacitor-live-update**: Un plugin gratuito e semplice per la [gestione base degli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/manual-update/) OTA con rollback automatico.

@@ -141,7 +141,7 @@ Capacitor OTAアップデートは、低スペックデバイスのパフォー�
 
 ### 今後の開発
 
-低スペックデバイス向けのOTAアップデートは進化し続けています。パフォーマンスに影響を与えることなく[安全なアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を確保する**エンドツーエンド暗号化**と、[GitHub Actions](https://docs.github.com/actions)や[GitLab CI](https://docs.gitlab.com/ee/ci/)のようなCI/CDプラットフォームとの統合によりデプロイメントが簡素化され、プロセスはさらにスムーズになっています[\[1\]](https://capgo.app/) 。コストも大きな要因です：[AppFlow](https://ionic.io/appflow/)が年間6,000ドルかかるのに対し、CapgoのCI/CDセットアップは月額約300ドルです[\[1\]](https://capgo.app/) 。NASAの[OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx)チームが指摘したように：
+低スペックデバイス向けのOTAアップデートは進化し続けています。パフォーマンスに影響を与えることなく[安全なアップデート](https://capgo.app/docs/live-updates/update-behavior/) を確保する**エンドツーエンド暗号化**と、[GitHub Actions](https://docs.github.com/actions)や[GitLab CI](https://docs.gitlab.com/ee/ci/)のようなCI/CDプラットフォームとの統合によりデプロイメントが簡素化され、プロセスはさらにスムーズになっています[\[1\]](https://capgo.app/) 。コストも大きな要因です：[AppFlow](https://ionic.io/appflow/)が年間6,000ドルかかるのに対し、CapgoのCI/CDセットアップは月額約300ドルです[\[1\]](https://capgo.app/) 。NASAの[OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx)チームが指摘したように：
 
 > "@Capgoはホットコードプッシュを行うスマートな方法です（@AppFlowのように世界中のお金を必要としません）"
 

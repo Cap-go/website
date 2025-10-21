@@ -155,7 +155,7 @@ These practices help meet both App Store requirements and version control standa
 
 Apple App Store and Google Play Store have strict requirements for OTA updates. Make sure your updates align with platform guidelines, such as restrictions on altering binaries or core app functions, while adhering to their security standards.
 
-Understanding these rules is essential for ensuring compliance and maintaining a [smooth update process](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+Understanding these rules is essential for ensuring compliance and maintaining a [smooth update process](https://capgo.app/docs/live-updates/update-behavior/).
 
 ### Version Management
 

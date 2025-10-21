@@ -60,7 +60,7 @@ Die Herausforderung wächst, wenn Apps Regeln aus mehreren Regionen folgen müss
 
 ### Compliance-Strafen
 
-Nichteinhaltung von Datenschutzstandards kann zu hohen Geldstrafen und rechtlichen Problemen führen. Selbst kleine Fehler bei der Einwilligungsverwaltung könnten behördliche Maßnahmen nach sich ziehen. Dies macht es essenziell, [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) schnell auszurollen, um compliant zu bleiben.
+Nichteinhaltung von Datenschutzstandards kann zu hohen Geldstrafen und rechtlichen Problemen führen. Selbst kleine Fehler bei der Einwilligungsverwaltung könnten behördliche Maßnahmen nach sich ziehen. Dies macht es essenziell, [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) schnell auszurollen, um compliant zu bleiben.
 
 ### Probleme beim Update-Management
 
@@ -188,7 +188,7 @@ Die effektive Verwaltung von Einwilligungen erfordert zuverlässige Tools und ei
 
 Hier sind die Prioritäten, die Sie setzen sollten:
 
-1. **[Automatische Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Entscheiden Sie sich für eine Plattform, die schnelle Bereitstellung ermöglicht. Capgo erreicht beispielsweise eine Benutzer-Update-Rate von 95% innerhalb von 24 Stunden [\[1\]](https://capgo.app/) und stellt sicher, dass Compliance-Anpassungen zeitnah vorgenommen werden.
+1. **[Automatische Updates](https://capgo.app/docs/live-updates/update-behavior/)**: Entscheiden Sie sich für eine Plattform, die schnelle Bereitstellung ermöglicht. Capgo erreicht beispielsweise eine Benutzer-Update-Rate von 95% innerhalb von 24 Stunden [\[1\]](https://capgo.app/) und stellt sicher, dass Compliance-Anpassungen zeitnah vorgenommen werden.
 2. **Sichere Datenverarbeitung gewährleisten**: Schützen Sie Einwilligungsaktualisierungen mit Ende-zu-Ende-Verschlüsselung, um Datenschutzvorschriften einzuhalten.
 3. **Update-Leistung überwachen**: Nutzen Sie Analysen, um die Wirksamkeit von Updates zu bewerten. Top-Plattformen halten konstant hohe Erfolgsraten aufrecht [\[1\]](https://capgo.app/).
 

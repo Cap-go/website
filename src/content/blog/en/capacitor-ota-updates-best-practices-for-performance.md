@@ -24,7 +24,7 @@ OTA (Over-the-Air) updates allow [Capacitor](https://capacitorjs.com/) apps to u
     
 -   **Incremental Updates**: Break updates into smaller steps, schedule them during idle times, and use A/B systems for seamless rollbacks.
     
--   [**Secure Updates**](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/): Protect files with encryption, checksums, and code signing to ensure integrity.
+-   [**Secure Updates**](https://capgo.app/docs/live-updates/update-behavior/): Protect files with encryption, checksums, and code signing to ensure integrity.
     
 -   **Testing & Compliance**: Test updates thoroughly and follow app store guidelines to avoid approval issues.
     

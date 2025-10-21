@@ -189,7 +189,7 @@ Audit ini, dipadukan dengan alat manajemen privasi, membantu pengembang bertinda
 
 ### Alat Manajemen Privasi
 
-Untuk menangani tantangan kepatuhan secara efisien, pengembang bergantung pada alat untuk pembaruan cepat dan [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). Capgo adalah contoh utama, yang telah mengirimkan lebih dari 947,6 juta [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) secara global [\[1\]](https://capgo.app/).
+Untuk menangani tantangan kepatuhan secara efisien, pengembang bergantung pada alat untuk pembaruan cepat dan [secure updates](https://capgo.app/docs/live-updates/update-behavior/). Capgo adalah contoh utama, yang telah mengirimkan lebih dari 947,6 juta [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) secara global [\[1\]](https://capgo.app/).
 
 | Fitur | Manfaat Privasi | Dampak Implementasi |
 | --- | --- | --- |

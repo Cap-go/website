@@ -26,7 +26,7 @@ Le marquage des versions est essentiel pour la gestion des applications [Capacit
 -   **Pourquoi c'est important** : Suit les mises à jour, permet les rollbacks et assure des déploiements stables.
 -   **Versionnage sémantique** : Utilise **MAJEUR.MINEUR.CORRECTIF** pour indiquer les changements majeurs, nouvelles fonctionnalités ou corrections de bugs.
 -   **Synchronisation entre plateformes** : Alignez les numéros de version dans `package.json`, `Info.plist` iOS et `build.gradle` Android.
--   **Automatisation** : [Automatisez les mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) avec des scripts npm et des outils CI/CD.
+-   **Automatisation** : [Automatisez les mises à jour](https://capgo.app/docs/live-updates/update-behavior/) avec des scripts npm et des outils CI/CD.
 -   **Mises à jour en direct** : Des outils comme [Capgo](https://capgo.app/) délivrent des mises à jour à 95% des utilisateurs en 24 heures.
 -   **Gestion des bêtas** : Utilisez des canaux structurés pour les versions alpha, bêta et production.
 

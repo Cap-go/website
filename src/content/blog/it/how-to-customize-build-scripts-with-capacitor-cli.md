@@ -35,7 +35,7 @@ next_blog: ''
 -   **Hook di build**: Esegui codice durante specifiche fasi del processo di build.
 -   **Variabili d'ambiente**: Semplifica le build specifiche per ambiente con file `.env`.
 
-[Capgo](https://capgo.app/), uno strumento di deployment, migliora questo processo con [aggiornamenti automatizzati](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), tracciamento delle versioni e ottimizzazione delle performance globali. Continua a leggere per imparare come configurare e personalizzare i tuoi script di build per la massima efficienza.
+[Capgo](https://capgo.app/), uno strumento di deployment, migliora questo processo con [aggiornamenti automatizzati](https://capgo.app/docs/live-updates/update-behavior/), tracciamento delle versioni e ottimizzazione delle performance globali. Continua a leggere per imparare come configurare e personalizzare i tuoi script di build per la massima efficienza.
 
 ## Introduzione a [Capacitor](https://capacitorjs.com/) Configure
 

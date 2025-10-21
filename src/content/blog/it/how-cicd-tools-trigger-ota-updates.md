@@ -173,7 +173,7 @@ Gli aggiornamenti graduali ti permettono di controllare come vengono distribuiti
 
 ### Trigger di aggiornamento basati su metriche
 
-[Automatizzare gli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) basandosi su metriche di performance può far risparmiare tempo e prevenire problemi. Configurando webhook di monitoraggio, puoi tracciare metriche importanti e decidere se continuare o mettere in pausa un aggiornamento:
+[Automatizzare gli aggiornamenti](https://capgo.app/docs/live-updates/update-behavior/) basandosi su metriche di performance può far risparmiare tempo e prevenire problemi. Configurando webhook di monitoraggio, puoi tracciare metriche importanti e decidere se continuare o mettere in pausa un aggiornamento:
 
 | Tipo di metrica | Soglia | Azione |
 | --- | --- | --- |

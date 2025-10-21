@@ -188,7 +188,7 @@ Here’s a breakdown of the current choices:
 
 | Plugin | Status | Key Strengths | Best For |
 | --- | --- | --- | --- |
-| Capgo | Active | End-to-end encryption, fast updates | Teams focused on [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Capgo | Active | End-to-end encryption, fast updates | Teams focused on [secure updates](https://capgo.app/docs/live-updates/update-behavior/) |
 | Capawesome | Active (Since 2024) | German market focus, competitive pricing | Projects targeting Europe |
 | Appflow | Sunsetting (2026) | Enterprise-grade features | Transitioning legacy systems |
 | CodePush | Discontinued (2024) | Previously free option | N/A |

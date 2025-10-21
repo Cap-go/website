@@ -39,7 +39,7 @@ Konflik versi selama live update sering muncul dari beberapa skenario utama:
 
 -   **Peluncuran Bertahap**: Peluncuran bertahap dapat menyebabkan beberapa versi aplikasi aktif secara bersamaan. Capgo mencatat bahwa meski 95% pengguna memperbarui dalam 24 jam, 5% sisanya dapat menyebabkan fragmentasi versi[\[1\]](https://capgo.app/).
     
--   **Update Gagal**: Dengan tingkat keberhasilan update 82%, sekitar 18% [percobaan update](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) gagal, membuat beberapa pengguna terjebak di versi lama[\[1\]](https://capgo.app/).
+-   **Update Gagal**: Dengan tingkat keberhasilan update 82%, sekitar 18% [percobaan update](https://capgo.app/docs/live-updates/update-behavior/) gagal, membuat beberapa pengguna terjebak di versi lama[\[1\]](https://capgo.app/).
     
 -   **Kanal Beta-Testing**: Mencampur pengujian beta dan peluncuran bertahap tanpa kontrol versi yang tepat dapat menciptakan konflik antara versi beta dan produksi[\[1\]](https://capgo.app/).
     

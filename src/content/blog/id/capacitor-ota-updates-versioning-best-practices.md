@@ -63,7 +63,7 @@ Pedoman Apple untuk kode yang diunduh patut dicatat:
 
 ### Implementasi Kontrol Versi
 
-Untuk mengelola pembaruan OTA Capacitor secara efektif, pengembang dapat menggunakan alat seperti `capacitor-set-version` dan `capacitor-sync-version-cli`. Alat-alat ini menyederhanakan pengelolaan versi dengan [mengotomatisasi pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) di berbagai platform.
+Untuk mengelola pembaruan OTA Capacitor secara efektif, pengembang dapat menggunakan alat seperti `capacitor-set-version` dan `capacitor-sync-version-cli`. Alat-alat ini menyederhanakan pengelolaan versi dengan [mengotomatisasi pembaruan](https://capgo.app/docs/live-updates/update-behavior/) di berbagai platform.
 
 Berikut cara memulai:
 

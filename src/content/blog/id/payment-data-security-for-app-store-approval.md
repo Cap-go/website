@@ -58,7 +58,7 @@ Berikut beberapa fitur utama platform Capgo:
 
 Pendekatan Capgo telah mencapai tingkat keberhasilan global 82% untuk deployment pembaruan. Bisnis dapat memilih hosting cloud aman atau self-hosting sesuai kebutuhan kepatuhan mereka.
 
-Dengan hanya mengunduh komponen yang berubah, Capgo meminimalkan risiko dan mengurangi penggunaan bandwidth. Sejauh ini, platform telah mengirimkan lebih dari 1,155 triliun [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/).
+Dengan hanya mengunduh komponen yang berubah, Capgo meminimalkan risiko dan mengurangi penggunaan bandwidth. Sejauh ini, platform telah mengirimkan lebih dari 1,155 triliun [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
 Selanjutnya, mari kita lihat bagaimana Capawesome menangani keamanan data pembayaran.
 

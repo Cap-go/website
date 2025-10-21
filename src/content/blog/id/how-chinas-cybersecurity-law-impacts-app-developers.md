@@ -28,7 +28,7 @@ next_blog: ''
 -   **Evaluasi Wajib**: Aplikasi harus lulus ulasan keamanan teknis, evaluasi dampak perlindungan data, dan pemeriksaan keamanan jaringan.
 -   **Konsekuensi Ketidakpatuhan**: Denda, penghapusan aplikasi, penangguhan layanan, dan kerusakan reputasi.
 
-Untuk tetap patuh, pengembang sebaiknya menggunakan alat untuk enkripsi, pemantauan waktu nyata, dan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). Kegagalan dalam mematuhi dapat mengakibatkan hukuman berat, jadi persiapan awal sangat penting untuk sukses di pasar China.
+Untuk tetap patuh, pengembang sebaiknya menggunakan alat untuk enkripsi, pemantauan waktu nyata, dan [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/). Kegagalan dalam mematuhi dapat mengakibatkan hukuman berat, jadi persiapan awal sangat penting untuk sukses di pasar China.
 
 ## Dasar-Dasar [Undang-Undang Keamanan Siber China](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China)
 

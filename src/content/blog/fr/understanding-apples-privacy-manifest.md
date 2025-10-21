@@ -100,7 +100,7 @@ S'appuyer sur les [mises à jour manuelles](https://capgo.app/docs/plugin/cloud-
 
 Voici une comparaison rapide des méthodes de mise à jour manuelles et automatisées :
 
--   **Vitesse de livraison** : Les mises à jour manuelles peuvent prendre des jours ou des semaines, tandis que les [mises à jour automatisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) atteignent 95% des utilisateurs en 24 heures [\[1\]](https://capgo.app/)
+-   **Vitesse de livraison** : Les mises à jour manuelles peuvent prendre des jours ou des semaines, tandis que les [mises à jour automatisées](https://capgo.app/docs/live-updates/update-behavior/) atteignent 95% des utilisateurs en 24 heures [\[1\]](https://capgo.app/)
 -   **Suivi du succès** : Les méthodes manuelles varient, mais les mises à jour automatisées atteignent un taux de réussite de 82% dans le monde [\[1\]](https://capgo.app/)
 -   **Options de retour en arrière** : Les mises à jour manuelles offrent une récupération limitée, tandis que les mises à jour automatisées permettent des retours immédiats
 -   **Surveillance** : Les vérifications manuelles prennent du temps, tandis que les outils automatisés fournissent des analyses en temps réel [\[1\]](https://capgo.app/)

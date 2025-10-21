@@ -42,7 +42,7 @@ Both Apple’s App Store and [Google Play Store](https://developer.android.com/d
 
 ### US Laws and Guidelines
 
-In the US, regulations require transparent update notifications, clear explanations of [update purposes](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), and secure handling of user data. Developers must design consent processes that reflect these principles. Tools like Capgo help developers strike the right balance between compliance and user experience, keeping users informed and their data protected during updates.
+In the US, regulations require transparent update notifications, clear explanations of [update purposes](https://capgo.app/docs/live-updates/update-behavior/), and secure handling of user data. Developers must design consent processes that reflect these principles. Tools like Capgo help developers strike the right balance between compliance and user experience, keeping users informed and their data protected during updates.
 
 ## User Consent Design Guidelines
 

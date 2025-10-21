@@ -176,7 +176,7 @@ Las actualizaciones por etapas te permiten controlar cómo se implementan las ac
 
 ### Activadores de Actualización Basados en Métricas
 
-[Automatizar actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) basadas en métricas de rendimiento puede ahorrar tiempo y prevenir problemas. Al configurar webhooks de monitoreo, puedes rastrear métricas importantes y decidir si continuar o pausar una actualización:
+[Automatizar actualizaciones](https://capgo.app/docs/live-updates/update-behavior/) basadas en métricas de rendimiento puede ahorrar tiempo y prevenir problemas. Al configurar webhooks de monitoreo, puedes rastrear métricas importantes y decidir si continuar o pausar una actualización:
 
 | Tipo de Métrica | Umbral | Acción |
 | --- | --- | --- |

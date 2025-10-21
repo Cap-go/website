@@ -185,7 +185,7 @@ The benefits of secure OTA updates go beyond just security. Developers have succ
 
 Here are some key factors that contribute to successful OTA updates:
 
-| Success Factor | Role in [Secure Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Success Factor | Role in [Secure Updates](https://capgo.app/docs/live-updates/update-behavior/) |
 | --- | --- |
 | [Encryption Implementation](https://capgo.app/docs/cli/migrations/encryption/) | Ensures only authorized users can decrypt updates |
 | Distribution Strategy | Manages controlled, staged rollouts |

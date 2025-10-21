@@ -257,7 +257,7 @@ Capgo stärkt die Sicherheit von Apps, indem es sichere Speicher- und Transportm
 
 ### Capgo Sicherheitsarchitektur
 
-Das System von Capgo hat erfolgreich über 23,5 Millionen [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) an 750 Produktionsanwendungen geliefert [\[1\]](https://capgo.app/). Es verwendet **End-to-End-Verschlüsselung**, die sicherstellt, dass nur autorisierte Benutzer Updates entschlüsseln können. Hier ist ein Blick auf seine Sicherheitskonzeption:
+Das System von Capgo hat erfolgreich über 23,5 Millionen [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) an 750 Produktionsanwendungen geliefert [\[1\]](https://capgo.app/). Es verwendet **End-to-End-Verschlüsselung**, die sicherstellt, dass nur autorisierte Benutzer Updates entschlüsseln können. Hier ist ein Blick auf seine Sicherheitskonzeption:
 
 ```javascript
 const capgoSecurity = {

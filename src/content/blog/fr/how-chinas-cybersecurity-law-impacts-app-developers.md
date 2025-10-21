@@ -32,7 +32,7 @@ next_blog: ''
 -   **Évaluations obligatoires** : Les applications doivent passer des examens de sécurité technique, des évaluations d'impact sur la protection des données et des contrôles de sécurité réseau.
 -   **Conséquences du non-respect** : Amendes, suppressions d'applications, suspensions de service et atteinte à la réputation.
 
-Pour rester conforme, les développeurs doivent utiliser des outils de chiffrement, de surveillance en temps réel et de [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). Le non-respect peut entraîner de graves sanctions, donc une préparation précoce est essentielle pour réussir sur le marché chinois.
+Pour rester conforme, les développeurs doivent utiliser des outils de chiffrement, de surveillance en temps réel et de [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/). Le non-respect peut entraîner de graves sanctions, donc une préparation précoce est essentielle pour réussir sur le marché chinois.
 
 ## [La loi sur la cybersécurité de la Chine](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) - Les bases
 

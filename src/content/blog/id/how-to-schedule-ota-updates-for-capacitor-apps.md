@@ -49,7 +49,7 @@ npx @capgo/cli init
 
 Perintah ini menyiapkan komponen yang diperlukan untuk pembaruan OTA, termasuk:
 
--   **Enkripsi end-to-end** untuk memastikan [pembaruan yang aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   **Enkripsi end-to-end** untuk memastikan [pembaruan yang aman](https://capgo.app/docs/live-updates/update-behavior/)
     
 -   **Kontrol versi** untuk mengelola peluncuran pembaruan
     

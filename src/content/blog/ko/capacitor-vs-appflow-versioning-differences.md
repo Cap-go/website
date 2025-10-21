@@ -128,7 +128,7 @@ Capgo는 비용을 크게 들이지 않고 버전 관리를 간소화하려는 �
 
 -   **Capgo** (2022년 출시): 활성, 월 12달러부터, 실시간 업데이트 지원
 -   **Capawesome** (2024년 출시): 활성, 유사한 가격대, 더 적은 업데이트 옵션
--   **Appflow**: 2026년 종료 예정, 연간 6,000달러 [\[1\]](https://capgo.app/), [자동화된 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) 제공
+-   **Appflow**: 2026년 종료 예정, 연간 6,000달러 [\[1\]](https://capgo.app/), [자동화된 업데이트](https://capgo.app/docs/live-updates/update-behavior/) 제공
 
 이러한 도구들은 2024년 CodePush 종료와 2026년 Appflow 종료로 인한 공백을 채우고 있습니다.
 

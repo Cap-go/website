@@ -47,7 +47,7 @@ npx @capgo/cli init
 
 Questo comando configura i componenti necessari per gli aggiornamenti OTA, tra cui:
 
--   **Crittografia end-to-end** per garantire [aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   **Crittografia end-to-end** per garantire [aggiornamenti sicuri](https://capgo.app/docs/live-updates/update-behavior/)
     
 -   **Controllo versione** per gestire il rilascio degli aggiornamenti
     

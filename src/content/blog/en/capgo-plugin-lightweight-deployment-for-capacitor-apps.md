@@ -299,7 +299,7 @@ Another advantage of the system is its support for **quick rollbacks**, allowing
 
 To make updates faster and keep their size manageable with Capgo, developers can focus on a few practical techniques:
 
--   **Leverage differential updates**: Instead of re-sending the entire app, only send the parts that have changed. This approach drastically cuts down the [update size](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   **Leverage differential updates**: Instead of re-sending the entire app, only send the parts that have changed. This approach drastically cuts down the [update size](https://capgo.app/docs/live-updates/update-behavior/).
 -   **Use effective compression**: Implement compression methods like _[ZSTD](https://en.wikipedia.org/wiki/Zstd)_ to shrink update files even further.
 -   **Structure your code thoughtfully**: Divide your code into smaller, modular pieces to speed up and streamline the update process.
 

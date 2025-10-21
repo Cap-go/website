@@ -358,7 +358,7 @@ Capgo는 Capacitor 워크플로우에 원활하게 통합되어 안전하고 지
 | **사전 통합** | 플러그인 호환성 및 사용자 리뷰 조사 | 잠재적 문제 조기 식별 |
 | **설치** | npm을 사용한 플러그인 설치 및 Capacitor 동기화 실행 | 플랫폼 간 원활한 통합 보장 |
 | **구성** | 플랫폼별 설정 요구사항 처리 | 플러그인 성능 최적화 |
-| **유지보수** | Capgo를 사용한 [자동 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 24시간 내 95% 사용자 업데이트[\[1\]](https://capgo.app/) |
+| **유지보수** | Capgo를 사용한 [자동 업데이트](https://capgo.app/docs/live-updates/update-behavior/) | 24시간 내 95% 사용자 업데이트[\[1\]](https://capgo.app/) |
 
 Capgo는 업데이트를 간소화하는 도구를 제공합니다. Rodrigo Mantica는 그 중요성을 강조합니다:
 

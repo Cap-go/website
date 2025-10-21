@@ -106,7 +106,7 @@ npx @capgo/cli@latest init YOUR_API_KEY
 
 ### Versionskontroll-Integration
 
-Capgo arbeitet gut mit CI/CD-Plattformen zusammen und macht [automatisierte Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) einfach. Unterstützte Plattformen sind:
+Capgo arbeitet gut mit CI/CD-Plattformen zusammen und macht [automatisierte Updates](https://capgo.app/docs/live-updates/update-behavior/) einfach. Unterstützte Plattformen sind:
 
 -   [GitHub Actions](https://docs.github.com/actions)
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)

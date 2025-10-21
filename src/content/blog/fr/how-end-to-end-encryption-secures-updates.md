@@ -188,7 +188,7 @@ Les avantages des mises à jour OTA sécurisées vont au-delà de la simple séc
 
 Voici quelques facteurs clés qui contribuent au succès des mises à jour OTA :
 
-| Facteur de réussite | Rôle dans les [Mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Facteur de réussite | Rôle dans les [Mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) |
 | --- | --- |
 | [Implémentation du chiffrement](https://capgo.app/docs/cli/migrations/encryption/) | Garantit que seuls les utilisateurs autorisés peuvent déchiffrer les mises à jour |
 | Stratégie de distribution | Gère les déploiements contrôlés et échelonnés |

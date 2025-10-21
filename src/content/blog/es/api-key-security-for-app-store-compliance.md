@@ -257,7 +257,7 @@ Capgo refuerza la seguridad de la aplicación combinando métodos de almacenamie
 
 ### Arquitectura de Seguridad de Capgo
 
-El sistema de Capgo ha entregado con éxito más de 23.5 millones de [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) a 750 aplicaciones en producción [\[1\]](https://capgo.app/). Utiliza **cifrado de extremo a extremo**, asegurando que solo los usuarios autorizados puedan descifrar las actualizaciones. Aquí hay una mirada a su configuración de seguridad:
+El sistema de Capgo ha entregado con éxito más de 23.5 millones de [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) a 750 aplicaciones en producción [\[1\]](https://capgo.app/). Utiliza **cifrado de extremo a extremo**, asegurando que solo los usuarios autorizados puedan descifrar las actualizaciones. Aquí hay una mirada a su configuración de seguridad:
 
 ```javascript
 const capgoSecurity = {

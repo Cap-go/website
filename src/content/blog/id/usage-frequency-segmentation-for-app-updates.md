@@ -72,7 +72,7 @@ Segmentasi ini memungkinkan pendekatan yang lebih disesuaikan untuk meningkatkan
 Dengan pengguna Anda terkelompok, Anda dapat merancang [strategi pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) yang memenuhi kebutuhan spesifik mereka. Berikut adalah cara mendekati setiap segmen:
 
 -   **Pengguna Aktif**: Buat saluran beta di mana mereka dapat menguji fitur baru dan memberikan umpan balik sebelum rilis penuh.
--   **Pengguna Reguler**: Gunakan peluncuran bertahap untuk memastikan stabilitas. [Pembaruan sebagian](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) dapat mengurangi tuntutan bandwidth dan mempercepat unduhan.
+-   **Pengguna Reguler**: Gunakan peluncuran bertahap untuk memastikan stabilitas. [Pembaruan sebagian](https://capgo.app/docs/live-updates/update-behavior/) dapat mengurangi tuntutan bandwidth dan mempercepat unduhan.
 -   **Pengguna Tidak Aktif**: Fokus pada peningkatan fitur inti dan stabilitas. Menawarkan opsi rollback satu klik dapat mendorong pengguna ini untuk kembali berinteraksi.
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Penargetan Pengguna
@@ -85,7 +85,7 @@ Capgo menawarkan alat yang membuat penargetan pembaruan ke kelompok pengguna ter
 
 Capgo membawa segmentasi pengguna ke level berikutnya dengan menetapkan pengguna ke saluran tertentu untuk peluncuran pembaruan yang disesuaikan. Sistem [saluran](https://capgo.app/docs/plugin/cloud-mode/channel-system/) ini memastikan pembaruan disampaikan dengan presisi:
 
-| **Segmen Pengguna** | **Tipe Saluran** | **[Strategi Pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** |
+| **Segmen Pengguna** | **Tipe Saluran** | **[Strategi Pembaruan](https://capgo.app/docs/live-updates/update-behavior/)** |
 | --- | --- | --- |
 | Pengguna Aktif | Saluran Beta | Akses awal ke fitur baru |
 | Pengguna Reguler | Saluran Produksi | Peluncuran bertahap yang fokus pada stabilitas |

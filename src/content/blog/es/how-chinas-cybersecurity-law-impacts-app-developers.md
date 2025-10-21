@@ -31,7 +31,7 @@ next_blog: ''
 -   **Evaluaciones Obligatorias**: Las aplicaciones deben pasar revisiones técnicas de seguridad, evaluaciones de impacto de protección de datos y verificaciones de seguridad de red.
 -   **Consecuencias del Incumplimiento**: Multas, eliminación de aplicaciones, suspensiones de servicio y daño reputacional.
 
-Para mantener el cumplimiento, los desarrolladores deben usar herramientas para encriptación, monitoreo en tiempo real y [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). No cumplir puede llevar a penalizaciones severas, por lo que la preparación temprana es clave para el éxito en el mercado chino.
+Para mantener el cumplimiento, los desarrolladores deben usar herramientas para encriptación, monitoreo en tiempo real y [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/). No cumplir puede llevar a penalizaciones severas, por lo que la preparación temprana es clave para el éxito en el mercado chino.
 
 ## [Ley de Ciberseguridad de China](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) Conceptos Básicos
 

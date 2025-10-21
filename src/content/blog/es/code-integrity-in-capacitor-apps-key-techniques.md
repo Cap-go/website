@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Herramientas Principales:** Usa firmas digitales SHA-256, verificaciones en tiempo de ejecución y cifrado (AES-256) para proteger el código.
 -   **Características Específicas de Plataforma:** Para Android, integra la [Play Integrity API](https://developer.android.com/google/play/integrity) para verificación de aplicaciones y atestación de dispositivos. Para iOS, sigue la Directriz 3.1.2 de la App Store para actualizaciones OTA.
--   **Seguridad de Actualizaciones OTA:** Implementa cifrado de extremo a extremo, validación de suma de comprobación y seguimiento de cumplimiento para [asegurar actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   **Seguridad de Actualizaciones OTA:** Implementa cifrado de extremo a extremo, validación de suma de comprobación y seguimiento de cumplimiento para [asegurar actualizaciones](https://capgo.app/docs/live-updates/update-behavior/).
 -   **Herramientas Recomendadas:** Herramientas como [Capgo](https://capgo.app/) simplifican las actualizaciones OTA seguras con cifrado, control de versiones y monitoreo de cumplimiento.
 
 ### Comparación Rápida de Herramientas y Características Clave

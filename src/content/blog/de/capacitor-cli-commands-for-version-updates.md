@@ -331,7 +331,7 @@ Moderne Update-Tools bieten mehrere bemerkenswerte Vorteile:
 -   **Ein-Klick-Rollback** für schnelle Wiederherstellung im Falle von Problemen
 -   **Echtzeit-Analysen**, um die Update-Leistung und das Benutzerengagement zu überwachen
 
-Diese Funktionen bilden ein robustes Rahmenwerk zur effektiven Verwaltung von [Versionsupdates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+Diese Funktionen bilden ein robustes Rahmenwerk zur effektiven Verwaltung von [Versionsupdates](https://capgo.app/docs/live-updates/update-behavior/).
 
 Egal, ob Sie an einer kleinen App arbeiten oder ein größeres Deployment skalieren, die Kombination von Capacitor CLI mit fortgeschrittenen Update-Tools gewährleistet zuverlässige und effiziente Versionskontrolle in der heutigen schnelllebigen Entwicklungslandschaft.
 

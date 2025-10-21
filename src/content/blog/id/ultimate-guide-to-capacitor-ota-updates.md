@@ -243,7 +243,7 @@ Berikut ikhtisar praktik terbaik untuk pembaruan OTA:
 | Distribusi | Meminimalkan risiko | Mengeluarkan pembaruan menggunakan saluran yang ditargetkan |
 | Pemantauan | Memastikan keandalan | Melacak keberhasilan pembaruan dan tingkat adopsi |
 
-Praktik-praktik ini penting bagi platform seperti Capgo untuk memberikan [pembaruan yang cepat dan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+Praktik-praktik ini penting bagi platform seperti Capgo untuk memberikan [pembaruan yang cepat dan aman](https://capgo.app/docs/live-updates/update-behavior/).
 
 ### Fitur [Capgo](https://capgo.app/)
 

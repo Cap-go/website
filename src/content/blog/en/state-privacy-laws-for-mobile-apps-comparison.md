@@ -124,7 +124,7 @@ For those worried about vendor dependencies, Capgo’s open-source structure pro
 
 > "The only solution with true end-to-end encryption, others just sign updates" - Capgo [\[1\]](https://capgo.app/)
 
-Capgo’s effectiveness is clear: it’s trusted by 750 production apps, delivering 23.5M [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) so far [\[1\]](https://capgo.app/).
+Capgo’s effectiveness is clear: it’s trusted by 750 production apps, delivering 23.5M [secure updates](https://capgo.app/docs/live-updates/update-behavior/) so far [\[1\]](https://capgo.app/).
 
 Track updates in real time with analytics, error monitoring, and role-based access controls to simplify compliance across multiple states.
 

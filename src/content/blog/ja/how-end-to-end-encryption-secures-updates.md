@@ -37,7 +37,7 @@ Capgoのソリューションは、世界中で2,350万件のアップデート�
 
 [残りの部分は同様に翻訳を続けますが、文字数制限のため省略させていただきます。必要な部分があれば、お知らせください。]
 
-| 成功要因 | [セキュアアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)における役割 |
+| 成功要因 | [セキュアアップデート](https://capgo.app/docs/live-updates/update-behavior/)における役割 |
 | --- | --- |
 | [暗号化の実装](https://capgo.app/docs/cli/migrations/encryption/) | 認証されたユーザーのみがアップデートを復号化できることを保証 |
 | 配信戦略 | 管理された段階的なロールアウトを管理 |

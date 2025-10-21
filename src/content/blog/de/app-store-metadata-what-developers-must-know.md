@@ -191,7 +191,7 @@ Capgo vereinfacht die Verwaltung von [App-Updates](https://capgo.app/plugins/cap
 Das Update-System von Capgo ist so konzipiert, dass es den Regeln des App-Stores entspricht und gleichzeitig die Bereitstellung beschleunigt. Entwickler können Updates sofort mit Funktionen wie:
 
 -   **Teilupdates**: Lädt nur den modifizierten Inhalt herunter, spart Bandbreite und reduziert die Update-Größe.
--   **Ende-zu-Ende-Verschlüsselung**: Bietet [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) mit echter Verschlüsselung, nicht nur mit einfacher Signierung.
+-   **Ende-zu-Ende-Verschlüsselung**: Bietet [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) mit echter Verschlüsselung, nicht nur mit einfacher Signierung.
 -   **Kanalverteilung**: Ermöglicht gezielte Bereitstellungen für Beta-Tests oder spezifische Benutzergruppen.
 
 Das System erreicht eine globale Erfolgsquote von 82 %, liefert ein 5 MB-Bundle von seinem globalen CDN in nur 114 Millisekunden und stellt sicher, dass 95 % der aktiven Nutzer innerhalb von 24 Stunden Updates erhalten [\[1\]](https://capgo.app/).

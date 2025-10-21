@@ -21,7 +21,7 @@ Version tagging is essential for managing [Capacitor](https://capacitorjs.com/) 
 -   **Why It Matters**: Tracks updates, enables rollbacks, and ensures stable deployments.
 -   **Semantic Versioning**: Use **MAJOR.MINOR.PATCH** to indicate breaking changes, new features, or bug fixes.
 -   **Sync Across Platforms**: Align version numbers in `package.json`, iOS `Info.plist`, and Android `build.gradle`.
--   **Automation**: [Automate updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) with npm scripts and CI/CD tools.
+-   **Automation**: [Automate updates](https://capgo.app/docs/live-updates/update-behavior/) with npm scripts and CI/CD tools.
 -   **Live Updates**: Tools like [Capgo](https://capgo.app/) deliver updates to 95% of users within 24 hours.
 -   **Beta Management**: Use structured channels for alpha, beta, and production versions.
 

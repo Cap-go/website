@@ -161,7 +161,7 @@ Voici quelques pratiques essentielles de test :
 -   **Tests d'intégration** : Assurez-vous que vos scripts fonctionnent sans problème avec d'autres parties du système.
 -   **Tests de performance** : Mesurez les temps d'exécution et l'utilisation des ressources pour identifier les goulets d'étranglement.
 
-Une fois les tests en place, [l'automatisation des mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) porte la fiabilité des déploiements à un niveau supérieur.
+Une fois les tests en place, [l'automatisation des mises à jour](https://capgo.app/docs/live-updates/update-behavior/) porte la fiabilité des déploiements à un niveau supérieur.
 
 ### Automatisation des mises à jour
 

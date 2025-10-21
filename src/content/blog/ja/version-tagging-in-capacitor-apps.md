@@ -23,7 +23,7 @@ next_blog: ''
 -   **重要な理由**: 更新の追跡、ロールバックの有効化、安定したデプロイメントの確保。
 -   **セマンティックバージョニング**: **MAJOR.MINOR.PATCH**を使用して、破壊的変更、新機能、バグ修正を示します。
 -   **プラットフォーム間の同期**: `package.json`、iOS `Info.plist`、Android `build.gradle`のバージョン番号を揃えます。
--   **自動化**: npm scriptsとCI/CDツールで[更新を自動化](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)します。
+-   **自動化**: npm scriptsとCI/CDツールで[更新を自動化](https://capgo.app/docs/live-updates/update-behavior/)します。
 -   **ライブ更新**: [Capgo](https://capgo.app/)のようなツールで24時間以内に95%のユーザーに更新を配信。
 -   **ベータ管理**: アルファ、ベータ、本番バージョン用の構造化されたチャンネルを使用。
 

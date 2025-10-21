@@ -22,7 +22,7 @@ next_blog: ''
 
 - **OTA 업데이트란 무엇인가요?** 앱스토어 승인을 기다리지 않고 사용자에게 직접 앱 변경사항을 푸시할 수 있습니다. [Capgo](https://capgo.app/)와 같은 도구를 사용하면 24시간 이내에 95%의 업데이트 비율을 달성할 수 있습니다.
 - **보안이 중요한 이유는 무엇인가요?** 적절한 암호화와 키 관리가 없으면 업데이트는 변조, 중간자 공격 및 버전 스푸핑에 취약합니다.
-- **[업데이트를 안전하게 하는 방법](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**
+- **[업데이트를 안전하게 하는 방법](https://capgo.app/docs/live-updates/update-behavior/)**
     - 업데이트 패키지를 보호하기 위해 **종단간 암호화** 사용
     - [RSA-4096](https://en.wikipedia.org/wiki/RSA_\(cryptosystem\))나 [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)과 같은 알고리즘으로 강력한 키 생성
     - **[하드웨어 보안 모듈](https://en.wikipedia.org/wiki/Hardware_security_module) (HSMs)** 또는 암호화된 키 저장소를 사용하여 키를 안전하게 보관

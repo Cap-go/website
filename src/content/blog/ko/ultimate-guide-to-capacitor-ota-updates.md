@@ -228,7 +228,7 @@ OTA 업데이트에 대한 모범 사례 개요:
 | 배포 | 위험 최소화 | 대상 채널을 사용한 업데이트 출시 |
 | 모니터링 | 신뢰성 보장 | 업데이트 성공 및 채택률 추적 |
 
-이러한 사례들은 Capgo와 같은 플랫폼이 빠르고 [안전한 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 제공하는 데 필수적입니다.
+이러한 사례들은 Capgo와 같은 플랫폼이 빠르고 [안전한 업데이트](https://capgo.app/docs/live-updates/update-behavior/)를 제공하는 데 필수적입니다.
 
 ### [Capgo](https://capgo.app/) 기능
 

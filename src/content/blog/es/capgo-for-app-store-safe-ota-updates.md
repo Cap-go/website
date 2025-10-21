@@ -138,7 +138,7 @@ Elegir la estrategia de [actualización adecuada](https://capgo.app/docs/plugin/
 
 Aquí hay algunas estrategias que se basan en estos hallazgos:
 
--   **[Estrategia de Actualización Híbrida](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**  
+-   **[Estrategia de Actualización Híbrida](https://capgo.app/docs/live-updates/update-behavior/)**  
     Combina actualizaciones de la tienda de aplicaciones con actualizaciones OTA para reparaciones rápidas. Rodrigo Mantica enfatizó este enfoque:
     
     > "Practicamos desarrollo ágil y @Capgo es crítico para nuestra misión de entregar continuamente a nuestros usuarios!" [\[1\]](https://capgo.app/)

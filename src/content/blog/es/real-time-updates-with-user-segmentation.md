@@ -176,7 +176,7 @@ Aquí hay un desglose rápido de implementación:
 | Fase | Elementos de Acción | Resultado Esperado |
 | --- | --- | --- |
 | Configuración Inicial | Instalar el plugin de Capgo y configurarlo | Una base sólida para actualizaciones |
-| Segmentación | Definir canales de usuario y grupos objetivo | [Entrega organizada de actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Segmentación | Definir canales de usuario y grupos objetivo | [Entrega organizada de actualizaciones](https://capgo.app/docs/live-updates/update-behavior/) |
 | Despliegue | Usar la CLI para implementar actualizaciones y monitorear | Despliegue rápido y controlado |
 | Optimización | Analizar el rendimiento y ajustar la segmentación | Eficiencia mejorada |
 

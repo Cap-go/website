@@ -40,7 +40,7 @@ Token signing is essential for securing [Capacitor](https://capacitorjs.com/) ap
 
 **Live Updates:**
 
--   Use signed tokens to [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   Use signed tokens to [secure updates](https://capgo.app/docs/live-updates/update-behavior/).
 -   Enable rollback options for compromised updates.
 -   Monitor user engagement and update success rates.
 

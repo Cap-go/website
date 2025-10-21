@@ -68,7 +68,7 @@ Apples Richtlinien für heruntergeladenen Code sind beachtenswert:
 
 ### Implementierung der Versionskontrolle
 
-Für eine effektive Verwaltung von Capacitor OTA-Updates können Entwickler Tools wie `capacitor-set-version` und `capacitor-sync-version-cli` verwenden. Diese Tools vereinfachen die Versionsverwaltung durch [Automatisierung von Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) über alle Plattformen hinweg.
+Für eine effektive Verwaltung von Capacitor OTA-Updates können Entwickler Tools wie `capacitor-set-version` und `capacitor-sync-version-cli` verwenden. Diese Tools vereinfachen die Versionsverwaltung durch [Automatisierung von Updates](https://capgo.app/docs/live-updates/update-behavior/) über alle Plattformen hinweg.
 
 So beginnen Sie:
 

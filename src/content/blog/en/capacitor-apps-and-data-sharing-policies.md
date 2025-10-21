@@ -23,7 +23,7 @@ next_blog: ''
     -   Use **end-to-end encryption** for data security.
     -   Clearly explain what data is collected and why.
     -   Allow users to control and manage their data easily.
--   **Tools Like [Capgo](https://capgo.app/) Help**: Capgo simplifies compliance with features like [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), real-time error tracking, and permission management.
+-   **Tools Like [Capgo](https://capgo.app/) Help**: Capgo simplifies compliance with features like [secure updates](https://capgo.app/docs/live-updates/update-behavior/), real-time error tracking, and permission management.
 
 ### Quick Overview of Platform Rules
 

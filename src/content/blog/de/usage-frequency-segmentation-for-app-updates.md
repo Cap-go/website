@@ -72,7 +72,7 @@ Diese Segmentierung ermöglicht einen maßgeschneiderteren Ansatz zur Verbesseru
 Mit Ihren gruppierten Nutzern können Sie [Update-Strategien](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) entwerfen, die ihren speziellen Bedürfnissen gerecht werden. So können Sie jeden Segment angehen:
 
 -   **Power User**: Erstellen Sie einen Beta-Kanal, in dem sie neue Funktionen testen und Feedback vor einem vollständigen Release geben können.
--   **Reguläre Nutzer**: Nutzen Sie gestaffelte Rollouts, um Stabilität zu gewährleisten. [Teilweise Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) können Bandbreitenanforderungen reduzieren und Downloads beschleunigen.
+-   **Reguläre Nutzer**: Nutzen Sie gestaffelte Rollouts, um Stabilität zu gewährleisten. [Teilweise Updates](https://capgo.app/docs/live-updates/update-behavior/) können Bandbreitenanforderungen reduzieren und Downloads beschleunigen.
 -   **Inaktive Nutzer**: Konzentrieren Sie sich auf die Verbesserung von Kernfunktionen und Stabilität. Die Bereitstellung von One-Click-Rollback-Optionen kann diese Nutzer dazu ermutigen, wieder aktiv zu werden.
 
 ## Nutzung von [Capgo](https://capgo.app/) für das Nutzer-Targeting
@@ -85,7 +85,7 @@ Capgo bietet Tools, die es erleichtern, Updates gezielt an bestimmte Nutzergrupp
 
 Capgo nimmt die Nutzersegmentierung einen Schritt weiter, indem es Nutzer spezifischen Kanälen für maßgeschneiderte Update-Rollouts zuweist. Dieses [Kanalsystem](https://capgo.app/docs/plugin/cloud-mode/channel-system/) stellt sicher, dass Updates präzise geliefert werden:
 
-| **Nutzersegment** | **Kanaltyp** | **[Update-Strategie](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** |
+| **Nutzersegment** | **Kanaltyp** | **[Update-Strategie](https://capgo.app/docs/live-updates/update-behavior/)** |
 | --- | --- | --- |
 | Power User | Beta-Kanal | Früher Zugang zu neuen Funktionen |
 | Reguläre Nutzer | Produktionskanal | Gestaffelte Rollouts, die auf Stabilität fokussiert sind |

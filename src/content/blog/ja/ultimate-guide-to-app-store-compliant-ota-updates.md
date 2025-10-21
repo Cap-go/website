@@ -32,7 +32,7 @@ next_blog: ''
 -   **コンプライアンスを維持する方法**:
     -   アプリの核となる機能を変更しない。
     -   HTTPSやデジタル署名などの安全な配信方法を使用。
-    -   [アップデートの目的](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) をユーザーに明確に伝える。
+    -   [アップデートの目的](https://capgo.app/docs/live-updates/update-behavior/) をユーザーに明確に伝える。
 
 ### OTAルールの比較
 

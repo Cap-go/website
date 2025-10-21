@@ -83,7 +83,7 @@ next_blog: ''
 追跡設定を調整して、最も関連性のあるデータを収集します。選択したツールに応じて、以下のことができます：
 
 -   **New Relic：** 分析、カスタムロギング、クラッシュレポート、ネットワーク監視、HTTP応答ボディキャプチャなどの機能を提供します [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/) 。
--   **Capgo：** [安全な更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)のための暗号化を有効にし、より良いターゲティングのために特定のユーザーに更新を割り当てることができます [\[1\]](https://capgo.app/) 。
+-   **Capgo：** [安全な更新](https://capgo.app/docs/live-updates/update-behavior/)のための暗号化を有効にし、より良いターゲティングのために特定のユーザーに更新を割り当てることができます [\[1\]](https://capgo.app/) 。
 
 > "Capgoは、生産性を向上させたい開発者にとって必須のツールです。バグ修正のためのレビューを避けることは非常に貴重です。" - ベッシー・クーパー [\[1\]](https://capgo.app/)
 

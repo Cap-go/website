@@ -19,7 +19,7 @@ next_blog: ''
 **Want to simplify your [CI/CD pipeline](https://capgo.app/blog/setup-ci-and-cd-gitlab/)?** Conventional Commits can help by automating versioning, changelog creation, and deployment. Here's how:
 
 -   Use a standard commit format like `feat: add new feature` or `fix: resolve issue`.
--   Automate [version updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) based on commit types (e.g., `fix` = patch, `feat` = minor).
+-   Automate [version updates](https://capgo.app/docs/live-updates/update-behavior/) based on commit types (e.g., `fix` = patch, `feat` = minor).
 -   Generate changelogs automatically for better transparency.
 -   Enforce commit standards with tools like [Commitlint](https://commitlint.js.org/) and [Husky](https://www.npmjs.com/package/husky).
 -   Integrate [semantic-release](https://www.npmjs.com/package/semantic-release) for seamless versioning and releases.
@@ -377,5 +377,5 @@ Together, these tools help you maintain a well-organized CI/CD pipeline with a s
 
 Capgo streamlines the CI/CD process for mobile apps by offering **instant updates** that bypass the need for app store approvals. This means developers can roll out fixes, new features, and updates much faster, ensuring apps stay current with minimal effort.
 
-It fits seamlessly into existing CI/CD pipelines, [automating updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) while maintaining **secure delivery** through end-to-end encryption. Capgo also supports **partial updates**, which cuts down on bandwidth usage by downloading only the necessary changes. Plus, its **one-click rollback** feature allows developers to quickly address issues by reverting to a previous version. With its focus on speed, security, and adaptability, Capgo is a valuable asset for improving development workflows and enhancing user experience.
+It fits seamlessly into existing CI/CD pipelines, [automating updates](https://capgo.app/docs/live-updates/update-behavior/) while maintaining **secure delivery** through end-to-end encryption. Capgo also supports **partial updates**, which cuts down on bandwidth usage by downloading only the necessary changes. Plus, its **one-click rollback** feature allows developers to quickly address issues by reverting to a previous version. With its focus on speed, security, and adaptability, Capgo is a valuable asset for improving development workflows and enhancing user experience.
 :::

@@ -29,7 +29,7 @@ Les mises à jour OTA (Over-the-Air) permettent aux applications [Capacitor](htt
     
 -   **Mises à jour incrémentales** : Découpez les mises à jour en petites étapes, planifiez-les pendant les temps d'inactivité et utilisez des systèmes A/B pour des retours en arrière fluides.
     
--   [**Mises à jour sécurisées**](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) : Protégez les fichiers avec le chiffrement, les sommes de contrôle et la signature de code pour garantir l'intégrité.
+-   [**Mises à jour sécurisées**](https://capgo.app/docs/live-updates/update-behavior/) : Protégez les fichiers avec le chiffrement, les sommes de contrôle et la signature de code pour garantir l'intégrité.
     
 -   **Tests & Conformité** : Testez minutieusement les mises à jour et suivez les directives des magasins d'applications pour éviter les problèmes d'approbation.
     

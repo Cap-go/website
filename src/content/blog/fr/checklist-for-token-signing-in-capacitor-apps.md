@@ -40,7 +40,7 @@ La signature des jetons est essentielle pour sécuriser les applications [Capaci
 
 **Mises à jour en direct :**
 
--   Utilisez des jetons signés pour [sécuriser les mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   Utilisez des jetons signés pour [sécuriser les mises à jour](https://capgo.app/docs/live-updates/update-behavior/).
 -   Activez les options de retour en arrière pour les mises à jour compromises.
 -   Surveillez l'engagement des utilisateurs et les taux de succès des mises à jour.
 

@@ -244,7 +244,7 @@ Updates können auf Hindernisse wie Netzwerkausfälle, Versionsunterschiede, ver
 | Fehlgeschlagene Downloads | Schlechte Netzwerkverbindung | Verwenden Sie ein automatisches Wiederholungssystem mit exponentieller Verzögerung. |
 | Versionskonflikte | Inkompatible Abhängigkeiten | Erzwingen Sie strenge Versionsprüfungen vor der Bereitstellung von Updates. |
 | Cache-Probleme | Veraltete Cache-Dateien | Fügen Sie Cache-Busting-Techniken hinzu und löschen Sie alte Versionen. |
-| Teilweise Updates | Unterbrochene Installation | Verwenden Sie [atomare Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) mit Rollback-Option zur Sicherstellung der Konsistenz. |
+| Teilweise Updates | Unterbrochene Installation | Verwenden Sie [atomare Updates](https://capgo.app/docs/live-updates/update-behavior/) mit Rollback-Option zur Sicherstellung der Konsistenz. |
 
 ### Fehlerverfolgungs-Setup
 

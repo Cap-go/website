@@ -64,7 +64,7 @@ Jamf ProはAppleデバイスの管理に特化して設計され、Appleエコ�
 
 Jamf Proは自動パッチ適用とAppleのVolume Purchase Program (VPP)との統合により、更新管理を簡素化します。この自動化によりIT作業負荷を90%削減し、アプリの展開を75%加速することができます。
 
-このプラットフォームは、[大規模な自動更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)、Smart Groupsを使用したターゲット展開、複雑なセットアップのためのカスタムワークフローをサポートしています。これらの機能により、様々な組織のニーズに適応できます。
+このプラットフォームは、[大規模な自動更新](https://capgo.app/docs/live-updates/update-behavior/)、Smart Groupsを使用したターゲット展開、複雑なセットアップのためのカスタムワークフローをサポートしています。これらの機能により、様々な組織のニーズに適応できます。
 
 ### エンタープライズ統合
 

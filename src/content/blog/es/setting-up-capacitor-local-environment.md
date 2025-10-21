@@ -428,7 +428,7 @@ Aquí hay algunas formas de mejorar la estabilidad y evitar problemas recurrente
 }
 ```
 
-- Usa encriptación de extremo a extremo para [asegurar actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/).
+- Usa encriptación de extremo a extremo para [asegurar actualizaciones](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
 ## Resumen
 

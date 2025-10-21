@@ -129,7 +129,7 @@ Für diejenigen, die sich Sorgen um Anbieterabhängigkeiten machen, bietet Capgo
 
 > "Die einzige Lösung mit echter Ende-zu-Ende-Verschlüsselung, andere signieren nur Updates" - Capgo [\[1\]](https://capgo.app/)
 
-Capgos Effektivität ist klar: Es wird von 750 Produktions-Apps vertraut und hat bisher 23,5M [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) ausgeliefert [\[1\]](https://capgo.app/).
+Capgos Effektivität ist klar: Es wird von 750 Produktions-Apps vertraut und hat bisher 23,5M [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) ausgeliefert [\[1\]](https://capgo.app/).
 
 Verfolgen Sie Updates in Echtzeit mit Analysen, Fehlerüberwachung und rollenbasierten Zugriffskontrollen, um die Compliance über mehrere Bundesstaaten hinweg zu vereinfachen.
 

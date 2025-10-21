@@ -32,7 +32,7 @@ next_blog: ''
 -   **Come Rimanere Conformi**:
     -   Evitare di alterare la funzionalità core dell'app.
     -   Utilizzare metodi di consegna sicuri come HTTPS e firme digitali.
-    -   Comunicare chiaramente agli utenti gli [scopi degli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+    -   Comunicare chiaramente agli utenti gli [scopi degli aggiornamenti](https://capgo.app/docs/live-updates/update-behavior/).
 
 ### Confronto Rapido delle Regole OTA
 

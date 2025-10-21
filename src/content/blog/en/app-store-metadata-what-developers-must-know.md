@@ -187,7 +187,7 @@ Capgo simplifies managing [app updates](https://capgo.app/plugins/capacitor-upda
 Capgo's update system is built to comply with app store rules while speeding up deployment. Developers can instantly push updates using features like:
 
 -   **Partial Updates**: Only downloads the modified content, saving bandwidth and reducing update size.
--   **End-to-End Encryption**: Provides [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) with true encryption, not just basic signing.
+-   **End-to-End Encryption**: Provides [secure updates](https://capgo.app/docs/live-updates/update-behavior/) with true encryption, not just basic signing.
 -   **Channel Distribution**: Enables targeted rollouts for beta testing or specific user groups.
 
 The system achieves an 82% global success rate, delivers a 5 MB bundle from its global CDN in just 114 milliseconds, and ensures that 95% of active users receive updates within 24 hours [\[1\]](https://capgo.app/).

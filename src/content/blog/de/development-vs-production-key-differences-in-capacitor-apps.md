@@ -145,7 +145,7 @@ In der Produktion verschiebt sich die Priorität auf die Implementierung fortges
 | --- | --- | --- |
 | Update-Sicherheit | Ende-zu-Ende-Verschlüsselung verwenden | Stellt sicher, dass Updates nur für autorisierte Benutzer zugänglich sind |
 | Zugriffskontrolle | Granulare Berechtigungseinstellungen | Beschränkt Zugriff basierend auf Teamrollen |
-| Bereitstellungsautomatisierung | Integrierte CI/CD-Pipelines | Ermöglicht sichere, [automatisierte Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Bereitstellungsautomatisierung | Integrierte CI/CD-Pipelines | Ermöglicht sichere, [automatisierte Updates](https://capgo.app/docs/live-updates/update-behavior/) |
 | Compliance | Apple- und Google-Standards erfüllen | Gewährleistet App-Store-Genehmigungen |
 
 Produktionseinrichtungen beinhalten auch organisationsspezifische Richtlinien, die über einheitliche Zugangskontrollen verwaltet werden. Teams können mehrere Organisationen mit maßgeschneiderten Benutzerberechtigungen erstellen und mit CI/CD-Tools wie GitHub, GitLab und Azure DevOps für nahtlose, sichere Bereitstellungen integrieren.

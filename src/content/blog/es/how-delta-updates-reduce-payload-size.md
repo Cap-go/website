@@ -34,7 +34,7 @@ Las actualizaciones delta hacen que las actualizaciones de aplicaciones sean má
 -   **Herramientas automatizadas**: Funciona con sistemas CI/CD como [GitHub Actions](https://docs.github.com/actions) y [Jenkins](https://www.jenkins.io/).
 -   **Métricas de rendimiento**: Rastrean tasas de éxito de actualización, velocidades de descarga y participación del usuario.
 
-Las actualizaciones delta son ideales para aplicaciones de [Capacitor](https://capacitorjs.com/), permitiendo correcciones rápidas de errores, lanzamiento de características y [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) mientras ahorran ancho de banda y tiempo.
+Las actualizaciones delta son ideales para aplicaciones de [Capacitor](https://capacitorjs.com/), permitiendo correcciones rápidas de errores, lanzamiento de características y [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) mientras ahorran ancho de banda y tiempo.
 
 ## Cómo obtener MÁS FPS y un mejor rendimiento en Warzone ...
 

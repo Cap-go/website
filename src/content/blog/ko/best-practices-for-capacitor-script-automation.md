@@ -158,7 +158,7 @@ Capacitor 앱의 응답성을 유지하는 것은 스크립트 성능에 크게 
 -   **통합 테스트**: 스크립트가 시스템의 다른 부분과 원활하게 작동하는지 확인.
 -   **성능 테스트**: 실행 시간과 리소스 사용량을 측정하여 병목 현상 식별.
 
-테스트가 준비되면, [업데이트 자동화](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)가 배포 신뢰성을 한 단계 높여줍니다.
+테스트가 준비되면, [업데이트 자동화](https://capgo.app/docs/live-updates/update-behavior/)가 배포 신뢰성을 한 단계 높여줍니다.
 
 ### 업데이트 자동화
 

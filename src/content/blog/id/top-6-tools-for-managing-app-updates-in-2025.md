@@ -155,7 +155,7 @@ Jamf Pro dirancang khusus untuk mengelola perangkat Apple, menawarkan integrasi 
 
 Jamf Pro menyederhanakan manajemen pembaruan dengan patching otomatis dan integrasi dengan Program Pembelian Volume Apple (VPP). Otomatisasi ini dapat mengurangi beban kerja IT hingga 90% dan mempercepat peluncuran aplikasi hingga 75%.
 
-Platform ini mendukung [pembaruan otomatis skala besar](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), penerapan yang ditargetkan menggunakan Smart Groups, dan alur kerja kustom untuk pengaturan yang kompleks. Fitur-fitur ini membuatnya dapat disesuaikan dengan berbagai kebutuhan organisasi.
+Platform ini mendukung [pembaruan otomatis skala besar](https://capgo.app/docs/live-updates/update-behavior/), penerapan yang ditargetkan menggunakan Smart Groups, dan alur kerja kustom untuk pengaturan yang kompleks. Fitur-fitur ini membuatnya dapat disesuaikan dengan berbagai kebutuhan organisasi.
 
 ### Integrasi Enterprise
 

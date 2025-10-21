@@ -329,7 +329,7 @@ Para habilitar actualizaciones en vivo, añade lo siguiente a tu archivo `capaci
 
 Capgo proporciona varias características destacadas:
 
--   **[Actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** con encriptación de extremo a extremo
+-   **[Actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/)** con encriptación de extremo a extremo
 -   **Despliegues automatizados** a través de CI/CD integrado
 -   **Actualizaciones dirigidas** a través de la asignación de usuarios
 -   **Rollback instantáneo** con control de versiones

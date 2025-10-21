@@ -190,7 +190,7 @@ Kepatuhan beta OTA bergantung pada tiga area utama: **keamanan**, **kontrol dist
 -   **Langkah Keamanan**
     
     -   Pembaruan dilindungi dengan enkripsi end-to-end, memastikan hanya pengguna yang berwenang yang dapat mengaksesnya.
-    -   Pemantauan real-time mendukung [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), dengan opsi rollback instan untuk penyelesaian masalah cepat (tingkat keberhasilan 82%) [\[1\]](https://capgo.app/).
+    -   Pemantauan real-time mendukung [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/), dengan opsi rollback instan untuk penyelesaian masalah cepat (tingkat keberhasilan 82%) [\[1\]](https://capgo.app/).
 -   **Kontrol Distribusi**
     
     -   Sistem channel memungkinkan manajemen yang tepat dari grup beta.

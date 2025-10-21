@@ -100,7 +100,7 @@ Die Abhängigkeit von [manuellen Updates](https://capgo.app/docs/plugin/cloud-mo
 
 Hier ein schneller Vergleich von manuellen und automatisierten Update-Methoden:
 
--   **Liefergeschwindigkeit**: Manuelle Updates können Tage oder Wochen dauern, während [automatisierte Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) 95% der Nutzer innerhalb von 24 Stunden erreichen [\[1\]](https://capgo.app/).
+-   **Liefergeschwindigkeit**: Manuelle Updates können Tage oder Wochen dauern, während [automatisierte Updates](https://capgo.app/docs/live-updates/update-behavior/) 95% der Nutzer innerhalb von 24 Stunden erreichen [\[1\]](https://capgo.app/).
 -   **Erfolgsverfolgung**: Manuelle Methoden variieren, aber automatisierte Updates erreichen weltweit eine Erfolgsquote von 82% [\[1\]](https://capgo.app/).
 -   **Rollback-Optionen**: Manuelle Updates bieten begrenzte Wiederherstellung, während automatisierte Updates sofortige Rollbacks ermöglichen.
 -   **Überwachung**: Manuelle Überprüfungen sind zeitaufwändig, während automatisierte Tools Echtzeit-Analysen bieten [\[1\]](https://capgo.app/).

@@ -57,7 +57,7 @@ La sfida cresce quando le app devono seguire regole da più regioni, ognuna con 
 
 ### Sanzioni per non conformità 
 
-Il mancato rispetto degli standard sulla privacy può portare a pesanti multe e problemi legali. Anche piccoli errori nella gestione del consenso potrebbero risultare in azioni normative. Questo rende essenziale implementare rapidamente [aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) per rimanere conformi.
+Il mancato rispetto degli standard sulla privacy può portare a pesanti multe e problemi legali. Anche piccoli errori nella gestione del consenso potrebbero risultare in azioni normative. Questo rende essenziale implementare rapidamente [aggiornamenti sicuri](https://capgo.app/docs/live-updates/update-behavior/) per rimanere conformi.
 
 ### Problemi di gestione degli aggiornamenti
 
@@ -185,7 +185,7 @@ La gestione efficace del consenso richiede strumenti affidabili e una strategia 
 
 Ecco cosa dovresti dare priorità:
 
-1. **[Aggiorna automaticamente](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Scegli una piattaforma che consenta una distribuzione rapida. Ad esempio, Capgo raggiunge un tasso di aggiornamento del 95% degli utenti entro 24 ore [\[1\]](https://capgo.app/), garantendo che le modifiche di conformità vengano effettuate tempestivamente.
+1. **[Aggiorna automaticamente](https://capgo.app/docs/live-updates/update-behavior/)**: Scegli una piattaforma che consenta una distribuzione rapida. Ad esempio, Capgo raggiunge un tasso di aggiornamento del 95% degli utenti entro 24 ore [\[1\]](https://capgo.app/), garantendo che le modifiche di conformità vengano effettuate tempestivamente.
 2. **Garantisci la gestione sicura dei dati**: Proteggi gli aggiornamenti del consenso con la crittografia end-to-end per soddisfare le normative sulla privacy.
 3. **Monitora le prestazioni degli aggiornamenti**: Utilizza l'analisi per valutare l'efficacia degli aggiornamenti. Le migliori piattaforme mantengono costantemente alti tassi di successo [\[1\]](https://capgo.app/).
 

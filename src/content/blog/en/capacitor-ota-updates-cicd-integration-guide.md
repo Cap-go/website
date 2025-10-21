@@ -98,7 +98,7 @@ Set up your pipeline to trigger actions based on changes in the main branch or t
 
 -   **Build**: Triggered by code changes to compile and prepare your app.
 -   **Test**: Automates functionality checks to ensure stability.
--   **[Update Generation](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Bundles and optimizes assets for deployment.
+-   **[Update Generation](https://capgo.app/docs/live-updates/update-behavior/)**: Bundles and optimizes assets for deployment.
 
 When your pipeline is ready, you can seamlessly deploy your update bundles.
 

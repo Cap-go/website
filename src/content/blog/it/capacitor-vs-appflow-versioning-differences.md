@@ -123,7 +123,7 @@ Il mercato del controllo versione sta cambiando mentre i servizi più vecchi ven
 
 -   **Capgo** (lanciato nel 2022): Attivo, a partire da $12/mese, supporta aggiornamenti in tempo reale
 -   **[Capawesome](https://capawesomeio/)** (lanciato nel 2024): Attivo, prezzo simile, ma con meno opzioni di aggiornamento
--   **Appflow**: Chiuderà nel 2026, costa $6.000/anno [\[1\]](https://capgo.app/), offre [aggiornamenti automatizzati](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   **Appflow**: Chiuderà nel 2026, costa $6.000/anno [\[1\]](https://capgo.app/), offre [aggiornamenti automatizzati](https://capgo.app/docs/live-updates/update-behavior/)
 
 Questi strumenti stanno colmando il vuoto lasciato dalla chiusura di CodePush nel 2024 e dalla prossima fine di Appflow nel 2026
 

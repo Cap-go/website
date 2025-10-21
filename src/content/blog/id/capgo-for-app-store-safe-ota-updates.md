@@ -136,7 +136,7 @@ Memilih [strategi pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-upd
 
 Berikut beberapa strategi yang dibangun berdasarkan temuan ini:
 
--   **[Hybrid Update Strategy](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**  
+-   **[Hybrid Update Strategy](https://capgo.app/docs/live-updates/update-behavior/)**  
     Menggabungkan pembaruan app store dengan pembaruan OTA untuk perbaikan cepat. Rodrigo Mantica menekankan pendekatan ini:
     
     > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan secara berkelanjutan kepada pengguna kami!" [\[1\]](https://capgo.app/)

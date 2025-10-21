@@ -70,7 +70,7 @@ Over-The-Air(OTA) 업데이트를 구현하려면 다음 세 단계를 따릅니
 
 -   **플러그인 설치**
 -   **빌드 구성**
--   **[업데이트 통합](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**
+-   **[업데이트 통합](https://capgo.app/docs/live-updates/update-behavior/)**
 
 Capgo의 CI/CD 도구는 자동화된 테스트를 원활하게 만듭니다. [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/) 및 [Jenkins](https://www.jenkins.io/)와 같은 플랫폼이 지원되어 다양한 환경에서 업데이트를 테스트할 수 있습니다. 채널 시스템은 다양한 테스트 시나리오 관리를 위해 특히 유용합니다.
 

@@ -215,7 +215,7 @@ Next, include the upload command after your build steps:
     capgo deploy v${VERSION} --channel production
 ```
 
-For [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), configure validation settings like this:
+For [secure updates](https://capgo.app/docs/live-updates/update-behavior/), configure validation settings like this:
 
 ```json
 {

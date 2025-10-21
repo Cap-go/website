@@ -134,7 +134,7 @@ Capgo memperkuat keamanan aplikasi dengan menggabungkan metode penyimpanan dan t
 
 ### Arsitektur Keamanan Capgo
 
-Sistem Capgo telah berhasil memberikan lebih dari 23,5 juta [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) kepada 750 aplikasi produksi [\[1\]](https://capgo.app/). Ini menggunakan **enkripsi end-to-end**, memastikan bahwa hanya pengguna yang berwenang yang dapat mendekripsi pembaruan. Berikut adalah gambaran tentang pengaturan keamanannya:
+Sistem Capgo telah berhasil memberikan lebih dari 23,5 juta [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) kepada 750 aplikasi produksi [\[1\]](https://capgo.app/). Ini menggunakan **enkripsi end-to-end**, memastikan bahwa hanya pengguna yang berwenang yang dapat mendekripsi pembaruan. Berikut adalah gambaran tentang pengaturan keamanannya:
 
 Desain ini tidak hanya melindungi kunci API tetapi juga menyederhanakan kepatuhan terhadap persyaratan toko aplikasi.
 

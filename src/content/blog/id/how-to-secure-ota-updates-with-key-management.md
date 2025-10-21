@@ -26,7 +26,7 @@ next_blog: ''
 
 -   **Apa itu pembaruan OTA?** Memungkinkan Anda mendorong perubahan aplikasi langsung ke pengguna tanpa menunggu persetujuan app store Alat seperti [Capgo](https://capgo.app/) dapat mencapai tingkat pembaruan 95% dalam 24 jam
 -   **Mengapa keamanan penting?** Tanpa enkripsi dan manajemen kunci yang tepat, pembaruan rentan terhadap perusakan, serangan man-in-the-middle, dan pemalsuan versi
--   **Bagaimana cara [mengamankan pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)?**
+-   **Bagaimana cara [mengamankan pembaruan](https://capgo.app/docs/live-updates/update-behavior/)?**
     -   Gunakan **enkripsi end-to-end** untuk melindungi paket pembaruan
     -   Buat kunci yang kuat dengan algoritma seperti [RSA-4096](https://enwikipediaorg/wiki/RSA_\(cryptosystem\)) atau [AES-256](https://enwikipediaorg/wiki/Advanced_Encryption_Standard)
     -   Simpan kunci dengan aman menggunakan **[Hardware Security Modules](https://enwikipediaorg/wiki/Hardware_security_module) (HSMs)** atau brankas kunci terenkripsi

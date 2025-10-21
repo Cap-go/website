@@ -34,7 +34,7 @@ next_blog: ''
 -   **Build Hooks**: Jalankan kode selama tahap tertentu dari proses build.
 -   **Variabel Environment**: Sederhanakan build spesifik environment dengan file `.env`.
 
-[Capgo](https://capgo.app/), sebuah alat deployment, meningkatkan proses ini dengan [pembaruan otomatis](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), pelacakan versi, dan optimasi performa global. Lanjutkan membaca untuk mempelajari cara mengatur dan menyesuaikan skrip build Anda untuk efisiensi maksimal.
+[Capgo](https://capgo.app/), sebuah alat deployment, meningkatkan proses ini dengan [pembaruan otomatis](https://capgo.app/docs/live-updates/update-behavior/), pelacakan versi, dan optimasi performa global. Lanjutkan membaca untuk mempelajari cara mengatur dan menyesuaikan skrip build Anda untuk efisiensi maksimal.
 
 ## Pengenalan [Capacitor](https://capacitorjs.com/) Configure
 

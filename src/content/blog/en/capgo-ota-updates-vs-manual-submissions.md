@@ -151,7 +151,7 @@ When it comes to app updates, the way users experience them can vary significant
 
 ### Auto vs Manual Updates
 
-Here's a quick side-by-side look at how these two [update methods](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) differ:
+Here's a quick side-by-side look at how these two [update methods](https://capgo.app/docs/live-updates/update-behavior/) differ:
 
 | Update Aspect | App Store Updates | Capgo OTA Updates |
 | --- | --- | --- |

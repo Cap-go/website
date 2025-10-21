@@ -22,7 +22,7 @@ next_blog: ''
 
 -   **핵심 도구:** SHA-256 디지털 서명, 런타임 검사, 암호화(AES-256)를 사용하여 코드를 보호합니다.
 -   **플랫폼별 기능:** Android의 경우 앱 검증과 기기 증명을 위해 [Play Integrity API](https://developer.android.com/google/play/integrity)를 통합하세요. iOS의 경우 OTA 업데이트를 위한 App Store 가이드라인 3.1.2를 따르세요.
--   **OTA 업데이트 보안:** 종단간 암호화, 체크섬 검증, 규정 준수 추적을 구현하여 [업데이트를 보호](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)하세요.
+-   **OTA 업데이트 보안:** 종단간 암호화, 체크섬 검증, 규정 준수 추적을 구현하여 [업데이트를 보호](https://capgo.app/docs/live-updates/update-behavior/)하세요.
 -   **추천 도구:** [Capgo](https://capgo.app/)와 같은 도구는 암호화, 버전 관리, 규정 준수 모니터링으로 안전한 OTA 업데이트를 단순화합니다.
 
 ### 주요 도구 및 기능 비교

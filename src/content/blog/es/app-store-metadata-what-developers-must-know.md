@@ -192,7 +192,7 @@ Capgo simplifica la gestión de [actualizaciones de aplicaciones](https://capgo.
 El sistema de actualización de Capgo está construido para cumplir con las reglas de la tienda de aplicaciones mientras acelera el despliegue. Los desarrolladores pueden implementar actualizaciones instantáneamente usando características como:
 
 -   **Actualizaciones Parciales**: Solo descarga el contenido modificado, ahorrando ancho de banda y reduciendo el tamaño de actualización.
--   **Encriptación de Extremo a Extremo**: Proporciona [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) con encriptación verdadera, no solo firma básica.
+-   **Encriptación de Extremo a Extremo**: Proporciona [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) con encriptación verdadera, no solo firma básica.
 -   **Distribución por Canales**: Permite lanzamientos dirigidos para pruebas beta o grupos específicos de usuarios.
 
 El sistema logra una tasa de éxito global del 82%, entrega un paquete de 5 MB desde su CDN global en solo 114 milisegundos, y asegura que el 95% de los usuarios activos reciban actualizaciones dentro de 24 horas [\[1\]](https://capgo.app/).

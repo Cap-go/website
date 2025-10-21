@@ -184,7 +184,7 @@ These audits, paired with privacy management tools, help developers act quickly 
 
 ### Privacy Management Tools
 
-To handle compliance challenges efficiently, developers rely on tools for fast and [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). Capgo is a prime example, having delivered over 947.6 million [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) globally [\[1\]](https://capgo.app/).
+To handle compliance challenges efficiently, developers rely on tools for fast and [secure updates](https://capgo.app/docs/live-updates/update-behavior/). Capgo is a prime example, having delivered over 947.6 million [secure updates](https://capgo.app/docs/live-updates/update-behavior/) globally [\[1\]](https://capgo.app/).
 
 | Feature | Privacy Benefit | Implementation Impact |
 | --- | --- | --- |

@@ -185,7 +185,7 @@ Beta OTA compliance hinges on three main areas: **security**, **distribution con
 -   **Security Measures**
     
     -   Updates are protected with end-to-end encryption, ensuring only authorized users can access them.
-    -   Real-time monitoring supports [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), with instant rollback options for quick issue resolution (82% success rate) [\[1\]](https://capgo.app/).
+    -   Real-time monitoring supports [secure updates](https://capgo.app/docs/live-updates/update-behavior/), with instant rollback options for quick issue resolution (82% success rate) [\[1\]](https://capgo.app/).
 -   **Distribution Control**
     
     -   Channel systems allow precise management of beta groups.

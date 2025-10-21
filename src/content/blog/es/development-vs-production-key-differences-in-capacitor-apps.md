@@ -149,7 +149,7 @@ En producción, la prioridad cambia a implementar protocolos de seguridad avanza
 | --- | --- | --- |
 | Seguridad de actualizaciones | Usar encriptación de extremo a extremo | Asegura que las actualizaciones sean accesibles solo para usuarios autorizados |
 | Control de acceso | Configuraciones de permisos granulares | Restringe el acceso según los roles del equipo |
-| Automatización de implementaciones | Pipelines CI/CD integrados | Permite [actualizaciones automatizadas seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Automatización de implementaciones | Pipelines CI/CD integrados | Permite [actualizaciones automatizadas seguras](https://capgo.app/docs/live-updates/update-behavior/) |
 | Cumplimiento | Cumplir con los estándares de Apple y Google | Asegura aprobaciones de la tienda de aplicaciones |
 
 Las configuraciones de producción también implican políticas específicas de la organización, gestionadas a través de controles de acceso unificados. Los equipos pueden crear múltiples organizaciones con permisos de usuario personalizados e integrarse con herramientas CI/CD como GitHub, GitLab y Azure DevOps para implementaciones seguras y fluidas.

@@ -326,7 +326,7 @@ Modern update tools offer several notable benefits:
 -   **One-click rollback** for quick recovery in case of issues
 -   **Real-time analytics** to monitor update performance and user engagement
 
-These features underpin a robust framework for managing [version updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) effectively.
+These features underpin a robust framework for managing [version updates](https://capgo.app/docs/live-updates/update-behavior/) effectively.
 
 Whether you’re working on a small app or scaling a larger deployment, combining Capacitor CLI with advanced update tools ensures reliable and efficient version control in today’s fast-moving development landscape.
 

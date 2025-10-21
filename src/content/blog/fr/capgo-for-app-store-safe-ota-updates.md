@@ -138,7 +138,7 @@ Choisir la bonne [stratégie de mise à jour](https://capgo.app/docs/plugin/clou
 
 Voici quelques stratégies qui s'appuient sur ces découvertes :
 
--   **[Stratégie de mise à jour hybride](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**  
+-   **[Stratégie de mise à jour hybride](https://capgo.app/docs/live-updates/update-behavior/)**  
     Combinez les mises à jour de l'app store avec des mises à jour OTA pour des corrections rapides. Rodrigo Mantica a souligné cette approche :
     
     > "Nous pratiquons le développement agile et @Capgo est essentiel pour livrer continuellement à nos utilisateurs !" [\[1\]](https://capgo.app/)

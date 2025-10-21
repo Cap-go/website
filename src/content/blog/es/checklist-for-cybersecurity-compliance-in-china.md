@@ -66,7 +66,7 @@ A partir del 1 de enero de 2025, la Regulación de Gestión de Seguridad de Dato
 
 Estas actualizaciones buscan fortalecer la aplicación y abordar los desafíos emergentes de ciberseguridad [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/).
 
-Para los desarrolladores de aplicaciones que trabajan en actualizaciones y parches de seguridad, utilizar [plataformas de actualización seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) puede simplificar el cumplimiento de estas regulaciones. Por ejemplo, **Capgo** (https://capgo.app) ofrece encriptación de extremo a extremo y [gestión de actualizaciones en tiempo real](https://capgo.app/docs/plugin/cloud-mode/manual-update/), lo que es especialmente valioso en un mercado con más de 4 millones de aplicaciones móviles y la base de usuarios de Internet móvil más grande del mundo [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
+Para los desarrolladores de aplicaciones que trabajan en actualizaciones y parches de seguridad, utilizar [plataformas de actualización seguras](https://capgo.app/docs/live-updates/update-behavior/) puede simplificar el cumplimiento de estas regulaciones. Por ejemplo, **Capgo** (https://capgo.app) ofrece encriptación de extremo a extremo y [gestión de actualizaciones en tiempo real](https://capgo.app/docs/plugin/cloud-mode/manual-update/), lo que es especialmente valioso en un mercado con más de 4 millones de aplicaciones móviles y la base de usuarios de Internet móvil más grande del mundo [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 
 ## Requisitos de Privacidad de Datos
 
@@ -181,7 +181,7 @@ Los desarrolladores deben mantener un inventario detallado de todos los SDK util
 -   Certificados de seguridad
 -   Cumplimiento con la Ley de Protección de Información Personal (PIPL) y la Ley de Seguridad de Datos (DSL) [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)
 
-Para aplicaciones que dependen de [actualizaciones basadas en la nube](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), plataformas como Capgo proporcionan herramientas para el control de versiones y la implementación de parches que se alinean con los estándares de ciberseguridad chinos.
+Para aplicaciones que dependen de [actualizaciones basadas en la nube](https://capgo.app/docs/live-updates/update-behavior/), plataformas como Capgo proporcionan herramientas para el control de versiones y la implementación de parches que se alinean con los estándares de ciberseguridad chinos.
 
 Para hacer cumplir el cumplimiento, la CAC ha implementado un sistema de denuncia. El incumplimiento puede llevar a la eliminación de la aplicación y a fuertes sanciones [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 

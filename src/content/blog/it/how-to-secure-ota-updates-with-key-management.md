@@ -25,7 +25,7 @@ next_blog: ''
 
 - **Cosa sono gli aggiornamenti OTA?** Permettono di inviare modifiche all'app direttamente agli utenti senza attendere l'approvazione degli app store. Strumenti come [Capgo](https://capgo.app/) possono raggiungere un tasso di aggiornamento del 95% entro 24 ore.
 - **Perché la sicurezza è importante?** Senza un'adeguata crittografia e gestione delle chiavi, gli aggiornamenti sono vulnerabili a manomissioni, attacchi man-in-the-middle e spoofing delle versioni.
-- **Come [proteggere gli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)?**
+- **Come [proteggere gli aggiornamenti](https://capgo.app/docs/live-updates/update-behavior/)?**
     - Utilizzare la **crittografia end-to-end** per proteggere i pacchetti di aggiornamento.
     - Generare chiavi robuste con algoritmi come [RSA-4096](https://en.wikipedia.org/wiki/RSA_\(cryptosystem\)) o [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
     - Archiviare le chiavi in modo sicuro utilizzando **[Hardware Security Modules](https://en.wikipedia.org/wiki/Hardware_security_module) (HSM)** o vault crittografati.

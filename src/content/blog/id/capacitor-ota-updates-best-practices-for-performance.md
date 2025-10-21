@@ -29,7 +29,7 @@ Pembaruan OTA (Over-the-Air) memungkinkan aplikasi [Capacitor](https://capacitor
     
 3.  **Pembaruan Bertahap**: Pecah pembaruan menjadi langkah-langkah yang lebih kecil, jadwalkan selama waktu idle, dan gunakan sistem A/B untuk pembatalan yang mulus.
     
-4.  [**Pembaruan Aman**](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/): Lindungi file dengan enkripsi, checksum, dan penandatanganan kode untuk memastikan integritas.
+4.  [**Pembaruan Aman**](https://capgo.app/docs/live-updates/update-behavior/): Lindungi file dengan enkripsi, checksum, dan penandatanganan kode untuk memastikan integritas.
     
 5.  **Pengujian & Kepatuhan**: Uji pembaruan secara menyeluruh dan ikuti pedoman toko aplikasi untuk menghindari masalah persetujuan.
     

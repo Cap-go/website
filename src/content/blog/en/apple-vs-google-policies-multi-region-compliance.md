@@ -226,7 +226,7 @@ Apple leans heavily on **manual reviews** and enforces strict over-the-air (OTA)
 | --- | --- | --- | --- |
 | **Review Process** | Manual review | Automated system | Longer deployment timelines with Apple |
 | **Payment** | 27% fee on external US payments | Flexible options | Requires a region-specific payment plan |
-| **Update Controls** | Strict OTA limits | Permissive guidelines | [Platform-specific update strategies](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| **Update Controls** | Strict OTA limits | Permissive guidelines | [Platform-specific update strategies](https://capgo.app/docs/live-updates/update-behavior/) |
 | **Privacy Standards** | Global uniform standards | Region-specific tools | Varied compliance measures by region |
 
 Apple's recent policy change in May 2025, which permits external payment platforms in the US but still imposes a 27% fee, highlights the evolving landscape developers must keep up with [\[19\]](https://medium.com/neural-lab/apple-just-changed-the-app-store-forever-what-every-developer-needs-to-know-in-2025-ad924586d4af).

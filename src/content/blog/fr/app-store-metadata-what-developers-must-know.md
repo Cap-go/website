@@ -192,7 +192,7 @@ Capgo simplifie la gestion des [mises à jour d'application](https://capgo.app/p
 Le système de mise à jour de Capgo est conçu pour être conforme aux règles des magasins d'applications tout en accélérant le déploiement. Les développeurs peuvent instantanément pousser des mises à jour en utilisant des fonctionnalités telles que :
 
 -   **Mises à jour partielles** : Ne télécharge que le contenu modifié, économisant ainsi de la bande passante et réduisant la taille de la mise à jour.
--   **Chiffrement de bout en bout** : Fournit des [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) avec un véritable chiffrement, et non simplement une signature de base.
+-   **Chiffrement de bout en bout** : Fournit des [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) avec un véritable chiffrement, et non simplement une signature de base.
 -   **Distribution par canal** : Permet des déploiements ciblés pour le test bêta ou des groupes d'utilisateurs spécifiques.
 
 Le système atteint un taux de succès mondial de 82 %, délivre un bundle de 5 Mo depuis son CDN mondial en seulement 114 millisecondes, et garantit que 95 % des utilisateurs actifs reçoivent des mises à jour dans les 24 heures [\[1\]](https://capgo.app/).

@@ -207,7 +207,7 @@ Apple frequently updates its App Store Review Guidelines, and **85% of mobile ap
 One strategy is to establish a monthly review cycle and maintain a compliance calendar to track important updates and deadlines. Subscribing to Apple Developer alerts and keeping an eye on industry channels can help you catch even subtle guideline changes. Developers often miss significant updates that Apple introduces between major iOS releases.
 
 -   **Quarterly reviews**: Assess platform updates for OS compatibility and API changes.
--   **Weekly checks**: Address security patches to handle vulnerabilities and [encryption updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[23\]](https://moldstud.com/articles/p-ensuring-compliance-with-apple-app-store-guidelines-in-your-ios-app).
+-   **Weekly checks**: Address security patches to handle vulnerabilities and [encryption updates](https://capgo.app/docs/live-updates/update-behavior/) [\[23\]](https://moldstud.com/articles/p-ensuring-compliance-with-apple-app-store-guidelines-in-your-ios-app).
 
 Beyond Apple's official resources, developer communities and industry publications can offer early insights into potential policy shifts. These discussions often surface weeks before changes are widely known, giving you extra time to prepare.
 

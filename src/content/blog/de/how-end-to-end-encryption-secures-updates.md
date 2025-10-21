@@ -186,7 +186,7 @@ Die Zahlen sprechen für sich. Mit Capgos Implementierung von Ende-zu-Ende-Versc
 
 Die Vorteile sicherer OTA-Updates gehen über reine
 
-| Erfolgsfaktor | Rolle bei [Secure Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Erfolgsfaktor | Rolle bei [Secure Updates](https://capgo.app/docs/live-updates/update-behavior/) |
 | --- | --- |
 | [Verschlüsselungsimplementierung](https://capgo.app/docs/cli/migrations/encryption/) | Stellt sicher, dass nur autorisierte Benutzer Updates entschlüsseln können |
 | Verteilungsstrategie | Verwaltet kontrollierte, stufenweise Einführungen |

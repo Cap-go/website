@@ -32,7 +32,7 @@ next_blog: ''
 -   **빌드 훅**: 빌드 프로세스의 특정 단계에서 코드 실행.
 -   **환경 변수**: `.env` 파일로 환경별 빌드 단순화.
 
-[Capgo](https://capgo.app/)는 배포 도구로서 [자동화된 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), 버전 추적 및 전역 성능 최적화로 이 프로세스를 향상시킵니다. 빌드 스크립트를 최대한 효율적으로 설정하고 커스터마이즈하는 방법을 알아보겠습니다.
+[Capgo](https://capgo.app/)는 배포 도구로서 [자동화된 업데이트](https://capgo.app/docs/live-updates/update-behavior/), 버전 추적 및 전역 성능 최적화로 이 프로세스를 향상시킵니다. 빌드 스크립트를 최대한 효율적으로 설정하고 커스터마이즈하는 방법을 알아보겠습니다.
 
 ## [Capacitor](https://capacitorjs.com/) 설정 소개
 

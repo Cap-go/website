@@ -88,7 +88,7 @@ Setelah dikonfigurasi, inisialisasi Capgo dengan kunci API Anda:
 
 ### Integrasi Kontrol Versi
 
-Capgo bekerja baik dengan platform CI/CD, membuat [pembaruan otomatis](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) menjadi sederhana. Platform yang didukung meliputi:
+Capgo bekerja baik dengan platform CI/CD, membuat [pembaruan otomatis](https://capgo.app/docs/live-updates/update-behavior/) menjadi sederhana. Platform yang didukung meliputi:
 
 -   [GitHub Actions](https://docs.github.com/actions)
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)

@@ -33,7 +33,7 @@ next_blog: ''
 -   **Comment rester conforme** :
     -   Évitez de modifier la fonctionnalité principale de l'application.
     -   Utilisez des méthodes de livraison sécurisées comme HTTPS et des signatures numériques.
-    -   Communiquez clairement les [objectifs de mise à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) aux utilisateurs.
+    -   Communiquez clairement les [objectifs de mise à jour](https://capgo.app/docs/live-updates/update-behavior/) aux utilisateurs.
 
 ### Comparaison rapide des règles OTA
 

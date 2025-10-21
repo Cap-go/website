@@ -28,7 +28,7 @@ next_blog: ''
     -   Usar **cifrado de extremo a extremo** para la seguridad de datos.
     -   Explicar claramente qué datos se recopilan y por qué.
     -   Permitir que los usuarios controlen y gestionen sus datos fácilmente.
--   **Herramientas Como [Capgo](https://capgo.app/) Ayudan**: Capgo simplifica el cumplimiento con funciones como [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), seguimiento de errores en tiempo real y gestión de permisos.
+-   **Herramientas Como [Capgo](https://capgo.app/) Ayudan**: Capgo simplifica el cumplimiento con funciones como [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/), seguimiento de errores en tiempo real y gestión de permisos.
 
 ### Resumen Rápido de las Reglas de Plataforma
 

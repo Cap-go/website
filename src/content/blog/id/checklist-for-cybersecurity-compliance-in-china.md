@@ -64,7 +64,7 @@ Mulai 1 Januari 2025, Peraturan Manajemen Keamanan Data Jaringan memperkenalkan 
 
 Pembaruan ini bertujuan untuk memperkuat penegakan dan mengatasi tantangan keamanan siber yang muncul [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/).
 
-Untuk pengembang aplikasi yang bekerja pada pembaruan dan patch keamanan, memanfaatkan [platform pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) dapat menyederhanakan kepatuhan dengan peraturan ini. Misalnya, **Capgo** (https://capgo.app) menawarkan enkripsi end-to-end dan [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) waktu nyata, yang sangat berharga di pasar dengan lebih dari 4 juta aplikasi seluler dan basis pengguna Internet seluler terbesar di dunia [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
+Untuk pengembang aplikasi yang bekerja pada pembaruan dan patch keamanan, memanfaatkan [platform pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) dapat menyederhanakan kepatuhan dengan peraturan ini. Misalnya, **Capgo** (https://capgo.app) menawarkan enkripsi end-to-end dan [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) waktu nyata, yang sangat berharga di pasar dengan lebih dari 4 juta aplikasi seluler dan basis pengguna Internet seluler terbesar di dunia [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 
 ## Persyaratan Privasi Data
 
@@ -179,7 +179,7 @@ Pengembang perlu mempertahankan inventaris rinci dari semua SDK yang digunakan d
 3. Sertifikat keamanan
 4. Kepatuhan terhadap Undang-Undang Perlindungan Informasi Pribadi (PIPL) dan Undang-Undang Keamanan Data (DSL) [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)
 
-Untuk aplikasi yang mengandalkan [pembaruan berbasis cloud](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), platform seperti Capgo menyediakan alat untuk kontrol versi dan penerapan patch yang sesuai dengan standar keamanan siber China.
+Untuk aplikasi yang mengandalkan [pembaruan berbasis cloud](https://capgo.app/docs/live-updates/update-behavior/), platform seperti Capgo menyediakan alat untuk kontrol versi dan penerapan patch yang sesuai dengan standar keamanan siber China.
 
 Untuk menegakkan kepatuhan, CAC telah menerapkan sistem pelaporan kebocoran. Ketidakpatuhan bisa mengakibatkan penghapusan aplikasi dan denda besar [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 

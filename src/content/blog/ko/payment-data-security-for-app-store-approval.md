@@ -55,7 +55,7 @@ Capgo 플랫폼의 주요 기능은 다음과 같습니다:
 
 Capgo의 접근 방식은 업데이트 배포에서 82%의 전세계 성공률을 달성했습니다. 기업은 규정 준수 요구사항에 맞춰 보안 클라우드 호스팅이나 자체 호스팅을 선택할 수 있습니다.
 
-변경된 구성 요소만 다운로드함으로써, Capgo는 위험을 최소화하고 대역폭 사용을 줄입니다. 지금까지 플랫폼은 1.155조 개의 [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 전달했습니다 [\[1\]](https://capgo.app/).
+변경된 구성 요소만 다운로드함으로써, Capgo는 위험을 최소화하고 대역폭 사용을 줄입니다. 지금까지 플랫폼은 1.155조 개의 [보안 업데이트](https://capgo.app/docs/live-updates/update-behavior/)를 전달했습니다 [\[1\]](https://capgo.app/).
 
 다음으로, Capawesome이 결제 데이터 보안을 어떻게 다루는지 살펴보겠습니다.
 

@@ -148,7 +148,7 @@ Here’s how the native bridge powers Capgo’s update system:
 | Content Delivery | Manages secure downloads of web assets | Quick and reliable asset delivery |
 | State Management | Maintains app state during updates | Smooth, uninterrupted user experience |
 | Version Control | Supports rollback functionality | Easy restoration with a single click |
-| [Update Targeting](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Enables distribution to specific user segments | Precise and controlled deployment |
+| [Update Targeting](https://capgo.app/docs/live-updates/update-behavior/) | Enables distribution to specific user segments | Precise and controlled deployment |
 
 These features highlight the efficiency of the native bridge in handling updates.
 

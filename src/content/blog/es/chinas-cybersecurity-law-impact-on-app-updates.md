@@ -158,7 +158,7 @@ Por ejemplo, la **plataforma de Capgo** simplifica el seguimiento del cumplimien
 
 Dada la rápida velocidad de las actualizaciones de aplicaciones bajo estrictas reglas de ciberseguridad, los chequeos de seguridad regulares son imprescindibles. Auditorías externas y evaluaciones de vulnerabilidad pueden identificar brechas potenciales temprano, ayudando a los equipos a abordar problemas antes de que escalen. Apunta a auditorías trimestrales para examinar métodos de encriptación, políticas de almacenamiento de datos y procesos de despliegue de actualizaciones.
 
-Además, realiza revisiones internas semanales para confirmar el cumplimiento en áreas como residencia de datos, [actualizaciones de encriptación](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), controles de acceso, registros de despliegue y protección de datos de usuarios. Mantener registros detallados de estos chequeos es crucial para evitar sanciones severas por incumplimiento.
+Además, realiza revisiones internas semanales para confirmar el cumplimiento en áreas como residencia de datos, [actualizaciones de encriptación](https://capgo.app/docs/live-updates/update-behavior/), controles de acceso, registros de despliegue y protección de datos de usuarios. Mantener registros detallados de estos chequeos es crucial para evitar sanciones severas por incumplimiento.
 
 > "Evitar la revisión por errores es oro." - Bessie Cooper [\[2\]](https://capgo.app)
 

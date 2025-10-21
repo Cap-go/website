@@ -34,7 +34,7 @@ Aquí por qué importan las comprobaciones de cumplimiento:
 -   Integra medidas de seguridad como encriptación, verificaciones de dependencias y pruebas.
 -   Utiliza pruebas de rendimiento y accesibilidad para mejorar la experiencia del usuario.
 
-**Capgo simplifica este proceso**, ofreciendo herramientas para cumplimiento automatizado, seguimiento de errores en tiempo real y [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+**Capgo simplifica este proceso**, ofreciendo herramientas para cumplimiento automatizado, seguimiento de errores en tiempo real y [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/).
 
 Mantente conforme, seguro y eficiente con prácticas adecuadas de CI/CD para [aplicaciones Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/).
 

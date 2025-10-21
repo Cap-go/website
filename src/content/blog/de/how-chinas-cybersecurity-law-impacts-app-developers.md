@@ -29,7 +29,7 @@ next_blog: ''
 -   **Pflichtbewertungen**: Apps müssen technische Sicherheitsüberprüfungen, Datenschutz-Folgenabschätzungen und Netzwerksicherheitsprüfungen bestehen.
 -   **Folgen bei Nichteinhaltung**: Geldstrafen, App-Entfernungen, Dienstsperrungen und Reputationsschäden.
 
-Um compliant zu bleiben, sollten Entwickler Tools für Verschlüsselung, Echtzeit-Monitoring und [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) verwenden. Die Nichteinhaltung kann zu schwerwiegenden Strafen führen, daher ist eine frühzeitige Vorbereitung der Schlüssel zum Erfolg im chinesischen Markt.
+Um compliant zu bleiben, sollten Entwickler Tools für Verschlüsselung, Echtzeit-Monitoring und [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) verwenden. Die Nichteinhaltung kann zu schwerwiegenden Strafen führen, daher ist eine frühzeitige Vorbereitung der Schlüssel zum Erfolg im chinesischen Markt.
 
 ## [Chinas Cybersicherheitsgesetz](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) Grundlagen
 

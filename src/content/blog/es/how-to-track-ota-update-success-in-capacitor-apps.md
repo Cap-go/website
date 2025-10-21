@@ -244,7 +244,7 @@ Las actualizaciones pueden tropezar con obstáculos como fallas de red, desajust
 | Descargas Fallidas | Conexión de red deficiente | Utiliza un sistema de reintento automático con retroceso exponencial. |
 | Conflictos de Versión | Dependencias incompatibles | Aplica estrictos controles de versión antes de implementar actualizaciones. |
 | Problemas de Caché | Archivos de caché obsoletos | Añade técnicas de eliminación de caché y borra versiones antiguas. |
-| Actualizaciones Parciales | Instalación interrumpida | Usa [actualizaciones atómicas](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) con una opción de reversión para garantizar la consistencia. |
+| Actualizaciones Parciales | Instalación interrumpida | Usa [actualizaciones atómicas](https://capgo.app/docs/live-updates/update-behavior/) con una opción de reversión para garantizar la consistencia. |
 
 ### Configuración de Seguimiento de Errores
 

@@ -157,7 +157,7 @@ Sebagai contoh, **platform Capgo** menyederhanakan pelacakan kepatuhan dengan me
 
 Mengingat cepatnya pace pembaruan aplikasi di bawah aturan keamanan siber yang ketat, pemeriksaan keamanan secara teratur adalah suatu keharusan. Audit eksternal dan penilaian kerentanan dapat mengidentifikasi potensi celah lebih awal, membantu tim menangani masalah sebelum meningkat. Targetkan audit triwulanan untuk memeriksa metode enkripsi, kebijakan penyimpanan data, dan proses pengiriman pembaruan.
 
-Selain itu, lakukan tinjauan internal mingguan untuk mengonfirmasi kepatuhan di area seperti residensi data, [pembaruan enkripsi](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), kontrol akses, catatan pengiriman, dan perlindungan data pengguna. Menjaga catatan rinci tentang pemeriksaan ini sangat penting untuk menghindari penalti besar karena ketidakpatuhan.
+Selain itu, lakukan tinjauan internal mingguan untuk mengonfirmasi kepatuhan di area seperti residensi data, [pembaruan enkripsi](https://capgo.app/docs/live-updates/update-behavior/), kontrol akses, catatan pengiriman, dan perlindungan data pengguna. Menjaga catatan rinci tentang pemeriksaan ini sangat penting untuk menghindari penalti besar karena ketidakpatuhan.
 
 > "Menghindari tinjauan untuk perbaikan bug adalah emas." - Bessie Cooper [\[2\]](https://capgo.app)
 

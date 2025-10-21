@@ -160,7 +160,7 @@ Aquí hay algunas prácticas esenciales de prueba:
 -   **Pruebas de Integración**: Asegura que tus scripts funcionen perfectamente con otras partes del sistema.
 -   **Pruebas de Rendimiento**: Mide tiempos de ejecución y uso de recursos para identificar cuellos de botella.
 
-Una vez que las pruebas están implementadas, [la actualización automatizada](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) lleva la fiabilidad del despliegue al siguiente nivel.
+Una vez que las pruebas están implementadas, [la actualización automatizada](https://capgo.app/docs/live-updates/update-behavior/) lleva la fiabilidad del despliegue al siguiente nivel.
 
 ### Automatización de Actualizaciones
 

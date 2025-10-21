@@ -125,7 +125,7 @@ Der Versionskontrollmarkt verändert sich, da ältere Dienste auslaufen. Teams m
 
 -   **Capgo** (Start 2022): Aktiv, ab 12 €/Monat, unterstützt Live-Updates
 -   **Capawesome** (Start 2024): Aktiv, ähnliche Preise, aber mit weniger Update-Optionen
--   **Appflow**: Wird 2026 eingestellt, kostet 6.000 €/Jahr [\[1\]](https://capgo.app/), bietet [automatisierte Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   **Appflow**: Wird 2026 eingestellt, kostet 6.000 €/Jahr [\[1\]](https://capgo.app/), bietet [automatisierte Updates](https://capgo.app/docs/live-updates/update-behavior/)
 
 Diese Tools füllen die Lücke, die durch die Schließung von CodePush 2024 und das bevorstehende Ende von Appflow 2026 entsteht.
 

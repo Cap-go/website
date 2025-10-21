@@ -58,7 +58,7 @@ Voici quelques fonctionnalités clés de la plateforme Capgo :
 
 L'approche de Capgo a atteint un taux de réussite mondial de 82 % pour les déploiements de mises à jour. Les entreprises peuvent opter pour un hébergement cloud sécurisé ou un auto-hébergement pour s'aligner sur leurs besoins de conformité.
 
-En téléchargeant uniquement les composants qui ont changé, Capgo minimise les risques et réduit l'utilisation de la bande passante. Jusqu'à présent, la plateforme a livré plus de 1,155 trillion de [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/).
+En téléchargeant uniquement les composants qui ont changé, Capgo minimise les risques et réduit l'utilisation de la bande passante. Jusqu'à présent, la plateforme a livré plus de 1,155 trillion de [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
 Ensuite, examinons comment Capawesome aborde la sécurité des données de paiement.
 

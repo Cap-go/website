@@ -18,7 +18,7 @@ published: true
 locale: id
 next_blog: ''
 ---
-Men-debug pembaruan Over-the-Air (OTA) dalam aplikasi [Capacitor](https://capacitorjs.com/) bisa rumit, tetapi alat yang tepat membuat perbedaan besar. Baik Anda mengelola konflik versi, memastikan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), atau men-debug lintas platform, berikut tiga alat yang perlu dipertimbangkan:
+Men-debug pembaruan Over-the-Air (OTA) dalam aplikasi [Capacitor](https://capacitorjs.com/) bisa rumit, tetapi alat yang tepat membuat perbedaan besar. Baik Anda mengelola konflik versi, memastikan [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/), atau men-debug lintas platform, berikut tiga alat yang perlu dipertimbangkan:
 
 -   **[Capgo](https://capgo.app/)**: Pembaruan OTA aman dengan enkripsi end-to-end, integrasi CI/CD, dan peluncuran khusus pengguna. Mulai dari $12/bulan.
 -   **@capawesome/capacitor-live-update**: Plugin gratis dan sederhana untuk [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) OTA dasar dengan rollback otomatis.

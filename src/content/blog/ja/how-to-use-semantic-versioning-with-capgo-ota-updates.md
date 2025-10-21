@@ -112,7 +112,7 @@ CapacitorUpdater.initialize({
 
 ### バージョン管理の統合
 
-Capgoは、CI/CDプラットフォームとうまく連携し、[自動更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を簡単にします。サポートされているプラットフォームには以下があります:
+Capgoは、CI/CDプラットフォームとうまく連携し、[自動更新](https://capgo.app/docs/live-updates/update-behavior/) を簡単にします。サポートされているプラットフォームには以下があります:
 
 - [GitHub Actions](https://docs.github.com/actions)
 - [GitLab CI](https://docs.gitlab.com/ee/ci/)

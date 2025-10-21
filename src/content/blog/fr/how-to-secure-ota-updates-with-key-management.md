@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Que sont les mises à jour OTA ?** Elles vous permettent de déployer directement les modifications d'applications aux utilisateurs sans attendre l'approbation des stores. Des outils comme [Capgo](https://capgo.app/) peuvent atteindre un taux de mise à jour de 95% en 24 heures.
 -   **Pourquoi la sécurité est-elle importante ?** Sans chiffrement et gestion des clés appropriés, les mises à jour sont vulnérables aux altérations, aux attaques de l'homme du milieu et à l'usurpation de version.
--   **Comment [sécuriser les mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) ?**
+-   **Comment [sécuriser les mises à jour](https://capgo.app/docs/live-updates/update-behavior/) ?**
     -   Utiliser le **chiffrement de bout en bout** pour protéger les paquets de mise à jour.
     -   Générer des clés robustes avec des algorithmes comme [RSA-4096](https://en.wikipedia.org/wiki/RSA_\(cryptosystem\)) ou [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
     -   Stocker les clés de manière sécurisée en utilisant des **[Modules de Sécurité Matériels](https://en.wikipedia.org/wiki/Hardware_security_module) (HSM)** ou des coffres-forts de clés chiffrés.

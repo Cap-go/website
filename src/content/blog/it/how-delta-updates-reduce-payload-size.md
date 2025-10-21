@@ -34,7 +34,7 @@ Gli aggiornamenti Delta rendono gli aggiornamenti delle app più veloci e più p
 -   **Strumenti automatizzati**: Funziona con sistemi CI/CD come [GitHub Actions](https://docs.github.com/actions) e [Jenkins](https://www.jenkins.io/).
 -   **Metriche di performance**: Traccia i tassi di successo degli aggiornamenti, le velocità di download e il coinvolgimento degli utenti.
 
-Gli aggiornamenti Delta sono ideali per le app [Capacitor](https://capacitorjs.com/), consentendo correzioni di bug rapide, implementazione di funzionalità e [aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) risparmiando banda e tempo.
+Gli aggiornamenti Delta sono ideali per le app [Capacitor](https://capacitorjs.com/), consentendo correzioni di bug rapide, implementazione di funzionalità e [aggiornamenti sicuri](https://capgo.app/docs/live-updates/update-behavior/) risparmiando banda e tempo.
 
 ## Come ottenere PIÙ FPS e migliori prestazioni in Warzone ...
 

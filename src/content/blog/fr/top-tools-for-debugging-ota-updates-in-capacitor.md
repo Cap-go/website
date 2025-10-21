@@ -18,7 +18,7 @@ published: true
 locale: fr
 next_blog: ''
 ---
-Déboguer les mises à jour Over-the-Air (OTA) dans des applications [Capacitor](https://capacitorjs.com/) peut être délicat, mais les bons outils font une grande différence. Que vous gériez des conflits de versions, que vous assuriez des [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), ou que vous déboguiez sur plusieurs plateformes, voici trois outils à considérer :
+Déboguer les mises à jour Over-the-Air (OTA) dans des applications [Capacitor](https://capacitorjs.com/) peut être délicat, mais les bons outils font une grande différence. Que vous gériez des conflits de versions, que vous assuriez des [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/), ou que vous déboguiez sur plusieurs plateformes, voici trois outils à considérer :
 
 1.   **[Capgo](https://capgo.app/)** : Mises à jour OTA sécurisées avec chiffrement de bout en bout, intégration CI/CD et déploiements spécifiques aux utilisateurs. À partir de 12 $/mois.
 2.   **@capawesome/capacitor-live-update** : Un plugin simple et gratuit pour la gestion de base des mises à jour OTA [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) avec retour automatique.

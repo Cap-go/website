@@ -73,7 +73,7 @@ Esta segmentación permite un enfoque más personalizado para mejorar la experie
 Con tus usuarios agrupados, puedes diseñar [estrategias de actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) que se adapten a sus necesidades específicas. Aquí te explicamos cómo abordar cada segmento:
 
 -   **Usuarios Avanzados**: Crea un canal beta donde puedan probar nuevas características y proporcionar comentarios antes de un lanzamiento completo.
--   **Usuarios Regulares**: Utiliza implementaciones por etapas para garantizar la estabilidad. Las [actualizaciones parciales](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) pueden reducir las demandas de ancho de banda y acelerar las descargas.
+-   **Usuarios Regulares**: Utiliza implementaciones por etapas para garantizar la estabilidad. Las [actualizaciones parciales](https://capgo.app/docs/live-updates/update-behavior/) pueden reducir las demandas de ancho de banda y acelerar las descargas.
 -   **Usuarios Inactivos**: Enfócate en mejorar las características centrales y la estabilidad. Ofrecer opciones de retroceso con un clic puede incentivar a estos usuarios a reactivar su interés.
 
 ## Usando [Capgo](https://capgo.app/) para la Segmentación de Usuarios
@@ -86,7 +86,7 @@ Capgo ofrece herramientas que facilitan dirigirse a actualizaciones para grupos 
 
 Capgo lleva la segmentación de usuarios un paso más allá al asignar usuarios a canales específicos para implementaciones de actualizaciones personalizadas. Este [sistema de canales](https://capgo.app/docs/plugin/cloud-mode/channel-system/) garantiza que las actualizaciones se entreguen con precisión:
 
-| **Segmento de Usuario** | **Tipo de Canal** | **[Estrategia de Actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** |
+| **Segmento de Usuario** | **Tipo de Canal** | **[Estrategia de Actualización](https://capgo.app/docs/live-updates/update-behavior/)** |
 | --- | --- | --- |
 | Usuarios Avanzados | Canal Beta | Acceso anticipado a nuevas características |
 | Usuarios Regulares | Canal de Producción | Implementaciones por etapas centradas en la estabilidad |

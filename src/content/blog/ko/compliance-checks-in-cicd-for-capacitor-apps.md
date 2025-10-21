@@ -31,7 +31,7 @@ next_blog: ''
 -   암호화, 종속성 검사, 테스팅과 같은 보안 조치 통합
 -   사용자 경험 향상을 위한 성능 및 접근성 테스트 활용
 
-**Capgo는 이 과정을 단순화하여**, 자동화된 컴플라이언스, 실시간 오류 추적, [안전한 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 위한 도구를 제공합니다.
+**Capgo는 이 과정을 단순화하여**, 자동화된 컴플라이언스, 실시간 오류 추적, [안전한 업데이트](https://capgo.app/docs/live-updates/update-behavior/)를 위한 도구를 제공합니다.
 
 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)에 대한 적절한 CI/CD 사례로 컴플라이언스, 보안, 효율성을 유지하세요.
 

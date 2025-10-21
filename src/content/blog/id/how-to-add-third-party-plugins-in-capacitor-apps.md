@@ -340,7 +340,7 @@ Berikut adalah pembagian proses integrasi menjadi fase-fase utama:
 | **Pra-Integrasi** | Penelitian kompatibilitas plugin dan ulasan pengguna | Mengidentifikasi potensi tantangan lebih awal |
 | **Instalasi** | Instal plugin menggunakan npm dan jalankan sinkronisasi Capacitor | Memastikan integrasi lancar di semua platform |
 | **Konfigurasi** | Menangani persyaratan pengaturan khusus platform | Mengoptimalkan kinerja plugin |
-| **Pemeliharaan** | Gunakan [pembaruan otomatis](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) dengan Capgo | 95% pengguna diperbarui dalam 24 jam[\[1\]](https://capgo.app/) |
+| **Pemeliharaan** | Gunakan [pembaruan otomatis](https://capgo.app/docs/live-updates/update-behavior/) dengan Capgo | 95% pengguna diperbarui dalam 24 jam[\[1\]](https://capgo.app/) |
 
 Capgo menawarkan alat untuk memperlancar pembaruan. Rodrigo Mantica menekankan pentingnya:
 

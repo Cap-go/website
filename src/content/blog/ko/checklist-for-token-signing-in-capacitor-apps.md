@@ -37,7 +37,7 @@ next_blog: ''
 
 **실시간 업데이트:**
 
--   서명된 토큰을 사용하여 [업데이트 보안](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   서명된 토큰을 사용하여 [업데이트 보안](https://capgo.app/docs/live-updates/update-behavior/)
 -   손상된 업데이트에 대한 롤백 옵션 활성화
 -   사용자 참여 및 업데이트 성공률 모니터링
 

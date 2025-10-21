@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Outils principaux :** Utilisez les signatures numériques SHA-256, les vérifications au runtime et le chiffrement (AES-256) pour protéger le code.
 -   **Fonctionnalités spécifiques aux plateformes :** Pour Android, intégrez l'[API Play Integrity](https://developer.android.com/google/play/integrity) pour la vérification des applications et l'attestation des appareils. Pour iOS, suivez la directive 3.1.2 de l'App Store pour les mises à jour OTA.
--   **Sécurité des mises à jour OTA :** Implémentez le chiffrement de bout en bout, la validation des sommes de contrôle et le suivi de conformité pour [sécuriser les mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   **Sécurité des mises à jour OTA :** Implémentez le chiffrement de bout en bout, la validation des sommes de contrôle et le suivi de conformité pour [sécuriser les mises à jour](https://capgo.app/docs/live-updates/update-behavior/).
 -   **Outils recommandés :** Des outils comme [Capgo](https://capgo.app/) simplifient les mises à jour OTA sécurisées avec le chiffrement, le contrôle de version et le suivi de la conformité.
 
 ### Comparaison rapide des outils et fonctionnalités clés

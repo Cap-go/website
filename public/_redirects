@@ -9,6 +9,8 @@
 /sitemap.xml /sitemap-index.xml 301
 /sitemap-index.xml/ /sitemap-index.xml 301
 /sitemap-0.xml/ /sitemap-0.xml 301
+/llms-full.txt/ /llms-full.txt 301
+/llm.txt/ /llms.txt 301
 /docs/plugin/cloud-mode/getting-started/ /docs/getting-started/quickstart 302
 /en/* /:splat 302
 /login/ /register/ 302

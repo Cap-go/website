@@ -20,7 +20,7 @@ next_blog: ''
 
 -   **What are OTA updates?** They let you push app changes directly to users without waiting for app store approvals. Tools like [Capgo](https://capgo.app/) can achieve a 95% update rate within 24 hours.
 -   **Why is security important?** Without proper encryption and key management, updates are vulnerable to tampering, man-in-the-middle attacks, and version spoofing.
--   **How to [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)?**
+-   **How to [secure updates](https://capgo.app/docs/live-updates/update-behavior/)?**
     -   Use **end-to-end encryption** to protect update packages.
     -   Generate strong keys with algorithms like [RSA-4096](https://en.wikipedia.org/wiki/RSA_\(cryptosystem\)) or [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
     -   Store keys securely using **[Hardware Security Modules](https://en.wikipedia.org/wiki/Hardware_security_module) (HSMs)** or encrypted key vaults.

@@ -31,7 +31,7 @@ Here’s why compliance checks matter:
 -   Integrate security measures like encryption, dependency checks, and testing.
 -   Use performance and accessibility tests to enhance user experience.
 
-**Capgo simplifies this process**, offering tools for automated compliance, real-time error tracking, and [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+**Capgo simplifies this process**, offering tools for automated compliance, real-time error tracking, and [secure updates](https://capgo.app/docs/live-updates/update-behavior/).
 
 Stay compliant, secure, and efficient with proper CI/CD practices for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/).
 

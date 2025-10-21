@@ -31,7 +31,7 @@ next_blog: ''
 -   **强制性评估**：应用必须通过技术安全审查、数据保护影响评估和网络安全检查。
 -   **违规后果**：罚款、应用下架、服务暂停和声誉损害。
 
-为保持合规，开发者应使用加密、实时监控和[安全更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)工具。违规可能导致严重处罚，因此早期准备对在中国市场取得成功至关重要。
+为保持合规，开发者应使用加密、实时监控和[安全更新](https://capgo.app/docs/live-updates/update-behavior/)工具。违规可能导致严重处罚，因此早期准备对在中国市场取得成功至关重要。
 
 ## [中华人民共和国网络安全法](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China)基础
 

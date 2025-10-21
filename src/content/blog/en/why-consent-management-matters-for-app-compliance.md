@@ -54,7 +54,7 @@ The challenge grows when apps must follow rules from multiple regions, each inte
 
 ### Compliance Penalties
 
-Failing to meet privacy standards can lead to hefty fines and legal trouble. Even small mistakes in handling consent could result in regulatory action. This makes it essential to roll out [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) quickly to stay compliant.
+Failing to meet privacy standards can lead to hefty fines and legal trouble. Even small mistakes in handling consent could result in regulatory action. This makes it essential to roll out [secure updates](https://capgo.app/docs/live-updates/update-behavior/) quickly to stay compliant.
 
 ### Update Management Issues
 
@@ -182,7 +182,7 @@ Managing consent effectively requires dependable tools and a clear strategy. Usi
 
 Here’s what you should prioritize:
 
-1.  **[Automate Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Opt for a platform that allows quick deployment. For example, Capgo achieves a 95% user update rate within 24 hours [\[1\]](https://capgo.app/), ensuring compliance adjustments are made promptly.
+1.  **[Automate Updates](https://capgo.app/docs/live-updates/update-behavior/)**: Opt for a platform that allows quick deployment. For example, Capgo achieves a 95% user update rate within 24 hours [\[1\]](https://capgo.app/), ensuring compliance adjustments are made promptly.
 2.  **Ensure Secure Data Handling**: Protect consent updates with end-to-end encryption to meet privacy regulations.
 3.  **Track Update Performance**: Use analytics to evaluate how well updates are working. Top platforms maintain consistently high success rates [\[1\]](https://capgo.app/).
 

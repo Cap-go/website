@@ -187,7 +187,7 @@ Estas auditorías, junto con herramientas de gestión de privacidad, ayudan a lo
 
 ### Herramientas de gestión de privacidad
 
-Para manejar eficientemente los desafíos de cumplimiento, los desarrolladores confían en herramientas para actualizaciones rápidas y [seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). Capgo es un ejemplo principal, habiendo entregado más de 947.6 millones de [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) globalmente [\[1\]](https://capgo.app/).
+Para manejar eficientemente los desafíos de cumplimiento, los desarrolladores confían en herramientas para actualizaciones rápidas y [seguras](https://capgo.app/docs/live-updates/update-behavior/). Capgo es un ejemplo principal, habiendo entregado más de 947.6 millones de [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) globalmente [\[1\]](https://capgo.app/).
 
 | Característica | Beneficio de privacidad | Impacto de implementación |
 | --- | --- | --- |

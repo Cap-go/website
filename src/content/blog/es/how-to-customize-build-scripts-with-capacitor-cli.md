@@ -35,7 +35,7 @@ next_blog: ''
 -   **Hooks de Construcción**: Ejecuta código durante etapas específicas del proceso de construcción.
 -   **Variables de Entorno**: Simplifica construcciones específicas de entorno con archivos `.env`.
 
-[Capgo](https://capgo.app/), una herramienta de despliegue, mejora este proceso con [actualizaciones automatizadas](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), seguimiento de versiones y optimización del rendimiento global. Sigue leyendo para aprender cómo configurar y personalizar tus scripts de construcción para una máxima eficiencia.
+[Capgo](https://capgo.app/), una herramienta de despliegue, mejora este proceso con [actualizaciones automatizadas](https://capgo.app/docs/live-updates/update-behavior/), seguimiento de versiones y optimización del rendimiento global. Sigue leyendo para aprender cómo configurar y personalizar tus scripts de construcción para una máxima eficiencia.
 
 ## Presentando [Capacitor](https://capacitorjs.com/) Configure
 

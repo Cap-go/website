@@ -61,7 +61,7 @@ El desafío crece cuando las aplicaciones deben seguir reglas de múltiples regi
 
 ### Sanciones por incumplimiento
 
-No cumplir con los estándares de privacidad puede llevar a multas cuantiosas y problemas legales. Incluso pequeños errores en el manejo del consentimiento podrían resultar en acciones regulatorias. Esto hace esencial implementar [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) rápidamente para mantener el cumplimiento.
+No cumplir con los estándares de privacidad puede llevar a multas cuantiosas y problemas legales. Incluso pequeños errores en el manejo del consentimiento podrían resultar en acciones regulatorias. Esto hace esencial implementar [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) rápidamente para mantener el cumplimiento.
 
 ### Problemas de gestión de actualizaciones
 
@@ -189,7 +189,7 @@ Gestionar el consentimiento efectivamente requiere herramientas confiables y una
 
 Esto es lo que deberías priorizar:
 
-1. **[Automatizar actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Opte por una plataforma que permita una implementación rápida. Por ejemplo, Capgo logra una tasa de actualización del 95% de usuarios en 24 horas [\[1\]](https://capgo.app/), asegurando que los ajustes de cumplimiento se realicen rápidamente.
+1. **[Automatizar actualizaciones](https://capgo.app/docs/live-updates/update-behavior/)**: Opte por una plataforma que permita una implementación rápida. Por ejemplo, Capgo logra una tasa de actualización del 95% de usuarios en 24 horas [\[1\]](https://capgo.app/), asegurando que los ajustes de cumplimiento se realicen rápidamente.
 2. **Garantizar el manejo seguro de datos**: Proteja las actualizaciones de consentimiento con cifrado de extremo a extremo para cumplir con las regulaciones de privacidad.
 3. **Seguimiento del rendimiento de actualizaciones**: Use análisis para evaluar qué tan bien funcionan las actualizaciones. Las mejores plataformas mantienen tasas de éxito consistentemente altas [\[1\]](https://capgo.app/).
 

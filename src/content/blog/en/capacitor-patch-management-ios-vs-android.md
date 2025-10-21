@@ -53,7 +53,7 @@ Here are some key factors for iOS updates:
 | **Review Process** | Manual review by the App Store team | May delay critical updates |
 | **Update Window** | Updates remain available for 180 days [\[5\]](https://support.apple.com/guide/deployment/installing-and-enforcing-software-updates-depd30715cbb/web) | Affects long-term version management |
 | **Deferral Options** | Updates can be deferred for 1–90 days [\[5\]](https://support.apple.com/guide/deployment/installing-and-enforcing-software-updates-depd30715cbb/web) | Allows controlled rollouts |
-| **Version Control** | Differentiates between major and minor updates [\[5\]](https://support.apple.com/guide/deployment/installing-and-enforcing-software-updates-depd30715cbb/web) | Offers [flexibility in updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| **Version Control** | Differentiates between major and minor updates [\[5\]](https://support.apple.com/guide/deployment/installing-and-enforcing-software-updates-depd30715cbb/web) | Offers [flexibility in updates](https://capgo.app/docs/live-updates/update-behavior/) |
 
 While this system ensures high standards, it can slow down the deployment of urgent updates.
 
@@ -100,7 +100,7 @@ Apple's tightly controlled ecosystem and mandatory app review process create not
 | Undocumented Features | 48,000+ | Demands thorough feature explanations |
 | Misleading Metadata | 150,000+ | Calls for precise version descriptions |
 
-Apart from the review process, iOS's WebView update mechanism introduces additional technical constraints. While developers can update web content, binary changes still require a rebuild and resubmission. This limitation complicates the process of delivering [seamless updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[9\]](https://capacitorjs.com/docs/guides/deploying-updates). Additionally, research shows that 93% of top iOS apps remain vulnerable to repackaging attacks, further emphasizing the need for stringent update strategies [\[12\]](https://promon.io/security-news/android-vs-ios-security).
+Apart from the review process, iOS's WebView update mechanism introduces additional technical constraints. While developers can update web content, binary changes still require a rebuild and resubmission. This limitation complicates the process of delivering [seamless updates](https://capgo.app/docs/live-updates/update-behavior/) [\[9\]](https://capacitorjs.com/docs/guides/deploying-updates). Additionally, research shows that 93% of top iOS apps remain vulnerable to repackaging attacks, further emphasizing the need for stringent update strategies [\[12\]](https://promon.io/security-news/android-vs-ios-security).
 
 ### Android Platform Limits
 
@@ -219,7 +219,7 @@ Here’s a quick comparison of the two platforms:
 
 ### Capgo Benefits
 
-Navigating these platform-specific challenges requires a tool that simplifies and streamlines patch management. This is where Capgo steps in as a reliable solution for [cross-platform updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). With Microsoft Code Push discontinued in 2024 and Appflow set to shut down in 2026, Capgo has become an essential tool for developers. It currently supports 1.7K production apps and has facilitated over 1.6 trillion updates [\[14\]](https://capgo.app).
+Navigating these platform-specific challenges requires a tool that simplifies and streamlines patch management. This is where Capgo steps in as a reliable solution for [cross-platform updates](https://capgo.app/docs/live-updates/update-behavior/). With Microsoft Code Push discontinued in 2024 and Appflow set to shut down in 2026, Capgo has become an essential tool for developers. It currently supports 1.7K production apps and has facilitated over 1.6 trillion updates [\[14\]](https://capgo.app).
 
 Here’s why Capgo stands out for cross-platform developers:
 

@@ -28,7 +28,7 @@ next_blog: ''
     -   Utilisez **le chiffrement de bout en bout** pour la sécurité des données.
     -   Expliquez clairement quelles données sont collectées et pourquoi.
     -   Permettez aux utilisateurs de contrôler et de gérer facilement leurs données.
--   **Des outils comme [Capgo](https://capgo.app/) aident** : Capgo simplifie la conformité avec des fonctionnalités telles que des [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), le suivi des erreurs en temps réel et la gestion des autorisations.
+-   **Des outils comme [Capgo](https://capgo.app/) aident** : Capgo simplifie la conformité avec des fonctionnalités telles que des [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/), le suivi des erreurs en temps réel et la gestion des autorisations.
 
 ### Vue d'ensemble rapide des règles de la plateforme
 

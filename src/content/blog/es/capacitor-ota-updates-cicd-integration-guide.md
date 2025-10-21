@@ -104,7 +104,7 @@ Configura tu pipeline para activar acciones basadas en cambios en la rama princi
 
 1. **Compilación**: Activada por cambios en el código para compilar y preparar tu aplicación
 2. **Pruebas**: Automatiza verificaciones de funcionalidad para asegurar la estabilidad
-3. **[Generación de Actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Empaqueta y optimiza activos para el despliegue
+3. **[Generación de Actualización](https://capgo.app/docs/live-updates/update-behavior/)**: Empaqueta y optimiza activos para el despliegue
 
 Cuando tu pipeline esté listo, podrás desplegar tus paquetes de actualización sin problemas
 

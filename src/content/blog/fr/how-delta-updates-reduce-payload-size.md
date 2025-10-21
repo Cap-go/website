@@ -34,7 +34,7 @@ Les mises à jour Delta rendent les mises à jour d'applications plus rapides et
 -   **Outils automatisés** : Fonctionne avec les systèmes CI/CD comme [GitHub Actions](https://docs.github.com/actions) et [Jenkins](https://www.jenkins.io/).
 -   **Métriques de performance** : Suit les taux de réussite des mises à jour, les vitesses de téléchargement et l'engagement des utilisateurs.
 
-Les mises à jour Delta sont idéales pour les applications [Capacitor](https://capacitorjs.com/), permettant des corrections de bugs rapides, des déploiements de fonctionnalités et des [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) tout en économisant de la bande passante et du temps.
+Les mises à jour Delta sont idéales pour les applications [Capacitor](https://capacitorjs.com/), permettant des corrections de bugs rapides, des déploiements de fonctionnalités et des [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) tout en économisant de la bande passante et du temps.
 
 ## Comment obtenir PLUS de FPS et de meilleures performances dans Warzone ...
 

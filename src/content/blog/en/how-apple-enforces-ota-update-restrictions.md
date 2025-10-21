@@ -18,7 +18,7 @@ next_blog: ''
 
 **Apple’s OTA update restrictions are designed to ensure security, protect user privacy, and maintain device integrity.** Here's a quick summary of how they work and what developers and businesses need to know:
 
--   **[Secure Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/):** Apple requires secure connections (TLS 1.3) for all updates, blocking unauthorized changes or downgrades. Updates are personalized for each device.
+-   **[Secure Updates](https://capgo.app/docs/live-updates/update-behavior/):** Apple requires secure connections (TLS 1.3) for all updates, blocking unauthorized changes or downgrades. Updates are personalized for each device.
 -   **Enterprise Controls:** Mobile Device Management (MDM) tools allow businesses to enforce update policies, delay updates (up to 90 days), and set minimum OS versions.
 -   **Battery & Storage Requirements:** Updates require specific battery levels and storage space to avoid disruptions. For example, iPhones need at least 20% battery for manual updates.
 -   **Strict Developer Guidelines:** Apps cannot download or run code that changes functionality post-approval. Unauthorized update methods lead to app rejection or removal.

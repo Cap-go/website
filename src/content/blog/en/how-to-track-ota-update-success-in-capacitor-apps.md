@@ -241,7 +241,7 @@ Updates can hit snags like network failures, version mismatches, outdated cache 
 | Failed Downloads | Poor network connection | Use an automatic retry system with exponential backoff. |
 | Version Conflicts | Incompatible dependencies | Enforce strict version checks before deploying updates. |
 | Cache Issues | Outdated cache files | Add cache-busting techniques and clear old versions. |
-| Partial Updates | Interrupted installation | Use [atomic updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) with a rollback option to ensure consistency. |
+| Partial Updates | Interrupted installation | Use [atomic updates](https://capgo.app/docs/live-updates/update-behavior/) with a rollback option to ensure consistency. |
 
 ### Error Tracking Setup
 

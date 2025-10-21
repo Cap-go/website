@@ -327,7 +327,7 @@ To enable live updates, add the following to your `capacitor.config.ts` file:
 
 Capgo provides several standout features:
 
--   **[Secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** with end-to-end encryption
+-   **[Secure updates](https://capgo.app/docs/live-updates/update-behavior/)** with end-to-end encryption
 -   **Automated deployments** through integrated CI/CD
 -   **Targeted updates** via user assignment
 -   **Instant rollback** with version control

@@ -45,7 +45,7 @@ npx @capgo/cli init
 
 이 명령은 다음을 포함한 OTA 업데이트에 필요한 구성 요소를 설정합니다:
 
--   [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 위한 **종단간 암호화**
+-   [보안 업데이트](https://capgo.app/docs/live-updates/update-behavior/)를 위한 **종단간 암호화**
     
 -   업데이트 출시를 관리하기 위한 **버전 관리**
     

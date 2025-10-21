@@ -58,7 +58,7 @@ Hier sind einige Hauptfunktionen der Capgo-Plattform:
 
 Capgos Ansatz hat eine globale Erfolgsquote von 82% bei Update-Bereitstellungen erreicht. Unternehmen können zwischen sicherem Cloud-Hosting oder Self-Hosting wählen, um ihre Compliance-Anforderungen zu erfüllen.
 
-Durch das Herunterladen nur der geänderten Komponenten minimiert Capgo Risiken und reduziert die Bandbreitennutzung. Bisher hat die Plattform über 1,155 Billionen [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) ausgeliefert [\[1\]](https://capgo.app/).
+Durch das Herunterladen nur der geänderten Komponenten minimiert Capgo Risiken und reduziert die Bandbreitennutzung. Bisher hat die Plattform über 1,155 Billionen [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) ausgeliefert [\[1\]](https://capgo.app/).
 
 Als Nächstes schauen wir uns an, wie Capawesome die Sicherheit von Zahlungsdaten handhabt.
 

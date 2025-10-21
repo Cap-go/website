@@ -40,7 +40,7 @@ Token-Signierung ist entscheidend für die Sicherheit von [Capacitor](https://ca
 
 **Live-Updates:**
 
--   Verwenden Sie signierte Tokens, um [Updates zu sichern](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   Verwenden Sie signierte Tokens, um [Updates zu sichern](https://capgo.app/docs/live-updates/update-behavior/).
 -   Aktivieren Sie Rollback-Optionen für kompromittierte Updates.
 -   Überwachen Sie das Engagement der Benutzer und die Erfolgsquoten der Updates.
 

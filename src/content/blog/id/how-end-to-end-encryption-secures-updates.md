@@ -188,7 +188,7 @@ Manfaat pembaruan OTA yang aman melampaui sekadar keamanan. Pengembang telah ber
 
 Berikut beberapa faktor kunci yang berkontribusi pada keberhasilan pembaruan OTA:
 
-| Faktor Keberhasilan | Peran dalam [Secure Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Faktor Keberhasilan | Peran dalam [Secure Updates](https://capgo.app/docs/live-updates/update-behavior/) |
 | --- | --- |
 | [Implementasi Enkripsi](https://capgo.app/docs/cli/migrations/encryption/) | Memastikan hanya pengguna yang berwenang yang dapat mendekripsi pembaruan |
 | Strategi Distribusi | Mengelola peluncuran bertahap yang terkendali |

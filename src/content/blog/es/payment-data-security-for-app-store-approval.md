@@ -58,7 +58,7 @@ Aquí hay algunas características clave de la plataforma de Capgo:
 
 El enfoque de Capgo ha logrado una tasa de éxito global del 82% en los despliegues de actualizaciones. Las empresas pueden optar por alojamiento en la nube seguro o autoalojamiento para alinearse con sus necesidades de cumplimiento.
 
-Al descargar solo los componentes que han cambiado, Capgo minimiza riesgos y reduce el uso de ancho de banda. Hasta ahora, la plataforma ha entregado más de 1.155 billones de [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/).
+Al descargar solo los componentes que han cambiado, Capgo minimiza riesgos y reduce el uso de ancho de banda. Hasta ahora, la plataforma ha entregado más de 1.155 billones de [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
 A continuación, veamos cómo Capawesome aborda la seguridad de los datos de pago.
 

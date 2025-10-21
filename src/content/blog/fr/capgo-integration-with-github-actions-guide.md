@@ -32,7 +32,7 @@ next_blog: ''
 
 1.  **Exigences** : Compte GitHub, [compte Capgo](https://capgo.app/disclaimer/) (à partir de 12 $/mois), projet Capacitor, [Node.js](https://nodejs.org/en).
 2.  **Configuration** : Installez [Capgo CLI](https://capgo.app/docs/cli/commands) avec `npx @capgo/cli init`, configurez GitHub Actions avec un workflow YAML.
-3.  **Déploiement** : Utilisez des commandes comme `npx @capgo/cli deploy` pour [automatiser les mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+3.  **Déploiement** : Utilisez des commandes comme `npx @capgo/cli deploy` pour [automatiser les mises à jour](https://capgo.app/docs/live-updates/update-behavior/).
 4.  **Tests** : Déployez vers des canaux de test (par exemple, bêta, préproduction) avant la production.
 
 **Exemple de Workflow (YAML)** :

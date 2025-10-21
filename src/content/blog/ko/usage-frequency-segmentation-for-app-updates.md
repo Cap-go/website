@@ -70,7 +70,7 @@ next_blog: ''
 사용자가 그룹화되면, [업데이트 전략](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)을 설계하여 그들의 특정 요구를 충족할 수 있습니다. 각 세그먼트에 접근하는 방법은 다음과 같습니다:
 
 -   **핵심 사용자**: 그들이 새 기능을 테스트하고 전체 출시 전에 피드백을 제공할 수 있는 베타 채널을 만듭니다.
--   **일반 사용자**: 안정성을 보장하기 위해 단계적 롤아웃을 사용합니다. [부분 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)는 대역폭 요구를 줄이고 다운로드 속도를 높일 수 있습니다.
+-   **일반 사용자**: 안정성을 보장하기 위해 단계적 롤아웃을 사용합니다. [부분 업데이트](https://capgo.app/docs/live-updates/update-behavior/)는 대역폭 요구를 줄이고 다운로드 속도를 높일 수 있습니다.
 -   **비활성 사용자**: 핵심 기능과 안정성을 개선하는 데 집중합니다. 원클릭 롤백 옵션을 제공하여 이러한 사용자가 재참여하도록 유도할 수 있습니다.
 
 ## [Capgo](https://capgo.app/)를 사용한 사용자 타겟팅
@@ -83,7 +83,7 @@ Capgo는 사용자 빈도 세분화 기능 덕분에 특정 사용자 그룹에 
 
 Capgo는 사용자를 특정 채널에 할당하여 맞춤형 업데이트 롤아웃을 통해 사용자 세분화를 한 단계 더 발전시킵니다. 이 [채널 시스템](https://capgo.app/docs/plugin/cloud-mode/channel-system/)은 업데이트가 정밀하게 전달되도록 보장합니다:
 
-| **사용자 세그먼트** | **채널 유형** | **[업데이트 전략](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** |
+| **사용자 세그먼트** | **채널 유형** | **[업데이트 전략](https://capgo.app/docs/live-updates/update-behavior/)** |
 | --- | --- | --- |
 | 핵심 사용자 | 베타 채널 | 새 기능에 대한 조기 접근 |
 | 일반 사용자 | 프로덕션 채널 | 안정성에 집중한 단계적 롤아웃 |

@@ -434,7 +434,7 @@ Voici quelques façons d'améliorer la stabilité et d'éviter les problèmes r�
 }
 ```
 
-- Utilisez le chiffrement de bout en bout pour [sécuriser les mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/).
+- Utilisez le chiffrement de bout en bout pour [sécuriser les mises à jour](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
 ## Résumé
 

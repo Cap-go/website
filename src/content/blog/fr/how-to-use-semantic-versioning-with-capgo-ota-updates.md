@@ -114,7 +114,7 @@ await CapacitorUpdater.initialize({ key: 'YOUR_API_KEY' })
 
 ### Intégration du contrôle de version
 
-Capgo fonctionne bien avec les plateformes CI/CD, rendant les [mises à jour automatisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) simples. Les plateformes prises en charge incluent :
+Capgo fonctionne bien avec les plateformes CI/CD, rendant les [mises à jour automatisées](https://capgo.app/docs/live-updates/update-behavior/) simples. Les plateformes prises en charge incluent :
 
 -   [GitHub Actions](https://docs.github.com/actions)
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)

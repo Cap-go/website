@@ -32,7 +32,7 @@ next_blog: ''
 - **自動化ツール**: [GitHub Actions](https://docs.github.com/actions)や[Jenkins](https://www.jenkins.io/)などのCI/CDシステムと連携。
 - **パフォーマンス指標**: アップデート成功率、ダウンロード速度、ユーザーエンゲージメントを追跡。
 
-デルタアップデートは[Capacitor](https://capacitorjs.com/)アプリに最適で、バグ修正、機能のロールアウト、[セキュアなアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を帯域幅と時間を節約しながら実現できます。
+デルタアップデートは[Capacitor](https://capacitorjs.com/)アプリに最適で、バグ修正、機能のロールアウト、[セキュアなアップデート](https://capgo.app/docs/live-updates/update-behavior/) を帯域幅と時間を節約しながら実現できます。
 
 ## How To Get MORE FPS and Better Performance in Warzone ...
 

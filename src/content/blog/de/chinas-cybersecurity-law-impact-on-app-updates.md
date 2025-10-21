@@ -159,7 +159,7 @@ Beispielsweise vereinfacht **Capgos Plattform** das Compliance-Tracking, indem s
 
 Angesichts des schnellen Tempos der App-Updates unter strengen Cybersicherheitsregeln sind regelmäßige Sicherheitsprüfungen unerlässlich. Externe Audits und Schwachstellenbewertungen können potenzielle Lücken frühzeitig identifizieren und Teams helfen, Probleme zu beheben, bevor sie eskalieren. Streben Sie vierteljährliche Audits an, um Verschlüsselungsmethoden, Datenspeicherungsrichtlinien und Update-Bereitstellungsprozesse zu überprüfen.
 
-Zusätzlich sollten wöchentliche interne Überprüfungen durchgeführt werden, um die Einhaltung in Bereichen wie Datenspeicherung, [Verschlüsselungsupdates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), Zugangskontrollen, Bereitstellungsprotokolle und den Schutz Benutzerdaten zu bestätigen. Detaillierte Aufzeichnungen dieser Prüfungen zu führen, ist entscheidend, um hohe Strafen für die Nichteinhaltung zu vermeiden.
+Zusätzlich sollten wöchentliche interne Überprüfungen durchgeführt werden, um die Einhaltung in Bereichen wie Datenspeicherung, [Verschlüsselungsupdates](https://capgo.app/docs/live-updates/update-behavior/), Zugangskontrollen, Bereitstellungsprotokolle und den Schutz Benutzerdaten zu bestätigen. Detaillierte Aufzeichnungen dieser Prüfungen zu führen, ist entscheidend, um hohe Strafen für die Nichteinhaltung zu vermeiden.
 
 > "Das Vermeiden einer Überprüfung für Bugfixes ist Gold wert." - Bessie Cooper [\[2\]](https://capgo.app)
 

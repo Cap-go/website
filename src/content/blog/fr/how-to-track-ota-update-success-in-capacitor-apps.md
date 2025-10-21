@@ -244,7 +244,7 @@ Les mises à jour peuvent rencontrer des difficultés comme des échecs réseau,
 | Téléchargements échoués | Mauvaise connexion réseau | Utilisez un système de réessai automatique avec backoff exponentiel. |
 | Conflits de version | Dépendances incompatibles | Appliquez des vérifications strictes de version avant de déployer les mises à jour. |
 | Problèmes de cache | Fichiers cache obsolètes | Ajoutez des techniques de cache-busting et nettoyez les anciennes versions. |
-| Mises à jour partielles | Installation interrompue | Utilisez des [mises à jour atomiques](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) avec option de retour en arrière pour assurer la cohérence. |
+| Mises à jour partielles | Installation interrompue | Utilisez des [mises à jour atomiques](https://capgo.app/docs/live-updates/update-behavior/) avec option de retour en arrière pour assurer la cohérence. |
 
 ### Configuration du suivi des erreurs
 

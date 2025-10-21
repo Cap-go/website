@@ -67,7 +67,7 @@ La PIPL exige également que les développeurs d'applications adoptent des prati
 
 Ces mises à jour visent à renforcer l'application et à s'attaquer aux nouveaux défis de cybersécurité [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/).
 
-Pour les développeurs d'applications travaillant sur des mises à jour et des correctifs de sécurité, l'utilisation de [plateformes de mise à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) peut simplifier la conformité à ces réglementations. Par exemple, **Capgo** (https://capgo.app) propose un chiffrement de bout en bout et une [gestion des mises à jour en temps réel](https://capgo.app/docs/plugin/cloud-mode/manual-update/), ce qui est particulièrement précieux dans un marché avec plus de 4 millions d'applications mobiles et la plus grande base d'utilisateurs d'Internet mobile au monde [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
+Pour les développeurs d'applications travaillant sur des mises à jour et des correctifs de sécurité, l'utilisation de [plateformes de mise à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) peut simplifier la conformité à ces réglementations. Par exemple, **Capgo** (https://capgo.app) propose un chiffrement de bout en bout et une [gestion des mises à jour en temps réel](https://capgo.app/docs/plugin/cloud-mode/manual-update/), ce qui est particulièrement précieux dans un marché avec plus de 4 millions d'applications mobiles et la plus grande base d'utilisateurs d'Internet mobile au monde [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 
 ## Exigences en matière de protection des données
 
@@ -181,7 +181,7 @@ Les développeurs doivent maintenir un inventaire détaillé de tous les SDK uti
 - 3. Certificats de sécurité
 - 4. Conformité à la Loi sur la protection des informations personnelles (PIPL) et à la Loi sur la sécurité des données (DSL) [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)
 
-Pour les applications reposant sur des [mises à jour basées sur le cloud](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), des plateformes comme Capgo fournissent des outils pour le contrôle des versions et le déploiement de correctifs conformes aux normes de cybersécurité chinoises.
+Pour les applications reposant sur des [mises à jour basées sur le cloud](https://capgo.app/docs/live-updates/update-behavior/), des plateformes comme Capgo fournissent des outils pour le contrôle des versions et le déploiement de correctifs conformes aux normes de cybersécurité chinoises.
 
 Pour faire respecter la conformité, la CAC a mis en place un système de signalement. Le non-respect peut entraîner la suppression de l'application et de lourdes pénalités [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 

@@ -190,7 +190,7 @@ El cumplimiento de OTA beta se basa en tres áreas principales: **seguridad**, *
 -   **Medidas de seguridad**
     
     -   Las actualizaciones están protegidas con cifrado de extremo a extremo, asegurando que solo los usuarios autorizados puedan acceder a ellas.
-    -   El monitoreo en tiempo real apoya [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), con opciones de reversión instantánea para una rápida resolución de problemas (tasa de éxito del 82%) [\[1\]](https://capgo.app/).
+    -   El monitoreo en tiempo real apoya [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/), con opciones de reversión instantánea para una rápida resolución de problemas (tasa de éxito del 82%) [\[1\]](https://capgo.app/).
 -   **Control de distribución**
     
     -   Los sistemas de canal permiten la gestión precisa de los grupos beta.

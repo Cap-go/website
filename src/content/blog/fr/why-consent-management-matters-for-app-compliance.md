@@ -63,7 +63,7 @@ Le défi s'accroît lorsque les applications doivent suivre les règles de plusi
 
 ### Pénalités de non-conformité
 
-Le non-respect des normes de confidentialité peut entraîner de lourdes amendes et des problèmes juridiques Même de petites erreurs dans la gestion du consentement pourraient entraîner des actions réglementaires Il est donc essentiel de déployer rapidement des [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) pour rester conforme
+Le non-respect des normes de confidentialité peut entraîner de lourdes amendes et des problèmes juridiques Même de petites erreurs dans la gestion du consentement pourraient entraîner des actions réglementaires Il est donc essentiel de déployer rapidement des [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) pour rester conforme
 
 ### Problèmes de gestion des mises à jour
 
@@ -191,7 +191,7 @@ La gestion efficace du consentement nécessite des outils fiables et une straté
 
 Voici ce que vous devez prioriser :
 
-1. **[Automatiser les mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** : Optez pour une plateforme qui permet un déploiement rapide Par exemple, Capgo atteint un taux de mise à jour de 95% des utilisateurs en 24 heures [\[1\]](https://capgo.app/), garantissant que les ajustements de conformité sont effectués rapidement
+1. **[Automatiser les mises à jour](https://capgo.app/docs/live-updates/update-behavior/)** : Optez pour une plateforme qui permet un déploiement rapide Par exemple, Capgo atteint un taux de mise à jour de 95% des utilisateurs en 24 heures [\[1\]](https://capgo.app/), garantissant que les ajustements de conformité sont effectués rapidement
 2. **Assurer la sécurité des données** : Protégez les mises à jour de consentement avec un chiffrement de bout en bout pour respecter les réglementations sur la confidentialité
 3. **Suivre les performances des mises à jour** : Utilisez les analyses pour évaluer l'efficacité des mises à jour Les meilleures plateformes maintiennent des taux de réussite constamment élevés [\[1\]](https://capgo.app/)
 

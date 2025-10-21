@@ -103,7 +103,7 @@ Siapkan pipeline Anda untuk memicu tindakan berdasarkan perubahan di cabang utam
 
 -   **Build**: Dipicu oleh perubahan kode untuk mengompilasi dan menyiapkan aplikasi Anda.
 -   **Test**: Mengotomatisasi pemeriksaan fungsionalitas untuk memastikan stabilitas.
--   **[Pembuatan Update](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Menggabungkan dan mengoptimalkan aset untuk penerapan.
+-   **[Pembuatan Update](https://capgo.app/docs/live-updates/update-behavior/)**: Menggabungkan dan mengoptimalkan aset untuk penerapan.
 
 Ketika pipeline Anda siap, Anda dapat menerapkan bundle pembaruan Anda dengan lancar.
 

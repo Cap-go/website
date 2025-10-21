@@ -438,7 +438,7 @@ Hier ist eine Aufschlüsselung des Integrationsprozesses in Schlüsselphasen:
 | **Vor-Integration** | Recherche zur Plugin-Kompatibilität und Nutzer-Bewertungen | Identifiziert potenzielle Herausforderungen frühzeitig |
 | **Installation** | Installation der Plugins über npm und Ausführung der Capacitor-Synchronisation | Gewährleistet reibungslose Integration über Plattformen hinweg |
 | **Konfiguration** | Handhabung plattformspezifischer Einrichtungsanforderungen | Optimiert Plugin-Performance |
-| **Wartung** | Verwendung von [automatisierten Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) mit Capgo | 95% der Nutzer innerhalb von 24 Stunden aktualisiert[\[1\]](https://capgo.app/) |
+| **Wartung** | Verwendung von [automatisierten Updates](https://capgo.app/docs/live-updates/update-behavior/) mit Capgo | 95% der Nutzer innerhalb von 24 Stunden aktualisiert[\[1\]](https://capgo.app/) |
 
 Capgo bietet Tools zur Optimierung von Updates. Rodrigo Mantica betont dessen Bedeutung:
 

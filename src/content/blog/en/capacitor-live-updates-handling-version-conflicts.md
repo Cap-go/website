@@ -35,7 +35,7 @@ Version conflicts during live updates often arise from a few key scenarios:
 
 -   **Staggered Rollouts**: Gradual rollouts can lead to multiple app versions being active at the same time. Capgo notes that while 95% of users update within 24 hours, the remaining 5% can cause version fragmentation[\[1\]](https://capgo.app/).
     
--   **Failed Updates**: With an update success rate of 82%, about 18% of [update attempts](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) fail, leaving some users stuck on outdated versions[\[1\]](https://capgo.app/).
+-   **Failed Updates**: With an update success rate of 82%, about 18% of [update attempts](https://capgo.app/docs/live-updates/update-behavior/) fail, leaving some users stuck on outdated versions[\[1\]](https://capgo.app/).
     
 -   **Beta-Testing Channels**: Mixing beta testing and staged rollouts without proper version control can create conflicts between beta and production versions[\[1\]](https://capgo.app/).
     

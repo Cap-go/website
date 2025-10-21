@@ -173,7 +173,7 @@ Here’s a quick implementation breakdown:
 | Phase | Action Items | Expected Outcome |
 | --- | --- | --- |
 | Initial Setup | Install the Capgo plugin and configure it | A strong update foundation |
-| Segmentation | Define user channels and target groups | [Organized update delivery](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Segmentation | Define user channels and target groups | [Organized update delivery](https://capgo.app/docs/live-updates/update-behavior/) |
 | Deployment | Use the CLI to roll out updates and monitor | Fast and controlled rollout |
 | Optimization | Analyze performance and adjust targeting | Improved efficiency |
 

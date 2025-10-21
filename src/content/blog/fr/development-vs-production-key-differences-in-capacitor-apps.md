@@ -147,7 +147,7 @@ En production, la priorité passe à l'implémentation de protocoles de sécurit
 | --- | --- | --- |
 | Sécurité des mises à jour | Utilisation du chiffrement de bout en bout | Garantit que les mises à jour sont accessibles uniquement aux utilisateurs autorisés |
 | Contrôle d'accès | Paramètres de permission granulaires | Restreint l'accès selon les rôles d'équipe |
-| Automatisation du déploiement | Pipelines CI/CD intégrés | Permet des [mises à jour automatisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) sécurisées |
+| Automatisation du déploiement | Pipelines CI/CD intégrés | Permet des [mises à jour automatisées](https://capgo.app/docs/live-updates/update-behavior/) sécurisées |
 | Conformité | Respect des normes Apple et Google | Assure les approbations des stores d'applications |
 
 Les configurations de production impliquent également des politiques spécifiques à l'organisation, gérées via des contrôles d'accès unifiés. Les équipes peuvent créer plusieurs organisations avec des permissions utilisateur personnalisées et s'intégrer avec des outils CI/CD comme GitHub, GitLab et Azure DevOps pour des déploiements sécurisés et fluides.

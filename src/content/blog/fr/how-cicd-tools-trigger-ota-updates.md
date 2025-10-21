@@ -173,7 +173,7 @@ Les mises à jour progressives vous permettent de contrôler le déploiement des
 
 ### Déclencheurs de mise à jour basés sur les métriques
 
-[L'automatisation des mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) basée sur les métriques de performance peut faire gagner du temps et prévenir les problèmes. En configurant des webhooks de surveillance, vous pouvez suivre des métriques importantes et décider de continuer ou de suspendre une mise à jour :
+[L'automatisation des mises à jour](https://capgo.app/docs/live-updates/update-behavior/) basée sur les métriques de performance peut faire gagner du temps et prévenir les problèmes. En configurant des webhooks de surveillance, vous pouvez suivre des métriques importantes et décider de continuer ou de suspendre une mise à jour :
 
 | Type de métrique | Seuil | Action |
 | --- | --- | --- |

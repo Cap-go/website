@@ -33,7 +33,7 @@ next_blog: ''
 -   **Cara Tetap Patuh**:
     -   Hindari mengubah fungsi inti aplikasi
     -   Gunakan metode pengiriman aman seperti HTTPS dan tanda tangan digital
-    -   Komunikasikan dengan jelas [tujuan pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) kepada pengguna
+    -   Komunikasikan dengan jelas [tujuan pembaruan](https://capgo.app/docs/live-updates/update-behavior/) kepada pengguna
 
 ### Perbandingan Cepat Aturan OTA
 

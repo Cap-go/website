@@ -188,7 +188,7 @@ I benefici degli aggiornamenti OTA sicuri vanno oltre la sola sicurezza. Gli svi
 
 Ecco alcuni fattori chiave che contribuiscono al successo degli aggiornamenti OTA:
 
-| Fattore di Successo | Ruolo negli [Aggiornamenti Sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Fattore di Successo | Ruolo negli [Aggiornamenti Sicuri](https://capgo.app/docs/live-updates/update-behavior/) |
 | --- | --- |
 | [Implementazione della Crittografia](https://capgo.app/docs/cli/migrations/encryption/) | Garantisce che solo gli utenti autorizzati possano decrittare gli aggiornamenti |
 | Strategia di Distribuzione | Gestisce rollout controllati e graduali |

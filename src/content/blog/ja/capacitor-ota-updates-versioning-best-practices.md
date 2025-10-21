@@ -64,7 +64,7 @@ Appleのダウンロードコードに関するガイドラインは注目に値
 
 ### バージョン管理の実装
 
-Capacitor OTAアップデートを効果的に管理するために、開発者は`capacitor-set-version`や`capacitor-sync-version-cli`などのツールを使用できます。これらのツールは[自動更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)によってプラットフォーム間でバージョン管理を簡素化します。
+Capacitor OTAアップデートを効果的に管理するために、開発者は`capacitor-set-version`や`capacitor-sync-version-cli`などのツールを使用できます。これらのツールは[自動更新](https://capgo.app/docs/live-updates/update-behavior/)によってプラットフォーム間でバージョン管理を簡素化します。
 
 始め方は以下の通りです:
 

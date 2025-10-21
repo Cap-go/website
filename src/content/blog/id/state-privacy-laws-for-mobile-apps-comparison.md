@@ -127,7 +127,7 @@ Bagi yang khawatir tentang ketergantungan vendor, struktur open-source Capgo mem
 
 > "Satu-satunya solusi dengan enkripsi end-to-end yang sebenarnya, yang lain hanya menandatangani pembaruan" - Capgo [\[1\]](https://capgo.app/)
 
-Efektivitas Capgo jelas: dipercaya oleh 750 aplikasi produksi, memberikan 23,5M [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) sejauh ini [\[1\]](https://capgo.app/).
+Efektivitas Capgo jelas: dipercaya oleh 750 aplikasi produksi, memberikan 23,5M [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) sejauh ini [\[1\]](https://capgo.app/).
 
 Lacak pembaruan secara real-time dengan analitik, pemantauan kesalahan, dan kontrol akses berbasis peran untuk menyederhanakan kepatuhan di berbagai negara bagian.
 

@@ -33,7 +33,7 @@ next_blog: ''
 -   **Cómo Mantener el Cumplimiento**:
     -   Evitar alterar la funcionalidad central de la aplicación.
     -   Usar métodos seguros de entrega como HTTPS y firmas digitales.
-    -   Comunicar claramente [los propósitos de actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) a los usuarios.
+    -   Comunicar claramente [los propósitos de actualización](https://capgo.app/docs/live-updates/update-behavior/) a los usuarios.
 
 ### Comparación Rápida de Reglas OTA
 

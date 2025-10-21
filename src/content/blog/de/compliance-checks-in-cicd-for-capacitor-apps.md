@@ -34,7 +34,7 @@ Hier ist, warum Compliance-Checks wichtig sind:
 -   Integrieren Sie Sicherheitsmaßnahmen wie Verschlüsselung, Abhängigkeitsprüfungen und Tests.
 -   Nutzen Sie Performance- und Barrierefreiheitstests zur Verbesserung der Nutzererfahrung.
 
-**Capgo vereinfacht diesen Prozess** und bietet Tools für automatisierte Compliance, Echtzeitfehlerüberwachung und [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+**Capgo vereinfacht diesen Prozess** und bietet Tools für automatisierte Compliance, Echtzeitfehlerüberwachung und [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/).
 
 Bleiben Sie konform, sicher und effizient mit angemessenen CI/CD-Praktiken für [Capacitor Apps](https://capgo.app/blog/capacitor-comprehensive-guide/).
 

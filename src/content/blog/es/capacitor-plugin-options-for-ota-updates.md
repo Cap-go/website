@@ -193,7 +193,7 @@ Aquí hay un desglose de las opciones actuales:
 
 | Plugin | Estado | Fortalezas Clave | Mejor Para |
 | --- | --- | --- | --- |
-| Capgo | Activo | Cifrado extremo a extremo, actualizaciones rápidas | Equipos enfocados en [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Capgo | Activo | Cifrado extremo a extremo, actualizaciones rápidas | Equipos enfocados en [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) |
 | Capawesome | Activo (Desde 2024) | Enfoque mercado alemán, precios competitivos | Proyectos dirigidos a Europa |
 | Appflow | Cerrando (2026) | Características de nivel empresarial | Transición de sistemas heredados |
 | CodePush | Descontinuado (2024) | Opción anteriormente gratuita | N/A |

@@ -176,7 +176,7 @@ Hier ist eine schnelle Umsetzung Übersicht:
 | Phase | Maßnahmen | Erwartetes Ergebnis |
 | --- | --- | --- |
 | 1. Einrichtung | Installieren Sie das Capgo-Plugin und konfigurieren Sie es | Eine solide Update-Grundlage |
-| 2. Segmentierung | Definieren Sie Benutzerkanäle und Zielgruppen | [Organisierte Update-Verteilung](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| 2. Segmentierung | Definieren Sie Benutzerkanäle und Zielgruppen | [Organisierte Update-Verteilung](https://capgo.app/docs/live-updates/update-behavior/) |
 | 3. Bereitstellung | Verwenden Sie die CLI, um Updates auszurollen und zu überwachen | Schnelles und kontrolliertes Rollout |
 | 4. Optimierung | Analysieren Sie die Leistung und passen Sie das Targeting an | Verbesserte Effizienz |
 

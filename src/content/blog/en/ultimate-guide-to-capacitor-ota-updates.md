@@ -238,7 +238,7 @@ Here’s a quick overview of best practices for OTA updates:
 | Distribution | Minimize risks | Roll out updates using targeted channels |
 | Monitoring | Ensure reliability | Track update success and adoption rates |
 
-These practices are essential for platforms like Capgo to deliver fast and [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+These practices are essential for platforms like Capgo to deliver fast and [secure updates](https://capgo.app/docs/live-updates/update-behavior/).
 
 ### [Capgo](https://capgo.app/) Features
 

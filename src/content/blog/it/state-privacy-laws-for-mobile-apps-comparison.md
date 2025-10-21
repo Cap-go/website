@@ -129,7 +129,7 @@ Per coloro che sono preoccupati per le dipendenze dai fornitori, la struttura op
 
 > "L'unica soluzione con vera crittografia end-to-end; gli altri firmano solo aggiornamenti." - Capgo [\[1\]](https://capgo.app/)
 
-L'efficacia di Capgo è chiara: è fidato da 750 app di produzione, fornendo fino ad oggi 23,5 milioni di [aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/).
+L'efficacia di Capgo è chiara: è fidato da 750 app di produzione, fornendo fino ad oggi 23,5 milioni di [aggiornamenti sicuri](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
 Monitora gli aggiornamenti in tempo reale con analisi, monitoraggio degli errori e controlli di accesso basati sui ruoli per semplificare la conformità in più stati.
 

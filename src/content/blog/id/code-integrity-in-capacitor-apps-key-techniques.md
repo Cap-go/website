@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Alat Utama:** Gunakan tanda tangan digital SHA-256, pemeriksaan runtime, dan enkripsi (AES-256) untuk melindungi kode.
 -   **Fitur Khusus Platform:** Untuk Android, integrasikan [Play Integrity API](https://developer.android.com/google/play/integrity) untuk verifikasi aplikasi dan attestasi perangkat. Untuk iOS, ikuti Panduan App Store 3.1.2 untuk update OTA.
--   **Keamanan Update OTA:** Terapkan enkripsi end-to-end, validasi checksum, dan pelacakan kepatuhan untuk [mengamankan update](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   **Keamanan Update OTA:** Terapkan enkripsi end-to-end, validasi checksum, dan pelacakan kepatuhan untuk [mengamankan update](https://capgo.app/docs/live-updates/update-behavior/).
 -   **Alat yang Direkomendasikan:** Alat seperti [Capgo](https://capgo.app/) menyederhanakan update OTA yang aman dengan enkripsi, kontrol versi, dan pemantauan kepatuhan.
 
 ### Perbandingan Cepat Alat dan Fitur Utama

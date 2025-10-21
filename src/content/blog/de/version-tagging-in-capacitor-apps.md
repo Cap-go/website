@@ -26,7 +26,7 @@ Versionskennzeichnung ist für die Verwaltung von [Capacitor](https://capacitorj
 -   **Warum es wichtig ist**: Verfolgt Updates, ermöglicht Rollbacks und gewährleistet stabile Bereitstellungen.
 -   **Semantische Versionierung**: Verwendet **MAJOR.MINOR.PATCH** um Breaking Changes, neue Funktionen oder Bugfixes anzuzeigen.
 -   **Plattformübergreifende Synchronisation**: Versionsnummern in `package.json`, iOS `Info.plist` und Android `build.gradle` abstimmen.
--   **Automatisierung**: [Updates automatisieren](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) mit npm-Skripten und CI/CD-Tools.
+-   **Automatisierung**: [Updates automatisieren](https://capgo.app/docs/live-updates/update-behavior/) mit npm-Skripten und CI/CD-Tools.
 -   **Live-Updates**: Tools wie [Capgo](https://capgo.app/) liefern Updates an 95% der Nutzer innerhalb von 24 Stunden.
 -   **Beta-Management**: Strukturierte Kanäle für Alpha-, Beta- und Produktionsversionen verwenden.
 

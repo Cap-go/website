@@ -128,7 +128,7 @@ Capgo는 2024년 [Microsoft Code Push](https://learn.microsoft.com/en-us/appcent
 | 기능 | 장점 | 성능 |
 | --- | --- | --- |
 | **원클릭 롤백** | 어떤 버전으로도 신속하게 되돌리기 | 평균 114ms 번들 다운로드 |
-| **종단 간 암호화** | [안전한 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 57ms API 응답 시간 |
+| **종단 간 암호화** | [안전한 업데이트](https://capgo.app/docs/live-updates/update-behavior/) | 57ms API 응답 시간 |
 | **[채널 시스템](https://capgo.app/docs/plugin/cloud-mode/channel-system/)** | 특정 그룹에 베타 업데이트 배포 | 23.5M 업데이트 전달 |
 | **분석 대시보드** | 실시간으로 업데이트 추적 | 750개 생산 앱 서비스 제공 |
 

@@ -153,7 +153,7 @@ Aquí se muestra cómo el puente nativo potencia el sistema de actualización de
 | Entrega de Contenido | Gestiona descargas seguras de activos web | Entrega rápida y confiable de activos |
 | Gestión del Estado | Mantiene el estado de la aplicación durante las actualizaciones | Experiencia de usuario fluida e ininterrumpida |
 | Control de Versiones | Soporta funcionalidad de retroceso | Restauración fácil con un solo clic |
-| [Segmentación de Actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Permite la distribución a segmentos de usuarios específicos | Despliegue preciso y controlado |
+| [Segmentación de Actualizaciones](https://capgo.app/docs/live-updates/update-behavior/) | Permite la distribución a segmentos de usuarios específicos | Despliegue preciso y controlado |
 
 Estas características destacan la eficiencia del puente nativo en el manejo de actualizaciones.
 

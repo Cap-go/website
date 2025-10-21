@@ -329,7 +329,7 @@ Pour activer les mises à jour en direct, ajoutez ce qui suit à votre fichier `
 
 Capgo fournit plusieurs fonctionnalités remarquables :
 
--   **[Mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** avec cryptage de bout en bout
+-   **[Mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/)** avec cryptage de bout en bout
 -   **Déploiements automatisés** grâce à l'intégration CI/CD
 -   **Mises à jour ciblées** par affectation d'utilisateurs
 -   **Rollback instantané** avec contrôle de version

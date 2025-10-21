@@ -124,7 +124,7 @@ Pasar kontrol versi bergeser seiring layanan lama yang mulai ditutup. Tim sekara
 
 -   **Capgo** (diluncurkan 2022): Aktif, mulai dari $12/bulan, mendukung pembaruan langsung
 -   **Capawesome** (diluncurkan 2024): Aktif, harga serupa, tetapi dengan opsi pembaruan lebih sedikit
--   **Appflow**: Ditutup pada 2026, harga $6.000/tahun [\[1\]](https://capgo.app/), menawarkan [pembaruan otomatis](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   **Appflow**: Ditutup pada 2026, harga $6.000/tahun [\[1\]](https://capgo.app/), menawarkan [pembaruan otomatis](https://capgo.app/docs/live-updates/update-behavior/)
 
 Alat-alat ini mengisi kekosongan yang ditinggalkan oleh penutupan CodePush pada 2024 dan akan berakhirnya Appflow pada 2026.
 

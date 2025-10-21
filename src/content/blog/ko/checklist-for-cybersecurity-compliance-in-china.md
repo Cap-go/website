@@ -64,7 +64,7 @@ PIPL은 또한 앱 개발자가 명확하고 개방적인 데이터 처리 관�
 
 이 업데이트는 집행을 강화하고 새로운 사이버 보안 도전에 대처하는 것을 목표로 합니다 [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/).
 
-업데이트 및 보안 패치를 진행하는 앱 개발자는 [보안 업데이트 플랫폼](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)을 활용하여 이러한 규정 준수를 간소화할 수 있습니다. 예를 들어, **Capgo** (https://capgo.app)는 엔드 투 엔드 암호화 및 실시간 [업데이트 관리](https://capgo.app/docs/plugin/cloud-mode/manual-update/)를 제공하여 전 세계에서 400만 개 이상의 모바일 앱 및 가장 많은 모바일 인터넷 사용자 기반을 가진 시장에서 특히 유용합니다 [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
+업데이트 및 보안 패치를 진행하는 앱 개발자는 [보안 업데이트 플랫폼](https://capgo.app/docs/live-updates/update-behavior/)을 활용하여 이러한 규정 준수를 간소화할 수 있습니다. 예를 들어, **Capgo** (https://capgo.app)는 엔드 투 엔드 암호화 및 실시간 [업데이트 관리](https://capgo.app/docs/plugin/cloud-mode/manual-update/)를 제공하여 전 세계에서 400만 개 이상의 모바일 앱 및 가장 많은 모바일 인터넷 사용자 기반을 가진 시장에서 특히 유용합니다 [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 
 ## 데이터 프라이버시 요구 사항
 
@@ -179,7 +179,7 @@ MIIT에 등록하려면 개발자가 다음을 준비해야 합니다:
 - 3. 보안 인증서
 - 4. 개인정보 보호법(PIPL) 및 데이터 보안법(DSL) 준수 [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)
 
-[클라우드 기반 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)에 의존하는 앱을 위해 Capgo와 같은 플랫폼은 중국의 사이버 보안 기준에 부합하는 버전 관리 및 패치 배포 도구를 제공합니다.
+[클라우드 기반 업데이트](https://capgo.app/docs/live-updates/update-behavior/)에 의존하는 앱을 위해 Capgo와 같은 플랫폼은 중국의 사이버 보안 기준에 부합하는 버전 관리 및 패치 배포 도구를 제공합니다.
 
 준수를 시행하기 위해 CAC는 제보 시스템을 구현했습니다. 비준수 시 앱 삭제 및 막대한 벌금이 부과될 수 있습니다 [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 

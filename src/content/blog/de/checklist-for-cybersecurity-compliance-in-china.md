@@ -66,7 +66,7 @@ Ab dem 1. Januar 2025 führt die Vorschrift zur Datensicherheit im Netzwerk eine
 
 Diese Updates zielen darauf ab, die Durchsetzung zu stärken und aufkommende Herausforderungen der Cybersicherheit anzugehen [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/).
 
-Für Anwendungsentwickler, die an Updates und Sicherheits-Patches arbeiten, kann die Nutzung von [sicheren Aktualisierungsplattformen](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) die Einhaltung dieser Vorschriften erleichtern. So bietet **Capgo** (https://capgo.app) End-to-End-Verschlüsselung und Echtzeit-[Aktualisierungsmanagement](https://capgo.app/docs/plugin/cloud-mode/manual-update/), was in einem Markt mit über 4 Millionen mobilen Apps und der größten Basis mobiler Internetnutzer weltweit besonders wertvoll ist [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
+Für Anwendungsentwickler, die an Updates und Sicherheits-Patches arbeiten, kann die Nutzung von [sicheren Aktualisierungsplattformen](https://capgo.app/docs/live-updates/update-behavior/) die Einhaltung dieser Vorschriften erleichtern. So bietet **Capgo** (https://capgo.app) End-to-End-Verschlüsselung und Echtzeit-[Aktualisierungsmanagement](https://capgo.app/docs/plugin/cloud-mode/manual-update/), was in einem Markt mit über 4 Millionen mobilen Apps und der größten Basis mobiler Internetnutzer weltweit besonders wertvoll ist [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 
 ## Anforderungen an den Datenschutz
 
@@ -181,7 +181,7 @@ Entwickler müssen ein detailliertes Inventar aller in ihren Apps verwendeten SD
 -  3. Sicherheitszertifikate
 -  4. Einhaltung des Gesetzes zum Schutz personenbezogener Daten (PIPL) und des Datenschutzgesetzes (DSL) [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)
 
-Für Apps, die auf [cloudbasierten Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) basieren, bieten Plattformen wie Capgo Tools für Versionskontrolle und Patch-Bereitstellung, die mit den chinesischen Cybersicherheitsstandards übereinstimmen.
+Für Apps, die auf [cloudbasierten Updates](https://capgo.app/docs/live-updates/update-behavior/) basieren, bieten Plattformen wie Capgo Tools für Versionskontrolle und Patch-Bereitstellung, die mit den chinesischen Cybersicherheitsstandards übereinstimmen.
 
 Um die Einhaltung durchzusetzen, hat die CAC ein Whistleblowing-System implementiert. Nichteinhaltung kann zur Entfernung der App und zu hohen Strafen führen [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market).
 

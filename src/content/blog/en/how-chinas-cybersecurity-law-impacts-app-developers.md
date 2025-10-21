@@ -24,7 +24,7 @@ next_blog: ''
 -   **Mandatory Assessments**: Apps must pass technical security reviews, data protection impact assessments, and network security checks.
 -   **Consequences of Non-Compliance**: Fines, app removals, service suspensions, and reputational damage.
 
-To stay compliant, developers should use tools for encryption, real-time monitoring, and [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). Failing to comply can lead to severe penalties, so early preparation is key for success in the Chinese market.
+To stay compliant, developers should use tools for encryption, real-time monitoring, and [secure updates](https://capgo.app/docs/live-updates/update-behavior/). Failing to comply can lead to severe penalties, so early preparation is key for success in the Chinese market.
 
 ## [China's Cybersecurity Law](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) Basics
 

@@ -156,7 +156,7 @@ Here are some essential testing practices:
 -   **Integration Testing**: Ensure your scripts work seamlessly with other parts of the system.
 -   **Performance Testing**: Measure execution times and resource usage to identify bottlenecks.
 
-Once testing is in place, [update automation](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) takes deployment reliability to the next level.
+Once testing is in place, [update automation](https://capgo.app/docs/live-updates/update-behavior/) takes deployment reliability to the next level.
 
 ### Update Automation
 

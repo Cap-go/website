@@ -25,7 +25,7 @@ next_blog: ''
     -   데이터 보안을 위한 **종단간 암호화** 사용
     -   수집되는 데이터와 그 이유를 명확히 설명
     -   사용자가 자신의 데이터를 쉽게 제어하고 관리할 수 있도록 함
--   **[Capgo](https://capgo.app/)와 같은 도구가 도움이 됨**: Capgo는 [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), 실시간 오류 추적, 권한 관리와 같은 기능으로 규정 준수를 단순화합니다.
+-   **[Capgo](https://capgo.app/)와 같은 도구가 도움이 됨**: Capgo는 [보안 업데이트](https://capgo.app/docs/live-updates/update-behavior/), 실시간 오류 추적, 권한 관리와 같은 기능으로 규정 준수를 단순화합니다.
 
 ### 플랫폼 규칙 요약
 

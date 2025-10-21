@@ -54,7 +54,7 @@ Capgoの更新システムの特筆すべき機能は、更新の修正された
 
 | セキュリティ機能 | Capgo | Appflow |
 | --- | --- | --- |
-| [更新保護](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | エンドツーエンドの暗号化 | 更新署名 |
+| [更新保護](https://capgo.app/docs/live-updates/update-behavior/) | エンドツーエンドの暗号化 | 更新署名 |
 | ホスティングオプション | クラウドまたは自己ホスト | SaaS専用 |
 | ソースコードアクセス | 100%オープンソース | 専有 |
 | ストア準拠 | 完全準拠 | 完全準拠 |

@@ -55,7 +55,7 @@ Capgo의 업데이트 시스템의 두드러진 기능은 업데이트의 수정
 
 | 보안 기능 | Capgo | Appflow |
 | --- | --- | --- |
-| [업데이트 보호](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 종단 간 암호화 | 업데이트 서명 |
+| [업데이트 보호](https://capgo.app/docs/live-updates/update-behavior/) | 종단 간 암호화 | 업데이트 서명 |
 | 호스팅 옵션 | 클라우드 또는 자가 호스팅 | SaaS 전용 |
 | 소스 코드 접근 | 100% 오픈 소스 | 독점 |
 | 스토어 준수 | 완전 준수 | 완전 준수 |

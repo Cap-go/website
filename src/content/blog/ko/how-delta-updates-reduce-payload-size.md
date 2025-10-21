@@ -31,7 +31,7 @@ next_blog: ''
 -   **자동화 도구**: [GitHub Actions](https://docs.github.com/actions)와 [Jenkins](https://www.jenkins.io/)같은 CI/CD 시스템과 함께 작동합니다.
 -   **성능 지표**: 업데이트 성공률, 다운로드 속도, 사용자 참여도를 추적합니다.
 
-델타 업데이트는 [Capacitor](https://capacitorjs.com/) 앱에 이상적이며, 버그 수정, 기능 출시, [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 빠르게 하면서 대역폭과 시간을 절약할 수 있습니다.
+델타 업데이트는 [Capacitor](https://capacitorjs.com/) 앱에 이상적이며, 버그 수정, 기능 출시, [보안 업데이트](https://capgo.app/docs/live-updates/update-behavior/)를 빠르게 하면서 대역폭과 시간을 절약할 수 있습니다.
 
 ## Warzone에서 더 높은 FPS와 더 나은 성능을 얻는 방법 ...
 

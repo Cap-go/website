@@ -257,7 +257,7 @@ Capgo renforce la sécurité des applications en combinant des méthodes de stoc
 
 ### Architecture de sécurité de Capgo
 
-Le système de Capgo a réussi à livrer plus de 23,5 millions de [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) à 750 applications de production [\[1\]](https://capgo.app/). Il utilise **le chiffrement de bout en bout**, garantissant que seuls les utilisateurs autorisés peuvent déchiffrer les mises à jour. Voici un aperçu de sa configuration de sécurité :
+Le système de Capgo a réussi à livrer plus de 23,5 millions de [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) à 750 applications de production [\[1\]](https://capgo.app/). Il utilise **le chiffrement de bout en bout**, garantissant que seuls les utilisateurs autorisés peuvent déchiffrer les mises à jour. Voici un aperçu de sa configuration de sécurité :
 
 ```javascript
 const capgoSecurity = {

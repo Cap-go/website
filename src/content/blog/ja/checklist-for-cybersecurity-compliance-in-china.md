@@ -64,7 +64,7 @@ PIPLはまた、アプリ開発者に対し、ユーザーの同意の詳細な�
 
 これらの更新は、施行を強化し新たなサイバーセキュリティの課題に対処することを目的としています [\[1\]](https://www.china-briefing.com/news/china-cybersecurity-law-amendments-2025/) 。
 
-更新やセキュリティパッチに取り組むアプリ開発者は、[安全な更新プラットフォーム](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を利用することで、これらの規則のコンプライアンスを簡素化できます。例えば、**Capgo** (https://capgo.app)はエンドツーエンドの暗号化とリアルタイムの[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/) を提供しており、400万以上のモバイルアプリと世界で最も大規模なモバイルインターネットユーザーを有する市場では特に価値があります [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
+更新やセキュリティパッチに取り組むアプリ開発者は、[安全な更新プラットフォーム](https://capgo.app/docs/live-updates/update-behavior/) を利用することで、これらの規則のコンプライアンスを簡素化できます。例えば、**Capgo** (https://capgo.app)はエンドツーエンドの暗号化とリアルタイムの[更新管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/) を提供しており、400万以上のモバイルアプリと世界で最も大規模なモバイルインターネットユーザーを有する市場では特に価値があります [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
 
 ## データプライバシー要件
 
@@ -178,7 +178,7 @@ MIITに登録するために、開発者は以下を準備する必要があり�
 3. セキュリティ証明書
 4. 個人情報保護法（PIPL）およびデータセキュリティ法（DSL）への準拠 [\[2\]](https://www.hunton.com/privacy-and-information-security-law/china-regulator-proposes-amendments-to-cybersecurity-law)
 
-[クラウドベースの更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)に依存するアプリの場合、Capgoのようなプラットフォームは、中国のサイバーセキュリティ基準に合わせたバージョン管理とパッチ展開のためのツールを提供します。
+[クラウドベースの更新](https://capgo.app/docs/live-updates/update-behavior/)に依存するアプリの場合、Capgoのようなプラットフォームは、中国のサイバーセキュリティ基準に合わせたバージョン管理とパッチ展開のためのツールを提供します。
 
 コンプライアンスを強制するために、CACは内部通報システムを導入しました。コンプライアンスに違反すると、アプリの削除や高額な罰金が科される可能性があります [\[4\]](https://www.nortonrosefulbright.com/en-us/knowledge/publications/93003105/china-issues-new-rules-to-tighten-regulation-of-mobile-apps-market)。
 

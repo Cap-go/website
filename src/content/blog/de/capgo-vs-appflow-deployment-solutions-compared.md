@@ -56,7 +56,7 @@ Was Sicherheit betrifft, verfolgen Capgo und Appflow unterschiedliche Ansätze. 
 
 | Sicherheitsmerkmal | Capgo | Appflow |
 | --- | --- | --- |
-| [Update-Schutz](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | End-to-End-Verschlüsselung | Update-Signierung |
+| [Update-Schutz](https://capgo.app/docs/live-updates/update-behavior/) | End-to-End-Verschlüsselung | Update-Signierung |
 | Hosting-Optionen | Cloud oder selbstgehostet | Nur SaaS |
 | Quellcode-Zugriff | 100% Open-Source | Proprietär |
 | Store-Konformität | Vollständige Konformität | Vollständige Konformität |

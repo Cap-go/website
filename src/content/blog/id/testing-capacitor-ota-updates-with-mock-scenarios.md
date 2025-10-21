@@ -72,7 +72,7 @@ Untuk menerapkan pembaruan Over-The-Air (OTA), ikuti tiga langkah berikut:
 
 -   **Instalasi Plugin**
 -   **Konfigurasi Build**
--   **[Integrasi Pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**
+-   **[Integrasi Pembaruan](https://capgo.app/docs/live-updates/update-behavior/)**
 
 Alat CI/CD Capgo membuat pengujian otomatis menjadi mudah. Platform seperti [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), dan [Jenkins](https://www.jenkins.io/) didukung, memungkinkan Anda menguji pembaruan di berbagai lingkungan sebelum penyebaran. Sistem saluran sangat membantu untuk mengelola skenario pengujian yang berbeda.
 

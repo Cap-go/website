@@ -41,7 +41,7 @@ Los conflictos de versiones durante las actualizaciones en vivo suelen surgir de
 
 -   **Implementaciones escalonadas**: Las implementaciones graduales pueden llevar a múltiples versiones de la aplicación activas al mismo tiempo. Capgo señala que mientras el 95% de los usuarios actualizan en 24 horas, el 5% restante puede causar fragmentación de versiones[\[1\]](https://capgo.app/)
     
--   **Actualizaciones fallidas**: Con una tasa de éxito de actualización del 82%, aproximadamente el 18% de los [intentos de actualización](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) fallan, dejando a algunos usuarios en versiones desactualizadas[\[1\]](https://capgo.app/)
+-   **Actualizaciones fallidas**: Con una tasa de éxito de actualización del 82%, aproximadamente el 18% de los [intentos de actualización](https://capgo.app/docs/live-updates/update-behavior/) fallan, dejando a algunos usuarios en versiones desactualizadas[\[1\]](https://capgo.app/)
     
 -   **Canales de prueba beta**: Mezclar pruebas beta y implementaciones escalonadas sin un control de versiones adecuado puede crear conflictos entre versiones beta y de producción[\[1\]](https://capgo.app/)
     

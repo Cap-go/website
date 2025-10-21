@@ -25,7 +25,7 @@ next_blog: ''
 
 -   **Strumenti principali:** Usa firme digitali SHA-256, controlli runtime e crittografia (AES-256) per proteggere il codice.
 -   **Funzionalità specifiche per piattaforma:** Per Android, integra l'[Play Integrity API](https://developer.android.com/google/play/integrity) per la verifica dell'app e l'attestazione del dispositivo. Per iOS, segui la Linea Guida 3.1.2 dell'App Store per gli aggiornamenti OTA.  
--   **Sicurezza aggiornamenti OTA:** Implementa crittografia end-to-end, validazione checksum e monitoraggio della conformità per [proteggere gli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   **Sicurezza aggiornamenti OTA:** Implementa crittografia end-to-end, validazione checksum e monitoraggio della conformità per [proteggere gli aggiornamenti](https://capgo.app/docs/live-updates/update-behavior/).
 -   **Strumenti consigliati:** Strumenti come [Capgo](https://capgo.app/) semplificano gli aggiornamenti OTA sicuri con crittografia, controllo versione e monitoraggio della conformità.
 
 ### Confronto rapido di strumenti e funzionalità chiave

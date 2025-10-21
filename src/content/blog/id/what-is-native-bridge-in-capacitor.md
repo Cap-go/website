@@ -153,7 +153,7 @@ Berikut adalah bagaimana jembatan asli mendukung sistem pembaruan Capgo:
 | Pengiriman Konten | Mengelola unduhan aset web yang aman | Pengiriman aset yang cepat dan dapat diandalkan |
 | Manajemen Status | Mempertahankan status aplikasi selama pembaruan | Pengalaman pengguna yang mulus dan tidak terputus |
 | Kontrol Versi | Mendukung fungsi rollback | Pemulihan yang mudah dengan satu klik |
-| [Target Pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Memungkinkan distribusi ke segmen pengguna tertentu | Penyebaran yang tepat dan terkontrol |
+| [Target Pembaruan](https://capgo.app/docs/live-updates/update-behavior/) | Memungkinkan distribusi ke segmen pengguna tertentu | Penyebaran yang tepat dan terkontrol |
 
 Fitur-fitur ini menyoroti efisiensi jembatan asli dalam menangani pembaruan.
 

@@ -92,7 +92,7 @@ Una volta configurato, inizializza Capgo con la tua chiave API:
 
 ### Integrazione controllo versione
 
-Capgo funziona bene con piattaforme CI/CD, rendendo gli [aggiornamenti automatizzati](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) semplici. Le piattaforme supportate includono:
+Capgo funziona bene con piattaforme CI/CD, rendendo gli [aggiornamenti automatizzati](https://capgo.app/docs/live-updates/update-behavior/) semplici. Le piattaforme supportate includono:
 
 -   [GitHub Actions](https://docs.github.com/actions)
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)

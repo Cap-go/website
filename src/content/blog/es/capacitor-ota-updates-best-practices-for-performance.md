@@ -29,7 +29,7 @@ Las actualizaciones OTA (Over-the-Air) permiten que las aplicaciones de [Capacit
     
 -   **Actualizaciones incrementales**: Divide las actualizaciones en pasos más pequeños, prográmalas durante tiempos de inactividad y usa sistemas A/B para reversiones sin problemas.
     
--   [**Actualizaciones seguras**](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/): Protege los archivos con cifrado, sumas de verificación y firma de código para garantizar la integridad.
+-   [**Actualizaciones seguras**](https://capgo.app/docs/live-updates/update-behavior/): Protege los archivos con cifrado, sumas de verificación y firma de código para garantizar la integridad.
     
 -   **Pruebas y cumplimiento**: Prueba las actualizaciones exhaustivamente y sigue las pautas de la tienda de aplicaciones para evitar problemas de aprobación.
 

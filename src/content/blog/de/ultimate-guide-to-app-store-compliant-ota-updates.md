@@ -32,7 +32,7 @@ next_blog: ''
 -   **So bleiben Sie konform**:
     -   Vermeiden Sie Änderungen an der Kernfunktionalität der App.
     -   Nutzen Sie sichere Bereitstellungsmethoden wie HTTPS und digitale Signaturen.
-    -   Kommunizieren Sie [Update-Zwecke](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) klar an Benutzer.
+    -   Kommunizieren Sie [Update-Zwecke](https://capgo.app/docs/live-updates/update-behavior/) klar an Benutzer.
 
 ### Schneller Vergleich der OTA-Regeln
 

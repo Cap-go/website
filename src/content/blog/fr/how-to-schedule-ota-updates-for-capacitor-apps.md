@@ -48,7 +48,7 @@ npx @capgo/cli init
 
 Cette commande configure les composants nécessaires pour les mises à jour OTA, notamment :
 
--   **Chiffrement de bout en bout** pour garantir des [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   **Chiffrement de bout en bout** pour garantir des [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/)
     
 -   **Contrôle de version** pour gérer les déploiements des mises à jour
     

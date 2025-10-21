@@ -35,7 +35,7 @@ Berikut mengapa pemeriksaan kepatuhan penting:
 -   Integrasikan langkah-langkah keamanan seperti enkripsi, pemeriksaan dependensi, dan pengujian
 -   Gunakan tes kinerja dan aksesibilitas untuk meningkatkan pengalaman pengguna
 
-**Capgo menyederhanakan proses ini**, menawarkan alat untuk kepatuhan otomatis, pelacakan kesalahan real-time, dan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+**Capgo menyederhanakan proses ini**, menawarkan alat untuk kepatuhan otomatis, pelacakan kesalahan real-time, dan [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/)
 
 Tetap patuh, aman, dan efisien dengan praktik CI/CD yang tepat untuk [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/)
 

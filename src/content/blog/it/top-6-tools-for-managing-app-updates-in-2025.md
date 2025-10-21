@@ -158,7 +158,7 @@ Jamf Pro è progettato specificamente per la gestione dei dispositivi Apple, off
 
 Jamf Pro semplifica la gestione degli aggiornamenti con patching automatizzato e integrazione con il Volume Purchase Program (VPP) di Apple. Questa automazione può ridurre il carico di lavoro IT del 90% e accelerare il rollout delle app del 75%.
 
-La piattaforma supporta [aggiornamenti automatizzati su larga scala](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), distribuzioni mirate utilizzando Smart Groups e flussi di lavoro personalizzati per configurazioni complesse. Queste funzionalità lo rendono adattabile a diverse esigenze organizzative.
+La piattaforma supporta [aggiornamenti automatizzati su larga scala](https://capgo.app/docs/live-updates/update-behavior/), distribuzioni mirate utilizzando Smart Groups e flussi di lavoro personalizzati per configurazioni complesse. Queste funzionalità lo rendono adattabile a diverse esigenze organizzative.
 
 ### Integrazione Enterprise
 

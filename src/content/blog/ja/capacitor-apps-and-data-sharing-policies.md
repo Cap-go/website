@@ -25,7 +25,7 @@ next_blog: ''
     -   データセキュリティのための**エンドツーエンド暗号化**を使用
     -   収集されるデータとその理由を明確に説明
     -   ユーザーが自身のデータを簡単に制御・管理できるようにする
--   **[Capgo](https://capgo.app/)のようなツールが役立つ**: Capgoは[セキュアなアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)、リアルタイムエラー追跡、権限管理などの機能でコンプライアンスを簡素化します。
+-   **[Capgo](https://capgo.app/)のようなツールが役立つ**: Capgoは[セキュアなアップデート](https://capgo.app/docs/live-updates/update-behavior/)、リアルタイムエラー追跡、権限管理などの機能でコンプライアンスを簡素化します。
 
 ### プラットフォームルールの概要
 

@@ -328,7 +328,7 @@ Las herramientas de actualización modernas ofrecen varios beneficios notables:
 -   **Reversión con un clic** para una rápida recuperación en caso de problemas
 -   **Analíticas en tiempo real** para monitorear el rendimiento de actualizaciones y la participación de los usuarios
 
-Estas características sustentan un marco robusto para gestionar [actualizaciones de versión](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) de manera efectiva.
+Estas características sustentan un marco robusto para gestionar [actualizaciones de versión](https://capgo.app/docs/live-updates/update-behavior/) de manera efectiva.
 
 Ya sea que estés trabajando en una aplicación pequeña o escalando un despliegue más grande, combinar la CLI de Capacitor con herramientas avanzadas de actualización asegura un control de versiones confiable y eficiente en el actual paisaje de desarrollo en rápida evolución.
 

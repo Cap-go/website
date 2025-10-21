@@ -219,7 +219,7 @@ A continuación, incluya el comando de carga después de sus pasos de construcci
     capgo deploy v${VERSION} --channel production
 ```
 
-Para [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), configure ajustes de validación de esta manera:
+Para [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/), configure ajustes de validación de esta manera:
 
 ```json
 {

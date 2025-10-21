@@ -100,7 +100,7 @@ Mengandalkan [pembaruan manual](https://capgo.app/docs/plugin/cloud-mode/manual-
 
 Berikut perbandingan singkat metode pembaruan manual dan otomatis:
 
--   **Kecepatan Pengiriman**: Pembaruan manual bisa memakan waktu berhari-hari atau berminggu-minggu, sementara [pembaruan otomatis](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) mencapai 95% pengguna dalam 24 jam [\[1\]](https://capgo.app/).
+-   **Kecepatan Pengiriman**: Pembaruan manual bisa memakan waktu berhari-hari atau berminggu-minggu, sementara [pembaruan otomatis](https://capgo.app/docs/live-updates/update-behavior/) mencapai 95% pengguna dalam 24 jam [\[1\]](https://capgo.app/).
 -   **Pelacakan Keberhasilan**: Metode manual bervariasi, tapi pembaruan otomatis mencapai tingkat keberhasilan 82% di seluruh dunia [\[1\]](https://capgo.app/).
 -   **Opsi Rollback**: Pembaruan manual menawarkan pemulihan terbatas, sementara pembaruan otomatis memungkinkan rollback segera.
 -   **Pemantauan**: Pemeriksaan manual memakan waktu, sedangkan alat otomatis menyediakan analitik real-time [\[1\]](https://capgo.app/).

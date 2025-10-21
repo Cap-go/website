@@ -34,7 +34,7 @@ next_blog: ''
 -   **ビルドフック**: ビルドプロセスの特定のステージでコードを実行。
 -   **環境変数**: `.env`ファイルで環境固有のビルドを簡素化。
 
-[Capgo](https://capgo.app/)というデプロイメントツールは、[自動更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)、バージョン追跡、グローバルなパフォーマンス最適化でこのプロセスを強化します。最大限の効率を得るためのビルドスクリプトの設定とカスタマイズ方法について、以下で詳しく説明します。
+[Capgo](https://capgo.app/)というデプロイメントツールは、[自動更新](https://capgo.app/docs/live-updates/update-behavior/)、バージョン追跡、グローバルなパフォーマンス最適化でこのプロセスを強化します。最大限の効率を得るためのビルドスクリプトの設定とカスタマイズ方法について、以下で詳しく説明します。
 
 ## [Capacitor](https://capacitorjs.com/)の設定について
 

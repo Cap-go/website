@@ -190,7 +190,7 @@ Ces audits, associés aux outils de gestion de la confidentialité, aident les d
 
 ### Outils de gestion de la confidentialité
 
-Pour gérer efficacement les défis de conformité, les développeurs s'appuient sur des outils pour des [mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) rapides et sécurisées. Capgo en est un excellent exemple, ayant livré plus de 947,6 millions de [mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) sécurisées dans le monde [\[1\]](https://capgo.app/).
+Pour gérer efficacement les défis de conformité, les développeurs s'appuient sur des outils pour des [mises à jour](https://capgo.app/docs/live-updates/update-behavior/) rapides et sécurisées. Capgo en est un excellent exemple, ayant livré plus de 947,6 millions de [mises à jour](https://capgo.app/docs/live-updates/update-behavior/) sécurisées dans le monde [\[1\]](https://capgo.app/).
 
 | Fonctionnalité | Avantage en matière de confidentialité | Impact sur la mise en œuvre |
 | --- | --- | --- |

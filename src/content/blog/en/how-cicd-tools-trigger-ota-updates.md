@@ -172,7 +172,7 @@ Staged updates let you control how updates are rolled out, ensuring a smooth exp
 
 ### Metric-Based Update Triggers
 
-[Automating updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) based on performance metrics can save time and prevent issues. By setting up monitoring webhooks, you can track important metrics and decide whether to continue or pause an update:
+[Automating updates](https://capgo.app/docs/live-updates/update-behavior/) based on performance metrics can save time and prevent issues. By setting up monitoring webhooks, you can track important metrics and decide whether to continue or pause an update:
 
 | Metric Type | Threshold | Action |
 | --- | --- | --- |

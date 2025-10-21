@@ -26,7 +26,7 @@ Il tag delle versioni è essenziale per gestire le app [Capacitor](https://capac
 -   **Perché è importante**: Tiene traccia degli aggiornamenti, consente i rollback e garantisce distribuzioni stabili.
 -   **Versionamento semantico**: Usa **MAJOR.MINOR.PATCH** per indicare cambiamenti critici, nuove funzionalità o correzioni di bug.
 -   **Sincronizzazione tra piattaforme**: Allinea i numeri di versione in `package.json`, iOS `Info.plist` e Android `build.gradle`.
--   **Automazione**: [Automatizza gli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) con script npm e strumenti CI/CD.
+-   **Automazione**: [Automatizza gli aggiornamenti](https://capgo.app/docs/live-updates/update-behavior/) con script npm e strumenti CI/CD.
 -   **Aggiornamenti Live**: Strumenti come [Capgo](https://capgo.app/) distribuiscono aggiornamenti al 95% degli utenti entro 24 ore.
 -   **Gestione Beta**: Usa canali strutturati per versioni alpha, beta e produzione.
 

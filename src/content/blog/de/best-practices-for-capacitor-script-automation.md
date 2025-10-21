@@ -161,7 +161,7 @@ Hier sind einige wesentliche Testpraktiken:
 2.  **Integrationstests**: Stellen Sie sicher, dass Ihre Skripte nahtlos mit anderen Teilen des Systems funktionieren.
 3.  **Leistungstests**: Messen Sie Ausführungszeiten und Ressourcenverbrauch, um Engpässe zu identifizieren.
 
-Sobald die Tests eingerichtet sind, hebt [die Update-Automatisierung](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) die Zuverlässigkeit der Bereitstellung auf die nächste Stufe.
+Sobald die Tests eingerichtet sind, hebt [die Update-Automatisierung](https://capgo.app/docs/live-updates/update-behavior/) die Zuverlässigkeit der Bereitstellung auf die nächste Stufe.
 
 ### Update-Automatisierung
 

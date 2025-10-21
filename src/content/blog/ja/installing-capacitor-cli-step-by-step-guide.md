@@ -327,7 +327,7 @@ Capgoは、さまざまなニーズに合わせた複数の価格帯を提供し
 
 Capgoは、いくつかの際立った機能を提供します：
 
--   **[安全なアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**　エンドツーエンドの暗号化による
+-   **[安全なアップデート](https://capgo.app/docs/live-updates/update-behavior/)**　エンドツーエンドの暗号化による
 -   **統合されたCI/CDを介した自動デプロイ**
 -   **ユーザー割り当てによるターゲット更新**
 -   **バージョン管理による即時ロールバック**

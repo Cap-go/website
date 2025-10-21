@@ -56,7 +56,7 @@ Dalam hal keamanan, Capgo dan Appflow mengambil pendekatan yang berbeda. Capgo m
 
 | Fitur Keamanan | Capgo | Appflow |
 | --- | --- | --- |
-| [Perlindungan Pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Enkripsi end-to-end | Penandatanganan pembaruan |
+| [Perlindungan Pembaruan](https://capgo.app/docs/live-updates/update-behavior/) | Enkripsi end-to-end | Penandatanganan pembaruan |
 | Opsi Hosting | Cloud atau self-hosted | Hanya SaaS |
 | Akses Kode Sumber | 100% open-source | Proprietary |
 | Kepatuhan Toko | Kepatuhan penuh | Kepatuhan penuh |

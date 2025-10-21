@@ -85,7 +85,7 @@ Queste metriche ti daranno un quadro chiaro di come stanno performando i tuoi ag
 Affina le tue impostazioni di monitoraggio per raccogliere i dati più rilevanti. A seconda dello strumento scelto, ecco cosa puoi fare:
 
 -   **New Relic**: Offre funzionalità come analytics, registrazione personalizzata, segnalazione crash, monitoraggio della rete e cattura del corpo delle risposte HTTP [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/).
--   **Capgo**: Permette di abilitare la crittografia per [aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) e assegnare aggiornamenti a utenti specifici per un targeting migliore [\[1\]](https://capgo.app/).
+-   **Capgo**: Permette di abilitare la crittografia per [aggiornamenti sicuri](https://capgo.app/docs/live-updates/update-behavior/) e assegnare aggiornamenti a utenti specifici per un targeting migliore [\[1\]](https://capgo.app/).
 
 > "Capgo è uno strumento indispensabile per gli sviluppatori che vogliono essere più produttivi. Evitare la revisione per le correzioni di bug è prezioso." - Bessie Cooper [\[1\]](https://capgo.app/)
 

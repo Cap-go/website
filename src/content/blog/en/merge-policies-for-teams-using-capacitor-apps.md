@@ -46,7 +46,7 @@ These general principles provide a strong starting point. From here, they can be
 Capacitor's unique setup, with live updates and hybrid code, requires additional policies that address web, native, and CI/CD integration. Here's what to focus on:
 
 -   **Managing Platform Code**: Define who owns the native code and make sure cross-platform behavior is validated.
--   **Plugin Handling**: Lock plugin versions to avoid unexpected issues, [automate updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), and test compatibility across platforms.
+-   **Plugin Handling**: Lock plugin versions to avoid unexpected issues, [automate updates](https://capgo.app/docs/live-updates/update-behavior/), and test compatibility across platforms.
 -   **CI/CD and Live Updates**: Use tools like GitHub Actions, GitLab CI, or Jenkins for automated checks. Automate live updates with Capgo to push fixes instantly, bypassing App Store delays. As Rodrigo Mantica puts it, "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" [\[1\]](https://capgo.app/)
 
 ## Core Components of Merge Policies

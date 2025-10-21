@@ -40,7 +40,7 @@ Penandatanganan token sangat penting untuk mengamankan aplikasi [Capacitor](http
 
 **Pembaruan Langsung:**
 
--   Gunakan token bertanda tangan untuk [mengamankan pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   Gunakan token bertanda tangan untuk [mengamankan pembaruan](https://capgo.app/docs/live-updates/update-behavior/).
 -   Aktifkan opsi rollback untuk pembaruan yang dikompromikan.
 -   Pantau keterlibatan pengguna dan tingkat keberhasilan pembaruan.
 

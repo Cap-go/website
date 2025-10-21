@@ -161,7 +161,7 @@ Ecco alcune pratiche essenziali di testing:
 -   **Test di Integrazione**: Assicurati che i tuoi script funzionino perfettamente con altre parti del sistema.
 -   **Test di Performance**: Misura tempi di esecuzione e uso risorse per identificare colli di bottiglia.
 
-Una volta implementati i test, l'[automazione degli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) porta l'affidabilità delle distribuzioni a un nuovo livello.
+Una volta implementati i test, l'[automazione degli aggiornamenti](https://capgo.app/docs/live-updates/update-behavior/) porta l'affidabilità delle distribuzioni a un nuovo livello.
 
 ### Automazione degli Aggiornamenti
 

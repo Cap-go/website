@@ -35,7 +35,7 @@ next_blog: ''
 -   **Build-Hooks**: Code während bestimmter Phasen des Build-Prozesses ausführen.
 -   **Umgebungsvariablen**: Vereinfachen Sie umgebungsspezifische Builds mit `.env`-Dateien.
 
-[Capgo](https://capgo.app/), ein Deployment-Tool, verbessert diesen Prozess mit [automatisierten Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), Versionsverfolgung und globaler Leistungsoptimierung. Lesen Sie weiter, um zu erfahren, wie Sie Ihre Build-Skripte für maximale Effizienz einrichten und anpassen können.
+[Capgo](https://capgo.app/), ein Deployment-Tool, verbessert diesen Prozess mit [automatisierten Updates](https://capgo.app/docs/live-updates/update-behavior/), Versionsverfolgung und globaler Leistungsoptimierung. Lesen Sie weiter, um zu erfahren, wie Sie Ihre Build-Skripte für maximale Effizienz einrichten und anpassen können.
 
 ## Einführung in [Capacitor](https://capacitorjs.com/) Configure
 

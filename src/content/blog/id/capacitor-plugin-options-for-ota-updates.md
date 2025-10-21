@@ -192,7 +192,7 @@ Berikut rincian pilihan saat ini:
 
 | Plugin | Status | Kekuatan Utama | Terbaik Untuk |
 | --- | --- | --- | --- |
-| Capgo | Aktif | Enkripsi end-to-end, pembaruan cepat | Tim yang fokus pada [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Capgo | Aktif | Enkripsi end-to-end, pembaruan cepat | Tim yang fokus pada [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) |
 | Capawesome | Aktif (Sejak 2024) | Fokus pasar Jerman, harga kompetitif | Proyek yang menargetkan Eropa |
 | Appflow | Akan ditutup (2026) | Fitur kelas enterprise | Transisi sistem lama |
 | CodePush | Dihentikan (2024) | Sebelumnya opsi gratis | N/A |

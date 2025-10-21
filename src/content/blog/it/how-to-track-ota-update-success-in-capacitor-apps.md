@@ -234,7 +234,7 @@ Gli aggiornamenti possono incontrare intoppi come fallimenti di rete, incompatib
 | Download Falliti | Connessione di rete scarsa | Usa un sistema di retry automatico con backoff esponenziale. |
 | Conflitti di Versione | Dipendenze incompatibili | Applica controlli di versione rigorosi prima di distribuire gli aggiornamenti. |
 | Problemi di Cache | File cache obsoleti | Aggiungi tecniche di cache-busting e pulisci le vecchie versioni. |
-| Aggiornamenti Parziali | Installazione interrotta | Usa [aggiornamenti atomici](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) con opzione di rollback per garantire la consistenza. |
+| Aggiornamenti Parziali | Installazione interrotta | Usa [aggiornamenti atomici](https://capgo.app/docs/live-updates/update-behavior/) con opzione di rollback per garantire la consistenza. |
 
 ### Configurazione del Monitoraggio degli Errori
 

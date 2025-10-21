@@ -220,7 +220,7 @@ Ensuite, incluez la commande de téléchargement après vos étapes de construct
     capgo deploy v${VERSION} --channel production
 ```
 
-Pour des [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), configurez les paramètres de validation comme suit :
+Pour des [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/), configurez les paramètres de validation comme suit :
 
 ```json
 {

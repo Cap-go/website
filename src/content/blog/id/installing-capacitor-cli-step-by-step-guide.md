@@ -329,7 +329,7 @@ Untuk mengaktifkan pembaruan langsung, tambahkan yang berikut ke file `capacitor
 
 Capgo menyediakan beberapa fitur unggulan:
 
--   **[Pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** dengan enkripsi ujung ke ujung
+-   **[Pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/)** dengan enkripsi ujung ke ujung
 -   **Penerapan otomatis** melalui CI/CD terintegrasi
 -   **Pembaruan terarah** melalui penugasan pengguna
 -   **Rollback instan** dengan kontrol versi

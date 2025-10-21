@@ -46,7 +46,7 @@ Capgo는 **빠르고 규정을 준수하는 업데이트**가 필요하면서 �
 
 ## 1. Capgo 기능
 
--   **[하이브리드 업데이트 전략](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**  
+-   **[하이브리드 업데이트 전략](https://capgo.app/docs/live-updates/update-behavior/)**  
     앱스토어 업데이트와 OTA 업데이트를 결합하여 빠른 수정이 가능합니다. Rodrigo Mantica는 이 접근 방식을 강조했습니다:
     
     > "우리는 애자일 개발을 실천하고 있으며 @Capgo는 사용자에게 지속적으로 제공하는 데 매우 중요합니다!" [\[1\]](https://capgo.app/)

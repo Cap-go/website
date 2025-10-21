@@ -136,7 +136,7 @@ La scelta della giusta [strategia di aggiornamento](https://capgo.app/docs/plugi
 
 Ecco alcune strategie che si basano su questi risultati:
 
--   **[Strategia di aggiornamento ibrida](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**  
+-   **[Strategia di aggiornamento ibrida](https://capgo.app/docs/live-updates/update-behavior/)**  
     Combina gli aggiornamenti dell'app store con gli aggiornamenti OTA per correzioni rapide. Rodrigo Mantica ha enfatizzato questo approccio:
     
     > "Pratichiamo lo sviluppo agile e @Capgo è fondamentale per fornire continuamente ai nostri utenti!" [\[1\]](https://capgo.app/)

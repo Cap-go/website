@@ -56,7 +56,7 @@ En matière de sécurité, Capgo et Appflow adoptent des approches différentes.
 
 | Fonctionnalité de Sécurité | Capgo | Appflow |
 | --- | --- | --- |
-| [Protection des Mises à Jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Cryptage de bout en bout | Signature des mises à jour |
+| [Protection des Mises à Jour](https://capgo.app/docs/live-updates/update-behavior/) | Cryptage de bout en bout | Signature des mises à jour |
 | Options d'Hébergement | Cloud ou auto-hébergé | SaaS uniquement |
 | Accès au Code Source | 100 % open-source | Propriétaire |
 | Conformité au Store | Conformité totale | Conformité totale |

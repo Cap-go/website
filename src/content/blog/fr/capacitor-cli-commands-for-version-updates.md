@@ -331,7 +331,7 @@ Les outils de mise à jour modernes offrent plusieurs avantages notables :
 -   **Rétrogradation en un clic** pour une récupération rapide en cas de problèmes
 -   **Analytique en temps réel** pour surveiller les performances de mise à jour et l'engagement des utilisateurs
 
-Ces fonctionnalités soutiennent un cadre robuste pour gérer efficacement les [versions des mises à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+Ces fonctionnalités soutiennent un cadre robuste pour gérer efficacement les [versions des mises à jour](https://capgo.app/docs/live-updates/update-behavior/).
 
 Que vous travailliez sur une petite application ou que vous évoluiez vers un déploiement plus important, combiner la CLI de Capacitor avec des outils de mise à jour avancés garantit un contrôle de version fiable et efficace dans le paysage de développement rapide d'aujourd'hui.
 

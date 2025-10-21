@@ -40,7 +40,7 @@ Les conflits de version lors des mises à jour en direct surviennent souvent à 
 
 - **Déploiements Échelonnés** : Les déploiements progressifs peuvent entraîner l'activation de plusieurs versions d'applications en même temps. Capgo note que bien que 95 % des utilisateurs soient mis à jour dans les 24 heures, les 5 % restants peuvent causer une fragmentation des versions [\[1\]](https://capgo.app/).
     
-- **Mises à Jour Échouées** : Avec un taux de succès des mises à jour de 82 %, environ 18 % des [tentatives de mise à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) échouent, laissant certains utilisateurs bloqués sur des versions obsolètes [\[1\]](https://capgo.app/).
+- **Mises à Jour Échouées** : Avec un taux de succès des mises à jour de 82 %, environ 18 % des [tentatives de mise à jour](https://capgo.app/docs/live-updates/update-behavior/) échouent, laissant certains utilisateurs bloqués sur des versions obsolètes [\[1\]](https://capgo.app/).
     
 - **Canaux de Test Bêta** : Le mélange entre les tests bêta et les déploiements échelonnés sans un contrôle de version approprié peut créer des conflits entre les versions bêta et de production [\[1\]](https://capgo.app/).
     

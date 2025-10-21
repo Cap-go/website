@@ -244,7 +244,7 @@ Aquí hay un resumen rápido de las mejores prácticas para actualizaciones OTA:
 | Distribución | Minimizar riesgos | Despliega actualizaciones utilizando canales específicos |
 | Monitoreo | Asegurar la fiabilidad | Rastrea el éxito de las actualizaciones y las tasas de adopción |
 
-Estas prácticas son esenciales para que plataformas como Capgo ofrezcan actualizaciones rápidas y [seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+Estas prácticas son esenciales para que plataformas como Capgo ofrezcan actualizaciones rápidas y [seguras](https://capgo.app/docs/live-updates/update-behavior/).
 
 ### [Características de Capgo](https://capgo.app/)
 

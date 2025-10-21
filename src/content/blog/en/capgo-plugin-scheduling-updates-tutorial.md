@@ -106,7 +106,7 @@ Capgo offers tools to tailor update strategies for various user segments by usin
 | Regular Users | Production Channel | Gradual rollouts prioritizing stability |
 | Low Activity Users | Stable Channel | Updates focused on core functionality |
 
-For even more control, you can implement percentage-based rollouts or allow specific groups to opt in [\[9\]](https://capgo.app/docs/faq). This method works particularly well for QA teams or organizations that require a [controlled update process](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+For even more control, you can implement percentage-based rollouts or allow specific groups to opt in [\[9\]](https://capgo.app/docs/faq). This method works particularly well for QA teams or organizations that require a [controlled update process](https://capgo.app/docs/live-updates/update-behavior/).
 
 For simpler apps, stick to separate channels. For apps with a diverse user base, consider combining multiple strategies to meet various needs effectively.
 
@@ -116,7 +116,7 @@ Once you've set up your update scheduling strategy, it's time to ensure everythi
 
 ### How to Test Update Scheduling
 
-Testing [scheduled updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) requires an environment that closely mirrors your production setup. This ensures that any issues encountered during testing are likely to reflect real-world scenarios.
+Testing [scheduled updates](https://capgo.app/docs/live-updates/update-behavior/) requires an environment that closely mirrors your production setup. This ensures that any issues encountered during testing are likely to reflect real-world scenarios.
 
 To get started, you'll need specific tools and software versions. Your testing environment should include:
 
@@ -201,7 +201,7 @@ Finally, keep users informed and engaged. Provide clear notifications about upco
 
 Now that you’ve explored the full range of OTA scheduling tools with Capgo, you’re equipped to manage updates efficiently - balancing speed, safety, and user experience. From installation and configuration to advanced rollout strategies and security measures, these techniques set you up for success.
 
-The key to effective scheduling lies in starting small, monitoring performance metrics, and scaling gradually. For example, achieving a 95% adoption rate within 24 hours is entirely possible when you combine a well-planned rollout with reliable infrastructure [\[1\]](https://capgo.app/blog). These practices ensure [smooth updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) while maintaining high performance.
+The key to effective scheduling lies in starting small, monitoring performance metrics, and scaling gradually. For example, achieving a 95% adoption rate within 24 hours is entirely possible when you combine a well-planned rollout with reliable infrastructure [\[1\]](https://capgo.app/blog). These practices ensure [smooth updates](https://capgo.app/docs/live-updates/update-behavior/) while maintaining high performance.
 
 > "Capgo solves a major problem for Capacitor application developers: how to deploy updates quickly without going through the tedious app store process. And it does it brilliantly, offering a robust solution." - Thomas Sanlis, Uneed Review [\[2\]](https://www.uneed.best/blog/capgo-review)
 

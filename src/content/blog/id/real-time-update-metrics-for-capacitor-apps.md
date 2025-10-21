@@ -87,7 +87,7 @@ Metrik ini akan memberikan gambaran jelas tentang seberapa baik kinerja pembarua
 Sesuaikan pengaturan pelacakan Anda untuk mengumpulkan data yang paling relevan. Tergantung pada alat yang Anda pilih, berikut yang dapat Anda lakukan:
 
 -   **New Relic**: Menawarkan fitur seperti analitik, pencatatan kustom, pelaporan crash, pemantauan jaringan, dan penangkapan body respons HTTP [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/).
--   **Capgo**: Memungkinkan Anda mengaktifkan enkripsi untuk [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) dan menetapkan pembaruan ke pengguna tertentu untuk penargetan yang lebih baik [\[1\]](https://capgo.app/).
+-   **Capgo**: Memungkinkan Anda mengaktifkan enkripsi untuk [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) dan menetapkan pembaruan ke pengguna tertentu untuk penargetan yang lebih baik [\[1\]](https://capgo.app/).
 
 > "Capgo adalah alat yang wajib dimiliki bagi pengembang yang ingin lebih produktif. Menghindari review untuk perbaikan bug sangatlah berharga." - Bessie Cooper [\[1\]](https://capgo.app/)
 

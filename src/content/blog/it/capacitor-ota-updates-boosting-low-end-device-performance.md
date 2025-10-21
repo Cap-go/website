@@ -144,7 +144,7 @@ Questi risultati aprono la strada a ulteriori progressi nei sistemi di consegna 
 
 ### Sviluppi Futuri
 
-Gli aggiornamenti OTA per dispositivi di fascia bassa continuano a evolversi. Con la **crittografia end-to-end** che garantisce [aggiornamenti sicuri](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) senza impattare le prestazioni e l'integrazione con piattaforme CI/CD come [GitHub Actions](https://docs.github.com/actions) e [GitLab CI](https://docs.gitlab.com/ee/ci/) che semplifica i deployment, il processo sta diventando ancora più fluido [\[1\]](https://capgo.app/). Il costo è anche un fattore importante: mentre [AppFlow](https://ionic.io/appflow/) costa $6.000 all'anno, il setup CI/CD di Capgo è circa $300 al mese [\[1\]](https://capgo.app/). Come ha sottolineato il team [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) della NASA:
+Gli aggiornamenti OTA per dispositivi di fascia bassa continuano a evolversi. Con la **crittografia end-to-end** che garantisce [aggiornamenti sicuri](https://capgo.app/docs/live-updates/update-behavior/) senza impattare le prestazioni e l'integrazione con piattaforme CI/CD come [GitHub Actions](https://docs.github.com/actions) e [GitLab CI](https://docs.gitlab.com/ee/ci/) che semplifica i deployment, il processo sta diventando ancora più fluido [\[1\]](https://capgo.app/). Il costo è anche un fattore importante: mentre [AppFlow](https://ionic.io/appflow/) costa $6.000 all'anno, il setup CI/CD di Capgo è circa $300 al mese [\[1\]](https://capgo.app/). Come ha sottolineato il team [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) della NASA:
 
 > "@Capgo è un modo intelligente per fare hot code pushes (e non per tutti i soldi del mondo come con @AppFlow)"
 

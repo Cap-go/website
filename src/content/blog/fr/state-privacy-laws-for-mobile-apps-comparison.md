@@ -131,7 +131,7 @@ Pour ceux qui s'inquiètent des dépendances aux fournisseurs, la structure open
 
 > "La seule solution avec un véritable chiffrement de bout en bout, les autres ne font que signer les mises à jour" - Capgo [\[1\]](https://capgo.app/)
 
-L'efficacité de Capgo est claire : il est utilisé par 750 applications en production, livrant 23,5M de [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) jusqu'à présent [\[1\]](https://capgo.app/).
+L'efficacité de Capgo est claire : il est utilisé par 750 applications en production, livrant 23,5M de [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) jusqu'à présent [\[1\]](https://capgo.app/).
 
 Suivez les mises à jour en temps réel avec des analyses, la surveillance des erreurs et des contrôles d'accès basés sur les rôles pour simplifier la conformité dans plusieurs États.
 

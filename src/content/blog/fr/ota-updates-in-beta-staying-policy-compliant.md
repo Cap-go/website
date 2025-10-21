@@ -190,7 +190,7 @@ La conformité des OTA bêta repose sur trois domaines principaux : la **sécuri
 -   **Mesures de sécurité**
     
     -   Les mises à jour sont protégées par un chiffrement de bout en bout, garantissant que seuls les utilisateurs autorisés peuvent y accéder.
-    -   La surveillance en temps réel prend en charge les [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), avec des options de restauration instantanée pour une résolution rapide des problèmes (taux de réussite de 82%) [\[1\]](https://capgo.app/).
+    -   La surveillance en temps réel prend en charge les [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/), avec des options de restauration instantanée pour une résolution rapide des problèmes (taux de réussite de 82%) [\[1\]](https://capgo.app/).
 -   **Contrôle de la distribution**
     
     -   Les systèmes de canaux permettent une gestion précise des groupes bêta.

@@ -27,7 +27,7 @@ Um die russischen Datenlokalisierungsgesetze bei der Entwicklung von [Capacitor]
 -   **Server-Einrichtung**: Nutzen Sie zertifizierte russische Rechenzentren (z.B. [YandexCloud](https://yandexcloud/en/solutions/gateway-to-russia), [Mailru Cloud Solutions](https://cloudmailru/)) und implementieren Sie Geo-Routing, um Daten innerhalb Russlands zu halten
 -   **[Datenschutzerklärung](https://capgo.app/privacy/)**: Stellen Sie eine russischsprachige Datenschutzerklärung bereit, die [Datenspeicherung](https://capgo.app/plugins/capacitor-data-storage-sqlite/), Nutzerrechte und Verarbeitungspraktiken detailliert beschreibt
 -   **Einwilligungsmechanismen**: Fügen Sie Opt-in-Checkboxen für die Datenerfassung hinzu und ermöglichen Sie Nutzern, ihre Einwilligung einfach zu widerrufen
--   **Compliance-Überwachung**: Führen Sie regelmäßige Audits durch, dokumentieren Sie die Einhaltung und nutzen Sie Tools wie [Capgo](https://capgo.app/) für [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) und Echtzeit-Monitoring
+-   **Compliance-Überwachung**: Führen Sie regelmäßige Audits durch, dokumentieren Sie die Einhaltung und nutzen Sie Tools wie [Capgo](https://capgo.app/) für [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) und Echtzeit-Monitoring
 
 **Kurzübersicht**:
 

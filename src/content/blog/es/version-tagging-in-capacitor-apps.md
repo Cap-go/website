@@ -26,7 +26,7 @@ El etiquetado de versiones es esencial para gestionar aplicaciones [Capacitor](h
 -   **Por Qué Importa**: Rastrea actualizaciones, permite reversiones y asegura implementaciones estables.
 -   **Versionado Semántico**: Usa **MAYOR.MENOR.PARCHE** para indicar cambios incompatibles, nuevas características o correcciones.
 -   **Sincronización Entre Plataformas**: Alinea números de versión en `package.json`, `Info.plist` de iOS y `build.gradle` de Android.
--   **Automatización**: [Automatiza actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) con scripts npm y herramientas CI/CD.
+-   **Automatización**: [Automatiza actualizaciones](https://capgo.app/docs/live-updates/update-behavior/) con scripts npm y herramientas CI/CD.
 -   **Actualizaciones en Vivo**: Herramientas como [Capgo](https://capgo.app/) entregan actualizaciones al 95% de usuarios en 24 horas.
 -   **Gestión Beta**: Usa canales estructurados para versiones alfa, beta y producción.
 

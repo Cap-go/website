@@ -111,7 +111,7 @@ CapacitorUpdater.initialize({
 
 ### Integración de Control de Versiones
 
-Capgo funciona bien con plataformas CI/CD, haciendo que las [actualizaciones automatizadas](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) sean simples. Las plataformas soportadas incluyen:
+Capgo funciona bien con plataformas CI/CD, haciendo que las [actualizaciones automatizadas](https://capgo.app/docs/live-updates/update-behavior/) sean simples. Las plataformas soportadas incluyen:
 
 -   [GitHub Actions](https://docs.github.com/actions)
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)

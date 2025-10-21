@@ -21,7 +21,7 @@ To comply with Russia's data localization laws when developing [Capacitor](https
 -   **Server Setup**: Use certified Russian data centers (e.g., [Yandex.Cloud](https://yandex.cloud/en/solutions/gateway-to-russia), [Mail.ru Cloud Solutions](https://cloud.mail.ru/)) and implement geo-routing to keep data within Russia.
 -   **[Privacy Policy](https://capgo.app/privacy/)**: Provide a Russian-language privacy policy detailing [data storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/), user rights, and processing practices.
 -   **Consent Mechanisms**: Add opt-in checkboxes for data collection and allow users to withdraw consent easily.
--   **Compliance Monitoring**: Perform regular audits, document compliance, and use tools like [Capgo](https://capgo.app/) for [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) and real-time monitoring.
+-   **Compliance Monitoring**: Perform regular audits, document compliance, and use tools like [Capgo](https://capgo.app/) for [secure updates](https://capgo.app/docs/live-updates/update-behavior/) and real-time monitoring.
 
 **Quick Overview**:
 

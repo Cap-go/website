@@ -426,7 +426,7 @@ export default defineConfig({
         },
         {
           label: 'LLMs-full.txt',
-          link: '/llms-full.txt',
+          link: 'https://capgo.app/llms-full.txt',
         },
       ],
     }),

@@ -142,7 +142,7 @@ In production, the priority shifts to implementing advanced security protocols t
 | --- | --- | --- |
 | Update Security | Use end-to-end encryption | Ensures updates are accessible only to authorized users |
 | Access Control | Granular permission settings | Restricts access based on team roles |
-| Deployment Automation | Integrated CI/CD pipelines | Enables secure, [automated updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Deployment Automation | Integrated CI/CD pipelines | Enables secure, [automated updates](https://capgo.app/docs/live-updates/update-behavior/) |
 | Compliance | Meet Apple and Google standards | Ensures app store approvals |
 
 Production setups also involve organization-specific policies, managed through unified access controls. Teams can create multiple organizations with tailored user permissions and integrate with CI/CD tools like GitHub, GitLab, and Azure DevOps for seamless, secure deployments.

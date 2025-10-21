@@ -49,7 +49,7 @@ Capgoは、**迅速でコンプライアンスに準拠した更新**を必要�
 
 （続く...）
 
--   **[ハイブリッド更新戦略](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**  
+-   **[ハイブリッド更新戦略](https://capgo.app/docs/live-updates/update-behavior/)**  
     アプリストアの更新とOTA更新を組み合わせてクイックフィックスを実現。Rodrigo Manticaはこのアプローチを強調しています：
     
     > "私たちはアジャイル開発を実践しており、@Capgoはユーザーに継続的にデリバリーする上で重要な役割を果たしています！" [\[1\]](https://capgo.app/)

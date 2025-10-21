@@ -143,7 +143,7 @@ Pencapaian ini membuka jalan untuk kemajuan lebih lanjut dalam sistem pengiriman
 
 ### Pengembangan Masa Depan
 
-Pembaruan OTA untuk perangkat low-end terus berkembang. Dengan **enkripsi end-to-end** memastikan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) tanpa mempengaruhi kinerja dan integrasi dengan platform CI/CD seperti [GitHub Actions](https://docs.github.com/actions) dan [GitLab CI](https://docs.gitlab.com/ee/ci/) menyederhanakan penerapan, prosesnya menjadi semakin lancar [\[1\]](https://capgo.app/). Biaya juga faktor utama: sementara [AppFlow](https://ionic.io/appflow/) biayanya $6.000 per tahun, setup CI/CD Capgo sekitar $300 per bulan [\[1\]](https://capgo.app/). Seperti yang ditunjukkan tim [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) NASA:
+Pembaruan OTA untuk perangkat low-end terus berkembang. Dengan **enkripsi end-to-end** memastikan [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) tanpa mempengaruhi kinerja dan integrasi dengan platform CI/CD seperti [GitHub Actions](https://docs.github.com/actions) dan [GitLab CI](https://docs.gitlab.com/ee/ci/) menyederhanakan penerapan, prosesnya menjadi semakin lancar [\[1\]](https://capgo.app/). Biaya juga faktor utama: sementara [AppFlow](https://ionic.io/appflow/) biayanya $6.000 per tahun, setup CI/CD Capgo sekitar $300 per bulan [\[1\]](https://capgo.app/). Seperti yang ditunjukkan tim [OSIRIS-REx](https://en.wikipedia.org/wiki/OSIRIS-REx) NASA:
 
 > "@Capgo adalah cara cerdas untuk melakukan hot code pushes (dan tidak untuk semua uang di dunia seperti dengan @AppFlow)"
 

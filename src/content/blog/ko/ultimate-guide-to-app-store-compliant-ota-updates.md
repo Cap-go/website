@@ -32,7 +32,7 @@ next_blog: ''
 -   **규정 준수 방법**:
     -   핵심 앱 기능 변경 금지.
     -   HTTPS와 디지털 서명과 같은 보안 전송 방식 사용.
-    -   사용자에게 [업데이트 목적](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)을 명확히 전달.
+    -   사용자에게 [업데이트 목적](https://capgo.app/docs/live-updates/update-behavior/)을 명확히 전달.
 
 ### OTA 규정 빠른 비교
 

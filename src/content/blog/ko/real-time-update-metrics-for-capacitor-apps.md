@@ -82,7 +82,7 @@ next_blog: ''
 가장 관련성 높은 데이터를 수집하도록 추적 설정을 미세 조정하세요. 선택한 도구에 따라 다음과 같은 작업이 가능합니다:
 
 -   **New Relic**: 분석, 사용자 정의 로깅, 충돌 보고, 네트워크 모니터링, HTTP 응답 본문 캡처와 같은 기능 제공 [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/).
--   **Capgo**: [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 위한 암호화 활성화 및 특정 사용자에게 업데이트 할당 가능 [\[1\]](https://capgo.app/).
+-   **Capgo**: [보안 업데이트](https://capgo.app/docs/live-updates/update-behavior/)를 위한 암호화 활성화 및 특정 사용자에게 업데이트 할당 가능 [\[1\]](https://capgo.app/).
 
 > "Capgo는 더 생산적이고자 하는 개발자들에게 꼭 필요한 도구입니다. 버그 수정을 위한 검토를 피할 수 있다는 것이 매우 좋습니다." - Bessie Cooper [\[1\]](https://capgo.app/)
 

@@ -161,7 +161,7 @@ Par exemple, la **plateforme de Capgo** simplifie le suivi de conformité en aut
 
 Étant donné le rythme rapide des mises à jour d'applications sous des règles de cybersécurité strictes, des vérifications régulières de sécurité sont indispensables. Des audits externes et des évaluations de vulnérabilité peuvent identifier les lacunes potentielles tôt, aidant les équipes à résoudre les problèmes avant qu'ils ne s'aggravent. Visez des audits trimestriels pour examiner les méthodes de cryptage, les politiques de stockage de données et les processus de déploiement de mises à jour.
 
-De plus, effectuez des révisions internes hebdomadaires pour confirmer la conformité dans des domaines tels que la résidence des données, les [mises à jour de cryptage](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), les contrôles d'accès, les journaux de déploiement et la protection des données utilisateurs. Garder des enregistrements détaillés de ces vérifications est crucial pour éviter de lourdes pénalités pour non-conformité.
+De plus, effectuez des révisions internes hebdomadaires pour confirmer la conformité dans des domaines tels que la résidence des données, les [mises à jour de cryptage](https://capgo.app/docs/live-updates/update-behavior/), les contrôles d'accès, les journaux de déploiement et la protection des données utilisateurs. Garder des enregistrements détaillés de ces vérifications est crucial pour éviter de lourdes pénalités pour non-conformité.
 
 > "Éviter la révision pour un correctif est précieux." - Bessie Cooper [\[2\]](https://capgo.app)
 

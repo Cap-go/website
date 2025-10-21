@@ -164,7 +164,7 @@ The financial toll of third-party breaches is staggering. In 2024 alone, compani
 
 -   **Real-time monitoring** of vendor activities and access to sensitive systems.
 -   **Automated security assessments** to identify vulnerabilities before they become problems.
--   **[Secure update deployment](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** via protected distribution channels to ensure system integrity.
+-   **[Secure update deployment](https://capgo.app/docs/live-updates/update-behavior/)** via protected distribution channels to ensure system integrity.
 
 The consequences of not being prepared can be severe. For example, AT&T faced a $13 million fine after a breach involving a third-party telecom vendor exposed the records of 8.9 million customers in December 2023 [\[19\]](https://panorays.com/blog/vendor-cybersecurity-best-practices). This serves as a stark reminder of the importance of centralized, rapid-response solutions that align with regulatory requirements.
 

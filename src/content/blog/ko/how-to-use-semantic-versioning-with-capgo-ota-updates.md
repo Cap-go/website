@@ -94,7 +94,7 @@ OTA 업데이트와 버전 관리를 쉽게 관리하기 위한 Capgo 설정 방
 
 ### 버전 관리 통합
 
-Capgo는 CI/CD 플랫폼과 잘 작동하여 [자동화된 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)를 간단하게 만듭니다. 지원되는 플랫폼:
+Capgo는 CI/CD 플랫폼과 잘 작동하여 [자동화된 업데이트](https://capgo.app/docs/live-updates/update-behavior/)를 간단하게 만듭니다. 지원되는 플랫폼:
 
 -   [GitHub Actions](https://docsgithubcom/actions)
 -   [GitLab CI](https://docsgitlabcom/ee/ci/)

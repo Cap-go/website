@@ -28,7 +28,7 @@ next_blog: ''
     -   Verwenden Sie **Ende-zu-Ende-Verschlüsselung** für Datensicherheit.
     -   Erklären Sie klar, welche Daten gesammelt werden und warum.
     -   Ermöglichen Sie den Benutzern, ihre Daten einfach zu kontrollieren und zu verwalten.
--   **Tools wie [Capgo](https://capgo.app/) helfen**: Capgo vereinfacht die Einhaltung mit Funktionen wie [sicheren Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), Echtzeit-Fehlerverfolgung und Berechtigungsmanagement.
+-   **Tools wie [Capgo](https://capgo.app/) helfen**: Capgo vereinfacht die Einhaltung mit Funktionen wie [sicheren Updates](https://capgo.app/docs/live-updates/update-behavior/), Echtzeit-Fehlerverfolgung und Berechtigungsmanagement.
 
 ### Schnellübersicht der Plattformregeln
 

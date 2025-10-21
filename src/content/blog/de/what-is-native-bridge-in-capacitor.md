@@ -153,7 +153,7 @@ So treibt die Native Bridge das Update-System von Capgo an:
 | Inhaltsbereitstellung | Verwaltet sichere Downloads von Webassets | Schnelle und zuverlässige Asset-Bereitstellung |
 | Statusmanagement | Hält den App-Zustand während Updates aufrecht | Sanfter, unterbrechungsfreier Benutzererlebnis |
 | Versionskontrolle | Unterstützt Rückfallfunktionalität | Einfache Wiederherstellung mit einem Klick |
-| [Update-Targeting](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Ermöglicht die Verteilung an spezifische Benutzersegmente | Präzise und kontrollierte Bereitstellung |
+| [Update-Targeting](https://capgo.app/docs/live-updates/update-behavior/) | Ermöglicht die Verteilung an spezifische Benutzersegmente | Präzise und kontrollierte Bereitstellung |
 
 Diese Funktionen heben die Effizienz der Native Bridge bei der Handhabung von Updates hervor.
 

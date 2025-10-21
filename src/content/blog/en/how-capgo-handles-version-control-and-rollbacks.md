@@ -35,7 +35,7 @@ Capgo supports 2,000+ apps, delivering updates to 95% of users within 24 hours. 
 
 ![Capgo](https://assets.seobotai.com/capgo.app/68346854d3b966198182c7d5/ae0e696178a553558fb76d876ab0786c.jpg)
 
-Capgo is designed to deliver fast, [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), and its version control system is at the heart of this promise. By focusing on transferring only the necessary code changes, Capgo significantly speeds up updates while minimizing the time users spend waiting.
+Capgo is designed to deliver fast, [secure updates](https://capgo.app/docs/live-updates/update-behavior/), and its version control system is at the heart of this promise. By focusing on transferring only the necessary code changes, Capgo significantly speeds up updates while minimizing the time users spend waiting.
 
 ### App Bundles and Delta Updates
 

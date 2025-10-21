@@ -54,7 +54,7 @@ For enterprises managing large-scale deployments, Capgo ensures reliable perform
 | **Global CDN** | 114ms download speed | Fast and efficient updates |
 | **Update Success Rate** | 82% worldwide | Consistent delivery across regions |
 | **Active Users** | 2.0K+ production apps | Proven scalability for enterprises |
-| **Storage Efficiency** | [Smart differential updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Reduces bandwidth consumption |
+| **Storage Efficiency** | [Smart differential updates](https://capgo.app/docs/live-updates/update-behavior/) | Reduces bandwidth consumption |
 
 Capgo's seamless CI/CD integration simplifies update workflows, contributing to its impressive delivery of 1,747.6 billion updates to date [\[1\]](https://capgo.app).
 
@@ -69,7 +69,7 @@ As an open-source platform with 594 GitHub stars [\[1\]](https://capgo.app), Cap
 
 ## 2\. Built-in Capacitor Update Options
 
-Capacitor's native framework supports essential [update capabilities](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) by utilizing web content updates, ensuring compliance with both [Apple App Store](https://developer.apple.com/app-store/guidelines/) and Google Play Store guidelines [\[3\]](https://capacitorjs.com/docs/guides/deploying-updates). These built-in features serve as a starting point for implementing over-the-air (OTA) updates in Capacitor applications.
+Capacitor's native framework supports essential [update capabilities](https://capgo.app/docs/live-updates/update-behavior/) by utilizing web content updates, ensuring compliance with both [Apple App Store](https://developer.apple.com/app-store/guidelines/) and Google Play Store guidelines [\[3\]](https://capacitorjs.com/docs/guides/deploying-updates). These built-in features serve as a starting point for implementing over-the-air (OTA) updates in Capacitor applications.
 
 Capacitor apps, which blend web technologies with native functionality [\[3\]](https://capacitorjs.com/docs/guides/deploying-updates), come equipped with features like:
 
@@ -128,7 +128,7 @@ For medium to large enterprises, more comprehensive OTA solutions are a better f
 
 > "We rolled out [Capgo OTA updates](https://web.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app)
 
-This example highlights how effective OTA platforms help enterprises manage [large-scale updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) with precision and ease.
+This example highlights how effective OTA platforms help enterprises manage [large-scale updates](https://capgo.app/docs/live-updates/update-behavior/) with precision and ease.
 
 Agile teams also benefit significantly from these platforms, thanks to simplified version management and secure, automatic deployments [\[2\]](https://www.uneed.best/blog/capgo-review). As the industry moves toward more reliable and proven solutions, the focus shifts to ensuring long-term stability when selecting a platform.
 

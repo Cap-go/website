@@ -53,7 +53,7 @@ Here are some key features of Capgo's platform:
 
 Capgo’s approach has achieved an 82% global success rate for update deployments. Businesses can opt for either secure cloud hosting or self-hosting to align with their compliance needs.
 
-By downloading only the components that have changed, Capgo minimizes risks and reduces bandwidth usage. So far, the platform has delivered over 1.155 trillion [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/).
+By downloading only the components that have changed, Capgo minimizes risks and reduces bandwidth usage. So far, the platform has delivered over 1.155 trillion [secure updates](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
 Next, let’s look at how Capawesome addresses payment data security.
 

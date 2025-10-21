@@ -75,7 +75,7 @@ Cette segmentation permet une approche plus personnalisée pour l'amélioration 
 Avec vos utilisateurs regroupés, vous pouvez concevoir des [stratégies de mise à jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update) qui répondent à leurs besoins spécifiques. Voici comment aborder chaque segment :
 
 - **Utilisateurs Puissants** : Créez un canal bêta où ils peuvent tester de nouvelles fonctionnalités et fournir des retours avant un lancement complet.
-- **Utilisateurs Réguliers** : Utilisez des déploiements échelonnés pour assurer la stabilité. Des [mises à jour partielles](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) peuvent réduire les exigences en bande passante et accélérer les téléchargements.
+- **Utilisateurs Réguliers** : Utilisez des déploiements échelonnés pour assurer la stabilité. Des [mises à jour partielles](https://capgo.app/docs/live-updates/update-behavior/) peuvent réduire les exigences en bande passante et accélérer les téléchargements.
 - **Utilisateurs Inactifs** : Concentrez-vous sur l'amélioration des fonctionnalités principales et de la stabilité. Proposer des options de retour en un clic peut encourager ces utilisateurs à se réengager.
 
 ## Utiliser [Capgo](https://capgo.app/) pour le Ciblage des Utilisateurs
@@ -88,7 +88,7 @@ Capgo propose des outils qui rendent le ciblage des mises à jour pour des group
 
 Capgo va un peu plus loin dans la segmentation des utilisateurs en attribuant des utilisateurs à des canaux spécifiques pour des déploiements de mises à jour personnalisés. Ce [système de canaux](https://capgo.app/docs/plugin/cloud-mode/channel-system/) garantit que les mises à jour sont livrées avec précision :
 
-| **Segment d'Utilisateur** | **Type de Canal** | **[Stratégie de Mise à Jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)** |
+| **Segment d'Utilisateur** | **Type de Canal** | **[Stratégie de Mise à Jour](https://capgo.app/docs/live-updates/update-behavior/)** |
 | --- | --- | --- |
 | Utilisateurs Puissants | Canal Bêta | Accès anticipé aux nouvelles fonctionnalités |
 | Utilisateurs Réguliers | Canal de Production | Déploiements échelonnés axés sur la stabilité |

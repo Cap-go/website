@@ -192,7 +192,7 @@ Capgo menyederhanakan pengelolaan [pembaruan aplikasi](https://capgo.app/plugins
 Sistem pembaruan Capgo dibangun untuk mematuhi aturan app store sambil mempercepat penerapan. Pengembang dapat langsung mendorong pembaruan menggunakan fitur seperti:
 
 -   **Pembaruan Parsial**: Hanya mengunduh konten yang dimodifikasi, menghemat bandwidth dan mengurangi ukuran pembaruan.
--   **Enkripsi End-to-End**: Menyediakan [pembaruan aman](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) dengan enkripsi sejati, bukan hanya penandatanganan dasar.
+-   **Enkripsi End-to-End**: Menyediakan [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) dengan enkripsi sejati, bukan hanya penandatanganan dasar.
 -   **Distribusi Saluran**: Memungkinkan peluncuran yang ditargetkan untuk pengujian beta atau grup pengguna tertentu.
 
 Sistem ini mencapai tingkat keberhasilan global 82%, mengirimkan bundle 5 MB dari CDN globalnya hanya dalam 114 milidetik, dan memastikan bahwa 95% pengguna aktif menerima pembaruan dalam 24 jam [\[1\]](https://capgo.app/).

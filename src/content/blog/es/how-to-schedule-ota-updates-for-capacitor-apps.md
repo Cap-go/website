@@ -47,7 +47,7 @@ Para comenzar con las actualizaciones OTA programadas, necesitarás instalar alg
 
 Este comando configura los componentes necesarios para actualizaciones OTA, incluyendo:
 
--   **Cifrado de extremo a extremo** para garantizar [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   **Cifrado de extremo a extremo** para garantizar [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/)
     
 -   **Control de versiones** para gestionar implementaciones de actualizaciones
     

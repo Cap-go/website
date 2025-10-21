@@ -23,7 +23,7 @@ next_blog: ''
 -   **サーバーのセットアップ**: 認定を受けたロシアのデータセンター（例：[Yandex.Cloud](https://yandex.cloud/en/solutions/gateway-to-russia)、[Mail.ru Cloud Solutions](https://cloud.mail.ru/)）を使用し、ロシアのデータを保持するためにジオルーティングを実装します。
 -   **[プライバシーポリシー](https://capgo.app/privacy/)**: ロシア語のプライバシーポリシーを提供し、[データストレージ](https://capgo.app/plugins/capacitor-data-storage-sqlite/)やユーザーの権利、処理 Practices を詳細に記載します。
 -   **同意メカニズム**: データ収集のためのオプトインチェックボックスを追加し、ユーザーが簡単に同意を撤回できるようにします。
--   **遵守監視**: 定期的な監査を行い、遵守を文書化し、[Capgo](https://capgo.app/) のようなツールを使用して、[安全な更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)とリアルタイム監視を実施します。
+-   **遵守監視**: 定期的な監査を行い、遵守を文書化し、[Capgo](https://capgo.app/) のようなツールを使用して、[安全な更新](https://capgo.app/docs/live-updates/update-behavior/)とリアルタイム監視を実施します。
 
 **クイック概要**:
 

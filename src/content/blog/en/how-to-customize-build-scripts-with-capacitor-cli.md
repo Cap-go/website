@@ -30,7 +30,7 @@ next_blog: ''
 -   **Build Hooks**: Run code during specific stages of the build process.
 -   **Environment Variables**: Simplify environment-specific builds with `.env` files.
 
-[Capgo](https://capgo.app/), a deployment tool, enhances this process with [automated updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), version tracking, and global performance optimization. Keep reading to learn how to set up and customize your build scripts for maximum efficiency.
+[Capgo](https://capgo.app/), a deployment tool, enhances this process with [automated updates](https://capgo.app/docs/live-updates/update-behavior/), version tracking, and global performance optimization. Keep reading to learn how to set up and customize your build scripts for maximum efficiency.
 
 ## Introducing [Capacitor](https://capacitorjs.com/) Configure
 

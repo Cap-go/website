@@ -330,7 +330,7 @@ Alat pembaruan modern menawarkan beberapa manfaat yang patut dicatat:
 - **Pemulihan sekali klik** untuk pemulihan cepat jika terjadi masalah
 - **Analisis waktu nyata** untuk memantau kinerja pembaruan dan keterlibatan pengguna
 
-Fitur-fitur ini mendasari kerangka kerja yang kuat untuk mengelola [pembaruan versi](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) secara efektif.
+Fitur-fitur ini mendasari kerangka kerja yang kuat untuk mengelola [pembaruan versi](https://capgo.app/docs/live-updates/update-behavior/) secara efektif.
 
 Apakah Anda sedang mengerjakan aplikasi kecil atau memperbesar penyebaran yang lebih besar, menggabungkan Capacitor CLI dengan alat pembaruan canggih memastikan kontrol versi yang andal dan efisien dalam lanskap pengembangan yang bergerak cepat saat ini.
 

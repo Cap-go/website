@@ -240,7 +240,7 @@ Voici un aperçu rapide des meilleures pratiques pour les mises à jour OTA :
 | Distribution | Minimiser les risques | Déployer les mises à jour via des canaux ciblés |
 | Surveillance | Assurer la fiabilité | Suivre les taux de réussite et d'adoption des mises à jour |
 
-Ces pratiques sont essentielles pour que des plateformes comme Capgo puissent livrer des [mises à jour rapides et sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+Ces pratiques sont essentielles pour que des plateformes comme Capgo puissent livrer des [mises à jour rapides et sécurisées](https://capgo.app/docs/live-updates/update-behavior/)
 
 ### [Capgo](https://capgo.app/) Fonctionnalités
 

@@ -47,7 +47,7 @@ npx @capgo/cli init
 
 Dieser Befehl richtet die notwendigen Komponenten für OTA-Updates ein, einschließlich:
 
--   **Ende-zu-Ende-Verschlüsselung** für [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+-   **Ende-zu-Ende-Verschlüsselung** für [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/)
     
 -   **Versionskontrolle** zur Verwaltung von Update-Auslieferungen
     

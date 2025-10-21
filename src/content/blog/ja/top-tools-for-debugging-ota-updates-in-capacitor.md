@@ -16,7 +16,7 @@ published: true
 locale: ja
 next_blog: ''
 ---
-[Capacitor](https://capacitorjs.com/) アプリのOver-the-Air (OTA) アップデートのデバッグは難しい場合がありますが、適切なツールを使用することで大きな違いが生まれます。バージョンの競合管理、[セキュアなアップデート](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)の確保、クロスプラットフォームでのデバッグなど、以下の3つのツールを検討してください：
+[Capacitor](https://capacitorjs.com/) アプリのOver-the-Air (OTA) アップデートのデバッグは難しい場合がありますが、適切なツールを使用することで大きな違いが生まれます。バージョンの競合管理、[セキュアなアップデート](https://capgo.app/docs/live-updates/update-behavior/)の確保、クロスプラットフォームでのデバッグなど、以下の3つのツールを検討してください：
 
 -   **[Capgo](https://capgo.app/)**：エンドツーエンドの暗号化、CI/CD統合、ユーザー固有のロールアウトを備えたセキュアなOTAアップデート。月額12ドルから。
 -   **@capawesome/capacitor-live-update**：自動ロールバック機能を備えた基本的なOTA [アップデート管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)のための無料の simple プラグイン。

@@ -31,7 +31,7 @@ next_blog: ''
 -   暗号化、依存関係チェック、テストなどのセキュリティ対策を統合。
 -   パフォーマンスとアクセシビリティテストを使用してユーザー体験を向上。
 
-**Capgoはこのプロセスを簡素化し**、自動コンプライアンス、リアルタイムエラー追跡、[安全な更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)のためのツールを提供します。
+**Capgoはこのプロセスを簡素化し**、自動コンプライアンス、リアルタイムエラー追跡、[安全な更新](https://capgo.app/docs/live-updates/update-behavior/)のためのツールを提供します。
 
 適切なCI/CD実践で[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)のコンプライアンス、セキュリティ、効率性を維持しましょう。
 

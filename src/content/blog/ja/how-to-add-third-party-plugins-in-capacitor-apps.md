@@ -327,7 +327,7 @@ Capgoは、Capacitorワークフローにシームレスに統合され、安全
 | **統合前** | プラグインの互換性とユーザーレビューの調査 | 潜在的な課題を早期に特定 |
 | **インストール** | npmを使用してプラグインをインストールしCapacitor同期を実行 | プラットフォーム間でのスムーズな統合を確保 |
 | **設定** | プラットフォーム固有のセットアップ要件に対応 | プラグインのパフォーマンスを最適化 |
-| **メンテナンス** | Capgoを使用した[自動更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | 24時間以内にユーザーの95%がアップデート[\[1\]](https://capgo.app/) |
+| **メンテナンス** | Capgoを使用した[自動更新](https://capgo.app/docs/live-updates/update-behavior/) | 24時間以内にユーザーの95%がアップデート[\[1\]](https://capgo.app/) |
 
 Capgoはアップデートを効率化するツールを提供します。Rodrigo Manticaはその重要性を強調しています：
 

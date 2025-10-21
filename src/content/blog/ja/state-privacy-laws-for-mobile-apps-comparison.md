@@ -126,7 +126,7 @@ Capgoは、CCPA、VCDPA、CPAに沿っており、州の規制と実用的なア
 
 > "真のエンドツーエンドの暗号化を備えた唯一のソリューション、他は単に更新に署名している" - Capgo [\[1\]](https://capgo.app/)
 
-Capgoの効果は明らかです：750のプロダクションアプリに信頼され、これまでに2350万件の[安全な更新](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) を提供しています [\[1\]](https://capgo.app/) 。
+Capgoの効果は明らかです：750のプロダクションアプリに信頼され、これまでに2350万件の[安全な更新](https://capgo.app/docs/live-updates/update-behavior/) を提供しています [\[1\]](https://capgo.app/) 。
 
 複数の州でのコンプライアンスを簡素化するために、分析、エラーモニタリング、役割ベースのアクセス制御を用いてリアルタイムで更新を追跡します。
 

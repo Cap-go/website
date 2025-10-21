@@ -86,7 +86,7 @@ Diese Kennzahlen geben Ihnen ein klares Bild davon, wie gut Ihre Updates funktio
 Feinabstimmung Ihrer Tracking-Einstellungen zur Erfassung der relevantesten Daten. Je nach gewähltem Tool können Sie Folgendes tun:
 
 -   **New Relic:** Bietet Funktionen wie Analysen, benutzerdefiniertes Protokollieren, Absturzberichte, Netzwerküberwachung und HTTP-Antwortkörpersammlung [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/).
--   **Capgo:** Ermöglicht es Ihnen, die Verschlüsselung für [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) zu aktivieren und Updates bestimmten Benutzern für eine bessere Zielverteilung zuzuweisen [\[1\]](https://capgo.app/).
+-   **Capgo:** Ermöglicht es Ihnen, die Verschlüsselung für [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) zu aktivieren und Updates bestimmten Benutzern für eine bessere Zielverteilung zuzuweisen [\[1\]](https://capgo.app/).
 
 > "Capgo ist ein unverzichtbares Tool für Entwickler, die produktiver sein möchten. Die Vermeidung von Überprüfungen für Fehlerbehebungen ist Gold wert." - Bessie Cooper [\[1\]](https://capgo.app/)
 

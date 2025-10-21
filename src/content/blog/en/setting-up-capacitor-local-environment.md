@@ -424,7 +424,7 @@ Here are some ways to improve stability and avoid recurring problems.
 }
 ```
 
--   Use end-to-end encryption to [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) [\[1\]](https://capgo.app/).
+-   Use end-to-end encryption to [secure updates](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
 ## Summary
 

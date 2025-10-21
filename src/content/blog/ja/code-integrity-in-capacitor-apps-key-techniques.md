@@ -22,7 +22,7 @@ next_blog: ''
 
 - **主要なツール:** SHA-256デジタル署名、ランタイムチェック、暗号化(AES-256)を使用してコードを保護します。
 - **プラットフォーム固有の機能:** Androidではアプリケーションとデバイスアテステーションのために[Play Integrity API](https://developer.android.com/google/play/integrity)を統合します。iOSではOTAアップデートについてApp Store Guideline 3.1.2に従います。
-- **OTAアップデートのセキュリティ:** エンドツーエンド暗号化、チェックサム検証、コンプライアンス追跡を実装して[アップデートを安全に](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)行います。
+- **OTAアップデートのセキュリティ:** エンドツーエンド暗号化、チェックサム検証、コンプライアンス追跡を実装して[アップデートを安全に](https://capgo.app/docs/live-updates/update-behavior/)行います。
 - **推奨ツール:** [Capgo](https://capgo.app/)のようなツールは、暗号化、バージョン管理、コンプライアンス監視により安全なOTAアップデートを簡素化します。
 
 ### 主要ツールと機能の比較

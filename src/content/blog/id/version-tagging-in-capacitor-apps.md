@@ -25,7 +25,7 @@ Penandaan versi sangat penting untuk mengelola aplikasi [Capacitor](https://capa
 -   **Mengapa Ini Penting**: Melacak pembaruan, memungkinkan rollback, dan memastikan penyebaran yang stabil.
 -   **Versi Semantik**: Gunakan **MAJOR.MINOR.PATCH** untuk menunjukkan perubahan yang merusak, fitur baru, atau perbaikan bug.
 -   **Sinkronisasi Antar Platform**: Selaraskan nomor versi di `package.json`, iOS `Info.plist`, dan Android `build.gradle`.
--   **Otomatisasi**: [Otomatisasikan pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) dengan skrip npm dan alat CI/CD.
+-   **Otomatisasi**: [Otomatisasikan pembaruan](https://capgo.app/docs/live-updates/update-behavior/) dengan skrip npm dan alat CI/CD.
 -   **Pembaruan Langsung**: Alat seperti [Capgo](https://capgo.app/) mengirimkan pembaruan kepada 95% pengguna dalam waktu 24 jam.
 -   **Manajemen Beta**: Gunakan saluran terstruktur untuk versi alfa, beta, dan produksi.
 

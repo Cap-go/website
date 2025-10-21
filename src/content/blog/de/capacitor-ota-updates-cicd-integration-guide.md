@@ -103,7 +103,7 @@ Richten Sie Ihre Pipeline so ein, dass Aktionen basierend auf Änderungen im Hau
 
 -   **Build**: Wird durch Code-Änderungen ausgelöst, um Ihre App zu kompilieren und vorzubereiten.
 -   **Test**: Automatisiert Funktionalitätsprüfungen zur Sicherstellung der Stabilität.
--   **[Update-Generierung](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Bündelt und optimiert Assets für die Bereitstellung.
+-   **[Update-Generierung](https://capgo.app/docs/live-updates/update-behavior/)**: Bündelt und optimiert Assets für die Bereitstellung.
 
 Wenn Ihre Pipeline bereit ist, können Sie Ihre Update-Bundles nahtlos bereitstellen.
 

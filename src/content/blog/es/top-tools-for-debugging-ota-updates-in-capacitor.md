@@ -18,7 +18,7 @@ published: true
 locale: es
 next_blog: ''
 ---
-La depuración de actualizaciones Over-the-Air (OTA) en aplicaciones de [Capacitor](https://capacitorjs.com/) puede ser complicada, pero las herramientas adecuadas marcan una gran diferencia. Ya sea que estés gestionando conflictos de versiones, asegurando [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/), o depurando en diferentes plataformas, aquí hay tres herramientas a considerar:
+La depuración de actualizaciones Over-the-Air (OTA) en aplicaciones de [Capacitor](https://capacitorjs.com/) puede ser complicada, pero las herramientas adecuadas marcan una gran diferencia. Ya sea que estés gestionando conflictos de versiones, asegurando [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/), o depurando en diferentes plataformas, aquí hay tres herramientas a considerar:
 
 -   **[Capgo](https://capgo.app/)**: Actualizaciones OTA seguras con cifrado de extremo a extremo, integración CI/CD y despliegues específicos por usuario. Comienza en $12/mes.
 -   **@capawesome/capacitor-live-update**: Un plugin gratuito y simple para [gestión básica](https://capgo.app/docs/plugin/cloud-mode/manual-update/) de actualizaciones OTA con reversión automática.

@@ -32,7 +32,7 @@ next_blog: ''
 
 1.  **Requisitos**: Cuenta GitHub, [cuenta Capgo](https://capgo.app/disclaimer/) (desde $12/mes), proyecto Capacitor, [Nodejs](https://nodejsorg/en)
 2.  **Configuración**: Instala [Capgo CLI](https://capgo.app/docs/cli/commands) con `npx @capgo/cli init`, configura GitHub Actions con un flujo de trabajo YAML
-3.  **Implementación**: Usa comandos como `npx @capgo/cli deploy` para [automatizar actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)
+3.  **Implementación**: Usa comandos como `npx @capgo/cli deploy` para [automatizar actualizaciones](https://capgo.app/docs/live-updates/update-behavior/)
 4.  **Pruebas**: Implementa en canales de prueba (ej. beta, staging) antes de producción
 
 **Ejemplo de Flujo de Trabajo (YAML)**:

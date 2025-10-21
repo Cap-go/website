@@ -187,7 +187,7 @@ Diese Audits, gepaart mit Datenschutz-Management-Tools, helfen Entwicklern, schn
 
 ### Datenschutz-Management-Tools
 
-Um Compliance-Herausforderungen effizient zu bewältigen, verlassen sich Entwickler auf Tools für schnelle und [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/). Capgo ist ein Paradebeispiel, das weltweit über 947,6 Millionen [sichere Updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) ausgeliefert hat [\[1\]](https://capgo.app/).
+Um Compliance-Herausforderungen effizient zu bewältigen, verlassen sich Entwickler auf Tools für schnelle und [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/). Capgo ist ein Paradebeispiel, das weltweit über 947,6 Millionen [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) ausgeliefert hat [\[1\]](https://capgo.app/).
 
 | Funktion | Datenschutzvorteil | Implementierungsauswirkung |
 | --- | --- | --- |

@@ -23,7 +23,7 @@ next_blog: ''
 -   **중요성**: 업데이트 추적, 롤백 활성화, 안정적인 배포 보장.
 -   **시맨틱 버전 관리**: **MAJOR.MINOR.PATCH**를 사용하여 주요 변경, 새로운 기능 또는 버그 수정을 표시.
 -   **플랫폼 간 동기화**: `package.json`, iOS `Info.plist`, Android `build.gradle`의 버전 번호를 일치시킴.
--   **자동화**: npm 스크립트와 CI/CD 도구로 [업데이트 자동화](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   **자동화**: npm 스크립트와 CI/CD 도구로 [업데이트 자동화](https://capgo.app/docs/live-updates/update-behavior/).
 -   **실시간 업데이트**: [Capgo](https://capgo.app/)와 같은 도구로 24시간 내에 95%의 사용자에게 업데이트 전달.
 -   **베타 관리**: 알파, 베타, 프로덕션 버전을 위한 구조화된 채널 사용.
 

@@ -160,7 +160,7 @@ Estas prácticas ayudan a cumplir tanto con los requisitos de la App Store como 
 
 La App Store de Apple y Google Play Store tienen requisitos estrictos para actualizaciones OTA. Asegúrate de que tus actualizaciones estén alineadas con las pautas de la plataforma, como restricciones sobre la alteración de binarios o funciones centrales de la aplicación, mientras cumples con sus estándares de seguridad.
 
-Entender estas reglas es esencial para asegurar el cumplimiento y mantener un [proceso de actualización fluido](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+Entender estas reglas es esencial para asegurar el cumplimiento y mantener un [proceso de actualización fluido](https://capgo.app/docs/live-updates/update-behavior/).
 
 ### Gestión de versiones
 

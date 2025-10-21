@@ -31,7 +31,7 @@ next_blog: ''
 
 1.  **Persyaratan**: Akun GitHub, [akun Capgo](https://capgo.app/disclaimer/) (mulai $12/bulan), proyek Capacitor, [Node.js](https://nodejs.org/en).
 2.  **Pengaturan**: Instal [Capgo CLI](https://capgo.app/docs/cli/commands) dengan `npx @capgo/cli init`, konfigurasi GitHub Actions dengan alur kerja YAML.
-3.  **Penerapan**: Gunakan perintah seperti `npx @capgo/cli deploy` untuk [mengotomatisasi pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+3.  **Penerapan**: Gunakan perintah seperti `npx @capgo/cli deploy` untuk [mengotomatisasi pembaruan](https://capgo.app/docs/live-updates/update-behavior/).
 4.  **Pengujian**: Terapkan ke kanal pengujian (mis. beta, staging) sebelum produksi.
 
 **Contoh Alur Kerja (YAML)**:

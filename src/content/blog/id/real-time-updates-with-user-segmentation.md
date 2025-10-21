@@ -176,7 +176,7 @@ Berikut adalah rincian implementasi singkat:
 | Fase | Item Tindakan | Hasil yang Diharapkan |
 | --- | --- | --- |
 | Pengaturan Awal | Instal plugin Capgo dan konfigurasikan | Dasar pembaruan yang kuat |
-| Segmentasi | Tentukan saluran pengguna dan kelompok target | [Pengiriman pembaruan terorganisir](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) |
+| Segmentasi | Tentukan saluran pengguna dan kelompok target | [Pengiriman pembaruan terorganisir](https://capgo.app/docs/live-updates/update-behavior/) |
 | Penerapan | Gunakan CLI untuk meluncurkan pembaruan dan memantau | Peluncuran yang cepat dan terkendali |
 | Optimisasi | Analisis kinerja dan sesuaikan penargetan | Efisiensi yang ditingkatkan |
 

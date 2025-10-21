@@ -186,7 +186,7 @@ Pembaruan bertahap memungkinkan Anda mengontrol bagaimana pembaruan diluncurkan,
 
 ### Pemicu Pembaruan Berbasis Metrik
 
-[Mengotomatisasi pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) berdasarkan metrik kinerja dapat menghemat waktu dan mencegah masalah. Dengan menyiapkan webhook pemantauan, Anda dapat melacak metrik penting dan memutuskan apakah akan melanjutkan atau menghentikan pembaruan:
+[Mengotomatisasi pembaruan](https://capgo.app/docs/live-updates/update-behavior/) berdasarkan metrik kinerja dapat menghemat waktu dan mencegah masalah. Dengan menyiapkan webhook pemantauan, Anda dapat melacak metrik penting dan memutuskan apakah akan melanjutkan atau menghentikan pembaruan:
 
 | Jenis Metrik | Ambang Batas | Tindakan |
 | --- | --- | --- |

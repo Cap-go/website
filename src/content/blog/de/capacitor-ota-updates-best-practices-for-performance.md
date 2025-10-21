@@ -29,7 +29,7 @@ OTA-(Over-the-Air)-Updates ermöglichen [Capacitor](https://capacitorjs.com/)-Ap
     
 -   **Inkrementelle Updates**: Teilen Sie Updates in kleinere Schritte auf, planen Sie sie während Leerlaufzeiten und nutzen Sie A/B-Systeme für problemlose Rollbacks.
     
--   [**Sichere Updates**](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/): Schützen Sie Dateien mit Verschlüsselung, Prüfsummen und Code-Signierung zur Gewährleistung der Integrität.
+-   [**Sichere Updates**](https://capgo.app/docs/live-updates/update-behavior/): Schützen Sie Dateien mit Verschlüsselung, Prüfsummen und Code-Signierung zur Gewährleistung der Integrität.
     
 -   **Tests & Compliance**: Testen Sie Updates gründlich und befolgen Sie App-Store-Richtlinien, um Genehmigungsprobleme zu vermeiden.
 

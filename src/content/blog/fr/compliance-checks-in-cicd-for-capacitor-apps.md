@@ -34,7 +34,7 @@ Voici pourquoi les contrôles de conformité sont importants :
 -   Intégrez des mesures de sécurité comme le chiffrement, les vérifications de dépendances et les tests.
 -   Utilisez des tests de performance et d'accessibilité pour améliorer l'expérience utilisateur.
 
-**Capgo simplifie ce processus**, offrant des outils pour la conformité automatisée, le suivi des erreurs en temps réel et les [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+**Capgo simplifie ce processus**, offrant des outils pour la conformité automatisée, le suivi des erreurs en temps réel et les [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/).
 
 Restez conforme, sécurisé et efficace avec des pratiques CI/CD appropriées pour les [applications Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/).
 

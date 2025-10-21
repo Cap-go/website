@@ -26,7 +26,7 @@ next_blog: ''
 -   **필수 평가**: 앱은 기술 보안 검토, 데이터 보호 영향 평가, 네트워크 보안 점검을 통과해야 함
 -   **미준수 시 결과**: 벌금, 앱 삭제, 서비스 중단, 평판 손상
 
-규정을 준수하기 위해 개발자는 암호화, 실시간 모니터링, [보안 업데이트](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) 도구를 사용해야 합니다. 미준수는 심각한 처벌로 이어질 수 있으므로, 중국 시장에서의 성공을 위해서는 조기 준비가 핵심입니다.
+규정을 준수하기 위해 개발자는 암호화, 실시간 모니터링, [보안 업데이트](https://capgo.app/docs/live-updates/update-behavior/) 도구를 사용해야 합니다. 미준수는 심각한 처벌로 이어질 수 있으므로, 중국 시장에서의 성공을 위해서는 조기 준비가 핵심입니다.
 
 ## [중국의 사이버보안법](https://en.wikipedia.org/wiki/Cybersecurity_Law_of_the_People%27s_Republic_of_China) 기본 사항
 

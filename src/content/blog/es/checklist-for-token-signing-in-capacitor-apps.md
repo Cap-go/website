@@ -40,7 +40,7 @@ La firma de tokens es esencial para asegurar aplicaciones de [Capacitor](https:/
 
 **Actualizaciones en Vivo:**
 
--   Usar tokens firmados para [asegurar actualizaciones](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/).
+-   Usar tokens firmados para [asegurar actualizaciones](https://capgo.app/docs/live-updates/update-behavior/).
 -   Habilitar opciones de reversión para actualizaciones comprometidas.
 -   Monitorear la participación del usuario y las tasas de éxito de actualización.
 

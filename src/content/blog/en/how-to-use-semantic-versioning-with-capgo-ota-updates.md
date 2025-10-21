@@ -102,7 +102,7 @@ npx @capgo/cli@latest init YOUR_API_KEY
 
 ### Version Control Integration
 
-Capgo works well with CI/CD platforms, making [automated updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) simple. Supported platforms include:
+Capgo works well with CI/CD platforms, making [automated updates](https://capgo.app/docs/live-updates/update-behavior/) simple. Supported platforms include:
 
 -   [GitHub Actions](https://docs.github.com/actions)
 -   [GitLab CI](https://docs.gitlab.com/ee/ci/)

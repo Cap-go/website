@@ -23,7 +23,7 @@ next_blog: ''
 
 - **OTAアップデートとは？**アプリストアの承認を待たずに、ユーザーに直接アプリの変更をプッシュできます。[Capgo](https://capgo.app/)のようなツールを使用すると、24時間以内に95%のアップデート率を達成できます
 - **なぜセキュリティが重要か？**適切な暗号化と鍵管理がないと、アップデートは改ざん、中間者攻撃、バージョンスプーフィングに対して脆弱になります
-- **[アップデートを安全にする方法](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)?**
+- **[アップデートを安全にする方法](https://capgo.app/docs/live-updates/update-behavior/)?**
     - アップデートパッケージを保護するために**エンドツーエンドの暗号化**を使用
     - [RSA-4096](https://enwikipediaorg/wiki/RSA_\(cryptosystem\))や[AES-256](https://enwikipediaorg/wiki/Advanced_Encryption_Standard)などのアルゴリズムで強力な鍵を生成
     - **[Hardware Security Modules](https://enwikipediaorg/wiki/Hardware_security_module) (HSMs)**や暗号化された鍵vault を使用して鍵を安全に保管

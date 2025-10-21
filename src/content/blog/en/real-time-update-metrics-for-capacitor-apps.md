@@ -81,7 +81,7 @@ These metrics will give you a clear picture of how well your updates are perform
 Fine-tune your tracking settings to collect the most relevant data. Depending on the tool you choose, here’s what you can do:
 
 -   **New Relic**: Offers features like analytics, custom logging, crash reporting, network monitoring, and HTTP response body capture [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/).
--   **Capgo**: Allows you to enable encryption for [secure updates](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) and assign updates to specific users for better targeting [\[1\]](https://capgo.app/).
+-   **Capgo**: Allows you to enable encryption for [secure updates](https://capgo.app/docs/live-updates/update-behavior/) and assign updates to specific users for better targeting [\[1\]](https://capgo.app/).
 
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding review for bug fixes is golden." - Bessie Cooper [\[1\]](https://capgo.app/)
 

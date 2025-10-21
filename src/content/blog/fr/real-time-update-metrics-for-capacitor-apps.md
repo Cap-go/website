@@ -85,7 +85,7 @@ Ces métriques vous donneront une image claire de la performance de vos mises à
 Affinez vos paramètres de suivi pour collecter les données les plus pertinentes. Selon l'outil que vous choisissez, voici ce que vous pouvez faire :
 
 -   **New Relic** : Offre des fonctionnalités comme l'analytique, la journalisation personnalisée, les rapports de crash, la surveillance réseau et la capture du corps des réponses HTTP [\[2\]](https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile-ionic-capacitor/get-started/introduction-new-relic-ionic-capacitor/).
--   **Capgo** : Permet d'activer le chiffrement pour les [mises à jour sécurisées](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) et d'attribuer des mises à jour à des utilisateurs spécifiques pour un meilleur ciblage [\[1\]](https://capgo.app/).
+-   **Capgo** : Permet d'activer le chiffrement pour les [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) et d'attribuer des mises à jour à des utilisateurs spécifiques pour un meilleur ciblage [\[1\]](https://capgo.app/).
 
 > "Capgo est un outil indispensable pour les développeurs qui veulent être plus productifs. Éviter la révision pour les corrections de bugs est précieux." - Bessie Cooper [\[1\]](https://capgo.app/)
 

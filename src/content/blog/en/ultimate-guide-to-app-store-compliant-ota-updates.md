@@ -28,7 +28,7 @@ next_blog: ''
 -   **How to Stay Compliant**:
     -   Avoid altering core app functionality.
     -   Use secure delivery methods like HTTPS and digital signatures.
-    -   Clearly communicate [update purposes](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) to users.
+    -   Clearly communicate [update purposes](https://capgo.app/docs/live-updates/update-behavior/) to users.
 
 ### Quick Comparison of OTA Rules
 

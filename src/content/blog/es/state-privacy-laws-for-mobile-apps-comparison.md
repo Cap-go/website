@@ -129,7 +129,7 @@ Para aquellos preocupados por las dependencias de proveedores, la estructura de 
 
 > "La única solución con verdadera encriptación de extremo a extremo, otros solo firman actualizaciones" - Capgo [\[1\]](https://capgo.app/)
 
-La efectividad de Capgo es clara: es confiado por 750 aplicaciones en producción, entregando 23.5M [actualizaciones seguras](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) hasta ahora [\[1\]](https://capgo.app/).
+La efectividad de Capgo es clara: es confiado por 750 aplicaciones en producción, entregando 23.5M [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) hasta ahora [\[1\]](https://capgo.app/).
 
 Rastrea actualizaciones en tiempo real con análisis, monitoreo de errores y controles de acceso basados en roles para simplificar el cumplimiento en múltiples estados.
 

@@ -68,7 +68,7 @@ To implement Over-The-Air (OTA) updates, follow these three steps:
 
 -   **Plugin Installation**
 -   **Build Configuration**
--   **[Update Integration](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**
+-   **[Update Integration](https://capgo.app/docs/live-updates/update-behavior/)**
 
 Capgo's CI/CD tools make automated testing seamless. Platforms like [GitHub Actions](https://docs.github.com/actions), [GitLab CI](https://docs.gitlab.com/ee/ci/), and [Jenkins](https://www.jenkins.io/) are supported, allowing you to test updates across various environments before deployment. The channel system is especially helpful for managing different test scenarios.
 

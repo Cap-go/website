@@ -101,7 +101,7 @@ Configura la tua pipeline per attivare azioni basate su modifiche nel branch pri
 
 1. **Build**: Attivato da modifiche al codice per compilare e preparare la tua app
 2. **Test**: Automatizza i controlli di funzionalità per garantire stabilità
-3. **[Generazione Aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/)**: Raggruppa e ottimizza gli asset per il deployment
+3. **[Generazione Aggiornamenti](https://capgo.app/docs/live-updates/update-behavior/)**: Raggruppa e ottimizza gli asset per il deployment
 
 Quando la tua pipeline è pronta, puoi distribuire facilmente i tuoi pacchetti di aggiornamento
 

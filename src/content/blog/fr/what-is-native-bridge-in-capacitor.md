@@ -153,7 +153,7 @@ Voici comment le native bridge alimente le système de mise à jour de Capgo :
 | Livraison de Contenu | Gère les téléchargements sécurisés des actifs web | Livraison rapide et fiable des actifs |
 | Gestion d'État | Maintient l'état de l'application pendant les mises à jour | Expérience utilisateur fluide et ininterrompue |
 | Contrôle des Versions | Supporte la fonctionnalité de retour en arrière | Restauration facile avec un simple clic |
-| [Ciblage des Mises à Jour](https://capgo.app/docs/plugin/cloud-mode/hybrid-update/) | Permet la distribution à des segments d'utilisateurs spécifiques | Déploiement précis et contrôlé |
+| [Ciblage des Mises à Jour](https://capgo.app/docs/live-updates/update-behavior/) | Permet la distribution à des segments d'utilisateurs spécifiques | Déploiement précis et contrôlé |
 
 Ces fonctionnalités mettent en évidence l'efficacité du native bridge dans la gestion des mises à jour.
 
