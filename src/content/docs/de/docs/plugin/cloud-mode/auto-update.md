@@ -80,7 +80,7 @@ Tun Sie dies so früh wie möglich
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 #### Benutzer-Ablauf

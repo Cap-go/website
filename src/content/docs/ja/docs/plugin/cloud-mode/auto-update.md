@@ -79,7 +79,7 @@ npx cap sync
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 #### ユーザーフロー

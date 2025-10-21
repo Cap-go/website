@@ -16,7 +16,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 export default ({ app }) => {
   if (processclient) {
     windowonNuxtReady(() => {
-      CapacitorUpdaternotifyAppReady()
+      CapacitorUpdater.notifyAppReady()
     })
   }
 }

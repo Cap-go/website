@@ -44,7 +44,7 @@ CapacitorUpdateraddListener('appReady', () => {
   SplashScreenhide()
 })
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 ## Forza aggiornamento
@@ -68,7 +68,7 @@ CapacitorUpdateraddListener('updateAvailable', async (res) => {
   }
 })
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 ## Aggiornamento modale
@@ -95,5 +95,5 @@ CapacitorUpdateraddListener('updateAvailable', async (res) => {
   }
 })
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```

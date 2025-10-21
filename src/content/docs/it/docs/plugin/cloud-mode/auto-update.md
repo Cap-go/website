@@ -79,7 +79,7 @@ Fallo il prima possibile
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 #### Flusso utente

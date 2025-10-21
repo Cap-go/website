@@ -78,7 +78,7 @@ Faites-le le plus tôt possible
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 #### Flux utilisateur

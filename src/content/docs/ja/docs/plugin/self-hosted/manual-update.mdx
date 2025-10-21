@@ -39,7 +39,7 @@ import { CapacitorUpdater } from '@capgo/capacitor-updater'
 import { SplashScreen } from '@capacitor/splash-screen'
 import { App } from '@capacitor/app'
 let data = {version: ""}
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 AppaddListener('appStateChange', async(state) => {
      if (stateisActive) {
        // ダウンロードの失敗を防ぐため、アプリがアクティブな時間中にダウンロードを実行

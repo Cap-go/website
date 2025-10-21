@@ -44,7 +44,7 @@ CapacitorUpdateraddListener('appReady', () => {
   SplashScreenhide()
 })
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 ## 강제 업데이트
@@ -68,7 +68,7 @@ CapacitorUpdateraddListener('updateAvailable', async (res) => {
   }
 })
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 ## 모달 업데이트
@@ -95,5 +95,5 @@ CapacitorUpdateraddListener('updateAvailable', async (res) => {
   }
 })
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```

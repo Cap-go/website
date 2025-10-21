@@ -78,7 +78,7 @@ Lakukan sesegera mungkin
 ```ts
 import { CapacitorUpdater } from '@capgo/capacitor-updater'
 
-CapacitorUpdaternotifyAppReady()
+CapacitorUpdater.notifyAppReady()
 ```
 
 #### Alur pengguna
