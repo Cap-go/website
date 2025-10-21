@@ -94,7 +94,27 @@ In order to use it, you have to do the following:
        })
       })
       ```
-  
+
+   :::note[Web Redirect Handling]
+   When using Google login on web, you **MUST** call any function from the plugin when the redirect happens to initialize the plugin so it can handle the redirect and close the popup window. You can call either `isLoggedIn()` OR `initialize()` - both will trigger the redirect handling:
+
+   ```typescript
+   // Option 1: Call isLoggedIn when the redirect page loads
+   SocialLogin.isLoggedIn({ provider: 'google' }).catch(() => {
+     // Ignore the result, this is just to initialize the plugin
+   });
+
+   // Option 2: Call initialize when the redirect page loads
+   SocialLogin.initialize({
+     google: {
+       webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+     }
+   }).catch(() => {
+     // Ignore any errors, this is just to handle the redirect
+   });
+   ```
+   :::
+
    3. Create a login button that calls `SocialLogin.login` when clicked
   
       ```typescript
