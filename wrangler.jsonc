@@ -5,13 +5,13 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist",
-    "binding": "ASSETS",
+    "binding": "ASSETS"
   },
   "workers_dev": false,
   "routes": [
     {
       "pattern": "capgo.app",
-      "custom_domain": true,
+      "custom_domain": true
     },
   ],
 }
