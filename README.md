@@ -31,7 +31,7 @@ bun run dev
 
 ## Deployment
 
-The website is deployed to [Cloudflare Pages](https://pages.cloudflare.com/). The deployment is automated using a GitHub action.
+The website runs as a [Cloudflare Worker](https://developers.cloudflare.com/workers/). Deployments are handled with [`wrangler deploy`](https://developers.cloudflare.com/workers/wrangler/commands/#deploy), driven by the `wrangler.toml` configuration in this repo.
 
 ## License
 
@@ -71,6 +71,8 @@ All commands are run from the root of the project, from a terminal:
 | `bun run dev`             | Starts local dev server at `localhost:3000`      |
 | `bun run build`           | Build your production site to `./dist/`          |
 | `bun run preview`         | Preview your build locally, before deploying     |
+| `bun run preview:worker`  | Run the Worker locally via `wrangler dev`        |
+| `bun run deploy`          | Build and deploy the Worker to Cloudflare        |
 | `bun run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `bun run astro -- --help` | Get help using the Astro CLI                     |
 

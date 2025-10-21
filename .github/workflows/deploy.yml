@@ -23,16 +23,7 @@ jobs:
           ORAMA_CLOUD_API_KEY: ${{ secrets.ORAMA_CLOUD_API_KEY }}
           ORAMA_CLOUD_ENDPOINT: ${{ secrets.ORAMA_CLOUD_ENDPOINT }}
           CLOUDFLARE_TURNSTILE_SITE_KEY: ${{ secrets.CLOUDFLARE_TURNSTILE_SITE_KEY }}
-      - name: Set branch name
-        id: vars
-        run: |
-          ref=${{ github.event.pull_request.head.ref }}
-          if [ "$ref" == "refs/heads/main" ]; then
-            echo "branch=main" >> $GITHUB_OUTPUT
-          else
-            echo "branch=${ref}" >> $GITHUB_OUTPUT
-          fi
-      - run: bunx wrangler@latest pages deploy dist --project-name capgo-website --branch ${{ steps.vars.outputs.branch }}
+      - run: bunx wrangler@latest deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

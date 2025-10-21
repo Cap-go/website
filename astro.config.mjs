@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import tailwindcss from '@tailwindcss/vite'
 import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
+import cloudflare from '@astrojs/cloudflare'
 import { defineConfig, envField } from 'astro/config'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
@@ -15,6 +16,7 @@ export default defineConfig({
   build: {
     concurrency: 2,
   },
+  adapter: cloudflare(),
   env: {
     validateSecrets: true,
     schema: {

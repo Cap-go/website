@@ -1,0 +1,19 @@
+{
+  "name": "capgo-website",
+  "main": "./dist/_worker.js/index.js",
+  "compatibility_date": "2025-06-17",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "capgo.app",
+      "custom_domain": true
+    }
+  ]
+}
