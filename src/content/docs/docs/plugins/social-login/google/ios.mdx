@@ -148,30 +148,69 @@ In this part, you will learn how to setup Google login in iOS.
    
    2. Call the initialize method (this should be called only once)
      
+      **Basic setup (online mode - recommended for most apps):**
       ```typescript
       // onMounted is Vue specific
       onMounted(() => {
         SocialLogin.initialize({
           google: {
             iOSClientId: '673324426943-redacted.apps.googleusercontent.com',
+            mode: 'online' // Default mode
+          }
+        })
+      })
+      ```
+
+      **Advanced setup with additional client IDs:**
+      ```typescript
+      onMounted(() => {
+        SocialLogin.initialize({
+          google: {
+            webClientId: 'YOUR_WEB_CLIENT_ID',           // Optional: for web platform support
+            iOSClientId: 'YOUR_IOS_CLIENT_ID',           // Required: from step 1
+            iOSServerClientId: 'YOUR_WEB_CLIENT_ID',     // Optional: same as webClientId, needed for some advanced features
+            mode: 'online'                               // 'online' or 'offline'
           }
         })
       })
       ```
      
+      :::note
+      **Client ID Requirements:**
+      - `iOSClientId`: **Required** - Must end with `googleusercontent.com` (from step 1 above)
+      - `webClientId`: **Optional** - Only needed if you also support web platform or need advanced features
+      - `iOSServerClientId`: **Optional** - Should be the same value as `webClientId` when provided
+      
+      For advanced setup with `webClientId` and `iOSServerClientId`, see the [web setup guide](/docs/plugins/social-login/google/web/) for creating these credentials.
+      :::
+
       :::caution
-      Ensure that `iOSClientId` **ENDS** with `googleusercontent.com`
+      **About offline mode:** When using `mode: 'offline'`, the login response will not contain user data directly. Instead, you'll receive a server auth code that must be exchanged for user information via your backend server. See the [general setup guide](/docs/plugins/social-login/google/general/#using-offline-access-with-your-own-backend) for implementation details.
       :::
    
    3. Implement the login function. Create a button and run the following code on click
      
+      **For online mode:**
       ```typescript
       const res = await SocialLogin.login({
         provider: 'google',
         options: {}
       })
-      // handle the response
+      // handle the response - contains user data
       console.log(JSON.stringify(res))
+      ```
+
+      **For offline mode:**
+      ```typescript
+      const res = await SocialLogin.login({
+        provider: 'google',
+        options: {
+          forceRefreshToken: true // Recommended for offline mode
+        }
+      })
+      // res contains serverAuthCode, not user data
+      // Send serverAuthCode to your backend to get user information
+      console.log('Server auth code:', res.result.serverAuthCode)
       ```
 
 5. Test your application

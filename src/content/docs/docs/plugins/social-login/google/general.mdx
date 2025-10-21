@@ -106,7 +106,11 @@ There are multiple ways to use Google Login with Capacitor. Here is a table that
 | Easy setup              | ✅             | ❌              |
 
 :::note
-Long lived access tokens allow the backend to call Google API's even when the user is not present
+**Offline mode** means that your backend can access Google's APIs even when the user is not actively using your app (i.e., when the user is "offline" from your app's perspective). Long-lived access tokens enable this functionality by allowing the backend to call Google APIs on behalf of the user at any time.
+:::
+
+:::caution
+**Offline mode REQUIRES a backend server.** When using offline mode, the frontend receives minimal information (primarily just a server auth code). Without a backend to exchange this code for tokens and user information, offline mode provides no useful data to your frontend application.
 :::
 
 If you still do not know which one you should choose, please consider the following scenarios:
