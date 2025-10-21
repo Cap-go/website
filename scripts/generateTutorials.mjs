@@ -1,10 +1,11 @@
 import '@dotenvx/dotenvx/config'
-import { RetrievalQAChain } from 'langchain/chains'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
 import { Document } from 'langchain/document'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { OutputFixingParser, StructuredOutputParser } from 'langchain/output_parsers'
 import { PromptTemplate } from 'langchain/prompts'
+import { createStuffDocumentsChain } from 'langchain/chains/combine_documents'
+import { createRetrievalChain } from 'langchain/chains/retrieval'
 import { FaissStore } from 'langchain/vectorstores/faiss'
 import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
@@ -41,14 +42,22 @@ async function chat(input, pluginPath) {
     )
     const outputFixingParser = OutputFixingParser.fromLLM(model, outputParser)
     const prompt = new PromptTemplate({
-      template: 'Answer the user question as best and be as detailed as possible:\n{format_instructions}\n{query}',
-      inputVariables: ['query'],
+      template: 'Use the provided context to answer the user question in as much detail as possible.\nContext:\n{context}\n\n{format_instructions}\nQuestion: {input}',
+      inputVariables: ['context', 'input'],
       partialVariables: {
         format_instructions: outputFixingParser.getFormatInstructions(),
       },
     })
-    const chain = RetrievalQAChain.fromLLM(model, vectorStore.asRetriever(), prompt)
-    await chain.call({ query: input })
+    const combineDocumentsChain = await createStuffDocumentsChain({
+      llm: model,
+      prompt,
+      outputParser: outputFixingParser,
+    })
+    const chain = await createRetrievalChain({
+      combineDocumentsChain,
+      retriever: vectorStore.asRetriever(),
+    })
+    await chain.invoke({ input })
   } catch (error) {
     writeFileSync(outputFile, currentContent, 'utf8')
     console.error(error.message || error.toString())
