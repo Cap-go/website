@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T08:40:26.161Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-10-21T10:46:26.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682b2ab25642a17d106fc1f4-1747730489188.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, mobile updates, iOS, Android, patch management, app deployment, version control, Capgo
