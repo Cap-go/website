@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-02T03:19:09.129Z
-updated_at: 2025-10-10T02:23:14.000Z
+updated_at: 2025-10-21T10:46:26.000Z
 head_image: https://assets.seobotai.com/capgo.app/67c3a347e68199dea862b1d5-1740885602596.jpg
 head_image_alt: Mobile Development
 keywords: update tracking, app performance, metrics monitoring, user experience, real-time updates
