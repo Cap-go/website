@@ -58,9 +58,59 @@ import * as m from '@/paraglide/messages'
           <span class="text-lg font-semibold text-white">?</span>
         </div>
         <div class="ml-4">
+          <p class="text-xl font-semibold text-white">
+            {m.do_you_offer_annual_billing_and_ach_payment_options({}, { locale: Astro.locals.locale })}
+          </p>
+          <p class="mt-4 text-base text-gray-400">
+            {m.ach_available_for_enterprise_annual_payments({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start">
+        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-700">
+          <span class="text-lg font-semibold text-white">?</span>
+        </div>
+        <div class="ml-4">
           <p class="text-xl font-semibold text-white">{m.unsure_about_active_users({}, { locale: Astro.locals.locale })}</p>
           <p class="mt-4 text-base text-gray-400">
             {m.free_trial_explanation({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start">
+        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-700">
+          <span class="text-lg font-semibold text-white">?</span>
+        </div>
+        <div class="ml-4">
+          <p class="text-xl font-semibold text-white">
+            {m.do_you_offer_discounts_for_students_non_profits_or_startups({}, { locale: Astro.locals.locale })}
+          </p>
+          <p class="mt-4 text-base text-gray-400">
+            {m.no_discounts_available_at_this_time({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start">
+        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-700">
+          <span class="text-lg font-semibold text-white">?</span>
+        </div>
+        <div class="ml-4">
+          <p class="text-xl font-semibold text-white">
+            {m.do_you_have_purchasing_power_parity_pricing({}, { locale: Astro.locals.locale })}
+          </p>
+          <p class="mt-4 text-base text-gray-400">
+            {m.no_ppp_available_at_this_time({}, { locale: Astro.locals.locale })}
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start">
+        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-700">
+          <span class="text-lg font-semibold text-white">?</span>
+        </div>
+        <div class="ml-4">
+          <p class="text-xl font-semibold text-white">{m.can_i_cancel_at_any_time({}, { locale: Astro.locals.locale })}</p>
+          <p class="mt-4 text-base text-gray-400">
+            {m.cancellation_policy_details({}, { locale: Astro.locals.locale })}
           </p>
         </div>
       </div>
