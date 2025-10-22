@@ -11,6 +11,6 @@
     {
       "pattern": "capgo.app",
       "custom_domain": true
-    },
-  ],
+    }
+  ]
 }
