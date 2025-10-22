@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-24T04:20:44.227Z
-updated_at: 2025-10-21T10:46:26.000Z
+updated_at: 2025-10-21T10:52:13.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/68311bb4d3b96619817f3ed6-1748060494048.jpg
 head_image_alt: Mobile Development
 keywords: Capgo, OTA updates, Capacitor, app development, update scheduling, mobile apps, CI/CD integration, app security

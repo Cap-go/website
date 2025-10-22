@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T13:51:19.891Z
-updated_at: 2025-10-21T10:46:26.000Z
+updated_at: 2025-10-21T10:52:13.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682c74ab4fa53d42207d63fd-1747749175119.jpg
 head_image_alt: Security
 keywords: third-party breaches, data breach response, vendor management, security practices, risk management

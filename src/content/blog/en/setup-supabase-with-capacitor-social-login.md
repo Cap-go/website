@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2025-07-27T00:00:00.000Z
-updated_at: 2025-07-27T00:00:00.000Z
+updated_at: 2025-10-21T16:11:57.000Z
 head_image: /supabase_social_login.webp
 head_image_alt: Supabase Social Login Integration
 keywords: Supabase, Capacitor, social login, authentication, Google, Apple, Facebook, mobile app development, OAuth
@@ -265,7 +265,7 @@ await SocialLogin.initialize({
     clientToken: 'YOUR_FACEBOOK_CLIENT_TOKEN', // From Facebook Developer Dashboard
     
     // Optional: Use Facebook Limited Login (for enhanced privacy)
-    limitedLogin: false // Set to true for limited login
+    limitedLogin: false // See our Facebook setup guide for important Limited Login details
   }
 });
 ```
@@ -273,7 +273,8 @@ await SocialLogin.initialize({
 **Key points for Facebook:**
 - Use the same App ID you configured in Supabase
 - Client Token is found in your Facebook App's Basic Settings
-- `limitedLogin: true` enables Facebook's privacy-focused Limited Login feature
+- `limitedLogin: true` enables Facebook's privacy-focused Limited Login feature (iOS only)
+- **Important**: See our [Facebook setup guide](/docs/plugins/social-login/facebook/#limited-login-ios-only) for detailed Limited Login information, including ATT considerations
 
 ### Complete Plugin Initialization
 
