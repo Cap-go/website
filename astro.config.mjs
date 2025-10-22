@@ -1,4 +1,3 @@
-import cloudflare from '@astrojs/cloudflare'
 import sitemap from '@astrojs/sitemap'
 import starlight from '@astrojs/starlight'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
@@ -13,10 +12,10 @@ import { defaultLocale, localeNames, locales } from './src/services/locale'
 export default defineConfig({
   trailingSlash: 'always',
   site: `https://${config.base_domain.prod}`,
+  output: 'static',
   build: {
     concurrency: 2,
   },
-  adapter: cloudflare(),
   env: {
     validateSecrets: true,
     schema: {

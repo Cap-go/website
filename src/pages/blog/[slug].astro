@@ -41,13 +41,18 @@ if (!entry) {
     if (enEntry)
       return new Response(
         `<!doctype html>
+<html lang="${Astro.locals.locale}">
+<head>
+<meta charset="utf-8">
 <title>Redirecting to: /blog/${Astro.params.slug}</title>
 <meta http-equiv="refresh" content="0;url=/blog/${Astro.params.slug}/">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="${Astro.locals.runtimeConfig.public.baseUrl}/blog/${Astro.params.slug}/">
+</head>
 <body>
 	<a href="/blog/${Astro.params.slug}/">Redirecting to <code>/blog/${Astro.params.slug}/</code></a>
-</body>`,
+</body>
+</html>`,
         { status: 302, headers: { 'Content-Type': 'text/html', Location: `/blog/${Astro.params.slug}/` } },
       )
   }
