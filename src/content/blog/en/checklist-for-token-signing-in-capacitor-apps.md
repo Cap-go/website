@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-20T02:15:22.429Z
-updated_at: 2025-10-21T10:52:13.000Z
+updated_at: 2025-10-22T12:30:10.000Z
 head_image: https://assets.seobotai.com/capgo.app/680454b86000445eb1a68ab2-1745115338258.jpg
 head_image_alt: Mobile Development
 keywords: token signing, Capacitor apps, data integrity, security standards, compliance, JWT, cryptographic library

@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-10T01:24:02.744Z
-updated_at: 2025-10-21T10:52:13.000Z
+updated_at: 2025-10-22T12:30:10.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ce2ed7f617addf5accc081-1741569855025.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, low-end devices, app performance, incremental updates, mobile development

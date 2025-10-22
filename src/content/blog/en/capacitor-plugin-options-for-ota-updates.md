@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-16T02:50:46.694Z
-updated_at: 2025-10-21T10:52:13.000Z
+updated_at: 2025-10-22T12:30:10.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, Capacitor, mobile apps, app deployment, Capgo, Capawesome, Appflow, CodePush

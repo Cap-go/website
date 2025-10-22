@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-02-20T02:05:05.290Z
-updated_at: 2025-10-21T10:52:13.000Z
+updated_at: 2025-10-22T12:30:10.000Z
 head_image: https://assets.seobotai.com/capgo.app/67b67f2eacf635f489c4a234-1740017141105.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, debugging tools, mobile development, app updates

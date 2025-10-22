@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-26T07:39:34.137Z
-updated_at: 2025-10-21T10:52:13.000Z
+updated_at: 2025-10-22T12:30:10.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/6833b5d5d3b9661981815dee-1748245233574.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, security, privacy, Apple, MDM, developer guidelines, device management, mobile updates, encryption
