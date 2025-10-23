@@ -160,9 +160,53 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
 
   getRemoteConfig()
 
+  // Validation functions
+  function isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  function isValidName(name: string): boolean {
+    // Allow Unicode letters from all languages, spaces, hyphens, and apostrophes
+    // Rejects numbers, URLs, and most special characters while supporting international names
+    const nameRegex = /^[\p{L}\s'-]+$/u
+    return nameRegex.test(name) && name.trim().length > 0
+  }
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault()
     if (submitButton.disabled) return
+
+    // Validate email format
+    if (!isValidEmail(email.value.trim())) {
+      return Toastify({
+        text: 'Please enter a valid email address',
+        style: {
+          background: '#e7000b',
+        },
+      }).showToast()
+    }
+
+    // Validate first name
+    if (!isValidName(firstName.value)) {
+      return Toastify({
+        text: 'First name can only contain letters, spaces, hyphens, and apostrophes',
+        style: {
+          background: '#e7000b',
+        },
+      }).showToast()
+    }
+
+    // Validate last name
+    if (!isValidName(lastName.value)) {
+      return Toastify({
+        text: 'Last name can only contain letters, spaces, hyphens, and apostrophes',
+        style: {
+          background: '#e7000b',
+        },
+      }).showToast()
+    }
+
     const supabase = useSupabase()
     const { data: deleted, error: errorDeleted } = await supabase.rpc('is_not_deleted', { email_check: email.value })
     if (errorDeleted) console.error(errorDeleted)
