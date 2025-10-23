@@ -1,0 +1,85 @@
+---
+title: Getting Started
+description: Enable HealthKit and Health Connect access with the Capgo Health plugin.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the plugin**
+   <PackageManagers pkg="@capgo/capacitor-health" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS configuration
+
+- Open `ios/App/App.xcworkspace` in Xcode and enable the **HealthKit** capability.
+- Provide usage descriptions in `Info.plist`:
+
+```xml
+<key>NSHealthShareUsageDescription</key>
+<string>This app reads your health metrics to personalize your experience.</string>
+<key>NSHealthUpdateUsageDescription</key>
+<string>This app writes health data that you explicitly record.</string>
+```
+
+## Android configuration
+
+Health data is powered by [Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect). Make sure:
+
+- `minSdkVersion` is **26 or higher** (Capacitor 5 already satisfies this).
+- Users have Health Connect installed (Android 14+ bundles it; earlier versions require a Play Store download).
+- You guide users through the runtime permission UI when prompting for access.
+
+## Check availability and request access
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+const { available, reason } = await Health.isAvailable();
+if (!available) {
+  console.warn('Health APIs unavailable:', reason);
+  return;
+}
+
+await Health.requestAuthorization({
+  read: ['steps', 'heartRate', 'weight'],
+  write: ['weight'],
+});
+```
+
+## Read samples
+
+```typescript
+const { samples } = await Health.readSamples({
+  dataType: 'steps',
+  startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  endDate: new Date().toISOString(),
+  limit: 200,
+});
+
+samples.forEach((sample) => {
+  console.log(sample.value, sample.startDate, sample.endDate);
+});
+```
+
+## Write samples
+
+```typescript
+await Health.saveSample({
+  dataType: 'weight',
+  value: 74.6,
+  startDate: new Date().toISOString(),
+});
+```
+
+## Authorization management
+
+- Use `checkAuthorization()` to verify current read/write scopes and adjust your UI.
+- Handle denials gracefully by explaining why the data enhances the experience and offering a retry.
+- Always respect the user's privacy and only request the minimum scopes your feature requires.

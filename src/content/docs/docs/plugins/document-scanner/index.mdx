@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-document-scanner"
+description: Capture crisp documents with automatic edge detection and export scanned pages from your Capacitor app.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Launch a polished document scanning experience with automatic cropping, multi-page capture, and configurable output formats.
+  image:
+    file: ~public/camera.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/document-scanner/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-document-scanner/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+The Document Scanner plugin gives your Capacitor app a native-quality scanning flow that works on both iOS and Android devices.
+
+<CardGrid stagger>
+  <Card title="Automatic detection" icon="rocket">
+    Detect page edges, crop automatically, and let users adjust before saving.
+  </Card>
+  <Card title="Multi-page capture" icon="chart">
+    Capture one or many pages in a single scan session with adjustable limits.
+  </Card>
+  <Card title="Custom output" icon="download">
+    Return either file paths or base64 strings at the image quality you choose.
+  </Card>
+  <Card title="Unified API" icon="code">
+    One TypeScript interface spans both iOS and Android implementations.
+  </Card>
+</CardGrid>
+
+Use the getting started guide to enable camera permissions, configure quality settings, and export scanned files to your storage workflow.

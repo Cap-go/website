@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-textinteraction"
+description: Enable or disable the iOS text interaction loupe for precise control over WebView behaviour.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Remove the iOS magnifier lens in kiosk or game experiences, then restore it before text entry.
+  image:
+    file: ~public/browser.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/textinteraction/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-textinteraction/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Control Apple's text interaction system to tailor UX on kiosk displays, games, and interactive installations.
+
+<CardGrid stagger>
+  <Card title="iOS specific" icon="rocket">
+    Toggle the magnifier lens and selection handles introduced in iOS 15.
+  </Card>
+  <Card title="Simple API" icon="code">
+    Call a single method to enable or disable text interaction state.
+  </Card>
+  <Card title="Safe defaults" icon="shield">
+    Receives a boolean result so you can detect unsupported versions.
+  </Card>
+  <Card title="Kiosk friendly" icon="chart">
+    Prevent long-press copy/paste on controlled installations or signage.
+  </Card>
+</CardGrid>
+
+Use the getting started guide for a minimal integration pattern and reminders to re-enable interaction before showing text inputs.

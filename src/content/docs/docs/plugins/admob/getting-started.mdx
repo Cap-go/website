@@ -1,0 +1,88 @@
+---
+title: Getting Started
+description: Install and configure the Capgo AdMob plugin to serve ads inside your Capacitor application.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the plugin**
+   <PackageManagers pkg="@capgo/capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Initialize the SDK
+
+```typescript
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
+
+// Start the Mobile Ads SDK once in your application bootstrap
+await AdMob.start();
+
+// Optional: configure global request settings
+await AdMob.configure({
+  appMuted: false,
+  appVolume: 1,
+});
+
+await AdMob.configRequest({
+  maxAdContentRating: MaxAdContentRating.T,
+  tagForChildDirectedTreatment: false,
+  tagForUnderAgeOfConsent: false,
+});
+```
+
+## Show a banner ad
+
+```typescript
+import { BannerAd } from '@capgo/capacitor-admob';
+
+const banner = new BannerAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/banner',
+  position: 'bottom',
+});
+
+await banner.show();
+```
+
+## Interstitial or rewarded ads
+
+```typescript
+import { InterstitialAd, RewardedAd } from '@capgo/capacitor-admob';
+
+const interstitial = new InterstitialAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/interstitial',
+});
+await interstitial.load();
+await interstitial.show();
+
+const rewarded = new RewardedAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/rewarded',
+});
+await rewarded.load();
+await rewarded.show();
+```
+
+## Listen for ad events
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const handle = await AdMob.addListener('adImpression', (event) => {
+  console.log('Ad impression', event);
+});
+
+// Later when cleaning up
+await handle.remove();
+```
+
+## Platform notes
+
+- **iOS**: Add your AdMob app ID to `Info.plist` under the `GADApplicationIdentifier` key and include any SKAdNetwork IDs you rely on.
+- **Android**: Declare your AdMob app ID in `AndroidManifest.xml` by adding `com.google.android.gms.ads.APPLICATION_ID` inside the `<application>` tag.
+- **Consent & Privacy**: Use `requestTrackingAuthorization()` on iOS 14+ and `configRequest()` child-directed flags to stay compliant with regional privacy rules.
