@@ -1,0 +1,354 @@
+---
+title: Getting Started
+description: Learn how to set up live reload for faster development with your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-live-reload" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Setup
+
+Configure your Vite dev server to work with live reload. You need to:
+1. Disable the built-in HMR client
+2. Forward reload events over a dedicated WebSocket endpoint
+
+## Usage
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+// Configure the dev server
+await LiveReload.configureServer({
+  url: 'http://localhost:5173',
+  websocketPath: '/capgo-livereload',
+  autoReconnect: true,
+  reconnectInterval: 2000
+});
+
+// Connect to the dev server
+await LiveReload.connect();
+
+// Listen for reload events
+LiveReload.addListener('reloadEvent', (event) => {
+  console.log('Reload event:', event);
+  if (event.type === 'full-reload') {
+    console.log('Full page reload triggered');
+  } else if (event.type === 'file-update') {
+    console.log('File updated:', event.file);
+  }
+});
+
+// Listen for connection status changes
+LiveReload.addListener('statusChange', (status) => {
+  console.log('Connection status:', status.connected);
+  console.log('Server URL:', status.url);
+});
+```
+
+## API Reference
+
+### configureServer(options)
+
+Store remote dev server settings for subsequent connections.
+
+```typescript
+const status = await LiveReload.configureServer({
+  url: 'http://192.168.1.100:5173',
+  websocketPath: '/capgo-livereload',
+  headers: {
+    'Authorization': 'Bearer token'
+  },
+  autoReconnect: true,
+  reconnectInterval: 2000
+});
+```
+
+**Parameters:**
+- `url` (string): Base URL for the dev server (e.g., `http://dev.local:5173`)
+- `websocketPath` (string, optional): WebSocket path override (default: `/ws`)
+- `headers` (Record<string, string>, optional): Extra headers for WebSocket connection
+- `autoReconnect` (boolean, optional): Auto-reconnect on disconnect (default: `true`)
+- `reconnectInterval` (number, optional): Delay between reconnect attempts in ms (default: `2000`)
+
+**Returns:** `LiveReloadStatus` with connection info
+
+### connect()
+
+Establish a WebSocket connection if one is not already active.
+
+```typescript
+const status = await LiveReload.connect();
+console.log('Connected:', status.connected);
+```
+
+**Returns:** Current connection status
+
+### disconnect()
+
+Close the current WebSocket connection and disable auto reconnect.
+
+```typescript
+await LiveReload.disconnect();
+```
+
+### getStatus()
+
+Get the current connection status.
+
+```typescript
+const status = await LiveReload.getStatus();
+console.log('Connected:', status.connected);
+console.log('URL:', status.url);
+```
+
+### reload()
+
+Manually trigger a full reload of the Capacitor WebView.
+
+```typescript
+await LiveReload.reload();
+```
+
+### reloadFile(options)
+
+Reload a single file/module (falls back to full reload if not supported).
+
+```typescript
+await LiveReload.reloadFile({
+  path: '/src/components/MyComponent.tsx',
+  hash: 'abc123'
+});
+```
+
+### addListener('reloadEvent', callback)
+
+Listen to incoming reload events from the server.
+
+```typescript
+const handle = await LiveReload.addListener('reloadEvent', (event) => {
+  switch (event.type) {
+    case 'full-reload':
+      console.log('Full reload requested');
+      break;
+    case 'file-update':
+      console.log('File updated:', event.file?.path);
+      break;
+    case 'error':
+      console.error('Error:', event.message);
+      break;
+  }
+});
+
+// Remove listener when done
+await handle.remove();
+```
+
+### addListener('statusChange', callback)
+
+Listen to socket status changes.
+
+```typescript
+await LiveReload.addListener('statusChange', (status) => {
+  console.log(status.connected ? 'Connected' : 'Disconnected');
+});
+```
+
+### removeAllListeners()
+
+Remove all registered listeners.
+
+```typescript
+await LiveReload.removeAllListeners();
+```
+
+## Complete Example
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+export class DevServer {
+  private connected = false;
+
+  async initialize() {
+    // Only enable in development
+    if (process.env.NODE_ENV !== 'development') {
+      return;
+    }
+
+    try {
+      // Configure server
+      await LiveReload.configureServer({
+        url: 'http://192.168.1.100:5173',
+        websocketPath: '/capgo-livereload',
+        autoReconnect: true,
+        reconnectInterval: 3000
+      });
+
+      // Set up listeners before connecting
+      await LiveReload.addListener('reloadEvent', this.handleReloadEvent.bind(this));
+      await LiveReload.addListener('statusChange', this.handleStatusChange.bind(this));
+
+      // Connect
+      await LiveReload.connect();
+    } catch (error) {
+      console.error('Failed to initialize live reload:', error);
+    }
+  }
+
+  private handleReloadEvent(event: any) {
+    console.log('Reload event received:', event.type);
+
+    switch (event.type) {
+      case 'full-reload':
+        this.performFullReload();
+        break;
+      case 'file-update':
+        this.handleFileUpdate(event.file);
+        break;
+      case 'error':
+        console.error('Server error:', event.message);
+        break;
+      case 'connected':
+        console.log('Server connected');
+        break;
+      case 'disconnected':
+        console.log('Server disconnected');
+        break;
+    }
+  }
+
+  private handleStatusChange(status: any) {
+    this.connected = status.connected;
+    console.log(`Live reload ${status.connected ? 'connected' : 'disconnected'}`);
+  }
+
+  private performFullReload() {
+    console.log('Performing full page reload...');
+    window.location.reload();
+  }
+
+  private handleFileUpdate(file: any) {
+    console.log('File updated:', file?.path);
+    // HMR will handle this automatically in most cases
+  }
+
+  async disconnect() {
+    await LiveReload.disconnect();
+    await LiveReload.removeAllListeners();
+    this.connected = false;
+  }
+
+  isConnected(): boolean {
+    return this.connected;
+  }
+}
+```
+
+## Vite Configuration Example
+
+Configure your Vite server to work with the live reload plugin:
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    host: '0.0.0.0', // Allow connections from network
+    port: 5173,
+    hmr: {
+      // Custom WebSocket path for live reload
+      path: '/capgo-livereload',
+    }
+  }
+});
+```
+
+## Best Practices
+
+1. **Only use in development**
+   ```typescript
+   if (import.meta.env.DEV) {
+     await LiveReload.configureServer({
+       url: 'http://localhost:5173',
+       websocketPath: '/capgo-livereload'
+     });
+     await LiveReload.connect();
+   }
+   ```
+
+2. **Use your local IP for mobile testing**
+   ```typescript
+   const devServerUrl = process.env.VITE_DEV_SERVER_URL || 'http://192.168.1.100:5173';
+   await LiveReload.configureServer({ url: devServerUrl });
+   ```
+
+3. **Handle connection errors gracefully**
+   ```typescript
+   try {
+     await LiveReload.connect();
+   } catch (error) {
+     console.warn('Could not connect to dev server, using production build');
+   }
+   ```
+
+4. **Clean up on app exit**
+   ```typescript
+   window.addEventListener('beforeunload', async () => {
+     await LiveReload.disconnect();
+   });
+   ```
+
+5. **Show connection status in UI**
+   ```typescript
+   LiveReload.addListener('statusChange', (status) => {
+     // Show indicator in dev builds
+     updateDevIndicator(status.connected);
+   });
+   ```
+
+## Platform Notes
+
+### iOS
+- Works with iOS 11.0+
+- Ensure dev server is accessible from your device's network
+- May need to configure firewall to allow connections
+
+### Android
+- Works with Android 5.0 (API 21)+
+- Use `adb reverse` for localhost connections:
+  ```bash
+  adb reverse tcp:5173 tcp:5173
+  ```
+
+### Web
+- Full support for web platform
+- Direct WebSocket connection to Vite dev server
+
+## Troubleshooting
+
+**Connection fails:**
+- Verify dev server is running
+- Check that device and computer are on same network
+- Ensure firewall allows connections on the port
+- Use IP address instead of localhost for mobile devices
+
+**Slow reload:**
+- Check network speed
+- Reduce reconnect interval
+- Optimize Vite build configuration
+
+**WebSocket errors:**
+- Verify websocketPath matches Vite config
+- Check for port conflicts
+- Ensure headers are correct if using authentication

@@ -397,6 +397,150 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'AdMob',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/admob/' },
+                { label: 'Getting started', link: '/docs/plugins/admob/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'AppInsights',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/appinsights/' },
+                { label: 'Getting started', link: '/docs/plugins/appinsights/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Audio Session',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/audiosession/' },
+                { label: 'Getting started', link: '/docs/plugins/audiosession/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Document Scanner',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/document-scanner/' },
+                { label: 'Getting started', link: '/docs/plugins/document-scanner/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Env',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/env/' },
+                { label: 'Getting started', link: '/docs/plugins/env/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'FFmpeg',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ffmpeg/' },
+                { label: 'Getting started', link: '/docs/plugins/ffmpeg/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Health',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/health/' },
+                { label: 'Getting started', link: '/docs/plugins/health/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Live Reload',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/live-reload/' },
+                { label: 'Getting started', link: '/docs/plugins/live-reload/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Media Session',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/media-session/' },
+                { label: 'Getting started', link: '/docs/plugins/media-session/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Mux Player',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/mux-player/' },
+                { label: 'Getting started', link: '/docs/plugins/mux-player/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Pay',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/pay/' },
+                { label: 'Getting started', link: '/docs/plugins/pay/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'PDF Generator',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/pdf-generator/' },
+                { label: 'Getting started', link: '/docs/plugins/pdf-generator/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Photo Library',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/photo-library/' },
+                { label: 'Getting started', link: '/docs/plugins/photo-library/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'SIM',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/sim/' },
+                { label: 'Getting started', link: '/docs/plugins/sim/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Text Interaction',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/textinteraction/' },
+                { label: 'Getting started', link: '/docs/plugins/textinteraction/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Video Player',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/video-player/' },
+                { label: 'Getting started', link: '/docs/plugins/video-player/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Volume Buttons',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/volume-buttons/' },
+                { label: 'Getting started', link: '/docs/plugins/volume-buttons/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'YouTube Player',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/youtube-player/' },
+                { label: 'Getting started', link: '/docs/plugins/youtube-player/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: '👋 Get a custom plugin',
               link: '/consulting/',
             },

@@ -401,22 +401,35 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {
             plugins.map((item) => (
-              <a
-                href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
-                class="group relative rounded-2xl border border-gray-700 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-gray-500/50 hover:bg-white/10"
-              >
+              <div class="group relative rounded-2xl border border-gray-700 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-gray-500/50 hover:bg-white/10">
                 <div class="relative">
                   {item.icon && (
                     <item.icon class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gray-800 fill-gray-400 p-2 transition-colors duration-300 group-hover:bg-gray-900 group-hover:fill-white" />
                   )}
                   <h3 class="mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
                   <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
-                  <div class="flex items-center justify-between">
+                  <div class="mb-4 flex items-center justify-between">
                     <span class="text-sm text-gray-500">by {item.author}</span>
-                    <ArrowUpRightIcon class="h-5 w-5 fill-gray-500 transition-colors duration-300 group-hover:fill-blue-400" />
+                  </div>
+                  <div class="flex gap-2">
+                    <a
+                      href={getRelativeLocaleUrl(Astro.locals.locale, `docs/plugins/${getSlug(item.href).replace('capacitor-', '').replace('@capgo/', '')}`)}
+                      class="flex-1 inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                    >
+                      View Docs
+                    </a>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center justify-center rounded-lg border border-gray-600 bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-700"
+                    >
+                      GitHub
+                      <ArrowUpRightIcon class="ml-1 h-4 w-4 fill-white" />
+                    </a>
                   </div>
                 </div>
-              </a>
+              </div>
             ))
           }
         </div>
