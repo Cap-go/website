@@ -413,10 +413,10 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                   </div>
                   <div class="flex gap-2">
                     <a
-                      href={getRelativeLocaleUrl(Astro.locals.locale, `docs/plugins/${getSlug(item.href).replace('capacitor-', '').replace('@capgo/', '')}`)}
+                      href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
                       class="flex-1 inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
                     >
-                      View Docs
+                      View Tutorial
                     </a>
                     <a
                       href={item.href}
