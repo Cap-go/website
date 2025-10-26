@@ -27,6 +27,7 @@ import MegaphoneIcon from 'astro-heroicons/mini/Megaphone.astro'
 import PhoneIcon from 'astro-heroicons/mini/Phone.astro'
 import PhotoIcon from 'astro-heroicons/mini/Photo.astro'
 import PlayCircleIcon from 'astro-heroicons/mini/PlayCircle.astro'
+import RadioIcon from 'astro-heroicons/mini/Radio.astro'
 import RocketLaunchIcon from 'astro-heroicons/mini/RocketLaunch.astro'
 import ShieldCheckIcon from 'astro-heroicons/mini/ShieldCheck.astro'
 import SignalIcon from 'astro-heroicons/mini/Signal.astro'
@@ -35,6 +36,7 @@ import SpeakerXMarkIcon from 'astro-heroicons/mini/SpeakerXMark.astro'
 import UserCircleIcon from 'astro-heroicons/mini/UserCircle.astro'
 import VideoCameraIcon from 'astro-heroicons/mini/VideoCamera.astro'
 import WrenchIcon from 'astro-heroicons/mini/Wrench.astro'
+import ChatBubbleOvalLeftIcon from 'astro-heroicons/mini/ChatBubbleOvalLeft.astro'
 
 export interface Action {
   icon?: any
@@ -481,5 +483,21 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-youtube-player/',
     title: 'YouTube Player',
     icon: PlayCircleIcon,
+  },
+  {
+    name: '@capgo/capacitor-wechat',
+    author: 'github.com/Cap-go',
+    description: 'WeChat SDK for Capacitor - enables authentication, sharing, payments, and mini-programs',
+    href: 'https://github.com/Cap-go/capacitor-wechat/',
+    title: 'WeChat',
+    icon: ChatBubbleOvalLeftIcon,
+  },
+  {
+    name: '@capgo/capacitor-ibeacon',
+    author: 'github.com/Cap-go',
+    description: 'iBeacon plugin for Capacitor - proximity detection and beacon region monitoring',
+    href: 'https://github.com/Cap-go/capacitor-ibeacon/',
+    title: 'iBeacon',
+    icon: RadioIcon,
   },
 ]

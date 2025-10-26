@@ -541,6 +541,22 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'WeChat',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/wechat/' },
+                { label: 'Getting started', link: '/docs/plugins/wechat/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'iBeacon',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ibeacon/' },
+                { label: 'Getting started', link: '/docs/plugins/ibeacon/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: '👋 Get a custom plugin',
               link: '/consulting/',
             },
