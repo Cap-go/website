@@ -58,7 +58,7 @@ Add the necessary permissions to your `AndroidManifest.xml`:
 
 The Android implementation requires the AltBeacon library. Add it to your app's `build.gradle`:
 
-```gradle
+```kotlin
 dependencies {
     implementation 'org.altbeacon:android-beacon-library:2.20+'
 }
