@@ -174,30 +174,83 @@ export default defineConfig({
             },
 
             {
-              label: 'Social Login',
+              label: 'Accelerometer',
               items: [
-                { label: 'Overview', link: '/docs/plugins/social-login/' },
-                { label: 'Getting started', link: '/docs/plugins/social-login/getting-started' },
-                { label: 'Google', autogenerate: { directory: 'docs/plugins/social-login/google' } },
-                { label: 'Apple', autogenerate: { directory: 'docs/plugins/social-login/apple' } },
-                { label: 'Facebook', link: '/docs/plugins/social-login/facebook' },
-                { label: 'Migrations', autogenerate: { directory: 'docs/plugins/social-login/migrations' } },
+                { label: 'Overview', link: '/docs/plugins/accelerometer/' },
+                { label: 'Getting started', link: '/docs/plugins/accelerometer/getting-started' },
               ],
               collapsed: true,
             },
             {
-              label: 'Native Market',
+              label: 'AdMob',
               items: [
-                { label: 'Overview', link: '/docs/plugins/native-market/' },
-                { label: 'Getting started', link: '/docs/plugins/native-market/getting-started' },
+                { label: 'Overview', link: '/docs/plugins/admob/' },
+                { label: 'Getting started', link: '/docs/plugins/admob/getting-started' },
               ],
               collapsed: true,
             },
             {
-              label: 'Native Biometric',
+              label: 'Age Signals',
               items: [
-                { label: 'Overview', link: '/docs/plugins/native-biometric/' },
-                { label: 'Getting started', link: '/docs/plugins/native-biometric/getting-started' },
+                { label: 'Overview', link: '/docs/plugins/age-signals/' },
+                { label: 'Getting started', link: '/docs/plugins/age-signals/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Alarm',
+              items: [{ label: 'Overview', link: '/docs/plugins/alarm/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Android Inline Install',
+              items: [{ label: 'Overview', link: '/docs/plugins/android-inline-install/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Android Usage Stats',
+              items: [{ label: 'Overview', link: '/docs/plugins/android-usagestatsmanager/' }],
+              collapsed: true,
+            },
+            {
+              label: 'AppInsights',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/appinsights/' },
+                { label: 'Getting started', link: '/docs/plugins/appinsights/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Audio Recorder',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/audio-recorder/' },
+                { label: 'Getting started', link: '/docs/plugins/audio-recorder/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Audio Session',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/audiosession/' },
+                { label: 'Getting started', link: '/docs/plugins/audiosession/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Autofill Save Password',
+              items: [{ label: 'Overview', link: '/docs/plugins/autofill-save-password/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Background Geolocation',
+              items: [{ label: 'Overview', link: '/docs/plugins/background-geolocation/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Barometer',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/barometer/' },
+                { label: 'Getting started', link: '/docs/plugins/barometer/getting-started' },
               ],
               collapsed: true,
             },
@@ -210,26 +263,10 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'Uploader',
+              label: 'Contacts',
               items: [
-                { label: 'Overview', link: '/docs/plugins/uploader/' },
-                { label: 'Getting started', link: '/docs/plugins/uploader/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Flash',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/flash/' },
-                { label: 'Getting started', link: '/docs/plugins/flash/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Screen Recorder',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/screen-recorder/' },
-                { label: 'Getting started', link: '/docs/plugins/screen-recorder/getting-started' },
+                { label: 'Overview', link: '/docs/plugins/contacts/' },
+                { label: 'Getting started', link: '/docs/plugins/contacts/getting-started' },
               ],
               collapsed: true,
             },
@@ -242,10 +279,76 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'Native Geocoder',
+              label: 'Data Storage SQLite',
               items: [
-                { label: 'Overview', link: '/docs/plugins/nativegeocoder/' },
-                { label: 'Getting started', link: '/docs/plugins/nativegeocoder/getting-started' },
+                { label: 'Overview', link: '/docs/plugins/data-storage-sqlite/' },
+                { label: 'Getting started', link: '/docs/plugins/data-storage-sqlite/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Document Scanner',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/document-scanner/' },
+                { label: 'Getting started', link: '/docs/plugins/document-scanner/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Downloader',
+              items: [{ label: 'Overview', link: '/docs/plugins/downloader/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Env',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/env/' },
+                { label: 'Getting started', link: '/docs/plugins/env/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'FFmpeg',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ffmpeg/' },
+                { label: 'Getting started', link: '/docs/plugins/ffmpeg/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Flash',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/flash/' },
+                { label: 'Getting started', link: '/docs/plugins/flash/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'GTM',
+              items: [{ label: 'Overview', link: '/docs/plugins/gtm/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Health',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/health/' },
+                { label: 'Getting started', link: '/docs/plugins/health/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Home Indicator',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/home-indicator/' },
+                { label: 'Getting started', link: '/docs/plugins/home-indicator/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'iBeacon',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ibeacon/' },
+                { label: 'Getting started', link: '/docs/plugins/ibeacon/getting-started' },
               ],
               collapsed: true,
             },
@@ -258,10 +361,62 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Is Root',
+              items: [{ label: 'Overview', link: '/docs/plugins/is-root/' }],
+              collapsed: true,
+            },
+            {
+              label: 'IVS Player',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ivs-player/' },
+                { label: 'Getting started', link: '/docs/plugins/ivs-player/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'JW Player',
+              items: [{ label: 'Overview', link: '/docs/plugins/jw-player/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Launch Navigator',
+              items: [{ label: 'Overview', link: '/docs/plugins/launch-navigator/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Live Reload',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/live-reload/' },
+                { label: 'Getting started', link: '/docs/plugins/live-reload/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'LLM',
+              items: [{ label: 'Overview', link: '/docs/plugins/llm/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Media Session',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/media-session/' },
+                { label: 'Getting started', link: '/docs/plugins/media-session/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Mute',
               items: [
                 { label: 'Overview', link: '/docs/plugins/mute/' },
                 { label: 'Getting started', link: '/docs/plugins/mute/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Mux Player',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/mux-player/' },
+                { label: 'Getting started', link: '/docs/plugins/mux-player/getting-started' },
               ],
               collapsed: true,
             },
@@ -274,18 +429,26 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'Shake',
+              label: 'Native Biometric',
               items: [
-                { label: 'Overview', link: '/docs/plugins/shake/' },
-                { label: 'Getting started', link: '/docs/plugins/shake/getting-started' },
+                { label: 'Overview', link: '/docs/plugins/native-biometric/' },
+                { label: 'Getting started', link: '/docs/plugins/native-biometric/getting-started' },
               ],
               collapsed: true,
             },
             {
-              label: 'Data Storage SQLite',
+              label: 'Native Geocoder',
               items: [
-                { label: 'Overview', link: '/docs/plugins/data-storage-sqlite/' },
-                { label: 'Getting started', link: '/docs/plugins/data-storage-sqlite/getting-started' },
+                { label: 'Overview', link: '/docs/plugins/nativegeocoder/' },
+                { label: 'Getting started', link: '/docs/plugins/nativegeocoder/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Native Market',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/native-market/' },
+                { label: 'Getting started', link: '/docs/plugins/native-market/getting-started' },
               ],
               collapsed: true,
             },
@@ -306,173 +469,10 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'Home Indicator',
+              label: 'NFC',
               items: [
-                { label: 'Overview', link: '/docs/plugins/home-indicator/' },
-                { label: 'Getting started', link: '/docs/plugins/home-indicator/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'IVS Player',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/ivs-player/' },
-                { label: 'Getting started', link: '/docs/plugins/ivs-player/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'LLM',
-              items: [{ label: 'Overview', link: '/docs/plugins/llm/' }],
-              collapsed: true,
-            },
-            {
-              label: 'GTM',
-              items: [{ label: 'Overview', link: '/docs/plugins/gtm/' }],
-              collapsed: true,
-            },
-            {
-              label: 'StreamCall',
-              items: [{ label: 'Overview', link: '/docs/plugins/streamcall/' }],
-              collapsed: true,
-            },
-            {
-              label: 'JW Player',
-              items: [{ label: 'Overview', link: '/docs/plugins/jw-player/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Ricoh 360 Camera',
-              items: [{ label: 'Overview', link: '/docs/plugins/ricoh360-camera/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Background Geolocation',
-              items: [{ label: 'Overview', link: '/docs/plugins/background-geolocation/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Alarm',
-              items: [{ label: 'Overview', link: '/docs/plugins/alarm/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Twilio Voice',
-              items: [{ label: 'Overview', link: '/docs/plugins/twilio-voice/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Is Root',
-              items: [{ label: 'Overview', link: '/docs/plugins/is-root/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Persistent Account',
-              items: [{ label: 'Overview', link: '/docs/plugins/persistent-account/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Android Usage Stats',
-              items: [{ label: 'Overview', link: '/docs/plugins/android-usagestatsmanager/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Android Inline Install',
-              items: [{ label: 'Overview', link: '/docs/plugins/android-inline-install/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Downloader',
-              items: [{ label: 'Overview', link: '/docs/plugins/downloader/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Launch Navigator',
-              items: [{ label: 'Overview', link: '/docs/plugins/launch-navigator/' }],
-              collapsed: true,
-            },
-            {
-              label: 'Autofill Save Password',
-              items: [{ label: 'Overview', link: '/docs/plugins/autofill-save-password/' }],
-              collapsed: true,
-            },
-            {
-              label: 'AdMob',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/admob/' },
-                { label: 'Getting started', link: '/docs/plugins/admob/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'AppInsights',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/appinsights/' },
-                { label: 'Getting started', link: '/docs/plugins/appinsights/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Audio Session',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/audiosession/' },
-                { label: 'Getting started', link: '/docs/plugins/audiosession/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Document Scanner',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/document-scanner/' },
-                { label: 'Getting started', link: '/docs/plugins/document-scanner/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Env',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/env/' },
-                { label: 'Getting started', link: '/docs/plugins/env/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'FFmpeg',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/ffmpeg/' },
-                { label: 'Getting started', link: '/docs/plugins/ffmpeg/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Health',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/health/' },
-                { label: 'Getting started', link: '/docs/plugins/health/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Live Reload',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/live-reload/' },
-                { label: 'Getting started', link: '/docs/plugins/live-reload/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Media Session',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/media-session/' },
-                { label: 'Getting started', link: '/docs/plugins/media-session/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Mux Player',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/mux-player/' },
-                { label: 'Getting started', link: '/docs/plugins/mux-player/getting-started' },
+                { label: 'Overview', link: '/docs/plugins/nfc/' },
+                { label: 'Getting started', link: '/docs/plugins/nfc/getting-started' },
               ],
               collapsed: true,
             },
@@ -493,10 +493,52 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Persistent Account',
+              items: [{ label: 'Overview', link: '/docs/plugins/persistent-account/' }],
+              collapsed: true,
+            },
+            {
               label: 'Photo Library',
               items: [
                 { label: 'Overview', link: '/docs/plugins/photo-library/' },
                 { label: 'Getting started', link: '/docs/plugins/photo-library/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'RealtimeKit',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/realtimekit/' },
+                { label: 'Getting started', link: '/docs/plugins/realtimekit/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Ricoh 360 Camera',
+              items: [{ label: 'Overview', link: '/docs/plugins/ricoh360-camera/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Screen Recorder',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/screen-recorder/' },
+                { label: 'Getting started', link: '/docs/plugins/screen-recorder/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Shake',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/shake/' },
+                { label: 'Getting started', link: '/docs/plugins/shake/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Share Target',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/share-target/' },
+                { label: 'Getting started', link: '/docs/plugins/share-target/getting-started' },
               ],
               collapsed: true,
             },
@@ -509,10 +551,40 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Social Login',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/social-login/' },
+                { label: 'Getting started', link: '/docs/plugins/social-login/getting-started' },
+                { label: 'Google', autogenerate: { directory: 'docs/plugins/social-login/google' } },
+                { label: 'Apple', autogenerate: { directory: 'docs/plugins/social-login/apple' } },
+                { label: 'Facebook', link: '/docs/plugins/social-login/facebook' },
+                { label: 'Migrations', autogenerate: { directory: 'docs/plugins/social-login/migrations' } },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'StreamCall',
+              items: [{ label: 'Overview', link: '/docs/plugins/streamcall/' }],
+              collapsed: true,
+            },
+            {
               label: 'Text Interaction',
               items: [
                 { label: 'Overview', link: '/docs/plugins/textinteraction/' },
                 { label: 'Getting started', link: '/docs/plugins/textinteraction/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Twilio Voice',
+              items: [{ label: 'Overview', link: '/docs/plugins/twilio-voice/' }],
+              collapsed: true,
+            },
+            {
+              label: 'Uploader',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/uploader/' },
+                { label: 'Getting started', link: '/docs/plugins/uploader/getting-started' },
               ],
               collapsed: true,
             },
@@ -533,14 +605,6 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'YouTube Player',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/youtube-player/' },
-                { label: 'Getting started', link: '/docs/plugins/youtube-player/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
               label: 'WeChat',
               items: [
                 { label: 'Overview', link: '/docs/plugins/wechat/' },
@@ -549,26 +613,10 @@ export default defineConfig({
               collapsed: true,
             },
             {
-              label: 'iBeacon',
+              label: 'YouTube Player',
               items: [
-                { label: 'Overview', link: '/docs/plugins/ibeacon/' },
-                { label: 'Getting started', link: '/docs/plugins/ibeacon/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'NFC',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/nfc/' },
-                { label: 'Getting started', link: '/docs/plugins/nfc/getting-started' },
-              ],
-              collapsed: true,
-            },
-            {
-              label: 'Age Signals',
-              items: [
-                { label: 'Overview', link: '/docs/plugins/age-signals/' },
-                { label: 'Getting started', link: '/docs/plugins/age-signals/getting-started' },
+                { label: 'Overview', link: '/docs/plugins/youtube-player/' },
+                { label: 'Getting started', link: '/docs/plugins/youtube-player/getting-started' },
               ],
               collapsed: true,
             },

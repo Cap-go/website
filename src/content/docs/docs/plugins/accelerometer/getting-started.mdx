@@ -1,0 +1,302 @@
+---
+title: "Getting Started with Accelerometer"
+description: "Learn how to integrate accelerometer sensing into your Capacitor app"
+---
+
+This guide will walk you through integrating the Capacitor Accelerometer plugin into your application.
+
+## Installation
+
+Install the plugin using npm:
+
+```bash
+npm install @capgo/capacitor-accelerometer
+npx cap sync
+```
+
+## Platform Configuration
+
+### iOS
+No additional configuration required. The accelerometer is always available.
+
+### Android
+No additional configuration required. The accelerometer is always available.
+
+### Web
+The plugin uses the DeviceMotion API. Requires HTTPS in production.
+
+## Basic Usage
+
+### Import the Plugin
+
+```typescript
+import { Accelerometer } from '@capgo/capacitor-accelerometer';
+```
+
+### Start Monitoring
+
+```typescript
+const startAccelerometer = async () => {
+  await Accelerometer.start({
+    interval: 100 // Update interval in milliseconds
+  });
+
+  console.log('Accelerometer started');
+};
+```
+
+### Listen to Acceleration Events
+
+```typescript
+Accelerometer.addListener('accelerationChange', (data) => {
+  console.log('X:', data.x);
+  console.log('Y:', data.y);
+  console.log('Z:', data.z);
+  console.log('Timestamp:', data.timestamp);
+});
+```
+
+### Get Current Reading
+
+```typescript
+const getCurrentAcceleration = async () => {
+  const reading = await Accelerometer.getCurrentAcceleration();
+  console.log('Current acceleration:', reading);
+};
+```
+
+### Stop Monitoring
+
+```typescript
+const stopAccelerometer = async () => {
+  await Accelerometer.stop();
+  console.log('Accelerometer stopped');
+};
+```
+
+## Complete Example
+
+Here's a complete example with shake detection:
+
+```typescript
+import { Accelerometer } from '@capgo/capacitor-accelerometer';
+
+class AccelerometerService {
+  private listener: any;
+  private lastX = 0;
+  private lastY = 0;
+  private lastZ = 0;
+  private shakeThreshold = 15;
+
+  async initialize() {
+    await Accelerometer.start({ interval: 100 });
+
+    this.listener = Accelerometer.addListener('accelerationChange', (data) => {
+      this.handleAcceleration(data);
+    });
+  }
+
+  handleAcceleration(data: any) {
+    // Calculate delta
+    const deltaX = Math.abs(data.x - this.lastX);
+    const deltaY = Math.abs(data.y - this.lastY);
+    const deltaZ = Math.abs(data.z - this.lastZ);
+
+    // Check for shake
+    if (deltaX > this.shakeThreshold ||
+        deltaY > this.shakeThreshold ||
+        deltaZ > this.shakeThreshold) {
+      this.onShake();
+    }
+
+    // Update last values
+    this.lastX = data.x;
+    this.lastY = data.y;
+    this.lastZ = data.z;
+
+    // Update UI
+    this.updateDisplay(data);
+  }
+
+  onShake() {
+    console.log('Device shaken!');
+    // Trigger shake action
+  }
+
+  updateDisplay(data: any) {
+    console.log(`X: ${data.x.toFixed(2)} m/s²`);
+    console.log(`Y: ${data.y.toFixed(2)} m/s²`);
+    console.log(`Z: ${data.z.toFixed(2)} m/s²`);
+
+    // Calculate magnitude
+    const magnitude = Math.sqrt(
+      data.x * data.x +
+      data.y * data.y +
+      data.z * data.z
+    );
+    console.log(`Magnitude: ${magnitude.toFixed(2)} m/s²`);
+  }
+
+  async cleanup() {
+    if (this.listener) {
+      this.listener.remove();
+    }
+    await Accelerometer.stop();
+  }
+}
+
+// Usage
+const accelService = new AccelerometerService();
+accelService.initialize();
+
+// Cleanup when done
+// accelService.cleanup();
+```
+
+## Understanding Readings
+
+### Acceleration Axes
+- **X-axis**: Left (-) to Right (+)
+- **Y-axis**: Bottom (-) to Top (+)
+- **Z-axis**: Back (-) to Front (+)
+
+### Gravity
+- Device at rest shows ~9.8 m/s² on one axis (gravity)
+- Moving device shows acceleration in addition to gravity
+
+### Units
+- Measured in meters per second squared (m/s²)
+- Gravity = 9.8 m/s²
+
+## Common Use Cases
+
+### Shake Detection
+
+```typescript
+class ShakeDetector {
+  private lastUpdate = 0;
+  private lastX = 0;
+  private lastY = 0;
+  private lastZ = 0;
+
+  detectShake(x: number, y: number, z: number): boolean {
+    const currentTime = Date.now();
+
+    if (currentTime - this.lastUpdate > 100) {
+      const deltaX = Math.abs(x - this.lastX);
+      const deltaY = Math.abs(y - this.lastY);
+      const deltaZ = Math.abs(z - this.lastZ);
+
+      this.lastUpdate = currentTime;
+      this.lastX = x;
+      this.lastY = y;
+      this.lastZ = z;
+
+      return deltaX + deltaY + deltaZ > 15;
+    }
+
+    return false;
+  }
+}
+```
+
+### Tilt Detection
+
+```typescript
+class TiltDetector {
+  getTiltAngles(x: number, y: number, z: number) {
+    const roll = Math.atan2(y, z) * (180 / Math.PI);
+    const pitch = Math.atan2(-x, Math.sqrt(y * y + z * z)) * (180 / Math.PI);
+
+    return { roll, pitch };
+  }
+
+  isDeviceFlat(z: number): boolean {
+    return Math.abs(z - 9.8) < 1.0;
+  }
+
+  isDeviceUpright(y: number): boolean {
+    return Math.abs(y - 9.8) < 2.0;
+  }
+}
+```
+
+### Step Counter
+
+```typescript
+class StepCounter {
+  private steps = 0;
+  private lastMagnitude = 0;
+  private threshold = 11;
+
+  processAcceleration(x: number, y: number, z: number) {
+    const magnitude = Math.sqrt(x * x + y * y + z * z);
+
+    if (magnitude > this.threshold &&
+        this.lastMagnitude < this.threshold) {
+      this.steps++;
+      console.log('Steps:', this.steps);
+    }
+
+    this.lastMagnitude = magnitude;
+  }
+}
+```
+
+## Best Practices
+
+1. **Choose Appropriate Intervals**: Balance responsiveness and battery life
+   - Gaming: 16-50ms
+   - Fitness: 100-200ms
+   - General: 200-500ms
+
+2. **Remove Listeners**: Always clean up when done
+3. **Filter Noise**: Use moving averages for smoother data
+4. **Consider Battery**: High-frequency polling drains battery
+5. **Test on Real Devices**: Simulators don't provide accurate data
+
+## Performance Tips
+
+### Debouncing
+
+```typescript
+class AccelerometerDebouncer {
+  private timeout: any;
+
+  debounce(callback: Function, delay: number) {
+    return (...args: any[]) => {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => callback(...args), delay);
+    };
+  }
+}
+```
+
+### Data Smoothing
+
+```typescript
+class AccelerometerFilter {
+  private alpha = 0.8;
+  private filteredX = 0;
+  private filteredY = 0;
+  private filteredZ = 0;
+
+  filter(x: number, y: number, z: number) {
+    this.filteredX = this.alpha * x + (1 - this.alpha) * this.filteredX;
+    this.filteredY = this.alpha * y + (1 - this.alpha) * this.filteredY;
+    this.filteredZ = this.alpha * z + (1 - this.alpha) * this.filteredZ;
+
+    return {
+      x: this.filteredX,
+      y: this.filteredY,
+      z: this.filteredZ
+    };
+  }
+}
+```
+
+## Next Steps
+
+- Explore the [API Reference](https://github.com/Cap-go/capacitor-accelerometer#api) for complete method documentation
+- Check out the [example app](https://github.com/Cap-go/capacitor-accelerometer/tree/main/example) for advanced usage
+- See the [tutorial](/plugins-tutorials/capacitor-accelerometer) for complete implementation examples

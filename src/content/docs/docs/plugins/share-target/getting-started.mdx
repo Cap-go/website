@@ -1,0 +1,413 @@
+---
+title: "Getting Started with Share Target"
+description: "Learn how to make your app receive shared content from other apps"
+---
+
+This guide will walk you through integrating the Capacitor Share Target plugin to enable your app to receive shared content from other applications.
+
+## Installation
+
+Install the plugin using npm:
+
+```bash
+npm install @capgo/capacitor-share-target
+npx cap sync
+```
+
+## Android Configuration
+
+Add intent filters to your `AndroidManifest.xml` inside the `<activity>` tag:
+
+### Accept Text Content
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="text/*" />
+</intent-filter>
+```
+
+### Accept Images
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="image/*" />
+</intent-filter>
+
+<intent-filter>
+    <action android:name="android.intent.action.SEND_MULTIPLE" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="image/*" />
+</intent-filter>
+```
+
+### Accept All Content Types
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="*/*" />
+</intent-filter>
+
+<intent-filter>
+    <action android:name="android.intent.action.SEND_MULTIPLE" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="*/*" />
+</intent-filter>
+```
+
+## iOS Configuration
+
+For iOS, you need to create a Share Extension:
+
+### 1. Create Share Extension in Xcode
+
+1. Open your project in Xcode
+2. Go to **File > New > Target**
+3. Select **Share Extension** and click **Next**
+4. Name it (e.g., "ShareExtension") and click **Finish**
+5. If prompted, activate the scheme
+
+### 2. Configure App Group
+
+1. In your main app target, go to **Signing & Capabilities**
+2. Click **+ Capability** and add **App Groups**
+3. Create or select an app group (e.g., `group.com.yourcompany.yourapp`)
+4. Repeat for the Share Extension target
+
+### 3. Update Share Extension Code
+
+The Share Extension needs to save shared data to the app group container so your main app can access it.
+
+For detailed iOS setup, see [Apple's Share Extension documentation](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller).
+
+## Basic Usage
+
+### Import the Plugin
+
+```typescript
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+```
+
+### Listen for Shared Content
+
+```typescript
+CapacitorShareTarget.addListener('shareReceived', (event) => {
+  console.log('Received share event');
+  console.log('Title:', event.title);
+  console.log('Texts:', event.texts);
+
+  // Handle shared files
+  if (event.files && event.files.length > 0) {
+    event.files.forEach(file => {
+      console.log(`File: ${file.name}`);
+      console.log(`Type: ${file.mimeType}`);
+      console.log(`URI: ${file.uri}`);
+    });
+  }
+});
+```
+
+## Complete Example
+
+Here's a comprehensive example handling different types of shared content:
+
+```typescript
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+class ShareTargetService {
+  private listener: any;
+
+  initialize() {
+    this.listener = CapacitorShareTarget.addListener('shareReceived', (event) => {
+      this.handleSharedContent(event);
+    });
+
+    console.log('Share target listener initialized');
+  }
+
+  handleSharedContent(event: any) {
+    console.log('=== Share Received ===');
+
+    // Handle title
+    if (event.title) {
+      console.log('Title:', event.title);
+      this.showNotification('Shared: ' + event.title);
+    }
+
+    // Handle text content
+    if (event.texts && event.texts.length > 0) {
+      event.texts.forEach((text: string, index: number) => {
+        console.log(`Text ${index + 1}:`, text);
+        this.processSharedText(text);
+      });
+    }
+
+    // Handle files
+    if (event.files && event.files.length > 0) {
+      console.log(`Received ${event.files.length} file(s)`);
+
+      event.files.forEach((file: any) => {
+        console.log('File details:');
+        console.log('  Name:', file.name);
+        console.log('  Type:', file.mimeType);
+        console.log('  URI:', file.uri);
+
+        this.processSharedFile(file);
+      });
+    }
+  }
+
+  processSharedText(text: string) {
+    // Check if it's a URL
+    if (this.isURL(text)) {
+      console.log('Shared URL detected:', text);
+      // Handle URL (e.g., create bookmark)
+      this.saveBookmark(text);
+    } else {
+      console.log('Shared text detected');
+      // Handle plain text (e.g., create note)
+      this.createNote(text);
+    }
+  }
+
+  processSharedFile(file: any) {
+    const fileType = file.mimeType.split('/')[0];
+
+    switch (fileType) {
+      case 'image':
+        console.log('Processing shared image');
+        this.handleImage(file);
+        break;
+
+      case 'video':
+        console.log('Processing shared video');
+        this.handleVideo(file);
+        break;
+
+      case 'audio':
+        console.log('Processing shared audio');
+        this.handleAudio(file);
+        break;
+
+      case 'application':
+        console.log('Processing shared document');
+        this.handleDocument(file);
+        break;
+
+      default:
+        console.log('Processing generic file');
+        this.handleGenericFile(file);
+    }
+  }
+
+  handleImage(file: any) {
+    // Process image file
+    console.log('Saving image:', file.name);
+    // Implementation: Save to gallery, upload, etc.
+  }
+
+  handleVideo(file: any) {
+    // Process video file
+    console.log('Saving video:', file.name);
+  }
+
+  handleAudio(file: any) {
+    // Process audio file
+    console.log('Saving audio:', file.name);
+  }
+
+  handleDocument(file: any) {
+    // Process document file
+    console.log('Saving document:', file.name);
+  }
+
+  handleGenericFile(file: any) {
+    // Process generic file
+    console.log('Saving file:', file.name);
+  }
+
+  isURL(text: string): boolean {
+    try {
+      new URL(text);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  saveBookmark(url: string) {
+    console.log('Creating bookmark for:', url);
+    // Implementation
+  }
+
+  createNote(text: string) {
+    console.log('Creating note with text:', text.substring(0, 50));
+    // Implementation
+  }
+
+  showNotification(message: string) {
+    console.log('Notification:', message);
+    // Show toast or notification
+  }
+
+  cleanup() {
+    if (this.listener) {
+      this.listener.remove();
+    }
+  }
+}
+
+// Usage
+const shareTarget = new ShareTargetService();
+shareTarget.initialize();
+
+// Cleanup when app closes
+// shareTarget.cleanup();
+```
+
+## React Integration
+
+```typescript
+import { useEffect } from 'react';
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+function useShareTarget(onShareReceived: (event: any) => void) {
+  useEffect(() => {
+    const listener = CapacitorShareTarget.addListener('shareReceived', onShareReceived);
+
+    return () => {
+      listener.remove();
+    };
+  }, [onShareReceived]);
+}
+
+// Usage in component
+function App() {
+  useShareTarget((event) => {
+    console.log('Share received:', event);
+    // Handle shared content
+  });
+
+  return <div>Your App</div>;
+}
+```
+
+## Vue Integration
+
+```typescript
+import { onMounted, onUnmounted } from 'vue';
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+export default {
+  setup() {
+    let listener: any;
+
+    onMounted(() => {
+      listener = CapacitorShareTarget.addListener('shareReceived', (event) => {
+        console.log('Share received:', event);
+        // Handle shared content
+      });
+    });
+
+    onUnmounted(() => {
+      if (listener) {
+        listener.remove();
+      }
+    });
+  }
+};
+```
+
+## Handling Different Content Types
+
+### URLs
+
+```typescript
+if (event.texts && event.texts.length > 0) {
+  const text = event.texts[0];
+
+  if (text.startsWith('http://') || text.startsWith('https://')) {
+    // Handle URL
+    window.open(text, '_blank');
+  }
+}
+```
+
+### Images
+
+```typescript
+if (event.files) {
+  const images = event.files.filter(f => f.mimeType.startsWith('image/'));
+
+  images.forEach(async (image) => {
+    // Read and display image
+    const response = await fetch(image.uri);
+    const blob = await response.blob();
+    const imageUrl = URL.createObjectURL(blob);
+
+    // Display or process image
+    console.log('Image URL:', imageUrl);
+  });
+}
+```
+
+### Multiple Files
+
+```typescript
+if (event.files && event.files.length > 1) {
+  console.log(`Processing ${event.files.length} files`);
+
+  const processPromises = event.files.map(file =>
+    processFile(file)
+  );
+
+  await Promise.all(processPromises);
+  console.log('All files processed');
+}
+```
+
+## Best Practices
+
+1. **Handle Multiple Content Types**: Be prepared to receive text, URLs, and files
+2. **Validate Content**: Check MIME types before processing
+3. **Provide Feedback**: Show users what was received
+4. **Handle Errors**: File URIs might be invalid or inaccessible
+5. **Clean Up Listeners**: Remove listeners when not needed
+6. **Test Thoroughly**: Test with different apps and content types
+7. **Request Permissions**: Some file types may require additional permissions
+
+## Common Issues
+
+### Share Not Working on Android
+
+Ensure intent filters are correctly configured in `AndroidManifest.xml` within the `<activity>` tag that has `android.intent.action.MAIN`.
+
+### iOS Share Extension Not Appearing
+
+1. Verify App Group is configured in both targets
+2. Ensure Share Extension is activated
+3. Check that Info.plist in Share Extension has correct configuration
+
+### File Access Errors
+
+```typescript
+try {
+  const response = await fetch(file.uri);
+  const blob = await response.blob();
+  // Process blob
+} catch (error) {
+  console.error('Failed to access file:', error);
+  // Show error to user
+}
+```
+
+## Next Steps
+
+- Explore the [API Reference](https://github.com/Cap-go/capacitor-share-target#api) for complete method documentation
+- Check out the [example app](https://github.com/Cap-go/capacitor-share-target/tree/main/example) for advanced usage
+- See the [tutorial](/plugins-tutorials/capacitor-share-target) for complete implementation examples

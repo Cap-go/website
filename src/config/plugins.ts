@@ -1,5 +1,6 @@
 import ArchiveBoxArrowDownIcon from 'astro-heroicons/mini/ArchiveBoxArrowDown.astro'
 import ArrowPathIcon from 'astro-heroicons/mini/ArrowPath.astro'
+import ArrowsPointingOutIcon from 'astro-heroicons/mini/ArrowsPointingOut.astro'
 import ArrowUpOnSquareIcon from 'astro-heroicons/mini/ArrowUpOnSquare.astro'
 import Bars3Icon from 'astro-heroicons/mini/Bars3.astro'
 import BellIcon from 'astro-heroicons/mini/Bell.astro'
@@ -24,6 +25,7 @@ import KeyIcon from 'astro-heroicons/mini/Key.astro'
 import MapIcon from 'astro-heroicons/mini/Map.astro'
 import MapPinIcon from 'astro-heroicons/mini/MapPin.astro'
 import MegaphoneIcon from 'astro-heroicons/mini/Megaphone.astro'
+import MicrophoneIcon from 'astro-heroicons/mini/Microphone.astro'
 import PhoneIcon from 'astro-heroicons/mini/Phone.astro'
 import PhotoIcon from 'astro-heroicons/mini/Photo.astro'
 import PlayCircleIcon from 'astro-heroicons/mini/PlayCircle.astro'
@@ -39,6 +41,7 @@ import UserGroupIcon from 'astro-heroicons/mini/UserGroup.astro'
 import VideoCameraIcon from 'astro-heroicons/mini/VideoCamera.astro'
 import WrenchIcon from 'astro-heroicons/mini/Wrench.astro'
 import ChatBubbleOvalLeftIcon from 'astro-heroicons/mini/ChatBubbleOvalLeft.astro'
+import ShareIcon from 'astro-heroicons/mini/Share.astro'
 
 export interface Action {
   icon?: any
@@ -517,5 +520,53 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-android-age-signals/',
     title: 'Age Signals',
     icon: UserGroupIcon,
+  },
+  {
+    name: '@capgo/capacitor-barometer',
+    author: 'github.com/Cap-go',
+    description: 'Access device barometer for atmospheric pressure and altitude readings',
+    href: 'https://github.com/Cap-go/capacitor-barometer/',
+    title: 'Barometer',
+    icon: ChartBarIcon,
+  },
+  {
+    name: '@capgo/capacitor-accelerometer',
+    author: 'github.com/Cap-go',
+    description: 'Read device accelerometer for motion detection and orientation tracking',
+    href: 'https://github.com/Cap-go/capacitor-accelerometer/',
+    title: 'Accelerometer',
+    icon: ArrowsPointingOutIcon,
+  },
+  {
+    name: '@capgo/capacitor-contacts',
+    author: 'github.com/Cap-go',
+    description: 'Access and manage device contacts with read and write capabilities',
+    href: 'https://github.com/Cap-go/capacitor-contacts/',
+    title: 'Contacts',
+    icon: UserGroupIcon,
+  },
+  {
+    name: '@capgo/capacitor-audio-recorder',
+    author: 'github.com/Cap-go',
+    description: 'Record audio on iOS, Android, and Web with simple controls and formats',
+    href: 'https://github.com/Cap-go/capacitor-audio-recorder/',
+    title: 'Audio Recorder',
+    icon: MicrophoneIcon,
+  },
+  {
+    name: '@capgo/capacitor-share-target',
+    author: 'github.com/Cap-go',
+    description: 'Receive shared content from other apps - text, images, and files',
+    href: 'https://github.com/Cap-go/capacitor-share-target/',
+    title: 'Share Target',
+    icon: ShareIcon,
+  },
+  {
+    name: '@capgo/capacitor-realtimekit',
+    author: 'github.com/Cap-go',
+    description: 'Cloudflare Calls integration with built-in UI for video meetings and real-time communication',
+    href: 'https://github.com/Cap-go/capacitor-realtimekit/',
+    title: 'RealtimeKit',
+    icon: VideoCameraIcon,
   },
 ]
