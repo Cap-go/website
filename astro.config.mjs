@@ -493,6 +493,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Pedometer',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/pedometer/' },
+                { label: 'Getting started', link: '/docs/plugins/pedometer/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Persistent Account',
               items: [{ label: 'Overview', link: '/docs/plugins/persistent-account/' }],
               collapsed: true,

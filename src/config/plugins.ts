@@ -569,4 +569,12 @@ export const actions = [
     title: 'RealtimeKit',
     icon: VideoCameraIcon,
   },
+  {
+    name: '@capgo/capacitor-pedometer',
+    author: 'github.com/Cap-go',
+    description: 'Track steps, distance, pace, cadence, and floors with device pedometer sensors',
+    href: 'https://github.com/Cap-go/capacitor-pedometer/',
+    title: 'Pedometer',
+    icon: SignalIcon,
+  },
 ]
