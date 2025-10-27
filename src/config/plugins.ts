@@ -33,7 +33,9 @@ import ShieldCheckIcon from 'astro-heroicons/mini/ShieldCheck.astro'
 import SignalIcon from 'astro-heroicons/mini/Signal.astro'
 import SpeakerWaveIcon from 'astro-heroicons/mini/SpeakerWave.astro'
 import SpeakerXMarkIcon from 'astro-heroicons/mini/SpeakerXMark.astro'
+import TagIcon from 'astro-heroicons/mini/Tag.astro'
 import UserCircleIcon from 'astro-heroicons/mini/UserCircle.astro'
+import UserGroupIcon from 'astro-heroicons/mini/UserGroup.astro'
 import VideoCameraIcon from 'astro-heroicons/mini/VideoCamera.astro'
 import WrenchIcon from 'astro-heroicons/mini/Wrench.astro'
 import ChatBubbleOvalLeftIcon from 'astro-heroicons/mini/ChatBubbleOvalLeft.astro'
@@ -499,5 +501,21 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-ibeacon/',
     title: 'iBeacon',
     icon: RadioIcon,
+  },
+  {
+    name: '@capgo/capacitor-nfc',
+    author: 'github.com/Cap-go',
+    description: 'Native NFC tag discovery, reading and writing for Capacitor apps on iOS and Android',
+    href: 'https://github.com/Cap-go/capacitor-nfc/',
+    title: 'NFC',
+    icon: TagIcon,
+  },
+  {
+    name: '@capgo/capacitor-android-age-signals',
+    author: 'github.com/Cap-go',
+    description: 'Google Play Age Signals API wrapper - detect supervised accounts and verified users',
+    href: 'https://github.com/Cap-go/capacitor-android-age-signals/',
+    title: 'Age Signals',
+    icon: UserGroupIcon,
   },
 ]

@@ -557,6 +557,22 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'NFC',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/nfc/' },
+                { label: 'Getting started', link: '/docs/plugins/nfc/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Age Signals',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/age-signals/' },
+                { label: 'Getting started', link: '/docs/plugins/age-signals/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: '👋 Get a custom plugin',
               link: '/consulting/',
             },
