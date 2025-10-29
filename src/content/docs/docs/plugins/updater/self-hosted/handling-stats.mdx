@@ -63,18 +63,19 @@ Here is an example of code in JavaScript to save the stats of the plugin:
 ```typescript
 interface AppInfos {
   version_name: string
-  action: 'delete' |
+  action: 'ping' |
+          'delete' |
           'reset' |
           'set' |
+          'get' |
           'set_fail' |
           'update_fail' |
+          'download_fail' |
           'windows_path_fail' |
           'canonical_path_fail' |
           'directory_path_fail' |
           'unzip_fail' |
           'low_mem_fail' |
-          'download_fail' |
-          'update_fail' |
           'download_10' |
           'download_20' |
           'download_30' |
@@ -84,7 +85,34 @@ interface AppInfos {
           'download_70' |
           'download_80' |
           'download_90' |
-          'download_complete'
+          'download_complete' |
+          'decrypt_fail' |
+          'app_moved_to_foreground' |
+          'app_moved_to_background' |
+          'uninstall' |
+          'needPlanUpgrade' |
+          'missingBundle' |
+          'noNew' |
+          'disablePlatformIos' |
+          'disablePlatformAndroid' |
+          'disableAutoUpdateToMajor' |
+          'cannotUpdateViaPrivateChannel' |
+          'disableAutoUpdateToMinor' |
+          'disableAutoUpdateToPatch' |
+          'channelMisconfigured' |
+          'disableAutoUpdateMetadata' |
+          'disableAutoUpdateUnderNative' |
+          'disableDevBuild' |
+          'disableEmulator' |
+          'cannotGetBundle' |
+          'checksum_fail' |
+          'NoChannelOrOverride' |
+          'setChannel' |
+          'getChannel' |
+          'rateLimited' |
+          'disableAutoUpdate' |
+          'InvalidIp' |
+          'blocked_by_server_url'
   version_build: string
   version_code: string
   version_os: string
@@ -132,15 +160,53 @@ This endpoint should return a JSON:
 
 ## Actions
 
-* **delete**: when a bundle is deleted locally
-* **reset**: when the app reset to the built-in bundle
-* **set**: when app sets a new bundle
-* **set_fail**: when app couldn't find the ID of the bundle set
-* **update_fail**: send after the delay and `notifyAppReady` never called
-* **download_fail**: when download never finished
+### Sent from the device
+
+* **ping**: Internal test action used to verify the stats system is working correctly
+* **get**: Info for downloading the new version has been sent to the device
+* **delete**: When a bundle is deleted locally
+* **reset**: When the app reset to the built-in bundle
+* **set**: When app sets a new bundle
+* **set_fail**: When app couldn't find the ID of the bundle set
+* **update_fail**: Send after the delay and `notifyAppReady` never called
+* **download_fail**: When download never finished
 * **download_complete**: When download finish
-* **download_xx**: Send every 10% of download ex : download_20, download_70
-* **update_fail**: when the bundle fails to do `notifyAppReady` in the timeframe
+* **download_xx**: Send every 10% of download ex: download_10, download_20, download_70
+* **windows_path_fail**: The zip has files who contain windows path who are illegal
+* **canonical_path_fail**: The path of files is not canonical
+* **directory_path_fail**: There is an error in the path of zip files
+* **unzip_fail**: Unzip failed
+* **low_mem_fail**: Download failed because of low memory in the device
+* **decrypt_fail**: Failed to decrypt the downloaded bundle
+* **checksum_fail**: The new bundle failed to validate the checksum
+* **app_moved_to_foreground**: The application entered the foreground state
+* **app_moved_to_background**: The application entered the background state
+* **getChannel**: The current channel for the device was queried
+* **setChannel**: A channel was successfully set for the device
+* **uninstall**: The application was uninstalled or Capgo data cleared
+* **blocked_by_server_url**: The update was blocked by the server URL configuration
+
+### Sent from the backend
+
+* **InvalidIp**: The user is located in a Google data center and the update is less than 4 hours old
+* **needPlanUpgrade**: Indicates that you have reached the limit of your plan
+* **noNew**: The device has the latest available version
+* **disablePlatformIos**: The device is on the iOS platform, but that is disabled in the channel settings
+* **disablePlatformAndroid**: The device is on the Android platform, but that is disabled in the channel settings
+* **disableAutoUpdate**: Automatic updates are disabled in channel settings
+* **disableAutoUpdateUnderNative**: The device has version that is higher than the channel update version
+* **disableAutoUpdateToMajor**: Automatic updates to major versions are disabled in channel settings
+* **disableAutoUpdateToMinor**: Automatic updates to minor versions are disabled in channel settings
+* **disableAutoUpdateToPatch**: Automatic updates to patch versions are disabled in channel settings
+* **disableDevBuild**: The device has a dev build, but that is disabled in the channel settings
+* **disableEmulator**: The device is an emulator, but that is disabled in the channel settings
+* **disableAutoUpdateMetadata**: Automatic updates based on metadata changes are disabled
+* **cannotGetBundle**: An error occurred while trying to retrieve the bundle information
+* **cannotUpdateViaPrivateChannel**: Device attempted an update via a private channel it doesn't have access to
+* **channelMisconfigured**: The channel configuration is invalid or incomplete
+* **missingBundle**: The requested bundle was not found on the server
+* **NoChannelOrOverride**: No channel is set for the device and no override is provided
+* **rateLimited**: The device has been rate limited due to excessive requests
 
 <LinkCard
 	title="Handling Updates"

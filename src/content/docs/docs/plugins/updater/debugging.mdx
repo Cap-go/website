@@ -31,12 +31,14 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **disableAutoUpdateToPatch**                   | Automatic updates to patch versions are disabled in channel settings.                                                                                             |
 | **missingBundle**                              | The requested bundle was not found on the server.                                                                                                                   |
 | **NoChannelOrOverride**                        | No channel is set for the device and no override is provided.                                                                                                     |
+| **rateLimited**                                | The device has been rate limited due to excessive requests.                                                                                                        |
 
 
 ### Sent from the device
 
 | code  | Description                                                                       |
 | --------------------- | --------------------------------------------------------------------------------- |
+| **ping**              | Internal test action used to verify the stats system is working correctly.        |
 | **get**               | Info for downloading the new version has been sent to the device.                 |
 | **delete**            | One bundle has been deleted on the device.                                        |
 | **set**               | A bundle has been set on the device.                                              |
@@ -58,6 +60,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **getChannel**          | The current channel for the device was queried.                                   |
 | **setChannel**          | A channel was successfully set for the device.                                    |
 | **uninstall**           | The application was uninstalled or Capgo data cleared.                            |
+| **blocked_by_server_url** | The update was blocked by the server URL configuration.                         |
 
 ### Bundle status
 
