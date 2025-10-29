@@ -308,6 +308,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Fast SQL',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/fast-sql/' },
+                { label: 'Getting started', link: '/docs/plugins/fast-sql/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'FFmpeg',
               items: [
                 { label: 'Overview', link: '/docs/plugins/ffmpeg/' },

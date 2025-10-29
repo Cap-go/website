@@ -577,4 +577,12 @@ export const actions = [
     title: 'Pedometer',
     icon: SignalIcon,
   },
+  {
+    name: '@capgo/capacitor-fast-sql',
+    author: 'github.com/Cap-go',
+    description: 'High-performance native SQLite with custom protocol for efficient sync operations and IndexedDB replacement',
+    href: 'https://github.com/Cap-go/capacitor-fast-sql/',
+    title: 'Fast SQL',
+    icon: CircleStackIcon,
+  },
 ]
