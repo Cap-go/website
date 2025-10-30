@@ -9,7 +9,7 @@ import { Steps } from '@astrojs/starlight/components';
 
 Getting your app approved on the App Store requires careful attention to Apple's guidelines, especially when implementing in-app purchases and subscriptions. This guide covers everything you need to know to pass review on your first submission.
 
-![iOS App Store Review Process](/native-purchases/review-guides/ios-review-hero.png)
+![iOS App Store Review Process](/native-purchases/review-guides/ios-review-hero.webp)
 
 ## In-App Purchase Requirements
 
@@ -43,7 +43,7 @@ Even a $1 discrepancy between store listing ($4.99) and app ($5.99) will trigger
 - No auto-defaulting to premium tiers through UI tricks
 - Easy-to-locate cancellation instructions
 
-![UI Design Dos and Don'ts](/native-purchases/review-guides/ui-design-dos-donts.jpg)
+![UI Design Dos and Don'ts](/native-purchases/review-guides/ui-design-dos-donts.webp)
 
 **Example of Compliant UI:**
 ```typescript
@@ -129,7 +129,7 @@ async function restorePurchases() {
 - Description mentions functionality that doesn't exist
 - Pricing in metadata differs from in-app pricing
 
-![Metadata Checklist](/native-purchases/review-guides/metadata-checklist.jpg)
+![Metadata Checklist](/native-purchases/review-guides/metadata-checklist.webp)
 
 **Prevention:**
 ```typescript
@@ -168,9 +168,9 @@ Update your `Info.plist` with clear explanations:
 - "Unlimited" features that have hidden limits
 - Fake urgency tactics ("Only 2 spots left!")
 
-![Description Guidelines Examples](/native-purchases/review-guides/description-guidelines-1.jpg)
+![Description Guidelines Examples](/native-purchases/review-guides/description-guidelines-1.webp)
 
-![Additional Description Guidelines](/native-purchases/review-guides/description-guidelines-2.jpg)
+![Additional Description Guidelines](/native-purchases/review-guides/description-guidelines-2.webp)
 
 **Prevention:**
 - Be specific and factual in descriptions
@@ -256,7 +256,7 @@ Inaccurate privacy labels are a common rejection reason in 2025. Audit your data
 
 ## Pre-Submission Checklist
 
-![Pre-Submission Checklist](/native-purchases/review-guides/pre-submission-checklist.jpg)
+![Pre-Submission Checklist](/native-purchases/review-guides/pre-submission-checklist.webp)
 
 <Steps>
 
@@ -321,7 +321,7 @@ Inaccurate privacy labels are a common rejection reason in 2025. Audit your data
 
 ## Review Timeline
 
-![App Store Review Timeline](/native-purchases/review-guides/review-timeline.jpg)
+![App Store Review Timeline](/native-purchases/review-guides/review-timeline.webp)
 
 **Standard Review:** 24-48 hours
 **Peak Periods:** 3-5 days (App Store holiday releases)
@@ -483,7 +483,7 @@ function SubscriptionTerms() {
 
 If you believe the rejection is incorrect:
 
-![App Store Clarification Process](/native-purchases/review-guides/clarification-process.jpg)
+![App Store Clarification Process](/native-purchases/review-guides/clarification-process.webp)
 
 1. Click "Appeal" in App Store Connect
 2. Provide clear evidence:
@@ -493,7 +493,7 @@ If you believe the rejection is incorrect:
 3. Be professional and factual
 4. Include test account if functionality is hard to find
 
-![Request for Documents Example](/native-purchases/review-guides/request-documents.jpg)
+![Request for Documents Example](/native-purchases/review-guides/request-documents.webp)
 
 ## Additional Resources
 
@@ -508,3 +508,15 @@ If you're still having issues:
 - Review the [Native Purchases documentation](/docs/plugins/native-purchases/getting-started/)
 - Check [common troubleshooting issues](/docs/plugins/native-purchases/getting-started/#troubleshooting)
 - Contact Apple Developer Support for guideline clarifications
+
+### Need Expert Help?
+
+Struggling with app review or need personalized assistance? **[Book a consultation call with our team](https://cal.com/team/capgo/capacitor-consulting-services)** for dedicated support with:
+
+- IAP implementation review and optimization
+- App Store review preparation and strategy
+- Submission checklist review
+- Rejection resolution and appeals
+- Complete testing and validation
+
+Our experts have successfully helped hundreds of apps pass review!
