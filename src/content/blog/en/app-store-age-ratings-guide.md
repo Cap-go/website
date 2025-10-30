@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-29T00:00:00.000Z
-updated_at: 2025-10-30T04:17:55.000Z
+updated_at: 2025-10-30T04:34:11.000Z
 head_image: /apple_appstore.webp
 head_image_alt: App Store Age Ratings Guide
 keywords: age ratings, app store, google play, content ratings, IARC, parental controls, app classification, ios age ratings, android age ratings
