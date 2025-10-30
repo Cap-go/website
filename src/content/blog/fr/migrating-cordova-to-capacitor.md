@@ -83,7 +83,7 @@ Capgo est un service basé sur le cloud qui vous permet de déployer des mises �
 ### Comment mettre en œuvre des mises à jour en direct Capgo
 
 Pour mettre en œuvre des mises à jour en direct Capgo dans votre projet Capacitor, suivez ces étapes :
-- Inscrivez-vous pour un [compte Capgo](https://web.capgo.app/).
+- Inscrivez-vous pour un [compte Capgo](https://console.capgo.app/).
 - Installez le SDK Capgo dans votre projet.
 - Configurez votre application pour vérifier les mises à jour au démarrage ou à des intervalles spécifiques.
 - Déployez des mises à jour vers votre application via le tableau de bord Capgo.

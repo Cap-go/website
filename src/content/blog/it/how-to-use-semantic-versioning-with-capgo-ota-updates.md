@@ -237,7 +237,7 @@ Il Semantic Versioning, combinato con Capgo, ha reso gli aggiornamenti OTA per l
 
 Ecco cosa dicono gli sviluppatori:
 
-> "Abbiamo implementato [gli aggiornamenti OTA di Capgo](https://web.capgo.app/resend_email) in produzione per la nostra base utenti di +5000. Stiamo osservando un funzionamento molto fluido, quasi tutti i nostri utenti sono aggiornati entro pochi minuti dalla distribuzione dell'OTA su @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Abbiamo implementato [gli aggiornamenti OTA di Capgo](https://console.capgo.app/resend_email) in produzione per la nostra base utenti di +5000. Stiamo osservando un funzionamento molto fluido, quasi tutti i nostri utenti sono aggiornati entro pochi minuti dalla distribuzione dell'OTA su @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 Il sistema di versioning MAJOR.MINOR.PATCH rende facile comunicare cambiamenti importanti, nuove funzionalità e correzioni di bug [\[5\]](https://aws.amazon.com/blogs/devops/using-semantic-versioning-to-simplify-release-management/). Questo è particolarmente utile per i team che gestiscono diverse release ogni settimana attraverso la piattaforma di Capgo.
 

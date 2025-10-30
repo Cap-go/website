@@ -46,7 +46,7 @@ Voici un guide rapide pour structurer votre correctif :
 
 Avec la capacité de mise à jour instantanée de Capgo, vous pouvez vous concentrer sur la correction du bug sans vous soucier d'inclure des modifications non liées. Cette méthode s'est révélée efficace, comme le souligne colenso :
 
-> "Nous avons déployé les [mises à jour OTA de Capgo](https://web.capgo.app/resend_email) en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour quelques minutes après le déploiement de l'OTA sur @Capgo" [\[1\]](https://capgo.app/).
+> "Nous avons déployé les [mises à jour OTA de Capgo](https://console.capgo.app/resend_email) en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour quelques minutes après le déploiement de l'OTA sur @Capgo" [\[1\]](https://capgo.app/).
 
 ### Tester sur votre appareil
 

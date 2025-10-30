@@ -85,7 +85,7 @@ Berikut saran rencana peluncuran bertahap:
 
 ### Pelacakan Kemajuan
 
-Antarmuka web Capgo memudahkan pemantauan pembaruan secara real-time, melacak distribusi dan adopsi pengguna [\[1\]](https://capgo.app/) Perhatikan metrik berikut saat melakukan peluncuran:
+Antarmuka console.capgo memudahkan pemantauan pembaruan secara real-time, melacak distribusi dan adopsi pengguna [\[1\]](https://capgo.app/) Perhatikan metrik berikut saat melakukan peluncuran:
 
 | Kategori Metrik | Indikator Utama | Pemicu Tindakan |
 | --- | --- | --- |

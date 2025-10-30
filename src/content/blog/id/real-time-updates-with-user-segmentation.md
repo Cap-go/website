@@ -48,7 +48,7 @@ Menggunakan analitik Capgo, Anda dapat melacak tingkat keberhasilan pembaruan da
 
 Setelah Anda mengumpulkan data, langkah selanjutnya adalah mengelompokkan pengguna ke dalam segmen menggunakan sistem channel Capgo. Ini memungkinkan pengembang untuk mengelola pembaruan dan menguji fitur dengan presisi.
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) dalam produksi untuk basis pengguna kami sebanyak 5.000. Kami melihat operasi yang sangat lancar; hampir semua pengguna kami telah diperbarui dalam hitungan menit setelah OTA diimplementasikan ke @Capgo." – colenso, @colenso [\[1\]](https://capgo.app/)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) dalam produksi untuk basis pengguna kami sebanyak 5.000. Kami melihat operasi yang sangat lancar; hampir semua pengguna kami telah diperbarui dalam hitungan menit setelah OTA diimplementasikan ke @Capgo." – colenso, @colenso [\[1\]](https://capgo.app/)
 
 Pengembang dapat mengorganisir pengguna ke dalam kategori seperti beta tester, power user, pengguna baru, atau akun perusahaan. Segmentasi ini membantu dalam pengujian pembaruan, peluncuran bertahap, atau menyesuaikan fitur untuk grup tertentu.
 

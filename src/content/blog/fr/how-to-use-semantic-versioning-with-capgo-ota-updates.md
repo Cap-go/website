@@ -277,7 +277,7 @@ Le versionnement sémantique, combiné à Capgo, a rendu les mises à jour OTA p
 
 Voici ce que disent les développeurs :
 
-> "Nous avons déployé les [mises à jour OTA Capgo](https://web.capgo.app/resend_email) en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement OTA sur @Capgo" - colenso [\[1\]](https://capgo.app/)
+> "Nous avons déployé les [mises à jour OTA Capgo](https://console.capgo.app/resend_email) en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement OTA sur @Capgo" - colenso [\[1\]](https://capgo.app/)
 
 Le système de versionnement MAJOR.MINOR.PATCH facilite la communication des changements majeurs, des nouvelles fonctionnalités et des corrections de bugs [\[5\]](https://aws.amazon.com/blogs/devops/using-semantic-versioning-to-simplify-release-management/). C'est particulièrement utile pour les équipes gérant plusieurs versions chaque semaine via la plateforme Capgo.
 

@@ -153,7 +153,7 @@ Integrare Capgo nella tua app Quasar è un processo semplice che ti permette di 
 
 **Registrati e Accedi alla Dashboard di Capgo**:
 
-È il momento di registrarti e ottenere la tua chiave API per caricare la tua prima versione! Inizia [registrandoti per un account Capgo](https://web.capgo.app/register/).
+È il momento di registrarti e ottenere la tua chiave API per caricare la tua prima versione! Inizia [registrandoti per un account Capgo](https://console.capgo.app/register/).
 
 **Installa l'SDK di Capgo**:
 
@@ -173,7 +173,7 @@ Questo dirà al plugin nativo che l'installazione è riuscita.
 
 **Accedi a Capgo CLOUD**:
 
-Prima, usa la [chiave API](https://web.capgo.app/dashboard/apikeys/) `all` presente nel tuo account per accedere con il CLI:
+Prima, usa la [chiave API](https://console.capgo.app/dashboard/apikeys/) `all` presente nel tuo account per accedere con il CLI:
 
     `npx @capgo/cli@latest login LA_TUA_CHIAVE`
 
@@ -196,7 +196,7 @@ npx @capgo/cli@latest bundle upload`
 
 Per default, il nome della versione sarà quello nel tuo file package.json.
 
-Controlla in [Capgo](https://web.capgo.app/login/) se la build è presente.
+Controlla in [Capgo](https://console.capgo.app/login/) se la build è presente.
 
 Puoi anche testarla con la mia [app mobile sandbox](https://capgo.app/app_mobile/).
 

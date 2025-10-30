@@ -193,7 +193,7 @@ Dengan langkah-langkah ini, sistem update OTA Anda siap digunakan. Jelajahi peng
 
 ## Pengaturan Lanjutan
 
-Tingkatkan pengaturan [update OTA Capgo](https://web.capgo.app/resend_email) Anda dengan langkah-langkah keamanan tambahan dan konfigurasi pembaruan yang fleksibel. Opsi ini memastikan pengalaman pembaruan yang aman dan lancar sambil memenuhi pedoman app store.
+Tingkatkan pengaturan [update OTA Capgo](https://console.capgo.app/resend_email) Anda dengan langkah-langkah keamanan tambahan dan konfigurasi pembaruan yang fleksibel. Opsi ini memastikan pengalaman pembaruan yang aman dan lancar sambil memenuhi pedoman app store.
 
 ### Fitur Keamanan
 

@@ -64,7 +64,7 @@ Les stores d'applications appliquent ces règles pour protéger les utilisateurs
 
 À cause de ces contrôles, les développeurs se tournent vers des méthodes alternatives pour suivre le besoin de mises à jour plus rapides. Capgo, par exemple, a livré 23.5 millions de mises à jour OTA conformes aux règles des stores d'applications [\[1\]](https://capgo.app/), prouvant la demande de solutions plus rapides.
 
-> "Nous avons déployé des [mises à jour OTA Capgo](https://web.capgo.app/resend_email) en production pour notre base d'utilisateurs de plus de 5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour dans les minutes qui suivent le déploiement de la mise à jour OTA sur @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Nous avons déployé des [mises à jour OTA Capgo](https://console.capgo.app/resend_email) en production pour notre base d'utilisateurs de plus de 5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour dans les minutes qui suivent le déploiement de la mise à jour OTA sur @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 Les systèmes OTA modernes offrent un moyen de pousser des mises à jour critiques rapidement sans enfreindre les directives des stores d'applications. Cette approche démontre comment les développeurs peuvent réaliser un déploiement plus rapide tout en restant conformes. Ensuite, nous approfondirons comment les mises à jour OTA offrent cette agilité.
 

@@ -188,7 +188,7 @@ Par défaut : `undefined`
 Lorsqu'une mise à jour du store se produit, désactive la réinitialisation forcée vers la version native
 :::
 
-Il existe beaucoup plus de paramètres disponibles uniquement sur l'[application web](https://web.capgo.app/login)
+Il existe beaucoup plus de paramètres disponibles uniquement sur l'[application web](https://console.capgo.app/login)
 
 Pour configurer le plugin, utilisez ces paramètres :
 

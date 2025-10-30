@@ -139,7 +139,7 @@ Capgo funciona sin problemas con plataformas CI/CD populares como GitHub Actions
 
 Un equipo compartió su experiencia desplegando para miles de usuarios:
 
-> "Implementamos [actualizaciones OTA de Capgo](https://web.capgo.app/resend_email) en producción para nuestra base de usuarios de más de 5,000. Estamos viendo una operación muy fluida; casi todos nuestros usuarios están al día en minutos después de que se desplegó OTA en @Capgo."
+> "Implementamos [actualizaciones OTA de Capgo](https://console.capgo.app/resend_email) en producción para nuestra base de usuarios de más de 5,000. Estamos viendo una operación muy fluida; casi todos nuestros usuarios están al día en minutos después de que se desplegó OTA en @Capgo."
 
 Por otro lado, Appflow adopta un enfoque más centralizado que requiere que los equipos se adapten a su ecosistema.
 

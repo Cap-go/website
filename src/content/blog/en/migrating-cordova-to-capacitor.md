@@ -80,7 +80,7 @@ Capgo is a cloud-based service that allows you to deploy live updates to your Ca
 ### How to Implement Capgo Live Updates
 
 To implement Capgo live updates in your Capacitor project, follow these steps:
-- Sign up for a [Capgo account](https://web.capgo.app/).
+- Sign up for a [Capgo account](https://console.capgo.app/).
 - Install the Capgo SDK in your project.
 - Configure your app to check for updates on startup or at specific intervals.
 - Deploy updates to your app using the Capgo dashboard.

@@ -83,7 +83,7 @@ CLI가 몇 가지 질문을 할 것이며, 시작은 앱 이름과 앱에 사용
 
 ## Capgo 구성
 
-앱이 [Capgo](https://web.capgo.app/) 통합을 준비하면, 회원가입하고 첫 번째 버전을 업로드할 API 키를 가져올 시간입니다! [Capgo 계정 등록](https://web.capgo.app/register/)으로 시작하세요.
+앱이 [Capgo](https://console.capgo.app/) 통합을 준비하면, 회원가입하고 첫 번째 버전을 업로드할 API 키를 가져올 시간입니다! [Capgo 계정 등록](https://console.capgo.app/register/)으로 시작하세요.
 
 Capgo에 로그인 한 후, 계정 페이지로 이동하여 API 키를 클릭한 다음 '쓰기' 키를 클릭하여 클립보드에 복사합니다.
 
@@ -110,7 +110,7 @@ CapacitorUpdater.notifyAppReady()
 
 ### Capgo CLOUD에 로그인
 
-먼저 계정에 있는 `all` [apikey](https://web.capgo.app/dashboard/apikeys/)를 사용하여 CLI로 로그인하세요:
+먼저 계정에 있는 `all` [apikey](https://console.capgo.app/dashboard/apikeys/)를 사용하여 CLI로 로그인하세요:
 
 ```shell
 npx @capgo/cli@latest login YOURKEY
@@ -133,7 +133,7 @@ npx @capgo/cli@latest bundle upload --channel production
 
 기본적으로 버전 이름은 `package.json` 파일의 이름이 됩니다.
 
-[Capgo](https://web.capgo.app/)에서 빌드가 존재하는지 확인하세요.
+[Capgo](https://console.capgo.app/)에서 빌드가 존재하는지 확인하세요.
 
 저의 [모바일 샌드박스 앱](https://capgo.app/app_mobile/).으로 테스트할 수 있습니다.
 

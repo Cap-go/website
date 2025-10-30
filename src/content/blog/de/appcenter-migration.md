@@ -82,7 +82,7 @@ So sollte die Verzeichnisstruktur der App aussehen:
 
 ## Capgo-Konfiguration
 
-Wenn Ihre App bereit für die [Capgo](https://web.capgo.app/)-Integration ist, ist es Zeit, sich anzumelden und Ihren API-Schlüssel zu erhalten, um Ihre erste Version hochzuladen! Beginnen Sie mit der [Anmeldung für ein Capgo-Konto](/register/)
+Wenn Ihre App bereit für die [Capgo](https://console.capgo.app/)-Integration ist, ist es Zeit, sich anzumelden und Ihren API-Schlüssel zu erhalten, um Ihre erste Version hochzuladen! Beginnen Sie mit der [Anmeldung für ein Capgo-Konto](/register/)
 
 Sobald Sie bei Capgo eingeloggt sind, navigieren Sie zur Kontoseite, klicken Sie dann auf API-Schlüssel und dann auf den 'write'-Schlüssel, um ihn in die Zwischenablage zu kopieren
 

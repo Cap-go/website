@@ -114,7 +114,7 @@ Benutzerdefinierte Komponenten sollten mit Flexibilität im Hinterkopf gestaltet
 
 Sobald Ihre Komponenten gestaltet sind, ist es wichtig, sie für die Leistung über alle Plattformen hinweg zu optimieren. Eine nahtlose Benutzererfahrung hängt von effizienter Leistung ab.
 
-> "Wir haben [Capgo OTA-Updates](https://web.capgo.app/resend_email) in der Produktion für unsere Nutzerbasis von +5000 ausgerollt. Wir sehen einen sehr reibungslosen Betrieb, fast alle unsere Nutzer sind innerhalb von Minuten nach dem OTA-Deployment bei @Capgo auf dem neuesten Stand." – colenso [\[1\]](https://capgo.app/)
+> "Wir haben [Capgo OTA-Updates](https://console.capgo.app/resend_email) in der Produktion für unsere Nutzerbasis von +5000 ausgerollt. Wir sehen einen sehr reibungslosen Betrieb, fast alle unsere Nutzer sind innerhalb von Minuten nach dem OTA-Deployment bei @Capgo auf dem neuesten Stand." – colenso [\[1\]](https://capgo.app/)
 
 Techniken wie Lazy Loading, virtuelles Scrollen und hardwarebeschleunigte Animationen können Bundle-Größen deutlich reduzieren und die Reaktionsfähigkeit verbessern. Für kritische Updates ist Capgos Live-Update-System ein zuverlässiges Tool, wie Rodrigo Mantica hervorhebt:
 

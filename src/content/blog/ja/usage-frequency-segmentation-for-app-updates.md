@@ -130,7 +130,7 @@ Capgoは、エンドツーエンドの暗号化、バージョン管理、ロー
 -   **ユーザーフィードバックを分析し、各セグメントの特定のニーズを理解する。**
 -   **Capgoのロールバック機能を活用して、問題が発生した際の中断を最小限に抑える。**
 
-> "我々は、+5000のユーザー基盤に対して[Capgo OTA更新](https://web.capgo.app/resend_email)を本番環境で展開しました。ほぼすべてのユーザーがOTAが@Capgoに展開される数分以内に更新される非常にスムーズな動作を見ています。" - colenso, @colenso [\[2\]](https://capgo.app)
+> "我々は、+5000のユーザー基盤に対して[Capgo OTA更新](https://console.capgo.app/resend_email)を本番環境で展開しました。ほぼすべてのユーザーがOTAが@Capgoに展開される数分以内に更新される非常にスムーズな動作を見ています。" - colenso, @colenso [\[2\]](https://capgo.app)
 
 ## 概要
 

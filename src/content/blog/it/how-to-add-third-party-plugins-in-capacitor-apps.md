@@ -227,7 +227,7 @@ Aprovecha `async/await` para manejar las funciones de los complementos con una g
 
 Prueba la funcionalidad del complemento en cada etapa de implementación para asegurar la fiabilidad.
 
-> "Lanzamos actualizaciones [Capgo OTA](https://web.capgo.app/resend_email) en producción para nuestra base de usuarios de más de 5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en unos minutos después de que se implementa la OTA en @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Lanzamos actualizaciones [Capgo OTA](https://console.capgo.app/resend_email) en producción para nuestra base de usuarios de más de 5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en unos minutos después de que se implementa la OTA en @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 | Fase de Pruebas del Complemento | Mejores Prácticas | Impacto |
 | --- | --- | --- |

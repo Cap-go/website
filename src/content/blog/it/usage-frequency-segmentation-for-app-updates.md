@@ -133,7 +133,7 @@ Para aprovechar al máximo tus esfuerzos de segmentación:
 -   **Analiza la retroalimentación de los usuarios** para comprender las necesidades específicas de cada segmento.
 -   **Aprovecha la función de retroceso de Capgo** para minimizar la interrupción cuando surjan problemas.
 
-> "Implementamos [actualizaciones OTA de Capgo](https://web.capgo.app/resend_email) en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy suave, casi todos nuestros usuarios están actualizados en minutos después de que se despliega la OTA a @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
+> "Implementamos [actualizaciones OTA de Capgo](https://console.capgo.app/resend_email) en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy suave, casi todos nuestros usuarios están actualizados en minutos después de que se despliega la OTA a @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
 
 ## Resumen
 

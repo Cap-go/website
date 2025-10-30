@@ -171,7 +171,7 @@ Setelah setup, fokus beralih ke pengelolaan versi aplikasi secara strategis.
 
 Manajemen versi yang efektif sangat penting untuk pembaruan OTA yang lancar. Berikut beberapa praktik terbaik:
 
--   **Pelacakan Versi**: Gunakan antarmuka web Capgo untuk memantau distribusi pembaruan.
+-   **Pelacakan Versi**: Gunakan antarmuka console.capgo untuk memantau distribusi pembaruan.
 -   **Peluncuran Bertahap**: Uji pembaruan dengan grup kecil sebelum rilis skala penuh.
 -   **Kompatibilitas Versi**: Pastikan pembaruan OTA sesuai dengan versi app store yang sesuai.
 

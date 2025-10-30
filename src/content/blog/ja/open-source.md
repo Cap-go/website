@@ -136,7 +136,7 @@ next_blog: ''
 
 これらはすべて、Capgoで遵守する原則です！私たちは、Capacitorアプリのライブ更新システムとして、Capacitorアプリをライブ更新することを使命としています。アプリを再インストールする必要なく、ユーザーに更新を展開することを可能にします。私たちはクラウドベースのサービスですが、自己ホスティングも可能です。
 
-ぜひ、自分で試してみませんか？ [無料版を試す](https://web.capgo.app/register/)と、[常に進化するオープンソースプロジェクトに貢献する](https://github.com/Cap-go/)ことをお勧めします - ぜひご参加ください！
+ぜひ、自分で試してみませんか？ [無料版を試す](https://console.capgo.app/register/)と、[常に進化するオープンソースプロジェクトに貢献する](https://github.com/Cap-go/)ことをお勧めします - ぜひご参加ください！
 
 <div class="mx-auto">
   <img src="/capgo_banner.webp" alt="capgo_banner">

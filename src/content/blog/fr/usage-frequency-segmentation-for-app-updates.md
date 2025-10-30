@@ -135,7 +135,7 @@ Pour tirer le meilleur parti de vos efforts de segmentation :
 - **Analysez les retours des utilisateurs** pour comprendre les besoins spécifiques de chaque segment.
 - **Profitez de la fonctionnalité de retour de Capgo** pour minimiser les perturbations en cas de problème.
 
-> "Nous avons déployé des [mises à jour OTA Capgo](https://web.capgo.app/resend_email) en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour dans les minutes suivant le déploiement de l'OTA à @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
+> "Nous avons déployé des [mises à jour OTA Capgo](https://console.capgo.app/resend_email) en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour dans les minutes suivant le déploiement de l'OTA à @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
 
 ## Résumé
 

@@ -189,7 +189,7 @@ With these steps, your OTA update system is ready to go. Explore advanced settin
 
 ## Advanced Settings
 
-Improve your [Capgo OTA update](https://web.capgo.app/resend_email) setup with added security measures and flexible update configurations. These options ensure a secure and smooth update experience while meeting app store guidelines.
+Improve your [Capgo OTA update](https://console.capgo.app/resend_email) setup with added security measures and flexible update configurations. These options ensure a secure and smooth update experience while meeting app store guidelines.
 
 ### Security Features
 

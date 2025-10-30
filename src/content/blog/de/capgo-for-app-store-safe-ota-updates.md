@@ -133,7 +133,7 @@ Die Wahl der richtigen [Update-Strategie](https://capgo.app/docs/plugin/cloud-mo
 
 | **Projektanforderung** | **Empfohlener Ansatz** | **Nachweis** |
 | --- | --- | --- |
-| Kritische Fehlerbehebungen | [Capgo OTA Updates](https://web.capgo.app/resend_email) | "Avoiding review for bugfix is golden" – Bessie Cooper [\[1\]](https://capgo.app/) |
+| Kritische Fehlerbehebungen | [Capgo OTA Updates](https://console.capgo.app/resend_email) | "Avoiding review for bugfix is golden" – Bessie Cooper [\[1\]](https://capgo.app/) |
 | Kostensensitive Projekte | Capgo (CI/CD-Integration für ~300$/Monat) | Spart Kosten im Vergleich zu anderen Alternativen [\[1\]](https://capgo.app/) |
 | Enterprise-Skalierung | Traditionell + OTA Hybrid | Über 9476M erfolgreiche Updates über 1.400 Produktions-Apps [\[1\]](https://capgo.app/) |
 

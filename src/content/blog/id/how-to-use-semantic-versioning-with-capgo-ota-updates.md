@@ -233,7 +233,7 @@ Versi Semantik, yang dikombinasikan dengan Capgo, telah membuat pembaruan OTA un
 
 Berikut adalah apa yang dikatakan pengembang:
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) di produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami diperbarui dalam waktu beberapa menit setelah OTA diterapkan di @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) di produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami diperbarui dalam waktu beberapa menit setelah OTA diterapkan di @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 Sistem penomoran versi MAJOR.MINOR.PATCH memudahkan untuk mengomunikasikan perubahan besar, fitur baru, dan perbaikan bug [\[5\]](https://aws.amazon.com/blogs/devops/using-semantic-versioning-to-simplify-release-management/). Ini sangat membantu untuk tim yang mengelola beberapa rilis setiap minggu melalui platform Capgo.
 

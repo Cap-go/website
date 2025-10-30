@@ -83,7 +83,7 @@ CLIはアプリ名から始まり、アプリに使用したいパッケージID
 
 ## Capgoの設定
 
-アプリが[Capgo](https://web.capgo.app/)統合の準備ができたら、サインアップしてAPIキーを取得し、最初のバージョンをアップロードする時です！まず、[Capgoアカウントにサインアップ](/register/)してください。
+アプリが[Capgo](https://console.capgo.app/)統合の準備ができたら、サインアップしてAPIキーを取得し、最初のバージョンをアップロードする時です！まず、[Capgoアカウントにサインアップ](/register/)してください。
 
 Capgoにログインしたら、アカウントページに移動してAPIキーをクリックし、'write'キーをクリックしてクリップボードにコピーしてください。
 
@@ -110,7 +110,7 @@ CapacitorUpdater.notifyAppReady()
 
 ### Capgo CLOUDへのログイン
 
-まず、アカウントに存在する`all` [apikey](https://web.capgo.app/dashboard/apikeys/)を使用してCLIでログインします：
+まず、アカウントに存在する`all` [apikey](https://console.capgo.app/dashboard/apikeys/)を使用してCLIでログインします：
 
 ```shell
 npx @capgo/cli@latest login YOURKEY
@@ -133,7 +133,7 @@ npx @capgo/cli@latest bundle upload --channel production
 
 デフォルトでは、バージョン名は`package.json`ファイルのものが使用されます。
 
-[Capgo](https://web.capgo.app/)でビルドが存在するか確認してください。
+[Capgo](https://console.capgo.app/)でビルドが存在するか確認してください。
 
 [モバイルサンドボックスアプリ](https://capgo.app/app_mobile/)でテストすることもできます。
 

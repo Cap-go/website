@@ -48,7 +48,7 @@ Mit den Analysen von Capgo können Sie die Erfolgsraten von Updates und das Benu
 
 Sobald Sie die Daten gesammelt haben, ist der nächste Schritt, Benutzer in Segmente mithilfe des Kanalsystems von Capgo zu gruppieren. Dies ermöglicht es Entwicklern, Updates zu verwalten und Funktionen präzise zu testen.
 
-> "Wir haben [Capgo OTA-Updates](https://web.capgo.app/resend_email) in der Produktion für unsere Benutzerbasis von 5.000 bereitgestellt. Wir sehen eine sehr reibungslose Operation; fast alle unsere Benutzer sind innerhalb von Minuten nach der Bereitstellung der OTA bei @Capgo auf dem neuesten Stand." – colenso, @colenso [\[1\]](https://capgo.app/)
+> "Wir haben [Capgo OTA-Updates](https://console.capgo.app/resend_email) in der Produktion für unsere Benutzerbasis von 5.000 bereitgestellt. Wir sehen eine sehr reibungslose Operation; fast alle unsere Benutzer sind innerhalb von Minuten nach der Bereitstellung der OTA bei @Capgo auf dem neuesten Stand." – colenso, @colenso [\[1\]](https://capgo.app/)
 
 Entwickler können Benutzer in Kategorien wie Beta-Tester, Power-User, neue Benutzer oder Unternehmenskonten organisieren. Diese Segmentierung hilft, Updates zu testen, sie schrittweise bereitzustellen oder Funktionen für spezifische Gruppen anzupassen.
 

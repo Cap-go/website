@@ -27,7 +27,7 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
             <h2 class="text-4xl font-bold text-gray-900">{m.register_title({}, { locale: Astro.locals.locale })}</h2>
             <p class="text-sm text-gray-500">
               {m.already_have_account({}, { locale: Astro.locals.locale })}
-              <a href="https://web.capgo.app/login/" target="_blank" class="text-gray-200 hover:underline">{m.sign_in({}, { locale: Astro.locals.locale })}</a>
+              <a href="https://console.capgo.app/login/" target="_blank" class="text-gray-200 hover:underline">{m.sign_in({}, { locale: Astro.locals.locale })}</a>
             </p>
           </div>
           <form id="registerForm" class="space-y-4 text-black">
@@ -265,6 +265,6 @@ const enableCaptcha = !!CLOUDFLARE_TURNSTILE_SITE_KEY
         last_name: lastName.value,
       })
     }
-    window.location.href = `https://web.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
+    window.location.href = `https://console.capgo.app/login/?access_token=${session.data.session?.access_token}&refresh_token=${session.data.session?.refresh_token}&to=/app`
   })
 </script>

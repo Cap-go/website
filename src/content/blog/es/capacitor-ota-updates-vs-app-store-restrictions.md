@@ -65,7 +65,7 @@ Las tiendas de aplicaciones hacen cumplir estas reglas para proteger a los usuar
 
 Debido a estos controles, los desarrolladores están recurriendo a métodos alternativos para mantenerse al día con la necesidad de actualizaciones más rápidas. Capgo, por ejemplo, ha entregado 23.5 millones de actualizaciones OTA que cumplen con las reglas de las tiendas de aplicaciones [\[1\]](https://capgo.app/), demostrando la demanda de soluciones más rápidas.
 
-> "Implementamos las [actualizaciones OTA de Capgo](https://web.capgo.app/resend_email) en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Implementamos las [actualizaciones OTA de Capgo](https://console.capgo.app/resend_email) en producción para nuestra base de usuarios de +5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 Los sistemas OTA modernos proporcionan una manera de enviar actualizaciones críticas rápidamente sin infringir las pautas de las tiendas de aplicaciones. Este enfoque demuestra cómo los desarrolladores pueden lograr una implementación más rápida mientras mantienen el cumplimiento. A continuación, profundizaremos en cómo las actualizaciones OTA ofrecen esta agilidad.
 

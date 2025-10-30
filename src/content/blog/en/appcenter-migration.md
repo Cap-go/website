@@ -83,7 +83,7 @@ Here is what the app’s directory structure should look like:
 
 ## Capgo Configuration
 
-With your app ready for [Capgo](https://web.capgo.app/) integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](/register/).
+With your app ready for [Capgo](https://console.capgo.app/) integration, it’s time to sign up, and get your API key to upload your first version! Begin by [signing up for a Capgo account](/register/).
 
 Once you’re logged into Capgo, navigate to the Account page then click on API key, then click on the 'write' key to copy it to your clipboard.
 
@@ -110,7 +110,7 @@ The Live Update feature works by using the installed [Capgo SDK](https://github.
 
 ### Login to Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
+First, use the `all` [apikey](https://console.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
 
 ```shell
 npx @capgo/cli@latest login YOURKEY
@@ -133,7 +133,7 @@ npx @capgo/cli@latest bundle upload --channel production
 
 By default, the version name will be the one in your `package.json` file.
 
-Check in [Capgo](https://web.capgo.app/) if the build is present.
+Check in [Capgo](https://console.capgo.app/) if the build is present.
 
 You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
 

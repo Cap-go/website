@@ -231,7 +231,7 @@ Manfaatkan `async/await` untuk menangani fitur plugin dengan manajemen kesalahan
 
 Uji fungsionalitas plugin di setiap tahap deployment untuk memastikan keandalan.
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) dalam produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami diperbarui dalam hitungan menit setelah OTA diimplementasikan ke @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) dalam produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami diperbarui dalam hitungan menit setelah OTA diimplementasikan ke @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 | Fase Pengujian Plugin | Praktik Terbaik | Dampak |
 | --- | --- | --- |

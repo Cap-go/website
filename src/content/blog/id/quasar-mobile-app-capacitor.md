@@ -151,7 +151,7 @@ Mengintegrasikan Capgo ke dalam aplikasi Quasar Anda adalah proses yang mudah ya
 
 **Daftar dan Akses Dashboard Capgo**:
 
-Saatnya mendaftar, dan dapatkan API key Anda untuk mengunggah versi pertama Anda! Mulailah dengan [mendaftar akun Capgo](https://web.capgo.app/register/).
+Saatnya mendaftar, dan dapatkan API key Anda untuk mengunggah versi pertama Anda! Mulailah dengan [mendaftar akun Capgo](https://console.capgo.app/register/).
 
 **Instal Capgo SDK**:
 
@@ -171,7 +171,7 @@ Ini akan memberi tahu plugin native bahwa instalasi telah berhasil.
 
 **Login ke Capgo CLOUD**:
 
-Pertama, gunakan [apikey](https://web.capgo.app/dashboard/apikeys/) `all` yang ada di akun Anda untuk login dengan CLI:
+Pertama, gunakan [apikey](https://console.capgo.app/dashboard/apikeys/) `all` yang ada di akun Anda untuk login dengan CLI:
 
     `npx @capgo/cli@latest login YOU_KEY`
 
@@ -194,7 +194,7 @@ npx @capgo/cli@latest bundle upload`
 
 Secara default, nama versi akan sama dengan yang ada di file package.json Anda.
 
-Periksa di [Capgo](https://web.capgo.app/login/) apakah build sudah ada.
+Periksa di [Capgo](https://console.capgo.app/login/) apakah build sudah ada.
 
 Anda bahkan dapat mengujinya dengan [aplikasi sandbox mobile](https://capgo.app/app_mobile/) saya.
 

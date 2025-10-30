@@ -46,7 +46,7 @@ Ecco una guida rapida per strutturare il tuo hotfix:
 
 Con la capacità di aggiornamento istantaneo di Capgo, puoi concentrarti sulla correzione del bug senza preoccuparti di raggruppare modifiche non correlate. Questo metodo si è dimostrato efficace, come evidenziato da colenso:
 
-> "Abbiamo implementato [gli aggiornamenti OTA di Capgo](https://web.capgo.app/resend_email) in produzione per la nostra base utenti di +5000. Stiamo osservando un'operazione molto fluida, quasi tutti i nostri utenti sono aggiornati entro minuti dal deployment dell'OTA su @Capgo" [\[1\]](https://capgo.app/).
+> "Abbiamo implementato [gli aggiornamenti OTA di Capgo](https://console.capgo.app/resend_email) in produzione per la nostra base utenti di +5000. Stiamo osservando un'operazione molto fluida, quasi tutti i nostri utenti sono aggiornati entro minuti dal deployment dell'OTA su @Capgo" [\[1\]](https://capgo.app/).
 
 ### Testa sul tuo Dispositivo
 

@@ -174,7 +174,7 @@ Après la configuration, l'accent se déplace vers la gestion stratégique des v
 
 Une gestion efficace des versions est cruciale pour des mises à jour OTA sans heurts. Voici quelques bonnes pratiques :
 
--   **Suivi des versions** : Utilisez l'interface web Capgo pour surveiller la distribution des mises à jour.
+-   **Suivi des versions** : Utilisez l'interface console.capgo pour surveiller la distribution des mises à jour.
 -   **Déploiements en plusieurs phases** : Testez les mises à jour avec de petits groupes avant un déploiement à grande échelle.
 -   **Compatibilité des versions** : Assurez-vous que les mises à jour OTA correspondent aux versions de l'App Store correspondantes.
 

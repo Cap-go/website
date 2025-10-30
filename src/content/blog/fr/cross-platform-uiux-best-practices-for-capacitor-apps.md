@@ -119,7 +119,7 @@ Les composants personnalisés doivent être conçus avec flexibilité à l'espri
 
 Une fois vos composants conçus, il est essentiel de les optimiser pour la performance sur toutes les plateformes. Une expérience utilisateur fluide dépend d'une performance efficace.
 
-> "Nous avons déployé des [mises à jour OTA Capgo](https://web.capgo.app/resend_email) en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour dans les minutes suivant le déploiement de l'OTA sur @Capgo." – colenso [\[1\]](https://capgo.app/)
+> "Nous avons déployé des [mises à jour OTA Capgo](https://console.capgo.app/resend_email) en production pour notre base d'utilisateurs de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour dans les minutes suivant le déploiement de l'OTA sur @Capgo." – colenso [\[1\]](https://capgo.app/)
 
 Des techniques comme le chargement paresseux, le défilement virtuel et les animations accélérées par matériel peuvent considérablement réduire la taille des paquets et améliorer la réactivité. Pour des mises à jour critiques, le système de mise à jour en direct de Capgo est un outil fiable, comme le souligne Rodrigo Mantica :
 

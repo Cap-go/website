@@ -149,7 +149,7 @@ Quasar 앱에 Capgo를 통합하는 것은 실시간 라이브 업데이트의 �
 
 **가입 및 Capgo 대시보드에 접근하기**:
 
-이제 가입하고 첫 번째 버전을 업로드할 API 키를 얻을 때입니다! [Capgo 계정 가입](https://web.capgo.app/register/)을 시작하세요.
+이제 가입하고 첫 번째 버전을 업로드할 API 키를 얻을 때입니다! [Capgo 계정 가입](https://console.capgo.app/register/)을 시작하세요.
 
 **Capgo SDK 설치**:
 
@@ -169,7 +169,7 @@ CapacitorUpdater.notifyAppReady()
 
 **Capgo CLOUD에 로그인**:
 
-먼저 계정에 있는 `all` [apikey](https://web.capgo.app/dashboard/apikeys/)를 사용하여 CLI로 로그인합니다:
+먼저 계정에 있는 `all` [apikey](https://console.capgo.app/dashboard/apikeys/)를 사용하여 CLI로 로그인합니다:
 
     `npx @capgo/cli@latest login YOU_KEY`
 
@@ -192,7 +192,7 @@ npx @capgo/cli@latest bundle upload`
 
 기본적으로 버전 이름은 **package.json** 파일의 것이 될 것입니다.
 
-Capgo에서 빌드가 있는지 확인하세요: [Capgo](https://web.capgo.app/login/)에 확인해 볼 수 있습니다.
+Capgo에서 빌드가 있는지 확인하세요: [Capgo](https://console.capgo.app/login/)에 확인해 볼 수 있습니다.
 
 제 [모바일 샌드박스 앱](https://capgo.app/app_mobile/)으로 테스트해 볼 수도 있습니다.
 

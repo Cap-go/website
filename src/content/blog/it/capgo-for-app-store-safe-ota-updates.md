@@ -130,7 +130,7 @@ La scelta della giusta [strategia di aggiornamento](https://capgo.app/docs/plugi
 
 | **Esigenza del progetto** | **Approccio raccomandato** | **Evidenza** |
 | --- | --- | --- |
-| Correzioni bug critici | [Aggiornamenti Capgo OTA](https://web.capgo.app/resend_email) | "Evitare la revisione per bugfix è d'oro." – Bessie Cooper [\[1\]](https://capgo.app/) |
+| Correzioni bug critici | [Aggiornamenti Capgo OTA](https://console.capgo.app/resend_email) | "Evitare la revisione per bugfix è d'oro." – Bessie Cooper [\[1\]](https://capgo.app/) |
 | Progetti sensibili ai costi | Capgo (integrazione CI/CD a ~$300/mese) | Risparmia costi rispetto ad altre alternative [\[1\]](https://capgo.app/) |
 | Scala enterprise | Ibrido tradizionale + OTA | Oltre 947,6M aggiornamenti riusciti su 1.400 app in produzione [\[1\]](https://capgo.app/) |
 

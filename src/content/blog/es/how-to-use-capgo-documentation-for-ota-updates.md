@@ -193,7 +193,7 @@ Con estos pasos, su sistema de actualización OTA está listo. Explore la config
 
 ## Configuración Avanzada
 
-Mejore su configuración de [actualizaciones OTA de Capgo](https://web.capgo.app/resend_email) con medidas de seguridad adicionales y configuraciones flexibles de actualización. Estas opciones aseguran una experiencia de actualización segura y fluida mientras cumplen con las pautas de las tiendas de aplicaciones.
+Mejore su configuración de [actualizaciones OTA de Capgo](https://console.capgo.app/resend_email) con medidas de seguridad adicionales y configuraciones flexibles de actualización. Estas opciones aseguran una experiencia de actualización segura y fluida mientras cumplen con las pautas de las tiendas de aplicaciones.
 
 ### Características de Seguridad
 

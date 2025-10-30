@@ -126,7 +126,7 @@ Choosing the right OTA method hinges on factors like team size, specific needs, 
 
 For medium to large enterprises, more comprehensive OTA solutions are a better fit. These platforms provide advanced security features and detailed control over updates. One enterprise user shared their experience:
 
-> "We rolled out [Capgo OTA updates](https://web.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app)
+> "We rolled out [Capgo OTA updates](https://console.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app)
 
 This example highlights how effective OTA platforms help enterprises manage [large-scale updates](https://capgo.app/docs/live-updates/update-behavior/) with precision and ease.
 

@@ -81,7 +81,7 @@ Capgo adalah layanan berbasis cloud yang memungkinkan Anda menerapkan pembaruan 
 ### Cara Mengimplementasikan Pembaruan Langsung Capgo
 
 Untuk mengimplementasikan pembaruan langsung Capgo dalam proyek Capacitor Anda, ikuti langkah-langkah berikut:
-- Daftar untuk [akun Capgo](https://web.capgo.app/).
+- Daftar untuk [akun Capgo](https://console.capgo.app/).
 - Instal SDK Capgo di proyek Anda.
 - Konfigurasi aplikasi Anda untuk memeriksa pembaruan saat startup atau pada interval tertentu.
 - Terapkan pembaruan ke aplikasi Anda menggunakan dashboard Capgo.

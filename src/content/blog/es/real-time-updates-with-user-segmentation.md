@@ -48,7 +48,7 @@ Usando los análisis de Capgo, puedes rastrear tasas de éxito de actualizacione
 
 Una vez que has recopilado los datos, el siguiente paso es agrupar usuarios en segmentos usando el sistema de canales de Capgo. Esto permite a los desarrolladores gestionar actualizaciones y probar funciones con precisión.
 
-> "Implementamos [actualizaciones OTA de Capgo](https://web.capgo.app/resend_email) en producción para nuestra base de usuarios de 5,000. Estamos viendo una operación muy fluida; casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo." – colenso, @colenso [\[1\]](https://capgo.app/)
+> "Implementamos [actualizaciones OTA de Capgo](https://console.capgo.app/resend_email) en producción para nuestra base de usuarios de 5,000. Estamos viendo una operación muy fluida; casi todos nuestros usuarios están actualizados en minutos después de que el OTA se implementa en @Capgo." – colenso, @colenso [\[1\]](https://capgo.app/)
 
 Los desarrolladores pueden organizar usuarios en categorías como beta testers, usuarios avanzados, usuarios nuevos o cuentas empresariales. Esta segmentación ayuda a probar actualizaciones, implementarlas gradualmente o personalizar funciones para grupos específicos.
 

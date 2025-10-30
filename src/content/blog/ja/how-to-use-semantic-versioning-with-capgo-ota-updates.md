@@ -281,7 +281,7 @@ Capgoのアップデーターは障害に対応できるように設計されて
 
 開発者からの声：
 
-> "5000人以上のユーザーベースに対して、[Capgo OTAアップデート](https://web.capgo.app/resend_email)を本番環境で展開しました。非常にスムーズな運用が確認され、OTAが@Capgoにデプロイされてから数分以内にほぼすべてのユーザーが最新の状態になっています。" - colenso [\[1\]](https://capgo.app/)
+> "5000人以上のユーザーベースに対して、[Capgo OTAアップデート](https://console.capgo.app/resend_email)を本番環境で展開しました。非常にスムーズな運用が確認され、OTAが@Capgoにデプロイされてから数分以内にほぼすべてのユーザーが最新の状態になっています。" - colenso [\[1\]](https://capgo.app/)
 
 MAJOR.MINOR.PATCHバージョニングシステムにより、破壊的変更、新機能、バグ修正を簡単に伝えることができます[\[5\]](https://aws.amazon.com/blogs/devops/using-semantic-versioning-to-simplify-release-management/) 。これは、Capgoのプラットフォームを通じて週に数回のリリースを管理するチームにとって特に役立ちます。
 

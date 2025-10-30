@@ -85,7 +85,7 @@ Así es como debería verse la estructura de directorios de la aplicación:
 
 ## Configuración de Capgo
 
-Con tu aplicación lista para la integración con [Capgo](https://web.capgo.app/), ¡es hora de registrarte y obtener tu clave API para subir tu primera versión! Comienza [registrándote para una cuenta de Capgo](/register/).
+Con tu aplicación lista para la integración con [Capgo](https://console.capgo.app/), ¡es hora de registrarte y obtener tu clave API para subir tu primera versión! Comienza [registrándote para una cuenta de Capgo](/register/).
 
 Una vez que hayas iniciado sesión en Capgo, navega a la página de Cuenta, luego haz clic en clave API, luego haz clic en la clave 'write' para copiarla al portapapeles.
 
@@ -112,7 +112,7 @@ La función de Actualización en Vivo funciona usando el [SDK de Capgo](https://
 
 ### Iniciar sesión en Capgo CLOUD 
 
-Primero, usa la [apikey](https://web.capgo.app/dashboard/apikeys/) `all` presente en tu cuenta para iniciar sesión con el CLI:
+Primero, usa la [apikey](https://console.capgo.app/dashboard/apikeys/) `all` presente en tu cuenta para iniciar sesión con el CLI:
 
 ```shell
 npx @capgo/cli@latest login YOURKEY
@@ -135,7 +135,7 @@ npx @capgo/cli@latest bundle upload --channel production
 
 Por defecto, el nombre de la versión será el que está en tu archivo `package.json`.
 
-Verifica en [Capgo](https://web.capgo.app/) si la compilación está presente.
+Verifica en [Capgo](https://console.capgo.app/) si la compilación está presente.
 
 Incluso puedes probarlo con mi [aplicación móvil sandbox](https://capgo.app/app_mobile/).
 

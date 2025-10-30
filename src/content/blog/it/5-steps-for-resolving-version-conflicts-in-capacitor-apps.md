@@ -272,7 +272,7 @@ Per gli utenti Yarn, applica queste risoluzioni con:
 yarn install --force
 ```
 
-> "Abbiamo distribuito gli [aggiornamenti OTA di Capgo](https://web.capgo.app/resend_email) in produzione per la nostra base utenti di +5000. Stiamo osservando un funzionamento molto fluido, quasi tutti i nostri utenti sono aggiornati entro minuti dal rilascio dell'OTA su @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Abbiamo distribuito gli [aggiornamenti OTA di Capgo](https://console.capgo.app/resend_email) in produzione per la nostra base utenti di +5000. Stiamo osservando un funzionamento molto fluido, quasi tutti i nostri utenti sono aggiornati entro minuti dal rilascio dell'OTA su @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 L'utilizzo di strumenti come Capgo può aiutare a gestire gli aggiornamenti dei plugin e mantenere la coerenza delle versioni, specialmente quando si introducono modifiche critiche.
 

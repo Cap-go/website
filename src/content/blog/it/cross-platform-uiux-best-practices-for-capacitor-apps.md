@@ -118,7 +118,7 @@ Los componentes personalizados deben diseñarse teniendo en cuenta la flexibilid
 
 Una vez que tus componentes estén diseñados, es esencial optimizarlos para un rendimiento adecuado en todas las plataformas. Una experiencia de usuario fluida depende de un rendimiento eficiente.
 
-> "Implementamos [actualizaciones OTA de Capgo](https://web.capgo.app/resend_email) en producción para nuestra base de usuarios de más de 5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que se despliega el OTA a @Capgo." – colenso [\[1\]](https://capgo.app/)
+> "Implementamos [actualizaciones OTA de Capgo](https://console.capgo.app/resend_email) en producción para nuestra base de usuarios de más de 5000. Estamos viendo una operación muy fluida, casi todos nuestros usuarios están actualizados en minutos después de que se despliega el OTA a @Capgo." – colenso [\[1\]](https://capgo.app/)
 
 Técnicas como carga diferida, desplazamiento virtual y animaciones aceleradas por hardware pueden reducir significativamente los tamaños de los paquetes y mejorar la capacidad de respuesta. Para actualizaciones críticas, el sistema de actualización en vivo de Capgo es una herramienta confiable, como lo destacó Rodrigo Mantica:
 

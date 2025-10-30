@@ -301,7 +301,7 @@ async function captureImage() {
 
 Test plugin functionality at every stage of deployment to ensure reliability.
 
-> "We rolled out [Capgo OTA updates](https://web.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "We rolled out [Capgo OTA updates](https://console.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 | Plugin Testing Phase | Best Practice | Impact |
 | --- | --- | --- |

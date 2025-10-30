@@ -112,7 +112,7 @@ Questa configurazione soddisfa le linee guida Apple e Google garantendo aggiorna
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
 
-La piattaforma web Capgo semplifica la distribuzione degli aggiornamenti con queste funzionalità principali:
+La piattaforma console.capgo semplifica la distribuzione degli aggiornamenti con queste funzionalità principali:
 
 | Componente | Funzione | Dettagli implementazione |
 | --- | --- | --- |

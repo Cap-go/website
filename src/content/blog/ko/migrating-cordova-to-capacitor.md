@@ -80,7 +80,7 @@ Capgo는 Capacitor 앱에 실시간 업데이트를 배포할 수 있게 해주�
 ### Capgo 실시간 업데이트 구현 방법
 
 Capacitor 프로젝트에서 Capgo 실시간 업데이트를 구현하려면 다음 단계를 따르세요:
-- [Capgo 계정](https://web.capgo.app/)에 가입하세요.
+- [Capgo 계정](https://console.capgo.app/)에 가입하세요.
 - 프로젝트에 Capgo SDK를 설치하세요.
 - 시작 시 또는 특정 간격으로 업데이트를 확인하도록 앱을 구성하세요.
 - Capgo 대시보드를 사용하여 앱에 업데이트를 배포하세요.

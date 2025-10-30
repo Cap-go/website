@@ -85,7 +85,7 @@ Berikut adalah struktur direktori aplikasi yang seharusnya:
 
 ## Konfigurasi Capgo
 
-Dengan aplikasi Anda siap untuk integrasi [Capgo](https://web.capgo.app/), saatnya mendaftar, dan dapatkan API key Anda untuk mengunggah versi pertama Anda! Mulai dengan [mendaftar akun Capgo](/register/).
+Dengan aplikasi Anda siap untuk integrasi [Capgo](https://console.capgo.app/), saatnya mendaftar, dan dapatkan API key Anda untuk mengunggah versi pertama Anda! Mulai dengan [mendaftar akun Capgo](/register/).
 
 Setelah Anda masuk ke Capgo, navigasi ke halaman Account kemudian klik pada API key, lalu klik pada kunci 'write' untuk menyalinnya ke clipboard Anda.
 
@@ -112,7 +112,7 @@ Fitur Live Update bekerja dengan menggunakan [Capgo SDK](https://github.com/Cap-
 
 ### Login ke Capgo CLOUD
 
-Pertama, gunakan [apikey](https://web.capgo.app/dashboard/apikeys/) 'all' yang ada di akun Anda untuk login dengan CLI:
+Pertama, gunakan [apikey](https://console.capgo.app/dashboard/apikeys/) 'all' yang ada di akun Anda untuk login dengan CLI:
 
 ```shell
 npx @capgo/cli@latest login YOURKEY
@@ -135,7 +135,7 @@ npx @capgo/cli@latest bundle upload --channel production
 
 Secara default, nama versi akan mengikuti yang ada di file `package.json` Anda.
 
-Periksa di [Capgo](https://web.capgo.app/) apakah build sudah ada.
+Periksa di [Capgo](https://console.capgo.app/) apakah build sudah ada.
 
 Anda bahkan dapat mengujinya dengan [aplikasi sandbox mobile](https://capgo.app/app_mobile/) saya.
 

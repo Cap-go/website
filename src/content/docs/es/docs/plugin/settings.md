@@ -188,7 +188,7 @@ Predeterminado: `undefined`
 Cuando ocurre una actualización de la tienda, deshabilita el reinicio forzado a la versión nativa
 :::
 
-Hay muchas más configuraciones disponibles solo en la [aplicación web](https://web.capgo.app/login)
+Hay muchas más configuraciones disponibles solo en la [aplicación web](https://console.capgo.app/login)
 
 Para configurar el plugin, usa estos ajustes:
 

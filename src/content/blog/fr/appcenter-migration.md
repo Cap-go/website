@@ -85,7 +85,7 @@ Voici à quoi devrait ressembler la structure des répertoires de l'application 
 
 ## Configuration de Capgo
 
-Avec votre application prête pour l'intégration [Capgo](https://web.capgo.app/), il est temps de s'inscrire et d'obtenir votre clé API pour télécharger votre première version ! Commencez par [vous inscrire pour un compte Capgo](/register/).
+Avec votre application prête pour l'intégration [Capgo](https://console.capgo.app/), il est temps de s'inscrire et d'obtenir votre clé API pour télécharger votre première version ! Commencez par [vous inscrire pour un compte Capgo](/register/).
 
 Une fois que vous êtes connecté à Capgo, accédez à la page de compte, puis cliquez sur la clé API, puis cliquez sur la clé 'write' pour la copier dans votre presse-papiers.
 
@@ -112,7 +112,7 @@ La fonction de mise à jour en direct fonctionne en utilisant le [SDK Capgo](htt
 
 ### Connexion à Capgo CLOUD
 
-Tout d'abord, utilisez le `all` [apikey](https://web.capgo.app/dashboard/apikeys/) présent dans votre compte pour vous connecter avec le CLI :
+Tout d'abord, utilisez le `all` [apikey](https://console.capgo.app/dashboard/apikeys/) présent dans votre compte pour vous connecter avec le CLI :
 
 ```shell
 npx @capgo/cli@latest login YOURKEY
@@ -135,7 +135,7 @@ npx @capgo/cli@latest bundle upload --channel production
 
 Par défaut, le nom de version sera celui de votre fichier `package.json`.
 
-Vérifiez dans [Capgo](https://web.capgo.app/) si la construction est présente.
+Vérifiez dans [Capgo](https://console.capgo.app/) si la construction est présente.
 
 Vous pouvez même le tester avec mon [application mobile sandbox](https://capgo.app/app_mobile/).
 

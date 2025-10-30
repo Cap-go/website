@@ -92,7 +92,7 @@ Poi esegui `npm run build && npx cap copy` per aggiornare la tua app.
 
 ### Accedi a Capgo CLOUD
 
-Prima, usa la [apikey](https://web.capgo.app/dashboard/apikeys/) `all` presente nel tuo account per accedere con la CLI:
+Prima, usa la [apikey](https://console.capgo.app/dashboard/apikeys/) `all` presente nel tuo account per accedere con la CLI:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
@@ -111,7 +111,7 @@ Esegui il comando per buildare il tuo codice e inviarlo a Capgo con:
 
 Per impostazione predefinita, il nome della versione sarà quello nel tuo file `package.json`.
 
-Controlla in [Capgo](https://web.capgo.app/) se la build è presente.
+Controlla in [Capgo](https://console.capgo.app/) se la build è presente.
 
 Puoi anche testarla con la mia [app sandbox mobile](https://capgo.app/app_mobile/).
 

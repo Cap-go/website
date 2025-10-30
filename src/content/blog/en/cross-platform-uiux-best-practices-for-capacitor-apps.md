@@ -110,7 +110,7 @@ Custom components should be designed with flexibility in mind. Use a platform-ne
 
 Once your components are designed, it’s essential to optimize them for performance across all platforms. A seamless user experience depends on efficient performance.
 
-> "We rolled out [Capgo OTA updates](https://web.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." – colenso [\[1\]](https://capgo.app/)
+> "We rolled out [Capgo OTA updates](https://console.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." – colenso [\[1\]](https://capgo.app/)
 
 Techniques like lazy loading, virtual scrolling, and hardware-accelerated animations can significantly reduce bundle sizes and improve responsiveness. For critical updates, Capgo’s live update system is a reliable tool, as highlighted by Rodrigo Mantica:
 

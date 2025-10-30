@@ -43,7 +43,7 @@ Here’s a quick guide to structuring your hotfix:
 
 With Capgo's instant update capability, you can zero in on fixing the bug without worrying about bundling unrelated changes. This method has proven effective, as highlighted by colenso:
 
-> "We rolled out [Capgo OTA updates](https://web.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are up to date within minutes of the OTA being deployed to @Capgo" [\[1\]](https://capgo.app/).
+> "We rolled out [Capgo OTA updates](https://console.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are up to date within minutes of the OTA being deployed to @Capgo" [\[1\]](https://capgo.app/).
 
 ### Test on Your Device
 

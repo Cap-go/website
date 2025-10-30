@@ -132,7 +132,7 @@ Um das Beste aus Ihren Segmentierungsanstrengungen herauszuholen:
 -   **Analysieren Sie das Nutzerfeedback**, um die spezifischen Bedürfnisse jedes Segments zu verstehen.
 -   **Nutzen Sie Capgos Rollback-Funktion**, um Störungen zu minimieren, wenn Probleme auftreten.
 
-> "Wir haben [Capgo OTA-Updates](https://web.capgo.app/resend_email) in der Produktion für unsere Nutzerbasis von +5000 implementiert. Wir sehen einen sehr reibungslosen Betrieb; fast alle unsere Nutzer sind innerhalb von Minuten auf dem neuesten Stand, nachdem die OTA bereitgestellt wurde, an @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
+> "Wir haben [Capgo OTA-Updates](https://console.capgo.app/resend_email) in der Produktion für unsere Nutzerbasis von +5000 implementiert. Wir sehen einen sehr reibungslosen Betrieb; fast alle unsere Nutzer sind innerhalb von Minuten auf dem neuesten Stand, nachdem die OTA bereitgestellt wurde, an @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
 
 ## Zusammenfassung
 

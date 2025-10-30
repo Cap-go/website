@@ -46,7 +46,7 @@ Berikut panduan singkat untuk menyusun hotfix Anda:
 
 Dengan kemampuan pembaruan instan Capgo, Anda dapat fokus memperbaiki bug tanpa khawatir menggabungkan perubahan yang tidak terkait. Metode ini terbukti efektif, seperti yang disoroti oleh colenso:
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) dalam produksi untuk basis pengguna kami +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami terbaru dalam hitungan menit setelah OTA diterapkan ke @Capgo" [\[1\]](https://capgo.app/).
+> "Kami meluncurkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) dalam produksi untuk basis pengguna kami +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami terbaru dalam hitungan menit setelah OTA diterapkan ke @Capgo" [\[1\]](https://capgo.app/).
 
 ### Uji di Perangkat Anda
 
@@ -155,7 +155,7 @@ Misalnya, jika bug mempengaruhi pengguna di wilayah tertentu, Anda dapat memprio
 
 ### Atur Aturan Rilis
 
-Melalui antarmuka web Capgo, Anda dapat menyesuaikan proses rilis dengan mengatur parameter seperti jadwal, kompatibilitas versi aplikasi, dan seberapa bertahap pembaruan diluncurkan.
+Melalui antarmuka console.capgo, Anda dapat menyesuaikan proses rilis dengan mengatur parameter seperti jadwal, kompatibilitas versi aplikasi, dan seberapa bertahap pembaruan diluncurkan.
 
 Berikut pengaturan utama yang perlu dikonfigurasi:
 
@@ -196,7 +196,7 @@ Rodrigo Mantica, pengembang bisnis, menekankan pentingnya Capgo:
 
 > "Kami menerapkan pengembangan agile dan @Capgo sangat penting dalam memberikan layanan secara terus-menerus kepada pengguna kami!" [\[1\]](https://capgo.app/)
 
-Antarmuka web Capgo memudahkan pemantauan kemajuan pembaruan Anda dengan log terperinci dan metrik kinerja. Fitur pelacakannya telah membantu organisasi meningkatkan efisiensi rilis hingga 81% [\[1\]](https://capgo.app/), memastikan kinerja aplikasi yang stabil sambil dengan cepat mengatasi masalah apa pun.
+Antarmuka console.capgo memudahkan pemantauan kemajuan pembaruan Anda dengan log terperinci dan metrik kinerja. Fitur pelacakannya telah membantu organisasi meningkatkan efisiensi rilis hingga 81% [\[1\]](https://capgo.app/), memastikan kinerja aplikasi yang stabil sambil dengan cepat mengatasi masalah apa pun.
 
 ## Ringkasan
 

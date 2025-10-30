@@ -305,7 +305,7 @@ async function captureImage() {
 
 Testez la fonctionnalité des plugins à chaque étape de déploiement pour garantir la fiabilité.
 
-> "Nous avons déployé [des mises à jour OTA Capgo](https://web.capgo.app/resend_email) en production pour notre base utilisateur de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement de l'OTA à @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Nous avons déployé [des mises à jour OTA Capgo](https://console.capgo.app/resend_email) en production pour notre base utilisateur de +5000. Nous constatons un fonctionnement très fluide, presque tous nos utilisateurs sont à jour en quelques minutes après le déploiement de l'OTA à @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 | Phase de Test du Plugin | Meilleure Pratique | Impact |
 | --- | --- | --- |

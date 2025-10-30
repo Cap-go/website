@@ -80,7 +80,7 @@ Capgo è un servizio basato su cloud che ti permette di distribuire aggiornament
 ### Come Implementare gli Aggiornamenti Live Capgo
 
 Per implementare gli aggiornamenti live Capgo nel tuo progetto Capacitor, segui questi passaggi:
-- Registrati per un [account Capgo](https://web.capgo.app/).
+- Registrati per un [account Capgo](https://console.capgo.app/).
 - Installa l'SDK Capgo nel tuo progetto.
 - Configura la tua app per controllare gli aggiornamenti all'avvio o a intervalli specifici.
 - Distribuisci aggiornamenti alla tua app utilizzando la dashboard Capgo.

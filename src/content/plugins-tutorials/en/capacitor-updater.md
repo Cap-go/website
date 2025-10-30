@@ -67,7 +67,7 @@ Then do a `npm run build && npx cap copy` to update your app.
 
 ### Login to Capgo CLOUD
 
-First, use the `all` [apikey](https://web.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
+First, use the `all` [apikey](https://console.capgo.app/dashboard/apikeys/) present in your account to log in with the CLI:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
@@ -86,7 +86,7 @@ Run the command to build your code and send it to Capgo with:
 
 By default, the version name will be the one in your `package.json` file.
 
-Check in [Capgo](https://web.capgo.app/) if the build is present.
+Check in [Capgo](https://console.capgo.app/) if the build is present.
 
 You can even test it with my [mobile sandbox app](https://capgo.app/app_mobile/).
 

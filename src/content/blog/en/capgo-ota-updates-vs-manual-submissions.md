@@ -26,7 +26,7 @@ next_blog: ''
 
 ### Quick Comparison
 
-| Feature | [Capgo OTA Updates](https://web.capgo.app/resend_email) | Manual App Store Updates |
+| Feature | [Capgo OTA Updates](https://console.capgo.app/resend_email) | Manual App Store Updates |
 | --- | --- | --- |
 | **Deployment Time** | Minutes to hours | 2–7 days |
 | **Update Success Rate** | 95% within 24 hours | User-dependent |

@@ -309,7 +309,7 @@ Semantische Versionierung in Kombination mit Capgo hat OTA-Updates für Capacito
 
 Das sagen Entwickler:
 
-> "Wir haben [Capgo OTA-Updates](https://web.capgo.app/resend_email) in der Produktion für unsere Nutzerbasis von +5000 eingeführt. Wir sehen einen sehr reibungslosen Betrieb, fast alle unsere Nutzer sind innerhalb von Minuten nach der Bereitstellung des OTA bei @Capgo auf dem neuesten Stand." - colenso [\[1\]](https://capgo.app/)
+> "Wir haben [Capgo OTA-Updates](https://console.capgo.app/resend_email) in der Produktion für unsere Nutzerbasis von +5000 eingeführt. Wir sehen einen sehr reibungslosen Betrieb, fast alle unsere Nutzer sind innerhalb von Minuten nach der Bereitstellung des OTA bei @Capgo auf dem neuesten Stand." - colenso [\[1\]](https://capgo.app/)
 
 Das MAJOR.MINOR.PATCH-Versionierungssystem macht es einfach, Breaking Changes, neue Funktionen und Fehlerbehebungen zu kommunizieren [\[5\]](https://aws.amazon.com/blogs/devops/using-semantic-versioning-to-simplify-release-management/). Dies ist besonders hilfreich für Teams, die mehrere Releases pro Woche über Capgos Plattform verwalten.
 

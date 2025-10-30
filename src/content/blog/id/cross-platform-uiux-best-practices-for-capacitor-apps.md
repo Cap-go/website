@@ -114,7 +114,7 @@ Komponen kustom harus dirancang dengan mempertimbangkan fleksibilitas. Gunakan d
 
 Setelah komponen Anda dirancang, penting untuk mengoptimalkannya untuk kinerja di semua platform. Pengalaman pengguna yang mulus bergantung pada kinerja yang efisien.
 
-> "Kami menerapkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) dalam produksi untuk basis pengguna kami yang +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami up to date dalam hitungan menit setelah OTA dikerahkan ke @Capgo." – colenso [\[1\]](https://capgo.app/)
+> "Kami menerapkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) dalam produksi untuk basis pengguna kami yang +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami up to date dalam hitungan menit setelah OTA dikerahkan ke @Capgo." – colenso [\[1\]](https://capgo.app/)
 
 Teknik seperti lazy loading, virtual scrolling, dan animasi yang dipercepat hardware dapat secara signifikan mengurangi ukuran bundle dan meningkatkan responsivitas. Untuk pembaruan penting, sistem pembaruan langsung Capgo adalah alat yang andal, seperti yang disoroti oleh Rodrigo Mantica:
 

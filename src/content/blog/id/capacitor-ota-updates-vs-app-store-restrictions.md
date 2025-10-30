@@ -64,7 +64,7 @@ Toko aplikasi menerapkan aturan ini untuk melindungi pengguna dan menjaga stabil
 
 Karena kontrol ini, pengembang beralih ke metode alternatif untuk mengikuti kebutuhan pembaruan yang lebih cepat. Capgo, misalnya, telah mengirimkan 23,5 juta pembaruan OTA yang mematuhi aturan toko aplikasi [\[1\]](https://capgo.app/), membuktikan permintaan untuk solusi yang lebih cepat.
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) dalam produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami sudah diperbarui dalam hitungan menit setelah OTA diterapkan di @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) dalam produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami sudah diperbarui dalam hitungan menit setelah OTA diterapkan di @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 Sistem OTA modern menyediakan cara untuk mendorong pembaruan penting dengan cepat tanpa melanggar pedoman toko aplikasi. Pendekatan ini menunjukkan bagaimana pengembang dapat mencapai penerapan yang lebih cepat sambil tetap mematuhi aturan. Selanjutnya, kita akan mendalami bagaimana pembaruan OTA menawarkan kelincahan ini.
 

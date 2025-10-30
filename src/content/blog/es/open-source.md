@@ -138,7 +138,7 @@ Como sabes, las tecnologías de código abierto tienen múltiples ventajas. Est�
 
 ¡Estos son todos principios que seguimos en Capgo! Somos un sistema de actualización en vivo de código abierto para aplicaciones de Capacitor cuya misión es actualizar en vivo las aplicaciones de Capacitor. Te permitimos implementar actualizaciones a tus usuarios sin necesidad de reinstalar la aplicación. Somos un servicio basado en la nube, pero también puedes autoalbergarlo.
 
-¿Por qué no lo pruebas tú mismo? [Prueba nuestra versión gratuita](https://web.capgo.app/register/) y [contribuye a nuestro proyecto de código abierto en constante evolución](https://github.com/Cap-go/) - ¡nos encantaría tenerte a bordo!
+¿Por qué no lo pruebas tú mismo? [Prueba nuestra versión gratuita](https://console.capgo.app/register/) y [contribuye a nuestro proyecto de código abierto en constante evolución](https://github.com/Cap-go/) - ¡nos encantaría tenerte a bordo!
 
 <div class="mx-auto">
   <img src="/capgo_banner.webp" alt="capgo_banner">

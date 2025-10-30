@@ -130,7 +130,7 @@ Memilih [strategi pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-upd
 
 | **Kebutuhan Proyek** | **Pendekatan yang Direkomendasikan** | **Bukti** |
 | --- | --- | --- |
-| Perbaikan Bug Kritis | [Pembaruan OTA Capgo](https://web.capgo.app/resend_email) | "Menghindari peninjauan untuk perbaikan bug sangat berharga." – Bessie Cooper [\[1\]](https://capgo.app/) |
+| Perbaikan Bug Kritis | [Pembaruan OTA Capgo](https://console.capgo.app/resend_email) | "Menghindari peninjauan untuk perbaikan bug sangat berharga." – Bessie Cooper [\[1\]](https://capgo.app/) |
 | Proyek Sensitif Biaya | Capgo (integrasi CI/CD dengan ~$300/bulan) | Menghemat biaya dibandingkan alternatif lain [\[1\]](https://capgo.app/) |
 | Skala Enterprise | Hybrid Tradisional + OTA | Lebih dari 947,6M pembaruan berhasil di 1.400 aplikasi produksi [\[1\]](https://capgo.app/) |
 

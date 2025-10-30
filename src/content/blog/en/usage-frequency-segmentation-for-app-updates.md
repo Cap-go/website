@@ -128,7 +128,7 @@ To get the most out of your segmentation efforts:
 -   **Analyze user feedback** to understand the specific needs of each segment.
 -   **Leverage Capgo's rollback feature** to minimize disruption when problems arise.
 
-> "We rolled out [Capgo OTA updates](https://web.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are up to date within minutes of the OTA being deployed to @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
+> "We rolled out [Capgo OTA updates](https://console.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are up to date within minutes of the OTA being deployed to @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
 
 ## Summary
 

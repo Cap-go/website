@@ -46,7 +46,7 @@ Hier ist ein schneller Leitfaden zur Strukturierung Ihres Hotfix:
 
 Mit Capgos sofortiger Update-Fähigkeit können Sie sich auf die Fehlerbehebung konzentrieren, ohne sich Sorgen um die Bündelung nicht verwandter Änderungen machen zu müssen. Diese Methode hat sich als effektiv erwiesen, wie colenso hervorhebt:
 
-> "Wir haben [Capgo OTA-Updates](https://web.capgo.app/resend_email) in Produktion für unsere Nutzerbasis von +5000 ausgerollt. Wir sehen einen sehr reibungslosen Betrieb, fast alle unsere Nutzer sind innerhalb von Minuten nach der OTA-Bereitstellung bei @Capgo auf dem neuesten Stand" [\[1\]](https://capgo.app/).
+> "Wir haben [Capgo OTA-Updates](https://console.capgo.app/resend_email) in Produktion für unsere Nutzerbasis von +5000 ausgerollt. Wir sehen einen sehr reibungslosen Betrieb, fast alle unsere Nutzer sind innerhalb von Minuten nach der OTA-Bereitstellung bei @Capgo auf dem neuesten Stand" [\[1\]](https://capgo.app/).
 
 ### Auf Ihrem Gerät testen
 

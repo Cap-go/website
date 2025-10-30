@@ -132,7 +132,7 @@ Choisir la bonne [stratégie de mise à jour](https://capgo.app/docs/plugin/clou
 
 | **Besoin du projet** | **Approche recommandée** | **Preuve** |
 | --- | --- | --- |
-| Corrections de bugs critiques | [Mises à jour OTA de Capgo](https://web.capgo.app/resend_email) | "Éviter la révision pour les corrections de bugs est précieux." – Bessie Cooper [\[1\]](https://capgo.app/) |
+| Corrections de bugs critiques | [Mises à jour OTA de Capgo](https://console.capgo.app/resend_email) | "Éviter la révision pour les corrections de bugs est précieux." – Bessie Cooper [\[1\]](https://capgo.app/) |
 | Projets sensibles aux coûts | Capgo (Intégration CI/CD à ~300 $/mois) | Économies par rapport à d'autres alternatives [\[1\]](https://capgo.app/) |
 | Échelle entreprise | Hybridation traditionnelle + OTA | Plus de 947,6 millions de mises à jour réussies à travers 1 400 applications de production [\[1\]](https://capgo.app/) |
 

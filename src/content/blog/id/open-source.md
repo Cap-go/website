@@ -138,7 +138,7 @@ Seperti yang Anda ketahui, teknologi sumber terbuka memiliki banyak keuntungan. 
 
 Ini semua adalah prinsip yang kami ikuti di Capgo! Kami adalah sistem pembaruan langsung sumber terbuka untuk aplikasi Capacitor yang misinya adalah memperbarui aplikasi Capacitor secara langsung. Kami memungkinkan Anda untuk menerapkan pembaruan kepada pengguna Anda tanpa perlu menginstal ulang aplikasi. Kami adalah layanan berbasis cloud, tetapi Anda juga dapat meng-host sendiri.
 
-Mengapa tidak mencobanya sendiri? [Coba versi gratis kami](https://web.capgo.app/register/) dan [berkontribusi pada proyek sumber terbuka kami yang terus berkembang](https://github.com/Cap-go/) - kami akan senang memiliki Anda di tim!
+Mengapa tidak mencobanya sendiri? [Coba versi gratis kami](https://console.capgo.app/register/) dan [berkontribusi pada proyek sumber terbuka kami yang terus berkembang](https://github.com/Cap-go/) - kami akan senang memiliki Anda di tim!
 
 <Steps>
   <Step>Test</Step>

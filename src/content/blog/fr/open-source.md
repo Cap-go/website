@@ -138,7 +138,7 @@ Comme vous le savez, les technologies open source présentent de multiples avant
 
 Ce sont tous des principes auxquels nous adhérons chez Capgo ! Nous sommes un système de mise à jour en direct open source pour les applications Capacitor dont la mission est de mettre à jour en direct les applications Capacitor. Nous vous permettons de déployer des mises à jour à vos utilisateurs sans avoir besoin de réinstaller l'application. Nous sommes un service basé sur le cloud, mais vous pouvez également l'héberger vous-même.
 
-Pourquoi ne pas essayer par vous-même ? [Essayez notre version gratuite](https://web.capgo.app/register/) et [contribuez à notre projet open source en constante évolution](https://github.com/Cap-go/) - nous serions ravis de vous accueillir à bord !
+Pourquoi ne pas essayer par vous-même ? [Essayez notre version gratuite](https://console.capgo.app/register/) et [contribuez à notre projet open source en constante évolution](https://github.com/Cap-go/) - nous serions ravis de vous accueillir à bord !
 
 <div class="mx-auto">
   <img src="/capgo_banner.webp" alt="capgo_banner">

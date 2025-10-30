@@ -130,7 +130,7 @@ Capgo는 종단 간 암호화, 버전 관리 및 롤백 옵션과 같은 기능�
 -   **사용자 피드백 분석**하여 각 세그먼트의 특정 요구를 이해**.
 -   **Capgo의 롤백 기능 활용**하여 문제 발생 시 중단을 최소화합니다.
 
-> "우리는 +5000명의 사용자 기반을 위한 [Capgo OTA 업데이트](https://web.capgo.app/resend_email)를 배포했습니다. 거의 모든 사용자가 OTA가 @Capgo에 배포된 몇 분 만에 최신 상태를 유지하고 있습니다." - colenso, @colenso [\[2\]](https://capgo.app)
+> "우리는 +5000명의 사용자 기반을 위한 [Capgo OTA 업데이트](https://console.capgo.app/resend_email)를 배포했습니다. 거의 모든 사용자가 OTA가 @Capgo에 배포된 몇 분 만에 최신 상태를 유지하고 있습니다." - colenso, @colenso [\[2\]](https://capgo.app)
 
 ## 요약
 

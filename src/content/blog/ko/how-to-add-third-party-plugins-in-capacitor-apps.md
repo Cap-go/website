@@ -288,7 +288,7 @@ async function usePlugin() {
 
 신뢰성을 보장하기 위해 배포의 모든 단계에서 플러그인 기능을 테스트하세요.
 
-> "우리는 5000명 이상의 사용자 기반에 대해 프로덕션에서 [Capgo OTA 업데이트](https://web.capgo.app/resend_email)를 출시했습니다. OTA가 @Capgo에 배포된 후 거의 모든 사용
+> "우리는 5000명 이상의 사용자 기반에 대해 프로덕션에서 [Capgo OTA 업데이트](https://console.capgo.app/resend_email)를 출시했습니다. OTA가 @Capgo에 배포된 후 거의 모든 사용
 
 ```bash
 npm install plugin-name

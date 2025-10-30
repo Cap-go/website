@@ -139,7 +139,7 @@ Capgo arbeitet nahtlos mit beliebten CI/CD-Plattformen wie GitHub Actions und Gi
 
 Ein Team teilte ihre Erfahrung bei der Bereitstellung für tausende Nutzer:
 
-> "Wir haben [Capgo OTA-Updates](https://web.capgo.app/resend_email) in Produktion für unsere Nutzerbasis von über 5.000 ausgerollt. Wir sehen einen sehr reibungslosen Betrieb; fast alle unsere Nutzer sind innerhalb von Minuten nach der Bereitstellung des OTA bei @Capgo auf dem neuesten Stand."
+> "Wir haben [Capgo OTA-Updates](https://console.capgo.app/resend_email) in Produktion für unsere Nutzerbasis von über 5.000 ausgerollt. Wir sehen einen sehr reibungslosen Betrieb; fast alle unsere Nutzer sind innerhalb von Minuten nach der Bereitstellung des OTA bei @Capgo auf dem neuesten Stand."
 
 Andererseits verfolgt Appflow einen zentralisierteren Ansatz, der von Teams verlangt, sich an sein Ökosystem anzupassen.
 

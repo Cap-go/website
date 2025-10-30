@@ -272,7 +272,7 @@ Untuk pengguna Yarn, tegakkan resolusi ini dengan:
 yarn install --force
 ```
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) di produksi untuk basis pengguna kami +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami up to date dalam hitungan menit setelah OTA dikerahkan ke @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) di produksi untuk basis pengguna kami +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami up to date dalam hitungan menit setelah OTA dikerahkan ke @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 Menggunakan alat seperti Capgo dapat membantu mengelola pembaruan plugin dan menjaga konsistensi versi, terutama saat memperkenalkan perubahan penting.
 

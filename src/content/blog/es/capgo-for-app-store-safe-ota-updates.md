@@ -132,7 +132,7 @@ Elegir la estrategia de [actualización adecuada](https://capgo.app/docs/plugin/
 
 | **Necesidad del Proyecto** | **Enfoque Recomendado** | **Evidencia** |
 | --- | --- | --- |
-| Correcciones Críticas de Errores | [Actualizaciones OTA de Capgo](https://web.capgo.app/resend_email) | "Evitar la revisión para una corrección de errores es invaluable." – Bessie Cooper [\[1\]](https://capgo.app/) |
+| Correcciones Críticas de Errores | [Actualizaciones OTA de Capgo](https://console.capgo.app/resend_email) | "Evitar la revisión para una corrección de errores es invaluable." – Bessie Cooper [\[1\]](https://capgo.app/) |
 | Proyectos Sensibles al Costo | Capgo (integración CI/CD a ~$300/mes) | Ahorra costos en comparación con otras alternativas [\[1\]](https://capgo.app/) |
 | Escala Empresarial | Híbrido Tradicional + OTA | Más de 947.6M actualizaciones exitosas en 1,400 aplicaciones en producción [\[1\]](https://capgo.app/) |
 

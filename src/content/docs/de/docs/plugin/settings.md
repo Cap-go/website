@@ -188,7 +188,7 @@ Standard: `undefined`
 Wenn ein Store-Update erfolgt, deaktivieren Sie das erzwungene Zurücksetzen auf die native Version
 :::
 
-Es gibt noch viele weitere Einstellungen, die nur in der [Web-App](https://web.capgo.app/login) verfügbar sind
+Es gibt noch viele weitere Einstellungen, die nur in der [Web-App](https://console.capgo.app/login) verfügbar sind
 
 
 Um das Plugin zu konfigurieren, verwenden Sie diese Einstellungen:

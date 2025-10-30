@@ -307,7 +307,7 @@ Semantic Versioning, combined with Capgo, has made OTA updates for Capacitor app
 
 Here’s what developers are saying:
 
-> "We rolled out [Capgo OTA updates](https://web.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "We rolled out [Capgo OTA updates](https://console.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are upto date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 The MAJOR.MINOR.PATCH versioning system makes it easy to communicate breaking changes, new features, and bug fixes [\[5\]](https://aws.amazon.com/blogs/devops/using-semantic-versioning-to-simplify-release-management/). This is especially helpful for teams managing several releases each week through Capgo's platform.
 

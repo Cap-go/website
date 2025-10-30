@@ -92,7 +92,7 @@ CapacitorUpdater.notifyAppReady()
 
 ### Capgo CLOUD에 로그인
 
-먼저 계정에 있는 `all` [apikey](https://web.capgo.app/dashboard/apikeys/)를 사용하여 CLI로 로그인하세요:
+먼저 계정에 있는 `all` [apikey](https://console.capgo.app/dashboard/apikeys/)를 사용하여 CLI로 로그인하세요:
 
 `npx @capgo/cli@latest login YOU_KEY`
 
@@ -111,7 +111,7 @@ CLI로 Capgo Cloud에 앱을 생성하는 것부터 시작하겠습니다
 
 기본적으로 버전 이름은 `packagejson` 파일의 버전이 됩니다
 
-[Capgo](https://web.capgo.app/)에서 빌드가 있는지 확인하세요
+[Capgo](https://console.capgo.app/)에서 빌드가 있는지 확인하세요
 
 내 [모바일 샌드박스 앱](https://capgo.app/app_mobile/)으로 테스트할 수도 있습니다
 

@@ -59,7 +59,7 @@ App stores enforce these rules to safeguard users and maintain the overall stabi
 
 Because of these controls, developers are turning to alternative methods to keep up with the need for faster updates. Capgo, for example, has delivered 23.5 million OTA updates that comply with app store rules [\[1\]](https://capgo.app/), proving the demand for quicker solutions.
 
-> "We rolled out [Capgo OTA updates](https://web.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are up to date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app/)
+> "We rolled out [Capgo OTA updates](https://console.capgo.app/resend_email) in production for our user base of +5000. We're seeing very smooth operation almost all our users are up to date within minutes of the OTA being deployed to @Capgo." - colenso [\[1\]](https://capgo.app/)
 
 Modern OTA systems provide a way to push critical updates quickly without breaking app store guidelines. This approach demonstrates how developers can achieve faster deployment while staying compliant. Up next, we'll dive deeper into how OTA updates offer this agility.
 

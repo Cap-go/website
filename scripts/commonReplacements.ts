@@ -7,7 +7,7 @@ export const commonReplacements = (text: string) => {
     .replace(/([^.\s])gif(?!y)/g, '$1.gif')
     .replace(/update\/\)を/g, 'update/) を')
     .replace(/osxdailycom/g, 'osxdaily.com')
-    .replace(/webcapgo.app/g, 'web.capgo.app')
+    .replace(/webcapgo.app/g, 'console.capgo.app')
     .replace(/playgooglecom/g, 'play.google.com')
     .replace(/capacitorjscom/g, 'capacitorjs.com')
     .replace(/imagesimgixnet/g, 'images.imgix.net')

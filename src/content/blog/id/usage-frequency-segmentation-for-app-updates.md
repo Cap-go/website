@@ -132,7 +132,7 @@ Untuk memaksimalkan upaya segmentasi Anda:
 -   **Analisis umpan balik pengguna** untuk memahami kebutuhan spesifik setiap segmen.
 -   **Manfaatkan fitur rollback Capgo** untuk meminimalkan gangguan saat masalah muncul.
 
-> "Kami meluncurkan [pembaruan OTA Capgo](https://web.capgo.app/resend_email) di produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar, hampir semua pengguna kami diperbarui dalam hitungan menit setelah OTA dikerahkan ke @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
+> "Kami meluncurkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) di produksi untuk basis pengguna kami lebih dari 5000. Kami melihat operasi yang sangat lancar, hampir semua pengguna kami diperbarui dalam hitungan menit setelah OTA dikerahkan ke @Capgo." - colenso, @colenso [\[2\]](https://capgo.app)
 
 ## Ringkasan
 
