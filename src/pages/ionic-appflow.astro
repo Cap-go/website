@@ -207,16 +207,16 @@ const sources = [
         }
       </div>
 
-      <div class="mt-12 overflow-hidden rounded-2xl ring-1 ring-white/10">
-        <table class="min-w-full divide-y divide-white/10">
-          <thead class="bg-gray-800/60">
+      <div class="mt-12 overflow-hidden rounded-2xl bg-gray-800/80 ring-1 ring-white/20 shadow-xl">
+        <table class="min-w-full divide-y divide-white/20">
+          <thead class="bg-gray-900/90">
             <tr>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capflow_table_capability({}, { locale })}</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capflow_table_capgo({}, { locale })}</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-200">{m.capflow_table_appflow({}, { locale })}</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-white">{m.capflow_table_capability({}, { locale })}</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-white">{m.capflow_table_capgo({}, { locale })}</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-white">{m.capflow_table_appflow({}, { locale })}</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-white/10 bg-gray-800/20">
+          <tbody class="divide-y divide-white/20 bg-gray-800/60">
             {
               comparisonRows.map((row) => {
                 const capgoStatus = getStatusMeta(row.capgoClass, 'text-emerald-400')
