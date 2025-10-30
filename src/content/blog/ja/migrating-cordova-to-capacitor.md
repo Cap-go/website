@@ -7,7 +7,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2023-06-07T00:00:00.000Z
-updated_at: 2023-06-29T00:00:00.000Z
+updated_at: 2025-10-30T15:06:44.000Z
 head_image: /migrating-cordova-to-capacitor.webp
 head_image_alt: CordovaからCapacitorへの移行イラストレーション
 keywords: >-
