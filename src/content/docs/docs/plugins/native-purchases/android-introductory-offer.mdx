@@ -1,0 +1,194 @@
+---
+title: Create Android Subscription Introductory Offer
+description: Learn how to create introductory offers for auto-renewable subscriptions on Android to attract new subscribers.
+sidebar:
+  order: 5
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Introductory offers allow you to provide eligible users with either a free trial or a discounted introductory price. After the introductory period concludes, subscriptions automatically renew at standard pricing unless cancelled.
+
+## Overview
+
+Introductory offers are a powerful tool to:
+- Reduce barriers to entry for new subscribers
+- Increase conversion rates
+- Allow users to try your premium features risk-free
+- Build long-term subscriber relationships
+
+## Eligibility
+
+Users can receive an introductory offer if they haven't previously purchased or received an introductory offer for the subscription. Google Play handles eligibility automatically.
+
+## Prerequisites
+
+You must first [create an auto-renewable subscription](/docs/plugins/native-purchases/android-create-subscription/) before adding an introductory offer.
+
+## Creating an Introductory Offer
+
+<Steps>
+
+1. **Access Offer Configuration**
+
+   Navigate to your subscription in Google Play Console and select the **Add offer** button.
+
+   ![Add offer button](/native-purchases/android/introductory-offer/add-offer-button.png)
+
+2. **Select Base Plan**
+
+   A modal will appear requiring you to choose your base plan. Typically, you'll only have one base plan. Click **Add offer** to continue.
+
+   ![Select base plan](/native-purchases/android/introductory-offer/select-base-plan.png)
+
+3. **Configure Offer Details**
+
+   Enter the following information:
+
+   **Offer ID**: A unique identifier for this offer
+
+   **Eligibility**: Choose who can receive this offer
+   - **New customers**: Only users who have never subscribed
+   - **Existing customers**: Users who previously subscribed
+   - **Developer determined**: Custom eligibility logic (not supported by native-purchases)
+
+   :::caution
+   The native-purchases plugin does not support the "Developer determined" eligibility option. Use "New customers" or "Existing customers" instead.
+   :::
+
+   ![Configure offer](/native-purchases/android/introductory-offer/configure-offer-details.png)
+
+4. **Add Phases**
+
+   Click **Add phase** at the bottom of the page to define your offer structure.
+
+   You can add up to two phases, allowing combinations like:
+   - Free trial only
+   - Discounted price only
+   - Free trial followed by discounted recurring payment
+
+5. **Select Phase Type**
+
+   Choose from three phase types:
+
+   **Free Trial**
+   - Complimentary access for a set duration
+   - Example: 7 days free, then $9.99/month
+
+   **Single Payment**
+   - One-time discounted price for a specific period
+   - Example: $1.99 for 2 months, then $9.99/month
+
+   **Discounted Recurring Payment**
+   - Reduced per-billing-cycle rate for multiple cycles
+   - Example: $4.99/month for 3 months, then $9.99/month
+
+6. **Configure Phase Duration**
+
+   Set how long the introductory phase lasts:
+   - Days, weeks, or months
+   - Number of billing cycles
+
+7. **Finalize and Activate**
+
+   Click **Apply**, then **Save** to activate the offer. The **Activate** button will become available once saved.
+
+</Steps>
+
+## Offer Phase Examples
+
+### Example 1: Simple Free Trial
+- Phase 1: 7 days free
+- Then: $9.99/month standard pricing
+
+### Example 2: Discounted Introduction
+- Phase 1: $1.99 for the first month
+- Then: $9.99/month standard pricing
+
+### Example 3: Extended Trial + Discount
+- Phase 1: 14 days free
+- Phase 2: $4.99/month for 2 months
+- Then: $9.99/month standard pricing
+
+## Using in Your App
+
+The native-purchases plugin automatically handles introductory offer eligibility and presentation:
+
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+// Check eligibility
+const { eligible } = await NativePurchases.checkTrialOrIntroductoryPriceEligibility({
+  productIdentifiers: ['premium_monthly']
+});
+
+if (eligible['premium_monthly']) {
+  console.log('User is eligible for introductory offer!');
+}
+
+// Fetch products (includes intro offer info)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly']
+});
+
+const product = products[0];
+if (product.introductoryPrice) {
+  console.log(`Intro offer: ${product.introductoryPriceString}`);
+  console.log(`Then: ${product.priceString}`);
+}
+
+// Purchase (intro offer applied automatically if eligible)
+const { customerInfo } = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly'
+});
+```
+
+## Best Practices
+
+### Offer Duration
+- **Free trials**: 3-14 days is optimal for most apps
+- **Discounted periods**: 1-3 months works well for building habit
+- **Price discount**: 50-70% off regular price drives conversions
+
+### Marketing
+- Clearly display the intro offer and regular price
+- Show what happens after the intro period
+- Make cancellation easy and transparent
+- Remind users before the intro period ends
+
+### A/B Testing
+Test different offer structures:
+- Free trial length
+- Discount percentage
+- Discount duration
+- Single phase vs. multi-phase
+
+## Important Notes
+
+- Only one introductory offer can be active per subscription at a time
+- Users can only claim an intro offer once per subscription
+- Intro offers don't apply to subscription upgrades/downgrades
+- Changes to intro offers don't affect existing subscribers
+
+## Troubleshooting
+
+**Intro offer not showing:**
+- Verify the offer is activated in Play Console
+- Check user eligibility (may have used offer before)
+- Ensure app is using latest product information
+
+**Wrong users receiving offer:**
+- Review eligibility settings (new vs. existing customers)
+- Check if user previously subscribed on different device
+- Verify Play Store account history
+
+**Offer not applying at purchase:**
+- Confirm product ID matches exactly
+- Check that offer is still active and not expired
+- Verify date range settings for the offer
+
+## Next Steps
+
+- [Configure sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/) to test your offers
+- Monitor conversion rates in Play Console analytics
+- Consider creating multiple subscription tiers with different offers

@@ -465,6 +465,23 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/native-purchases/' },
                 { label: 'Getting started', link: '/docs/plugins/native-purchases/getting-started' },
+                {
+                  label: 'Android Setup',
+                  items: [
+                    { label: 'Sandbox Testing', link: '/docs/plugins/native-purchases/android-sandbox-testing' },
+                    { label: 'Create Subscription', link: '/docs/plugins/native-purchases/android-create-subscription' },
+                    { label: 'Introductory Offers', link: '/docs/plugins/native-purchases/android-introductory-offer' },
+                  ],
+                },
+                {
+                  label: 'iOS Setup',
+                  items: [
+                    { label: 'Sandbox Testing', link: '/docs/plugins/native-purchases/ios-sandbox-testing' },
+                    { label: 'Subscription Groups', link: '/docs/plugins/native-purchases/ios-subscription-group' },
+                    { label: 'Create Subscription', link: '/docs/plugins/native-purchases/ios-create-subscription' },
+                    { label: 'Introductory Offers', link: '/docs/plugins/native-purchases/ios-introductory-offer' },
+                  ],
+                },
               ],
               collapsed: true,
             },

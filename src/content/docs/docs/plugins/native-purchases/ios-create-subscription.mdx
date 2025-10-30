@@ -1,0 +1,303 @@
+---
+title: Create iOS Auto-Renewable Subscription
+description: Step-by-step guide to creating auto-renewable subscriptions in App Store Connect for the native-purchases plugin.
+sidebar:
+  order: 8
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Auto-renewable subscriptions provide recurring access to content, services, or premium features in your iOS app. This guide walks you through creating subscriptions in App Store Connect.
+
+## Overview
+
+Auto-renewable subscriptions automatically renew at the end of each billing period until users cancel. They're perfect for:
+- Premium content and features
+- Ad-free experiences
+- Cloud storage and sync
+- Streaming services
+- Professional tools and utilities
+
+## Prerequisites
+
+Before creating subscriptions, you must:
+1. [Create a subscription group](/docs/plugins/native-purchases/ios-subscription-group/) to organize your subscriptions
+2. Have an active Apple Developer Program membership
+3. Complete banking and tax information in App Store Connect
+
+## Creating a Subscription
+
+<Steps>
+
+1. **Navigate to Subscriptions**
+
+   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+
+   Select your subscription group or create a new one if needed.
+
+   ![Navigate to subscriptions](/native-purchases/ios/create-subscription/navigate-to-subscriptions.png)
+
+2. **Create New Subscription**
+
+   Click the **+** icon next to your subscription group to add a new subscription.
+
+3. **Enter Basic Information**
+
+   **Reference Name**: Descriptive name for your internal use (not shown to customers)
+   - Examples: "Premium Monthly", "Ultimate Annual", "Basic Plan"
+
+   **Product ID**: Unique identifier for this subscription (cannot be changed later)
+   - Format: `com.yourcompany.yourapp.premium_monthly`
+   - Use descriptive, lowercase names with underscores
+   - Required for configuring the native-purchases plugin
+
+   ![Enter subscription details](/native-purchases/ios/create-subscription/enter-subscription-info.png)
+
+4. **Configure Duration**
+
+   Select the subscription duration from available options:
+   - 1 week
+   - 1 month
+   - 2 months
+   - 3 months
+   - 6 months
+   - 1 year
+
+   The duration determines how often users are billed.
+
+5. **Set Up Pricing**
+
+   Click **Add Subscription Price** to configure pricing:
+
+   **Base Territory**: Select your primary market (usually your country)
+
+   **Price**: Set the subscription price
+   - Apple automatically converts to other currencies
+   - Choose from Apple's price tiers
+   - Consider perceived value and market rates
+
+   ![Configure pricing](/native-purchases/ios/create-subscription/configure-pricing.png)
+
+6. **Family Sharing (Optional)**
+
+   Decide whether to enable Family Sharing, which allows up to 6 family members to access the subscription.
+
+   :::caution
+   Once Family Sharing is enabled, it cannot be turned off for this product.
+   :::
+
+   **Enable if:**
+   - Content is appropriate for family use
+   - You want to increase value proposition
+   - Your business model supports it
+
+   **Don't enable if:**
+   - Subscription is for individual use only
+   - Content is personalized to the user
+   - You want to maximize revenue per user
+
+7. **Add Localizations**
+
+   Add subscription display information in all languages your app supports:
+
+   **Subscription Display Name**: Customer-facing name (e.g., "Premium Monthly")
+
+   **Description**: Brief description of what the subscription includes
+   - Keep it concise and benefit-focused
+   - Mention key features
+   - Highlight value proposition
+
+   ![Add localizations](/native-purchases/ios/create-subscription/add-localization.png)
+
+8. **App Store Promotional Image (Optional)**
+
+   Upload a promotional image for this subscription (312x390 pixels):
+   - Shows in the App Store subscription page
+   - Should match your app's design
+   - Include subscription name for clarity
+
+   :::note
+   While images are optional for initial submission, they're required for promotional display in the App Store. You can add them later.
+   :::
+
+9. **Save and Submit**
+
+   Click **Save** to create the subscription.
+
+   **For First Subscription:**
+   - Must be submitted with a new app version
+   - Include in your next App Store submission
+   - Cannot submit independently
+
+   **For Subsequent Subscriptions:**
+   - Can be submitted directly from the Subscriptions page
+   - Don't require a new app version
+   - Available after first subscription is approved
+
+</Steps>
+
+## Subscription Status
+
+Your subscription will have one of these statuses:
+
+| Status | Description | Can Test? |
+|--------|-------------|-----------|
+| **Missing Metadata** | Incomplete setup | Yes (sandbox) |
+| **Ready to Submit** | Complete but not submitted | Yes (sandbox) |
+| **Waiting for Review** | Submitted to Apple | Yes (sandbox) |
+| **In Review** | Being reviewed by Apple | Yes (sandbox) |
+| **Approved** | Available for purchase | Yes |
+| **Rejected** | Needs changes | Yes (sandbox) |
+
+:::tip
+You can test subscriptions in sandbox mode even if they show "Missing Metadata" or "Ready to Submit"!
+:::
+
+## Using in Your App
+
+Once created, reference the subscription in your app using the product ID:
+
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+// Fetch subscription products
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: [
+    'com.yourcompany.yourapp.premium_monthly',
+    'com.yourcompany.yourapp.premium_annual'
+  ]
+});
+
+// Display subscription details
+products.forEach(product => {
+  console.log(`${product.title}: ${product.priceString}`);
+  console.log(`Duration: ${product.subscriptionPeriod}`);
+  console.log(`Description: ${product.description}`);
+});
+
+// Purchase a subscription
+try {
+  const { customerInfo } = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.yourcompany.yourapp.premium_monthly'
+  });
+
+  // Check entitlements
+  if (customerInfo.entitlements.active['premium']) {
+    console.log('Premium subscription active!');
+    // Enable premium features
+  }
+} catch (error) {
+  console.error('Purchase failed:', error);
+}
+
+// Check subscription status
+const { customerInfo } = await NativePurchases.getCustomerInfo();
+const premiumEntitlement = customerInfo.entitlements.active['premium'];
+
+if (premiumEntitlement) {
+  console.log('Expires:', premiumEntitlement.expirationDate);
+  console.log('Will renew:', premiumEntitlement.willRenew);
+  console.log('Product:', premiumEntitlement.productIdentifier);
+}
+```
+
+## Best Practices
+
+### Pricing Strategy
+- **Monthly plans**: Lower barrier to entry, builds habit
+- **Annual plans**: Better value, higher LTV, lower churn
+- **Multiple tiers**: Basic, Premium, Ultimate for different user segments
+- **Competitive analysis**: Research similar apps' pricing
+
+### Product IDs
+- Use consistent naming: `company.app.tier_duration`
+- Include tier and duration in ID: `premium_monthly`, `ultimate_annual`
+- Avoid changing product IDs (they're permanent)
+- Document all product IDs for your team
+
+### Family Sharing
+- Enable for family-oriented apps (games, educational, entertainment)
+- Consider impact on revenue
+- Test sharing behavior thoroughly
+- Communicate sharing capability in marketing
+
+### Localization
+- Translate all subscription names and descriptions
+- Consider regional pricing differences
+- Test display in all supported languages
+- Use culturally appropriate marketing language
+
+### Promotional Images
+- Maintain consistent visual style
+- Include subscription name and key benefit
+- Update for seasonal promotions
+- Match app's overall design language
+
+## Common Subscription Patterns
+
+### Single Tier (Freemium)
+```
+Free App + Premium Subscription
+- Basic: Free (limited features)
+- Premium Monthly: $4.99
+- Premium Annual: $39.99 (save 33%)
+```
+
+### Multi-Tier (Good, Better, Best)
+```
+- Basic Monthly: $4.99
+- Premium Monthly: $9.99
+- Ultimate Monthly: $19.99
+
+- Basic Annual: $49.99
+- Premium Annual: $99.99
+- Ultimate Annual: $199.99
+```
+
+### Consumable + Subscription Hybrid
+```
+- Credit packs (consumable)
+- Monthly subscription (unlimited credits)
+- Annual subscription (unlimited + bonus features)
+```
+
+## Troubleshooting
+
+**Subscription not loading in app:**
+- Verify product ID matches exactly (case-sensitive)
+- Check subscription is in subscription group
+- Ensure bundle identifier matches App Store Connect
+- Wait 2-3 hours after creating product
+
+**Cannot submit subscription:**
+- Complete all required fields (name, description, price)
+- Add at least one localization
+- Verify banking/tax info is approved
+- Check if first subscription (requires app version)
+
+**Family Sharing toggle disabled:**
+- Already enabled (cannot be disabled)
+- Check in subscription details
+- Contact Apple Support if stuck
+
+**Price tier not available:**
+- May be restricted in some territories
+- Choose alternative tier
+- Contact Apple for pricing questions
+
+**"Invalid Product ID" error:**
+- Must be reverse domain format
+- Cannot contain spaces or special characters
+- Check for typos
+- Verify uniqueness across all products
+
+## Next Steps
+
+- [Create an introductory offer](/docs/plugins/native-purchases/ios-introductory-offer/) to attract new subscribers
+- [Configure sandbox testing](/docs/plugins/native-purchases/ios-sandbox-testing/) to test your subscriptions
+- Set up promotional offers for win-back and retention
+- Implement subscription analytics tracking
+
+## Additional Resources
+
+For more details, refer to the [official Apple documentation on auto-renewable subscriptions](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).
