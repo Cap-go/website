@@ -471,6 +471,7 @@ export default defineConfig({
                     { label: 'Sandbox Testing', link: '/docs/plugins/native-purchases/android-sandbox-testing' },
                     { label: 'Create Subscription', link: '/docs/plugins/native-purchases/android-create-subscription' },
                     { label: 'Introductory Offers', link: '/docs/plugins/native-purchases/android-introductory-offer' },
+                    { label: 'Play Store Review', link: '/docs/plugins/native-purchases/android-play-store-review' },
                   ],
                 },
                 {
@@ -480,6 +481,7 @@ export default defineConfig({
                     { label: 'Subscription Groups', link: '/docs/plugins/native-purchases/ios-subscription-group' },
                     { label: 'Create Subscription', link: '/docs/plugins/native-purchases/ios-create-subscription' },
                     { label: 'Introductory Offers', link: '/docs/plugins/native-purchases/ios-introductory-offer' },
+                    { label: 'App Store Review', link: '/docs/plugins/native-purchases/ios-app-store-review' },
                   ],
                 },
               ],
