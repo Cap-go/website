@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-10-30T00:00:00.000Z
-updated_at: 2025-10-30T00:00:00.000Z
+updated_at: 2025-10-30T04:17:55.000Z
 head_image: /app-review-guide.webp
 head_image_alt: App Review Process
 keywords: app store review, play store review, app submission, privacy policy, terms and conditions, social login, app testing, android review, ios review
