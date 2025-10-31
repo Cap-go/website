@@ -215,7 +215,7 @@ body,
 }
 
 /* MicroCard component styles */
-.card {
+.micro-card {
   width: 33.333333333%;
   --sl-card-border: var(--sl-color-blue);
   --sl-card-bg: var(--sl-color-blue-low);
@@ -232,7 +232,7 @@ body,
   overflow: hidden;
 }
 
-.clickable:hover {
+.micro-card-clickable:hover {
   transform: translateY(-6px) scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   border-color: var(--sl-card-border);
@@ -240,11 +240,11 @@ body,
 }
 
 /* Light mode hover background */
-:root[data-theme='light'] .clickable:hover {
+:root[data-theme='light'] .micro-card-clickable:hover {
   background-color: hsl(224, 10%, 95%);
 }
 
-.clickable:hover::before {
+.micro-card-clickable:hover::before {
   content: '';
   position: absolute;
   top: 0;
@@ -256,7 +256,7 @@ body,
   pointer-events: none;
 }
 
-.clickable:hover::after {
+.micro-card-clickable:hover::after {
   content: '';
   position: absolute;
   inset: -2px;
@@ -264,11 +264,11 @@ body,
   border-radius: 2px;
   opacity: 0.8;
   pointer-events: none;
-  animation: pulse 1.5s infinite;
+  animation: micro-card-pulse 1.5s infinite;
   z-index: 2;
 }
 
-@keyframes pulse {
+@keyframes micro-card-pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(var(--sl-card-border-rgb, 100, 100, 255), 0.6);
     opacity: 1;
@@ -283,13 +283,13 @@ body,
   }
 }
 
-.clickable:active {
+.micro-card-clickable:active {
   transform: translateY(0) scale(0.95);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: all 0.1s ease;
 }
 
-.card-link {
+.micro-card-link {
   display: block;
   text-decoration: none;
   color: inherit;
@@ -299,27 +299,27 @@ body,
   z-index: 3;
 }
 
-.card:nth-child(4n + 1) {
+.micro-card:nth-child(4n + 1) {
   --sl-card-border: var(--sl-color-orange);
   --sl-card-bg: var(--sl-color-orange-low);
   --sl-card-border-rgb: 255, 146, 43;
 }
-.card:nth-child(4n + 3) {
+.micro-card:nth-child(4n + 3) {
   --sl-card-border: var(--sl-color-green);
   --sl-card-bg: var(--sl-color-green-low);
   --sl-card-border-rgb: 62, 204, 143;
 }
-.card:nth-child(4n + 4) {
+.micro-card:nth-child(4n + 4) {
   --sl-card-border: var(--sl-color-red);
   --sl-card-bg: var(--sl-color-red-low);
   --sl-card-border-rgb: 248, 113, 113;
 }
-.card:nth-child(4n + 5) {
+.micro-card:nth-child(4n + 5) {
   --sl-card-border: var(--sl-color-blue);
   --sl-card-bg: var(--sl-color-blue-low);
   --sl-card-border-rgb: 62, 138, 204;
 }
-.card .title {
+.micro-card .title {
   font-weight: 600;
   font-size: var(--sl-text-h4);
   color: var(--sl-color-white);
@@ -327,13 +327,13 @@ body,
   gap: 1rem;
   align-items: center;
 }
-.card .icon {
+.micro-card .icon {
   border: 1px solid var(--sl-card-border);
   background-color: var(--sl-card-bg);
   padding: 0.2em;
   border-radius: 0.25rem;
 }
-.card .body {
+.micro-card .body {
   margin: 0;
   font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
 }

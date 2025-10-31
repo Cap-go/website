@@ -14,8 +14,8 @@ interface Props {
 const { icon, customIcon, title, size = '1.333em', color, href } = Astro.props
 ---
 
-<article class="card sl-flex clickable" style={color ? `--card-icon-color: ${color};` : ''}>
-  <a href={href || '#'} class="card-link">
+<article class="micro-card sl-flex micro-card-clickable" style={color ? `--micro-card-icon-color: ${color};` : ''}>
+  <a href={href || '#'} class="micro-card-link">
     <p class="title sl-flex">
       {icon && <Icon name={icon as any} class="icon" size={size} />}
       {
