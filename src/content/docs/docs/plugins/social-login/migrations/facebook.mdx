@@ -1,10 +1,14 @@
 ---
 title: Migration Guide from @capacitor-community/facebook-login to @capgo/capacitor-social-login
-description: This detailed guide provides step-by-step instructions for transitioning from the @capacitor-community/facebook-login plugin to the @capgo/capacitor-social-login plugin, ensuring a smooth migration process.
+description: This detailed guide provides step-by-step instructions for transitioning from the @capacitor-community/facebook-login plugin to the @capgo/capacitor-social-login plugin, ensuring a smooth migration process with enhanced features.
 sidebar:
     order: 2
 ---
 import { Steps } from '@astrojs/starlight/components';
+
+## Overview
+
+This guide provides comprehensive instructions for migrating from `@capacitor-community/facebook-login` to `@capgo/capacitor-social-login`. The new plugin modernizes Facebook authentication with a unified API that supports multiple social providers, improved TypeScript support, and enhanced capabilities.
 
 ## Installation
 
@@ -30,6 +34,9 @@ import { Steps } from '@astrojs/starlight/components';
 ```
 
 ### Initialization
+
+**Key Change**: The new package requires explicit setup in your code:
+
 ```diff
 - // Old package required no explicit initialization in code
 - // Configuration was done only in native platforms
@@ -44,6 +51,9 @@ import { Steps } from '@astrojs/starlight/components';
 ```
 
 ### Login
+
+The login method now accepts a provider parameter:
+
 ```diff
 - const FACEBOOK_PERMISSIONS = ['email', 'public_profile'];
 - const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
@@ -60,7 +70,7 @@ import { Steps } from '@astrojs/starlight/components';
 
 ### Response Type Changes
 
-The response object structure has changed. Here's how to handle the new response:
+The response structure has been modernized with a more comprehensive profile object:
 
 ```typescript
 // Old response type
@@ -105,6 +115,11 @@ interface FacebookLoginResponse {
 }
 ```
 
+**Key Differences**:
+- Response now includes a `provider` field identifying the authentication provider
+- More detailed `profile` object with additional user information
+- Consistent structure across all social login providers
+
 ### Checking Login Status
 ```diff
 - const result = await FacebookLogin.getCurrentAccessToken();
@@ -129,7 +144,7 @@ interface FacebookLoginResponse {
 
 ### Android Setup
 
-1. The Android setup remains similar, but configuration is now done through the plugin's initialize method:
+Configuration is now handled through the initialize method:
 
 ```diff
 - // AndroidManifest.xml changes remain the same
@@ -142,6 +157,8 @@ interface FacebookLoginResponse {
 +   }
 + });
 ```
+
+**Important**: Client token is now required for Android authentication.
 
 ### iOS Setup
 
@@ -194,10 +211,23 @@ ApplicationDelegate.shared.application(
 
 ## Breaking Changes
 
-1. Explicit initialization is now required
-2. Response object structure has changed significantly
-3. Client token is now required for Android
-4. Different method names and parameter structures
-5. Error handling and error types have changed
+Summary of breaking changes when migrating:
+
+1. **Explicit initialization is now required** - Must call `initialize()` before use
+2. **Response object structure has changed significantly** - New nested result format with enhanced profile data
+3. **Client token is now required for Android** - Additional configuration needed
+4. **Different method names and parameter structures** - Provider-based approach
+5. **Error handling and error types have changed** - More detailed error information
+
+## Key Advantages
+
+The new plugin provides:
+
+- **Unified API** across multiple social providers (Google, Apple, Facebook)
+- **Improved TypeScript support** with better type definitions
+- **Enhanced profile data** with more user information
+- **Active maintenance** and community support
+- **Consistent error handling** across all providers
+- **Better token management** with proper expiration handling
 
 For more detailed setup instructions, please refer to the [official documentation](/docs/plugins/social-login/facebook/). 
