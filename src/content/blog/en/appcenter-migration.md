@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-22T00:00:00.000Z
-updated_at: 2025-10-31T10:28:43.000Z
+updated_at: 2025-10-31T17:55:22.000Z
 head_image: /migrate_appcenter.webp
 head_image_alt: Capacitor JS Dev looking for alternative
 keywords: App Center, migration, live updates, OTA updates, continuous integration, mobile app updates

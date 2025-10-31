@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-02-27T00:00:00.000Z
-updated_at: 2025-10-31T10:28:43.000Z
+updated_at: 2025-10-31T17:55:22.000Z
 head_image: /update_flow.webp
 head_image_alt: Desarrollo de Capacitor busca alternativas
 keywords: >-
