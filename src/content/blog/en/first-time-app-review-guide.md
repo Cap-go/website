@@ -649,7 +649,7 @@ cd android
 **2025 Requirement**: New apps must target Android 14 (API level 34) or higher.
 
 **Update in android/app/build.gradle**:
-```gradle
+```kotlin
 android {
     compileSdkVersion 34
 
