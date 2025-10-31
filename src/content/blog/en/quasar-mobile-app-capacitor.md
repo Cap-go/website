@@ -6,7 +6,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikDhabal'
 created_at: 2023-09-14T00:00:00.000Z
-updated_at: 2025-10-30T15:06:44.000Z
+updated_at: 2025-10-31T10:28:43.000Z
 head_image: /quasar_capgo.webp
 head_image_alt: Quasar and Capgo illustration
 keywords: Quasar, Capacitor, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
