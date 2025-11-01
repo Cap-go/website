@@ -123,35 +123,40 @@ const features = [
       <div class="group relative flex flex-col rounded-3xl p-8 transition-all duration-300" style="background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.15) 0%, rgba(36, 36, 36, 1) 70%);">
         <!-- Image Container with glow effect -->
         <div class="relative mb-8 flex h-[400px] items-center justify-center overflow-visible">
+          <!-- Blue glow outside card on bottom-left -->
+          <div class="pointer-events-none absolute bottom-[25%] left-[15%] w-64 h-64 z-0" style="background: radial-gradient(circle, rgba(59, 130, 246, 0.5) 0%, transparent 70%); filter: blur(30px);"></div>
+
           <!-- Developer Card -->
-          <div class="relative w-72 rounded-xl border border-gray-700 bg-[#1f1f1f] p-6 shadow-2xl">
-            <div class="mb-6 flex items-center gap-2">
-              <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-700">
-                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
+          <div class="relative w-72 rounded-xl border border-gray-700 bg-[#1f1f1f] p-6 shadow-2xl z-10">
+            <div class="relative">
+              <div class="mb-6 flex items-center gap-2">
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-700">
+                  <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                  </svg>
+                </div>
+                <span class="text-base text-white">Developer</span>
               </div>
-              <span class="text-base text-white">Developer</span>
-            </div>
 
-            <div class="mb-6">
-              <div class="mb-2 text-xs text-gray-500">Account</div>
-              <div class="text-2xl font-semibold text-white">Joseph</div>
-            </div>
-
-            <div class="mb-6 flex gap-8">
-              <div class="text-sm text-gray-400">Permissions</div>
-              <div class="relative text-sm text-white">
-                Full access
-                <!-- Cursor Pointer -->
-                <svg class="absolute -right-6 -top-1 h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M5 3l14 9-6 1-3 6-5-16z"></path>
-                </svg>
+              <div class="mb-6">
+                <div class="mb-2 text-xs text-gray-500">Account</div>
+                <div class="text-2xl font-semibold text-white">Joseph</div>
               </div>
-            </div>
 
-            <div class="border-t border-gray-700 pt-4">
-              <div class="text-sm text-gray-400">Settings</div>
+              <div class="mb-6 flex gap-8">
+                <div class="text-sm text-gray-400">Permissions</div>
+                <div class="relative text-sm text-white">
+                  Full access
+                  <!-- Cursor Pointer -->
+                  <svg class="absolute -right-6 -top-1 h-6 w-6 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M5 3l14 9-6 1-3 6-5-16z"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="border-t border-gray-700 pt-4">
+                <div class="text-sm text-gray-400">Settings</div>
+              </div>
             </div>
           </div>
         </div>
@@ -162,52 +167,48 @@ const features = [
       </div>
 
       <!-- Card 3: Adapt as you grow -->
-      <div class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#242424] p-8 transition-all duration-300 hover:bg-[#2a2a2a]">
-        <div
-          class="pointer-events-none absolute inset-0 opacity-80"
-          aria-hidden="true"
-          style="background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.18) 0%, rgba(36, 36, 36, 1) 70%);"
-        ></div>
+      <div class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#1e1f23] p-8 transition-all duration-300 hover:bg-[#24252a]">
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div
+            class="absolute inset-0 opacity-80"
+            style="background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.25) 0%, rgba(30, 32, 40, 0.85) 65%, rgba(12, 13, 18, 0.95) 100%);"
+          ></div>
+        </div>
         <!-- Preview Card -->
-        <div class="relative mb-8 flex h-[400px] items-start justify-center">
-          <div class="relative w-full max-w-sm overflow-hidden rounded-2xl border border-blue-500/40 bg-[#1f1f1f] p-6 shadow-2xl">
-            <div
-              class="pointer-events-none absolute inset-0"
-              aria-hidden="true"
-              style="background: radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 65%);"
-            ></div>
-            <div
-              class="pointer-events-none absolute inset-x-0 bottom-0 h-40"
-              aria-hidden="true"
-              style="background: linear-gradient(to bottom, transparent 0%, rgba(30, 58, 138, 0.35) 100%);"
-            ></div>
-            <div class="relative flex flex-col gap-6">
+        <div class="relative mb-8 flex h-[400px] items-center justify-end overflow-visible">
+          <div class="relative w-full max-w-sm rounded-2xl border-2 border-gray-700 bg-[#1f1f1f] p-6 shadow-2xl overflow-hidden" style="margin-right: -5rem;">
+            <!-- Gradient Bottom Effect -->
+            <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-48">
+              <div class="h-full w-full" style="background: linear-gradient(to bottom, transparent 0%, rgba(30, 58, 138, 0.2) 100%);"></div>
+            </div>
+
+            <div class="relative z-10 space-y-6">
               <h3 class="text-xl font-semibold text-white">Role Permissions</h3>
 
-              <div class="flex items-center justify-between">
-                <span class="text-base text-white">Deploy update</span>
-                <div class="flex h-6 w-6 items-center justify-center rounded bg-blue-500">
-                  <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                  </svg>
+              <div class="overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm">
+                <div class="flex items-center justify-between px-5 py-4">
+                  <span class="text-base text-white/90">Deploy updates</span>
+                  <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.55)]">
+                    <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-
-              <div class="flex items-center justify-between">
-                <span class="text-base text-white">Upload only</span>
-                <div class="flex h-6 w-6 items-center justify-center rounded bg-blue-500">
-                  <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                  </svg>
+                <div class="flex items-center justify-between border-t border-white/5 px-5 py-4">
+                  <span class="text-base text-white/90">View logs</span>
+                  <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.55)]">
+                    <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
                 </div>
-              </div>
-
-              <div class="flex items-center justify-between">
-                <span class="text-base text-white">Manage org</span>
-                <div class="flex h-6 w-6 items-center justify-center rounded bg-blue-500">
-                  <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                  </svg>
+                <div class="flex items-center justify-between border-t border-white/5 px-5 py-4">
+                  <span class="text-base text-white/90">Manage channels</span>
+                  <div class="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.55)]">
+                    <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -215,8 +216,8 @@ const features = [
         </div>
 
         <!-- Text Content -->
-        <h3 class="mb-4 text-2xl font-bold text-white">{features[2].title}</h3>
-        <p class="text-base leading-relaxed text-gray-400">{features[2].description}</p>
+        <h3 class="relative z-[1] mb-4 text-2xl font-bold text-white">{features[2].title}</h3>
+        <p class="relative z-[1] text-base leading-relaxed text-gray-400">{features[2].description}</p>
       </div>
     </div>
 
