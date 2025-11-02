@@ -72,11 +72,14 @@ Perhatikan bahwa sebagian besar app store melarang pengiriman kode yang mengubah
 
 MAU adalah "Monthly Active User". Kami menghitung MAU sebagai perangkat yang telah menghubungi server kami dalam 30 hari terakhir. Kami tidak menghitung perangkat yang tidak menghubungi server kami dalam 30 hari terakhir.
 
-Setiap kali perangkat menginstal ulang aplikasi Anda, MAU baru dihitung, ini terjadi karena batasan privasi Apple Store. Kami tidak dapat melacak perangkat yang sama jika pengguna menginstal ulang aplikasi.
+**Penting**: Sejak versi plugin **v6.25.0** dan **v7.25.0**, ID perangkat sekarang bertahan di seluruh instalasi ulang aplikasi. Sebelum versi ini, setiap instalasi ulang aplikasi akan menghasilkan ID perangkat baru dan dihitung sebagai MAU baru.
 
-Selama pengembangan, setiap kali Anda menginstal ulang aplikasi, MAU baru dihitung.
+Dengan versi saat ini:
+- ID perangkat bertahan di seluruh instalasi ulang aplikasi (disimpan dengan aman di Keychain pada iOS dan EncryptedSharedPreferences pada Android)
+- Memperbarui aplikasi tidak membuat ID Perangkat baru
+- Selama pengembangan, jika Anda menggunakan versi plugin yang lebih lama (< v6.25.0 / v7.25.0), setiap instalasi ulang masih membuat MAU baru
 
-Sama untuk unduhan testflight atau perpindahan channel di Android. Memperbarui aplikasi tidak membuat ID Perangkat baru.
+Catatan: Unduhan TestFlight dan perpindahan channel di Android mungkin masih menghasilkan pendaftaran perangkat baru tergantung pada konfigurasi Anda.
 
 > Kami menyarankan setelah pengaturan pertama, untuk menonaktifkan perangkat dev dan emulator untuk mengurangi jumlah perangkat duplikat.
 
@@ -303,9 +306,11 @@ ID perangkat dibuat di perangkat pada penggunaan pertama, dan digunakan untuk me
 
 MAU adalah solusi yang lebih baik daripada jumlah instalasi untuk harga Capgo, karena lebih akurat dan mencerminkan biaya aktual Capgo per perangkat.
 
-Untuk alasan privasi, kami tidak dapat melacak perangkat yang sama jika pengguna menginstal ulang aplikasi.
+**Persistensi ID Perangkat (Diperbarui di v6.25.0 dan v7.25.0)**:
+- **Perilaku saat ini**: ID perangkat sekarang bertahan di seluruh instalasi ulang aplikasi. Ini disimpan dengan aman di Keychain perangkat (iOS) atau EncryptedSharedPreferences (Android), memungkinkan kami melacak perangkat yang sama bahkan setelah penghapusan instalasi/instalasi ulang.
+- **Perilaku sebelumnya** (sebelum v6.25.0/v7.25.0): Untuk alasan privasi yang terkait dengan kebijakan Apple dan Google Store, ID perangkat direset pada setiap instalasi ulang aplikasi, membuatnya tidak mungkin untuk melacak perangkat yang sama di seluruh instalasi ulang.
 
-Aturan privasi diberlakukan oleh Apple dan Google, dan tidak diberlakukan oleh Capgo.
+Aturan privasi diberlakukan oleh Apple dan Google, dan implementasi Capgo sesuai dengan praktik terbaik mereka untuk identifikasi perangkat.
 
 ID Perangkat tidak akan terdaftar dalam daftar perangkat Anda sampai mereka mendapatkan patch pertama yang diinstal.
 

@@ -72,11 +72,14 @@ Nota che la maggior parte degli app store vieta la distribuzione di codice che m
 
 Un MAU è un "Utente Attivo Mensile". Contiamo come MAU qualsiasi dispositivo che ha contattato i nostri server negli ultimi 30 giorni. Non contiamo i dispositivi che non hanno contattato i nostri server negli ultimi 30 giorni.
 
-Ogni volta che un dispositivo installa nuovamente la tua app, viene contato un nuovo MAU, questo accade a causa delle limitazioni di privacy dell'Apple Store. Non possiamo tracciare lo stesso dispositivo se l'utente reinstalla l'app.
+**Importante**: A partire dalla versione del plugin **v6.25.0** e **v7.25.0**, l'ID del dispositivo ora persiste tra le reinstallazioni dell'app. Prima di queste versioni, ogni reinstallazione dell'app generava un nuovo ID dispositivo e contava come un nuovo MAU.
 
-Durante lo sviluppo, ogni volta che reinstalli l'app, viene contato un nuovo MAU.
+Con le versioni attuali:
+- L'ID del dispositivo persiste tra le reinstallazioni dell'app (memorizzato in modo sicuro nel Keychain su iOS e EncryptedSharedPreferences su Android)
+- L'aggiornamento dell'app non crea un nuovo Device ID
+- Durante lo sviluppo, se stai usando una versione precedente del plugin (< v6.25.0 / v7.25.0), ogni reinstallazione crea ancora un nuovo MAU
 
-Lo stesso vale per i download di testflight o il cambio di canale in Android. L'aggiornamento dell'app non crea un nuovo Device ID.
+Nota: I download di TestFlight e i cambi di canale in Android potrebbero ancora generare nuove registrazioni di dispositivi a seconda della tua configurazione.
 
 > Consigliamo dopo il primo setup di disabilitare i dispositivi di sviluppo e gli emulatori per ridurre la quantità di dispositivi duplicati.
 
@@ -303,9 +306,11 @@ L'ID del dispositivo viene generato sul dispositivo al primo avvio e viene utili
 
 MAU è una soluzione migliore del numero di installazioni per prezzare Capgo, in quanto è più accurato e riflette il costo effettivo di Capgo per dispositivo.
 
-Per ragioni di privacy, non possiamo tracciare lo stesso dispositivo se l'utente reinstalla l'app.
+**Persistenza dell'ID del dispositivo (Aggiornato in v6.25.0 e v7.25.0)**:
+- **Comportamento attuale**: L'ID del dispositivo ora persiste tra le reinstallazioni dell'app. È memorizzato in modo sicuro nel Keychain del dispositivo (iOS) o EncryptedSharedPreferences (Android), permettendoci di tracciare lo stesso dispositivo anche dopo la disinstallazione/reinstallazione.
+- **Comportamento precedente** (prima di v6.25.0/v7.25.0): Per ragioni di privacy legate alle policy dell'App Store di Apple e Google, l'ID del dispositivo veniva reimpostato ad ogni reinstallazione dell'app, rendendo impossibile tracciare lo stesso dispositivo tra le reinstallazioni.
 
-Le regole sulla privacy sono imposte da Apple e Google, e non sono imposte da Capgo.
+Le regole sulla privacy sono imposte da Apple e Google, e l'implementazione di Capgo è conforme alle loro best practice per l'identificazione dei dispositivi.
 
 L'ID del dispositivo non sarà elencato nella tua lista dispositivi finché non ottengono la loro prima patch installata.
 

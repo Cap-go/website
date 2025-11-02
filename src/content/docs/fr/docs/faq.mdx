@@ -72,11 +72,14 @@ Notez que la plupart des app stores interdisent l'envoi de code qui modifie sign
 
 Un MAU est un "Utilisateur Actif Mensuel". Nous comptons un MAU comme tout appareil qui a contacté nos serveurs au cours des 30 derniers jours. Nous ne comptons pas les appareils qui n'ont pas contacté nos serveurs au cours des 30 derniers jours.
 
-Chaque fois qu'un appareil installe à nouveau votre application, un nouveau MAU est compté, cela se produit en raison des limitations de confidentialité de l'App Store. Nous ne pouvons pas suivre le même appareil si l'utilisateur réinstalle l'application.
+**Important** : Depuis la version du plugin **v6.25.0** et **v7.25.0**, l'ID de l'appareil persiste maintenant entre les réinstallations de l'application. Avant ces versions, chaque réinstallation de l'application générait un nouvel ID d'appareil et comptait comme un nouveau MAU.
 
-Pendant le développement, chaque fois que vous réinstallez l'application, un nouveau MAU est compté.
+Avec les versions actuelles :
+- L'ID de l'appareil persiste entre les réinstallations de l'application (stocké de manière sécurisée dans le Keychain sur iOS et EncryptedSharedPreferences sur Android)
+- La mise à jour de l'application ne crée pas un nouvel ID d'appareil
+- Pendant le développement, si vous utilisez une version plus ancienne du plugin (< v6.25.0 / v7.25.0), chaque réinstallation crée toujours un nouveau MAU
 
-Il en va de même pour les téléchargements Testflight ou le changement de canal sur Android. La mise à jour de l'application ne crée pas un nouvel ID d'appareil.
+Remarque : Les téléchargements TestFlight et les changements de canal sur Android peuvent toujours générer de nouvelles inscriptions d'appareils selon votre configuration.
 
 > Nous recommandons après la première configuration de désactiver les appareils de développement et l'émulateur pour réduire le nombre d'appareils dupliqués.
 
@@ -304,9 +307,11 @@ L'ID de l'appareil est généré sur l'appareil lors de la première exécution,
 
 MAU est une meilleure solution que le nombre d'installations pour tarifer Capgo, car il est plus précis et reflète le coût réel de Capgo par appareil.
 
-Pour des raisons de confidentialité, nous ne pouvons pas suivre le même appareil si l'utilisateur réinstalle l'application.
+**Persistance de l'ID de l'appareil (Mis à jour dans v6.25.0 et v7.25.0)** :
+- **Comportement actuel** : L'ID de l'appareil persiste maintenant entre les réinstallations de l'application. Il est stocké de manière sécurisée dans le Keychain de l'appareil (iOS) ou EncryptedSharedPreferences (Android), ce qui nous permet de suivre le même appareil même après une désinstallation/réinstallation.
+- **Comportement précédent** (avant v6.25.0/v7.25.0) : Pour des raisons de confidentialité liées aux politiques de l'App Store d'Apple et de Google, l'ID de l'appareil était réinitialisé à chaque réinstallation de l'application, rendant impossible le suivi du même appareil entre les réinstallations.
 
-Les règles de confidentialité sont imposées par Apple et Google, et ne sont pas imposées par Capgo.
+Les règles de confidentialité sont imposées par Apple et Google, et l'implémentation de Capgo est conforme à leurs meilleures pratiques pour l'identification des appareils.
 
 L'ID de l'appareil ne sera pas répertorié dans votre liste d'appareils tant qu'ils n'auront pas reçu leur premier correctif installé.
 

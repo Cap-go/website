@@ -81,11 +81,14 @@ Note that most app stores prohibit shipping code that changes the behavior of th
 
 A MAU is a "Monthly Active User". In Capgo's context, this actually refers to a Monthly Active Device. We count a MAU as any device that has contacted our servers in the last 30 days. We do not count devices that have not contacted our servers in the last 30 days.
 
-Each time a device installs your app again, a new MAU is counted, this happen because Apple store limitation about privacy. We cannot track the same device if the user reinstall the app.
+**Important**: Starting from plugin version **v6.25.0** and **v7.25.0**, the deviceID now persists across app reinstalls. Before these versions, each app reinstall would generate a new deviceID and count as a new MAU.
 
-During development, each time you reinstall the app, a new MAU is counted.
+With the current versions:
+- DeviceID persists across app reinstalls (stored securely in Keychain on iOS and EncryptedSharedPreferences on Android)
+- Updating the app does not create a new Device ID
+- During development, if you're using an older plugin version (< v6.25.0 / v7.25.0), each reinstall still creates a new MAU
 
-Same for testflight download or switch channel in Android. Updating the app do not create a new Device ID.
+Note: TestFlight downloads and channel switches in Android may still generate new device registrations depending on your configuration.
 
 > We recommend after first setup, to disable dev devices and emulators to reduce the amount of duplicated devices.
 
@@ -313,11 +316,13 @@ The device ID is generated on the device on first run, and is used to de-duplica
 
 MAU is a better solution than number of installs to price Capgo, as it is more accurate and reflects the actual cost of Capgo per device.
 
-For privacy reasons, we cannot track the same device if the user reinstall the app.
+**DeviceID Persistence (Updated in v6.25.0 and v7.25.0)**:
+- **Current behavior**: The deviceID now persists across app reinstalls. It is stored securely in the device's Keychain (iOS) or EncryptedSharedPreferences (Android), allowing us to track the same device even after uninstall/reinstall.
+- **Previous behavior** (before v6.25.0/v7.25.0): For privacy reasons related to Apple and Google store policies, the deviceID was reset on each app reinstall, making it impossible to track the same device across reinstalls.
 
-The privacy rules are enforced by Apple and Google, and are not enforced by Capgo.
+The privacy rules are enforced by Apple and Google, and Capgo's implementation complies with their best practices for device identification.
 
-Device ID will not be listed in your device list until they get they first patch installed.
+Device ID will not be listed in your device list until they get their first patch installed.
 
 ## Why my device number is different than my MAU?[](https://capgo.app/docs/faq/#why-my-device-number-is-different-than-my-mau "Direct link to Why my device number is different than my MAU?")
 
