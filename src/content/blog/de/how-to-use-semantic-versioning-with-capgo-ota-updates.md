@@ -56,8 +56,6 @@ Capgo stellt sicher, dass Updates schnell und zuverlässig bei Nutzern ankommen,
 
 ## Semantic Versioning | Level Up
 
-<Steps>
-
 ## [Capgo](https://capgo.app/) Einrichtungsanleitung
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)

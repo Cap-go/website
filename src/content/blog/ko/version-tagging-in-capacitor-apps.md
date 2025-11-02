@@ -43,8 +43,6 @@ next_blog: ''
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
 
-<Steps>
-
 ## Capacitor의 버전 설정
 
 Capacitor 앱에서 모든 플랫폼에 걸쳐 일관된 버전 관리를 보장하기 위해 다음 단계를 따르세요.

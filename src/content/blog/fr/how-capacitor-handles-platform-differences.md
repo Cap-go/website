@@ -43,8 +43,6 @@ Capacitor comble le fossé entre le développement web et natif, facilitant la c
 
 ## Développement Multiplateforme : Explorer CapacitorJS avec
 
-<Steps>
-
 ## Comment [Capacitor](https://capacitorjs.com/) Gère le Code Plateforme
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)

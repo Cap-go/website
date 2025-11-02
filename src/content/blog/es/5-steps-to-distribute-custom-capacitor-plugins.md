@@ -32,8 +32,6 @@ Este proceso paso a paso asegura que tu complemento esté bien construido, sea f
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<Steps>
-
 ## Paso 1: Construir y Probar Tu Complemento
 
 El objetivo principal aquí es conectar JavaScript con características nativas mientras se asegura que funcione sin problemas tanto en iOS como en Android.

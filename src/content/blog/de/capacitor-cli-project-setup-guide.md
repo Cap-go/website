@@ -40,8 +40,6 @@ Dieser Leitfaden behandelt alles, was Sie für die Einrichtung von Capacitor CLI
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<Steps>
-
 ## Systemvoraussetzungen
 
 Stellen Sie sicher, dass Sie folgende Tools installiert haben:

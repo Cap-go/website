@@ -55,8 +55,6 @@ next_blog: ''
 
 ## Autenticación biométrica en Ionic (FaceID / Huella digital)
 
-<Steps>
-
 ## Requisitos de configuración
 
 Para habilitar la autenticación biométrica en tu [aplicación Capacitor](https://capgo.app/plugins/ivs-player/), necesitarás configurar algunas herramientas, dependencias y ajustes específicos de plataforma. A continuación, encontrarás los requisitos de configuración paso a paso para las plataformas Android e iOS.

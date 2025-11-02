@@ -60,8 +60,6 @@ Ensuite, nous examinerons les mises à jour des politiques 2025 et les conseils 
 
 ![PolicyBytes](https://assets.seobotai.com/capgo.app/6806fd96e572faef8699cea8/81241892df8a0b3e1d59d8ca79389c8a.jpg)
 
-<Steps>
-
 ## Changements de politique 2025
 
 Les mises à jour 2025 de Google Play se concentrent sur l'élévation des standards de contenu, l'amélioration de la confidentialité des utilisateurs et le renforcement des mesures de sécurité des comptes.

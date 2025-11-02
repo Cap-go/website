@@ -44,8 +44,6 @@ Omitir este proceso puede llevar a interrupciones significativas, así que aseg�
 
 ## Qué es una Licencia ICP y Registro ICP para China
 
-<Steps>
-
 ## Documentación Requerida
 
 Hacer correctamente su registro ICP en China comienza con tener la documentación correcta. Aquí hay un desglose de los documentos comerciales, técnicos y de autorización que necesitará.

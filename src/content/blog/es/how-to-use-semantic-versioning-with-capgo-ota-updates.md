@@ -57,8 +57,6 @@ Capgo asegura que las actualizaciones lleguen a los usuarios de forma rápida y 
 
 ## Versionado Semántico | Subir de Nivel
 
-<Steps>
-
 ## Guía de Configuración de [Capgo](https://capgo.app/)
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)

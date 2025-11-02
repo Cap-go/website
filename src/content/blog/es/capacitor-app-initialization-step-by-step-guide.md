@@ -36,8 +36,6 @@ Capacitor conecta aplicaciones web con características nativas del dispositivo,
 
 ![CAPACITOR](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-28.jpg?auto=compress)
 
-<Steps>
-
 ## Herramientas Requeridas y Configuración
 
 Aquí te explicamos cómo configurar tu entorno de desarrollo con las herramientas esenciales.

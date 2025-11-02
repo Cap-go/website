@@ -33,8 +33,6 @@ Ce processus étape par étape garantit que votre plugin est bien construit, fac
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<Steps>
-
 ## Étape 1 : Construire et Tester Votre Plugin
 
 L'objectif principal ici est de connecter JavaScript avec les fonctionnalités natives tout en garantissant un fonctionnement fluide sur iOS et Android.

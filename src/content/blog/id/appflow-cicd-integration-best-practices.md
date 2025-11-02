@@ -44,8 +44,6 @@ next_blog: ''
 
 ![Appflow](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/d621f8c4ec61e7471b0153517889f4cc.jpg)
 
-<Steps>
-
 ## Fitur Utama Appflow CI/CD
 
 Appflow CI/CD menawarkan empat fitur utama yang dirancang untuk menyederhanakan pengembangan dan deployment aplikasi seluler. Fitur-fitur ini membantu mengotomatisasi build, deployment, dan pembaruan di berbagai platform seluler.

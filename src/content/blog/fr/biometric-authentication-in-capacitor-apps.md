@@ -56,8 +56,6 @@ next_blog: ''
 
 ## Authentification biométrique Ionic (FaceID / FingerPrint)
 
-<Steps>
-
 ## Exigences de configuration
 
 Pour activer l'authentification biométrique dans votre [application Capacitor](https://capgo.app/plugins/ivs-player/), vous devrez configurer certains outils, dépendances et paramètres spécifiques à la plateforme. Ci-dessous, vous trouverez les exigences de configuration étape par étape pour les plateformes Android et iOS.

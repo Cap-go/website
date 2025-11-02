@@ -47,8 +47,6 @@ Pour les mises à jour en direct, intégrez des outils comme **[Capgo](https://c
 
 ![Firebase](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
 
-<Steps>
-
 ## Sélectionnez un outil de surveillance
 
 Choisissez un outil de surveillance qui correspond aux exigences de votre application et à l'expertise de votre équipe. Voici un aperçu de Firebase Performance Monitoring et Sentry pour vous aider à décider.

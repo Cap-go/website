@@ -42,8 +42,6 @@ Mari kita dalami setiap praktik untuk memahami bagaimana mereka melindungi aplik
 
 ## Cara Sukses dengan Pembaruan OTA
 
-<Steps>
-
 ## 1. Pengiriman Pembaruan yang Aman
 
 Untuk memastikan pembaruan yang aman untuk aplikasi berbasis Capacitor, **enkripsi** dan **protokol autentikasi** adalah tulang punggung pipeline pengiriman yang aman.

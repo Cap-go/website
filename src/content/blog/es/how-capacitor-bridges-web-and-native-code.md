@@ -42,8 +42,6 @@ next_blog: ''
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
 
-<Steps>
-
 ## Funciones principales del puente
 
 El puente nativo de Capacitor actúa como un enlace crucial, permitiendo que las aplicaciones web interactúen directamente con las capacidades del dispositivo a través de código nativo.

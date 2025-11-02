@@ -48,8 +48,6 @@ Capgo, ein Tool für Over-the-Air-Updates, integriert sich mit der Native Bridge
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22.jpg?auto=compress)
 
-<Steps>
-
 ## Native Bridge Kommunikationsfluss
 
 Die Native Bridge in [Capacitor Android-Apps](https://capgo.app/top_capacitor_app/) ermöglicht eine bidirektionale Kommunikation zwischen den Web- und nativen Schichten. Dieses Nachrichtenübermittlungssystem gewährleistet einen reibungslosen und echtzeitigen Datenaustausch ohne Leistungseinbußen. Im Folgenden erläutern wir, wie die Kommunikation in beide Richtungen fließt und wie Daten verwaltet werden.

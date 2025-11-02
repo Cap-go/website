@@ -38,8 +38,6 @@ La documentazione di Capgo ([capgo.app/docs](https://capgo.app/docs)) fornisce i
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-19.jpg?auto=compress)
 
-<Steps>
-
 ## Utilizzare la Documentazione Capgo
 
 Navigare efficacemente nella documentazione è essenziale quando si lavora con aggiornamenti OTA. La documentazione di Capgo offre una guida dettagliata per integrare gli aggiornamenti live nelle app Capacitor.

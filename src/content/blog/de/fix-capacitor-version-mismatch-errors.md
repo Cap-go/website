@@ -42,8 +42,6 @@ next_blog: ''
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<Steps>
-
 ## Versionskonflikte finden
 
 Sie können Versionskonflikte mit diesen Schritten aufdecken:

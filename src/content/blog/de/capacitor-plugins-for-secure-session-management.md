@@ -50,8 +50,6 @@ Lesen Sie weiter für detaillierte Integrationsschritte, Funktionen und Best Pra
 
 ![Identity Vault](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/c5fae6eb414f2040557b847eda54d313.jpg)
 
-<Steps>
-
 1. [Firebase Auth](https://firebase.google.com/docs/auth) für [Capacitor](https://capacitorjs.com/)
 
 ![Firebase Auth](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/20003c863a77b942b90536c0e5cde156.jpg)

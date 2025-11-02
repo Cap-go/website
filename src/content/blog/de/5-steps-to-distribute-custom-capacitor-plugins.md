@@ -33,7 +33,6 @@ Dieser schrittweise Prozess stellt sicher, dass Ihr Plugin gut entwickelt, einfa
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<Steps>
 
 ## Schritt 1: Plugin erstellen und testen
 

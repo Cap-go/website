@@ -48,8 +48,6 @@ Memantau pembaruan membantu Anda memberikan pembaruan yang mulus, mengurangi kes
 
 ![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-02.jpg?auto=compress)
 
-<Steps>
-
 ## Menyiapkan Pelacakan Pembaruan
 
 Untuk melacak pembaruan secara efektif, Anda perlu mengkonfigurasi alat yang tepat dan mengidentifikasi metrik utama.

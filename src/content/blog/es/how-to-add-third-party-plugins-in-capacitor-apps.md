@@ -44,8 +44,6 @@ Esto es lo que aprenderás:
 
 ![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
-<Steps>
-
 ## Antes de Empezar
 
 Antes de sumergirte en la integración de plugins, asegúrate de que tu configuración y habilidades estén listas.

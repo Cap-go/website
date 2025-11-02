@@ -42,8 +42,6 @@ Approfondiamo ogni pratica per capire come proteggono la tua app e i tuoi utenti
 
 ## Come avere successo con gli aggiornamenti OTA
 
-<Steps>
-
 ## 1. Consegna Sicura degli Aggiornamenti
 
 Per garantire aggiornamenti sicuri per le app basate su Capacitor, la **crittografia** e i **protocolli di autenticazione** sono la spina dorsale di una pipeline di consegna sicura.

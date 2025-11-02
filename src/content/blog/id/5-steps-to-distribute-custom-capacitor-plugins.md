@@ -32,8 +32,6 @@ Proses bertahap ini memastikan plugin Anda dibangun dengan baik, mudah diintegra
 
 ![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
-<Steps>
-
 ## Langkah 1: Bangun dan Uji Plugin Anda
 
 Tujuan utama di sini adalah menghubungkan JavaScript dengan fitur native sambil memastikan berfungsi dengan lancar pada iOS dan Android.

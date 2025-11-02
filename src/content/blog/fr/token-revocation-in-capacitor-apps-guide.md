@@ -87,8 +87,6 @@ Enfin, évitez d'intégrer directement des données sensibles dans le code de vo
 
 ![Redis](https://assets.seobotai.com/capgo.app/68268a500209458b3ff4fe45/2e78e5b01f7fb6de1a584710a9d487ab.jpg)
 
-<Steps>
-
 ## Méthodes de liste noire des tokens
 
 La mise en liste noire des tokens joue un rôle clé dans la gestion du cycle de vie des tokens en invalidant les tokens compromis dès leur détection.
