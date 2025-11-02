@@ -99,7 +99,7 @@ For critical updates or apps with very simple state, you may want to apply an up
 
 - `false` (default): Never do direct updates, use normal background update behavior
 - `'atInstall'`: Direct update only when the app is installed or updated from the store, otherwise use normal behavior
-- `'always'`: Always do direct updates immediately when available
+- `'always'`: Check for updates and apply them when app starts or resumes from background
 - `true` (deprecated): Same as `'always'` for backward compatibility
 
 ```typescript
