@@ -186,9 +186,9 @@ body,
 
 /* Dark mode colors. */
 :root {
-  --sl-color-accent-low: #131e4f;
-  --sl-color-accent: #3447ff;
-  --sl-color-accent-high: #b3c7ff;
+  --sl-color-accent-low: #1a1f3d;
+  --sl-color-accent: #6876e1;
+  --sl-color-accent-high: #9da8f0;
   --sl-color-white: #ffffff;
   --sl-color-gray-1: #eceef2;
   --sl-color-gray-2: #c6c8ce;
@@ -200,9 +200,9 @@ body,
 }
 /* Light mode colors. */
 :root[data-theme='light'] {
-  --sl-color-accent-low: #c7d6ff;
-  --sl-color-accent: #2827e9;
-  --sl-color-accent-high: #182775;
+  --sl-color-accent-low: #d4d9f7;
+  --sl-color-accent: #6876e1;
+  --sl-color-accent-high: #3a4ba8;
   --sl-color-white: #17181c;
   --sl-color-gray-1: #24272f;
   --sl-color-gray-2: #353841;
@@ -349,4 +349,123 @@ body,
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+/* Gradient background with shade - inspired by Bun docs */
+:root {
+  --page-bg-gradient-light: radial-gradient(
+    60% 80% at 50% 0%,
+    rgba(104, 118, 225, 0.12) 0%,
+    rgba(104, 118, 225, 0.08) 30%,
+    rgba(104, 118, 225, 0.04) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  --page-bg-gradient-dark: radial-gradient(
+    60% 80% at 50% 0%,
+    rgba(104, 118, 225, 0.20) 0%,
+    rgba(104, 118, 225, 0.12) 30%,
+    rgba(104, 118, 225, 0.06) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Main page background with gradient overlay */
+.sl-markdown-content,
+.main-frame {
+  position: relative;
+}
+
+/* Background gradient layer for dark mode - scrolls with page */
+:root:not([data-theme='light']) .main-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  background: var(--page-bg-gradient-dark);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Background gradient layer for light mode - scrolls with page */
+:root[data-theme='light'] .main-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  background: var(--page-bg-gradient-light);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Subtle texture/noise overlay for added depth */
+:root:not([data-theme='light']) .main-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* Lighter texture for light mode */
+:root[data-theme='light'] .main-frame::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.015) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.015) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* Sidebar transparent to show gradient */
+.sidebar-pane {
+  background-color: transparent !important;
+  border-inline-end-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Dark mode sidebar border */
+:root:not([data-theme='light']) .sidebar-pane {
+  border-inline-end-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Light mode sidebar border - more whitish/greyish */
+:root[data-theme='light'] .sidebar-pane {
+  border-inline-end-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Top navigation bar - solid gray-900 background for both modes */
+.header {
+  background-color: #111827 !important;
+}
+
+/* Make logo background transparent to blend with header */
+.header .site-title img,
+.header .logo img,
+.header img[src*="logo"] {
+  background-color: transparent !important;
+  mix-blend-mode: normal;
+  height: 5rem !important;
+  width: auto !important;
+}
+
+/* Ensure logo container is also transparent */
+.header .site-title,
+.header .logo {
+  background-color: transparent !important;
 }

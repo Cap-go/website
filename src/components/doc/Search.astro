@@ -33,6 +33,18 @@ export type { Props } from '@astrojs/starlight/props'
       searchPlaceholder: 'Search something...',
       chatPlaceholder: 'What do you dream of doing with Capgo?',
       suggestions: ['What is Capgo?', 'How to use Live updates plugin?', 'How to use Capgo CLI?'],
+      themeConfig: {
+        colors: {
+          light: {
+            '--background-color-primary': 'rgba(0, 0, 0, 0.2)',
+            '--border-color-primary': 'rgba(255, 255, 255, 0.1)',
+          },
+          dark: {
+            '--background-color-primary': 'rgba(0, 0, 0, 0.2)',
+            '--border-color-primary': 'rgba(255, 255, 255, 0.1)',
+          }
+        }
+      }
     } satisfies Partial<HTMLOramaSearchBoxElement>)
   })
 
@@ -57,10 +69,3 @@ export type { Props } from '@astrojs/starlight/props'
     el.appendChild(document.createTextNode('Search'))
   })
 </script>
-
-<style>
-  .orama-search-bar {
-    width: 100%;
-    max-width: 22rem;
-  }
-</style>

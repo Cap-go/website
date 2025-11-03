@@ -79,7 +79,10 @@ export default defineConfig({
         }),
       ],
       disable404Route: true,
-      logo: { src: '~public/logo.svg' },
+      logo: {
+        src: '~public/capgo_logo.webp',
+        replacesTitle: true
+      },
       markdown: { headingLinks: false },
       customCss: ['./src/css/docs.css'],
       expressiveCode: { themes: ['github-dark'] },
