@@ -139,19 +139,36 @@ const pageSlug = entry?.slug || ''
         // Disable button during operation
         ;(btn as HTMLButtonElement).disabled = true
 
-        // Fetch the markdown content from the local .md file
-        const mdPath = `/${pageSlug}.md`
-        console.log('Fetching markdown from:', mdPath)
-        const response = await fetch(mdPath)
+        // Try multiple paths for the markdown file
+        const paths = [
+          `/${pageSlug}.md`,  // Built/copied version
+          `/src/content/docs/${pageSlug}.mdx`,  // Dev mode .mdx
+          `/src/content/docs/${pageSlug}.md`,   // Dev mode .md
+        ]
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch markdown: ${response.status} ${response.statusText}`)
+        let content = ''
+        let fetchSuccess = false
+
+        for (const mdPath of paths) {
+          try {
+            console.log('Trying to fetch from:', mdPath)
+            const response = await fetch(mdPath)
+            if (response.ok) {
+              content = await response.text()
+              console.log('Successfully fetched from:', mdPath, 'Length:', content.length)
+              fetchSuccess = true
+              break
+            }
+          } catch (err) {
+            console.log('Failed to fetch from:', mdPath)
+          }
         }
 
-        const content = await response.text()
-        console.log('Fetched content length:', content.length)
+        if (!fetchSuccess || !content) {
+          throw new Error('Failed to fetch markdown from any source')
+        }
 
-        // Try using the older execCommand fallback if clipboard API fails
+        // Copy to clipboard using the most reliable method
         try {
           await navigator.clipboard.writeText(content)
           console.log('Copied to clipboard successfully')
@@ -164,9 +181,14 @@ const pageSlug = entry?.slug || ''
           textarea.style.position = 'fixed'
           textarea.style.opacity = '0'
           document.body.appendChild(textarea)
+          textarea.focus()
           textarea.select()
-          document.execCommand('copy')
+          const success = document.execCommand('copy')
           document.body.removeChild(textarea)
+
+          if (!success) {
+            throw new Error('Fallback copy method also failed')
+          }
         }
 
         // Show success feedback
