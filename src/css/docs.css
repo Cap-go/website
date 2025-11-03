@@ -355,17 +355,17 @@ body,
 :root {
   --page-bg-gradient-light: radial-gradient(
     60% 80% at 50% 0%,
-    rgba(104, 118, 225, 0.12) 0%,
-    rgba(104, 118, 225, 0.08) 30%,
-    rgba(104, 118, 225, 0.04) 50%,
-    rgba(0, 0, 0, 0) 100%
+    hsla(233, 67%, 65%, 0.25) 0%,
+    hsla(233, 67%, 65%, 0.18) 30%,
+    hsla(233, 67%, 65%, 0.10) 50%,
+    hsla(0, 0%, 0%, 0) 100%
   );
   --page-bg-gradient-dark: radial-gradient(
     60% 80% at 50% 0%,
-    rgba(104, 118, 225, 0.20) 0%,
-    rgba(104, 118, 225, 0.12) 30%,
-    rgba(104, 118, 225, 0.06) 50%,
-    rgba(0, 0, 0, 0) 100%
+    hsla(233, 67%, 65%, 0.20) 0%,
+    hsla(233, 67%, 65%, 0.12) 30%,
+    hsla(233, 67%, 65%, 0.06) 50%,
+    hsla(0, 0%, 0%, 0) 100%
   );
 }
 
@@ -384,6 +384,8 @@ body,
   right: 0;
   min-height: 100vh;
   background: var(--page-bg-gradient-dark);
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
   pointer-events: none;
   z-index: -1;
 }
@@ -397,6 +399,8 @@ body,
   right: 0;
   min-height: 100vh;
   background: var(--page-bg-gradient-light);
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
   pointer-events: none;
   z-index: -1;
 }
@@ -452,6 +456,25 @@ body,
 /* Top navigation bar - solid gray-900 background for both modes */
 .header {
   background-color: #111827 !important;
+}
+
+.header #language-menu-button {
+  height: 44.5px;
+  background-color: transparent !important;
+  border: none !important;
+  color: #eceef2 !important;
+}
+.header #language-menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+starlight-theme-select label {
+  color: #eceef2 !important;
+}
+starlight-theme-select label select {
+  border: none !important;
+}
+starlight-theme-select label select:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Make logo background transparent to blend with header */
