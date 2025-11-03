@@ -6,7 +6,7 @@ export type { Props } from '@astrojs/starlight/props'
 
 <div class="orama-search-bar">
   <orama-search-box></orama-search-box>
-  <orama-search-button colorScheme="dark"></orama-search-button>
+  <orama-search-button></orama-search-button>
 </div>
 
 <script>
@@ -30,21 +30,9 @@ export type { Props } from '@astrojs/starlight/props'
         description: 'content',
         section: 'category',
       },
-      searchPlaceholder: 'Search something...',
+      searchPlaceholder: 'Search in Capgo',
       chatPlaceholder: 'What do you dream of doing with Capgo?',
       suggestions: ['What is Capgo?', 'How to use Live updates plugin?', 'How to use Capgo CLI?'],
-      themeConfig: {
-        colors: {
-          light: {
-            '--background-color-primary': 'rgba(0, 0, 0, 0.2)',
-            '--border-color-primary': 'rgba(255, 255, 255, 0.1)',
-          },
-          dark: {
-            '--background-color-primary': 'rgba(0, 0, 0, 0.2)',
-            '--border-color-primary': 'rgba(255, 255, 255, 0.1)',
-          }
-        }
-      }
     } satisfies Partial<HTMLOramaSearchBoxElement>)
   })
 
@@ -64,8 +52,23 @@ export type { Props } from '@astrojs/starlight/props'
   observer.observe(document.documentElement, { attributes: true, subtree: false })
 
   defineCustomElements()
-
-  document.querySelectorAll('.orama-search-bar orama-search-button').forEach((el) => {
-    el.appendChild(document.createTextNode('Search'))
-  })
 </script>
+<style is:global>
+[id^=orama-ui].theme-dark {
+  --button-background-color-secondary: rgba(0, 0, 0, 0.2);
+  --button-border-color-secondary: rgba(255, 255, 255, 0.1);
+  --radius-m: 0.375rem;
+}
+[id^=orama-ui].theme-light {
+  --button-background-color-secondary: rgba(0, 0, 0, 0.2);
+  --button-border-color-secondary: rgba(255, 255, 255, 0.1);
+  --radius-m: 0.375rem;
+}
+
+.orama-search-bar {
+  width: 100%;
+  max-width: 47rem;
+  padding-left: 20px;
+}
+
+</style>
