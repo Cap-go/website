@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-25T00:00:00.000Z
-updated_at: 2025-11-03T11:43:59.000Z
+updated_at: 2025-11-03T11:48:48.000Z
 head_image: /usage_explained.webp
 head_image_alt: Système d'utilisation de Capgo expliqué
 keywords: >-
