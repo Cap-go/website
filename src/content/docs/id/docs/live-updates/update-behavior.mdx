@@ -95,6 +95,22 @@ Perhatikan bahwa kondisi `kill` saat ini memicu pembaruan setelah event penutupa
 
 Untuk pembaruan kritis atau aplikasi dengan status yang sangat sederhana, Anda mungkin ingin menerapkan pembaruan segera setelah diunduh, tanpa menunggu event latar belakang atau penutupan. Capgo mendukung ini melalui opsi konfigurasi `directUpdate`.
 
+<Aside type="tip" title="Direkomendasikan: Gunakan Delta Updates dengan Direct Update">
+Saat menggunakan `directUpdate`, kami **sangat merekomendasikan** untuk mengaktifkan [Delta Updates](/docs/live-updates/differentials/) untuk meminimalkan waktu unduh dan meningkatkan pengalaman pengguna. Delta Updates hanya mengunduh file yang berubah alih-alih seluruh bundle, yang sangat penting ketika pembaruan diterapkan segera saat pengguna aktif menggunakan aplikasi Anda.
+
+**Mengapa ini penting untuk Direct Updates:**
+- **Pembaruan lebih cepat**: Unduhan yang lebih kecil berarti pembaruan selesai dengan cepat, mengurangi waktu pengguna melihat layar pemuatan
+- **Pengalaman seluler yang lebih baik**: Pengguna di jaringan seluler atau koneksi yang lebih lambat tidak akan menghadapi waktu tunggu yang lama
+- **Penggunaan bandwidth yang lebih rendah**: Hanya file yang berubah yang diunduh, menghemat data untuk Anda dan pengguna Anda
+
+Untuk mengaktifkan Delta Updates, cukup gunakan flag `--partial` saat mengunggah bundle:
+```shell
+npx @capgo/cli@latest bundle upload --partial
+```
+
+Pelajari lebih lanjut di [dokumentasi Delta Updates](/docs/live-updates/differentials/).
+</Aside>
+
 `directUpdate` diatur dalam file `capacitor.config.ts` Anda, bukan dalam kode JavaScript:
 
 ```typescript

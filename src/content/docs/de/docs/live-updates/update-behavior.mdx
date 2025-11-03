@@ -95,6 +95,22 @@ Beachten Sie, dass die `kill`-Bedingung das Update derzeit nach dem ersten Beend
 
 Für kritische Updates oder Apps mit sehr einfachem Status möchten Sie möglicherweise ein Update sofort nach dem Download anwenden, ohne auf ein Hintergrund- oder Beendigungsereignis zu warten. Capgo unterstützt dies über die `directUpdate`-Konfigurationsoption.
 
+<Aside type="tip" title="Empfohlen: Delta Updates mit Direct Update verwenden">
+Bei Verwendung von `directUpdate` **empfehlen wir dringend**, [Delta Updates](/docs/live-updates/differentials/) zu aktivieren, um Download-Zeiten zu minimieren und die Benutzererfahrung zu verbessern. Delta Updates laden nur geänderte Dateien statt des gesamten Bundles herunter, was besonders wichtig ist, wenn Updates sofort angewendet werden, während Benutzer Ihre App aktiv nutzen.
+
+**Warum dies für Direct Updates wichtig ist:**
+- **Schnellere Updates**: Kleinere Downloads bedeuten, dass Updates schnell abgeschlossen werden und die Zeit reduziert wird, in der Benutzer Ladebildschirme sehen
+- **Besseres mobiles Erlebnis**: Benutzer mit mobilen Netzwerken oder langsameren Verbindungen haben keine langen Wartezeiten
+- **Geringere Bandbreitennutzung**: Es werden nur geänderte Dateien heruntergeladen, was Daten für Sie und Ihre Benutzer spart
+
+Um Delta Updates zu aktivieren, verwenden Sie einfach das `--partial`-Flag beim Hochladen von Bundles:
+```shell
+npx @capgo/cli@latest bundle upload --partial
+```
+
+Erfahren Sie mehr in der [Delta Updates Dokumentation](/docs/live-updates/differentials/).
+</Aside>
+
 `directUpdate` wird in Ihrer `capacitor.config.ts`-Datei gesetzt, nicht im JavaScript-Code:
 
 ```typescript

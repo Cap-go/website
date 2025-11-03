@@ -95,6 +95,22 @@ await CapacitorUpdater.setMultiDelay({
 
 重要なアップデートや非常にシンプルな状態のアプリの場合、バックグラウンドや終了イベントを待たずに、ダウンロード完了後すぐにアップデートを適用したい場合があります。Capgoは`directUpdate`設定オプションでこれをサポートしています。
 
+<Aside type="tip" title="推奨：Direct UpdateでDelta Updatesを使用">
+`directUpdate`を使用する場合、ダウンロード時間を最小限に抑え、ユーザーエクスペリエンスを向上させるために[Delta Updates](/docs/live-updates/differentials/)を有効にすることを**強くお勧めします**。Delta Updatesは、バンドル全体ではなく変更されたファイルのみをダウンロードします。これは、ユーザーがアプリを積極的に使用している間にアップデートが即座に適用される場合に特に重要です。
+
+**Direct Updatesにとって重要な理由：**
+- **より高速なアップデート**：小さなダウンロードは、アップデートが迅速に完了することを意味し、ユーザーがローディング画面を見る時間を削減します
+- **より良いモバイル体験**：モバイルネットワークや低速接続のユーザーは長い待ち時間に直面しません
+- **帯域幅使用量の削減**：変更されたファイルのみがダウンロードされ、あなたとユーザーの両方のデータを節約します
+
+Delta Updatesを有効にするには、バンドルをアップロードする際に`--partial`フラグを使用するだけです：
+```shell
+npx @capgo/cli@latest bundle upload --partial
+```
+
+詳しくは[Delta Updatesドキュメント](/docs/live-updates/differentials/)をご覧ください。
+</Aside>
+
 `directUpdate`はJavaScriptコードではなく、`capacitor.config.ts`ファイルで設定します：
 
 ```typescript
