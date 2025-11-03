@@ -6,6 +6,7 @@ import { filterSitemapByDefaultLocale, i18n } from 'astro-i18n-aut/integration'
 import { defineConfig, envField } from 'astro/config'
 import starlightImageZoom from 'starlight-image-zoom'
 import starlightLlmsTxt from 'starlight-llms-txt'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
@@ -91,6 +92,7 @@ export default defineConfig({
         Head: './src/components/doc/Head.astro',
         Search: './src/components/doc/Search.astro',
         LanguageSelect: './src/components/doc/LanguageSelect.astro',
+        PageTitle: './src/components/doc/PageTitle.astro',
       },
       social: [
         { icon: 'discord', label: 'Discord', href: 'https://discord.capgo.app' },
@@ -709,6 +711,33 @@ export default defineConfig({
         outdir: './src/paraglide',
         project: './project.inlang',
         disableAsyncLocalStorage: true,
+      }),
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'src/content/docs/**/*.{md,mdx}',
+            dest: '',
+            rename: (fileName, fileExtension, fullPath) => {
+              // Extract relative path after 'src/content/docs/'
+              const relativePath = fullPath.replace(/\\/g, '/').split('src/content/docs/')[1]
+              const pathWithoutExt = relativePath.replace(/\.(md|mdx)$/, '')
+              const segments = pathWithoutExt.split('/')
+
+              // Handle index files
+              if (fileName === 'index') {
+                if (segments.length === 1) {
+                  return 'index.md'
+                }
+                // Remove 'index' from the end and use parent folder name
+                segments.pop()
+                return `${segments.join('/')}.md`
+              }
+
+              // Regular files - preserve directory structure
+              return `${pathWithoutExt}.md`
+            },
+          },
+        ],
       }),
     ],
   },
