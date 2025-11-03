@@ -31,7 +31,7 @@ Jeder dieser Werte wird auf leicht unterschiedliche Weise erfasst.
 Jedes Mal, wenn ein Benutzer Ihre Capacitor JS-App herunterlädt und öffnet, sendet sie eine Anfrage an das Capgo-Backend, um zu erfahren, ob ein Update verfügbar ist.
 Wenn die App das tut, sendet sie einige Informationen, wobei die wichtigste die `DeviceID` ist.
 
-`DeviceID`: ist eine eindeutige ID (UUID), die vom Betriebssystem des Geräts definiert wird. Diese ID ist bei jeder App-Installation einzigartig.
+`DeviceID`: ist eine eindeutige ID (UUID), die auf dem Gerät generiert wird. **Ab Plugin-Version v6.25.0 und v7.25.0** bleibt diese ID nun über App-Neuinstallationen hinweg erhalten (sicher im Gerätespeicher gespeichert). Vor diesen Versionen wurde die ID bei jeder App-Installation zurückgesetzt.
 
 Jedes Mal, wenn Ihr Konto eine neue Device ID erhält, wird sie in der Datenbank gespeichert.
 Jedes Mal, wenn eine alte `DeviceID` ein Update anfordert (App-Öffnung), wird ihr Datensatz aktualisiert (updated_at in der Datenbank).
