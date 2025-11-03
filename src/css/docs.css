@@ -15,9 +15,26 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  /* background-color: var(--sl-color-black); */
 }
 
 @theme {
+  --font-sans: 'Atkinson Hyperlegible';
+  /* Your preferred code font. Starlight uses system monospace fonts by default. */
+  --font-mono: 'IBM Plex Mono';
+
+  --color-accent-50: #9aa8ff;
+  --color-accent-100: #909eff;
+  --color-accent-200: #8694ff;
+  --color-accent-300: #7c8af5;
+  --color-accent-400: #7280eb;
+  --color-accent-500: #6876e1;
+  --color-accent-600: #5e6cd7;
+  --color-accent-700: #5462cd;
+  --color-accent-800: #4a58c3;
+  --color-accent-900: #404eb9;
+  --color-accent-950: #2e36a5;
+
   --color-gray-50: oklch(0.984 0.003 247.858);
   --color-gray-100: oklch(0.968 0.007 247.896);
   --color-gray-200: oklch(0.929 0.013 255.508);
@@ -184,36 +201,6 @@ body,
   }
 }
 
-/* Dark mode colors. */
-:root {
-  --sl-color-accent-low: #1a1f3d;
-  --sl-color-accent: #6876e1;
-  --sl-color-accent-high: #9da8f0;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #eceef2;
-  --sl-color-gray-2: #c6c8ce;
-  --sl-color-gray-3: #a0a4ae;
-  --sl-color-gray-4: #545861;
-  --sl-color-gray-5: #353841;
-  --sl-color-gray-6: #24272f;
-  --sl-color-black: #17181c;
-}
-/* Light mode colors. */
-:root[data-theme='light'] {
-  --sl-color-accent-low: #d4d9f7;
-  --sl-color-accent: #6876e1;
-  --sl-color-accent-high: #3a4ba8;
-  --sl-color-white: #17181c;
-  --sl-color-gray-1: #24272f;
-  --sl-color-gray-2: #353841;
-  --sl-color-gray-3: #545861;
-  --sl-color-gray-4: #888b96;
-  --sl-color-gray-5: #c0c2c7;
-  --sl-color-gray-6: #eceef2;
-  --sl-color-gray-7: #f5f6f8;
-  --sl-color-black: #ffffff;
-}
-
 /* MicroCard component styles */
 .micro-card {
   width: 33.333333333%;
@@ -351,24 +338,6 @@ body,
   object-fit: contain;
 }
 
-/* Gradient background with shade - inspired by Bun docs */
-:root {
-  --page-bg-gradient-light: radial-gradient(
-    60% 80% at 50% 0%,
-    hsla(233, 67%, 65%, 0.25) 0%,
-    hsla(233, 67%, 65%, 0.18) 30%,
-    hsla(233, 67%, 65%, 0.10) 50%,
-    hsla(0, 0%, 0%, 0) 100%
-  );
-  --page-bg-gradient-dark: radial-gradient(
-    60% 80% at 50% 0%,
-    hsla(233, 67%, 65%, 0.20) 0%,
-    hsla(233, 67%, 65%, 0.12) 30%,
-    hsla(233, 67%, 65%, 0.06) 50%,
-    hsla(0, 0%, 0%, 0) 100%
-  );
-}
-
 /* Main page background with gradient overlay */
 .sl-markdown-content,
 .main-frame {
@@ -403,38 +372,6 @@ body,
   -webkit-backdrop-filter: blur(80px);
   pointer-events: none;
   z-index: -1;
-}
-
-/* Subtle texture/noise overlay for added depth */
-:root:not([data-theme='light']) .main-frame::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100vh;
-  background-image:
-    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.5;
-}
-
-/* Lighter texture for light mode */
-:root[data-theme='light'] .main-frame::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: 100vh;
-  background-image:
-    radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.015) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.015) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.5;
 }
 
 /* Sidebar transparent to show gradient */
