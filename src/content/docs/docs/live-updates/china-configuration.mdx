@@ -144,7 +144,41 @@ The update behavior and timing remain the same as with standard Capgo configurat
 
 ## Multi-Region Deployment
 
-If your app serves users both inside and outside China, you may want to consider:
+If your app serves users both inside and outside China, you can use the Chinese domain configuration for all users worldwide. The `updater.capgo.com.cn` domain is resolved globally thanks to Alibaba DNS infrastructure, making it accessible both inside China and everywhere else in the world.
+
+### Using Chinese Domains Globally
+
+The Chinese domain URLs work seamlessly for multi-region apps:
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: false, // Recommended for China users
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+This single configuration will work for:
+- Users in mainland China (using Hong Kong-based infrastructure)
+- Users outside China (accessing the same infrastructure via Alibaba DNS)
+
+**Performance Considerations:**
+
+While the `.cn` domain is resolved globally through Alibaba DNS and works everywhere, it's slightly less performant for users outside China compared to the standard domain (`api.capgo.app`), which is resolved directly by Cloudflare where our backend is hosted. However, DNS resolution is fast, so the performance difference is minimal and won't significantly impact the user experience.
+
+<Aside type="tip">
+Using the `.cn` domain for all users simplifies your deployment and ensures consistent update behavior across all regions. You don't need separate builds or environment-based configurations. The small performance trade-off outside China is typically worth the simplified deployment.
+</Aside>
+
+### Alternative: Region-Specific Configurations
+
+If you prefer to optimize differently for each region, you can also consider:
 
 - Building separate app variants with different configurations
 - Using environment-based configuration to dynamically set the URLs
