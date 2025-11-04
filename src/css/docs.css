@@ -23,17 +23,18 @@ body,
   /* Your preferred code font. Starlight uses system monospace fonts by default. */
   --font-mono: 'IBM Plex Mono';
 
-  --color-accent-50: #9aa8ff;
-  --color-accent-100: #909eff;
-  --color-accent-200: #8694ff;
-  --color-accent-300: #7c8af5;
-  --color-accent-400: #7280eb;
-  --color-accent-500: #6876e1;
-  --color-accent-600: #5e6cd7;
-  --color-accent-700: #5462cd;
-  --color-accent-800: #4a58c3;
-  --color-accent-900: #404eb9;
-  --color-accent-950: #2e36a5;
+/* Color for documentation */
+  --color-accent-50: var(--color-blue-50);
+  --color-accent-100: var(--color-blue-100);
+  --color-accent-200: var(--color-blue-200);
+  --color-accent-300: var(--color-blue-300);
+  --color-accent-400: var(--color-blue-400);
+  --color-accent-500: var(--color-blue-500);
+  --color-accent-600: var(--color-blue-600);
+  --color-accent-700: var(--color-blue-700);
+  --color-accent-800: var(--color-blue-800);
+  --color-accent-900: var(--color-blue-900);
+  --color-accent-950: var(--color-blue-950);
 
   --color-gray-50: oklch(0.984 0.003 247.858);
   --color-gray-100: oklch(0.968 0.007 247.896);
