@@ -46,6 +46,13 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **reset**             | The device reset to the `builtin` bundle.                                         |
 | **download_XX**       | A new bundle has been downloaded - progress indicated by XX% (increments of 10%). |
 | **download_complete** | The new bundle has finished downloading.                                          |
+| **download_manifest_start** | The device started downloading the update manifest.                             |
+| **download_manifest_complete** | The device finished downloading the update manifest.                          |
+| **download_zip_start** | The device started downloading the bundle archive.                                   |
+| **download_zip_complete** | The device finished downloading the bundle archive.                                 |
+| **download_manifest_file_fail** | One manifest entry failed to download; the stats payload puts `version_name` in the form `version:fileName` to pinpoint the asset. |
+| **download_manifest_checksum_fail** | The manifest file failed checksum validation.                           |
+| **download_manifest_brotli_fail** | The manifest file failed to decompress using Brotli.                       |
 | **download_fail**     | The new bundle failed to download.                                                |
 | **update_fail**       | The new bundle has been installed but failed to call `notifyAppReady`.            |
 | **checksum_fail**     | The new bundle failed to validate the checksum.                                   |

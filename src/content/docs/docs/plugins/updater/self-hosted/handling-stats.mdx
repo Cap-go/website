@@ -86,6 +86,13 @@ interface AppInfos {
           'download_80' |
           'download_90' |
           'download_complete' |
+          'download_manifest_start' |
+          'download_manifest_complete' |
+          'download_zip_start' |
+          'download_zip_complete' |
+          'download_manifest_file_fail' |
+          'download_manifest_checksum_fail' |
+          'download_manifest_brotli_fail' |
           'decrypt_fail' |
           'app_moved_to_foreground' |
           'app_moved_to_background' |
@@ -169,9 +176,16 @@ This endpoint should return a JSON:
 * **set**: When app sets a new bundle
 * **set_fail**: When app couldn't find the ID of the bundle set
 * **update_fail**: Send after the delay and `notifyAppReady` never called
-* **download_fail**: When download never finished
-* **download_complete**: When download finish
 * **download_xx**: Send every 10% of download ex: download_10, download_20, download_70
+* **download_manifest_start**: The manifest download started on the device
+* **download_manifest_complete**: The manifest download finished on the device
+* **download_manifest_file_fail**: A manifest entry failed to download; `version_name` will be `version:fileName` so you can identify the asset
+* **download_manifest_checksum_fail**: The manifest file failed checksum validation
+* **download_manifest_brotli_fail**: The manifest file failed to decompress using Brotli
+* **download_zip_start**: The bundle archive download started on the device
+* **download_zip_complete**: The bundle archive download finished on the device
+* **download_complete**: When download finish
+* **download_fail**: When download never finished
 * **windows_path_fail**: The zip has files who contain windows path who are illegal
 * **canonical_path_fail**: The path of files is not canonical
 * **directory_path_fail**: There is an error in the path of zip files

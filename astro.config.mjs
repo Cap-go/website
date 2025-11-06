@@ -218,6 +218,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Android Kiosk',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/android-kiosk/' },
+                { label: 'Getting started', link: '/docs/plugins/android-kiosk/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'AppInsights',
               items: [
                 { label: 'Overview', link: '/docs/plugins/appinsights/' },

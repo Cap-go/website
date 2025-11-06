@@ -21,7 +21,7 @@ import FingerPrintIcon from 'astro-heroicons/mini/FingerPrint.astro'
 import GlobeAltIcon from 'astro-heroicons/mini/GlobeAlt.astro'
 import HeartIcon from 'astro-heroicons/mini/Heart.astro'
 import HomeIcon from 'astro-heroicons/mini/Home.astro'
-import KeyIcon from 'astro-heroicons/mini/Key.astro'
+import LockClosedIcon from 'astro-heroicons/mini/LockClosed.astro'
 import MapIcon from 'astro-heroicons/mini/Map.astro'
 import MapPinIcon from 'astro-heroicons/mini/MapPin.astro'
 import MegaphoneIcon from 'astro-heroicons/mini/Megaphone.astro'
@@ -39,7 +39,6 @@ import TagIcon from 'astro-heroicons/mini/Tag.astro'
 import UserCircleIcon from 'astro-heroicons/mini/UserCircle.astro'
 import UserGroupIcon from 'astro-heroicons/mini/UserGroup.astro'
 import VideoCameraIcon from 'astro-heroicons/mini/VideoCamera.astro'
-import WrenchIcon from 'astro-heroicons/mini/Wrench.astro'
 import ChatBubbleOvalLeftIcon from 'astro-heroicons/mini/ChatBubbleOvalLeft.astro'
 import ShareIcon from 'astro-heroicons/mini/Share.astro'
 
@@ -288,6 +287,14 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-android-inline-install/',
     title: 'Android Inline Install',
     icon: CloudArrowDownIcon,
+  },
+  {
+    name: '@capgo/capacitor-android-kiosk',
+    author: 'github.com/Cap-go',
+    description: 'Lock Android devices into kiosk mode with launcher functionality and hardware key control',
+    href: 'https://github.com/Cap-go/capacitor-android-kiosk/',
+    title: 'Android Kiosk',
+    icon: LockClosedIcon,
   },
   {
     name: '@capgo/capacitor-appinsights',
