@@ -599,6 +599,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Speech Recognition',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/speech-recognition/' },
+                { label: 'Getting started', link: '/docs/plugins/speech-recognition/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Social Login',
               items: [
                 { label: 'Overview', link: '/docs/plugins/social-login/' },

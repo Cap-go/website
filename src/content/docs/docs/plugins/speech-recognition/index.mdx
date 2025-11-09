@@ -1,0 +1,62 @@
+---
+title: Speech Recognition Plugin
+description: Natural, low-latency speech recognition for Capacitor apps with parity across iOS and Android
+sidebar:
+  order: 1
+---
+
+The Speech Recognition plugin provides comprehensive on-device speech recognition capabilities for your Capacitor apps. It offers natural, low-latency transcription with streaming partial results, permission helpers, and consistent behavior across iOS and Android platforms.
+
+## Features
+
+- **Real-time transcription**: Get instant partial results as users speak
+- **Cross-platform parity**: Consistent API and behavior across iOS and Android
+- **Segmented sessions**: Split recognition into segments based on silence (Android)
+- **Punctuation support**: Automatic punctuation on supported platforms (iOS 16+)
+- **Permission helpers**: Built-in permission request and status checking
+- **Language support**: Access to device's supported recognition languages
+- **Event listeners**: Track listening state and receive results via events
+
+## Why this plugin?
+
+This package builds on the excellent [`capacitor-community/speech-recognition`](https://github.com/capacitor-community/speech-recognition) plugin, incorporating the most requested community pull requests:
+
+- Punctuation toggles on iOS (PR #74)
+- Segmented results & silence handling on Android (PR #104)
+- `recognitionRequest` safety fix (PR #105)
+
+Plus additional Capgo features:
+
+- Configurable silence windows
+- Streaming segment listeners
+- Consistent permission helpers
+- Active maintenance tracking Capacitor major versions
+- Same conventions as all Capgo plugins (SPM, Podspec, workflows)
+
+## Installation
+
+Get started with the [Getting Started guide](/docs/plugins/speech-recognition/getting-started/).
+
+## Use Cases
+
+- Voice commands and control
+- Dictation and note-taking apps
+- Voice search functionality
+- Accessibility features
+- Language learning applications
+- Transcription services
+- Voice-activated assistants
+
+## Platform Support
+
+| Platform | Supported | Notes |
+|----------|-----------|-------|
+| iOS | ✅ | iOS 10.0+, supports punctuation on iOS 16+ |
+| Android | ✅ | API 23+, supports segmented sessions |
+| Web | ⚠️ | Limited support via Web Speech API |
+
+## Next Steps
+
+- [Getting Started](/docs/plugins/speech-recognition/getting-started/) - Install and configure the plugin
+- [View on GitHub](https://github.com/Cap-go/capacitor-speech-recognition)
+- [Report an Issue](https://github.com/Cap-go/capacitor-speech-recognition/issues)

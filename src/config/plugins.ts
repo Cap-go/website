@@ -457,6 +457,14 @@ export const actions = [
     icon: SignalIcon,
   },
   {
+    name: '@capgo/capacitor-speech-recognition',
+    author: 'github.com/Cap-go',
+    description: 'Natural, low-latency speech recognition with streaming partial results and cross-platform parity',
+    href: 'https://github.com/Cap-go/capacitor-speech-recognition/',
+    title: 'Speech Recognition',
+    icon: MicrophoneIcon,
+  },
+  {
     name: '@capgo/capacitor-textinteraction',
     author: 'github.com/Cap-go',
     description: 'Enable advanced text selection, copy-paste, and interaction features in web views',
