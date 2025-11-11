@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-30T00:00:00.000Z
-updated_at: 2025-09-23T00:00:00.000Z
+updated_at: 2025-11-11T17:12:15.000Z
 head_image: /fastlane_ios.webp
 head_image_alt: Ilustrasi GitHub Action Fastlane testflight
 keywords: 'Fastlane, CI/CD, iOS, automatic build, automatic release, mobile app updates'

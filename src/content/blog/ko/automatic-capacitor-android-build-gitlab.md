@@ -6,7 +6,7 @@ author: Anik Dhabal Babu
 author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
-updated_at: 2023-09-27T00:00:00.000Z
+updated_at: 2025-11-11T17:12:15.000Z
 head_image: /andriod_app_gitlab.webp
 head_image_alt: GitLab과 구글 플레이 Fastlane 일러스트
 keywords: >-
