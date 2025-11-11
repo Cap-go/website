@@ -155,7 +155,7 @@ export const actions = [
   {
     name: '@capgo/capacitor-navigation-bar',
     author: 'Martin Donadieu',
-    description: 'Set navigation bar color for android lolipop and higher',
+    description: 'Set navigation bar color for android Lollipop and higher',
     href: 'https://github.com/Cap-go/capacitor-navigation-bar/',
     title: 'Navigation Bar',
     // icon: Bars3Icon,

@@ -85,7 +85,7 @@ Capacitor 앱용 CI/CD 설정은 복잡하고 시간이 많이 걸릴 수 있습
 2. _요구사항_
 3. _App Store Connect API 키 생성하기_
 4. _App Store Connect API 키 사용하기_
-5. _Fastline 파일 복사하기_
+5. _Fastlane 파일 복사하기_
 6. _Fastlane match 구성하기_
 6. _Fastlane match 구성하기_
 

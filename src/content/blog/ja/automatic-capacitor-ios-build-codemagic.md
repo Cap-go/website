@@ -45,7 +45,7 @@ next_blog: automatic-capacitor-android-build-codemagic
 2. _要件_
 3. _App Store Connect APIキーの作成_
 4. _App Store Connect APIキーの使用_
-5. _Fastlineファイルのコピー_
+5. _Fastlaneファイルのコピー_
 6. _Codemagicの設定_
 
 ## 1. CodemagicでApp Store Connect APIを使用する

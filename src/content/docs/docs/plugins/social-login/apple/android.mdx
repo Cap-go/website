@@ -9,7 +9,7 @@ import { Steps } from '@astrojs/starlight/components';
 
 Apple login on android is hacky. Apple has no official support for `Sign in with Apple` on Android, so the solution is slightly hacky.
 
-Android currently uses a chrome tabs to display an OAuth2 website. This approach has the challanges:
+Android currently uses a chrome tabs to display an OAuth2 website. This approach has the challenges:
 
 - Difficult configuration
 - A backend is required
@@ -68,7 +68,7 @@ Now that you are aware of the challlanges and the flow, let's begin the configur
         :::
 
         :::note
-        Service ID doesn't have to match the App ID, but I recomend setting the service ID to `YOUR_APP_ID.serivce` . As a reminder, I am using `me.wcaleniewolny.test.ionic.vue` for my app ID but I am using `ee.forgr.io.ionic.service2` as the service ID.
+        Service ID doesn't have to match the App ID, but I recommend setting the service ID to `YOUR_APP_ID.service` . As a reminder, I am using `me.wcaleniewolny.test.ionic.vue` for my app ID but I am using `ee.forgr.io.ionic.service2` as the service ID.
         :::
     4. Please verify the details and click `Register`
         <img src="/social-login-assets/apple_dev_service_ref_fin.png" alt="Confirming service ID registration" />
@@ -90,7 +90,7 @@ Now that you are aware of the challlanges and the flow, let's begin the configur
         <img src="/social-login-assets/apple_dev_serv_create_next.png" alt="Setting domain and return URL fields" />
 
         :::note
-        This backend **has** to be running on HTTPS. As for the `Return URLs`, you might want to come back to this after reading the next section of this tutorial and after configuring the backend. For the purposes of this tutorial, I will use `https://xyz.wcaleniewolny.me/login/callback` for the return URL and `xyz.wcaleniewolny.me` the doman. Press next.
+        This backend **has** to be running on HTTPS. As for the `Return URLs`, you might want to come back to this after reading the next section of this tutorial and after configuring the backend. For the purposes of this tutorial, I will use `https://xyz.wcaleniewolny.me/login/callback` for the return URL and `xyz.wcaleniewolny.me` the domain. Press next.
         :::
 
     10. Confirm the data and click `Done`
@@ -156,7 +156,7 @@ As you saw in the diagram, the backend performs a step called `Redirect back to 
 
 <Steps>
     1. Modify the `AndroidManifest.xml`
-        1. Open the file, I will use `AndroidStuido`
+        1. Open the file, I will use `AndroidStudio`
             <img src="/social-login-assets/studio_android_manifest_file.png" alt="AndroidManifest.xml file in Android Studio" />
         2. Find the `MainActivity` and add the following Intent filter
             <img src="/social-login-assets/studio_manifest_code_to_add.png" alt="Intent filter code to add in MainActivity" />

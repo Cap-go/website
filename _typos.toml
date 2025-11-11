@@ -1,0 +1,57 @@
+[files]
+# Exclude translated content - these are not English typos
+extend-exclude = [
+    "messages/*.json",
+    "src/content/i18n/*.json",
+    "src/content/docs/es/**",
+    "src/content/docs/it/**",
+    "src/content/docs/ja/**",
+    "src/content/docs/de/**",
+    "src/content/docs/fr/**",
+    "src/content/docs/pt/**",
+    "src/content/docs/zh/**",
+    "src/content/docs/ko/**",
+    "src/content/docs/ru/**",
+    "src/content/docs/id/**",
+    "src/content/plugins-tutorials/es/**",
+    "src/content/plugins-tutorials/it/**",
+    "src/content/plugins-tutorials/fr/**",
+    "src/content/plugins-tutorials/id/**",
+    "src/content/plugins-tutorials/de/**",
+    "src/content/blog/es/**",
+    "src/content/blog/fr/**",
+    "src/content/blog/it/**",
+    "src/content/blog/ja/**",
+    "src/content/blog/de/**",
+    "src/content/blog/pt/**",
+    "src/content/blog/id/**",
+    "src/content/blog/ko/**",
+    "src/content/blog/zh-cn/**",
+    "public/**/*_tye.png",
+    "loadedVectorStore/**",
+    "src/pages/**",
+    "src/services/supabase.types.ts",
+    "src/components/**",
+    "public/",
+]
+
+[default]
+extend-ignore-re = [
+    # Ignore URLs
+    "https?://\\S+",
+]
+
+[default.extend-words]
+# These are proper names, not typos
+Longe = "Longe"
+Damon = "Damon"
+
+# Acronyms and technical terms
+ASO = "ASO"  # App Store Optimization
+ITMS = "ITMS"  # iTunes Music Store
+Hashi = "Hashi"  # HashiCorp (brand name)
+
+# Translation keys/identifiers - these should remain as-is
+udid = "udid"  # iOS device UDID (technical term)
+UDID = "UDID"  # iOS device UDID (technical term)
+RTO = "RTO"  # Recovery Time Objective

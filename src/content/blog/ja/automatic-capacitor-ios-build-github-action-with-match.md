@@ -88,7 +88,7 @@ CapacitorアプリのCI/CDのセットアップは複雑で時間がかかる場
 3. _App Store Connect APIキーの作成_
 4. _App Store Connect APIキーの使用_
 5. _Fastlaneファイルのコピー_
-6. _Fastlane matchsの設定_
+6. _Fastlane matchの設定_
 
 ## 1. FastlaneMatchでApp Store Connect APIを使用する
 

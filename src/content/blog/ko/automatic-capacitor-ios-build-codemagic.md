@@ -45,7 +45,7 @@ next_blog: automatic-capacitor-android-build-codemagic
 2. _요구사항_
 3. _App Store Connect API 키 생성하기_
 4. _App Store Connect API 키 사용하기_
-5. _Fastline 파일 복사하기_
+5. _Fastlane 파일 복사하기_
 6. _Codemagic 구성하기_
 
 ## 1. Codemagic에서 App Store Connect API 사용하기

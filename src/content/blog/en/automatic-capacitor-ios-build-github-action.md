@@ -84,7 +84,7 @@ We are going to use a **_macOS_** machine, you can see in the screenshot its pri
     - _Requirements:_
       - _Creating an App Store Connect API Key_
       - _Using an App Store Connect API Key_
-2.  _Copy Fastline files_
+2.  _Copy Fastlane files_
 3.  _Configure GitHub Actions_
 
 
@@ -226,7 +226,7 @@ Please convert the profile to Base64 and store it as a secret (`BUILD_PROVISION_
 base64 -i BUILD_PROVISION_PROFILE.mobileprovision | pbcopy
 ```
 
-## 4\. Copy Fastline files
+## 4\. Copy Fastlane files
 
 Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom "lanes" which bundle a series of "actions" that perform tasks that you'd normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we'll be using only a handful of core actions.
 
@@ -534,7 +534,7 @@ Make a _commit_, you should see the active workflow in the repository.
 
 **Trigger the workflow**
 
-Push the new commits to the branch `main` or `developement` to trigger the workflow.
+Push the new commits to the branch `main` or `development` to trigger the workflow.
 
 ![Started with commit](/cd_started.webp)
 

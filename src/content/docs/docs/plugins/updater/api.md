@@ -378,7 +378,7 @@ For the `date` kind, the value should be an iso8601 date string.
 For the `background` kind, the value should be a number in milliseconds.
 For the `nativeVersion` kind, the value should be the version number.
 For the `kill` kind, the value is not used.
-The function has unconsistent behavior the option kill do trigger the update after the first kill and not after the next background like other options. This will be fixed in a future major release.
+The function has inconsistent behavior the option kill do trigger the update after the first kill and not after the next background like other options. This will be fixed in a future major release.
 
 | Param         | Type                                                                  | Description                                                                                                |
 | ------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -861,7 +861,7 @@ Get the current state of the shake menu
 
 ### DownloadOptions
 
-This URL and versions are used to download the bundle from the server, If you use backend all information will be gived by the method getLatest.
+This URL and versions are used to download the bundle from the server, If you use backend all information will be given by the method getLatest.
 If you don't use backend, you need to provide the URL and version of the bundle. Checksum and sessionKey are required if you encrypted the bundle with the CLI command encrypt, you should receive them as result of the command.
 
 | Prop             | Type                         | Description                                                                                                                                                      | Default                | Since |

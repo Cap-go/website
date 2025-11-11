@@ -11,8 +11,18 @@ on:
       - main
 
 jobs:
+  typos:
+    name: Check for Typos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+      - name: Check for Typos
+        uses: crate-ci/typos@v1.39.0
+
   build:
     runs-on: ubuntu-latest
+    needs: typos
     steps:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2

@@ -50,7 +50,7 @@ We are going to use a **_macOS M1_** machine, you can see in the screenshot its 
 2.  _Requirements_
 3.  _Creating an App Store Connect API Key_
 4.  _Using an App Store Connect API Key_
-5.  _Copy Fastline files_
+5.  _Copy Fastlane files_
 6.  _Configure Codemagic_
 
 ## 1\. Using App Store Connect API with Codemagic
@@ -301,7 +301,7 @@ Your App doesn't need to use Ionic, only Capacitor base is mandatory, it can hav
 
 **Trigger the workflow**
 
-Push the new commits to the branch `main` or `developement` to trigger the workflow.
+Push the new commits to the branch `main` or `development` to trigger the workflow.
 
 ![Started with commit](/build_result.webp)
 

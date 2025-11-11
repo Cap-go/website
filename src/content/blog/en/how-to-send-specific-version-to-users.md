@@ -106,7 +106,7 @@ await axios.post('https://api.capgo.app/device', {
   app_id: 'YOUR_APP_ID',
   device_id: 'DEVICE_ID',
   channel: 'CHANNEL_NAME', // The name of the channel, or undefined if version_id provided
-  version_id: 'VERSION_NAME' // this is optionnal, if provide it will override the channel, that usefull when you want to debug only one user.
+  version_id: 'VERSION_NAME' // this is optional, if provide it will override the channel, that useful when you want to debug only one user.
 }, {
   headers: {
     authorization: 'YOUR_API_KEY' // choose a key with 'write' or 'all' rights

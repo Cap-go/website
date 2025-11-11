@@ -151,7 +151,7 @@ File Kunci API (file p8 yang Anda unduh), ID kunci, dan ID issuer diperlukan unt
 
 _Sekarang kita dapat mengelola Fastlane dengan kunci API App Store Connect, bagus!_
 
-## 2. Menyalin file Fastline
+## 2. Menyalin file Fastlane
 
 Fastlane adalah pustaka Ruby yang dibuat untuk mengotomatiskan tugas-tugas pengembangan mobile yang umum. Menggunakan Fastlane, Anda dapat mengkonfigurasi "lane" kustom yang menggabungkan serangkaian "aksi" yang melakukan tugas-tugas yang biasanya Anda lakukan menggunakan Android studio. Anda dapat melakukan banyak hal dengan Fastlane, tetapi untuk keperluan tutorial ini, kita hanya akan menggunakan beberapa aksi inti.
 

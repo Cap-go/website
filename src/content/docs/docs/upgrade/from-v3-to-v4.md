@@ -1,6 +1,6 @@
 ---
 title: "From V3 to V4"
-description: "How to upgrade from V3 to V4 of  Capgo updater, undertsand what are the breaking changes and how to handle them"
+description: "How to upgrade from V3 to V4 of  Capgo updater, understand what are the breaking changes and how to handle them"
 sidebar:
   order: 3
 ---

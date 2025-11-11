@@ -1,7 +1,7 @@
 ---
 slug: how-capgo-is-born
 title: How Capgo is born
-description: Backstory on how i started this journey and builded Capgo
+description: Backstory on how i started this journey and built Capgo
 author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'

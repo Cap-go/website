@@ -57,13 +57,13 @@ Capacitor 앱의 CI/CD 설정은 복잡하고 시간이 많이 소요될 수 있
 
 **게시물에서 따라야 할 단계**
 
-1. _Fastline 파일 복사_
+1. _Fastlane 파일 복사_
 2. _GitLab 암호화된 시크릿에 시크릿 저장_
 3. _Google Play 서비스 계정 키 생성 및 저장_
 4. _Android 서명 키 저장_
 5. _GitLab 워크플로우 .yml 파일 설정_
 
-## 1. Fastline 파일 복사
+## 1. Fastlane 파일 복사
 
 Fastlane은 일반적인 모바일 개발 작업을 자동화하기 위해 만들어진 Ruby 라이브러리입니다. Fastlane을 사용하면 일반적으로 Android Studio에서 수행하는 작업을 수행하는 "액션"들을 묶은 사용자 정의 "레인"을 구성할 수 있습니다. Fastlane으로 많은 것을 할 수 있지만, 이 튜토리얼에서는 핵심 액션 몇 가지만 사용할 것입니다.
 

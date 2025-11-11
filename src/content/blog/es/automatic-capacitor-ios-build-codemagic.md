@@ -48,7 +48,7 @@ Vamos a usar una máquina **_macOS M1_**, puedes ver en la captura su precio y l
 2.  _Requisitos_
 3.  _Creando una clave de API de App Store Connect_
 4.  _Usando una clave de API de App Store Connect_
-5.  _Copiar archivos de Fastline_
+5.  _Copiar archivos de Fastlane_
 6.  _Configurar Codemagic_
 
 ## 1. Usando la API de App Store Connect con Codemagic

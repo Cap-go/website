@@ -34,7 +34,7 @@ This method is here to remember the `apikey` for you.
 use `--apikey=********` in any command to override it
 :::
 
-**Optionaly you can give:**
+**Optionally you can give:**
 
 `--local` This will store your **apikey** in the local repo and git ignore it.
 
@@ -173,9 +173,9 @@ Optionally, you can give:
 * `--tus` Upload the bundle using tus protocol.
 * `--multipart` Uses multipart protocol to upload data to S3, Deprecated, use TUS instead.
 * `--encrypted-checksum <encryptedChecksum>` An encrypted checksum (signature). Used only when uploading an external bundle.
-* `--package-json <packageJson>` A path to package.json. Usefull for monorepos.
+* `--package-json <packageJson>` A path to package.json. Useful for monorepos.
 * `--auto-set-bundle` Set the bundle in capacitor.config.json.
-* `--node-modules <nodeModules>` A list of path to node_modules. Usefull for monorepos (comma separated ex: ../../node_modules,./node_modules)
+* `--node-modules <nodeModules>` A list of path to node_modules. Useful for monorepos (comma separated ex: ../../node_modules,./node_modules)
 
 > ⭐️ External option helps to unlock 2 cases: corporate with privacy concern, don't send the code to a third part and app bigger than 200 MB. With this setting, Capgo store only the link to the zip and sends the link to all apps.
 
@@ -316,8 +316,8 @@ Optionally, you can give:
 * `--apikey [key]` API key to link to your account.
 * `--text` use text instead of emojis in the table
 * `--channel [channel]` the channel to check the compatibility with.
-* `--package-json <packageJson>` A path to package.json. Usefull for monorepos
-* `--node-modules <nodeModules>` A list of path to node_modules. Usefull for monorepos (comma separated ex: ../../node_modules,./node_modules)
+* `--package-json <packageJson>` A path to package.json. Useful for monorepos
+* `--node-modules <nodeModules>` A list of path to node_modules. Useful for monorepos (comma separated ex: ../../node_modules,./node_modules)
 
 ## Channel
 
@@ -377,7 +377,7 @@ First, the `major` strategy. It prevents an update from `0.0.0` -> `1.0.0`. The 
 Second is the `minor` strategy. It prevents an update from `0.0.0` -> `1.1.0` or an update from `1.1.0` to `1.2.0`. 
 **BE AWARE** this strategy does not prevent an update from `0.1.0` -> `1.1.0`
 
-Third, the `patch` strategy. It was added into capgo as a very strict mode. It's not recomended to be used unless you fully understand how it works.
+Third, the `patch` strategy. It was added into capgo as a very strict mode. It's not recommended to be used unless you fully understand how it works.
 In order for it to accept a update the following conditions must be meet:
  - The major is the same between the new and the old version
  - The minor is the same between the new and the old version
@@ -417,7 +417,7 @@ To properly upload a bundle when using the `metadata` option you need to pass th
 The `--min-update-version` is not the ONLY way to do compatibility.
 There also exists the `--auto-min-update-version`. Here is how it works.
 
-First, it takes a look at the version curently uploaded to the channel. It checks compatibility same as `bundle compatibility` command would.
+First, it takes a look at the version currently uploaded to the channel. It checks compatibility same as `bundle compatibility` command would.
 Second, if the new version is 100% compatible it reuses the `min_update_version` from the latest version in the channel.
 If not, then it sets the `min_update_version` to the bundle number of the newly uploaded version.
 
@@ -437,7 +437,7 @@ See below for more information about the encryption system.
 
 <img src="/crypto_explained.webp" alt="How crypto works"/>
 
-Ecryption schema
+Encryption schema
 
 ### Create key for your app
 

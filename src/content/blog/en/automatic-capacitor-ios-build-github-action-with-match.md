@@ -88,9 +88,9 @@ We are going to use a **_macOS_** machine, you can see in the screenshot its pri
 2.  _Requirements_
 3.  _Creating an App Store Connect API Key_
 4.  _Using an App Store Connect API Key_
-5.  _Copy Fastline files_
-6.  _Configure Fastlane matchs_
-6.  _Configure Fastlane matchs_
+5.  _Copy Fastlane files_
+6.  _Configure Fastlane match_
+6.  _Configure Fastlane match_
 
 ## 1\. Using App Store Connect API with Fastlane Match
 
@@ -153,7 +153,7 @@ The API Key file (p8 file that you download), the key ID, and the issuer ID are 
 
 _Now we can manage Fastlane with the App Store Connect API key, great!_
 
-## 2\. Copy Fastline files
+## 2\. Copy Fastlane files
 
 Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom "lanes" which bundle a series of "actions" that perform tasks that you'd normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we'll be using only a handful of core actions.
 
@@ -526,7 +526,7 @@ Make a _commit_, you should see the active workflow in the repository.
 
 **Trigger the workflow**
 
-Push the new commits to the branch `main` or `developement` to trigger the workflow.
+Push the new commits to the branch `main` or `development` to trigger the workflow.
 
 ![Started with commit](/cd_started.webp)
 
@@ -573,7 +573,7 @@ I will improve this blog with your feedbacks, if you have any question or sugges
 
 If you still need to build on your device, you need to add them manually to the provisionning.
 Connect your device to your mac and open the device menu
-![find devic ios menu](/find_ios_device.webp)
+![find device ios menu](/find_ios_device.webp)
 Then copy your identifier 
 ![find identifier ios](/find_ios_identifier.webp)
 And then start the command:

@@ -9,7 +9,7 @@ author_image_url: 'https://avatars.githubusercontent.com/u/81948346?v=4'
 author_url: 'https://x.com/anikdhabal'
 created_at: 2023-09-27T00:00:00.000Z
 updated_at: 2023-09-27T00:00:00.000Z
-head_image: /andriod_app_gitlab.webp
+head_image: /android_app_gitlab.webp
 head_image_alt: Fastlane Google play GitLab illustration
 keywords: Fastlane, CI/CD, Android, automatic build, automatic release, mobile app updates
 tag: CI/CD
@@ -58,13 +58,13 @@ If you still want to set up everything yourself, here's what you need to do:
 
 **Steps to follow in the post**
 
-1.  _Copy Fastline files_
+1.  _Copy Fastlane files_
 2.  _Storing your secrets in GitLab encrypted secrets_
 3.  _Creating & storing your Google Play service account key_
 4.  _Storing your Android signing key_
 5.  _Set up your GitLab workflow .yml file_
 
-## 1. Copy Fastline files
+## 1. Copy Fastlane files
 
 Fastlane is a Ruby library created to automate common mobile development tasks. Using Fastlane, you can configure custom "lanes" which bundle a series of "actions" that perform tasks that you'd normally perform using Android studio. You can do a lot with Fastlane, but for the purposes of this tutorial, we'll be using only a handful of core actions.
 

@@ -80,8 +80,8 @@ The migration was rather smooth. It took a week of work but compared to V1 and V
 
 After all of this hard work I think it's time to focus on something else for now 😎
 
-It was not easy but I learned a lot and capgo has recived a very nice and important feature
-I still have to deperecate the legacy functions, improve the webapp user experiance, monitor for bugs, 
+It was not easy but I learned a lot and capgo has received a very nice and important feature
+I still have to deprecate the legacy functions, improve the webapp user experience, monitor for bugs, 
 but there should not be any major changes to this system.
 
 

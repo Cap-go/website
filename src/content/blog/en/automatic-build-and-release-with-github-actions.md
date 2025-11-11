@@ -116,7 +116,7 @@ jobs:
         id: build_code
         run: npm run build
         env: # Remove both lines  if you don't need it
-          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }} # Exemple of env var coming from a secret
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }} # Example of env var coming from a secret
       - name: Create Release
         id: create_release
         run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} -c production

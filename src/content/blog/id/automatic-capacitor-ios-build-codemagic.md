@@ -48,7 +48,7 @@ Kita akan menggunakan mesin **_macOS M1_**, Anda dapat melihat di tangkapan laya
 2.  _Persyaratan_
 3.  _Membuat Kunci API App Store Connect_
 4.  _Menggunakan Kunci API App Store Connect_
-5.  _Menyalin file Fastline_
+5.  _Menyalin file Fastlane_
 6.  _Mengonfigurasi Codemagic_
 
 ## 1\. Menggunakan App Store Connect API dengan Codemagic
