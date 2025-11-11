@@ -59,7 +59,7 @@ Here's where to find the key information you'll need for integration:
    This is a crucial security step required by Facebook. Open your terminal and run:
 
    ```bash
-   keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl base64 -A
+   keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64 -A
    ```
 
    When prompted for a password, use: `android`
@@ -67,7 +67,7 @@ Here's where to find the key information you'll need for integration:
    :::note
    For release builds, you'll need to use your release keystore:
    ```bash
-   keytool -exportcert -alias your-key-name -keystore your-keystore-path | openssl base64 -A
+   keytool -exportcert -alias your-key-name -keystore your-keystore-path | openssl sha1 -binary | openssl base64 -A
    ```
    :::
 
