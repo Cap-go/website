@@ -88,11 +88,11 @@ The plugin provides comprehensive event handling:
 ## Usage Example
 
 ```typescript
-import { Downloader } from '@capgo/capacitor-downloader';
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
 
 // Start a download
 const downloadId = 'my-download-001';
-await Downloader.download({
+await CapacitorDownloader.download({
   id: downloadId,
   url: 'https://example.com/large-file.zip',
   destination: '/downloads/large-file.zip',
@@ -104,41 +104,41 @@ await Downloader.download({
 });
 
 // Listen for progress updates
-Downloader.addListener('downloadProgress', (data) => {
+CapacitorDownloader.addListener('downloadProgress', (data) => {
   console.log(`Download ${data.id}: ${data.progress}% complete`);
   console.log(`Downloaded: ${data.bytesDownloaded}/${data.totalBytes} bytes`);
 });
 
 // Handle completion
-Downloader.addListener('downloadCompleted', (data) => {
+CapacitorDownloader.addListener('downloadCompleted', (data) => {
   console.log(`Download completed: ${data.id}`);
   console.log(`File saved to: ${data.path}`);
 });
 
 // Handle errors
-Downloader.addListener('downloadFailed', (error) => {
+CapacitorDownloader.addListener('downloadFailed', (error) => {
   console.error(`Download failed: ${error.id}`, error.message);
 });
 
 // Pause a download
-await Downloader.pause(downloadId);
+await CapacitorDownloader.pause(downloadId);
 
 // Resume the download
-await Downloader.resume(downloadId);
+await CapacitorDownloader.resume(downloadId);
 
 // Check download status
-const status = await Downloader.checkStatus(downloadId);
+const status = await CapacitorDownloader.checkStatus(downloadId);
 console.log('Download status:', status);
 
 // Stop the download
-await Downloader.stop(downloadId);
+await CapacitorDownloader.stop(downloadId);
 ```
 
 ## Network Configuration
 
 ### WiFi-Only Downloads
 ```typescript
-await Downloader.download({
+await CapacitorDownloader.download({
   id: 'large-file',
   url: 'https://example.com/video.mp4',
   destination: '/downloads/video.mp4',
@@ -149,7 +149,7 @@ await Downloader.download({
 ### Priority Management
 ```typescript
 // High priority download
-await Downloader.download({
+await CapacitorDownloader.download({
   id: 'urgent-update',
   url: 'https://example.com/update.zip',
   destination: '/downloads/update.zip',
@@ -171,7 +171,7 @@ Downloads can be in various states:
 
 ```typescript
 // Get file details
-const fileInfo = await Downloader.getFileInfo('/downloads/my-file.pdf');
+const fileInfo = await CapacitorDownloader.getFileInfo('/downloads/my-file.pdf');
 console.log('File size:', fileInfo.size);
 console.log('Last modified:', fileInfo.lastModified);
 console.log('MIME type:', fileInfo.mimeType);
