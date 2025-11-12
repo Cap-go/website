@@ -41,7 +41,6 @@ next_blog: ''
 | **Hosting** | Cloud or self-hosted | Cloud-only |
 | **Future Availability** | Actively developed | Ends in 2026 |
 | **Annual Cost** | ~$3,600 | $6,000 |
-| **Setup Fee** | $2,600 | Included |
 
 **Bottom line:** Capacitor (Capgo) is a future-proof, secure, and cost-efficient choice, especially for long-term projects. Appflow may suit short-term needs but requires migration planning due to its upcoming shutdown.
 
@@ -115,7 +114,6 @@ This table highlights the main differences between Capgo and Appflow:
 | **Hosting Options** | Cloud or self-hosted | Cloud-only |
 | **Platform Status** | Active development | Support ends in 2026 |
 | **Annual Cost** | ~$3,600 ($300/month) | $6,000 |
-| **Setup Fee** | $2,600 (one-time) | Included |
 | **Source Code** | 100% open-source | Proprietary |
 
 These distinctions can help guide your choice depending on your specific needs.

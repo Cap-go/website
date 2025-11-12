@@ -201,7 +201,6 @@ The OTA market is evolving, with new platforms offering competitive pricing and 
 | --- | --- | --- |
 | Monthly Operations | $300 | Starting at $12 |
 | Annual Enterprise Cost | $6,000+ | $996 |
-| Setup Fee | Variable | $2,600 (one-time) |
 
 > "We practice agile development and @Capgo is mission-critical in delivering continuously to our users!" - Rodrigo Mantica, @manticarodrigo [\[1\]](https://capgo.app/)
 
