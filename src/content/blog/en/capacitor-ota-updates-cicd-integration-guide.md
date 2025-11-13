@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-17T01:02:12.522Z
-updated_at: 2025-11-13T20:46:16.000Z
+updated_at: 2025-11-13T20:57:27.000Z
 head_image: https://assets.seobotai.com/capgo.app/6800475b28980901df1e541b-1744851846737.jpg
 head_image_alt: Mobile Development
 keywords: Capacitor, OTA updates, CI/CD, app deployment, automation, mobile development, versioning, error tracking

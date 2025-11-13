@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-05-20T15:10:20.942Z
-updated_at: 2025-11-13T20:46:16.000Z
+updated_at: 2025-11-13T20:57:27.000Z
 head_image: https://assets.seobotai.com/cdn-cgi/image/quality=75,w=1536,h=1024/capgo.app/682c8ab34fa53d42207d8d4e-1747753870852.jpg
 head_image_alt: Mobile Development
 keywords: OTA updates, manual submissions, app development, user experience, deployment speed
