@@ -81,7 +81,7 @@ Microsoft Code Push was discontinued in 2024 due to ongoing reliability issues a
 
 Here's a breakdown of the tools based on security, compliance, deployment options, and cost:
 
--   **Capgo**: Offers true end-to-end encryption, complies with Apple and Google standards, supports both cloud and self-hosted deployment, integrates with CI/CD pipelines, and is open-source. Pricing includes a $2,600 setup fee and approximately $300 per month. Over five years, it could save up to $26,100 compared to Appflow [\[1\]](https://capgo.app/).
+-   **Capgo**: Offers true end-to-end encryption, complies with Apple and Google standards, supports both cloud and self-hosted deployment, integrates with CI/CD pipelines, and is open-source. OTA update pricing starts at $12/month. For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for $2,600. Over five years, it could save up to $26,100 compared to Appflow [\[1\]](https://capgo.app/).
     
 -   **Capawesome**: Provides cryptographic signing but includes fewer features. It mainly targets the German market and has pricing similar to Capgo [\[1\]](https://capgo.app/).
     

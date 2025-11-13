@@ -132,7 +132,7 @@ Here’s how to configure your CI/CD pipeline for phased rollouts:
 > "Capgo is a must-have tool for developers who want to be more productive. Avoiding app store reviews for bug fixes is a game changer."  
 > – Bessie Cooper
 
-Capgo's integration costs about $300 per month for ongoing CI/CD operations, offering a more affordable option compared to alternatives like AppFlow, which costs around $6,000 annually [\[1\]](https://capgo.app/).
+Capgo's OTA updates start at just $12 per month, offering a more affordable option compared to alternatives like AppFlow, which costs around $6,000 annually [\[1\]](https://capgo.app/). For teams needing automated CI/CD to build native apps, an optional setup service is available for $2,600 one-time.
 
 ###### sbb-itb-f9944d2
 

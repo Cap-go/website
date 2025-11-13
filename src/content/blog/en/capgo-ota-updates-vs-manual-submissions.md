@@ -195,13 +195,13 @@ Cost is another critical factor when choosing an update strategy. The pricing st
 
 | **Cost Factor** | **Capgo OTA** | **Manual Submission** |
 | --- | --- | --- |
-| **Setup Cost** | $2,600 (one-time CI/CD setup) | Developer account fees |
+| **Setup Cost** | No setup fee for OTA updates; optional $2,600 one-time for CI/CD native build setup | Developer account fees |
 | **Monthly Fee** | From $12 (SOLO) to $249 (PAYG) | None |
 | **Bandwidth** | 50GB–10TB (based on plan) | Store-managed |
 | **Storage** | 2GB–20GB (based on plan) | Store-managed |
 | **User Limit** | 1,000–1,000,000 MAU | Unlimited |
 
-Though Capgo's initial CI/CD setup fee of $2,600 may seem steep, it becomes a cost-efficient solution for teams that release frequent updates or manage multiple apps [\[1\]](https://capgo.app). The monthly plans also provide flexibility based on bandwidth, storage, and user needs.
+Capgo's OTA update plans start at just $12/month, making it a cost-efficient solution for teams that release frequent updates or manage multiple apps [\[1\]](https://capgo.app). The monthly plans provide flexibility based on bandwidth, storage, and user needs. For teams needing automated CI/CD pipelines to build native apps, an optional setup service is available for $2,600 one-time.
 
 These factors highlight the trade-offs between the two approaches, helping teams choose the best fit for their app deployment strategy.
 
@@ -262,7 +262,7 @@ What sets Capgo apart is its ability to push updates in real time. You can test 
 ::: faq
 ### How does the cost of Capgo's OTA updates compare to traditional app store update costs?
 
-Capgo's OTA updates provide a **more budget-friendly option** compared to the traditional app store update process. With Capgo, you’re looking at about **$300 per month** and a **one-time setup fee of $2,600**. When you stack that up against competitors like [Appflow](https://ionic.io/appflow/), which charges roughly **$6,000 annually** for similar services, the savings become clear.
+Capgo's OTA updates provide a **more budget-friendly option** compared to the traditional app store update process. With Capgo, you're looking at plans starting from just **$12 per month**. When you stack that up against competitors like [Appflow](https://ionic.io/appflow/), which charges roughly **$6,000 annually** for similar services, the savings become clear. For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for **$2,600**.
 
 Traditional app store submissions, on the other hand, come with recurring expenses like **Apple's $99 annual Developer Program fee** and a **30% commission** on in-app purchases. Plus, Capgo saves you from the hassle of waiting for app store approvals, letting you roll out updates instantly and simplify your workflow.
 :::

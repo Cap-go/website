@@ -221,7 +221,7 @@ Since 2022, the CI/CD security landscape has seen significant advancements, and 
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." - Simon Flack[\[1\]](https://capgo.app)
 
-Capgo's one-time CI/CD setup fee of $2,600 offers long-term savings, with an estimated $26,100 saved over five years[\[1\]](https://capgo.app). Its support for Capacitor 6 & 7, along with features for flexible organization management, makes it an excellent option for small teams and large enterprises alike, especially those prioritizing robust security measures.
+Capgo's affordable OTA update plans starting at $12/month offer long-term savings, with an estimated $26,100 saved over five years[\[1\]](https://capgo.app). For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for $2,600. Its support for Capacitor 6 & 7, along with features for flexible organization management, makes it an excellent option for small teams and large enterprises alike, especially those prioritizing robust security measures.
 
 ## Conclusion: Improving CI/CD with Token Rotation
 

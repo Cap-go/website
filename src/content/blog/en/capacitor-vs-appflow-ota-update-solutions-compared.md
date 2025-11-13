@@ -24,7 +24,7 @@ next_blog: ''
     
     -   Updates reach 95% of users in 24 hours.
     -   Offers end-to-end encryption and flexible hosting (cloud or self-hosted).
-    -   Costs ~$3,600 annually, with a one-time setup fee of $2,600.
+    -   OTA updates from $12/month ($144+/year). Optional CI/CD setup service for native builds available for $2,600 one-time.
     -   Actively developed and open-source.
 -   **Appflow**:
     
@@ -40,7 +40,7 @@ next_blog: ''
 | **Security** | End-to-end encryption | Standard signing |
 | **Hosting** | Cloud or self-hosted | Cloud-only |
 | **Future Availability** | Actively developed | Ends in 2026 |
-| **Annual Cost** | ~$3,600 | $6,000 |
+| **Annual Cost** | From $144/year (OTA only) | $6,000 |
 
 **Bottom line:** Capacitor (Capgo) is a future-proof, secure, and cost-efficient choice, especially for long-term projects. Appflow may suit short-term needs but requires migration planning due to its upcoming shutdown.
 
@@ -113,7 +113,7 @@ This table highlights the main differences between Capgo and Appflow:
 | **CI/CD Integration** | GitHub Actions, GitLab CI, Jenkins | Ionic-specific tools |
 | **Hosting Options** | Cloud or self-hosted | Cloud-only |
 | **Platform Status** | Active development | Support ends in 2026 |
-| **Annual Cost** | ~$3,600 ($300/month) | $6,000 |
+| **Annual Cost** | From $144/year ($12/month for OTA) | $6,000 |
 | **Source Code** | 100% open-source | Proprietary |
 
 These distinctions can help guide your choice depending on your specific needs.
@@ -158,7 +158,7 @@ Capgo doesn't just stop at setup - it further enhances the build pipeline with C
 
 ### Build Pipeline Support
 
-Following the quick setup, Capgo integrates effortlessly with widely-used CI/CD tools like GitHub Actions, GitLab CI, and Jenkins. This approach supports over 50 apps without locking developers into specific platforms. The CI/CD setup involves a one-time fee of $2,600 and monthly operational costs of about $300 [\[1\]](https://capgo.app/).
+Following the quick setup, Capgo integrates effortlessly with widely-used CI/CD tools like GitHub Actions, GitLab CI, and Jenkins. This approach supports over 50 apps without locking developers into specific platforms. For teams needing automated CI/CD pipelines to build native mobile apps, an optional setup service is available for a one-time fee of $2,600 [\[1\]](https://capgo.app/).
 
 ### Update Management
 
@@ -224,19 +224,19 @@ These contrasting pricing models highlight the importance of evaluating costs al
 
 Pricing is a major factor in choosing an OTA update solution, especially for long-term planning. Over time, the cost gap between Capgo and Appflow becomes more noticeable:
 
-| Time Period | Capgo Total Cost\* | Appflow Total Cost | Potential Savings |
+| Time Period | Capgo Total Cost (OTA only)\* | Appflow Total Cost | Potential Savings |
 | --- | --- | --- | --- |
-| Year 1 | $6,200 | $6,000 | \-$200 |
-| Year 3 | $13,400 | $18,000 | $4,600 |
-| Year 5 | $20,600 | $30,000 | $9,400 |
+| Year 1 | $144 | $6,000 | $5,856 |
+| Year 3 | $432 | $18,000 | $17,568 |
+| Year 5 | $720 | $30,000 | $29,280 |
 
-\*Capgo's total includes a one-time CI/CD setup fee of $2,600 and monthly costs of $300 [\[1\]](https://capgo.app/).
+\*Capgo's OTA update costs at $12/month ($144/year) [\[1\]](https://capgo.app/). Optional CI/CD setup service for building native apps available for $2,600 one-time (not included in table).
 
 Jermaine shared his experience:
 
 > "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue. Loving Capgo so far" [\[1\]](https://capgo.app/)
 
-For organizations focused on cost efficiency, Capgo's one-time setup fee, lower monthly charges, and [self-hosting option](https://capgo.app/blog/self-hosted-capgo/) can lead to significant savings over time.
+For organizations focused on cost efficiency, Capgo's lower monthly charges and [self-hosting option](https://capgo.app/blog/self-hosted-capgo/) can lead to significant savings over time.
 
 LeVar Berry also shared his perspective:
 

@@ -18,14 +18,14 @@ next_blog: ''
 
 **Looking for a better way to manage updates for your [Capacitor](https://capacitorjs.com/) apps?** With [Microsoft CodePush](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) shutting down in 2024 and [Appflow](https://ionic.io/appflow/) scheduled to close in 2026, developers are turning to alternatives like Capacitor CI/CD plugins. Here's a quick breakdown:
 
--   **Capacitor CI/CD Plugins**: Open-source, customizable, and integrates with tools like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/). Offers features like live updates, end-to-end encryption, and partial updates. Costs around $300/month with a one-time setup fee of $2,600.
+-   **Capacitor CI/CD Plugins**: Open-source, customizable, and integrates with tools like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/). Offers features like live updates, end-to-end encryption, and partial updates. OTA updates start at $12/month. Optional CI/CD setup service for building native apps available for $2,600 one-time.
 -   **Appflow**: A centralized platform for builds and deployments but lacks flexibility. Costs $6,000/year and will be discontinued in 2026.
 
 ### Quick Comparison
 
 | Feature | Capacitor CI/CD Plugins | Appflow |
 | --- | --- | --- |
-| **Cost** | $300/month + $2,600 setup | $6,000/year |
+| **Cost** | From $12/month (OTA); optional CI/CD setup $2,600 | $6,000/year |
 | **Customization** | High | Limited |
 | **Integration** | GitHub, GitLab, [Jenkins](https://www.jenkins.io/) | Platform-specific |
 | **Future Support** | Ongoing | Ends in 2026 |
@@ -102,13 +102,12 @@ When evaluating these solutions, cost plays a key role alongside features and de
 
 ### CI/CD Plugin Pricing
 
-Capacitor CI/CD plugins come with a straightforward pricing model. For example, Capgo charges a **one-time setup fee of $2,600** and about **$300 per month** for CI/CD operations. Additionally, they offer tiered plans to accommodate different team sizes and needs.
+Capacitor CI/CD plugins come with a straightforward pricing model. For example, Capgo offers OTA updates with tiered plans starting at just **$12/month**. For teams needing automated CI/CD pipelines to build native mobile apps, an optional setup service is available for a **one-time fee of $2,600**.
 
 | Plan Component | Cost |
 | --- | --- |
-| Initial Setup | $2,600 (one-time) |
-| Monthly CI/CD Operations | ~$300 |
-| Tiered Plans | $12 - $249/month |
+| OTA Update Plans | $12 - $249/month |
+| Optional CI/CD Setup | $2,600 (one-time, for native build automation) |
 
 This structure is particularly appealing for long-term projects, offering budget-friendly scaling options. On the other hand, Appflow takes a different approach.
 

@@ -20,7 +20,7 @@ next_blog: ''
 
 ### Key Points:
 
--   **Capgo**: Affordable ($300/month + $2,600 setup), one-click rollback, GitHub/GitLab integration, real-time analytics, and encryption.
+-   **Capgo**: Affordable (from $12/month), one-click rollback, GitHub/GitLab integration, real-time analytics, and encryption. Optional CI/CD setup for building native mobile apps available for $2,600.
 -   **Capawesome**: Limited documentation; region-specific (Germany).
 -   **Appflow**: Expensive ($6,000/year); supports snapshots but ends in 2026.
 -   **Microsoft CodePush**: Discontinued in 2024, leaving hybrid app developers seeking alternatives.
@@ -32,7 +32,7 @@ next_blog: ''
 | Rollback Options | One-click rollback | Not documented | Snapshots | Discontinued |
 | CI/CD Integration | GitHub, GitLab, [Jenkins](https://www.jenkins.io/) | Not documented | Limited | None |
 | Security | End-to-end encryption | Update signing | Update signing | Update signing |
-| Pricing | $300/month + $2,600 setup | Not disclosed | $6,000/year | Free (discontinued) |
+| Pricing | From $12/month (OTA); CI/CD setup $2,600 (optional) | Not disclosed | $6,000/year | Free (discontinued) |
 
 **Bottom Line:** With CodePush gone and Appflow nearing its end, **Capgo** stands out as a cost-effective, secure, and feature-rich solution for rollback management.
 
@@ -63,7 +63,7 @@ It works seamlessly with popular tools like **[GitHub Actions](https://docs.gith
 
 ### Pricing
 
-Capgo costs approximately $300 per month, with a one-time setup fee of $2,600 [\[1\]](https://capgo.app/).
+Capgo costs from $12 per month for OTA updates. For teams needing CI/CD setup to build native mobile apps, there's an optional one-time setup fee of $2,600 [\[1\]](https://capgo.app/).
 
 ### Update Management
 
@@ -104,13 +104,13 @@ Here's a breakdown of rollback features, CI/CD integration, security, and pricin
 | Rollback Options | One-click rollback to any previous version [\[1\]](https://capgo.app/) | –   | –   | Discontinued |
 | CI/CD Integration | GitHub Actions, GitLab CI, Jenkins [\[1\]](https://capgo.app/) | –   | –   | –   |
 | Security | End-to-end encryption (meets Apple and Google requirements) [\[1\]](https://capgo.app/) | Update signing | Update signing | Update signing |
-| Pricing Model | Starts at $12/month (Solo plan); $2,600 one-time setup + ~$300/month for CI/CD [\[1\]](https://capgo.app/) | –   | $6,000/year [\[1\]](https://capgo.app/) | Free (discontinued) |
+| Pricing Model | Starts at $12/month for OTA updates; optional CI/CD setup for native builds at $2,600 one-time [\[1\]](https://capgo.app/) | –   | $6,000/year [\[1\]](https://capgo.app/) | Free (discontinued) |
 
 This comparison emphasizes Capgo's strengths in cost, security, and CI/CD integration.
 
 > "@Capgo is a smart way to make hot code pushes (and not for all the money in the world like with @AppFlow) 🙂" - NASA's OSIRIS‑REx [\[1\]](https://capgo.app/)
 
-Capgo stands out by offering a more affordable option compared to Appflow, with over 50% savings on annual costs. The combination of a $2,600 setup fee and ~$300/month provides end-to-end encryption, GitHub/GitLab/Jenkins integration, and live analytics - features that competitors lack.
+Capgo stands out by offering a more affordable option compared to Appflow, with over 50% savings on annual costs. Starting at just $12/month for OTA updates, Capgo provides end-to-end encryption, GitHub/GitLab/Jenkins integration, and live analytics - features that competitors lack. For teams that need automated native app builds, an optional CI/CD setup service is available for a one-time fee of $2,600.
 
 Next, we'll summarize the key takeaways from this comparison.
 

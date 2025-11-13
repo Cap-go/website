@@ -105,7 +105,7 @@ Here’s a quick comparison of the two platforms:
 | Feature | Capgo | Appflow |
 | --- | --- | --- |
 | CI/CD Integration | Works with external platforms like GitHub, GitLab, and Jenkins | Comes with a built-in system |
-| Operating Cost | Around US$300 per month | Roughly US$6,000 per year |
+| Operating Cost | From US$12/month for OTA updates | Roughly US$6,000 per year |
 
 Now, let’s look at how these platforms handle collaboration and team workflows.
 

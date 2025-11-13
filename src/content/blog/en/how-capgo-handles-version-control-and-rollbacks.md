@@ -69,7 +69,7 @@ To get started, configure the Capgo CLI with an API key from the dashboard. Then
 
 By incorporating semantic versioning, you can streamline version management, automate release notes, and maintain a clear audit trail. This end-to-end automation - from committing code to delivering updates - ensures a smooth, efficient workflow while retaining rollback capabilities.
 
-The benefits of this integration are clear. Capgo currently supports nearly 2,000 production apps, delivering updates in just 114ms for a 5MB bundle. While running CI/CD workflows costs about $300 per month, the time savings and reduced risk of manual errors make it a worthwhile investment for development teams.
+The benefits of this integration are clear. Capgo currently supports nearly 2,000 production apps, delivering updates in just 114ms for a 5MB bundle. With OTA updates starting at just $12 per month, the time savings and reduced risk of manual errors make it a worthwhile investment for development teams. For teams needing automated CI/CD to build native apps, an optional setup service is available for $2,600 one-time.
 
 These streamlined version control processes work hand-in-hand with Capgo's rollback features, which are covered in the next section.
 

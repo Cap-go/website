@@ -125,7 +125,7 @@ A detailed look at error logging tools for Capacitor OTA updates.
 | Bugsnag | 7.5K events/month | $59/month | Custom |
 | Capgo | 15-day trial | $12/month | $249/month |
 
-Capgo highlights cost efficiency with their one-time CI/CD setup fee of $2,600 and ongoing costs of around $300 per month. They claim this approach can cut first-year expenses by more than half compared to options like [AppFlow](https://ionic.io/appflow/), potentially saving up to $26,100 over five years [\[1\]](https://capgo.app/).
+Capgo highlights cost efficiency with OTA updates starting at just $12/month. For teams needing automated CI/CD pipeline setup to build native mobile apps, an optional one-time setup service is available for $2,600. This approach can cut first-year expenses by more than half compared to options like [AppFlow](https://ionic.io/appflow/), potentially saving up to $26,100 over five years [\[1\]](https://capgo.app/).
 
 ### Setup Difficulty Levels
 

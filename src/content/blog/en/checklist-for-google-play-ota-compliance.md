@@ -204,7 +204,7 @@ Capgo easily fits into existing development workflows while adhering to Google P
 | API Access | Public API for custom setups | Offers flexible compliance management |
 | [Channel System](https://capgo.app/docs/plugin/cloud-mode/channel-system/) | Beta testing and staged rollouts | Enables controlled update releases |
 
-CI/CD integration is available for approximately $300 per month.
+OTA updates start at $12 per month. For teams needing automated CI/CD pipelines to build native mobile apps, an optional setup service is available for $2,600 one-time.
 
 ### Update Management
 

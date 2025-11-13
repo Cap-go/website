@@ -207,7 +207,7 @@ Here’s a quick guide to help you match your needs with the right platform:
 
 ### **Cost Considerations**
 
-Costs can vary widely depending on your needs. For example, running CI/CD operations may cost about $300 per month, while platforms like **AppFlow** can reach up to $6,000 annually [\[1\]](https://capgo.app/). Balancing costs with performance is key, and platforms like Capgo offer competitive pricing alongside strong performance metrics.
+Costs can vary widely depending on your needs. For example, Capgo's OTA updates start at just $12 per month, while platforms like **AppFlow** can reach up to $6,000 annually [\[1\]](https://capgo.app/). Balancing costs with performance is key, and platforms like Capgo offer competitive pricing alongside strong performance metrics.
 
 ### **Technical Requirements**
 

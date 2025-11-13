@@ -178,7 +178,7 @@ The size of your project plays a significant role in determining the best plugin
     _Example_: [Capgo's PAYG plan](https://capgo.app/docs/webapp/payment/) supports up to 1,000,000 monthly active users, includes 10 TB of bandwidth, and offers self-hosting options.
     
 
-Capgo stands out by offering cost-efficient plans with enterprise-grade features. For instance, their one-time CI/CD setup fee of $2,600 is a practical alternative to more expensive enterprise solutions [\[1\]](https://capgo.app/).
+Capgo stands out by offering cost-efficient plans with enterprise-grade features, starting at just $12/month for OTA updates. For teams needing automated CI/CD pipelines to build native apps, an optional one-time setup service is available for $2,600, providing a practical alternative to more expensive enterprise solutions [\[1\]](https://capgo.app/).
 
 ## Summary
 

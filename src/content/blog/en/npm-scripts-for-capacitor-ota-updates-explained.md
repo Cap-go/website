@@ -303,7 +303,7 @@ The OTA update market has shifted significantly, especially after [Microsoft Cod
 
 > "We are currently giving a try to @Capgo since Appcenter stopped live updates support on hybrid apps and @AppFlow is way too expensive." [\[1\]](https://capgo.app/)
 
-Cost is another important consideration for teams. Capgo offers CI/CD capabilities at approximately $300 per month, a much lower cost compared to the $6,000 annual fees of enterprise-level alternatives [\[1\]](https://capgo.app/).
+Cost is another important consideration for teams. Capgo offers OTA updates starting at just $12 per month, a much lower cost compared to the $6,000 annual fees of enterprise-level alternatives [\[1\]](https://capgo.app/). For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for $2,600.
 
 When implementing npm scripts in your deployment workflow, consider these factors:
 
@@ -343,4 +343,4 @@ Capgo's performance metrics speak for themselves:
 | Bundle Download Speed | 114 ms for 5 MB |
 | Update Success Rate | 82% globally |
 
-At $300 per month for CI/CD integration - compared to $6,000 annually for enterprise-level solutions - Capgo offers a secure, reliable, and cost-efficient option for managing OTA updates [\[1\]](https://capgo.app/).
+Starting at just $12 per month for OTA updates - compared to $6,000 annually for enterprise-level solutions - Capgo offers a secure, reliable, and cost-efficient option for managing OTA updates [\[1\]](https://capgo.app/).

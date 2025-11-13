@@ -95,8 +95,8 @@ Incorporate debugging tools into your CI/CD pipeline. This streamlines issue det
 
 **Cost Overview**
 
--   **Monthly CI/CD operations**: ~$300
--   **One-time setup fee**: ~$2,600 [\[1\]](https://capgo.app/)
+-   **OTA Update Plans**: From $12/month [\[1\]](https://capgo.app/)
+-   **Optional CI/CD Setup Service** (for building native apps): $2,600 one-time [\[1\]](https://capgo.app/)
 
 **Advanced Debugging Tips**
 

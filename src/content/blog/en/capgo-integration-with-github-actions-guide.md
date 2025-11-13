@@ -96,7 +96,7 @@ Prepare your GitHub repository to meet the requirements for CI/CD integration wi
 
 > "We configure your CI/CD pipeline directly in your preferred platform, whether it's GitHub Actions, GitLab CI, or others. We don't host CI/CD or charge you to maintain it." [\[1\]](https://capgo.app/)
 
-Capgo offers this setup for a one-time fee of $2,600 and ~$300/month, which is more affordable compared to AppFlow's $6,000 annual fee [\[1\]](https://capgo.app/).
+Capgo offers OTA updates from $12/month, which is more affordable compared to AppFlow's $6,000 annual fee [\[1\]](https://capgo.app/). For teams needing automated CI/CD to build native apps, an optional setup service is available for $2,600 one-time.
 
 Here’s how to set up your repository:
 

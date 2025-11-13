@@ -157,7 +157,7 @@ Getting started with Capgo is fast and simple. Use the following command:
 npx @capgo/cli init
 ```
 
-The setup process takes less than 15 minutes to deploy your first update. Capgo also supports CI/CD integration with platforms like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/). The one-time setup fee for Capgo is $2,600.
+The setup process takes less than 15 minutes to deploy your first update. Capgo also supports CI/CD integration with platforms like [GitHub Actions](https://docs.github.com/actions) and [GitLab CI](https://docs.gitlab.com/ee/ci/).
 
 ## Long-term Compliance Management
 
