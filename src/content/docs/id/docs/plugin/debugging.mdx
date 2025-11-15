@@ -37,7 +37,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **download_complete** | Bundle baru selesai diunduh                                                  |
 | **download_fail**     | Bundle baru gagal diunduh                                                    |
 | **update_fail**       | Bundle baru telah dipasang tetapi gagal memanggil `notifyAppReady`            |
-| **checksum_fail**     | Bundle baru gagal memvalidasi checksum                                   |
+| **checksum_fail**     | Bundle baru gagal memvalidasi checksum. Jika Anda menggunakan Capgo Cloud dan menemukan kesalahan ini, biasanya berarti versi aplikasi Anda mengharapkan jenis checksum yang berbeda. Versi terbaru CLI dan plugin (versi 6.25.0 atau 7+) menggunakan checksum SHA256, sedangkan plugin lama menggunakan CRC32. Jika Anda melihat kegagalan checksum, periksa apakah checksum adalah CRC32 (hash yang lebih pendek) daripada SHA256. Ini biasanya menunjukkan bahwa bundle diunggah dengan versi CLI yang lama. Verifikasi versi bundle Anda di dashboard Capgo - bundle yang dibuat sejak versi 6.25.0/7 seharusnya menggunakan SHA256. Jika Anda melihat checksum CRC32, pastikan Anda memiliki versi plugin terbaru yang diinstal secara lokal (CLI memeriksa versi plugin lokal Anda untuk menentukan jenis checksum yang akan diunggah), kemudian tingkatkan CLI Anda dan unggah ulang bundle.                                   |
 | **windows_path_fail** | Zip memiliki file yang mengandung path Windows yang ilegal                        |
 | **canonical_path_fail** | Path file tidak kanonik                                              |
 | **directory_path_fail** | Ada kesalahan dalam path file zip                                         |

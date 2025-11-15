@@ -80,12 +80,7 @@ Questo endpoint dovrebbe restituire un JSON:
 
 ## Azioni:
 
-* **delete**: quando un bundle viene eliminato localmente
-* **reset**: quando l'app ripristina il bundle integrato
-* **set**: quando l'app imposta un nuovo bundle
-* **set_fail**: quando l'app non riesce a trovare l'ID del bundle impostato
-* **update_fail**: inviato dopo il ritardo e `notifyAppReady` non è mai stato chiamato
-* **download_fail**: quando il download non è mai stato completato
-* **download_complete:** Quando il download è completato
-* **download_xx:** Inviato ogni 10% di download es: download_20, download_70
-* **update_fail:** quando il bundle non riesce a eseguire `notifyAppReady` nel periodo di tempo stabilito
+Per descrizioni dettagliate di tutti i codici di azione e i loro significati, consulta la documentazione di debug:
+
+* **Azioni inviate dal dispositivo**: Vedere la sezione [documentazione di debug - Inviati dal dispositivo](/docs/plugin/debugging/#inviati-dal-dispositivo)
+* **Azioni inviate dal backend**: Vedere la sezione [documentazione di debug - Inviati dal backend](/docs/plugin/debugging/#inviati-dal-backend)

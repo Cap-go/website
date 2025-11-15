@@ -80,12 +80,7 @@ Ce point de terminaison doit retourner un JSON :
 
 ## Actions :
 
-* **delete** : quand un bundle est supprimé localement
-* **reset** : quand l'application revient au bundle intégré
-* **set** : quand l'application configure un nouveau bundle
-* **set\_fail** : quand l'application ne trouve pas l'ID du bundle configuré
-* **update\_fail** : envoyé après le délai et `notifyAppReady` n'a jamais été appelé
-* **download\_fail** : quand le téléchargement n'est jamais terminé
-* **download\_complete:** Quand le téléchargement se termine
-* **download\_xx:** Envoyé tous les 10% du téléchargement ex : download\_20, download\_70
-* **update\_fail:** quand le bundle ne parvient pas à exécuter `notifyAppReady` dans le délai imparti
+Pour des descriptions détaillées de tous les codes d'action et leurs significations, veuillez consulter la documentation de débogage :
+
+* **Actions envoyées depuis l'appareil** : Voir la section [documentation de débogage - Envoyé depuis l'appareil](/docs/plugin/debugging/#envoyé-depuis-lappareil)
+* **Actions envoyées depuis le backend** : Voir la section [documentation de débogage - Envoyé depuis le backend](/docs/plugin/debugging/#envoyé-depuis-le-backend)

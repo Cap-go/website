@@ -80,12 +80,7 @@ export const handler: Handler = async (event) => {
 
 ## 액션:
 
-* **delete** : 번들이 로컬에서 삭제될 때
-* **reset** : 앱이 내장 번들로 재설정될 때
-* **set** : 앱이 새로운 번들을 설정할 때
-* **set\_fail** : 앱이 설정된 번들의 ID를 찾을 수 없을 때
-* **update\_fail** : 지연 후 `notifyAppReady`가 호출되지 않았을 때 전송
-* **download\_fail** : 다운로드가 완료되지 않았을 때
-* **download\_complete:** 다운로드가 완료되었을 때
-* **download\_xx:** 다운로드 진행률 10% 마다 전송 예: download\_20, download\_70
-* **update\_fail:** 번들이 주어진 시간 내에 `notifyAppReady`를 실행하지 못했을 때
+모든 액션 코드와 그 의미에 대한 자세한 설명은 디버깅 문서를 참조하세요:
+
+* **기기에서 전송된 액션**: [디버깅 문서 - 기기에서 전송됨](/docs/plugin/debugging/#기기에서-전송됨) 섹션 참조
+* **백엔드에서 전송된 액션**: [디버깅 문서 - 백엔드에서 전송됨](/docs/plugin/debugging/#백엔드에서-전송됨) 섹션 참조

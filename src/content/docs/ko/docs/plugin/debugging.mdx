@@ -37,7 +37,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **download_complete** | 새 번들 다운로드가 완료되었습니다                                          |
 | **download_fail**     | 새 번들 다운로드에 실패했습니다                                                |
 | **update_fail**       | 새 번들이 설치되었지만 `notifyAppReady` 호출에 실패했습니다            |
-| **checksum_fail**     | 새 번들의 체크섬 검증에 실패했습니다                                   |
+| **checksum_fail**     | 새 번들의 체크섬 검증에 실패했습니다. Capgo Cloud를 사용하고 이 오류가 발생하는 경우, 일반적으로 앱 버전이 다른 체크섬 유형을 기대하고 있음을 의미합니다. 최신 버전의 CLI 및 플러그인(버전 6.25.0 또는 7+)은 SHA256 체크섬을 사용하지만 이전 플러그인은 CRC32를 사용했습니다. 체크섬 실패가 표시되면 체크섬이 SHA256이 아닌 CRC32(더 짧은 해시)인지 확인하세요. 이는 일반적으로 오래된 버전의 CLI로 번들이 업로드되었음을 나타냅니다. Capgo 대시보드에서 번들 버전을 확인하세요 - 버전 6.25.0/7 이후로 생성된 번들은 SHA256을 사용해야 합니다. CRC32 체크섬이 표시되면 최신 플러그인 버전이 로컬에 설치되어 있는지 확인하세요(CLI는 로컬 플러그인 버전을 확인하여 업로드할 체크섬 유형을 결정합니다), 그런 다음 CLI를 업그레이드하고 번들을 다시 업로드하세요.                                   |
 | **windows_path_fail** | zip 파일에 잘못된 Windows 경로가 포함되어 있습니다                        |
 | **canonical_path_fail** | 파일 경로가 정규화되지 않았습니다                                              |
 | **directory_path_fail** | zip 파일 경로에 오류가 있습니다                                         |

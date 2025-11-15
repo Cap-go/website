@@ -55,7 +55,7 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **download_manifest_brotli_fail** | The manifest file failed to decompress using Brotli.                       |
 | **download_fail**     | The new bundle failed to download.                                                |
 | **update_fail**       | The new bundle has been installed but failed to call `notifyAppReady`.            |
-| **checksum_fail**     | The new bundle failed to validate the checksum.                                   |
+| **checksum_fail**     | The new bundle failed to validate the checksum. If you're using Capgo Cloud and encounter this error, it typically means your app version is expecting a different checksum type. The latest version of the CLI and plugins (version 6.25.0 or 7+) use SHA256 checksums, while older plugins used CRC32. If you see a checksum fail, check if the checksum is CRC32 (a shorter hash) rather than SHA256. This usually indicates the bundle was uploaded with an old version of the CLI. Verify your bundle version in the Capgo dashboard - bundles created since version 6.25.0/7 should use SHA256. If you're seeing CRC32 checksums, ensure you have the latest plugin version installed locally (the CLI checks your local plugin version to determine which checksum type to upload), then upgrade your CLI and re-upload the bundle.                                   |
 | **windows_path_fail** | The zip has files who contain windows path who are illegal                        |
 | **canonical_path_fail** | The path of files is not canonical                                              |
 | **directory_path_fail** | There is an error in the path of zip files                                         |

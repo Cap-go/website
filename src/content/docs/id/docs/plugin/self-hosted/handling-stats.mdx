@@ -80,12 +80,7 @@ Endpoint ini harus mengembalikan JSON:
 
 ## Tindakan:
 
-* **delete**: ketika bundle dihapus secara lokal
-* **reset**: ketika aplikasi direset ke bundle bawaan
-* **set**: ketika aplikasi menetapkan bundle baru
-* **set_fail**: ketika aplikasi tidak dapat menemukan ID dari bundle yang ditetapkan
-* **update_fail**: dikirim setelah penundaan dan `notifyAppReady` tidak pernah dipanggil
-* **download_fail**: ketika unduhan tidak pernah selesai
-* **download_complete**: Ketika unduhan selesai
-* **download_xx**: Dikirim setiap 10% unduhan contoh: download_20, download_70
-* **update_fail**: ketika bundle gagal melakukan `notifyAppReady` dalam jangka waktu tertentu
+Untuk deskripsi rinci semua kode tindakan dan artinya, silakan lihat dokumentasi debugging:
+
+* **Tindakan yang dikirim dari perangkat**: Lihat bagian [dokumentasi debugging - Dikirim dari perangkat](/docs/plugin/debugging/#dikirim-dari-perangkat)
+* **Tindakan yang dikirim dari backend**: Lihat bagian [dokumentasi debugging - Dikirim dari backend](/docs/plugin/debugging/#dikirim-dari-backend)

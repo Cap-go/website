@@ -80,12 +80,7 @@ Este endpoint debe devolver un JSON:
 
 ## Acciones:
 
-* **delete**: cuando un paquete se elimina localmente
-* **reset**: cuando la aplicación se restablece al paquete incorporado
-* **set**: cuando la aplicación establece un nuevo paquete
-* **set_fail**: cuando la aplicación no pudo encontrar el ID del paquete establecido
-* **update_fail**: enviado después del retraso y `notifyAppReady` nunca fue llamado
-* **download_fail**: cuando la descarga nunca terminó
-* **download_complete:** Cuando la descarga finaliza
-* **download_xx:** Enviado cada 10% de descarga ej: download_20, download_70
-* **update_fail:** cuando el paquete falla al ejecutar `notifyAppReady` en el plazo establecido
+Para descripciones detalladas de todos los códigos de acción y sus significados, consulte la documentación de depuración:
+
+* **Acciones enviadas desde el dispositivo**: Ver la sección [documentación de depuración - Enviados desde el dispositivo](/docs/plugin/debugging/#enviados-desde-el-dispositivo)
+* **Acciones enviadas desde el backend**: Ver la sección [documentación de depuración - Enviados desde el backend](/docs/plugin/debugging/#enviados-desde-el-backend)
