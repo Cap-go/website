@@ -84,18 +84,34 @@ function SubscriptionScreen() {
 Every app with IAP must provide a way for users to restore previous purchases without contacting support.
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
 async function restorePurchases() {
   try {
-    const { customerInfo } = await NativePurchases.restorePurchases();
+    await NativePurchases.restorePurchases();
 
-    if (customerInfo.activeSubscriptions.length > 0) {
-      showMessage('Purchases restored successfully!');
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    const activeSub = purchases.find(
+      (purchase) => purchase.isActive && purchase.expirationDate,
+    );
+
+    if (activeSub) {
       unlockPremiumFeatures();
-    } else {
-      showMessage('No previous purchases found.');
+      showMessage('Purchases restored successfully!');
+      return;
     }
+
+    const { purchases: iaps } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.INAPP,
+    });
+    const hasIap = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
+
+    showMessage(
+      hasIap ? 'Premium purchase restored!' : 'No previous purchases found.',
+    );
   } catch (error) {
     showError('Failed to restore purchases. Please try again.');
   }
@@ -364,15 +380,17 @@ If your app uses AI for any features, you must:
 ### Implement Proper Error Handling
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
 async function handlePurchase(productId: string) {
   try {
-    const { customerInfo } = await NativePurchases.purchaseProduct({
-      productIdentifier: productId
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: productId,
+      productType: PURCHASE_TYPE.SUBS,
     });
 
     // Success
+    await validateReceiptOnServer(transaction.receipt);
     showSuccess('Subscription activated!');
     unlockFeatures();
 

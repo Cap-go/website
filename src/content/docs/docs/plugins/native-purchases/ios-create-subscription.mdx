@@ -158,46 +158,54 @@ You can test subscriptions in sandbox mode even if they show "Missing Metadata" 
 Once created, reference the subscription in your app using the product ID:
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// Fetch subscription products
+// Fetch subscription products direct from StoreKit
 const { products } = await NativePurchases.getProducts({
   productIdentifiers: [
     'com.yourcompany.yourapp.premium_monthly',
-    'com.yourcompany.yourapp.premium_annual'
-  ]
+    'com.yourcompany.yourapp.premium_annual',
+  ],
+  productType: PURCHASE_TYPE.SUBS,
 });
 
-// Display subscription details
-products.forEach(product => {
+products.forEach((product) => {
   console.log(`${product.title}: ${product.priceString}`);
   console.log(`Duration: ${product.subscriptionPeriod}`);
   console.log(`Description: ${product.description}`);
 });
 
-// Purchase a subscription
+// Purchase a subscription (StoreKit 2 automatically handles intro pricing and offers)
 try {
-  const { customerInfo } = await NativePurchases.purchaseProduct({
-    productIdentifier: 'com.yourcompany.yourapp.premium_monthly'
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.yourcompany.yourapp.premium_monthly',
+    productType: PURCHASE_TYPE.SUBS,
   });
 
-  // Check entitlements
-  if (customerInfo.entitlements.active['premium']) {
-    console.log('Premium subscription active!');
-    // Enable premium features
-  }
+  console.log('Transaction ID:', transaction.transactionId);
+
+  // StoreKit receipts are included on iOS for server-side validation
+  await sendReceiptToBackend(transaction.receipt);
 } catch (error) {
   console.error('Purchase failed:', error);
 }
 
-// Check subscription status
-const { customerInfo } = await NativePurchases.getCustomerInfo();
-const premiumEntitlement = customerInfo.entitlements.active['premium'];
+// Check subscription status using the store's data
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
 
-if (premiumEntitlement) {
-  console.log('Expires:', premiumEntitlement.expirationDate);
-  console.log('Will renew:', premiumEntitlement.willRenew);
-  console.log('Product:', premiumEntitlement.productIdentifier);
+const premium = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.yourcompany.yourapp.premium_monthly',
+);
+
+if (premium?.isActive) {
+  console.log('Expires:', premium.expirationDate);
+  console.log('Will renew:', premium.willCancel === false);
+  console.log('Store state:', premium.subscriptionState);
+  unlockPremiumFeatures();
+} else {
+  showPaywall();
 }
 ```
 

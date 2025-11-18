@@ -34,26 +34,26 @@ New apps must use the `monetization.subscriptions` APIs for handling subscriptio
 ### Implementation with Native Purchases
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// Configure with Google Play billing
-await NativePurchases.configure({
-  apiKey: 'your_api_key_here'
-  // Google Play billing is automatically used on Android
-});
+// Ensure billing is available on the device
+const { isBillingSupported } = await NativePurchases.isBillingSupported();
+if (!isBillingSupported) throw new Error('Google Play Billing not available');
 
-// Fetch subscription products
+// Fetch subscription products (Store data is required—never hardcode pricing)
 const { products } = await NativePurchases.getProducts({
-  productIdentifiers: [
-    'premium_monthly',
-    'premium_yearly'
-  ]
+  productIdentifiers: ['premium_monthly', 'premium_yearly'],
+  productType: PURCHASE_TYPE.SUBS,
 });
 
-// Purchase flows through Google Play
-const { customerInfo } = await NativePurchases.purchaseProduct({
-  productIdentifier: 'premium_monthly'
+// Plan identifiers are the Base Plan IDs you create in Google Play Console
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
+  productType: PURCHASE_TYPE.SUBS,
 });
+
+console.log('Purchase token for server validation:', transaction.purchaseToken);
 ```
 
 ## Transparency and Disclosure Requirements
@@ -289,28 +289,43 @@ function PurchaseScreen({ product }) {
 
 **Prevention:**
 ```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
 // Comprehensive testing before submission
 async function testPurchaseFlow() {
   try {
     // 1. Test product loading
     const { products } = await NativePurchases.getProducts({
-      productIdentifiers: ['premium_monthly', 'premium_yearly']
+      productIdentifiers: ['premium_monthly', 'premium_yearly'],
+      productType: PURCHASE_TYPE.SUBS,
     });
     console.log('✓ Products loaded:', products.length);
 
     // 2. Test purchase flow
-    const { customerInfo } = await NativePurchases.purchaseProduct({
-      productIdentifier: 'premium_monthly'
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: 'premium_monthly',
+      planIdentifier: 'monthly-plan',
+      productType: PURCHASE_TYPE.SUBS,
     });
-    console.log('✓ Purchase completed');
+    console.log('✓ Purchase completed', transaction.transactionId);
 
     // 3. Verify entitlements
-    if (customerInfo.entitlements.active['premium']) {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    if (
+      purchases.some(
+        (purchase) =>
+          purchase.productIdentifier === 'premium_monthly' &&
+          ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') &&
+          purchase.isAcknowledged,
+      )
+    ) {
       console.log('✓ Premium features unlocked');
     }
 
     // 4. Test restore
-    const restored = await NativePurchases.restorePurchases();
+    await NativePurchases.restorePurchases();
     console.log('✓ Restore works');
 
   } catch (error) {
@@ -483,26 +498,32 @@ Unlike Apple, Google reviews apps continuously. Your app may go live at any time
 
 2. **Test in Sandbox:**
 ```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
 // Test purchases with license test account
 async function testInSandbox() {
-  // Configure SDK (same as production)
-  await NativePurchases.configure({
-    apiKey: 'your_api_key'
-  });
+  const { isBillingSupported } = await NativePurchases.isBillingSupported();
+  if (!isBillingSupported) {
+    console.error('Billing not supported in this environment');
+    return;
+  }
 
-  // Fetch products (will be in test mode)
+  // Fetch products (returns test pricing when using a license tester)
   const { products } = await NativePurchases.getProducts({
-    productIdentifiers: ['premium_monthly']
+    productIdentifiers: ['premium_monthly'],
+    productType: PURCHASE_TYPE.SUBS,
   });
 
   console.log('Test products:', products);
 
   // Make test purchase (no charge)
-  const { customerInfo } = await NativePurchases.purchaseProduct({
-    productIdentifier: 'premium_monthly'
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'premium_monthly',
+    planIdentifier: 'monthly-plan',
+    productType: PURCHASE_TYPE.SUBS,
   });
 
-  console.log('Test purchase complete:', customerInfo);
+  console.log('Test purchase complete:', transaction.transactionId);
 }
 ```
 
@@ -526,20 +547,35 @@ Before production release:
 ### Handle All Purchase States
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-async function handlePurchase(productId: string) {
+async function handlePurchase(productId: string, planIdentifier?: string) {
   try {
     setLoading(true);
 
-    const { customerInfo } = await NativePurchases.purchaseProduct({
-      productIdentifier: productId
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: productId,
+      planIdentifier,
+      productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
     });
 
-    // Success - check entitlements
-    if (customerInfo.entitlements.active['premium']) {
-      showSuccess('Premium activated!');
+    console.log('Purchase token:', transaction.purchaseToken ?? transaction.receipt);
+
+    // Success - check entitlements from the store
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
+    });
+
+    const isOwned = purchases.some(
+      (purchase) =>
+        purchase.productIdentifier === productId &&
+        (purchase.purchaseState === 'PURCHASED' || purchase.purchaseState === '1') &&
+        purchase.isAcknowledged,
+    );
+
+    if (isOwned) {
       unlockPremiumFeatures();
+      showSuccess('Premium activated!');
     }
 
   } catch (error: any) {
@@ -577,6 +613,8 @@ async function handlePurchase(productId: string) {
 ### Implement Restore Purchases
 
 ```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
 function RestorePurchasesButton() {
   const [loading, setLoading] = useState(false);
 
@@ -584,14 +622,35 @@ function RestorePurchasesButton() {
     setLoading(true);
 
     try {
-      const { customerInfo } = await NativePurchases.restorePurchases();
+      await NativePurchases.restorePurchases();
 
-      if (customerInfo.activeSubscriptions.length > 0) {
-        showSuccess('Subscriptions restored!');
+      const { purchases } = await NativePurchases.getPurchases({
+        productType: PURCHASE_TYPE.SUBS,
+      });
+
+      const hasSubscription = purchases.some(
+        (purchase) => purchase.productType === 'subs' && purchase.isAcknowledged,
+      );
+
+      if (hasSubscription) {
         unlockPremiumFeatures();
-      } else {
-        showInfo('No previous purchases found.');
+        showSuccess('Subscriptions restored!');
+        return;
       }
+
+      // Check one-time unlocks if needed
+      const { purchases: iaps } = await NativePurchases.getPurchases({
+        productType: PURCHASE_TYPE.INAPP,
+      });
+      const hasInApp = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
+
+      if (hasInApp) {
+        unlockPremiumFeatures();
+        showSuccess('Previous purchases restored!');
+        return;
+      }
+
+      showInfo('No previous purchases found.');
     } catch (error) {
       showError('Failed to restore purchases. Please try again.');
     } finally {
@@ -610,27 +669,34 @@ function RestorePurchasesButton() {
 ### Check Subscription Status
 
 ```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
 async function checkSubscriptionStatus() {
   try {
-    const { customerInfo } = await NativePurchases.getCustomerInfo();
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
 
-    // Check if user has active premium subscription
-    const hasPremium = customerInfo.entitlements.active['premium'] !== undefined;
+    const subscription = purchases.find(
+      (purchase) =>
+        purchase.productIdentifier === 'premium_monthly' &&
+        (purchase.purchaseState === 'PURCHASED' || purchase.purchaseState === '1') &&
+        purchase.isAcknowledged,
+    );
 
-    if (hasPremium) {
-      const premiumInfo = customerInfo.entitlements.active['premium'];
-
-      console.log('Subscription active:', {
-        productId: premiumInfo.productIdentifier,
-        expiresAt: premiumInfo.expirationDate,
-        willRenew: premiumInfo.willRenew,
-        periodType: premiumInfo.periodType
-      });
-
-      unlockPremiumFeatures();
-    } else {
+    if (!subscription) {
       showPaywall();
+      return;
     }
+
+    console.log('Subscription active:', {
+      productId: subscription.productIdentifier,
+      expiresAt: subscription.expirationDate,
+      willRenew: subscription.willCancel === false,
+      purchaseToken: subscription.purchaseToken,
+    });
+
+    unlockPremiumFeatures();
   } catch (error) {
     console.error('Failed to check subscription:', error);
   }

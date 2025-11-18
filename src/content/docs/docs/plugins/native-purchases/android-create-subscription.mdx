@@ -105,21 +105,39 @@ After creation, your subscription will be in "Draft" status until activated. You
 Once created, reference the subscription in your app using the product ID:
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// Fetch subscription products
+// Load subscription info
 const { products } = await NativePurchases.getProducts({
-  productIdentifiers: ['your_subscription_product_id']
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
 });
 
-// Display to user and handle purchase
 const product = products[0];
-console.log(`${product.title}: ${product.priceString}`);
+console.log(`${product.title} — ${product.priceString}`);
 
-// Purchase
-const { customerInfo } = await NativePurchases.purchaseProduct({
-  productIdentifier: 'your_subscription_product_id'
+// Purchase (planIdentifier = Base Plan ID from Google Play Console)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
+  productType: PURCHASE_TYPE.SUBS,
 });
+
+console.log('Transaction ID', transaction.transactionId);
+
+// Later, check purchase state
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const subscription = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.example.premium.monthly',
+);
+
+if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.isAcknowledged) {
+  console.log('Subscription active locally');
+  // For expiration/cancellation, validate purchaseToken through your backend
+}
 ```
 
 ## Next Steps

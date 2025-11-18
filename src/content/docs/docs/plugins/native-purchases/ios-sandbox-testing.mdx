@@ -114,24 +114,26 @@ Banking and tax setup approval can take hours to days. Complete this well in adv
 ## Using Sandbox Testing
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// Initialize (works in both sandbox and production)
-await NativePurchases.configure({
-  apiKey: 'your_api_key_here'
-});
+const { isBillingSupported } = await NativePurchases.isBillingSupported();
+if (!isBillingSupported) {
+  throw new Error('StoreKit not supported on this device');
+}
 
 // Fetch products (automatically uses sandbox when available)
 const { products } = await NativePurchases.getProducts({
-  productIdentifiers: ['premium_monthly']
+  productIdentifiers: ['premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
 });
 
 // Make test purchase
-const { customerInfo } = await NativePurchases.purchaseProduct({
-  productIdentifier: 'premium_monthly'
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  productType: PURCHASE_TYPE.SUBS,
 });
 
-console.log('Test purchase successful!', customerInfo);
+console.log('Test purchase successful!', transaction.transactionId);
 ```
 
 ## Verification

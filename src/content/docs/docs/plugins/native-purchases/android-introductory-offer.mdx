@@ -115,32 +115,34 @@ You must first [create an auto-renewable subscription](/docs/plugins/native-purc
 The native-purchases plugin automatically handles introductory offer eligibility and presentation:
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// Check eligibility
-const { eligible } = await NativePurchases.checkTrialOrIntroductoryPriceEligibility({
-  productIdentifiers: ['premium_monthly']
-});
-
-if (eligible['premium_monthly']) {
-  console.log('User is eligible for introductory offer!');
-}
-
-// Fetch products (includes intro offer info)
+// Fetch products (includes intro offer metadata)
 const { products } = await NativePurchases.getProducts({
-  productIdentifiers: ['premium_monthly']
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
 });
 
 const product = products[0];
+
 if (product.introductoryPrice) {
-  console.log(`Intro offer: ${product.introductoryPriceString}`);
-  console.log(`Then: ${product.priceString}`);
+  console.log(`Intro price: ${product.introductoryPriceString}`);
+  console.log(`Regular price: ${product.priceString}`);
+  console.log(
+    `Offer duration: ${product.introductoryPrice.subscriptionPeriod?.numberOfUnits} ${product.introductoryPrice.subscriptionPeriod?.unit}`,
+  );
+} else {
+  console.log('No intro offer configured for this product');
 }
 
-// Purchase (intro offer applied automatically if eligible)
-const { customerInfo } = await NativePurchases.purchaseProduct({
-  productIdentifier: 'premium_monthly'
+// Purchase (Google Play applies intro pricing automatically if the user is eligible)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // Base Plan ID from Google Play Console
+  productType: PURCHASE_TYPE.SUBS,
 });
+
+console.log('Introductory purchase transaction', transaction.transactionId);
 ```
 
 ## Best Practices

@@ -22,9 +22,6 @@ Benefits for iOS and Android mobile applications:
 - Full TypeScript support for mobile app development
 - Seamless integration with existing Capacitor mobile apps
 
----
-locale: en
----
 # Using @capgo/native-purchases
 
 The `@capgo/native-purchases` package provides in-app purchases and subscriptions with a unified API. Here is a tutorial on how to use this package.
@@ -109,3 +106,113 @@ You have successfully integrated @capgo/capacitor-native-purchases into your Cap
 For detailed API documentation and advanced native purchases features for mobile app development, visit the [GitHub repository](https://github.com/Cap-go/capacitor-native-purchases).
 
 Whether you're building native iOS apps, Android mobile applications, or cross-platform Capacitor mobile apps, this native purchases plugin provides the native capabilities you need for professional mobile app development on iOS and Android platforms.
+
+---
+
+# Native Purchases with Capacitor
+
+`@capgo/native-purchases` is the official Capgo plugin for integrating in-app purchases and subscriptions on iOS (StoreKit 2) and Android (Google Play Billing 7). The latest release ships a modern TypeScript API with platform-specific safeguards such as mandatory `planIdentifier` values for Android subscriptions, optional `appAccountToken` support, listeners for StoreKit transaction updates, and helpers like `manageSubscriptions()` to open the system subscription screen.
+
+## Why use this plugin?
+- Battle-tested StoreKit 2 implementation with transaction listeners
+- Google Play Billing 7 with automatic acknowledgement/consumption
+- Same API for in-app products and subscriptions
+- Optional `appAccountToken` to link purchases to your users
+- Helper utilities: `isBillingSupported`, `getPurchases`, `manageSubscriptions`, `getPluginVersion`
+
+## Installation
+
+```bash
+npm install @capgo/native-purchases
+npx cap sync
+```
+
+## Quick start flow
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const monthlySubId = 'com.yourapp.premium.monthly';
+const monthlyPlanId = 'monthly-plan'; // Base Plan ID from Play Console
+
+async function initStore() {
+  const { isBillingSupported } = await NativePurchases.isBillingSupported();
+  if (!isBillingSupported) {
+    throw new Error('Billing not supported on this device');
+  }
+
+  const { products } = await NativePurchases.getProducts({
+    productIdentifiers: [monthlySubId, 'com.yourapp.premium.lifetime'],
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  products.forEach((product) => {
+    console.log(`${product.title} — ${product.priceString}`);
+  });
+}
+
+async function buyMonthlySubscription(appAccountToken?: string) {
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: monthlySubId,
+    planIdentifier: monthlyPlanId, // REQUIRED for Android subscriptions, ignored on iOS
+    productType: PURCHASE_TYPE.SUBS,
+    quantity: 1,
+    appAccountToken, // UUID required on iOS, any obfuscated string (<=64 chars) on Android
+  });
+
+  console.log('Transaction ID', transaction.transactionId);
+}
+
+async function restore() {
+  await NativePurchases.restorePurchases();
+}
+```
+
+## Handling purchase status
+
+Use `getPurchases()` to inspect what the stores currently report:
+
+```typescript
+import { PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+purchases.forEach((purchase) => {
+  if (purchase.isActive === true && purchase.expirationDate) {
+    console.log('iOS sub active until', purchase.expirationDate);
+  }
+
+  if (purchase.purchaseState === 'PURCHASED' && purchase.isAcknowledged) {
+    console.log('Android purchase acknowledged for', purchase.productIdentifier);
+  }
+});
+```
+
+Key differences:
+- iOS subscriptions populate `isActive`, `expirationDate`, and `willCancel`. Validate receipts server-side for final authority.
+- Android never sets `isActive`/`expirationDate`; rely on `purchaseState` plus backend validation with the Google Play Developer API.
+- In-app products on both platforms only prove ownership after receipt/purchase token validation on your server.
+
+## Managing subscriptions
+
+- `restorePurchases()` replays StoreKit history (iOS) / Google Play purchases (Android) and links them to the current device.
+- `manageSubscriptions()` opens the native subscription dashboard so users can upgrade/cancel.
+- `addListener('transactionUpdated', ...)` surfaces StoreKit pending transactions at app launch for iOS 15+.
+
+## Server-side validation
+
+Always validate purchases on your backend:
+1. Send the `receipt` (iOS) or `purchaseToken` (Android) from the `Transaction` returned by `purchaseProduct`.
+2. For iOS, call Apple's receipt validation or App Store Server API and track `isActive`/`revocationReason`.
+3. For Android, call the Google Play Developer API with the `purchaseToken` to confirm state, expiration, and cancellations.
+4. Keep a copy of `appAccountToken` to detect fraud and map store events to user accounts.
+
+Capgo ships a Cloudflare Worker example inside the plugin repository’s `validator/` folder that you can adapt to your backend.
+
+## Additional references
+
+- [Full README and API docs](https://github.com/Cap-go/capacitor-native-purchases)
+- [Android testing guide](/docs/plugins/native-purchases/android-sandbox-testing/)
+- [iOS testing guide](/docs/plugins/native-purchases/ios-sandbox-testing/)

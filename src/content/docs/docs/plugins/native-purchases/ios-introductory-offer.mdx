@@ -178,40 +178,35 @@ Then: $9.99/month
 The native-purchases plugin automatically handles introductory offer presentation and eligibility:
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
-
-// Check eligibility for intro offers
-const { eligible } = await NativePurchases.checkTrialOrIntroductoryPriceEligibility({
-  productIdentifiers: [
-    'com.yourapp.premium_monthly',
-    'com.yourapp.premium_annual'
-  ]
-});
-
-console.log('Eligible for intro offer:', eligible);
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
 // Fetch products with intro offer information
 const { products } = await NativePurchases.getProducts({
-  productIdentifiers: ['com.yourapp.premium_monthly']
+  productIdentifiers: ['com.yourapp.premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
 });
 
 const product = products[0];
 
-// Display intro offer details
+// Display intro offer details (StoreKit sends localized metadata)
 if (product.introductoryPrice) {
   console.log('Intro price:', product.introductoryPriceString);
   console.log('Intro period:', product.introductoryPricePeriod);
   console.log('Intro cycles:', product.introductoryPriceCycles);
   console.log('Regular price:', product.priceString);
+} else {
+  console.log('No intro offer configured');
 }
 
-// Purchase (intro offer applied automatically if eligible)
+// Purchase (StoreKit automatically applies intro pricing if eligible)
 try {
-  const { customerInfo } = await NativePurchases.purchaseProduct({
-    productIdentifier: 'com.yourapp.premium_monthly'
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.yourapp.premium_monthly',
+    productType: PURCHASE_TYPE.SUBS,
   });
 
-  console.log('Subscription active:', customerInfo.entitlements.active);
+  console.log('Subscription active, receipt length:', transaction.receipt?.length);
+  await validateReceiptOnServer(transaction.receipt);
 } catch (error) {
   console.error('Purchase failed:', error);
 }
@@ -290,27 +285,33 @@ function formatIntroOffer(product: any): string {
 Use sandbox testing to verify behavior:
 
 ```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
 // In sandbox mode, accelerated subscription durations apply:
 // - 3 days free trial = 3 minutes
 // - 1 week free trial = 3 minutes
 // - 1 month free trial = 5 minutes
 
-await NativePurchases.configure({
-  apiKey: 'your_sandbox_api_key'
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
 });
 
 // Purchase with intro offer
-const { customerInfo } = await NativePurchases.purchaseProduct({
-  productIdentifier: 'premium_monthly'
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  productType: PURCHASE_TYPE.SUBS,
 });
 
-// Verify intro offer was applied
-console.log('Intro activated:', customerInfo.entitlements.active);
+console.log('Intro purchase transaction:', transaction.transactionId);
 
 // Wait for accelerated renewal
 setTimeout(async () => {
-  const { customerInfo: updated } = await NativePurchases.getCustomerInfo();
-  console.log('After trial:', updated.entitlements.active);
+  const { purchases } = await NativePurchases.getPurchases({
+    productType: PURCHASE_TYPE.SUBS,
+  });
+  const premium = purchases.find((purchase) => purchase.productIdentifier === 'premium_monthly');
+  console.log('After trial state:', premium?.subscriptionState);
 }, 180000); // 3 minutes for weekly trial
 ```
 
@@ -389,10 +390,11 @@ analytics.track('intro_offer_accepted', {
 });
 
 // Monitor conversion
-NativePurchases.addListener('customerInfoUpdate', (info) => {
-  if (info.customerInfo.entitlements.active['premium']) {
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  if (transaction.productIdentifier === product.identifier && transaction.isActive) {
     analytics.track('trial_converted', {
-      customer_id: info.customerInfo.originalAppUserId
+      transactionId: transaction.transactionId,
+      productId: transaction.productIdentifier,
     });
   }
 });

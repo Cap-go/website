@@ -125,35 +125,36 @@ Switching to another subscription **at the same tier level**.
 The native-purchases plugin automatically handles subscription group logic:
 
 ```typescript
-import { NativePurchases } from '@capgo/native-purchases';
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
 // Fetch all subscriptions in a group
 const { products } = await NativePurchases.getProducts({
-  productIdentifiers: [
-    'premium_monthly',
-    'premium_annual',
-    'ultimate_monthly'
-  ]
+  productIdentifiers: ['premium_monthly', 'premium_annual', 'ultimate_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
 });
 
-// Display current subscription
-const { customerInfo } = await NativePurchases.getCustomerInfo();
-const activeSubs = customerInfo.activeSubscriptions;
+// Display current subscription using StoreKit transactions
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
 
-// Check for pending downgrade
-if (customerInfo.subscriptionRenewalProduct) {
-  console.log('Subscription will change to:',
-    customerInfo.subscriptionRenewalProduct);
+const activeSubs = purchases.filter((purchase) => purchase.isActive);
+
+// Detect pending downgrade/cancellation (StoreKit sets willCancel === true)
+const pendingChange = purchases.find((purchase) => purchase.willCancel === true);
+if (pendingChange) {
+  console.log('Subscription will stop auto-renewing on', pendingChange.expirationDate);
 }
 
-// Purchase (automatically handles upgrade/downgrade)
+// Purchase (StoreKit handles upgrades/downgrades automatically)
 await NativePurchases.purchaseProduct({
-  productIdentifier: 'premium_annual'
+  productIdentifier: 'premium_annual',
+  productType: PURCHASE_TYPE.SUBS,
 });
 
-// Listen for subscription changes
-NativePurchases.addListener('customerInfoUpdate', (info) => {
-  console.log('Subscription updated:', info.customerInfo);
+// Listen for StoreKit updates (fires on upgrades/downgrades/refunds)
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Subscription updated:', transaction);
 });
 ```
 
@@ -162,23 +163,38 @@ NativePurchases.addListener('customerInfoUpdate', (info) => {
 ### Detecting Change Type
 
 ```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
 // Get current subscription info
-const { customerInfo } = await NativePurchases.getCustomerInfo();
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
 
-// Check if downgrade is pending
-if (customerInfo.subscriptionRenewalProduct) {
-  // User has downgraded, will change at next renewal
-  const currentProduct = customerInfo.activeSubscriptions[0];
-  const futureProduct = customerInfo.subscriptionRenewalProduct;
+const currentSubscription = purchases.find(
+  (purchase) => purchase.subscriptionState === 'subscribed',
+);
 
-  console.log(`Currently: ${currentProduct}`);
-  console.log(`Changes to: ${futureProduct} at next renewal`);
+if (currentSubscription) {
+  // StoreKit reports if user cancelled auto-renew
+  if (currentSubscription.willCancel) {
+    console.log(
+      `User cancelled. Access remains until ${currentSubscription.expirationDate}`,
+    );
+  }
+
+  if (currentSubscription.isUpgraded) {
+    console.log('User recently upgraded to this plan.');
+  }
 }
 
-// Check for immediate upgrade
-NativePurchases.addListener('customerInfoUpdate', (info) => {
-  // This fires immediately for upgrades
-  console.log('Subscription changed!');
+// Listen for automatic upgrades/downgrades
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Subscription changed!', transaction);
+  if (transaction.subscriptionState === 'revoked') {
+    revokeAccess();
+  } else if (transaction.isActive) {
+    unlockPremiumFeatures();
+  }
 });
 ```
 
@@ -195,20 +211,9 @@ Always communicate the change behavior clearly:
 **For Crossgrades:**
 > "Your plan will change to Annual billing at the next renewal on [date]."
 
-## Webhooks
+## Server monitoring
 
-The native-purchases plugin triggers webhooks for subscription changes:
-
-```typescript
-// subscription_replace webhook fired when user changes subscriptions
-{
-  "type": "subscription_replace",
-  "oldProduct": "premium_monthly",
-  "newProduct": "premium_annual",
-  "effectiveDate": "2024-01-15T00:00:00Z",
-  "isUpgrade": false // Crossgrade (monthly to annual)
-}
-```
+Use Apple's App Store Server Notifications v2 or your own receipt-validation backend to mirror StoreKit changes in your database. Pair server notifications with the `transactionUpdated` listener so both client and backend stay in sync.
 
 ## Best Practices
 

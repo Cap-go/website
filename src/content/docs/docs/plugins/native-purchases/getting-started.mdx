@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Learn how to install and configure the Capacitor Native Purchases plugin to implement in-app purchases and subscriptions.
+description: Learn how to install and use the @capgo/native-purchases plugin to implement one-time purchases and subscriptions with StoreKit 2 and Google Play Billing 7.
 sidebar:
   order: 2
 ---
@@ -16,333 +16,239 @@ import { PackageManagers } from 'starlight-package-managers'
 2. **Sync with native projects**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure the plugin**
+3. **Check billing support**
 
-   **Initialize Purchases:**
    ```typescript
    import { NativePurchases } from '@capgo/native-purchases';
 
-   // Initialize with your app's API keys
-   await NativePurchases.configure({
-     apiKey: 'your_api_key_here',
-     appUserID: 'user123' // Optional custom user ID
+   const { isBillingSupported } = await NativePurchases.isBillingSupported();
+   if (!isBillingSupported) {
+     throw new Error('Billing is not available on this device');
+   }
+   ```
+
+4. **Load products directly from the stores**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const { products } = await NativePurchases.getProducts({
+     productIdentifiers: [
+       'com.example.premium.monthly',
+       'com.example.premium.yearly',
+       'com.example.one_time_unlock'
+     ],
+     productType: PURCHASE_TYPE.SUBS, // Use PURCHASE_TYPE.INAPP for one‑time products
+   });
+
+   products.forEach((product) => {
+     console.log(product.title, product.priceString);
    });
    ```
 
-   **Get Products:**
+5. **Implement purchase & restore flows**
+
    ```typescript
-   // Fetch available products
-   const { products } = await NativePurchases.getProducts({
-     productIdentifiers: [
-       'premium_monthly',
-       'premium_yearly'
-     ]
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const monthlyPlanId = 'monthly-plan'; // Base Plan ID from Google Play Console
+
+   const transaction = await NativePurchases.purchaseProduct({
+     productIdentifier: 'com.example.premium.monthly',
+     planIdentifier: monthlyPlanId,        // REQUIRED for Android subscriptions, ignored on iOS
+     productType: PURCHASE_TYPE.SUBS,
+     quantity: 1,
    });
 
-   console.log('Available products:', products);
+   console.log('Transaction ID', transaction.transactionId);
+
+   await NativePurchases.restorePurchases();
    ```
 
    <Tabs>
      <TabItem label="iOS">
-       1. Configure in App Store Connect:
-          - Create your in-app purchases
-          - Submit for review
-       
-       2. Add to `Info.plist`:
-       ```xml
-       <key>SKAdNetworkItems</key>
-       <array>
-         <dict>
-           <key>SKAdNetworkIdentifier</key>
-           <string>your-network-id.skadnetwork</string>
-         </dict>
-       </array>
-       ```
+       - Create in-app products and subscriptions in App Store Connect.<br />
+       - Use StoreKit Local Testing or Sandbox testers for QA.<br />
+       - No manifest edits required. Make sure your products are approved.
      </TabItem>
      <TabItem label="Android">
-       1. Configure in Google Play Console:
-          - Create in-app products
-          - Add your app's signing certificate
-       
-       2. Add to `AndroidManifest.xml`:
+       - Create in-app products and subscriptions in Google Play Console.<br />
+       - Upload at least an internal test build and add license testers.<br />
+       - Add the billing permission to `AndroidManifest.xml`:
        ```xml
        <uses-permission android:name="com.android.vending.BILLING" />
        ```
      </TabItem>
    </Tabs>
-
-4. **Making purchases**
-   ```typescript
-   import { NativePurchases } from '@capgo/native-purchases';
-
-   // Purchase a product
-   try {
-     const { customerInfo } = await NativePurchases.purchaseProduct({
-       productIdentifier: 'premium_monthly'
-     });
-
-     console.log('Purchase successful:', customerInfo);
-     
-     // Check if user has active entitlements
-     if (customerInfo.entitlements.active['premium']) {
-       console.log('User has premium access!');
-     }
-   } catch (error) {
-     console.error('Purchase failed:', error);
-   }
-
-   // Restore purchases
-   const { customerInfo } = await NativePurchases.restorePurchases();
-   console.log('Restored purchases:', customerInfo);
-   ```
-
-5. **Advanced implementation**
-   ```typescript
-   import { NativePurchases } from '@capgo/native-purchases';
-
-   export class PurchaseService {
-     private products: any[] = [];
-     private customerInfo: any = null;
-
-     async initialize(userId?: string) {
-       try {
-         // Configure SDK
-         await NativePurchases.configure({
-           apiKey: process.env.PURCHASES_API_KEY,
-           appUserID: userId,
-           observerMode: false, // Set true if using with other purchase SDKs
-           userDefaultsSuiteName: 'group.com.yourapp'
-         });
-
-         // Set user attributes
-         await NativePurchases.setAttributes({
-           '$email': 'user@example.com',
-           'user_level': 'gold',
-           'app_version': '1.0.0'
-         });
-
-         // Get initial customer info
-         await this.syncCustomerInfo();
-         
-         // Listen for updates
-         this.setupListeners();
-       } catch (error) {
-         console.error('Failed to initialize purchases:', error);
-       }
-     }
-
-     private setupListeners() {
-       // Listen for customer info updates
-       NativePurchases.addListener('customerInfoUpdate', (info) => {
-         this.customerInfo = info.customerInfo;
-         this.checkSubscriptionStatus();
-       });
-
-       // Listen for promotional purchases (iOS)
-       NativePurchases.addListener('shouldPurchasePromoProduct', async (data) => {
-         // Handle App Store promotional purchases
-         const { product } = data;
-         const shouldPurchase = await this.showPromotionalOffer(product);
-         
-         if (shouldPurchase) {
-           await this.purchaseProduct(product.identifier);
-         }
-       });
-     }
-
-     async loadProducts() {
-       const { products } = await NativePurchases.getProducts({
-         productIdentifiers: [
-           'premium_monthly',
-           'premium_yearly',
-           'lifetime_access'
-         ]
-       });
-
-       this.products = products;
-       return products;
-     }
-
-     async purchaseProduct(productId: string) {
-       try {
-         // Show loading
-         this.showLoading(true);
-
-         const { customerInfo } = await NativePurchases.purchaseProduct({
-           productIdentifier: productId
-         });
-
-         this.customerInfo = customerInfo;
-         
-         // Handle successful purchase
-         if (this.hasActiveSubscription()) {
-           this.unlockPremiumFeatures();
-           this.showSuccessMessage();
-         }
-
-         return customerInfo;
-       } catch (error: any) {
-         // Handle different error cases
-         if (error.userCancelled) {
-           console.log('User cancelled purchase');
-         } else if (error.code === 'PRODUCT_ALREADY_PURCHASED') {
-           await this.restorePurchases();
-         } else {
-           this.showErrorMessage(error.message);
-         }
-         throw error;
-       } finally {
-         this.showLoading(false);
-       }
-     }
-
-     async restorePurchases() {
-       const { customerInfo } = await NativePurchases.restorePurchases();
-       this.customerInfo = customerInfo;
-       
-       if (this.hasActiveSubscription()) {
-         this.showSuccessMessage('Purchases restored!');
-         this.unlockPremiumFeatures();
-       } else {
-         this.showInfoMessage('No purchases to restore');
-       }
-
-       return customerInfo;
-     }
-
-     async checkTrialOrIntroductoryPrice(productId: string) {
-       const { eligible } = await NativePurchases.checkTrialOrIntroductoryPriceEligibility({
-         productIdentifiers: [productId]
-       });
-
-       return eligible[productId];
-     }
-
-     hasActiveSubscription(): boolean {
-       return this.customerInfo?.entitlements?.active?.['premium'] !== undefined;
-     }
-
-     getSubscriptionExpirationDate(): Date | null {
-       const premium = this.customerInfo?.entitlements?.active?.['premium'];
-       return premium ? new Date(premium.expirationDate) : null;
-     }
-
-     async syncCustomerInfo() {
-       const { customerInfo } = await NativePurchases.getCustomerInfo();
-       this.customerInfo = customerInfo;
-       return customerInfo;
-     }
-
-     private unlockPremiumFeatures() {
-       // Enable premium features in your app
-       localStorage.setItem('isPremium', 'true');
-       // Update UI, enable features, etc.
-     }
-
-     private showLoading(show: boolean) {
-       // Show/hide loading indicator
-     }
-
-     private showSuccessMessage(message = 'Purchase successful!') {
-       // Show success notification
-     }
-
-     private showErrorMessage(message: string) {
-       // Show error notification
-     }
-
-     private showInfoMessage(message: string) {
-       // Show info notification
-     }
-
-     private async showPromotionalOffer(product: any): Promise<boolean> {
-       // Show UI for promotional offer
-       return true; // or false based on user choice
-     }
-   }
-   ```
 </Steps>
 
-## API Reference
+## Purchase service example
 
-### Methods
+```typescript
+import { NativePurchases, PURCHASE_TYPE, Transaction } from '@capgo/native-purchases';
+import { Capacitor } from '@capacitor/core';
 
-#### `configure(options: ConfigureOptions)`
-Initialize the SDK with your credentials.
+class PurchaseService {
+  private premiumProduct = 'com.example.premium.unlock';
+  private monthlySubId = 'com.example.premium.monthly';
+  private monthlyPlanId = 'monthly-plan'; // Base Plan ID (Android only)
 
-**Parameters:**
-- `options.apiKey`: string - Your app's API key
-- `options.appUserID`: string (optional) - Custom user identifier
-- `options.observerMode`: boolean (optional) - Disable automatic transaction finishing
-- `options.userDefaultsSuiteName`: string (optional) - iOS App Group name
+  async initialize() {
+    const { isBillingSupported } = await NativePurchases.isBillingSupported();
+    if (!isBillingSupported) throw new Error('Billing unavailable');
 
-#### `getProducts(options: GetProductsOptions)`
-Fetch product details from the store.
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: [this.premiumProduct, this.monthlySubId],
+      productType: PURCHASE_TYPE.SUBS,
+    });
 
-**Returns:** `Promise<{ products: Product[] }>`
+    console.log('Loaded products', products);
 
-#### `purchaseProduct(options: PurchaseOptions)`
-Initiate a purchase.
+    if (Capacitor.getPlatform() === 'ios') {
+      NativePurchases.addListener('transactionUpdated', (transaction) => {
+        this.handleTransaction(transaction);
+      });
+    }
+  }
 
-**Returns:** `Promise<{ customerInfo: CustomerInfo }>`
+  async buyPremium(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.premiumProduct,
+      productType: PURCHASE_TYPE.INAPP,
+      appAccountToken,
+    });
 
-#### `restorePurchases()`
-Restore previous purchases.
+    await this.processTransaction(transaction);
+  }
 
-**Returns:** `Promise<{ customerInfo: CustomerInfo }>`
+  async buyMonthly(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.monthlySubId,
+      planIdentifier: this.monthlyPlanId, // REQUIRED for Android subscriptions
+      productType: PURCHASE_TYPE.SUBS,
+      appAccountToken,
+    });
 
-#### `getCustomerInfo()`
-Get current customer information.
+    await this.processTransaction(transaction);
+  }
 
-**Returns:** `Promise<{ customerInfo: CustomerInfo }>`
+  async restore() {
+    await NativePurchases.restorePurchases();
+    await this.refreshEntitlements();
+  }
 
-### Events
+  async openManageSubscriptions() {
+    await NativePurchases.manageSubscriptions();
+  }
 
-- `customerInfoUpdate`: Fired when customer info changes
-- `shouldPurchasePromoProduct`: iOS promotional purchase events
+  private async processTransaction(transaction: Transaction) {
+    this.unlockContent(transaction.productIdentifier);
+    this.validateOnServer(transaction).catch(console.error);
+  }
 
-## Platform Notes
+  private unlockContent(productIdentifier: string) {
+    // persist entitlement locally
+    console.log('Unlocked', productIdentifier);
+  }
 
-### iOS
-- Requires iOS 11.0 or later
-- App Store receipt validation
-- Support for promotional offers
-- StoreKit 2 support on iOS 15+
+  private async refreshEntitlements() {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('Current purchases', purchases);
+  }
 
-### Android
-- Requires Android 5.0 (API 21) or later
-- Google Play Billing Library
-- Supports immediate and deferred purchases
+  private async handleTransaction(transaction: Transaction) {
+    console.log('StoreKit transaction update:', transaction);
+    await this.processTransaction(transaction);
+  }
 
-## Common Use Cases
+  private async validateOnServer(transaction: Transaction) {
+    await fetch('/api/validate-purchase', {
+      method: 'POST',
+      body: JSON.stringify({
+        transactionId: transaction.transactionId,
+        receipt: transaction.receipt,
+        purchaseToken: transaction.purchaseToken,
+      }),
+    });
+  }
+}
+```
 
-1. **Subscriptions**: Monthly/yearly premium access
-2. **One-time Purchases**: Remove ads, unlock features
-3. **Consumables**: In-game currency, credits
-4. **Free Trials**: Introductory offers for new users
-5. **Family Sharing**: Shared subscriptions (iOS)
+## Required purchase options
 
-## Best Practices
+| Option | Platform | Description |
+|--------|----------|-------------|
+| `productIdentifier` | iOS + Android | SKU/Product ID configured in App Store Connect / Google Play Console. |
+| `productType` | Android only | `PURCHASE_TYPE.INAPP` or `PURCHASE_TYPE.SUBS`. Defaults to `INAPP`. Always set to `SUBS` for subscriptions. |
+| `planIdentifier` | Android subscriptions | Base Plan ID from Google Play Console. Required for subscriptions, ignored on iOS and in-app purchases. |
+| `quantity` | iOS | Only for in-app purchases, defaults to `1`. Android always purchases one item. |
+| `appAccountToken` | iOS + Android | UUID/string linking the purchase to your user. Required to be UUID on iOS; Android accepts any obfuscated string up to 64 chars. |
+| `isConsumable` | Android | Set to `true` to auto-consume tokens after granting entitlement for consumables. Defaults to `false`. |
 
-1. **Always Restore**: Provide restore functionality
-2. **Cache Products**: Store product info locally
-3. **Handle Errors**: Graceful error handling
-4. **Receipt Validation**: Always validate on your server
-5. **Test Thoroughly**: Use sandbox/test accounts
+## Checking entitlement status
+
+Use `getPurchases()` for a cross-platform view of every transaction the stores report:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+purchases.forEach((purchase) => {
+  if (purchase.isActive && purchase.expirationDate) {
+    console.log('iOS sub active until', purchase.expirationDate);
+  }
+
+  const isAndroidIapValid =
+    ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') && purchase.isAcknowledged;
+
+  if (isAndroidIapValid) {
+    console.log('Grant in-app entitlement for', purchase.productIdentifier);
+  }
+});
+```
+
+### Platform behavior
+
+- **iOS**: Subscriptions include `isActive`, `expirationDate`, `willCancel`, and StoreKit 2 listener support. In-app purchases require server receipt validation.
+- **Android**: `isActive`/`expirationDate` are not populated; call the Google Play Developer API with the `purchaseToken` for authoritative status. `purchaseState` must be `PURCHASED` and `isAcknowledged` must be `true`.
+
+## API quick reference
+
+- `isBillingSupported()` – check for StoreKit / Google Play availability.
+- `getProduct()` / `getProducts()` – fetch price, localized title, description, intro offers.
+- `purchaseProduct()` – initiate StoreKit 2 or Billing client purchase flow.
+- `restorePurchases()` – replay historical purchases and sync to current device.
+- `getPurchases()` – list all iOS transactions or Play Billing purchases.
+- `manageSubscriptions()` – open the native subscription management UI.
+- `addListener('transactionUpdated')` – handle pending StoreKit 2 transactions when your app starts (iOS only).
+
+## Best practices
+
+1. **Show store pricing** – Apple requires displaying `product.title` and `product.priceString`; never hardcode.
+2. **Use `appAccountToken`** – deterministically generate a UUID (v5) from your user ID to link purchases to accounts.
+3. **Validate server-side** – send `receipt` (iOS) / `purchaseToken` (Android) to your backend for verification.
+4. **Handle errors gracefully** – check for user cancellations, network failures, and unsupported billing environments.
+5. **Test thoroughly** – follow the [iOS sandbox guide](/docs/plugins/native-purchases/ios-sandbox-testing/) and [Android sandbox guide](/docs/plugins/native-purchases/android-sandbox-testing/).
+6. **Offer restore & management** – add UI buttons wired to `restorePurchases()` and `manageSubscriptions()`.
 
 ## Troubleshooting
 
-**Products not loading:**
-- Verify product IDs match store configuration
-- Ensure agreements are signed in store consoles
-- Check products are approved/active
+**Products not loading**
+- Make sure the bundle ID / application ID matches store configuration.
+- Confirm the product IDs are active and approved (App Store) or activated (Google Play).
+- Wait several hours after creating products; store propagation is not instant.
 
-**Purchases failing:**
-- Check internet connectivity
-- Verify test accounts are configured
-- Ensure billing permissions are granted
+**Purchase cancelled or stuck**
+- Users can cancel mid-flow; wrap calls in `try/catch` and surface friendly error messages.
+- For Android, ensure test accounts install the app from Play Store (internal track) so Billing works.
+- Check logcat/Xcode for billing errors when running on device.
 
-**Subscription status incorrect:**
-- Call `syncCustomerInfo()` to refresh
-- Check timezone/date settings
-- Verify receipt validation
+**Subscription state incorrect**
+- Use `getPurchases()` to compare store data with your local entitlement cache.
+- On Android, always query the Google Play Developer API with the `purchaseToken` to obtain expiration dates or refund status.
+- On iOS, check `isActive`/`expirationDate` and validate receipts to detect refunds or revocations.
