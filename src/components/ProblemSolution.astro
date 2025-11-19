@@ -1,0 +1,141 @@
+---
+import * as m from '@/paraglide/messages'
+---
+
+<section class="relative bg-[#090b11] py-24 sm:py-32">
+  <!-- Background Glow -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full opacity-20 pointer-events-none">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-blue-600/30 blur-[120px] rounded-full"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center mb-20">
+      <div class="inline-flex items-center gap-2 text-blue-500 font-mono text-sm mb-6 tracking-wider">
+        PROBLEM <span class="text-gray-600">→</span> SOLUTION
+      </div>
+      
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+        The App Store is killing<br />
+        your <span class="underline decoration-gray-600 underline-offset-8 decoration-2">velocity</span>.
+      </h2>
+      
+      <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+        Capacitor apps should ship like web apps, but waiting days for approval is the bottleneck.
+      </p>
+    </div>
+
+    <!-- Comparison Cards -->
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <!-- Problem Card -->
+      <div class="relative group">
+        <!-- Red Glow -->
+        <div class="absolute -inset-0.5 bg-gradient-to-b from-red-500/20 to-transparent rounded-[2rem] blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+        
+        <div class="relative h-full bg-[#0c0e12] rounded-[1.9rem] border border-red-500/30 p-8 flex flex-col">
+          <!-- Status Icon -->
+          <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#0c0e12] border border-red-500/30 rounded-full flex items-center justify-center z-10">
+            <svg class="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+
+          <!-- Timeline -->
+          <div class="flex items-center justify-center gap-2 mb-12 text-xs font-mono">
+            <div class="px-2 py-1 rounded bg-gray-800 text-gray-400">/dev</div>
+            <div class="px-2 py-1 rounded bg-gray-800 text-gray-400">/build</div>
+            <div class="px-2 py-1 rounded bg-gray-800 text-gray-400 flex items-center gap-1">
+              <span class="w-2 h-2 bg-blue-500 rounded-full"></span>submit
+            </div>
+            <div class="px-2 py-1 rounded bg-gray-800 text-gray-400 flex items-center gap-1">
+              <span class="w-2 h-2 bg-blue-500 rounded-full"></span>review
+            </div>
+            <div class="px-2 py-1 rounded bg-gray-800 text-green-400 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>live
+            </div>
+          </div>
+
+          <!-- Chat Interface -->
+          <div class="flex-1 space-y-6 font-sans">
+            <!-- Incoming Message -->
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-400 font-bold">A</div>
+              <div class="bg-[#1c1f26] text-gray-300 px-4 py-2.5 rounded-2xl rounded-tl-none text-sm">
+                whats the app status?
+              </div>
+            </div>
+
+            <!-- Outgoing Message -->
+            <div class="flex flex-col items-end gap-2">
+              <div class="bg-red-500/90 text-white px-4 py-2.5 rounded-2xl rounded-tr-none text-sm shadow-lg shadow-red-900/20">
+                Still pending...
+              </div>
+              <div class="bg-red-500/90 text-white px-4 py-2.5 rounded-2xl rounded-tr-none text-sm shadow-lg shadow-red-900/20">
+                I hope this bug fix get approved today...
+              </div>
+            </div>
+
+            <!-- Reaction -->
+            <div class="flex justify-end">
+              <div class="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center">
+                <span class="text-xs">😟</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution Card -->
+      <div class="relative group">
+        <!-- Blue Glow -->
+        <div class="absolute -inset-0.5 bg-gradient-to-b from-blue-500/20 to-transparent rounded-[2rem] blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+        
+        <div class="relative h-full bg-[#0c0e12] rounded-[1.9rem] border border-blue-500/30 p-8 flex flex-col">
+          <!-- Status Icon -->
+          <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+
+          <!-- Timeline -->
+          <div class="flex items-center justify-center gap-2 mb-12 text-xs font-mono">
+            <div class="px-2 py-1 rounded bg-gray-800 text-gray-400">/dev</div>
+            <div class="px-2 py-1 rounded bg-gray-800 text-gray-400">/build</div>
+            <div class="px-2 py-1 rounded bg-gray-800 text-green-400 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>live
+            </div>
+          </div>
+
+          <!-- Chat Interface -->
+          <div class="flex-1 space-y-6 font-sans">
+            <!-- Incoming Message -->
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-400 font-bold">A</div>
+              <div class="bg-blue-500 text-white px-4 py-2.5 rounded-2xl rounded-tl-none text-sm shadow-lg shadow-blue-900/20">
+                whats the app status?
+              </div>
+            </div>
+
+            <!-- Outgoing Message -->
+            <div class="flex flex-col items-end gap-2">
+              <div class="bg-blue-500 text-white px-4 py-2.5 rounded-2xl rounded-tr-none text-sm shadow-lg shadow-blue-900/20">
+                Shipped. Next.
+              </div>
+              <div class="bg-blue-500 text-white px-4 py-2.5 rounded-2xl rounded-tr-none text-sm shadow-lg shadow-blue-900/20">
+                My users already have it. 🎉
+              </div>
+            </div>
+
+            <!-- Reaction -->
+            <div class="flex justify-end">
+              <div class="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center">
+                <span class="text-xs">😃</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
