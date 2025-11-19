@@ -257,9 +257,9 @@ Cloud Build complements our existing [live update system](/blog/update-your-capa
 
 Use Cloud Build when you add a new plugin or change native configurations. Use live updates for everything else. Together, they give you the fastest possible deployment workflow.
 
-## Current Status: Private Beta
+## Current Status: Public Beta
 
-Cloud Build is currently in **private beta**. We're working with a select group of early adopters to refine the experience before opening it to everyone.
+Cloud Build is currently in **public beta**. We're working with a select group of early adopters to refine the experience before opening it to everyone.
 
 Interested in trying it out? [Join our Discord](https://discord.com/invite/VnYRvBfgA6) and let us know - we'd love to have you as an early tester!
 
