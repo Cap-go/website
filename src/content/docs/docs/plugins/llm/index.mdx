@@ -1,169 +1,46 @@
 ---
-title: Capacitor LLM Plugin
-description: Run LLM models locally in iOS and Android with Apple Intelligence support
+title: "@capgo/capacitor-llm"
+description: Run LLM models locally in iOS and Android with native Apple Intelligence support for privacy and offline capabilities.
+tableOfContents: false
+next: false
+prev: false
 sidebar:
   order: 1
+  label: "Introduction"
+hero:
+  tagline: Run LLM models directly on device with native Apple Intelligence integration and hardware acceleration.
+  image:
+    file: ~public/icons/plugins/llm.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/llm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-llm/
+      icon: external
+      variant: minimal
 ---
 
-import { LinkCard, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-# Capacitor LLM Plugin
-
-Capacitor SDK to run LLM models locally in iOS and Android, with native Apple Intelligence support.
-
-## Features
-
-- 🤖 Run LLM models directly on device for privacy and offline capabilities
-- 🍎 Native Apple Intelligence integration on iOS 18.0+
-- 🤖 MediaPipe tasks-genai support on Android
-- 📦 Support for multiple model formats (`.gguf`, `.task`, `.litertlm`)
-- ⚡ Hardware acceleration for fast inference
-- 💾 Model download and caching support
-- 🔄 Real-time streaming responses
-
-## Installation
-
-<Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @capgo/capacitor-llm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```bash
-    yarn add @capgo/capacitor-llm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @capgo/capacitor-llm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @capgo/capacitor-llm
-    npx cap sync
-    ```
-  </TabItem>
-</Tabs>
-
-## Platform Configuration
-
-### iOS Configuration
-
-- **iOS 18.0+**: Uses Apple Intelligence by default (no model needed)
-- **iOS < 18.0**: Requires MediaPipe custom models (experimental)
-
-### Android Configuration
-
-Place model files in your Android assets folder:
-- Path: `android/app/src/main/assets/`
-- Supported formats: `.task`, `.litertlm`
-
-## Recommended Models
-
-### Gemma-3 Models (Best Performance)
-- **270M** - Smallest, most efficient for mobile
-- **1B** - Larger text generation model
-- **2B** - Cross-platform experimental
-
-## Usage
-
-```typescript
-import { CapacitorLLM } from '@capgo/capacitor-llm';
-import { Capacitor } from '@capacitor/core';
-
-// Check if LLM is ready
-const { readiness } = await CapacitorLLM.getReadiness();
-console.log('LLM readiness:', readiness);
-
-// Set the model path based on platform
-await CapacitorLLM.setModelPath({
-  path: Capacitor.getPlatform() === 'ios'
-    ? 'gemma-3-270m.gguf'  // iOS model
-    : '/android_asset/gemma-3-270m-it-int8.task' // Android model
-});
-
-// Create a chat session
-const { id: chatId } = await CapacitorLLM.createChat();
-
-// Send a message
-await CapacitorLLM.sendMessage({
-  chatId,
-  message: 'Hello! How are you today?'
-});
-
-// Listen for AI responses
-CapacitorLLM.addListener('onAiText', (event) => {
-  console.log('AI response:', event.text);
-});
-
-// Listen for completion
-CapacitorLLM.addListener('onAiCompletion', (event) => {
-  console.log('AI completed response');
-});
-```
-
-## Advanced Features
-
-### Download Models
-
-```typescript
-// Download a model from URL
-await CapacitorLLM.downloadModel({
-  url: 'https://example.com/model.task',
-  filename: 'model.task'
-});
-```
-
-### Model Management
-
-```typescript
-// Set a specific model
-await CapacitorLLM.setModel({
-  model: 'gemma-3-1b'
-});
-
-// Check readiness
-const { readiness } = await CapacitorLLM.getReadiness();
-if (readiness === 'ready') {
-  // Model is loaded and ready
-}
-```
-
-## API Methods
-
-- `createChat()` - Create a new chat session
-- `sendMessage()` - Send a message to the LLM
-- `getReadiness()` - Check if the LLM is ready
-- `setModel()` - Set the active model
-- `setModelPath()` - Set the path to model file
-- `downloadModel()` - Download a model from URL
-
-## Events
-
-- `onAiText` - Fired when AI generates text
-- `onAiCompletion` - Fired when AI completes response
-
-## Platform Support
-
-| Platform | Supported | Requirements |
-|----------|-----------|--------------|
-| iOS      | ✅        | iOS 13.0+ (18.0+ for Apple Intelligence) |
-| Android  | ✅        | API 24+ |
-| Web      | ❌        | Not supported |
-
-## Contributing
-
-We welcome contributions! Please see our [Contributing Guide](https://github.com/Cap-go/capacitor-llm/blob/main/CONTRIBUTING.md) for more details.
-
-## License
-
-This plugin is licensed under the MIT License. See [LICENSE](https://github.com/Cap-go/capacitor-llm/blob/main/LICENSE) for more information.
-
-## Support
-
-If you encounter any issues or have questions, please file an issue on our [GitHub repository](https://github.com/Cap-go/capacitor-llm/issues).
+<CardGrid stagger>
+  <Card title="On-Device Privacy" icon="shield-check">
+    Run LLM models directly on device for privacy and offline capabilities 🤖
+  </Card>
+  <Card title="Apple Intelligence" icon="star">
+    Native Apple Intelligence integration on iOS 18.0+ 🍎
+  </Card>
+  <Card title="Multiple Formats" icon="puzzle">
+    Support for .gguf, .task, and .litertlm model formats 📦
+  </Card>
+  <Card title="Hardware Acceleration" icon="rocket">
+    Fast inference with native hardware acceleration ⚡
+  </Card>
+  <Card title="Streaming Responses" icon="download">
+    Real-time streaming responses with event listeners 🔄
+  </Card>
+  <Card title="Getting Started" icon="open-book">
+    Check the [Getting Started Guide](/docs/plugins/llm/getting-started/) to install and configure the plugin.
+  </Card>
+</CardGrid>

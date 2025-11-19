@@ -132,15 +132,15 @@ const navigation: Record<string, NavigationItem[]> = {
 }
 ---
 
-<footer class="bg-[#09090b] text-white" aria-labelledby="footer-heading">
+<footer class="bg-gray-900 text-white" aria-labelledby="footer-heading">
   <p id="footer-heading" class="sr-only">{m.footer({}, { locale: Astro.locals.locale })}</p>
   <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24 relative">
     
     <!-- Top Section: Tagline + Button -->
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white max-w-2xl mb-6 lg:mb-0">
-        Improving the Capacitor ecosystem,
-        <span class="text-zinc-500 block">one plugin at a time.</span>
+        {m.footer_tagline_part1({}, { locale: Astro.locals.locale })}
+        <span class="text-zinc-500 block">{m.footer_tagline_part2({}, { locale: Astro.locals.locale })}</span>
       </h2>
       <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
         Install Plugin
@@ -216,7 +216,7 @@ const navigation: Record<string, NavigationItem[]> = {
     <div class="flex flex-col md:flex-row justify-between items-end pt-8 border-t border-zinc-800 relative">
         
         <!-- Status Indicator -->
-        <div class="mb-4 md:mb-0">
+        <div class="mb-4 md:mb-0 flex flex-col gap-4 items-start">
              <a href="https://status.capgo.app/" target="_blank" class="flex items-center text-sm text-zinc-400 hover:text-white">
                 <span class="relative flex h-2 w-2 mr-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -224,6 +224,14 @@ const navigation: Record<string, NavigationItem[]> = {
                 </span>
                 All systems normal: 99% uptime
              </a>
+             <div class="flex gap-4">
+               <img src="/soc2.svg" alt="SOC 2 Compliant" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+               <img src="/soc1.svg" alt="SOC 1 Compliant" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+               <img src="/gdpr.svg" alt="GDPR Compliant" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+             </div>
+             <p class="text-xs text-zinc-500 max-w-md">
+                {m.enterprise_security_audit_desc({}, { locale: Astro.locals.locale })}
+             </p>
         </div>
 
         <!-- Language & Copyright -->
@@ -246,7 +254,7 @@ const navigation: Record<string, NavigationItem[]> = {
             </div>
 
             <p class="text-xs text-zinc-500 uppercase tracking-wider">
-                &copy; {year} CAPGO, INC. ALL RIGHTS RESERVED.
+                &copy; {year} CAPGO, Digital shift OU. ALL RIGHTS RESERVED.
             </p>
         </div>
     </div>

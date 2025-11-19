@@ -1,0 +1,344 @@
+---
+title: Getting Started
+description: Learn how to install and integrate JW Player into your Capacitor app for professional video streaming capabilities.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Prerequisites
+
+You'll need a JW Player account and license key to use this plugin. Sign up at [JW Player](https://www.jwplayer.com/) if you don't have one.
+
+## Platform Configuration
+
+### iOS
+
+Add your JW Player license key to your `Info.plist`:
+
+```xml
+<key>JWPlayerLicenseKey</key>
+<string>YOUR_LICENSE_KEY</string>
+```
+
+### Android
+
+Add your JW Player license key to `android/app/src/main/res/values/strings.xml`:
+
+```xml
+<resources>
+    <string name="jw_player_license_key">YOUR_LICENSE_KEY</string>
+</resources>
+```
+
+## Usage Example
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// Play a single video
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'My Video',
+  description: 'Video description',
+  poster: 'https://example.com/poster.jpg'
+});
+
+// Play a playlist
+await JWPlayer.playPlaylist({
+  playlistUrl: 'https://example.com/playlist.json'
+});
+
+// Listen for player events
+JWPlayer.addListener('playerReady', () => {
+  console.log('Player is ready');
+});
+
+JWPlayer.addListener('play', (data) => {
+  console.log('Video started playing');
+});
+
+JWPlayer.addListener('pause', (data) => {
+  console.log('Video paused');
+});
+
+JWPlayer.addListener('complete', (data) => {
+  console.log('Video playback completed');
+});
+
+JWPlayer.addListener('error', (error) => {
+  console.error('Player error:', error);
+});
+```
+
+## API Reference
+
+### playVideo(options)
+
+```typescript
+playVideo(options: VideoOptions) => Promise<void>
+```
+
+Play a single video in fullscreen mode.
+
+| Param         | Type                    |
+| ------------- | ----------------------- |
+| **`options`** | `VideoOptions` |
+
+### playPlaylist(options)
+
+```typescript
+playPlaylist(options: PlaylistOptions) => Promise<void>
+```
+
+Play a playlist in fullscreen mode.
+
+| Param         | Type                        |
+| ------------- | --------------------------- |
+| **`options`** | `PlaylistOptions` |
+
+### pause()
+
+```typescript
+pause() => Promise<void>
+```
+
+Pause the current video.
+
+### play()
+
+```typescript
+play() => Promise<void>
+```
+
+Resume video playback.
+
+### seek(options)
+
+```typescript
+seek(options: { position: number }) => Promise<void>
+```
+
+Seek to a specific position in the video.
+
+| Param         | Type                         |
+| ------------- | ---------------------------- |
+| **`options`** | `{ position: number }` |
+
+### setPlaybackSpeed(options)
+
+```typescript
+setPlaybackSpeed(options: { speed: number }) => Promise<void>
+```
+
+Set the playback speed.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ speed: number }` |
+
+### setVolume(options)
+
+```typescript
+setVolume(options: { volume: number }) => Promise<void>
+```
+
+Set the audio volume (0.0 to 1.0).
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ volume: number }` |
+
+### selectAudioTrack(options)
+
+```typescript
+selectAudioTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+Select an audio track by index.
+
+| Param         | Type                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### selectCaptionTrack(options)
+
+```typescript
+selectCaptionTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+Select a caption/subtitle track by index.
+
+| Param         | Type                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+Stop playback and close the player.
+
+## Interfaces
+
+### VideoOptions
+
+| Prop              | Type               | Description                             |
+| ----------------- | ------------------ | --------------------------------------- |
+| **`mediaUrl`**    | `string` | URL of the video file                   |
+| **`title`**       | `string` | Video title (optional)                  |
+| **`description`** | `string` | Video description (optional)            |
+| **`poster`**      | `string` | URL of the poster/thumbnail (optional)  |
+| **`autoStart`**   | `boolean` | Auto-start playback (optional, default: true) |
+
+### PlaylistOptions
+
+| Prop              | Type               | Description                 |
+| ----------------- | ------------------ | --------------------------- |
+| **`playlistUrl`** | `string` | URL of the JW playlist JSON |
+| **`autoStart`**   | `boolean` | Auto-start playback (optional) |
+
+## Event Listeners
+
+### Available Events
+
+- `playerReady` - Player is initialized and ready
+- `play` - Video playback started
+- `pause` - Video playback paused
+- `complete` - Video playback completed
+- `error` - Player encountered an error
+- `seek` - User seeked to a different position
+- `time` - Playback time updated
+- `bufferChange` - Buffer state changed
+
+### Event Example
+
+```typescript
+// Listen for time updates
+JWPlayer.addListener('time', (data) => {
+  console.log('Current time:', data.position);
+  console.log('Duration:', data.duration);
+});
+
+// Listen for buffer changes
+JWPlayer.addListener('bufferChange', (data) => {
+  console.log('Buffering:', data.buffering);
+});
+
+// Remove listener when done
+const listener = await JWPlayer.addListener('play', (data) => {
+  console.log('Playing');
+});
+
+// Later...
+listener.remove();
+```
+
+## Advanced Usage
+
+### Playing with Captions
+
+```typescript
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'Video with Subtitles',
+  poster: 'https://example.com/poster.jpg',
+  tracks: [
+    {
+      file: 'https://example.com/captions-en.vtt',
+      label: 'English',
+      kind: 'captions'
+    },
+    {
+      file: 'https://example.com/captions-es.vtt',
+      label: 'Spanish',
+      kind: 'captions'
+    }
+  ]
+});
+```
+
+### Custom Playback Controls
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// Start playing
+await JWPlayer.play();
+
+// Pause after 10 seconds
+setTimeout(() => {
+  JWPlayer.pause();
+}, 10000);
+
+// Seek to 30 seconds
+await JWPlayer.seek({ position: 30 });
+
+// Set playback speed to 1.5x
+await JWPlayer.setPlaybackSpeed({ speed: 1.5 });
+
+// Set volume to 50%
+await JWPlayer.setVolume({ volume: 0.5 });
+```
+
+## Best Practices
+
+- Always provide a poster image for better user experience
+- Handle player errors gracefully with appropriate error messages
+- Clean up event listeners when component unmounts
+- Test video playback on both iOS and Android devices
+- Use appropriate video formats (MP4 recommended)
+- Implement loading states while video initializes
+- Consider network conditions when streaming
+
+## Troubleshooting
+
+### Video Won't Play
+
+- Verify your JW Player license key is correct
+- Check that video URL is accessible and valid
+- Ensure proper CORS headers if using custom server
+- Test with different video formats
+
+### Fullscreen Issues
+
+- The plugin always plays in fullscreen mode
+- Ensure proper permissions for fullscreen in your app
+
+### Performance
+
+- Use appropriate video quality for target devices
+- Consider adaptive streaming for better performance
+- Implement proper buffering indicators

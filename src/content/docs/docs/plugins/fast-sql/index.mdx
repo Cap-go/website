@@ -1,86 +1,49 @@
 ---
 title: "@capgo/capacitor-fast-sql"
-description: High-performance native SQLite with custom HTTP protocol for efficient sync operations and IndexedDB replacement
+description: High-performance native SQLite with custom HTTP protocol for efficient sync operations and IndexedDB replacement.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
 hero:
-  tagline: Ultra-fast native SQLite with custom protocol for sync systems and large datasets
+  tagline: Ultra-fast native SQLite with custom protocol for sync systems and large datasets, delivering up to 25x faster performance.
   image:
     file: ~public/icons/plugins/fast-sql.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/fast-sql/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-fast-sql/
+      icon: external
+      variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-**@capgo/capacitor-fast-sql** is a high-performance native SQLite plugin that uses a custom HTTP-based communication protocol to bypass Capacitor's standard bridge, delivering up to 25x faster performance for large datasets and sync operations.
-
-## Why Fast SQL?
-
-Traditional Capacitor plugins serialize data through the JavaScript bridge, which becomes inefficient with large datasets. Fast SQL solves this by establishing a local HTTP server for direct native communication, making it ideal for:
-
-- **Local-first sync systems** (CRDTs, operational transforms)
-- **IndexedDB replacement** on platforms with broken/limited implementations
-- **Large dataset operations** requiring high throughput
-- **Batch operations** with thousands of rows
-- **Binary data storage** (BLOBs, files)
-
-## Key Features
-
-<CardGrid>
+<CardGrid stagger>
   <Card title="Custom HTTP Protocol" icon="rocket">
-    Bypasses Capacitor's bridge for up to 25x faster performance with large data transfers
+    Bypasses Capacitor's bridge for up to 25x faster performance ⚡
   </Card>
   <Card title="Full SQLite Support" icon="list-format">
-    Complete SQL support with transactions, batch operations, and binary data handling
+    Complete SQL support with transactions and batch operations 📊
   </Card>
   <Card title="Sync-Friendly" icon="random">
-    Designed for local sync systems like CRDTs and operational transforms
+    Designed for local sync systems like CRDTs and operational transforms 🔄
   </Card>
   <Card title="Cross-Platform" icon="laptop">
-    iOS, Android, and Web (using sql.js + IndexedDB for persistence)
+    iOS, Android, and Web using sql.js + IndexedDB 🌐
   </Card>
   <Card title="Transaction Support" icon="approve-check-circle">
-    ACID transactions with configurable isolation levels
+    ACID transactions with configurable isolation levels 🔒
   </Card>
   <Card title="Binary Data" icon="document">
-    Native support for Uint8Array/BLOB storage
+    Native support for Uint8Array/BLOB storage 📁
   </Card>
-</CardGrid>
-
-## Performance
-
-Fast SQL uses a custom HTTP protocol inspired by [capacitor-blob-writer](https://github.com/diachedelic/capacitor-blob-writer) that eliminates serialization overhead:
-
-- **25x faster** for large batch operations
-- **Direct binary transfer** without base64 encoding
-- **Efficient memory usage** for streaming large results
-- **Local HTTP server** on iOS/Android for optimal throughput
-
-## Use Cases
-
-### Local-First Applications
-Build apps that work offline-first with efficient sync capabilities:
-- CouchDB/PouchDB-style replication
-- Operational transform systems
-- CRDT-based collaboration tools
-
-### IndexedDB Replacement
-Replace unreliable IndexedDB implementations with native SQLite:
-- Cross-platform consistency
-- Better performance on mobile
-- Reliable transactions and data integrity
-
-### High-Performance Data
-Handle large datasets efficiently:
-- Analytics and reporting
-- Import/export operations
-- Data migration tools
-- Scientific data collection
-
-## Next Steps
-
-<CardGrid>
-  <Card title="Getting Started" icon="rocket">
-    [Install and configure Fast SQL →](/docs/plugins/fast-sql/getting-started)
-  </Card>
-  <Card title="Tutorial" icon="open-book">
-    [Complete implementation guide →](/plugins-tutorials/capacitor-fast-sql)
+  <Card title="Getting Started" icon="open-book">
+    Check the [Getting Started Guide](/docs/plugins/fast-sql/getting-started/) to install and configure the plugin.
   </Card>
 </CardGrid>

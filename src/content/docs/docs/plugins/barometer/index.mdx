@@ -1,55 +1,43 @@
 ---
 title: "@capgo/capacitor-barometer"
-description: Access device barometer readings with Capacitor
+description: Access device barometer readings for atmospheric pressure and altitude data from device sensors.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
 hero:
-  tagline: Access barometric pressure and altitude data from device sensors
+  tagline: Access barometric pressure and altitude data from device sensors for weather and fitness applications.
   image:
     file: ~public/icons/plugins/barometer.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/barometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-barometer/
+      icon: external
+      variant: minimal
 ---
 
-The Capacitor Barometer plugin provides access to device barometric pressure sensors, allowing you to read atmospheric pressure and calculate altitude changes.
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Key Features
-
-- **Pressure Monitoring** - Real-time atmospheric pressure readings
-- **Altitude Calculation** - Derive relative altitude from pressure changes
-- **Event Listeners** - Subscribe to pressure change events
-- **Cross-Platform** - Works on iOS and Android devices with barometer sensors
-
-## Installation
-
-```bash
-npm install @capgo/capacitor-barometer
-npx cap sync
-```
-
-## Platform Support
-
-- **iOS**: Requires device with barometer (iPhone 6 and newer)
-- **Android**: Requires device with pressure sensor
-- **Web**: Not supported (no browser API for barometer access)
-
-## Use Cases
-
-- **Weather Apps** - Display local atmospheric pressure
-- **Fitness Tracking** - Monitor altitude during outdoor activities
-- **Navigation** - Enhance GPS with pressure-based altitude
-- **Health Apps** - Track elevation changes during exercise
-
-## API Overview
-
-The plugin provides methods to:
-- Start/stop pressure monitoring
-- Get current pressure readings
-- Calculate altitude changes
-- Listen to pressure events
-
-## Next Steps
-
-Get started with the [Getting Started guide](/docs/plugins/barometer/getting-started) to integrate barometer functionality into your Capacitor app.
-
-## Resources
-
-- [GitHub Repository](https://github.com/Cap-go/capacitor-barometer)
-- [npm Package](https://www.npmjs.com/package/@capgo/capacitor-barometer)
-- [Issue Tracker](https://github.com/Cap-go/capacitor-barometer/issues)
+<CardGrid stagger>
+  <Card title="Pressure Monitoring" icon="rocket">
+    Real-time atmospheric pressure readings 🌡️
+  </Card>
+  <Card title="Altitude Calculation" icon="star">
+    Derive relative altitude from pressure changes 📈
+  </Card>
+  <Card title="Event Listeners" icon="setting">
+    Subscribe to pressure change events 🔔
+  </Card>
+  <Card title="Cross-Platform" icon="laptop">
+    Works on iOS and Android devices with barometer sensors 📱
+  </Card>
+  <Card title="Getting Started" icon="open-book">
+    Check the [Getting Started Guide](/docs/plugins/barometer/getting-started/) to install and configure the plugin.
+  </Card>
+</CardGrid>

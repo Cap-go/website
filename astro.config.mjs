@@ -209,17 +209,26 @@ export default defineConfig({
             },
             {
               label: 'Alarm',
-              items: [{ label: 'Overview', link: '/docs/plugins/alarm/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/alarm/' },
+                { label: 'Getting started', link: '/docs/plugins/alarm/getting-started' },
+              ],
               collapsed: true,
             },
             {
               label: 'Android Inline Install',
-              items: [{ label: 'Overview', link: '/docs/plugins/android-inline-install/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/android-inline-install/' },
+                { label: 'Getting started', link: '/docs/plugins/android-inline-install/getting-started' },
+              ],
               collapsed: true,
             },
             {
               label: 'Android Usage Stats',
-              items: [{ label: 'Overview', link: '/docs/plugins/android-usagestatsmanager/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/android-usagestatsmanager/' },
+                { label: 'Getting started', link: '/docs/plugins/android-usagestatsmanager/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -256,12 +265,18 @@ export default defineConfig({
             },
             {
               label: 'Autofill Save Password',
-              items: [{ label: 'Overview', link: '/docs/plugins/autofill-save-password/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/autofill-save-password/' },
+                { label: 'Getting started', link: '/docs/plugins/autofill-save-password/getting-started' },
+              ],
               collapsed: true,
             },
             {
               label: 'Background Geolocation',
-              items: [{ label: 'Overview', link: '/docs/plugins/background-geolocation/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/background-geolocation/' },
+                { label: 'Getting started', link: '/docs/plugins/background-geolocation/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -314,7 +329,10 @@ export default defineConfig({
             },
             {
               label: 'Downloader',
-              items: [{ label: 'Overview', link: '/docs/plugins/downloader/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/downloader/' },
+                { label: 'Getting started', link: '/docs/plugins/downloader/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -359,7 +377,10 @@ export default defineConfig({
             },
             {
               label: 'GTM',
-              items: [{ label: 'Overview', link: '/docs/plugins/gtm/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/gtm/' },
+                { label: 'Getting started', link: '/docs/plugins/gtm/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -396,7 +417,10 @@ export default defineConfig({
             },
             {
               label: 'Is Root',
-              items: [{ label: 'Overview', link: '/docs/plugins/is-root/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/is-root/' },
+                { label: 'Getting started', link: '/docs/plugins/is-root/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -409,12 +433,18 @@ export default defineConfig({
             },
             {
               label: 'JW Player',
-              items: [{ label: 'Overview', link: '/docs/plugins/jw-player/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/jw-player/' },
+                { label: 'Getting started', link: '/docs/plugins/jw-player/getting-started' },
+              ],
               collapsed: true,
             },
             {
               label: 'Launch Navigator',
-              items: [{ label: 'Overview', link: '/docs/plugins/launch-navigator/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/launch-navigator/' },
+                { label: 'Getting started', link: '/docs/plugins/launch-navigator/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -427,7 +457,10 @@ export default defineConfig({
             },
             {
               label: 'LLM',
-              items: [{ label: 'Overview', link: '/docs/plugins/llm/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/llm/' },
+                { label: 'Getting started', link: '/docs/plugins/llm/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -555,7 +588,10 @@ export default defineConfig({
             },
             {
               label: 'Persistent Account',
-              items: [{ label: 'Overview', link: '/docs/plugins/persistent-account/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/persistent-account/' },
+                { label: 'Getting started', link: '/docs/plugins/persistent-account/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -584,7 +620,10 @@ export default defineConfig({
             },
             {
               label: 'Ricoh 360 Camera',
-              items: [{ label: 'Overview', link: '/docs/plugins/ricoh360-camera/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/ricoh360-camera/' },
+                { label: 'Getting started', link: '/docs/plugins/ricoh360-camera/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -649,7 +688,10 @@ export default defineConfig({
             },
             {
               label: 'StreamCall',
-              items: [{ label: 'Overview', link: '/docs/plugins/streamcall/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/streamcall/' },
+                { label: 'Getting started', link: '/docs/plugins/streamcall/getting-started' },
+              ],
               collapsed: true,
             },
             {
@@ -662,7 +704,10 @@ export default defineConfig({
             },
             {
               label: 'Twilio Voice',
-              items: [{ label: 'Overview', link: '/docs/plugins/twilio-voice/' }],
+              items: [
+                { label: 'Overview', link: '/docs/plugins/twilio-voice/' },
+                { label: 'Getting started', link: '/docs/plugins/twilio-voice/getting-started' },
+              ],
               collapsed: true,
             },
             {

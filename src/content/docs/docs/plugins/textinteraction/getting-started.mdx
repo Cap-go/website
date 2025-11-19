@@ -1,0 +1,273 @@
+---
+title: Getting Started
+description: Learn how to install and use the Text Interaction plugin to control iOS text selection magnifier and loupe.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Platform Support
+
+- **iOS**: iOS 15.0+ (requires UITextInteraction API)
+- **Android**: No-op (returns unsupported)
+- **Web**: No-op (returns unsupported)
+
+## Usage Example
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+// Disable text interaction (remove magnifier/loupe)
+const result = await TextInteraction.setEnabled({ enabled: false });
+
+if (result.success) {
+  console.log('Text interaction disabled');
+} else {
+  console.log('Not supported on this platform');
+}
+
+// Re-enable text interaction before showing text inputs
+await TextInteraction.setEnabled({ enabled: true });
+```
+
+## API Reference
+
+### setEnabled(options)
+
+```typescript
+setEnabled(options: { enabled: boolean }) => Promise<{ success: boolean }>
+```
+
+Enable or disable iOS text interaction (magnifier lens and selection handles).
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+**Returns:** `Promise<{ success: boolean }>`
+
+- Returns `{ success: true }` if the operation was successful (iOS 15+)
+- Returns `{ success: false }` if not supported (Android, Web, or iOS < 15)
+
+## Practical Use Cases
+
+### Kiosk Applications
+
+Disable text interaction in kiosk mode to prevent users from accessing copy/paste menus:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function enterKioskMode() {
+  // Disable text interaction in kiosk mode
+  const result = await TextInteraction.setEnabled({ enabled: false });
+
+  if (result.success) {
+    console.log('Kiosk mode: Text interaction disabled');
+  }
+}
+
+async function exitKioskMode() {
+  // Re-enable text interaction when exiting kiosk mode
+  await TextInteraction.setEnabled({ enabled: true });
+  console.log('Kiosk mode: Text interaction enabled');
+}
+```
+
+### Game Experiences
+
+Remove magnifier lens during gameplay and restore it for text input:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class GameController {
+  async startGame() {
+    // Disable text interaction during gameplay
+    await TextInteraction.setEnabled({ enabled: false });
+    console.log('Game started - text interaction disabled');
+  }
+
+  async showTextInput() {
+    // Enable text interaction before showing input
+    await TextInteraction.setEnabled({ enabled: true });
+    console.log('Text input ready - interaction enabled');
+
+    // Show input field
+    this.displayInputField();
+  }
+
+  async hideTextInput() {
+    // Hide input and disable interaction again
+    this.hideInputField();
+    await TextInteraction.setEnabled({ enabled: false });
+  }
+}
+```
+
+### Interactive Installations
+
+Control text interaction for digital signage and interactive displays:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function setupInteractiveDisplay() {
+  // Disable text interaction for display mode
+  await TextInteraction.setEnabled({ enabled: false });
+
+  // Set up touch handlers for display interaction
+  document.addEventListener('touchstart', handleDisplayTouch);
+}
+
+async function enableUserInput() {
+  // Enable text interaction when user needs to input data
+  const result = await TextInteraction.setEnabled({ enabled: true });
+
+  if (result.success) {
+    showInputForm();
+  } else {
+    // Fallback for unsupported platforms
+    showInputFormWithoutTextInteraction();
+  }
+}
+```
+
+### Form Management
+
+Toggle text interaction based on form state:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class FormManager {
+  private textInteractionEnabled = true;
+
+  async disableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: false });
+    this.textInteractionEnabled = false;
+    return result.success;
+  }
+
+  async enableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: true });
+    this.textInteractionEnabled = true;
+    return result.success;
+  }
+
+  async onFormFocus() {
+    // Always enable before showing keyboard
+    await this.enableTextSelection();
+  }
+
+  async onFormBlur() {
+    // Optionally disable after input is complete
+    await this.disableTextSelection();
+  }
+}
+```
+
+### Conditional Text Interaction
+
+Platform-aware text interaction control:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+import { Capacitor } from '@capacitor/core';
+
+async function toggleTextInteraction(enabled: boolean) {
+  // Only attempt on iOS
+  if (Capacitor.getPlatform() === 'ios') {
+    const result = await TextInteraction.setEnabled({ enabled });
+
+    if (result.success) {
+      console.log(`Text interaction ${enabled ? 'enabled' : 'disabled'}`);
+    } else {
+      console.log('Text interaction not supported on this iOS version');
+    }
+  } else {
+    console.log('Text interaction control only available on iOS');
+  }
+}
+
+// Usage
+await toggleTextInteraction(false); // Disable
+await toggleTextInteraction(true);  // Enable
+```
+
+## Best Practices
+
+- **Always re-enable before text input**: Disable text interaction when needed, but always re-enable it before showing text input fields or keyboards
+- **Check for platform support**: Verify `result.success` to handle unsupported platforms gracefully
+- **iOS-specific feature**: This plugin is iOS-only; implement fallbacks for Android and Web
+- **User experience**: Consider UX implications of disabling text interaction
+- **State management**: Track enabled/disabled state to avoid redundant calls
+
+## Important Reminders
+
+1. **Re-enable for text inputs**: Always call `setEnabled({ enabled: true })` before showing text input fields, otherwise users won't be able to properly select or edit text
+
+2. **Platform detection**: The plugin returns `{ success: false }` on Android, Web, and iOS versions below 15.0
+
+3. **No visual feedback**: Disabling text interaction removes the magnifier but doesn't provide visual feedback - implement your own UI indicators if needed
+
+4. **Safe defaults**: The text interaction system is enabled by default, matching iOS's standard behavior
+
+## Limitations
+
+- iOS 15.0+ only (requires UITextInteraction API)
+- No effect on Android or Web platforms
+- Cannot selectively disable only magnifier or only selection handles
+- No callback for when users attempt to use disabled features
+
+## Use Cases
+
+- **Kiosk applications**: Prevent copy/paste on controlled installations
+- **Game experiences**: Remove magnifier during gameplay
+- **Interactive displays**: Control text interaction on digital signage
+- **Custom text editors**: Build specialized text editing experiences
+- **Security**: Prevent text selection in sensitive areas
+
+## Troubleshooting
+
+### Text Interaction Not Disabling
+
+- Verify iOS version is 15.0 or higher
+- Check that `result.success` returns `true`
+- Ensure no other code is re-enabling text interaction
+
+### Users Can't Edit Text
+
+- Make sure you called `setEnabled({ enabled: true })` before showing text inputs
+- Verify the enable call succeeded by checking `result.success`
+- Test on actual iOS device (not just simulator)
