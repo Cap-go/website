@@ -1,0 +1,14 @@
+---
+interface Props {
+  icon: any;
+  name: string;
+  className?: string;
+}
+
+const { icon: Icon, name, className = "" } = Astro.props;
+---
+
+<div class={`relative flex h-14 w-14 items-center justify-center rounded-xl bg-azure-500 shadow-lg ${className}`}>
+  <div class="absolute inset-0 rounded-xl bg-white opacity-20"></div>
+  <Icon class="relative h-8 w-8 text-white drop-shadow-md" />
+</div>

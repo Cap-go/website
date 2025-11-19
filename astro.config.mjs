@@ -119,6 +119,11 @@ export default defineConfig({
               autogenerate: { directory: 'docs/cli/reference' },
             },
             {
+              label: 'Cloud Build',
+              collapsed: false,
+              autogenerate: { directory: 'docs/cli/cloud-build' },
+            },
+            {
               label: 'Migrations',
               collapsed: true,
               autogenerate: { directory: 'docs/cli/migrations' },

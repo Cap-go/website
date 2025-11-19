@@ -4,6 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
 import { getSlug } from '@/services/github'
 import ArrowUpRightIcon from 'astro-heroicons/mini/ArrowUpRight.astro'
+import PluginIcon from '@/components/PluginIcon.astro'
 import { getCollection } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { marked } from 'marked'
@@ -159,7 +160,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m.full_source_code_included({}, { locale: Astro.locals.locale })}
                 </li>
                 <li class="flex items-center">
@@ -168,7 +169,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m['2_3_week_delivery']({}, { locale: Astro.locals.locale })}
                 </li>
                 <li class="flex items-center">
@@ -177,7 +178,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m['30_day_support_included']({}, { locale: Astro.locals.locale })}
                 </li>
               </ul>
@@ -211,7 +212,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m.complete_documentation({}, { locale: Astro.locals.locale })}
                 </li>
                 <li class="flex items-center">
@@ -220,7 +221,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m.typescript_definitions({}, { locale: Astro.locals.locale })}
                 </li>
                 <li class="flex items-center">
@@ -229,7 +230,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m['3_4_week_delivery']({}, { locale: Astro.locals.locale })}
                 </li>
               </ul>
@@ -264,7 +265,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m.free_initial_consultation({}, { locale: Astro.locals.locale })}
                 </li>
                 <li class="flex items-center">
@@ -273,7 +274,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m.flexible_engagement({}, { locale: Astro.locals.locale })}
                 </li>
                 <li class="flex items-center">
@@ -282,7 +283,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                       fill-rule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                       clip-rule="evenodd"></path>
-                  </svg>
+                </svg>
                   {m.ongoing_support_available({}, { locale: Astro.locals.locale })}
                 </li>
               </ul>
@@ -404,7 +405,7 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
               <div class="group relative rounded-2xl border border-gray-700 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:border-gray-500/50 hover:bg-white/10">
                 <div class="relative">
                   {item.icon && (
-                    <item.icon class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gray-800 fill-gray-400 p-2 transition-colors duration-300 group-hover:bg-gray-900 group-hover:fill-white" />
+                    <PluginIcon icon={item.icon} name={item.title} className="mb-4 transition-transform duration-300 group-hover:scale-110" />
                   )}
                   <h3 class="mb-3 text-xl font-bold text-white transition-colors duration-300 group-hover:text-gray-200">{item.title}</h3>
                   <div class="mb-4 line-clamp-3 leading-relaxed text-gray-300" set:html={item.description} />
