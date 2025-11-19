@@ -1,34 +1,43 @@
 ---
 title: "Background Geolocation"
 description: A Capacitor plugin that lets you receive accurate geolocation updates even while the app is backgrounded
+tableOfContents: false
+next: false
+prev: false
 sidebar:
   order: 1
+  label: "Introduction"
+hero:
+  tagline: Receive accurate geolocation updates even while the app is backgrounded.
+  image:
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
 ---
 
-import { LinkCard, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-# Background Geolocation
-
-A Capacitor plugin that lets you receive accurate geolocation updates even while the app is backgrounded.
-It has a web API to facilitate for a similar usage, but background geolocation is not supported in a regular browser, only in an app environment.
-
-## This plugin's history
-
-Interestingly enough, this plugin has a lot of history. The initial solution from [Transistorsoft](https://github.com/transistorsoft) was a great piece of software, and I ([HarelM](https://github.com/HarelM)) encourage using it if it fits your needs.
-I tried it and understood that it prioritizes battery life over accuracy, which wasn't the right fit for my hiking app.
-There was a very good fork maintained by **mauron85** specifically for that use case, and I was happy to help maintain it.
-But at some point, **mauron85** stopped responding to messages on GitHub, and no one could continue maintaining it.
-I hope mauron85 is safe and sound somewhere.
-
-So I created a fork and started maintaining it [here](https://github.com/HaylLtd/cordova-background-geolocation-plugin).
-It served me well for over half a decade, but I felt it was hard to maintain due to all its history, features, and bug fixes.
-I also felt like there was a barrier to introducing new features because of its complexity.
-
-So I started exploring what it would take to reduce that complexity—at the same time, I was envious of how small [`@capacitor-community/background-geolocation`](https://github.com/capacitor-community/background-geolocation) is.
-I took the best of both worlds: tried to reduce the codebase in the original Cordova plugin and add some robustness to the Capacitor plugin.
-
-That's how I ended up maintaining this one.
-I hope you'll enjoy it!
+<CardGrid stagger>
+  <Card title="Accurate Tracking" icon="rocket">
+    Prioritizes accuracy for use cases like hiking and navigation 🎯
+  </Card>
+  <Card title="Background Updates" icon="puzzle">
+    Continues to receive location updates even when the app is in the background 🏃
+  </Card>
+  <Card title="Battery Efficient" icon="setting">
+    Optimized to balance accuracy and battery consumption 🔋
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/background-geolocation/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>
 
 ## Plugin comparison
 
@@ -41,270 +50,11 @@ A short comparison between the three main background-geolocation plugins commonl
 | Transistorsoft (original) | Accurate | Yes | Yes — built-in HTTP uploader to your API | Paid |
 
 Notes:
-- The Community plugin is lightweight and continues to work in the background, but it is known to be less accurate than the options below.
-- This Cap-go plugin aims to provide accurate location fixes and reliable background operation without requiring a paid license.
-- Transistorsoft's plugin is a mature, accurate solution that also includes an HTTP uploader (it can send location updates to your API). It is a commercial product and requires a paid license for full use.
+- The Com    Cy plugin is lightweight and continues to work  </Che background, but it is known to be less accurate than the options below.
+- This Cap-go pl    Optim to provide accurate location fixes and r  </Card>ackground operation without requiring a paid license.
+- Transist    Check the [Documentation](/docs/e solution that also inclu  </Card>
+</CardGrid>
 
-## Installation
+## Plugin comparison
 
-This plugin supports Capacitor v7:
-
-| Capacitor  | Plugin |
-|------------|--------|
-| v7         | v7     |
-
-<Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @capgo/background-geolocation
-    npx cap update
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```bash
-    yarn add @capgo/background-geolocation
-    npx cap update
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @capgo/background-geolocation
-    npx cap update
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @capgo/background-geolocation
-    npx cap update
-    ```
-  </TabItem>
-</Tabs>
-
-## Platform Setup
-
-### iOS
-
-Add the following keys to `Info.plist.`:
-
-```xml
-<dict>
-  ...
-  <key>NSLocationWhenInUseUsageDescription</key>
-  <string>We need to track your location</string>
-  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-  <string>We need to track your location while your device is locked.</string>
-  <key>UIBackgroundModes</key>
-  <array>
-    <string>location</string>
-  </array>
-  ...
-</dict>
-```
-
-### Android
-
-Set the the `android.useLegacyBridge` option to `true` in your Capacitor configuration. This prevents location updates halting after 5 minutes in the background. See https://capacitorjs.com/docs/config and https://github.com/capacitor-community/background-geolocation/issues/89.
-
-On Android 13+, the app needs the `POST_NOTIFICATIONS` runtime permission to show the persistent notification informing the user that their location is being used in the background. This runtime permission is requested after the location permission is granted.
-
-If your app forwards location updates to a server in real time, be aware that after 5 minutes in the background Android will throttle HTTP requests initiated from the WebView. The solution is to use a native HTTP plugin such as [CapacitorHttp](https://capacitorjs.com/docs/apis/http). See https://github.com/capacitor-community/background-geolocation/issues/14.
-
-Configuration specific to Android can be made in `strings.xml`:
-```xml
-<resources>
-    <!--
-        The channel name for the background notification. This will be visible
-        when the user presses & holds the notification. It defaults to
-        "Background Tracking".
-    -->
-    <string name="capacitor_background_geolocation_notification_channel_name">
-        Background Tracking
-    </string>
-
-    <!--
-        The icon to use for the background notification. Note the absence of a
-        leading "@". It defaults to "mipmap/ic_launcher", the app's launch icon.
-
-        If a raster image is used to generate the icon (as opposed to a vector
-        image), it must have a transparent background. To make sure your image
-        is compatible, select "Notification Icons" as the Icon Type when
-        creating the image asset in Android Studio.
-
-        An incompatible image asset will cause the notification to misbehave in
-        a few telling ways, even if the icon appears correctly:
-
-          - The notification may be dismissable by the user when it should not
-            be.
-          - Tapping the notification may open the settings, not the app.
-          - The notification text may be incorrect.
-    -->
-    <string name="capacitor_background_geolocation_notification_icon">
-        drawable/ic_tracking
-    </string>
-
-    <!--
-        The color of the notification as a string parseable by
-        android.graphics.Color.parseColor. Optional.
-    -->
-    <string name="capacitor_background_geolocation_notification_color">
-        yellow
-    </string>
-</resources>
-```
-
-## Usage
-
-```javascript
-import { BackgroundGeolocation } from "@capgo/background-geolocation";
-
-BackgroundGeolocation.start(
-    {
-        backgroundMessage: "Cancel to prevent battery drain.",
-        backgroundTitle: "Tracking You.",
-        requestPermissions: true,
-        stale: false,
-        distanceFilter: 50
-    },
-    (location, error) => {
-        if (error) {
-            if (error.code === "NOT_AUTHORIZED") {
-                if (window.confirm(
-                    "This app needs your location, " +
-                    "but does not have permission.\n\n" +
-                    "Open settings now?"
-                )) {
-                    // It can be useful to direct the user to their device's
-                    // settings when location permissions have been denied. The
-                    // plugin provides the 'openSettings' method to do exactly
-                    // this.
-                    BackgroundGeolocation.openSettings();
-                }
-            }
-            return console.error(error);
-        }
-        return console.log(location);
-    }
-).then(() => {
-    // When location updates are no longer needed, the plugin should be stopped by calling
-    BackgroundGeolocation.stop();
-});
-
-// Set a planned route to get a notification sound when a new location arrives and it's not on the route:
-
-BackgroundGeolocation.setPlannedRoute({soundFile: "assets/myFile.mp3", route: [[1,2], [3,4]], distance: 30 });
-
-// If you just want the current location, try something like this. The longer
-// the timeout, the more accurate the guess will be. I wouldn't go below about 100ms.
-function guessLocation(callback, timeout) {
-    let last_location;
-    BackgroundGeolocation.start(
-        {
-            requestPermissions: false,
-            stale: true
-        },
-        (location) => {
-            last_location = location || undefined;
-        }
-    ).then(() => {
-        setTimeout(() => {
-            callback(last_location);
-            BackgroundGeolocation.stop();
-        }, timeout);
-    });
-}
-```
-
-## API
-
-### start(...)
-
-```typescript
-start(options: StartOptions, callback: (position?: Location | undefined, error?: CallbackError | undefined) => void) => Promise<void>
-```
-
-To start listening for changes in the device's location, call this method.
-A Promise is returned to indicate that it finished the call. The callback will be called every time a new location
-is available, or if there was an error when calling this method. Don't rely on promise rejection for this.
-
-| Param          | Type                                                                                                                      | Description                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **`options`**  | `StartOptions`                                                                     | The configuration options                                                         |
-| **`callback`** | `(position?: Location, error?: CallbackError) => void` | The callback function invoked when a new location is available or an error occurs |
-
-### stop()
-
-```typescript
-stop() => Promise<void>
-```
-
-Stops location updates.
-
-### openSettings()
-
-```typescript
-openSettings() => Promise<void>
-```
-
-Opens the device's location settings page.
-Useful for directing users to enable location services or adjust permissions.
-
-### setPlannedRoute(...)
-
-```typescript
-setPlannedRoute(options: SetPlannedRouteOptions) => Promise<void>
-```
-
-Plays a sound file when the user deviates from the planned route.
-This should be used to play a sound (in the background too, only for native).
-
-| Param         | Type                                                                      | Description                                              |
-| ------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
-| **`options`** | `SetPlannedRouteOptions` | The options for setting the planned route and sound file |
-
-## Interfaces
-
-### StartOptions
-
-The options for configuring for location updates.
-
-| Prop                     | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                          | Default                            |
-| ------------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| **`backgroundMessage`**  | `string`  | If the "backgroundMessage" option is defined, the plugin will provide location updates whether the app is in the background or the foreground. If it is not defined, location updates are only guaranteed in the foreground. This is true on both platforms. On Android, a notification must be shown to continue receiving location updates in the background. This option specifies the text of that notification. |                                    |
-| **`backgroundTitle`**    | `string`  | The title of the notification mentioned above.                                                                                                                                                                                                                                                                                                                                                                       | `"Using your location"` |
-| **`requestPermissions`** | `boolean` | Whether permissions should be requested from the user automatically, if they are not already granted.                                                                                                                                                                                                                                                                                                                | `true`                  |
-| **`stale`**              | `boolean` | If "true", stale locations may be delivered while the device obtains a GPS fix. You are responsible for checking the "time" property. If "false", locations are guaranteed to be up to date.                                                                                                                                                                                                                         | `false`                 |
-| **`distanceFilter`**     | `number`  | The distance in meters that the device must move before a new location update is triggered. This is used to filter out small movements and reduce the number of updates.                                                                                                                                                                                                                                             | `0`                     |
-
-### Location
-
-Represents a geographical location with various attributes.
-Contains all the standard location properties returned by GPS/network providers.
-
-| Prop                   | Type                        | Description                                                                                                                            |
-| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **`latitude`**         | `number`         | Latitude in degrees. Range: -90.0 to +90.0                                                                                             |
-| **`longitude`**        | `number`         | Longitude in degrees. Range: -180.0 to +180.0                                                                                          |
-| **`accuracy`**         | `number`         | Radius of horizontal uncertainty in metres, with 68% confidence. Lower values indicate more accurate location.                         |
-| **`altitude`**         | `number \| null` | Metres above sea level (or null if not available).                                                                                     |
-| **`altitudeAccuracy`** | `number \| null` | Vertical uncertainty in metres, with 68% confidence (or null if not available).                                                        |
-| **`simulated`**        | `boolean`        | `true` if the location was simulated by software, rather than GPS. Useful for detecting mock locations in development or testing.      |
-| **`bearing`**          | `number \| null` | Deviation from true north in degrees (or null if not available). Range: 0.0 to 360.0                                                   |
-| **`speed`**            | `number \| null` | Speed in metres per second (or null if not available).                                                                                 |
-| **`time`**             | `number \| null` | Time the location was produced, in milliseconds since the unix epoch. Use this to check if a location is stale when using stale: true. |
-
-### CallbackError
-
-Error object that may be passed to the location start callback.
-Extends the standard Error with optional error codes.
-
-| Prop       | Type                | Description                                           |
-| ---------- | ------------------- | ----------------------------------------------------- |
-| **`code`** | `string` | Optional error code for more specific error handling. |
-
-### SetPlannedRouteOptions
-
-| Prop            | Type                            | Description                                                                                                                                                                                                                                        | Default         |
-| --------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| **`soundFile`** | `string`             | The name of the sound file to play. Must be a valid sound relative path in the app's public folder to work for both web and native platforms. There's no need to include the public folder in the path.                                            |                 |
-| **`route`**     | `[number, number][]` | The planned route as an array of longitude and latitude pairs. Each pair represents a point on the route. This is used to define a route that the user can follow. The route is used to play a sound when the user deviates from it.               |                 |
-| **`distance`**  | `number`             | The distance in meters that the user must deviate from the planned route to trigger the sound. This is used to determine how far off the route the user can be before the sound is played. If not specified, a default value of 50 meters is used. | `50` |
+A short comparison between the three main background-geolocation plugins commonfull use.

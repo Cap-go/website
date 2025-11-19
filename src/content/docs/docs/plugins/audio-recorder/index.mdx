@@ -1,58 +1,40 @@
 ---
 title: "@capgo/capacitor-audio-recorder"
 description: Record audio on iOS, Android, and Web with Capacitor
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
 hero:
   tagline: High-quality audio recording for your Capacitor applications
   image:
     file: ~public/icons/plugins/audio-recorder.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/audio-recorder/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-audio-recorder
+      icon: external
+      variant: minimal
 ---
 
-The Capacitor Audio Recorder plugin enables high-quality audio recording across iOS, Android, and Web platforms with a simple, unified API.
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Key Features
-
-- **Cross-Platform** - iOS, Android, and Web support
-- **Multiple Formats** - AAC, MP3, WAV encoding
-- **Configurable Quality** - Control sample rate and bit rate
-- **Real-time Monitoring** - Track recording duration
-- **File Management** - Save to device storage or get base64
-
-## Installation
-
-```bash
-npm install @capgo/capacitor-audio-recorder
-npx cap sync
-```
-
-## Platform Support
-
-- **iOS**: Full support with configurable formats
-- **Android**: Full support with all formats
-- **Web**: Supported via MediaRecorder API
-
-## Use Cases
-
-- **Voice Memos** - Personal note-taking apps
-- **Podcasts** - Audio content creation
-- **Music Recording** - Musical instrument apps
-- **Voice Messages** - Chat and messaging apps
-- **Accessibility** - Voice input alternatives
-
-## API Overview
-
-The plugin provides methods to:
-- Start/stop recording
-- Pause/resume recording
-- Configure audio quality
-- Get recording status
-- Export audio files
-
-## Next Steps
-
-Get started with the [Getting Started guide](/docs/plugins/audio-recorder/getting-started) to integrate audio recording into your Capacitor app.
-
-## Resources
-
-- [GitHub Repository](https://github.com/Cap-go/capacitor-audio-recorder)
-- [npm Package](https://www.npmjs.com/package/@capgo/capacitor-audio-recorder)
-- [Issue Tracker](https://github.com/Cap-go/capacitor-audio-recorder/issues)
+<CardGrid stagger>
+  <Card title="Cross-Platform" icon="laptop">
+    Record audio on iOS, Android, and Web with a unified API 🌐
+  </Card>
+  <Card title="Multiple Formats" icon="document">
+    Support for AAC, MP3, and WAV encoding 🎵
+  </Card>
+  <Card title="Configurable Quality" icon="setting">
+    Control sample rate, bit rate, and channels for optimal quality 🎚️
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/audio-recorder/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>

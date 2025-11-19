@@ -1,0 +1,144 @@
+---
+title: Getting Started
+description: Installation and usage guide for @capgo/capacitor-android-inline-install
+sidebar:
+  order: 2
+  label: "Getting Started"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage Example
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+// Basic inline install
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp'
+});
+
+// Advanced install with tracking
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp',
+  referrer: 'campaign=my-campaign&source=app',
+  overlay: true,
+  fallback: true
+});
+
+// Handle the installation flow
+try {
+  await AndroidInlineInstall.startInlineInstall({
+    id: 'com.spotify.music',
+    referrer: 'utm_source=myapp&utm_campaign=music_promotion'
+  });
+  console.log('Install overlay triggered successfully');
+} catch (error) {
+  console.error('Install failed:', error);
+}
+```
+
+## Core API Methods
+
+### Installation Management
+- `startInlineInstall(options)` - Trigger Google Play inline install overlay for specified app
+
+## Configuration Options
+
+```typescript
+interface InlineInstallOptions {
+  id: string;           // Target app package name (required)
+  referrer?: string;    // Tracking campaign string (optional)
+  callerId?: string;    // Caller app package name (defaults to current app)
+  overlay?: boolean;    // Enable/disable Play overlay (default: true)
+  fallback?: boolean;   // Use full store page if overlay fails (default: true)
+}
+```
+
+## Google Play Requirements
+
+### Premium Growth Tools Eligibility
+Your app must qualify for Google Play's Premium Growth Tools to use inline install:
+- Apps with significant user engagement
+- Good Play Store ratings and reviews
+- Compliance with Google Play policies
+
+### Target App Requirements
+- Target app must be available on Google Play Store
+- Target app must support inline installation
+- User must be signed into Google Play Store
+
+## Behavior and Fallbacks
+
+### Overlay Mode (default)
+1. Attempts to open Google Play overlay within your app
+2. If overlay is unavailable, falls back to full Play Store page
+3. If Play Store is not available, shows error
+
+### Full Store Mode
+- Directly opens the full Google Play Store page
+- Bypasses overlay attempt entirely
+
+## Platform Support
+
+- **Android**: Full support with Google Play Services
+- **iOS**: Not supported (Android-specific feature)
+- **Web**: Not supported (native Android feature)
+
+## Implementation Details
+
+The plugin uses Android intents to communicate with Google Play Store:
+- Intent action for inline install overlay
+- Fallback to standard Play Store intent
+- Automatic handling of Play Services availability
+
+## Use Cases
+
+- **App discovery**: Promote related apps within your ecosystem
+- **Cross-promotion**: Drive installs for partner applications
+- **Feature unlocking**: Install additional modules or extensions
+- **Companion apps**: Install supporting applications seamlessly
+
+## Best Practices
+
+- Always provide fallback options for users without Play Services
+- Test with different device configurations and Play Store versions
+- Use referrer tracking to measure conversion rates
+- Handle installation errors gracefully
+- Respect user choice if they decline installation
+
+## Limitations
+
+- Android-only functionality
+- Requires Google Play Services
+- Only works with apps qualifying for Premium Growth Tools
+- Subject to Google Play Store policies and availability

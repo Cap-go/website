@@ -1,142 +1,40 @@
 ---
 title: "@capgo/capacitor-alarm"
-description: Manage native alarm Capacitor plugin
+description: Schedule native alarms and notifications even when app is closed.
+tableOfContents: false
+next: false
+prev: false
 sidebar:
   order: 1
+  label: "Introduction"
+hero:
+  tagline: Manage native alarms on iOS and Android directly from your Capacitor app.
+  image:
+    file: ~public/icons/plugins/alarm.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/alarm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-alarm/
+      icon: external
+      variant: minimal
 ---
 
-import { LinkCard, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
-# @capgo/capacitor-alarm
-
-Manage native alarm Capacitor plugin
-
-## Installation
-
-<Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @capgo/capacitor-alarm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="yarn">
-    ```bash
-    yarn add @capgo/capacitor-alarm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @capgo/capacitor-alarm
-    npx cap sync
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @capgo/capacitor-alarm
-    npx cap sync
-    ```
-  </TabItem>
-</Tabs>
-
-## Requirements
-
-- **iOS**: iOS 26+ only. This plugin relies on `AlarmKit` APIs and will report unsupported on earlier versions or when the framework is unavailable.
-- **Android**: Uses `AlarmClock` intents; behavior depends on the default Clock app and OEM policies.
-
-Note: This plugin only exposes native alarm actions (create/open). It does not implement any custom in-app alarm scheduling/CRUD.
-
-## API
-
-### createAlarm(...)
-
-```typescript
-createAlarm(options: NativeAlarmCreateOptions) => Promise<NativeActionResult>
-```
-
-Create a native OS alarm using the platform clock app.
-On Android this uses the Alarm Clock intent; on iOS this use AlarmKit if available (iOS 26+).
-
-| Param         | Type                                                                          |
-| ------------- | ----------------------------------------------------------------------------- |
-| **`options`** | `NativeAlarmCreateOptions` |
-
-**Returns:** `Promise<NativeActionResult>`
-
-### openAlarms()
-
-```typescript
-openAlarms() => Promise<NativeActionResult>
-```
-
-Open the platform's native alarm list UI, if available.
-
-**Returns:** `Promise<NativeActionResult>`
-
-### getOSInfo()
-
-```typescript
-getOSInfo() => Promise<OSInfo>
-```
-
-Get information about the OS and capabilities.
-
-**Returns:** `Promise<OSInfo>`
-
-### requestPermissions(...)
-
-```typescript
-requestPermissions(options?: { exactAlarm?: boolean | undefined; } | undefined) => Promise<PermissionResult>
-```
-
-Request relevant permissions for alarm usage on the platform.
-On Android, may route to settings for exact alarms.
-
-| Param         | Type                                   |
-| ------------- | -------------------------------------- |
-| **`options`** | `{ exactAlarm?: boolean; }` |
-
-**Returns:** `Promise<PermissionResult>`
-
-## Interfaces
-
-### NativeActionResult
-
-| Prop          | Type                 |
-| ------------- | -------------------- |
-| **`success`** | `boolean` |
-| **`message`** | `string`  |
-
-### NativeAlarmCreateOptions
-
-Options for creating a native OS alarm via the platform clock app.
-
-| Prop          | Type                 | Description                                  |
-| ------------- | -------------------- | -------------------------------------------- |
-| **`hour`**    | `number`  | Hour of day in 24h format (0-23)             |
-| **`minute`**  | `number`  | Minute of hour (0-59)                        |
-| **`label`**   | `string`  | Optional label for the alarm                 |
-| **`skipUi`**  | `boolean` | Android only: attempt to skip UI if possible |
-| **`vibrate`** | `boolean` | Android only: set alarm to vibrate           |
-
-### OSInfo
-
-Returned info about current OS and capabilities.
-
-| Prop                                 | Type                 | Description                                                 |
-| ------------------------------------ | -------------------- | ----------------------------------------------------------- |
-| **`platform`**                       | `string`  | 'ios' \| 'android' \| 'web'                                 |
-| **`version`**                        | `string`  | OS version string                                           |
-| **`supportsNativeAlarms`**           | `boolean` | Whether the platform exposes a native alarm app integration |
-| **`supportsScheduledNotifications`** | `boolean` | Whether scheduling local notifications is supported         |
-| **`canScheduleExactAlarms`**         | `boolean` | Android only: whether exact alarms are allowed              |
-
-### PermissionResult
-
-Result of a permissions request.
-
-| Prop          | Type                                                             | Description                        |
-| ------------- | ---------------------------------------------------------------- | ---------------------------------- |
-| **`granted`** | `boolean`                                             | Overall grant for requested scope  |
-| **`details`** | `Record<string, boolean>` | Optional details by permission key |
+<CardGrid stagger>
+  <Card title="Native Integration" icon="puzzle">
+    Uses native AlarmKit on iOS and AlarmClock intents on Android 📱
+  </Card>
+  <Card title="Simple API" icon="rocket">
+    Easy-to-use methods to create and manage alarms ⚡
+  </Card>
+  <Card title="Permission Handling" icon="shield-check">
+    Built-in support for requesting necessary permissions 🔒
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Check the [Documentation](/docs/plugins/alarm/getting-started/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>
