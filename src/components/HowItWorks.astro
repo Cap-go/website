@@ -1,0 +1,195 @@
+---
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+---
+
+<section class="bg-[#090b11] py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-base font-semibold leading-7 text-[#44BCFF] font-mono">HOW IT WORKS</h2>
+      <p class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-6xl">
+        Push once.<br />
+        Update everywhere, instantly.
+      </p>
+      <p class="mt-6 text-lg leading-8 text-gray-400">
+        Capgo uses an open-source CapacitorJS plugin and a secure cloud service to
+        push frontend updates to your users — no app store review required.
+      </p>
+    </div>
+
+    <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+      <!-- Card 1 -->
+      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12] p-8 ring-1 ring-white/10">
+        <div class="mb-8 flex items-center justify-center h-48">
+            <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Glow -->
+                <circle cx="150" cy="100" r="80" fill="#44BCFF" fill-opacity="0.1" filter="url(#filter0_f_card1)"/>
+                
+                <!-- Terminal Window -->
+                <rect x="40" y="40" width="220" height="140" rx="8" fill="#111318" stroke="#333" stroke-width="1"/>
+                
+                <!-- Traffic Lights -->
+                <circle cx="60" cy="55" r="3" fill="#FF5F56"/>
+                <circle cx="70" cy="55" r="3" fill="#FFBD2E"/>
+                <circle cx="80" cy="55" r="3" fill="#27C93F"/>
+                
+                <!-- Code -->
+                <text x="60" y="85" font-family="monospace" font-size="10" fill="#27C93F">$ <tspan fill="#fff">npx @capgo/cli init</tspan></text>
+                <text x="60" y="105" font-family="monospace" font-size="10" fill="#666">✓ Plugin installed succ...</text>
+                <text x="60" y="120" font-family="monospace" font-size="10" fill="#666">✓ Configuration created</text>
+                <text x="60" y="135" font-family="monospace" font-size="10" fill="#666">✓ Project initialized</text>
+                <text x="60" y="155" font-family="monospace" font-size="10" fill="#27C93F">$</text>
+
+                <defs>
+                    <filter id="filter0_f_card1" x="0" y="-50" width="300" height="300" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                        <feGaussianBlur stdDeviation="30" result="effect1_foregroundBlur"/>
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+        <div class="text-center">
+          <h3 class="text-lg font-semibold leading-8 text-white">Add the plugin</h3>
+          <p class="mt-4 text-sm leading-6 text-gray-400">
+            Install the Capgo CLI and initialize your project with a single command.
+            <br class="hidden lg:inline" />It's that simple!
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12] p-8 ring-1 ring-white/10">
+        <div class="mb-8 flex items-center justify-center h-48">
+            <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Glow -->
+                <circle cx="150" cy="100" r="80" fill="#44BCFF" fill-opacity="0.1" filter="url(#filter0_f_card2)"/>
+                
+                <!-- Terminal Window (Tilted) -->
+                <g transform="rotate(-5 150 100)">
+                    <rect x="40" y="40" width="220" height="140" rx="8" fill="#111318" stroke="#333" stroke-width="1"/>
+                    
+                    <!-- Traffic Lights -->
+                    <circle cx="60" cy="55" r="3" fill="#FF5F56"/>
+                    <circle cx="70" cy="55" r="3" fill="#FFBD2E"/>
+                    <circle cx="80" cy="55" r="3" fill="#27C93F"/>
+                    
+                    <!-- Code -->
+                    <text x="60" y="85" font-family="monospace" font-size="10" fill="#27C93F">$ <tspan fill="#fff">npm run build</tspan></text>
+                    <text x="60" y="100" font-family="monospace" font-size="9" fill="#666">Building your app...</text>
+                    <text x="60" y="112" font-family="monospace" font-size="9" fill="#666">✓ Build completed</text>
+                    
+                    <text x="60" y="130" font-family="monospace" font-size="10" fill="#27C93F">$ <tspan fill="#fff">npx @capgo/cli bundle upload</tspan></text>
+                    <text x="60" y="145" font-family="monospace" font-size="9" fill="#C98A27">📦 Uploading bundle...</text>
+                    <text x="60" y="157" font-family="monospace" font-size="9" fill="#666">✓ Bundle uploaded successfully</text>
+                    <text x="60" y="169" font-family="monospace" font-size="9" fill="#666">✓ Version 1.0.1 is now live</text>
+                    <text x="60" y="182" font-family="monospace" font-size="10" fill="#27C93F">$</text>
+                </g>
+
+                <defs>
+                    <filter id="filter0_f_card2" x="0" y="-50" width="300" height="300" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                        <feGaussianBlur stdDeviation="30" result="effect1_foregroundBlur"/>
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+        <div class="text-center">
+          <h3 class="text-lg font-semibold leading-8 text-white">Push new updates</h3>
+          <p class="mt-4 text-sm leading-6 text-gray-400">
+            Build your app as usual, then deploy your update with our CLI. No complex configuration needed.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12] p-8 ring-1 ring-white/10">
+        <div class="mb-8 flex items-center justify-center h-48">
+            <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background Container (Subtle Glass Effect) -->
+                <rect x="85" y="10" width="130" height="180" rx="20" fill="#1F2937" fill-opacity="0.2"/>
+                <rect x="85" y="10" width="130" height="180" rx="20" stroke="url(#container_gradient)" stroke-width="1" stroke-opacity="0.2"/>
+
+                <!-- Text -->
+                <text x="150" y="40" font-family="sans-serif" font-size="14" fill="#E5E7EB" text-anchor="middle" font-weight="500">My App</text>
+                <text x="150" y="55" font-family="monospace" font-size="8" fill="#9CA3AF" text-anchor="middle">✓ Updating in background...</text>
+
+                <!-- Main Content Group -->
+                <g transform="translate(0, 15)">
+                    <!-- Ripples -->
+                    <ellipse cx="150" cy="145" rx="80" ry="30" stroke="#3B82F6" stroke-opacity="0.2" stroke-width="1"/>
+                    <ellipse cx="150" cy="145" rx="60" ry="22" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1"/>
+                    <ellipse cx="150" cy="145" rx="40" ry="15" stroke="#3B82F6" stroke-opacity="0.6" stroke-width="1"/>
+
+                    <!-- Stack Layers (Isometric) -->
+                    <!-- Bottom Block -->
+                    <path d="M150 155 L115 140 L150 125 L185 140 Z" fill="#111827" stroke="#1F2937" stroke-width="1"/> <!-- Top face -->
+                    <path d="M115 140 L115 150 L150 165 L150 155 Z" fill="#0F172A" stroke="#1F2937" stroke-width="1"/> <!-- Left face -->
+                    <path d="M185 140 L185 150 L150 165 L150 155 Z" fill="#1F2937" stroke="#374151" stroke-width="1"/> <!-- Right face -->
+                    <!-- Highlight on bottom block edges -->
+                    <path d="M115 150 L150 165 L185 150" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.3" fill="none"/>
+
+                    <!-- Top Block -->
+                    <g transform="translate(0, -25)">
+                        <path d="M150 155 L115 140 L150 125 L185 140 Z" fill="#1F2937" stroke="#374151" stroke-width="1"/> <!-- Top face -->
+                        <path d="M115 140 L115 150 L150 165 L150 155 Z" fill="#111827" stroke="#374151" stroke-width="1"/> <!-- Left face -->
+                        <path d="M185 140 L185 150 L150 165 L150 155 Z" fill="#374151" stroke="#4B5563" stroke-width="1"/> <!-- Right face -->
+                        <!-- Highlight on top block edges -->
+                        <path d="M115 150 L150 165 L185 150" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.5" fill="none"/>
+                        <path d="M115 140 L150 155 L185 140 L150 125 Z" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.5" fill="none"/>
+                    </g>
+
+                    <!-- App Icon (Floating above) -->
+                    <g transform="translate(118, 65)">
+                        <!-- Glow behind icon -->
+                        <rect x="4" y="4" width="56" height="56" rx="14" fill="#3B82F6" fill-opacity="0.4" filter="url(#icon_glow)"/>
+                        
+                        <!-- Icon Body -->
+                        <rect width="64" height="64" rx="16" fill="url(#icon_gradient)"/>
+                        
+                        <!-- Capacitor Logo -->
+                        <g transform="translate(32, 32)" stroke="white" stroke-width="2" stroke-linecap="round" fill="none">
+                            <ellipse cx="0" cy="0" rx="8" ry="20" transform="rotate(0)"/>
+                            <ellipse cx="0" cy="0" rx="8" ry="20" transform="rotate(60)"/>
+                            <ellipse cx="0" cy="0" rx="8" ry="20" transform="rotate(120)"/>
+                            <circle cx="0" cy="0" r="3" fill="white" stroke="none"/>
+                        </g>
+                    </g>
+                </g>
+
+                <defs>
+                    <filter id="icon_glow" x="-20" y="-20" width="100" height="100" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+                    </filter>
+                    <linearGradient id="icon_gradient" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#60A5FA"/>
+                        <stop offset="1" stop-color="#3B82F6"/>
+                    </linearGradient>
+                    <linearGradient id="container_gradient" x1="85" y1="10" x2="215" y2="190" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="white" stop-opacity="0.2"/>
+                        <stop offset="1" stop-color="white" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        <div class="text-center">
+          <h3 class="text-lg font-semibold leading-8 text-white">App syncs on launch</h3>
+          <p class="mt-4 text-sm leading-6 text-gray-400">
+            Users receive updates instantly in the background. No app store approval, no user interaction required.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 flex justify-center">
+      <a
+        href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+        class="rounded-md bg-[#44BCFF] px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-[#3a9fd6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
+      >
+        Try for free
+      </a>
+    </div>
+  </div>
+</section>
