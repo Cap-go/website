@@ -55,3 +55,6 @@ Hashi = "Hashi"  # HashiCorp (brand name)
 udid = "udid"  # iOS device UDID (technical term)
 UDID = "UDID"  # iOS device UDID (technical term)
 RTO = "RTO"  # Recovery Time Objective
+
+# OpenSSL command flags
+passin = "passin"  # OpenSSL password input flag
