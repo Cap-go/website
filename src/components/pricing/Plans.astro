@@ -182,17 +182,19 @@ function buildTimeDisplay(buildTimeSeconds: number) {
                   GiB {m.of_storage({}, { locale: Astro.locals.locale })}
                 </span>
               </li>
-              <li class="flex items-center">
-                <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
-                  <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
-                </svg>
-                <span>
-                  <span class="font-bold">
-                    {buildTimeDisplay(plan.build_time_seconds || 0)}
-                    {plan.name === 'Pay as you go' ? '+' : ''}
+              {plan.build_time_seconds && plan.build_time_seconds > 0 && (
+                <li class="flex items-center">
+                  <svg class="mr-2 h-5 w-5 shrink-0 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" viewBox="0 0 448 512">
+                    <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                  </svg>
+                  <span>
+                    <span class="font-bold">
+                      {buildTimeDisplay(plan.build_time_seconds)}
+                      {plan.name === 'Pay as you go' ? '+' : ''}
+                    </span>
                   </span>
-                </span>
-              </li>
+                </li>
+              )}
               {plan.name === 'Solo' && (
                 <>
                   <li class="flex items-center">
