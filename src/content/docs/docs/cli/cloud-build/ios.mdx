@@ -1,0 +1,329 @@
+---
+title: iOS Builds
+description: Configure and build iOS apps with Capgo Cloud Build
+sidebar:
+  order: 2
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Build and submit iOS apps to TestFlight and the App Store using Capgo's dedicated Mac infrastructure.
+
+## Before You Build
+
+<CardGrid>
+  <Card title="⚠️ Setup iOS Credentials First" icon="warning">
+    **Required:** You must save your iOS credentials before building.
+
+    [Setup iOS Credentials →](/docs/cli/cloud-build/credentials/#saving-ios-credentials)
+  </Card>
+</CardGrid>
+
+## How iOS Builds Work
+
+iOS builds run on dedicated Mac machines (Scaleway Mac minis M4) provisioned on-demand:
+
+- **Hardware**: Apple Silicon Mac minis with macOS 15
+- **Build Tool**: Xcode with Fastlane (custom Capgo configuration)
+- **Isolation**: Each build runs as a separate macOS user account
+- **Lifetime**: Machines have 24-hour leases and are automatically cleaned up
+- **Security**: All files and user accounts are deleted after the machine is dismissed
+
+## Prerequisites
+
+Before building for iOS, you need:
+
+### 1. Development Environment
+
+- Mac computer with Xcode installed (for initial certificate setup)
+- Valid Apple Developer account ($99/year)
+- Your app building successfully locally with `npx cap open ios`
+
+### 2. Code Signing Certificates
+
+You'll need one of these certificate types depending on your build:
+
+| Build Type | Certificate Required | Provisioning Profile |
+|------------|---------------------|---------------------|
+| **Development** | Apple Development | Development Profile |
+| **Ad Hoc** | Apple Distribution | Ad Hoc Profile |
+| **App Store** | Apple Distribution | App Store Profile |
+
+### 3. App Store Connect API Key (Recommended)
+
+For automatic TestFlight submission, create an API key:
+
+<Steps>
+
+1. Go to [App Store Connect](https://appstoreconnect.apple.com/) → Users and Access → Keys
+2. Click the "+" button to create a new key
+3. Give it a name (e.g., "Capgo CI") and select "Developer" role
+4. Download the `.p8` file (you can only download it once!)
+5. Note the **Key ID** and **Issuer ID**
+
+</Steps>
+
+## Build Configuration
+
+### Required Environment Variables
+
+Set these credentials before building:
+
+```bash
+# iOS Signing (Required)
+BUILD_CERTIFICATE_BASE64="<base64-encoded-p12-certificate>"
+BUILD_PROVISION_PROFILE_BASE64="<base64-encoded-mobileprovision>"
+P12_PASSWORD="<certificate-password>"
+
+# App Store Connect API (for submission)
+APPLE_KEY_ID="ABC1234567"
+APPLE_ISSUER_ID="00000000-0000-0000-0000-000000000000"
+APPLE_KEY_CONTENT="<base64-encoded-p8-key>"
+
+# Additional Config
+APP_STORE_CONNECT_TEAM_ID="1234567890"
+APPLE_PROFILE_NAME="App Store com.example.app"
+```
+
+### Generating Base64 Credentials
+
+<Aside type="tip">
+Use these commands to encode your certificates for Capgo:
+</Aside>
+
+**Certificate (.p12):**
+```bash
+base64 -i YourCertificate.p12 | pbcopy
+```
+
+**Provisioning Profile (.mobileprovision):**
+```bash
+base64 -i YourProfile.mobileprovision | pbcopy
+```
+
+**App Store Connect Key (.p8):**
+```bash
+base64 -i AuthKey_ABC1234567.p8 | pbcopy
+```
+
+The base64 string is now in your clipboard - paste it into your environment variable or CI/CD secrets.
+
+## Building for iOS
+
+### Debug Build (Development)
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode debug
+```
+
+This creates a development build that can be installed on registered devices.
+
+### Release Build (App Store)
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode release
+```
+
+This creates an App Store build and automatically submits to TestFlight if you have the App Store Connect API credentials configured.
+
+## CI/CD Integration
+
+### GitHub Actions Example
+
+```yaml
+name: Build iOS App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync ios
+
+      - name: Build iOS app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform ios \
+            --build-mode release
+```
+
+## Build Process Details
+
+### What Happens During an iOS Build
+
+<Steps>
+
+1. **Machine Provisioning** (1-2 minutes)
+   - Scaleway Mac mini is provisioned or assigned
+   - macOS 15 with Xcode pre-installed
+   - Bootstrap scripts run (if first use)
+
+2. **User Isolation** (~10 seconds)
+   - Unique macOS user created: `job-<jobId>`
+   - Dedicated home directory: `/Users/job-<jobId>`
+   - Isolated workspace created
+
+3. **Project Setup** (~30 seconds)
+   - Project zip downloaded from R2
+   - Extracted to workspace
+   - Credentials injected as environment variables
+
+4. **Fastlane Build** (3-8 minutes)
+   - Keychain created with signing certificate
+   - Provisioning profile installed
+   - Xcode build command executed
+   - IPA file generated
+
+5. **App Store Submission** (1-2 minutes, if configured)
+   - IPA uploaded to App Store Connect
+   - Submitted to TestFlight
+   - Processing begins on Apple's side
+
+6. **Cleanup** (immediate)
+   - User account killed and deleted
+   - Workspace files removed
+   - Temporary files cleared
+
+7. **Machine Dismissal** (after 24 hours)
+   - Mac machine is destroyed
+   - All data permanently deleted
+
+</Steps>
+
+### Build Stack
+
+Our iOS build environment includes:
+
+- **macOS**: 15 (latest stable)
+- **Xcode**: Latest stable version
+- **Fastlane**: Latest stable version
+- **CocoaPods**: Latest stable version
+- **Node.js**: 18.x (LTS)
+- **Ruby**: System ruby with bundler
+
+## Build Times
+
+Typical iOS build times:
+
+| Build Type | First Build | Subsequent Builds* |
+|------------|-------------|-------------------|
+| Debug | 5-7 minutes | 4-6 minutes |
+| Release | 7-10 minutes | 5-8 minutes |
+
+*Subsequent builds may be faster if the same machine is reused within the 24-hour window.
+
+<Aside type="note">
+iOS builds cost **2× the base rate** due to dedicated Mac hardware requirements.
+</Aside>
+
+## Troubleshooting
+
+### Common Issues
+
+**"Code signing failed"**
+- Verify your certificate is for the correct distribution type
+- Ensure provisioning profile matches your App ID
+- Check that P12_PASSWORD is correct
+
+**"Provisioning profile doesn't include signing certificate"**
+- Regenerate your provisioning profile including the certificate
+- Re-download and re-encode the profile
+
+**"App Store Connect authentication failed"**
+- Verify APPLE_KEY_ID, APPLE_ISSUER_ID, and APPLE_KEY_CONTENT
+- Ensure the API key has not been revoked
+- Check that the key has "Developer" role or higher
+
+**"Build timeout after 10 minutes"**
+- Check if your app has large native dependencies
+- Consider optimizing your Podfile
+- Contact support if builds consistently timeout
+
+### Debug Logs
+
+All build logs are streamed in real-time. Watch for these key phases:
+
+```
+✔ Machine assigned: m-abc123
+→ Creating user: job-abc123
+→ Installing CocoaPods dependencies...
+→ Building iOS app...
+→ Code signing with certificate...
+→ Uploading to App Store Connect...
+✔ Build succeeded
+```
+
+If a build fails, the error will be clearly shown in the logs with the specific Fastlane/Xcode error message.
+
+## Best Practices
+
+### 1. Test Locally First
+
+Always ensure your iOS build works locally before using cloud build:
+
+```bash
+npx cap open ios
+# Build in Xcode
+```
+
+### 2. Use Environment Variables
+
+Never commit certificates or keys to your repository. Always use:
+- CI/CD secrets (GitHub, GitLab)
+- Environment variables
+- Secure secret management
+
+### 3. Cache Dependencies
+
+For faster builds, ensure your `package.json` and `Podfile.lock` are committed to version control.
+
+### 4. Monitor Build Time
+
+Keep an eye on build duration to optimize costs:
+
+```bash
+# The CLI shows build time at the end
+Build succeeded in 6m 42s (13.4 billing minutes at 2× rate)
+```
+
+## Next Steps
+
+- [Android Builds](/docs/cli/cloud-build/android/) - Configure Android builds
+- [Troubleshooting](/docs/cli/cloud-build/troubleshooting/) - Common build issues
+- [CLI Reference](/docs/cli/reference/build/) - Full command documentation
+
+## Need Help?
+
+- [Troubleshooting Guide](/docs/cli/cloud-build/troubleshooting/)
+- [Discord Community](https://discord.com/invite/VnYRvBfgA6)
+- Email: support@capgo.app

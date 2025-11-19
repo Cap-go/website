@@ -1,0 +1,247 @@
+---
+title: Getting Started
+description: Create your first native build with Capgo Cloud Build
+sidebar:
+  order: 1
+---
+
+import { Steps, Card, CardGrid } from '@astrojs/starlight/components';
+
+Get started with Capgo Cloud Build and create your first iOS or Android native build in minutes.
+
+## What You'll Need
+
+Before you begin, ensure you have:
+
+- A Capacitor app that builds successfully locally
+- Node.js 20 or higher installed
+- A Capgo account with an active subscription
+- Your app already registered in Capgo (run `npx @capgo/cli@latest app add` if not)
+- **Build credentials configured** (certificates, keystores) - see below
+
+## Before Your First Build
+
+<CardGrid>
+  <Card title="⚠️ Setup Credentials First" icon="warning">
+    **Required before building:** You must configure your build credentials (certificates for iOS, keystores for Android).
+
+    [Setup Credentials →](/docs/cli/cloud-build/credentials/)
+  </Card>
+</CardGrid>
+
+## Quick Start
+
+<Steps>
+
+1. **Setup Build Credentials**
+
+   Before you can build, you need to save your credentials locally:
+
+   **For iOS:**
+   ```bash
+   npx @capgo/cli build credentials save \
+     --platform ios \
+     --certificate ./cert.p12 \
+     --p12-password "password" \
+     --provisioning-profile ./profile.mobileprovision \
+     --apple-key ./AuthKey.p8 \
+     --apple-key-id "KEY123" \
+     --apple-issuer-id "issuer-uuid" \
+     --apple-team-id "team-id"
+   ```
+
+   **For Android:**
+   ```bash
+   npx @capgo/cli build credentials save \
+     --platform android \
+     --keystore ./release.keystore \
+     --keystore-alias "my-key" \
+     --keystore-key-password "key-pass" \
+     --keystore-store-password "store-pass"
+   ```
+
+   See the [full credentials guide](/docs/cli/cloud-build/credentials/) for details.
+
+2. **Verify Local Build**
+
+   First, ensure your app builds locally without errors:
+
+   ```bash
+   # Build your web assets
+   npm run build
+
+   # Sync with Capacitor
+   npx cap sync
+
+   # Test local build (optional but recommended)
+   npx cap open ios    # For iOS
+   npx cap open android # For Android
+   ```
+
+3. **Authenticate with Capgo**
+
+   Set your Capgo API key (if not already configured):
+
+   ```bash
+   npx @capgo/cli@latest login
+   ```
+
+   Or set the environment variable:
+   ```bash
+   export CAPGO_TOKEN=your_api_key_here
+   ```
+
+4. **Run Your First Build**
+
+   Start with an Android debug build (fastest to test):
+
+   ```bash
+   npx @capgo/cli@latest build com.example.app \
+     --platform android \
+     --build-mode debug
+   ```
+
+   You'll see real-time logs as your build progresses:
+   ```
+   ✔ Creating build job...
+   ✔ Uploading project (15.2 MB)...
+   ✔ Build started
+
+   📝 Build logs:
+   → Installing dependencies...
+   → Running Gradle build...
+   → Signing APK...
+   ✔ Build succeeded in 3m 42s
+   ```
+
+5. **Check Build Status**
+
+   The CLI will automatically poll and display the build status. Once complete, you'll see:
+
+   - Build time
+   - Success/failure status
+   - App submitted to App Store/Play Store (if credentials configured)
+
+</Steps>
+
+## Understanding the Build Process
+
+When you run the build command, here's what happens:
+
+```mermaid
+graph LR
+    A[Your Machine] -->|1. Zip Project| B[Local Temp]
+    B -->|2. Upload| C[Capgo Cloud]
+    C -->|3. Build| D[Build Server]
+    D -->|4. Logs Stream| A
+    D -->|5. Cleanup| E[Auto Delete]
+```
+
+1. **Local Preparation** - Your project is zipped (excluding `node_modules` and dotfiles)
+2. **Upload** - The zip is uploaded to secure cloud storage (Cloudflare R2)
+3. **Build Execution** - Your app builds on dedicated infrastructure
+4. **Log Streaming** - Real-time logs stream to your terminal via Server-Sent Events
+5. **Automatic Cleanup** - Build artifacts are deleted (Android: instant, iOS: 24 hours)
+
+## Your First Production Build
+
+Once you've verified the process works, create a production build:
+
+### Android
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release
+```
+
+You'll need to configure signing credentials first. See [Android Build Configuration](/docs/cli/cloud-build/android/).
+
+### iOS
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode release
+```
+
+iOS builds require signing certificates and provisioning profiles. See [iOS Build Configuration](/docs/cli/cloud-build/ios/).
+
+## What Gets Built
+
+**Important:** Capgo Cloud Build only builds the **native parts** of your app (iOS and Android native code).
+
+You are responsible for:
+- Building your web assets (`npm run build`)
+- Running `npx cap sync` before the build
+- Ensuring all dependencies are in `package.json`
+
+We handle:
+- Native iOS compilation (Xcode, Fastlane)
+- Native Android compilation (Gradle)
+- Code signing
+- App store submission (if configured)
+
+## Build Time & Costs
+
+Build time is measured from start to completion:
+
+- **Android**: Typically 3-5 minutes (1× billing multiplier)
+- **iOS**: Typically 5-10 minutes (2× billing multiplier due to Mac hardware costs)
+
+You only pay for actual build time used. No hidden fees.
+
+## Common Use Cases
+
+### CI/CD Integration
+
+Add to your GitHub Actions workflow:
+
+```yaml
+- name: Build native app
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+  run: |
+    npm run build
+    npx cap sync
+    npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+      --platform both \
+      --build-mode release
+```
+
+### Local Development
+
+Test builds locally before committing:
+
+```bash
+# Quick debug build for testing
+npm run build && npx cap sync
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode debug
+```
+
+### Multi-Platform Builds
+
+Build for both platforms simultaneously:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform both \
+  --build-mode release
+```
+
+## Next Steps
+
+Now that you've created your first build:
+
+- [Configure iOS builds](/docs/cli/cloud-build/ios/) - Set up certificates and profiles
+- [Configure Android builds](/docs/cli/cloud-build/android/) - Set up keystores and Play Store
+- [Troubleshooting](/docs/cli/cloud-build/troubleshooting/) - Common issues and solutions
+- [CLI Reference](/docs/cli/reference/build/) - Complete command documentation
+
+## Need Help?
+
+- Check the [troubleshooting guide](/docs/cli/cloud-build/troubleshooting/)
+- Join our [Discord community](https://discord.com/invite/VnYRvBfgA6)
+- Email support at support@capgo.app
