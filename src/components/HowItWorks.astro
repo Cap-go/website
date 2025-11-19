@@ -1,6 +1,8 @@
 ---
 import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
 ---
 
 <section class="bg-[#090b11] py-24 sm:py-32">
@@ -183,13 +185,14 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
       </div>
     </div>
 
-    <div class="mt-16 flex justify-center">
+    <div class="mt-16 flex flex-col items-center gap-3">
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
         class="rounded-md bg-[#44BCFF] px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-[#3a9fd6] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
       >
         Try for free
       </a>
+      <p class="text-sm text-gray-500">{ctaSubtext}</p>
     </div>
   </div>
 </section>
