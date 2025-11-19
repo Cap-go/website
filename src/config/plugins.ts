@@ -41,6 +41,9 @@ import UserGroupIcon from 'astro-heroicons/mini/UserGroup.astro'
 import VideoCameraIcon from 'astro-heroicons/mini/VideoCamera.astro'
 import ChatBubbleOvalLeftIcon from 'astro-heroicons/mini/ChatBubbleOvalLeft.astro'
 import ShareIcon from 'astro-heroicons/mini/Share.astro'
+import PrinterIcon from 'astro-heroicons/mini/Printer.astro'
+import ArchiveBoxIcon from 'astro-heroicons/mini/ArchiveBox.astro'
+import WifiIcon from 'astro-heroicons/mini/Wifi.astro'
 
 export interface Action {
   icon?: any
@@ -599,5 +602,45 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-fast-sql/',
     title: 'Fast SQL',
     icon: CircleStackIcon,
+  },
+  {
+    name: '@capgo/capacitor-file-compressor',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for efficient image compression supporting PNG, JPEG, and WebP formats across iOS, Android, and Web platforms',
+    href: 'https://github.com/Cap-go/capacitor-file-compressor/',
+    title: 'File Compressor',
+    icon: PhotoIcon,
+  },
+  {
+    name: '@capgo/capacitor-speech-synthesis',
+    author: 'github.com/Cap-go',
+    description: 'Synthesize speech from text with full control over language, voice, pitch, rate, and volume.',
+    href: 'https://github.com/Cap-go/capacitor-speech-synthesis/',
+    title: 'Speech Synthesis',
+    icon: SpeakerWaveIcon,
+  },
+  {
+    name: '@capgo/capacitor-printer',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for printing documents, HTML, PDFs, images and web views',
+    href: 'https://github.com/Cap-go/capacitor-printer/',
+    title: 'Printer',
+    icon: PrinterIcon,
+  },
+  {
+    name: '@capgo/capacitor-zip',
+    author: 'github.com/Cap-go',
+    description: 'A free Capacitor plugin for zipping and unzipping files on iOS, Android, and Web.',
+    href: 'https://github.com/Cap-go/capacitor-zip/',
+    title: 'Zip',
+    icon: ArchiveBoxIcon,
+  },
+  {
+    name: '@capgo/capacitor-wifi',
+    author: 'github.com/Cap-go',
+    description: 'Manage WiFi connectivity for your Capacitor app',
+    href: 'https://github.com/Cap-go/capacitor-wifi/',
+    title: 'WiFi',
+    icon: WifiIcon,
   },
 ]

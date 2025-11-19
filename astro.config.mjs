@@ -337,6 +337,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'File Compressor',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/file-compressor/' },
+                { label: 'Getting started', link: '/docs/plugins/file-compressor/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Flash',
               items: [
                 { label: 'Overview', link: '/docs/plugins/flash/' },
@@ -554,6 +562,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Printer',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/printer/' },
+                { label: 'Getting started', link: '/docs/plugins/printer/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'RealtimeKit',
               items: [
                 { label: 'Overview', link: '/docs/plugins/realtimekit/' },
@@ -603,6 +619,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/speech-recognition/' },
                 { label: 'Getting started', link: '/docs/plugins/speech-recognition/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Speech Synthesis',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/speech-synthesis/' },
+                { label: 'Getting started', link: '/docs/plugins/speech-synthesis/getting-started' },
               ],
               collapsed: true,
             },
@@ -669,10 +693,26 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'WiFi',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/wifi/' },
+                { label: 'Getting started', link: '/docs/plugins/wifi/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'YouTube Player',
               items: [
                 { label: 'Overview', link: '/docs/plugins/youtube-player/' },
                 { label: 'Getting started', link: '/docs/plugins/youtube-player/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Zip',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/zip/' },
+                { label: 'Getting started', link: '/docs/plugins/zip/getting-started' },
               ],
               collapsed: true,
             },
