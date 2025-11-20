@@ -2,147 +2,118 @@
 import * as m from '@/paraglide/messages'
 ---
 
-<section class="relative bg-[#1a1a1a] py-24 sm:py-32">
-  <!-- Planet Background -->
-  <div class="absolute top-0 left-1/2 w-full max-w-[1200px] -translate-x-1/2">
-    <svg width="100%" height="100%" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M1198 599C1198 520.338 1182.51 442.447 1152.4 369.773C1122.3 297.099 1078.18 231.065 1022.56 175.443C966.935 119.821 900.901 75.6987 828.227 45.5962C755.553 15.4936 677.662 -3.43842e-06 599 0C520.338 3.43842e-06 442.447 15.4936 369.773 45.5962C297.099 75.6987 231.065 119.821 175.443 175.443C119.821 231.065 75.6987 297.099 45.5961 369.773C15.4936 442.447 -6.87683e-06 520.338 0 599L599 599H1198Z"
-        fill="url(#paint0_linear_1_23404)"></path>
-      <defs>
+<section class="relative overflow-hidden bg-[#1a1a1a] py-24 sm:py-32">
+  <!-- Background Gradient -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl opacity-80 pointer-events-none">
+    <svg width="1198" height="599" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+        <path d="M1198 599C1198 520.338 1182.51 442.447 1152.4 369.773C1122.3 297.099 1078.18 231.065 1022.56 175.443C966.935 119.821 900.901 75.6987 828.227 45.5962C755.553 15.4936 677.662 -3.43842e-06 599 0C520.338 3.43842e-06 442.447 15.4936 369.773 45.5962C297.099 75.6987 231.065 119.821 175.443 175.443C119.821 231.065 75.6987 297.099 45.5961 369.773C15.4936 442.447 -6.87683e-06 520.338 0 599L599 599H1198Z" fill="url(#paint0_linear_1_23404)"/>
+        <defs>
         <linearGradient id="paint0_linear_1_23404" x1="599" y1="-225" x2="599" y2="447" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#5273EB"></stop>
-          <stop offset="1" stop-color="#1D1E22" stop-opacity="0"></stop>
+        <stop stop-color="#5273EB"/>
+        <stop offset="1" stop-color="#1D1E22" stop-opacity="0"/>
         </linearGradient>
-      </defs>
+        </defs>
     </svg>
   </div>
 
-  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
     <!-- Header -->
-    <div class="mb-20 text-center">
-      <div class="mb-6 inline-flex items-center gap-2 font-mono text-sm tracking-wider text-blue-500">
-        {m.problem_solution_badge({}, { locale: Astro.locals.locale })}
-      </div>
-
-      <h2 class="mb-6 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
-        {m.problem_solution_title({}, { locale: Astro.locals.locale })}<br />
-        {m.your({}, { locale: Astro.locals.locale })}
-        <span class="underline decoration-gray-600 decoration-2 underline-offset-8">{m.problem_solution_velocity({}, { locale: Astro.locals.locale })}</span>.
-      </h2>
-
-      <p class="mx-auto max-w-2xl text-lg leading-relaxed text-gray-400 md:text-xl">
-        {m.problem_solution_subtitle({}, { locale: Astro.locals.locale })}
+    <div class="mx-auto max-w-2xl text-center mb-16">
+      <h2 class="text-sm font-semibold leading-7 text-[#44BCFF] uppercase tracking-wide">Problem &rarr; Solution</h2>
+      <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-5xl">
+        The App Store is killing<br />your <span class="underline decoration-[#44BCFF] underline-offset-4">velocity</span>.
+      </p>
+      <p class="mt-6 text-lg leading-8 text-gray-400">
+        Capacitor apps should ship like web apps, but waiting days<br />for approval is the bottleneck.
       </p>
     </div>
 
-    <!-- Comparison Cards -->
-    <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
       <!-- Problem Card -->
-      <div class="group relative">
-        <div class="relative flex h-full flex-col rounded-[1.9rem] border border-red-500/30 bg-[#0c0e12]/30 p-6 sm:p-8">
-          <!-- Status Icon -->
-          <div class="absolute -top-5 left-1/2 z-10 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border border-red-500/30 bg-red-500">
-            <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      <div class="relative rounded-3xl border border-red-500/30 bg-[#111] p-8">
+        <!-- Red Cross Icon -->
+        <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-red-500 ring-4 ring-[#0B0C10]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
-          </div>
+        </div>
 
-          <!-- Timeline -->
-          <div class="mb-8 flex flex-wrap items-center justify-center gap-2 font-mono text-xs sm:mb-12">
-            <div class="rounded bg-gray-800 px-2 py-1 text-gray-400">{m.timeline_dev({}, { locale: Astro.locals.locale })}</div>
-            <div class="rounded bg-gray-800 px-2 py-1 text-gray-400">{m.timeline_build({}, { locale: Astro.locals.locale })}</div>
-            <div class="flex items-center gap-1 rounded bg-gray-800 px-2 py-1 text-gray-400">
-              <span class="h-2 w-2 rounded-full bg-blue-500"></span>{m.timeline_submit({}, { locale: Astro.locals.locale })}
-            </div>
-            <div class="flex items-center gap-1 rounded bg-gray-800 px-2 py-1 text-gray-400">
-              <span class="h-2 w-2 rounded-full bg-blue-500"></span>{m.timeline_review({}, { locale: Astro.locals.locale })}
-            </div>
-            <div class="flex items-center gap-1 rounded bg-gray-800 px-2 py-1 text-green-400">
-              <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg
-              >{m.timeline_live({}, { locale: Astro.locals.locale })}
-            </div>
-          </div>
+        <!-- Timeline -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12 mt-4">
+            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-gray-300 border border-gray-700">/👷dev</span>
+            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-gray-300 border border-gray-700">/📦build</span>
+            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-blue-300 border border-blue-900/50">/🚢submit</span>
+            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-blue-300 border border-blue-900/50">/👮review</span>
+            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-green-400 border border-green-900/50">/✅live</span>
+        </div>
 
-          <!-- Chat Interface -->
-          <div class="flex-1 space-y-6 font-sans">
-            <!-- Incoming Message -->
+        <!-- Chat -->
+        <div class="space-y-6 font-sans text-sm">
+            <!-- Left Message -->
             <div class="flex gap-3">
-              <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">A</div>
-              <div class="rounded-2xl rounded-tl-none bg-[#1c1f26] px-4 py-2.5 text-sm text-gray-300">
-                {m.problem_chat_whats_status({}, { locale: Astro.locals.locale })}
-              </div>
+                <div class="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-400 font-bold">A</div>
+                <div class="rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+                    whats the app status?
+                </div>
             </div>
 
-            <!-- Outgoing Message -->
+            <!-- Right Message -->
             <div class="flex flex-col items-end gap-2">
-              <div class="rounded-2xl rounded-tr-none bg-red-500/90 px-4 py-2.5 text-sm text-white shadow-lg shadow-red-900/20">
-                {m.problem_chat_still_pending({}, { locale: Astro.locals.locale })}
-              </div>
-              <div class="rounded-2xl rounded-tr-none bg-red-500/90 px-4 py-2.5 text-sm text-white shadow-lg shadow-red-900/20">
-                {m.problem_chat_hope_approved({}, { locale: Astro.locals.locale })}
-              </div>
+                <div class="rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
+                    Still pending...
+                </div>
+                <div class="rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
+                    I hope this bug fix get<br/>approved today...
+                </div>
+                 <div class="flex justify-end mt-1">
+                    <div class="h-6 w-6 rounded-full bg-[#D34545]/20 flex items-center justify-center text-sm">
+                        🤬
+                    </div>
+                </div>
             </div>
-
-            <!-- Reaction -->
-            <div class="flex justify-end">
-              <div class="flex h-6 w-6 items-center justify-center rounded-full bg-red-500/20">
-                <span class="text-xs">😟</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
       <!-- Solution Card -->
-      <div class="group relative">
-        <div class="relative flex h-full flex-col rounded-[1.9rem] border border-blue-500/30 bg-[#0c0e12]/30 p-6 sm:p-8">
-          <!-- Status Icon -->
-          <div class="absolute -top-5 left-1/2 z-10 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-            <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      <div class="relative rounded-3xl border border-blue-500/30 bg-[#111] p-8">
+        <!-- Blue Check Icon -->
+        <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 ring-4 ring-[#0B0C10]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
-          </div>
+        </div>
 
-          <!-- Timeline -->
-          <div class="mb-8 flex flex-wrap items-center justify-center gap-2 font-mono text-xs sm:mb-12">
-            <div class="rounded bg-gray-800 px-2 py-1 text-gray-400">{m.timeline_dev({}, { locale: Astro.locals.locale })}</div>
-            <div class="rounded bg-gray-800 px-2 py-1 text-gray-400">{m.timeline_build({}, { locale: Astro.locals.locale })}</div>
-            <div class="flex items-center gap-1 rounded bg-gray-800 px-2 py-1 text-green-400">
-              <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg
-              >{m.timeline_live({}, { locale: Astro.locals.locale })}
-            </div>
-          </div>
+        <!-- Timeline -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12 mt-4">
+            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-gray-300 border border-gray-700">/👷dev</span>
+            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-gray-300 border border-gray-700">/📦build</span>
+            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-green-400 border border-green-900/50">/✅live</span>
+        </div>
 
-          <!-- Chat Interface -->
-          <div class="flex-1 space-y-6 font-sans">
-            <!-- Incoming Message -->
+        <!-- Chat -->
+        <div class="space-y-6 font-sans text-sm">
+            <!-- Left Message -->
             <div class="flex gap-3">
-              <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-xs font-bold text-gray-400">A</div>
-              <div class="rounded-2xl rounded-tl-none bg-blue-500 px-4 py-2.5 text-sm text-white shadow-lg shadow-blue-900/20">
-                {m.solution_chat_whats_status({}, { locale: Astro.locals.locale })}
-              </div>
+                <div class="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-400 font-bold">A</div>
+                <div class="rounded-2xl rounded-tl-none bg-[#3B82F6] px-4 py-2 text-white">
+                    whats the app status?
+                </div>
             </div>
 
-            <!-- Outgoing Message -->
+            <!-- Right Message -->
             <div class="flex flex-col items-end gap-2">
-              <div class="rounded-2xl rounded-tr-none bg-blue-500 px-4 py-2.5 text-sm text-white shadow-lg shadow-blue-900/20">
-                {m.solution_chat_shipped({}, { locale: Astro.locals.locale })}
-              </div>
-              <div class="rounded-2xl rounded-tr-none bg-blue-500 px-4 py-2.5 text-sm text-white shadow-lg shadow-blue-900/20">
-                {m.solution_chat_users_have_it({}, { locale: Astro.locals.locale })}
-              </div>
+                <div class="rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+                    Shipped. Next.
+                </div>
+                <div class="rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+                    My users already have it. 🚀
+                </div>
+                 <div class="flex justify-end mt-1">
+                    <div class="h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center text-sm">
+                        😍
+                    </div>
+                </div>
             </div>
-
-            <!-- Reaction -->
-            <div class="flex justify-end">
-              <div class="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20">
-                <span class="text-xs">😃</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
