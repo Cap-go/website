@@ -49,6 +49,47 @@ You'll need one of these certificate types depending on your build:
 | **Ad Hoc** | Apple Distribution | Ad Hoc Profile |
 | **App Store** | Apple Distribution | App Store Profile |
 
+#### How to Get iOS Certificates and Provisioning Profiles
+
+<Aside type="tip">
+For detailed step-by-step guides with screenshots, visit:
+- [iOS Certificates Guide](https://capawesome.io/cloud/native-builds/certificates/ios/)
+- [Blog: Automatic iOS Builds with GitHub Actions](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
+</Aside>
+
+**Quick Overview:**
+
+<Steps>
+
+1. **Create a Certificate Signing Request (CSR)**
+   - Open Keychain Access on your Mac
+   - Go to Keychain Access → Certificate Assistant → Request a Certificate from a Certificate Authority
+   - Enter your email and name, select "Saved to disk"
+   - Save the `.certSigningRequest` file
+
+2. **Generate Certificate in Apple Developer Portal**
+   - Go to [Apple Developer Certificates](https://developer.apple.com/account/resources/certificates)
+   - Click "+" to create a new certificate
+   - Choose certificate type (iOS Distribution for App Store builds)
+   - Upload your CSR file
+   - Download the certificate (`.cer` file)
+
+3. **Export Certificate as .p12**
+   - Double-click the downloaded `.cer` file to add it to Keychain
+   - In Keychain Access, find your certificate under "My Certificates"
+   - Right-click → Export "Apple Distribution..."
+   - Save as `.p12` format and set a password (save this password!)
+
+4. **Create Provisioning Profile**
+   - Go to [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles)
+   - Click "+" to create a new profile
+   - Choose profile type (App Store for production builds)
+   - Select your App ID
+   - Select the certificate you just created
+   - Download the `.mobileprovision` file
+
+</Steps>
+
 ### 3. App Store Connect API Key (Recommended)
 
 For automatic TestFlight submission, create an API key:
@@ -62,6 +103,10 @@ For automatic TestFlight submission, create an API key:
 5. Note the **Key ID** and **Issuer ID**
 
 </Steps>
+
+<Aside type="note">
+You can also find your **Team ID** in your Apple Developer account under Membership details.
+</Aside>
 
 ## Build Configuration
 

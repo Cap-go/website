@@ -50,6 +50,12 @@ For release builds, you need a signing keystore:
 
 ## Creating a Keystore
 
+<Aside type="tip">
+For detailed step-by-step guides with screenshots, visit:
+- [Android Certificates Guide](https://capawesome.io/cloud/native-builds/certificates/android/)
+- [Blog: Automatic Android Builds with GitHub Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+</Aside>
+
 If you don't have a keystore yet, create one:
 
 ```bash
@@ -70,6 +76,23 @@ Answer the prompts:
 <Aside type="caution">
 **Important**: Keep your keystore file and passwords secure! If you lose them, you cannot update your app on the Play Store.
 </Aside>
+
+### Understanding Keystore Components
+
+When creating a keystore, you'll need to remember:
+
+1. **Keystore Password** (`KEYSTORE_STORE_PASSWORD`): The password for the keystore file itself
+2. **Key Alias** (`KEYSTORE_KEY_ALIAS`): The name/identifier for your signing key within the keystore
+3. **Key Password** (`KEYSTORE_KEY_PASSWORD`): The password for the specific key (can be the same as store password)
+
+**Example workflow:**
+```bash
+# List aliases in your keystore to verify
+keytool -list -keystore my-release-key.keystore
+
+# View detailed information about your key
+keytool -list -v -keystore my-release-key.keystore -alias my-key-alias
+```
 
 ## Build Configuration
 
@@ -104,20 +127,51 @@ The base64 string is now in your clipboard.
 
 ### Play Store Service Account Setup
 
-To enable automatic Play Store uploads:
+To enable automatic Play Store uploads, you need to create a Google Cloud service account with proper permissions.
+
+<Aside type="tip">
+For detailed instructions with screenshots, see the [Android Certificates Guide](https://capawesome.io/cloud/native-builds/certificates/android/).
+</Aside>
 
 <Steps>
 
-1. Go to [Google Play Console](https://play.google.com/console) → Setup → API Access
-2. Click "Create new service account"
-3. Follow the link to Google Cloud Console
-4. Create a service account with "Service Account User" role
-5. Create a JSON key for the service account
-6. Download the JSON file
-7. Go back to Play Console and grant access to the service account
-8. Give it "Release to production, exclude devices, and use Play App Signing" permissions
+1. **Create Service Account in Google Cloud**
+   - Go to [Google Play Console](https://play.google.com/console) → Setup → API Access
+   - Click "Create new service account"
+   - Follow the link to Google Cloud Console
+   - Click "Create Service Account"
+   - Enter a name (e.g., "Capgo CI/CD")
+   - Grant the "Service Account User" role
+   - Click "Done"
+
+2. **Create JSON Key**
+   - In Google Cloud Console, find your service account
+   - Click on the service account email
+   - Go to "Keys" tab
+   - Click "Add Key" → "Create new key"
+   - Choose "JSON" format
+   - Download the JSON file (keep it secure!)
+
+3. **Grant Permissions in Play Console**
+   - Go back to Google Play Console → Setup → API Access
+   - Find your service account in the list
+   - Click "Grant access"
+   - Under "App permissions", select your app
+   - Under "Account permissions", grant:
+     - **Releases**: "View app information and download bulk reports (read-only)"
+     - **Releases**: "Create, edit, and delete draft releases"
+     - **Releases**: "Release to production, exclude devices, and use Play App Signing"
+   - Click "Invite user"
+
+4. **Accept the Invitation**
+   - The service account will receive an invitation email
+   - Accept the invitation to activate the permissions
 
 </Steps>
+
+<Aside type="caution">
+The service account JSON file contains sensitive credentials. Never commit it to version control or share it publicly.
+</Aside>
 
 ## Building for Android
 
