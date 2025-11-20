@@ -20,18 +20,18 @@ const features = [
 ]
 ---
 
-<section class="relative bg-gray-900 py-20 sm:py-24 lg:py-32">
+<section class="relative bg-[#1a1a1a] py-20 sm:py-24 lg:py-32">
   <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <!-- Header Section -->
     <div class="mb-20 text-center">
       <!-- Badge -->
       <div class="mb-8 inline-flex items-center rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-blue-400">
-        HOW IT WORKS
+        {m.orgs_badge({}, { locale: Astro.locals.locale })}
       </div>
 
       <!-- Main Heading -->
       <h2 class="mb-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-        Flexible Management<br />for Your Team
+        {m.orgs_title({}, { locale: Astro.locals.locale })}<br />{m.orgs_title_line2({}, { locale: Astro.locals.locale })}
       </h2>
 
       <!-- Subtitle -->
@@ -171,7 +171,7 @@ const features = [
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
         class="inline-flex items-center justify-center rounded-xl bg-[#5B7FE8] px-12 py-4 text-lg font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 hover:bg-[#4a6ed4] hover:shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#1a1a1a]"
       >
-        Install Capgo
+{m.orgs_cta({}, { locale: Astro.locals.locale })}
       </a>
     </div>
   </div>

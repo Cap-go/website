@@ -1,0 +1,201 @@
+---
+import * as m from '@/paraglide/messages'
+import { shortNumber } from '@/services/misc'
+import dayjs from 'dayjs'
+
+const config = Astro.locals.runtimeConfig
+
+const stats = {
+  stars: shortNumber(645),
+  apps: shortNumber(1400),
+  updates: shortNumber(947593631),
+}
+
+const tmp = await fetch(`${config.public.baseApiUrl}/private/website_stats`)
+if (tmp.ok) {
+  const res = await tmp.json()
+  if (res) {
+    if (res.apps) stats.apps = shortNumber(res.apps)
+    if (res.updates) stats.updates = shortNumber(res.updates)
+    if (res.stars) stats.stars = shortNumber(res.stars)
+  }
+}
+---
+
+<section class="relative overflow-hidden bg-[#1a1a1a] py-24 sm:py-32">
+  <!-- Background Glow -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- Planet Background -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px]">
+      <svg width="100%" height="100%" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1198 599C1198 520.338 1182.51 442.447 1152.4 369.773C1122.3 297.099 1078.18 231.065 1022.56 175.443C966.935 119.821 900.901 75.6987 828.227 45.5962C755.553 15.4936 677.662 -3.43842e-06 599 0C520.338 3.43842e-06 442.447 15.4936 369.773 45.5962C297.099 75.6987 231.065 119.821 175.443 175.443C119.821 231.065 75.6987 297.099 45.5961 369.773C15.4936 442.447 -6.87683e-06 520.338 0 599L599 599H1198Z" fill="url(#paint0_linear_1_23404)"/>
+        <defs>
+          <linearGradient id="paint0_linear_1_23404" x1="599" y1="-225" x2="599" y2="447" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#5273EB"/>
+            <stop offset="1" stop-color="#1D1E22" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <!-- Fade to bottom -->
+
+  </div>
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Header Section -->
+    <div class="mb-20 text-center">
+      <div class="mb-6 flex items-center justify-center gap-2 text-sm font-medium tracking-wider text-blue-400">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        {m.last_update({}, { locale: Astro.locals.locale }).toUpperCase()}: {dayjs().format('MMMM DD, YYYY').toUpperCase()}
+      </div>
+
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+        {m.apps_with_20m_users({}, { locale: Astro.locals.locale })}
+        <br />
+        {m.use_capgo({}, { locale: Astro.locals.locale })}
+      </h2>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-gray-400">
+        {m.our_numbers_are_shared_transparently_since_december_2021({}, { locale: Astro.locals.locale })}
+      </p>
+    </div>
+
+    <!-- Top Row: 3 Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <!-- Updates Delivered -->
+      <div class="group relative bg-gradient-to-br from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm rounded-3xl border border-white/10 p-8 overflow-hidden hover:border-white/20 transition-all duration-300">
+        <!-- Visual Area -->
+        <div class="h-44 mb-6 relative flex items-center justify-center">
+          <img src="/planet_updates.svg" alt="World Map Glow" class="absolute inset-0 w-full h-full object-cover opacity-90" />
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10">
+          <div class="mb-3">
+            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="text-5xl font-bold text-white mb-2">{stats.updates}</div>
+          <div class="text-base font-semibold text-white mb-1">{m.updates_delivered({}, { locale: Astro.locals.locale })}</div>
+          <div class="text-sm text-gray-400">{m.all_around_the_globe({}, { locale: Astro.locals.locale })}</div>
+        </div>
+      </div>
+
+      <!-- Apps -->
+      <div class="group relative bg-gradient-to-br from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm rounded-3xl border border-white/10 p-8 overflow-hidden hover:border-white/20 transition-all duration-300">
+        <!-- Visual Area -->
+        <div class="h-44 mb-6 relative flex items-center justify-center">
+           <img src="/logo_apps.svg" alt="customers logos" class="w-full h-full object-contain" />
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10">
+          <div class="mb-3">
+            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+          </div>
+          <div class="text-5xl font-bold text-white mb-2">{stats.apps}</div>
+          <div class="text-base font-semibold text-white mb-1">{m.apps({}, { locale: Astro.locals.locale })}</div>
+          <div class="text-sm text-gray-400">{m.using_us_in_production({}, { locale: Astro.locals.locale })}</div>
+        </div>
+      </div>
+
+      <!-- GitHub Stars -->
+      <div class="group relative bg-gradient-to-br from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm rounded-3xl border border-white/10 p-8 overflow-hidden hover:border-white/20 transition-all duration-300">
+        <!-- Visual Area -->
+        <div class="h-44 mb-6 relative flex items-center justify-center">
+          <div class="relative w-full h-full flex items-center justify-center">
+            <img src="/github_glow.svg" alt="GitHub Logo" class="w-auto h-full max-h-44 object-contain" />
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10">
+          <div class="mb-3">
+            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+          </div>
+          <div class="text-5xl font-bold text-white mb-2">
+             <a href="https://github.com/Cap-go/capacitor-updater" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">
+              {stats.stars}
+             </a>
+          </div>
+          <div class="text-base font-semibold text-white mb-1">{m.stars_in_github({}, { locale: Astro.locals.locale })}</div>
+          <div class="text-sm text-gray-400">{m.shared_numbers_opensource({}, { locale: Astro.locals.locale })}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: 2 Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Active Users & Success Rate -->
+      <div class="group relative bg-gradient-to-br from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm rounded-3xl border border-white/10 p-8 overflow-hidden hover:border-white/20 transition-all duration-300">
+        <!-- Visual Area -->
+        <div class="h-48 mb-6 relative flex items-center justify-center">
+          <img src="/updates_nbar.svg" alt="Active Users Chart" class="absolute inset-0 w-full h-full object-cover opacity-90" />
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10">
+          <div class="mb-4">
+            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <div class="text-5xl font-bold text-white mb-2">95%</div>
+              <div class="text-sm font-semibold text-white mb-1">{m.active_users_up_to_date({}, { locale: Astro.locals.locale })}</div>
+              <div class="text-xs text-gray-400">{m.shared_numbers_uptodate_24h({}, { locale: Astro.locals.locale })}</div>
+            </div>
+            <div>
+              <div class="text-5xl font-bold text-white mb-2">82%</div>
+              <div class="text-sm font-semibold text-white mb-1">{m.worldwide_success_rate({}, { locale: Astro.locals.locale })}</div>
+              <div class="text-xs text-gray-400">{m.shared_numbers_success_rate_desc({}, { locale: Astro.locals.locale })}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Speed & API Response -->
+      <div class="group relative bg-gradient-to-br from-[#1a1d24]/90 to-[#14161b]/90 backdrop-blur-sm rounded-3xl border border-white/10 p-8 overflow-hidden hover:border-white/20 transition-all duration-300">
+        <!-- Visual Area -->
+        <div class="h-48 mb-6 relative flex items-center justify-center overflow-hidden">
+           <div class="relative flex items-center justify-center w-full h-full">
+            <img src="/speed_card.svg" alt="Speed Card" class="w-full h-full object-contain" />
+           </div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-10">
+          <div class="mb-4">
+            <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="grid grid-cols-2 gap-12">
+            <div>
+              <div class="text-5xl font-bold text-white mb-2">
+                 <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">114ms</a>
+              </div>
+              <div class="text-sm font-semibold text-white mb-1">{m.shared_numbers_speed({}, { locale: Astro.locals.locale })}</div>
+              <div class="text-xs text-gray-400">{m.download_time_globally({}, { locale: Astro.locals.locale })}</div>
+            </div>
+            <div>
+              <div class="text-5xl font-bold text-white mb-2">
+                 <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">57ms</a>
+              </div>
+              <div class="text-sm font-semibold text-white mb-1">{m.shared_numbers_api_response({}, { locale: Astro.locals.locale })}</div>
+              <div class="text-xs text-gray-400">{m.home_avg_latency({}, { locale: Astro.locals.locale })}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

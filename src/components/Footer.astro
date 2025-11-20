@@ -6,6 +6,21 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 const brand = Astro.locals.runtimeConfig.public.brand
 const year = new Date().getFullYear()
 
+// Map locale codes to flag emojis
+const localeFlags: Record<string, string> = {
+  de: '🇩🇪',
+  en: '🇺🇸',
+  es: '🇪🇸',
+  fr: '🇫🇷',
+  id: '🇮🇩',
+  it: '🇮🇹',
+  ja: '🇯🇵',
+  ko: '🇰🇷',
+  zh: '🇨🇳',
+}
+
+const currentFlag = localeFlags[Astro.locals.locale] || '🇺🇸'
+
 interface NavigationItem {
   name: string | (() => string)
   href: string
@@ -240,7 +255,7 @@ const navigation: Record<string, NavigationItem[]> = {
             <!-- Language Selector -->
             <div class="relative">
                 <button type="button" id="language-dropdown-button" class="flex items-center text-sm text-zinc-400 hover:text-white focus:outline-none">
-                    <span class="mr-2">🇺🇸</span> {Astro.locals.locale.toUpperCase()} <span class="ml-1">▼</span>
+                    <span class="mr-2">{currentFlag}</span> {Astro.locals.locale.toUpperCase()} <span class="ml-1">▼</span>
                 </button>
                  <div id="language-dropdown" class="absolute bottom-full left-0 mb-2 hidden w-32 rounded-md bg-[#1c1c1f] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                     <div class="py-1">

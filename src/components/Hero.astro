@@ -1,0 +1,242 @@
+---
+import * as m from '@/paraglide/messages'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+
+const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
+
+---
+<section>
+  <div class="relative pt-16 sm:pt-24 lg:pt-32 overflow-hidden">
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Background Grid of Squares -->
+      <div class="absolute inset-0 pointer-events-none hidden lg:flex flex-col gap-4 p-8 select-none opacity-90 justify-center">
+        
+        <!-- Row 1 -->
+        <div class="grid grid-cols-12 gap-4 w-full">
+            <!-- Left -->
+            <div class="col-start-2 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+            <!-- Right -->
+            <div class="col-start-11 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="grid grid-cols-12 gap-4 w-full">
+            <!-- Left -->
+            <div class="col-start-1 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm -translate-x-12"></div>
+            <div class="col-start-2 w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm p-4 flex items-center justify-center -translate-x-12">
+                <img src="/kick_logo.svg" alt="Kick" class="max-w-full max-h-full object-contain opacity-100" />
+            </div>
+            <div class="col-start-3 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm -translate-x-12"></div>
+            
+            <!-- Right -->
+            <div class="col-start-10 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm translate-x-12"></div>
+            <div class="col-start-11 w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm p-4 flex items-center justify-center translate-x-12">
+                <img src="/suez_logo.svg" alt="Suez" class="max-w-full max-h-full object-contain opacity-100" />
+            </div>
+            <div class="col-start-12 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm translate-x-12"></div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="grid grid-cols-12 gap-4 w-full">
+            <!-- Left -->
+            <div class="col-start-2 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+            <div class="col-start-3 w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm p-4 flex items-center justify-center">
+                <img src="/revel_logo_1.svg" alt="Revel" class="max-w-full max-h-full object-contain opacity-100" />
+            </div>
+            
+            <!-- Right -->
+            <div class="col-start-10 w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm p-4 flex items-center justify-center">
+                <img src="/pizza_hut_logo.svg" alt="Pizza Hut" class="max-w-full max-h-full object-contain opacity-100" />
+            </div>
+            <div class="col-start-11 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="grid grid-cols-12 gap-4 w-full">
+            <!-- Left -->
+            <div class="col-start-1 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm -translate-x-12"></div>
+            <div class="col-start-2 w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm p-4 flex items-center justify-center -translate-x-12">
+                <img src="/ourliving_logo.webp" alt="OurLiving" class="max-w-full max-h-full object-contain opacity-100" />
+            </div>
+            <div class="col-start-3 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm -translate-x-12"></div>
+
+            <!-- Right -->
+            <div class="col-start-10 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm translate-x-12"></div>
+            <div class="col-start-11 w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm p-4 flex items-center justify-center translate-x-12">
+                <img src="/remnote_logo_1.svg" alt="RemNote" class="max-w-full max-h-full object-contain opacity-100" />
+            </div>
+            <div class="col-start-12 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm translate-x-12"></div>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="grid grid-cols-12 gap-4 w-full">
+            <!-- Left -->
+            <div class="col-start-2 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+            <div class="col-start-3 w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm p-4 flex items-center justify-center">
+                <img src="/vella_logo_1.svg" alt="Vella" class="max-w-full max-h-full object-contain opacity-100" />
+            </div>
+
+            <!-- Right -->
+            <div class="col-start-10 w-16 h-16 rounded-2xl border border-white/10 bg-[#1a1d24]/80 backdrop-blur-sm p-4 flex items-center justify-center">
+                <img src="/irec.png" alt="IREC" class="max-w-full max-h-full object-contain opacity-100" />
+            </div>
+            <div class="col-start-11 w-16 h-16 rounded-2xl border border-white/5 bg-[#1a1d24]/30 backdrop-blur-sm"></div>
+        </div>
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-4xl text-center">
+        <h1 class="font-pj text-4xl leading-tight font-bold tracking-tight sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight xl:text-7xl">
+          {m.instant_updates_for_your({}, { locale: Astro.locals.locale })}
+          <br />
+          <span class="text-azure-500">&lt;CapacitorJS app/&gt;</span>
+        </h1>
+        <p class="font-inter mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400 sm:text-xl">
+          {m.hero_subtitle_part1({}, { locale: Astro.locals.locale })} {m.hero_subtitle_part2({}, { locale: Astro.locals.locale })}<br />{m.hero_subtitle_line2({}, { locale: Astro.locals.locale })}
+        </p>
+        <div class="mt-10 flex flex-col items-center gap-3">
+          <div class="group relative inline-flex">
+            <div
+              class="transitiona-all animate-tilt absolute -inset-px rounded-xl bg-[#44BCFF] opacity-70 blur-lg duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200"
+            >
+            </div>
+            <a
+              href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+              class="font-pj relative z-10 inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition-all duration-200 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            >
+              {m.cta_start_free({}, { locale: Astro.locals.locale })}
+            </a>
+          </div>
+          <p class="font-inter text-sm leading-6 text-gray-400">{ctaSubtext}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Features Bar -->
+  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-36 sm:py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Single Horizontal Bar with Features and Stats -->
+      <div class="mx-auto max-w-6xl">
+        <div class="rounded-3xl border border-white/10 bg-linear-to-br from-[#1a1d24]/50 to-[#14161b]/50 backdrop-blur-sm">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start my-6">
+            <!-- Instant Updates -->
+            <div class="flex flex-col items-center text-center gap-4">
+              <div class="shrink-0">
+                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
+                  <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-2">{m.instant_updates({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">{m.reach_users_now_not_weeks_later({}, { locale: Astro.locals.locale })}</p>
+              </div>
+            </div>
+
+            <!-- App Store Compliant -->
+            <div class="flex flex-col items-center text-center gap-4">
+              <div class="shrink-0">
+                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
+                  <div class="flex gap-2">
+                    <svg class="h-6 w-6 text-gray-400" fill="currentColor" viewBox="0 0 384 512">
+                      <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                    </svg>
+                    <svg class="h-6 w-6 text-gray-400" fill="currentColor" viewBox="0 0 488 512">
+                      <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-2">{m.app_store_compliant({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">{m.compliant_with_apple_and_android_requirements({}, { locale: Astro.locals.locale })}</p>
+              </div>
+            </div>
+
+            <!-- End-to-end Encryption -->
+            <div class="flex flex-col items-center text-center gap-4">
+              <div class="shrink-0">
+                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
+                  <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-white mb-2">{m.end_to_end_encryption({}, { locale: Astro.locals.locale })}</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">{m.only_your_users_can_decrypt_your_updates_no_one_else({}, { locale: Astro.locals.locale })}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- Stats Bar -->
+          <div class="pt-8">
+            <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-sm">
+              <!-- Trusted by Companies -->
+              <div class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                </svg>
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-400">{m.companies_logo_stat_companies_label({}, { locale: Astro.locals.locale })}</span>
+                  <span class="font-semibold text-white">{m.companies_logo_stat_companies_value({}, { locale: Astro.locals.locale })}</span>
+                </div>
+              </div>
+
+              <!-- Devices Tracked -->
+              <div class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-400">{m.companies_logo_stat_devices_label({}, { locale: Astro.locals.locale })}</span>
+                  <span class="font-semibold text-white">{m.companies_logo_stat_devices_value({}, { locale: Astro.locals.locale })}</span>
+                </div>
+              </div>
+
+              <!-- Uptime -->
+              <div class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-400">{m.companies_logo_stat_uptime_label({}, { locale: Astro.locals.locale })}</span>
+                  <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-blue-400 transition-colors">
+                    {m.companies_logo_stat_uptime_value({}, { locale: Astro.locals.locale })}
+                  </a>
+                </div>
+              </div>
+
+              <!-- Update Adoption -->
+              <div class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <div class="flex items-center gap-1">
+                  <span class="text-gray-400">{m.active_users_up_to_date({}, { locale: Astro.locals.locale })}</span>
+                  <span class="font-semibold text-white">95%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-center my-6 gap-8 text-sm text-slate-500">
+            <div class="flex flex-col items-center gap-1">
+              <img loading="lazy" src="/soc2.svg" alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })} class="h-10 w-auto opacity-90 hover:opacity-80 transition-opacity" />
+              <span class="text-xs font-semibold text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+              <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-10 w-autoo opacity-90 hover:opacity-80 transition-opacity" />
+              <span class="text-xs font-semibold text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+              <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-10 w-autoo opacity-90 hover:opacity-80 transition-opacity" />
+              <span class="text-xs font-semibold text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
+            </div>
+          </div>
+      </div>
+
+      <!-- Old Stats Bar Removed -->
+    </div>
+  </div>
+</section>
