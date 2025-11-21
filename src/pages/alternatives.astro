@@ -1,0 +1,337 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import * as m from '@/paraglide/messages'
+
+const locale = Astro.locals.locale
+const title = "Capgo Alternatives – An Honest Comparison"
+const description = "Looking for Capacitor live update solutions? Here is an honest, transparent comparison of Capgo vs the alternatives. No BS, just real talk about what makes each platform different."
+
+const content = {
+  title,
+  description,
+  image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
+}
+
+const alternatives = [
+  {
+    name: 'Ionic Appflow',
+    url: getRelativeLocaleUrl(locale, 'ionic-appflow'),
+    status: 'Shutting down Dec 31, 2027',
+    pricing: 'From $499/month',
+  },
+  {
+    name: 'Microsoft CodePush',
+    url: '#codepush',
+    status: 'Deprecated',
+    pricing: 'Free (but unmaintained)',
+  },
+  {
+    name: 'Capawesome Cloud',
+    url: getRelativeLocaleUrl(locale, 'capwesome'),
+    status: 'Active',
+    pricing: 'From €9/month',
+  },
+]
+---
+
+<Layout content={content}>
+  <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <!-- Hero Section -->
+    <div class="mb-16 text-center">
+      <h1 class="mb-4 text-4xl font-bold tracking-tight text-gray-100 sm:text-5xl">
+        Capgo Alternatives
+      </h1>
+      <p class="mx-auto max-w-2xl text-xl text-gray-300">
+        Let's be honest: comparison pages are kinda silly. But here's an actually transparent look at your options.
+      </p>
+    </div>
+
+    <!-- Why This Page Exists -->
+    <div class="mb-16 rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+      <h2 class="mb-4 text-2xl font-semibold text-gray-100">
+        Why this page exists
+      </h2>
+      <div class="space-y-4 text-gray-300">
+        <p>
+          Look, we could make a fancy table showing how Capgo crushes every competitor on every metric. That's what everyone does. But it's BS, and you know it.
+        </p>
+        <p>
+          The truth? All the live update platforms do pretty much the same thing now: push JavaScript updates to your Capacitor apps. API? We all have one. Channels? Yep. Rollbacks? Sure.
+        </p>
+        <p>
+          So what actually matters? Let's talk about that instead.
+        </p>
+      </div>
+    </div>
+
+    <!-- What Makes Us Different -->
+    <div class="mb-16">
+      <h2 class="mb-8 text-3xl font-bold text-gray-100">
+        What actually makes Capgo different
+      </h2>
+
+      <div class="space-y-6">
+        <!-- Open & Transparent -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-emerald-400">
+            🌍 We do it openly and transparently
+          </h3>
+          <p class="mb-2 text-gray-300">
+            100% open source. MIT/MPL-2.0 licensed. You can see every line of code, self-host if you want, or fork it entirely.
+          </p>
+          <ul class="ml-6 list-disc space-y-1 text-gray-400">
+            <li>Plugin code: <a href="https://github.com/Cap-go/capacitor-updater" class="text-emerald-400 hover:underline">github.com/Cap-go/capacitor-updater</a></li>
+            <li>Backend code: <a href="https://github.com/Cap-go/capgo" class="text-emerald-400 hover:underline">github.com/Cap-go/capgo</a></li>
+            <li>Self-audit anytime - critical for compliance and security</li>
+            <li>Public security audits available</li>
+            <li>Public roadmap, public issues, public everything</li>
+          </ul>
+        </div>
+
+        <!-- Been Doing It -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-blue-400">
+            ⏰ We've been doing this for 4 years
+          </h3>
+          <p class="text-gray-300">
+            Started in 2020. We've seen every edge case, survived every App Store policy change, and processed billions of updates.
+            We're not going anywhere.
+          </p>
+        </div>
+
+        <!-- Biggest Plugin Provider -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-purple-400">
+            🚀 Biggest plugin provider after official Capacitor
+          </h3>
+          <p class="mb-2 text-gray-300">
+            We maintain 70+ free, open-source Capacitor plugins. More than anyone else in the ecosystem except the Capacitor team itself.
+          </p>
+          <p class="text-gray-400">
+            So yeah, we know a thing or two about Capacitor.
+          </p>
+        </div>
+
+        <!-- Family Business -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-yellow-400">
+            👨‍👩‍👧‍👦 Family business
+          </h3>
+          <p class="mb-2 text-gray-300">
+            Founded and run by Martin Donadieu and family. No VC pressure to "maximize growth metrics" or "pivot the business model."
+            We're building this for the long term because it's our livelihood.
+          </p>
+          <ul class="ml-6 list-disc space-y-1 text-gray-400">
+            <li>Legal entities in both US and Europe</li>
+            <li>Dedicated infrastructure for China</li>
+          </ul>
+        </div>
+
+        <!-- Bootstrapped & Profitable -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-green-400">
+            💰 Bootstrapped and profitable
+          </h3>
+          <p class="mb-2 text-gray-300">
+            No investors. No debt. Just sustainable revenue from happy customers.
+          </p>
+          <p class="text-gray-400">
+            That means we can charge fair prices ($14/month starter, not $499), and we won't suddenly shut down or 10x our pricing.
+          </p>
+        </div>
+
+        <!-- Human Support -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <h3 class="mb-3 text-xl font-semibold text-pink-400">
+            🙋 Only human support
+          </h3>
+          <p class="mb-2 text-gray-300">
+            No chatbots. No "AI assistants." No ticket systems that lose your message.
+          </p>
+          <p class="text-gray-400">
+            You get Martin or someone from the family. Usually within hours. Sometimes within minutes.
+            Yes, even on weekends (we can't help ourselves 😅).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Alternatives -->
+    <div class="mb-16">
+      <h2 class="mb-8 text-3xl font-bold text-gray-100">
+        The other options (and when to pick them)
+      </h2>
+
+      <div class="space-y-8">
+        <!-- Appflow -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4 flex items-start justify-between">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-gray-100">Ionic Appflow</h3>
+              <p class="text-sm text-orange-400">⚠️ Shutting down December 31, 2027</p>
+            </div>
+            <a
+              href={getRelativeLocaleUrl(locale, 'ionic-appflow')}
+              class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+            >
+              Migration guide →
+            </a>
+          </div>
+
+          <div class="mb-4 space-y-3 text-gray-300">
+            <p><strong class="text-gray-100">The reality:</strong> Ionic announced they're winding down Appflow. Existing customers can use it until end of 2027, but no new customers or features.</p>
+
+            <p><strong class="text-gray-100">When it was good:</strong> Appflow was great if you wanted everything in one place - CI/CD, live updates, native builds. The pioneers of this space.</p>
+
+            <p><strong class="text-gray-100">Why we're different:</strong></p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li>We're not shutting down (kinda important!)</li>
+              <li>$14/month vs their $499/month</li>
+              <li>Open source vs closed source</li>
+              <li>Focus on updates only, so we're better at it</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 text-sm text-gray-400">
+            💚 Credit where it's due: Ionic built amazing tools and educated a whole generation of hybrid app developers. Respect.
+          </div>
+        </div>
+
+        <!-- CodePush -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4">
+            <h3 class="mb-2 text-2xl font-bold text-gray-100">Microsoft CodePush</h3>
+            <p class="text-sm text-red-400">🪦 Deprecated - Microsoft has moved on</p>
+          </div>
+
+          <div class="mb-4 space-y-3 text-gray-300">
+            <p><strong class="text-gray-100">The reality:</strong> CodePush was free and worked well... until Microsoft stopped maintaining it. It's in legacy mode for React Native, and there's no official Capacitor support.</p>
+
+            <p><strong class="text-gray-100">When it was good:</strong> Free is hard to beat! And Microsoft's infrastructure meant it was reliable.</p>
+
+            <p><strong class="text-gray-100">Why we're different:</strong></p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li>Actually maintained and improved every month</li>
+              <li>Built specifically for Capacitor</li>
+              <li>Real humans fixing bugs and adding features</li>
+              <li>Still affordable: $14/month (not VC-subsidized free, but sustainable)</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 text-sm text-gray-400">
+            💚 Credit where it's due: CodePush proved the live update model works at massive scale.
+          </div>
+        </div>
+
+        <!-- Capawesome -->
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
+          <div class="mb-4 flex items-start justify-between">
+            <div>
+              <h3 class="mb-2 text-2xl font-bold text-gray-100">Capawesome Cloud</h3>
+              <p class="text-sm text-green-400">✅ Active and well-maintained</p>
+            </div>
+            <a
+              href={getRelativeLocaleUrl(locale, 'capwesome')}
+              class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+            >
+              Full comparison →
+            </a>
+          </div>
+
+          <div class="mb-4 space-y-3 text-gray-300">
+            <p><strong class="text-gray-100">The reality:</strong> Capawesome is a solid, newer option with good German engineering. They were inspired by Capgo when building their live updates solution. They also make great Capacitor plugins.</p>
+
+            <p><strong class="text-gray-100">When it's good:</strong> If you want a simpler interface and don't need some of the advanced features, it's a fine choice.</p>
+
+            <p><strong class="text-gray-100">Honest differences:</strong></p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li><strong>Experience:</strong> We've been doing this since 2020 (they launched live updates in 2024)</li>
+              <li><strong>Scale:</strong> We serve 1B+ updates/month, 750k+ devices (they don't publish stats yet)</li>
+              <li><strong>Pricing:</strong> Both affordable - we start at $14/month, they start at €9/month</li>
+              <li><strong>Focus:</strong> Live updates is our core business; for them it's a side offering to their paid plugins</li>
+              <li><strong>Security & Transparency:</strong> We're 100% open source with public audits and self-audit capability; they're 0% open on backend with no public audits</li>
+              <li><strong>Support:</strong> Both provide human support (we're both small teams!)</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 text-sm text-gray-400">
+            💚 Credit where it's due: Robin (Capawesome founder) does great work. Being inspired by our approach when building their solution is honestly flattering. The ecosystem is better with multiple options.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What We're NOT Good At -->
+    <div class="mb-16 rounded-lg border-2 border-yellow-600 bg-yellow-950/20 p-8">
+      <h2 class="mb-4 text-2xl font-bold text-yellow-400">
+        🤔 What we're NOT good at (honesty time)
+      </h2>
+      <div class="space-y-3 text-gray-300">
+        <p>
+          <strong class="text-yellow-300">All-in-one CI/CD:</strong> We don't bundle CI/CD like Appflow did. You use your own (GitHub Actions, GitLab CI, etc). But we CAN handle native builds from your CI if you want - just call our build API from your pipeline.
+        </p>
+        <p>
+          <strong class="text-yellow-300">Documentation complexity:</strong> Basic automatic updates are well documented. But Capgo has many options (manual, half-manual, channel_default, etc.) that aren't always easy to understand for every use case yet. We're actively improving this.
+        </p>
+      </div>
+    </div>
+
+    <!-- Why People Actually Choose Us -->
+    <div class="mb-16">
+      <h2 class="mb-8 text-3xl font-bold text-gray-100">
+        Why people actually choose us
+      </h2>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <p class="mb-2 italic text-gray-300">
+            "The migration from Appflow took 2 hours. We went from $499/month to $14/month. Same features, better DX."
+          </p>
+          <p class="text-sm text-gray-400">— React developer from France</p>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <p class="mb-2 italic text-gray-300">
+            "I had a question at 10pm on Saturday. Martin himself answered in 15 minutes. Insane."
+          </p>
+          <p class="text-sm text-gray-400">— Solo developer from Brazil</p>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <p class="mb-2 italic text-gray-300">
+            "Being open source means we could audit the security ourselves. That's non-negotiable for our healthcare app."
+          </p>
+          <p class="text-sm text-gray-400">— CTO of health tech startup</p>
+        </div>
+
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+          <p class="mb-2 italic text-gray-300">
+            "The fact it's a family business makes me trust it MORE, not less. These folks aren't going to rugpull us."
+          </p>
+          <p class="text-sm text-gray-400">— Mobile team lead from Germany</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <h2 class="mb-4 text-2xl font-bold text-gray-100">
+        Try it yourself (free for 14 days)
+      </h2>
+      <p class="mb-8 text-gray-300">
+        No credit card. No commitment. Just see if it works for you.
+      </p>
+      <a
+        href={getRelativeLocaleUrl(locale, 'register')}
+        class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700"
+      >
+        Start free trial
+      </a>
+      <p class="mt-4 text-sm text-gray-400">
+        Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Ask us on Discord</a> or
+        <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email support@capgo.app</a>
+      </p>
+    </div>
+  </div>
+</Layout>

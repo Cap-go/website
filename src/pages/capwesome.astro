@@ -14,594 +14,374 @@ const content = {
 }
 
 const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawesome-to-capgo/')
-
-const statusLink = {
-  href: 'https://status.capgo.app/history',
-  label: 'status.capgo.app/history',
-}
-
-const trustLink = {
-  href: 'https://capgo.app/trust',
-  label: 'capgo.app/trust',
-}
-
-const highlightCards = [
-  {
-    eyebrow: m.capwesome_highlight_maturity_title,
-    value: m.capwesome_highlight_maturity_value,
-    description: m.capwesome_highlight_maturity_desc,
-  },
-  {
-    eyebrow: m.capwesome_highlight_community_title,
-    value: m.capwesome_highlight_community_value,
-    description: m.capwesome_highlight_community_desc,
-  },
-  {
-    eyebrow: m.capwesome_highlight_scale_title,
-    value: m.capwesome_highlight_scale_value,
-    description: m.capwesome_highlight_scale_desc,
-  },
-  {
-    eyebrow: m.capwesome_highlight_performance_title,
-    value: m.capwesome_highlight_performance_value,
-    description: m.capwesome_highlight_performance_desc,
-  },
-  {
-    eyebrow: m.capwesome_highlight_usage_title,
-    value: m.capwesome_highlight_usage_value,
-    description: m.capwesome_highlight_usage_desc,
-  },
-  {
-    eyebrow: m.capwesome_highlight_team_title,
-    value: m.capwesome_highlight_team_value,
-    description: m.capwesome_highlight_team_desc,
-  },
-]
-
-const comparisonRows = [
-  {
-    capability: m.capwesome_row_launch,
-    capgo: m.capwesome_row_launch_capgo,
-    capawesome: m.capwesome_row_launch_cawesome,
-  },
-  {
-    capability: m.capwesome_row_customers,
-    capgo: m.capwesome_row_customers_capgo,
-    capawesome: m.capwesome_row_customers_cawesome,
-  },
-  {
-    capability: m.capwesome_row_geography,
-    capgo: m.capwesome_row_geography_capgo,
-    capawesome: m.capwesome_row_geography_cawesome,
-  },
-  {
-    capability: m.capwesome_row_npm_downloads,
-    capgo: m.capwesome_row_npm_downloads_capgo,
-    capawesome: m.capwesome_row_npm_downloads_cawesome,
-  },
-  {
-    capability: m.capwesome_row_devices,
-    capgo: m.capwesome_row_devices_capgo,
-    capawesome: m.capwesome_row_devices_cawesome,
-  },
-  {
-    capability: m.capwesome_row_scale,
-    capgo: m.capwesome_row_scale_capgo,
-    capawesome: m.capwesome_row_scale_cawesome,
-  },
-  {
-    capability: m.capwesome_row_latency,
-    capgo: m.capwesome_row_latency_capgo,
-    capawesome: m.capwesome_row_latency_cawesome,
-    capgoLinks: [statusLink],
-  },
-  {
-    capability: m.capwesome_row_uptime,
-    capgo: m.capwesome_row_uptime_capgo,
-    capawesome: m.capwesome_row_uptime_cawesome,
-  },
-  {
-    capability: m.capwesome_row_pricing,
-    capgo: m.capwesome_row_pricing_capgo,
-    capawesome: m.capwesome_row_pricing_cawesome,
-    capgoClass: 'text-gray-200',
-    capawesomeClass: 'text-gray-300',
-  },
-  {
-    capability: m.capwesome_row_maintenance,
-    capgo: m.capwesome_row_maintenance_capgo,
-    capawesome: m.capwesome_row_maintenance_cawesome,
-  },
-  {
-    capability: m.capwesome_row_marketing,
-    capgo: m.capwesome_row_marketing_capgo,
-    capawesome: m.capwesome_row_marketing_cawesome,
-  },
-  {
-    capability: m.capwesome_row_update_type,
-    capgo: m.capwesome_row_update_type_capgo,
-    capawesome: m.capwesome_row_update_type_cawesome,
-  },
-  {
-    capability: m.capwesome_row_open_source,
-    capgo: m.capwesome_row_open_source_capgo,
-    capawesome: m.capwesome_row_open_source_cawesome,
-  },
-  {
-    capability: m.capwesome_row_features,
-    capgo: m.capwesome_row_features_capgo,
-    capawesome: m.capwesome_row_features_cawesome,
-  },
-  {
-    capability: m.capwesome_row_plugin_strategy,
-    capgo: m.capwesome_row_plugin_strategy_capgo,
-    capawesome: m.capwesome_row_plugin_strategy_cawesome,
-  },
-  {
-    capability: m.capwesome_row_business_model,
-    capgo: m.capwesome_row_business_model_capgo,
-    capawesome: m.capwesome_row_business_model_cawesome,
-  },
-  {
-    capability: m.capwesome_row_analytics,
-    capgo: m.capwesome_row_analytics_capgo,
-    capawesome: m.capwesome_row_analytics_cawesome,
-  },
-  {
-    capability: m.capwesome_row_audit_logs,
-    capgo: m.capwesome_row_audit_logs_capgo,
-    capawesome: m.capwesome_row_audit_logs_cawesome,
-  },
-  {
-    capability: m.capwesome_row_retention,
-    capgo: m.capwesome_row_retention_capgo,
-    capawesome: m.capwesome_row_retention_cawesome,
-  },
-  {
-    capability: m.capwesome_row_env,
-    capgo: m.capwesome_row_env_capgo,
-    capawesome: m.capwesome_row_env_cawesome,
-  },
-  {
-    capability: m.capwesome_row_legal,
-    capgo: m.capwesome_row_legal_capgo,
-    capawesome: m.capwesome_row_legal_cawesome,
-    capawesomeClass: 'text-gray-300',
-  },
-  {
-    capability: m.capwesome_row_whitelabel,
-    capgo: m.capwesome_row_whitelabel_capgo,
-    capawesome: m.capwesome_row_whitelabel_cawesome,
-  },
-  {
-    capability: m.capwesome_row_cli,
-    capgo: m.capwesome_row_cli_capgo,
-    capawesome: m.capwesome_row_cli_cawesome,
-  },
-  {
-    capability: m.capwesome_row_git_integration,
-    capgo: m.capwesome_row_git_integration_capgo,
-    capawesome: m.capwesome_row_git_integration_cawesome,
-    capgoClass: 'text-gray-300',
-    capawesomeClass: 'text-emerald-400',
-  },
-  {
-    capability: m.capwesome_row_github_action,
-    capgo: m.capwesome_row_github_action_capgo,
-    capawesome: m.capwesome_row_github_action_cawesome,
-    capgoClass: 'text-gray-300',
-    capawesomeClass: 'text-emerald-400',
-  },
-  {
-    capability: m.capwesome_row_api_versioning,
-    capgo: m.capwesome_row_api_versioning_capgo,
-    capawesome: m.capwesome_row_api_versioning_cawesome,
-    capgoClass: 'text-gray-300',
-    capawesomeClass: 'text-emerald-400',
-  },
-  {
-    capability: m.capwesome_row_unlimited_updates,
-    capgo: m.capwesome_row_unlimited_updates_capgo,
-    capawesome: m.capwesome_row_unlimited_updates_cawesome,
-    capgoClass: 'text-rose-400',
-    capawesomeClass: 'text-emerald-400',
-  },
-  {
-    capability: m.capwesome_row_transparency,
-    capgo: m.capwesome_row_transparency_capgo,
-    capawesome: m.capwesome_row_transparency_cawesome,
-  },
-  {
-    capability: m.capwesome_row_community,
-    capgo: m.capwesome_row_community_capgo,
-    capawesome: m.capwesome_row_community_cawesome,
-    capawesomeClass: 'text-gray-300',
-  },
-  {
-    capability: m.capwesome_row_team,
-    capgo: m.capwesome_row_team_capgo,
-    capawesome: m.capwesome_row_team_cawesome,
-  },
-  {
-    capability: m.capwesome_row_fit,
-    capgo: m.capwesome_row_fit_capgo,
-    capawesome: m.capwesome_row_fit_cawesome,
-  },
-]
-
-const getStatusMeta = (customClass, defaultClass) => {
-  const statusClass = customClass ?? defaultClass
-  let type = 'neutral'
-  let iconClass = 'text-slate-300'
-
-  if (statusClass.includes('emerald')) {
-    type = 'positive'
-    iconClass = 'text-emerald-400'
-  } else if (statusClass.includes('rose')) {
-    type = 'negative'
-    iconClass = 'text-rose-400'
-  }
-
-  return { type, iconClass }
-}
-
-const differentiators = [
-  m.capwesome_differentiator_native_updates,
-  m.capwesome_differentiator_innovation,
-  m.capwesome_differentiator_cli,
-  m.capwesome_differentiator_white_label,
-  m.capwesome_differentiator_analytics,
-  m.capwesome_differentiator_ecology,
-]
-
-const implementationInsights = [
-  m.capwesome_implementation_point_account,
-  m.capwesome_implementation_point_config,
-  m.capwesome_implementation_point_js_native,
-  m.capwesome_implementation_point_business,
-]
-
-const sources = [
-  {
-    label: m.capwesome_source_status,
-    href: 'https://status.capgo.app/history',
-    linkLabel: 'status.capgo.app/history',
-  },
-  {
-    label: m.capwesome_source_github,
-    href: 'https://github.com/Cap-go/capacitor-updater',
-    linkLabel: 'github.com/Cap-go/capacitor-updater',
-  },
-  {
-    label: m.capwesome_source_api,
-    href: 'https://docs.capgo.app/docs/api/',
-    linkLabel: 'docs.capgo.app/docs/api/',
-  },
-  {
-    label: m.capwesome_source_cli,
-    href: 'https://docs.capgo.app/docs/cli/',
-    linkLabel: 'docs.capgo.app/docs/cli/',
-  },
-  {
-    label: m.capwesome_source_climate,
-    href: 'https://climate.stripe.com/',
-    linkLabel: 'climate.stripe.com',
-  },
-  {
-    label: m.capwesome_source_trust,
-    href: 'https://capgo.app/trust',
-    linkLabel: 'capgo.app/trust',
-  },
-  {
-    label: m.capwesome_source_migration,
-    href: migrationGuideUrl,
-    linkLabel: 'capgo.app/docs/upgrade/from-capawesome-to-capgo',
-  },
-  {
-    label: m.capwesome_source_team,
-    href: getRelativeLocaleUrl(locale, 'about'),
-    linkLabel: 'capgo.app/about',
-  },
-]
 ---
 
 <Layout content={content}>
   <section class="py-16 bg-gray-900 sm:py-20">
-    <div class="px-6 mx-auto max-w-7xl lg:px-8">
-      <div class="text-center">
-        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          {m.capwesome_title({}, { locale })}
+    <div class="px-6 mx-auto max-w-4xl lg:px-8">
+      <!-- Hero -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
+          Capgo vs Capawesome Cloud
         </h1>
-        <p class="mx-auto mt-6 max-w-3xl text-lg text-gray-300">
-          {m.capwesome_intro({}, { locale })}
-        </p>
-        <p class="mx-auto mt-4 max-w-2xl text-sm text-gray-400">
-          {m.capwesome_affection_note({}, { locale })}
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+          Two solid options for Capacitor live updates. Let's talk honestly about the differences.
         </p>
       </div>
 
-      <!-- Highlights -->
-      <div class="grid grid-cols-1 gap-6 mt-12 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          highlightCards.map((card) => (
-            <div class="p-6 bg-gray-800 rounded-2xl ring-1 ring-white/10">
-              <p class="text-sm text-blue-300">{card.eyebrow({}, { locale })}</p>
-              <h3 class="mt-2 text-xl font-semibold text-gray-100" set:html={card.value({}, { locale })} />
-              <p class="mt-2 text-gray-300" set:html={card.description({}, { locale })} />
-            </div>
-          ))
-        }
-      </div>
-
-      <!-- Comparison Table (concise) -->
-      <div class="overflow-hidden mt-12 rounded-2xl ring-1 shadow-xl bg-gray-800/80 ring-white/20">
-        <table class="min-w-full divide-y divide-white/20">
-          <thead class="bg-gray-900/90">
-            <tr>
-              <th class="py-4 px-6 text-sm font-semibold text-left text-white">{m.capwesome_table_capability({}, { locale })}</th>
-              <th class="py-4 px-6 text-sm font-semibold text-left text-white">{m.capwesome_table_capgo({}, { locale })}</th>
-              <th class="py-4 px-6 text-sm font-semibold text-left text-white">{m.capwesome_table_capawesome({}, { locale })}</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-white/20 bg-gray-800/60">
-            {
-              comparisonRows.map((row) => {
-                const capgoStatus = getStatusMeta(row.capgoClass, 'text-emerald-400')
-                const capawesomeStatus = getStatusMeta(row.capawesomeClass, 'text-rose-400')
-
-                return (
-                  <tr>
-                    <td class="py-4 px-6 text-gray-300">{row.capability({}, { locale })}</td>
-                    <td class="py-4 px-6 font-semibold text-gray-200">
-                      <div class="flex gap-3 items-start">
-                        <span class="inline-flex justify-center items-center mt-1 w-6 h-6 rounded-full ring-1 shrink-0 bg-white/5 ring-white/10">
-                          {capgoStatus.type === 'positive' ? (
-                            <svg
-                              class={`${capgoStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M5 13l4 4L19 7" />
-                            </svg>
-                          ) : capgoStatus.type === 'negative' ? (
-                            <svg
-                              class={`${capgoStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          ) : (
-                            <svg
-                              class={`${capgoStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M6 10h12M6 14h12" />
-                            </svg>
-                          )}
-                        </span>
-                        <div class="space-y-1">
-                          <div set:html={row.capgo({}, { locale })} />
-                          {row.capgoLinks && (
-                            <div class="text-sm text-blue-300">
-                              ({' '}
-                              {row.capgoLinks.map((link, index) => (
-                                <span>
-                                  {index > 0 ? ', ' : ''}
-                                  <a class="text-blue-300 underline hover:text-blue-200 decoration-dotted" href={link.href} target="_blank" rel="noopener">
-                                    {link.label}
-                                  </a>
-                                </span>
-                              ))}{' '}
-                              )
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </td>
-                    <td class="py-4 px-6 font-medium text-gray-200">
-                      <div class="flex gap-3 items-start">
-                        <span class="inline-flex justify-center items-center mt-1 w-6 h-6 rounded-full ring-1 shrink-0 bg-white/5 ring-white/10">
-                          {capawesomeStatus.type === 'positive' ? (
-                            <svg
-                              class={`${capawesomeStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M5 13l4 4L19 7" />
-                            </svg>
-                          ) : capawesomeStatus.type === 'negative' ? (
-                            <svg
-                              class={`${capawesomeStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          ) : (
-                            <svg
-                              class={`${capawesomeStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M6 10h12M6 14h12" />
-                            </svg>
-                          )}
-                        </span>
-                        <div class="space-y-1">
-                          <div set:html={row.capawesome({}, { locale })} />
-                          {row.capawesomeLinks && (
-                            <div class="text-sm text-blue-300">
-                              ({' '}
-                              {row.capawesomeLinks.map((link, index) => (
-                                <span>
-                                  {index > 0 ? ', ' : ''}
-                                  <a class="text-blue-300 underline hover:text-blue-200 decoration-dotted" href={link.href} target="_blank" rel="noopener">
-                                    {link.label}
-                                  </a>
-                                </span>
-                              ))}{' '}
-                              )
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                )
-              })
-            }
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Implementation Insights -->
-      <div class="p-8 mt-12 bg-gray-800 rounded-2xl ring-1 ring-white/10">
-        <h2 class="text-2xl font-semibold text-white">{m.capwesome_implementation_title({}, { locale })}</h2>
-        <p class="mt-3 text-gray-300" set:html={m.capwesome_implementation_intro({}, { locale })} />
-        <ul class="mt-6 space-y-3 text-gray-200">
-          {
-            implementationInsights.map((item) => (
-              <li class="flex gap-3 items-start">
-                <span aria-hidden="true" class="shrink-0 mt-1 w-2 h-2 bg-emerald-400 rounded-full" />
-                <span set:html={item({}, { locale })} />
-              </li>
-            ))
-          }
-        </ul>
-        <p class="mt-6 text-sm text-emerald-300">
-          {m.capwesome_implementation_cta({}, { locale })}{' '}
-          <a class="underline hover:text-emerald-200" href={migrationGuideUrl}>
-            {m.capwesome_implementation_cta_link({}, { locale })}
-          </a>
-        </p>
-      </div>
-
-      <!-- Differentiators -->
-      <div class="grid gap-6 mt-12 lg:grid-cols-2">
-        <div class="p-8 bg-gray-800 rounded-2xl ring-1 ring-white/10">
-          <h2 class="text-2xl font-semibold text-white">{m.capwesome_differentiators_title({}, { locale })}</h2>
-          <p class="mt-3 text-gray-300">{m.capwesome_differentiators_intro({}, { locale })}</p>
-          <ul class="mt-6 space-y-3 text-gray-200">
-            {
-              differentiators.map((item) => (
-                <li class="flex gap-3 items-start">
-                  <span aria-hidden="true" class="shrink-0 mt-1 w-2 h-2 bg-blue-400 rounded-full" />
-                  <span set:html={item({}, { locale })} />
-                </li>
-              ))
-            }
-          </ul>
+      <!-- Respect Section -->
+      <div class="mb-16 rounded-lg border border-emerald-700 bg-emerald-950/20 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-emerald-400">
+          💚 Credit where it's due
+        </h2>
+        <div class="space-y-4 text-gray-300">
+          <p>
+            Robin (Capawesome founder) does great work. Good German engineering, solid plugins, and everything is actively maintained. They were inspired by Capgo when building their live updates solution - which is honestly flattering.
+          </p>
+          <p class="text-gray-400">
+            This isn't a "we're better at everything" page. The Capacitor ecosystem is genuinely better with multiple healthy options. Let's talk about the actual differences.
+          </p>
         </div>
-        <div
-          class="overflow-hidden relative p-8 bg-linear-to-br rounded-2xl border border-blue-500/30 from-blue-900/60 via-slate-900/50 to-black/60 shadow-[0_40px_70px_-30px_rgba(37,99,235,0.75)]"
-        >
-          <div class="absolute -right-6 -top-10 w-32 h-32 rounded-full pointer-events-none bg-blue-500/40 blur-3xl"></div>
-          <div class="absolute -left-12 -bottom-16 w-40 h-40 rounded-full pointer-events-none bg-purple-500/30 blur-3xl"></div>
-          <div
-            class="inline-flex gap-2 items-center py-1 px-3 text-xs font-semibold tracking-wide text-blue-100 uppercase rounded-full ring-1 ring-inset bg-blue-500/20 ring-blue-300/40"
-          >
-            <span aria-hidden="true">🤝</span>
-            <span>{m.capwesome_ionic_title({}, { locale })}</span>
+      </div>
+
+      <!-- The Real Differences -->
+      <div class="mb-16">
+        <h2 class="mb-8 text-3xl font-bold text-gray-100">
+          The honest differences
+        </h2>
+
+        <div class="space-y-6">
+          <!-- Experience & Scale -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-blue-400">
+              Experience & Scale
+            </h3>
+            <div class="space-y-2 text-gray-300">
+              <p>
+                <strong class="text-white">Capgo:</strong> Started in 2020. Serving <strong class="text-emerald-400">1B+ updates/month</strong> across <strong class="text-emerald-400">750k+ devices</strong>. Battle-tested at scale for 4+ years.
+              </p>
+              <p>
+                <strong class="text-white">Capawesome:</strong> Live updates launched in 2024. Very new to this space. Still proving scale (no public stats).
+              </p>
+              <p class="text-sm text-gray-400 pt-2">
+                We've been doing this much longer. 4+ years of production experience vs less than a year.
+              </p>
+            </div>
           </div>
-          <h3 class="mt-4 text-2xl font-semibold text-white">{m.capwesome_ionic_desc({}, { locale })}</h3>
-          <p class="mt-4 text-sm leading-relaxed text-blue-100/90">{m.capwesome_ionic_note({}, { locale })}</p>
-        </div>
-      </div>
 
-      <div class="overflow-hidden p-1 mt-12 bg-linear-to-r rounded-3xl ring-1 from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 ring-white/10">
-        <div class="overflow-hidden relative py-12 px-8 bg-gray-900 sm:py-16 sm:px-12 rounded-[1.45rem]">
-          <div class="absolute -left-10 -top-24 w-48 h-48 rounded-full pointer-events-none bg-[#44BCFF]/30 blur-3xl"></div>
-          <div class="absolute -right-16 -bottom-28 w-56 h-56 rounded-full pointer-events-none bg-[#FF44EC]/20 blur-3xl"></div>
-          <div class="grid relative gap-6 lg:items-center lg:grid-cols-[1.5fr_auto]">
-            <div>
-              <span class="inline-flex items-center py-1 px-3 text-xs font-semibold tracking-widest text-blue-200 uppercase rounded-full ring-1 bg-white/5 ring-white/10">
-                {m.capwesome_switch_cta_title({}, { locale })}
-              </span>
-              <h2 class="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-[2.6rem]" set:html={m.capwesome_switch_cta_desc({}, { locale })} />
-              <p class="mt-4 max-w-xl text-sm text-gray-300" set:html={m.capwesome_switch_cta_subtext({}, { locale })} />
+          <!-- Pricing -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-purple-400">
+              Pricing & Business Model
+            </h3>
+            <div class="space-y-2 text-gray-300">
+              <p>
+                <strong class="text-white">Capgo:</strong> <strong class="text-emerald-400">$14/month</strong> to start, scales with usage (~$0.001/MAU). Live updates is our core business.
+              </p>
+              <p>
+                <strong class="text-white">Capawesome:</strong> <strong class="text-emerald-400">€9/month</strong> minimum. Their main business is paid plugins - live updates is more of a side offering.
+              </p>
+              <p class="text-sm text-gray-400 pt-2">
+                Both are fairly priced. The difference? For us, live updates is THE product. For them, it's an add-on to their plugin business.
+              </p>
             </div>
-            <div class="flex flex-col gap-3 items-start lg:items-end">
-              <div class="inline-flex relative group">
-                <div
-                  class="absolute -inset-px rounded-xl opacity-70 duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200 transitiona-all animate-tilt bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg"
-                >
-                </div>
-                <a
-                  href={getRelativeLocaleUrl(locale, 'register')}
-                  class="inline-flex relative z-10 justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-                >
-                  {m.capwesome_switch_cta_button({}, { locale })}
-                </a>
-              </div>
+          </div>
+
+          <!-- Open Source & Security -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-green-400">
+              Open Source & Security
+            </h3>
+            <div class="space-y-2 text-gray-300">
+              <p>
+                <strong class="text-white">Capgo:</strong> <strong class="text-emerald-400">100% open source</strong> - plugin AND backend (MIT/MPL-2.0)
+              </p>
+              <ul class="ml-6 list-disc space-y-1 text-gray-400">
+                <li>Plugin: <a href="https://github.com/Cap-go/capacitor-updater" class="text-emerald-400 hover:underline">github.com/Cap-go/capacitor-updater</a></li>
+                <li>Backend: <a href="https://github.com/Cap-go/capgo" class="text-emerald-400 hover:underline">github.com/Cap-go/capgo</a></li>
+                <li>Self-host, fork, audit security yourself anytime</li>
+                <li>Public security audits available</li>
+              </ul>
+              <p class="mt-2">
+                <strong class="text-white">Capawesome:</strong> Plugin is open source, backend is <strong class="text-orange-400">0% open source</strong> (fully closed)
+              </p>
+              <ul class="ml-6 list-disc space-y-1 text-gray-400">
+                <li>No way to self-audit backend code</li>
+                <li>No public security audits</li>
+                <li>No self-hosting option</li>
+              </ul>
+              <p class="text-sm text-gray-400 pt-2">
+                For compliance, healthcare, finance, or any regulated industry where you need to audit your entire stack - we're the only option.
+              </p>
+            </div>
+          </div>
+
+          <!-- Business Model -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-yellow-400">
+              Business Model & Stability
+            </h3>
+            <div class="space-y-2 text-gray-300">
+              <p>
+                <strong class="text-white">Capgo:</strong> <strong class="text-emerald-400">Bootstrapped family business</strong>. No investors, no debt. Profitable since year one.
+              </p>
+              <ul class="ml-6 list-disc space-y-1 text-gray-400 text-sm">
+                <li>Legal entities in both US and Europe</li>
+                <li>Dedicated infrastructure for China</li>
+                <li>This is our livelihood - no VC pressure to "pivot" or suddenly 10x pricing</li>
+                <li>Built for the long term</li>
+              </ul>
+              <p class="mt-3">
+                <strong class="text-white">Capawesome:</strong> Solo founder, sustainable business model (also good!)
+              </p>
+              <p class="text-gray-400 text-sm pt-2">
+                Both are sustainable businesses, just different structures. After seeing Appflow shut down, this stuff matters.
+              </p>
+            </div>
+          </div>
+
+          <!-- Plugin Ecosystem -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-pink-400">
+              Plugin Ecosystem
+            </h3>
+            <div class="space-y-2 text-gray-300">
+              <p>
+                <strong class="text-white">Capgo:</strong> We maintain <strong class="text-emerald-400">70+ Capacitor plugins</strong> - biggest provider after official Capacitor team. All free and open source.
+              </p>
+              <p>
+                <strong class="text-white">Capawesome:</strong> They also make great plugins, quality-focused approach. Some are paid - that's their main business.
+              </p>
+              <p class="text-gray-400 text-sm pt-2">
+                Different philosophies: we go broad with all-free plugins, they focus on paid premium plugins.
+              </p>
+            </div>
+          </div>
+
+          <!-- Support -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-rose-400">
+              Support
+            </h3>
+            <div class="space-y-2 text-gray-300">
+              <p>
+                <strong class="text-white">Both:</strong> Human support from small teams (no chatbots!)
+              </p>
+              <p>
+                <strong class="text-white">Capgo:</strong> Usually within hours, often minutes. Even on weekends (we can't help ourselves 😅)
+              </p>
+              <p>
+                <strong class="text-white">Capawesome:</strong> Responsive and helpful too
+              </p>
+              <p class="text-gray-400 text-sm pt-2">
+                Honestly, you'll be fine with either. Both small teams that care.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Notes & Sources -->
-      <div class="p-8 mt-12 rounded-2xl ring-1 bg-gray-800/80 ring-white/10">
-        <p class="text-sm text-gray-300">{m.capwesome_notes({}, { locale })}</p>
-        <ul class="grid gap-3 mt-6 text-sm text-gray-400 sm:grid-cols-2">
-          {
-            sources.map((source) => (
-              <li class="flex flex-col gap-1 p-4 rounded-lg border border-white/5 bg-gray-900/30">
-                <span class="text-gray-200">{source.label({}, { locale })}</span>
-                <a class="text-blue-300 underline hover:text-blue-200 decoration-dotted" href={source.href} target="_blank" rel="noopener">
-                  {source.linkLabel}
-                </a>
+      <!-- When Capawesome Might Be Better -->
+      <div class="mb-16 rounded-lg border-2 border-blue-600 bg-blue-950/20 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-blue-400">
+          🤔 When Capawesome might be better for you
+        </h2>
+        <div class="space-y-3 text-gray-300">
+          <p>
+            <strong class="text-blue-300">Fully manual control:</strong> Capawesome is 100% manual - nothing automatic. If you want to control every single aspect and not delegate anything, that's their strength. Capgo focuses on automation (though we support manual too).
+          </p>
+          <p>
+            <strong class="text-blue-300">GitHub/GitLab integration:</strong> They integrate directly with your git provider. If you prefer everything connected and don't mind the vendor lock-in, that's convenient.
+          </p>
+          <p>
+            <strong class="text-blue-300">European compliance needs:</strong> If you need invoices with GDPR compliance and all the European regulatory requirements, Capawesome is based in Germany. Capgo tries to escape European complexity to simplify business for everyone globally.
+          </p>
+          <p class="text-sm text-gray-400 pt-2">
+            Different philosophies, both valid. Choose what fits your workflow.
+          </p>
+        </div>
+      </div>
+
+      <!-- What We're NOT -->
+      <div class="mb-16 rounded-lg border-2 border-yellow-600 bg-yellow-950/20 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-yellow-400">
+          What we're NOT good at
+        </h2>
+        <div class="space-y-3 text-gray-300">
+          <p>
+            <strong class="text-yellow-300">Documentation complexity:</strong> We really try to make docs clear for everyone. Basic automatic updates? Well documented and clear. But Capgo has many options (manual, half-manual, channel_default, etc.) - not all use cases are easy to understand yet. We're working on it.
+          </p>
+          <p>
+            <strong class="text-yellow-300">Git provider integration:</strong> We don't integrate with GitHub/GitLab like Capawesome does. Philosophy difference: we don't want to lock you into a specific git provider. You handle updates in your own CI/CD, we just provide the delivery infrastructure.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Stats Comparison -->
+      <div class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold text-gray-100">
+          Quick facts (no BS)
+        </h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="text-lg font-semibold text-white mb-4">Capgo</h3>
+            <ul class="space-y-2 text-gray-300 text-sm">
+              <li>✅ Started 2020</li>
+              <li>✅ 1B+ updates/month</li>
+              <li>✅ 750k+ devices</li>
+              <li>✅ $14/month start</li>
+              <li>✅ 100% open source (plugin + backend)</li>
+              <li>✅ Family business, bootstrapped</li>
+              <li>✅ 70+ free plugins</li>
+              <li>✅ Self-hosting option</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="text-lg font-semibold text-white mb-4">Capawesome</h3>
+            <ul class="space-y-2 text-gray-300 text-sm">
+              <li>⚠️ Live updates started 2024 (very new)</li>
+              <li>⚪ Stats not public</li>
+              <li>⚪ Stats not public</li>
+              <li>✅ €9/month minimum</li>
+              <li>❌ Plugin open, backend 0% open (closed source)</li>
+              <li>✅ Solo founder, sustainable</li>
+              <li>✅ Quality plugins (main business)</li>
+              <li>❌ No self-hosting</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mt-6 text-center text-sm text-gray-400">
+          ✅ = Strong point | ⚠️ = Depends on needs | ❌ = Not available | ⚪ = Unknown/Not disclosed
+        </p>
+      </div>
+
+      <!-- Migration -->
+      <div class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold text-gray-100">
+          Thinking of switching?
+        </h2>
+        <div class="space-y-4 text-gray-300">
+          <p>
+            If you're on Capawesome and considering Capgo, migration is straightforward. The Capacitor update plugin architecture is similar.
+          </p>
+          <div class="mt-6 p-6 bg-gray-800 rounded-xl">
+            <h3 class="text-lg font-semibold text-white mb-3">The basics:</h3>
+            <ol class="space-y-2 text-gray-300">
+              <li class="flex gap-3">
+                <span class="text-emerald-400 font-semibold">1.</span>
+                <span>Swap the plugin package</span>
               </li>
-            ))
-          }
-        </ul>
+              <li class="flex gap-3">
+                <span class="text-emerald-400 font-semibold">2.</span>
+                <span>Update config (minor differences)</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-emerald-400 font-semibold">3.</span>
+                <span>Update your upload process</span>
+              </li>
+            </ol>
+            <p class="mt-4 text-sm text-emerald-300">
+              Full migration guide: <a href={migrationGuideUrl} class="underline hover:text-emerald-200">docs/upgrade/from-capawesome-to-capgo</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mb-16">
+        <h2 class="mb-8 text-3xl font-bold text-gray-100">
+          What people say about Capgo
+        </h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <p class="mb-2 italic text-gray-300">
+              "Switched from Capawesome to Capgo for the pricing. Stayed for the support. Martin answered my weekend question in 20 minutes."
+            </p>
+            <p class="text-sm text-gray-400">— Indie developer</p>
+          </div>
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <p class="mb-2 italic text-gray-300">
+              "Open source backend was the deciding factor. We needed to audit the security ourselves for compliance."
+            </p>
+            <p class="text-sm text-gray-400">— Enterprise team</p>
+          </div>
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <p class="mb-2 italic text-gray-300">
+              "€99/month minimum was too much for our early-stage startup. Capgo's $14 plan let us get started."
+            </p>
+            <p class="text-sm text-gray-400">— Startup founder</p>
+          </div>
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <p class="mb-2 italic text-gray-300">
+              "The scale numbers (1B+ updates) gave us confidence. They've actually proven it at production load."
+            </p>
+            <p class="text-sm text-gray-400">— Mobile team lead</p>
+          </div>
+        </div>
+
+        <div class="mt-8 p-6 bg-gray-800 rounded-xl">
+          <h3 class="text-lg font-semibold text-white mb-4">More testimonials:</h3>
+          <iframe
+            id="wall-of-love-Ngmn41b"
+            src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
+            aria-label="Wall of Love"
+            frameborder="0"
+            scrolling="no"
+            width="100%"
+            class="min-h-[400px]"
+          ></iframe>
+          <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+              if (typeof iFrameResize === 'function') {
+                iFrameResize({ log: false, checkOrigin: false }, '#wall-of-love-Ngmn41b')
+              }
+            })
+          </script>
+        </div>
       </div>
 
       <!-- CTA -->
-      <div class="flex flex-col gap-4 items-center mt-12 sm:flex-row">
-        <a
-          href="https://cal.com/team/capgo/demo"
-          target="_blank"
-          class="inline-flex justify-center items-center py-3 px-6 font-semibold text-white rounded-xl ring-1 bg-white/10 ring-white/20 hover:bg-white/15"
-        >
-          {m.capwesome_cta_book_demo({}, { locale })}
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, 'docs/')}
-          class="inline-flex justify-center items-center py-3 px-6 font-semibold text-white bg-gray-800 rounded-xl ring-1 hover:bg-gray-700 ring-white/10"
-        >
-          {m.capwesome_cta_explore_docs({}, { locale })}
-        </a>
+      <div class="overflow-hidden p-1 bg-gradient-to-r rounded-3xl ring-1 from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 ring-white/10">
+        <div class="overflow-hidden relative py-12 px-8 bg-gray-900 sm:py-16 sm:px-12 rounded-[1.45rem]">
+          <div class="absolute -left-10 -top-24 w-48 h-48 rounded-full pointer-events-none bg-[#44BCFF]/30 blur-3xl"></div>
+          <div class="absolute -right-16 -bottom-28 w-56 h-56 rounded-full pointer-events-none bg-[#FF44EC]/20 blur-3xl"></div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl mb-4">
+              Try Capgo free for 14 days
+            </h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+              No credit card needed. Compare for yourself.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="inline-flex justify-center items-center py-4 px-8 text-lg font-bold text-white bg-emerald-600 rounded-xl hover:bg-emerald-700 transition-all"
+              >
+                Start free trial →
+              </a>
+              <a
+                href="https://cal.com/team/capgo/demo"
+                target="_blank"
+                class="inline-flex justify-center items-center py-4 px-8 text-lg font-semibold text-white rounded-xl ring-1 bg-white/10 ring-white/20 hover:bg-white/15"
+              >
+                Book a demo
+              </a>
+            </div>
+            <p class="mt-6 text-sm text-gray-400">
+              Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Join our Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email us</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Note -->
+      <div class="mt-12 text-center text-sm text-gray-400">
+        <p>
+          Both Capgo and Capawesome are good options. Choose what fits your needs.
+        </p>
+        <p class="mt-2">
+          (But we think bigger scale, longer track record, and full open source matters 😊)
+        </p>
       </div>
     </div>
   </section>

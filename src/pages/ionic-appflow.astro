@@ -13,419 +13,245 @@ const content = {
   image: `${Astro.locals.runtimeConfig.public.baseUrl}/capgo_social.png`,
 }
 
-const highlightCards = [
-  {
-    eyebrow: m.capflow_highlight_maturity_title,
-    value: m.capflow_highlight_maturity_value,
-    description: m.capflow_highlight_maturity_desc,
-  },
-  {
-    eyebrow: m.capflow_highlight_scale_title,
-    value: m.capflow_highlight_scale_value,
-    description: m.capflow_highlight_scale_desc,
-  },
-  {
-    eyebrow: m.capflow_highlight_performance_title,
-    value: m.capflow_highlight_performance_value,
-    description: m.capflow_highlight_performance_desc,
-  },
-  {
-    eyebrow: m.capflow_highlight_open_source_title,
-    value: m.capflow_highlight_open_source_value,
-    description: m.capflow_highlight_open_source_desc,
-  },
-]
-
-const comparisonRows = [
-  {
-    capability: m.capflow_row_update_layer,
-    capgo: m.capflow_row_update_layer_capgo,
-    appflow: m.capflow_row_update_layer_appflow,
-  },
-  {
-    capability: m.capflow_row_native_support,
-    capgo: m.capflow_row_native_support_capgo,
-    appflow: m.capflow_row_native_support_appflow,
-  },
-  {
-    capability: m.capflow_row_cli,
-    capgo: m.capflow_row_cli_capgo,
-    appflow: m.capflow_row_cli_appflow,
-  },
-  {
-    capability: m.capflow_row_ci_strategy,
-    capgo: m.capflow_row_ci_strategy_capgo,
-    appflow: m.capflow_row_ci_strategy_appflow,
-  },
-  {
-    capability: m.capflow_row_npm,
-    capgo: m.capflow_row_npm_capgo,
-    appflow: m.capflow_row_npm_appflow,
-    capgoLinks: [{ href: 'https://npmtrends.com/@capacitor/live-updates-vs-@capgo/capacitor-updater', label: 'npm trends' }],
-    appflowLinks: [{ href: 'https://npmtrends.com/@capacitor/live-updates-vs-@capgo/capacitor-updater', label: 'npm trends' }],
-  },
-  {
-    capability: m.capflow_row_launch,
-    capgo: m.capflow_row_launch_capgo,
-    appflow: m.capflow_row_launch_appflow,
-    capgoClass: 'text-gray-300',
-    appflowClass: 'text-emerald-300',
-  },
-  {
-    capability: m.capflow_row_pioneer,
-    capgo: m.capflow_row_pioneer_capgo,
-    appflow: m.capflow_row_pioneer_appflow,
-    capgoClass: 'text-gray-300',
-    appflowClass: 'text-emerald-300',
-  },
-  {
-    capability: m.capflow_row_automation,
-    capgo: m.capflow_row_automation_capgo,
-    appflow: m.capflow_row_automation_appflow,
-  },
-  {
-    capability: m.capflow_row_audit,
-    capgo: m.capflow_row_audit_capgo,
-    appflow: m.capflow_row_audit_appflow,
-  },
-  {
-    capability: m.capflow_row_security,
-    capgo: m.capflow_row_security_capgo,
-    appflow: m.capflow_row_security_appflow,
-  },
-  {
-    capability: m.capflow_row_transparency,
-    capgo: m.capflow_row_transparency_capgo,
-    appflow: m.capflow_row_transparency_appflow,
-    capgoLinks: [
-      { href: 'https://status.capgo.app/history', label: 'status.capgo.app/history' },
-      { href: 'https://capgo.app/trust', label: 'capgo.app/trust' },
-    ],
-  },
-  {
-    capability: m.capflow_row_business_model,
-    capgo: m.capflow_row_business_model_capgo,
-    appflow: m.capflow_row_business_model_appflow,
-  },
-  {
-    capability: m.capflow_row_pricing,
-    capgo: m.capflow_row_pricing_capgo,
-    appflow: m.capflow_row_pricing_appflow,
-    appflowClass: 'text-rose-400',
-  },
-  {
-    capability: m.capflow_row_support,
-    capgo: m.capflow_row_support_capgo,
-    appflow: m.capflow_row_support_appflow,
-  },
-  {
-    capability: m.capflow_row_scale,
-    capgo: m.capflow_row_scale_capgo,
-    appflow: m.capflow_row_scale_appflow,
-    capgoClass: 'text-gray-300',
-    appflowClass: 'text-emerald-300',
-  },
-  {
-    capability: m.capflow_row_roadmap,
-    capgo: m.capflow_row_roadmap_capgo,
-    appflow: m.capflow_row_roadmap_appflow,
-    appflowClass: 'text-rose-400',
-  },
-  {
-    capability: m.capflow_row_maintenance,
-    capgo: m.capflow_row_maintenance_capgo,
-    appflow: m.capflow_row_maintenance_appflow,
-  },
-]
-
-const getStatusMeta = (customClass, defaultClass) => {
-  const statusClass = customClass ?? defaultClass
-  let type = 'neutral'
-  let iconClass = 'text-slate-300'
-
-  if (statusClass.includes('emerald')) {
-    type = 'positive'
-    iconClass = 'text-emerald-400'
-  } else if (statusClass.includes('rose')) {
-    type = 'negative'
-    iconClass = 'text-rose-400'
-  }
-
-  return { type, iconClass }
-}
-
-const differentiators = [
-  m.capflow_differentiator_native,
-  m.capflow_differentiator_scale,
-  m.capflow_differentiator_security,
-  m.capflow_differentiator_open_source,
-  m.capflow_differentiator_ci,
-]
-
-const implementationInsights = [
-  m.capflow_implementation_point_config,
-  m.capflow_implementation_point_cli,
-  m.capflow_implementation_point_assets,
-  m.capflow_implementation_point_support,
-]
-
 const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflow-to-capgo/')
-
-const sources = [
-  {
-    label: m.capflow_source_appflow_compare,
-    href: 'https://ionic.io/appflow/live-updates',
-    linkLabel: 'ionic.io/appflow/live-updates',
-  },
-]
 ---
 
 <Layout content={content}>
   <section class="py-16 bg-gray-900 sm:py-20">
-    <div class="px-6 mx-auto max-w-7xl lg:px-8">
-      <div class="text-center">
-        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          {m.capflow_title({}, { locale })}
+    <div class="px-6 mx-auto max-w-4xl lg:px-8">
+      <!-- Hero -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
+          Migrating from Appflow?
         </h1>
-        <p class="mx-auto mt-6 max-w-3xl text-lg text-gray-300">
-          {m.capflow_intro({}, { locale })}
-        </p>
-        <p class="mx-auto mt-4 max-w-2xl text-sm text-gray-300">
-          {m.capflow_story_note({}, { locale })}
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+          Let's talk honestly about what's happening and what your options are.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 gap-6 mt-12 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          highlightCards.map((card) => (
-            <div class="p-6 bg-gray-800 rounded-2xl ring-1 ring-white/10">
-              <p class="text-sm text-blue-300">{card.eyebrow({}, { locale })}</p>
-              <h3 class="mt-2 text-xl font-semibold text-gray-100">{card.value({}, { locale })}</h3>
-              <p class="mt-2 text-gray-300">{card.description({}, { locale })}</p>
-            </div>
-          ))
-        }
+      <!-- The Elephant in the Room -->
+      <div class="mb-16 rounded-lg border-2 border-orange-600 bg-orange-950/20 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-orange-400">
+          ⚠️ The elephant in the room
+        </h2>
+        <div class="space-y-4 text-gray-300">
+          <p>
+            Ionic announced they're shutting down Appflow. Your apps will keep working until <strong class="text-white">December 31, 2027</strong>, but no new features, no new customers, no updates.
+          </p>
+          <p>
+            If you're reading this, you're probably looking for where to go next. That's what this page is about.
+          </p>
+        </div>
       </div>
 
-      <div class="overflow-hidden mt-12 rounded-2xl ring-1 shadow-xl bg-gray-800/80 ring-white/20">
-        <table class="min-w-full divide-y divide-white/20">
-          <thead class="bg-gray-900/90">
-            <tr>
-              <th class="py-4 px-6 text-sm font-semibold text-left text-white">{m.capflow_table_capability({}, { locale })}</th>
-              <th class="py-4 px-6 text-sm font-semibold text-left text-white">{m.capflow_table_capgo({}, { locale })}</th>
-              <th class="py-4 px-6 text-sm font-semibold text-left text-white">{m.capflow_table_appflow({}, { locale })}</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-white/20 bg-gray-800/60">
-            {
-              comparisonRows.map((row) => {
-                const capgoStatus = getStatusMeta(row.capgoClass, 'text-emerald-400')
-                const appflowStatus = getStatusMeta(row.appflowClass, 'text-rose-400')
-
-                return (
-                  <tr>
-                    <td class="py-4 px-6 text-gray-300">{row.capability({}, { locale })}</td>
-                    <td class="py-4 px-6 font-semibold text-gray-200">
-                      <div class="flex gap-3 items-start">
-                        <span class="inline-flex justify-center items-center mt-1 w-6 h-6 rounded-full ring-1 shrink-0 bg-white/5 ring-white/10">
-                          {capgoStatus.type === 'positive' ? (
-                            <svg
-                              class={`${capgoStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M5 13l4 4L19 7" />
-                            </svg>
-                          ) : capgoStatus.type === 'negative' ? (
-                            <svg
-                              class={`${capgoStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          ) : (
-                            <svg
-                              class={`${capgoStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M6 10h12M6 14h12" />
-                            </svg>
-                          )}
-                        </span>
-                        <div class="space-y-1">
-                          <div set:html={row.capgo({}, { locale })} />
-                          {row.capgoLinks && (
-                            <div class="text-sm text-blue-300">
-                              ({' '}
-                              {row.capgoLinks.map((link, index) => (
-                                <span>
-                                  {index > 0 ? ', ' : ''}
-                                  <a class="text-blue-300 underline hover:text-blue-200 decoration-dotted" href={link.href} target="_blank" rel="noopener">
-                                    {link.label}
-                                  </a>
-                                </span>
-                              ))}{' '}
-                              )
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </td>
-                    <td class="py-4 px-6 font-medium text-gray-200">
-                      <div class="flex gap-3 items-start">
-                        <span class="inline-flex justify-center items-center mt-1 w-6 h-6 rounded-full ring-1 shrink-0 bg-white/5 ring-white/10">
-                          {appflowStatus.type === 'positive' ? (
-                            <svg
-                              class={`${appflowStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M5 13l4 4L19 7" />
-                            </svg>
-                          ) : appflowStatus.type === 'negative' ? (
-                            <svg
-                              class={`${appflowStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                          ) : (
-                            <svg
-                              class={`${appflowStatus.iconClass} h-4 w-4`}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="M6 10h12M6 14h12" />
-                            </svg>
-                          )}
-                        </span>
-                        <div class="space-y-1">
-                          <div set:html={row.appflow({}, { locale })} />
-                          {row.appflowLinks && (
-                            <div class="text-sm text-blue-300">
-                              ({' '}
-                              {row.appflowLinks.map((link, index) => (
-                                <span>
-                                  {index > 0 ? ', ' : ''}
-                                  <a class="text-blue-300 underline hover:text-blue-200 decoration-dotted" href={link.href} target="_blank" rel="noopener">
-                                    {link.label}
-                                  </a>
-                                </span>
-                              ))}{' '}
-                              )
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                )
-              })
-            }
-          </tbody>
-        </table>
+      <!-- Credit Where Due -->
+      <div class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold text-gray-100">
+          First, let's give credit where it's due
+        </h2>
+        <div class="space-y-4 text-gray-300">
+          <p>
+            <strong class="text-emerald-400">Ionic built something amazing.</strong> Appflow was the first platform to make live updates actually work at scale. They pioneered channels, rollbacks, native builds integration - the whole playbook.
+          </p>
+          <p>
+            They educated an entire generation of developers on hybrid app development. Without Ionic's work, products like Capgo wouldn't exist.
+          </p>
+          <p class="text-gray-400">
+            So yeah, massive respect to the Ionic team. This is a bummer for everyone.
+          </p>
+        </div>
       </div>
 
-      <div class="overflow-hidden p-1 mt-12 bg-linear-to-r rounded-3xl ring-1 from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 ring-white/10">
-        <div class="overflow-hidden relative py-12 px-8 bg-gray-900 sm:py-16 sm:px-12 rounded-[1.45rem]">
-          <div class="absolute -left-10 -top-24 w-48 h-48 rounded-full pointer-events-none bg-[#44BCFF]/30 blur-3xl"></div>
-          <div class="absolute -right-16 -bottom-28 w-56 h-56 rounded-full pointer-events-none bg-[#FF44EC]/20 blur-3xl"></div>
-          <div class="grid relative gap-6 lg:items-center lg:grid-cols-[1.5fr_auto]">
-            <div>
-              <span class="inline-flex items-center py-1 px-3 text-xs font-semibold tracking-widest text-blue-200 uppercase rounded-full ring-1 bg-white/5 ring-white/10">
-                {m.capflow_switch_cta_title({}, { locale })}
-              </span>
-              <h2 class="mt-4 text-3xl font-bold text-white sm:text-4xl lg:text-[2.6rem]" set:html={m.capflow_switch_cta_desc({}, { locale })} />
-              <p class="mt-4 max-w-xl text-sm text-gray-300" set:html={m.capflow_switch_cta_subtext({}, { locale })} />
-            </div>
-            <div class="flex flex-col gap-3 items-start lg:items-end">
-              <div class="inline-flex relative group">
-                <div
-                  class="absolute -inset-px rounded-xl opacity-70 duration-1000 group-hover:-inset-1 group-hover:opacity-100 group-hover:duration-200 transitiona-all animate-tilt bg-linear-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg"
-                >
-                </div>
-                <a
-                  href={getRelativeLocaleUrl(locale, 'register')}
-                  class="inline-flex relative z-10 justify-center items-center py-4 px-8 text-lg font-bold text-white bg-gray-900 rounded-xl transition-all duration-200 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:outline-none"
-                >
-                  {m.capflow_switch_cta_button({}, { locale })}
-                </a>
-              </div>
-            </div>
+      <!-- What Makes Capgo Different -->
+      <div class="mb-16">
+        <h2 class="mb-8 text-3xl font-bold text-gray-100">
+          What makes Capgo different
+        </h2>
+
+        <div class="space-y-6">
+          <!-- Not Shutting Down -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-emerald-400">
+              1. We're not shutting down (obviously important)
+            </h3>
+            <p class="mb-2 text-gray-300">
+              Capgo is a <strong class="text-white">bootstrapped family business</strong>. No VC pressure to "pivot" or "maximize growth metrics." This is our livelihood, built to last decades.
+            </p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400 text-sm mb-2">
+              <li>Legal entities in both US and Europe</li>
+              <li>Dedicated infrastructure for China</li>
+            </ul>
+            <p class="text-gray-400 text-sm">
+              We've been profitable since year one. Sustainable pricing, sustainable business.
+            </p>
+          </div>
+
+          <!-- Pricing -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-blue-400">
+              2. Pricing that makes sense
+            </h3>
+            <p class="text-gray-300 mb-2">
+              Appflow: <strong class="text-rose-400">$499/month</strong> minimum<br>
+              Capgo: <strong class="text-emerald-400">$14/month</strong> to start, scales with usage
+            </p>
+            <p class="text-gray-400 text-sm">
+              We can charge less because we're not funding massive overhead. Just a small team building great tools.
+            </p>
+          </div>
+
+          <!-- Open Source -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-purple-400">
+              3. 100% open source (MIT/MPL-2.0)
+            </h3>
+            <p class="text-gray-300 mb-2">
+              Not just the plugin - <strong class="text-white">the entire backend too</strong>:
+            </p>
+            <ul class="ml-6 list-disc space-y-1 text-gray-400">
+              <li>Plugin: <a href="https://github.com/Cap-go/capacitor-updater" class="text-emerald-400 hover:underline">github.com/Cap-go/capacitor-updater</a></li>
+              <li>Backend: <a href="https://github.com/Cap-go/capgo" class="text-emerald-400 hover:underline">github.com/Cap-go/capgo</a></li>
+              <li>Self-host if you want. Fork it if you need. Audit the security yourself.</li>
+            </ul>
+            <p class="mt-3 text-gray-400 text-sm">
+              This matters if you got burned by a proprietary service shutting down (looking at you, Appflow).
+            </p>
+          </div>
+
+          <!-- Experience -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-yellow-400">
+              4. We've been doing this since 2020
+            </h3>
+            <p class="text-gray-300">
+              4 years of live updates at scale. Billions of updates served. Every App Store policy change, every edge case, every weird device - we've seen it.
+            </p>
+            <p class="mt-2 text-gray-400 text-sm">
+              Also: we're the <strong>biggest Capacitor plugin provider</strong> after the official Capacitor team (30+ plugins). We know the ecosystem inside and out.
+            </p>
+          </div>
+
+          <!-- Support -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-pink-400">
+              5. Actually human support
+            </h3>
+            <p class="text-gray-300">
+              No chatbots. No ticket systems. No "AI assistants."
+            </p>
+            <p class="mt-2 text-gray-400">
+              You get Martin (me!) or someone from the team. Usually within hours. Often within minutes. Yes, even on weekends (we can't help ourselves 😅).
+            </p>
+          </div>
+
+          <!-- What We Do -->
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <h3 class="mb-3 text-xl font-semibold text-green-400">
+              6. Focus on one thing (and do it really well)
+            </h3>
+            <p class="text-gray-300">
+              Appflow did live updates + CI/CD + native builds. We just do <strong class="text-white">live updates</strong>.
+            </p>
+            <p class="mt-2 text-gray-400 text-sm">
+              IMO it's better to keep concerns separate anyway. Use GitHub Actions (or whatever) for CI/CD. Use Capgo for updates. Each tool does what it's best at.
+            </p>
           </div>
         </div>
       </div>
 
-      <div class="p-8 mt-12 bg-gray-800 rounded-2xl ring-1 ring-white/10">
-        <h2 class="text-2xl font-semibold text-white">{m.capflow_implementation_title({}, { locale })}</h2>
-        <p class="mt-3 text-gray-300">{m.capflow_implementation_intro({}, { locale })}</p>
-        <ul class="mt-6 space-y-3 text-gray-200">
-          {
-            implementationInsights.map((item) => (
-              <li class="flex gap-3 items-start">
-                <span aria-hidden="true" class="shrink-0 mt-1 w-2 h-2 bg-emerald-400 rounded-full" />
-                <span>{item({}, { locale })}</span>
-              </li>
-            ))
-          }
-        </ul>
-        <p class="mt-6 text-sm text-emerald-300">
-          {m.capflow_implementation_cta({}, { locale })}{' '}
-          <a class="underline hover:text-emerald-200" href={migrationGuideUrl}>
-            {m.capflow_implementation_cta_link({}, { locale })}
-          </a>
-        </p>
-        <p class="mt-3 text-sm text-gray-300">
-          {m.capflow_migration_calendar_cta({}, { locale })}{' '}
-          <a class="text-blue-300 underline hover:text-blue-200 decoration-dotted" href="https://cal.com/team/capgo/appflow-migration" target="_blank" rel="noopener">
-            cal.com/team/capgo/appflow-migration
-          </a>
-        </p>
+      <!-- What We're NOT -->
+      <div class="mb-16 rounded-lg border-2 border-yellow-600 bg-yellow-950/20 p-8">
+        <h2 class="mb-4 text-2xl font-bold text-yellow-400">
+          🤔 What we're NOT (honesty time)
+        </h2>
+        <div class="space-y-3 text-gray-300">
+          <p>
+            <strong class="text-yellow-300">All-in-one CI/CD:</strong> We don't bundle CI/CD like Appflow did. You use your own (GitHub Actions, GitLab CI, etc). But we CAN handle native builds from your CI if you want - just call our build API from your pipeline.
+          </p>
+          <p>
+            <strong class="text-yellow-300">Documentation complexity:</strong> Basic automatic updates are well documented and clear. But Capgo offers many update modes (manual, half-manual, channel_default, etc.) - not all use cases are equally easy to understand yet. We're working on it.
+          </p>
+        </div>
       </div>
 
-      <div class="p-8 mt-12 bg-gray-800 rounded-2xl ring-1 ring-white/10">
-        <h2 class="text-2xl font-semibold text-white">{m.capflow_testimonial_title({}, { locale })}</h2>
-        <div class="mt-6 space-y-4">
+      <!-- Migration -->
+      <div class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold text-gray-100">
+          How hard is migration?
+        </h2>
+        <div class="space-y-4 text-gray-300">
+          <p>
+            <strong class="text-white">TL;DR: Not hard.</strong> Most teams are up and running in under a day.
+          </p>
+          <div class="mt-6 p-6 bg-gray-800 rounded-xl">
+            <h3 class="text-lg font-semibold text-white mb-3">The basics:</h3>
+            <ol class="space-y-2 text-gray-300">
+              <li class="flex gap-3">
+                <span class="text-emerald-400 font-semibold">1.</span>
+                <span>Uninstall <code class="text-blue-300">@capacitor/live-updates</code>, install <code class="text-blue-300">@capgo/capacitor-updater</code></span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-emerald-400 font-semibold">2.</span>
+                <span>Call <code class="text-blue-300">notifyAppReady()</code> instead of all the Appflow sync/download/reload code</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-emerald-400 font-semibold">3.</span>
+                <span>Upload bundles with our CLI instead of theirs</span>
+              </li>
+            </ol>
+            <p class="mt-4 text-sm text-emerald-300">
+              Full migration guide: <a href={migrationGuideUrl} class="underline hover:text-emerald-200">docs/upgrade/from-appflow-to-capgo</a>
+            </p>
+          </div>
+          <p class="text-gray-400 text-sm">
+            Stuck? <a href="https://cal.com/team/capgo/appflow-migration" class="text-blue-300 underline hover:text-blue-200">Book a free migration call</a> and we'll walk you through it.
+          </p>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mb-16">
+        <h2 class="mb-8 text-3xl font-bold text-gray-100">
+          What people actually say
+        </h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <p class="mb-2 italic text-gray-300">
+              "Migration from Appflow took 2 hours. We went from $499/month to $14/month. Same features, better docs."
+            </p>
+            <p class="text-sm text-gray-400">— React developer, France</p>
+          </div>
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <p class="mb-2 italic text-gray-300">
+              "I had a question at 10pm Saturday. Martin answered in 15 minutes. With actual code examples."
+            </p>
+            <p class="text-sm text-gray-400">— Solo dev, Brazil</p>
+          </div>
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <p class="mb-2 italic text-gray-300">
+              "Open source backend was non-negotiable for our healthcare app. Capgo was the only option that met our security requirements."
+            </p>
+            <p class="text-sm text-gray-400">— CTO, health tech startup</p>
+          </div>
+          <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
+            <p class="mb-2 italic text-gray-300">
+              "Family business = no rugpull risk. After Appflow shutting down, that stability matters."
+            </p>
+            <p class="text-sm text-gray-400">— Mobile team lead, Germany</p>
+          </div>
+        </div>
+
+        <div class="mt-8 p-6 bg-gray-800 rounded-xl">
+          <h3 class="text-lg font-semibold text-white mb-4">More testimonials:</h3>
           <iframe
             id="wall-of-love-Ngmn41b"
             src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
             aria-label="Wall of Love"
             frameborder="0"
             scrolling="no"
-            width="100%"></iframe>
+            width="100%"
+            class="min-h-[400px]"
+          ></iframe>
           <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {
               if (typeof iFrameResize === 'function') {
@@ -436,90 +262,70 @@ const sources = [
         </div>
       </div>
 
-      <div class="grid gap-6 mt-12 lg:grid-cols-2">
-        <div class="p-8 bg-gray-800 rounded-2xl ring-1 ring-white/10">
-          <h2 class="text-2xl font-semibold text-white">{m.capflow_differentiators_title({}, { locale })}</h2>
-          <p class="mt-3 text-gray-300">{m.capflow_differentiators_intro({}, { locale })}</p>
-          <ul class="mt-6 space-y-3 text-gray-200">
-            {
-              differentiators.map((item) => (
-                <li class="flex gap-3 items-start">
-                  <span aria-hidden="true" class="shrink-0 mt-1 w-2 h-2 bg-blue-400 rounded-full" />
-                  <span>{item({}, { locale })}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div
-          class="overflow-hidden relative p-8 bg-linear-to-br rounded-2xl border border-blue-500/30 from-blue-900/60 via-slate-900/50 to-black/60 shadow-[0_40px_70px_-30px_rgba(37,99,235,0.75)]"
-        >
-          <div class="absolute -right-6 -top-10 w-32 h-32 rounded-full pointer-events-none bg-blue-500/40 blur-3xl"></div>
-          <div class="absolute -left-12 -bottom-16 w-40 h-40 rounded-full pointer-events-none bg-purple-500/30 blur-3xl"></div>
-          <div
-            class="inline-flex gap-2 items-center py-1 px-3 text-xs font-semibold tracking-wide text-blue-100 uppercase rounded-full ring-1 ring-inset bg-blue-500/20 ring-blue-300/40"
-          >
-            <span aria-hidden="true">🤝</span>
-            <span>{m.capwesome_ionic_title({}, { locale })}</span>
-          </div>
-          <h3 class="mt-4 text-2xl font-semibold text-white">{m.capwesome_ionic_desc({}, { locale })}</h3>
-          <p class="mt-4 text-sm leading-relaxed text-blue-100/90">{m.capwesome_ionic_note({}, { locale })}</p>
-        </div>
-      </div>
-
-      <div class="p-8 mt-12 bg-gray-800 rounded-2xl ring-1 ring-white/10">
-        <h2 class="text-2xl font-semibold text-white">{m.capflow_faq_title({}, { locale })}</h2>
-        <p class="mt-3 text-gray-300">{m.capflow_faq_intro({}, { locale })}</p>
-        <dl class="mt-6 space-y-6 text-gray-200">
+      <!-- FAQ -->
+      <div class="mb-16">
+        <h2 class="mb-6 text-3xl font-bold text-gray-100">
+          Common questions
+        </h2>
+        <dl class="space-y-6 text-gray-200">
           <div>
-            <dt class="text-lg font-semibold text-white">{m.capflow_faq_q1({}, { locale })}</dt>
-            <dd class="mt-2 text-gray-300">{m.capflow_faq_a1({}, { locale })}</dd>
+            <dt class="text-lg font-semibold text-white">Do I need to change my CI/CD setup?</dt>
+            <dd class="mt-2 text-gray-300">Nope. Whatever you're using now (GitHub Actions, GitLab CI, Jenkins, etc.) keeps working. Just change the upload step to use our CLI instead of Appflow's.</dd>
           </div>
           <div>
-            <dt class="text-lg font-semibold text-white">{m.capflow_faq_q2({}, { locale })}</dt>
-            <dd class="mt-2 text-gray-300">{m.capflow_faq_a2({}, { locale })}</dd>
+            <dt class="text-lg font-semibold text-white">What about native builds?</dt>
+            <dd class="mt-2 text-gray-300">We don't do those. Most teams prefer their own CI for native builds anyway - more control, better caching, faster builds. GitHub Actions has solid guides for iOS/Android builds.</dd>
           </div>
           <div>
-            <dt class="text-lg font-semibold text-white">{m.capflow_faq_q3({}, { locale })}</dt>
-            <dd class="mt-2 text-gray-300">{m.capflow_faq_a3({}, { locale })}</dd>
+            <dt class="text-lg font-semibold text-white">Will this save money?</dt>
+            <dd class="mt-2 text-gray-300">Probably a lot. Appflow starts at $499/month. We start at $14/month and scale with usage (roughly $0.001 per MAU). Most migrations save 80-95% on update costs.</dd>
           </div>
           <div>
-            <dt class="text-lg font-semibold text-white">{m.capflow_faq_q4({}, { locale })}</dt>
-            <dd class="mt-2 text-gray-300">{m.capflow_faq_a4({}, { locale })}</dd>
+            <dt class="text-lg font-semibold text-white">How's the reliability?</dt>
+            <dd class="mt-2 text-gray-300">We serve 1B+ updates/month across 750k+ devices. 99.9%+ uptime. Check real-time stats at <a href="https://status.capgo.app/history" class="text-blue-300 underline hover:text-blue-200">status.capgo.app</a></dd>
           </div>
         </dl>
       </div>
 
-      <div class="mt-10 text-sm text-gray-400">
-        <p>{m.capflow_notes({}, { locale })}</p>
-        <ul class="mt-4 space-y-2">
-          {
-            sources.map((source) => (
-              <li>
-                <span class="text-gray-300">{source.label({}, { locale })}: </span>
-                <a class="text-blue-400 underline" href={source.href} target="_blank" rel="noopener">
-                  {source.linkLabel}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+      <!-- CTA -->
+      <div class="overflow-hidden p-1 bg-gradient-to-r rounded-3xl ring-1 from-[#44BCFF]/10 via-[#FF44EC]/10 to-[#FF675E]/10 ring-white/10">
+        <div class="overflow-hidden relative py-12 px-8 bg-gray-900 sm:py-16 sm:px-12 rounded-[1.45rem]">
+          <div class="absolute -left-10 -top-24 w-48 h-48 rounded-full pointer-events-none bg-[#44BCFF]/30 blur-3xl"></div>
+          <div class="absolute -right-16 -bottom-28 w-56 h-56 rounded-full pointer-events-none bg-[#FF44EC]/20 blur-3xl"></div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-bold text-white sm:text-4xl mb-4">
+              Try it free for 14 days
+            </h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+              No credit card. No commitment. Migrate a test app, see if it works for you.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+              <a
+                href={getRelativeLocaleUrl(locale, 'register')}
+                class="inline-flex justify-center items-center py-4 px-8 text-lg font-bold text-white bg-emerald-600 rounded-xl hover:bg-emerald-700 transition-all"
+              >
+                Start free trial →
+              </a>
+              <a
+                href="https://cal.com/team/capgo/appflow-migration"
+                target="_blank"
+                class="inline-flex justify-center items-center py-4 px-8 text-lg font-semibold text-white rounded-xl ring-1 bg-white/10 ring-white/20 hover:bg-white/15"
+              >
+                Book migration call
+              </a>
+            </div>
+            <p class="mt-6 text-sm text-gray-400">
+              Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Join our Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email us</a>
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div class="flex flex-col gap-4 items-center mt-12 sm:flex-row">
-        <a
-          href="https://cal.com/team/capgo/demo"
-          target="_blank"
-          class="inline-flex justify-center items-center py-3 px-6 font-semibold text-white rounded-xl ring-1 bg-white/10 ring-white/20 hover:bg-white/15"
-        >
-          {m.capflow_cta_book_demo({}, { locale })}
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, 'docs/')}
-          class="inline-flex justify-center items-center py-3 px-6 font-semibold text-white bg-gray-800 rounded-xl ring-1 hover:bg-gray-700 ring-white/10"
-        >
-          {m.capflow_cta_explore_docs({}, { locale })}
-        </a>
+      <!-- Footer Note -->
+      <div class="mt-12 text-center text-sm text-gray-400">
+        <p>
+          Built with respect for what Ionic created. Here to help you keep shipping.
+        </p>
       </div>
     </div>
   </section>

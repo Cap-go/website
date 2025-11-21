@@ -94,6 +94,7 @@ const navigation: Record<string, NavigationItem[]> = {
     { name: m.consulting({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'consulting') },
   ],
   compare: [
+    { name: m.alternatives({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'alternatives') },
     { name: m.capflow_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'ionic-appflow') },
     { name: m.capwesome_nav_label({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'capwesome') },
   ],
@@ -175,7 +176,7 @@ const navigation: Record<string, NavigationItem[]> = {
     </div>
 
     <!-- Links Grid -->
-    <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-4">
+    <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-5">
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.solutions({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
@@ -205,6 +206,18 @@ const navigation: Record<string, NavigationItem[]> = {
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.company({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
           {navigation.company.map((item) => (
+            <li>
+              <a href={item.href} class="text-sm transition-colors hover:text-white text-zinc-400">
+                {typeof item.name === 'function' ? item.name() : item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">Compare</h3>
+        <ul role="list" class="space-y-3">
+          {navigation.compare.map((item) => (
             <li>
               <a href={item.href} class="text-sm transition-colors hover:text-white text-zinc-400">
                 {typeof item.name === 'function' ? item.name() : item.name}

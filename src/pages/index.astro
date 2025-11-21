@@ -11,6 +11,8 @@ import * as m from '@/paraglide/messages'
 import CompaniesLogo from '@/components/companies-logo.astro'
 import HowItWorks from '@/components/HowItWorks.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
+import MonitoringFeatures from '@/components/landing/MonitoringFeatures.astro'
+import AutomationFeatures from '@/components/landing/AutomationFeatures.astro'
 import BuiltForDevelopers from '@/components/BuiltForDevelopers.astro'
 import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson } from '@/lib/ldJson'
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
@@ -106,6 +108,8 @@ content.ldJSON['@graph'].push(capgoSoftware)
     <ProblemSolution />
     <Manifesto />
     <HowItWorks />
+    <MonitoringFeatures />
+    <AutomationFeatures />
     <GlobalInfrastructure />
     <BuiltForDevelopers />
     <SharedNumbers />

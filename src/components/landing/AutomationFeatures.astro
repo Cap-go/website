@@ -1,0 +1,196 @@
+---
+
+import * as m from '@/paraglide/messages'
+
+const locale = Astro.locals.locale
+---
+
+<div class="py-24 sm:py-32 bg-[#1a1a1a] automation-diagram">
+  <style>
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    .path-initial {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+    .reveal-initial {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .is-visible .animate-draw-1 {
+      animation: draw 0.5s linear forwards;
+    }
+    .is-visible .animate-draw-2 {
+      animation: draw 0.5s linear 0.5s forwards;
+    }
+    .is-visible .animate-draw-3 {
+      animation: draw 0.5s linear 1.0s forwards;
+    }
+    .is-visible .reveal-delay-1 {
+      transition-delay: 1.0s;
+      opacity: 1;
+    }
+    .is-visible .reveal-delay-2 {
+      transition-delay: 1.5s;
+      opacity: 1;
+    }
+  </style>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.automation-diagram').forEach((el) => {
+      observer.observe(el);
+    });
+  </script>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center mb-16">
+      <h2 class="font-mono text-base font-semibold leading-7 text-[#44BCFF]">Automation</h2>
+      <h2 class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        Automate your builds, tests, and releases
+      </h2>
+      <p class="mt-6 text-lg leading-8 text-gray-400">
+        Build for the app stores, send over-the-air updates, and more automatically with Workflows.
+      </p>
+    </div>
+
+    <div class="relative overflow-x-auto pb-12">
+      <div class="min-w-[800px] px-4">
+        <svg width="1124" height="323" viewBox="0 0 1124 323" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-auto w-full">
+          <defs>
+            <mask id="reveal-middle" maskUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="1124" height="323" fill="black"></rect>
+              <path class="path-initial animate-draw-2" d="M433 175H481V112C481 108 485 104 489 104H519" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="1" pathLength="1"></path>
+              <path class="path-initial animate-draw-2" d="M519 104V61C519 57 523 53 527 53H551" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="1" pathLength="1"></path>
+              <path class="path-initial animate-draw-2" d="M519 104V147C519 151 523 155 527 155H551" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="1" pathLength="1"></path>
+            </mask>
+            <filter id="card_shadow" x="-20" y="-10" width="200%" height="150%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+              <feOffset dy="2"></feOffset>
+              <feGaussianBlur stdDeviation="5"></feGaussianBlur>
+              <feComposite in2="hardAlpha" operator="out"></feComposite>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend>
+            </filter>
+            <clipPath id="clip0_4538_722"><rect x="10" y="79.1582" width="222" height="179" rx="12.4516" fill="white"></rect></clipPath>
+            <clipPath id="clip1_4538_722"><rect x="176" y="225.613" width="36" height="20" rx="10" fill="white"></rect></clipPath>
+            <clipPath id="clip2_4538_722"><rect x="573.876" y="30.9404" width="20" height="20" rx="10" fill="white"></rect></clipPath>
+            <clipPath id="clip3_4538_722"><rect x="573.876" y="130.94" width="20" height="20" rx="10" fill="white"></rect></clipPath>
+            <clipPath id="clip4_4538_722"><rect x="833.876" y="31.3994" width="20" height="20" rx="10" fill="white"></rect></clipPath>
+            <clipPath id="clip5_4538_722"><rect x="833.876" y="130.94" width="20" height="20" rx="10" fill="white"></rect></clipPath>
+          </defs>
+          <path d="M481 175L234 175M481 175V264C481 268 485 272 489 272H572M481 175L481 112C481 108 485 104 489 104H519M843 53L527 53C523 53 519 57 519 61V104M843 155L527 155C523 155 519 152 519 147L519 104" stroke="#333333" stroke-width="2"></path>
+          <path class="path-initial animate-draw-1" d="M233 175H280" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" pathLength="1"></path>
+          <g mask="url(#reveal-middle)" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <path d="M433 175H481V112C481 108 485 104 489 104H519"></path>
+            <path d="M519 104V61C519 57 523 53 527 53H551"></path>
+            <path d="M519 104V147C519 151 523 155 527 155H551"></path>
+          </g>
+          <path class="path-initial animate-draw-3" d="M772 53H811" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" pathLength="1"></path>
+          <path class="path-initial animate-draw-3" d="M772 155H811" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" pathLength="1"></path>
+          
+          <!-- Get Build Card -->
+          <g filter="url(#card_shadow)">
+            <rect x="280" y="141.664" width="153" height="62" rx="12.4516" fill="#252525"></rect>
+            <rect x="280.328" y="141.992" width="152.345" height="61.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="333.858" y="179.883">Get build</tspan></text>
+            <path d="M318.8 180.306L315.527 177.033M317.295 172.782C317.295 176.106 314.6 178.801 311.276 178.801C307.952 178.801 305.257 176.106 305.257 172.782C305.257 169.458 307.952 166.763 311.276 166.763C314.6 166.763 317.295 169.458 317.295 172.782Z" stroke="#9CA3AF" stroke-width="1.50482" stroke-linecap="round" stroke-linejoin="round"></path>
+          </g>
+
+          <!-- Deploy to Production Card -->
+          <g filter="url(#card_shadow)">
+            <g clip-path="url(#clip0_4538_722)">
+              <rect x="10" y="79.1582" width="222" height="179" rx="12.4516" fill="#252525"></rect>
+              <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em"><tspan x="29.2607" y="157.15">On every</tspan></text>
+              <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="500" letter-spacing="-0.005em"><tspan x="29.2607" y="106.923">Deploy to production</tspan></text>
+              <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em"><tspan x="29.2607" y="193.249">on branch</tspan></text>
+              <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em"><tspan x="29.2607" y="241.704">Enabled</tspan></text>
+              <g>
+                <rect x="94" y="139.059" width="118" height="26" rx="5" fill="#252525" shape-rendering="crispEdges"></rect>
+                <rect x="94.5" y="139.559" width="117" height="25" rx="4.5" stroke="#333333" shape-rendering="crispEdges"></rect>
+                <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12" font-weight="600" letter-spacing="0em"><tspan x="104" y="156.379">merge</tspan></text>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M189.528 149.587C189.789 149.327 190.211 149.327 190.471 149.587L194 153.115L197.528 149.587C197.789 149.327 198.211 149.327 198.471 149.587C198.731 149.847 198.731 150.269 198.471 150.53L194.471 154.53C194.211 154.79 193.789 154.79 193.528 154.53L189.528 150.53C189.268 150.269 189.268 149.847 189.528 149.587Z" fill="#9CA3AF"></path>
+              </g>
+              <g>
+                <rect x="102" y="175.158" width="110" height="26" rx="5" fill="#252525" shape-rendering="crispEdges"></rect>
+                <rect x="102.5" y="175.658" width="109" height="25" rx="4.5" stroke="#333333" shape-rendering="crispEdges"></rect>
+                <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12" font-weight="600" letter-spacing="0em"><tspan x="112" y="192.478">main</tspan></text>
+              </g>
+              <path d="M10.7695 121.832H232.353" stroke="#333333" stroke-width="0.5"></path>
+              <path d="M10.7695 216.158H232.353" stroke="#333333" stroke-width="0.5"></path>
+              <g clip-path="url(#clip1_4538_722)">
+                <rect x="176" y="225.613" width="36" height="20" rx="10" fill="#3B82F6"></rect>
+                <g><circle cx="202" cy="235.613" r="8" fill="#252525"></circle></g>
+              </g>
+              <rect x="176.5" y="226.113" width="35" height="19" rx="9.5" stroke="#3B82F6"></rect>
+            </g>
+            <rect x="10.3277" y="79.4859" width="221.345" height="178.345" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
+          </g>
+
+          <!-- Build iOS Card -->
+          <g filter="url(#card_shadow)">
+            <rect x="551.323" y="8" width="221" height="84" rx="12.4516" fill="#252525"></rect>
+            <rect x="551.651" y="8.32767" width="220.345" height="83.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="605.182" y="46.2186">Build iOS</tspan></text>
+            <text class="reveal-initial reveal-delay-1" fill="#9CA3AF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em" opacity="1"><tspan x="605.182" y="68.2491">Duration: 5m 42s</tspan></text>
+            <g class="reveal-initial reveal-delay-1" clip-path="url(#clip2_4538_722)" opacity="1">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M583.875 31.7734C578.813 31.7734 574.709 35.8774 574.709 40.9398C574.709 46.0022 578.813 50.1062 583.875 50.1062C588.938 50.1062 593.042 46.0022 593.042 40.9398C593.042 35.8774 588.938 31.7734 583.875 31.7734ZM588.214 39.0291C588.54 38.7037 588.54 38.1761 588.214 37.8506C587.889 37.5252 587.361 37.5252 587.036 37.8506L582.625 42.2612L580.715 40.3506C580.389 40.0251 579.862 40.0251 579.536 40.3506C579.211 40.676 579.211 41.2036 579.536 41.529L582.036 44.029C582.362 44.3544 582.889 44.3544 583.215 44.029L588.214 39.0291Z" fill="#4ADE80"></path>
+            </g>
+          </g>
+
+          <!-- OTA Card -->
+          <g filter="url(#card_shadow)">
+            <rect x="551" y="226.664" width="306" height="84" rx="12.4516" fill="#252525"></rect>
+            <rect x="551.328" y="226.992" width="305.345" height="83.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" letter-spacing="0em"><tspan x="604.858" y="264.864">Send over-the-air update</tspan></text>
+            <text class="reveal-initial reveal-delay-1" fill="#9CA3AF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em"><tspan x="604.858" y="286.913">Skipped</tspan></text>
+            <path class="reveal-initial reveal-delay-1" d="M577.727 253.78L589.708 265.761M592.19 259.771C592.19 264.451 588.397 268.244 583.717 268.244C579.038 268.244 575.244 264.451 575.244 259.771C575.244 255.091 579.038 251.298 583.717 251.298C588.397 251.298 592.19 255.091 592.19 259.771Z" stroke="#9CA3AF" stroke-width="1.69462" stroke-linecap="round" stroke-linejoin="round"></path>
+          </g>
+
+          <!-- Build Android Card -->
+          <g filter="url(#card_shadow)">
+            <rect x="551.323" y="108" width="221" height="84" rx="12.4516" fill="#252525"></rect>
+            <rect x="551.651" y="108.328" width="220.345" height="83.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="605.182" y="146.719">Build Android</tspan></text>
+            <text class="reveal-initial reveal-delay-1" fill="#9CA3AF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em" opacity="1"><tspan x="605.182" y="168.749">Duration: 9m 54s</tspan></text>
+            <g class="reveal-initial reveal-delay-1" clip-path="url(#clip3_4538_722)" opacity="1">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M583.875 131.773C578.813 131.773 574.709 135.877 574.709 140.94C574.709 146.002 578.813 150.106 583.875 150.106C588.938 150.106 593.042 146.002 593.042 140.94C593.042 135.877 588.938 131.773 583.875 131.773ZM588.214 139.029C588.54 138.704 588.54 138.176 588.214 137.851C587.889 137.525 587.361 137.525 587.036 137.851L582.625 142.261L580.715 140.351C580.389 140.025 579.862 140.025 579.536 140.351C579.211 140.676 579.211 141.204 579.536 141.529L582.036 144.029C582.362 144.354 582.889 144.354 583.215 144.029L588.214 139.029Z" fill="#4ADE80"></path>
+            </g>
+          </g>
+
+          <!-- Submit to App Store Card -->
+          <g filter="url(#card_shadow)">
+            <rect x="811" y="8" width="303" height="84" rx="12.4516" fill="#252525"></rect>
+            <rect x="811.328" y="8.32767" width="302.345" height="83.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="864.858" y="46.2186">Submit to App Store</tspan></text>
+            <text class="reveal-initial reveal-delay-2" fill="#9CA3AF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em" opacity="1"><tspan x="864.858" y="68.2491">Duration: 5m 42s</tspan></text>
+            <g class="reveal-initial reveal-delay-2" clip-path="url(#clip4_4538_722)" opacity="1">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M843.875 32.2324C838.813 32.2324 834.709 36.3363 834.709 41.3988C834.709 46.4612 838.813 50.5651 843.875 50.5651C848.938 50.5651 853.042 46.4612 853.042 41.3988C853.042 36.3363 848.938 32.2324 843.875 32.2324ZM848.214 39.4881C848.54 39.1627 848.54 38.6351 848.214 38.3096C847.889 37.9842 847.361 37.9842 847.036 38.3096L842.625 42.7202L840.715 40.8095C840.389 40.4841 839.862 40.4841 839.536 40.8095C839.211 41.135 839.211 41.6626 839.536 41.988L842.036 44.4879C842.362 44.8134 842.889 44.8134 843.215 44.4879L848.214 39.4881Z" fill="#4ADE80"></path>
+            </g>
+          </g>
+
+          <!-- Submit to Google Play Store Card -->
+          <g filter="url(#card_shadow)">
+            <rect x="811" y="108" width="303" height="84" rx="12.4516" fill="#252525"></rect>
+            <rect x="811.328" y="108.328" width="302.345" height="83.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="864.859" y="146.719">Submit to Google Play Store</tspan></text>
+            <text class="reveal-initial reveal-delay-2" fill="#9CA3AF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em" opacity="1"><tspan x="864.859" y="168.749">Duration: 9m 54s</tspan></text>
+            <g class="reveal-initial reveal-delay-2" clip-path="url(#clip5_4538_722)" opacity="1">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M843.875 131.773C838.813 131.773 834.709 135.877 834.709 140.94C834.709 146.002 838.813 150.106 843.875 150.106C848.938 150.106 853.042 146.002 853.042 140.94C853.042 135.877 848.938 131.773 843.875 131.773ZM848.214 139.029C848.54 138.704 848.54 138.176 848.214 137.851C847.889 137.525 847.361 137.525 847.036 137.851L842.625 142.261L840.715 140.351C840.389 140.025 839.862 140.025 839.536 140.351C839.211 140.676 839.211 141.204 839.536 141.529L842.036 144.029C842.362 144.354 842.889 144.354 843.215 144.029L848.214 139.029Z" fill="#4ADE80"></path>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
