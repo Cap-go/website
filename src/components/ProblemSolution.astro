@@ -2,9 +2,9 @@
 import * as m from '@/paraglide/messages'
 ---
 
-<section class="relative overflow-hidden bg-[#1a1a1a] pt-24 sm:py-32">
+<section class="overflow-hidden relative pt-24 sm:py-32 bg-[#1a1a1a]">
   <!-- Background Gradient -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl opacity-80 pointer-events-none">
+  <div class="absolute top-0 left-1/2 w-full max-w-7xl opacity-80 -translate-x-1/2 pointer-events-none">
     <svg width="1198" height="599" viewBox="0 0 1198 599" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
         <path d="M1198 599C1198 520.338 1182.51 442.447 1152.4 369.773C1122.3 297.099 1078.18 231.065 1022.56 175.443C966.935 119.821 900.901 75.6987 828.227 45.5962C755.553 15.4936 677.662 -3.43842e-06 599 0C520.338 3.43842e-06 442.447 15.4936 369.773 45.5962C297.099 75.6987 231.065 119.821 175.443 175.443C119.821 231.065 75.6987 297.099 45.5961 369.773C15.4936 442.447 -6.87683e-06 520.338 0 599L599 599H1198Z" fill="url(#paint0_linear_1_23404)"/>
         <defs>
@@ -16,10 +16,10 @@ import * as m from '@/paraglide/messages'
     </svg>
   </div>
 
-  <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+  <div class="relative px-6 mx-auto max-w-7xl lg:px-8">
     <!-- Header -->
-    <div class="mx-auto max-w-2xl text-center mb-16">
-      <h2 class="text-sm font-semibold leading-7 text-[#44BCFF] uppercase tracking-wide">Problem &rarr; Solution</h2>
+    <div class="mx-auto mb-16 max-w-2xl text-center">
+      <h2 class="text-sm font-semibold tracking-wide leading-7 uppercase text-[#44BCFF]">Problem &rarr; Solution</h2>
       <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-5xl">
         The App Store is killing<br />your <span class="underline decoration-[#44BCFF] underline-offset-4">velocity</span>.
       </p>
@@ -28,45 +28,45 @@ import * as m from '@/paraglide/messages'
       </p>
     </div>
 
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 gap-8 mx-auto max-w-5xl lg:grid-cols-2">
       <!-- Problem Card -->
-      <div class="relative rounded-3xl border border-red-500/30 bg-[#111] p-8">
+      <div class="relative p-8 rounded-3xl border border-red-500/30 bg-[#111]">
         <!-- Red Cross Icon -->
-        <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-red-500 ring-4 ring-[#0B0C10]">
+        <div class="flex absolute -top-5 left-1/2 justify-center items-center w-10 h-10 bg-red-500 rounded-full ring-4 -translate-x-1/2 ring-[#0B0C10]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </div>
 
         <!-- Timeline -->
-        <div class="flex flex-wrap justify-center gap-2 mb-12 mt-4">
-            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-gray-300 border border-gray-700">/👷dev</span>
-            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-gray-300 border border-gray-700">/📦build</span>
-            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-blue-300 border border-blue-900/50">/🚢submit</span>
-            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-blue-300 border border-blue-900/50">/👮review</span>
-            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-green-400 border border-green-900/50">/✅live</span>
+        <div class="flex flex-wrap gap-2 justify-center mt-4 mb-12">
+            <span class="py-1 px-3 font-mono text-xs text-gray-300 rounded-md border border-gray-700 bg-[#222]">/👷dev</span>
+            <span class="py-1 px-3 font-mono text-xs text-gray-300 rounded-md border border-gray-700 bg-[#222]">/📦build</span>
+            <span class="py-1 px-3 font-mono text-xs text-blue-300 rounded-md border bg-[#222] border-blue-900/50">/🚢submit</span>
+            <span class="py-1 px-3 font-mono text-xs text-blue-300 rounded-md border bg-[#222] border-blue-900/50">/👮review</span>
+            <span class="py-1 px-3 font-mono text-xs text-green-400 rounded-md border bg-[#222] border-green-900/50">/✅live</span>
         </div>
 
         <!-- Chat -->
         <div class="space-y-6 font-sans text-sm">
             <!-- Left Message -->
             <div class="flex gap-3">
-                <div class="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-400 font-bold">A</div>
-                <div class="rounded-2xl rounded-tl-none bg-[#222] px-4 py-2 text-gray-200">
+                <div class="flex justify-center items-center w-8 h-8 text-xs font-bold text-gray-400 bg-gray-800 rounded-full">A</div>
+                <div class="py-2 px-4 text-gray-200 rounded-2xl rounded-tl-none bg-[#222]">
                     whats the app status?
                 </div>
             </div>
 
             <!-- Right Message -->
-            <div class="flex flex-col items-end gap-2">
-                <div class="rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
+            <div class="flex flex-col gap-2 items-end">
+                <div class="py-2 px-4 text-white rounded-2xl rounded-tr-none bg-[#D34545]">
                     Still pending...
                 </div>
-                <div class="rounded-2xl rounded-tr-none bg-[#D34545] px-4 py-2 text-white">
+                <div class="py-2 px-4 text-white rounded-2xl rounded-tr-none bg-[#D34545]">
                     I hope this bug fix get<br/>approved today...
                 </div>
                  <div class="flex justify-end mt-1">
-                    <div class="h-6 w-6 rounded-full bg-[#D34545]/20 flex items-center justify-center text-sm">
+                    <div class="flex justify-center items-center w-6 h-6 text-sm rounded-full bg-[#D34545]/20">
                         🤬
                     </div>
                 </div>
@@ -75,41 +75,41 @@ import * as m from '@/paraglide/messages'
       </div>
 
       <!-- Solution Card -->
-      <div class="relative rounded-3xl border border-blue-500/30 bg-[#111] p-8">
+      <div class="relative p-8 rounded-3xl border border-blue-500/30 bg-[#111]">
         <!-- Blue Check Icon -->
-        <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 ring-4 ring-[#0B0C10]">
+        <div class="flex absolute -top-5 left-1/2 justify-center items-center w-10 h-10 bg-blue-500 rounded-full ring-4 -translate-x-1/2 ring-[#0B0C10]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
         </div>
 
         <!-- Timeline -->
-        <div class="flex flex-wrap justify-center gap-2 mb-12 mt-4">
-            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-gray-300 border border-gray-700">/👷dev</span>
-            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-gray-300 border border-gray-700">/📦build</span>
-            <span class="px-3 py-1 rounded-md bg-[#222] text-xs font-mono text-green-400 border border-green-900/50">/✅live</span>
+        <div class="flex flex-wrap gap-2 justify-center mt-4 mb-12">
+            <span class="py-1 px-3 font-mono text-xs text-gray-300 rounded-md border border-gray-700 bg-[#222]">/👷dev</span>
+            <span class="py-1 px-3 font-mono text-xs text-gray-300 rounded-md border border-gray-700 bg-[#222]">/📦build</span>
+            <span class="py-1 px-3 font-mono text-xs text-green-400 rounded-md border bg-[#222] border-green-900/50">/✅live</span>
         </div>
 
         <!-- Chat -->
         <div class="space-y-6 font-sans text-sm">
             <!-- Left Message -->
             <div class="flex gap-3">
-                <div class="h-8 w-8 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-400 font-bold">A</div>
-                <div class="rounded-2xl rounded-tl-none bg-[#3B82F6] px-4 py-2 text-white">
+                <div class="flex justify-center items-center w-8 h-8 text-xs font-bold text-gray-400 bg-gray-800 rounded-full">A</div>
+                <div class="py-2 px-4 text-white rounded-2xl rounded-tl-none bg-[#3B82F6]">
                     whats the app status?
                 </div>
             </div>
 
             <!-- Right Message -->
-            <div class="flex flex-col items-end gap-2">
-                <div class="rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+            <div class="flex flex-col gap-2 items-end">
+                <div class="py-2 px-4 text-white rounded-2xl rounded-tr-none bg-[#3B82F6]">
                     Shipped. Next.
                 </div>
-                <div class="rounded-2xl rounded-tr-none bg-[#3B82F6] px-4 py-2 text-white">
+                <div class="py-2 px-4 text-white rounded-2xl rounded-tr-none bg-[#3B82F6]">
                     My users already have it. 🚀
                 </div>
                  <div class="flex justify-end mt-1">
-                    <div class="h-6 w-6 rounded-full bg-blue-500/20 flex items-center justify-center text-sm">
+                    <div class="flex justify-center items-center w-6 h-6 text-sm rounded-full bg-blue-500/20">
                         😍
                     </div>
                 </div>

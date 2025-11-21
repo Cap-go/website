@@ -314,7 +314,7 @@ Hier ist ein Beispiel für eine Zahlungsbuttons-Komponente in Vue, die Sie zu Ih
       </div>
       <button 
         @click="handlePayment" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         Purchase Now
       </button>
@@ -589,7 +589,7 @@ Fügen Sie in Ihrer App eine Seite zur Verwaltung von Abonnements hinzu, um die 
       
       <button 
         @click="manageSubscription" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         Manage Subscription
       </button>
@@ -599,7 +599,7 @@ Fügen Sie in Ihrer App eine Seite zur Verwaltung von Abonnements hinzu, um die 
       <p class="mb-4">You don't have an active subscription.</p>
       <button 
         @click="goToPricingPage" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         View Plans
       </button>

@@ -120,16 +120,16 @@ if (import.meta.env.DEV) {
 ---
 
 <Layout content={content}>
-  <div class="flex w-full flex-col items-center">
-    <div class="relative w-full max-w-7xl px-8 sm:px-10 lg:px-12">
-      <div class="relative z-0 mx-auto pb-12">
+  <div class="flex flex-col items-center w-full">
+    <div class="relative px-8 w-full max-w-7xl sm:px-10 lg:px-12">
+      <div class="relative z-0 pb-12 mx-auto">
         <div class="relative max-w-(--breakpoint-sm)">
-          <div class="mt-4 flex flex-row flex-wrap items-center gap-3">
+          <div class="flex flex-row flex-wrap gap-3 items-center mt-4">
             {
               entry.data.tag.split(',').map((i) => (
                 <a
                   href={getRelativeLocaleUrl(Astro.locals.locale, `blog/category/${slugify(i.trim())}`)}
-                  class="rounded-lg border border-gray-400 px-4 py-1.5 text-sm text-white hover:bg-white hover:text-black"
+                  class="py-1.5 px-4 text-sm text-white rounded-lg border border-gray-400 hover:text-black hover:bg-white"
                 >
                   {i.trim()}
                 </a>
@@ -139,11 +139,11 @@ if (import.meta.env.DEV) {
               {formatTime(entry.data.updated_at)}
             </time>
           </div>
-          <h1 class="font-display mt-8 text-left text-4xl font-medium text-white sm:text-4xl sm:leading-tight">
+          <h1 class="mt-8 text-4xl font-medium text-left text-white sm:text-4xl sm:leading-tight font-display">
             {entry.data.title}
           </h1>
           <p class="mt-4 text-gray-400 sm:text-lg">{entry.data.description}</p>
-          <a class="group mt-6 flex items-center space-x-3 md:hidden" href={entry.data.author_url}>
+          <a class="flex items-center mt-6 space-x-3 md:hidden group" href={entry.data.author_url}>
             <img
               width="36"
               height="36"
@@ -151,18 +151,18 @@ if (import.meta.env.DEV) {
               decoding="async"
               alt={entry.data.author}
               src={entry.data.author_image_url}
-              class="blur-0 rounded-full transition-all group-hover:brightness-90"
+              class="rounded-full transition-all blur-0 group-hover:brightness-90"
             />
             <div class="flex flex-col">
-              <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
+              <p class="text-sm font-medium text-gray-400 whitespace-nowrap">{entry.data.author}</p>
               <p class="text-sm text-gray-500">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
             </div>
           </a>
         </div>
       </div>
     </div>
-    <div class="relative w-full max-w-7xl overflow-clip px-8 sm:px-10 lg:px-12">
-      <div class="max-w-grid-width relative z-auto mx-auto grid grid-cols-3">
+    <div class="relative px-8 w-full max-w-7xl sm:px-10 lg:px-12 overflow-clip">
+      <div class="grid relative z-auto grid-cols-3 mx-auto max-w-grid-width">
         <div class="relative col-span-3 md:col-span-2">
           <img
             width="1536"
@@ -172,16 +172,16 @@ if (import.meta.env.DEV) {
             decoding="async"
             alt={entry.data.title}
             src={entry.data.head_image}
-            class="rounded border border-white/5 object-cover"
+            class="object-cover rounded border border-white/5"
           />
-          <article class="prose prose-invert blog mt-8 min-w-full">
+          <article class="mt-8 min-w-full prose prose-invert blog">
             <Content />
           </article>
         </div>
-        <div class="right-0 hidden px-10 sm:block">
-          <div class="relative flex flex-col gap-y-4 pb-5">
+        <div class="hidden right-0 px-10 sm:block">
+          <div class="flex relative flex-col gap-y-4 pb-5">
             <p class="text-sm text-gray-600">{m.written_by({}, { locale: Astro.locals.locale })}</p>
-            <a class="group flex items-center space-x-3" href={entry.data.author_url}>
+            <a class="flex items-center space-x-3 group" href={entry.data.author_url}>
               <img
                 width="36"
                 height="36"
@@ -189,10 +189,10 @@ if (import.meta.env.DEV) {
                 decoding="async"
                 alt={entry.data.author}
                 src={entry.data.author_image_url}
-                class="blur-0 rounded-full transition-all group-hover:brightness-90"
+                class="rounded-full transition-all blur-0 group-hover:brightness-90"
               />
               <div class="flex flex-col">
-                <p class="text-sm font-medium whitespace-nowrap text-gray-400">{entry.data.author}</p>
+                <p class="text-sm font-medium text-gray-400 whitespace-nowrap">{entry.data.author}</p>
                 <p class="text-sm text-gray-500">{m.content_marketer({}, { locale: Astro.locals.locale })}</p>
               </div>
             </a>
@@ -201,7 +201,7 @@ if (import.meta.env.DEV) {
             headings?.length > 0 && (
               <div id="staticToc" class="sticky top-16 pt-4 pb-8">
                 <div>
-                  <p class="-ml-0.5 flex items-center gap-1.5 text-sm text-gray-500">
+                  <p class="flex gap-1.5 items-center -ml-0.5 text-sm text-gray-500">
                     <svg
                       width="24"
                       height="24"
@@ -212,7 +212,7 @@ if (import.meta.env.DEV) {
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       xmlns="http://www.w3.org/2000/svg"
-                      class="lucide lucide-align-left h-4 w-4"
+                      class="w-4 h-4 lucide lucide-align-left"
                     >
                       <line x1="21" x2="3" y1="6" y2="6" />
                       <line x1="15" x2="3" y1="12" y2="12" />
@@ -220,7 +220,7 @@ if (import.meta.env.DEV) {
                     </svg>
                     {m.table_of_contents({}, { locale: Astro.locals.locale })}
                   </p>
-                  <div class="mt-4 grid gap-4 border-l border-gray-600">
+                  <div class="grid gap-4 mt-4 border-l border-gray-600">
                     {headings.map((k) => (
                       <a id={`${k.slug}-link`} class={`ml-4 pl-${Math.max(0, (k.depth - 1) * 2)} truncate text-sm text-gray-500`} href={`#${k.slug}`}>
                         {k.text}
@@ -236,13 +236,13 @@ if (import.meta.env.DEV) {
       <GetStarted />
       <div class="mx-auto max-w-xl text-center">
         <p class="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">{m.latest_from_news({}, { locale: Astro.locals.locale })}</p>
-        <p class="mt-4 text-base leading-7 font-normal text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
+        <p class="mt-4 text-base font-normal leading-7 text-gray-400 lg:mt-6 lg:text-lg lg:leading-8">
           {m.capgo_gives_you_the_best_insights_you_need_to_create_a_truly_professional_mobile_app({}, { locale: Astro.locals.locale })}
         </p>
       </div>
       {
         related.length > 0 && (
-          <div class="mt-8 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+          <div class="grid grid-cols-1 gap-2 mt-8 md:grid-cols-2 lg:grid-cols-3">
             {related.map((article) => (
               <Blog tag={article.data.tag} link={article.data.slug} title={article.data.title} date={article.data.created_at} image={article.data.head_image} />
             ))}
@@ -252,11 +252,11 @@ if (import.meta.env.DEV) {
       <div class="my-12 text-center">
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
-          class="group inline-flex items-center text-sm font-semibold text-white transition-all duration-200 hover:text-gray-200 hover:underline"
+          class="inline-flex items-center text-sm font-semibold text-white transition-all duration-200 hover:text-gray-200 hover:underline group"
         >
           {m.see_all_from_our_blog({}, { locale: Astro.locals.locale })}
           <svg
-            class="ml-1 h-5 w-5 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            class="ml-1 w-5 h-5 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             viewBox="0 0 24 24"
             stroke="currentColor"
             stroke-width="2.5"

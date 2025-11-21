@@ -20,12 +20,12 @@ const features = [
 ]
 ---
 
-<section class="relative bg-[#1a1a1a] py-20 sm:py-24 lg:py-32">
-  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<section class="relative py-20 sm:py-24 lg:py-32 bg-[#1a1a1a]">
+  <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <!-- Header Section -->
     <div class="mb-20 text-center">
       <!-- Badge -->
-      <div class="mb-8 inline-flex items-center rounded-full border border-blue-500/30 bg-blue-500/10 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-blue-400">
+      <div class="inline-flex items-center py-2 px-5 mb-8 text-xs font-semibold tracking-widest text-blue-400 uppercase rounded-full border border-blue-500/30 bg-blue-500/10">
         {m.orgs_badge({}, { locale: Astro.locals.locale })}
       </div>
 
@@ -41,12 +41,12 @@ const features = [
     </div>
 
     <!-- Feature Cards Grid -->
-    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-8 mx-auto max-w-7xl lg:grid-cols-3">
       <!-- Card 1: Manage various teams -->
-      <div class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#10131a] p-8 transition-all duration-300 hover:bg-[#141822]">
-        <div class="pointer-events-none absolute inset-0 rounded-3xl" aria-hidden="true" style="background: radial-gradient(circle at top, rgba(59, 130, 246, 0.22) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
-        <div class="relative mb-8 flex h-[400px] items-center justify-center">
-          <div class="pointer-events-none absolute -top-20 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-blue-500/25 blur-[120px]"></div>
+      <div class="flex overflow-hidden relative flex-col p-8 rounded-3xl transition-all duration-300 group bg-[#10131a] hover:bg-[#141822]">
+        <div class="absolute inset-0 rounded-3xl pointer-events-none" aria-hidden="true" style="background: radial-gradient(circle at top, rgba(59, 130, 246, 0.22) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
+        <div class="flex relative justify-center items-center mb-8 h-[400px]">
+          <div class="absolute -top-20 left-1/2 w-80 h-80 rounded-full -translate-x-1/2 pointer-events-none bg-blue-500/25 blur-[120px]"></div>
           <Image src={orgsGraphic} alt="Organization Management" class="relative z-10 w-full max-w-[400px]" />
         </div>
 
@@ -55,10 +55,10 @@ const features = [
       </div>
 
       <!-- Card 2: Control access levels -->
-      <div class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#10131a] p-8 transition-all duration-300 hover:bg-[#141822]">
-        <div class="pointer-events-none absolute inset-0 rounded-3xl" aria-hidden="true" style="background: radial-gradient(circle at 40% 10%, rgba(59, 130, 246, 0.22) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
-        <div class="relative mb-8 flex h-[400px] items-center justify-center">
-          <div class="pointer-events-none absolute bottom-0 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-blue-500/25 blur-[140px]"></div>
+      <div class="flex overflow-hidden relative flex-col p-8 rounded-3xl transition-all duration-300 group bg-[#10131a] hover:bg-[#141822]">
+        <div class="absolute inset-0 rounded-3xl pointer-events-none" aria-hidden="true" style="background: radial-gradient(circle at 40% 10%, rgba(59, 130, 246, 0.22) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
+        <div class="flex relative justify-center items-center mb-8 h-[400px]">
+          <div class="absolute bottom-0 left-1/2 w-80 h-80 rounded-full -translate-x-1/2 pointer-events-none bg-blue-500/25 blur-[140px]"></div>
 
           <svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" class="relative z-10 w-full max-w-[320px]">
             <!-- Glow -->
@@ -109,10 +109,10 @@ const features = [
       </div>
 
       <!-- Card 3: Adapt as you grow -->
-      <div class="group relative flex flex-col overflow-hidden rounded-3xl bg-[#10131a] p-8 transition-all duration-300 hover:bg-[#141822]">
-        <div class="pointer-events-none absolute inset-0 rounded-3xl" aria-hidden="true" style="background: radial-gradient(circle at 70% 15%, rgba(59, 130, 246, 0.24) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
-        <div class="relative mb-8 flex h-[400px] items-center justify-center">
-          <div class="pointer-events-none absolute inset-0 rounded-full bg-blue-500/20 blur-[140px]"></div>
+      <div class="flex overflow-hidden relative flex-col p-8 rounded-3xl transition-all duration-300 group bg-[#10131a] hover:bg-[#141822]">
+        <div class="absolute inset-0 rounded-3xl pointer-events-none" aria-hidden="true" style="background: radial-gradient(circle at 70% 15%, rgba(59, 130, 246, 0.24) 0%, rgba(16, 19, 26, 0.95) 70%);"></div>
+        <div class="flex relative justify-center items-center mb-8 h-[400px]">
+          <div class="absolute inset-0 rounded-full pointer-events-none bg-blue-500/20 blur-[140px]"></div>
 
           <svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" class="relative z-10 w-full max-w-[320px]">
             <!-- Glow -->
@@ -169,7 +169,7 @@ const features = [
     <div class="mt-20 text-center">
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="inline-flex items-center justify-center rounded-xl bg-[#5B7FE8] px-12 py-4 text-lg font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 hover:bg-[#4a6ed4] hover:shadow-blue-500/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-[#1a1a1a]"
+        class="inline-flex justify-center items-center py-4 px-12 text-lg font-semibold text-white rounded-xl shadow-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none bg-[#5B7FE8] shadow-blue-500/20 hover:bg-[#4a6ed4] hover:shadow-blue-500/30 focus:ring-offset-[#1a1a1a]"
       >
 {m.orgs_cta({}, { locale: Astro.locals.locale })}
       </a>

@@ -71,29 +71,29 @@ if (plans.length > 0) {
 ---
 
 <Layout content={content}
-  ><section class="bg-gray-50 py-12 sm:py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  ><section class="py-12 bg-gray-50 sm:py-16">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="mx-auto mb-8 text-center sm:mb-24">
-        <h1 class="font-pj text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl">
+        <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-6xl font-pj">
           {m.plans_that_scale_with_your_business({}, { locale: Astro.locals.locale })}
         </h1>
-        <p class="font-pj mt-6 text-xl font-normal text-gray-600">
+        <p class="mt-6 text-xl font-normal text-gray-600 font-pj">
           {m.plans_that_scale_with_your_business_description({}, { locale: Astro.locals.locale })}
         </p>
       </div>
 
       {plans && plans.length > 0 && <Plans yearly={yearly} pricing={plans} />}
 
-      <div class="mt-8 flex items-center justify-center space-x-6 pb-12 sm:pb-16">
+      <div class="flex justify-center items-center pb-12 mt-8 space-x-6 sm:pb-16">
         <div class="flex items-center">
           <input
             id="monthly"
             type="radio"
             checked={!yearly}
             name="pricing-plans"
-            class="h-4 w-4 border border-gray-200 text-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
+            class="w-4 h-4 text-blue-600 border border-gray-200 focus:ring-1 focus:ring-blue-600 focus:outline-none"
           />
-          <label for="monthly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base">
+          <label for="monthly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base">
             {m.monthly_plan({}, { locale: Astro.locals.locale })}
           </label>
         </div>
@@ -103,9 +103,9 @@ if (plans.length > 0) {
             type="radio"
             checked={yearly}
             name="pricing-plans"
-            class="h-4 w-4 border border-gray-200 text-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none"
+            class="w-4 h-4 text-blue-600 border border-gray-200 focus:ring-1 focus:ring-blue-600 focus:outline-none"
           />
-          <label for="yearly" class="ml-3 block text-sm font-medium text-gray-900 sm:text-base">
+          <label for="yearly" class="block ml-3 text-sm font-medium text-gray-900 sm:text-base">
             {m.yearly_plan({}, { locale: Astro.locals.locale })}
           </label>
           <span class="ml-1 text-sm font-medium text-blue-600">
@@ -114,12 +114,12 @@ if (plans.length > 0) {
         </div>
       </div>
       <div class="pb-24 sm:pb-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 class="text-center text-lg/8 font-semibold text-gray-900">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
-          <div class="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-2xl sm:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+        <div class="px-6 mx-auto max-w-7xl lg:px-8">
+          <h2 class="font-semibold text-center text-gray-900 text-lg/8">{m.trusted_by_the_biggest_capacitor_apps({}, { locale: Astro.locals.locale })}</h2>
+          <div class="grid grid-cols-2 gap-x-8 gap-y-10 items-center mx-auto mt-10 max-w-lg sm:grid-cols-3 sm:gap-x-10 sm:max-w-2xl lg:grid-cols-5 lg:mx-0 lg:max-w-none">
             <div class="flex flex-col items-center space-y-2">
-              <div class="rounded-2xl bg-gray-100 shadow-sm">
-                <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/nana-logo-transparent.webp" alt="Nana" width="48" height="48" />
+              <div class="bg-gray-100 rounded-2xl shadow-sm">
+                <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/nana-logo-transparent.webp" alt="Nana" width="48" height="48" />
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Nana</p>
@@ -127,8 +127,8 @@ if (plans.length > 0) {
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
-              <div class="rounded-2xl bg-gray-100 shadow-sm">
-                <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/snowqueen.webp" alt="Snowqueen" width="48" height="48" />
+              <div class="bg-gray-100 rounded-2xl shadow-sm">
+                <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/snowqueen.webp" alt="Snowqueen" width="48" height="48" />
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Snowqueen</p>
@@ -136,8 +136,8 @@ if (plans.length > 0) {
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
-              <div class="rounded-2xl bg-gray-100 shadow-sm">
-                <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/shelf_app.webp" alt="Shelf" width="48" height="48" />
+              <div class="bg-gray-100 rounded-2xl shadow-sm">
+                <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/shelf_app.webp" alt="Shelf" width="48" height="48" />
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Shelf</p>
@@ -145,8 +145,8 @@ if (plans.length > 0) {
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
-              <div class="rounded-2xl bg-gray-100 shadow-sm">
-                <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/suez.webp" alt="Suez" width="48" height="48" />
+              <div class="bg-gray-100 rounded-2xl shadow-sm">
+                <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/suez.webp" alt="Suez" width="48" height="48" />
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Suez</p>
@@ -154,8 +154,8 @@ if (plans.length > 0) {
               </div>
             </div>
             <div class="flex flex-col items-center space-y-2">
-              <div class="rounded-2xl bg-gray-100 shadow-sm">
-                <img class="h-12 w-12 rounded-xl object-contain grayscale" src="/janitor_app.webp" alt="Janitor" width="48" height="48" />
+              <div class="bg-gray-100 rounded-2xl shadow-sm">
+                <img class="object-contain w-12 h-12 rounded-xl grayscale" src="/janitor_app.webp" alt="Janitor" width="48" height="48" />
               </div>
               <div class="text-center">
                 <p class="text-sm font-medium text-gray-900">Janitor</p>
@@ -168,7 +168,7 @@ if (plans.length > 0) {
       <Enterprise />
       {credits && credits.length > 0 && <CreditPricing credits={credits} />}
       <!-- <Calculator /> -->
-      <p class="font-pj mx-auto mb-8 max-w-md text-center text-base text-gray-500 md:mt-16">
+      <p class="mx-auto mb-8 max-w-md text-base text-center text-gray-500 md:mt-16 font-pj">
         {m.we_don_t_bill_you_automatically_until_your_confirmation({}, { locale: Astro.locals.locale })}<br />
         {m.we_don_t_store_or_sell_your_data_to_anyone({}, { locale: Astro.locals.locale })}
       </p>

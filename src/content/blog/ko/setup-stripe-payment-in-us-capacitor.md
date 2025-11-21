@@ -311,7 +311,7 @@ Capacitor의 장점은 플랫폼 특정 구성 작업을 완료한 후에도 실
       </div>
       <button 
         @click="handlePayment" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         Purchase Now
       </button>
@@ -586,7 +586,7 @@ Android (`android/app/src/main/AndroidManifest.xml`):
       
       <button 
         @click="manageSubscription" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         Manage Subscription
       </button>
@@ -596,7 +596,7 @@ Android (`android/app/src/main/AndroidManifest.xml`):
       <p class="mb-4">You don't have an active subscription.</p>
       <button 
         @click="goToPricingPage" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         View Plans
       </button>

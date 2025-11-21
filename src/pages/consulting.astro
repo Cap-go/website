@@ -128,35 +128,35 @@ const useCases = [
 ---
 
 <Layout content={content}>
-    <section class="relative min-h-screen flex items-center justify-center bg-slate-900 overflow-hidden">
+    <section class="flex overflow-hidden relative justify-center items-center min-h-screen bg-slate-900">
       <!-- Background Pattern - Following Capgo style -->
       <div class="absolute inset-0 bg-slate-900">
         <div class="absolute inset-0" style="background-image: url('/5f9c104d097c52e7c1b98fe4_hero-code-consulting.webp'); background-position: 50% 100%; background-size: 520px; background-repeat: no-repeat; opacity: 0.7;"></div>
       </div>
       
-      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-        <div class="inline-flex items-center px-4 py-2 rounded-full bg-gray-800/40 border border-gray-600/40 text-gray-200 text-sm font-medium mb-8">
-          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+      <div class="relative z-10 px-6 mx-auto max-w-7xl text-center lg:px-8">
+        <div class="inline-flex items-center py-2 px-4 mb-8 text-sm font-medium text-gray-200 rounded-full border bg-gray-800/40 border-gray-600/40">
+          <svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           Custom Capacitor Plugin Development
         </div>
   
-        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+        <h1 class="mb-6 text-5xl font-bold md:text-7xl">
           <span class="text-white">Custom</span>
           <span class="text-gray-200">Capacitor Plugins</span>
           <span class="text-white">& Expert Consulting</span>
         </h1>
   
-        <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
+        <p class="mx-auto mb-12 max-w-4xl text-xl leading-relaxed text-gray-300 md:text-2xl">
           Need a native feature that doesn't exist? We build custom Capacitor plugins and provide expert consulting to bring any native functionality to your app.
         </p>
   
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex flex-col gap-4 justify-center sm:flex-row">
           <a 
             href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
             target="_blank"
-            class="inline-flex items-center px-8 py-4 bg-gray-900 hover:bg-gray-700 text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-gray-900/30"
+            class="inline-flex items-center py-4 px-8 text-lg font-semibold text-white bg-gray-900 rounded-xl shadow-lg transition-all duration-200 hover:bg-gray-700 hover:shadow-gray-900/30"
           >
             Get Your Custom Plugin Built
             <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -166,7 +166,7 @@ const useCases = [
           <a 
             href="https://cal.com/team/capgo/capacitor-consulting-services"
             target="_blank"
-            class="inline-flex items-center px-8 py-4 border-2 border-gray-600 text-white hover:bg-white hover:text-gray-900 font-semibold rounded-xl transition-all duration-200 text-lg"
+            class="inline-flex items-center py-4 px-8 text-lg font-semibold text-white rounded-xl border-2 border-gray-600 transition-all duration-200 hover:text-gray-900 hover:bg-white"
           >
             {m.book_a_consultation({}, { locale: Astro.locals.locale })}
             <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -179,28 +179,28 @@ const useCases = [
 
     <!-- Custom Plugin Development Section -->
     <section class="py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+      <div class="px-6 mx-auto max-w-7xl lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
             Custom Plugin <span class="text-gray-200">Development</span>
           </h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p class="mx-auto max-w-3xl text-xl text-gray-600">
             Access any native iOS or Android functionality from your Capacitor app. We build battle-tested, production-ready plugins tailored to your specific needs.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div class="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2 lg:grid-cols-3">
           {customPluginFeatures.map((feature) => (
-            <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300">
-              <div class="w-16 h-16 bg-gray-700 rounded-xl flex items-center justify-center mb-6">
+            <div class="p-8 bg-gray-50 rounded-2xl transition-shadow duration-300 hover:shadow-lg">
+              <div class="flex justify-center items-center mb-6 w-16 h-16 bg-gray-700 rounded-xl">
                 <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
                 </svg>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-4">
+              <h3 class="mb-4 text-xl font-bold text-gray-900">
                 {feature.title}
               </h3>
-              <p class="text-gray-600 leading-relaxed">
+              <p class="leading-relaxed text-gray-600">
                 {feature.description}
               </p>
             </div>
@@ -208,29 +208,29 @@ const useCases = [
         </div>
 
         <!-- Process Steps -->
-        <div class="bg-gray-100 rounded-3xl p-8 md:p-12">
-          <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">
+        <div class="p-8 bg-gray-100 rounded-3xl md:p-12">
+          <h3 class="mb-12 text-3xl font-bold text-center text-gray-900">
             Our Plugin Development Process
           </h3>
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
             <div class="text-center">
-              <div class="w-16 h-16 bg-gray-900 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">1</div>
-              <h4 class="font-bold text-gray-900 mb-2">Requirements Analysis</h4>
+              <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 text-xl font-bold text-white bg-gray-900 rounded-full">1</div>
+              <h4 class="mb-2 font-bold text-gray-900">Requirements Analysis</h4>
               <p class="text-gray-600">We analyze your native functionality needs and define the plugin specifications</p>
             </div>
             <div class="text-center">
-              <div class="w-16 h-16 bg-gray-900 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">2</div>
-              <h4 class="font-bold text-gray-900 mb-2">Native Development</h4>
+              <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 text-xl font-bold text-white bg-gray-900 rounded-full">2</div>
+              <h4 class="mb-2 font-bold text-gray-900">Native Development</h4>
               <p class="text-gray-600">Build the native iOS (Swift) and Android (Kotlin/Java) implementations</p>
             </div>
             <div class="text-center">
-              <div class="w-16 h-16 bg-gray-900 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">3</div>
-              <h4 class="font-bold text-gray-900 mb-2">JavaScript Bridge</h4>
+              <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 text-xl font-bold text-white bg-gray-900 rounded-full">3</div>
+              <h4 class="mb-2 font-bold text-gray-900">JavaScript Bridge</h4>
               <p class="text-gray-600">Create the TypeScript interface and ensure seamless communication</p>
             </div>
             <div class="text-center">
-              <div class="w-16 h-16 bg-gray-900 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">4</div>
-              <h4 class="font-bold text-gray-900 mb-2">Testing & Documentation</h4>
+              <div class="flex justify-center items-center mx-auto mb-4 w-16 h-16 text-xl font-bold text-white bg-gray-900 rounded-full">4</div>
+              <h4 class="mb-2 font-bold text-gray-900">Testing & Documentation</h4>
               <p class="text-gray-600">Comprehensive testing, documentation, and integration support</p>
             </div>
           </div>
@@ -240,14 +240,14 @@ const useCases = [
   
     <!-- Testimonial Section -->
     <section class="py-20 bg-gray-50">
-      <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <div class="px-6 mx-auto max-w-4xl text-center lg:px-8">
         <div class="relative">
-          <p class="mt-0 mb-2 font-serif text-6xl font-normal text-slate-300 sm:text-6xl sm:font-normal sm:text-indigo-600" >"</p>
-          <blockquote class="text-xl md:text-2xl text-gray-700 italic leading-relaxed mb-8 pt-8">
+          <p class="mt-0 mb-2 font-serif text-6xl font-normal sm:text-6xl sm:font-normal sm:text-indigo-600 text-slate-300" >"</p>
+          <blockquote class="pt-8 mb-8 text-xl italic leading-relaxed text-gray-700 md:text-2xl">
             <span set:html={m.testimonial_consulting({}, { locale: Astro.locals.locale })} />
           </blockquote>
-          <div class="flex items-center justify-center">
-              <img loading="lazy" height="10" alt="logo" src="/click_and_boat.webp" class="inline-block w-1/8 pr-2 max-w-full border-0 align-middle" />
+          <div class="flex justify-center items-center">
+              <img loading="lazy" height="10" alt="logo" src="/click_and_boat.webp" class="inline-block pr-2 max-w-full align-middle border-0 w-1/8" />
             <div class="text-left">
               <div class="font-semibold text-gray-900">TC Nicolas</div>
               <div class="text-gray-600">Click & Boat</div>
@@ -259,21 +259,21 @@ const useCases = [
 
     <!-- Plugin Showcase Section -->
     <section class="py-20 bg-gray-900">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+      <div class="px-6 mx-auto max-w-7xl lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">
             {m.consulting_forged_plugins_community_embraced({}, { locale: Astro.locals.locale })}
           </h2>
-          <p class="text-xl text-gray-200 max-w-4xl mx-auto">
+          <p class="mx-auto max-w-4xl text-xl text-gray-200">
             Our custom-built plugins power millions of apps worldwide. Each solution represents a success story, battle-tested and refined for the community.
           </p>
         </div>
   
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div class="grid grid-cols-1 gap-8 mb-12 md:grid-cols-2 lg:grid-cols-3">
           {plugins.map((plugin) => (
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
+            <div class="p-6 rounded-2xl transition-all duration-300 bg-white/10 backdrop-blur-sm hover:bg-white/20">
               <div class="flex items-center mb-4">
-                <div class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mr-4">
+                <div class="flex justify-center items-center mr-4 w-12 h-12 bg-gray-800 rounded-xl">
                   <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={plugin.icon} />
                   </svg>
@@ -286,24 +286,24 @@ const useCases = [
                     rel="noopener noreferrer"
                     class="flex items-center text-sm text-gray-200 hover:underline"
                   >
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     {plugin.stars}
                   </a>
                 </div>
               </div>
-              <p class="text-gray-200 mb-4">{plugin.description}</p>
+              <p class="mb-4 text-gray-200">{plugin.description}</p>
               <span class="text-sm text-gray-200">{plugin.language}</span>
             </div>
           ))}
         </div>
   
         <div class="text-center">
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="flex flex-col gap-4 justify-center sm:flex-row">
             <a 
               href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
               target="_blank"
-              class="inline-flex items-center px-8 py-4 bg-white text-gray-200 font-semibold rounded-xl hover:bg-gray-100 transition-colors duration-200"
+              class="inline-flex items-center py-4 px-8 font-semibold text-gray-200 bg-white rounded-xl transition-colors duration-200 hover:bg-gray-100"
             >
               {m.get_your_custom_plugin_built({}, { locale: Astro.locals.locale })}
               <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -312,7 +312,7 @@ const useCases = [
             </a>
             <a 
               href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-              class="inline-flex items-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-gray-200 font-semibold rounded-xl transition-colors duration-200"
+              class="inline-flex items-center py-4 px-8 font-semibold text-white rounded-xl border-2 border-white transition-colors duration-200 hover:text-gray-200 hover:bg-white"
             >
               {m.browse_all_plugins({}, { locale: Astro.locals.locale })}
               <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -326,29 +326,29 @@ const useCases = [
   
     <!-- Use Cases Section -->
     <section id="use-cases" class="py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+      <div class="px-6 mx-auto max-w-7xl lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
             {m.code_review({}, { locale: Astro.locals.locale })} & 
             <span class="text-gray-200">{m.consulting({}, { locale: Astro.locals.locale })}</span>
           </h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p class="mx-auto max-w-3xl text-xl text-gray-600">
             {m.when_its_good_to_ask_for_cordova_and_capacitorjs_consulting_services({}, { locale: Astro.locals.locale })}:
           </p>
         </div>
   
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {useCases.slice(0, 5).map((useCase) => (
-            <div class="bg-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div class="p-8 bg-gray-50 rounded-2xl shadow-lg transition-shadow duration-300 hover:shadow-xl">
               <div class="flex items-center mb-6">
-                <span class="inline-flex items-center justify-center w-12 h-12 bg-gray-900 text-white font-bold rounded-xl text-lg">
+                <span class="inline-flex justify-center items-center w-12 h-12 text-lg font-bold text-white bg-gray-900 rounded-xl">
                   {useCase.number}
                 </span>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-4 leading-tight">
+              <h3 class="mb-4 text-xl font-bold leading-tight text-gray-900">
                 {useCase.title}
               </h3>
-              <p class="text-gray-600 leading-relaxed">
+              <p class="leading-relaxed text-gray-600">
                 {useCase.description}
               </p>
             </div>
@@ -356,24 +356,24 @@ const useCases = [
         </div>
   
         <!-- Special Plugin Case -->
-        <div class="mt-12 bg-gray-100 rounded-2xl p-8 border border-gray-200">
+        <div class="p-8 mt-12 bg-gray-100 rounded-2xl border border-gray-200">
           <div class="flex items-start">
-            <span class="inline-flex items-center justify-center w-12 h-12 bg-gray-900 text-white font-bold rounded-xl text-lg mr-6 flex-shrink-0">
+            <span class="inline-flex shrink-0 justify-center items-center mr-6 w-12 h-12 text-lg font-bold text-white bg-gray-900 rounded-xl">
               06
             </span>
             <div>
-              <h3 class="text-xl font-bold text-gray-900 mb-4">
+              <h3 class="mb-4 text-xl font-bold text-gray-900">
                 {m.plugin_is_missing({}, { locale: Astro.locals.locale })}
               </h3>
-              <p class="text-gray-700 mb-4">
+              <p class="mb-4 text-gray-700">
                 {m.you_need_a_to_access_to_specific_native_api_and_the_right_plugin_don_t_exist_we_can_develop_it_for_you_or_support_you_with_it({}, { locale: Astro.locals.locale })}
               </p>
-              <div class="bg-gray-700 rounded-lg p-4 mb-4">
-                <p class="text-gray-200 font-medium">
+              <div class="p-4 mb-4 bg-gray-700 rounded-lg">
+                <p class="font-medium text-gray-200">
                   💡 First, check our 
                   <a 
                     href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
-                    class="underline hover:text-gray-100 transition-colors duration-200 font-semibold"
+                    class="font-semibold underline transition-colors duration-200 hover:text-gray-100"
                   >
                     extensive plugin library
                   </a>
@@ -383,7 +383,7 @@ const useCases = [
               <a 
                 href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
                 target="_blank"
-                class="inline-flex items-center px-6 py-3 bg-gray-900 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors duration-200"
+                class="inline-flex items-center py-3 px-6 font-semibold text-white bg-gray-900 rounded-lg transition-colors duration-200 hover:bg-gray-700"
               >
                 Get Custom Plugin Quote
                 <svg class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -398,57 +398,57 @@ const useCases = [
   
     <!-- Benefits Section -->
     <section class="py-20 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+      <div class="px-6 mx-auto max-w-7xl lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">
             {m.why_is_it_important({}, { locale: Astro.locals.locale })}
           </h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p class="mx-auto max-w-3xl text-xl text-gray-600">
             Custom plugins and code consulting help your team build better apps faster
           </p>
         </div>
   
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div class="text-center">
-            <div class="w-20 h-20 bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div class="flex justify-center items-center mx-auto mb-6 w-20 h-20 bg-gray-700 rounded-2xl">
               <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">
+            <h3 class="mb-4 text-xl font-bold text-gray-900">
               Access Any Native Feature
             </h3>
           </div>
   
           <div class="text-center">
-            <div class="w-20 h-20 bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div class="flex justify-center items-center mx-auto mb-6 w-20 h-20 bg-gray-700 rounded-2xl">
               <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">
+            <h3 class="mb-4 text-xl font-bold text-gray-900">
               Faster Development
             </h3>
           </div>
   
           <div class="text-center">
-            <div class="w-20 h-20 bg-gray-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div class="flex justify-center items-center mx-auto mb-6 w-20 h-20 bg-gray-700 rounded-2xl">
               <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">
+            <h3 class="mb-4 text-xl font-bold text-gray-900">
               Production Ready
             </h3>
           </div>
   
           <div class="text-center">
-            <div class="w-20 h-20 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div class="flex justify-center items-center mx-auto mb-6 w-20 h-20 bg-orange-100 rounded-2xl">
               <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">
+            <h3 class="mb-4 text-xl font-bold text-gray-900">
               Ongoing Support
             </h3>
           </div>
@@ -458,55 +458,55 @@ const useCases = [
   
     <!-- Why Work With Us Section -->
     <section class="py-20 bg-gray-900">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+      <div class="px-6 mx-auto max-w-7xl lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="mb-6 text-4xl font-bold text-white md:text-5xl">
             {m.why_work({}, { locale: Astro.locals.locale })}
             <span class="text-gray-200">{m.with_us({}, { locale: Astro.locals.locale })}</span>
           </h2>
         </div>
   
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div class="text-center">
-            <div class="w-24 h-24 mx-auto mb-6">
+            <div class="mx-auto mb-6 w-24 h-24">
               <svg class="w-full h-full text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-white mb-4">{m.community_trusted_title({}, { locale: Astro.locals.locale })}</h3>
+            <h3 class="mb-4 text-xl font-bold text-white">{m.community_trusted_title({}, { locale: Astro.locals.locale })}</h3>
             <p class="text-gray-300">
               {m.community_trusted({}, { locale: Astro.locals.locale })}
-              <a href="https://x.com/martindonadieu" target="_blank" class="text-gray-200 hover:text-gray-200 underline">
+              <a href="https://x.com/martindonadieu" target="_blank" class="text-gray-200 underline hover:text-gray-200">
                 {m.cordova_and_capacitorjs_expert({}, { locale: Astro.locals.locale })}
               </a>
             </p>
           </div>
   
           <div class="text-center">
-            <div class="w-24 h-24 mx-auto mb-6">
+            <div class="mx-auto mb-6 w-24 h-24">
               <svg class="w-full h-full text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-white mb-4">{m.proven_experience({}, { locale: Astro.locals.locale })}</h3>
+            <h3 class="mb-4 text-xl font-bold text-white">{m.proven_experience({}, { locale: Astro.locals.locale })}</h3>
             <p class="text-gray-300">
               {m.experienced_in_working_on_demanding({}, { locale: Astro.locals.locale })}
-              <a href="https://github.com/Cap-go/capacitor-updater" target="_blank" class="text-gray-200 hover:text-gray-200 underline">
+              <a href="https://github.com/Cap-go/capacitor-updater" target="_blank" class="text-gray-200 underline hover:text-gray-200">
                 {m.cordova_capacitorjs_projects({}, { locale: Astro.locals.locale })}
               </a>
             </p>
           </div>
   
           <div class="text-center">
-            <div class="w-24 h-24 mx-auto mb-6">
+            <div class="mx-auto mb-6 w-24 h-24">
               <svg class="w-full h-full text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-white mb-4">{m.open_source_leaders({}, { locale: Astro.locals.locale })}</h3>
+            <h3 class="mb-4 text-xl font-bold text-white">{m.open_source_leaders({}, { locale: Astro.locals.locale })}</h3>
             <p class="text-gray-300">
               {m.creators_and_maintainers_of_many_open_source_libraries_used_by_millions({}, { locale: Astro.locals.locale })}
-              <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="text-gray-200 hover:text-gray-200 underline">
+              <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="text-gray-200 underline hover:text-gray-200">
                 {m.open_source({}, { locale: Astro.locals.locale })} libraries
               </a>
               used by millions
@@ -518,16 +518,16 @@ const useCases = [
 
     <!-- Second Testimonial -->
     <section class="py-20 bg-white">
-      <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <div class="px-6 mx-auto max-w-4xl text-center lg:px-8">
         <div class="relative">
-          <svg class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8 w-16 h-16 text-white" fill="currentColor" viewBox="0 0 32 32">
+          <svg class="absolute top-0 left-1/2 w-16 h-16 text-white transform -translate-x-1/2 -translate-y-8" fill="currentColor" viewBox="0 0 32 32">
             <path d="M10 8c-3.3 0-6 2.7-6 6v10h6V14h-4c0-1.1.9-2 2-2s2 .9 2 2v2h4V14c0-3.3-2.7-6-6-6zM26 8c-3.3 0-6 2.7-6 6v10h6V14h-4c0-1.1.9-2 2-2s2 .9 2 2v2h4V14c0-3.3-2.7-6-6-6z"/>
           </svg>
-          <blockquote class="text-xl md:text-2xl text-gray-700 italic leading-relaxed mb-8 pt-8">
+          <blockquote class="pt-8 mb-8 text-xl italic leading-relaxed text-gray-700 md:text-2xl">
             <span set:html={m.testimonial_consulting_2({}, { locale: Astro.locals.locale })} />
           </blockquote>
-          <div class="flex items-center justify-center">
-            <img width="39" loading="lazy" alt="logo waynium" src="/waynium.webp" class="mt-3 pr-2 inline-block max-w-full border-0 align-middle" />
+          <div class="flex justify-center items-center">
+            <img width="39" loading="lazy" alt="logo waynium" src="/waynium.webp" class="inline-block pr-2 mt-3 max-w-full align-middle border-0" />
             <div class="text-left">
               <div class="font-semibold text-gray-900">Iannis</div>
               <div class="text-gray-600">CTO & Co-founder @ WAYNIUM</div>
@@ -539,25 +539,25 @@ const useCases = [
   
     <!-- Final CTA Section -->
     <section class="py-20 bg-gray-900">
-      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="px-6 mx-auto max-w-7xl lg:px-8">
         <div class="text-center">
-          <div class="inline-flex items-center px-4 py-2 rounded-full bg-gray-800/40 border border-gray-600/40 text-gray-200 text-sm font-medium mb-8">
+          <div class="inline-flex items-center py-2 px-4 mb-8 text-sm font-medium text-gray-200 rounded-full border bg-gray-800/40 border-gray-600/40">
             Ready to get started?
           </div>
           
-          <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+          <h2 class="mb-6 text-4xl font-bold text-white md:text-6xl">
             {m.lets_work_together({}, { locale: Astro.locals.locale })}
           </h2>
           
-          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+          <p class="mx-auto mb-12 max-w-3xl text-xl text-gray-300">
             Whether you need a custom plugin built or expert consulting for your Capacitor app, we're here to make it happen.
           </p>
   
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="flex flex-col gap-4 justify-center sm:flex-row">
             <a 
               href="https://cal.com/team/capgo/get-your-custom-capacitor-plugin"
               target="_blank"
-              class="inline-flex items-center px-8 py-4 bg-gray-900 hover:bg-gray-700 text-white font-semibold rounded-xl transition-all duration-200 text-lg shadow-lg hover:shadow-gray-900/30"
+              class="inline-flex items-center py-4 px-8 text-lg font-semibold text-white bg-gray-900 rounded-xl shadow-lg transition-all duration-200 hover:bg-gray-700 hover:shadow-gray-900/30"
             >
               Get Your Custom Plugin Built
               <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -567,7 +567,7 @@ const useCases = [
             <a 
               href="https://cal.com/team/capgo/capacitor-consulting-services"
               target="_blank"
-              class="inline-flex items-center px-8 py-4 border-2 border-gray-600 text-white hover:bg-white hover:text-gray-900 font-semibold rounded-xl transition-all duration-200 text-lg"
+              class="inline-flex items-center py-4 px-8 text-lg font-semibold text-white rounded-xl border-2 border-gray-600 transition-all duration-200 hover:text-gray-900 hover:bg-white"
             >
               {m.book_a_consultation({}, { locale: Astro.locals.locale })}
               <svg class="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

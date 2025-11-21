@@ -119,9 +119,9 @@ const testimonials = [
 const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span class="text-indigo-400">$1</span>').replace(/\n/g, '<br/>')
 ---
 
-<section class="relative isolate bg-[#1a1a1a] pt-24 pb-32 sm:pt-32">
+<section class="relative pt-24 pb-32 sm:pt-32 isolate bg-[#1a1a1a]">
   <!-- Background effects -->
-  <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl" aria-hidden="true">
+  <div class="overflow-hidden absolute inset-x-0 top-1/2 opacity-30 transform-gpu -translate-y-1/2 -z-10 blur-3xl" aria-hidden="true">
     <div
       class="ml-[max(50%,38rem)] aspect-1313/771 w-328.25 bg-linear-to-tr from-indigo-500 to-blue-500"
       style="
@@ -147,7 +147,7 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
     >
     </div>
   </div>
-  <div class="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-32 opacity-25 blur-3xl sm:pt-40 xl:justify-end" aria-hidden="true">
+  <div class="flex overflow-hidden absolute inset-x-0 top-0 pt-32 opacity-25 transform-gpu sm:pt-40 xl:justify-end -z-10 blur-3xl" aria-hidden="true">
     <div
       class="-ml-88 aspect-1313/771 w-328.25 flex-none origin-top-right rotate-30 bg-linear-to-tr from-indigo-500 to-blue-500 xl:mr-[calc(50%-12rem)] xl:ml-0"
       style="
@@ -174,21 +174,21 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
     </div>
   </div>
 
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+  <div class="px-6 mx-auto max-w-7xl lg:px-8">
     <!-- <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-base/7 font-semibold text-indigo-400">Testimonials</h2>
-      <p class="mt-2 text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
+      <h2 class="font-semibold text-indigo-400 text-base/7">Testimonials</h2>
+      <p class="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl text-balance">
         {m.they_love_capgo({}, { locale: Astro.locals.locale })}
       </p>
     </div>
 
-    <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm/6 text-gray-300 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
-      <figure class="rounded-2xl bg-gray-800 shadow-lg ring-1 ring-gray-700 sm:col-span-2 xl:col-start-2 xl:row-end-1">
-        <blockquote class="p-6 text-lg/4 tracking-tight text-white sm:p-12 sm:text-xl/8">
+    <div class="grid grid-cols-1 grid-rows-1 gap-8 mx-auto mt-16 max-w-2xl text-gray-300 sm:grid-cols-2 sm:mt-20 xl:grid-cols-4 xl:grid-flow-col xl:mx-0 xl:max-w-none text-sm/6">
+      <figure class="bg-gray-800 rounded-2xl ring-1 ring-gray-700 shadow-lg sm:col-span-2 xl:col-start-2 xl:row-end-1">
+        <blockquote class="p-6 tracking-tight text-white sm:p-12 text-lg/4 sm:text-xl/8">
           <p set:html={messageFormatter(featuredTestimonial.body)} />
         </blockquote>
-        <figcaption class="flex flex-wrap items-center gap-x-4 gap-y-4 border-t border-gray-700 px-6 py-4 sm:flex-nowrap">
-          <img class="size-10 flex-none rounded-full bg-gray-800" src={featuredTestimonial.author.imageUrl} alt={featuredTestimonial.author.name} />
+        <figcaption class="flex flex-wrap gap-x-4 gap-y-4 items-center py-4 px-6 border-t border-gray-700 sm:flex-nowrap">
+          <img class="flex-none bg-gray-800 rounded-full size-10" src={featuredTestimonial.author.imageUrl} alt={featuredTestimonial.author.name} />
           <div class="flex-auto">
             <div class="font-semibold text-white">{featuredTestimonial.author.name}</div>
             <div class="text-gray-400">@{featuredTestimonial.author.handle}</div>
@@ -215,12 +215,12 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
                 } space-y-8`}
               >
                 {column.map((testimonial) => (
-                  <figure class="rounded-2xl bg-gray-800 p-6 shadow-lg ring-1 ring-gray-700">
+                  <figure class="p-6 bg-gray-800 rounded-2xl ring-1 ring-gray-700 shadow-lg">
                     <blockquote class="text-white">
                       <p set:html={messageFormatter(testimonial.body)} />
                     </blockquote>
-                    <figcaption class="mt-6 flex items-center gap-x-4">
-                      <img class="size-10 rounded-full bg-gray-800" src={testimonial.author.imageUrl} alt={testimonial.author.name} />
+                    <figcaption class="flex gap-x-4 items-center mt-6">
+                      <img class="bg-gray-800 rounded-full size-10" src={testimonial.author.imageUrl} alt={testimonial.author.name} />
                       <div>
                         <div class="font-semibold text-white">{testimonial.author.name}</div>
                         <div class="text-gray-400">@{testimonial.author.handle}</div>

@@ -5,10 +5,10 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. ${m.no_credit_card_required({}, { locale: Astro.locals.locale })}`
 ---
 
-<section class="bg-[#1a1a1a] py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+<section class="py-24 sm:py-32 bg-[#1a1a1a]">
+  <div class="px-6 mx-auto max-w-7xl lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="font-mono text-base leading-7 font-semibold text-[#44BCFF]">{m.how_it_works_badge({}, { locale: Astro.locals.locale })}</h2>
+      <h2 class="font-mono text-base font-semibold leading-7 text-[#44BCFF]">{m.how_it_works_badge({}, { locale: Astro.locals.locale })}</h2>
       <p class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-6xl">
         {m.how_it_works_title({}, { locale: Astro.locals.locale })}<br />
         {m.how_it_works_title_line2({}, { locale: Astro.locals.locale })}
@@ -18,10 +18,10 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       </p>
     </div>
 
-    <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-8 mx-auto mt-16 max-w-2xl lg:grid-cols-3 lg:mx-0 lg:max-w-none">
       <!-- Card 1 -->
-      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
-        <div class="relative top-30 left-8 mb-8 flex h-64 items-center justify-center">
+      <div class="flex flex-col justify-between p-8 rounded-3xl ring-1 bg-[#0c0e12]/30 ring-white/10">
+        <div class="flex relative left-8 justify-center items-center mb-8 h-64 top-30">
           <svg width="324" height="441" viewBox="0 0 324 441" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M39.8184 24C39.8184 17.3726 45.1909 12 51.8184 12H620.818C627.446 12 632.818 17.3726 632.818 24V201C632.818 207.627 627.446 213 620.818 213H51.8184C45.1909 213 39.8184 207.627 39.8184 201V24Z"
@@ -89,7 +89,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           </svg>
         </div>
         <div class="text-center">
-          <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card1_title({}, { locale: Astro.locals.locale })}</h3>
+          <h3 class="text-lg font-semibold leading-8 text-white">{m.how_it_works_card1_title({}, { locale: Astro.locals.locale })}</h3>
           <p class="mt-4 text-sm leading-6 text-gray-400">
             {m.how_it_works_card1_desc_part1({}, { locale: Astro.locals.locale })}
             <br class="hidden lg:inline" />{m.how_it_works_card1_desc_part2({}, { locale: Astro.locals.locale })}
@@ -98,8 +98,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       </div>
 
       <!-- Card 2 -->
-      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
-        <div class="mb-8 flex h-64 items-center justify-center">
+      <div class="flex flex-col justify-between p-8 rounded-3xl ring-1 bg-[#0c0e12]/30 ring-white/10">
+        <div class="flex justify-center items-center mb-8 h-64">
           <svg width="324" height="420" viewBox="0 0 324 420" fill="none" class="relative top-25" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_f_0_1)">
               <path
@@ -219,7 +219,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           </svg>
         </div>
         <div class="text-center">
-          <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card2_title({}, { locale: Astro.locals.locale })}</h3>
+          <h3 class="text-lg font-semibold leading-8 text-white">{m.how_it_works_card2_title({}, { locale: Astro.locals.locale })}</h3>
           <p class="mt-4 text-sm leading-6 text-gray-400">
             {m.home_deploy_cli_desc({}, { locale: Astro.locals.locale })}
           </p>
@@ -227,8 +227,8 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       </div>
 
       <!-- Card 3 -->
-      <div class="flex flex-col justify-between rounded-3xl bg-[#0c0e12]/30 p-8 ring-1 ring-white/10">
-        <div class="mb-8 flex h-64 items-center justify-center">
+      <div class="flex flex-col justify-between p-8 rounded-3xl ring-1 bg-[#0c0e12]/30 ring-white/10">
+        <div class="flex justify-center items-center mb-8 h-64">
           <svg width="239" height="288" class="relative top-10" viewBox="0 0 239 288" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M33.1 31.1001C33.1 20.0544 42.0543 11.1001 53.1 11.1001H184.1C195.146 11.1001 204.1 20.0544 204.1 31.1001V212.1H33.1V31.1001Z" fill="url(#paint0_linear_0_1)"
             ></path>
@@ -375,7 +375,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
           </svg>
         </div>
         <div class="text-center">
-          <h3 class="text-lg leading-8 font-semibold text-white">{m.how_it_works_card3_title({}, { locale: Astro.locals.locale })}</h3>
+          <h3 class="text-lg font-semibold leading-8 text-white">{m.how_it_works_card3_title({}, { locale: Astro.locals.locale })}</h3>
           <p class="mt-4 text-sm leading-6 text-gray-400">
             {m.home_users_get_update_desc({}, { locale: Astro.locals.locale })}
           </p>
@@ -383,10 +383,10 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
       </div>
     </div>
 
-    <div class="mt-16 flex flex-col items-center gap-3">
+    <div class="flex flex-col gap-3 items-center mt-16">
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="rounded-md bg-[#44BCFF] px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-[#3a9fd6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
+        class="py-3 px-8 text-base font-semibold text-white rounded-md shadow-sm bg-[#44BCFF] hover:bg-[#3a9fd6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
       >
         {m.how_it_works_cta({}, { locale: Astro.locals.locale })}
       </a>

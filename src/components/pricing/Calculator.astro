@@ -12,7 +12,7 @@ const initialBandwidth = (initialUpdates * initialUpdatesSize) / 1024 // Convert
 const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
 ---
 
-<section id="calculator" class="mx-auto max-w-7xl px-0 py-12 sm:px-6 lg:px-8">
+<section id="calculator" class="py-12 px-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
     <!-- Header -->
     <div class="mb-8 text-center">
@@ -25,11 +25,11 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
     </div>
 
     <!-- Main Calculator -->
-    <div class="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+    <div class="overflow-hidden bg-white rounded-2xl border border-gray-200 shadow-lg">
       <!-- User Inputs Section -->
-      <div class="border-b border-gray-200 bg-gray-100 px-8 py-6">
-        <h2 class="mb-4 flex items-center text-lg font-semibold text-gray-900">
-          <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="py-6 px-8 bg-gray-100 border-b border-gray-200">
+        <h2 class="flex items-center mb-4 text-lg font-semibold text-gray-900">
+          <svg class="mr-2 w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -41,33 +41,33 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">
+            <label class="block mb-2 text-sm font-medium text-gray-700">
               {m.monthly_active_users_mau({}, { locale: Astro.locals.locale })}
             </label>
             <input
               id="mau-input"
               type="number"
               value={initialMau}
-              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
+              class="py-3 px-4 w-full text-gray-700 bg-white rounded-lg border border-gray-300 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
               placeholder="5,000,000"
             />
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">
+            <label class="block mb-2 text-sm font-medium text-gray-700">
               {m.updates_per_month({}, { locale: Astro.locals.locale })}
             </label>
             <input
               id="updates-by-month-input"
               type="number"
               value={initialUpdatesByMonth}
-              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
+              class="py-3 px-4 w-full text-gray-700 bg-white rounded-lg border border-gray-300 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
               placeholder="1"
             />
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">
+            <label class="block mb-2 text-sm font-medium text-gray-700">
               {m.update_size_mb({}, { locale: Astro.locals.locale })}
             </label>
             <input
@@ -75,7 +75,7 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
               type="number"
               step="0.1"
               value={initialUpdatesSize}
-              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-700 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
+              class="py-3 px-4 w-full text-gray-700 bg-white rounded-lg border border-gray-300 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-gray-500"
               placeholder="4"
             />
           </div>
@@ -83,9 +83,9 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
       </div>
 
       <!-- Calculated Results Section -->
-      <div class="px-8 py-6">
-        <h2 class="mb-6 flex items-center text-lg font-semibold text-gray-900">
-          <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="py-6 px-8">
+        <h2 class="flex items-center mb-6 text-lg font-semibold text-gray-900">
+          <svg class="mr-2 w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -96,11 +96,11 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
         </h2>
 
         <!-- Usage Metrics -->
-        <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-4">
+        <div class="grid grid-cols-1 gap-6 mb-8 md:grid-cols-4">
           <!-- MAU -->
-          <div class="rounded-xl border border-gray-200 bg-gray-100 p-4">
-            <div class="mb-2 flex items-center">
-              <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="p-4 bg-gray-100 rounded-xl border border-gray-200">
+            <div class="flex items-center mb-2">
+              <svg class="mr-2 w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -115,9 +115,9 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
           </div>
 
           <!-- Bandwidth -->
-          <div class="rounded-xl border border-orange-100 bg-gray-100 p-4">
-            <div class="mb-2 flex items-center">
-              <svg class="mr-2 h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <div class="p-4 bg-gray-100 rounded-xl border border-orange-100">
+            <div class="flex items-center mb-2">
+              <svg class="mr-2 w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
               </svg>
               <span class="text-sm font-medium text-gray-200">Bandwidth</span>
@@ -127,9 +127,9 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
           </div>
 
           <!-- Storage -->
-          <div class="rounded-xl border border-purple-100 bg-gray-100 p-4">
-            <div class="mb-2 flex items-center">
-              <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="p-4 bg-gray-100 rounded-xl border border-purple-100">
+            <div class="flex items-center mb-2">
+              <svg class="mr-2 w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -143,9 +143,9 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
           </div>
 
           <!-- Total Credits Cost -->
-          <div class="rounded-xl border border-gray-200 bg-gray-900 p-4">
-            <div class="mb-2 flex items-center">
-              <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="p-4 bg-gray-900 rounded-xl border border-gray-200">
+            <div class="flex items-center mb-2">
+              <svg class="mr-2 w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -163,17 +163,17 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
 
         <!-- Pricing Tiers -->
         <div class="rounded-xl border border-gray-200">
-          <div class="border-b border-gray-200 px-6 py-4">
+          <div class="py-4 px-6 border-b border-gray-200">
             <h3 class="font-medium text-gray-900">{m.cost_breakdown_pricing_tiers({}, { locale: Astro.locals.locale })}</h3>
           </div>
 
-          <div class="px-6 py-6">
+          <div class="py-6 px-6">
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <!-- MAU Tiers -->
               <div data-mau-tiers>
-                <div class="mb-3 flex items-center justify-between">
+                <div class="flex justify-between items-center mb-3">
                   <h4 class="flex items-center font-medium text-gray-900">
-                    <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="mr-2 w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -190,9 +190,9 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
 
               <!-- Bandwidth Tiers -->
               <div data-bandwidth-tiers>
-                <div class="mb-3 flex items-center justify-between">
+                <div class="flex justify-between items-center mb-3">
                   <h4 class="flex items-center font-medium text-gray-900">
-                    <svg class="mr-2 h-4 w-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="mr-2 w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
                     </svg>
                     {m.bandwidth({}, { locale: Astro.locals.locale })}:
@@ -204,9 +204,9 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
 
               <!-- Storage Tiers -->
               <div data-storage-tiers>
-                <div class="mb-3 flex items-center justify-between">
+                <div class="flex justify-between items-center mb-3">
                   <h4 class="flex items-center font-medium text-gray-900">
-                    <svg class="mr-2 h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="mr-2 w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -346,7 +346,7 @@ const initialStorage = initialUpdatesSize / 1024 // Convert MB to GiB
       tiers.forEach((tier, index) => {
         if (tier.units_used > 0) {
           const tierDiv = document.createElement('div')
-          tierDiv.className = 'bg-gray-50 rounded-lg p-3 border border-gray-200'
+          tierDiv.className = 'p-3 bg-gray-50 rounded-lg border border-gray-200'
 
           // Tier range and usage
           const tierHeader = document.createElement('div')

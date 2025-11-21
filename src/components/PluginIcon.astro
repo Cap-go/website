@@ -9,6 +9,6 @@ const { icon: Icon, name, className = "" } = Astro.props;
 ---
 
 <div class={`relative flex h-14 w-14 items-center justify-center rounded-xl bg-azure-500 shadow-lg ${className}`}>
-  <div class="absolute inset-0 rounded-xl bg-white opacity-20"></div>
-  <Icon class="relative h-8 w-8 text-white drop-shadow-md" />
+  <div class="absolute inset-0 bg-white rounded-xl opacity-20"></div>
+  <Icon class="relative w-8 h-8 text-white drop-shadow-md" />
 </div>

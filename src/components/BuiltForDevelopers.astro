@@ -3,8 +3,8 @@ import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 ---
 
-<section class="bg-[#1a1a1a] py-24 sm:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+<section class="py-24 sm:py-32 bg-[#1a1a1a]">
+  <div class="px-6 mx-auto max-w-7xl lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <h2 class="text-base font-semibold leading-7 text-blue-400">{m.built_for_devs_badge({}, { locale: Astro.locals.locale })}</h2>
       <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">{m.built_for_devs_title({}, { locale: Astro.locals.locale })}</p>
@@ -14,62 +14,62 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
     </div>
 
     <!-- Visual Section: Code + Phone -->
-    <div class="mt-16 flex flex-col items-center justify-center lg:flex-row lg:gap-16">
+    <div class="flex flex-col justify-center items-center mt-16 lg:flex-row lg:gap-16">
         <!-- Code Block -->
-        <div class="relative w-full max-w-lg rounded-xl bg-[#0d1117] p-8 shadow-2xl ring-1 ring-white/10 z-10">
-            <div class="flex items-center gap-2 mb-6">
-                <div class="h-3 w-3 rounded-full bg-[#ff5f56]"></div>
-                <div class="h-3 w-3 rounded-full bg-[#ffbd2e]"></div>
-                <div class="h-3 w-3 rounded-full bg-[#27c93f]"></div>
+        <div class="relative z-10 p-8 w-full max-w-lg rounded-xl ring-1 shadow-2xl bg-[#0d1117] ring-white/10">
+            <div class="flex gap-2 items-center mb-6">
+                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
             </div>
             <div class="font-mono text-sm leading-relaxed">
                 <div class="flex">
-                    <span class="w-8 text-gray-600 select-none text-right pr-4">1</span>
+                    <span class="pr-4 w-8 text-right text-gray-600 select-none">1</span>
                     <span><span class="text-blue-400">import</span> <span class="text-white">{'{'}</span> <span class="text-yellow-400">CapacitorUpdater</span> <span class="text-white">{'}'}</span> <span class="text-blue-400">from</span> <span class="text-green-400">'@capgo/capacitor-updater'</span></span>
                 </div>
                 <div class="flex">
-                    <span class="w-8 text-gray-600 select-none text-right pr-4">2</span>
+                    <span class="pr-4 w-8 text-right text-gray-600 select-none">2</span>
                 </div>
                 <div class="flex">
-                    <span class="w-8 text-gray-600 select-none text-right pr-4">3</span>
+                    <span class="pr-4 w-8 text-right text-gray-600 select-none">3</span>
                     <span><span class="text-yellow-400">CapacitorUpdater</span><span class="text-white">.</span><span class="text-blue-400">notifyAppReady</span><span class="text-white">()</span></span>
                 </div>
                 <div class="flex">
-                    <span class="w-8 text-gray-600 select-none text-right pr-4">4</span>
+                    <span class="pr-4 w-8 text-right text-gray-600 select-none">4</span>
                 </div>
             </div>
         </div>
 
         <!-- Dotted Line (Hidden on mobile, visible on desktop) -->
-        <div class="hidden lg:block relative h-32 w-px border-l border-dashed border-gray-700 self-center"></div>
+        <div class="hidden relative self-center w-px h-32 border-l border-gray-700 border-dashed lg:block"></div>
 
         <!-- Phone Mockup -->
         <div class="relative mt-8 lg:mt-0">
             <!-- Phone Frame -->
-            <div class="relative mx-auto border-gray-900 bg-gray-900 border-12 rounded-[3rem] h-[500px] w-[260px] shadow-2xl flex flex-col overflow-hidden">
+            <div class="flex overflow-hidden relative flex-col mx-auto bg-gray-900 border-gray-900 shadow-2xl border-12 rounded-[3rem] h-[500px] w-[260px]">
                 <!-- Dynamic Island / Notch -->
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 h-6 w-20 bg-black rounded-b-2xl z-20"></div>
+                <div class="absolute top-0 left-1/2 z-20 w-20 h-6 bg-black rounded-b-2xl -translate-x-1/2"></div>
                 
                 <!-- Screen Content -->
-                <div class="flex-1 bg-[#0d1117] relative flex flex-col items-center pt-16 w-full h-full overflow-hidden">
+                <div class="flex overflow-hidden relative flex-col flex-1 items-center pt-16 w-full h-full bg-[#0d1117]">
                     
                     <!-- Text Content -->
-                    <div class="text-white text-xl font-medium mb-8 z-10">{m.built_for_devs_code_comment({}, { locale: Astro.locals.locale })}</div>
+                    <div class="z-10 mb-8 text-xl font-medium text-white">{m.built_for_devs_code_comment({}, { locale: Astro.locals.locale })}</div>
 
-                    <div class="flex flex-col items-center justify-center w-full z-10 mt-auto mb-20">
-                        <div class="text-gray-400 text-[10px] mb-1">{m.built_for_devs_phone_update({}, { locale: Astro.locals.locale })}</div>
+                    <div class="flex z-10 flex-col justify-center items-center mt-auto mb-20 w-full">
+                        <div class="mb-1 text-gray-400 text-[10px]">{m.built_for_devs_phone_update({}, { locale: Astro.locals.locale })}</div>
                         <div class="text-gray-600 text-[9px]">{m.built_for_devs_phone_time({}, { locale: Astro.locals.locale })}</div>
                         
                         <!-- App Icon -->
-                        <div class="mt-8 relative">
-                            <div class="h-16 w-16 bg-linear-to-b from-blue-400 to-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg relative z-10">
+                        <div class="relative mt-8">
+                            <div class="flex relative z-10 justify-center items-center w-16 h-16 text-white from-blue-400 to-blue-600 rounded-xl shadow-lg bg-linear-to-b">
                               <img src="/app_update_logo.svg" alt="App Icon" class="w-full"/>
                             </div>
                         </div>
                     </div>
 
                     <!-- Bottom Glow -->
-                    <div class="absolute bottom-0 left-0 right-0 h-48 bg-linear-to-t from-blue-600/40 via-blue-900/10 to-transparent pointer-events-none"></div>
+                    <div class="absolute right-0 bottom-0 left-0 h-48 to-transparent pointer-events-none bg-linear-to-t from-blue-600/40 via-blue-900/10"></div>
                 </div>
             </div>
         </div>
@@ -77,185 +77,185 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 
     <!-- Features Grid -->
     <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-      <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-8 lg:max-w-none lg:grid-cols-3">
+      <dl class="grid grid-cols-1 gap-x-8 gap-y-8 max-w-xl lg:grid-cols-3 lg:max-w-none">
         
         <!-- TypeScript support -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center rounded bg-white text-black font-bold text-xl group-hover:scale-110 transition-transform duration-300">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 text-xl font-bold text-black bg-white rounded transition-transform duration-300 group-hover:scale-110">
                 TS
             </div>
             {m.built_for_devs_feature_ts({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_ts_desc({}, { locale: Astro.locals.locale })}</p>
           </dd>
         </div>
 
         <!-- CLI & REST API -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 18" />
                 </svg>
             </div>
             {m.built_for_devs_feature_cli({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_cli_desc({}, { locale: Astro.locals.locale })}</p>
           </dd>
         </div>
 
         <!-- Multi-channel delivery -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" />
                 </svg>
             </div>
             {m.built_for_devs_feature_channels({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_channels_desc({}, { locale: Astro.locals.locale })}</p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_rollback({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /> <!-- Placeholder for git graph -->
                      <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
                 </svg>
             </div>
             {m.built_for_devs_feature_rollback({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_rollback_desc({}, { locale: Astro.locals.locale })}</p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_analytics({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
                 </svg>
             </div>
             {m.built_for_devs_feature_analytics({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_analytics_desc({}, { locale: Astro.locals.locale })}</p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_opensource({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                 </svg>
             </div>
             {m.built_for_devs_feature_opensource({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_opensource_desc({}, { locale: Astro.locals.locale })}</p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_capacitor({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
                 </svg>
             </div>
             {m.built_for_devs_feature_capacitor({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_capacitor_desc({}, { locale: Astro.locals.locale })}</p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_api({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
                     <rect x="2" y="2" width="20" height="20" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
                 </svg>
             </div>
             {m.built_for_devs_feature_api({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_api_desc_part1({}, { locale: Astro.locals.locale })} <a href="/docs/public-api" class="text-white underline hover:text-blue-400">{m.built_for_devs_feature_api_docs({}, { locale: Astro.locals.locale })}</a></p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_differential({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                 </svg>
             </div>
             {m.built_for_devs_feature_differential({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_differential_desc_part1({}, { locale: Astro.locals.locale })} <a href="/docs/live-updates/differentials" class="text-white underline hover:text-blue-400">{m.built_for_devs_feature_differential_learn({}, { locale: Astro.locals.locale })}</a></p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_distribution({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
                 </svg>
             </div>
             {m.built_for_devs_feature_distribution({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_distribution_desc_part1({}, { locale: Astro.locals.locale })} <a href="/docs/live-updates/channels" class="text-white underline hover:text-blue-400">{m.built_for_devs_feature_distribution_learn({}, { locale: Astro.locals.locale })}</a></p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_soc2({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
                 </svg>
             </div>
             {m.built_for_devs_feature_soc2({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_soc2_desc_part1({}, { locale: Astro.locals.locale })} <a href="/trust" class="text-white underline hover:text-blue-400">{m.built_for_devs_feature_soc2_trust({}, { locale: Astro.locals.locale })}</a></p>
           </dd>
         </div>
 
         <!-- {m.built_for_devs_feature_support({}, { locale: Astro.locals.locale })} -->
-        <div class="flex flex-col bg-[#1c1c1c] p-8 rounded-2xl border border-white/5 hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-300 group">
-          <dt class="flex flex-col items-center text-center gap-y-6 text-base font-semibold leading-7 text-white">
-            <div class="h-12 w-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <div class="flex flex-col p-8 rounded-2xl border transition-all duration-300 bg-[#1c1c1c] border-white/5 group hover:border-blue-500/30 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)]">
+          <dt class="flex flex-col gap-y-6 items-center text-base font-semibold leading-7 text-center text-white">
+            <div class="flex justify-center items-center w-12 h-12 transition-transform duration-300 group-hover:scale-110">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                 </svg>
             </div>
             {m.built_for_devs_feature_support({}, { locale: Astro.locals.locale })}
           </dt>
-          <dd class="mt-2 flex flex-auto flex-col text-center text-sm leading-6 text-gray-400">
+          <dd class="flex flex-col flex-auto mt-2 text-sm leading-6 text-center text-gray-400">
             <p class="flex-auto">{m.built_for_devs_feature_support_desc({}, { locale: Astro.locals.locale })}</p>
           </dd>
         </div>
@@ -263,10 +263,10 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
       </dl>
     </div>
 
-    <div class="mt-16 flex justify-center">
+    <div class="flex justify-center mt-16">
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="rounded-md bg-[#44BCFF] px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-[#3a9fd6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
+        class="py-3 px-8 text-base font-semibold text-white rounded-md shadow-sm bg-[#44BCFF] hover:bg-[#3a9fd6] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#44BCFF]"
       >
         {m.built_for_devs_cta({}, { locale: Astro.locals.locale })}
       </a>

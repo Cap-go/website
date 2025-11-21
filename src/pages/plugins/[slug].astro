@@ -152,26 +152,26 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
 ---
 
 <Layout {content}>
-  <div class="flex w-full flex-col items-center">
-    <div class="flex w-full flex-row flex-wrap px-10 lg:max-w-6xl xl:px-0">
-      <a aria-label="Back To Plugins" href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="max-w-max border-b border-white/10 pb-0.5 text-white/50 hover:text-white">
+  <div class="flex flex-col items-center w-full">
+    <div class="flex flex-row flex-wrap px-10 w-full lg:max-w-6xl xl:px-0">
+      <a aria-label="Back To Plugins" href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="pb-0.5 max-w-max border-b hover:text-white border-white/10 text-white/50">
         ← Back To Plugins
       </a>
     </div>
-    <div class="mt-6 flex w-full flex-row flex-wrap gap-8 px-10 lg:max-w-6xl xl:px-0">
-      <button class="rounded border border-white px-3 py-1 text-sm" id="tutorialBtn">
+    <div class="flex flex-row flex-wrap gap-8 px-10 mt-6 w-full lg:max-w-6xl xl:px-0">
+      <button class="py-1 px-3 text-sm rounded border border-white" id="tutorialBtn">
         {m.tutorial_on({}, { locale: Astro.locals.locale })}
         {title}
       </button>
-      <!-- <button class="rounded border border-white/10 px-3 py-1 text-sm" id="aboutBtn">
+      <!-- <button class="py-1 px-3 text-sm rounded border border-white/10" id="aboutBtn">
         {m.about({}, { locale: Astro.locals.locale })}
         {title}
       </button> -->
     </div>
-    <div class="mt-6 flex w-full flex-col items-center">
-      <div class="z-10 mb-8 hidden w-full flex-row flex-wrap gap-10 px-10 md:flex-nowrap lg:max-w-6xl xl:px-0" id="aboutSection">
-        <div class="flex w-full flex-col">
-          <div class="flex items-center gap-4 mt-4">
+    <div class="flex flex-col items-center mt-6 w-full">
+      <div class="hidden z-10 flex-row flex-wrap gap-10 px-10 mb-8 w-full md:flex-nowrap lg:max-w-6xl xl:px-0" id="aboutSection">
+        <div class="flex flex-col w-full">
+          <div class="flex gap-4 items-center mt-4">
             {icon && <PluginIcon icon={icon} name={title} className="shrink-0" />}
             <h1 class="text-2xl font-bold md:text-4xl">
               {title}
@@ -182,7 +182,7 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
           </span>
           {
             githubStars && (
-              <div class="mt-8 flex flex-row items-center justify-between border-t border-white/10 pt-2">
+              <div class="flex flex-row justify-between items-center pt-2 mt-8 border-t border-white/10">
                 <span class="text-sm font-semibold text-gray-400">GitHub Stars</span>{' '}
                 <a class="text-gray-600 hover:underline" href={href} target="_blank" rel="noopener noreferrer">
                   {githubStars}
@@ -192,17 +192,17 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
           }
           {
             npmDownloads && (
-              <div class="mt-4 flex flex-row items-center justify-between border-t border-white/10 pt-2">
+              <div class="flex flex-row justify-between items-center pt-2 mt-4 border-t border-white/10">
                 <span class="text-sm font-semibold text-gray-400">NPM Downloads</span> <span class="text-gray-600">{npmDownloads}</span>
               </div>
             )
           }
-          <div class="flex flex-row flex-wrap items-center justify-between">
+          <div class="flex flex-row flex-wrap justify-between items-center">
             {
               href && (
                 <a
                   aria-label="View Repo URL"
-                  class="mt-8 w-full rounded border border-white/50 px-6 py-2 text-center text-sm hover:border-white sm:w-auto"
+                  class="py-2 px-6 mt-8 w-full text-sm text-center rounded border sm:w-auto hover:border-white border-white/50"
                   href={href}
                   target="_blank"
                 >
@@ -214,7 +214,7 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
               name && (
                 <a
                   aria-label="View NPM"
-                  class="mt-8 w-full rounded border border-white/50 px-6 py-2 text-center text-sm hover:border-white sm:w-auto"
+                  class="py-2 px-6 mt-8 w-full text-sm text-center rounded border sm:w-auto hover:border-white border-white/50"
                   href={`https://www.npmjs.com/package/${name}`}
                   target="_blank"
                 >
@@ -223,11 +223,11 @@ const { title, description, githubStars, npmDownloads, href, name, readme, tutor
               )
             }
           </div>
-          <!-- {readme && <div id="readme" class="prose my-8" set:html={readme} />} -->
+          <!-- {readme && <div id="readme" class="my-8 prose" set:html={readme} />} -->
         </div>
       </div>
     </div>
-    {tutorial && <div class="prose prose-invert mx-auto w-full px-10 py-8 lg:max-w-6xl xl:px-0" id="tutorialSection" set:html={tutorial} />}
+    {tutorial && <div class="py-8 px-10 mx-auto w-full lg:max-w-6xl xl:px-0 prose prose-invert" id="tutorialSection" set:html={tutorial} />}
   </div>
 </Layout>
 

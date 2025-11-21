@@ -68,25 +68,25 @@ const partnerLogos = [
 ]
 ---
 
-<section class="relative overflow-hidden bg-slate-50 py-24">
-  <div class="container mx-auto px-4">
+<section class="overflow-hidden relative py-24 bg-slate-50">
+  <div class="container px-4 mx-auto">
     <!-- Background Elements -->
     <div class="absolute inset-0 rounded-3xl bg-white/60"></div>
-    <div class="absolute top-0 right-0 h-72 w-72 rounded-full bg-blue-400/10 blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-indigo-400/10 blur-3xl"></div>
+    <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-blue-400/10 blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-indigo-400/10 blur-3xl"></div>
 
     <div class="relative mx-auto max-w-7xl">
-      <div class="grid items-center gap-16 lg:grid-cols-2">
+      <div class="grid gap-16 items-center lg:grid-cols-2">
         <!-- Left Column - Content -->
         <div class="space-y-8">
           <!-- Badge -->
-          <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/50 bg-blue-50 px-4 py-2">
-            <div class="h-2 w-2 animate-pulse rounded-full bg-blue-500"></div>
+          <div class="inline-flex gap-2 items-center py-2 px-4 bg-blue-50 rounded-full border border-blue-200/50">
+            <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
             <span class="text-sm font-medium text-blue-700">{m.trusted_by_developers_worldwide({}, { locale: Astro.locals.locale })}</span>
           </div>
 
           <div>
-            <h2 class="mb-6 text-5xl leading-tight font-bold text-slate-900 lg:text-6xl">
+            <h2 class="mb-6 text-5xl font-bold leading-tight lg:text-6xl text-slate-900">
               {m.youre_in_good_company({}, { locale: Astro.locals.locale })}
             </h2>
             <p class="text-xl leading-relaxed text-slate-600">
@@ -106,7 +106,7 @@ const partnerLogos = [
             </div>
             <div class="text-center">
               <div class="mb-2 text-3xl font-bold text-slate-900">
-                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-blue-600 transition-colors">
+                <a href="https://status.capgo.app" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-blue-600 hover:underline">
                   {m.companies_logo_stat_uptime_value({}, { locale: Astro.locals.locale })}
                 </a>
               </div>
@@ -128,9 +128,9 @@ const partnerLogos = [
                     class={`company-logo rounded-2xl border border-slate-200/50 bg-white p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${company.floatDelay ? 'animate-float' : ''}`}
                     style={company.floatDelay ? `animation-delay: ${company.floatDelay};` : undefined}
                   >
-                    <div class="relative flex h-16 items-center justify-center">
-                      <img loading="lazy" class="h-auto max-h-12 w-auto transition-transform hover:scale-105" src={company.logo} alt={company.alt} aria-label={company.name} />
-                      <span class="absolute -top-3 -right-3 rounded-full border border-white/60 bg-slate-900 px-2.5 py-0.5 text-[10px] font-semibold whitespace-nowrap text-white shadow-md">
+                    <div class="flex relative justify-center items-center h-16">
+                      <img loading="lazy" class="w-auto h-auto max-h-12 transition-transform hover:scale-105" src={company.logo} alt={company.alt} aria-label={company.name} />
+                      <span class="absolute -top-3 -right-3 py-0.5 px-2.5 font-semibold text-white whitespace-nowrap rounded-full border shadow-md border-white/60 bg-slate-900 text-[10px]">
                         {m[company.badgeKey]({}, { locale: Astro.locals.locale })}
                       </span>
                     </div>
@@ -148,30 +148,30 @@ const partnerLogos = [
           <p class="text-lg text-slate-600">
             {m.companies_logo_bottom_text({}, { locale: Astro.locals.locale })}
           </p>
-          <div class="flex items-center justify-center gap-8 text-sm text-slate-500">
-            <div class="flex flex-col items-center gap-1">
-              <img loading="lazy" src="/soc2.svg" alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })} class="h-20 w-auto hover:opacity-80 transition-opacity" />
+          <div class="flex gap-8 justify-center items-center text-sm text-slate-500">
+            <div class="flex flex-col gap-1 items-center">
+              <img loading="lazy" src="/soc2.svg" alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })} class="w-auto h-20 transition-opacity hover:opacity-80" />
               <span class="text-xs font-semibold text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
             </div>
-            <div class="flex flex-col items-center gap-1">
-              <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="h-20 w-auto hover:opacity-80 transition-opacity" />
+            <div class="flex flex-col gap-1 items-center">
+              <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="w-auto h-20 transition-opacity hover:opacity-80" />
               <span class="text-xs font-semibold text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
             </div>
-            <div class="flex flex-col items-center gap-1">
-              <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="h-20 w-auto hover:opacity-80 transition-opacity" />
+            <div class="flex flex-col gap-1 items-center">
+              <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="w-auto h-20 transition-opacity hover:opacity-80" />
               <span class="text-xs font-semibold text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
             </div>
           </div>
           <div class="mt-6">
-            <a href="https://trust.capgo.app" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700">
+            <a href="https://trust.capgo.app" class="inline-flex gap-2 items-center text-sm font-semibold text-blue-600 hover:text-blue-700">
               {m.trust_center({}, { locale: Astro.locals.locale })}
-              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3h7m0 0v7m0-7L10 14"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10v11h11"></path>
               </svg>
             </a>
           </div>
-          <p class="mx-auto mt-4 max-w-2xl text-center text-xs text-slate-500">
+          <p class="mx-auto mt-4 max-w-2xl text-xs text-center text-slate-500">
             {m.enterprise_security_audit_desc({}, { locale: Astro.locals.locale })}
           </p>
         </div>

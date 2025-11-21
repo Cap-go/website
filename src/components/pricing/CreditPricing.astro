@@ -84,10 +84,10 @@ function formatPrice(price: number): string {
 }
 ---
 
-<section class="mx-auto max-w-7xl px-0 py-12 sm:px-6 lg:px-8">
-  <div class="rounded-3xl bg-white p-6 shadow-xl sm:p-8 lg:p-12">
+<section class="py-12 px-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
+  <div class="p-6 bg-white rounded-3xl shadow-xl sm:p-8 lg:p-12">
     <div class="mb-6 text-center sm:mb-8">
-      <h2 class="inline-flex flex-col items-center gap-2 text-2xl font-bold text-gray-900 sm:flex-row sm:gap-3 sm:text-3xl">
+      <h2 class="inline-flex flex-col gap-2 items-center text-2xl font-bold text-gray-900 sm:flex-row sm:gap-3 sm:text-3xl">
         {m.credit_pricing({}, { locale: Astro.locals.locale })}
       </h2>
     </div>
@@ -95,10 +95,10 @@ function formatPrice(price: number): string {
     <div class="grid gap-6 sm:gap-8 md:grid-cols-3">
       {
         Object.entries(creditsByType).map(([type, typeCredits]) => (
-          <div class="rounded-2xl border border-gray-200 p-4 sm:p-6">
-            <h3 class="mb-4 flex items-center text-lg font-semibold text-gray-900 sm:text-xl">
+          <div class="p-4 rounded-2xl border border-gray-200 sm:p-6">
+            <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 sm:text-xl">
               {type === 'mau' && (
-                <svg class="mr-2 h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="mr-2 w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -108,12 +108,12 @@ function formatPrice(price: number): string {
                 </svg>
               )}
               {type === 'bandwidth' && (
-                <svg class="mr-2 h-4 w-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                <svg class="mr-2 w-4 h-4 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
                 </svg>
               )}
               {type === 'storage' && (
-                <svg class="mr-2 h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="mr-2 w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -127,7 +127,7 @@ function formatPrice(price: number): string {
 
             <div class="space-y-3">
               {typeCredits.map((credit, index) => (
-                <div class="flex flex-col space-y-1 border-b border-gray-100 pb-3 last:border-0 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+                <div class="flex flex-col pb-3 space-y-1 border-b border-gray-100 sm:flex-row sm:justify-between sm:items-center sm:space-y-0 last:border-0">
                   <div class="text-xs text-gray-600 sm:text-sm">
                     {index === 0
                       ? `${m.first({}, { locale: Astro.locals.locale })} ${formatNumber(credit.step_max, type)}`

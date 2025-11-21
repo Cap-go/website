@@ -9,7 +9,7 @@ const content = { title, description }
 ---
 
 <Layout content={content}>
-  <div class="prose-sm prose prose-invert m-auto py-8">
+  <div class="py-8 m-auto prose-sm prose prose-invert">
     <h1>{m.support_policy_title({}, { locale: Astro.locals.locale })}</h1>
     <p>
       {m.support_policy_intro({}, { locale: Astro.locals.locale })}

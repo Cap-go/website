@@ -6,60 +6,60 @@ const brand = Astro.locals.runtimeConfig.public.brand
 ---
 
 <header class="relative py-2">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between">
-      <div class="flex shrink-0 items-center">
-        <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label="Capgo home" class="font-prompt flex items-center pr-3 text-4xl font-medium">
-          <img class="h-18 w-auto pr-1" loading="eager" height="72" width="133" alt={`${brand} logo`} aria-label={`${brand} logo`} src="/capgo_logo.webp" />
+  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="flex relative justify-between items-center">
+      <div class="flex items-center shrink-0">
+        <a href={getRelativeLocaleUrl(Astro.locals.locale)} aria-label="Capgo home" class="flex items-center pr-3 text-4xl font-medium font-prompt">
+          <img class="pr-1 w-auto h-18" loading="eager" height="72" width="133" alt={`${brand} logo`} aria-label={`${brand} logo`} src="/capgo_logo.webp" />
         </a>
       </div>
       <div class="flex lg:hidden">
         <button type="button" class="text-white" aria-label="Expand menu" id="menu-toggle">
-          <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
       </div>
-      <div class="hidden lg:flex lg:flex-1 lg:items-center lg:gap-10">
+      <div class="hidden lg:flex lg:flex-1 lg:gap-10 lg:items-center">
         <nav class="flex items-center space-x-8">
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
             aria-label="Pricing"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium border-b-2 border-transparent transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
           >
             {m.pricing({}, { locale: Astro.locals.locale })}
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
             aria-label="Enterprise"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium border-b-2 border-transparent transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
           >
             {m.enterprise_title({}, { locale: Astro.locals.locale })}
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
             aria-label="Documentation"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium border-b-2 border-transparent transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
           >
             {m.documentation({}, { locale: Astro.locals.locale })}
           </a>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
             aria-label="Blog"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium border-b-2 border-transparent transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
           >
             {m.blog({}, { locale: Astro.locals.locale })}
           </a>
         </nav>
-        <div class="ml-auto flex items-center space-x-4">
+        <div class="flex items-center ml-auto space-x-4">
           <a
             href="https://github.com/Cap-go/capacitor-updater"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Stars"
-            class="flex items-center gap-2 rounded-md bg-gray-800 px-3 py-1.5 text-sm font-medium text-gray-300 transition-colors hover:bg-gray-700"
+            class="flex gap-2 items-center py-1.5 px-3 text-sm font-medium text-gray-300 bg-gray-800 rounded-md transition-colors hover:bg-gray-700"
           >
-            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
             </svg>
             <span>644+</span>
@@ -68,7 +68,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
             href="https://console.capgo.app/login/"
             aria-label="Login"
             target="_blank"
-            class="border-b-2 border-transparent text-base font-medium transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
+            class="text-base font-medium border-b-2 border-transparent transition-all duration-200 hover:border-blue-600 focus:border-blue-600"
           >
             {m.login({}, { locale: Astro.locals.locale })}
           </a>
@@ -76,7 +76,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
             href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
             target="_blank"
             aria-label="Register"
-            class="font-pj rounded-xl border border-gray-300 bg-transparent px-5 py-2 text-base leading-7 font-semibold text-gray-300 transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+            class="py-2 px-5 text-base font-semibold leading-7 text-gray-300 bg-transparent rounded-xl border border-gray-300 transition-all duration-200 hover:text-white hover:bg-gray-500 focus:text-white focus:bg-gray-500 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none font-pj"
             role="button"
           >
             {m.register({}, { locale: Astro.locals.locale })}
@@ -86,32 +86,32 @@ const brand = Astro.locals.runtimeConfig.public.brand
     </div>
   </div>
   <div id="mobile-menu" class="hidden">
-    <div class="mt-2 space-y-1 bg-gray-700 px-2 pt-2 pb-3">
+    <div class="px-2 pt-2 pb-3 mt-2 space-y-1 bg-gray-700">
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
         aria-label={m.pricing({}, { locale: Astro.locals.locale })}
-        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
       >
         Pricing
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
         aria-label={m.enterprise_title({}, { locale: Astro.locals.locale })}
-        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
       >
         Enterprise
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
         aria-label={m.documentation({}, { locale: Astro.locals.locale })}
-        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
       >
         Documentation
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
         aria-label={m.blog({}, { locale: Astro.locals.locale })}
-        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
       >
         Blog
       </a>
@@ -119,7 +119,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
         href="https://console.capgo.app/login/"
         target="_blank"
         aria-label={m.login({}, { locale: Astro.locals.locale })}
-        class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
       >
         Login
       </a>
@@ -127,7 +127,7 @@ const brand = Astro.locals.runtimeConfig.public.brand
         target="_blank"
         aria-label={m.register({}, { locale: Astro.locals.locale })}
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="font-pj block rounded-md border border-gray-300 bg-gray-900 px-5 py-2 text-base leading-7 font-medium text-gray-300 transition-all duration-200 hover:bg-gray-500 hover:text-white focus:bg-gray-500 focus:text-white focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+        class="block py-2 px-5 text-base font-medium leading-7 text-gray-300 bg-gray-900 rounded-md border border-gray-300 transition-all duration-200 hover:text-white hover:bg-gray-500 focus:text-white focus:bg-gray-500 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none font-pj"
       >
         Register
       </a>

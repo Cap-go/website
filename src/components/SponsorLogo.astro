@@ -24,9 +24,9 @@ const sizeClass = (() => {
 })()
 ---
 
-<a href={url} target="_blank" class="m-3 flex flex-col items-center rounded-lg p-2 transition duration-300 hover:scale-105 hover:bg-gray-800">
+<a href={url} target="_blank" class="flex flex-col items-center p-2 m-3 rounded-lg transition duration-300 hover:bg-gray-800 hover:scale-105">
   <div class={`mb-2 flex items-center justify-center overflow-hidden rounded-full bg-white ${sizeClass}`}>
-    <img src={logo} alt={name} class="h-full w-full object-cover" />
+    <img src={logo} alt={name} class="object-cover w-full h-full" />
   </div>
-  <span class="text-center text-sm">{name}</span>
+  <span class="text-sm text-center">{name}</span>
 </a>

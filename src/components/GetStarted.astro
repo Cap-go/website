@@ -4,22 +4,22 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 ---
 
 <div>
-  <div class="relative mx-4 my-6 max-w-4xl p-4 sm:mx-auto sm:my-10 sm:p-8 md:my-14 md:p-12">
+  <div class="relative p-4 my-6 mx-4 max-w-4xl sm:p-8 sm:my-10 sm:mx-auto md:p-12 md:my-14">
     <!-- Border design -->
-    <div class="absolute inset-0 rounded-[20px] border border-gray-700 sm:rounded-[40px]"></div>
+    <div class="absolute inset-0 border border-gray-700 rounded-[20px] sm:rounded-[40px]"></div>
 
     <div class="relative">
-      <span class="mb-4 text-3xl leading-tight font-normal text-white sm:mb-6 sm:text-4xl md:text-[44px]">
+      <span class="mb-4 text-3xl font-normal leading-tight text-white sm:mb-6 sm:text-4xl md:text-[44px]">
         {m.instant_updates_for_capacitor_apps({}, { locale: Astro.locals.locale })}
       </span>
 
-      <p class="mb-6 max-w-3xl text-lg leading-relaxed font-normal text-gray-300 sm:mb-8 sm:text-xl md:mb-12">
+      <p class="mb-6 max-w-3xl text-lg font-normal leading-relaxed text-gray-300 sm:mb-8 sm:text-xl md:mb-12">
         {m.instant_updates_for_capacitor_apps_description({}, { locale: Astro.locals.locale })}
       </p>
 
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="inline-flex w-full items-center justify-center rounded-lg bg-black px-6 py-3 text-lg text-white transition-colors duration-200 hover:bg-gray-800 sm:w-auto sm:px-10 sm:py-4 sm:text-xl"
+        class="inline-flex justify-center items-center py-3 px-6 w-full text-lg text-white bg-black rounded-lg transition-colors duration-200 sm:py-4 sm:px-10 sm:w-auto sm:text-xl hover:bg-gray-800"
       >
         {m.get_started_now({}, { locale: Astro.locals.locale })}
       </a>

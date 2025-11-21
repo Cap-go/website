@@ -3,22 +3,22 @@ import * as m from '@/paraglide/messages'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 ---    
 <!-- Ionic Appflow Shutdown Notice Section -->
-<section class="relative overflow-hidden py-16 sm:py-20 lg:py-24 bg-slate-700">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<section class="overflow-hidden relative py-16 sm:py-20 lg:py-24 bg-slate-700">
+  <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div class="mx-auto text-center">
       <!-- Notice Badge -->
-      <div class="mb-8 inline-flex items-center rounded-full bg-white/20 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm ring-1 ring-white/30 ring-inset uppercase tracking-wider">
+      <div class="inline-flex items-center py-2 px-4 mb-8 text-xs font-medium tracking-wider text-white uppercase rounded-full ring-1 ring-inset bg-white/20 backdrop-blur-sm ring-white/30">
         {m.home_important_update_badge({}, { locale: Astro.locals.locale })}
       </div>
 
-      <h2 class="mx-auto mb-8 max-w-5xl text-4xl leading-tight font-bold text-white sm:text-5xl xl:text-6xl">
+      <h2 class="mx-auto mb-8 max-w-5xl text-4xl font-bold leading-tight text-white sm:text-5xl xl:text-6xl">
         {m.home_appflow_shutdown_heading({}, { locale: Astro.locals.locale })},<br />
         <span class="underline decoration-2 underline-offset-8">
           {m.home_capgo_here_to_stay({}, { locale: Astro.locals.locale })}
         </span>
       </h2>
 
-      <div class="mx-auto mb-12 max-w-6xl space-y-6 text-lg leading-relaxed text-white sm:text-xl">
+      <div class="mx-auto mb-12 space-y-6 max-w-6xl text-lg leading-relaxed text-white sm:text-xl">
         <p class="font-normal">
           {m.home_appflow_notice_intro({}, { locale: Astro.locals.locale })}
         </p>
@@ -36,37 +36,37 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
       </div>
 
       <!-- Key Differentiators -->
-      <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 mb-12 md:grid-cols-3">
         <!-- Bootstrapped -->
-        <div class="rounded-2xl bg-[#1c1c1c] p-8 text-center ring-1 ring-white/10 flex flex-col items-center justify-between h-full">
-          <div class="flex flex-col items-center gap-6 w-full pt-4">
+        <div class="flex flex-col justify-between items-center p-8 h-full text-center rounded-2xl ring-1 bg-[#1c1c1c] ring-white/10">
+          <div class="flex flex-col gap-6 items-center pt-4 w-full">
             <!-- Toggle Switch -->
-            <div class="bg-white rounded-full py-3 px-6 flex items-center gap-3 shadow-lg">
-              <div class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 bg-blue-600" role="switch" aria-checked="true">
-                <span aria-hidden="true" class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+            <div class="flex gap-3 items-center py-3 px-6 bg-white rounded-full shadow-lg">
+              <div class="inline-flex relative w-11 h-6 bg-blue-600 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out cursor-pointer focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none shrink-0" role="switch" aria-checked="true">
+                <span aria-hidden="true" class="inline-block w-5 h-5 bg-white rounded-full ring-0 shadow transition duration-200 ease-in-out transform translate-x-5 pointer-events-none"></span>
               </div>
-              <span class="text-gray-900 font-semibold">Fully Bootstrapped</span>
+              <span class="font-semibold text-gray-900">Fully Bootstrapped</span>
             </div>
 
             <!-- Tags -->
-            <div class="flex flex-wrap justify-center gap-3 w-full max-w-[280px]">
-              <span class="-rotate-6 bg-[#2a2a2a] text-gray-300 px-4 py-1.5 rounded-full text-sm border border-white/10 shadow-lg">No VCs</span>
-              <span class="rotate-[4deg] bg-[#2a2a2a] text-gray-300 px-4 py-1.5 rounded-full text-sm border border-white/10 shadow-lg">Self funded</span>
-              <span class="-rotate-3 bg-[#2a2a2a] text-gray-300 px-4 py-1.5 rounded-full text-sm border border-white/10 shadow-lg">Growing</span>
-              <span class="rotate-2 bg-[#2a2a2a] text-gray-300 px-4 py-1.5 rounded-full text-sm border border-white/10 shadow-lg">Own resources</span>
-              <span class="-rotate-2 bg-[#2a2a2a] text-gray-300 px-4 py-1.5 rounded-full text-sm border border-white/10 shadow-lg">Happy customers</span>
+            <div class="flex flex-wrap gap-3 justify-center w-full max-w-[280px]">
+              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg -rotate-6 bg-[#2a2a2a] border-white/10">No VCs</span>
+              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg rotate-[4deg] bg-[#2a2a2a] border-white/10">Self funded</span>
+              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg -rotate-3 bg-[#2a2a2a] border-white/10">Growing</span>
+              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg rotate-2 bg-[#2a2a2a] border-white/10">Own resources</span>
+              <span class="py-1.5 px-4 text-sm text-gray-300 rounded-full border shadow-lg -rotate-2 bg-[#2a2a2a] border-white/10">Happy customers</span>
             </div>
           </div>
 
           <div class="mt-8">
-            <h3 class="text-xl font-bold text-white mb-3">{m.home_bootstrapped_title({}, { locale: Astro.locals.locale })}</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">{m.home_bootstrapped_desc({}, { locale: Astro.locals.locale })}</p>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.home_bootstrapped_title({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-sm leading-relaxed text-gray-400">{m.home_bootstrapped_desc({}, { locale: Astro.locals.locale })}</p>
           </div>
         </div>
 
         <!-- Profitable -->
-        <div class="rounded-2xl bg-[#1c1c1c] p-8 text-center ring-1 ring-white/10 flex flex-col items-center justify-between h-full">
-          <div class="w-full h-48 relative flex items-center justify-center">
+        <div class="flex flex-col justify-between items-center p-8 h-full text-center rounded-2xl ring-1 bg-[#1c1c1c] ring-white/10">
+          <div class="flex relative justify-center items-center w-full h-48">
             <svg class="w-full h-full" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
               <!-- Grid lines -->
               <line x1="0" y1="20" x2="200" y2="20" stroke="#333" stroke-width="1" stroke-dasharray="4 4" />
@@ -89,14 +89,14 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
           </div>
 
           <div class="mt-8">
-            <h3 class="text-xl font-bold text-white mb-3">{m.home_revenue_title({}, { locale: Astro.locals.locale })}</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">{m.home_revenue_desc({}, { locale: Astro.locals.locale })}</p>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.home_revenue_title({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-sm leading-relaxed text-gray-400">{m.home_revenue_desc({}, { locale: Astro.locals.locale })}</p>
           </div>
         </div>
 
         <!-- Long-term -->
-        <div class="rounded-2xl bg-[#1c1c1c] p-8 text-center ring-1 ring-white/10 flex flex-col items-center justify-between h-full">
-          <div class="w-full h-48 flex items-center justify-center relative">
+        <div class="flex flex-col justify-between items-center p-8 h-full text-center rounded-2xl ring-1 bg-[#1c1c1c] ring-white/10">
+          <div class="flex relative justify-center items-center w-full h-48">
             <!-- Grid background -->
             <div class="absolute inset-0" style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 20px 20px; opacity: 0.2;"></div>
             
@@ -132,26 +132,26 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
           </div>
 
           <div class="mt-8">
-            <h3 class="text-xl font-bold text-white mb-3">{m.home_built_to_last_title({}, { locale: Astro.locals.locale })}</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">{m.home_built_to_last_desc({}, { locale: Astro.locals.locale })}</p>
+            <h3 class="mb-3 text-xl font-bold text-white">{m.home_built_to_last_title({}, { locale: Astro.locals.locale })}</h3>
+            <p class="text-sm leading-relaxed text-gray-400">{m.home_built_to_last_desc({}, { locale: Astro.locals.locale })}</p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Migration CTA -->
-    <div class="rounded-3xl bg-white p-8 sm:p-12 text-center">
-      <div class="mb-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-        <img src="/appflow_logo.webp" alt="Appflow" class="h-10 w-auto" />
-        <svg class="h-6 w-6 text-gray-400 rotate-90 sm:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="p-8 text-center bg-white rounded-3xl sm:p-12">
+      <div class="flex flex-col gap-4 justify-center items-center mb-6 sm:flex-row sm:gap-8">
+        <img src="/appflow_logo.webp" alt="Appflow" class="w-auto h-10" />
+        <svg class="w-6 h-6 text-gray-400 rotate-90 sm:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
         </svg>
-        <img src="/capgo_logo.webp" alt="Capgo" class="h-20 sm:h-32 w-auto invert" />
+        <img src="/capgo_logo.webp" alt="Capgo" class="w-auto h-20 sm:h-32 invert" />
       </div>
 
-      <h3 class="mb-4 text-2xl sm:text-3xl font-bold text-gray-900">
+      <h3 class="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl">
         {m.home_migration_cta_title({}, { locale: Astro.locals.locale })}
       </h3>
       <p class="mx-auto mb-8 max-w-2xl text-base text-gray-600">
@@ -159,27 +159,27 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
       </p>
 
       <!-- User avatars -->
-      <div class="mb-6 flex justify-center -space-x-4">
-        <img class="inline-block h-12 w-12 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=64&h=64" alt="" />
-        <img class="inline-block h-12 w-12 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=64&h=64" alt="" />
-        <img class="inline-block h-12 w-12 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=64&h=64" alt="" />
-        <img class="inline-block h-12 w-12 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=64&h=64" alt="" />
-        <img class="inline-block h-12 w-12 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=64&h=64" alt="" />
-        <div class="h-12 w-12 rounded-full bg-blue-600 ring-2 ring-white flex items-center justify-center text-white text-sm font-bold">
+      <div class="flex justify-center mb-6 -space-x-4">
+        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=64&h=64" alt="" />
+        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=64&h=64" alt="" />
+        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=64&h=64" alt="" />
+        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=64&h=64" alt="" />
+        <img class="inline-block object-cover w-12 h-12 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=64&h=64" alt="" />
+        <div class="flex justify-center items-center w-12 h-12 text-sm font-bold text-white bg-blue-600 rounded-full ring-2 ring-white">
           1k+
         </div>
       </div>
 
-      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <div class="flex flex-col gap-4 justify-center items-center sm:flex-row">
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-          class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+          class="inline-flex justify-center items-center py-4 px-8 text-base font-semibold text-white bg-blue-600 rounded-xl transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
         >
           {m.cta_start_migration({}, { locale: Astro.locals.locale })}
         </a>
         <a
           href={getRelativeLocaleUrl(Astro.locals.locale, 'docs/upgrade/from-appflow-to-capgo')}
-          class="inline-flex items-center justify-center rounded-xl border-2 border-gray-300 bg-white px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 hover:border-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+          class="inline-flex justify-center items-center py-4 px-8 text-base font-semibold text-gray-900 bg-white rounded-xl border-2 border-gray-300 transition-all duration-200 hover:bg-gray-50 hover:border-gray-400 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
         >
           {m.migration_guide({}, { locale: Astro.locals.locale })}
         </a>

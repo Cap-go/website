@@ -147,26 +147,26 @@ const navigation: Record<string, NavigationItem[]> = {
 }
 ---
 
-<footer class="bg-gray-900 text-white" aria-labelledby="footer-heading">
+<footer class="text-white bg-gray-900" aria-labelledby="footer-heading">
   <p id="footer-heading" class="sr-only">{m.footer({}, { locale: Astro.locals.locale })}</p>
-  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24 relative">
+  <div class="relative py-16 px-4 mx-auto max-w-7xl sm:px-6 lg:py-24 lg:px-8">
     
     <!-- Top Section: Tagline + Button -->
-    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white max-w-2xl mb-6 lg:mb-0">
+    <div class="flex flex-col justify-between items-start mb-12 lg:flex-row lg:items-center">
+      <h2 class="mb-6 max-w-2xl text-3xl font-bold tracking-tight text-white md:text-4xl lg:mb-0">
         {m.footer_tagline_part1({}, { locale: Astro.locals.locale })}
-        <span class="text-zinc-500 block">{m.footer_tagline_part2({}, { locale: Astro.locals.locale })}</span>
+        <span class="block text-zinc-500">{m.footer_tagline_part2({}, { locale: Astro.locals.locale })}</span>
       </h2>
-      <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+      <a href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')} class="inline-flex justify-center items-center py-3 px-6 text-base font-medium text-white bg-blue-600 rounded-md border border-transparent shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none">
         Install Plugin
       </a>
     </div>
 
     <!-- Middle Section: Hero Icons -->
-    <div class="flex flex-wrap gap-6 mb-12 border-b border-zinc-800 pb-12">
+    <div class="flex flex-wrap gap-6 pb-12 mb-12 border-b border-zinc-800">
       {
         navigation.hero.map((item) => (
-          <a href={item.href} target="_blank" rel="noreferrer" class="flex items-center text-sm text-zinc-400 hover:text-white transition-colors">
+          <a href={item.href} target="_blank" rel="noreferrer" class="flex items-center text-sm transition-colors hover:text-white text-zinc-400">
             {item.icon && <div class="h-5 w-5 mr-2 text-blue-500 [&>svg]:w-full [&>svg]:h-full" set:html={item.icon} />}
             <span>{typeof item.name === 'function' ? item.name() : item.name}</span>
           </a>
@@ -175,13 +175,13 @@ const navigation: Record<string, NavigationItem[]> = {
     </div>
 
     <!-- Links Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+    <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-4">
       <div>
-        <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">{m.solutions({}, { locale: Astro.locals.locale })}</h3>
+        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.solutions({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
           {navigation.solutions.map((item) => (
             <li>
-              <a href={item.href} target={item.target} class="text-sm text-zinc-400 hover:text-white transition-colors">
+              <a href={item.href} target={item.target} class="text-sm transition-colors hover:text-white text-zinc-400">
                 {typeof item.name === 'function' ? item.name() : item.name}
               </a>
             </li>
@@ -189,12 +189,12 @@ const navigation: Record<string, NavigationItem[]> = {
         </ul>
       </div>
       <div>
-        <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">{m.support({}, { locale: Astro.locals.locale })}</h3>
+        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.support({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
           {navigation.support.filter(i => !i.href.includes('status.capgo.app') || (typeof i.name === 'function' ? i.name() : i.name) !== m.all_systems_normal({}, { locale: Astro.locals.locale })).map((item) => (
             <li>
-              <a href={item.href} target={item.target} rel={item.rel} class="text-sm text-zinc-400 hover:text-white transition-colors">
-                {item.icon && <span class="mr-2 inline-block w-4 h-4" set:html={typeof item.icon === 'function' ? item.icon() : item.icon} />}
+              <a href={item.href} target={item.target} rel={item.rel} class="text-sm transition-colors hover:text-white text-zinc-400">
+                {item.icon && <span class="inline-block mr-2 w-4 h-4" set:html={typeof item.icon === 'function' ? item.icon() : item.icon} />}
                 {typeof item.name === 'function' ? item.name() : item.name}
               </a>
             </li>
@@ -202,11 +202,11 @@ const navigation: Record<string, NavigationItem[]> = {
         </ul>
       </div>
       <div>
-        <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">{m.company({}, { locale: Astro.locals.locale })}</h3>
+        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.company({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
           {navigation.company.map((item) => (
             <li>
-              <a href={item.href} class="text-sm text-zinc-400 hover:text-white transition-colors">
+              <a href={item.href} class="text-sm transition-colors hover:text-white text-zinc-400">
                 {typeof item.name === 'function' ? item.name() : item.name}
               </a>
             </li>
@@ -214,11 +214,11 @@ const navigation: Record<string, NavigationItem[]> = {
         </ul>
       </div>
       <div>
-        <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">{m.legal({}, { locale: Astro.locals.locale })}</h3>
+        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.legal({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">
           {navigation.legal.map((item) => (
             <li>
-              <a href={item.href} rel={item.rel} class="text-sm text-zinc-400 hover:text-white transition-colors">
+              <a href={item.href} rel={item.rel} class="text-sm transition-colors hover:text-white text-zinc-400">
                 {typeof item.name === 'function' ? item.name() : item.name}
               </a>
             </li>
@@ -228,39 +228,39 @@ const navigation: Record<string, NavigationItem[]> = {
     </div>
 
     <!-- Bottom Section -->
-    <div class="flex flex-col md:flex-row justify-between items-end pt-8 border-t border-zinc-800 relative">
+    <div class="flex relative flex-col justify-between items-end pt-8 border-t md:flex-row border-zinc-800">
         
         <!-- Status Indicator -->
-        <div class="mb-4 md:mb-0 flex flex-col gap-4 items-start">
-             <a href="https://status.capgo.app/" target="_blank" class="flex items-center text-sm text-zinc-400 hover:text-white">
-                <span class="relative flex h-2 w-2 mr-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        <div class="flex flex-col gap-4 items-start mb-4 md:mb-0">
+             <a href="https://status.capgo.app/" target="_blank" class="flex items-center text-sm hover:text-white text-zinc-400">
+                <span class="flex relative mr-2 w-2 h-2">
+                  <span class="inline-flex absolute w-full h-full bg-green-400 rounded-full opacity-75 animate-ping"></span>
+                  <span class="inline-flex relative w-2 h-2 bg-green-500 rounded-full"></span>
                 </span>
                 All systems normal: 99% uptime
              </a>
              <div class="flex gap-4">
-               <img src="/soc2.svg" alt="SOC 2 Compliant" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-               <img src="/soc1.svg" alt="SOC 1 Compliant" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-               <img src="/gdpr.svg" alt="GDPR Compliant" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+               <img src="/soc2.svg" alt="SOC 2 Compliant" class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
+               <img src="/soc1.svg" alt="SOC 1 Compliant" class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
+               <img src="/gdpr.svg" alt="GDPR Compliant" class="w-auto h-12 opacity-80 transition-opacity hover:opacity-100" />
              </div>
-             <p class="text-xs text-zinc-500 max-w-md">
+             <p class="max-w-md text-xs text-zinc-500">
                 {m.enterprise_security_audit_desc({}, { locale: Astro.locals.locale })}
              </p>
         </div>
 
         <!-- Language & Copyright -->
-        <div class="flex flex-col md:flex-row items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+        <div class="flex flex-col gap-6 justify-between items-center w-full md:flex-row md:justify-end md:w-auto">
             
             <!-- Language Selector -->
             <div class="relative">
-                <button type="button" id="language-dropdown-button" class="flex items-center text-sm text-zinc-400 hover:text-white focus:outline-none">
+                <button type="button" id="language-dropdown-button" class="flex items-center text-sm hover:text-white focus:outline-none text-zinc-400">
                     <span class="mr-2">{currentFlag}</span> {Astro.locals.locale.toUpperCase()} <span class="ml-1">▼</span>
                 </button>
-                 <div id="language-dropdown" class="absolute bottom-full left-0 mb-2 hidden w-32 rounded-md bg-[#1c1c1f] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                 <div id="language-dropdown" class="hidden absolute left-0 bottom-full z-50 mb-2 w-32 rounded-md ring-1 ring-black ring-opacity-5 shadow-lg focus:outline-none bg-[#1c1c1f]">
                     <div class="py-1">
                         {locales.map((item) => (
-                            <a href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))} class="block px-4 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white">
+                            <a href={getRelativeLocaleUrl(item.toLowerCase(), Astro.url.pathname.replace(`/${Astro.locals.locale}/`, '/'))} class="block py-2 px-4 text-sm hover:text-white text-zinc-400 hover:bg-zinc-800">
                                 {item.toUpperCase()}
                             </a>
                         ))}
@@ -268,7 +268,7 @@ const navigation: Record<string, NavigationItem[]> = {
                  </div>
             </div>
 
-            <p class="text-xs text-zinc-500 uppercase tracking-wider">
+            <p class="text-xs tracking-wider uppercase text-zinc-500">
                 &copy; {year} CAPGO, Digital shift OU. ALL RIGHTS RESERVED.
             </p>
         </div>

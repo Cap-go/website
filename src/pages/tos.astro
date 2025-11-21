@@ -14,7 +14,7 @@ const domain = config.public.baseUrl
 ---
 
 <Layout content={content}>
-  <div class="prose prose-sm prose-invert m-auto">
+  <div class="m-auto prose prose-sm prose-invert">
     {
       Astro.locals.locale !== defaultLocale && (
         <span class="text-xs">
@@ -319,6 +319,6 @@ const domain = config.public.baseUrl
         <a href="https://support.capgo.app" rel="external nofollow noopener" target="_blank">{domain}#support</a>
       </li>
     </ul>
-    <div class="mt-8 h-px w-full"></div>
+    <div class="mt-8 w-full h-px"></div>
   </div>
 </Layout>

@@ -315,7 +315,7 @@ Voici un exemple de composant de bouton de paiement en Vue que vous pouvez ajout
       </div>
       <button 
         @click="handlePayment" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         Purchase Now
       </button>
@@ -590,7 +590,7 @@ Ajoutez une page de gestion des abonnements dans votre application pour afficher
       
       <button 
         @click="manageSubscription" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         Manage Subscription
       </button>
@@ -600,7 +600,7 @@ Ajoutez une page de gestion des abonnements dans votre application pour afficher
       <p class="mb-4">You don't have an active subscription.</p>
       <button 
         @click="goToPricingPage" 
-        class="w-full py-3 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+        class="py-3 w-full font-medium text-white bg-indigo-600 rounded-lg transition-colors hover:bg-indigo-700"
       >
         View Plans
       </button>
