@@ -7,9 +7,9 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
 
 <section>
   <div class="relative overflow-hidden">
-    <div class="relative mx-auto max-w-7xl pb-32">
+    <div class="relative mx-auto max-w-7xl pb-8 md:pb-32">
       <!-- Background Grid of Squares -->
-      <div class="pointer-events-none absolute inset-0 hidden w-full flex-col justify-center gap-4 select-none lg:flex">
+      <div class="pointer-events-none absolute inset-0 w-full flex-col justify-center gap-4 select-none flex blur-sm">
         <!-- Row 0 -->
         <div class="grid w-full grid-cols-12 gap-4">
           <!-- Left -->
@@ -188,7 +188,7 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
     </div>
   </div>
   <!-- Features Bar -->
-  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-36 sm:py-16 lg:py-20">
+  <div class="bg-linear-to-b from-gray-900 to-[#1a1a1a] py-6 sm:py-16 lg:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Single Horizontal Bar with Features and Stats -->
       <div class="mx-auto max-w-6xl">
@@ -318,15 +318,15 @@ const ctaSubtext = `${m.days_free_trial({}, { locale: Astro.locals.locale })}. $
               alt={m.soc2_compliance_short({}, { locale: Astro.locals.locale })}
               class="h-10 w-auto opacity-90 transition-opacity hover:opacity-80"
             />
-            <span class="text-xs font-semibold text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
+            <span class="text-xs text-center font-semibold text-slate-500">{m.soc2_compliance_short({}, { locale: Astro.locals.locale })}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
             <img loading="lazy" src="/soc1.svg" alt={m.compliance_soc1({}, { locale: Astro.locals.locale })} class="w-autoo h-10 opacity-90 transition-opacity hover:opacity-80" />
-            <span class="text-xs font-semibold text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
+            <span class="text-xs text-center font-semibold text-slate-500">{m.compliance_soc1({}, { locale: Astro.locals.locale })}</span>
           </div>
           <div class="flex flex-col items-center gap-1">
             <img loading="lazy" src="/gdpr.svg" alt={m.compliance_gdpr({}, { locale: Astro.locals.locale })} class="w-autoo h-10 opacity-90 transition-opacity hover:opacity-80" />
-            <span class="text-xs font-semibold text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
+            <span class="text-xs text-center font-semibold text-slate-500">{m.compliance_gdpr({}, { locale: Astro.locals.locale })}</span>
           </div>
         </div>
       </div>
