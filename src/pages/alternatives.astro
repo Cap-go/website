@@ -4,8 +4,8 @@ import { getRelativeLocaleUrl } from 'astro:i18n'
 import * as m from '@/paraglide/messages'
 
 const locale = Astro.locals.locale
-const title = "Capgo Alternatives – An Honest Comparison"
-const description = "Looking for Capacitor live update solutions? Here is an honest, transparent comparison of Capgo vs the alternatives. No BS, just real talk about what makes each platform different."
+const title = m.alternatives_title({}, { locale })
+const description = m.alternatives_meta_description({}, { locale })
 
 const content = {
   title,
@@ -17,20 +17,20 @@ const alternatives = [
   {
     name: 'Ionic Appflow',
     url: getRelativeLocaleUrl(locale, 'ionic-appflow'),
-    status: 'Shutting down Dec 31, 2027',
-    pricing: 'From $499/month',
+    status: m.alternatives_appflow_status({}, { locale }),
+    pricing: m.alternatives_appflow_pricing({}, { locale }),
   },
   {
     name: 'Microsoft CodePush',
     url: '#codepush',
-    status: 'Deprecated',
-    pricing: 'Free (but unmaintained)',
+    status: m.alternatives_status_deprecated({}, { locale }),
+    pricing: m.alternatives_codepush_pricing({}, { locale }),
   },
   {
     name: 'Capawesome Cloud',
     url: getRelativeLocaleUrl(locale, 'capwesome'),
-    status: 'Active',
-    pricing: 'From €9/month',
+    status: m.alternatives_status_active({}, { locale }),
+    pricing: m.alternatives_capawesome_pricing({}, { locale }),
   },
 ]
 ---
@@ -40,27 +40,27 @@ const alternatives = [
     <!-- Hero Section -->
     <div class="mb-16 text-center">
       <h1 class="mb-4 text-4xl font-bold tracking-tight text-gray-100 sm:text-5xl">
-        Capgo Alternatives
+        {m.alternatives_hero_title({}, { locale })}
       </h1>
       <p class="mx-auto max-w-2xl text-xl text-gray-300">
-        Let's be honest: comparison pages are kinda silly. But here's an actually transparent look at your options.
+        {m.alternatives_hero_subtitle({}, { locale })}
       </p>
     </div>
 
     <!-- Why This Page Exists -->
     <div class="mb-16 rounded-lg border border-gray-700 bg-gray-800/50 p-8">
       <h2 class="mb-4 text-2xl font-semibold text-gray-100">
-        Why this page exists
+        {m.alternatives_why_exists_title({}, { locale })}
       </h2>
       <div class="space-y-4 text-gray-300">
         <p>
-          Look, we could make a fancy table showing how Capgo crushes every competitor on every metric. That's what everyone does. But it's BS, and you know it.
+          {m.alternatives_why_exists_p1({}, { locale })}
         </p>
         <p>
-          The truth? All the live update platforms do pretty much the same thing now: push JavaScript updates to your Capacitor apps. API? We all have one. Channels? Yep. Rollbacks? Sure.
+          {m.alternatives_why_exists_p2({}, { locale })}
         </p>
         <p>
-          So what actually matters? Let's talk about that instead.
+          {m.alternatives_why_exists_p3({}, { locale })}
         </p>
       </div>
     </div>
@@ -68,90 +68,87 @@ const alternatives = [
     <!-- What Makes Us Different -->
     <div class="mb-16">
       <h2 class="mb-8 text-3xl font-bold text-gray-100">
-        What actually makes Capgo different
+        {m.alternatives_what_different_title({}, { locale })}
       </h2>
 
       <div class="space-y-6">
         <!-- Open & Transparent -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <h3 class="mb-3 text-xl font-semibold text-emerald-400">
-            🌍 We do it openly and transparently
+            {m.alternatives_open_transparent_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
-            100% open source. MIT/MPL-2.0 licensed. You can see every line of code, self-host if you want, or fork it entirely.
+            {m.alternatives_open_transparent_desc({}, { locale })}
           </p>
           <ul class="ml-6 list-disc space-y-1 text-gray-400">
-            <li>Plugin code: <a href="https://github.com/Cap-go/capacitor-updater" class="text-emerald-400 hover:underline">github.com/Cap-go/capacitor-updater</a></li>
-            <li>Backend code: <a href="https://github.com/Cap-go/capgo" class="text-emerald-400 hover:underline">github.com/Cap-go/capgo</a></li>
-            <li>Self-audit anytime - critical for compliance and security</li>
-            <li>Public security audits available</li>
-            <li>Public roadmap, public issues, public everything</li>
+            <li set:html={m.alternatives_open_transparent_li1({}, { locale })}></li>
+            <li set:html={m.alternatives_open_transparent_li2({}, { locale })}></li>
+            <li>{m.alternatives_open_transparent_li3({}, { locale })}</li>
+            <li>{m.alternatives_open_transparent_li4({}, { locale })}</li>
+            <li>{m.alternatives_open_transparent_li5({}, { locale })}</li>
           </ul>
         </div>
 
         <!-- Been Doing It -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <h3 class="mb-3 text-xl font-semibold text-blue-400">
-            ⏰ We've been doing this for 4 years
+            {m.alternatives_been_doing_title({}, { locale })}
           </h3>
           <p class="text-gray-300">
-            Started in 2020. We've seen every edge case, survived every App Store policy change, and processed billions of updates.
-            We're not going anywhere.
+            {m.alternatives_been_doing_desc({}, { locale })}
           </p>
         </div>
 
         <!-- Biggest Plugin Provider -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <h3 class="mb-3 text-xl font-semibold text-purple-400">
-            🚀 Biggest plugin provider after official Capacitor
+            {m.alternatives_biggest_plugin_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
-            We maintain 70+ free, open-source Capacitor plugins. More than anyone else in the ecosystem except the Capacitor team itself.
+            {m.alternatives_biggest_plugin_desc({}, { locale })}
           </p>
           <p class="text-gray-400">
-            So yeah, we know a thing or two about Capacitor.
+            {m.alternatives_biggest_plugin_note({}, { locale })}
           </p>
         </div>
 
         <!-- Family Business -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <h3 class="mb-3 text-xl font-semibold text-yellow-400">
-            👨‍👩‍👧‍👦 Family business
+            {m.alternatives_family_business_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
-            Founded and run by Martin Donadieu and family. No VC pressure to "maximize growth metrics" or "pivot the business model."
-            We're building this for the long term because it's our livelihood.
+            {m.alternatives_family_business_desc({}, { locale })}
           </p>
           <ul class="ml-6 list-disc space-y-1 text-gray-400">
-            <li>Legal entities in both US and Europe</li>
-            <li>Dedicated infrastructure for China</li>
+            <li>{m.alternatives_family_business_li1({}, { locale })}</li>
+            <li>{m.alternatives_family_business_li2({}, { locale })}</li>
           </ul>
         </div>
 
         <!-- Bootstrapped & Profitable -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <h3 class="mb-3 text-xl font-semibold text-green-400">
-            💰 Bootstrapped and profitable
+            {m.alternatives_bootstrapped_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
-            No investors. No debt. Just sustainable revenue from happy customers.
+            {m.alternatives_bootstrapped_desc({}, { locale })}
           </p>
           <p class="text-gray-400">
-            That means we can charge fair prices ($14/month starter, not $499), and we won't suddenly shut down or 10x our pricing.
+            {m.alternatives_bootstrapped_note({}, { locale })}
           </p>
         </div>
 
         <!-- Human Support -->
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <h3 class="mb-3 text-xl font-semibold text-pink-400">
-            🙋 Only human support
+            {m.alternatives_human_support_title({}, { locale })}
           </h3>
           <p class="mb-2 text-gray-300">
-            No chatbots. No "AI assistants." No ticket systems that lose your message.
+            {m.alternatives_human_support_desc({}, { locale })}
           </p>
           <p class="text-gray-400">
-            You get Martin or someone from the family. Usually within hours. Sometimes within minutes.
-            Yes, even on weekends (we can't help ourselves 😅).
+            {m.alternatives_human_support_note({}, { locale })}
           </p>
         </div>
       </div>
@@ -160,7 +157,7 @@ const alternatives = [
     <!-- The Alternatives -->
     <div class="mb-16">
       <h2 class="mb-8 text-3xl font-bold text-gray-100">
-        The other options (and when to pick them)
+        {m.alternatives_other_options_title({}, { locale })}
       </h2>
 
       <div class="space-y-8">
@@ -169,32 +166,32 @@ const alternatives = [
           <div class="mb-4 flex items-start justify-between">
             <div>
               <h3 class="mb-2 text-2xl font-bold text-gray-100">Ionic Appflow</h3>
-              <p class="text-sm text-orange-400">⚠️ Shutting down December 31, 2027</p>
+              <p class="text-sm text-orange-400">{m.alternatives_appflow_status({}, { locale })}</p>
             </div>
             <a
               href={getRelativeLocaleUrl(locale, 'ionic-appflow')}
               class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
             >
-              Migration guide →
+              {m.alternatives_appflow_migration_guide({}, { locale })}
             </a>
           </div>
 
           <div class="mb-4 space-y-3 text-gray-300">
-            <p><strong class="text-gray-100">The reality:</strong> Ionic announced they're winding down Appflow. Existing customers can use it until end of 2027, but no new customers or features.</p>
+            <p><strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_appflow_reality({}, { locale })}</p>
 
-            <p><strong class="text-gray-100">When it was good:</strong> Appflow was great if you wanted everything in one place - CI/CD, live updates, native builds. The pioneers of this space.</p>
+            <p><strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_appflow_when_good({}, { locale })}</p>
 
-            <p><strong class="text-gray-100">Why we're different:</strong></p>
+            <p><strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong></p>
             <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li>We're not shutting down (kinda important!)</li>
-              <li>$14/month vs their $499/month</li>
-              <li>Open source vs closed source</li>
-              <li>Focus on updates only, so we're better at it</li>
+              <li>{m.alternatives_appflow_why_different_li1({}, { locale })}</li>
+              <li>{m.alternatives_appflow_why_different_li2({}, { locale })}</li>
+              <li>{m.alternatives_appflow_why_different_li3({}, { locale })}</li>
+              <li>{m.alternatives_appflow_why_different_li4({}, { locale })}</li>
             </ul>
           </div>
 
           <div class="mt-4 text-sm text-gray-400">
-            💚 Credit where it's due: Ionic built amazing tools and educated a whole generation of hybrid app developers. Respect.
+            {m.alternatives_appflow_credit({}, { locale })}
           </div>
         </div>
 
@@ -202,25 +199,25 @@ const alternatives = [
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-8">
           <div class="mb-4">
             <h3 class="mb-2 text-2xl font-bold text-gray-100">Microsoft CodePush</h3>
-            <p class="text-sm text-red-400">🪦 Deprecated - Microsoft has moved on</p>
+            <p class="text-sm text-red-400">{m.alternatives_codepush_status({}, { locale })}</p>
           </div>
 
           <div class="mb-4 space-y-3 text-gray-300">
-            <p><strong class="text-gray-100">The reality:</strong> CodePush was free and worked well... until Microsoft stopped maintaining it. It's in legacy mode for React Native, and there's no official Capacitor support.</p>
+            <p><strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_codepush_reality({}, { locale })}</p>
 
-            <p><strong class="text-gray-100">When it was good:</strong> Free is hard to beat! And Microsoft's infrastructure meant it was reliable.</p>
+            <p><strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_codepush_when_good({}, { locale })}</p>
 
-            <p><strong class="text-gray-100">Why we're different:</strong></p>
+            <p><strong class="text-gray-100">{m.alternatives_appflow_why_different_label({}, { locale })}</strong></p>
             <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li>Actually maintained and improved every month</li>
-              <li>Built specifically for Capacitor</li>
-              <li>Real humans fixing bugs and adding features</li>
-              <li>Still affordable: $14/month (not VC-subsidized free, but sustainable)</li>
+              <li>{m.alternatives_codepush_why_different_li1({}, { locale })}</li>
+              <li>{m.alternatives_codepush_why_different_li2({}, { locale })}</li>
+              <li>{m.alternatives_codepush_why_different_li3({}, { locale })}</li>
+              <li>{m.alternatives_codepush_why_different_li4({}, { locale })}</li>
             </ul>
           </div>
 
           <div class="mt-4 text-sm text-gray-400">
-            💚 Credit where it's due: CodePush proved the live update model works at massive scale.
+            {m.alternatives_codepush_credit({}, { locale })}
           </div>
         </div>
 
@@ -229,34 +226,34 @@ const alternatives = [
           <div class="mb-4 flex items-start justify-between">
             <div>
               <h3 class="mb-2 text-2xl font-bold text-gray-100">Capawesome Cloud</h3>
-              <p class="text-sm text-green-400">✅ Active and well-maintained</p>
+              <p class="text-sm text-green-400">{m.alternatives_capawesome_status({}, { locale })}</p>
             </div>
             <a
               href={getRelativeLocaleUrl(locale, 'capwesome')}
               class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
             >
-              Full comparison →
+              {m.alternatives_capawesome_full_comparison({}, { locale })}
             </a>
           </div>
 
           <div class="mb-4 space-y-3 text-gray-300">
-            <p><strong class="text-gray-100">The reality:</strong> Capawesome is a solid, newer option with good German engineering. They were inspired by Capgo when building their live updates solution. They also make great Capacitor plugins.</p>
+            <p><strong class="text-gray-100">{m.alternatives_appflow_reality_label({}, { locale })}</strong> {m.alternatives_capawesome_reality({}, { locale })}</p>
 
-            <p><strong class="text-gray-100">When it's good:</strong> If you want a simpler interface and don't need some of the advanced features, it's a fine choice.</p>
+            <p><strong class="text-gray-100">{m.alternatives_appflow_when_good_label({}, { locale })}</strong> {m.alternatives_capawesome_when_good({}, { locale })}</p>
 
-            <p><strong class="text-gray-100">Honest differences:</strong></p>
+            <p><strong class="text-gray-100">{m.alternatives_capawesome_differences_label({}, { locale })}</strong></p>
             <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li><strong>Experience:</strong> We've been doing this since 2020 (they launched live updates in 2024)</li>
-              <li><strong>Scale:</strong> We serve 1B+ updates/month, 750k+ devices (they don't publish stats yet)</li>
-              <li><strong>Pricing:</strong> Both affordable - we start at $14/month, they start at €9/month</li>
-              <li><strong>Focus:</strong> Live updates is our core business; for them it's a side offering to their paid plugins</li>
-              <li><strong>Security & Transparency:</strong> We're 100% open source with public audits and self-audit capability; they're 0% open on backend with no public audits</li>
-              <li><strong>Support:</strong> Both provide human support (we're both small teams!)</li>
+              <li set:html={m.alternatives_capawesome_diff_experience({}, { locale })}></li>
+              <li set:html={m.alternatives_capawesome_diff_scale({}, { locale })}></li>
+              <li set:html={m.alternatives_capawesome_diff_pricing({}, { locale })}></li>
+              <li set:html={m.alternatives_capawesome_diff_focus({}, { locale })}></li>
+              <li set:html={m.alternatives_capawesome_diff_security({}, { locale })}></li>
+              <li set:html={m.alternatives_capawesome_diff_support({}, { locale })}></li>
             </ul>
           </div>
 
           <div class="mt-4 text-sm text-gray-400">
-            💚 Credit where it's due: Robin (Capawesome founder) does great work. Being inspired by our approach when building their solution is honestly flattering. The ecosystem is better with multiple options.
+            {m.alternatives_capawesome_credit({}, { locale })}
           </div>
         </div>
       </div>
@@ -265,14 +262,14 @@ const alternatives = [
     <!-- What We're NOT Good At -->
     <div class="mb-16 rounded-lg border-2 border-yellow-600 bg-yellow-950/20 p-8">
       <h2 class="mb-4 text-2xl font-bold text-yellow-400">
-        🤔 What we're NOT good at (honesty time)
+        {m.alternatives_not_good_at_title({}, { locale })}
       </h2>
       <div class="space-y-3 text-gray-300">
         <p>
-          <strong class="text-yellow-300">All-in-one CI/CD:</strong> We don't bundle CI/CD like Appflow did. You use your own (GitHub Actions, GitLab CI, etc). But we CAN handle native builds from your CI if you want - just call our build API from your pipeline.
+          <strong class="text-yellow-300">{m.alternatives_not_good_at_ci_cd_label({}, { locale })}</strong> {m.alternatives_not_good_at_ci_cd({}, { locale })}
         </p>
         <p>
-          <strong class="text-yellow-300">Documentation complexity:</strong> Basic automatic updates are well documented. But Capgo has many options (manual, half-manual, channel_default, etc.) that aren't always easy to understand for every use case yet. We're actively improving this.
+          <strong class="text-yellow-300">{m.alternatives_not_good_at_docs_label({}, { locale })}</strong> {m.alternatives_not_good_at_docs({}, { locale })}
         </p>
       </div>
     </div>
@@ -280,36 +277,36 @@ const alternatives = [
     <!-- Why People Actually Choose Us -->
     <div class="mb-16">
       <h2 class="mb-8 text-3xl font-bold text-gray-100">
-        Why people actually choose us
+        {m.alternatives_why_choose_title({}, { locale })}
       </h2>
 
       <div class="grid gap-6 sm:grid-cols-2">
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <p class="mb-2 italic text-gray-300">
-            "The migration from Appflow took 2 hours. We went from $499/month to $14/month. Same features, better DX."
+            "{m.alternatives_testimonial_1({}, { locale })}"
           </p>
-          <p class="text-sm text-gray-400">— React developer from France</p>
+          <p class="text-sm text-gray-400">{m.alternatives_testimonial_1_author({}, { locale })}</p>
         </div>
 
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <p class="mb-2 italic text-gray-300">
-            "I had a question at 10pm on Saturday. Martin himself answered in 15 minutes. Insane."
+            "{m.alternatives_testimonial_2({}, { locale })}"
           </p>
-          <p class="text-sm text-gray-400">— Solo developer from Brazil</p>
+          <p class="text-sm text-gray-400">{m.alternatives_testimonial_2_author({}, { locale })}</p>
         </div>
 
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <p class="mb-2 italic text-gray-300">
-            "Being open source means we could audit the security ourselves. That's non-negotiable for our healthcare app."
+            "{m.alternatives_testimonial_3({}, { locale })}"
           </p>
-          <p class="text-sm text-gray-400">— CTO of health tech startup</p>
+          <p class="text-sm text-gray-400">{m.alternatives_testimonial_3_author({}, { locale })}</p>
         </div>
 
         <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
           <p class="mb-2 italic text-gray-300">
-            "The fact it's a family business makes me trust it MORE, not less. These folks aren't going to rugpull us."
+            "{m.alternatives_testimonial_4({}, { locale })}"
           </p>
-          <p class="text-sm text-gray-400">— Mobile team lead from Germany</p>
+          <p class="text-sm text-gray-400">{m.alternatives_testimonial_4_author({}, { locale })}</p>
         </div>
       </div>
     </div>
@@ -317,21 +314,18 @@ const alternatives = [
     <!-- CTA -->
     <div class="text-center">
       <h2 class="mb-4 text-2xl font-bold text-gray-100">
-        Try it yourself (free for 14 days)
+        {m.alternatives_cta_title({}, { locale })}
       </h2>
       <p class="mb-8 text-gray-300">
-        No credit card. No commitment. Just see if it works for you.
+        {m.alternatives_cta_subtitle({}, { locale })}
       </p>
       <a
         href={getRelativeLocaleUrl(locale, 'register')}
         class="inline-block rounded-lg bg-emerald-600 px-8 py-3 text-lg font-medium text-white hover:bg-emerald-700"
       >
-        Start free trial
+        {m.alternatives_cta_button({}, { locale })}
       </a>
-      <p class="mt-4 text-sm text-gray-400">
-        Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Ask us on Discord</a> or
-        <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email support@capgo.app</a>
-      </p>
+      <p class="mt-4 text-sm text-gray-400" set:html={m.alternatives_cta_questions({}, { locale })}></p>
     </div>
   </div>
 </Layout>

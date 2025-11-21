@@ -159,8 +159,11 @@ await InAppBrowser.openWebView({
 
 `ToolBarType` values: `activity` (close + share), `compact` (close only), `navigation` (back/forward + close), `blank` (no toolbar). `BackgroundColor` values: `white` or `black`.
 
-### close(options?: { isAnimated?: boolean })
+### close(options?)
 Closes the WebView/custom tab.
+
+**Options:**
+- `isAnimated?: boolean` - Whether to animate the close action
 
 ### reload()
 Reloads the current WebView page.

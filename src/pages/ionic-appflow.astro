@@ -22,24 +22,22 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
       <!-- Hero -->
       <div class="text-center mb-12">
         <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
-          Migrating from Appflow?
+          {m.appflow_hero_title({}, { locale })}
         </h1>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-          Let's talk honestly about what's happening and what your options are.
+          {m.appflow_hero_subtitle({}, { locale })}
         </p>
       </div>
 
       <!-- The Elephant in the Room -->
       <div class="mb-16 rounded-lg border-2 border-orange-600 bg-orange-950/20 p-8">
         <h2 class="mb-4 text-2xl font-bold text-orange-400">
-          ⚠️ The elephant in the room
+          {m.appflow_elephant_title({}, { locale })}
         </h2>
         <div class="space-y-4 text-gray-300">
+          <p set:html={m.appflow_elephant_p1({}, { locale })}></p>
           <p>
-            Ionic announced they're shutting down Appflow. Your apps will keep working until <strong class="text-white">December 31, 2027</strong>, but no new features, no new customers, no updates.
-          </p>
-          <p>
-            If you're reading this, you're probably looking for where to go next. That's what this page is about.
+            {m.appflow_elephant_p2({}, { locale })}
           </p>
         </div>
       </div>
@@ -47,17 +45,15 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
       <!-- Credit Where Due -->
       <div class="mb-16">
         <h2 class="mb-6 text-3xl font-bold text-gray-100">
-          First, let's give credit where it's due
+          {m.appflow_credit_title({}, { locale })}
         </h2>
         <div class="space-y-4 text-gray-300">
+          <p set:html={m.appflow_credit_p1({}, { locale })}></p>
           <p>
-            <strong class="text-emerald-400">Ionic built something amazing.</strong> Appflow was the first platform to make live updates actually work at scale. They pioneered channels, rollbacks, native builds integration - the whole playbook.
-          </p>
-          <p>
-            They educated an entire generation of developers on hybrid app development. Without Ionic's work, products like Capgo wouldn't exist.
+            {m.appflow_credit_p2({}, { locale })}
           </p>
           <p class="text-gray-400">
-            So yeah, massive respect to the Ionic team. This is a bummer for everyone.
+            {m.appflow_credit_p3({}, { locale })}
           </p>
         </div>
       </div>
@@ -65,95 +61,84 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
       <!-- What Makes Capgo Different -->
       <div class="mb-16">
         <h2 class="mb-8 text-3xl font-bold text-gray-100">
-          What makes Capgo different
+          {m.appflow_what_different_title({}, { locale })}
         </h2>
 
         <div class="space-y-6">
           <!-- Not Shutting Down -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-emerald-400">
-              1. We're not shutting down (obviously important)
+              {m.appflow_not_shutting_title({}, { locale })}
             </h3>
-            <p class="mb-2 text-gray-300">
-              Capgo is a <strong class="text-white">bootstrapped family business</strong>. No VC pressure to "pivot" or "maximize growth metrics." This is our livelihood, built to last decades.
-            </p>
+            <p class="mb-2 text-gray-300" set:html={m.appflow_not_shutting_desc({}, { locale })}></p>
             <ul class="ml-6 list-disc space-y-1 text-gray-400 text-sm mb-2">
-              <li>Legal entities in both US and Europe</li>
-              <li>Dedicated infrastructure for China</li>
+              <li>{m.appflow_not_shutting_li1({}, { locale })}</li>
+              <li>{m.appflow_not_shutting_li2({}, { locale })}</li>
             </ul>
             <p class="text-gray-400 text-sm">
-              We've been profitable since year one. Sustainable pricing, sustainable business.
+              {m.appflow_not_shutting_note({}, { locale })}
             </p>
           </div>
 
           <!-- Pricing -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-blue-400">
-              2. Pricing that makes sense
+              {m.appflow_pricing_title({}, { locale })}
             </h3>
-            <p class="text-gray-300 mb-2">
-              Appflow: <strong class="text-rose-400">$499/month</strong> minimum<br>
-              Capgo: <strong class="text-emerald-400">$14/month</strong> to start, scales with usage
-            </p>
+            <p class="text-gray-300 mb-2" set:html={m.appflow_pricing_comparison({}, { locale })}></p>
             <p class="text-gray-400 text-sm">
-              We can charge less because we're not funding massive overhead. Just a small team building great tools.
+              {m.appflow_pricing_note({}, { locale })}
             </p>
           </div>
 
           <!-- Open Source -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-purple-400">
-              3. 100% open source (MIT/MPL-2.0)
+              {m.appflow_opensource_title({}, { locale })}
             </h3>
-            <p class="text-gray-300 mb-2">
-              Not just the plugin - <strong class="text-white">the entire backend too</strong>:
-            </p>
+            <p class="text-gray-300 mb-2" set:html={m.appflow_opensource_desc({}, { locale })}></p>
             <ul class="ml-6 list-disc space-y-1 text-gray-400">
-              <li>Plugin: <a href="https://github.com/Cap-go/capacitor-updater" class="text-emerald-400 hover:underline">github.com/Cap-go/capacitor-updater</a></li>
-              <li>Backend: <a href="https://github.com/Cap-go/capgo" class="text-emerald-400 hover:underline">github.com/Cap-go/capgo</a></li>
-              <li>Self-host if you want. Fork it if you need. Audit the security yourself.</li>
+              <li set:html={m.appflow_opensource_li1({}, { locale })}></li>
+              <li set:html={m.appflow_opensource_li2({}, { locale })}></li>
+              <li>{m.appflow_opensource_li3({}, { locale })}</li>
             </ul>
             <p class="mt-3 text-gray-400 text-sm">
-              This matters if you got burned by a proprietary service shutting down (looking at you, Appflow).
+              {m.appflow_opensource_note({}, { locale })}
             </p>
           </div>
 
           <!-- Experience -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-yellow-400">
-              4. We've been doing this since 2020
+              {m.appflow_experience_title({}, { locale })}
             </h3>
             <p class="text-gray-300">
-              4 years of live updates at scale. Billions of updates served. Every App Store policy change, every edge case, every weird device - we've seen it.
+              {m.appflow_experience_desc({}, { locale })}
             </p>
-            <p class="mt-2 text-gray-400 text-sm">
-              Also: we're the <strong>biggest Capacitor plugin provider</strong> after the official Capacitor team (30+ plugins). We know the ecosystem inside and out.
-            </p>
+            <p class="mt-2 text-gray-400 text-sm" set:html={m.appflow_experience_note({}, { locale })}></p>
           </div>
 
           <!-- Support -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-pink-400">
-              5. Actually human support
+              {m.appflow_support_title({}, { locale })}
             </h3>
             <p class="text-gray-300">
-              No chatbots. No ticket systems. No "AI assistants."
+              {m.appflow_support_desc({}, { locale })}
             </p>
             <p class="mt-2 text-gray-400">
-              You get Martin (me!) or someone from the team. Usually within hours. Often within minutes. Yes, even on weekends (we can't help ourselves 😅).
+              {m.appflow_support_note({}, { locale })}
             </p>
           </div>
 
           <!-- What We Do -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-green-400">
-              6. Focus on one thing (and do it really well)
+              {m.appflow_focus_title({}, { locale })}
             </h3>
-            <p class="text-gray-300">
-              Appflow did live updates + CI/CD + native builds. We just do <strong class="text-white">live updates</strong>.
-            </p>
+            <p class="text-gray-300" set:html={m.appflow_focus_desc({}, { locale })}></p>
             <p class="mt-2 text-gray-400 text-sm">
-              IMO it's better to keep concerns separate anyway. Use GitHub Actions (or whatever) for CI/CD. Use Capgo for updates. Each tool does what it's best at.
+              {m.appflow_focus_note({}, { locale })}
             </p>
           </div>
         </div>
@@ -162,14 +147,14 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
       <!-- What We're NOT -->
       <div class="mb-16 rounded-lg border-2 border-yellow-600 bg-yellow-950/20 p-8">
         <h2 class="mb-4 text-2xl font-bold text-yellow-400">
-          🤔 What we're NOT (honesty time)
+          {m.appflow_not_good_at_title({}, { locale })}
         </h2>
         <div class="space-y-3 text-gray-300">
           <p>
-            <strong class="text-yellow-300">All-in-one CI/CD:</strong> We don't bundle CI/CD like Appflow did. You use your own (GitHub Actions, GitLab CI, etc). But we CAN handle native builds from your CI if you want - just call our build API from your pipeline.
+            <strong class="text-yellow-300">{m.appflow_not_good_at_ci_cd_label({}, { locale })}</strong> {m.appflow_not_good_at_ci_cd({}, { locale })}
           </p>
           <p>
-            <strong class="text-yellow-300">Documentation complexity:</strong> Basic automatic updates are well documented and clear. But Capgo offers many update modes (manual, half-manual, channel_default, etc.) - not all use cases are equally easy to understand yet. We're working on it.
+            <strong class="text-yellow-300">{m.appflow_not_good_at_docs_label({}, { locale })}</strong> {m.appflow_not_good_at_docs({}, { locale })}
           </p>
         </div>
       </div>
@@ -177,72 +162,66 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
       <!-- Migration -->
       <div class="mb-16">
         <h2 class="mb-6 text-3xl font-bold text-gray-100">
-          How hard is migration?
+          {m.appflow_migration_how_title({}, { locale })}
         </h2>
         <div class="space-y-4 text-gray-300">
-          <p>
-            <strong class="text-white">TL;DR: Not hard.</strong> Most teams are up and running in under a day.
-          </p>
+          <p set:html={m.appflow_migration_intro({}, { locale })}></p>
           <div class="mt-6 p-6 bg-gray-800 rounded-xl">
-            <h3 class="text-lg font-semibold text-white mb-3">The basics:</h3>
+            <h3 class="text-lg font-semibold text-white mb-3">{m.appflow_migration_basics_title({}, { locale })}</h3>
             <ol class="space-y-2 text-gray-300">
               <li class="flex gap-3">
                 <span class="text-emerald-400 font-semibold">1.</span>
-                <span>Uninstall <code class="text-blue-300">@capacitor/live-updates</code>, install <code class="text-blue-300">@capgo/capacitor-updater</code></span>
+                <span set:html={m.appflow_migration_step1({}, { locale })}></span>
               </li>
               <li class="flex gap-3">
                 <span class="text-emerald-400 font-semibold">2.</span>
-                <span>Call <code class="text-blue-300">notifyAppReady()</code> instead of all the Appflow sync/download/reload code</span>
+                <span set:html={m.appflow_migration_step2({}, { locale })}></span>
               </li>
               <li class="flex gap-3">
                 <span class="text-emerald-400 font-semibold">3.</span>
-                <span>Upload bundles with our CLI instead of theirs</span>
+                <span>{m.appflow_migration_step3({}, { locale })}</span>
               </li>
             </ol>
-            <p class="mt-4 text-sm text-emerald-300">
-              Full migration guide: <a href={migrationGuideUrl} class="underline hover:text-emerald-200">docs/upgrade/from-appflow-to-capgo</a>
-            </p>
+            <p class="mt-4 text-sm text-emerald-300" set:html={m.appflow_migration_guide_text({ url: migrationGuideUrl }, { locale })}></p>
           </div>
-          <p class="text-gray-400 text-sm">
-            Stuck? <a href="https://cal.com/team/capgo/appflow-migration" class="text-blue-300 underline hover:text-blue-200">Book a free migration call</a> and we'll walk you through it.
-          </p>
+          <p class="text-gray-400 text-sm" set:html={m.appflow_migration_stuck({}, { locale })}></p>
         </div>
       </div>
 
       <!-- Testimonials -->
       <div class="mb-16">
         <h2 class="mb-8 text-3xl font-bold text-gray-100">
-          What people actually say
+          {m.appflow_testimonials_title({}, { locale })}
         </h2>
         <div class="grid gap-6 sm:grid-cols-2">
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <p class="mb-2 italic text-gray-300">
-              "Migration from Appflow took 2 hours. We went from $499/month to $14/month. Same features, better docs."
+              "{m.appflow_testimonial_1({}, { locale })}"
             </p>
-            <p class="text-sm text-gray-400">— React developer, France</p>
+            <p class="text-sm text-gray-400">{m.appflow_testimonial_1_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <p class="mb-2 italic text-gray-300">
-              "I had a question at 10pm Saturday. Martin answered in 15 minutes. With actual code examples."
+              "{m.appflow_testimonial_2({}, { locale })}"
             </p>
-            <p class="text-sm text-gray-400">— Solo dev, Brazil</p>
+            <p class="text-sm text-gray-400">{m.appflow_testimonial_2_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <p class="mb-2 italic text-gray-300">
-              "Open source backend was non-negotiable for our healthcare app. Capgo was the only option that met our security requirements."
+              "{m.appflow_testimonial_3({}, { locale })}"
             </p>
-            <p class="text-sm text-gray-400">— CTO, health tech startup</p>
+            <p class="text-sm text-gray-400">{m.appflow_testimonial_3_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <p class="mb-2 italic text-gray-300">
-              "Family business = no rugpull risk. After Appflow shutting down, that stability matters."
+              "{m.appflow_testimonial_4({}, { locale })}"
             </p>
-            <p class="text-sm text-gray-400">— Mobile team lead, Germany</p>
+            <p class="text-sm text-gray-400">{m.appflow_testimonial_4_author({}, { locale })}</p>
           </div>
         </div>
 
         <div class="mt-8 p-6 bg-gray-800 rounded-xl">
-          <h3 class="text-lg font-semibold text-white mb-4">More testimonials:</h3>
+          <h3 class="text-lg font-semibold text-white mb-4">{m.appflow_testimonials_more({}, { locale })}</h3>
           <iframe
             id="wall-of-love-Ngmn41b"
             src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
@@ -265,24 +244,24 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
       <!-- FAQ -->
       <div class="mb-16">
         <h2 class="mb-6 text-3xl font-bold text-gray-100">
-          Common questions
+          {m.appflow_faq_title({}, { locale })}
         </h2>
         <dl class="space-y-6 text-gray-200">
           <div>
-            <dt class="text-lg font-semibold text-white">Do I need to change my CI/CD setup?</dt>
-            <dd class="mt-2 text-gray-300">Nope. Whatever you're using now (GitHub Actions, GitLab CI, Jenkins, etc.) keeps working. Just change the upload step to use our CLI instead of Appflow's.</dd>
+            <dt class="text-lg font-semibold text-white">{m.appflow_faq_q1({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300">{m.appflow_faq_a1({}, { locale })}</dd>
           </div>
           <div>
-            <dt class="text-lg font-semibold text-white">What about native builds?</dt>
-            <dd class="mt-2 text-gray-300">We don't do those. Most teams prefer their own CI for native builds anyway - more control, better caching, faster builds. GitHub Actions has solid guides for iOS/Android builds.</dd>
+            <dt class="text-lg font-semibold text-white">{m.appflow_faq_q2({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300">{m.appflow_faq_a2({}, { locale })}</dd>
           </div>
           <div>
-            <dt class="text-lg font-semibold text-white">Will this save money?</dt>
-            <dd class="mt-2 text-gray-300">Probably a lot. Appflow starts at $499/month. We start at $14/month and scale with usage (roughly $0.001 per MAU). Most migrations save 80-95% on update costs.</dd>
+            <dt class="text-lg font-semibold text-white">{m.appflow_faq_q3({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300">{m.appflow_faq_a3({}, { locale })}</dd>
           </div>
           <div>
-            <dt class="text-lg font-semibold text-white">How's the reliability?</dt>
-            <dd class="mt-2 text-gray-300">We serve 1B+ updates/month across 750k+ devices. 99.9%+ uptime. Check real-time stats at <a href="https://status.capgo.app/history" class="text-blue-300 underline hover:text-blue-200">status.capgo.app</a></dd>
+            <dt class="text-lg font-semibold text-white">{m.appflow_faq_q4({}, { locale })}</dt>
+            <dd class="mt-2 text-gray-300" set:html={m.appflow_faq_a4({}, { locale })}></dd>
           </div>
         </dl>
       </div>
@@ -294,29 +273,27 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
           <div class="absolute -right-16 -bottom-28 w-56 h-56 rounded-full pointer-events-none bg-[#FF44EC]/20 blur-3xl"></div>
           <div class="relative text-center">
             <h2 class="text-3xl font-bold text-white sm:text-4xl mb-4">
-              Try it free for 14 days
+              {m.appflow_cta_title({}, { locale })}
             </h2>
             <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
-              No credit card. No commitment. Migrate a test app, see if it works for you.
+              {m.appflow_cta_subtitle({}, { locale })}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}
                 class="inline-flex justify-center items-center py-4 px-8 text-lg font-bold text-white bg-emerald-600 rounded-xl hover:bg-emerald-700 transition-all"
               >
-                Start free trial →
+                {m.appflow_cta_start_trial({}, { locale })}
               </a>
               <a
                 href="https://cal.com/team/capgo/appflow-migration"
                 target="_blank"
                 class="inline-flex justify-center items-center py-4 px-8 text-lg font-semibold text-white rounded-xl ring-1 bg-white/10 ring-white/20 hover:bg-white/15"
               >
-                Book migration call
+                {m.appflow_cta_book_migration({}, { locale })}
               </a>
             </div>
-            <p class="mt-6 text-sm text-gray-400">
-              Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Join our Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email us</a>
-            </p>
+            <p class="mt-6 text-sm text-gray-400" set:html={m.appflow_cta_questions({}, { locale })}></p>
           </div>
         </div>
       </div>
@@ -324,7 +301,7 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-appflo
       <!-- Footer Note -->
       <div class="mt-12 text-center text-sm text-gray-400">
         <p>
-          Built with respect for what Ionic created. Here to help you keep shipping.
+          {m.appflow_footer_note({}, { locale })}
         </p>
       </div>
     </div>

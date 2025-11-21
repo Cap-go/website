@@ -22,24 +22,24 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
       <!-- Hero -->
       <div class="text-center mb-12">
         <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
-          Capgo vs Capawesome Cloud
+          {m.capwesome_hero_title({}, { locale })}
         </h1>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-          Two solid options for Capacitor live updates. Let's talk honestly about the differences.
+          {m.capwesome_hero_subtitle({}, { locale })}
         </p>
       </div>
 
       <!-- Respect Section -->
       <div class="mb-16 rounded-lg border border-emerald-700 bg-emerald-950/20 p-8">
         <h2 class="mb-4 text-2xl font-bold text-emerald-400">
-          💚 Credit where it's due
+          {m.capwesome_respect_title({}, { locale })}
         </h2>
         <div class="space-y-4 text-gray-300">
           <p>
-            Robin (Capawesome founder) does great work. Good German engineering, solid plugins, and everything is actively maintained. They were inspired by Capgo when building their live updates solution - which is honestly flattering.
+            {m.capwesome_respect_p1({}, { locale })}
           </p>
           <p class="text-gray-400">
-            This isn't a "we're better at everything" page. The Capacitor ecosystem is genuinely better with multiple healthy options. Let's talk about the actual differences.
+            {m.capwesome_respect_p2({}, { locale })}
           </p>
         </div>
       </div>
@@ -47,24 +47,20 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
       <!-- The Real Differences -->
       <div class="mb-16">
         <h2 class="mb-8 text-3xl font-bold text-gray-100">
-          The honest differences
+          {m.capwesome_differences_title({}, { locale })}
         </h2>
 
         <div class="space-y-6">
           <!-- Experience & Scale -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-blue-400">
-              Experience & Scale
+              {m.capwesome_diff_experience_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p>
-                <strong class="text-white">Capgo:</strong> Started in 2020. Serving <strong class="text-emerald-400">1B+ updates/month</strong> across <strong class="text-emerald-400">750k+ devices</strong>. Battle-tested at scale for 4+ years.
-              </p>
-              <p>
-                <strong class="text-white">Capawesome:</strong> Live updates launched in 2024. Very new to this space. Still proving scale (no public stats).
-              </p>
+              <p set:html={m.capwesome_diff_experience_capgo({}, { locale })}></p>
+              <p set:html={m.capwesome_diff_experience_capawesome({}, { locale })}></p>
               <p class="text-sm text-gray-400 pt-2">
-                We've been doing this much longer. 4+ years of production experience vs less than a year.
+                {m.capwesome_diff_experience_note({}, { locale })}
               </p>
             </div>
           </div>
@@ -72,17 +68,13 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
           <!-- Pricing -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-purple-400">
-              Pricing & Business Model
+              {m.capwesome_diff_pricing_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p>
-                <strong class="text-white">Capgo:</strong> <strong class="text-emerald-400">$14/month</strong> to start, scales with usage (~$0.001/MAU). Live updates is our core business.
-              </p>
-              <p>
-                <strong class="text-white">Capawesome:</strong> <strong class="text-emerald-400">€9/month</strong> minimum. Their main business is paid plugins - live updates is more of a side offering.
-              </p>
+              <p set:html={m.capwesome_diff_pricing_capgo({}, { locale })}></p>
+              <p set:html={m.capwesome_diff_pricing_capawesome({}, { locale })}></p>
               <p class="text-sm text-gray-400 pt-2">
-                Both are fairly priced. The difference? For us, live updates is THE product. For them, it's an add-on to their plugin business.
+                {m.capwesome_diff_pricing_note({}, { locale })}
               </p>
             </div>
           </div>
@@ -90,28 +82,24 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
           <!-- Open Source & Security -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-green-400">
-              Open Source & Security
+              {m.capwesome_diff_opensource_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p>
-                <strong class="text-white">Capgo:</strong> <strong class="text-emerald-400">100% open source</strong> - plugin AND backend (MIT/MPL-2.0)
-              </p>
+              <p set:html={m.capwesome_diff_opensource_capgo({}, { locale })}></p>
               <ul class="ml-6 list-disc space-y-1 text-gray-400">
-                <li>Plugin: <a href="https://github.com/Cap-go/capacitor-updater" class="text-emerald-400 hover:underline">github.com/Cap-go/capacitor-updater</a></li>
-                <li>Backend: <a href="https://github.com/Cap-go/capgo" class="text-emerald-400 hover:underline">github.com/Cap-go/capgo</a></li>
-                <li>Self-host, fork, audit security yourself anytime</li>
-                <li>Public security audits available</li>
+                <li set:html={m.capwesome_diff_opensource_capgo_li1({}, { locale })}></li>
+                <li set:html={m.capwesome_diff_opensource_capgo_li2({}, { locale })}></li>
+                <li>{m.capwesome_diff_opensource_capgo_li3({}, { locale })}</li>
+                <li>{m.capwesome_diff_opensource_capgo_li4({}, { locale })}</li>
               </ul>
-              <p class="mt-2">
-                <strong class="text-white">Capawesome:</strong> Plugin is open source, backend is <strong class="text-orange-400">0% open source</strong> (fully closed)
-              </p>
+              <p class="mt-2" set:html={m.capwesome_diff_opensource_capawesome({}, { locale })}></p>
               <ul class="ml-6 list-disc space-y-1 text-gray-400">
-                <li>No way to self-audit backend code</li>
-                <li>No public security audits</li>
-                <li>No self-hosting option</li>
+                <li>{m.capwesome_diff_opensource_capawesome_li1({}, { locale })}</li>
+                <li>{m.capwesome_diff_opensource_capawesome_li2({}, { locale })}</li>
+                <li>{m.capwesome_diff_opensource_capawesome_li3({}, { locale })}</li>
               </ul>
               <p class="text-sm text-gray-400 pt-2">
-                For compliance, healthcare, finance, or any regulated industry where you need to audit your entire stack - we're the only option.
+                {m.capwesome_diff_opensource_note({}, { locale })}
               </p>
             </div>
           </div>
@@ -119,23 +107,19 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
           <!-- Business Model -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-yellow-400">
-              Business Model & Stability
+              {m.capwesome_diff_business_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p>
-                <strong class="text-white">Capgo:</strong> <strong class="text-emerald-400">Bootstrapped family business</strong>. No investors, no debt. Profitable since year one.
-              </p>
+              <p set:html={m.capwesome_diff_business_capgo({}, { locale })}></p>
               <ul class="ml-6 list-disc space-y-1 text-gray-400 text-sm">
-                <li>Legal entities in both US and Europe</li>
-                <li>Dedicated infrastructure for China</li>
-                <li>This is our livelihood - no VC pressure to "pivot" or suddenly 10x pricing</li>
-                <li>Built for the long term</li>
+                <li>{m.capwesome_diff_business_capgo_li1({}, { locale })}</li>
+                <li>{m.capwesome_diff_business_capgo_li2({}, { locale })}</li>
+                <li>{m.capwesome_diff_business_capgo_li3({}, { locale })}</li>
+                <li>{m.capwesome_diff_business_capgo_li4({}, { locale })}</li>
               </ul>
-              <p class="mt-3">
-                <strong class="text-white">Capawesome:</strong> Solo founder, sustainable business model (also good!)
-              </p>
+              <p class="mt-3" set:html={m.capwesome_diff_business_capawesome({}, { locale })}></p>
               <p class="text-gray-400 text-sm pt-2">
-                Both are sustainable businesses, just different structures. After seeing Appflow shut down, this stuff matters.
+                {m.capwesome_diff_business_note({}, { locale })}
               </p>
             </div>
           </div>
@@ -143,17 +127,13 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
           <!-- Plugin Ecosystem -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-pink-400">
-              Plugin Ecosystem
+              {m.capwesome_diff_plugins_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p>
-                <strong class="text-white">Capgo:</strong> We maintain <strong class="text-emerald-400">70+ Capacitor plugins</strong> - biggest provider after official Capacitor team. All free and open source.
-              </p>
-              <p>
-                <strong class="text-white">Capawesome:</strong> They also make great plugins, quality-focused approach. Some are paid - that's their main business.
-              </p>
+              <p set:html={m.capwesome_diff_plugins_capgo({}, { locale })}></p>
+              <p set:html={m.capwesome_diff_plugins_capawesome({}, { locale })}></p>
               <p class="text-gray-400 text-sm pt-2">
-                Different philosophies: we go broad with all-free plugins, they focus on paid premium plugins.
+                {m.capwesome_diff_plugins_note({}, { locale })}
               </p>
             </div>
           </div>
@@ -161,20 +141,14 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
           <!-- Support -->
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="mb-3 text-xl font-semibold text-rose-400">
-              Support
+              {m.capwesome_diff_support_title({}, { locale })}
             </h3>
             <div class="space-y-2 text-gray-300">
-              <p>
-                <strong class="text-white">Both:</strong> Human support from small teams (no chatbots!)
-              </p>
-              <p>
-                <strong class="text-white">Capgo:</strong> Usually within hours, often minutes. Even on weekends (we can't help ourselves 😅)
-              </p>
-              <p>
-                <strong class="text-white">Capawesome:</strong> Responsive and helpful too
-              </p>
+              <p set:html={m.capwesome_diff_support_both({}, { locale })}></p>
+              <p set:html={m.capwesome_diff_support_capgo({}, { locale })}></p>
+              <p set:html={m.capwesome_diff_support_capawesome({}, { locale })}></p>
               <p class="text-gray-400 text-sm pt-2">
-                Honestly, you'll be fine with either. Both small teams that care.
+                {m.capwesome_diff_support_note({}, { locale })}
               </p>
             </div>
           </div>
@@ -184,20 +158,20 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
       <!-- When Capawesome Might Be Better -->
       <div class="mb-16 rounded-lg border-2 border-blue-600 bg-blue-950/20 p-8">
         <h2 class="mb-4 text-2xl font-bold text-blue-400">
-          🤔 When Capawesome might be better for you
+          {m.capwesome_when_better_title({}, { locale })}
         </h2>
         <div class="space-y-3 text-gray-300">
           <p>
-            <strong class="text-blue-300">Fully manual control:</strong> Capawesome is 100% manual - nothing automatic. If you want to control every single aspect and not delegate anything, that's their strength. Capgo focuses on automation (though we support manual too).
+            <strong class="text-blue-300">{m.capwesome_when_better_manual_label({}, { locale })}</strong> {m.capwesome_when_better_manual({}, { locale })}
           </p>
           <p>
-            <strong class="text-blue-300">GitHub/GitLab integration:</strong> They integrate directly with your git provider. If you prefer everything connected and don't mind the vendor lock-in, that's convenient.
+            <strong class="text-blue-300">{m.capwesome_when_better_git_label({}, { locale })}</strong> {m.capwesome_when_better_git({}, { locale })}
           </p>
           <p>
-            <strong class="text-blue-300">European compliance needs:</strong> If you need invoices with GDPR compliance and all the European regulatory requirements, Capawesome is based in Germany. Capgo tries to escape European complexity to simplify business for everyone globally.
+            <strong class="text-blue-300">{m.capwesome_when_better_european_label({}, { locale })}</strong> {m.capwesome_when_better_european({}, { locale })}
           </p>
           <p class="text-sm text-gray-400 pt-2">
-            Different philosophies, both valid. Choose what fits your workflow.
+            {m.capwesome_when_better_note({}, { locale })}
           </p>
         </div>
       </div>
@@ -205,14 +179,14 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
       <!-- What We're NOT -->
       <div class="mb-16 rounded-lg border-2 border-yellow-600 bg-yellow-950/20 p-8">
         <h2 class="mb-4 text-2xl font-bold text-yellow-400">
-          What we're NOT good at
+          {m.capwesome_not_good_at_title({}, { locale })}
         </h2>
         <div class="space-y-3 text-gray-300">
           <p>
-            <strong class="text-yellow-300">Documentation complexity:</strong> We really try to make docs clear for everyone. Basic automatic updates? Well documented and clear. But Capgo has many options (manual, half-manual, channel_default, etc.) - not all use cases are easy to understand yet. We're working on it.
+            <strong class="text-yellow-300">{m.capwesome_not_good_at_docs_label({}, { locale })}</strong> {m.capwesome_not_good_at_docs({}, { locale })}
           </p>
           <p>
-            <strong class="text-yellow-300">Git provider integration:</strong> We don't integrate with GitHub/GitLab like Capawesome does. Philosophy difference: we don't want to lock you into a specific git provider. You handle updates in your own CI/CD, we just provide the delivery infrastructure.
+            <strong class="text-yellow-300">{m.capwesome_not_good_at_git_label({}, { locale })}</strong> {m.capwesome_not_good_at_git({}, { locale })}
           </p>
         </div>
       </div>
@@ -220,69 +194,67 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
       <!-- Quick Stats Comparison -->
       <div class="mb-16">
         <h2 class="mb-6 text-3xl font-bold text-gray-100">
-          Quick facts (no BS)
+          {m.capwesome_quick_facts_title({}, { locale })}
         </h2>
         <div class="grid gap-6 sm:grid-cols-2">
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="text-lg font-semibold text-white mb-4">Capgo</h3>
             <ul class="space-y-2 text-gray-300 text-sm">
-              <li>✅ Started 2020</li>
-              <li>✅ 1B+ updates/month</li>
-              <li>✅ 750k+ devices</li>
-              <li>✅ $14/month start</li>
-              <li>✅ 100% open source (plugin + backend)</li>
-              <li>✅ Family business, bootstrapped</li>
-              <li>✅ 70+ free plugins</li>
-              <li>✅ Self-hosting option</li>
+              <li>{m.capwesome_quick_facts_capgo_li1({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capgo_li2({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capgo_li3({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capgo_li4({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capgo_li5({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capgo_li6({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capgo_li7({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capgo_li8({}, { locale })}</li>
             </ul>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <h3 class="text-lg font-semibold text-white mb-4">Capawesome</h3>
             <ul class="space-y-2 text-gray-300 text-sm">
-              <li>⚠️ Live updates started 2024 (very new)</li>
-              <li>⚪ Stats not public</li>
-              <li>⚪ Stats not public</li>
-              <li>✅ €9/month minimum</li>
-              <li>❌ Plugin open, backend 0% open (closed source)</li>
-              <li>✅ Solo founder, sustainable</li>
-              <li>✅ Quality plugins (main business)</li>
-              <li>❌ No self-hosting</li>
+              <li>{m.capwesome_quick_facts_capawesome_li1({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capawesome_li2({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capawesome_li3({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capawesome_li4({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capawesome_li5({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capawesome_li6({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capawesome_li7({}, { locale })}</li>
+              <li>{m.capwesome_quick_facts_capawesome_li8({}, { locale })}</li>
             </ul>
           </div>
         </div>
         <p class="mt-6 text-center text-sm text-gray-400">
-          ✅ = Strong point | ⚠️ = Depends on needs | ❌ = Not available | ⚪ = Unknown/Not disclosed
+          {m.capwesome_quick_facts_legend({}, { locale })}
         </p>
       </div>
 
       <!-- Migration -->
       <div class="mb-16">
         <h2 class="mb-6 text-3xl font-bold text-gray-100">
-          Thinking of switching?
+          {m.capwesome_migration_title({}, { locale })}
         </h2>
         <div class="space-y-4 text-gray-300">
           <p>
-            If you're on Capawesome and considering Capgo, migration is straightforward. The Capacitor update plugin architecture is similar.
+            {m.capwesome_migration_intro({}, { locale })}
           </p>
           <div class="mt-6 p-6 bg-gray-800 rounded-xl">
-            <h3 class="text-lg font-semibold text-white mb-3">The basics:</h3>
+            <h3 class="text-lg font-semibold text-white mb-3">{m.capwesome_migration_basics_title({}, { locale })}</h3>
             <ol class="space-y-2 text-gray-300">
               <li class="flex gap-3">
                 <span class="text-emerald-400 font-semibold">1.</span>
-                <span>Swap the plugin package</span>
+                <span>{m.capwesome_migration_step1({}, { locale })}</span>
               </li>
               <li class="flex gap-3">
                 <span class="text-emerald-400 font-semibold">2.</span>
-                <span>Update config (minor differences)</span>
+                <span>{m.capwesome_migration_step2({}, { locale })}</span>
               </li>
               <li class="flex gap-3">
                 <span class="text-emerald-400 font-semibold">3.</span>
-                <span>Update your upload process</span>
+                <span>{m.capwesome_migration_step3({}, { locale })}</span>
               </li>
             </ol>
-            <p class="mt-4 text-sm text-emerald-300">
-              Full migration guide: <a href={migrationGuideUrl} class="underline hover:text-emerald-200">docs/upgrade/from-capawesome-to-capgo</a>
-            </p>
+            <p class="mt-4 text-sm text-emerald-300" set:html={m.capwesome_migration_guide_text({ url: migrationGuideUrl }, { locale })}></p>
           </div>
         </div>
       </div>
@@ -290,37 +262,37 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
       <!-- Testimonials -->
       <div class="mb-16">
         <h2 class="mb-8 text-3xl font-bold text-gray-100">
-          What people say about Capgo
+          {m.capwesome_testimonials_title({}, { locale })}
         </h2>
         <div class="grid gap-6 sm:grid-cols-2">
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <p class="mb-2 italic text-gray-300">
-              "Switched from Capawesome to Capgo for the pricing. Stayed for the support. Martin answered my weekend question in 20 minutes."
+              "{m.capwesome_testimonial_1({}, { locale })}"
             </p>
-            <p class="text-sm text-gray-400">— Indie developer</p>
+            <p class="text-sm text-gray-400">{m.capwesome_testimonial_1_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <p class="mb-2 italic text-gray-300">
-              "Open source backend was the deciding factor. We needed to audit the security ourselves for compliance."
+              "{m.capwesome_testimonial_2({}, { locale })}"
             </p>
-            <p class="text-sm text-gray-400">— Enterprise team</p>
+            <p class="text-sm text-gray-400">{m.capwesome_testimonial_2_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <p class="mb-2 italic text-gray-300">
-              "€99/month minimum was too much for our early-stage startup. Capgo's $14 plan let us get started."
+              "{m.capwesome_testimonial_3({}, { locale })}"
             </p>
-            <p class="text-sm text-gray-400">— Startup founder</p>
+            <p class="text-sm text-gray-400">{m.capwesome_testimonial_3_author({}, { locale })}</p>
           </div>
           <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6">
             <p class="mb-2 italic text-gray-300">
-              "The scale numbers (1B+ updates) gave us confidence. They've actually proven it at production load."
+              "{m.capwesome_testimonial_4({}, { locale })}"
             </p>
-            <p class="text-sm text-gray-400">— Mobile team lead</p>
+            <p class="text-sm text-gray-400">{m.capwesome_testimonial_4_author({}, { locale })}</p>
           </div>
         </div>
 
         <div class="mt-8 p-6 bg-gray-800 rounded-xl">
-          <h3 class="text-lg font-semibold text-white mb-4">More testimonials:</h3>
+          <h3 class="text-lg font-semibold text-white mb-4">{m.capwesome_testimonials_more({}, { locale })}</h3>
           <iframe
             id="wall-of-love-Ngmn41b"
             src="https://senja.io/p/capgo/Ngmn41b?hideNavigation=true&embed=true"
@@ -347,29 +319,27 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
           <div class="absolute -right-16 -bottom-28 w-56 h-56 rounded-full pointer-events-none bg-[#FF44EC]/20 blur-3xl"></div>
           <div class="relative text-center">
             <h2 class="text-3xl font-bold text-white sm:text-4xl mb-4">
-              Try Capgo free for 14 days
+              {m.capwesome_cta_title({}, { locale })}
             </h2>
             <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
-              No credit card needed. Compare for yourself.
+              {m.capwesome_cta_subtitle({}, { locale })}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <a
                 href={getRelativeLocaleUrl(locale, 'register')}
                 class="inline-flex justify-center items-center py-4 px-8 text-lg font-bold text-white bg-emerald-600 rounded-xl hover:bg-emerald-700 transition-all"
               >
-                Start free trial →
+                {m.capwesome_cta_start_trial({}, { locale })}
               </a>
               <a
                 href="https://cal.com/team/capgo/demo"
                 target="_blank"
                 class="inline-flex justify-center items-center py-4 px-8 text-lg font-semibold text-white rounded-xl ring-1 bg-white/10 ring-white/20 hover:bg-white/15"
               >
-                Book a demo
+                {m.capwesome_cta_book_demo_btn({}, { locale })}
               </a>
             </div>
-            <p class="mt-6 text-sm text-gray-400">
-              Questions? <a href="https://discord.gg/VCXxSVjefW" class="text-emerald-400 hover:underline">Join our Discord</a> or <a href="mailto:support@capgo.app" class="text-emerald-400 hover:underline">email us</a>
-            </p>
+            <p class="mt-6 text-sm text-gray-400" set:html={m.capwesome_cta_questions({}, { locale })}></p>
           </div>
         </div>
       </div>
@@ -377,10 +347,10 @@ const migrationGuideUrl = getRelativeLocaleUrl(locale, 'docs/upgrade/from-capawe
       <!-- Footer Note -->
       <div class="mt-12 text-center text-sm text-gray-400">
         <p>
-          Both Capgo and Capawesome are good options. Choose what fits your needs.
+          {m.capwesome_footer_note({}, { locale })}
         </p>
         <p class="mt-2">
-          (But we think bigger scale, longer track record, and full open source matters 😊)
+          {m.capwesome_footer_note_wink({}, { locale })}
         </p>
       </div>
     </div>
