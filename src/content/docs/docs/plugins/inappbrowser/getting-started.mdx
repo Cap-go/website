@@ -171,19 +171,19 @@ Reloads the current WebView page.
 ### goBack()
 Goes back in WebView history and returns `{ canGoBack: boolean }`.
 
-### setUrl({ url: string })
+### `setUrl({ url: string })`
 Replaces the current WebView URL.
 
-### executeScript({ code: string })
+### `executeScript({ code: string })`
 Injects JavaScript into the WebView.
 
-### postMessage({ detail: Record<string, any> })
+### `postMessage({ detail: Record<string, any> })`
 Sends data from the native app to the WebView (receive in JS via `window.addEventListener('messageFromNative', ...)`).
 
-### getCookies({ url, includeHttpOnly? })
+### `getCookies({ url, includeHttpOnly? })`
 Returns cookies for the URL.
 
-### clearCookies({ url }) / clearAllCookies() / clearCache()
+### `clearCookies({ url })` / clearAllCookies() / clearCache()
 Cookie and cache management helpers.
 
 ### updateDimensions(options: DimensionOptions)
