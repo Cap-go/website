@@ -84,20 +84,19 @@ const locale = Astro.locals.locale
           <!-- Simple SVG Line Chart -->
           <svg class="w-full h-full" viewBox="0 0 100 50" preserveAspectRatio="none">
             <!-- Grid lines -->
-            <line x1="0" y1="10" x2="100" y2="10" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
-            <line x1="0" y1="20" x2="100" y2="20" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
-            <line x1="0" y1="30" x2="100" y2="30" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
-            <line x1="0" y1="40" x2="100" y2="40" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
+            <line x1="0" y1="12.5" x2="100" y2="12.5" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
+            <line x1="0" y1="25" x2="100" y2="25" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
+            <line x1="0" y1="37.5" x2="100" y2="37.5" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
 
             <!-- Line 1 (Blue) -->
-            <path d="M0,40 Q20,35 40,25 T80,15 T100,5" fill="none" stroke="#3b82f6" stroke-width="2" />
+            <path d="M0,40 C30,35 70,30 100,5" fill="none" stroke="#3b82f6" stroke-width="2" />
             <!-- Area 1 -->
-            <path d="M0,40 Q20,35 40,25 T80,15 T100,5 V50 H0 Z" fill="url(#blueGradient)" opacity="0.2" />
+            <path d="M0,40 C30,35 70,30 100,5 V50 H0 Z" fill="url(#blueGradient)" opacity="0.2" />
 
             <!-- Line 2 (Green) -->
-            <path d="M0,45 Q30,40 50,30 T90,20 T100,10" fill="none" stroke="#10b981" stroke-width="2" />
+            <path d="M0,45 C30,42 70,38 100,20" fill="none" stroke="#10b981" stroke-width="2" />
              <!-- Area 2 -->
-             <path d="M0,45 Q30,40 50,30 T90,20 T100,10 V50 H0 Z" fill="url(#greenGradient)" opacity="0.2" />
+             <path d="M0,45 C30,42 70,38 100,20 V50 H0 Z" fill="url(#greenGradient)" opacity="0.2" />
 
             <defs>
               <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
