@@ -15,7 +15,7 @@ export default defineConfig({
   site: `https://${config.base_domain.prod}`,
   output: 'static',
   build: {
-    concurrency: 2,
+    concurrency: 6,
   },
   env: {
     validateSecrets: true,
@@ -71,6 +71,7 @@ export default defineConfig({
     }),
     starlight({
       title: 'Capgo',
+      pagefind: false,
       plugins: [
         starlightImageZoom({ showCaptions: false }),
         starlightLlmsTxt({
@@ -823,7 +824,7 @@ export default defineConfig({
           {
             src: 'src/content/docs/**/*.{md,mdx}',
             dest: '',
-            rename: (fileName, fileExtension, fullPath) => {
+            rename: (fileName, _, fullPath) => {
               // Extract relative path after 'src/content/docs/'
               const relativePath = fullPath.replace(/\\/g, '/').split('src/content/docs/')[1]
               const pathWithoutExt = relativePath.replace(/\.(md|mdx)$/, '')
