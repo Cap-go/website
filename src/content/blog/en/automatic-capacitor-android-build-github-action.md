@@ -66,11 +66,118 @@ For private projects, costs are approximately $0.008/minute. A typical build tak
 
 ## Manual Setup Steps
 
-1. Set up Fastlane
-2. Configure GitHub secrets
-3. Create GitHub Actions workflow
+1. Create Android Keystore
+2. Set up Google Play Service Account
+3. Set up Fastlane
+4. Configure GitHub secrets
+5. Create GitHub Actions workflow
 
-## 1. Set Up Fastlane
+## 1. Create Android Keystore
+
+Before you can sign and publish your Android app, you need to create a keystore file. This is a one-time setup.
+
+### Generate Keystore with keytool
+
+Run this command in your terminal:
+
+```bash
+keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+```
+
+You'll be prompted for:
+- **Keystore password**: Choose a strong password (you'll need this as `KEYSTORE_STORE_PASSWORD`)
+- **Key password**: Choose a strong password (you'll need this as `KEYSTORE_KEY_PASSWORD`)
+- **Your name, organization, etc.**: Fill in your details
+
+### Important Notes
+
+- **Save these values securely**:
+  - Keystore file location (e.g., `my-release-key.keystore`)
+  - Key alias (e.g., `my-key-alias`) - you'll need this as `KEYSTORE_KEY_ALIAS`
+  - Keystore password - you'll need this as `KEYSTORE_STORE_PASSWORD`
+  - Key password - you'll need this as `KEYSTORE_KEY_PASSWORD`
+
+- **Backup the keystore file**: If you lose it, you cannot update your published app
+- **Keep it secret**: Never commit the keystore file to git
+- **Store it safely**: Keep multiple backups in secure locations
+
+### Alternative: Use Existing Keystore
+
+If you already published your app, you must use the same keystore you used initially. You can find it:
+- In your local machine where you first built the app
+- In your Play Console → Setup → App signing (if using Google Play App Signing)
+
+## 2. Set up Google Play Service Account
+
+To allow GitHub Actions to upload builds to Google Play, you need a service account.
+
+### Step 2.1: Create Google Cloud Project
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select existing one
+3. Note the project ID
+
+### Step 2.2: Enable Google Play Developer API
+
+1. In Google Cloud Console, go to **APIs & Services** → **Library**
+2. Search for "Google Play Android Developer API"
+3. Click **Enable**
+
+### Step 2.3: Create Service Account
+
+1. Go to **IAM & Admin** → **Service Accounts**
+2. Click **Create Service Account**
+3. Enter details:
+   - Name: `github-actions-uploader`
+   - Description: "Service account for GitHub Actions to upload builds"
+4. Click **Create and Continue**
+5. Skip role assignment for now (click **Continue**, then **Done**)
+
+### Step 2.4: Create Service Account Key
+
+1. Click on the newly created service account
+2. Go to **Keys** tab
+3. Click **Add Key** → **Create new key**
+4. Choose **JSON** format
+5. Click **Create**
+6. A JSON file will download - **save this securely**, you'll need it later
+
+### Step 2.5: Grant Access in Play Console
+
+1. Go to [Google Play Console](https://play.google.com/console/)
+2. Go to **Setup** → **API access**
+3. Under **Service accounts**, click **Grant access** for your service account
+4. On the **App permissions** tab, add your app
+5. On the **Account permissions** tab, grant these permissions:
+   - View app information and download bulk reports (read only)
+   - Create, edit, and delete draft apps
+   - Release apps to testing tracks
+   - Release apps to production, exclude, and other tracks
+6. Click **Invite user**
+7. Click **Send invite**
+
+### Step 2.6: Verify the JSON Key
+
+The downloaded JSON file should look like this:
+
+```json
+{
+  "type": "service_account",
+  "project_id": "your-project-id",
+  "private_key_id": "...",
+  "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
+  "client_email": "github-actions-uploader@your-project-id.iam.gserviceaccount.com",
+  "client_id": "...",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "..."
+}
+```
+
+You'll convert this to base64 in the GitHub secrets setup step.
+
+## 3. Set Up Fastlane
 
 Create a `fastlane` folder at your project root and add a `Fastfile` with this content:
 
@@ -135,30 +242,82 @@ platform :android do
 end
 ```
 
-## 2. Configure GitHub Secrets
+## 4. Configure GitHub Secrets
 
-You need to store sensitive information securely in GitHub. Go to your repository → Settings → Secrets and variables → Actions → New repository secret.
+Now that you have your keystore and service account JSON, you need to store them securely in GitHub.
 
-### Required Secrets:
+### Step 4.1: Access GitHub Secrets
 
-1. **Google Play Service Account Key**
-   - Create a service account in Google Cloud Console
-   - Enable Google Play Developer API
-   - Grant the service account access to your app in Play Console
-   - Download the JSON key file
-   - Convert to base64: `base64 service_account_key.json | pbcopy`
-   - Add as `PLAY_CONFIG_JSON`
+1. Go to your repository on GitHub
+2. Click **Settings** → **Secrets and variables** → **Actions**
+3. Click **New repository secret**
 
-2. **Android Signing Key**
-   - Convert your keystore to base64: `base64 your_keystore.jks | pbcopy`
-   - Add as `ANDROID_KEYSTORE_FILE`
-   - Add keystore details:
-     - `KEYSTORE_KEY_ALIAS`
-     - `KEYSTORE_KEY_PASSWORD`
-     - `KEYSTORE_STORE_PASSWORD`
-     - `DEVELOPER_PACKAGE_NAME` (e.g., com.example.app)
+### Step 4.2: Add Required Secrets
 
-## 3. Create GitHub Actions Workflow
+Add each of these secrets one by one:
+
+#### PLAY_CONFIG_JSON
+
+1. Take the service account JSON file you downloaded in Step 2.4
+2. Convert it to base64:
+
+**On macOS/Linux:**
+```bash
+base64 service_account_key.json | pbcopy
+```
+
+**On Windows (PowerShell):**
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("service_account_key.json")) | Set-Clipboard
+```
+
+3. Create a new secret named `PLAY_CONFIG_JSON` and paste the base64 string
+
+#### ANDROID_KEYSTORE_FILE
+
+1. Convert your keystore to base64:
+
+**On macOS/Linux:**
+```bash
+base64 my-release-key.keystore | pbcopy
+```
+
+**On Windows (PowerShell):**
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("my-release-key.keystore")) | Set-Clipboard
+```
+
+2. Create a new secret named `ANDROID_KEYSTORE_FILE` and paste the base64 string
+
+#### KEYSTORE_KEY_ALIAS
+
+Create a new secret with the key alias you used when generating the keystore (e.g., `my-key-alias`)
+
+#### KEYSTORE_KEY_PASSWORD
+
+Create a new secret with the key password you set when generating the keystore
+
+#### KEYSTORE_STORE_PASSWORD
+
+Create a new secret with the keystore password you set when generating the keystore
+
+#### DEVELOPER_PACKAGE_NAME
+
+Create a new secret with your app's package name (e.g., `com.example.app`)
+
+You can find your package name in `android/app/build.gradle` under `applicationId`
+
+### Step 4.3: Verify All Secrets
+
+Make sure you have these 6 secrets configured:
+- ✅ PLAY_CONFIG_JSON
+- ✅ ANDROID_KEYSTORE_FILE
+- ✅ KEYSTORE_KEY_ALIAS
+- ✅ KEYSTORE_KEY_PASSWORD
+- ✅ KEYSTORE_STORE_PASSWORD
+- ✅ DEVELOPER_PACKAGE_NAME
+
+## 5. Create GitHub Actions Workflow
 
 Create `.github/workflows/build-upload-android.yml`:
 
