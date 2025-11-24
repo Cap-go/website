@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-03-16T02:24:50.565Z
-updated_at: 2025-11-13T20:57:27.000Z
+updated_at: 2025-11-24T14:48:36.000Z
 head_image: https://assets.seobotai.com/capgo.app/67d61b378b902ec211cf87e9-1742091902582.jpg
 head_image_alt: Mobile Development
 keywords: Capgo, GitHub Actions, CI/CD, Capacitor apps, deployment, automation, updates, security

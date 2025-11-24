@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-10-27T00:00:00.000Z
-updated_at: 2025-11-23T16:22:44.000Z
+updated_at: 2025-11-24T14:48:36.000Z
 head_image: /fastlane_android.webp
 head_image_alt: Fastlane Google play GitHub action illustration
 keywords: Fastlane, CI/CD, Android, automatic build, automatic release, mobile app updates, Capacitor
