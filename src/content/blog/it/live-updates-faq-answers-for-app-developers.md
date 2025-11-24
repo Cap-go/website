@@ -154,7 +154,7 @@ Verwenden Sie die folgende YAML-Konfiguration, um Ihre Umgebung einzurichten und
 steps:
   - uses: actions/setup-node@v2
     with:
-      node-version: '16.x'
+      node-version: '24'
   - name: Install and Test
     run: |
       npm install

@@ -155,7 +155,7 @@ Gunakan konfigurasi YAML berikut untuk menyiapkan lingkungan dan menjalankan pen
 steps:
   - uses: actions/setup-node@v2
     with:
-      node-version: '16.x'
+      node-version: '24'
   - name: Install and Test
     run: |
       npm install

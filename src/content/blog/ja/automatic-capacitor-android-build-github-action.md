@@ -178,7 +178,7 @@ jobs:
       - uses: actions/checkout@v5
       
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: npm
@@ -203,7 +203,7 @@ jobs:
         run: npx cap sync
         
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-node@v5
         with:
             distribution: 'zulu'
             java-version: '17'

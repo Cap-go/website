@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v3  
       - uses: actions/setup-node@v3  
         with:  
-          node-version: '18.x'  
+          node-version: '24'  
       - name: Install Dependencies  
         run: npm install  
       - name: Deploy to Capgo  
@@ -129,7 +129,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '24'
       - name: Install Dependencies
         run: npm install
       - name: Build App

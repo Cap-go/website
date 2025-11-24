@@ -141,9 +141,9 @@ Configura il tuo ambiente CI/CD con le variabili e i passaggi necessari:
 ```yaml
 steps:
   - name: Setup Node.js
-    uses: actions/setup-node@v4
+    uses: actions/setup-node@v6
     with:
-      node-version: '18'
+      node-version: '24'
 ```
 
 Per prestazioni ottimali, includi il caching nel tuo processo di build:

@@ -151,7 +151,7 @@ Capgo의 API는 이러한 도구와 통합되어 [안전한 암호화](https://c
 steps:
   - uses: actions/setup-node@v2
     with:
-      node-version: '16.x'
+      node-version: '24'
   - name: Install and Test
     run: |
       npm install

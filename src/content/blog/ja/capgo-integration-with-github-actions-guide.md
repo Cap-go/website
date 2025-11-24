@@ -46,9 +46,9 @@ jobs:
     runs-on: ubuntu-latest  
     steps:  
       - uses: actions/checkout@v3  
-      - uses: actions/setup-node@v4  
+      - uses: actions/setup-node@v6  
         with:  
-          node-version: '18.x'  
+          node-version: '24'  
       - name: Install Dependencies  
         run: npm install  
       - name: Deploy to Capgo  
@@ -129,9 +129,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: '18.x'
+          node-version: '24'
       - name: Install Dependencies
         run: npm install
       - name: Build App

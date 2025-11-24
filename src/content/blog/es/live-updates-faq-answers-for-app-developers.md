@@ -156,7 +156,7 @@ Usa la siguiente configuración YAML para configurar tu entorno y ejecutar prueb
 steps:
   - uses: actions/setup-node@v2
     with:
-      node-version: '16.x'
+      node-version: '24'
   - name: Install and Test
     run: |
       npm install
