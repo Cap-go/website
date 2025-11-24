@@ -60,10 +60,10 @@ Mit dem installierten und konfigurierten Capgo SDK können Sie Ihr erstes Live-U
         runs-on: ubuntu-latest
         steps:
           - name: Checkout
-            uses: actions/checkout@v5
+            uses: actions/checkout@v6
           - uses: actions/setup-node@v6
             with:
-              node-version: 18
+              node-version: '24'
           - name: Install dependencies
             run: npm install
           - name: Build

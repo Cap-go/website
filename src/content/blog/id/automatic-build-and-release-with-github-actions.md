@@ -54,7 +54,7 @@ jobs:
     name: "Bump version and create changelog with standard version"
     steps:
       - name: Check out
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'
@@ -110,7 +110,7 @@ jobs:
     name: "Build code and release"
     steps:
       - name: Check out
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install dependencies
         id: install_code
         run: npm i

@@ -469,7 +469,7 @@ jobs:
   build_ios:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Use Node.js 20
         uses: actions/setup-node@v6
         with:

@@ -60,10 +60,10 @@ Capgo SDK를 설치하고 구성했다면 첫 실시간 업데이트 번들을 �
         runs-on: ubuntu-latest
         steps:
           - name: Checkout
-            uses: actions/checkout@v5
+            uses: actions/checkout@v6
           - uses: actions/setup-node@v6
             with:
-              node-version: 18
+              node-version: '24'
           - name: Install dependencies
             run: npm install
           - name: Build

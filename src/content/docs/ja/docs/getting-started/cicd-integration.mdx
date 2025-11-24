@@ -36,7 +36,7 @@ CI/CDツールの選択によって具体的な手順は異なりますが、Cap
 
 3. **`upload`コマンドの設定**：CI/CD設定に適切な引数で`upload`コマンドを実行するステップを追加します：<Code lang="yaml" title="uploadyml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />\n `Production`をデプロイしたいチャンネルに、`${{ secretsCAPGO_API_KEY }}`をAPIキーを保持する環境変数に置き換えてください。
 
-4. **Webビルド後に`upload`ステップを追加**：`upload`ステップがWebビルドの完了後に実行されることを確認してください。これにより、常に最新のコードがデプロイされます。\n GitHub Actionsの設定例：\n<Code lang="yaml" title="uploadyml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v3\n - uses: actions/setup-node@v6\n  with:\n   node-version: 18\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />
+4. **Webビルド後に`upload`ステップを追加**：`upload`ステップがWebビルドの完了後に実行されることを確認してください。これにより、常に最新のコードがデプロイされます。\n GitHub Actionsの設定例：\n<Code lang="yaml" title="uploadyml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />
 
 </Steps>
 

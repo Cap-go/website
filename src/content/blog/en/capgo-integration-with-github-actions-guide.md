@@ -43,7 +43,7 @@ jobs:
   deploy:  
     runs-on: ubuntu-latest  
     steps:  
-      - uses: actions/checkout@v3  
+      - uses: actions/checkout@v6  
       - uses: actions/setup-node@v3  
         with:  
           node-version: '24'  
@@ -126,7 +126,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v3
         with:
           node-version: '24'

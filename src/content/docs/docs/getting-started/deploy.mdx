@@ -59,10 +59,10 @@ With the Capgo SDK installed and configured, you're ready to upload your first l
         runs-on: ubuntu-latest
         steps:
           - name: Checkout
-            uses: actions/checkout@v5
+            uses: actions/checkout@v6
           - uses: actions/setup-node@v6
             with:
-              node-version: 18
+              node-version: '24'
           - name: Install dependencies
             run: npm install
           - name: Build

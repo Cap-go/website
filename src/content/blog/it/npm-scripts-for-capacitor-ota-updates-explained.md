@@ -171,7 +171,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Deploy Update
         run: npm run deploy:production
 ```

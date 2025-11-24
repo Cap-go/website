@@ -450,11 +450,11 @@ jobs:
   build_ios:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Use Node.js 16
         uses: actions/setup-node@v6
         with:
-          node-version: 16
+          node-version: '24'
           cache: npm
       - name: Install dependencies
         id: install_code
