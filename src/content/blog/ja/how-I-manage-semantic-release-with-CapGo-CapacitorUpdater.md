@@ -6,7 +6,7 @@ author: Rupert Barrow
 author_image_url: 'https://avatars.githubusercontent.com/u/48629751?v=4'
 author_url: 'https://linkedin.com/in/rbarrow'
 created_at: 2024-09-22T00:00:00.000Z
-updated_at: 2025-11-24T14:48:36.000Z
+updated_at: 2025-11-24T15:08:57.000Z
 head_image: /rapido_cloud_study_case.webp
 head_image_alt: クラウドのクイックケーススタディ
 keywords: >-
