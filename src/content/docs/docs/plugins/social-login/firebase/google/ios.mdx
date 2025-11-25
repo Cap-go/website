@@ -1,0 +1,78 @@
+---
+title: Firebase Google Login on iOS
+description: Learn how to set up Google Sign-In with Firebase Authentication on iOS using the Capacitor Social Login plugin.
+sidebar:
+    order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Introduction
+
+This guide will help you integrate Google Sign-In with Firebase Authentication on iOS. I assume you have already completed the [general Firebase Google setup](./general). 
+
+:::note
+I will assume that you have not yet created your iOS app in the Firebase Console. If you have, your steps will be slightly different.
+:::
+
+## Setup Steps
+
+<Steps>
+1. Go to your project overview over at [console.cloud.google.com](https://console.cloud.google.com/)
+    <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+
+2. Click on the `Add app` button
+    <img src="/social-login-assets/firebase_project_add_app.webp" alt="Firebase Add App Button" />
+
+    :::note
+    It is possible that you will have to look here for this button. This applies only if you have already created a different app in the Firebase Console.
+    :::
+
+    <img src="/social-login-assets/firebase_project_add_app_2.webp" alt="Firebase Add App Button" />
+3. Select `iOS`
+    <img src="/social-login-assets/firebase_project_add_app_ios.webp" alt="Firebase Add App iOS Button" />
+
+4. Fill the first part of the form
+   1. Fill the `Apple bundle ID`
+      1. Open Xcode at your app using `npx cap open ios`
+      2. Double click on `App`
+         <img src="/social-login-assets/xcode_app_click.png" alt="App target in Xcode project navigator" />
+      3. Ensure that you are on `Targets -> App`
+         <img src="/social-login-assets/xcode_targets_app.png" alt="Targets section in Xcode with App selected" />
+      4. Find your `Bundle Identifier`
+          <img src="/social-login-assets/xcode_bundle_id.png" alt="Bundle Identifier field in Xcode project settings" />
+          :::note
+          The ID shown here will differ from the one I will use for the rest of the guide. I will use `app.capgo.plugin.SocialLogin` for the rest of the guide.
+          :::
+      5. Copy the `Bundle Identifier` and paste it in the Firebase console
+         <img src="/social-login-assets/firebase_project_add_app_ios_bundle_id.webp" alt="Firebase Add App iOS Bundle ID Field" />
+   2. Click on the `Register app` button
+         <img src="/social-login-assets/firebase_project_add_app_ios_register.webp" alt="Firebase Add App iOS Register Button" />
+5. Skip the `Download config file` step
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download.webp" alt="Firebase Add App iOS Skip Download Button" />
+6. Skip the `Add firebase SDK` step
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download_firebase_sdk.webp" alt="Firebase Add App iOS Skip Download Firebase SDK Button" />
+7. Skip the `Add initialization code` step
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download_firebase_sdk.webp" alt="Firebase Add App iOS Skip Download Firebase SDK Button" />
+8. If you do not get automatically authenticated, go to `settings` -> `general` -> `your apps`
+
+</Steps>
+
+## Important Notes
+
+- Use `mode: 'online'` to get the `idToken` needed for Firebase Auth
+- The `iOSServerClientId` should be the same as `webClientId` (your Firebase web client ID)
+- The `GIDClientID` in Info.plist must match your iOS client ID
+- Ensure the REVERSED_CLIENT_ID URL scheme is correctly configured
+- The user will be automatically created in Firebase Auth on first sign-in
+
+## Troubleshooting
+
+If authentication hangs or fails:
+
+- Verify the `idToken` audience matches your Firebase web client ID
+- Check that Google Sign-In is enabled in Firebase Console
+- Ensure Info.plist has the correct URL schemes and GIDClientID
+- Verify `iOSServerClientId` matches your web client ID
+- Review the [example app code](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/src/authUtils.ts) for reference
+
+
