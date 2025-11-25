@@ -44,6 +44,11 @@ import ShareIcon from 'astro-heroicons/mini/Share.astro'
 import PrinterIcon from 'astro-heroicons/mini/Printer.astro'
 import ArchiveBoxIcon from 'astro-heroicons/mini/ArchiveBox.astro'
 import WifiIcon from 'astro-heroicons/mini/Wifi.astro'
+import FireIcon from 'astro-heroicons/mini/Fire.astro'
+import ExclamationTriangleIcon from 'astro-heroicons/mini/ExclamationTriangle.astro'
+import CloudIcon from 'astro-heroicons/mini/Cloud.astro'
+import CommandLineIcon from 'astro-heroicons/mini/CommandLine.astro'
+import ShieldExclamationIcon from 'astro-heroicons/mini/ShieldExclamation.astro'
 
 export interface Action {
   icon?: any
@@ -642,5 +647,109 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-wifi/',
     title: 'WiFi',
     icon: WifiIcon,
+  },
+  {
+    name: '@capgo/capacitor-screen-orientation',
+    author: 'github.com/Cap-go',
+    description: 'Screen orientation plugin with support for bypassing orientation lock',
+    href: 'https://github.com/Cap-go/capacitor-screen-orientation/',
+    title: 'Screen Orientation',
+    icon: DevicePhoneMobileIcon,
+  },
+  {
+    name: '@capgo/capacitor-webview-guardian',
+    author: 'github.com/Cap-go',
+    description: 'Detect when the WebView was killed in the background and relaunch it on foreground',
+    href: 'https://github.com/Cap-go/capacitor-webview-guardian/',
+    title: 'WebView Guardian',
+    icon: ShieldExclamationIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-analytics',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Analytics',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/analytics',
+    title: 'Firebase Analytics',
+    icon: ChartBarIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-app',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase App',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app',
+    title: 'Firebase App',
+    icon: FireIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-app-check',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase App Check',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/app-check',
+    title: 'Firebase App Check',
+    icon: ShieldCheckIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-authentication',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Authentication',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/authentication',
+    title: 'Firebase Authentication',
+    icon: UserCircleIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-crashlytics',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Crashlytics',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/crashlytics',
+    title: 'Firebase Crashlytics',
+    icon: ExclamationTriangleIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-firestore',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Cloud Firestore',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/firestore',
+    title: 'Firebase Firestore',
+    icon: CircleStackIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-functions',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Cloud Functions',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/functions',
+    title: 'Firebase Functions',
+    icon: CommandLineIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-messaging',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Cloud Messaging (FCM)',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/messaging',
+    title: 'Firebase Messaging',
+    icon: ChatBubbleLeftIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-performance',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Performance Monitoring',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/performance',
+    title: 'Firebase Performance',
+    icon: RocketLaunchIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-remote-config',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Remote Config',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/remote-config',
+    title: 'Firebase Remote Config',
+    icon: CogIcon,
+  },
+  {
+    name: '@capgo/capacitor-firebase-storage',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor plugin for Firebase Cloud Storage',
+    href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/storage',
+    title: 'Firebase Storage',
+    icon: CloudIcon,
   },
 ]
