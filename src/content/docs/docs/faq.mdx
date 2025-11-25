@@ -81,12 +81,12 @@ Note that most app stores prohibit shipping code that changes the behavior of th
 
 A MAU is a "Monthly Active User". In Capgo's context, this actually refers to a Monthly Active Device. We count a MAU as any device that has contacted our servers in the last 30 days. We do not count devices that have not contacted our servers in the last 30 days.
 
-**Important**: Starting from plugin version **v6.25.0** and **v7.25.0**, the deviceID now persists across app reinstalls. Before these versions, each app reinstall would generate a new deviceID and count as a new MAU.
+**Important**: Starting from plugin version **v5.10.0**, **v6.25.0** and **v7.25.0**, the deviceID now persists across app reinstalls. Before these versions, each app reinstall would generate a new deviceID and count as a new MAU.
 
 With the current versions:
 - DeviceID persists across app reinstalls (stored securely in Keychain on iOS and EncryptedSharedPreferences on Android)
 - Updating the app does not create a new Device ID
-- During development, if you're using an older plugin version (< v6.25.0 / v7.25.0), each reinstall still creates a new MAU
+- During development, if you're using an older plugin version (< v5.10.0 / v6.25.0 / v7.25.0), each reinstall still creates a new MAU
 
 Note: TestFlight downloads and channel switches in Android may still generate new device registrations depending on your configuration.
 
