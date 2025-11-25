@@ -4,104 +4,51 @@ description: Learn how to set up Google Sign-In with Firebase Authentication on 
 sidebar:
     order: 4
 ---
-import { Steps } from '@astrojs/starlight/components';
 
 ## Introduction
 
-This guide will help you integrate Google Sign-In with Firebase Authentication on Web. For web platforms, we recommend using Firebase's built-in Google Sign-In instead of the Capacitor plugin, as it provides a more reliable popup-based flow.
+The Capacitor Social Login plugin **does not support web platforms**. For web applications, you should use Firebase's built-in Google Sign-In directly, which provides a more reliable popup-based authentication flow.
+
+## Why Not Use the Plugin on Web?
+
+The Capacitor Social Login plugin is designed for native mobile platforms (Android and iOS) where it can leverage platform-specific authentication flows. For web, Firebase's native `signInWithPopup` method is:
+
+- ✅ More reliable and better supported
+- ✅ Handles browser session storage automatically
+- ✅ Provides better error handling
+- ✅ No additional configuration needed
 
 ## Setup Steps
 
-<Steps>
 1. **Configure Firebase Project**
    
    Ensure your Firebase project has Google Sign-In enabled:
    - Go to [Firebase Console](https://console.firebase.google.com/)
    - Navigate to Authentication > Sign-in method
    - Enable Google Sign-In provider
-   - Add your authorized domains
 
-2. **Get Your Web Client ID**
-   
-   You'll need your **Web Client ID** from Google Console:
-   - This should be the same client ID configured in Firebase Console
-   - Used for Firebase's built-in Google Sign-In
+2. Add your authorized domains
+    1. Go to your project overview over at [console.cloud.google.com](https://console.cloud.google.com/)
+        <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+    2. Open the `Authentication` menu
+        <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+    3. Click on the `Settings` button
+        <img src="/social-login-assets/firebase_select_authentication_settings.webp" alt="Firebase Authentication Sign-in Method Button" />
+    4. Setup the `Authorized domains`
+        <img src="/social-login-assets/firebase_select_authentication_settings_authorized_domains.webp" alt="Firebase Authentication Settings Authorized Domains" />
 
-3. **Use Firebase's Built-in Google Sign-In**
-   
-   For web, use Firebase's `signInWithPopup` directly:
-   
-   ```typescript
-   import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-   import { auth } from './firebase'; // Your Firebase auth instance
-   
-   const provider = new GoogleAuthProvider();
-   provider.addScope('email');
-   provider.addScope('profile');
-   
-   const userCredential = await signInWithPopup(auth, provider);
-   // User is now authenticated with Firebase!
-   ```
+## Example Implementation
 
-4. **Alternative: Using Capacitor Plugin (Not Recommended)**
-   
-   If you must use the Capacitor plugin on web, you can configure it with a redirect URL:
-   
-   ```typescript
-   import { SocialLogin } from '@capgo/capacitor-social-login';
-   import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
-   
-   await SocialLogin.initialize({
-     google: {
-       webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
-       redirectUrl: 'https://your-app.firebaseapp.com/__/auth/handler',
-       mode: 'online',
-     },
-   });
-   
-   const response = await SocialLogin.login({
-     provider: 'google',
-     options: {
-       scopes: ['email', 'profile'],
-     },
-   });
-   
-   if (response.result.responseType === 'online' && response.result.idToken) {
-     const credential = GoogleAuthProvider.credential(response.result.idToken);
-     const userCredential = await signInWithCredential(auth, credential);
-   }
-   ```
-   
-   :::caution
-   Using the Capacitor plugin on web may cause issues with redirect flows and session storage. Firebase's built-in `signInWithPopup` is recommended for web platforms.
-   :::
-</Steps>
+See the [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) file in the example app for a complete implementation that:
 
-## Recommended Approach
-
-For web applications, we strongly recommend using Firebase's built-in Google Sign-In (`signInWithPopup`) because:
-
-- ✅ More reliable popup-based flow
-- ✅ Better error handling
-- ✅ No redirect URL configuration needed
-- ✅ Handles session storage automatically
-- ✅ Works seamlessly with Firebase Auth
-
-## Example Code
-
-See the [example app](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/src/authUtils.ts) for a complete implementation that:
-
-- Uses Firebase's `signInWithPopup` for web
-- Uses Capacitor plugin for Android/iOS
+- Uses Firebase's `signInWithPopup` for web platforms
+- Uses Capacitor Social Login plugin for Android/iOS platforms
 - Handles platform detection automatically
 
-## Troubleshooting
+The example shows how to conditionally use Firebase's built-in method for web while using the plugin for native platforms.
 
-If you encounter issues:
+## Additional Resources
 
-- Ensure Google Sign-In is enabled in Firebase Console
-- Verify your web client ID matches Firebase configuration
-- Check browser console for any CORS or popup blocking errors
-- Review Firebase Auth documentation for web-specific issues
-
-
+- [Firebase Authentication Documentation](https://firebase.google.com/docs/auth) - Complete Firebase Auth documentation
+- [Firebase Google Sign-In for Web](https://firebase.google.com/docs/auth/web/google-signin) - Official Firebase guide for Google Sign-In on web
+- [Google Login Setup Guide](/docs/plugins/social-login/google/general/) - Guide for configuring authorized domains and OAuth consent screen
