@@ -399,10 +399,31 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
           </p>
         </div>
 
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <!-- Search Bar -->
+        <div class="mx-auto mb-8 max-w-2xl">
+          <div class="relative">
+            <input
+              type="text"
+              id="plugin-search"
+              placeholder="Search plugins by name or description..."
+              class="py-4 px-6 w-full text-white placeholder-gray-400 bg-white/5 rounded-xl border border-gray-700 backdrop-blur-sm transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            />
+            <svg class="absolute top-1/2 right-4 w-5 h-5 text-gray-400 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <div id="search-results-count" class="mt-2 text-sm text-center text-gray-400"></div>
+        </div>
+
+        <div id="plugins-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {
             plugins.map((item) => (
-              <div class="relative p-6 rounded-2xl border border-gray-700 transition-all duration-300 group bg-white/5 backdrop-blur-sm hover:scale-[1.02] hover:border-gray-500/50 hover:bg-white/10">
+              <div
+                class="plugin-card relative p-6 rounded-2xl border border-gray-700 transition-all duration-300 group bg-white/5 backdrop-blur-sm hover:scale-[1.02] hover:border-gray-500/50 hover:bg-white/10"
+                data-title={item.title.toLowerCase()}
+                data-description={item.description.toLowerCase()}
+                data-author={item.author.toLowerCase()}
+              >
                 <div class="relative">
                   {item.icon && (
                     <PluginIcon icon={item.icon} name={item.title} className="mb-4 transition-transform duration-300 group-hover:scale-110" />
@@ -491,4 +512,55 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
       </div>
     </section>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('plugin-search') as HTMLInputElement
+      const pluginCards = document.querySelectorAll('.plugin-card') as NodeListOf<HTMLElement>
+      const resultsCount = document.getElementById('search-results-count')
+      const totalPlugins = pluginCards.length
+
+      function updateResultsCount(visibleCount: number) {
+        if (resultsCount) {
+          if (searchInput.value.trim() === '') {
+            resultsCount.textContent = ''
+          } else {
+            resultsCount.textContent = `Showing ${visibleCount} of ${totalPlugins} plugins`
+          }
+        }
+      }
+
+      function filterPlugins() {
+        const searchTerm = searchInput.value.toLowerCase().trim()
+        let visibleCount = 0
+
+        pluginCards.forEach((card) => {
+          const title = card.getAttribute('data-title') || ''
+          const description = card.getAttribute('data-description') || ''
+          const author = card.getAttribute('data-author') || ''
+
+          const matches =
+            title.includes(searchTerm) ||
+            description.includes(searchTerm) ||
+            author.includes(searchTerm)
+
+          if (matches) {
+            card.style.display = ''
+            visibleCount++
+          } else {
+            card.style.display = 'none'
+          }
+        })
+
+        updateResultsCount(visibleCount)
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterPlugins)
+
+        // Initialize count
+        updateResultsCount(totalPlugins)
+      }
+    })
+  </script>
 </Layout>
