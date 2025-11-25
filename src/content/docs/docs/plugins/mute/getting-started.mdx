@@ -27,27 +27,13 @@ import { CapacitorMute } from '@capgo/capacitor-mute';
 // Check if device is muted
 const checkMuteState = async () => {
   const { value } = await CapacitorMute.isMuted();
-  
+
   if (value) {
     console.log('Device is muted/silent');
     // Adjust app behavior for silent mode
   } else {
     console.log('Device sound is on');
   }
-};
-
-// Listen for mute state changes (iOS only)
-const listenForChanges = async () => {
-  await CapacitorMute.addListener('muteChanged', (state) => {
-    console.log('Mute state changed:', state.value);
-    updateUIForMuteState(state.value);
-  });
-};
-
-// Check if feature is available
-const checkAvailability = async () => {
-  const { value } = await CapacitorMute.isAvailable();
-  console.log('Mute detection available:', value);
 };
 ```
 
@@ -62,31 +48,6 @@ const result = await CapacitorMute.isMuted();
 // Returns: { value: boolean }
 ```
 
-### isAvailable()
-
-Checks if mute detection is available on the device.
-
-```typescript
-const result = await CapacitorMute.isAvailable();
-// Returns: { value: boolean }
-```
-
-## Events
-
-### muteChanged
-
-Fired when the mute state changes (iOS only).
-
-```typescript
-interface MuteChangedEvent {
-  value: boolean;
-}
-
-CapacitorMute.addListener('muteChanged', (event) => {
-  console.log('Is muted:', event.value);
-});
-```
-
 ## Complete Example
 
 ```typescript
@@ -94,22 +55,10 @@ import { CapacitorMute } from '@capgo/capacitor-mute';
 
 export class SoundManager {
   private isMuted = false;
-  private listener: any;
 
   async initialize() {
-    // Check if mute detection is available
-    const { value: isAvailable } = await CapacitorMute.isAvailable();
-    
-    if (!isAvailable) {
-      console.log('Mute detection not available');
-      return;
-    }
-
     // Get initial mute state
     await this.checkMuteState();
-
-    // Listen for changes (iOS only)
-    this.setupListener();
   }
 
   async checkMuteState() {
@@ -120,13 +69,6 @@ export class SoundManager {
     } catch (error) {
       console.error('Failed to check mute state:', error);
     }
-  }
-
-  private setupListener() {
-    this.listener = CapacitorMute.addListener('muteChanged', (event) => {
-      this.isMuted = event.value;
-      this.updateAppBehavior();
-    });
   }
 
   private updateAppBehavior() {
@@ -160,24 +102,23 @@ export class SoundManager {
     // Use audio notifications
     console.log('Using audio notifications');
   }
-
-  cleanup() {
-    if (this.listener) {
-      this.listener.remove();
-    }
-  }
 }
 
 // Usage
 const soundManager = new SoundManager();
 await soundManager.initialize();
+
+// Poll periodically to check for changes
+setInterval(() => {
+  soundManager.checkMuteState();
+}, 5000); // Check every 5 seconds
 ```
 
 ## Platform Behavior
 
 ### iOS
 - Detects the physical mute switch state
-- Provides real-time change events
+- No real-time change events (polling required)
 - Works on iPhone and iPad with mute switch
 
 ### Android
@@ -187,12 +128,16 @@ await soundManager.initialize();
 
 ## Best Practices
 
-1. **Check availability first**
+1. **Poll for changes**
+   Since the plugin doesn't provide real-time events, poll periodically if you need to track changes:
    ```typescript
-   const { value } = await CapacitorMute.isAvailable();
-   if (!value) {
-     // Fallback to default behavior
-   }
+   // Check mute state periodically
+   setInterval(async () => {
+     const { value } = await CapacitorMute.isMuted();
+     if (value !== previousMuteState) {
+       handleMuteStateChange(value);
+     }
+   }, 5000);
    ```
 
 2. **Respect user preferences**
@@ -200,25 +145,13 @@ await soundManager.initialize();
 
 3. **Provide visual alternatives**
    ```typescript
+   const { value: isMuted } = await CapacitorMute.isMuted();
    if (isMuted) {
      // Show visual notifications
      showToast('New message received');
    } else {
      // Play sound notification
      playNotificationSound();
-   }
-   ```
-
-4. **Handle platform differences**
-   ```typescript
-   import { Capacitor } from '@capacitor/core';
-   
-   if (Capacitor.getPlatform() === 'ios') {
-     // Set up change listener
-     CapacitorMute.addListener('muteChanged', handler);
-   } else {
-     // Poll periodically on Android
-     setInterval(checkMuteState, 5000);
    }
    ```
 
@@ -267,9 +200,9 @@ await soundManager.initialize();
    - Check if device ringer mode is actually set to silent
    - Some Android devices may have different behavior
 
-2. **No change events on Android**
-   - This is expected - Android doesn't provide mute switch events
-   - Implement polling if real-time detection is needed
+2. **No change events available**
+   - The plugin does not provide real-time change events
+   - Implement polling if you need to detect changes
 
 3. **Not working on simulator**
    - iOS Simulator doesn't have a mute switch

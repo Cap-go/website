@@ -62,43 +62,25 @@ const startUpload = async () => {
   console.log('Upload ID:', upload.id);
 };
 
-// Monitor upload progress
-const monitorProgress = async (uploadId: string) => {
-  const listener = await Uploader.addListener(
-    'progressEvent', 
-    (progress) => {
-      if (progress.id === uploadId) {
-        console.log(`Progress: ${progress.progress}%`);
-        console.log(`Bytes sent: ${progress.bytesSent}/${progress.bytesTotal}`);
-      }
-    }
-  );
-  
-  // Remember to remove listener when done
-  // listener.remove();
-};
+// Listen for upload events
+const listener = await Uploader.addListener('events', (event) => {
+  switch (event.name) {
+    case 'uploading':
+      console.log(`Upload ${event.payload.id}: ${event.payload.percent}%`);
+      break;
+    case 'completed':
+      console.log('Upload completed:', event.payload.id);
+      console.log('Status code:', event.payload.statusCode);
+      break;
+    case 'failed':
+      console.error('Upload failed:', event.payload.id);
+      console.error('Error:', event.payload.error);
+      break;
+  }
+});
 
-// Handle upload completion
-const handleCompletion = async () => {
-  const listener = await Uploader.addListener(
-    'completedEvent',
-    (result) => {
-      console.log('Upload completed:', result.id);
-      console.log('Server response:', result.response);
-    }
-  );
-};
-
-// Handle upload errors
-const handleErrors = async () => {
-  const listener = await Uploader.addListener(
-    'errorEvent',
-    (error) => {
-      console.error('Upload failed:', error.id);
-      console.error('Error:', error.error);
-    }
-  );
-};
+// Remember to remove listener when done
+// listener.remove();
 
 // Cancel an upload
 const cancelUpload = async (uploadId: string) => {
@@ -158,42 +140,38 @@ interface RemoveOptions {
 
 ## Events
 
-### progressEvent
+### events
 
-Fired during upload progress.
-
-```typescript
-interface ProgressEvent {
-  id: string;
-  progress: number; // 0-100
-  bytesSent: number;
-  bytesTotal: number;
-}
-```
-
-### completedEvent
-
-Fired when upload completes successfully.
+All upload events are delivered through a single `events` listener. The event contains a `name` field to identify the type:
 
 ```typescript
-interface CompletedEvent {
-  id: string;
-  response: string;
-  statusCode: number;
-}
+Uploader.addListener('events', (event: UploadEvent) => {
+  switch (event.name) {
+    case 'uploading':
+      // Upload in progress
+      console.log(`Progress: ${event.payload.percent}%`);
+      console.log(`ID: ${event.payload.id}`);
+      break;
+
+    case 'completed':
+      // Upload finished successfully
+      console.log(`Completed: ${event.payload.id}`);
+      console.log(`Status code: ${event.payload.statusCode}`);
+      break;
+
+    case 'failed':
+      // Upload failed
+      console.error(`Failed: ${event.payload.id}`);
+      console.error(`Error: ${event.payload.error}`);
+      break;
+  }
+});
 ```
 
-### errorEvent
-
-Fired when upload fails.
-
-```typescript
-interface ErrorEvent {
-  id: string;
-  error: string;
-  statusCode?: number;
-}
-```
+**Event Types:**
+- `uploading` - Progress update with `percent` and `id`
+- `completed` - Upload finished with `id` and `statusCode`
+- `failed` - Upload failed with `id` and `error` message
 
 ## Advanced Features
 
@@ -251,24 +229,32 @@ const smartUpload = async () => {
 
 ## Best Practices
 
-1. **Handle all events**
+1. **Handle all event types**
    ```typescript
    const setupUploadHandlers = () => {
-     Uploader.addListener('progressEvent', handleProgress);
-     Uploader.addListener('completedEvent', handleCompleted);
-     Uploader.addListener('errorEvent', handleError);
+     Uploader.addListener('events', (event) => {
+       switch (event.name) {
+         case 'uploading':
+           handleProgress(event.payload);
+           break;
+         case 'completed':
+           handleCompleted(event.payload);
+           break;
+         case 'failed':
+           handleError(event.payload);
+           break;
+       }
+     });
    };
    ```
 
 2. **Clean up listeners**
    ```typescript
-   const listeners: PluginListenerHandle[] = [];
-   
-   // Add listeners
-   listeners.push(await Uploader.addListener(...));
-   
+   // Add listener
+   const listener = await Uploader.addListener('events', handleEvent);
+
    // Clean up when done
-   listeners.forEach(listener => listener.remove());
+   listener.remove();
    ```
 
 3. **Retry failed uploads**
