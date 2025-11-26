@@ -65,7 +65,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 ```
 
-Unfortunatly, on Capacitor, this does not work and causes Firebase auth to hang. As stated in [this blog post](https://harryherskowitz.com/2021/08/23/firebase-capacitor.html), you need to use the `initializeAuth` function to initialize the Firebase Auth instance.
+Unfortunately, on Capacitor, this does not work and causes Firebase auth to hang. As stated in [this blog post](https://harryherskowitz.com/2021/08/23/firebase-capacitor.html), you need to use the `initializeAuth` function to initialize the Firebase Auth instance.
 This looks like this:
 
 ```typescript
