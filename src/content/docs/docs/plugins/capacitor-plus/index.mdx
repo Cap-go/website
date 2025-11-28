@@ -1,0 +1,63 @@
+---
+title: "Capacitor+"
+description: An automated, always-synced fork of Capacitor with merged community PRs and rapid releases.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Capacitor+ is an automated fork of Capacitor that merges community PRs faster, with security-reviewed releases.
+  image:
+    file: ~public/icons/plugins/capacitor-plus.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/capacitor-plus/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-plus/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  **Why Capacitor+?** Great PRs sit unmerged in the official Capacitor repository for months. Capacitor+ actively merges these community contributions so you don't have to wait.
+</Aside>
+
+<CardGrid stagger>
+  <Card title="Community PRs Merged Faster" icon="rocket">
+    Bug fixes and features stuck in upstream? We merge them so you can benefit immediately.
+  </Card>
+  <Card title="Auto-Synced Daily" icon="seti:clock">
+    Every change from official Capacitor is automatically pulled, tested, and verified.
+  </Card>
+  <Card title="Security Reviewed" icon="approve-check">
+    Every release is analyzed by AI for security vulnerabilities, breaking changes, and stability risks.
+  </Card>
+  <Card title="Drop-in Replacement" icon="puzzle">
+    Same API as official Capacitor - just change the package scope and you're done.
+  </Card>
+</CardGrid>
+
+## Philosophy
+
+The Ionic team maintains Capacitor with their own priorities and release schedule. Community contributions can wait months or even years to be merged. Capacitor+ takes a different approach:
+
+1. **Merge PRs from Forks** - Valuable PRs stuck in the upstream queue are actively merged
+2. **Continuous Sync** - Every upstream change is automatically pulled and tested
+3. **Rapid Releases** - Changes are published to npm as soon as they pass CI
+4. **Community-First** - Your contributions matter and get prioritized
+5. **Transparency** - All automation is open source and visible
+
+## Packages
+
+| Package | npm |
+|---------|-----|
+| `@capacitor-plus/core` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/core)](https://www.npmjs.com/package/@capacitor-plus/core) |
+| `@capacitor-plus/cli` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/cli)](https://www.npmjs.com/package/@capacitor-plus/cli) |
+| `@capacitor-plus/android` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/android)](https://www.npmjs.com/package/@capacitor-plus/android) |
+| `@capacitor-plus/ios` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/ios)](https://www.npmjs.com/package/@capacitor-plus/ios) |

@@ -1,0 +1,188 @@
+---
+title: Getting Started
+description: Learn how to install Capacitor+ as a drop-in replacement for official Capacitor packages.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+## New Project Installation
+
+<Steps>
+1. **Install core packages**
+   ```bash
+   npm install @capacitor-plus/core @capacitor-plus/cli
+   ```
+
+2. **Add platform packages**
+   ```bash
+   npm install @capacitor-plus/android  # for Android
+   npm install @capacitor-plus/ios      # for iOS
+   ```
+
+3. **Initialize Capacitor**
+   <PackageManagers type="exec" pkg="cap" args="init" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+4. **Add platforms**
+   <PackageManagers type="exec" pkg="cap" args="add android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="add ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Migrating from Official Capacitor
+
+If you have an existing Capacitor project, migrating to Capacitor+ is simple:
+
+<Steps>
+1. **Remove official packages**
+   ```bash
+   npm uninstall @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios
+   ```
+
+2. **Install Capacitor+ packages**
+   ```bash
+   npm install @capacitor-plus/core @capacitor-plus/cli
+   npm install @capacitor-plus/android  # if using Android
+   npm install @capacitor-plus/ios      # if using iOS
+   ```
+
+3. **Sync your project**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+<Aside type="note">
+  No code changes required! Capacitor+ has the same API as official Capacitor. Your imports and code remain exactly the same.
+</Aside>
+
+## Usage
+
+Since Capacitor+ is API-compatible, your existing code works without changes:
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { registerPlugin } from '@capacitor/core';
+
+// Check platform
+const platform = Capacitor.getPlatform();
+console.log('Running on:', platform);
+
+// Check if native
+if (Capacitor.isNativePlatform()) {
+  console.log('Running on native platform');
+}
+
+// Register a custom plugin
+const MyPlugin = registerPlugin('MyPlugin');
+```
+
+### With Official Capacitor Plugins
+
+All official Capacitor plugins work seamlessly:
+
+```typescript
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { Geolocation } from '@capacitor/geolocation';
+import { Storage } from '@capacitor/preferences';
+
+// Camera
+const photo = await Camera.getPhoto({
+  quality: 90,
+  resultType: CameraResultType.Uri
+});
+
+// Geolocation
+const position = await Geolocation.getCurrentPosition();
+
+// Storage
+await Storage.set({ key: 'name', value: 'John' });
+```
+
+### With Capgo Plugins
+
+Capgo plugins work perfectly with Capacitor+:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// Live updates
+await CapacitorUpdater.notifyAppReady();
+
+// Screen orientation
+await ScreenOrientation.lock({ orientation: 'portrait' });
+
+// Flashlight
+await CapacitorFlash.toggle();
+```
+
+## How the Sync Works
+
+```
+┌─────────────────────┐     ┌──────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  ionic-team/        │     │  CI/CD           │     │  Claude Code     │     │  npm publish    │
+│  capacitor          │────▶│  Pipeline        │────▶│  Security Review │────▶│  @capacitor-plus│
+│  (upstream)         │     │  (daily sync)    │     │  (AI analysis)   │     │  packages       │
+└─────────────────────┘     └──────────────────┘     └──────────────────┘     └─────────────────┘
+```
+
+1. **Daily Sync**: GitHub Actions fetch latest changes from `ionic-team/capacitor`
+2. **PR Creation**: Changes are proposed as pull requests to the `plus` branch
+3. **CI Validation**: Full test suite runs (lint, unit tests, iOS build, Android build)
+4. **Security Review**: AI-powered analysis checks for vulnerabilities and breaking changes
+5. **Auto-Merge**: Only if CI passes AND security review approves
+6. **Auto-Publish**: New version published to npm under `@capacitor-plus/*`
+
+## Security Review Details
+
+Every upstream sync is analyzed for:
+
+| Check | What It Catches |
+|-------|-----------------|
+| **Security** | Command injection, XSS, path traversal, hardcoded secrets |
+| **Breaking Changes** | Removed/renamed APIs, changed signatures, config changes |
+| **Stability** | Null dereferences, unhandled exceptions, race conditions, memory leaks |
+| **Data Safety** | Data loss scenarios, privacy violations, insecure storage |
+| **Code Integrity** | Obfuscated code, suspicious network calls, backdoors |
+
+<Aside type="caution">
+  If any issues are detected, the PR is flagged for manual review and will NOT be auto-merged. This ensures you always get stable, secure releases.
+</Aside>
+
+## Submitting Your PR
+
+Have a PR stuck in the official Capacitor repo? Get it merged in Capacitor+:
+
+<Steps>
+1. **Open an issue** in the [Capacitor+ repo](https://github.com/Cap-go/capacitor-plus/issues) linking to your upstream PR
+
+2. **Or submit directly** as a PR to the `plus` branch
+
+3. The team will review, run CI, and merge if it passes
+</Steps>
+
+This way you and others can benefit from your work immediately without waiting for the upstream release cycle.
+
+## FAQ
+
+### Is this production-ready?
+
+Yes. Capacitor+ is used in production apps. Every release passes the same test suite as official Capacitor, plus additional security analysis.
+
+### Will my official plugins still work?
+
+Yes. All `@capacitor/*` plugins work with Capacitor+ out of the box.
+
+### What if upstream releases a breaking change?
+
+The AI security review flags breaking changes for manual review. You'll see the changes documented before they're merged.
+
+### How do I report issues?
+
+File issues on the [Capacitor+ GitHub repo](https://github.com/Cap-go/capacitor-plus/issues). For issues that also affect official Capacitor, we'll help coordinate upstream.
+
+### Can I contribute?
+
+Absolutely! PRs are welcome. You can submit fixes directly or request that specific upstream PRs be merged.

@@ -49,6 +49,7 @@ import ExclamationTriangleIcon from 'astro-heroicons/mini/ExclamationTriangle.as
 import CloudIcon from 'astro-heroicons/mini/Cloud.astro'
 import CommandLineIcon from 'astro-heroicons/mini/CommandLine.astro'
 import ShieldExclamationIcon from 'astro-heroicons/mini/ShieldExclamation.astro'
+import ArrowsRightLeftIcon from 'astro-heroicons/mini/ArrowsRightLeft.astro'
 
 export interface Action {
   icon?: any
@@ -751,5 +752,37 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-firebase/tree/main/packages/storage',
     title: 'Firebase Storage',
     icon: CloudIcon,
+  },
+  {
+    name: '@capacitor-plus/core',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor+ is an automated, always-synced fork of Capacitor with merged community PRs and rapid releases',
+    href: 'https://github.com/Cap-go/capacitor-plus/',
+    title: 'Capacitor+ Core',
+    icon: ArrowsRightLeftIcon,
+  },
+  {
+    name: '@capacitor-plus/cli',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor+ CLI - Same as official CLI but with community improvements merged faster',
+    href: 'https://github.com/Cap-go/capacitor-plus/',
+    title: 'Capacitor+ CLI',
+    icon: CommandLineIcon,
+  },
+  {
+    name: '@capacitor-plus/android',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor+ Android runtime - Drop-in replacement with merged community fixes',
+    href: 'https://github.com/Cap-go/capacitor-plus/',
+    title: 'Capacitor+ Android',
+    icon: DevicePhoneMobileIcon,
+  },
+  {
+    name: '@capacitor-plus/ios',
+    author: 'github.com/Cap-go',
+    description: 'Capacitor+ iOS runtime - Drop-in replacement with merged community fixes',
+    href: 'https://github.com/Cap-go/capacitor-plus/',
+    title: 'Capacitor+ iOS',
+    icon: DevicePhoneMobileIcon,
   },
 ]

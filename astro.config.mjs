@@ -297,6 +297,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Capacitor+',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/capacitor-plus/' },
+                { label: 'Getting started', link: '/docs/plugins/capacitor-plus/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Contacts',
               items: [
                 { label: 'Overview', link: '/docs/plugins/contacts/' },
@@ -624,6 +632,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/ricoh360-camera/' },
                 { label: 'Getting started', link: '/docs/plugins/ricoh360-camera/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'Screen Orientation',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/screen-orientation/' },
+                { label: 'Getting started', link: '/docs/plugins/screen-orientation/getting-started' },
               ],
               collapsed: true,
             },
