@@ -305,6 +305,14 @@ export default defineConfig({
               collapsed: true,
             },
             {
+              label: 'Compass',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/compass/' },
+                { label: 'Getting started', link: '/docs/plugins/compass/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
               label: 'Contacts',
               items: [
                 { label: 'Overview', link: '/docs/plugins/contacts/' },
@@ -365,6 +373,14 @@ export default defineConfig({
               items: [
                 { label: 'Overview', link: '/docs/plugins/ffmpeg/' },
                 { label: 'Getting started', link: '/docs/plugins/ffmpeg/getting-started' },
+              ],
+              collapsed: true,
+            },
+            {
+              label: 'File',
+              items: [
+                { label: 'Overview', link: '/docs/plugins/file/' },
+                { label: 'Getting started', link: '/docs/plugins/file/getting-started' },
               ],
               collapsed: true,
             },

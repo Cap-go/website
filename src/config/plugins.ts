@@ -50,6 +50,7 @@ import CloudIcon from 'astro-heroicons/mini/Cloud.astro'
 import CommandLineIcon from 'astro-heroicons/mini/CommandLine.astro'
 import ShieldExclamationIcon from 'astro-heroicons/mini/ShieldExclamation.astro'
 import ArrowsRightLeftIcon from 'astro-heroicons/mini/ArrowsRightLeft.astro'
+import FolderIcon from 'astro-heroicons/mini/Folder.astro'
 
 export interface Action {
   icon?: any
@@ -784,5 +785,21 @@ export const actions = [
     href: 'https://github.com/Cap-go/capacitor-plus/',
     title: 'Capacitor+ iOS',
     icon: DevicePhoneMobileIcon,
+  },
+  {
+    name: '@capgo/capacitor-compass',
+    author: 'github.com/Cap-go',
+    description: 'Read device compass heading in degrees with continuous updates and permission handling',
+    href: 'https://github.com/Cap-go/capacitor-compass/',
+    title: 'Compass',
+    icon: MapPinIcon,
+  },
+  {
+    name: '@capgo/capacitor-file',
+    author: 'github.com/Cap-go',
+    description: 'Full-featured file system plugin for reading, writing, and managing files and directories',
+    href: 'https://github.com/Cap-go/capacitor-file/',
+    title: 'File',
+    icon: FolderIcon,
   },
 ]
