@@ -2,20 +2,29 @@
 
 /**
  * Fetches npm download stats for all plugins in plugins.ts and saves to a JSON file.
- * Uses sequential fetching with delays to avoid rate limiting.
+ * Uses npm-trends proxy API which has better rate limiting than the official npm API.
  * Run with: bun run scripts/fetch-npm-downloads.ts
  */
 
 import { actions } from '../src/config/plugins'
 
-// Delay between requests (500ms is safe for npm API)
-const REQUEST_DELAY = 500
+// Get date range for last 7 days
+const getDateRange = () => {
+  const end = new Date()
+  const start = new Date()
+  start.setDate(start.getDate() - 7)
+  const format = (d: Date) => d.toISOString().split('T')[0]
+  return `${format(start)}:${format(end)}`
+}
 
 // Fetch weekly downloads for a single package with retry
 const fetchDownloads = async (packageName: string, retries = 3): Promise<number | null> => {
+  const dateRange = getDateRange()
+
   for (let attempt = 0; attempt < retries; attempt++) {
     try {
-      const apiUrl = `https://api.npmjs.org/downloads/point/last-week/${encodeURIComponent(packageName)}`
+      // Use npm-trends proxy which has better rate limiting
+      const apiUrl = `https://npm-trends-proxy.uidotdev.workers.dev/npm/downloads/range/${dateRange}/${encodeURIComponent(packageName)}`
       const response = await fetch(apiUrl)
 
       if (response.status === 429) {
@@ -38,7 +47,11 @@ const fetchDownloads = async (packageName: string, retries = 3): Promise<number 
       }
 
       const data = await response.json()
-      return data.downloads ?? null
+      // Sum up all daily downloads
+      if (data.downloads && Array.isArray(data.downloads)) {
+        return data.downloads.reduce((sum: number, day: { downloads: number }) => sum + day.downloads, 0)
+      }
+      return null
     } catch (error) {
       if (attempt < retries - 1) {
         await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -56,27 +69,27 @@ async function main() {
   const packageNames = [...new Set(actions.map((p) => p.name).filter(Boolean))] as string[]
 
   console.log(`Found ${packageNames.length} unique npm packages`)
+  console.log('Fetching all packages in parallel...')
 
   const outputPath = new URL('../src/data/npm-downloads.json', import.meta.url).pathname
+
+  // Fetch all packages in parallel
+  const results = await Promise.all(
+    packageNames.map(async (name) => {
+      const count = await fetchDownloads(name)
+      if (count !== null) {
+        console.log(`  ${name}: ${count} downloads/week`)
+      } else {
+        console.warn(`  ${name}: failed to fetch`)
+      }
+      return { name, count }
+    })
+  )
+
   const downloads: Record<string, number> = {}
-
-  // Fetch sequentially to avoid rate limiting (npm API is strict)
-  for (let i = 0; i < packageNames.length; i++) {
-    const name = packageNames[i]
-    console.log(`[${i + 1}/${packageNames.length}] Fetching ${name}...`)
-
-    const count = await fetchDownloads(name)
-
+  for (const { name, count } of results) {
     if (count !== null) {
       downloads[name] = count
-      console.log(`  ${name}: ${count} downloads/week`)
-    } else {
-      console.warn(`  ${name}: failed to fetch`)
-    }
-
-    // Delay between requests to avoid rate limiting
-    if (i < packageNames.length - 1) {
-      await new Promise((resolve) => setTimeout(resolve, REQUEST_DELAY))
     }
   }
 
