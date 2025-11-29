@@ -1,0 +1,50 @@
+name: Update Org README
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/config/plugins.ts'
+      - 'src/data/github-stars.json'
+      - 'src/data/npm-downloads.json'
+      - 'scripts/generate-plugins-readme.ts'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout website repo
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Fetch latest data
+        run: |
+          bun run fetch:stars
+          bun run fetch:downloads
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Generate README
+        run: bun run generate:plugins-readme
+
+      - name: Push to Cap-go/.github
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        with:
+          source_file: 'public/plugins-readme.md'
+          destination_repo: 'Cap-go/.github'
+          destination_folder: 'profile'
+          destination_branch: 'main'
+          destination_branch_create: 'false'
+          rename: 'README.md'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          user_name: 'github-actions[bot]'
+          commit_message: 'Update plugins README from website build'
