@@ -61,7 +61,7 @@ export const GET: APIRoute = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${import.meta.env.BEARER_TOKEN}`,
+        Authorization: `Bearer ${import.meta.env.PERSONAL_ACCESS_TOKEN}`,
       },
       body: JSON.stringify({ query }),
     })

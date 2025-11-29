@@ -2,7 +2,7 @@
 import { actions } from '@/config/plugins'
 import Layout from '@/layouts/Layout.astro'
 import * as m from '@/paraglide/messages'
-import { getSlug } from '@/services/github'
+import { getSlug, getPluginsWithStars, getGitHubStars, getNpmDownloads, getTotalStars, getTotalDownloads } from '@/services/github'
 import ArrowUpRightIcon from 'astro-heroicons/mini/ArrowUpRight.astro'
 import PluginIcon from '@/components/PluginIcon.astro'
 import { getCollection } from 'astro:content'
@@ -15,23 +15,37 @@ const description = m.plugins_description({}, { locale: Astro.locals.locale })
 const content = { title, description }
 
 const slugsSet = new Set()
-const [_, pluginsOriginal] = await Promise.all([
-  getCollection('plugin', ({ data, filePath }) => {
-    if (data.published !== false && filePath) {
-      slugsSet.add(getSlug(filePath).replace('.md', ''))
-    }
-  }),
-  Promise.all(
-    actions.map(async (item) => ({
+await getCollection('plugin', ({ data, filePath }) => {
+  if (data.published !== false && filePath) {
+    slugsSet.add(getSlug(filePath).replace('.md', ''))
+  }
+})
+
+const pluginsWithStars = getPluginsWithStars(actions)
+const totalStars = getTotalStars()
+const totalDownloads = getTotalDownloads()
+
+// Parse descriptions and filter by available tutorials
+const slugs = [...slugsSet] as string[]
+const plugins = await Promise.all(
+  pluginsWithStars
+    .filter((i) => slugs.includes(getSlug(i.href).replace('.md', '')))
+    .map(async (item) => ({
       ...item,
       description: await marked.parse(item.description),
     })),
-  ),
-])
+)
 
-let plugins = pluginsOriginal
-const slugs = [...slugsSet] as string[]
-plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', '')))
+// Helper function to format counts
+const formatCount = (count: number): string => {
+  if (count >= 1000000) {
+    return `${(count / 1000000).toFixed(1)}M`
+  }
+  if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}k`
+  }
+  return count.toString()
+}
 ---
 
 <Layout content={content}>
@@ -84,12 +98,12 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
             <div class="text-gray-400">{m.ready_to_use_plugins({}, { locale: Astro.locals.locale })}</div>
           </div>
           <div>
-            <div class="mb-2 text-3xl font-bold text-emerald-400 md:text-4xl">1M+</div>
-            <div class="text-gray-400">{m.downloads({}, { locale: Astro.locals.locale })}</div>
+            <div class="mb-2 text-3xl font-bold text-emerald-400 md:text-4xl">{formatCount(totalDownloads)}</div>
+            <div class="text-gray-400">{m.downloads({}, { locale: Astro.locals.locale })}/week</div>
           </div>
           <div>
-            <div class="mb-2 text-3xl font-bold text-gray-200 md:text-4xl">20K+</div>
-            <div class="text-gray-400">{m.happy_developers({}, { locale: Astro.locals.locale })}</div>
+            <div class="mb-2 text-3xl font-bold text-gray-200 md:text-4xl">{formatCount(totalStars)}+</div>
+            <div class="text-gray-400">GitHub Stars</div>
           </div>
           <div>
             <div class="mb-2 text-3xl font-bold text-gray-200 md:text-4xl">24/7</div>
@@ -306,47 +320,65 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
               class="block p-4 text-center rounded-xl transition-colors duration-200 bg-white/5 hover:bg-white/10"
             >
               <div class="mb-2 text-lg font-semibold text-white">capacitor-updater</div>
-              <div class="flex justify-center items-center mb-2 text-gray-200">
-                <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  ></path>
-                </svg>
-                640 stars
+              <div class="flex flex-wrap gap-3 justify-center items-center mb-2 text-gray-200">
+                <span class="inline-flex items-center">
+                  <svg class="mr-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  </svg>
+                  {formatCount(getNpmDownloads('@capgo/capacitor-updater') ?? 0)}/w
+                </span>
+                <span class="inline-flex items-center">
+                  <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                  {formatCount(getGitHubStars('https://github.com/Cap-go/capacitor-updater/') ?? 0)}
+                </span>
               </div>
               <div class="text-sm text-gray-400">{m.instant_ota_updates_capacitor({}, { locale: Astro.locals.locale })}</div>
             </a>
             <a
-              href="https://github.com/Cap-go/capacitor-purchases"
+              href="https://github.com/RevenueCat/purchases-capacitor/"
               target="_blank"
               rel="noopener noreferrer"
               class="block p-4 text-center rounded-xl transition-colors duration-200 bg-white/5 hover:bg-white/10"
             >
               <div class="mb-2 text-lg font-semibold text-white">purchases-capacitor</div>
-              <div class="flex justify-center items-center mb-2 text-gray-200">
-                <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  ></path>
-                </svg>
-                205 stars
+              <div class="flex flex-wrap gap-3 justify-center items-center mb-2 text-gray-200">
+                <span class="inline-flex items-center">
+                  <svg class="mr-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  </svg>
+                  {formatCount(getNpmDownloads('@revenuecat/purchases-capacitor') ?? 0)}/w
+                </span>
+                <span class="inline-flex items-center">
+                  <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                  {formatCount(getGitHubStars('https://github.com/RevenueCat/purchases-capacitor/') ?? 0)}
+                </span>
               </div>
               <div class="text-sm text-gray-400">{m.in_app_purchases_acquired({}, { locale: Astro.locals.locale })}</div>
             </a>
             <a
-              href="https://github.com/Cap-go/capacitor-social-login"
+              href="https://github.com/Cap-go/capacitor-social-login/"
               target="_blank"
               rel="noopener noreferrer"
               class="block p-4 text-center rounded-xl transition-colors duration-200 bg-white/5 hover:bg-white/10"
             >
               <div class="mb-2 text-lg font-semibold text-white">capacitor-social-login</div>
-              <div class="flex justify-center items-center mb-2 text-gray-200">
-                <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  ></path>
-                </svg>
-                141 stars
+              <div class="flex flex-wrap gap-3 justify-center items-center mb-2 text-gray-200">
+                <span class="inline-flex items-center">
+                  <svg class="mr-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  </svg>
+                  {formatCount(getNpmDownloads('@capgo/capacitor-social-login') ?? 0)}/w
+                </span>
+                <span class="inline-flex items-center">
+                  <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                  </svg>
+                  {formatCount(getGitHubStars('https://github.com/Cap-go/capacitor-social-login/') ?? 0)}
+                </span>
               </div>
               <div class="text-sm text-gray-400">{m.social_auth_simplified({}, { locale: Astro.locals.locale })}</div>
             </a>
@@ -399,9 +431,9 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
           </p>
         </div>
 
-        <!-- Search Bar -->
-        <div class="mx-auto mb-8 max-w-2xl">
-          <div class="relative">
+        <!-- Search and Sort Controls -->
+        <div class="flex flex-col gap-4 justify-center items-center mx-auto mb-8 max-w-3xl sm:flex-row">
+          <div class="relative flex-1 w-full">
             <input
               type="text"
               id="plugin-search"
@@ -412,8 +444,21 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
-          <div id="search-results-count" class="mt-2 text-sm text-center text-gray-400"></div>
+          <div class="relative w-full sm:w-auto">
+            <select
+              id="plugin-sort"
+              class="py-4 px-6 pr-10 w-full text-white bg-white/5 rounded-xl border border-gray-700 backdrop-blur-sm transition-all duration-200 appearance-none cursor-pointer focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 sm:w-48"
+            >
+              <option value="downloads">Downloads</option>
+              <option value="stars">GitHub Stars</option>
+              <option value="alphabetical">Alphabetical</option>
+            </select>
+            <svg class="absolute top-1/2 right-4 w-5 h-5 text-gray-400 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
         </div>
+        <div id="search-results-count" class="mb-4 text-sm text-center text-gray-400"></div>
 
         <div id="plugins-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {
@@ -423,6 +468,8 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                 data-title={item.title.toLowerCase()}
                 data-description={item.description.toLowerCase()}
                 data-author={item.author.toLowerCase()}
+                data-downloads={item.npmDownloads ?? 0}
+                data-stars={item.githubStars ?? 0}
               >
                 <div class="relative">
                   {item.icon && (
@@ -432,6 +479,22 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
                   <div class="mb-4 leading-relaxed text-gray-300 line-clamp-3" set:html={item.description} />
                   <div class="flex justify-between items-center mb-4">
                     <span class="text-sm text-gray-500">by {item.author}</span>
+                    <div class="flex gap-3">
+                      {item.npmDownloads !== undefined && (
+                        <span class="inline-flex items-center text-sm text-gray-200">
+                          <svg class="mr-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                          </svg>
+                          {formatCount(item.npmDownloads)}/w
+                        </span>
+                      )}
+                      <span class="inline-flex items-center text-sm text-gray-200">
+                        <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        {formatCount(item.githubStars ?? 0)}
+                      </span>
+                    </div>
                   </div>
                   <div class="flex gap-2">
                     <a
@@ -516,6 +579,8 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('plugin-search') as HTMLInputElement
+      const sortSelect = document.getElementById('plugin-sort') as HTMLSelectElement
+      const pluginsGrid = document.getElementById('plugins-grid') as HTMLElement
       const pluginCards = document.querySelectorAll('.plugin-card') as NodeListOf<HTMLElement>
       const resultsCount = document.getElementById('search-results-count')
       const totalPlugins = pluginCards.length
@@ -555,11 +620,42 @@ plugins = plugins.filter((i) => slugs.includes(getSlug(i.href).replace('.md', ''
         updateResultsCount(visibleCount)
       }
 
+      function sortPlugins(sortBy: string) {
+        const cardsArray = Array.from(pluginCards)
+
+        cardsArray.sort((a, b) => {
+          if (sortBy === 'downloads') {
+            const aDownloads = parseInt(a.getAttribute('data-downloads') || '0', 10)
+            const bDownloads = parseInt(b.getAttribute('data-downloads') || '0', 10)
+            return bDownloads - aDownloads
+          } else if (sortBy === 'stars') {
+            const aStars = parseInt(a.getAttribute('data-stars') || '0', 10)
+            const bStars = parseInt(b.getAttribute('data-stars') || '0', 10)
+            return bStars - aStars
+          } else {
+            const aTitle = a.getAttribute('data-title') || ''
+            const bTitle = b.getAttribute('data-title') || ''
+            return aTitle.localeCompare(bTitle)
+          }
+        })
+
+        // Re-append cards in sorted order
+        cardsArray.forEach((card) => {
+          pluginsGrid.appendChild(card)
+        })
+      }
+
       if (searchInput) {
         searchInput.addEventListener('input', filterPlugins)
-
-        // Initialize count
         updateResultsCount(totalPlugins)
+      }
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+          sortPlugins(sortSelect.value)
+        })
+        // Initial sort by downloads
+        sortPlugins('downloads')
       }
     })
   </script>

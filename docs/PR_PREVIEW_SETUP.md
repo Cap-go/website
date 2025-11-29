@@ -49,7 +49,7 @@ CLOUDFLARE_ACCOUNT_ID     # Your Cloudflare account ID
 The following environment variables are used during build:
 
 ```bash
-BEARER_TOKEN                      # Your API bearer token
+PERSONAL_ACCESS_TOKEN                      # Your API bearer token
 ORAMA_CLOUD_API_KEY              # Orama search API key
 ORAMA_CLOUD_ENDPOINT             # Orama search endpoint
 CLOUDFLARE_TURNSTILE_SITE_KEY    # Cloudflare Turnstile site key
