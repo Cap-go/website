@@ -22,8 +22,13 @@ const formatNumber = (num: number): string => {
   return num.toString()
 }
 
+// Filter only @capgo/ plugins
+const capgoPlugins = actions.filter(
+  (plugin) => plugin.author === 'github.com/Cap-go' && plugin.name?.startsWith('@capgo/')
+)
+
 // Sort by GitHub stars (most popular first)
-const sortedPlugins = [...actions].sort((a, b) => {
+const sortedPlugins = [...capgoPlugins].sort((a, b) => {
   const aStars = githubStars[a.href] || 0
   const bStars = githubStars[b.href] || 0
   return bStars - aStars
