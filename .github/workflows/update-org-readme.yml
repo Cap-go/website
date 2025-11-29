@@ -35,16 +35,12 @@ jobs:
         run: bun run generate:plugins-readme
 
       - name: Push to Cap-go/.github
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        with:
-          source_file: 'public/plugins-readme.md'
-          destination_repo: 'Cap-go/.github'
-          destination_folder: 'profile'
-          destination_branch: 'main'
-          destination_branch_create: 'false'
-          rename: 'README.md'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          user_name: 'github-actions[bot]'
-          commit_message: 'Update plugins README from website build'
+        run: |
+          git clone https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/Cap-go/.github.git target-repo
+          cp public/plugins-readme.md target-repo/profile/README.md
+          cd target-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add profile/README.md
+          git diff --staged --quiet || git commit -m "Update plugins README from website build"
+          git push
