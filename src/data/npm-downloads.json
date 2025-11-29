@@ -71,11 +71,9 @@
   "@capgo/capacitor-firebase-authentication": 173,
   "@capgo/capacitor-firebase-crashlytics": 177,
   "@capgo/capacitor-firebase-firestore": 178,
+  "@capgo/capacitor-firebase-functions": 180,
+  "@capgo/capacitor-firebase-messaging": 182,
+  "@capgo/capacitor-firebase-performance": 174,
   "@capgo/capacitor-firebase-remote-config": 178,
-  "@capgo/capacitor-firebase-storage": 174,
-  "@capgo/capacitor-screen-orientation": 115,
-  "@capgo/capacitor-compass": 98,
-  "@capgo/capacitor-file": 87,
-  "@capacitor-plus/core": 45,
-  "@capacitor-plus/cli": 32
+  "@capgo/capacitor-firebase-storage": 174
 }
