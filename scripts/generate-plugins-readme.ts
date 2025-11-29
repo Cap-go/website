@@ -27,11 +27,11 @@ const capgoPlugins = actions.filter(
   (plugin) => plugin.author === 'github.com/Cap-go' && plugin.name?.startsWith('@capgo/')
 )
 
-// Sort by downloads (most popular first)
+// Sort by GitHub stars (most popular first)
 const sortedPlugins = capgoPlugins.sort((a, b) => {
-  const aDownloads = a.name ? npmDownloads[a.name] || 0 : 0
-  const bDownloads = b.name ? npmDownloads[b.name] || 0 : 0
-  return bDownloads - aDownloads
+  const aStars = githubStars[a.href] || 0
+  const bStars = githubStars[b.href] || 0
+  return bStars - aStars
 })
 
 // Generate HTML table rows (3 plugins per row)
