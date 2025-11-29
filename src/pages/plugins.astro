@@ -25,15 +25,14 @@ const pluginsWithStars = getPluginsWithStars(actions)
 const totalStars = getTotalStars()
 const totalDownloads = getTotalDownloads()
 
-// Parse descriptions and filter by available tutorials
+// Parse descriptions for all plugins
 const slugs = [...slugsSet] as string[]
 const plugins = await Promise.all(
-  pluginsWithStars
-    .filter((i) => slugs.includes(getSlug(i.href).replace('.md', '')))
-    .map(async (item) => ({
-      ...item,
-      description: await marked.parse(item.description),
-    })),
+  pluginsWithStars.map(async (item) => ({
+    ...item,
+    description: await marked.parse(item.description),
+    hasTutorial: slugs.includes(getSlug(item.href).replace('.md', '')),
+  })),
 )
 
 // Helper function to format counts
@@ -497,12 +496,24 @@ const formatCount = (count: number): string => {
                     </div>
                   </div>
                   <div class="flex gap-2">
-                    <a
-                      href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
-                      class="inline-flex flex-1 justify-center items-center py-2 px-4 text-sm font-semibold text-white bg-blue-600 rounded-lg transition-all duration-200 hover:bg-blue-700"
-                    >
-                      View Tutorial
-                    </a>
+                    {item.hasTutorial ? (
+                      <a
+                        href={getRelativeLocaleUrl(Astro.locals.locale, `plugins/${getSlug(item.href)}`)}
+                        class="inline-flex flex-1 justify-center items-center py-2 px-4 text-sm font-semibold text-white bg-blue-600 rounded-lg transition-all duration-200 hover:bg-blue-700"
+                      >
+                        View Tutorial
+                      </a>
+                    ) : (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex flex-1 justify-center items-center py-2 px-4 text-sm font-semibold text-white bg-blue-600 rounded-lg transition-all duration-200 hover:bg-blue-700"
+                      >
+                        View Docs
+                        <ArrowUpRightIcon class="ml-1 w-4 h-4 fill-white" />
+                      </a>
+                    )}
                     <a
                       href={item.href}
                       target="_blank"
