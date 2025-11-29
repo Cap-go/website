@@ -225,4 +225,25 @@ In this part, you will learn how to setup Google login in iOS.
 The language in the Google prompt depends on your device's language settings.
 :::
 
+## Known Problems
+
+### Privacy Screen Plugin Incompatibility
+
+The Google Login plugin is incompatible with [@capacitor/privacy-screen](https://github.com/ionic-team/capacitor-privacy-screen). When using both plugins together, the Google login webview will be interrupted by the privacy screen.
+
+**Workaround:** Call `await PrivacyScreen.disable();` before calling the login function:
+
+```typescript
+import { PrivacyScreen } from '@capacitor/privacy-screen';
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await PrivacyScreen.disable();
+await SocialLogin.login({
+  provider: 'google',
+  options: {}
+});
+```
+
+
+
 
