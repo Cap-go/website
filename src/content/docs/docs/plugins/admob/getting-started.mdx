@@ -30,11 +30,44 @@ await AdMob.configure({
   appVolume: 1,
 });
 
+// iOS: request tracking authorization
+const platform = Capacitor.getPlatform();
+if(platform === 'ios') {
+  await AdMob.requestTrackingAuthorization();
+}
+
 await AdMob.configRequest({
   maxAdContentRating: MaxAdContentRating.T,
   tagForChildDirectedTreatment: false,
   tagForUnderAgeOfConsent: false,
 });
+```
+
+## Android configuration
+
+> android/app/src/main/AndroidManifest.xml
+
+```xml
+<application>
+	...
+	<meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-000000000000000~0000000000"/>
+</application>
+```
+
+## iOS configuration
+
+> ios/App/App/Info.plist
+
+```xml
+<dict>
+	...
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-000000000000000~0000000000</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Your data will be used to deliver personalized ads and help us keep YourAppName free to play.</string>
+</dict>
 ```
 
 ## Show a banner ad
@@ -86,3 +119,4 @@ await handle.remove();
 - **iOS**: Add your AdMob app ID to `Info.plist` under the `GADApplicationIdentifier` key and include any SKAdNetwork IDs you rely on.
 - **Android**: Declare your AdMob app ID in `AndroidManifest.xml` by adding `com.google.android.gms.ads.APPLICATION_ID` inside the `<application>` tag.
 - **Consent & Privacy**: Use `requestTrackingAuthorization()` on iOS 14+ and `configRequest()` child-directed flags to stay compliant with regional privacy rules.
+- **iOS**: On `npx cap sync` got this error `The 'Pods-App' target has transitive dependencies that include statically linked binaries: (Google-Mobile-Ads-SDK and GoogleUserMessagingPlatform)` solved by editing `ios/App/Podfile` on line 4 adding `use_frameworks! :linkage => :static`
