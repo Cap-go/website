@@ -31,7 +31,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.10",
     "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/starlight": "^0.36.1",
+    "@astrojs/starlight": "^0.37.0",
     "@astrojs/starlight-tailwind": "^4.0.1",
     "@orama/wc-components": "^0.8.1",
     "@std/semver": "npm:@jsr/std__semver@1.0.6",
