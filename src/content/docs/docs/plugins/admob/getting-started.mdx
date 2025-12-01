@@ -20,6 +20,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
 ```typescript
 import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
+import { Capacitor } from '@capacitor/core';
 
 // Start the Mobile Ads SDK once in your application bootstrap
 await AdMob.start();
@@ -32,7 +33,7 @@ await AdMob.configure({
 
 // iOS: request tracking authorization
 const platform = Capacitor.getPlatform();
-if(platform === 'ios') {
+if (platform === 'ios') {
   await AdMob.requestTrackingAuthorization();
 }
 
