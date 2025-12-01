@@ -716,6 +716,7 @@ export default defineConfig({
                 { label: 'Apple', autogenerate: { directory: 'docs/plugins/social-login/apple' } },
                 { label: 'Facebook', link: '/docs/plugins/social-login/facebook' },
                 { label: 'Firebase', autogenerate: { directory: 'docs/plugins/social-login/firebase' } },
+                { label: 'Supabase', autogenerate: { directory: 'docs/plugins/social-login/supabase' } },
                 { label: 'Migrations', autogenerate: { directory: 'docs/plugins/social-login/migrations' } },
               ],
               collapsed: true,
