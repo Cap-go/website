@@ -10,6 +10,8 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import config from './configs.json'
 import { defaultLocale, localeNames, locales } from './src/services/locale'
 
+const docsExpludes = locales.map((locale) => `${locale}/**`)
+
 export default defineConfig({
   trailingSlash: 'always',
   site: `https://${config.base_domain.prod}`,
@@ -72,12 +74,13 @@ export default defineConfig({
     starlight({
       title: 'Capgo',
       pagefind: false,
+      prerender: true,
       plugins: [
         starlightImageZoom({ showCaptions: false }),
         starlightLlmsTxt({
           projectName: 'capgo',
-          description: 'Capgo is a platform for creating and managing Capacitorjs live app updates.',
-          exclude: locales.map((locale) => `${locale}/**`),
+          description: 'Capgo is set of tools for Capacitorjs apps, plugins live app updates with cloud hosting, more than 90 plugins for any problems.',
+          exclude: docsExpludes,
         }),
       ],
       disable404Route: true,
@@ -85,7 +88,7 @@ export default defineConfig({
         src: '~public/capgo_logo.webp',
         replacesTitle: true
       },
-      markdown: { headingLinks: false },
+      markdown: { headingLinks: true },
       customCss: ['./src/css/docs.css'],
       expressiveCode: { themes: ['github-dark'] },
       editLink: { baseUrl: 'https://github.com/Cap-go/website/edit/main/' },

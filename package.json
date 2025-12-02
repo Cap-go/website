@@ -8,6 +8,7 @@
     "repair_sitemap": "bun run scripts/repair_sitemap.tsx",
     "fetch:stars": "bun run scripts/fetch-github-stars.ts",
     "fetch:downloads": "bun run scripts/fetch-npm-downloads.ts",
+    "just:build": "astro build",
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
     "build": "bun run fetch:stars && bun run fetch:downloads && bun run generate:plugins-readme && bun run fix_code_languages_all && astro build && bun run repair_sitemap",
     "preview": "wrangler dev",
