@@ -26,9 +26,6 @@
     "setup:new:locale": "bun run scripts/setup_new_locale.tsx",
     "clean:unused": "bun run scripts/clean_not_used.tsx"
   },
-  "overrides": {
-    "vite": "npm:rolldown-vite@latest"
-  },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/sitemap": "^3.6.0",
