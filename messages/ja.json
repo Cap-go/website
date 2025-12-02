@@ -238,7 +238,7 @@
   "automatic_fail_safe_updates": "自動フェイルセーフ配送",
   "availability_97_95": "97.0%未満だが、95.0%以上",
   "availability_98_97": "98.0%未満で、97.0%以上",
-  "availability_99_98": "99.0%未満、しかし98.0%以上",
+  "availability_99_98": "99.9%未満、しかし98.0%以上",
   "availability_below_95": "95.0%未満",
   "average_api_response_time": "世界中の平均API応答時間",
   "average_delivery_114ms_globally": "平均配送時間：全世界で114ミリ秒",
