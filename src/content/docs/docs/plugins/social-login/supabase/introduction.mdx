@@ -1,0 +1,91 @@
+---
+title: Supabase Integration Introduction
+description: Learn how to integrate Supabase Authentication with the Capacitor Social Login plugin for a complete authentication solution.
+sidebar:
+    order: 1
+---
+
+## Overview
+
+This tutorial will guide you through setting up Supabase Authentication with the Capacitor Social Login plugin. This integration allows you to use native social login providers (Google, Apple, Facebook, Twitter) on mobile platforms while leveraging Supabase Auth for backend authentication and PostgreSQL for data storage.
+
+## What You'll Learn
+
+- How to configure Supabase Authentication
+- How to integrate Capacitor Social Login plugin with Supabase Auth
+- Platform-specific setup for Android, iOS, and Web
+- How to handle nonces securely for Supabase
+
+## What You'll Need
+
+Before you begin, make sure you have:
+
+1. **A Supabase Project**
+   - Create a project at [Supabase Dashboard](https://app.supabase.com/)
+   - Enable Google OAuth provider
+   - Get your Supabase project URL and anon key
+
+2. **Supabase JS SDK**
+   - Install Supabase in your project:
+     ```bash
+     npm install @supabase/supabase-js
+     ```
+
+3. **A Capacitor Project**
+   - An existing Capacitor application
+   - Capacitor Social Login plugin installed:
+     ```bash
+     npm install @capgo/capacitor-social-login
+     npx cap sync
+     ```
+
+4. **Platform-Specific Google Setup**
+   - Complete the Google Sign-In setup for your target platforms:
+     - [Google Login Android Setup](/docs/plugins/social-login/google/android/)
+     - [Google Login iOS Setup](/docs/plugins/social-login/google/ios/)
+     - [Google Login Web Setup](/docs/plugins/social-login/google/web/)
+
+## Example Application
+
+A complete working example is available in the repository:
+
+**Code Repository**: [You can find the code repository here](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+
+The example app demonstrates:
+- Email/password authentication with Supabase
+- Google Sign-In integration (Android, iOS, and Web)
+- A simple key-value store using Supabase PostgreSQL tables
+- User-specific data storage with Row Level Security (RLS)
+
+## Key Implementation Details
+
+### Nonce Handling
+
+Supabase requires special nonce handling for security. The implementation follows the [React Native Google Sign In documentation](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+
+- Generate a `rawNonce` (URL-safe random string)
+- Hash it with SHA-256 to get `nonceDigest`
+- Pass `nonceDigest` to Google Sign-In
+- Pass `rawNonce` to Supabase (Supabase hashes it internally for comparison)
+
+### JWT Validation
+
+The example implementation includes JWT validation to ensure:
+- The token audience matches your configured Google Client IDs
+- The nonce matches the expected digest
+- Automatic retry on validation failure (especially important for iOS)
+
+### Platform-Specific Considerations
+
+- **iOS**: Token caching can cause nonce issues - the implementation handles this automatically
+- **Web**: Must call `isLoggedIn()` on mount to handle OAuth redirects
+- **Android**: Standard implementation with SHA-1 fingerprint configuration
+
+## Next Steps
+
+Continue with the setup guides:
+- [Supabase Google Login - General Setup](./google/general/) - Overview and prerequisites
+- [Android Setup](./google/android/) - Android-specific configuration
+- [iOS Setup](./google/ios/) - iOS-specific configuration
+- [Web Setup](./google/web/) - Web-specific configuration
+
