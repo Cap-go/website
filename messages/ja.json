@@ -765,6 +765,7 @@
   "do_you_offer_discounts_for_students_non_profits_or_startups": "学生、非営利団体、またはスタートアップ向けの割引はありますか？",
   "do_you_offer_refunds": "あなたは返金を提供していますか？",
   "do_you_offer_refunds_answer": "法律で必要とされる場合を除き、支払い済みのサブスクリプション料金は返金不可です。ただし、特定の返金要求はケースバイケースで考慮され、Capgoの単独裁量により認められる場合があります。返金資格があると思われる場合は、サポートチームにご連絡ください。",
+  "docs": "Docs",
   "documentation": "ドキュメント",
   "documentation_in_markdown_that_powers": "文書はMarkdownで記述されており、その背後にあります",
   "documenting_apis": "APIの文書化",

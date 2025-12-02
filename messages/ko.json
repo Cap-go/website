@@ -765,6 +765,7 @@
   "do_you_offer_discounts_for_students_non_profits_or_startups": "학생, 비영리 단체, 또는 스타트업을 위한 할인 혜택이 있나요?",
   "do_you_offer_refunds": "환불 해주시나요?",
   "do_you_offer_refunds_answer": "법률에 의해 요구되는 경우를 제외하고, 지불된 구독료는 환불이 불가능합니다. 그러나 특정 환불 요청은 사례별로 고려될 수 있으며 Capgo의 전적인 재량에 따라 승인될 수 있습니다. 환불 자격이 있다고 생각되면, 저희 지원팀에 연락해 주세요.",
+  "docs": "Docs",
   "documentation": "문서",
   "documentation_in_markdown_that_powers": "Markdown으로 작성된 문서가 구동하는",
   "documenting_apis": "API 문서화",

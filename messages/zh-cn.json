@@ -765,6 +765,7 @@
   "do_you_offer_discounts_for_students_non_profits_or_startups": "你们是否为学生、非营利组织或初创企业提供折扣？",
   "do_you_offer_refunds": "你们提供退款吗？",
   "do_you_offer_refunds_answer": "除非法律要求，否则已付订阅费用不予退款。然而，我们可能会根据具体情况考虑某些退款请求，并由Capgo自行决定是否批准。如果您认为自己有资格获得退款，请联系我们的支持团队。",
+  "docs": "Docs",
   "documentation": "文档",
   "documentation_in_markdown_that_powers": "驱动的Markdown文档",
   "documenting_apis": "记录APIs",
