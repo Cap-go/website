@@ -68,17 +68,18 @@ curl -X POST \
 
 `https://api.capgo.app/device/`
 
-Retrieve device information. Returns 50 devices per page.
+Retrieve device information. Uses cursor-based pagination for efficient retrieval of large device lists.
 
 #### Query Parameters
 - `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
-- `device_id`: Optional. Specific device ID to retrieve
+- `device_id`: Optional. Specific device ID to retrieve a single device
+- `cursor`: Optional. Cursor from previous response for pagination
+- `limit`: Optional. Number of devices per page (default: 50)
 
 #### Example Requests
 
 ```bash
-# Get all devices
+# Get all devices (first page)
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/device/?app_id=app_123"
 
@@ -86,32 +87,62 @@ curl -H "authorization: your-api-key" \
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/device/?app_id=app_123&device_id=device_456"
 
-# Get next page
+# Get next page using cursor
 curl -H "authorization: your-api-key" \
-  "https://api.capgo.app/device/?app_id=app_123&page=1"
+  "https://api.capgo.app/device/?app_id=app_123&cursor=2024-01-01T00:00:00Z|device_456"
 ```
 
-#### Response Type
+#### Response Type (List)
+
+When requesting multiple devices (no `device_id` parameter):
 
 ```typescript
+interface DeviceListResponse {
+  data: Device[];
+  nextCursor?: string;  // Pass this as 'cursor' param to get next page
+  hasMore: boolean;     // true if more pages available
+}
+
 interface Device {
-    created_at?: string | undefined;
-    updated_at?: string | undefined;
-    device_id: string;
-    custom_id: string;
-    version: number;
-    channel?: string;
-    app_id: string;
-    platform?: "ios" | "android" | undefined;
-    plugin_version: string;
-    os_version?: string | undefined;
-    version_build: string;
-    is_prod: boolean;
-    is_emulator: boolean;
+  updated_at: string;
+  device_id: string;
+  custom_id: string;
+  version?: number;
+  version_name: string | null;
+  channel?: string;
+  app_id: string;
+  platform: "ios" | "android";
+  plugin_version: string;
+  os_version: string;
+  version_build: string;
+  is_prod: boolean;
+  is_emulator: boolean;
 }
 ```
 
-#### Example Response
+#### Response Type (Single Device)
+
+When requesting a specific device with `device_id` parameter, returns the device object directly:
+
+```typescript
+interface Device {
+  updated_at: string;
+  device_id: string;
+  custom_id: string;
+  version?: number;
+  version_name: string | null;
+  channel?: string;
+  app_id: string;
+  platform: "ios" | "android";
+  plugin_version: string;
+  os_version: string;
+  version_build: string;
+  is_prod: boolean;
+  is_emulator: boolean;
+}
+```
+
+#### Example Response (List)
 
 ```json
 {
@@ -120,6 +151,7 @@ interface Device {
       "device_id": "device_456",
       "custom_id": "test-device-1",
       "version": 1,
+      "version_name": "1.0.0",
       "app_id": "app_123",
       "platform": "ios",
       "plugin_version": "5.0.0",
@@ -127,10 +159,31 @@ interface Device {
       "version_build": "1",
       "is_prod": true,
       "is_emulator": false,
-      "created_at": "2024-01-01T00:00:00Z",
       "updated_at": "2024-01-01T00:00:00Z"
     }
-  ]
+  ],
+  "nextCursor": "2024-01-01T00:00:00Z|device_456",
+  "hasMore": true
+}
+```
+
+#### Example Response (Single Device)
+
+```json
+{
+  "device_id": "device_456",
+  "custom_id": "test-device-1",
+  "version": 1,
+  "version_name": "1.0.0",
+  "app_id": "app_123",
+  "platform": "ios",
+  "plugin_version": "5.0.0",
+  "os_version": "17.0",
+  "version_build": "1",
+  "is_prod": true,
+  "is_emulator": false,
+  "updated_at": "2024-01-01T00:00:00Z",
+  "channel": "production"
 }
 ```
 
