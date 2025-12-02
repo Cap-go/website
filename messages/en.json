@@ -2442,5 +2442,215 @@
   "your_live_update_solution_for_capacitor_apps": "Your Live Update Solution for Capacitor Apps",
   "youre_in_good_company": "You're in good company.",
   "zero_trust_security": "Zero-Trust Security",
-  "zero_vendor_lockin_pay_provider_directly": "zero vendor lock-in, pay your provider directly."
+  "zero_vendor_lockin_pay_provider_directly": "zero vendor lock-in, pay your provider directly.",
+
+  "products": "Products",
+
+  "live_update": "Live Update",
+  "live_update_hero_title": "Live Updates That Can't Break Your App",
+  "live_update_hero_subtitle": "Our CLI catches breaking changes before deploy. Our native engine auto-recovers if anything goes wrong.",
+  "live_update_description": "Intelligent OTA updates with automatic rollback protection",
+  "live_update_get_started": "Get Started",
+  "live_update_view_docs": "View Documentation",
+
+  "live_update_features_title": "Intelligent Update System",
+  "live_update_features_subtitle": "More than just file uploads. Capgo understands your app and protects your users.",
+
+  "live_update_feature_breaking_detection": "Breaking Update Detection",
+  "live_update_feature_breaking_detection_desc": "CLI scans native dependencies and warns you before deploying incompatible updates. See compatibility status for every package.",
+
+  "live_update_feature_native_engine": "Pure Native Engine",
+  "live_update_feature_native_engine_desc": "Downloads, installation, and activation run on native OS threads. JavaScript crashes can't affect the update process.",
+
+  "live_update_feature_auto_rollback": "Automatic Rollback",
+  "live_update_feature_auto_rollback_desc": "If your app doesn't call notifyAppReady() within 10 seconds, we automatically roll back to the last working version.",
+
+  "live_update_feature_self_healing": "Self-Healing Updates",
+  "live_update_feature_self_healing_desc": "Fallback bundle mechanism always maintains a working version. Your users never see a broken app.",
+
+  "live_update_feature_preflight": "Pre-flight Validation",
+  "live_update_feature_preflight_desc": "Validates notifyAppReady(), index.html, bundle size limits, and checksums before accepting any upload.",
+
+  "live_update_feature_encryption": "Tamper-Proof Updates",
+  "live_update_feature_encryption_desc": "Every update is checksummed, signed, and encrypted end-to-end. No one can tamper with updates - not even Capgo can see what's inside your bundles.",
+
+  "live_update_how_it_works_title": "How It Works",
+  "live_update_how_it_works_subtitle": "A safety net at every step of the update process",
+
+  "live_update_step1_title": "CLI Validates",
+  "live_update_step1_desc": "Before upload, CLI checks native dependencies, version compatibility, and required files",
+
+  "live_update_step2_title": "Native Downloads",
+  "live_update_step2_desc": "Pure native code downloads and installs the update - completely isolated from JavaScript",
+
+  "live_update_step3_title": "App Confirms Ready",
+  "live_update_step3_desc": "Your app calls notifyAppReady(). If it doesn't within 10s, automatic rollback kicks in",
+
+  "live_update_comparison_title": "Capgo vs Manual Updates",
+  "live_update_comparison_subtitle": "See why intelligent updates matter",
+
+  "live_update_comparison_breaking": "Breaking update detection",
+  "live_update_comparison_rollback": "Automatic rollback",
+  "live_update_comparison_native": "Native crash recovery",
+  "live_update_comparison_validation": "Pre-deployment validation",
+  "live_update_comparison_healing": "Self-healing updates",
+  "live_update_comparison_cloud": "Cloud rollback & modify",
+
+  "live_update_cta_title": "Ready to Ship Safer Updates?",
+  "live_update_cta_subtitle": "Start with 14 days free. No credit card required.",
+
+  "native_build": "Native Build",
+  "native_build_hero_title": "Build & Ship to App Stores",
+  "native_build_hero_subtitle": "Anyone on your team can build iOS apps and publish to TestFlight - no Mac required. Works from anywhere, compatible with any CI/CD.",
+  "native_build_description": "Cloud builds and automatic App Store submission",
+  "native_build_get_started": "Get Started",
+  "native_build_view_docs": "View Documentation",
+
+  "native_build_features_title": "Cloud Native Builds",
+  "native_build_features_subtitle": "Build iOS and Android apps without local setup. Submit directly to stores.",
+
+  "native_build_feature_cloud_builds": "Cloud Builds",
+  "native_build_feature_cloud_builds_desc": "Build iOS and Android apps in the cloud. No local Xcode or Android Studio required.",
+
+  "native_build_feature_auto_signing": "Automated Signing",
+  "native_build_feature_auto_signing_desc": "We handle certificates, provisioning profiles, and keystores. Just upload once.",
+
+  "native_build_feature_store_upload": "App Store Upload",
+  "native_build_feature_store_upload_desc": "Automatic submission to App Store Connect and Google Play Store after successful builds.",
+
+  "native_build_feature_ci_cd": "CI/CD Integration",
+  "native_build_feature_ci_cd_desc": "Works with GitHub Actions, GitLab CI, Jenkins, and any CI/CD pipeline.",
+
+  "native_build_feature_credentials": "Bring Your Own Credentials",
+  "native_build_feature_credentials_desc": "Pass your certificates at build time - we never store them. Use your existing CI/CD secrets or local credentials. Maximum security compliance.",
+
+  "native_build_feature_logs": "Real-time Logs",
+  "native_build_feature_logs_desc": "Stream build logs directly to your terminal. Debug issues instantly.",
+
+  "native_build_how_it_works_title": "How It Works",
+  "native_build_how_it_works_subtitle": "From code push to App Store in minutes",
+
+  "native_build_step1_title": "Push Your Code",
+  "native_build_step1_desc": "Commit and push to your repository. Our CLI or CI/CD triggers the build.",
+
+  "native_build_step2_title": "Cloud Builds",
+  "native_build_step2_desc": "iOS and Android apps built in parallel on our cloud infrastructure.",
+
+  "native_build_step3_title": "Store Submission",
+  "native_build_step3_desc": "Signed apps automatically uploaded to App Store Connect and Play Store.",
+
+  "native_build_comparison_title": "Cloud vs Local Builds",
+  "native_build_comparison_subtitle": "Skip the complexity of local native builds",
+
+  "native_build_comparison_xcode": "No Xcode required",
+  "native_build_comparison_android": "No Android Studio setup",
+  "native_build_comparison_signing": "Automatic code signing",
+  "native_build_comparison_parallel": "iOS & Android in parallel",
+  "native_build_comparison_submission": "Direct store submission",
+
+  "native_build_cta_title": "Ready to Simplify Your Builds?",
+  "native_build_cta_subtitle": "Stop fighting with local build environments.",
+
+  "native_build_cli_title": "One Command, Works Anywhere",
+  "native_build_cli_subtitle": "Just a CLI tool that uploads and builds. No integration needed - run it locally, in GitHub Actions, GitLab CI, Jenkins, or any CI/CD. Minimal scope for maximum security compliance.",
+  "native_build_cli_example": "Build your app with a single command",
+
+  "native_build_security_title": "Zero Storage - Runtime Only",
+  "native_build_security_subtitle": "Your credentials are never stored. They exist only in runtime memory during the build.",
+  "native_build_security_feature1_title": "Credentials Never Stored",
+  "native_build_security_feature1_desc": "Your certificates and keystores exist only in runtime memory during the build. They are never written to disk or stored on our servers - purely runtime.",
+  "native_build_security_feature2_title": "Minimal Upload",
+  "native_build_security_feature2_desc": "We only upload the platform you request (iOS or Android) plus your built JS code. Nothing else. Your source code stays on your machine.",
+  "native_build_security_feature3_title": "Dedicated Build Infrastructure",
+  "native_build_security_feature3_desc": "iOS builds run on dedicated Mac Mini M4 machines. Android builds run in isolated Docker containers - making Android builds 2x cheaper.",
+  "native_build_security_feature4_title": "No Log Storage",
+  "native_build_security_feature4_desc": "Build logs only stream to your terminal in real-time. We never store your build logs on our servers.",
+
+  "native_build_streaming_title": "Real-Time Build Logs",
+  "native_build_streaming_subtitle": "Watch your build progress live in your terminal",
+  "native_build_streaming_desc": "Build logs stream directly to your terminal via Server-Sent Events. See every step of your build in real-time - no waiting, no refreshing. Debug issues instantly as they happen.",
+
+  "native_build_pricing_title": "Pay Only for Build Time",
+  "native_build_pricing_subtitle": "No storage costs. No hidden fees. Just build minutes.",
+  "native_build_pricing_desc": "Build minutes are included in your plan, or purchase extra via our credit system. iOS runs on Mac Mini M4, Android on Docker (2x cheaper). Average build time: 2-3 minutes.",
+
+  "native_build_faq_title": "Frequently Asked Questions",
+  "native_build_faq_subtitle": "Everything you need to know about cloud builds",
+
+  "native_build_faq1_q": "Can I use custom Gradle or native iOS configurations?",
+  "native_build_faq1_a": "Yes! We build exactly what you have locally. Run any custom Gradle scripts, CocoaPods, native code changes - just configure it before running the CLI. We use your local project as-is.",
+
+  "native_build_faq2_q": "Do you need access to my private repositories or packages?",
+  "native_build_faq2_a": "No. All dependencies should be installed locally before you run the build command. We only receive what you upload - no access to your Git repos, npm registries, or private packages.",
+
+  "native_build_faq3_q": "How do you handle signing credentials?",
+  "native_build_faq3_a": "We don't store them. Pass certificates at build time via CLI flags or environment variables. Store them in your CI/CD secrets (GitHub, GitLab, etc.) - credentials only exist in memory during the build.",
+
+  "native_build_faq4_q": "How does pricing work?",
+  "native_build_faq4_a": "Build minutes are included in your plan. Need more? Buy credits. iOS builds run on Mac Mini M4, Android builds run in Docker containers (2x cheaper). No storage fees - ever.",
+
+  "native_build_faq5_q": "How long do builds take?",
+  "native_build_faq5_a": "Average build time is 2-3 minutes depending on your project size and configuration. iOS and Android can build in parallel to save time.",
+
+  "native_build_faq6_q": "What platforms do you support?",
+  "native_build_faq6_a": "iOS and Android. iOS builds for App Store, TestFlight, and ad-hoc distribution. Android builds for Play Store and direct APK/AAB downloads.",
+
+  "live_update_delta_title": "Delta Updates",
+  "live_update_delta_subtitle": "Only download what changed",
+  "live_update_delta_desc": "Traditional updates download the entire bundle every time. With delta updates, devices only download the files that actually changed - saving 50-90% bandwidth.",
+  "live_update_delta_feature1_title": "File-Level Diffing",
+  "live_update_delta_feature1_desc": "Each file is uploaded and checksummed individually. Devices compare manifests and only download changed files.",
+  "live_update_delta_feature2_title": "Perfect for Large Assets",
+  "live_update_delta_feature2_desc": "Images, fonts, and videos are downloaded only once. Small code changes don't re-download your entire asset folder.",
+  "live_update_delta_feature3_title": "Enable with One Flag",
+  "live_update_delta_feature3_desc": "Just add --partial to your upload command to enable delta updates for your bundle.",
+  "live_update_delta_command": "Upload with delta updates enabled",
+
+  "live_update_channels_title": "Smart Channel System",
+  "live_update_channels_subtitle": "Control who gets what update, from anywhere",
+  "live_update_channels_desc": "Channels let you target specific user groups with specific builds. Manage channels from the cloud dashboard, API, or mobile app.",
+  "live_update_channels_feature1_title": "Cloud Dashboard Control",
+  "live_update_channels_feature1_desc": "Create, configure, and switch channels from the web dashboard. Roll back instantly with one click.",
+  "live_update_channels_feature2_title": "API & CLI Access",
+  "live_update_channels_feature2_desc": "Automate channel management with our CLI or REST API. Perfect for CI/CD integration.",
+  "live_update_channels_feature3_title": "Device Self-Assignment",
+  "live_update_channels_feature3_desc": "Let devices switch channels at runtime with setChannel(). Great for QA testers or beta programs.",
+  "live_update_channels_feature4_title": "Priority-Based Routing",
+  "live_update_channels_feature4_desc": "Forced device > Cloud override > Config default > Cloud default. Full control over update routing.",
+
+  "live_update_stats_title": "Logs & Statistics",
+  "live_update_stats_subtitle": "See exactly what's happening with your updates",
+  "live_update_stats_desc": "Real-time visibility into your update deployments. Track download progress, success rates, and device health across your entire user base.",
+  "live_update_stats_feature1_title": "Download Progress Tracking",
+  "live_update_stats_feature1_desc": "See which devices are downloading, installed, or pending. Track progress across your entire fleet.",
+  "live_update_stats_feature2_title": "Success & Failure Rates",
+  "live_update_stats_feature2_desc": "Monitor update success rates in real-time. Identify issues before they affect more users.",
+  "live_update_stats_feature3_title": "Device Health Monitoring",
+  "live_update_stats_feature3_desc": "Track which devices are on which versions. Identify devices stuck on old versions.",
+  "live_update_stats_feature4_title": "Bundle Analytics",
+  "live_update_stats_feature4_desc": "See bundle sizes, download times, and rollback frequency. Optimize your update strategy with data.",
+
+  "live_update_lts_title": "Long-Term Support",
+  "live_update_lts_subtitle": "We support the last 3 major Capacitor versions",
+  "live_update_lts_desc": "No pressure to upgrade immediately. Capgo officially supports Capacitor 7, 6, and 5 - giving you years of support and flexibility to upgrade on your own schedule.",
+  "live_update_lts_capacitor7": "Capacitor 7",
+  "live_update_lts_capacitor6": "Capacitor 6",
+  "live_update_lts_capacitor5": "Capacitor 5",
+  "live_update_lts_supported": "Fully Supported",
+
+  "live_update_validation_title": "Deep Pre-Deployment Validation",
+  "live_update_validation_subtitle": "The CLI protects you from yourself",
+  "live_update_validation_desc": "Manual updates give you all the tools to break your app. Capgo's CLI catches mistakes before they reach your users.",
+  "live_update_validation_feature1_title": "Native Dependency Check",
+  "live_update_validation_feature1_desc": "CLI scans your native plugins and compares versions. If your JS bundle expects a newer native plugin version than what's installed, we warn you before deploy.",
+  "live_update_validation_feature2_title": "Duplicate Version Prevention",
+  "live_update_validation_feature2_desc": "Already uploaded this exact version? We'll catch it and prevent accidental overwrites or confusion.",
+  "live_update_validation_feature3_title": "Hub-CLI Compatibility",
+  "live_update_validation_feature3_desc": "Certain features require specific CLI versions. We validate compatibility between your CLI and the Capgo hub before allowing uploads.",
+  "live_update_validation_feature4_title": "Required Files Check",
+  "live_update_validation_feature4_desc": "Missing index.html? No notifyAppReady() call? Bundle too large? We catch these issues before they become production problems.",
+  "live_update_validation_warning_title": "What happens without validation?",
+  "live_update_validation_warning_desc": "Upload a JS bundle that expects native plugins your users don't have? Your app breaks. And if your rollback is also in JS, you have no way to recover. Users are stuck until they reinstall from the App Store.",
+
+  "cli_and_api": "CLI & API"
 }

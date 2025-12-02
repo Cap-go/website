@@ -30,16 +30,16 @@
     "vite": "npm:rolldown-vite@latest"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.10",
+    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/starlight": "^0.36.1",
-    "@astrojs/starlight-tailwind": "^4.0.1",
+    "@astrojs/starlight": "^0.37.0",
+    "@astrojs/starlight-tailwind": "^4.0.2",
     "@orama/wc-components": "^0.8.1",
     "@std/semver": "npm:@jsr/std__semver@1.0.6",
     "@supabase/supabase-js": "^2.76.1",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.14.7",
+    "astro": "^5.16.3",
     "astro-embed": "^0.9.1",
     "astro-heroicons": "^2.1.5-1",
     "astro-i18n-aut": "^0.7.3",
@@ -85,7 +85,7 @@
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "vite-plugin-static-copy": "^3.1.4",
-    "wrangler": "^4.44.0",
+    "wrangler": "^4.51.0",
     "zod": "^3.25.76"
   }
 }

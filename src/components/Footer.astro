@@ -31,14 +31,19 @@ interface NavigationItem {
 }
 
 const navigation: Record<string, NavigationItem[]> = {
+  products: [
+    { name: m.live_update({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'live-update') },
+    { name: m.native_build({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'native-build') },
+    { name: m.app_mobile({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile') },
+    { name: m.plugins({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'plugins') },
+    { name: m.cli_and_api({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'docs/cli') },
+  ],
   solutions: [
     { name: m.register({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'register'), target: '_blank' },
-    { name: m.app_mobile({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'app_mobile') },
     {
       name: m.documentation({}, { locale: Astro.locals.locale }),
       href: getRelativeLocaleUrl(Astro.locals.locale, 'docs'),
     },
-    { name: m.plugins({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'plugins') },
     { name: m.ci_cd_integration({}, { locale: Astro.locals.locale }), href: getRelativeLocaleUrl(Astro.locals.locale, 'ci_cd') },
     {
       name: m.awesome_capacitor({}, { locale: Astro.locals.locale }),
@@ -176,7 +181,19 @@ const navigation: Record<string, NavigationItem[]> = {
     </div>
 
     <!-- Links Grid -->
-    <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-5">
+    <div class="grid grid-cols-2 gap-8 mb-12 md:grid-cols-6">
+      <div>
+        <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.products({}, { locale: Astro.locals.locale })}</h3>
+        <ul role="list" class="space-y-3">
+          {navigation.products.map((item) => (
+            <li>
+              <a href={item.href} target={item.target} class="text-sm transition-colors hover:text-white text-zinc-400">
+                {typeof item.name === 'function' ? item.name() : item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div>
         <h3 class="mb-4 text-sm font-semibold tracking-wider text-white uppercase">{m.solutions({}, { locale: Astro.locals.locale })}</h3>
         <ul role="list" class="space-y-3">

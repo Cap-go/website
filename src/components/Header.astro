@@ -24,6 +24,35 @@ const totalStars = getTotalStars()
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:gap-10 lg:items-center">
         <nav class="flex items-center space-x-8">
+          <!-- Products Dropdown -->
+          <div class="relative group">
+            <button
+              type="button"
+              class="flex items-center text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+              aria-label="Products"
+            >
+              {m.products({}, { locale: Astro.locals.locale })}
+              <svg class="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="absolute left-0 z-50 invisible pt-2 w-48 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+              <div class="py-2 bg-gray-800 rounded-lg border border-gray-700 shadow-xl">
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
+                  class="block px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
+                >
+                  {m.live_update({}, { locale: Astro.locals.locale })}
+                </a>
+                <a
+                  href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
+                  class="block px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-gray-700 hover:text-white"
+                >
+                  {m.native_build({}, { locale: Astro.locals.locale })}
+                </a>
+              </div>
+            </div>
+          </div>
           <a
             href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
             aria-label="Pricing"
@@ -87,50 +116,90 @@ const totalStars = getTotalStars()
   </div>
   <div id="mobile-menu" class="hidden">
     <div class="px-2 pt-2 pb-3 mt-2 space-y-1 bg-gray-700">
+      <!-- GitHub Stars -->
+      <a
+        href={getRelativeLocaleUrl(Astro.locals.locale, 'plugins')}
+        aria-label="GitHub Stars"
+        class="flex gap-2 items-center px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+        </svg>
+        <span>{totalStars}+ Stars</span>
+      </a>
+      <!-- Products Section -->
+      <div class="border-t border-gray-600 pt-2 mt-2">
+        <button
+          type="button"
+          id="products-toggle"
+          class="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
+        >
+          {m.products({}, { locale: Astro.locals.locale })}
+          <svg id="products-chevron" class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="products-submenu" class="hidden pl-4 space-y-1">
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'live-update')}
+            class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
+          >
+            {m.live_update({}, { locale: Astro.locals.locale })}
+          </a>
+          <a
+            href={getRelativeLocaleUrl(Astro.locals.locale, 'native-build')}
+            class="block px-3 py-2 text-sm text-gray-400 rounded-md hover:text-white hover:bg-gray-600"
+          >
+            {m.native_build({}, { locale: Astro.locals.locale })}
+          </a>
+        </div>
+      </div>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'pricing')}
         aria-label={m.pricing({}, { locale: Astro.locals.locale })}
-        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
+        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
       >
-        Pricing
+        {m.pricing({}, { locale: Astro.locals.locale })}
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'enterprise')}
         aria-label={m.enterprise_title({}, { locale: Astro.locals.locale })}
-        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
+        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
       >
-        Enterprise
+        {m.enterprise_title({}, { locale: Astro.locals.locale })}
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'docs')}
         aria-label={m.documentation({}, { locale: Astro.locals.locale })}
-        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
+        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
       >
-        Documentation
+        {m.documentation({}, { locale: Astro.locals.locale })}
       </a>
       <a
         href={getRelativeLocaleUrl(Astro.locals.locale, 'blog')}
         aria-label={m.blog({}, { locale: Astro.locals.locale })}
-        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
+        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
       >
-        Blog
+        {m.blog({}, { locale: Astro.locals.locale })}
       </a>
-      <a
-        href="https://console.capgo.app/login/"
-        target="_blank"
-        aria-label={m.login({}, { locale: Astro.locals.locale })}
-        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
-      >
-        Login
-      </a>
-      <a
-        target="_blank"
-        aria-label={m.register({}, { locale: Astro.locals.locale })}
-        href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
-        class="block px-5 py-2 text-base font-medium leading-7 text-gray-300 transition-all duration-200 bg-gray-900 border border-gray-300 rounded-md hover:text-white hover:bg-gray-500 focus:text-white focus:bg-gray-500 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none font-pj"
-      >
-        Register
-      </a>
+      <div class="border-t border-gray-600 pt-2 mt-2">
+        <a
+          href="https://console.capgo.app/login/"
+          target="_blank"
+          aria-label={m.login({}, { locale: Astro.locals.locale })}
+          class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-600"
+        >
+          {m.login({}, { locale: Astro.locals.locale })}
+        </a>
+        <a
+          target="_blank"
+          aria-label={m.register({}, { locale: Astro.locals.locale })}
+          href={getRelativeLocaleUrl(Astro.locals.locale, 'register')}
+          class="block px-5 py-2 mt-2 text-base font-medium leading-7 text-center text-gray-300 transition-all duration-200 bg-gray-900 border border-gray-300 rounded-md hover:text-white hover:bg-gray-500 focus:text-white focus:bg-gray-500 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none font-pj"
+        >
+          {m.register({}, { locale: Astro.locals.locale })}
+        </a>
+      </div>
     </div>
   </div>
 </header>
@@ -138,8 +207,16 @@ const totalStars = getTotalStars()
 <script>
   const menuToggle = document.getElementById('menu-toggle')
   const mobileMenu = document.getElementById('mobile-menu')
+  const productsToggle = document.getElementById('products-toggle')
+  const productsSubmenu = document.getElementById('products-submenu')
+  const productsChevron = document.getElementById('products-chevron')
 
   menuToggle?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden')
+  })
+
+  productsToggle?.addEventListener('click', () => {
+    productsSubmenu?.classList.toggle('hidden')
+    productsChevron?.classList.toggle('rotate-180')
   })
 </script>
