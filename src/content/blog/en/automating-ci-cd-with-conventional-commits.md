@@ -146,6 +146,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          filter: blob:none
 
       - name: Verify Commits
         uses: wagoid/commitlint-github-action@v5
