@@ -716,7 +716,25 @@ export default defineConfig({
                 { label: 'Apple', autogenerate: { directory: 'docs/plugins/social-login/apple' } },
                 { label: 'Facebook', link: '/docs/plugins/social-login/facebook' },
                 { label: 'Firebase', autogenerate: { directory: 'docs/plugins/social-login/firebase' } },
-                { label: 'Supabase', autogenerate: { directory: 'docs/plugins/social-login/supabase' } },
+                {
+                  label: 'Supabase',
+                  items: [
+                    { label: 'Introduction', link: '/docs/plugins/social-login/supabase/introduction' },
+                    {
+                      label: 'Google',
+                      autogenerate: { directory: 'docs/plugins/social-login/supabase/google' },
+                    },
+                    {
+                      label: 'Apple',
+                      items: [
+                        { label: 'Supabase Apple Login - General Setup', link: '/docs/plugins/social-login/supabase/apple/general' },
+                        { label: 'Supabase Apple Login on iOS Setup', link: '/docs/plugins/social-login/supabase/apple/ios' },
+                        { label: 'Supabase Apple Login on Android Setup', link: '/docs/plugins/social-login/supabase/apple/android' },
+                        { label: 'Supabase Apple Login on Web Setup', link: '/docs/plugins/social-login/supabase/apple/web' },
+                      ],
+                    },
+                  ],
+                },
                 { label: 'Migrations', autogenerate: { directory: 'docs/plugins/social-login/migrations' } },
               ],
               collapsed: true,
