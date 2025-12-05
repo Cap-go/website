@@ -188,5 +188,9 @@ export class FlashlightService {
 - Intensity control not supported (uses default brightness)
 
 ### Web
-- Not supported on web platform
-- Will return `isAvailable: false`
+- Supported on browsers with MediaDevices API and torch capability
+- Uses the camera stream to access the device's flashlight
+- Requires user permission to access the camera
+- Works best on mobile browsers (Chrome on Android)
+- Desktop browsers typically return `isAvailable: false` (no torch hardware)
+- Intensity control not supported on web
