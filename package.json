@@ -10,7 +10,7 @@
     "fetch:downloads": "bun run scripts/fetch-npm-downloads.ts",
     "just:build": "astro build",
     "generate:plugins-readme": "bun run scripts/generate-plugins-readme.ts",
-    "build": "bun run fetch:stars && bun run fetch:downloads && bun run generate:plugins-readme && bun run fix_code_languages_all && astro build && bun run repair_sitemap",
+    "build": "export NODE_OPTIONS=--max-old-space-size=6144; bun run fetch:stars && bun run fetch:downloads && bun run generate:plugins-readme && bun run fix_code_languages_all && astro build && bun run repair_sitemap",
     "preview": "wrangler dev",
     "types": "npx --yes supabase gen types typescript --project-id=xvwzpoazmxkqosrdewyv > src/services/supabase.types.ts",
     "fmt": "prettier --write '**/*' --ignore-unknown",
