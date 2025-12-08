@@ -1,5 +1,7 @@
 ---
 import * as m from '@/paraglide/messages'
+
+const locale = Astro.locals.locale
 ---
 
 <section class="overflow-hidden relative pt-24 sm:py-32 bg-[#1a1a1a]">
@@ -19,12 +21,13 @@ import * as m from '@/paraglide/messages'
   <div class="relative px-6 mx-auto max-w-7xl lg:px-8">
     <!-- Header -->
     <div class="mx-auto mb-16 max-w-2xl text-center">
-      <h2 class="text-sm font-semibold tracking-wide leading-7 uppercase text-[#44BCFF]">Problem &rarr; Solution</h2>
+      <h2 class="text-sm font-semibold tracking-wide leading-7 uppercase text-[#44BCFF]">{m.problem_solution_badge({}, { locale })}</h2>
       <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-5xl">
-        The App Store is killing<br />your <span class="underline decoration-[#44BCFF] underline-offset-4">velocity</span>.
+        {m.problem_solution_title({}, { locale })}<br />
+        <span class="underline decoration-[#44BCFF] underline-offset-4">{m.problem_solution_velocity({}, { locale })}</span>
       </p>
       <p class="mt-6 text-lg leading-8 text-gray-400">
-        Capacitor apps should ship like web apps, but waiting days<br />for approval is the bottleneck.
+        {m.problem_solution_subtitle({}, { locale })}
       </p>
     </div>
 
@@ -53,17 +56,17 @@ import * as m from '@/paraglide/messages'
             <div class="flex gap-3">
                 <div class="flex justify-center items-center w-8 h-8 text-xs font-bold text-gray-400 bg-gray-800 rounded-full">A</div>
                 <div class="py-2 px-4 text-gray-200 rounded-2xl rounded-tl-none bg-[#222]">
-                    whats the app status?
+                    {m.problem_chat_whats_status({}, { locale })}
                 </div>
             </div>
 
             <!-- Right Message -->
             <div class="flex flex-col gap-2 items-end">
                 <div class="py-2 px-4 text-white rounded-2xl rounded-tr-none bg-[#D34545]">
-                    Still pending...
+                    {m.problem_chat_still_pending({}, { locale })}
                 </div>
                 <div class="py-2 px-4 text-white rounded-2xl rounded-tr-none bg-[#D34545]">
-                    I hope this bug fix get<br/>approved today...
+                    {m.problem_chat_hope_approved({}, { locale })}
                 </div>
                  <div class="flex justify-end mt-1">
                     <div class="flex justify-center items-center w-6 h-6 text-sm rounded-full bg-[#D34545]/20">
@@ -96,17 +99,17 @@ import * as m from '@/paraglide/messages'
             <div class="flex gap-3">
                 <div class="flex justify-center items-center w-8 h-8 text-xs font-bold text-gray-400 bg-gray-800 rounded-full">A</div>
                 <div class="py-2 px-4 text-white rounded-2xl rounded-tl-none bg-[#3B82F6]">
-                    whats the app status?
+                    {m.solution_chat_whats_status({}, { locale })}
                 </div>
             </div>
 
             <!-- Right Message -->
             <div class="flex flex-col gap-2 items-end">
                 <div class="py-2 px-4 text-white rounded-2xl rounded-tr-none bg-[#3B82F6]">
-                    Shipped. Next.
+                    {m.solution_chat_shipped({}, { locale })}
                 </div>
                 <div class="py-2 px-4 text-white rounded-2xl rounded-tr-none bg-[#3B82F6]">
-                    My users already have it. 🚀
+                    {m.solution_chat_users_have_it({}, { locale })}
                 </div>
                  <div class="flex justify-end mt-1">
                     <div class="flex justify-center items-center w-6 h-6 text-sm rounded-full bg-blue-500/20">

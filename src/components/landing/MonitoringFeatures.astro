@@ -7,12 +7,12 @@ const locale = Astro.locals.locale
 <div class="py-24 sm:py-32 bg-[#1a1a1a]">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center mb-16">
-      <h2 class="font-mono text-base font-semibold leading-7 text-[#44BCFF]">{m.landing_monitoring_subtitle()}</h2>
+      <h2 class="font-mono text-base font-semibold leading-7 text-[#44BCFF]">{m.landing_monitoring_subtitle({}, { locale })}</h2>
       <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-        {m.landing_monitoring_title()}
+        {m.landing_monitoring_title({}, { locale })}
       </p>
       <p class="mt-6 text-lg leading-8 text-gray-400">
-        {m.landing_monitoring_description()}
+        {m.landing_monitoring_description({}, { locale })}
       </p>
     </div>
 
@@ -20,10 +20,10 @@ const locale = Astro.locals.locale
       <!-- Card 1: User Population -->
       <div class="bg-white/5 rounded-2xl p-8 border border-white/10 flex flex-col">
         <h3 class="text-lg font-semibold mb-2 text-white">
-          {m.landing_monitoring_user_pop()}
+          {m.landing_monitoring_user_pop({}, { locale })}
         </h3>
         <p class="text-gray-400 text-sm mb-6">
-          {m.landing_monitoring_user_pop_desc()}
+          {m.landing_monitoring_user_pop_desc({}, { locale })}
         </p>
         
         <div class="mt-auto space-y-6">
@@ -74,10 +74,10 @@ const locale = Astro.locals.locale
       <!-- Card 2: Bandwidth & Storage -->
       <div class="bg-white/5 rounded-2xl p-8 border border-white/10 flex flex-col">
         <h3 class="text-lg font-semibold mb-2 text-white">
-          {m.landing_monitoring_bandwidth()}
+          {m.landing_monitoring_bandwidth({}, { locale })}
         </h3>
         <p class="text-gray-400 text-sm mb-6">
-          {m.landing_monitoring_bandwidth_desc()}
+          {m.landing_monitoring_bandwidth_desc({}, { locale })}
         </p>
         
         <div class="mt-auto h-48 relative">
@@ -115,10 +115,10 @@ const locale = Astro.locals.locale
       <!-- Card 3: Update Statistics -->
       <div class="bg-white/5 rounded-2xl p-8 border border-white/10 flex flex-col">
         <h3 class="text-lg font-semibold mb-2 text-white">
-          {m.landing_monitoring_updates()}
+          {m.landing_monitoring_updates({}, { locale })}
         </h3>
         <p class="text-gray-400 text-sm mb-6">
-          {m.landing_monitoring_updates_desc()}
+          {m.landing_monitoring_updates_desc({}, { locale })}
         </p>
         
         <div class="mt-auto h-48 relative flex items-end justify-between gap-1">

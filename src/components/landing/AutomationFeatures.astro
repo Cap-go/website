@@ -1,5 +1,7 @@
 ---
 import * as m from '@/paraglide/messages';
+
+const locale = Astro.locals.locale
 ---
 
 <div class="py-24 sm:py-32 bg-[#1a1a1a] automation-diagram">
@@ -50,12 +52,12 @@ import * as m from '@/paraglide/messages';
   </script>
   <div class="px-6 mx-auto max-w-7xl lg:px-8">
     <div class="max-w-2xl mx-auto mb-16 text-center">
-      <h2 class="font-mono text-base font-semibold leading-7 text-[#44BCFF]">{m.landing_automation_subtitle()}</h2>
+      <h2 class="font-mono text-base font-semibold leading-7 text-[#44BCFF]">{m.landing_automation_subtitle({}, { locale })}</h2>
       <h2 class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-        {m.landing_automation_title()}
+        {m.landing_automation_title({}, { locale })}
       </h2>
       <p class="mt-6 text-lg leading-8 text-gray-400">
-        {m.landing_automation_description()}
+        {m.landing_automation_description({}, { locale })}
       </p>
     </div>
 
@@ -100,7 +102,7 @@ import * as m from '@/paraglide/messages';
           <g filter="url(#card_shadow)">
             <rect x="280" y="141.664" width="153" height="62" rx="12.4516" fill="#252525"></rect>
             <rect x="280.328" y="141.992" width="152.345" height="61.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
-            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="333.858" y="179.883">{m.landing_automation_build()}</tspan></text>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="333.858" y="179.883">{m.landing_automation_build({}, { locale })}</tspan></text>
             <path d="M318.8 180.306L315.527 177.033M317.295 172.782C317.295 176.106 314.6 178.801 311.276 178.801C307.952 178.801 305.257 176.106 305.257 172.782C305.257 169.458 307.952 166.763 311.276 166.763C314.6 166.763 317.295 169.458 317.295 172.782Z" stroke="#9CA3AF" stroke-width="1.50482" stroke-linecap="round" stroke-linejoin="round"></path>
           </g>
 
@@ -109,7 +111,7 @@ import * as m from '@/paraglide/messages';
             <g clip-path="url(#clip0_4538_722)">
               <rect x="10" y="79.1582" width="222" height="179" rx="12.4516" fill="#252525"></rect>
               <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em"><tspan x="29.2607" y="157.15">On every</tspan></text>
-              <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="500" letter-spacing="-0.005em"><tspan x="29.2607" y="106.923">{m.landing_automation_deploy()}</tspan></text>
+              <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="500" letter-spacing="-0.005em"><tspan x="29.2607" y="106.923">{m.landing_automation_deploy({}, { locale })}</tspan></text>
               <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em"><tspan x="29.2607" y="193.249">on branch</tspan></text>
               <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em"><tspan x="29.2607" y="241.704">Enabled</tspan></text>
               <g>
@@ -169,7 +171,7 @@ import * as m from '@/paraglide/messages';
           <g filter="url(#card_shadow)">
             <rect x="811" y="8" width="303" height="84" rx="12.4516" fill="#252525"></rect>
             <rect x="811.328" y="8.32767" width="302.345" height="83.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
-            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="864.858" y="46.2186">{m.landing_automation_submit()}</tspan></text>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="864.858" y="46.2186">{m.landing_automation_submit({}, { locale })}</tspan></text>
             <text class="reveal-initial reveal-delay-2" fill="#9CA3AF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em" opacity="1"><tspan x="864.858" y="68.2491">Duration: 5m 42s</tspan></text>
             <g class="reveal-initial reveal-delay-2" clip-path="url(#clip4_4538_722)" opacity="1">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M843.875 32.2324C838.813 32.2324 834.709 36.3363 834.709 41.3988C834.709 46.4612 838.813 50.5651 843.875 50.5651C848.938 50.5651 853.042 46.4612 853.042 41.3988C853.042 36.3363 848.938 32.2324 843.875 32.2324ZM848.214 39.4881C848.54 39.1627 848.54 38.6351 848.214 38.3096C847.889 37.9842 847.361 37.9842 847.036 38.3096L842.625 42.7202L840.715 40.8095C840.389 40.4841 839.862 40.4841 839.536 40.8095C839.211 41.135 839.211 41.6626 839.536 41.988L842.036 44.4879C842.362 44.8134 842.889 44.8134 843.215 44.4879L848.214 39.4881Z" fill="#4ADE80"></path>
@@ -180,7 +182,7 @@ import * as m from '@/paraglide/messages';
           <g filter="url(#card_shadow)">
             <rect x="811" y="108" width="303" height="84" rx="12.4516" fill="#252525"></rect>
             <rect x="811.328" y="108.328" width="302.345" height="83.3447" rx="12.1239" stroke="#333333" stroke-width="0.655348"></rect>
-            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="864.859" y="146.719">{m.landing_automation_submit()}</tspan></text>
+            <text fill="#FFFFFF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="500" letter-spacing="-0.005em"><tspan x="864.859" y="146.719">{m.landing_automation_submit({}, { locale })}</tspan></text>
             <text class="reveal-initial reveal-delay-2" fill="#9CA3AF" xml:space="preserve" style="white-space:pre" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" letter-spacing="0em" opacity="1"><tspan x="864.859" y="168.749">Duration: 9m 54s</tspan></text>
             <g class="reveal-initial reveal-delay-2" clip-path="url(#clip5_4538_722)" opacity="1">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M843.875 131.773C838.813 131.773 834.709 135.877 834.709 140.94C834.709 146.002 838.813 150.106 843.875 150.106C848.938 150.106 853.042 146.002 853.042 140.94C853.042 135.877 848.938 131.773 843.875 131.773ZM848.214 139.029C848.54 138.704 848.54 138.176 848.214 137.851C847.889 137.525 847.361 137.525 847.036 137.851L842.625 142.261L840.715 140.351C840.389 140.025 839.862 140.025 839.536 140.351C839.211 140.676 839.211 141.204 839.536 141.529L842.036 144.029C842.362 144.354 842.889 144.354 843.215 144.029L848.214 139.029Z" fill="#4ADE80"></path>

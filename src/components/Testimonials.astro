@@ -1,6 +1,8 @@
 ---
 import * as m from '@/paraglide/messages'
 
+const locale = Astro.locals.locale
+
 // Define featured testimonial
 const featuredTestimonial = {
   author: {
@@ -121,7 +123,7 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
 
 <section class="relative pt-24 pb-32 sm:pt-32 isolate bg-[#1a1a1a]">
   <!-- Background effects -->
-  <div class="overflow-hidden absolute inset-x-0 top-1/2 opacity-30 transform-gpu -translate-y-1/2 -z-10 blur-3xl" aria-hidden="true">
+  <div class="absolute inset-x-0 overflow-hidden -translate-y-1/2 top-1/2 opacity-30 transform-gpu -z-10 blur-3xl" aria-hidden="true">
     <div
       class="ml-[max(50%,38rem)] aspect-1313/771 w-328.25 bg-linear-to-tr from-indigo-500 to-blue-500"
       style="
@@ -147,7 +149,7 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
     >
     </div>
   </div>
-  <div class="flex overflow-hidden absolute inset-x-0 top-0 pt-32 opacity-25 transform-gpu sm:pt-40 xl:justify-end -z-10 blur-3xl" aria-hidden="true">
+  <div class="absolute inset-x-0 top-0 flex pt-32 overflow-hidden opacity-25 transform-gpu sm:pt-40 xl:justify-end -z-10 blur-3xl" aria-hidden="true">
     <div
       class="-ml-88 aspect-1313/771 w-328.25 flex-none origin-top-right rotate-30 bg-linear-to-tr from-indigo-500 to-blue-500 xl:mr-[calc(50%-12rem)] xl:ml-0"
       style="
@@ -175,73 +177,15 @@ const messageFormatter = (message: string) => message.replace(/(@\w+)/g, '<span 
   </div>
 
   <div class="px-6 mx-auto max-w-7xl lg:px-8">
-    <!-- <div class="mx-auto max-w-2xl text-center">
-      <h2 class="font-semibold text-indigo-400 text-base/7">Testimonials</h2>
-      <p class="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl text-balance">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="mt-2 text-4xl font-semibold tracking-tight text-white sm:text-5xl text-balance">
         {m.they_love_capgo({}, { locale: Astro.locals.locale })}
+      </h2>
+      <p class="mt-6 mb-2 text-lg text-center whitespace-pre-line text-white/70">
+        {m.From_indie_devs_to({}, { locale: Astro.locals.locale })}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 grid-rows-1 gap-8 mx-auto mt-16 max-w-2xl text-gray-300 sm:grid-cols-2 sm:mt-20 xl:grid-cols-4 xl:grid-flow-col xl:mx-0 xl:max-w-none text-sm/6">
-      <figure class="bg-gray-800 rounded-2xl ring-1 ring-gray-700 shadow-lg sm:col-span-2 xl:col-start-2 xl:row-end-1">
-        <blockquote class="p-6 tracking-tight text-white sm:p-12 text-lg/4 sm:text-xl/8">
-          <p set:html={messageFormatter(featuredTestimonial.body)} />
-        </blockquote>
-        <figcaption class="flex flex-wrap gap-x-4 gap-y-4 items-center py-4 px-6 border-t border-gray-700 sm:flex-nowrap">
-          <img class="flex-none bg-gray-800 rounded-full size-10" src={featuredTestimonial.author.imageUrl} alt={featuredTestimonial.author.name} />
-          <div class="flex-auto">
-            <div class="font-semibold text-white">{featuredTestimonial.author.name}</div>
-            <div class="text-gray-400">@{featuredTestimonial.author.handle}</div>
-          </div>
-          <div class="size-5">
-            <svg viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
-                fill="white"></path>
-            </svg>
-          </div>
-        </figcaption>
-      </figure>
-
-      {
-        testimonials.map((columnGroup, columnGroupIdx) => (
-          <div class="space-y-8 xl:contents xl:space-y-0">
-            {columnGroup.map((column, columnIdx) => (
-              <div
-                class={`${
-                  (columnGroupIdx === 0 && columnIdx === 0) || (columnGroupIdx === testimonials.length - 1 && columnIdx === columnGroup.length - 1)
-                    ? 'xl:row-span-2'
-                    : 'xl:row-start-1'
-                } space-y-8`}
-              >
-                {column.map((testimonial) => (
-                  <figure class="p-6 bg-gray-800 rounded-2xl ring-1 ring-gray-700 shadow-lg">
-                    <blockquote class="text-white">
-                      <p set:html={messageFormatter(testimonial.body)} />
-                    </blockquote>
-                    <figcaption class="flex gap-x-4 items-center mt-6">
-                      <img class="bg-gray-800 rounded-full size-10" src={testimonial.author.imageUrl} alt={testimonial.author.name} />
-                      <div>
-                        <div class="font-semibold text-white">{testimonial.author.name}</div>
-                        <div class="text-gray-400">@{testimonial.author.handle}</div>
-                      </div>
-                      <div class="ml-auto size-4">
-                        <svg viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
-                            fill="white"
-                          />
-                        </svg>
-                      </div>
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            ))}
-          </div>
-        ))
-      }
-    </div> -->
     <iframe id="wall-of-love-eEqRvoc" src="https://senja.io/p/capgo/love-embed?hideNavigation=true&embed=true" aria-label="Wall of Love" frameborder="0" scrolling="no" width="100%"
     ></iframe>
     <script type="text/javascript">
