@@ -26,7 +26,7 @@ También puedes asignar un dispositivo directamente a un paquete
 
 ## Opciones de canal
 
-<figure><img src="/channel_setting_1.webp" alt=""><figcaption></figcaption></figure>
+<figure><img src="/channel_setting_1.webp" alt="Capgo channel settings configuration panel"><figcaption></figcaption></figure>
 
 Detalles de cada opción:
 

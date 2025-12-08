@@ -26,7 +26,7 @@ Capgo와 capacitor-updater는 강력한 채널 시스템을 제공합니다
 
 ## 채널 옵션
 
-<figure><img src="/channel_setting_1.webp" alt=""><figcaption></figcaption></figure>
+<figure><img src="/channel_setting_1.webp" alt="Capgo channel settings configuration panel"><figcaption></figcaption></figure>
 
 각 옵션에 대한 설명:
 

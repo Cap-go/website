@@ -26,7 +26,7 @@ Vous pouvez également assigner un appareil directement à un bundle
 
 ## Options du canal
 
-<figure><img src="/channel_setting_1.webp" alt=""><figcaption></figcaption></figure>
+<figure><img src="/channel_setting_1.webp" alt="Capgo channel settings configuration panel"><figcaption></figcaption></figure>
 
 Détails de chaque option :
 
