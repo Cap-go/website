@@ -1578,7 +1578,7 @@
   "live_update_dynamic_label_staging": "staging",
   "live_update_dynamic_label_to": "to",
   "live_update_dynamic_panel_footer": "Treat environments like feature flags: switch, test, and rollback live (no store resubmissions).",
-  "live_update_dynamic_title": "Switch release tracks live (no new binary)",
+  "live_update_dynamic_title": "实时切换发布轨道（无需新二进制）",
   "live_update_exclusion_1": "(i) 不适当地为您的项目提供预期负载相关的计算资源。",
   "live_update_exclusion_2": "(ii) 由过于宽松的速率限制配置引起的停机。",
   "live_update_exclusion_3": "(iii) 由于撤回官方Capgo库、框架、软件包或API的版本而导致的停机或问题，包括因识别到安全漏洞而紧急撤回。",

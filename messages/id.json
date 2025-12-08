@@ -1578,7 +1578,7 @@
   "live_update_dynamic_label_staging": "staging",
   "live_update_dynamic_label_to": "to",
   "live_update_dynamic_panel_footer": "Treat environments like feature flags: switch, test, and rollback live (no store resubmissions).",
-  "live_update_dynamic_title": "Switch release tracks live (no new binary)",
+  "live_update_dynamic_title": "Ganti track rilis secara live (tanpa binary baru)",
   "live_update_exclusion_1": "(i) Sumber daya komputasi yang disediakan secara tidak tepat terkait dengan proyek Anda untuk beban yang diharapkan.",
   "live_update_exclusion_2": "(ii) Gangguan yang disebabkan oleh konfigurasi batas laju yang terlalu longgar.",
   "live_update_exclusion_3": "(iii) Gangguan atau masalah yang disebabkan oleh versi resmi Capgo yang ditarik kembali, pustaka, kerangka kerja, paket perangkat lunak, atau API, termasuk penarikan mendesak karena adanya kerentanan keamanan yang teridentifikasi.",

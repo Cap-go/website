@@ -1578,7 +1578,7 @@
   "live_update_dynamic_label_staging": "staging",
   "live_update_dynamic_label_to": "to",
   "live_update_dynamic_panel_footer": "Treat environments like feature flags: switch, test, and rollback live (no store resubmissions).",
-  "live_update_dynamic_title": "Switch release tracks live (no new binary)",
+  "live_update_dynamic_title": "릴리즈 트랙을 실시간 전환 (새 바이너리 불필요)",
   "live_update_exclusion_1": "(i) 예상 부하에 대해 프로젝트와 관련된 컴퓨팅 리소스가 부적절하게 프로비저닝되었습니다.",
   "live_update_exclusion_2": "(ii) 지나치게 관대한 요청 속도 제한 구성으로 인한 서비스 중단.",
   "live_update_exclusion_3": "(iii) 확인된 보안 취약점으로 인한 긴급 철회를 포함하여, 공식 Capgo 라이브러리, 프레임워크, 소프트웨어 패키지 또는 API의 철회된 버전으로 인한 중단 또는 문제.",

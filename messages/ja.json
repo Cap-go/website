@@ -1578,7 +1578,7 @@
   "live_update_dynamic_label_staging": "staging",
   "live_update_dynamic_label_to": "to",
   "live_update_dynamic_panel_footer": "Treat environments like feature flags: switch, test, and rollback live (no store resubmissions).",
-  "live_update_dynamic_title": "Switch release tracks live (no new binary)",
+  "live_update_dynamic_title": "リリーストラックをライブで切り替え（新しいバイナリ不要）",
   "live_update_exclusion_1": "(i) 予想される負荷に対して、あなたのプロジェクトに関連する不適切に提供されたコンピューティングリソース。",
   "live_update_exclusion_2": "（ii）過度に許容的なレート制限設定によって引き起こされる障害。",
   "live_update_exclusion_3": "(iii) 公的なCapgoライブラリ、フレームワーク、ソフトウェアパッケージ、またはAPIの撤回されたバージョンによって引き起こされる障害や問題、特に特定されたセキュリティ脆弱性に起因する緊急の撤回を含みます。",

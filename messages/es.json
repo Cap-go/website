@@ -1578,7 +1578,7 @@
   "live_update_dynamic_label_staging": "staging",
   "live_update_dynamic_label_to": "to",
   "live_update_dynamic_panel_footer": "Treat environments like feature flags: switch, test, and rollback live (no store resubmissions).",
-  "live_update_dynamic_title": "Switch release tracks live (no new binary)",
+  "live_update_dynamic_title": "Cambia pistas de lanzamiento en vivo (sin binario nuevo)",
   "live_update_exclusion_1": "(i) Recursos de computación provisionados de manera inapropiada relacionados con su proyecto para la carga esperada.",
   "live_update_exclusion_2": "(ii) Cortes causados por configuraciones de limitación de tasa demasiado permisivas.",
   "live_update_exclusion_3": "(iii) Interrupciones o problemas causados por versiones retractadas de bibliotecas, marcos de trabajo, paquetes de software o API oficiales de Capgo, incluidas retractaciones urgentes debido a vulnerabilidades de seguridad identificadas.",
