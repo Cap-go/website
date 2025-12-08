@@ -1,0 +1,322 @@
+---
+title: 快速入门
+locale: zh
+description: 学习如何安装和使用 Printer 插件从 Capacitor 应用打印内容。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+导入插件并打印各种类型的内容：
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+// 打印 HTML 内容
+const printHTML = async () => {
+  await Printer.print({
+    content: '<h1>Hello World</h1><p>这是一个测试打印。</p>',
+    name: 'test-print'
+  });
+};
+
+// 打印 PDF 文件
+const printPDF = async () => {
+  await Printer.print({
+    content: 'file:///path/to/document.pdf',
+    name: 'my-document'
+  });
+};
+
+// 打印图片
+const printImage = async () => {
+  await Printer.print({
+    content: 'file:///path/to/image.jpg',
+    name: 'my-image'
+  });
+};
+```
+
+## API 参考
+
+### print(options)
+
+使用指定的内容打开原生打印对话框。
+
+```typescript
+interface PrintOptions {
+  content: string;          // HTML 字符串、文件 URI 或 base64 数据
+  name?: string;            // 打印作业名称
+  orientation?: 'portrait' | 'landscape';
+  grayscale?: boolean;      // 以灰度打印（默认：false）
+}
+
+await Printer.print(options);
+```
+
+### canPrint()
+
+检查设备上是否可以打印。
+
+```typescript
+const { value } = await Printer.canPrint();
+console.log('打印可用:', value);
+```
+
+## 完整示例
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+
+export class PrintService {
+  async checkPrintAvailability(): Promise<boolean> {
+    const { value } = await Printer.canPrint();
+    return value;
+  }
+
+  async printHTML(htmlContent: string, jobName: string = 'Document') {
+    try {
+      const canPrint = await this.checkPrintAvailability();
+      if (!canPrint) {
+        throw new Error('此设备上不可用打印功能');
+      }
+
+      await Printer.print({
+        content: htmlContent,
+        name: jobName,
+        orientation: 'portrait'
+      });
+    } catch (error) {
+      console.error('打印失败:', error);
+      throw error;
+    }
+  }
+
+  async printDocument(filePath: string, jobName?: string) {
+    await Printer.print({
+      content: filePath,
+      name: jobName || 'Document'
+    });
+  }
+
+  async printReceipt(receiptData: any) {
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            .header { text-align: center; margin-bottom: 20px; }
+            .item { display: flex; justify-content: space-between; margin: 10px 0; }
+            .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; padding-top: 10px; border-top: 2px solid #000; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h2>收据</h2>
+            <p>日期: ${new Date().toLocaleDateString()}</p>
+          </div>
+          ${receiptData.items.map((item: any) => `
+            <div class="item">
+              <span>${item.name}</span>
+              <span>$${item.price.toFixed(2)}</span>
+            </div>
+          `).join('')}
+          <div class="total">
+            <div class="item">
+              <span>总计:</span>
+              <span>$${receiptData.total.toFixed(2)}</span>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    await this.printHTML(html, 'Receipt');
+  }
+
+  async printFromURL(url: string) {
+    // 首先下载文件
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const reader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+      reader.onloadend = async () => {
+        try {
+          await Printer.print({
+            content: reader.result as string,
+            name: 'Downloaded Document'
+          });
+          resolve(true);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+}
+```
+
+## 高级用法
+
+### 使用自定义样式打印
+
+```typescript
+const printStyledDocument = async () => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          @page {
+            size: A4;
+            margin: 2cm;
+          }
+          body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+          }
+          h1 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+          }
+          .content {
+            margin-top: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>专业文档</h1>
+        <div class="content">
+          <p>这是一个准备好打印的专业样式文档。</p>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Styled Document',
+    orientation: 'portrait'
+  });
+};
+```
+
+### 打印表格
+
+```typescript
+const printTable = async (data: any[]) => {
+  const tableRows = data.map(row => `
+    <tr>
+      <td>${row.id}</td>
+      <td>${row.name}</td>
+      <td>${row.value}</td>
+    </tr>
+  `).join('');
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+          }
+        </style>
+      </head>
+      <body>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>名称</th>
+              <th>值</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRows}
+          </tbody>
+        </table>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Data Table'
+  });
+};
+```
+
+### 打印图片
+
+```typescript
+const printImageWithDetails = async (imagePath: string, title: string) => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body { text-align: center; padding: 20px; }
+          h2 { margin-bottom: 20px; }
+          img { max-width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>
+        <h2>${title}</h2>
+        <img src="${imagePath}" alt="${title}" />
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: title
+  });
+};
+```
+
+## 最佳实践
+
+1. **检查可用性**: 在尝试打印之前始终检查打印是否可用
+2. **有效内容**: 确保 HTML 格式良好且文件路径有效
+3. **作业名称**: 使用描述性名称来帮助用户识别打印作业
+4. **样式**: 使用内联 CSS 或嵌入式样式以确保打印输出一致
+5. **错误处理**: 将打印调用包装在 try-catch 块中以提供用户反馈
+
+## 故障排除
+
+### 常见问题
+
+**打印对话框未出现**: 使用 canPrint() 检查打印是否可用
+**内容未打印**: 验证 HTML 有效且文件路径正确
+**图片未显示**: 确保图片路径是绝对路径且文件可访问
+**样式问题**: 使用 @page CSS 规则并测试打印输出

@@ -1,0 +1,122 @@
+---
+title: "@capgo/capacitor-is-root"
+description: Plugin deteksi root dan jailbreak untuk aplikasi Capacitor dengan pemeriksaan keamanan komprehensif dan validasi integritas perangkat.
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Deteksi perangkat Android yang di-root dan perangkat iOS yang di-jailbreak untuk meningkatkan keamanan aplikasi dan melindungi data sensitif.
+  image:
+    file: ~public/icons/plugins/is-root.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/is-root/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-is-root/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Ringkasan
+
+Plugin Capacitor Is Root menyediakan deteksi root dan jailbreak yang komprehensif untuk perangkat Android dan deteksi emulator. Plugin ini membantu meningkatkan keamanan aplikasi dengan mengidentifikasi perangkat yang disusupi dan lingkungan teremulasi yang mungkin menimbulkan risiko keamanan.
+
+<CardGrid stagger>
+  <Card title="Deteksi root" icon="rocket">
+    Deteksi root Android lanjutan dengan berbagai metode 🔒
+  </Card>
+  <Card title="Deteksi emulator" icon="approve-check">
+    Identifikasi lingkungan teremulasi dan framework pengujian 🛡️
+  </Card>
+  <Card title="Validasi keamanan" icon="approve-check">
+    Berbagai teknik deteksi untuk akurasi yang ditingkatkan ✅
+  </Card>
+  <Card title="Fokus Android" icon="laptop">
+    Deteksi khusus untuk penilaian keamanan Android 🤖
+  </Card>
+</CardGrid>
+
+## Instalasi
+
+```bash
+npm install @capgo/capacitor-is-root
+npx cap sync
+```
+
+## Metode API Inti
+
+### Deteksi Root
+- `isRooted()` - Melakukan deteksi root komprehensif menggunakan metode default
+- `isRootedWithBusyBox()` - Deteksi diperluas termasuk pemeriksaan BusyBox
+- `detectRootManagementApps()` - Mengidentifikasi aplikasi manajemen root yang terinstal
+- `checkForSuBinary()` - Memeriksa keberadaan binary `su` di jalur sistem
+
+### Deteksi Emulator
+- `isRunningOnEmulator()` - Mendeteksi sidik jari emulator Android umum
+
+## Teknik Deteksi
+
+Plugin menggunakan beberapa metode deteksi:
+
+### Deteksi Root
+- Memeriksa aplikasi manajemen root (SuperSU, Magisk, dll.)
+- Memindai properti sistem yang mencurigakan
+- Mengidentifikasi tag build tes dan flag debug
+- Memvalidasi lokasi binary yang berbahaya
+- Memeriksa izin jalur sistem
+
+### Deteksi Emulator
+- Analisis sidik jari hardware
+- Inspeksi properti build
+- Karakteristik khusus emulator
+- Indikator lingkungan virtual
+
+## Contoh Penggunaan
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// Deteksi root dasar
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('Perangkat di-root');
+  // Tangani perangkat yang di-root dengan tepat
+}
+
+// Deteksi root diperluas dengan BusyBox
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('Perangkat di-root (pemeriksaan diperluas)');
+}
+
+// Periksa emulator
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('Berjalan di emulator');
+}
+
+// Deteksi aplikasi manajemen root
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('Aplikasi manajemen root terdeteksi');
+}
+```
+
+## Pertimbangan Keamanan
+
+- Gunakan beberapa metode deteksi untuk akurasi lebih tinggi
+- Implementasikan degradasi yang anggun untuk lingkungan yang terdeteksi
+- Pertimbangkan privasi pengguna saat menerapkan langkah-langkah keamanan
+- Pembaruan rutin direkomendasikan karena metode deteksi berkembang
+
+## Dokumentasi
+
+Periksa [dokumentasi lengkap](/docs/plugins/is-root/getting-started/) untuk panduan implementasi terperinci dan pola keamanan lanjutan.

@@ -1,0 +1,129 @@
+---
+title: Getting Started
+description: Configure Apple Pay and Google Pay for your Capacitor checkout with the Pay plugin.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the plugin**
+   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Native prerequisites
+
+- **Apple Pay (iOS)**
+  1. Create an Apple Pay merchant ID in the Apple Developer portal.
+  2. Generate and upload the payment processing certificate required by your gateway.
+  3. Enable the **Apple Pay** capability in Xcode and make sure your provisioning profile includes it.
+  4. Update `Info.plist` with a usage description if your gateway requires network access to validate payments.
+
+- **Google Pay (Android)**
+  1. Sign in to the [Google Pay Business Console](https://pay.google.com/business/console/).
+  2. Configure your payment gateway parameters or set up direct tokenization for testing.
+  3. If you plan to use production cards, switch `environment` to `PRODUCTION` and register test cards for QA.
+  4. Confirm that Google Play services are available on the device (required by Google Pay).
+
+Refer to the guides under `docs/` in the plugin repository for step-by-step screenshots.
+
+## Check availability
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const availability = await Pay.isPayAvailable({
+  apple: { supportedNetworks: ['visa', 'masterCard', 'amex'] },
+  google: {
+    isReadyToPayRequest: {
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+          },
+        },
+      ],
+    },
+  },
+});
+
+if (!availability.available) {
+  console.warn('Native pay unavailable:', availability);
+}
+```
+
+## Request payment (Apple Pay)
+
+```typescript
+const appleResult = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant.com.example.app',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    supportedNetworks: ['visa', 'masterCard'],
+    paymentSummaryItems: [
+      { label: 'Starter Plan', amount: '9.99' },
+      { label: 'Capgo Store', amount: '9.99' },
+    ],
+    requiredShippingContactFields: ['name', 'emailAddress'],
+  },
+});
+
+const token = appleResult.apple?.paymentData;
+```
+
+## Request payment (Google Pay)
+
+```typescript
+const googleResult = await Pay.requestPayment({
+  google: {
+    environment: 'test',
+    paymentDataRequest: {
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            billingAddressRequired: true,
+            billingAddressParameters: { format: 'FULL' },
+          },
+          tokenizationSpecification: {
+            type: 'PAYMENT_GATEWAY',
+            parameters: {
+              gateway: 'example',
+              gatewayMerchantId: 'exampleMerchantId',
+            },
+          },
+        },
+      ],
+      merchantInfo: {
+        merchantName: 'Capgo Store',
+      },
+      transactionInfo: {
+        totalPriceStatus: 'FINAL',
+        totalPrice: '9.99',
+        currencyCode: 'USD',
+        countryCode: 'US',
+      },
+    },
+  },
+});
+
+const paymentData = googleResult.google?.paymentData;
+```
+
+## Handling responses
+
+- Tokenize the returned payload with your payment processor and confirm the transaction server-side.
+- Surface a fallback path (card entry, invoice) if native pay is unavailable or the user cancels the sheet.
+- Cache the availability result so you do not display the buttons on unsupported devices.

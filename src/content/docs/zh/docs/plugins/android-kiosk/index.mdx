@@ -1,0 +1,51 @@
+---
+title: "@capgo/capacitor-android-kiosk"
+locale: zh
+description: 适用于 Capacitor 的 Android 自助服务终端模式插件 - 使用启动器功能将设备锁定到自助服务终端模式
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 为您的 Capacitor 应用将 Android 设备锁定到自助服务终端模式，完全控制硬件按钮和启动器功能。
+  image:
+    file: ~public/icons/plugins/android-kiosk.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/android-kiosk/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-kiosk/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="自助服务终端模式" icon="rocket">
+    隐藏系统 UI 并进入沉浸式全屏模式
+  </Card>
+  <Card title="启动器集成" icon="setting">
+    将您的应用设置为设备启动器/主屏幕应用
+  </Card>
+  <Card title="硬件按键控制" icon="warning">
+    阻止或允许特定硬件按钮（返回、主屏幕、最近应用、音量、电源）
+  </Card>
+  <Card title="状态检测" icon="approve-check">
+    检查自助服务终端模式是否处于活动状态或应用是否设置为启动器
+  </Card>
+  <Card title="Android 6.0+" icon="star">
+    支持 Android API 23 到 Android 15（API 35）
+  </Card>
+  <Card title="全面的文档" icon="open-book">
+    查看[文档](/docs/plugins/android-kiosk/getting-started/)，在几分钟内集成自助服务终端模式。
+  </Card>
+</CardGrid>
+
+## 平台支持
+
+此插件**仅限 Android**。对于 iOS 自助服务终端模式功能，请使用设备的内置[引导式访问](https://support.apple.com/zh-cn/HT202612)功能。

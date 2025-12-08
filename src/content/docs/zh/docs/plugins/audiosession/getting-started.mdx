@@ -1,0 +1,72 @@
+---
+title: 入门指南
+locale: zh
+description: 配置 AudioSession 插件以响应 iOS 音频路由变化和中断。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+> ℹ️ **平台支持：** 音频会话 API 在 iOS 上可用。在 Android 和 Web 上的调用会在不产生效果的情况下解决，因此您可以保持共享逻辑。
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步 iOS 平台**
+   <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 检查可用输出
+
+```typescript
+import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
+
+const outputs = await AudioSession.currentOutputs();
+
+if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
+  console.log('Bluetooth speaker connected');
+}
+```
+
+## 覆盖到扬声器模式
+
+```typescript
+import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
+
+await AudioSession.overrideOutput(OutputOverrideType.speaker);
+
+// Restore system routing when you are done
+await AudioSession.overrideOutput(OutputOverrideType.default);
+```
+
+## 监听路由和中断事件
+
+```typescript
+import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
+
+const routeListener = await AudioSession.addListener('routeChanged', (reason) => {
+  if (reason === RouteChangeReasons.NEW_DEVICE_AVAILABLE) {
+    console.log('User connected a new audio route');
+  }
+});
+
+const interruptionListener = await AudioSession.addListener('interruption', (type) => {
+  if (type === InterruptionTypes.BEGAN) {
+    // Pause playback while we are interrupted
+  } else {
+    // Resume playback
+  }
+});
+
+// Later during cleanup
+await routeListener.remove();
+await interruptionListener.remove();
+```
+
+## 授权
+
+- **iOS**：如果您的应用在后台播放音频，请在 `ios/App/App/Info.plist` 中添加任何所需的后台音频模式（例如 `audio`、`voice`）。
+- **其他平台**：无需额外设置；方法将以空结果解决。

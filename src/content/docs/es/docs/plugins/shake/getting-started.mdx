@@ -1,0 +1,162 @@
+---
+title: Comenzando
+locale: es
+description: Aprende cómo instalar y configurar el plugin Capacitor Shake para detectar gestos de agitación y crear experiencias interactivas en tu aplicación.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurar el plugin**
+
+   **Ejemplo de Uso Básico:**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+
+   // Start listening for shake gestures
+   await Shake.start();
+
+   // Listen for shake events
+   Shake.addListener('shake', () => {
+     console.log('Device was shaken!');
+     // Perform your action here
+   });
+   ```
+
+   **Configuración de Sensibilidad:**
+   ```typescript
+   // Configure shake sensitivity
+   await Shake.start({
+     threshold: 3.5 // Adjust sensitivity (default: 3.5)
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       No se requiere configuración adicional para iOS.
+     </TabItem>
+     <TabItem label="Android">
+       No se requiere configuración adicional para Android.
+     </TabItem>
+   </Tabs>
+
+4. **Dejar de escuchar agitaciones**
+   ```typescript
+   // Stop shake detection when not needed
+   await Shake.stop();
+
+   // Remove specific listener
+   const handle = await Shake.addListener('shake', () => {
+     console.log('Shaken!');
+   });
+   handle.remove();
+   ```
+
+5. **Ejemplo de implementación**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+   import { App } from '@capacitor/app';
+
+   export class ShakeService {
+     private shakeListener: any;
+
+     async initialize() {
+       // Start shake detection
+       await Shake.start({ threshold: 4.0 });
+
+       // Add shake listener
+       this.shakeListener = await Shake.addListener('shake', () => {
+         this.handleShake();
+       });
+
+       // Clean up on app pause
+       App.addListener('pause', () => {
+         Shake.stop();
+       });
+
+       // Resume on app resume
+       App.addListener('resume', () => {
+         Shake.start({ threshold: 4.0 });
+       });
+     }
+
+     private handleShake() {
+       console.log('Shake detected!');
+       // Show debug menu, refresh data, or trigger any action
+     }
+
+     async cleanup() {
+       if (this.shakeListener) {
+         this.shakeListener.remove();
+       }
+       await Shake.stop();
+     }
+   }
+   ```
+</Steps>
+
+## Referencia del API
+
+### Métodos
+
+#### `start(options?: ShakeOptions)`
+Comienza a escuchar gestos de agitación.
+
+**Parámetros:**
+- `options` (opcional): Objeto de configuración
+  - `threshold`: number - Umbral de sensibilidad (predeterminado: 3.5)
+
+#### `stop()`
+Detiene la escucha de gestos de agitación.
+
+#### `addListener('shake', callback: () => void)`
+Agrega un escuchador para eventos de agitación.
+
+**Devuelve:** Promise con un manejador para eliminar el escuchador
+
+### Interfaces
+
+```typescript
+interface ShakeOptions {
+  threshold?: number; // Shake sensitivity threshold
+}
+```
+
+## Notas de Plataforma
+
+### iOS
+- Usa el acelerómetro del dispositivo para detectar gestos de agitación
+- Funciona tanto en primer plano como en segundo plano (si la aplicación tiene permisos de segundo plano)
+
+### Android
+- Usa el SensorManager para detectar eventos de agitación
+- No requiere permisos especiales
+- Funciona cuando la aplicación está en primer plano
+
+## Casos de Uso Comunes
+
+1. **Menú de Depuración**: Mostrar opciones de desarrollador cuando se agita el dispositivo
+2. **Retroalimentación**: Activar formulario de retroalimentación o reporte de errores
+3. **Actualizar**: Actualizar datos de la aplicación o limpiar caché
+4. **Juegos**: Usar la agitación como mecanismo de control en juegos
+5. **Deshacer**: Implementar funcionalidad de deshacer con agitación
+
+## Solución de Problemas
+
+**Agitación no detectada:**
+- Asegúrate de que el plugin esté iniciado con `Shake.start()`
+- Intenta ajustar el valor del umbral (menor = más sensible)
+- Verifica que los escuchadores estén correctamente registrados
+
+**Demasiado sensible/no lo suficientemente sensible:**
+- Ajusta el parámetro `threshold` en las opciones de `start()`
+- Los valores típicamente varían desde 2.0 (muy sensible) hasta 5.0 (menos sensible)

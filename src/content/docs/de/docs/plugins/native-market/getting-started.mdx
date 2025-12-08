@@ -1,0 +1,106 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Native Market-Plugin installieren und verwenden, um Benutzer aus Ihrer Capacitor-App zum Google Play Store oder Apple App Store weiterzuleiten.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installieren Sie das Paket**
+   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchronisieren Sie mit nativen Projekten**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Verwendung
+
+Importieren Sie das Plugin und verwenden Sie seine Methoden, um Benutzer zu App Stores weiterzuleiten:
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+// App Store-Eintrag öffnen
+const openAppStore = async () => {
+  await NativeMarket.openStoreListing({
+    appId: 'com.example.app' // Ihre App-Bundle-ID
+  });
+};
+
+// App-Bewertung anfordern
+const requestReview = async () => {
+  await NativeMarket.requestReview();
+};
+
+// App Store-Suche öffnen
+const searchInStore = async () => {
+  await NativeMarket.search({
+    terms: 'fitness app' // Suchbegriffe
+  });
+};
+```
+
+## API-Referenz
+
+### openStoreListing(options)
+
+Öffnet den App Store-Eintrag für die angegebene App.
+
+```typescript
+interface OpenStoreListingOptions {
+  appId: string; // Bundle-ID auf iOS, Paketname auf Android
+}
+```
+
+### requestReview()
+
+Fordert eine In-App-Bewertung vom Benutzer an. Auf iOS 10.3+ wird der Bewertungsdialog angezeigt, ohne die App zu verlassen.
+
+### search(options)
+
+Öffnet den App Store mit Suchergebnissen.
+
+```typescript
+interface SearchOptions {
+  terms: string; // Zu verwendende Suchbegriffe
+}
+```
+
+## Plattform-Hinweise
+
+### iOS
+- Verwendet `SKStoreReviewController` für In-App-Bewertungen auf iOS 10.3+
+- Fällt auf das Öffnen des App Store für ältere Versionen zurück
+
+### Android
+- Öffnet Google Play Store
+- Verwendet In-App-Review-API, wenn verfügbar
+
+## Beispiel
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+import { Capacitor } from '@capacitor/core';
+
+export class AppService {
+  async rateApp() {
+    try {
+      // Versuchen Sie zuerst In-App-Bewertung
+      await NativeMarket.requestReview();
+    } catch (error) {
+      // Fallback zum Öffnen des Store-Eintrags
+      const platform = Capacitor.getPlatform();
+      const appId = platform === 'ios'
+        ? 'id123456789' // Ihre iOS-App-ID
+        : 'com.example.app'; // Ihr Android-Paketname
+
+      await NativeMarket.openStoreListing({ appId });
+    }
+  }
+}
+```

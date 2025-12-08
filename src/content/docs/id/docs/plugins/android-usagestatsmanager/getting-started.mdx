@@ -1,0 +1,173 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Android Usage Stats Manager untuk mengakses statistik penggunaan aplikasi dan data penggunaan perangkat.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Konfigurasi Platform
+
+### Android
+
+Tambahkan izin yang diperlukan ke `android/app/src/main/AndroidManifest.xml` Anda:
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## Contoh Penggunaan
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// Check if permission is granted
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // Open settings to grant permission
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// Query usage statistics for the last 7 days
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7 days ago
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Usage statistics:', usageStats);
+
+// Get all installed packages
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installed packages:', packages);
+```
+
+## Referensi API
+
+### isUsageStatsPermissionGranted()
+
+```typescript
+isUsageStatsPermissionGranted() => Promise<{ granted: boolean }>
+```
+
+Periksa apakah izin PACKAGE_USAGE_STATS diberikan.
+
+**Mengembalikan:** `Promise<{ granted: boolean }>`
+
+### openUsageStatsSettings()
+
+```typescript
+openUsageStatsSettings() => Promise<void>
+```
+
+Buka halaman pengaturan sistem untuk memberikan izin statistik penggunaan.
+
+### queryAndAggregateUsageStats(options)
+
+```typescript
+queryAndAggregateUsageStats(options: UsageStatsOptions) => Promise<UsageStatsResult>
+```
+
+Query statistik penggunaan terperinci untuk aplikasi yang terinstal.
+
+| Param         | Type                           |
+| ------------- | ------------------------------ |
+| **`options`** | `UsageStatsOptions` |
+
+**Mengembalikan:** `Promise<UsageStatsResult>`
+
+### queryAllPackages()
+
+```typescript
+queryAllPackages() => Promise<PackagesResult>
+```
+
+Dapatkan informasi tentang semua paket yang terinstal di perangkat.
+
+**Mengembalikan:** `Promise<PackagesResult>`
+
+## Interface
+
+### UsageStatsOptions
+
+| Prop               | Type                | Description                                         |
+| ------------------ | ------------------- | --------------------------------------------------- |
+| **`intervalType`** | `number` | Tipe interval (0=DAILY, 1=WEEKLY, 2=MONTHLY, dll.) |
+| **`startTime`**    | `number` | Waktu mulai dalam milidetik                          |
+| **`endTime`**      | `number` | Waktu akhir dalam milidetik                            |
+
+### UsageStatsResult
+
+Berisi data statistik penggunaan untuk setiap aplikasi:
+
+- Waktu penggunaan dan frekuensi aplikasi
+- Waktu pertama dan terakhir digunakan
+- Total waktu di foreground
+- Jumlah peluncuran
+
+### PackagesResult
+
+Berisi informasi tentang paket yang terinstal:
+
+- Nama paket dan versi
+- Waktu instalasi
+- Label dan ikon aplikasi
+- Aplikasi sistem vs pengguna
+
+## Penanganan Izin
+
+Plugin memerlukan izin khusus yang tidak dapat diberikan melalui permintaan izin runtime normal:
+
+1. **PACKAGE_USAGE_STATS**: Memungkinkan akses ke statistik penggunaan
+2. **QUERY_ALL_PACKAGES**: Diperlukan untuk informasi paket (Android 11+)
+
+Pengguna harus memberikan izin ini secara manual melalui pengaturan sistem. Gunakan `openUsageStatsSettings()` untuk mengarahkan pengguna ke halaman pengaturan yang sesuai.
+
+## Praktik Terbaik
+
+- Selalu periksa status izin sebelum query statistik penggunaan
+- Tangani penolakan izin dengan baik dengan pesan yang ramah pengguna
+- Pertimbangkan privasi pengguna saat mengumpulkan data penggunaan
+- Implementasikan praktik penanganan dan penyimpanan data yang tepat
+- Ikuti kebijakan Google Play untuk pengumpulan data penggunaan
+
+## Kasus Penggunaan
+
+- **Aplikasi kesejahteraan digital**: Pantau waktu layar dan penggunaan aplikasi
+- **Kontrol orang tua**: Lacak penggunaan perangkat anak-anak
+- **Aplikasi produktivitas**: Analisis pola kerja dan waktu fokus
+- **Analitik**: Pahami perilaku pengguna dan keterlibatan aplikasi

@@ -1,0 +1,67 @@
+---
+title: iOS 上的 Apple 登录
+locale: zh
+description: 本综合指南将引导你完成在 iOS 设备上使用 Capacitor 设置 Apple 登录的过程,通过涵盖所有必要的步骤和配置来确保无缝集成。
+sidebar:
+    order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+让我们分解在 iOS 上设置 Apple 登录所需的内容。
+
+<Steps>
+1. 配置应用的功能。
+
+    为此,请打开 Xcode,点击 `App`
+    ![App XCode](/social-login-assets/app-xcode.png)
+
+2. 确保选择正确的 target。
+
+    ![XCode App Target](/social-login-assets/xcode-app-target.png)
+
+3. 请确保添加 `Sign in with Apple` 功能。
+
+    ![App XCode Add Capability](/social-login-assets/app-xcode-add-cap.png)
+
+    ![App XCode Add Capability](/social-login-assets/sign-with-apple-cap.png)
+
+    :::caution
+    如果你看不到 `Sign in with Apple` 功能,请配置 [Account & Organizational Data Sharing](https://developer.apple.com/account/resources/services/cwa/configure/)
+    :::
+
+4. 在应用中初始化 Apple 登录。
+
+    :::note
+    我使用 Vue 作为框架,具体实现会根据你选择的框架而有所不同
+    :::
+
+    ```ts
+    //  onMounted 是 vue 特定的
+    onMounted(() => {
+    SocialLogin.initialize({
+        apple: {}
+    })
+    });
+    ```
+
+5. 创建一个按钮来开始登录过程。
+
+    该按钮应调用以下函数:
+
+    ```ts
+    async function loginApple() {
+    const res = await SocialLogin.login({
+        provider: 'apple',
+        options: {}
+    })
+    ```
+
+6. 在**<u>真实</u>**设备上运行你的应用并进行测试。
+
+    如果你仔细按照步骤操作,点击按钮后你将看到以下屏幕。
+
+    ![Apple Sign In prompt on iOS device](/social-login-assets/apple-sign-in-ios-final.png)
+</Steps>
+
+就是这样!你已经准备好了。

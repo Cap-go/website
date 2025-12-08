@@ -1,0 +1,456 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin NFC untuk membaca dan menulis tag NFC di aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-nfc" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Konfigurasi
+
+### Konfigurasi iOS
+
+Tambahkan deskripsi penggunaan NFC ke `Info.plist` Anda:
+
+```xml
+<key>NFCReaderUsageDescription</key>
+<string>Aplikasi ini memerlukan akses NFC untuk membaca dan menulis tag</string>
+```
+
+Aktifkan kemampuan Near Field Communication Tag Reading di proyek Xcode Anda.
+
+### Konfigurasi Android
+
+Tambahkan izin NFC ke `AndroidManifest.xml` Anda:
+
+```xml
+<manifest>
+  <uses-permission android:name="android.permission.NFC" />
+  <uses-feature android:name="android.hardware.nfc" android:required="false" />
+</manifest>
+```
+
+## Penggunaan
+
+### Mulai Scanning Tag NFC
+
+```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
+await CapacitorNfc.startScanning({
+  invalidateAfterFirstRead: false, // Tetap buka sesi (iOS)
+  alertMessage: 'Dekatkan tag ke bagian atas perangkat Anda.',
+});
+
+const listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
+  console.log('Tag terdeteksi:', event.type);
+  console.log('Tag ID:', event.tag?.id);
+  console.log('Pesan NDEF:', event.tag?.ndefMessage);
+});
+```
+
+### Membaca Tag NFC
+
+```typescript
+await CapacitorNfc.addListener('nfcEvent', (event) => {
+  if (event.tag?.ndefMessage) {
+    event.tag.ndefMessage.forEach(record => {
+      console.log('TNF:', record.tnf);
+      console.log('Type:', record.type);
+      console.log('Payload:', record.payload);
+
+      // Decode record teks
+      if (record.tnf === 1 && record.type[0] === 0x54) { // Record teks
+        const langLen = record.payload[0] & 0x3f;
+        const text = new TextDecoder().decode(
+          new Uint8Array(record.payload.slice(langLen + 1))
+        );
+        console.log('Teks:', text);
+      }
+    });
+  }
+});
+```
+
+### Menulis ke Tag NFC
+
+```typescript
+// Siapkan record teks
+const encoder = new TextEncoder();
+const langBytes = Array.from(encoder.encode('en'));
+const textBytes = Array.from(encoder.encode('Hello NFC'));
+const payload = [langBytes.length & 0x3f, ...langBytes, ...textBytes];
+
+await CapacitorNfc.write({
+  allowFormat: true,
+  records: [
+    {
+      tnf: 0x01, // TNF Well-known
+      type: [0x54], // 'T' untuk Text
+      id: [],
+      payload,
+    },
+  ],
+});
+
+console.log('Tag berhasil ditulis');
+```
+
+### Menulis URL ke Tag NFC
+
+```typescript
+const url = 'https://capgo.app';
+const urlBytes = Array.from(new TextEncoder().encode(url));
+
+await CapacitorNfc.write({
+  allowFormat: true,
+  records: [
+    {
+      tnf: 0x01, // TNF Well-known
+      type: [0x55], // 'U' untuk URI
+      id: [],
+      payload: [0x01, ...urlBytes], // 0x01 = https://
+    },
+  ],
+});
+```
+
+### Menghapus Tag NFC
+
+```typescript
+await CapacitorNfc.erase();
+console.log('Tag dihapus');
+```
+
+### Membuat Tag Read-Only
+
+```typescript
+await CapacitorNfc.makeReadOnly();
+console.log('Tag sekarang read-only');
+```
+
+### Berhenti Scanning
+
+```typescript
+await listener.remove();
+await CapacitorNfc.stopScanning();
+```
+
+### Memeriksa Status NFC
+
+```typescript
+const { status } = await CapacitorNfc.getStatus();
+console.log('Status NFC:', status);
+// Nilai yang mungkin: 'NFC_OK', 'NO_NFC', 'NFC_DISABLED', 'NDEF_PUSH_DISABLED'
+
+if (status === 'NFC_DISABLED') {
+  // Buka pengaturan sistem
+  await CapacitorNfc.showSettings();
+}
+```
+
+### Android Beam (Berbagi P2P)
+
+```typescript
+// Bagikan data via Android Beam
+const message = {
+  records: [
+    {
+      tnf: 0x01,
+      type: [0x54], // Text
+      id: [],
+      payload: [/* payload record teks */],
+    },
+  ],
+};
+
+await CapacitorNfc.share(message);
+
+// Kemudian, berhenti berbagi
+await CapacitorNfc.unshare();
+```
+
+## Referensi API
+
+### startScanning(options?)
+
+Mulai mendengarkan tag NFC.
+
+```typescript
+interface StartScanningOptions {
+  invalidateAfterFirstRead?: boolean; // iOS saja, default true
+  alertMessage?: string; // iOS saja
+  androidReaderModeFlags?: number; // Android saja
+}
+
+await CapacitorNfc.startScanning(options);
+```
+
+### stopScanning()
+
+Hentikan sesi scanning NFC.
+
+```typescript
+await CapacitorNfc.stopScanning();
+```
+
+### write(options)
+
+Tulis record NDEF ke tag yang terakhir ditemukan.
+
+```typescript
+interface WriteTagOptions {
+  records: NdefRecord[];
+  allowFormat?: boolean; // Default true
+}
+
+interface NdefRecord {
+  tnf: number; // Type Name Format
+  type: number[]; // Tipe record
+  id: number[]; // Record ID
+  payload: number[]; // Payload record
+}
+
+await CapacitorNfc.write(options);
+```
+
+### erase()
+
+Hapus tag yang terakhir ditemukan.
+
+```typescript
+await CapacitorNfc.erase();
+```
+
+### makeReadOnly()
+
+Jadikan tag yang terakhir ditemukan read-only (permanen).
+
+```typescript
+await CapacitorNfc.makeReadOnly();
+```
+
+### share(options)
+
+Bagikan pesan NDEF via Android Beam (Android saja).
+
+```typescript
+await CapacitorNfc.share({ records: [...] });
+```
+
+### unshare()
+
+Berhenti berbagi (Android saja).
+
+```typescript
+await CapacitorNfc.unshare();
+```
+
+### getStatus()
+
+Dapatkan status adapter NFC saat ini.
+
+```typescript
+const { status } = await CapacitorNfc.getStatus();
+// Mengembalikan: 'NFC_OK' | 'NO_NFC' | 'NFC_DISABLED' | 'NDEF_PUSH_DISABLED'
+```
+
+### showSettings()
+
+Buka pengaturan NFC sistem.
+
+```typescript
+await CapacitorNfc.showSettings();
+```
+
+## Event
+
+### nfcEvent
+
+Dipicu saat tag NFC ditemukan.
+
+```typescript
+interface NfcEvent {
+  type: 'tag' | 'ndef' | 'ndef-mime' | 'ndef-formattable';
+  tag?: NfcTag;
+}
+
+interface NfcTag {
+  id: number[];
+  techTypes: string[];
+  type: string | null;
+  maxSize: number | null;
+  isWritable: boolean | null;
+  canMakeReadOnly: boolean | null;
+  ndefMessage: NdefRecord[] | null;
+}
+```
+
+### nfcStateChange
+
+Dipicu saat ketersediaan adapter NFC berubah (Android saja).
+
+```typescript
+interface NfcStateChangeEvent {
+  status: NfcStatus;
+  enabled: boolean;
+}
+```
+
+## Contoh Lengkap
+
+```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
+export class NfcService {
+  private listener: any;
+
+  async startReading() {
+    // Periksa status NFC
+    const { status } = await CapacitorNfc.getStatus();
+
+    if (status === 'NO_NFC') {
+      throw new Error('NFC tidak tersedia di perangkat ini');
+    }
+
+    if (status === 'NFC_DISABLED') {
+      await CapacitorNfc.showSettings();
+      return;
+    }
+
+    // Mulai scanning
+    await CapacitorNfc.startScanning({
+      invalidateAfterFirstRead: false,
+      alertMessage: 'Siap untuk scan tag NFC',
+    });
+
+    // Dengarkan tag
+    this.listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
+      this.handleNfcEvent(event);
+    });
+  }
+
+  private handleNfcEvent(event: any) {
+    console.log('Event NFC:', event.type);
+
+    if (event.tag?.ndefMessage) {
+      event.tag.ndefMessage.forEach(record => {
+        this.processRecord(record);
+      });
+    }
+  }
+
+  private processRecord(record: any) {
+    // Proses record teks
+    if (record.tnf === 1 && record.type[0] === 0x54) {
+      const langLen = record.payload[0] & 0x3f;
+      const text = new TextDecoder().decode(
+        new Uint8Array(record.payload.slice(langLen + 1))
+      );
+      console.log('Teks:', text);
+    }
+
+    // Proses record URI
+    if (record.tnf === 1 && record.type[0] === 0x55) {
+      const uriCode = record.payload[0];
+      const uri = new TextDecoder().decode(
+        new Uint8Array(record.payload.slice(1))
+      );
+      console.log('URI:', uri);
+    }
+  }
+
+  async writeText(text: string) {
+    const encoder = new TextEncoder();
+    const langBytes = Array.from(encoder.encode('en'));
+    const textBytes = Array.from(encoder.encode(text));
+    const payload = [langBytes.length & 0x3f, ...langBytes, ...textBytes];
+
+    await CapacitorNfc.write({
+      allowFormat: true,
+      records: [
+        {
+          tnf: 0x01,
+          type: [0x54],
+          id: [],
+          payload,
+        },
+      ],
+    });
+  }
+
+  async stopReading() {
+    if (this.listener) {
+      await this.listener.remove();
+    }
+    await CapacitorNfc.stopScanning();
+  }
+}
+```
+
+## Tipe Record NDEF
+
+### TNF (Type Name Format)
+
+- `0x00`: Empty
+- `0x01`: Well-known (mis., Text, URI)
+- `0x02`: Tipe media MIME
+- `0x03`: URI Absolut
+- `0x04`: Tipe eksternal
+- `0x05`: Unknown
+- `0x06`: Unchanged
+- `0x07`: Reserved
+
+### Tipe Record Umum
+
+- **Text**: `type: [0x54]` ('T')
+- **URI**: `type: [0x55]` ('U')
+- **Smart Poster**: `type: [0x53, 0x70]` ('Sp')
+
+### Prefix URI
+
+- `0x00`: (tanpa prefix)
+- `0x01`: `https://`
+- `0x02`: `https://`
+- `0x03`: `http://`
+- `0x04`: `https://www.`
+
+## Praktik Terbaik
+
+1. **Periksa Status NFC**: Selalu verifikasi NFC tersedia dan diaktifkan
+2. **Tangani Izin**: Minta izin NFC dengan tepat
+3. **Berhenti Scanning**: Selalu berhenti scanning saat selesai untuk menghemat baterai
+4. **Penanganan Error**: Bungkus operasi NFC dalam blok try-catch
+5. **Uji di Perangkat**: Fitur NFC tidak berfungsi di simulator/emulator
+
+## Catatan Platform
+
+### iOS
+- Memerlukan iOS 11.0+
+- Menggunakan framework Core NFC
+- Mendukung pembacaan tag latar belakang (iOS 13+)
+- Terbatas pada pembacaan tag berformat NDEF
+- Tidak dapat menulis tag di latar belakang
+- Memerlukan NFCReaderUsageDescription di Info.plist
+
+### Android
+- Memerlukan Android 4.4 (API 19)+
+- Menggunakan Android NFC API
+- Mendukung pembacaan tag foreground dan background
+- Dapat menulis ke tag
+- Mendukung Android Beam (P2P) di perangkat dengan NFC
+- Memerlukan izin NFC di AndroidManifest.xml
+
+### Web
+- Tidak didukung di platform web

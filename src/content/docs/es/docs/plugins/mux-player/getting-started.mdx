@@ -1,0 +1,91 @@
+---
+title: Comenzar
+description: Integra el SDK nativo de Mux Player dentro de tu aplicación Capacitor.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el plugin**
+   <PackageManagers pkg="@capgo/capacitor-mux-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Preparación para iOS
+
+1. Abre el espacio de trabajo de Xcode en `ios/App/`.
+2. Agrega el paquete Swift `https://github.com/muxinc/mux-player-swift` a tu objetivo de aplicación para que el módulo `MuxPlayerSwift` esté disponible.
+3. Asegúrate de que el objetivo de implementación sea **iOS 15+** y reconstruye.
+
+## Preparación para Android
+
+El módulo Gradle viene con los repositorios y dependencias correctos. Si usas un proxy corporativo personalizado, permite solicitudes a `https://muxinc.jfrog.io/artifactory/default-maven-release-local`.
+
+## Lanzar el reproductor
+
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
+
+await MuxPlayer.play({
+  playbackId: 'your-playback-id',
+  environmentKey: 'your-mux-data-key',
+  title: 'Launch Announcement',
+  subtitle: 'Filmed live at Capgo HQ',
+  poster: 'https://stream.example.com/poster.jpg',
+});
+```
+
+## Escuchar eventos del reproductor
+
+```typescript
+const readyHandle = await MuxPlayer.addListener('ready', ({ playerName }) => {
+  console.log('Mux player ready', playerName);
+});
+
+const errorHandle = await MuxPlayer.addListener('error', ({ message }) => {
+  console.error('Mux player error:', message);
+});
+
+// Limpiar después de descartar el reproductor
+const dismissPlayer = async () => {
+  await MuxPlayer.dismiss();
+  await readyHandle.remove();
+  await errorHandle.remove();
+};
+```
+
+## Reproducción basada en tokens
+
+```typescript
+await MuxPlayer.play({
+  playbackId: 'signed-playback-id',
+  playbackToken: signedPlaybackToken,
+  drmToken: signedDrmToken, // Opcional si habilitaste políticas DRM
+  autoPlay: true,
+  startTime: 120, // comenzar en 2 minutos
+});
+```
+
+## Reaccionar al ciclo de vida del reproductor
+
+```typescript
+const { active } = await MuxPlayer.isActive();
+if (active) {
+  console.log('Reproductor actualmente visible');
+}
+
+// Eliminar todos los registros de detectores al desmontar
+await MuxPlayer.removeAllListeners();
+```
+
+## Consejos
+
+- Genera tokens de reproducción firmados y DRM en tu backend usando las claves de firma de Mux.
+- Pasa un `playerName` para separar los análisis al ejecutar múltiples reproductores en tu aplicación.
+- Combina con `enableSmartCache` para mejorar la resistencia offline en plataformas compatibles.

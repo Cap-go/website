@@ -1,0 +1,274 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara memasang dan menggunakan plugin Text Interaction untuk mengontrol pembesar pemilihan teks iOS dan loupe.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Dukungan Platform
+
+- **iOS**: iOS 15.0+ (memerlukan UITextInteraction API)
+- **Android**: No-op (mengembalikan unsupported)
+- **Web**: No-op (mengembalikan unsupported)
+
+## Contoh Penggunaan
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+// Disable text interaction (remove magnifier/loupe)
+const result = await TextInteraction.setEnabled({ enabled: false });
+
+if (result.success) {
+  console.log('Text interaction disabled');
+} else {
+  console.log('Not supported on this platform');
+}
+
+// Re-enable text interaction before showing text inputs
+await TextInteraction.setEnabled({ enabled: true });
+```
+
+## Referensi API
+
+### setEnabled(options)
+
+```typescript
+setEnabled(options: { enabled: boolean }) => Promise<{ success: boolean }>
+```
+
+Aktifkan atau nonaktifkan interaksi teks iOS (lensa pembesar dan pegangan pemilihan).
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+**Returns:** `Promise<{ success: boolean }>`
+
+- Mengembalikan `{ success: true }` jika operasi berhasil (iOS 15+)
+- Mengembalikan `{ success: false }` jika tidak didukung (Android, Web, atau iOS < 15)
+
+## Kasus Penggunaan Praktis
+
+### Aplikasi Kiosk
+
+Nonaktifkan interaksi teks dalam mode kiosk untuk mencegah pengguna mengakses menu salin/tempel:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function enterKioskMode() {
+  // Disable text interaction in kiosk mode
+  const result = await TextInteraction.setEnabled({ enabled: false });
+
+  if (result.success) {
+    console.log('Kiosk mode: Text interaction disabled');
+  }
+}
+
+async function exitKioskMode() {
+  // Re-enable text interaction when exiting kiosk mode
+  await TextInteraction.setEnabled({ enabled: true });
+  console.log('Kiosk mode: Text interaction enabled');
+}
+```
+
+### Pengalaman Game
+
+Hapus lensa pembesar selama permainan dan pulihkan untuk input teks:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class GameController {
+  async startGame() {
+    // Disable text interaction during gameplay
+    await TextInteraction.setEnabled({ enabled: false });
+    console.log('Game started - text interaction disabled');
+  }
+
+  async showTextInput() {
+    // Enable text interaction before showing input
+    await TextInteraction.setEnabled({ enabled: true });
+    console.log('Text input ready - interaction enabled');
+
+    // Show input field
+    this.displayInputField();
+  }
+
+  async hideTextInput() {
+    // Hide input and disable interaction again
+    this.hideInputField();
+    await TextInteraction.setEnabled({ enabled: false });
+  }
+}
+```
+
+### Instalasi Interaktif
+
+Kontrol interaksi teks untuk signage digital dan display interaktif:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function setupInteractiveDisplay() {
+  // Disable text interaction for display mode
+  await TextInteraction.setEnabled({ enabled: false });
+
+  // Set up touch handlers for display interaction
+  document.addEventListener('touchstart', handleDisplayTouch);
+}
+
+async function enableUserInput() {
+  // Enable text interaction when user needs to input data
+  const result = await TextInteraction.setEnabled({ enabled: true });
+
+  if (result.success) {
+    showInputForm();
+  } else {
+    // Fallback for unsupported platforms
+    showInputFormWithoutTextInteraction();
+  }
+}
+```
+
+### Manajemen Form
+
+Toggle interaksi teks berdasarkan status form:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class FormManager {
+  private textInteractionEnabled = true;
+
+  async disableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: false });
+    this.textInteractionEnabled = false;
+    return result.success;
+  }
+
+  async enableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: true });
+    this.textInteractionEnabled = true;
+    return result.success;
+  }
+
+  async onFormFocus() {
+    // Always enable before showing keyboard
+    await this.enableTextSelection();
+  }
+
+  async onFormBlur() {
+    // Optionally disable after input is complete
+    await this.disableTextSelection();
+  }
+}
+```
+
+### Interaksi Teks Kondisional
+
+Kontrol interaksi teks yang sadar platform:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+import { Capacitor } from '@capacitor/core';
+
+async function toggleTextInteraction(enabled: boolean) {
+  // Only attempt on iOS
+  if (Capacitor.getPlatform() === 'ios') {
+    const result = await TextInteraction.setEnabled({ enabled });
+
+    if (result.success) {
+      console.log(`Text interaction ${enabled ? 'enabled' : 'disabled'}`);
+    } else {
+      console.log('Text interaction not supported on this iOS version');
+    }
+  } else {
+    console.log('Text interaction control only available on iOS');
+  }
+}
+
+// Usage
+await toggleTextInteraction(false); // Disable
+await toggleTextInteraction(true);  // Enable
+```
+
+## Praktik Terbaik
+
+- **Selalu aktifkan kembali sebelum input teks**: Nonaktifkan interaksi teks saat diperlukan, tetapi selalu aktifkan kembali sebelum menampilkan bidang input teks atau keyboard
+- **Periksa dukungan platform**: Verifikasi `result.success` untuk menangani platform yang tidak didukung dengan baik
+- **Fitur khusus iOS**: Plugin ini khusus untuk iOS; implementasikan fallback untuk Android dan Web
+- **Pengalaman pengguna**: Pertimbangkan implikasi UX dalam menonaktifkan interaksi teks
+- **Manajemen state**: Lacak status aktif/nonaktif untuk menghindari panggilan yang berlebihan
+
+## Pengingat Penting
+
+1. **Aktifkan kembali untuk input teks**: Selalu panggil `setEnabled({ enabled: true })` sebelum menampilkan bidang input teks, jika tidak pengguna tidak akan dapat memilih atau mengedit teks dengan benar
+
+2. **Deteksi platform**: Plugin mengembalikan `{ success: false }` pada Android, Web, dan versi iOS di bawah 15.0
+
+3. **Tidak ada umpan balik visual**: Menonaktifkan interaksi teks menghapus pembesar tetapi tidak memberikan umpan balik visual - implementasikan indikator UI Anda sendiri jika diperlukan
+
+4. **Default yang aman**: Sistem interaksi teks diaktifkan secara default, sesuai dengan perilaku standar iOS
+
+## Keterbatasan
+
+- Hanya iOS 15.0+ (memerlukan UITextInteraction API)
+- Tidak ada efek pada platform Android atau Web
+- Tidak dapat menonaktifkan hanya pembesar atau hanya pegangan pemilihan secara selektif
+- Tidak ada callback ketika pengguna mencoba menggunakan fitur yang dinonaktifkan
+
+## Kasus Penggunaan
+
+- **Aplikasi kiosk**: Mencegah salin/tempel pada instalasi terkontrol
+- **Pengalaman game**: Hapus pembesar selama permainan
+- **Display interaktif**: Kontrol interaksi teks pada signage digital
+- **Editor teks kustom**: Bangun pengalaman pengeditan teks khusus
+- **Keamanan**: Mencegah pemilihan teks di area sensitif
+
+## Pemecahan Masalah
+
+### Interaksi Teks Tidak Dinonaktifkan
+
+- Verifikasi versi iOS adalah 15.0 atau lebih tinggi
+- Periksa bahwa `result.success` mengembalikan `true`
+- Pastikan tidak ada kode lain yang mengaktifkan kembali interaksi teks
+
+### Pengguna Tidak Dapat Mengedit Teks
+
+- Pastikan Anda memanggil `setEnabled({ enabled: true })` sebelum menampilkan input teks
+- Verifikasi panggilan enable berhasil dengan memeriksa `result.success`
+- Uji pada perangkat iOS nyata (bukan hanya simulator)

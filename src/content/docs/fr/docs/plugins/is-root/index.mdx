@@ -1,0 +1,122 @@
+---
+title: "@capgo/capacitor-is-root"
+description: Plugin de détection de root et jailbreak pour les applications Capacitor avec vérifications de sécurité complètes et validation d'intégrité de l'appareil.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+locale: fr
+hero:
+  tagline: Détectez les appareils Android rootés et les appareils iOS jailbreakés pour améliorer la sécurité de l'application et protéger les données sensibles.
+  image:
+    file: ~public/icons/plugins/is-root.svg
+  actions:
+    - text: Commencer
+      link: /docs/plugins/is-root/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-is-root/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Aperçu
+
+Le plugin Capacitor Is Root fournit une détection complète de root et jailbreak pour les appareils Android et une détection d'émulateur. Ce plugin aide à améliorer la sécurité de l'application en identifiant les appareils compromis et les environnements émulés qui peuvent présenter des risques de sécurité.
+
+<CardGrid stagger>
+  <Card title="Détection de root" icon="rocket">
+    Détection avancée de root Android avec plusieurs méthodes 🔒
+  </Card>
+  <Card title="Détection d'émulateur" icon="approve-check">
+    Identifiez les environnements émulés et les frameworks de test 🛡️
+  </Card>
+  <Card title="Validation de sécurité" icon="approve-check">
+    Plusieurs techniques de détection pour une précision améliorée ✅
+  </Card>
+  <Card title="Axé sur Android" icon="laptop">
+    Détection spécialisée pour l'évaluation de sécurité Android 🤖
+  </Card>
+</CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-is-root
+npx cap sync
+```
+
+## Méthodes API principales
+
+### Détection de root
+- `isRooted()` - Effectue une détection complète de root en utilisant les méthodes par défaut
+- `isRootedWithBusyBox()` - Détection étendue incluant les vérifications BusyBox
+- `detectRootManagementApps()` - Identifie les applications de gestion root installées
+- `checkForSuBinary()` - Vérifie la présence du binaire `su` dans les chemins système
+
+### Détection d'émulateur
+- `isRunningOnEmulator()` - Détecte les empreintes communes des émulateurs Android
+
+## Techniques de détection
+
+Le plugin emploie plusieurs méthodes de détection :
+
+### Détection de root
+- Vérifie les applications de gestion root (SuperSU, Magisk, etc.)
+- Analyse les propriétés système suspectes
+- Identifie les tags de build de test et les drapeaux de débogage
+- Valide les emplacements de binaires dangereux
+- Examine les permissions des chemins système
+
+### Détection d'émulateur
+- Analyse de l'empreinte matérielle
+- Inspection des propriétés de build
+- Caractéristiques spécifiques à l'émulateur
+- Indicateurs d'environnement virtuel
+
+## Exemple d'utilisation
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// Détection de root basique
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('L\'appareil est rooté');
+  // Gérez l'appareil rooté de manière appropriée
+}
+
+// Détection de root étendue avec BusyBox
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('L\'appareil est rooté (vérification étendue)');
+}
+
+// Vérifier la présence d'un émulateur
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('Fonctionne sur émulateur');
+}
+
+// Détecter les applications de gestion root
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('Applications de gestion root détectées');
+}
+```
+
+## Considérations de sécurité
+
+- Utilisez plusieurs méthodes de détection pour une meilleure précision
+- Implémentez une dégradation gracieuse pour les environnements détectés
+- Considérez la confidentialité des utilisateurs lors de l'implémentation de mesures de sécurité
+- Mises à jour régulières recommandées car les méthodes de détection évoluent
+
+## Documentation
+
+Consultez la [documentation complète](/docs/plugins/is-root/getting-started/) pour des guides d'implémentation détaillés et des modèles de sécurité avancés.

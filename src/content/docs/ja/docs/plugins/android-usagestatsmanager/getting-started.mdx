@@ -1,0 +1,173 @@
+---
+title: はじめに
+description: Android Usage Stats Managerプラグインのインストールと使用方法を学び、アプリ使用統計とデバイス使用データにアクセスします。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## プラットフォーム設定
+
+### Android
+
+必要な権限を`android/app/src/main/AndroidManifest.xml`に追加:
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## 使用例
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// 権限が許可されているか確認
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // 権限を許可するために設定を開く
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// 過去7日間の使用統計をクエリ
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7日前
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Usage statistics:', usageStats);
+
+// インストールされているすべてのパッケージを取得
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installed packages:', packages);
+```
+
+## APIリファレンス
+
+### isUsageStatsPermissionGranted()
+
+```typescript
+isUsageStatsPermissionGranted() => Promise<{ granted: boolean }>
+```
+
+PACKAGE_USAGE_STATS権限が許可されているか確認します。
+
+**戻り値:** `Promise<{ granted: boolean }>`
+
+### openUsageStatsSettings()
+
+```typescript
+openUsageStatsSettings() => Promise<void>
+```
+
+使用統計権限を許可するためのシステム設定ページを開きます。
+
+### queryAndAggregateUsageStats(options)
+
+```typescript
+queryAndAggregateUsageStats(options: UsageStatsOptions) => Promise<UsageStatsResult>
+```
+
+インストールされているアプリの詳細な使用統計をクエリします。
+
+| パラメータ         | 型                           |
+| ------------- | ------------------------------ |
+| **`options`** | `UsageStatsOptions` |
+
+**戻り値:** `Promise<UsageStatsResult>`
+
+### queryAllPackages()
+
+```typescript
+queryAllPackages() => Promise<PackagesResult>
+```
+
+デバイスにインストールされているすべてのパッケージに関する情報を取得します。
+
+**戻り値:** `Promise<PackagesResult>`
+
+## インターフェース
+
+### UsageStatsOptions
+
+| プロパティ               | 型                | 説明                                         |
+| ------------------ | ------------------- | --------------------------------------------------- |
+| **`intervalType`** | `number` | 間隔タイプ（0=DAILY、1=WEEKLY、2=MONTHLY など） |
+| **`startTime`**    | `number` | ミリ秒単位の開始時刻                          |
+| **`endTime`**      | `number` | ミリ秒単位の終了時刻                            |
+
+### UsageStatsResult
+
+各アプリの使用統計データを含む:
+
+- アプリの使用時間と頻度
+- 最初と最後に使用された時刻
+- フォアグラウンドでの合計時間
+- 起動回数
+
+### PackagesResult
+
+インストールされているパッケージに関する情報を含む:
+
+- パッケージ名とバージョン
+- インストール時刻
+- アプリのラベルとアイコン
+- システムアプリ対ユーザーアプリ
+
+## 権限処理
+
+このプラグインは、通常のランタイム権限リクエストでは許可できない特別な権限が必要です:
+
+1. **PACKAGE_USAGE_STATS**: 使用統計へのアクセスを許可
+2. **QUERY_ALL_PACKAGES**: パッケージ情報に必要（Android 11以降）
+
+ユーザーはシステム設定を通じてこれらの権限を手動で許可する必要があります。`openUsageStatsSettings()`を使用して、ユーザーを適切な設定ページに誘導します。
+
+## ベストプラクティス
+
+- 使用統計をクエリする前に常に権限ステータスを確認
+- 権限拒否をユーザーフレンドリーなメッセージで適切に処理
+- 使用データを収集する際のユーザープライバシーを考慮
+- 適切なデータ処理とストレージプラクティスを実装
+- 使用データ収集のためのGoogle Playポリシーに従う
+
+## ユースケース
+
+- **デジタルウェルビーイングアプリ**: スクリーンタイムとアプリ使用を監視
+- **ペアレンタルコントロール**: 子供のデバイス使用を追跡
+- **生産性アプリ**: 作業パターンと集中時間を分析
+- **分析**: ユーザー行動とアプリエンゲージメントを理解

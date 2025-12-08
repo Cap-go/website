@@ -1,0 +1,301 @@
+---
+title: iOS-Abonnementgruppe erstellen
+description: Erfahren Sie, wie Sie Abonnementgruppen in App Store Connect erstellen und konfigurieren, um die Abonnementangebote Ihrer App zu organisieren.
+locale: de
+sidebar:
+  order: 7
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Abonnementgruppen sind für die Organisation und Verwaltung mehrerer Abonnementstufen in Ihrer iOS-App unerlässlich. Das Verständnis ihrer Funktionsweise ist entscheidend für die Implementierung von Upgrade-, Downgrade- und Crossgrade-Funktionen.
+
+## Was ist eine Abonnementgruppe?
+
+Eine Abonnementgruppe ist eine Sammlung verwandter Abonnements, zwischen denen Benutzer wählen können. Benutzer können jeweils nur ein Abonnement innerhalb einer Gruppe abonnieren. Wenn sie Abonnements wechseln, handhabt Apple den Übergang automatisch.
+
+## Warum Abonnementgruppen wichtig sind
+
+Abonnementgruppen ermöglichen:
+- **Gestaffelte Preise**: Bieten Sie Basic-, Premium- und Ultimate-Pläne an
+- **Verschiedene Laufzeiten**: Monatliche, jährliche und Lifetime-Optionen
+- **Upgrade/Downgrade-Logik**: Automatische Handhabung von Abonnementwechseln
+- **Vereinfachte Verwaltung**: Gruppieren Sie verwandte Abonnements zusammen
+
+## Abonnementstufen
+
+Innerhalb einer Gruppe sollte jedes Abonnement vom höchsten Wert (Stufe 1) zum niedrigsten Wert eingestuft werden. Diese Rangfolge bestimmt, wie Abonnementwechsel klassifiziert werden:
+
+![Abonnementgruppen-Hierarchie](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
+
+### Stufenbeispiele
+
+**Stufe 1** (Höchster Wert)
+- Premium Jährlich (99,99 €/Jahr)
+- Ultimate Monatlich (19,99 €/Monat)
+
+**Stufe 2** (Mittlerer Wert)
+- Standard Jährlich (49,99 €/Jahr)
+- Premium Monatlich (9,99 €/Monat)
+
+**Stufe 3** (Niedrigster Wert)
+- Basic Jährlich (29,99 €/Jahr)
+- Standard Monatlich (4,99 €/Monat)
+
+## Arten von Abonnementwechseln
+
+Apple handhabt automatisch drei Arten von Abonnementwechseln basierend auf der Stufenrangfolge:
+
+### 1. Upgrade
+Wechsel zu einem **höherwertigen** Abonnement (z. B. Stufe 2 → Stufe 1).
+
+**Verhalten:**
+- Tritt **sofort** in Kraft
+- Benutzer erhält **anteilige Rückerstattung** für verbleibende Zeit
+- Neues Abonnement beginnt sofort
+
+**Beispiel:**
+```typescript
+// Benutzer hat derzeit: Standard Monatlich (Stufe 2)
+// Benutzer upgradet auf: Premium Jährlich (Stufe 1)
+// Ergebnis: Sofortiger Zugang zu Premium, Rückerstattung für ungenutzte Standard-Zeit
+```
+
+### 2. Downgrade
+Wechsel zu einem **niedrigerwertigen** Abonnement (z. B. Stufe 1 → Stufe 2).
+
+**Verhalten:**
+- Tritt am **nächsten Verlängerungsdatum** in Kraft
+- Benutzer behält aktuelles Abonnement bis zum Ende des Zeitraums
+- Neues Abonnement beginnt automatisch nach Ablauf
+
+**Beispiel:**
+```typescript
+// Benutzer hat derzeit: Premium Jährlich (Stufe 1)
+// Benutzer downgradet auf: Standard Monatlich (Stufe 2)
+// Ergebnis: Premium-Zugang bleibt bis zum jährlichen Verlängerungsdatum, dann Wechsel
+```
+
+### 3. Crossgrade
+Wechsel zu einem anderen Abonnement **auf derselben Stufe**.
+
+**Verhalten hängt von der Laufzeit ab:**
+
+**Verschiedene Laufzeit** → Verhält sich wie **Downgrade**
+- Tritt am nächsten Verlängerungsdatum in Kraft
+- Beispiel: Monatlich Premium (Stufe 1) → Jährlich Premium (Stufe 1)
+
+**Gleiche Laufzeit** → Verhält sich wie **Upgrade**
+- Tritt sofort in Kraft
+- Beispiel: Premium Monatlich (Stufe 1) → Ultimate Monatlich (Stufe 1)
+
+## Erstellen einer Abonnementgruppe
+
+<Steps>
+
+1. **Zu Abonnements navigieren**
+
+   Wählen Sie in App Store Connect Ihre App aus und gehen Sie zu **Monetarisierung > Abonnements**.
+
+2. **Gruppe erstellen**
+
+   Klicken Sie auf **+** neben "Abonnementgruppen", um eine neue Gruppe zu erstellen.
+
+3. **Gruppe benennen**
+
+   Wählen Sie einen beschreibenden Namen, der die enthaltenen Abonnements widerspiegelt:
+   - "Premium-Zugang"
+   - "Cloud-Speicher-Pläne"
+   - "Pro-Funktionen"
+
+4. **Abonnements hinzufügen**
+
+   Nach dem Erstellen der Gruppe fügen Sie ihr einzelne Abonnements hinzu. Jedes Abonnement erhält eine Stufenrangfolge.
+
+5. **Stufenrangfolgen festlegen**
+
+   Ordnen Sie Abonnements vom höchsten Wert (1) zum niedrigsten Wert. Berücksichtigen Sie:
+   - Jahrespläne rangieren typischerweise höher als monatliche
+   - Höherpreisige Stufen rangieren über niedrigpreisigen
+   - Ultimate/Premium-Stufen rangieren am höchsten
+
+</Steps>
+
+## Verwendung in Ihrer App
+
+Das native-purchases Plugin handhabt automatisch die Abonnementgruppen-Logik:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Alle Abonnements in einer Gruppe abrufen
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly', 'premium_annual', 'ultimate_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Aktuelles Abonnement mit StoreKit-Transaktionen anzeigen
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const activeSubs = purchases.filter((purchase) => purchase.isActive);
+
+// Anstehendes Downgrade/Kündigung erkennen (StoreKit setzt willCancel === true)
+const pendingChange = purchases.find((purchase) => purchase.willCancel === true);
+if (pendingChange) {
+  console.log('Abonnement wird am folgenden Datum die automatische Verlängerung einstellen', pendingChange.expirationDate);
+}
+
+// Kauf (StoreKit handhabt Upgrades/Downgrades automatisch)
+await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_annual',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Auf StoreKit-Updates lauschen (wird bei Upgrades/Downgrades/Rückerstattungen ausgelöst)
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Abonnement aktualisiert:', transaction);
+});
+```
+
+## Handhabung von Abonnementwechseln
+
+### Wechseltyp erkennen
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Aktuelle Abonnementinformationen abrufen
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const currentSubscription = purchases.find(
+  (purchase) => purchase.subscriptionState === 'subscribed',
+);
+
+if (currentSubscription) {
+  // StoreKit meldet, ob Benutzer Auto-Verlängerung gekündigt hat
+  if (currentSubscription.willCancel) {
+    console.log(
+      `Benutzer hat gekündigt. Zugang bleibt bis ${currentSubscription.expirationDate}`,
+    );
+  }
+
+  if (currentSubscription.isUpgraded) {
+    console.log('Benutzer hat kürzlich auf diesen Plan upgegradet.');
+  }
+}
+
+// Auf automatische Upgrades/Downgrades lauschen
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Abonnement geändert!', transaction);
+  if (transaction.subscriptionState === 'revoked') {
+    revokeAccess();
+  } else if (transaction.isActive) {
+    unlockPremiumFeatures();
+  }
+});
+```
+
+### Benutzerkommunikation
+
+Kommunizieren Sie das Wechselverhalten immer klar:
+
+**Für Upgrades:**
+> "Sie erhalten sofortigen Zugang zu Premium-Funktionen. Wir erstatten Ihr aktuelles Abonnement anteilig."
+
+**Für Downgrades:**
+> "Sie behalten Premium-Zugang bis [Verlängerungsdatum], dann wechseln Sie zu Standard."
+
+**Für Crossgrades:**
+> "Ihr Plan wechselt zur jährlichen Abrechnung bei der nächsten Verlängerung am [Datum]."
+
+## Server-Überwachung
+
+Verwenden Sie Apples App Store Server Notifications v2 oder Ihr eigenes Beleg-Validierungs-Backend, um StoreKit-Änderungen in Ihrer Datenbank zu spiegeln. Kombinieren Sie Server-Benachrichtigungen mit dem `transactionUpdated`-Listener, damit sowohl Client als auch Backend synchron bleiben.
+
+## Best Practices
+
+### Gruppenorganisation
+- Halten Sie verwandte Abonnements in derselben Gruppe
+- Mischen Sie keine unabhängigen Funktionen (z. B. Speicher und Werbung-Entfernung)
+- Erstellen Sie separate Gruppen für verschiedene Funktionssätze
+
+### Stufenrangfolgen-Strategie
+- Jahrespläne → Höhere Stufe als monatlich (für dieselbe Stufe)
+- Höherpreisige Stufen → Höhere Stufe
+- Berücksichtigen Sie den Wert, nicht nur den Preis
+
+### Benutzererfahrung
+- Zeigen Sie aktuelles Abonnement klar an
+- Zeigen Sie alle verfügbaren Optionen in der Gruppe an
+- Geben Sie an, welche Wechsel sofort vs. bei Verlängerung erfolgen
+- Ermöglichen Sie einfachen Wechsel zwischen Plänen
+
+### Testen
+- Testen Sie alle Upgrade-Szenarien
+- Testen Sie alle Downgrade-Szenarien
+- Überprüfen Sie Crossgrade-Verhalten
+- Prüfen Sie Webhook-Auslösung
+
+## Gängige Szenarien
+
+### Szenario 1: Drei-Stufen-Monatspläne
+```
+Stufe 1: Ultimate Monatlich (19,99 €)
+Stufe 2: Premium Monatlich (9,99 €)
+Stufe 3: Basic Monatlich (4,99 €)
+```
+
+- Basic → Premium: Upgrade (sofort)
+- Premium → Ultimate: Upgrade (sofort)
+- Ultimate → Premium: Downgrade (bei Verlängerung)
+- Basic → Ultimate: Upgrade (sofort)
+
+### Szenario 2: Gemischte Laufzeitpläne
+```
+Stufe 1: Premium Jährlich (99,99 €/Jahr)
+Stufe 2: Premium Monatlich (9,99 €/Monat)
+```
+
+- Monatlich → Jährlich: Crossgrade (bei Verlängerung)
+- Jährlich → Monatlich: Downgrade (bei Verlängerung)
+
+### Szenario 3: Multi-Stufen Multi-Laufzeit
+```
+Stufe 1: Ultimate Jährlich (199 €/Jahr)
+Stufe 2: Ultimate Monatlich (19,99 €/Monat)
+Stufe 3: Premium Jährlich (99 €/Jahr)
+Stufe 4: Premium Monatlich (9,99 €/Monat)
+Stufe 5: Basic Jährlich (49 €/Jahr)
+Stufe 6: Basic Monatlich (4,99 €/Monat)
+```
+
+Diese Einrichtung bietet maximale Flexibilität bei gleichzeitiger Beibehaltung klarer Upgrade/Downgrade-Logik.
+
+## Fehlerbehebung
+
+**Abonnement erscheint nicht in der Gruppe:**
+- Überprüfen Sie, ob es der richtigen Gruppe zugewiesen ist
+- Prüfen Sie, ob es mindestens im Status "Bereit zur Einreichung" ist
+- Stellen Sie sicher, dass die Produkt-ID korrekt ist
+
+**Falsches Upgrade/Downgrade-Verhalten:**
+- Überprüfen Sie Stufenrangfolgen (1 = höchste)
+- Überprüfen Sie, ob Abonnementstufen sinnvoll sind
+- Prüfen Sie, ob Stufen korrekt gesetzt sind
+
+**Produkte aus verschiedenen Gruppen:**
+- Benutzer können gleichzeitig mehrere Gruppen abonnieren
+- Dies ist beabsichtigt - halten Sie verwandte Produkte in derselben Gruppe
+
+**getActiveProducts zeigt mehrere Abonnements:**
+- Prüfen Sie, ob Abonnements in verschiedenen Gruppen sind
+- Überprüfen Sie, ob Benutzer über Familienfreigabe abonniert ist
+- Überprüfen Sie den Abonnementstatus in App Store Connect
+
+## Zusätzliche Ressourcen
+
+Weitere Details finden Sie in der [offiziellen Apple-Dokumentation zu Abonnementgruppen](https://developer.apple.com/app-store/subscriptions/).

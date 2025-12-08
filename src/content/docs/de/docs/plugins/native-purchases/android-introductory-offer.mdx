@@ -1,0 +1,197 @@
+---
+title: Android-Abonnement-Einführungsangebot erstellen
+description: Erfahren Sie, wie Sie Einführungsangebote für automatisch verlängernde Abonnements auf Android erstellen, um neue Abonnenten zu gewinnen.
+locale: de
+sidebar:
+  order: 5
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Einführungsangebote ermöglichen es Ihnen, berechtigten Benutzern entweder eine kostenlose Testversion oder einen ermäßigten Einführungspreis anzubieten. Nach Ablauf der Einführungsphase werden Abonnements automatisch zum Standardpreis verlängert, sofern sie nicht gekündigt werden.
+
+## Überblick
+
+Einführungsangebote sind ein mächtiges Werkzeug, um:
+- Eintrittsbarrieren für neue Abonnenten zu reduzieren
+- Konversionsraten zu erhöhen
+- Benutzern zu ermöglichen, Ihre Premium-Funktionen risikofrei zu testen
+- Langfristige Abonnentenbeziehungen aufzubauen
+
+## Berechtigung
+
+Benutzer können ein Einführungsangebot erhalten, wenn sie das Abonnement zuvor noch nicht gekauft oder ein Einführungsangebot dafür erhalten haben. Google Play verwaltet die Berechtigung automatisch.
+
+## Voraussetzungen
+
+Sie müssen zuerst [ein automatisch verlängerndes Abonnement erstellen](/docs/plugins/native-purchases/android-create-subscription/), bevor Sie ein Einführungsangebot hinzufügen.
+
+## Ein Einführungsangebot erstellen
+
+<Steps>
+
+1. **Auf Angebotskonfiguration zugreifen**
+
+   Navigieren Sie zu Ihrem Abonnement in der Google Play Console und wählen Sie die Schaltfläche **Angebot hinzufügen**.
+
+   ![Schaltfläche Angebot hinzufügen](/native-purchases/android/introductory-offer/add-offer-button.webp)
+
+2. **Basisplan auswählen**
+
+   Ein Modal wird angezeigt, in dem Sie aufgefordert werden, Ihren Basisplan auszuwählen. Normalerweise haben Sie nur einen Basisplan. Klicken Sie auf **Angebot hinzufügen**, um fortzufahren.
+
+   ![Basisplan auswählen](/native-purchases/android/introductory-offer/select-base-plan.webp)
+
+3. **Angebotsdetails konfigurieren**
+
+   Geben Sie folgende Informationen ein:
+
+   **Angebots-ID**: Eine eindeutige Kennung für dieses Angebot
+
+   **Berechtigung**: Wählen Sie, wer dieses Angebot erhalten kann
+   - **Neue Kunden**: Nur Benutzer, die noch nie abonniert haben
+   - **Bestehende Kunden**: Benutzer, die zuvor abonniert haben
+   - **Vom Entwickler bestimmt**: Benutzerdefinierte Berechtigungslogik (wird von native-purchases nicht unterstützt)
+
+   :::caution
+   Das native-purchases-Plugin unterstützt nicht die Option "Vom Entwickler bestimmt". Verwenden Sie stattdessen "Neue Kunden" oder "Bestehende Kunden".
+   :::
+
+   ![Angebot konfigurieren](/native-purchases/android/introductory-offer/configure-offer-details.webp)
+
+4. **Phasen hinzufügen**
+
+   Klicken Sie am Ende der Seite auf **Phase hinzufügen**, um Ihre Angebotsstruktur zu definieren.
+
+   Sie können bis zu zwei Phasen hinzufügen, was Kombinationen wie die folgenden ermöglicht:
+   - Nur kostenlose Testversion
+   - Nur ermäßigter Preis
+   - Kostenlose Testversion gefolgt von ermäßigter wiederkehrender Zahlung
+
+5. **Phasentyp auswählen**
+
+   Wählen Sie aus drei Phasentypen:
+
+   **Kostenlose Testversion**
+   - Kostenloser Zugang für eine festgelegte Dauer
+   - Beispiel: 7 Tage kostenlos, dann 9,99 €/Monat
+
+   **Einmalzahlung**
+   - Einmalig ermäßigter Preis für einen bestimmten Zeitraum
+   - Beispiel: 1,99 € für 2 Monate, dann 9,99 €/Monat
+
+   **Ermäßigte wiederkehrende Zahlung**
+   - Reduzierter Preis pro Abrechnungszyklus für mehrere Zyklen
+   - Beispiel: 4,99 €/Monat für 3 Monate, dann 9,99 €/Monat
+
+6. **Phasendauer konfigurieren**
+
+   Legen Sie fest, wie lange die Einführungsphase dauert:
+   - Tage, Wochen oder Monate
+   - Anzahl der Abrechnungszyklen
+
+7. **Fertigstellen und aktivieren**
+
+   Klicken Sie auf **Anwenden** und dann auf **Speichern**, um das Angebot zu aktivieren. Die Schaltfläche **Aktivieren** wird verfügbar, sobald gespeichert wurde.
+
+</Steps>
+
+## Beispiele für Angebotsphasen
+
+### Beispiel 1: Einfache kostenlose Testversion
+- Phase 1: 7 Tage kostenlos
+- Dann: 9,99 €/Monat Standardpreis
+
+### Beispiel 2: Ermäßigte Einführung
+- Phase 1: 1,99 € für den ersten Monat
+- Dann: 9,99 €/Monat Standardpreis
+
+### Beispiel 3: Erweiterte Testversion + Rabatt
+- Phase 1: 14 Tage kostenlos
+- Phase 2: 4,99 €/Monat für 2 Monate
+- Dann: 9,99 €/Monat Standardpreis
+
+## Verwendung in Ihrer App
+
+Das native-purchases-Plugin verwaltet automatisch die Berechtigung für Einführungsangebote und deren Darstellung:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Produkte abrufen (enthält Metadaten zum Einführungsangebot)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+
+if (product.introductoryPrice) {
+  console.log(`Einführungspreis: ${product.introductoryPriceString}`);
+  console.log(`Regulärer Preis: ${product.priceString}`);
+  console.log(
+    `Angebotsdauer: ${product.introductoryPrice.subscriptionPeriod?.numberOfUnits} ${product.introductoryPrice.subscriptionPeriod?.unit}`,
+  );
+} else {
+  console.log('Kein Einführungsangebot für dieses Produkt konfiguriert');
+}
+
+// Kaufen (Google Play wendet Einführungspreis automatisch an, wenn der Benutzer berechtigt ist)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // Basisplan-ID aus der Google Play Console
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Einführungsangebot-Transaktion', transaction.transactionId);
+```
+
+## Best Practices
+
+### Angebotsdauer
+- **Kostenlose Testversionen**: 3-14 Tage sind optimal für die meisten Apps
+- **Ermäßigte Zeiträume**: 1-3 Monate funktionieren gut für den Gewohnheitsaufbau
+- **Preisrabatt**: 50-70% Rabatt auf den regulären Preis treibt Konversionen an
+
+### Marketing
+- Zeigen Sie das Einführungsangebot und den regulären Preis klar an
+- Zeigen Sie, was nach der Einführungsphase passiert
+- Machen Sie die Kündigung einfach und transparent
+- Erinnern Sie Benutzer, bevor die Einführungsphase endet
+
+### A/B-Tests
+Testen Sie verschiedene Angebotsstrukturen:
+- Länge der kostenlosen Testversion
+- Rabattprozentsatz
+- Rabattdauer
+- Einzelphase vs. Mehrphasen
+
+## Wichtige Hinweise
+
+- Nur ein Einführungsangebot kann gleichzeitig pro Abonnement aktiv sein
+- Benutzer können ein Einführungsangebot nur einmal pro Abonnement in Anspruch nehmen
+- Einführungsangebote gelten nicht für Abonnement-Upgrades/-Downgrades
+- Änderungen an Einführungsangeboten wirken sich nicht auf bestehende Abonnenten aus
+
+## Fehlerbehebung
+
+**Einführungsangebot wird nicht angezeigt:**
+- Überprüfen Sie, ob das Angebot in der Play Console aktiviert ist
+- Prüfen Sie die Benutzerberechtigung (hat möglicherweise das Angebot bereits verwendet)
+- Stellen Sie sicher, dass die App die neuesten Produktinformationen verwendet
+
+**Falsche Benutzer erhalten das Angebot:**
+- Überprüfen Sie die Berechtigungseinstellungen (neue vs. bestehende Kunden)
+- Prüfen Sie, ob der Benutzer zuvor auf einem anderen Gerät abonniert hat
+- Überprüfen Sie den Play Store-Kontoverlauf
+
+**Angebot wird beim Kauf nicht angewendet:**
+- Bestätigen Sie, dass die Produkt-ID genau übereinstimmt
+- Prüfen Sie, ob das Angebot noch aktiv und nicht abgelaufen ist
+- Überprüfen Sie die Datumsbereichseinstellungen für das Angebot
+
+## Nächste Schritte
+
+- [Sandbox-Tests konfigurieren](/docs/plugins/native-purchases/android-sandbox-testing/) um Ihre Angebote zu testen
+- Konversionsraten in der Play Console-Analyse überwachen
+- Erwägen Sie, mehrere Abonnementstufen mit unterschiedlichen Angeboten zu erstellen

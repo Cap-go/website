@@ -1,0 +1,56 @@
+---
+title: "Background Geolocation"
+locale: it
+description: Un plugin Capacitor che ti permette di ricevere aggiornamenti di geolocalizzazione accurati anche mentre l'app è in background
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+hero:
+  tagline: Ricevi aggiornamenti di geolocalizzazione accurati anche mentre l'app è in background.
+  image:
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions:
+    - text: Inizia
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Tracciamento Accurato" icon="rocket">
+    Priorità all'accuratezza per casi d'uso come escursionismo e navigazione
+  </Card>
+  <Card title="Aggiornamenti in Background" icon="puzzle">
+    Continua a ricevere aggiornamenti di posizione anche quando l'app è in background
+  </Card>
+  <Card title="Efficiente per la Batteria" icon="setting">
+    Ottimizzato per bilanciare accuratezza e consumo della batteria
+  </Card>
+  <Card title="Iniziare" icon="open-book">
+    Controlla la [Guida Iniziare](/docs/plugins/background-geolocation/getting-started/) per installare e configurare il plugin.
+  </Card>
+</CardGrid>
+
+## Confronto Plugin
+
+Un breve confronto tra i tre principali plugin di background-geolocation comunemente usati nelle app Capacitor.
+
+| Plugin | Accuratezza | Background | Upload HTTP | Prezzo |
+|--------|----------|------------|-------------|---------|
+| `@capacitor-community/background-geolocation` (Community) | Non accurato | Sì | No | Gratuito |
+| `@capgo/background-geolocation` (questo plugin) | Accurato | Sì | No | Gratuito |
+| Transistorsoft (originale) | Accurato | Sì | Sì — uploader HTTP integrato alla tua API | A pagamento |
+
+**Note:**
+- Il plugin Community è leggero e continua a funzionare in background, ma è noto per essere meno accurato delle opzioni sottostanti.
+- Questo plugin Capgo è ottimizzato per fornire fix di posizione accurati e operazioni in background affidabili senza richiedere una licenza a pagamento.
+- Transistorsoft offre una soluzione commerciale completa che include anche capacità di upload HTTP integrate per inviare dati di posizione al tuo backend.

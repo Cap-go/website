@@ -1,0 +1,86 @@
+---
+title: 시작하기
+description: Capgo Health 플러그인으로 HealthKit 및 Health Connect 액세스를 활성화합니다.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **플러그인 설치**
+   <PackageManagers pkg="@capgo/capacitor-health" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS 구성
+
+- Xcode에서 `ios/App/App.xcworkspace`를 열고 **HealthKit** 기능을 활성화합니다.
+- `Info.plist`에 사용 설명을 제공합니다:
+
+```xml
+<key>NSHealthShareUsageDescription</key>
+<string>이 앱은 경험을 개인화하기 위해 건강 지표를 읽습니다.</string>
+<key>NSHealthUpdateUsageDescription</key>
+<string>이 앱은 사용자가 명시적으로 기록한 건강 데이터를 작성합니다.</string>
+```
+
+## Android 구성
+
+건강 데이터는 [Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect)로 구동됩니다. 다음을 확인하세요:
+
+- `minSdkVersion`이 **26 이상**입니다 (Capacitor 5는 이미 이를 만족합니다).
+- 사용자에게 Health Connect가 설치되어 있습니다 (Android 14 이상은 번들로 제공되며, 이전 버전은 Play 스토어 다운로드가 필요합니다).
+- 액세스 권한을 요청할 때 런타임 권한 UI를 통해 사용자를 안내합니다.
+
+## 사용 가능 여부 확인 및 액세스 요청
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+const { available, reason } = await Health.isAvailable();
+if (!available) {
+  console.warn('Health API를 사용할 수 없습니다:', reason);
+  return;
+}
+
+await Health.requestAuthorization({
+  read: ['steps', 'heartRate', 'weight'],
+  write: ['weight'],
+});
+```
+
+## 샘플 읽기
+
+```typescript
+const { samples } = await Health.readSamples({
+  dataType: 'steps',
+  startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  endDate: new Date().toISOString(),
+  limit: 200,
+});
+
+samples.forEach((sample) => {
+  console.log(sample.value, sample.startDate, sample.endDate);
+});
+```
+
+## 샘플 쓰기
+
+```typescript
+await Health.saveSample({
+  dataType: 'weight',
+  value: 74.6,
+  startDate: new Date().toISOString(),
+});
+```
+
+## 권한 관리
+
+- `checkAuthorization()`을 사용하여 현재 읽기/쓰기 범위를 확인하고 UI를 조정합니다.
+- 거부를 우아하게 처리하고 데이터가 경험을 향상시키는 이유를 설명하고 재시도를 제공합니다.
+- 항상 사용자의 개인 정보를 존중하고 기능에 필요한 최소 범위만 요청합니다.

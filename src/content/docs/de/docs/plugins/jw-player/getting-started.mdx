@@ -1,0 +1,345 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie JW Player installieren und in Ihre Capacitor-App integrieren, um professionelle Video-Streaming-Funktionen zu erhalten.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Voraussetzungen
+
+Sie benötigen ein JW Player-Konto und einen Lizenzschlüssel, um dieses Plugin zu verwenden. Registrieren Sie sich bei [JW Player](https://www.jwplayer.com/), wenn Sie noch keines haben.
+
+## Plattform-Konfiguration
+
+### iOS
+
+Fügen Sie Ihren JW Player Lizenzschlüssel zu Ihrer `Info.plist` hinzu:
+
+```xml
+<key>JWPlayerLicenseKey</key>
+<string>YOUR_LICENSE_KEY</string>
+```
+
+### Android
+
+Fügen Sie Ihren JW Player Lizenzschlüssel zu `android/app/src/main/res/values/strings.xml` hinzu:
+
+```xml
+<resources>
+    <string name="jw_player_license_key">YOUR_LICENSE_KEY</string>
+</resources>
+```
+
+## Verwendungsbeispiel
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// Einzelnes Video abspielen
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'Mein Video',
+  description: 'Video-Beschreibung',
+  poster: 'https://example.com/poster.jpg'
+});
+
+// Playlist abspielen
+await JWPlayer.playPlaylist({
+  playlistUrl: 'https://example.com/playlist.json'
+});
+
+// Player-Ereignisse abhören
+JWPlayer.addListener('playerReady', () => {
+  console.log('Player ist bereit');
+});
+
+JWPlayer.addListener('play', (data) => {
+  console.log('Video-Wiedergabe gestartet');
+});
+
+JWPlayer.addListener('pause', (data) => {
+  console.log('Video pausiert');
+});
+
+JWPlayer.addListener('complete', (data) => {
+  console.log('Video-Wiedergabe abgeschlossen');
+});
+
+JWPlayer.addListener('error', (error) => {
+  console.error('Player-Fehler:', error);
+});
+```
+
+## API-Referenz
+
+### playVideo(options)
+
+```typescript
+playVideo(options: VideoOptions) => Promise<void>
+```
+
+Spielt ein einzelnes Video im Vollbildmodus ab.
+
+| Parameter     | Typ                    |
+| ------------- | ---------------------- |
+| **`options`** | `VideoOptions` |
+
+### playPlaylist(options)
+
+```typescript
+playPlaylist(options: PlaylistOptions) => Promise<void>
+```
+
+Spielt eine Playlist im Vollbildmodus ab.
+
+| Parameter     | Typ                        |
+| ------------- | -------------------------- |
+| **`options`** | `PlaylistOptions` |
+
+### pause()
+
+```typescript
+pause() => Promise<void>
+```
+
+Pausiert das aktuelle Video.
+
+### play()
+
+```typescript
+play() => Promise<void>
+```
+
+Setzt die Video-Wiedergabe fort.
+
+### seek(options)
+
+```typescript
+seek(options: { position: number }) => Promise<void>
+```
+
+Springt zu einer bestimmten Position im Video.
+
+| Parameter     | Typ                         |
+| ------------- | --------------------------- |
+| **`options`** | `{ position: number }` |
+
+### setPlaybackSpeed(options)
+
+```typescript
+setPlaybackSpeed(options: { speed: number }) => Promise<void>
+```
+
+Setzt die Wiedergabegeschwindigkeit.
+
+| Parameter     | Typ                      |
+| ------------- | ----------------------- |
+| **`options`** | `{ speed: number }` |
+
+### setVolume(options)
+
+```typescript
+setVolume(options: { volume: number }) => Promise<void>
+```
+
+Setzt die Audiolautstärke (0.0 bis 1.0).
+
+| Parameter     | Typ                       |
+| ------------- | ------------------------- |
+| **`options`** | `{ volume: number }` |
+
+### selectAudioTrack(options)
+
+```typescript
+selectAudioTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+Wählt eine Audiospur nach Index aus.
+
+| Parameter     | Typ                            |
+| ------------- | ------------------------------ |
+| **`options`** | `{ trackIndex: number }` |
+
+### selectCaptionTrack(options)
+
+```typescript
+selectCaptionTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+Wählt eine Untertitelspur nach Index aus.
+
+| Parameter     | Typ                            |
+| ------------- | ------------------------------ |
+| **`options`** | `{ trackIndex: number }` |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+Stoppt die Wiedergabe und schließt den Player.
+
+## Schnittstellen
+
+### VideoOptions
+
+| Eigenschaft       | Typ               | Beschreibung                             |
+| ----------------- | ----------------- | ---------------------------------------- |
+| **`mediaUrl`**    | `string` | URL der Videodatei                       |
+| **`title`**       | `string` | Video-Titel (optional)                   |
+| **`description`** | `string` | Video-Beschreibung (optional)            |
+| **`poster`**      | `string` | URL des Posters/Thumbnails (optional)    |
+| **`autoStart`**   | `boolean` | Wiedergabe automatisch starten (optional, Standard: true) |
+
+### PlaylistOptions
+
+| Eigenschaft       | Typ               | Beschreibung                 |
+| ----------------- | ----------------- | ---------------------------- |
+| **`playlistUrl`** | `string` | URL der JW Playlist JSON     |
+| **`autoStart`**   | `boolean` | Wiedergabe automatisch starten (optional) |
+
+## Event-Listener
+
+### Verfügbare Ereignisse
+
+- `playerReady` - Player ist initialisiert und bereit
+- `play` - Video-Wiedergabe gestartet
+- `pause` - Video-Wiedergabe pausiert
+- `complete` - Video-Wiedergabe abgeschlossen
+- `error` - Player hat einen Fehler festgestellt
+- `seek` - Benutzer ist zu einer anderen Position gesprungen
+- `time` - Wiedergabezeit aktualisiert
+- `bufferChange` - Pufferstatus geändert
+
+### Event-Beispiel
+
+```typescript
+// Zeit-Updates abhören
+JWPlayer.addListener('time', (data) => {
+  console.log('Aktuelle Zeit:', data.position);
+  console.log('Dauer:', data.duration);
+});
+
+// Pufferänderungen abhören
+JWPlayer.addListener('bufferChange', (data) => {
+  console.log('Puffert:', data.buffering);
+});
+
+// Listener entfernen, wenn fertig
+const listener = await JWPlayer.addListener('play', (data) => {
+  console.log('Spielt ab');
+});
+
+// Später...
+listener.remove();
+```
+
+## Erweiterte Verwendung
+
+### Abspielen mit Untertiteln
+
+```typescript
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'Video mit Untertiteln',
+  poster: 'https://example.com/poster.jpg',
+  tracks: [
+    {
+      file: 'https://example.com/captions-en.vtt',
+      label: 'English',
+      kind: 'captions'
+    },
+    {
+      file: 'https://example.com/captions-es.vtt',
+      label: 'Spanish',
+      kind: 'captions'
+    }
+  ]
+});
+```
+
+### Benutzerdefinierte Wiedergabesteuerung
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// Wiedergabe starten
+await JWPlayer.play();
+
+// Nach 10 Sekunden pausieren
+setTimeout(() => {
+  JWPlayer.pause();
+}, 10000);
+
+// Zu 30 Sekunden springen
+await JWPlayer.seek({ position: 30 });
+
+// Wiedergabegeschwindigkeit auf 1.5x setzen
+await JWPlayer.setPlaybackSpeed({ speed: 1.5 });
+
+// Lautstärke auf 50% setzen
+await JWPlayer.setVolume({ volume: 0.5 });
+```
+
+## Best Practices
+
+- Stellen Sie immer ein Posterbild für bessere Benutzererfahrung bereit
+- Behandeln Sie Player-Fehler elegant mit passenden Fehlermeldungen
+- Entfernen Sie Event-Listener, wenn Komponente demontiert wird
+- Testen Sie Video-Wiedergabe auf iOS- und Android-Geräten
+- Verwenden Sie geeignete Videoformate (MP4 empfohlen)
+- Implementieren Sie Ladezustände, während Video initialisiert wird
+- Berücksichtigen Sie Netzwerkbedingungen beim Streaming
+
+## Fehlerbehebung
+
+### Video wird nicht abgespielt
+
+- Überprüfen Sie, ob Ihr JW Player Lizenzschlüssel korrekt ist
+- Prüfen Sie, ob die Video-URL zugänglich und gültig ist
+- Stellen Sie sicher, dass korrekte CORS-Header vorhanden sind, wenn Sie einen benutzerdefinierten Server verwenden
+- Testen Sie mit verschiedenen Videoformaten
+
+### Vollbild-Probleme
+
+- Das Plugin spielt immer im Vollbildmodus ab
+- Stellen Sie sicher, dass korrekte Berechtigungen für Vollbild in Ihrer App vorhanden sind
+
+### Performance
+
+- Verwenden Sie geeignete Video-Qualität für Zielgeräte
+- Erwägen Sie adaptives Streaming für bessere Performance
+- Implementieren Sie geeignete Puffer-Indikatoren

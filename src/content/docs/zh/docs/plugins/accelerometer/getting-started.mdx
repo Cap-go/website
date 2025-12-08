@@ -1,0 +1,303 @@
+---
+title: "加速度计入门"
+locale: zh
+description: "了解如何将加速度计感应集成到您的 Capacitor 应用中"
+---
+
+本指南将引导您将 Capacitor Accelerometer 插件集成到应用程序中。
+
+## 安装
+
+使用 npm 安装插件:
+
+```bash
+npm install @capgo/capacitor-accelerometer
+npx cap sync
+```
+
+## 平台配置
+
+### iOS
+无需额外配置。加速度计始终可用。
+
+### Android
+无需额外配置。加速度计始终可用。
+
+### Web
+插件使用 DeviceMotion API。生产环境需要 HTTPS。
+
+## 基本用法
+
+### 导入插件
+
+```typescript
+import { Accelerometer } from '@capgo/capacitor-accelerometer';
+```
+
+### 开始监控
+
+```typescript
+const startAccelerometer = async () => {
+  await Accelerometer.start({
+    interval: 100 // 更新间隔(毫秒)
+  });
+
+  console.log('加速度计已启动');
+};
+```
+
+### 监听加速度事件
+
+```typescript
+Accelerometer.addListener('accelerationChange', (data) => {
+  console.log('X:', data.x);
+  console.log('Y:', data.y);
+  console.log('Z:', data.z);
+  console.log('时间戳:', data.timestamp);
+});
+```
+
+### 获取当前读数
+
+```typescript
+const getCurrentAcceleration = async () => {
+  const reading = await Accelerometer.getCurrentAcceleration();
+  console.log('当前加速度:', reading);
+};
+```
+
+### 停止监控
+
+```typescript
+const stopAccelerometer = async () => {
+  await Accelerometer.stop();
+  console.log('加速度计已停止');
+};
+```
+
+## 完整示例
+
+这是一个包含摇晃检测的完整示例:
+
+```typescript
+import { Accelerometer } from '@capgo/capacitor-accelerometer';
+
+class AccelerometerService {
+  private listener: any;
+  private lastX = 0;
+  private lastY = 0;
+  private lastZ = 0;
+  private shakeThreshold = 15;
+
+  async initialize() {
+    await Accelerometer.start({ interval: 100 });
+
+    this.listener = Accelerometer.addListener('accelerationChange', (data) => {
+      this.handleAcceleration(data);
+    });
+  }
+
+  handleAcceleration(data: any) {
+    // 计算差值
+    const deltaX = Math.abs(data.x - this.lastX);
+    const deltaY = Math.abs(data.y - this.lastY);
+    const deltaZ = Math.abs(data.z - this.lastZ);
+
+    // 检查摇晃
+    if (deltaX > this.shakeThreshold ||
+        deltaY > this.shakeThreshold ||
+        deltaZ > this.shakeThreshold) {
+      this.onShake();
+    }
+
+    // 更新最后的值
+    this.lastX = data.x;
+    this.lastY = data.y;
+    this.lastZ = data.z;
+
+    // 更新 UI
+    this.updateDisplay(data);
+  }
+
+  onShake() {
+    console.log('设备被摇晃!');
+    // 触发摇晃动作
+  }
+
+  updateDisplay(data: any) {
+    console.log(`X: ${data.x.toFixed(2)} m/s²`);
+    console.log(`Y: ${data.y.toFixed(2)} m/s²`);
+    console.log(`Z: ${data.z.toFixed(2)} m/s²`);
+
+    // 计算幅度
+    const magnitude = Math.sqrt(
+      data.x * data.x +
+      data.y * data.y +
+      data.z * data.z
+    );
+    console.log(`幅度: ${magnitude.toFixed(2)} m/s²`);
+  }
+
+  async cleanup() {
+    if (this.listener) {
+      this.listener.remove();
+    }
+    await Accelerometer.stop();
+  }
+}
+
+// 用法
+const accelService = new AccelerometerService();
+accelService.initialize();
+
+// 完成时清理
+// accelService.cleanup();
+```
+
+## 理解读数
+
+### 加速度轴
+- **X 轴**:左(-)到右(+)
+- **Y 轴**:下(-)到上(+)
+- **Z 轴**:后(-)到前(+)
+
+### 重力
+- 静止设备在一个轴上显示约 9.8 m/s²(重力)
+- 移动设备除了重力外还显示加速度
+
+### 单位
+- 以米每秒平方(m/s²)测量
+- 重力 = 9.8 m/s²
+
+## 常见用例
+
+### 摇晃检测
+
+```typescript
+class ShakeDetector {
+  private lastUpdate = 0;
+  private lastX = 0;
+  private lastY = 0;
+  private lastZ = 0;
+
+  detectShake(x: number, y: number, z: number): boolean {
+    const currentTime = Date.now();
+
+    if (currentTime - this.lastUpdate > 100) {
+      const deltaX = Math.abs(x - this.lastX);
+      const deltaY = Math.abs(y - this.lastY);
+      const deltaZ = Math.abs(z - this.lastZ);
+
+      this.lastUpdate = currentTime;
+      this.lastX = x;
+      this.lastY = y;
+      this.lastZ = z;
+
+      return deltaX + deltaY + deltaZ > 15;
+    }
+
+    return false;
+  }
+}
+```
+
+### 倾斜检测
+
+```typescript
+class TiltDetector {
+  getTiltAngles(x: number, y: number, z: number) {
+    const roll = Math.atan2(y, z) * (180 / Math.PI);
+    const pitch = Math.atan2(-x, Math.sqrt(y * y + z * z)) * (180 / Math.PI);
+
+    return { roll, pitch };
+  }
+
+  isDeviceFlat(z: number): boolean {
+    return Math.abs(z - 9.8) < 1.0;
+  }
+
+  isDeviceUpright(y: number): boolean {
+    return Math.abs(y - 9.8) < 2.0;
+  }
+}
+```
+
+### 步数计数器
+
+```typescript
+class StepCounter {
+  private steps = 0;
+  private lastMagnitude = 0;
+  private threshold = 11;
+
+  processAcceleration(x: number, y: number, z: number) {
+    const magnitude = Math.sqrt(x * x + y * y + z * z);
+
+    if (magnitude > this.threshold &&
+        this.lastMagnitude < this.threshold) {
+      this.steps++;
+      console.log('步数:', this.steps);
+    }
+
+    this.lastMagnitude = magnitude;
+  }
+}
+```
+
+## 最佳实践
+
+1. **选择适当的间隔**:平衡响应性和电池寿命
+   - 游戏:16-50ms
+   - 健身:100-200ms
+   - 一般:200-500ms
+
+2. **移除监听器**:完成后始终清理
+3. **过滤噪声**:使用移动平均值获得更平滑的数据
+4. **考虑电池**:高频轮询会耗尽电池
+5. **在真实设备上测试**:模拟器无法提供准确的数据
+
+## 性能提示
+
+### 防抖
+
+```typescript
+class AccelerometerDebouncer {
+  private timeout: any;
+
+  debounce(callback: Function, delay: number) {
+    return (...args: any[]) => {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => callback(...args), delay);
+    };
+  }
+}
+```
+
+### 数据平滑
+
+```typescript
+class AccelerometerFilter {
+  private alpha = 0.8;
+  private filteredX = 0;
+  private filteredY = 0;
+  private filteredZ = 0;
+
+  filter(x: number, y: number, z: number) {
+    this.filteredX = this.alpha * x + (1 - this.alpha) * this.filteredX;
+    this.filteredY = this.alpha * y + (1 - this.alpha) * this.filteredY;
+    this.filteredZ = this.alpha * z + (1 - this.alpha) * this.filteredZ;
+
+    return {
+      x: this.filteredX,
+      y: this.filteredY,
+      z: this.filteredZ
+    };
+  }
+}
+```
+
+## 下一步
+
+- 探索 [API 参考](https://github.com/Cap-go/capacitor-accelerometer#api)以获取完整的方法文档
+- 查看[示例应用](https://github.com/Cap-go/capacitor-accelerometer/tree/main/example)以了解高级用法
+- 参阅[教程](/plugins-tutorials/capacitor-accelerometer)以获取完整的实现示例

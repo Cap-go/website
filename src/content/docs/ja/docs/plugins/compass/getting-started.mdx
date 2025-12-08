@@ -1,0 +1,219 @@
+---
+title: はじめに
+locale: ja
+description: Compassプラグインをインストールして使用し、Capacitorアプリでデバイスのコンパス方位を読み取る方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS設定
+
+iOSでは、コンパスアクセスに位置情報権限が必要です。以下を `Info.plist` に追加します:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need location permission to access the compass</string>
+```
+
+## Android設定
+
+追加の設定は必要ありません。プラグインはデバイスの磁力計と加速度計センサーを使用します。
+
+## 使用方法
+
+プラグインをインポートして、そのメソッドを使用してコンパスの方位を読み取ります:
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// 現在の方位を一度取得
+const getCurrentHeading = async () => {
+  const { value } = await CapgoCompass.getCurrentHeading();
+  console.log('Current heading:', value, 'degrees');
+};
+
+// 継続的な方位更新を開始
+const startCompass = async () => {
+  // 更新のリッスンを開始
+  await CapgoCompass.startListening();
+
+  // 方位変更のリスナーを追加
+  const handle = await CapgoCompass.addListener('headingChange', (event) => {
+    console.log('Heading:', event.value, 'degrees');
+  });
+
+  // 後で、リッスンを停止するには:
+  // await CapgoCompass.stopListening();
+  // await handle.remove();
+};
+
+// 権限を確認
+const checkPermission = async () => {
+  const status = await CapgoCompass.checkPermissions();
+  console.log('Permission status:', status.compass);
+};
+
+// 権限をリクエスト
+const requestPermission = async () => {
+  const status = await CapgoCompass.requestPermissions();
+  if (status.compass === 'granted') {
+    console.log('Compass access granted');
+  }
+};
+```
+
+## APIリファレンス
+
+### getCurrentHeading()
+
+現在のコンパス方位を度数で取得します。
+
+```typescript
+const result = await CapgoCompass.getCurrentHeading();
+// 戻り値: { value: number } - 度数での方位（0-360）
+```
+
+### startListening()
+
+コンパス方位変更のリッスンを開始します。方位イベントが発行される前に呼び出す必要があります。
+
+```typescript
+await CapgoCompass.startListening();
+```
+
+### stopListening()
+
+コンパス方位変更のリッスンを停止します。
+
+```typescript
+await CapgoCompass.stopListening();
+```
+
+### addListener('headingChange', callback)
+
+方位変更イベントのリスナーを追加します。
+
+```typescript
+const handle = await CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
+
+// 完了したらリスナーを削除
+await handle.remove();
+```
+
+### removeAllListeners()
+
+登録されたすべてのリスナーを削除します。
+
+```typescript
+await CapgoCompass.removeAllListeners();
+```
+
+### checkPermissions()
+
+現在の権限ステータスを確認します。
+
+```typescript
+const status = await CapgoCompass.checkPermissions();
+// 戻り値: { compass: 'prompt' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+コンパスデータへのアクセス権限をリクエストします。
+
+```typescript
+const status = await CapgoCompass.requestPermissions();
+```
+
+### getPluginVersion()
+
+ネイティブプラグインのバージョンを取得します。
+
+```typescript
+const { version } = await CapgoCompass.getPluginVersion();
+```
+
+## 完全な例
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+export class CompassService {
+  private listenerHandle: any = null;
+
+  async init() {
+    // 権限を確認してリクエスト
+    const status = await CapgoCompass.checkPermissions();
+    if (status.compass !== 'granted') {
+      const result = await CapgoCompass.requestPermissions();
+      if (result.compass !== 'granted') {
+        throw new Error('Compass permission denied');
+      }
+    }
+  }
+
+  async startTracking(onHeadingChange: (heading: number) => void) {
+    // 更新のリッスンを開始
+    await CapgoCompass.startListening();
+
+    // イベントリスナーを追加
+    this.listenerHandle = await CapgoCompass.addListener(
+      'headingChange',
+      (event) => {
+        onHeadingChange(event.value);
+      }
+    );
+  }
+
+  async stopTracking() {
+    if (this.listenerHandle) {
+      await this.listenerHandle.remove();
+      this.listenerHandle = null;
+    }
+    await CapgoCompass.stopListening();
+  }
+
+  async getHeading(): Promise<number> {
+    const { value } = await CapgoCompass.getCurrentHeading();
+    return value;
+  }
+
+  getCardinalDirection(heading: number): string {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(heading / 45) % 8;
+    return directions[index];
+  }
+}
+```
+
+## プラットフォームノート
+
+### iOS
+- iOS 10.0+が必要
+- 方位データにCore Locationを使用
+- 位置情報権限が必要（NSLocationWhenInUseUsageDescription）
+- リッスンがアクティブなときに方位更新が継続的に行われる
+
+### Android
+- Android 6.0（API 23）+が必要
+- 加速度計と磁力計センサーを使用
+- コンパスセンサーに特別な権限は不要
+- センサーフュージョンから方位が計算される
+
+### Web
+- Webプラットフォームではサポートされていません
+- 呼び出されるとメソッドはエラーをスローします

@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-mute"
+description: iOS 기기의 무음 스위치 상태를 감지 및 제어하고 Android에서 볼륨 상태를 확인하세요.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 기기가 무음 또는 무음 모드로 설정되어 있는지 확인하세요. iOS에서는 무음 스위치를 감지하고 Android에서는 볼륨 상태를 감지합니다.
+  image:
+    file: ~public/icons/plugins/mute.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/mute/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mute/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="무음 모드 감지" icon="rocket">
+    기기가 무음/무음 모드인지 감지 🔇
+  </Card>
+  <Card title="크로스 플랫폼" icon="setting">
+    iOS(무음 스위치) 및 Android(볼륨) 모두에서 작동 📱
+  </Card>
+  <Card title="간단한 API" icon="pencil">
+    간단한 메서드로 쉽게 사용 🎯
+  </Card>
+  <Card title="포괄적인 문서" icon="open-book">
+    [문서](/docs/plugins/mute/getting-started/)를 확인하여 몇 분 만에 플러그인을 마스터하세요.
+  </Card>
+</CardGrid>

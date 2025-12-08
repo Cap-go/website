@@ -1,0 +1,145 @@
+---
+title: 开始使用
+locale: zh
+description: @capgo/capacitor-android-inline-install 的安装和使用指南
+sidebar:
+  order: 2
+  label: "开始使用"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 使用示例
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+// 基本内联安装
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp'
+});
+
+// 带跟踪的高级安装
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp',
+  referrer: 'campaign=my-campaign&source=app',
+  overlay: true,
+  fallback: true
+});
+
+// 处理安装流程
+try {
+  await AndroidInlineInstall.startInlineInstall({
+    id: 'com.spotify.music',
+    referrer: 'utm_source=myapp&utm_campaign=music_promotion'
+  });
+  console.log('Install overlay triggered successfully');
+} catch (error) {
+  console.error('Install failed:', error);
+}
+```
+
+## 核心 API 方法
+
+### 安装管理
+- `startInlineInstall(options)` - 为指定应用触发 Google Play 内联安装覆盖层
+
+## 配置选项
+
+```typescript
+interface InlineInstallOptions {
+  id: string;           // 目标应用包名（必需）
+  referrer?: string;    // 跟踪活动字符串（可选）
+  callerId?: string;    // 调用方应用包名（默认为当前应用）
+  overlay?: boolean;    // 启用/禁用 Play 覆盖层（默认：true）
+  fallback?: boolean;   // 如果覆盖层失败，使用完整商店页面（默认：true）
+}
+```
+
+## Google Play 要求
+
+### Premium Growth Tools 资格
+您的应用必须符合 Google Play 的 Premium Growth Tools 资格才能使用内联安装：
+- 具有显著用户参与度的应用
+- 良好的 Play Store 评分和评价
+- 符合 Google Play 政策
+
+### 目标应用要求
+- 目标应用必须在 Google Play Store 上可用
+- 目标应用必须支持内联安装
+- 用户必须登录 Google Play Store
+
+## 行为和回退
+
+### 覆盖层模式（默认）
+1. 尝试在您的应用内打开 Google Play 覆盖层
+2. 如果覆盖层不可用，回退到完整的 Play Store 页面
+3. 如果 Play Store 不可用，显示错误
+
+### 完整商店模式
+- 直接打开完整的 Google Play Store 页面
+- 完全绕过覆盖层尝试
+
+## 平台支持
+
+- **Android**：完全支持 Google Play Services
+- **iOS**：不支持（Android 特定功能）
+- **Web**：不支持（原生 Android 功能）
+
+## 实现细节
+
+该插件使用 Android intent 与 Google Play Store 通信：
+- 用于内联安装覆盖层的 Intent action
+- 回退到标准 Play Store intent
+- 自动处理 Play Services 可用性
+
+## 使用场景
+
+- **应用发现**：在您的生态系统内推广相关应用
+- **交叉推广**：推动合作伙伴应用的安装
+- **功能解锁**：安装额外的模块或扩展
+- **配套应用**：无缝安装支持应用
+
+## 最佳实践
+
+- 始终为没有 Play Services 的用户提供回退选项
+- 使用不同的设备配置和 Play Store 版本进行测试
+- 使用推荐人跟踪来衡量转化率
+- 优雅地处理安装错误
+- 如果用户拒绝安装，请尊重用户选择
+
+## 限制
+
+- 仅限 Android 功能
+- 需要 Google Play Services
+- 仅适用于符合 Premium Growth Tools 资格的应用
+- 受 Google Play Store 政策和可用性约束

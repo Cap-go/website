@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-textinteraction"
+locale: zh
+description: 启用或禁用 iOS 文本交互放大器以精确控制 WebView 行为。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 在自助服务终端或游戏体验中移除 iOS 放大镜，然后在文本输入之前恢复它。
+  image:
+    file: ~public/icons/plugins/textinteraction.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/textinteraction/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-textinteraction/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+控制 Apple 的文本交互系统，以在自助服务终端显示、游戏和互动装置上定制用户体验。
+
+<CardGrid stagger>
+  <Card title="iOS 专用" icon="rocket">
+    切换 iOS 15 中引入的放大镜和选择手柄。
+  </Card>
+  <Card title="简单的 API" icon="pencil">
+    调用单个方法来启用或禁用文本交互状态。
+  </Card>
+  <Card title="安全默认值" icon="approve-check">
+    接收布尔结果以便您可以检测不支持的版本。
+  </Card>
+  <Card title="自助服务终端友好" icon="star">
+    在受控装置或标牌上防止长按复制/粘贴。
+  </Card>
+</CardGrid>
+
+使用入门指南获取最小集成模式，并提醒在显示文本输入之前重新启用交互。

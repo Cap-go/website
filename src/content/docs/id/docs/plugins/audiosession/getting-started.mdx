@@ -1,0 +1,72 @@
+---
+title: Memulai
+description: Konfigurasi plugin AudioSession untuk bereaksi terhadap perubahan rute audio dan gangguan iOS.
+sidebar:
+  order: 2
+locale: id
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+> ℹ️ **Dukungan platform:** API audio session tersedia di iOS. Panggilan di Android dan web diselesaikan tanpa efek sehingga Anda dapat menyimpan logika bersama.
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan platform iOS**
+   <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Periksa output yang tersedia
+
+```typescript
+import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
+
+const outputs = await AudioSession.currentOutputs();
+
+if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
+  console.log('Bluetooth speaker connected');
+}
+```
+
+## Override ke mode speaker
+
+```typescript
+import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
+
+await AudioSession.overrideOutput(OutputOverrideType.speaker);
+
+// Restore system routing when you are done
+await AudioSession.overrideOutput(OutputOverrideType.default);
+```
+
+## Dengarkan peristiwa rute dan gangguan
+
+```typescript
+import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
+
+const routeListener = await AudioSession.addListener('routeChanged', (reason) => {
+  if (reason === RouteChangeReasons.NEW_DEVICE_AVAILABLE) {
+    console.log('User connected a new audio route');
+  }
+});
+
+const interruptionListener = await AudioSession.addListener('interruption', (type) => {
+  if (type === InterruptionTypes.BEGAN) {
+    // Pause playback while we are interrupted
+  } else {
+    // Resume playback
+  }
+});
+
+// Later during cleanup
+await routeListener.remove();
+await interruptionListener.remove();
+```
+
+## Entitlements
+
+- **iOS**: Tambahkan mode audio latar belakang yang diperlukan (misalnya `audio`, `voice`) di dalam `ios/App/App/Info.plist` jika aplikasi Anda memutar audio di latar belakang.
+- **Platform lain**: Tidak diperlukan pengaturan tambahan; metode akan diselesaikan dengan hasil kosong.

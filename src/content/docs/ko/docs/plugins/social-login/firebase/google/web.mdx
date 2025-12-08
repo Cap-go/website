@@ -1,0 +1,55 @@
+---
+title: Web에서 Firebase Google 로그인
+locale: ko
+description: Firebase의 내장 Google 로그인을 사용하여 Web에서 Firebase Authentication으로 Google 로그인을 설정하는 방법을 알아보세요.
+sidebar:
+    order: 4
+---
+
+## 소개
+
+Capacitor Social Login 플러그인은 **웹 플랫폼을 지원하지 않습니다**. 웹 애플리케이션의 경우 Firebase의 내장 Google 로그인을 직접 사용해야 하며, 이는 더 안정적인 팝업 기반 인증 흐름을 제공합니다.
+
+## 웹에서 플러그인을 사용하지 않는 이유는?
+
+Capacitor Social Login 플러그인은 플랫폼별 인증 흐름을 활용할 수 있는 네이티브 모바일 플랫폼(Android 및 iOS)용으로 설계되었습니다. 웹의 경우 Firebase의 네이티브 `signInWithPopup` 메서드가 다음과 같은 장점이 있습니다:
+
+- ✅ 더 안정적이고 더 나은 지원
+- ✅ 브라우저 세션 스토리지를 자동으로 처리
+- ✅ 더 나은 오류 처리 제공
+- ✅ 추가 구성이 필요하지 않음
+
+## 설정 단계
+
+1. **Firebase 프로젝트 구성**
+
+   Firebase 프로젝트에서 Google 로그인이 활성화되어 있는지 확인하세요:
+   - [Firebase Console](https://console.firebase.google.com/)로 이동
+   - Authentication > Sign-in method로 이동
+   - Google 로그인 제공업체 활성화
+
+2. 승인된 도메인 추가
+    1. [console.cloud.google.com](https://console.cloud.google.com/)에서 프로젝트 개요로 이동
+        <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+    2. `Authentication` 메뉴 열기
+        <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+    3. `Settings` 버튼 클릭
+        <img src="/social-login-assets/firebase_select_authentication_settings.webp" alt="Firebase Authentication Sign-in Method Button" />
+    4. `Authorized domains` 설정
+        <img src="/social-login-assets/firebase_select_authentication_settings_authorized_domains.webp" alt="Firebase Authentication Settings Authorized Domains" />
+
+## 예제 구현
+
+다음을 수행하는 완전한 구현은 예제 앱의 [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) 파일을 참조하세요:
+
+- 웹 플랫폼용 Firebase의 `signInWithPopup` 사용
+- Android/iOS 플랫폼용 Capacitor Social Login 플러그인 사용
+- 플랫폼 감지 자동 처리
+
+예제는 네이티브 플랫폼용 플러그인을 사용하면서 웹용 Firebase의 내장 메서드를 조건부로 사용하는 방법을 보여줍니다.
+
+## 추가 리소스
+
+- [Firebase Authentication Documentation](https://firebase.google.com/docs/auth) - 전체 Firebase Auth 문서
+- [Firebase Google Sign-In for Web](https://firebase.google.com/docs/auth/web/google-signin) - 웹용 Google 로그인 공식 Firebase 가이드
+- [Google Login Setup Guide](/docs/plugins/social-login/google/general/) - 승인된 도메인 및 OAuth 동의 화면 구성 가이드

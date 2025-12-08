@@ -1,0 +1,302 @@
+---
+title: Comenzando
+locale: es
+description: Aprende cómo integrar reproducción de video nativo en tu app Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-video-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Uso Básico
+
+```typescript
+import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
+
+// Inicializar un reproductor de video
+const playVideo = async () => {
+  const result = await CapacitorVideoPlayer.initPlayer({
+    mode: 'fullscreen',
+    url: 'https://example.com/video.mp4',
+    playerId: 'myPlayer',
+    componentTag: 'div'
+  });
+
+  console.log('Player initialized:', result);
+};
+
+// Reproducir el video
+await CapacitorVideoPlayer.play({ playerId: 'myPlayer' });
+
+// Pausar el video
+await CapacitorVideoPlayer.pause({ playerId: 'myPlayer' });
+
+// Obtener tiempo actual
+const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'myPlayer' });
+console.log('Current time:', value);
+
+// Buscar posición
+await CapacitorVideoPlayer.setCurrentTime({
+  playerId: 'myPlayer',
+  seektime: 30 // segundos
+});
+
+// Establecer volumen (0-1)
+await CapacitorVideoPlayer.setVolume({
+  playerId: 'myPlayer',
+  volume: 0.5
+});
+```
+
+## Referencia API
+
+### initPlayer(options)
+
+Inicializa una instancia del reproductor de video.
+
+```typescript
+await CapacitorVideoPlayer.initPlayer({
+  mode: 'fullscreen', // o 'embedded'
+  url: 'https://example.com/video.mp4',
+  playerId: 'player1',
+  subtitle: 'https://example.com/subtitles.vtt',
+  language: 'en',
+  rate: 1.0,
+  exitOnEnd: true,
+  loopOnEnd: false,
+  pipEnabled: true,
+  showControls: true
+});
+```
+
+### play(options)
+
+Reproduce el video.
+
+```typescript
+await CapacitorVideoPlayer.play({ playerId: 'player1' });
+```
+
+### pause(options)
+
+Pausa el video.
+
+```typescript
+await CapacitorVideoPlayer.pause({ playerId: 'player1' });
+```
+
+### getDuration(options)
+
+Obtiene la duración del video en segundos.
+
+```typescript
+const { value } = await CapacitorVideoPlayer.getDuration({ playerId: 'player1' });
+console.log('Duration:', value, 'seconds');
+```
+
+### getCurrentTime(options)
+
+Obtiene la posición de reproducción actual en segundos.
+
+```typescript
+const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'player1' });
+```
+
+### setCurrentTime(options)
+
+Busca un tiempo específico.
+
+```typescript
+await CapacitorVideoPlayer.setCurrentTime({
+  playerId: 'player1',
+  seektime: 60 // segundos
+});
+```
+
+### setVolume(options)
+
+Establece el volumen (0.0 a 1.0).
+
+```typescript
+await CapacitorVideoPlayer.setVolume({
+  playerId: 'player1',
+  volume: 0.8
+});
+```
+
+### getVolume(options)
+
+Obtiene el volumen actual.
+
+```typescript
+const { value } = await CapacitorVideoPlayer.getVolume({ playerId: 'player1' });
+```
+
+### setMuted(options)
+
+Silencia o activa el sonido del video.
+
+```typescript
+await CapacitorVideoPlayer.setMuted({
+  playerId: 'player1',
+  muted: true
+});
+```
+
+### setRate(options)
+
+Establece la velocidad de reproducción.
+
+```typescript
+await CapacitorVideoPlayer.setRate({
+  playerId: 'player1',
+  rate: 1.5 // velocidad 1.5x
+});
+```
+
+### stopAllPlayers()
+
+Detiene todos los reproductores activos.
+
+```typescript
+await CapacitorVideoPlayer.stopAllPlayers();
+```
+
+### exitPlayer()
+
+Sale del reproductor de video.
+
+```typescript
+await CapacitorVideoPlayer.exitPlayer();
+```
+
+## Ejemplo Completo
+
+```typescript
+import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
+
+export class VideoPlayerService {
+  private playerId = 'mainPlayer';
+
+  async initializePlayer(videoUrl: string, subtitleUrl?: string) {
+    try {
+      const result = await CapacitorVideoPlayer.initPlayer({
+        mode: 'fullscreen',
+        url: videoUrl,
+        playerId: this.playerId,
+        subtitle: subtitleUrl,
+        language: 'en',
+        rate: 1.0,
+        exitOnEnd: true,
+        loopOnEnd: false,
+        pipEnabled: true,
+        bkmodeEnabled: true,
+        showControls: true,
+        displayMode: 'all'
+      });
+
+      console.log('Player initialized:', result);
+      return result;
+    } catch (error) {
+      console.error('Failed to initialize player:', error);
+      throw error;
+    }
+  }
+
+  async togglePlayPause() {
+    const { value: isPlaying } = await CapacitorVideoPlayer.isPlaying({
+      playerId: this.playerId
+    });
+
+    if (isPlaying) {
+      await CapacitorVideoPlayer.pause({ playerId: this.playerId });
+    } else {
+      await CapacitorVideoPlayer.play({ playerId: this.playerId });
+    }
+  }
+
+  async seekForward(seconds: number = 10) {
+    const { value: currentTime } = await CapacitorVideoPlayer.getCurrentTime({
+      playerId: this.playerId
+    });
+
+    await CapacitorVideoPlayer.setCurrentTime({
+      playerId: this.playerId,
+      seektime: currentTime + seconds
+    });
+  }
+
+  async seekBackward(seconds: number = 10) {
+    const { value: currentTime } = await CapacitorVideoPlayer.getCurrentTime({
+      playerId: this.playerId
+    });
+
+    await CapacitorVideoPlayer.setCurrentTime({
+      playerId: this.playerId,
+      seektime: Math.max(0, currentTime - seconds)
+    });
+  }
+
+  async setPlaybackSpeed(speed: number) {
+    await CapacitorVideoPlayer.setRate({
+      playerId: this.playerId,
+      rate: speed
+    });
+  }
+
+  async getProgress() {
+    const { value: currentTime } = await CapacitorVideoPlayer.getCurrentTime({
+      playerId: this.playerId
+    });
+    const { value: duration } = await CapacitorVideoPlayer.getDuration({
+      playerId: this.playerId
+    });
+
+    return {
+      currentTime,
+      duration,
+      percentage: (currentTime / duration) * 100
+    };
+  }
+
+  async cleanup() {
+    await CapacitorVideoPlayer.stopAllPlayers();
+  }
+}
+```
+
+## Notas de Plataforma
+
+### iOS
+- Requiere iOS 10.0+
+- Usa AVPlayer nativo
+- Soporta Picture-in-Picture
+- Reproducción en segundo plano soportada
+
+### Android
+- Requiere Android 5.0 (API 21)+
+- Usa ExoPlayer
+- Soporta Chromecast
+- Colores de acento personalizados disponibles
+
+### Web
+- Usa reproductor de video HTML5
+- Solo modo embebido
+- Características nativas limitadas
+
+## Mejores Prácticas
+
+1. **Limpiar reproductores**: Siempre detén los reproductores cuando termines
+2. **Manejar errores**: Envuelve llamadas del reproductor en try-catch
+3. **IDs únicos de reproductor**: Usa IDs únicos para múltiples reproductores
+4. **Verificar estado de reproducción**: Verifica el estado antes de operaciones
+5. **Gestión de recursos**: Libera reproductores para liberar memoria

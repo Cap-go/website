@@ -1,0 +1,375 @@
+---
+title: iOS Builds
+description: iOS-Apps mit Capgo Cloud Build konfigurieren und erstellen
+sidebar:
+  order: 2
+locale: de
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Erstellen und übermitteln Sie iOS-Apps an TestFlight und den App Store mithilfe der dedizierten Mac-Infrastruktur von Capgo.
+
+## Bevor Sie erstellen
+
+<CardGrid>
+  <Card title="⚠️ Richten Sie zuerst iOS-Zugangsdaten ein" icon="warning">
+    **Erforderlich:** Sie müssen Ihre iOS-Zugangsdaten speichern, bevor Sie erstellen.
+
+    [iOS-Zugangsdaten einrichten →](/docs/cli/cloud-build/credentials/#saving-ios-credentials)
+  </Card>
+</CardGrid>
+
+## Wie iOS Builds funktionieren
+
+iOS-Builds laufen auf dedizierten Mac-Maschinen (Scaleway Mac minis M4), die bei Bedarf bereitgestellt werden:
+
+- **Hardware**: Apple Silicon Mac minis mit macOS 15
+- **Build-Tool**: Xcode mit Fastlane (benutzerdefinierte Capgo-Konfiguration)
+- **Isolation**: Jeder Build läuft als separates macOS-Benutzerkonto
+- **Lebensdauer**: Maschinen haben 24-Stunden-Leases und werden automatisch bereinigt
+- **Sicherheit**: Alle Dateien und Benutzerkonten werden gelöscht, nachdem die Maschine freigegeben wurde
+
+## Voraussetzungen
+
+Bevor Sie für iOS erstellen, benötigen Sie:
+
+### 1. Entwicklungsumgebung
+
+- Mac-Computer mit installiertem Xcode (für anfängliche Zertifikatseinrichtung)
+- Gültiges Apple Developer-Konto ($99/Jahr)
+- Ihre App erstellt erfolgreich lokal mit `npx cap open ios`
+
+### 2. Code-Signatur-Zertifikate
+
+Sie benötigen einen dieser Zertifikatstypen je nach Build:
+
+| Build-Typ | Erforderliches Zertifikat | Bereitstellungsprofil |
+|------------|---------------------|---------------------|
+| **Development** | Apple Development | Development Profile |
+| **Ad Hoc** | Apple Distribution | Ad Hoc Profile |
+| **App Store** | Apple Distribution | App Store Profile |
+
+#### So erhalten Sie iOS-Zertifikate und Bereitstellungsprofile
+
+<Aside type="tip">
+Für detaillierte Schritt-für-Schritt-Anleitungen mit Screenshots besuchen Sie:
+- [iOS-Zertifikate-Anleitung](https://capawesome.io/cloud/native-builds/certificates/ios/)
+- [Blog: Automatische iOS-Builds mit GitHub Actions](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
+</Aside>
+
+**Schnellübersicht:**
+
+<Steps>
+
+1. **Certificate Signing Request (CSR) erstellen**
+   - Öffnen Sie Schlüsselbundverwaltung auf Ihrem Mac
+   - Gehen Sie zu Schlüsselbundverwaltung → Zertifikatsassistent → Zertifikat einer Zertifizierungsinstanz anfordern
+   - Geben Sie Ihre E-Mail und Ihren Namen ein, wählen Sie "Auf Festplatte gesichert"
+   - Speichern Sie die `.certSigningRequest`-Datei
+
+2. **Zertifikat im Apple Developer Portal generieren**
+   - Gehen Sie zu [Apple Developer Certificates](https://developer.apple.com/account/resources/certificates)
+   - Klicken Sie auf "+", um ein neues Zertifikat zu erstellen
+   - Wählen Sie den Zertifikatstyp (iOS Distribution für App Store-Builds)
+   - Laden Sie Ihre CSR-Datei hoch
+   - Laden Sie das Zertifikat (`.cer`-Datei) herunter
+
+3. **Zertifikat als .p12 exportieren**
+   - Doppelklicken Sie auf die heruntergeladene `.cer`-Datei, um sie zum Schlüsselbund hinzuzufügen
+   - Suchen Sie in der Schlüsselbundverwaltung Ihr Zertifikat unter "Meine Zertifikate"
+   - Rechtsklick → "Apple Distribution..." exportieren
+   - Speichern Sie im `.p12`-Format und legen Sie ein Passwort fest (dieses Passwort speichern!)
+
+4. **Bereitstellungsprofil erstellen**
+   - Gehen Sie zu [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles)
+   - Klicken Sie auf "+", um ein neues Profil zu erstellen
+   - Wählen Sie den Profiltyp (App Store für Produktions-Builds)
+   - Wählen Sie Ihre App ID aus
+   - Wählen Sie das gerade erstellte Zertifikat aus
+   - Laden Sie die `.mobileprovision`-Datei herunter
+
+</Steps>
+
+### 3. App Store Connect API-Schlüssel (Empfohlen)
+
+Für automatische TestFlight-Übermittlung erstellen Sie einen API-Schlüssel:
+
+<Steps>
+
+1. Gehen Sie zu [App Store Connect](https://appstoreconnect.apple.com/) → Benutzer und Zugriff → Schlüssel
+2. Klicken Sie auf die Schaltfläche "+", um einen neuen Schlüssel zu erstellen
+3. Geben Sie ihm einen Namen (z. B. "Capgo CI") und wählen Sie die Rolle "Developer"
+4. Laden Sie die `.p8`-Datei herunter (Sie können sie nur einmal herunterladen!)
+5. Notieren Sie die **Key ID** und **Issuer ID**
+
+</Steps>
+
+<Aside type="note">
+Sie finden Ihre **Team ID** auch in Ihrem Apple Developer-Konto unter Mitgliedschaftsdetails.
+</Aside>
+
+## Build-Konfiguration
+
+### Erforderliche Umgebungsvariablen
+
+Legen Sie diese Zugangsdaten vor dem Erstellen fest:
+
+```bash
+# iOS-Signatur (Erforderlich)
+BUILD_CERTIFICATE_BASE64="<base64-kodiertes-p12-zertifikat>"
+BUILD_PROVISION_PROFILE_BASE64="<base64-kodierte-mobileprovision>"
+P12_PASSWORD="<zertifikat-passwort>"
+
+# App Store Connect API (für Übermittlung)
+APPLE_KEY_ID="ABC1234567"
+APPLE_ISSUER_ID="00000000-0000-0000-0000-000000000000"
+APPLE_KEY_CONTENT="<base64-kodierter-p8-schlüssel>"
+
+# Zusätzliche Konfiguration
+APP_STORE_CONNECT_TEAM_ID="1234567890"
+APPLE_PROFILE_NAME="App Store com.example.app"
+```
+
+### Base64-Zugangsdaten generieren
+
+<Aside type="tip">
+Verwenden Sie diese Befehle, um Ihre Zertifikate für Capgo zu kodieren:
+</Aside>
+
+**Zertifikat (.p12):**
+```bash
+base64 -i YourCertificate.p12 | pbcopy
+```
+
+**Bereitstellungsprofil (.mobileprovision):**
+```bash
+base64 -i YourProfile.mobileprovision | pbcopy
+```
+
+**App Store Connect Schlüssel (.p8):**
+```bash
+base64 -i AuthKey_ABC1234567.p8 | pbcopy
+```
+
+Die Base64-Zeichenfolge befindet sich jetzt in Ihrer Zwischenablage - fügen Sie sie in Ihre Umgebungsvariable oder CI/CD-Secrets ein.
+
+## Für iOS erstellen
+
+### Debug-Build (Development)
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode debug
+```
+
+Dies erstellt einen Development-Build, der auf registrierten Geräten installiert werden kann.
+
+### Release-Build (App Store)
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode release
+```
+
+Dies erstellt einen App Store-Build und übermittelt ihn automatisch an TestFlight, wenn Sie die App Store Connect API-Zugangsdaten konfiguriert haben.
+
+## CI/CD-Integration
+
+### GitHub Actions-Beispiel
+
+```yaml
+name: Build iOS App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync ios
+
+      - name: Build iOS app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform ios \
+            --build-mode release
+```
+
+## Details zum Build-Prozess
+
+### Was passiert während eines iOS-Builds
+
+<Steps>
+
+1. **Maschinenbereitstellung** (1-2 Minuten)
+   - Scaleway Mac mini wird bereitgestellt oder zugewiesen
+   - macOS 15 mit vorinstalliertem Xcode
+   - Bootstrap-Skripte laufen (bei erster Verwendung)
+
+2. **Benutzerisolation** (~10 Sekunden)
+   - Eindeutiger macOS-Benutzer erstellt: `job-<jobId>`
+   - Dediziertes Home-Verzeichnis: `/Users/job-<jobId>`
+   - Isolierter Workspace erstellt
+
+3. **Projekt-Setup** (~30 Sekunden)
+   - Projekt-Zip von R2 heruntergeladen
+   - In Workspace extrahiert
+   - Zugangsdaten als Umgebungsvariablen eingefügt
+
+4. **Fastlane-Build** (3-8 Minuten)
+   - Schlüsselbund mit Signaturzertifikat erstellt
+   - Bereitstellungsprofil installiert
+   - Xcode-Build-Befehl ausgeführt
+   - IPA-Datei generiert
+
+5. **App Store-Übermittlung** (1-2 Minuten, falls konfiguriert)
+   - IPA zu App Store Connect hochgeladen
+   - An TestFlight übermittelt
+   - Verarbeitung auf Apple-Seite beginnt
+
+6. **Bereinigung** (sofort)
+   - Benutzerkonto beendet und gelöscht
+   - Workspace-Dateien entfernt
+   - Temporäre Dateien gelöscht
+
+7. **Maschinenfreigabe** (nach 24 Stunden)
+   - Mac-Maschine wird zerstört
+   - Alle Daten werden dauerhaft gelöscht
+
+</Steps>
+
+### Build-Stack
+
+Unsere iOS-Build-Umgebung umfasst:
+
+- **macOS**: 15 (neueste stabile Version)
+- **Xcode**: Neueste stabile Version
+- **Fastlane**: Neueste stabile Version
+- **CocoaPods**: Neueste stabile Version
+- **Node.js**: 18.x (LTS)
+- **Ruby**: System-Ruby mit Bundler
+
+## Build-Zeiten
+
+Typische iOS-Build-Zeiten:
+
+| Build-Typ | Erster Build | Nachfolgende Builds* |
+|------------|-------------|-------------------|
+| Debug | 5-7 Minuten | 4-6 Minuten |
+| Release | 7-10 Minuten | 5-8 Minuten |
+
+*Nachfolgende Builds können schneller sein, wenn dieselbe Maschine innerhalb des 24-Stunden-Fensters wiederverwendet wird.
+
+<Aside type="note">
+iOS-Builds kosten **2× den Basistarif** aufgrund dedizierter Mac-Hardwareanforderungen.
+</Aside>
+
+## Fehlerbehebung
+
+### Häufige Probleme
+
+**"Code signing failed"**
+- Überprüfen Sie, ob Ihr Zertifikat für den korrekten Distributionstyp ist
+- Stellen Sie sicher, dass das Bereitstellungsprofil zu Ihrer App ID passt
+- Prüfen Sie, ob P12_PASSWORD korrekt ist
+
+**"Provisioning profile doesn't include signing certificate"**
+- Generieren Sie Ihr Bereitstellungsprofil neu, einschließlich des Zertifikats
+- Laden Sie das Profil erneut herunter und kodieren Sie es neu
+
+**"App Store Connect authentication failed"**
+- Überprüfen Sie APPLE_KEY_ID, APPLE_ISSUER_ID und APPLE_KEY_CONTENT
+- Stellen Sie sicher, dass der API-Schlüssel nicht widerrufen wurde
+- Prüfen Sie, ob der Schlüssel die Rolle "Developer" oder höher hat
+
+**"Build timeout after 10 minutes"**
+- Prüfen Sie, ob Ihre App große native Abhängigkeiten hat
+- Erwägen Sie, Ihr Podfile zu optimieren
+- Kontaktieren Sie den Support, wenn Builds ständig ein Timeout erreichen
+
+### Debug-Protokolle
+
+Alle Build-Protokolle werden in Echtzeit gestreamt. Achten Sie auf diese wichtigen Phasen:
+
+```
+✔ Machine assigned: m-abc123
+→ Creating user: job-abc123
+→ Installing CocoaPods dependencies...
+→ Building iOS app...
+→ Code signing with certificate...
+→ Uploading to App Store Connect...
+✔ Build succeeded
+```
+
+Wenn ein Build fehlschlägt, wird der Fehler in den Protokollen mit der spezifischen Fastlane/Xcode-Fehlermeldung klar angezeigt.
+
+## Best Practices
+
+### 1. Zuerst lokal testen
+
+Stellen Sie immer sicher, dass Ihr iOS-Build lokal funktioniert, bevor Sie Cloud Build verwenden:
+
+```bash
+npx cap open ios
+# In Xcode erstellen
+```
+
+### 2. Umgebungsvariablen verwenden
+
+Committen Sie niemals Zertifikate oder Schlüssel in Ihr Repository. Verwenden Sie immer:
+- CI/CD-Secrets (GitHub, GitLab)
+- Umgebungsvariablen
+- Sichere Secret-Verwaltung
+
+### 3. Abhängigkeiten zwischenspeichern
+
+Für schnellere Builds stellen Sie sicher, dass Ihre `package.json` und `Podfile.lock` in die Versionskontrolle committed sind.
+
+### 4. Build-Zeit überwachen
+
+Behalten Sie die Build-Dauer im Auge, um Kosten zu optimieren:
+
+```bash
+# Die CLI zeigt die Build-Zeit am Ende an
+Build succeeded in 6m 42s (13.4 billing minutes at 2× rate)
+```
+
+## Nächste Schritte
+
+- [Android Builds](/docs/cli/cloud-build/android/) - Android-Builds konfigurieren
+- [Fehlerbehebung](/docs/cli/cloud-build/troubleshooting/) - Häufige Build-Probleme
+- [CLI-Referenz](/docs/cli/reference/build/) - Vollständige Befehlsdokumentation
+
+## Brauchen Sie Hilfe?
+
+- [Fehlerbehebungsanleitung](/docs/cli/cloud-build/troubleshooting/)
+- [Discord-Community](https://discord.com/invite/VnYRvBfgA6)
+- E-Mail: support@capgo.app

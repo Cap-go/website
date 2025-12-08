@@ -1,0 +1,303 @@
+---
+title: "加速度計を使い始める"
+description: "Capacitorアプリに加速度計センシングを統合する方法を学ぶ"
+locale: ja
+---
+
+このガイドでは、Capacitor加速度計プラグインをアプリケーションに統合する手順を説明します。
+
+## インストール
+
+npmを使用してプラグインをインストールします：
+
+```bash
+npm install @capgo/capacitor-accelerometer
+npx cap sync
+```
+
+## プラットフォーム構成
+
+### iOS
+追加の構成は必要ありません。加速度計は常に利用可能です。
+
+### Android
+追加の構成は必要ありません。加速度計は常に利用可能です。
+
+### Web
+プラグインはDeviceMotion APIを使用します。本番環境ではHTTPSが必要です。
+
+## 基本的な使用方法
+
+### プラグインのインポート
+
+```typescript
+import { Accelerometer } from '@capgo/capacitor-accelerometer';
+```
+
+### 監視の開始
+
+```typescript
+const startAccelerometer = async () => {
+  await Accelerometer.start({
+    interval: 100 // 更新間隔（ミリ秒）
+  });
+
+  console.log('加速度計を開始しました');
+};
+```
+
+### 加速度イベントのリスニング
+
+```typescript
+Accelerometer.addListener('accelerationChange', (data) => {
+  console.log('X:', data.x);
+  console.log('Y:', data.y);
+  console.log('Z:', data.z);
+  console.log('タイムスタンプ:', data.timestamp);
+});
+```
+
+### 現在の読み取り値の取得
+
+```typescript
+const getCurrentAcceleration = async () => {
+  const reading = await Accelerometer.getCurrentAcceleration();
+  console.log('現在の加速度:', reading);
+};
+```
+
+### 監視の停止
+
+```typescript
+const stopAccelerometer = async () => {
+  await Accelerometer.stop();
+  console.log('加速度計を停止しました');
+};
+```
+
+## 完全な例
+
+振動検出を含む完全な例です：
+
+```typescript
+import { Accelerometer } from '@capgo/capacitor-accelerometer';
+
+class AccelerometerService {
+  private listener: any;
+  private lastX = 0;
+  private lastY = 0;
+  private lastZ = 0;
+  private shakeThreshold = 15;
+
+  async initialize() {
+    await Accelerometer.start({ interval: 100 });
+
+    this.listener = Accelerometer.addListener('accelerationChange', (data) => {
+      this.handleAcceleration(data);
+    });
+  }
+
+  handleAcceleration(data: any) {
+    // デルタを計算
+    const deltaX = Math.abs(data.x - this.lastX);
+    const deltaY = Math.abs(data.y - this.lastY);
+    const deltaZ = Math.abs(data.z - this.lastZ);
+
+    // 振動をチェック
+    if (deltaX > this.shakeThreshold ||
+        deltaY > this.shakeThreshold ||
+        deltaZ > this.shakeThreshold) {
+      this.onShake();
+    }
+
+    // 最後の値を更新
+    this.lastX = data.x;
+    this.lastY = data.y;
+    this.lastZ = data.z;
+
+    // UIを更新
+    this.updateDisplay(data);
+  }
+
+  onShake() {
+    console.log('デバイスが振動しました！');
+    // 振動アクションをトリガー
+  }
+
+  updateDisplay(data: any) {
+    console.log(`X: ${data.x.toFixed(2)} m/s²`);
+    console.log(`Y: ${data.y.toFixed(2)} m/s²`);
+    console.log(`Z: ${data.z.toFixed(2)} m/s²`);
+
+    // 大きさを計算
+    const magnitude = Math.sqrt(
+      data.x * data.x +
+      data.y * data.y +
+      data.z * data.z
+    );
+    console.log(`大きさ: ${magnitude.toFixed(2)} m/s²`);
+  }
+
+  async cleanup() {
+    if (this.listener) {
+      this.listener.remove();
+    }
+    await Accelerometer.stop();
+  }
+}
+
+// 使用方法
+const accelService = new AccelerometerService();
+accelService.initialize();
+
+// 完了時のクリーンアップ
+// accelService.cleanup();
+```
+
+## 読み取り値の理解
+
+### 加速度軸
+- **X軸**: 左（-）から右（+）
+- **Y軸**: 下（-）から上（+）
+- **Z軸**: 後ろ（-）から前（+）
+
+### 重力
+- 静止しているデバイスは、1つの軸に約9.8 m/s²（重力）を示します
+- デバイスを動かすと、重力に加えて加速度が表示されます
+
+### 単位
+- メートル毎秒の二乗（m/s²）で測定
+- 重力 = 9.8 m/s²
+
+## 一般的な使用例
+
+### 振動検出
+
+```typescript
+class ShakeDetector {
+  private lastUpdate = 0;
+  private lastX = 0;
+  private lastY = 0;
+  private lastZ = 0;
+
+  detectShake(x: number, y: number, z: number): boolean {
+    const currentTime = Date.now();
+
+    if (currentTime - this.lastUpdate > 100) {
+      const deltaX = Math.abs(x - this.lastX);
+      const deltaY = Math.abs(y - this.lastY);
+      const deltaZ = Math.abs(z - this.lastZ);
+
+      this.lastUpdate = currentTime;
+      this.lastX = x;
+      this.lastY = y;
+      this.lastZ = z;
+
+      return deltaX + deltaY + deltaZ > 15;
+    }
+
+    return false;
+  }
+}
+```
+
+### 傾き検出
+
+```typescript
+class TiltDetector {
+  getTiltAngles(x: number, y: number, z: number) {
+    const roll = Math.atan2(y, z) * (180 / Math.PI);
+    const pitch = Math.atan2(-x, Math.sqrt(y * y + z * z)) * (180 / Math.PI);
+
+    return { roll, pitch };
+  }
+
+  isDeviceFlat(z: number): boolean {
+    return Math.abs(z - 9.8) < 1.0;
+  }
+
+  isDeviceUpright(y: number): boolean {
+    return Math.abs(y - 9.8) < 2.0;
+  }
+}
+```
+
+### 歩数カウンター
+
+```typescript
+class StepCounter {
+  private steps = 0;
+  private lastMagnitude = 0;
+  private threshold = 11;
+
+  processAcceleration(x: number, y: number, z: number) {
+    const magnitude = Math.sqrt(x * x + y * y + z * z);
+
+    if (magnitude > this.threshold &&
+        this.lastMagnitude < this.threshold) {
+      this.steps++;
+      console.log('歩数:', this.steps);
+    }
+
+    this.lastMagnitude = magnitude;
+  }
+}
+```
+
+## ベストプラクティス
+
+1. **適切な間隔を選択**: 応答性とバッテリー寿命のバランス
+   - ゲーム: 16-50ms
+   - フィットネス: 100-200ms
+   - 一般: 200-500ms
+
+2. **リスナーを削除**: 完了時には必ずクリーンアップ
+3. **ノイズをフィルタリング**: より滑らかなデータのために移動平均を使用
+4. **バッテリーを考慮**: 高頻度ポーリングはバッテリーを消耗
+5. **実機でテスト**: シミュレーターは正確なデータを提供しません
+
+## パフォーマンスのヒント
+
+### デバウンス
+
+```typescript
+class AccelerometerDebouncer {
+  private timeout: any;
+
+  debounce(callback: Function, delay: number) {
+    return (...args: any[]) => {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => callback(...args), delay);
+    };
+  }
+}
+```
+
+### データのスムージング
+
+```typescript
+class AccelerometerFilter {
+  private alpha = 0.8;
+  private filteredX = 0;
+  private filteredY = 0;
+  private filteredZ = 0;
+
+  filter(x: number, y: number, z: number) {
+    this.filteredX = this.alpha * x + (1 - this.alpha) * this.filteredX;
+    this.filteredY = this.alpha * y + (1 - this.alpha) * this.filteredY;
+    this.filteredZ = this.alpha * z + (1 - this.alpha) * this.filteredZ;
+
+    return {
+      x: this.filteredX,
+      y: this.filteredY,
+      z: this.filteredZ
+    };
+  }
+}
+```
+
+## 次のステップ
+
+- 完全なメソッドドキュメントについては[APIリファレンス](https://github.com/Cap-go/capacitor-accelerometer#api)を探索
+- 高度な使用方法については[サンプルアプリ](https://github.com/Cap-go/capacitor-accelerometer/tree/main/example)をチェック
+- 完全な実装例については[チュートリアル](/plugins-tutorials/capacitor-accelerometer)を参照

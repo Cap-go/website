@@ -1,0 +1,197 @@
+---
+title: Crea Offerta Introduttiva per Abbonamento Android
+locale: it
+description: Scopri come creare offerte introduttive per abbonamenti auto-rinnovabili su Android per attrarre nuovi abbonati.
+sidebar:
+  order: 5
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Le offerte introduttive ti permettono di fornire agli utenti idonei una prova gratuita o un prezzo introduttivo scontato. Dopo la conclusione del periodo introduttivo, gli abbonamenti si rinnovano automaticamente al prezzo standard a meno che non vengano cancellati.
+
+## Panoramica
+
+Le offerte introduttive sono uno strumento potente per:
+- Ridurre le barriere d'ingresso per i nuovi abbonati
+- Aumentare i tassi di conversione
+- Permettere agli utenti di provare le funzionalità premium senza rischi
+- Costruire relazioni durature con gli abbonati
+
+## Idoneità
+
+Gli utenti possono ricevere un'offerta introduttiva se non hanno precedentemente acquistato o ricevuto un'offerta introduttiva per l'abbonamento. Google Play gestisce automaticamente l'idoneità.
+
+## Prerequisiti
+
+Devi prima [creare un abbonamento auto-rinnovabile](/docs/plugins/native-purchases/android-create-subscription/) prima di aggiungere un'offerta introduttiva.
+
+## Creazione di un'Offerta Introduttiva
+
+<Steps>
+
+1. **Accedi alla Configurazione dell'Offerta**
+
+   Naviga al tuo abbonamento in Google Play Console e seleziona il pulsante **Add offer**.
+
+   ![Pulsante Add offer](/native-purchases/android/introductory-offer/add-offer-button.webp)
+
+2. **Seleziona il Piano Base**
+
+   Apparirà un modal che richiede di scegliere il tuo piano base. Di solito avrai solo un piano base. Clicca **Add offer** per continuare.
+
+   ![Seleziona piano base](/native-purchases/android/introductory-offer/select-base-plan.webp)
+
+3. **Configura i Dettagli dell'Offerta**
+
+   Inserisci le seguenti informazioni:
+
+   **Offer ID**: Un identificatore univoco per questa offerta
+
+   **Eligibility**: Scegli chi può ricevere questa offerta
+   - **New customers**: Solo utenti che non si sono mai abbonati
+   - **Existing customers**: Utenti che si sono precedentemente abbonati
+   - **Developer determined**: Logica di idoneità personalizzata (non supportata da native-purchases)
+
+   :::caution
+   Il plugin native-purchases non supporta l'opzione di idoneità "Developer determined". Usa "New customers" o "Existing customers" invece.
+   :::
+
+   ![Configura offerta](/native-purchases/android/introductory-offer/configure-offer-details.webp)
+
+4. **Aggiungi Fasi**
+
+   Clicca **Add phase** in fondo alla pagina per definire la struttura della tua offerta.
+
+   Puoi aggiungere fino a due fasi, permettendo combinazioni come:
+   - Solo prova gratuita
+   - Solo prezzo scontato
+   - Prova gratuita seguita da pagamento ricorrente scontato
+
+5. **Seleziona il Tipo di Fase**
+
+   Scegli tra tre tipi di fase:
+
+   **Free Trial**
+   - Accesso gratuito per una durata prestabilita
+   - Esempio: 7 giorni gratis, poi $9.99/mese
+
+   **Single Payment**
+   - Prezzo scontato una tantum per un periodo specifico
+   - Esempio: $1.99 per 2 mesi, poi $9.99/mese
+
+   **Discounted Recurring Payment**
+   - Tariffa ridotta per ciclo di fatturazione per più cicli
+   - Esempio: $4.99/mese per 3 mesi, poi $9.99/mese
+
+6. **Configura la Durata della Fase**
+
+   Imposta quanto dura la fase introduttiva:
+   - Giorni, settimane o mesi
+   - Numero di cicli di fatturazione
+
+7. **Finalizza e Attiva**
+
+   Clicca **Apply**, poi **Save** per attivare l'offerta. Il pulsante **Activate** diventerà disponibile una volta salvata.
+
+</Steps>
+
+## Esempi di Fasi dell'Offerta
+
+### Esempio 1: Prova Gratuita Semplice
+- Fase 1: 7 giorni gratis
+- Poi: $9.99/mese al prezzo standard
+
+### Esempio 2: Introduzione Scontata
+- Fase 1: $1.99 per il primo mese
+- Poi: $9.99/mese al prezzo standard
+
+### Esempio 3: Prova Estesa + Sconto
+- Fase 1: 14 giorni gratis
+- Fase 2: $4.99/mese per 2 mesi
+- Poi: $9.99/mese al prezzo standard
+
+## Utilizzo nella Tua App
+
+Il plugin native-purchases gestisce automaticamente l'idoneità e la presentazione dell'offerta introduttiva:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Recupera prodotti (include metadati offerta introduttiva)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+
+if (product.introductoryPrice) {
+  console.log(`Prezzo introduttivo: ${product.introductoryPriceString}`);
+  console.log(`Prezzo regolare: ${product.priceString}`);
+  console.log(
+    `Durata offerta: ${product.introductoryPrice.subscriptionPeriod?.numberOfUnits} ${product.introductoryPrice.subscriptionPeriod?.unit}`,
+  );
+} else {
+  console.log('Nessuna offerta introduttiva configurata per questo prodotto');
+}
+
+// Acquisto (Google Play applica automaticamente il prezzo introduttivo se l'utente è idoneo)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // Base Plan ID da Google Play Console
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Transazione acquisto introduttivo', transaction.transactionId);
+```
+
+## Best Practice
+
+### Durata dell'Offerta
+- **Prove gratuite**: 3-14 giorni è ottimale per la maggior parte delle app
+- **Periodi scontati**: 1-3 mesi funziona bene per costruire l'abitudine
+- **Sconto sul prezzo**: 50-70% sul prezzo regolare aumenta le conversioni
+
+### Marketing
+- Mostra chiaramente l'offerta introduttiva e il prezzo regolare
+- Mostra cosa succede dopo il periodo introduttivo
+- Rendi la cancellazione facile e trasparente
+- Ricorda agli utenti prima che finisca il periodo introduttivo
+
+### Test A/B
+Testa diverse strutture di offerta:
+- Durata della prova gratuita
+- Percentuale di sconto
+- Durata dello sconto
+- Fase singola vs. multi-fase
+
+## Note Importanti
+
+- Solo un'offerta introduttiva può essere attiva per abbonamento alla volta
+- Gli utenti possono richiedere un'offerta introduttiva solo una volta per abbonamento
+- Le offerte introduttive non si applicano agli upgrade/downgrade degli abbonamenti
+- Le modifiche alle offerte introduttive non influenzano gli abbonati esistenti
+
+## Risoluzione dei Problemi
+
+**L'offerta introduttiva non appare:**
+- Verifica che l'offerta sia attivata in Play Console
+- Controlla l'idoneità dell'utente (potrebbe aver già usato l'offerta prima)
+- Assicurati che l'app stia utilizzando le informazioni prodotto più recenti
+
+**Utenti sbagliati ricevono l'offerta:**
+- Rivedi le impostazioni di idoneità (nuovi vs. clienti esistenti)
+- Controlla se l'utente si è precedentemente abbonato su un dispositivo diverso
+- Verifica lo storico dell'account Play Store
+
+**L'offerta non si applica all'acquisto:**
+- Conferma che l'ID prodotto corrisponda esattamente
+- Verifica che l'offerta sia ancora attiva e non scaduta
+- Verifica le impostazioni dell'intervallo di date per l'offerta
+
+## Prossimi Passi
+
+- [Configura il testing sandbox](/docs/plugins/native-purchases/android-sandbox-testing/) per testare le tue offerte
+- Monitora i tassi di conversione nelle analytics di Play Console
+- Considera la creazione di più livelli di abbonamento con offerte diverse

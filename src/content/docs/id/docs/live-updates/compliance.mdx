@@ -1,0 +1,189 @@
+---
+title: Kepatuhan
+description: "Pelajari tentang praktik privasi Capgo, pengumpulan data, kepatuhan keamanan, dan bagaimana kami melindungi informasi pengguna Anda selama pembaruan langsung."
+sidebar:
+  order: 6
+locale: id
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo dirancang dengan mempertimbangkan privasi, keamanan, dan kepatuhan. Dokumen ini menjelaskan data apa yang dikumpulkan, bagaimana data digunakan, dan langkah-langkah apa yang ada untuk melindungi privasi pengguna Anda dan memastikan kepatuhan regulasi saat menggunakan layanan pembaruan langsung Capgo.
+
+## Gambaran Umum Pengumpulan Data
+
+Capgo mengumpulkan data minimal yang diperlukan untuk menyediakan layanan pembaruan langsung secara efektif. Pengumpulan data difokuskan pada kebutuhan operasional daripada pelacakan pengguna atau analitik.
+
+### Data Apa yang Dikumpulkan
+
+Capgo hanya mengumpulkan data yang diperlukan untuk menyediakan fitur pembaruan langsung. Ketika aplikasi Anda memeriksa pembaruan atau mengunduh bundle baru, informasi berikut dikumpulkan:
+
+- **App ID**: Pengenal unik untuk aplikasi Anda yang digunakan untuk mengaitkan aplikasi dengan akun yang benar
+- **App Version Code**: Kode versi aplikasi yang digunakan untuk menentukan pembaruan mana yang kompatibel dengan aplikasi
+- **App Version Name**: Nama versi aplikasi yang digunakan untuk tujuan tampilan
+- **Platform**: Platform (iOS, Android) dari aplikasi yang digunakan untuk menentukan pembaruan mana yang kompatibel dengan aplikasi
+- **Device ID**: Pengenal unik untuk perangkat yang digunakan untuk mengirimkan pembaruan ke perangkat tertentu dan untuk tujuan penagihan. Pengenal ini adalah string acak yang dibuat saat aplikasi dimulai untuk pertama kalinya. **Mulai dari plugin versi v5.10.0, v6.25.0 dan v7.25.0**, device ID sekarang tetap ada di seluruh instalasi ulang aplikasi (disimpan dengan aman di Keychain pada iOS dan EncryptedSharedPreferences pada Android) untuk memberikan pelacakan perangkat yang lebih baik sambil mempertahankan kepatuhan terhadap pedoman app store. Sebelum versi ini, device ID direset dengan setiap instalasi aplikasi
+- **Bundle ID**: Pengenal unik untuk bundle yang saat ini dipasang pada perangkat
+- **Channel Name**: Nama channel yang dipilih untuk menerima pembaruan
+- **OS Version**: Versi sistem operasi yang digunakan untuk menentukan pembaruan mana yang kompatibel dengan perangkat
+- **Plugin Version**: Versi plugin @capgo/capacitor-updater yang digunakan untuk mengirimkan pembaruan ke perangkat
+
+**Data Teknis Tambahan:**
+- Timestamp pemeriksaan pembaruan
+- Status keberhasilan/kegagalan unduhan
+- Status instalasi bundle
+- Peristiwa rollback dan alasannya
+- Alamat IP (untuk geolokasi dan optimasi CDN)
+
+<Aside type="note">
+Anda dapat memverifikasi data yang dikumpulkan dengan memeriksa kode sumber plugin @capgo/capacitor-updater, yang bersumber terbuka dan tersedia di [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo tidak mengumpulkan informasi yang dapat diidentifikasi secara pribadi (PII) seperti nama, alamat email, nomor telepon, atau pengenal perangkat persisten yang dapat digunakan untuk melacak pengguna individual di seluruh aplikasi.
+</Aside>
+
+### Data Apa yang TIDAK Dikumpulkan
+
+Capgo secara eksplisit tidak mengumpulkan:
+
+- Informasi pengguna pribadi atau kredensial
+- Analitik penggunaan aplikasi atau data perilaku pengguna
+- Konten dari aplikasi Anda atau data yang dihasilkan pengguna
+- Data lokasi di luar wilayah geografis umum
+- Pengenal perangkat persisten untuk pelacakan
+- Data biometrik atau data pribadi sensitif
+
+## Penggunaan dan Tujuan Data
+
+Data yang dikumpulkan oleh Capgo digunakan secara eksklusif untuk:
+
+### Operasi Layanan
+- Menentukan pembaruan mana yang tersedia untuk versi aplikasi tertentu
+- Mengoptimalkan pengiriman konten melalui pemilihan CDN geografis
+- Memastikan kompatibilitas antara pembaruan dan kemampuan perangkat
+- Mengelola peluncuran pembaruan dan penugasan channel
+
+### Peningkatan Layanan
+- Memantau tingkat keberhasilan pembaruan dan mengidentifikasi masalah
+- Mengoptimalkan kinerja dan keandalan unduhan
+- Meningkatkan sistem pengiriman pembaruan secara keseluruhan
+- Debugging dan pemecahan masalah kegagalan pembaruan
+
+### Keamanan dan Integritas
+- Mencegah penyalahgunaan dan memastikan ketersediaan layanan
+- Memvalidasi keaslian dan integritas pembaruan
+- Melindungi dari pembaruan yang berbahaya atau rusak
+- Menjaga keamanan dan stabilitas layanan
+
+## Penyimpanan dan Retensi Data
+
+### Lokasi Penyimpanan
+- Bundle pembaruan dan metadata disimpan di infrastruktur cloud yang aman
+- Data didistribusikan di berbagai wilayah geografis untuk kinerja
+- Semua transmisi data dienkripsi menggunakan protokol standar industri (HTTPS/TLS)
+
+### Retensi Data
+- Log pemeriksaan pembaruan disimpan untuk tujuan operasional (biasanya 30-90 hari)
+- File bundle disimpan selama ditugaskan ke channel aktif
+- Metrik agregat dan non-pribadi dapat disimpan lebih lama untuk peningkatan layanan
+- Data pribadi, jika ada, dihapus sesuai dengan hukum perlindungan data yang berlaku
+
+### Keamanan Data
+- Semua data dienkripsi saat transit dan saat istirahat
+- Akses ke data dibatasi hanya untuk personel yang berwenang
+- Audit keamanan dan pemantauan rutin dilakukan
+- Praktik keamanan standar industri diikuti
+- **Sertifikasi SOC 2**: Capgo saat ini bersertifikat SOC 2 Type II, memastikan standar tertinggi keamanan, ketersediaan, dan kerahasiaan. Lihat status kepatuhan kami di [trust.capgo.app](https://trust.capgo.app)
+- **Audit Kode Berkelanjutan**: Setiap commit secara otomatis diaudit oleh [SonarCloud](https://sonarcloud.io/summary/overall?id=Cap-go_capacitor-updater&branch=main) untuk [plugin](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main) dan [backend](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main), memastikan kualitas kode, deteksi kerentanan keamanan, dan maintainability
+- **Pemindaian Kerentanan**: Pemindaian keamanan tambahan dilakukan oleh [Snyk](https://snyk.io/test/github/Cap-go/capgo) untuk mendeteksi dan memperbaiki kerentanan keamanan dalam dependensi
+- **Keamanan Infrastruktur**: Infrastruktur hosting kami terus dipantau dan diverifikasi melalui [pemeriksaan keamanan hosting](https://hosting-checker.net/websites/api.capgo.app)
+- **Tinjauan Kode Bertenaga AI**: Setiap pull request ditinjau oleh CodeRabbit AI untuk menangkap masalah potensial, masalah keamanan, dan mempertahankan standar kualitas kode
+
+## Kontrol Privasi
+
+### Untuk Pengembang Aplikasi
+Sebagai pengguna Capgo, Anda memiliki kontrol atas:
+
+- **Manajemen Channel**: Kontrol pembaruan mana yang didistribusikan ke pengguna mana
+- **Minimisasi Data**: Konfigurasi informasi perangkat apa yang dibagikan
+- **Kontrol Geografis**: Kelola di mana pembaruan Anda didistribusikan
+- **Pengaturan Retensi**: Kontrol berapa lama data pembaruan disimpan
+
+### Untuk Pengguna Akhir
+Pengguna aplikasi Anda mendapat manfaat dari:
+
+- **Pengumpulan Data Minimal**: Hanya data penting untuk pengiriman pembaruan yang dikumpulkan
+- **Tanpa Pelacakan**: Tidak ada pelacakan lintas aplikasi atau pelacakan pengguna persisten
+- **Transparansi**: Kebijakan privasi ini menjelaskan dengan tepat data apa yang dikumpulkan
+- **Keamanan**: Semua transmisi data dienkripsi dan aman
+
+## Kepatuhan dan Hukum
+
+### Regulasi Perlindungan Data
+Capgo dirancang untuk mematuhi regulasi perlindungan data utama termasuk:
+
+- **GDPR** (General Data Protection Regulation)
+- **CCPA** (California Consumer Privacy Act)
+- **COPPA** (Children's Online Privacy Protection Act)
+- Hukum privasi regional lainnya yang berlaku
+
+### Kepatuhan App Store
+Capgo secara ketat mematuhi pedoman dan kebijakan app store:
+
+- **Apple App Store**: Mematuhi [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) bagian 3.3.2, memastikan bahwa pembaruan langsung hanya memodifikasi perilaku aplikasi dengan cara yang konsisten dengan aplikasi yang diajukan
+- **Google Play Store**: Mengikuti persyaratan [Google Play Developer Policy](https://play.google.com/about/developer-content-policy/) untuk pemuatan kode dinamis dan pembaruan aplikasi
+- **Pembatasan Konten**: Pembaruan langsung tidak dapat memperkenalkan fungsionalitas yang tidak ada dalam pengajuan aplikasi asli atau melanggar kebijakan konten khusus platform
+- **Persyaratan Keamanan**: Semua pembaruan mempertahankan postur keamanan dan izin yang sama dengan aplikasi asli
+
+### Tanggung Jawab Anda
+Sebagai pengembang aplikasi yang menggunakan Capgo, Anda harus:
+
+- Sertakan pengungkapan privasi yang sesuai dalam kebijakan privasi aplikasi Anda
+- Informasikan pengguna tentang penggunaan layanan pembaruan langsung
+- Pastikan kepatuhan dengan hukum yang berlaku di yurisdiksi Anda
+- Implementasikan mekanisme persetujuan yang sesuai jika diperlukan
+
+<Aside type="tip">
+**Tidak Diperlukan Implementasi Privasi Tambahan**: Capgo dirancang untuk mematuhi privasi secara default. Anda tidak perlu mengimplementasikan kontrol privasi tambahan atau mekanisme penanganan data dalam kode aplikasi Anda. Pendekatan pengumpulan data minimal dan privasi-by-design berarti bahwa mengintegrasikan Capgo biasanya tidak memerlukan perubahan pada deklarasi atau kebijakan privasi Anda yang ada.
+</Aside>
+
+## Privasi by Design
+
+Capgo mengikuti prinsip privasi-by-design:
+
+### Minimisasi Data
+- Hanya kumpulkan data yang benar-benar diperlukan untuk operasi layanan
+- Hindari mengumpulkan informasi pribadi atau sensitif
+- Gunakan data agregat dan anonim jika memungkinkan
+
+### Pembatasan Tujuan
+- Gunakan data yang dikumpulkan hanya untuk tujuan yang dinyatakan
+- Jangan menggunakan kembali data untuk aktivitas yang tidak terkait
+- Pertahankan batasan yang jelas pada penggunaan data
+
+### Transparansi
+- Berikan informasi yang jelas tentang pengumpulan dan penggunaan data
+- Buat praktik privasi mudah diakses dan dipahami
+- Perbarui dokumentasi privasi secara berkala
+
+## Kontak dan Pertanyaan
+
+Jika Anda memiliki pertanyaan tentang praktik privasi Capgo atau perlu melaporkan masalah privasi:
+
+- Tinjau Kebijakan Privasi lengkap kami di [capgo.app/privacy](https://capgo.app/privacy)
+- Lihat status keamanan dan kepatuhan kami di [capgo.app/trust](https://capgo.app/trust)
+- Hubungi tim privasi kami melalui saluran dukungan
+- Laporkan masalah terkait privasi melalui kontak keamanan kami
+
+<Aside type="tip">
+Ingat untuk memperbarui kebijakan privasi aplikasi Anda sendiri untuk mencerminkan penggunaan layanan pembaruan langsung Capgo dan pengumpulan data apa pun yang mungkin terjadi sebagai bagian dari proses pembaruan.
+</Aside>
+
+## Praktik Terbaik untuk Privasi
+
+Saat mengimplementasikan Capgo di aplikasi Anda:
+
+1. **Bersikap Transparan**: Informasikan pengguna tentang fungsionalitas pembaruan langsung
+2. **Minimalkan Data**: Hanya aktifkan fitur pengumpulan data yang benar-benar Anda butuhkan
+3. **Implementasi Aman**: Ikuti praktik terbaik keamanan dalam integrasi Anda
+4. **Tinjauan Berkala**: Tinjau secara berkala praktik privasi Anda dan perbarui kebijakan
+5. **Kontrol Pengguna**: Pertimbangkan untuk memberikan pengguna opsi untuk mengontrol perilaku pembaruan
+
+Dengan mengikuti praktik ini dan memahami pendekatan privasi Capgo, Anda dapat memberikan pengguna Anda pengalaman pembaruan langsung yang aman dan menghormati privasi.

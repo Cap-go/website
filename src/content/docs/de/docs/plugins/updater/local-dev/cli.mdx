@@ -1,0 +1,34 @@
+---
+title: "Verwendung des CLI mit selbst gehostetem Capgo"
+locale: de
+description: "Diese Anleitung erklärt, wie Sie das CLI mit einer selbst gehosteten Capgo-Instanz verwenden, damit Sie Capgo-Tools auf Ihrem eigenen Server anstelle des Cloud-Dienstes nutzen können."
+sidebar:
+    order: 2
+---
+
+## Was wird dieses Tutorial abdecken?
+
+Dieses Tutorial zeigt, wie man das CLI in einer Entwicklungsumgebung mit selbst gehostetem Capgo verwendet.
+
+## Erste Schritte
+
+Um das CLI mit selbst gehostetem Capgo zu verwenden, bearbeiten Sie die `capacitor.config.ts` aus Ihrem App-Verzeichnis und setzen Sie es wie folgt:
+
+```ts
+const config: CapacitorConfig = {
+  appId: 'com.demo.app',
+  appName: 'demoApp',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorUpdater : {
+      localHost: "http://localhost:5173",
+      localWebHost: "http://localhost:5173",
+      localSupa: "http://localhost:54321",
+      localSupaAnon: "siehe_hinweise",
+    },
+  },
+};
+```
+
+Hinweis: Um `localSupaAnon` zu erhalten, folgen Sie bitte [diesem Tutorial](/docs/plugin/self-hosted/local-dev/getting-started/) und kopieren Sie den `anon key` in `localSupaAnon`

@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-env"
+locale: es
+description: Expone valores de configuración de `capacitor.config` en tiempo de ejecución para aplicaciones de marca blanca y multiinquilino.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Entrega configuraciones específicas por inquilino sin nuevas compilaciones leyendo valores de configuración seguros directamente desde Capacitor.
+  image:
+    file: ~public/settings-go.webp
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/env/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-env/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Env te permite almacenar secretos y configuración por compilación dentro de `capacitor.config.*` y resolverlos en tiempo de ejecución a través de una API simple.
+
+<CardGrid stagger>
+  <Card title="Configuración en tiempo de ejecución" icon="rocket">
+    Lee valores de archivos de configuración nativos sin enviarlos en tu paquete JavaScript.
+  </Card>
+  <Card title="Anulaciones por compilación" icon="rocket">
+    Crea múltiples variantes de aplicación o inquilinos proporcionando diferentes archivos de configuración.
+  </Card>
+  <Card title="Acceso con seguridad de tipos" icon="pencil">
+    Obtén claves con soporte TypeScript y centraliza la lógica de valores predeterminados.
+  </Card>
+  <Card title="Seguro por defecto" icon="approve-check">
+    Mantén las claves API y secretos fuera de Git mientras los envías con binarios nativos.
+  </Card>
+</CardGrid>
+
+Sigue la guía de inicio para declarar claves en tu configuración de Capacitor y obtenerlas de forma segura en todas las plataformas.

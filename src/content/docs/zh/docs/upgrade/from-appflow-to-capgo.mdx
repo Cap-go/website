@@ -1,0 +1,170 @@
+---
+title: 从 AppFlow 迁移到 Capgo
+locale: zh
+description: 将 Ionic AppFlow 项目迁移到 Capgo 的详细步骤。每个步骤都对应标准的 AppFlow 迁移任务，因此您可以逐行比较，并查看 Capgo 已经为您处理了哪些任务。
+sidebar:
+  order: 7
+---
+
+> 🚦 Ionic 宣布 AppFlow 的商业产品（包括实时更新）正在逐步停止。现有项目可以运行到 **2027 年 12 月 31 日**，但不接受新客户，也不计划新功能。本指南将引导您完成迁移到 Capgo 所需的操作，并重点介绍您获得的原生自动化功能。
+
+## 迁移概述
+
+Capgo 为您处理渠道、包保留、回滚、分析和 CLI 上传。迁移归结为安装插件、调用 `CapacitorUpdater.notifyAppReady()`，以及（如果需要）配置可选的手动控制。以下部分直接介绍每个任务。
+
+## 步骤 0 – 记录您当前的 AppFlow 设置
+
+- 记下您的 AppFlow **App ID**、现有渠道和签名密钥。
+- 导出您想要归档的任何包历史记录。
+- 如果您使用 GitHub Actions 或其他 CI 提供商，请保留这些流水线——它们将继续与 Capgo 一起工作。
+
+## 步骤 1 – 用 Capgo 替换 AppFlow SDK
+
+```bash
+npm uninstall @capacitor/live-updates
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+就是这样。Capgo 为 iOS 和 Android 打包原生代码；不需要额外的 JavaScript 辅助工具。
+
+## 步骤 2 – 最小配置（无需手动字段）
+
+现有的配置块很广泛。Capgo 会自动检测您的项目和渠道，因此最小配置为：
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli'
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      autoDeletePrevious: true,
+    },
+  },
+}
+
+export default config
+```
+
+### 配置快速参考
+
+| Ionic AppFlow 设置 | Capgo 等效项 | 是否需要设置？ |
+| --- | --- | --- |
+| `appId` | 在 Capgo 仪表板中管理 | 创建项目时自动提供 |
+| `channel` / `defaultChannel` | 仪表板/API 中的渠道规则 | 可选覆盖；默认值来自服务器 |
+| `autoUpdateMethod` | `autoUpdate: true` | 默认启用 |
+| `maxVersions` | 保留策略 | 集中配置（默认 1 个月，最多 24 个月） |
+| `enabled` | 不需要 | Capgo 按渠道切换可用性 |
+
+## 步骤 3 – 调用 `notifyAppReady()`（唯一需要的钩子）
+
+在 Ionic 的指南中，您需要连接 `sync`、`download` 和 `reload`，然后手动隐藏启动屏幕。Capgo 原生执行这些操作。您只需要确认应用已准备就绪：
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+CapacitorUpdater.notifyAppReady()
+```
+
+如果确认信号从未到达，Capgo 会自动回滚包。
+
+**就是这样——Capgo 为您处理后台检查、启动屏幕可见性和回滚。**
+
+<details>
+<summary>可选：在启动屏幕隐藏之前运行逻辑</summary>
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Log diagnostics or run custom code if needed
+  SplashScreen.hide()
+})
+
+CapacitorUpdater.notifyAppReady()
+```
+
+</details>
+
+## 步骤 4 – 更新策略转换
+
+AppFlow 记录了三种策略。以下是它们如何映射到 Capgo：
+
+### 后台更新（默认）
+- **AppFlow**：配置 `autoUpdateMethod = background`，手动调用 `sync()`。
+- **Capgo**：默认启用。无需 JavaScript。
+
+### 始终最新
+- **AppFlow**：添加一个下载和重新加载的 `App.addListener('resume')` 处理程序。
+- **Capgo**：自动更新已经在恢复时运行。仅当您需要自定义时间窗口时才添加处理程序。
+
+<details>
+<summary>可选：手动恢复检查</summary>
+
+```ts
+import { App } from '@capacitor/app'
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+App.addListener('resume', async () => {
+  const bundle = await CapacitorUpdater.download()
+  if (bundle) {
+    await CapacitorUpdater.set({ id: bundle.id })
+  }
+})
+```
+
+</details>
+
+### 强制更新
+- **AppFlow**：提示用户并调用 `reload()`。
+- **Capgo**：在仪表板中将包标记为"强制"，然后监听 `majorAvailable` 事件（在 `notifyAppReady()` 之后触发）以在应用内提示或强制用户更新。
+
+## 步骤 5 – API 调用映射
+
+| AppFlow 方法 | Capgo 等效项 | 是否需要？ |
+| --- | --- | --- |
+| `LiveUpdates.sync()` | 自动处理 | Capgo 的原生自动更新无需手动同步调用即可运行 |
+| `LiveUpdates.download()` | `CapacitorUpdater.download()` | 自定义流程可选 |
+| `LiveUpdates.reload()` | `CapacitorUpdater.set()` | 可选；仪表板切换处理强制更新 |
+| `LiveUpdates.getVersion()` | `CapacitorUpdater.current()` | 可选诊断 |
+
+## 步骤 6 – 使用 Capgo CLI 或 API 部署
+
+通过使用 Capgo CLI 或 API 上传包来完成迁移。工作流程反映了您之前可能编写的脚本，但现在包含原生保护措施：
+
+```bash
+capgo login                # authenticate once
+capgo bundle upload \
+  --path dist \
+  --channel production     # automatically tags platform/version
+```
+
+Capgo 自动：
+- 为每次安装保留设备级审计日志。
+- 当您接近计划限制时发送主动邮件。
+- 提供突发积分，这样您就不会在发布过程中被阻止。
+- 在 [status.capgo.app/history](https://status.capgo.app/history) 发布 18 个全球区域的延迟指标。
+
+## 常见问题
+
+### 为什么 AppFlow 关闭实时更新？
+Ionic 正在停止包括 AppFlow 在内的商业产品，以专注于他们的开源框架。现有客户可以继续使用实时更新直到 **2027 年 12 月 31 日**，但不接受新功能或新客户。Capgo 通过专用的原生 OTA 平台填补了这一空白。
+
+### 迁移需要多长时间？
+大多数团队在一天内完成迁移。渠道、部署和发布规则等概念直接映射，我们的团队提供文档和实际支持。在许多情况下，您只需安装插件、调用 `notifyAppReady()` 并上传您的第一个包。
+
+### 我们会省钱吗？
+是的。AppFlow 实时更新起价为 **$499/月**。Capgo 起价为 **$14/月**，基于使用量的定价降至大约 **每月活跃用户 $0.001**。您还可以获得加密、自动回滚和全球延迟监控。
+
+### 我们应该什么时候迁移？
+由于 AppFlow 现在处于维护模式，尽早迁移可以让您访问 Capgo 的持续创新。我们建议在适合您的发布计划时进行切换。我们的工程团队将帮助您规划转换，以便您的 CI/CD 和部署继续运行。
+
+## 需要帮助？
+
+- 预订迁移会议：[cal.com/team/capgo/demo](https://cal.com/team/capgo/demo)
+- 加入社区：[Capgo Discord](https://discord.gg/VCXxSVjefW)
+- 跟踪问题/请求功能：[github.com/Cap-go/capacitor-updater](https://github.com/Cap-go/capacitor-updater)
+
+Capgo 专为需要原生增量更新、加密包和持续创新的企业而设计。迁移后，您可以删除 AppFlow 的粘合代码，依赖原生自动化，并不间断地继续发布。

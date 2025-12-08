@@ -1,0 +1,345 @@
+---
+title: 开始使用
+description: 了解如何安装并将 JW Player 集成到 Capacitor 应用中，实现专业的视频流媒体功能。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 前置要求
+
+您需要 JW Player 账户和许可证密钥才能使用此插件。如果还没有账户，请在 [JW Player](https://www.jwplayer.com/) 注册。
+
+## 平台配置
+
+### iOS
+
+将您的 JW Player 许可证密钥添加到 `Info.plist`：
+
+```xml
+<key>JWPlayerLicenseKey</key>
+<string>YOUR_LICENSE_KEY</string>
+```
+
+### Android
+
+将您的 JW Player 许可证密钥添加到 `android/app/src/main/res/values/strings.xml`：
+
+```xml
+<resources>
+    <string name="jw_player_license_key">YOUR_LICENSE_KEY</string>
+</resources>
+```
+
+## 使用示例
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// 播放单个视频
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'My Video',
+  description: 'Video description',
+  poster: 'https://example.com/poster.jpg'
+});
+
+// 播放播放列表
+await JWPlayer.playPlaylist({
+  playlistUrl: 'https://example.com/playlist.json'
+});
+
+// 监听播放器事件
+JWPlayer.addListener('playerReady', () => {
+  console.log('Player is ready');
+});
+
+JWPlayer.addListener('play', (data) => {
+  console.log('Video started playing');
+});
+
+JWPlayer.addListener('pause', (data) => {
+  console.log('Video paused');
+});
+
+JWPlayer.addListener('complete', (data) => {
+  console.log('Video playback completed');
+});
+
+JWPlayer.addListener('error', (error) => {
+  console.error('Player error:', error);
+});
+```
+
+## API 参考
+
+### playVideo(options)
+
+```typescript
+playVideo(options: VideoOptions) => Promise<void>
+```
+
+以全屏模式播放单个视频。
+
+| 参数         | 类型                    |
+| ------------- | ----------------------- |
+| **`options`** | `VideoOptions` |
+
+### playPlaylist(options)
+
+```typescript
+playPlaylist(options: PlaylistOptions) => Promise<void>
+```
+
+以全屏模式播放播放列表。
+
+| 参数         | 类型                        |
+| ------------- | --------------------------- |
+| **`options`** | `PlaylistOptions` |
+
+### pause()
+
+```typescript
+pause() => Promise<void>
+```
+
+暂停当前视频。
+
+### play()
+
+```typescript
+play() => Promise<void>
+```
+
+恢复视频播放。
+
+### seek(options)
+
+```typescript
+seek(options: { position: number }) => Promise<void>
+```
+
+跳转到视频的特定位置。
+
+| 参数         | 类型                         |
+| ------------- | ---------------------------- |
+| **`options`** | `{ position: number }` |
+
+### setPlaybackSpeed(options)
+
+```typescript
+setPlaybackSpeed(options: { speed: number }) => Promise<void>
+```
+
+设置播放速度。
+
+| 参数         | 类型                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ speed: number }` |
+
+### setVolume(options)
+
+```typescript
+setVolume(options: { volume: number }) => Promise<void>
+```
+
+设置音频音量（0.0 到 1.0）。
+
+| 参数         | 类型                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ volume: number }` |
+
+### selectAudioTrack(options)
+
+```typescript
+selectAudioTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+按索引选择音频轨道。
+
+| 参数         | 类型                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### selectCaptionTrack(options)
+
+```typescript
+selectCaptionTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+按索引选择字幕轨道。
+
+| 参数         | 类型                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+停止播放并关闭播放器。
+
+## 接口
+
+### VideoOptions
+
+| 属性              | 类型               | 描述                             |
+| ----------------- | ------------------ | --------------------------------------- |
+| **`mediaUrl`**    | `string` | 视频文件的 URL                   |
+| **`title`**       | `string` | 视频标题（可选）                  |
+| **`description`** | `string` | 视频描述（可选）            |
+| **`poster`**      | `string` | 海报/缩略图的 URL（可选）  |
+| **`autoStart`**   | `boolean` | 自动开始播放（可选，默认：true） |
+
+### PlaylistOptions
+
+| 属性              | 类型               | 描述                 |
+| ----------------- | ------------------ | --------------------------- |
+| **`playlistUrl`** | `string` | JW 播放列表 JSON 的 URL |
+| **`autoStart`**   | `boolean` | 自动开始播放（可选） |
+
+## 事件监听器
+
+### 可用事件
+
+- `playerReady` - 播放器已初始化并准备就绪
+- `play` - 视频播放开始
+- `pause` - 视频播放暂停
+- `complete` - 视频播放完成
+- `error` - 播放器遇到错误
+- `seek` - 用户跳转到不同位置
+- `time` - 播放时间更新
+- `bufferChange` - 缓冲状态改变
+
+### 事件示例
+
+```typescript
+// 监听时间更新
+JWPlayer.addListener('time', (data) => {
+  console.log('Current time:', data.position);
+  console.log('Duration:', data.duration);
+});
+
+// 监听缓冲变化
+JWPlayer.addListener('bufferChange', (data) => {
+  console.log('Buffering:', data.buffering);
+});
+
+// 完成后移除监听器
+const listener = await JWPlayer.addListener('play', (data) => {
+  console.log('Playing');
+});
+
+// 稍后...
+listener.remove();
+```
+
+## 高级用法
+
+### 带字幕播放
+
+```typescript
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'Video with Subtitles',
+  poster: 'https://example.com/poster.jpg',
+  tracks: [
+    {
+      file: 'https://example.com/captions-en.vtt',
+      label: 'English',
+      kind: 'captions'
+    },
+    {
+      file: 'https://example.com/captions-es.vtt',
+      label: 'Spanish',
+      kind: 'captions'
+    }
+  ]
+});
+```
+
+### 自定义播放控制
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// 开始播放
+await JWPlayer.play();
+
+// 10 秒后暂停
+setTimeout(() => {
+  JWPlayer.pause();
+}, 10000);
+
+// 跳转到 30 秒
+await JWPlayer.seek({ position: 30 });
+
+// 设置播放速度为 1.5 倍
+await JWPlayer.setPlaybackSpeed({ speed: 1.5 });
+
+// 设置音量为 50%
+await JWPlayer.setVolume({ volume: 0.5 });
+```
+
+## 最佳实践
+
+- 始终提供海报图片以获得更好的用户体验
+- 通过适当的错误消息优雅地处理播放器错误
+- 在组件卸载时清理事件监听器
+- 在 iOS 和 Android 设备上测试视频播放
+- 使用适当的视频格式（推荐 MP4）
+- 在视频初始化时实现加载状态
+- 在流式传输时考虑网络条件
+
+## 故障排除
+
+### 视频无法播放
+
+- 验证您的 JW Player 许可证密钥是否正确
+- 检查视频 URL 是否可访问且有效
+- 如果使用自定义服务器，请确保正确的 CORS 标头
+- 测试不同的视频格式
+
+### 全屏问题
+
+- 插件始终以全屏模式播放
+- 确保应用中具有全屏的适当权限
+
+### 性能
+
+- 为目标设备使用适当的视频质量
+- 考虑使用自适应流媒体以获得更好的性能
+- 实现适当的缓冲指示器

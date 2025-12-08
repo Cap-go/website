@@ -1,0 +1,345 @@
+---
+title: 시작하기
+description: 전문 비디오 스트리밍 기능을 위해 JW Player를 Capacitor 앱에 설치하고 통합하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 전제 조건
+
+이 플러그인을 사용하려면 JW Player 계정과 라이선스 키가 필요합니다. 계정이 없다면 [JW Player](https://www.jwplayer.com/)에서 가입하세요.
+
+## 플랫폼 구성
+
+### iOS
+
+`Info.plist`에 JW Player 라이선스 키를 추가하세요:
+
+```xml
+<key>JWPlayerLicenseKey</key>
+<string>YOUR_LICENSE_KEY</string>
+```
+
+### Android
+
+`android/app/src/main/res/values/strings.xml`에 JW Player 라이선스 키를 추가하세요:
+
+```xml
+<resources>
+    <string name="jw_player_license_key">YOUR_LICENSE_KEY</string>
+</resources>
+```
+
+## 사용 예제
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// 단일 비디오 재생
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: '내 비디오',
+  description: '비디오 설명',
+  poster: 'https://example.com/poster.jpg'
+});
+
+// 재생 목록 재생
+await JWPlayer.playPlaylist({
+  playlistUrl: 'https://example.com/playlist.json'
+});
+
+// 플레이어 이벤트 수신
+JWPlayer.addListener('playerReady', () => {
+  console.log('플레이어 준비됨');
+});
+
+JWPlayer.addListener('play', (data) => {
+  console.log('비디오 재생 시작');
+});
+
+JWPlayer.addListener('pause', (data) => {
+  console.log('비디오 일시 중지');
+});
+
+JWPlayer.addListener('complete', (data) => {
+  console.log('비디오 재생 완료');
+});
+
+JWPlayer.addListener('error', (error) => {
+  console.error('플레이어 오류:', error);
+});
+```
+
+## API 참조
+
+### playVideo(options)
+
+```typescript
+playVideo(options: VideoOptions) => Promise<void>
+```
+
+전체 화면 모드에서 단일 비디오를 재생합니다.
+
+| 매개변수         | 타입                    |
+| ------------- | ----------------------- |
+| **`options`** | `VideoOptions` |
+
+### playPlaylist(options)
+
+```typescript
+playPlaylist(options: PlaylistOptions) => Promise<void>
+```
+
+전체 화면 모드에서 재생 목록을 재생합니다.
+
+| 매개변수         | 타입                        |
+| ------------- | --------------------------- |
+| **`options`** | `PlaylistOptions` |
+
+### pause()
+
+```typescript
+pause() => Promise<void>
+```
+
+현재 비디오를 일시 중지합니다.
+
+### play()
+
+```typescript
+play() => Promise<void>
+```
+
+비디오 재생을 재개합니다.
+
+### seek(options)
+
+```typescript
+seek(options: { position: number }) => Promise<void>
+```
+
+비디오의 특정 위치로 이동합니다.
+
+| 매개변수         | 타입                         |
+| ------------- | ---------------------------- |
+| **`options`** | `{ position: number }` |
+
+### setPlaybackSpeed(options)
+
+```typescript
+setPlaybackSpeed(options: { speed: number }) => Promise<void>
+```
+
+재생 속도를 설정합니다.
+
+| 매개변수         | 타입                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ speed: number }` |
+
+### setVolume(options)
+
+```typescript
+setVolume(options: { volume: number }) => Promise<void>
+```
+
+오디오 볼륨을 설정합니다 (0.0에서 1.0까지).
+
+| 매개변수         | 타입                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ volume: number }` |
+
+### selectAudioTrack(options)
+
+```typescript
+selectAudioTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+인덱스로 오디오 트랙을 선택합니다.
+
+| 매개변수         | 타입                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### selectCaptionTrack(options)
+
+```typescript
+selectCaptionTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+인덱스로 자막/부제 트랙을 선택합니다.
+
+| 매개변수         | 타입                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+재생을 중지하고 플레이어를 닫습니다.
+
+## 인터페이스
+
+### VideoOptions
+
+| 속성              | 타입               | 설명                             |
+| ----------------- | ------------------ | --------------------------------------- |
+| **`mediaUrl`**    | `string` | 비디오 파일의 URL                   |
+| **`title`**       | `string` | 비디오 제목 (선택 사항)                  |
+| **`description`** | `string` | 비디오 설명 (선택 사항)            |
+| **`poster`**      | `string` | 포스터/썸네일 URL (선택 사항)  |
+| **`autoStart`**   | `boolean` | 자동 재생 시작 (선택 사항, 기본값: true) |
+
+### PlaylistOptions
+
+| 속성              | 타입               | 설명                 |
+| ----------------- | ------------------ | --------------------------- |
+| **`playlistUrl`** | `string` | JW 재생 목록 JSON의 URL |
+| **`autoStart`**   | `boolean` | 자동 재생 시작 (선택 사항) |
+
+## 이벤트 리스너
+
+### 사용 가능한 이벤트
+
+- `playerReady` - 플레이어가 초기화되고 준비됨
+- `play` - 비디오 재생이 시작됨
+- `pause` - 비디오 재생이 일시 중지됨
+- `complete` - 비디오 재생이 완료됨
+- `error` - 플레이어에서 오류 발생
+- `seek` - 사용자가 다른 위치로 이동함
+- `time` - 재생 시간이 업데이트됨
+- `bufferChange` - 버퍼 상태가 변경됨
+
+### 이벤트 예제
+
+```typescript
+// 시간 업데이트 수신
+JWPlayer.addListener('time', (data) => {
+  console.log('현재 시간:', data.position);
+  console.log('길이:', data.duration);
+});
+
+// 버퍼 변경 수신
+JWPlayer.addListener('bufferChange', (data) => {
+  console.log('버퍼링:', data.buffering);
+});
+
+// 완료 시 리스너 제거
+const listener = await JWPlayer.addListener('play', (data) => {
+  console.log('재생 중');
+});
+
+// 나중에...
+listener.remove();
+```
+
+## 고급 사용법
+
+### 자막이 있는 재생
+
+```typescript
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: '자막이 있는 비디오',
+  poster: 'https://example.com/poster.jpg',
+  tracks: [
+    {
+      file: 'https://example.com/captions-en.vtt',
+      label: 'English',
+      kind: 'captions'
+    },
+    {
+      file: 'https://example.com/captions-es.vtt',
+      label: 'Spanish',
+      kind: 'captions'
+    }
+  ]
+});
+```
+
+### 사용자 지정 재생 컨트롤
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// 재생 시작
+await JWPlayer.play();
+
+// 10초 후 일시 중지
+setTimeout(() => {
+  JWPlayer.pause();
+}, 10000);
+
+// 30초로 이동
+await JWPlayer.seek({ position: 30 });
+
+// 재생 속도를 1.5배로 설정
+await JWPlayer.setPlaybackSpeed({ speed: 1.5 });
+
+// 볼륨을 50%로 설정
+await JWPlayer.setVolume({ volume: 0.5 });
+```
+
+## 모범 사례
+
+- 더 나은 사용자 경험을 위해 항상 포스터 이미지 제공
+- 적절한 오류 메시지로 플레이어 오류를 우아하게 처리
+- 컴포넌트가 마운트 해제될 때 이벤트 리스너 정리
+- iOS 및 Android 장치 모두에서 비디오 재생 테스트
+- 적절한 비디오 형식 사용 (MP4 권장)
+- 비디오 초기화 중 로딩 상태 구현
+- 스트리밍 시 네트워크 상태 고려
+
+## 문제 해결
+
+### 비디오가 재생되지 않음
+
+- JW Player 라이선스 키가 올바른지 확인
+- 비디오 URL이 액세스 가능하고 유효한지 확인
+- 사용자 지정 서버를 사용하는 경우 적절한 CORS 헤더 확인
+- 다른 비디오 형식으로 테스트
+
+### 전체 화면 문제
+
+- 플러그인은 항상 전체 화면 모드로 재생됨
+- 앱에서 전체 화면에 대한 적절한 권한 확인
+
+### 성능
+
+- 대상 장치에 적절한 비디오 품질 사용
+- 더 나은 성능을 위한 적응형 스트리밍 고려
+- 적절한 버퍼링 표시기 구현

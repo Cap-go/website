@@ -1,0 +1,166 @@
+---
+title: Créer un abonnement auto-renouvelable Android
+locale: fr
+description: Guide étape par étape pour créer des abonnements auto-renouvelables dans Google Play Console pour le plugin native-purchases.
+sidebar:
+  order: 4
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Les abonnements auto-renouvelables fournissent un accès au contenu, aux services ou aux fonctionnalités premium de votre application de manière continue. Ce guide vous aidera à créer et configurer des abonnements dans Google Play Console.
+
+## Aperçu
+
+Les abonnements se renouvellent automatiquement à la fin de chaque période de facturation jusqu'à ce que l'utilisateur annule. Ils sont idéaux pour :
+- L'accès à du contenu premium
+- Les expériences sans publicité
+- Le stockage cloud
+- Les services continus
+
+## Créer un abonnement
+
+<Steps>
+
+1. **Accéder aux abonnements**
+
+   Dans Google Play Console, sélectionnez votre application et choisissez **Monétiser > Abonnements** dans le menu de gauche.
+
+   Cliquez sur le bouton **Créer un abonnement** pour commencer.
+
+   ![Navigate to subscriptions](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+
+2. **Entrer les informations de base**
+
+   Fournissez un nom d'abonnement et un ID de produit. L'ID de produit est requis pour la configuration dans votre application et ne peut pas être modifié ultérieurement.
+
+   ![Enter subscription details](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+
+3. **Créer un forfait de base**
+
+   Google Play nécessite exactement un forfait de base par abonnement. Le plugin native-purchases prend en charge uniquement un forfait de base pour maintenir la compatibilité avec iOS.
+
+   Cliquez sur **Ajouter un forfait de base** pour continuer.
+
+   ![Create base plan](/native-purchases/android/create-subscription/create-base-plan.webp)
+
+4. **Configurer les détails du forfait de base**
+
+   Entrez :
+   - **ID du forfait de base** : Identifiant unique pour ce plan
+   - **Période de facturation** : Fréquence de facturation des utilisateurs (hebdomadaire, mensuelle, annuelle, etc.)
+   - **Période de grâce** : Fenêtre de temps pendant laquelle Google maintient l'abonnement tout en retentant le paiement avant l'annulation
+
+   ![Configure base plan](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+
+5. **Configurer la tarification**
+
+   Accédez à la section tarification et sélectionnez tous les pays/régions où vous souhaitez offrir l'abonnement.
+
+   ![Select regions](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+
+6. **Configurer le prix**
+
+   Définissez votre prix de base dans votre devise principale. Google Play convertit automatiquement ce prix en devises locales.
+
+   ![Set price](/native-purchases/android/create-subscription/set-base-price.webp)
+
+7. **Réviser la tarification régionale**
+
+   Révisez les prix automatiquement convertis pour chaque pays. Vous pouvez ajuster les prix individuels si nécessaire.
+
+   ![Review pricing](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+
+8. **Enregistrer la configuration**
+
+   Enregistrez votre configuration de tarification.
+
+   ![Save pricing](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+
+9. **Activer l'abonnement**
+
+   Cliquez sur le bouton **Activer** pour rendre votre produit d'abonnement actif et disponible à l'achat.
+
+   ![Activate subscription](/native-purchases/android/create-subscription/activate-subscription.webp)
+
+</Steps>
+
+## Considérations importantes
+
+### Limitation du forfait de base
+
+Le plugin native-purchases nécessite exactement un forfait de base par abonnement pour assurer la cohérence avec la gestion des abonnements iOS. Les forfaits de base multiples ne sont pas pris en charge.
+
+### Période de grâce
+
+La période de grâce permet à Google Play de réessayer les paiements échoués tout en maintenant l'accès à l'abonnement de l'utilisateur. Les périodes de grâce courantes sont :
+- 3 jours pour les abonnements mensuels
+- 7 jours pour les abonnements plus longs
+
+### Statut de l'abonnement
+
+Après création, votre abonnement sera en statut "Brouillon" jusqu'à activation. Vous pouvez tester les abonnements en brouillon en mode sandbox.
+
+## Utilisation dans votre application
+
+Une fois créé, référencez l'abonnement dans votre application en utilisant l'ID de produit :
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Load subscription info
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+console.log(`${product.title} — ${product.priceString}`);
+
+// Purchase (planIdentifier = Base Plan ID from Google Play Console)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Transaction ID', transaction.transactionId);
+
+// Later, check purchase state
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const subscription = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.example.premium.monthly',
+);
+
+if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.isAcknowledged) {
+  console.log('Subscription active locally');
+  // For expiration/cancellation, validate purchaseToken through your backend
+}
+```
+
+## Prochaines étapes
+
+- [Créer une offre de lancement](/docs/plugins/native-purchases/android-introductory-offer/) pour attirer de nouveaux abonnés
+- [Configurer les tests sandbox](/docs/plugins/native-purchases/android-sandbox-testing/) pour tester vos abonnements
+- Configurer la validation des reçus backend pour la sécurité
+
+## Dépannage
+
+**L'abonnement n'apparaît pas dans l'application :**
+- Vérifiez que l'ID de produit correspond exactement
+- Assurez-vous que l'abonnement est activé
+- Vérifiez que votre application a le nom de package correct
+- Attendez 2-3 heures après l'activation pour que les modifications se propagent
+
+**Erreurs de forfait de base :**
+- Assurez-vous d'avoir exactement un forfait de base
+- Vérifiez que tous les champs requis sont remplis
+- Vérifiez que la période de facturation est valide
+
+**Problèmes de tarification :**
+- Confirmez qu'au moins un pays est sélectionné
+- Vérifiez que le prix de base est supérieur au minimum autorisé
+- Vérifiez que les taux de conversion de devise sont acceptables

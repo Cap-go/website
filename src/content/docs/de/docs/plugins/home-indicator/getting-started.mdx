@@ -1,0 +1,214 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Capacitor Home Indicator-Plugin installieren und konfigurieren, um den Home-Indikator auf iOS-Geräten zu steuern.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Plugin konfigurieren**
+
+   **Home-Indikator ausblenden:**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Home-Indikator ausblenden
+   await HomeIndicator.hide();
+   ```
+
+   **Home-Indikator anzeigen:**
+   ```typescript
+   // Home-Indikator anzeigen
+   await HomeIndicator.show();
+
+   // Sichtbarkeitsstatus prüfen
+   const { hidden } = await HomeIndicator.isHidden();
+   console.log('Ist ausgeblendet:', hidden);
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Keine zusätzliche Einrichtung erforderlich. Das Plugin funktioniert nur auf iOS-Geräten mit Home-Indikator (iPhone X und neuer).
+     </TabItem>
+     <TabItem label="Android">
+       Dieses Plugin hat keine Auswirkungen auf Android-Geräte, da sie keinen iOS-ähnlichen Home-Indikator haben.
+     </TabItem>
+   </Tabs>
+
+4. **Auto-Hide-Konfiguration**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Auto-Hide-Verhalten konfigurieren
+   await HomeIndicator.setAutoHidden({
+     autoHidden: true // Auto-Hide aktivieren
+   });
+
+   // Der Home-Indikator wird nach einigen Sekunden automatisch ausgeblendet
+   // und erscheint wieder, wenn der Benutzer den Bildschirm berührt
+   ```
+
+5. **Erweiterte Verwendung**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+   import { App } from '@capacitor/app';
+
+   export class ImmersiveMode {
+     private isImmersive = false;
+
+     async enterImmersiveMode() {
+       this.isImmersive = true;
+
+       // Home-Indikator ausblenden
+       await HomeIndicator.hide();
+
+       // Auto-Hide für bessere UX aktivieren
+       await HomeIndicator.setAutoHidden({ autoHidden: true });
+
+       // Statusleiste für vollständige Immersion ausblenden
+       // StatusBar.hide(); // Bei Verwendung von @capacitor/status-bar
+     }
+
+     async exitImmersiveMode() {
+       this.isImmersive = false;
+
+       // Home-Indikator anzeigen
+       await HomeIndicator.show();
+
+       // Auto-Hide deaktivieren
+       await HomeIndicator.setAutoHidden({ autoHidden: false });
+
+       // Statusleiste anzeigen
+       // StatusBar.show(); // Bei Verwendung von @capacitor/status-bar
+     }
+
+     async toggleImmersiveMode() {
+       const { hidden } = await HomeIndicator.isHidden();
+
+       if (hidden) {
+         await this.exitImmersiveMode();
+       } else {
+         await this.enterImmersiveMode();
+       }
+     }
+
+     setupAppLifecycle() {
+       // App-Statusänderungen behandeln
+       App.addListener('appStateChange', async ({ isActive }) => {
+         if (!isActive && this.isImmersive) {
+           // App ging in den Hintergrund, möglicherweise Indikator anzeigen
+           await HomeIndicator.show();
+         } else if (isActive && this.isImmersive) {
+           // App kam in den Vordergrund, immersiven Modus wiederherstellen
+           await HomeIndicator.hide();
+         }
+       });
+     }
+   }
+   ```
+</Steps>
+
+## API-Referenz
+
+### Methoden
+
+#### `hide()`
+Blendet den Home-Indikator aus.
+
+**Gibt zurück:** `Promise<void>`
+
+#### `show()`
+Zeigt den Home-Indikator an.
+
+**Gibt zurück:** `Promise<void>`
+
+#### `isHidden()`
+Prüft, ob der Home-Indikator derzeit ausgeblendet ist.
+
+**Gibt zurück:** `Promise<{ hidden: boolean }>`
+
+#### `setAutoHidden(options: { autoHidden: boolean })`
+Konfiguriert das Auto-Hide-Verhalten für den Home-Indikator.
+
+**Parameter:**
+- `options.autoHidden`: boolean - Auto-Hide aktivieren oder deaktivieren
+
+**Gibt zurück:** `Promise<void>`
+
+### Schnittstellen
+
+```typescript
+interface AutoHiddenOptions {
+  autoHidden: boolean;
+}
+
+interface HiddenResult {
+  hidden: boolean;
+}
+```
+
+## Plattformhinweise
+
+### iOS
+- Funktioniert nur auf Geräten mit Home-Indikator (iPhone X und neuer)
+- Erfordert iOS 11.0 oder neuer
+- Auto-Hide macht den Indikator durchscheinend und blendet ihn nach Inaktivität aus
+- Der Indikator erscheint wieder, wenn Benutzer von unten wischen
+
+### Android
+- Dieses Plugin hat keine Auswirkungen auf Android
+- Android verwendet unterschiedliche Navigationsgesten/-tasten
+
+## Häufige Anwendungsfälle
+
+1. **Spiele**: Vollbild-Gaming ohne Ablenkungen
+2. **Videoplayer**: Immersive Videowiedergabe
+3. **Fotobetrachter**: Vollbild-Fotogalerien
+4. **Präsentationen**: Ablenkungsfreie Präsentationen
+5. **Kiosk-Apps**: Öffentliche Anzeigeanwendungen
+
+## Best Practices
+
+1. **Benutzerkontrolle**: Bieten Sie immer eine Möglichkeit, den immersiven Modus zu verlassen
+   ```typescript
+   // Geste oder Button zum Umschalten des immersiven Modus hinzufügen
+   const toggleButton = document.getElementById('toggle-immersive');
+   toggleButton.addEventListener('click', () => {
+     immersiveMode.toggleImmersiveMode();
+   });
+   ```
+
+2. **Auto-Hide für Spiele**: Verwenden Sie Auto-Hide für besseres Spielerlebnis
+   ```typescript
+   // Für Spiele bietet Auto-Hide die beste Balance
+   await HomeIndicator.setAutoHidden({ autoHidden: true });
+   ```
+
+3. **Systemgesten respektieren**: Beeinträchtigen Sie nicht die Systemnavigation
+4. **Status speichern**: Merken Sie sich die Präferenz des Benutzers für den immersiven Modus
+
+## Fehlerbehebung
+
+**Home-Indikator wird nicht ausgeblendet:**
+- Überprüfen Sie, ob das Gerät einen Home-Indikator hat (iPhone X+)
+- Prüfen Sie, ob die iOS-Version 11.0 oder höher ist
+- Stellen Sie sicher, dass die App den Fokus hat
+
+**Auto-Hide funktioniert nicht:**
+- Auto-Hide erfordert Benutzerinteraktion zur Aktivierung
+- Der Indikator wird durchscheinend, nicht vollständig ausgeblendet
+
+**Indikator erscheint unerwartet wieder:**
+- Dies ist normales iOS-Verhalten für Systemgesten
+- Verwenden Sie Auto-Hide für weniger aufdringliches Verhalten

@@ -1,0 +1,568 @@
+---
+title: はじめに
+locale: ja
+description: Twilio Voiceをインストールして統合し、CapacitorアプリでVoIP通話を実現する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 前提条件
+
+Twilioアカウントと認証用のアクセストークンが必要です。アカウントをお持ちでない場合は[Twilio](https://www.twilio.com/)でサインアップしてください。
+
+## プラットフォーム設定
+
+### iOS
+
+`Info.plist`に必要なパーミッションを追加します:
+
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs microphone access for voice calls</string>
+```
+
+PushKitを使用した着信通話の場合:
+
+1. Xcodeの機能でプッシュ通知を有効化
+2. VoIPバックグラウンドモードを追加
+3. Twilioコンソールでvip証明書を設定
+
+### Android
+
+`AndroidManifest.xml`に必要なパーミッションを追加します:
+
+```xml
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+<uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+```
+
+プッシュ通知用にFirebaseを設定:
+
+1. `google-services.json`をAndroidプロジェクトに追加
+2. TwilioコンソールでFCMを設定
+
+## 使用例
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+// Twilioで認証
+await TwilioVoice.login({
+  accessToken: 'your-twilio-access-token'
+});
+
+// 通話を発信
+await TwilioVoice.makeCall({
+  to: '+1234567890'
+});
+
+// 通話イベントをリスニング
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Call connected:', data.callSid);
+});
+
+TwilioVoice.addListener('callDisconnected', (data) => {
+  console.log('Call disconnected:', data.callSid);
+});
+
+TwilioVoice.addListener('incomingCall', (data) => {
+  console.log('Incoming call from:', data.from);
+
+  // 通話を承認
+  TwilioVoice.acceptCall({ callSid: data.callSid });
+
+  // または拒否
+  // TwilioVoice.rejectCall({ callSid: data.callSid });
+});
+
+// 通話をミュート/ミュート解除
+await TwilioVoice.muteCall({
+  muted: true,
+  callSid: 'current-call-sid'
+});
+
+// スピーカーを切り替え
+await TwilioVoice.setSpeaker({
+  enabled: true
+});
+
+// 通話を終了
+await TwilioVoice.endCall({
+  callSid: 'current-call-sid'
+});
+
+// ログアウト
+await TwilioVoice.logout();
+```
+
+## APIリファレンス
+
+### login(options)
+
+```typescript
+login(options: { accessToken: string }) => Promise<void>
+```
+
+アクセストークンを使用してTwilioで認証します。
+
+| Param         | Type                              |
+| ------------- | --------------------------------- |
+| **`options`** | `{ accessToken: string }` |
+
+### logout()
+
+```typescript
+logout() => Promise<void>
+```
+
+ユーザーセッションを終了し、通話状態をクリアします。
+
+### isLoggedIn()
+
+```typescript
+isLoggedIn() => Promise<{ loggedIn: boolean }>
+```
+
+現在の認証ステータスを確認します。
+
+**戻り値:** `Promise<{ loggedIn: boolean }>`
+
+### makeCall(options)
+
+```typescript
+makeCall(options: { to: string; params?: Record<string, string> }) => Promise<{ callSid: string }>
+```
+
+指定された番号への発信通話を開始します。
+
+| Param         | Type                                                    |
+| ------------- | ------------------------------------------------------- |
+| **`options`** | `{ to: string; params?: Record<string, string> }` |
+
+**戻り値:** `Promise<{ callSid: string }>`
+
+### acceptCall(options)
+
+```typescript
+acceptCall(options: { callSid: string }) => Promise<void>
+```
+
+着信通話を承認します。
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callSid: string }` |
+
+### rejectCall(options)
+
+```typescript
+rejectCall(options: { callSid: string }) => Promise<void>
+```
+
+着信通話を拒否します。
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callSid: string }` |
+
+### endCall(options?)
+
+```typescript
+endCall(options?: { callSid?: string }) => Promise<void>
+```
+
+アクティブな通話を終了します。
+
+| Param         | Type                         |
+| ------------- | ---------------------------- |
+| **`options`** | `{ callSid?: string }` (オプション) |
+
+### muteCall(options)
+
+```typescript
+muteCall(options: { muted: boolean; callSid?: string }) => Promise<void>
+```
+
+通話音声をミュートまたはミュート解除します。
+
+| Param         | Type                                            |
+| ------------- | ----------------------------------------------- |
+| **`options`** | `{ muted: boolean; callSid?: string }` |
+
+### setSpeaker(options)
+
+```typescript
+setSpeaker(options: { enabled: boolean }) => Promise<void>
+```
+
+スピーカー出力を切り替えます。
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### sendDigits(options)
+
+```typescript
+sendDigits(options: { digits: string; callSid?: string }) => Promise<void>
+```
+
+通話中にDTMFトーンを送信します。
+
+| Param         | Type                                          |
+| ------------- | --------------------------------------------- |
+| **`options`** | `{ digits: string; callSid?: string }` |
+
+## イベントリスナー
+
+### 利用可能なイベント
+
+- `registered` - Twilioへの登録に成功しました
+- `unregistered` - Twilioから登録解除されました
+- `registrationFailed` - 登録に失敗しました
+- `incomingCall` - 着信通話を受信しました
+- `callConnected` - 通話が正常に接続されました
+- `callDisconnected` - 通話が切断されました
+- `callRinging` - 発信通話が呼び出し中です
+- `callReconnecting` - 通話が再接続中です
+- `callReconnected` - 中断後に通話が再接続されました
+- `qualityWarning` - 通話品質の警告
+- `error` - エラーが発生しました
+
+### イベント例
+
+```typescript
+// 着信通話を処理
+TwilioVoice.addListener('incomingCall', (data) => {
+  console.log('Incoming call from:', data.from);
+  console.log('Call SID:', data.callSid);
+
+  // 着信通話UIを表示
+  showIncomingCallScreen({
+    from: data.from,
+    callSid: data.callSid
+  });
+});
+
+// 通話状態の変更を処理
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Call connected:', data.callSid);
+  startCallTimer();
+});
+
+TwilioVoice.addListener('callDisconnected', (data) => {
+  console.log('Call ended:', data.callSid);
+  stopCallTimer();
+  hideCallScreen();
+});
+
+// 品質警告を処理
+TwilioVoice.addListener('qualityWarning', (data) => {
+  console.warn('Call quality warning:', data.warning);
+  showQualityWarning(data.warning);
+});
+
+// エラーを処理
+TwilioVoice.addListener('error', (error) => {
+  console.error('Twilio error:', error.message);
+  handleError(error);
+});
+
+// 完了したらリスナーを削除
+const listener = await TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Connected');
+});
+
+// 後で...
+listener.remove();
+```
+
+## 完全な例
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+class VoiceCallService {
+  private currentCallSid: string | null = null;
+  private isMuted = false;
+  private isSpeakerOn = false;
+
+  async initialize(accessToken: string) {
+    try {
+      // Twilioにログイン
+      await TwilioVoice.login({ accessToken });
+
+      // ログインステータスを確認
+      const { loggedIn } = await TwilioVoice.isLoggedIn();
+      console.log('Login status:', loggedIn);
+
+      // イベントリスナーをセットアップ
+      this.setupEventListeners();
+
+    } catch (error) {
+      console.error('Failed to initialize:', error);
+    }
+  }
+
+  setupEventListeners() {
+    // 登録イベント
+    TwilioVoice.addListener('registered', () => {
+      console.log('Successfully registered with Twilio');
+    });
+
+    TwilioVoice.addListener('registrationFailed', (error) => {
+      console.error('Registration failed:', error);
+    });
+
+    // 着信通話
+    TwilioVoice.addListener('incomingCall', async (data) => {
+      console.log('Incoming call from:', data.from);
+
+      const accepted = await this.showIncomingCallDialog(data.from);
+
+      if (accepted) {
+        await TwilioVoice.acceptCall({ callSid: data.callSid });
+        this.currentCallSid = data.callSid;
+      } else {
+        await TwilioVoice.rejectCall({ callSid: data.callSid });
+      }
+    });
+
+    // 通話イベント
+    TwilioVoice.addListener('callConnected', (data) => {
+      console.log('Call connected');
+      this.currentCallSid = data.callSid;
+      this.showCallScreen();
+    });
+
+    TwilioVoice.addListener('callDisconnected', () => {
+      console.log('Call disconnected');
+      this.currentCallSid = null;
+      this.hideCallScreen();
+    });
+
+    TwilioVoice.addListener('callRinging', () => {
+      console.log('Call ringing...');
+    });
+
+    // 品質警告
+    TwilioVoice.addListener('qualityWarning', (data) => {
+      console.warn('Call quality warning:', data.warning);
+      this.showQualityIndicator(data.warning);
+    });
+  }
+
+  async makeCall(phoneNumber: string) {
+    try {
+      const result = await TwilioVoice.makeCall({
+        to: phoneNumber,
+        params: {
+          // オプションのカスタムパラメータ
+          customerId: 'customer-123'
+        }
+      });
+
+      this.currentCallSid = result.callSid;
+      console.log('Call initiated:', result.callSid);
+    } catch (error) {
+      console.error('Failed to make call:', error);
+    }
+  }
+
+  async endCall() {
+    if (this.currentCallSid) {
+      await TwilioVoice.endCall({ callSid: this.currentCallSid });
+      this.currentCallSid = null;
+    }
+  }
+
+  async toggleMute() {
+    this.isMuted = !this.isMuted;
+    await TwilioVoice.muteCall({
+      muted: this.isMuted,
+      callSid: this.currentCallSid || undefined
+    });
+  }
+
+  async toggleSpeaker() {
+    this.isSpeakerOn = !this.isSpeakerOn;
+    await TwilioVoice.setSpeaker({ enabled: this.isSpeakerOn });
+  }
+
+  async sendDTMF(digits: string) {
+    if (this.currentCallSid) {
+      await TwilioVoice.sendDigits({
+        digits,
+        callSid: this.currentCallSid
+      });
+    }
+  }
+
+  async logout() {
+    await TwilioVoice.logout();
+  }
+
+  private async showIncomingCallDialog(from: string): Promise<boolean> {
+    // ネイティブダイアログまたはカスタムUIを表示
+    return confirm(`Incoming call from ${from}`);
+  }
+
+  private showCallScreen() {
+    // 通話UIを表示
+    console.log('Showing call screen');
+  }
+
+  private hideCallScreen() {
+    // 通話UIを非表示
+    console.log('Hiding call screen');
+  }
+
+  private showQualityIndicator(warning: string) {
+    // 品質警告を表示
+    console.log('Quality warning:', warning);
+  }
+}
+
+// 使用方法
+const voiceService = new VoiceCallService();
+
+// バックエンドからのアクセストークンで初期化
+const token = await fetchTwilioToken();
+await voiceService.initialize(token);
+
+// 通話を発信
+await voiceService.makeCall('+1234567890');
+
+// 通話を制御
+await voiceService.toggleMute();
+await voiceService.toggleSpeaker();
+await voiceService.sendDTMF('1');
+
+// 通話を終了
+await voiceService.endCall();
+
+// ログアウト
+await voiceService.logout();
+```
+
+## ベストプラクティス
+
+- アクセストークンはバックエンドサーバーから取得し、アプリに埋め込まない
+- 長時間実行セッションのためにトークンリフレッシュロジックを実装する
+- 再接続ロジックでネットワーク中断を処理する
+- 通話状態の視覚的フィードバックを提供する
+- プッシュ通知で実際のデバイスでテストする
+- 適切なエラー処理を実装する
+- コンポーネントがアンマウントされたらリスナーをクリーンアップする
+- 通話を発信する前にマイクパーミッションをリクエストする
+
+## セキュリティに関する考慮事項
+
+- Twilio認証情報をアプリに保存しない
+- バックエンドでアクセストークンを生成する
+- トークンの有効期限とリフレッシュを実装する
+- すべてのトークンリクエストにHTTPSを使用する
+- サーバーサイドで着信通話を検証する
+
+## トラブルシューティング
+
+### 通話が接続されない
+
+- アクセストークンが有効で期限切れでないことを確認
+- ネットワーク接続を確認
+- マイクパーミッションが付与されていることを確認
+- Twilioアカウントが適切に設定されていることを確認
+
+### プッシュ通知が機能しない
+
+- TwilioでPushKit/FCM証明書が設定されていることを確認
+- デバイスがプッシュ通知に登録されていることを確認
+- 本番証明書でテストする
+
+### 音声の問題
+
+- マイクパーミッションを確認
+- スピーカー/Bluetooth設定を確認
+- 実際のデバイスで音声ルーティングをテストする
+
+## 発信者名表示 (CapacitorTwilioCallerName)
+
+デフォルトでは、着信通話は発信者の電話番号またはクライアントIDを表示します。TwiMLバックエンドから`CapacitorTwilioCallerName`パラメータを渡すことで、代わりにわかりやすい名前を表示するようにカスタマイズできます。
+
+### バックエンドのセットアップ
+
+`<Client>`ダイアルのTwiMLレスポンスを生成する際に、`CapacitorTwilioCallerName`パラメータを追加します:
+
+```java
+// Javaの例
+Parameter callerNameParam = new Parameter.Builder()
+    .name("CapacitorTwilioCallerName")
+    .value("John Doe")
+    .build();
+
+Client client = new Client.Builder(identity)
+    .parameter(callerNameParam)
+    .build();
+
+Dial dial = new Dial.Builder()
+    .client(client)
+    .build();
+```
+
+```javascript
+// Node.jsの例
+const VoiceResponse = require('twilio').twiml.VoiceResponse;
+
+const response = new VoiceResponse();
+const dial = response.dial();
+dial.client({
+  name: 'CapacitorTwilioCallerName',
+  value: 'John Doe'
+}, identity);
+```
+
+### 仕組み
+
+1. バックエンドが着信通話を受信すると、通話をルーティングするTwiMLを生成します
+2. 発信者の表示名を含む`CapacitorTwilioCallerName`パラメータを含めます
+3. プラグインは自動的にこのパラメータを抽出し、以下に使用します:
+   - iOS CallKit着信通話画面
+   - Android着信通話通知
+   - `incomingCall`イベントの`from`フィールド
+   - 通話ステータスの`pendingInvites`配列
+
+`CapacitorTwilioCallerName`が提供されない場合、プラグインは発信者の電話番号またはクライアントIDにフォールバックします。

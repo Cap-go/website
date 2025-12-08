@@ -1,0 +1,336 @@
+---
+title: 开始使用
+locale: zh
+description: 了解如何在您的 Capacitor 应用中安装和使用 Android Kiosk 插件将您的 Android 设备锁定到自助服务终端模式。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 平台支持
+
+此插件**仅限 Android**。对于 iOS 自助服务终端模式功能，请使用设备的内置[引导式访问](https://support.apple.com/zh-cn/HT202612)功能。
+
+## 功能
+
+- **自助服务终端模式**：隐藏系统 UI 并进入沉浸式全屏模式
+- **启动器集成**：将您的应用设置为设备启动器/主屏幕应用
+- **硬件按键控制**：阻止或允许特定硬件按钮
+- **状态检测**：检查自助服务终端模式是否处于活动状态或应用是否设置为启动器
+- **Android 6.0+**：支持 Android API 23 到 Android 15（API 35）
+
+## 基本使用
+
+### 进入和退出自助服务终端模式
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+// 进入自助服务终端模式
+await CapacitorAndroidKiosk.enterKioskMode();
+
+// 退出自助服务终端模式
+await CapacitorAndroidKiosk.exitKioskMode();
+
+// 检查是否处于自助服务终端模式
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+console.log('Kiosk mode active:', isInKioskMode);
+```
+
+### 启动器功能
+
+要获得完整的自助服务终端模式功能，您需要将您的应用设置为设备启动器：
+
+```typescript
+// 打开主屏幕设置，供用户选择您的应用作为启动器
+await CapacitorAndroidKiosk.setAsLauncher();
+
+// 检查应用是否设置为启动器
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+console.log('App is launcher:', isLauncher);
+```
+
+### 硬件按键控制
+
+控制在自助服务终端模式下允许哪些硬件按钮工作：
+
+```typescript
+// 仅允许音量键
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false
+});
+
+// 阻止所有按键（默认）
+await CapacitorAndroidKiosk.setAllowedKeys({});
+```
+
+## 完整示例
+
+```typescript
+async function setupKioskMode() {
+  try {
+    // 检查是否已设置为启动器
+    const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+
+    if (!isLauncher) {
+      // 提示用户设置为启动器
+      await CapacitorAndroidKiosk.setAsLauncher();
+      alert('Please select this app as your Home app');
+      return;
+    }
+
+    // 配置允许的按键
+    await CapacitorAndroidKiosk.setAllowedKeys({
+      volumeUp: true,
+      volumeDown: true,
+      back: false,
+      home: false,
+      recent: false,
+      power: false
+    });
+
+    // 进入自助服务终端模式
+    await CapacitorAndroidKiosk.enterKioskMode();
+    console.log('Kiosk mode activated');
+
+  } catch (error) {
+    console.error('Failed to setup kiosk mode:', error);
+  }
+}
+```
+
+## API 参考
+
+### isInKioskMode()
+
+检查应用当前是否在自助服务终端模式下运行。
+
+```typescript
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+```
+
+**返回：**
+- `isInKioskMode` (boolean)：自助服务终端模式当前是否处于活动状态
+
+---
+
+### isSetAsLauncher()
+
+检查应用是否设置为设备启动器（主屏幕应用）。
+
+```typescript
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+```
+
+**返回：**
+- `isLauncher` (boolean)：应用是否设置为设备启动器
+
+---
+
+### enterKioskMode()
+
+进入自助服务终端模式，隐藏系统 UI 并阻止硬件按钮。应用必须设置为设备启动器才能有效工作。
+
+```typescript
+await CapacitorAndroidKiosk.enterKioskMode();
+```
+
+---
+
+### exitKioskMode()
+
+退出自助服务终端模式，恢复正常的系统 UI 和硬件按钮功能。
+
+```typescript
+await CapacitorAndroidKiosk.exitKioskMode();
+```
+
+---
+
+### setAsLauncher()
+
+打开设备的主屏幕设置以允许用户将此应用设置为启动器。这是完整自助服务终端模式功能所必需的。
+
+```typescript
+await CapacitorAndroidKiosk.setAsLauncher();
+```
+
+---
+
+### setAllowedKeys(options)
+
+设置在自助服务终端模式下允许哪些硬件按键工作。默认情况下，所有硬件按键在自助服务终端模式下都被阻止。
+
+```typescript
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false,
+  power: false,
+  camera: false,
+  menu: false
+});
+```
+
+**参数：**
+- `volumeUp` (boolean, 可选)：允许音量增大按钮（默认：false）
+- `volumeDown` (boolean, 可选)：允许音量减小按钮（默认：false）
+- `back` (boolean, 可选)：允许返回按钮（默认：false）
+- `home` (boolean, 可选)：允许主屏幕按钮（默认：false）
+- `recent` (boolean, 可选)：允许最近应用按钮（默认：false）
+- `power` (boolean, 可选)：允许电源按钮（默认：false）
+- `camera` (boolean, 可选)：如果存在，允许相机按钮（默认：false）
+- `menu` (boolean, 可选)：如果存在，允许菜单按钮（默认：false）
+
+---
+
+### getPluginVersion()
+
+获取原生 Capacitor 插件版本。
+
+```typescript
+const { version } = await CapacitorAndroidKiosk.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+**返回：**
+- `version` (string)：插件版本号
+
+## Android 配置
+
+### 1. MainActivity 设置
+
+要启用完整的硬件按键阻止，您需要在 `MainActivity.java` 中覆盖 `dispatchKeyEvent`：
+
+```java
+import android.view.KeyEvent;
+import ee.forgr.plugin.android_kiosk.CapacitorAndroidKioskPlugin;
+
+public class MainActivity extends BridgeActivity {
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // Get the kiosk plugin
+        CapacitorAndroidKioskPlugin kioskPlugin = (CapacitorAndroidKioskPlugin)
+            this.getBridge().getPlugin("CapacitorAndroidKiosk").getInstance();
+
+        if (kioskPlugin != null && kioskPlugin.shouldBlockKey(event.getKeyCode())) {
+            return true; // Block the key
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Don't call super.onBackPressed() to disable back button
+        // Or call the plugin's handleOnBackPressed
+    }
+}
+```
+
+### 2. AndroidManifest.xml
+
+添加启动器 intent 过滤器以使您的应用可选择为启动器：
+
+```xml
+<activity
+    android:name=".MainActivity"
+    ...>
+
+    <!-- Existing intent filter -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <!-- Add this to make app selectable as launcher -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+```
+
+## 重要说明
+
+1. **启动器要求**：要获得完整的自助服务终端模式功能（阻止主屏幕按钮、防止任务切换），您的应用必须设置为设备启动器。
+
+2. **测试**：在测试时，您可以通过编程方式退出自助服务终端模式，或通过将另一个应用设置为启动器来退出。
+
+3. **Android 版本**：该插件在 Android 11+ 上使用现代 Android API，并回退到旧方法以保持与 Android 6.0+ 的兼容性。
+
+4. **安全性**：此插件专为合法的自助服务终端应用程序设计。确保为用户提供退出自助服务终端模式的方法。
+
+5. **电池**：自助服务终端模式保持屏幕常亮。考虑实现您自己的屏幕超时或亮度管理。
+
+## iOS 替代方案
+
+对于 iOS 设备，请使用内置的[引导式访问](https://support.apple.com/zh-cn/HT202612)功能：
+
+1. 前往"设置">"辅助功能">"引导式访问"
+2. 打开"引导式访问"
+3. 设置密码
+4. 打开您的应用
+5. 三次点击侧边按钮
+6. 调整设置并开始引导式访问
+
+## 最佳实践
+
+1. **首先检查启动器状态**
+   ```typescript
+   const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+   if (!isLauncher) {
+     // 提示用户首先设置为启动器
+     await CapacitorAndroidKiosk.setAsLauncher();
+   }
+   ```
+
+2. **提供退出机制**
+   ```typescript
+   // 允许特定的按键组合退出
+   // 或实现秘密手势/图案
+   async function exitKioskWithConfirmation() {
+     const confirmed = confirm('Exit kiosk mode?');
+     if (confirmed) {
+       await CapacitorAndroidKiosk.exitKioskMode();
+     }
+   }
+   ```
+
+3. **处理应用生命周期**
+   ```typescript
+   // 当应用恢复时重新进入自助服务终端模式
+   window.addEventListener('resume', async () => {
+     const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+     if (!isInKioskMode) {
+       await CapacitorAndroidKiosk.enterKioskMode();
+     }
+   });
+   ```
+
+4. **错误处理**
+   ```typescript
+   try {
+     await CapacitorAndroidKiosk.enterKioskMode();
+   } catch (error) {
+     console.error('Failed to enter kiosk mode:', error);
+     // 通知用户并提供替代方案
+   }
+   ```

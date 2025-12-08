@@ -1,0 +1,82 @@
+---
+title: CI/CD統合
+description: "お気に入りのCI/CDプラットフォームとCapgo Live Updatesを統合して、自動化されたデプロイメントワークフローを実現します。"
+locale: ja
+sidebar:
+  order: 1
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+人気のあるCI/CDプラットフォームと統合することで、Capgo Live Updatesのデプロイメントプロセスを自動化します。これらの統合により、コード変更をプッシュするたびに自動的にアプリのアップデートをデプロイし、フィーチャーブランチをテストし、複数のデプロイメント環境を管理できます。
+
+## 利用可能な統合
+
+CI/CDプラットフォームを選択して、自動デプロイメントを開始しましょう：
+
+<CardGrid>
+  <LinkCard
+    title="Azure DevOps"
+    description="自動化されたビルド、テスト、デプロイメントワークフローのためにAzure DevOps Pipelinesと統合します。"
+    href="/docs/live-updates/integrations/azure-devops/"
+  />
+  <LinkCard
+    title="GitLab CI/CD"
+    description="包括的な環境管理を備えたアプリのアップデートを自動的にデプロイするためにGitLab CI/CDパイプラインをセットアップします。"
+    href="/docs/live-updates/integrations/gitlab-ci/"
+  />
+  <LinkCard
+    title="GitHub Actions"
+    description="マルチチャネルデプロイメントと環境保護を備えた強力な自動化のためにGitHub Actionsを使用します。"
+    href="/docs/live-updates/integrations/github-actions/"
+  />
+  <LinkCard
+    title="Bitbucket Pipelines"
+    description="複数の環境用のシンプルまたは高度な構成を使用してBitbucket Pipelinesでデプロイします。"
+    href="/docs/live-updates/integrations/bitbucket-pipeline/"
+  />
+</CardGrid>
+
+## 得られるもの
+
+すべての統合ガイドには以下が含まれます：
+
+- **シンプルなセットアップ**: 迅速に開始するための基本構成
+- **高度なワークフロー**: ステージングと本番環境を含むマルチ環境デプロイメント
+- **フィーチャーブランチテスト**: テストチャネルへのフィーチャーブランチの自動デプロイメント
+- **セキュリティのベストプラクティス**: 安全なシークレット管理と環境保護
+- **監視**: デプロイメントステータスの通知とロギング
+
+<Aside type="tip">
+
+**CI/CDが初めてですか？** プラットフォームのシンプルな構成から始めて、ニーズが増えるにつれて、マルチチャネルデプロイメントや自動テストなどのより高度な機能を徐々に追加していきます。
+
+</Aside>
+
+## 共通機能
+
+各統合は以下をサポートします：
+
+- **自動ビルド**: コード変更時にデプロイメントをトリガー
+- **マルチチャネルサポート**: 異なるチャネル（development、staging、production）へのデプロイ
+- **プルリクエスト/マージリクエストテスト**: 隔離された環境で変更をテスト
+- **暗号化サポート**: Capgoの暗号化機能を使用した安全なデプロイメント
+- **環境保護**: 本番環境用の手動承認と制限付きアクセス
+- **通知**: Slack、メール、その他の通知統合
+
+## 前提条件
+
+統合を設定する前に、以下を確認してください：
+
+- Capgoアカウントとアプリが構成されている
+- アプリのソースコードがGitリポジトリにある
+- [console.capgo.app/apikeys](https://console.capgo.app/apikeys)からのCapgo APIトークン
+- プロジェクトにNode.jsとnpm/yarnが構成されている
+
+## 関連ドキュメント
+
+- [チャネル](/docs/live-updates/channels/) - 異なるデプロイメント環境の管理方法を学ぶ
+- [暗号化](/docs/live-updates/encryption/) - エンドツーエンド暗号化でデプロイメントを保護
+- [アップデート動作](/docs/live-updates/update-behavior/) - アプリへのアップデートの適用方法をカスタマイズ
+
+上記からCI/CDプラットフォームを選択して、Capgoデプロイメントの自動化を開始しましょう！

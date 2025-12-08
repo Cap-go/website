@@ -1,0 +1,274 @@
+---
+title: Guida introduttiva
+locale: it
+description: Scopri come installare e utilizzare il plugin Text Interaction per controllare la lente di ingrandimento e la lente di selezione del testo iOS.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installazione
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Supporto piattaforma
+
+- **iOS**: iOS 15.0+ (richiede UITextInteraction API)
+- **Android**: No-op (restituisce non supportato)
+- **Web**: No-op (restituisce non supportato)
+
+## Esempio di utilizzo
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+// Disabilita interazione con il testo (rimuovi lente di ingrandimento)
+const result = await TextInteraction.setEnabled({ enabled: false });
+
+if (result.success) {
+  console.log('Interazione con il testo disabilitata');
+} else {
+  console.log('Non supportato su questa piattaforma');
+}
+
+// Riabilita interazione con il testo prima di mostrare input di testo
+await TextInteraction.setEnabled({ enabled: true });
+```
+
+## Riferimento API
+
+### setEnabled(options)
+
+```typescript
+setEnabled(options: { enabled: boolean }) => Promise<{ success: boolean }>
+```
+
+Abilita o disabilita l'interazione con il testo iOS (lente di ingrandimento e maniglie di selezione).
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+**Restituisce:** `Promise<{ success: boolean }>`
+
+- Restituisce `{ success: true }` se l'operazione è riuscita (iOS 15+)
+- Restituisce `{ success: false }` se non supportato (Android, Web, o iOS < 15)
+
+## Casi d'uso pratici
+
+### Applicazioni kiosk
+
+Disabilita l'interazione con il testo in modalità kiosk per impedire agli utenti di accedere ai menu copia/incolla:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function enterKioskMode() {
+  // Disabilita interazione con il testo in modalità kiosk
+  const result = await TextInteraction.setEnabled({ enabled: false });
+
+  if (result.success) {
+    console.log('Modalità kiosk: Interazione con il testo disabilitata');
+  }
+}
+
+async function exitKioskMode() {
+  // Riabilita interazione con il testo quando si esce dalla modalità kiosk
+  await TextInteraction.setEnabled({ enabled: true });
+  console.log('Modalità kiosk: Interazione con il testo abilitata');
+}
+```
+
+### Esperienze di gioco
+
+Rimuovi la lente di ingrandimento durante il gioco e ripristinala per l'input di testo:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class GameController {
+  async startGame() {
+    // Disabilita interazione con il testo durante il gioco
+    await TextInteraction.setEnabled({ enabled: false });
+    console.log('Gioco avviato - interazione con il testo disabilitata');
+  }
+
+  async showTextInput() {
+    // Abilita interazione con il testo prima di mostrare l'input
+    await TextInteraction.setEnabled({ enabled: true });
+    console.log('Input di testo pronto - interazione abilitata');
+
+    // Mostra campo di input
+    this.displayInputField();
+  }
+
+  async hideTextInput() {
+    // Nascondi input e disabilita nuovamente l'interazione
+    this.hideInputField();
+    await TextInteraction.setEnabled({ enabled: false });
+  }
+}
+```
+
+### Installazioni interattive
+
+Controlla l'interazione con il testo per segnaletica digitale e display interattivi:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function setupInteractiveDisplay() {
+  // Disabilita interazione con il testo per modalità display
+  await TextInteraction.setEnabled({ enabled: false });
+
+  // Configura gestori touch per l'interazione con il display
+  document.addEventListener('touchstart', handleDisplayTouch);
+}
+
+async function enableUserInput() {
+  // Abilita interazione con il testo quando l'utente deve inserire dati
+  const result = await TextInteraction.setEnabled({ enabled: true });
+
+  if (result.success) {
+    showInputForm();
+  } else {
+    // Fallback per piattaforme non supportate
+    showInputFormWithoutTextInteraction();
+  }
+}
+```
+
+### Gestione form
+
+Attiva/disattiva l'interazione con il testo in base allo stato del form:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class FormManager {
+  private textInteractionEnabled = true;
+
+  async disableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: false });
+    this.textInteractionEnabled = false;
+    return result.success;
+  }
+
+  async enableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: true });
+    this.textInteractionEnabled = true;
+    return result.success;
+  }
+
+  async onFormFocus() {
+    // Abilita sempre prima di mostrare la tastiera
+    await this.enableTextSelection();
+  }
+
+  async onFormBlur() {
+    // Opzionalmente disabilita dopo che l'input è completato
+    await this.disableTextSelection();
+  }
+}
+```
+
+### Interazione con il testo condizionale
+
+Controllo dell'interazione con il testo consapevole della piattaforma:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+import { Capacitor } from '@capacitor/core';
+
+async function toggleTextInteraction(enabled: boolean) {
+  // Tenta solo su iOS
+  if (Capacitor.getPlatform() === 'ios') {
+    const result = await TextInteraction.setEnabled({ enabled });
+
+    if (result.success) {
+      console.log(`Interazione con il testo ${enabled ? 'abilitata' : 'disabilitata'}`);
+    } else {
+      console.log('Interazione con il testo non supportata su questa versione iOS');
+    }
+  } else {
+    console.log('Controllo interazione con il testo disponibile solo su iOS');
+  }
+}
+
+// Utilizzo
+await toggleTextInteraction(false); // Disabilita
+await toggleTextInteraction(true);  // Abilita
+```
+
+## Best practice
+
+- **Riabilita sempre prima dell'input di testo**: Disabilita l'interazione con il testo quando necessario, ma riabilitala sempre prima di mostrare campi di input di testo o tastiere
+- **Verifica supporto piattaforma**: Verifica `result.success` per gestire in modo elegante le piattaforme non supportate
+- **Funzionalità specifica iOS**: Questo plugin è solo per iOS; implementa fallback per Android e Web
+- **Esperienza utente**: Considera le implicazioni UX della disabilitazione dell'interazione con il testo
+- **Gestione dello stato**: Traccia lo stato abilitato/disabilitato per evitare chiamate ridondanti
+
+## Promemoria importanti
+
+1. **Riabilita per input di testo**: Chiama sempre `setEnabled({ enabled: true })` prima di mostrare campi di input di testo, altrimenti gli utenti non potranno selezionare o modificare il testo correttamente
+
+2. **Rilevamento piattaforma**: Il plugin restituisce `{ success: false }` su Android, Web e versioni iOS inferiori alla 15.0
+
+3. **Nessun feedback visivo**: La disabilitazione dell'interazione con il testo rimuove la lente di ingrandimento ma non fornisce feedback visivo - implementa i tuoi indicatori UI se necessario
+
+4. **Impostazioni predefinite sicure**: Il sistema di interazione con il testo è abilitato per impostazione predefinita, in linea con il comportamento standard di iOS
+
+## Limitazioni
+
+- Solo iOS 15.0+ (richiede UITextInteraction API)
+- Nessun effetto su piattaforme Android o Web
+- Non può disabilitare selettivamente solo la lente di ingrandimento o solo le maniglie di selezione
+- Nessun callback quando gli utenti tentano di utilizzare funzionalità disabilitate
+
+## Casi d'uso
+
+- **Applicazioni kiosk**: Previeni copia/incolla su installazioni controllate
+- **Esperienze di gioco**: Rimuovi la lente di ingrandimento durante il gioco
+- **Display interattivi**: Controlla l'interazione con il testo sulla segnaletica digitale
+- **Editor di testo personalizzati**: Costruisci esperienze di modifica del testo specializzate
+- **Sicurezza**: Previeni la selezione del testo in aree sensibili
+
+## Risoluzione dei problemi
+
+### L'interazione con il testo non si disabilita
+
+- Verifica che la versione iOS sia 15.0 o superiore
+- Controlla che `result.success` restituisca `true`
+- Assicurati che nessun altro codice stia riabilitando l'interazione con il testo
+
+### Gli utenti non possono modificare il testo
+
+- Assicurati di aver chiamato `setEnabled({ enabled: true })` prima di mostrare input di testo
+- Verifica che la chiamata di abilitazione sia riuscita controllando `result.success`
+- Testa su dispositivo iOS reale (non solo simulatore)

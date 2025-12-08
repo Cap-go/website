@@ -1,0 +1,165 @@
+---
+title: Create Android Auto-Renewable Subscription
+description: Step-by-step guide to creating auto-renewable subscriptions in Google Play Console for the native-purchases plugin.
+sidebar:
+  order: 4
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Auto-renewable subscriptions provide access to content, services, or premium features in your app on an ongoing basis. This guide will help you create and configure subscriptions in Google Play Console.
+
+## Overview
+
+Subscriptions automatically renew at the end of each billing period until the user cancels. They're ideal for:
+- Premium content access
+- Ad-free experiences
+- Cloud storage
+- Ongoing services
+
+## Creating a Subscription
+
+<Steps>
+
+1. **Navigate to Subscriptions**
+
+   In Google Play Console, select your app and choose **Monetize > Subscriptions** from the left menu.
+
+   Click the **Create subscription** button to begin.
+
+   ![Navigate to subscriptions](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+
+2. **Enter Basic Information**
+
+   Provide a subscription name and product ID. The product ID is required for configuration in your app and cannot be changed later.
+
+   ![Enter subscription details](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+
+3. **Create Base Plan**
+
+   Google Play requires exactly one base plan per subscription. The native-purchases plugin supports only one base plan to maintain compatibility with iOS.
+
+   Click **Add base plan** to continue.
+
+   ![Create base plan](/native-purchases/android/create-subscription/create-base-plan.webp)
+
+4. **Configure Base Plan Details**
+
+   Enter:
+   - **Base plan ID**: Unique identifier for this plan
+   - **Billing period**: How often users are charged (weekly, monthly, yearly, etc.)
+   - **Grace period**: Time window during which Google maintains the subscription while retrying payment before cancellation
+
+   ![Configure base plan](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+
+5. **Set Up Pricing**
+
+   Access the pricing section and select all countries/regions where you want to offer the subscription.
+
+   ![Select regions](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+
+6. **Configure Price**
+
+   Set your base price in your primary currency. Google Play automatically converts this to local currencies.
+
+   ![Set price](/native-purchases/android/create-subscription/set-base-price.webp)
+
+7. **Review Regional Pricing**
+
+   Review the automatically converted prices for each country. You can adjust individual prices if needed.
+
+   ![Review pricing](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+
+8. **Save Configuration**
+
+   Save your pricing configuration.
+
+   ![Save pricing](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+
+9. **Activate Subscription**
+
+   Click the **Activate** button to make your subscription product live and available for purchase.
+
+   ![Activate subscription](/native-purchases/android/create-subscription/activate-subscription.webp)
+
+</Steps>
+
+## Important Considerations
+
+### Base Plan Limitation
+
+The native-purchases plugin requires exactly one base plan per subscription to ensure consistency with iOS subscription handling. Multiple base plans are not supported.
+
+### Grace Period
+
+The grace period allows Google Play to retry failed payments while maintaining the user's subscription access. Common grace periods are:
+- 3 days for monthly subscriptions
+- 7 days for longer subscriptions
+
+### Subscription Status
+
+After creation, your subscription will be in "Draft" status until activated. You can test draft subscriptions in sandbox mode.
+
+## Using in Your App
+
+Once created, reference the subscription in your app using the product ID:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Load subscription info
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+console.log(`${product.title} — ${product.priceString}`);
+
+// Purchase (planIdentifier = Base Plan ID from Google Play Console)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Transaction ID', transaction.transactionId);
+
+// Later, check purchase state
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const subscription = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.example.premium.monthly',
+);
+
+if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.isAcknowledged) {
+  console.log('Subscription active locally');
+  // For expiration/cancellation, validate purchaseToken through your backend
+}
+```
+
+## Next Steps
+
+- [Create an introductory offer](/docs/plugins/native-purchases/android-introductory-offer/) to attract new subscribers
+- [Configure sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/) to test your subscriptions
+- Set up backend receipt validation for security
+
+## Troubleshooting
+
+**Subscription not appearing in app:**
+- Verify the product ID matches exactly
+- Ensure the subscription is activated
+- Check that your app has the correct package name
+- Wait 2-3 hours after activation for changes to propagate
+
+**Base plan errors:**
+- Ensure you have exactly one base plan
+- Verify all required fields are filled
+- Check that billing period is valid
+
+**Pricing issues:**
+- Confirm at least one country is selected
+- Verify base price is greater than minimum allowed
+- Check currency conversion rates are acceptable

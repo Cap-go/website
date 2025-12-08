@@ -1,0 +1,35 @@
+---
+title: "正确放置 CapacitorUpdater.notifyAppReady() 调用"
+locale: zh
+description: 如何在应用中正确放置 CapacitorUpdater.notifyAppReady() 调用以确保正确的自动更新流程。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import ConditionalQuestionnaire from '@/components/ConditionalQuestionnaire.astro'
+
+`CapacitorUpdater.notifyAppReady()` 调用的放置位置对于正确的自动更新流程至关重要。
+
+
+如果未正确完成，应用将无法更新到最新版本。每个在 10 秒内未调用 `notifyAppReady()` 的版本将被标记为无效，并将被上一个有效版本或默认（内置）版本替换。
+
+
+在本指南中，我们将向您展示如何在应用中正确放置 `notifyAppReady()` 调用以确保正确的自动更新流程。
+
+### `notifyAppReady()` 调用放置位置问卷
+
+<ConditionalQuestionnaire />
+
+
+<div style="margin-top: 3rem;">
+<Aside type="note">
+如果您在问卷中找不到您的框架，请随时在我们的 [Discord](https://discord.capgo.app) 上提问。
+</Aside>
+</div>

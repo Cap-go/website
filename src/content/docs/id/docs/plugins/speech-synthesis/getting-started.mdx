@@ -1,0 +1,252 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin Speech Synthesis untuk mengubah teks menjadi ucapan di aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+Impor plugin dan sintesis ucapan dari teks:
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+// Basic text-to-speech
+const speak = async () => {
+  await SpeechSynthesis.speak({
+    text: 'Hello, world!',
+    language: 'en-US'
+  });
+};
+
+// Advanced usage with voice control
+const speakWithVoice = async () => {
+  await SpeechSynthesis.speak({
+    text: 'This is a test of speech synthesis.',
+    language: 'en-US',
+    rate: 1.0,      // Speech rate: 0.1 to 10.0
+    pitch: 1.0,     // Voice pitch: 0.5 to 2.0
+    volume: 1.0,    // Volume: 0.0 to 1.0
+    voice: 'com.apple.ttsbundle.Samantha-compact'
+  });
+};
+```
+
+## Referensi API
+
+### speak(options)
+
+Mengucapkan teks yang diberikan menggunakan pengaturan suara yang ditentukan.
+
+```typescript
+interface SpeakOptions {
+  text: string;           // Text to speak
+  language?: string;      // Language code (e.g., 'en-US', 'es-ES')
+  rate?: number;          // Speech rate: 0.1 to 10.0 (default: 1.0)
+  pitch?: number;         // Voice pitch: 0.5 to 2.0 (default: 1.0)
+  volume?: number;        // Volume: 0.0 to 1.0 (default: 1.0)
+  voice?: string;         // Voice identifier (get from getVoices())
+}
+
+await SpeechSynthesis.speak(options);
+```
+
+### stop()
+
+Menghentikan sintesis ucapan yang sedang berlangsung.
+
+```typescript
+await SpeechSynthesis.stop();
+```
+
+### getVoices()
+
+Mendapatkan daftar suara yang tersedia untuk sintesis ucapan.
+
+```typescript
+interface Voice {
+  voiceURI: string;       // Unique voice identifier
+  name: string;           // Human-readable voice name
+  lang: string;           // Language code
+  default: boolean;       // Whether this is the default voice
+}
+
+const { voices } = await SpeechSynthesis.getVoices();
+console.log('Available voices:', voices);
+```
+
+### getSupportedLanguages()
+
+Mendapatkan daftar kode bahasa yang didukung.
+
+```typescript
+const { languages } = await SpeechSynthesis.getSupportedLanguages();
+console.log('Supported languages:', languages);
+```
+
+### isSpeaking()
+
+Memeriksa apakah sintesis ucapan sedang aktif.
+
+```typescript
+const { speaking } = await SpeechSynthesis.isSpeaking();
+console.log('Currently speaking:', speaking);
+```
+
+## Contoh Lengkap
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+export class TextToSpeechService {
+  private currentVoice: string | undefined;
+
+  async init() {
+    // Get available voices
+    const { voices } = await SpeechSynthesis.getVoices();
+
+    // Find English voice
+    const englishVoice = voices.find(v => v.lang.startsWith('en'));
+    this.currentVoice = englishVoice?.voiceURI;
+
+    console.log(`Using voice: ${englishVoice?.name}`);
+  }
+
+  async speak(text: string, options?: Partial<SpeakOptions>) {
+    try {
+      // Stop any ongoing speech
+      await SpeechSynthesis.stop();
+
+      // Speak the text
+      await SpeechSynthesis.speak({
+        text,
+        language: 'en-US',
+        rate: 1.0,
+        pitch: 1.0,
+        volume: 1.0,
+        voice: this.currentVoice,
+        ...options
+      });
+    } catch (error) {
+      console.error('Speech synthesis failed:', error);
+      throw error;
+    }
+  }
+
+  async speakWithRate(text: string, rate: number) {
+    await this.speak(text, { rate });
+  }
+
+  async stop() {
+    await SpeechSynthesis.stop();
+  }
+
+  async checkIfSpeaking(): Promise<boolean> {
+    const { speaking } = await SpeechSynthesis.isSpeaking();
+    return speaking;
+  }
+
+  async listVoicesByLanguage(languageCode: string) {
+    const { voices } = await SpeechSynthesis.getVoices();
+    return voices.filter(v => v.lang.startsWith(languageCode));
+  }
+}
+```
+
+## Penggunaan Lanjutan
+
+### Dukungan Multi-bahasa
+
+```typescript
+// Speak in different languages
+const speakMultiLanguage = async () => {
+  await SpeechSynthesis.speak({
+    text: 'Hello!',
+    language: 'en-US'
+  });
+
+  await SpeechSynthesis.speak({
+    text: 'Bonjour!',
+    language: 'fr-FR'
+  });
+
+  await SpeechSynthesis.speak({
+    text: 'こんにちは!',
+    language: 'ja-JP'
+  });
+};
+```
+
+### Pemilihan Suara
+
+```typescript
+// Select a specific voice
+const selectVoice = async (languageCode: string) => {
+  const { voices } = await SpeechSynthesis.getVoices();
+
+  // Filter voices by language
+  const languageVoices = voices.filter(v =>
+    v.lang.startsWith(languageCode)
+  );
+
+  // Use the first available voice
+  if (languageVoices.length > 0) {
+    await SpeechSynthesis.speak({
+      text: 'Testing voice selection',
+      language: languageCode,
+      voice: languageVoices[0].voiceURI
+    });
+  }
+};
+```
+
+### Membaca Teks Panjang
+
+```typescript
+// Split and speak long text in chunks
+const speakLongText = async (longText: string) => {
+  const sentences = longText.match(/[^.!?]+[.!?]+/g) || [longText];
+
+  for (const sentence of sentences) {
+    await SpeechSynthesis.speak({
+      text: sentence.trim(),
+      language: 'en-US',
+      rate: 0.9
+    });
+
+    // Wait a bit between sentences
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+};
+```
+
+## Praktik Terbaik
+
+1. **Pemilihan Suara**: Selalu periksa suara yang tersedia sebelum menggunakan ID suara tertentu
+2. **Kode Bahasa**: Gunakan kode bahasa standar (misalnya, 'en-US', 'es-ES', 'fr-FR')
+3. **Kontrol Kecepatan**: Pertahankan kecepatan antara 0.5 dan 2.0 untuk ucapan yang terdengar alami
+4. **Stop Sebelum Speak**: Panggil stop() sebelum memulai ucapan baru untuk menghindari tumpang tindih
+5. **Penanganan Error**: Bungkus semua panggilan dalam blok try-catch untuk penanganan error yang kokoh
+
+## Pemecahan Masalah
+
+### Masalah Umum
+
+**Tidak ada output ucapan**: Periksa volume perangkat dan pastikan teks tidak kosong
+**Suara tidak ditemukan**: Gunakan getVoices() untuk menemukan suara yang tersedia di perangkat
+**Ucapan terputus**: Hentikan ucapan yang sedang berlangsung sebelum memulai sintesis baru
+**Bahasa tidak didukung**: Periksa getSupportedLanguages() untuk bahasa yang tersedia

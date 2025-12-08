@@ -1,0 +1,179 @@
+---
+title: "Statistics API"
+locale: id
+description: "Cara menggunakan endpoint statistik Capgo dengan plugin auto-update dalam mode self-hosted, untuk apa mereka digunakan dan apa yang diharapkan"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+
+## Statistics API
+
+Mulai dari versi 1.3.0, sistem pembaruan dapat mengirim statistik!
+
+Secara default, semua statistik dikirim ke server kami, untuk memahami penggunaan dan riset.
+
+<Aside>
+Tidak ada data pribadi yang dikirim untuk statistik, hanya UUID acak, versi pembaruan, versi aplikasi native, platform, aksi, dan ID aplikasi.
+</Aside>
+
+Jika Anda ingin mengirim data ini ke server Anda sebagai gantinya, ubah konfigurasi di bawah ini:
+
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "YOUR_URL"
+		}
+	}
+}
+```
+
+## Struktur Data
+
+Apa yang akan diterima server Anda adalah:
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // bisa berupa set, delete, set_fail, reset, revert
+	// Kemudian informasinya sama seperti update
+	"app_id": "**.***.**", // identifier aplikasi di store
+	"device_id": "*******", // id unik per instalasi aplikasi
+	"platform": "ios", // atau android
+	"custom_id": "user_1", // mewakili pengguna Anda
+        "version_name": "1.2.3", // versi build web
+        "version_build": "1.2.0", // versi build native
+        "version_code": "120", // build number dari build native
+	"version_os": "16", // versi OS perangkat
+        "plugin_version": "4.0.0"// agar api Anda berperilaku berbeda dengan plugin yang berbeda
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+Anda juga dapat sepenuhnya menonaktifkannya, dengan string kosong. Ingat, statistik dibuat dengan ramah privasi dan membantu saya memahami bagaimana orang menggunakan plugin, untuk menyelesaikan masalah dan meningkatkannya.
+
+## Contoh Implementasi
+
+Berikut adalah contoh kode dalam JavaScript untuk menyimpan statistik plugin:
+
+```typescript
+interface AppInfos {
+  version_name: string
+  action: 'ping' |
+          'delete' |
+          'reset' |
+          'set' |
+          'get' |
+          'set_fail' |
+          'update_fail' |
+          'download_fail' |
+          'windows_path_fail' |
+          'canonical_path_fail' |
+          'directory_path_fail' |
+          'unzip_fail' |
+          'low_mem_fail' |
+          'download_10' |
+          'download_20' |
+          'download_30' |
+          'download_40' |
+          'download_50' |
+          'download_60' |
+          'download_70' |
+          'download_80' |
+          'download_90' |
+          'download_complete' |
+          'download_manifest_start' |
+          'download_manifest_complete' |
+          'download_zip_start' |
+          'download_zip_complete' |
+          'download_manifest_file_fail' |
+          'download_manifest_checksum_fail' |
+          'download_manifest_brotli_fail' |
+          'decrypt_fail' |
+          'app_moved_to_foreground' |
+          'app_moved_to_background' |
+          'uninstall' |
+          'needPlanUpgrade' |
+          'missingBundle' |
+          'noNew' |
+          'disablePlatformIos' |
+          'disablePlatformAndroid' |
+          'disableAutoUpdateToMajor' |
+          'cannotUpdateViaPrivateChannel' |
+          'disableAutoUpdateToMinor' |
+          'disableAutoUpdateToPatch' |
+          'channelMisconfigured' |
+          'disableAutoUpdateMetadata' |
+          'disableAutoUpdateUnderNative' |
+          'disableDevBuild' |
+          'disableEmulator' |
+          'cannotGetBundle' |
+          'checksum_fail' |
+          'NoChannelOrOverride' |
+          'setChannel' |
+          'getChannel' |
+          'rateLimited' |
+          'disableAutoUpdate' |
+          'InvalidIp' |
+          'blocked_by_server_url'
+  version_build: string
+  version_code: string
+  version_os: string
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSON.parse(event.body || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    action,
+    version_code,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  console.log('update asked', platform,
+    app_id,
+    action,
+    version_os,
+    version_code,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  // Simpan di database Anda
+  return { status: 'ok' }
+}
+```
+
+Endpoint ini harus mengembalikan JSON:
+
+```json
+{ "status": "ok" }
+```
+
+## Actions
+
+Untuk deskripsi detail dari semua kode aksi dan artinya, silakan lihat dokumentasi debugging:
+
+* **Actions yang dikirim dari perangkat**: Lihat bagian [dokumentasi debugging - Sent from the device](/docs/plugins/updater/debugging/#sent-from-the-device)
+* **Actions yang dikirim dari backend**: Lihat bagian [dokumentasi debugging - Sent from the backend](/docs/plugins/updater/debugging/#sent-from-the-backend)
+
+<LinkCard
+	title="Handling Updates"
+	href="/docs/plugin/self-hosted/handling-updates/"
+/>

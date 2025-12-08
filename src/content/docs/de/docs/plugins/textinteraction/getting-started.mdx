@@ -1,0 +1,274 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie das Text Interaction-Plugin installieren und verwenden, um die iOS-Textauswahllupe und -lupe zu steuern.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Plattformunterstützung
+
+- **iOS**: iOS 15.0+ (erfordert UITextInteraction API)
+- **Android**: Keine Operation (gibt nicht unterstützt zurück)
+- **Web**: Keine Operation (gibt nicht unterstützt zurück)
+
+## Verwendungsbeispiel
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+// Textinteraktion deaktivieren (Lupenlupe entfernen)
+const result = await TextInteraction.setEnabled({ enabled: false });
+
+if (result.success) {
+  console.log('Textinteraktion deaktiviert');
+} else {
+  console.log('Nicht auf dieser Plattform unterstützt');
+}
+
+// Textinteraktion vor dem Anzeigen von Texteingaben wieder aktivieren
+await TextInteraction.setEnabled({ enabled: true });
+```
+
+## API-Referenz
+
+### setEnabled(options)
+
+```typescript
+setEnabled(options: { enabled: boolean }) => Promise<{ success: boolean }>
+```
+
+iOS-Textinteraktion aktivieren oder deaktivieren (Lupenlupe und Auswahlgriffe).
+
+| Parameter     | Typ                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+**Rückgabe:** `Promise<{ success: boolean }>`
+
+- Gibt `{ success: true }` zurück, wenn die Operation erfolgreich war (iOS 15+)
+- Gibt `{ success: false }` zurück, wenn nicht unterstützt (Android, Web oder iOS < 15)
+
+## Praktische Anwendungsfälle
+
+### Kiosk-Anwendungen
+
+Deaktivieren Sie die Textinteraktion im Kiosk-Modus, um zu verhindern, dass Benutzer auf Kopieren/Einfügen-Menüs zugreifen:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function enterKioskMode() {
+  // Textinteraktion im Kiosk-Modus deaktivieren
+  const result = await TextInteraction.setEnabled({ enabled: false });
+
+  if (result.success) {
+    console.log('Kiosk-Modus: Textinteraktion deaktiviert');
+  }
+}
+
+async function exitKioskMode() {
+  // Textinteraktion beim Verlassen des Kiosk-Modus wieder aktivieren
+  await TextInteraction.setEnabled({ enabled: true });
+  console.log('Kiosk-Modus: Textinteraktion aktiviert');
+}
+```
+
+### Spielerlebnisse
+
+Entfernen Sie die Lupenlupe während des Spielens und stellen Sie sie für die Texteingabe wieder her:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class GameController {
+  async startGame() {
+    // Textinteraktion während des Spielens deaktivieren
+    await TextInteraction.setEnabled({ enabled: false });
+    console.log('Spiel gestartet - Textinteraktion deaktiviert');
+  }
+
+  async showTextInput() {
+    // Textinteraktion vor dem Anzeigen der Eingabe aktivieren
+    await TextInteraction.setEnabled({ enabled: true });
+    console.log('Texteingabe bereit - Interaktion aktiviert');
+
+    // Eingabefeld anzeigen
+    this.displayInputField();
+  }
+
+  async hideTextInput() {
+    // Eingabe ausblenden und Interaktion wieder deaktivieren
+    this.hideInputField();
+    await TextInteraction.setEnabled({ enabled: false });
+  }
+}
+```
+
+### Interaktive Installationen
+
+Steuern Sie die Textinteraktion für digitale Beschilderung und interaktive Displays:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function setupInteractiveDisplay() {
+  // Textinteraktion für den Anzeigemodus deaktivieren
+  await TextInteraction.setEnabled({ enabled: false });
+
+  // Touch-Handler für Display-Interaktion einrichten
+  document.addEventListener('touchstart', handleDisplayTouch);
+}
+
+async function enableUserInput() {
+  // Textinteraktion aktivieren, wenn der Benutzer Daten eingeben muss
+  const result = await TextInteraction.setEnabled({ enabled: true });
+
+  if (result.success) {
+    showInputForm();
+  } else {
+    // Fallback für nicht unterstützte Plattformen
+    showInputFormWithoutTextInteraction();
+  }
+}
+```
+
+### Formularverwaltung
+
+Textinteraktion basierend auf dem Formularstatus umschalten:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class FormManager {
+  private textInteractionEnabled = true;
+
+  async disableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: false });
+    this.textInteractionEnabled = false;
+    return result.success;
+  }
+
+  async enableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: true });
+    this.textInteractionEnabled = true;
+    return result.success;
+  }
+
+  async onFormFocus() {
+    // Immer vor dem Anzeigen der Tastatur aktivieren
+    await this.enableTextSelection();
+  }
+
+  async onFormBlur() {
+    // Optional nach Abschluss der Eingabe deaktivieren
+    await this.disableTextSelection();
+  }
+}
+```
+
+### Bedingte Textinteraktion
+
+Plattformbewusste Textinteraktionssteuerung:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+import { Capacitor } from '@capacitor/core';
+
+async function toggleTextInteraction(enabled: boolean) {
+  // Nur auf iOS versuchen
+  if (Capacitor.getPlatform() === 'ios') {
+    const result = await TextInteraction.setEnabled({ enabled });
+
+    if (result.success) {
+      console.log(`Textinteraktion ${enabled ? 'aktiviert' : 'deaktiviert'}`);
+    } else {
+      console.log('Textinteraktion wird auf dieser iOS-Version nicht unterstützt');
+    }
+  } else {
+    console.log('Textinteraktionssteuerung nur auf iOS verfügbar');
+  }
+}
+
+// Verwendung
+await toggleTextInteraction(false); // Deaktivieren
+await toggleTextInteraction(true);  // Aktivieren
+```
+
+## Best Practices
+
+- **Vor der Texteingabe immer wieder aktivieren**: Deaktivieren Sie die Textinteraktion bei Bedarf, aber aktivieren Sie sie immer wieder, bevor Sie Texteingabefelder oder Tastaturen anzeigen
+- **Auf Plattformunterstützung prüfen**: Überprüfen Sie `result.success`, um nicht unterstützte Plattformen ordnungsgemäß zu behandeln
+- **iOS-spezifische Funktion**: Dieses Plugin ist nur für iOS; implementieren Sie Fallbacks für Android und Web
+- **Benutzererfahrung**: Berücksichtigen Sie UX-Auswirkungen der Deaktivierung der Textinteraktion
+- **Zustandsverwaltung**: Verfolgen Sie den aktivierten/deaktivierten Zustand, um redundante Aufrufe zu vermeiden
+
+## Wichtige Erinnerungen
+
+1. **Für Texteingaben wieder aktivieren**: Rufen Sie immer `setEnabled({ enabled: true })` auf, bevor Sie Texteingabefelder anzeigen, da Benutzer sonst Text nicht richtig auswählen oder bearbeiten können
+
+2. **Plattformerkennung**: Das Plugin gibt `{ success: false }` auf Android, Web und iOS-Versionen unter 15.0 zurück
+
+3. **Kein visuelles Feedback**: Das Deaktivieren der Textinteraktion entfernt die Lupe, bietet aber kein visuelles Feedback - implementieren Sie Ihre eigenen UI-Indikatoren, falls erforderlich
+
+4. **Sichere Standardwerte**: Das Textinteraktionssystem ist standardmäßig aktiviert und entspricht dem Standardverhalten von iOS
+
+## Einschränkungen
+
+- Nur iOS 15.0+ (erfordert UITextInteraction API)
+- Keine Auswirkungen auf Android- oder Web-Plattformen
+- Kann nicht selektiv nur die Lupe oder nur die Auswahlgriffe deaktivieren
+- Kein Callback, wenn Benutzer versuchen, deaktivierte Funktionen zu verwenden
+
+## Anwendungsfälle
+
+- **Kiosk-Anwendungen**: Verhindern Sie Kopieren/Einfügen auf kontrollierten Installationen
+- **Spielerlebnisse**: Entfernen Sie die Lupe während des Spielens
+- **Interaktive Displays**: Steuern Sie die Textinteraktion auf digitaler Beschilderung
+- **Benutzerdefinierte Texteditoren**: Erstellen Sie spezialisierte Textbearbeitungserlebnisse
+- **Sicherheit**: Verhindern Sie Textauswahl in sensiblen Bereichen
+
+## Fehlerbehebung
+
+### Textinteraktion wird nicht deaktiviert
+
+- Überprüfen Sie, ob die iOS-Version 15.0 oder höher ist
+- Überprüfen Sie, ob `result.success` `true` zurückgibt
+- Stellen Sie sicher, dass kein anderer Code die Textinteraktion wieder aktiviert
+
+### Benutzer können Text nicht bearbeiten
+
+- Stellen Sie sicher, dass Sie `setEnabled({ enabled: true })` aufgerufen haben, bevor Sie Texteingaben anzeigen
+- Überprüfen Sie, ob der Aktivierungsaufruf erfolgreich war, indem Sie `result.success` überprüfen
+- Testen Sie auf einem echten iOS-Gerät (nicht nur im Simulator)

@@ -1,0 +1,204 @@
+---
+title: Inizia
+description: Impara come installare e utilizzare il plugin Native Biometric per l'autenticazione biometrica sicura nella tua app Capacitor.
+locale: it
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configura i permessi**
+
+   ### iOS
+   Aggiungi la descrizione dell'uso di Face ID al tuo `Info.plist`:
+   ```xml
+   <key>NSFaceIDUsageDescription</key>
+   <string>For secure authentication</string>
+   ```
+
+   ### Android
+   Aggiungi il permesso biometrico al tuo `AndroidManifest.xml`:
+   ```xml
+   <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+   ```
+</Steps>
+
+## Utilizzo
+
+Importa il plugin e usa i suoi metodi per l'autenticazione biometrica:
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+// Controlla se l'autenticazione biometrica è disponibile
+const checkBiometric = async () => {
+  const result = await NativeBiometric.isAvailable();
+
+  if (result.isAvailable) {
+    console.log(`Tipo biometrico: ${result.biometryType}`);
+  }
+};
+
+// Esegui la verifica biometrica
+const verify = async () => {
+  const verified = await NativeBiometric.verifyIdentity({
+    reason: "Per un accesso sicuro al tuo account",
+    title: "Autenticazione",
+    subtitle: "Verifica la tua identità",
+    description: "Posiziona il dito sul sensore"
+  })
+    .then(() => true)
+    .catch(() => false);
+
+  if (verified) {
+    console.log("Autenticazione riuscita");
+  }
+};
+
+// Memorizza le credenziali in modo sicuro
+const saveCredentials = async () => {
+  await NativeBiometric.setCredentials({
+    username: "user@example.com",
+    password: "securepassword",
+    server: "https://api.example.com"
+  });
+};
+
+// Recupera le credenziali memorizzate
+const getCredentials = async () => {
+  const credentials = await NativeBiometric.getCredentials({
+    server: "https://api.example.com"
+  });
+
+  console.log(credentials.username);
+  console.log(credentials.password);
+};
+
+// Elimina le credenziali memorizzate
+const deleteCredentials = async () => {
+  await NativeBiometric.deleteCredentials({
+    server: "https://api.example.com"
+  });
+};
+```
+
+## Riferimento API
+
+### isAvailable()
+
+Controlla se l'autenticazione biometrica è disponibile sul dispositivo.
+
+```typescript
+interface AvailableResult {
+  isAvailable: boolean;
+  biometryType?: BiometryType;
+  errorCode?: number;
+}
+
+enum BiometryType {
+  NONE = 0,
+  TOUCH_ID = 1,
+  FACE_ID = 2,
+  FINGERPRINT = 3,
+  FACE_AUTHENTICATION = 4,
+  IRIS_AUTHENTICATION = 5
+}
+```
+
+### verifyIdentity(options)
+
+Esegue l'autenticazione biometrica.
+
+```typescript
+interface BiometricOptions {
+  reason?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  fallbackTitle?: string;
+  useFallback?: boolean;
+  maxAttempts?: number;
+}
+```
+
+### setCredentials(options)
+
+Memorizza le credenziali in modo sicuro con protezione biometrica.
+
+```typescript
+interface Credentials {
+  username: string;
+  password: string;
+  server: string;
+}
+```
+
+### getCredentials(options)
+
+Recupera le credenziali memorizzate dopo l'autenticazione biometrica.
+
+```typescript
+interface GetCredentialOptions {
+  server: string;
+}
+```
+
+### deleteCredentials(options)
+
+Elimina le credenziali memorizzate.
+
+```typescript
+interface DeleteCredentialOptions {
+  server: string;
+}
+```
+
+## Best practice
+
+1. **Controlla sempre la disponibilità per prima**
+   ```typescript
+   const result = await NativeBiometric.isAvailable();
+   if (!result.isAvailable) {
+     // Torna all'autenticazione tramite password
+   }
+   ```
+
+2. **Fornisci motivi chiari**
+   Spiega sempre perché hai bisogno dell'autenticazione biometrica per creare fiducia nell'utente.
+
+3. **Gestisci gli errori con grazia**
+   ```typescript
+   try {
+     await NativeBiometric.verifyIdentity({
+       reason: "Accedi ai tuoi dati sicuri"
+     });
+   } catch (error) {
+     // Gestisci annullamento o fallimento
+     console.log("Autenticazione fallita o annullata");
+   }
+   ```
+
+4. **Usa fallback appropriati**
+   Abilita il fallback del codice di accesso per i dispositivi in cui la biometria potrebbe fallire.
+
+## Differenze tra piattaforme
+
+### iOS
+- Supporta Touch ID e Face ID
+- Richiede `NSFaceIDUsageDescription` per Face ID
+- Fallback al codice di accesso del dispositivo disponibile
+
+### Android
+- Supporta riconoscimento di impronte digitali, volto e iride
+- Richiede il permesso `USE_BIOMETRIC`
+- API Biometric Prompt per Android 9+

@@ -1,0 +1,91 @@
+---
+title: Supabase統合の紹介
+locale: ja
+description: Capacitor Social LoginプラグインでSupabase認証を統合して完全な認証ソリューションを実現する方法を学びます。
+sidebar:
+    order: 1
+---
+
+## 概要
+
+このチュートリアルでは、Capacitor Social LoginプラグインでSupabase認証を設定する方法をガイドします。この統合により、モバイルプラットフォームでネイティブソーシャルログインプロバイダー(Google、Apple、Facebook、Twitter)を使用しながら、バックエンド認証とデータストレージにはSupabase AuthとPostgreSQLを活用できます。
+
+## 学習内容
+
+- Supabase認証の設定方法
+- Capacitor Social LoginプラグインをSupabase Authと統合する方法
+- Android、iOS、Web向けのプラットフォーム固有のセットアップ
+- Supabaseでnonceを安全に処理する方法
+
+## 必要なもの
+
+始める前に、以下を用意してください:
+
+1. **Supabaseプロジェクト**
+   - [Supabaseダッシュボード](https://app.supabase.com/)でプロジェクトを作成
+   - Google OAuthプロバイダーを有効化
+   - SupabaseプロジェクトURLとanon keyを取得
+
+2. **Supabase JS SDK**
+   - プロジェクトにSupabaseをインストール:
+     ```bash
+     npm install @supabase/supabase-js
+     ```
+
+3. **Capacitorプロジェクト**
+   - 既存のCapacitorアプリケーション
+   - Capacitor Social Loginプラグインをインストール:
+     ```bash
+     npm install @capgo/capacitor-social-login
+     npx cap sync
+     ```
+
+4. **プラットフォーム固有のGoogleセットアップ**
+   - ターゲットプラットフォーム向けのGoogleサインインセットアップを完了:
+     - [Google Login Androidセットアップ](/docs/plugins/social-login/google/android/)
+     - [Google Login iOSセットアップ](/docs/plugins/social-login/google/ios/)
+     - [Google Login Webセットアップ](/docs/plugins/social-login/google/web/)
+
+## サンプルアプリケーション
+
+完全に動作するサンプルがリポジトリで利用可能です:
+
+**コードリポジトリ**: [コードリポジトリはこちらで確認できます](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+
+サンプルアプリは以下を示しています:
+- Supabaseによるメール/パスワード認証
+- Googleサインイン統合(Android、iOS、Web)
+- Supabase PostgreSQLテーブルを使用したシンプルなキーバリューストア
+- Row Level Security (RLS)を使用したユーザー固有のデータストレージ
+
+## 主要な実装詳細
+
+### Nonceの処理
+
+Supabaseはセキュリティのために特別なnonce処理が必要です。実装は[React Native Google Sign Inドキュメント](https://react-native-google-signin.github.io/docs/security#usage-with-supabase)に従っています:
+
+- `rawNonce`(URL安全なランダム文字列)を生成
+- SHA-256でハッシュ化して`nonceDigest`を取得
+- `nonceDigest`をGoogle Sign-Inに渡す
+- `rawNonce`をSupabaseに渡す(Supabaseは内部でハッシュ化して比較)
+
+### JWT検証
+
+サンプル実装にはJWT検証が含まれており、以下を保証します:
+- トークンのaudienceが設定されたGoogle Client IDと一致する
+- nonceが期待されるダイジェストと一致する
+- 検証失敗時の自動リトライ(特にiOSで重要)
+
+### プラットフォーム固有の考慮事項
+
+- **iOS**: トークンキャッシングがnonce問題を引き起こす可能性があります - 実装は自動的にこれを処理します
+- **Web**: OAuthリダイレクトを処理するためにマウント時に`isLoggedIn()`を呼び出す必要があります
+- **Android**: SHA-1フィンガープリント設定による標準実装
+
+## 次のステップ
+
+セットアップガイドを続けます:
+- [Supabase Googleログイン - 一般セットアップ](./google/general/) - 概要と前提条件
+- [Androidセットアップ](./google/android/) - Android固有の設定
+- [iOSセットアップ](./google/ios/) - iOS固有の設定
+- [Webセットアップ](./google/web/) - Web固有の設定

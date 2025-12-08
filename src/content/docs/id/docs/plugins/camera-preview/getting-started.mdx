@@ -1,0 +1,275 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Camera Preview untuk menampilkan feed kamera real-time dan menangkap foto/video di aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+locale: id
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/camera-preview" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurasi izin**
+
+   ### iOS
+   Tambahkan deskripsi penggunaan kamera ke `Info.plist` Anda:
+   ```xml
+   <key>NSCameraUsageDescription</key>
+   <string>To take photos and videos</string>
+   <key>NSMicrophoneUsageDescription</key>
+   <string>To record audio with videos</string>
+   <key>NSPhotoLibraryUsageDescription</key>
+   <string>To save photos and videos</string>
+   ```
+
+   ### Android
+   Tambahkan izin kamera ke `AndroidManifest.xml` Anda:
+   ```xml
+   <uses-permission android:name="android.permission.CAMERA" />
+   <uses-permission android:name="android.permission.RECORD_AUDIO" />
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   ```
+</Steps>
+
+## Penggunaan
+
+Impor plugin dan gunakan metodenya untuk mengontrol kamera:
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+import { CameraPreviewOptions, CameraPreviewPictureOptions } from '@capgo/camera-preview';
+
+// Start camera preview
+const startCamera = async () => {
+  const cameraPreviewOptions: CameraPreviewOptions = {
+    position: 'rear',
+    height: 1920,
+    width: 1080,
+    quality: 50,
+    toBack: false,
+    paddingBottom: 0,
+    rotateWhenOrientationChanged: true,
+    x: 0,
+    y: 0
+  };
+
+  await CameraPreview.start(cameraPreviewOptions);
+};
+
+// Stop camera preview
+const stopCamera = async () => {
+  await CameraPreview.stop();
+};
+
+// Take a picture
+const takePicture = async () => {
+  const pictureOptions: CameraPreviewPictureOptions = {
+    quality: 90,
+    width: 1920,
+    height: 1080
+  };
+
+  const result = await CameraPreview.capture(pictureOptions);
+  const base64PictureData = result.value;
+
+  // Use the base64 image data
+  console.log(base64PictureData);
+};
+
+// Switch camera
+const flipCamera = async () => {
+  await CameraPreview.flip();
+};
+
+// Control flash
+const setFlashMode = async (mode: 'on' | 'off' | 'auto' | 'torch') => {
+  await CameraPreview.setFlashMode({ flashMode: mode });
+};
+
+// Start recording video
+const startRecording = async () => {
+  await CameraPreview.startRecordVideo({
+    storeToFile: true,
+    fileName: 'myvideo'
+  });
+};
+
+// Stop recording
+const stopRecording = async () => {
+  const result = await CameraPreview.stopRecordVideo();
+  console.log('Video path:', result.videoFilePath);
+};
+```
+
+## Referensi API
+
+### start(options)
+
+Memulai pratinjau kamera.
+
+```typescript
+interface CameraPreviewOptions {
+  position?: 'rear' | 'front';
+  height?: number;
+  width?: number;
+  x?: number;
+  y?: number;
+  toBack?: boolean;
+  paddingBottom?: number;
+  rotateWhenOrientationChanged?: boolean;
+  storeToFile?: boolean;
+  disableExifHeaderStripping?: boolean;
+  enableHighResolution?: boolean;
+  disableAudio?: boolean;
+  lockAndroidOrientation?: boolean;
+  enableOpacity?: boolean;
+  enableZoom?: boolean;
+}
+```
+
+### stop()
+
+Menghentikan pratinjau kamera.
+
+### capture(options)
+
+Mengambil foto dan mengembalikannya sebagai string yang dikodekan base64.
+
+```typescript
+interface CameraPreviewPictureOptions {
+  height?: number;
+  width?: number;
+  quality?: number;
+}
+```
+
+### flip()
+
+Beralih antara kamera depan dan belakang.
+
+### setFlashMode(options)
+
+Mengatur mode flash.
+
+```typescript
+interface CameraPreviewFlashMode {
+  flashMode: 'off' | 'on' | 'auto' | 'torch';
+}
+```
+
+### startRecordVideo(options)
+
+Memulai perekaman video.
+
+```typescript
+interface CameraPreviewVideoOptions {
+  storeToFile?: boolean;
+  fileName?: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  withFlash?: boolean;
+}
+```
+
+### stopRecordVideo()
+
+Menghentikan perekaman video dan mengembalikan path file video.
+
+## Fitur Lanjutan
+
+### Kontrol Fokus
+
+```typescript
+// Set focus
+await CameraPreview.setFocusCoordinate({
+  x: 100,
+  y: 100
+});
+
+// Get supported focus modes
+const focusModes = await CameraPreview.getFocusModes();
+
+// Set focus mode
+await CameraPreview.setFocusMode({
+  focusMode: 'continuous-picture'
+});
+```
+
+### Kontrol Zoom
+
+```typescript
+// Get max zoom
+const maxZoom = await CameraPreview.getMaxZoom();
+
+// Set zoom
+await CameraPreview.setZoom({
+  zoom: 2.0
+});
+
+// Get current zoom
+const currentZoom = await CameraPreview.getZoom();
+```
+
+### Kontrol Eksposur
+
+```typescript
+// Get exposure compensation range
+const range = await CameraPreview.getExposureCompensationRange();
+
+// Set exposure compensation
+await CameraPreview.setExposureCompensation({
+  exposureCompensation: 0.5
+});
+```
+
+## Praktik Terbaik
+
+1. **Minta izin terlebih dahulu**
+   ```typescript
+   import { Camera } from '@capacitor/camera';
+
+   const requestPermissions = async () => {
+     const permissions = await Camera.requestPermissions();
+     if (permissions.camera === 'granted') {
+       // Start camera preview
+     }
+   };
+   ```
+
+2. **Tangani perubahan orientasi**
+   Setel `rotateWhenOrientationChanged: true` untuk menyesuaikan pratinjau secara otomatis.
+
+3. **Optimalkan performa**
+   - Gunakan pengaturan resolusi yang sesuai
+   - Hentikan pratinjau saat tidak digunakan
+   - Nonaktifkan fitur yang tidak Anda perlukan
+
+4. **Penanganan error**
+   ```typescript
+   try {
+     await CameraPreview.start(options);
+   } catch (error) {
+     console.error('Failed to start camera:', error);
+   }
+   ```
+
+## Catatan Platform
+
+### iOS
+- Memerlukan iOS 10.0+
+- Menggunakan framework AVFoundation
+- Mendukung akselerasi hardware
+
+### Android
+- Memerlukan Android 5.0 (API 21)+
+- Menggunakan Camera2 API
+- Mendukung berbagai fitur kamera berdasarkan kemampuan perangkat

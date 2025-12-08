@@ -1,0 +1,277 @@
+---
+title: Iniziare
+locale: it
+description: Scopri come installare e utilizzare il plugin FFmpeg per l'elaborazione video nella tua app Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-ffmpeg" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilizzo
+
+Importa il plugin e usalo per ricodificare video:
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+
+// Ricodifica un video con impostazioni personalizzate
+const processVideo = async () => {
+  await CapacitorFFmpeg.reencodeVideo({
+    inputPath: '/percorso/input/video.mp4',
+    outputPath: '/percorso/output/video.mp4',
+    width: 1280,
+    height: 720,
+    bitrate: 2000000 // Opzionale: 2 Mbps
+  });
+};
+
+// Ottieni la versione del plugin
+const checkVersion = async () => {
+  const { version } = await CapacitorFFmpeg.getPluginVersion();
+  console.log('Versione plugin FFmpeg:', version);
+};
+```
+
+## Riferimento API
+
+### reencodeVideo(options)
+
+Ricodifica un file video con dimensioni e bitrate specificati.
+
+```typescript
+await CapacitorFFmpeg.reencodeVideo({
+  inputPath: '/percorso/input.mp4',
+  outputPath: '/percorso/output.mp4',
+  width: 1920,
+  height: 1080,
+  bitrate: 5000000 // Opzionale: 5 Mbps
+});
+```
+
+**Parametri:**
+- `inputPath` (string): Percorso completo del file video di input
+- `outputPath` (string): Percorso completo dove verrà salvato il video di output
+- `width` (number): Larghezza di destinazione in pixel
+- `height` (number): Altezza di destinazione in pixel
+- `bitrate` (number, opzionale): Bitrate di destinazione in bit al secondo
+
+### getPluginVersion()
+
+Ottiene la versione del plugin Capacitor nativo.
+
+```typescript
+const { version } = await CapacitorFFmpeg.getPluginVersion();
+```
+
+## Esempio completo
+
+```typescript
+import { CapacitorFFmpeg } from '@capgo/capacitor-ffmpeg';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+
+export class VideoProcessor {
+  /**
+   * Comprimi un video per ridurre le dimensioni del file
+   */
+  async compressVideo(inputPath: string, quality: 'low' | 'medium' | 'high') {
+    const qualitySettings = {
+      low: { width: 640, height: 360, bitrate: 500000 },
+      medium: { width: 1280, height: 720, bitrate: 2000000 },
+      high: { width: 1920, height: 1080, bitrate: 5000000 }
+    };
+
+    const settings = qualitySettings[quality];
+    const outputPath = inputPath.replace('.mp4', `_${quality}.mp4`);
+
+    try {
+      await CapacitorFFmpeg.reencodeVideo({
+        inputPath,
+        outputPath,
+        width: settings.width,
+        height: settings.height,
+        bitrate: settings.bitrate
+      });
+
+      console.log(`Video compresso in qualità ${quality}:`, outputPath);
+      return outputPath;
+    } catch (error) {
+      console.error('Compressione video fallita:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Ridimensiona il video a dimensioni specifiche
+   */
+  async resizeVideo(
+    inputPath: string,
+    width: number,
+    height: number
+  ): Promise<string> {
+    const outputPath = inputPath.replace('.mp4', '_resized.mp4');
+
+    await CapacitorFFmpeg.reencodeVideo({
+      inputPath,
+      outputPath,
+      width,
+      height
+    });
+
+    return outputPath;
+  }
+
+  /**
+   * Crea una versione miniatura di un video
+   */
+  async createThumbnailVideo(inputPath: string): Promise<string> {
+    return this.compressVideo(inputPath, 'low');
+  }
+
+  /**
+   * Elabora più video in batch
+   */
+  async processMultipleVideos(
+    videoPaths: string[],
+    width: number,
+    height: number,
+    bitrate?: number
+  ): Promise<string[]> {
+    const outputPaths: string[] = [];
+
+    for (const inputPath of videoPaths) {
+      const outputPath = inputPath.replace('.mp4', '_processed.mp4');
+
+      try {
+        await CapacitorFFmpeg.reencodeVideo({
+          inputPath,
+          outputPath,
+          width,
+          height,
+          bitrate
+        });
+
+        outputPaths.push(outputPath);
+      } catch (error) {
+        console.error(`Impossibile elaborare ${inputPath}:`, error);
+      }
+    }
+
+    return outputPaths;
+  }
+}
+```
+
+## Best practices
+
+1. **Usa bitrate appropriati**
+   Scegli il bitrate in base alla risoluzione e al caso d'uso:
+   ```typescript
+   // Condivisione mobile (bassa larghezza di banda)
+   const lowQuality = { width: 640, height: 360, bitrate: 500000 };
+
+   // Qualità standard
+   const standardQuality = { width: 1280, height: 720, bitrate: 2000000 };
+
+   // Alta qualità
+   const highQuality = { width: 1920, height: 1080, bitrate: 5000000 };
+   ```
+
+2. **Mantieni il rapporto d'aspetto**
+   Calcola le dimensioni per preservare il rapporto d'aspetto:
+   ```typescript
+   function calculateDimensions(originalWidth: number, originalHeight: number, targetWidth: number) {
+     const aspectRatio = originalWidth / originalHeight;
+     return {
+       width: targetWidth,
+       height: Math.round(targetWidth / aspectRatio)
+     };
+   }
+   ```
+
+3. **Gestisci correttamente i percorsi dei file**
+   Usa Capacitor Filesystem per la gestione dei percorsi multipiattaforma:
+   ```typescript
+   import { Filesystem, Directory } from '@capacitor/filesystem';
+
+   const inputPath = await Filesystem.getUri({
+     directory: Directory.Documents,
+     path: 'input.mp4'
+   });
+   ```
+
+4. **Mostra progressi agli utenti**
+   L'elaborazione video può essere lenta - informa gli utenti:
+   ```typescript
+   async function processWithProgress(inputPath: string) {
+     // Mostra indicatore di caricamento
+     showLoading('Elaborazione video...');
+
+     try {
+       await CapacitorFFmpeg.reencodeVideo({
+         inputPath,
+         outputPath: '/percorso/output.mp4',
+         width: 1280,
+         height: 720
+       });
+
+       showSuccess('Video elaborato con successo!');
+     } catch (error) {
+       showError('Impossibile elaborare il video');
+     } finally {
+       hideLoading();
+     }
+   }
+   ```
+
+5. **Pulisci i file temporanei**
+   Rimuovi i file intermedi per risparmiare spazio:
+   ```typescript
+   async function processAndCleanup(inputPath: string) {
+     const outputPath = inputPath.replace('.mp4', '_output.mp4');
+
+     await CapacitorFFmpeg.reencodeVideo({
+       inputPath,
+       outputPath,
+       width: 1280,
+       height: 720
+     });
+
+     // Rimuovi l'originale se non più necessario
+     await Filesystem.deleteFile({ path: inputPath });
+
+     return outputPath;
+   }
+   ```
+
+## Note sulla piattaforma
+
+### iOS
+- Richiede iOS 11.0+
+- L'elaborazione di video grandi potrebbe richiedere permessi per attività in background
+- Utilizza VideoToolbox nativo iOS per l'accelerazione hardware
+
+### Android
+- Richiede Android 5.0 (API 21)+
+- L'accelerazione hardware varia in base al dispositivo
+- Potrebbe richiedere il permesso WRITE_EXTERNAL_STORAGE per l'accesso ai file
+
+### Web
+- Non supportato sulla piattaforma web
+
+## Suggerimenti sulle prestazioni
+
+1. **Risoluzione più bassa per elaborazione più veloce**: Dimensioni più piccole = codifica più veloce
+2. **Usa l'accelerazione hardware**: Lascia che la piattaforma nativa ottimizzi la codifica
+3. **Elabora in background**: Non bloccare l'UI durante l'elaborazione video
+4. **Monitora l'uso della memoria**: I video grandi possono consumare memoria significativa
+5. **Testa su dispositivi reali**: Gli emulatori potrebbero non riflettere le prestazioni effettive

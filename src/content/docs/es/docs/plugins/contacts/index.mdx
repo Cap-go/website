@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-contacts"
+locale: es
+description: Trabaja con los contactos del dispositivo utilizando las APIs de Capacitor para acceder, buscar y gestionar información de contactos.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Accede, busca y gestiona los contactos del dispositivo en tu aplicación Capacitor con operaciones CRUD completas y manejo de permisos.
+  image:
+    file: ~public/icons/plugins/contacts.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/contacts/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-contacts/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Leer Contactos" icon="rocket">
+    Accede a la lista de contactos del dispositivo con todos los detalles 📇
+  </Card>
+  <Card title="Funcionalidad de Búsqueda" icon="magnifier">
+    Encuentra contactos por nombre, correo electrónico o teléfono 🔍
+  </Card>
+  <Card title="Crear y Actualizar" icon="pencil">
+    Agrega nuevos contactos o modifica los existentes ✏️
+  </Card>
+  <Card title="Eliminar Contactos" icon="setting">
+    Elimina contactos del dispositivo de forma segura 🗑️
+  </Card>
+  <Card title="Manejo de Permisos" icon="approve-check-circle">
+    Gestiona los permisos de contactos correctamente con cumplimiento del manifiesto de privacidad 🔒
+  </Card>
+  <Card title="Primeros Pasos" icon="open-book">
+    Consulta la [Guía de Inicio](/docs/plugins/contacts/getting-started/) para instalar y configurar el plugin.
+  </Card>
+</CardGrid>

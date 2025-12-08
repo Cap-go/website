@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-env"
+description: 在运行时从 `capacitor.config` 中公开配置值，用于白标和多租户应用。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 通过直接从 Capacitor 读取安全的配置值，无需新的构建即可传送特定租户的设置。
+  image:
+    file: ~public/settings-go.webp
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/env/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-env/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Env 允许您在 `capacitor.config.*` 中存储秘密和每个构建的配置，并通过简单的 API 在运行时解析它们。
+
+<CardGrid stagger>
+  <Card title="运行时配置" icon="rocket">
+    从原生配置文件中读取值，而无需将它们打包到您的 JavaScript bundle 中。
+  </Card>
+  <Card title="每个构建的覆盖" icon="rocket">
+    通过提供不同的配置文件创建多个应用版本或租户。
+  </Card>
+  <Card title="类型安全访问" icon="pencil">
+    使用 TypeScript 支持获取键并集中后备逻辑。
+  </Card>
+  <Card title="默认安全" icon="approve-check">
+    将 API 密钥和秘密排除在 Git 之外，同时仍然随原生二进制文件一起发送。
+  </Card>
+</CardGrid>
+
+按照入门指南在您的 Capacitor 配置中声明键，并在各个平台上安全地获取它们。

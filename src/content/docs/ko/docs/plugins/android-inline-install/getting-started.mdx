@@ -1,0 +1,146 @@
+---
+title: 시작하기
+description: @capgo/capacitor-android-inline-install 설치 및 사용 가이드
+locale: ko
+sidebar:
+  order: 2
+  label: "시작하기"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 사용 예제
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+// Basic inline install
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp'
+});
+
+// Advanced install with tracking
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp',
+  referrer: 'campaign=my-campaign&source=app',
+  overlay: true,
+  fallback: true
+});
+
+// Handle the installation flow
+try {
+  await AndroidInlineInstall.startInlineInstall({
+    id: 'com.spotify.music',
+    referrer: 'utm_source=myapp&utm_campaign=music_promotion'
+  });
+  console.log('Install overlay triggered successfully');
+} catch (error) {
+  console.error('Install failed:', error);
+}
+```
+
+## 핵심 API 메서드
+
+### 설치 관리
+- `startInlineInstall(options)` - 지정된 앱에 대한 Google Play 인라인 설치 오버레이 트리거
+
+## 구성 옵션
+
+```typescript
+interface InlineInstallOptions {
+  id: string;           // Target app package name (required)
+  referrer?: string;    // Tracking campaign string (optional)
+  callerId?: string;    // Caller app package name (defaults to current app)
+  overlay?: boolean;    // Enable/disable Play overlay (default: true)
+  fallback?: boolean;   // Use full store page if overlay fails (default: true)
+}
+```
+
+## Google Play 요구 사항
+
+### Premium Growth Tools 자격
+
+인라인 설치를 사용하려면 앱이 Google Play의 Premium Growth Tools 자격을 충족해야 합니다:
+- 상당한 사용자 참여가 있는 앱
+- 좋은 Play Store 평가 및 리뷰
+- Google Play 정책 준수
+
+### 대상 앱 요구 사항
+- 대상 앱이 Google Play Store에서 사용 가능해야 함
+- 대상 앱이 인라인 설치를 지원해야 함
+- 사용자가 Google Play Store에 로그인되어 있어야 함
+
+## 동작 및 대체
+
+### 오버레이 모드 (기본값)
+1. 앱 내에서 Google Play 오버레이를 열려고 시도
+2. 오버레이를 사용할 수 없는 경우 전체 Play Store 페이지로 대체
+3. Play Store를 사용할 수 없는 경우 오류 표시
+
+### 전체 스토어 모드
+- 전체 Google Play Store 페이지를 직접 열기
+- 오버레이 시도를 완전히 우회
+
+## 플랫폼 지원
+
+- **Android**: Google Play Services를 통한 전체 지원
+- **iOS**: 지원되지 않음 (Android 전용 기능)
+- **Web**: 지원되지 않음 (네이티브 Android 기능)
+
+## 구현 세부 정보
+
+플러그인은 Android 인텐트를 사용하여 Google Play Store와 통신합니다:
+- 인라인 설치 오버레이를 위한 인텐트 작업
+- 표준 Play Store 인텐트로 대체
+- Play Services 가용성 자동 처리
+
+## 사용 사례
+
+- **앱 발견**: 생태계 내에서 관련 앱 홍보
+- **교차 홍보**: 파트너 애플리케이션에 대한 설치 유도
+- **기능 잠금 해제**: 추가 모듈 또는 확장 설치
+- **컴패니언 앱**: 지원 애플리케이션을 원활하게 설치
+
+## 모범 사례
+
+- Play Services가 없는 사용자를 위한 대체 옵션을 항상 제공
+- 다양한 기기 구성 및 Play Store 버전으로 테스트
+- 전환율을 측정하기 위해 referrer 추적 사용
+- 설치 오류를 우아하게 처리
+- 사용자가 설치를 거부하는 경우 사용자의 선택을 존중
+
+## 제한 사항
+
+- Android 전용 기능
+- Google Play Services 필요
+- Premium Growth Tools 자격을 충족하는 앱에서만 작동
+- Google Play Store 정책 및 가용성에 따름

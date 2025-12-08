@@ -1,0 +1,69 @@
+---
+title: 网页浏览器的 Apple 登录
+locale: zh
+description: 本指南详细介绍如何为 Web 应用程序使用 Capacitor 设置 Apple 登录，利用 @capgo/capacitor-social-login 插件确保无缝集成过程。
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+
+配置 Web 登录并不简单。它比在 iOS 上设置 `Sign in with Apple` 更困难，但比在 Android 上设置 `Sign in with Apple` 更困难。
+
+## 生成服务
+
+:::note
+如果您已经在 Android 上配置了 `Sign in with Apple`，则此步骤是多余的。
+:::
+
+请按照[此处](/docs/plugins/social-login/apple/android/#creating-the-service-id/)的指南生成服务。
+
+## 配置 `Return URLs`
+
+<Steps>
+
+1. **转到您的 Service ID 配置**
+
+   在 [Apple Developer Portal](https://developer.apple.com) 中，导航到 `Identifiers` > `Services IDs` 并点击您的 service ID。
+
+2. **配置 Sign in with Apple**
+
+   点击 `Sign in with Apple` 旁边的 `Configure`。
+
+   ![apple_dev_configure_login](/social-login-assets/apple_dev_configure_login.webp)
+
+3. **添加 Return URLs**
+
+   点击 `+` 按钮添加新的 return URL。
+
+   ![apple_dev_return_url_plus](/social-login-assets/apple_dev_return_url_plus.webp)
+
+4. **添加 Return URLs**
+
+   在 `Domains and Subdomains` 中添加您的 Web 应用程序域名。
+   :::caution
+   您**不能**在此处添加 `localhost` 或 `127.0.0.1` 作为域名。
+   :::
+
+   然后，添加带有 `https://` 前缀的域名以及您将调用 Apple Login 的路径。
+   例如，如果您的域名是 `https://my-app.com`，并且您将从 `/login` 调用 Apple Login，则应添加 `https://my-app.com/login` 作为 return URL。
+
+   :::caution
+   您**必须**同时添加带有尾部斜杠和不带尾部斜杠的域名。
+   :::
+
+   ![apple_dev_return_url_add](/social-login-assets/apple_dev_return_url_add.webp)
+
+5. **保存更改**
+
+   1. 点击 `Next` 按钮保存更改。
+   2. 点击 `Save` 按钮保存更改。
+
+6. 您应该已准备好测试 JavaScript 登录。请注意，您无法从 localhost 进行测试。
+</Steps>
+
+
+
+
+
+

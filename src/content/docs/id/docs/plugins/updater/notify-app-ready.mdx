@@ -1,0 +1,35 @@
+---
+title: "Menempatkan pemanggilan CapacitorUpdater.notifyAppReady() dengan benar"
+locale: id
+description: Cara menempatkan pemanggilan CapacitorUpdater.notifyAppReady() dengan benar di aplikasi Anda untuk memastikan alur auto-update yang benar.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import ConditionalQuestionnaire from '@/components/ConditionalQuestionnaire.astro'
+
+Penempatan pemanggilan `CapacitorUpdater.notifyAppReady()` sangat penting untuk alur auto-update yang benar.
+
+
+Jika tidak dilakukan dengan benar, aplikasi tidak akan dapat memperbarui ke versi terbaru. Setiap versi yang tidak memanggil `notifyAppReady()` dalam waktu 10 detik akan ditandai sebagai tidak valid dan akan diganti dengan versi valid sebelumnya atau versi default (bawaan).
+
+
+Dalam panduan ini kami akan menunjukkan cara menempatkan pemanggilan `notifyAppReady()` dengan benar di aplikasi Anda untuk memastikan alur auto-update yang benar.
+
+### Kuesioner Penempatan Pemanggilan `notifyAppReady()`
+
+<ConditionalQuestionnaire />
+
+
+<div style="margin-top: 3rem;">
+<Aside type="note">
+Jika Anda tidak dapat menemukan framework Anda dalam kuesioner, jangan ragu untuk bertanya di [Discord](https://discord.capgo.app) kami.
+</Aside>
+</div>

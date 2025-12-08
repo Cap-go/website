@@ -1,0 +1,322 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie das Printer-Plugin installieren und verwenden, um Inhalte aus Ihrer Capacitor-App zu drucken.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Verwendung
+
+Importieren Sie das Plugin und drucken Sie verschiedene Arten von Inhalten:
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+// HTML-Inhalt drucken
+const printHTML = async () => {
+  await Printer.print({
+    content: '<h1>Hallo Welt</h1><p>Dies ist ein Testdruck.</p>',
+    name: 'test-print'
+  });
+};
+
+// PDF-Datei drucken
+const printPDF = async () => {
+  await Printer.print({
+    content: 'file:///pfad/zum/dokument.pdf',
+    name: 'mein-dokument'
+  });
+};
+
+// Bild drucken
+const printImage = async () => {
+  await Printer.print({
+    content: 'file:///pfad/zum/bild.jpg',
+    name: 'mein-bild'
+  });
+};
+```
+
+## API-Referenz
+
+### print(options)
+
+Öffnet den nativen Druckdialog mit dem angegebenen Inhalt.
+
+```typescript
+interface PrintOptions {
+  content: string;          // HTML-String, Datei-URI oder Base64-Daten
+  name?: string;            // Name des Druckauftrags
+  orientation?: 'portrait' | 'landscape';
+  grayscale?: boolean;      // In Graustufen drucken (Standard: false)
+}
+
+await Printer.print(options);
+```
+
+### canPrint()
+
+Prüft, ob das Drucken auf dem Gerät verfügbar ist.
+
+```typescript
+const { value } = await Printer.canPrint();
+console.log('Drucken verfügbar:', value);
+```
+
+## Vollständiges Beispiel
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+
+export class PrintService {
+  async checkPrintAvailability(): Promise<boolean> {
+    const { value } = await Printer.canPrint();
+    return value;
+  }
+
+  async printHTML(htmlContent: string, jobName: string = 'Dokument') {
+    try {
+      const canPrint = await this.checkPrintAvailability();
+      if (!canPrint) {
+        throw new Error('Drucken auf diesem Gerät nicht verfügbar');
+      }
+
+      await Printer.print({
+        content: htmlContent,
+        name: jobName,
+        orientation: 'portrait'
+      });
+    } catch (error) {
+      console.error('Druck fehlgeschlagen:', error);
+      throw error;
+    }
+  }
+
+  async printDocument(filePath: string, jobName?: string) {
+    await Printer.print({
+      content: filePath,
+      name: jobName || 'Dokument'
+    });
+  }
+
+  async printReceipt(receiptData: any) {
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            .header { text-align: center; margin-bottom: 20px; }
+            .item { display: flex; justify-content: space-between; margin: 10px 0; }
+            .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; padding-top: 10px; border-top: 2px solid #000; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h2>Quittung</h2>
+            <p>Datum: ${new Date().toLocaleDateString()}</p>
+          </div>
+          ${receiptData.items.map((item: any) => `
+            <div class="item">
+              <span>${item.name}</span>
+              <span>${item.price.toFixed(2)}€</span>
+            </div>
+          `).join('')}
+          <div class="total">
+            <div class="item">
+              <span>Gesamt:</span>
+              <span>${receiptData.total.toFixed(2)}€</span>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    await this.printHTML(html, 'Quittung');
+  }
+
+  async printFromURL(url: string) {
+    // Datei zuerst herunterladen
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const reader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+      reader.onloadend = async () => {
+        try {
+          await Printer.print({
+            content: reader.result as string,
+            name: 'Heruntergeladenes Dokument'
+          });
+          resolve(true);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+}
+```
+
+## Erweiterte Verwendung
+
+### Drucken mit benutzerdefinierten Stilen
+
+```typescript
+const printStyledDocument = async () => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          @page {
+            size: A4;
+            margin: 2cm;
+          }
+          body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+          }
+          h1 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+          }
+          .content {
+            margin-top: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Professionelles Dokument</h1>
+        <div class="content">
+          <p>Dies ist ein professionell gestaltetes Dokument, bereit zum Drucken.</p>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Gestaltetes Dokument',
+    orientation: 'portrait'
+  });
+};
+```
+
+### Tabellen drucken
+
+```typescript
+const printTable = async (data: any[]) => {
+  const tableRows = data.map(row => `
+    <tr>
+      <td>${row.id}</td>
+      <td>${row.name}</td>
+      <td>${row.value}</td>
+    </tr>
+  `).join('');
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+          }
+        </style>
+      </head>
+      <body>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Wert</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRows}
+          </tbody>
+        </table>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Datentabelle'
+  });
+};
+```
+
+### Bilder drucken
+
+```typescript
+const printImageWithDetails = async (imagePath: string, title: string) => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body { text-align: center; padding: 20px; }
+          h2 { margin-bottom: 20px; }
+          img { max-width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>
+        <h2>${title}</h2>
+        <img src="${imagePath}" alt="${title}" />
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: title
+  });
+};
+```
+
+## Best Practices
+
+1. **Verfügbarkeit prüfen**: Vor dem Druckversuch immer prüfen, ob Drucken verfügbar ist
+2. **Gültiger Inhalt**: Sicherstellen, dass HTML wohlgeformt ist und Dateipfade gültig sind
+3. **Auftragsnamen**: Beschreibende Namen für Druckaufträge verwenden, um Benutzern bei der Identifizierung zu helfen
+4. **Styling**: Inline-CSS oder eingebettete Stile für konsistente Druckausgabe verwenden
+5. **Fehlerbehandlung**: Druckaufrufe in try-catch-Blöcke für Benutzerfeedback einwickeln
+
+## Fehlerbehebung
+
+### Häufige Probleme
+
+**Druckdialog erscheint nicht**: Mit canPrint() prüfen, ob Drucken verfügbar ist
+**Inhalt wird nicht gedruckt**: HTML ist gültig und Dateipfade sind korrekt prüfen
+**Bilder werden nicht angezeigt**: Bildpfade sind absolut und Dateien sind zugänglich sicherstellen
+**Styling-Probleme**: @page-CSS-Regeln verwenden und Druckausgabe testen

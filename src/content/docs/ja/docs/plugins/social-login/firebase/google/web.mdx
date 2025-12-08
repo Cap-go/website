@@ -1,0 +1,55 @@
+---
+title: WebでのFirebase Googleログイン
+locale: ja
+description: Firebaseの組み込みGoogleサインインを使用して、WebでFirebase AuthenticationによるGoogleサインインを設定する方法を学びます。
+sidebar:
+    order: 4
+---
+
+## はじめに
+
+Capacitor Social Loginプラグインは**Webプラットフォームをサポートしていません**。Webアプリケーションの場合は、Firebaseの組み込みGoogleサインインを直接使用する必要があります。これにより、より信頼性の高いポップアップベースの認証フローが提供されます。
+
+## WebでプラグインをWebで使用しない理由
+
+Capacitor Social Loginプラグインは、プラットフォーム固有の認証フローを活用できるネイティブモバイルプラットフォーム（AndroidとiOS）向けに設計されています。Webの場合、Firebaseのネイティブ`signInWithPopup`メソッドは次の点で優れています:
+
+- ✅ より信頼性が高く、よりサポートされている
+- ✅ ブラウザセッションストレージを自動的に処理
+- ✅ より良いエラー処理を提供
+- ✅ 追加の設定が不要
+
+## 設定手順
+
+1. **Firebaseプロジェクトを設定する**
+
+   FirebaseプロジェクトでGoogleサインインが有効になっていることを確認してください:
+   - [Firebase Console](https://console.firebase.google.com/)にアクセスします
+   - Authentication > Sign-in methodに移動します
+   - Googleサインインプロバイダーを有効にします
+
+2. 承認済みドメインを追加します
+    1. [console.cloud.google.com](https://console.cloud.google.com/)でプロジェクト概要に移動します
+        <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+    2. `Authentication`メニューを開きます
+        <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+    3. `Settings`ボタンをクリックします
+        <img src="/social-login-assets/firebase_select_authentication_settings.webp" alt="Firebase Authentication Sign-in Method Button" />
+    4. `Authorized domains`を設定します
+        <img src="/social-login-assets/firebase_select_authentication_settings_authorized_domains.webp" alt="Firebase Authentication Settings Authorized Domains" />
+
+## 実装例
+
+サンプルアプリの[authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts)ファイルで、次を実行する完全な実装を参照してください:
+
+- Webプラットフォーム用にFirebaseの`signInWithPopup`を使用
+- Android/iOSプラットフォーム用にCapacitor Social Loginプラグインを使用
+- プラットフォーム検出を自動的に処理
+
+この例は、WebではFirebaseの組み込みメソッドを使用し、ネイティブプラットフォームではプラグインを使用する方法を条件付きで示しています。
+
+## 追加リソース
+
+- [Firebase Authentication Documentation](https://firebase.google.com/docs/auth) - 完全なFirebase Authドキュメント
+- [Firebase Google Sign-In for Web](https://firebase.google.com/docs/auth/web/google-signin) - Web用のGoogleサインインに関する公式Firebaseガイド
+- [Google Login Setup Guide](/docs/plugins/social-login/google/general/) - 承認済みドメインとOAuth同意画面を設定するためのガイド

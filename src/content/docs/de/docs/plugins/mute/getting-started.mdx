@@ -1,0 +1,210 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie das Mute-Plugin installieren und verwenden, um den Stummschaltungsstatus in Ihrer Capacitor-App zu erkennen.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installieren Sie das Paket**
+   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Verwendung
+
+Importieren Sie das Plugin und verwenden Sie seine Methoden, um den Stummschaltungsstatus zu überprüfen:
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+// Prüfen, ob Gerät stummgeschaltet ist
+const checkMuteState = async () => {
+  const { value } = await CapacitorMute.isMuted();
+
+  if (value) {
+    console.log('Gerät ist stummgeschaltet/lautlos');
+    // App-Verhalten für Lautlos-Modus anpassen
+  } else {
+    console.log('Geräteton ist eingeschaltet');
+  }
+};
+```
+
+## API-Referenz
+
+### isMuted()
+
+Prüft, ob das Gerät derzeit stummgeschaltet/im Lautlos-Modus ist.
+
+```typescript
+const result = await CapacitorMute.isMuted();
+// Rückgabe: { value: boolean }
+```
+
+## Vollständiges Beispiel
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+export class SoundManager {
+  private isMuted = false;
+
+  async initialize() {
+    // Anfänglichen Stummschaltungsstatus abrufen
+    await this.checkMuteState();
+  }
+
+  async checkMuteState() {
+    try {
+      const { value } = await CapacitorMute.isMuted();
+      this.isMuted = value;
+      this.updateAppBehavior();
+    } catch (error) {
+      console.error('Fehler beim Prüfen des Stummschaltungsstatus:', error);
+    }
+  }
+
+  private updateAppBehavior() {
+    if (this.isMuted) {
+      // Gerät ist stummgeschaltet - App-Verhalten anpassen
+      this.disableSoundEffects();
+      this.showVisualNotifications();
+    } else {
+      // Geräteton ist eingeschaltet
+      this.enableSoundEffects();
+      this.useAudioNotifications();
+    }
+  }
+
+  private disableSoundEffects() {
+    // In-App-Sounds deaktivieren
+    console.log('Soundeffekte werden deaktiviert');
+  }
+
+  private enableSoundEffects() {
+    // In-App-Sounds aktivieren
+    console.log('Soundeffekte werden aktiviert');
+  }
+
+  private showVisualNotifications() {
+    // Visuelles Feedback anstelle von Audio verwenden
+    console.log('Visuelle Benachrichtigungen werden verwendet');
+  }
+
+  private useAudioNotifications() {
+    // Audio-Benachrichtigungen verwenden
+    console.log('Audio-Benachrichtigungen werden verwendet');
+  }
+}
+
+// Verwendung
+const soundManager = new SoundManager();
+await soundManager.initialize();
+
+// Regelmäßig abfragen, um Änderungen zu überprüfen
+setInterval(() => {
+  soundManager.checkMuteState();
+}, 5000); // Alle 5 Sekunden prüfen
+```
+
+## Plattformverhalten
+
+### iOS
+- Erkennt den Status des physischen Stummschalters
+- Keine Echtzeit-Änderungsereignisse (Abfrage erforderlich)
+- Funktioniert auf iPhone und iPad mit Stummschalter
+
+### Android
+- Prüft, ob der Klingeltonmodus auf lautlos oder vibrieren eingestellt ist
+- Keine Änderungsereignisse (Abfrage erforderlich)
+- Basierend auf AudioManager-Klingeltonmodus
+
+## Best Practices
+
+1. **Auf Änderungen abfragen**
+   Da das Plugin keine Echtzeit-Ereignisse bereitstellt, fragen Sie regelmäßig ab, wenn Sie Änderungen verfolgen müssen:
+   ```typescript
+   // Stummschaltungsstatus regelmäßig prüfen
+   setInterval(async () => {
+     const { value } = await CapacitorMute.isMuted();
+     if (value !== previousMuteState) {
+       handleMuteStateChange(value);
+     }
+   }, 5000);
+   ```
+
+2. **Benutzerpräferenzen respektieren**
+   Respektieren Sie immer den Stummschaltungsstatus und passen Sie das Audio-Verhalten Ihrer App entsprechend an.
+
+3. **Visuelle Alternativen bereitstellen**
+   ```typescript
+   const { value: isMuted } = await CapacitorMute.isMuted();
+   if (isMuted) {
+     // Visuelle Benachrichtigungen anzeigen
+     showToast('Neue Nachricht empfangen');
+   } else {
+     // Tonbenachrichtigung abspielen
+     playNotificationSound();
+   }
+   ```
+
+## Anwendungsfälle
+
+1. **Spiel-Sound-Management**
+   ```typescript
+   const shouldPlaySound = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     return !isMuted && userPreferences.soundEnabled;
+   };
+   ```
+
+2. **Benachrichtigungsbehandlung**
+   ```typescript
+   const sendNotification = async (message: string) => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     if (isMuted) {
+       // Vibration oder visuelle Benachrichtigung verwenden
+       await Haptics.vibrate();
+       showBanner(message);
+     } else {
+       // Benachrichtigungston abspielen
+       await playSound('notification.mp3');
+     }
+   };
+   ```
+
+3. **Videoplayer**
+   ```typescript
+   const initVideoPlayer = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     videoPlayer.setMuted(isMuted);
+     if (isMuted) {
+       showSubtitles(true);
+       showMuteIndicator();
+     }
+   };
+   ```
+
+## Fehlerbehebung
+
+1. **Gibt auf Android immer false zurück**
+   - Prüfen Sie, ob der Geräteklingeltonmodus tatsächlich auf lautlos eingestellt ist
+   - Einige Android-Geräte können unterschiedliches Verhalten aufweisen
+
+2. **Keine Änderungsereignisse verfügbar**
+   - Das Plugin bietet keine Echtzeit-Änderungsereignisse
+   - Implementieren Sie Abfragen, wenn Sie Änderungen erkennen müssen
+
+3. **Funktioniert nicht im Simulator**
+   - iOS-Simulator hat keinen Stummschalter
+   - Testen Sie auf echten Geräten für genaue Ergebnisse

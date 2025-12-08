@@ -1,0 +1,204 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Native Biometric untuk autentikasi biometrik yang aman di aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek asli**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurasikan izin**
+
+   ### iOS
+   Tambahkan deskripsi penggunaan Face ID ke `Info.plist` Anda:
+   ```xml
+   <key>NSFaceIDUsageDescription</key>
+   <string>For secure authentication</string>
+   ```
+
+   ### Android
+   Tambahkan izin biometrik ke `AndroidManifest.xml` Anda:
+   ```xml
+   <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+   ```
+</Steps>
+
+## Penggunaan
+
+Impor plugin dan gunakan metodenya untuk autentikasi biometrik:
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+// Periksa apakah autentikasi biometrik tersedia
+const checkBiometric = async () => {
+  const result = await NativeBiometric.isAvailable();
+
+  if (result.isAvailable) {
+    console.log(`Biometric type: ${result.biometryType}`);
+  }
+};
+
+// Lakukan verifikasi biometrik
+const verify = async () => {
+  const verified = await NativeBiometric.verifyIdentity({
+    reason: "For secure access to your account",
+    title: "Authentication",
+    subtitle: "Verify your identity",
+    description: "Place your finger on the sensor"
+  })
+    .then(() => true)
+    .catch(() => false);
+
+  if (verified) {
+    console.log("Authentication successful");
+  }
+};
+
+// Simpan kredensial dengan aman
+const saveCredentials = async () => {
+  await NativeBiometric.setCredentials({
+    username: "user@example.com",
+    password: "securepassword",
+    server: "https://api.example.com"
+  });
+};
+
+// Ambil kredensial yang disimpan
+const getCredentials = async () => {
+  const credentials = await NativeBiometric.getCredentials({
+    server: "https://api.example.com"
+  });
+
+  console.log(credentials.username);
+  console.log(credentials.password);
+};
+
+// Hapus kredensial yang disimpan
+const deleteCredentials = async () => {
+  await NativeBiometric.deleteCredentials({
+    server: "https://api.example.com"
+  });
+};
+```
+
+## Referensi API
+
+### isAvailable()
+
+Memeriksa apakah autentikasi biometrik tersedia di perangkat.
+
+```typescript
+interface AvailableResult {
+  isAvailable: boolean;
+  biometryType?: BiometryType;
+  errorCode?: number;
+}
+
+enum BiometryType {
+  NONE = 0,
+  TOUCH_ID = 1,
+  FACE_ID = 2,
+  FINGERPRINT = 3,
+  FACE_AUTHENTICATION = 4,
+  IRIS_AUTHENTICATION = 5
+}
+```
+
+### verifyIdentity(options)
+
+Melakukan autentikasi biometrik.
+
+```typescript
+interface BiometricOptions {
+  reason?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  fallbackTitle?: string;
+  useFallback?: boolean;
+  maxAttempts?: number;
+}
+```
+
+### setCredentials(options)
+
+Menyimpan kredensial dengan aman dengan perlindungan biometrik.
+
+```typescript
+interface Credentials {
+  username: string;
+  password: string;
+  server: string;
+}
+```
+
+### getCredentials(options)
+
+Mengambil kredensial yang disimpan setelah autentikasi biometrik.
+
+```typescript
+interface GetCredentialOptions {
+  server: string;
+}
+```
+
+### deleteCredentials(options)
+
+Menghapus kredensial yang disimpan.
+
+```typescript
+interface DeleteCredentialOptions {
+  server: string;
+}
+```
+
+## Praktik Terbaik
+
+1. **Selalu periksa ketersediaan terlebih dahulu**
+   ```typescript
+   const result = await NativeBiometric.isAvailable();
+   if (!result.isAvailable) {
+     // Gunakan autentikasi password sebagai cadangan
+   }
+   ```
+
+2. **Berikan alasan yang jelas**
+   Selalu jelaskan mengapa Anda memerlukan autentikasi biometrik untuk membangun kepercayaan pengguna.
+
+3. **Tangani kesalahan dengan baik**
+   ```typescript
+   try {
+     await NativeBiometric.verifyIdentity({
+       reason: "Access your secure data"
+     });
+   } catch (error) {
+     // Tangani pembatalan atau kegagalan
+     console.log("Authentication failed or cancelled");
+   }
+   ```
+
+4. **Gunakan cadangan yang sesuai**
+   Aktifkan cadangan kode sandi untuk perangkat yang biometriknya mungkin gagal.
+
+## Perbedaan Platform
+
+### iOS
+- Mendukung Touch ID dan Face ID
+- Memerlukan `NSFaceIDUsageDescription` untuk Face ID
+- Cadangan ke kode sandi perangkat tersedia
+
+### Android
+- Mendukung pengenalan sidik jari, wajah, dan iris
+- Memerlukan izin `USE_BIOMETRIC`
+- Biometric Prompt API untuk Android 9+

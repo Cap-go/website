@@ -15,19 +15,103 @@ From there you should see a page similar to this, displaying a list of log entri
 
 Each log entry typically includes information such as the timestamp, the device ID, the log message or code, and the bundle version involved.
 
-### Example Log Entries and Meanings
+## Example Log Scenarios
 
-Here are a few examples of common log codes you might encounter:
+To help you understand what the logs tell you, here are example sequences showing real device update journeys:
 
-*   **`noNew`**: This indicates that the device checked for an update but already has the latest available version for its assigned channel.
-*   **`get`**: Signifies that the device successfully received information to download a new bundle.
-*   **`download_complete`**: Confirms that a new bundle has been successfully downloaded to the device.
-*   **`set`**: Means a downloaded bundle has been successfully installed and set as the active version on the device.
-*   **`update_fail`**: Indicates that a new bundle was installed, but the application failed to confirm its readiness (e.g., `notifyAppReady` was not called), leading to a rollback.
+### Successful Update Flow
 
-These are just a few examples. For a comprehensive list of all possible log codes (both from the backend and the device) and their detailed explanations, please refer to our detailed debugging guide:
+This is what a healthy update looks like in your logs:
 
-➡️ **[Full Log Code Reference and Debugging Guide](/docs/plugin/debugging/#understanding-cloud-logs)**
+| Time | Device ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 10:00:01 | `a1b2c3d4` | `get` | 1.2.0 | Device checked for updates and received version 1.2.0 info |
+| 10:00:02 | `a1b2c3d4` | `download_10` | 1.2.0 | Download started, 10% complete |
+| 10:00:03 | `a1b2c3d4` | `download_50` | 1.2.0 | Download at 50% |
+| 10:00:05 | `a1b2c3d4` | `download_complete` | 1.2.0 | Download finished successfully |
+| 10:00:06 | `a1b2c3d4` | `set` | 1.2.0 | Bundle installed and activated |
+
+### Device Already Up-to-Date
+
+When a device checks but already has the latest version:
+
+| Time | Device ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 14:30:00 | `e5f6g7h8` | `noNew` | 1.2.0 | Device is already on the latest version, no update needed |
+
+### Failed Update with Rollback
+
+When an update fails and the device rolls back:
+
+| Time | Device ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 11:15:00 | `i9j0k1l2` | `get` | 1.3.0 | Device received update info |
+| 11:15:02 | `i9j0k1l2` | `download_complete` | 1.3.0 | Download completed |
+| 11:15:03 | `i9j0k1l2` | `set` | 1.3.0 | Bundle was set |
+| 11:15:10 | `i9j0k1l2` | `update_fail` | 1.3.0 | App crashed or `notifyAppReady()` wasn't called - rollback triggered |
+| 11:15:11 | `i9j0k1l2` | `reset` | builtin | Device reverted to the built-in version |
+
+**Action needed**: Check that your app calls `notifyAppReady()` after successful initialization. See [the plugin documentation](/docs/plugin/api/#notifyappready) for details.
+
+### Download Failure
+
+When network issues prevent the download:
+
+| Time | Device ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 09:45:00 | `m3n4o5p6` | `get` | 1.2.0 | Device received update info |
+| 09:45:01 | `m3n4o5p6` | `download_30` | 1.2.0 | Download started but... |
+| 09:45:15 | `m3n4o5p6` | `download_fail` | 1.2.0 | Download failed (network timeout, connection lost, etc.) |
+
+**Action needed**: The device will retry automatically on next app launch. No action required unless this happens frequently.
+
+### Plan Limit Reached
+
+When your account reaches its device limit:
+
+| Time | Device ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 16:00:00 | `q7r8s9t0` | `needPlanUpgrade` | - | This device won't receive updates until you upgrade or the billing cycle resets |
+
+**Action needed**: [Upgrade your plan](/docs/webapp/settings/) or wait for the next billing cycle.
+
+### Channel Configuration Blocking Updates
+
+When channel settings prevent an update:
+
+| Time | Device ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 12:00:00 | `u1v2w3x4` | `disableAutoUpdateToMajor` | 2.0.0 | Device on v1.x can't auto-update to v2.x (major version jump blocked) |
+| 12:05:00 | `y5z6a7b8` | `disableEmulator` | 1.2.0 | Emulator detected, and channel blocks emulators |
+| 12:10:00 | `c9d0e1f2` | `disableDevBuild` | 1.2.0 | Dev build detected, and channel blocks dev builds |
+
+**Action needed**: These are intentional protections. If you want to allow these updates, modify your [channel settings](/docs/webapp/channels/).
+
+## Quick Reference: Common Log Codes
+
+| Code | Category | Description |
+|------|----------|-------------|
+| `get` | Success | Device received update information |
+| `noNew` | Success | Already on latest version |
+| `download_XX` | Progress | Download progress (10%, 20%... 90%) |
+| `download_complete` | Success | Download finished |
+| `set` | Success | Bundle activated on device |
+| `update_fail` | Error | Update installed but app didn't confirm readiness (rollback occurred) |
+| `download_fail` | Error | Download failed (network issue) |
+| `checksum_fail` | Error | Downloaded file was corrupted |
+| `reset` | Info | Device reverted to a previous version |
+| `needPlanUpgrade` | Billing | Plan limit reached |
+| `disableAutoUpdateToMajor` | Config | Major version updates blocked by channel |
+| `disableAutoUpdateToMinor` | Config | Minor version updates blocked by channel |
+| `disablePlatformIos` | Config | iOS disabled on this channel |
+| `disablePlatformAndroid` | Config | Android disabled on this channel |
+| `disableEmulator` | Config | Emulators blocked by channel |
+| `disableDevBuild` | Config | Dev builds blocked by channel |
+| `rateLimited` | Access | Too many requests from this device |
+
+For a comprehensive list of all possible log codes (both from the backend and the device) and their detailed explanations, please refer to our detailed debugging guide:
+
+➡️ **[Full Log Code Reference and Debugging Guide](/docs/plugins/updater/debugging/#understanding-cloud-logs)**
 
 ## Getting More Details About a Log
 

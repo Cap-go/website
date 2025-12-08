@@ -1,0 +1,302 @@
+---
+title: Custom Storage
+description: "Erfahren Sie, wie Sie benutzerdefinierte Speicherlösungen mit Capgo Live Updates verwenden, einschließlich externer URLs, S3-Integration und Bundle-Verschlüsselung für sichere Bereitstellungen."
+sidebar:
+  order: 6
+locale: de
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo unterstützt benutzerdefinierte Speicherlösungen für Ihre App-Bundles, sodass Sie Ihre Updates auf Ihrer eigenen Infrastruktur oder Drittspeicherdiensten hosten können. Dies ist besonders nützlich für Organisationen mit spezifischen Sicherheitsanforderungen, Compliance-Anforderungen oder bestehender Speicherinfrastruktur.
+
+## Übersicht
+
+Custom Storage in Capgo funktioniert durch Hochladen Ihres Bundles an einen externen Standort und Bereitstellung der URL für Capgo, um darauf zuzugreifen. Das Capgo SDK lädt dann Updates direkt von Ihrem benutzerdefinierten Speicherort herunter anstelle von Capgos Standard-Cloud-Speicher.
+
+<Aside type="tip">
+
+Custom Storage ist ideal für:
+- Organisationen mit strengen Datenresidenzanforderungen
+- Teams mit bestehender CDN- oder Speicherinfrastruktur
+- Anwendungen, die zusätzliche Sicherheitsebenen erfordern
+- Kostenoptimierung für große Bundle-Größen
+
+</Aside>
+
+## Externe URL-Upload
+
+Der einfachste Weg, benutzerdefinierten Speicher zu verwenden, besteht darin, Ihr Bundle auf eine öffentlich zugängliche URL hochzuladen und diese URL Capgo bereitzustellen.
+
+### Basis Externe URL-Upload
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip
+```
+
+Dieser Befehl weist Capgo an, auf das Bundle unter der angegebenen URL zu verweisen, anstatt es in Capgos Cloud-Speicher hochzuladen.
+
+### Mit Verschlüsselung
+
+Für sicheren externen Speicher können Sie Ihr Bundle verschlüsseln und die Entschlüsselungsschlüssel bereitstellen:
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip --iv-session-key YOUR_IV_SESSION_KEY
+```
+
+## S3-Integration
+
+Capgo bietet integrierte Unterstützung für Amazon S3 und S3-kompatible Speicherdienste. Die CLI kann Ihr Bundle automatisch zu S3 hochladen und Capgo konfigurieren, die S3-URL zu verwenden.
+
+### S3 Upload-Optionen
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-bucket-name your-bucket-name
+```
+
+### Vollständige S3-Konfiguration
+
+Für S3-kompatible Dienste oder benutzerdefinierte Endpunkte:
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-endpoint https://s3.your-provider.com \
+  --s3-bucket-name your-bucket-name \
+  --s3-port 443 \
+  --no-s3-ssl  # Nur wenn Ihr Endpunkt SSL nicht unterstützt
+```
+
+### S3-Konfigurationsparameter
+
+| Parameter | Beschreibung | Erforderlich |
+|-----------|-------------|----------|
+| `--s3-region` | AWS-Region für Ihren S3-Bucket | Ja |
+| `--s3-apikey` | S3-Zugriffsschlüssel-ID | Ja |
+| `--s3-apisecret` | S3-Geheimzugriffsschlüssel | Ja |
+| `--s3-bucket-name` | Name Ihres S3-Buckets | Ja |
+| `--s3-endpoint` | Benutzerdefinierte S3-Endpunkt-URL | Nein |
+| `--s3-port` | Port für S3-Endpunkt | Nein |
+| `--no-s3-ssl` | SSL für S3-Upload deaktivieren | Nein |
+
+## Bundle-Vorbereitung und Verschlüsselung
+
+Bei Verwendung von benutzerdefiniertem Speicher, insbesondere mit Verschlüsselung, müssen Sie Ihre Bundles ordnungsgemäß vorbereiten. Dies beinhaltet das Erstellen einer Zip-Datei und optional deren Verschlüsselung.
+
+### Schritt 1: Ein Zip-Bundle erstellen
+
+Erstellen Sie zunächst eine Zip-Datei Ihres App-Bundles:
+
+```shell
+npx @capgo/cli@latest bundle zip com.example.app --path ./dist
+```
+
+Der Zip-Befehl gibt die Prüfsumme der Zip-Datei zurück. Sie können diese Prüfsumme verwenden, um die Zip-Datei bei Bedarf zu verschlüsseln. Verwenden Sie die Option `--json`, um strukturierte Ausgabe einschließlich der Prüfsumme zu erhalten.
+
+#### Zip-Befehlsoptionen
+
+```shell
+npx @capgo/cli@latest bundle zip [appId] \
+  --path ./dist \
+  --bundle 1.2.3 \
+  --name myapp-v1.2.3 \
+  --json \
+  --no-code-check \
+  --key-v2 \
+  --package-json ../../package.json,./package.json
+```
+
+| Option | Beschreibung |
+|--------|-------------|
+| `--path` | Pfad zum zu zippenden Ordner (Standard ist webDir aus capacitor.config) |
+| `--bundle` | Bundle-Versionsnummer zur Benennung der Zip-Datei |
+| `--name` | Benutzerdefinierter Name für die Zip-Datei |
+| `--json` | Ergebnisse im JSON-Format ausgeben (enthält Prüfsumme) |
+| `--no-code-check` | Prüfung auf notifyAppReady()-Aufruf und Index-Datei überspringen |
+| `--key-v2` | Verschlüsselung v2 verwenden |
+| `--package-json` | Pfade zu package.json-Dateien für Monorepos (kommagetrennt) |
+
+### Schritt 2: Bundle verschlüsseln (Optional)
+
+Für erhöhte Sicherheit verschlüsseln Sie Ihr Zip-Bundle vor dem Hochladen:
+
+```shell
+# Verwendung des lokalen Standardschlüssels
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM
+
+# Verwendung einer benutzerdefinierten Schlüsseldatei
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key ./path/to/.capgo_key_v2
+
+# Verwendung von Schlüsseldaten direkt
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key-data "PRIVATE_KEY_CONTENT"
+```
+
+Der Parameter `CHECKSUM` ist erforderlich und sollte die Prüfsumme Ihrer Zip-Datei sein. Sie können die Prüfsumme aus der Ausgabe des Zip-Befehls erhalten (verwenden Sie die Option `--json` für strukturierte Ausgabe).
+
+Standardmäßig verwendet der encrypt-Befehl Ihren lokalen privaten Signaturschlüssel. Sie können einen benutzerdefinierten Schlüssel mit den Optionen `--key` oder `--key-data` angeben.
+
+Der encrypt-Befehl gibt den für Upload oder Entschlüsselung benötigten `ivSessionKey` zurück.
+
+#### Verschlüsselungs-Befehlsoptionen
+
+| Option | Beschreibung |
+|--------|-------------|
+| `zipPath` | Pfad zur zu verschlüsselnden Zip-Datei (erforderlich) |
+| `checksum` | Prüfsumme der Zip-Datei (erforderlich) - aus Zip-Befehl erhalten |
+| `--key` | Benutzerdefinierter Pfad für privaten Signaturschlüssel (optional, verwendet lokalen Schlüssel standardmäßig) |
+| `--key-data` | Private Signaturschlüsseldaten direkt (optional) |
+| `--json` | Ergebnisse im JSON-Format ausgeben |
+
+<Aside type="caution">
+
+Der encrypt-Befehl gibt einen `ivSessionKey` aus, den Sie beim Hochladen mit der Option `--iv-session-key` bereitstellen müssen.
+
+</Aside>
+
+## Vollständige Workflow-Beispiele
+
+### Beispiel 1: Externe URL mit Verschlüsselung
+
+<Steps>
+
+1. **Erstellen Sie Ihre App:**
+   ```shell
+   npm run build
+   ```
+
+2. **Erstellen Sie ein Zip-Bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --bundle 1.2.3
+   ```
+
+   Notieren Sie sich die von diesem Befehl zurückgegebene Prüfsumme.
+
+3. **Verschlüsseln Sie das Bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app-1.2.3.zip CHECKSUM_FROM_STEP_2
+   ```
+
+   Notieren Sie sich den `ivSessionKey` aus der Ausgabe.
+
+4. **In Ihren Speicher hochladen:**
+   Laden Sie die verschlüsselte Zip-Datei zu Ihrem Hosting-Dienst hoch.
+
+5. **Bei Capgo registrieren:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --external https://your-cdn.com/bundles/com.example.app-1.2.3.zip \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_3
+   ```
+
+</Steps>
+
+### Beispiel 2: Direkter S3-Upload
+
+<Steps>
+
+1. **Erstellen Sie Ihre App:**
+   ```shell
+   npm run build
+   ```
+
+2. **Direkt zu S3 hochladen:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --channel Production
+   ```
+
+</Steps>
+
+### Beispiel 3: S3 mit Verschlüsselung
+
+<Steps>
+
+1. **Erstellen und zippen:**
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **Bundle verschlüsseln:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM
+   ```
+
+3. **Zu S3 mit Verschlüsselung hochladen:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_2 \
+     --channel Production
+   ```
+
+</Steps>
+
+## Sicherheitsüberlegungen
+
+Bei Verwendung von benutzerdefiniertem Speicher sollten Sie diese Sicherheits-Best-Practices beachten:
+
+### Zugriffskontrolle
+- Stellen Sie sicher, dass Ihre Speicher-URLs für Ihre App-Benutzer zugänglich, aber nicht öffentlich auffindbar sind
+- Verwenden Sie signierte URLs oder tokenbasierte Authentifizierung, wenn möglich
+- Implementieren Sie ordnungsgemäße CORS-Header für webbasierte Apps
+
+### Verschlüsselung
+- Verschlüsseln Sie immer sensible Bundles mit den Capgo-Verschlüsselungstools
+- Speichern Sie Verschlüsselungsschlüssel sicher und rotieren Sie sie regelmäßig
+- Verwenden Sie HTTPS für alle Bundle-URLs (erforderlich für iOS und Android)
+
+### Überwachung
+- Überwachen Sie Zugriffsprotokolle, um ungewöhnliche Download-Muster zu erkennen
+- Richten Sie Benachrichtigungen für fehlgeschlagene Bundle-Downloads ein
+- Überprüfen Sie regelmäßig Ihre Speicherberechtigungen
+
+## Fehlerbehebung
+
+### Häufige Probleme
+
+**Bundle wird nicht heruntergeladen:**
+- Überprüfen Sie, ob die URL öffentlich zugänglich ist und HTTPS verwendet (erforderlich für iOS und Android)
+- Prüfen Sie CORS-Header für Web-Apps
+- Stellen Sie sicher, dass das Bundle-Format korrekt ist
+
+**Verschlüsselungsfehler:**
+- Überprüfen Sie, ob der `ivSessionKey` mit dem verschlüsselten Bundle übereinstimmt
+- Prüfen Sie, ob das Bundle mit dem richtigen Schlüssel verschlüsselt wurde
+- Stellen Sie sicher, dass Verschlüsselung v2 für neue Bundles verwendet wird
+
+**S3-Upload-Fehler:**
+- Überprüfen Sie Ihre S3-Anmeldeinformationen und Berechtigungen
+- Prüfen Sie Bucket-Richtlinien und CORS-Konfiguration
+- Stellen Sie sicher, dass die angegebene Region korrekt ist
+
+### Debug-Befehle
+
+Bundle-Status überprüfen:
+```shell
+npx @capgo/cli@latest app debug
+```
+
+Bundle-Integrität überprüfen:
+```shell
+npx @capgo/cli@latest bundle list
+```
+
+## Nächste Schritte
+
+- Erfahren Sie mehr über [Channels](/docs/live-updates/channels/), um verschiedene Bereitstellungsumgebungen zu verwalten
+- Erkunden Sie [Update Behavior](/docs/live-updates/update-behavior/), um anzupassen, wie Updates angewendet werden
+- Richten Sie [CI/CD Integration](/docs/getting-started/cicd-integration/) ein, um Ihren benutzerdefinierten Speicher-Workflow zu automatisieren

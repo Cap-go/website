@@ -1,0 +1,360 @@
+---
+title: Fast SQL 시작하기
+description: 고성능 네이티브 SQLite 데이터베이스 액세스를 위한 Fast SQL 플러그인을 설치하고 구성합니다
+locale: ko
+---
+
+이 가이드는 고성능 SQLite 데이터베이스 액세스를 위한 **@capgo/capacitor-fast-sql** 플러그인의 설치 및 구성을 도와드립니다.
+
+## Fast SQL을 사용하는 이유는?
+
+Capacitor용 기존 SQLite 플러그인은 웹 코드와 네이티브 코드 간의 통신을 위해 표준 JavaScript 브리지에 의존합니다. 이는 작은 작업에는 문제없이 작동하지만, 대량의 데이터를 전송해야 할 때 브리지가 상당한 병목 현상이 됩니다. 모든 데이터는 JSON으로 직렬화되고, 브리지를 통해 전송되며, 반대편에서 역직렬화되어야 합니다. 이 직렬화 오버헤드로 인해 수천 개의 행이나 대용량 바이너리 데이터를 처리하는 작업이 매우 느려집니다.
+
+**Fast SQL은 이 문제를 해결합니다** 기기에 로컬 HTTP 서버를 구축하여 네이티브 SQLite 데이터베이스와 직접 통신합니다. 이 사용자 정의 프로토콜은 Capacitor의 브리지를 완전히 우회하여 직렬화 오버헤드를 제거하고 다음을 가능하게 합니다:
+
+- 배치 작업 및 대규모 데이터셋에 대해 **최대 25배 빠른 성능**
+- base64 인코딩 없는 **효율적인 바이너리 데이터 전송**
+- 메모리 문제 없이 **대용량 결과 스트리밍**
+- CRDT 및 operational transforms와 같은 **동기화 시스템에 최적의 성능**
+
+이는 Fast SQL을 로컬 우선 애플리케이션, 오프라인 동기화 시스템 및 IndexedDB를 더 안정적이고 성능이 뛰어난 솔루션으로 교체해야 하는 시나리오에 이상적으로 만듭니다.
+
+## 설치
+
+```bash
+npm install @capgo/capacitor-fast-sql
+npx cap sync
+```
+
+## 플랫폼 구성
+
+### iOS 구성
+
+로컬 네트워킹을 허용하려면 `Info.plist`에 다음을 추가하세요:
+
+```xml title="ios/App/App/Info.plist"
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
+```
+
+### Android 구성
+
+필요한 경우 `AndroidManifest.xml`에 추가하세요:
+
+```xml title="android/app/src/main/AndroidManifest.xml"
+<application
+    android:usesCleartextTraffic="true">
+    ...
+</application>
+```
+
+### Web 구성
+
+웹 플랫폼 지원을 위해 sql.js를 설치하세요:
+
+```bash
+npm install sql.js
+```
+
+## 기본 사용법
+
+### 데이터베이스에 연결
+
+```typescript
+import { FastSQL } from '@capgo/capacitor-fast-sql';
+
+// 데이터베이스에 연결 (파일이 없으면 생성)
+const db = await FastSQL.connect({
+  database: 'myapp'
+});
+
+console.log('Connected to database on port:', db.port);
+```
+
+### 테이블 생성
+
+```typescript
+// 테이블 생성
+await db.execute(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE,
+    created_at INTEGER DEFAULT (strftime('%s', 'now'))
+  )
+`);
+```
+
+### 데이터 삽입
+
+```typescript
+// 단일 행 삽입
+const result = await db.run(
+  'INSERT INTO users (name, email) VALUES (?, ?)',
+  ['John Doe', 'john@example.com']
+);
+
+console.log('Inserted row ID:', result.insertId);
+console.log('Rows affected:', result.rowsAffected);
+```
+
+### 데이터 쿼리
+
+```typescript
+// 매개변수를 사용한 쿼리
+const users = await db.query(
+  'SELECT * FROM users WHERE name LIKE ?',
+  ['John%']
+);
+
+console.log('Found users:', users);
+
+// users는 객체 배열입니다:
+// [{ id: 1, name: 'John Doe', email: 'john@example.com', created_at: 1234567890 }]
+```
+
+### 데이터 업데이트
+
+```typescript
+const result = await db.run(
+  'UPDATE users SET email = ? WHERE id = ?',
+  ['newemail@example.com', 1]
+);
+
+console.log('Updated rows:', result.rowsAffected);
+```
+
+### 데이터 삭제
+
+```typescript
+const result = await db.run(
+  'DELETE FROM users WHERE id = ?',
+  [1]
+);
+
+console.log('Deleted rows:', result.rowsAffected);
+```
+
+## 트랜잭션
+
+트랜잭션은 원자성을 보장합니다 - 모든 작업이 성공하거나 모두 롤백됩니다:
+
+```typescript
+try {
+  await db.transaction(async (tx) => {
+    // 이 블록의 모든 작업은 트랜잭션의 일부입니다
+    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Alice', 1000]);
+    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Bob', 500]);
+
+    // 송금
+    await tx.run('UPDATE accounts SET balance = balance - 100 WHERE name = ?', ['Alice']);
+    await tx.run('UPDATE accounts SET balance = balance + 100 WHERE name = ?', ['Bob']);
+  });
+
+  console.log('Transaction committed successfully!');
+} catch (error) {
+  console.error('Transaction rolled back:', error);
+  // 오류 발생 시 모든 변경 사항이 자동으로 롤백됩니다
+}
+```
+
+### 트랜잭션 격리 수준
+
+```typescript
+import { FastSQL, IsolationLevel } from '@capgo/capacitor-fast-sql';
+
+await db.transaction(async (tx) => {
+  // 작업
+}, IsolationLevel.Serializable);
+```
+
+사용 가능한 격리 수준:
+- `ReadUncommitted` - 최저 격리, 최고 성능
+- `ReadCommitted` - 더티 읽기 방지
+- `RepeatableRead` - 반복 불가능한 읽기 방지
+- `Serializable` - 최고 격리, 모든 이상 현상 방지
+
+## 배치 작업
+
+여러 문을 효율적으로 실행:
+
+```typescript
+const results = await db.executeBatch([
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['App started', 'INFO']
+  },
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['User logged in', 'INFO']
+  },
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['Error occurred', 'ERROR']
+  },
+]);
+
+console.log('Executed', results.length, 'statements');
+```
+
+## 바이너리 데이터 (BLOB)
+
+Uint8Array를 사용하여 바이너리 데이터 저장 및 검색:
+
+```typescript
+// 바이너리 데이터 저장
+const imageData = new Uint8Array([0xFF, 0xD8, 0xFF, 0xE0, /* ... */]);
+
+await db.run(
+  'INSERT INTO images (name, data) VALUES (?, ?)',
+  ['photo.jpg', imageData]
+);
+
+// 바이너리 데이터 검색
+const rows = await db.query('SELECT data FROM images WHERE name = ?', ['photo.jpg']);
+const retrievedData = rows[0].data; // Uint8Array
+```
+
+## 암호화 (iOS/Android)
+
+안전한 저장을 위해 SQLCipher 암호화 활성화:
+
+```typescript
+const db = await FastSQL.connect({
+  database: 'secure_db',
+  encrypted: true,
+  encryptionKey: 'your-secure-encryption-key'
+});
+```
+
+:::caution
+- 암호화는 iOS 및 Android에서만 사용 가능합니다
+- 암호화 키를 안전하게 저장하세요 (Keychain/Keystore 사용)
+- 올바른 키 없이는 암호화된 데이터베이스를 열 수 없습니다
+- Web 플랫폼은 암호화를 지원하지 않습니다
+:::
+
+## 읽기 전용 모드
+
+수정을 방지하기 위해 읽기 전용 모드로 데이터베이스 열기:
+
+```typescript
+const db = await FastSQL.connect({
+  database: 'myapp',
+  readOnly: true
+});
+```
+
+## 연결 닫기
+
+작업이 완료되면 항상 데이터베이스 연결을 닫으세요:
+
+```typescript
+await FastSQL.disconnect('myapp');
+```
+
+## 직접 HTTP 프로토콜
+
+대규모 데이터셋에서 최대 성능을 위해 HTTP 프로토콜을 직접 사용:
+
+```typescript
+const { port, token } = await FastSQL.getServerInfo({ database: 'myapp' });
+
+// localhost:port로 직접 HTTP 요청 만들기
+// Authorization 헤더에 토큰 포함
+const response = await fetch(`http://localhost:${port}/execute`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    statement: 'SELECT * FROM users',
+    params: []
+  })
+});
+
+const result = await response.json();
+```
+
+## 오류 처리
+
+```typescript
+import { FastSQL } from '@capgo/capacitor-fast-sql';
+
+try {
+  const db = await FastSQL.connect({ database: 'myapp' });
+
+  await db.run('INSERT INTO users (name, email) VALUES (?, ?)', ['John', 'john@example.com']);
+
+} catch (error) {
+  if (error.message.includes('UNIQUE constraint failed')) {
+    console.error('Email already exists');
+  } else if (error.message.includes('no such table')) {
+    console.error('Table does not exist');
+  } else {
+    console.error('Database error:', error);
+  }
+}
+```
+
+## 일반적인 SQL 패턴
+
+### 테이블 존재 여부 확인
+
+```typescript
+const result = await db.query(
+  "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+  ['users']
+);
+
+const tableExists = result.length > 0;
+```
+
+### 테이블 스키마 가져오기
+
+```typescript
+const schema = await db.query('PRAGMA table_info(users)');
+console.log('Columns:', schema);
+```
+
+### 행 개수 세기
+
+```typescript
+const result = await db.query('SELECT COUNT(*) as count FROM users');
+const count = result[0].count;
+```
+
+### 페이지네이션
+
+```typescript
+const pageSize = 20;
+const page = 1;
+const offset = (page - 1) * pageSize;
+
+const users = await db.query(
+  'SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?',
+  [pageSize, offset]
+);
+```
+
+## 성능 팁
+
+1. **트랜잭션 사용** 여러 작업에 대해 - 개별 커밋보다 훨씬 빠릅니다
+2. **배치 작업 사용** 대량 삽입에 대해 - 루프보다 효율적입니다
+3. **인덱스 생성** 자주 쿼리하는 열에
+4. **매개변수가 있는 준비된 문 사용** (?) - SQL 인젝션을 방지하고 성능을 향상시킵니다
+5. **HTTP 프로토콜 직접 사용** 매우 큰 결과 집합에 대해
+6. **연결 닫기** 사용하지 않을 때 리소스를 해제합니다
+
+## 다음 단계
+
+다음을 포함한 고급 패턴에 대한 [전체 튜토리얼](/plugins-tutorials/capacitor-fast-sql)을 확인하세요:
+- 데이터베이스 서비스 아키텍처
+- 마이그레이션 시스템
+- 동기화 엔진
+- 복잡한 쿼리 및 조인
+- 성능 최적화

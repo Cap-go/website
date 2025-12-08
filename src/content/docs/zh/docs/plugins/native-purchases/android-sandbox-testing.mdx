@@ -1,0 +1,93 @@
+---
+title: 配置 Android 沙盒测试
+locale: zh
+description: 学习如何在 Google Play Console 中为应用内购买设置沙盒测试。
+sidebar:
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+测试应用内购买需要在 Google Play Console 中进行适当配置。本指南将引导您为 Android 应用设置沙盒测试。
+
+## 先决条件
+
+您需要一个活跃的 Google Play Console 账户并保持当前订阅（每年续订）。
+
+## 设置流程
+
+<Steps>
+
+1. **添加测试账户**
+
+   导航到您的 Google Play Console，选择您的应用，然后转到 **设置 > 许可测试**。
+
+   添加与您用于测试的 Android 设备关联的主要 Google 账户。
+
+   ![添加测试账户](/native-purchases/android/sandbox-testing/add-testing-account.webp)
+
+2. **创建测试轨道**
+
+   转到 **测试 > 封闭测试** 或 **测试 > 内部测试** 并创建新轨道。
+
+   您必须至少上传一个签名版本的应用到此轨道。
+
+   ![创建测试轨道](/native-purchases/android/sandbox-testing/create-testing-track.webp)
+
+3. **创建测试者列表**
+
+   设置测试轨道后，创建电子邮件列表并添加测试设备的账户电子邮件地址。
+
+   ![创建测试者列表](/native-purchases/android/sandbox-testing/create-tester-list.webp)
+
+4. **加入测试计划**
+
+   从您的测试设备打开选择加入 URL，点击 **"成为测试者"** 按钮进行注册。
+
+   ![加入测试](/native-purchases/android/sandbox-testing/join-testing-program.webp)
+
+5. **上传签名 APK**
+
+   生成签名 APK 或使用 Android App Bundle 将您的应用上传到测试轨道。
+
+   不需要推出 - 只需上传并等待批准。
+
+   ![上传 APK](/native-purchases/android/sandbox-testing/upload-signed-apk.webp)
+
+6. **构建和测试**
+
+   在测试设备上运行您的应用。尝试购买时，您应该看到一条消息：
+
+   > "这是测试订单；您不会被收费。"
+
+   ![测试购买](/native-purchases/android/sandbox-testing/test-purchase-confirmation.webp)
+
+</Steps>
+
+## 重要提示
+
+- 测试账户不会被收取购买费用
+- 测试购买使用与生产购买相同的流程
+- 您可以测试所有订阅功能，包括试用和引导性优惠
+- 测试订阅具有加速的续订期，以便更快测试
+
+## 故障排除
+
+**产品未在测试模式下显示：**
+- 确保您的应用已上传到测试轨道
+- 验证测试账户已添加到许可测试
+- 检查产品在 Google Play Console 中已激活
+
+**"项目不可用"错误：**
+- 创建产品后等待 2-3 小时使其可用
+- 确保您的应用包名与 Play Console 中的一致
+- 验证您已使用测试账户登录
+
+**测试购买显示为真实收费：**
+- 仔细检查账户已添加到许可测试
+- 确保您使用的是测试轨道的构建
+- 验证购买期间出现测试横幅
+
+## 其他资源
+
+有关更多详细信息，请参阅[官方 Google Play 文档](https://developer.android.com/google/play/billing/test)关于测试应用内购买。

@@ -1,0 +1,453 @@
+---
+title: Menambahkan atau Mengupdate Plugin
+description: Panduan lengkap untuk kontributor dan agen tentang cara menambahkan plugin baru atau mengupdate plugin yang ada di dokumentasi Capgo.
+locale: id
+sidebar:
+  order: 10
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+Panduan ini menjelaskan cara menambahkan plugin Capacitor baru ke website Capgo atau mengupdate dokumentasi plugin yang ada. Ini berguna untuk kontributor, maintainer, dan agen AI yang membantu maintain dokumentasi.
+
+## Gambaran Umum
+
+Saat menambahkan plugin baru ke ekosistem Capgo, Anda perlu mengupdate beberapa file dan lokasi di seluruh website untuk memastikan plugin muncul dengan benar di semua tempat yang relevan:
+
+1. **Konfigurasi Daftar Plugin** - Tambahkan metadata plugin ke master list
+2. **Halaman Index Plugin** - Tambahkan plugin ke halaman daftar plugin berkategori
+3. **Navigasi Sidebar** - Tambahkan plugin ke sidebar dokumentasi
+4. **Dokumentasi Plugin** - Buat halaman overview dan getting-started
+5. **Tutorial Plugin** - Buat tutorial komprehensif
+
+## Lokasi File
+
+### File Kunci untuk Diupdate
+
+| File | Tujuan |
+|------|---------|
+| `/src/config/plugins.ts` | Master plugin list dengan metadata |
+| `/src/content/docs/docs/plugins/index.mdx` | Halaman index plugin dengan kategori |
+| `/astro.config.mjs` | Konfigurasi navigasi sidebar |
+| `/src/content/docs/docs/plugins/[plugin-name]/` | Direktori dokumentasi plugin |
+| `/src/content/plugins-tutorials/en/` | File tutorial bahasa Inggris |
+
+## Panduan Langkah demi Langkah
+
+<Steps>
+
+1. ### Tambahkan Plugin ke Master List
+
+   Buka `/src/config/plugins.ts` dan tambahkan plugin Anda ke array `actions`:
+
+   ```typescript
+   // Pertama, import Heroicon yang sesuai
+   import YourIconName from 'astro-heroicons/mini/IconName.astro'
+
+   // Lalu tambahkan ke array actions
+   {
+     name: '@capgo/your-plugin-name',
+     author: 'github.com/Cap-go',
+     description: 'Deskripsi singkat tentang apa yang dilakukan plugin',
+     href: 'https://github.com/Cap-go/your-plugin-name/',
+     title: 'Display Name',
+     icon: YourIconName,
+   }
+   ```
+
+   **Icon yang Tersedia**: Periksa `/node_modules/astro-heroicons/mini/` untuk icon yang tersedia.
+
+2. ### Tambahkan Plugin ke Halaman Index
+
+   Buka `/src/content/docs/docs/plugins/index.mdx` dan tambahkan plugin Anda di bawah kategori yang sesuai:
+
+   ```mdx
+   <LinkCard
+     title="Your Plugin Name"
+     description="Deskripsi singkat tentang apa yang dilakukan plugin"
+     href="/docs/plugins/your-plugin-name/"
+   />
+   ```
+
+   **Kategori**:
+   - ⭐ Featured Plugins
+   - 📱 Device & System Plugins
+   - 🎥 Media & Camera Plugins
+   - 🛠️ Utility Plugins
+   - 🤖 AI & Advanced Media
+   - 📍 Location & Background Services
+   - 📞 Communication & Analytics
+   - 🔐 Security & System
+   - 📊 Android-Specific Features
+   - 📥 Download & Navigation
+
+3. ### Tambahkan ke Navigasi Sidebar
+
+   Buka `/astro.config.mjs` dan tambahkan plugin Anda ke konfigurasi sidebar (sekitar line 540):
+
+   ```javascript
+   {
+     label: 'Your Plugin Name',
+     items: [
+       { label: 'Overview', link: '/docs/plugins/your-plugin-name/' },
+       { label: 'Getting started', link: '/docs/plugins/your-plugin-name/getting-started' },
+     ],
+     collapsed: true,
+   }
+   ```
+
+   Plugin didaftar secara alfabetis di sidebar.
+
+4. ### Buat Direktori Dokumentasi Plugin
+
+   Buat direktori baru untuk dokumentasi plugin Anda:
+
+   ```bash
+   mkdir -p /src/content/docs/docs/plugins/your-plugin-name/
+   ```
+
+5. ### Buat Halaman Overview Plugin
+
+   Buat `/src/content/docs/docs/plugins/your-plugin-name/index.mdx`:
+
+   ```mdx
+   ---
+   title: "@capgo/your-plugin-name"
+   description: Deskripsi singkat tentang tujuan plugin
+   tableOfContents: false
+   next: false
+   prev: false
+   sidebar:
+     order: 1
+     label: "Introduction"
+   hero:
+     tagline: Tagline detail menjelaskan apa yang dilakukan plugin
+     image:
+       file: ~public/your-plugin-icon.svg
+     actions:
+       - text: Get started
+         link: /docs/plugins/your-plugin-name/getting-started/
+         icon: right-arrow
+         variant: primary
+       - text: Github
+         link: https://github.com/Cap-go/your-plugin-name/
+         icon: external
+         variant: minimal
+   ---
+
+   import { Card, CardGrid } from '@astrojs/starlight/components';
+
+   <CardGrid stagger>
+     <Card title="Feature 1" icon="puzzle">
+       Deskripsi fitur kunci pertama
+     </Card>
+     <Card title="Feature 2" icon="rocket">
+       Deskripsi fitur kunci kedua
+     </Card>
+     <Card title="Cross-platform" icon="puzzle">
+       Berfungsi di iOS dan Android 📱
+     </Card>
+     <Card title="Comprehensive Documentation" icon="open-book">
+       Periksa [Documentation](/docs/plugins/your-plugin-name/getting-started/) untuk menguasai plugin.
+     </Card>
+   </CardGrid>
+   ```
+
+6. ### Buat Panduan Getting Started
+
+   Buat `/src/content/docs/docs/plugins/your-plugin-name/getting-started.mdx`:
+
+   ```mdx
+   ---
+   title: Getting Started
+   description: Pelajari cara menginstal dan menggunakan plugin di aplikasi Capacitor Anda.
+   sidebar:
+     order: 2
+   ---
+
+   import { Steps } from '@astrojs/starlight/components';
+   import { PackageManagers } from 'starlight-package-managers'
+
+   <Steps>
+   1. **Instal package**
+      <PackageManagers pkg="@capgo/your-plugin-name" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+   2. **Sync dengan proyek native**
+      <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   </Steps>
+
+   ## Konfigurasi
+
+   ### Konfigurasi iOS
+   [Instruksi setup spesifik iOS]
+
+   ### Konfigurasi Android
+   [Instruksi setup spesifik Android]
+
+   ## Penggunaan
+
+   [Contoh penggunaan dasar]
+
+   ## Referensi API
+
+   [Dokumentasi API detail]
+
+   ## Contoh Lengkap
+
+   [Contoh kerja lengkap]
+
+   ## Best Practices
+
+   [Praktik yang direkomendasikan dan tips]
+
+   ## Catatan Platform
+
+   [Catatan dan keterbatasan spesifik platform]
+   ```
+
+7. ### Buat File Tutorial
+
+   Buat `/src/content/plugins-tutorials/en/your-plugin-name.md`:
+
+   ```markdown
+   ---
+   locale: en
+   ---
+   # Menggunakan Package @capgo/your-plugin-name
+
+   Package `@capgo/your-plugin-name` [deskripsi singkat]. Dalam tutorial ini, kami akan memandu Anda melalui instalasi, konfigurasi, dan penggunaan package ini di aplikasi Ionic Capacitor Anda.
+
+   ## Instalasi
+
+   [Langkah instalasi]
+
+   ## Konfigurasi
+
+   [Langkah konfigurasi untuk iOS dan Android]
+
+   ## Penggunaan API
+
+   [Contoh penggunaan API detail]
+
+   ## Contoh Lengkap
+
+   [Contoh kerja lengkap]
+
+   ## Best Practices
+
+   [Tips dan best practices]
+
+   ## Troubleshooting
+
+   [Masalah umum dan solusi]
+
+   ## Kesimpulan
+
+   [Ringkasan dan link ke resource tambahan]
+   ```
+
+</Steps>
+
+## Struktur Dokumentasi Plugin
+
+### File yang Diperlukan
+
+```
+src/content/docs/docs/plugins/your-plugin-name/
+├── index.mdx           # Halaman overview dengan hero dan feature cards
+└── getting-started.mdx # Panduan instalasi dan penggunaan
+
+src/content/plugins-tutorials/en/
+└── your-plugin-name.md # Tutorial komprehensif
+```
+
+### File Opsional
+
+Untuk plugin kompleks, Anda dapat menambahkan halaman dokumentasi tambahan:
+
+```
+src/content/docs/docs/plugins/your-plugin-name/
+├── index.mdx
+├── getting-started.mdx
+├── api-reference.mdx   # Dokumentasi API detail
+├── examples.mdx        # Contoh tambahan
+├── troubleshooting.mdx # Panduan troubleshooting
+└── migrations.mdx      # Panduan migrasi
+```
+
+## Pedoman Konten
+
+### Menulis Deskripsi Plugin
+
+- **Ringkas**: Jaga deskripsi di bawah 100 karakter
+- **Spesifik**: Jelaskan apa yang dilakukan plugin, bukan apa itu
+- **Gunakan Kata Kerja**: Mulai dengan kata kerja seperti "Kontrol", "Integrasikan", "Aktifkan"
+
+**Contoh Baik**:
+- "Kontrol flashlight dan torch perangkat dengan toggle on/off sederhana"
+- "Integrasikan live chat Crisp dan customer support ke aplikasi Anda"
+- "Aktifkan autentikasi aman menggunakan Face ID dan Touch ID"
+
+**Contoh Buruk**:
+- "Plugin untuk flash"
+- "Ini adalah plugin Crisp"
+- "Plugin biometrik"
+
+### Menulis Dokumentasi
+
+1. **Mulai dengan Instalasi**: Selalu mulai dengan langkah instalasi yang jelas
+2. **Berikan Konfigurasi**: Sertakan persyaratan setup spesifik platform
+3. **Tampilkan Contoh Penggunaan**: Berikan contoh kode yang berfungsi
+4. **Sertakan Referensi API**: Dokumentasikan semua method dan parameter
+5. **Tambahkan Contoh Lengkap**: Tampilkan pola penggunaan dunia nyata
+6. **Daftar Best Practices**: Bagikan tips untuk penggunaan optimal
+7. **Dokumentasikan Perbedaan Platform**: Perjelas perilaku iOS vs Android
+8. **Tambahkan Troubleshooting**: Tangani masalah umum
+
+### Contoh Kode
+
+- Gunakan TypeScript untuk semua contoh kode
+- Sertakan import di atas
+- Tambahkan komentar menjelaskan langkah kunci
+- Tampilkan error handling
+- Demonstrasikan penggunaan dasar dan lanjutan
+
+## Checklist
+
+Gunakan checklist ini saat menambahkan plugin baru:
+
+- [ ] Menambahkan plugin ke `/src/config/plugins.ts`
+- [ ] Memilih icon yang sesuai dari Heroicons
+- [ ] Menambahkan plugin ke `/src/content/docs/docs/plugins/index.mdx` di bawah kategori yang benar
+- [ ] Menambahkan entry sidebar di `/astro.config.mjs`
+- [ ] Membuat direktori dokumentasi plugin
+- [ ] Membuat halaman overview `index.mdx`
+- [ ] Membuat panduan `getting-started.mdx`
+- [ ] Membuat tutorial di `/src/content/plugins-tutorials/en/`
+- [ ] Menyertakan instruksi instalasi
+- [ ] Mendokumentasikan konfigurasi iOS
+- [ ] Mendokumentasikan konfigurasi Android
+- [ ] Menyediakan contoh penggunaan
+- [ ] Menambahkan referensi API
+- [ ] Menyertakan contoh kerja lengkap
+- [ ] Mendaftar best practices
+- [ ] Menambahkan catatan spesifik platform
+- [ ] Menguji semua link berfungsi dengan benar
+
+## Referensi Icon
+
+Icon umum yang digunakan untuk plugin (dari `astro-heroicons/mini/`):
+
+| Icon | Use Case |
+|------|----------|
+| `BoltIcon` | Flash, power, energy |
+| `CameraIcon` | Camera, photo, video |
+| `ChatBubbleLeftIcon` | Chat, messaging, communication |
+| `FingerPrintIcon` | Biometric, security, authentication |
+| `MapPinIcon` | Location, geolocation, maps |
+| `SpeakerWaveIcon` | Audio, sound, music |
+| `VideoCameraIcon` | Video, recording, streaming |
+| `CreditCardIcon` | Payments, purchases |
+| `PlayCircleIcon` | Media players, video players |
+| `SignalIcon` | Connectivity, network, beacon |
+| `RadioIcon` | Beacon, broadcast, wireless |
+| `ChatBubbleOvalLeftIcon` | Social media, WeChat |
+
+## Mengupdate Plugin yang Ada
+
+Saat mengupdate plugin yang ada:
+
+1. **Update nomor versi** di dokumentasi
+2. **Tambahkan panduan migrasi** jika ada breaking changes
+3. **Update referensi API** dengan method baru
+4. **Tambahkan contoh baru** untuk fitur baru
+5. **Update persyaratan platform** jika berubah
+6. **Revisi best practices** berdasarkan fitur baru
+7. **Jaga tutorial tetap current** dengan API terbaru
+
+## Dukungan Multi-bahasa
+
+Website mendukung beberapa bahasa. Setelah membuat dokumentasi bahasa Inggris:
+
+1. Jalankan script terjemahan:
+   ```bash
+   bun run plugins:translate_all
+   ```
+
+2. Review terjemahan yang dihasilkan di:
+   - `/src/content/plugins-tutorials/de/` (Jerman)
+   - `/src/content/plugins-tutorials/es/` (Spanyol)
+   - `/src/content/plugins-tutorials/fr/` (Prancis)
+   - `/src/content/plugins-tutorials/it/` (Italia)
+   - `/src/content/plugins-tutorials/ja/` (Jepang)
+   - `/src/content/plugins-tutorials/ko/` (Korea)
+   - `/src/content/plugins-tutorials/id/` (Indonesia)
+
+## Testing Perubahan Anda
+
+Setelah menambahkan atau mengupdate dokumentasi plugin:
+
+1. **Build site secara lokal**:
+   ```bash
+   npm run build
+   ```
+
+2. **Periksa error**:
+   - Verifikasi semua link berfungsi
+   - Pastikan gambar dimuat dengan benar
+   - Konfirmasi contoh kode valid
+   - Test navigasi berfungsi
+
+3. **Preview site**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Verifikasi plugin Anda muncul**:
+   - Periksa halaman daftar plugin
+   - Verifikasi navigasi sidebar
+   - Test semua halaman dokumentasi
+   - Konfirmasi halaman tutorial berfungsi
+
+## Kesalahan Umum
+
+<Aside type="caution">
+**Hindari kesalahan umum ini:**
+
+1. **Lupa sync**: Selalu jalankan `npx cap sync` di contoh
+2. **Penamaan tidak konsisten**: Gunakan nama plugin yang sama di mana-mana
+3. **Config platform hilang**: Dokumentasikan setup iOS dan Android
+4. **Link rusak**: Gunakan link relatif dan verifikasi mereka berfungsi
+5. **Tidak ada error handling**: Selalu tampilkan try-catch di contoh
+6. **Import hilang**: Sertakan semua import yang diperlukan di contoh
+7. **Deskripsi tidak jelas**: Spesifik tentang apa yang dilakukan plugin
+</Aside>
+
+## Mendapatkan Bantuan
+
+Jika Anda butuh bantuan menambahkan atau mengupdate dokumentasi plugin:
+
+- **Discord**: Gabung [komunitas Discord](https://discord.capgo.app) kami
+- **GitHub**: Buka issue di [repository website](https://github.com/Cap-go/website)
+- **Email**: Hubungi tim di support@capgo.app
+
+## Contoh
+
+Untuk referensi, periksa plugin yang terdokumentasi dengan baik ini:
+
+- **Updater**: `/src/content/docs/docs/plugins/updater/` (plugin kompleks dengan beberapa halaman)
+- **Flash**: `/src/content/docs/docs/plugins/flash/` (plugin sederhana, contoh starter yang baik)
+- **Social Login**: `/src/content/docs/docs/plugins/social-login/` (plugin dengan sub-pages)
+
+## Ringkasan
+
+Menambahkan plugin ke dokumentasi Capgo melibatkan:
+
+1. Menambahkan metadata ke konfigurasi master
+2. Menambahkan plugin ke halaman index berkategori
+3. Mengkonfigurasi navigasi sidebar
+4. Membuat halaman dokumentasi komprehensif
+5. Menulis tutorial detail
+6. Testing semua perubahan secara lokal
+
+Dengan mengikuti panduan ini, Anda memastikan bahwa plugin didokumentasikan secara konsisten dan mudah ditemukan oleh pengguna.

@@ -1,0 +1,33 @@
+---
+title: 🚀 init
+description: 🚀 在 Capgo Cloud 中初始化新应用并提供分步指导。
+sidebar_label: init
+locale: zh
+sidebar:
+  order: 1
+---
+
+🚀 在 Capgo Cloud 中初始化新应用并提供分步指导。
+
+**别名:** `i`
+
+```bash
+npx @capgo/cli@latest init
+```
+
+这包括添加更新代码、构建、上传应用以及验证更新功能。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest init YOUR_API_KEY com.example.app
+```
+
+## <a id="options"></a> 选项
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 在 Capgo Cloud 中显示的应用名称 |
+| **-i,** | <code>string</code> | 在 Capgo Cloud 中显示的应用图标路径 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |

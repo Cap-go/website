@@ -1,0 +1,173 @@
+---
+title: 시작하기
+description: Android Usage Stats Manager 플러그인을 설치하고 사용하여 앱 사용 통계 및 기기 사용 데이터에 접근하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 플랫폼 구성
+
+### Android
+
+`android/app/src/main/AndroidManifest.xml`에 필요한 권한을 추가합니다:
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## 사용 예제
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// Check if permission is granted
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // Open settings to grant permission
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// Query usage statistics for the last 7 days
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7 days ago
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Usage statistics:', usageStats);
+
+// Get all installed packages
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installed packages:', packages);
+```
+
+## API 참조
+
+### isUsageStatsPermissionGranted()
+
+```typescript
+isUsageStatsPermissionGranted() => Promise<{ granted: boolean }>
+```
+
+PACKAGE_USAGE_STATS 권한이 부여되었는지 확인합니다.
+
+**반환값:** `Promise<{ granted: boolean }>`
+
+### openUsageStatsSettings()
+
+```typescript
+openUsageStatsSettings() => Promise<void>
+```
+
+사용 통계 권한 부여를 위한 시스템 설정 페이지를 엽니다.
+
+### queryAndAggregateUsageStats(options)
+
+```typescript
+queryAndAggregateUsageStats(options: UsageStatsOptions) => Promise<UsageStatsResult>
+```
+
+설치된 앱의 상세 사용 통계를 쿼리합니다.
+
+| Param         | Type                           |
+| ------------- | ------------------------------ |
+| **`options`** | `UsageStatsOptions` |
+
+**반환값:** `Promise<UsageStatsResult>`
+
+### queryAllPackages()
+
+```typescript
+queryAllPackages() => Promise<PackagesResult>
+```
+
+기기에 설치된 모든 패키지에 대한 정보를 가져옵니다.
+
+**반환값:** `Promise<PackagesResult>`
+
+## 인터페이스
+
+### UsageStatsOptions
+
+| Prop               | Type                | Description                                         |
+| ------------------ | ------------------- | --------------------------------------------------- |
+| **`intervalType`** | `number` | 간격 유형 (0=DAILY, 1=WEEKLY, 2=MONTHLY 등) |
+| **`startTime`**    | `number` | 밀리초 단위 시작 시간                          |
+| **`endTime`**      | `number` | 밀리초 단위 종료 시간                            |
+
+### UsageStatsResult
+
+각 앱의 사용 통계 데이터를 포함합니다:
+
+- 앱 사용 시간 및 빈도
+- 처음 및 마지막 사용 시간
+- 포어그라운드 총 시간
+- 실행 횟수
+
+### PackagesResult
+
+설치된 패키지에 대한 정보를 포함합니다:
+
+- 패키지 이름 및 버전
+- 설치 시간
+- 앱 라벨 및 아이콘
+- 시스템 vs 사용자 앱
+
+## 권한 처리
+
+플러그인은 일반 런타임 권한 요청을 통해 부여할 수 없는 특수 권한이 필요합니다:
+
+1. **PACKAGE_USAGE_STATS**: 사용 통계에 대한 접근 허용
+2. **QUERY_ALL_PACKAGES**: 패키지 정보에 필요 (Android 11+)
+
+사용자는 시스템 설정을 통해 수동으로 이러한 권한을 부여해야 합니다. `openUsageStatsSettings()`를 사용하여 사용자를 적절한 설정 페이지로 안내하세요.
+
+## 모범 사례
+
+- 사용 통계를 쿼리하기 전에 항상 권한 상태를 확인
+- 사용자 친화적인 메시지로 권한 거부를 우아하게 처리
+- 사용 데이터를 수집할 때 사용자 개인정보 보호를 고려
+- 적절한 데이터 처리 및 저장 관행 구현
+- 사용 데이터 수집에 대한 Google Play 정책 준수
+
+## 사용 사례
+
+- **디지털 웰빙 앱**: 화면 시간 및 앱 사용 모니터링
+- **자녀 보호**: 어린이의 기기 사용 추적
+- **생산성 앱**: 작업 패턴 및 집중 시간 분석
+- **분석**: 사용자 행동 및 앱 참여도 이해

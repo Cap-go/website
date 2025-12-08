@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-mux-player"
+description: Lanza el SDK nativo de Mux Player desde aplicaciones Capacitor con soporte de reproducción firmada y análisis.
+tableOfContents: false
+next: false
+prev: false
+locale: es
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Transmite video Mux de alta calidad en pantalla completa con DRM, análisis y controles consistentes en iOS, Android y web.
+  image:
+    file: ~public/icons/plugins/mux-player.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/mux-player/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mux-player/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Ofrece reproducción premium envolviendo los SDK nativos oficiales de Mux en una interfaz Capacitor simple.
+
+<CardGrid stagger>
+  <Card title="Experiencia de SDK nativo" icon="rocket">
+    Usa el mismo stack de reproducción que los SDK móviles de Mux con tasa de bits adaptativa y DRM.
+  </Card>
+  <Card title="Reproducción firmada" icon="approve-check">
+    Proporciona tokens de reproducción y DRM para entrega segura de transmisiones protegidas.
+  </Card>
+  <Card title="API Uniforme" icon="pencil">
+    Activa la reproducción, descarta el reproductor y escucha eventos con una API TypeScript única.
+  </Card>
+  <Card title="Listo para análisis" icon="star">
+    Pasa claves de entorno y nombres de reproductores para alimentar la telemetría de Mux Data automáticamente.
+  </Card>
+</CardGrid>
+
+La guía de inicio te guía a través de la conexión de los SDK nativos, el manejo de tokens y la respuesta a eventos del reproductor.

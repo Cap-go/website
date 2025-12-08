@@ -1,0 +1,111 @@
+---
+title: "업데이트 API 엔드포인트"
+locale: ko
+description: "적절한 번들 정보 및 체크섬으로 Capgo 플러그인 요청에 응답하기 위해 업데이트 서버 API 엔드포인트를 구축하는 방법"
+sidebar:
+  order: 6
+---
+
+다음은 플러그인에 업데이트를 보내는 JavaScript 코드 예제입니다
+
+```typescript
+interface AppInfos {
+  version_name: string
+  version_build: string
+  version_os: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSON.parse(event.body || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  console.log('update asked', platform,
+    app_id,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  if (version_name === '1.0.0') {
+    return {
+      version: '1.0.1',
+      url: 'https://apiurl.com/mybuild_101.zip',
+      checksum: 'sha256_checksum_of_bundle',
+    }
+  }
+  else if (version_name === '1.0.1') {
+    return {
+      version: '1.0.2',
+      url: 'https://apiurl.com/mybuild_102.zip',
+      checksum: 'sha256_checksum_of_bundle',
+    }
+  }
+  else {
+    return {
+      message: 'Error version not found'
+      version: '',
+      url: '',
+    }
+  }
+}
+```
+
+## 응답 형식
+
+**암호화되지 않은 번들**의 경우 엔드포인트가 다음을 반환해야 합니다:
+
+```json
+{
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip",
+  "checksum": "sha256_checksum_of_bundle"
+}
+```
+
+**암호화된 번들**의 경우 세션 키도 포함해야 합니다:
+
+```json
+{
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip",
+  "checksum": "encrypted_checksum_from_encrypt_command",
+  "session_key": "ivSessionKey_from_encrypt_command"
+}
+```
+
+업데이트나 오류가 없는 경우 `message` 키와 선택적으로 `error`를 추가하세요:
+
+```json
+{
+  "message": "Version not found",
+  "error": "The backend crashed",
+  "version": "1.0.2",
+}
+```
+
+## 필드 설명
+
+- **`checksum`**: 무결성 검증을 위한 번들 zip 파일의 SHA256 해시
+- **`session_key`**: 암호화된 번들에만 필요 - 이것은 encrypt 명령에서 반환된 `ivSessionKey`입니다
+- **`version`**: semver 형식의 버전 식별자
+- **`url`**: 번들을 다운로드할 수 있는 HTTPS URL
+
+## 번들 생성
+
+호환 가능한 번들을 만들고 체크섬을 생성하는 방법은 [자동 업데이트 문서](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum)를 참조하세요.
+
+암호화된 번들의 경우 완전한 암호화 워크플로우를 설명하는 [암호화된 번들 문서](/docs/plugin/self-hosted/encrypted-bundles/)를 참조하세요.

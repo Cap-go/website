@@ -1,0 +1,292 @@
+---
+title: Login Apple su Android
+locale: it
+description: Questa guida fornisce una procedura completa per configurare il Login Apple utilizzando Capacitor per dispositivi iOS, dettagliando ogni passaggio per garantire un processo di integrazione fluido.
+sidebar:
+    order: 3
+---
+import AndroidAppleLoginGraph from '@/components/AndroidAppleLoginGraph.astro'
+import { Steps } from '@astrojs/starlight/components';
+
+Il login Apple su Android è complicato. Apple non ha supporto ufficiale per `Sign in with Apple` su Android, quindi la soluzione è leggermente hacky.
+
+Android attualmente utilizza schede Chrome per visualizzare un sito web OAuth2. Questo approccio presenta le seguenti sfide:
+
+- Configurazione difficile
+- È richiesto un backend
+
+## Comprendere il flusso su Android
+
+Lascia che usi un diagramma per spiegare il flusso su Android:
+
+<AndroidAppleLoginGraph />
+
+Ora che sei consapevole delle sfide e del flusso, iniziamo la configurazione.
+
+## Creazione del Service ID
+
+<Steps>
+1. Accedi al [Portale Sviluppatori Apple](https://developer.apple.com).
+
+2. Clicca su `Identifiers`.
+
+    <img src="/social-login-assets/apple_dev_portal_iden.png" alt="Sezione Identifiers del Portale Sviluppatori Apple" />
+
+    Dovresti vedere una schermata simile a questa:
+
+    <img src="/social-login-assets/apple_dev_portal_iden_2.png" alt="Schermata Identifiers del Portale Sviluppatori Apple" />
+
+    1. Assicurati che questo campo dica <code>App IDs</code>
+    2. Assicurati di poter trovare il tuo App ID.
+        :::note
+        Se non hai configurato il Login Apple per iOS, dovrai crearne uno. Per me, ne ho già uno creato. L'app ID che userò è `me.wcaleniewolny.test.ionic.vue`. Se non ne hai uno, creane uno usando il [passaggio di creazione app](#creating-the-app).
+        :::
+3. Assicurati che la capacità `Sign in with Apple` sia abilitata per la tua app
+    1. Clicca sulla tua app
+        <img src="/social-login-assets/apple_dev_click_on_app.png" alt="Selezione della tua app dall'elenco" />
+    2. Assicurati che la capacità `Sign in with Apple` sia abilitata
+        <img src="/social-login-assets/apple_dev_sign_in_with_apple_enabled.png" alt="Casella di controllo capacità Sign in with Apple abilitata" />
+    3. Se non è abilitata, abilitala.
+4. Torna a `All Identifiers`
+    <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="Pulsante di navigazione All Identifiers" />
+5. Clicca su `App Ids` e vai a `Services IDs`
+   <img src="/social-login-assets/apple_dev_go_to_services_id.png" alt="Navigazione alla sezione Services IDs" />
+6. Crea un nuovo identificatore
+    1. Clicca sul pulsante più
+        <img src="/social-login-assets/apple_dev_iden_add.png" alt="Pulsante aggiungi nuovo service ID" />
+
+    2. Seleziona `Servcice IDs` e clicca `Continue`
+        <img src="/social-login-assets/apple_dev_service_and_cont.png" alt="Selezione dell'opzione Service IDs" />
+
+    3. Inserisci una descrizione e un identificatore e clicca `Continuie`.
+
+        <img src="/social-login-assets/apple_dev_reg_service_2.png" alt="Inserimento dei dettagli del service ID" />
+
+        :::note
+        Questo `identifiers` diventerà il `clientId` che passerai nella funzione `initialize` E `ANDROID_SERVICE_ID` per il backend.
+
+        **Per favore salvalo!!!**
+        :::
+
+        :::note
+        Il Service ID non deve corrispondere all'App ID, ma raccomando di impostare il service ID su `YOUR_APP_ID.service`. Come promemoria, sto usando `me.wcaleniewolny.test.ionic.vue` per il mio app ID ma sto usando `ee.forgr.io.ionic.service2` come service ID.
+        :::
+    4. Verifica i dettagli e clicca `Register`
+        <img src="/social-login-assets/apple_dev_service_ref_fin.png" alt="Conferma della registrazione del service ID" />
+
+    5. Clicca sul servizio appena creato
+        <img src="/social-login-assets/apple_dev_open_serv.png" alt="Selezione del service ID appena creato" />
+
+    6. Abilita l'opzione `Sign in with Apple`
+        <img src="/social-login-assets/apple_dev_serv_enable_sign_with_apple.png" alt="Abilitazione di Sign in with Apple per il service ID" />
+
+    7. Configura il `Sign In with Apple`
+        <img src="/social-login-assets/apple_dev_conf_serv_sign_with_apple.png" alt="Pulsante Configure per Sign in with Apple" />
+
+    8. Assicurati che il `Primary App ID` sia impostato sull'App ID configurato nel passaggio precedente
+        <img src="/social-login-assets/apple_dev_service_prim_id.png" alt="Menu a discesa impostazione Primary App ID" />
+
+    9. Aggiungi il dominio su cui ospiterai il tuo backend.
+
+        <img src="/social-login-assets/apple_dev_serv_create_next.png" alt="Campi impostazione dominio e URL di ritorno" />
+
+        :::note
+        Questo backend **deve** essere eseguito su HTTPS. Per quanto riguarda i `Return URLs`, potresti voler tornare a questo dopo aver letto la prossima sezione di questo tutorial e dopo aver configurato il backend. Per gli scopi di questo tutorial, userò `https://xyz.wcaleniewolny.me/login/callback` per l'URL di ritorno e `xyz.wcaleniewolny.me` come dominio. Premi next.
+        :::
+
+    10. Conferma i dati e clicca `Done`
+        <img src="/social-login-assets/apple_dev_serv_conf_done.png" alt="Conferma della configurazione dominio e URL di ritorno" />
+
+    11. Clicca su `Continue`
+        <img src="/social-login-assets/apple_dev_cont_serv_creat.png" alt="Pulsante Continue per la configurazione del servizio" />
+
+    12. Clicca su `Save`
+        <img src="/social-login-assets/apple_dev_cont_serv_creat_save.png" alt="Pulsante Save per la configurazione del servizio" />
+</Steps>
+
+## Creazione della chiave
+
+<Steps>
+1. Torna a `All Identifiers`
+    <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="Pulsante di navigazione All Identifiers" />
+2. Clicca su `Keys`
+    <img src="/social-login-assets/apple_dev_key_selc.png" alt="Sezione Keys nel Portale Sviluppatori Apple" />
+3. Clicca sull'icona più
+    <img src="/social-login-assets/apple_dev_key_plus.png" alt="Pulsante aggiungi nuova chiave" />
+4. Dai un nome alla tua chiave
+    <img src="/social-login-assets/apple_key_name.png" alt="Campo inserimento nome chiave" />
+    :::note
+    Questo nome non è importante, puoi mettere qualsiasi cosa.
+    :::
+5. Seleziona `Sign in with Apple` e clicca `Configure`
+    <img src="/social-login-assets/apple_dev_key_sing_apple_conf.png" alt="Abilitazione e configurazione di Sign in with Apple per la chiave" />
+6. Seleziona il primary App ID e premi `Save`
+    <img src="/social-login-assets/apple_dev_key_prim_app_id.png" alt="Selezione del primary App ID per la chiave" />
+
+    :::note
+    Questo deve essere lo stesso App ID degli ID nei passaggi precedenti.
+    :::
+7. Clicca su `Continue`
+    <img src="/social-login-assets/apple_dev_key_const.png" alt="Pulsante Continue per la configurazione della chiave" />
+8. Clicca su `Register`
+    <img src="/social-login-assets/apple_dev_key_reg.png" alt="Pulsante Register per la creazione della chiave" />
+9. Copia l'ID della chiave e scarica la chiave.
+    <img src="/social-login-assets/apple_dev_key_downl.png" alt="Schermata ID chiave e pulsante download" />
+
+    :::caution
+        **IMPORTANTE:** Salva questo ID, nel backend sarà chiamato `KEY_ID`. Scarica la chiave. Assicurati di non condividere mai questa chiave.
+    :::
+10. Trova la chiave scaricata e salvala nella cartella del backend.
+    <img src="/social-login-assets/apple_dev_downloaded_key.png" alt="File chiave scaricato" />
+</Steps>
+
+## Ottenere il Team ID
+
+Per utilizzare `Login with Apple` su Android, devi ottenere il `Team ID`. Sarà utilizzato nel backend.
+
+<Steps>
+   1. Vai su [questo sito web](https://developer.apple.com/account/) e scorri verso il basso
+
+   2. Trova il `Team ID`
+      <img src="/social-login-assets/apple_dev_team_id.png" alt="Posizione del Team ID nell'account sviluppatore" />
+</Steps>
+
+## Configurazione del redirect dell'app
+
+Come hai visto nel diagramma, il backend esegue un passaggio chiamato `Redirect back to the app`. Questo richiede modifiche manuali alla tua app.
+
+<Steps>
+    1. Modifica il `AndroidManifest.xml`
+        1. Apri il file, userò `AndroidStudio`
+            <img src="/social-login-assets/studio_android_manifest_file.png" alt="File AndroidManifest.xml in Android Studio" />
+        2. Trova la `MainActivity` e aggiungi il seguente Intent filter
+            <img src="/social-login-assets/studio_manifest_code_to_add.png" alt="Codice intent filter da aggiungere in MainActivity" />
+
+            ```xml
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="capgo-demo-app" android:host="path" />
+            </intent-filter>
+            ```
+    2. Modifica la `MainActivity`
+        1. Apri la `MainActivity`
+            <img src="/social-login-assets/studio_main_activ_file.png" alt="File MainActivity.java in Android Studio" />
+
+        2. Aggiungi il seguente codice:
+            <img src="/social-login-assets/studio_main_actv_new_code.png" alt="Codice da aggiungere a MainActivity per gestire deep link" />
+
+            ```java
+            @Override
+            protected void onNewIntent(Intent intent) {
+                String action = intent.getAction();
+                Uri data = intent.getData();
+
+                if (Intent.ACTION_VIEW.equals(action) && data != null) {
+                    PluginHandle pluginHandle = getBridge().getPlugin("SocialLogin");
+                    if (pluginHandle == null) {
+                        Log.i("Apple Login Intent", "SocialLogin login handle is null");
+                        return;
+                    }
+                    Plugin plugin = pluginHandle.getInstance();
+                    if (!(plugin instanceof SocialLoginPlugin)) {
+                        Log.i("Apple Login Intent", "SocialLogin plugin instance is not SocialLoginPlugin");
+                        return;
+                    }
+                    ((SocialLoginPlugin) plugin).handleAppleLoginIntent(intent);
+                    return;
+                }
+                super.onNewIntent(intent);
+            }
+            ```
+
+            :::caution
+            Questo esempio presuppone che tu non abbia deep link configurati. Se li hai, adatta il codice
+            :::
+</Steps>
+
+:::note
+Hai appena aggiunto un nuovo deep link nella tua app. Il deep link apparirà così: `capgo-demo-app://path`. Puoi modificare `android:scheme` e `android:host` per modificare come appare questo deep link.
+**Importante:** Nella configurazione del backend, questo deep link diventerà `BASE_REDIRECT_URL`
+:::
+
+
+## Configurazione del backend
+
+È richiesto un backend per Android, ma configurare un backend influenzerà anche iOS. Un backend di esempio è fornito [qui](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/main/index.ts)
+
+Questo esempio fornisce quanto segue:
+- Un semplice database JSON
+- Un modo per richiedere il JWT dai server di Apple
+- Una semplice verifica JWT
+
+:::note
+Uso `PM2` per ospitare questo esempio. Un esempio di `ecosystem.config.js` può essere trovato [qui](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/main/ecosystem.config.js.example)
+:::
+
+Dato tutto ciò che ho detto in questo tutorial, ecco come apparirebbe la sezione `env`:
+
+- `ANDROID_SERVICE_ID` = Service ID
+- `IOS_SERVICE_ID` = App ID
+
+```js
+env: {
+  PRIVATE_KEY_FILE: "AuthKey_U93M8LBQK3.p8",
+  KEY_ID: "U93M8LBQK3",
+  TEAM_ID: "UVTJ336J2D",
+  ANDROID_SERVICE_ID: "ee.forgr.io.ionic.starter.service2",
+  IOS_SERVICE_ID: "me.wcaleniewolny.test.ionic.vue",
+  PORT: 3000,
+  REDIRECT_URI: "https://xyz.wcaleniewolny.me/login/callback",
+  BASE_REDIRECT_URL: "capgo-demo-app://path"
+}
+```
+
+#### Utilizzo del plugin
+
+L'utilizzo della funzione `login` non cambia, è lo stesso di iOS. Dai un'occhiata a quella sezione per maggiori informazioni. **TUTTAVIA**, il metodo `initialize` cambia un po'.
+
+```typescript
+await SocialLogin.initialize({
+  apple: {
+    clientId: 'ee.forgr.io.ionic.starter.service2',
+    redirectUrl: 'https://appleloginvps.wcaleniewolny.me/login/callback'
+  }
+})
+```
+
+:::danger
+    Nota che aggiungere `redirectUrl` **INFLUENZERÀ** iOS !!!!!
+:::
+
+
+## Creazione dell'app
+
+:::note
+Se hai già un App ID, puoi saltare questo passaggio.
+Non seguire questo passaggio se hai configurato il Login Apple per iOS.
+:::
+
+<Steps>
+   1. Se non hai già un App ID, clicca sul pulsante più
+        <img src="/social-login-assets/apple_dev_iden_plus.png" alt="Pulsante più aggiungi nuovo identificatore" />
+
+   2. Seleziona `App IDs` e clicca continue
+        <img src="/social-login-assets/apple_dev_new_app_id.png" alt="Selezione del tipo App IDs" />
+
+   3. Clicca sul tipo `App` e clicca `Continue`
+        <img src="/social-login-assets/apple_dev_new_app_type.png" alt="Selezione del tipo App" />
+
+   4. Inserisci la descrizione e l'app ID
+        <img src="/social-login-assets/apple_dev_new_app_desc_id.png" alt="Inserimento della descrizione app e bundle ID" />
+
+   5. Abilita la capacità `Sign with Apple`
+        <img src="/social-login-assets/apple_dev_enable_sign_with_apple.png" alt="Abilitazione della capacità Sign in with Apple" />
+
+   6. Clicca `Continue`
+        <img src="/social-login-assets/apple_dev_register_continue.png" alt="Pulsante Continue per la registrazione dell'app" />
+
+   7. Conferma i dettagli e clicca `Register`
+        <img src="/social-login-assets/apple_dev_confirm_register.png" alt="Conferma dei dettagli di registrazione dell'app" />
+</Steps>

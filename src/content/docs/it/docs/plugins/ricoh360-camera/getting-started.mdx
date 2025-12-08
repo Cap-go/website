@@ -1,0 +1,413 @@
+---
+title: Getting Started
+description: Learn how to install and use the Ricoh 360° Camera plugin to control Ricoh Theta cameras in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-ricoh360-camera
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-ricoh360-camera
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-ricoh360-camera
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-ricoh360-camera
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Platform Configuration
+
+### iOS
+
+Add camera and photo library permissions to your `Info.plist`:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>This app needs access to the camera to capture 360° photos and videos</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>This app needs access to save 360° photos and videos to your library</string>
+```
+
+### Android
+
+Add required permissions to your `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+```
+
+## Supported Devices
+
+This plugin supports Ricoh Theta series cameras:
+- Ricoh Theta V
+- Ricoh Theta Z1
+- Ricoh Theta SC2
+- Ricoh Theta X
+
+## Usage Example
+
+```typescript
+import { Ricoh360Camera } from '@capgo/capacitor-ricoh360-camera';
+
+// Initialize camera connection
+await Ricoh360Camera.initialize();
+
+// Connect to Ricoh Theta camera via WiFi
+await Ricoh360Camera.connect({
+  ssid: 'THETAYL12345678',
+  password: '12345678'
+});
+
+// Start live preview
+await Ricoh360Camera.startPreview({
+  container: 'preview-container' // ID of HTML element
+});
+
+// Capture a 360° photo
+const result = await Ricoh360Camera.capturePhoto();
+console.log('Photo saved:', result.filePath);
+
+// Start recording 360° video
+await Ricoh360Camera.startRecording();
+
+// Stop recording after some time
+setTimeout(async () => {
+  const video = await Ricoh360Camera.stopRecording();
+  console.log('Video saved:', video.filePath);
+}, 10000);
+
+// Stop preview
+await Ricoh360Camera.stopPreview();
+
+// Disconnect from camera
+await Ricoh360Camera.disconnect();
+```
+
+## API Reference
+
+### initialize()
+
+```typescript
+initialize() => Promise<void>
+```
+
+Initialize the camera plugin.
+
+### connect(options)
+
+```typescript
+connect(options: ConnectOptions) => Promise<void>
+```
+
+Connect to a Ricoh Theta camera via WiFi.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `ConnectOptions` |
+
+### disconnect()
+
+```typescript
+disconnect() => Promise<void>
+```
+
+Disconnect from the camera.
+
+### startPreview(options)
+
+```typescript
+startPreview(options: PreviewOptions) => Promise<void>
+```
+
+Start live 360° preview stream.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `PreviewOptions` |
+
+### stopPreview()
+
+```typescript
+stopPreview() => Promise<void>
+```
+
+Stop the live preview stream.
+
+### capturePhoto(options?)
+
+```typescript
+capturePhoto(options?: CaptureOptions) => Promise<CaptureResult>
+```
+
+Capture a 360° photo.
+
+| Param         | Type                        |
+| ------------- | --------------------------- |
+| **`options`** | `CaptureOptions` (optional) |
+
+**Returns:** `Promise<CaptureResult>`
+
+### startRecording(options?)
+
+```typescript
+startRecording(options?: RecordingOptions) => Promise<void>
+```
+
+Start recording 360° video.
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `RecordingOptions` (optional) |
+
+### stopRecording()
+
+```typescript
+stopRecording() => Promise<CaptureResult>
+```
+
+Stop video recording.
+
+**Returns:** `Promise<CaptureResult>`
+
+### getCameraInfo()
+
+```typescript
+getCameraInfo() => Promise<CameraInfo>
+```
+
+Get camera information and capabilities.
+
+**Returns:** `Promise<CameraInfo>`
+
+### setExposure(options)
+
+```typescript
+setExposure(options: ExposureOptions) => Promise<void>
+```
+
+Set camera exposure settings.
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `ExposureOptions` |
+
+### setWhiteBalance(options)
+
+```typescript
+setWhiteBalance(options: WhiteBalanceOptions) => Promise<void>
+```
+
+Set white balance mode.
+
+| Param         | Type                           |
+| ------------- | ------------------------------ |
+| **`options`** | `WhiteBalanceOptions` |
+
+## Interfaces
+
+### ConnectOptions
+
+| Prop           | Type              | Description                    |
+| -------------- | ----------------- | ------------------------------ |
+| **`ssid`**     | `string` | WiFi SSID of the Ricoh camera  |
+| **`password`** | `string` | WiFi password of the camera    |
+
+### PreviewOptions
+
+| Prop            | Type              | Description                           |
+| --------------- | ----------------- | ------------------------------------- |
+| **`container`** | `string` | HTML element ID for preview container |
+
+### CaptureOptions
+
+| Prop           | Type               | Description                           |
+| -------------- | ------------------ | ------------------------------------- |
+| **`quality`**  | `number` | Image quality (1-100) (optional)      |
+| **`saveToGallery`** | `boolean` | Save to device gallery (optional) |
+
+### RecordingOptions
+
+| Prop              | Type               | Description                              |
+| ----------------- | ------------------ | ---------------------------------------- |
+| **`maxDuration`** | `number` | Maximum recording duration in seconds (optional) |
+| **`quality`**     | `string` | Video quality: 'high' \| 'medium' \| 'low' (optional) |
+
+### CaptureResult
+
+| Prop           | Type              | Description                |
+| -------------- | ----------------- | -------------------------- |
+| **`filePath`** | `string` | Path to the captured file  |
+| **`fileUrl`**  | `string` | URL to access the file     |
+
+### CameraInfo
+
+| Prop              | Type              | Description                |
+| ----------------- | ----------------- | -------------------------- |
+| **`model`**       | `string` | Camera model name          |
+| **`serialNumber`** | `string` | Camera serial number      |
+| **`firmwareVersion`** | `string` | Firmware version         |
+| **`batteryLevel`** | `number` | Battery level (0-100)     |
+
+### ExposureOptions
+
+| Prop         | Type               | Description                                    |
+| ------------ | ------------------ | ---------------------------------------------- |
+| **`mode`**   | `string` | Exposure mode: 'auto' \| 'manual' \| 'iso' |
+| **`iso`**    | `number` | ISO value (100, 200, 400, etc.) (optional)     |
+| **`shutter`** | `number` | Shutter speed (optional)                      |
+
+### WhiteBalanceOptions
+
+| Prop       | Type              | Description                                            |
+| ---------- | ----------------- | ------------------------------------------------------ |
+| **`mode`** | `string` | White balance: 'auto' \| 'daylight' \| 'cloudy' \| 'tungsten' \| 'fluorescent' |
+
+## Complete Example
+
+```typescript
+import { Ricoh360Camera } from '@capgo/capacitor-ricoh360-camera';
+
+class Camera360Controller {
+  async setup() {
+    try {
+      // Initialize
+      await Ricoh360Camera.initialize();
+
+      // Connect to camera
+      await Ricoh360Camera.connect({
+        ssid: 'THETAYL12345678',
+        password: '12345678'
+      });
+
+      // Get camera info
+      const info = await Ricoh360Camera.getCameraInfo();
+      console.log('Connected to:', info.model);
+      console.log('Battery level:', info.batteryLevel + '%');
+
+      // Configure exposure
+      await Ricoh360Camera.setExposure({
+        mode: 'auto'
+      });
+
+      // Configure white balance
+      await Ricoh360Camera.setWhiteBalance({
+        mode: 'auto'
+      });
+
+      // Start preview
+      await Ricoh360Camera.startPreview({
+        container: 'camera-preview'
+      });
+
+    } catch (error) {
+      console.error('Failed to setup camera:', error);
+    }
+  }
+
+  async takePhoto() {
+    try {
+      const result = await Ricoh360Camera.capturePhoto({
+        quality: 95,
+        saveToGallery: true
+      });
+      console.log('Photo captured:', result.filePath);
+      return result;
+    } catch (error) {
+      console.error('Failed to capture photo:', error);
+    }
+  }
+
+  async recordVideo(durationSeconds: number) {
+    try {
+      // Start recording
+      await Ricoh360Camera.startRecording({
+        maxDuration: durationSeconds,
+        quality: 'high'
+      });
+
+      console.log('Recording started...');
+
+      // Stop after duration
+      setTimeout(async () => {
+        const result = await Ricoh360Camera.stopRecording();
+        console.log('Video saved:', result.filePath);
+      }, durationSeconds * 1000);
+
+    } catch (error) {
+      console.error('Failed to record video:', error);
+    }
+  }
+
+  async cleanup() {
+    try {
+      await Ricoh360Camera.stopPreview();
+      await Ricoh360Camera.disconnect();
+      console.log('Camera disconnected');
+    } catch (error) {
+      console.error('Failed to cleanup:', error);
+    }
+  }
+}
+
+// Usage
+const camera = new Camera360Controller();
+await camera.setup();
+await camera.takePhoto();
+await camera.recordVideo(10); // 10 seconds
+await camera.cleanup();
+```
+
+## Best Practices
+
+- Always initialize the plugin before connecting to the camera
+- Ensure the device is connected to the camera's WiFi network
+- Handle errors gracefully, especially connection failures
+- Stop preview and disconnect when done to save battery
+- Check camera battery level before long recording sessions
+- Test on actual Ricoh Theta hardware
+- Use appropriate video quality based on storage constraints
+
+## Troubleshooting
+
+### Connection Issues
+
+- Verify the camera is powered on
+- Check WiFi SSID and password are correct
+- Ensure no other app is connected to the camera
+- Reset camera WiFi settings if connection fails
+
+### Preview Not Showing
+
+- Verify the HTML container element exists
+- Check camera permissions are granted
+- Ensure preview is started after successful connection
+
+### Capture Failures
+
+- Check available storage space
+- Verify camera battery level is sufficient
+- Ensure camera is not in sleep mode

@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-file"
+description: 파일 및 디렉터리 읽기, 쓰기 및 관리를 위한 완전한 기능을 갖춘 파일 시스템 플러그인.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: iOS 및 Android용 읽기, 쓰기, 복사, 이동 및 디렉터리 관리를 포함한 완전한 파일 시스템 작업.
+  image:
+    file: ~public/icons/plugins/file.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/file/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-file/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="완전한 파일 작업" icon="rocket">
+    파일을 쉽게 읽기, 쓰기, 추가, 복사, 이동 및 삭제
+  </Card>
+  <Card title="디렉터리 관리" icon="folder">
+    재귀 지원을 통해 디렉터리 생성, 나열 및 제거
+  </Card>
+  <Card title="다양한 인코딩" icon="document">
+    UTF-8, ASCII, UTF-16 및 바이너리 (base64) 데이터 지원
+  </Card>
+  <Card title="크로스 플랫폼" icon="puzzle">
+    플랫폼 간에 일관된 API를 사용하는 iOS 및 Android에서 작동
+  </Card>
+</CardGrid>

@@ -1,0 +1,470 @@
+---
+title: Android 构建
+description: 使用 Capgo Cloud Build 配置和构建 Android 应用
+locale: zh
+sidebar:
+  order: 3
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+使用 Capgo 的安全云基础设施构建 Android 应用并提交至 Google Play 商店。
+
+## 构建前准备
+
+<CardGrid>
+  <Card title="⚠️ 首先设置 Android 凭证" icon="warning">
+    **必需:** 在构建发布版应用之前,您必须保存 Android 凭证。
+
+    [设置 Android 凭证 →](/docs/cli/cloud-build/credentials/#saving-android-credentials)
+  </Card>
+</CardGrid>
+
+## Android 构建的工作原理
+
+Android 构建在安全的 Cloudflare 沙箱中运行:
+
+- **基础设施**: 带有容器化 Android SDK 的 Cloudflare Workers
+- **构建工具**: Gradle 和 Android 构建工具
+- **执行**: 每次构建独立的沙箱环境
+- **清理**: 构建完成后立即删除
+- **安全性**: 无持久存储,构建之间完全隔离
+
+## 前置条件
+
+在为 Android 构建之前,您需要:
+
+### 1. 开发环境(本地测试)
+
+- 本地安装 Android Studio(用于初始密钥库设置)
+- 您的应用能够成功使用 `npx cap open android` 构建
+- Java JDK 17 或更高版本
+
+### 2. 签名密钥库
+
+对于发布版本构建,您需要签名密钥库:
+
+| 构建类型 | 需要密钥库 | 用途 |
+|------------|-------------------|---------|
+| **Debug** | 否 | 仅用于测试,自动生成 |
+| **Release** | 是 | Play 商店提交 |
+
+## 创建密钥库
+
+<Aside type="tip">
+有关详细的分步指南和截图,请访问:
+- [Android 证书指南](https://capawesome.io/cloud/native-builds/certificates/android/)
+- [博客: 使用 GitHub Actions 自动构建 Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+</Aside>
+
+如果您还没有密钥库,请创建一个:
+
+```bash
+keytool -genkey -v \
+  -keystore my-release-key.keystore \
+  -alias my-key-alias \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000
+```
+
+回答提示:
+- **密码**: 选择一个强密码(安全保存!)
+- **姓名**: 您的姓名或公司名称
+- **组织**: 您的公司名称
+- **位置**: 您的城市、州、国家
+
+<Aside type="caution">
+**重要**: 保持您的密钥库文件和密码安全!如果丢失它们,您将无法在 Play 商店更新您的应用。
+</Aside>
+
+### 理解密钥库组件
+
+创建密钥库时,您需要记住:
+
+1. **密钥库密码** (`KEYSTORE_STORE_PASSWORD`): 密钥库文件本身的密码
+2. **密钥别名** (`KEYSTORE_KEY_ALIAS`): 密钥库中签名密钥的名称/标识符
+3. **密钥密码** (`KEYSTORE_KEY_PASSWORD`): 特定密钥的密码(可以与存储密码相同)
+
+**示例工作流程:**
+```bash
+# 列出密钥库中的别名以验证
+keytool -list -keystore my-release-key.keystore
+
+# 查看有关您的密钥的详细信息
+keytool -list -v -keystore my-release-key.keystore -alias my-key-alias
+```
+
+## 构建配置
+
+### 必需的环境变量
+
+对于**发布版本构建**,设置这些凭证:
+
+```bash
+# Android 签名(发布版本必需)
+ANDROID_KEYSTORE_FILE="<base64编码的密钥库>"
+KEYSTORE_KEY_ALIAS="my-key-alias"
+KEYSTORE_KEY_PASSWORD="<密钥密码>"
+KEYSTORE_STORE_PASSWORD="<存储密码>"
+
+# Play 商店发布(可选,用于自动提交)
+PLAY_CONFIG_JSON="<base64编码的服务账户json>"
+```
+
+### 生成 Base64 凭证
+
+**密钥库文件:**
+```bash
+base64 -i my-release-key.keystore | pbcopy
+```
+
+**Play 商店服务账户 JSON:**
+```bash
+base64 -i play-store-service-account.json | pbcopy
+```
+
+base64 字符串现在在您的剪贴板中。
+
+### Play 商店服务账户设置
+
+要启用自动 Play 商店上传,您需要创建具有适当权限的 Google Cloud 服务账户。
+
+<Aside type="tip">
+有关详细说明和截图,请参阅 [Android 证书指南](https://capawesome.io/cloud/native-builds/certificates/android/)。
+</Aside>
+
+<Steps>
+
+1. **在 Google Cloud 中创建服务账户**
+   - 转到 [Google Play Console](https://play.google.com/console) → 设置 → API 访问
+   - 点击"创建新服务账户"
+   - 按照链接转到 Google Cloud Console
+   - 点击"创建服务账户"
+   - 输入名称(例如,"Capgo CI/CD")
+   - 授予"服务账户用户"角色
+   - 点击"完成"
+
+2. **创建 JSON 密钥**
+   - 在 Google Cloud Console 中,找到您的服务账户
+   - 点击服务账户电子邮件
+   - 转到"密钥"选项卡
+   - 点击"添加密钥" → "创建新密钥"
+   - 选择"JSON"格式
+   - 下载 JSON 文件(保持安全!)
+
+3. **在 Play Console 中授予权限**
+   - 返回 Google Play Console → 设置 → API 访问
+   - 在列表中找到您的服务账户
+   - 点击"授予访问权限"
+   - 在"应用权限"下,选择您的应用
+   - 在"账户权限"下,授予:
+     - **发布**: "查看应用信息和下载批量报告(只读)"
+     - **发布**: "创建、编辑和删除草稿版本"
+     - **发布**: "发布到生产环境、排除设备并使用 Play 应用签名"
+   - 点击"邀请用户"
+
+4. **接受邀请**
+   - 服务账户将收到邀请电子邮件
+   - 接受邀请以激活权限
+
+</Steps>
+
+<Aside type="caution">
+服务账户 JSON 文件包含敏感凭证。切勿将其提交到版本控制或公开分享。
+</Aside>
+
+## 为 Android 构建
+
+### Debug 构建
+
+非常适合无需签名的测试:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode debug
+```
+
+这会创建一个可以安装在任何设备上进行测试的 debug APK。
+
+### Release 构建
+
+用于 Play 商店提交:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release
+```
+
+需要将签名凭证配置为环境变量。
+
+## CI/CD 集成
+
+### GitHub Actions 示例
+
+```yaml
+name: Build Android App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build Android app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform android \
+            --build-mode release
+```
+
+## 构建过程详情
+
+### Android 构建期间发生的事情
+
+<Steps>
+
+1. **沙箱初始化** (~5秒)
+   - 启动安全容器
+   - 加载 Android SDK 和 Gradle
+   - 创建隔离文件系统
+
+2. **项目设置** (~20秒)
+   - 从 R2 下载项目压缩包
+   - 解压到构建目录
+   - 注入签名凭证
+
+3. **Gradle 构建** (2-4分钟)
+   - 下载依赖项
+   - APK/AAB 编译
+   - ProGuard/R8 优化(发布模式)
+   - 应用代码签名
+
+4. **Play 商店上传** (30秒,如果配置)
+   - AAB 上传到 Play Console
+   - 配置发布轨道
+   - 启动提交
+
+5. **清理** (立即)
+   - 删除所有文件
+   - 销毁容器
+   - 不保留任何构建产物
+
+</Steps>
+
+### 构建堆栈
+
+我们的 Android 构建环境包括:
+
+- **Java**: OpenJDK 17
+- **Android SDK**: 最新稳定版
+- **Gradle**: 8.x
+- **Build Tools**: 34.x
+- **Node.js**: 18.x (LTS)
+- **NPM**: 最新稳定版
+
+## 构建输出
+
+### APK vs AAB
+
+- **APK** (Android Package): 可直接安装的文件
+- **AAB** (Android App Bundle): Google Play 推荐的格式(用户下载更小)
+
+默认情况下,Capgo 构建创建:
+- **Debug 模式**: APK
+- **Release 模式**: AAB(针对 Play 商店优化)
+
+## 构建时间
+
+典型的 Android 构建时间:
+
+| 构建类型 | 平均时间 |
+|------------|--------------|
+| Debug | 2-3 分钟 |
+| Release (无 ProGuard) | 3-4 分钟 |
+| Release (有 ProGuard) | 4-6 分钟 |
+
+<Aside type="note">
+Android 构建费用为**1× 基础费率**(iOS 构建费用的一半)。
+</Aside>
+
+## 构建变体
+
+### 自定义构建变体
+
+如果您的应用有自定义构建变体(例如,`staging`、`production`),使用 `build-config`:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release \
+  --build-config '{"variant":"staging"}'
+```
+
+这将构建 `stagingRelease` 变体。
+
+### Flavor 维度
+
+对于具有 flavor 维度的应用:
+
+```bash
+--build-config '{"flavor":"premium","variant":"production"}'
+```
+
+这将构建 `premiumProductionRelease` 变体。
+
+## 故障排除
+
+### 常见问题
+
+**"Keystore password incorrect"**
+- 验证 KEYSTORE_STORE_PASSWORD 与您的密钥库匹配
+- 确保 KEYSTORE_KEY_PASSWORD 与您的密钥别名密码匹配
+- 检查额外的空格或特殊字符
+
+**"Key alias not found"**
+- 验证 KEYSTORE_KEY_ALIAS 完全匹配(区分大小写)
+- 列出别名: `keytool -list -keystore my-release-key.keystore`
+
+**"Gradle build failed"**
+- 检查构建日志以了解具体错误
+- 确保您的应用可以在本地使用 `./gradlew assembleRelease` 构建
+- 验证所有原生依赖项都在 `build.gradle` 中
+
+**"Play Store upload failed"**
+- 验证服务账户 JSON 是否有效
+- 确保服务账户在 Play Console 中具有正确的权限
+- 检查应用是否在 Play Console 中正确设置
+
+**"Build timeout"**
+- 大型应用可能需要优化
+- 检查是否可以删除不必要的依赖项
+- 如果构建持续超时,请联系支持
+
+### 调试日志
+
+在构建日志中注意这些关键阶段:
+
+```
+→ Downloading dependencies...
+→ Running Gradle assembleRelease...
+→ Signing APK/AAB...
+→ Uploading to Play Store...
+✔ Build succeeded
+```
+
+如果构建失败,日志中将显示具体的 Gradle 错误。
+
+## 最佳实践
+
+### 1. 首先在本地测试
+
+始终确保您的 Android 构建在本地可以工作:
+
+```bash
+cd android
+./gradlew assembleRelease
+# 或
+./gradlew bundleRelease
+```
+
+### 2. 保护您的密钥库
+
+- 切勿将密钥库提交到版本控制
+- 存储在安全的密钥管理中(1Password、AWS Secrets Manager 等)
+- 在多个安全位置保留备份副本
+- 在安全的密码管理器中记录密码
+
+### 3. 版本管理
+
+Capgo 从您的 `capacitor.config.json` 读取版本:
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "My App",
+  "version": "1.0.0",
+  "build": "1"
+}
+```
+
+为每个版本递增 `build` 编号。
+
+### 4. ProGuard 配置
+
+对于发布版本构建,确保 ProGuard 规则配置正确:
+
+```
+# android/app/proguard-rules.pro
+-keep class com.getcapacitor.** { *; }
+-keep @com.getcapacitor.annotation.CapacitorPlugin public class * {
+  @com.getcapacitor.annotation.PluginMethod public <methods>;
+}
+```
+
+### 5. 监控构建大小
+
+密切关注 APK/AAB 大小以确保其经过优化:
+
+```
+CLI 显示最终大小:
+→ APK size: 12.4 MB
+```
+
+如果您的应用很大(>50 MB),考虑:
+- 启用 ProGuard/R8
+- 使用 AAB 格式(动态交付)
+- 优化图像和资源
+
+## Play 商店提交
+
+### 自动提交
+
+配置了 PLAY_CONFIG_JSON 后,构建会自动上传到 Play Console 的内部测试轨道。
+
+### 手动提交
+
+如果您喜欢手动提交:
+
+1. 在没有 PLAY_CONFIG_JSON 的情况下运行构建
+2. 从构建产物下载 AAB(如果配置)
+3. 手动上传到 Play Console
+
+## 下一步
+
+- [iOS 构建](/docs/cli/cloud-build/ios/) - 配置 iOS 构建
+- [故障排除](/docs/cli/cloud-build/troubleshooting/) - 常见构建问题
+- [CLI 参考](/docs/cli/reference/build/) - 完整命令文档
+
+## 需要帮助?
+
+- [故障排除指南](/docs/cli/cloud-build/troubleshooting/)
+- [Discord 社区](https://discord.com/invite/VnYRvBfgA6)
+- 电子邮件: support@capgo.app

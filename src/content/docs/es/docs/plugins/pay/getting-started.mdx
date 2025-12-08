@@ -1,0 +1,130 @@
+---
+title: Comenzando
+locale: es
+description: Configura Apple Pay y Google Pay para tu checkout Capacitor con el plugin Pay.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el plugin**
+   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Requisitos previos nativos
+
+- **Apple Pay (iOS)**
+  1. Crea un ID de comerciante Apple Pay en el portal de desarrolladores de Apple.
+  2. Genera y sube el certificado de procesamiento de pagos requerido por tu pasarela.
+  3. Habilita la capacidad **Apple Pay** en Xcode y asegúrate de que tu perfil de aprovisionamiento la incluya.
+  4. Actualiza `Info.plist` con una descripción de uso si tu pasarela requiere acceso a la red para validar pagos.
+
+- **Google Pay (Android)**
+  1. Inicia sesión en la [Consola de Negocios de Google Pay](https://pay.google.com/business/console/).
+  2. Configura los parámetros de tu pasarela de pago o configura tokenización directa para pruebas.
+  3. Si planeas usar tarjetas de producción, cambia `environment` a `PRODUCTION` y registra tarjetas de prueba para QA.
+  4. Confirma que los servicios de Google Play estén disponibles en el dispositivo (requerido por Google Pay).
+
+Consulta las guías bajo `docs/` en el repositorio del plugin para capturas de pantalla paso a paso.
+
+## Verificar disponibilidad
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const availability = await Pay.isPayAvailable({
+  apple: { supportedNetworks: ['visa', 'masterCard', 'amex'] },
+  google: {
+    isReadyToPayRequest: {
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+          },
+        },
+      ],
+    },
+  },
+});
+
+if (!availability.available) {
+  console.warn('Native pay unavailable:', availability);
+}
+```
+
+## Solicitar pago (Apple Pay)
+
+```typescript
+const appleResult = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant.com.example.app',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    supportedNetworks: ['visa', 'masterCard'],
+    paymentSummaryItems: [
+      { label: 'Starter Plan', amount: '9.99' },
+      { label: 'Capgo Store', amount: '9.99' },
+    ],
+    requiredShippingContactFields: ['name', 'emailAddress'],
+  },
+});
+
+const token = appleResult.apple?.paymentData;
+```
+
+## Solicitar pago (Google Pay)
+
+```typescript
+const googleResult = await Pay.requestPayment({
+  google: {
+    environment: 'test',
+    paymentDataRequest: {
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            billingAddressRequired: true,
+            billingAddressParameters: { format: 'FULL' },
+          },
+          tokenizationSpecification: {
+            type: 'PAYMENT_GATEWAY',
+            parameters: {
+              gateway: 'example',
+              gatewayMerchantId: 'exampleMerchantId',
+            },
+          },
+        },
+      ],
+      merchantInfo: {
+        merchantName: 'Capgo Store',
+      },
+      transactionInfo: {
+        totalPriceStatus: 'FINAL',
+        totalPrice: '9.99',
+        currencyCode: 'USD',
+        countryCode: 'US',
+      },
+    },
+  },
+});
+
+const paymentData = googleResult.google?.paymentData;
+```
+
+## Manejar respuestas
+
+- Tokeniza el payload devuelto con tu procesador de pagos y confirma la transacción del lado del servidor.
+- Proporciona una ruta alternativa (entrada de tarjeta, factura) si el pago nativo no está disponible o el usuario cancela la hoja.
+- Cachea el resultado de disponibilidad para no mostrar los botones en dispositivos no soportados.

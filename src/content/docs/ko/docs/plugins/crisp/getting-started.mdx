@@ -1,0 +1,344 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor 앱에서 인앱 고객 지원을 위한 Crisp 채팅 SDK 플러그인을 설치하고 사용하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-crisp" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Crisp Website ID 가져오기**
+   - [crisp.chat](https://crisp.chat)에서 회원가입
+   - 웹사이트/프로젝트 생성
+   - Settings > Setup Instructions에서 Website ID 찾기
+</Steps>
+
+## 기본 사용법
+
+플러그인을 가져오고 Website ID로 구성합니다:
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+// 웹사이트 ID로 Crisp 구성
+const configureCrisp = async () => {
+  await CapacitorCrisp.configure({
+    websiteID: 'YOUR_WEBSITE_ID'
+  });
+};
+
+// 채팅 열기
+const openChat = async () => {
+  await CapacitorCrisp.openMessenger();
+};
+
+// 사용자 정보 설정
+const setUserInfo = async () => {
+  await CapacitorCrisp.setUser({
+    email: 'user@example.com',
+    nickname: 'John Doe',
+    phone: '+1234567890',
+    avatar: 'https://example.com/avatar.jpg'
+  });
+};
+
+// 사용자 세션 재설정 (로그아웃)
+const logout = async () => {
+  await CapacitorCrisp.resetChatSession();
+};
+```
+
+## API Reference
+
+### configure(options)
+
+웹사이트 ID와 선택적 설정으로 Crisp을 구성합니다.
+
+```typescript
+interface ConfigureOptions {
+  websiteID: string;
+  locale?: string; // 예: 'en', 'fr', 'es'
+  tokenID?: string; // 인증된 세션용
+}
+
+await CapacitorCrisp.configure({
+  websiteID: 'YOUR_WEBSITE_ID',
+  locale: 'en'
+});
+```
+
+### openMessenger()
+
+Crisp 채팅 인터페이스를 엽니다.
+
+```typescript
+await CapacitorCrisp.openMessenger();
+```
+
+### setUser(options)
+
+채팅 세션에 대한 사용자 정보를 설정합니다.
+
+```typescript
+interface UserOptions {
+  email?: string;
+  nickname?: string;
+  phone?: string;
+  avatar?: string;
+}
+
+await CapacitorCrisp.setUser({
+  email: 'user@example.com',
+  nickname: 'John Doe'
+});
+```
+
+### setUserCompany(options)
+
+비즈니스 사용자를 위한 회사 정보를 설정합니다.
+
+```typescript
+interface CompanyOptions {
+  name: string;
+  url?: string;
+  description?: string;
+  employment?: {
+    title?: string;
+    role?: string;
+  };
+  geolocation?: {
+    city?: string;
+    country?: string;
+  };
+}
+
+await CapacitorCrisp.setUserCompany({
+  name: 'Acme Corp',
+  url: 'https://acme.com',
+  employment: {
+    title: 'CEO',
+    role: 'Leadership'
+  }
+});
+```
+
+### pushEvent(options)
+
+사용자 행동을 추적하기 위한 사용자 정의 이벤트를 전송합니다.
+
+```typescript
+interface EventOptions {
+  name: string;
+  color?: 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'pink' | 'brown' | 'grey' | 'black';
+  data?: { [key: string]: any };
+}
+
+await CapacitorCrisp.pushEvent({
+  name: 'checkout_completed',
+  color: 'green',
+  data: {
+    price: 99.99,
+    currency: 'USD'
+  }
+});
+```
+
+### setSessionSegment(segment)
+
+채팅 세션을 분류하기 위한 세그먼트를 설정합니다.
+
+```typescript
+await CapacitorCrisp.setSessionSegment('premium_customer');
+```
+
+### resetChatSession()
+
+현재 채팅 세션을 재설정합니다 (로그아웃에 유용).
+
+```typescript
+await CapacitorCrisp.resetChatSession();
+```
+
+## 고급 기능
+
+### 사용자 정의 데이터
+
+```typescript
+// 여러 사용자 정의 데이터 필드 설정
+await CapacitorCrisp.setSessionData({
+  key: 'plan',
+  value: 'premium'
+});
+
+await CapacitorCrisp.setSessionData({
+  key: 'signup_date',
+  value: '2024-01-15'
+});
+```
+
+### 메시지 프리셋
+
+채팅 입력에 미리 채워진 메시지를 설정합니다:
+
+```typescript
+await CapacitorCrisp.setMessageText(
+  "안녕하세요, 주문 #12345에 대한 도움이 필요합니다"
+);
+```
+
+### 채팅 가용성
+
+채팅 위젯이 사용 가능한 시기를 제어합니다:
+
+```typescript
+// 채팅을 일시적으로 숨기기
+await CapacitorCrisp.setTokenID('user_token_12345');
+```
+
+## 전체 예제
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+export class ChatService {
+  async initialize() {
+    // Crisp 구성
+    await CapacitorCrisp.configure({
+      websiteID: 'YOUR_WEBSITE_ID',
+      locale: 'en'
+    });
+  }
+
+  async loginUser(user: any) {
+    // 사용자 정보 설정
+    await CapacitorCrisp.setUser({
+      email: user.email,
+      nickname: user.name,
+      phone: user.phone,
+      avatar: user.avatarUrl
+    });
+
+    // 사용자 정의 데이터 설정
+    await CapacitorCrisp.setSessionData({
+      key: 'user_id',
+      value: user.id
+    });
+
+    await CapacitorCrisp.setSessionData({
+      key: 'account_type',
+      value: user.accountType
+    });
+
+    // 세그먼트 설정
+    if (user.isPremium) {
+      await CapacitorCrisp.setSessionSegment('premium');
+    }
+
+    // 로그인 이벤트 추적
+    await CapacitorCrisp.pushEvent({
+      name: 'user_login',
+      color: 'blue',
+      data: {
+        method: 'email'
+      }
+    });
+  }
+
+  async openSupport(context?: string) {
+    if (context) {
+      await CapacitorCrisp.setMessageText(
+        `도움이 필요합니다: ${context}`
+      );
+    }
+
+    await CapacitorCrisp.openMessenger();
+  }
+
+  async logout() {
+    await CapacitorCrisp.resetChatSession();
+  }
+}
+```
+
+## 스타일 및 커스터마이징
+
+Crisp은 앱의 테마에 자동으로 적응하지만, Crisp 대시보드를 통해 더욱 커스터마이징할 수 있습니다:
+
+1. Crisp 대시보드로 이동
+2. Settings > Website Settings > Chatbox & Email Settings로 이동
+3. 색상, 위치 및 동작을 커스터마이징
+
+## 모범 사례
+
+1. **조기 초기화**
+   즉시 사용 가능하도록 앱 초기화 중에 Crisp을 구성합니다:
+   ```typescript
+   import { App } from '@capacitor/app';
+
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       await CapacitorCrisp.configure({
+         websiteID: 'YOUR_WEBSITE_ID'
+       });
+     }
+   });
+   ```
+
+2. **사용자 컨텍스트 설정**
+   더 나은 지원을 위해 가능한 경우 항상 사용자 정보를 제공합니다:
+   ```typescript
+   if (user.isAuthenticated) {
+     await CapacitorCrisp.setUser({
+       email: user.email,
+       nickname: user.name
+     });
+   }
+   ```
+
+3. **중요한 이벤트 추적**
+   지원 담당자에게 컨텍스트를 제공하기 위해 이벤트를 사용합니다:
+   ```typescript
+   await CapacitorCrisp.pushEvent({
+     name: 'error_occurred',
+     color: 'red',
+     data: {
+       error: error.message,
+       screen: 'checkout'
+     }
+   });
+   ```
+
+4. **로그아웃 적절히 처리**
+   사용자가 로그아웃할 때 항상 세션을 재설정합니다:
+   ```typescript
+   async logout() {
+     await CapacitorCrisp.resetChatSession();
+     // 기타 로그아웃 로직
+   }
+   ```
+
+## 플랫폼 참고사항
+
+### iOS
+- iOS 10.0+ 필요
+- 네이티브 Crisp iOS SDK 사용
+- 푸시 알림 지원 (Crisp 대시보드에서 구성)
+
+### Android
+- Android 5.0 (API 21)+ 필요
+- 네이티브 Crisp Android SDK 사용
+- Material Design 준수
+
+### Web
+- Crisp JavaScript SDK로 폴백
+- 네이티브 플랫폼과 완전한 기능 동등성

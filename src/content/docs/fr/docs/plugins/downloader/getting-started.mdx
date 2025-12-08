@@ -1,0 +1,172 @@
+---
+title: Premiers pas
+locale: fr
+description: Guide d'installation et d'utilisation pour @capgo/capacitor-downloader
+sidebar:
+  order: 2
+  label: "Premiers pas"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Exemple d'utilisation
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+// Démarrer un téléchargement
+const downloadId = 'my-download-001';
+await CapacitorDownloader.download({
+  id: downloadId,
+  url: 'https://example.com/large-file.zip',
+  destination: '/downloads/large-file.zip',
+  headers: {
+    'Authorization': 'Bearer token123'
+  },
+  network: 'wifi-only',
+  priority: 'high'
+});
+
+// Écouter les mises à jour de progression
+CapacitorDownloader.addListener('downloadProgress', (data) => {
+  console.log(`Download ${data.id}: ${data.progress}% complete`);
+  console.log(`Downloaded: ${data.bytesDownloaded}/${data.totalBytes} bytes`);
+});
+
+// Gérer la complétion
+CapacitorDownloader.addListener('downloadCompleted', (data) => {
+  console.log(`Download completed: ${data.id}`);
+  console.log(`File saved to: ${data.path}`);
+});
+
+// Gérer les erreurs
+CapacitorDownloader.addListener('downloadFailed', (error) => {
+  console.error(`Download failed: ${error.id}`, error.message);
+});
+
+// Mettre en pause un téléchargement
+await CapacitorDownloader.pause(downloadId);
+
+// Reprendre le téléchargement
+await CapacitorDownloader.resume(downloadId);
+
+// Vérifier le statut du téléchargement
+const status = await CapacitorDownloader.checkStatus(downloadId);
+console.log('Download status:', status);
+
+// Arrêter le téléchargement
+await CapacitorDownloader.stop(downloadId);
+```
+
+## Méthodes principales de l'API
+
+### Gestion des téléchargements
+- `download(options)` - Démarrer un nouveau téléchargement de fichier
+- `pause(id)` - Mettre en pause un téléchargement en cours
+- `resume(id)` - Reprendre un téléchargement en pause
+- `stop(id)` - Arrêter et annuler un téléchargement
+- `checkStatus(id)` - Obtenir le statut actuel du téléchargement
+
+### Opérations sur les fichiers
+- `getFileInfo(path)` - Récupérer les informations et métadonnées du fichier
+
+## Configuration du téléchargement
+
+```typescript
+interface DownloadOptions {
+  id: string;                    // Identifiant unique du téléchargement
+  url: string;                   // URL source du téléchargement
+  destination: string;           // Chemin d'enregistrement local
+  headers?: Record<string, string>; // En-têtes HTTP personnalisés
+  network?: 'cellular' | 'wifi-only'; // Restrictions réseau
+  priority?: 'high' | 'normal' | 'low'; // Priorité du téléchargement
+}
+```
+
+## Écouteurs d'événements
+
+Le plugin fournit une gestion complète des événements :
+
+- `downloadProgress` - Suivre la progression du téléchargement en temps réel
+- `downloadCompleted` - Gérer la complétion réussie du téléchargement
+- `downloadFailed` - Gérer les erreurs et échecs de téléchargement
+
+## Configuration réseau
+
+### Téléchargements WiFi uniquement
+```typescript
+await CapacitorDownloader.download({
+  id: 'large-file',
+  url: 'https://example.com/video.mp4',
+  destination: '/downloads/video.mp4',
+  network: 'wifi-only' // Restreint aux réseaux WiFi uniquement
+});
+```
+
+### Gestion des priorités
+```typescript
+// Téléchargement haute priorité
+await CapacitorDownloader.download({
+  id: 'urgent-update',
+  url: 'https://example.com/update.zip',
+  destination: '/downloads/update.zip',
+  priority: 'high'
+});
+```
+
+## États de téléchargement
+
+Les téléchargements peuvent être dans différents états :
+- **Pending** : En attente de téléchargement
+- **Running** : Téléchargement en cours
+- **Paused** : Temporairement arrêté
+- **Completed** : Terminé avec succès
+- **Failed** : Une erreur s'est produite
+- **Stopped** : Annulé manuellement
+
+## Informations sur les fichiers
+
+```typescript
+// Obtenir les détails du fichier
+const fileInfo = await CapacitorDownloader.getFileInfo('/downloads/my-file.pdf');
+console.log('File size:', fileInfo.size);
+console.log('Last modified:', fileInfo.lastModified);
+console.log('MIME type:', fileInfo.mimeType);
+```
+
+## Bonnes pratiques
+
+- Utilisez des ID de téléchargement uniques pour éviter les conflits
+- Implémentez une gestion appropriée des erreurs pour les échecs réseau
+- Considérez l'espace de stockage avant de démarrer de gros téléchargements
+- Utilisez le mode WiFi uniquement pour les gros fichiers afin de préserver les données mobiles
+- Nettoyez les téléchargements terminés pour gérer le stockage

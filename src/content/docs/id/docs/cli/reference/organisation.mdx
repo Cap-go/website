@@ -1,0 +1,111 @@
+---
+title: 🔹 organisation
+description: 🏢 Kelola organisasi Anda di Capgo Cloud untuk kolaborasi tim dan manajemen aplikasi.
+sidebar_label: organisation
+locale: id
+sidebar:
+  order: 9
+---
+
+🏢 Kelola organisasi Anda di Capgo Cloud untuk kolaborasi tim dan manajemen aplikasi.
+
+### <a id="organisation-list"></a> 📋 **List**
+
+**Alias:** `l`
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+📋 Tampilkan semua organisasi yang Anda miliki akses di Capgo Cloud.
+
+**Contoh:**
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+**Opsi:**
+
+| Param          | Type          | Deskripsi          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | API key untuk link ke akun Anda |
+| **--supa-host** | <code>string</code> | URL host Supabase kustom (untuk self-hosting atau development Capgo) |
+| **--supa-anon** | <code>string</code> | Anon key Supabase kustom (untuk self-hosting) |
+
+### <a id="organisation-add"></a> ➕ **Add**
+
+**Alias:** `a`
+
+```bash
+npx @capgo/cli@latest organisation add
+```
+
+➕ Buat organisasi baru di Capgo Cloud untuk kolaborasi tim.
+
+**Contoh:**
+
+```bash
+npx @capgo/cli@latest organisation add --name "My Company" --email admin@mycompany.com
+```
+
+**Opsi:**
+
+| Param          | Type          | Deskripsi          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | Nama organisasi |
+| **-e,** | <code>string</code> | Email manajemen untuk organisasi |
+| **-a,** | <code>string</code> | API key untuk link ke akun Anda |
+| **--supa-host** | <code>string</code> | URL host Supabase kustom (untuk self-hosting atau development Capgo) |
+| **--supa-anon** | <code>string</code> | Anon key Supabase kustom (untuk self-hosting) |
+
+### <a id="organisation-set"></a> ⚙️ **Set**
+
+**Alias:** `s`
+
+```bash
+npx @capgo/cli@latest organisation set
+```
+
+⚙️ Update pengaturan organisasi seperti nama dan email manajemen.
+
+**Contoh:**
+
+```bash
+npx @capgo/cli@latest organisation set ORG_ID --name "Updated Company Name"
+```
+
+**Opsi:**
+
+| Param          | Type          | Deskripsi          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | Nama organisasi |
+| **-e,** | <code>string</code> | Email manajemen untuk organisasi |
+| **-a,** | <code>string</code> | API key untuk link ke akun Anda |
+| **--supa-host** | <code>string</code> | URL host Supabase kustom (untuk self-hosting atau development Capgo) |
+| **--supa-anon** | <code>string</code> | Anon key Supabase kustom (untuk self-hosting) |
+
+### <a id="organisation-delete"></a> 🗑️ **Delete**
+
+**Alias:** `d`
+
+```bash
+npx @capgo/cli@latest organisation delete
+```
+
+🗑️ Hapus organisasi dari Capgo Cloud. Tindakan ini tidak dapat dibatalkan.
+Hanya pemilik organisasi yang dapat menghapus organisasi.
+
+**Contoh:**
+
+```bash
+npx @capgo/cli@latest organisation delete ORG_ID
+```
+
+**Opsi:**
+
+| Param          | Type          | Deskripsi          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | API key untuk link ke akun Anda |
+| **--supa-host** | <code>string</code> | URL host Supabase kustom (untuk self-hosting atau development Capgo) |
+| **--supa-anon** | <code>string</code> | Anon key Supabase kustom (untuk self-hosting) |

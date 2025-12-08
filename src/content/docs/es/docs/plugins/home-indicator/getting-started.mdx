@@ -1,0 +1,214 @@
+---
+title: Comenzar
+description: Aprende a instalar y configurar el plugin Capacitor Home Indicator para controlar el indicador de inicio en dispositivos iOS.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurar el plugin**
+
+   **Ocultar Indicador de Inicio:**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Hide the home indicator
+   await HomeIndicator.hide();
+   ```
+
+   **Mostrar Indicador de Inicio:**
+   ```typescript
+   // Show the home indicator
+   await HomeIndicator.show();
+
+   // Check visibility status
+   const { hidden } = await HomeIndicator.isHidden();
+   console.log('Is hidden:', hidden);
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       No se requiere configuración adicional. El plugin solo funciona en dispositivos iOS con indicador de inicio (iPhone X y posteriores).
+     </TabItem>
+     <TabItem label="Android">
+       Este plugin no tiene efecto en dispositivos Android ya que no tienen un indicador de inicio estilo iOS.
+     </TabItem>
+   </Tabs>
+
+4. **Configuración de auto-ocultación**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Configure auto-hide behavior
+   await HomeIndicator.setAutoHidden({
+     autoHidden: true // Enable auto-hide
+   });
+
+   // The home indicator will automatically hide after a few seconds
+   // and reappear when the user touches the screen
+   ```
+
+5. **Uso avanzado**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+   import { App } from '@capacitor/app';
+
+   export class ImmersiveMode {
+     private isImmersive = false;
+
+     async enterImmersiveMode() {
+       this.isImmersive = true;
+
+       // Hide home indicator
+       await HomeIndicator.hide();
+
+       // Enable auto-hide for better UX
+       await HomeIndicator.setAutoHidden({ autoHidden: true });
+
+       // Hide status bar for full immersion
+       // StatusBar.hide(); // If using @capacitor/status-bar
+     }
+
+     async exitImmersiveMode() {
+       this.isImmersive = false;
+
+       // Show home indicator
+       await HomeIndicator.show();
+
+       // Disable auto-hide
+       await HomeIndicator.setAutoHidden({ autoHidden: false });
+
+       // Show status bar
+       // StatusBar.show(); // If using @capacitor/status-bar
+     }
+
+     async toggleImmersiveMode() {
+       const { hidden } = await HomeIndicator.isHidden();
+
+       if (hidden) {
+         await this.exitImmersiveMode();
+       } else {
+         await this.enterImmersiveMode();
+       }
+     }
+
+     setupAppLifecycle() {
+       // Handle app state changes
+       App.addListener('appStateChange', async ({ isActive }) => {
+         if (!isActive && this.isImmersive) {
+           // App went to background, might want to show indicator
+           await HomeIndicator.show();
+         } else if (isActive && this.isImmersive) {
+           // App came to foreground, restore immersive mode
+           await HomeIndicator.hide();
+         }
+       });
+     }
+   }
+   ```
+</Steps>
+
+## Referencia de API
+
+### Métodos
+
+#### `hide()`
+Oculta el indicador de inicio.
+
+**Retorna:** `Promise<void>`
+
+#### `show()`
+Muestra el indicador de inicio.
+
+**Retorna:** `Promise<void>`
+
+#### `isHidden()`
+Verifica si el indicador de inicio está actualmente oculto.
+
+**Retorna:** `Promise<{ hidden: boolean }>`
+
+#### `setAutoHidden(options: { autoHidden: boolean })`
+Configura el comportamiento de auto-ocultación del indicador de inicio.
+
+**Parámetros:**
+- `options.autoHidden`: boolean - Habilita o deshabilita la auto-ocultación
+
+**Retorna:** `Promise<void>`
+
+### Interfaces
+
+```typescript
+interface AutoHiddenOptions {
+  autoHidden: boolean;
+}
+
+interface HiddenResult {
+  hidden: boolean;
+}
+```
+
+## Notas de Plataforma
+
+### iOS
+- Solo funciona en dispositivos con indicador de inicio (iPhone X y posteriores)
+- Requiere iOS 11.0 o posterior
+- La auto-ocultación hace que el indicador sea translúcido y se oculte después de inactividad
+- El indicador reaparece cuando los usuarios deslizan desde la parte inferior
+
+### Android
+- Este plugin no tiene efecto en Android
+- Android usa diferentes gestos/botones de navegación
+
+## Casos de Uso Comunes
+
+1. **Juegos**: Juego a pantalla completa sin distracciones
+2. **Reproductores de Video**: Reproducción de video inmersiva
+3. **Visores de Fotos**: Galerías de fotos a pantalla completa
+4. **Presentaciones**: Presentaciones sin distracciones
+5. **Aplicaciones Kiosko**: Aplicaciones de exhibición pública
+
+## Mejores Prácticas
+
+1. **Control del Usuario**: Siempre proporciona una forma de salir del modo inmersivo
+   ```typescript
+   // Add a gesture or button to toggle immersive mode
+   const toggleButton = document.getElementById('toggle-immersive');
+   toggleButton.addEventListener('click', () => {
+     immersiveMode.toggleImmersiveMode();
+   });
+   ```
+
+2. **Auto-ocultación para Juegos**: Usa auto-ocultación para mejor experiencia de juego
+   ```typescript
+   // For games, auto-hide provides the best balance
+   await HomeIndicator.setAutoHidden({ autoHidden: true });
+   ```
+
+3. **Respetar Gestos del Sistema**: No interferir con la navegación del sistema
+4. **Guardar Estado**: Recordar la preferencia del usuario para el modo inmersivo
+
+## Solución de Problemas
+
+**El indicador de inicio no se oculta:**
+- Verifica que el dispositivo tenga indicador de inicio (iPhone X+)
+- Verifica que la versión de iOS sea 11.0 o superior
+- Asegúrate de que la aplicación tenga foco
+
+**La auto-ocultación no funciona:**
+- La auto-ocultación requiere interacción del usuario para activarse
+- El indicador se vuelve translúcido, no completamente oculto
+
+**El indicador reaparece inesperadamente:**
+- Este es un comportamiento normal de iOS para gestos del sistema
+- Usa auto-ocultación para un comportamiento menos intrusivo

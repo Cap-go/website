@@ -1,0 +1,56 @@
+---
+title: "Background Geolocation"
+description: Plugin Capacitor yang memungkinkan Anda menerima pembaruan geolokasi yang akurat bahkan saat aplikasi di latar belakang
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+locale: id
+hero:
+  tagline: Terima pembaruan geolokasi yang akurat bahkan saat aplikasi di latar belakang.
+  image:
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Pelacakan Akurat" icon="rocket">
+    Memprioritaskan akurasi untuk kasus penggunaan seperti hiking dan navigasi 🎯
+  </Card>
+  <Card title="Pembaruan Latar Belakang" icon="puzzle">
+    Terus menerima pembaruan lokasi bahkan saat aplikasi di latar belakang 🏃
+  </Card>
+  <Card title="Efisien Baterai" icon="setting">
+    Dioptimalkan untuk menyeimbangkan akurasi dan konsumsi baterai 🔋
+  </Card>
+  <Card title="Memulai" icon="open-book">
+    Periksa [Panduan Memulai](/docs/plugins/background-geolocation/getting-started/) untuk menginstal dan mengkonfigurasi plugin.
+  </Card>
+</CardGrid>
+
+## Perbandingan Plugin
+
+Perbandingan singkat antara tiga plugin background-geolocation utama yang biasa digunakan dalam aplikasi Capacitor.
+
+| Plugin | Akurasi | Latar Belakang | Upload HTTP | Harga |
+|--------|----------|------------|-------------|---------|
+| `@capacitor-community/background-geolocation` (Community) | Tidak akurat | Ya | Tidak | Gratis |
+| `@capgo/background-geolocation` (plugin ini) | Akurat | Ya | Tidak | Gratis |
+| Transistorsoft (original) | Akurat | Ya | Ya — pengunggah HTTP bawaan ke API Anda | Berbayar |
+
+**Catatan:**
+- Plugin Community ringan dan terus bekerja di latar belakang, tetapi diketahui kurang akurat dibandingkan opsi di bawah ini.
+- Plugin Capgo ini dioptimalkan untuk memberikan posisi lokasi yang akurat dan operasi latar belakang yang dapat diandalkan tanpa memerlukan lisensi berbayar.
+- Transistorsoft menawarkan solusi komersial lengkap yang juga menyertakan kemampuan upload HTTP bawaan untuk mengirim data lokasi ke backend Anda.

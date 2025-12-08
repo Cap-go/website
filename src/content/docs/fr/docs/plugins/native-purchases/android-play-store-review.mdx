@@ -1,0 +1,795 @@
+---
+title: Directives de révision Android Play Store pour les IAP
+locale: fr
+description: Guide complet pour réussir la révision Google Play avec des achats intégrés et des abonnements, incluant les exigences de conformité et les bonnes pratiques.
+sidebar:
+  order: 11
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Obtenir l'approbation de votre application Android sur Google Play nécessite de se conformer aux politiques de Google, en particulier pour les applications avec des achats intégrés et des abonnements. Ce guide couvre tout ce dont vous avez besoin pour réussir la révision.
+
+## Exigences de Google Play Billing
+
+### Système de facturation obligatoire
+
+Pour les biens et services numériques, vous **devez** utiliser le système de facturation de Google Play :
+
+**Biens numériques (doivent utiliser Play Billing) :**
+- Abonnements aux fonctionnalités premium
+- Monnaie ou crédits intégrés
+- Contenu numérique (ebooks, musique, vidéos)
+- Améliorations et power-ups de jeux
+- Déverrouillages d'application et niveaux premium
+
+**Biens physiques (ne peuvent pas utiliser Play Billing) :**
+- Marchandises physiques
+- Services dans le monde réel
+- Dons ponctuels à des organisations à but non lucratif
+
+:::caution Exigence 2025
+Les nouvelles applications doivent utiliser les API `monetization.subscriptions` pour gérer les catalogues d'abonnements. Les anciennes API de facturation sont obsolètes.
+:::
+
+### Implémentation avec Native Purchases
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Assurez-vous que la facturation est disponible sur l'appareil
+const { isBillingSupported } = await NativePurchases.isBillingSupported();
+if (!isBillingSupported) throw new Error('Google Play Billing non disponible');
+
+// Récupérer les produits d'abonnement (les données de la boutique sont requises—ne jamais coder les prix en dur)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly', 'premium_yearly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Les identifiants de plan sont les ID de plan de base que vous créez dans Google Play Console
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  planIdentifier: 'monthly-plan', // REQUIS sur Android, ignoré sur iOS
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Jeton d\'achat pour validation serveur:', transaction.purchaseToken);
+```
+
+## Exigences de transparence et divulgation
+
+### Divulgation des prix à l'avance
+
+Google Play exige une divulgation claire de tous les coûts avant l'achat :
+
+**Éléments requis :**
+- Prix exact dans la devise locale de l'utilisateur
+- Fréquence de facturation (mensuelle, annuelle, etc.)
+- Ce qui est inclus dans l'abonnement
+- Coût total des offres d'introduction
+- Quand les frais seront appliqués
+
+![Bonnes pratiques de conception UI](/native-purchases/review-guides/ui-design-dos-donts.webp)
+
+**Exemple d'UI conforme :**
+```typescript
+function SubscriptionCard({ product }) {
+  return (
+    <div className="subscription-card">
+      <h3>{product.title}</h3>
+
+      {/* Afficher l'offre d'introduction si disponible */}
+      {product.introductoryPrice && (
+        <div className="intro-offer">
+          <p className="intro-price">{product.introductoryPriceString}</p>
+          <p className="intro-period">
+            pour {product.introductoryPricePeriod}
+          </p>
+        </div>
+      )}
+
+      {/* Prix régulier */}
+      <div className="regular-price">
+        <p className="price">{product.priceString}</p>
+        <p className="period">par {product.subscriptionPeriod}</p>
+      </div>
+
+      {/* Description claire */}
+      <p>{product.description}</p>
+
+      {/* Conditions de renouvellement */}
+      <p className="terms">
+        Se renouvelle automatiquement. Annulez à tout moment dans Google Play.
+      </p>
+
+      <button onClick={() => handlePurchase(product)}>
+        S'abonner maintenant
+      </button>
+    </div>
+  );
+}
+```
+
+### Divulgation du renouvellement automatique
+
+Avant qu'un abonnement ne se renouvelle automatiquement, Google exige :
+- Notification claire que le renouvellement aura lieu
+- Rappel du prix
+- Accès facile à l'annulation
+
+:::tip
+Le plugin native-purchases fonctionne avec Google Play pour gérer automatiquement les notifications de renouvellement automatique. Assurez-vous que vos produits d'abonnement sont correctement configurés dans Google Play Console.
+:::
+
+### Cohérence des prix entre les plateformes
+
+**Règle critique :** Les prix doivent être cohérents sur toutes les plateformes où votre application est disponible.
+
+**Exemple de violation :**
+- iOS : 9,99 $/mois
+- Android : 7,99 $/mois
+- Web : 11,99 $/mois
+
+**Pourquoi c'est important :** Les utilisateurs peuvent capturer des différences de prix et les signaler à Google, déclenchant des violations de politique.
+
+## Exigences de politique de confidentialité
+
+### Politique de confidentialité obligatoire
+
+Si votre application inclut des achats intégrés, vous devez :
+
+1. **Lien dans la fiche Play Store**
+   - Ajouter l'URL de la politique de confidentialité dans Play Console
+   - Doit être accessible publiquement
+   - Doit être dans la même langue que votre application
+
+2. **Lien dans l'application**
+   - Afficher la politique de confidentialité dans les paramètres de l'application
+   - Afficher avant de collecter des données utilisateur
+   - Rendre facilement découvrable
+
+**Exemple d'implémentation :**
+```typescript
+function SettingsScreen() {
+  const openPrivacyPolicy = () => {
+    window.open('https://yourapp.com/privacy', '_blank');
+  };
+
+  const openTerms = () => {
+    window.open('https://yourapp.com/terms', '_blank');
+  };
+
+  return (
+    <div>
+      <h2>Paramètres</h2>
+
+      <button onClick={openPrivacyPolicy}>
+        Politique de confidentialité
+      </button>
+
+      <button onClick={openTerms}>
+        Conditions d'utilisation
+      </button>
+
+      <button onClick={() => NativePurchases.showManageSubscriptions()}>
+        Gérer les abonnements
+      </button>
+    </div>
+  );
+}
+```
+
+### Section Sécurité des données
+
+Google Play exige une divulgation détaillée dans la section Sécurité des données :
+
+**Pour les applications IAP, déclarez :**
+- Collecte de l'historique des achats
+- Adresses e-mail (pour les reçus)
+- ID d'appareil (pour la prévention de la fraude)
+- Traitement des informations de paiement
+- Collecte de données d'analyse
+
+:::warning
+La section Sécurité des données est juridiquement contraignante. Des déclarations inexactes peuvent entraîner la suppression de l'application.
+:::
+
+## Raisons de rejet courantes
+
+### 1. Implémentation de facturation manquante ou incorrecte
+
+**Pourquoi ça échoue :**
+- Ne pas utiliser Google Play Billing pour les biens numériques
+- Utiliser des API de facturation obsolètes
+- Implémenter des solutions de paiement personnalisées pour les abonnements
+
+**Prévention :**
+```typescript
+// ✅ Correct : Utiliser native-purchases (utilise Google Play Billing)
+await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly'
+});
+
+// ❌ Incorrect : Processeur de paiement personnalisé pour les abonnements
+// await CustomPayment.charge(user, 9.99);
+```
+
+### 2. Prix peu clair ou coûts cachés
+
+**Pourquoi ça échoue :**
+- Prix affiché uniquement après avoir cliqué sur acheter
+- Frais supplémentaires non divulgués à l'avance
+- Conditions d'abonnement vagues
+
+**Prévention :**
+```typescript
+function PurchaseScreen({ product }) {
+  return (
+    <div>
+      {/* Afficher TOUS les coûts à l'avance */}
+      <h2>Abonnement Premium</h2>
+
+      <div className="pricing">
+        <p className="price">{product.priceString}/mois</p>
+        <p className="taxes">Les taxes peuvent s'appliquer selon l'emplacement</p>
+      </div>
+
+      <div className="features">
+        <h3>Inclut :</h3>
+        <ul>
+          <li>Expérience sans publicité</li>
+          <li>Stockage cloud illimité</li>
+          <li>Support prioritaire</li>
+        </ul>
+      </div>
+
+      <div className="terms">
+        <p>
+          L'abonnement se renouvelle automatiquement sauf annulation au moins
+          24 heures avant la fin de la période en cours.
+        </p>
+        <p>
+          Gérer ou annuler dans les Abonnements Google Play.
+        </p>
+      </div>
+
+      <button onClick={handlePurchase}>
+        Commencer l'abonnement
+      </button>
+    </div>
+  );
+}
+```
+
+### 3. Modèles d'abonnement trompeurs
+
+**Pourquoi ça échoue :**
+- Pré-sélection des options premium
+- Masquage des alternatives moins chères
+- Rendre l'annulation difficile
+- Fausse urgence ("Seulement 3 places restantes !")
+
+![Bonnes pratiques de description](/native-purchases/review-guides/description-guidelines-1.webp)
+
+![Directives marketing](/native-purchases/review-guides/description-guidelines-2.webp)
+
+**Prévention :**
+- Afficher tous les niveaux d'abonnement de manière égale
+- Rendre l'annulation claire et accessible
+- Éviter les comptes à rebours ou la fausse rareté
+- Ne pas utiliser de dark patterns pour pousser les options coûteuses
+
+### 4. Tests incomplets
+
+**Pourquoi ça échoue :**
+- L'application plante lors de l'achat
+- Les produits ne se chargent pas
+- La confirmation d'achat ne s'affiche pas
+- Les fonctionnalités premium ne se déverrouillent pas après l'achat
+
+**Prévention :**
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Tests complets avant soumission
+async function testPurchaseFlow() {
+  try {
+    // 1. Tester le chargement des produits
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: ['premium_monthly', 'premium_yearly'],
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('✓ Produits chargés:', products.length);
+
+    // 2. Tester le flux d'achat
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: 'premium_monthly',
+      planIdentifier: 'monthly-plan',
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('✓ Achat terminé', transaction.transactionId);
+
+    // 3. Vérifier les droits
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    if (
+      purchases.some(
+        (purchase) =>
+          purchase.productIdentifier === 'premium_monthly' &&
+          ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') &&
+          purchase.isAcknowledged,
+      )
+    ) {
+      console.log('✓ Fonctionnalités premium déverrouillées');
+    }
+
+    // 4. Tester la restauration
+    await NativePurchases.restorePurchases();
+    console.log('✓ La restauration fonctionne');
+
+  } catch (error) {
+    console.error('✗ Test échoué:', error);
+  }
+}
+```
+
+### 5. Violations de la politique de confidentialité
+
+**Pourquoi ça échoue :**
+- Pas de lien de politique de confidentialité dans l'application
+- Politique de confidentialité non accessible
+- Collecte de données non divulguée
+- Section Sécurité des données inexacte
+
+**Prévention :**
+- Ajouter la politique de confidentialité à la fiche Play Store
+- Inclure un lien dans les paramètres de l'application
+- Remplir avec précision la section Sécurité des données
+- Mettre à jour la politique lors de l'ajout de nouvelle collecte de données
+
+## Systèmes de facturation alternatifs (Mise à jour 2025)
+
+### Conformité régionale
+
+Google permet désormais les systèmes de facturation alternatifs dans certaines régions :
+
+**Régions éligibles :**
+- Espace économique européen (EEE)
+- Corée du Sud
+- Inde (bientôt disponible)
+
+**Exigences en cas d'utilisation de facturation alternative :**
+- Doit toujours offrir Google Play Billing comme option
+- Communication claire aux utilisateurs sur le choix
+- Conformité aux réglementations locales
+- Les frais de service s'appliquent toujours (réduits)
+
+:::note
+Pour la plupart des développeurs, s'en tenir uniquement à Google Play Billing est plus simple. Le plugin native-purchases gère cela automatiquement.
+:::
+
+## Gestion des abonnements
+
+### Annulation facile
+
+Les utilisateurs doivent pouvoir :
+- Voir facilement les abonnements actifs
+- Annuler sans contacter le support
+- Comprendre quand l'annulation prend effet
+
+**Implémentation :**
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+function ManageSubscriptionButton() {
+  const openManagement = async () => {
+    try {
+      // Ouvre la gestion des abonnements Google Play
+      await NativePurchases.showManageSubscriptions();
+    } catch (error) {
+      // Solution de secours vers l'URL directe
+      const playStoreUrl = 'https://play.google.com/store/account/subscriptions';
+      window.open(playStoreUrl, '_blank');
+    }
+  };
+
+  return (
+    <button onClick={openManagement}>
+      Gérer l'abonnement dans Google Play
+    </button>
+  );
+}
+```
+
+### Période de grâce d'annulation
+
+**Divulgation requise :**
+- Quand l'annulation prend-elle effet ?
+- Les utilisateurs conservent-ils l'accès jusqu'à la fin de la période ?
+- Des remboursements partiels sont-ils disponibles ?
+
+```typescript
+function CancellationInfo() {
+  return (
+    <div className="cancellation-info">
+      <h3>Politique d'annulation</h3>
+      <ul>
+        <li>Annulez à tout moment dans Google Play</li>
+        <li>L'accès continue jusqu'à la fin de la période de facturation</li>
+        <li>Pas de remboursement pour les périodes partielles</li>
+        <li>Réabonnez-vous à tout moment pour retrouver l'accès</li>
+      </ul>
+
+      <button onClick={() => NativePurchases.showManageSubscriptions()}>
+        Gérer dans Google Play
+      </button>
+    </div>
+  );
+}
+```
+
+## Liste de vérification avant soumission
+
+![Liste de vérification avant soumission](/native-purchases/review-guides/pre-submission-checklist.webp)
+
+<Steps>
+
+1. **Vérifier l'implémentation de la facturation**
+   - Utilisation de Google Play Billing (via native-purchases)
+   - Tous les produits d'abonnement créés dans Play Console
+   - Les produits sont activés et publiés
+   - Prix définis pour tous les pays cibles
+
+2. **Tester les flux d'achat**
+   - Créer un compte de test de licence
+   - Tester chaque niveau d'abonnement
+   - Vérifier que les produits se chargent correctement
+   - Tester l'achèvement de l'achat
+   - Vérifier que les fonctionnalités premium se déverrouillent
+   - Tester la restauration d'abonnement
+   - Tester sur plusieurs appareils
+
+3. **Réviser tout le texte**
+   - Prix affiché clairement avant l'achat
+   - Tous les frais divulgués à l'avance
+   - Les conditions d'abonnement sont claires
+   - Processus d'annulation expliqué
+   - Pas de revendications trompeuses
+
+4. **Conformité à la confidentialité**
+   - Politique de confidentialité liée dans Play Console
+   - Politique de confidentialité accessible dans l'application
+   - Section Sécurité des données complétée avec précision
+   - Permissions justifiées et documentées
+
+5. **Classification du contenu**
+   - Compléter le questionnaire de classification du contenu
+   - Assurer que la classification correspond au contenu réel
+   - Déclarer les achats intégrés dans le questionnaire
+
+6. **Préparer la fiche de la boutique**
+   - Description de l'application précise
+   - Captures d'écran montrant la version actuelle
+   - Graphique de fonctionnalité conforme aux exigences
+   - Tous les assets requis téléchargés
+
+</Steps>
+
+## Délai de révision
+
+**Révision initiale :** 7 jours en moyenne (peut être plus rapide)
+**Mises à jour :** Généralement plus rapide que la soumission initiale
+**Violations de politique :** Suspension immédiate possible
+**Appels :** 7-14 jours pour révision
+
+:::tip Révisions continues
+Contrairement à Apple, Google examine les applications en continu. Votre application peut être mise en ligne à tout moment pendant la période de révision, pas à un moment fixe.
+:::
+
+## Tests avant soumission
+
+### Tests de licence
+
+1. **Ajouter un compte de test :**
+   - Aller dans Play Console
+   - Configuration > Tests de licence
+   - Ajouter un compte Gmail pour les tests
+
+2. **Tester en sandbox :**
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Tester les achats avec un compte de test de licence
+async function testInSandbox() {
+  const { isBillingSupported } = await NativePurchases.isBillingSupported();
+  if (!isBillingSupported) {
+    console.error('Facturation non prise en charge dans cet environnement');
+    return;
+  }
+
+  // Récupérer les produits (renvoie les prix de test lors de l'utilisation d'un testeur de licence)
+  const { products } = await NativePurchases.getProducts({
+    productIdentifiers: ['premium_monthly'],
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Produits de test:', products);
+
+  // Effectuer un achat de test (aucun frais)
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'premium_monthly',
+    planIdentifier: 'monthly-plan',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Achat de test terminé:', transaction.transactionId);
+}
+```
+
+3. **Vérifier la bannière de test :**
+   - Lors de l'achat avec un compte de test
+   - Devrait voir une notification "Achat de test"
+   - Aucun frais réel n'est appliqué
+
+### Piste de test interne
+
+Avant la version de production :
+
+1. Créer une piste de test interne dans Play Console
+2. Télécharger APK/AAB
+3. Ajouter des adresses e-mail de testeurs
+4. Les testeurs téléchargent depuis Play Store (piste de test)
+5. Vérifier que les flux d'achat fonctionnent de bout en bout
+
+## Bonnes pratiques pour Native Purchases
+
+### Gérer tous les états d'achat
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function handlePurchase(productId: string, planIdentifier?: string) {
+  try {
+    setLoading(true);
+
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: productId,
+      planIdentifier,
+      productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
+    });
+
+    console.log('Jeton d\'achat:', transaction.purchaseToken ?? transaction.receipt);
+
+    // Succès - vérifier les droits de la boutique
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
+    });
+
+    const isOwned = purchases.some(
+      (purchase) =>
+        purchase.productIdentifier === productId &&
+        (purchase.purchaseState === 'PURCHASED' || purchase.purchaseState === '1') &&
+        purchase.isAcknowledged,
+    );
+
+    if (isOwned) {
+      unlockPremiumFeatures();
+      showSuccess('Premium activé !');
+    }
+
+  } catch (error: any) {
+    // Gérer les cas d'erreur spécifiques
+    switch (error.code) {
+      case 'USER_CANCELLED':
+        // L'utilisateur a annulé - pas besoin d'erreur
+        console.log('Achat annulé');
+        break;
+
+      case 'ITEM_ALREADY_OWNED':
+        // Ils le possèdent déjà - restaurer à la place
+        showInfo('Vous possédez déjà cela ! Restauration...');
+        await NativePurchases.restorePurchases();
+        break;
+
+      case 'ITEM_UNAVAILABLE':
+        showError('Cet abonnement est actuellement indisponible. Veuillez réessayer plus tard.');
+        break;
+
+      case 'NETWORK_ERROR':
+        showError('Erreur réseau. Veuillez vérifier votre connexion et réessayer.');
+        break;
+
+      default:
+        showError('L\'achat a échoué. Veuillez réessayer.');
+        console.error('Erreur d\'achat:', error);
+    }
+  } finally {
+    setLoading(false);
+  }
+}
+```
+
+### Implémenter la restauration des achats
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+function RestorePurchasesButton() {
+  const [loading, setLoading] = useState(false);
+
+  const handleRestore = async () => {
+    setLoading(true);
+
+    try {
+      await NativePurchases.restorePurchases();
+
+      const { purchases } = await NativePurchases.getPurchases({
+        productType: PURCHASE_TYPE.SUBS,
+      });
+
+      const hasSubscription = purchases.some(
+        (purchase) => purchase.productType === 'subs' && purchase.isAcknowledged,
+      );
+
+      if (hasSubscription) {
+        unlockPremiumFeatures();
+        showSuccess('Abonnements restaurés !');
+        return;
+      }
+
+      // Vérifier les déverrouillages uniques si nécessaire
+      const { purchases: iaps } = await NativePurchases.getPurchases({
+        productType: PURCHASE_TYPE.INAPP,
+      });
+      const hasInApp = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
+
+      if (hasInApp) {
+        unlockPremiumFeatures();
+        showSuccess('Achats précédents restaurés !');
+        return;
+      }
+
+      showInfo('Aucun achat précédent trouvé.');
+    } catch (error) {
+      showError('Échec de la restauration des achats. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button onClick={handleRestore} disabled={loading}>
+      {loading ? 'Restauration...' : 'Restaurer les achats'}
+    </button>
+  );
+}
+```
+
+### Vérifier le statut d'abonnement
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function checkSubscriptionStatus() {
+  try {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    const subscription = purchases.find(
+      (purchase) =>
+        purchase.productIdentifier === 'premium_monthly' &&
+        (purchase.purchaseState === 'PURCHASED' || purchase.purchaseState === '1') &&
+        purchase.isAcknowledged,
+    );
+
+    if (!subscription) {
+      showPaywall();
+      return;
+    }
+
+    console.log('Abonnement actif:', {
+      productId: subscription.productIdentifier,
+      expiresAt: subscription.expirationDate,
+      willRenew: subscription.willCancel === false,
+      purchaseToken: subscription.purchaseToken,
+    });
+
+    unlockPremiumFeatures();
+  } catch (error) {
+    console.error('Échec de la vérification de l\'abonnement:', error);
+  }
+}
+```
+
+## Si votre application est rejetée
+
+### Violations de politique courantes
+
+**Politique de paiements :**
+- Ne pas utiliser Google Play Billing
+- Conditions d'abonnement trompeuses
+- Coûts cachés
+
+**Politique de données utilisateur :**
+- Politique de confidentialité manquante
+- Déclarations inexactes de Sécurité des données
+- Permissions excessives
+
+### Étapes de résolution
+
+<Steps>
+
+1. **Examiner l'avis de violation**
+   - Lire la politique spécifique citée
+   - Comprendre ce que Google a signalé
+   - Vérifier les exemples qu'ils ont fournis
+
+2. **Corriger le problème**
+   - Traiter la cause profonde, pas seulement les symptômes
+   - Tester minutieusement après correction
+   - Documenter tous les changements effectués
+
+3. **Soumettre un appel (le cas échéant)**
+
+   ![Processus de clarification et d'appel](/native-purchases/review-guides/clarification-process.webp)
+
+   ```
+   Objet : Appel de violation de politique - [Nom de l'application]
+
+   Chère équipe de révision Google Play,
+
+   J'ai reçu une notification indiquant que mon application viole [Politique X.Y].
+   J'ai apporté les modifications suivantes pour me conformer :
+
+   1. [Modification spécifique apportée]
+   2. [Modification spécifique apportée]
+   3. [Modification spécifique apportée]
+
+   La version mise à jour [numéro de version] répond à toutes les préoccupations soulevées.
+
+   Compte de test pour vérification :
+   E-mail : test@example.com
+   Mot de passe : TestPass123
+
+   Merci pour votre considération.
+   ```
+
+   ![Exemple de demande de documents](/native-purchases/review-guides/request-documents.webp)
+
+4. **Resoumettre ou mettre à jour**
+   - Télécharger la version corrigée
+   - Resoumettre pour révision
+   - Surveiller le statut dans Play Console
+
+</Steps>
+
+## Ressources supplémentaires
+
+- [Centre de politique de développeur Google Play](https://play.google.com/about/developer-content-policy/)
+- [Documentation Google Play Billing](https://developer.android.com/google/play/billing)
+- [Bonnes pratiques pour les abonnements](https://developer.android.com/google/play/billing/subscriptions)
+- [Aide Play Console](https://support.google.com/googleplay/android-developer/)
+
+## Besoin d'aide d'expert ?
+
+Naviguer dans la révision Play Store peut être complexe, surtout avec les nouvelles exigences de test de 2025. Si vous avez besoin d'une assistance personnalisée :
+
+**[Réservez un appel de consultation avec notre équipe](https://cal.com/team/capgo/capacitor-consulting-services)** pour obtenir de l'aide avec :
+- Préparation complète de la révision Play Store
+- Configuration de la piste de test et recrutement de testeurs
+- Révision de l'implémentation IAP
+- Conformité Sécurité des données et confidentialité
+- Dépannage des rejets et appels
+- Processus complet de soumission d'application
+
+Nos experts ont guidé des centaines d'applications à travers des soumissions Play Store réussies et peuvent vous aider à naviguer dans les exigences de 2025.
+
+## Support
+
+Besoin d'aide avec l'implémentation ?
+- Consultez la [documentation Native Purchases](/docs/plugins/native-purchases/getting-started/)
+- Vérifiez le [guide de test sandbox Android](/docs/plugins/native-purchases/android-sandbox-testing/)
+- Visitez [Google Play Developer Support](https://support.google.com/googleplay/android-developer/)

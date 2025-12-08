@@ -1,0 +1,56 @@
+---
+title: "Background Geolocation"
+locale: ja
+description: アプリがバックグラウンドにある間でも正確な位置情報更新を受信できるCapacitorプラグイン
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: アプリがバックグラウンドにある間でも正確な位置情報更新を受信します。
+  image:
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="正確な追跡" icon="rocket">
+    ハイキングやナビゲーションなどのユースケースに精度を優先 🎯
+  </Card>
+  <Card title="バックグラウンド更新" icon="puzzle">
+    アプリがバックグラウンドにある場合でも位置情報更新を受信し続けます 🏃
+  </Card>
+  <Card title="バッテリー効率" icon="setting">
+    精度とバッテリー消費のバランスを最適化 🔋
+  </Card>
+  <Card title="はじめに" icon="open-book">
+    [はじめにガイド](/docs/plugins/background-geolocation/getting-started/)を確認して、プラグインをインストールして設定します。
+  </Card>
+</CardGrid>
+
+## プラグイン比較
+
+Capacitorアプリで一般的に使用される3つの主要なバックグラウンド位置情報プラグインの簡単な比較。
+
+| プラグイン | 精度 | バックグラウンド | HTTP アップロード | 価格 |
+|--------|----------|------------|-------------|---------|
+| `@capacitor-community/background-geolocation` (コミュニティ) | 不正確 | はい | いいえ | 無料 |
+| `@capgo/background-geolocation` (このプラグイン) | 正確 | はい | いいえ | 無料 |
+| Transistorsoft (オリジナル) | 正確 | はい | はい — API への組み込みHTTPアップローダー | 有料 |
+
+**注意:**
+- コミュニティプラグインは軽量で、バックグラウンドで動作し続けますが、以下のオプションよりも精度が低いことが知られています。
+- このCapgoプラグインは、有料ライセンスを必要とせずに、正確な位置情報修正と信頼性の高いバックグラウンド動作を提供するように最適化されています。
+- Transistorsoftは、バックエンドに位置情報データを送信するための組み込みHTTPアップロード機能も含む完全な商用ソリューションを提供しています。

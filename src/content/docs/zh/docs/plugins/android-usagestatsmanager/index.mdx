@@ -1,0 +1,146 @@
+---
+title: "@capgo/capacitor-android-usagestatsmanager"
+locale: zh
+description: 适用于 Capacitor 应用的 Android 使用统计插件，具有应用使用跟踪、屏幕时间监控和使用分析功能。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 访问 Android 使用统计数据以监控应用使用情况、屏幕时间和具有系统级数据的用户行为分析。
+  image:
+    file: ~public/icons/plugins/android-usagestatsmanager.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/android-usagestatsmanager/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-usagestatsmanager/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概述
+
+Capacitor Android Usage Stats Manager 插件将 Android 的 UsageStatsManager SDK 公开给 Capacitor 应用程序，使其能够访问详细的应用使用统计数据和设备使用数据。此插件允许开发人员跟踪应用使用模式、屏幕时间和 Android 设备上的用户行为分析。
+
+<CardGrid stagger>
+  <Card title="使用统计" icon="rocket">
+    访问 Android UsageStatsManager SDK 数据 📱
+  </Card>
+  <Card title="应用监控" icon="moon">
+    跟踪单个应用的使用时间和频率 🕐
+  </Card>
+  <Card title="权限管理" icon="approve-check">
+    无缝处理使用统计权限 🛡️
+  </Card>
+  <Card title="包信息" icon="puzzle">
+    查询已安装包的详细信息和元数据 📦
+  </Card>
+</CardGrid>
+
+## 安装
+
+```bash
+npm install @capgo/capacitor-android-usagestatsmanager
+npx cap sync
+```
+
+## 所需权限
+
+将这些权限添加到您的 `android/app/src/main/AndroidManifest.xml`：
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## 核心 API 方法
+
+### 使用统计
+- `queryAndAggregateUsageStats(options)` - 检索已安装应用的详细使用统计数据
+- `isUsageStatsPermissionGranted()` - 检查是否授予了使用统计权限
+- `openUsageStatsSettings()` - 打开用于使用统计权限的系统设置
+
+### 包信息
+- `queryAllPackages()` - 获取所有已安装包的信息
+
+## 使用示例
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// 检查是否授予了权限
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // 打开设置以授予权限
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// 查询使用统计数据
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7 天前
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Usage statistics:', usageStats);
+
+// 获取所有已安装的包
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installed packages:', packages);
+```
+
+## 权限处理
+
+该插件需要无法通过正常的运行时权限请求授予的特殊权限：
+
+1. **PACKAGE_USAGE_STATS**：允许访问使用统计数据
+2. **QUERY_ALL_PACKAGES**：包信息所需（Android 11+）
+
+用户必须通过系统设置手动授予这些权限。使用 `openUsageStatsSettings()` 将用户引导到适当的设置页面。
+
+## 数据类型
+
+### 使用统计
+- 应用使用时间和频率
+- 首次和最后一次使用时间
+- 前台总时间
+- 启动次数
+
+### 包信息
+- 包名和版本
+- 安装时间
+- 应用标签和图标
+- 系统应用与用户应用
+
+## 使用场景
+
+- **数字健康应用**：监控屏幕时间和应用使用情况
+- **家长控制**：跟踪儿童的设备使用情况
+- **生产力应用**：分析工作模式和专注时间
+- **分析**：了解用户行为和应用参与度
+
+## Android 兼容性
+
+- **最低 Android 版本**：API level 21（Android 5.0）
+- **高级功能**：API level 29+（Android 10+）以获得增强的统计数据
+- **包查询**：API level 30+（Android 11+）需要 QUERY_ALL_PACKAGES
+
+## 安全注意事项
+
+- 使用统计权限是敏感的，需要用户同意
+- 收集使用数据时考虑用户隐私
+- 实施适当的数据处理和存储实践
+- 遵循 Google Play 的使用数据收集政策
+
+## 文档
+
+查看[完整文档](/docs/plugins/android-usagestatsmanager/getting-started/)以获取详细的实现指南和高级使用模式。

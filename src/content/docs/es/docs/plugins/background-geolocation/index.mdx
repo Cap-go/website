@@ -1,0 +1,56 @@
+---
+title: "Background Geolocation"
+locale: es
+description: Un plugin de Capacitor que te permite recibir actualizaciones precisas de geolocalización incluso mientras la app está en segundo plano
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Recibe actualizaciones precisas de geolocalización incluso mientras la app está en segundo plano.
+  image:
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Rastreo Preciso" icon="rocket">
+    Prioriza la precisión para casos de uso como senderismo y navegación 🎯
+  </Card>
+  <Card title="Actualizaciones en Segundo Plano" icon="puzzle">
+    Continúa recibiendo actualizaciones de ubicación incluso cuando la app está en segundo plano 🏃
+  </Card>
+  <Card title="Eficiente en Batería" icon="setting">
+    Optimizado para equilibrar precisión y consumo de batería 🔋
+  </Card>
+  <Card title="Comenzar" icon="open-book">
+    Consulta la [Guía de Inicio](/docs/plugins/background-geolocation/getting-started/) para instalar y configurar el plugin.
+  </Card>
+</CardGrid>
+
+## Comparación de Plugins
+
+Una breve comparación entre los tres principales plugins de geolocalización en segundo plano comúnmente usados en aplicaciones Capacitor.
+
+| Plugin | Precisión | Segundo Plano | Carga HTTP | Precio |
+|--------|-----------|---------------|------------|--------|
+| `@capacitor-community/background-geolocation` (Community) | No preciso | Sí | No | Gratis |
+| `@capgo/background-geolocation` (este plugin) | Preciso | Sí | No | Gratis |
+| Transistorsoft (original) | Preciso | Sí | Sí — cargador HTTP integrado a tu API | Pago |
+
+**Notas:**
+- El plugin Community es ligero y continúa funcionando en segundo plano, pero se sabe que es menos preciso que las opciones siguientes.
+- Este plugin de Capgo está optimizado para proporcionar posiciones de ubicación precisas y operación confiable en segundo plano sin requerir una licencia de pago.
+- Transistorsoft ofrece una solución comercial completa que también incluye capacidades integradas de carga HTTP para enviar datos de ubicación a tu backend.

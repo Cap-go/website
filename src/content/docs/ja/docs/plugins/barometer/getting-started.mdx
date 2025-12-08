@@ -1,0 +1,214 @@
+---
+title: "Barometerのはじめに"
+locale: ja
+description: "Capacitorアプリに気圧センシングを統合する方法を学びます"
+---
+
+このガイドでは、Capacitor Barometerプラグインをアプリケーションに統合する手順を説明します。
+
+## インストール
+
+npmを使用してプラグインをインストールします:
+
+```bash
+npm install @capgo/capacitor-barometer
+npx cap sync
+```
+
+## iOS設定
+
+`Info.plist` に以下を追加します:
+
+```xml
+<key>NSMotionUsageDescription</key>
+<string>This app uses the barometer to measure atmospheric pressure</string>
+```
+
+## Android設定
+
+追加の設定は必要ありません。プラグインは必要な権限を自動的にリクエストします。
+
+## 基本的な使用方法
+
+### プラグインをインポート
+
+```typescript
+import { Barometer } from '@capgo/capacitor-barometer';
+```
+
+### センサーの可用性を確認
+
+```typescript
+const checkBarometer = async () => {
+  const { available } = await Barometer.isAvailable();
+  console.log('Barometer available:', available);
+};
+```
+
+### 気圧の監視を開始
+
+```typescript
+const startMonitoring = async () => {
+  await Barometer.start({
+    interval: 1000 // ミリ秒単位の更新間隔
+  });
+
+  console.log('Barometer monitoring started');
+};
+```
+
+### 気圧イベントをリッスン
+
+```typescript
+Barometer.addListener('pressureChange', (data) => {
+  console.log('Pressure (hPa):', data.pressure);
+  console.log('Relative altitude (m):', data.relativeAltitude);
+  console.log('Timestamp:', data.timestamp);
+});
+```
+
+### 現在の読み取り値を取得
+
+```typescript
+const getCurrentPressure = async () => {
+  const reading = await Barometer.getCurrentReading();
+  console.log('Current pressure:', reading.pressure, 'hPa');
+  console.log('Relative altitude:', reading.relativeAltitude, 'm');
+};
+```
+
+### 監視を停止
+
+```typescript
+const stopMonitoring = async () => {
+  await Barometer.stop();
+  console.log('Barometer monitoring stopped');
+};
+```
+
+## 完全な例
+
+気圧計統合を示す完全な例:
+
+```typescript
+import { Barometer } from '@capgo/capacitor-barometer';
+
+class BarometerService {
+  private listener: any;
+
+  async initialize() {
+    // 可用性を確認
+    const { available } = await Barometer.isAvailable();
+    if (!available) {
+      console.error('Barometer not available on this device');
+      return;
+    }
+
+    // 監視を開始
+    await Barometer.start({ interval: 1000 });
+
+    // リスナーを追加
+    this.listener = Barometer.addListener('pressureChange', (data) => {
+      this.handlePressureChange(data);
+    });
+  }
+
+  handlePressureChange(data: any) {
+    console.log('Pressure:', data.pressure, 'hPa');
+    console.log('Altitude:', data.relativeAltitude, 'm');
+
+    // UIを更新またはデータを処理
+    this.updateDisplay(data);
+  }
+
+  updateDisplay(data: any) {
+    // hPaを他の単位に変換
+    const inHg = (data.pressure * 0.02953).toFixed(2);
+    const mmHg = (data.pressure * 0.750062).toFixed(1);
+
+    console.log(`Pressure: ${data.pressure.toFixed(1)} hPa`);
+    console.log(`         ${inHg} inHg`);
+    console.log(`         ${mmHg} mmHg`);
+    console.log(`Altitude: ${data.relativeAltitude.toFixed(1)} m`);
+  }
+
+  async cleanup() {
+    // リスナーを削除
+    if (this.listener) {
+      this.listener.remove();
+    }
+
+    // 監視を停止
+    await Barometer.stop();
+  }
+}
+
+// 使用方法
+const barometerService = new BarometerService();
+barometerService.initialize();
+
+// 完了したらクリーンアップ
+// barometerService.cleanup();
+```
+
+## 読み取り値の理解
+
+### 大気圧
+- ヘクトパスカル（hPa）またはミリバール（mb）で測定
+- 標準海面気圧: 1013.25 hPa
+- 高度が高い = 気圧が低い
+- 気象システムが気圧の読み取り値に影響します
+
+### 相対高度
+- 気圧変化から計算
+- 開始基準点に対する相対値
+- 精度: ±10-30メートル
+- 短期追跡に最適
+
+## ベストプラクティス
+
+1. **可用性を確認**: 使用前に常にセンサーの可用性を確認
+2. **妥当な間隔**: 頻繁にポーリングしすぎない（1000msが適切）
+3. **リスナーを削除**: 不要になったらリスナーをクリーンアップ
+4. **キャリブレーション**: 正確な読み取りのために既知の高度を使用
+5. **バッテリーへの影響**: 連続センシングでバッテリー使用量を監視
+
+## よくある問題
+
+### センサーが利用できない
+```typescript
+try {
+  const { available } = await Barometer.isAvailable();
+  if (!available) {
+    // GPS高度または手動入力にフォールバック
+    showAlternativeMethod();
+  }
+} catch (error) {
+  console.error('Barometer check failed:', error);
+}
+```
+
+### ノイズの多いデータ
+```typescript
+class PressureFilter {
+  private readings: number[] = [];
+  private maxReadings = 5;
+
+  addReading(pressure: number): number {
+    this.readings.push(pressure);
+    if (this.readings.length > this.maxReadings) {
+      this.readings.shift();
+    }
+
+    // 移動平均を返す
+    const sum = this.readings.reduce((a, b) => a + b, 0);
+    return sum / this.readings.length;
+  }
+}
+```
+
+## 次のステップ
+
+- 完全なメソッドドキュメントについては、[APIリファレンス](https://github.com/Cap-go/capacitor-barometer#api)を参照
+- 高度な使用方法については、[サンプルアプリ](https://github.com/Cap-go/capacitor-barometer/tree/main/example)を確認
+- 完全な実装例については、[チュートリアル](/plugins-tutorials/capacitor-barometer)を参照

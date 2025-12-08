@@ -1,0 +1,207 @@
+---
+title: Iniziare
+description: Scopri come installare e utilizzare il plugin AppInsights per le analytics dell'applicazione nella tua app Capacitor.
+sidebar:
+  order: 2
+locale: it
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-appinsights" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilizzo
+
+Importa il plugin e inizializzalo con le tue credenziali AppInsights:
+
+```typescript
+import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
+
+// Initialize the SDK
+const initializeAnalytics = async () => {
+  await CapacitorAppinsights.init({
+    partnerId: 'your-partner-id',
+    partnerKey: 'your-partner-key'
+  });
+};
+
+// Set user ID for tracking
+const setUser = async (userId: string) => {
+  await CapacitorAppinsights.setUserId({ userId });
+};
+
+// Get SDK state
+const checkSDKState = async () => {
+  const state = await CapacitorAppinsights.getState();
+  console.log('SDK State:', state);
+};
+
+// Get plugin version
+const checkVersion = async () => {
+  const { version } = await CapacitorAppinsights.getPluginVersion();
+  console.log('Plugin version:', version);
+};
+```
+
+## Riferimento API
+
+### init(options)
+
+Inizializza l'SDK AppInsights con le tue credenziali.
+
+```typescript
+await CapacitorAppinsights.init({
+  partnerId: 'your-partner-id',
+  partnerKey: 'your-partner-key'
+});
+```
+
+**Parametri:**
+- `partnerId` (string): Il tuo ID partner AppInsights
+- `partnerKey` (string): La tua chiave partner AppInsights
+
+### setUserId(options)
+
+Imposta o aggiorna l'ID utente dopo l'inizializzazione.
+
+```typescript
+await CapacitorAppinsights.setUserId({
+  userId: 'user-123'
+});
+```
+
+**Parametri:**
+- `userId` (string): L'ID utente da impostare per il tracciamento
+
+### getState()
+
+Ottieni lo stato corrente dell'SDK.
+
+```typescript
+const state = await CapacitorAppinsights.getState();
+console.log(state);
+// {
+//   initCompleted: true,
+//   jobScheduled: true,
+//   permissionAcquired: true
+// }
+```
+
+**Restituisce:**
+- `initCompleted` (boolean): Se l'inizializzazione dell'SDK è completata
+- `jobScheduled` (boolean): Se il job di raccolta dati è pianificato
+- `permissionAcquired` (boolean): Se i permessi necessari sono acquisiti
+
+### getPluginVersion()
+
+Ottieni la versione del plugin Capacitor nativo.
+
+```typescript
+const { version } = await CapacitorAppinsights.getPluginVersion();
+console.log('Version:', version);
+```
+
+## Esempio Completo
+
+```typescript
+import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
+
+export class AnalyticsService {
+  private initialized = false;
+
+  async initialize(partnerId: string, partnerKey: string) {
+    try {
+      await CapacitorAppinsights.init({
+        partnerId,
+        partnerKey
+      });
+
+      const state = await CapacitorAppinsights.getState();
+      this.initialized = state.initCompleted;
+
+      console.log('AppInsights initialized:', state);
+    } catch (error) {
+      console.error('Failed to initialize AppInsights:', error);
+    }
+  }
+
+  async identifyUser(userId: string) {
+    if (!this.initialized) {
+      throw new Error('AppInsights not initialized');
+    }
+
+    await CapacitorAppinsights.setUserId({ userId });
+    console.log('User identified:', userId);
+  }
+
+  async getSDKStatus() {
+    const state = await CapacitorAppinsights.getState();
+    return {
+      ready: state.initCompleted && state.permissionAcquired,
+      tracking: state.jobScheduled,
+      state
+    };
+  }
+}
+```
+
+## Migliori Pratiche
+
+1. **Inizializza presto**
+   Inizializza l'SDK non appena la tua app si avvia per garantire un tracciamento accurato:
+   ```typescript
+   // In your app initialization
+   await CapacitorAppinsights.init({
+     partnerId: process.env.APPINSIGHTS_PARTNER_ID,
+     partnerKey: process.env.APPINSIGHTS_PARTNER_KEY
+   });
+   ```
+
+2. **Imposta l'ID utente al login**
+   Identifica gli utenti dopo l'autenticazione:
+   ```typescript
+   async function onUserLogin(user) {
+     await CapacitorAppinsights.setUserId({
+       userId: user.id
+     });
+   }
+   ```
+
+3. **Verifica lo stato dell'SDK**
+   Verifica che l'SDK sia pronto prima di operazioni critiche:
+   ```typescript
+   const state = await CapacitorAppinsights.getState();
+   if (!state.initCompleted) {
+     console.warn('AppInsights not ready');
+   }
+   ```
+
+4. **Gestisci gli errori in modo elegante**
+   ```typescript
+   try {
+     await CapacitorAppinsights.init(config);
+   } catch (error) {
+     console.error('Analytics initialization failed:', error);
+     // Continue app operation even if analytics fails
+   }
+   ```
+
+## Note sulla Piattaforma
+
+### iOS
+- Richiede iOS 10.0+
+- Assicurati di avere i permessi necessari in Info.plist per il tracciamento
+
+### Android
+- Richiede Android 5.0 (API 21)+
+- Potrebbe richiedere il permesso delle statistiche di utilizzo a seconda delle funzionalità di tracciamento
+
+### Web
+- Non supportato sulla piattaforma web

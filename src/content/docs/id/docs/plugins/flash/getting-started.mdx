@@ -1,0 +1,197 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Flash untuk mengontrol senter perangkat Anda dalam aplikasi Capacitor.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+Import plugin dan gunakan metodenya untuk mengontrol senter:
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// Check if flashlight is available
+const checkFlashlight = async () => {
+  const { value } = await CapacitorFlash.isAvailable();
+  console.log('Flashlight available:', value);
+};
+
+// Turn on flashlight
+const turnOn = async () => {
+  await CapacitorFlash.switchOn();
+};
+
+// Turn off flashlight
+const turnOff = async () => {
+  await CapacitorFlash.switchOff();
+};
+
+// Check if flashlight is on
+const checkStatus = async () => {
+  const { value } = await CapacitorFlash.isSwitchedOn();
+  console.log('Flashlight is on:', value);
+};
+
+// Toggle flashlight
+const toggle = async () => {
+  await CapacitorFlash.toggle();
+};
+```
+
+## Referensi API
+
+### isAvailable()
+
+Memeriksa apakah senter tersedia pada perangkat.
+
+```typescript
+const result = await CapacitorFlash.isAvailable();
+// Returns: { value: boolean }
+```
+
+### switchOn(options?)
+
+Menyalakan senter.
+
+```typescript
+interface SwitchOnOptions {
+  intensity?: number; // 0.0 to 1.0 (iOS only)
+}
+
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+### switchOff()
+
+Mematikan senter.
+
+```typescript
+await CapacitorFlash.switchOff();
+```
+
+### isSwitchedOn()
+
+Memeriksa apakah senter sedang menyala.
+
+```typescript
+const result = await CapacitorFlash.isSwitchedOn();
+// Returns: { value: boolean }
+```
+
+### toggle()
+
+Mengalihkan senter on/off.
+
+```typescript
+await CapacitorFlash.toggle();
+```
+
+## Contoh Lengkap
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+export class FlashlightService {
+  private isOn = false;
+
+  async init() {
+    const { value } = await CapacitorFlash.isAvailable();
+    if (!value) {
+      throw new Error('Flashlight not available on this device');
+    }
+  }
+
+  async toggle() {
+    if (this.isOn) {
+      await CapacitorFlash.switchOff();
+    } else {
+      await CapacitorFlash.switchOn();
+    }
+    this.isOn = !this.isOn;
+  }
+
+  async turnOn(intensity?: number) {
+    await CapacitorFlash.switchOn({ intensity });
+    this.isOn = true;
+  }
+
+  async turnOff() {
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+
+  async strobe(intervalMs: number = 100, duration: number = 3000) {
+    const endTime = Date.now() + duration;
+
+    while (Date.now() < endTime) {
+      await CapacitorFlash.toggle();
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+
+    // Ensure flashlight is off after strobe
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+}
+```
+
+## Praktik Terbaik
+
+1. **Periksa ketersediaan terlebih dahulu**
+   Selalu verifikasi ketersediaan senter sebelum menggunakannya:
+   ```typescript
+   const { value } = await CapacitorFlash.isAvailable();
+   if (!value) {
+     // Show alternative UI or disable flashlight features
+   }
+   ```
+
+2. **Tangani error dengan baik**
+   ```typescript
+   try {
+     await CapacitorFlash.switchOn();
+   } catch (error) {
+     console.error('Failed to turn on flashlight:', error);
+   }
+   ```
+
+3. **Matikan saat tidak diperlukan**
+   Selalu matikan senter ketika aplikasi Anda berpindah ke background atau ketika fitur tidak lagi diperlukan untuk menghemat baterai.
+
+4. **Hindari toggling yang cepat**
+   Terapkan debouncing untuk mencegah pergantian on/off yang cepat yang dapat merusak LED atau menguras baterai.
+
+## Catatan Platform
+
+### iOS
+- Memerlukan iOS 10.0+
+- Menggunakan mode torch `AVCaptureDevice`
+- Mendukung kontrol intensitas (0.0 hingga 1.0)
+
+### Android
+- Memerlukan Android 6.0 (API 23)+
+- Menggunakan Camera2 API
+- Kontrol intensitas tidak didukung (menggunakan kecerahan default)
+
+### Web
+- Didukung pada browser dengan MediaDevices API dan kemampuan torch
+- Menggunakan stream kamera untuk mengakses senter perangkat
+- Memerlukan izin pengguna untuk mengakses kamera
+- Bekerja paling baik pada browser mobile (Chrome di Android)
+- Browser desktop biasanya mengembalikan `isAvailable: false` (tidak ada hardware torch)
+- Kontrol intensitas tidak didukung pada web

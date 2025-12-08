@@ -1,0 +1,252 @@
+---
+title: はじめに
+locale: ja
+description: Speech Synthesisプラグインをインストールして使用し、Capacitorアプリでテキストを音声に変換する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+プラグインをインポートしてテキストから音声を合成します:
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+// 基本的なテキスト読み上げ
+const speak = async () => {
+  await SpeechSynthesis.speak({
+    text: 'Hello, world!',
+    language: 'en-US'
+  });
+};
+
+// 音声制御を伴う高度な使用方法
+const speakWithVoice = async () => {
+  await SpeechSynthesis.speak({
+    text: 'This is a test of speech synthesis.',
+    language: 'en-US',
+    rate: 1.0,      // 発話速度: 0.1から10.0
+    pitch: 1.0,     // 音声ピッチ: 0.5から2.0
+    volume: 1.0,    // 音量: 0.0から1.0
+    voice: 'com.apple.ttsbundle.Samantha-compact'
+  });
+};
+```
+
+## APIリファレンス
+
+### speak(options)
+
+指定された音声設定を使用してテキストを話します。
+
+```typescript
+interface SpeakOptions {
+  text: string;           // 話すテキスト
+  language?: string;      // 言語コード(例: 'en-US', 'es-ES')
+  rate?: number;          // 発話速度: 0.1から10.0(デフォルト: 1.0)
+  pitch?: number;         // 音声ピッチ: 0.5から2.0(デフォルト: 1.0)
+  volume?: number;        // 音量: 0.0から1.0(デフォルト: 1.0)
+  voice?: string;         // 音声識別子(getVoices()から取得)
+}
+
+await SpeechSynthesis.speak(options);
+```
+
+### stop()
+
+進行中の音声合成を停止します。
+
+```typescript
+await SpeechSynthesis.stop();
+```
+
+### getVoices()
+
+音声合成に利用可能な音声のリストを取得します。
+
+```typescript
+interface Voice {
+  voiceURI: string;       // 一意の音声識別子
+  name: string;           // 人間が読める音声名
+  lang: string;           // 言語コード
+  default: boolean;       // これがデフォルトの音声かどうか
+}
+
+const { voices } = await SpeechSynthesis.getVoices();
+console.log('Available voices:', voices);
+```
+
+### getSupportedLanguages()
+
+サポートされている言語コードのリストを取得します。
+
+```typescript
+const { languages } = await SpeechSynthesis.getSupportedLanguages();
+console.log('Supported languages:', languages);
+```
+
+### isSpeaking()
+
+音声合成が現在アクティブかどうかを確認します。
+
+```typescript
+const { speaking } = await SpeechSynthesis.isSpeaking();
+console.log('Currently speaking:', speaking);
+```
+
+## 完全な例
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+export class TextToSpeechService {
+  private currentVoice: string | undefined;
+
+  async init() {
+    // 利用可能な音声を取得
+    const { voices } = await SpeechSynthesis.getVoices();
+
+    // 英語の音声を見つける
+    const englishVoice = voices.find(v => v.lang.startsWith('en'));
+    this.currentVoice = englishVoice?.voiceURI;
+
+    console.log(`Using voice: ${englishVoice?.name}`);
+  }
+
+  async speak(text: string, options?: Partial<SpeakOptions>) {
+    try {
+      // 進行中の音声を停止
+      await SpeechSynthesis.stop();
+
+      // テキストを話す
+      await SpeechSynthesis.speak({
+        text,
+        language: 'en-US',
+        rate: 1.0,
+        pitch: 1.0,
+        volume: 1.0,
+        voice: this.currentVoice,
+        ...options
+      });
+    } catch (error) {
+      console.error('Speech synthesis failed:', error);
+      throw error;
+    }
+  }
+
+  async speakWithRate(text: string, rate: number) {
+    await this.speak(text, { rate });
+  }
+
+  async stop() {
+    await SpeechSynthesis.stop();
+  }
+
+  async checkIfSpeaking(): Promise<boolean> {
+    const { speaking } = await SpeechSynthesis.isSpeaking();
+    return speaking;
+  }
+
+  async listVoicesByLanguage(languageCode: string) {
+    const { voices } = await SpeechSynthesis.getVoices();
+    return voices.filter(v => v.lang.startsWith(languageCode));
+  }
+}
+```
+
+## 高度な使用方法
+
+### 多言語サポート
+
+```typescript
+// 異なる言語で話す
+const speakMultiLanguage = async () => {
+  await SpeechSynthesis.speak({
+    text: 'Hello!',
+    language: 'en-US'
+  });
+
+  await SpeechSynthesis.speak({
+    text: 'Bonjour!',
+    language: 'fr-FR'
+  });
+
+  await SpeechSynthesis.speak({
+    text: 'こんにちは!',
+    language: 'ja-JP'
+  });
+};
+```
+
+### 音声の選択
+
+```typescript
+// 特定の音声を選択
+const selectVoice = async (languageCode: string) => {
+  const { voices } = await SpeechSynthesis.getVoices();
+
+  // 言語で音声をフィルタリング
+  const languageVoices = voices.filter(v =>
+    v.lang.startsWith(languageCode)
+  );
+
+  // 利用可能な最初の音声を使用
+  if (languageVoices.length > 0) {
+    await SpeechSynthesis.speak({
+      text: 'Testing voice selection',
+      language: languageCode,
+      voice: languageVoices[0].voiceURI
+    });
+  }
+};
+```
+
+### 長いテキストの読み上げ
+
+```typescript
+// 長いテキストをチャンクに分割して話す
+const speakLongText = async (longText: string) => {
+  const sentences = longText.match(/[^.!?]+[.!?]+/g) || [longText];
+
+  for (const sentence of sentences) {
+    await SpeechSynthesis.speak({
+      text: sentence.trim(),
+      language: 'en-US',
+      rate: 0.9
+    });
+
+    // 文の間に少し待つ
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+};
+```
+
+## ベストプラクティス
+
+1. **音声の選択**: 特定の音声IDを使用する前に常に利用可能な音声を確認する
+2. **言語コード**: 標準言語コードを使用する(例: 'en-US', 'es-ES', 'fr-FR')
+3. **速度制御**: 自然な音声のために速度を0.5から2.0の間に保つ
+4. **話す前に停止**: 重複を避けるために新しい音声を開始する前にstop()を呼び出す
+5. **エラー処理**: 堅牢なエラー処理のためにすべての呼び出しをtry-catchブロックでラップする
+
+## トラブルシューティング
+
+### 一般的な問題
+
+**音声出力なし**: デバイスの音量を確認し、テキストが空でないことを確認する
+**音声が見つからない**: getVoices()を使用してデバイスで利用可能な音声を見つける
+**音声が中断される**: 新しい合成を開始する前に進行中の音声を停止する
+**言語がサポートされていない**: getSupportedLanguages()で利用可能な言語を確認する

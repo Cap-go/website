@@ -1,0 +1,204 @@
+---
+title: はじめに
+description: Capacitorアプリで安全な生体認証のためのNative Biometricプラグインをインストールして使用する方法を学びます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **権限を設定**
+
+   ### iOS
+   `Info.plist`にFace ID使用説明を追加します：
+   ```xml
+   <key>NSFaceIDUsageDescription</key>
+   <string>For secure authentication</string>
+   ```
+
+   ### Android
+   `AndroidManifest.xml`に生体認証の権限を追加します：
+   ```xml
+   <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+   ```
+</Steps>
+
+## 使用方法
+
+プラグインをインポートし、そのメソッドを生体認証に使用します：
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+// 生体認証が利用可能か確認
+const checkBiometric = async () => {
+  const result = await NativeBiometric.isAvailable();
+
+  if (result.isAvailable) {
+    console.log(`生体認証タイプ: ${result.biometryType}`);
+  }
+};
+
+// 生体認証を実行
+const verify = async () => {
+  const verified = await NativeBiometric.verifyIdentity({
+    reason: "アカウントへの安全なアクセスのため",
+    title: "認証",
+    subtitle: "本人確認",
+    description: "センサーに指を置いてください"
+  })
+    .then(() => true)
+    .catch(() => false);
+
+  if (verified) {
+    console.log("認証成功");
+  }
+};
+
+// 認証情報を安全に保存
+const saveCredentials = async () => {
+  await NativeBiometric.setCredentials({
+    username: "user@example.com",
+    password: "securepassword",
+    server: "https://api.example.com"
+  });
+};
+
+// 保存された認証情報を取得
+const getCredentials = async () => {
+  const credentials = await NativeBiometric.getCredentials({
+    server: "https://api.example.com"
+  });
+
+  console.log(credentials.username);
+  console.log(credentials.password);
+};
+
+// 保存された認証情報を削除
+const deleteCredentials = async () => {
+  await NativeBiometric.deleteCredentials({
+    server: "https://api.example.com"
+  });
+};
+```
+
+## APIリファレンス
+
+### isAvailable()
+
+デバイスで生体認証が利用可能かどうかを確認します。
+
+```typescript
+interface AvailableResult {
+  isAvailable: boolean;
+  biometryType?: BiometryType;
+  errorCode?: number;
+}
+
+enum BiometryType {
+  NONE = 0,
+  TOUCH_ID = 1,
+  FACE_ID = 2,
+  FINGERPRINT = 3,
+  FACE_AUTHENTICATION = 4,
+  IRIS_AUTHENTICATION = 5
+}
+```
+
+### verifyIdentity(options)
+
+生体認証を実行します。
+
+```typescript
+interface BiometricOptions {
+  reason?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  fallbackTitle?: string;
+  useFallback?: boolean;
+  maxAttempts?: number;
+}
+```
+
+### setCredentials(options)
+
+生体認証保護を使用して認証情報を安全に保存します。
+
+```typescript
+interface Credentials {
+  username: string;
+  password: string;
+  server: string;
+}
+```
+
+### getCredentials(options)
+
+生体認証後に保存された認証情報を取得します。
+
+```typescript
+interface GetCredentialOptions {
+  server: string;
+}
+```
+
+### deleteCredentials(options)
+
+保存された認証情報を削除します。
+
+```typescript
+interface DeleteCredentialOptions {
+  server: string;
+}
+```
+
+## ベストプラクティス
+
+1. **常に最初に可用性を確認**
+   ```typescript
+   const result = await NativeBiometric.isAvailable();
+   if (!result.isAvailable) {
+     // パスワード認証にフォールバック
+   }
+   ```
+
+2. **明確な理由を提供**
+   ユーザーの信頼を構築するために、生体認証が必要な理由を常に説明します。
+
+3. **エラーを適切に処理**
+   ```typescript
+   try {
+     await NativeBiometric.verifyIdentity({
+       reason: "安全なデータにアクセス"
+     });
+   } catch (error) {
+     // キャンセルまたは失敗を処理
+     console.log("認証に失敗またはキャンセルされました");
+   }
+   ```
+
+4. **適切なフォールバックを使用**
+   生体認証が失敗する可能性のあるデバイスのために、パスコードフォールバックを有効にします。
+
+## プラットフォームの違い
+
+### iOS
+- Touch IDとFace IDをサポート
+- Face IDには`NSFaceIDUsageDescription`が必要
+- デバイスパスコードへのフォールバックが利用可能
+
+### Android
+- 指紋、顔、虹彩認識をサポート
+- `USE_BIOMETRIC`権限が必要
+- Android 9以降用のBiometric Prompt API

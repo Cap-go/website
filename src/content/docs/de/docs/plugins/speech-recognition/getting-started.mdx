@@ -1,0 +1,445 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie das Speech Recognition Plugin installieren und verwenden, um Sprachtranskription zu Ihrer Capacitor-App hinzuzufügen
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-speech-recognition" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Plattformberechtigungen konfigurieren** (siehe unten)
+</Steps>
+
+## Plattformkonfiguration
+
+### iOS
+
+Fügen Sie die folgenden Schlüssel zur `Info.plist`-Datei Ihrer App hinzu:
+
+```xml
+<key>NSSpeechRecognitionUsageDescription</key>
+<string>Wir benötigen Zugriff auf die Spracherkennung, um Ihre Stimme zu transkribieren</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Wir benötigen Zugriff auf Ihr Mikrofon, um Audio für die Transkription aufzunehmen</string>
+```
+
+### Android
+
+Das Plugin fügt automatisch die erforderliche `RECORD_AUDIO`-Berechtigung zu Ihrer `AndroidManifest.xml` hinzu. Es ist keine zusätzliche Konfiguration erforderlich.
+
+## Grundlegende Verwendung
+
+### Verfügbarkeit überprüfen
+
+Überprüfen Sie vor der Verwendung der Spracherkennung, ob sie auf dem Gerät verfügbar ist:
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const checkAvailability = async () => {
+  const { available } = await SpeechRecognition.available();
+  if (!available) {
+    console.warn('Spracherkennung wird auf diesem Gerät nicht unterstützt');
+    return false;
+  }
+  return true;
+};
+```
+
+### Berechtigungen anfordern
+
+Fordern Sie die erforderlichen Berechtigungen an, bevor Sie die Erkennung starten:
+
+```typescript
+const requestPermissions = async () => {
+  const { speechRecognition } = await SpeechRecognition.requestPermissions();
+
+  if (speechRecognition === 'granted') {
+    console.log('Berechtigung erteilt');
+    return true;
+  } else {
+    console.log('Berechtigung verweigert');
+    return false;
+  }
+};
+```
+
+### Erkennung starten
+
+Beginnen Sie mit dem Hören auf Sprache mit optionaler Konfiguration:
+
+```typescript
+// Grundlegende Verwendung
+await SpeechRecognition.start({
+  language: 'de-DE',
+  maxResults: 3,
+  partialResults: true,
+});
+
+// Mit allen Optionen
+await SpeechRecognition.start({
+  language: 'de-DE',
+  maxResults: 5,
+  prompt: 'Jetzt sprechen...',          // Nur Android
+  popup: false,                     // Nur Android
+  partialResults: true,
+  addPunctuation: true,             // Nur iOS 16+
+  allowForSilence: 2000,            // Nur Android, Millisekunden
+});
+```
+
+### Auf Ergebnisse hören
+
+Abonnieren Sie Teilergebnisse, während die Erkennung aktiv ist:
+
+```typescript
+const partialListener = await SpeechRecognition.addListener(
+  'partialResults',
+  (event) => {
+    const transcription = event.matches?.[0];
+    console.log('Teilergebnis:', transcription);
+  }
+);
+
+// Vergessen Sie nicht, den Listener zu entfernen, wenn Sie fertig sind
+await partialListener.remove();
+```
+
+### Erkennung stoppen
+
+Hören Sie auf zuzuhören und räumen Sie Ressourcen auf:
+
+```typescript
+await SpeechRecognition.stop();
+```
+
+## Vollständiges Beispiel
+
+Hier ist ein vollständiges Beispiel, das zeigt, wie das Plugin verwendet wird:
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+export class VoiceRecognitionService {
+  private partialListener: any = null;
+  private isListening = false;
+
+  async initialize(): Promise<boolean> {
+    // Verfügbarkeit überprüfen
+    const { available } = await SpeechRecognition.available();
+    if (!available) {
+      throw new Error('Spracherkennung nicht verfügbar');
+    }
+
+    // Berechtigungen anfordern
+    const { speechRecognition } = await SpeechRecognition.requestPermissions();
+    if (speechRecognition !== 'granted') {
+      throw new Error('Berechtigung verweigert');
+    }
+
+    return true;
+  }
+
+  async startListening(
+    onPartialResult: (text: string) => void,
+    onFinalResult: (text: string) => void
+  ): Promise<void> {
+    if (this.isListening) {
+      console.warn('Hört bereits zu');
+      return;
+    }
+
+    try {
+      // Teilergebnisse-Listener einrichten
+      this.partialListener = await SpeechRecognition.addListener(
+        'partialResults',
+        (event) => {
+          const text = event.matches?.[0] || '';
+          onPartialResult(text);
+        }
+      );
+
+      // Erkennung starten
+      const result = await SpeechRecognition.start({
+        language: 'de-DE',
+        maxResults: 3,
+        partialResults: true,
+        addPunctuation: true,
+      });
+
+      this.isListening = true;
+
+      // Endergebnis behandeln, wenn partialResults false ist
+      if (result.matches && result.matches.length > 0) {
+        onFinalResult(result.matches[0]);
+      }
+    } catch (error) {
+      console.error('Fehler beim Starten der Spracherkennung:', error);
+      throw error;
+    }
+  }
+
+  async stopListening(): Promise<void> {
+    if (!this.isListening) {
+      return;
+    }
+
+    try {
+      await SpeechRecognition.stop();
+
+      // Listener aufräumen
+      if (this.partialListener) {
+        await this.partialListener.remove();
+        this.partialListener = null;
+      }
+
+      this.isListening = false;
+    } catch (error) {
+      console.error('Fehler beim Stoppen der Spracherkennung:', error);
+      throw error;
+    }
+  }
+
+  async getSupportedLanguages(): Promise<string[]> {
+    const { languages } = await SpeechRecognition.getSupportedLanguages();
+    return languages;
+  }
+
+  async checkListeningState(): Promise<boolean> {
+    const { listening } = await SpeechRecognition.isListening();
+    return listening;
+  }
+}
+```
+
+## API-Referenz
+
+### available()
+
+Überprüft, ob der native Spracherkennungsdienst auf dem aktuellen Gerät verwendbar ist.
+
+```typescript
+const result = await SpeechRecognition.available();
+// Gibt zurück: { available: boolean }
+```
+
+### start(options?)
+
+Beginnt mit der Aufnahme von Audio und der Transkription von Sprache.
+
+```typescript
+interface SpeechRecognitionStartOptions {
+  language?: string;          // Locale-Kennung (z.B. 'de-DE')
+  maxResults?: number;        // Maximale Anzahl von Ergebnissen (Standard: 5)
+  prompt?: string;            // Nur Android: Dialog-Aufforderung
+  popup?: boolean;            // Nur Android: System-Dialog anzeigen
+  partialResults?: boolean;   // Teilergebnisse streamen
+  addPunctuation?: boolean;   // Nur iOS 16+: Interpunktion hinzufügen
+  allowForSilence?: number;   // Nur Android: Stille-Timeout in ms
+}
+
+const result = await SpeechRecognition.start(options);
+// Gibt zurück: { matches?: string[] }
+```
+
+### stop()
+
+Stoppt das Zuhören und räumt native Ressourcen auf.
+
+```typescript
+await SpeechRecognition.stop();
+```
+
+### getSupportedLanguages()
+
+Ruft die vom zugrunde liegenden Erkennungsdienst unterstützten Locales ab.
+
+**Hinweis**: Android 13+-Geräte stellen diese Liste nicht mehr bereit; in diesem Fall ist `languages` leer.
+
+```typescript
+const result = await SpeechRecognition.getSupportedLanguages();
+// Gibt zurück: { languages: string[] }
+```
+
+### isListening()
+
+Gibt zurück, ob das Plugin aktiv auf Sprache hört.
+
+```typescript
+const result = await SpeechRecognition.isListening();
+// Gibt zurück: { listening: boolean }
+```
+
+### checkPermissions()
+
+Ruft den aktuellen Berechtigungsstatus ab.
+
+```typescript
+const result = await SpeechRecognition.checkPermissions();
+// Gibt zurück: { speechRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+Fordert die Mikrofon- + Spracherkennungsberechtigungen an.
+
+```typescript
+const result = await SpeechRecognition.requestPermissions();
+// Gibt zurück: { speechRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied' }
+```
+
+## Event-Listener
+
+### partialResults
+
+Hören Sie auf Teilergebnisse der Transkription, während `partialResults` aktiviert ist.
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'partialResults',
+  (event: { matches: string[] }) => {
+    console.log('Teilweise:', event.matches?.[0]);
+  }
+);
+```
+
+### segmentResults (nur Android)
+
+Hören Sie auf segmentierte Erkennungsergebnisse.
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'segmentResults',
+  (event: { matches: string[] }) => {
+    console.log('Segment:', event.matches?.[0]);
+  }
+);
+```
+
+### endOfSegmentedSession (nur Android)
+
+Hören Sie auf Abschluss-Events der segmentierten Sitzung.
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'endOfSegmentedSession',
+  () => {
+    console.log('Segmentierte Sitzung beendet');
+  }
+);
+```
+
+### listeningState
+
+Hören Sie auf Änderungen des nativen Listening-Status.
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'listeningState',
+  (event: { status: 'started' | 'stopped' }) => {
+    console.log('Listening-Status:', event.status);
+  }
+);
+```
+
+### removeAllListeners()
+
+Entfernt alle registrierten Listener.
+
+```typescript
+await SpeechRecognition.removeAllListeners();
+```
+
+## Best Practices
+
+1. **Immer Verfügbarkeit und Berechtigungen überprüfen**
+   ```typescript
+   const { available } = await SpeechRecognition.available();
+   if (!available) return;
+
+   const { speechRecognition } = await SpeechRecognition.requestPermissions();
+   if (speechRecognition !== 'granted') return;
+   ```
+
+2. **Listener aufräumen**
+   Entfernen Sie Listener immer, wenn sie nicht mehr benötigt werden, um Speicherlecks zu vermeiden:
+   ```typescript
+   await listener.remove();
+   // oder
+   await SpeechRecognition.removeAllListeners();
+   ```
+
+3. **Fehler elegant behandeln**
+   ```typescript
+   try {
+     await SpeechRecognition.start({ language: 'de-DE' });
+   } catch (error) {
+     console.error('Spracherkennung fehlgeschlagen:', error);
+     // Benutzerfreundliche Fehlermeldung anzeigen
+   }
+   ```
+
+4. **Visuelles Feedback bereitstellen**
+   Verwenden Sie das `listeningState`-Event, um Benutzern zu zeigen, wann die App aktiv zuhört.
+
+5. **Mit verschiedenen Akzenten und Sprachen testen**
+   Die Genauigkeit der Spracherkennung variiert je nach Sprache und Akzent. Testen Sie gründlich mit Ihrer Zielgruppe.
+
+## Plattformhinweise
+
+### iOS
+- Erfordert iOS 10.0+
+- Verwendet natives `SFSpeechRecognizer`
+- Unterstützt Interpunktion auf iOS 16+
+- Erfordert sowohl Mikrofon- als auch Spracherkennungsberechtigungen
+- Erkennung kann fehlschlagen, wenn die Gerätesprache nicht mit der angeforderten Sprache übereinstimmt
+
+### Android
+- Erfordert Android 6.0 (API 23)+
+- Verwendet `SpeechRecognizer` API
+- Unterstützt segmentierte Sitzungen mit konfigurierbarer Stilleerkennung
+- Android 13+ stellt keine Liste unterstützter Sprachen bereit
+- Einige Geräte zeigen möglicherweise die System-Erkennungs-UI an
+
+### Web
+- Eingeschränkte Unterstützung über Web Speech API
+- Nicht alle Browser unterstützen Spracherkennung
+- Erfordert HTTPS-Verbindung
+- Kann unterschiedliches Verhalten über Browser hinweg haben
+
+## Fehlerbehebung
+
+### Berechtigung verweigert
+Wenn Berechtigungen verweigert werden, führen Sie Benutzer zu den App-Einstellungen:
+```typescript
+const { speechRecognition } = await SpeechRecognition.checkPermissions();
+if (speechRecognition === 'denied') {
+  // Anweisungen zum Aktivieren von Berechtigungen in den Einstellungen anzeigen
+}
+```
+
+### Keine Ergebnisse zurückgegeben
+- Mikrofon funktioniert überprüfen
+- Ruhige Umgebung sicherstellen
+- Sprachcode mit Gerätefunktionen überprüfen
+- Netzwerkverbindung prüfen (einige Plattformen erfordern sie)
+
+### Erkennung stoppt unerwartet
+- `isListening()` verwenden, um Status zu überprüfen
+- Auf `listeningState`-Events hören
+- Automatischen Neustart implementieren, falls erforderlich
+
+## Nächste Schritte
+
+- [API-Referenz auf GitHub ansehen](https://github.com/Cap-go/capacitor-speech-recognition#api)
+- [Probleme melden](https://github.com/Cap-go/capacitor-speech-recognition/issues)
+- [Beispiel-App erkunden](https://github.com/Cap-go/capacitor-speech-recognition/tree/main/example)

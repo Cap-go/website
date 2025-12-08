@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-document-scanner"
+locale: ko
+description: Capacitor 앱에서 자동 가장자리 감지로 선명한 문서를 캡처하고 스캔된 페이지를 내보냅니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 자동 자르기, 다중 페이지 캡처 및 구성 가능한 출력 형식을 갖춘 세련된 문서 스캔 경험을 시작합니다.
+  image:
+    file: ~public/icons/plugins/document-scanner.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/document-scanner/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-document-scanner/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Document Scanner 플러그인은 iOS 및 Android 기기 모두에서 작동하는 네이티브 품질의 스캔 흐름을 Capacitor 앱에 제공합니다.
+
+<CardGrid stagger>
+  <Card title="자동 감지" icon="rocket">
+    페이지 가장자리를 감지하고 자동으로 자르며 사용자가 저장하기 전에 조정할 수 있습니다.
+  </Card>
+  <Card title="다중 페이지 캡처" icon="star">
+    조정 가능한 제한으로 단일 스캔 세션에서 하나 또는 여러 페이지를 캡처합니다.
+  </Card>
+  <Card title="사용자 정의 출력" icon="download">
+    선택한 이미지 품질로 파일 경로 또는 base64 문자열을 반환합니다.
+  </Card>
+  <Card title="통합 API" icon="pencil">
+    하나의 TypeScript 인터페이스가 iOS 및 Android 구현을 모두 포괄합니다.
+  </Card>
+</CardGrid>
+
+시작 가이드를 사용하여 카메라 권한을 활성화하고 품질 설정을 구성하며 스캔된 파일을 저장소 워크플로로 내보냅니다.

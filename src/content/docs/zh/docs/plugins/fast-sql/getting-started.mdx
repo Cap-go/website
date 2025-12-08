@@ -1,0 +1,360 @@
+---
+title: Fast SQL 入门指南
+description: 安装和配置 Fast SQL 插件以实现高性能原生 SQLite 数据库访问
+locale: zh
+---
+
+本指南将帮助您安装和配置 **@capgo/capacitor-fast-sql** 插件，以实现高性能 SQLite 数据库访问。
+
+## 为什么选择 Fast SQL？
+
+Capacitor 的传统 SQLite 插件依赖标准的 JavaScript 桥接在您的 Web 代码和原生代码之间进行通信。虽然这对于小型操作来说效果不错，但当您需要传输大量数据时，桥接会成为一个重大瓶颈。每一块数据都必须序列化为 JSON，通过桥接发送，然后在另一端反序列化。这种序列化开销使得处理数千行或大型二进制数据的操作变得极其缓慢。
+
+**Fast SQL 解决了这个问题**，它在设备上建立了一个本地 HTTP 服务器，直接与原生 SQLite 数据库通信。这种自定义协议完全绕过了 Capacitor 的桥接，消除了序列化开销，实现了：
+
+- **批量操作和大型数据集的性能提升高达 25 倍**
+- **高效的二进制数据传输**，无需 base64 编码
+- **流式传输大型结果**，无内存问题
+- **同步系统的最佳性能**，如 CRDT 和操作转换
+
+这使得 Fast SQL 非常适合本地优先应用、离线同步系统以及需要用更可靠和高性能的解决方案替换 IndexedDB 的场景。
+
+## 安装
+
+```bash
+npm install @capgo/capacitor-fast-sql
+npx cap sync
+```
+
+## 平台配置
+
+### iOS 配置
+
+将以下内容添加到您的 `Info.plist` 以允许本地网络：
+
+```xml title="ios/App/App/Info.plist"
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
+```
+
+### Android 配置
+
+如果需要，将以下内容添加到您的 `AndroidManifest.xml`：
+
+```xml title="android/app/src/main/AndroidManifest.xml"
+<application
+    android:usesCleartextTraffic="true">
+    ...
+</application>
+```
+
+### Web 配置
+
+对于 Web 平台支持，请安装 sql.js：
+
+```bash
+npm install sql.js
+```
+
+## 基本用法
+
+### 连接到数据库
+
+```typescript
+import { FastSQL } from '@capgo/capacitor-fast-sql';
+
+// Connect to database (creates file if it doesn't exist)
+const db = await FastSQL.connect({
+  database: 'myapp'
+});
+
+console.log('Connected to database on port:', db.port);
+```
+
+### 创建表
+
+```typescript
+// Create a table
+await db.execute(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE,
+    created_at INTEGER DEFAULT (strftime('%s', 'now'))
+  )
+`);
+```
+
+### 插入数据
+
+```typescript
+// Insert single row
+const result = await db.run(
+  'INSERT INTO users (name, email) VALUES (?, ?)',
+  ['John Doe', 'john@example.com']
+);
+
+console.log('Inserted row ID:', result.insertId);
+console.log('Rows affected:', result.rowsAffected);
+```
+
+### 查询数据
+
+```typescript
+// Query with parameters
+const users = await db.query(
+  'SELECT * FROM users WHERE name LIKE ?',
+  ['John%']
+);
+
+console.log('Found users:', users);
+
+// users is an array of objects:
+// [{ id: 1, name: 'John Doe', email: 'john@example.com', created_at: 1234567890 }]
+```
+
+### 更新数据
+
+```typescript
+const result = await db.run(
+  'UPDATE users SET email = ? WHERE id = ?',
+  ['newemail@example.com', 1]
+);
+
+console.log('Updated rows:', result.rowsAffected);
+```
+
+### 删除数据
+
+```typescript
+const result = await db.run(
+  'DELETE FROM users WHERE id = ?',
+  [1]
+);
+
+console.log('Deleted rows:', result.rowsAffected);
+```
+
+## 事务
+
+事务确保原子性 - 所有操作要么都成功，要么都回滚：
+
+```typescript
+try {
+  await db.transaction(async (tx) => {
+    // All operations in this block are part of the transaction
+    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Alice', 1000]);
+    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Bob', 500]);
+
+    // Transfer money
+    await tx.run('UPDATE accounts SET balance = balance - 100 WHERE name = ?', ['Alice']);
+    await tx.run('UPDATE accounts SET balance = balance + 100 WHERE name = ?', ['Bob']);
+  });
+
+  console.log('Transaction committed successfully!');
+} catch (error) {
+  console.error('Transaction rolled back:', error);
+  // All changes are automatically rolled back on error
+}
+```
+
+### 事务隔离级别
+
+```typescript
+import { FastSQL, IsolationLevel } from '@capgo/capacitor-fast-sql';
+
+await db.transaction(async (tx) => {
+  // Your operations
+}, IsolationLevel.Serializable);
+```
+
+可用的隔离级别：
+- `ReadUncommitted` - 最低隔离，最高性能
+- `ReadCommitted` - 防止脏读
+- `RepeatableRead` - 防止不可重复读
+- `Serializable` - 最高隔离，防止所有异常
+
+## 批量操作
+
+高效执行多个语句：
+
+```typescript
+const results = await db.executeBatch([
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['App started', 'INFO']
+  },
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['User logged in', 'INFO']
+  },
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['Error occurred', 'ERROR']
+  },
+]);
+
+console.log('Executed', results.length, 'statements');
+```
+
+## 二进制数据 (BLOBs)
+
+使用 Uint8Array 存储和检索二进制数据：
+
+```typescript
+// Store binary data
+const imageData = new Uint8Array([0xFF, 0xD8, 0xFF, 0xE0, /* ... */]);
+
+await db.run(
+  'INSERT INTO images (name, data) VALUES (?, ?)',
+  ['photo.jpg', imageData]
+);
+
+// Retrieve binary data
+const rows = await db.query('SELECT data FROM images WHERE name = ?', ['photo.jpg']);
+const retrievedData = rows[0].data; // Uint8Array
+```
+
+## 加密 (iOS/Android)
+
+启用 SQLCipher 加密以实现安全存储：
+
+```typescript
+const db = await FastSQL.connect({
+  database: 'secure_db',
+  encrypted: true,
+  encryptionKey: 'your-secure-encryption-key'
+});
+```
+
+:::caution
+- 加密仅在 iOS 和 Android 上可用
+- 安全存储加密密钥（使用 Keychain/Keystore）
+- 没有正确的密钥无法打开加密的数据库
+- Web 平台不支持加密
+:::
+
+## 只读模式
+
+以只读模式打开数据库以防止修改：
+
+```typescript
+const db = await FastSQL.connect({
+  database: 'myapp',
+  readOnly: true
+});
+```
+
+## 关闭连接
+
+完成后始终关闭数据库连接：
+
+```typescript
+await FastSQL.disconnect('myapp');
+```
+
+## 直接 HTTP 协议
+
+对于大型数据集的最大性能，直接使用 HTTP 协议：
+
+```typescript
+const { port, token } = await FastSQL.getServerInfo({ database: 'myapp' });
+
+// Make direct HTTP requests to localhost:port
+// Include token in Authorization header
+const response = await fetch(`http://localhost:${port}/execute`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    statement: 'SELECT * FROM users',
+    params: []
+  })
+});
+
+const result = await response.json();
+```
+
+## 错误处理
+
+```typescript
+import { FastSQL } from '@capgo/capacitor-fast-sql';
+
+try {
+  const db = await FastSQL.connect({ database: 'myapp' });
+
+  await db.run('INSERT INTO users (name, email) VALUES (?, ?)', ['John', 'john@example.com']);
+
+} catch (error) {
+  if (error.message.includes('UNIQUE constraint failed')) {
+    console.error('Email already exists');
+  } else if (error.message.includes('no such table')) {
+    console.error('Table does not exist');
+  } else {
+    console.error('Database error:', error);
+  }
+}
+```
+
+## 常见 SQL 模式
+
+### 检查表是否存在
+
+```typescript
+const result = await db.query(
+  "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+  ['users']
+);
+
+const tableExists = result.length > 0;
+```
+
+### 获取表结构
+
+```typescript
+const schema = await db.query('PRAGMA table_info(users)');
+console.log('Columns:', schema);
+```
+
+### 计数行数
+
+```typescript
+const result = await db.query('SELECT COUNT(*) as count FROM users');
+const count = result[0].count;
+```
+
+### 分页
+
+```typescript
+const pageSize = 20;
+const page = 1;
+const offset = (page - 1) * pageSize;
+
+const users = await db.query(
+  'SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?',
+  [pageSize, offset]
+);
+```
+
+## 性能提示
+
+1. **使用事务** 进行多个操作 - 比单独提交快得多
+2. **使用批量操作** 进行批量插入 - 比循环更高效
+3. **创建索引** 在经常查询的列上
+4. **使用带参数的预处理语句** (?) - 防止 SQL 注入并提高性能
+5. **直接使用 HTTP 协议** 处理非常大的结果集
+6. **关闭连接** 不使用时释放资源
+
+## 下一步
+
+查看[完整教程](/plugins-tutorials/capacitor-fast-sql)了解高级模式，包括：
+- 数据库服务架构
+- 迁移系统
+- 同步引擎
+- 复杂查询和连接
+- 性能优化

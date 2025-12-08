@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-android-age-signals"
+description: Google Play Age Signals API 래퍼 - 감독 계정, 보호자 승인 및 인증된 사용자를 감지합니다.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: Google Play Age Signals에 접근하여 감독 계정을 감지하고, 사용자 연령을 확인하며, Android 앱에서 아동 안전 규정을 준수하세요.
+  image:
+    file: ~public/icons/plugins/android-age-signals.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/age-signals/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-age-signals/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="감독 계정" icon="setting">
+    보호자가 관리하는 감독된 Google 계정을 가진 사용자 감지 👨‍👧‍👦
+  </Card>
+  <Card title="연령 인증" icon="approve-check-circle">
+    Google의 연령 인증으로 18세 이상 인증된 사용자 식별 🔐
+  </Card>
+  <Card title="규정 준수" icon="approve-check">
+    COPPA 및 GDPR과 같은 아동 안전 규정 준수 📋
+  </Card>
+  <Card title="보호자 승인" icon="star">
+    대기 중인 승인 및 보호자 동의 상태 추적 ✅
+  </Card>
+  <Card title="Android 전용" icon="puzzle">
+    Google Play Services를 사용하는 Android 전용 설계 📱
+  </Card>
+  <Card title="간단한 API" icon="rocket">
+    모든 연령 신호를 검색하는 단일 메서드 호출 🚀
+  </Card>
+</CardGrid>

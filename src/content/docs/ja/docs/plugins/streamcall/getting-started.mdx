@@ -1,0 +1,488 @@
+---
+title: はじめに
+locale: ja
+description: Stream Video SDKをインストールして統合し、Capacitorアプリでプロフェッショナルなビデオ通話を実現する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 前提条件
+
+StreamアカウントとAPI認証情報が必要です。アカウントをお持ちでない場合は[Stream](https://getstream.io/)でサインアップしてください。
+
+## プラットフォーム設定
+
+### iOS
+
+`Info.plist`に必要なパーミッションを追加します:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>This app needs camera access for video calls</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs microphone access for video calls</string>
+```
+
+### Android
+
+`AndroidManifest.xml`に必要なパーミッションを追加します:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+```
+
+## 使用例
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+// Stream SDKを初期化
+await StreamCall.initialize({
+  apiKey: 'your-stream-api-key',
+  userId: 'user-123',
+  userToken: 'user-token'
+});
+
+// 通話を作成
+await StreamCall.createCall({
+  callId: 'call-123',
+  callType: 'default'
+});
+
+// 通話に参加
+await StreamCall.joinCall({
+  callId: 'call-123'
+});
+
+// カメラの有効/無効
+await StreamCall.toggleCamera({
+  enabled: true
+});
+
+// マイクの有効/無効
+await StreamCall.toggleMicrophone({
+  enabled: true
+});
+
+// カメラの切り替え(前面/背面)
+await StreamCall.switchCamera();
+
+// 通話を終了
+await StreamCall.leaveCall();
+
+// 通話イベントをリスニング
+StreamCall.addListener('callStarted', (data) => {
+  console.log('Call started:', data);
+});
+
+StreamCall.addListener('callEnded', (data) => {
+  console.log('Call ended:', data);
+});
+
+StreamCall.addListener('participantJoined', (data) => {
+  console.log('Participant joined:', data);
+});
+
+StreamCall.addListener('participantLeft', (data) => {
+  console.log('Participant left:', data);
+});
+```
+
+## APIリファレンス
+
+### initialize(options)
+
+```typescript
+initialize(options: InitializeOptions) => Promise<void>
+```
+
+Stream Video SDKを初期化します。
+
+| Param         | Type                        |
+| ------------- | --------------------------- |
+| **`options`** | `InitializeOptions` |
+
+### createCall(options)
+
+```typescript
+createCall(options: CreateCallOptions) => Promise<void>
+```
+
+新しいビデオ通話を作成します。
+
+| Param         | Type                        |
+| ------------- | --------------------------- |
+| **`options`** | `CreateCallOptions` |
+
+### joinCall(options)
+
+```typescript
+joinCall(options: JoinCallOptions) => Promise<void>
+```
+
+既存のビデオ通話に参加します。
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `JoinCallOptions` |
+
+### leaveCall()
+
+```typescript
+leaveCall() => Promise<void>
+```
+
+現在の通話を退出します。
+
+### toggleCamera(options)
+
+```typescript
+toggleCamera(options: { enabled: boolean }) => Promise<void>
+```
+
+カメラを有効または無効にします。
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### toggleMicrophone(options)
+
+```typescript
+toggleMicrophone(options: { enabled: boolean }) => Promise<void>
+```
+
+マイクを有効または無効にします。
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### switchCamera()
+
+```typescript
+switchCamera() => Promise<void>
+```
+
+前面カメラと背面カメラを切り替えます。
+
+### setSpeakerphone(options)
+
+```typescript
+setSpeakerphone(options: { enabled: boolean }) => Promise<void>
+```
+
+スピーカーフォンを有効または無効にします。
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### sendCallInvite(options)
+
+```typescript
+sendCallInvite(options: InviteOptions) => Promise<void>
+```
+
+ユーザーに通話招待を送信します。
+
+| Param         | Type                    |
+| ------------- | ----------------------- |
+| **`options`** | `InviteOptions` |
+
+### acceptCall(options)
+
+```typescript
+acceptCall(options: { callId: string }) => Promise<void>
+```
+
+着信通話を承認します。
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callId: string }` |
+
+### rejectCall(options)
+
+```typescript
+rejectCall(options: { callId: string }) => Promise<void>
+```
+
+着信通話を拒否します。
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callId: string }` |
+
+## インターフェース
+
+### InitializeOptions
+
+| Prop            | Type              | Description                    |
+| --------------- | ----------------- | ------------------------------ |
+| **`apiKey`**    | `string` | Stream APIキー                 |
+| **`userId`**    | `string` | ユーザーID                        |
+| **`userToken`** | `string` | ユーザー認証トークン      |
+| **`userName`**  | `string` | ユーザー表示名(オプション)   |
+| **`userImage`** | `string` | ユーザープロフィール画像URL(オプション) |
+
+### CreateCallOptions
+
+| Prop           | Type              | Description                        |
+| -------------- | ----------------- | ---------------------------------- |
+| **`callId`**   | `string` | 一意の通話識別子             |
+| **`callType`** | `string` | 通話タイプ(例: 'default', 'audio-only') |
+| **`members`**  | `string[]` | 招待するユーザーIDの配列(オプション) |
+
+### JoinCallOptions
+
+| Prop         | Type              | Description                |
+| ------------ | ----------------- | -------------------------- |
+| **`callId`** | `string` | 参加する通話ID            |
+
+### InviteOptions
+
+| Prop         | Type              | Description                |
+| ------------ | ----------------- | -------------------------- |
+| **`callId`** | `string` | 通話ID                    |
+| **`userId`** | `string` | 招待するユーザーID          |
+
+## イベントリスナー
+
+### 利用可能なイベント
+
+- `callStarted` - 通話が開始されました
+- `callEnded` - 通話が終了しました
+- `participantJoined` - 参加者が通話に参加しました
+- `participantLeft` - 参加者が通話から退出しました
+- `incomingCall` - 着信通話を受信しました
+- `callAccepted` - 通話が承認されました
+- `callRejected` - 通話が拒否されました
+- `error` - エラーが発生しました
+
+### イベント例
+
+```typescript
+// 着信通話をリスニング
+StreamCall.addListener('incomingCall', (data) => {
+  console.log('Incoming call from:', data.callerId);
+  console.log('Caller name:', data.callerName);
+
+  // 着信通話UIを表示
+  showIncomingCallScreen({
+    callerId: data.callerId,
+    callerName: data.callerName,
+    callerImage: data.callerImage,
+    callId: data.callId
+  });
+});
+
+// 通話承認をリスニング
+StreamCall.addListener('callAccepted', (data) => {
+  console.log('Call accepted');
+  // 通話画面に移動
+});
+
+// エラーをリスニング
+StreamCall.addListener('error', (error) => {
+  console.error('Call error:', error.message);
+  // エラーを適切に処理
+});
+
+// 完了したらリスナーを削除
+const listener = await StreamCall.addListener('callStarted', (data) => {
+  console.log('Call started');
+});
+
+// 後で...
+listener.remove();
+```
+
+## 完全な例
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+class VideoCallService {
+  async initialize(userId: string, userName: string) {
+    try {
+      await StreamCall.initialize({
+        apiKey: 'your-stream-api-key',
+        userId: userId,
+        userToken: await this.getUserToken(userId),
+        userName: userName
+      });
+
+      this.setupEventListeners();
+    } catch (error) {
+      console.error('Failed to initialize Stream:', error);
+    }
+  }
+
+  setupEventListeners() {
+    // 着信通話を処理
+    StreamCall.addListener('incomingCall', async (data) => {
+      const accepted = await this.showIncomingCallDialog(data);
+
+      if (accepted) {
+        await StreamCall.acceptCall({ callId: data.callId });
+        await StreamCall.joinCall({ callId: data.callId });
+      } else {
+        await StreamCall.rejectCall({ callId: data.callId });
+      }
+    });
+
+    // 通話イベントを処理
+    StreamCall.addListener('callStarted', () => {
+      console.log('Call started');
+    });
+
+    StreamCall.addListener('callEnded', () => {
+      console.log('Call ended');
+      this.navigateToHome();
+    });
+
+    StreamCall.addListener('participantJoined', (data) => {
+      console.log('Participant joined:', data.participantName);
+    });
+  }
+
+  async startCall(recipientId: string) {
+    try {
+      const callId = `call-${Date.now()}`;
+
+      // 通話を作成して参加
+      await StreamCall.createCall({
+        callId: callId,
+        callType: 'default',
+        members: [recipientId]
+      });
+
+      await StreamCall.joinCall({ callId: callId });
+
+      // 招待を送信
+      await StreamCall.sendCallInvite({
+        callId: callId,
+        userId: recipientId
+      });
+
+      console.log('Call started');
+    } catch (error) {
+      console.error('Failed to start call:', error);
+    }
+  }
+
+  async endCall() {
+    try {
+      await StreamCall.leaveCall();
+      console.log('Call ended');
+    } catch (error) {
+      console.error('Failed to end call:', error);
+    }
+  }
+
+  async toggleVideo(enabled: boolean) {
+    await StreamCall.toggleCamera({ enabled });
+  }
+
+  async toggleAudio(enabled: boolean) {
+    await StreamCall.toggleMicrophone({ enabled });
+  }
+
+  async flipCamera() {
+    await StreamCall.switchCamera();
+  }
+
+  private async getUserToken(userId: string): Promise<string> {
+    // バックエンドからユーザートークンを取得
+    const response = await fetch(`/api/stream-token?userId=${userId}`);
+    const data = await response.json();
+    return data.token;
+  }
+
+  private async showIncomingCallDialog(data: any): Promise<boolean> {
+    // ネイティブダイアログまたはカスタムUIを表示
+    return confirm(`Incoming call from ${data.callerName}`);
+  }
+
+  private navigateToHome() {
+    // ホーム画面に移動
+    window.location.href = '/';
+  }
+}
+
+// 使用方法
+const videoCall = new VideoCallService();
+await videoCall.initialize('user-123', 'John Doe');
+
+// 通話を開始
+await videoCall.startCall('user-456');
+
+// コントロールを切り替え
+await videoCall.toggleVideo(false); // ビデオを無効化
+await videoCall.toggleAudio(false); // ミュート
+await videoCall.flipCamera(); // カメラを切り替え
+
+// 通話を終了
+await videoCall.endCall();
+```
+
+## ベストプラクティス
+
+- アプリのライフサイクルの早い段階でSDKを初期化する
+- 通話を開始する前にパーミッションリクエストを処理する
+- ネットワークの問題に対する適切なエラー処理を実装する
+- コンポーネントがアンマウントされたらリスナーをクリーンアップする
+- 実際のデバイスでテストする(エミュレータだけでなく)
+- ネットワーク中断に対する再接続ロジックを実装する
+- 通話状態の視覚的フィードバックを提供する
+- バックグラウンド/フォアグラウンド遷移を処理する
+
+## ローカライゼーション
+
+プラグインはネイティブUI要素の複数言語をサポートしています。プラットフォーム固有の設定で構成してください。
+
+## ユースケース
+
+- 1対1のビデオ通話
+- グループビデオ会議
+- 音声のみの通話
+- 画面共有セッション
+- カスタマーサポートビデオチャット
+- 遠隔医療相談
+- リモートコラボレーション

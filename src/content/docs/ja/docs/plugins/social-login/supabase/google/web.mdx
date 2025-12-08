@@ -1,0 +1,117 @@
+---
+title: Webでのsupabase Googleログイン
+locale: ja
+description: Capacitor Social LoginプラグインでWebのSupabase認証とGoogleサインインを設定する方法を学びます。
+sidebar:
+    order: 4
+---
+
+## はじめに
+
+このガイドは、WebでSupabase認証とGoogleサインインを統合するのに役立ちます。すでに以下を完了していることを前提としています。
+ -  [Google Login Webセットアップ](/docs/plugins/social-login/google/web/)
+ -  [Supabase Googleログイン - 一般セットアップ](/docs/plugins/social-login/supabase/google/general/)
+
+## 実装
+
+完全な実装は[サンプルアプリの`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)ファイルで利用できます。このガイドでは、主要な概念とその使用方法を説明します。
+
+### 認証ヘルパーの使用
+
+`authenticateWithGoogleSupabase`関数は認証フロー全体を処理します:
+
+```typescript
+import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithGoogleSupabase();
+if (result.success) {
+  console.log('Signed in:', result.user);
+  // 認証エリアに移動
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## 重要: リダイレクトの処理
+
+:::warning[重要: リダイレクトの処理]
+Webでのgoogleログインを使用する場合、リダイレクトが発生したときにプラグインから任意の関数を呼び出して、プラグインを初期化し、リダイレクトを処理してポップアップウィンドウを閉じる必要があります。`isLoggedIn()`または`initialize()`のいずれかを呼び出すことができます - どちらもリダイレクト処理をトリガーします。
+
+これはOAuthポップアップフローが正しく動作するために不可欠です。
+:::
+
+### 実装例
+
+Googleサインインを処理するコンポーネントに次を追加します:
+
+```typescript
+import { useEffect } from 'react';
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+function SupabasePage() {
+  // マウント時にGoogleログインステータスをチェックしてリダイレクト処理を呼び出す
+  // これはUIで機能的な目的を果たしませんが、保留中のOAuthリダイレクトが
+  // 適切に処理されることを保証します
+  useEffect(() => {
+    const checkGoogleLoginStatus = async () => {
+      try {
+        await SocialLogin.isLoggedIn({ provider: 'google' });
+        // 結果は使用しません。これはリダイレクト処理をトリガーするためだけのものです
+      } catch (error) {
+        // エラーは無視 - これはリダイレクト処理のためだけです
+        console.log('Google login status check completed (redirect handling)');
+      }
+    };
+
+    checkGoogleLoginStatus();
+  }, []);
+
+  // ... コンポーネントの残り
+}
+```
+
+完全な例については、[SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx)を参照してください。
+
+## 仕組み
+
+nonce生成、JWT検証、Supabaseサインインを含む認証フローの仕組みの詳細な説明については、[一般セットアップガイドの仕組みセクション](/docs/plugins/social-login/supabase/google/general/#how-it-works)を参照してください。
+
+完全なコードリファレンスについては、[一般セットアップガイドの完全なコードリファレンスセクション](/docs/plugins/social-login/supabase/google/general/#complete-code-reference)を参照してください。
+
+以下も参照してください:
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - リダイレクト処理を含むサンプルコンポーネント
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - アカウント作成ページのサンプル
+
+## 重要な注意事項
+
+### リダイレクトの処理
+
+Webでのgoogleログインを使用する場合、リダイレクトが発生したときにプラグインから任意の関数を呼び出して、プラグインを初期化し、リダイレクトを処理してポップアップウィンドウを閉じる必要があります。`isLoggedIn()`または`initialize()`のいずれかを呼び出すことができます - どちらもリダイレクト処理をトリガーします。
+
+これはOAuthポップアップフローが正しく動作するために不可欠です。これがないと、認証後にポップアップウィンドウが閉じません。
+
+### Nonceの処理
+
+nonce実装は[React Native Google Sign Inドキュメント](https://react-native-google-signin.github.io/docs/security#usage-with-supabase)のパターンに従っています:
+
+- `rawNonce`はSupabaseの`signInWithIdToken()`に渡されます
+- Supabaseは`rawNonce`のハッシュを作成し、Googleサインインからのidトークンに含まれる`nonceDigest`と比較します
+- `nonceDigest`(SHA-256ハッシュ、16進エンコード)はGoogle Sign-In APIの`nonce`パラメータに渡されます
+
+### 自動リトライ
+
+実装には自動リトライロジックが含まれています:
+- JWT検証が最初の試行で失敗した場合、ログアウトして1回リトライします
+- これにより、キャッシュされたトークンに誤ったnonceがある場合を処理します
+- リトライも失敗した場合は、エラーが返されます
+
+## トラブルシューティング
+
+認証が失敗する場合:
+
+- **リダイレクトが機能しない**: コンポーネントのマウント時に`isLoggedIn()`を呼び出していることを確認してください(上記の例を参照)
+- **無効なaudience**: Google Cloud ConsoleとSupabaseの両方でGoogle Client IDが一致していることを確認してください
+- **承認されたリダイレクトURL**: Google Cloud ConsoleとSupabaseの両方で承認されたリダイレクトURLが設定されていることを確認してください
+- **Nonce不一致**: コンソールログを確認してください - 関数は自動的にリトライしますが、必要に応じて最初に手動でログアウトできます
+- **トークン検証が失敗する**: 初期化呼び出しで`mode: 'online'`を使用してidTokenを取得していることを確認してください
+- 参照用に[サンプルアプリコード](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)を確認してください

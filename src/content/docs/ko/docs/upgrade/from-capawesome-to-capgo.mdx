@@ -1,0 +1,253 @@
+---
+title: Capawesome Cloud에서 Capgo로 마이그레이션
+locale: ko
+description: 네이티브 OTA 안전성, 기기 수준 관찰 가능성 및 완전한 자동화를 확보하면서 Capawesome Cloud에서 Capgo로 이동하는 단계별 가이드입니다.
+sidebar:
+  order: 8
+---
+
+> ⚡️ Capgo는 채널, 번들 정리, 롤백, 분석 및 CLI 업로드를 네이티브로 자동화합니다. 이 가이드를 사용하여 마이그레이션에 필요한 최소한의 단계를 수행하고 필요한 경우 커스텀 동작을 선택적으로 재생성하세요.
+
+## 개요
+
+1. 기존 Capawesome Cloud 구성(App ID, 채널, 서명 키, CLI 토큰)을 수집하여 나중에 보관하거나 감사할 수 있도록 합니다.
+2. Capgo 플러그인을 설치하고 Capawesome SDK를 제거한 다음 `CapacitorUpdater.notifyAppReady()`를 호출합니다.
+3. 현재 해당 플로우를 사용하는 경우 선택적 동작(수동 다운로드, 번들 고정, 리로드)을 구성합니다.
+
+Capgo를 사용하면 플러그인을 설치하고 `CapacitorUpdater.notifyAppReady()`만 호출하면 됩니다. 나머지 모든 것(채널, 번들 정리, 롤백, 분석 및 CLI 자동화)은 네이티브로 처리됩니다. 아래 섹션에서는 각 작업을 직접 안내합니다.
+
+## 시작하기 전에
+
+- 프로젝트가 이미 Capacitor 5 이상을 사용하고 있는지 확인하세요.
+- CI/CD에서 번들을 푸시할 계획이라면 Capgo CLI(`npm install -g @capgo/cli`)를 설치하세요.
+
+## 단계 1 – Capgo 설치 및 Capawesome SDK 제거
+
+```bash
+npm uninstall @capawesome/capacitor-live-update
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+이것이 유일한 필수 교체 작업입니다. Capgo의 네이티브 코드는 플러그인과 함께 제공됩니다. 추가 JavaScript 헬퍼는 필요하지 않습니다.
+
+## 단계 2 – 최소 구성
+
+이전 설정에서는 `capacitor.config`에 수십 개의 옵션을 매핑해야 했습니다. Capgo는 프로젝트를 자동으로 인식하므로 최소 구성은 다음과 같습니다:
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli'
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      autoDeletePrevious: true,
+      periodCheckDelay: 10 * 60 * 1000, // 선택사항: 10분마다 확인
+    },
+  },
+}
+
+export default config
+```
+
+Capawesome가 수동 플래그(`defaultChannel`, `autoDeleteBundles`, 보존 정책 등)로 나열한 모든 것은 Capgo 대시보드 또는 API를 통해 관리됩니다. Capgo의 기본값과 다른 동작을 원하는 경우에만 이러한 키를 재정의하면 됩니다.
+
+### 구성 빠른 참조
+
+| Capawesome 옵션 | Capgo 동등 항목 | 설정이 필요한가요? |
+| --- | --- | --- |
+| `appId` | Capgo 대시보드에서 프로젝트를 생성하면 가져옴 | 하나의 바이너리에서 여러 프로젝트를 사용하는 경우에만 |
+| `defaultChannel` | 대시보드/API에서 관리되는 채널 규칙 | 선택사항; 대부분의 팀은 서버 측에서 설정 |
+| `autoDeleteBundles` | `autoDeletePrevious: true` (기본값) | 이미 활성화됨 |
+| `publicKey` | Capgo 콘솔에서 관리 | 키를 수동으로 회전하는 경우에만 |
+| `maxVersions` / 보존 | 번들 보존 정책 | Capgo에서 중앙 집중식으로 구성(기본값 1개월, 최대 24개월) |
+
+## 단계 3 – `notifyAppReady()` 호출 (유일하게 필요한 훅)
+
+이전 워크플로우에서는 커스텀 리스너(`checkForUpdates()`, `retryDownload()`, 스플래시 화면 숨기기 등)를 도입했습니다. Capgo는 이러한 단계를 네이티브로 수행합니다. 호출해야 하는 유일한 API는 다음과 같습니다:
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+CapacitorUpdater.notifyAppReady()
+```
+
+이것은 앱이 성공적으로 부팅되었음을 확인합니다. 확인이 도착하지 않으면 Capgo는 자동으로 번들을 롤백합니다. 추가 JavaScript가 필요하지 않습니다.
+
+**이것이 전부입니다—Capgo는 백그라운드 확인, 스플래시 표시 및 롤백을 네이티브로 처리합니다.**
+
+<details>
+<summary>선택사항: 스플래시 화면이 숨겨지기 전에 커스텀 로직 실행</summary>
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+
+CapacitorUpdater.addListener('appReady', () => {
+  // 필요한 경우 진단 또는 로깅 실행
+  SplashScreen.hide()
+})
+
+CapacitorUpdater.notifyAppReady()
+```
+
+</details>
+
+## 단계 4 – API 호출 매핑 (대부분 선택사항)
+
+Capgo에서는 일반적으로 자동 업데이터를 실행하도록 합니다. 전체 제어를 원하는 경우 수동 API를 사용할 수 있습니다.
+
+| Capawesome Cloud | Capgo 동등 항목 | 필요한가요? |
+| --- | --- | --- |
+| `LiveUpdate.fetchLatestBundle()` | `CapacitorUpdater.getLatest()` | 자체 다운로드 워크플로우를 구현할 때만 |
+| `LiveUpdate.downloadBundle()` | `CapacitorUpdater.download()` | 선택사항: 네이티브 자동 업데이트가 이미 다운로드 |
+| `LiveUpdate.setNextBundle()` | `CapacitorUpdater.next()` | 선택사항: 대시보드가 번들을 자동으로 고정 |
+| `LiveUpdate.reload()` | `CapacitorUpdater.reload()` | 선택사항; Capgo는 `notifyAppReady()` 후 필수 번들을 적용 |
+| `LiveUpdate.getCurrentBundle()` | `CapacitorUpdater.current()` | 선택적 진단 |
+
+네이티브 자동 업데이트 동작을 유지하면 Capawesome JavaScript를 완전히 삭제할 수 있습니다.
+
+### 수동 제어 예제
+
+**최신 번들 다운로드**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const downloadUpdate = async () => {
+  const latest = await CapacitorUpdater.getLatest()
+  if (latest?.url) {
+    const bundle = await CapacitorUpdater.download({
+      url: latest.url,
+      version: latest.version,
+    })
+    console.log('Bundle downloaded', bundle?.id)
+  }
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const downloadUpdate = async () => {
+  const result = await LiveUpdate.fetchLatestBundle()
+  if (result.downloadUrl) {
+    await LiveUpdate.downloadBundle({
+      bundleId: result.bundleId,
+      url: result.downloadUrl,
+    })
+    console.log('Bundle downloaded')
+  }
+}
+```
+
+**다음 번들 설정**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const setNextBundle = async () => {
+  await CapacitorUpdater.next({ id: 'bundle-id-123' })
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const setNextBundle = async () => {
+  await LiveUpdate.setNextBundle({ bundleId: 'bundle-id-123' })
+}
+```
+
+**다운로드한 번들을 즉시 적용**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const applyUpdate = async () => {
+  await CapacitorUpdater.reload()
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const applyUpdate = async () => {
+  await LiveUpdate.reload()
+}
+```
+
+## 단계 5 – 업데이트 전략: Capgo가 처리하는 방법
+
+Capawesome는 세 가지 전략을 문서화합니다. 다음은 변환 방법입니다:
+
+### 백그라운드 업데이트
+- **이전 워크플로우**: 코드에서 구성하고 수동으로 다운로드를 예약합니다.
+- **Capgo**: 기본적으로 활성화됨(`autoUpdate: true`). 추가 코드가 필요하지 않습니다.
+
+### 항상 최신
+- **이전 워크플로우**: `App.resume` 리스너를 추가하고 `download`를 호출한 다음 `set`을 호출합니다.
+- **Capgo**: 백그라운드 자동 업데이트가 이미 재개 후 확인을 수행합니다. 커스텀 간격을 원하는 경우에만 수동 리스너가 필요합니다.
+
+<details>
+<summary>선택사항: 수동 재개 확인</summary>
+
+```ts
+import { App } from '@capacitor/app'
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+App.addListener('resume', async () => {
+  const latest = await CapacitorUpdater.getLatest()
+  if (latest?.url) {
+    const downloaded = await CapacitorUpdater.download({
+      url: latest.url,
+      version: latest.version,
+    })
+    if (downloaded) {
+      await CapacitorUpdater.next({ id: downloaded.id })
+    }
+  }
+})
+```
+
+</details>
+
+### 강제 업데이트
+- **이전 워크플로우**: 프롬프트 로직을 연결하고 리로드를 적용합니다.
+- **Capgo**: 대시보드에서 번들을 "필수"로 표시한 다음 `majorAvailable` 이벤트(`notifyAppReady()` 후 발생)를 수신하여 사용자가 앱 내에서 업그레이드하도록 요구합니다.
+
+## 단계 6 – 번들 배포
+
+이전에 `capawesome live-update deploy`에 의존했다면 Capgo는 유사한 CLI 워크플로우를 제공하며 API를 통해 배포를 완전히 자동화할 수도 있습니다.
+
+```bash
+# 한 번 인증 (CI 환경에 토큰 저장)
+capgo login
+
+# 새 번들 업로드 (플랫폼/버전 자동 감지)
+capgo bundle upload --path dist --channel production
+```
+
+Capgo는 번들 상태를 자동으로 추적하므로 다음과 같은 이점도 얻을 수 있습니다:
+
+- 모든 설치에 대한 기기 수준 감사 로그.
+- 구성 가능한 제한(최대 24개월)을 가진 자동 보존(기본값 1개월).
+- [status.capgo.app/history](https://status.capgo.app/history)에서 실시간 지연 시간 메트릭.
+
+## 마이그레이션 타임라인
+
+- **인벤토리 및 설치**: 10분 (`npm install`, 이전 플러그인 제거).
+- **구성 및 준비**: 5분 (`notifyAppReady`).
+- **정상성 확인**: 15분 (선택적 수동 테스트 또는 리스너).
+- **첫 번째 배포**: Capgo CLI 또는 CI 통합으로 10분.
+
+실제로 팀은 1시간 이내에 완료합니다. Capawesome 프로젝트 세부 정보를 제공하면 채널과 기기 목록을 가져올 수도 있습니다.
+
+## Capgo 지원
+
+- **마이그레이션 컨시어지**: [cal.com/team/capgo/demo](https://cal.com/team/capgo/demo)에서 세션을 예약하세요.
+- **커뮤니티**: [Capgo Discord](https://discord.gg/VCXxSVjefW)에 참여하세요.
+- **이슈 트래커**: [github.com/Cap-go/capacitor-updater/issues](https://github.com/Cap-go/capacitor-updater/issues).
+
+Capgo는 장기적인 안정성을 위해 구축되었습니다: 네이티브 델타 업데이트, 암호화된 번들, 자동 롤백 및 커스텀 JavaScript가 필요하지 않은 분석. 마이그레이션하면 유지 관리가 많이 필요한 글루를 삭제하고 플랫폼이 업데이트를 자동으로 실행하도록 할 수 있습니다.

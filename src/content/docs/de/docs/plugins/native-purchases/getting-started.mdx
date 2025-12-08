@@ -1,0 +1,255 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das @capgo/native-purchases-Plugin installieren und verwenden, um Einmalkäufe und Abonnements mit StoreKit 2 und Google Play Billing 7 zu implementieren.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installieren Sie das Paket**
+   <PackageManagers pkg="@capgo/native-purchases" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchronisieren Sie mit nativen Projekten**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Billing-Unterstützung überprüfen**
+
+   ```typescript
+   import { NativePurchases } from '@capgo/native-purchases';
+
+   const { isBillingSupported } = await NativePurchases.isBillingSupported();
+   if (!isBillingSupported) {
+     throw new Error('Billing ist auf diesem Gerät nicht verfügbar');
+   }
+   ```
+
+4. **Produkte direkt aus den Stores laden**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const { products } = await NativePurchases.getProducts({
+     productIdentifiers: [
+       'com.example.premium.monthly',
+       'com.example.premium.yearly',
+       'com.example.one_time_unlock'
+     ],
+     productType: PURCHASE_TYPE.SUBS, // Verwenden Sie PURCHASE_TYPE.INAPP für Einmalprodukte
+   });
+
+   products.forEach((product) => {
+     console.log(product.title, product.priceString);
+   });
+   ```
+
+5. **Kauf- und Wiederherstellungsabläufe implementieren**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const monthlyPlanId = 'monthly-plan'; // Basisplan-ID aus der Google Play Console
+
+   const transaction = await NativePurchases.purchaseProduct({
+     productIdentifier: 'com.example.premium.monthly',
+     planIdentifier: monthlyPlanId,        // ERFORDERLICH für Android-Abonnements, wird auf iOS ignoriert
+     productType: PURCHASE_TYPE.SUBS,
+     quantity: 1,
+   });
+
+   console.log('Transaktions-ID', transaction.transactionId);
+
+   await NativePurchases.restorePurchases();
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       - Erstellen Sie In-App-Produkte und Abonnements in App Store Connect.<br />
+       - Verwenden Sie StoreKit Local Testing oder Sandbox-Tester für QA.<br />
+       - Keine Manifest-Bearbeitungen erforderlich. Stellen Sie sicher, dass Ihre Produkte genehmigt sind.
+     </TabItem>
+     <TabItem label="Android">
+       - Erstellen Sie In-App-Produkte und Abonnements in der Google Play Console.<br />
+       - Laden Sie mindestens einen internen Test-Build hoch und fügen Sie Lizenztester hinzu.<br />
+       - Fügen Sie die Billing-Berechtigung zu `AndroidManifest.xml` hinzu:
+       ```xml
+       <uses-permission android:name="com.android.vending.BILLING" />
+       ```
+     </TabItem>
+   </Tabs>
+</Steps>
+
+## Beispiel für Purchase Service
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE, Transaction } from '@capgo/native-purchases';
+import { Capacitor } from '@capacitor/core';
+
+class PurchaseService {
+  private premiumProduct = 'com.example.premium.unlock';
+  private monthlySubId = 'com.example.premium.monthly';
+  private monthlyPlanId = 'monthly-plan'; // Basisplan-ID (nur Android)
+
+  async initialize() {
+    const { isBillingSupported } = await NativePurchases.isBillingSupported();
+    if (!isBillingSupported) throw new Error('Billing nicht verfügbar');
+
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: [this.premiumProduct, this.monthlySubId],
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    console.log('Produkte geladen', products);
+
+    if (Capacitor.getPlatform() === 'ios') {
+      NativePurchases.addListener('transactionUpdated', (transaction) => {
+        this.handleTransaction(transaction);
+      });
+    }
+  }
+
+  async buyPremium(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.premiumProduct,
+      productType: PURCHASE_TYPE.INAPP,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async buyMonthly(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.monthlySubId,
+      planIdentifier: this.monthlyPlanId, // ERFORDERLICH für Android-Abonnements
+      productType: PURCHASE_TYPE.SUBS,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async restore() {
+    await NativePurchases.restorePurchases();
+    await this.refreshEntitlements();
+  }
+
+  async openManageSubscriptions() {
+    await NativePurchases.manageSubscriptions();
+  }
+
+  private async processTransaction(transaction: Transaction) {
+    this.unlockContent(transaction.productIdentifier);
+    this.validateOnServer(transaction).catch(console.error);
+  }
+
+  private unlockContent(productIdentifier: string) {
+    // Berechtigung lokal speichern
+    console.log('Freigeschaltet', productIdentifier);
+  }
+
+  private async refreshEntitlements() {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('Aktuelle Käufe', purchases);
+  }
+
+  private async handleTransaction(transaction: Transaction) {
+    console.log('StoreKit-Transaktionsaktualisierung:', transaction);
+    await this.processTransaction(transaction);
+  }
+
+  private async validateOnServer(transaction: Transaction) {
+    await fetch('/api/validate-purchase', {
+      method: 'POST',
+      body: JSON.stringify({
+        transactionId: transaction.transactionId,
+        receipt: transaction.receipt,
+        purchaseToken: transaction.purchaseToken,
+      }),
+    });
+  }
+}
+```
+
+## Erforderliche Kaufoptionen
+
+| Option | Plattform | Beschreibung |
+|--------|----------|-------------|
+| `productIdentifier` | iOS + Android | SKU/Produkt-ID, die in App Store Connect / Google Play Console konfiguriert ist. |
+| `productType` | Nur Android | `PURCHASE_TYPE.INAPP` oder `PURCHASE_TYPE.SUBS`. Standardmäßig `INAPP`. Immer auf `SUBS` für Abonnements setzen. |
+| `planIdentifier` | Android-Abonnements | Basisplan-ID aus der Google Play Console. Erforderlich für Abonnements, wird auf iOS und In-App-Käufen ignoriert. |
+| `quantity` | iOS | Nur für In-App-Käufe, standardmäßig `1`. Android kauft immer ein Element. |
+| `appAccountToken` | iOS + Android | UUID/String, der den Kauf mit Ihrem Benutzer verknüpft. Muss auf iOS UUID sein; Android akzeptiert jeden verschleierten String bis zu 64 Zeichen. |
+| `isConsumable` | Android | Auf `true` setzen, um Token nach Gewährung der Berechtigung für Verbrauchsartikel automatisch zu konsumieren. Standard ist `false`. |
+
+## Berechtigungsstatus prüfen
+
+Verwenden Sie `getPurchases()` für eine plattformübergreifende Ansicht jeder Transaktion, die die Stores melden:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+purchases.forEach((purchase) => {
+  if (purchase.isActive && purchase.expirationDate) {
+    console.log('iOS-Abo aktiv bis', purchase.expirationDate);
+  }
+
+  const isAndroidIapValid =
+    ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') && purchase.isAcknowledged;
+
+  if (isAndroidIapValid) {
+    console.log('In-App-Berechtigung gewähren für', purchase.productIdentifier);
+  }
+});
+```
+
+### Plattformverhalten
+
+- **iOS**: Abonnements enthalten `isActive`, `expirationDate`, `willCancel` und StoreKit 2 Listener-Unterstützung. In-App-Käufe erfordern serverseitige Belegvalidierung.
+- **Android**: `isActive`/`expirationDate` werden nicht ausgefüllt; rufen Sie die Google Play Developer API mit dem `purchaseToken` für den maßgeblichen Status auf. `purchaseState` muss `PURCHASED` und `isAcknowledged` muss `true` sein.
+
+## API-Schnellreferenz
+
+- `isBillingSupported()` – auf StoreKit / Google Play-Verfügbarkeit prüfen.
+- `getProduct()` / `getProducts()` – Preis, lokalisierter Titel, Beschreibung, Einführungsangebote abrufen.
+- `purchaseProduct()` – StoreKit 2 oder Billing Client-Kaufablauf initiieren.
+- `restorePurchases()` – historische Käufe wiedergeben und mit aktuellem Gerät synchronisieren.
+- `getPurchases()` – alle iOS-Transaktionen oder Play Billing-Käufe auflisten.
+- `manageSubscriptions()` – native Abonnementverwaltungs-UI öffnen.
+- `addListener('transactionUpdated')` – ausstehende StoreKit 2-Transaktionen beim App-Start behandeln (nur iOS).
+
+## Best Practices
+
+1. **Store-Preise anzeigen** – Apple erfordert die Anzeige von `product.title` und `product.priceString`; niemals fest codieren.
+2. **`appAccountToken` verwenden** – deterministisch eine UUID (v5) aus Ihrer Benutzer-ID generieren, um Käufe mit Konten zu verknüpfen.
+3. **Serverseitig validieren** – `receipt` (iOS) / `purchaseToken` (Android) an Ihr Backend zur Überprüfung senden.
+4. **Fehler elegant behandeln** – auf Benutzerabbrüche, Netzwerkfehler und nicht unterstützte Billing-Umgebungen prüfen.
+5. **Gründlich testen** – folgen Sie dem [iOS-Sandbox-Leitfaden](/docs/plugins/native-purchases/ios-sandbox-testing/) und [Android-Sandbox-Leitfaden](/docs/plugins/native-purchases/android-sandbox-testing/).
+6. **Wiederherstellen & Verwalten anbieten** – UI-Schaltflächen hinzufügen, die mit `restorePurchases()` und `manageSubscriptions()` verbunden sind.
+
+## Fehlerbehebung
+
+**Produkte werden nicht geladen**
+- Stellen Sie sicher, dass Bundle-ID / Anwendungs-ID mit Store-Konfiguration übereinstimmt.
+- Bestätigen Sie, dass Produkt-IDs aktiv und genehmigt (App Store) oder aktiviert (Google Play) sind.
+- Warten Sie mehrere Stunden nach dem Erstellen von Produkten; Store-Propagierung erfolgt nicht sofort.
+
+**Kauf abgebrochen oder hängt**
+- Benutzer können den Ablauf abbrechen; Aufrufe in `try/catch` einwickeln und benutzerfreundliche Fehlermeldungen anzeigen.
+- Für Android stellen Sie sicher, dass Testkonten die App aus dem Play Store installieren (interner Track), damit Billing funktioniert.
+- Überprüfen Sie logcat/Xcode auf Billing-Fehler beim Ausführen auf dem Gerät.
+
+**Abonnementstatus inkorrekt**
+- Verwenden Sie `getPurchases()`, um Store-Daten mit Ihrem lokalen Berechtigungs-Cache zu vergleichen.
+- Auf Android fragen Sie immer die Google Play Developer API mit dem `purchaseToken` ab, um Ablaufdaten oder Rückerstattungsstatus zu erhalten.
+- Auf iOS überprüfen Sie `isActive`/`expirationDate` und validieren Sie Belege, um Rückerstattungen oder Widerrufe zu erkennen.

@@ -1,0 +1,166 @@
+---
+title: 创建 Android 自动续订订阅
+locale: zh
+description: 在 Google Play Console 中创建自动续订订阅的分步指南，用于 native-purchases 插件。
+sidebar:
+  order: 4
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+自动续订订阅可持续为用户提供对应用中的内容、服务或高级功能的访问。本指南将帮助您在 Google Play Console 中创建和配置订阅。
+
+## 概述
+
+订阅会在每个计费周期结束时自动续订，直到用户取消。它们非常适合：
+- 高级内容访问
+- 无广告体验
+- 云存储
+- 持续服务
+
+## 创建订阅
+
+<Steps>
+
+1. **导航到订阅**
+
+   在 Google Play Console 中，选择您的应用并从左侧菜单中选择 **获利 > 订阅**。
+
+   点击 **创建订阅** 按钮开始。
+
+   ![导航到订阅](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+
+2. **输入基本信息**
+
+   提供订阅名称和产品 ID。产品 ID 是应用配置所必需的，以后无法更改。
+
+   ![输入订阅详情](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+
+3. **创建基础方案**
+
+   Google Play 要求每个订阅必须有一个基础方案。native-purchases 插件仅支持一个基础方案以保持与 iOS 的兼容性。
+
+   点击 **添加基础方案** 继续。
+
+   ![创建基础方案](/native-purchases/android/create-subscription/create-base-plan.webp)
+
+4. **配置基础方案详情**
+
+   输入：
+   - **基础方案 ID**：该方案的唯一标识符
+   - **计费周期**：用户被收费的频率（每周、每月、每年等）
+   - **宽限期**：在取消前 Google 维护订阅同时重试支付的时间窗口
+
+   ![配置基础方案](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+
+5. **设置定价**
+
+   访问定价部分并选择您想要提供订阅的所有国家/地区。
+
+   ![选择地区](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+
+6. **配置价格**
+
+   以您的主要货币设置基础价格。Google Play 会自动将其转换为本地货币。
+
+   ![设置价格](/native-purchases/android/create-subscription/set-base-price.webp)
+
+7. **审核地区定价**
+
+   审核每个国家自动转换的价格。如果需要，您可以调整个别价格。
+
+   ![审核定价](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+
+8. **保存配置**
+
+   保存您的定价配置。
+
+   ![保存定价](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+
+9. **激活订阅**
+
+   点击 **激活** 按钮使您的订阅产品上线并可供购买。
+
+   ![激活订阅](/native-purchases/android/create-subscription/activate-subscription.webp)
+
+</Steps>
+
+## 重要注意事项
+
+### 基础方案限制
+
+native-purchases 插件要求每个订阅只能有一个基础方案，以确保与 iOS 订阅处理的一致性。不支持多个基础方案。
+
+### 宽限期
+
+宽限期允许 Google Play 在维护用户订阅访问的同时重试失败的支付。常见的宽限期为：
+- 月度订阅为 3 天
+- 较长订阅为 7 天
+
+### 订阅状态
+
+创建后，您的订阅将处于"草稿"状态，直到激活。您可以在沙盒模式下测试草稿订阅。
+
+## 在应用中使用
+
+创建后，使用产品 ID 在应用中引用订阅：
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// 加载订阅信息
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+console.log(`${product.title} — ${product.priceString}`);
+
+// 购买（planIdentifier = Google Play Console 中的基础方案 ID）
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // 在 Android 上必需，在 iOS 上被忽略
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Transaction ID', transaction.transactionId);
+
+// 稍后，检查购买状态
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const subscription = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.example.premium.monthly',
+);
+
+if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.isAcknowledged) {
+  console.log('Subscription active locally');
+  // 对于过期/取消，通过后端验证 purchaseToken
+}
+```
+
+## 后续步骤
+
+- [创建引导性优惠](/docs/plugins/native-purchases/android-introductory-offer/)以吸引新订阅者
+- [配置沙盒测试](/docs/plugins/native-purchases/android-sandbox-testing/)以测试您的订阅
+- 设置后端收据验证以确保安全
+
+## 故障排除
+
+**订阅未在应用中显示：**
+- 验证产品 ID 完全匹配
+- 确保订阅已激活
+- 检查您的应用具有正确的包名
+- 激活后等待 2-3 小时以便更改传播
+
+**基础方案错误：**
+- 确保您只有一个基础方案
+- 验证所有必填字段已填写
+- 检查计费周期是否有效
+
+**定价问题：**
+- 确认至少选择了一个国家
+- 验证基础价格大于允许的最小值
+- 检查货币转换率是否可接受

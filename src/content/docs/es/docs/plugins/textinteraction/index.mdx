@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-textinteraction"
+locale: es
+description: Habilita o deshabilita la lupa de interacción de texto de iOS para un control preciso sobre el comportamiento del WebView.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Elimina la lupa de iOS en experiencias de kiosco o juegos, luego restáurala antes de la entrada de texto.
+  image:
+    file: ~public/icons/plugins/textinteraction.svg
+  actions:
+    - text: Primeros pasos
+      link: /docs/plugins/textinteraction/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-textinteraction/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Controla el sistema de interacción de texto de Apple para adaptar la experiencia de usuario en pantallas de kiosco, juegos e instalaciones interactivas.
+
+<CardGrid stagger>
+  <Card title="Específico de iOS" icon="rocket">
+    Alterna la lupa y los controles de selección introducidos en iOS 15.
+  </Card>
+  <Card title="API simple" icon="pencil">
+    Llama a un solo método para habilitar o deshabilitar el estado de interacción de texto.
+  </Card>
+  <Card title="Valores predeterminados seguros" icon="approve-check">
+    Recibe un resultado booleano para que puedas detectar versiones no compatibles.
+  </Card>
+  <Card title="Amigable para kioscos" icon="star">
+    Previene copiar/pegar con pulsación prolongada en instalaciones controladas o señalización.
+  </Card>
+</CardGrid>
+
+Usa la guía de primeros pasos para un patrón de integración mínimo y recordatorios para volver a habilitar la interacción antes de mostrar entradas de texto.

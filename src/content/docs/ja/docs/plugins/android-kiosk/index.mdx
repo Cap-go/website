@@ -1,0 +1,51 @@
+---
+title: "@capgo/capacitor-android-kiosk"
+description: Capacitor用Android Kioskモードプラグイン - ランチャー機能でデバイスをキオスクモードにロック
+locale: ja
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Capacitorアプリ用にハードウェアボタンとランチャー機能を完全に制御して、Androidデバイスをキオスクモードにロックします。
+  image:
+    file: ~public/icons/plugins/android-kiosk.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/android-kiosk/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-kiosk/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="キオスクモード" icon="rocket">
+    システムUIを非表示にして没入型フルスクリーンモードに入る
+  </Card>
+  <Card title="ランチャー統合" icon="setting">
+    アプリをデバイスのランチャー/ホームアプリとして設定
+  </Card>
+  <Card title="ハードウェアキー制御" icon="warning">
+    特定のハードウェアボタン（戻る、ホーム、最近、音量、電源）をブロックまたは許可
+  </Card>
+  <Card title="ステータス検出" icon="approve-check">
+    キオスクモードがアクティブかどうか、またはアプリがランチャーとして設定されているかを確認
+  </Card>
+  <Card title="Android 6.0以降" icon="star">
+    Android API 23からAndroid 15（API 35）までサポート
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    [ドキュメント](/docs/plugins/android-kiosk/getting-started/)をチェックして、数分でキオスクモードを統合。
+  </Card>
+</CardGrid>
+
+## プラットフォームサポート
+
+このプラグインは**Android専用**です。iOSのキオスクモード機能については、デバイスの組み込み[ガイドアクセス](https://support.apple.com/en-us/HT202612)機能を使用してください。

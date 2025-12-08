@@ -1,0 +1,166 @@
+---
+title: 시작하기
+description: Capacitor 앱에서 이미지를 압축하기 위해 File Compressor 플러그인을 설치하고 사용하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-file-compressor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 플랫폼 지원
+
+| 플랫폼 | 지원 형식 | 참고 |
+|----------|-------------------|-------|
+| iOS | JPEG | JPEG 압축만 지원됨 |
+| Android | JPEG, WebP | 두 형식 모두 완전히 지원됨 |
+| Web | JPEG, WebP | Canvas API 기반 압축 |
+
+참고: 모든 플랫폼에서 압축 중에 EXIF 메타데이터가 제거됩니다.
+
+## 사용법
+
+플러그인을 가져와서 이미지를 압축합니다:
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+
+// 이미지 압축
+const compressImage = async () => {
+  const result = await FileCompressor.compressImage({
+    source: 'file:///path/to/image.jpg',
+    quality: 0.8,
+    width: 1920,
+    height: 1080
+  });
+
+  console.log('Compressed image path:', result.path);
+  console.log('Original size:', result.originalSize);
+  console.log('Compressed size:', result.size);
+};
+```
+
+## API 참조
+
+### compressImage(options)
+
+지정된 크기 및 품질 설정으로 이미지 파일을 압축합니다.
+
+```typescript
+interface CompressImageOptions {
+  source: string;           // 이미지 파일의 경로
+  quality?: number;         // 0.0에서 1.0 (기본값: 0.8)
+  width?: number;           // 픽셀 단위의 목표 너비
+  height?: number;          // 픽셀 단위의 목표 높이
+  format?: 'jpeg' | '.webp'; // 출력 형식
+}
+
+interface CompressImageResult {
+  path: string;             // 압축된 이미지의 경로
+  size: number;             // 바이트 단위의 압축된 파일 크기
+  originalSize: number;     // 바이트 단위의 원본 파일 크기
+}
+
+const result = await FileCompressor.compressImage(options);
+```
+
+**중요 참고사항:**
+- 모든 플랫폼에서 압축 중에 EXIF 메타데이터가 제거됩니다
+- 하나의 차원만 제공되면 종횡비가 자동으로 유지됩니다
+- 압축된 파일은 네이티브 플랫폼의 임시 디렉터리에 저장됩니다
+
+### getPluginVersion()
+
+네이티브 플러그인 버전을 가져옵니다.
+
+```typescript
+const { version } = await FileCompressor.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## 전체 예제
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+import { Camera } from '@capacitor/camera';
+
+export class ImageCompressionService {
+  async captureAndCompress() {
+    try {
+      // 사진 찍기
+      const photo = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: false,
+        resultType: 'uri'
+      });
+
+      if (!photo.path) {
+        throw new Error('No image path');
+      }
+
+      // 사진 압축
+      const compressed = await FileCompressor.compressImage({
+        source: photo.path,
+        quality: 0.7,
+        width: 1920,
+        height: 1080,
+        format: 'jpeg'
+      });
+
+      console.log(`Compression ratio: ${
+        ((1 - compressed.size / compressed.originalSize) * 100).toFixed(1)
+      }%`);
+
+      return compressed.path;
+    } catch (error) {
+      console.error('Compression failed:', error);
+      throw error;
+    }
+  }
+
+  async batchCompress(imagePaths: string[]) {
+    const results = [];
+
+    for (const path of imagePaths) {
+      try {
+        const result = await FileCompressor.compressImage({
+          source: path,
+          quality: 0.8,
+          width: 1280
+        });
+        results.push(result);
+      } catch (error) {
+        console.error(`Failed to compress ${path}:`, error);
+      }
+    }
+
+    return results;
+  }
+}
+```
+
+## 모범 사례
+
+1. **품질 설정**: 파일 크기와 이미지 품질 간의 균형을 위해 0.8 품질로 시작
+2. **크기 조정**: 필요할 때만 크기를 지정 - 종횡비가 자동으로 유지됩니다
+3. **형식 선택**: 사진에는 JPEG, 더 나은 압축을 위해 WebP 사용 (Android/Web만 해당)
+4. **오류 처리**: 항상 압축 호출을 try-catch 블록으로 감쌉니다
+5. **정리**: 사용 후 임시 파일을 정리하는 것을 잊지 마세요
+
+## 문제 해결
+
+### 일반적인 문제
+
+**이미지가 압축되지 않음**: 소스 경로가 유효하고 액세스 가능한지 확인
+**메모리 부족**: 목표 크기를 줄이거나 한 번에 하나씩 이미지를 압축
+**지원되지 않는 형식**: 위의 플랫폼 지원 표 확인

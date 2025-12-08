@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-ibeacon"
+description: Plugin iBeacon per Capacitor - rilevamento di prossimità e monitoraggio regioni beacon per funzionalità basate sulla posizione.
+locale: it
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+hero:
+  tagline: Rileva e monitora beacon Bluetooth per funzionalità basate sulla prossimità, navigazione indoor ed esperienze consapevoli della posizione.
+  image:
+    file: ~public/icons/plugins/ibeacon.svg
+  actions:
+    - text: Iniziare
+      link: /docs/plugins/ibeacon/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-ibeacon/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Monitoraggio Beacon" icon="star">
+    Monitora le regioni beacon e ricevi notifiche quando entri o esci 🎯
+  </Card>
+  <Card title="Ranging Beacon" icon="rocket">
+    Rileva beacon vicini e misura la loro distanza in tempo reale 📡
+  </Card>
+  <Card title="Rilevamento in Background" icon="setting">
+    Monitora i beacon anche quando l'app è in background 🔔
+  </Card>
+  <Card title="Trasmissione Beacon" icon="puzzle">
+    Trasforma il tuo dispositivo in un trasmettitore iBeacon (solo iOS) 📱
+  </Card>
+  <Card title="Cross-platform" icon="puzzle">
+    Funziona sia su iOS che su Android con librerie beacon native 📱
+  </Card>
+  <Card title="Documentazione Completa" icon="open-book">
+    Consulta la [Documentazione](/docs/plugins/ibeacon/getting-started/) per padroneggiare il plugin in pochi minuti.
+  </Card>
+</CardGrid>

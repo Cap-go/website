@@ -1,0 +1,60 @@
+---
+title: "暗号化されたバンドル"
+locale: ja
+description: "セルフホスティング環境で手動アップデートプラグインを利用するための包括的なガイド。安全で効率的なアップデートのための暗号化されたバンドルの管理に関する手順とプロセスを詳述します。"
+sidebar:
+  order: 5
+---
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## エンドツーエンド暗号化
+
+バージョン4.15.0以降、プラグインは暗号化されたアップデートを送信できます。
+
+### ステップ1: 秘密鍵を作成する
+```bash title='秘密鍵を作成'
+npx @capgo/cli key create
+```
+
+### ステップ2: バンドルを作成してzipする
+```bash title="チェックサム付きでバンドルzipを作成"
+npx @capgo/cli bundle zip [appId] --key-v2 --json
+```
+
+`--key-v2`フラグは、より良いチェックサムを持つ新しい暗号化システムを使用し、`--json`フラグは暗号化に必要なチェックサムを含むバンドル情報を出力します。
+
+### ステップ3: バンドルを暗号化する
+```bash title="チェックサム付きでバンドルzipを暗号化"
+npx @capgo/cli encrypt [path/to/zip] [checksum]
+```
+
+`checksum`パラメータは、ステップ2のzipコマンドで生成されたSHA256チェックサムです。encryptコマンドは`ivSessionKey`を返し、暗号化されたチェックサムを生成します。アップデートペイロードで`ivSessionKey`キーを`session_key`に名前変更することを忘れないでください。
+
+### ステップ4: アップデートペイロードで使用する
+```json
+{
+"version": "1.2.3",
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
+"session_key": "encrypted_session_key",
+"checksum": "encrypted_checksum_from_encrypt_command"
+}
+```
+
+`session_key`はencryptコマンドから返された`ivSessionKey`で、`checksum`は暗号化中に生成された暗号化されたチェックサムです（zipコマンドからの元のチェックサムではありません）。
+
+その後、アプリは秘密鍵を使用して`session_key`を復号化し、復号化された`session_key`を使用してアップデートを復号化できます。暗号化されたチェックサムは、バンドルの整合性検証を保証します。
+
+## さらに詳しく
+
+<CardGrid>
+<LinkCard
+	title="エンドツーエンド暗号化ガイド"
+	href="https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/"
+	description="RSA + AES暗号化を使用したCapgoの暗号化システムの仕組みの詳細"
+/>
+<LinkCard
+	title="セルフホスティングライブアップデート"
+	href="https://capgo.app/blog/self-hosted-live-updates/"
+	description="セルフホスティングアップデートのセットアップの完全なワークフロー"
+/>
+</CardGrid>

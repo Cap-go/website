@@ -1,0 +1,49 @@
+---
+title: Firebase Google 登录 - 通用设置
+locale: zh
+description: 了解如何使用 Capacitor Social Login 插件设置带有 Firebase Authentication 的 Google 登录。
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 简介
+
+本指南将引导你使用 Capacitor Social Login 插件集成带有 Firebase Authentication 的 Google 登录。此设置允许你在移动平台上使用原生 Google 登录,同时利用 Firebase Auth 进行后端身份验证。
+
+## 设置步骤
+
+<Steps>
+1. 请前往 [console.cloud.google.com](https://console.cloud.google.com/)
+2. 选择你要使用的项目
+    <img src="/social-login-assets/firebase_project_select.webp" alt="Firebase Project Selector" />
+3. 转到 `Authentication` 菜单
+    1. 点击 `build`
+    2. 点击 `Authentication`
+    <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+4. 点击 `Get started` 按钮
+    <img src="/social-login-assets/firebase_auth_start.webp" alt="Firebase Get Started Button" />
+5. 选择 `Email/Password` 和 `Google` 或仅选择 `Google`
+    :::note
+    我将选择 `Email/Password` 和 `Google`,因为我想同时使用两者,但你可以仅选择 `Google`。这是你以后可以更改的内容。
+    :::
+    <img src="/social-login-assets/firebase_google_email_auth.webp" alt="Firebase Select Email/Password and Google Button" />
+    <img src="/social-login-assets/firebase_auth_enable_email.webp" alt="Firebase enable email authentication" />
+    <img src="/social-login-assets/firebase_auth_enable_email_save.webp" alt="Firebase save enable google authentication" />
+    <img src="/social-login-assets/firebase_auth_add_provider_after_email.webp" alt="Firebase enable add provider button" />
+    <img src="/social-login-assets/firebase_auth_add_google_provider_after_email.webp" alt="Firebase add Google provider after having added email provider" />
+6. 启用 `Google` 提供商
+    <img src="/social-login-assets/firebase_auth_add_google_provider_enable.webp" alt="Firebase enable google authentication" />
+7. 添加支持电子邮件
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth.webp" alt="Firebase add support email" />
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth_2.webp" alt="Firebase add support email part 2" />
+8. 更改 `Public-facing name for project`。
+    :::note
+    这将显示给用户,所以我建议将其更改为更具描述性的内容。
+    :::
+    <img src="/social-login-assets/firebase_auth_change_public_facing_name.webp" alt="Firebase change public facing name" />
+9. 点击 `Save` 按钮
+    <img src="/social-login-assets/firebase_auth_save_google_auth.webp" alt="Firebase save public facing name" />
+</Steps>
+
+瞧,你现在已启用带有 Firebase Authentication 的 Google 登录

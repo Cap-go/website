@@ -1,0 +1,145 @@
+---
+title: Démarrage
+description: Guide d'installation et d'utilisation pour @capgo/capacitor-android-inline-install
+locale: fr
+sidebar:
+  order: 2
+  label: "Démarrage"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Exemple d'utilisation
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+// Basic inline install
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp'
+});
+
+// Advanced install with tracking
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp',
+  referrer: 'campaign=my-campaign&source=app',
+  overlay: true,
+  fallback: true
+});
+
+// Handle the installation flow
+try {
+  await AndroidInlineInstall.startInlineInstall({
+    id: 'com.spotify.music',
+    referrer: 'utm_source=myapp&utm_campaign=music_promotion'
+  });
+  console.log('Install overlay triggered successfully');
+} catch (error) {
+  console.error('Install failed:', error);
+}
+```
+
+## Méthodes API principales
+
+### Gestion de l'installation
+- `startInlineInstall(options)` - Déclencher la superposition d'installation en ligne Google Play pour l'application spécifiée
+
+## Options de configuration
+
+```typescript
+interface InlineInstallOptions {
+  id: string;           // Nom du package de l'application cible (requis)
+  referrer?: string;    // Chaîne de campagne de suivi (optionnel)
+  callerId?: string;    // Nom du package de l'application appelante (par défaut l'application actuelle)
+  overlay?: boolean;    // Activer/désactiver la superposition Play (par défaut : true)
+  fallback?: boolean;   // Utiliser la page complète du store si la superposition échoue (par défaut : true)
+}
+```
+
+## Exigences Google Play
+
+### Éligibilité aux outils de croissance premium
+Votre application doit être qualifiée pour les outils de croissance premium de Google Play pour utiliser l'installation en ligne :
+- Applications avec un engagement utilisateur significatif
+- Bonnes évaluations et avis sur le Play Store
+- Conformité aux politiques de Google Play
+
+### Exigences de l'application cible
+- L'application cible doit être disponible sur le Google Play Store
+- L'application cible doit prendre en charge l'installation en ligne
+- L'utilisateur doit être connecté au Google Play Store
+
+## Comportement et solutions de repli
+
+### Mode superposition (par défaut)
+1. Tente d'ouvrir la superposition Google Play dans votre application
+2. Si la superposition n'est pas disponible, bascule vers la page complète du Play Store
+3. Si le Play Store n'est pas disponible, affiche une erreur
+
+### Mode store complet
+- Ouvre directement la page complète du Google Play Store
+- Contourne complètement la tentative de superposition
+
+## Support de plateforme
+
+- **Android** : Support complet avec Google Play Services
+- **iOS** : Non supporté (fonctionnalité spécifique à Android)
+- **Web** : Non supporté (fonctionnalité native Android)
+
+## Détails d'implémentation
+
+Le plugin utilise les intents Android pour communiquer avec le Google Play Store :
+- Intent action pour la superposition d'installation en ligne
+- Solution de repli vers l'intent standard du Play Store
+- Gestion automatique de la disponibilité des Play Services
+
+## Cas d'utilisation
+
+- **Découverte d'applications** : Promouvoir des applications connexes au sein de votre écosystème
+- **Promotion croisée** : Générer des installations pour des applications partenaires
+- **Déverrouillage de fonctionnalités** : Installer des modules ou extensions supplémentaires
+- **Applications compagnons** : Installer des applications de support de manière transparente
+
+## Bonnes pratiques
+
+- Fournissez toujours des options de repli pour les utilisateurs sans Play Services
+- Testez avec différentes configurations d'appareils et versions du Play Store
+- Utilisez le suivi de référence pour mesurer les taux de conversion
+- Gérez les erreurs d'installation avec élégance
+- Respectez le choix de l'utilisateur s'il refuse l'installation
+
+## Limitations
+
+- Fonctionnalité uniquement Android
+- Nécessite Google Play Services
+- Fonctionne uniquement avec les applications qualifiées pour les outils de croissance premium
+- Soumis aux politiques et à la disponibilité du Google Play Store

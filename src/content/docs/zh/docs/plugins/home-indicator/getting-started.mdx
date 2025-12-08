@@ -1,0 +1,214 @@
+---
+title: 开始使用
+description: 了解如何安装和配置 Capacitor Home Indicator 插件以控制 iOS 设备上的主屏幕指示器。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **配置插件**
+
+   **隐藏主屏幕指示器：**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // 隐藏主屏幕指示器
+   await HomeIndicator.hide();
+   ```
+
+   **显示主屏幕指示器：**
+   ```typescript
+   // 显示主屏幕指示器
+   await HomeIndicator.show();
+
+   // 检查可见性状态
+   const { hidden } = await HomeIndicator.isHidden();
+   console.log('Is hidden:', hidden);
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       无需额外设置。该插件仅在具有主屏幕指示器的 iOS 设备（iPhone X 及更高版本）上工作。
+     </TabItem>
+     <TabItem label="Android">
+       此插件在 Android 设备上无效，因为它们没有 iOS 风格的主屏幕指示器。
+     </TabItem>
+   </Tabs>
+
+4. **自动隐藏配置**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // 配置自动隐藏行为
+   await HomeIndicator.setAutoHidden({
+     autoHidden: true // 启用自动隐藏
+   });
+
+   // 主屏幕指示器将在几秒钟后自动隐藏
+   // 并在用户触摸屏幕时重新出现
+   ```
+
+5. **高级用法**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+   import { App } from '@capacitor/app';
+
+   export class ImmersiveMode {
+     private isImmersive = false;
+
+     async enterImmersiveMode() {
+       this.isImmersive = true;
+
+       // 隐藏主屏幕指示器
+       await HomeIndicator.hide();
+
+       // 启用自动隐藏以获得更好的用户体验
+       await HomeIndicator.setAutoHidden({ autoHidden: true });
+
+       // 隐藏状态栏以获得完全沉浸式体验
+       // StatusBar.hide(); // 如果使用 @capacitor/status-bar
+     }
+
+     async exitImmersiveMode() {
+       this.isImmersive = false;
+
+       // 显示主屏幕指示器
+       await HomeIndicator.show();
+
+       // 禁用自动隐藏
+       await HomeIndicator.setAutoHidden({ autoHidden: false });
+
+       // 显示状态栏
+       // StatusBar.show(); // 如果使用 @capacitor/status-bar
+     }
+
+     async toggleImmersiveMode() {
+       const { hidden } = await HomeIndicator.isHidden();
+
+       if (hidden) {
+         await this.exitImmersiveMode();
+       } else {
+         await this.enterImmersiveMode();
+       }
+     }
+
+     setupAppLifecycle() {
+       // 处理应用状态变化
+       App.addListener('appStateChange', async ({ isActive }) => {
+         if (!isActive && this.isImmersive) {
+           // 应用进入后台，可能想要显示指示器
+           await HomeIndicator.show();
+         } else if (isActive && this.isImmersive) {
+           // 应用进入前台，恢复沉浸式模式
+           await HomeIndicator.hide();
+         }
+       });
+     }
+   }
+   ```
+</Steps>
+
+## API 参考
+
+### 方法
+
+#### `hide()`
+隐藏主屏幕指示器。
+
+**返回值：** `Promise<void>`
+
+#### `show()`
+显示主屏幕指示器。
+
+**返回值：** `Promise<void>`
+
+#### `isHidden()`
+检查主屏幕指示器当前是否隐藏。
+
+**返回值：** `Promise<{ hidden: boolean }>`
+
+#### `setAutoHidden(options: { autoHidden: boolean })`
+为主屏幕指示器配置自动隐藏行为。
+
+**参数：**
+- `options.autoHidden`: boolean - 启用或禁用自动隐藏
+
+**返回值：** `Promise<void>`
+
+### 接口
+
+```typescript
+interface AutoHiddenOptions {
+  autoHidden: boolean;
+}
+
+interface HiddenResult {
+  hidden: boolean;
+}
+```
+
+## 平台说明
+
+### iOS
+- 仅在具有主屏幕指示器的设备上工作（iPhone X 及更高版本）
+- 需要 iOS 11.0 或更高版本
+- 自动隐藏使指示器变为半透明并在非活动后隐藏
+- 当用户从底部向上滑动时，指示器会重新出现
+
+### Android
+- 此插件在 Android 上无效
+- Android 使用不同的导航手势/按钮
+
+## 常见使用场景
+
+1. **游戏**：无干扰的全屏游戏
+2. **视频播放器**：沉浸式视频播放
+3. **照片查看器**：全屏照片库
+4. **演示文稿**：无干扰的演示
+5. **Kiosk 应用**：公共显示应用
+
+## 最佳实践
+
+1. **用户控制**：始终提供一种退出沉浸式模式的方法
+   ```typescript
+   // 添加手势或按钮以切换沉浸式模式
+   const toggleButton = document.getElementById('toggle-immersive');
+   toggleButton.addEventListener('click', () => {
+     immersiveMode.toggleImmersiveMode();
+   });
+   ```
+
+2. **游戏的自动隐藏**：使用自动隐藏获得更好的游戏体验
+   ```typescript
+   // 对于游戏，自动隐藏提供最佳平衡
+   await HomeIndicator.setAutoHidden({ autoHidden: true });
+   ```
+
+3. **尊重系统手势**：不要干扰系统导航
+4. **保存状态**：记住用户对沉浸式模式的偏好
+
+## 故障排除
+
+**主屏幕指示器未隐藏：**
+- 验证设备具有主屏幕指示器（iPhone X+）
+- 检查 iOS 版本是否为 11.0 或更高
+- 确保应用有焦点
+
+**自动隐藏不工作：**
+- 自动隐藏需要用户交互才能激活
+- 指示器变为半透明，而不是完全隐藏
+
+**指示器意外重新出现：**
+- 这是系统手势的正常 iOS 行为
+- 使用自动隐藏以获得不太侵入性的行为

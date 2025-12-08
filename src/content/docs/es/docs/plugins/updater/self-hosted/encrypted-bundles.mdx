@@ -1,0 +1,60 @@
+---
+title: "Bundles Encriptados"
+locale: es
+description: "Una guía completa sobre cómo utilizar el plugin de actualización manual en un entorno auto-hospedado, detallando los pasos y procesos involucrados en la gestión de bundles encriptados para actualizaciones seguras y eficientes."
+sidebar:
+  order: 5
+---
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Encriptación de Extremo a Extremo
+
+A partir de la versión 4.15.0, el plugin te permite enviar actualizaciones encriptadas.
+
+### Paso 1: Crear una clave privada
+```bash title='Crear una clave privada'
+npx @capgo/cli key create
+```
+
+### Paso 2: Crear y comprimir tu bundle
+```bash title="Crear bundle zip con checksum"
+npx @capgo/cli bundle zip [appId] --key-v2 --json
+```
+
+La bandera `--key-v2` usa el nuevo sistema de encriptación con mejores checksums, y la bandera `--json` mostrará la información del bundle incluyendo el checksum que necesitarás para la encriptación.
+
+### Paso 3: Encriptar tu bundle
+```bash title="Encriptar zip del bundle con checksum"
+npx @capgo/cli encrypt [path/to/zip] [checksum]
+```
+
+El parámetro `checksum` es el checksum SHA256 generado por el comando zip en el paso 2. El comando encrypt devolverá un `ivSessionKey` y generará un checksum encriptado. Recuerda renombrar la clave `ivSessionKey` como `session_key` en el payload de actualización.
+
+### Paso 4: Usar en tu payload de actualización
+```json
+{
+"version": "1.2.3",
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
+"session_key": "encrypted_session_key",
+"checksum": "encrypted_checksum_from_encrypt_command"
+}
+```
+
+La `session_key` es el `ivSessionKey` devuelto por el comando encrypt, y el `checksum` es el checksum encriptado generado durante la encriptación (no el checksum original del comando zip).
+
+Luego tu aplicación podrá usar la clave privada para desencriptar la `session_key` y usar la `session_key` desencriptada para desencriptar la actualización. El checksum encriptado asegura la verificación de integridad del bundle.
+
+## Aprende Más
+
+<CardGrid>
+<LinkCard
+	title="Guía de Encriptación de Extremo a Extremo"
+	href="https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/"
+	description="Profundiza en cómo funciona el sistema de encriptación de Capgo con criptografía RSA + AES"
+/>
+<LinkCard
+	title="Actualizaciones en Vivo Auto-hospedadas"
+	href="https://capgo.app/blog/self-hosted-live-updates/"
+	description="Flujo de trabajo completo para configurar actualizaciones auto-hospedadas"
+/>
+</CardGrid>

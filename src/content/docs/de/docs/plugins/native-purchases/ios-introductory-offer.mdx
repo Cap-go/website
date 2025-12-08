@@ -1,0 +1,413 @@
+---
+title: iOS-Abonnement-Einführungsangebot erstellen
+description: Erfahren Sie, wie Sie Einführungsangebote für automatisch verlängernde Abonnements auf iOS erstellen, um neue Abonnenten zu gewinnen und zu konvertieren.
+locale: de
+sidebar:
+  order: 9
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Einführungsangebote ermöglichen es Ihnen, berechtigten Benutzern kostenlose Testversionen oder vergünstigte Einführungspreise anzubieten, um Einstiegshürden zu reduzieren und Abonnement-Konversionen zu erhöhen.
+
+## Übersicht
+
+Einführungsangebote sind eines der effektivsten Werkzeuge zum Wachstum Ihrer Abonnentenbasis. Sie ermöglichen es Benutzern:
+- Ihre Premium-Funktionen risikofrei zu testen
+- Wert zu erfahren, bevor sie sich verpflichten
+- Mit einem niedrigeren Preispunkt zu beginnen
+- Vertrauen in Ihr Produkt aufzubauen
+
+## Angebotstypen
+
+iOS unterstützt drei Arten von Einführungsangeboten:
+
+### 1. Kostenlose Testversion
+Kunden erhalten für einen bestimmten Zeitraum kostenlosen Zugang. Nach der Testversion werden ihnen Standardpreise berechnet, wenn sie nicht kündigen.
+
+**Beispiele:**
+- 7 Tage kostenlos
+- 14 Tage kostenlos
+- 1 Monat kostenlos
+
+**Am besten geeignet für:**
+- Hochwertige Abonnements
+- Funktionsreiche Apps
+- Aufbau von Nutzergewohnheiten
+
+### 2. Vorabzahlung
+Kunden zahlen einen einmaligen reduzierten Preis, der den Einführungszeitraum abdeckt.
+
+**Beispiele:**
+- 1,99 € für 2 Monate (dann 9,99 €/Monat)
+- 9,99 € für 3 Monate (dann 19,99 €/Monat)
+
+**Am besten geeignet für:**
+- Verbindlichkeitssignale
+- Cashflow-Bedürfnisse
+- Testen der Preissensitivität
+
+### 3. Ratenzahlung
+Kunden zahlen über mehrere Abrechnungszyklen einen reduzierten Preis.
+
+**Beispiele:**
+- 1,99 €/Monat für 3 Monate (dann 9,99 €/Monat)
+- 4,99 €/Monat für 6 Monate (dann 14,99 €/Monat)
+
+**Am besten geeignet für:**
+- Schrittweise Verpflichtung
+- Langfristige Wertdemonstration
+- Reduzierung des wahrgenommenen Risikos
+
+## Berechtigungsanforderungen
+
+Benutzer können Einführungsangebote nur erhalten, wenn sie:
+- Noch kein Einführungsangebot für das Produkt erhalten haben
+- Kein Einführungsangebot für ein Produkt in derselben Abonnementgruppe erhalten haben
+- Kein aktives Abonnement für das Produkt hatten
+
+:::note
+Apple übernimmt die Berechtigungsprüfung automatisch. Das native-purchases Plugin bietet Methoden zur Überprüfung der Berechtigung vor der Präsentation von Angeboten.
+:::
+
+## Voraussetzungen
+
+Sie müssen zuerst [ein automatisch verlängerndes Abonnement erstellen](/docs/plugins/native-purchases/ios-create-subscription/), bevor Sie ein Einführungsangebot hinzufügen.
+
+## Erstellen eines Einführungsangebots
+
+<Steps>
+
+1. **Zum Abonnement navigieren**
+
+   Gehen Sie in App Store Connect zu Ihrem App-Bereich **Monetarisierung > Abonnements** und wählen Sie das Abonnement aus, dem Sie ein Angebot hinzufügen möchten.
+
+2. **Abonnementpreis hinzufügen**
+
+   Klicken Sie auf das **+**-Symbol neben "Abonnementpreise", um das Preis-Modal zu öffnen.
+
+3. **Einführungsangebot erstellen**
+
+   Wählen Sie **"Einführungsangebot erstellen"** aus den Optionen.
+
+   ![Einführungsangebot erstellen](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
+
+4. **Länder und Startdatum konfigurieren**
+
+   **Länder und Regionen**: Wählen Sie aus, wo das Angebot verfügbar sein wird
+   - Wählen Sie alle Länder für maximale Reichweite
+   - Oder beschränken Sie auf bestimmte Märkte zum Testen
+
+   **Startdatum**: Wann das Angebot verfügbar wird
+   - Kann sofort oder für die Zukunft geplant sein
+   - Nützlich für die Koordination mit Marketingkampagnen
+
+   **Enddatum (Optional)**: Wann das Angebot abläuft
+   - Leer lassen für dauerhafte Verfügbarkeit
+   - Datum festlegen für zeitlich begrenzte Aktionen
+
+5. **Angebotstyp auswählen**
+
+   Wählen Sie einen der drei Angebotstypen:
+
+   **Kostenlos** (Kostenlose Testversion)
+   - Dauer auswählen (Tage, Wochen, Monate)
+   - Beispiele: 7 Tage, 2 Wochen, 1 Monat
+
+   **Vorabzahlung**
+   - Einmaligen Zahlungspreis festlegen
+   - Von der Zahlung abgedeckte Dauer festlegen
+   - Beispiel: 1,99 € für 2 Monate
+
+   **Ratenzahlung**
+   - Reduzierten Preis pro Zeitraum festlegen
+   - Anzahl der Zeiträume festlegen
+   - Beispiel: 2,99 €/Monat für 3 Monate
+
+6. **Überprüfen und bestätigen**
+
+   Überprüfen Sie die Zusammenfassung, die Folgendes zeigt:
+   - Angebotstyp und Dauer
+   - Preisdetails
+   - Regulärer Preis nach Einführungszeitraum
+   - Verfügbarkeitsdaten und Länder
+
+7. **Speichern**
+
+   Klicken Sie auf **Speichern**, um das Einführungsangebot zu erstellen. Es wird sofort zum Testen im Sandbox-Modus verfügbar sein.
+
+</Steps>
+
+## Beispiele für Angebotskonfigurationen
+
+### Beispiel 1: Standard-Testversion
+```
+Typ: Kostenlos
+Dauer: 7 Tage
+Dann: 9,99 €/Monat
+```
+**Benutzerreise:**
+- Tag 1-7: Kostenloser Zugang
+- Tag 8: Erste Belastung von 9,99 €
+- Monatliche Belastungen setzen sich fort
+
+### Beispiel 2: Vergünstigter Vorabzahlungszeitraum
+```
+Typ: Vorabzahlung
+Preis: 4,99 €
+Dauer: 3 Monate
+Dann: 9,99 €/Monat
+```
+**Benutzerreise:**
+- Tag 1: Belastung von 4,99 €
+- 90 Tage Zugang
+- Tag 91: Belastung von 9,99 €/Monat
+
+### Beispiel 3: Schrittweise Einführung
+```
+Typ: Ratenzahlung
+Preis: 2,99 €/Monat
+Zeiträume: 6 Monate
+Dann: 9,99 €/Monat
+```
+**Benutzerreise:**
+- Monate 1-6: 2,99 €/Monat
+- Monat 7+: 9,99 €/Monat
+
+## Verwendung in Ihrer App
+
+Das native-purchases Plugin behandelt automatisch die Präsentation und Berechtigung von Einführungsangeboten:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Produkte mit Einführungsangebot-Informationen abrufen
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.yourapp.premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+
+// Einführungsangebot-Details anzeigen (StoreKit sendet lokalisierte Metadaten)
+if (product.introductoryPrice) {
+  console.log('Einführungspreis:', product.introductoryPriceString);
+  console.log('Einführungszeitraum:', product.introductoryPricePeriod);
+  console.log('Einführungszyklen:', product.introductoryPriceCycles);
+  console.log('Regulärer Preis:', product.priceString);
+} else {
+  console.log('Kein Einführungsangebot konfiguriert');
+}
+
+// Kauf (StoreKit wendet automatisch Einführungspreise an, wenn berechtigt)
+try {
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.yourapp.premium_monthly',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Abonnement aktiv, Beleglänge:', transaction.receipt?.length);
+  await validateReceiptOnServer(transaction.receipt);
+} catch (error) {
+  console.error('Kauf fehlgeschlagen:', error);
+}
+```
+
+## Einführungsangebote für Benutzer anzeigen
+
+### Best Practices für UI
+
+**Klares Wertversprechen:**
+```
+Testen Sie Premium 7 Tage kostenlos
+Dann 9,99 €/Monat. Jederzeit kündbar.
+```
+
+**Einsparungen betonen:**
+```
+Starten Sie für nur 1,99 €
+Erhalten Sie 3 Monate Premium für nur 1,99 €
+Dann 9,99 €/Monat
+```
+
+**Transparente Kommunikation:**
+```
+Ihre kostenlose Testversion
+• Zugang zu allen Premium-Funktionen
+• Keine Belastung für 7 Tage
+• 9,99 €/Monat nach der Testversion
+• Jederzeit kündbar, auch während der Testversion
+```
+
+### Beispielimplementierung
+
+```typescript
+function formatIntroOffer(product: any): string {
+  if (!product.introductoryPrice) {
+    return `${product.priceString} pro ${product.subscriptionPeriod}`;
+  }
+
+  const intro = product.introductoryPrice;
+  const regular = product.priceString;
+
+  if (intro.price === 0) {
+    // Kostenlose Testversion
+    return `Testen Sie kostenlos für ${intro.periodString}, dann ${regular}`;
+  } else if (intro.cycles === 1) {
+    // Vorabzahlung
+    return `${intro.priceString} für ${intro.periodString}, dann ${regular}`;
+  } else {
+    // Ratenzahlung
+    return `${intro.priceString} für ${intro.cycles} ${intro.periodString}(e), dann ${regular}`;
+  }
+}
+```
+
+## Marketing Best Practices
+
+### Strategie für Testversionen-Länge
+- **3-7 Tage**: Apps mit schneller Entscheidung, Spiele
+- **7-14 Tage**: Standard für die meisten Apps
+- **14-30 Tage**: Komplexe Tools, professionelle Apps
+- **30+ Tage**: Hochwertige B2B oder Enterprise
+
+### Preispsychologie
+- **0,99 €-1,99 €**: Sehr niedrige Schwelle, gut zum Testen
+- **50% Rabatt**: Starker wahrgenommener Wert
+- **Erster Monat kostenlos**: Üblich, vertrautes Muster
+
+### Kommunikations-Timing
+- **Vor Testende**: Benutzer an bevorstehende Belastung erinnern
+- **Wert hervorheben**: Nutzungsstatistiken, Erfolge zeigen
+- **Einfache Kündigung**: Vertrauen mit transparentem Prozess aufbauen
+
+## Einführungsangebote testen
+
+Verwenden Sie Sandbox-Tests, um das Verhalten zu überprüfen:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Im Sandbox-Modus gelten beschleunigte Abonnementdauern:
+// - 3 Tage kostenlose Testversion = 3 Minuten
+// - 1 Woche kostenlose Testversion = 3 Minuten
+// - 1 Monat kostenlose Testversion = 5 Minuten
+
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Kauf mit Einführungsangebot
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Einführungskauf-Transaktion:', transaction.transactionId);
+
+// Auf beschleunigte Verlängerung warten
+setTimeout(async () => {
+  const { purchases } = await NativePurchases.getPurchases({
+    productType: PURCHASE_TYPE.SUBS,
+  });
+  const premium = purchases.find((purchase) => purchase.productIdentifier === 'premium_monthly');
+  console.log('Status nach Testversion:', premium?.subscriptionState);
+}, 180000); // 3 Minuten für wöchentliche Testversion
+```
+
+## Wichtige Hinweise
+
+### Berechtigungsregeln
+- Ein Einführungsangebot pro Benutzer pro Abonnementgruppe (lebenslang)
+- Gilt nur für neue Abonnenten
+- Kann nach Kündigung nicht erneut verwendet werden
+- Nicht verfügbar für Abonnement-Upgrades/Crossgrades
+
+### StoreKit API
+- `introductoryPrice` zeigt Details zum Einführungsangebot
+- `eligibility`-Methode prüft, ob Benutzer qualifiziert ist
+- Wird automatisch beim Kauf angewendet
+- Keine spezielle Kaufmethode erforderlich
+
+### Einschränkungen
+- Nur ein aktives Einführungsangebot pro Abonnement gleichzeitig
+- Kann nicht mit anderen Rabatttypen kombiniert werden
+- Berechtigungsregeln können nicht geändert werden
+- Apple kontrolliert die Berechtigungsprüfung
+
+## Fehlerbehebung
+
+**Einführungsangebot wird nicht angezeigt:**
+- Prüfen Sie, ob das Angebot in App Store Connect aktiviert ist
+- Überprüfen Sie, ob der Benutzer zuvor kein Einführungsangebot verwendet hat
+- Stellen Sie sicher, dass der Benutzer nichts in der Gruppe abonniert hat
+- Testen Sie mit neuem Sandbox-Konto
+
+**Berechtigungsprüfung schlägt fehl:**
+- Warten Sie auf App Store-Synchronisation (kann 2-3 Stunden dauern)
+- Überprüfen Sie, ob die Produkt-ID korrekt ist
+- Prüfen Sie die Abonnementgruppen-Konfiguration
+- Testen Sie in der Sandbox mit frischem Testkonto
+
+**Falscher Preis wird angezeigt:**
+- Prüfen Sie regionale Preiseinstellungen
+- Überprüfen Sie Währungsumrechnung
+- Stellen Sie sicher, dass Angebotsdaten aktuell sind
+- Produktinformationen aktualisieren
+
+**Sandbox-Testprobleme:**
+- Verwenden Sie beschleunigte Dauern (3 Min = 1 Woche)
+- Erstellen Sie neue Testkonten für jeden Test
+- Warten Sie, bis die Testversion natürlich abgeschlossen ist
+- Prüfen Sie Verlängerungsanzahl (max 6 in Sandbox)
+
+## Analytics und Optimierung
+
+### Diese Metriken verfolgen
+- Akzeptanzrate für Einführungsangebote
+- Konversionsrate von Testversion zu Bezahlung
+- Kündigungen während der Testversion
+- Verbleib nach erster Belastung
+- Umsatzauswirkungen
+
+### A/B-Test-Ideen
+- Kostenlose Testversion vs. bezahlte Einführung
+- Variationen der Testversionen-Länge
+- Rabattprozentsatz
+- Einmalzahlung vs. wiederkehrender Rabatt
+
+### Optimierungsstrategie
+```typescript
+// Angebots-Performance verfolgen
+analytics.track('intro_offer_displayed', {
+  product_id: product.identifier,
+  offer_type: product.introductoryPriceType,
+  offer_duration: product.introductoryPricePeriod
+});
+
+analytics.track('intro_offer_accepted', {
+  product_id: product.identifier
+});
+
+// Konversion überwachen
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  if (transaction.productIdentifier === product.identifier && transaction.isActive) {
+    analytics.track('trial_converted', {
+      transactionId: transaction.transactionId,
+      productId: transaction.productIdentifier,
+    });
+  }
+});
+```
+
+## Nächste Schritte
+
+- [Sandbox-Tests konfigurieren](/docs/plugins/native-purchases/ios-sandbox-testing/), um Ihre Einführungsangebote zu testen
+- Richten Sie Werbeangebote für Rückgewinnungskampagnen ein
+- Implementieren Sie Abonnement-Analytics
+- Erstellen Sie gezielte Marketingkampagnen
+
+## Zusätzliche Ressourcen
+
+Weitere Details finden Sie in der [offiziellen Apple-Dokumentation zu Einführungsangeboten](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).

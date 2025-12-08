@@ -1,0 +1,63 @@
+---
+title: Apple Login für Webbrowser
+locale: de
+description: Dieser Leitfaden bietet eine detaillierte Anleitung zur Einrichtung von Apple Login mit Capacitor für Webanwendungen unter Verwendung des @capgo/capacitor-social-login Plugins, um einen nahtlosen Integrationsprozess zu gewährleisten.
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+
+Die Konfiguration des Web-Logins ist nicht trivial. Es ist schwieriger als die Einrichtung von `Sign in with Apple` auf iOS, aber schwieriger als die Einrichtung von `Sign in with Apple` auf Android.
+
+## Generierung des Dienstes
+
+:::note
+Dieser Schritt ist redundant, wenn Sie bereits `Sign in with Apple` auf Android konfiguriert haben.
+:::
+
+Bitte folgen Sie der Anleitung [hier](/docs/plugins/social-login/apple/android/#creating-the-service-id/), um den Dienst zu generieren.
+
+## Konfiguration der `Return URLs`
+
+<Steps>
+
+1. **Gehen Sie zu Ihrer Service ID Konfiguration**
+
+   Im [Apple Developer Portal](https://developer.apple.com) navigieren Sie zu `Identifiers` > `Services IDs` und klicken Sie auf Ihre Service ID.
+
+2. **Konfigurieren Sie Sign in with Apple**
+
+   Klicken Sie auf `Configure` neben `Sign in with Apple`.
+
+   ![apple_dev_configure_login](/social-login-assets/apple_dev_configure_login.webp)
+
+3. **Fügen Sie die Return URLs hinzu**
+
+   Klicken Sie auf die `+` Schaltfläche, um eine neue Return URL hinzuzufügen.
+
+   ![apple_dev_return_url_plus](/social-login-assets/apple_dev_return_url_plus.webp)
+
+4. **Fügen Sie die Return URLs hinzu**
+
+   Fügen Sie Ihre Domain für Ihre Webanwendung unter `Domains and Subdomains` hinzu.
+   :::caution
+   Sie **KÖNNEN NICHT** `localhost` oder `127.0.0.1` als Domain hier hinzufügen.
+   :::
+
+   Fügen Sie dann Ihre Domain mit dem `https://` Präfix und dem Pfad hinzu, von dem Sie Apple Login aufrufen werden.
+   Wenn Ihre Domain zum Beispiel `https://my-app.com` ist und Sie Apple Login von `/login` aufrufen, sollten Sie `https://my-app.com/login` als Return URL hinzufügen.
+
+   :::caution
+   Sie **MÜSSEN** sowohl die Domain mit als auch ohne abschließenden Schrägstrich hinzufügen.
+   :::
+
+   ![apple_dev_return_url_add](/social-login-assets/apple_dev_return_url_add.webp)
+
+5. **Speichern Sie die Änderungen**
+
+   1. Klicken Sie auf die `Next` Schaltfläche, um die Änderungen zu speichern.
+   2. Klicken Sie auf die `Save` Schaltfläche, um die Änderungen zu speichern.
+
+6. Sie sollten nun bereit sein, den Login für JavaScript zu testen. Bitte beachten Sie, dass Sie nicht von localhost testen können.
+</Steps>

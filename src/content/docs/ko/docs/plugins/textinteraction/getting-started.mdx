@@ -1,0 +1,274 @@
+---
+title: 시작하기
+locale: ko
+description: Text Interaction 플러그인을 설치하고 사용하여 iOS 텍스트 선택 확대경 및 루페를 제어하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 플랫폼 지원
+
+- **iOS**: iOS 15.0+ (UITextInteraction API 필요)
+- **Android**: 작동 안 함 (지원되지 않음 반환)
+- **Web**: 작동 안 함 (지원되지 않음 반환)
+
+## 사용 예제
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+// 텍스트 인터랙션 비활성화 (확대경/루페 제거)
+const result = await TextInteraction.setEnabled({ enabled: false });
+
+if (result.success) {
+  console.log('텍스트 인터랙션 비활성화됨');
+} else {
+  console.log('이 플랫폼에서 지원되지 않음');
+}
+
+// 텍스트 입력을 표시하기 전에 텍스트 인터랙션 다시 활성화
+await TextInteraction.setEnabled({ enabled: true });
+```
+
+## API 참조
+
+### setEnabled(options)
+
+```typescript
+setEnabled(options: { enabled: boolean }) => Promise<{ success: boolean }>
+```
+
+iOS 텍스트 인터랙션(확대경 렌즈 및 선택 핸들)을 활성화 또는 비활성화합니다.
+
+| 매개변수         | 타입                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+**반환값:** `Promise<{ success: boolean }>`
+
+- 작업이 성공하면(iOS 15+) `{ success: true }` 반환
+- 지원되지 않으면(Android, Web 또는 iOS < 15) `{ success: false }` 반환
+
+## 실용적인 사용 사례
+
+### 키오스크 애플리케이션
+
+키오스크 모드에서 텍스트 인터랙션을 비활성화하여 사용자가 복사/붙여넣기 메뉴에 액세스하지 못하도록 방지:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function enterKioskMode() {
+  // 키오스크 모드에서 텍스트 인터랙션 비활성화
+  const result = await TextInteraction.setEnabled({ enabled: false });
+
+  if (result.success) {
+    console.log('키오스크 모드: 텍스트 인터랙션 비활성화됨');
+  }
+}
+
+async function exitKioskMode() {
+  // 키오스크 모드 종료 시 텍스트 인터랙션 다시 활성화
+  await TextInteraction.setEnabled({ enabled: true });
+  console.log('키오스크 모드: 텍스트 인터랙션 활성화됨');
+}
+```
+
+### 게임 경험
+
+게임 플레이 중에 확대경 렌즈를 제거하고 텍스트 입력 시 복원:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class GameController {
+  async startGame() {
+    // 게임 플레이 중 텍스트 인터랙션 비활성화
+    await TextInteraction.setEnabled({ enabled: false });
+    console.log('게임 시작됨 - 텍스트 인터랙션 비활성화됨');
+  }
+
+  async showTextInput() {
+    // 입력을 표시하기 전에 텍스트 인터랙션 활성화
+    await TextInteraction.setEnabled({ enabled: true });
+    console.log('텍스트 입력 준비됨 - 인터랙션 활성화됨');
+
+    // 입력 필드 표시
+    this.displayInputField();
+  }
+
+  async hideTextInput() {
+    // 입력을 숨기고 인터랙션을 다시 비활성화
+    this.hideInputField();
+    await TextInteraction.setEnabled({ enabled: false });
+  }
+}
+```
+
+### 인터랙티브 설치
+
+디지털 사이니지 및 인터랙티브 디스플레이를 위한 텍스트 인터랙션 제어:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function setupInteractiveDisplay() {
+  // 디스플레이 모드를 위한 텍스트 인터랙션 비활성화
+  await TextInteraction.setEnabled({ enabled: false });
+
+  // 디스플레이 인터랙션을 위한 터치 핸들러 설정
+  document.addEventListener('touchstart', handleDisplayTouch);
+}
+
+async function enableUserInput() {
+  // 사용자가 데이터를 입력해야 할 때 텍스트 인터랙션 활성화
+  const result = await TextInteraction.setEnabled({ enabled: true });
+
+  if (result.success) {
+    showInputForm();
+  } else {
+    // 지원되지 않는 플랫폼에 대한 대체
+    showInputFormWithoutTextInteraction();
+  }
+}
+```
+
+### 폼 관리
+
+폼 상태에 따라 텍스트 인터랙션 토글:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class FormManager {
+  private textInteractionEnabled = true;
+
+  async disableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: false });
+    this.textInteractionEnabled = false;
+    return result.success;
+  }
+
+  async enableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: true });
+    this.textInteractionEnabled = true;
+    return result.success;
+  }
+
+  async onFormFocus() {
+    // 키보드 표시 전에 항상 활성화
+    await this.enableTextSelection();
+  }
+
+  async onFormBlur() {
+    // 입력이 완료된 후 선택적으로 비활성화
+    await this.disableTextSelection();
+  }
+}
+```
+
+### 조건부 텍스트 인터랙션
+
+플랫폼 인식 텍스트 인터랙션 제어:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+import { Capacitor } from '@capacitor/core';
+
+async function toggleTextInteraction(enabled: boolean) {
+  // iOS에서만 시도
+  if (Capacitor.getPlatform() === 'ios') {
+    const result = await TextInteraction.setEnabled({ enabled });
+
+    if (result.success) {
+      console.log(`텍스트 인터랙션 ${enabled ? '활성화됨' : '비활성화됨'}`);
+    } else {
+      console.log('이 iOS 버전에서 텍스트 인터랙션이 지원되지 않음');
+    }
+  } else {
+    console.log('텍스트 인터랙션 제어는 iOS에서만 사용 가능');
+  }
+}
+
+// 사용법
+await toggleTextInteraction(false); // 비활성화
+await toggleTextInteraction(true);  // 활성화
+```
+
+## 모범 사례
+
+- **텍스트 입력 전에 항상 다시 활성화**: 필요할 때 텍스트 인터랙션을 비활성화하되, 텍스트 입력 필드나 키보드를 표시하기 전에 항상 다시 활성화하세요
+- **플랫폼 지원 확인**: `result.success`를 확인하여 지원되지 않는 플랫폼을 우아하게 처리하세요
+- **iOS 전용 기능**: 이 플러그인은 iOS 전용입니다. Android 및 Web에 대한 대체 구현을 구현하세요
+- **사용자 경험**: 텍스트 인터랙션 비활성화가 UX에 미치는 영향을 고려하세요
+- **상태 관리**: 불필요한 호출을 피하기 위해 활성화/비활성화 상태를 추적하세요
+
+## 중요 알림
+
+1. **텍스트 입력을 위해 다시 활성화**: 텍스트 입력 필드를 표시하기 전에 항상 `setEnabled({ enabled: true })`를 호출하세요. 그렇지 않으면 사용자가 텍스트를 제대로 선택하거나 편집할 수 없습니다
+
+2. **플랫폼 감지**: 이 플러그인은 Android, Web 및 15.0 미만의 iOS 버전에서 `{ success: false }`를 반환합니다
+
+3. **시각적 피드백 없음**: 텍스트 인터랙션 비활성화는 확대경을 제거하지만 시각적 피드백을 제공하지 않습니다 - 필요한 경우 자체 UI 표시기를 구현하세요
+
+4. **안전한 기본값**: 텍스트 인터랙션 시스템은 기본적으로 활성화되어 있으며, iOS의 표준 동작과 일치합니다
+
+## 제한 사항
+
+- iOS 15.0+ 전용 (UITextInteraction API 필요)
+- Android 또는 Web 플랫폼에 효과 없음
+- 확대경 또는 선택 핸들만 선택적으로 비활성화할 수 없음
+- 사용자가 비활성화된 기능을 사용하려고 시도할 때 콜백 없음
+
+## 사용 사례
+
+- **키오스크 애플리케이션**: 제어된 설치에서 복사/붙여넣기 방지
+- **게임 경험**: 게임 플레이 중 확대경 제거
+- **인터랙티브 디스플레이**: 디지털 사이니지에서 텍스트 인터랙션 제어
+- **커스텀 텍스트 편집기**: 특수 텍스트 편집 경험 구축
+- **보안**: 민감한 영역에서 텍스트 선택 방지
+
+## 문제 해결
+
+### 텍스트 인터랙션이 비활성화되지 않음
+
+- iOS 버전이 15.0 이상인지 확인
+- `result.success`가 `true`를 반환하는지 확인
+- 다른 코드가 텍스트 인터랙션을 다시 활성화하지 않는지 확인
+
+### 사용자가 텍스트를 편집할 수 없음
+
+- 텍스트 입력을 표시하기 전에 `setEnabled({ enabled: true })`를 호출했는지 확인
+- `result.success`를 확인하여 활성화 호출이 성공했는지 확인
+- 실제 iOS 기기에서 테스트 (시뮬레이터뿐만 아니라)

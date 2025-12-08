@@ -1,0 +1,255 @@
+---
+title: 시작하기
+locale: ko
+description: StoreKit 2와 Google Play Billing 7을 사용하여 일회성 구매 및 구독을 구현하기 위한 @capgo/native-purchases 플러그인 설치 및 사용 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/native-purchases" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **결제 지원 확인**
+
+   ```typescript
+   import { NativePurchases } from '@capgo/native-purchases';
+
+   const { isBillingSupported } = await NativePurchases.isBillingSupported();
+   if (!isBillingSupported) {
+     throw new Error('Billing is not available on this device');
+   }
+   ```
+
+4. **스토어에서 직접 제품 로드**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const { products } = await NativePurchases.getProducts({
+     productIdentifiers: [
+       'com.example.premium.monthly',
+       'com.example.premium.yearly',
+       'com.example.one_time_unlock'
+     ],
+     productType: PURCHASE_TYPE.SUBS, // Use PURCHASE_TYPE.INAPP for one‑time products
+   });
+
+   products.forEach((product) => {
+     console.log(product.title, product.priceString);
+   });
+   ```
+
+5. **구매 및 복원 플로우 구현**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const monthlyPlanId = 'monthly-plan'; // Base Plan ID from Google Play Console
+
+   const transaction = await NativePurchases.purchaseProduct({
+     productIdentifier: 'com.example.premium.monthly',
+     planIdentifier: monthlyPlanId,        // REQUIRED for Android subscriptions, ignored on iOS
+     productType: PURCHASE_TYPE.SUBS,
+     quantity: 1,
+   });
+
+   console.log('Transaction ID', transaction.transactionId);
+
+   await NativePurchases.restorePurchases();
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       - App Store Connect에서 인앱 제품 및 구독을 생성하세요.<br />
+       - QA를 위해 StoreKit Local Testing 또는 Sandbox 테스터를 사용하세요.<br />
+       - 매니페스트 편집이 필요하지 않습니다. 제품이 승인되었는지 확인하세요.
+     </TabItem>
+     <TabItem label="Android">
+       - Google Play Console에서 인앱 제품 및 구독을 생성하세요.<br />
+       - 최소한 내부 테스트 빌드를 업로드하고 라이선스 테스터를 추가하세요.<br />
+       - `AndroidManifest.xml`에 결제 권한을 추가하세요:
+       ```xml
+       <uses-permission android:name="com.android.vending.BILLING" />
+       ```
+     </TabItem>
+   </Tabs>
+</Steps>
+
+## 구매 서비스 예제
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE, Transaction } from '@capgo/native-purchases';
+import { Capacitor } from '@capacitor/core';
+
+class PurchaseService {
+  private premiumProduct = 'com.example.premium.unlock';
+  private monthlySubId = 'com.example.premium.monthly';
+  private monthlyPlanId = 'monthly-plan'; // Base Plan ID (Android only)
+
+  async initialize() {
+    const { isBillingSupported } = await NativePurchases.isBillingSupported();
+    if (!isBillingSupported) throw new Error('Billing unavailable');
+
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: [this.premiumProduct, this.monthlySubId],
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    console.log('Loaded products', products);
+
+    if (Capacitor.getPlatform() === 'ios') {
+      NativePurchases.addListener('transactionUpdated', (transaction) => {
+        this.handleTransaction(transaction);
+      });
+    }
+  }
+
+  async buyPremium(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.premiumProduct,
+      productType: PURCHASE_TYPE.INAPP,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async buyMonthly(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.monthlySubId,
+      planIdentifier: this.monthlyPlanId, // REQUIRED for Android subscriptions
+      productType: PURCHASE_TYPE.SUBS,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async restore() {
+    await NativePurchases.restorePurchases();
+    await this.refreshEntitlements();
+  }
+
+  async openManageSubscriptions() {
+    await NativePurchases.manageSubscriptions();
+  }
+
+  private async processTransaction(transaction: Transaction) {
+    this.unlockContent(transaction.productIdentifier);
+    this.validateOnServer(transaction).catch(console.error);
+  }
+
+  private unlockContent(productIdentifier: string) {
+    // persist entitlement locally
+    console.log('Unlocked', productIdentifier);
+  }
+
+  private async refreshEntitlements() {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('Current purchases', purchases);
+  }
+
+  private async handleTransaction(transaction: Transaction) {
+    console.log('StoreKit transaction update:', transaction);
+    await this.processTransaction(transaction);
+  }
+
+  private async validateOnServer(transaction: Transaction) {
+    await fetch('/api/validate-purchase', {
+      method: 'POST',
+      body: JSON.stringify({
+        transactionId: transaction.transactionId,
+        receipt: transaction.receipt,
+        purchaseToken: transaction.purchaseToken,
+      }),
+    });
+  }
+}
+```
+
+## 필수 구매 옵션
+
+| 옵션 | 플랫폼 | 설명 |
+|--------|----------|-------------|
+| `productIdentifier` | iOS + Android | App Store Connect / Google Play Console에서 구성된 SKU/제품 ID입니다. |
+| `productType` | Android only | `PURCHASE_TYPE.INAPP` 또는 `PURCHASE_TYPE.SUBS`. 기본값은 `INAPP`입니다. 구독의 경우 항상 `SUBS`로 설정하세요. |
+| `planIdentifier` | Android subscriptions | Google Play Console의 Base Plan ID입니다. 구독에 필수이며, iOS 및 인앱 구매에서는 무시됩니다. |
+| `quantity` | iOS | 인앱 구매에만 해당하며 기본값은 `1`입니다. Android는 항상 하나의 항목을 구매합니다. |
+| `appAccountToken` | iOS + Android | 구매를 사용자에게 연결하는 UUID/문자열입니다. iOS에서는 UUID여야 하며, Android는 최대 64자의 난독화된 문자열을 허용합니다. |
+| `isConsumable` | Android | 소비 가능한 제품의 경우 권한 부여 후 토큰을 자동으로 소비하려면 `true`로 설정하세요. 기본값은 `false`입니다. |
+
+## 권한 상태 확인
+
+스토어가 보고하는 모든 거래의 크로스 플랫폼 보기를 위해 `getPurchases()`를 사용하세요:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+purchases.forEach((purchase) => {
+  if (purchase.isActive && purchase.expirationDate) {
+    console.log('iOS sub active until', purchase.expirationDate);
+  }
+
+  const isAndroidIapValid =
+    ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') && purchase.isAcknowledged;
+
+  if (isAndroidIapValid) {
+    console.log('Grant in-app entitlement for', purchase.productIdentifier);
+  }
+});
+```
+
+### 플랫폼 동작
+
+- **iOS**: 구독에는 `isActive`, `expirationDate`, `willCancel` 및 StoreKit 2 리스너 지원이 포함됩니다. 인앱 구매에는 서버 영수증 검증이 필요합니다.
+- **Android**: `isActive`/`expirationDate`는 채워지지 않습니다. 권한 있는 상태를 확인하려면 `purchaseToken`으로 Google Play Developer API를 호출하세요. `purchaseState`는 `PURCHASED`여야 하고 `isAcknowledged`는 `true`여야 합니다.
+
+## API 빠른 참조
+
+- `isBillingSupported()` – StoreKit / Google Play 가용성을 확인합니다.
+- `getProduct()` / `getProducts()` – 가격, 현지화된 제목, 설명, 소개 혜택을 가져옵니다.
+- `purchaseProduct()` – StoreKit 2 또는 Billing client 구매 플로우를 시작합니다.
+- `restorePurchases()` – 과거 구매를 재생하고 현재 기기와 동기화합니다.
+- `getPurchases()` – 모든 iOS 거래 또는 Play Billing 구매를 나열합니다.
+- `manageSubscriptions()` – 네이티브 구독 관리 UI를 엽니다.
+- `addListener('transactionUpdated')` – 앱이 시작될 때 보류 중인 StoreKit 2 거래를 처리합니다 (iOS만 해당).
+
+## 모범 사례
+
+1. **스토어 가격 표시** – Apple은 `product.title` 및 `product.priceString` 표시를 요구합니다. 절대 하드코딩하지 마세요.
+2. **`appAccountToken` 사용** – 사용자 ID에서 UUID(v5)를 결정론적으로 생성하여 구매를 계정에 연결하세요.
+3. **서버 측 검증** – `receipt`(iOS) / `purchaseToken`(Android)을 백엔드로 보내 검증하세요.
+4. **오류를 우아하게 처리** – 사용자 취소, 네트워크 실패 및 지원되지 않는 결제 환경을 확인하세요.
+5. **철저히 테스트** – [iOS 샌드박스 가이드](/docs/plugins/native-purchases/ios-sandbox-testing/) 및 [Android 샌드박스 가이드](/docs/plugins/native-purchases/android-sandbox-testing/)를 따르세요.
+6. **복원 및 관리 제공** – `restorePurchases()` 및 `manageSubscriptions()`에 연결된 UI 버튼을 추가하세요.
+
+## 문제 해결
+
+**제품이 로드되지 않음**
+- 번들 ID / 애플리케이션 ID가 스토어 구성과 일치하는지 확인하세요.
+- 제품 ID가 활성화되고 승인되었는지 확인하세요 (App Store) 또는 활성화되었는지 확인하세요 (Google Play).
+- 제품 생성 후 몇 시간 기다리세요. 스토어 전파는 즉시 이루어지지 않습니다.
+
+**구매가 취소되거나 중단됨**
+- 사용자가 플로우 중간에 취소할 수 있습니다. 호출을 `try/catch`로 감싸고 친근한 오류 메시지를 표시하세요.
+- Android의 경우, 테스트 계정이 Play Store(내부 트랙)에서 앱을 설치했는지 확인하여 Billing이 작동하도록 하세요.
+- 기기에서 실행할 때 logcat/Xcode에서 결제 오류를 확인하세요.
+
+**구독 상태가 올바르지 않음**
+- `getPurchases()`를 사용하여 스토어 데이터를 로컬 권한 캐시와 비교하세요.
+- Android에서는 항상 `purchaseToken`으로 Google Play Developer API를 쿼리하여 만료 날짜 또는 환불 상태를 확인하세요.
+- iOS에서는 `isActive`/`expirationDate`를 확인하고 영수증을 검증하여 환불 또는 취소를 감지하세요.

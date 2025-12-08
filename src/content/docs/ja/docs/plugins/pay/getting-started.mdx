@@ -1,0 +1,130 @@
+---
+title: はじめに
+locale: ja
+description: Pay プラグインを使用して、Capacitor チェックアウトで Apple Pay と Google Pay を設定します。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **プラグインをインストールする**
+   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトを同期する**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## ネイティブの前提条件
+
+- **Apple Pay（iOS）**
+  1. Apple Developer ポータルで Apple Pay マーチャント ID を作成します。
+  2. ゲートウェイに必要な決済処理証明書を生成してアップロードします。
+  3. Xcode で **Apple Pay** 機能を有効にし、プロビジョニングプロファイルに含まれていることを確認します。
+  4. ゲートウェイが決済を検証するためにネットワークアクセスを必要とする場合は、`Info.plist` を使用説明で更新します。
+
+- **Google Pay（Android）**
+  1. [Google Pay Business Console](https://pay.google.com/business/console/) にサインインします。
+  2. 決済ゲートウェイパラメータを設定するか、テスト用に直接トークン化を設定します。
+  3. 本番カードを使用する予定がある場合は、`environment` を `PRODUCTION` に切り替え、QA 用にテストカードを登録します。
+  4. デバイスで Google Play services が利用可能であることを確認します（Google Pay に必要）。
+
+プラグインリポジトリの `docs/` 以下にあるステップバイステップのスクリーンショット付きガイドを参照してください。
+
+## 利用可能性を確認する
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const availability = await Pay.isPayAvailable({
+  apple: { supportedNetworks: ['visa', 'masterCard', 'amex'] },
+  google: {
+    isReadyToPayRequest: {
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+          },
+        },
+      ],
+    },
+  },
+});
+
+if (!availability.available) {
+  console.warn('ネイティブ決済が利用できません:', availability);
+}
+```
+
+## 決済をリクエストする（Apple Pay）
+
+```typescript
+const appleResult = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant.com.example.app',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    supportedNetworks: ['visa', 'masterCard'],
+    paymentSummaryItems: [
+      { label: 'スタータープラン', amount: '9.99' },
+      { label: 'Capgo Store', amount: '9.99' },
+    ],
+    requiredShippingContactFields: ['name', 'emailAddress'],
+  },
+});
+
+const token = appleResult.apple?.paymentData;
+```
+
+## 決済をリクエストする（Google Pay）
+
+```typescript
+const googleResult = await Pay.requestPayment({
+  google: {
+    environment: 'test',
+    paymentDataRequest: {
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            billingAddressRequired: true,
+            billingAddressParameters: { format: 'FULL' },
+          },
+          tokenizationSpecification: {
+            type: 'PAYMENT_GATEWAY',
+            parameters: {
+              gateway: 'example',
+              gatewayMerchantId: 'exampleMerchantId',
+            },
+          },
+        },
+      ],
+      merchantInfo: {
+        merchantName: 'Capgo Store',
+      },
+      transactionInfo: {
+        totalPriceStatus: 'FINAL',
+        totalPrice: '9.99',
+        currencyCode: 'USD',
+        countryCode: 'US',
+      },
+    },
+  },
+});
+
+const paymentData = googleResult.google?.paymentData;
+```
+
+## レスポンスの処理
+
+- 返されたペイロードを決済プロセッサーでトークン化し、サーバー側でトランザクションを確認します。
+- ネイティブ決済が利用できない場合やユーザーがシートをキャンセルした場合のフォールバックパス（カード入力、請求書）を用意します。
+- 利用可能性の結果をキャッシュして、サポートされていないデバイスにボタンを表示しないようにします。

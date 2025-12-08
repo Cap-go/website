@@ -1,0 +1,69 @@
+---
+title: Memulai
+locale: id
+description: Konfigurasi nilai lingkungan per-build dan ambil nilai tersebut saat runtime dengan plugin Env.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan platform native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Deklarasikan nilai konfigurasi
+
+Tambahkan kunci ke konfigurasi Capacitor agar tertanam ke dalam build native Anda. Anda dapat membuat beberapa varian konfigurasi (`capacitor.config.prod.ts`, `capacitor.config.dev.ts`, dll.) untuk menukar nilai per lingkungan.
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    Env: {
+      API_URL: 'https://api.example.com',
+      PUBLIC_KEY: 'pk_live_123',
+    },
+  },
+};
+
+export default config;
+```
+
+Pada platform native, nilai-nilai tersebut disimpan di dalam file konfigurasi yang dihasilkan (`ios/App/App/capacitor.config.json` dan `android/app/src/main/assets/capacitor.config.json`). Perbarui file-file tersebut per flavor jika Anda memerlukan nilai khusus tenant.
+
+## Baca nilai dalam kode
+
+```typescript
+import { Env } from '@capgo/capacitor-env';
+
+const apiUrl = await Env.getKey({ key: 'API_URL' }).then((result) => result.value);
+
+if (!apiUrl) {
+  throw new Error('Missing API_URL configuration');
+}
+```
+
+## Sediakan fallback
+
+```typescript
+const loadConfig = async () => {
+  const { value: endpoint } = await Env.getKey({ key: 'API_URL' });
+  return endpoint || 'https://staging.example.com';
+};
+```
+
+## Tips
+
+- Gunakan file `capacitor.config` yang berbeda per lingkungan dan arahkan CLI ke file yang tepat dengan `npx cap run ios --configuration=prod`.
+- Gabungkan dengan channel updater Capgo untuk mengirim nilai khusus tenant tanpa menerbitkan binary baru.
+- Jaga rahasia keluar dari source control dengan mengganti mereka selama build CI Anda sebelum `npx cap sync`.

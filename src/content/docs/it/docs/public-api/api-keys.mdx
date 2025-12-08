@@ -1,0 +1,192 @@
+---
+title: "API Keys"
+description: "Comprehensive documentation for API Keys endpoint, detailing authentication, permissions, and management within Capgo API"
+sidebar:
+  order: 9
+---
+
+API keys are used to authenticate requests to the Capgo API. Each key can have different permissions (modes) to control access levels. Keys are organization-specific and should be managed carefully as they grant access to your Capgo resources.
+
+## Key Modes
+
+- **read**: Can only read data, no modifications allowed
+- **upload**: Can read, modify, and upload new bundles
+- **write**: Can read, modify data, and upload bundles
+- **all**: Full access to all operations
+
+Key modes follow a stepped/gradual schema. If you have an upload key, and then you create a write key, the write key will be able to do everything that the upload key could.
+Please take a look at the following diagram to better understand how API keys work.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+
+## Subkeys with Limited Rights
+
+You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+
+## Security Best Practices
+
+1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
+2. **Regular Rotation**: Rotate your API keys periodically
+3. **Secure Storage**: Store API keys securely and never commit them to version control
+4. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
+5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+
+## Endpoints
+
+### GET
+
+`https://api.capgo.app/apikey/`
+
+Retrieve all API keys associated with your account.
+
+#### Response Type
+
+```typescript
+interface ApiKey {
+  created_at: string | null
+  id: number
+  key: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+  name: string
+  updated_at: string | null
+  user_id: string
+  limited_to_apps?: string[]
+  limited_to_orgs?: string[]
+}
+```
+
+#### Example Request
+
+```bash
+curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
+```
+
+#### Example Response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "key": "ak_123...",
+      "mode": "read",
+      "name": "CI/CD Read Key",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "user_id": "user_123"
+    },
+    {
+      "id": 2,
+      "key": "ak_456...",
+      "mode": "upload",
+      "name": "Deploy Bot",
+      "created_at": "2024-01-02T00:00:00Z",
+      "updated_at": "2024-01-02T00:00:00Z",
+      "user_id": "user_123",
+      "limited_to_apps": ["com.demo.app"]
+    }
+  ]
+}
+```
+
+### POST
+
+`https://api.capgo.app/apikey/`
+
+Create a new API key for a specific organization.
+
+#### Query Parameters
+
+```typescript
+interface ApiKeyCreate {
+  name: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+  limited_to_apps?: string[]
+  limited_to_orgs?: string[]
+}
+```
+
+#### Example Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Limited Read Key",
+    "mode": "read",
+    "limited_to_apps": ["com.demo.app"]
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### Example Response
+
+```json
+{
+  "apikey": {
+    "id": 3,
+    "key": "ak_789...",
+    "mode": "read",
+    "name": "Limited Read Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "limited_to_apps": ["com.demo.app"]
+  }
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/apikey/:id/`
+
+Delete an existing API key. Use this to revoke access immediately.
+
+#### Parameters
+- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
+
+#### Example Request
+
+```bash
+curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
+```
+
+#### Success Response
+
+```json
+{
+  "success": true
+}
+```
+
+## Common Use Cases
+
+1. **CI/CD Integration**: Create read-only keys for CI pipelines to check deployment status
+2. **Deployment Automation**: Use upload mode keys for automated deployment scripts
+3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
+4. **Admin Access**: Use all mode keys sparingly for administrative tools
+5. **Limited Access**: Create subkeys with limited rights to specific apps or organizations for third-party integrations
+
+## Error Handling
+
+Common error scenarios and their responses:
+
+```json
+// Invalid mode
+{
+  "error": "Invalid mode specified. Must be one of: read, write, upload, all",
+  "status": "KO"
+}
+
+// Key not found
+{
+  "error": "API key not found",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage API keys",
+  "status": "KO"
+}
+``` 

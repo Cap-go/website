@@ -1,0 +1,252 @@
+---
+title: Comenzando
+locale: es
+description: Aprende cómo instalar y usar el plugin Speech Synthesis para convertir texto a voz en tu aplicación Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instala el paquete**
+   <PackageManagers pkg="@capgo/capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincroniza con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Uso
+
+Importa el plugin y sintetiza voz desde texto:
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+// Texto a voz básico
+const speak = async () => {
+  await SpeechSynthesis.speak({
+    text: '¡Hola, mundo!',
+    language: 'es-ES'
+  });
+};
+
+// Uso avanzado con control de voz
+const speakWithVoice = async () => {
+  await SpeechSynthesis.speak({
+    text: 'Esta es una prueba de síntesis de voz.',
+    language: 'es-ES',
+    rate: 1.0,      // Velocidad de habla: 0.1 a 10.0
+    pitch: 1.0,     // Tono de voz: 0.5 a 2.0
+    volume: 1.0,    // Volumen: 0.0 a 1.0
+    voice: 'com.apple.ttsbundle.Samantha-compact'
+  });
+};
+```
+
+## Referencia de API
+
+### speak(options)
+
+Habla el texto dado usando la configuración de voz especificada.
+
+```typescript
+interface SpeakOptions {
+  text: string;           // Texto a hablar
+  language?: string;      // Código de idioma (ej., 'es-ES', 'en-US')
+  rate?: number;          // Velocidad de habla: 0.1 a 10.0 (predeterminado: 1.0)
+  pitch?: number;         // Tono de voz: 0.5 a 2.0 (predeterminado: 1.0)
+  volume?: number;        // Volumen: 0.0 a 1.0 (predeterminado: 1.0)
+  voice?: string;         // Identificador de voz (obtener de getVoices())
+}
+
+await SpeechSynthesis.speak(options);
+```
+
+### stop()
+
+Detiene cualquier síntesis de voz en curso.
+
+```typescript
+await SpeechSynthesis.stop();
+```
+
+### getVoices()
+
+Obtiene la lista de voces disponibles para síntesis de voz.
+
+```typescript
+interface Voice {
+  voiceURI: string;       // Identificador único de voz
+  name: string;           // Nombre de voz legible por humanos
+  lang: string;           // Código de idioma
+  default: boolean;       // Si esta es la voz predeterminada
+}
+
+const { voices } = await SpeechSynthesis.getVoices();
+console.log('Voces disponibles:', voices);
+```
+
+### getSupportedLanguages()
+
+Obtiene la lista de códigos de idioma soportados.
+
+```typescript
+const { languages } = await SpeechSynthesis.getSupportedLanguages();
+console.log('Idiomas soportados:', languages);
+```
+
+### isSpeaking()
+
+Verifica si la síntesis de voz está actualmente activa.
+
+```typescript
+const { speaking } = await SpeechSynthesis.isSpeaking();
+console.log('Hablando actualmente:', speaking);
+```
+
+## Ejemplo Completo
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+export class TextToSpeechService {
+  private currentVoice: string | undefined;
+
+  async init() {
+    // Obtener voces disponibles
+    const { voices } = await SpeechSynthesis.getVoices();
+
+    // Encontrar voz en español
+    const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+    this.currentVoice = spanishVoice?.voiceURI;
+
+    console.log(`Usando voz: ${spanishVoice?.name}`);
+  }
+
+  async speak(text: string, options?: Partial<SpeakOptions>) {
+    try {
+      // Detener cualquier habla en curso
+      await SpeechSynthesis.stop();
+
+      // Hablar el texto
+      await SpeechSynthesis.speak({
+        text,
+        language: 'es-ES',
+        rate: 1.0,
+        pitch: 1.0,
+        volume: 1.0,
+        voice: this.currentVoice,
+        ...options
+      });
+    } catch (error) {
+      console.error('Síntesis de voz falló:', error);
+      throw error;
+    }
+  }
+
+  async speakWithRate(text: string, rate: number) {
+    await this.speak(text, { rate });
+  }
+
+  async stop() {
+    await SpeechSynthesis.stop();
+  }
+
+  async checkIfSpeaking(): Promise<boolean> {
+    const { speaking } = await SpeechSynthesis.isSpeaking();
+    return speaking;
+  }
+
+  async listVoicesByLanguage(languageCode: string) {
+    const { voices } = await SpeechSynthesis.getVoices();
+    return voices.filter(v => v.lang.startsWith(languageCode));
+  }
+}
+```
+
+## Uso Avanzado
+
+### Soporte Multi-idioma
+
+```typescript
+// Hablar en diferentes idiomas
+const speakMultiLanguage = async () => {
+  await SpeechSynthesis.speak({
+    text: '¡Hola!',
+    language: 'es-ES'
+  });
+
+  await SpeechSynthesis.speak({
+    text: 'Bonjour!',
+    language: 'fr-FR'
+  });
+
+  await SpeechSynthesis.speak({
+    text: 'こんにちは!',
+    language: 'ja-JP'
+  });
+};
+```
+
+### Selección de Voz
+
+```typescript
+// Seleccionar una voz específica
+const selectVoice = async (languageCode: string) => {
+  const { voices } = await SpeechSynthesis.getVoices();
+
+  // Filtrar voces por idioma
+  const languageVoices = voices.filter(v =>
+    v.lang.startsWith(languageCode)
+  );
+
+  // Usar la primera voz disponible
+  if (languageVoices.length > 0) {
+    await SpeechSynthesis.speak({
+      text: 'Probando selección de voz',
+      language: languageCode,
+      voice: languageVoices[0].voiceURI
+    });
+  }
+};
+```
+
+### Lectura de Texto Largo
+
+```typescript
+// Dividir y hablar texto largo en fragmentos
+const speakLongText = async (longText: string) => {
+  const sentences = longText.match(/[^.!?]+[.!?]+/g) || [longText];
+
+  for (const sentence of sentences) {
+    await SpeechSynthesis.speak({
+      text: sentence.trim(),
+      language: 'es-ES',
+      rate: 0.9
+    });
+
+    // Esperar un poco entre oraciones
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+};
+```
+
+## Mejores Prácticas
+
+1. **Selección de Voz**: Siempre verifica las voces disponibles antes de usar un ID de voz específico
+2. **Códigos de Idioma**: Usa códigos de idioma estándar (ej., 'es-ES', 'en-US', 'fr-FR')
+3. **Control de Velocidad**: Mantén la velocidad entre 0.5 y 2.0 para un habla de sonido natural
+4. **Detener Antes de Hablar**: Llama a stop() antes de iniciar un nuevo habla para evitar superposición
+5. **Manejo de Errores**: Envuelve todas las llamadas en bloques try-catch para un manejo de errores robusto
+
+## Solución de Problemas
+
+### Problemas Comunes
+
+**Sin salida de voz**: Verifica el volumen del dispositivo y asegúrate de que el texto no esté vacío
+**Voz no encontrada**: Usa getVoices() para encontrar voces disponibles en el dispositivo
+**Habla interrumpida**: Detén cualquier habla en curso antes de iniciar una nueva síntesis
+**Idioma no soportado**: Verifica getSupportedLanguages() para idiomas disponibles

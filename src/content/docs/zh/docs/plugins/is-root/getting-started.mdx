@@ -1,0 +1,276 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和使用 Is Root 插件来检测已 root 的 Android 设备和模拟器，以增强应用安全性。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 平台支持
+
+- **Android**：完全支持 root 和模拟器检测
+- **iOS**：无需配置（插件专注于 Android）
+
+## 使用示例
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// 基本 root 检测
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('Device is rooted');
+  // 适当处理已 root 的设备
+  // 例如：显示警告、限制功能或阻止访问
+}
+
+// 使用 BusyBox 的扩展 root 检测
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('Device is rooted (extended check)');
+}
+
+// 检查模拟器
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('Running on emulator');
+  // 处理模拟器环境
+}
+
+// 检测 root 管理应用
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('Root management apps detected');
+}
+
+// 检查 su 二进制文件
+const suResult = await IsRoot.checkForSuBinary();
+if (suResult.hasSu) {
+  console.log('SU binary found on device');
+}
+```
+
+## API 参考
+
+### isRooted()
+
+```typescript
+isRooted() => Promise<{ isRooted: boolean }>
+```
+
+使用默认方法执行全面的 root 检测。
+
+**返回：** `Promise<{ isRooted: boolean }>`
+
+### isRootedWithBusyBox()
+
+```typescript
+isRootedWithBusyBox() => Promise<{ isRooted: boolean }>
+```
+
+包括 BusyBox 检查的扩展 root 检测。
+
+**返回：** `Promise<{ isRooted: boolean }>`
+
+### detectRootManagementApps()
+
+```typescript
+detectRootManagementApps() => Promise<{ hasRootApps: boolean }>
+```
+
+识别已安装的 root 管理应用程序（SuperSU、Magisk 等）。
+
+**返回：** `Promise<{ hasRootApps: boolean }>`
+
+### checkForSuBinary()
+
+```typescript
+checkForSuBinary() => Promise<{ hasSu: boolean }>
+```
+
+检查系统路径中是否存在 `su` 二进制文件。
+
+**返回：** `Promise<{ hasSu: boolean }>`
+
+### isRunningOnEmulator()
+
+```typescript
+isRunningOnEmulator() => Promise<{ isEmulator: boolean }>
+```
+
+检测常见的 Android 模拟器指纹。
+
+**返回：** `Promise<{ isEmulator: boolean }>`
+
+## 综合安全检查
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+async function performSecurityCheck() {
+  const checks = {
+    rooted: false,
+    emulator: false,
+    rootApps: false,
+    suBinary: false
+  };
+
+  try {
+    // 运行所有检测方法
+    const [rootResult, emulatorResult, rootAppsResult, suResult] = await Promise.all([
+      IsRoot.isRootedWithBusyBox(),
+      IsRoot.isRunningOnEmulator(),
+      IsRoot.detectRootManagementApps(),
+      IsRoot.checkForSuBinary()
+    ]);
+
+    checks.rooted = rootResult.isRooted;
+    checks.emulator = emulatorResult.isEmulator;
+    checks.rootApps = rootAppsResult.hasRootApps;
+    checks.suBinary = suResult.hasSu;
+
+    // 确定安全级别
+    const securityIssues = Object.values(checks).filter(v => v).length;
+
+    if (securityIssues > 0) {
+      console.warn(`Device has ${securityIssues} security concern(s)`, checks);
+      return {
+        secure: false,
+        issues: checks
+      };
+    }
+
+    return {
+      secure: true,
+      issues: checks
+    };
+  } catch (error) {
+    console.error('Security check failed:', error);
+    throw error;
+  }
+}
+
+// 在应用中使用
+const securityStatus = await performSecurityCheck();
+if (!securityStatus.secure) {
+  // 处理不安全的设备
+  showSecurityWarning(securityStatus.issues);
+}
+```
+
+## 检测技术
+
+### Root 检测
+
+插件采用多种检测方法：
+
+- 检查 root 管理应用程序（SuperSU、Magisk、KingRoot 等）
+- 扫描可疑的系统属性
+- 识别测试构建标签和调试标志
+- 验证危险二进制文件位置
+- 检查系统路径权限
+- 检测已知的 root 隐藏应用
+
+### 模拟器检测
+
+- 硬件指纹分析
+- 构建属性检查
+- 模拟器特定特征
+- 虚拟环境指标
+
+## 处理安全问题
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+async function handleDeviceSecurity() {
+  const rootResult = await IsRoot.isRooted();
+
+  if (rootResult.isRooted) {
+    // 选项 1：显示警告并继续
+    showWarning('Your device appears to be rooted. Some features may be limited.');
+
+    // 选项 2：限制功能
+    disableSensitiveFeatures();
+
+    // 选项 3：阻止访问应用
+    showBlockedScreen('This app cannot run on rooted devices for security reasons.');
+    return false;
+  }
+
+  return true;
+}
+
+function showWarning(message: string) {
+  // 显示用户友好的警告对话框
+  alert(message);
+}
+
+function disableSensitiveFeatures() {
+  // 禁用支付处理、敏感数据访问等
+  console.log('Sensitive features disabled due to rooted device');
+}
+
+function showBlockedScreen(message: string) {
+  // 显示阻止屏幕并退出应用
+  alert(message);
+}
+```
+
+## 最佳实践
+
+- 使用多种检测方法以提高准确性
+- 实施优雅降级而不是完全阻止访问
+- 提供有关安全问题的清晰用户沟通
+- 实施安全措施时考虑用户体验
+- 随着检测方法的发展，保持插件更新
+- 在已 root 和未 root 的设备上测试
+- 优雅地处理检测失败
+
+## 安全注意事项
+
+- 没有检测方法是 100% 可靠的
+- 高级用户可以绕过检测机制
+- 与服务器端安全措施结合使用
+- 实施安全检查时考虑用户隐私
+- 遵循平台的安全实施指南
+- 建议定期更新，因为 root 隐藏技术不断发展
+
+## 用例
+
+- **银行和金融应用**：防止在受损设备上访问
+- **DRM 保护内容**：保护受版权保护的材料
+- **企业应用**：执行 BYOD 安全策略
+- **支付处理**：确保安全的交易环境
+- **敏感数据应用**：保护机密信息

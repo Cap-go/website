@@ -1,0 +1,132 @@
+---
+title: "@capgo/capacitor-persistent-account"
+locale: id
+description: Plugin manajemen akun persisten untuk aplikasi Capacitor dengan penyimpanan aman, penanganan sesi, dan persistensi data pengguna.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Kelola akun pengguna dengan penyimpanan persisten, penanganan sesi yang aman, dan autentikasi yang mulus di seluruh sesi aplikasi.
+  image:
+    file: ~public/icons/plugins/persistent-account.svg
+  actions:
+    - text: Mulai
+      link: /docs/plugins/persistent-account/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persistent-account/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Gambaran Umum
+
+Plugin Capacitor Persistent Account memungkinkan penyimpanan dan persistensi yang aman dari data akun pengguna di antara instalasi aplikasi. Plugin ini memastikan bahwa informasi akun pengguna tetap tersedia bahkan setelah reinstall aplikasi, memberikan pengalaman pengguna yang mulus dan kontinuitas akun.
+
+<CardGrid stagger>
+  <Card title="Persistensi lintas-instalasi" icon="rocket">
+    Data bertahan melalui siklus uninstall/reinstall aplikasi 💾
+  </Card>
+  <Card title="Penyimpanan aman" icon="setting">
+    Penyimpanan data akun yang aman dengan integrasi sistem 🔐
+  </Card>
+  <Card title="API sederhana" icon="puzzle">
+    Interface baca/tulis yang bersih untuk manajemen akun 📊
+  </Card>
+  <Card title="Lintas-platform" icon="laptop">
+    Implementasi native iOS dan Android 📱
+  </Card>
+</CardGrid>
+
+## Instalasi
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## Metode API Inti
+
+### Manajemen Data
+- `saveAccount(options: { data: unknown })` - Simpan data akun dengan aman ke penyimpanan persisten
+- `readAccount()` - Ambil data akun yang tersimpan, mengembalikan `Promise<{ data: unknown | null }>`
+
+## Fitur Utama
+
+- **Persistensi lintas-instalasi**: Data akun bertahan melalui uninstall dan reinstall aplikasi
+- **Penyimpanan aman**: Menggunakan mekanisme penyimpanan aman khusus platform
+- **Fleksibilitas tipe**: Simpan struktur data akun yang dapat diserialisasi
+- **Dukungan lintas-platform**: Implementasi native untuk iOS dan Android
+
+## Contoh Penggunaan
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Define your account data structure
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Save account data
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Read account data
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Restored account:', account.username);
+} else {
+  console.log('No account data found');
+}
+```
+
+## Kasus Penggunaan
+
+- **User onboarding**: Pertahankan progres pengguna melalui reinstall aplikasi
+- **Pemulihan akun**: Pulihkan sesi pengguna setelah pembaruan aplikasi
+- **Penyimpanan preferensi**: Pertahankan pengaturan dan konfigurasi pengguna
+- **Aplikasi offline-first**: Simpan data pengguna penting secara lokal
+
+## Implementasi Platform
+
+### iOS
+- Memanfaatkan iOS Keychain Services untuk penyimpanan yang aman dan persisten
+- Data bertahan melalui penghapusan aplikasi dan pemulihan perangkat
+
+### Android
+- Menggunakan Android Account Manager atau shared preferences dengan backup
+- Mempertahankan data di seluruh reinstall aplikasi dan migrasi perangkat
+
+## Pertimbangan Keamanan
+
+- Data akun disimpan menggunakan penyimpanan aman khusus platform
+- Pertimbangkan enkripsi data untuk informasi sensitif
+- Implementasikan validasi data yang tepat saat membaca akun yang tersimpan
+- Ikuti panduan platform untuk penanganan data pengguna
+
+## Dokumentasi
+
+Lihat [dokumentasi lengkap](/docs/plugins/persistent-account/getting-started/) untuk panduan implementasi detail dan praktik terbaik.

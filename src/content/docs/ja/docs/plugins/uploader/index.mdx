@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-uploader"
+locale: ja
+description: Capacitorアプリ用のバックグラウンドファイルアップロードプラグイン。進行状況の追跡と再開可能なアップロードに対応。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Capacitorアプリ用に進行状況の追跡、再開可能なアップロード、ネットワーク対応処理を備えたバックグラウンドファイルアップロード。
+  image:
+    file: ~public/icons/plugins/uploader.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/uploader/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-uploader/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="バックグラウンドアップロード" icon="rocket">
+    アプリがバックグラウンドにある間もアップロードを継続 🚀
+  </Card>
+  <Card title="進行状況の追跡" icon="list-format">
+    詳細な統計情報を含むリアルタイムアップロード進行状況 📊
+  </Card>
+  <Card title="再開可能なアップロード" icon="download">
+    中断されたアップロードを自動的に再開 🔄
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    [ドキュメント](/docs/plugins/uploader/getting-started/)をチェックして、わずか数分でプラグインをマスターしましょう。
+  </Card>
+</CardGrid>

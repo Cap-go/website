@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-plugin-audiosession"
+description: Amati dan kontrol sesi audio iOS dari aplikasi Capacitor untuk menangani perubahan rute dan gangguan.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Dengarkan perubahan rute audio, bereaksi terhadap gangguan, dan arahkan ulang pemutaran ke speaker tanpa meninggalkan Capacitor.
+  image:
+    file: ~public/icons/plugins/audiosession.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/audiosession/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-audiosession/
+      icon: external
+      variant: minimal
+locale: id
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Plugin AudioSession dari Capgo memberi Anda kontrol yang lebih detail atas layer AVAudioSession iOS sehingga Anda dapat menangani headphone, perangkat Bluetooth, dan gangguan yang tidak terduga dengan baik.
+
+<CardGrid stagger>
+  <Card title="Kesadaran rute" icon="rocket">
+    Deteksi saat pengguna memasang atau melepas headset, AirPods, speaker Bluetooth, dan lainnya.
+  </Card>
+  <Card title="Override speaker" icon="setting">
+    Paksa pemutaran melalui speaker bawaan saat Anda memerlukan audio hands-free.
+  </Card>
+  <Card title="Penanganan gangguan" icon="moon">
+    Bereaksi terhadap peristiwa gangguan seperti panggilan telepon atau Siri untuk menjeda dan melanjutkan audio dengan aman.
+  </Card>
+  <Card title="Keamanan tipe" icon="pencil">
+    Definisi TypeScript yang kuat memudahkan membangun pengalaman audio yang tangguh.
+  </Card>
+</CardGrid>
+
+Plugin ini menargetkan iOS di mana kontrol AVAudioSession diperlukan. Di platform lain, panggilan diselesaikan tanpa efek, memungkinkan Anda menyimpan satu jalur kode bersama.

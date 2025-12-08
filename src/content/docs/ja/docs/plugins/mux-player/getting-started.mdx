@@ -1,0 +1,91 @@
+---
+title: はじめに
+description: Capacitorアプリケーション内でネイティブMux Player SDKを組み込みます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **プラグインをインストール**
+   <PackageManagers pkg="@capgo/capacitor-mux-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトを同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS準備
+
+1. `ios/App/`の下にあるXcodeワークスペースを開きます。
+2. Swiftパッケージ`https://github.com/muxinc/mux-player-swift`をアプリターゲットに追加して、`MuxPlayerSwift`モジュールが利用可能になるようにします。
+3. デプロイメントターゲットが**iOS 15以降**であることを確認し、リビルドします。
+
+## Android準備
+
+Gradleモジュールには正しいリポジトリと依存関係が含まれています。カスタム企業プロキシを使用する場合は、`https://muxinc.jfrog.io/artifactory/default-maven-release-local`へのリクエストを許可してください。
+
+## プレーヤーを起動
+
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
+
+await MuxPlayer.play({
+  playbackId: 'your-playback-id',
+  environmentKey: 'your-mux-data-key',
+  title: 'Launch Announcement',
+  subtitle: 'Filmed live at Capgo HQ',
+  poster: 'https://stream.example.com/poster.jpg',
+});
+```
+
+## プレーヤーイベントをリスン
+
+```typescript
+const readyHandle = await MuxPlayer.addListener('ready', ({ playerName }) => {
+  console.log('Mux player ready', playerName);
+});
+
+const errorHandle = await MuxPlayer.addListener('error', ({ message }) => {
+  console.error('Mux player error:', message);
+});
+
+// プレーヤーを閉じた後にクリーンアップ
+const dismissPlayer = async () => {
+  await MuxPlayer.dismiss();
+  await readyHandle.remove();
+  await errorHandle.remove();
+};
+```
+
+## トークンベースの再生
+
+```typescript
+await MuxPlayer.play({
+  playbackId: 'signed-playback-id',
+  playbackToken: signedPlaybackToken,
+  drmToken: signedDrmToken, // DRMポリシーを有効にした場合はオプション
+  autoPlay: true,
+  startTime: 120, // 2分から開始
+});
+```
+
+## プレーヤーのライフサイクルに反応
+
+```typescript
+const { active } = await MuxPlayer.isActive();
+if (active) {
+  console.log('プレーヤーは現在表示中');
+}
+
+// アンマウント時にすべてのリスナー登録を削除
+await MuxPlayer.removeAllListeners();
+```
+
+## ヒント
+
+- Mux署名キーを使用してバックエンドで署名済み再生およびDRMトークンを生成します。
+- アプリで複数のプレーヤーを実行する際に分析を分離するために`playerName`を渡します。
+- サポートされているプラットフォームでオフライン復元力を向上させるために`enableSmartCache`と組み合わせます。

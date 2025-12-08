@@ -1,0 +1,354 @@
+---
+title: Comenzando
+locale: es
+description: Aprende cómo instalar y usar el plugin Native Geocoder para conversión de direcciones y coordenadas en tu aplicación Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/nativegeocoder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurar permisos**
+
+   ### iOS
+   Agrega la descripción de uso de ubicación a tu `Info.plist`:
+   ```xml
+   <key>NSLocationWhenInUseUsageDescription</key>
+   <string>To convert addresses to coordinates</string>
+   ```
+
+   ### Android
+   Agrega permisos a tu `AndroidManifest.xml`:
+   ```xml
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+   ```
+</Steps>
+
+## Uso
+
+Importa el plugin y usa sus métodos de geocodificación:
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+
+// Geocodificación directa: Dirección a coordenadas
+const forwardGeocode = async () => {
+  const results = await NativeGeocoder.forwardGeocode({
+    addressString: '1600 Amphitheatre Parkway, Mountain View, CA',
+    useLocale: true,
+    maxResults: 1
+  });
+
+  const location = results.addresses[0];
+  console.log('Latitude:', location.latitude);
+  console.log('Longitude:', location.longitude);
+};
+
+// Geocodificación inversa: Coordenadas a dirección
+const reverseGeocode = async () => {
+  const results = await NativeGeocoder.reverseGeocode({
+    latitude: 37.4220656,
+    longitude: -122.0840897,
+    useLocale: true,
+    maxResults: 1
+  });
+
+  const address = results.addresses[0];
+  console.log('Street:', address.thoroughfare);
+  console.log('City:', address.locality);
+  console.log('Country:', address.countryName);
+};
+```
+
+## Referencia de API
+
+### forwardGeocode(options)
+
+Convierte una cadena de dirección en coordenadas geográficas.
+
+```typescript
+interface ForwardGeocodeOptions {
+  addressString: string;
+  useLocale?: boolean;
+  maxResults?: number;
+  apiKey?: string; // Solo Android
+}
+
+interface GeocodeResult {
+  addresses: Address[];
+}
+
+interface Address {
+  latitude: number;
+  longitude: number;
+  countryCode?: string;
+  countryName?: string;
+  postalCode?: string;
+  administrativeArea?: string;
+  subAdministrativeArea?: string;
+  locality?: string;
+  subLocality?: string;
+  thoroughfare?: string;
+  subThoroughfare?: string;
+}
+```
+
+### reverseGeocode(options)
+
+Convierte coordenadas geográficas en información de dirección.
+
+```typescript
+interface ReverseGeocodeOptions {
+  latitude: number;
+  longitude: number;
+  useLocale?: boolean;
+  maxResults?: number;
+  apiKey?: string; // Solo Android
+}
+```
+
+## Ejemplos Completos
+
+### Búsqueda de Dirección con Manejo de Errores
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+
+export class GeocodingService {
+  async searchAddress(address: string): Promise<{lat: number, lng: number} | null> {
+    try {
+      const results = await NativeGeocoder.forwardGeocode({
+        addressString: address,
+        useLocale: true,
+        maxResults: 5
+      });
+
+      if (results.addresses.length > 0) {
+        const location = results.addresses[0];
+        return {
+          lat: location.latitude,
+          lng: location.longitude
+        };
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Geocoding failed:', error);
+      return null;
+    }
+  }
+
+  async getAddressFromCoordinates(lat: number, lng: number): Promise<string | null> {
+    try {
+      const results = await NativeGeocoder.reverseGeocode({
+        latitude: lat,
+        longitude: lng,
+        useLocale: true,
+        maxResults: 1
+      });
+
+      if (results.addresses.length > 0) {
+        const address = results.addresses[0];
+        return this.formatAddress(address);
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Reverse geocoding failed:', error);
+      return null;
+    }
+  }
+
+  private formatAddress(address: Address): string {
+    const parts = [
+      address.subThoroughfare,
+      address.thoroughfare,
+      address.locality,
+      address.administrativeArea,
+      address.postalCode,
+      address.countryName
+    ].filter(part => part != null && part !== '');
+
+    return parts.join(', ');
+  }
+}
+```
+
+### Componente Selector de Ubicación
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { Geolocation } from '@capacitor/geolocation';
+
+export class LocationPicker {
+  currentLocation: { lat: number; lng: number } | null = null;
+  currentAddress: string = '';
+
+  async getCurrentLocation() {
+    try {
+      // Obtener coordenadas actuales
+      const position = await Geolocation.getCurrentPosition();
+      this.currentLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      // Obtener dirección para coordenadas
+      const results = await NativeGeocoder.reverseGeocode({
+        latitude: this.currentLocation.lat,
+        longitude: this.currentLocation.lng,
+        useLocale: true,
+        maxResults: 1
+      });
+
+      if (results.addresses.length > 0) {
+        const address = results.addresses[0];
+        this.currentAddress = [
+          address.thoroughfare,
+          address.locality,
+          address.countryName
+        ].filter(Boolean).join(', ');
+      }
+    } catch (error) {
+      console.error('Failed to get location:', error);
+    }
+  }
+
+  async searchLocation(query: string) {
+    try {
+      const results = await NativeGeocoder.forwardGeocode({
+        addressString: query,
+        useLocale: true,
+        maxResults: 10
+      });
+
+      return results.addresses.map(address => ({
+        coordinates: {
+          lat: address.latitude,
+          lng: address.longitude
+        },
+        displayName: this.formatDisplayName(address)
+      }));
+    } catch (error) {
+      console.error('Search failed:', error);
+      return [];
+    }
+  }
+
+  private formatDisplayName(address: Address): string {
+    const mainPart = [
+      address.thoroughfare,
+      address.locality
+    ].filter(Boolean).join(', ');
+
+    const subPart = [
+      address.administrativeArea,
+      address.countryName
+    ].filter(Boolean).join(', ');
+
+    return mainPart + (subPart ? ` (${subPart})` : '');
+  }
+}
+```
+
+## Mejores Prácticas
+
+1. **Solicitar permisos primero**
+   ```typescript
+   import { Geolocation } from '@capacitor/geolocation';
+
+   const requestPermissions = async () => {
+     const permissions = await Geolocation.requestPermissions();
+     if (permissions.location !== 'granted') {
+       throw new Error('Location permission required');
+     }
+   };
+   ```
+
+2. **Manejar errores con gracia**
+   ```typescript
+   try {
+     const results = await NativeGeocoder.forwardGeocode({
+       addressString: address
+     });
+   } catch (error) {
+     // Manejar casos de error específicos
+     if (error.message.includes('network')) {
+       console.error('Network error');
+     } else if (error.message.includes('permission')) {
+       console.error('Permission denied');
+     }
+   }
+   ```
+
+3. **Usar maxResults sabiamente**
+   - Para búsqueda de usuario: Usar 5-10 resultados
+   - Para conversión automática: Usar 1 resultado
+   - Más resultados = respuesta más lenta
+
+4. **Cachear resultados cuando sea posible**
+   ```typescript
+   const geocodeCache = new Map();
+
+   async function geocodeWithCache(address: string) {
+     if (geocodeCache.has(address)) {
+       return geocodeCache.get(address);
+     }
+
+     const result = await NativeGeocoder.forwardGeocode({
+       addressString: address
+     });
+
+     geocodeCache.set(address, result);
+     return result;
+   }
+   ```
+
+## Diferencias de Plataforma
+
+### iOS
+- Usa `CLGeocoder` de CoreLocation
+- No se requiere API key
+- Respeta la configuración regional del usuario automáticamente
+
+### Android
+- Usa Android Geocoder API
+- API key opcional de Google para mejores resultados
+- Puede recurrir al servicio web de Google
+
+### Configuración de API Key (Android)
+
+Para mejores resultados en Android, puedes proporcionar una API key de Google:
+
+```typescript
+await NativeGeocoder.forwardGeocode({
+  addressString: address,
+  apiKey: 'YOUR_GOOGLE_API_KEY' // Solo Android
+});
+```
+
+## Problemas Comunes
+
+1. **No se devuelven resultados**
+   - Verifica la conexión a internet
+   - Verifica el formato de la dirección
+   - Intenta con una dirección más general
+
+2. **Errores de permisos**
+   - Asegúrate de que los permisos de ubicación estén otorgados
+   - Verifica Info.plist/AndroidManifest.xml
+
+3. **Resultados inexactos**
+   - Usa direcciones más específicas
+   - Incluye códigos postales cuando estén disponibles
+   - Considera usar coordenadas para ubicaciones precisas

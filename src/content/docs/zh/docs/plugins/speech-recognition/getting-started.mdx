@@ -1,0 +1,445 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和使用语音识别插件为您的 Capacitor 应用添加语音转录功能
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-speech-recognition" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **配置平台权限**（见下文）
+</Steps>
+
+## 平台配置
+
+### iOS
+
+将以下密钥添加到您应用的 `Info.plist` 文件中：
+
+```xml
+<key>NSSpeechRecognitionUsageDescription</key>
+<string>我们需要访问语音识别来转录您的语音</string>
+<key>NSMicrophoneUsageDescription</key>
+<parameter>我们需要访问您的麦克风来录制音频进行转录</string>
+```
+
+### Android
+
+该插件会自动将所需的 `RECORD_AUDIO` 权限添加到您的 `AndroidManifest.xml`。无需额外配置。
+
+## 基本用法
+
+### 检查可用性
+
+在使用语音识别之前，检查设备是否支持：
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const checkAvailability = async () => {
+  const { available } = await SpeechRecognition.available();
+  if (!available) {
+    console.warn('此设备不支持语音识别');
+    return false;
+  }
+  return true;
+};
+```
+
+### 请求权限
+
+在开始识别之前请求必要的权限：
+
+```typescript
+const requestPermissions = async () => {
+  const { speechRecognition } = await SpeechRecognition.requestPermissions();
+
+  if (speechRecognition === 'granted') {
+    console.log('权限已授予');
+    return true;
+  } else {
+    console.log('权限被拒绝');
+    return false;
+  }
+};
+```
+
+### 开始识别
+
+使用可选配置开始监听语音：
+
+```typescript
+// 基本用法
+await SpeechRecognition.start({
+  language: 'en-US',
+  maxResults: 3,
+  partialResults: true,
+});
+
+// 使用所有选项
+await SpeechRecognition.start({
+  language: 'en-US',
+  maxResults: 5,
+  prompt: 'Speak now...',          // 仅 Android
+  popup: false,                     // 仅 Android
+  partialResults: true,
+  addPunctuation: true,             // 仅 iOS 16+
+  allowForSilence: 2000,            // 仅 Android，以毫秒为单位
+});
+```
+
+### 监听结果
+
+在识别活动时订阅部分结果：
+
+```typescript
+const partialListener = await SpeechRecognition.addListener(
+  'partialResults',
+  (event) => {
+    const transcription = event.matches?.[0];
+    console.log('部分结果：', transcription);
+  }
+);
+
+// 使用完毕后别忘了移除监听器
+await partialListener.remove();
+```
+
+### 停止识别
+
+停止监听并清理资源：
+
+```typescript
+await SpeechRecognition.stop();
+```
+
+## 完整示例
+
+这是一个展示如何使用该插件的完整示例：
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+export class VoiceRecognitionService {
+  private partialListener: any = null;
+  private isListening = false;
+
+  async initialize(): Promise<boolean> {
+    // 检查可用性
+    const { available } = await SpeechRecognition.available();
+    if (!available) {
+      throw new Error('语音识别不可用');
+    }
+
+    // 请求权限
+    const { speechRecognition } = await SpeechRecognition.requestPermissions();
+    if (speechRecognition !== 'granted') {
+      throw new Error('权限被拒绝');
+    }
+
+    return true;
+  }
+
+  async startListening(
+    onPartialResult: (text: string) => void,
+    onFinalResult: (text: string) => void
+  ): Promise<void> {
+    if (this.isListening) {
+      console.warn('已在监听中');
+      return;
+    }
+
+    try {
+      // 设置部分结果监听器
+      this.partialListener = await SpeechRecognition.addListener(
+        'partialResults',
+        (event) => {
+          const text = event.matches?.[0] || '';
+          onPartialResult(text);
+        }
+      );
+
+      // 开始识别
+      const result = await SpeechRecognition.start({
+        language: 'en-US',
+        maxResults: 3,
+        partialResults: true,
+        addPunctuation: true,
+      });
+
+      this.isListening = true;
+
+      // 如果 partialResults 为 false，处理最终结果
+      if (result.matches && result.matches.length > 0) {
+        onFinalResult(result.matches[0]);
+      }
+    } catch (error) {
+      console.error('启动语音识别时出错：', error);
+      throw error;
+    }
+  }
+
+  async stopListening(): Promise<void> {
+    if (!this.isListening) {
+      return;
+    }
+
+    try {
+      await SpeechRecognition.stop();
+
+      // 清理监听器
+      if (this.partialListener) {
+        await this.partialListener.remove();
+        this.partialListener = null;
+      }
+
+      this.isListening = false;
+    } catch (error) {
+      console.error('停止语音识别时出错：', error);
+      throw error;
+    }
+  }
+
+  async getSupportedLanguages(): Promise<string[]> {
+    const { languages } = await SpeechRecognition.getSupportedLanguages();
+    return languages;
+  }
+
+  async checkListeningState(): Promise<boolean> {
+    const { listening } = await SpeechRecognition.isListening();
+    return listening;
+  }
+}
+```
+
+## API 参考
+
+### available()
+
+检查当前设备上是否可以使用原生语音识别服务。
+
+```typescript
+const result = await SpeechRecognition.available();
+// 返回：{ available: boolean }
+```
+
+### start(options?)
+
+开始捕获音频并转录语音。
+
+```typescript
+interface SpeechRecognitionStartOptions {
+  language?: string;          // 语言标识符（例如 'en-US'）
+  maxResults?: number;        // 最大结果数（默认：5）
+  prompt?: string;            // 仅 Android：对话框提示
+  popup?: boolean;            // 仅 Android：显示系统对话框
+  partialResults?: boolean;   // 流式传输部分结果
+  addPunctuation?: boolean;   // 仅 iOS 16+：添加标点符号
+  allowForSilence?: number;   // 仅 Android：静音超时（毫秒）
+}
+
+const result = await SpeechRecognition.start(options);
+// 返回：{ matches?: string[] }
+```
+
+### stop()
+
+停止监听并释放原生资源。
+
+```typescript
+await SpeechRecognition.stop();
+```
+
+### getSupportedLanguages()
+
+获取底层识别器支持的语言环境。
+
+**注意**：Android 13+ 设备不再公开此列表；在这种情况下 `languages` 将为空。
+
+```typescript
+const result = await SpeechRecognition.getSupportedLanguages();
+// 返回：{ languages: string[] }
+```
+
+### isListening()
+
+返回插件是否正在主动监听语音。
+
+```typescript
+const result = await SpeechRecognition.isListening();
+// 返回：{ listening: boolean }
+```
+
+### checkPermissions()
+
+获取当前权限状态。
+
+```typescript
+const result = await SpeechRecognition.checkPermissions();
+// 返回：{ speechRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+请求麦克风和语音识别权限。
+
+```typescript
+const result = await SpeechRecognition.requestPermissions();
+// 返回：{ speechRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied' }
+```
+
+## 事件监听器
+
+### partialResults
+
+在启用 `partialResults` 时监听部分转录更新。
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'partialResults',
+  (event: { matches: string[] }) => {
+    console.log('部分：', event.matches?.[0]);
+  }
+);
+```
+
+### segmentResults（仅 Android）
+
+监听分段识别结果。
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'segmentResults',
+  (event: { matches: string[] }) => {
+    console.log('分段：', event.matches?.[0]);
+  }
+);
+```
+
+### endOfSegmentedSession（仅 Android）
+
+监听分段会话完成事件。
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'endOfSegmentedSession',
+  () => {
+    console.log('分段会话已结束');
+  }
+);
+```
+
+### listeningState
+
+监听原生监听状态的变化。
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'listeningState',
+  (event: { status: 'started' | 'stopped' }) => {
+    console.log('监听状态：', event.status);
+  }
+);
+```
+
+### removeAllListeners()
+
+移除所有已注册的监听器。
+
+```typescript
+await SpeechRecognition.removeAllListeners();
+```
+
+## 最佳实践
+
+1. **始终检查可用性和权限**
+   ```typescript
+   const { available } = await SpeechRecognition.available();
+   if (!available) return;
+
+   const { speechRecognition } = await SpeechRecognition.requestPermissions();
+   if (speechRecognition !== 'granted') return;
+   ```
+
+2. **清理监听器**
+   始终在不再需要监听器时移除它们以防止内存泄漏：
+   ```typescript
+   await listener.remove();
+   // 或
+   await SpeechRecognition.removeAllListeners();
+   ```
+
+3. **优雅地处理错误**
+   ```typescript
+   try {
+     await SpeechRecognition.start({ language: 'en-US' });
+   } catch (error) {
+     console.error('语音识别失败：', error);
+     // 显示用户友好的错误消息
+   }
+   ```
+
+4. **提供视觉反馈**
+   使用 `listeningState` 事件向用户显示应用何时正在主动监听。
+
+5. **测试不同口音和语言**
+   语音识别准确性因语言和口音而异。与目标受众进行彻底测试。
+
+## 平台说明
+
+### iOS
+- 需要 iOS 10.0+
+- 使用原生 `SFSpeechRecognizer`
+- 在 iOS 16+ 上支持标点符号
+- 需要麦克风和语音识别权限
+- 如果设备语言与请求的语言不匹配，识别可能会失败
+
+### Android
+- 需要 Android 6.0 (API 23)+
+- 使用 `SpeechRecognizer` API
+- 支持具有可配置静音检测的分段会话
+- Android 13+ 不公开支持的语言列表
+- 某些设备可能显示系统识别界面
+
+### Web
+- 通过 Web Speech API 提供有限支持
+- 并非所有浏览器都支持语音识别
+- 需要 HTTPS 连接
+- 可能在不同浏览器中具有不同的行为
+
+## 故障排除
+
+### 权限被拒绝
+如果权限被拒绝，引导用户前往应用设置：
+```typescript
+const { speechRecognition } = await SpeechRecognition.checkPermissions();
+if (speechRecognition === 'denied') {
+  // 显示在设置中启用权限的说明
+}
+```
+
+### 无返回结果
+- 检查麦克风是否正常工作
+- 确保环境安静
+- 验证语言代码是否与设备功能匹配
+- 检查网络连接（某些平台需要）
+
+### 识别意外停止
+- 使用 `isListening()` 检查状态
+- 监听 `listeningState` 事件
+- 如需要，实现自动重启逻辑
+
+## 下一步
+
+- [在 GitHub 上查看 API 参考](https://github.com/Cap-go/capacitor-speech-recognition#api)
+- [报告问题](https://github.com/Cap-go/capacitor-speech-recognition/issues)
+- [探索示例应用](https://github.com/Cap-go/capacitor-speech-recognition/tree/main/example)

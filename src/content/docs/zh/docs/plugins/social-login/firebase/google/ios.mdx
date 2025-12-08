@@ -1,0 +1,171 @@
+---
+title: iOS 上的 Firebase Google 登录
+locale: zh
+description: 了解如何使用 Capacitor Social Login 插件在 iOS 上设置带有 Firebase Authentication 的 Google 登录。
+sidebar:
+    order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 简介
+
+本指南将帮助你在 iOS 上集成带有 Firebase Authentication 的 Google 登录。我假设你已经完成了[通用 Firebase Google 设置](./general/)。
+
+:::note
+我将假设你尚未在 Firebase Console 中创建 iOS 应用。如果已创建,你的步骤会略有不同。
+:::
+
+## 设置步骤
+
+<Steps>
+1. 在 [console.cloud.google.com](https://console.cloud.google.com/) 转到项目概览
+    <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+
+2. 点击 `Add app` 按钮
+    <img src="/social-login-assets/firebase_project_add_app.webp" alt="Firebase Add App Button" />
+
+    :::note
+    你可能需要在此处查找此按钮。这仅适用于你已在 Firebase Console 中创建了不同应用的情况。
+    :::
+
+    <img src="/social-login-assets/firebase_project_add_app_2.webp" alt="Firebase Add App Button" />
+3. 选择 `iOS`
+    <img src="/social-login-assets/firebase_project_add_app_ios.webp" alt="Firebase Add App iOS Button" />
+
+4. 填写表单的第一部分
+   1. 填写 `Apple bundle ID`
+      1. 使用 `npx cap open ios` 在 Xcode 中打开你的应用
+      2. 双击 `App`
+         <img src="/social-login-assets/xcode_app_click.png" alt="App target in Xcode project navigator" />
+      3. 确保你在 `Targets -> App` 上
+         <img src="/social-login-assets/xcode_targets_app.png" alt="Targets section in Xcode with App selected" />
+      4. 找到你的 `Bundle Identifier`
+          <img src="/social-login-assets/xcode_bundle_id.png" alt="Bundle Identifier field in Xcode project settings" />
+          :::note
+          此处显示的 ID 将与我在本指南其余部分使用的 ID 不同。我将在本指南的其余部分使用 `app.capgo.plugin.SocialLogin`。
+          :::
+      5. 复制 `Bundle Identifier` 并在 Firebase 控制台中粘贴
+         <img src="/social-login-assets/firebase_project_add_app_ios_bundle_id.webp" alt="Firebase Add App iOS Bundle ID Field" />
+   2. 点击 `Register app` 按钮
+         <img src="/social-login-assets/firebase_project_add_app_ios_register.webp" alt="Firebase Add App iOS Register Button" />
+5. 跳过 `Download config file` 步骤
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download.webp" alt="Firebase Add App iOS Skip Download Button" />
+6. 跳过 `Add firebase SDK` 步骤
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download_firebase_sdk_2.webp" alt="Firebase Add App iOS Skip Download Firebase SDK Button" />
+7. 跳过 `Add initialization code` 步骤
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download_firebase_sdk.webp" alt="Firebase Add App iOS Skip Add Initialization Code Button" />
+8. 点击 `Continue to console` 按钮
+    <img src="/social-login-assets/firebase_project_add_app_ios_continue_to_console.webp" alt="Firebase Add App iOS Continue to Console Button" />
+9. 获取你的 iOS 客户端 ID 和 `YOUR_DOT_REVERSED_IOS_CLIENT_ID`
+   1. 在 [console.cloud.google.com](https://console.cloud.google.com/) 转到 Google Cloud Console
+   2. 找到你的项目
+      1. 点击项目选择器
+         <img src="/social-login-assets/firebase_double_check_gc_project_select.webp" alt="Google Cloud Console Project Selector" />
+      2. 按 Firebase 项目的确切名称搜索你的项目并点击它。在我的情况下,它是 `sociallogin-tutorial-app`。
+         <img src="/social-login-assets/firebase_gc_project_select_project.webp" alt="Firebase Project Selector Project" />
+   3. 打开搜索栏并打开 `credentials`
+      1. 打开搜索栏
+         <img src="/social-login-assets/firebase_double_check_gc_search_bar.webp" alt="Google Cloud Console Search Bar" />
+      2. 搜索 `credentials` 并点击 `APIs and Services` 那个(截图上的第 2 个)
+         <img src="/social-login-assets/firebase_gc_credentials_search.webp" alt="Google Cloud Console Credentials Search" />
+   4. 点击 `iOS client for [YOUR_APP_ID] (auto created by Google Service)` 那个。在我的情况下,它是 `sociallogin-tutorial-app`。
+      <img src="/social-login-assets/firebase_gc_credentials_ios_client_id.webp" alt="Google Cloud Console Credentials iOS Client ID" />
+   5. 复制 `Client ID` 和 `iOS URL scheme`。这将分别是你的 `iOSClientId` 和 `YOUR_DOT_REVERSED_IOS_CLIENT_ID`。
+
+      :::note
+      你将在插件的 `initialize` 方法中传递 `iOSClientId`,而在应用的 `Info.plist` 文件中使用 `YOUR_DOT_REVERSED_IOS_CLIENT_ID`,如本指南的下一部分所述。
+      :::
+
+      <img src="/social-login-assets/firebase_gc_credentials_ios_client_id_copy.webp" alt="Google Cloud Console Credentials iOS Client ID Copy" />
+10. 获取你的 Web 客户端 ID
+    1. 返回 Firebase 控制台并转到 `Build` -> `Authentication`
+        <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+    2. 点击 `Sign-in method` 按钮
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method.webp" alt="Firebase Authentication Sign-in Method Button" />
+    3. 点击 `Google` 提供商
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_google.webp" alt="Firebase Authentication Sign-in Method Google Provider" />
+    4. 点击 `Web SDK configuration` 按钮
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration.webp" alt="Firebase Authentication Sign-in Method Web SDK Configuration Button" />
+    5. 复制 `Web client ID`。这将是插件的 `initialize` 方法中的 `webClientId`。
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration_web_client_id.webp" alt="Firebase Authentication Sign-in Method Web SDK Configuration Web Client ID" />
+11. 修改应用的 Info.plist
+    1. 打开 Xcode 并找到 `Info.plist` 文件
+        <img src="/social-login-assets/xcode_info_file.png" alt="Info.plist file in Xcode project navigator" />
+    2. 右键单击此文件并将其作为源代码打开
+        <img src="/social-login-assets/xcode_open_as_src_code.png" alt="Right-click menu showing Open As Source Code option" />
+    3. 在 `Plist` 文件的底部,你将看到一个 `</dict>` 标签
+        <img src="/social-login-assets/xcode_dict_tag.png" alt="Closing dict tag in Info.plist file" />
+    4. 在关闭的 `</dict>` 标签之前插入以下片段
+        <img src="/social-login-assets/xcode_plist_inserted.png" alt="Info.plist with URL schemes code inserted before closing dict tag" />
+
+        ```xml
+        <key>CFBundleURLTypes</key>
+        <array>
+        <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>YOUR_DOT_REVERSED_IOS_CLIENT_ID</string>
+          </array>
+        </dict>
+        </array>
+        <key>GIDClientID</key>
+        <string>YOUR_IOS_CLIENT_ID.apps.googleusercontent.com</string>
+        ```
+
+    5. 将 `YOUR_DOT_REVERSED_IOS_CLIENT_ID` 更改为在步骤 9 中复制的值(iOS URL scheme)
+        <img src="/social-login-assets/xcode_plist_final.png" alt="Info.plist with actual reversed client ID inserted in URL schemes" />
+
+        :::caution
+        确保此值**以** `com.googleusercontent.apps` 开头
+        :::
+
+   6. 将 `YOUR_IOS_CLIENT_ID` 更改为你在步骤 9 中复制的 iOS 客户端 ID
+
+   7. 使用 `Command + S` 保存文件
+
+12. 修改 `AppDelegate.swift`
+    1. 打开 AppDelegate
+        <img src="/social-login-assets/xcode_app_deleg.png" alt="AppDelegate.swift file in Xcode project navigator" />
+    2. 在文件顶部插入 `import GoogleSignIn`
+        <img src="/social-login-assets/xcode_app_deleg_google_sign_in.png" alt="AppDelegate.swift with GoogleSignIn import added" />
+    3. 找到 `func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])` 函数
+        <img src="/social-login-assets/xcode_app_deleg_app_fn.png" alt="Original application openURL function in AppDelegate" />
+    4. 修改函数使其看起来像这样
+
+        ```swift
+        func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+            // Called when the app was launched with a url. Feel free to add additional processing here,
+            // but if you want the App API to support tracking app url opens, make sure to keep this call
+
+            var handled: Bool
+
+            handled = GIDSignIn.sharedInstance.handle(url)
+            if handled {
+              return true
+            }
+
+            return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
+        }
+        ```
+
+        <img src="/social-login-assets/xcode_app_deleg_app_fn_mod.png" alt="Modified application openURL function with GoogleSignIn handling" />
+
+    5. 使用 `Command + S` 保存文件
+
+15. 在应用中使用 Google 登录
+
+    在此步骤,你已准备好在应用中使用 Google 登录。
+    请使用示例应用的 [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) 文件通过 Google 进行身份验证。
+</Steps>
+
+ 用户首次登录时将在 Firebase Auth 中自动创建
+
+## 故障排除
+
+如果身份验证挂起或失败:
+
+- 验证 `idToken` audience 是否与你的 Firebase Web 客户端 ID 匹配
+- 检查 Firebase Console 中是否启用了 Google 登录
+- 确保 Info.plist 具有正确的 URL schemes 和 GIDClientID
+- 验证 `iOSServerClientId` 是否与你的 Web 客户端 ID 匹配
+- 查看[示例应用代码](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/src/authUtils.ts)以供参考

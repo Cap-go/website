@@ -1,0 +1,130 @@
+---
+title: Getting Started
+locale: id
+description: Konfigurasikan Apple Pay dan Google Pay untuk checkout Capacitor Anda dengan plugin Pay.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal plugin**
+   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronisasi proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Prasyarat Native
+
+- **Apple Pay (iOS)**
+  1. Buat Apple Pay merchant ID di portal Apple Developer.
+  2. Buat dan unggah sertifikat pemrosesan pembayaran yang diperlukan oleh gateway Anda.
+  3. Aktifkan kemampuan **Apple Pay** di Xcode dan pastikan profil provisioning Anda menyertakannya.
+  4. Perbarui `Info.plist` dengan deskripsi penggunaan jika gateway Anda memerlukan akses jaringan untuk memvalidasi pembayaran.
+
+- **Google Pay (Android)**
+  1. Masuk ke [Google Pay Business Console](https://pay.google.com/business/console/).
+  2. Konfigurasikan parameter gateway pembayaran Anda atau atur tokenisasi langsung untuk pengujian.
+  3. Jika Anda berencana menggunakan kartu produksi, alihkan `environment` ke `PRODUCTION` dan daftarkan kartu uji untuk QA.
+  4. Konfirmasi bahwa layanan Google Play tersedia di perangkat (diperlukan oleh Google Pay).
+
+Lihat panduan di bawah `docs/` di repositori plugin untuk screenshot langkah demi langkah.
+
+## Periksa ketersediaan
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const availability = await Pay.isPayAvailable({
+  apple: { supportedNetworks: ['visa', 'masterCard', 'amex'] },
+  google: {
+    isReadyToPayRequest: {
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+          },
+        },
+      ],
+    },
+  },
+});
+
+if (!availability.available) {
+  console.warn('Native pay unavailable:', availability);
+}
+```
+
+## Minta pembayaran (Apple Pay)
+
+```typescript
+const appleResult = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant.com.example.app',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    supportedNetworks: ['visa', 'masterCard'],
+    paymentSummaryItems: [
+      { label: 'Starter Plan', amount: '9.99' },
+      { label: 'Capgo Store', amount: '9.99' },
+    ],
+    requiredShippingContactFields: ['name', 'emailAddress'],
+  },
+});
+
+const token = appleResult.apple?.paymentData;
+```
+
+## Minta pembayaran (Google Pay)
+
+```typescript
+const googleResult = await Pay.requestPayment({
+  google: {
+    environment: 'test',
+    paymentDataRequest: {
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            billingAddressRequired: true,
+            billingAddressParameters: { format: 'FULL' },
+          },
+          tokenizationSpecification: {
+            type: 'PAYMENT_GATEWAY',
+            parameters: {
+              gateway: 'example',
+              gatewayMerchantId: 'exampleMerchantId',
+            },
+          },
+        },
+      ],
+      merchantInfo: {
+        merchantName: 'Capgo Store',
+      },
+      transactionInfo: {
+        totalPriceStatus: 'FINAL',
+        totalPrice: '9.99',
+        currencyCode: 'USD',
+        countryCode: 'US',
+      },
+    },
+  },
+});
+
+const paymentData = googleResult.google?.paymentData;
+```
+
+## Menangani respons
+
+- Tokenisasi payload yang dikembalikan dengan pemroses pembayaran Anda dan konfirmasi transaksi di sisi server.
+- Tampilkan jalur cadangan (entri kartu, faktur) jika pembayaran native tidak tersedia atau pengguna membatalkan sheet.
+- Cache hasil ketersediaan sehingga Anda tidak menampilkan tombol di perangkat yang tidak didukung.

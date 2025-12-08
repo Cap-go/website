@@ -1,0 +1,83 @@
+---
+title: 开始使用
+description: 使用 Media Session 插件将播放器 UI 与原生媒体控件同步。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装插件**
+   <PackageManagers pkg="@capgo/capacitor-media-session" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步平台**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+> ℹ️ Media Session API 在 Android（基于 Chrome 的浏览器、WebView）和许多桌面浏览器上可用。在不支持的平台上，调用会在不产生任何效果的情况下解决，因此请相应地保护您的 UI。
+
+## 发布元数据
+
+```typescript
+import { MediaSession } from '@capgo/capacitor-media-session';
+
+await MediaSession.setMetadata({
+  title: 'Weekly Tech Podcast',
+  artist: 'Capgo Studio',
+  album: 'Season 2',
+  artwork: [
+    { src: 'https://cdn.example.com/covers/s02e05-512.png', sizes: '512x512', type: 'image/.png' },
+  ],
+});
+```
+
+## 更新播放状态
+
+```typescript
+await MediaSession.setPlaybackState({ playbackState: 'playing' });
+
+// 稍后暂停（如果需要）
+await MediaSession.setPlaybackState({ playbackState: 'paused' });
+```
+
+## 处理媒体操作
+
+```typescript
+const pauseHandler = async () => {
+  player.pause();
+  await MediaSession.setPlaybackState({ playbackState: 'paused' });
+};
+
+await MediaSession.setActionHandler({ action: 'pause' }, pauseHandler);
+await MediaSession.setActionHandler({ action: 'play' }, async () => {
+  await player.play();
+  await MediaSession.setPlaybackState({ playbackState: 'playing' });
+});
+
+// 在释放播放器时移除处理程序
+await MediaSession.setActionHandler({ action: 'pause' }, null);
+```
+
+## 保持位置同步
+
+```typescript
+const updatePosition = async () => {
+  await MediaSession.setPositionState({
+    duration: player.duration,
+    position: player.currentTime,
+    playbackRate: player.playbackRate,
+  });
+};
+
+player.ontimeupdate = updatePosition;
+player.onratechange = updatePosition;
+```
+
+## 建议
+
+- 在曲目更改时刷新元数据，以便通知和智能音箱保持最新。
+- 限制位置更新（例如每 250 毫秒）以避免向原生层发送垃圾信息。
+- 在销毁播放器实例时始终移除操作处理程序，以防止意外泄漏。

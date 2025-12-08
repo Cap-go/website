@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-barometer"
+locale: ja
+description: デバイスセンサーから大気圧と高度データのためにデバイス気圧計の読み取り値にアクセスします。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: 気象およびフィットネスアプリケーション用のデバイスセンサーから気圧と高度データにアクセスします。
+  image:
+    file: ~public/icons/plugins/barometer.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/barometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-barometer/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="気圧監視" icon="rocket">
+    リアルタイムの大気圧読み取り 🌡️
+  </Card>
+  <Card title="高度計算" icon="star">
+    気圧変化から相対高度を導出 📈
+  </Card>
+  <Card title="イベントリスナー" icon="setting">
+    気圧変化イベントを購読 🔔
+  </Card>
+  <Card title="クロスプラットフォーム" icon="laptop">
+    気圧計センサーを備えたiOSおよびAndroidデバイスで動作 📱
+  </Card>
+  <Card title="はじめに" icon="open-book">
+    [はじめにガイド](/docs/plugins/barometer/getting-started/)を確認して、プラグインをインストールして設定します。
+  </Card>
+</CardGrid>

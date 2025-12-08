@@ -1,0 +1,208 @@
+---
+title: Configure iOS Sandbox Testing
+description: Learn how to set up sandbox testing for in-app purchases on iOS using App Store Connect and Xcode.
+sidebar:
+  order: 6
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Testing in-app purchases on iOS requires proper configuration in App Store Connect and on your test devices. This guide covers everything you need to get started with sandbox testing.
+
+## Prerequisites
+
+- **Apple Developer Program**: Active membership with annual renewal
+- **Agreements**: Signed "Paid Applications Agreement" with banking and tax information completed
+- **Xcode Project**: Configured with proper bundle identifier and capabilities
+
+:::note
+Banking and tax setup approval can take hours to days. Complete this well in advance of testing.
+:::
+
+## Setup Process
+
+<Steps>
+
+1. **Sign Paid Applications Agreement**
+
+   In App Store Connect, navigate to **Agreements, Tax, and Banking** and complete:
+   - Sign the Paid Applications Agreement
+   - Add your banking information
+   - Complete tax forms
+
+   Wait for Apple to approve your information (this can take 24-48 hours).
+
+2. **Create Sandbox Test User**
+
+   In App Store Connect, go to **Users and Access > Sandbox Testers**.
+
+   Click the **+** button to create a new sandbox tester.
+
+   **Important**: Use an email address that is NOT already associated with an Apple ID. You can use email aliases:
+   - Gmail: `youremail+test@gmail.com`
+   - iCloud: `youremail+test@icloud.com`
+
+   ![Create sandbox tester](/native-purchases/ios/sandbox-testing/sandbox-tester-setup.webp)
+
+3. **Configure Test Device (iOS 12+)**
+
+   Starting with iOS 12, you no longer need to sign out of your iTunes account to test purchases.
+
+   On your iOS device:
+   1. Open **Settings**
+   2. Tap **App Store**
+   3. Scroll to the bottom
+   4. Tap **Sandbox Account**
+   5. Sign in with your sandbox test account
+
+   :::tip
+   This is much more convenient than the old method of signing out of your iTunes account!
+   :::
+
+4. **Configure Xcode Project**
+
+   Ensure your Xcode project has:
+
+   **Bundle Identifier**
+   - Must match the identifier in your Developer Center
+   - Must match the identifier in App Store Connect
+
+   **In-App Purchase Capability**
+   1. Select your project in Xcode
+   2. Go to **Signing & Capabilities**
+   3. Click **+ Capability**
+   4. Add **In-App Purchase**
+
+5. **Create In-App Purchase Products**
+
+   In App Store Connect, navigate to your app and create your in-app purchase products (subscriptions, consumables, etc.).
+
+   Products must be in at least "Ready to Submit" status for sandbox testing.
+
+6. **Test Your Implementation**
+
+   Build and run your app on a test device. When you attempt a purchase, you should see:
+
+   > **[Environment: Sandbox]**
+
+   This confirmation indicates you're in the sandbox environment and won't be charged real money.
+
+</Steps>
+
+## Important Notes
+
+### Sandbox Environment Characteristics
+
+- **No real charges**: All purchases are free in sandbox mode
+- **Accelerated subscriptions**: Subscription durations are shortened for faster testing
+  - 1 week subscription = 3 minutes
+  - 1 month subscription = 5 minutes
+  - 2 months subscription = 10 minutes
+  - 3 months subscription = 15 minutes
+  - 6 months subscription = 30 minutes
+  - 1 year subscription = 1 hour
+- **Auto-renewal limit**: Subscriptions auto-renew up to 6 times in sandbox
+- **Immediate cancellation**: Cancelled subscriptions expire immediately
+
+### Sandbox Account Management
+
+- Create multiple test accounts for different scenarios
+- Use test accounts only on test devices
+- Don't use personal Apple ID for sandbox testing
+- Test accounts can purchase any product regardless of region
+
+## Using Sandbox Testing
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { isBillingSupported } = await NativePurchases.isBillingSupported();
+if (!isBillingSupported) {
+  throw new Error('StoreKit not supported on this device');
+}
+
+// Fetch products (automatically uses sandbox when available)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Make test purchase
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Test purchase successful!', transaction.transactionId);
+```
+
+## Verification
+
+When properly configured, you should observe:
+
+1. **Sandbox banner** during purchase: "[Environment: Sandbox]"
+2. **Products load** successfully
+3. **Purchases complete** without actual charges
+4. **Receipts validate** correctly
+5. **Subscriptions renew** automatically (at accelerated rate)
+
+## Troubleshooting
+
+**Products not loading:**
+- Verify bundle identifier matches App Store Connect
+- Check that agreements are signed and approved
+- Ensure products are at least "Ready to Submit" status
+- Wait 2-3 hours after creating products
+
+**"Cannot connect to iTunes Store":**
+- Verify sandbox account is configured correctly
+- Check device is connected to internet
+- Try signing out and back into sandbox account
+- Restart the app
+
+**Purchases failing silently:**
+- Check Xcode console for error messages
+- Verify In-App Purchase capability is enabled
+- Ensure sandbox account email is not a real Apple ID
+- Try creating a new sandbox test account
+
+**Receipt validation errors:**
+- Use sandbox receipt validation endpoint in testing
+- Production endpoint: `https://buy.itunes.apple.com/verifyReceipt`
+- Sandbox endpoint: `https://sandbox.itunes.apple.com/verifyReceipt`
+- The native-purchases plugin handles this automatically
+
+**Wrong subscription duration:**
+- Remember subscriptions are accelerated in sandbox
+- Use the conversion chart above for expected durations
+- Subscriptions auto-renew max 6 times in sandbox
+
+**"This Apple ID has not yet been used in the iTunes Store":**
+- This is normal for new sandbox accounts
+- Proceed with the purchase to activate the account
+- Only happens on first use
+
+## Best Practices
+
+1. **Create multiple test accounts** for different test scenarios
+2. **Test all subscription durations** to verify behavior
+3. **Test cancellation and renewal** flows
+4. **Verify receipt validation** works correctly
+5. **Test restore purchases** functionality
+6. **Check subscription upgrade/downgrade** behavior
+7. **Test with poor network conditions**
+
+## Production vs. Sandbox
+
+| Feature | Sandbox | Production |
+|---------|---------|------------|
+| Real charges | No | Yes |
+| Subscription duration | Accelerated | Normal |
+| Auto-renewal limit | 6 times | Unlimited |
+| Cancellation effect | Immediate | End of period |
+| Receipt endpoint | Sandbox URL | Production URL |
+| Test accounts only | Yes | No |
+
+## Additional Resources
+
+For more details, refer to the [official Apple StoreKit documentation](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox) on sandbox testing.

@@ -1,0 +1,131 @@
+---
+title: 概述
+description: "通过学习关键概念和步骤,开始使用 Capgo 集成和部署实时更新到您的应用。"
+sidebar:
+  order: 1
+next: false
+prev: false
+locale: zh
+---
+
+import { Card, CardGrid, Steps, LinkCard, Aside } from '@astrojs/starlight/components';
+
+快速入门教程将引导您了解 Capgo 的关键概念!将探索的概念包括:
+
+<Steps>
+
+1. 将应用添加到您的 Capgo 账户
+
+2. 将 Capgo 集成到您的 CI/CD
+
+3. 通过推送提交触发 Capgo 上的 bundle 上传
+
+4. 配置和自定义 Capgo bundle 发布
+
+5. 设置您的应用以通过 Capgo 启用实时更新
+
+6. 从 Capgo 部署实时更新到您的应用
+
+</Steps>
+
+只需按照指南逐步操作,或直接导航到您感兴趣的组件的文档。
+
+
+<CardGrid stagger>
+  <a href="/docs/getting-started/add-an-app/" ><Card title="开始教程" icon="rocket" >
+    按照快速入门教程,立即开始使用 Capgo!
+  </Card></a>
+  <a href="/docs/getting-started/deploy/"><Card title="发布更新" icon="pencil">
+    从 Capgo 仪表板向您的应用发布更新。
+  </Card></a>
+  <a href="/docs/getting-started/cicd-integration/"><Card title="自动化更新" icon="pencil">
+    将 Capgo 集成到您的 CI/CD,并通过推送提交触发 Capgo 上的 bundle 上传。
+  </Card></a>
+  <a href="/docs/getting-started/troubleshooting/"><Card title="故障排除" icon="open-book">
+    常见问题及解决方法。
+  </Card></a>
+  <a href="/docs/getting-started/wrapping-up/"><Card title="总结" icon="pencil">
+    总结教程并快速了解您所学的内容。
+  </Card></a>
+</CardGrid>
+
+<Aside type="tip">
+空中更新(OTA)功能仅适用于对 HTML、CSS 和 JavaScript 文件所做的修改。
+
+如果您对原生代码进行任何更改,例如更新 Capacitor 插件,则必须重新提交应用到应用商店以获得批准。
+</Aside>
+
+## 加入 Discord 社区
+
+[加入 Capgo Discord 服务器!](https://discord.capgo.app)
+
+## 维护
+
+| 插件版本 | Capacitor 兼容性 | 维护状态        |
+| -------------- | ----------------------- | ----------------- |
+| v7.\*.\* (≥7.25.0)       | v7.\*.\*                | ✅ 完全支持                 |
+| v6.\*.\* (≥6.25.0)       | v6.\*.\*                | ✅ 完全支持 |
+| v5.\*.\* (≥5.10.0)       | v5.\*.\*                | ✅ 完全支持 |
+| v5.\*.\* (\<5.10.0)       | v5.\*.\*                | ⚠️ 已弃用 |
+| v4.\*.\*       | v4.\*.\*                | ❌ 不再支持 |
+| v3.\*.\*       | v3.\*.\*                | ❌ 不再支持     |
+| >= 8            | v4.\*.\*                | ⚠️ 由于 CI 流程中的版本问题已弃用     |
+
+## 商店指南合规性
+
+Android Google Play 和 iOS App Store 都有相应的指南,其中包含在您的应用中集成 Capacitor-updater 解决方案之前应了解的规则。
+
+### Google play
+
+[设备和网络滥用](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)主题的第三段描述了通过 Google Play 更新机制以外的任何方法更新源代码是受限制的。但此限制不适用于更新 javascript bundle。
+> 此限制不适用于在虚拟机中运行且对 Android API 的访问受限的代码(例如 webview 或浏览器中的 JavaScript)。
+
+这完全允许 Capacitor-updater,因为它只更新 JS bundle,不会更新原生代码。
+
+### App Store
+
+自 2015 年 [Apple 开发者计划许可协议](https://developer.apple.com/programs/ios/information/)起,第 **3.3.2** 段完全允许执行 JavaScript 和资源的空中更新 - 在其最新版本(20170605)[可在此处下载](https://developer.apple.com/terms/),此规定甚至更加宽泛:
+
+> 解释型代码可以下载到应用程序,但前提是此类代码:(a) 不会通过提供与提交到 App Store 时应用程序的预期和宣传目的不一致的功能来改变应用程序的主要目的,(b) 不会为其他代码或应用程序创建商店或店面,以及 (c) 不会绕过签名、沙箱或操作系统的其他安全功能。
+
+Capacitor Updater 允许您完全遵守这些规则,只要您推送的更新不会使您的产品与其原始 App Store 批准的意图发生重大偏离。
+
+为了进一步遵守 Apple 的指南,我们建议 App Store 分发的应用不要启用 `强制更新` 场景,因为在 [App Store 审核指南](https://developer.apple.com/app-store/review/guidelines/)中规定:
+
+> 应用不得强制用户对应用进行评分、审核应用、下载其他应用或执行类似操作,以访问功能、内容或使用应用。
+
+这对于后台更新的默认行为来说不是问题,因为它不会强制用户应用新版本,直到下次关闭应用,但至少如果您决定显示它,您应该了解该角色。
+
+## 开源
+
+该插件采用 LGPL-3.0 许可证,后端采用 AGPL-3.0 许可证。
+
+> 💡 LGPL-3.0 意味着如果有人修改插件的代码,必须以相同的许可证以开源方式发布。如果您在不修改的情况下使用代码,则不涉及您。有关更多详细信息,请查看以下链接 👇
+
+<LinkCard
+	title="许可?"
+	href="https://github.com/Cap-go/capacitor-updater/issues/7"
+/>
+
+
+<LinkCard
+	title="尝试 GPTS Capgo 获取帮助,而不是阅读文档"
+	href="https://chat.openai.com/g/g-3dMwHbF2w-capgo-doc-gpt"
+/>
+
+
+> 您可以将其包含在您的应用中,无需担心
+
+## 最后说明
+
+如果您自托管并发现此工具有用,请考虑通过成为 [GitHub 赞助商](https://github.com/sponsors/riderx/)来支持我的工作。
+
+我打赌开源我在这里构建的所有代码,而不是将其付费墙。通过开放它而不是战斗和隐藏,我相信我们可以让世界变得更美好。
+
+为了实现这一点,我们所有人都需要尽自己的一份力量,包括您 🥹。如果 Capgo cloud 不符合您的需求,您可以在[这里](https://github.com/sponsors/riderx/)按照您自己的条件支持一个自力更生的创客。
+
+## 简单数学
+
+基本计划的价格:$14*12 = 每年 $168。
+而平均开发/小时 = $60。
+这意味着在自托管上浪费 3 小时的开发时间就可以支付一整年的费用,如果您花费超过 3 小时,您就在赔钱 ^^

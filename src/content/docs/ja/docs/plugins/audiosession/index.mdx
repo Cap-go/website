@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-plugin-audiosession"
+locale: ja
+description: Capacitorアプリからオーディオルートの変更と中断を処理するために、iOSオーディオセッションを監視および制御します。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: オーディオルートの変更をリッスンし、中断に対応し、Capacitorを離れることなくスピーカーへの再生を再ルーティングします。
+  image:
+    file: ~public/icons/plugins/audiosession.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/audiosession/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-audiosession/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+CapgoのAudioSessionプラグインは、iOS AVAudioSessionレイヤーをきめ細かく制御できるため、ヘッドフォン、Bluetoothデバイス、予期しない中断を適切に処理できます。
+
+<CardGrid stagger>
+  <Card title="ルート認識" icon="rocket">
+    ユーザーがヘッドセット、AirPods、Bluetoothスピーカーなどを接続または取り外したときを検出します。
+  </Card>
+  <Card title="スピーカーオーバーライド" icon="setting">
+    ハンズフリーオーディオが必要な場合に、内蔵スピーカーを通じて強制的に再生します。
+  </Card>
+  <Card title="中断処理" icon="moon">
+    電話やSiriなどの中断イベントに対応して、オーディオを安全に一時停止および再開します。
+  </Card>
+  <Card title="型安全性" icon="pencil">
+    強力なTypeScript定義により、堅牢なオーディオエクスペリエンスを簡単に構築できます。
+  </Card>
+</CardGrid>
+
+このプラグインは、AVAudioSessionの制御が必要なiOSを対象としています。他のプラットフォームでは、呼び出しは効果なく解決され、1つの共有コードパスを維持できます。

@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-media-session"
+description: Capacitor에서 직접 잠금 화면, 알림 및 헤드셋 미디어 컨트롤을 제어하세요.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 트랙 메타데이터를 게시하고, 재생/일시정지 이벤트에 반응하며, 네이티브 미디어 컨트롤과 재생 상태를 동기화하세요.
+  image:
+    file: ~public/icons/plugins/media-session.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/media-session/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-media-session/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Media Session 플러그인은 Capacitor를 Media Session API와 연결하여 오디오 및 비디오 플레이어가 모든 곳에서 네이티브처럼 느껴지도록 합니다.
+
+<CardGrid stagger>
+  <Card title="풍부한 메타데이터" icon="star">
+    잠금 화면 및 알림 컨트롤에 앨범 아트, 아티스트 및 제목을 제공하세요.
+  </Card>
+  <Card title="재생 상태 동기화" icon="rocket">
+    재생/일시정지 버튼과 진행률 표시기를 플레이어와 정렬하여 유지하세요.
+  </Card>
+  <Card title="액션 콜백" icon="pencil">
+    Capacitor 코드에서 헤드셋 버튼 및 OS 미디어 액션을 처리하세요.
+  </Card>
+  <Card title="위치 보고" icon="download">
+    스크러빙이 원활하게 작동하도록 duration, position 및 rate를 전달하세요.
+  </Card>
+</CardGrid>
+
+플레이어 라이프사이클에 메타데이터 업데이트를 연결하려면 시작 가이드로 이동하세요.

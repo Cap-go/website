@@ -1,0 +1,130 @@
+---
+title: "既知の問題"
+locale: ja
+description: "CapacitorとCapgo、およびupdaterに関する既知の問題。このページは、ツールに関する奇妙な問題を理解するのに役立ちます"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Ionicライブリロード
+
+* 開発時にCLIからIonicライブリロード機能を使用すると、プラグインが上書きされるため、アップデートは表示されません。
+
+## Quasarライブリロード
+
+* 内部的にionicと同じシステムを使用しているため、アップデートは表示されません。
+
+## アップデートが失敗する
+
+* これは通常、大規模なアップデート（> 20mb）がプッシュされた場合に発生し、多くのユーザーが最新バージョンを取得できません。
+以前は、ユーザーはダウンロードが完了するまでアプリを開いたままにしておく必要がありましたが、現在はバックグラウンドダウンロードを使用していますが、まだ数秒に制限されています。
+
+## Android
+
+### ダウンロードできない
+
+インドのデバイスでいくつかの問題が見られ、ユーザーと電話で話し、異なるDNSサーバーを試してもらったところ、うまくいきました。
+
+そのため、問題が発生した場合は、CloudflareやGoogle DNSなどの別のDNSサーバーを使用してみてください。
+
+Cloudflare: 1.1.1.1 と 1.0.0.1
+
+Google DNS: 8.8.8.8 と 8.8.4.4 または dns.google
+
+<LinkCard
+	title="AndroidでDNSサーバーを設定する方法は？"
+	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
+/>
+
+### セルフホスティング
+セルフホスティングのアップデートをプッシュする場合、「HTTP」エンドポイントを使用できないことに注意してください。これはAndroidアプリのセキュリティポリシーに違反するためです。それでも実行したい場合は、このガイドに従ってください:
+
+<LinkCard
+	title="Android（9）PieでHTTPとHTTPSのすべてのネットワーク接続タイプを許可する方法は？"
+	href="https://stackoverflow.com/a/51902630/5511370"
+/>
+
+### Unzip
+
+Unzip issue: DEFLATED entries can have EXT descriptor
+
+CLIとは異なる方法でバンドルを圧縮した場合、zipの形式が正しくない可能性があります。CLIコマンド`npx @capgo/cli zip BUNDLE_FOLDER`を使用してください。
+
+これはJavaの既知の問題です:
+
+<LinkCard
+	title="Unzip issue: DEFLATED entries can have EXT descriptor"
+	href="https://bugs.openjdk.org/browse/JDK-8143613"
+/>
+
+
+### Clearfix issue
+
+* usesCleartextTrafficに関する問題がある場合、これはプラグインがsonar cloudが推奨するベストプラクティスに従っているためです。90%のケースでは正常に動作しますが、一部のプラグインでは問題が発生します。
+
+修正するには、`android/app/src/main/AndroidManifest.xml`の`<application>`キーに以下を追加してください:
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemas.android.com/tools"
+```
+
+## IOS
+
+### プライバシーマニフェスト
+
+`NSPrivacyAccessedAPICategoryUserDefaults`辞書キーを[Privacy Manifest](https://capacitorjs.com/docs/ios/privacy-manifest)（通常は`ios/App/PrivacyInfo.xcprivacy`）に追加してください:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- ファイルが既に存在する場合は、この辞書エントリを配列に追加してください。 -->
+      <dict>
+        <key>NSPrivacityAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA92.1</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+[`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) APIにアクセスする理由として[`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401)を宣言することをお勧めします。
+
+
+### ネットワーク権限
+
+アップデートのテストにローカルサーバーを使用する場合、アプリはネットワーク権限を要求します。これは正常な動作で、リモートサーバーを使用する場合には発生しません。
+
+
+## 両OS
+
+手動モードでアップデートを行う場合、一部のイベントをキャッチするのは簡単ではありません。たとえば、アップデート失敗はJSコードがリロードされる直前にトリガーされるため、キャッチできません。
+
+代替案の1つは、バンドルを一覧表示し、エラー統計を確認してアップデートが失敗したかどうかを知ることです。
+
+将来的にこれをより良く処理する方法を見つける必要がありますが、自動モードがアップデートを行うための推奨方法であるため、優先順位ではありません。
+
+これを改善するためのPRを歓迎します。
+
+## CLI
+
+CLIが何かを実行する際に問題がある場合、
+
+**capacitor.config.ts**に**appId**と**appName**が存在するか確認してください
+
+公式ドキュメントのガイドに従ってください:
+
+<LinkCard
+	title="Capacitor Configuration"
+	href="https://capacitorjs.com/docs/config"
+/>

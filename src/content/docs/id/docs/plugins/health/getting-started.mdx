@@ -1,0 +1,86 @@
+---
+title: Memulai
+description: Aktifkan akses HealthKit dan Health Connect dengan plugin Capgo Health.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal plugin**
+   <PackageManagers pkg="@capgo/capacitor-health" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Konfigurasi iOS
+
+- Buka `ios/App/App.xcworkspace` di Xcode dan aktifkan kemampuan **HealthKit**.
+- Berikan deskripsi penggunaan di `Info.plist`:
+
+```xml
+<key>NSHealthShareUsageDescription</key>
+<string>This app reads your health metrics to personalize your experience.</string>
+<key>NSHealthUpdateUsageDescription</key>
+<string>This app writes health data that you explicitly record.</string>
+```
+
+## Konfigurasi Android
+
+Data kesehatan didukung oleh [Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect). Pastikan:
+
+- `minSdkVersion` adalah **26 atau lebih tinggi** (Capacitor 5 sudah memenuhi ini).
+- Pengguna telah menginstal Health Connect (Android 14+ sudah menyertainya; versi sebelumnya memerlukan unduhan Play Store).
+- Anda memandu pengguna melalui UI izin runtime saat meminta akses.
+
+## Periksa ketersediaan dan minta akses
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+const { available, reason } = await Health.isAvailable();
+if (!available) {
+  console.warn('Health APIs unavailable:', reason);
+  return;
+}
+
+await Health.requestAuthorization({
+  read: ['steps', 'heartRate', 'weight'],
+  write: ['weight'],
+});
+```
+
+## Baca sampel
+
+```typescript
+const { samples } = await Health.readSamples({
+  dataType: 'steps',
+  startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  endDate: new Date().toISOString(),
+  limit: 200,
+});
+
+samples.forEach((sample) => {
+  console.log(sample.value, sample.startDate, sample.endDate);
+});
+```
+
+## Tulis sampel
+
+```typescript
+await Health.saveSample({
+  dataType: 'weight',
+  value: 74.6,
+  startDate: new Date().toISOString(),
+});
+```
+
+## Manajemen otorisasi
+
+- Gunakan `checkAuthorization()` untuk memverifikasi scope baca/tulis saat ini dan menyesuaikan UI Anda.
+- Tangani penolakan dengan baik dengan menjelaskan mengapa data meningkatkan pengalaman dan menawarkan percobaan ulang.
+- Selalu hormati privasi pengguna dan hanya minta scope minimum yang diperlukan fitur Anda.

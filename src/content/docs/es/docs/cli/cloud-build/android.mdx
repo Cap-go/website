@@ -1,0 +1,470 @@
+---
+title: Compilaciones Android
+description: Configura y compila aplicaciones Android con Capgo Cloud Build
+locale: es
+sidebar:
+  order: 3
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Compila y envía aplicaciones Android a Google Play Store usando la infraestructura de nube segura de Capgo.
+
+## Antes de Compilar
+
+<CardGrid>
+  <Card title="⚠️ Configura las Credenciales de Android Primero" icon="warning">
+    **Requerido:** Debes guardar tus credenciales de Android antes de compilar aplicaciones de lanzamiento.
+
+    [Configurar Credenciales de Android →](/docs/cli/cloud-build/credentials/#saving-android-credentials)
+  </Card>
+</CardGrid>
+
+## Cómo Funcionan las Compilaciones Android
+
+Las compilaciones Android se ejecutan en sandboxes seguros de Cloudflare:
+
+- **Infraestructura**: Cloudflare Workers con Android SDK en contenedores
+- **Herramienta de Compilación**: Gradle con herramientas de compilación de Android
+- **Ejecución**: Entorno sandbox aislado por compilación
+- **Limpieza**: Eliminación instantánea después de completar la compilación
+- **Seguridad**: Sin almacenamiento persistente, aislamiento completo entre compilaciones
+
+## Prerequisitos
+
+Antes de compilar para Android, necesitas:
+
+### 1. Entorno de Desarrollo (Pruebas Locales)
+
+- Android Studio instalado localmente (para configuración inicial de keystore)
+- Tu aplicación compilándose exitosamente con `npx cap open android`
+- Java JDK 17 o superior
+
+### 2. Keystore de Firma
+
+Para compilaciones de lanzamiento, necesitas un keystore de firma:
+
+| Tipo de Compilación | Keystore Requerido | Propósito |
+|------------|-------------------|---------|
+| **Debug** | No | Solo pruebas, autogenerado |
+| **Release** | Sí | Envío a Play Store |
+
+## Crear un Keystore
+
+<Aside type="tip">
+Para guías detalladas paso a paso con capturas de pantalla, visita:
+- [Guía de Certificados Android](https://capawesome.io/cloud/native-builds/certificates/android/)
+- [Blog: Compilaciones Automáticas de Android con GitHub Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+</Aside>
+
+Si aún no tienes un keystore, créalo:
+
+```bash
+keytool -genkey -v \
+  -keystore my-release-key.keystore \
+  -alias my-key-alias \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000
+```
+
+Responde las preguntas:
+- **Contraseña**: Elige una contraseña fuerte (¡guárdala de forma segura!)
+- **Nombre**: Tu nombre o nombre de la empresa
+- **Organización**: Nombre de tu empresa
+- **Ubicación**: Tu ciudad, estado, país
+
+<Aside type="caution">
+**Importante**: ¡Mantén tu archivo keystore y contraseñas seguras! Si las pierdes, no podrás actualizar tu aplicación en Play Store.
+</Aside>
+
+### Entendiendo los Componentes del Keystore
+
+Al crear un keystore, necesitarás recordar:
+
+1. **Contraseña del Keystore** (`KEYSTORE_STORE_PASSWORD`): La contraseña para el archivo keystore en sí
+2. **Alias de la Clave** (`KEYSTORE_KEY_ALIAS`): El nombre/identificador para tu clave de firma dentro del keystore
+3. **Contraseña de la Clave** (`KEYSTORE_KEY_PASSWORD`): La contraseña para la clave específica (puede ser la misma que la contraseña del almacén)
+
+**Flujo de trabajo de ejemplo:**
+```bash
+# Lista los alias en tu keystore para verificar
+keytool -list -keystore my-release-key.keystore
+
+# Ver información detallada sobre tu clave
+keytool -list -v -keystore my-release-key.keystore -alias my-key-alias
+```
+
+## Configuración de Compilación
+
+### Variables de Entorno Requeridas
+
+Para **compilaciones de lanzamiento**, configura estas credenciales:
+
+```bash
+# Firma de Android (Requerido para lanzamiento)
+ANDROID_KEYSTORE_FILE="<keystore-codificado-en-base64>"
+KEYSTORE_KEY_ALIAS="my-key-alias"
+KEYSTORE_KEY_PASSWORD="<contraseña-de-clave>"
+KEYSTORE_STORE_PASSWORD="<contraseña-de-almacén>"
+
+# Publicación en Play Store (Opcional, para envío automático)
+PLAY_CONFIG_JSON="<json-de-cuenta-de-servicio-codificado-en-base64>"
+```
+
+### Generando Credenciales en Base64
+
+**Archivo Keystore:**
+```bash
+base64 -i my-release-key.keystore | pbcopy
+```
+
+**JSON de Cuenta de Servicio de Play Store:**
+```bash
+base64 -i play-store-service-account.json | pbcopy
+```
+
+La cadena base64 ahora está en tu portapapeles.
+
+### Configuración de Cuenta de Servicio de Play Store
+
+Para habilitar las cargas automáticas a Play Store, necesitas crear una cuenta de servicio de Google Cloud con los permisos apropiados.
+
+<Aside type="tip">
+Para instrucciones detalladas con capturas de pantalla, consulta la [Guía de Certificados Android](https://capawesome.io/cloud/native-builds/certificates/android/).
+</Aside>
+
+<Steps>
+
+1. **Crear Cuenta de Servicio en Google Cloud**
+   - Ve a [Google Play Console](https://play.google.com/console) → Configuración → Acceso a la API
+   - Haz clic en "Crear nueva cuenta de servicio"
+   - Sigue el enlace a Google Cloud Console
+   - Haz clic en "Crear Cuenta de Servicio"
+   - Ingresa un nombre (ej., "Capgo CI/CD")
+   - Otorga el rol "Usuario de Cuenta de Servicio"
+   - Haz clic en "Listo"
+
+2. **Crear Clave JSON**
+   - En Google Cloud Console, encuentra tu cuenta de servicio
+   - Haz clic en el correo electrónico de la cuenta de servicio
+   - Ve a la pestaña "Claves"
+   - Haz clic en "Agregar Clave" → "Crear nueva clave"
+   - Elige formato "JSON"
+   - Descarga el archivo JSON (¡manténlo seguro!)
+
+3. **Otorgar Permisos en Play Console**
+   - Vuelve a Google Play Console → Configuración → Acceso a la API
+   - Encuentra tu cuenta de servicio en la lista
+   - Haz clic en "Otorgar acceso"
+   - En "Permisos de aplicación", selecciona tu aplicación
+   - En "Permisos de cuenta", otorga:
+     - **Lanzamientos**: "Ver información de la aplicación y descargar informes masivos (solo lectura)"
+     - **Lanzamientos**: "Crear, editar y eliminar lanzamientos borrador"
+     - **Lanzamientos**: "Lanzar a producción, excluir dispositivos y usar Play App Signing"
+   - Haz clic en "Invitar usuario"
+
+4. **Aceptar la Invitación**
+   - La cuenta de servicio recibirá un correo de invitación
+   - Acepta la invitación para activar los permisos
+
+</Steps>
+
+<Aside type="caution">
+El archivo JSON de la cuenta de servicio contiene credenciales sensibles. Nunca lo confirmes en control de versiones ni lo compartas públicamente.
+</Aside>
+
+## Compilando para Android
+
+### Compilación de Debug
+
+Perfecto para pruebas sin firma:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode debug
+```
+
+Esto crea un APK de debug que se puede instalar en cualquier dispositivo para pruebas.
+
+### Compilación de Release
+
+Para envío a Play Store:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release
+```
+
+Requiere que las credenciales de firma estén configuradas como variables de entorno.
+
+## Integración CI/CD
+
+### Ejemplo de GitHub Actions
+
+```yaml
+name: Build Android App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build Android app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform android \
+            --build-mode release
+```
+
+## Detalles del Proceso de Compilación
+
+### Qué Sucede Durante una Compilación Android
+
+<Steps>
+
+1. **Inicialización del Sandbox** (~5 segundos)
+   - Contenedor seguro iniciado
+   - Android SDK y Gradle cargados
+   - Sistema de archivos aislado creado
+
+2. **Configuración del Proyecto** (~20 segundos)
+   - Zip del proyecto descargado desde R2
+   - Extraído al directorio de compilación
+   - Credenciales de firma inyectadas
+
+3. **Compilación Gradle** (2-4 minutos)
+   - Dependencias descargadas
+   - Compilación APK/AAB
+   - Optimización ProGuard/R8 (modo release)
+   - Firma de código aplicada
+
+4. **Carga a Play Store** (30 segundos, si está configurado)
+   - AAB subido a Play Console
+   - Canal de lanzamiento configurado
+   - Envío iniciado
+
+5. **Limpieza** (inmediata)
+   - Todos los archivos eliminados
+   - Contenedor destruido
+   - Sin artefactos retenidos
+
+</Steps>
+
+### Pila de Compilación
+
+Nuestro entorno de compilación Android incluye:
+
+- **Java**: OpenJDK 17
+- **Android SDK**: Última versión estable
+- **Gradle**: 8.x
+- **Build Tools**: 34.x
+- **Node.js**: 18.x (LTS)
+- **NPM**: Última versión estable
+
+## Salida de Compilación
+
+### APK vs AAB
+
+- **APK** (Paquete Android): Archivo instalable para instalación directa
+- **AAB** (Android App Bundle): Formato recomendado por Google Play (descargas más pequeñas para usuarios)
+
+Por defecto, las compilaciones de Capgo crean:
+- **Modo debug**: APK
+- **Modo release**: AAB (optimizado para Play Store)
+
+## Tiempos de Compilación
+
+Tiempos típicos de compilación Android:
+
+| Tipo de Compilación | Tiempo Promedio |
+|------------|--------------|
+| Debug | 2-3 minutos |
+| Release (sin ProGuard) | 3-4 minutos |
+| Release (con ProGuard) | 4-6 minutos |
+
+<Aside type="note">
+Las compilaciones Android cuestan **1× la tarifa base** (la mitad del costo de las compilaciones iOS).
+</Aside>
+
+## Variantes de Compilación
+
+### Variantes de Compilación Personalizadas
+
+Si tu aplicación tiene variantes de compilación personalizadas (ej., `staging`, `production`), usa `build-config`:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release \
+  --build-config '{"variant":"staging"}'
+```
+
+Esto compilará la variante `stagingRelease`.
+
+### Dimensiones de Sabor
+
+Para aplicaciones con dimensiones de sabor:
+
+```bash
+--build-config '{"flavor":"premium","variant":"production"}'
+```
+
+Esto compila la variante `premiumProductionRelease`.
+
+## Solución de Problemas
+
+### Problemas Comunes
+
+**"Contraseña de keystore incorrecta"**
+- Verifica que KEYSTORE_STORE_PASSWORD coincida con tu keystore
+- Asegúrate de que KEYSTORE_KEY_PASSWORD coincida con la contraseña de tu alias de clave
+- Verifica espacios extra o caracteres especiales
+
+**"Alias de clave no encontrado"**
+- Verifica que KEYSTORE_KEY_ALIAS coincida exactamente (sensible a mayúsculas)
+- Lista los alias: `keytool -list -keystore my-release-key.keystore`
+
+**"Compilación Gradle falló"**
+- Revisa los registros de compilación para el error específico
+- Asegúrate de que tu aplicación compile localmente con `./gradlew assembleRelease`
+- Verifica que todas las dependencias nativas estén en `build.gradle`
+
+**"Carga a Play Store falló"**
+- Verifica que el JSON de la cuenta de servicio sea válido
+- Asegúrate de que la cuenta de servicio tenga los permisos correctos en Play Console
+- Verifica que la aplicación esté configurada correctamente en Play Console
+
+**"Tiempo de espera de compilación agotado"**
+- Las aplicaciones grandes pueden necesitar optimización
+- Verifica si se pueden eliminar dependencias innecesarias
+- Contacta soporte si las compilaciones consistentemente agotan el tiempo
+
+### Registros de Debug
+
+Busca estas fases clave en los registros de compilación:
+
+```
+→ Descargando dependencias...
+→ Ejecutando Gradle assembleRelease...
+→ Firmando APK/AAB...
+→ Subiendo a Play Store...
+✔ Compilación exitosa
+```
+
+Si una compilación falla, el error específico de Gradle se mostrará en los registros.
+
+## Mejores Prácticas
+
+### 1. Probar Localmente Primero
+
+Siempre asegúrate de que tu compilación Android funcione localmente:
+
+```bash
+cd android
+./gradlew assembleRelease
+# o
+./gradlew bundleRelease
+```
+
+### 2. Asegurar tu Keystore
+
+- Nunca confirmes keystores en control de versiones
+- Almacena en gestión de secretos segura (1Password, AWS Secrets Manager, etc.)
+- Mantén copias de respaldo en múltiples ubicaciones seguras
+- Documenta contraseñas en un gestor de contraseñas seguro
+
+### 3. Gestión de Versiones
+
+Capgo lee la versión de tu `capacitor.config.json`:
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "My App",
+  "version": "1.0.0",
+  "build": "1"
+}
+```
+
+Incrementa el número de `build` para cada lanzamiento.
+
+### 4. Configuración de ProGuard
+
+Para compilaciones de lanzamiento, asegúrate de que las reglas de ProGuard estén configuradas correctamente:
+
+```
+# android/app/proguard-rules.pro
+-keep class com.getcapacitor.** { *; }
+-keep @com.getcapacitor.annotation.CapacitorPlugin public class * {
+  @com.getcapacitor.annotation.PluginMethod public <methods>;
+}
+```
+
+### 5. Monitorear Tamaño de Compilación
+
+Mantén un ojo en el tamaño APK/AAB para asegurar que esté optimizado:
+
+```
+El CLI muestra el tamaño final:
+→ Tamaño APK: 12.4 MB
+```
+
+Si tu aplicación es grande (>50 MB), considera:
+- Habilitar ProGuard/R8
+- Usar formato AAB (entrega dinámica)
+- Optimizar imágenes y recursos
+
+## Envío a Play Store
+
+### Envío Automático
+
+Con PLAY_CONFIG_JSON configurado, las compilaciones se cargan automáticamente al canal de prueba interna de Play Console.
+
+### Envío Manual
+
+Si prefieres el envío manual:
+
+1. Ejecuta la compilación sin PLAY_CONFIG_JSON
+2. Descarga el AAB de los artefactos de compilación (si está configurado)
+3. Sube manualmente a Play Console
+
+## Próximos Pasos
+
+- [Compilaciones iOS](/docs/cli/cloud-build/ios/) - Configurar compilaciones iOS
+- [Solución de Problemas](/docs/cli/cloud-build/troubleshooting/) - Problemas comunes de compilación
+- [Referencia CLI](/docs/cli/reference/build/) - Documentación completa de comandos
+
+## ¿Necesitas Ayuda?
+
+- [Guía de Solución de Problemas](/docs/cli/cloud-build/troubleshooting/)
+- [Comunidad Discord](https://discord.com/invite/VnYRvBfgA6)
+- Email: support@capgo.app

@@ -1,0 +1,122 @@
+---
+title: "@capgo/capacitor-is-root"
+description: 포괄적인 보안 검사 및 장치 무결성 검증을 통한 Capacitor 앱용 루트 및 탈옥 감지 플러그인.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 루팅된 Android 장치와 탈옥된 iOS 장치를 감지하여 앱 보안을 강화하고 민감한 데이터를 보호하세요.
+  image:
+    file: ~public/icons/plugins/is-root.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/is-root/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-is-root/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 개요
+
+Capacitor Is Root 플러그인은 Android 장치에 대한 포괄적인 루트 및 탈옥 감지와 에뮬레이터 감지를 제공합니다. 이 플러그인은 손상된 장치와 보안 위험을 초래할 수 있는 에뮬레이트된 환경을 식별하여 앱 보안을 강화하는 데 도움이 됩니다.
+
+<CardGrid stagger>
+  <Card title="루트 감지" icon="rocket">
+    여러 방법을 사용한 고급 Android 루트 감지 🔒
+  </Card>
+  <Card title="에뮬레이터 감지" icon="approve-check">
+    에뮬레이트된 환경 및 테스트 프레임워크 식별 🛡️
+  </Card>
+  <Card title="보안 검증" icon="approve-check">
+    향상된 정확도를 위한 여러 감지 기술 ✅
+  </Card>
+  <Card title="Android 중심" icon="laptop">
+    Android 보안 평가를 위한 전문 감지 🤖
+  </Card>
+</CardGrid>
+
+## 설치
+
+```bash
+npm install @capgo/capacitor-is-root
+npx cap sync
+```
+
+## 핵심 API 메서드
+
+### 루트 감지
+- `isRooted()` - 기본 방법을 사용하여 포괄적인 루트 감지 수행
+- `isRootedWithBusyBox()` - BusyBox 검사를 포함한 확장 감지
+- `detectRootManagementApps()` - 설치된 루트 관리 애플리케이션 식별
+- `checkForSuBinary()` - 시스템 경로에서 `su` 바이너리 존재 확인
+
+### 에뮬레이터 감지
+- `isRunningOnEmulator()` - 일반적인 Android 에뮬레이터 지문 감지
+
+## 감지 기술
+
+플러그인은 여러 감지 방법을 사용합니다:
+
+### 루트 감지
+- 루트 관리 애플리케이션 확인(SuperSU, Magisk 등)
+- 의심스러운 시스템 속성 스캔
+- 테스트 빌드 태그 및 디버그 플래그 식별
+- 위험한 바이너리 위치 검증
+- 시스템 경로 권한 검사
+
+### 에뮬레이터 감지
+- 하드웨어 지문 분석
+- 빌드 속성 검사
+- 에뮬레이터별 특성
+- 가상 환경 표시기
+
+## 사용 예제
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// 기본 루트 감지
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('장치가 루팅되었습니다');
+  // 루팅된 장치를 적절하게 처리
+}
+
+// BusyBox를 사용한 확장 루트 감지
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('장치가 루팅되었습니다 (확장 검사)');
+}
+
+// 에뮬레이터 확인
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('에뮬레이터에서 실행 중');
+}
+
+// 루트 관리 앱 감지
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('루트 관리 앱이 감지되었습니다');
+}
+```
+
+## 보안 고려사항
+
+- 더 높은 정확도를 위해 여러 감지 방법 사용
+- 감지된 환경에 대한 점진적 기능 저하 구현
+- 보안 조치를 구현할 때 사용자 프라이버시 고려
+- 감지 방법이 발전함에 따라 정기적인 업데이트 권장
+
+## 문서
+
+자세한 구현 가이드 및 고급 보안 패턴은 [전체 문서](/docs/plugins/is-root/getting-started/)를 확인하세요.

@@ -1,0 +1,432 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何在您的 Capacitor 应用中集成 YouTube 视频播放。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装软件包**
+   <PackageManagers pkg="@capgo/capacitor-youtube-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 基本用法
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+// Initialize the player
+const result = await YoutubePlayer.initialize({
+  playerId: 'youtube-player',
+  playerSize: { width: 640, height: 360 },
+  videoId: 'dQw4w9WgXcQ',
+  fullscreen: false,
+  playerVars: {
+    autoplay: 1,
+    controls: 1
+  }
+});
+
+// Play video
+await YoutubePlayer.playVideo(result.player);
+
+// Pause video
+await YoutubePlayer.pauseVideo(result.player);
+
+// Listen to player events
+YoutubePlayer.addEventListener(result.player, 'onStateChange', (event) => {
+  console.log('Player state:', event.data);
+});
+```
+
+## API 参考
+
+### initialize(options)
+
+初始化 YouTube 播放器实例。
+
+```typescript
+const { player, playerReady } = await YoutubePlayer.initialize({
+  playerId: 'my-player',
+  playerSize: { width: 1280, height: 720 },
+  videoId: 'VIDEO_ID',
+  fullscreen: false,
+  playerVars: {
+    autoplay: 0,
+    controls: 1,
+    rel: 0
+  }
+});
+```
+
+### 视频控制方法
+
+```typescript
+// Play
+await YoutubePlayer.playVideo(playerId);
+
+// Pause
+await YoutubePlayer.pauseVideo(playerId);
+
+// Stop
+await YoutubePlayer.stopVideo(playerId);
+
+// Seek to time
+await YoutubePlayer.seekTo(playerId, seconds, allowSeekAhead);
+
+// Load video by ID
+await YoutubePlayer.loadVideoById(playerId, { videoId: 'VIDEO_ID' });
+
+// Cue video (load without playing)
+await YoutubePlayer.cueVideoById(playerId, { videoId: 'VIDEO_ID' });
+```
+
+### 播放列表控制
+
+```typescript
+// Load playlist
+await YoutubePlayer.loadPlaylist(playerId, {
+  listType: 'playlist',
+  list: 'PLAYLIST_ID'
+});
+
+// Cue playlist
+await YoutubePlayer.cuePlaylist(playerId, {
+  playlist: ['VIDEO_ID_1', 'VIDEO_ID_2'],
+  index: 0
+});
+
+// Navigate playlist
+await YoutubePlayer.nextVideo(playerId);
+await YoutubePlayer.previousVideo(playerId);
+await YoutubePlayer.playVideoAt(playerId, index);
+```
+
+### 音频控制
+
+```typescript
+// Mute/Unmute
+await YoutubePlayer.mute(playerId);
+await YoutubePlayer.unMute(playerId);
+
+const { result } = await YoutubePlayer.isMuted(playerId);
+console.log('Muted:', result.value);
+
+// Volume (0-100)
+await YoutubePlayer.setVolume(playerId, 50);
+const { result } = await YoutubePlayer.getVolume(playerId);
+```
+
+### 播放控制
+
+```typescript
+// Playback rate
+await YoutubePlayer.setPlaybackRate(playerId, 1.5);
+const { result } = await YoutubePlayer.getPlaybackRate(playerId);
+
+// Available rates
+const { result } = await YoutubePlayer.getAvailablePlaybackRates(playerId);
+console.log('Available rates:', result.value);
+
+// Loop and shuffle
+await YoutubePlayer.setLoop(playerId, true);
+await YoutubePlayer.setShuffle(playerId, true);
+```
+
+### 质量控制
+
+```typescript
+// Set quality
+await YoutubePlayer.setPlaybackQuality(playerId, 'hd720');
+
+// Get current quality
+const { result } = await YoutubePlayer.getPlaybackQuality(playerId);
+
+// Get available qualities
+const { result } = await YoutubePlayer.getAvailableQualityLevels(playerId);
+```
+
+### 播放器信息
+
+```typescript
+// Duration
+const { result } = await YoutubePlayer.getDuration(playerId);
+
+// Current time
+const { result } = await YoutubePlayer.getCurrentTime(playerId);
+
+// Loaded fraction
+const { result } = await YoutubePlayer.getVideoLoadedFraction(playerId);
+
+// Player state
+const { result } = await YoutubePlayer.getPlayerState(playerId);
+
+// Video URL
+const { result } = await YoutubePlayer.getVideoUrl(playerId);
+```
+
+### 事件监听器
+
+```typescript
+// State change
+YoutubePlayer.addEventListener(playerId, 'onStateChange', (event) => {
+  console.log('State:', event.data); // -1, 0, 1, 2, 3, 5
+});
+
+// Ready
+YoutubePlayer.addEventListener(playerId, 'onReady', (event) => {
+  console.log('Player ready');
+});
+
+// Error
+YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
+  console.error('Player error:', event.data);
+});
+
+// Quality change
+YoutubePlayer.addEventListener(playerId, 'onPlaybackQualityChange', (event) => {
+  console.log('Quality:', event.data);
+});
+
+// Rate change
+YoutubePlayer.addEventListener(playerId, 'onPlaybackRateChange', (event) => {
+  console.log('Rate:', event.data);
+});
+
+// Remove listener
+YoutubePlayer.removeEventListener(playerId, 'onStateChange', callback);
+```
+
+## 完整示例
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+export class YouTubeService {
+  private playerId: string | null = null;
+
+  async initPlayer(videoId: string) {
+    try {
+      const { player, playerReady } = await YoutubePlayer.initialize({
+        playerId: 'main-player',
+        playerSize: { width: 1280, height: 720 },
+        videoId,
+        fullscreen: false,
+        playerVars: {
+          autoplay: 0,
+          controls: 1,
+          modestbranding: 1,
+          rel: 0
+        }
+      });
+
+      this.playerId = player;
+
+      // Set up event listeners
+      YoutubePlayer.addEventListener(player, 'onReady', () => {
+        console.log('Player is ready');
+      });
+
+      YoutubePlayer.addEventListener(player, 'onStateChange', (event) => {
+        this.handleStateChange(event.data);
+      });
+
+      YoutubePlayer.addEventListener(player, 'onError', (event) => {
+        console.error('YouTube error:', event.data);
+      });
+
+      return player;
+    } catch (error) {
+      console.error('Failed to initialize player:', error);
+      throw error;
+    }
+  }
+
+  private handleStateChange(state: number) {
+    switch (state) {
+      case -1:
+        console.log('Unstarted');
+        break;
+      case 0:
+        console.log('Ended');
+        break;
+      case 1:
+        console.log('Playing');
+        break;
+      case 2:
+        console.log('Paused');
+        break;
+      case 3:
+        console.log('Buffering');
+        break;
+      case 5:
+        console.log('Video cued');
+        break;
+    }
+  }
+
+  async play() {
+    if (!this.playerId) return;
+    await YoutubePlayer.playVideo(this.playerId);
+  }
+
+  async pause() {
+    if (!this.playerId) return;
+    await YoutubePlayer.pauseVideo(this.playerId);
+  }
+
+  async loadVideo(videoId: string) {
+    if (!this.playerId) return;
+    await YoutubePlayer.loadVideoById(this.playerId, { videoId });
+  }
+
+  async loadPlaylist(playlistId: string) {
+    if (!this.playerId) return;
+    await YoutubePlayer.loadPlaylist(this.playerId, {
+      listType: 'playlist',
+      list: playlistId,
+      index: 0
+    });
+  }
+
+  async setQuality(quality: 'small' | 'medium' | 'large' | 'hd720' | 'hd1080') {
+    if (!this.playerId) return;
+    await YoutubePlayer.setPlaybackQuality(this.playerId, quality);
+  }
+
+  async getProgress() {
+    if (!this.playerId) return { current: 0, duration: 0 };
+
+    const current = await YoutubePlayer.getCurrentTime(this.playerId);
+    const duration = await YoutubePlayer.getDuration(this.playerId);
+
+    return {
+      current: current.result.value,
+      duration: duration.result.value
+    };
+  }
+
+  async destroy() {
+    if (!this.playerId) return;
+    await YoutubePlayer.destroy(this.playerId);
+    this.playerId = null;
+  }
+}
+```
+
+## 播放器状态
+
+| 状态 | 值 | 描述 |
+|-------|-------|-------------|
+| UNSTARTED | -1 | 视频未开始 |
+| ENDED | 0 | 视频已结束 |
+| PLAYING | 1 | 视频正在播放 |
+| PAUSED | 2 | 视频已暂停 |
+| BUFFERING | 3 | 视频正在缓冲 |
+| CUED | 5 | 视频已排队 |
+
+## 质量级别
+
+- `small`: 240p
+- `medium`: 360p
+- `large`: 480p
+- `hd720`: 720p
+- `hd1080`: 1080p
+- `highres`: >1080p
+- `default`: 自动质量
+
+## 最佳实践
+
+1. **只初始化一次**
+   创建播放器实例一次并重复使用：
+   ```typescript
+   let player = await YoutubePlayer.initialize(options);
+   // Reuse player for different videos
+   await YoutubePlayer.loadVideoById(player, { videoId: 'NEW_ID' });
+   ```
+
+2. **优雅地处理错误**
+   ```typescript
+   YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
+     switch (event.data) {
+       case 2:
+         console.error('Invalid parameter');
+         break;
+       case 100:
+         console.error('Video not found');
+         break;
+       case 101:
+       case 150:
+         console.error('Embedding not allowed');
+         break;
+     }
+   });
+   ```
+
+3. **清理资源**
+   在组件卸载时销毁播放器：
+   ```typescript
+   useEffect(() => {
+     return () => {
+       if (playerId) {
+         YoutubePlayer.destroy(playerId);
+       }
+     };
+   }, []);
+   ```
+
+4. **尊重用户偏好**
+   ```typescript
+   // Don't autoplay unless user initiated
+   playerVars: {
+     autoplay: 0
+   }
+   ```
+
+5. **监控播放**
+   ```typescript
+   setInterval(async () => {
+     const time = await YoutubePlayer.getCurrentTime(playerId);
+     updateProgressBar(time.result.value);
+   }, 1000);
+   ```
+
+## 平台说明
+
+### iOS
+- 支持 iOS 9.0+
+- 使用 WKWebView 与 YouTube iframe API
+- 支持全屏
+
+### Android
+- 支持 Android 5.0 (API 21)+
+- 使用 WebView 与 YouTube iframe API
+- 支持全屏
+
+### Web
+- 直接 YouTube iframe 集成
+- 完整的 API 支持
+- 最佳性能
+
+## 故障排除
+
+**播放器无法加载：**
+- 检查视频 ID 是否有效
+- 验证互联网连接
+- 确保该视频允许 YouTube 嵌入
+
+**事件未触发：**
+- 确保在初始化后添加监听器
+- 在添加监听器之前检查播放器是否就绪
+
+**质量问题：**
+- 首先检查可用的质量级别
+- 某些视频不支持所有质量
+- 质量更改可能不是立即生效

@@ -1,0 +1,568 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和集成 Twilio Voice 以在您的 Capacitor 应用中实现 VoIP 通话。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 先决条件
+
+您需要一个 Twilio 账户和访问令牌以进行身份验证。如果您还没有账户，请在 [Twilio](https://www.twilio.com/) 注册。
+
+## 平台配置
+
+### iOS
+
+将所需权限添加到您的 `Info.plist`：
+
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs microphone access for voice calls</string>
+```
+
+对于带有 PushKit 的来电：
+
+1. 在 Xcode 功能中启用推送通知
+2. 添加 VoIP 后台模式
+3. 在 Twilio 控制台中配置 VoIP 证书
+
+### Android
+
+将所需权限添加到您的 `AndroidManifest.xml`：
+
+```xml
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+<uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+```
+
+配置 Firebase 推送通知：
+
+1. 将 `google-services.json` 添加到您的 Android 项目
+2. 在 Twilio 控制台中配置 FCM
+
+## 使用示例
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+// 使用 Twilio 进行身份验证
+await TwilioVoice.login({
+  accessToken: 'your-twilio-access-token'
+});
+
+// 拨打电话
+await TwilioVoice.makeCall({
+  to: '+1234567890'
+});
+
+// 监听通话事件
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('通话已连接：', data.callSid);
+});
+
+TwilioVoice.addListener('callDisconnected', (data) => {
+  console.log('通话已断开：', data.callSid);
+});
+
+TwilioVoice.addListener('incomingCall', (data) => {
+  console.log('来电来自：', data.from);
+
+  // 接受通话
+  TwilioVoice.acceptCall({ callSid: data.callSid });
+
+  // 或拒绝
+  // TwilioVoice.rejectCall({ callSid: data.callSid });
+});
+
+// 静音/取消静音通话
+await TwilioVoice.muteCall({
+  muted: true,
+  callSid: 'current-call-sid'
+});
+
+// 切换扬声器
+await TwilioVoice.setSpeaker({
+  enabled: true
+});
+
+// 结束通话
+await TwilioVoice.endCall({
+  callSid: 'current-call-sid'
+});
+
+// 登出
+await TwilioVoice.logout();
+```
+
+## API 参考
+
+### login(options)
+
+```typescript
+login(options: { accessToken: string }) => Promise<void>
+```
+
+使用访问令牌对 Twilio 进行身份验证。
+
+| 参数         | 类型                              |
+| ------------- | --------------------------------- |
+| **`options`** | `{ accessToken: string }` |
+
+### logout()
+
+```typescript
+logout() => Promise<void>
+```
+
+结束用户会话并清除通话状态。
+
+### isLoggedIn()
+
+```typescript
+isLoggedIn() => Promise<{ loggedIn: boolean }>
+```
+
+检查当前身份验证状态。
+
+**返回：** `Promise<{ loggedIn: boolean }>`
+
+### makeCall(options)
+
+```typescript
+makeCall(options: { to: string; params?: Record<string, string> }) => Promise<{ callSid: string }>
+```
+
+向指定号码发起呼出通话。
+
+| 参数         | 类型                                                    |
+| ------------- | ------------------------------------------------------- |
+| **`options`** | `{ to: string; params?: Record<string, string> }` |
+
+**返回：** `Promise<{ callSid: string }>`
+
+### acceptCall(options)
+
+```typescript
+acceptCall(options: { callSid: string }) => Promise<void>
+```
+
+接受来电。
+
+| 参数         | 类型                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callSid: string }` |
+
+### rejectCall(options)
+
+```typescript
+rejectCall(options: { callSid: string }) => Promise<void>
+```
+
+拒绝来电。
+
+| 参数         | 类型                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callSid: string }` |
+
+### endCall(options?)
+
+```typescript
+endCall(options?: { callSid?: string }) => Promise<void>
+```
+
+终止活动通话。
+
+| 参数         | 类型                         |
+| ------------- | ---------------------------- |
+| **`options`** | `{ callSid?: string }`（可选） |
+
+### muteCall(options)
+
+```typescript
+muteCall(options: { muted: boolean; callSid?: string }) => Promise<void>
+```
+
+静音或取消静音通话音频。
+
+| 参数         | 类型                                            |
+| ------------- | ----------------------------------------------- |
+| **`options`** | `{ muted: boolean; callSid?: string }` |
+
+### setSpeaker(options)
+
+```typescript
+setSpeaker(options: { enabled: boolean }) => Promise<void>
+```
+
+切换扬声器输出。
+
+| 参数         | 类型                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### sendDigits(options)
+
+```typescript
+sendDigits(options: { digits: string; callSid?: string }) => Promise<void>
+```
+
+在通话期间发送 DTMF 音调。
+
+| 参数         | 类型                                          |
+| ------------- | --------------------------------------------- |
+| **`options`** | `{ digits: string; callSid?: string }` |
+
+## 事件监听器
+
+### 可用事件
+
+- `registered` - 成功注册到 Twilio
+- `unregistered` - 从 Twilio 注销
+- `registrationFailed` - 注册失败
+- `incomingCall` - 收到来电
+- `callConnected` - 通话成功连接
+- `callDisconnected` - 通话已断开
+- `callRinging` - 呼出通话正在响铃
+- `callReconnecting` - 通话正在重新连接
+- `callReconnected` - 中断后通话重新连接
+- `qualityWarning` - 通话质量警告
+- `error` - 发生错误
+
+### 事件示例
+
+```typescript
+// 处理来电
+TwilioVoice.addListener('incomingCall', (data) => {
+  console.log('来电来自：', data.from);
+  console.log('通话 SID：', data.callSid);
+
+  // 显示来电界面
+  showIncomingCallScreen({
+    from: data.from,
+    callSid: data.callSid
+  });
+});
+
+// 处理通话状态变化
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('通话已连接：', data.callSid);
+  startCallTimer();
+});
+
+TwilioVoice.addListener('callDisconnected', (data) => {
+  console.log('通话已结束：', data.callSid);
+  stopCallTimer();
+  hideCallScreen();
+});
+
+// 处理质量警告
+TwilioVoice.addListener('qualityWarning', (data) => {
+  console.warn('通话质量警告：', data.warning);
+  showQualityWarning(data.warning);
+});
+
+// 处理错误
+TwilioVoice.addListener('error', (error) => {
+  console.error('Twilio 错误：', error.message);
+  handleError(error);
+});
+
+// 使用完毕后移除监听器
+const listener = await TwilioVoice.addListener('callConnected', (data) => {
+  console.log('已连接');
+});
+
+// 稍后...
+listener.remove();
+```
+
+## 完整示例
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+class VoiceCallService {
+  private currentCallSid: string | null = null;
+  private isMuted = false;
+  private isSpeakerOn = false;
+
+  async initialize(accessToken: string) {
+    try {
+      // 登录到 Twilio
+      await TwilioVoice.login({ accessToken });
+
+      // 检查登录状态
+      const { loggedIn } = await TwilioVoice.isLoggedIn();
+      console.log('登录状态：', loggedIn);
+
+      // 设置事件监听器
+      this.setupEventListeners();
+
+    } catch (error) {
+      console.error('初始化失败：', error);
+    }
+  }
+
+  setupEventListeners() {
+    // 注册事件
+    TwilioVoice.addListener('registered', () => {
+      console.log('成功注册到 Twilio');
+    });
+
+    TwilioVoice.addListener('registrationFailed', (error) => {
+      console.error('注册失败：', error);
+    });
+
+    // 来电
+    TwilioVoice.addListener('incomingCall', async (data) => {
+      console.log('来电来自：', data.from);
+
+      const accepted = await this.showIncomingCallDialog(data.from);
+
+      if (accepted) {
+        await TwilioVoice.acceptCall({ callSid: data.callSid });
+        this.currentCallSid = data.callSid;
+      } else {
+        await TwilioVoice.rejectCall({ callSid: data.callSid });
+      }
+    });
+
+    // 通话事件
+    TwilioVoice.addListener('callConnected', (data) => {
+      console.log('通话已连接');
+      this.currentCallSid = data.callSid;
+      this.showCallScreen();
+    });
+
+    TwilioVoice.addListener('callDisconnected', () => {
+      console.log('通话已断开');
+      this.currentCallSid = null;
+      this.hideCallScreen();
+    });
+
+    TwilioVoice.addListener('callRinging', () => {
+      console.log('通话响铃中...');
+    });
+
+    // 质量警告
+    TwilioVoice.addListener('qualityWarning', (data) => {
+      console.warn('通话质量警告：', data.warning);
+      this.showQualityIndicator(data.warning);
+    });
+  }
+
+  async makeCall(phoneNumber: string) {
+    try {
+      const result = await TwilioVoice.makeCall({
+        to: phoneNumber,
+        params: {
+          // 可选的自定义参数
+          customerId: 'customer-123'
+        }
+      });
+
+      this.currentCallSid = result.callSid;
+      console.log('通话已发起：', result.callSid);
+    } catch (error) {
+      console.error('拨打电话失败：', error);
+    }
+  }
+
+  async endCall() {
+    if (this.currentCallSid) {
+      await TwilioVoice.endCall({ callSid: this.currentCallSid });
+      this.currentCallSid = null;
+    }
+  }
+
+  async toggleMute() {
+    this.isMuted = !this.isMuted;
+    await TwilioVoice.muteCall({
+      muted: this.isMuted,
+      callSid: this.currentCallSid || undefined
+    });
+  }
+
+  async toggleSpeaker() {
+    this.isSpeakerOn = !this.isSpeakerOn;
+    await TwilioVoice.setSpeaker({ enabled: this.isSpeakerOn });
+  }
+
+  async sendDTMF(digits: string) {
+    if (this.currentCallSid) {
+      await TwilioVoice.sendDigits({
+        digits,
+        callSid: this.currentCallSid
+      });
+    }
+  }
+
+  async logout() {
+    await TwilioVoice.logout();
+  }
+
+  private async showIncomingCallDialog(from: string): Promise<boolean> {
+    // 显示原生对话框或自定义界面
+    return confirm(`来自 ${from} 的来电`);
+  }
+
+  private showCallScreen() {
+    // 显示通话界面
+    console.log('显示通话界面');
+  }
+
+  private hideCallScreen() {
+    // 隐藏通话界面
+    console.log('隐藏通话界面');
+  }
+
+  private showQualityIndicator(warning: string) {
+    // 显示质量警告
+    console.log('质量警告：', warning);
+  }
+}
+
+// 用法
+const voiceService = new VoiceCallService();
+
+// 使用来自后端的访问令牌初始化
+const token = await fetchTwilioToken();
+await voiceService.initialize(token);
+
+// 拨打电话
+await voiceService.makeCall('+1234567890');
+
+// 控制通话
+await voiceService.toggleMute();
+await voiceService.toggleSpeaker();
+await voiceService.sendDTMF('1');
+
+// 结束通话
+await voiceService.endCall();
+
+// 登出
+await voiceService.logout();
+```
+
+## 最佳实践
+
+- 从后端服务器获取访问令牌，永远不要将其嵌入到应用中
+- 为长时间运行的会话实现令牌刷新逻辑
+- 使用重新连接逻辑处理网络中断
+- 为通话状态提供视觉反馈
+- 在实际设备上测试推送通知
+- 实现适当的错误处理
+- 在组件卸载时清理监听器
+- 在拨打电话之前请求麦克风权限
+
+## 安全注意事项
+
+- 永远不要在应用中存储 Twilio 凭证
+- 在后端生成访问令牌
+- 实现令牌过期和刷新
+- 对所有令牌请求使用 HTTPS
+- 在服务器端验证来电
+
+## 故障排除
+
+### 通话无法连接
+
+- 验证访问令牌有效且未过期
+- 检查网络连接
+- 确保已授予麦克风权限
+- 验证 Twilio 账户配置正确
+
+### 推送通知不起作用
+
+- 验证 PushKit/FCM 证书在 Twilio 中配置
+- 检查设备已注册推送通知
+- 使用生产证书测试
+
+### 音频问题
+
+- 检查麦克风权限
+- 验证扬声器/蓝牙设置
+- 在实际设备上测试音频路由
+
+## 来电者名称显示（CapacitorTwilioCallerName）
+
+默认情况下，来电显示来电者的电话号码或客户端 ID。您可以通过从 TwiML 后端传递 `CapacitorTwilioCallerName` 参数来自定义显示友好名称。
+
+### 后端设置
+
+在为 `<Client>` 拨号生成 TwiML 响应时，添加 `CapacitorTwilioCallerName` 参数：
+
+```java
+// Java 示例
+Parameter callerNameParam = new Parameter.Builder()
+    .name("CapacitorTwilioCallerName")
+    .value("John Doe")
+    .build();
+
+Client client = new Client.Builder(identity)
+    .parameter(callerNameParam)
+    .build();
+
+Dial dial = new Dial.Builder()
+    .client(client)
+    .build();
+```
+
+```javascript
+// Node.js 示例
+const VoiceResponse = require('twilio').twiml.VoiceResponse;
+
+const response = new VoiceResponse();
+const dial = response.dial();
+dial.client({
+  name: 'CapacitorTwilioCallerName',
+  value: 'John Doe'
+}, identity);
+```
+
+### 工作原理
+
+1. 当您的后端收到来电时，它生成 TwiML 来路由通话
+2. 包含带有来电者显示名称的 `CapacitorTwilioCallerName` 参数
+3. 插件自动提取此参数并将其用于：
+   - iOS CallKit 来电屏幕
+   - Android 来电通知
+   - `incomingCall` 事件中的 `from` 字段
+   - 通话状态中的 `pendingInvites` 数组
+
+如果未提供 `CapacitorTwilioCallerName`，插件会回退到来电者的电话号码或客户端 ID。

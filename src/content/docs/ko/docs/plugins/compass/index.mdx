@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-compass"
+locale: ko
+description: 지속적인 업데이트 및 권한 처리를 통해 기기 나침반 방향을 도 단위로 읽습니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: iOS 및 Android에서 실시간 업데이트로 방향 데이터를 위한 기기 나침반 센서에 액세스합니다.
+  image:
+    file: ~public/icons/plugins/compass.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/compass/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-compass/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="실시간 방향" icon="rocket">
+    도 단위(0-360)로 지속적인 나침반 방향 업데이트 받기
+  </Card>
+  <Card title="크로스 플랫폼" icon="puzzle">
+    네이티브 센서 액세스를 통해 iOS 및 Android 기기 모두에서 작동
+  </Card>
+  <Card title="권한 처리" icon="shield">
+    위치 서비스를 위한 내장 권한 관리(iOS)
+  </Card>
+  <Card title="이벤트 기반" icon="star">
+    효율적인 이벤트 리스너로 방향 변경 사항 구독
+  </Card>
+</CardGrid>

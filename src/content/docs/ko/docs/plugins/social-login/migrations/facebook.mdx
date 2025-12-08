@@ -1,0 +1,234 @@
+---
+title: @capacitor-community/facebook-login에서 @capgo/capacitor-social-login으로 마이그레이션 가이드
+locale: ko
+description: 이 상세한 가이드는 @capacitor-community/facebook-login 플러그인에서 @capgo/capacitor-social-login 플러그인으로 전환하는 단계별 지침을 제공하여 향상된 기능으로 원활한 마이그레이션 프로세스를 보장합니다.
+sidebar:
+    order: 2
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 개요
+
+이 가이드는 `@capacitor-community/facebook-login`에서 `@capgo/capacitor-social-login`으로 마이그레이션하기 위한 포괄적인 지침을 제공합니다. 새 플러그인은 여러 소셜 제공업체를 지원하는 통합 API, 향상된 TypeScript 지원 및 향상된 기능으로 Facebook 인증을 현대화합니다.
+
+## 설치
+
+<Steps>
+1. 이전 패키지를 제거합니다:
+   ```bash
+   npm uninstall @capacitor-community/facebook-login
+   ```
+
+2. 새 패키지를 설치합니다:
+   ```bash
+   npm install @capgo/capacitor-social-login
+   npx cap sync
+   ```
+</Steps>
+
+## 코드 변경사항
+
+### Import 변경사항
+```diff
+- import { FacebookLogin } from '@capacitor-community/facebook-login';
++ import { SocialLogin } from '@capgo/capacitor-social-login';
+```
+
+### 초기화
+
+**주요 변경사항**: 새 패키지는 코드에서 명시적인 설정이 필요합니다:
+
+```diff
+- // Old package required no explicit initialization in code
+- // Configuration was done only in native platforms
+
++ // New package requires explicit initialization
++ await SocialLogin.initialize({
++   facebook: {
++     appId: 'YOUR_FACEBOOK_APP_ID',        // Required for web and Android
++     clientToken: 'YOUR_CLIENT_TOKEN'       // Required for Android
++   }
++ });
+```
+
+### 로그인
+
+이제 로그인 메서드는 제공자 매개변수를 허용합니다:
+
+```diff
+- const FACEBOOK_PERMISSIONS = ['email', 'public_profile'];
+- const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+
++ const result = await SocialLogin.login({
++   provider: 'facebook',
++   options: {
++     permissions: ['email', 'public_profile'],
++     limitedLogin: false,
++     nonce: 'optional_nonce'
++   }
++ });
+```
+
+### 응답 유형 변경사항
+
+응답 구조는 더 포괄적인 프로필 객체로 현대화되었습니다:
+
+```typescript
+// Old response type
+interface FacebookLoginResponse {
+  accessToken: {
+    applicationId: string;
+    userId: string;
+    token: string;
+    expires: string;
+  };
+  recentlyGrantedPermissions: string[];
+  recentlyDeniedPermissions: string[];
+}
+
+// New response type
+interface FacebookLoginResponse {
+  provider: 'facebook';
+  result: {
+    accessToken: {
+      token: string;
+      applicationId?: string;
+      expires?: string;
+      userId?: string;
+      permissions?: string[];
+      declinedPermissions?: string[];
+    } | null;
+    idToken: string | null;
+    profile: {
+      userID: string;
+      email: string | null;
+      friendIDs: string[];
+      birthday: string | null;
+      ageRange: { min?: number; max?: number } | null;
+      gender: string | null;
+      location: { id: string; name: string } | null;
+      hometown: { id: string; name: string } | null;
+      profileURL: string | null;
+      name: string | null;
+      imageURL: string | null;
+    };
+  };
+}
+```
+
+**주요 차이점**:
+- 이제 응답에는 인증 제공업체를 식별하는 `provider` 필드가 포함됩니다
+- 추가 사용자 정보가 포함된 더 상세한 `profile` 객체
+- 모든 소셜 로그인 제공업체에 걸쳐 일관된 구조
+
+### 로그인 상태 확인
+```diff
+- const result = await FacebookLogin.getCurrentAccessToken();
+- const isLoggedIn = result && result.accessToken;
+
++ const status = await SocialLogin.isLoggedIn({
++   provider: 'facebook'
++ });
++ const isLoggedIn = status.isLoggedIn;
+```
+
+### 로그아웃
+```diff
+- await FacebookLogin.logout();
+
++ await SocialLogin.logout({
++   provider: 'facebook'
++ });
+```
+
+## 플랫폼별 변경사항
+
+### Android 설정
+
+이제 구성이 initialize 메서드를 통해 처리됩니다:
+
+```diff
+- // AndroidManifest.xml changes remain the same
+- // strings.xml become irrelevant
++ // Additionally initialize in your code:
++ await SocialLogin.initialize({
++   facebook: {
++     appId: 'your-app-id',
++     clientToken: 'your-client-token'  // New requirement
++   }
++ });
+```
+
+**중요**: 이제 Android 인증에 클라이언트 토큰이 필요합니다.
+
+### iOS 설정
+
+1. `AppDelegate.swift`의 iOS 설정은 동일하게 유지됩니다:
+
+```swift
+import FBSDKCoreKit
+
+// In application:didFinishLaunchingWithOptions:
+FBSDKCoreKit.ApplicationDelegate.shared.application(
+    application,
+    didFinishLaunchingWithOptions: launchOptions
+)
+
+// In application:openURL:options:
+ApplicationDelegate.shared.application(
+    app,
+    open: url,
+    sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+    annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+)
+```
+
+2. `Info.plist` 구성은 동일하게 유지됩니다:
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>fb[APP_ID]</string>
+        </array>
+    </dict>
+</array>
+<key>FacebookAppID</key>
+<string>[APP_ID]</string>
+<key>FacebookClientToken</key>
+<string>[CLIENT_TOKEN]</string>
+<key>FacebookDisplayName</key>
+<string>[APP_NAME]</string>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>fbapi</string>
+    <string>fbauth</string>
+    <string>fb-messenger-share-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+</array>
+```
+
+## 주요 변경사항
+
+마이그레이션 시 주요 변경사항 요약:
+
+1. **명시적 초기화가 이제 필요합니다** - 사용 전에 `initialize()`를 호출해야 합니다
+2. **응답 객체 구조가 크게 변경되었습니다** - 향상된 프로필 데이터가 포함된 새로운 중첩 결과 형식
+3. **Android에 이제 클라이언트 토큰이 필요합니다** - 추가 구성 필요
+4. **다른 메서드 이름 및 매개변수 구조** - 제공자 기반 접근 방식
+5. **오류 처리 및 오류 유형이 변경되었습니다** - 더 자세한 오류 정보
+
+## 주요 장점
+
+새 플러그인은 다음을 제공합니다:
+
+- 여러 소셜 제공업체(Google, Apple, Facebook)에 걸친 **통합 API**
+- 더 나은 유형 정의로 **향상된 TypeScript 지원**
+- 더 많은 사용자 정보가 포함된 **향상된 프로필 데이터**
+- **활성 유지 관리** 및 커뮤니티 지원
+- 모든 제공업체에 걸친 **일관된 오류 처리**
+- 적절한 만료 처리로 **더 나은 토큰 관리**
+
+더 자세한 설정 지침은 [공식 문서](/docs/plugins/social-login/facebook/)를 참조하세요.

@@ -1,0 +1,51 @@
+---
+title: "@capgo/capacitor-android-kiosk"
+description: Plugin Mode Kiosk Android untuk Capacitor - Kunci perangkat ke mode kiosk dengan fungsi launcher
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Kunci perangkat Android Anda ke mode kiosk dengan kontrol penuh atas tombol hardware dan fungsi launcher untuk aplikasi Capacitor Anda.
+  image:
+    file: ~public/icons/plugins/android-kiosk.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/android-kiosk/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-kiosk/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Mode Kiosk" icon="rocket">
+    Sembunyikan UI sistem dan masuk mode layar penuh immersive
+  </Card>
+  <Card title="Integrasi Launcher" icon="setting">
+    Atur aplikasi Anda sebagai launcher/aplikasi home perangkat
+  </Card>
+  <Card title="Kontrol Tombol Hardware" icon="warning">
+    Blokir atau izinkan tombol hardware tertentu (back, home, recent, volume, power)
+  </Card>
+  <Card title="Deteksi Status" icon="approve-check">
+    Periksa apakah mode kiosk aktif atau aplikasi diatur sebagai launcher
+  </Card>
+  <Card title="Android 6.0+" icon="star">
+    Mendukung Android API 23 hingga Android 15 (API 35)
+  </Card>
+  <Card title="Dokumentasi Lengkap" icon="open-book">
+    Lihat [Dokumentasi](/docs/plugins/android-kiosk/getting-started/) untuk mengintegrasikan mode kiosk dalam hitungan menit.
+  </Card>
+</CardGrid>
+
+## Dukungan Platform
+
+Plugin ini **khusus Android**. Untuk fungsi mode kiosk iOS, silakan gunakan fitur [Guided Access](https://support.apple.com/en-us/HT202612) bawaan perangkat.

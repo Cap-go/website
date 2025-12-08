@@ -1,0 +1,172 @@
+---
+title: はじめに
+locale: ja
+description: "@capgo/capacitor-downloaderのインストールと使用ガイド"
+sidebar:
+  order: 2
+  label: "はじめに"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 使用例
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+// ダウンロードを開始
+const downloadId = 'my-download-001';
+await CapacitorDownloader.download({
+  id: downloadId,
+  url: 'https://example.com/large-file.zip',
+  destination: '/downloads/large-file.zip',
+  headers: {
+    'Authorization': 'Bearer token123'
+  },
+  network: 'wifi-only',
+  priority: 'high'
+});
+
+// 進行状況の更新をリッスン
+CapacitorDownloader.addListener('downloadProgress', (data) => {
+  console.log(`Download ${data.id}: ${data.progress}% complete`);
+  console.log(`Downloaded: ${data.bytesDownloaded}/${data.totalBytes} bytes`);
+});
+
+// 完了を処理
+CapacitorDownloader.addListener('downloadCompleted', (data) => {
+  console.log(`Download completed: ${data.id}`);
+  console.log(`File saved to: ${data.path}`);
+});
+
+// エラーを処理
+CapacitorDownloader.addListener('downloadFailed', (error) => {
+  console.error(`Download failed: ${error.id}`, error.message);
+});
+
+// ダウンロードを一時停止
+await CapacitorDownloader.pause(downloadId);
+
+// ダウンロードを再開
+await CapacitorDownloader.resume(downloadId);
+
+// ダウンロードステータスを確認
+const status = await CapacitorDownloader.checkStatus(downloadId);
+console.log('Download status:', status);
+
+// ダウンロードを停止
+await CapacitorDownloader.stop(downloadId);
+```
+
+## コアAPIメソッド
+
+### ダウンロード管理
+- `download(options)` - 新しいファイルのダウンロードを開始
+- `pause(id)` - 進行中のダウンロードを一時停止
+- `resume(id)` - 一時停止したダウンロードを再開
+- `stop(id)` - ダウンロードを停止してキャンセル
+- `checkStatus(id)` - 現在のダウンロードステータスを取得
+
+### ファイル操作
+- `getFileInfo(path)` - ファイル情報とメタデータを取得
+
+## ダウンロード設定
+
+```typescript
+interface DownloadOptions {
+  id: string;                    // 一意のダウンロード識別子
+  url: string;                   // ダウンロード元URL
+  destination: string;           // ローカル保存パス
+  headers?: Record<string, string>; // カスタムHTTPヘッダー
+  network?: 'cellular' | 'wifi-only'; // ネットワーク制限
+  priority?: 'high' | 'normal' | 'low'; // ダウンロード優先度
+}
+```
+
+## イベントリスナー
+
+プラグインは包括的なイベント処理を提供します:
+
+- `downloadProgress` - リアルタイムのダウンロード進行状況を追跡
+- `downloadCompleted` - ダウンロードの正常完了を処理
+- `downloadFailed` - ダウンロードエラーと失敗を処理
+
+## ネットワーク設定
+
+### WiFi専用ダウンロード
+```typescript
+await CapacitorDownloader.download({
+  id: 'large-file',
+  url: 'https://example.com/video.mp4',
+  destination: '/downloads/video.mp4',
+  network: 'wifi-only' // WiFiネットワークのみに制限
+});
+```
+
+### 優先度管理
+```typescript
+// 高優先度ダウンロード
+await CapacitorDownloader.download({
+  id: 'urgent-update',
+  url: 'https://example.com/update.zip',
+  destination: '/downloads/update.zip',
+  priority: 'high'
+});
+```
+
+## ダウンロードステータス
+
+ダウンロードはさまざまなステータスを持つことができます:
+- **Pending**: ダウンロード待機中
+- **Running**: 現在ダウンロード中
+- **Paused**: 一時停止中
+- **Completed**: 正常に完了
+- **Failed**: エラーが発生
+- **Stopped**: 手動でキャンセル
+
+## ファイル情報
+
+```typescript
+// ファイルの詳細を取得
+const fileInfo = await CapacitorDownloader.getFileInfo('/downloads/my-file.pdf');
+console.log('File size:', fileInfo.size);
+console.log('Last modified:', fileInfo.lastModified);
+console.log('MIME type:', fileInfo.mimeType);
+```
+
+## ベストプラクティス
+
+- 競合を避けるために一意のダウンロードIDを使用する
+- ネットワーク障害に対して適切なエラー処理を実装する
+- 大きなダウンロードを開始する前にストレージスペースを考慮する
+- モバイルデータを節約するために大きなファイルにはWiFi専用モードを使用する
+- ストレージを管理するために完了したダウンロードをクリーンアップする

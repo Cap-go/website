@@ -1,0 +1,146 @@
+---
+title: "@capgo/capacitor-android-usagestatsmanager"
+description: Plugin statistik penggunaan Android untuk aplikasi Capacitor dengan pelacakan penggunaan aplikasi, pemantauan waktu layar, dan analitik penggunaan.
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Akses statistik penggunaan Android untuk memantau penggunaan aplikasi, waktu layar, dan analitik perilaku pengguna dengan data tingkat sistem.
+  image:
+    file: ~public/icons/plugins/android-usagestatsmanager.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/android-usagestatsmanager/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-usagestatsmanager/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Ringkasan
+
+Plugin Capacitor Android Usage Stats Manager mengekspos UsageStatsManager SDK Android ke aplikasi Capacitor, memungkinkan akses ke statistik penggunaan aplikasi terperinci dan data penggunaan perangkat. Plugin ini memungkinkan developer untuk melacak pola penggunaan aplikasi, waktu layar, dan analitik perilaku pengguna di perangkat Android.
+
+<CardGrid stagger>
+  <Card title="Statistik penggunaan" icon="rocket">
+    Akses data UsageStatsManager SDK Android 📱
+  </Card>
+  <Card title="Pemantauan aplikasi" icon="moon">
+    Lacak waktu dan frekuensi penggunaan aplikasi individual 🕐
+  </Card>
+  <Card title="Manajemen izin" icon="approve-check">
+    Tangani izin statistik penggunaan dengan mulus 🛡️
+  </Card>
+  <Card title="Informasi paket" icon="puzzle">
+    Query detail dan metadata paket yang terinstal 📦
+  </Card>
+</CardGrid>
+
+## Instalasi
+
+```bash
+npm install @capgo/capacitor-android-usagestatsmanager
+npx cap sync
+```
+
+## Izin yang Diperlukan
+
+Tambahkan izin ini ke `android/app/src/main/AndroidManifest.xml` Anda:
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## Metode API Inti
+
+### Statistik Penggunaan
+- `queryAndAggregateUsageStats(options)` - Ambil statistik penggunaan terperinci untuk aplikasi yang terinstal
+- `isUsageStatsPermissionGranted()` - Periksa apakah izin statistik penggunaan diberikan
+- `openUsageStatsSettings()` - Buka pengaturan sistem untuk izin statistik penggunaan
+
+### Informasi Paket
+- `queryAllPackages()` - Dapatkan informasi tentang semua paket yang terinstal
+
+## Contoh Penggunaan
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// Check if permission is granted
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // Open settings to grant permission
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// Query usage statistics
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7 days ago
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Usage statistics:', usageStats);
+
+// Get all installed packages
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installed packages:', packages);
+```
+
+## Penanganan Izin
+
+Plugin memerlukan izin khusus yang tidak dapat diberikan melalui permintaan izin runtime normal:
+
+1. **PACKAGE_USAGE_STATS**: Memungkinkan akses ke statistik penggunaan
+2. **QUERY_ALL_PACKAGES**: Diperlukan untuk informasi paket (Android 11+)
+
+Pengguna harus memberikan izin ini secara manual melalui pengaturan sistem. Gunakan `openUsageStatsSettings()` untuk mengarahkan pengguna ke halaman pengaturan yang sesuai.
+
+## Tipe Data
+
+### Statistik Penggunaan
+- Waktu dan frekuensi penggunaan aplikasi
+- Waktu pertama dan terakhir digunakan
+- Total waktu di foreground
+- Jumlah peluncuran
+
+### Informasi Paket
+- Nama paket dan versi
+- Waktu instalasi
+- Label dan ikon aplikasi
+- Aplikasi sistem vs pengguna
+
+## Kasus Penggunaan
+
+- **Aplikasi kesejahteraan digital**: Pantau waktu layar dan penggunaan aplikasi
+- **Kontrol orang tua**: Lacak penggunaan perangkat anak-anak
+- **Aplikasi produktivitas**: Analisis pola kerja dan waktu fokus
+- **Analitik**: Pahami perilaku pengguna dan keterlibatan aplikasi
+
+## Kompatibilitas Android
+
+- **Versi Android minimum**: API level 21 (Android 5.0)
+- **Fitur lanjutan**: API level 29+ (Android 10+) untuk statistik yang ditingkatkan
+- **Query paket**: API level 30+ (Android 11+) memerlukan QUERY_ALL_PACKAGES
+
+## Pertimbangan Keamanan
+
+- Izin statistik penggunaan bersifat sensitif dan memerlukan persetujuan pengguna
+- Pertimbangkan privasi pengguna saat mengumpulkan data penggunaan
+- Implementasikan praktik penanganan dan penyimpanan data yang tepat
+- Ikuti kebijakan Google Play untuk pengumpulan data penggunaan
+
+## Dokumentasi
+
+Lihat [dokumentasi lengkap](/docs/plugins/android-usagestatsmanager/getting-started/) untuk panduan implementasi terperinci dan pola penggunaan lanjutan.

@@ -1,0 +1,52 @@
+---
+title: Guía de Migración V7
+locale: es
+description: Guía para migrar desde versiones anteriores a V7 de @capgo/capacitor-social-login
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Introducción
+
+:::caution
+Esta guía es para la versión `V1`/`V7` del plugin para personas que todavía estaban usando este plugin con la versión `0.x.x`.
+:::
+
+Esta guía cubrirá lo siguiente:
+
+- Migrar a la versión V1 desde la versión `main`
+- Migrar a la versión V1 desde la versión `development`
+
+## Cambios importantes en V1
+
+V1 es solo un port de la versión de desarrollo a main. Sin embargo, incluye muchos cambios importantes que no están disponibles en la versión `main` V0. Esos cambios incluyen:
+
+- Ámbitos de acceso para el inicio de sesión de Google
+- Modo offline para el inicio de sesión de Google
+- Unificación de las diferentes implementaciones
+  - Se realizaron pruebas exhaustivas para garantizar que todas las implementaciones del proveedor de Google se comporten de la misma manera entre plataformas
+
+## Migración desde la versión V0 main
+
+- Cambios en el `MainActivity.java` para Android
+  - Por favor sigue la [Guía de Configuración de Google](/docs/plugins/social-login/google/android/). Específicamente, busca `MainActivity.java`
+
+- Por favor agrega urls de redirección en la consola de Google. Sin agregar urls de redirección, el inicio de sesión de Google no funcionará.
+  - Nuevamente, por favor sigue la [Guía de Configuración de Google](/docs/plugins/social-login/google/android/). Específicamente, busca `Authorized redirect URIs`
+
+- Por favor asegúrate de que no estás usando `grantOfflineAccess` en la configuración. Esta característica no es compatible con V1.
+
+- Por favor asegúrate de que la autenticación funcione en todas las plataformas.
+
+## Migración desde la versión V0 development
+
+- Cambios en el `MainActivity.java` para Android
+  - Por favor sigue la [Guía de Configuración de Google](/docs/plugins/social-login/google/android/). Específicamente, busca `MainActivity.java`. En V1, **DEBES** implementar `ModifiedMainActivityForSocialLoginPlugin` en tu actividad principal. Este cambio es crucial para que el plugin funcione
+
+- Por favor agrega urls de redirección en la consola de Google. Sin agregar urls de redirección, el inicio de sesión de Google no funcionará.
+  - Nuevamente, por favor sigue la [Guía de Configuración de Google](/docs/plugins/social-login/google/android/). Específicamente, busca `Authorized redirect URIs`
+
+- Por favor asegúrate de que los tipos y nombres de variables son correctos. Ten en cuenta que los tipos y variables pueden no coincidir entre development y V1.
+
+- Por favor asegúrate de que la autenticación funcione en todas las plataformas.

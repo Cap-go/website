@@ -1,0 +1,82 @@
+---
+title: Integrasi CI/CD
+description: "Integrasikan Capgo Live Updates dengan platform CI/CD favorit Anda untuk workflow deployment otomatis."
+locale: id
+sidebar:
+  order: 1
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Otomatiskan proses deployment Capgo Live Updates Anda dengan mengintegrasikannya dengan platform CI/CD populer. Integrasi ini memungkinkan Anda untuk secara otomatis men-deploy pembaruan aplikasi setiap kali Anda push perubahan kode, menguji branch fitur, dan mengelola environment deployment multiple.
+
+## Integrasi yang Tersedia
+
+Pilih platform CI/CD Anda untuk memulai dengan deployment otomatis:
+
+<CardGrid>
+  <LinkCard
+    title="Azure DevOps"
+    description="Integrasikan dengan Azure DevOps Pipelines untuk build otomatis, testing, dan workflow deployment."
+    href="/docs/live-updates/integrations/azure-devops/"
+  />
+  <LinkCard
+    title="GitLab CI/CD"
+    description="Atur pipeline GitLab CI/CD untuk secara otomatis men-deploy pembaruan aplikasi Anda dengan manajemen environment yang komprehensif."
+    href="/docs/live-updates/integrations/gitlab-ci/"
+  />
+  <LinkCard
+    title="GitHub Actions"
+    description="Gunakan GitHub Actions untuk otomasi powerful dengan deployment multi-channel dan perlindungan environment."
+    href="/docs/live-updates/integrations/github-actions/"
+  />
+  <LinkCard
+    title="Bitbucket Pipelines"
+    description="Deploy dengan Bitbucket Pipelines menggunakan konfigurasi sederhana atau lanjutan untuk environment multiple."
+    href="/docs/live-updates/integrations/bitbucket-pipeline/"
+  />
+</CardGrid>
+
+## Yang Akan Anda Dapatkan
+
+Semua panduan integrasi mencakup:
+
+- **Setup Sederhana**: Konfigurasi dasar untuk memulai dengan cepat
+- **Workflow Lanjutan**: Deployment multi-environment dengan staging dan production
+- **Testing Branch Fitur**: Deployment otomatis branch fitur ke channel test
+- **Praktik Terbaik Keamanan**: Manajemen secret aman dan perlindungan environment
+- **Monitoring**: Notifikasi dan logging untuk status deployment
+
+<Aside type="tip">
+
+**Baru dengan CI/CD?** Mulai dengan konfigurasi sederhana untuk platform Anda, kemudian secara bertahap tambahkan fitur yang lebih lanjutan seperti deployment multi-channel dan testing otomatis sesuai kebutuhan Anda.
+
+</Aside>
+
+## Fitur Umum
+
+Setiap integrasi mendukung:
+
+- **Build Otomatis**: Trigger deployment pada perubahan kode
+- **Dukungan Multi-Channel**: Deploy ke channel yang berbeda (development, staging, production)
+- **Testing Pull Request/Merge Request**: Uji perubahan dalam environment terisolasi
+- **Dukungan Enkripsi**: Deployment aman dengan fitur enkripsi Capgo
+- **Perlindungan Environment**: Persetujuan manual dan akses terbatas untuk production
+- **Notifikasi**: Integrasi Slack, email, dan notifikasi lainnya
+
+## Prasyarat
+
+Sebelum mengatur integrasi apapun, pastikan Anda memiliki:
+
+- Akun Capgo dengan aplikasi yang sudah dikonfigurasi
+- Kode sumber aplikasi Anda dalam repositori Git
+- Token API Capgo dari [console.capgo.app/apikeys](https://console.capgo.app/apikeys)
+- Node.js dan npm/yarn yang dikonfigurasi dalam proyek Anda
+
+## Dokumentasi Terkait
+
+- [Channels](/docs/live-updates/channels/) - Pelajari cara mengelola environment deployment yang berbeda
+- [Encryption](/docs/live-updates/encryption/) - Amankan deployment Anda dengan enkripsi end-to-end
+- [Update Behavior](/docs/live-updates/update-behavior/) - Sesuaikan cara penerapan pembaruan ke aplikasi Anda
+
+Pilih platform CI/CD Anda di atas untuk mulai mengotomatiskan deployment Capgo Anda!

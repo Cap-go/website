@@ -1,0 +1,200 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Capacitor Navigation Bar-Plugin installieren und konfigurieren, um die Farbe und den Stil der Android-Navigationsleiste anzupassen.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Plugin konfigurieren**
+
+   **Navigationsleistenfarbe festlegen:**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Navigationsleistenfarbe festlegen
+   await NavigationBar.setColor({
+     color: '#FF0000', // Rote Farbe
+     darkButtons: false // Helle Schaltflächen verwenden
+   });
+   ```
+
+   **Dynamische Theme-Unterstützung:**
+   ```typescript
+   // Farbe basierend auf Theme festlegen
+   const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+   await NavigationBar.setColor({
+     color: isDarkMode ? '#000000' : '#FFFFFF',
+     darkButtons: !isDarkMode
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="Android">
+       **Mindestanforderungen:**
+       - Android 5.0 (API-Level 21) oder höher
+       - Das Plugin funktioniert nur auf Android-Geräten
+
+       Keine zusätzliche Einrichtung in AndroidManifest.xml erforderlich.
+     </TabItem>
+     <TabItem label="iOS">
+       Dieses Plugin ist nur für Android. iOS hat keine anpassbare Navigationsleiste.
+     </TabItem>
+   </Tabs>
+
+4. **Erweiterte Verwendung**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   export class ThemeService {
+     // Transparente Navigationsleiste festlegen
+     async setTransparent() {
+       await NavigationBar.setColor({
+         color: '#00000000', // Transparent
+         darkButtons: true
+       });
+     }
+
+     // App-Theme anpassen
+     async matchAppTheme(primaryColor: string, isLight: boolean) {
+       await NavigationBar.setColor({
+         color: primaryColor,
+         darkButtons: isLight
+       });
+     }
+
+     // Aktuelle Navigationsleistenfarbe abrufen
+     async getCurrentColor() {
+       const result = await NavigationBar.getColor();
+       console.log('Aktuelle Farbe:', result.color);
+       return result.color;
+     }
+
+     // Auf Standard zurücksetzen
+     async resetToDefault() {
+       await NavigationBar.setColor({
+         color: '#000000',
+         darkButtons: false
+       });
+     }
+   }
+   ```
+
+5. **Integration mit App-Lebenszyklus**
+   ```typescript
+   import { App } from '@capacitor/app';
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Navigationsleiste bei App-Statusänderungen aktualisieren
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       // Navigationsleistenfarbe Ihrer App wiederherstellen
+       await NavigationBar.setColor({
+         color: '#IhreAppFarbe',
+         darkButtons: true
+       });
+     }
+   });
+
+   // Theme-Änderungen behandeln
+   window.matchMedia('(prefers-color-scheme: dark)')
+     .addEventListener('change', async (e) => {
+       await NavigationBar.setColor({
+         color: e.matches ? '#121212' : '#FFFFFF',
+         darkButtons: !e.matches
+       });
+     });
+   ```
+</Steps>
+
+## API-Referenz
+
+### Methoden
+
+#### `setColor(options: ColorOptions)`
+Navigationsleistenfarbe und Schaltflächenstil festlegen.
+
+**Parameter:**
+- `options`: Konfigurationsobjekt
+  - `color`: string - Hex-Farbcode (z. B. '#FF0000')
+  - `darkButtons`: boolean - Dunkle Schaltflächen (true) oder helle Schaltflächen (false) verwenden
+
+**Rückgabe:** `Promise<void>`
+
+#### `getColor()`
+Aktuelle Navigationsleistenfarbe abrufen.
+
+**Rückgabe:** `Promise<{ color: string }>`
+
+### Interfaces
+
+```typescript
+interface ColorOptions {
+  color: string;      // Hex-Farbcode
+  darkButtons: boolean; // Schaltflächenstil
+}
+
+interface ColorResult {
+  color: string;      // Aktueller Hex-Farbcode
+}
+```
+
+## Plattformhinweise
+
+### Android
+- Erfordert Android 5.0 (API-Level 21) oder höher
+- Farbänderungen erfolgen sofort
+- Transparente Farben werden unterstützt (Alpha-Kanal verwenden)
+- Die Navigationsleiste ist möglicherweise auf Geräten mit Gestennavigation nicht sichtbar
+
+### iOS
+- Dieses Plugin hat keine Auswirkungen auf iOS-Geräte
+- iOS bietet keine APIs zur Anpassung der Systemnavigation
+
+## Gängige Anwendungsfälle
+
+1. **Markenkonsistenz**: Navigationsleiste an Primärfarbe Ihrer App anpassen
+2. **Theme-Unterstützung**: Dynamisch an helle/dunkle Themes anpassen
+3. **Immersive Erlebnisse**: Transparente Navigation für Vollbildinhalte verwenden
+4. **Statusanzeige**: Farbe ändern, um App-Zustände anzuzeigen (Aufnahme, Fehler usw.)
+
+## Best Practices
+
+1. **Farbkontrast**: Ausreichenden Kontrast zwischen Navigationsleiste und Schaltflächen sicherstellen
+   ```typescript
+   // Gute Kontrastbeispiele
+   setColor({ color: '#FFFFFF', darkButtons: true });  // Weiße Leiste, dunkle Schaltflächen
+   setColor({ color: '#000000', darkButtons: false }); // Schwarze Leiste, helle Schaltflächen
+   ```
+
+2. **Theme-Konsistenz**: Navigationsleiste aktualisieren, wenn sich das Theme ändert
+3. **Barrierefreiheit**: Benutzer mit Sehbehinderungen bei der Farbauswahl berücksichtigen
+4. **Leistung**: Häufige Farbwechsel vermeiden, die Benutzer ablenken könnten
+
+## Fehlerbehebung
+
+**Navigationsleiste ändert sich nicht:**
+- Überprüfen Sie, ob das Gerät Android 5.0+ ausführt
+- Prüfen Sie, ob das Gerät Gestennavigation aktiviert hat
+- Sicherstellen, dass das Farbformat ein gültiger Hex-Code ist (z. B. '#FF0000')
+
+**Schaltflächen nicht sichtbar:**
+- Überprüfen Sie, ob der `darkButtons`-Parameter zu Ihrer Hintergrundfarbe passt
+- Helle Hintergründe benötigen `darkButtons: true`
+- Dunkle Hintergründe benötigen `darkButtons: false`
+
+**Farbe erscheint anders:**
+- Einige Android-Versionen können die Farbe leicht modifizieren
+- Verwenden Sie vollständig opake Farben für beste Ergebnisse

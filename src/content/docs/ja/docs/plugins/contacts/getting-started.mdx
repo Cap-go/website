@@ -1,0 +1,394 @@
+---
+title: "Contactsの使い方"
+locale: ja
+description: "CapacitorアプリにContactsプラグインを統合する方法を学びます"
+---
+
+このガイドでは、Capacitor Contactsプラグインをアプリケーションに統合する手順を説明します。
+
+## インストール
+
+npmを使用してプラグインをインストールします:
+
+```bash
+npm install @capgo/capacitor-contacts
+npx cap sync
+```
+
+## iOS設定
+
+`Info.plist`に以下を追加します:
+
+```xml
+<key>NSContactsUsageDescription</key>
+<string>This app needs access to contacts to let you select recipients</string>
+```
+
+## Android設定
+
+`AndroidManifest.xml`に以下のパーミッションを追加します:
+
+```xml
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+<uses-permission android:name="android.permission.WRITE_CONTACTS" />
+```
+
+## 基本的な使い方
+
+### プラグインのインポート
+
+```typescript
+import { Contacts } from '@capgo/capacitor-contacts';
+```
+
+### パーミッションの要求
+
+```typescript
+const requestPermissions = async () => {
+  const permission = await Contacts.requestPermissions();
+  console.log('Permission status:', permission.contacts);
+};
+```
+
+### すべての連絡先を取得
+
+```typescript
+const getAllContacts = async () => {
+  const result = await Contacts.getContacts({
+    projection: {
+      name: true,
+      phones: true,
+      emails: true,
+      image: true
+    }
+  });
+
+  console.log('Contacts:', result.contacts);
+};
+```
+
+### 連絡先の検索
+
+```typescript
+const searchContacts = async (query: string) => {
+  const result = await Contacts.getContacts({
+    projection: {
+      name: true,
+      phones: true,
+      emails: true
+    },
+    query: query
+  });
+
+  console.log('Search results:', result.contacts);
+};
+```
+
+### 連絡先の作成
+
+```typescript
+const createContact = async () => {
+  const newContact = {
+    name: {
+      given: 'John',
+      family: 'Doe'
+    },
+    phones: [{
+      type: 'mobile',
+      number: '+1234567890'
+    }],
+    emails: [{
+      type: 'work',
+      address: 'john.doe@example.com'
+    }]
+  };
+
+  const result = await Contacts.createContact(newContact);
+  console.log('Contact created:', result);
+};
+```
+
+### 連絡先の更新
+
+```typescript
+const updateContact = async (contactId: string) => {
+  const updates = {
+    contactId: contactId,
+    name: {
+      given: 'Jane',
+      family: 'Doe'
+    }
+  };
+
+  await Contacts.updateContact(updates);
+  console.log('Contact updated');
+};
+```
+
+### 連絡先の削除
+
+```typescript
+const deleteContact = async (contactId: string) => {
+  await Contacts.deleteContact({ contactId });
+  console.log('Contact deleted');
+};
+```
+
+## 完全な例
+
+以下は、連絡先サービスの完全な例です:
+
+```typescript
+import { Contacts } from '@capgo/capacitor-contacts';
+
+interface Contact {
+  contactId: string;
+  name: {
+    display?: string;
+    given?: string;
+    family?: string;
+  };
+  phones?: Array<{ type: string; number: string }>;
+  emails?: Array<{ type: string; address: string }>;
+  image?: { base64String: string };
+}
+
+class ContactsService {
+  async checkPermissions(): Promise<boolean> {
+    const permission = await Contacts.checkPermissions();
+
+    if (permission.contacts === 'granted') {
+      return true;
+    }
+
+    const requested = await Contacts.requestPermissions();
+    return requested.contacts === 'granted';
+  }
+
+  async getAllContacts(): Promise<Contact[]> {
+    const hasPermission = await this.checkPermissions();
+    if (!hasPermission) {
+      throw new Error('Contacts permission denied');
+    }
+
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true,
+        image: true
+      }
+    });
+
+    return result.contacts;
+  }
+
+  async searchContacts(query: string): Promise<Contact[]> {
+    if (!query || query.length < 2) {
+      return [];
+    }
+
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true
+      },
+      query: query
+    });
+
+    return result.contacts;
+  }
+
+  async getContactById(contactId: string): Promise<Contact | null> {
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true,
+        image: true,
+        organization: true,
+        birthday: true,
+        note: true,
+        urls: true,
+        postalAddresses: true
+      },
+      contactId: contactId
+    });
+
+    return result.contacts.length > 0 ? result.contacts[0] : null;
+  }
+
+  async createContact(contact: Partial<Contact>): Promise<string> {
+    const hasPermission = await this.checkPermissions();
+    if (!hasPermission) {
+      throw new Error('Contacts permission denied');
+    }
+
+    const result = await Contacts.createContact(contact);
+    return result.contactId;
+  }
+
+  async updateContact(contactId: string, updates: Partial<Contact>): Promise<void> {
+    await Contacts.updateContact({
+      contactId,
+      ...updates
+    });
+  }
+
+  async deleteContact(contactId: string): Promise<void> {
+    await Contacts.deleteContact({ contactId });
+  }
+
+  formatPhoneNumber(phone: string): string {
+    // 数字以外の文字を削除
+    const cleaned = phone.replace(/\D/g, '');
+
+    // (XXX) XXX-XXXX形式にフォーマット
+    if (cleaned.length === 10) {
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+    }
+
+    return phone;
+  }
+
+  getContactInitials(contact: Contact): string {
+    const given = contact.name?.given || '';
+    const family = contact.name?.family || '';
+
+    if (given && family) {
+      return `${given[0]}${family[0]}`.toUpperCase();
+    }
+
+    const display = contact.name?.display || '';
+    const parts = display.split(' ');
+
+    if (parts.length >= 2) {
+      return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+    }
+
+    return display.slice(0, 2).toUpperCase();
+  }
+}
+
+// 使用例
+const contactsService = new ContactsService();
+
+// すべての連絡先を取得
+const contacts = await contactsService.getAllContacts();
+console.log('Contacts:', contacts);
+
+// 連絡先を検索
+const results = await contactsService.searchContacts('john');
+console.log('Search results:', results);
+
+// 連絡先を作成
+const newContactId = await contactsService.createContact({
+  name: { given: 'Jane', family: 'Smith' },
+  phones: [{ type: 'mobile', number: '+1234567890' }]
+});
+
+// 連絡先を更新
+await contactsService.updateContact(newContactId, {
+  emails: [{ type: 'work', address: 'jane@example.com' }]
+});
+```
+
+## Projectionについて
+
+`projection`パラメータは、取得するフィールドを制御します:
+
+```typescript
+const result = await Contacts.getContacts({
+  projection: {
+    name: true,           // 連絡先の名前
+    phones: true,         // 電話番号
+    emails: true,         // メールアドレス
+    image: true,          // 連絡先の写真
+    organization: true,   // 会社/組織
+    birthday: true,       // 生年月日
+    note: true,          // メモ
+    urls: true,          // ウェブサイト
+    postalAddresses: true // 住所
+  }
+});
+```
+
+**ヒント**: パフォーマンス向上のため、必要なフィールドのみをリクエストしてください。
+
+## 連絡先ピッカーUI
+
+多くのアプリでは、ネイティブの連絡先ピッカーを使用することを好みます:
+
+```typescript
+const pickContact = async () => {
+  try {
+    const result = await Contacts.pickContact({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true
+      }
+    });
+
+    if (result.contacts.length > 0) {
+      const contact = result.contacts[0];
+      console.log('Selected contact:', contact);
+    }
+  } catch (error) {
+    console.error('Contact picker cancelled or failed:', error);
+  }
+};
+```
+
+## ベストプラクティス
+
+1. **最小限のパーミッション要求**: 必要な時のみ連絡先パーミッションをリクエストする
+2. **Projectionの使用**: 実際に使用するフィールドのみを取得する
+3. **拒否への対処**: パーミッションが拒否された場合のフォールバックを提供する
+4. **賢いキャッシュ**: 連絡先は変更される可能性があるため、長期間キャッシュしない
+5. **プライバシーの尊重**: 連絡先の使用について透明性を保つ
+6. **非同期操作**: すべての連絡先操作は非同期です
+
+## よくある問題
+
+### パーミッションが拒否された
+
+```typescript
+const handlePermissionDenied = async () => {
+  const permission = await Contacts.checkPermissions();
+
+  if (permission.contacts === 'denied') {
+    // パーミッションが必要な理由を説明するダイアログを表示
+    showPermissionDialog();
+    // ユーザーを設定に誘導
+    // iOS: 設定 > [アプリ] > 連絡先
+    // Android: 設定 > アプリ > [アプリ] > 権限
+  }
+};
+```
+
+### 大量の連絡先リスト
+
+```typescript
+const loadContactsInBatches = async () => {
+  // 最初に件数を取得 (軽量)
+  const projection = { name: true }; // 最小限のprojection
+
+  // 必要に応じてページネーションを実装
+  const allContacts = await Contacts.getContacts({ projection });
+
+  // チャンクで処理
+  const chunkSize = 100;
+  for (let i = 0; i < allContacts.contacts.length; i += chunkSize) {
+    const chunk = allContacts.contacts.slice(i, i + chunkSize);
+    await processContactChunk(chunk);
+  }
+};
+```
+
+## 次のステップ
+
+- 完全なメソッドドキュメントについては[APIリファレンス](https://github.com/Cap-go/capacitor-contacts#api)を参照してください
+- 高度な使用方法については[サンプルアプリ](https://github.com/Cap-go/capacitor-contacts/tree/main/example)をご覧ください
+- 完全な実装例については[チュートリアル](/plugins-tutorials/capacitor-contacts)を参照してください

@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-ffmpeg"
+locale: ja
+description: CapacitorアプリのためのFFmpegを活用したビデオエンコーディングと処理。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "イントロダクション"
+hero:
+  tagline: Capacitorアプリで強力なFFmpegライブラリを使用して、カスタム解像度とビットレートでビデオを再エンコードします。
+  image:
+    file: ~public/icons/plugins/ffmpeg.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/ffmpeg/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-ffmpeg/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="ビデオ再エンコーディング" icon="rocket">
+    FFmpegでビデオを変換および圧縮
+  </Card>
+  <Card title="カスタム解像度" icon="setting">
+    任意の幅と高さにビデオをリサイズ
+  </Card>
+  <Card title="ビットレート制御" icon="star">
+    ビデオ品質とファイルサイズを制御
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    ビデオ処理を開始するには[ドキュメント](/docs/plugins/ffmpeg/getting-started/)を確認してください。
+  </Card>
+</CardGrid>

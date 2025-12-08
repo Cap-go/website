@@ -1,0 +1,179 @@
+---
+title: "API de statistiques"
+locale: fr
+description: "Comment utiliser le point de terminaison de statistiques de Capgo avec le plugin de mise à jour automatique en mode auto-hébergé, à quoi ils servent et à quoi s'attendre"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+
+## API de statistiques
+
+À partir de la version 1.3.0, le système de mise à jour est capable d'envoyer des statistiques !
+
+Par défaut, toutes les statistiques sont envoyées à notre serveur, pour comprendre l'utilisation et la recherche.
+
+<Aside>
+Aucune donnée privée n'est envoyée pour les statistiques, seulement un UUID aléatoire, la version de mise à jour, la version de l'application native, la plateforme, l'action et l'ID de l'application.
+</Aside>
+
+Si vous souhaitez envoyer ces données à votre serveur à la place, modifiez la configuration ci-dessous :
+
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "VOTRE_URL"
+		}
+	}
+}
+```
+
+## Structure des données
+
+Ce que votre serveur recevra est :
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // peut être set, delete, set_fail, reset, revert
+	// Ensuite ce sont les mêmes infos que pour la mise à jour
+	"app_id": "**.***.**", // identifiant de l'app dans le store
+	"device_id": "*******", // id unique par installation d'app
+	"platform": "ios", // ou android
+	"custom_id": "user_1", // représente votre utilisateur
+        "version_name": "1.2.3", // version du build web
+        "version_build": "1.2.0", // version du build natif
+        "version_code": "120", // numéro de build du build natif
+	"version_os": "16", // version de l'OS de l'appareil
+        "plugin_version": "4.0.0"// pour faire en sorte que votre api se comporte différemment avec différents plugins
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+Vous pouvez également le désactiver complètement, avec une chaîne vide. Gardez à l'esprit que les statistiques sont respectueuses de la vie privée et m'aident à comprendre comment les gens utilisent le plugin, à résoudre les problèmes et à l'améliorer.
+
+## Exemple d'implémentation
+
+Voici un exemple de code en JavaScript pour sauvegarder les statistiques du plugin :
+
+```typescript
+interface AppInfos {
+  version_name: string
+  action: 'ping' |
+          'delete' |
+          'reset' |
+          'set' |
+          'get' |
+          'set_fail' |
+          'update_fail' |
+          'download_fail' |
+          'windows_path_fail' |
+          'canonical_path_fail' |
+          'directory_path_fail' |
+          'unzip_fail' |
+          'low_mem_fail' |
+          'download_10' |
+          'download_20' |
+          'download_30' |
+          'download_40' |
+          'download_50' |
+          'download_60' |
+          'download_70' |
+          'download_80' |
+          'download_90' |
+          'download_complete' |
+          'download_manifest_start' |
+          'download_manifest_complete' |
+          'download_zip_start' |
+          'download_zip_complete' |
+          'download_manifest_file_fail' |
+          'download_manifest_checksum_fail' |
+          'download_manifest_brotli_fail' |
+          'decrypt_fail' |
+          'app_moved_to_foreground' |
+          'app_moved_to_background' |
+          'uninstall' |
+          'needPlanUpgrade' |
+          'missingBundle' |
+          'noNew' |
+          'disablePlatformIos' |
+          'disablePlatformAndroid' |
+          'disableAutoUpdateToMajor' |
+          'cannotUpdateViaPrivateChannel' |
+          'disableAutoUpdateToMinor' |
+          'disableAutoUpdateToPatch' |
+          'channelMisconfigured' |
+          'disableAutoUpdateMetadata' |
+          'disableAutoUpdateUnderNative' |
+          'disableDevBuild' |
+          'disableEmulator' |
+          'cannotGetBundle' |
+          'checksum_fail' |
+          'NoChannelOrOverride' |
+          'setChannel' |
+          'getChannel' |
+          'rateLimited' |
+          'disableAutoUpdate' |
+          'InvalidIp' |
+          'blocked_by_server_url'
+  version_build: string
+  version_code: string
+  version_os: string
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSON.parse(event.body || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    action,
+    version_code,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  console.log('mise à jour demandée', platform,
+    app_id,
+    action,
+    version_os,
+    version_code,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  // Sauvegardez-le dans votre base de données
+  return { status: 'ok' }
+}
+```
+
+Ce point de terminaison devrait retourner un JSON :
+
+```json
+{ "status": "ok" }
+```
+
+## Actions
+
+Pour des descriptions détaillées de tous les codes d'action et de leurs significations, veuillez vous référer à la documentation de débogage :
+
+* **Actions envoyées depuis l'appareil** : Voir la section [documentation de débogage - Envoyées depuis l'appareil](/docs/plugins/updater/debugging/#sent-from-the-device)
+* **Actions envoyées depuis le backend** : Voir la section [documentation de débogage - Envoyées depuis le backend](/docs/plugins/updater/debugging/#sent-from-the-backend)
+
+<LinkCard
+	title="Gestion des mises à jour"
+	href="/docs/plugin/self-hosted/handling-updates/"
+/>

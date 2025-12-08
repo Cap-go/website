@@ -1,0 +1,61 @@
+---
+title: Memulai
+locale: id
+description: Tambahkan pemindaian dokumen berkualitas native dengan deteksi tepi dan format output yang dapat disesuaikan.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal plugin**
+   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan platform native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Memicu scan
+
+```typescript
+import {
+  DocumentScanner,
+  ResponseType,
+  ScanDocumentResponseStatus,
+} from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  croppedImageQuality: 90,
+  letUserAdjustCrop: true,
+  maxNumDocuments: 10,
+  responseType: ResponseType.ImageFilePath,
+});
+
+if (result.status === ScanDocumentResponseStatus.Success) {
+  console.log('Scanned files:', result.scannedImages);
+} else {
+  console.log('Scan cancelled by user');
+}
+```
+
+## Mengembalikan data base64
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  responseType: ResponseType.Base64,
+});
+
+const [firstPage] = result.scannedImages ?? [];
+if (firstPage) {
+  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
+  // Display preview or upload to server
+}
+```
+
+## Persyaratan platform
+
+- **iOS**: Tambahkan `NSCameraUsageDescription` ke `ios/App/App/Info.plist` yang menjelaskan bagaimana Anda menggunakan kamera.
+- **Android**: Konfirmasikan bahwa izin `CAMERA` dideklarasikan (Capacitor menambahkannya secara otomatis) dan sesuaikan `croppedImageQuality`, `letUserAdjustCrop`, dan `maxNumDocuments` agar sesuai dengan UI Anda.
+- **Storage**: Saat menggunakan `ResponseType.ImageFilePath`, pindahkan atau salin file yang dipindai ke lokasi penyimpanan yang Anda inginkan sebelum sesi aplikasi berakhir.

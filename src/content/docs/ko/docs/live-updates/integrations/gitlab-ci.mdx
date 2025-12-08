@@ -1,0 +1,426 @@
+---
+title: GitLab CI/CD 통합
+description: "앱 업데이트의 자동 배포를 위해 Capgo Live Updates를 GitLab CI/CD와 통합하는 방법을 알아보세요."
+sidebar:
+  order: 2
+locale: ko
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo Live Updates를 GitLab CI/CD와 통합하여 코드 변경 사항을 푸시할 때마다 앱 업데이트를 자동으로 배포하세요. 이 가이드는 자동화된 빌드, 테스트 및 배포 워크플로우 설정을 다룹니다.
+
+## 사전 요구 사항
+
+GitLab CI/CD 통합을 설정하기 전에 다음을 준비해야 합니다:
+
+- 프로젝트 저장소가 있는 GitLab 계정
+- 구성된 앱이 있는 Capgo 계정
+- 프로젝트에 구성된 Node.js 및 npm/yarn
+
+## GitLab CI/CD 설정
+
+### 1단계: 환경 변수 구성
+
+먼저 GitLab 프로젝트에 필요한 변수를 설정합니다:
+
+<Steps>
+
+1. GitLab 프로젝트로 이동
+2. **Settings** → **CI/CD** → **Variables**로 이동
+3. 다음 변수 추가:
+
+</Steps>
+
+| 변수 이름 | 값 | Protected | Masked |
+|---------------|-------|-----------|--------|
+| `CAPGO_TOKEN` | Capgo API 토큰 | ✅ 예 | ✅ 예 |
+
+<Aside type="tip">
+
+[console.capgo.app/apikeys](https://console.capgo.app/apikeys)에서 Capgo API 토큰을 받으세요. 앱 ID는 이미 `capacitor.config.ts` 파일에 구성되어 있습니다.
+
+</Aside>
+
+## 간단한 구성
+
+main 브랜치에 푸시할 때마다 프로덕션에 배포하는 기본 구성:
+
+```yaml
+# .gitlab-ci.yml - 간단한 구성
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+  only:
+    - main
+
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+    # 암호화된 업로드의 경우 추가: --key-data-v2 "$CAPGO_PRIVATE_KEY"
+  dependencies:
+    - build
+  only:
+    - main
+```
+
+## 고급 구성
+
+### 기능 브랜치 배포
+
+검토 및 테스트를 위해 기능 브랜치를 테스트 채널에 배포:
+
+```yaml
+# 기능 브랜치 배포
+deploy_feature:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - CHANNEL_NAME="feature-$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9-]/-/g')"
+    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+  dependencies:
+    - build
+  only:
+    - /^feature\/.*$/
+  environment:
+    name: feature/$CI_COMMIT_REF_NAME
+    url: https://your-app.com/channels/$CHANNEL_NAME
+```
+
+<Aside type="tip">
+
+**채널로 테스트**: 기능 채널에 배포한 후 해당 특정 채널을 사용하도록 구성하여 앱에서 업데이트를 테스트할 수 있습니다. [앱에서 채널 구성](/docs/live-updates/channels/#configuring-the-channel-in-your-app)에 대해 자세히 알아보세요.
+
+</Aside>
+
+### 암호화 사용
+
+[Capgo의 암호화 기능](/docs/live-updates/encryption/)을 사용하는 경우 CI/CD 환경에 개인 키를 안전하게 저장해야 합니다.
+
+로컬에서 [암호화 키 설정](/docs/live-updates/encryption/#setting-up-encryption) 후 GitLab 변수에 개인 키를 추가하세요:
+
+```shell
+# 개인 키 콘텐츠 표시(이 출력 복사)
+cat .capgo_key_v2
+```
+
+이 콘텐츠를 GitLab 프로젝트 변수에 `CAPGO_PRIVATE_KEY`로 추가(protected 및 masked로 표시)한 다음 파이프라인에서 사용:
+
+```yaml
+# 암호화로 배포
+deploy_production:
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**보안 모범 사례:**
+- `.capgo_key_v2` 파일을 절대 버전 관리에 커밋하지 마세요
+- 개인 키는 안전한 CI/CD 비밀 관리에만 저장
+- 다른 환경에 대해 다른 키 사용
+
+</Aside>
+
+### 다중 채널 구성
+
+여러 배포 채널 설정 및 관리에 대한 포괄적인 정보는 [Channels 문서](/docs/live-updates/channels/)를 참조하세요.
+
+여러 환경 및 병합 요청 배포가 포함된 완전한 구성:
+
+```yaml
+# .gitlab-ci.yml - 고급 다중 채널 구성
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+# 빌드 단계
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 24 hours
+
+# 개발 채널에 배포
+deploy_development:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel development
+  dependencies:
+    - build
+  only:
+    - develop
+  environment:
+    name: development
+
+# 병합 요청을 테스트 채널에 배포
+deploy_mr:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - CHANNEL_NAME="mr-$CI_MERGE_REQUEST_IID"
+    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+  dependencies:
+    - build
+  only:
+    - merge_requests
+  environment:
+    name: review/$CI_MERGE_REQUEST_IID
+    url: https://your-app.com/channels/mr-$CI_MERGE_REQUEST_IID
+    on_stop: cleanup_mr
+
+# MR이 닫힐 때 MR 채널 정리
+cleanup_mr:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli channel delete mr-$CI_MERGE_REQUEST_IID --apikey $CAPGO_TOKEN || true
+  when: manual
+  environment:
+    name: review/$CI_MERGE_REQUEST_IID
+    action: stop
+  only:
+    - merge_requests
+
+# 스테이징에 배포
+deploy_staging:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel staging
+  dependencies:
+    - build
+  only:
+    - develop
+  environment:
+    name: staging
+
+# 프로덕션에 배포
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  dependencies:
+    - build
+  only:
+    - main
+  environment:
+    name: production
+```
+
+### 수동 승인이 있는 다중 환경
+
+수동 승인이 필요한 프로덕션 배포의 경우:
+
+```yaml
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  dependencies:
+    - build
+  only:
+    - main
+  when: manual
+  environment:
+    name: production
+```
+
+### 브랜치 기반 배포 전략
+
+다른 브랜치를 적절한 채널에 자동으로 배포:
+
+```yaml
+# 브랜치에 따른 동적 채널 배포
+deploy:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        CHANNEL="production"
+      elif [ "$CI_COMMIT_REF_NAME" = "develop" ]; then
+        CHANNEL="staging"
+      else
+        CHANNEL="development"
+      fi
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL
+  dependencies:
+    - build
+  environment:
+    name: $CHANNEL
+```
+
+## 보안 모범 사례
+
+### 보호된 변수
+
+<Steps>
+
+1. **민감한 변수 표시**: API 토큰을 항상 protected 및 masked로 표시
+2. **브랜치 보호**: 프로덕션 배포에 보호된 변수 사용
+3. **액세스 제어**: 변수 액세스를 maintainer에게만 제한
+4. **정기 교체**: API 토큰을 정기적으로 교체
+
+</Steps>
+
+### 안전한 파이프라인 구성
+
+```yaml
+# 프로덕션에 보호된 변수 사용
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  only:
+    refs:
+      - main
+    variables:
+      - $CI_COMMIT_REF_PROTECTED == "true"
+```
+
+## 모니터링 및 알림
+
+### Slack 통합
+
+파이프라인에 Slack 알림 추가:
+
+```yaml
+notify_success:
+  stage: .post
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - |
+      curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"✅ Capgo deployment successful for '"$CI_COMMIT_REF_NAME"'"}' \
+        $SLACK_WEBHOOK_URL
+  when: on_success
+
+notify_failure:
+  stage: .post
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - |
+      curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"❌ Capgo deployment failed for '"$CI_COMMIT_REF_NAME"'"}' \
+        $SLACK_WEBHOOK_URL
+  when: on_failure
+```
+
+### 이메일 알림
+
+GitLab 프로젝트 설정에서 이메일 알림을 구성하거나 API 사용:
+
+```yaml
+notify_email:
+  stage: .post
+  script:
+    - |
+      curl --request POST \
+        --header "PRIVATE-TOKEN: $GITLAB_API_TOKEN" \
+        --form "to=team@yourcompany.com" \
+        --form "subject=Capgo Deployment Status" \
+        --form "body=Deployment of $CI_COMMIT_REF_NAME completed with status: $CI_JOB_STATUS" \
+        "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/emails"
+  when: always
+```
+
+## 문제 해결
+
+### 일반적인 문제
+
+**"Capgo CLI not found"로 파이프라인 실패:**
+```yaml
+# CLI 설치 디버그
+debug_cli:
+  script:
+    - npm install -g @capgo/cli
+    - which capgo || echo "Capgo CLI not found"
+    - npx @capgo/cli --version
+```
+
+**인증 오류:**
+```yaml
+# 토큰 구성 확인
+debug_auth:
+  script:
+    - |
+      if [ -z "$CAPGO_TOKEN" ]; then
+        echo "CAPGO_TOKEN is not set"
+        exit 1
+      fi
+      echo "Token length: ${#CAPGO_TOKEN}"
+```
+
+**빌드 아티팩트를 찾을 수 없음:**
+```yaml
+# 빌드 출력 나열
+debug_build:
+  script:
+    - ls -la dist/
+    - find dist/ -type f -name "*.js" -o -name "*.html"
+```
+
+### 파이프라인 디버그
+
+문제를 해결하기 위한 디버깅 정보 추가:
+
+```yaml
+debug:
+  stage: build
+  script:
+    - echo "Branch: $CI_COMMIT_REF_NAME"
+    - echo "Commit: $CI_COMMIT_SHA"
+    - echo "Build: $CI_PIPELINE_ID"
+    - env | grep CI_ | sort
+  only:
+    - branches
+```
+
+## 다음 단계
+
+- 다양한 배포 환경을 관리하려면 [Channels](/docs/live-updates/channels/)에 대해 알아보기
+- 고급 배포 시나리오를 위해 [Custom Storage](/docs/live-updates/custom-storage/) 살펴보기
+- 안전한 배포를 위해 [Encryption](/docs/live-updates/encryption/) 설정
+- 업데이트 적용 방법을 사용자 정의하기 위해 [Update Behavior](/docs/live-updates/update-behavior/) 구성
+
+GitLab CI/CD 통합을 통해 Capgo 배포를 자동화하고 모바일 앱 사용자에게 일관되고 안정적인 업데이트를 보장할 수 있습니다.

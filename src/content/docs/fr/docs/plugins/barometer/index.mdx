@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-barometer"
+locale: fr
+description: Accédez aux lectures du baromètre de l'appareil pour les données de pression atmosphérique et d'altitude depuis les capteurs de l'appareil.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Accédez aux données de pression barométrique et d'altitude depuis les capteurs de l'appareil pour les applications météo et fitness.
+  image:
+    file: ~public/icons/plugins/barometer.svg
+  actions:
+    - text: Commencer
+      link: /docs/plugins/barometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-barometer/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Surveillance de la pression" icon="rocket">
+    Lectures de pression atmosphérique en temps réel 🌡️
+  </Card>
+  <Card title="Calcul de l'altitude" icon="star">
+    Dérivez l'altitude relative à partir des changements de pression 📈
+  </Card>
+  <Card title="Écouteurs d'événements" icon="setting">
+    Abonnez-vous aux événements de changement de pression 🔔
+  </Card>
+  <Card title="Multi-plateforme" icon="laptop">
+    Fonctionne sur les appareils iOS et Android avec capteurs baromètres 📱
+  </Card>
+  <Card title="Premiers pas" icon="open-book">
+    Consultez le [Guide de démarrage](/docs/plugins/barometer/getting-started/) pour installer et configurer le plugin.
+  </Card>
+</CardGrid>

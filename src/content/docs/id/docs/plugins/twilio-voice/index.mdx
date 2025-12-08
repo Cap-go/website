@@ -1,0 +1,108 @@
+---
+title: "@capgo/capacitor-twilio-voice"
+locale: id
+description: Plugin integrasi Twilio Voice API untuk aplikasi Capacitor dengan panggilan VoIP, manajemen panggilan, dan penanganan audio.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Integrasikan Twilio Voice API untuk panggilan VoIP berkualitas tinggi dengan manajemen panggilan, kontrol audio, dan komunikasi real-time.
+  image:
+    file: ~public/icons/plugins/twilio-voice.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/twilio-voice/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-twilio-voice/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Gambaran Umum
+
+Plugin Capacitor Twilio Voice mengaktifkan fungsionalitas panggilan VoIP berkualitas tinggi di aplikasi iOS dan Android menggunakan Voice API Twilio. Plugin ini menyediakan manajemen panggilan, autentikasi, dan kontrol audio yang komprehensif untuk menciptakan pengalaman panggilan profesional.
+
+<CardGrid stagger>
+  <Card title="Panggilan VoIP" icon="rocket">
+    Panggilan suara berkualitas tinggi melalui internet menggunakan Twilio Voice API 📞
+  </Card>
+  <Card title="Manajemen panggilan" icon="setting">
+    Buat, terima, tolak, dan akhiri panggilan dengan kontrol siklus hidup penuh 🎛️
+  </Card>
+  <Card title="Kontrol audio" icon="comment">
+    Bisukan, toggle speaker, dan opsi routing audio 🎤
+  </Card>
+  <Card title="Dukungan platform" icon="approve-check">
+    Implementasi native iOS dan Android dengan notifikasi push 📱
+  </Card>
+</CardGrid>
+
+## Instalasi
+
+```bash
+npm install @capgo/capacitor-twilio-voice
+npx cap sync
+```
+
+## Metode API Inti
+
+### Autentikasi
+- `login(options: { accessToken: string })` - Autentikasi dengan Twilio menggunakan token akses
+- `logout()` - Akhiri sesi pengguna dan bersihkan status panggilan
+- `isLoggedIn()` - Periksa status autentikasi saat ini
+
+### Manajemen Panggilan
+- `makeCall(options: { to: string })` - Mulai panggilan keluar ke nomor yang ditentukan
+- `acceptCall(options: { callSid: string })` - Terima panggilan masuk
+- `rejectCall(options: { callSid: string })` - Tolak panggilan masuk
+- `endCall(options?: { callSid?: string })` - Akhiri panggilan aktif
+- `muteCall(options: { muted: boolean, callSid?: string })` - Bisukan/aktifkan audio panggilan
+- `setSpeaker(options: { enabled: boolean })` - Toggle output speaker
+
+## Event Listeners
+
+Plugin menyediakan penanganan event komprehensif untuk:
+- Event pendaftaran untuk status koneksi
+- Perubahan status panggilan (terhubung, terputus, berdering)
+- Peringatan kualitas dan masalah koneksi
+- Notifikasi panggilan masuk
+
+## Konfigurasi Platform
+
+### Pengaturan iOS
+- Memerlukan integrasi PushKit untuk panggilan masuk
+- Konfigurasi sertifikat untuk penggunaan produksi
+- Izin mikrofon di Info.plist
+
+### Pengaturan Android
+- Pengaturan Firebase untuk notifikasi push
+- Izin mikrofon di AndroidManifest.xml
+- Konfigurasi layanan background
+
+## Contoh Quick Start
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+// Authenticate with Twilio
+await TwilioVoice.login({ accessToken: 'your-twilio-access-token' });
+
+// Make a call
+await TwilioVoice.makeCall({ to: '+1234567890' });
+
+// Listen for call events
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Call connected:', data);
+});
+```
+
+## Dokumentasi
+
+Lihat [dokumentasi lengkap](/docs/plugins/twilio-voice/getting-started/) untuk petunjuk pengaturan detail, konfigurasi lanjutan, dan contoh integrasi.

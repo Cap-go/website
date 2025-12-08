@@ -1,0 +1,178 @@
+---
+title: "Statistics API"
+description: "How to use the statistics endpoint of Capgo with the auto-update plugin in self-hosted mode, what they are used for and what to expect"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+
+## Statistics API
+
+Starting from version 1.3.0 the update system is able to send stats!
+
+By default, all stats are sent to our server, to understand usage and research. 
+
+<Aside>
+No private data is sent for stats, only random UUID, version update, version native app, platform, action, and app ID.
+</Aside>
+
+If you want to send this data to your server instead, change the config below:
+
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "YOUR_URL"
+		}
+	}
+}
+```
+
+## Data Structure
+
+What your server will receive is:
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // can be set, delete, set_fail, reset, revert
+	// Then it's the same info as update
+	"app_id": "**.***.**", // app identifier in the store
+	"device_id": "*******", // unique id per app install
+	"platform": "ios", // or android
+	"custom_id": "user_1", // represent your user
+        "version_name": "1.2.3", // version of the web build
+        "version_build": "1.2.0", // version of the native build
+        "version_code": "120", // build number of the native build
+	"version_os": "16", // OS version of the device
+        "plugin_version": "4.0.0"// to make your api behave differently with different plugins
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+You can also totally disable it, with an empty string. Keep in mind, statistics are made private friendly and help me to understand how people use the plugin, to resolve issues and improve it.
+
+## Implementation Example
+
+Here is an example of code in JavaScript to save the stats of the plugin:
+
+```typescript
+interface AppInfos {
+  version_name: string
+  action: 'ping' |
+          'delete' |
+          'reset' |
+          'set' |
+          'get' |
+          'set_fail' |
+          'update_fail' |
+          'download_fail' |
+          'windows_path_fail' |
+          'canonical_path_fail' |
+          'directory_path_fail' |
+          'unzip_fail' |
+          'low_mem_fail' |
+          'download_10' |
+          'download_20' |
+          'download_30' |
+          'download_40' |
+          'download_50' |
+          'download_60' |
+          'download_70' |
+          'download_80' |
+          'download_90' |
+          'download_complete' |
+          'download_manifest_start' |
+          'download_manifest_complete' |
+          'download_zip_start' |
+          'download_zip_complete' |
+          'download_manifest_file_fail' |
+          'download_manifest_checksum_fail' |
+          'download_manifest_brotli_fail' |
+          'decrypt_fail' |
+          'app_moved_to_foreground' |
+          'app_moved_to_background' |
+          'uninstall' |
+          'needPlanUpgrade' |
+          'missingBundle' |
+          'noNew' |
+          'disablePlatformIos' |
+          'disablePlatformAndroid' |
+          'disableAutoUpdateToMajor' |
+          'cannotUpdateViaPrivateChannel' |
+          'disableAutoUpdateToMinor' |
+          'disableAutoUpdateToPatch' |
+          'channelMisconfigured' |
+          'disableAutoUpdateMetadata' |
+          'disableAutoUpdateUnderNative' |
+          'disableDevBuild' |
+          'disableEmulator' |
+          'cannotGetBundle' |
+          'checksum_fail' |
+          'NoChannelOrOverride' |
+          'setChannel' |
+          'getChannel' |
+          'rateLimited' |
+          'disableAutoUpdate' |
+          'InvalidIp' |
+          'blocked_by_server_url'
+  version_build: string
+  version_code: string
+  version_os: string
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSON.parse(event.body || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    action,
+    version_code,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  console.log('update asked', platform,
+    app_id,
+    action,
+    version_os,
+    version_code,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  // Save it in your database
+  return { status: 'ok' }
+}
+```
+
+This endpoint should return a JSON:
+
+```json
+{ "status": "ok" }
+```
+
+## Actions
+
+For detailed descriptions of all action codes and their meanings, please refer to the debugging documentation:
+
+* **Actions sent from the device**: See the [debugging documentation - Sent from the device](/docs/plugins/updater/debugging/#sent-from-the-device) section
+* **Actions sent from the backend**: See the [debugging documentation - Sent from the backend](/docs/plugins/updater/debugging/#sent-from-the-backend) section
+
+<LinkCard
+	title="Handling Updates"
+	href="/docs/plugin/self-hosted/handling-updates/"
+/>

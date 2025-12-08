@@ -1,0 +1,253 @@
+---
+title: Migrasi dari Capawesome Cloud ke Capgo
+locale: id
+description: Panduan langkah demi langkah untuk pindah dari Capawesome Cloud ke Capgo dengan mendapatkan keamanan OTA native, observabilitas tingkat perangkat, dan otomasi penuh.
+sidebar:
+  order: 8
+---
+
+> ⚡️ Capgo mengotomatiskan channel, pembersihan bundle, rollback, analytics, dan upload CLI secara native. Gunakan panduan ini untuk melakukan langkah-langkah minimal yang diperlukan untuk migrasi dan secara opsional membuat ulang perilaku khusus yang masih Anda butuhkan.
+
+## Gambaran Umum
+
+1. Kumpulkan konfigurasi Capawesome Cloud Anda yang ada (App ID, channel, signing key, CLI token) sehingga Anda dapat mengarsipkan atau mengauditnya nanti.
+2. Instal plugin Capgo, hapus Capawesome SDK, dan panggil `CapacitorUpdater.notifyAppReady()`.
+3. Konfigurasi perilaku opsional (unduhan manual, bundle pinning, reload) jika Anda mengandalkan alur tersebut saat ini.
+
+Dengan Capgo, Anda hanya perlu menginstal plugin kami dan memanggil `CapacitorUpdater.notifyAppReady()`. Semua yang lain—channel, pembersihan bundle, rollback, analytics, dan otomasi CLI—ditangani secara native. Bagian-bagian di bawah ini memandu Anda melalui setiap tugas secara langsung.
+
+## Sebelum Anda Memulai
+
+- Pastikan proyek Anda sudah menggunakan Capacitor 5 atau yang lebih baru.
+- Instal Capgo CLI (`npm install -g @capgo/cli`) jika Anda berencana untuk push bundle dari CI/CD.
+
+## Langkah 1 – Instal Capgo dan hapus Capawesome SDK
+
+```bash
+npm uninstall @capawesome/capacitor-live-update
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+Itulah satu-satunya penggantian wajib. Kode native Capgo sudah tersedia dengan plugin; tidak diperlukan helper JavaScript tambahan.
+
+## Langkah 2 – Konfigurasi minimal
+
+Setup sebelumnya memerlukan pemetaan puluhan opsi di `capacitor.config`. Capgo mengenali proyek Anda secara otomatis, sehingga konfigurasi minimal terlihat seperti ini:
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli'
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      autoDeletePrevious: true,
+      periodCheckDelay: 10 * 60 * 1000, // optional: check every 10 minutes
+    },
+  },
+}
+
+export default config
+```
+
+Semua yang didaftarkan Capawesome sebagai flag manual (`defaultChannel`, `autoDeleteBundles`, kebijakan retensi, dll.) dikelola melalui dashboard atau API Capgo. Anda hanya perlu menimpa key ini jika Anda menginginkan perilaku yang berbeda dari default Capgo.
+
+### Referensi cepat konfigurasi
+
+| Opsi Capawesome | Ekuivalen Capgo | Apakah Anda perlu mengaturnya? |
+| --- | --- | --- |
+| `appId` | Diambil dari dashboard Capgo setelah Anda membuat proyek | Hanya jika Anda menggunakan beberapa proyek dalam satu binary |
+| `defaultChannel` | Aturan channel dikelola di dashboard/API | Opsional; kebanyakan tim mengatur ini di sisi server |
+| `autoDeleteBundles` | `autoDeletePrevious: true` (default) | Sudah diaktifkan |
+| `publicKey` | Dikelola di konsol Capgo | Hanya jika Anda merotasi key secara manual |
+| `maxVersions` / retensi | Kebijakan retensi bundle | Dikonfigurasi secara terpusat di Capgo (default 1 bulan, maksimal 24 bulan) |
+
+## Langkah 3 – Panggil `notifyAppReady()` (satu-satunya hook yang diperlukan)
+
+Workflow lama memperkenalkan listener khusus (`checkForUpdates()`, `retryDownload()`, menyembunyikan splash screen, dll.). Capgo melakukan langkah-langkah tersebut secara native. Satu-satunya API yang harus Anda panggil adalah:
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+CapacitorUpdater.notifyAppReady()
+```
+
+Ini mengonfirmasi bahwa aplikasi berhasil di-boot. Jika konfirmasi tidak pernah sampai, Capgo secara otomatis melakukan rollback bundle—tidak diperlukan JavaScript tambahan.
+
+**Itu saja—Capgo menangani pengecekan latar belakang, visibilitas splash, dan rollback secara native.**
+
+<details>
+<summary>Opsional: jalankan logika khusus sebelum splash screen disembunyikan</summary>
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Jalankan diagnostik atau logging jika Anda perlu
+  SplashScreen.hide()
+})
+
+CapacitorUpdater.notifyAppReady()
+```
+
+</details>
+
+## Langkah 4 – Petakan panggilan API (sebagian besar opsional)
+
+Di Capgo, Anda biasanya membiarkan auto-updater berjalan; API manual tetap tersedia jika Anda menginginkan kontrol penuh.
+
+| Capawesome Cloud | Ekuivalen Capgo | Apakah Anda membutuhkannya? |
+| --- | --- | --- |
+| `LiveUpdate.fetchLatestBundle()` | `CapacitorUpdater.getLatest()` | Hanya saat mengimplementasikan workflow unduhan Anda sendiri |
+| `LiveUpdate.downloadBundle()` | `CapacitorUpdater.download()` | Opsional: auto-update native sudah mengunduh |
+| `LiveUpdate.setNextBundle()` | `CapacitorUpdater.next()` | Opsional: dashboard meng-pin bundle secara otomatis |
+| `LiveUpdate.reload()` | `CapacitorUpdater.reload()` | Opsional; Capgo memberlakukan bundle wajib setelah `notifyAppReady()` |
+| `LiveUpdate.getCurrentBundle()` | `CapacitorUpdater.current()` | Diagnostik opsional |
+
+Jika Anda tetap menggunakan perilaku auto-update native, Anda dapat menghapus JavaScript Capawesome sepenuhnya.
+
+### Contoh kontrol manual
+
+**Unduh bundle terbaru**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const downloadUpdate = async () => {
+  const latest = await CapacitorUpdater.getLatest()
+  if (latest?.url) {
+    const bundle = await CapacitorUpdater.download({
+      url: latest.url,
+      version: latest.version,
+    })
+    console.log('Bundle downloaded', bundle?.id)
+  }
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const downloadUpdate = async () => {
+  const result = await LiveUpdate.fetchLatestBundle()
+  if (result.downloadUrl) {
+    await LiveUpdate.downloadBundle({
+      bundleId: result.bundleId,
+      url: result.downloadUrl,
+    })
+    console.log('Bundle downloaded')
+  }
+}
+```
+
+**Atur bundle berikutnya**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const setNextBundle = async () => {
+  await CapacitorUpdater.next({ id: 'bundle-id-123' })
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const setNextBundle = async () => {
+  await LiveUpdate.setNextBundle({ bundleId: 'bundle-id-123' })
+}
+```
+
+**Terapkan bundle yang diunduh segera**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const applyUpdate = async () => {
+  await CapacitorUpdater.reload()
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const applyUpdate = async () => {
+  await LiveUpdate.reload()
+}
+```
+
+## Langkah 5 – Strategi pembaruan: bagaimana Capgo menanganinya
+
+Capawesome mendokumentasikan tiga strategi. Berikut ini bagaimana mereka diterjemahkan:
+
+### Pembaruan latar belakang
+- **Workflow sebelumnya**: konfigurasi dalam kode dan jadwalkan unduhan secara manual.
+- **Capgo**: diaktifkan secara default (`autoUpdate: true`). Tidak diperlukan kode tambahan.
+
+### Selalu terbaru
+- **Workflow sebelumnya**: tambahkan listener `App.resume`, panggil `download`, kemudian `set`.
+- **Capgo**: auto-update latar belakang sudah melakukan pengecekan setelah resume. Anda hanya memerlukan listener manual jika Anda menginginkan interval khusus.
+
+<details>
+<summary>Opsional: pengecekan resume manual</summary>
+
+```ts
+import { App } from '@capacitor/app'
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+App.addListener('resume', async () => {
+  const latest = await CapacitorUpdater.getLatest()
+  if (latest?.url) {
+    const downloaded = await CapacitorUpdater.download({
+      url: latest.url,
+      version: latest.version,
+    })
+    if (downloaded) {
+      await CapacitorUpdater.next({ id: downloaded.id })
+    }
+  }
+})
+```
+
+</details>
+
+### Pembaruan paksa
+- **Workflow sebelumnya**: menghubungkan logika prompt dan memberlakukan reload.
+- **Capgo**: tandai bundle sebagai "wajib" di dashboard, kemudian dengarkan event `majorAvailable` (dipancarkan setelah `notifyAppReady()`) untuk mengharuskan pengguna upgrade di dalam aplikasi Anda.
+
+## Langkah 6 – Deploy bundle
+
+Jika Anda sebelumnya mengandalkan `capawesome live-update deploy`, Capgo menawarkan workflow CLI serupa, dan Anda juga dapat mengotomatiskan deployment sepenuhnya melalui API.
+
+```bash
+# Autentikasi sekali (menyimpan token di lingkungan CI Anda)
+capgo login
+
+# Upload bundle baru (mendeteksi platform/versi secara otomatis)
+capgo bundle upload --path dist --channel production
+```
+
+Karena Capgo melacak kesehatan bundle secara otomatis, Anda juga mendapatkan:
+
+- Log audit tingkat perangkat untuk setiap instalasi.
+- Retensi otomatis (satu bulan secara default) dengan batas yang dapat dikonfigurasi hingga 24 bulan.
+- Metrik latensi real-time di [status.capgo.app/history](https://status.capgo.app/history).
+
+## Timeline Migrasi
+
+- **Inventaris & instalasi**: 10 menit (`npm install`, hapus plugin lama).
+- **Konfigurasi & kesiapan**: 5 menit (`notifyAppReady`).
+- **Pemeriksaan kewarasan**: 15 menit (tes manual opsional atau listener).
+- **Deployment pertama**: 10 menit dengan Capgo CLI atau integrasi CI.
+
+Dalam praktiknya, tim menyelesaikannya dalam waktu kurang dari satu jam. Jika Anda memberikan detail proyek Capawesome, kami bahkan dapat mengimpor channel dan daftar perangkat untuk Anda.
+
+## Dukungan Capgo
+
+- **Pendamping migrasi**: pesan sesi di [cal.com/team/capgo/demo](https://cal.com/team/capgo/demo).
+- **Komunitas**: bergabung dengan [Capgo Discord](https://discord.gg/VCXxSVjefW).
+- **Issue tracker**: [github.com/Cap-go/capacitor-updater/issues](https://github.com/Cap-go/capacitor-updater/issues).
+
+Capgo dibuat untuk keandalan jangka panjang: pembaruan delta native, bundle terenkripsi, rollback otomatis, dan analytics yang tidak memerlukan JavaScript khusus. Setelah Anda bermigrasi, Anda dapat menghapus glue yang berat pemeliharaannya dan membiarkan platform menjalankan pembaruan secara otomatis.

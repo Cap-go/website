@@ -1,0 +1,109 @@
+---
+title: "자동 업데이트"
+locale: ko
+description: "자체 호스팅 모드에서 자동 업데이트 플러그인과 함께 Capgo의 업데이트 엔드포인트를 사용하는 방법, 그 용도 및 기대사항"
+sidebar:
+  order: 4
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+이 문서는 자동 업데이트 서버를 실행하는 방법을 설명합니다.
+
+## 번들 제공하기
+번들이 HTTPS를 통해 제공되고 서버에 앱이 업데이트를 다운로드할 수 있도록 하는 올바른 CORS 헤더가 있는지 확인하세요.
+예: ```https://myserver.com/app/updates/updates.json```
+
+
+번들 제공이 익숙하지 않다면 Capgo Cloud를 시도하거나 여기에서 예제를 보는 것을 권장합니다:
+<LinkCard
+	title="번들 제공하기"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## 구성
+``capacitor.config.json``에 ``updateUrl``을 추가하세요.
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myserver.com/app/updates/updates.json",
+		}
+	}
+}
+```
+:::caution
+자체 호스팅 업데이트를 푸시할 때 "HTTP" 엔드포인트를 사용할 수 없다는 점에 유의하세요. 이는 Android 앱의 보안 정책에 위배됩니다. 테스트 목적으로 [허용할 수 있습니다](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted).
+:::
+
+## Update API
+
+플러그인은 앱이 열릴 때마다 이 본문으로 API에 POST 호출을 수행합니다:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSTEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+서버 API는 업데이트가 필요한 경우 JSON으로 capacitor-updater 플러그인에 응답해야 합니다:
+
+```json
+{
+"version": "1.2.3",
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
+"checksum": "sha256_checksum_of_bundle"
+}
+```
+
+자동 업데이트 모드에서 서버는 버전을 비교하고 올바른 버전을 반환해야 합니다. URL 키가 있으면 플러그인이 다운로드 프로세스를 시작합니다.
+
+"message" 및 "error" 키를 추가하면 버전이 설정되지 않고 대신 로그에 메시지가 표시됩니다.
+
+`version` 키는 [`semver`](https://semver.org/) 형식이어야 합니다.
+
+zip에는 루트에 `index.html` 파일이 있거나 내부에 `index.html`이 있는 폴더만 루트에 있어야 합니다.
+
+
+CLI 명령을 사용하여 번들을 압축할 수 있습니다:
+
+```bash title="서버에서 제공할 파일로 번들 생성"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```
+
+## 번들 체크섬 생성
+
+**중요:** 번들 zip 파일을 생성하려면 Capgo CLI를 사용해야 합니다. Capgo 플러그인은 공식 CLI 도구를 사용할 때만 보장되는 특정 zip 형식과 구조가 필요합니다. 표준 zip 유틸리티는 호환되지 않는 아카이브를 생성할 수 있습니다.
+
+번들의 체크섬을 생성하려면 `--json` 플래그와 함께 Capgo CLI zip 명령을 사용하세요:
+
+```bash title="체크섬 정보와 함께 번들 생성"
+npx @capgo/cli bundle zip [appId] --json
+```
+
+이 명령은 다음을 수행합니다:
+- Capgo 플러그인과 호환되는 올바른 형식의 zip 파일 생성
+- 무결성 검증을 위한 SHA256 체크섬 생성
+- JSON 형식으로 번들 정보 출력
+
+예제 출력:
+```json
+{
+  "version": "1.2.3",
+  "checksum": "a1b2c3d4e5f6789...",
+  "size": 1234567
+}
+```
+
+플러그인이 설치 전에 번들 무결성을 확인할 수 있도록 API 응답에서 이 출력의 `checksum` 값을 사용하세요.

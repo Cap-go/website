@@ -1,0 +1,49 @@
+---
+title: Firebase Googleログイン - 一般的な設定
+locale: ja
+description: Capacitor Social LoginプラグインでFirebase AuthenticationによるGoogleサインインを設定する方法を学びます。
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## はじめに
+
+このガイドでは、Capacitor Social LoginプラグインでFirebase AuthenticationによるGoogleサインインを統合する方法を説明します。このセットアップにより、モバイルプラットフォームでネイティブGoogleサインインを使用しながら、バックエンド認証にFirebase Authを活用できます。
+
+## 設定手順
+
+<Steps>
+1. [console.cloud.google.com](https://console.cloud.google.com/)にアクセスしてください
+2. 使用するプロジェクトを選択します
+    <img src="/social-login-assets/firebase_project_select.webp" alt="Firebase Project Selector" />
+3. `Authentication`メニューに移動します
+    1. `build`をクリックします
+    2. `Authentication`をクリックします
+    <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+4. `Get started`ボタンをクリックします
+    <img src="/social-login-assets/firebase_auth_start.webp" alt="Firebase Get Started Button" />
+5. `Email/Password`と`Google`の両方、または`Google`のみを選択します
+    :::note
+    私は両方を使用したいので、`Email/Password`と`Google`を選択しますが、`Google`のみを選択することもできます。これは後で変更できます。
+    :::
+    <img src="/social-login-assets/firebase_google_email_auth.webp" alt="Firebase Select Email/Password and Google Button" />
+    <img src="/social-login-assets/firebase_auth_enable_email.webp" alt="Firebase enable email authentication" />
+    <img src="/social-login-assets/firebase_auth_enable_email_save.webp" alt="Firebase save enable google authentication" />
+    <img src="/social-login-assets/firebase_auth_add_provider_after_email.webp" alt="Firebase enable add provider button" />
+    <img src="/social-login-assets/firebase_auth_add_google_provider_after_email.webp" alt="Firebase add Google provider after having added email provider" />
+6. `Google`プロバイダーを有効にします
+    <img src="/social-login-assets/firebase_auth_add_google_provider_enable.webp" alt="Firebase enable google authentication" />
+7. サポートメールを追加します
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth.webp" alt="Firebase add support email" />
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth_2.webp" alt="Firebase add support email part 2" />
+8. `Public-facing name for project`を変更します。
+    :::note
+    これはユーザーに表示されるため、よりわかりやすい名前に変更することをお勧めします。
+    :::
+    <img src="/social-login-assets/firebase_auth_change_public_facing_name.webp" alt="Firebase change public facing name" />
+9. `Save`ボタンをクリックします
+    <img src="/social-login-assets/firebase_auth_save_google_auth.webp" alt="Firebase save public facing name" />
+</Steps>
+
+完了です！Firebase AuthenticationでGoogleサインインが有効になりました 🎉

@@ -1,0 +1,265 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie Lautstärketasten-Drücke in Ihrer Capacitor-App erkennen.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installieren Sie das Paket**
+   <PackageManagers pkg="@capgo/capacitor-volume-buttons" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchronisieren Sie mit nativen Projekten**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Verwendung
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+// Listen for volume button presses
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  console.log('Volume button pressed:', event.direction);
+
+  if (event.direction === 'up') {
+    console.log('Volume up pressed');
+    // Handle volume up
+  } else if (event.direction === 'down') {
+    console.log('Volume down pressed');
+    // Handle volume down
+  }
+});
+
+// Remove all listeners when done
+await VolumeButtons.removeAllListeners();
+```
+
+## API-Referenz
+
+### addListener('volumeButtonPressed', callback)
+
+Lauschen Sie auf Lautstärketasten-Drücke.
+
+```typescript
+const handle = VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  console.log('Direction:', event.direction); // 'up' or 'down'
+});
+
+// Remove specific listener
+await handle.remove();
+```
+
+**Event-Daten:**
+- `direction`: `'up' | 'down'` - Richtung des Tastendrucks
+
+### removeAllListeners()
+
+Entfernen Sie alle registrierten Listener.
+
+```typescript
+await VolumeButtons.removeAllListeners();
+```
+
+### getPluginVersion()
+
+Abrufen der Plugin-Version.
+
+```typescript
+const { version } = await VolumeButtons.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Vollständiges Beispiel
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+export class VolumeButtonController {
+  private listener: any;
+
+  async initialize() {
+    this.listener = VolumeButtons.addListener(
+      'volumeButtonPressed',
+      this.handleVolumeButton.bind(this)
+    );
+
+    console.log('Volume button listener initialized');
+  }
+
+  private handleVolumeButton(event: { direction: 'up' | 'down' }) {
+    switch (event.direction) {
+      case 'up':
+        this.handleVolumeUp();
+        break;
+      case 'down':
+        this.handleVolumeDown();
+        break;
+    }
+  }
+
+  private handleVolumeUp() {
+    console.log('Volume up pressed');
+    // Your custom logic for volume up
+    // e.g., navigate forward, increase brightness, etc.
+  }
+
+  private handleVolumeDown() {
+    console.log('Volume down pressed');
+    // Your custom logic for volume down
+    // e.g., navigate backward, decrease brightness, etc.
+  }
+
+  async cleanup() {
+    if (this.listener) {
+      await this.listener.remove();
+    }
+    await VolumeButtons.removeAllListeners();
+    console.log('Volume button listener cleaned up');
+  }
+}
+```
+
+## Anwendungsfälle
+
+### Foto-/Videoaufnahme
+
+Verwenden Sie Lautstärketasten als Kamera-Auslöser:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', async (event) => {
+  // Any volume button triggers camera
+  await capturePhoto();
+});
+```
+
+### Seitennavigation
+
+Navigieren Sie durch Inhalte mit Lautstärketasten:
+
+```typescript
+let currentPage = 0;
+
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    currentPage++;
+    showPage(currentPage);
+  } else {
+    currentPage = Math.max(0, currentPage - 1);
+    showPage(currentPage);
+  }
+});
+```
+
+### Mediensteuerung
+
+Steuern Sie die Medienwiedergabe:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    skipForward();
+  } else {
+    skipBackward();
+  }
+});
+```
+
+### Spielsteuerung
+
+Verwenden Sie Lautstärketasten für Spielaktionen:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    player.jump();
+  } else {
+    player.crouch();
+  }
+});
+```
+
+## Best Practices
+
+1. **Räumen Sie Listener auf**
+   Entfernen Sie immer Listener, wenn Ihre Komponente unmountiert wird:
+   ```typescript
+   useEffect(() => {
+     const listener = VolumeButtons.addListener('volumeButtonPressed', handler);
+
+     return () => {
+       listener.remove();
+     };
+   }, []);
+   ```
+
+2. **Geben Sie visuelles Feedback**
+   Zeigen Sie Benutzern, dass Lautstärketasten für benutzerdefinierte Steuerungen verwendet werden:
+   ```typescript
+   VolumeButtons.addListener('volumeButtonPressed', (event) => {
+     showNotification(`Volume ${event.direction} pressed`);
+     performAction(event.direction);
+   });
+   ```
+
+3. **Berücksichtigen Sie Barrierefreiheit**
+   Denken Sie daran, dass einige Benutzer auf Lautstärketasten für die tatsächliche Lautstärkeregelung angewiesen sind. Bieten Sie alternative Steuerungen an.
+
+4. **Entprellen Sie schnelle Drücke**
+   Verhindern Sie versehentliches Doppeldrücken:
+   ```typescript
+   let lastPress = 0;
+   const DEBOUNCE_MS = 300;
+
+   VolumeButtons.addListener('volumeButtonPressed', (event) => {
+     const now = Date.now();
+     if (now - lastPress < DEBOUNCE_MS) {
+       return; // Ignore rapid presses
+     }
+     lastPress = now;
+     handlePress(event.direction);
+   });
+   ```
+
+5. **Dokumentieren Sie das Verhalten**
+   Machen Sie den Benutzern klar, dass Lautstärketasten eine benutzerdefinierte Funktionalität haben:
+   ```typescript
+   function showVolumeButtonHelp() {
+     alert('Use Volume Up/Down buttons to navigate pages');
+   }
+   ```
+
+## Plattform-Hinweise
+
+### iOS
+- Funktioniert auf iOS 10.0+
+- Lautstärketasten werden zuverlässig erkannt
+- System-Lautstärke-UI kann kurz erscheinen
+
+### Android
+- Funktioniert auf Android 5.0 (API 21)+
+- Erfordert, dass die App im Vordergrund ist
+- Einige Geräte können eine leichte Verzögerung haben
+
+### Web
+- Auf der Web-Plattform nicht unterstützt
+- Listener werden nicht ausgelöst
+
+## Fehlerbehebung
+
+**Events werden nicht ausgelöst:**
+- Stellen Sie sicher, dass die App den Fokus hat
+- Überprüfen Sie, ob Listener ordnungsgemäß registriert sind
+- Überprüfen Sie, ob das Plugin installiert und synchronisiert ist
+
+**System-Lautstärkeänderungen stören:**
+- Dies ist erwartetes Verhalten - das Plugin erkennt Drücke, verhindert aber nicht System-Lautstärkeänderungen
+- Berücksichtigen Sie UX, die mit Lautstärkeänderungen funktioniert
+
+**Mehrere Events werden ausgelöst:**
+- Implementieren Sie Entprellen, um schnelle Drücke zu behandeln
+- Überprüfen Sie auf doppelte Listener-Registrierung

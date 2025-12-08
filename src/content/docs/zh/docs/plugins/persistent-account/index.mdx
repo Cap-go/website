@@ -1,0 +1,132 @@
+---
+title: "@capgo/capacitor-persistent-account"
+locale: zh
+description: 用于 Capacitor 应用的持久化账户管理插件，具有安全存储、会话处理和用户数据持久化功能。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 通过持久化存储、安全会话处理和跨应用会话的无缝身份验证管理用户账户。
+  image:
+    file: ~public/icons/plugins/persistent-account.svg
+  actions:
+    - text: 快速入门
+      link: /docs/plugins/persistent-account/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persistent-account/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概览
+
+Capacitor Persistent Account 插件能够在应用安装之间安全存储和持久化用户账户数据。此插件确保即使在应用重新安装后，用户账户信息仍然可用，提供无缝的用户体验和账户连续性。
+
+<CardGrid stagger>
+  <Card title="跨安装持久化" icon="rocket">
+    数据在应用卸载/重新安装循环中保持不变 💾
+  </Card>
+  <Card title="安全存储" icon="setting">
+    通过系统集成实现安全的账户数据存储 🔐
+  </Card>
+  <Card title="简单的 API" icon="puzzle">
+    用于账户管理的清晰读写接口 📊
+  </Card>
+  <Card title="跨平台" icon="laptop">
+    原生 iOS 和 Android 实现 📱
+  </Card>
+</CardGrid>
+
+## 安装
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## 核心 API 方法
+
+### 数据管理
+- `saveAccount(options: { data: unknown })` - 安全地保存账户数据到持久化存储
+- `readAccount()` - 检索已存储的账户数据，返回 `Promise<{ data: unknown | null }>`
+
+## 主要功能
+
+- **跨安装持久化**: 账户数据在应用卸载和重新安装后仍然存在
+- **安全存储**: 使用特定于平台的安全存储机制
+- **类型灵活性**: 存储任何可序列化的账户数据结构
+- **跨平台支持**: iOS 和 Android 的原生实现
+
+## 使用示例
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// 定义您的账户数据结构
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// 保存账户数据
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// 读取账户数据
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('已恢复账户:', account.username);
+} else {
+  console.log('未找到账户数据');
+}
+```
+
+## 使用场景
+
+- **用户引导**: 在应用重新安装期间保留用户进度
+- **账户恢复**: 在应用更新后恢复用户会话
+- **偏好设置存储**: 维护用户设置和配置
+- **离线优先应用**: 在本地存储必要的用户数据
+
+## 平台实现
+
+### iOS
+- 利用 iOS Keychain Services 进行安全的持久化存储
+- 数据在应用删除和设备恢复后仍然存在
+
+### Android
+- 使用 Android Account Manager 或带备份的共享首选项
+- 在应用重新安装和设备迁移期间保持数据
+
+## 安全注意事项
+
+- 账户数据使用特定于平台的安全存储存储
+- 考虑对敏感信息进行数据加密
+- 读取存储的账户时实施适当的数据验证
+- 遵循平台关于用户数据处理的指南
+
+## 文档
+
+查看[完整文档](/docs/plugins/persistent-account/getting-started/)以获取详细的实现指南和最佳实践。

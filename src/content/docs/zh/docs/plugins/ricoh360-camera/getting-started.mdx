@@ -1,0 +1,414 @@
+---
+title: 快速入门
+locale: zh
+description: 学习如何安装和使用 Ricoh 360° Camera 插件在 Capacitor 应用中控制 Ricoh Theta 相机。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-ricoh360-camera
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-ricoh360-camera
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-ricoh360-camera
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-ricoh360-camera
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 平台配置
+
+### iOS
+
+在您的 `Info.plist` 中添加相机和照片库权限：
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>此应用需要访问相机以拍摄 360° 照片和视频</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>此应用需要访问权限以将 360° 照片和视频保存到您的图库</string>
+```
+
+### Android
+
+在您的 `AndroidManifest.xml` 中添加所需权限：
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+```
+
+## 支持的设备
+
+此插件支持 Ricoh Theta 系列相机：
+- Ricoh Theta V
+- Ricoh Theta Z1
+- Ricoh Theta SC2
+- Ricoh Theta X
+
+## 使用示例
+
+```typescript
+import { Ricoh360Camera } from '@capgo/capacitor-ricoh360-camera';
+
+// 初始化相机连接
+await Ricoh360Camera.initialize();
+
+// 通过 WiFi 连接到 Ricoh Theta 相机
+await Ricoh360Camera.connect({
+  ssid: 'THETAYL12345678',
+  password: '12345678'
+});
+
+// 启动实时预览
+await Ricoh360Camera.startPreview({
+  container: 'preview-container' // HTML 元素的 ID
+});
+
+// 拍摄 360° 照片
+const result = await Ricoh360Camera.capturePhoto();
+console.log('照片已保存:', result.filePath);
+
+// 开始录制 360° 视频
+await Ricoh360Camera.startRecording();
+
+// 一段时间后停止录制
+setTimeout(async () => {
+  const video = await Ricoh360Camera.stopRecording();
+  console.log('视频已保存:', video.filePath);
+}, 10000);
+
+// 停止预览
+await Ricoh360Camera.stopPreview();
+
+// 断开相机连接
+await Ricoh360Camera.disconnect();
+```
+
+## API 参考
+
+### initialize()
+
+```typescript
+initialize() => Promise<void>
+```
+
+初始化相机插件。
+
+### connect(options)
+
+```typescript
+connect(options: ConnectOptions) => Promise<void>
+```
+
+通过 WiFi 连接到 Ricoh Theta 相机。
+
+| 参数         | 类型                      |
+| ------------- | ------------------------- |
+| **`options`** | `ConnectOptions` |
+
+### disconnect()
+
+```typescript
+disconnect() => Promise<void>
+```
+
+断开与相机的连接。
+
+### startPreview(options)
+
+```typescript
+startPreview(options: PreviewOptions) => Promise<void>
+```
+
+启动实时 360° 预览流。
+
+| 参数         | 类型                      |
+| ------------- | ------------------------- |
+| **`options`** | `PreviewOptions` |
+
+### stopPreview()
+
+```typescript
+stopPreview() => Promise<void>
+```
+
+停止实时预览流。
+
+### capturePhoto(options?)
+
+```typescript
+capturePhoto(options?: CaptureOptions) => Promise<CaptureResult>
+```
+
+拍摄 360° 照片。
+
+| 参数         | 类型                        |
+| ------------- | --------------------------- |
+| **`options`** | `CaptureOptions`（可选） |
+
+**返回:** `Promise<CaptureResult>`
+
+### startRecording(options?)
+
+```typescript
+startRecording(options?: RecordingOptions) => Promise<void>
+```
+
+开始录制 360° 视频。
+
+| 参数         | 类型                          |
+| ------------- | ----------------------------- |
+| **`options`** | `RecordingOptions`（可选） |
+
+### stopRecording()
+
+```typescript
+stopRecording() => Promise<CaptureResult>
+```
+
+停止视频录制。
+
+**返回:** `Promise<CaptureResult>`
+
+### getCameraInfo()
+
+```typescript
+getCameraInfo() => Promise<CameraInfo>
+```
+
+获取相机信息和功能。
+
+**返回:** `Promise<CameraInfo>`
+
+### setExposure(options)
+
+```typescript
+setExposure(options: ExposureOptions) => Promise<void>
+```
+
+设置相机曝光设置。
+
+| 参数         | 类型                       |
+| ------------- | -------------------------- |
+| **`options`** | `ExposureOptions` |
+
+### setWhiteBalance(options)
+
+```typescript
+setWhiteBalance(options: WhiteBalanceOptions) => Promise<void>
+```
+
+设置白平衡模式。
+
+| 参数         | 类型                           |
+| ------------- | ------------------------------ |
+| **`options`** | `WhiteBalanceOptions` |
+
+## 接口
+
+### ConnectOptions
+
+| 属性           | 类型              | 描述                    |
+| -------------- | ----------------- | ------------------------------ |
+| **`ssid`**     | `string` | Ricoh 相机的 WiFi SSID  |
+| **`password`** | `string` | 相机的 WiFi 密码    |
+
+### PreviewOptions
+
+| 属性            | 类型              | 描述                           |
+| --------------- | ----------------- | ------------------------------------- |
+| **`container`** | `string` | 预览容器的 HTML 元素 ID |
+
+### CaptureOptions
+
+| 属性           | 类型               | 描述                           |
+| -------------- | ------------------ | ------------------------------------- |
+| **`quality`**  | `number` | 图像质量（1-100）（可选）      |
+| **`saveToGallery`** | `boolean` | 保存到设备图库（可选） |
+
+### RecordingOptions
+
+| 属性              | 类型               | 描述                              |
+| ----------------- | ------------------ | ---------------------------------------- |
+| **`maxDuration`** | `number` | 最大录制时长（秒）（可选） |
+| **`quality`**     | `string` | 视频质量：'high' \| 'medium' \| 'low'（可选） |
+
+### CaptureResult
+
+| 属性           | 类型              | 描述                |
+| -------------- | ----------------- | -------------------------- |
+| **`filePath`** | `string` | 拍摄文件的路径  |
+| **`fileUrl`**  | `string` | 访问文件的 URL     |
+
+### CameraInfo
+
+| 属性              | 类型              | 描述                |
+| ----------------- | ----------------- | -------------------------- |
+| **`model`**       | `string` | 相机型号名称          |
+| **`serialNumber`** | `string` | 相机序列号      |
+| **`firmwareVersion`** | `string` | 固件版本         |
+| **`batteryLevel`** | `number` | 电池电量（0-100）     |
+
+### ExposureOptions
+
+| 属性         | 类型               | 描述                                    |
+| ------------ | ------------------ | ---------------------------------------------- |
+| **`mode`**   | `string` | 曝光模式：'auto' \| 'manual' \| 'iso' |
+| **`iso`**    | `number` | ISO 值（100、200、400 等）（可选）     |
+| **`shutter`** | `number` | 快门速度（可选）                      |
+
+### WhiteBalanceOptions
+
+| 属性       | 类型              | 描述                                            |
+| ---------- | ----------------- | ------------------------------------------------------ |
+| **`mode`** | `string` | 白平衡：'auto' \| 'daylight' \| 'cloudy' \| 'tungsten' \| 'fluorescent' |
+
+## 完整示例
+
+```typescript
+import { Ricoh360Camera } from '@capgo/capacitor-ricoh360-camera';
+
+class Camera360Controller {
+  async setup() {
+    try {
+      // 初始化
+      await Ricoh360Camera.initialize();
+
+      // 连接到相机
+      await Ricoh360Camera.connect({
+        ssid: 'THETAYL12345678',
+        password: '12345678'
+      });
+
+      // 获取相机信息
+      const info = await Ricoh360Camera.getCameraInfo();
+      console.log('已连接到:', info.model);
+      console.log('电池电量:', info.batteryLevel + '%');
+
+      // 配置曝光
+      await Ricoh360Camera.setExposure({
+        mode: 'auto'
+      });
+
+      // 配置白平衡
+      await Ricoh360Camera.setWhiteBalance({
+        mode: 'auto'
+      });
+
+      // 启动预览
+      await Ricoh360Camera.startPreview({
+        container: 'camera-preview'
+      });
+
+    } catch (error) {
+      console.error('设置相机失败:', error);
+    }
+  }
+
+  async takePhoto() {
+    try {
+      const result = await Ricoh360Camera.capturePhoto({
+        quality: 95,
+        saveToGallery: true
+      });
+      console.log('照片已拍摄:', result.filePath);
+      return result;
+    } catch (error) {
+      console.error('拍摄照片失败:', error);
+    }
+  }
+
+  async recordVideo(durationSeconds: number) {
+    try {
+      // 开始录制
+      await Ricoh360Camera.startRecording({
+        maxDuration: durationSeconds,
+        quality: 'high'
+      });
+
+      console.log('录制已开始...');
+
+      // 持续时间后停止
+      setTimeout(async () => {
+        const result = await Ricoh360Camera.stopRecording();
+        console.log('视频已保存:', result.filePath);
+      }, durationSeconds * 1000);
+
+    } catch (error) {
+      console.error('录制视频失败:', error);
+    }
+  }
+
+  async cleanup() {
+    try {
+      await Ricoh360Camera.stopPreview();
+      await Ricoh360Camera.disconnect();
+      console.log('相机已断开连接');
+    } catch (error) {
+      console.error('清理失败:', error);
+    }
+  }
+}
+
+// 使用方法
+const camera = new Camera360Controller();
+await camera.setup();
+await camera.takePhoto();
+await camera.recordVideo(10); // 10 秒
+await camera.cleanup();
+```
+
+## 最佳实践
+
+- 在连接到相机之前始终初始化插件
+- 确保设备已连接到相机的 WiFi 网络
+- 优雅地处理错误，特别是连接失败
+- 完成后停止预览并断开连接以节省电池
+- 在长时间录制之前检查相机电池电量
+- 在实际的 Ricoh Theta 硬件上进行测试
+- 根据存储限制使用适当的视频质量
+
+## 故障排除
+
+### 连接问题
+
+- 验证相机已开机
+- 检查 WiFi SSID 和密码是否正确
+- 确保没有其他应用连接到相机
+- 如果连接失败，请重置相机 WiFi 设置
+
+### 预览未显示
+
+- 验证 HTML 容器元素是否存在
+- 检查相机权限是否已授予
+- 确保在成功连接后启动预览
+
+### 拍摄失败
+
+- 检查可用存储空间
+- 验证相机电池电量是否充足
+- 确保相机未处于睡眠模式

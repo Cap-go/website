@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-barometer"
+locale: zh
+description: 从设备传感器访问大气压力和海拔数据的设备气压计读数。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 从设备传感器访问气压和海拔数据，用于天气和健身应用。
+  image:
+    file: ~public/icons/plugins/barometer.svg
+  actions:
+    - text: 入门指南
+      link: /docs/plugins/barometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-barometer/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="气压监测" icon="rocket">
+    实时大气压力读数
+  </Card>
+  <Card title="海拔计算" icon="star">
+    从气压变化推导相对海拔
+  </Card>
+  <Card title="事件监听器" icon="setting">
+    订阅气压变化事件
+  </Card>
+  <Card title="跨平台" icon="laptop">
+    适用于配备气压计传感器的 iOS 和 Android 设备
+  </Card>
+  <Card title="入门指南" icon="open-book">
+    查看[入门指南](/docs/plugins/barometer/getting-started/)以安装和配置插件。
+  </Card>
+</CardGrid>

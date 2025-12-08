@@ -1,0 +1,189 @@
+---
+title: Memulai
+description: Pelajari cara menginstal Capacitor+ sebagai pengganti drop-in untuk paket Capacitor resmi.
+sidebar:
+  order: 2
+locale: id
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+## Instalasi Proyek Baru
+
+<Steps>
+1. **Instal paket inti**
+   ```bash
+   npm install @capacitor-plus/core @capacitor-plus/cli
+   ```
+
+2. **Tambahkan paket platform**
+   ```bash
+   npm install @capacitor-plus/android  # for Android
+   npm install @capacitor-plus/ios      # for iOS
+   ```
+
+3. **Inisialisasi Capacitor**
+   <PackageManagers type="exec" pkg="cap" args="init" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+4. **Tambahkan platform**
+   <PackageManagers type="exec" pkg="cap" args="add android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="add ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Migrasi dari Capacitor Resmi
+
+Jika Anda memiliki proyek Capacitor yang sudah ada, migrasi ke Capacitor+ sangat mudah:
+
+<Steps>
+1. **Hapus paket resmi**
+   ```bash
+   npm uninstall @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios
+   ```
+
+2. **Instal paket Capacitor+**
+   ```bash
+   npm install @capacitor-plus/core @capacitor-plus/cli
+   npm install @capacitor-plus/android  # if using Android
+   npm install @capacitor-plus/ios      # if using iOS
+   ```
+
+3. **Sinkronkan proyek Anda**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+<Aside type="note">
+  Tidak perlu perubahan kode! Capacitor+ memiliki API yang sama dengan Capacitor resmi. Impor dan kode Anda tetap sama persis.
+</Aside>
+
+## Penggunaan
+
+Karena Capacitor+ kompatibel dengan API, kode Anda yang ada akan berfungsi tanpa perubahan:
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { registerPlugin } from '@capacitor/core';
+
+// Check platform
+const platform = Capacitor.getPlatform();
+console.log('Running on:', platform);
+
+// Check if native
+if (Capacitor.isNativePlatform()) {
+  console.log('Running on native platform');
+}
+
+// Register a custom plugin
+const MyPlugin = registerPlugin('MyPlugin');
+```
+
+### Dengan Plugin Capacitor Resmi
+
+Semua plugin Capacitor resmi bekerja dengan lancar:
+
+```typescript
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { Geolocation } from '@capacitor/geolocation';
+import { Storage } from '@capacitor/preferences';
+
+// Camera
+const photo = await Camera.getPhoto({
+  quality: 90,
+  resultType: CameraResultType.Uri
+});
+
+// Geolocation
+const position = await Geolocation.getCurrentPosition();
+
+// Storage
+await Storage.set({ key: 'name', value: 'John' });
+```
+
+### Dengan Plugin Capgo
+
+Plugin Capgo bekerja sempurna dengan Capacitor+:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// Live updates
+await CapacitorUpdater.notifyAppReady();
+
+// Screen orientation
+await ScreenOrientation.lock({ orientation: 'portrait' });
+
+// Flashlight
+await CapacitorFlash.toggle();
+```
+
+## Cara Kerja Sinkronisasi
+
+```
+┌─────────────────────┐     ┌──────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  ionic-team/        │     │  CI/CD           │     │  Claude Code     │     │  npm publish    │
+│  capacitor          │────▶│  Pipeline        │────▶│  Security Review │────▶│  @capacitor-plus│
+│  (upstream)         │     │  (daily sync)    │     │  (AI analysis)   │     │  packages       │
+└─────────────────────┘     └──────────────────┘     └──────────────────┘     └─────────────────┘
+```
+
+1. **Sinkronisasi Harian**: GitHub Actions mengambil perubahan terbaru dari `ionic-team/capacitor`
+2. **Pembuatan PR**: Perubahan diusulkan sebagai pull request ke cabang `plus`
+3. **Validasi CI**: Test suite lengkap berjalan (lint, unit tests, iOS build, Android build)
+4. **Tinjauan Keamanan**: Analisis bertenaga AI memeriksa kerentanan dan perubahan yang merusak
+5. **Auto-Merge**: Hanya jika CI lulus DAN tinjauan keamanan menyetujui
+6. **Auto-Publish**: Versi baru dipublikasikan ke npm di bawah `@capacitor-plus/*`
+
+## Detail Tinjauan Keamanan
+
+Setiap sinkronisasi upstream dianalisis untuk:
+
+| Pemeriksaan | Yang Ditangkap |
+|-------|-----------------|
+| **Keamanan** | Command injection, XSS, path traversal, hardcoded secrets |
+| **Perubahan yang Merusak** | API yang dihapus/diubah namanya, signature yang diubah, perubahan konfigurasi |
+| **Stabilitas** | Null dereferences, exception yang tidak ditangani, race conditions, memory leaks |
+| **Keamanan Data** | Skenario kehilangan data, pelanggaran privasi, penyimpanan tidak aman |
+| **Integritas Kode** | Kode yang disamarkan, panggilan jaringan mencurigakan, backdoors |
+
+<Aside type="caution">
+  Jika ada masalah terdeteksi, PR akan ditandai untuk ditinjau secara manual dan TIDAK akan digabungkan secara otomatis. Ini memastikan Anda selalu mendapatkan rilis yang stabil dan aman.
+</Aside>
+
+## Mengirimkan PR Anda
+
+Memiliki PR yang terjebak di repo Capacitor resmi? Dapatkan merge di Capacitor+:
+
+<Steps>
+1. **Buka issue** di [repo Capacitor+](https://github.com/Cap-go/capacitor-plus/issues) yang menautkan ke PR upstream Anda
+
+2. **Atau kirimkan langsung** sebagai PR ke cabang `plus`
+
+3. Tim akan meninjau, menjalankan CI, dan menggabungkan jika lulus
+</Steps>
+
+Dengan cara ini Anda dan orang lain dapat mengambil manfaat dari pekerjaan Anda segera tanpa menunggu siklus rilis upstream.
+
+## FAQ
+
+### Apakah ini siap untuk produksi?
+
+Ya. Capacitor+ digunakan di aplikasi produksi. Setiap rilis melewati test suite yang sama dengan Capacitor resmi, ditambah analisis keamanan tambahan.
+
+### Apakah plugin resmi saya masih akan bekerja?
+
+Ya. Semua plugin `@capacitor/*` bekerja dengan Capacitor+ langsung dari kotak.
+
+### Bagaimana jika upstream merilis perubahan yang merusak?
+
+Tinjauan keamanan AI menandai perubahan yang merusak untuk ditinjau secara manual. Anda akan melihat perubahan yang didokumentasikan sebelum digabungkan.
+
+### Bagaimana cara melaporkan masalah?
+
+Ajukan issue di [repo GitHub Capacitor+](https://github.com/Cap-go/capacitor-plus/issues). Untuk masalah yang juga mempengaruhi Capacitor resmi, kami akan membantu koordinasi upstream.
+
+### Bisakah saya berkontribusi?
+
+Tentu saja! PR sangat diterima. Anda dapat mengirimkan perbaikan secara langsung atau meminta agar PR upstream tertentu digabungkan.

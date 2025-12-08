@@ -1,0 +1,303 @@
+---
+title: "Accelerometer 시작하기"
+description: "Capacitor 앱에 가속도계 감지를 통합하는 방법을 알아보세요"
+locale: ko
+---
+
+이 가이드는 Capacitor Accelerometer 플러그인을 애플리케이션에 통합하는 과정을 안내합니다.
+
+## 설치
+
+npm을 사용하여 플러그인을 설치합니다:
+
+```bash
+npm install @capgo/capacitor-accelerometer
+npx cap sync
+```
+
+## 플랫폼 구성
+
+### iOS
+추가 구성이 필요하지 않습니다. 가속도계는 항상 사용 가능합니다.
+
+### Android
+추가 구성이 필요하지 않습니다. 가속도계는 항상 사용 가능합니다.
+
+### Web
+플러그인은 DeviceMotion API를 사용합니다. 프로덕션에서는 HTTPS가 필요합니다.
+
+## 기본 사용법
+
+### 플러그인 가져오기
+
+```typescript
+import { Accelerometer } from '@capgo/capacitor-accelerometer';
+```
+
+### 모니터링 시작
+
+```typescript
+const startAccelerometer = async () => {
+  await Accelerometer.start({
+    interval: 100 // 밀리초 단위의 업데이트 간격
+  });
+
+  console.log('Accelerometer started');
+};
+```
+
+### 가속도 이벤트 수신
+
+```typescript
+Accelerometer.addListener('accelerationChange', (data) => {
+  console.log('X:', data.x);
+  console.log('Y:', data.y);
+  console.log('Z:', data.z);
+  console.log('Timestamp:', data.timestamp);
+});
+```
+
+### 현재 측정값 가져오기
+
+```typescript
+const getCurrentAcceleration = async () => {
+  const reading = await Accelerometer.getCurrentAcceleration();
+  console.log('Current acceleration:', reading);
+};
+```
+
+### 모니터링 중지
+
+```typescript
+const stopAccelerometer = async () => {
+  await Accelerometer.stop();
+  console.log('Accelerometer stopped');
+};
+```
+
+## 완전한 예제
+
+흔들기 감지가 포함된 완전한 예제:
+
+```typescript
+import { Accelerometer } from '@capgo/capacitor-accelerometer';
+
+class AccelerometerService {
+  private listener: any;
+  private lastX = 0;
+  private lastY = 0;
+  private lastZ = 0;
+  private shakeThreshold = 15;
+
+  async initialize() {
+    await Accelerometer.start({ interval: 100 });
+
+    this.listener = Accelerometer.addListener('accelerationChange', (data) => {
+      this.handleAcceleration(data);
+    });
+  }
+
+  handleAcceleration(data: any) {
+    // 델타 계산
+    const deltaX = Math.abs(data.x - this.lastX);
+    const deltaY = Math.abs(data.y - this.lastY);
+    const deltaZ = Math.abs(data.z - this.lastZ);
+
+    // 흔들기 확인
+    if (deltaX > this.shakeThreshold ||
+        deltaY > this.shakeThreshold ||
+        deltaZ > this.shakeThreshold) {
+      this.onShake();
+    }
+
+    // 마지막 값 업데이트
+    this.lastX = data.x;
+    this.lastY = data.y;
+    this.lastZ = data.z;
+
+    // UI 업데이트
+    this.updateDisplay(data);
+  }
+
+  onShake() {
+    console.log('Device shaken!');
+    // 흔들기 액션 트리거
+  }
+
+  updateDisplay(data: any) {
+    console.log(`X: ${data.x.toFixed(2)} m/s²`);
+    console.log(`Y: ${data.y.toFixed(2)} m/s²`);
+    console.log(`Z: ${data.z.toFixed(2)} m/s²`);
+
+    // 크기 계산
+    const magnitude = Math.sqrt(
+      data.x * data.x +
+      data.y * data.y +
+      data.z * data.z
+    );
+    console.log(`Magnitude: ${magnitude.toFixed(2)} m/s²`);
+  }
+
+  async cleanup() {
+    if (this.listener) {
+      this.listener.remove();
+    }
+    await Accelerometer.stop();
+  }
+}
+
+// 사용법
+const accelService = new AccelerometerService();
+accelService.initialize();
+
+// 완료 시 정리
+// accelService.cleanup();
+```
+
+## 측정값 이해하기
+
+### 가속도 축
+- **X축**: 왼쪽(-) ~ 오른쪽(+)
+- **Y축**: 아래(-) ~ 위(+)
+- **Z축**: 뒤(-) ~ 앞(+)
+
+### 중력
+- 정지 상태의 기기는 한 축에서 ~9.8 m/s²를 표시합니다(중력)
+- 움직이는 기기는 중력에 추가로 가속도를 표시합니다
+
+### 단위
+- 초당 미터 제곱(m/s²)으로 측정
+- 중력 = 9.8 m/s²
+
+## 일반적인 사용 사례
+
+### 흔들기 감지
+
+```typescript
+class ShakeDetector {
+  private lastUpdate = 0;
+  private lastX = 0;
+  private lastY = 0;
+  private lastZ = 0;
+
+  detectShake(x: number, y: number, z: number): boolean {
+    const currentTime = Date.now();
+
+    if (currentTime - this.lastUpdate > 100) {
+      const deltaX = Math.abs(x - this.lastX);
+      const deltaY = Math.abs(y - this.lastY);
+      const deltaZ = Math.abs(z - this.lastZ);
+
+      this.lastUpdate = currentTime;
+      this.lastX = x;
+      this.lastY = y;
+      this.lastZ = z;
+
+      return deltaX + deltaY + deltaZ > 15;
+    }
+
+    return false;
+  }
+}
+```
+
+### 기울기 감지
+
+```typescript
+class TiltDetector {
+  getTiltAngles(x: number, y: number, z: number) {
+    const roll = Math.atan2(y, z) * (180 / Math.PI);
+    const pitch = Math.atan2(-x, Math.sqrt(y * y + z * z)) * (180 / Math.PI);
+
+    return { roll, pitch };
+  }
+
+  isDeviceFlat(z: number): boolean {
+    return Math.abs(z - 9.8) < 1.0;
+  }
+
+  isDeviceUpright(y: number): boolean {
+    return Math.abs(y - 9.8) < 2.0;
+  }
+}
+```
+
+### 걸음 수 카운터
+
+```typescript
+class StepCounter {
+  private steps = 0;
+  private lastMagnitude = 0;
+  private threshold = 11;
+
+  processAcceleration(x: number, y: number, z: number) {
+    const magnitude = Math.sqrt(x * x + y * y + z * z);
+
+    if (magnitude > this.threshold &&
+        this.lastMagnitude < this.threshold) {
+      this.steps++;
+      console.log('Steps:', this.steps);
+    }
+
+    this.lastMagnitude = magnitude;
+  }
+}
+```
+
+## 모범 사례
+
+1. **적절한 간격 선택**: 반응성과 배터리 수명의 균형
+   - 게임: 16-50ms
+   - 피트니스: 100-200ms
+   - 일반: 200-500ms
+
+2. **리스너 제거**: 완료 시 항상 정리
+3. **노이즈 필터링**: 더 부드러운 데이터를 위해 이동 평균 사용
+4. **배터리 고려**: 고주파 폴링은 배터리를 소모합니다
+5. **실제 기기에서 테스트**: 시뮬레이터는 정확한 데이터를 제공하지 않습니다
+
+## 성능 팁
+
+### 디바운싱
+
+```typescript
+class AccelerometerDebouncer {
+  private timeout: any;
+
+  debounce(callback: Function, delay: number) {
+    return (...args: any[]) => {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => callback(...args), delay);
+    };
+  }
+}
+```
+
+### 데이터 스무딩
+
+```typescript
+class AccelerometerFilter {
+  private alpha = 0.8;
+  private filteredX = 0;
+  private filteredY = 0;
+  private filteredZ = 0;
+
+  filter(x: number, y: number, z: number) {
+    this.filteredX = this.alpha * x + (1 - this.alpha) * this.filteredX;
+    this.filteredY = this.alpha * y + (1 - this.alpha) * this.filteredY;
+    this.filteredZ = this.alpha * z + (1 - this.alpha) * this.filteredZ;
+
+    return {
+      x: this.filteredX,
+      y: this.filteredY,
+      z: this.filteredZ
+    };
+  }
+}
+```
+
+## 다음 단계
+
+- 완전한 메서드 문서는 [API Reference](https://github.com/Cap-go/capacitor-accelerometer#api)를 살펴보세요
+- 고급 사용법은 [예제 앱](https://github.com/Cap-go/capacitor-accelerometer/tree/main/example)을 확인하세요
+- 완전한 구현 예제는 [튜토리얼](/plugins-tutorials/capacitor-accelerometer)을 참조하세요

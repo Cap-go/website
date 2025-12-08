@@ -1,0 +1,93 @@
+---
+title: Konfigurasi Pengujian Sandbox Android
+locale: id
+description: Pelajari cara mengatur pengujian sandbox untuk pembelian dalam aplikasi di Android menggunakan Google Play Console.
+sidebar:
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Menguji pembelian dalam aplikasi memerlukan konfigurasi yang tepat di Google Play Console. Panduan ini akan memandu Anda melalui pengaturan pengujian sandbox untuk aplikasi Android Anda.
+
+## Prasyarat
+
+Anda memerlukan akun Google Play Console aktif dengan langganan saat ini (diperpanjang setiap tahun).
+
+## Proses Pengaturan
+
+<Steps>
+
+1. **Tambahkan Akun Pengujian**
+
+   Navigasikan ke Google Play Console Anda, pilih aplikasi Anda, dan buka **Setup > License testing**.
+
+   Tambahkan akun Google utama yang terkait dengan perangkat Android yang Anda gunakan untuk pengujian.
+
+   ![Add testing account](/native-purchases/android/sandbox-testing/add-testing-account.webp)
+
+2. **Buat Track Pengujian**
+
+   Buka **Testing > Closed testing** atau **Testing > Internal testing** dan buat track baru.
+
+   Anda harus mengunggah setidaknya satu versi aplikasi Anda yang sudah ditandatangani ke track ini.
+
+   ![Create testing track](/native-purchases/android/sandbox-testing/create-testing-track.webp)
+
+3. **Buat Daftar Tester**
+
+   Setelah mengatur track pengujian, buat daftar email dan tambahkan alamat email akun perangkat pengujian.
+
+   ![Create tester list](/native-purchases/android/sandbox-testing/create-tester-list.webp)
+
+4. **Gabung Program Pengujian**
+
+   Buka URL opt-in dari perangkat uji Anda dan klik tombol **"Become a tester"** untuk mendaftar.
+
+   ![Join testing](/native-purchases/android/sandbox-testing/join-testing-program.webp)
+
+5. **Unggah APK yang Ditandatangani**
+
+   Generate APK yang ditandatangani atau gunakan Android App Bundle untuk mengunggah aplikasi Anda ke track pengujian.
+
+   Rolling out tidak diperlukan - cukup unggah dan tunggu persetujuan.
+
+   ![Upload APK](/native-purchases/android/sandbox-testing/upload-signed-apk.webp)
+
+6. **Build dan Uji**
+
+   Jalankan aplikasi Anda di perangkat uji. Saat mencoba melakukan pembelian, Anda akan melihat pesan:
+
+   > "This is a test order; you will not be charged."
+
+   ![Test purchase](/native-purchases/android/sandbox-testing/test-purchase-confirmation.webp)
+
+</Steps>
+
+## Catatan Penting
+
+- Akun uji tidak akan dikenakan biaya untuk pembelian
+- Pembelian uji menggunakan alur yang sama dengan pembelian produksi
+- Anda dapat menguji semua fitur langganan termasuk uji coba dan penawaran pengantar
+- Langganan uji memiliki periode perpanjangan yang dipercepat untuk pengujian lebih cepat
+
+## Pemecahan Masalah
+
+**Produk tidak muncul di mode uji:**
+- Pastikan aplikasi Anda diunggah ke track pengujian
+- Verifikasi akun uji ditambahkan ke License testing
+- Periksa bahwa produk aktif di Google Play Console
+
+**Error "Item not available":**
+- Tunggu 2-3 jam setelah membuat produk agar tersedia
+- Pastikan nama paket aplikasi Anda cocok dengan yang di Play Console
+- Verifikasi Anda masuk dengan akun uji
+
+**Pembelian uji muncul sebagai tagihan nyata:**
+- Periksa kembali akun ditambahkan ke License testing
+- Pastikan Anda menggunakan build dari track pengujian
+- Verifikasi banner pengujian muncul saat pembelian
+
+## Sumber Daya Tambahan
+
+Untuk detail lebih lanjut, rujuk ke [dokumentasi resmi Google Play](https://developer.android.com/google/play/billing/test) tentang pengujian pembelian dalam aplikasi.

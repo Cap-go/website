@@ -1,0 +1,111 @@
+---
+title: 🔹 organisation
+description: 🏢 Verwalten Sie Ihre Organisationen in Capgo Cloud für Teamzusammenarbeit und App-Verwaltung.
+sidebar_label: organisation
+sidebar:
+  order: 9
+locale: de
+---
+
+🏢 Verwalten Sie Ihre Organisationen in Capgo Cloud für Teamzusammenarbeit und App-Verwaltung.
+
+### <a id="organisation-list"></a> 📋 **List**
+
+**Alias:** `l`
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+📋 Auflisten aller Organisationen, auf die Sie in Capgo Cloud Zugriff haben.
+
+**Beispiel:**
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+**Optionen:**
+
+| Parameter          | Typ          | Beschreibung          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | API-Schlüssel, um mit Ihrem Konto zu verknüpfen |
+| **--supa-host** | <code>string</code> | Benutzerdefinierte Supabase-Host-URL (für Self-Hosting oder Capgo-Entwicklung) |
+| **--supa-anon** | <code>string</code> | Benutzerdefinierter Supabase-Anon-Schlüssel (für Self-Hosting) |
+
+### <a id="organisation-add"></a> ➕ **Add**
+
+**Alias:** `a`
+
+```bash
+npx @capgo/cli@latest organisation add
+```
+
+➕ Erstellen Sie eine neue Organisation in Capgo Cloud für Teamzusammenarbeit.
+
+**Beispiel:**
+
+```bash
+npx @capgo/cli@latest organisation add --name "My Company" --email admin@mycompany.com
+```
+
+**Optionen:**
+
+| Parameter          | Typ          | Beschreibung          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | Organisationsname |
+| **-e,** | <code>string</code> | Verwaltungs-E-Mail für die Organisation |
+| **-a,** | <code>string</code> | API-Schlüssel, um mit Ihrem Konto zu verknüpfen |
+| **--supa-host** | <code>string</code> | Benutzerdefinierte Supabase-Host-URL (für Self-Hosting oder Capgo-Entwicklung) |
+| **--supa-anon** | <code>string</code> | Benutzerdefinierter Supabase-Anon-Schlüssel (für Self-Hosting) |
+
+### <a id="organisation-set"></a> ⚙️ **Set**
+
+**Alias:** `s`
+
+```bash
+npx @capgo/cli@latest organisation set
+```
+
+⚙️ Aktualisieren Sie Organisationseinstellungen wie Name und Verwaltungs-E-Mail.
+
+**Beispiel:**
+
+```bash
+npx @capgo/cli@latest organisation set ORG_ID --name "Updated Company Name"
+```
+
+**Optionen:**
+
+| Parameter          | Typ          | Beschreibung          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | Organisationsname |
+| **-e,** | <code>string</code> | Verwaltungs-E-Mail für die Organisation |
+| **-a,** | <code>string</code> | API-Schlüssel, um mit Ihrem Konto zu verknüpfen |
+| **--supa-host** | <code>string</code> | Benutzerdefinierte Supabase-Host-URL (für Self-Hosting oder Capgo-Entwicklung) |
+| **--supa-anon** | <code>string</code> | Benutzerdefinierter Supabase-Anon-Schlüssel (für Self-Hosting) |
+
+### <a id="organisation-delete"></a> 🗑️ **Delete**
+
+**Alias:** `d`
+
+```bash
+npx @capgo/cli@latest organisation delete
+```
+
+🗑️ Löschen Sie eine Organisation aus Capgo Cloud. Diese Aktion kann nicht rückgängig gemacht werden.
+Nur Organisationsinhaber können Organisationen löschen.
+
+**Beispiel:**
+
+```bash
+npx @capgo/cli@latest organisation delete ORG_ID
+```
+
+**Optionen:**
+
+| Parameter          | Typ          | Beschreibung          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | API-Schlüssel, um mit Ihrem Konto zu verknüpfen |
+| **--supa-host** | <code>string</code> | Benutzerdefinierte Supabase-Host-URL (für Self-Hosting oder Capgo-Entwicklung) |
+| **--supa-anon** | <code>string</code> | Benutzerdefinierter Supabase-Anon-Schlüssel (für Self-Hosting) |

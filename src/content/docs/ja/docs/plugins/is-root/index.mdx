@@ -1,0 +1,122 @@
+---
+title: "@capgo/capacitor-is-root"
+description: 包括的なセキュリティチェックとデバイス整合性検証を備えた、Capacitor アプリ向けの Root および脱獄検出プラグイン。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+locale: ja
+hero:
+  tagline: root 化された Android デバイスと脱獄された iOS デバイスを検出し、アプリのセキュリティを強化し、機密データを保護します。
+  image:
+    file: ~public/icons/plugins/is-root.svg
+  actions:
+    - text: はじめに
+      link: /docs/plugins/is-root/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-is-root/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概要
+
+Capacitor Is Root プラグインは、Android デバイスの包括的な root および脱獄検出とエミュレーター検出を提供します。このプラグインは、セキュリティリスクをもたらす可能性のある侵害されたデバイスやエミュレートされた環境を識別することで、アプリのセキュリティを強化するのに役立ちます。
+
+<CardGrid stagger>
+  <Card title="Root 検出" icon="rocket">
+    複数の方法による高度な Android root 検出 🔒
+  </Card>
+  <Card title="エミュレーター検出" icon="approve-check">
+    エミュレートされた環境とテストフレームワークを識別 🛡️
+  </Card>
+  <Card title="セキュリティ検証" icon="approve-check">
+    精度向上のための複数の検出技術 ✅
+  </Card>
+  <Card title="Android 特化" icon="laptop">
+    Android セキュリティ評価のための専門的検出 🤖
+  </Card>
+</CardGrid>
+
+## インストール
+
+```bash
+npm install @capgo/capacitor-is-root
+npx cap sync
+```
+
+## コア API メソッド
+
+### Root 検出
+- `isRooted()` - デフォルトメソッドを使用して包括的な root 検出を実行
+- `isRootedWithBusyBox()` - BusyBox チェックを含む拡張検出
+- `detectRootManagementApps()` - インストールされている root 管理アプリケーションを識別
+- `checkForSuBinary()` - システムパスに `su` バイナリが存在するかチェック
+
+### エミュレーター検出
+- `isRunningOnEmulator()` - 一般的な Android エミュレーターのフィンガープリントを検出
+
+## 検出技術
+
+プラグインは複数の検出方法を採用しています：
+
+### Root 検出
+- root 管理アプリケーションのチェック（SuperSU、Magisk など）
+- 疑わしいシステムプロパティのスキャン
+- テストビルドタグとデバッグフラグの識別
+- 危険なバイナリの場所の検証
+- システムパスのパーミッション検査
+
+### エミュレーター検出
+- ハードウェアフィンガープリント分析
+- ビルドプロパティ検査
+- エミュレーター固有の特性
+- 仮想環境インジケーター
+
+## 使用例
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// 基本的な root 検出
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('デバイスは root 化されています');
+  // root 化されたデバイスを適切に処理
+}
+
+// BusyBox を使用した拡張 root 検出
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('デバイスは root 化されています（拡張チェック）');
+}
+
+// エミュレーターチェック
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('エミュレーター上で実行中');
+}
+
+// root 管理アプリの検出
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('root 管理アプリが検出されました');
+}
+```
+
+## セキュリティに関する考慮事項
+
+- より高い精度のために複数の検出方法を使用
+- 検出された環境に対して段階的な機能低下を実装
+- セキュリティ対策を実装する際にユーザーのプライバシーを考慮
+- 検出方法が進化するため、定期的な更新を推奨
+
+## ドキュメント
+
+詳細な実装ガイドと高度なセキュリティパターンについては、[完全なドキュメント](/docs/plugins/is-root/getting-started/)をご覧ください。

@@ -1,0 +1,478 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Native Audio untuk pemutaran audio berkinerja tinggi di aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/native-audio" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek asli**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Tambahkan file audio**
+   Tempatkan file audio Anda di folder platform yang sesuai:
+   - **iOS**: `ios/App/App/sounds/`
+   - **Android**: `android/app/src/main/res/raw/`
+</Steps>
+
+## Penggunaan
+
+Impor plugin dan pramuat file audio sebelum diputar:
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+// Pramuat file audio
+const preloadAudio = async () => {
+  // Pramuat sederhana untuk suara pendek
+  await NativeAudio.preload({
+    assetId: 'click',
+    assetPath: 'sounds/click.mp3',
+    audioChannelNum: 1,
+    isUrl: false
+  });
+
+  // Pramuat kompleks untuk musik/audio lebih panjang
+  await NativeAudio.preloadComplex({
+    assetId: 'background-music',
+    assetPath: 'sounds/background.mp3',
+    audioChannelNum: 1,
+    volume: 0.5,
+    delay: 0,
+    isUrl: false
+  });
+};
+
+// Putar audio
+const playSound = async () => {
+  await NativeAudio.play({
+    assetId: 'click'
+  });
+};
+
+// Putar dengan opsi
+const playMusic = async () => {
+  await NativeAudio.play({
+    assetId: 'background-music',
+    time: 0 // Mulai dari awal
+  });
+};
+
+// Loop audio
+const loopMusic = async () => {
+  await NativeAudio.loop({
+    assetId: 'background-music'
+  });
+};
+
+// Hentikan audio
+const stopMusic = async () => {
+  await NativeAudio.stop({
+    assetId: 'background-music'
+  });
+};
+
+// Unload saat selesai
+const cleanup = async () => {
+  await NativeAudio.unload({
+    assetId: 'click'
+  });
+  await NativeAudio.unload({
+    assetId: 'background-music'
+  });
+};
+```
+
+## Referensi API
+
+### preload(options)
+
+Pramuat file audio untuk pemutaran sederhana (terbaik untuk suara pendek).
+
+```typescript
+interface PreloadOptions {
+  assetId: string;
+  assetPath: string;
+  audioChannelNum?: number;
+  isUrl?: boolean;
+}
+
+await NativeAudio.preload({
+  assetId: 'sound-effect',
+  assetPath: 'sounds/effect.mp3',
+  audioChannelNum: 1,
+  isUrl: false
+});
+```
+
+### preloadComplex(options)
+
+Pramuat audio dengan opsi lanjutan (terbaik untuk musik/audio latar).
+
+```typescript
+interface PreloadComplexOptions {
+  assetId: string;
+  assetPath: string;
+  volume?: number; // 0.0 hingga 1.0
+  audioChannelNum?: number;
+  delay?: number;
+  isUrl?: boolean;
+  fadeDuration?: number;
+}
+
+await NativeAudio.preloadComplex({
+  assetId: 'theme-song',
+  assetPath: 'sounds/theme.mp3',
+  volume: 0.7,
+  audioChannelNum: 2,
+  isUrl: false
+});
+```
+
+### play(options)
+
+Memutar file audio yang telah dipramuat.
+
+```typescript
+interface PlayOptions {
+  assetId: string;
+  time?: number; // Waktu mulai dalam detik
+}
+
+await NativeAudio.play({
+  assetId: 'sound-effect',
+  time: 0
+});
+```
+
+### loop(options)
+
+Memutar file audio yang telah dipramuat secara berulang.
+
+```typescript
+await NativeAudio.loop({
+  assetId: 'background-music'
+});
+```
+
+### stop(options)
+
+Menghentikan pemutaran file audio.
+
+```typescript
+await NativeAudio.stop({
+  assetId: 'background-music'
+});
+```
+
+### pause(options)
+
+Menjeda pemutaran audio.
+
+```typescript
+await NativeAudio.pause({
+  assetId: 'background-music'
+});
+```
+
+### resume(options)
+
+Melanjutkan audio yang dijeda.
+
+```typescript
+await NativeAudio.resume({
+  assetId: 'background-music'
+});
+```
+
+### setVolume(options)
+
+Mengatur volume untuk aset audio.
+
+```typescript
+interface SetVolumeOptions {
+  assetId: string;
+  volume: number; // 0.0 hingga 1.0
+}
+
+await NativeAudio.setVolume({
+  assetId: 'background-music',
+  volume: 0.3
+});
+```
+
+### getDuration(options)
+
+Mendapatkan durasi file audio dalam detik.
+
+```typescript
+const { duration } = await NativeAudio.getDuration({
+  assetId: 'background-music'
+});
+console.log(`Duration: ${duration} seconds`);
+```
+
+### getCurrentTime(options)
+
+Mendapatkan waktu pemutaran saat ini dalam detik.
+
+```typescript
+const { currentTime } = await NativeAudio.getCurrentTime({
+  assetId: 'background-music'
+});
+console.log(`Current time: ${currentTime} seconds`);
+```
+
+### isPlaying(options)
+
+Memeriksa apakah audio sedang diputar.
+
+```typescript
+const { isPlaying } = await NativeAudio.isPlaying({
+  assetId: 'background-music'
+});
+console.log(`Is playing: ${isPlaying}`);
+```
+
+### unload(options)
+
+Membongkar file audio dari memori.
+
+```typescript
+await NativeAudio.unload({
+  assetId: 'sound-effect'
+});
+```
+
+## Penggunaan Lanjutan
+
+### Kelas Sound Manager
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+export class SoundManager {
+  private sounds: Map<string, boolean> = new Map();
+  private volume = 1.0;
+
+  async init() {
+    // Pramuat semua suara
+    await this.preloadSound('click', 'sounds/click.mp3');
+    await this.preloadSound('success', 'sounds/success.mp3');
+    await this.preloadSound('error', 'sounds/error.mp3');
+
+    // Pramuat musik
+    await this.preloadMusic('background', 'sounds/background.mp3', 0.5);
+  }
+
+  private async preloadSound(id: string, path: string) {
+    try {
+      await NativeAudio.preload({
+        assetId: id,
+        assetPath: path,
+        audioChannelNum: 1,
+        isUrl: false
+      });
+      this.sounds.set(id, true);
+    } catch (error) {
+      console.error(`Failed to preload ${id}:`, error);
+    }
+  }
+
+  private async preloadMusic(id: string, path: string, volume: number) {
+    try {
+      await NativeAudio.preloadComplex({
+        assetId: id,
+        assetPath: path,
+        volume,
+        audioChannelNum: 2,
+        isUrl: false
+      });
+      this.sounds.set(id, true);
+    } catch (error) {
+      console.error(`Failed to preload ${id}:`, error);
+    }
+  }
+
+  async playSound(id: string) {
+    if (!this.sounds.has(id)) {
+      console.warn(`Sound ${id} not preloaded`);
+      return;
+    }
+
+    try {
+      await NativeAudio.play({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to play ${id}:`, error);
+    }
+  }
+
+  async playMusic(id: string) {
+    if (!this.sounds.has(id)) return;
+
+    try {
+      await NativeAudio.loop({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to play music ${id}:`, error);
+    }
+  }
+
+  async stopMusic(id: string) {
+    try {
+      await NativeAudio.stop({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to stop ${id}:`, error);
+    }
+  }
+
+  async setMasterVolume(volume: number) {
+    this.volume = Math.max(0, Math.min(1, volume));
+
+    // Perbarui semua suara yang dimuat
+    for (const [id] of this.sounds) {
+      await NativeAudio.setVolume({
+        assetId: id,
+        volume: this.volume
+      });
+    }
+  }
+
+  async cleanup() {
+    for (const [id] of this.sounds) {
+      await NativeAudio.unload({ assetId: id });
+    }
+    this.sounds.clear();
+  }
+}
+```
+
+### Memuat dari URL
+
+```typescript
+// Muat audio dari URL
+await NativeAudio.preloadComplex({
+  assetId: 'remote-audio',
+  assetPath: 'https://example.com/audio.mp3',
+  isUrl: true,
+  volume: 0.8
+});
+```
+
+### Efek Fade In/Out
+
+```typescript
+const fadeIn = async (assetId: string, duration: number) => {
+  const steps = 20;
+  const stepDuration = duration / steps;
+
+  await NativeAudio.setVolume({ assetId, volume: 0 });
+  await NativeAudio.play({ assetId });
+
+  for (let i = 1; i <= steps; i++) {
+    await new Promise(resolve => setTimeout(resolve, stepDuration));
+    await NativeAudio.setVolume({
+      assetId,
+      volume: i / steps
+    });
+  }
+};
+
+const fadeOut = async (assetId: string, duration: number) => {
+  const steps = 20;
+  const stepDuration = duration / steps;
+
+  for (let i = steps; i >= 0; i--) {
+    await NativeAudio.setVolume({
+      assetId,
+      volume: i / steps
+    });
+    await new Promise(resolve => setTimeout(resolve, stepDuration));
+  }
+
+  await NativeAudio.stop({ assetId });
+};
+```
+
+## Praktik Terbaik
+
+1. **Pramuat saat inisialisasi aplikasi**
+   ```typescript
+   import { App } from '@capacitor/app';
+
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       await soundManager.init();
+     }
+   });
+   ```
+
+2. **Tangani kesalahan dengan baik**
+   ```typescript
+   try {
+     await NativeAudio.play({ assetId: 'sound' });
+   } catch (error) {
+     console.log('Audio playback failed, continuing silently');
+   }
+   ```
+
+3. **Unload audio yang tidak digunakan**
+   ```typescript
+   // Unload suara saat meninggalkan layar
+   ionViewWillLeave() {
+     this.unloadScreenSounds();
+   }
+   ```
+
+4. **Gunakan metode pramuat yang sesuai**
+   - `preload()` untuk efek suara pendek (< 5 detik)
+   - `preloadComplex()` untuk musik dan audio yang lebih panjang
+
+## Catatan Platform
+
+### iOS
+- Mendukung AAC, MP3, WAV, dan format Core Audio lainnya
+- Menggunakan AVAudioPlayer untuk audio kompleks
+- Menggunakan System Sound Services untuk audio sederhana
+- Mendukung audio latar dengan konfigurasi yang tepat
+
+### Android
+- Mendukung format MP3, OGG, WAV
+- Menggunakan SoundPool untuk audio sederhana
+- Menggunakan MediaPlayer untuk audio kompleks
+- Mungkin memerlukan izin WAKE_LOCK untuk pemutaran latar
+
+### Penempatan File
+
+#### iOS
+Tempatkan file di `ios/App/App/sounds/` atau buat referensi folder di Xcode.
+
+#### Android
+Tempatkan file di `android/app/src/main/res/raw/`.
+Catatan: Nama file harus huruf kecil tanpa karakter khusus.
+
+## Masalah Umum
+
+1. **Audio tidak diputar**
+   - Pastikan file berada di direktori yang benar
+   - Periksa kompatibilitas format file
+   - Verifikasi assetId cocok persis
+
+2. **Keterlambatan dalam pemutaran**
+   - Gunakan `preload()` untuk efek suara
+   - Pramuat sebelum Anda perlu memutar
+
+3. **Masalah memori**
+   - Unload file audio saat tidak diperlukan
+   - Jangan pramuat terlalu banyak file besar
+
+4. **Pemutaran latar**
+   - Konfigurasikan kemampuan audio latar pada iOS
+   - Tangani fokus audio pada Android

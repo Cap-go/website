@@ -1,0 +1,50 @@
+---
+title: "@capgo/capacitor-speech-recognition"
+locale: es
+description: Reconocimiento de voz natural y de baja latencia para aplicaciones Capacitor con paridad entre plataformas iOS y Android.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Reconocimiento de voz completo en el dispositivo con transcripción en tiempo real, resultados parciales transmitidos y paridad entre plataformas.
+  image:
+    file: ~public/icons/plugins/speech-recognition.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/speech-recognition/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-speech-recognition/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Transcripción en Tiempo Real" icon="rocket">
+    Obtén resultados parciales instantáneos mientras los usuarios hablan
+  </Card>
+  <Card title="Paridad Entre Plataformas" icon="star">
+    API y comportamiento consistentes en iOS y Android
+  </Card>
+  <Card title="Sesiones Segmentadas" icon="list-format">
+    Divide el reconocimiento en segmentos basados en silencio
+  </Card>
+  <Card title="Soporte de Puntuación" icon="pencil">
+    Puntuación automática en iOS 16+
+  </Card>
+  <Card title="Helpers de Permisos" icon="approve-check-circle">
+    Solicitud de permisos y verificación de estado integradas
+  </Card>
+  <Card title="Soporte de Idiomas" icon="translate">
+    Acceso a los idiomas de reconocimiento soportados por el dispositivo
+  </Card>
+  <Card title="Comenzando" icon="open-book">
+    Consulta la [Guía de Inicio](/docs/plugins/speech-recognition/getting-started/) para instalar y configurar el plugin.
+  </Card>
+</CardGrid>

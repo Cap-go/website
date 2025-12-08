@@ -1,0 +1,98 @@
+---
+title: Pengantar Integrasi Firebase
+locale: id
+description: Pelajari cara mengintegrasikan Firebase Authentication dengan plugin Capacitor Social Login untuk solusi autentikasi lengkap.
+sidebar:
+    order: 1
+---
+
+## Ikhtisar
+
+Tutorial ini akan memandu Anda melalui pengaturan Firebase Authentication dengan plugin Capacitor Social Login. Integrasi ini memungkinkan Anda menggunakan provider social login native (Google, Apple, Facebook, Twitter) di platform mobile sambil memanfaatkan Firebase Auth untuk autentikasi backend dan Firestore untuk penyimpanan data.
+
+## Apa yang Akan Anda Pelajari
+
+- Cara mengonfigurasi Firebase Authentication
+- Cara mengintegrasikan plugin Capacitor Social Login dengan Firebase Auth
+- Pengaturan khusus platform untuk Android, iOS, dan Web
+
+## Apa yang Anda Perlukan
+
+Sebelum Anda memulai, pastikan Anda memiliki:
+
+1. **Proyek Firebase**
+   - Buat proyek di [Firebase Console](https://console.firebase.google.com/)
+   - Aktifkan Authentication (Email/Password dan Google Sign-In)
+   - Dapatkan kredensial konfigurasi Firebase Anda
+
+2. **Firebase JS SDK**
+   - Instal Firebase di proyek Anda:
+     ```bash
+     npm install firebase
+     ```
+
+3. **Proyek Capacitor**
+   - Aplikasi Capacitor yang ada
+   - Plugin Capacitor Social Login terinstal:
+     ```bash
+     npm install @capgo/capacitor-social-login
+     npx cap sync
+     ```
+
+## Aplikasi Contoh
+
+Contoh lengkap yang berfungsi tersedia di repository:
+
+**Repository Kode**: [Anda dapat menemukan repository kode di sini](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+
+Aplikasi contoh mendemonstrasikan:
+- Autentikasi email/password dengan Firebase
+- Integrasi Google Sign-In (Android, iOS, dan Web)
+- Penyimpanan key-value sederhana menggunakan koleksi Firebase Firestore
+- Penyimpanan data khusus pengguna di subkoleksi Firestore
+
+
+## Catatan tentang penggunaan Firebase SDK di Capacitor
+
+Saat menggunakan Firebase JS SDK di Capacitor, Anda perlu menyadari bahwa saat menggunakan metode autentikasi, Anda perlu menginisialisasi instance Firebase Auth sedikit berbeda.
+
+Di platform web, Anda akan menggunakan fungsi `getAuth` untuk mendapatkan instance Firebase Auth.
+
+```typescript
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+```
+
+Sayangnya, di Capacitor, ini tidak berfungsi dan menyebabkan Firebase auth macet. Seperti yang dinyatakan dalam [posting blog ini](https://harryherskowitz.com/2021/08/23/firebase-capacitor.html), Anda perlu menggunakan fungsi `initializeAuth` untuk menginisialisasi instance Firebase Auth.
+Ini terlihat seperti ini:
+
+```typescript
+import { initializeApp } from 'firebase/app';
+import { initializeAuth } from 'firebase/auth';
+
+const app = initializeApp(firebaseConfig);
+
+function whichAuth() {
+  let auth;
+  if (Capacitor.isNativePlatform()) {
+    auth = initializeAuth(app, {
+      persistence: indexedDBLocalPersistence,
+    });
+  } else {
+    auth = getAuth(app);
+  }
+  return auth;
+}
+
+export const auth = whichAuth();
+```
+## Langkah Selanjutnya
+
+Lanjutkan dengan panduan pengaturan:
+- [Pengaturan Firebase](./google/general/) - Konfigurasikan proyek Firebase
+- [Pengaturan Android](./google/android/) - Konfigurasi khusus Android
+- [Pengaturan iOS](./google/ios/) - Konfigurasi khusus iOS
+- [Pengaturan Web](./google/web/) - Konfigurasi khusus Web

@@ -1,0 +1,209 @@
+---
+title: "Pedometer のはじめに"
+locale: ja
+description: "歩数カウントとフィットネストラッキングを Capacitor アプリに統合する方法を学びます"
+---
+
+このガイドでは、Capacitor Pedometer プラグインをアプリケーションに統合する手順を説明します。
+
+## インストール
+
+npm を使用してプラグインをインストールします：
+
+```bash
+npm install @capgo/capacitor-pedometer
+npx cap sync
+```
+
+## iOS の設定
+
+`Info.plist` にモーション使用説明を追加します：
+
+```xml
+<key>NSMotionUsageDescription</key>
+<string>歩数とアクティビティを追跡するためにモーションデータへのアクセスが必要です</string>
+```
+
+## Android の設定
+
+プラグインは自動的に `ACTIVITY_RECOGNITION` パーミッションを追加します。Android 10+（API 29）の場合、このパーミッションを実行時に要求する必要があります。
+
+## 基本的な使用方法
+
+### プラグインをインポートする
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+```
+
+### 利用可能性を確認する
+
+```typescript
+const checkPedometer = async () => {
+  const result = await CapacitorPedometer.isAvailable();
+  console.log('歩数カウント利用可能:', result.stepCounting);
+  console.log('距離利用可能:', result.distance);
+  console.log('階数カウント利用可能:', result.floorCounting);
+  console.log('ペース利用可能:', result.pace);
+  console.log('ケイデンス利用可能:', result.cadence);
+};
+```
+
+### パーミッションをリクエストする
+
+```typescript
+const requestPermission = async () => {
+  const permission = await CapacitorPedometer.requestPermissions();
+  console.log('パーミッションステータス:', permission.activityRecognition);
+};
+```
+
+### 現在の測定値を取得する
+
+```typescript
+const getMeasurements = async () => {
+  const measurements = await CapacitorPedometer.getMeasurement({
+    startDate: new Date(Date.now() - 24 * 60 * 60 * 1000), // 24時間前
+    endDate: new Date()
+  });
+
+  console.log('歩数:', measurements.numberOfSteps);
+  console.log('距離:', measurements.distance, 'メートル');
+  console.log('登った階数:', measurements.floorsAscended);
+  console.log('降りた階数:', measurements.floorsDescended);
+};
+```
+
+### リアルタイム更新を開始する
+
+```typescript
+// リアルタイム更新のリスナーを追加
+CapacitorPedometer.addListener('measurement', (data) => {
+  console.log('歩数:', data.numberOfSteps);
+  console.log('距離:', data.distance);
+  console.log('ペース:', data.currentPace);
+  console.log('ケイデンス:', data.currentCadence);
+});
+
+// 更新の受信を開始
+await CapacitorPedometer.startMeasurementUpdates();
+```
+
+### 更新を停止する
+
+```typescript
+await CapacitorPedometer.stopMeasurementUpdates();
+CapacitorPedometer.removeAllListeners();
+```
+
+## 完全な例
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+class PedometerService {
+  private listener: any;
+
+  async initialize() {
+    // 利用可能性を確認
+    const available = await CapacitorPedometer.isAvailable();
+    if (!available.stepCounting) {
+      console.error('歩数カウントが利用できません');
+      return false;
+    }
+
+    // パーミッションをリクエスト
+    const permission = await CapacitorPedometer.requestPermissions();
+    if (permission.activityRecognition !== 'granted') {
+      console.error('パーミッションが拒否されました');
+      return false;
+    }
+
+    return true;
+  }
+
+  async startTracking() {
+    // リスナーを追加
+    this.listener = CapacitorPedometer.addListener('measurement', (data) => {
+      this.onMeasurement(data);
+    });
+
+    // 更新を開始
+    await CapacitorPedometer.startMeasurementUpdates();
+    console.log('歩数計のトラッキングを開始しました');
+  }
+
+  async stopTracking() {
+    await CapacitorPedometer.stopMeasurementUpdates();
+    if (this.listener) {
+      this.listener.remove();
+    }
+    console.log('歩数計のトラッキングを停止しました');
+  }
+
+  onMeasurement(data: any) {
+    console.log('今日の歩数:', data.numberOfSteps);
+    console.log('距離:', (data.distance / 1000).toFixed(2), 'km');
+  }
+
+  async getTodaySteps() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const measurements = await CapacitorPedometer.getMeasurement({
+      startDate: today,
+      endDate: new Date()
+    });
+
+    return measurements.numberOfSteps;
+  }
+}
+
+// 使用方法
+const pedometer = new PedometerService();
+await pedometer.initialize();
+await pedometer.startTracking();
+```
+
+## ベストプラクティス
+
+1. **利用可能性を確認する**: 使用前に必ず歩数計機能を確認する
+2. **パーミッションをリクエストする**: パーミッションリクエストを適切に処理する
+3. **バッテリー最適化**: 必要ないときは更新を停止する
+4. **エラー処理**: 呼び出しを try-catch ブロックでラップする
+5. **バックグラウンド更新**: 継続的なトラッキングのためにバックグラウンドモードを設定する
+
+## よくある問題
+
+### パーミッションが拒否された
+
+```typescript
+const handlePermissionDenied = async () => {
+  const permission = await CapacitorPedometer.checkPermissions();
+
+  if (permission.activityRecognition === 'denied') {
+    alert('モーショントラッキングのパーミッションが必要です。設定で有効にしてください。');
+  }
+};
+```
+
+### デバイスで利用できない
+
+```typescript
+const checkSupport = async () => {
+  const available = await CapacitorPedometer.isAvailable();
+
+  if (!available.stepCounting) {
+    alert('このデバイスでは歩数カウントが利用できません');
+    return false;
+  }
+
+  return true;
+};
+```
+
+## 次のステップ
+
+- 完全なドキュメントについては [API リファレンス](https://github.com/Cap-go/capacitor-pedometer#api) をご覧ください
+- [サンプルアプリ](https://github.com/Cap-go/capacitor-pedometer/tree/main/example) をチェックアウトしてください
+- 高度な実装については [チュートリアル](/plugins-tutorials/capacitor-pedometer) をご覧ください

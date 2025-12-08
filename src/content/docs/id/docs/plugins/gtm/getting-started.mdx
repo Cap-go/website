@@ -1,0 +1,242 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan mengintegrasikan Google Tag Manager ke aplikasi Capacitor Anda menggunakan SDK resmi.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Konfigurasi Platform
+
+### iOS
+
+1. Unduh file konfigurasi container GTM Anda dari konsol Google Tag Manager
+2. Tambahkan file JSON container ke proyek iOS Anda di Xcode
+3. File tersebut harus diberi nama seperti `GTM-XXXXXX.json`
+
+### Android
+
+1. Unduh file konfigurasi container GTM Anda dari konsol Google Tag Manager
+2. Tambahkan file JSON container ke `android/app/src/main/assets/`
+3. File tersebut harus diberi nama seperti `GTM-XXXXXX.json`
+
+## Contoh Penggunaan
+
+```typescript
+import { CapacitorGTM } from '@capgo/capacitor-gtm';
+
+// Initialize GTM with your container ID
+await CapacitorGTM.init({
+  containerId: 'GTM-XXXXXX'
+});
+
+// Push events to dataLayer
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Home',
+    screen_class: 'HomeScreen'
+  }
+});
+
+// Push custom events with parameters
+await CapacitorGTM.pushEvent({
+  event: 'purchase',
+  parameters: {
+    transaction_id: 'T12345',
+    value: 25.00,
+    currency: 'USD',
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product Name',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+
+// Set user properties
+await CapacitorGTM.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+
+// Get values from dataLayer
+const result = await CapacitorGTM.getVariable({
+  key: 'config_value'
+});
+console.log('Config value:', result.value);
+```
+
+## Referensi API
+
+### init(options)
+
+```typescript
+init(options: { containerId: string }) => Promise<void>
+```
+
+Inisialisasi Google Tag Manager dengan ID container Anda.
+
+| Param         | Type                             |
+| ------------- | -------------------------------- |
+| **`options`** | `{ containerId: string }` |
+
+### pushEvent(options)
+
+```typescript
+pushEvent(options: GTMEvent) => Promise<void>
+```
+
+Kirim event ke dataLayer dengan parameter opsional.
+
+| Param         | Type              |
+| ------------- | ----------------- |
+| **`options`** | `GTMEvent` |
+
+### setUserProperty(options)
+
+```typescript
+setUserProperty(options: { key: string; value: string }) => Promise<void>
+```
+
+Tetapkan properti pengguna untuk segmentasi dan penargetan.
+
+| Param         | Type                                      |
+| ------------- | ----------------------------------------- |
+| **`options`** | `{ key: string; value: string }` |
+
+### getVariable(options)
+
+```typescript
+getVariable(options: { key: string }) => Promise<{ value: any }>
+```
+
+Dapatkan nilai dari konfigurasi container GTM.
+
+| Param         | Type                     |
+| ------------- | ------------------------ |
+| **`options`** | `{ key: string }` |
+
+**Returns:** `Promise<{ value: any }>`
+
+## Interface
+
+### GTMEvent
+
+| Prop             | Type                                 | Description                        |
+| ---------------- | ------------------------------------ | ---------------------------------- |
+| **`event`**      | `string`                  | Nama event                     |
+| **`parameters`** | `Record<string, any>` | Parameter event opsional (opsional) |
+
+## Contoh Event Umum
+
+### Tampilan Layar
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Product Details',
+    screen_class: 'ProductScreen'
+  }
+});
+```
+
+### Aksi Pengguna
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'button_click',
+  parameters: {
+    button_name: 'add_to_cart',
+    product_id: 'SKU_12345'
+  }
+});
+```
+
+### Event E-commerce
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'begin_checkout',
+  parameters: {
+    currency: 'USD',
+    value: 75.00,
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product 1',
+        quantity: 2,
+        price: 25.00
+      },
+      {
+        item_id: 'SKU_67890',
+        item_name: 'Product 2',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+```
+
+## Praktik Terbaik
+
+- Inisialisasi GTM lebih awal dalam lifecycle aplikasi Anda
+- Gunakan konvensi penamaan event yang konsisten
+- Sertakan parameter yang relevan dengan setiap event
+- Test konfigurasi GTM Anda dalam mode preview
+- Monitor data di konsol Google Tag Manager
+- Gunakan properti pengguna untuk segmentasi yang bermakna
+
+## Debugging
+
+Aktifkan mode debug di konsol Google Tag Manager untuk menguji implementasi Anda:
+
+1. Buka konsol GTM
+2. Masuk ke mode Preview
+3. Hubungkan ke aplikasi Anda menggunakan ID container
+4. Verifikasi bahwa event dilacak dengan benar
+
+## Kasus Penggunaan
+
+- Lacak interaksi dan perilaku pengguna
+- Monitor metrik performa aplikasi
+- Kumpulkan data e-commerce
+- Kelola tag pihak ketiga tanpa perubahan kode
+- Implementasikan pengujian A/B dan personalisasi
+- Integrasikan dengan Google Analytics dan layanan lainnya

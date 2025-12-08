@@ -1,0 +1,470 @@
+---
+title: Androidビルド
+description: Capgo Cloud BuildでAndroidアプリを設定およびビルドする
+sidebar:
+  order: 3
+locale: ja
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgoの安全なクラウドインフラストラクチャを使用して、AndroidアプリをビルドしてGoogle Play Storeに送信します。
+
+## ビルド前の準備
+
+<CardGrid>
+  <Card title="⚠️ 最初にAndroid認証情報を設定してください" icon="warning">
+    **必須:** リリースアプリをビルドする前に、Android認証情報を保存する必要があります。
+
+    [Android認証情報を設定 →](/docs/cli/cloud-build/credentials/#saving-android-credentials)
+  </Card>
+</CardGrid>
+
+## Androidビルドの仕組み
+
+Androidビルドは、安全なCloudflareサンドボックスで実行されます:
+
+- **インフラストラクチャ**: コンテナ化されたAndroid SDKを搭載したCloudflare Workers
+- **ビルドツール**: Android build toolsを搭載したGradle
+- **実行**: ビルドごとに分離されたサンドボックス環境
+- **クリーンアップ**: ビルド完了後に即座に削除
+- **セキュリティ**: 永続的なストレージなし、ビルド間の完全な分離
+
+## 前提条件
+
+Androidでビルドする前に、以下が必要です:
+
+### 1. 開発環境（ローカルテスト用）
+
+- Android Studioがローカルにインストールされている（初期キーストア設定用）
+- `npx cap open android`でアプリが正常にビルドされる
+- Java JDK 17以上
+
+### 2. 署名用キーストア
+
+リリースビルドには、署名用キーストアが必要です:
+
+| ビルドタイプ | キーストア必須 | 目的 |
+|------------|-------------------|---------|
+| **Debug** | いいえ | テスト専用、自動生成 |
+| **Release** | はい | Play Store送信用 |
+
+## キーストアの作成
+
+<Aside type="tip">
+スクリーンショット付きの詳細なステップバイステップガイドについては、以下をご覧ください:
+- [Android証明書ガイド](https://capawesome.io/cloud/native-builds/certificates/android/)
+- [ブログ: GitHub Actionsを使用した自動Androidビルド](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+</Aside>
+
+まだキーストアをお持ちでない場合は、作成してください:
+
+```bash
+keytool -genkey -v \
+  -keystore my-release-key.keystore \
+  -alias my-key-alias \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000
+```
+
+プロンプトに答えてください:
+- **パスワード**: 強力なパスワードを選択してください（安全に保存してください！）
+- **名前**: あなたの名前または会社名
+- **組織**: あなたの会社名
+- **場所**: あなたの都市、州、国
+
+<Aside type="caution">
+**重要**: キーストアファイルとパスワードを安全に保管してください！紛失すると、Play Storeでアプリを更新できなくなります。
+</Aside>
+
+### キーストアコンポーネントの理解
+
+キーストアを作成する際、以下を覚えておく必要があります:
+
+1. **キーストアパスワード** (`KEYSTORE_STORE_PASSWORD`): キーストアファイル自体のパスワード
+2. **キーエイリアス** (`KEYSTORE_KEY_ALIAS`): キーストア内の署名キーの名前/識別子
+3. **キーパスワード** (`KEYSTORE_KEY_PASSWORD`): 特定のキーのパスワード（ストアパスワードと同じでも可）
+
+**ワークフローの例:**
+```bash
+# キーストアのエイリアスをリストして確認
+keytool -list -keystore my-release-key.keystore
+
+# キーに関する詳細情報を表示
+keytool -list -v -keystore my-release-key.keystore -alias my-key-alias
+```
+
+## ビルド設定
+
+### 必須の環境変数
+
+**リリースビルド**の場合、以下の認証情報を設定してください:
+
+```bash
+# Android署名（リリース用に必須）
+ANDROID_KEYSTORE_FILE="<base64-encoded-keystore>"
+KEYSTORE_KEY_ALIAS="my-key-alias"
+KEYSTORE_KEY_PASSWORD="<key-password>"
+KEYSTORE_STORE_PASSWORD="<store-password>"
+
+# Play Store公開（オプション、自動送信用）
+PLAY_CONFIG_JSON="<base64-encoded-service-account-json>"
+```
+
+### Base64認証情報の生成
+
+**キーストアファイル:**
+```bash
+base64 -i my-release-key.keystore | pbcopy
+```
+
+**Play Storeサービスアカウント JSON:**
+```bash
+base64 -i play-store-service-account.json | pbcopy
+```
+
+Base64文字列がクリップボードにコピーされました。
+
+### Play Storeサービスアカウントの設定
+
+Play Storeへの自動アップロードを有効にするには、適切な権限を持つGoogle Cloudサービスアカウントを作成する必要があります。
+
+<Aside type="tip">
+スクリーンショット付きの詳細な手順については、[Android証明書ガイド](https://capawesome.io/cloud/native-builds/certificates/android/)をご覧ください。
+</Aside>
+
+<Steps>
+
+1. **Google Cloudでサービスアカウントを作成**
+   - [Google Play Console](https://play.google.com/console) → 設定 → APIアクセスに移動
+   - 「新しいサービスアカウントを作成」をクリック
+   - Google Cloud Consoleへのリンクをたどる
+   - 「サービスアカウントを作成」をクリック
+   - 名前を入力（例: "Capgo CI/CD"）
+   - 「サービスアカウントユーザー」ロールを付与
+   - 「完了」をクリック
+
+2. **JSONキーを作成**
+   - Google Cloud Consoleで、サービスアカウントを見つける
+   - サービスアカウントのメールをクリック
+   - 「キー」タブに移動
+   - 「キーを追加」→「新しいキーを作成」をクリック
+   - 「JSON」形式を選択
+   - JSONファイルをダウンロード（安全に保管してください！）
+
+3. **Play Consoleで権限を付与**
+   - Google Play Console → 設定 → APIアクセスに戻る
+   - リストからサービスアカウントを見つける
+   - 「アクセスを付与」をクリック
+   - 「アプリの権限」で、アプリを選択
+   - 「アカウントの権限」で、以下を付与:
+     - **リリース**: 「アプリ情報の表示とバルクレポートのダウンロード（読み取り専用）」
+     - **リリース**: 「ドラフトリリースの作成、編集、削除」
+     - **リリース**: 「本番環境へのリリース、デバイスの除外、Play App Signingの使用」
+   - 「ユーザーを招待」をクリック
+
+4. **招待を受け入れる**
+   - サービスアカウントが招待メールを受信します
+   - 招待を受け入れて権限を有効化
+
+</Steps>
+
+<Aside type="caution">
+サービスアカウントJSONファイルには機密認証情報が含まれています。バージョン管理にコミットしたり、公開したりしないでください。
+</Aside>
+
+## Androidでのビルド
+
+### デバッグビルド
+
+署名なしでテスト用に最適:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode debug
+```
+
+これにより、任意のデバイスにインストールしてテストできるデバッグAPKが作成されます。
+
+### リリースビルド
+
+Play Store送信用:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release
+```
+
+署名認証情報が環境変数として設定されている必要があります。
+
+## CI/CD統合
+
+### GitHub Actionsの例
+
+```yaml
+name: Build Android App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build Android app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform android \
+            --build-mode release
+```
+
+## ビルドプロセスの詳細
+
+### Androidビルド中の処理
+
+<Steps>
+
+1. **サンドボックスの初期化** (~5秒)
+   - 安全なコンテナが起動
+   - Android SDKとGradleがロード
+   - 分離されたファイルシステムが作成
+
+2. **プロジェクトのセットアップ** (~20秒)
+   - R2からプロジェクトzipをダウンロード
+   - ビルドディレクトリに展開
+   - 署名認証情報を注入
+
+3. **Gradleビルド** (2-4分)
+   - 依存関係のダウンロード
+   - APK/AABのコンパイル
+   - ProGuard/R8最適化（リリースモード）
+   - コード署名の適用
+
+4. **Play Storeアップロード** (30秒、設定されている場合)
+   - AABをPlay Consoleにアップロード
+   - リリーストラックを設定
+   - 送信を開始
+
+5. **クリーンアップ** (即座)
+   - すべてのファイルを削除
+   - コンテナを破棄
+   - アーティファクトを保持しない
+
+</Steps>
+
+### ビルドスタック
+
+Androidビルド環境には以下が含まれます:
+
+- **Java**: OpenJDK 17
+- **Android SDK**: 最新の安定版
+- **Gradle**: 8.x
+- **Build Tools**: 34.x
+- **Node.js**: 18.x (LTS)
+- **NPM**: 最新の安定版
+
+## ビルド出力
+
+### APK vs AAB
+
+- **APK** (Android Package): 直接インストール用のインストール可能ファイル
+- **AAB** (Android App Bundle): Google Playが推奨する形式（ユーザーにとってダウンロードサイズが小さい）
+
+デフォルトでは、Capgoビルドは以下を作成します:
+- **デバッグモード**: APK
+- **リリースモード**: AAB（Play Store用に最適化）
+
+## ビルド時間
+
+一般的なAndroidビルド時間:
+
+| ビルドタイプ | 平均時間 |
+|------------|--------------|
+| デバッグ | 2-3分 |
+| リリース（ProGuardなし） | 3-4分 |
+| リリース（ProGuardあり） | 4-6分 |
+
+<Aside type="note">
+Androidビルドのコストは**基本レートの1倍**（iOSビルドの半分のコスト）です。
+</Aside>
+
+## ビルドバリアント
+
+### カスタムビルドバリアント
+
+アプリにカスタムビルドバリアント（例: `staging`、`production`）がある場合は、`build-config`を使用してください:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release \
+  --build-config '{"variant":"staging"}'
+```
+
+これにより、`stagingRelease`バリアントがビルドされます。
+
+### フレーバーディメンション
+
+フレーバーディメンションを持つアプリの場合:
+
+```bash
+--build-config '{"flavor":"premium","variant":"production"}'
+```
+
+これにより、`premiumProductionRelease`バリアントがビルドされます。
+
+## トラブルシューティング
+
+### 一般的な問題
+
+**「Keystore password incorrect」**
+- KEYSTORE_STORE_PASSWORDがキーストアと一致することを確認
+- KEYSTORE_KEY_PASSWORDがキーエイリアスパスワードと一致することを確認
+- 余分なスペースや特殊文字がないか確認
+
+**「Key alias not found」**
+- KEYSTORE_KEY_ALIASが正確に一致することを確認（大文字小文字を区別）
+- エイリアスをリスト: `keytool -list -keystore my-release-key.keystore`
+
+**「Gradle build failed」**
+- ビルドログで特定のエラーを確認
+- アプリが`./gradlew assembleRelease`でローカルでビルドされることを確認
+- すべてのネイティブ依存関係が`build.gradle`にあることを確認
+
+**「Play Store upload failed」**
+- サービスアカウントJSONが有効であることを確認
+- サービスアカウントがPlay Consoleで正しい権限を持っていることを確認
+- アプリがPlay Consoleで適切に設定されていることを確認
+
+**「Build timeout」**
+- 大きなアプリは最適化が必要な場合があります
+- 不要な依存関係を削除できるか確認
+- ビルドが一貫してタイムアウトする場合はサポートに連絡
+
+### デバッグログ
+
+ビルドログでこれらの主要なフェーズを確認してください:
+
+```
+→ Downloading dependencies...
+→ Running Gradle assembleRelease...
+→ Signing APK/AAB...
+→ Uploading to Play Store...
+✔ Build succeeded
+```
+
+ビルドが失敗した場合、特定のGradleエラーがログに表示されます。
+
+## ベストプラクティス
+
+### 1. 最初にローカルでテスト
+
+常にAndroidビルドがローカルで機能することを確認してください:
+
+```bash
+cd android
+./gradlew assembleRelease
+# または
+./gradlew bundleRelease
+```
+
+### 2. キーストアを安全に保管
+
+- キーストアをバージョン管理にコミットしない
+- 安全なシークレット管理に保存（1Password、AWS Secrets Managerなど）
+- 複数の安全な場所にバックアップコピーを保管
+- パスワードを安全なパスワードマネージャーに記録
+
+### 3. バージョン管理
+
+Capgoは`capacitor.config.json`からバージョンを読み取ります:
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "My App",
+  "version": "1.0.0",
+  "build": "1"
+}
+```
+
+各リリースごとに`build`番号を増やしてください。
+
+### 4. ProGuard設定
+
+リリースビルドの場合、ProGuardルールが適切に設定されていることを確認してください:
+
+```
+# android/app/proguard-rules.pro
+-keep class com.getcapacitor.** { *; }
+-keep @com.getcapacitor.annotation.CapacitorPlugin public class * {
+  @com.getcapacitor.annotation.PluginMethod public <methods>;
+}
+```
+
+### 5. ビルドサイズの監視
+
+APK/AABサイズを監視して最適化されていることを確認してください:
+
+```
+CLIは最終サイズを表示します:
+→ APK size: 12.4 MB
+```
+
+アプリが大きい場合（>50 MB）、以下を検討してください:
+- ProGuard/R8の有効化
+- AAB形式の使用（動的配信）
+- 画像とアセットの最適化
+
+## Play Storeへの送信
+
+### 自動送信
+
+PLAY_CONFIG_JSONが設定されている場合、ビルドは自動的にPlay Consoleの内部テストトラックにアップロードされます。
+
+### 手動送信
+
+手動送信を希望する場合:
+
+1. PLAY_CONFIG_JSONなしでビルドを実行
+2. ビルドアーティファクトからAABをダウンロード（設定されている場合）
+3. Play Consoleに手動でアップロード
+
+## 次のステップ
+
+- [iOSビルド](/docs/cli/cloud-build/ios/) - iOSビルドを設定
+- [トラブルシューティング](/docs/cli/cloud-build/troubleshooting/) - 一般的なビルドの問題
+- [CLIリファレンス](/docs/cli/reference/build/) - 完全なコマンドドキュメント
+
+## お困りですか？
+
+- [トラブルシューティングガイド](/docs/cli/cloud-build/troubleshooting/)
+- [Discordコミュニティ](https://discord.com/invite/VnYRvBfgA6)
+- メール: support@capgo.app

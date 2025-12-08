@@ -1,0 +1,267 @@
+---
+title: 入门指南
+locale: zh
+description: 了解如何安装和使用后台地理位置插件来跟踪后台设备位置。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+此插件支持 Capacitor v7：
+
+| Capacitor  | Plugin |
+|------------|--------|
+| v7         | v7     |
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+</Tabs>
+
+## 平台设置
+
+### iOS
+
+将以下键添加到 `Info.plist`：
+
+```xml
+<dict>
+  ...
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We need to track your location</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>We need to track your location while your device is locked.</string>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
+  ...
+</dict>
+```
+
+### Android
+
+在 Capacitor 配置中将 `android.useLegacyBridge` 选项设置为 `true`。这可以防止位置更新在后台 5 分钟后停止。请参阅 https://capacitorjs.com/docs/config 和 https://github.com/capacitor-community/background-geolocation/issues/89。
+
+在 Android 13+ 上，应用需要 `POST_NOTIFICATIONS` 运行时权限才能显示持久通知，告知用户他们的位置正在后台使用。此运行时权限在授予位置权限后请求。
+
+如果您的应用实时将位置更新转发到服务器，请注意在后台 5 分钟后，Android 将限制从 WebView 发起的 HTTP 请求。解决方案是使用原生 HTTP 插件，例如 [CapacitorHttp](https://capacitorjs.com/docs/apis/http)。请参阅 https://github.com/capacitor-community/background-geolocation/issues/14。
+
+可以在 `strings.xml` 中进行特定于 Android 的配置：
+```xml
+<resources>
+    <!--
+        后台通知的频道名称。当用户按住通知时，这将可见。
+        默认为 "Background Tracking"。
+    -->
+    <string name="capacitor_background_geolocation_notification_channel_name">
+        Background Tracking
+    </string>
+
+    <!--
+        用于后台通知的图标。注意缺少前导 "@"。
+        默认为 "mipmap/ic_launcher"，即应用的启动图标。
+
+        如果使用光栅图像生成图标（而不是矢量图像），
+        它必须具有透明背景。为确保您的图像兼容，
+        在 Android Studio 中创建图像资源时，请选择 "Notification Icons" 作为图标类型。
+
+        不兼容的图像资源会导致通知出现一些明显的异常行为，
+        即使图标显示正确：
+
+          - 通知可能会被用户关闭，而实际上不应该被关闭。
+          - 点击通知可能会打开设置，而不是应用。
+          - 通知文本可能不正确。
+    -->
+    <string name="capacitor_background_geolocation_notification_icon">
+        drawable/ic_tracking
+    </string>
+
+    <!--
+        通知的颜色，作为可由 android.graphics.Color.parseColor 解析的字符串。
+        可选。
+    -->
+    <string name="capacitor_background_geolocation_notification_color">
+        yellow
+    </string>
+</resources>
+```
+
+## 使用
+
+```javascript
+import { BackgroundGeolocation } from "@capgo/background-geolocation";
+
+BackgroundGeolocation.start(
+    {
+        backgroundMessage: "Cancel to prevent battery drain.",
+        backgroundTitle: "Tracking You.",
+        requestPermissions: true,
+        stale: false,
+        distanceFilter: 50
+    },
+    (location, error) => {
+        if (error) {
+            if (error.code === "NOT_AUTHORIZED") {
+                if (window.confirm(
+                    "This app needs your location, " +
+                    "but does not have permission.\n\n" +
+                    "Open settings now?"
+                )) {
+                    // 当位置权限被拒绝时，将用户引导到他们设备的设置可能很有用。
+                    // 插件提供 'openSettings' 方法来完成此操作。
+                    BackgroundGeolocation.openSettings();
+                }
+            }
+            return console.error(error);
+        }
+        return console.log(location);
+    }
+).then(() => {
+    // 当不再需要位置更新时，应通过调用以下方法停止插件
+    BackgroundGeolocation.stop();
+});
+
+// 设置计划路线，当新位置到达且不在路线上时播放通知声音：
+
+BackgroundGeolocation.setPlannedRoute({soundFile: "assets/myFile.mp3", route: [[1,2], [3,4]], distance: 30 });
+
+// 如果您只想要当前位置，请尝试类似这样的操作。超时时间越长，
+// 猜测越准确。我不会低于大约 100ms。
+function guessLocation(callback, timeout) {
+    let last_location;
+    BackgroundGeolocation.start(
+        {
+            requestPermissions: false,
+            stale: true
+        },
+        (location) => {
+            last_location = location || undefined;
+        }
+    ).then(() => {
+        setTimeout(() => {
+            callback(last_location);
+            BackgroundGeolocation.stop();
+        }, timeout);
+    });
+}
+```
+
+## API
+
+### start(...)
+
+```typescript
+start(options: StartOptions, callback: (position?: Location | undefined, error?: CallbackError | undefined) => void) => Promise<void>
+```
+
+要开始监听设备位置的变化，请调用此方法。
+返回一个 Promise 以指示它完成了调用。每次有新位置可用或调用此方法时出错时，都会调用回调。不要依赖 promise 拒绝来处理此问题。
+
+| 参数          | 类型                                                                                                                      | 描述                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **`options`**  | `StartOptions`                                                                     | 配置选项                                                         |
+| **`callback`** | `(position?: Location, error?: CallbackError) => void` | 新位置可用或发生错误时调用的回调函数 |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+停止位置更新。
+
+### openSettings()
+
+```typescript
+openSettings() => Promise<void>
+```
+
+打开设备的位置设置页面。
+用于引导用户启用位置服务或调整权限。
+
+### setPlannedRoute(...)
+
+```typescript
+setPlannedRoute(options: SetPlannedRouteOptions) => Promise<void>
+```
+
+当用户偏离计划路线时播放声音文件。
+这应该用于播放声音（在后台也可以，仅限原生）。
+
+| 参数         | 类型                                                                      | 描述                                              |
+| ------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **`options`** | `SetPlannedRouteOptions` | 设置计划路线和声音文件的选项 |
+
+## 接口
+
+### StartOptions
+
+配置位置更新的选项。
+
+| 属性                     | 类型                 | 描述                                                                                                                                                                                                                                                                                                                                                                                                          | 默认值                            |
+| ------------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **`backgroundMessage`**  | `string`  | 如果定义了 "backgroundMessage" 选项，则无论应用是在后台还是前台，插件都将提供位置更新。如果未定义，则仅在前台保证位置更新。这在两个平台上都是如此。在 Android 上，必须显示通知才能继续在后台接收位置更新。此选项指定该通知的文本。 |                                    |
+| **`backgroundTitle`**    | `string`  | 上述通知的标题。                                                                                                                                                                                                                                                                                                                                                                       | `"Using your location"` |
+| **`requestPermissions`** | `boolean` | 是否应在权限尚未授予的情况下自动向用户请求权限。                                                                                                                                                                                                                                                                                                                                | `true`                  |
+| **`stale`**              | `boolean` | 如果为 "true"，则在设备获取 GPS 定位时可能会传递过时的位置。您有责任检查 "time" 属性。如果为 "false"，则保证位置是最新的。                                                                                                                                                                                                                         | `false`                 |
+| **`distanceFilter`**     | `number`  | 设备移动多少米后才会触发新的位置更新。这用于过滤小幅移动并减少更新次数。                                                                                                                                                                                                                                             | `0`                     |
+
+### Location
+
+表示具有各种属性的地理位置。
+包含 GPS/网络提供商返回的所有标准位置属性。
+
+| 属性                   | 类型                        | 描述                                                                                                                            |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **`latitude`**         | `number`         | 纬度（度）。范围：-90.0 到 +90.0                                                                                             |
+| **`longitude`**        | `number`         | 经度（度）。范围：-180.0 到 +180.0                                                                                          |
+| **`accuracy`**         | `number`         | 水平不确定性半径（米），置信度为 68%。较低的值表示位置更准确。                         |
+| **`altitude`**         | `number \| null` | 海拔高度（米）（如果不可用则为 null）。                                                                                     |
+| **`altitudeAccuracy`** | `number \| null` | 垂直不确定性（米），置信度为 68%（如果不可用则为 null）。                                                        |
+| **`simulated`**        | `boolean`        | 如果位置由软件模拟而不是 GPS，则为 `true`。对于在开发或测试中检测模拟位置很有用。      |
+| **`bearing`**          | `number \| null` | 与真北的偏差（度）（如果不可用则为 null）。范围：0.0 到 360.0                                                   |
+| **`speed`**            | `number \| null` | 速度（米/秒）（如果不可用则为 null）。                                                                                 |
+| **`time`**             | `number \| null` | 位置生成的时间，以 Unix 纪元以来的毫秒为单位。在使用 stale: true 时使用此选项检查位置是否过时。 |
+
+### CallbackError
+
+可能传递给位置启动回调的错误对象。
+使用可选错误代码扩展标准 Error。
+
+| 属性       | 类型                | 描述                                           |
+| ---------- | ------------------- | ----------------------------------------------------- |
+| **`code`** | `string` | 可选错误代码，用于更具体的错误处理。 |
+
+### SetPlannedRouteOptions
+
+| 属性            | 类型                            | 描述                                                                                                                                                                                                                                        | 默认值         |
+| --------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| **`soundFile`** | `string`             | 要播放的声音文件的名称。必须是应用公共文件夹中的有效声音相对路径，才能在 Web 和原生平台上工作。路径中无需包含公共文件夹。                                            |                 |
+| **`route`**     | `[number, number][]` | 计划路线，作为经度和纬度对的数组。每对表示路线上的一个点。这用于定义用户可以遵循的路线。该路线用于在用户偏离时播放声音。               |                 |
+| **`distance`**  | `number`             | 用户偏离计划路线多少米才会触发声音。这用于确定用户在播放声音之前可以离路线多远。如果未指定，则使用默认值 50 米。 | `50` |

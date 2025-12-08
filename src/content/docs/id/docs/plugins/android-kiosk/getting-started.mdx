@@ -1,0 +1,336 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Android Kiosk untuk mengunci perangkat Android Anda ke mode kiosk di aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Dukungan Platform
+
+Plugin ini **khusus Android**. Untuk fungsi mode kiosk iOS, silakan gunakan fitur [Guided Access](https://support.apple.com/en-us/HT202612) bawaan perangkat.
+
+## Fitur
+
+- **Mode Kiosk**: Sembunyikan UI sistem dan masuk mode layar penuh immersive
+- **Integrasi Launcher**: Atur aplikasi Anda sebagai launcher/aplikasi home perangkat
+- **Kontrol Tombol Hardware**: Blokir atau izinkan tombol hardware tertentu
+- **Deteksi Status**: Periksa apakah mode kiosk aktif atau aplikasi diatur sebagai launcher
+- **Android 6.0+**: Mendukung Android API 23 hingga Android 15 (API 35)
+
+## Penggunaan Dasar
+
+### Masuk dan Keluar Mode Kiosk
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+// Enter kiosk mode
+await CapacitorAndroidKiosk.enterKioskMode();
+
+// Exit kiosk mode
+await CapacitorAndroidKiosk.exitKioskMode();
+
+// Check if in kiosk mode
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+console.log('Kiosk mode active:', isInKioskMode);
+```
+
+### Fungsi Launcher
+
+Untuk fungsi mode kiosk penuh, Anda perlu mengatur aplikasi Anda sebagai launcher perangkat:
+
+```typescript
+// Open home screen settings for user to select your app as launcher
+await CapacitorAndroidKiosk.setAsLauncher();
+
+// Check if app is set as launcher
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+console.log('App is launcher:', isLauncher);
+```
+
+### Kontrol Tombol Hardware
+
+Kontrol tombol hardware mana yang diizinkan berfungsi dalam mode kiosk:
+
+```typescript
+// Allow only volume keys
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false
+});
+
+// Block all keys (default)
+await CapacitorAndroidKiosk.setAllowedKeys({});
+```
+
+## Contoh Lengkap
+
+```typescript
+async function setupKioskMode() {
+  try {
+    // Check if already set as launcher
+    const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+
+    if (!isLauncher) {
+      // Prompt user to set as launcher
+      await CapacitorAndroidKiosk.setAsLauncher();
+      alert('Please select this app as your Home app');
+      return;
+    }
+
+    // Configure allowed keys
+    await CapacitorAndroidKiosk.setAllowedKeys({
+      volumeUp: true,
+      volumeDown: true,
+      back: false,
+      home: false,
+      recent: false,
+      power: false
+    });
+
+    // Enter kiosk mode
+    await CapacitorAndroidKiosk.enterKioskMode();
+    console.log('Kiosk mode activated');
+
+  } catch (error) {
+    console.error('Failed to setup kiosk mode:', error);
+  }
+}
+```
+
+## Referensi API
+
+### isInKioskMode()
+
+Memeriksa apakah aplikasi saat ini berjalan dalam mode kiosk.
+
+```typescript
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+```
+
+**Mengembalikan:**
+- `isInKioskMode` (boolean): Apakah mode kiosk saat ini aktif
+
+---
+
+### isSetAsLauncher()
+
+Memeriksa apakah aplikasi diatur sebagai launcher perangkat (aplikasi home).
+
+```typescript
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+```
+
+**Mengembalikan:**
+- `isLauncher` (boolean): Apakah aplikasi diatur sebagai launcher perangkat
+
+---
+
+### enterKioskMode()
+
+Masuk mode kiosk, menyembunyikan UI sistem dan memblokir tombol hardware. Aplikasi harus diatur sebagai launcher perangkat agar ini berfungsi efektif.
+
+```typescript
+await CapacitorAndroidKiosk.enterKioskMode();
+```
+
+---
+
+### exitKioskMode()
+
+Keluar dari mode kiosk, memulihkan UI sistem normal dan fungsi tombol hardware.
+
+```typescript
+await CapacitorAndroidKiosk.exitKioskMode();
+```
+
+---
+
+### setAsLauncher()
+
+Membuka pengaturan layar home perangkat untuk memungkinkan pengguna mengatur aplikasi ini sebagai launcher. Ini diperlukan untuk fungsi mode kiosk penuh.
+
+```typescript
+await CapacitorAndroidKiosk.setAsLauncher();
+```
+
+---
+
+### setAllowedKeys(options)
+
+Mengatur tombol hardware mana yang diizinkan berfungsi dalam mode kiosk. Secara default, semua tombol hardware diblokir dalam mode kiosk.
+
+```typescript
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false,
+  power: false,
+  camera: false,
+  menu: false
+});
+```
+
+**Parameter:**
+- `volumeUp` (boolean, opsional): Izinkan tombol volume naik (default: false)
+- `volumeDown` (boolean, opsional): Izinkan tombol volume turun (default: false)
+- `back` (boolean, opsional): Izinkan tombol kembali (default: false)
+- `home` (boolean, opsional): Izinkan tombol home (default: false)
+- `recent` (boolean, opsional): Izinkan tombol aplikasi terbaru (default: false)
+- `power` (boolean, opsional): Izinkan tombol power (default: false)
+- `camera` (boolean, opsional): Izinkan tombol kamera jika ada (default: false)
+- `menu` (boolean, opsional): Izinkan tombol menu jika ada (default: false)
+
+---
+
+### getPluginVersion()
+
+Dapatkan versi plugin Capacitor native.
+
+```typescript
+const { version } = await CapacitorAndroidKiosk.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+**Mengembalikan:**
+- `version` (string): Nomor versi plugin
+
+## Konfigurasi Android
+
+### 1. Setup MainActivity
+
+Untuk mengaktifkan pemblokiran tombol hardware penuh, Anda perlu override `dispatchKeyEvent` di `MainActivity.java` Anda:
+
+```java
+import android.view.KeyEvent;
+import ee.forgr.plugin.android_kiosk.CapacitorAndroidKioskPlugin;
+
+public class MainActivity extends BridgeActivity {
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // Get the kiosk plugin
+        CapacitorAndroidKioskPlugin kioskPlugin = (CapacitorAndroidKioskPlugin)
+            this.getBridge().getPlugin("CapacitorAndroidKiosk").getInstance();
+
+        if (kioskPlugin != null && kioskPlugin.shouldBlockKey(event.getKeyCode())) {
+            return true; // Block the key
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Don't call super.onBackPressed() to disable back button
+        // Or call the plugin's handleOnBackPressed
+    }
+}
+```
+
+### 2. AndroidManifest.xml
+
+Tambahkan intent filter launcher untuk membuat aplikasi Anda dapat dipilih sebagai launcher:
+
+```xml
+<activity
+    android:name=".MainActivity"
+    ...>
+
+    <!-- Existing intent filter -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <!-- Add this to make app selectable as launcher -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+```
+
+## Catatan Penting
+
+1. **Persyaratan Launcher**: Untuk fungsi mode kiosk penuh (memblokir tombol home, mencegah pergantian tugas), aplikasi Anda harus diatur sebagai launcher perangkat.
+
+2. **Pengujian**: Saat pengujian, Anda dapat keluar dari mode kiosk secara programatis atau dengan mengatur aplikasi lain sebagai launcher.
+
+3. **Versi Android**: Plugin menggunakan Android API modern untuk Android 11+ dan kembali ke metode lama untuk kompatibilitas dengan Android 6.0+.
+
+4. **Keamanan**: Plugin ini dirancang untuk aplikasi kiosk yang sah. Pastikan Anda menyediakan pengguna dengan cara untuk keluar dari mode kiosk.
+
+5. **Baterai**: Mode kiosk menjaga layar tetap menyala. Pertimbangkan untuk mengimplementasikan timeout layar atau manajemen kecerahan Anda sendiri.
+
+## Alternatif iOS
+
+Untuk perangkat iOS, gunakan fitur [Guided Access](https://support.apple.com/en-us/HT202612) bawaan:
+
+1. Pergi ke Settings > Accessibility > Guided Access
+2. Aktifkan Guided Access
+3. Atur passcode
+4. Buka aplikasi Anda
+5. Triple-click tombol samping
+6. Sesuaikan pengaturan dan mulai Guided Access
+
+## Praktik Terbaik
+
+1. **Periksa status launcher terlebih dahulu**
+   ```typescript
+   const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+   if (!isLauncher) {
+     // Prompt user to set as launcher first
+     await CapacitorAndroidKiosk.setAsLauncher();
+   }
+   ```
+
+2. **Sediakan mekanisme keluar**
+   ```typescript
+   // Allow specific key combination to exit
+   // Or implement a secret gesture/pattern
+   async function exitKioskWithConfirmation() {
+     const confirmed = confirm('Exit kiosk mode?');
+     if (confirmed) {
+       await CapacitorAndroidKiosk.exitKioskMode();
+     }
+   }
+   ```
+
+3. **Tangani siklus hidup aplikasi**
+   ```typescript
+   // Re-enter kiosk mode when app resumes
+   window.addEventListener('resume', async () => {
+     const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+     if (!isInKioskMode) {
+       await CapacitorAndroidKiosk.enterKioskMode();
+     }
+   });
+   ```
+
+4. **Penanganan error**
+   ```typescript
+   try {
+     await CapacitorAndroidKiosk.enterKioskMode();
+   } catch (error) {
+     console.error('Failed to enter kiosk mode:', error);
+     // Notify user and provide alternative
+   }
+   ```

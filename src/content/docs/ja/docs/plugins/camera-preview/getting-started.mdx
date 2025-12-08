@@ -1,0 +1,275 @@
+---
+title: はじめに
+locale: ja
+description: Camera Previewプラグインをインストールして使用し、Capacitorアプリでリアルタイムのカメラフィードを表示し、写真/動画をキャプチャする方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/camera-preview" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **権限を設定**
+
+   ### iOS
+   `Info.plist` にカメラ使用の説明を追加します:
+   ```xml
+   <key>NSCameraUsageDescription</key>
+   <string>To take photos and videos</string>
+   <key>NSMicrophoneUsageDescription</key>
+   <string>To record audio with videos</string>
+   <key>NSPhotoLibraryUsageDescription</key>
+   <string>To save photos and videos</string>
+   ```
+
+   ### Android
+   `AndroidManifest.xml` にカメラ権限を追加します:
+   ```xml
+   <uses-permission android:name="android.permission.CAMERA" />
+   <uses-permission android:name="android.permission.RECORD_AUDIO" />
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   ```
+</Steps>
+
+## 使用方法
+
+プラグインをインポートして、そのメソッドを使用してカメラを制御します:
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+import { CameraPreviewOptions, CameraPreviewPictureOptions } from '@capgo/camera-preview';
+
+// カメラプレビューを開始
+const startCamera = async () => {
+  const cameraPreviewOptions: CameraPreviewOptions = {
+    position: 'rear',
+    height: 1920,
+    width: 1080,
+    quality: 50,
+    toBack: false,
+    paddingBottom: 0,
+    rotateWhenOrientationChanged: true,
+    x: 0,
+    y: 0
+  };
+
+  await CameraPreview.start(cameraPreviewOptions);
+};
+
+// カメラプレビューを停止
+const stopCamera = async () => {
+  await CameraPreview.stop();
+};
+
+// 写真を撮る
+const takePicture = async () => {
+  const pictureOptions: CameraPreviewPictureOptions = {
+    quality: 90,
+    width: 1920,
+    height: 1080
+  };
+
+  const result = await CameraPreview.capture(pictureOptions);
+  const base64PictureData = result.value;
+
+  // base64画像データを使用
+  console.log(base64PictureData);
+};
+
+// カメラを切り替え
+const flipCamera = async () => {
+  await CameraPreview.flip();
+};
+
+// フラッシュを制御
+const setFlashMode = async (mode: 'on' | 'off' | 'auto' | 'torch') => {
+  await CameraPreview.setFlashMode({ flashMode: mode });
+};
+
+// 動画録画を開始
+const startRecording = async () => {
+  await CameraPreview.startRecordVideo({
+    storeToFile: true,
+    fileName: 'myvideo'
+  });
+};
+
+// 録画を停止
+const stopRecording = async () => {
+  const result = await CameraPreview.stopRecordVideo();
+  console.log('Video path:', result.videoFilePath);
+};
+```
+
+## APIリファレンス
+
+### start(options)
+
+カメラプレビューを開始します。
+
+```typescript
+interface CameraPreviewOptions {
+  position?: 'rear' | 'front';
+  height?: number;
+  width?: number;
+  x?: number;
+  y?: number;
+  toBack?: boolean;
+  paddingBottom?: number;
+  rotateWhenOrientationChanged?: boolean;
+  storeToFile?: boolean;
+  disableExifHeaderStripping?: boolean;
+  enableHighResolution?: boolean;
+  disableAudio?: boolean;
+  lockAndroidOrientation?: boolean;
+  enableOpacity?: boolean;
+  enableZoom?: boolean;
+}
+```
+
+### stop()
+
+カメラプレビューを停止します。
+
+### capture(options)
+
+写真を撮影し、base64エンコードされた文字列として返します。
+
+```typescript
+interface CameraPreviewPictureOptions {
+  height?: number;
+  width?: number;
+  quality?: number;
+}
+```
+
+### flip()
+
+フロントカメラとリアカメラを切り替えます。
+
+### setFlashMode(options)
+
+フラッシュモードを設定します。
+
+```typescript
+interface CameraPreviewFlashMode {
+  flashMode: 'off' | 'on' | 'auto' | 'torch';
+}
+```
+
+### startRecordVideo(options)
+
+動画録画を開始します。
+
+```typescript
+interface CameraPreviewVideoOptions {
+  storeToFile?: boolean;
+  fileName?: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  withFlash?: boolean;
+}
+```
+
+### stopRecordVideo()
+
+動画録画を停止し、動画ファイルパスを返します。
+
+## 高度な機能
+
+### フォーカス制御
+
+```typescript
+// フォーカスを設定
+await CameraPreview.setFocusCoordinate({
+  x: 100,
+  y: 100
+});
+
+// サポートされているフォーカスモードを取得
+const focusModes = await CameraPreview.getFocusModes();
+
+// フォーカスモードを設定
+await CameraPreview.setFocusMode({
+  focusMode: 'continuous-picture'
+});
+```
+
+### ズーム制御
+
+```typescript
+// 最大ズームを取得
+const maxZoom = await CameraPreview.getMaxZoom();
+
+// ズームを設定
+await CameraPreview.setZoom({
+  zoom: 2.0
+});
+
+// 現在のズームを取得
+const currentZoom = await CameraPreview.getZoom();
+```
+
+### 露出制御
+
+```typescript
+// 露出補正範囲を取得
+const range = await CameraPreview.getExposureCompensationRange();
+
+// 露出補正を設定
+await CameraPreview.setExposureCompensation({
+  exposureCompensation: 0.5
+});
+```
+
+## ベストプラクティス
+
+1. **最初に権限をリクエスト**
+   ```typescript
+   import { Camera } from '@capacitor/camera';
+
+   const requestPermissions = async () => {
+     const permissions = await Camera.requestPermissions();
+     if (permissions.camera === 'granted') {
+       // カメラプレビューを開始
+     }
+   };
+   ```
+
+2. **向きの変更を処理**
+   プレビューを自動的に調整するには、`rotateWhenOrientationChanged: true` を設定します。
+
+3. **パフォーマンスの最適化**
+   - 適切な解像度設定を使用
+   - 使用していないときはプレビューを停止
+   - 必要のない機能を無効にする
+
+4. **エラーハンドリング**
+   ```typescript
+   try {
+     await CameraPreview.start(options);
+   } catch (error) {
+     console.error('Failed to start camera:', error);
+   }
+   ```
+
+## プラットフォームノート
+
+### iOS
+- iOS 10.0+が必要
+- AVFoundationフレームワークを使用
+- ハードウェアアクセラレーションサポート
+
+### Android
+- Android 5.0（API 21）+が必要
+- Camera2 APIを使用
+- デバイスの機能に基づいて様々なカメラ機能をサポート

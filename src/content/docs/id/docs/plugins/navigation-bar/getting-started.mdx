@@ -1,0 +1,200 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan mengkonfigurasi plugin Capacitor Navigation Bar untuk menyesuaikan warna dan gaya navigation bar Android.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurasi plugin**
+
+   **Atur Warna Navigation Bar:**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Atur warna navigation bar
+   await NavigationBar.setColor({
+     color: '#FF0000', // Warna merah
+     darkButtons: false // Gunakan tombol terang
+   });
+   ```
+
+   **Dukungan Tema Dinamis:**
+   ```typescript
+   // Atur warna berdasarkan tema
+   const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+   await NavigationBar.setColor({
+     color: isDarkMode ? '#000000' : '#FFFFFF',
+     darkButtons: !isDarkMode
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="Android">
+       **Persyaratan Minimum:**
+       - Android 5.0 (API level 21) atau lebih tinggi
+       - Plugin hanya berfungsi di perangkat Android
+
+       Tidak perlu pengaturan tambahan di AndroidManifest.xml.
+     </TabItem>
+     <TabItem label="iOS">
+       Plugin ini khusus Android. iOS tidak memiliki navigation bar yang dapat disesuaikan.
+     </TabItem>
+   </Tabs>
+
+4. **Penggunaan lanjutan**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   export class ThemeService {
+     // Atur navigation bar transparan
+     async setTransparent() {
+       await NavigationBar.setColor({
+         color: '#00000000', // Transparan
+         darkButtons: true
+       });
+     }
+
+     // Sesuaikan tema aplikasi
+     async matchAppTheme(primaryColor: string, isLight: boolean) {
+       await NavigationBar.setColor({
+         color: primaryColor,
+         darkButtons: isLight
+       });
+     }
+
+     // Dapatkan warna navigation bar saat ini
+     async getCurrentColor() {
+       const result = await NavigationBar.getColor();
+       console.log('Warna saat ini:', result.color);
+       return result.color;
+     }
+
+     // Reset ke default
+     async resetToDefault() {
+       await NavigationBar.setColor({
+         color: '#000000',
+         darkButtons: false
+       });
+     }
+   }
+   ```
+
+5. **Integrasi dengan siklus hidup aplikasi**
+   ```typescript
+   import { App } from '@capacitor/app';
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Perbarui navigation bar saat status aplikasi berubah
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       // Pulihkan warna navigation bar aplikasi Anda
+       await NavigationBar.setColor({
+         color: '#YourAppColor',
+         darkButtons: true
+       });
+     }
+   });
+
+   // Tangani perubahan tema
+   window.matchMedia('(prefers-color-scheme: dark)')
+     .addEventListener('change', async (e) => {
+       await NavigationBar.setColor({
+         color: e.matches ? '#121212' : '#FFFFFF',
+         darkButtons: !e.matches
+       });
+     });
+   ```
+</Steps>
+
+## Referensi API
+
+### Metode
+
+#### `setColor(options: ColorOptions)`
+Atur warna navigation bar dan gaya tombol.
+
+**Parameter:**
+- `options`: Objek konfigurasi
+  - `color`: string - Kode warna hex (mis., '#FF0000')
+  - `darkButtons`: boolean - Gunakan tombol gelap (true) atau tombol terang (false)
+
+**Mengembalikan:** `Promise<void>`
+
+#### `getColor()`
+Dapatkan warna navigation bar saat ini.
+
+**Mengembalikan:** `Promise<{ color: string }>`
+
+### Interface
+
+```typescript
+interface ColorOptions {
+  color: string;      // Kode warna hex
+  darkButtons: boolean; // Gaya tombol
+}
+
+interface ColorResult {
+  color: string;      // Warna hex saat ini
+}
+```
+
+## Catatan Platform
+
+### Android
+- Memerlukan Android 5.0 (API level 21) atau lebih tinggi
+- Perubahan warna langsung terjadi
+- Warna transparan didukung (gunakan alpha channel)
+- Navigation bar mungkin tidak terlihat pada perangkat dengan navigasi gesture
+
+### iOS
+- Plugin ini tidak berpengaruh pada perangkat iOS
+- iOS tidak menyediakan API untuk menyesuaikan navigasi sistem
+
+## Kasus Penggunaan Umum
+
+1. **Konsistensi Merek**: Sesuaikan navigation bar dengan warna utama aplikasi Anda
+2. **Dukungan Tema**: Beradaptasi dengan tema terang/gelap secara dinamis
+3. **Pengalaman Immersive**: Gunakan navigasi transparan untuk konten layar penuh
+4. **Indikasi Status**: Ubah warna untuk menunjukkan status aplikasi (merekam, error, dll.)
+
+## Praktik Terbaik
+
+1. **Kontras Warna**: Pastikan kontras yang cukup antara navigation bar dan tombol
+   ```typescript
+   // Contoh kontras yang baik
+   setColor({ color: '#FFFFFF', darkButtons: true });  // Bar putih, tombol gelap
+   setColor({ color: '#000000', darkButtons: false }); // Bar hitam, tombol terang
+   ```
+
+2. **Konsistensi Tema**: Perbarui navigation bar saat tema berubah
+3. **Aksesibilitas**: Pertimbangkan pengguna dengan gangguan penglihatan saat memilih warna
+4. **Performa**: Hindari perubahan warna yang sering yang mungkin mengganggu pengguna
+
+## Pemecahan Masalah
+
+**Navigation bar tidak berubah:**
+- Verifikasi perangkat menjalankan Android 5.0+
+- Periksa apakah perangkat memiliki navigasi gesture yang diaktifkan
+- Pastikan format warna adalah hex yang valid (mis., '#FF0000')
+
+**Tombol tidak terlihat:**
+- Periksa parameter `darkButtons` sesuai dengan warna latar belakang Anda
+- Latar belakang terang memerlukan `darkButtons: true`
+- Latar belakang gelap memerlukan `darkButtons: false`
+
+**Warna tampak berbeda:**
+- Beberapa versi Android mungkin memodifikasi warna sedikit
+- Gunakan warna yang sepenuhnya buram untuk hasil terbaik

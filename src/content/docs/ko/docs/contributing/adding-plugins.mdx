@@ -1,0 +1,453 @@
+---
+title: 플러그인 추가 또는 업데이트
+description: Capgo 문서에 새 플러그인을 추가하거나 기존 플러그인을 업데이트하는 방법에 대한 기여자 및 에이전트를 위한 완전한 가이드.
+sidebar:
+  order: 10
+locale: ko
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+이 가이드는 Capgo 웹사이트에 새 Capacitor 플러그인을 추가하거나 기존 플러그인 문서를 업데이트하는 방법을 설명합니다. 이는 기여자, 유지관리자 및 문서 유지관리를 돕는 AI 에이전트에게 유용합니다.
+
+## 개요
+
+Capgo 생태계에 새 플러그인을 추가할 때 플러그인이 모든 관련 위치에 올바르게 나타나도록 웹사이트 전체의 여러 파일과 위치를 업데이트해야 합니다:
+
+1. **플러그인 목록 구성** - 마스터 목록에 플러그인 메타데이터 추가
+2. **플러그인 인덱스 페이지** - 범주화된 플러그인 목록 페이지에 플러그인 추가
+3. **사이드바 네비게이션** - 문서 사이드바에 플러그인 추가
+4. **플러그인 문서** - 개요 및 시작하기 페이지 생성
+5. **플러그인 튜토리얼** - 포괄적인 튜토리얼 생성
+
+## 파일 위치
+
+### 업데이트할 주요 파일
+
+| 파일 | 목적 |
+|------|---------|
+| `/src/config/plugins.ts` | 메타데이터가 포함된 마스터 플러그인 목록 |
+| `/src/content/docs/docs/plugins/index.mdx` | 범주가 포함된 플러그인 인덱스 페이지 |
+| `/astro.config.mjs` | 사이드바 네비게이션 구성 |
+| `/src/content/docs/docs/plugins/[plugin-name]/` | 플러그인 문서 디렉토리 |
+| `/src/content/plugins-tutorials/en/` | 영어 튜토리얼 파일 |
+
+## 단계별 가이드
+
+<Steps>
+
+1. ### 마스터 목록에 플러그인 추가
+
+   `/src/config/plugins.ts`를 열고 `actions` 배열에 플러그인을 추가하세요:
+
+   ```typescript
+   // 먼저 적절한 Heroicon을 가져오기
+   import YourIconName from 'astro-heroicons/mini/IconName.astro'
+
+   // 그런 다음 actions 배열에 추가
+   {
+     name: '@capgo/your-plugin-name',
+     author: 'github.com/Cap-go',
+     description: '플러그인이 하는 일에 대한 간단한 설명',
+     href: 'https://github.com/Cap-go/your-plugin-name/',
+     title: '표시 이름',
+     icon: YourIconName,
+   }
+   ```
+
+   **사용 가능한 아이콘**: `/node_modules/astro-heroicons/mini/`에서 사용 가능한 아이콘을 확인하세요.
+
+2. ### 인덱스 페이지에 플러그인 추가
+
+   `/src/content/docs/docs/plugins/index.mdx`를 열고 적절한 범주 아래에 플러그인을 추가하세요:
+
+   ```mdx
+   <LinkCard
+     title="Your Plugin Name"
+     description="플러그인이 하는 일에 대한 간단한 설명"
+     href="/docs/plugins/your-plugin-name/"
+   />
+   ```
+
+   **범주**:
+   - ⭐ 주요 플러그인
+   - 📱 기기 및 시스템 플러그인
+   - 🎥 미디어 및 카메라 플러그인
+   - 🛠️ 유틸리티 플러그인
+   - 🤖 AI 및 고급 미디어
+   - 📍 위치 및 백그라운드 서비스
+   - 📞 통신 및 분석
+   - 🔐 보안 및 시스템
+   - 📊 Android 전용 기능
+   - 📥 다운로드 및 탐색
+
+3. ### 사이드바 네비게이션에 추가
+
+   `/astro.config.mjs`를 열고 사이드바 구성에 플러그인을 추가하세요 (약 540번째 줄):
+
+   ```javascript
+   {
+     label: 'Your Plugin Name',
+     items: [
+       { label: 'Overview', link: '/docs/plugins/your-plugin-name/' },
+       { label: 'Getting started', link: '/docs/plugins/your-plugin-name/getting-started' },
+     ],
+     collapsed: true,
+   }
+   ```
+
+   플러그인은 사이드바에서 알파벳순으로 나열됩니다.
+
+4. ### 플러그인 문서 디렉토리 생성
+
+   플러그인 문서용 새 디렉토리를 만드세요:
+
+   ```bash
+   mkdir -p /src/content/docs/docs/plugins/your-plugin-name/
+   ```
+
+5. ### 플러그인 개요 페이지 생성
+
+   `/src/content/docs/docs/plugins/your-plugin-name/index.mdx` 생성:
+
+   ```mdx
+   ---
+   title: "@capgo/your-plugin-name"
+   description: 플러그인의 목적에 대한 간단한 설명
+   tableOfContents: false
+   next: false
+   prev: false
+   sidebar:
+     order: 1
+     label: "Introduction"
+   hero:
+     tagline: 플러그인이 하는 일을 설명하는 자세한 태그라인
+     image:
+       file: ~public/your-plugin-icon.svg
+     actions:
+       - text: Get started
+         link: /docs/plugins/your-plugin-name/getting-started/
+         icon: right-arrow
+         variant: primary
+       - text: Github
+         link: https://github.com/Cap-go/your-plugin-name/
+         icon: external
+         variant: minimal
+   ---
+
+   import { Card, CardGrid } from '@astrojs/starlight/components';
+
+   <CardGrid stagger>
+     <Card title="Feature 1" icon="puzzle">
+       첫 번째 주요 기능 설명
+     </Card>
+     <Card title="Feature 2" icon="rocket">
+       두 번째 주요 기능 설명
+     </Card>
+     <Card title="크로스 플랫폼" icon="puzzle">
+       iOS 및 Android에서 모두 작동 📱
+     </Card>
+     <Card title="포괄적인 문서" icon="open-book">
+       플러그인을 마스터하려면 [문서](/docs/plugins/your-plugin-name/getting-started/)를 확인하세요.
+     </Card>
+   </CardGrid>
+   ```
+
+6. ### 시작하기 가이드 생성
+
+   `/src/content/docs/docs/plugins/your-plugin-name/getting-started.mdx` 생성:
+
+   ```mdx
+   ---
+   title: 시작하기
+   description: Capacitor 앱에서 플러그인을 설치하고 사용하는 방법을 배웁니다.
+   sidebar:
+     order: 2
+   ---
+
+   import { Steps } from '@astrojs/starlight/components';
+   import { PackageManagers } from 'starlight-package-managers'
+
+   <Steps>
+   1. **패키지 설치**
+      <PackageManagers pkg="@capgo/your-plugin-name" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+   2. **네이티브 프로젝트와 동기화**
+      <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   </Steps>
+
+   ## 구성
+
+   ### iOS 구성
+   [iOS 전용 설정 지침]
+
+   ### Android 구성
+   [Android 전용 설정 지침]
+
+   ## 사용법
+
+   [기본 사용 예시]
+
+   ## API 참조
+
+   [자세한 API 문서]
+
+   ## 전체 예시
+
+   [완전히 작동하는 예시]
+
+   ## 모범 사례
+
+   [권장 사례 및 팁]
+
+   ## 플랫폼 참고사항
+
+   [플랫폼별 참고사항 및 제한 사항]
+   ```
+
+7. ### 튜토리얼 파일 생성
+
+   `/src/content/plugins-tutorials/en/your-plugin-name.md` 생성:
+
+   ```markdown
+   ---
+   locale: en
+   ---
+   # @capgo/your-plugin-name 패키지 사용하기
+
+   `@capgo/your-plugin-name` 패키지는 [간단한 설명]입니다. 이 튜토리얼에서는 Ionic Capacitor 앱에서 이 패키지의 설치, 구성 및 사용을 안내합니다.
+
+   ## 설치
+
+   [설치 단계]
+
+   ## 구성
+
+   [iOS 및 Android용 구성 단계]
+
+   ## API 사용
+
+   [자세한 API 사용 예시]
+
+   ## 전체 예시
+
+   [완전히 작동하는 예시]
+
+   ## 모범 사례
+
+   [팁 및 모범 사례]
+
+   ## 문제 해결
+
+   [일반적인 문제 및 해결 방법]
+
+   ## 결론
+
+   [요약 및 추가 리소스 링크]
+   ```
+
+</Steps>
+
+## 플러그인 문서 구조
+
+### 필수 파일
+
+```
+src/content/docs/docs/plugins/your-plugin-name/
+├── index.mdx           # 히어로 및 기능 카드가 있는 개요 페이지
+└── getting-started.mdx # 설치 및 사용 가이드
+
+src/content/plugins-tutorials/en/
+└── your-plugin-name.md # 포괄적인 튜토리얼
+```
+
+### 선택적 파일
+
+복잡한 플러그인의 경우 추가 문서 페이지를 추가할 수 있습니다:
+
+```
+src/content/docs/docs/plugins/your-plugin-name/
+├── index.mdx
+├── getting-started.mdx
+├── api-reference.mdx   # 자세한 API 문서
+├── examples.mdx        # 추가 예시
+├── troubleshooting.mdx # 문제 해결 가이드
+└── migrations.mdx      # 마이그레이션 가이드
+```
+
+## 콘텐츠 가이드라인
+
+### 플러그인 설명 작성
+
+- **간결하게**: 설명을 100자 미만으로 유지
+- **구체적으로**: 플러그인이 무엇인지가 아니라 무엇을 하는지 설명
+- **동작 단어 사용**: "제어", "통합", "활성화"와 같은 동사로 시작
+
+**좋은 예시**:
+- "간단한 온/오프 토글로 기기 플래시 및 토치 제어"
+- "앱에 Crisp 라이브 채팅 및 고객 지원 통합"
+- "Face ID 및 Touch ID를 사용한 안전한 인증 활성화"
+
+**나쁜 예시**:
+- "플래시용 플러그인"
+- "Crisp 플러그인입니다"
+- "생체 인식 플러그인"
+
+### 문서 작성
+
+1. **설치부터 시작**: 항상 명확한 설치 단계로 시작
+2. **구성 제공**: 플랫폼별 설정 요구 사항 포함
+3. **사용 예시 표시**: 작동하는 코드 예시 제공
+4. **API 참조 포함**: 모든 메서드 및 매개변수 문서화
+5. **전체 예시 추가**: 실제 사용 패턴 표시
+6. **모범 사례 나열**: 최적 사용을 위한 팁 공유
+7. **플랫폼 차이점 문서화**: iOS와 Android 동작 명확히 하기
+8. **문제 해결 추가**: 일반적인 문제 해결
+
+### 코드 예시
+
+- 모든 코드 예시에 TypeScript 사용
+- 상단에 import 포함
+- 주요 단계를 설명하는 주석 추가
+- 오류 처리 표시
+- 기본 및 고급 사용 모두 시연
+
+## 체크리스트
+
+새 플러그인을 추가할 때 이 체크리스트를 사용하세요:
+
+- [ ] `/src/config/plugins.ts`에 플러그인 추가
+- [ ] Heroicons에서 적절한 아이콘 선택
+- [ ] 올바른 범주 아래의 `/src/content/docs/docs/plugins/index.mdx`에 플러그인 추가
+- [ ] `/astro.config.mjs`에 사이드바 항목 추가
+- [ ] 플러그인 문서 디렉토리 생성
+- [ ] `index.mdx` 개요 페이지 생성
+- [ ] `getting-started.mdx` 가이드 생성
+- [ ] `/src/content/plugins-tutorials/en/`에 튜토리얼 생성
+- [ ] 설치 지침 포함
+- [ ] iOS 구성 문서화
+- [ ] Android 구성 문서화
+- [ ] 사용 예시 제공
+- [ ] API 참조 추가
+- [ ] 완전히 작동하는 예시 포함
+- [ ] 모범 사례 나열
+- [ ] 플랫폼별 참고사항 추가
+- [ ] 모든 링크가 올바르게 작동하는지 테스트
+
+## 아이콘 참조
+
+플러그인에 사용되는 일반적인 아이콘 (`astro-heroicons/mini/`에서):
+
+| 아이콘 | 사용 사례 |
+|------|----------|
+| `BoltIcon` | 플래시, 전원, 에너지 |
+| `CameraIcon` | 카메라, 사진, 비디오 |
+| `ChatBubbleLeftIcon` | 채팅, 메시징, 통신 |
+| `FingerPrintIcon` | 생체 인식, 보안, 인증 |
+| `MapPinIcon` | 위치, 지오로케이션, 지도 |
+| `SpeakerWaveIcon` | 오디오, 사운드, 음악 |
+| `VideoCameraIcon` | 비디오, 녹화, 스트리밍 |
+| `CreditCardIcon` | 결제, 구매 |
+| `PlayCircleIcon` | 미디어 플레이어, 비디오 플레이어 |
+| `SignalIcon` | 연결성, 네트워크, 비콘 |
+| `RadioIcon` | 비콘, 방송, 무선 |
+| `ChatBubbleOvalLeftIcon` | 소셜 미디어, WeChat |
+
+## 기존 플러그인 업데이트
+
+기존 플러그인을 업데이트할 때:
+
+1. 문서에서 **버전 번호 업데이트**
+2. 주요 변경 사항이 있는 경우 **마이그레이션 가이드 추가**
+3. 새 메서드로 **API 참조 업데이트**
+4. 새 기능에 대한 **새 예시 추가**
+5. 변경된 경우 **플랫폼 요구 사항 업데이트**
+6. 새 기능을 기반으로 **모범 사례 수정**
+7. 최신 API로 **튜토리얼 최신 상태 유지**
+
+## 다국어 지원
+
+웹사이트는 여러 언어를 지원합니다. 영어 문서를 생성한 후:
+
+1. 번역 스크립트 실행:
+   ```bash
+   bun run plugins:translate_all
+   ```
+
+2. 생성된 번역 검토:
+   - `/src/content/plugins-tutorials/de/` (독일어)
+   - `/src/content/plugins-tutorials/es/` (스페인어)
+   - `/src/content/plugins-tutorials/fr/` (프랑스어)
+   - `/src/content/plugins-tutorials/it/` (이탈리아어)
+   - `/src/content/plugins-tutorials/ja/` (일본어)
+   - `/src/content/plugins-tutorials/ko/` (한국어)
+   - `/src/content/plugins-tutorials/id/` (인도네시아어)
+
+## 변경 사항 테스트
+
+플러그인 문서를 추가하거나 업데이트한 후:
+
+1. **사이트를 로컬에서 빌드**:
+   ```bash
+   npm run build
+   ```
+
+2. **오류 확인**:
+   - 모든 링크가 작동하는지 확인
+   - 이미지가 올바르게 로드되는지 확인
+   - 코드 예시가 유효한지 확인
+   - 탐색이 작동하는지 테스트
+
+3. **사이트 미리보기**:
+   ```bash
+   npm run dev
+   ```
+
+4. **플러그인이 나타나는지 확인**:
+   - 플러그인 목록 페이지 확인
+   - 사이드바 탐색 확인
+   - 모든 문서 페이지 테스트
+   - 튜토리얼 페이지 작동 확인
+
+## 일반적인 함정
+
+<Aside type="caution">
+**이러한 일반적인 실수를 피하세요:**
+
+1. **동기화 잊기**: 예시에서 항상 `npx cap sync` 실행
+2. **일관성 없는 이름**: 모든 곳에서 동일한 플러그인 이름 사용
+3. **플랫폼 구성 누락**: iOS 및 Android 설정 모두 문서화
+4. **깨진 링크**: 상대 링크 사용 및 작동하는지 확인
+5. **오류 처리 없음**: 예시에서 항상 try-catch 표시
+6. **import 누락**: 예시에 필요한 모든 import 포함
+7. **불명확한 설명**: 플러그인이 하는 일을 구체적으로 설명
+</Aside>
+
+## 도움 받기
+
+플러그인 문서를 추가하거나 업데이트하는 데 도움이 필요한 경우:
+
+- **Discord**: [Discord 커뮤니티](https://discord.capgo.app)에 참여
+- **GitHub**: [웹사이트 리포지토리](https://github.com/Cap-go/website)에 이슈 열기
+- **이메일**: support@capgo.app으로 팀에 문의
+
+## 예시
+
+참고를 위해 다음과 같은 잘 문서화된 플러그인을 확인하세요:
+
+- **Updater**: `/src/content/docs/docs/plugins/updater/` (여러 페이지가 있는 복잡한 플러그인)
+- **Flash**: `/src/content/docs/docs/plugins/flash/` (간단한 플러그인, 좋은 시작 예시)
+- **Social Login**: `/src/content/docs/docs/plugins/social-login/` (하위 페이지가 있는 플러그인)
+
+## 요약
+
+Capgo 문서에 플러그인을 추가하는 것은 다음과 같습니다:
+
+1. 마스터 구성에 메타데이터 추가
+2. 범주화된 인덱스 페이지에 플러그인 추가
+3. 사이드바 네비게이션 구성
+4. 포괄적인 문서 페이지 생성
+5. 자세한 튜토리얼 작성
+6. 모든 변경 사항을 로컬에서 테스트
+
+이 가이드를 따르면 플러그인이 일관되게 문서화되고 사용자가 쉽게 찾을 수 있도록 보장됩니다.

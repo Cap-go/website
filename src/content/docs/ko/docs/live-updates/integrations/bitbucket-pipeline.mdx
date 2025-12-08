@@ -1,0 +1,498 @@
+---
+title: Bitbucket Pipelines 통합
+description: "앱 업데이트의 자동 배포를 위해 Capgo Live Updates를 Bitbucket Pipelines와 통합하는 방법을 알아보세요."
+sidebar:
+  order: 4
+locale: ko
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo Live Updates를 Bitbucket Pipelines와 통합하여 코드 변경 사항을 푸시할 때마다 앱 업데이트를 자동으로 배포하세요. 이 가이드는 자동화된 빌드, 테스트 및 배포 워크플로우 설정을 다룹니다.
+
+## 사전 요구 사항
+
+Bitbucket Pipelines 통합을 설정하기 전에 다음을 준비해야 합니다:
+
+- 저장소가 있는 Bitbucket 계정
+- 구성된 앱이 있는 Capgo 계정
+- 프로젝트에 구성된 Node.js 및 npm/yarn
+
+## Bitbucket Pipelines 설정
+
+### 1단계: 저장소 변수 구성
+
+먼저 Bitbucket 저장소에 필요한 변수를 설정합니다:
+
+<Steps>
+
+1. Bitbucket 저장소로 이동
+2. **Repository settings** → **Pipelines** → **Repository variables**로 이동
+3. 다음 변수 추가:
+
+</Steps>
+
+| 변수 이름 | 값 | Secured |
+|---------------|-------|---------|
+| `CAPGO_TOKEN` | Capgo API 토큰 | ✅ 예 |
+
+<Aside type="tip">
+
+[console.capgo.app/apikeys](https://console.capgo.app/apikeys)에서 Capgo API 토큰을 받으세요. 앱 ID는 이미 `capacitor.config.ts` 파일에 구성되어 있습니다.
+
+</Aside>
+
+## 간단한 구성
+
+main 브랜치에 푸시할 때마다 프로덕션에 배포하는 기본 구성:
+
+```yaml
+# bitbucket-pipelines.yml - 간단한 구성
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and Deploy to Production
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+          artifacts:
+            - dist/**
+```
+
+## 고급 구성
+
+### 기능 브랜치 배포
+
+검토 및 테스트를 위해 기능 브랜치를 테스트 채널에 배포:
+
+```yaml
+# 기능 브랜치 배포
+pipelines:
+  branches:
+    feature/*:
+      - step:
+          name: Deploy Feature Branch
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - BRANCH_NAME=$(echo $BITBUCKET_BRANCH | sed 's/[^a-zA-Z0-9-]/-/g')
+            - CHANNEL_NAME="feature-$BRANCH_NAME"
+            - npm install -g @capgo/cli
+            - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+          artifacts:
+            - dist/**
+```
+
+<Aside type="tip">
+
+**채널로 테스트**: 기능 채널에 배포한 후 해당 특정 채널을 사용하도록 구성하여 앱에서 업데이트를 테스트할 수 있습니다. [앱에서 채널 구성](/docs/live-updates/channels/#configuring-the-channel-in-your-app)에 대해 자세히 알아보세요.
+
+</Aside>
+
+### 암호화 사용
+
+[Capgo의 암호화 기능](/docs/live-updates/encryption/)을 사용하는 경우 CI/CD 환경에 개인 키를 안전하게 저장해야 합니다.
+
+로컬에서 [암호화 키 설정](/docs/live-updates/encryption/#setting-up-encryption) 후 Bitbucket 변수에 개인 키를 추가하세요:
+
+```shell
+# 개인 키 콘텐츠 표시(이 출력 복사)
+cat .capgo_key_v2
+```
+
+이 콘텐츠를 Bitbucket 저장소 변수에 `CAPGO_PRIVATE_KEY`로 추가(비밀로 표시)한 다음 파이프라인에서 사용:
+
+```yaml
+# 암호화로 배포
+- step:
+    name: Deploy to Capgo with Encryption
+    script:
+      - npm install -g @capgo/cli
+      - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**보안 모범 사례:**
+- `.capgo_key_v2` 파일을 절대 버전 관리에 커밋하지 마세요
+- 개인 키는 안전한 CI/CD 비밀 관리에만 저장
+- 다른 환경에 대해 다른 키 사용
+
+</Aside>
+
+### 다중 채널 구성
+
+여러 배포 채널 설정 및 관리에 대한 포괄적인 정보는 [Channels 문서](/docs/live-updates/channels/)를 참조하세요.
+
+여러 환경 및 풀 리퀘스트 배포가 포함된 완전한 구성:
+
+```yaml
+# bitbucket-pipelines.yml - 고급 다중 채널 구성
+image: node:22
+
+definitions:
+  steps:
+    - step: &build-step
+        name: Build Application
+        script:
+          - npm ci
+          - npm run test
+          - npm run build
+        artifacts:
+          - dist/**
+
+    - step: &deploy-step
+        name: Deploy to Capgo
+        script:
+          - npm install -g @capgo/cli
+          - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+pipelines:
+  branches:
+    main:
+      - step:
+          <<: *build-step
+      - step:
+          <<: *deploy-step
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - export CHANNEL_NAME=production
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+    develop:
+      - step:
+          <<: *build-step
+      - step:
+          <<: *deploy-step
+          name: Deploy to Development
+          deployment: development
+          script:
+            - export CHANNEL_NAME=development
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+  pull-requests:
+    '**':
+      - step:
+          <<: *build-step
+      - step:
+          name: Deploy PR to Test Channel
+          script:
+            - CHANNEL_NAME="pr-$BITBUCKET_PR_ID"
+            - npm install -g @capgo/cli
+            - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+          artifacts:
+            - dist/**
+```
+
+### 다중 환경 파이프라인
+
+스테이징 및 프로덕션 환경이 있는 복잡한 배포 시나리오의 경우:
+
+```yaml
+# 다중 환경 파이프라인
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to Staging
+          deployment: staging
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel staging
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+
+    develop:
+      - step:
+          name: Build and Deploy to Development
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel development
+          artifacts:
+            - dist/**
+```
+
+### 브랜치 기반 배포 전략
+
+다른 브랜치를 적절한 채널에 자동으로 배포:
+
+```yaml
+# 동적 채널 배포
+image: node:22
+
+definitions:
+  scripts:
+    - script: &determine-channel |
+        if [ "$BITBUCKET_BRANCH" = "main" ]; then
+          export CHANNEL_NAME="production"
+        elif [ "$BITBUCKET_BRANCH" = "develop" ]; then
+          export CHANNEL_NAME="staging"
+        else
+          export CHANNEL_NAME="development"
+        fi
+        echo "Deploying to channel: $CHANNEL_NAME"
+
+pipelines:
+  default:
+    - step:
+        name: Build and Deploy
+        script:
+          - npm ci
+          - npm run test
+          - npm run build
+          - *determine-channel
+          - npm install -g @capgo/cli
+          - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+        artifacts:
+          - dist/**
+```
+
+### 병렬 파이프라인 실행
+
+병렬 단계로 빌드 시간 최적화:
+
+```yaml
+# 병렬 실행 파이프라인
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - parallel:
+          - step:
+              name: Run Tests
+              script:
+                - npm ci
+                - npm run test
+          - step:
+              name: Lint Code
+              script:
+                - npm ci
+                - npm run lint
+      - step:
+          name: Build Application
+          script:
+            - npm ci
+            - npm run build
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to Production
+          deployment: production
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+## 보안 모범 사례
+
+### 저장소 변수
+
+<Steps>
+
+1. **보안 변수**: API 토큰을 항상 보안으로 표시
+2. **환경 변수**: 필요할 때 배포별 변수 사용
+3. **액세스 제어**: 승인된 팀원에게만 저장소 액세스 제한
+4. **토큰 교체**: Capgo API 토큰을 정기적으로 교체
+
+</Steps>
+
+### 배포 환경
+
+더 나은 보안을 위해 배포 환경 구성:
+
+```yaml
+# 환경 제한이 있는 배포
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+## 모니터링 및 알림
+
+### Slack 통합
+
+파이프라인에 Slack 알림 추가:
+
+```yaml
+# Slack 알림이 있는 파이프라인
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and Deploy
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+          after-script:
+            - |
+              if [ $BITBUCKET_EXIT_CODE -eq 0 ]; then
+                curl -X POST -H 'Content-type: application/json' \
+                  --data '{"text":"✅ Capgo deployment successful for '$BITBUCKET_BRANCH'"}' \
+                  $SLACK_WEBHOOK_URL
+              else
+                curl -X POST -H 'Content-type: application/json' \
+                  --data '{"text":"❌ Capgo deployment failed for '$BITBUCKET_BRANCH'"}' \
+                  $SLACK_WEBHOOK_URL
+              fi
+```
+
+### 이메일 알림
+
+Bitbucket의 내장 기능이나 외부 서비스를 사용하여 이메일 알림 구성:
+
+```yaml
+# 이메일 알림 단계
+- step:
+    name: Send Notification
+    script:
+      - |
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -d '{
+            "to": "team@yourcompany.com",
+            "subject": "Capgo Deployment Status",
+            "body": "Deployment of '$BITBUCKET_BRANCH' completed with status: '$BITBUCKET_EXIT_CODE'"
+          }' \
+          $EMAIL_SERVICE_URL
+    condition:
+      result: [successful, failed]
+```
+
+## 문제 해결
+
+### 일반적인 문제
+
+**"Capgo CLI not found"로 파이프라인 실패:**
+```yaml
+# CLI 설치 디버그
+- step:
+    name: Debug CLI
+    script:
+      - npm install -g @capgo/cli
+      - which capgo || echo "Capgo CLI not found"
+      - npx @capgo/cli --version
+```
+
+**인증 오류:**
+```yaml
+# 토큰 구성 확인
+- step:
+    name: Debug Auth
+    script:
+      - |
+        if [ -z "$CAPGO_TOKEN" ]; then
+          echo "CAPGO_TOKEN is not set"
+          exit 1
+        fi
+        echo "Token length: ${#CAPGO_TOKEN}"
+```
+
+**빌드 아티팩트를 찾을 수 없음:**
+```yaml
+# 빌드 출력 나열
+- step:
+    name: Debug Build
+    script:
+      - ls -la dist/
+      - find dist/ -type f -name "*.js" -o -name "*.html"
+```
+
+### 파이프라인 디버그
+
+문제를 해결하기 위한 디버깅 정보 추가:
+
+```yaml
+# 파이프라인 디버그
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Debug Information
+          script:
+            - echo "Branch: $BITBUCKET_BRANCH"
+            - echo "Commit: $BITBUCKET_COMMIT"
+            - echo "Build: $BITBUCKET_BUILD_NUMBER"
+            - env | grep BITBUCKET_ | sort
+      - step:
+          name: Build and Deploy
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+### 파이프라인 검증
+
+구성 오류를 잡기 위해 파이프라인 검증 활성화:
+
+```yaml
+# 파이프라인 검증 활성화
+options:
+  docker: true
+  size: 2x
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Validate Pipeline
+          script:
+            - echo "Pipeline validation successful"
+      - step:
+          name: Build and Deploy
+          script:
+            # ... 배포 단계
+```
+
+## 다음 단계
+
+- 다양한 배포 환경을 관리하려면 [Channels](/docs/live-updates/channels/)에 대해 알아보기
+- 고급 배포 시나리오를 위해 [Custom Storage](/docs/live-updates/custom-storage/) 살펴보기
+- 안전한 배포를 위해 [Encryption](/docs/live-updates/encryption/) 설정
+- 업데이트 적용 방법을 사용자 정의하기 위해 [Update Behavior](/docs/live-updates/update-behavior/) 구성
+
+Bitbucket Pipelines 통합을 통해 Capgo 배포를 자동화하고 모바일 앱 사용자에게 일관되고 안정적인 업데이트를 보장할 수 있습니다.

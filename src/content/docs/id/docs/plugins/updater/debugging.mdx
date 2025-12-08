@@ -1,0 +1,172 @@
+---
+title: "Debugging"
+locale: id
+description: "Cara men-debug pembaruan Capgo Anda dan memahami masalah yang mungkin terjadi dengan konfigurasi Anda"
+sidebar:
+  order: 6
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Memahami log cloud:
+
+### Dikirim dari backend
+
+| code                          | Deskripsi                                                                                                                                                                 |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **InvalidIp**                                    | Pengguna berada di pusat data Google dan pembaruan berusia kurang dari 4 jam. Ini dilakukan untuk mencegah perangkat bot Google dihitung sebagai perangkat di akun Anda. |
+| **needPlanUpgrade** (sebelumnya **needUpgrade**) | Menunjukkan bahwa Anda telah mencapai batas paket Anda, dan perangkat tidak akan menerima pembaruan sampai Anda meningkatkan atau sampai bulan berikutnya.                                  |
+| **noNew**                                        | Perangkat memiliki versi terbaru yang tersedia.                                                                                                                                |
+| **disablePlatformIos**                           | Perangkat berada di platform iOS, tetapi itu dinonaktifkan di pengaturan channel.                                                                                            |
+| **disablePlatformAndroid**                       | Perangkat berada di platform Android, tetapi itu dinonaktifkan di pengaturan channel.                                                                                        |
+| **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
+| **disableAutoUpdateUnderNative**                 | Perangkat memiliki versi (`1.2.3`), dan channel memiliki pembaruan (`1.2.2`) di bawah versi perangkat untuk dikirim, tetapi itu dinonaktifkan di pengaturan channel.                   |
+| **disableDevBuild**                              | Perangkat memiliki build dev, tetapi itu dinonaktifkan di pengaturan channel.                                                                                                   |
+| **disableEmulator**                              | Perangkat adalah emulator, tetapi itu dinonaktifkan di pengaturan channel.                                                                                                    |
+| **cannotGetBundle**                          | Gagal menghasilkan URL yang ditandatangani yang valid untuk unduhan bundle. Ini terjadi ketika pembuatan URL bundle gagal atau mengembalikan URL yang tidak valid (tidak dimulai dengan http/https) dan tidak ada manifest yang tersedia sebagai fallback.                                                                                          |
+| **cannotUpdateViaPrivateChannel**              | Perangkat mencoba untuk mengaitkan diri dengan channel privat, tetapi pengaturan channel tidak mengizinkan pengaitan perangkat sendiri (`allow_device_self_set` adalah false) dan channel tidak publik.                                                                                    |
+| **channelMisconfigured**                       | Channel dikonfigurasi untuk menonaktifkan auto-update berdasarkan nomor versi (`disable_auto_update: 'version_number'`), tetapi field `min_update_version` bundle adalah null, sehingga tidak mungkin untuk menentukan perangkat mana yang harus menerima pembaruan.                                                                                                                 |
+| **disableAutoUpdateMetadata**                  | Auto-update dinonaktifkan oleh metadata nomor versi. Channel memerlukan versi perangkat minimal `min_update_version`, tetapi versi perangkat saat ini lebih rendah dari ambang batas ini.                                                                                                         |
+| **disableAutoUpdateToMajor**                   | Pengaturan channel `disable_auto_update: 'major'` mencegah pembaruan yang akan meningkatkan nomor versi major (misalnya, memblokir 1.x.x dari pembaruan ke 2.x.x).                                                                                             |
+| **disableAutoUpdateToMinor**                   | Pengaturan channel `disable_auto_update: 'minor'` mencegah pembaruan yang akan meningkatkan nomor versi minor (misalnya, memblokir 1.2.x dari pembaruan ke 1.3.x).                                                                                             |
+| **disableAutoUpdateToPatch**                   | Pengaturan channel `disable_auto_update: 'patch'` mencegah pembaruan yang akan meningkatkan nomor versi patch, atau hanya mengizinkan pembaruan tingkat patch dalam versi major.minor yang sama (misalnya, 1.2.3 dapat memperbarui ke 1.2.4 tetapi tidak 1.2.2 atau 1.3.0).                                                                                             |
+| **missingBundle**                              | Bundle yang ditetapkan ke channel ini tidak memiliki konten yang dapat diunduh. Ini berarti bundle tidak memiliki `external_url`, tidak ada `r2_path`, bukan versi built-in, dan tidak ada entri manifest yang tersedia untuk diunduh.                                                                                                                   |
+| **NoChannelOrOverride**                        | Tidak ada channel default yang dikonfigurasi untuk aplikasi ini dan perangkat tidak memiliki override channel spesifik yang ditetapkan. Setidaknya satu harus ada agar pembaruan dapat bekerja.                                                                                                     |
+| **rateLimited**                                | Perangkat telah dibatasi rate karena permintaan yang berlebihan.                                                                                                        |
+
+
+### Dikirim dari perangkat
+
+| code  | Deskripsi                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| **ping**              | Internal test action used to verify the stats system is working correctly.        |
+| **get**               | Info for downloading the new version has been sent to the device.                 |
+| **delete**            | One bundle has been deleted on the device.                                        |
+| **set**               | A bundle has been set on the device.                                              |
+| **set_fail**          | The bundle failed to set.                                                         |
+| **reset**             | The device reset to the `builtin` bundle.                                         |
+| **download_XX**       | A new bundle has been downloaded - progress indicated by XX% (increments of 10%). |
+| **download_complete** | The new bundle has finished downloading.                                          |
+| **download_manifest_start** | The device started downloading the update manifest.                             |
+| **download_manifest_complete** | The device finished downloading the update manifest.                          |
+| **download_zip_start** | The device started downloading the bundle archive.                                   |
+| **download_zip_complete** | The device finished downloading the bundle archive.                                 |
+| **download_manifest_file_fail** | One manifest entry failed to download; the stats payload puts `version_name` in the form `version:fileName` to pinpoint the asset. |
+| **download_manifest_checksum_fail** | The manifest file failed checksum validation.                           |
+| **download_manifest_brotli_fail** | The manifest file failed to decompress using Brotli.                       |
+| **download_fail**     | The new bundle failed to download.                                                |
+| **update_fail**       | The new bundle has been installed but failed to call `notifyAppReady`.            |
+| **checksum_fail**     | The new bundle failed to validate the checksum. If you're using Capgo Cloud and encounter this error, it typically means your app version is expecting a different checksum type. The latest version of the CLI and plugins (version 5.10.0+, 6.25.0+ or 7+) use SHA256 checksums, while older plugins used CRC32. If you see a checksum fail, check if the checksum is CRC32 (a shorter hash) rather than SHA256. This usually indicates the bundle was uploaded with an old version of the CLI. Verify your bundle version in the Capgo dashboard - bundles created since version 5.10.0/6.25.0/7 should use SHA256. If you're seeing CRC32 checksums, ensure you have the latest plugin version installed locally (the CLI checks your local plugin version to determine which checksum type to upload), then upgrade your CLI and re-upload the bundle.                                   |
+| **windows_path_fail** | The zip has files who contain windows path who are illegal                        |
+| **canonical_path_fail** | The path of files is not canonical                                              |
+| **directory_path_fail** | There is an error in the path of zip files                                         |
+| **unzip_fail**          | unzip failed                                                                   |
+| **low_mem_fail** | Download failed because of low memory in the device                                    |
+| **app_moved_to_background** | The application entered the background state.                                   |
+| **app_moved_to_foreground** | The application entered the foreground state.                                   |
+| **decrypt_fail**        | Failed to decrypt the downloaded bundle.                                          |
+| **getChannel**          | The current channel for the device was queried.                                   |
+| **setChannel**          | A channel was successfully set for the device.                                    |
+| **uninstall**           | The application was uninstalled or Capgo data cleared.                            |
+| **blocked_by_server_url** | Server.url is present in your capacitor config, this make Capacitor serve remote url and ignore local files, while our updater is made to function with local file, Server.url Is consider by Capacitor Makers as bad practice in production and will lead to many issue and plugin not working correctly.                         |
+
+### Bundle status
+
+* `SUCCESS`: install bundle done
+* `ERROR`: install or download failed
+* `PENDING`: Download done, pending release
+* `DELETED`: Bundle deleted, still presented for stats
+* `DOWNLOADING`: Currently downloading a bundle
+
+## Understanding device logs:
+
+### Debug command:
+
+There is a debug command for Capgo cloud users.
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+This will allow you to check all events happening in the app and find a solution if updates don't happen.
+
+### IOS
+
+to find your logs on Xcode
+
+<LinkCard
+    title="Getting the Device Log in Xcode"
+    href="https://intercom.help/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
+/>
+
+### Android:
+
+to find your logs on Android studio
+
+<LinkCard
+    title="View logs with Logcat"
+    href="https://developer.android.com/studio/debug/am-logcat"
+/>
+
+### Explanations Logs
+
+* `Failed to download from` **=>** same as **download\_fail**
+* `notifyAppReady was not called, roll back current bundle` => same as as **update\_fail**
+
+## Finding the downloaded bundle in your device
+
+### iOS
+
+To debug on iOS, you need to dump the app on your computer, you can do it like this:
+
+Xcode has a built-in feature for inspecting the file system of developer-installed apps on an iOS device.
+![Xcode Window menu showing Devices and Simulators option](/ios_debug_update_1.webp)
+
+To achieve this:
+
+* Connect your device to your Mac and select Window > Devices in the Xcode menubar.
+* Select your device in the left pane under the Devices section.
+* This will show a list of developer-installed apps for that device.
+* Select the app you want to inspect and then select the 3 dots icon near the bottom of the screen.
+* Here you can view the current file system by selecting download a snapshot of it.
+
+![Xcode Devices panel showing app container download option](/ios_debug_update_2.webp)
+
+Selecting Download Container... will download and export a snapshot of the file system as a .xcappdata file that you can browse through.
+
+![Downloaded xcappdata file with Show Package Contents context menu](/ios_debug_update_3.webp)
+
+Right-click on this file and select Show Package Contents to open the folder.
+
+Open the App Data folder, and you should now see a few folders like Documents, Library, tmp, etc.
+
+![iOS app container folder structure showing Documents and Library folders](/ios_debug_update_4.webp)
+
+Then you will find a version in 2 folders:
+
+`library/NoCloud/ionic_built_snapshots` is necessary after the app reboot
+
+and `documents/versions` for hot reload
+
+### Android
+
+To debug on Android, you need to access the device from Android Studio:
+
+* Click View > Tool Windows > Device File Explorer or click the Device File Explorer button in the tool window bar to open the Device File Explorer.
+* Select a device from the dropdown list.
+* Open the path **data/data/APP\_NAME/** where **APP\_NAME is your app ID.**
+
+![Android Studio Device File Explorer showing app data directory](/android_debug_update.webp)
+
+Then Find the `versions` folder to see all the versions
+
+:::tip[Did you know?]
+On Android, all versions are stored in one folder, unlike IOS where it has to be duplicated in two locations.
+:::
+
+## Understanding ios production crash logs
+
+<LinkCard
+    title="How to review your app's crash logs"
+    href="https://developer.apple.com/news/?id=nra79npr"
+/>

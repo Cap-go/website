@@ -1,0 +1,166 @@
+---
+title: Iniziare
+locale: it
+description: Scopri come installare e utilizzare il plugin File Compressor per comprimere immagini nella tua app Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-file-compressor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Supporto Piattaforma
+
+| Piattaforma | Formati Supportati | Note |
+|----------|-------------------|-------|
+| iOS | JPEG | Solo compressione JPEG supportata |
+| Android | JPEG, WebP | Entrambi i formati completamente supportati |
+| Web | JPEG, WebP | Compressione basata su Canvas API |
+
+Nota: I metadati EXIF vengono rimossi durante la compressione su tutte le piattaforme.
+
+## Utilizzo
+
+Importa il plugin e comprimi le immagini:
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+
+// Compress an image
+const compressImage = async () => {
+  const result = await FileCompressor.compressImage({
+    source: 'file:///path/to/image.jpg',
+    quality: 0.8,
+    width: 1920,
+    height: 1080
+  });
+
+  console.log('Compressed image path:', result.path);
+  console.log('Original size:', result.originalSize);
+  console.log('Compressed size:', result.size);
+};
+```
+
+## Riferimento API
+
+### compressImage(options)
+
+Comprime un file immagine con dimensioni e impostazioni di qualità specificate.
+
+```typescript
+interface CompressImageOptions {
+  source: string;           // Path to the image file
+  quality?: number;         // 0.0 to 1.0 (default: 0.8)
+  width?: number;           // Target width in pixels
+  height?: number;          // Target height in pixels
+  format?: 'jpeg' | '.webp'; // Output format
+}
+
+interface CompressImageResult {
+  path: string;             // Path to compressed image
+  size: number;             // Compressed file size in bytes
+  originalSize: number;     // Original file size in bytes
+}
+
+const result = await FileCompressor.compressImage(options);
+```
+
+**Note Importanti:**
+- I metadati EXIF vengono rimossi durante la compressione su tutte le piattaforme
+- Le proporzioni vengono mantenute automaticamente se viene fornita solo una dimensione
+- I file compressi vengono salvati in directory temporanee sulle piattaforme native
+
+### getPluginVersion()
+
+Ottieni la versione del plugin nativo.
+
+```typescript
+const { version } = await FileCompressor.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Esempio Completo
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+import { Camera } from '@capacitor/camera';
+
+export class ImageCompressionService {
+  async captureAndCompress() {
+    try {
+      // Take a photo
+      const photo = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: false,
+        resultType: 'uri'
+      });
+
+      if (!photo.path) {
+        throw new Error('No image path');
+      }
+
+      // Compress the photo
+      const compressed = await FileCompressor.compressImage({
+        source: photo.path,
+        quality: 0.7,
+        width: 1920,
+        height: 1080,
+        format: 'jpeg'
+      });
+
+      console.log(`Compression ratio: ${
+        ((1 - compressed.size / compressed.originalSize) * 100).toFixed(1)
+      }%`);
+
+      return compressed.path;
+    } catch (error) {
+      console.error('Compression failed:', error);
+      throw error;
+    }
+  }
+
+  async batchCompress(imagePaths: string[]) {
+    const results = [];
+
+    for (const path of imagePaths) {
+      try {
+        const result = await FileCompressor.compressImage({
+          source: path,
+          quality: 0.8,
+          width: 1280
+        });
+        results.push(result);
+      } catch (error) {
+        console.error(`Failed to compress ${path}:`, error);
+      }
+    }
+
+    return results;
+  }
+}
+```
+
+## Migliori Pratiche
+
+1. **Impostazioni di Qualità**: Inizia con qualità 0.8 per un buon equilibrio tra dimensione del file e qualità dell'immagine
+2. **Dimensioni di Ridimensionamento**: Specifica le dimensioni solo quando necessario - le proporzioni vengono preservate automaticamente
+3. **Selezione Formato**: Usa JPEG per foto e WebP per migliore compressione (solo Android/Web)
+4. **Gestione Errori**: Racchiudi sempre le chiamate di compressione in blocchi try-catch
+5. **Pulizia**: Ricorda di pulire i file temporanei dopo l'uso
+
+## Risoluzione Problemi
+
+### Problemi Comuni
+
+**L'immagine non si comprime**: Assicurati che il percorso sorgente sia valido e accessibile
+**Memoria insufficiente**: Riduci le dimensioni target o comprimi le immagini una alla volta
+**Formato non supportato**: Controlla la tabella di supporto piattaforma sopra

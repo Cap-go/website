@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-android-age-signals"
+description: Google Play Age Signals API-Wrapper - Erkennen Sie überwachte Konten, Elterngenehmigungen und verifizierte Benutzer.
+locale: de
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Greifen Sie auf Google Play Age Signals zu, um überwachte Konten zu erkennen, Benutzeralter zu überprüfen und Kinderschutzbestimmungen in Ihrer Android-App einzuhalten.
+  image:
+    file: ~public/icons/plugins/android-age-signals.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/age-signals/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-age-signals/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Überwachte Konten" icon="setting">
+    Erkennen Sie, wann Benutzer überwachte Google-Konten haben, die von Erziehungsberechtigten verwaltet werden
+  </Card>
+  <Card title="Altersüberprüfung" icon="approve-check-circle">
+    Identifizieren Sie verifizierte Benutzer, die 18+ sind, mit der Altersüberprüfung von Google
+  </Card>
+  <Card title="Compliance" icon="approve-check">
+    Halten Sie Kinderschutzbestimmungen wie COPPA und GDPR ein
+  </Card>
+  <Card title="Elterngenehmigungen" icon="star">
+    Verfolgen Sie ausstehende Genehmigungen und den Zustimmungsstatus der Erziehungsberechtigten
+  </Card>
+  <Card title="Nur Android" icon="puzzle">
+    Speziell für Android mit Google Play Services entwickelt
+  </Card>
+  <Card title="Einfache API" icon="rocket">
+    Einzelner Methodenaufruf zum Abrufen aller Alterssignale
+  </Card>
+</CardGrid>

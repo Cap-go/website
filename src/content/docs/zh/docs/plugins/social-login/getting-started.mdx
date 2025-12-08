@@ -1,0 +1,35 @@
+---
+title: Getting Started
+locale: zh
+description: 了解如何安装和配置 Capacitor Social Login 插件，通过 Google、Apple 和 Facebook 登录的无缝集成增强应用的身份验证。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+import MicroCard from '@/components/MicroCard.astro'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **配置插件**
+   <div class="flex flex-nowrap gap-4 h-full">
+      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important;">
+         <MicroCard href="/docs/plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
+            为您的应用配置 Google 登录
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/facebook/" title="Facebook" icon="facebook">
+            设置 Facebook 登录集成
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/apple/general/" title="Apple" icon="apple">
+            启用 Apple 登录
+         </MicroCard>
+      </div>
+   </div>
+</Steps>

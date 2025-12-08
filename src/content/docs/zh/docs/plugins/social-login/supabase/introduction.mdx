@@ -1,0 +1,91 @@
+---
+title: Supabase Integration Introduction
+locale: zh
+description: 了解如何将 Supabase 身份验证与 Capacitor Social Login 插件集成，实现完整的身份验证解决方案。
+sidebar:
+    order: 1
+---
+
+## 概述
+
+本教程将指导您使用 Capacitor Social Login 插件设置 Supabase 身份验证。此集成允许您在移动平台上使用原生社交登录提供商（Google、Apple、Facebook、Twitter），同时利用 Supabase Auth 进行后端身份验证和 PostgreSQL 进行数据存储。
+
+## 您将学到什么
+
+- 如何配置 Supabase 身份验证
+- 如何将 Capacitor Social Login 插件与 Supabase Auth 集成
+- Android、iOS 和 Web 的平台特定设置
+- 如何安全地处理 Supabase 的 nonce
+
+## 您需要什么
+
+在开始之前，请确保您已具备：
+
+1. **Supabase 项目**
+   - 在 [Supabase 控制台](https://app.supabase.com/)创建项目
+   - 启用 Google OAuth 提供商
+   - 获取您的 Supabase 项目 URL 和 anon key
+
+2. **Supabase JS SDK**
+   - 在您的项目中安装 Supabase：
+     ```bash
+     npm install @supabase/supabase-js
+     ```
+
+3. **Capacitor 项目**
+   - 现有的 Capacitor 应用程序
+   - 已安装 Capacitor Social Login 插件：
+     ```bash
+     npm install @capgo/capacitor-social-login
+     npx cap sync
+     ```
+
+4. **平台特定的 Google 设置**
+   - 完成目标平台的 Google 登录设置：
+     - [Google Login Android 设置](/docs/plugins/social-login/google/android/)
+     - [Google Login iOS 设置](/docs/plugins/social-login/google/ios/)
+     - [Google Login Web 设置](/docs/plugins/social-login/google/web/)
+
+## 示例应用程序
+
+代码仓库中提供了完整的工作示例：
+
+**代码仓库**：[您可以在此处找到代码仓库](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+
+示例应用演示了：
+- 使用 Supabase 的电子邮件/密码身份验证
+- Google 登录集成（Android、iOS 和 Web）
+- 使用 Supabase PostgreSQL 表的简单键值存储
+- 使用行级安全性（RLS）的用户特定数据存储
+
+## 关键实现细节
+
+### Nonce 处理
+
+Supabase 为了安全需要特殊的 nonce 处理。该实现遵循 [React Native Google Sign In 文档](https://react-native-google-signin.github.io/docs/security#usage-with-supabase)：
+
+- 生成 `rawNonce`（URL 安全的随机字符串）
+- 使用 SHA-256 对其进行哈希处理以获得 `nonceDigest`
+- 将 `nonceDigest` 传递给 Google Sign-In
+- 将 `rawNonce` 传递给 Supabase（Supabase 在内部对其进行哈希处理以进行比较）
+
+### JWT 验证
+
+示例实现包括 JWT 验证以确保：
+- 令牌 audience 与您配置的 Google 客户端 ID 匹配
+- nonce 与预期的摘要匹配
+- 验证失败时自动重试（对于 iOS 特别重要）
+
+### 平台特定注意事项
+
+- **iOS**：令牌缓存可能会导致 nonce 问题 - 该实现会自动处理此问题
+- **Web**：必须在挂载时调用 `isLoggedIn()` 来处理 OAuth 重定向
+- **Android**：使用 SHA-1 指纹配置的标准实现
+
+## 下一步
+
+继续设置指南：
+- [Supabase Google Login - 通用设置](./google/general/) - 概述和先决条件
+- [Android 设置](./google/android/) - Android 特定配置
+- [iOS 设置](./google/ios/) - iOS 特定配置
+- [Web 设置](./google/web/) - Web 特定配置

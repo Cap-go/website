@@ -1,0 +1,99 @@
+---
+title: Firebase 통합 소개
+locale: ko
+description: 완전한 인증 솔루션을 위해 Capacitor Social Login 플러그인과 Firebase Authentication을 통합하는 방법을 알아보세요.
+sidebar:
+    order: 1
+---
+
+## 개요
+
+이 튜토리얼은 Capacitor Social Login 플러그인과 Firebase Authentication 설정 과정을 안내합니다. 이 통합을 통해 모바일 플랫폼에서 네이티브 소셜 로그인 제공업체(Google, Apple, Facebook, Twitter)를 사용하고 백엔드 인증을 위한 Firebase Auth와 데이터 저장을 위한 Firestore를 활용할 수 있습니다.
+
+## 배울 내용
+
+- Firebase Authentication 구성 방법
+- Capacitor Social Login 플러그인을 Firebase Auth와 통합하는 방법
+- Android, iOS 및 Web을 위한 플랫폼별 설정
+
+## 필요한 것
+
+시작하기 전에 다음이 필요합니다:
+
+1. **Firebase 프로젝트**
+   - [Firebase Console](https://console.firebase.google.com/)에서 프로젝트 생성
+   - Authentication 활성화(이메일/비밀번호 및 Google 로그인)
+   - Firebase 구성 자격 증명 가져오기
+
+2. **Firebase JS SDK**
+   - 프로젝트에 Firebase 설치:
+     ```bash
+     npm install firebase
+     ```
+
+3. **Capacitor 프로젝트**
+   - 기존 Capacitor 애플리케이션
+   - Capacitor Social Login 플러그인 설치:
+     ```bash
+     npm install @capgo/capacitor-social-login
+     npx cap sync
+     ```
+
+## 예제 애플리케이션
+
+완전히 작동하는 예제는 리포지토리에서 확인할 수 있습니다:
+
+**코드 리포지토리**: [코드 리포지토리는 여기에서 찾을 수 있습니다](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+
+예제 앱은 다음을 보여줍니다:
+- Firebase를 사용한 이메일/비밀번호 인증
+- Google 로그인 통합(Android, iOS 및 Web)
+- Firebase Firestore 컬렉션을 사용한 간단한 키-값 저장소
+- Firestore 하위 컬렉션의 사용자별 데이터 저장
+
+
+## Capacitor에서 Firebase SDK 사용에 대한 참고사항
+
+Capacitor에서 Firebase JS SDK를 사용할 때 인증 메서드를 사용할 때 Firebase Auth 인스턴스를 약간 다르게 초기화해야 합니다.
+
+웹 플랫폼에서는 `getAuth` 함수를 사용하여 Firebase Auth 인스턴스를 가져옵니다.
+
+```typescript
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+```
+
+안타깝게도 Capacitor에서는 이것이 작동하지 않으며 Firebase 인증이 중단됩니다. [이 블로그 포스트](https://harryherskowitz.com/2021/08/23/firebase-capacitor.html)에 명시된 대로 `initializeAuth` 함수를 사용하여 Firebase Auth 인스턴스를 초기화해야 합니다.
+다음과 같이 보입니다:
+
+```typescript
+import { initializeApp } from 'firebase/app';
+import { initializeAuth } from 'firebase/auth';
+
+const app = initializeApp(firebaseConfig);
+
+function whichAuth() {
+  let auth;
+  if (Capacitor.isNativePlatform()) {
+    auth = initializeAuth(app, {
+      persistence: indexedDBLocalPersistence,
+    });
+  } else {
+    auth = getAuth(app);
+  }
+  return auth;
+}
+
+export const auth = whichAuth();
+```
+## 다음 단계
+
+설정 가이드를 계속 진행하세요:
+- [Firebase Setup](./google/general/) - Firebase 프로젝트 구성
+- [Android Setup](./google/android/) - Android 전용 구성
+- [iOS Setup](./google/ios/) - iOS 전용 구성
+- [Web Setup](./google/web/) - Web 전용 구성
+

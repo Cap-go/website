@@ -1,0 +1,67 @@
+---
+title: Inicio de sesión de Apple en iOS
+locale: es
+description: Esta guía completa te guiará a través del proceso de configuración del inicio de sesión de Apple usando Capacitor en dispositivos iOS, garantizando una integración fluida al cubrir todos los pasos y configuraciones necesarias.
+sidebar:
+    order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Desglosemos lo que vas a necesitar para configurar el inicio de sesión de Apple en iOS.
+
+<Steps>
+1. Configura las capacidades de tu aplicación.
+
+    Para hacer esto, abre Xcode, haz clic en `App`
+    ![App XCode](/social-login-assets/app-xcode.png)
+
+2. Asegúrate de seleccionar el objetivo correcto.
+
+    ![XCode App Target](/social-login-assets/xcode-app-target.png)
+
+3. Asegúrate de agregar la capacidad `Sign in with Apple`.
+
+    ![App XCode Add Capability](/social-login-assets/app-xcode-add-cap.png)
+
+    ![App XCode Add Capability](/social-login-assets/sign-with-apple-cap.png)
+
+    :::caution
+    Si no ves la capacidad `Sign in with Apple`, configura [Account & Organizational Data Sharing](https://developer.apple.com/account/resources/services/cwa/configure/)
+    :::
+
+4. Inicializa el inicio de sesión de Apple en tu aplicación.
+
+    :::note
+    Estoy usando Vue como mi framework, la implementación exacta variará según el framework de tu elección
+    :::
+
+    ```ts
+    //  onMounted is vue specific
+    onMounted(() => {
+    SocialLogin.initialize({
+        apple: {}
+    })
+    });
+    ```
+
+5. Crea un botón que comenzará el proceso de inicio de sesión.
+
+    Dicho botón debe llamar a la siguiente función:
+
+    ```ts
+    async function loginApple() {
+    const res = await SocialLogin.login({
+        provider: 'apple',
+        options: {}
+    })
+    ```
+
+6. Ejecuta tu aplicación en un dispositivo **<u>FÍSICO</u>** y pruébala.
+
+    Si seguiste los pasos de cerca, verás la siguiente pantalla después de hacer clic en tu botón.
+
+    ![Apple Sign In prompt on iOS device](/social-login-assets/apple-sign-in-ios-final.png)
+</Steps>
+
+¡Eso es todo! Ya está configurado.

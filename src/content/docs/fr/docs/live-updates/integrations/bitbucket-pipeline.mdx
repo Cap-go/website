@@ -1,0 +1,498 @@
+---
+title: Intégration Bitbucket Pipelines
+description: "Apprenez comment intégrer Capgo Live Updates avec Bitbucket Pipelines pour le déploiement automatisé de vos mises à jour d'application."
+locale: fr
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Intégrez Capgo Live Updates avec Bitbucket Pipelines pour déployer automatiquement vos mises à jour d'application à chaque fois que vous poussez des modifications de code. Ce guide couvre la configuration des workflows de build, de test et de déploiement automatisés.
+
+## Prérequis
+
+Avant de configurer l'intégration Bitbucket Pipelines, assurez-vous d'avoir :
+
+- Un compte Bitbucket avec un référentiel
+- Un compte Capgo avec une application configurée
+- Node.js et npm/yarn configurés dans votre projet
+
+## Configuration de Bitbucket Pipelines
+
+### Étape 1 : Configurer les variables du référentiel
+
+Tout d'abord, configurez les variables nécessaires dans votre référentiel Bitbucket :
+
+<Steps>
+
+1. Accédez à votre référentiel Bitbucket
+2. Allez dans **Paramètres du référentiel** → **Pipelines** → **Variables du référentiel**
+3. Ajoutez les variables suivantes :
+
+</Steps>
+
+| Nom de variable | Valeur | Sécurisé |
+|---------------|-------|---------|
+| `CAPGO_TOKEN` | Votre jeton API Capgo | ✅ Oui |
+
+<Aside type="tip">
+
+Obtenez votre jeton API Capgo depuis [console.capgo.app/apikeys](https://console.capgo.app/apikeys). L'ID de votre application est déjà configuré dans votre fichier `capacitor.config.ts`.
+
+</Aside>
+
+## Simple
+
+Configuration de base qui déploie en production à chaque push vers la branche main :
+
+```yaml
+# bitbucket-pipelines.yml - Configuration simple
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and Deploy to Production
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+          artifacts:
+            - dist/**
+```
+
+## Avancé
+
+### Déploiements de branches de fonctionnalités
+
+Déployez les branches de fonctionnalités vers des canaux de test pour révision et test :
+
+```yaml
+# Déploiement de branche de fonctionnalité
+pipelines:
+  branches:
+    feature/*:
+      - step:
+          name: Deploy Feature Branch
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - BRANCH_NAME=$(echo $BITBUCKET_BRANCH | sed 's/[^a-zA-Z0-9-]/-/g')
+            - CHANNEL_NAME="feature-$BRANCH_NAME"
+            - npm install -g @capgo/cli
+            - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+          artifacts:
+            - dist/**
+```
+
+<Aside type="tip">
+
+**Tests avec les canaux** : Après le déploiement vers un canal de fonctionnalité, vous pouvez tester la mise à jour dans votre application en la configurant pour utiliser ce canal spécifique. En savoir plus sur [la configuration des canaux dans votre application](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+
+</Aside>
+
+### Utilisation du chiffrement
+
+Si vous utilisez [la fonctionnalité de chiffrement de Capgo](/docs/live-updates/encryption/), vous devrez stocker votre clé privée en toute sécurité dans votre environnement CI/CD.
+
+Après avoir [configuré les clés de chiffrement](/docs/live-updates/encryption/#setting-up-encryption) localement, ajoutez votre clé privée aux variables Bitbucket :
+
+```shell
+# Afficher le contenu de votre clé privée (copiez cette sortie)
+cat .capgo_key_v2
+```
+
+Ajoutez ce contenu en tant que `CAPGO_PRIVATE_KEY` dans les variables de votre référentiel Bitbucket (marquez comme sécurisé), puis utilisez-le dans les pipelines :
+
+```yaml
+# Déployer avec chiffrement
+- step:
+    name: Deploy to Capgo with Encryption
+    script:
+      - npm install -g @capgo/cli
+      - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**Meilleures pratiques de sécurité :**
+- Ne jamais valider le fichier `.capgo_key_v2` dans le contrôle de version
+- Stocker la clé privée uniquement dans la gestion sécurisée des secrets CI/CD
+- Utiliser des clés différentes pour différents environnements
+
+</Aside>
+
+### Configuration multi-canaux
+
+Pour des informations complètes sur la configuration et la gestion de plusieurs canaux de déploiement, consultez la [documentation sur les canaux](/docs/live-updates/channels/).
+
+Configuration complète avec plusieurs environnements et déploiements de pull request :
+
+```yaml
+# bitbucket-pipelines.yml - Configuration multi-canaux avancée
+image: node:22
+
+definitions:
+  steps:
+    - step: &build-step
+        name: Build Application
+        script:
+          - npm ci
+          - npm run test
+          - npm run build
+        artifacts:
+          - dist/**
+
+    - step: &deploy-step
+        name: Deploy to Capgo
+        script:
+          - npm install -g @capgo/cli
+          - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+pipelines:
+  branches:
+    main:
+      - step:
+          <<: *build-step
+      - step:
+          <<: *deploy-step
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - export CHANNEL_NAME=production
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+    develop:
+      - step:
+          <<: *build-step
+      - step:
+          <<: *deploy-step
+          name: Deploy to Development
+          deployment: development
+          script:
+            - export CHANNEL_NAME=development
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+  pull-requests:
+    '**':
+      - step:
+          <<: *build-step
+      - step:
+          name: Deploy PR to Test Channel
+          script:
+            - CHANNEL_NAME="pr-$BITBUCKET_PR_ID"
+            - npm install -g @capgo/cli
+            - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+          artifacts:
+            - dist/**
+```
+
+### Pipeline multi-environnements
+
+Pour des scénarios de déploiement complexes avec des environnements de staging et de production :
+
+```yaml
+# Pipeline multi-environnements
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to Staging
+          deployment: staging
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel staging
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+
+    develop:
+      - step:
+          name: Build and Deploy to Development
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel development
+          artifacts:
+            - dist/**
+```
+
+### Stratégie de déploiement basée sur les branches
+
+Déployer automatiquement différentes branches vers les canaux appropriés :
+
+```yaml
+# Déploiement dynamique de canal
+image: node:22
+
+definitions:
+  scripts:
+    - script: &determine-channel |
+        if [ "$BITBUCKET_BRANCH" = "main" ]; then
+          export CHANNEL_NAME="production"
+        elif [ "$BITBUCKET_BRANCH" = "develop" ]; then
+          export CHANNEL_NAME="staging"
+        else
+          export CHANNEL_NAME="development"
+        fi
+        echo "Deploying to channel: $CHANNEL_NAME"
+
+pipelines:
+  default:
+    - step:
+        name: Build and Deploy
+        script:
+          - npm ci
+          - npm run test
+          - npm run build
+          - *determine-channel
+          - npm install -g @capgo/cli
+          - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+        artifacts:
+          - dist/**
+```
+
+### Exécution parallèle de pipeline
+
+Optimisez les temps de build avec des étapes parallèles :
+
+```yaml
+# Pipeline d'exécution parallèle
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - parallel:
+          - step:
+              name: Run Tests
+              script:
+                - npm ci
+                - npm run test
+          - step:
+              name: Lint Code
+              script:
+                - npm ci
+                - npm run lint
+      - step:
+          name: Build Application
+          script:
+            - npm ci
+            - npm run build
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to Production
+          deployment: production
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+## Meilleures pratiques de sécurité
+
+### Variables du référentiel
+
+<Steps>
+
+1. **Variables sécurisées** : Toujours marquer les jetons API comme sécurisés
+2. **Variables d'environnement** : Utiliser des variables spécifiques au déploiement si nécessaire
+3. **Contrôle d'accès** : Limiter l'accès au référentiel aux membres autorisés de l'équipe
+4. **Rotation des jetons** : Effectuer régulièrement la rotation de vos jetons API Capgo
+
+</Steps>
+
+### Environnements de déploiement
+
+Configurez les environnements de déploiement pour une meilleure sécurité :
+
+```yaml
+# Déploiement avec restrictions d'environnement
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+## Surveillance et notifications
+
+### Intégration Slack
+
+Ajoutez des notifications Slack à votre pipeline :
+
+```yaml
+# Pipeline avec notifications Slack
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and Deploy
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+          after-script:
+            - |
+              if [ $BITBUCKET_EXIT_CODE -eq 0 ]; then
+                curl -X POST -H 'Content-type: application/json' \
+                  --data '{"text":"✅ Capgo deployment successful for '$BITBUCKET_BRANCH'"}' \
+                  $SLACK_WEBHOOK_URL
+              else
+                curl -X POST -H 'Content-type: application/json' \
+                  --data '{"text":"❌ Capgo deployment failed for '$BITBUCKET_BRANCH'"}' \
+                  $SLACK_WEBHOOK_URL
+              fi
+```
+
+### Notifications par e-mail
+
+Configurez les notifications par e-mail via les fonctionnalités intégrées de Bitbucket ou en utilisant des services externes :
+
+```yaml
+# Étape de notification par e-mail
+- step:
+    name: Send Notification
+    script:
+      - |
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -d '{
+            "to": "team@yourcompany.com",
+            "subject": "Capgo Deployment Status",
+            "body": "Deployment of '$BITBUCKET_BRANCH' completed with status: '$BITBUCKET_EXIT_CODE'"
+          }' \
+          $EMAIL_SERVICE_URL
+    condition:
+      result: [successful, failed]
+```
+
+## Dépannage
+
+### Problèmes courants
+
+**Le pipeline échoue avec "Capgo CLI not found" :**
+```yaml
+# Déboguer l'installation du CLI
+- step:
+    name: Debug CLI
+    script:
+      - npm install -g @capgo/cli
+      - which capgo || echo "Capgo CLI not found"
+      - npx @capgo/cli --version
+```
+
+**Erreurs d'authentification :**
+```yaml
+# Vérifier la configuration du jeton
+- step:
+    name: Debug Auth
+    script:
+      - |
+        if [ -z "$CAPGO_TOKEN" ]; then
+          echo "CAPGO_TOKEN is not set"
+          exit 1
+        fi
+        echo "Token length: ${#CAPGO_TOKEN}"
+```
+
+**Artefacts de build introuvables :**
+```yaml
+# Lister les sorties de build
+- step:
+    name: Debug Build
+    script:
+      - ls -la dist/
+      - find dist/ -type f -name "*.js" -o -name "*.html"
+```
+
+### Pipeline de débogage
+
+Ajoutez des informations de débogage pour résoudre les problèmes :
+
+```yaml
+# Pipeline de débogage
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Debug Information
+          script:
+            - echo "Branch: $BITBUCKET_BRANCH"
+            - echo "Commit: $BITBUCKET_COMMIT"
+            - echo "Build: $BITBUCKET_BUILD_NUMBER"
+            - env | grep BITBUCKET_ | sort
+      - step:
+          name: Build and Deploy
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+### Validation du pipeline
+
+Activez la validation du pipeline pour détecter les erreurs de configuration :
+
+```yaml
+# Activer la validation du pipeline
+options:
+  docker: true
+  size: 2x
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Validate Pipeline
+          script:
+            - echo "Pipeline validation successful"
+      - step:
+          name: Build and Deploy
+          script:
+            # ... étapes de déploiement
+```
+
+## Prochaines étapes
+
+- Découvrez les [Canaux](/docs/live-updates/channels/) pour gérer différents environnements de déploiement
+- Explorez le [Stockage personnalisé](/docs/live-updates/custom-storage/) pour des scénarios de déploiement avancés
+- Configurez le [Chiffrement](/docs/live-updates/encryption/) pour des déploiements sécurisés
+- Configurez le [Comportement des mises à jour](/docs/live-updates/update-behavior/) pour personnaliser l'application des mises à jour
+
+Avec l'intégration Bitbucket Pipelines, vous pouvez automatiser vos déploiements Capgo et garantir des mises à jour cohérentes et fiables pour les utilisateurs de votre application mobile.

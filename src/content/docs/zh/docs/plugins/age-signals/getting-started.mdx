@@ -1,0 +1,509 @@
+---
+title: 开始使用
+locale: zh
+description: 了解如何安装和使用 Age Signals 插件来检测 Android 应用中的受监督账户和已验证用户。
+sidebar:
+  order: 2
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Aside type="caution">
+此插件**仅支持 Android**，需要 Google Play 服务。不适用于 iOS、Web 或没有 Google Play 商店的 Android 设备。
+</Aside>
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-android-age-signals" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与 Android 项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 前提条件
+
+- 安装了 Google Play 服务的 Android 设备
+- 最低 Android API 级别 21（Android 5.0）
+- 设备上安装了 Google Play 商店
+
+## 使用方法
+
+### 检查年龄信号
+
+```typescript
+import { AgeSignals, UserStatus } from '@capgo/capacitor-android-age-signals';
+
+try {
+  const result = await AgeSignals.checkAgeSignals();
+
+  console.log('User status:', result.userStatus);
+
+  switch (result.userStatus) {
+    case UserStatus.Verified:
+      console.log('User is 18+ and verified by Google');
+      // Allow access to age-restricted content
+      break;
+
+    case UserStatus.Supervised:
+      console.log(`Supervised user aged ${result.ageLower}-${result.ageUpper}`);
+      // Apply age-appropriate restrictions
+      break;
+
+    case UserStatus.SupervisedApprovalPending:
+      console.log('Waiting for guardian approval');
+      console.log('Pending since:', result.mostRecentApprovalDate);
+      // Inform user to wait for guardian approval
+      break;
+
+    case UserStatus.SupervisedApprovalDenied:
+      console.log('Guardian denied access');
+      console.log('Last approval:', result.mostRecentApprovalDate);
+      // Block access or show alternative content
+      break;
+
+    case UserStatus.Unknown:
+      console.log('User status unknown - prompt to verify in Play Store');
+      // Guide user to verify their age in Google Play
+      break;
+
+    case UserStatus.Empty:
+      console.log('No age signal available');
+      // Handle as unverified user
+      break;
+  }
+} catch (error) {
+  console.error('Failed to check age signals:', error);
+}
+```
+
+### 处理受监督用户
+
+```typescript
+async function handleSupervisedUser() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.Supervised) {
+    const age = result.ageLower;
+
+    if (age < 13) {
+      // Apply COPPA restrictions
+      console.log('User is under 13 - COPPA applies');
+      disableDataCollection();
+      disableSocialFeatures();
+      requireParentalConsent();
+    } else if (age < 18) {
+      // Apply teen restrictions
+      console.log('User is 13-17 - Teen restrictions apply');
+      enableModeratedSocialFeatures();
+      restrictAds();
+    }
+
+    // Track install ID for revocation notifications
+    console.log('Install ID:', result.installId);
+    saveInstallId(result.installId);
+  }
+}
+```
+
+### 实现年龄门槛
+
+```typescript
+async function ageGate() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  // Allow verified 18+ users
+  if (result.userStatus === UserStatus.Verified) {
+    return true;
+  }
+
+  // Check supervised user age
+  if (result.userStatus === UserStatus.Supervised) {
+    return result.ageUpper >= 18;
+  }
+
+  // Block users with pending or denied approvals
+  if (
+    result.userStatus === UserStatus.SupervisedApprovalPending ||
+    result.userStatus === UserStatus.SupervisedApprovalDenied
+  ) {
+    return false;
+  }
+
+  // For unknown/empty, implement fallback age verification
+  return await showAgeVerificationDialog();
+}
+```
+
+### 监控批准状态
+
+```typescript
+async function checkApprovalStatus() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.SupervisedApprovalPending) {
+    console.log('Guardian approval pending');
+    console.log('Age range:', result.ageLower, '-', result.ageUpper);
+    console.log('Most recent approval:', result.mostRecentApprovalDate);
+
+    // Show message to user
+    showMessage(
+      'Your guardian needs to approve this app. ' +
+      'We notified them on ' + result.mostRecentApprovalDate
+    );
+  } else if (result.userStatus === UserStatus.SupervisedApprovalDenied) {
+    console.log('Guardian denied approval');
+    console.log('Last approved on:', result.mostRecentApprovalDate);
+
+    // Show blocked message
+    showMessage(
+      'Your guardian did not approve this app. ' +
+      'Contact them for more information.'
+    );
+  }
+}
+```
+
+## API 参考
+
+### checkAgeSignals()
+
+请求当前活跃用户的 Play 年龄信号。
+
+```typescript
+const result = await AgeSignals.checkAgeSignals();
+```
+
+**返回值：**
+
+```typescript
+interface CheckAgeSignalsResult {
+  userStatus: UserStatus;
+  ageLower?: number;
+  ageUpper?: number;
+  mostRecentApprovalDate?: string;
+  installId?: string;
+}
+```
+
+### UserStatus Enum
+
+```typescript
+enum UserStatus {
+  Verified = 'VERIFIED',                           // 18+ verified
+  Supervised = 'SUPERVISED',                       // Supervised account
+  SupervisedApprovalPending = 'SUPERVISED_APPROVAL_PENDING',
+  SupervisedApprovalDenied = 'SUPERVISED_APPROVAL_DENIED',
+  Unknown = 'UNKNOWN',                             // Unknown status
+  Empty = 'EMPTY'                                  // No signal
+}
+```
+
+## 结果字段
+
+### userStatus
+
+Google Play 报告的用户验证状态。
+
+- **Verified**：用户已年满 18 周岁并已通过 Google 验证
+- **Supervised**：用户拥有受监督的 Google 账户
+- **SupervisedApprovalPending**：等待监护人批准更改
+- **SupervisedApprovalDenied**：监护人拒绝应用访问
+- **Unknown**：用户应在 Play 商店中验证状态
+- **Empty**：所有其他用户（默认状态）
+
+### ageLower
+
+受监督用户年龄范围的下限（包含）。
+
+仅在 `userStatus` 为以下值时存在：
+- `SUPERVISED`
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+### ageUpper
+
+受监督用户年龄范围的上限（包含）。
+
+仅在以下情况下存在：
+- `userStatus` 为受监督状态之一
+- 用户年龄报告为小于 18 周岁
+
+### mostRecentApprovalDate
+
+获得监护人批准的最近一次重要更改的日期字符串。
+
+仅在 `userStatus` 为以下值时存在：
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+格式：ISO 8601 日期字符串
+
+### installId
+
+在 Google Play 中分配给受监督安装的标识符。
+
+用于监护人撤销应用批准时的撤销通知。
+
+仅在 `userStatus` 为以下值时存在：
+- `SUPERVISED`
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+## 使用案例
+
+### 1. COPPA 合规
+
+```typescript
+async function applyCoppaRestrictions() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.Supervised && result.ageLower < 13) {
+    // Disable data collection
+    disableAnalytics();
+    disableAdvertising();
+
+    // Disable social features
+    hideChatFeatures();
+    disableUserProfiles();
+
+    // Require verifiable parental consent
+    await requestParentalConsent(result.installId);
+  }
+}
+```
+
+### 2. 适龄内容
+
+```typescript
+async function filterContent() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  let contentRating;
+
+  if (result.userStatus === UserStatus.Verified) {
+    contentRating = 'MATURE';
+  } else if (result.userStatus === UserStatus.Supervised) {
+    if (result.ageUpper < 13) {
+      contentRating = 'EVERYONE';
+    } else if (result.ageUpper < 18) {
+      contentRating = 'TEEN';
+    } else {
+      contentRating = 'MATURE';
+    }
+  } else {
+    contentRating = 'TEEN'; // Default safe rating
+  }
+
+  loadContentForRating(contentRating);
+}
+```
+
+### 3. 监护人面板
+
+```typescript
+async function getGuardianInfo() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (
+    result.userStatus === UserStatus.Supervised ||
+    result.userStatus === UserStatus.SupervisedApprovalPending ||
+    result.userStatus === UserStatus.SupervisedApprovalDenied
+  ) {
+    return {
+      isSupervised: true,
+      ageRange: `${result.ageLower}-${result.ageUpper}`,
+      approvalStatus: result.userStatus,
+      lastApprovalDate: result.mostRecentApprovalDate,
+      installId: result.installId,
+    };
+  }
+
+  return { isSupervised: false };
+}
+```
+
+## 完整示例
+
+```typescript
+import { AgeSignals, UserStatus } from '@capgo/capacitor-android-age-signals';
+
+export class AgeVerificationService {
+  async verifyAge(): Promise<{
+    allowed: boolean;
+    reason: string;
+    restrictions: string[];
+  }> {
+    try {
+      const result = await AgeSignals.checkAgeSignals();
+
+      switch (result.userStatus) {
+        case UserStatus.Verified:
+          return {
+            allowed: true,
+            reason: 'User is verified 18+',
+            restrictions: [],
+          };
+
+        case UserStatus.Supervised:
+          return this.handleSupervised(result);
+
+        case UserStatus.SupervisedApprovalPending:
+          return {
+            allowed: false,
+            reason: 'Waiting for guardian approval',
+            restrictions: ['Guardian approval required'],
+          };
+
+        case UserStatus.SupervisedApprovalDenied:
+          return {
+            allowed: false,
+            reason: 'Guardian denied access',
+            restrictions: ['Access denied by guardian'],
+          };
+
+        case UserStatus.Unknown:
+          return {
+            allowed: false,
+            reason: 'Age verification required',
+            restrictions: ['Verify age in Google Play'],
+          };
+
+        case UserStatus.Empty:
+        default:
+          return {
+            allowed: false,
+            reason: 'No age signal available',
+            restrictions: ['Age verification needed'],
+          };
+      }
+    } catch (error) {
+      console.error('Age verification failed:', error);
+      return {
+        allowed: false,
+        reason: 'Verification error',
+        restrictions: ['Try again later'],
+      };
+    }
+  }
+
+  private handleSupervised(result: any) {
+    const age = result.ageLower;
+    const restrictions: string[] = [];
+
+    if (age < 13) {
+      restrictions.push('No data collection (COPPA)');
+      restrictions.push('No social features');
+      restrictions.push('Parental consent required');
+      return {
+        allowed: false,
+        reason: `User is under 13 (${result.ageLower}-${result.ageUpper})`,
+        restrictions,
+      };
+    } else if (age < 18) {
+      restrictions.push('Age-appropriate content only');
+      restrictions.push('Moderated social features');
+      return {
+        allowed: true,
+        reason: `Teen user (${result.ageLower}-${result.ageUpper})`,
+        restrictions,
+      };
+    } else {
+      return {
+        allowed: true,
+        reason: `Adult supervised user (${result.ageLower}+)`,
+        restrictions: [],
+      };
+    }
+  }
+
+  async saveInstallId(installId: string) {
+    // Store install ID for revocation handling
+    localStorage.setItem('ageSignalsInstallId', installId);
+  }
+
+  async checkRevocation() {
+    const result = await AgeSignals.checkAgeSignals();
+    const storedId = localStorage.getItem('ageSignalsInstallId');
+
+    if (result.installId && storedId && result.installId !== storedId) {
+      // Install ID changed - likely revoked and reinstalled
+      console.log('App was revoked and reinstalled');
+      return true;
+    }
+
+    return false;
+  }
+}
+```
+
+## 最佳实践
+
+1. **应用启动时检查**：在应用启动时验证年龄信号
+2. **缓存结果**：缓存结果但定期刷新
+3. **处理所有状态**：为所有 UserStatus 值实现逻辑
+4. **尊重拒绝**：当监护人拒绝批准时不允许访问
+5. **存储安装 ID**：跟踪安装 ID 以检测撤销
+6. **回退逻辑**：为 Unknown/Empty 状态提供回退年龄验证
+7. **隐私优先**：不收集受监督用户的不必要数据
+
+## 合规指南
+
+### COPPA（儿童在线隐私保护法）
+
+对于 13 岁以下的用户：
+- 获得可验证的家长同意
+- 限制数据收集
+- 禁用行为广告
+- 提供家长控制
+
+### GDPR（通用数据保护条例）
+
+对于受监督用户：
+- 合法处理数据
+- 提供监护人同意机制
+- 允许数据访问和删除
+- 实施隐私设计
+
+## 平台说明
+
+### Android
+- 需要 Google Play 服务
+- 最低 API 级别 21（Android 5.0+）
+- 仅适用于安装了 Play 商店的设备
+- 信号可能在所有地区都不可用
+- 如果监护人修改设置，结果可能会改变
+
+### iOS / Web
+- **不支持** - 这是一个仅限 Android 的插件
+- 在不支持的平台上调用时会抛出错误
+
+## 故障排除
+
+### 未返回信号（空状态）
+
+以下情况是正常的：
+- 不在支持地区的用户
+- 没有 Google Play 服务的设备
+- 未设置 Family Link 的用户
+- 未验证的新账户
+
+### 未知状态
+
+用户应该：
+1. 打开 Google Play 商店
+2. 进入设置 → 家庭
+3. 完成年龄验证过程
+
+### 权限问题
+
+确保：
+- Google Play 服务已更新
+- 应用在 Play 控制台中有正确的包名
+- 在真实设备上测试（不是没有 Play 服务的模拟器）
+
+## 资源
+
+- [Google Play 年龄信号文档](https://developers.google.com/android/reference/com/google/android/gms/agesignals)
+- [Family Link 开发者指南](https://developers.google.com/families)
+- [COPPA 合规指南](https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions)

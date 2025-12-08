@@ -1,0 +1,197 @@
+---
+title: 创建 Android 订阅引导性优惠
+locale: zh
+description: 学习如何在 Android 上为自动续订订阅创建引导性优惠以吸引新订阅者。
+sidebar:
+  order: 5
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+引导性优惠允许您为符合条件的用户提供免费试用或折扣引导价格。引导期结束后，订阅会自动以标准价格续订，除非取消。
+
+## 概述
+
+引导性优惠是一个强大的工具，可以：
+- 降低新订阅者的进入门槛
+- 提高转化率
+- 让用户无风险试用您的高级功能
+- 建立长期订阅者关系
+
+## 资格
+
+如果用户之前未购买或收到过该订阅的引导性优惠，则可以获得引导性优惠。Google Play 会自动处理资格。
+
+## 先决条件
+
+在添加引导性优惠之前，您必须先[创建自动续订订阅](/docs/plugins/native-purchases/android-create-subscription/)。
+
+## 创建引导性优惠
+
+<Steps>
+
+1. **访问优惠配置**
+
+   在 Google Play Console 中导航到您的订阅并选择 **添加优惠** 按钮。
+
+   ![添加优惠按钮](/native-purchases/android/introductory-offer/add-offer-button.webp)
+
+2. **选择基础方案**
+
+   会出现一个模态框，要求您选择基础方案。通常，您只有一个基础方案。点击 **添加优惠** 继续。
+
+   ![选择基础方案](/native-purchases/android/introductory-offer/select-base-plan.webp)
+
+3. **配置优惠详情**
+
+   输入以下信息：
+
+   **优惠 ID**：此优惠的唯一标识符
+
+   **资格**：选择谁可以获得此优惠
+   - **新客户**：仅从未订阅过的用户
+   - **现有客户**：以前订阅过的用户
+   - **开发者决定**：自定义资格逻辑（native-purchases 不支持）
+
+   :::caution
+   native-purchases 插件不支持"开发者决定"资格选项。请使用"新客户"或"现有客户"。
+   :::
+
+   ![配置优惠](/native-purchases/android/introductory-offer/configure-offer-details.webp)
+
+4. **添加阶段**
+
+   在页面底部点击 **添加阶段** 以定义您的优惠结构。
+
+   您最多可以添加两个阶段，允许组合如下：
+   - 仅免费试用
+   - 仅折扣价格
+   - 免费试用后折扣定期付款
+
+5. **选择阶段类型**
+
+   从三种阶段类型中选择：
+
+   **免费试用**
+   - 特定期间的免费访问
+   - 示例：7 天免费，然后 $9.99/月
+
+   **单次付款**
+   - 特定期间的一次性折扣价格
+   - 示例：2 个月 $1.99，然后 $9.99/月
+
+   **折扣定期付款**
+   - 多个周期的降低的每个计费周期费率
+   - 示例：3 个月 $4.99/月，然后 $9.99/月
+
+6. **配置阶段持续时间**
+
+   设置引导阶段持续多长时间：
+   - 天、周或月
+   - 计费周期数
+
+7. **最终确定并激活**
+
+   点击 **应用**，然后 **保存** 以激活优惠。保存后，**激活** 按钮将变为可用。
+
+</Steps>
+
+## 优惠阶段示例
+
+### 示例 1：简单免费试用
+- 阶段 1：7 天免费
+- 然后：$9.99/月标准定价
+
+### 示例 2：折扣引导
+- 阶段 1：第一个月 $1.99
+- 然后：$9.99/月标准定价
+
+### 示例 3：延长试用 + 折扣
+- 阶段 1：14 天免费
+- 阶段 2：2 个月 $4.99/月
+- 然后：$9.99/月标准定价
+
+## 在应用中使用
+
+native-purchases 插件会自动处理引导性优惠的资格和展示：
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// 获取产品（包括引导优惠元数据）
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+
+if (product.introductoryPrice) {
+  console.log(`Intro price: ${product.introductoryPriceString}`);
+  console.log(`Regular price: ${product.priceString}`);
+  console.log(
+    `Offer duration: ${product.introductoryPrice.subscriptionPeriod?.numberOfUnits} ${product.introductoryPrice.subscriptionPeriod?.unit}`,
+  );
+} else {
+  console.log('No intro offer configured for this product');
+}
+
+// 购买（如果用户符合条件，Google Play 会自动应用引导定价）
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // Google Play Console 中的基础方案 ID
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Introductory purchase transaction', transaction.transactionId);
+```
+
+## 最佳实践
+
+### 优惠时长
+- **免费试用**：对于大多数应用，3-14 天是最佳的
+- **折扣期**：1-3 个月适合建立习惯
+- **价格折扣**：标准价格的 50-70% 折扣可提高转化率
+
+### 营销
+- 清楚显示引导优惠和常规价格
+- 显示引导期后会发生什么
+- 使取消变得容易和透明
+- 在引导期结束前提醒用户
+
+### A/B 测试
+测试不同的优惠结构：
+- 免费试用时长
+- 折扣百分比
+- 折扣持续时间
+- 单阶段与多阶段
+
+## 重要提示
+
+- 每个订阅一次只能有一个活跃的引导性优惠
+- 用户每个订阅只能申领一次引导优惠
+- 引导优惠不适用于订阅升级/降级
+- 引导优惠的更改不影响现有订阅者
+
+## 故障排除
+
+**引导优惠未显示：**
+- 验证优惠在 Play Console 中已激活
+- 检查用户资格（可能之前使用过优惠）
+- 确保应用使用最新的产品信息
+
+**错误的用户收到优惠：**
+- 审核资格设置（新客户与现有客户）
+- 检查用户是否之前在不同设备上订阅过
+- 验证 Play Store 账户历史记录
+
+**优惠在购买时未应用：**
+- 确认产品 ID 完全匹配
+- 检查优惠仍然活跃且未过期
+- 验证优惠的日期范围设置
+
+## 后续步骤
+
+- [配置沙盒测试](/docs/plugins/native-purchases/android-sandbox-testing/)以测试您的优惠
+- 在 Play Console 分析中监控转化率
+- 考虑创建具有不同优惠的多个订阅层级

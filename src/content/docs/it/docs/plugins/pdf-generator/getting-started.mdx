@@ -1,0 +1,67 @@
+---
+title: Iniziare
+locale: it
+description: Renderizza HTML e pagine remote in PDF con il plugin Capgo PDF Generator.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il plugin**
+   <PackageManagers pkg="@capgo/capacitor-pdf-generator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza piattaforme**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Genera da HTML
+
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+
+const receiptHtml = `
+  <html>
+    <body>
+      <h1>Negozio Capgo</h1>
+      <p>Grazie per il tuo acquisto.</p>
+    </body>
+  </html>
+`;
+
+const pdf = await PdfGenerator.fromData({
+  data: receiptHtml,
+  documentSize: 'A4',
+  orientation: 'portrait',
+  type: 'base64',
+  fileName: 'ricevuta.pdf',
+});
+
+if (pdf.type === 'base64') {
+  const link = document.createElement('a');
+  link.href = `data:application/pdf;base64,${pdf.base64}`;
+  link.download = 'ricevuta.pdf';
+  link.click();
+}
+```
+
+## Cattura un URL remoto
+
+```typescript
+await PdfGenerator.fromURL({
+  url: 'https://docs.capgo.app/invoice?id=123',
+  orientation: 'landscape',
+  documentSize: 'A4',
+  type: 'share', // apre la finestra di condivisione nativa
+  fileName: 'fattura-123.pdf',
+});
+```
+
+## Suggerimenti
+
+- Includi CSS inline nella tua stringa HTML o fornisci un `baseUrl` in modo che le risorse relative si risolvano correttamente.
+- Quando restituisci dati base64 su mobile, spostali nel filesystem (ad es., Capacitor Filesystem) prima di condividerli.
+- L'orientamento orizzontale è ideale per tabelle larghe, mentre quello verticale si adatta alla maggior parte dei documenti.
+- Considera di utilizzare font CSS con ambito (ad es., font di sistema) per un rendering coerente tra le piattaforme.

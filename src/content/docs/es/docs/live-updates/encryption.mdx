@@ -1,0 +1,344 @@
+---
+title: Cifrado
+description: "Aprenda cómo el cifrado de extremo a extremo de Capgo asegura sus paquetes de aplicación durante la transmisión y almacenamiento, protegiendo su código y datos de usuario."
+sidebar:
+  order: 5
+locale: es
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo proporciona un cifrado de extremo a extremo robusto para sus paquetes de aplicación, asegurando que su código JavaScript y activos estén protegidos durante la transmisión y almacenamiento. Este sistema de cifrado está diseñado para darle control completo sobre la seguridad de su aplicación mientras mantiene la conveniencia de las actualizaciones en vivo.
+
+## Descripción General
+
+El sistema de cifrado de Capgo utiliza métodos criptográficos estándar de la industria para proteger sus paquetes del acceso no autorizado. Cuando el cifrado está habilitado, sus paquetes se cifran antes de salir de su entorno de desarrollo y permanecen cifrados hasta que son descifrados por su aplicación en el dispositivo del usuario.
+
+**Cifrado Verdadero de Extremo a Extremo**: A diferencia de otras plataformas de actualización OTA que solo firman actualizaciones (dejando el código públicamente legible), Capgo proporciona cifrado verdadero de extremo a extremo. Esto significa que solo sus usuarios pueden descifrar sus actualizaciones - nadie más, incluido Capgo mismo. El contenido de su paquete permanece completamente privado e ilegible durante todo el proceso de entrega.
+
+<Aside type="tip">
+
+El cifrado es particularmente importante para:
+- Aplicaciones que manejan datos sensibles o lógica de negocio
+- Aplicaciones empresariales con requisitos de cumplimiento
+- Aplicaciones desplegadas en industrias reguladas
+- Organizaciones con políticas de seguridad estrictas
+
+</Aside>
+
+## Cómo Funciona el Cifrado
+
+Capgo utiliza un enfoque de cifrado híbrido que combina cifrado RSA y AES para seguridad y rendimiento óptimos:
+
+![Flujo de Cifrado de Capgo](/encryption_flow.webp)
+
+### 1. Generación de Claves
+- **Clave Privada**: Generada y almacenada de forma segura en su entorno de desarrollo (usada para cifrado)
+- **Clave Pública**: Derivada de su clave privada y almacenada en la configuración de Capacitor de su aplicación (usada para descifrado)
+- **Claves de Sesión**: Claves AES aleatorias generadas para cada carga de paquete
+
+### 2. Proceso de Cifrado
+1. Se genera una clave de sesión AES aleatoria para cada carga de paquete
+2. Su paquete se cifra usando la clave de sesión AES
+3. Se calcula el checksum del paquete
+4. Tanto la clave de sesión AES como el checksum se cifran juntos usando su clave privada RSA (creando la "firma")
+5. Se almacenan el paquete cifrado y la firma cifrada
+
+El checksum se cifra junto con la clave AES para prevenir manipulación. Dado que solo su clave privada RSA puede crear esta firma, y solo la clave pública correspondiente puede descifrarla, esto asegura que tanto la clave de sesión AES como el checksum esperado son auténticos y no han sido modificados por un atacante.
+
+### 3. Proceso de Descifrado
+1. Su aplicación descarga el paquete cifrado y la firma cifrada
+2. El SDK de Capgo usa su clave pública RSA (almacenada en la aplicación) para descifrar la firma
+3. Esto revela la clave de sesión AES y el checksum original
+4. La clave de sesión AES se usa para descifrar el paquete
+5. Se calcula un checksum del paquete descifrado y se compara con el checksum original para verificación de integridad
+
+Este proceso asegura que incluso si un atacante intercepta el paquete cifrado, no puede modificar la clave de sesión AES ni proporcionar un checksum falso, porque necesitaría su clave privada para crear una firma válida que la clave pública pueda descifrar.
+
+<Aside type="tip">
+
+RSA no puede cifrar grandes cantidades de datos eficientemente, por lo que AES se usa para el cifrado del paquete real mientras que RSA asegura la clave AES y proporciona verificación de integridad a través de la firma del checksum.
+
+</Aside>
+
+## Capgo vs Otras Plataformas
+
+| Característica | Capgo | Otras Plataformas OTA |
+|---------|-------|-------------------|
+| **Contenido del Paquete** | Completamente cifrado (ilegible) | Públicamente legible |
+| **Método de Seguridad** | Cifrado verdadero de extremo a extremo | Solo firma de código |
+| **Nivel de Privacidad** | Conocimiento cero (incluso Capgo no puede leer su código) | La plataforma puede acceder a su código |
+| **Protección** | Contenido + integridad + autenticidad | Solo integridad + autenticidad |
+
+**Por Qué Esto Importa:**
+- **La firma de código** solo verifica que las actualizaciones no han sido manipuladas y provienen de la fuente correcta
+- **El cifrado de extremo a extremo** asegura que el contenido real de su código permanezca privado e ilegible durante la transmisión y almacenamiento
+- Con el cifrado verdadero de extremo a extremo de Capgo, solo sus usuarios pueden descifrar actualizaciones - nadie más, incluido Capgo mismo
+
+## Métodos de Cifrado
+
+Capgo usa Cifrado V2 como el método de cifrado estándar:
+
+### Cifrado V2 (Estándar Actual)
+- Usa RSA-4096 para seguridad mejorada
+- AES-256-GCM para cifrado autenticado
+- Proporciona verificación de integridad
+- Mejor rendimiento y seguridad
+
+### Cifrado V1 (Obsoleto)
+- Usa RSA-2048 para cifrado de claves
+- AES-256-CBC para cifrado de paquetes
+- **Ya no está disponible en el CLI actual**
+- Las aplicaciones heredadas que usan V1 deben migrar a V2
+
+<Aside type="danger">
+
+El Cifrado V1 ya no es compatible con el CLI de Capgo actual. Si está usando cifrado V1, debe migrar a V2. Consulte la [guía de migración](/docs/upgrade/encryption-v1-to-v2/) para instrucciones detalladas.
+
+</Aside>
+
+## Configuración del Cifrado
+
+### Paso 1: Generar Claves de Cifrado
+
+Primero, genere sus claves de cifrado usando el CLI de Capgo:
+
+```shell
+# Generar nuevas claves de cifrado (crea archivos en el directorio actual)
+npx @capgo/cli@latest key create
+```
+
+Esto crea:
+- `.capgo_key_v2`: Su clave privada (¡manténgala segura!)
+- `.capgo_key_v2.pub`: Su clave pública (usada por su aplicación)
+
+Estos archivos se crean en el directorio actual donde ejecuta el comando.
+
+<Aside type="caution">
+
+**Notas Importantes de Almacenamiento:**
+- **Clave Privada (`.capgo_key_v2`)**: Nunca confirme esto en control de versiones. Este archivo debe mantenerse seguro y usarse solo para cifrado durante las cargas de paquetes.
+- **Clave Pública (`.capgo_key_v2.pub`)**: Es seguro confirmar esto en control de versiones ya que es una copia de seguridad de su clave pública.
+- **Ubicación del Archivo**: Las claves se crean en el directorio actual donde ejecuta el comando `key create`.
+- **Clave Pública en Config**: Debe ejecutar `key save` para almacenar la clave pública en su configuración de Capacitor para que la aplicación móvil la use.
+
+Para uso en producción, almacene la clave privada de forma segura (variables de entorno, servicios de gestión de claves) y elimínela de su proyecto local después de la configuración.
+
+</Aside>
+
+### Paso 2: Guardar su Clave Pública en la Configuración de Capacitor (Requerido)
+
+**Debe** guardar su clave pública en la configuración de Capacitor para que su aplicación móvil pueda descifrar paquetes:
+
+```shell
+# Guardar clave pública desde archivo a configuración de Capacitor (requerido)
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+
+# O guardar datos de clave pública directamente
+npx @capgo/cli@latest key save --key-data "$CAPGO_PUBLIC_KEY"
+```
+
+### Paso 3: Sincronizar Plataforma Capacitor (Requerido)
+
+Después de guardar la clave pública, **debe** sincronizar la plataforma Capacitor para copiar la configuración actualizada a la capa nativa:
+
+```shell
+# Sincronizar la plataforma para copiar config a nativo
+npx cap sync
+```
+
+<Aside type="caution">
+
+**Pasos Requeridos**:
+1. El comando `key save` almacena la clave pública en su configuración de Capacitor
+2. `npx cap sync` copia esta configuración a la capa nativa donde la aplicación móvil puede acceder a ella
+3. Sin ambos pasos, su aplicación no podrá descifrar actualizaciones cifradas
+
+</Aside>
+
+## Cifrado de Paquetes
+
+### Método 1: Cifrar Durante la Carga
+
+La forma más simple es cifrar durante el proceso de carga:
+
+```shell
+# Cargar con cifrado automático
+npx @capgo/cli@latest bundle upload --key-v2
+
+# Para almacenamiento externo, debe cifrar primero (ver Flujo de Trabajo de Cifrado Manual abajo)
+```
+
+### Método 2: Flujo de Trabajo de Cifrado Manual
+
+Para más control, puede cifrar paquetes manualmente:
+
+<Steps>
+
+1. **Crear un paquete zip:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **Cifrar el paquete:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
+   ```
+
+3. **Cargar a su almacenamiento (ej., S3) y registrar con Capgo:**
+   ```shell
+   # Primero cargar el paquete cifrado a su almacenamiento (ej., AWS S3)
+   aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
+
+   # Luego registrar con Capgo usando la URL externa
+   npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
+   ```
+
+</Steps>
+
+## Gestión de Claves
+
+### Almacenamiento Seguro de Claves
+
+**Opciones de Clave Privada:**
+
+1. **Basada en archivo (desarrollo local):**
+   ```shell
+   # Clave almacenada como archivo .capgo_key_v2 en la raíz del proyecto
+   npx @capgo/cli@latest bundle upload --key-v2
+   ```
+
+2. **Variable de entorno (CI/CD):**
+   ```shell
+   # Almacenar en variable de entorno para CI
+   export CAPGO_PRIVATE_KEY="$(cat .capgo_key_v2)"
+   npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
+   ```
+
+**Configuración de Clave Pública (Requerido):**
+```shell
+# Debe guardar clave pública en configuración de Capacitor para aplicación móvil
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+```
+
+**Entorno de Producción:**
+- Almacene claves privadas en servicios de gestión de claves seguros (AWS KMS, Azure Key Vault, etc.)
+- Use gestión de secretos de CI/CD para claves privadas
+- Nunca confirme claves privadas en control de versiones
+
+**Uso de Claves:**
+- **Clave Privada**: Usada por CLI para cifrado durante la carga de paquetes (mantener segura)
+- **Clave Pública**: Almacenada en configuración de la aplicación para descifrado en dispositivo (seguro confirmar)
+
+### Rotación de Claves
+
+Rote regularmente sus claves de cifrado para mayor seguridad:
+
+<Steps>
+
+1. **Generar nuevas claves:**
+   ```shell
+   # Navegar al directorio deseado primero, luego crear claves
+   mkdir ./new-keys && cd ./new-keys
+   npx @capgo/cli@latest key create
+   ```
+
+2. **Guardar la nueva clave pública en configuración de Capacitor:**
+   ```shell
+   npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
+   ```
+
+3. **Actualizar la configuración de su aplicación** con la nueva clave pública
+
+4. **Desplegar la aplicación actualizada** antes de cargar paquetes cifrados con la nueva clave
+
+</Steps>
+
+## Mejores Prácticas de Seguridad
+
+### Seguridad de Claves
+- **Nunca comparta claves privadas** entre entornos o miembros del equipo
+- **Use claves diferentes** para diferentes entornos (dev, staging, producción)
+- **Rote claves regularmente** (recomendado: cada 6-12 meses)
+- **Almacene claves de forma segura** usando sistemas de gestión de claves apropiados
+
+### Seguridad de Paquetes
+- **Siempre verifique** la integridad del paquete después del descifrado
+- **Monitoree** patrones de descarga inusuales o fallos
+- **Use HTTPS** para todas las URLs de paquetes (requerido para aplicaciones móviles)
+- **Implemente** manejo de errores apropiado para fallos de descifrado
+
+### Control de Acceso
+- **Limite el acceso** a claves de cifrado solo a personal autorizado
+- **Use acceso basado en roles** para operaciones de gestión de claves
+- **Audite** el uso y acceso de claves regularmente
+- **Implemente** procedimientos apropiados de respaldo y recuperación
+
+## Solución de Problemas de Cifrado
+
+### Problemas Comunes
+
+**Fallos de descifrado:**
+- Verifique que la clave privada coincida con la clave pública usada para cifrado
+- Verifique que el `ivSessionKey` sea correcto
+- Asegúrese de que está usando Cifrado V2 (V1 ya no es compatible)
+
+**Errores relacionados con claves:**
+- Confirme que el formato de clave privada sea correcto (formato PEM)
+- Verifique que la clave no se haya corrompido durante almacenamiento/transferencia
+- Verifique que la clave tenga permisos apropiados en la configuración de su aplicación
+
+**Problemas de rendimiento:**
+- Los paquetes grandes pueden tardar más en cifrar/descifrar
+- Considere usar actualizaciones diferenciales para reducir tamaños de paquetes
+- Monitoree el rendimiento del dispositivo durante el descifrado
+
+### Comandos de Depuración
+
+Verificar estado de cifrado:
+```shell
+npx @capgo/cli@latest app debug
+```
+
+Probar flujo de trabajo de cifrado/descifrado:
+```shell
+# Probar el flujo de trabajo completo: zip → cifrar → descifrar → descomprimir
+npx @capgo/cli@latest bundle zip com.example.app --key-v2
+npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM --json
+npx @capgo/cli@latest bundle decrypt ./encrypted-bundle.zip IV_SESSION_KEY
+```
+
+## Cumplimiento y Estándares
+
+La implementación de cifrado de Capgo sigue estándares de la industria:
+
+- **AES-256**: Algoritmo de cifrado aprobado por FIPS 140-2
+- **RSA-4096**: Cifrado asimétrico fuerte para protección de claves
+- **Modo GCM**: Proporciona confidencialidad y autenticidad
+- **Aleatorio Seguro**: Generación de números aleatorios criptográficamente seguros
+
+Esto hace que Capgo sea adecuado para aplicaciones que requieren cumplimiento con:
+- GDPR (Reglamento General de Protección de Datos)
+- HIPAA (Ley de Portabilidad y Responsabilidad de Seguros de Salud)
+- SOC 2 (Service Organization Control 2)
+- ISO 27001 (Gestión de Seguridad de la Información)
+
+## Consideraciones de Rendimiento
+
+### Sobrecarga de Cifrado
+- **Tamaño del paquete**: Los paquetes cifrados son ligeramente más grandes (~1-2% de sobrecarga)
+- **Tiempo de procesamiento**: El cifrado/descifrado agrega latencia mínima
+- **Uso de memoria**: Aumento temporal durante operaciones de cifrado/descifrado
+
+### Consejos de Optimización
+- Use actualizaciones diferenciales para minimizar transferencia de datos cifrados
+- Optimice el tamaño de su paquete convirtiendo imágenes a formato WebP
+- Minimice archivos JavaScript y CSS antes de empaquetar
+- Elimine dependencias y código no utilizados
+- Monitoree el rendimiento del dispositivo en dispositivos más antiguos/lentos
+
+## Próximos Pasos
+
+- Conozca sobre [Almacenamiento Personalizado](/docs/live-updates/custom-storage/) para usar cifrado con su propia infraestructura
+- Explore [Canales](/docs/live-updates/channels/) para gestionar paquetes cifrados en diferentes entornos
+- Configure [Integración CI/CD](/docs/getting-started/cicd-integration/) para automatizar despliegues cifrados

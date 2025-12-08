@@ -1,0 +1,50 @@
+---
+title: "@capgo/capacitor-fast-sql"
+description: 효율적인 동기화 작업 및 IndexedDB 교체를 위한 사용자 정의 HTTP 프로토콜을 사용한 고성능 네이티브 SQLite.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 동기화 시스템 및 대규모 데이터셋을 위한 사용자 정의 프로토콜을 사용한 초고속 네이티브 SQLite로 최대 25배 빠른 성능을 제공합니다.
+  image:
+    file: ~public/icons/plugins/fast-sql.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/fast-sql/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-fast-sql/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="사용자 정의 HTTP 프로토콜" icon="rocket">
+    Capacitor의 브리지를 우회하여 최대 25배 빠른 성능 ⚡
+  </Card>
+  <Card title="전체 SQLite 지원" icon="list-format">
+    트랜잭션 및 배치 작업을 포함한 완전한 SQL 지원 📊
+  </Card>
+  <Card title="동기화 친화적" icon="random">
+    CRDT 및 operational transforms와 같은 로컬 동기화 시스템을 위해 설계됨 🔄
+  </Card>
+  <Card title="크로스 플랫폼" icon="laptop">
+    sql.js + IndexedDB를 사용하는 iOS, Android 및 Web 🌐
+  </Card>
+  <Card title="트랜잭션 지원" icon="approve-check-circle">
+    구성 가능한 격리 수준을 가진 ACID 트랜잭션 🔒
+  </Card>
+  <Card title="바이너리 데이터" icon="document">
+    Uint8Array/BLOB 스토리지에 대한 네이티브 지원 📁
+  </Card>
+  <Card title="시작하기" icon="open-book">
+    플러그인을 설치하고 구성하려면 [시작 가이드](/docs/plugins/fast-sql/getting-started/)를 확인하세요.
+  </Card>
+</CardGrid>

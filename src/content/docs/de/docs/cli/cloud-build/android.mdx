@@ -1,0 +1,470 @@
+---
+title: Android Builds
+description: Android-Apps mit Capgo Cloud Build konfigurieren und erstellen
+sidebar:
+  order: 3
+locale: de
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Erstellen und übermitteln Sie Android-Apps an den Google Play Store mithilfe der sicheren Cloud-Infrastruktur von Capgo.
+
+## Bevor Sie erstellen
+
+<CardGrid>
+  <Card title="⚠️ Richten Sie zuerst Android-Zugangsdaten ein" icon="warning">
+    **Erforderlich:** Sie müssen Ihre Android-Zugangsdaten speichern, bevor Sie Release-Apps erstellen.
+
+    [Android-Zugangsdaten einrichten →](/docs/cli/cloud-build/credentials/#saving-android-credentials)
+  </Card>
+</CardGrid>
+
+## Wie Android Builds funktionieren
+
+Android-Builds laufen in sicheren Cloudflare-Sandboxen:
+
+- **Infrastruktur**: Cloudflare Workers mit containerisiertem Android SDK
+- **Build-Tool**: Gradle mit Android Build Tools
+- **Ausführung**: Isolierte Sandbox-Umgebung pro Build
+- **Bereinigung**: Sofortige Löschung nach Build-Abschluss
+- **Sicherheit**: Kein persistenter Speicher, vollständige Isolation zwischen Builds
+
+## Voraussetzungen
+
+Bevor Sie für Android erstellen, benötigen Sie:
+
+### 1. Entwicklungsumgebung (Lokales Testen)
+
+- Android Studio lokal installiert (für die anfängliche Keystore-Einrichtung)
+- Ihre App erstellt erfolgreich mit `npx cap open android`
+- Java JDK 17 oder höher
+
+### 2. Signatur-Keystore
+
+Für Release-Builds benötigen Sie einen Signatur-Keystore:
+
+| Build-Typ | Keystore erforderlich | Zweck |
+|------------|-------------------|---------|
+| **Debug** | Nein | Nur für Tests, automatisch generiert |
+| **Release** | Ja | Play Store-Übermittlung |
+
+## Einen Keystore erstellen
+
+<Aside type="tip">
+Für detaillierte Schritt-für-Schritt-Anleitungen mit Screenshots besuchen Sie:
+- [Android-Zertifikate-Anleitung](https://capawesome.io/cloud/native-builds/certificates/android/)
+- [Blog: Automatische Android-Builds mit GitHub Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+</Aside>
+
+Wenn Sie noch keinen Keystore haben, erstellen Sie einen:
+
+```bash
+keytool -genkey -v \
+  -keystore my-release-key.keystore \
+  -alias my-key-alias \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000
+```
+
+Beantworten Sie die Aufforderungen:
+- **Passwort**: Wählen Sie ein starkes Passwort (sicher aufbewahren!)
+- **Name**: Ihr Name oder Firmenname
+- **Organisation**: Ihr Firmenname
+- **Standort**: Ihre Stadt, Bundesland, Land
+
+<Aside type="caution">
+**Wichtig**: Bewahren Sie Ihre Keystore-Datei und Passwörter sicher auf! Wenn Sie diese verlieren, können Sie Ihre App im Play Store nicht aktualisieren.
+</Aside>
+
+### Keystore-Komponenten verstehen
+
+Beim Erstellen eines Keystores müssen Sie sich Folgendes merken:
+
+1. **Keystore-Passwort** (`KEYSTORE_STORE_PASSWORD`): Das Passwort für die Keystore-Datei selbst
+2. **Key-Alias** (`KEYSTORE_KEY_ALIAS`): Der Name/Bezeichner für Ihren Signaturschlüssel innerhalb des Keystores
+3. **Key-Passwort** (`KEYSTORE_KEY_PASSWORD`): Das Passwort für den spezifischen Schlüssel (kann identisch mit dem Store-Passwort sein)
+
+**Beispiel-Workflow:**
+```bash
+# Aliase in Ihrem Keystore auflisten, um zu überprüfen
+keytool -list -keystore my-release-key.keystore
+
+# Detaillierte Informationen über Ihren Schlüssel anzeigen
+keytool -list -v -keystore my-release-key.keystore -alias my-key-alias
+```
+
+## Build-Konfiguration
+
+### Erforderliche Umgebungsvariablen
+
+Für **Release-Builds** legen Sie diese Zugangsdaten fest:
+
+```bash
+# Android-Signatur (Erforderlich für Release)
+ANDROID_KEYSTORE_FILE="<base64-kodierter-keystore>"
+KEYSTORE_KEY_ALIAS="my-key-alias"
+KEYSTORE_KEY_PASSWORD="<key-passwort>"
+KEYSTORE_STORE_PASSWORD="<store-passwort>"
+
+# Play Store-Veröffentlichung (Optional, für automatische Übermittlung)
+PLAY_CONFIG_JSON="<base64-kodierte-service-account-json>"
+```
+
+### Base64-Zugangsdaten generieren
+
+**Keystore-Datei:**
+```bash
+base64 -i my-release-key.keystore | pbcopy
+```
+
+**Play Store Service Account JSON:**
+```bash
+base64 -i play-store-service-account.json | pbcopy
+```
+
+Die Base64-Zeichenfolge befindet sich jetzt in Ihrer Zwischenablage.
+
+### Play Store Service Account einrichten
+
+Um automatische Play Store-Uploads zu ermöglichen, müssen Sie ein Google Cloud Service Account mit entsprechenden Berechtigungen erstellen.
+
+<Aside type="tip">
+Für detaillierte Anweisungen mit Screenshots siehe die [Android-Zertifikate-Anleitung](https://capawesome.io/cloud/native-builds/certificates/android/).
+</Aside>
+
+<Steps>
+
+1. **Service Account in Google Cloud erstellen**
+   - Gehen Sie zu [Google Play Console](https://play.google.com/console) → Einrichtung → API-Zugriff
+   - Klicken Sie auf "Neues Service Account erstellen"
+   - Folgen Sie dem Link zur Google Cloud Console
+   - Klicken Sie auf "Service Account erstellen"
+   - Geben Sie einen Namen ein (z. B. "Capgo CI/CD")
+   - Erteilen Sie die Rolle "Service Account User"
+   - Klicken Sie auf "Fertig"
+
+2. **JSON-Schlüssel erstellen**
+   - Finden Sie in der Google Cloud Console Ihr Service Account
+   - Klicken Sie auf die Service Account-E-Mail
+   - Gehen Sie zum Tab "Schlüssel"
+   - Klicken Sie auf "Schlüssel hinzufügen" → "Neuen Schlüssel erstellen"
+   - Wählen Sie das Format "JSON"
+   - Laden Sie die JSON-Datei herunter (sicher aufbewahren!)
+
+3. **Berechtigungen in der Play Console erteilen**
+   - Gehen Sie zurück zur Google Play Console → Einrichtung → API-Zugriff
+   - Finden Sie Ihr Service Account in der Liste
+   - Klicken Sie auf "Zugriff gewähren"
+   - Wählen Sie unter "App-Berechtigungen" Ihre App aus
+   - Erteilen Sie unter "Kontoberechtigungen":
+     - **Releases**: "App-Informationen anzeigen und Massenberichte herunterladen (schreibgeschützt)"
+     - **Releases**: "Entwurfsreleases erstellen, bearbeiten und löschen"
+     - **Releases**: "In Produktion veröffentlichen, Geräte ausschließen und Play App Signing verwenden"
+   - Klicken Sie auf "Benutzer einladen"
+
+4. **Einladung annehmen**
+   - Das Service Account erhält eine Einladungs-E-Mail
+   - Akzeptieren Sie die Einladung, um die Berechtigungen zu aktivieren
+
+</Steps>
+
+<Aside type="caution">
+Die Service Account JSON-Datei enthält vertrauliche Zugangsdaten. Committen Sie sie niemals in die Versionskontrolle oder teilen Sie sie öffentlich.
+</Aside>
+
+## Für Android erstellen
+
+### Debug-Build
+
+Perfekt zum Testen ohne Signatur:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode debug
+```
+
+Dies erstellt ein Debug-APK, das auf jedem Gerät zum Testen installiert werden kann.
+
+### Release-Build
+
+Für Play Store-Übermittlung:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release
+```
+
+Erfordert, dass Signaturzugangsdaten als Umgebungsvariablen konfiguriert sind.
+
+## CI/CD-Integration
+
+### GitHub Actions-Beispiel
+
+```yaml
+name: Build Android App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build Android app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform android \
+            --build-mode release
+```
+
+## Details zum Build-Prozess
+
+### Was passiert während eines Android-Builds
+
+<Steps>
+
+1. **Sandbox-Initialisierung** (~5 Sekunden)
+   - Sicherer Container wird gestartet
+   - Android SDK und Gradle geladen
+   - Isoliertes Dateisystem erstellt
+
+2. **Projekt-Setup** (~20 Sekunden)
+   - Projekt-Zip von R2 heruntergeladen
+   - In Build-Verzeichnis extrahiert
+   - Signaturzugangsdaten eingefügt
+
+3. **Gradle-Build** (2-4 Minuten)
+   - Abhängigkeiten heruntergeladen
+   - APK/AAB-Kompilierung
+   - ProGuard/R8-Optimierung (Release-Modus)
+   - Code-Signatur angewendet
+
+4. **Play Store-Upload** (30 Sekunden, falls konfiguriert)
+   - AAB zur Play Console hochgeladen
+   - Release-Track konfiguriert
+   - Übermittlung initiiert
+
+5. **Bereinigung** (sofort)
+   - Alle Dateien gelöscht
+   - Container zerstört
+   - Keine Artefakte gespeichert
+
+</Steps>
+
+### Build-Stack
+
+Unsere Android-Build-Umgebung umfasst:
+
+- **Java**: OpenJDK 17
+- **Android SDK**: Neueste stabile Version
+- **Gradle**: 8.x
+- **Build Tools**: 34.x
+- **Node.js**: 18.x (LTS)
+- **NPM**: Neueste stabile Version
+
+## Build-Ausgabe
+
+### APK vs AAB
+
+- **APK** (Android Package): Installierbare Datei für direkte Installation
+- **AAB** (Android App Bundle): Von Google Play empfohlenes Format (kleinere Downloads für Benutzer)
+
+Standardmäßig erstellen Capgo-Builds:
+- **Debug-Modus**: APK
+- **Release-Modus**: AAB (optimiert für Play Store)
+
+## Build-Zeiten
+
+Typische Android-Build-Zeiten:
+
+| Build-Typ | Durchschnittliche Zeit |
+|------------|--------------|
+| Debug | 2-3 Minuten |
+| Release (ohne ProGuard) | 3-4 Minuten |
+| Release (mit ProGuard) | 4-6 Minuten |
+
+<Aside type="note">
+Android-Builds kosten **1× den Basistarif** (halb so viel wie iOS-Builds).
+</Aside>
+
+## Build-Varianten
+
+### Benutzerdefinierte Build-Varianten
+
+Wenn Ihre App benutzerdefinierte Build-Varianten hat (z. B. `staging`, `production`), verwenden Sie `build-config`:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release \
+  --build-config '{"variant":"staging"}'
+```
+
+Dies erstellt die Variante `stagingRelease`.
+
+### Flavor-Dimensionen
+
+Für Apps mit Flavor-Dimensionen:
+
+```bash
+--build-config '{"flavor":"premium","variant":"production"}'
+```
+
+Dies erstellt die Variante `premiumProductionRelease`.
+
+## Fehlerbehebung
+
+### Häufige Probleme
+
+**"Keystore password incorrect"**
+- Überprüfen Sie, ob KEYSTORE_STORE_PASSWORD mit Ihrem Keystore übereinstimmt
+- Stellen Sie sicher, dass KEYSTORE_KEY_PASSWORD mit Ihrem Key-Alias-Passwort übereinstimmt
+- Prüfen Sie auf zusätzliche Leerzeichen oder Sonderzeichen
+
+**"Key alias not found"**
+- Überprüfen Sie, ob KEYSTORE_KEY_ALIAS genau übereinstimmt (Groß-/Kleinschreibung beachten)
+- Aliase auflisten: `keytool -list -keystore my-release-key.keystore`
+
+**"Gradle build failed"**
+- Überprüfen Sie die Build-Protokolle auf den spezifischen Fehler
+- Stellen Sie sicher, dass Ihre App lokal mit `./gradlew assembleRelease` erstellt wird
+- Überprüfen Sie, ob alle nativen Abhängigkeiten in `build.gradle` sind
+
+**"Play Store upload failed"**
+- Überprüfen Sie, ob die Service Account JSON gültig ist
+- Stellen Sie sicher, dass das Service Account korrekte Berechtigungen in der Play Console hat
+- Prüfen Sie, ob die App ordnungsgemäß in der Play Console eingerichtet ist
+
+**"Build timeout"**
+- Große Apps benötigen möglicherweise Optimierung
+- Prüfen Sie, ob unnötige Abhängigkeiten entfernt werden können
+- Kontaktieren Sie den Support, wenn Builds ständig ein Timeout erreichen
+
+### Debug-Protokolle
+
+Achten Sie auf diese wichtigen Phasen in den Build-Protokollen:
+
+```
+→ Downloading dependencies...
+→ Running Gradle assembleRelease...
+→ Signing APK/AAB...
+→ Uploading to Play Store...
+✔ Build succeeded
+```
+
+Wenn ein Build fehlschlägt, wird der spezifische Gradle-Fehler in den Protokollen angezeigt.
+
+## Best Practices
+
+### 1. Zuerst lokal testen
+
+Stellen Sie immer sicher, dass Ihr Android-Build lokal funktioniert:
+
+```bash
+cd android
+./gradlew assembleRelease
+# oder
+./gradlew bundleRelease
+```
+
+### 2. Sichern Sie Ihren Keystore
+
+- Committen Sie niemals Keystores in die Versionskontrolle
+- Speichern Sie in sicherer Secrets-Verwaltung (1Password, AWS Secrets Manager usw.)
+- Bewahren Sie Backup-Kopien an mehreren sicheren Orten auf
+- Dokumentieren Sie Passwörter in einem sicheren Passwort-Manager
+
+### 3. Versionsverwaltung
+
+Capgo liest die Version aus Ihrer `capacitor.config.json`:
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "My App",
+  "version": "1.0.0",
+  "build": "1"
+}
+```
+
+Erhöhen Sie die `build`-Nummer für jedes Release.
+
+### 4. ProGuard-Konfiguration
+
+Für Release-Builds stellen Sie sicher, dass ProGuard-Regeln ordnungsgemäß konfiguriert sind:
+
+```
+# android/app/proguard-rules.pro
+-keep class com.getcapacitor.** { *; }
+-keep @com.getcapacitor.annotation.CapacitorPlugin public class * {
+  @com.getcapacitor.annotation.PluginMethod public <methods>;
+}
+```
+
+### 5. Build-Größe überwachen
+
+Behalten Sie die APK/AAB-Größe im Auge, um sicherzustellen, dass sie optimiert ist:
+
+```
+Die CLI zeigt die endgültige Größe an:
+→ APK size: 12.4 MB
+```
+
+Wenn Ihre App groß ist (>50 MB), erwägen Sie:
+- ProGuard/R8 aktivieren
+- AAB-Format verwenden (dynamische Bereitstellung)
+- Bilder und Assets optimieren
+
+## Play Store-Übermittlung
+
+### Automatische Übermittlung
+
+Mit konfiguriertem PLAY_CONFIG_JSON werden Builds automatisch zum internen Test-Track der Play Console hochgeladen.
+
+### Manuelle Übermittlung
+
+Wenn Sie manuelle Übermittlung bevorzugen:
+
+1. Führen Sie den Build ohne PLAY_CONFIG_JSON aus
+2. Laden Sie das AAB von Build-Artefakten herunter (falls konfiguriert)
+3. Laden Sie es manuell zur Play Console hoch
+
+## Nächste Schritte
+
+- [iOS Builds](/docs/cli/cloud-build/ios/) - iOS-Builds konfigurieren
+- [Fehlerbehebung](/docs/cli/cloud-build/troubleshooting/) - Häufige Build-Probleme
+- [CLI-Referenz](/docs/cli/reference/build/) - Vollständige Befehlsdokumentation
+
+## Brauchen Sie Hilfe?
+
+- [Fehlerbehebungsanleitung](/docs/cli/cloud-build/troubleshooting/)
+- [Discord-Community](https://discord.com/invite/VnYRvBfgA6)
+- E-Mail: support@capgo.app

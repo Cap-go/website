@@ -1,0 +1,312 @@
+---
+title: iOS Auto-Renewable Subscription erstellen
+locale: de
+description: Schritt-für-Schritt-Anleitung zum Erstellen von automatisch verlängernden Abonnements in App Store Connect für das native-purchases-Plugin.
+sidebar:
+  order: 8
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Automatisch verlängernde Abonnements bieten wiederkehrenden Zugriff auf Inhalte, Dienste oder Premium-Funktionen in Ihrer iOS-App. Dieser Leitfaden führt Sie durch die Erstellung von Abonnements in App Store Connect.
+
+## Übersicht
+
+Automatisch verlängernde Abonnements werden am Ende jeder Abrechnungsperiode automatisch verlängert, bis Benutzer kündigen. Sie sind perfekt für:
+- Premium-Inhalte und -Funktionen
+- Werbefreie Erlebnisse
+- Cloud-Speicher und Synchronisation
+- Streaming-Dienste
+- Professionelle Tools und Dienstprogramme
+
+## Voraussetzungen
+
+Bevor Sie Abonnements erstellen, müssen Sie:
+1. [Eine Abonnementgruppe erstellen](/docs/plugins/native-purchases/ios-subscription-group/), um Ihre Abonnements zu organisieren
+2. Eine aktive Apple Developer Program-Mitgliedschaft haben
+3. Bank- und Steuerinformationen in App Store Connect vervollständigen
+
+## Ein Abonnement erstellen
+
+<Steps>
+
+1. **Zu Abonnements navigieren**
+
+   In App Store Connect wählen Sie Ihre App aus und gehen zu **Monetarisieren > Abonnements**.
+
+   Wählen Sie Ihre Abonnementgruppe aus oder erstellen Sie bei Bedarf eine neue.
+
+   ![Zu Abonnements navigieren](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
+
+2. **Neues Abonnement erstellen**
+
+   Klicken Sie auf das **+**-Symbol neben Ihrer Abonnementgruppe, um ein neues Abonnement hinzuzufügen.
+
+3. **Grundinformationen eingeben**
+
+   **Referenzname**: Beschreibender Name für Ihre interne Verwendung (wird Kunden nicht angezeigt)
+   - Beispiele: "Premium Monatlich", "Ultimate Jährlich", "Basis-Plan"
+
+   **Produkt-ID**: Eindeutige Kennung für dieses Abonnement (kann später nicht geändert werden)
+   - Format: `com.ihrfirma.ihreapp.premium_monthly`
+   - Verwenden Sie beschreibende Namen in Kleinbuchstaben mit Unterstrichen
+   - Erforderlich für die Konfiguration des native-purchases-Plugins
+
+   ![Abonnementdetails eingeben](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
+
+4. **Dauer konfigurieren**
+
+   Wählen Sie die Abonnementdauer aus den verfügbaren Optionen:
+   - 1 Woche
+   - 1 Monat
+   - 2 Monate
+   - 3 Monate
+   - 6 Monate
+   - 1 Jahr
+
+   Die Dauer bestimmt, wie oft Benutzer abgerechnet werden.
+
+5. **Preise festlegen**
+
+   Klicken Sie auf **Abonnementpreis hinzufügen**, um Preise zu konfigurieren:
+
+   **Basis-Territorium**: Wählen Sie Ihren primären Markt (normalerweise Ihr Land)
+
+   **Preis**: Abonnementpreis festlegen
+   - Apple konvertiert automatisch in andere Währungen
+   - Aus Apples Preisstufen wählen
+   - Wahrgenommenen Wert und Marktraten berücksichtigen
+
+   ![Preise konfigurieren](/native-purchases/ios/create-subscription/configure-pricing.webp)
+
+6. **Familienfreigabe (Optional)**
+
+   Entscheiden Sie, ob Sie die Familienfreigabe aktivieren möchten, die bis zu 6 Familienmitgliedern den Zugriff auf das Abonnement ermöglicht.
+
+   :::caution
+   Sobald die Familienfreigabe aktiviert ist, kann sie für dieses Produkt nicht mehr deaktiviert werden.
+   :::
+
+   **Aktivieren wenn:**
+   - Inhalt für die Familiennutzung geeignet ist
+   - Sie das Wertversprechen erhöhen möchten
+   - Ihr Geschäftsmodell es unterstützt
+
+   **Nicht aktivieren wenn:**
+   - Abonnement nur für individuelle Nutzung ist
+   - Inhalt auf den Benutzer zugeschnitten ist
+   - Sie Umsatz pro Benutzer maximieren möchten
+
+7. **Lokalisierungen hinzufügen**
+
+   Fügen Sie Abonnement-Anzeigeinformationen in allen Sprachen hinzu, die Ihre App unterstützt:
+
+   **Abonnement-Anzeigename**: Kundenorientierter Name (z.B. "Premium Monatlich")
+
+   **Beschreibung**: Kurze Beschreibung dessen, was das Abonnement beinhaltet
+   - Prägnant und nutzenorientiert halten
+   - Hauptfunktionen erwähnen
+   - Wertversprechen hervorheben
+
+   ![Lokalisierungen hinzufügen](/native-purchases/ios/create-subscription/add-localization.webp)
+
+8. **App Store-Werbebild (Optional)**
+
+   Laden Sie ein Werbebild für dieses Abonnement hoch (312x390 Pixel):
+   - Wird auf der App Store-Abonnementseite angezeigt
+   - Sollte zum Design Ihrer App passen
+   - Abonnementnamen zur Klarheit einschließen
+
+   :::note
+   Während Bilder für die erste Einreichung optional sind, sind sie für die Werbeanzeige im App Store erforderlich. Sie können sie später hinzufügen.
+   :::
+
+9. **Speichern und einreichen**
+
+   Klicken Sie auf **Speichern**, um das Abonnement zu erstellen.
+
+   **Für erstes Abonnement:**
+   - Muss mit einer neuen App-Version eingereicht werden
+   - In Ihre nächste App Store-Einreichung einbeziehen
+   - Kann nicht unabhängig eingereicht werden
+
+   **Für nachfolgende Abonnements:**
+   - Kann direkt von der Abonnementseite eingereicht werden
+   - Benötigen keine neue App-Version
+   - Verfügbar, nachdem das erste Abonnement genehmigt wurde
+
+</Steps>
+
+## Abonnementstatus
+
+Ihr Abonnement wird einen dieser Status haben:
+
+| Status | Beschreibung | Kann testen? |
+|--------|-------------|-----------|
+| **Fehlende Metadaten** | Unvollständige Einrichtung | Ja (Sandbox) |
+| **Bereit zur Einreichung** | Vollständig, aber nicht eingereicht | Ja (Sandbox) |
+| **Wartet auf Prüfung** | An Apple eingereicht | Ja (Sandbox) |
+| **In Prüfung** | Wird von Apple geprüft | Ja (Sandbox) |
+| **Genehmigt** | Zum Kauf verfügbar | Ja |
+| **Abgelehnt** | Benötigt Änderungen | Ja (Sandbox) |
+
+:::tip
+Sie können Abonnements im Sandbox-Modus testen, auch wenn sie "Fehlende Metadaten" oder "Bereit zur Einreichung" anzeigen!
+:::
+
+## Verwendung in Ihrer App
+
+Nach der Erstellung verweisen Sie in Ihrer App auf das Abonnement mit der Produkt-ID:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Abonnementprodukte direkt von StoreKit abrufen
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: [
+    'com.ihrfirma.ihreapp.premium_monthly',
+    'com.ihrfirma.ihreapp.premium_annual',
+  ],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+products.forEach((product) => {
+  console.log(`${product.title}: ${product.priceString}`);
+  console.log(`Dauer: ${product.subscriptionPeriod}`);
+  console.log(`Beschreibung: ${product.description}`);
+});
+
+// Ein Abonnement kaufen (StoreKit 2 behandelt automatisch Einführungspreise und Angebote)
+try {
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.ihrfirma.ihreapp.premium_monthly',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Transaktions-ID:', transaction.transactionId);
+
+  // StoreKit-Quittungen sind auf iOS für serverseitige Validierung enthalten
+  await sendReceiptToBackend(transaction.receipt);
+} catch (error) {
+  console.error('Kauf fehlgeschlagen:', error);
+}
+
+// Abonnementstatus über die Store-Daten prüfen
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const premium = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.ihrfirma.ihreapp.premium_monthly',
+);
+
+if (premium?.isActive) {
+  console.log('Läuft ab:', premium.expirationDate);
+  console.log('Wird verlängert:', premium.willCancel === false);
+  console.log('Store-Status:', premium.subscriptionState);
+  unlockPremiumFeatures();
+} else {
+  showPaywall();
+}
+```
+
+## Best Practices
+
+### Preisstrategie
+- **Monatspläne**: Niedrigere Einstiegshürde, bildet Gewohnheit
+- **Jahrespläne**: Besserer Wert, höherer LTV, geringere Abwanderung
+- **Mehrere Stufen**: Basic, Premium, Ultimate für verschiedene Benutzersegmente
+- **Wettbewerbsanalyse**: Preise ähnlicher Apps recherchieren
+
+### Produkt-IDs
+- Konsistente Benennung verwenden: `firma.app.stufe_dauer`
+- Stufe und Dauer in ID einschließen: `premium_monthly`, `ultimate_annual`
+- Änderung von Produkt-IDs vermeiden (sie sind dauerhaft)
+- Alle Produkt-IDs für Ihr Team dokumentieren
+
+### Familienfreigabe
+- Für familienorientierte Apps aktivieren (Spiele, Bildung, Unterhaltung)
+- Auswirkung auf Umsatz berücksichtigen
+- Freigabeverhalten gründlich testen
+- Freigabefähigkeit im Marketing kommunizieren
+
+### Lokalisierung
+- Alle Abonnementnamen und Beschreibungen übersetzen
+- Regionale Preisunterschiede berücksichtigen
+- Anzeige in allen unterstützten Sprachen testen
+- Kulturell angemessene Marketingsprache verwenden
+
+### Werbebilder
+- Konsistenten visuellen Stil beibehalten
+- Abonnementnamen und Hauptvorteil einschließen
+- Für saisonale Aktionen aktualisieren
+- Zur gesamten Design-Sprache der App passen
+
+## Häufige Abonnementmuster
+
+### Einzelstufe (Freemium)
+```
+Kostenlose App + Premium-Abonnement
+- Basic: Kostenlos (eingeschränkte Funktionen)
+- Premium Monatlich: 4,99€
+- Premium Jährlich: 39,99€ (33% sparen)
+```
+
+### Mehrstufig (Gut, Besser, Am besten)
+```
+- Basic Monatlich: 4,99€
+- Premium Monatlich: 9,99€
+- Ultimate Monatlich: 19,99€
+
+- Basic Jährlich: 49,99€
+- Premium Jährlich: 99,99€
+- Ultimate Jährlich: 199,99€
+```
+
+### Verbrauchbar + Abonnement-Hybrid
+```
+- Credit-Pakete (verbrauchbar)
+- Monatsabonnement (unbegrenzte Credits)
+- Jahresabonnement (unbegrenzt + Bonus-Funktionen)
+```
+
+## Fehlerbehebung
+
+**Abonnement lädt nicht in App:**
+- Produkt-ID stimmt genau überein prüfen (groß-/kleinschreibungsabhängig)
+- Abonnement ist in Abonnementgruppe prüfen
+- Bundle-Kennung stimmt mit App Store Connect überein sicherstellen
+- 2-3 Stunden nach Produkterstellung warten
+
+**Abonnement kann nicht eingereicht werden:**
+- Alle erforderlichen Felder vervollständigen (Name, Beschreibung, Preis)
+- Mindestens eine Lokalisierung hinzufügen
+- Bank-/Steuerinformationen sind genehmigt prüfen
+- Prüfen, ob erstes Abonnement (benötigt App-Version)
+
+**Familienfreigabe-Umschalter deaktiviert:**
+- Bereits aktiviert (kann nicht deaktiviert werden)
+- In Abonnementdetails prüfen
+- Apple Support kontaktieren, falls festgefahren
+
+**Preisstufe nicht verfügbar:**
+- Kann in einigen Territorien eingeschränkt sein
+- Alternative Stufe wählen
+- Apple für Preisfragen kontaktieren
+
+**"Ungültige Produkt-ID"-Fehler:**
+- Muss Reverse-Domain-Format sein
+- Darf keine Leerzeichen oder Sonderzeichen enthalten
+- Auf Tippfehler prüfen
+- Eindeutigkeit über alle Produkte hinweg prüfen
+
+## Nächste Schritte
+
+- [Ein Einführungsangebot erstellen](/docs/plugins/native-purchases/ios-introductory-offer/), um neue Abonnenten zu gewinnen
+- [Sandbox-Tests konfigurieren](/docs/plugins/native-purchases/ios-sandbox-testing/), um Ihre Abonnements zu testen
+- Aktionsangebote für Rückgewinnung und Bindung einrichten
+- Abonnement-Analytics-Tracking implementieren
+
+## Zusätzliche Ressourcen
+
+Weitere Details finden Sie in der [offiziellen Apple-Dokumentation zu automatisch verlängernden Abonnements](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).

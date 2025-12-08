@@ -1,0 +1,549 @@
+---
+title: GitHub Actions 集成
+locale: zh
+description: "了解如何将 Capgo Live Updates 与 GitHub Actions 集成,实现应用更新的自动化部署。"
+sidebar:
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+将 Capgo Live Updates 与 GitHub Actions 集成,在您推送代码更改时自动部署应用更新。本指南涵盖了使用 GitHub 强大的 CI/CD 平台设置自动化构建、测试和部署工作流。
+
+## 前置要求
+
+在设置 GitHub Actions 集成之前,请确保您具备:
+
+- 包含应用源代码的 GitHub 存储库
+- 已配置应用的 Capgo 账户
+- 项目中已配置 Node.js 和 npm/yarn
+- 为您的存储库启用 GitHub Actions
+
+## 设置 GitHub Secrets
+
+### 步骤 1:配置存储库 Secrets
+
+在您的 GitHub 存储库中设置必要的 secrets:
+
+<Steps>
+
+1. 导航到您的 GitHub 存储库
+2. 进入 **Settings** → **Secrets and variables** → **Actions**
+3. 点击 **New repository secret** 并添加以下内容:
+
+</Steps>
+
+| Secret 名称 | 值 |
+|-------------|-------|
+| `CAPGO_TOKEN` | 您的 Capgo API token |
+
+<Aside type="tip">
+
+从 [console.capgo.app/apikeys](https://console.capgo.app/apikeys) 获取您的 Capgo API token。您的应用 ID 已在 `capacitor.config.ts` 文件中配置。
+
+</Aside>
+
+## 简单生产部署
+
+从这个基本配置开始,在每次推送到主分支时部署到生产环境:
+
+```yaml
+# 用于 Capgo Live Updates 的简单 GitHub Actions 工作流
+name: Deploy to Capgo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install, test and build
+        run: |
+          npm ci
+          npm run test
+          npm run build
+
+             - name: Deploy to Capgo
+         run: |
+           npm install -g @capgo/cli
+           npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+           # 对于加密上传,添加: --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
+```
+
+## 高级多渠道配置
+
+### 功能分支部署
+
+将功能分支部署到临时渠道以进行测试:
+
+```yaml
+# 功能分支部署
+name: Deploy Feature Branch to Capgo
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  deploy-feature:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: |
+          npm ci
+          npm run test
+          npm run build
+
+      - name: Deploy to feature channel
+        run: |
+          CHANNEL_NAME=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
+          npm install -g @capgo/cli
+          npx @capgo/cli channel create $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+                     npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
+```
+
+### 使用加密
+
+如果您使用 [Capgo 的加密功能](/docs/live-updates/encryption/),则需要在 CI/CD 环境中安全地存储您的私钥。
+
+在本地[设置加密密钥](/docs/live-updates/encryption/#setting-up-encryption)后,将您的私钥添加到 GitHub secrets:
+
+```shell
+# 显示您的私钥内容(复制此输出)
+cat .capgo_key_v2
+```
+
+将此内容作为 `CAPGO_PRIVATE_KEY` 添加到您的 GitHub 存储库 secrets,然后在工作流中使用它:
+
+```yaml
+# 使用加密部署
+- name: Deploy to Capgo with Encryption
+  run: |
+    npm install -g @capgo/cli
+    npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}" --channel production
+```
+
+<Aside type="caution">
+
+**安全最佳实践:**
+- 切勿将 `.capgo_key_v2` 文件提交到版本控制
+- 仅在安全的 CI/CD 密钥管理中存储私钥
+- 为不同环境使用不同的密钥
+
+</Aside>
+
+### 多渠道配置
+
+有关设置和管理多个部署渠道的综合信息,请参阅[渠道文档](/docs/live-updates/channels/)。
+
+包含开发、拉取请求和生产部署的完整工作流:
+
+```yaml
+# 完整的多环境工作流
+name: Deploy to Capgo
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: |
+          npm ci
+          npm run test
+          npm run build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  deploy-development:
+    if: github.ref == 'refs/heads/develop'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel development
+
+  deploy-pr:
+    if: github.event_name == 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Deploy to PR channel
+        run: |
+          CHANNEL_NAME="pr-${{ github.event.number }}"
+          npm install -g @capgo/cli
+          npx @capgo/cli channel create $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
+
+      - name: Comment PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 此 PR 已部署到 Capgo 渠道: \`pr-${{ github.event.number }}\`\n\n要在您的应用中测试此更新,请将其配置为使用此渠道。[了解如何配置渠道 →](/docs/live-updates/channels/#configuring-the-channel-in-your-app)`
+            })
+
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+```
+
+<Aside type="tip">
+
+**使用渠道进行测试**:部署到 PR 或开发渠道后,您可以通过配置应用使用该特定渠道来测试更新。了解更多关于[在应用中配置渠道](/docs/live-updates/channels/#configuring-the-channel-in-your-app)的信息。
+
+</Aside>
+
+### 清理功能渠道
+
+在删除分支时自动清理功能渠道:
+
+```yaml
+name: Cleanup Feature Channels
+
+on:
+  delete:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch' && startsWith(github.event.ref, 'feature/')
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Delete Capgo channel
+        run: |
+          CHANNEL_NAME=$(echo "${{ github.event.ref }}" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
+          npm install -g @capgo/cli
+          npx @capgo/cli channel delete $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+```
+
+## 安全和最佳实践
+
+### 环境保护规则
+
+在 GitHub 中设置环境保护规则:
+
+<Steps>
+
+1. 在您的存储库中进入 **Settings** → **Environments**
+2. 创建环境:`development`、`staging`、`production`
+3. 对于生产环境,添加:
+   - **Required reviewers**:添加必须批准部署的团队成员
+   - **Wait timer**:添加部署前的延迟(可选)
+   - **Deployment branches**:仅限制为 `main` 分支
+
+</Steps>
+
+### 安全 Secrets 管理
+
+使用特定于环境的 secrets:
+
+```yaml
+# 每个环境使用不同的 secrets
+deploy-production:
+  environment: production
+  steps:
+    - name: Deploy to Production
+      run: |
+        npx @capgo/cli bundle upload \
+          --apikey ${{ secrets.CAPGO_PROD_TOKEN }} \
+          --app ${{ secrets.CAPGO_PROD_APP_ID }} \
+          --channel production
+```
+
+## 监控和通知
+
+### Slack 集成
+
+向工作流添加 Slack 通知:
+
+```yaml
+name: Deploy with Notifications
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # ... 部署步骤
+
+      - name: Notify Slack on Success
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: '✅ Capgo 部署成功!'
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on Failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: '❌ Capgo 部署失败!'
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+```
+
+### Discord 集成
+
+向 Discord 发送通知:
+
+```yaml
+- name: Discord notification
+  if: always()
+  uses: Ilshidur/action-discord@master
+  with:
+    args: |
+      Capgo 部署 ${{ job.status }}!
+      应用: ${{ secrets.CAPGO_APP_ID }}
+      渠道: ${{ github.ref_name }}
+      提交: ${{ github.sha }}
+  env:
+    DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+```
+
+### 邮件通知
+
+配置邮件通知:
+
+```yaml
+- name: Send email notification
+  if: failure()
+  uses: dawidd6/action-send-mail@v3
+  with:
+    server_address: smtp.gmail.com
+    server_port: 465
+    username: ${{ secrets.EMAIL_USERNAME }}
+    password: ${{ secrets.EMAIL_PASSWORD }}
+    subject: 'Capgo 部署失败 - ${{ github.repository }}'
+    to: team@yourcompany.com
+    from: ci-cd@yourcompany.com
+    body: |
+      ${{ github.repository }} 的部署失败
+      分支: ${{ github.ref_name }}
+      提交: ${{ github.sha }}
+      工作流: ${{ github.workflow }}
+```
+
+## 故障排除
+
+### 调试工作流
+
+添加调试步骤以解决问题:
+
+```yaml
+- name: Debug environment
+  run: |
+    echo "Node version: $(node --version)"
+    echo "NPM version: $(npm --version)"
+    echo "Working directory: $(pwd)"
+    echo "Files in dist/: $(ls -la dist/ || echo 'No dist directory')"
+    echo "Environment variables:"
+    env | grep -E "(GITHUB_|CAPGO_)" | sort
+
+- name: Test Capgo CLI
+  run: |
+    npx @capgo/cli --version
+    npx @capgo/cli app debug --apikey ${{ secrets.CAPGO_TOKEN }} --app ${{ secrets.CAPGO_APP_ID }}
+```
+
+### 常见问题和解决方案
+
+**工作流失败并显示 "CAPGO_TOKEN not found":**
+
+```yaml
+- name: Verify secrets
+  run: |
+    if [ -z "${{ secrets.CAPGO_TOKEN }}" ]; then
+      echo "ERROR: CAPGO_TOKEN secret is not set"
+      exit 1
+    fi
+    echo "CAPGO_TOKEN is set (length: ${#CAPGO_TOKEN})"
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+```
+
+**找不到构建产物:**
+
+```yaml
+- name: Debug artifacts
+  run: |
+    echo "Checking for build artifacts..."
+    ls -la dist/ || echo "No dist directory found"
+    find . -name "*.js" -o -name "*.html" | head -10
+```
+
+**网络连接问题:**
+
+```yaml
+- name: Test connectivity
+  run: |
+    ping -c 3 api.capgo.io || echo "Ping failed"
+    curl -I https://api.capgo.io/health || echo "Health check failed"
+```
+
+## 可重用工作流
+
+创建可重用工作流以在项目间保持一致性:
+
+```yaml
+# .github/workflows/reusable-capgo-deploy.yml
+name: Reusable Capgo Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      channel:
+        required: true
+        type: string
+    secrets:
+      CAPGO_TOKEN:
+        required: true
+      CAPGO_APP_ID:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Capgo
+        run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload \
+            --apikey ${{ secrets.CAPGO_TOKEN }} \
+            --app ${{ secrets.CAPGO_APP_ID }} \
+            --channel ${{ inputs.channel }}
+```
+
+使用可重用工作流:
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy App
+
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  deploy-dev:
+    if: github.ref == 'refs/heads/develop'
+    uses: ./.github/workflows/reusable-capgo-deploy.yml
+    with:
+      environment: development
+      channel: development
+    secrets:
+      CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      CAPGO_APP_ID: ${{ secrets.CAPGO_APP_ID }}
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/reusable-capgo-deploy.yml
+    with:
+      environment: production
+      channel: production
+    secrets:
+      CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      CAPGO_APP_ID: ${{ secrets.CAPGO_APP_ID }}
+```
+
+## 下一步
+
+- 了解[渠道](/docs/live-updates/channels/)以管理不同的部署环境
+- 探索[自定义存储](/docs/live-updates/custom-storage/)以进行高级部署场景
+- 设置[加密](/docs/live-updates/encryption/)以进行安全部署
+- 配置[更新行为](/docs/live-updates/update-behavior/)以自定义更新的应用方式
+
+通过 GitHub Actions 集成,您可以利用 GitHub 强大的 CI/CD 平台为 Capgo Live Updates 创建复杂的部署工作流,并内置安全性、监控和协作功能。

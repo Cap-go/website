@@ -1,0 +1,260 @@
+---
+title: Iniziare
+locale: it
+description: Scopri come installare e configurare il plugin Autofill Save Password per una gestione delle password senza interruzioni nella tua app Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installazione
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Supporto Piattaforme
+
+- **iOS**: Supporto completo (iOS 18.3 e versioni precedenti)
+- **Android**: Lavori in corso
+
+## Configurazione Piattaforma
+
+### iOS
+
+#### 1. Configurazione Domini Associati
+
+Configura i domini associati nel tuo account Apple Developer e aggiungili al tuo file `App.entitlements`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>webcredentials:yourdomain.com</string>
+        <string>webcredentials:www.yourdomain.com</string>
+    </array>
+</dict>
+</plist>
+```
+
+#### 2. Configurazione Credenziali Web
+
+Aggiungi un file `.well-known/apple-app-site-association` al tuo sito web:
+
+```json
+{
+  "webcredentials": {
+    "apps": [
+      "TEAMID.com.yourcompany.yourapp"
+    ]
+  }
+}
+```
+
+### Android (Supporto Futuro)
+
+#### 1. Plugin Google Services
+
+Aggiungi a `android/app/build.gradle`:
+
+```kotlin
+apply plugin: 'com.google.gms.google-services'
+```
+
+#### 2. Configurazione Domini
+
+Aggiungi a `android/app/src/main/res/values/strings.xml`:
+
+```xml
+<resources>
+    <string name="asset_statements">
+        [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {
+                "namespace": "web",
+                "site": "https://yourdomain.com"
+            }
+        }]
+    </string>
+</resources>
+```
+
+## Esempio di Utilizzo
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+// Salva la password dopo un login riuscito
+async function login(username: string, password: string) {
+  try {
+    // Esegui qui la tua logica di login
+    const loginSuccess = await performLogin(username, password);
+
+    if (loginSuccess) {
+      // Chiedi all'utente di salvare la password
+      await SavePassword.promptDialog({
+        username: username,
+        password: password,
+        url: 'https://yourdomain.com' // Solo iOS
+      });
+
+      console.log('Password salvata con successo');
+    }
+  } catch (error) {
+    console.error('Impossibile salvare la password:', error);
+  }
+}
+
+// Leggi la password salvata per l'autofill
+async function loadSavedCredentials() {
+  try {
+    const credentials = await SavePassword.readPassword();
+
+    if (credentials.username && credentials.password) {
+      console.log('Credenziali salvate trovate');
+      // Pre-compila il modulo di login
+      return {
+        username: credentials.username,
+        password: credentials.password
+      };
+    }
+  } catch (error) {
+    console.error('Impossibile leggere la password salvata:', error);
+  }
+
+  return null;
+}
+```
+
+## Riferimento API
+
+### promptDialog(options)
+
+```typescript
+promptDialog(options: SavePasswordOptions) => Promise<void>
+```
+
+Salva le credenziali utente nel portachiavi di sistema.
+
+| Parametro     | Tipo                              |
+| ------------- | --------------------------------- |
+| **`options`** | `SavePasswordOptions` |
+
+### readPassword()
+
+```typescript
+readPassword() => Promise<SavedCredentials>
+```
+
+Recupera le credenziali salvate dal portachiavi di sistema.
+
+**Ritorna:** `Promise<SavedCredentials>`
+
+## Interfacce
+
+### SavePasswordOptions
+
+| Prop           | Tipo               | Descrizione                                   |
+| -------------- | ------------------ | --------------------------------------------- |
+| **`username`** | `string` | Il nome utente da salvare                          |
+| **`password`** | `string` | La password da salvare                          |
+| **`url`**      | `string` | Solo iOS - URL del dominio associato (opzionale) |
+
+### SavedCredentials
+
+| Prop           | Tipo              | Descrizione                  |
+| -------------- | ----------------- | ---------------------------- |
+| **`username`** | `string` | Il nome utente salvato           |
+| **`password`** | `string` | La password salvata           |
+
+## Integrazione con il Flusso di Login
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+class AuthService {
+  async login(username: string, password: string) {
+    try {
+      // Autentica con il tuo backend
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        // Offri di salvare le credenziali
+        await this.offerToSavePassword(username, password);
+        return true;
+      }
+    } catch (error) {
+      console.error('Login fallito:', error);
+    }
+    return false;
+  }
+
+  private async offerToSavePassword(username: string, password: string) {
+    try {
+      await SavePassword.promptDialog({
+        username,
+        password,
+        url: 'https://yourdomain.com'
+      });
+    } catch (error) {
+      // L'utente ha rifiutato di salvare o si è verificato un errore
+      console.log('Password non salvata:', error);
+    }
+  }
+
+  async loadSavedCredentials() {
+    try {
+      return await SavePassword.readPassword();
+    } catch (error) {
+      console.log('Nessuna credenziale salvata trovata');
+      return null;
+    }
+  }
+}
+```
+
+## Best Practices
+
+- Chiedi di salvare le password solo dopo un'autenticazione riuscita
+- Gestisci i casi in cui gli utenti rifiutano di salvare le password in modo elegante
+- Implementa una corretta gestione degli errori per i fallimenti di accesso al portachiavi
+- Usa i domini associati per una condivisione senza interruzioni delle credenziali tra web e app
+- Testa la funzionalità di autofill su diverse versioni di iOS
+
+## Considerazioni sulla Sicurezza
+
+- Le credenziali sono memorizzate nel portachiavi di sistema con flag di sicurezza appropriati
+- I domini associati assicurano che le credenziali siano accessibili solo alle app autorizzate
+- Segui le linee guida di sicurezza della piattaforma per la gestione delle credenziali
+- Considera l'implementazione di misure di sicurezza aggiuntive per applicazioni sensibili

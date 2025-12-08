@@ -1,0 +1,68 @@
+---
+title: "Actualización Manual"
+locale: es
+description: "Una guía detallada sobre cómo utilizar el plugin de actualización manual dentro de un entorno auto-hospedado, proporcionando instrucciones completas sobre configuración y uso para gestionar eficazmente las actualizaciones sin depender de procesos automáticos."
+sidebar:
+  order: 3
+---
+
+## Configuración
+
+Agrega esto a tu ``capacitor.config.json``, para deshabilitar la actualización automática.
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false,
+		}
+	}
+}
+```
+
+## Uso
+
+Puedes usar este ejemplo o recrear la lógica en tu aplicación.
+
+:::caution
+Estamos forzando al usuario a actualizar la aplicación con una versión estática declarada en el código. Esto no es recomendado, deberías usar una versión dinámica desde tu servidor.
+:::
+
+:::danger
+No estamos haciendo ninguna verificación de versión, desencriptación o validación de checksum en este ejemplo. Deberías hacerlo por tu cuenta.
+:::
+
+```tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+let data = {version: ""}
+CapacitorUpdater.notifyAppReady()
+App.addListener('appStateChange', async(state) => {
+     if (state.isActive) {
+       // Hacer la descarga durante el tiempo activo del usuario en la app para prevenir descargas fallidas
+       data = await CapacitorUpdater.download({
+       version: '0.0.4',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/0.0.4/dist.zip',
+       })
+     }
+     if (!state.isActive && data.version !== "") {
+       // Hacer el cambio cuando el usuario deje la app
+       SplashScreen.show()
+       try {
+         await CapacitorUpdater.set(data)
+       } catch (err) {
+         console.log(err)
+         SplashScreen.hide() // en caso de que el set falle, de lo contrario la nueva app tendrá que ocultarlo
+       }
+     }
+ })
+```
+
+
+
+:::note
+Si esto parece mucho trabajo, considera probar [el trial de Capgo](https://capgo.app/register/). Manejará todo esto por ti.
+:::

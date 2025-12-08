@@ -1,0 +1,35 @@
+---
+title: "CapacitorUpdater.notifyAppReady()呼び出しを正しく配置する"
+locale: ja
+description: 正しい自動アップデートフローを確保するために、アプリでCapacitorUpdater.notifyAppReady()呼び出しを適切に配置する方法。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import ConditionalQuestionnaire from '@/components/ConditionalQuestionnaire.astro'
+
+`CapacitorUpdater.notifyAppReady()`呼び出しの配置は、正しい自動アップデートフローにとって重要です。
+
+
+正しく行われない場合、アプリは最新バージョンにアップデートできません。10秒以内に`notifyAppReady()`を呼び出さない各バージョンは無効とマークされ、以前の有効なバージョンまたはデフォルト（組み込み）バージョンに置き換えられます。
+
+
+このガイドでは、正しい自動アップデートフローを確保するために、アプリで`notifyAppReady()`呼び出しを適切に配置する方法を説明します。
+
+### `notifyAppReady()`呼び出し配置アンケート
+
+<ConditionalQuestionnaire />
+
+
+<div style="margin-top: 3rem;">
+<Aside type="note">
+アンケートにフレームワークが見つからない場合は、[Discord](https://discord.capgo.app)でお気軽にお問い合わせください。
+</Aside>
+</div>

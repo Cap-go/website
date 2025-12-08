@@ -1,0 +1,214 @@
+---
+title: Iniziare
+description: Scopri come installare e configurare il plugin Capacitor Home Indicator per controllare l'indicatore home sui dispositivi iOS.
+locale: it
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configura il plugin**
+
+   **Nascondi l'Indicatore Home:**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Hide the home indicator
+   await HomeIndicator.hide();
+   ```
+
+   **Mostra l'Indicatore Home:**
+   ```typescript
+   // Show the home indicator
+   await HomeIndicator.show();
+
+   // Check visibility status
+   const { hidden } = await HomeIndicator.isHidden();
+   console.log('Is hidden:', hidden);
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Non è richiesta alcuna configurazione aggiuntiva. Il plugin funziona solo su dispositivi iOS con indicatore home (iPhone X e successivi).
+     </TabItem>
+     <TabItem label="Android">
+       Questo plugin non ha effetto sui dispositivi Android poiché non hanno un indicatore home in stile iOS.
+     </TabItem>
+   </Tabs>
+
+4. **Configurazione auto-nascondi**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Configure auto-hide behavior
+   await HomeIndicator.setAutoHidden({
+     autoHidden: true // Enable auto-hide
+   });
+
+   // The home indicator will automatically hide after a few seconds
+   // and reappear when the user touches the screen
+   ```
+
+5. **Utilizzo avanzato**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+   import { App } from '@capacitor/app';
+
+   export class ImmersiveMode {
+     private isImmersive = false;
+
+     async enterImmersiveMode() {
+       this.isImmersive = true;
+
+       // Hide home indicator
+       await HomeIndicator.hide();
+
+       // Enable auto-hide for better UX
+       await HomeIndicator.setAutoHidden({ autoHidden: true });
+
+       // Hide status bar for full immersion
+       // StatusBar.hide(); // If using @capacitor/status-bar
+     }
+
+     async exitImmersiveMode() {
+       this.isImmersive = false;
+
+       // Show home indicator
+       await HomeIndicator.show();
+
+       // Disable auto-hide
+       await HomeIndicator.setAutoHidden({ autoHidden: false });
+
+       // Show status bar
+       // StatusBar.show(); // If using @capacitor/status-bar
+     }
+
+     async toggleImmersiveMode() {
+       const { hidden } = await HomeIndicator.isHidden();
+
+       if (hidden) {
+         await this.exitImmersiveMode();
+       } else {
+         await this.enterImmersiveMode();
+       }
+     }
+
+     setupAppLifecycle() {
+       // Handle app state changes
+       App.addListener('appStateChange', async ({ isActive }) => {
+         if (!isActive && this.isImmersive) {
+           // App went to background, might want to show indicator
+           await HomeIndicator.show();
+         } else if (isActive && this.isImmersive) {
+           // App came to foreground, restore immersive mode
+           await HomeIndicator.hide();
+         }
+       });
+     }
+   }
+   ```
+</Steps>
+
+## Riferimento API
+
+### Metodi
+
+#### `hide()`
+Nascondi l'indicatore home.
+
+**Restituisce:** `Promise<void>`
+
+#### `show()`
+Mostra l'indicatore home.
+
+**Restituisce:** `Promise<void>`
+
+#### `isHidden()`
+Controlla se l'indicatore home è attualmente nascosto.
+
+**Restituisce:** `Promise<{ hidden: boolean }>`
+
+#### `setAutoHidden(options: { autoHidden: boolean })`
+Configura il comportamento auto-nascondi per l'indicatore home.
+
+**Parametri:**
+- `options.autoHidden`: boolean - Abilita o disabilita auto-nascondi
+
+**Restituisce:** `Promise<void>`
+
+### Interfacce
+
+```typescript
+interface AutoHiddenOptions {
+  autoHidden: boolean;
+}
+
+interface HiddenResult {
+  hidden: boolean;
+}
+```
+
+## Note sulla Piattaforma
+
+### iOS
+- Funziona solo su dispositivi con indicatore home (iPhone X e successivi)
+- Richiede iOS 11.0 o successivo
+- Auto-nascondi rende l'indicatore traslucido e lo nasconde dopo inattività
+- L'indicatore riappare quando gli utenti scorrono dal basso
+
+### Android
+- Questo plugin non ha effetto su Android
+- Android utilizza diversi gesti/pulsanti di navigazione
+
+## Casi d'Uso Comuni
+
+1. **Giochi**: Gaming a schermo intero senza distrazioni
+2. **Lettori Video**: Riproduzione video immersiva
+3. **Visualizzatori Foto**: Gallerie fotografiche a schermo intero
+4. **Presentazioni**: Presentazioni senza distrazioni
+5. **App Kiosk**: Applicazioni per display pubblici
+
+## Migliori Pratiche
+
+1. **Controllo Utente**: Fornisci sempre un modo per uscire dalla modalità immersiva
+   ```typescript
+   // Add a gesture or button to toggle immersive mode
+   const toggleButton = document.getElementById('toggle-immersive');
+   toggleButton.addEventListener('click', () => {
+     immersiveMode.toggleImmersiveMode();
+   });
+   ```
+
+2. **Auto-Nascondi per Giochi**: Usa auto-nascondi per una migliore esperienza di gioco
+   ```typescript
+   // For games, auto-hide provides the best balance
+   await HomeIndicator.setAutoHidden({ autoHidden: true });
+   ```
+
+3. **Rispetta i Gesti di Sistema**: Non interferire con la navigazione di sistema
+4. **Salva Stato**: Ricorda la preferenza dell'utente per la modalità immersiva
+
+## Risoluzione Problemi
+
+**L'indicatore home non si nasconde:**
+- Verifica che il dispositivo abbia un indicatore home (iPhone X+)
+- Controlla che la versione iOS sia 11.0 o superiore
+- Assicurati che l'app abbia il focus
+
+**Auto-nascondi non funziona:**
+- Auto-nascondi richiede interazione dell'utente per attivarsi
+- L'indicatore diventa traslucido, non completamente nascosto
+
+**L'indicatore riappare inaspettatamente:**
+- Questo è un comportamento normale di iOS per i gesti di sistema
+- Usa auto-nascondi per un comportamento meno invasivo

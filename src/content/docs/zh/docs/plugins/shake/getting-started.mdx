@@ -1,0 +1,162 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和配置 Capacitor Shake 插件以检测摇动手势并在应用中创建交互式体验。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **配置插件**
+
+   **基本使用示例：**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+
+   // Start listening for shake gestures
+   await Shake.start();
+
+   // Listen for shake events
+   Shake.addListener('shake', () => {
+     console.log('Device was shaken!');
+     // Perform your action here
+   });
+   ```
+
+   **灵敏度配置：**
+   ```typescript
+   // Configure shake sensitivity
+   await Shake.start({
+     threshold: 3.5 // Adjust sensitivity (default: 3.5)
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       iOS 无需额外设置。
+     </TabItem>
+     <TabItem label="Android">
+       Android 无需额外设置。
+     </TabItem>
+   </Tabs>
+
+4. **停止监听摇动**
+   ```typescript
+   // Stop shake detection when not needed
+   await Shake.stop();
+   
+   // Remove specific listener
+   const handle = await Shake.addListener('shake', () => {
+     console.log('Shaken!');
+   });
+   handle.remove();
+   ```
+
+5. **示例实现**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+   import { App } from '@capacitor/app';
+
+   export class ShakeService {
+     private shakeListener: any;
+
+     async initialize() {
+       // Start shake detection
+       await Shake.start({ threshold: 4.0 });
+
+       // Add shake listener
+       this.shakeListener = await Shake.addListener('shake', () => {
+         this.handleShake();
+       });
+
+       // Clean up on app pause
+       App.addListener('pause', () => {
+         Shake.stop();
+       });
+
+       // Resume on app resume
+       App.addListener('resume', () => {
+         Shake.start({ threshold: 4.0 });
+       });
+     }
+
+     private handleShake() {
+       console.log('Shake detected!');
+       // Show debug menu, refresh data, or trigger any action
+     }
+
+     async cleanup() {
+       if (this.shakeListener) {
+         this.shakeListener.remove();
+       }
+       await Shake.stop();
+     }
+   }
+   ```
+</Steps>
+
+## API 参考
+
+### 方法
+
+#### `start(options?: ShakeOptions)`
+开始监听摇动手势。
+
+**参数：**
+- `options`（可选）：配置对象
+  - `threshold`: number - 灵敏度阈值（默认：3.5）
+
+#### `stop()`
+停止监听摇动手势。
+
+#### `addListener('shake', callback: () => void)`
+添加摇动事件监听器。
+
+**返回：** 带有删除监听器句柄的 Promise
+
+### 接口
+
+```typescript
+interface ShakeOptions {
+  threshold?: number; // Shake sensitivity threshold
+}
+```
+
+## 平台说明
+
+### iOS
+- 使用设备的加速度计检测摇动手势
+- 在前台和后台均可工作（如果应用具有后台权限）
+
+### Android
+- 使用 SensorManager 检测摇动事件
+- 不需要特殊权限
+- 应用在前台时工作
+
+## 常见用例
+
+1. **调试菜单**：设备摇动时显示开发者选项
+2. **反馈**：触发反馈表单或错误报告
+3. **刷新**：刷新应用数据或清除缓存
+4. **游戏**：使用摇动作为游戏控制机制
+5. **撤销**：实现摇动撤销功能
+
+## 故障排除
+
+**未检测到摇动：**
+- 确保使用 `Shake.start()` 启动了插件
+- 尝试调整阈值（较低 = 更敏感）
+- 检查监听器是否正确注册
+
+**太敏感/不够敏感：**
+- 在 `start()` 选项中调整 `threshold` 参数
+- 值通常范围从 2.0（非常敏感）到 5.0（较不敏感）

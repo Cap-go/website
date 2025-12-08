@@ -1,0 +1,166 @@
+---
+title: 入门指南
+description: 了解如何安装和使用 File Compressor 插件在 Capacitor 应用中压缩图像。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-file-compressor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 平台支持
+
+| 平台 | 支持的格式 | 注释 |
+|----------|-------------------|-------|
+| iOS | JPEG | 仅支持 JPEG 压缩 |
+| Android | JPEG, WebP | 两种格式都完全支持 |
+| Web | JPEG, WebP | 基于 Canvas API 的压缩 |
+
+注意：在所有平台上，压缩期间会删除 EXIF 元数据。
+
+## 使用
+
+导入插件并压缩图像：
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+
+// Compress an image
+const compressImage = async () => {
+  const result = await FileCompressor.compressImage({
+    source: 'file:///path/to/image.jpg',
+    quality: 0.8,
+    width: 1920,
+    height: 1080
+  });
+
+  console.log('Compressed image path:', result.path);
+  console.log('Original size:', result.originalSize);
+  console.log('Compressed size:', result.size);
+};
+```
+
+## API 参考
+
+### compressImage(options)
+
+使用指定的尺寸和质量设置压缩图像文件。
+
+```typescript
+interface CompressImageOptions {
+  source: string;           // Path to the image file
+  quality?: number;         // 0.0 to 1.0 (default: 0.8)
+  width?: number;           // Target width in pixels
+  height?: number;          // Target height in pixels
+  format?: 'jpeg' | '.webp'; // Output format
+}
+
+interface CompressImageResult {
+  path: string;             // Path to compressed image
+  size: number;             // Compressed file size in bytes
+  originalSize: number;     // Original file size in bytes
+}
+
+const result = await FileCompressor.compressImage(options);
+```
+
+**重要说明：**
+- 在所有平台上，压缩期间会删除 EXIF 元数据
+- 如果只提供一个维度，纵横比会自动保持
+- 在原生平台上，压缩文件会保存到临时目录
+
+### getPluginVersion()
+
+获取原生插件版本。
+
+```typescript
+const { version } = await FileCompressor.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## 完整示例
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+import { Camera } from '@capacitor/camera';
+
+export class ImageCompressionService {
+  async captureAndCompress() {
+    try {
+      // Take a photo
+      const photo = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: false,
+        resultType: 'uri'
+      });
+
+      if (!photo.path) {
+        throw new Error('No image path');
+      }
+
+      // Compress the photo
+      const compressed = await FileCompressor.compressImage({
+        source: photo.path,
+        quality: 0.7,
+        width: 1920,
+        height: 1080,
+        format: 'jpeg'
+      });
+
+      console.log(`Compression ratio: ${
+        ((1 - compressed.size / compressed.originalSize) * 100).toFixed(1)
+      }%`);
+
+      return compressed.path;
+    } catch (error) {
+      console.error('Compression failed:', error);
+      throw error;
+    }
+  }
+
+  async batchCompress(imagePaths: string[]) {
+    const results = [];
+
+    for (const path of imagePaths) {
+      try {
+        const result = await FileCompressor.compressImage({
+          source: path,
+          quality: 0.8,
+          width: 1280
+        });
+        results.push(result);
+      } catch (error) {
+        console.error(`Failed to compress ${path}:`, error);
+      }
+    }
+
+    return results;
+  }
+}
+```
+
+## 最佳实践
+
+1. **质量设置**：从 0.8 质量开始，在文件大小和图像质量之间取得良好平衡
+2. **调整尺寸维度**：仅在需要时指定尺寸 - 纵横比会自动保持
+3. **格式选择**：照片使用 JPEG，更好的压缩使用 WebP（仅限 Android/Web）
+4. **错误处理**：始终将压缩调用包装在 try-catch 块中
+5. **清理**：使用后记得清理临时文件
+
+## 故障排除
+
+### 常见问题
+
+**图像未压缩**：确保源路径有效且可访问
+**内存不足**：减少目标尺寸或一次压缩一张图像
+**格式不支持**：检查上面的平台支持表

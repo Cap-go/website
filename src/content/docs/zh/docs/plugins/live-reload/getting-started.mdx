@@ -1,0 +1,355 @@
+---
+title: 开始使用
+description: 了解如何为 Capacitor 应用设置实时重载，以加快开发速度。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-live-reload" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 设置
+
+配置您的 Vite 开发服务器以使用实时重载。您需要：
+1. 禁用内置的 HMR 客户端
+2. 通过专用的 WebSocket 端点转发重载事件
+
+## 用法
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+// 配置开发服务器
+await LiveReload.configureServer({
+  url: 'http://localhost:5173',
+  websocketPath: '/capgo-livereload',
+  autoReconnect: true,
+  reconnectInterval: 2000
+});
+
+// 连接到开发服务器
+await LiveReload.connect();
+
+// 监听重载事件
+LiveReload.addListener('reloadEvent', (event) => {
+  console.log('Reload event:', event);
+  if (event.type === 'full-reload') {
+    console.log('Full page reload triggered');
+  } else if (event.type === 'file-update') {
+    console.log('File updated:', event.file);
+  }
+});
+
+// 监听连接状态变化
+LiveReload.addListener('statusChange', (status) => {
+  console.log('Connection status:', status.connected);
+  console.log('Server URL:', status.url);
+});
+```
+
+## API 参考
+
+### configureServer(options)
+
+存储远程开发服务器设置以供后续连接使用。
+
+```typescript
+const status = await LiveReload.configureServer({
+  url: 'http://192.168.1.100:5173',
+  websocketPath: '/capgo-livereload',
+  headers: {
+    'Authorization': 'Bearer token'
+  },
+  autoReconnect: true,
+  reconnectInterval: 2000
+});
+```
+
+**参数：**
+- `url` (string)：开发服务器的基础 URL（例如 `http://dev.local:5173`）
+- `websocketPath` (string, 可选)：WebSocket 路径覆盖（默认：`/ws`）
+- `headers` (Record\<string, string\>, 可选)：WebSocket 连接的额外标头
+- `autoReconnect` (boolean, 可选)：断开连接时自动重新连接（默认：`true`）
+- `reconnectInterval` (number, 可选)：重新连接尝试之间的延迟（毫秒）（默认：`2000`）
+
+**返回：** 带有连接信息的 `LiveReloadStatus`
+
+### connect()
+
+如果尚未激活，则建立 WebSocket 连接。
+
+```typescript
+const status = await LiveReload.connect();
+console.log('Connected:', status.connected);
+```
+
+**返回：** 当前连接状态
+
+### disconnect()
+
+关闭当前的 WebSocket 连接并禁用自动重新连接。
+
+```typescript
+await LiveReload.disconnect();
+```
+
+### getStatus()
+
+获取当前连接状态。
+
+```typescript
+const status = await LiveReload.getStatus();
+console.log('Connected:', status.connected);
+console.log('URL:', status.url);
+```
+
+### reload()
+
+手动触发 Capacitor WebView 的完全重载。
+
+```typescript
+await LiveReload.reload();
+```
+
+### reloadFile(options)
+
+重载单个文件/模块（如果不支持则回退到完全重载）。
+
+```typescript
+await LiveReload.reloadFile({
+  path: '/src/components/MyComponent.tsx',
+  hash: 'abc123'
+});
+```
+
+### addListener('reloadEvent', callback)
+
+监听来自服务器的传入重载事件。
+
+```typescript
+const handle = await LiveReload.addListener('reloadEvent', (event) => {
+  switch (event.type) {
+    case 'full-reload':
+      console.log('Full reload requested');
+      break;
+    case 'file-update':
+      console.log('File updated:', event.file?.path);
+      break;
+    case 'error':
+      console.error('Error:', event.message);
+      break;
+  }
+});
+
+// 完成后移除监听器
+await handle.remove();
+```
+
+### addListener('statusChange', callback)
+
+监听套接字状态变化。
+
+```typescript
+await LiveReload.addListener('statusChange', (status) => {
+  console.log(status.connected ? 'Connected' : 'Disconnected');
+});
+```
+
+### removeAllListeners()
+
+移除所有已注册的监听器。
+
+```typescript
+await LiveReload.removeAllListeners();
+```
+
+## 完整示例
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+export class DevServer {
+  private connected = false;
+
+  async initialize() {
+    // 仅在开发环境中启用
+    if (process.env.NODE_ENV !== 'development') {
+      return;
+    }
+
+    try {
+      // 配置服务器
+      await LiveReload.configureServer({
+        url: 'http://192.168.1.100:5173',
+        websocketPath: '/capgo-livereload',
+        autoReconnect: true,
+        reconnectInterval: 3000
+      });
+
+      // 在连接之前设置监听器
+      await LiveReload.addListener('reloadEvent', this.handleReloadEvent.bind(this));
+      await LiveReload.addListener('statusChange', this.handleStatusChange.bind(this));
+
+      // 连接
+      await LiveReload.connect();
+    } catch (error) {
+      console.error('Failed to initialize live reload:', error);
+    }
+  }
+
+  private handleReloadEvent(event: any) {
+    console.log('Reload event received:', event.type);
+
+    switch (event.type) {
+      case 'full-reload':
+        this.performFullReload();
+        break;
+      case 'file-update':
+        this.handleFileUpdate(event.file);
+        break;
+      case 'error':
+        console.error('Server error:', event.message);
+        break;
+      case 'connected':
+        console.log('Server connected');
+        break;
+      case 'disconnected':
+        console.log('Server disconnected');
+        break;
+    }
+  }
+
+  private handleStatusChange(status: any) {
+    this.connected = status.connected;
+    console.log(`Live reload ${status.connected ? 'connected' : 'disconnected'}`);
+  }
+
+  private performFullReload() {
+    console.log('Performing full page reload...');
+    window.location.reload();
+  }
+
+  private handleFileUpdate(file: any) {
+    console.log('File updated:', file?.path);
+    // HMR 在大多数情况下会自动处理这个
+  }
+
+  async disconnect() {
+    await LiveReload.disconnect();
+    await LiveReload.removeAllListeners();
+    this.connected = false;
+  }
+
+  isConnected(): boolean {
+    return this.connected;
+  }
+}
+```
+
+## Vite 配置示例
+
+配置您的 Vite 服务器以使用实时重载插件：
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    host: '0.0.0.0', // 允许来自网络的连接
+    port: 5173,
+    hmr: {
+      // 用于实时重载的自定义 WebSocket 路径
+      path: '/capgo-livereload',
+    }
+  }
+});
+```
+
+## 最佳实践
+
+1. **仅在开发中使用**
+   ```typescript
+   if (import.meta.env.DEV) {
+     await LiveReload.configureServer({
+       url: 'http://localhost:5173',
+       websocketPath: '/capgo-livereload'
+     });
+     await LiveReload.connect();
+   }
+   ```
+
+2. **使用本地 IP 进行移动测试**
+   ```typescript
+   const devServerUrl = process.env.VITE_DEV_SERVER_URL || 'http://192.168.1.100:5173';
+   await LiveReload.configureServer({ url: devServerUrl });
+   ```
+
+3. **优雅地处理连接错误**
+   ```typescript
+   try {
+     await LiveReload.connect();
+   } catch (error) {
+     console.warn('Could not connect to dev server, using production build');
+   }
+   ```
+
+4. **在应用退出时清理**
+   ```typescript
+   window.addEventListener('beforeunload', async () => {
+     await LiveReload.disconnect();
+   });
+   ```
+
+5. **在 UI 中显示连接状态**
+   ```typescript
+   LiveReload.addListener('statusChange', (status) => {
+     // 在开发版本中显示指示器
+     updateDevIndicator(status.connected);
+   });
+   ```
+
+## 平台说明
+
+### iOS
+- 适用于 iOS 11.0+
+- 确保开发服务器可从您设备的网络访问
+- 可能需要配置防火墙以允许连接
+
+### Android
+- 适用于 Android 5.0 (API 21)+
+- 使用 `adb reverse` 进行 localhost 连接：
+  ```bash
+  adb reverse tcp:5173 tcp:5173
+  ```
+
+### Web
+- 完全支持 Web 平台
+- 直接 WebSocket 连接到 Vite 开发服务器
+
+## 故障排除
+
+**连接失败：**
+- 验证开发服务器是否正在运行
+- 检查设备和计算机是否在同一网络上
+- 确保防火墙允许端口上的连接
+- 为移动设备使用 IP 地址而不是 localhost
+
+**重载缓慢：**
+- 检查网络速度
+- 减少重新连接间隔
+- 优化 Vite 构建配置
+
+**WebSocket 错误：**
+- 验证 websocketPath 是否与 Vite 配置匹配
+- 检查端口冲突
+- 如果使用身份验证，请确保标头正确

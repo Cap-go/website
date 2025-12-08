@@ -1,0 +1,279 @@
+---
+title: "@capgo/capacitor-autofill-save-password"
+description: Plugin dukungan autofill kata sandi untuk aplikasi Capacitor dengan manajemen kredensial, penyimpanan aman, dan pengalaman pengguna yang mulus.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Aktifkan autofill kata sandi dan manajemen kredensial dengan integrasi sistem untuk pengalaman autentikasi yang mulus.
+  image:
+    file: ~public/icons/plugins/autofill-save-password.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/autofill-save-password/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-autofill-save-password/
+      icon: external
+      variant: minimal
+locale: id
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Ikhtisar
+
+Plugin Capacitor Autofill Save Password menyediakan fungsi penyimpanan dan autofill kata sandi untuk aplikasi Capacitor. Plugin ini terintegrasi dengan manajemen kredensial tingkat sistem untuk menawarkan pengalaman autentikasi yang mulus dengan penyimpanan dan pengambilan kata sandi yang aman.
+
+<CardGrid stagger>
+  <Card title="Penyimpanan kata sandi" icon="rocket">
+    Simpan kredensial ke keychain sistem dengan aman 🔐
+  </Card>
+  <Card title="Integrasi autofill" icon="setting">
+    Dukungan autofill kata sandi tingkat sistem 🗝️
+  </Card>
+  <Card title="Lintas platform" icon="laptop">
+    Dukungan iOS dengan pengembangan Android sedang berlangsung 📱
+  </Card>
+  <Card title="Asosiasi domain" icon="puzzle">
+    Associated domains untuk autentikasi yang mulus ❤️
+  </Card>
+</CardGrid>
+
+## Instalasi
+
+```bash
+npm install @capgo/capacitor-autofill-save-password
+npx cap sync
+```
+
+## Dukungan Platform
+
+- **iOS**: Dukungan penuh (berfungsi dengan iOS 18.3 dan versi lama)
+- **Android**: Dalam pengembangan
+
+## Konfigurasi iOS
+
+### 1. Pengaturan Associated Domains
+
+Konfigurasi associated domains di akun Apple Developer Anda dan tambahkan ke file `App.entitlements` Anda:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>webcredentials:yourdomain.com</string>
+        <string>webcredentials:www.yourdomain.com</string>
+    </array>
+</dict>
+</plist>
+```
+
+### 2. Konfigurasi Web Credential
+
+Tambahkan file `.well-known/apple-app-site-association` ke situs web Anda:
+
+```json
+{
+  "webcredentials": {
+    "apps": [
+      "TEAMID.com.yourcompany.yourapp"
+    ]
+  }
+}
+```
+
+## Metode API Inti
+
+### Manajemen Kata Sandi
+- `promptDialog(options)` - Simpan kata sandi ke keychain sistem
+- `readPassword()` - Baca kata sandi yang disimpan dari keychain
+
+## Contoh Penggunaan
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+// Save password after successful login
+async function login(username: string, password: string) {
+  try {
+    // Perform your login logic here
+    const loginSuccess = await performLogin(username, password);
+
+    if (loginSuccess) {
+      // Prompt user to save password
+      await SavePassword.promptDialog({
+        username: username,
+        password: password,
+        url: 'https://yourdomain.com' // iOS only
+      });
+
+      console.log('Password saved successfully');
+    }
+  } catch (error) {
+    console.error('Failed to save password:', error);
+  }
+}
+
+// Read saved password for autofill
+async function loadSavedCredentials() {
+  try {
+    const credentials = await SavePassword.readPassword();
+
+    if (credentials.username && credentials.password) {
+      console.log('Found saved credentials');
+      // Pre-fill login form
+      return {
+        username: credentials.username,
+        password: credentials.password
+      };
+    }
+  } catch (error) {
+    console.error('Failed to read saved password:', error);
+  }
+
+  return null;
+}
+```
+
+## Konfigurasi Android (Dalam Pengembangan)
+
+Untuk dukungan Android di masa depan, konfigurasi berikut akan diperlukan:
+
+### 1. Google Services Plugin
+
+Tambahkan ke `android/app/build.gradle`:
+
+```kotlin
+apply plugin: 'com.google.gms.google-services'
+```
+
+### 2. Konfigurasi Domain
+
+Tambahkan ke `android/app/src/main/res/values/strings.xml`:
+
+```xml
+<resources>
+    <string name="asset_statements">
+        [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {
+                "namespace": "web",
+                "site": "https://yourdomain.com"
+            }
+        }]
+    </string>
+</resources>
+```
+
+### 3. Google Services JSON
+
+Tambahkan `google-services.json` ke proyek Android Anda.
+
+## Referensi API
+
+### promptDialog(options)
+
+Menyimpan kredensial pengguna ke keychain sistem.
+
+```typescript
+interface SavePasswordOptions {
+  username: string;
+  password: string;
+  url?: string; // iOS only - associated domain URL
+}
+```
+
+### readPassword()
+
+Mengambil kredensial yang disimpan dari keychain sistem.
+
+```typescript
+interface SavedCredentials {
+  username: string;
+  password: string;
+}
+```
+
+## Integrasi dengan Alur Login
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+class AuthService {
+  async login(username: string, password: string) {
+    try {
+      // Authenticate with your backend
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        // Offer to save credentials
+        await this.offerToSavePassword(username, password);
+        return true;
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+    return false;
+  }
+
+  private async offerToSavePassword(username: string, password: string) {
+    try {
+      await SavePassword.promptDialog({
+        username,
+        password,
+        url: 'https://yourdomain.com'
+      });
+    } catch (error) {
+      // User declined to save or error occurred
+      console.log('Password not saved:', error);
+    }
+  }
+
+  async loadSavedCredentials() {
+    try {
+      return await SavePassword.readPassword();
+    } catch (error) {
+      console.log('No saved credentials found');
+      return null;
+    }
+  }
+}
+```
+
+## Praktik Terbaik
+
+- Hanya minta untuk menyimpan kata sandi setelah autentikasi berhasil
+- Tangani kasus di mana pengguna menolak untuk menyimpan kata sandi dengan baik
+- Implementasikan penanganan error yang tepat untuk kegagalan akses keychain
+- Gunakan associated domains untuk berbagi kredensial web-app yang mulus
+- Uji fungsi autofill di berbagai versi iOS
+
+## Pertimbangan Keamanan
+
+- Kredensial disimpan di keychain sistem dengan flag keamanan yang sesuai
+- Associated domains memastikan kredensial hanya dapat diakses oleh aplikasi yang berwenang
+- Ikuti panduan keamanan platform untuk manajemen kredensial
+- Pertimbangkan untuk menerapkan langkah-langkah keamanan tambahan untuk aplikasi sensitif
+
+## Keterbatasan
+
+- Dukungan Android saat ini sedang dalam pengembangan
+- iOS memerlukan konfigurasi associated domains yang tepat
+- Perilaku autofill dapat bervariasi di berbagai versi iOS
+- Memerlukan persetujuan pengguna untuk menyimpan dan mengakses kredensial
+
+## Dokumentasi
+
+Periksa [dokumentasi lengkap](/docs/plugins/autofill-save-password/getting-started/) untuk panduan implementasi terperinci dan pola integrasi lanjutan.

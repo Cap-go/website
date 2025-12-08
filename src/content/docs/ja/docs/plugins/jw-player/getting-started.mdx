@@ -1,0 +1,345 @@
+---
+title: はじめに
+description: JW Player を Capacitor アプリにインストールして統合し、プロフェッショナルなビデオストリーミング機能を実現する方法を学びます。
+sidebar:
+  order: 2
+locale: ja
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 前提条件
+
+このプラグインを使用するには、JW Player アカウントとライセンスキーが必要です。お持ちでない場合は、[JW Player](https://www.jwplayer.com/) でサインアップしてください。
+
+## プラットフォーム設定
+
+### iOS
+
+JW Player ライセンスキーを `Info.plist` に追加します：
+
+```xml
+<key>JWPlayerLicenseKey</key>
+<string>YOUR_LICENSE_KEY</string>
+```
+
+### Android
+
+JW Player ライセンスキーを `android/app/src/main/res/values/strings.xml` に追加します：
+
+```xml
+<resources>
+    <string name="jw_player_license_key">YOUR_LICENSE_KEY</string>
+</resources>
+```
+
+## 使用例
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// 単一のビデオを再生
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'My Video',
+  description: 'ビデオの説明',
+  poster: 'https://example.com/poster.jpg'
+});
+
+// プレイリストを再生
+await JWPlayer.playPlaylist({
+  playlistUrl: 'https://example.com/playlist.json'
+});
+
+// プレーヤーイベントをリッスン
+JWPlayer.addListener('playerReady', () => {
+  console.log('プレーヤーの準備ができました');
+});
+
+JWPlayer.addListener('play', (data) => {
+  console.log('ビデオの再生が開始されました');
+});
+
+JWPlayer.addListener('pause', (data) => {
+  console.log('ビデオが一時停止されました');
+});
+
+JWPlayer.addListener('complete', (data) => {
+  console.log('ビデオの再生が完了しました');
+});
+
+JWPlayer.addListener('error', (error) => {
+  console.error('プレーヤーエラー:', error);
+});
+```
+
+## API リファレンス
+
+### playVideo(options)
+
+```typescript
+playVideo(options: VideoOptions) => Promise<void>
+```
+
+単一のビデオをフルスクリーンモードで再生します。
+
+| パラメータ         | 型                    |
+| ------------- | ----------------------- |
+| **`options`** | `VideoOptions` |
+
+### playPlaylist(options)
+
+```typescript
+playPlaylist(options: PlaylistOptions) => Promise<void>
+```
+
+プレイリストをフルスクリーンモードで再生します。
+
+| パラメータ         | 型                        |
+| ------------- | --------------------------- |
+| **`options`** | `PlaylistOptions` |
+
+### pause()
+
+```typescript
+pause() => Promise<void>
+```
+
+現在のビデオを一時停止します。
+
+### play()
+
+```typescript
+play() => Promise<void>
+```
+
+ビデオの再生を再開します。
+
+### seek(options)
+
+```typescript
+seek(options: { position: number }) => Promise<void>
+```
+
+ビデオの特定の位置にシークします。
+
+| パラメータ         | 型                         |
+| ------------- | ---------------------------- |
+| **`options`** | `{ position: number }` |
+
+### setPlaybackSpeed(options)
+
+```typescript
+setPlaybackSpeed(options: { speed: number }) => Promise<void>
+```
+
+再生速度を設定します。
+
+| パラメータ         | 型                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ speed: number }` |
+
+### setVolume(options)
+
+```typescript
+setVolume(options: { volume: number }) => Promise<void>
+```
+
+オーディオボリュームを設定します（0.0 から 1.0）。
+
+| パラメータ         | 型                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ volume: number }` |
+
+### selectAudioTrack(options)
+
+```typescript
+selectAudioTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+インデックスでオーディオトラックを選択します。
+
+| パラメータ         | 型                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### selectCaptionTrack(options)
+
+```typescript
+selectCaptionTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+インデックスでキャプション/字幕トラックを選択します。
+
+| パラメータ         | 型                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+再生を停止してプレーヤーを閉じます。
+
+## インターフェース
+
+### VideoOptions
+
+| プロパティ              | 型               | 説明                             |
+| ----------------- | ------------------ | --------------------------------------- |
+| **`mediaUrl`**    | `string` | ビデオファイルの URL                   |
+| **`title`**       | `string` | ビデオタイトル（オプション）                  |
+| **`description`** | `string` | ビデオの説明（オプション）            |
+| **`poster`**      | `string` | ポスター/サムネイルの URL（オプション）  |
+| **`autoStart`**   | `boolean` | 自動再生を開始（オプション、デフォルト: true） |
+
+### PlaylistOptions
+
+| プロパティ              | 型               | 説明                 |
+| ----------------- | ------------------ | --------------------------- |
+| **`playlistUrl`** | `string` | JW プレイリスト JSON の URL |
+| **`autoStart`**   | `boolean` | 自動再生を開始（オプション） |
+
+## イベントリスナー
+
+### 利用可能なイベント
+
+- `playerReady` - プレーヤーが初期化され準備完了
+- `play` - ビデオ再生が開始されました
+- `pause` - ビデオ再生が一時停止されました
+- `complete` - ビデオ再生が完了しました
+- `error` - プレーヤーでエラーが発生しました
+- `seek` - ユーザーが異なる位置にシークしました
+- `time` - 再生時間が更新されました
+- `bufferChange` - バッファ状態が変更されました
+
+### イベントの例
+
+```typescript
+// 時間更新をリッスン
+JWPlayer.addListener('time', (data) => {
+  console.log('現在時刻:', data.position);
+  console.log('長さ:', data.duration);
+});
+
+// バッファ変更をリッスン
+JWPlayer.addListener('bufferChange', (data) => {
+  console.log('バッファリング中:', data.buffering);
+});
+
+// 完了したらリスナーを削除
+const listener = await JWPlayer.addListener('play', (data) => {
+  console.log('再生中');
+});
+
+// 後で...
+listener.remove();
+```
+
+## 高度な使用方法
+
+### キャプション付きで再生
+
+```typescript
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: '字幕付きビデオ',
+  poster: 'https://example.com/poster.jpg',
+  tracks: [
+    {
+      file: 'https://example.com/captions-en.vtt',
+      label: 'English',
+      kind: 'captions'
+    },
+    {
+      file: 'https://example.com/captions-es.vtt',
+      label: 'Spanish',
+      kind: 'captions'
+    }
+  ]
+});
+```
+
+### カスタム再生コントロール
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// 再生を開始
+await JWPlayer.play();
+
+// 10 秒後に一時停止
+setTimeout(() => {
+  JWPlayer.pause();
+}, 10000);
+
+// 30 秒にシーク
+await JWPlayer.seek({ position: 30 });
+
+// 再生速度を 1.5 倍に設定
+await JWPlayer.setPlaybackSpeed({ speed: 1.5 });
+
+// ボリュームを 50% に設定
+await JWPlayer.setVolume({ volume: 0.5 });
+```
+
+## ベストプラクティス
+
+- より良いユーザーエクスペリエンスのために常にポスター画像を提供
+- 適切なエラーメッセージでプレーヤーエラーを適切に処理
+- コンポーネントがアンマウントされるときにイベントリスナーをクリーンアップ
+- iOS と Android の両方のデバイスでビデオ再生をテスト
+- 適切なビデオフォーマットを使用（MP4 を推奨）
+- ビデオが初期化される間のローディング状態を実装
+- ストリーミング時にネットワーク状況を考慮
+
+## トラブルシューティング
+
+### ビデオが再生されない
+
+- JW Player ライセンスキーが正しいことを確認
+- ビデオ URL がアクセス可能で有効であることを確認
+- カスタムサーバーを使用する場合は適切な CORS ヘッダーを確保
+- 異なるビデオフォーマットでテスト
+
+### フルスクリーンの問題
+
+- プラグインは常にフルスクリーンモードで再生します
+- アプリでフルスクリーンの適切な権限を確保
+
+### パフォーマンス
+
+- ターゲットデバイスに適切なビデオ品質を使用
+- より良いパフォーマンスのためにアダプティブストリーミングを検討
+- 適切なバッファリングインジケーターを実装

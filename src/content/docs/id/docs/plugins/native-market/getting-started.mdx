@@ -1,0 +1,105 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Native Market untuk mengarahkan pengguna ke Google Play Store atau Apple App Store dari aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek asli**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+Impor plugin dan gunakan metodenya untuk mengarahkan pengguna ke toko aplikasi:
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+// Buka daftar toko aplikasi
+const openAppStore = async () => {
+  await NativeMarket.openStoreListing({
+    appId: 'com.example.app' // Bundle ID aplikasi Anda
+  });
+};
+
+// Minta ulasan aplikasi
+const requestReview = async () => {
+  await NativeMarket.requestReview();
+};
+
+// Buka pencarian toko aplikasi
+const searchInStore = async () => {
+  await NativeMarket.search({
+    terms: 'fitness app' // Kata kunci pencarian
+  });
+};
+```
+
+## Referensi API
+
+### openStoreListing(options)
+
+Membuka daftar toko aplikasi untuk aplikasi yang ditentukan.
+
+```typescript
+interface OpenStoreListingOptions {
+  appId: string; // Bundle ID di iOS, Nama paket di Android
+}
+```
+
+### requestReview()
+
+Meminta ulasan dalam aplikasi dari pengguna. Di iOS 10.3+, ini menampilkan dialog penilaian tanpa meninggalkan aplikasi.
+
+### search(options)
+
+Membuka toko aplikasi dengan hasil pencarian.
+
+```typescript
+interface SearchOptions {
+  terms: string; // Kata kunci pencarian yang digunakan
+}
+```
+
+## Catatan Platform
+
+### iOS
+- Menggunakan `SKStoreReviewController` untuk ulasan dalam aplikasi di iOS 10.3+
+- Kembali ke pembukaan App Store untuk versi yang lebih lama
+
+### Android
+- Membuka Google Play Store
+- Menggunakan API ulasan dalam aplikasi saat tersedia
+
+## Contoh
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+import { Capacitor } from '@capacitor/core';
+
+export class AppService {
+  async rateApp() {
+    try {
+      // Coba ulasan dalam aplikasi terlebih dahulu
+      await NativeMarket.requestReview();
+    } catch (error) {
+      // Kembali ke pembukaan daftar toko
+      const platform = Capacitor.getPlatform();
+      const appId = platform === 'ios'
+        ? 'id123456789' // ID aplikasi iOS Anda
+        : 'com.example.app'; // Nama paket Android Anda
+
+      await NativeMarket.openStoreListing({ appId });
+    }
+  }
+}

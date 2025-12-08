@@ -1,0 +1,35 @@
+---
+title: Erste Schritte
+locale: de
+description: Entdecken Sie, wie Sie das Capacitor Social Login Plugin installieren und konfigurieren, um die Authentifizierung Ihrer App mit nahtloser Integration für Google, Apple und Facebook Logins zu verbessern.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+import MicroCard from '@/components/MicroCard.astro'
+
+<Steps>
+1. **Installieren Sie das Paket**
+   <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurieren Sie das Plugin**
+   <div class="flex flex-nowrap gap-4 h-full">
+      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important;">
+         <MicroCard href="/docs/plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
+            Konfigurieren Sie Google Sign-In für Ihre App
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/facebook/" title="Facebook" icon="facebook">
+            Richten Sie die Facebook Login Integration ein
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/apple/general/" title="Apple" icon="apple">
+            Aktivieren Sie Sign in with Apple
+         </MicroCard>
+      </div>
+   </div>
+</Steps>

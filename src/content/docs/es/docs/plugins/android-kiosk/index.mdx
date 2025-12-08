@@ -1,0 +1,51 @@
+---
+title: "@capgo/capacitor-android-kiosk"
+description: Plugin de modo quiosco de Android para Capacitor - Bloquea el dispositivo en modo quiosco con funcionalidad de lanzador
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+locale: es
+hero:
+  tagline: Bloquea tu dispositivo Android en modo quiosco con control total sobre los botones físicos y funcionalidad de lanzador para tus aplicaciones Capacitor.
+  image:
+    file: ~public/icons/plugins/android-kiosk.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/android-kiosk/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-kiosk/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Modo quiosco" icon="rocket">
+    Oculta la interfaz de usuario del sistema y entra en modo de pantalla completa inmersivo
+  </Card>
+  <Card title="Integración de lanzador" icon="setting">
+    Establece tu aplicación como el lanzador/aplicación de inicio del dispositivo
+  </Card>
+  <Card title="Control de teclas físicas" icon="warning">
+    Bloquea o permite botones físicos específicos (retroceso, inicio, recientes, volumen, encendido)
+  </Card>
+  <Card title="Detección de estado" icon="approve-check">
+    Verifica si el modo quiosco está activo o si la aplicación está configurada como lanzador
+  </Card>
+  <Card title="Android 6.0+" icon="star">
+    Compatible con Android API 23 hasta Android 15 (API 35)
+  </Card>
+  <Card title="Documentación completa" icon="open-book">
+    Consulta la [Documentación](/docs/plugins/android-kiosk/getting-started/) para integrar el modo quiosco en minutos.
+  </Card>
+</CardGrid>
+
+## Soporte de plataforma
+
+Este plugin es **solo para Android**. Para la funcionalidad de modo quiosco en iOS, por favor usa la función integrada del dispositivo [Acceso Guiado](https://support.apple.com/en-us/HT202612).

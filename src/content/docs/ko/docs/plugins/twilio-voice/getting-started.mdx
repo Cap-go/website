@@ -1,0 +1,568 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor 앱에 VoIP 통화를 위한 Twilio Voice를 설치하고 통합하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-twilio-voice
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 사전 요구 사항
+
+인증을 위한 Twilio 계정과 액세스 토큰이 필요합니다. 계정이 없다면 [Twilio](https://www.twilio.com/)에서 가입하세요.
+
+## 플랫폼 구성
+
+### iOS
+
+`Info.plist`에 필요한 권한을 추가하세요:
+
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs microphone access for voice calls</string>
+```
+
+PushKit을 사용한 수신 통화의 경우:
+
+1. Xcode 기능에서 Push Notifications를 활성화하세요
+2. VoIP 백그라운드 모드를 추가하세요
+3. Twilio 콘솔에서 VoIP 인증서를 구성하세요
+
+### Android
+
+`AndroidManifest.xml`에 필요한 권한을 추가하세요:
+
+```xml
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+<uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+```
+
+푸시 알림을 위한 Firebase 구성:
+
+1. Android 프로젝트에 `google-services.json`을 추가하세요
+2. Twilio 콘솔에서 FCM을 구성하세요
+
+## 사용 예제
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+// Twilio로 인증
+await TwilioVoice.login({
+  accessToken: 'your-twilio-access-token'
+});
+
+// 전화 걸기
+await TwilioVoice.makeCall({
+  to: '+1234567890'
+});
+
+// 통화 이벤트 리스닝
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Call connected:', data.callSid);
+});
+
+TwilioVoice.addListener('callDisconnected', (data) => {
+  console.log('Call disconnected:', data.callSid);
+});
+
+TwilioVoice.addListener('incomingCall', (data) => {
+  console.log('Incoming call from:', data.from);
+
+  // 통화 수락
+  TwilioVoice.acceptCall({ callSid: data.callSid });
+
+  // 또는 거부
+  // TwilioVoice.rejectCall({ callSid: data.callSid });
+});
+
+// 음소거/음소거 해제
+await TwilioVoice.muteCall({
+  muted: true,
+  callSid: 'current-call-sid'
+});
+
+// 스피커 전환
+await TwilioVoice.setSpeaker({
+  enabled: true
+});
+
+// 통화 종료
+await TwilioVoice.endCall({
+  callSid: 'current-call-sid'
+});
+
+// 로그아웃
+await TwilioVoice.logout();
+```
+
+## API 참조
+
+### login(options)
+
+```typescript
+login(options: { accessToken: string }) => Promise<void>
+```
+
+액세스 토큰을 사용하여 Twilio로 인증합니다.
+
+| 매개변수 | 타입 |
+| ------------- | --------------------------------- |
+| **`options`** | `{ accessToken: string }` |
+
+### logout()
+
+```typescript
+logout() => Promise<void>
+```
+
+사용자 세션을 종료하고 통화 상태를 지웁니다.
+
+### isLoggedIn()
+
+```typescript
+isLoggedIn() => Promise<{ loggedIn: boolean }>
+```
+
+현재 인증 상태를 확인합니다.
+
+**반환값:** `Promise<{ loggedIn: boolean }>`
+
+### makeCall(options)
+
+```typescript
+makeCall(options: { to: string; params?: Record<string, string> }) => Promise<{ callSid: string }>
+```
+
+지정된 번호로 발신 통화를 시작합니다.
+
+| 매개변수 | 타입 |
+| ------------- | ------------------------------------------------------- |
+| **`options`** | `{ to: string; params?: Record<string, string> }` |
+
+**반환값:** `Promise<{ callSid: string }>`
+
+### acceptCall(options)
+
+```typescript
+acceptCall(options: { callSid: string }) => Promise<void>
+```
+
+수신 통화를 수락합니다.
+
+| 매개변수 | 타입 |
+| ------------- | -------------------------- |
+| **`options`** | `{ callSid: string }` |
+
+### rejectCall(options)
+
+```typescript
+rejectCall(options: { callSid: string }) => Promise<void>
+```
+
+수신 통화를 거부합니다.
+
+| 매개변수 | 타입 |
+| ------------- | -------------------------- |
+| **`options`** | `{ callSid: string }` |
+
+### endCall(options?)
+
+```typescript
+endCall(options?: { callSid?: string }) => Promise<void>
+```
+
+활성 통화를 종료합니다.
+
+| 매개변수 | 타입 |
+| ------------- | ---------------------------- |
+| **`options`** | `{ callSid?: string }` (선택 사항) |
+
+### muteCall(options)
+
+```typescript
+muteCall(options: { muted: boolean; callSid?: string }) => Promise<void>
+```
+
+통화 오디오를 음소거하거나 음소거 해제합니다.
+
+| 매개변수 | 타입 |
+| ------------- | ----------------------------------------------- |
+| **`options`** | `{ muted: boolean; callSid?: string }` |
+
+### setSpeaker(options)
+
+```typescript
+setSpeaker(options: { enabled: boolean }) => Promise<void>
+```
+
+스피커 출력을 전환합니다.
+
+| 매개변수 | 타입 |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### sendDigits(options)
+
+```typescript
+sendDigits(options: { digits: string; callSid?: string }) => Promise<void>
+```
+
+통화 중 DTMF 톤을 전송합니다.
+
+| 매개변수 | 타입 |
+| ------------- | --------------------------------------------- |
+| **`options`** | `{ digits: string; callSid?: string }` |
+
+## 이벤트 리스너
+
+### 사용 가능한 이벤트
+
+- `registered` - Twilio에 성공적으로 등록됨
+- `unregistered` - Twilio에서 등록 해제됨
+- `registrationFailed` - 등록 실패
+- `incomingCall` - 수신 통화 받음
+- `callConnected` - 통화가 성공적으로 연결됨
+- `callDisconnected` - 통화 연결 해제됨
+- `callRinging` - 발신 통화가 울리고 있음
+- `callReconnecting` - 통화 재연결 중
+- `callReconnected` - 중단 후 통화 재연결됨
+- `qualityWarning` - 통화 품질 경고
+- `error` - 오류 발생
+
+### 이벤트 예제
+
+```typescript
+// 수신 통화 처리
+TwilioVoice.addListener('incomingCall', (data) => {
+  console.log('Incoming call from:', data.from);
+  console.log('Call SID:', data.callSid);
+
+  // 수신 통화 UI 표시
+  showIncomingCallScreen({
+    from: data.from,
+    callSid: data.callSid
+  });
+});
+
+// 통화 상태 변경 처리
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Call connected:', data.callSid);
+  startCallTimer();
+});
+
+TwilioVoice.addListener('callDisconnected', (data) => {
+  console.log('Call ended:', data.callSid);
+  stopCallTimer();
+  hideCallScreen();
+});
+
+// 품질 경고 처리
+TwilioVoice.addListener('qualityWarning', (data) => {
+  console.warn('Call quality warning:', data.warning);
+  showQualityWarning(data.warning);
+});
+
+// 오류 처리
+TwilioVoice.addListener('error', (error) => {
+  console.error('Twilio error:', error.message);
+  handleError(error);
+});
+
+// 완료 시 리스너 제거
+const listener = await TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Connected');
+});
+
+// 나중에...
+listener.remove();
+```
+
+## 완전한 예제
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+class VoiceCallService {
+  private currentCallSid: string | null = null;
+  private isMuted = false;
+  private isSpeakerOn = false;
+
+  async initialize(accessToken: string) {
+    try {
+      // Twilio에 로그인
+      await TwilioVoice.login({ accessToken });
+
+      // 로그인 상태 확인
+      const { loggedIn } = await TwilioVoice.isLoggedIn();
+      console.log('Login status:', loggedIn);
+
+      // 이벤트 리스너 설정
+      this.setupEventListeners();
+
+    } catch (error) {
+      console.error('Failed to initialize:', error);
+    }
+  }
+
+  setupEventListeners() {
+    // 등록 이벤트
+    TwilioVoice.addListener('registered', () => {
+      console.log('Successfully registered with Twilio');
+    });
+
+    TwilioVoice.addListener('registrationFailed', (error) => {
+      console.error('Registration failed:', error);
+    });
+
+    // 수신 통화
+    TwilioVoice.addListener('incomingCall', async (data) => {
+      console.log('Incoming call from:', data.from);
+
+      const accepted = await this.showIncomingCallDialog(data.from);
+
+      if (accepted) {
+        await TwilioVoice.acceptCall({ callSid: data.callSid });
+        this.currentCallSid = data.callSid;
+      } else {
+        await TwilioVoice.rejectCall({ callSid: data.callSid });
+      }
+    });
+
+    // 통화 이벤트
+    TwilioVoice.addListener('callConnected', (data) => {
+      console.log('Call connected');
+      this.currentCallSid = data.callSid;
+      this.showCallScreen();
+    });
+
+    TwilioVoice.addListener('callDisconnected', () => {
+      console.log('Call disconnected');
+      this.currentCallSid = null;
+      this.hideCallScreen();
+    });
+
+    TwilioVoice.addListener('callRinging', () => {
+      console.log('Call ringing...');
+    });
+
+    // 품질 경고
+    TwilioVoice.addListener('qualityWarning', (data) => {
+      console.warn('Call quality warning:', data.warning);
+      this.showQualityIndicator(data.warning);
+    });
+  }
+
+  async makeCall(phoneNumber: string) {
+    try {
+      const result = await TwilioVoice.makeCall({
+        to: phoneNumber,
+        params: {
+          // 선택적 사용자 정의 매개변수
+          customerId: 'customer-123'
+        }
+      });
+
+      this.currentCallSid = result.callSid;
+      console.log('Call initiated:', result.callSid);
+    } catch (error) {
+      console.error('Failed to make call:', error);
+    }
+  }
+
+  async endCall() {
+    if (this.currentCallSid) {
+      await TwilioVoice.endCall({ callSid: this.currentCallSid });
+      this.currentCallSid = null;
+    }
+  }
+
+  async toggleMute() {
+    this.isMuted = !this.isMuted;
+    await TwilioVoice.muteCall({
+      muted: this.isMuted,
+      callSid: this.currentCallSid || undefined
+    });
+  }
+
+  async toggleSpeaker() {
+    this.isSpeakerOn = !this.isSpeakerOn;
+    await TwilioVoice.setSpeaker({ enabled: this.isSpeakerOn });
+  }
+
+  async sendDTMF(digits: string) {
+    if (this.currentCallSid) {
+      await TwilioVoice.sendDigits({
+        digits,
+        callSid: this.currentCallSid
+      });
+    }
+  }
+
+  async logout() {
+    await TwilioVoice.logout();
+  }
+
+  private async showIncomingCallDialog(from: string): Promise<boolean> {
+    // 네이티브 대화 상자 또는 사용자 정의 UI 표시
+    return confirm(`Incoming call from ${from}`);
+  }
+
+  private showCallScreen() {
+    // 통화 UI 표시
+    console.log('Showing call screen');
+  }
+
+  private hideCallScreen() {
+    // 통화 UI 숨기기
+    console.log('Hiding call screen');
+  }
+
+  private showQualityIndicator(warning: string) {
+    // 품질 경고 표시
+    console.log('Quality warning:', warning);
+  }
+}
+
+// 사용법
+const voiceService = new VoiceCallService();
+
+// 백엔드에서 액세스 토큰으로 초기화
+const token = await fetchTwilioToken();
+await voiceService.initialize(token);
+
+// 전화 걸기
+await voiceService.makeCall('+1234567890');
+
+// 통화 제어
+await voiceService.toggleMute();
+await voiceService.toggleSpeaker();
+await voiceService.sendDTMF('1');
+
+// 통화 종료
+await voiceService.endCall();
+
+// 로그아웃
+await voiceService.logout();
+```
+
+## 모범 사례
+
+- 백엔드 서버에서 액세스 토큰을 가져오고, 앱에 내장하지 마세요
+- 장기 실행 세션을 위한 토큰 새로 고침 로직 구현
+- 재연결 로직으로 네트워크 중단 처리
+- 통화 상태에 대한 시각적 피드백 제공
+- 푸시 알림으로 실제 기기에서 테스트
+- 적절한 오류 처리 구현
+- 컴포넌트 언마운트 시 리스너 정리
+- 통화하기 전에 마이크 권한 요청
+
+## 보안 고려 사항
+
+- 앱에 Twilio 자격 증명을 저장하지 마세요
+- 백엔드에서 액세스 토큰 생성
+- 토큰 만료 및 새로 고침 구현
+- 모든 토큰 요청에 HTTPS 사용
+- 서버 측에서 수신 통화 유효성 검사
+
+## 문제 해결
+
+### 통화가 연결되지 않음
+
+- 액세스 토큰이 유효하고 만료되지 않았는지 확인
+- 네트워크 연결 확인
+- 마이크 권한이 부여되었는지 확인
+- Twilio 계정이 올바르게 구성되었는지 확인
+
+### 푸시 알림이 작동하지 않음
+
+- Twilio에서 PushKit/FCM 인증서가 구성되었는지 확인
+- 기기가 푸시 알림에 등록되었는지 확인
+- 프로덕션 인증서로 테스트
+
+### 오디오 문제
+
+- 마이크 권한 확인
+- 스피커/블루투스 설정 확인
+- 실제 기기에서 오디오 라우팅 테스트
+
+## 발신자 이름 표시 (CapacitorTwilioCallerName)
+
+기본적으로 수신 통화는 발신자의 전화번호 또는 클라이언트 ID를 표시합니다. TwiML 백엔드에서 `CapacitorTwilioCallerName` 매개변수를 전달하여 대신 친근한 이름을 표시하도록 사용자 정의할 수 있습니다.
+
+### 백엔드 설정
+
+`<Client>` 다이얼을 위한 TwiML 응답을 생성할 때 `CapacitorTwilioCallerName` 매개변수를 추가하세요:
+
+```java
+// Java 예제
+Parameter callerNameParam = new Parameter.Builder()
+    .name("CapacitorTwilioCallerName")
+    .value("John Doe")
+    .build();
+
+Client client = new Client.Builder(identity)
+    .parameter(callerNameParam)
+    .build();
+
+Dial dial = new Dial.Builder()
+    .client(client)
+    .build();
+```
+
+```javascript
+// Node.js 예제
+const VoiceResponse = require('twilio').twiml.VoiceResponse;
+
+const response = new VoiceResponse();
+const dial = response.dial();
+dial.client({
+  name: 'CapacitorTwilioCallerName',
+  value: 'John Doe'
+}, identity);
+```
+
+### 작동 방식
+
+1. 백엔드가 수신 통화를 받으면 통화를 라우팅하기 위한 TwiML을 생성합니다
+2. 발신자의 표시 이름과 함께 `CapacitorTwilioCallerName` 매개변수를 포함합니다
+3. 플러그인은 자동으로 이 매개변수를 추출하여 다음에 사용합니다:
+   - iOS CallKit 수신 통화 화면
+   - Android 수신 통화 알림
+   - `incomingCall` 이벤트의 `from` 필드
+   - 통화 상태의 `pendingInvites` 배열
+
+`CapacitorTwilioCallerName`이 제공되지 않으면 플러그인은 발신자의 전화번호 또는 클라이언트 ID로 대체합니다.

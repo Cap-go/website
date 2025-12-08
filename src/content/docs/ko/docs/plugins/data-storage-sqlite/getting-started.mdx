@@ -1,0 +1,395 @@
+---
+title: 시작하기
+locale: ko
+description: 선택적 암호화와 함께 빠른 키-값 저장소를 위한 Capacitor Data Storage SQLite 플러그인을 설치하고 구성하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-data-storage-sqlite" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **플러그인 구성**
+
+   **기본 저장소 예제:**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   // 저장소 데이터베이스 열기
+   await CapacitorDataStorageSqlite.openStore({
+     database: 'myapp_storage'
+   });
+
+   // 데이터 저장
+   await CapacitorDataStorageSqlite.set({
+     key: 'user_preferences',
+     value: JSON.stringify({ theme: 'dark' })
+   });
+   ```
+
+   **암호화된 저장소 예제:**
+   ```typescript
+   // 암호화된 저장소 열기
+   await CapacitorDataStorageSqlite.openStore({
+     database: 'secure_storage',
+     encrypted: true,
+     mode: 'encryption'
+   });
+
+   // 민감한 데이터 저장
+   await CapacitorDataStorageSqlite.set({
+     key: 'api_token',
+     value: 'secret_token_value'
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       iOS에는 추가 설정이 필요하지 않습니다.
+     </TabItem>
+     <TabItem label="Android">
+       Android에는 추가 설정이 필요하지 않습니다.
+     </TabItem>
+   </Tabs>
+
+4. **기본 작업**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   // 값 설정
+   await CapacitorDataStorageSqlite.set({
+     key: 'username',
+     value: 'john_doe'
+   });
+
+   // 값 가져오기
+   const { value } = await CapacitorDataStorageSqlite.get({
+     key: 'username'
+   });
+   console.log('사용자 이름:', value); // "john_doe"
+
+   // 값 제거
+   await CapacitorDataStorageSqlite.remove({
+     key: 'username'
+   });
+
+   // 모든 데이터 지우기
+   await CapacitorDataStorageSqlite.clear();
+
+   // 키 존재 확인
+   const { result } = await CapacitorDataStorageSqlite.iskey({
+     key: 'username'
+   });
+   console.log('키 존재:', result); // true 또는 false
+
+   // 모든 키 가져오기
+   const { keys } = await CapacitorDataStorageSqlite.keys();
+   console.log('모든 키:', keys);
+
+   // 모든 값 가져오기
+   const { values } = await CapacitorDataStorageSqlite.values();
+   console.log('모든 값:', values);
+   ```
+
+5. **고급 사용법**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   export class StorageService {
+     private dbName = 'app_storage';
+     private isEncrypted = false;
+
+     async initialize(encrypted = false) {
+       this.isEncrypted = encrypted;
+
+       // 옵션과 함께 저장소 열기
+       await CapacitorDataStorageSqlite.openStore({
+         database: this.dbName,
+         encrypted: encrypted,
+         mode: encrypted ? 'encryption' : 'no-encryption',
+         version: 1
+       });
+     }
+
+     // 제네릭 저장소 메서드
+     async setObject<T>(key: string, data: T): Promise<void> {
+       const value = JSON.stringify(data);
+       await CapacitorDataStorageSqlite.set({ key, value });
+     }
+
+     async getObject<T>(key: string): Promise<T | null> {
+       try {
+         const { value } = await CapacitorDataStorageSqlite.get({ key });
+         return value ? JSON.parse(value) : null;
+       } catch (error) {
+         console.error('객체 가져오기 오류:', error);
+         return null;
+       }
+     }
+
+     // 일괄 작업
+     async setMultiple(items: Record<string, any>): Promise<void> {
+       for (const [key, value] of Object.entries(items)) {
+         await CapacitorDataStorageSqlite.set({
+           key,
+           value: typeof value === 'string' ? value : JSON.stringify(value)
+         });
+       }
+     }
+
+     async getMultiple(keys: string[]): Promise<Record<string, any>> {
+       const results: Record<string, any> = {};
+
+       for (const key of keys) {
+         try {
+           const { value } = await CapacitorDataStorageSqlite.get({ key });
+           results[key] = value;
+         } catch (error) {
+           results[key] = null;
+         }
+       }
+
+       return results;
+     }
+
+     // 테이블 관리
+     async getTables(): Promise<string[]> {
+       const { tables } = await CapacitorDataStorageSqlite.tables();
+       return tables;
+     }
+
+     async deleteTable(table: string): Promise<void> {
+       await CapacitorDataStorageSqlite.deleteTable({ table });
+     }
+
+     // Import/Export 기능
+     async exportToJson(): Promise<any[]> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       const { values } = await CapacitorDataStorageSqlite.values();
+
+       return keys.map((key, index) => ({
+         key,
+         value: values[index]
+       }));
+     }
+
+     async importFromJson(data: Array<{ key: string; value: string }>): Promise<void> {
+       // 기존 데이터 지우기
+       await CapacitorDataStorageSqlite.clear();
+
+       // 새 데이터 가져오기
+       for (const item of data) {
+         await CapacitorDataStorageSqlite.set({
+           key: item.key,
+           value: item.value
+         });
+       }
+     }
+
+     // 필터링 및 검색
+     async keysStartingWith(prefix: string): Promise<string[]> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       return keys.filter(key => key.startsWith(prefix));
+     }
+
+     async filterByPrefix(prefix: string): Promise<Array<{ key: string; value: string }>> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       const { values } = await CapacitorDataStorageSqlite.values();
+
+       const filtered: Array<{ key: string; value: string }> = [];
+
+       keys.forEach((key, index) => {
+         if (key.startsWith(prefix)) {
+           filtered.push({ key, value: values[index] });
+         }
+       });
+
+       return filtered;
+     }
+
+     // 작업 완료 시 데이터베이스 닫기
+     async close(): Promise<void> {
+       await CapacitorDataStorageSqlite.closeStore({
+         database: this.dbName
+       });
+     }
+   }
+
+   // 사용 예제
+   const storage = new StorageService();
+   await storage.initialize(true); // 암호화 사용
+
+   // 사용자 데이터 저장
+   await storage.setObject('user_profile', {
+     id: 123,
+     name: 'John Doe',
+     email: 'john@example.com'
+   });
+
+   // 사용자 데이터 검색
+   const profile = await storage.getObject<any>('user_profile');
+   console.log('사용자 프로필:', profile);
+   ```
+</Steps>
+
+## API Reference
+
+### 메서드
+
+#### `openStore(options: OpenStoreOptions)`
+저장소 데이터베이스를 엽니다.
+
+**매개변수:**
+- `options.database`: string - 데이터베이스 이름
+- `options.encrypted`: boolean - 암호화 활성화
+- `options.mode`: string - 'encryption' 또는 'no-encryption'
+- `options.version`: number - 데이터베이스 버전
+
+#### `closeStore(options: CloseStoreOptions)`
+저장소 데이터베이스를 닫습니다.
+
+#### `set(options: SetOptions)`
+키-값 쌍을 저장합니다.
+
+**매개변수:**
+- `options.key`: string - 저장소 키
+- `options.value`: string - 저장할 값
+
+#### `get(options: GetOptions)`
+키로 값을 검색합니다.
+
+**반환값:** `Promise<{ value: string }>`
+
+#### `remove(options: RemoveOptions)`
+키-값 쌍을 제거합니다.
+
+#### `clear()`
+저장소에서 모든 데이터를 지웁니다.
+
+#### `iskey(options: IskeyOptions)`
+키가 존재하는지 확인합니다.
+
+**반환값:** `Promise<{ result: boolean }>`
+
+#### `keys()`
+모든 저장소 키를 가져옵니다.
+
+**반환값:** `Promise<{ keys: string[] }>`
+
+#### `values()`
+모든 저장소 값을 가져옵니다.
+
+**반환값:** `Promise<{ values: string[] }>`
+
+#### `tables()`
+모든 테이블 이름을 가져옵니다.
+
+**반환값:** `Promise<{ tables: string[] }>`
+
+#### `deleteTable(options: DeleteTableOptions)`
+특정 테이블을 삭제합니다.
+
+### 인터페이스
+
+```typescript
+interface OpenStoreOptions {
+  database: string;
+  encrypted?: boolean;
+  mode?: string;
+  version?: number;
+}
+
+interface SetOptions {
+  key: string;
+  value: string;
+}
+
+interface GetOptions {
+  key: string;
+}
+
+interface RemoveOptions {
+  key: string;
+}
+```
+
+## 플랫폼 참고사항
+
+### iOS
+- 암호화를 위한 선택적 SQLCipher와 함께 SQLite3 사용
+- 앱 업데이트 시에도 데이터 유지
+- iOS 11.0+ 지원
+
+### Android
+- 선택적 SQLCipher와 함께 SQLite 사용
+- 앱 업데이트 시에도 데이터 유지
+- Android 5.0 (API 21)+ 지원
+
+## 일반적인 사용 사례
+
+1. **사용자 기본 설정**: 앱 설정 및 기본 설정 저장
+2. **캐시 관리**: API 응답 및 데이터 캐싱
+3. **오프라인 저장소**: 오프라인 접근을 위한 데이터 저장
+4. **세션 관리**: 사용자 세션을 안전하게 관리
+5. **토큰 저장소**: 인증 토큰을 안전하게 저장
+
+## 모범 사례
+
+1. **민감한 데이터에 암호화 사용**
+   ```typescript
+   // 토큰과 같은 민감한 데이터의 경우
+   await openStore({
+     database: 'secure_db',
+     encrypted: true,
+     mode: 'encryption'
+   });
+   ```
+
+2. **접두사로 키 정리**
+   ```typescript
+   // 정리를 위해 접두사 사용
+   await set({ key: 'user:123:profile', value: userData });
+   await set({ key: 'cache:api:users', value: apiData });
+   ```
+
+3. **대용량 데이터 신중히 처리**
+   ```typescript
+   // 대용량 객체의 경우 압축 고려
+   const compressed = compress(largeData);
+   await set({ key: 'large_data', value: compressed });
+   ```
+
+4. **정기적인 정리**
+   ```typescript
+   // 만료된 캐시 항목 제거
+   const keys = await keys();
+   for (const key of keys.keys) {
+     if (key.startsWith('cache:') && isExpired(key)) {
+       await remove({ key });
+     }
+   }
+   ```
+
+## 문제 해결
+
+**데이터베이스가 열리지 않음:**
+- 데이터베이스 이름이 유효한지 확인 (영숫자, 밑줄)
+- 데이터베이스 이름에 특수 문자가 없는지 확인
+- 암호화 모드가 기존 데이터베이스와 일치하는지 확인
+
+**데이터가 유지되지 않음:**
+- 작업 전에 `openStore`가 호출되었는지 확인
+- 콘솔에 오류가 있는지 확인
+- 키 이름이 문자열인지 확인
+
+**성능 문제:**
+- 매우 큰 값을 저장하지 마세요
+- 가능한 경우 일괄 작업 사용
+- 다양한 데이터 유형에 대해 여러 데이터베이스 사용 고려

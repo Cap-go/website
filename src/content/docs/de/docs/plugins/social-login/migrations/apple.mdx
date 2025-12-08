@@ -1,0 +1,186 @@
+---
+title: Migrationsleitfaden von @capacitor-community/apple-sign-in zu @capgo/capacitor-social-login
+locale: de
+description: Dieser umfassende Leitfaden bietet detaillierte Anweisungen für den Übergang vom @capacitor-community/apple-sign-in Plugin zum @capgo/capacitor-social-login Plugin und gewährleistet einen reibungslosen Migrationsprozess mit verbesserten Funktionen.
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Übersicht
+
+Dieser Leitfaden beschreibt den Übergang vom veralteten `@capacitor-community/apple-sign-in` Plugin zum modernen `@capgo/capacitor-social-login` Paket. Das neue Plugin bietet eine einheitliche Schnittstelle für mehrere soziale Authentifizierungsanbieter mit verbesserter TypeScript-Unterstützung und aktiver Wartung.
+
+## Installation
+
+<Steps>
+1. Entfernen Sie das alte Paket:
+   ```bash
+   npm uninstall @capacitor-community/apple-sign-in
+   ```
+
+2. Installieren Sie das neue Paket:
+   ```bash
+   npm install @capgo/capacitor-social-login
+   npx cap sync
+   ```
+</Steps>
+
+## Code-Änderungen
+
+### Import-Änderungen
+```diff
+- import { SignInWithApple } from '@capacitor-community/apple-sign-in';
++ import { SocialLogin } from '@capgo/capacitor-social-login';
+```
+
+### Initialisierung
+
+**Wichtige Änderung**: Das neue Plugin erfordert einen Initialisierungsschritt, der zuvor nicht erforderlich war.
+
+```diff
+- // Keine Initialisierung im alten Paket erforderlich
++ // Für iOS: Basiskonfiguration
++ await SocialLogin.initialize({
++   apple: {} // Basis-iOS-Konfiguration
++ });
+
++ // Für Android: Zusätzliche Konfiguration erforderlich
++ await SocialLogin.initialize({
++   apple: {
++     clientId: 'YOUR_SERVICE_ID', // Service-ID aus dem Apple Developer Portal
++     redirectUrl: 'https://your-backend.com/callback' // Ihre Backend-Callback-URL
++   }
++ });
+```
+
+**Wichtiger Hinweis**: Für iOS geben Sie eine Basiskonfiguration an, während Android zusätzliche Details einschließlich einer Service-ID und Backend-Callback-URL für webbasierte OAuth-Authentifizierung benötigt.
+
+### Anmelden
+
+Der Login-Prozess vereinfacht sich von mehreren Parametern zu einer saubereren API:
+
+```diff
+- const result = await SignInWithApple.authorize({
+-   clientId: 'com.your.app',
+-   redirectURI: 'https://your-app.com/callback',
+-   scopes: 'email name',
+-   state: '12345',
+-   nonce: 'nonce'
+- });
+
++ const result = await SocialLogin.login({
++   provider: 'apple',
++   options: {
++     // Optional: Scopes hinzufügen, falls erforderlich
++     scopes: ['email', 'name'],
++     nonce: 'nonce'
++   }
++ });
+```
+
+Das neue Plugin verwendet `login()` mit `provider: 'apple'` und optionalen Scopes anstelle der Übergabe einzelner Konfigurationswerte wie `clientId` und `redirectURI`.
+
+### Änderungen des Antworttyps
+
+Die Ergebnisse enthalten jetzt ein `accessToken`-Objekt mit Ablaufdetails und einem strukturierten `profile`-Abschnitt, der das flachere Antwortformat des ursprünglichen Pakets ersetzt:
+
+```typescript
+// Alter Antworttyp
+interface AppleSignInResponse {
+  response: {
+    user: string;
+    email: string | null;
+    givenName: string | null;
+    familyName: string | null;
+    identityToken: string | null;
+    authorizationCode: string | null;
+  };
+}
+
+// Neuer Antworttyp
+interface SocialLoginResponse {
+  provider: 'apple';
+  result: {
+    accessToken: {
+      token: string;
+      expiresIn?: number;
+      refreshToken?: string;
+    } | null;
+    idToken: string | null;
+    profile: {
+      user: string;
+      email: string | null;
+      givenName: string | null;
+      familyName: string | null;
+    };
+  };
+}
+```
+
+### Neue Funktionen
+
+Das aktualisierte Plugin führt Funktionalität ein, die im Vorgänger nicht verfügbar war:
+
+**Login-Status überprüfen**
+```diff
+- // Im alten Paket nicht verfügbar
++ const status = await SocialLogin.isLoggedIn({
++   provider: 'apple'
++ });
+```
+
+**Logout-Funktionalität**
+```diff
+- // Im alten Paket nicht verfügbar
++ await SocialLogin.logout({
++   provider: 'apple'
++ });
+```
+
+Diese Methoden bieten `isLoggedIn()` zur Überprüfung des Authentifizierungsstatus und `logout()`-Funktionalität.
+
+## Plattformspezifische Änderungen
+
+### iOS-Einrichtung
+
+**iOS** behält vertraute Einrichtungsverfahren über Xcode-Funktionen bei:
+
+1. Die iOS-Einrichtung bleibt weitgehend gleich. Sie müssen weiterhin:
+   - "Sign In with Apple"-Funktion in Xcode aktivieren
+   - Ihre App im Apple Developer Portal konfigurieren
+   - Keine zusätzlichen Code-Änderungen für iOS erforderlich
+
+### Android-Einrichtung
+
+**Android** erhält jetzt native Unterstützung über webbasierte OAuth-Authentifizierung:
+
+Das neue Plugin bietet Android-Unterstützung von Haus aus, erfordert jedoch zusätzliche Einrichtung:
+
+1. Erstellen Sie eine Services-ID im Apple Developer Portal
+2. Konfigurieren Sie einen Web-Authentifizierungsendpunkt
+3. Richten Sie Ihre Android-App ein, um den OAuth-Ablauf zu verarbeiten
+4. Backend-Service-Konfiguration ist erforderlich
+
+Detaillierte Anweisungen zur Android-Einrichtung finden Sie im [Android Setup Guide](/docs/plugins/social-login/apple/android/).
+
+## Hauptvorteile
+
+Das modernisierte Paket bietet:
+
+1. **Einheitliche APIs** über mehrere soziale Anbieter hinweg (Google, Facebook, Apple)
+2. **Verbesserte TypeScript-Typisierung** mit besseren Typdefinitionen
+3. **Aktive Community-Wartung** im Vergleich zur veralteten Version
+4. **Integrierte Android-Unterstützung** durch webbasierte Authentifizierung
+5. **Persistente Login-Zustandsverwaltung**
+6. **Bessere Fehlerbehandlung** mit konsistenten Fehlertypen
+
+## Breaking Changes
+
+1. **Explizite Initialisierung ist jetzt erforderlich** - keine Standardkonfiguration
+2. **Struktur des Antwortobjekts hat sich geändert** - verschachteltes Ergebnisformat
+3. **Android-Implementierung erfordert einen Backend-Service** für OAuth
+4. **Token-Refresh-Behandlung ist anders** - verbesserte Token-Verwaltung
+5. **Fehlerbehandlung und Fehlertypen haben sich geändert** - detailliertere Fehler
+
+Für detailliertere Einrichtungsanweisungen konsultieren Sie bitte die [offizielle Dokumentation](/docs/plugins/social-login/apple/general/).

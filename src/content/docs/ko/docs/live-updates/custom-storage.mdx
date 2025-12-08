@@ -1,0 +1,302 @@
+---
+title: 사용자 정의 스토리지
+description: "외부 URL, S3 통합 및 안전한 배포를 위한 번들 암호화를 포함하여 Capgo Live Updates에서 사용자 정의 스토리지 솔루션을 사용하는 방법을 알아보세요."
+sidebar:
+  order: 6
+locale: ko
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo는 앱 번들에 대한 사용자 정의 스토리지 솔루션을 지원하여 자체 인프라나 타사 스토리지 서비스에 업데이트를 호스팅할 수 있습니다. 이는 특정 보안 요구 사항, 규정 준수 요구 사항 또는 기존 스토리지 인프라가 있는 조직에 특히 유용합니다.
+
+## 개요
+
+Capgo의 사용자 정의 스토리지는 번들을 외부 위치에 업로드하고 Capgo에 액세스할 URL을 제공하는 방식으로 작동합니다. 그러면 Capgo SDK가 Capgo의 기본 클라우드 스토리지 대신 사용자 정의 스토리지 위치에서 직접 업데이트를 다운로드합니다.
+
+<Aside type="tip">
+
+사용자 정의 스토리지는 다음과 같은 경우에 이상적입니다:
+- 엄격한 데이터 거주 요구 사항이 있는 조직
+- 기존 CDN 또는 스토리지 인프라가 있는 팀
+- 추가 보안 계층이 필요한 애플리케이션
+- 대용량 번들 크기에 대한 비용 최적화
+
+</Aside>
+
+## 외부 URL 업로드
+
+사용자 정의 스토리지를 사용하는 가장 간단한 방법은 번들을 공개적으로 액세스 가능한 URL에 업로드하고 해당 URL을 Capgo에 제공하는 것입니다.
+
+### 기본 외부 URL 업로드
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip
+```
+
+이 명령은 Capgo에게 Capgo의 클라우드 스토리지에 업로드하는 대신 지정된 URL에 있는 번들을 참조하도록 지시합니다.
+
+### 암호화 사용
+
+안전한 외부 스토리지를 위해 번들을 암호화하고 복호화 키를 제공할 수 있습니다:
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip --iv-session-key YOUR_IV_SESSION_KEY
+```
+
+## S3 통합
+
+Capgo는 Amazon S3 및 S3 호환 스토리지 서비스에 대한 기본 지원을 제공합니다. CLI는 번들을 S3에 자동으로 업로드하고 S3 URL을 사용하도록 Capgo를 구성할 수 있습니다.
+
+### S3 업로드 옵션
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-bucket-name your-bucket-name
+```
+
+### 완전한 S3 구성
+
+S3 호환 서비스 또는 사용자 정의 엔드포인트의 경우:
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-endpoint https://s3.your-provider.com \
+  --s3-bucket-name your-bucket-name \
+  --s3-port 443 \
+  --no-s3-ssl  # 엔드포인트가 SSL을 지원하지 않는 경우에만
+```
+
+### S3 구성 매개변수
+
+| 매개변수 | 설명 | 필수 |
+|-----------|-------------|----------|
+| `--s3-region` | S3 버킷의 AWS 리전 | 예 |
+| `--s3-apikey` | S3 액세스 키 ID | 예 |
+| `--s3-apisecret` | S3 비밀 액세스 키 | 예 |
+| `--s3-bucket-name` | S3 버킷의 이름 | 예 |
+| `--s3-endpoint` | 사용자 정의 S3 엔드포인트 URL | 아니오 |
+| `--s3-port` | S3 엔드포인트 포트 | 아니오 |
+| `--no-s3-ssl` | S3 업로드 시 SSL 비활성화 | 아니오 |
+
+## 번들 준비 및 암호화
+
+특히 암호화를 사용하는 경우 사용자 정의 스토리지를 사용할 때 번들을 적절하게 준비해야 합니다. 여기에는 zip 파일 생성과 선택적으로 암호화가 포함됩니다.
+
+### 1단계: Zip 번들 생성
+
+먼저 앱 번들의 zip 파일을 생성합니다:
+
+```shell
+npx @capgo/cli@latest bundle zip com.example.app --path ./dist
+```
+
+zip 명령은 zip 파일의 체크섬을 반환합니다. 필요한 경우 이 체크섬을 사용하여 zip 파일을 암호화할 수 있습니다. 체크섬을 포함한 구조화된 출력을 얻으려면 `--json` 옵션을 사용하세요.
+
+#### Zip 명령 옵션
+
+```shell
+npx @capgo/cli@latest bundle zip [appId] \
+  --path ./dist \
+  --bundle 1.2.3 \
+  --name myapp-v1.2.3 \
+  --json \
+  --no-code-check \
+  --key-v2 \
+  --package-json ../../package.json,./package.json
+```
+
+| 옵션 | 설명 |
+|--------|-------------|
+| `--path` | zip할 폴더의 경로(capacitor.config의 webDir 기본값) |
+| `--bundle` | zip 파일 이름을 지정할 번들 버전 번호 |
+| `--name` | zip 파일의 사용자 정의 이름 |
+| `--json` | JSON 형식으로 결과 출력(체크섬 포함) |
+| `--no-code-check` | notifyAppReady() 호출 및 인덱스 파일 확인 건너뛰기 |
+| `--key-v2` | 암호화 v2 사용 |
+| `--package-json` | 모노레포용 package.json 파일 경로(쉼표로 구분) |
+
+### 2단계: 번들 암호화(선택 사항)
+
+보안 강화를 위해 업로드하기 전에 zip 번들을 암호화하세요:
+
+```shell
+# 기본 로컬 키 사용
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM
+
+# 사용자 정의 키 파일 사용
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key ./path/to/.capgo_key_v2
+
+# 키 데이터 직접 사용
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key-data "PRIVATE_KEY_CONTENT"
+```
+
+`CHECKSUM` 매개변수는 필수이며 zip 파일의 체크섬이어야 합니다. zip 명령 출력에서 체크섬을 얻을 수 있습니다(구조화된 출력을 위해 `--json` 옵션 사용).
+
+기본적으로 encrypt 명령은 로컬 개인 서명 키를 사용합니다. `--key` 또는 `--key-data` 옵션을 사용하여 사용자 정의 키를 지정할 수 있습니다.
+
+encrypt 명령은 업로드 또는 복호화에 필요한 `ivSessionKey`를 반환합니다.
+
+#### 암호화 명령 옵션
+
+| 옵션 | 설명 |
+|--------|-------------|
+| `zipPath` | 암호화할 zip 파일의 경로(필수) |
+| `checksum` | zip 파일의 체크섬(필수) - zip 명령에서 가져오기 |
+| `--key` | 개인 서명 키의 사용자 정의 경로(선택 사항, 기본적으로 로컬 키 사용) |
+| `--key-data` | 개인 서명 키 데이터 직접(선택 사항) |
+| `--json` | JSON 형식으로 결과 출력 |
+
+<Aside type="caution">
+
+encrypt 명령은 `--iv-session-key` 옵션으로 업로드할 때 제공해야 하는 `ivSessionKey`를 출력합니다.
+
+</Aside>
+
+## 전체 워크플로우 예제
+
+### 예제 1: 암호화를 사용한 외부 URL
+
+<Steps>
+
+1. **앱 빌드:**
+   ```shell
+   npm run build
+   ```
+
+2. **zip 번들 생성:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --bundle 1.2.3
+   ```
+
+   이 명령에서 반환된 체크섬을 기록하세요.
+
+3. **번들 암호화:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app-1.2.3.zip CHECKSUM_FROM_STEP_2
+   ```
+
+   출력에서 `ivSessionKey`를 기록하세요.
+
+4. **스토리지에 업로드:**
+   암호화된 zip 파일을 호스팅 서비스에 업로드합니다.
+
+5. **Capgo에 등록:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --external https://your-cdn.com/bundles/com.example.app-1.2.3.zip \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_3
+   ```
+
+</Steps>
+
+### 예제 2: 직접 S3 업로드
+
+<Steps>
+
+1. **앱 빌드:**
+   ```shell
+   npm run build
+   ```
+
+2. **S3에 직접 업로드:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --channel Production
+   ```
+
+</Steps>
+
+### 예제 3: 암호화를 사용한 S3
+
+<Steps>
+
+1. **빌드 및 zip:**
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **번들 암호화:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM
+   ```
+
+3. **암호화를 사용하여 S3에 업로드:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_2 \
+     --channel Production
+   ```
+
+</Steps>
+
+## 보안 고려 사항
+
+사용자 정의 스토리지를 사용할 때 다음 보안 모범 사례를 고려하세요:
+
+### 액세스 제어
+- 스토리지 URL이 앱 사용자가 액세스할 수 있지만 공개적으로 검색 가능하지 않도록 보장
+- 가능한 경우 서명된 URL 또는 토큰 기반 인증 사용
+- 웹 기반 앱에 적절한 CORS 헤더 구현
+
+### 암호화
+- 항상 Capgo 암호화 도구를 사용하여 민감한 번들 암호화
+- 암호화 키를 안전하게 저장하고 정기적으로 교체
+- 모든 번들 URL에 HTTPS 사용(iOS 및 Android 필수)
+
+### 모니터링
+- 액세스 로그를 모니터링하여 비정상적인 다운로드 패턴 감지
+- 번들 다운로드 실패에 대한 알림 설정
+- 스토리지 권한을 정기적으로 감사
+
+## 문제 해결
+
+### 일반적인 문제
+
+**번들이 다운로드되지 않음:**
+- URL이 공개적으로 액세스 가능하고 HTTPS를 사용하는지 확인(iOS 및 Android 필수)
+- 웹 앱의 CORS 헤더 확인
+- 번들 형식이 올바른지 확인
+
+**암호화 오류:**
+- `ivSessionKey`가 암호화된 번들과 일치하는지 확인
+- 번들이 올바른 키로 암호화되었는지 확인
+- 새 번들에 암호화 v2가 사용되었는지 확인
+
+**S3 업로드 실패:**
+- S3 자격 증명 및 권한 확인
+- 버킷 정책 및 CORS 구성 확인
+- 지정된 리전이 올바른지 확인
+
+### 디버그 명령
+
+번들 상태 확인:
+```shell
+npx @capgo/cli@latest app debug
+```
+
+번들 무결성 확인:
+```shell
+npx @capgo/cli@latest bundle list
+```
+
+## 다음 단계
+
+- 다양한 배포 환경을 관리하기 위해 [Channels](/docs/live-updates/channels/)에 대해 알아보기
+- 업데이트 적용 방법을 사용자 정의하기 위해 [Update Behavior](/docs/live-updates/update-behavior/) 살펴보기
+- 사용자 정의 스토리지 워크플로우를 자동화하기 위해 [CI/CD Integration](/docs/getting-started/cicd-integration/) 설정

@@ -1,0 +1,209 @@
+---
+title: iOS Sandbox-Tests konfigurieren
+description: Erfahren Sie, wie Sie Sandbox-Tests für In-App-Käufe auf iOS mit App Store Connect und Xcode einrichten.
+locale: de
+sidebar:
+  order: 6
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Das Testen von In-App-Käufen auf iOS erfordert eine ordnungsgemäße Konfiguration in App Store Connect und auf Ihren Testgeräten. Dieser Leitfaden deckt alles ab, was Sie für den Einstieg in Sandbox-Tests benötigen.
+
+## Voraussetzungen
+
+- **Apple Developer Program**: Aktive Mitgliedschaft mit jährlicher Verlängerung
+- **Vereinbarungen**: Signierte "Paid Applications Agreement" mit ausgefüllten Bank- und Steuerinformationen
+- **Xcode-Projekt**: Konfiguriert mit korrekter Bundle-Kennung und Funktionen
+
+:::note
+Die Genehmigung der Bank- und Steuereinrichtung kann Stunden bis Tage dauern. Schließen Sie dies rechtzeitig vor dem Testen ab.
+:::
+
+## Einrichtungsprozess
+
+<Steps>
+
+1. **Paid Applications Agreement unterzeichnen**
+
+   Navigieren Sie in App Store Connect zu **Vereinbarungen, Steuern und Banking** und vervollständigen Sie:
+   - Unterzeichnen Sie die Paid Applications Agreement
+   - Fügen Sie Ihre Bankinformationen hinzu
+   - Füllen Sie die Steuerformulare aus
+
+   Warten Sie auf die Genehmigung Ihrer Informationen durch Apple (dies kann 24-48 Stunden dauern).
+
+2. **Sandbox-Testbenutzer erstellen**
+
+   Gehen Sie in App Store Connect zu **Benutzer und Zugriff > Sandbox-Tester**.
+
+   Klicken Sie auf die **+**-Schaltfläche, um einen neuen Sandbox-Tester zu erstellen.
+
+   **Wichtig**: Verwenden Sie eine E-Mail-Adresse, die NICHT bereits mit einer Apple ID verknüpft ist. Sie können E-Mail-Aliase verwenden:
+   - Gmail: `ihreemail+test@gmail.com`
+   - iCloud: `ihreemail+test@icloud.com`
+
+   ![Sandbox-Tester erstellen](/native-purchases/ios/sandbox-testing/sandbox-tester-setup.webp)
+
+3. **Testgerät konfigurieren (iOS 12+)**
+
+   Ab iOS 12 müssen Sie sich nicht mehr von Ihrem iTunes-Konto abmelden, um Käufe zu testen.
+
+   Auf Ihrem iOS-Gerät:
+   1. Öffnen Sie **Einstellungen**
+   2. Tippen Sie auf **App Store**
+   3. Scrollen Sie nach unten
+   4. Tippen Sie auf **Sandbox-Konto**
+   5. Melden Sie sich mit Ihrem Sandbox-Testkonto an
+
+   :::tip
+   Dies ist viel bequemer als die alte Methode, sich von Ihrem iTunes-Konto abzumelden!
+   :::
+
+4. **Xcode-Projekt konfigurieren**
+
+   Stellen Sie sicher, dass Ihr Xcode-Projekt Folgendes hat:
+
+   **Bundle-Kennung**
+   - Muss mit der Kennung in Ihrem Developer Center übereinstimmen
+   - Muss mit der Kennung in App Store Connect übereinstimmen
+
+   **In-App-Kauf-Funktion**
+   1. Wählen Sie Ihr Projekt in Xcode aus
+   2. Gehen Sie zu **Signierung & Funktionen**
+   3. Klicken Sie auf **+ Funktion**
+   4. Fügen Sie **In-App-Kauf** hinzu
+
+5. **In-App-Kauf-Produkte erstellen**
+
+   Navigieren Sie in App Store Connect zu Ihrer App und erstellen Sie Ihre In-App-Kauf-Produkte (Abonnements, Verbrauchsgüter usw.).
+
+   Produkte müssen mindestens im Status "Bereit zur Einreichung" sein für Sandbox-Tests.
+
+6. **Ihre Implementierung testen**
+
+   Erstellen und führen Sie Ihre App auf einem Testgerät aus. Wenn Sie einen Kauf versuchen, sollten Sie Folgendes sehen:
+
+   > **[Umgebung: Sandbox]**
+
+   Diese Bestätigung zeigt an, dass Sie sich in der Sandbox-Umgebung befinden und kein echtes Geld belastet wird.
+
+</Steps>
+
+## Wichtige Hinweise
+
+### Sandbox-Umgebungsmerkmale
+
+- **Keine echten Belastungen**: Alle Käufe sind im Sandbox-Modus kostenlos
+- **Beschleunigte Abonnements**: Abonnementdauern werden für schnelleres Testen verkürzt
+  - 1 Woche Abonnement = 3 Minuten
+  - 1 Monat Abonnement = 5 Minuten
+  - 2 Monate Abonnement = 10 Minuten
+  - 3 Monate Abonnement = 15 Minuten
+  - 6 Monate Abonnement = 30 Minuten
+  - 1 Jahr Abonnement = 1 Stunde
+- **Auto-Verlängerungslimit**: Abonnements werden in der Sandbox bis zu 6-mal automatisch verlängert
+- **Sofortige Kündigung**: Gekündigte Abonnements laufen sofort ab
+
+### Sandbox-Kontoverwaltung
+
+- Erstellen Sie mehrere Testkonten für verschiedene Szenarien
+- Verwenden Sie Testkonten nur auf Testgeräten
+- Verwenden Sie keine persönliche Apple ID für Sandbox-Tests
+- Testkonten können jedes Produkt unabhängig von der Region kaufen
+
+## Sandbox-Tests verwenden
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { isBillingSupported } = await NativePurchases.isBillingSupported();
+if (!isBillingSupported) {
+  throw new Error('StoreKit wird auf diesem Gerät nicht unterstützt');
+}
+
+// Produkte abrufen (verwendet automatisch Sandbox, wenn verfügbar)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Testkauf durchführen
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Testkauf erfolgreich!', transaction.transactionId);
+```
+
+## Überprüfung
+
+Bei ordnungsgemäßer Konfiguration sollten Sie Folgendes beobachten:
+
+1. **Sandbox-Banner** während des Kaufs: "[Umgebung: Sandbox]"
+2. **Produkte werden** erfolgreich geladen
+3. **Käufe werden abgeschlossen** ohne tatsächliche Belastungen
+4. **Belege werden** korrekt validiert
+5. **Abonnements werden** automatisch verlängert (mit beschleunigter Rate)
+
+## Fehlerbehebung
+
+**Produkte werden nicht geladen:**
+- Überprüfen Sie, ob die Bundle-Kennung mit App Store Connect übereinstimmt
+- Prüfen Sie, ob Vereinbarungen unterzeichnet und genehmigt sind
+- Stellen Sie sicher, dass Produkte mindestens im Status "Bereit zur Einreichung" sind
+- Warten Sie 2-3 Stunden nach der Erstellung von Produkten
+
+**"Verbindung zum iTunes Store nicht möglich":**
+- Überprüfen Sie, ob das Sandbox-Konto korrekt konfiguriert ist
+- Prüfen Sie, ob das Gerät mit dem Internet verbunden ist
+- Versuchen Sie, sich vom Sandbox-Konto ab- und wieder anzumelden
+- Starten Sie die App neu
+
+**Käufe schlagen stillschweigend fehl:**
+- Prüfen Sie die Xcode-Konsole auf Fehlermeldungen
+- Überprüfen Sie, ob die In-App-Kauf-Funktion aktiviert ist
+- Stellen Sie sicher, dass die E-Mail des Sandbox-Kontos keine echte Apple ID ist
+- Versuchen Sie, ein neues Sandbox-Testkonto zu erstellen
+
+**Belegvalidierungsfehler:**
+- Verwenden Sie den Sandbox-Belegvalidierungs-Endpunkt beim Testen
+- Produktions-Endpunkt: `https://buy.itunes.apple.com/verifyReceipt`
+- Sandbox-Endpunkt: `https://sandbox.itunes.apple.com/verifyReceipt`
+- Das native-purchases Plugin behandelt dies automatisch
+
+**Falsche Abonnementdauer:**
+- Denken Sie daran, dass Abonnements in der Sandbox beschleunigt sind
+- Verwenden Sie die obige Umrechnungstabelle für erwartete Dauern
+- Abonnements werden in der Sandbox maximal 6-mal automatisch verlängert
+
+**"Diese Apple ID wurde noch nicht im iTunes Store verwendet":**
+- Dies ist bei neuen Sandbox-Konten normal
+- Fahren Sie mit dem Kauf fort, um das Konto zu aktivieren
+- Tritt nur bei der ersten Verwendung auf
+
+## Best Practices
+
+1. **Erstellen Sie mehrere Testkonten** für verschiedene Testszenarien
+2. **Testen Sie alle Abonnementdauern**, um das Verhalten zu überprüfen
+3. **Testen Sie Kündigungs- und Verlängerungs**-Abläufe
+4. **Überprüfen Sie, ob die Belegvalidierung** korrekt funktioniert
+5. **Testen Sie die Wiederherstellung von Käufen**-Funktionalität
+6. **Prüfen Sie das Verhalten von Abonnement-Upgrade/Downgrade**
+7. **Testen Sie bei schlechten Netzwerkbedingungen**
+
+## Produktion vs. Sandbox
+
+| Funktion | Sandbox | Produktion |
+|---------|---------|------------|
+| Echte Belastungen | Nein | Ja |
+| Abonnementdauer | Beschleunigt | Normal |
+| Auto-Verlängerungslimit | 6-mal | Unbegrenzt |
+| Kündigungseffekt | Sofort | Ende des Zeitraums |
+| Beleg-Endpunkt | Sandbox-URL | Produktions-URL |
+| Nur Testkonten | Ja | Nein |
+
+## Zusätzliche Ressourcen
+
+Weitere Details finden Sie in der [offiziellen Apple StoreKit-Dokumentation](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox) zu Sandbox-Tests.

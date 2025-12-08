@@ -1,0 +1,41 @@
+---
+title: "@capgo/nativegeocoder"
+locale: id
+description: Plugin geocoding native forward dan reverse untuk mengonversi alamat ke koordinat dan sebaliknya.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+hero:
+  tagline: Konversi antara alamat dan koordinat geografis menggunakan API geocoding platform native untuk data lokasi yang akurat.
+  image:
+    file: ~public/icons/plugins/nativegeocoder.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/nativegeocoder/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-nativegeocoder/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Forward geocoding" icon="rocket">
+    Konversi alamat ke koordinat geografis 📍
+  </Card>
+  <Card title="Reverse geocoding" icon="document">
+    Konversi koordinat ke alamat yang dapat dibaca manusia 🏠
+  </Card>
+  <Card title="Akurasi native" icon="star">
+    Menggunakan geocoding native platform untuk hasil terbaik 🎯
+  </Card>
+  <Card title="Dokumentasi Lengkap" icon="open-book">
+    Lihat [Dokumentasi](/docs/plugins/nativegeocoder/getting-started/) untuk menguasai plugin hanya dalam beberapa menit.
+  </Card>
+</CardGrid>

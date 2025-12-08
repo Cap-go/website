@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-compass"
+locale: id
+description: Baca arah kompas perangkat dalam derajat dengan pembaruan berkelanjutan dan penanganan izin.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Akses sensor kompas perangkat untuk data arah dengan pembaruan real-time di iOS dan Android.
+  image:
+    file: ~public/icons/plugins/compass.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/compass/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-compass/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Arah Real-time" icon="rocket">
+    Dapatkan pembaruan arah kompas berkelanjutan dalam derajat (0-360)
+  </Card>
+  <Card title="Lintas Platform" icon="puzzle">
+    Bekerja di perangkat iOS dan Android dengan akses sensor native
+  </Card>
+  <Card title="Penanganan Izin" icon="shield">
+    Manajemen izin bawaan untuk layanan lokasi (iOS)
+  </Card>
+  <Card title="Berbasis Event" icon="star">
+    Berlangganan perubahan arah dengan event listener yang efisien
+  </Card>
+</CardGrid>

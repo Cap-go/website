@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-plugin-audiosession"
+locale: es
+description: Observa y controla la sesión de audio de iOS desde aplicaciones Capacitor para manejar cambios de ruta e interrupciones.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Escucha los cambios de ruta de audio, reacciona a interrupciones y redirige la reproducción al altavoz sin salir de Capacitor.
+  image:
+    file: ~public/icons/plugins/audiosession.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/audiosession/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-audiosession/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+El plugin AudioSession de Capgo te brinda control detallado sobre la capa AVAudioSession de iOS para que puedas manejar con elegancia auriculares, dispositivos Bluetooth e interrupciones inesperadas.
+
+<CardGrid stagger>
+  <Card title="Detección de ruta" icon="rocket">
+    Detecta cuando los usuarios conectan o desconectan auriculares, AirPods, altavoces Bluetooth y más.
+  </Card>
+  <Card title="Anulación de altavoz" icon="setting">
+    Fuerza la reproducción a través del altavoz integrado cuando necesites audio manos libres.
+  </Card>
+  <Card title="Manejo de interrupciones" icon="moon">
+    Reacciona a eventos de interrupción como llamadas telefónicas o Siri para pausar y reanudar el audio de forma segura.
+  </Card>
+  <Card title="Seguridad de tipos" icon="pencil">
+    Definiciones sólidas de TypeScript facilitan la creación de experiencias de audio resilientes.
+  </Card>
+</CardGrid>
+
+Este plugin se dirige a iOS donde se requiere el control de AVAudioSession. En otras plataformas, las llamadas se resuelven sin efecto, lo que te permite mantener una ruta de código compartida.

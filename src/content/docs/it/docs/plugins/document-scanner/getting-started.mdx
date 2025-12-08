@@ -1,0 +1,61 @@
+---
+title: Iniziare
+locale: it
+description: Aggiungi scansione documenti di qualità nativa con rilevamento bordi e formati di output regolabili.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il plugin**
+   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza piattaforme native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Avvia una scansione
+
+```typescript
+import {
+  DocumentScanner,
+  ResponseType,
+  ScanDocumentResponseStatus,
+} from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  croppedImageQuality: 90,
+  letUserAdjustCrop: true,
+  maxNumDocuments: 10,
+  responseType: ResponseType.ImageFilePath,
+});
+
+if (result.status === ScanDocumentResponseStatus.Success) {
+  console.log('File scansionati:', result.scannedImages);
+} else {
+  console.log('Scansione annullata dall\'utente');
+}
+```
+
+## Restituisci dati base64
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  responseType: ResponseType.Base64,
+});
+
+const [firstPage] = result.scannedImages ?? [];
+if (firstPage) {
+  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
+  // Mostra anteprima o carica sul server
+}
+```
+
+## Requisiti piattaforma
+
+- **iOS**: Aggiungi `NSCameraUsageDescription` a `ios/App/App/Info.plist` spiegando come usi la fotocamera.
+- **Android**: Conferma che il permesso `CAMERA` sia dichiarato (Capacitor lo aggiunge automaticamente) e regola `croppedImageQuality`, `letUserAdjustCrop` e `maxNumDocuments` per adattarsi alla tua UI.
+- **Archiviazione**: Quando usi `ResponseType.ImageFilePath`, sposta o copia i file scansionati nella posizione di archiviazione desiderata prima che la sessione dell'app termini.

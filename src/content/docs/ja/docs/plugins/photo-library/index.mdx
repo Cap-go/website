@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-photo-library"
+locale: ja
+description: 効率的なページング、サムネイル、キャッシュされた URL で写真を閲覧して選択します。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "概要"
+hero:
+  tagline: 堅牢な認証フローでネイティブフォトライブラリにアクセスするカスタムギャラリーを構築します。
+  image:
+    file: ~public/icons/plugins/photo-library.svg
+  actions:
+    - text: はじめに
+      link: /docs/plugins/photo-library/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-photo-library/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Photo Library は、アルバムのリスト、アセットのページング、サムネイルのリクエストを行いながら、パフォーマンスをチェックするのに役立ちます。
+
+<CardGrid stagger>
+  <Card title="認証ヘルパー" icon="approve-check">
+    パーミッションをリクエストし、制限付きアクセス状態を適切に処理します。
+  </Card>
+  <Card title="ページング取得" icon="rocket">
+    カーソルベースの読み込みとカスタマイズ可能な制限でギャラリーをページ分割します。
+  </Card>
+  <Card title="最適化されたサムネイル" icon="star">
+    スムーズなスクロールリストのために、固定サイズでサムネイル URL を取得します。
+  </Card>
+  <Card title="メディア選択" icon="download">
+    設定可能な選択制限でユーザーに写真やビデオを選択させます。
+  </Card>
+</CardGrid>
+
+パーミッションの設定とギャラリーの例については、はじめにガイドをご覧ください。

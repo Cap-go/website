@@ -1,0 +1,219 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor 앱에서 기기 나침반 방향을 읽기 위해 Compass 플러그인을 설치하고 사용하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS 설정
+
+iOS에서는 나침반 액세스에 위치 권한이 필요합니다. `Info.plist`에 다음을 추가하세요:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need location permission to access the compass</string>
+```
+
+## Android 설정
+
+추가 설정이 필요하지 않습니다. 플러그인은 기기의 자기장 센서와 가속도계 센서를 사용합니다.
+
+## 사용법
+
+플러그인을 가져오고 메서드를 사용하여 나침반 방향을 읽으세요:
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// Get current heading once
+const getCurrentHeading = async () => {
+  const { value } = await CapgoCompass.getCurrentHeading();
+  console.log('Current heading:', value, 'degrees');
+};
+
+// Start continuous heading updates
+const startCompass = async () => {
+  // Start listening for updates
+  await CapgoCompass.startListening();
+
+  // Add listener for heading changes
+  const handle = await CapgoCompass.addListener('headingChange', (event) => {
+    console.log('Heading:', event.value, 'degrees');
+  });
+
+  // Later, to stop listening:
+  // await CapgoCompass.stopListening();
+  // await handle.remove();
+};
+
+// Check permissions
+const checkPermission = async () => {
+  const status = await CapgoCompass.checkPermissions();
+  console.log('Permission status:', status.compass);
+};
+
+// Request permissions
+const requestPermission = async () => {
+  const status = await CapgoCompass.requestPermissions();
+  if (status.compass === 'granted') {
+    console.log('Compass access granted');
+  }
+};
+```
+
+## API Reference
+
+### getCurrentHeading()
+
+나침반 방향을 도 단위로 가져옵니다.
+
+```typescript
+const result = await CapgoCompass.getCurrentHeading();
+// Returns: { value: number } - heading in degrees (0-360)
+```
+
+### startListening()
+
+나침반 방향 변경 사항을 수신하기 시작합니다. 방향 이벤트가 발생하기 전에 호출되어야 합니다.
+
+```typescript
+await CapgoCompass.startListening();
+```
+
+### stopListening()
+
+나침반 방향 변경 사항 수신을 중지합니다.
+
+```typescript
+await CapgoCompass.stopListening();
+```
+
+### addListener('headingChange', callback)
+
+방향 변경 이벤트에 대한 리스너를 추가합니다.
+
+```typescript
+const handle = await CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
+
+// Remove listener when done
+await handle.remove();
+```
+
+### removeAllListeners()
+
+등록된 모든 리스너를 제거합니다.
+
+```typescript
+await CapgoCompass.removeAllListeners();
+```
+
+### checkPermissions()
+
+현재 권한 상태를 확인합니다.
+
+```typescript
+const status = await CapgoCompass.checkPermissions();
+// Returns: { compass: 'prompt' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+나침반 데이터에 액세스할 수 있는 권한을 요청합니다.
+
+```typescript
+const status = await CapgoCompass.requestPermissions();
+```
+
+### getPluginVersion()
+
+네이티브 플러그인 버전을 가져옵니다.
+
+```typescript
+const { version } = await CapgoCompass.getPluginVersion();
+```
+
+## 완전한 예제
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+export class CompassService {
+  private listenerHandle: any = null;
+
+  async init() {
+    // Check and request permissions
+    const status = await CapgoCompass.checkPermissions();
+    if (status.compass !== 'granted') {
+      const result = await CapgoCompass.requestPermissions();
+      if (result.compass !== 'granted') {
+        throw new Error('Compass permission denied');
+      }
+    }
+  }
+
+  async startTracking(onHeadingChange: (heading: number) => void) {
+    // Start listening for updates
+    await CapgoCompass.startListening();
+
+    // Add event listener
+    this.listenerHandle = await CapgoCompass.addListener(
+      'headingChange',
+      (event) => {
+        onHeadingChange(event.value);
+      }
+    );
+  }
+
+  async stopTracking() {
+    if (this.listenerHandle) {
+      await this.listenerHandle.remove();
+      this.listenerHandle = null;
+    }
+    await CapgoCompass.stopListening();
+  }
+
+  async getHeading(): Promise<number> {
+    const { value } = await CapgoCompass.getCurrentHeading();
+    return value;
+  }
+
+  getCardinalDirection(heading: number): string {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(heading / 45) % 8;
+    return directions[index];
+  }
+}
+```
+
+## 플랫폼 참고 사항
+
+### iOS
+- iOS 10.0+ 필요
+- 방향 데이터에 Core Location 사용
+- 위치 권한 필요(NSLocationWhenInUseUsageDescription)
+- 수신 대기가 활성화되면 방향 업데이트가 지속됨
+
+### Android
+- Android 6.0 (API 23)+ 필요
+- 가속도계 및 자기장 센서 사용
+- 나침반 센서에 특별한 권한이 필요하지 않음
+- 센서 융합에서 방향 계산
+
+### Web
+- 웹 플랫폼에서 지원되지 않음
+- 호출 시 메서드가 오류를 발생시킴

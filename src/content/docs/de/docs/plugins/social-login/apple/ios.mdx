@@ -1,0 +1,67 @@
+---
+title: Apple Login auf iOS
+locale: de
+description: Diese umfassende Anleitung führt Sie durch den Prozess der Einrichtung von Apple Login mit Capacitor auf iOS-Geräten und stellt eine nahtlose Integration durch Abdeckung aller notwendigen Schritte und Konfigurationen sicher.
+sidebar:
+    order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Lassen Sie uns aufschlüsseln, was Sie benötigen, um Apple Login auf iOS einzurichten.
+
+<Steps>
+1. Konfigurieren Sie die Funktionen Ihrer App.
+
+    Um dies zu tun, öffnen Sie bitte Xcode, klicken Sie auf `App`
+    ![App XCode](/social-login-assets/app-xcode.png)
+
+2. Stellen Sie sicher, dass Sie das richtige Ziel auswählen.
+
+    ![XCode App Target](/social-login-assets/xcode-app-target.png)
+
+3. Bitte stellen Sie sicher, dass Sie die Funktion `Sign in with Apple` hinzufügen.
+
+    ![App XCode Add Capability](/social-login-assets/app-xcode-add-cap.png)
+
+    ![App XCode Add Capability](/social-login-assets/sign-with-apple-cap.png)
+
+    :::caution
+    Wenn Sie die Funktion `Sign in with Apple` nicht sehen, konfigurieren Sie die [Account & Organizational Data Sharing](https://developer.apple.com/account/resources/services/cwa/configure/)
+    :::
+
+4. Initialisieren Sie das Apple Login in Ihrer App.
+
+    :::note
+    Ich verwende Vue als mein Framework, die genaue Implementierung variiert je nach Framework Ihrer Wahl
+    :::
+
+    ```ts
+    //  onMounted ist Vue-spezifisch
+    onMounted(() => {
+    SocialLogin.initialize({
+        apple: {}
+    })
+    });
+    ```
+
+5. Erstellen Sie eine Schaltfläche, die den Login-Prozess startet.
+
+    Diese Schaltfläche sollte die folgende Funktion aufrufen:
+
+    ```ts
+    async function loginApple() {
+    const res = await SocialLogin.login({
+        provider: 'apple',
+        options: {}
+    })
+    ```
+
+6. Führen Sie Ihre App auf einem **<u>PHYSISCHEN</u>** Gerät aus und testen Sie sie.
+
+    Wenn Sie die Schritte genau befolgt haben, sehen Sie nach dem Klicken auf Ihre Schaltfläche den folgenden Bildschirm.
+
+    ![Apple Sign In prompt on iOS device](/social-login-assets/apple-sign-in-ios-final.png)
+</Steps>
+
+Das war's! Sie sind fertig.

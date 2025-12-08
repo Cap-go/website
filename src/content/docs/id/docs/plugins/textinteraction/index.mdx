@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-textinteraction"
+locale: id
+description: Aktifkan atau nonaktifkan loupe interaksi teks iOS untuk kontrol presisi atas perilaku WebView.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Hapus lensa pembesar iOS dalam pengalaman kiosk atau game, lalu pulihkan sebelum entri teks.
+  image:
+    file: ~public/icons/plugins/textinteraction.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/textinteraction/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-textinteraction/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Kontrol sistem interaksi teks Apple untuk menyesuaikan UX pada display kiosk, game, dan instalasi interaktif.
+
+<CardGrid stagger>
+  <Card title="Khusus iOS" icon="rocket">
+    Toggle lensa pembesar dan pegangan pemilihan yang diperkenalkan di iOS 15.
+  </Card>
+  <Card title="API Sederhana" icon="pencil">
+    Panggil satu metode untuk mengaktifkan atau menonaktifkan status interaksi teks.
+  </Card>
+  <Card title="Default yang aman" icon="approve-check">
+    Menerima hasil boolean sehingga Anda dapat mendeteksi versi yang tidak didukung.
+  </Card>
+  <Card title="Ramah kiosk" icon="star">
+    Mencegah salin/tempel long-press pada instalasi atau signage terkontrol.
+  </Card>
+</CardGrid>
+
+Gunakan panduan memulai untuk pola integrasi minimal dan pengingat untuk mengaktifkan kembali interaksi sebelum menampilkan input teks.

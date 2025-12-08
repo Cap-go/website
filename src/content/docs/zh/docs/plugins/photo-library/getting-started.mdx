@@ -1,0 +1,76 @@
+---
+title: 快速入门
+locale: zh
+description: 通过分页和媒体选择器集成原生照片图库。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装插件**
+   <PackageManagers pkg="@capgo/capacitor-photo-library" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步平台**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 平台权限
+
+- **iOS**: 在 `Info.plist` 中添加 `NSPhotoLibraryUsageDescription`（如果您计划保存媒体，还需添加 `NSPhotoLibraryAddUsageDescription`）。
+- **Android**: 对于 Android 13+，声明照片/视频权限（`READ_MEDIA_IMAGES`、`READ_MEDIA_VIDEO`）。Capacitor 5 会自动处理这些权限，但请仔细检查自定义清单。
+
+## 请求访问权限
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const { state } = await PhotoLibrary.requestAuthorization();
+if (state !== 'authorized' && state !== 'limited') {
+  throw new Error('照片访问被拒绝');
+}
+```
+
+## 加载图库
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+
+const { assets, hasMore, nextPage } = await PhotoLibrary.getLibrary({
+  limit: 100,
+  includeAlbums: false,
+  thumbnailWidth: 256,
+  thumbnailHeight: 256,
+});
+
+const gallery = assets.map((asset) => ({
+  id: asset.id,
+  fileName: asset.fileName,
+  created: asset.creationDate,
+  thumbnailUrl: asset.thumbnail
+    ? asset.thumbnail.webPath ?? Capacitor.convertFileSrc(asset.thumbnail.path)
+    : undefined,
+  photoUrl: asset.file
+    ? asset.file.webPath ?? Capacitor.convertFileSrc(asset.file.path)
+    : undefined,
+}));
+```
+
+要获取其他页面，请调用 `PhotoLibrary.getLibrary({ cursor: nextPage })`。
+
+## 让用户选择媒体
+
+```typescript
+const selection = await PhotoLibrary.pickMedia({
+  selectionLimit: 5,
+  includeVideos: true,
+});
+
+console.log('用户选择了', selection.assets.length, '项');
+```
+
+## 清理缓存文件
+
+生成的缩略图和导出文件存储在 `photoLibrary` 下的应用缓存目录中。当您需要回收存储空间时，可以使用您首选的文件 API 删除它们。

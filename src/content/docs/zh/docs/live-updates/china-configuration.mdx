@@ -1,0 +1,208 @@
+---
+title: 在中国使用 Capgo
+description: "了解如何配置 Capgo 实时更新以在中国使用区域 OST URL 以获得最佳性能和可靠性。"
+sidebar:
+  order: 11
+locale: zh
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+如果您要将应用部署给中国的用户,您需要配置 Capgo 使用区域 OST(对象存储技术)URL 以确保可靠和快速的更新。
+
+## 为什么使用中国特定的 URL?
+
+由于中国的网络基础设施和法规(防火长城),直接连接到国际服务器可能会很慢或不可靠。Capgo 提供专用的 OST URL,数据位于香港,以最大限度地减少延迟并确保您的用户尽可能快速可靠地接收更新。
+
+## 配置
+
+要为中国配置 Capgo,您需要在 Capacitor 配置文件中设置三个特定的 URL。这些 URL 指向 Capgo 基于香港的基础设施。
+
+<Steps>
+
+1. 打开您的 `capacitor.config.ts` 文件
+
+2. 将以下配置添加到 `CapacitorUpdater` 插件部分:
+
+    ```typescript
+    import { CapacitorConfig } from '@capacitor/cli';
+
+    const config: CapacitorConfig = {
+      plugins: {
+        CapacitorUpdater: {
+          autoUpdate: true,
+          updateUrl: 'https://updater.capgo.com.cn/updates',
+          statsUrl: 'https://updater.capgo.com.cn/stats',
+          channelUrl: 'https://updater.capgo.com.cn/channel_self',
+        },
+      },
+    };
+
+    export default config;
+    ```
+
+3. 重新构建您的应用以应用更改:
+
+    ```shell
+    npm run build
+    npx cap sync
+    ```
+
+</Steps>
+
+## 配置详细信息
+
+以下是每个 URL 的作用:
+
+- **updateUrl**: `https://updater.capgo.com.cn/updates` - 用于检查和下载您的应用的可用更新
+- **statsUrl**: `https://updater.capgo.com.cn/stats` - 用于向 Capgo 报告分析和使用统计信息
+- **channelUrl**: `https://updater.capgo.com.cn/channel_self` - 用于检索渠道配置并确定要应用哪些更新
+
+<Aside type="tip">
+所有三个 URL 必须一起配置,以确保 Capgo 更新程序在中国的完整功能。
+</Aside>
+
+## 中国推荐设置
+
+由于中国防火长城造成的网络性能限制,我们对部署在中国大陆的应用有具体建议:
+
+### 禁用直接更新
+
+我们**强烈建议为中国的应用禁用 `directUpdate`**。中国的网络连接性能不如其他地区,直接更新(立即应用)在下载中断或缓慢时可能会导致糟糕的用户体验。
+
+相反,请使用默认的更新行为,在后台下载更新并在应用进入后台或重新启动时应用。这为您的用户提供了更可靠的体验。
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: false, // 推荐用于中国
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+<Aside type="caution">
+虽然我们基于香港的基础设施有助于最大限度地减少延迟并提高可靠性,但到中国大陆的网络性能仍然会受到防火长城的影响。禁用 `directUpdate` 有助于确保更新成功完成,而不会中断用户体验。
+</Aside>
+
+## 完整配置示例
+
+以下是为部署在中国的应用推荐设置的完整示例:
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'My App',
+  webDir: 'dist',
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: false, // 推荐:禁用以在中国获得更好的可靠性
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+
+export default config;
+```
+
+## 测试您的配置
+
+配置中国特定的 URL 后,您可以验证更新是否正常工作:
+
+<Steps>
+
+1. 将新 bundle 上传到 Capgo:
+
+    ```shell
+    npx @capgo/cli@latest bundle upload --channel=Production
+    ```
+
+2. 在中国的测试设备上安装您的应用
+
+3. 监控更新过程:
+
+    ```shell
+    npx @capgo/cli@latest app debug
+    ```
+
+4. 检查是否从中国 OST URL 下载更新
+
+</Steps>
+
+<Aside type="note">
+更新行为和时间与标准 Capgo 配置保持相同。有关如何和何时应用更新的详细信息,请参阅[更新行为](/docs/live-updates/update-behavior/)文档。
+</Aside>
+
+## 多区域部署
+
+如果您的应用为中国境内和境外的用户提供服务,您可以为全球所有用户使用中国域配置。由于阿里巴巴 DNS 基础设施,`updater.capgo.com.cn` 域在全球范围内解析,使其可在中国境内和世界其他地方访问。
+
+### 在全球使用中国域
+
+中国域 URL 对多区域应用无缝工作:
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: false, // 推荐用于中国用户
+      updateUrl: 'https://updater.capgo.com.cn/updates',
+      statsUrl: 'https://updater.capgo.com.cn/stats',
+      channelUrl: 'https://updater.capgo.com.cn/channel_self',
+    },
+  },
+};
+```
+
+此单一配置将适用于:
+- 中国大陆用户(使用基于香港的基础设施)
+- 中国境外用户(通过阿里巴巴 DNS 访问相同的基础设施)
+
+**性能考虑:**
+
+虽然 `.cn` 域通过阿里巴巴 DNS 在全球范围内解析并在任何地方都能工作,但与标准域(`api.capgo.app`)相比,它对中国境外的用户来说性能略差,后者由我们托管后端的 Cloudflare 直接解析。但是,DNS 解析很快,因此性能差异很小,不会显著影响用户体验。
+
+<Aside type="tip">
+为所有用户使用 `.cn` 域简化了您的部署,并确保所有区域的一致更新行为。您不需要单独的构建或基于环境的配置。中国境外的小性能权衡通常值得简化的部署。
+</Aside>
+
+### 替代方案:区域特定配置
+
+如果您希望为每个区域进行不同的优化,您还可以考虑:
+
+- 使用不同配置构建单独的应用变体
+- 使用基于环境的配置动态设置 URL
+- 为不同区域创建不同的发布渠道
+
+如果您需要有关多区域部署策略的帮助,请通过 [support@capgo.app](mailto:support@capgo.app) 联系我们或加入我们的 [Discord 社区](https://discord.capgo.app)寻求帮助。
+
+## 故障排除
+
+如果您在中国遇到更新问题:
+
+1. **验证您的配置** - 仔细检查所有三个 URL 是否在您的 `capacitor.config.ts` 中正确设置
+2. **检查网络连接** - 确保您的设备可以访问 `updater.capgo.com.cn` 域
+3. **查看日志** - 使用 `npx @capgo/cli@latest app debug` 检查错误消息
+4. **测试更新** - 尝试上传新 bundle 并监控下载过程
+5. **联系支持** - 如果问题仍然存在,请通过 [support@capgo.app](mailto:support@capgo.app) 联系我们或加入我们的 [Discord 社区](https://discord.capgo.app)寻求帮助
+
+<Aside type="caution">
+确保使用 `.cn` 域(`updater.capgo.com.cn`)而不是为中国配置时的标准国际域。
+</Aside>
+
+## 后续步骤
+
+- 了解[更新行为](/docs/live-updates/update-behavior/)以自定义何时应用更新
+- 探索[渠道](/docs/live-updates/channels/)以管理不同的发布轨道
+- 查看[加密](/docs/live-updates/encryption/)以保护您的更新

@@ -1,0 +1,105 @@
+---
+title: Inizia
+description: Impara come installare e utilizzare il plugin Native Market per reindirizzare gli utenti a Google Play Store o Apple App Store dalla tua app Capacitor.
+locale: it
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilizzo
+
+Importa il plugin e usa i suoi metodi per reindirizzare gli utenti agli app store:
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+// Apri la scheda dell'app nello store
+const openAppStore = async () => {
+  await NativeMarket.openStoreListing({
+    appId: 'com.example.app' // Il bundle ID della tua app
+  });
+};
+
+// Richiedi una recensione dell'app
+const requestReview = async () => {
+  await NativeMarket.requestReview();
+};
+
+// Apri la ricerca nell'app store
+const searchInStore = async () => {
+  await NativeMarket.search({
+    terms: 'fitness app' // Termini di ricerca
+  });
+};
+```
+
+## Riferimento API
+
+### openStoreListing(options)
+
+Apre la scheda dell'app store per l'app specificata.
+
+```typescript
+interface OpenStoreListingOptions {
+  appId: string; // Bundle ID su iOS, nome pacchetto su Android
+}
+```
+
+### requestReview()
+
+Richiede una recensione in-app all'utente. Su iOS 10.3+, questo mostra il dialogo di valutazione senza uscire dall'app.
+
+### search(options)
+
+Apre l'app store con i risultati di ricerca.
+
+```typescript
+interface SearchOptions {
+  terms: string; // Termini di ricerca da utilizzare
+}
+```
+
+## Note sulla piattaforma
+
+### iOS
+- Usa `SKStoreReviewController` per recensioni in-app su iOS 10.3+
+- Torna all'apertura dell'App Store per versioni precedenti
+
+### Android
+- Apre Google Play Store
+- Usa l'API di recensione in-app quando disponibile
+
+## Esempio
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+import { Capacitor } from '@capacitor/core';
+
+export class AppService {
+  async rateApp() {
+    try {
+      // Prova prima la recensione in-app
+      await NativeMarket.requestReview();
+    } catch (error) {
+      // Fallback all'apertura della scheda dello store
+      const platform = Capacitor.getPlatform();
+      const appId = platform === 'ios'
+        ? 'id123456789' // Il tuo ID app iOS
+        : 'com.example.app'; // Il tuo nome pacchetto Android
+
+      await NativeMarket.openStoreListing({ appId });
+    }
+  }
+}

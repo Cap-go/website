@@ -1,0 +1,214 @@
+---
+title: Démarrage
+description: Apprenez à installer et configurer le plugin Capacitor Home Indicator pour contrôler l'indicateur d'accueil sur les appareils iOS.
+sidebar:
+  order: 2
+locale: fr
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer le package**
+   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser avec les projets natifs**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurer le plugin**
+
+   **Masquer l'indicateur d'accueil :**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Hide the home indicator
+   await HomeIndicator.hide();
+   ```
+
+   **Afficher l'indicateur d'accueil :**
+   ```typescript
+   // Show the home indicator
+   await HomeIndicator.show();
+
+   // Check visibility status
+   const { hidden } = await HomeIndicator.isHidden();
+   console.log('Is hidden:', hidden);
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Aucune configuration supplémentaire requise. Le plugin fonctionne uniquement sur les appareils iOS avec un indicateur d'accueil (iPhone X et ultérieur).
+     </TabItem>
+     <TabItem label="Android">
+       Ce plugin n'a aucun effet sur les appareils Android car ils n'ont pas d'indicateur d'accueil de type iOS.
+     </TabItem>
+   </Tabs>
+
+4. **Configuration du masquage automatique**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Configure auto-hide behavior
+   await HomeIndicator.setAutoHidden({
+     autoHidden: true // Enable auto-hide
+   });
+
+   // The home indicator will automatically hide after a few seconds
+   // and reappear when the user touches the screen
+   ```
+
+5. **Utilisation avancée**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+   import { App } from '@capacitor/app';
+
+   export class ImmersiveMode {
+     private isImmersive = false;
+
+     async enterImmersiveMode() {
+       this.isImmersive = true;
+
+       // Hide home indicator
+       await HomeIndicator.hide();
+
+       // Enable auto-hide for better UX
+       await HomeIndicator.setAutoHidden({ autoHidden: true });
+
+       // Hide status bar for full immersion
+       // StatusBar.hide(); // If using @capacitor/status-bar
+     }
+
+     async exitImmersiveMode() {
+       this.isImmersive = false;
+
+       // Show home indicator
+       await HomeIndicator.show();
+
+       // Disable auto-hide
+       await HomeIndicator.setAutoHidden({ autoHidden: false });
+
+       // Show status bar
+       // StatusBar.show(); // If using @capacitor/status-bar
+     }
+
+     async toggleImmersiveMode() {
+       const { hidden } = await HomeIndicator.isHidden();
+
+       if (hidden) {
+         await this.exitImmersiveMode();
+       } else {
+         await this.enterImmersiveMode();
+       }
+     }
+
+     setupAppLifecycle() {
+       // Handle app state changes
+       App.addListener('appStateChange', async ({ isActive }) => {
+         if (!isActive && this.isImmersive) {
+           // App went to background, might want to show indicator
+           await HomeIndicator.show();
+         } else if (isActive && this.isImmersive) {
+           // App came to foreground, restore immersive mode
+           await HomeIndicator.hide();
+         }
+       });
+     }
+   }
+   ```
+</Steps>
+
+## Référence API
+
+### Méthodes
+
+#### `hide()`
+Masque l'indicateur d'accueil.
+
+**Retourne:** `Promise<void>`
+
+#### `show()`
+Affiche l'indicateur d'accueil.
+
+**Retourne:** `Promise<void>`
+
+#### `isHidden()`
+Vérifie si l'indicateur d'accueil est actuellement masqué.
+
+**Retourne:** `Promise<{ hidden: boolean }>`
+
+#### `setAutoHidden(options: { autoHidden: boolean })`
+Configure le comportement de masquage automatique de l'indicateur d'accueil.
+
+**Paramètres:**
+- `options.autoHidden`: boolean - Activer ou désactiver le masquage automatique
+
+**Retourne:** `Promise<void>`
+
+### Interfaces
+
+```typescript
+interface AutoHiddenOptions {
+  autoHidden: boolean;
+}
+
+interface HiddenResult {
+  hidden: boolean;
+}
+```
+
+## Notes de plateforme
+
+### iOS
+- Fonctionne uniquement sur les appareils avec indicateur d'accueil (iPhone X et ultérieur)
+- Nécessite iOS 11.0 ou ultérieur
+- Le masquage automatique rend l'indicateur translucide et se masque après inactivité
+- L'indicateur réapparaît lorsque les utilisateurs glissent depuis le bas
+
+### Android
+- Ce plugin n'a aucun effet sur Android
+- Android utilise différents gestes/boutons de navigation
+
+## Cas d'utilisation courants
+
+1. **Jeux**: Jeu en plein écran sans distractions
+2. **Lecteurs vidéo**: Lecture vidéo immersive
+3. **Visionneuses de photos**: Galeries de photos en plein écran
+4. **Présentations**: Présentations sans distraction
+5. **Applications kiosque**: Applications d'affichage public
+
+## Bonnes pratiques
+
+1. **Contrôle utilisateur**: Fournissez toujours un moyen de sortir du mode immersif
+   ```typescript
+   // Add a gesture or button to toggle immersive mode
+   const toggleButton = document.getElementById('toggle-immersive');
+   toggleButton.addEventListener('click', () => {
+     immersiveMode.toggleImmersiveMode();
+   });
+   ```
+
+2. **Masquage automatique pour les jeux**: Utilisez le masquage automatique pour une meilleure expérience de jeu
+   ```typescript
+   // For games, auto-hide provides the best balance
+   await HomeIndicator.setAutoHidden({ autoHidden: true });
+   ```
+
+3. **Respectez les gestes système**: N'interférez pas avec la navigation système
+4. **Sauvegarder l'état**: Mémorisez la préférence de l'utilisateur pour le mode immersif
+
+## Dépannage
+
+**L'indicateur d'accueil ne se masque pas:**
+- Vérifiez que l'appareil a un indicateur d'accueil (iPhone X+)
+- Vérifiez que la version iOS est 11.0 ou supérieure
+- Assurez-vous que l'application a le focus
+
+**Le masquage automatique ne fonctionne pas:**
+- Le masquage automatique nécessite une interaction de l'utilisateur pour s'activer
+- L'indicateur devient translucide, pas complètement masqué
+
+**L'indicateur réapparaît de manière inattendue:**
+- C'est le comportement normal d'iOS pour les gestes système
+- Utilisez le masquage automatique pour un comportement moins intrusif

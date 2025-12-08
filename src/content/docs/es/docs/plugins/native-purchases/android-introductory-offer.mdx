@@ -1,0 +1,197 @@
+---
+title: Crear Oferta Introductoria de Suscripción en Android
+description: Aprende cómo crear ofertas introductorias para suscripciones renovables automáticas en Android para atraer nuevos suscriptores.
+locale: es
+sidebar:
+  order: 5
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Las ofertas introductorias te permiten proporcionar a usuarios elegibles un período de prueba gratuito o un precio introductorio con descuento. Después de que concluya el período introductorio, las suscripciones se renuevan automáticamente a precio estándar a menos que se cancelen.
+
+## Descripción General
+
+Las ofertas introductorias son una herramienta poderosa para:
+- Reducir barreras de entrada para nuevos suscriptores
+- Aumentar tasas de conversión
+- Permitir a los usuarios probar tus funciones premium sin riesgo
+- Construir relaciones de suscriptores a largo plazo
+
+## Elegibilidad
+
+Los usuarios pueden recibir una oferta introductoria si no han comprado previamente o recibido una oferta introductoria para la suscripción. Google Play maneja la elegibilidad automáticamente.
+
+## Requisitos Previos
+
+Primero debes [crear una suscripción renovable automática](/docs/plugins/native-purchases/android-create-subscription/) antes de agregar una oferta introductoria.
+
+## Crear una Oferta Introductoria
+
+<Steps>
+
+1. **Acceder a Configuración de Oferta**
+
+   Navega a tu suscripción en Google Play Console y selecciona el botón **Agregar oferta**.
+
+   ![Botón agregar oferta](/native-purchases/android/introductory-offer/add-offer-button.webp)
+
+2. **Seleccionar Plan Base**
+
+   Aparecerá un modal que requiere que elijas tu plan base. Típicamente, solo tendrás un plan base. Haz clic en **Agregar oferta** para continuar.
+
+   ![Seleccionar plan base](/native-purchases/android/introductory-offer/select-base-plan.webp)
+
+3. **Configurar Detalles de la Oferta**
+
+   Ingresa la siguiente información:
+
+   **ID de Oferta**: Un identificador único para esta oferta
+
+   **Elegibilidad**: Elige quién puede recibir esta oferta
+   - **Nuevos clientes**: Solo usuarios que nunca se han suscrito
+   - **Clientes existentes**: Usuarios que previamente se suscribieron
+   - **Determinado por desarrollador**: Lógica de elegibilidad personalizada (no soportada por native-purchases)
+
+   :::caution
+   El plugin native-purchases no soporta la opción de elegibilidad "Determinado por desarrollador". Usa "Nuevos clientes" o "Clientes existentes" en su lugar.
+   :::
+
+   ![Configurar oferta](/native-purchases/android/introductory-offer/configure-offer-details.webp)
+
+4. **Agregar Fases**
+
+   Haz clic en **Agregar fase** en la parte inferior de la página para definir la estructura de tu oferta.
+
+   Puedes agregar hasta dos fases, permitiendo combinaciones como:
+   - Solo prueba gratuita
+   - Solo precio con descuento
+   - Prueba gratuita seguida de pago recurrente con descuento
+
+5. **Seleccionar Tipo de Fase**
+
+   Elige entre tres tipos de fase:
+
+   **Prueba Gratuita**
+   - Acceso complementario por una duración establecida
+   - Ejemplo: 7 días gratis, luego $9.99/mes
+
+   **Pago Único**
+   - Precio con descuento de una sola vez por un período específico
+   - Ejemplo: $1.99 por 2 meses, luego $9.99/mes
+
+   **Pago Recurrente con Descuento**
+   - Tasa reducida por ciclo de facturación para múltiples ciclos
+   - Ejemplo: $4.99/mes por 3 meses, luego $9.99/mes
+
+6. **Configurar Duración de la Fase**
+
+   Establece cuánto durará la fase introductoria:
+   - Días, semanas o meses
+   - Número de ciclos de facturación
+
+7. **Finalizar y Activar**
+
+   Haz clic en **Aplicar**, luego **Guardar** para activar la oferta. El botón **Activar** estará disponible una vez guardado.
+
+</Steps>
+
+## Ejemplos de Fases de Oferta
+
+### Ejemplo 1: Prueba Gratuita Simple
+- Fase 1: 7 días gratis
+- Luego: $9.99/mes precio estándar
+
+### Ejemplo 2: Introducción con Descuento
+- Fase 1: $1.99 por el primer mes
+- Luego: $9.99/mes precio estándar
+
+### Ejemplo 3: Prueba Extendida + Descuento
+- Fase 1: 14 días gratis
+- Fase 2: $4.99/mes por 2 meses
+- Luego: $9.99/mes precio estándar
+
+## Usar en tu App
+
+El plugin native-purchases maneja automáticamente la elegibilidad y presentación de ofertas introductorias:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Obtener productos (incluye metadatos de oferta introductoria)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+
+if (product.introductoryPrice) {
+  console.log(`Precio intro: ${product.introductoryPriceString}`);
+  console.log(`Precio regular: ${product.priceString}`);
+  console.log(
+    `Duración de oferta: ${product.introductoryPrice.subscriptionPeriod?.numberOfUnits} ${product.introductoryPrice.subscriptionPeriod?.unit}`,
+  );
+} else {
+  console.log('No hay oferta introductoria configurada para este producto');
+}
+
+// Comprar (Google Play aplica precios introductorios automáticamente si el usuario es elegible)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // ID del Plan Base de Google Play Console
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Transacción de compra introductoria', transaction.transactionId);
+```
+
+## Mejores Prácticas
+
+### Duración de la Oferta
+- **Pruebas gratuitas**: 3-14 días es óptimo para la mayoría de las apps
+- **Períodos con descuento**: 1-3 meses funciona bien para construir hábito
+- **Descuento de precio**: 50-70% del precio regular impulsa conversiones
+
+### Marketing
+- Muestra claramente la oferta introductoria y el precio regular
+- Muestra qué sucede después del período introductorio
+- Haz que la cancelación sea fácil y transparente
+- Recuerda a los usuarios antes de que termine el período introductorio
+
+### Pruebas A/B
+Prueba diferentes estructuras de oferta:
+- Duración de prueba gratuita
+- Porcentaje de descuento
+- Duración del descuento
+- Fase única vs. multi-fase
+
+## Notas Importantes
+
+- Solo una oferta introductoria puede estar activa por suscripción a la vez
+- Los usuarios solo pueden reclamar una oferta introductoria una vez por suscripción
+- Las ofertas introductorias no se aplican a actualizaciones/cambios de suscripción
+- Los cambios a ofertas introductorias no afectan a suscriptores existentes
+
+## Solución de Problemas
+
+**La oferta introductoria no se muestra:**
+- Verifica que la oferta esté activada en Play Console
+- Verifica elegibilidad del usuario (puede haber usado la oferta antes)
+- Asegúrate de que la app esté usando la información más reciente del producto
+
+**Usuarios incorrectos recibiendo oferta:**
+- Revisa configuración de elegibilidad (nuevos vs. clientes existentes)
+- Verifica si el usuario se suscribió previamente en otro dispositivo
+- Verifica historial de cuenta de Play Store
+
+**La oferta no se aplica en la compra:**
+- Confirma que el ID de producto coincida exactamente
+- Verifica que la oferta aún esté activa y no haya expirado
+- Verifica configuración de rango de fechas para la oferta
+
+## Próximos Pasos
+
+- [Configurar pruebas en sandbox](/docs/plugins/native-purchases/android-sandbox-testing/) para probar tus ofertas
+- Monitorear tasas de conversión en analíticas de Play Console
+- Considera crear múltiples niveles de suscripción con diferentes ofertas

@@ -1,0 +1,129 @@
+---
+title: "Channels"
+description: "Channels are a way to manage your app's updates. Each channel can have one version. This allows you to have multiple versions of your app in production at the same time."
+sidebar:
+  order: 6
+---
+
+## How Capgo chooses a channel (precedence)
+
+When a device asks Capgo for an update, the channel it will use is decided in the following order (highest priority first):
+
+1. **Forced device mapping**: If the device ID is explicitly forced to a channel (see the *Forced devices* list inside the channel settings), that channel always wins.
+2. **Cloud override (created by `setChannel()` or Webapp action)**: Calling [`setChannel`](/docs/plugin/api/#setchannel) (or changing a device's channel in the dashboard) writes a persistent override in the cloud tied to that device ID. That override is consulted after forced mapping but before any defaults. Re‑installing the app does **not** clear it; deleting the device entry does.
+3. **Capacitor config `defaultChannel` (test build default)**: For internal / beta / test builds you can set `defaultChannel` (legacy key `channel`) in `capacitor.config.*` so test devices start on a pre-release channel (e.g. `beta`, `pr-123`). If absent, the device will proceed to the cloud default. Production builds usually leave this unset.
+4. **Cloud Default Channel (primary strategy for ~99% of users)**: The main production channel virtually all real users land on. Any new device without a force, without an override, and without a config `defaultChannel` uses this. Changing it rolls out (or rolls back) for everyone in seconds—no new binary.
+
+Why the **cloud default** is the main path:
+- Instant rollout or rollback without rebuilding or re‑publishing native binaries.
+- One place to manage both iOS & Android behavior.
+- Safer: you can confirm bundles exist and settings are correct before switching default.
+- Auditable changes (team members can see who changed what in the UI / logs).
+Design principle: Layers above (force / override / config) are *exceptions* (debug single user, QA switching, test build defaults). Normal users flow to the cloud default.
+
+Changing the *cloud default* channel affects *new* normal devices that:
+- Are not forced
+- Do not already have a cloud override
+- Do not have an app-level `defaultChannel` defined
+
+If a test build ships with `defaultChannel: 'beta'` and you later change the cloud default to `production`, devices that started on `beta` via the config stay there until you: (a) override them with `setChannel()`, (b) force them, or (c) delete the device entry.
+
+Devices stay on their current channel unless you:
+- Force them to another channel.
+- Call `setChannel()` (creating/replacing the cloud override) or change it manually in the dashboard.
+- Remove / archive the channel they are on (then they will fall back through the precedence again at next check).
+
+If a channel is disabled for a platform (see iOS / Android toggles) and would otherwise have been selected, the selection skips it and falls back to the next rule.
+
+> Note: Setting `defaultChannel` means changing it requires a new binary; use it intentionally for test/QA, not for general production control.
+
+### Capacitor config example
+
+```ts
+// capacitor.config.ts
+// Example: a TestFlight or internal QA build defaults to the beta channel.
+const config = {
+  plugins: {
+    Capgo: {
+      defaultChannel: 'beta', // Test build default. Omit in production so users attach to cloud default.
+      // legacy key: channel
+    },
+  },
+};
+export default config;
+```
+
+If you later change the dashboard default to `production`, devices already on another channel (via config, override, or force) will NOT move automatically; only fresh devices (or those whose override/force you clear) pick it up.
+
+---
+
+## Managing channels
+
+First, let's take a look at the channels page. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the channels tab](/docs/webapp/main-app-page).
+
+
+<figure><img src="/channels.webp" alt="channel list" /><figcaption></figcaption></figure>
+
+## Creating a channel
+
+As you can see, there exists a plus button in the lower right corner. (`1` in the image) Clicking on it will open a modal where you can create a new channel.
+<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modal.webp" alt="new channel" /><figcaption></figcaption></figure>
+
+Then after you click on `Add` a new channel should appear in the list.
+<figure><img src="/post-channel-create.webp" alt="after channel create" /><figcaption></figcaption></figure>
+
+## What does misconfigured mean?
+Sometimes the configuration of a channel is not valid. In that case, you will get a big warning and the `Misconfigured` column will say `Yes` for one or more of the channels.
+You can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+
+## Deleting a channel
+
+Deleting a channel is straight forward. Just click on the trash icon and confirm the deletion. (`2` in the image)
+
+## Managing a channel
+
+Clicking on the channel name will open a modal where you can manage the channel. (`3` in the image)
+This page should look something like this:
+
+<figure><img src="/manage_channel_main.webp" alt="manage channel" /><figcaption></figcaption></figure>
+
+Let's go through the different sections.
+
+First the `Bundle number` (`1` in the image). This is the current version for that channel. When asked to serve an update this channel will always attempt to respond with that version.* [^1]
+Clicking on it should take you to the [bundle](/docs/webapp/bundles/) page.
+
+Second the `Shared to` (`2` in the image) page. I recommend against ever using this. A new and better system is in the works.
+
+Now the forced devices (`3` in the image). This is a list of devices that will always get updates from this channel. This is useful for testing purposes. You can add force a device to a channel from the [devices](/docs/webapp/devices/) page.
+
+Lastly the settings (`4` in the image). This is where you can manage how the channels behave.
+After you click on it you should see something like this:
+
+<figure><img src="/channel_settings.webp" alt="setting of channel" /><figcaption></figcaption></figure>
+
+The list of settings is long, but I will do my best to explain them all.
+
+---
+First the `Default channel` **THIS IS PROBABLY THE MOST IMPORTANT ONE**.\
+If a channel is marked as default, then it will be used as the default channel for all new devices.\
+In different terms: If you have a new user Capgo will try to serve them the latest version of this default channel (unless the device is forced or has an override as described above).
+Only 1 channel can be set to default at a time. If you try to break this rule you will be asked to confirm your action.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/confirm-make-default.webp" alt="confirm make change" /><figcaption></figcaption></figure>
+
+After you confirm the old default channel will be unmarked as default and the new one will be marked as default.
+
+---
+Second the `IOS` setting. This is relatively simple. If this is false then IOS devices will not be allowed to download updates from this channel.
+
+Third is the `Android` setting. This is similar to `IOS`. If this is false then Android devices will not be allowed to download updates from this channel.
+
+Fourth is the `Disable auto downgrade under native` setting. If this is true then it will be impossible to downgrade from a native version. This means that if you have uploaded a `1.2.0` version to the app store or play store and try to set the channel version to `1.1.0` then the update (downgrade) will fail.
+
+Fifth is the `Disable auto update`. This setting is quite complex, and you can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+
+As for `Allow development build`. If this is true then development builds will be allowed to download updates from this channel. If not then any update request that has the `prod` set to false will be rejected. This is mostly useful for testing purposes.
+
+Seventh is the `Allow Emulators`. If this is false then Capgo will disallow any update request that comes from an emulator. This is mostly useful for testing purposes.
+
+Eight is the `Allow devices to self associate`. If this is true then the [setChannel](/docs/plugin/api/#setchannel) method will be available. If this is set to false and you try to call the [setChannel](/docs/plugin/api/#setchannel) method with this channel then the call will fail.

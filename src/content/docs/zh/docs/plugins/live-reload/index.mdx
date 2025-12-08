@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-live-reload"
+description: 从远程开发服务器实时重载 Capacitor 应用，加快开发速度。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 将 Capacitor 应用连接到本地开发服务器，实现即时热重载，加快开发迭代速度。
+  image:
+    file: ~public/icons/plugins/live-reload.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/live-reload/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-live-reload/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="热模块替换" icon="rocket">
+    无需重新构建应用即可即时更新
+  </Card>
+  <Card title="远程开发服务器" icon="laptop">
+    连接到 Vite 或任何兼容的开发服务器
+  </Card>
+  <Card title="WebSocket 连接" icon="puzzle">
+    实时通信以实现实时更新
+  </Card>
+  <Card title="完善的文档" icon="open-book">
+    查看[文档](/docs/plugins/live-reload/getting-started/)设置实时重载。
+  </Card>
+</CardGrid>

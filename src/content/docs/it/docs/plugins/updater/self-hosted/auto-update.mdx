@@ -1,0 +1,109 @@
+---
+title: "Auto Update"
+locale: it
+description: "Come utilizzare l'endpoint di aggiornamento di Capgo con il plugin auto-update in modalità self-hosted, a cosa servono e cosa aspettarsi"
+sidebar:
+  order: 4
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Questa documentazione spiegherà come eseguire il tuo server di auto-aggiornamento.
+
+## Servire il tuo bundle
+Assicurati che il tuo bundle sia servito tramite HTTPS, e che il server abbia gli header CORS corretti per permettere all'app di scaricare l'aggiornamento.
+es. ```https://myserver.com/app/updates/updates.json```
+
+
+Se non hai familiarità con come servire un bundle, ti consigliamo di provare Capgo Cloud o vedere un esempio qui:
+<LinkCard
+	title="Servire un Bundle"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## Configurazione
+Aggiungi un ``updateUrl`` al tuo ``capacitor.config.json``.
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myserver.com/app/updates/updates.json",
+		}
+	}
+}
+```
+:::caution
+Quando invii un aggiornamento self-hosted, fai attenzione che non puoi utilizzare un endpoint "HTTP" poiché è contro le politiche di sicurezza delle app Android, per scopi di test puoi [permetterlo](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted).
+:::
+
+## API di Aggiornamento
+
+Il plugin effettuerà una chiamata POST alla tua API ogni volta che l'app viene aperta, con questo body:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSTEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+L'API del server dovrebbe rispondere, in JSON, al plugin capacitor-updater. Con questi dati se è necessario un aggiornamento:
+
+```json
+{
+"version": "1.2.3",
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
+"checksum": "sha256_checksum_of_bundle"
+}
+```
+
+In modalità Auto-update il server dovrebbe confrontare le versioni e restituire quella giusta, se la chiave URL è presente, il plugin avvia il processo di download.
+
+Se aggiungi le chiavi "message" ed "error", la versione non verrà impostata e il messaggio verrà visualizzato nei log invece.
+
+La chiave `version` dovrebbe essere in formato [`semver`](https://semver.org/).
+
+Lo zip dovrebbe avere `index.html` come file nella root, o solo una cartella nella root con `index.html` al suo interno.
+
+
+Puoi usare il comando della CLI per zippare il tuo bundle:
+
+```bash title="Crea un bundle con i tuoi file da servire dal tuo server"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```
+
+## Generazione del Checksum del Bundle
+
+**Importante:** Devi usare la CLI Capgo per creare il tuo file zip del bundle. Il plugin Capgo richiede un formato e una struttura zip specifici che sono garantiti solo quando si utilizza lo strumento CLI ufficiale. Le utility zip standard potrebbero creare archivi incompatibili.
+
+Per generare il checksum per il tuo bundle, usa il comando zip della CLI Capgo con il flag `--json`:
+
+```bash title="Crea bundle con informazioni checksum"
+npx @capgo/cli bundle zip [appId] --json
+```
+
+Questo comando:
+- Creerà un file zip formattato correttamente compatibile con il plugin Capgo
+- Genererà il checksum SHA256 per la verifica dell'integrità
+- Produrrà informazioni sul bundle in formato JSON
+
+Esempio di output:
+```json
+{
+  "version": "1.2.3",
+  "checksum": "a1b2c3d4e5f6789...",
+  "size": 1234567
+}
+```
+
+Usa il valore `checksum` da questo output nella risposta della tua API per assicurarti che il plugin possa verificare l'integrità del bundle prima dell'installazione.

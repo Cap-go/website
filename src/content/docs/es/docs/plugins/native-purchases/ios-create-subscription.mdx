@@ -1,0 +1,312 @@
+---
+title: Crear Suscripción Renovable Automáticamente en iOS
+locale: es
+description: Guía paso a paso para crear suscripciones renovables automáticamente en App Store Connect para el plugin native-purchases.
+sidebar:
+  order: 8
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Las suscripciones renovables automáticamente proporcionan acceso recurrente a contenido, servicios o funciones premium en tu aplicación iOS. Esta guía te lleva a través de la creación de suscripciones en App Store Connect.
+
+## Descripción general
+
+Las suscripciones renovables automáticamente se renuevan automáticamente al final de cada período de facturación hasta que los usuarios cancelen. Son perfectas para:
+- Contenido y funciones premium
+- Experiencias sin anuncios
+- Almacenamiento y sincronización en la nube
+- Servicios de streaming
+- Herramientas y utilidades profesionales
+
+## Requisitos previos
+
+Antes de crear suscripciones, debes:
+1. [Crear un grupo de suscripción](/docs/plugins/native-purchases/ios-subscription-group/) para organizar tus suscripciones
+2. Tener una membresía activa del Apple Developer Program
+3. Completar la información bancaria y fiscal en App Store Connect
+
+## Crear una suscripción
+
+<Steps>
+
+1. **Navegar a Suscripciones**
+
+   En App Store Connect, selecciona tu aplicación y ve a **Monetize > Subscriptions**.
+
+   Selecciona tu grupo de suscripción o crea uno nuevo si es necesario.
+
+   ![Navegar a suscripciones](/native-purchases/ios/create-subscription/navigate-to-subscriptions.webp)
+
+2. **Crear Nueva Suscripción**
+
+   Haz clic en el icono **+** junto a tu grupo de suscripción para agregar una nueva suscripción.
+
+3. **Ingresar Información Básica**
+
+   **Reference Name**: Nombre descriptivo para tu uso interno (no se muestra a los clientes)
+   - Ejemplos: "Premium Monthly", "Ultimate Annual", "Basic Plan"
+
+   **Product ID**: Identificador único para esta suscripción (no se puede cambiar después)
+   - Formato: `com.yourcompany.yourapp.premium_monthly`
+   - Usa nombres descriptivos en minúsculas con guiones bajos
+   - Requerido para configurar el plugin native-purchases
+
+   ![Ingresar detalles de suscripción](/native-purchases/ios/create-subscription/enter-subscription-info.webp)
+
+4. **Configurar Duración**
+
+   Selecciona la duración de la suscripción de las opciones disponibles:
+   - 1 semana
+   - 1 mes
+   - 2 meses
+   - 3 meses
+   - 6 meses
+   - 1 año
+
+   La duración determina con qué frecuencia se factura a los usuarios.
+
+5. **Configurar Precios**
+
+   Haz clic en **Add Subscription Price** para configurar los precios:
+
+   **Base Territory**: Selecciona tu mercado principal (generalmente tu país)
+
+   **Price**: Establece el precio de la suscripción
+   - Apple convierte automáticamente a otras monedas
+   - Elige de los niveles de precio de Apple
+   - Considera el valor percibido y las tarifas del mercado
+
+   ![Configurar precios](/native-purchases/ios/create-subscription/configure-pricing.webp)
+
+6. **Family Sharing (Opcional)**
+
+   Decide si habilitar Family Sharing, que permite hasta 6 miembros de la familia acceder a la suscripción.
+
+   :::caution
+   Una vez que Family Sharing está habilitado, no se puede desactivar para este producto.
+   :::
+
+   **Habilitar si:**
+   - El contenido es apropiado para uso familiar
+   - Quieres aumentar la propuesta de valor
+   - Tu modelo de negocio lo soporta
+
+   **No habilitar si:**
+   - La suscripción es solo para uso individual
+   - El contenido está personalizado para el usuario
+   - Quieres maximizar los ingresos por usuario
+
+7. **Agregar Localizaciones**
+
+   Agrega información de visualización de la suscripción en todos los idiomas que tu aplicación soporta:
+
+   **Subscription Display Name**: Nombre de cara al cliente (ej., "Premium Mensual")
+
+   **Description**: Breve descripción de lo que incluye la suscripción
+   - Manténlo conciso y enfocado en beneficios
+   - Menciona características clave
+   - Resalta la propuesta de valor
+
+   ![Agregar localizaciones](/native-purchases/ios/create-subscription/add-localization.webp)
+
+8. **Imagen Promocional de App Store (Opcional)**
+
+   Sube una imagen promocional para esta suscripción (312x390 píxeles):
+   - Se muestra en la página de suscripción de App Store
+   - Debe coincidir con el diseño de tu aplicación
+   - Incluye el nombre de la suscripción para mayor claridad
+
+   :::note
+   Aunque las imágenes son opcionales para el envío inicial, son requeridas para la visualización promocional en App Store. Puedes agregarlas más tarde.
+   :::
+
+9. **Guardar y Enviar**
+
+   Haz clic en **Save** para crear la suscripción.
+
+   **Para la Primera Suscripción:**
+   - Debe enviarse con una nueva versión de la aplicación
+   - Incluir en tu próximo envío a App Store
+   - No se puede enviar de forma independiente
+
+   **Para Suscripciones Subsiguientes:**
+   - Se pueden enviar directamente desde la página de Suscripciones
+   - No requieren una nueva versión de la aplicación
+   - Disponibles después de que se apruebe la primera suscripción
+
+</Steps>
+
+## Estado de la Suscripción
+
+Tu suscripción tendrá uno de estos estados:
+
+| Estado | Descripción | ¿Se puede probar? |
+|--------|-------------|-----------|
+| **Missing Metadata** | Configuración incompleta | Sí (sandbox) |
+| **Ready to Submit** | Completa pero no enviada | Sí (sandbox) |
+| **Waiting for Review** | Enviada a Apple | Sí (sandbox) |
+| **In Review** | Siendo revisada por Apple | Sí (sandbox) |
+| **Approved** | Disponible para compra | Sí |
+| **Rejected** | Necesita cambios | Sí (sandbox) |
+
+:::tip
+¡Puedes probar suscripciones en modo sandbox incluso si muestran "Missing Metadata" o "Ready to Submit"!
+:::
+
+## Usar en tu Aplicación
+
+Una vez creada, referencia la suscripción en tu aplicación usando el product ID:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Obtener productos de suscripción directamente desde StoreKit
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: [
+    'com.yourcompany.yourapp.premium_monthly',
+    'com.yourcompany.yourapp.premium_annual',
+  ],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+products.forEach((product) => {
+  console.log(`${product.title}: ${product.priceString}`);
+  console.log(`Duration: ${product.subscriptionPeriod}`);
+  console.log(`Description: ${product.description}`);
+});
+
+// Comprar una suscripción (StoreKit 2 maneja automáticamente precios introductorios y ofertas)
+try {
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.yourcompany.yourapp.premium_monthly',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Transaction ID:', transaction.transactionId);
+
+  // Los recibos de StoreKit se incluyen en iOS para validación del lado del servidor
+  await sendReceiptToBackend(transaction.receipt);
+} catch (error) {
+  console.error('Purchase failed:', error);
+}
+
+// Verificar el estado de la suscripción usando los datos de la tienda
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const premium = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.yourcompany.yourapp.premium_monthly',
+);
+
+if (premium?.isActive) {
+  console.log('Expires:', premium.expirationDate);
+  console.log('Will renew:', premium.willCancel === false);
+  console.log('Store state:', premium.subscriptionState);
+  unlockPremiumFeatures();
+} else {
+  showPaywall();
+}
+```
+
+## Mejores Prácticas
+
+### Estrategia de Precios
+- **Planes mensuales**: Menor barrera de entrada, construye hábito
+- **Planes anuales**: Mejor valor, mayor LTV, menor abandono
+- **Múltiples niveles**: Básico, Premium, Ultimate para diferentes segmentos de usuarios
+- **Análisis competitivo**: Investiga los precios de aplicaciones similares
+
+### Product IDs
+- Usa nombres consistentes: `company.app.tier_duration`
+- Incluye nivel y duración en el ID: `premium_monthly`, `ultimate_annual`
+- Evita cambiar los product IDs (son permanentes)
+- Documenta todos los product IDs para tu equipo
+
+### Family Sharing
+- Habilita para aplicaciones orientadas a familias (juegos, educativas, entretenimiento)
+- Considera el impacto en los ingresos
+- Prueba el comportamiento de compartir exhaustivamente
+- Comunica la capacidad de compartir en el marketing
+
+### Localización
+- Traduce todos los nombres y descripciones de suscripciones
+- Considera las diferencias de precios regionales
+- Prueba la visualización en todos los idiomas soportados
+- Usa un lenguaje de marketing culturalmente apropiado
+
+### Imágenes Promocionales
+- Mantén un estilo visual consistente
+- Incluye el nombre de la suscripción y el beneficio clave
+- Actualiza para promociones estacionales
+- Coincide con el lenguaje de diseño general de la aplicación
+
+## Patrones Comunes de Suscripción
+
+### Nivel Único (Freemium)
+```
+Aplicación Gratuita + Suscripción Premium
+- Básico: Gratuito (funciones limitadas)
+- Premium Mensual: $4.99
+- Premium Anual: $39.99 (ahorra 33%)
+```
+
+### Multi-Nivel (Bueno, Mejor, Excelente)
+```
+- Básico Mensual: $4.99
+- Premium Mensual: $9.99
+- Ultimate Mensual: $19.99
+
+- Básico Anual: $49.99
+- Premium Anual: $99.99
+- Ultimate Anual: $199.99
+```
+
+### Híbrido Consumible + Suscripción
+```
+- Paquetes de créditos (consumible)
+- Suscripción mensual (créditos ilimitados)
+- Suscripción anual (ilimitado + funciones adicionales)
+```
+
+## Solución de Problemas
+
+**Suscripción no se carga en la aplicación:**
+- Verifica que el product ID coincida exactamente (sensible a mayúsculas)
+- Verifica que la suscripción esté en el grupo de suscripción
+- Asegúrate de que el bundle identifier coincida con App Store Connect
+- Espera 2-3 horas después de crear el producto
+
+**No se puede enviar la suscripción:**
+- Completa todos los campos requeridos (nombre, descripción, precio)
+- Agrega al menos una localización
+- Verifica que la información bancaria/fiscal esté aprobada
+- Verifica si es la primera suscripción (requiere versión de aplicación)
+
+**Interruptor de Family Sharing deshabilitado:**
+- Ya está habilitado (no se puede deshabilitar)
+- Verifica en los detalles de la suscripción
+- Contacta a Apple Support si está atascado
+
+**Nivel de precio no disponible:**
+- Puede estar restringido en algunos territorios
+- Elige un nivel alternativo
+- Contacta a Apple para preguntas sobre precios
+
+**Error "Invalid Product ID":**
+- Debe estar en formato de dominio inverso
+- No puede contener espacios o caracteres especiales
+- Verifica errores tipográficos
+- Verifica la unicidad en todos los productos
+
+## Próximos Pasos
+
+- [Crear una oferta introductoria](/docs/plugins/native-purchases/ios-introductory-offer/) para atraer nuevos suscriptores
+- [Configurar pruebas en sandbox](/docs/plugins/native-purchases/ios-sandbox-testing/) para probar tus suscripciones
+- Configurar ofertas promocionales para recuperación y retención
+- Implementar seguimiento de análisis de suscripción
+
+## Recursos Adicionales
+
+Para más detalles, consulta la [documentación oficial de Apple sobre suscripciones renovables automáticamente](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers).

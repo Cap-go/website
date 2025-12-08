@@ -1,0 +1,291 @@
+---
+title: "デバイス"
+locale: ja
+description: "Capgo APIを介したデバイス管理のドキュメント。アプリインストールの追跡、バージョン管理、チャネル割り当てをカバーしています。"
+sidebar:
+  order: 7
+---
+
+デバイスは、Capgoによって管理されるアプリの個別インストールを表します。Devices APIを使用すると、バージョン、チャネル、更新ステータスを含むデバイスを追跡および管理できます。
+
+:::note[データ保持期間]
+デバイスデータは、最後のデバイスアクティビティから**90日間**保持されます。この期間内にCapgoに接続していないデバイスは、システムから自動的に削除されます。アクティブなデバイスは、更新をチェックする際に継続的に追跡されます。
+:::
+
+## デバイスの理解
+
+各デバイスには固有の特性と状態があります:
+- **プラットフォーム**: iOSまたはAndroid
+- **バージョン**: 現在のバンドルバージョンとネイティブビルドバージョン
+- **環境**: 本番環境または開発環境、エミュレータまたは物理デバイス
+- **チャネル**: 現在の更新チャネルの割り当て
+- **カスタムID**: 独自の追跡目的のためのオプション識別子
+
+## ベストプラクティス
+
+1. **バージョン追跡**: 更新の採用を確認するためにデバイスバージョンを監視する
+2. **チャネル管理**: テストニーズに基づいてデバイスを適切なチャネルに割り当てる
+3. **環境認識**: 異なる環境(本番/開発/エミュレータ)を適切に処理する
+4. **カスタム識別**: 既存のシステムと統合するためにカスタムIDを使用する
+
+## エンドポイント
+
+### POST
+
+`https://api.capgo.app/device/`
+
+デバイスを特定のバージョンまたはチャネルにリンクします。
+
+#### リクエストボディ
+
+```typescript
+interface DeviceLink {
+  app_id: string
+  device_id: string
+  version_id?: string // version name
+  channel?: string    // channel name
+}
+```
+
+#### リクエスト例
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "device_id": "device_456",
+    "channel": "beta"
+  }' \
+  https://api.capgo.app/device/
+```
+
+#### 成功レスポンス
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### GET
+
+`https://api.capgo.app/device/`
+
+デバイス情報を取得します。大規模なデバイスリストを効率的に取得するために、カーソルベースのページネーションを使用します。
+
+#### クエリパラメータ
+- `app_id`: 必須。アプリのID
+- `device_id`: オプション。単一のデバイスを取得するための特定のデバイスID
+- `cursor`: オプション。ページネーション用の前のレスポンスからのカーソル
+- `limit`: オプション。ページあたりのデバイス数(デフォルト: 50)
+
+#### リクエスト例
+
+```bash
+# Get all devices (first page)
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=app_123"
+
+# Get specific device
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=app_123&device_id=device_456"
+
+# Get next page using cursor
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/device/?app_id=app_123&cursor=2024-01-01T00:00:00Z|device_456"
+```
+
+#### レスポンスタイプ(リスト)
+
+複数のデバイスをリクエストする場合(`device_id`パラメータなし):
+
+```typescript
+interface DeviceListResponse {
+  data: Device[];
+  nextCursor?: string;  // Pass this as 'cursor' param to get next page
+  hasMore: boolean;     // true if more pages available
+}
+
+interface Device {
+  updated_at: string;
+  device_id: string;
+  custom_id: string;
+  version?: number;
+  version_name: string | null;
+  channel?: string;
+  app_id: string;
+  platform: "ios" | "android";
+  plugin_version: string;
+  os_version: string;
+  version_build: string;
+  is_prod: boolean;
+  is_emulator: boolean;
+}
+```
+
+#### レスポンスタイプ(単一デバイス)
+
+`device_id`パラメータで特定のデバイスをリクエストする場合、デバイスオブジェクトを直接返します:
+
+```typescript
+interface Device {
+  updated_at: string;
+  device_id: string;
+  custom_id: string;
+  version?: number;
+  version_name: string | null;
+  channel?: string;
+  app_id: string;
+  platform: "ios" | "android";
+  plugin_version: string;
+  os_version: string;
+  version_build: string;
+  is_prod: boolean;
+  is_emulator: boolean;
+}
+```
+
+#### レスポンス例(リスト)
+
+```json
+{
+  "data": [
+    {
+      "device_id": "device_456",
+      "custom_id": "test-device-1",
+      "version": 1,
+      "version_name": "1.0.0",
+      "app_id": "app_123",
+      "platform": "ios",
+      "plugin_version": "5.0.0",
+      "os_version": "17.0",
+      "version_build": "1",
+      "is_prod": true,
+      "is_emulator": false,
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "nextCursor": "2024-01-01T00:00:00Z|device_456",
+  "hasMore": true
+}
+```
+
+#### レスポンス例(単一デバイス)
+
+```json
+{
+  "device_id": "device_456",
+  "custom_id": "test-device-1",
+  "version": 1,
+  "version_name": "1.0.0",
+  "app_id": "app_123",
+  "platform": "ios",
+  "plugin_version": "5.0.0",
+  "os_version": "17.0",
+  "version_build": "1",
+  "is_prod": true,
+  "is_emulator": false,
+  "updated_at": "2024-01-01T00:00:00Z",
+  "channel": "production"
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/device/`
+
+デバイスをチャネルとバージョンオーバーライドからリンク解除します。これにより、デバイスはデフォルトチャネルを使用するようにリセットされます。
+
+#### クエリパラメータ
+
+```typescript
+interface Device {
+  device_id: string
+  app_id: string
+}
+```
+
+#### リクエスト例
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "device_id": "device_456"
+  }' \
+  https://api.capgo.app/device/
+```
+
+#### 成功レスポンス
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## エラーハンドリング
+
+一般的なエラーシナリオとそのレスポンス:
+
+```json
+// Device not found
+{
+  "error": "Device not found",
+  "status": "KO"
+}
+
+// Invalid version
+{
+  "error": "Version not found",
+  "status": "KO"
+}
+
+// Invalid channel
+{
+  "error": "Channel not found",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage devices",
+  "status": "KO"
+}
+```
+
+## 一般的なユースケース
+
+1. **ベータデバイスの登録**
+```typescript
+{
+  "app_id": "app_123",
+  "device_id": "device_456",
+  "channel": "beta"
+}
+```
+
+2. **バージョンオーバーライド**
+```typescript
+{
+  "app_id": "app_123",
+  "device_id": "device_456",
+  "version_id": "1.1.0"
+}
+```
+
+3. **デフォルトチャネルへのリセット**
+```typescript
+// DELETEエンドポイントを使用してオーバーライドを削除
+```
+
+## デバイス管理のヒント
+
+1. **監視**: デバイスのステータスとバージョン分布を定期的に確認する
+2. **テスト**: テストデバイスを簡単に識別するためにカスタムIDを使用する
+3. **トラブルシューティング**: デバイスの更新とチャネル割り当てを追跡する
+4. **バージョン管理**: 互換性を確保するためにネイティブアプリのバージョンを監視する 

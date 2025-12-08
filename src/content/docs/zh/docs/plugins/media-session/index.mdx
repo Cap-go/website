@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-media-session"
+description: 直接从 Capacitor 控制锁屏、通知和耳机媒体控件。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 发布曲目元数据，响应播放/暂停事件，并将播放状态与原生媒体控件同步。
+  image:
+    file: ~public/icons/plugins/media-session.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/media-session/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-media-session/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Media Session 插件将 Capacitor 与 Media Session API 桥接，使您的音频和视频播放器在任何地方都感觉原生。
+
+<CardGrid stagger>
+  <Card title="丰富的元数据" icon="star">
+    为锁屏和通知控件提供专辑封面、艺术家和标题。
+  </Card>
+  <Card title="播放状态同步" icon="rocket">
+    保持播放/暂停按钮和进度指示器与您的播放器对齐。
+  </Card>
+  <Card title="操作回调" icon="pencil">
+    从 Capacitor 代码处理耳机按钮和操作系统媒体操作。
+  </Card>
+  <Card title="位置报告" icon="download">
+    推送持续时间、位置和速率，以便流畅地进行滑动。
+  </Card>
+</CardGrid>
+
+跳转到入门指南，将元数据更新集成到播放器生命周期中。

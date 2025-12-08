@@ -1,0 +1,59 @@
+---
+title: "@capgo/native-purchases"
+locale: ko
+description: iOS와 Android 플랫폼에서 원활하게 작동하는 통합 API로 인앱 구매 및 구독을 처리하는 Capacitor 플러그인입니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: iOS 및 Android 플랫폼에서 원활하게 작동하는 통합 API로 인앱 구매 및 구독을 간소화하세요.
+  image:
+    file: ~public/icons/plugins/native-purchases.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/native-purchases/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/native-purchases/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="통합 API" icon="rocket">
+    iOS 및 Android 구매를 위한 단일 API
+  </Card>
+  <Card title="구독 관리" icon="setting">
+    자동 갱신이 있는 구독 처리
+  </Card>
+  <Card title="영수증 검증" icon="approve-check">
+    보안을 위한 내장 영수증 검증
+  </Card>
+  <Card title="시작하기" icon="open-book">
+    플러그인을 설치하고 구성하려면 [시작 가이드](/docs/plugins/native-purchases/getting-started/)를 확인하세요.
+  </Card>
+</CardGrid>
+
+## 플랫폼 설정 가이드
+
+<CardGrid>
+  <Card title="Android 설정" icon="setting">
+    Android에서 인앱 구매 설정을 위한 완전한 가이드:
+    - [샌드박스 테스트 구성](/docs/plugins/native-purchases/android-sandbox-testing/)
+    - [구독 생성](/docs/plugins/native-purchases/android-create-subscription/)
+    - [소개 혜택](/docs/plugins/native-purchases/android-introductory-offer/)
+  </Card>
+  <Card title="iOS 설정" icon="star">
+    iOS에서 인앱 구매 설정을 위한 완전한 가이드:
+    - [샌드박스 테스트 구성](/docs/plugins/native-purchases/ios-sandbox-testing/)
+    - [구독 그룹](/docs/plugins/native-purchases/ios-subscription-group/)
+    - [구독 생성](/docs/plugins/native-purchases/ios-create-subscription/)
+    - [소개 혜택](/docs/plugins/native-purchases/ios-introductory-offer/)
+  </Card>
+</CardGrid>

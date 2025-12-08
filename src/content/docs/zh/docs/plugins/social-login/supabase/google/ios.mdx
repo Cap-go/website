@@ -1,0 +1,95 @@
+---
+title: Supabase Google Login on iOS
+locale: zh
+description: 了解如何在 iOS 上使用 Capacitor Social Login 插件设置 Google 登录与 Supabase 身份验证。
+sidebar:
+    order: 3
+---
+
+## 简介
+
+本指南将帮助您在 iOS 上集成 Google 登录与 Supabase 身份验证。假设您已经完成：
+ -  [Google Login iOS 设置](/docs/plugins/social-login/google/ios/)
+ -  [Supabase Google Login - 通用设置](/docs/plugins/social-login/supabase/google/general/)
+
+## 实现
+
+完整的实现可在[示例应用的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。本指南解释了关键概念以及如何使用它。
+
+### 使用身份验证助手
+
+`authenticateWithGoogleSupabase` 函数处理整个身份验证流程：
+
+```typescript
+import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithGoogleSupabase();
+if (result.success) {
+  console.log('Signed in:', result.user);
+  // Navigate to your authenticated area
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## 工作原理
+
+有关身份验证流程如何工作的详细说明，包括 nonce 生成、JWT 验证和 Supabase 登录，请参阅[通用设置指南中的工作原理部分](/docs/plugins/social-login/supabase/google/general/#how-it-works)。
+
+## 重要注意事项
+
+### iOS 令牌缓存和 Nonce 问题
+
+:::warning[iOS Nonce 缓存问题]
+在 iOS 上，Google 登录可能会缓存令牌，这可能导致 nonce 验证失败。`validateJWTToken` 函数会检测并自动处理此问题：
+
+1. **自动检测**：该函数检查令牌中的 nonce 是否与预期的 `nonceDigest` 匹配
+2. **自动重试**：如果验证失败，它会自动从 Google 注销并重试一次
+3. **错误处理**：如果重试也失败，则返回错误
+
+**发生原因**：iOS Google Sign-In SDK 为提高性能会缓存令牌。当返回缓存的令牌时，它可能是使用不同的 nonce（或没有 nonce）生成的，从而导致不匹配。
+
+**解决方案**：该实现通过注销并重试来自动处理此问题，这会强制 Google 使用正确的 nonce 生成新令牌。
+:::
+
+**手动解决方法**（如果自动重试不起作用）：
+
+```typescript
+// Logout first to clear cached tokens
+await SocialLogin.logout({ provider: 'google' });
+
+// Then authenticate
+const result = await authenticateWithGoogleSupabase();
+```
+
+这可确保使用正确的 nonce 获取新令牌。
+
+有关完整的代码参考，请参阅[通用设置指南中的完整代码参考部分](/docs/plugins/social-login/supabase/google/general/#complete-code-reference)。
+
+## 重要说明
+
+### Nonce 处理
+
+nonce 实现遵循 [React Native Google Sign In 文档](https://react-native-google-signin.github.io/docs/security#usage-with-supabase)中的模式：
+
+- `rawNonce` 传递给 Supabase 的 `signInWithIdToken()`
+- Supabase 对 `rawNonce` 进行哈希处理，并将其与 Google Sign-In ID 令牌中包含的 `nonceDigest` 进行比较
+- `nonceDigest`（SHA-256 哈希，十六进制编码）传递给 Google Sign-In API 中的 `nonce` 参数
+
+### 自动重试机制
+
+`authenticateWithGoogleSupabase` 函数包含一个 `retry` 参数：
+- 第一次调用（`retry=false`）：如果验证失败，自动注销并重试一次
+- 重试调用（`retry=true`）：如果验证再次失败，立即返回错误
+
+这会自动处理 iOS 令牌缓存问题。
+
+## 故障排除
+
+如果身份验证失败：
+
+- **Nonce 不匹配**：该函数会自动重试 - 检查控制台日志以获取详细信息。如果问题仍然存在，请先手动注销
+- **无效的 audience**：验证您的 Google 客户端 ID 在 Google Cloud Console 和 Supabase 中是否匹配（iOS 和 Web 客户端 ID）
+- **令牌验证失败**：确保在 initialize 调用中使用 `mode: 'online'` 以获取 idToken
+- **Info.plist 配置**：确保 Info.plist 具有正确的 URL schemes 和 GIDClientID
+- 查看[示例应用代码](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)作为参考

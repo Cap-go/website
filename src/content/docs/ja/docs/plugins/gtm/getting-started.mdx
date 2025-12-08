@@ -1,0 +1,242 @@
+---
+title: 始め方
+description: 公式SDKを使用してGoogle Tag ManagerをCapacitorアプリにインストールして統合する方法を学びます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## プラットフォーム設定
+
+### iOS
+
+1. Google Tag Managerコンソールからコンテナ設定ファイルをダウンロード
+2. XcodeでiOSプロジェクトにコンテナJSONファイルを追加
+3. ファイル名は`GTM-XXXXXX.json`のようになります
+
+### Android
+
+1. Google Tag Managerコンソールからコンテナ設定ファイルをダウンロード
+2. `android/app/src/main/assets/`にコンテナJSONファイルを追加
+3. ファイル名は`GTM-XXXXXX.json`のようになります
+
+## 使用例
+
+```typescript
+import { CapacitorGTM } from '@capgo/capacitor-gtm';
+
+// コンテナIDでGTMを初期化
+await CapacitorGTM.init({
+  containerId: 'GTM-XXXXXX'
+});
+
+// dataLayerにイベントをプッシュ
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Home',
+    screen_class: 'HomeScreen'
+  }
+});
+
+// パラメータを持つカスタムイベントをプッシュ
+await CapacitorGTM.pushEvent({
+  event: 'purchase',
+  parameters: {
+    transaction_id: 'T12345',
+    value: 25.00,
+    currency: 'USD',
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product Name',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+
+// ユーザープロパティを設定
+await CapacitorGTM.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+
+// dataLayerから値を取得
+const result = await CapacitorGTM.getVariable({
+  key: 'config_value'
+});
+console.log('Config value:', result.value);
+```
+
+## APIリファレンス
+
+### init(options)
+
+```typescript
+init(options: { containerId: string }) => Promise<void>
+```
+
+コンテナIDでGoogle Tag Managerを初期化します。
+
+| パラメータ         | 型                             |
+| ------------- | -------------------------------- |
+| **`options`** | `{ containerId: string }` |
+
+### pushEvent(options)
+
+```typescript
+pushEvent(options: GTMEvent) => Promise<void>
+```
+
+オプションのパラメータを持つイベントをdataLayerにプッシュします。
+
+| パラメータ         | 型              |
+| ------------- | ----------------- |
+| **`options`** | `GTMEvent` |
+
+### setUserProperty(options)
+
+```typescript
+setUserProperty(options: { key: string; value: string }) => Promise<void>
+```
+
+セグメンテーションとターゲティングのためのユーザープロパティを設定します。
+
+| パラメータ         | 型                                      |
+| ------------- | ----------------------------------------- |
+| **`options`** | `{ key: string; value: string }` |
+
+### getVariable(options)
+
+```typescript
+getVariable(options: { key: string }) => Promise<{ value: any }>
+```
+
+GTMコンテナ設定から値を取得します。
+
+| パラメータ         | 型                     |
+| ------------- | ------------------------ |
+| **`options`** | `{ key: string }` |
+
+**戻り値:** `Promise<{ value: any }>`
+
+## インターフェース
+
+### GTMEvent
+
+| プロパティ             | 型                                 | 説明                        |
+| ---------------- | ------------------------------------ | ---------------------------------- |
+| **`event`**      | `string`                  | イベント名                     |
+| **`parameters`** | `Record<string, any>` | オプションのイベントパラメータ (任意) |
+
+## 一般的なイベントの例
+
+### 画面表示
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Product Details',
+    screen_class: 'ProductScreen'
+  }
+});
+```
+
+### ユーザーアクション
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'button_click',
+  parameters: {
+    button_name: 'add_to_cart',
+    product_id: 'SKU_12345'
+  }
+});
+```
+
+### Eコマースイベント
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'begin_checkout',
+  parameters: {
+    currency: 'USD',
+    value: 75.00,
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product 1',
+        quantity: 2,
+        price: 25.00
+      },
+      {
+        item_id: 'SKU_67890',
+        item_name: 'Product 2',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+```
+
+## ベストプラクティス
+
+- アプリのライフサイクルの早い段階でGTMを初期化する
+- 一貫したイベント命名規則を使用する
+- 各イベントに関連するパラメータを含める
+- プレビューモードでGTM設定をテストする
+- Google Tag Managerコンソールでデータを監視する
+- 意味のあるセグメンテーションにユーザープロパティを使用する
+
+## デバッグ
+
+実装をテストするために、Google Tag Managerコンソールでデバッグモードを有効にします:
+
+1. GTMコンソールを開く
+2. プレビューモードに移動
+3. コンテナIDを使用してアプリに接続
+4. イベントが正しく追跡されていることを確認
+
+## ユースケース
+
+- ユーザーのインタラクションと行動を追跡
+- アプリのパフォーマンスメトリクスを監視
+- Eコマースデータを収集
+- コード変更なしでサードパーティタグを管理
+- A/Bテストとパーソナライゼーションを実装
+- Google Analyticsや他のサービスと統合

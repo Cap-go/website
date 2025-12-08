@@ -1,0 +1,355 @@
+---
+title: Memulai
+description: Pelajari cara mengatur live reload untuk development yang lebih cepat dengan aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-live-reload" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan project native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Setup
+
+Konfigurasi server dev Vite Anda agar berfungsi dengan live reload. Anda perlu:
+1. Nonaktifkan klien HMR bawaan
+2. Teruskan event reload melalui endpoint WebSocket khusus
+
+## Penggunaan
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+// Konfigurasi server dev
+await LiveReload.configureServer({
+  url: 'http://localhost:5173',
+  websocketPath: '/capgo-livereload',
+  autoReconnect: true,
+  reconnectInterval: 2000
+});
+
+// Terhubung ke server dev
+await LiveReload.connect();
+
+// Dengarkan event reload
+LiveReload.addListener('reloadEvent', (event) => {
+  console.log('Event reload:', event);
+  if (event.type === 'full-reload') {
+    console.log('Reload halaman penuh dipicu');
+  } else if (event.type === 'file-update') {
+    console.log('File diperbarui:', event.file);
+  }
+});
+
+// Dengarkan perubahan status koneksi
+LiveReload.addListener('statusChange', (status) => {
+  console.log('Status koneksi:', status.connected);
+  console.log('URL Server:', status.url);
+});
+```
+
+## Referensi API
+
+### configureServer(options)
+
+Simpan pengaturan server dev jarak jauh untuk koneksi berikutnya.
+
+```typescript
+const status = await LiveReload.configureServer({
+  url: 'http://192.168.1.100:5173',
+  websocketPath: '/capgo-livereload',
+  headers: {
+    'Authorization': 'Bearer token'
+  },
+  autoReconnect: true,
+  reconnectInterval: 2000
+});
+```
+
+**Parameter:**
+- `url` (string): URL dasar untuk server dev (mis., `http://dev.local:5173`)
+- `websocketPath` (string, opsional): Override jalur WebSocket (default: `/ws`)
+- `headers` (Record\<string, string\>, opsional): Header tambahan untuk koneksi WebSocket
+- `autoReconnect` (boolean, opsional): Koneksi ulang otomatis saat terputus (default: `true`)
+- `reconnectInterval` (number, opsional): Penundaan antara upaya koneksi ulang dalam ms (default: `2000`)
+
+**Mengembalikan:** `LiveReloadStatus` dengan info koneksi
+
+### connect()
+
+Buat koneksi WebSocket jika belum aktif.
+
+```typescript
+const status = await LiveReload.connect();
+console.log('Terhubung:', status.connected);
+```
+
+**Mengembalikan:** Status koneksi saat ini
+
+### disconnect()
+
+Tutup koneksi WebSocket saat ini dan nonaktifkan koneksi ulang otomatis.
+
+```typescript
+await LiveReload.disconnect();
+```
+
+### getStatus()
+
+Dapatkan status koneksi saat ini.
+
+```typescript
+const status = await LiveReload.getStatus();
+console.log('Terhubung:', status.connected);
+console.log('URL:', status.url);
+```
+
+### reload()
+
+Picu secara manual reload penuh Capacitor WebView.
+
+```typescript
+await LiveReload.reload();
+```
+
+### reloadFile(options)
+
+Reload satu file/modul (fallback ke reload penuh jika tidak didukung).
+
+```typescript
+await LiveReload.reloadFile({
+  path: '/src/components/MyComponent.tsx',
+  hash: 'abc123'
+});
+```
+
+### addListener('reloadEvent', callback)
+
+Dengarkan event reload yang masuk dari server.
+
+```typescript
+const handle = await LiveReload.addListener('reloadEvent', (event) => {
+  switch (event.type) {
+    case 'full-reload':
+      console.log('Reload penuh diminta');
+      break;
+    case 'file-update':
+      console.log('File diperbarui:', event.file?.path);
+      break;
+    case 'error':
+      console.error('Error:', event.message);
+      break;
+  }
+});
+
+// Hapus listener saat selesai
+await handle.remove();
+```
+
+### addListener('statusChange', callback)
+
+Dengarkan perubahan status socket.
+
+```typescript
+await LiveReload.addListener('statusChange', (status) => {
+  console.log(status.connected ? 'Terhubung' : 'Terputus');
+});
+```
+
+### removeAllListeners()
+
+Hapus semua listener yang terdaftar.
+
+```typescript
+await LiveReload.removeAllListeners();
+```
+
+## Contoh Lengkap
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+export class DevServer {
+  private connected = false;
+
+  async initialize() {
+    // Hanya aktifkan dalam development
+    if (process.env.NODE_ENV !== 'development') {
+      return;
+    }
+
+    try {
+      // Konfigurasi server
+      await LiveReload.configureServer({
+        url: 'http://192.168.1.100:5173',
+        websocketPath: '/capgo-livereload',
+        autoReconnect: true,
+        reconnectInterval: 3000
+      });
+
+      // Siapkan listener sebelum terhubung
+      await LiveReload.addListener('reloadEvent', this.handleReloadEvent.bind(this));
+      await LiveReload.addListener('statusChange', this.handleStatusChange.bind(this));
+
+      // Terhubung
+      await LiveReload.connect();
+    } catch (error) {
+      console.error('Gagal menginisialisasi live reload:', error);
+    }
+  }
+
+  private handleReloadEvent(event: any) {
+    console.log('Event reload diterima:', event.type);
+
+    switch (event.type) {
+      case 'full-reload':
+        this.performFullReload();
+        break;
+      case 'file-update':
+        this.handleFileUpdate(event.file);
+        break;
+      case 'error':
+        console.error('Error server:', event.message);
+        break;
+      case 'connected':
+        console.log('Server terhubung');
+        break;
+      case 'disconnected':
+        console.log('Server terputus');
+        break;
+    }
+  }
+
+  private handleStatusChange(status: any) {
+    this.connected = status.connected;
+    console.log(`Live reload ${status.connected ? 'terhubung' : 'terputus'}`);
+  }
+
+  private performFullReload() {
+    console.log('Melakukan reload halaman penuh...');
+    window.location.reload();
+  }
+
+  private handleFileUpdate(file: any) {
+    console.log('File diperbarui:', file?.path);
+    // HMR akan menangani ini secara otomatis dalam kebanyakan kasus
+  }
+
+  async disconnect() {
+    await LiveReload.disconnect();
+    await LiveReload.removeAllListeners();
+    this.connected = false;
+  }
+
+  isConnected(): boolean {
+    return this.connected;
+  }
+}
+```
+
+## Contoh Konfigurasi Vite
+
+Konfigurasi server Vite Anda agar berfungsi dengan plugin live reload:
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    host: '0.0.0.0', // Izinkan koneksi dari jaringan
+    port: 5173,
+    hmr: {
+      // Jalur WebSocket kustom untuk live reload
+      path: '/capgo-livereload',
+    }
+  }
+});
+```
+
+## Praktik Terbaik
+
+1. **Hanya gunakan dalam development**
+   ```typescript
+   if (import.meta.env.DEV) {
+     await LiveReload.configureServer({
+       url: 'http://localhost:5173',
+       websocketPath: '/capgo-livereload'
+     });
+     await LiveReload.connect();
+   }
+   ```
+
+2. **Gunakan IP lokal Anda untuk pengujian mobile**
+   ```typescript
+   const devServerUrl = process.env.VITE_DEV_SERVER_URL || 'http://192.168.1.100:5173';
+   await LiveReload.configureServer({ url: devServerUrl });
+   ```
+
+3. **Tangani error koneksi dengan anggun**
+   ```typescript
+   try {
+     await LiveReload.connect();
+   } catch (error) {
+     console.warn('Tidak dapat terhubung ke server dev, menggunakan build production');
+   }
+   ```
+
+4. **Bersihkan saat keluar dari aplikasi**
+   ```typescript
+   window.addEventListener('beforeunload', async () => {
+     await LiveReload.disconnect();
+   });
+   ```
+
+5. **Tampilkan status koneksi di UI**
+   ```typescript
+   LiveReload.addListener('statusChange', (status) => {
+     // Tampilkan indikator di build dev
+     updateDevIndicator(status.connected);
+   });
+   ```
+
+## Catatan Platform
+
+### iOS
+- Bekerja dengan iOS 11.0+
+- Pastikan server dev dapat diakses dari jaringan perangkat Anda
+- Mungkin perlu mengkonfigurasi firewall untuk mengizinkan koneksi
+
+### Android
+- Bekerja dengan Android 5.0 (API 21)+
+- Gunakan `adb reverse` untuk koneksi localhost:
+  ```bash
+  adb reverse tcp:5173 tcp:5173
+  ```
+
+### Web
+- Dukungan penuh untuk platform web
+- Koneksi WebSocket langsung ke server dev Vite
+
+## Pemecahan Masalah
+
+**Koneksi gagal:**
+- Verifikasi server dev sedang berjalan
+- Periksa bahwa perangkat dan komputer berada di jaringan yang sama
+- Pastikan firewall mengizinkan koneksi pada port tersebut
+- Gunakan alamat IP sebagai ganti localhost untuk perangkat mobile
+
+**Reload lambat:**
+- Periksa kecepatan jaringan
+- Kurangi interval koneksi ulang
+- Optimalkan konfigurasi build Vite
+
+**Error WebSocket:**
+- Verifikasi websocketPath cocok dengan konfigurasi Vite
+- Periksa konflik port
+- Pastikan header benar jika menggunakan autentikasi

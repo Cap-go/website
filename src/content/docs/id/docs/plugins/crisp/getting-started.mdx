@@ -1,0 +1,344 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin SDK chat Crisp untuk dukungan pelanggan dalam aplikasi di aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-crisp" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Dapatkan Website ID Crisp Anda**
+   - Daftar di [crisp.chat](https://crisp.chat)
+   - Buat website/proyek
+   - Temukan Website ID Anda di Settings > Setup Instructions
+</Steps>
+
+## Penggunaan Dasar
+
+Impor plugin dan konfigurasikan dengan Website ID Anda:
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+// Configure Crisp with your website ID
+const configureCrisp = async () => {
+  await CapacitorCrisp.configure({
+    websiteID: 'YOUR_WEBSITE_ID'
+  });
+};
+
+// Open the chat
+const openChat = async () => {
+  await CapacitorCrisp.openMessenger();
+};
+
+// Set user information
+const setUserInfo = async () => {
+  await CapacitorCrisp.setUser({
+    email: 'user@example.com',
+    nickname: 'John Doe',
+    phone: '+1234567890',
+    avatar: 'https://example.com/avatar.jpg'
+  });
+};
+
+// Reset user session (logout)
+const logout = async () => {
+  await CapacitorCrisp.resetChatSession();
+};
+```
+
+## Referensi API
+
+### configure(options)
+
+Konfigurasikan Crisp dengan website ID Anda dan pengaturan opsional.
+
+```typescript
+interface ConfigureOptions {
+  websiteID: string;
+  locale?: string; // e.g., 'en', 'fr', 'es'
+  tokenID?: string; // For authenticated sessions
+}
+
+await CapacitorCrisp.configure({
+  websiteID: 'YOUR_WEBSITE_ID',
+  locale: 'en'
+});
+```
+
+### openMessenger()
+
+Membuka antarmuka chat Crisp.
+
+```typescript
+await CapacitorCrisp.openMessenger();
+```
+
+### setUser(options)
+
+Mengatur informasi pengguna untuk sesi chat.
+
+```typescript
+interface UserOptions {
+  email?: string;
+  nickname?: string;
+  phone?: string;
+  avatar?: string;
+}
+
+await CapacitorCrisp.setUser({
+  email: 'user@example.com',
+  nickname: 'John Doe'
+});
+```
+
+### setUserCompany(options)
+
+Mengatur informasi perusahaan untuk pengguna bisnis.
+
+```typescript
+interface CompanyOptions {
+  name: string;
+  url?: string;
+  description?: string;
+  employment?: {
+    title?: string;
+    role?: string;
+  };
+  geolocation?: {
+    city?: string;
+    country?: string;
+  };
+}
+
+await CapacitorCrisp.setUserCompany({
+  name: 'Acme Corp',
+  url: 'https://acme.com',
+  employment: {
+    title: 'CEO',
+    role: 'Leadership'
+  }
+});
+```
+
+### pushEvent(options)
+
+Kirim event kustom untuk melacak tindakan pengguna.
+
+```typescript
+interface EventOptions {
+  name: string;
+  color?: 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'pink' | 'brown' | 'grey' | 'black';
+  data?: { [key: string]: any };
+}
+
+await CapacitorCrisp.pushEvent({
+  name: 'checkout_completed',
+  color: 'green',
+  data: {
+    price: 99.99,
+    currency: 'USD'
+  }
+});
+```
+
+### setSessionSegment(segment)
+
+Atur segmen untuk mengategorikan sesi chat.
+
+```typescript
+await CapacitorCrisp.setSessionSegment('premium_customer');
+```
+
+### resetChatSession()
+
+Reset sesi chat saat ini (berguna untuk logout).
+
+```typescript
+await CapacitorCrisp.resetChatSession();
+```
+
+## Fitur Lanjutan
+
+### Data Pengguna Kustom
+
+```typescript
+// Set multiple custom data fields
+await CapacitorCrisp.setSessionData({
+  key: 'plan',
+  value: 'premium'
+});
+
+await CapacitorCrisp.setSessionData({
+  key: 'signup_date',
+  value: '2024-01-15'
+});
+```
+
+### Preset Pesan
+
+Atur pesan yang sudah diisi sebelumnya di input chat:
+
+```typescript
+await CapacitorCrisp.setMessageText(
+  "Hello, I need help with my order #12345"
+);
+```
+
+### Ketersediaan Chat
+
+Kontrol kapan widget chat tersedia:
+
+```typescript
+// Hide chat temporarily
+await CapacitorCrisp.setTokenID('user_token_12345');
+```
+
+## Contoh Lengkap
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+export class ChatService {
+  async initialize() {
+    // Configure Crisp
+    await CapacitorCrisp.configure({
+      websiteID: 'YOUR_WEBSITE_ID',
+      locale: 'en'
+    });
+  }
+
+  async loginUser(user: any) {
+    // Set user information
+    await CapacitorCrisp.setUser({
+      email: user.email,
+      nickname: user.name,
+      phone: user.phone,
+      avatar: user.avatarUrl
+    });
+
+    // Set custom data
+    await CapacitorCrisp.setSessionData({
+      key: 'user_id',
+      value: user.id
+    });
+
+    await CapacitorCrisp.setSessionData({
+      key: 'account_type',
+      value: user.accountType
+    });
+
+    // Set segment
+    if (user.isPremium) {
+      await CapacitorCrisp.setSessionSegment('premium');
+    }
+
+    // Track login event
+    await CapacitorCrisp.pushEvent({
+      name: 'user_login',
+      color: 'blue',
+      data: {
+        method: 'email'
+      }
+    });
+  }
+
+  async openSupport(context?: string) {
+    if (context) {
+      await CapacitorCrisp.setMessageText(
+        `I need help with: ${context}`
+      );
+    }
+
+    await CapacitorCrisp.openMessenger();
+  }
+
+  async logout() {
+    await CapacitorCrisp.resetChatSession();
+  }
+}
+```
+
+## Styling dan Kustomisasi
+
+Crisp secara otomatis menyesuaikan dengan tema aplikasi Anda, tetapi Anda dapat menyesuaikannya lebih lanjut melalui dashboard Crisp:
+
+1. Buka dashboard Crisp Anda
+2. Navigasi ke Settings > Website Settings > Chatbox & Email Settings
+3. Sesuaikan warna, posisi, dan perilaku
+
+## Praktik Terbaik
+
+1. **Inisialisasi lebih awal**
+   Konfigurasikan Crisp selama inisialisasi aplikasi untuk ketersediaan langsung:
+   ```typescript
+   import { App } from '@capacitor/app';
+
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       await CapacitorCrisp.configure({
+         websiteID: 'YOUR_WEBSITE_ID'
+       });
+     }
+   });
+   ```
+
+2. **Atur konteks pengguna**
+   Selalu berikan informasi pengguna saat tersedia untuk dukungan yang lebih baik:
+   ```typescript
+   if (user.isAuthenticated) {
+     await CapacitorCrisp.setUser({
+       email: user.email,
+       nickname: user.name
+     });
+   }
+   ```
+
+3. **Lacak event penting**
+   Gunakan event untuk memberikan konteks kepada agen dukungan:
+   ```typescript
+   await CapacitorCrisp.pushEvent({
+     name: 'error_occurred',
+     color: 'red',
+     data: {
+       error: error.message,
+       screen: 'checkout'
+     }
+   });
+   ```
+
+4. **Tangani logout dengan benar**
+   Selalu reset sesi ketika pengguna logout:
+   ```typescript
+   async logout() {
+     await CapacitorCrisp.resetChatSession();
+     // Your other logout logic
+   }
+   ```
+
+## Catatan Platform
+
+### iOS
+- Memerlukan iOS 10.0+
+- Menggunakan SDK iOS Crisp native
+- Mendukung notifikasi push (konfigurasikan di dashboard Crisp)
+
+### Android
+- Memerlukan Android 5.0 (API 21)+
+- Menggunakan SDK Android Crisp native
+- Patuh dengan Material Design
+
+### Web
+- Fallback ke SDK JavaScript Crisp
+- Paritas fitur penuh dengan platform native

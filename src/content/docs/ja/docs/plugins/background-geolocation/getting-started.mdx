@@ -1,0 +1,270 @@
+---
+title: はじめに
+locale: ja
+description: Background Geolocationプラグインをインストールして使用し、バックグラウンドでデバイスの位置を追跡する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+このプラグインはCapacitor v7をサポートしています:
+
+| Capacitor  | Plugin |
+|------------|--------|
+| v7         | v7     |
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+</Tabs>
+
+## プラットフォーム設定
+
+### iOS
+
+以下のキーを `Info.plist` に追加してください:
+
+```xml
+<dict>
+  ...
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We need to track your location</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>We need to track your location while your device is locked.</string>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
+  ...
+</dict>
+```
+
+### Android
+
+Capacitor設定で `android.useLegacyBridge` オプションを `true` に設定してください。これにより、バックグラウンドで5分後に位置情報更新が停止するのを防ぎます。https://capacitorjs.com/docs/config および https://github.com/capacitor-community/background-geolocation/issues/89 を参照してください。
+
+Android 13+では、バックグラウンドで位置情報が使用されていることをユーザーに通知する永続的な通知を表示するために、アプリに `POST_NOTIFICATIONS` ランタイム権限が必要です。このランタイム権限は、位置情報権限が付与された後にリクエストされます。
+
+アプリが位置情報更新をリアルタイムでサーバーに転送する場合、バックグラウンドで5分後にAndroidがWebViewから開始されたHTTPリクエストをスロットルすることに注意してください。解決策は、[CapacitorHttp](https://capacitorjs.com/docs/apis/http)などのネイティブHTTPプラグインを使用することです。https://github.com/capacitor-community/background-geolocation/issues/14 を参照してください。
+
+Android固有の設定は `strings.xml` で行うことができます:
+```xml
+<resources>
+    <!--
+        バックグラウンド通知のチャンネル名。ユーザーが通知を長押しすると表示されます。
+        デフォルトは "Background Tracking" です。
+    -->
+    <string name="capacitor_background_geolocation_notification_channel_name">
+        Background Tracking
+    </string>
+
+    <!--
+        バックグラウンド通知に使用するアイコン。先頭の "@" がないことに注意してください。
+        デフォルトは "mipmap/ic_launcher"（アプリの起動アイコン）です。
+
+        ラスター画像を使用してアイコンを生成する場合（ベクター画像とは対照的に）、
+        透明な背景が必要です。画像が互換性があることを確認するには、
+        Android Studioで画像アセットを作成する際に "Notification Icons" を
+        Icon Typeとして選択してください。
+
+        互換性のない画像アセットは、アイコンが正しく表示されても、
+        いくつかの特徴的な方法で通知が誤動作する原因となります:
+
+          - 通知がユーザーによって解除可能になる場合があります（本来解除できないはずです）
+          - 通知をタップすると、アプリではなく設定が開く場合があります
+          - 通知テキストが正しくない場合があります
+    -->
+    <string name="capacitor_background_geolocation_notification_icon">
+        drawable/ic_tracking
+    </string>
+
+    <!--
+        android.graphics.Color.parseColorで解析可能な文字列としての通知の色。
+        オプションです。
+    -->
+    <string name="capacitor_background_geolocation_notification_color">
+        yellow
+    </string>
+</resources>
+```
+
+## 使用方法
+
+```javascript
+import { BackgroundGeolocation } from "@capgo/background-geolocation";
+
+BackgroundGeolocation.start(
+    {
+        backgroundMessage: "Cancel to prevent battery drain.",
+        backgroundTitle: "Tracking You.",
+        requestPermissions: true,
+        stale: false,
+        distanceFilter: 50
+    },
+    (location, error) => {
+        if (error) {
+            if (error.code === "NOT_AUTHORIZED") {
+                if (window.confirm(
+                    "This app needs your location, " +
+                    "but does not have permission.\n\n" +
+                    "Open settings now?"
+                )) {
+                    // ユーザーのデバイスの設定に移動するのが便利な場合があります
+                    // 位置情報権限が拒否されている場合、
+                    // プラグインはそのための 'openSettings' メソッドを提供しています
+                    BackgroundGeolocation.openSettings();
+                }
+            }
+            return console.error(error);
+        }
+        return console.log(location);
+    }
+).then(() => {
+    // 位置情報更新が不要になったら、プラグインを停止する必要があります
+    BackgroundGeolocation.stop();
+});
+
+// 計画されたルートを設定して、新しい位置が到着し、それがルート上にない場合に通知音を取得します:
+
+BackgroundGeolocation.setPlannedRoute({soundFile: "assets/myFile.mp3", route: [[1,2], [3,4]], distance: 30 });
+
+// 現在の位置だけが必要な場合は、次のようなことを試してください。
+// タイムアウトが長いほど、推測はより正確になります。100ms未満にはしないことをお勧めします。
+function guessLocation(callback, timeout) {
+    let last_location;
+    BackgroundGeolocation.start(
+        {
+            requestPermissions: false,
+            stale: true
+        },
+        (location) => {
+            last_location = location || undefined;
+        }
+    ).then(() => {
+        setTimeout(() => {
+            callback(last_location);
+            BackgroundGeolocation.stop();
+        }, timeout);
+    });
+}
+```
+
+## API
+
+### start(...)
+
+```typescript
+start(options: StartOptions, callback: (position?: Location | undefined, error?: CallbackError | undefined) => void) => Promise<void>
+```
+
+デバイスの位置の変更をリッスンするには、このメソッドを呼び出します。
+呼び出しが完了したことを示すPromiseが返されます。コールバックは、新しい位置が利用可能になるたびに、
+またはこのメソッドの呼び出し時にエラーが発生した場合に呼び出されます。これに対するpromiseの拒否には依存しないでください。
+
+| パラメータ | 型 | 説明 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **`options`**  | `StartOptions`                                                                     | 設定オプション |
+| **`callback`** | `(position?: Location, error?: CallbackError) => void` | 新しい位置が利用可能になったとき、またはエラーが発生したときに呼び出されるコールバック関数 |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+位置情報更新を停止します。
+
+### openSettings()
+
+```typescript
+openSettings() => Promise<void>
+```
+
+デバイスの位置情報設定ページを開きます。
+ユーザーを位置情報サービスの有効化や権限の調整に誘導するのに便利です。
+
+### setPlannedRoute(...)
+
+```typescript
+setPlannedRoute(options: SetPlannedRouteOptions) => Promise<void>
+```
+
+ユーザーが計画されたルートから外れたときに音声ファイルを再生します。
+これは音声を再生するために使用する必要があります（バックグラウンドでも、ネイティブのみ）。
+
+| パラメータ | 型 | 説明 |
+| ------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **`options`** | `SetPlannedRouteOptions` | 計画されたルートと音声ファイルを設定するためのオプション |
+
+## インターフェース
+
+### StartOptions
+
+位置情報更新を設定するためのオプション。
+
+| プロパティ | 型 | 説明 | デフォルト |
+| ------------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **`backgroundMessage`**  | `string`  | "backgroundMessage" オプションが定義されている場合、アプリがバックグラウンドまたはフォアグラウンドにあるかどうかに関係なく、プラグインは位置情報更新を提供します。定義されていない場合、位置情報更新はフォアグラウンドでのみ保証されます。これは両方のプラットフォームで当てはまります。Androidでは、バックグラウンドで位置情報更新を受け続けるには、通知を表示する必要があります。このオプションは、その通知のテキストを指定します。 |                                    |
+| **`backgroundTitle`**    | `string`  | 上記で言及された通知のタイトル。 | `"Using your location"` |
+| **`requestPermissions`** | `boolean` | 権限がまだ付与されていない場合、ユーザーから自動的に権限をリクエストするかどうか。 | `true`                  |
+| **`stale`**              | `boolean` | "true" の場合、デバイスがGPS修正を取得している間に古い位置が配信される可能性があります。"time" プロパティを確認する責任があります。"false" の場合、位置は最新であることが保証されます。 | `false`                 |
+| **`distanceFilter`**     | `number`  | 新しい位置情報更新がトリガーされる前にデバイスが移動しなければならない距離（メートル）。これは、小さな動きを除外し、更新の数を減らすために使用されます。 | `0`                     |
+
+### Location
+
+様々な属性を持つ地理的位置を表します。
+GPS/ネットワークプロバイダーによって返されるすべての標準的な位置プロパティを含みます。
+
+| プロパティ | 型 | 説明 |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **`latitude`**         | `number`         | 緯度（度）。範囲: -90.0 から +90.0 |
+| **`longitude`**        | `number`         | 経度（度）。範囲: -180.0 から +180.0 |
+| **`accuracy`**         | `number`         | 水平方向の不確実性の半径（メートル）、68%の信頼度。値が小さいほど、位置がより正確であることを示します。 |
+| **`altitude`**         | `number \| null` | 海抜メートル（または利用できない場合はnull）。 |
+| **`altitudeAccuracy`** | `number \| null` | 垂直方向の不確実性（メートル）、68%の信頼度（または利用できない場合はnull）。 |
+| **`simulated`**        | `boolean`        | 位置がGPSではなくソフトウェアによってシミュレートされた場合は `true`。開発またはテストでモック位置を検出するのに便利です。 |
+| **`bearing`**          | `number \| null` | 真北からの偏差（度）（または利用できない場合はnull）。範囲: 0.0 から 360.0 |
+| **`speed`**            | `number \| null` | 速度（メートル毎秒）（または利用できない場合はnull）。 |
+| **`time`**             | `number \| null` | 位置が生成された時刻（ユニックスエポックからのミリ秒）。stale: true を使用するときに位置が古いかどうかを確認するために使用します。 |
+
+### CallbackError
+
+位置情報開始コールバックに渡される可能性のあるエラーオブジェクト。
+オプションのエラーコードで標準のErrorを拡張します。
+
+| プロパティ | 型 | 説明 |
+| ---------- | ------------------- | ----------------------------------------------------- |
+| **`code`** | `string` | より具体的なエラー処理のためのオプションのエラーコード。 |
+
+### SetPlannedRouteOptions
+
+| プロパティ | 型 | 説明 | デフォルト |
+| --------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| **`soundFile`** | `string`             | 再生する音声ファイルの名前。ウェブとネイティブの両方のプラットフォームで動作するように、アプリのpublicフォルダ内の有効な音声相対パスである必要があります。パスにpublicフォルダを含める必要はありません。 |                 |
+| **`route`**     | `[number, number][]` | 経度と緯度のペアの配列としての計画されたルート。各ペアはルート上のポイントを表します。これは、ユーザーが従うことができるルートを定義するために使用されます。ルートは、ユーザーがそこから外れたときに音声を再生するために使用されます。 |                 |
+| **`distance`**  | `number`             | 音声をトリガーするために、ユーザーが計画されたルートから外れなければならない距離（メートル）。これは、音声が再生される前にユーザーがルートからどれだけ離れることができるかを決定するために使用されます。指定されていない場合、デフォルト値の50メートルが使用されます。 | `50` |

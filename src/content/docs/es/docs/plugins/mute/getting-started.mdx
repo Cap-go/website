@@ -1,0 +1,210 @@
+---
+title: Comenzar
+description: Aprende cómo instalar y usar el plugin Mute para detectar el estado de modo silencioso en tu aplicación Capacitor.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Uso
+
+Importa el plugin y usa sus métodos para verificar el estado de silencio:
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+// Verificar si el dispositivo está silenciado
+const checkMuteState = async () => {
+  const { value } = await CapacitorMute.isMuted();
+
+  if (value) {
+    console.log('El dispositivo está silenciado/en modo silencioso');
+    // Ajustar el comportamiento de la aplicación para modo silencioso
+  } else {
+    console.log('El sonido del dispositivo está activado');
+  }
+};
+```
+
+## Referencia de API
+
+### isMuted()
+
+Verifica si el dispositivo está actualmente silenciado/en modo silencioso.
+
+```typescript
+const result = await CapacitorMute.isMuted();
+// Devuelve: { value: boolean }
+```
+
+## Ejemplo Completo
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+export class SoundManager {
+  private isMuted = false;
+
+  async initialize() {
+    // Obtener el estado inicial de silencio
+    await this.checkMuteState();
+  }
+
+  async checkMuteState() {
+    try {
+      const { value } = await CapacitorMute.isMuted();
+      this.isMuted = value;
+      this.updateAppBehavior();
+    } catch (error) {
+      console.error('Error al verificar el estado de silencio:', error);
+    }
+  }
+
+  private updateAppBehavior() {
+    if (this.isMuted) {
+      // El dispositivo está silenciado - ajustar el comportamiento de la aplicación
+      this.disableSoundEffects();
+      this.showVisualNotifications();
+    } else {
+      // El sonido del dispositivo está activado
+      this.enableSoundEffects();
+      this.useAudioNotifications();
+    }
+  }
+
+  private disableSoundEffects() {
+    // Desactivar sonidos dentro de la aplicación
+    console.log('Desactivando efectos de sonido');
+  }
+
+  private enableSoundEffects() {
+    // Activar sonidos dentro de la aplicación
+    console.log('Activando efectos de sonido');
+  }
+
+  private showVisualNotifications() {
+    // Usar retroalimentación visual en lugar de audio
+    console.log('Usando notificaciones visuales');
+  }
+
+  private useAudioNotifications() {
+    // Usar notificaciones de audio
+    console.log('Usando notificaciones de audio');
+  }
+}
+
+// Uso
+const soundManager = new SoundManager();
+await soundManager.initialize();
+
+// Sondear periódicamente para verificar cambios
+setInterval(() => {
+  soundManager.checkMuteState();
+}, 5000); // Verificar cada 5 segundos
+```
+
+## Comportamiento por Plataforma
+
+### iOS
+- Detecta el estado del interruptor físico de silencio
+- Sin eventos de cambio en tiempo real (se requiere sondeo)
+- Funciona en iPhone y iPad con interruptor de silencio
+
+### Android
+- Verifica si el modo de timbre está configurado en silencio o vibración
+- Sin eventos de cambio (se requiere sondeo)
+- Basado en el modo de timbre de AudioManager
+
+## Mejores Prácticas
+
+1. **Sondear para detectar cambios**
+   Dado que el plugin no proporciona eventos en tiempo real, sondea periódicamente si necesitas rastrear cambios:
+   ```typescript
+   // Verificar el estado de silencio periódicamente
+   setInterval(async () => {
+     const { value } = await CapacitorMute.isMuted();
+     if (value !== previousMuteState) {
+       handleMuteStateChange(value);
+     }
+   }, 5000);
+   ```
+
+2. **Respetar las preferencias del usuario**
+   Siempre honra el estado de silencio y ajusta el comportamiento de audio de tu aplicación en consecuencia.
+
+3. **Proporcionar alternativas visuales**
+   ```typescript
+   const { value: isMuted } = await CapacitorMute.isMuted();
+   if (isMuted) {
+     // Mostrar notificaciones visuales
+     showToast('Nuevo mensaje recibido');
+   } else {
+     // Reproducir notificación de sonido
+     playNotificationSound();
+   }
+   ```
+
+## Casos de Uso
+
+1. **Gestión de Sonido en Juegos**
+   ```typescript
+   const shouldPlaySound = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     return !isMuted && userPreferences.soundEnabled;
+   };
+   ```
+
+2. **Manejo de Notificaciones**
+   ```typescript
+   const sendNotification = async (message: string) => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     if (isMuted) {
+       // Usar vibración o notificación visual
+       await Haptics.vibrate();
+       showBanner(message);
+     } else {
+       // Reproducir sonido de notificación
+       await playSound('notification.mp3');
+     }
+   };
+   ```
+
+3. **Reproductor de Video**
+   ```typescript
+   const initVideoPlayer = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     videoPlayer.setMuted(isMuted);
+     if (isMuted) {
+       showSubtitles(true);
+       showMuteIndicator();
+     }
+   };
+   ```
+
+## Solución de Problemas
+
+1. **Siempre devuelve false en Android**
+   - Verifica si el modo de timbre del dispositivo está realmente configurado en silencio
+   - Algunos dispositivos Android pueden tener un comportamiento diferente
+
+2. **No hay eventos de cambio disponibles**
+   - El plugin no proporciona eventos de cambio en tiempo real
+   - Implementa sondeo si necesitas detectar cambios
+
+3. **No funciona en el simulador**
+   - El Simulador de iOS no tiene un interruptor de silencio
+   - Prueba en dispositivos reales para obtener resultados precisos

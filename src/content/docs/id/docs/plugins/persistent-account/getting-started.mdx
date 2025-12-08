@@ -1,0 +1,339 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin Persistent Account untuk mempertahankan data pengguna di seluruh instalasi aplikasi.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Dukungan Platform
+
+- **iOS**: Menggunakan iOS Keychain Services untuk penyimpanan yang aman dan persisten
+- **Android**: Menggunakan Android Account Manager atau shared preferences dengan backup
+
+## Contoh Penggunaan
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Define your account data structure
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Save account data
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Read account data
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Restored account:', account.username);
+} else {
+  console.log('No account data found');
+}
+```
+
+## Referensi API
+
+### saveAccount(options)
+
+```typescript
+saveAccount(options: { data: unknown }) => Promise<void>
+```
+
+Simpan data akun dengan aman ke penyimpanan persisten.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ data: unknown }` |
+
+### readAccount()
+
+```typescript
+readAccount() => Promise<{ data: unknown | null }>
+```
+
+Ambil data akun yang tersimpan.
+
+**Returns:** `Promise<{ data: unknown | null }>`
+
+## Implementasi Praktis
+
+### Contoh Layanan Auth Lengkap
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  authToken?: string;
+  preferences: {
+    theme: string;
+    language: string;
+    notifications: boolean;
+  };
+}
+
+class AuthService {
+  // Save user account after login
+  async saveUserAccount(user: UserAccount) {
+    try {
+      await PersistentAccount.saveAccount({ data: user });
+      console.log('User account saved successfully');
+    } catch (error) {
+      console.error('Failed to save account:', error);
+      throw error;
+    }
+  }
+
+  // Restore user account on app start
+  async restoreUserAccount(): Promise<UserAccount | null> {
+    try {
+      const result = await PersistentAccount.readAccount();
+
+      if (result.data) {
+        const account = result.data as UserAccount;
+        console.log('Restored user account:', account.username);
+        return account;
+      }
+
+      console.log('No saved account found');
+      return null;
+    } catch (error) {
+      console.error('Failed to restore account:', error);
+      return null;
+    }
+  }
+
+  // Update user preferences
+  async updatePreferences(preferences: Partial<UserAccount['preferences']>) {
+    const account = await this.restoreUserAccount();
+
+    if (account) {
+      const updatedAccount: UserAccount = {
+        ...account,
+        preferences: {
+          ...account.preferences,
+          ...preferences
+        }
+      };
+
+      await this.saveUserAccount(updatedAccount);
+    }
+  }
+
+  // Clear account data (on logout)
+  async clearAccount() {
+    try {
+      await PersistentAccount.saveAccount({ data: null });
+      console.log('Account data cleared');
+    } catch (error) {
+      console.error('Failed to clear account:', error);
+    }
+  }
+}
+
+// Usage
+const authService = new AuthService();
+
+// On login
+await authService.saveUserAccount({
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  authToken: 'abc123xyz',
+  preferences: {
+    theme: 'dark',
+    language: 'en',
+    notifications: true
+  }
+});
+
+// On app start
+const savedAccount = await authService.restoreUserAccount();
+if (savedAccount) {
+  // User was previously logged in
+  console.log('Welcome back,', savedAccount.username);
+}
+
+// Update preferences
+await authService.updatePreferences({
+  theme: 'light',
+  notifications: false
+});
+
+// On logout
+await authService.clearAccount();
+```
+
+### Inisialisasi Aplikasi dengan Pemulihan Akun
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function initializeApp() {
+  try {
+    // Try to restore saved account
+    const result = await PersistentAccount.readAccount();
+
+    if (result.data) {
+      const account = result.data as UserAccount;
+
+      // Validate token is still valid
+      const isValid = await validateAuthToken(account.authToken);
+
+      if (isValid) {
+        // Restore user session
+        setCurrentUser(account);
+        navigateToHome();
+      } else {
+        // Token expired, show login
+        navigateToLogin();
+      }
+    } else {
+      // No saved account, show login
+      navigateToLogin();
+    }
+  } catch (error) {
+    console.error('Failed to initialize app:', error);
+    navigateToLogin();
+  }
+}
+
+// Call on app start
+initializeApp();
+```
+
+### Sinkronisasi dengan Backend
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function syncAccountWithBackend() {
+  const result = await PersistentAccount.readAccount();
+
+  if (result.data) {
+    const localAccount = result.data as UserAccount;
+
+    try {
+      // Fetch latest account data from server
+      const response = await fetch(`/api/users/${localAccount.userId}`);
+      const serverAccount = await response.json();
+
+      // Merge server data with local preferences
+      const mergedAccount: UserAccount = {
+        ...serverAccount,
+        preferences: {
+          ...serverAccount.preferences,
+          ...localAccount.preferences // Local preferences take priority
+        }
+      };
+
+      // Save merged data
+      await PersistentAccount.saveAccount({ data: mergedAccount });
+
+      return mergedAccount;
+    } catch (error) {
+      console.error('Failed to sync with backend:', error);
+      // Return local account as fallback
+      return localAccount;
+    }
+  }
+
+  return null;
+}
+```
+
+## Praktik Terbaik
+
+- **Type Safety**: Definisikan interface TypeScript yang jelas untuk data akun Anda
+- **Validasi**: Selalu validasi data saat membaca dari penyimpanan persisten
+- **Penanganan Error**: Implementasikan blok try-catch yang tepat untuk semua operasi
+- **Keamanan**: Jangan simpan data sensitif seperti password dalam teks biasa
+- **Manajemen Token**: Refresh token auth saat memulihkan akun
+- **Ukuran Data**: Jaga agar data yang tersimpan tetap minimal untuk memastikan operasi baca/tulis yang cepat
+- **Pengecekan Null**: Selalu periksa apakah data ada sebelum menggunakannya
+- **Strategi Backup**: Pertimbangkan sinkronisasi dengan backend untuk keamanan tambahan
+
+## Pertimbangan Keamanan
+
+- Data akun disimpan menggunakan mekanisme penyimpanan aman khusus platform
+- Data bertahan di seluruh uninstall dan reinstall aplikasi
+- Pertimbangkan untuk mengenkripsi informasi sensitif sebelum menyimpan
+- Implementasikan validasi data yang tepat saat membaca akun yang tersimpan
+- Ikuti panduan platform untuk penanganan data pengguna
+- Gunakan token autentikasi dengan kedaluwarsa untuk keamanan
+- Bersihkan data akun dengan tepat saat pengguna logout
+
+## Implementasi Platform
+
+### iOS
+
+- Memanfaatkan iOS Keychain Services untuk penyimpanan yang aman dan persisten
+- Data bertahan melalui penghapusan aplikasi dan pemulihan perangkat
+- Dilindungi oleh mekanisme keamanan iOS
+
+### Android
+
+- Menggunakan Android Account Manager atau shared preferences dengan backup
+- Mempertahankan data di seluruh reinstall aplikasi dan migrasi perangkat
+- Dilindungi oleh keamanan sistem Android
+
+## Kasus Penggunaan
+
+- **User Onboarding**: Pertahankan progres pengguna melalui reinstall aplikasi
+- **Pemulihan Akun**: Pulihkan sesi pengguna setelah pembaruan aplikasi
+- **Penyimpanan Preferensi**: Pertahankan pengaturan dan konfigurasi pengguna
+- **Aplikasi Offline-First**: Simpan data pengguna penting secara lokal
+- **Manajemen Sesi**: Jaga agar pengguna tetap login di seluruh restart aplikasi
+- **Migrasi Perangkat**: Transfer data pengguna ke perangkat baru

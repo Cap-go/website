@@ -1,0 +1,145 @@
+---
+title: Memulai
+description: Panduan instalasi dan penggunaan untuk @capgo/capacitor-android-inline-install
+locale: id
+sidebar:
+  order: 2
+  label: "Memulai"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Contoh Penggunaan
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+// Basic inline install
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp'
+});
+
+// Advanced install with tracking
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp',
+  referrer: 'campaign=my-campaign&source=app',
+  overlay: true,
+  fallback: true
+});
+
+// Handle the installation flow
+try {
+  await AndroidInlineInstall.startInlineInstall({
+    id: 'com.spotify.music',
+    referrer: 'utm_source=myapp&utm_campaign=music_promotion'
+  });
+  console.log('Install overlay triggered successfully');
+} catch (error) {
+  console.error('Install failed:', error);
+}
+```
+
+## Metode API Inti
+
+### Manajemen Instalasi
+- `startInlineInstall(options)` - Memicu overlay instalasi inline Google Play untuk aplikasi yang ditentukan
+
+## Opsi Konfigurasi
+
+```typescript
+interface InlineInstallOptions {
+  id: string;           // Nama paket aplikasi target (wajib)
+  referrer?: string;    // String kampanye pelacakan (opsional)
+  callerId?: string;    // Nama paket aplikasi pemanggil (default: aplikasi saat ini)
+  overlay?: boolean;    // Aktifkan/nonaktifkan overlay Play (default: true)
+  fallback?: boolean;   // Gunakan halaman store penuh jika overlay gagal (default: true)
+}
+```
+
+## Persyaratan Google Play
+
+### Kelayakan Premium Growth Tools
+Aplikasi Anda harus memenuhi syarat untuk Premium Growth Tools Google Play untuk menggunakan instalasi inline:
+- Aplikasi dengan keterlibatan pengguna yang signifikan
+- Rating dan ulasan Play Store yang baik
+- Kepatuhan dengan kebijakan Google Play
+
+### Persyaratan Aplikasi Target
+- Aplikasi target harus tersedia di Google Play Store
+- Aplikasi target harus mendukung instalasi inline
+- Pengguna harus masuk ke Google Play Store
+
+## Perilaku dan Fallback
+
+### Mode Overlay (default)
+1. Mencoba membuka overlay Google Play di dalam aplikasi Anda
+2. Jika overlay tidak tersedia, kembali ke halaman Play Store penuh
+3. Jika Play Store tidak tersedia, menampilkan error
+
+### Mode Store Penuh
+- Langsung membuka halaman Google Play Store penuh
+- Melewati upaya overlay sepenuhnya
+
+## Dukungan Platform
+
+- **Android**: Dukungan penuh dengan Google Play Services
+- **iOS**: Tidak didukung (fitur khusus Android)
+- **Web**: Tidak didukung (fitur native Android)
+
+## Detail Implementasi
+
+Plugin menggunakan intent Android untuk berkomunikasi dengan Google Play Store:
+- Intent action untuk overlay instalasi inline
+- Fallback ke intent Play Store standar
+- Penanganan otomatis ketersediaan Play Services
+
+## Kasus Penggunaan
+
+- **Penemuan aplikasi**: Promosikan aplikasi terkait dalam ekosistem Anda
+- **Promosi silang**: Dorong instalasi untuk aplikasi partner
+- **Pembukaan fitur**: Instal modul atau ekstensi tambahan
+- **Aplikasi pendamping**: Instal aplikasi pendukung dengan mulus
+
+## Praktik Terbaik
+
+- Selalu sediakan opsi fallback untuk pengguna tanpa Play Services
+- Uji dengan konfigurasi perangkat dan versi Play Store yang berbeda
+- Gunakan pelacakan referrer untuk mengukur tingkat konversi
+- Tangani error instalasi dengan baik
+- Hormati pilihan pengguna jika mereka menolak instalasi
+
+## Keterbatasan
+
+- Fungsi khusus Android
+- Memerlukan Google Play Services
+- Hanya berfungsi dengan aplikasi yang memenuhi syarat untuk Premium Growth Tools
+- Tunduk pada kebijakan dan ketersediaan Google Play Store

@@ -1,0 +1,157 @@
+---
+title: 故障排除
+description: "通过详细的故障排除步骤和上传及调试的高级选项,解决使用 Capgo 时遇到的常见问题。"
+sidebar:
+  order: 5
+next: false
+prev: false
+locale: zh
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+以下是您在使用 Capgo 时可能遇到的一些常见问题及解决方法。
+
+<Card title="🚀 需要专家帮助?" icon="rocket">
+  <p>
+    遇到复杂问题?我们的专家团队随时为您提供帮助!获得个性化支持、代码审查和针对您特定需求的定制解决方案。
+  </p>
+  <div style="margin-top: 1rem;">
+    <a href="/consulting/" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: #2563eb; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s;">
+      获取专业支持
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin:0">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+    </a>
+  </div>
+</Card>
+
+### 上传失败
+
+如果您的 bundle 上传失败,请仔细检查:
+- 您在 `capacitor.config.ts` 中的应用 ID 与 Capgo 仪表板中的应用匹配
+- 您从 Capacitor 项目的根目录运行上传命令
+- 您的 Web 资源已构建且是最新的
+
+#### 高级上传选项
+
+Capgo CLI 提供了一些额外的标志来帮助解决常见的上传问题:
+
+- `--tus`: 使用 [tus 可恢复上传协议](https://tus.io/)来更可靠地上传大型 bundle 或在较差的网络连接下上传。如果您的 bundle 超过 10MB 或您的连接不稳定,请考虑使用 `--tus`:
+  ```shell
+  npx @capgo/cli@latest bundle upload --tus
+  ```
+
+- `--package-json` 和 `--node-modules`: 如果您的应用使用非标准结构(如 monorepo 或 npm workspace),告诉 Capgo 在哪里找到您的根 `package.json` 和 `node_modules`。传递根 `package.json` 的路径和 `--node_modules` 路径:
+  ```shell
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node_modules=path/to/node_modules
+  ```
+  Capgo 需要此信息来正确打包您的应用依赖项。
+
+您可以根据需要将这些标志与其他选项(如 `--channel`)结合使用。有关可用上传选项的完整详细信息,请参阅 [Capgo CLI 文档](/docs/cli/overview/)。
+
+如果您仍然在上传方面遇到问题,请联系 [Capgo 支持](https://support.capgo.app)以获得进一步的帮助。
+
+### 调试更新
+
+如果您在实时更新方面遇到问题,Capgo debug 命令是一个有用的故障排除工具。使用方法如下:
+
+1. 在您的项目目录中运行以下命令:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+2. 在设备或模拟器上启动您的应用,并执行应触发更新的操作(例如,在上传新 bundle 后重新打开应用)。
+
+3. 观察 debug 命令的输出。它将记录有关更新过程的信息,包括:
+   - 应用检查更新的时间
+   - 是否找到更新及其版本
+   - 更新的下载和安装进度
+   - 更新过程中发生的任何错误
+
+4. 使用调试日志来确定问题发生的位置。例如:
+   - 如果未找到更新,请仔细检查您的 bundle 是否已成功上传,以及应用是否配置为使用正确的渠道。
+   - 如果更新下载但未安装,请确保您已调用 `CapacitorUpdater.notifyAppReady()` 并且应用已完全关闭并重新打开。
+   - 如果您看到错误消息,请在 Capgo 文档中查找该特定错误,或联系支持寻求帮助。
+
+debug 命令对于识别更新下载和安装过程中的问题特别有用。如果日志显示找到了预期的更新版本但最终未应用,请将故障排除重点放在下载后的步骤上。
+
+### 使用原生日志调试
+
+除了 Capgo debug 命令外,Android 和 iOS 上的原生日志可以提供有价值的故障排除信息,特别是对于更新过程中原生端的问题。
+
+#### Android 日志
+
+访问 Android 日志:
+
+1. 连接您的设备或启动模拟器
+2. 打开 Android Studio 并选择 "View > Tool Windows > Logcat"
+3. 在 Logcat 窗口中,通过从顶部的下拉菜单中选择您的应用进程来过滤日志
+4. 查找包含 `Capgo` 的任何行以找到 SDK 日志
+
+或者,您可以使用 `adb logcat` 命令并 grep `Capgo` 来过滤日志。
+
+Capgo SDK 将在更新过程中记录关键事件,例如:
+- 启动更新检查的时间
+- 是否找到更新及其版本
+- 更新下载开始和完成的时间
+- 触发更新安装的时间
+- 原生更新步骤期间发生的任何错误
+
+您可能在日志中看到的常见 Android 特定问题包括:
+- 阻止更新下载的网络连接问题
+- 保存或读取更新 bundle 时的文件权限错误
+- 更新 bundle 的存储空间不足
+- 安装更新后无法重新启动应用
+
+#### iOS 日志
+
+访问 iOS 日志:
+
+1. 连接您的设备或启动模拟器
+2. 打开 Xcode 并转到 "Window > Devices and Simulators"
+3. 选择您的设备并点击 "Open Console"
+4. 在控制台输出中,查找包含 `Capgo` 的任何行以找到 SDK 日志
+
+您还可以在终端中使用 `log stream` 命令并 grep `Capgo` 来过滤日志。
+
+与 Android 类似,Capgo SDK 将记录关键的 iOS 端事件:
+- 更新检查启动和结果
+- 下载开始、进度和完成
+- 安装触发和结果
+- 原生更新过程中的任何错误
+
+您可能在日志中识别的 iOS 特定问题包括:
+- 下载更新时的 SSL 证书问题
+- 应用传输安全阻止更新下载
+- 更新 bundle 的存储空间不足
+- 无法正确提取或应用更新 bundle
+
+在两个平台上,原生日志都提供了对更新过程的较低级别视图,包含有关原生实现的更多详细信息。它们对于识别发生在 Capgo JavaScript 层之外的问题特别有用。
+
+在排除棘手的实时更新问题时,最好同时捕获 Capgo 调试日志和原生日志,以全面了解正在发生的情况。这两个日志一起将为您提供识别和解决问题的最佳机会。
+
+### 更新未应用
+
+如果您已上传 bundle 但在设备上看不到更改:
+- 确保您已在应用代码中调用 `CapacitorUpdater.notifyAppReady()`,如[快速入门](/docs/getting-started/quickstart)中所示
+- 检查您的设备是否已连接到互联网,以及 Capgo 调试日志是否显示更新已下载
+- 尝试完全关闭并重新打开应用,因为更新仅在全新启动时应用
+- 查找原生日志中可能表明应用更新时出现问题的任何错误
+
+有关更新过程的更多详细信息,请参阅[部署实时更新](/docs/getting-started/deploy)指南。如果您仍然遇到困难,请使用 `npx @capgo/cli@latest app debug` 命令和原生日志来更深入地了解正在发生的情况。
+
+## SDK 安装
+
+如果您在安装 Capgo SDK 时遇到问题,请确保:
+- 您的应用使用的是受支持的 Capacitor 版本(4.0 或更高版本)
+- 您已按顺序遵循[快速入门](/docs/getting-started/quickstart)步骤,包括在安装 SDK 后同步您的应用
+
+## CI/CD 集成
+
+对于从 CI/CD 管道触发 Capgo 上传的问题:
+- 仔细检查您的 Capgo 身份验证令牌是否设置正确
+- 确保您在 Web 资源构建后运行上传命令
+- 检查上传命令是否为目标环境使用正确的渠道名称
+
+有关更多故障排除提示,请参阅 [CI/CD 集成](/docs/getting-started/cicd-integration/)文档。您还可以使用 `npx @capgo/cli@latest app debug` 命令来确认您的应用是否收到了 CI/CD 触发的更新。

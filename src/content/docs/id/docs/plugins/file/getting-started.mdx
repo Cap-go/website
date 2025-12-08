@@ -1,0 +1,389 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin File untuk operasi file system dalam aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-file" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+Import plugin dan gunakan metodenya untuk operasi file:
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+// Write a text file
+const writeFile = async () => {
+  const result = await CapacitorFile.writeFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    data: 'Hello, World!',
+    encoding: Encoding.UTF8,
+    recursive: true, // Create parent directories if needed
+  });
+  console.log('File written to:', result.uri);
+};
+
+// Read a text file
+const readFile = async () => {
+  const result = await CapacitorFile.readFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    encoding: Encoding.UTF8,
+  });
+  console.log('File contents:', result.data);
+};
+
+// Check if file exists
+const checkExists = async () => {
+  const result = await CapacitorFile.exists({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+  console.log('File exists:', result.exists);
+};
+
+// Delete a file
+const deleteFile = async () => {
+  await CapacitorFile.deleteFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+};
+```
+
+## Lokasi Direktori
+
+Plugin menyediakan beberapa konstanta direktori:
+
+```typescript
+import { Directory } from '@capgo/capacitor-file';
+
+// Available directories
+Directory.Documents  // User-visible documents (backed up)
+Directory.Data       // Private app data storage
+Directory.Library    // App support files (iOS) / files (Android)
+Directory.Cache      // Temporary cache (may be cleared by OS)
+Directory.External   // External storage (Android only)
+Directory.Application // Read-only app bundle
+```
+
+## Opsi Encoding
+
+```typescript
+import { Encoding } from '@capgo/capacitor-file';
+
+Encoding.UTF8   // UTF-8 text encoding
+Encoding.ASCII  // ASCII text encoding
+Encoding.UTF16  // UTF-16 text encoding
+// Omit encoding for binary data (returns base64)
+```
+
+## Referensi API
+
+### writeFile(options)
+
+Menulis data ke file.
+
+```typescript
+const result = await CapacitorFile.writeFile({
+  path: 'folder/file.txt',
+  directory: Directory.Documents,
+  data: 'File content',
+  encoding: Encoding.UTF8,
+  recursive: true,  // Create directories if needed
+  append: false,    // Overwrite existing file
+  position: 0,      // Byte position for random access writes
+});
+// Returns: { uri: string }
+```
+
+### readFile(options)
+
+Membaca konten file.
+
+```typescript
+const result = await CapacitorFile.readFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  encoding: Encoding.UTF8,
+  offset: 0,    // Start reading from byte offset
+  length: 100,  // Read only this many bytes
+});
+// Returns: { data: string }
+```
+
+### appendFile(options)
+
+Menambahkan data ke file.
+
+```typescript
+await CapacitorFile.appendFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  data: '\nNew line',
+  encoding: Encoding.UTF8,
+});
+```
+
+### deleteFile(options)
+
+Menghapus file.
+
+```typescript
+await CapacitorFile.deleteFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+```
+
+### mkdir(options)
+
+Membuat direktori.
+
+```typescript
+await CapacitorFile.mkdir({
+  path: 'my-folder/sub-folder',
+  directory: Directory.Documents,
+  recursive: true,  // Create parent directories
+});
+```
+
+### rmdir(options)
+
+Menghapus direktori.
+
+```typescript
+await CapacitorFile.rmdir({
+  path: 'my-folder',
+  directory: Directory.Documents,
+  recursive: true,  // Delete contents recursively
+});
+```
+
+### readdir(options)
+
+Mendaftar konten direktori.
+
+```typescript
+const result = await CapacitorFile.readdir({
+  path: '',  // Empty for root of directory
+  directory: Directory.Documents,
+});
+// Returns: { entries: Entry[] }
+// Each entry has: { name, isFile, isDirectory, fullPath, nativeURL }
+```
+
+### stat(options)
+
+Mendapatkan metadata file atau direktori.
+
+```typescript
+const result = await CapacitorFile.stat({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// Returns: { type, size, mtime, ctime, uri }
+```
+
+### exists(options)
+
+Memeriksa apakah file atau direktori ada.
+
+```typescript
+const result = await CapacitorFile.exists({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// Returns: { exists: boolean, type?: 'file' | 'directory' }
+```
+
+### copy(options)
+
+Menyalin file atau direktori.
+
+```typescript
+const result = await CapacitorFile.copy({
+  from: 'source.txt',
+  to: 'destination.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+// Returns: { uri: string }
+```
+
+### rename(options) / move(options)
+
+Mengganti nama atau memindahkan file atau direktori.
+
+```typescript
+await CapacitorFile.rename({
+  from: 'old-name.txt',
+  to: 'new-name.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+```
+
+### truncate(options)
+
+Memotong file ke ukuran tertentu.
+
+```typescript
+await CapacitorFile.truncate({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  size: 100,  // Truncate to 100 bytes
+});
+```
+
+### getUri(options)
+
+Mendapatkan URI native untuk file.
+
+```typescript
+const result = await CapacitorFile.getUri({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// Returns: { uri: string }
+```
+
+### getDirectories()
+
+Mendapatkan semua path direktori yang tersedia.
+
+```typescript
+const dirs = await CapacitorFile.getDirectories();
+// Returns paths for: documents, data, cache, external, etc.
+```
+
+### getFreeDiskSpace()
+
+Mendapatkan ruang disk yang tersedia.
+
+```typescript
+const result = await CapacitorFile.getFreeDiskSpace();
+console.log('Free space:', result.free, 'bytes');
+```
+
+### checkPermissions() / requestPermissions()
+
+Menangani izin penyimpanan (Android).
+
+```typescript
+const status = await CapacitorFile.checkPermissions();
+if (status.publicStorage !== 'granted') {
+  await CapacitorFile.requestPermissions();
+}
+```
+
+## Contoh Lengkap
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+export class FileService {
+  async saveJson(filename: string, data: object): Promise<void> {
+    await CapacitorFile.writeFile({
+      path: filename,
+      directory: Directory.Documents,
+      data: JSON.stringify(data, null, 2),
+      encoding: Encoding.UTF8,
+      recursive: true,
+    });
+  }
+
+  async loadJson<T>(filename: string): Promise<T | null> {
+    try {
+      const { exists } = await CapacitorFile.exists({
+        path: filename,
+        directory: Directory.Documents,
+      });
+
+      if (!exists) return null;
+
+      const result = await CapacitorFile.readFile({
+        path: filename,
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8,
+      });
+
+      return JSON.parse(result.data) as T;
+    } catch (error) {
+      console.error('Failed to load JSON:', error);
+      return null;
+    }
+  }
+
+  async listFiles(folder: string = ''): Promise<string[]> {
+    const result = await CapacitorFile.readdir({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    return result.entries
+      .filter(entry => entry.isFile)
+      .map(entry => entry.name);
+  }
+
+  async deleteAll(folder: string): Promise<void> {
+    const { exists } = await CapacitorFile.exists({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    if (exists) {
+      await CapacitorFile.rmdir({
+        path: folder,
+        directory: Directory.Documents,
+        recursive: true,
+      });
+    }
+  }
+
+  async copyToBackup(filename: string): Promise<string> {
+    const timestamp = Date.now();
+    const backupName = `backup/${timestamp}-${filename}`;
+
+    const result = await CapacitorFile.copy({
+      from: filename,
+      to: backupName,
+      directory: Directory.Documents,
+      toDirectory: Directory.Documents,
+    });
+
+    return result.uri;
+  }
+}
+```
+
+## Catatan Platform
+
+### iOS
+- Memerlukan iOS 13.0+
+- Direktori Documents terlihat di aplikasi Files
+- Direktori Library untuk file dukungan aplikasi
+- Cache mungkin dibersihkan ketika penyimpanan perangkat rendah
+
+### Android
+- Memerlukan Android 6.0 (API 23)+
+- Penyimpanan eksternal memerlukan izin runtime pada versi Android yang lebih lama
+- Direktori Documents dipetakan ke direktori files aplikasi
+- Gunakan direktori External untuk akses penyimpanan bersama
+
+### Web
+- Tidak didukung pada platform web

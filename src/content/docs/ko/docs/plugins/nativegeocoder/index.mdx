@@ -1,0 +1,41 @@
+---
+title: "@capgo/nativegeocoder"
+locale: ko
+description: 주소를 좌표로 변환하고 그 반대로 변환하는 네이티브 정방향 및 역방향 지오코딩 플러그인입니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 정확한 위치 데이터를 위해 네이티브 플랫폼 지오코딩 API를 사용하여 주소와 지리적 좌표 간을 변환하세요.
+  image:
+    file: ~public/icons/plugins/nativegeocoder.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/nativegeocoder/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-nativegeocoder/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="정방향 지오코딩" icon="rocket">
+    주소를 지리적 좌표로 변환
+  </Card>
+  <Card title="역방향 지오코딩" icon="document">
+    좌표를 사람이 읽을 수 있는 주소로 변환
+  </Card>
+  <Card title="네이티브 정확도" icon="star">
+    최상의 결과를 위해 플랫폼 네이티브 지오코딩 사용
+  </Card>
+  <Card title="포괄적인 문서" icon="open-book">
+    단 몇 분 만에 플러그인을 마스터하려면 [문서](/docs/plugins/nativegeocoder/getting-started/)를 확인하세요.
+  </Card>
+</CardGrid>

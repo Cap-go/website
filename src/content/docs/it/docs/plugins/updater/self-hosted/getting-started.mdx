@@ -1,0 +1,117 @@
+---
+title: "Guida Introduttiva"
+locale: it
+description: "Una guida completa sulla configurazione e gestione del tuo server di auto-aggiornamento per aggiornamenti e manutenzione dell'applicazione senza interruzioni"
+sidebar:
+    order: 1
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Questa documentazione spiegherà come eseguire il tuo server di auto-aggiornamento.
+
+## Introduzione
+
+Se trovi questo lavoro utile, considera di supportare il mio lavoro diventando uno [sponsor Github](https://github.com/sponsors/riderx).
+
+Ho fatto una scommessa di rendere open-source tutto il codice che ho costruito qui invece di metterlo dietro un paywall. Aprendolo invece di combattere e nascondere, credo che possiamo rendere il mondo un posto migliore.
+
+Inoltre, voglio concentrarmi sugli strumenti Capgo, e renderlo un business aperto e trasparente.
+
+Ma per renderlo possibile, è necessario che tutti noi facciamo la nostra parte, incluso tu 🥹.
+
+Se Capgo non fa per te, allora paga il tuo prezzo e [sostieni un Maker bootstrap](https://github.com/sponsors/riderx) alle tue condizioni.
+
+<LinkCard title="Considera di Contribuire" href="/docs/plugin/self-hosted/contributing/"/>
+## Parità di funzionalità
+
+Se scegli di andare con il tuo server, perderai il flusso di configurazione di 5 minuti.\
+Devi implementare tutte queste funzionalità da solo.
+
+
+| Funzionalità                     | Capgo | Self hosted |
+| -------------------------------- | ----- | ----------- |
+| Aggiornamenti                    | ✅     | 🚧         |
+| Auto revert                      | ✅     | 🚧         |
+| Avvisi email su fallimento       | ✅     | 🚧         |
+| Canali                           | ✅     | 🚧         |
+| Override Canali                  | ✅     | 🚧         |
+| Override Dispositivo             | ✅     | 🚧         |
+| Impostazioni Canali              | ✅     | 🚧         |
+| Impostazioni Dispositivo         | ✅     | 🚧         |
+| ID Personalizzato                | ✅     | 🚧         |
+| Auto Set Canali                  | ✅     | 🚧         |
+| API Canali                       | ✅     | 🚧         |
+| Statistiche Aggiornamenti        | ✅     | 🚧         |
+| Statistiche Fallimenti Download  | ✅     | 🚧         |
+| Statistiche Utilizzo App         | ✅     | 🚧         |
+| Crittografia Aggiornamenti       | ✅     | 🚧         |
+| Aggiornamenti differenziali      | ✅     | ❌         |
+
+:::danger
+Se invii un aggiornamento errato ai tuoi utenti puoi e romperai la loro app.
+:::
+
+> Tieni presente che non puoi usare Capgo cloud e il tuo server allo stesso tempo.
+
+
+
+:::danger
+La funzionalità di aggiornamento Over-the-Air (OTA) è applicabile solo per le modifiche apportate ai file HTML, CSS e JavaScript.
+
+Se apporti modifiche al codice nativo, come aggiornamenti ai plugin Capacitor, è obbligatorio inviare nuovamente l'applicazione all'app store per l'approvazione.
+:::
+
+## Scegli tra Auto e Manuale
+In modalità auto, parte della logica è gestita dal codice Nativo, gli aggiornamenti sono decisi lato server, questo è più sicuro e permette aggiornamenti a grana fine, distribuzione parziale a un dispositivo o gruppo e altro ancora.
+
+In modalità manuale, tutta la logica è gestita dal JS.
+
+
+
+<LinkCard
+	title="Auto Update"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manuale"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+## Installa Capacitor updater
+
+```bash title="Installa Capacitor updater"
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+## Prepara il tuo bundle
+
+Per inviare aggiornamenti alla tua app, devi zipparla.
+Il modo migliore per essere certi che il tuo zip sia corretto è usare la CLI Capgo per zippare.
+```bash title="Crea un bundle con i tuoi file da servire dal tuo server"
+npx @capgo/cli@latest bundle zip
+```
+
+
+Dovrai servire questo zip dal tuo server autonomamente.
+
+<LinkCard
+	title="Auto Update"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manuale"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+
+:::note
+Se questo sembra molto lavoro, prova la trial di Capgo Cloud.
+:::
+
+:::note
+Gli aggiornamenti differenziali non funzioneranno negli aggiornamenti manuali, ma possono funzionare negli aggiornamenti automatici, al momento non è documentato poiché è un processo piuttosto complesso
+:::

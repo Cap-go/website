@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-media-session"
+description: Controlla la schermata di blocco, le notifiche e i controlli multimediali delle cuffie direttamente da Capacitor.
+locale: it
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+hero:
+  tagline: Pubblica metadati delle tracce, reagisci agli eventi play/pausa e sincronizza lo stato di riproduzione con i controlli multimediali nativi.
+  image:
+    file: ~public/icons/plugins/media-session.svg
+  actions:
+    - text: Inizia
+      link: /docs/plugins/media-session/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-media-session/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Il plugin Media Session collega Capacitor con l'API Media Session in modo che i tuoi player audio e video sembrino nativi ovunque.
+
+<CardGrid stagger>
+  <Card title="Metadati ricchi" icon="star">
+    Fornisci copertina dell'album, artista e titolo per i controlli della schermata di blocco e delle notifiche.
+  </Card>
+  <Card title="Sincronizzazione stato di riproduzione" icon="rocket">
+    Mantieni allineati i pulsanti play/pausa e gli indicatori di progresso con il tuo player.
+  </Card>
+  <Card title="Callback azioni" icon="pencil">
+    Gestisci i pulsanti delle cuffie e le azioni multimediali del sistema operativo dal tuo codice Capacitor.
+  </Card>
+  <Card title="Segnalazione posizione" icon="download">
+    Invia durata, posizione e velocità in modo che lo scrubbing funzioni fluidamente.
+  </Card>
+</CardGrid>
+
+Passa alla guida introduttiva per collegare gli aggiornamenti dei metadati al ciclo di vita del tuo player.

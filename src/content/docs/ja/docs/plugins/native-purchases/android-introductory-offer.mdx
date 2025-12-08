@@ -1,0 +1,197 @@
+---
+title: Androidサブスクリプション入門オファーの作成
+locale: ja
+description: 新規サブスクライバーを引き付けるためにAndroidで自動更新サブスクリプションの入門オファーを作成する方法を学びます。
+sidebar:
+  order: 5
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+入門オファーにより、対象ユーザーに無料トライアルまたは割引入門価格を提供できます。入門期間終了後、サブスクリプションはキャンセルされない限り、標準価格で自動的に更新されます。
+
+## 概要
+
+入門オファーは次のための強力なツールです:
+- 新規サブスクライバーの参入障壁を減らす
+- コンバージョン率を上げる
+- ユーザーがリスクなくプレミアム機能を試せるようにする
+- 長期的なサブスクライバー関係を構築
+
+## 適格性
+
+ユーザーは、以前にサブスクリプションを購入したことがない、または入門オファーを受け取ったことがない場合に入門オファーを受け取ることができます。Google Playは自動的に適格性を処理します。
+
+## 前提条件
+
+入門オファーを追加する前に、まず[自動更新サブスクリプションを作成](/docs/plugins/native-purchases/android-create-subscription/)する必要があります。
+
+## 入門オファーの作成
+
+<Steps>
+
+1. **オファー設定にアクセス**
+
+   Google Play Consoleでサブスクリプションに移動し、**Add offer**ボタンを選択します。
+
+   ![オファーボタンを追加](/native-purchases/android/introductory-offer/add-offer-button.webp)
+
+2. **ベースプランを選択**
+
+   ベースプランを選択する必要があるモーダルが表示されます。通常、ベースプランは1つだけです。**Add offer**をクリックして続行します。
+
+   ![ベースプランを選択](/native-purchases/android/introductory-offer/select-base-plan.webp)
+
+3. **オファーの詳細を設定**
+
+   以下の情報を入力します:
+
+   **Offer ID**: このオファーの一意の識別子
+
+   **Eligibility**: このオファーを受け取れる人を選択
+   - **New customers**: サブスクライブしたことがないユーザーのみ
+   - **Existing customers**: 以前にサブスクライブしたユーザー
+   - **Developer determined**: カスタム適格性ロジック(native-purchasesではサポートされていません)
+
+   :::caution
+   native-purchasesプラグインは"Developer determined"適格性オプションをサポートしていません。代わりに"New customers"または"Existing customers"を使用してください。
+   :::
+
+   ![オファーを設定](/native-purchases/android/introductory-offer/configure-offer-details.webp)
+
+4. **フェーズを追加**
+
+   ページの下部にある**Add phase**をクリックして、オファー構造を定義します。
+
+   最大2つのフェーズを追加でき、以下のような組み合わせが可能です:
+   - 無料トライアルのみ
+   - 割引価格のみ
+   - 無料トライアル後に割引定期支払い
+
+5. **フェーズタイプを選択**
+
+   3つのフェーズタイプから選択:
+
+   **Free Trial**
+   - 設定された期間の無料アクセス
+   - 例: 7日間無料、その後$9.99/月
+
+   **Single Payment**
+   - 特定期間の1回限りの割引価格
+   - 例: 2ヶ月間$1.99、その後$9.99/月
+
+   **Discounted Recurring Payment**
+   - 複数サイクルの請求サイクルごとの割引料金
+   - 例: 3ヶ月間$4.99/月、その後$9.99/月
+
+6. **フェーズ期間を設定**
+
+   入門フェーズの継続期間を設定:
+   - 日、週、または月
+   - 請求サイクルの数
+
+7. **確定して有効化**
+
+   **Apply**をクリックし、次に**Save**をクリックしてオファーを有効化します。保存後、**Activate**ボタンが利用可能になります。
+
+</Steps>
+
+## オファーフェーズの例
+
+### 例1: シンプルな無料トライアル
+- フェーズ1: 7日間無料
+- その後: $9.99/月の標準価格
+
+### 例2: 割引入門
+- フェーズ1: 最初の月は$1.99
+- その後: $9.99/月の標準価格
+
+### 例3: 延長トライアル + 割引
+- フェーズ1: 14日間無料
+- フェーズ2: 2ヶ月間$4.99/月
+- その後: $9.99/月の標準価格
+
+## アプリでの使用
+
+native-purchasesプラグインは、入門オファーの適格性とプレゼンテーションを自動的に処理します:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// プロダクトを取得(入門オファーメタデータを含む)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+
+if (product.introductoryPrice) {
+  console.log(`Intro price: ${product.introductoryPriceString}`);
+  console.log(`Regular price: ${product.priceString}`);
+  console.log(
+    `Offer duration: ${product.introductoryPrice.subscriptionPeriod?.numberOfUnits} ${product.introductoryPrice.subscriptionPeriod?.unit}`,
+  );
+} else {
+  console.log('No intro offer configured for this product');
+}
+
+// 購入(ユーザーが適格な場合、Google Playは自動的に入門価格を適用)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // Google Play ConsoleのBase Plan ID
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Introductory purchase transaction', transaction.transactionId);
+```
+
+## ベストプラクティス
+
+### オファー期間
+- **無料トライアル**: ほとんどのアプリで3〜14日が最適
+- **割引期間**: 習慣を構築するには1〜3ヶ月が適切
+- **価格割引**: 通常価格の50〜70%オフがコンバージョンを促進
+
+### マーケティング
+- 入門オファーと通常価格を明確に表示
+- 入門期間後に何が起こるかを示す
+- キャンセルを簡単で透明にする
+- 入門期間終了前にユーザーに通知
+
+### A/Bテスト
+異なるオファー構造をテスト:
+- 無料トライアル期間
+- 割引率
+- 割引期間
+- シングルフェーズ対マルチフェーズ
+
+## 重要な注意事項
+
+- 一度に有効にできる入門オファーはサブスクリプションごとに1つのみ
+- ユーザーはサブスクリプションごとに入門オファーを1回のみ請求できます
+- 入門オファーはサブスクリプションのアップグレード/ダウングレードには適用されません
+- 入門オファーへの変更は既存のサブスクライバーに影響しません
+
+## トラブルシューティング
+
+**入門オファーが表示されない:**
+- Play Consoleでオファーが有効化されていることを確認
+- ユーザーの適格性を確認(以前にオファーを使用した可能性があります)
+- アプリが最新のプロダクト情報を使用していることを確認
+
+**間違ったユーザーがオファーを受け取る:**
+- 適格性設定を確認(新規顧客対既存顧客)
+- ユーザーが以前に別のデバイスでサブスクライブしたか確認
+- Play Storeアカウントの履歴を確認
+
+**購入時にオファーが適用されない:**
+- プロダクトIDが正確に一致することを確認
+- オファーがまだ有効で期限切れでないことを確認
+- オファーの日付範囲設定を確認
+
+## 次のステップ
+
+- オファーをテストするために[サンドボックステストを設定](/docs/plugins/native-purchases/android-sandbox-testing/)
+- Play Console分析でコンバージョン率を監視
+- 異なるオファーを持つ複数のサブスクリプション層の作成を検討

@@ -1,0 +1,65 @@
+---
+title: Google Login di Supabase su Android
+locale: it
+description: Scopri come configurare Google Sign-In con l'autenticazione Supabase su Android utilizzando il plugin Capacitor Social Login.
+sidebar:
+    order: 2
+---
+
+## Introduzione
+
+Questa guida ti aiuterà a integrare Google Sign-In con l'autenticazione Supabase su Android. Si presume che tu abbia già completato:
+ -  la [configurazione di Google Login per Android](/docs/plugins/social-login/google/android/)
+ -  la [Configurazione Generale di Google Login per Supabase](/docs/plugins/social-login/supabase/google/general/).
+
+## Implementazione
+
+L'implementazione completa è disponibile nel file [`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) dell'app di esempio. Questa guida spiega i concetti chiave e come utilizzarlo.
+
+### Utilizzo dell'Helper di Autenticazione
+
+La funzione `authenticateWithGoogleSupabase` gestisce l'intero flusso di autenticazione:
+
+```typescript
+import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithGoogleSupabase();
+if (result.success) {
+  console.log('Accesso effettuato:', result.user);
+  // Naviga verso la tua area autenticata
+} else {
+  console.error('Errore:', result.error);
+}
+```
+
+## Come Funziona
+
+Per una spiegazione dettagliata di come funziona il flusso di autenticazione, inclusa la generazione del nonce, la validazione JWT e l'accesso a Supabase, consulta la [sezione Come Funziona nella guida alla Configurazione Generale](/docs/plugins/social-login/supabase/google/general/#how-it-works).
+
+Per il riferimento completo al codice, consulta la [sezione Riferimento Completo al Codice nella guida alla Configurazione Generale](/docs/plugins/social-login/supabase/google/general/#complete-code-reference).
+
+## Note Importanti
+
+### Gestione del Nonce
+
+L'implementazione del nonce segue il modello della [documentazione React Native Google Sign In](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+
+- `rawNonce` va a `signInWithIdToken()` di Supabase
+- Supabase crea un hash di `rawNonce` e lo confronta con il `nonceDigest` che è incluso nell'ID token di Google Sign-In
+- `nonceDigest` (hash SHA-256, codificato in esadecimale) va al parametro `nonce` nelle API di Google Sign-In
+
+### Retry Automatico
+
+L'implementazione include una logica di retry automatico:
+- Se la validazione JWT fallisce al primo tentativo, effettua il logout e riprova una volta
+- Questo gestisce i casi in cui i token memorizzati nella cache potrebbero avere nonce errati
+- Se anche il retry fallisce, viene restituito un errore
+
+## Risoluzione dei Problemi
+
+Se l'autenticazione fallisce:
+
+- **Audience non valido**: Verifica che i tuoi Google Client ID corrispondano sia nella Console Google Cloud che in Supabase
+- **Nonce non corrispondente**: Controlla i log della console - la funzione riproverà automaticamente, ma puoi effettuare manualmente il logout prima se necessario
+- **Validazione del token fallita**: Assicurati di utilizzare `mode: 'online'` nella chiamata initialize per ottenere un idToken
+- Consulta il [codice dell'app di esempio](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) per riferimento

@@ -1,0 +1,246 @@
+---
+title: "@capgo/capacitor-launch-navigator"
+description: Plugin peluncuran aplikasi navigasi untuk aplikasi Capacitor dengan dukungan untuk Google Maps, Apple Maps, Waze, dan layanan navigasi lainnya.
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Luncurkan aplikasi navigasi dengan petunjuk turn-by-turn, mendukung beberapa penyedia peta dan opsi routing kustom.
+  image:
+    file: ~public/icons/plugins/launch-navigator.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/launch-navigator/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-launch-navigator/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Ringkasan
+
+Plugin Capacitor Launch Navigator memungkinkan peluncuran aplikasi navigasi native di perangkat iOS dan Android dengan navigasi berbasis koordinat. Plugin ini menyediakan integrasi yang mulus dengan aplikasi pemetaan populer dan mendukung berbagai mode transportasi untuk solusi navigasi yang komprehensif.
+
+<CardGrid stagger>
+  <Card title="Dukungan multi-aplikasi" icon="rocket">
+    Google Maps, Apple Maps, Waze, Citymapper dan lainnya 🗺️
+  </Card>
+  <Card title="Mode transportasi" icon="magnifier">
+    Petunjuk mengemudi, berjalan kaki, transit, dan bersepeda 🧭
+  </Card>
+  <Card title="Deteksi aplikasi" icon="magnifier">
+    Periksa ketersediaan dan daftar aplikasi navigasi yang terinstal 🔍
+  </Card>
+  <Card title="Berbasis koordinat" icon="star">
+    Navigasi menggunakan koordinat latitude/longitude 📍
+  </Card>
+</CardGrid>
+
+## Instalasi
+
+```bash
+npm install @capgo/capacitor-launch-navigator
+npx cap sync
+```
+
+## Konfigurasi iOS
+
+Tambahkan URL scheme ke `Info.plist` Anda untuk mendeteksi aplikasi navigasi yang terinstal:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <!-- Tambahkan scheme aplikasi navigasi lainnya -->
+</array>
+```
+
+## Metode API Inti
+
+### Navigasi
+- `navigate(options)` - Luncurkan navigasi ke koordinat yang ditentukan
+- `isAppAvailable(options)` - Periksa apakah aplikasi navigasi tertentu terinstal
+- `getAvailableApps()` - Daftar semua aplikasi navigasi yang tersedia di perangkat
+- `getSupportedApps()` - Dapatkan semua aplikasi yang didukung untuk platform saat ini
+
+## Contoh Penggunaan
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// Navigasi dasar ke koordinat
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // Koordinat San Francisco
+});
+
+// Navigasi lanjutan dengan opsi
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // Titik awal opsional
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // Aplikasi navigasi yang dipilih
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// Periksa apakah aplikasi tertentu tersedia
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps terinstal');
+} else {
+  console.log('Google Maps tidak tersedia');
+}
+
+// Dapatkan semua aplikasi navigasi yang tersedia
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('Aplikasi navigasi yang tersedia:', availableApps);
+
+// Dapatkan semua aplikasi yang didukung untuk platform
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('Aplikasi yang didukung:', supportedApps);
+```
+
+## Opsi Navigasi
+
+```typescript
+interface NavigationOptions {
+  start?: [number, number];      // Koordinat awal [lat, lng]
+  transportMode?: TransportMode; // Metode transportasi
+  app?: string;                  // Aplikasi navigasi yang dipilih
+  appDisplayName?: string;       // Nama tampilan untuk aplikasi
+  launchMode?: LaunchMode;       // Cara meluncurkan aplikasi
+}
+```
+
+## Mode Transportasi
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## Aplikasi Navigasi yang Didukung
+
+### iOS
+- Apple Maps (bawaan)
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- Dan banyak lagi...
+
+### Android
+- Google Maps (bawaan)
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- Dan banyak lagi...
+
+## Persyaratan Koordinat
+
+> ⚠️ **Penting**: Plugin ini hanya menerima koordinat latitude/longitude untuk navigasi. Gunakan [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) untuk mengonversi alamat ke koordinat.
+
+```typescript
+// Contoh dengan geocoding
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+// Konversi alamat ke koordinat
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // Luncurkan navigasi dengan koordinat yang di-geocode
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## Deteksi dan Pemilihan Aplikasi
+
+```typescript
+// Periksa beberapa aplikasi dan gunakan yang pertama tersedia
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('Tidak ada aplikasi navigasi yang didukung ditemukan');
+}
+```
+
+## Penanganan Error
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('Navigasi gagal:', error);
+  // Tangani error - aplikasi tidak tersedia, koordinat tidak valid, dll.
+}
+```
+
+## Kasus Penggunaan
+
+- **Layanan berbasis lokasi**: Navigasikan pengguna ke titik menarik
+- **Aplikasi pengiriman**: Pandu pengemudi ke lokasi pengiriman
+- **Aplikasi event**: Arahkan peserta ke lokasi venue
+- **Aplikasi real estate**: Navigasi ke lokasi properti
+- **Aplikasi perjalanan**: Pandu wisatawan ke atraksi
+
+## Praktik Terbaik
+
+- Selalu periksa ketersediaan aplikasi sebelum mencoba navigasi
+- Sediakan opsi fallback ketika aplikasi yang dipilih tidak tersedia
+- Gunakan nama tampilan aplikasi yang bermakna untuk pemilihan pengguna
+- Tangani error dengan anggun dengan pesan yang ramah pengguna
+- Pertimbangkan preferensi pengguna untuk aplikasi navigasi default
+
+## Dokumentasi
+
+Periksa [dokumentasi lengkap](/docs/plugins/launch-navigator/getting-started/) untuk panduan implementasi terperinci dan pola navigasi lanjutan.

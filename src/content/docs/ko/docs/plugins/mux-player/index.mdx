@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-mux-player"
+description: 서명된 재생 및 분석 지원으로 Capacitor 앱에서 네이티브 Mux Player SDK를 실행하세요.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: DRM, 분석 및 iOS, Android 및 웹에서 일관된 컨트롤을 갖춘 전체 화면에서 고품질 Mux 비디오를 스트리밍하세요.
+  image:
+    file: ~public/icons/plugins/mux-player.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/mux-player/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mux-player/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+공식 Mux 네이티브 SDK를 간단한 Capacitor 인터페이스로 래핑하여 프리미엄 재생을 제공합니다.
+
+<CardGrid stagger>
+  <Card title="네이티브 SDK 경험" icon="rocket">
+    적응형 비트레이트 및 DRM을 사용하여 Mux 모바일 SDK와 동일한 재생 스택을 사용하세요.
+  </Card>
+  <Card title="서명된 재생" icon="approve-check">
+    보호된 스트림의 안전한 전달을 위해 재생 및 DRM 토큰을 제공하세요.
+  </Card>
+  <Card title="통일된 API" icon="pencil">
+    하나의 TypeScript API로 재생을 트리거하고, 플레이어를 해제하고, 이벤트를 수신하세요.
+  </Card>
+  <Card title="분석 준비" icon="star">
+    Mux Data 원격 측정을 자동으로 공급하기 위해 환경 키와 플레이어 이름을 전달하세요.
+  </Card>
+</CardGrid>
+
+시작 가이드에서는 네이티브 SDK 연결, 토큰 처리 및 플레이어 이벤트에 대한 응답 방법을 안내합니다.

@@ -1,0 +1,179 @@
+---
+title: "통계 API"
+locale: ko
+description: "자체 호스팅 모드에서 자동 업데이트 플러그인과 함께 Capgo의 통계 엔드포인트를 사용하는 방법, 그 용도 및 기대사항"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+
+## 통계 API
+
+버전 1.3.0부터 업데이트 시스템은 통계를 보낼 수 있습니다!
+
+기본적으로 모든 통계는 사용량과 연구를 이해하기 위해 서버로 전송됩니다.
+
+<Aside>
+통계에는 개인 데이터가 전송되지 않으며 임의 UUID, 버전 업데이트, 버전 네이티브 앱, 플랫폼, 액션 및 앱 ID만 전송됩니다.
+</Aside>
+
+대신 이 데이터를 자체 서버로 보내려면 아래 구성을 변경하세요:
+
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "YOUR_URL"
+		}
+	}
+}
+```
+
+## 데이터 구조
+
+서버에서 받게 될 내용은:
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // can be set, delete, set_fail, reset, revert
+	// Then it's the same info as update
+	"app_id": "**.***.**", // app identifier in the store
+	"device_id": "*******", // unique id per app install
+	"platform": "ios", // or android
+	"custom_id": "user_1", // represent your user
+        "version_name": "1.2.3", // version of the web build
+        "version_build": "1.2.0", // version of the native build
+        "version_code": "120", // build number of the native build
+	"version_os": "16", // OS version of the device
+        "plugin_version": "4.0.0"// to make your api behave differently with different plugins
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+빈 문자열로 완전히 비활성화할 수도 있습니다. 통계는 프라이버시 친화적으로 만들어지며 사람들이 플러그인을 어떻게 사용하는지 이해하고 문제를 해결하고 개선하는 데 도움이 된다는 점을 명심하세요.
+
+## 구현 예제
+
+다음은 플러그인의 통계를 저장하는 JavaScript 코드 예제입니다:
+
+```typescript
+interface AppInfos {
+  version_name: string
+  action: 'ping' |
+          'delete' |
+          'reset' |
+          'set' |
+          'get' |
+          'set_fail' |
+          'update_fail' |
+          'download_fail' |
+          'windows_path_fail' |
+          'canonical_path_fail' |
+          'directory_path_fail' |
+          'unzip_fail' |
+          'low_mem_fail' |
+          'download_10' |
+          'download_20' |
+          'download_30' |
+          'download_40' |
+          'download_50' |
+          'download_60' |
+          'download_70' |
+          'download_80' |
+          'download_90' |
+          'download_complete' |
+          'download_manifest_start' |
+          'download_manifest_complete' |
+          'download_zip_start' |
+          'download_zip_complete' |
+          'download_manifest_file_fail' |
+          'download_manifest_checksum_fail' |
+          'download_manifest_brotli_fail' |
+          'decrypt_fail' |
+          'app_moved_to_foreground' |
+          'app_moved_to_background' |
+          'uninstall' |
+          'needPlanUpgrade' |
+          'missingBundle' |
+          'noNew' |
+          'disablePlatformIos' |
+          'disablePlatformAndroid' |
+          'disableAutoUpdateToMajor' |
+          'cannotUpdateViaPrivateChannel' |
+          'disableAutoUpdateToMinor' |
+          'disableAutoUpdateToPatch' |
+          'channelMisconfigured' |
+          'disableAutoUpdateMetadata' |
+          'disableAutoUpdateUnderNative' |
+          'disableDevBuild' |
+          'disableEmulator' |
+          'cannotGetBundle' |
+          'checksum_fail' |
+          'NoChannelOrOverride' |
+          'setChannel' |
+          'getChannel' |
+          'rateLimited' |
+          'disableAutoUpdate' |
+          'InvalidIp' |
+          'blocked_by_server_url'
+  version_build: string
+  version_code: string
+  version_os: string
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSON.parse(event.body || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    action,
+    version_code,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  console.log('update asked', platform,
+    app_id,
+    action,
+    version_os,
+    version_code,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  // Save it in your database
+  return { status: 'ok' }
+}
+```
+
+이 엔드포인트는 다음 JSON을 반환해야 합니다:
+
+```json
+{ "status": "ok" }
+```
+
+## 액션
+
+모든 액션 코드와 그 의미에 대한 자세한 설명은 디버깅 문서를 참조하세요:
+
+* **장치에서 전송된 액션**: [디버깅 문서 - 장치에서 전송](/docs/plugins/updater/debugging/#sent-from-the-device) 섹션을 참조하세요
+* **백엔드에서 전송된 액션**: [디버깅 문서 - 백엔드에서 전송](/docs/plugins/updater/debugging/#sent-from-the-backend) 섹션을 참조하세요
+
+<LinkCard
+	title="업데이트 처리"
+	href="/docs/plugin/self-hosted/handling-updates/"
+/>

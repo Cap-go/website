@@ -1,0 +1,292 @@
+---
+title: Login Apple di Android
+locale: id
+description: Panduan ini memberikan panduan komprehensif tentang pengaturan Login Apple menggunakan Capacitor untuk perangkat iOS, merinci setiap langkah untuk memastikan proses integrasi yang lancar.
+sidebar:
+    order: 3
+---
+import AndroidAppleLoginGraph from '@/components/AndroidAppleLoginGraph.astro'
+import { Steps } from '@astrojs/starlight/components';
+
+Login Apple di Android agak rumit. Apple tidak memiliki dukungan resmi untuk `Sign in with Apple` di Android, jadi solusinya sedikit rumit.
+
+Android saat ini menggunakan tab Chrome untuk menampilkan situs web OAuth2. Pendekatan ini memiliki tantangan:
+
+- Konfigurasi yang sulit
+- Backend diperlukan
+
+## Memahami alur di Android
+
+Mari saya gunakan diagram untuk menjelaskan alur di Android:
+
+<AndroidAppleLoginGraph />
+
+Sekarang setelah Anda mengetahui tantangan dan alurnya, mari kita mulai konfigurasi.
+
+## Membuat ID layanan
+
+<Steps>
+1. Login ke [Portal Developer Apple](https://developer.apple.com).
+
+2. Klik pada `Identifiers`.
+
+    <img src="/social-login-assets/apple_dev_portal_iden.png" alt="Bagian Identifiers di Portal Developer Apple" />
+
+    Anda harus melihat layar yang terlihat seperti ini:
+
+    <img src="/social-login-assets/apple_dev_portal_iden_2.png" alt="Layar Identifiers di Portal Developer Apple" />
+
+    1. Pastikan field ini mengatakan <code>App IDs</code>
+    2. Pastikan Anda dapat menemukan App ID Anda.
+        :::note
+        Jika Anda belum mengkonfigurasi Login Apple untuk IOS, Anda harus membuatnya. Untuk saya, saya sudah memiliki satu yang dibuat. App ID yang akan saya gunakan adalah `me.wcaleniewolny.test.ionic.vue`. Jika Anda tidak memilikinya, silakan buat satu menggunakan [langkah membuat app](#membuat-app).
+        :::
+3. Pastikan bahwa kemampuan `Sign in with Apple` diaktifkan untuk aplikasi Anda
+    1. Klik pada aplikasi Anda
+        <img src="/social-login-assets/apple_dev_click_on_app.png" alt="Memilih aplikasi Anda dari daftar" />
+    2. Pastikan bahwa kemampuan `Sign in with Apple` diaktifkan
+        <img src="/social-login-assets/apple_dev_sign_in_with_apple_enabled.png" alt="Checkbox kemampuan Sign in with Apple diaktifkan" />
+    3. Jika belum diaktifkan, aktifkan.
+4. Kembali ke `All Identifiers`
+    <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="Tombol navigasi All Identifiers" />
+5. Klik pada `App Ids` dan pergi ke `Services IDs`
+   <img src="/social-login-assets/apple_dev_go_to_services_id.png" alt="Navigasi ke bagian Services IDs" />
+6. Buat identifier baru
+    1. Klik tombol plus
+        <img src="/social-login-assets/apple_dev_iden_add.png" alt="Tombol tambah ID layanan baru" />
+
+    2. Pilih `Servcice IDs` dan klik `Continue`
+        <img src="/social-login-assets/apple_dev_service_and_cont.png" alt="Memilih opsi Service IDs" />
+
+    3. Masukkan deskripsi dan identifier dan klik `Continuie`.
+
+        <img src="/social-login-assets/apple_dev_reg_service_2.png" alt="Memasukkan detail ID layanan" />
+
+        :::note
+        `identifiers` ini akan menjadi `clientId` yang akan Anda berikan di fungsi `initialize` DAN `ANDROID_SERVICE_ID` untuk backend.
+
+        **Harap simpan!!!**
+        :::
+
+        :::note
+        ID Layanan tidak harus cocok dengan App ID, tetapi saya merekomendasikan mengatur ID layanan ke `YOUR_APP_ID.service`. Sebagai pengingat, saya menggunakan `me.wcaleniewolny.test.ionic.vue` untuk App ID saya tetapi saya menggunakan `ee.forgr.io.ionic.service2` sebagai ID layanan.
+        :::
+    4. Silakan verifikasi detailnya dan klik `Register`
+        <img src="/social-login-assets/apple_dev_service_ref_fin.png" alt="Mengonfirmasi pendaftaran ID layanan" />
+
+    5. Klik pada layanan yang baru dibuat
+        <img src="/social-login-assets/apple_dev_open_serv.png" alt="Memilih ID layanan yang baru dibuat" />
+
+    6. Aktifkan opsi `Sign in with Apple`
+        <img src="/social-login-assets/apple_dev_serv_enable_sign_with_apple.png" alt="Mengaktifkan Sign in with Apple untuk ID layanan" />
+
+    7. Konfigurasi `Sign In with Apple`
+        <img src="/social-login-assets/apple_dev_conf_serv_sign_with_apple.png" alt="Tombol Configure untuk Sign in with Apple" />
+
+    8. Pastikan bahwa `Primary App ID` diatur ke App ID yang dikonfigurasi di langkah sebelumnya
+        <img src="/social-login-assets/apple_dev_service_prim_id.png" alt="Dropdown pengaturan Primary App ID" />
+
+    9. Tambahkan domain tempat Anda akan menghosting backend Anda.
+
+        <img src="/social-login-assets/apple_dev_serv_create_next.png" alt="Mengatur field domain dan return URL" />
+
+        :::note
+        Backend ini **harus** berjalan di HTTPS. Untuk `Return URLs`, Anda mungkin ingin kembali ke ini setelah membaca bagian berikutnya dari tutorial ini dan setelah mengkonfigurasi backend. Untuk tujuan tutorial ini, saya akan menggunakan `https://xyz.wcaleniewolny.me/login/callback` untuk return URL dan `xyz.wcaleniewolny.me` untuk domain. Tekan next.
+        :::
+
+    10. Konfirmasikan data dan klik `Done`
+        <img src="/social-login-assets/apple_dev_serv_conf_done.png" alt="Mengonfirmasi konfigurasi domain dan return URL" />
+
+    11. Klik pada `Continue`
+        <img src="/social-login-assets/apple_dev_cont_serv_creat.png" alt="Tombol Continue untuk konfigurasi layanan" />
+
+    12. Klik pada `Save`
+        <img src="/social-login-assets/apple_dev_cont_serv_creat_save.png" alt="Tombol Save untuk konfigurasi layanan" />
+</Steps>
+
+## Membuat key
+
+<Steps>
+1. Kembali ke `All Identifiers`
+    <img src="/social-login-assets/apple_dev_go_back_iden.png" alt="Tombol navigasi All Identifiers" />
+2. Klik pada `Keys`
+    <img src="/social-login-assets/apple_dev_key_selc.png" alt="Bagian Keys di Portal Developer Apple" />
+3. Klik pada ikon plus
+    <img src="/social-login-assets/apple_dev_key_plus.png" alt="Tombol tambah key baru" />
+4. Beri nama key Anda
+    <img src="/social-login-assets/apple_key_name.png" alt="Field memasukkan nama key" />
+    :::note
+    Nama ini tidak penting, Anda bisa memasukkan apa saja.
+    :::
+5. Pilih `Sign in with Apple` dan klik `Configure`
+    <img src="/social-login-assets/apple_dev_key_sing_apple_conf.png" alt="Mengaktifkan dan mengkonfigurasi Sign in with Apple untuk key" />
+6. Pilih primary App ID, dan tekan `Save`
+    <img src="/social-login-assets/apple_dev_key_prim_app_id.png" alt="Memilih primary App ID untuk key" />
+
+    :::note
+    Ini harus App ID yang sama dengan ID di langkah-langkah sebelumnya.
+    :::
+7. Klik pada `Continue`
+    <img src="/social-login-assets/apple_dev_key_const.png" alt="Tombol Continue untuk konfigurasi key" />
+8. Klik pada `Register`
+    <img src="/social-login-assets/apple_dev_key_reg.png" alt="Tombol Register untuk pembuatan key" />
+9. Salin ID key dan unduh key.
+    <img src="/social-login-assets/apple_dev_key_downl.png" alt="Layar ID Key dan tombol unduh" />
+
+    :::caution
+        **PENTING:** Simpan ID ini, di backend ini akan disebut `KEY_ID`. Unduh key. Pastikan untuk tidak pernah membagikan key ini.
+    :::
+10. Temukan key yang diunduh dan simpan di folder backend.
+    <img src="/social-login-assets/apple_dev_downloaded_key.png" alt="File key yang diunduh" />
+</Steps>
+
+## Mendapatkan Team ID
+
+Untuk menggunakan `Login with Apple` di Android, Anda perlu mendapatkan `Team ID`. Ini akan digunakan di backend.
+
+<Steps>
+   1. Pergi ke [situs web ini](https://developer.apple.com/account/) dan scroll ke bawah
+
+   2. Temukan `Team ID`
+      <img src="/social-login-assets/apple_dev_team_id.png" alt="Lokasi Team ID di akun developer" />
+</Steps>
+
+## Mengkonfigurasi redirect aplikasi
+
+Seperti yang Anda lihat di diagram, backend melakukan langkah yang disebut `Redirect back to the app`. Ini memerlukan perubahan manual pada aplikasi Anda.
+
+<Steps>
+    1. Modifikasi `AndroidManifest.xml`
+        1. Buka file, saya akan menggunakan `AndroidStudio`
+            <img src="/social-login-assets/studio_android_manifest_file.png" alt="File AndroidManifest.xml di Android Studio" />
+        2. Temukan `MainActivity` dan tambahkan Intent filter berikut
+            <img src="/social-login-assets/studio_manifest_code_to_add.png" alt="Kode Intent filter untuk ditambahkan di MainActivity" />
+
+            ```xml
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="capgo-demo-app" android:host="path" />
+            </intent-filter>
+            ```
+    2. Modifikasi `MainActivity`
+        1. Silakan buka `MainActivity`
+            <img src="/social-login-assets/studio_main_activ_file.png" alt="File MainActivity.java di Android Studio" />
+
+        2. Tambahkan kode berikut:
+            <img src="/social-login-assets/studio_main_actv_new_code.png" alt="Kode untuk ditambahkan ke MainActivity untuk menangani deep link" />
+
+            ```java
+            @Override
+            protected void onNewIntent(Intent intent) {
+                String action = intent.getAction();
+                Uri data = intent.getData();
+
+                if (Intent.ACTION_VIEW.equals(action) && data != null) {
+                    PluginHandle pluginHandle = getBridge().getPlugin("SocialLogin");
+                    if (pluginHandle == null) {
+                        Log.i("Apple Login Intent", "SocialLogin login handle is null");
+                        return;
+                    }
+                    Plugin plugin = pluginHandle.getInstance();
+                    if (!(plugin instanceof SocialLoginPlugin)) {
+                        Log.i("Apple Login Intent", "SocialLogin plugin instance is not SocialLoginPlugin");
+                        return;
+                    }
+                    ((SocialLoginPlugin) plugin).handleAppleLoginIntent(intent);
+                    return;
+                }
+                super.onNewIntent(intent);
+            }
+            ```
+
+            :::caution
+            Contoh ini mengasumsikan bahwa Anda tidak memiliki deep link yang dikonfigurasi. Jika Anda memilikinya, silakan sesuaikan kode
+            :::
+</Steps>
+
+:::note
+Anda baru saja menambahkan deep link baru ke aplikasi Anda. Deep link akan terlihat seperti ini: `capgo-demo-app://path`. Anda dapat mengubah `android:scheme` dan `android:host` untuk memodifikasi tampilan deep link ini.
+**Penting:** Di konfigurasi backend, deep link ini akan menjadi `BASE_REDIRECT_URL`
+:::
+
+
+## Konfigurasi backend
+
+Backend diperlukan untuk Android, tetapi mengkonfigurasi backend juga akan berdampak pada IOS. Contoh backend disediakan [di sini](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/main/index.ts)
+
+Contoh ini menyediakan hal berikut:
+- Database JSON sederhana
+- Cara untuk meminta JWT dari server Apple
+- Verifikasi JWT sederhana
+
+:::note
+Saya menggunakan `PM2` untuk menghosting contoh ini. Contoh `ecosystem.config.js` dapat ditemukan [di sini](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/main/ecosystem.config.js.example)
+:::
+
+Mengingat semua yang saya katakan dalam tutorial ini, berikut adalah bagaimana bagian `env` akan terlihat:
+
+- `ANDROID_SERVICE_ID` = ID Layanan
+- `IOS_SERVICE_ID` = App ID
+
+```js
+env: {
+  PRIVATE_KEY_FILE: "AuthKey_U93M8LBQK3.p8",
+  KEY_ID: "U93M8LBQK3",
+  TEAM_ID: "UVTJ336J2D",
+  ANDROID_SERVICE_ID: "ee.forgr.io.ionic.starter.service2",
+  IOS_SERVICE_ID: "me.wcaleniewolny.test.ionic.vue",
+  PORT: 3000,
+  REDIRECT_URI: "https://xyz.wcaleniewolny.me/login/callback",
+  BASE_REDIRECT_URL: "capgo-demo-app://path"
+}
+```
+
+#### Menggunakan plugin
+
+Penggunaan fungsi `login` tidak berubah, sama seperti IOS. Silakan lihat bagian itu untuk info lebih lanjut. **NAMUN**, metode `initialize` sedikit berubah.
+
+```typescript
+await SocialLogin.initialize({
+  apple: {
+    clientId: 'ee.forgr.io.ionic.starter.service2',
+    redirectUrl: 'https://appleloginvps.wcaleniewolny.me/login/callback'
+  }
+})
+```
+
+:::danger
+    Perhatikan, bahwa menambahkan `redirectUrl` **AKAN** mempengaruhi IOS!!!!!
+:::
+
+
+## Membuat app
+
+:::note
+Jika Anda sudah memiliki App ID, Anda dapat melewati langkah ini.
+Jangan ikuti langkah ini jika Anda telah mengkonfigurasi Login Apple untuk IOS.
+:::
+
+<Steps>
+   1. Jika Anda belum memiliki App ID, klik tombol plus
+        <img src="/social-login-assets/apple_dev_iden_plus.png" alt="Tombol plus tambah identifier baru" />
+
+   2. Pilih `App IDs` dan klik continue
+        <img src="/social-login-assets/apple_dev_new_app_id.png" alt="Memilih jenis App IDs" />
+
+   3. Klik pada jenis `App` dan klik `Continue`
+        <img src="/social-login-assets/apple_dev_new_app_type.png" alt="Memilih jenis App" />
+
+   4. Masukkan deskripsi dan app ID
+        <img src="/social-login-assets/apple_dev_new_app_desc_id.png" alt="Memasukkan deskripsi dan bundle ID aplikasi" />
+
+   5. Aktifkan kemampuan `Sign with Apple`
+        <img src="/social-login-assets/apple_dev_enable_sign_with_apple.png" alt="Mengaktifkan kemampuan Sign in with Apple" />
+
+   6. Klik `Continue`
+        <img src="/social-login-assets/apple_dev_register_continue.png" alt="Tombol Continue untuk pendaftaran aplikasi" />
+
+   7. Konfirmasikan detail dan klik `Register`
+        <img src="/social-login-assets/apple_dev_confirm_register.png" alt="Mengonfirmasi detail pendaftaran aplikasi" />
+</Steps>

@@ -1,0 +1,214 @@
+---
+title: "Barometer 入门指南"
+locale: zh
+description: "了解如何将气压感应集成到 Capacitor 应用中"
+---
+
+本指南将引导您完成将 Capacitor Barometer 插件集成到应用中的过程。
+
+## 安装
+
+使用 npm 安装插件：
+
+```bash
+npm install @capgo/capacitor-barometer
+npx cap sync
+```
+
+## iOS 配置
+
+将以下内容添加到 `Info.plist`：
+
+```xml
+<key>NSMotionUsageDescription</key>
+<string>This app uses the barometer to measure atmospheric pressure</string>
+```
+
+## Android 配置
+
+无需额外配置。插件会自动请求必要的权限。
+
+## 基本用法
+
+### 导入插件
+
+```typescript
+import { Barometer } from '@capgo/capacitor-barometer';
+```
+
+### 检查传感器可用性
+
+```typescript
+const checkBarometer = async () => {
+  const { available } = await Barometer.isAvailable();
+  console.log('Barometer available:', available);
+};
+```
+
+### 开始监测气压
+
+```typescript
+const startMonitoring = async () => {
+  await Barometer.start({
+    interval: 1000 // 更新间隔（毫秒）
+  });
+
+  console.log('Barometer monitoring started');
+};
+```
+
+### 监听气压事件
+
+```typescript
+Barometer.addListener('pressureChange', (data) => {
+  console.log('Pressure (hPa):', data.pressure);
+  console.log('Relative altitude (m):', data.relativeAltitude);
+  console.log('Timestamp:', data.timestamp);
+});
+```
+
+### 获取当前读数
+
+```typescript
+const getCurrentPressure = async () => {
+  const reading = await Barometer.getCurrentReading();
+  console.log('Current pressure:', reading.pressure, 'hPa');
+  console.log('Relative altitude:', reading.relativeAltitude, 'm');
+};
+```
+
+### 停止监测
+
+```typescript
+const stopMonitoring = async () => {
+  await Barometer.stop();
+  console.log('Barometer monitoring stopped');
+};
+```
+
+## 完整示例
+
+这是一个显示气压计集成的完整示例：
+
+```typescript
+import { Barometer } from '@capgo/capacitor-barometer';
+
+class BarometerService {
+  private listener: any;
+
+  async initialize() {
+    // 检查可用性
+    const { available } = await Barometer.isAvailable();
+    if (!available) {
+      console.error('Barometer not available on this device');
+      return;
+    }
+
+    // 开始监测
+    await Barometer.start({ interval: 1000 });
+
+    // 添加监听器
+    this.listener = Barometer.addListener('pressureChange', (data) => {
+      this.handlePressureChange(data);
+    });
+  }
+
+  handlePressureChange(data: any) {
+    console.log('Pressure:', data.pressure, 'hPa');
+    console.log('Altitude:', data.relativeAltitude, 'm');
+
+    // 更新 UI 或处理数据
+    this.updateDisplay(data);
+  }
+
+  updateDisplay(data: any) {
+    // 将 hPa 转换为其他单位
+    const inHg = (data.pressure * 0.02953).toFixed(2);
+    const mmHg = (data.pressure * 0.750062).toFixed(1);
+
+    console.log(`Pressure: ${data.pressure.toFixed(1)} hPa`);
+    console.log(`         ${inHg} inHg`);
+    console.log(`         ${mmHg} mmHg`);
+    console.log(`Altitude: ${data.relativeAltitude.toFixed(1)} m`);
+  }
+
+  async cleanup() {
+    // 移除监听器
+    if (this.listener) {
+      this.listener.remove();
+    }
+
+    // 停止监测
+    await Barometer.stop();
+  }
+}
+
+// 使用
+const barometerService = new BarometerService();
+barometerService.initialize();
+
+// 完成后清理
+// barometerService.cleanup();
+```
+
+## 理解读数
+
+### 大气压力
+- 以百帕 (hPa) 或毫巴 (mb) 为单位测量
+- 标准海平面气压：1013.25 hPa
+- 海拔越高 = 气压越低
+- 天气系统影响气压读数
+
+### 相对高度
+- 从气压变化计算得出
+- 相对于起始参考点
+- 精度：±10-30 米
+- 最适合短期跟踪
+
+## 最佳实践
+
+1. **检查可用性**：使用前始终验证传感器可用性
+2. **合理间隔**：不要轮询太频繁（1000ms 比较好）
+3. **移除监听器**：不需要时清理监听器
+4. **校准**：使用已知高度进行准确读数
+5. **电池影响**：持续感应时监控电池使用情况
+
+## 常见问题
+
+### 传感器不可用
+```typescript
+try {
+  const { available } = await Barometer.isAvailable();
+  if (!available) {
+    // 回退到 GPS 高度或手动输入
+    showAlternativeMethod();
+  }
+} catch (error) {
+  console.error('Barometer check failed:', error);
+}
+```
+
+### 数据噪声
+```typescript
+class PressureFilter {
+  private readings: number[] = [];
+  private maxReadings = 5;
+
+  addReading(pressure: number): number {
+    this.readings.push(pressure);
+    if (this.readings.length > this.maxReadings) {
+      this.readings.shift();
+    }
+
+    // 返回移动平均值
+    const sum = this.readings.reduce((a, b) => a + b, 0);
+    return sum / this.readings.length;
+  }
+}
+```
+
+## 下一步
+
+- 浏览 [API 参考](https://github.com/Cap-go/capacitor-barometer#api)以获取完整的方法文档
+- 查看[示例应用](https://github.com/Cap-go/capacitor-barometer/tree/main/example)以了解高级用法
+- 查看[教程](/plugins-tutorials/capacitor-barometer)以获取完整的实施示例

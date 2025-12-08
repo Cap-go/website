@@ -1,0 +1,56 @@
+---
+title: "Background Geolocation"
+locale: zh
+description: 一个 Capacitor 插件，即使在应用处于后台时也能接收准确的地理位置更新
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 即使在应用处于后台时也能接收准确的地理位置更新。
+  image:
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions:
+    - text: 入门指南
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="准确跟踪" icon="rocket">
+    为徒步和导航等用例优先考虑准确性
+  </Card>
+  <Card title="后台更新" icon="puzzle">
+    即使应用在后台也能继续接收位置更新
+  </Card>
+  <Card title="节能高效" icon="setting">
+    优化以平衡准确性和电池消耗
+  </Card>
+  <Card title="入门指南" icon="open-book">
+    查看[入门指南](/docs/plugins/background-geolocation/getting-started/)以安装和配置插件。
+  </Card>
+</CardGrid>
+
+## 插件对比
+
+Capacitor 应用中常用的三个主要后台地理位置插件的简短对比。
+
+| 插件 | 准确性 | 后台 | HTTP 上传 | 定价 |
+|--------|----------|------------|-------------|---------|
+| `@capacitor-community/background-geolocation`（社区版） | 不准确 | 是 | 否 | 免费 |
+| `@capgo/background-geolocation`（本插件） | 准确 | 是 | 否 | 免费 |
+| Transistorsoft（原版） | 准确 | 是 | 是 — 内置 HTTP 上传器到您的 API | 付费 |
+
+**注意：**
+- 社区插件轻量级且可在后台继续工作，但已知不如以下选项准确。
+- 此 Capgo 插件经过优化，可提供准确的位置修复和可靠的后台操作，无需付费许可证。
+- Transistorsoft 提供完整的商业解决方案，还包括用于将位置数据发送到后端的内置 HTTP 上传功能。

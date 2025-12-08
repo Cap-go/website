@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-accelerometer"
+locale: zh
+description: 使用 Capacitor 读取设备加速度计测量值
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 从加速度计传感器访问设备运动和加速度数据
+  image:
+    file: ~public/icons/plugins/accelerometer.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/accelerometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-accelerometer
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="三轴加速度" icon="rocket">
+    测量 X、Y 和 Z 轴的加速度力 📊
+  </Card>
+  <Card title="运动检测" icon="star">
+    检测设备摇晃、倾斜和移动 📱
+  </Card>
+  <Card title="实时更新" icon="setting">
+    连续监控加速度数据 ⚡
+  </Card>
+  <Card title="全面文档" icon="open-book">
+    查看[文档](/docs/plugins/accelerometer/getting-started/)以在几分钟内掌握插件。
+  </Card>
+</CardGrid>

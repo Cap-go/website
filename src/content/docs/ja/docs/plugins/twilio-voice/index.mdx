@@ -1,0 +1,108 @@
+---
+title: "@capgo/capacitor-twilio-voice"
+locale: ja
+description: VoIP通話、通話管理、音声処理を備えたCapacitorアプリ向けのTwilio Voice API統合プラグイン。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "紹介"
+hero:
+  tagline: 通話管理、音声制御、リアルタイムコミュニケーションを備えた高品質VoIP通話のためにTwilio Voice APIを統合します。
+  image:
+    file: ~public/icons/plugins/twilio-voice.svg
+  actions:
+    - text: はじめに
+      link: /docs/plugins/twilio-voice/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-twilio-voice/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概要
+
+Capacitor Twilio Voiceプラグインは、TwilioのVoice APIを使用してiOSおよびAndroidアプリケーションで高品質のVoIP通話機能を実現します。このプラグインは、プロフェッショナルな通話体験を作成するための包括的な通話管理、認証、音声制御を提供します。
+
+<CardGrid stagger>
+  <Card title="VoIP通話" icon="rocket">
+    Twilio Voice APIを使用したインターネット経由の高品質音声通話 📞
+  </Card>
+  <Card title="通話管理" icon="setting">
+    完全なライフサイクル制御で通話の発信、承認、拒否、終了 🎛️
+  </Card>
+  <Card title="音声制御" icon="comment">
+    ミュート、スピーカー切り替え、音声ルーティングオプション 🎤
+  </Card>
+  <Card title="プラットフォームサポート" icon="approve-check">
+    プッシュ通知を備えたネイティブiOSおよびAndroid実装 📱
+  </Card>
+</CardGrid>
+
+## インストール
+
+```bash
+npm install @capgo/capacitor-twilio-voice
+npx cap sync
+```
+
+## コアAPIメソッド
+
+### 認証
+- `login(options: { accessToken: string })` - アクセストークンを使用してTwilioで認証
+- `logout()` - ユーザーセッションを終了し、通話状態をクリア
+- `isLoggedIn()` - 現在の認証ステータスを確認
+
+### 通話管理
+- `makeCall(options: { to: string })` - 指定された番号への発信通話を開始
+- `acceptCall(options: { callSid: string })` - 着信通話を承認
+- `rejectCall(options: { callSid: string })` - 着信通話を拒否
+- `endCall(options?: { callSid?: string })` - アクティブな通話を終了
+- `muteCall(options: { muted: boolean, callSid?: string })` - 通話音声をミュート/ミュート解除
+- `setSpeaker(options: { enabled: boolean })` - スピーカー出力を切り替え
+
+## イベントリスナー
+
+プラグインは以下の包括的なイベント処理を提供します:
+- 接続ステータスの登録イベント
+- 通話状態の変更(接続済み、切断済み、呼び出し中)
+- 品質警告と接続問題
+- 着信通話通知
+
+## プラットフォーム設定
+
+### iOSセットアップ
+- 着信通話用のPushKit統合が必要
+- 本番使用のための証明書設定
+- Info.plistでのマイクパーミッション
+
+### Androidセットアップ
+- プッシュ通知用のFirebaseセットアップ
+- AndroidManifest.xmlでのマイクパーミッション
+- バックグラウンドサービス設定
+
+## クイックスタート例
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+// Twilioで認証
+await TwilioVoice.login({ accessToken: 'your-twilio-access-token' });
+
+// 通話を発信
+await TwilioVoice.makeCall({ to: '+1234567890' });
+
+// 通話イベントをリスニング
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Call connected:', data);
+});
+```
+
+## ドキュメント
+
+詳細なセットアップ手順、高度な設定、統合例については、[完全なドキュメント](/docs/plugins/twilio-voice/getting-started/)をご確認ください。

@@ -1,0 +1,206 @@
+---
+title: "Organisationen"
+locale: de
+description: "Leitfaden zur Verwaltung von Organisationen in Capgo, einschließlich Erstellung, Einstellungen, Updates und Abruf von Organisationsdetails."
+sidebar:
+  order: 2
+---
+
+Organisationen sind die obersten Entitäten in Capgo. Sie ermöglichen es Ihnen, Apps, Teammitglieder und Ressourcen unter einem einzigen Dach zu gruppieren. Jede Organisation kann mehrere Mitglieder mit unterschiedlichen Rollen und Berechtigungen haben.
+
+## Häufige Anwendungsfälle
+
+- Erstellen einer neuen Organisation für Ihr Unternehmen
+- Verwalten von Organisationseinstellungen
+- Aktualisieren von Organisationsinformationen
+- Abrufen von Organisationsdetails
+
+## Endpunkte
+
+### GET
+
+`https://api.capgo.app/organization/`
+
+Ruft Organisationsinformationen ab. Wenn `orgId` in den Parametern angegeben wird, wird eine einzelne Organisation zurückgegeben. Andernfalls werden alle zugänglichen Organisationen zurückgegeben.
+
+#### Query-Parameter
+
+- `orgId` (optional): Die ID der spezifischen Organisation, die abgerufen werden soll
+
+#### Response-Typ
+
+```typescript
+interface Organization {
+  id: string
+  created_by: string
+  created_at: string
+  updated_at: string
+  logo: string | null
+  name: string
+  management_email: string
+  customer_id: string | null
+}
+```
+
+#### Beispiel-Anfrage
+
+```bash
+# Alle Organisationen abrufen
+curl -H "authorization: your-api-key" https://api.capgo.app/organization/
+
+# Spezifische Organisation abrufen
+curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=org_123
+```
+
+#### Beispiel-Antwort
+
+```json
+{
+  "data": {
+    "id": "org_123",
+    "name": "My Company",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "logo": "https://example.com/logo.png",
+    "management_email": "admin@example.com",
+    "customer_id": "cus_123"
+  }
+}
+```
+
+### POST
+
+`https://api.capgo.app/organization/`
+
+Erstellt eine neue Organisation.
+
+#### Request-Body
+
+```typescript
+interface OrganizationCreate {
+  name: string
+}
+```
+
+#### Beispiel-Anfrage
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "New Organization"
+  }' \
+  https://api.capgo.app/organization/
+```
+
+#### Example Response
+
+```json
+{
+  "status": "Organization created",
+  "id": "org_456"
+}
+```
+
+### PUT
+
+`https://api.capgo.app/organization/`
+
+Update an existing organization. Requires admin role.
+
+#### Request Body
+
+```typescript
+interface OrganizationUpdate {
+  orgId: string
+  logo?: string
+  name?: string
+  management_email?: string
+}
+```
+
+#### Example Request
+
+```bash
+curl -X PUT \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "name": "New Company Name",
+    "management_email": "newemail@example.com"
+  }' \
+  https://api.capgo.app/organization/
+```
+
+#### Example Response
+
+```json
+{
+  "status": "Organization updated",
+  "data": {
+    "id": "org_123",
+    "name": "New Company Name",
+    "management_email": "newemail@example.com"
+  }
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/organization/`
+
+Delete an existing organization. Requires admin role. This action is irreversible and will remove all associated apps, versions, and resources.
+
+#### Query Parameters
+
+- `orgId`: The ID of the organization to delete
+
+#### Example Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  https://api.capgo.app/organization/?orgId=org_123
+```
+
+#### Example Response
+
+```json
+{
+  "status": "Organization deleted",
+  "id": "org_123"
+}
+```
+
+## Error Handling
+
+Common error scenarios and their responses:
+
+```json
+// Invalid API key
+{
+  "error": "Invalid API key",
+  "status": "KO"
+}
+
+// Missing required field
+{
+  "error": "Name is required",
+  "status": "KO"
+}
+
+// Insufficient permissions
+{
+  "error": "Admin role required",
+  "status": "KO"
+}
+```
+
+## Best Practices
+
+1. **Naming**: Use clear, descriptive names for organizations
+2. **Roles**: Assign appropriate roles to team members
+3. **Email**: Use a group email for management_email to avoid issues with personal email changes
+4. **Logo**: Host logos on a reliable CDN and use HTTPS URLs 

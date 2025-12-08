@@ -1,0 +1,276 @@
+---
+title: Comenzando
+description: Aprende cómo instalar y usar el plugin Is Root para detectar dispositivos Android rooteados y emuladores para mayor seguridad de la app.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalación
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Soporte de Plataformas
+
+- **Android**: Soporte completo para detección de root y emuladores
+- **iOS**: No se requiere configuración (el plugin está enfocado en Android)
+
+## Ejemplo de Uso
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// Detección básica de root
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('El dispositivo está rooteado');
+  // Maneja el dispositivo rooteado apropiadamente
+  // Ejemplo: Mostrar advertencia, limitar funcionalidad o bloquear acceso
+}
+
+// Detección extendida de root con BusyBox
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('El dispositivo está rooteado (verificación extendida)');
+}
+
+// Verificar emulador
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('Ejecutándose en un emulador');
+  // Manejar entorno de emulador
+}
+
+// Detectar aplicaciones de gestión de root
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('Se detectaron aplicaciones de gestión de root');
+}
+
+// Verificar binario su
+const suResult = await IsRoot.checkForSuBinary();
+if (suResult.hasSu) {
+  console.log('Se encontró binario SU en el dispositivo');
+}
+```
+
+## Referencia de la API
+
+### isRooted()
+
+```typescript
+isRooted() => Promise<{ isRooted: boolean }>
+```
+
+Realiza una detección completa de root usando métodos predeterminados.
+
+**Retorna:** `Promise<{ isRooted: boolean }>`
+
+### isRootedWithBusyBox()
+
+```typescript
+isRootedWithBusyBox() => Promise<{ isRooted: boolean }>
+```
+
+Detección extendida de root incluyendo verificaciones de BusyBox.
+
+**Retorna:** `Promise<{ isRooted: boolean }>`
+
+### detectRootManagementApps()
+
+```typescript
+detectRootManagementApps() => Promise<{ hasRootApps: boolean }>
+```
+
+Identifica aplicaciones de gestión de root instaladas (SuperSU, Magisk, etc.).
+
+**Retorna:** `Promise<{ hasRootApps: boolean }>`
+
+### checkForSuBinary()
+
+```typescript
+checkForSuBinary() => Promise<{ hasSu: boolean }>
+```
+
+Verifica la presencia del binario `su` en rutas del sistema.
+
+**Retorna:** `Promise<{ hasSu: boolean }>`
+
+### isRunningOnEmulator()
+
+```typescript
+isRunningOnEmulator() => Promise<{ isEmulator: boolean }>
+```
+
+Detecta huellas comunes de emuladores Android.
+
+**Retorna:** `Promise<{ isEmulator: boolean }>`
+
+## Verificación de Seguridad Completa
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+async function performSecurityCheck() {
+  const checks = {
+    rooted: false,
+    emulator: false,
+    rootApps: false,
+    suBinary: false
+  };
+
+  try {
+    // Ejecutar todos los métodos de detección
+    const [rootResult, emulatorResult, rootAppsResult, suResult] = await Promise.all([
+      IsRoot.isRootedWithBusyBox(),
+      IsRoot.isRunningOnEmulator(),
+      IsRoot.detectRootManagementApps(),
+      IsRoot.checkForSuBinary()
+    ]);
+
+    checks.rooted = rootResult.isRooted;
+    checks.emulator = emulatorResult.isEmulator;
+    checks.rootApps = rootAppsResult.hasRootApps;
+    checks.suBinary = suResult.hasSu;
+
+    // Determinar nivel de seguridad
+    const securityIssues = Object.values(checks).filter(v => v).length;
+
+    if (securityIssues > 0) {
+      console.warn(`El dispositivo tiene ${securityIssues} problema(s) de seguridad`, checks);
+      return {
+        secure: false,
+        issues: checks
+      };
+    }
+
+    return {
+      secure: true,
+      issues: checks
+    };
+  } catch (error) {
+    console.error('Falló la verificación de seguridad:', error);
+    throw error;
+  }
+}
+
+// Usar en tu app
+const securityStatus = await performSecurityCheck();
+if (!securityStatus.secure) {
+  // Manejar dispositivo inseguro
+  showSecurityWarning(securityStatus.issues);
+}
+```
+
+## Técnicas de Detección
+
+### Detección de Root
+
+El plugin emplea múltiples métodos de detección:
+
+- Verifica aplicaciones de gestión de root (SuperSU, Magisk, KingRoot, etc.)
+- Escanea propiedades sospechosas del sistema
+- Identifica etiquetas de compilación de prueba y banderas de depuración
+- Valida ubicaciones de binarios peligrosos
+- Examina permisos de rutas del sistema
+- Detecta aplicaciones conocidas de ocultación de root
+
+### Detección de Emuladores
+
+- Análisis de huella de hardware
+- Inspección de propiedades de compilación
+- Características específicas de emuladores
+- Indicadores de entorno virtual
+
+## Manejo de Problemas de Seguridad
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+async function handleDeviceSecurity() {
+  const rootResult = await IsRoot.isRooted();
+
+  if (rootResult.isRooted) {
+    // Opción 1: Mostrar advertencia y continuar
+    showWarning('Tu dispositivo parece estar rooteado. Algunas funciones pueden estar limitadas.');
+
+    // Opción 2: Limitar funcionalidad
+    disableSensitiveFeatures();
+
+    // Opción 3: Bloquear acceso a la app
+    showBlockedScreen('Esta app no puede ejecutarse en dispositivos rooteados por razones de seguridad.');
+    return false;
+  }
+
+  return true;
+}
+
+function showWarning(message: string) {
+  // Mostrar diálogo de advertencia amigable
+  alert(message);
+}
+
+function disableSensitiveFeatures() {
+  // Desactivar procesamiento de pagos, acceso a datos sensibles, etc.
+  console.log('Funciones sensibles deshabilitadas debido a dispositivo rooteado');
+}
+
+function showBlockedScreen(message: string) {
+  // Mostrar pantalla de bloqueo y salir de la app
+  alert(message);
+}
+```
+
+## Mejores Prácticas
+
+- Usar múltiples métodos de detección para mayor precisión
+- Implementar degradación gradual en lugar de bloquear el acceso completamente
+- Proporcionar comunicación clara al usuario sobre preocupaciones de seguridad
+- Considerar la experiencia del usuario al implementar medidas de seguridad
+- Mantener el plugin actualizado a medida que evolucionan los métodos de detección
+- Probar en dispositivos tanto rooteados como no rooteados
+- Manejar fallos de detección con gracia
+
+## Consideraciones de Seguridad
+
+- Ningún método de detección es 100% infalible
+- Los usuarios avanzados pueden eludir los mecanismos de detección
+- Usar en combinación con medidas de seguridad del lado del servidor
+- Considerar la privacidad del usuario al implementar verificaciones de seguridad
+- Seguir las directrices de la plataforma para implementaciones de seguridad
+- Se recomiendan actualizaciones regulares a medida que evolucionan las técnicas de ocultación de root
+
+## Casos de Uso
+
+- **Apps bancarias y financieras**: Prevenir acceso en dispositivos comprometidos
+- **Contenido protegido con DRM**: Proteger material con derechos de autor
+- **Apps empresariales**: Aplicar políticas de seguridad BYOD
+- **Procesamiento de pagos**: Asegurar entorno de transacciones seguras
+- **Apps de datos sensibles**: Proteger información confidencial

@@ -1,0 +1,111 @@
+---
+title: "Point de terminaison API de mise à jour"
+locale: fr
+description: "Comment créer votre point de terminaison API de serveur de mise à jour pour répondre aux requêtes du plugin Capgo avec les bonnes informations de bundle et checksums"
+sidebar:
+  order: 6
+---
+
+Voici un exemple de code en JavaScript pour envoyer une mise à jour au plugin
+
+```typescript
+interface AppInfos {
+  version_name: string
+  version_build: string
+  version_os: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSON.parse(event.body || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  console.log('mise à jour demandée', platform,
+    app_id,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  if (version_name === '1.0.0') {
+    return {
+      version: '1.0.1',
+      url: 'https://apiurl.com/mybuild_101.zip',
+      checksum: 'checksum_sha256_du_bundle',
+    }
+  }
+  else if (version_name === '1.0.1') {
+    return {
+      version: '1.0.2',
+      url: 'https://apiurl.com/mybuild_102.zip',
+      checksum: 'checksum_sha256_du_bundle',
+    }
+  }
+  else {
+    return {
+      message: 'Erreur version introuvable'
+      version: '',
+      url: '',
+    }
+  }
+}
+```
+
+## Format de réponse
+
+Pour les **bundles non chiffrés**, votre point de terminaison devrait retourner :
+
+```json
+{
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip",
+  "checksum": "checksum_sha256_du_bundle"
+}
+```
+
+Pour les **bundles chiffrés**, vous devez également inclure la clé de session :
+
+```json
+{
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip",
+  "checksum": "checksum_chiffre_de_la_commande_encrypt",
+  "session_key": "ivSessionKey_de_la_commande_encrypt"
+}
+```
+
+Et s'il n'y a pas de mise à jour ou d'erreur, ajoutez la clé `message` et éventuellement une `error` :
+
+```json
+{
+  "message": "Version introuvable",
+  "error": "Le backend a crashé",
+  "version": "1.0.2",
+}
+```
+
+## Description des champs
+
+- **`checksum`** : Hash SHA256 de votre fichier zip de bundle pour la vérification de l'intégrité
+- **`session_key`** : Requis uniquement pour les bundles chiffrés - c'est la `ivSessionKey` retournée par la commande encrypt
+- **`version`** : Identifiant de version au format semver
+- **`url`** : URL HTTPS où le bundle peut être téléchargé
+
+## Création de bundle
+
+Pour apprendre comment créer des bundles compatibles et générer des checksums, consultez la [documentation de mise à jour automatique](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
+
+Pour les bundles chiffrés, consultez la [documentation des bundles chiffrés](/docs/plugin/self-hosted/encrypted-bundles/) qui explique le flux de travail de chiffrement complet.

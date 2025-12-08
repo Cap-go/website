@@ -1,0 +1,186 @@
+---
+title: 从 @capacitor-community/apple-sign-in 迁移到 @capgo/capacitor-social-login 的指南
+locale: zh
+description: 本综合指南提供从 @capacitor-community/apple-sign-in 插件过渡到 @capgo/capacitor-social-login 插件的详细说明，确保平滑的迁移过程和改进的功能。
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 概述
+
+本指南概述了从传统的 `@capacitor-community/apple-sign-in` 插件过渡到现代的 `@capgo/capacitor-social-login` 包。新插件通过改进的 TypeScript 支持和积极维护为多个社交身份验证提供商提供统一接口。
+
+## 安装
+
+<Steps>
+1. 删除旧包：
+   ```bash
+   npm uninstall @capacitor-community/apple-sign-in
+   ```
+
+2. 安装新包：
+   ```bash
+   npm install @capgo/capacitor-social-login
+   npx cap sync
+   ```
+</Steps>
+
+## 代码更改
+
+### 导入更改
+```diff
+- import { SignInWithApple } from '@capacitor-community/apple-sign-in';
++ import { SocialLogin } from '@capgo/capacitor-social-login';
+```
+
+### 初始化
+
+**关键更改**：新插件需要以前不需要的初始化步骤。
+
+```diff
+- // 旧包中不需要初始化
++ // 对于 iOS：基本配置
++ await SocialLogin.initialize({
++   apple: {} // 基本 iOS 配置
++ });
+
++ // 对于 Android：需要额外配置
++ await SocialLogin.initialize({
++   apple: {
++     clientId: 'YOUR_SERVICE_ID', // 来自 Apple Developer Portal 的 Service ID
++     redirectUrl: 'https://your-backend.com/callback' // 您的后端回调 URL
++   }
++ });
+```
+
+**重要提示**：对于 iOS，您提供基本配置，而 Android 需要额外的详细信息，包括 Service ID 和用于基于 Web 的 OAuth 身份验证的后端回调 URL。
+
+### 登录
+
+登录过程从多个参数简化为更清晰的 API：
+
+```diff
+- const result = await SignInWithApple.authorize({
+-   clientId: 'com.your.app',
+-   redirectURI: 'https://your-app.com/callback',
+-   scopes: 'email name',
+-   state: '12345',
+-   nonce: 'nonce'
+- });
+
++ const result = await SocialLogin.login({
++   provider: 'apple',
++   options: {
++     // 可选：如果需要添加范围
++     scopes: ['email', 'name'],
++     nonce: 'nonce'
++   }
++ });
+```
+
+新插件使用带有 `provider: 'apple'` 和可选范围的 `login()`，而不是传递像 `clientId` 和 `redirectURI` 这样的单独配置值。
+
+### 响应类型更改
+
+结果现在包括一个带有过期详细信息的 `accessToken` 对象和一个结构化的 `profile` 部分，替换了原始包的扁平响应格式：
+
+```typescript
+// 旧响应类型
+interface AppleSignInResponse {
+  response: {
+    user: string;
+    email: string | null;
+    givenName: string | null;
+    familyName: string | null;
+    identityToken: string | null;
+    authorizationCode: string | null;
+  };
+}
+
+// 新响应类型
+interface SocialLoginResponse {
+  provider: 'apple';
+  result: {
+    accessToken: {
+      token: string;
+      expiresIn?: number;
+      refreshToken?: string;
+    } | null;
+    idToken: string | null;
+    profile: {
+      user: string;
+      email: string | null;
+      givenName: string | null;
+      familyName: string | null;
+    };
+  };
+}
+```
+
+### 新功能
+
+更新的插件引入了前身中不可用的功能：
+
+**检查登录状态**
+```diff
+- // 旧包中不可用
++ const status = await SocialLogin.isLoggedIn({
++   provider: 'apple'
++ });
+```
+
+**退出登录功能**
+```diff
+- // 旧包中不可用
++ await SocialLogin.logout({
++   provider: 'apple'
++ });
+```
+
+这些方法提供 `isLoggedIn()` 来验证身份验证状态和 `logout()` 功能。
+
+## 平台特定更改
+
+### iOS 设置
+
+**iOS** 通过 Xcode 功能维护熟悉的设置过程：
+
+1. iOS 设置基本保持不变。您仍然需要：
+   - 在 Xcode 中启用 "Sign In with Apple" 功能
+   - 在 Apple Developer Portal 中配置您的应用
+   - iOS 不需要额外的代码更改
+
+### Android 设置
+
+**Android** 现在通过基于 Web 的 OAuth 身份验证获得原生支持：
+
+新插件提供开箱即用的 Android 支持，但需要额外设置：
+
+1. 在 Apple Developer Portal 中创建 Services ID
+2. 配置 Web 身份验证端点
+3. 设置您的 Android 应用以处理 OAuth 流程
+4. 需要后端服务配置
+
+有关详细的 Android 设置说明，请参阅 [Android 设置指南](/docs/plugins/social-login/apple/android/)。
+
+## 关键优势
+
+现代化的包提供：
+
+1. 多个社交提供商（Google、Facebook、Apple）的**统一 API**
+2. 具有更好类型定义的**改进 TypeScript 类型**
+3. 与已弃用版本相比的**积极社区维护**
+4. 通过基于 Web 的身份验证的**内置 Android 支持**
+5. **持久登录状态管理**
+6. 具有一致错误类型的**更好的错误处理**
+
+## 重大更改
+
+1. **现在需要显式初始化** - 没有默认配置
+2. **响应对象结构已更改** - 嵌套结果格式
+3. **Android 实现需要后端服务**用于 OAuth
+4. **令牌刷新处理不同** - 改进的令牌管理
+5. **错误处理和错误类型已更改** - 更详细的错误
+
+有关更详细的设置说明，请参阅[官方文档](/docs/plugins/social-login/apple/general/)。

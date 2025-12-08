@@ -1,0 +1,83 @@
+---
+title: Inizia
+description: Sincronizza l'interfaccia del tuo player con i controlli multimediali nativi utilizzando il plugin Media Session.
+locale: it
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il plugin**
+   <PackageManagers pkg="@capgo/capacitor-media-session" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza le piattaforme**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+> ℹ️ L'API Media Session è disponibile su Android (browser basati su Chrome, WebView) e molti browser desktop. Su piattaforme non supportate le chiamate si risolvono senza effetto, quindi proteggi di conseguenza la tua interfaccia.
+
+## Pubblica metadati
+
+```typescript
+import { MediaSession } from '@capgo/capacitor-media-session';
+
+await MediaSession.setMetadata({
+  title: 'Weekly Tech Podcast',
+  artist: 'Capgo Studio',
+  album: 'Season 2',
+  artwork: [
+    { src: 'https://cdn.example.com/covers/s02e05-512.png', sizes: '512x512', type: 'image/.png' },
+  ],
+});
+```
+
+## Aggiorna lo stato di riproduzione
+
+```typescript
+await MediaSession.setPlaybackState({ playbackState: 'playing' });
+
+// Metti in pausa in seguito se necessario
+await MediaSession.setPlaybackState({ playbackState: 'paused' });
+```
+
+## Gestisci azioni multimediali
+
+```typescript
+const pauseHandler = async () => {
+  player.pause();
+  await MediaSession.setPlaybackState({ playbackState: 'paused' });
+};
+
+await MediaSession.setActionHandler({ action: 'pause' }, pauseHandler);
+await MediaSession.setActionHandler({ action: 'play' }, async () => {
+  await player.play();
+  await MediaSession.setPlaybackState({ playbackState: 'playing' });
+});
+
+// Rimuovi un gestore quando elimini il player
+await MediaSession.setActionHandler({ action: 'pause' }, null);
+```
+
+## Mantieni la posizione sincronizzata
+
+```typescript
+const updatePosition = async () => {
+  await MediaSession.setPositionState({
+    duration: player.duration,
+    position: player.currentTime,
+    playbackRate: player.playbackRate,
+  });
+};
+
+player.ontimeupdate = updatePosition;
+player.onratechange = updatePosition;
+```
+
+## Raccomandazioni
+
+- Aggiorna i metadati quando cambia la traccia in modo che le notifiche e gli altoparlanti intelligenti rimangano aggiornati.
+- Limita gli aggiornamenti di posizione (es. ogni 250 ms) per evitare di sovraccaricare il livello nativo.
+- Rimuovi sempre i gestori di azione quando elimini un'istanza del player per prevenire perdite accidentali.

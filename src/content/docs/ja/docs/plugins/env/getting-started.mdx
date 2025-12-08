@@ -1,0 +1,69 @@
+---
+title: はじめに
+locale: ja
+description: Envプラグインを使用して、ビルドごとの環境値を設定し、実行時に取得します。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプラットフォームと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 設定値を宣言
+
+Capacitor設定にキーを追加して、ネイティブビルドに組み込まれるようにします。環境ごとに値を入れ替えるために、複数の設定バリアント(`capacitor.config.prod.ts`、`capacitor.config.dev.ts`など)を作成できます。
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    Env: {
+      API_URL: 'https://api.example.com',
+      PUBLIC_KEY: 'pk_live_123',
+    },
+  },
+};
+
+export default config;
+```
+
+ネイティブプラットフォームでは、値は生成された設定ファイル(`ios/App/App/capacitor.config.json`と`android/app/src/main/assets/capacitor.config.json`)内に保存されます。テナント固有の値が必要な場合は、フレーバーごとにそれらのファイルを更新してください。
+
+## コード内で値を読み取る
+
+```typescript
+import { Env } from '@capgo/capacitor-env';
+
+const apiUrl = await Env.getKey({ key: 'API_URL' }).then((result) => result.value);
+
+if (!apiUrl) {
+  throw new Error('Missing API_URL configuration');
+}
+```
+
+## フォールバックを提供
+
+```typescript
+const loadConfig = async () => {
+  const { value: endpoint } = await Env.getKey({ key: 'API_URL' });
+  return endpoint || 'https://staging.example.com';
+};
+```
+
+## ヒント
+
+- 環境ごとに異なる`capacitor.config`ファイルを使用し、`npx cap run ios --configuration=prod`でCLIに正しいファイルを指定します。
+- Capgo updaterチャンネルと組み合わせて、新しいバイナリを公開せずにテナント固有の値を配信します。
+- `npx cap sync`の前に、CIビルド中に秘密を置換することで、ソース管理から秘密を除外します。

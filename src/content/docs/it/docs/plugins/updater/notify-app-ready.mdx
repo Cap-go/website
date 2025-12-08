@@ -1,0 +1,35 @@
+---
+title: "Posizionamento corretto della chiamata CapacitorUpdater.notifyAppReady()"
+locale: it
+description: Come posizionare correttamente la chiamata CapacitorUpdater.notifyAppReady() nella tua app per garantire il corretto flusso di auto-aggiornamento.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import ConditionalQuestionnaire from '@/components/ConditionalQuestionnaire.astro'
+
+Il posizionamento della chiamata `CapacitorUpdater.notifyAppReady()` è cruciale per il corretto flusso di auto-aggiornamento.
+
+
+Se non eseguita correttamente, l'app non sarà in grado di aggiornarsi all'ultima versione. Ogni versione che non chiama `notifyAppReady()` entro 10 secondi verrà contrassegnata come non valida e verrà sostituita dalla versione valida precedente o dalla versione predefinita (incorporata).
+
+
+In questa guida ti mostreremo come posizionare correttamente la chiamata `notifyAppReady()` nella tua app per garantire il corretto flusso di auto-aggiornamento.
+
+### Questionario sul posizionamento della chiamata `notifyAppReady()`
+
+<ConditionalQuestionnaire />
+
+
+<div style="margin-top: 3rem;">
+<Aside type="note">
+Se non riesci a trovare il tuo framework nel questionario, non esitare a chiedere sul nostro [Discord](https://discord.capgo.app).
+</Aside>
+</div>

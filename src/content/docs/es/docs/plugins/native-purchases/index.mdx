@@ -1,0 +1,59 @@
+---
+title: "@capgo/native-purchases"
+locale: es
+description: Plugin de Capacitor para gestionar compras y suscripciones en la aplicación con una API simple y unificada para iOS y Android.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Simplifica las compras y suscripciones en la aplicación con una API unificada que funciona perfectamente en las plataformas iOS y Android.
+  image:
+    file: ~public/icons/plugins/native-purchases.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-purchases/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/native-purchases/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="API unificada" icon="rocket">
+    API única para compras en iOS y Android 💳
+  </Card>
+  <Card title="Gestión de suscripciones" icon="setting">
+    Gestiona suscripciones con renovación automática 🔄
+  </Card>
+  <Card title="Validación de recibos" icon="approve-check">
+    Validación de recibos integrada para seguridad 🔒
+  </Card>
+  <Card title="Getting Started" icon="open-book">
+    Consulta la [Guía de inicio](/docs/plugins/native-purchases/getting-started/) para instalar y configurar el plugin.
+  </Card>
+</CardGrid>
+
+## Guías de configuración de plataforma
+
+<CardGrid>
+  <Card title="Configuración de Android" icon="setting">
+    Guías completas para configurar compras en la aplicación en Android:
+    - [Configurar pruebas de Sandbox](/docs/plugins/native-purchases/android-sandbox-testing/)
+    - [Crear suscripciones](/docs/plugins/native-purchases/android-create-subscription/)
+    - [Ofertas introductorias](/docs/plugins/native-purchases/android-introductory-offer/)
+  </Card>
+  <Card title="Configuración de iOS" icon="star">
+    Guías completas para configurar compras en la aplicación en iOS:
+    - [Configurar pruebas de Sandbox](/docs/plugins/native-purchases/ios-sandbox-testing/)
+    - [Grupos de suscripciones](/docs/plugins/native-purchases/ios-subscription-group/)
+    - [Crear suscripciones](/docs/plugins/native-purchases/ios-create-subscription/)
+    - [Ofertas introductorias](/docs/plugins/native-purchases/ios-introductory-offer/)
+  </Card>
+</CardGrid>

@@ -1,0 +1,410 @@
+---
+title: Démarrage
+description: Apprenez à installer et utiliser le plugin InAppBrowser avec des événements de changement d'URL pour du contenu web intégré dans votre application Capacitor.
+sidebar:
+  order: 2
+locale: fr
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer le package**
+   <PackageManagers pkg="@capgo/inappbrowser" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser avec les projets natifs**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilisation
+
+Importez le plugin et utilisez ses deux principaux points d'entrée :
+
+```typescript
+import { InAppBrowser, ToolBarType, BackgroundColor } from '@capgo/inappbrowser';
+
+// 1) Simple custom tab / SFSafariViewController
+const openExternal = async () => {
+  await InAppBrowser.open({
+    url: 'https://capgo.app',
+    isPresentAfterPageLoad: true,
+    preventDeeplink: false,
+  });
+};
+
+// 2) Full WebView with navigation, headers, share, messaging, etc.
+const openWebView = async () => {
+  await InAppBrowser.openWebView({
+    url: 'https://capgo.app',
+    title: 'Capgo',
+    toolbarType: ToolBarType.NAVIGATION,
+    backgroundColor: BackgroundColor.BLACK,
+    activeNativeNavigationForWebview: true,
+    showReloadButton: true,
+    shareSubject: 'Check this page',
+    shareDisclaimer: {
+      title: 'Disclaimer',
+      message: 'You are about to share content',
+      confirmBtn: 'Continue',
+      cancelBtn: 'Cancel',
+    },
+  });
+};
+
+// Messaging between app and the opened WebView
+const setupListeners = async () => {
+  await InAppBrowser.addListener('urlChangeEvent', (event) => {
+    console.log('URL changed to:', event.url);
+  });
+
+  await InAppBrowser.addListener('messageFromWebview', (event) => {
+    console.log('Message from web:', event.detail);
+  });
+
+  await InAppBrowser.addListener('closeEvent', () => {
+    console.log('WebView closed');
+  });
+};
+
+// Send data to the WebView
+const sendData = async () => {
+  await InAppBrowser.postMessage({ detail: { action: 'refresh-profile' } });
+};
+
+// Close and reload helpers
+const closeBrowser = () => InAppBrowser.close();
+const reloadPage = () => InAppBrowser.reload();
+```
+
+## Référence API
+
+### open(options: OpenOptions)
+Ouvre une URL dans un onglet personnalisé / SFSafariViewController.
+
+```typescript
+interface OpenOptions {
+  /** Target URL to load */
+  url: string;
+  /** Present after the page finishes loading */
+  isPresentAfterPageLoad?: boolean;
+  /** Prevent deep links from opening external apps */
+  preventDeeplink?: boolean;
+}
+
+await InAppBrowser.open({ url: 'https://example.com', preventDeeplink: true });
+```
+
+### openWebView(options: OpenWebViewOptions)
+Charge un WebView complet avec interface de navigation, en-têtes, identifiants, script et messagerie.
+
+```typescript
+interface OpenWebViewOptions {
+  url: string;
+  headers?: Record<string, string>;
+  credentials?: { username: string; password: string };
+  materialPicker?: boolean;
+  shareDisclaimer?: {
+    title: string;
+    message: string;
+    confirmBtn: string;
+    cancelBtn: string;
+  };
+  toolbarType?: ToolBarType;
+  shareSubject?: string;
+  title?: string;
+  backgroundColor?: BackgroundColor;
+  activeNativeNavigationForWebview?: boolean;
+  disableGoBackOnNativeApplication?: boolean;
+  isPresentAfterPageLoad?: boolean;
+  isInspectable?: boolean;
+  isAnimated?: boolean;
+  showReloadButton?: boolean;
+  closeModal?: boolean;
+  closeModalTitle?: string;
+  closeModalDescription?: string;
+  closeModalOk?: string;
+  closeModalCancel?: string;
+  visibleTitle?: boolean;
+  toolbarColor?: string;
+  toolbarTextColor?: string;
+  showArrow?: boolean;
+  ignoreUntrustedSSLError?: boolean;
+  preShowScript?: string;
+  preShowScriptInjectionTime?: 'documentStart' | 'pageLoad';
+  proxyRequests?: string;
+  buttonNearDone?: {
+    ios: { iconType: 'sf-symbol' | 'asset'; icon: string };
+    android: { iconType: 'asset' | 'vector'; icon: string; width?: number; height?: number };
+  };
+  textZoom?: number;
+  preventDeeplink?: boolean;
+  authorizedAppLinks?: string[];
+  enabledSafeBottomMargin?: boolean;
+  useTopInset?: boolean;
+  enableGooglePaySupport?: boolean;
+  blockedHosts?: string[];
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+}
+
+await InAppBrowser.openWebView({
+  url: 'https://new-page.com',
+  toolbarType: ToolBarType.NAVIGATION,
+  showReloadButton: true,
+});
+```
+
+Valeurs `ToolBarType` : `activity` (fermer + partager), `compact` (fermer seulement), `navigation` (arrière/avant + fermer), `blank` (pas de barre d'outils). Valeurs `BackgroundColor` : `white` ou `black`.
+
+### close(options?)
+Ferme le WebView/onglet personnalisé.
+
+**Options:**
+- `isAnimated?: boolean` - Si l'action de fermeture doit être animée
+
+### reload()
+Recharge la page WebView actuelle.
+
+### goBack()
+Revient en arrière dans l'historique WebView et retourne `{ canGoBack: boolean }`.
+
+### `setUrl({ url: string })`
+Remplace l'URL WebView actuelle.
+
+### `executeScript({ code: string })`
+Injecte du JavaScript dans le WebView.
+
+### `postMessage({ detail: Record<string, any> })`
+Envoie des données de l'application native vers le WebView (réception en JS via `window.addEventListener('messageFromNative', ...)`).
+
+### `getCookies({ url, includeHttpOnly? })`
+Retourne les cookies pour l'URL.
+
+### `clearCookies({ url })` / clearAllCookies() / clearCache()
+Assistants de gestion des cookies et du cache.
+
+### updateDimensions(options: DimensionOptions)
+Modifie la taille/position du WebView à l'exécution (`width`, `height`, `x`, `y`).
+
+### removeAllListeners()
+Désinscrit tous les écouteurs du plugin.
+
+## Événements
+
+### urlChangeEvent
+
+Déclenché lorsque l'URL change dans le navigateur.
+
+```typescript
+interface UrlChangeEvent {
+  url: string;
+}
+
+InAppBrowser.addListener('urlChangeEvent', (event) => {
+  console.log('New URL:', event.url);
+});
+```
+
+### messageFromWebview
+Déclenché lorsque `window.mobileApp.postMessage(...)` est appelé dans le WebView.
+
+```typescript
+InAppBrowser.addListener('messageFromWebview', (event) => {
+  console.log('Payload from web:', event.detail);
+});
+```
+
+### closeEvent
+
+Déclenché lorsque le navigateur est fermé.
+
+```typescript
+InAppBrowser.addListener('closeEvent', () => {
+  console.log('Browser closed');
+});
+```
+
+### buttonNearDoneClick
+Déclenché lorsque le bouton personnalisé ajouté avec `buttonNearDone` est pressé.
+
+```typescript
+InAppBrowser.addListener('buttonNearDoneClick', (event) => {
+  console.log('Button near done tapped', event);
+});
+```
+
+### confirmBtnClicked
+Déclenché lorsqu'une boîte de dialogue de confirmation (avertissement ou modal de fermeture) est acceptée.
+
+```typescript
+InAppBrowser.addListener('confirmBtnClicked', (event) => {
+  console.log('Confirm accepted, current URL:', event.url);
+});
+```
+
+### browserPageLoaded / pageLoadError
+Événements de cycle de vie pour le succès ou l'échec du chargement du WebView.
+
+```typescript
+InAppBrowser.addListener('browserPageLoaded', () => console.log('Page loaded'));
+InAppBrowser.addListener('pageLoadError', () => console.log('Page failed to load'));
+```
+
+## Utilisation avancée
+
+### Implémentation du flux OAuth
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class OAuthService {
+  private listeners: any[] = [];
+
+  async authenticate(authUrl: string, redirectUri: string) {
+    return new Promise<string>((resolve, reject) => {
+      // Listen for URL changes
+      const urlListener = InAppBrowser.addListener('urlChangeEvent', (event) => {
+        if (event.url.startsWith(redirectUri)) {
+          // Extract OAuth code/token from URL
+          const url = new URL(event.url);
+          const code = url.searchParams.get('code');
+
+          if (code) {
+            InAppBrowser.close();
+            resolve(code);
+          } else {
+            const error = url.searchParams.get('error');
+            reject(new Error(error || 'OAuth failed'));
+          }
+        }
+      });
+
+      this.listeners.push(urlListener);
+
+      // Open OAuth provider
+      InAppBrowser.open({
+        url: authUrl,
+        preventDeeplink: true,
+      });
+    });
+  }
+
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+### Interface de navigateur personnalisée
+
+```typescript
+const openCustomBrowser = async () => {
+  await InAppBrowser.open({
+    url: 'https://example.com',
+    isPresentAfterPageLoad: true,
+    preventDeeplink: false,
+  });
+};
+```
+
+### Gestion des liens externes
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class LinkHandler {
+  async openExternalLink(url: string) {
+    // Check if URL should open in browser
+    if (this.shouldOpenInBrowser(url)) {
+      await InAppBrowser.open({
+        url,
+        preventDeeplink: true,
+      });
+    } else {
+      // Handle internally
+      window.location.href = url;
+    }
+  }
+
+  private shouldOpenInBrowser(url: string): boolean {
+    // External domains
+    const externalDomains = ['youtube.com', 'twitter.com', 'facebook.com'];
+    const urlDomain = new URL(url).hostname;
+
+    return externalDomains.some(domain => urlDomain.includes(domain));
+  }
+}
+```
+
+## Bonnes pratiques
+
+1. **Supprimez toujours les écouteurs**
+   ```typescript
+   const listener = await InAppBrowser.addListener('urlChangeEvent', handler);
+   // When done
+   listener.remove();
+   ```
+
+2. **Gérez les états du navigateur**
+   ```typescript
+   let browserOpen = false;
+
+   const launch = async () => {
+     browserOpen = true;
+     await InAppBrowser.openWebView({ url: 'https://example.com' });
+   };
+
+   InAppBrowser.addListener('closeEvent', () => {
+     browserOpen = false;
+   });
+   ```
+
+3. **Validez les URL avant d'ouvrir**
+   ```typescript
+   const isValidUrl = (url: string): boolean => {
+     try {
+       new URL(url);
+       return true;
+     } catch {
+       return false;
+     }
+   };
+
+   if (isValidUrl(url)) {
+     await InAppBrowser.open({ url });
+   }
+   ```
+
+4. **Personnalisez pour la plateforme**
+   ```typescript
+   import { Capacitor } from '@capacitor/core';
+
+   const options = {
+     url: 'https://example.com',
+     preventDeeplink: Capacitor.getPlatform() === 'ios',
+   };
+   ```
+
+## Notes de plateforme
+
+### iOS
+- Utilise `SFSafariViewController`
+- Prend en charge iOS 11.0+
+- Respecte les insets de la zone sûre
+- Prend en charge les styles de présentation personnalisés
+
+### Android
+- Utilise Chrome Custom Tabs
+- Se replie sur WebView si Chrome n'est pas disponible
+- Prend en charge Android 5.0 (API 21)+
+- Personnalisation de la barre d'outils prise en charge via `toolbarType`, `toolbarColor`, `buttonNearDone`, etc.
+
+### Web
+- Ouvre dans un nouvel onglet/fenêtre de navigateur
+- Options de personnalisation limitées
+- Pas d'événements de changement d'URL

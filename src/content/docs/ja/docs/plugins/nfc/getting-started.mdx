@@ -1,0 +1,456 @@
+---
+title: はじめに
+locale: ja
+description: NFCプラグインをインストールして使用し、CapacitorアプリでNFCタグの読み取りと書き込みを行う方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストールする**
+   <PackageManagers pkg="@capgo/capacitor-nfc" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期する**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 設定
+
+### iOS の設定
+
+`Info.plist` に NFC 使用説明を追加します：
+
+```xml
+<key>NFCReaderUsageDescription</key>
+<string>このアプリはタグの読み取りと書き込みのためにNFCアクセスが必要です</string>
+```
+
+Xcode プロジェクトで Near Field Communication Tag Reading 機能を有効にします。
+
+### Android の設定
+
+`AndroidManifest.xml` に NFC パーミッションを追加します：
+
+```xml
+<manifest>
+  <uses-permission android:name="android.permission.NFC" />
+  <uses-feature android:name="android.hardware.nfc" android:required="false" />
+</manifest>
+```
+
+## 使用方法
+
+### NFC タグのスキャンを開始する
+
+```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
+await CapacitorNfc.startScanning({
+  invalidateAfterFirstRead: false, // セッションを開いたままにする（iOS）
+  alertMessage: 'デバイスの上部近くにタグをかざしてください。',
+});
+
+const listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
+  console.log('タグを検出しました:', event.type);
+  console.log('タグID:', event.tag?.id);
+  console.log('NDEFメッセージ:', event.tag?.ndefMessage);
+});
+```
+
+### NFC タグを読み取る
+
+```typescript
+await CapacitorNfc.addListener('nfcEvent', (event) => {
+  if (event.tag?.ndefMessage) {
+    event.tag.ndefMessage.forEach(record => {
+      console.log('TNF:', record.tnf);
+      console.log('タイプ:', record.type);
+      console.log('ペイロード:', record.payload);
+
+      // テキストレコードをデコード
+      if (record.tnf === 1 && record.type[0] === 0x54) { // テキストレコード
+        const langLen = record.payload[0] & 0x3f;
+        const text = new TextDecoder().decode(
+          new Uint8Array(record.payload.slice(langLen + 1))
+        );
+        console.log('テキスト:', text);
+      }
+    });
+  }
+});
+```
+
+### NFC タグに書き込む
+
+```typescript
+// テキストレコードを準備
+const encoder = new TextEncoder();
+const langBytes = Array.from(encoder.encode('en'));
+const textBytes = Array.from(encoder.encode('Hello NFC'));
+const payload = [langBytes.length & 0x3f, ...langBytes, ...textBytes];
+
+await CapacitorNfc.write({
+  allowFormat: true,
+  records: [
+    {
+      tnf: 0x01, // TNF Well-known
+      type: [0x54], // 'T' はテキストを表す
+      id: [],
+      payload,
+    },
+  ],
+});
+
+console.log('タグの書き込みに成功しました');
+```
+
+### NFC タグに URL を書き込む
+
+```typescript
+const url = 'https://capgo.app';
+const urlBytes = Array.from(new TextEncoder().encode(url));
+
+await CapacitorNfc.write({
+  allowFormat: true,
+  records: [
+    {
+      tnf: 0x01, // TNF Well-known
+      type: [0x55], // 'U' は URI を表す
+      id: [],
+      payload: [0x01, ...urlBytes], // 0x01 = https://
+    },
+  ],
+});
+```
+
+### NFC タグを消去する
+
+```typescript
+await CapacitorNfc.erase();
+console.log('タグを消去しました');
+```
+
+### タグを読み取り専用にする
+
+```typescript
+await CapacitorNfc.makeReadOnly();
+console.log('タグは読み取り専用になりました');
+```
+
+### スキャンを停止する
+
+```typescript
+await listener.remove();
+await CapacitorNfc.stopScanning();
+```
+
+### NFC ステータスを確認する
+
+```typescript
+const { status } = await CapacitorNfc.getStatus();
+console.log('NFCステータス:', status);
+// 可能な値: 'NFC_OK', 'NO_NFC', 'NFC_DISABLED', 'NDEF_PUSH_DISABLED'
+
+if (status === 'NFC_DISABLED') {
+  // システム設定を開く
+  await CapacitorNfc.showSettings();
+}
+```
+
+### Android Beam（P2P 共有）
+
+```typescript
+// Android Beam でデータを共有
+const message = {
+  records: [
+    {
+      tnf: 0x01,
+      type: [0x54], // テキスト
+      id: [],
+      payload: [/* テキストレコードペイロード */],
+    },
+  ],
+};
+
+await CapacitorNfc.share(message);
+
+// 後で共有を停止
+await CapacitorNfc.unshare();
+```
+
+## API リファレンス
+
+### startScanning(options?)
+
+NFC タグのリスニングを開始します。
+
+```typescript
+interface StartScanningOptions {
+  invalidateAfterFirstRead?: boolean; // iOS のみ、デフォルトは true
+  alertMessage?: string; // iOS のみ
+  androidReaderModeFlags?: number; // Android のみ
+}
+
+await CapacitorNfc.startScanning(options);
+```
+
+### stopScanning()
+
+NFC スキャンセッションを停止します。
+
+```typescript
+await CapacitorNfc.stopScanning();
+```
+
+### write(options)
+
+最後に検出されたタグに NDEF レコードを書き込みます。
+
+```typescript
+interface WriteTagOptions {
+  records: NdefRecord[];
+  allowFormat?: boolean; // デフォルトは true
+}
+
+interface NdefRecord {
+  tnf: number; // Type Name Format
+  type: number[]; // レコードタイプ
+  id: number[]; // レコードID
+  payload: number[]; // レコードペイロード
+}
+
+await CapacitorNfc.write(options);
+```
+
+### erase()
+
+最後に検出されたタグを消去します。
+
+```typescript
+await CapacitorNfc.erase();
+```
+
+### makeReadOnly()
+
+最後に検出されたタグを読み取り専用にします（永続的）。
+
+```typescript
+await CapacitorNfc.makeReadOnly();
+```
+
+### share(options)
+
+Android Beam 経由で NDEF メッセージを共有します（Android のみ）。
+
+```typescript
+await CapacitorNfc.share({ records: [...] });
+```
+
+### unshare()
+
+共有を停止します（Android のみ）。
+
+```typescript
+await CapacitorNfc.unshare();
+```
+
+### getStatus()
+
+現在の NFC アダプターステータスを取得します。
+
+```typescript
+const { status } = await CapacitorNfc.getStatus();
+// 戻り値: 'NFC_OK' | 'NO_NFC' | 'NFC_DISABLED' | 'NDEF_PUSH_DISABLED'
+```
+
+### showSettings()
+
+システムの NFC 設定を開きます。
+
+```typescript
+await CapacitorNfc.showSettings();
+```
+
+## イベント
+
+### nfcEvent
+
+NFC タグが検出されたときに発火されます。
+
+```typescript
+interface NfcEvent {
+  type: 'tag' | 'ndef' | 'ndef-mime' | 'ndef-formattable';
+  tag?: NfcTag;
+}
+
+interface NfcTag {
+  id: number[];
+  techTypes: string[];
+  type: string | null;
+  maxSize: number | null;
+  isWritable: boolean | null;
+  canMakeReadOnly: boolean | null;
+  ndefMessage: NdefRecord[] | null;
+}
+```
+
+### nfcStateChange
+
+NFC アダプターの可用性が変更されたときに発火されます（Android のみ）。
+
+```typescript
+interface NfcStateChangeEvent {
+  status: NfcStatus;
+  enabled: boolean;
+}
+```
+
+## 完全な例
+
+```typescript
+import { CapacitorNfc } from '@capgo/capacitor-nfc';
+
+export class NfcService {
+  private listener: any;
+
+  async startReading() {
+    // NFC ステータスを確認
+    const { status } = await CapacitorNfc.getStatus();
+
+    if (status === 'NO_NFC') {
+      throw new Error('このデバイスではNFCが利用できません');
+    }
+
+    if (status === 'NFC_DISABLED') {
+      await CapacitorNfc.showSettings();
+      return;
+    }
+
+    // スキャンを開始
+    await CapacitorNfc.startScanning({
+      invalidateAfterFirstRead: false,
+      alertMessage: 'NFCタグをスキャンする準備ができました',
+    });
+
+    // タグをリッスン
+    this.listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
+      this.handleNfcEvent(event);
+    });
+  }
+
+  private handleNfcEvent(event: any) {
+    console.log('NFCイベント:', event.type);
+
+    if (event.tag?.ndefMessage) {
+      event.tag.ndefMessage.forEach(record => {
+        this.processRecord(record);
+      });
+    }
+  }
+
+  private processRecord(record: any) {
+    // テキストレコードを処理
+    if (record.tnf === 1 && record.type[0] === 0x54) {
+      const langLen = record.payload[0] & 0x3f;
+      const text = new TextDecoder().decode(
+        new Uint8Array(record.payload.slice(langLen + 1))
+      );
+      console.log('テキスト:', text);
+    }
+
+    // URI レコードを処理
+    if (record.tnf === 1 && record.type[0] === 0x55) {
+      const uriCode = record.payload[0];
+      const uri = new TextDecoder().decode(
+        new Uint8Array(record.payload.slice(1))
+      );
+      console.log('URI:', uri);
+    }
+  }
+
+  async writeText(text: string) {
+    const encoder = new TextEncoder();
+    const langBytes = Array.from(encoder.encode('en'));
+    const textBytes = Array.from(encoder.encode(text));
+    const payload = [langBytes.length & 0x3f, ...langBytes, ...textBytes];
+
+    await CapacitorNfc.write({
+      allowFormat: true,
+      records: [
+        {
+          tnf: 0x01,
+          type: [0x54],
+          id: [],
+          payload,
+        },
+      ],
+    });
+  }
+
+  async stopReading() {
+    if (this.listener) {
+      await this.listener.remove();
+    }
+    await CapacitorNfc.stopScanning();
+  }
+}
+```
+
+## NDEF レコードタイプ
+
+### TNF（Type Name Format）
+
+- `0x00`: 空
+- `0x01`: Well-known（例: テキスト、URI）
+- `0x02`: MIME メディアタイプ
+- `0x03`: 絶対 URI
+- `0x04`: 外部タイプ
+- `0x05`: 不明
+- `0x06`: 未変更
+- `0x07`: 予約済み
+
+### 一般的なレコードタイプ
+
+- **テキスト**: `type: [0x54]`（'T'）
+- **URI**: `type: [0x55]`（'U'）
+- **スマートポスター**: `type: [0x53, 0x70]`（'Sp'）
+
+### URI プレフィックス
+
+- `0x00`: （プレフィックスなし）
+- `0x01`: `https://`
+- `0x02`: `https://`
+- `0x03`: `http://`
+- `0x04`: `https://www.`
+
+## ベストプラクティス
+
+1. **NFC ステータスを確認する**: NFC が利用可能で有効になっているか常に確認する
+2. **パーミッションを処理する**: NFC パーミッションを適切に要求する
+3. **スキャンを停止する**: バッテリーを節約するため、完了したら必ずスキャンを停止する
+4. **エラー処理**: NFC 操作を try-catch ブロックでラップする
+5. **実機でテストする**: NFC 機能はシミュレーター/エミュレーターでは動作しない
+
+## プラットフォームノート
+
+### iOS
+- iOS 11.0+ が必要
+- Core NFC フレームワークを使用
+- バックグラウンドタグ読み取りをサポート（iOS 13+）
+- NDEF フォーマットされたタグの読み取りに限定
+- バックグラウンドでタグに書き込みできない
+- Info.plist に NFCReaderUsageDescription が必要
+
+### Android
+- Android 4.4（API 19）+ が必要
+- Android NFC API を使用
+- フォアグラウンドとバックグラウンドの両方のタグ読み取りをサポート
+- タグへの書き込みが可能
+- NFC を搭載したデバイスで Android Beam（P2P）をサポート
+- AndroidManifest.xml に NFC パーミッションが必要
+
+### Web
+- Web プラットフォームではサポートされていません

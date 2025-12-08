@@ -1,0 +1,67 @@
+---
+title: Memulai
+locale: id
+description: Render HTML dan halaman remote menjadi PDF dengan plugin Capgo PDF Generator.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal plugin**
+   <PackageManagers pkg="@capgo/capacitor-pdf-generator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan platform**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Generate dari HTML
+
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+
+const receiptHtml = `
+  <html>
+    <body>
+      <h1>Capgo Store</h1>
+      <p>Thank you for your purchase.</p>
+    </body>
+  </html>
+`;
+
+const pdf = await PdfGenerator.fromData({
+  data: receiptHtml,
+  documentSize: 'A4',
+  orientation: 'portrait',
+  type: 'base64',
+  fileName: 'receipt.pdf',
+});
+
+if (pdf.type === 'base64') {
+  const link = document.createElement('a');
+  link.href = `data:application/pdf;base64,${pdf.base64}`;
+  link.download = 'receipt.pdf';
+  link.click();
+}
+```
+
+## Tangkap URL remote
+
+```typescript
+await PdfGenerator.fromURL({
+  url: 'https://docs.capgo.app/invoice?id=123',
+  orientation: 'landscape',
+  documentSize: 'A4',
+  type: 'share', // membuka dialog berbagi native
+  fileName: 'invoice-123.pdf',
+});
+```
+
+## Tips
+
+- Sertakan CSS inline di string HTML Anda atau berikan `baseUrl` agar aset relatif dapat terselesaikan dengan benar.
+- Saat mengembalikan data base64 di mobile, pindahkan ke filesystem (misalnya, Capacitor Filesystem) sebelum berbagi.
+- Orientasi landscape ideal untuk tabel lebar, sementara portrait cocok untuk sebagian besar dokumen.
+- Pertimbangkan menggunakan font CSS scoped (misalnya, font sistem) untuk rendering yang konsisten di seluruh platform.

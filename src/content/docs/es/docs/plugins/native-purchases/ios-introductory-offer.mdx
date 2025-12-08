@@ -1,0 +1,413 @@
+---
+title: Crear Oferta Introductoria de Suscripción en iOS
+locale: es
+description: Aprende cómo crear ofertas introductorias para suscripciones renovables automáticamente en iOS para atraer y convertir nuevos suscriptores.
+sidebar:
+  order: 9
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Las ofertas introductorias te permiten proporcionar a usuarios elegibles pruebas gratuitas o precios introductorios con descuento para reducir barreras de entrada y aumentar las conversiones de suscripción.
+
+## Descripción general
+
+Las ofertas introductorias son una de las herramientas más efectivas para hacer crecer tu base de suscriptores. Permiten a los usuarios:
+- Probar tus funciones premium sin riesgo
+- Experimentar el valor antes de comprometerse
+- Comenzar con un punto de precio más bajo
+- Generar confianza en tu producto
+
+## Tipos de Oferta
+
+iOS soporta tres tipos de ofertas introductorias:
+
+### 1. Prueba Gratuita
+Los clientes obtienen acceso gratuito durante una duración especificada. Después de la prueba, se les cobra a tarifas estándar si no cancelan.
+
+**Ejemplos:**
+- 7 días gratis
+- 14 días gratis
+- 1 mes gratis
+
+**Mejor para:**
+- Suscripciones de alto valor
+- Aplicaciones con muchas funciones
+- Construir hábito del usuario
+
+### 2. Pago por Adelantado
+Los clientes pagan un precio único con descuento que cubre el período introductorio.
+
+**Ejemplos:**
+- $1.99 por 2 meses (luego $9.99/mes)
+- $9.99 por 3 meses (luego $19.99/mes)
+
+**Mejor para:**
+- Señales de compromiso
+- Necesidades de flujo de efectivo
+- Probar sensibilidad al precio
+
+### 3. Pago Según Uso
+Los clientes pagan un precio reducido durante múltiples ciclos de facturación.
+
+**Ejemplos:**
+- $1.99/mes por 3 meses (luego $9.99/mes)
+- $4.99/mes por 6 meses (luego $14.99/mes)
+
+**Mejor para:**
+- Compromiso gradual
+- Demostración de valor a largo plazo
+- Reducir el riesgo percibido
+
+## Requisitos de Elegibilidad
+
+Los usuarios solo pueden recibir ofertas introductorias si:
+- No han recibido previamente una oferta introductoria para el producto
+- No han recibido una oferta introductoria para ningún producto en el mismo grupo de suscripción
+- No han tenido una suscripción activa al producto
+
+:::note
+Apple maneja la verificación de elegibilidad automáticamente. El plugin native-purchases proporciona métodos para verificar la elegibilidad antes de presentar ofertas.
+:::
+
+## Requisitos previos
+
+Primero debes [crear una suscripción renovable automáticamente](/docs/plugins/native-purchases/ios-create-subscription/) antes de agregar una oferta introductoria.
+
+## Crear una Oferta Introductoria
+
+<Steps>
+
+1. **Navegar a la Suscripción**
+
+   En App Store Connect, ve a la sección **Monetize > Subscriptions** de tu aplicación y selecciona la suscripción a la que deseas agregar una oferta.
+
+2. **Agregar Precio de Suscripción**
+
+   Haz clic en el icono **+** junto a "Subscription Prices" para abrir el modal de precios.
+
+3. **Crear Oferta Introductoria**
+
+   Selecciona **"Create introductory offer"** de las opciones.
+
+   ![Crear oferta introductoria](/native-purchases/ios/introductory-offer/create-introductory-offer.webp)
+
+4. **Configurar Países y Fecha de Inicio**
+
+   **Countries and Regions**: Selecciona dónde estará disponible la oferta
+   - Elige todos los países para máximo alcance
+   - O limita a mercados específicos para pruebas
+
+   **Start Date**: Cuándo la oferta estará disponible
+   - Puede ser inmediata o programada para el futuro
+   - Útil para coordinar con campañas de marketing
+
+   **End Date (Opcional)**: Cuándo expira la oferta
+   - Déjalo en blanco para disponibilidad continua
+   - Establece una fecha para promociones por tiempo limitado
+
+5. **Seleccionar Tipo de Oferta**
+
+   Elige uno de los tres tipos de oferta:
+
+   **Free** (Prueba Gratuita)
+   - Selecciona duración (días, semanas, meses)
+   - Ejemplos: 7 días, 2 semanas, 1 mes
+
+   **Pay Up Front**
+   - Establece precio de pago único
+   - Establece duración cubierta por el pago
+   - Ejemplo: $1.99 por 2 meses
+
+   **Pay As You Go**
+   - Establece precio con descuento por período
+   - Establece número de períodos
+   - Ejemplo: $2.99/mes por 3 meses
+
+6. **Revisar y Confirmar**
+
+   Revisa el resumen que muestra:
+   - Tipo de oferta y duración
+   - Detalles de precios
+   - Precio regular después del período introductorio
+   - Fechas de disponibilidad y países
+
+7. **Guardar**
+
+   Haz clic en **Save** para crear la oferta introductoria. Estará disponible para pruebas inmediatamente en modo sandbox.
+
+</Steps>
+
+## Ejemplos de Configuración de Oferta
+
+### Ejemplo 1: Prueba Gratuita Estándar
+```
+Tipo: Free
+Duración: 7 días
+Luego: $9.99/mes
+```
+**Recorrido del Usuario:**
+- Día 1-7: Acceso gratuito
+- Día 8: Primer cargo de $9.99
+- Los cargos mensuales continúan
+
+### Ejemplo 2: Período con Descuento por Adelantado
+```
+Tipo: Pay Up Front
+Precio: $4.99
+Duración: 3 meses
+Luego: $9.99/mes
+```
+**Recorrido del Usuario:**
+- Día 1: Cargado $4.99
+- Acceso por 90 días
+- Día 91: Cargado $9.99/mes
+
+### Ejemplo 3: Introducción Gradual
+```
+Tipo: Pay As You Go
+Precio: $2.99/mes
+Períodos: 6 meses
+Luego: $9.99/mes
+```
+**Recorrido del Usuario:**
+- Meses 1-6: $2.99/mes
+- Mes 7+: $9.99/mes
+
+## Usar en tu Aplicación
+
+El plugin native-purchases maneja automáticamente la presentación de ofertas introductorias y la elegibilidad:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Obtener productos con información de oferta introductoria
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.yourapp.premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+
+// Mostrar detalles de oferta introductoria (StoreKit envía metadatos localizados)
+if (product.introductoryPrice) {
+  console.log('Intro price:', product.introductoryPriceString);
+  console.log('Intro period:', product.introductoryPricePeriod);
+  console.log('Intro cycles:', product.introductoryPriceCycles);
+  console.log('Regular price:', product.priceString);
+} else {
+  console.log('No intro offer configured');
+}
+
+// Comprar (StoreKit aplica automáticamente precios introductorios si es elegible)
+try {
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.yourapp.premium_monthly',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Subscription active, receipt length:', transaction.receipt?.length);
+  await validateReceiptOnServer(transaction.receipt);
+} catch (error) {
+  console.error('Purchase failed:', error);
+}
+```
+
+## Mostrar Ofertas Introductorias a los Usuarios
+
+### Mejores Prácticas para la Interfaz
+
+**Propuesta de Valor Clara:**
+```
+Prueba Premium Gratis por 7 Días
+Luego $9.99/mes. Cancela en cualquier momento.
+```
+
+**Enfatizar Ahorros:**
+```
+Comienza por Solo $1.99
+Obtén 3 meses de Premium por solo $1.99
+Luego $9.99/mes
+```
+
+**Comunicación Transparente:**
+```
+Tu Prueba Gratuita
+• Acceso a todas las funciones premium
+• Sin cargo por 7 días
+• $9.99/mes después de la prueba
+• Cancela en cualquier momento, incluso durante la prueba
+```
+
+### Ejemplo de Implementación
+
+```typescript
+function formatIntroOffer(product: any): string {
+  if (!product.introductoryPrice) {
+    return `${product.priceString} per ${product.subscriptionPeriod}`;
+  }
+
+  const intro = product.introductoryPrice;
+  const regular = product.priceString;
+
+  if (intro.price === 0) {
+    // Prueba gratuita
+    return `Try free for ${intro.periodString}, then ${regular}`;
+  } else if (intro.cycles === 1) {
+    // Pago por adelantado
+    return `${intro.priceString} for ${intro.periodString}, then ${regular}`;
+  } else {
+    // Pago según uso
+    return `${intro.priceString} for ${intro.cycles} ${intro.periodString}s, then ${regular}`;
+  }
+}
+```
+
+## Mejores Prácticas de Marketing
+
+### Estrategia de Duración de Prueba
+- **3-7 días**: Aplicaciones de decisión rápida, juegos
+- **7-14 días**: Estándar para la mayoría de aplicaciones
+- **14-30 días**: Herramientas complejas, aplicaciones profesionales
+- **30+ días**: Alto valor B2B o empresarial
+
+### Psicología de Precios
+- **$0.99-$1.99**: Barrera muy baja, bueno para pruebas
+- **50% de descuento**: Fuerte valor percibido
+- **Primer mes gratis**: Común, patrón familiar
+
+### Momento de Comunicación
+- **Antes de que termine la prueba**: Recuerda a los usuarios el próximo cargo
+- **Resalta el valor**: Muestra estadísticas de uso, logros
+- **Cancelación fácil**: Genera confianza con proceso transparente
+
+## Probar Ofertas Introductorias
+
+Usa pruebas en sandbox para verificar el comportamiento:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// En modo sandbox, se aplican duraciones de suscripción aceleradas:
+// - Prueba gratuita de 3 días = 3 minutos
+// - Prueba gratuita de 1 semana = 3 minutos
+// - Prueba gratuita de 1 mes = 5 minutos
+
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Comprar con oferta introductoria
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Intro purchase transaction:', transaction.transactionId);
+
+// Esperar renovación acelerada
+setTimeout(async () => {
+  const { purchases } = await NativePurchases.getPurchases({
+    productType: PURCHASE_TYPE.SUBS,
+  });
+  const premium = purchases.find((purchase) => purchase.productIdentifier === 'premium_monthly');
+  console.log('After trial state:', premium?.subscriptionState);
+}, 180000); // 3 minutos para prueba semanal
+```
+
+## Notas Importantes
+
+### Reglas de Elegibilidad
+- Una oferta introductoria por usuario por grupo de suscripción (de por vida)
+- Se aplica solo a nuevos suscriptores
+- No se puede usar nuevamente después de la cancelación
+- No disponible para actualizaciones/cambios de suscripción
+
+### StoreKit API
+- `introductoryPrice` muestra detalles de oferta introductoria
+- El método `eligibility` verifica si el usuario califica
+- Se aplica automáticamente en el momento de la compra
+- No se necesita método de compra especial
+
+### Limitaciones
+- Solo una oferta introductoria activa por suscripción a la vez
+- No se puede combinar con otros tipos de descuento
+- No se pueden cambiar reglas de elegibilidad
+- Apple controla la verificación de elegibilidad
+
+## Solución de Problemas
+
+**Oferta introductoria no se muestra:**
+- Verifica si la oferta está activada en App Store Connect
+- Verifica que el usuario no haya usado una oferta introductoria antes
+- Asegúrate de que el usuario no se haya suscrito a nada en el grupo
+- Prueba con una nueva cuenta sandbox
+
+**Falla la verificación de elegibilidad:**
+- Espera la sincronización de App Store (puede tomar 2-3 horas)
+- Verifica que el product ID sea correcto
+- Verifica la configuración del grupo de suscripción
+- Prueba en sandbox con cuenta de prueba nueva
+
+**Se muestra precio incorrecto:**
+- Verifica la configuración de precios regionales
+- Verifica la conversión de moneda
+- Asegúrate de que las fechas de la oferta sean actuales
+- Actualiza la información del producto
+
+**Problemas de prueba en sandbox:**
+- Usa duraciones aceleradas (3 min = 1 semana)
+- Crea nuevas cuentas de prueba para cada prueba
+- Espera que la prueba se complete naturalmente
+- Verifica el recuento de renovaciones (máximo 6 en sandbox)
+
+## Análisis y Optimización
+
+### Rastrear Estas Métricas
+- Tasa de aceptación de oferta introductoria
+- Tasa de conversión de prueba a pago
+- Cancelación durante la prueba
+- Retención después del primer cargo
+- Impacto en ingresos
+
+### Ideas para Pruebas A/B
+- Prueba gratuita vs. introducción pagada
+- Variaciones de duración de prueba
+- Porcentaje de descuento
+- Pago único vs. descuento recurrente
+
+### Estrategia de Optimización
+```typescript
+// Rastrear rendimiento de oferta
+analytics.track('intro_offer_displayed', {
+  product_id: product.identifier,
+  offer_type: product.introductoryPriceType,
+  offer_duration: product.introductoryPricePeriod
+});
+
+analytics.track('intro_offer_accepted', {
+  product_id: product.identifier
+});
+
+// Monitorear conversión
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  if (transaction.productIdentifier === product.identifier && transaction.isActive) {
+    analytics.track('trial_converted', {
+      transactionId: transaction.transactionId,
+      productId: transaction.productIdentifier,
+    });
+  }
+});
+```
+
+## Próximos Pasos
+
+- [Configurar pruebas en sandbox](/docs/plugins/native-purchases/ios-sandbox-testing/) para probar tus ofertas introductorias
+- Configurar ofertas promocionales para campañas de recuperación
+- Implementar análisis de suscripción
+- Crear campañas de marketing dirigidas
+
+## Recursos Adicionales
+
+Para más detalles, consulta la [documentación oficial de Apple sobre ofertas introductorias](https://developer.apple.com/documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).

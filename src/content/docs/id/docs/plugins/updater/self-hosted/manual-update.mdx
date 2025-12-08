@@ -1,0 +1,68 @@
+---
+title: "Manual Update"
+locale: id
+description: "Panduan detail tentang pemanfaatan plugin pembaruan manual dalam lingkungan self-hosted, memberikan instruksi komprehensif tentang konfigurasi dan penggunaan untuk mengelola pembaruan secara efektif tanpa mengandalkan proses otomatis."
+sidebar:
+  order: 3
+---
+
+## Konfigurasi
+
+Tambahkan ini ke ``capacitor.config.json`` Anda, untuk menonaktifkan auto-update.
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false,
+		}
+	}
+}
+```
+
+## Penggunaan
+
+Anda dapat menggunakan contoh ini atau membuat ulang logika di aplikasi Anda.
+
+:::caution
+Kami memaksa pengguna untuk memperbarui aplikasi dengan versi statis yang dideklarasikan dalam kode. Ini tidak direkomendasikan, Anda harus menggunakan versi dinamis dari server Anda.
+:::
+
+:::danger
+Kami tidak melakukan pemeriksaan versi, dekripsi, atau validasi checksum dalam contoh ini. Anda harus melakukannya sendiri.
+:::
+
+```tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+let data = {version: ""}
+CapacitorUpdater.notifyAppReady()
+App.addListener('appStateChange', async(state) => {
+     if (state.isActive) {
+       // Lakukan unduhan selama waktu aplikasi aktif pengguna untuk mencegah unduhan gagal
+       data = await CapacitorUpdater.download({
+       version: '0.0.4',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/0.0.4/dist.zip',
+       })
+     }
+     if (!state.isActive && data.version !== "") {
+       // Lakukan perpindahan ketika pengguna meninggalkan aplikasi
+       SplashScreen.show()
+       try {
+         await CapacitorUpdater.set(data)
+       } catch (err) {
+         console.log(err)
+         SplashScreen.hide() // jika set gagal, jika tidak aplikasi baru harus menyembunyikannya
+       }
+     }
+ })
+```
+
+
+
+:::note
+Jika ini terasa seperti banyak pekerjaan pertimbangkan untuk mencoba [trial Capgo](https://capgo.app/register/). Ini akan menangani semua ini untuk Anda.
+:::

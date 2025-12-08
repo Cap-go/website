@@ -1,0 +1,246 @@
+---
+title: "@capgo/capacitor-launch-navigator"
+description: Google Maps, Apple Maps, Waze 및 기타 탐색 서비스를 지원하는 Capacitor 앱용 탐색 앱 실행 플러그인.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 여러 지도 제공업체 및 사용자 지정 라우팅 옵션을 지원하여 턴바이턴 방향으로 탐색 앱을 실행하세요.
+  image:
+    file: ~public/icons/plugins/launch-navigator.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/launch-navigator/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-launch-navigator/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 개요
+
+Capacitor Launch Navigator 플러그인은 좌표 기반 탐색으로 iOS 및 Android 장치에서 네이티브 탐색 앱을 실행할 수 있게 합니다. 이 플러그인은 인기 있는 매핑 애플리케이션과의 원활한 통합을 제공하고 포괄적인 탐색 솔루션을 위해 여러 교통 수단을 지원합니다.
+
+<CardGrid stagger>
+  <Card title="다중 앱 지원" icon="rocket">
+    Google Maps, Apple Maps, Waze, Citymapper 등 🗺️
+  </Card>
+  <Card title="교통 수단" icon="magnifier">
+    운전, 도보, 대중교통 및 자전거 경로 🧭
+  </Card>
+  <Card title="앱 감지" icon="magnifier">
+    가용성 확인 및 설치된 탐색 앱 목록 표시 🔍
+  </Card>
+  <Card title="좌표 기반" icon="star">
+    위도/경도 좌표를 사용하여 탐색 📍
+  </Card>
+</CardGrid>
+
+## 설치
+
+```bash
+npm install @capgo/capacitor-launch-navigator
+npx cap sync
+```
+
+## iOS 구성
+
+설치된 탐색 앱을 감지하기 위해 `Info.plist`에 URL 스키마를 추가하세요:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <!-- 다른 탐색 앱 스키마 추가 -->
+</array>
+```
+
+## 핵심 API 메서드
+
+### 탐색
+- `navigate(options)` - 지정된 좌표로 탐색 시작
+- `isAppAvailable(options)` - 특정 탐색 앱이 설치되어 있는지 확인
+- `getAvailableApps()` - 장치에서 사용 가능한 모든 탐색 앱 목록 표시
+- `getSupportedApps()` - 현재 플랫폼에 대해 지원되는 모든 앱 가져오기
+
+## 사용 예제
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// 좌표로 기본 탐색
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // 샌프란시스코 좌표
+});
+
+// 옵션이 있는 고급 탐색
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // 선택적 출발점
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // 선호하는 탐색 앱
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// 특정 앱이 사용 가능한지 확인
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps가 설치되어 있습니다');
+} else {
+  console.log('Google Maps를 사용할 수 없습니다');
+}
+
+// 사용 가능한 모든 탐색 앱 가져오기
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('사용 가능한 탐색 앱:', availableApps);
+
+// 플랫폼에 대해 지원되는 모든 앱 가져오기
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('지원되는 앱:', supportedApps);
+```
+
+## 탐색 옵션
+
+```typescript
+interface NavigationOptions {
+  start?: [number, number];      // 출발 좌표 [위도, 경도]
+  transportMode?: TransportMode; // 교통 수단
+  app?: string;                  // 선호하는 탐색 앱
+  appDisplayName?: string;       // 앱의 표시 이름
+  launchMode?: LaunchMode;       // 앱 실행 방법
+}
+```
+
+## 교통 수단
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## 지원되는 탐색 앱
+
+### iOS
+- Apple Maps (내장)
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- 그 외 다수...
+
+### Android
+- Google Maps (내장)
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- 그 외 다수...
+
+## 좌표 요구 사항
+
+> ⚠️ **중요**: 이 플러그인은 탐색을 위해 위도/경도 좌표만 허용합니다. 주소를 좌표로 변환하려면 [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder)를 사용하세요.
+
+```typescript
+// 지오코딩 예제
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+// 주소를 좌표로 변환
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // 지오코딩된 좌표로 탐색 시작
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## 앱 감지 및 선택
+
+```typescript
+// 여러 앱을 확인하고 첫 번째로 사용 가능한 앱 사용
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('지원되는 탐색 앱을 찾을 수 없습니다');
+}
+```
+
+## 오류 처리
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('탐색 실패:', error);
+  // 오류 처리 - 앱을 사용할 수 없음, 잘못된 좌표 등
+}
+```
+
+## 사용 사례
+
+- **위치 기반 서비스**: 사용자를 관심 지점으로 안내
+- **배달 앱**: 운전자를 배달 위치로 안내
+- **이벤트 앱**: 참석자를 행사장 위치로 안내
+- **부동산 앱**: 부동산 위치로 탐색
+- **여행 앱**: 관광객을 명소로 안내
+
+## 모범 사례
+
+- 탐색을 시도하기 전에 항상 앱 가용성 확인
+- 선호하는 앱을 사용할 수 없을 때 대체 옵션 제공
+- 사용자 선택을 위해 의미 있는 앱 표시 이름 사용
+- 사용자 친화적인 메시지로 오류를 우아하게 처리
+- 기본 탐색 앱에 대한 사용자 기본 설정 고려
+
+## 문서
+
+자세한 구현 가이드 및 고급 탐색 패턴은 [전체 문서](/docs/plugins/launch-navigator/getting-started/)를 확인하세요.

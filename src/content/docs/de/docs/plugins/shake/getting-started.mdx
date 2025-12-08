@@ -1,0 +1,162 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie das Capacitor Shake-Plugin installieren und konfigurieren, um Schüttelgesten zu erkennen und interaktive Erlebnisse in Ihrer App zu erstellen.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installieren Sie das Paket**
+   <PackageManagers pkg="@capgo/capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurieren Sie das Plugin**
+
+   **Grundlegendes Verwendungsbeispiel:**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+
+   // Beginnen Sie mit dem Lauschen auf Schüttelgesten
+   await Shake.start();
+
+   // Lauschen Sie auf Schüttelereignisse
+   Shake.addListener('shake', () => {
+     console.log('Gerät wurde geschüttelt!');
+     // Führen Sie hier Ihre Aktion aus
+   });
+   ```
+
+   **Empfindlichkeitskonfiguration:**
+   ```typescript
+   // Schüttelempfindlichkeit konfigurieren
+   await Shake.start({
+     threshold: 3.5 // Empfindlichkeit anpassen (Standard: 3.5)
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Für iOS ist keine zusätzliche Einrichtung erforderlich.
+     </TabItem>
+     <TabItem label="Android">
+       Für Android ist keine zusätzliche Einrichtung erforderlich.
+     </TabItem>
+   </Tabs>
+
+4. **Beenden Sie das Lauschen auf Schüttelgesten**
+   ```typescript
+   // Schüttelerkennung stoppen, wenn nicht benötigt
+   await Shake.stop();
+
+   // Bestimmten Listener entfernen
+   const handle = await Shake.addListener('shake', () => {
+     console.log('Geschüttelt!');
+   });
+   handle.remove();
+   ```
+
+5. **Beispielimplementierung**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+   import { App } from '@capacitor/app';
+
+   export class ShakeService {
+     private shakeListener: any;
+
+     async initialize() {
+       // Schüttelerkennung starten
+       await Shake.start({ threshold: 4.0 });
+
+       // Schüttel-Listener hinzufügen
+       this.shakeListener = await Shake.addListener('shake', () => {
+         this.handleShake();
+       });
+
+       // Beim Pausieren der App aufräumen
+       App.addListener('pause', () => {
+         Shake.stop();
+       });
+
+       // Beim Fortsetzen der App fortsetzen
+       App.addListener('resume', () => {
+         Shake.start({ threshold: 4.0 });
+       });
+     }
+
+     private handleShake() {
+       console.log('Schütteln erkannt!');
+       // Debug-Menü anzeigen, Daten aktualisieren oder eine beliebige Aktion auslösen
+     }
+
+     async cleanup() {
+       if (this.shakeListener) {
+         this.shakeListener.remove();
+       }
+       await Shake.stop();
+     }
+   }
+   ```
+</Steps>
+
+## API-Referenz
+
+### Methoden
+
+#### `start(options?: ShakeOptions)`
+Beginnen Sie mit dem Lauschen auf Schüttelgesten.
+
+**Parameter:**
+- `options` (optional): Konfigurationsobjekt
+  - `threshold`: number - Empfindlichkeitsschwelle (Standard: 3.5)
+
+#### `stop()`
+Beenden Sie das Lauschen auf Schüttelgesten.
+
+#### `addListener('shake', callback: () => void)`
+Fügen Sie einen Listener für Schüttelereignisse hinzu.
+
+**Rückgabe:** Promise mit einem Handle zum Entfernen des Listeners
+
+### Schnittstellen
+
+```typescript
+interface ShakeOptions {
+  threshold?: number; // Schüttelempfindlichkeitsschwelle
+}
+```
+
+## Plattformhinweise
+
+### iOS
+- Verwendet den Beschleunigungsmesser des Geräts zur Erkennung von Schüttelgesten
+- Funktioniert sowohl im Vordergrund als auch im Hintergrund (wenn die App Hintergrundberechtigungen hat)
+
+### Android
+- Verwendet den SensorManager zur Erkennung von Schüttelereignissen
+- Erfordert keine speziellen Berechtigungen
+- Funktioniert, wenn die App im Vordergrund ist
+
+## Häufige Anwendungsfälle
+
+1. **Debug-Menü**: Entwickleroptionen anzeigen, wenn das Gerät geschüttelt wird
+2. **Feedback**: Feedback-Formular oder Fehlerbericht auslösen
+3. **Aktualisieren**: App-Daten aktualisieren oder Cache leeren
+4. **Spiele**: Schütteln als Spielsteuerungsmechanismus verwenden
+5. **Rückgängig machen**: Schüttel-zum-Rückgängigmachen-Funktionalität implementieren
+
+## Fehlerbehebung
+
+**Schütteln wird nicht erkannt:**
+- Stellen Sie sicher, dass das Plugin mit `Shake.start()` gestartet wurde
+- Versuchen Sie, den Schwellenwert anzupassen (niedriger = empfindlicher)
+- Überprüfen Sie, ob Listener ordnungsgemäß registriert sind
+
+**Zu empfindlich/nicht empfindlich genug:**
+- Passen Sie den `threshold`-Parameter in den `start()`-Optionen an
+- Werte liegen typischerweise zwischen 2.0 (sehr empfindlich) und 5.0 (weniger empfindlich)

@@ -1,0 +1,214 @@
+---
+title: 시작하기
+description: iOS 기기에서 홈 표시기를 제어하기 위해 Capacitor Home Indicator 플러그인을 설치하고 구성하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **플러그인 구성**
+
+   **홈 표시기 숨기기:**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // 홈 표시기 숨기기
+   await HomeIndicator.hide();
+   ```
+
+   **홈 표시기 표시:**
+   ```typescript
+   // 홈 표시기 표시
+   await HomeIndicator.show();
+
+   // 가시성 상태 확인
+   const { hidden } = await HomeIndicator.isHidden();
+   console.log('숨김 여부:', hidden);
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       추가 설정이 필요하지 않습니다. 이 플러그인은 홈 표시기가 있는 iOS 기기(iPhone X 이상)에서만 작동합니다.
+     </TabItem>
+     <TabItem label="Android">
+       Android 기기에는 iOS 스타일 홈 표시기가 없으므로 이 플러그인은 효과가 없습니다.
+     </TabItem>
+   </Tabs>
+
+4. **자동 숨기기 구성**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // 자동 숨기기 동작 구성
+   await HomeIndicator.setAutoHidden({
+     autoHidden: true // 자동 숨기기 활성화
+   });
+
+   // 홈 표시기가 몇 초 후 자동으로 숨겨지고
+   // 사용자가 화면을 터치하면 다시 나타납니다
+   ```
+
+5. **고급 사용법**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+   import { App } from '@capacitor/app';
+
+   export class ImmersiveMode {
+     private isImmersive = false;
+
+     async enterImmersiveMode() {
+       this.isImmersive = true;
+
+       // 홈 표시기 숨기기
+       await HomeIndicator.hide();
+
+       // 더 나은 UX를 위해 자동 숨기기 활성화
+       await HomeIndicator.setAutoHidden({ autoHidden: true });
+
+       // 완전한 몰입을 위해 상태 표시줄 숨기기
+       // StatusBar.hide(); // @capacitor/status-bar 사용 시
+     }
+
+     async exitImmersiveMode() {
+       this.isImmersive = false;
+
+       // 홈 표시기 표시
+       await HomeIndicator.show();
+
+       // 자동 숨기기 비활성화
+       await HomeIndicator.setAutoHidden({ autoHidden: false });
+
+       // 상태 표시줄 표시
+       // StatusBar.show(); // @capacitor/status-bar 사용 시
+     }
+
+     async toggleImmersiveMode() {
+       const { hidden } = await HomeIndicator.isHidden();
+
+       if (hidden) {
+         await this.exitImmersiveMode();
+       } else {
+         await this.enterImmersiveMode();
+       }
+     }
+
+     setupAppLifecycle() {
+       // 앱 상태 변경 처리
+       App.addListener('appStateChange', async ({ isActive }) => {
+         if (!isActive && this.isImmersive) {
+           // 앱이 백그라운드로 전환되면 표시기를 표시할 수 있음
+           await HomeIndicator.show();
+         } else if (isActive && this.isImmersive) {
+           // 앱이 포그라운드로 전환되면 몰입 모드 복원
+           await HomeIndicator.hide();
+         }
+       });
+     }
+   }
+   ```
+</Steps>
+
+## API 참조
+
+### 메서드
+
+#### `hide()`
+홈 표시기를 숨깁니다.
+
+**반환:** `Promise<void>`
+
+#### `show()`
+홈 표시기를 표시합니다.
+
+**반환:** `Promise<void>`
+
+#### `isHidden()`
+홈 표시기가 현재 숨겨져 있는지 확인합니다.
+
+**반환:** `Promise<{ hidden: boolean }>`
+
+#### `setAutoHidden(options: { autoHidden: boolean })`
+홈 표시기의 자동 숨기기 동작을 구성합니다.
+
+**매개변수:**
+- `options.autoHidden`: boolean - 자동 숨기기 활성화 또는 비활성화
+
+**반환:** `Promise<void>`
+
+### 인터페이스
+
+```typescript
+interface AutoHiddenOptions {
+  autoHidden: boolean;
+}
+
+interface HiddenResult {
+  hidden: boolean;
+}
+```
+
+## 플랫폼 참고사항
+
+### iOS
+- 홈 표시기가 있는 기기(iPhone X 이상)에서만 작동
+- iOS 11.0 이상 필요
+- 자동 숨기기는 표시기를 반투명하게 만들고 비활성 상태 후 숨김
+- 사용자가 하단에서 스와이프하면 표시기가 다시 나타남
+
+### Android
+- Android에서는 이 플러그인이 효과가 없음
+- Android는 다른 탐색 제스처/버튼 사용
+
+## 일반적인 사용 사례
+
+1. **게임**: 방해 요소 없이 전체 화면 게임
+2. **비디오 플레이어**: 몰입형 비디오 재생
+3. **사진 뷰어**: 전체 화면 사진 갤러리
+4. **프레젠테이션**: 방해 요소 없는 프레젠테이션
+5. **키오스크 앱**: 공개 디스플레이 애플리케이션
+
+## 모범 사례
+
+1. **사용자 제어**: 항상 몰입 모드를 종료할 수 있는 방법 제공
+   ```typescript
+   // 제스처 또는 버튼을 추가하여 몰입 모드 전환
+   const toggleButton = document.getElementById('toggle-immersive');
+   toggleButton.addEventListener('click', () => {
+     immersiveMode.toggleImmersiveMode();
+   });
+   ```
+
+2. **게임용 자동 숨기기**: 더 나은 게임 경험을 위해 자동 숨기기 사용
+   ```typescript
+   // 게임의 경우 자동 숨기기가 최상의 균형 제공
+   await HomeIndicator.setAutoHidden({ autoHidden: true });
+   ```
+
+3. **시스템 제스처 존중**: 시스템 탐색을 방해하지 마세요
+4. **상태 저장**: 몰입 모드에 대한 사용자 기본 설정 기억
+
+## 문제 해결
+
+**홈 표시기가 숨겨지지 않음:**
+- 기기에 홈 표시기가 있는지 확인 (iPhone X+)
+- iOS 버전이 11.0 이상인지 확인
+- 앱에 포커스가 있는지 확인
+
+**자동 숨기기가 작동하지 않음:**
+- 자동 숨기기는 사용자 상호작용이 필요함
+- 표시기가 완전히 숨겨지지 않고 반투명해짐
+
+**표시기가 예기치 않게 다시 나타남:**
+- 시스템 제스처를 위한 일반적인 iOS 동작
+- 덜 눈에 띄는 동작을 위해 자동 숨기기 사용

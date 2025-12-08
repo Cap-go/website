@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-native-biometric"
+locale: zh
+description: 使用指纹、Face ID 和其他生物识别传感器进行原生生物识别认证的 Capacitor 插件。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 访问 Android 和 iOS 的原生生物识别认证 API，提供安全便捷的用户认证。
+  image:
+    file: ~public/icons/plugins/native-biometric.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/native-biometric/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-native-biometric/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="多种生物识别" icon="rocket">
+    支持指纹、Face ID、Touch ID 和其他生物识别传感器
+  </Card>
+  <Card title="安全认证" icon="approve-check">
+    为敏感操作提供安全的生物识别认证
+  </Card>
+  <Card title="备用选项" icon="setting">
+    当生物识别不可用时包含设备密码备用方案
+  </Card>
+  <Card title="完整文档" icon="open-book">
+    查看[文档](/docs/plugins/native-biometric/getting-started/)，在几分钟内掌握该插件。
+  </Card>
+</CardGrid>

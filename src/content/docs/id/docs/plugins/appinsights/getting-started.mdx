@@ -1,0 +1,207 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin AppInsights untuk analitik aplikasi di aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-appinsights" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+Impor plugin dan inisialisasi dengan kredensial AppInsights Anda:
+
+```typescript
+import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
+
+// Initialize the SDK
+const initializeAnalytics = async () => {
+  await CapacitorAppinsights.init({
+    partnerId: 'your-partner-id',
+    partnerKey: 'your-partner-key'
+  });
+};
+
+// Set user ID for tracking
+const setUser = async (userId: string) => {
+  await CapacitorAppinsights.setUserId({ userId });
+};
+
+// Get SDK state
+const checkSDKState = async () => {
+  const state = await CapacitorAppinsights.getState();
+  console.log('SDK State:', state);
+};
+
+// Get plugin version
+const checkVersion = async () => {
+  const { version } = await CapacitorAppinsights.getPluginVersion();
+  console.log('Plugin version:', version);
+};
+```
+
+## Referensi API
+
+### init(options)
+
+Inisialisasi AppInsights SDK dengan kredensial Anda.
+
+```typescript
+await CapacitorAppinsights.init({
+  partnerId: 'your-partner-id',
+  partnerKey: 'your-partner-key'
+});
+```
+
+**Parameter:**
+- `partnerId` (string): ID partner AppInsights Anda
+- `partnerKey` (string): Kunci partner AppInsights Anda
+
+### setUserId(options)
+
+Atur atau perbarui ID pengguna setelah inisialisasi.
+
+```typescript
+await CapacitorAppinsights.setUserId({
+  userId: 'user-123'
+});
+```
+
+**Parameter:**
+- `userId` (string): ID pengguna yang akan diatur untuk pelacakan
+
+### getState()
+
+Dapatkan status SDK saat ini.
+
+```typescript
+const state = await CapacitorAppinsights.getState();
+console.log(state);
+// {
+//   initCompleted: true,
+//   jobScheduled: true,
+//   permissionAcquired: true
+// }
+```
+
+**Mengembalikan:**
+- `initCompleted` (boolean): Apakah inisialisasi SDK selesai
+- `jobScheduled` (boolean): Apakah pekerjaan pengumpulan data dijadwalkan
+- `permissionAcquired` (boolean): Apakah izin yang diperlukan diperoleh
+
+### getPluginVersion()
+
+Dapatkan versi plugin Capacitor native.
+
+```typescript
+const { version } = await CapacitorAppinsights.getPluginVersion();
+console.log('Version:', version);
+```
+
+## Contoh Lengkap
+
+```typescript
+import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
+
+export class AnalyticsService {
+  private initialized = false;
+
+  async initialize(partnerId: string, partnerKey: string) {
+    try {
+      await CapacitorAppinsights.init({
+        partnerId,
+        partnerKey
+      });
+
+      const state = await CapacitorAppinsights.getState();
+      this.initialized = state.initCompleted;
+
+      console.log('AppInsights initialized:', state);
+    } catch (error) {
+      console.error('Failed to initialize AppInsights:', error);
+    }
+  }
+
+  async identifyUser(userId: string) {
+    if (!this.initialized) {
+      throw new Error('AppInsights not initialized');
+    }
+
+    await CapacitorAppinsights.setUserId({ userId });
+    console.log('User identified:', userId);
+  }
+
+  async getSDKStatus() {
+    const state = await CapacitorAppinsights.getState();
+    return {
+      ready: state.initCompleted && state.permissionAcquired,
+      tracking: state.jobScheduled,
+      state
+    };
+  }
+}
+```
+
+## Praktik Terbaik
+
+1. **Inisialisasi lebih awal**
+   Inisialisasi SDK segera setelah aplikasi Anda dimulai untuk memastikan pelacakan yang akurat:
+   ```typescript
+   // In your app initialization
+   await CapacitorAppinsights.init({
+     partnerId: process.env.APPINSIGHTS_PARTNER_ID,
+     partnerKey: process.env.APPINSIGHTS_PARTNER_KEY
+   });
+   ```
+
+2. **Atur ID pengguna saat login**
+   Identifikasi pengguna setelah otentikasi:
+   ```typescript
+   async function onUserLogin(user) {
+     await CapacitorAppinsights.setUserId({
+       userId: user.id
+     });
+   }
+   ```
+
+3. **Periksa status SDK**
+   Verifikasi SDK siap sebelum operasi kritis:
+   ```typescript
+   const state = await CapacitorAppinsights.getState();
+   if (!state.initCompleted) {
+     console.warn('AppInsights not ready');
+   }
+   ```
+
+4. **Tangani error dengan baik**
+   ```typescript
+   try {
+     await CapacitorAppinsights.init(config);
+   } catch (error) {
+     console.error('Analytics initialization failed:', error);
+     // Continue app operation even if analytics fails
+   }
+   ```
+
+## Catatan Platform
+
+### iOS
+- Memerlukan iOS 10.0+
+- Pastikan Anda memiliki izin yang diperlukan di Info.plist untuk pelacakan
+
+### Android
+- Memerlukan Android 5.0 (API 21)+
+- Mungkin memerlukan izin statistik penggunaan tergantung pada fitur pelacakan
+
+### Web
+- Tidak didukung di platform web

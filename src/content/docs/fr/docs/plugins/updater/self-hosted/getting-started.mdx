@@ -1,0 +1,117 @@
+---
+title: "Démarrage"
+locale: fr
+description: "Un guide complet sur la configuration et la gestion de votre propre serveur de mise à jour automatique pour des mises à jour et une maintenance d'application fluides"
+sidebar:
+    order: 1
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Cette documentation expliquera comment exécuter votre propre serveur de mise à jour automatique.
+
+## Introduction
+
+Si vous trouvez ce travail utile, veuillez envisager de soutenir mon travail en devenant [sponsor Github](https://github.com/sponsors/riderx).
+
+J'ai fait le pari de rendre open source tout le code que j'ai construit ici au lieu de le mettre derrière un paywall. En l'ouvrant au lieu de combattre et de cacher, je crois que nous pouvons rendre le monde meilleur.
+
+De plus, je veux me concentrer sur les outils Capgo, et en faire une entreprise ouverte et transparente.
+
+Mais pour que cela soit possible, il est nécessaire que nous tous fassions notre part, vous y compris 🥹.
+
+Si Capgo ne vous convient pas, alors payez votre propre prix et [soutenez un Maker bootstrappé](https://github.com/sponsors/riderx) selon vos conditions.
+
+<LinkCard title="Envisagez de contribuer" href="/docs/plugin/self-hosted/contributing/"/>
+## Parité des fonctionnalités
+
+Si vous choisissez d'utiliser votre propre serveur, vous perdrez le flux de configuration de 5 minutes.\
+Vous devez implémenter toutes ces fonctionnalités vous-même.
+
+
+| Fonctionnalités                 | Capgo | Auto-hébergé |
+| ------------------------ | ----- | ----------- |
+| Mises à jour                  | ✅     | 🚧         |
+| Retour automatique              | ✅     | 🚧         |
+| Alertes email en cas d'échec     | ✅     | 🚧         |
+| Canaux                 | ✅     | 🚧         |
+| Remplacement de canaux        | ✅     | 🚧         |
+| Remplacement d'appareil          | ✅     | 🚧         |
+| Paramètres de canaux        | ✅     | 🚧         |
+| Paramètres d'appareil          | ✅     | 🚧         |
+| ID personnalisé                | ✅     | 🚧         |
+| Définition automatique des canaux        | ✅     | 🚧         |
+| API Canaux             | ✅     | 🚧         |
+| Statistiques de mises à jour       | ✅     | 🚧         |
+| Statistiques d'échec de téléchargement | ✅     | 🚧         |
+| Statistiques d'utilisation de l'app     | ✅     | 🚧         |
+| Chiffrement des mises à jour        | ✅     | 🚧         |
+| Mises à jour différentielles     | ✅     | ❌         |
+
+:::danger
+Si vous envoyez une mauvaise mise à jour à vos utilisateurs, vous pouvez et allez casser leur application.
+:::
+
+> Gardez à l'esprit que vous ne pouvez pas utiliser le cloud Capgo et votre serveur en même temps.
+
+
+
+:::danger
+La fonction de mise à jour Over-the-Air (OTA) n'est applicable que pour les modifications apportées aux fichiers HTML, CSS et JavaScript.
+
+Si vous apportez des modifications au code natif, comme des mises à jour des plugins Capacitor, il est obligatoire de soumettre à nouveau l'application à l'app store pour approbation.
+:::
+
+## Choisir entre Auto et Manuel
+En mode auto, une partie de la logique est gérée par le code natif, les mises à jour sont décidées côté serveur, c'est plus sécurisé et permet des mises à jour granulaires, un déploiement partiel sur un appareil ou un groupe et plus encore.
+
+En mode manuel, toute la logique est gérée par le JS.
+
+
+
+<LinkCard
+	title="Mise à jour automatique"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manuel"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+## Installer Capacitor updater
+
+```bash title="Installer le Capacitor updater"
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+## Préparer votre bundle
+
+Pour envoyer des mises à jour à votre application, vous devez le zipper.
+La meilleure façon d'être certain que votre zip est bon est d'utiliser le CLI Capgo pour zipper.
+```bash title="Créer un bundle avec vos fichiers à servir depuis votre serveur"
+npx @capgo/cli@latest bundle zip
+```
+
+
+Vous devrez servir ce zip depuis votre serveur vous-même.
+
+<LinkCard
+	title="Mise à jour automatique"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manuel"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+
+:::note
+Si cela vous semble beaucoup de travail, essayez la version d'essai de Capgo Cloud.
+:::
+
+:::note
+La mise à jour différentielle ne fonctionnera pas dans les mises à jour manuelles, mais elle peut fonctionner en mise à jour automatique, pour l'instant ce n'est pas documenté car c'est un processus assez complexe
+:::

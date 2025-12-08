@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-mute"
+locale: zh
+description: 检测和控制 iOS 设备上的静音开关状态，并检查 Android 上的音量状态。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 检查设备是否静音或设置为静音模式。检测 iOS 上的静音开关和 Android 上的音量状态。
+  image:
+    file: ~public/icons/plugins/mute.svg
+  actions:
+    - text: 入门指南
+      link: /docs/plugins/mute/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mute/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="静音模式检测" icon="rocket">
+    检测设备是否处于静音/静音模式 🔇
+  </Card>
+  <Card title="跨平台" icon="setting">
+    在 iOS（静音开关）和 Android（音量）上均可运行 📱
+  </Card>
+  <Card title="简单的 API" icon="pencil">
+    易于使用的直接方法 🎯
+  </Card>
+  <Card title="全面的文档" icon="open-book">
+    查看[文档](/docs/plugins/mute/getting-started/)，只需几分钟即可掌握插件。
+  </Card>
+</CardGrid>

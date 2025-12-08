@@ -1,0 +1,488 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie das Stream Video SDK für professionelle Videoanrufe in Ihrer Capacitor-App installieren und integrieren.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Voraussetzungen
+
+Sie benötigen ein Stream-Konto und API-Anmeldeinformationen. Registrieren Sie sich bei [Stream](https://getstream.io/), falls Sie noch kein Konto haben.
+
+## Plattform-Konfiguration
+
+### iOS
+
+Fügen Sie die erforderlichen Berechtigungen zu Ihrer `Info.plist` hinzu:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>Diese App benötigt Kamerazugriff für Videoanrufe</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Diese App benötigt Mikrofonzugriff für Videoanrufe</string>
+```
+
+### Android
+
+Fügen Sie die erforderlichen Berechtigungen zu Ihrer `AndroidManifest.xml` hinzu:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+```
+
+## Verwendungsbeispiel
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+// Stream SDK initialisieren
+await StreamCall.initialize({
+  apiKey: 'your-stream-api-key',
+  userId: 'user-123',
+  userToken: 'user-token'
+});
+
+// Einen Anruf erstellen
+await StreamCall.createCall({
+  callId: 'call-123',
+  callType: 'default'
+});
+
+// Einem Anruf beitreten
+await StreamCall.joinCall({
+  callId: 'call-123'
+});
+
+// Kamera aktivieren/deaktivieren
+await StreamCall.toggleCamera({
+  enabled: true
+});
+
+// Mikrofon aktivieren/deaktivieren
+await StreamCall.toggleMicrophone({
+  enabled: true
+});
+
+// Kamera wechseln (vorne/hinten)
+await StreamCall.switchCamera();
+
+// Den Anruf verlassen
+await StreamCall.leaveCall();
+
+// Auf Anrufereignisse hören
+StreamCall.addListener('callStarted', (data) => {
+  console.log('Call started:', data);
+});
+
+StreamCall.addListener('callEnded', (data) => {
+  console.log('Call ended:', data);
+});
+
+StreamCall.addListener('participantJoined', (data) => {
+  console.log('Participant joined:', data);
+});
+
+StreamCall.addListener('participantLeft', (data) => {
+  console.log('Participant left:', data);
+});
+```
+
+## API-Referenz
+
+### initialize(options)
+
+```typescript
+initialize(options: InitializeOptions) => Promise<void>
+```
+
+Initialisiert das Stream Video SDK.
+
+| Param         | Type                        |
+| ------------- | --------------------------- |
+| **`options`** | `InitializeOptions` |
+
+### createCall(options)
+
+```typescript
+createCall(options: CreateCallOptions) => Promise<void>
+```
+
+Erstellt einen neuen Videoanruf.
+
+| Param         | Type                        |
+| ------------- | --------------------------- |
+| **`options`** | `CreateCallOptions` |
+
+### joinCall(options)
+
+```typescript
+joinCall(options: JoinCallOptions) => Promise<void>
+```
+
+Tritt einem bestehenden Videoanruf bei.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `JoinCallOptions` |
+
+### leaveCall()
+
+```typescript
+leaveCall() => Promise<void>
+```
+
+Verlässt den aktuellen Anruf.
+
+### toggleCamera(options)
+
+```typescript
+toggleCamera(options: { enabled: boolean }) => Promise<void>
+```
+
+Aktiviert oder deaktiviert die Kamera.
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### toggleMicrophone(options)
+
+```typescript
+toggleMicrophone(options: { enabled: boolean }) => Promise<void>
+```
+
+Aktiviert oder deaktiviert das Mikrofon.
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### switchCamera()
+
+```typescript
+switchCamera() => Promise<void>
+```
+
+Wechselt zwischen Vorder- und Rückkamera.
+
+### setSpeakerphone(options)
+
+```typescript
+setSpeakerphone(options: { enabled: boolean }) => Promise<void>
+```
+
+Aktiviert oder deaktiviert den Lautsprecher.
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### sendCallInvite(options)
+
+```typescript
+sendCallInvite(options: InviteOptions) => Promise<void>
+```
+
+Sendet eine Anrufeinladung an einen Benutzer.
+
+| Param         | Type                    |
+| ------------- | ----------------------- |
+| **`options`** | `InviteOptions` |
+
+### acceptCall(options)
+
+```typescript
+acceptCall(options: { callId: string }) => Promise<void>
+```
+
+Nimmt einen eingehenden Anruf an.
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callId: string }` |
+
+### rejectCall(options)
+
+```typescript
+rejectCall(options: { callId: string }) => Promise<void>
+```
+
+Lehnt einen eingehenden Anruf ab.
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callId: string }` |
+
+## Schnittstellen
+
+### InitializeOptions
+
+| Prop            | Type              | Beschreibung                    |
+| --------------- | ----------------- | ------------------------------ |
+| **`apiKey`**    | `string` | Stream API-Schlüssel                 |
+| **`userId`**    | `string` | Benutzer-ID                        |
+| **`userToken`** | `string` | Benutzer-Authentifizierungstoken      |
+| **`userName`**  | `string` | Anzeigename des Benutzers (optional)   |
+| **`userImage`** | `string` | Profilbild-URL des Benutzers (optional) |
+
+### CreateCallOptions
+
+| Prop           | Type              | Beschreibung                        |
+| -------------- | ----------------- | ---------------------------------- |
+| **`callId`**   | `string` | Eindeutiger Anruf-Identifikator             |
+| **`callType`** | `string` | Anruftyp (z.B. 'default', 'audio-only') |
+| **`members`**  | `string[]` | Array von Benutzer-IDs zum Einladen (optional) |
+
+### JoinCallOptions
+
+| Prop         | Type              | Beschreibung                |
+| ------------ | ----------------- | -------------------------- |
+| **`callId`** | `string` | Anruf-ID zum Beitreten            |
+
+### InviteOptions
+
+| Prop         | Type              | Beschreibung                |
+| ------------ | ----------------- | -------------------------- |
+| **`callId`** | `string` | Anruf-ID                    |
+| **`userId`** | `string` | Benutzer-ID zum Einladen          |
+
+## Event-Listener
+
+### Verfügbare Ereignisse
+
+- `callStarted` - Anruf wurde gestartet
+- `callEnded` - Anruf wurde beendet
+- `participantJoined` - Ein Teilnehmer ist dem Anruf beigetreten
+- `participantLeft` - Ein Teilnehmer hat den Anruf verlassen
+- `incomingCall` - Eingehender Anruf empfangen
+- `callAccepted` - Anruf wurde angenommen
+- `callRejected` - Anruf wurde abgelehnt
+- `error` - Ein Fehler ist aufgetreten
+
+### Ereignis-Beispiel
+
+```typescript
+// Auf eingehende Anrufe hören
+StreamCall.addListener('incomingCall', (data) => {
+  console.log('Incoming call from:', data.callerId);
+  console.log('Caller name:', data.callerName);
+
+  // Eingehenden Anruf-UI anzeigen
+  showIncomingCallScreen({
+    callerId: data.callerId,
+    callerName: data.callerName,
+    callerImage: data.callerImage,
+    callId: data.callId
+  });
+});
+
+// Auf Anrufannahme hören
+StreamCall.addListener('callAccepted', (data) => {
+  console.log('Call accepted');
+  // Zum Anruf-Bildschirm navigieren
+});
+
+// Auf Fehler hören
+StreamCall.addListener('error', (error) => {
+  console.error('Call error:', error.message);
+  // Fehler angemessen behandeln
+});
+
+// Listener entfernen, wenn fertig
+const listener = await StreamCall.addListener('callStarted', (data) => {
+  console.log('Call started');
+});
+
+// Später...
+listener.remove();
+```
+
+## Vollständiges Beispiel
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+class VideoCallService {
+  async initialize(userId: string, userName: string) {
+    try {
+      await StreamCall.initialize({
+        apiKey: 'your-stream-api-key',
+        userId: userId,
+        userToken: await this.getUserToken(userId),
+        userName: userName
+      });
+
+      this.setupEventListeners();
+    } catch (error) {
+      console.error('Failed to initialize Stream:', error);
+    }
+  }
+
+  setupEventListeners() {
+    // Eingehende Anrufe behandeln
+    StreamCall.addListener('incomingCall', async (data) => {
+      const accepted = await this.showIncomingCallDialog(data);
+
+      if (accepted) {
+        await StreamCall.acceptCall({ callId: data.callId });
+        await StreamCall.joinCall({ callId: data.callId });
+      } else {
+        await StreamCall.rejectCall({ callId: data.callId });
+      }
+    });
+
+    // Anrufereignisse behandeln
+    StreamCall.addListener('callStarted', () => {
+      console.log('Call started');
+    });
+
+    StreamCall.addListener('callEnded', () => {
+      console.log('Call ended');
+      this.navigateToHome();
+    });
+
+    StreamCall.addListener('participantJoined', (data) => {
+      console.log('Participant joined:', data.participantName);
+    });
+  }
+
+  async startCall(recipientId: string) {
+    try {
+      const callId = `call-${Date.now()}`;
+
+      // Anruf erstellen und beitreten
+      await StreamCall.createCall({
+        callId: callId,
+        callType: 'default',
+        members: [recipientId]
+      });
+
+      await StreamCall.joinCall({ callId: callId });
+
+      // Einladung senden
+      await StreamCall.sendCallInvite({
+        callId: callId,
+        userId: recipientId
+      });
+
+      console.log('Call started');
+    } catch (error) {
+      console.error('Failed to start call:', error);
+    }
+  }
+
+  async endCall() {
+    try {
+      await StreamCall.leaveCall();
+      console.log('Call ended');
+    } catch (error) {
+      console.error('Failed to end call:', error);
+    }
+  }
+
+  async toggleVideo(enabled: boolean) {
+    await StreamCall.toggleCamera({ enabled });
+  }
+
+  async toggleAudio(enabled: boolean) {
+    await StreamCall.toggleMicrophone({ enabled });
+  }
+
+  async flipCamera() {
+    await StreamCall.switchCamera();
+  }
+
+  private async getUserToken(userId: string): Promise<string> {
+    // Benutzer-Token von Ihrem Backend abrufen
+    const response = await fetch(`/api/stream-token?userId=${userId}`);
+    const data = await response.json();
+    return data.token;
+  }
+
+  private async showIncomingCallDialog(data: any): Promise<boolean> {
+    // Nativen Dialog oder benutzerdefinierte UI anzeigen
+    return confirm(`Incoming call from ${data.callerName}`);
+  }
+
+  private navigateToHome() {
+    // Zum Startbildschirm navigieren
+    window.location.href = '/';
+  }
+}
+
+// Verwendung
+const videoCall = new VideoCallService();
+await videoCall.initialize('user-123', 'John Doe');
+
+// Einen Anruf starten
+await videoCall.startCall('user-456');
+
+// Steuerelemente umschalten
+await videoCall.toggleVideo(false); // Video deaktivieren
+await videoCall.toggleAudio(false); // Stummschalten
+await videoCall.flipCamera(); // Kamera wechseln
+
+// Anruf beenden
+await videoCall.endCall();
+```
+
+## Best Practices
+
+- Initialisieren Sie das SDK früh im Lebenszyklus Ihrer App
+- Berechtigungsanfragen vor dem Start von Anrufen behandeln
+- Implementieren Sie eine ordnungsgemäße Fehlerbehandlung für Netzwerkprobleme
+- Listener aufräumen, wenn Komponenten demontiert werden
+- Auf echten Geräten testen (nicht nur Emulatoren)
+- Wiederverbindungslogik für Netzwerkunterbrechungen implementieren
+- Visuelles Feedback für Anrufzustände bereitstellen
+- Hintergrund-/Vordergrund-Übergänge behandeln
+
+## Lokalisierung
+
+Das Plugin unterstützt mehrere Sprachen für native UI-Elemente. Konfigurieren Sie dies in Ihren plattformspezifischen Einstellungen.
+
+## Anwendungsfälle
+
+- Einzelgespräche per Video
+- Gruppen-Videokonferenzen
+- Nur-Audio-Anrufe
+- Bildschirmfreigabe-Sitzungen
+- Kundensupport per Video-Chat
+- Telemedizinische Konsultationen
+- Remote-Zusammenarbeit

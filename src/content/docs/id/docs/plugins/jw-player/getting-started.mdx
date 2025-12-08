@@ -1,0 +1,345 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan mengintegrasikan JW Player ke aplikasi Capacitor Anda untuk kemampuan streaming video profesional.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-jw-player
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Prasyarat
+
+Anda memerlukan akun JW Player dan license key untuk menggunakan plugin ini. Daftar di [JW Player](https://www.jwplayer.com/) jika Anda belum memilikinya.
+
+## Konfigurasi Platform
+
+### iOS
+
+Tambahkan license key JW Player Anda ke `Info.plist`:
+
+```xml
+<key>JWPlayerLicenseKey</key>
+<string>YOUR_LICENSE_KEY</string>
+```
+
+### Android
+
+Tambahkan license key JW Player Anda ke `android/app/src/main/res/values/strings.xml`:
+
+```xml
+<resources>
+    <string name="jw_player_license_key">YOUR_LICENSE_KEY</string>
+</resources>
+```
+
+## Contoh Penggunaan
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// Putar satu video
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'Video Saya',
+  description: 'Deskripsi video',
+  poster: 'https://example.com/poster.jpg'
+});
+
+// Putar playlist
+await JWPlayer.playPlaylist({
+  playlistUrl: 'https://example.com/playlist.json'
+});
+
+// Dengarkan event player
+JWPlayer.addListener('playerReady', () => {
+  console.log('Player siap');
+});
+
+JWPlayer.addListener('play', (data) => {
+  console.log('Video mulai diputar');
+});
+
+JWPlayer.addListener('pause', (data) => {
+  console.log('Video dijeda');
+});
+
+JWPlayer.addListener('complete', (data) => {
+  console.log('Pemutaran video selesai');
+});
+
+JWPlayer.addListener('error', (error) => {
+  console.error('Error player:', error);
+});
+```
+
+## Referensi API
+
+### playVideo(options)
+
+```typescript
+playVideo(options: VideoOptions) => Promise<void>
+```
+
+Putar satu video dalam mode layar penuh.
+
+| Param         | Type                    |
+| ------------- | ----------------------- |
+| **`options`** | `VideoOptions` |
+
+### playPlaylist(options)
+
+```typescript
+playPlaylist(options: PlaylistOptions) => Promise<void>
+```
+
+Putar playlist dalam mode layar penuh.
+
+| Param         | Type                        |
+| ------------- | --------------------------- |
+| **`options`** | `PlaylistOptions` |
+
+### pause()
+
+```typescript
+pause() => Promise<void>
+```
+
+Jeda video saat ini.
+
+### play()
+
+```typescript
+play() => Promise<void>
+```
+
+Lanjutkan pemutaran video.
+
+### seek(options)
+
+```typescript
+seek(options: { position: number }) => Promise<void>
+```
+
+Seek ke posisi tertentu di video.
+
+| Param         | Type                         |
+| ------------- | ---------------------------- |
+| **`options`** | `{ position: number }` |
+
+### setPlaybackSpeed(options)
+
+```typescript
+setPlaybackSpeed(options: { speed: number }) => Promise<void>
+```
+
+Atur kecepatan pemutaran.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ speed: number }` |
+
+### setVolume(options)
+
+```typescript
+setVolume(options: { volume: number }) => Promise<void>
+```
+
+Atur volume audio (0.0 hingga 1.0).
+
+| Param         | Type                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ volume: number }` |
+
+### selectAudioTrack(options)
+
+```typescript
+selectAudioTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+Pilih track audio berdasarkan indeks.
+
+| Param         | Type                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### selectCaptionTrack(options)
+
+```typescript
+selectCaptionTrack(options: { trackIndex: number }) => Promise<void>
+```
+
+Pilih track caption/subtitle berdasarkan indeks.
+
+| Param         | Type                            |
+| ------------- | ------------------------------- |
+| **`options`** | `{ trackIndex: number }` |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+Hentikan pemutaran dan tutup player.
+
+## Interface
+
+### VideoOptions
+
+| Prop              | Type               | Description                             |
+| ----------------- | ------------------ | --------------------------------------- |
+| **`mediaUrl`**    | `string` | URL file video                   |
+| **`title`**       | `string` | Judul video (opsional)                  |
+| **`description`** | `string` | Deskripsi video (opsional)            |
+| **`poster`**      | `string` | URL poster/thumbnail (opsional)  |
+| **`autoStart`**   | `boolean` | Mulai pemutaran otomatis (opsional, default: true) |
+
+### PlaylistOptions
+
+| Prop              | Type               | Description                 |
+| ----------------- | ------------------ | --------------------------- |
+| **`playlistUrl`** | `string` | URL playlist JSON JW |
+| **`autoStart`**   | `boolean` | Mulai pemutaran otomatis (opsional) |
+
+## Event Listener
+
+### Event yang Tersedia
+
+- `playerReady` - Player diinisialisasi dan siap
+- `play` - Pemutaran video dimulai
+- `pause` - Pemutaran video dijeda
+- `complete` - Pemutaran video selesai
+- `error` - Player mengalami error
+- `seek` - Pengguna seek ke posisi berbeda
+- `time` - Waktu pemutaran diperbarui
+- `bufferChange` - Status buffer berubah
+
+### Contoh Event
+
+```typescript
+// Dengarkan update waktu
+JWPlayer.addListener('time', (data) => {
+  console.log('Waktu saat ini:', data.position);
+  console.log('Durasi:', data.duration);
+});
+
+// Dengarkan perubahan buffer
+JWPlayer.addListener('bufferChange', (data) => {
+  console.log('Buffering:', data.buffering);
+});
+
+// Hapus listener saat selesai
+const listener = await JWPlayer.addListener('play', (data) => {
+  console.log('Playing');
+});
+
+// Kemudian...
+listener.remove();
+```
+
+## Penggunaan Lanjutan
+
+### Memutar dengan Caption
+
+```typescript
+await JWPlayer.playVideo({
+  mediaUrl: 'https://example.com/video.mp4',
+  title: 'Video dengan Subtitle',
+  poster: 'https://example.com/poster.jpg',
+  tracks: [
+    {
+      file: 'https://example.com/captions-en.vtt',
+      label: 'English',
+      kind: 'captions'
+    },
+    {
+      file: 'https://example.com/captions-es.vtt',
+      label: 'Spanish',
+      kind: 'captions'
+    }
+  ]
+});
+```
+
+### Kontrol Pemutaran Kustom
+
+```typescript
+import { JWPlayer } from '@capgo/capacitor-jw-player';
+
+// Mulai memutar
+await JWPlayer.play();
+
+// Jeda setelah 10 detik
+setTimeout(() => {
+  JWPlayer.pause();
+}, 10000);
+
+// Seek ke 30 detik
+await JWPlayer.seek({ position: 30 });
+
+// Atur kecepatan pemutaran ke 1.5x
+await JWPlayer.setPlaybackSpeed({ speed: 1.5 });
+
+// Atur volume ke 50%
+await JWPlayer.setVolume({ volume: 0.5 });
+```
+
+## Praktik Terbaik
+
+- Selalu sediakan gambar poster untuk pengalaman pengguna yang lebih baik
+- Tangani error player dengan anggun dengan pesan error yang sesuai
+- Bersihkan event listener saat komponen unmount
+- Uji pemutaran video di perangkat iOS dan Android
+- Gunakan format video yang sesuai (MP4 direkomendasikan)
+- Implementasikan loading state saat video diinisialisasi
+- Pertimbangkan kondisi jaringan saat streaming
+
+## Pemecahan Masalah
+
+### Video Tidak Diputar
+
+- Verifikasi license key JW Player Anda benar
+- Periksa bahwa URL video dapat diakses dan valid
+- Pastikan header CORS yang tepat jika menggunakan server kustom
+- Uji dengan format video yang berbeda
+
+### Masalah Layar Penuh
+
+- Plugin selalu memutar dalam mode layar penuh
+- Pastikan izin yang tepat untuk layar penuh di aplikasi Anda
+
+### Kinerja
+
+- Gunakan kualitas video yang sesuai untuk perangkat target
+- Pertimbangkan streaming adaptif untuk kinerja lebih baik
+- Implementasikan indikator buffering yang tepat

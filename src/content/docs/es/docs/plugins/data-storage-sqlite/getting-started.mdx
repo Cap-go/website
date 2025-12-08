@@ -1,0 +1,395 @@
+---
+title: Comenzando
+locale: es
+description: Aprende cómo instalar y configurar el plugin Capacitor Data Storage SQLite para almacenamiento rápido de clave-valor con encriptación opcional.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-data-storage-sqlite" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurar el plugin**
+
+   **Ejemplo de almacenamiento básico:**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   // Abrir una base de datos de almacenamiento
+   await CapacitorDataStorageSqlite.openStore({
+     database: 'myapp_storage'
+   });
+
+   // Almacenar datos
+   await CapacitorDataStorageSqlite.set({
+     key: 'user_preferences',
+     value: JSON.stringify({ theme: 'dark' })
+   });
+   ```
+
+   **Ejemplo de almacenamiento encriptado:**
+   ```typescript
+   // Abrir almacenamiento encriptado
+   await CapacitorDataStorageSqlite.openStore({
+     database: 'secure_storage',
+     encrypted: true,
+     mode: 'encryption'
+   });
+
+   // Almacenar datos sensibles
+   await CapacitorDataStorageSqlite.set({
+     key: 'api_token',
+     value: 'secret_token_value'
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       No se requiere configuración adicional para iOS.
+     </TabItem>
+     <TabItem label="Android">
+       No se requiere configuración adicional para Android.
+     </TabItem>
+   </Tabs>
+
+4. **Operaciones básicas**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   // Establecer un valor
+   await CapacitorDataStorageSqlite.set({
+     key: 'username',
+     value: 'john_doe'
+   });
+
+   // Obtener un valor
+   const { value } = await CapacitorDataStorageSqlite.get({
+     key: 'username'
+   });
+   console.log('Nombre de usuario:', value); // "john_doe"
+
+   // Eliminar un valor
+   await CapacitorDataStorageSqlite.remove({
+     key: 'username'
+   });
+
+   // Limpiar todos los datos
+   await CapacitorDataStorageSqlite.clear();
+
+   // Verificar si existe la clave
+   const { result } = await CapacitorDataStorageSqlite.iskey({
+     key: 'username'
+   });
+   console.log('La clave existe:', result); // true o false
+
+   // Obtener todas las claves
+   const { keys } = await CapacitorDataStorageSqlite.keys();
+   console.log('Todas las claves:', keys);
+
+   // Obtener todos los valores
+   const { values } = await CapacitorDataStorageSqlite.values();
+   console.log('Todos los valores:', values);
+   ```
+
+5. **Uso avanzado**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   export class StorageService {
+     private dbName = 'app_storage';
+     private isEncrypted = false;
+
+     async initialize(encrypted = false) {
+       this.isEncrypted = encrypted;
+
+       // Abrir almacenamiento con opciones
+       await CapacitorDataStorageSqlite.openStore({
+         database: this.dbName,
+         encrypted: encrypted,
+         mode: encrypted ? 'encryption' : 'no-encryption',
+         version: 1
+       });
+     }
+
+     // Métodos de almacenamiento genéricos
+     async setObject<T>(key: string, data: T): Promise<void> {
+       const value = JSON.stringify(data);
+       await CapacitorDataStorageSqlite.set({ key, value });
+     }
+
+     async getObject<T>(key: string): Promise<T | null> {
+       try {
+         const { value } = await CapacitorDataStorageSqlite.get({ key });
+         return value ? JSON.parse(value) : null;
+       } catch (error) {
+         console.error('Error al obtener objeto:', error);
+         return null;
+       }
+     }
+
+     // Operaciones por lotes
+     async setMultiple(items: Record<string, any>): Promise<void> {
+       for (const [key, value] of Object.entries(items)) {
+         await CapacitorDataStorageSqlite.set({
+           key,
+           value: typeof value === 'string' ? value : JSON.stringify(value)
+         });
+       }
+     }
+
+     async getMultiple(keys: string[]): Promise<Record<string, any>> {
+       const results: Record<string, any> = {};
+
+       for (const key of keys) {
+         try {
+           const { value } = await CapacitorDataStorageSqlite.get({ key });
+           results[key] = value;
+         } catch (error) {
+           results[key] = null;
+         }
+       }
+
+       return results;
+     }
+
+     // Gestión de tablas
+     async getTables(): Promise<string[]> {
+       const { tables } = await CapacitorDataStorageSqlite.tables();
+       return tables;
+     }
+
+     async deleteTable(table: string): Promise<void> {
+       await CapacitorDataStorageSqlite.deleteTable({ table });
+     }
+
+     // Funcionalidad de importar/exportar
+     async exportToJson(): Promise<any[]> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       const { values } = await CapacitorDataStorageSqlite.values();
+
+       return keys.map((key, index) => ({
+         key,
+         value: values[index]
+       }));
+     }
+
+     async importFromJson(data: Array<{ key: string; value: string }>): Promise<void> {
+       // Limpiar datos existentes
+       await CapacitorDataStorageSqlite.clear();
+
+       // Importar nuevos datos
+       for (const item of data) {
+         await CapacitorDataStorageSqlite.set({
+           key: item.key,
+           value: item.value
+         });
+       }
+     }
+
+     // Filtrado y búsqueda
+     async keysStartingWith(prefix: string): Promise<string[]> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       return keys.filter(key => key.startsWith(prefix));
+     }
+
+     async filterByPrefix(prefix: string): Promise<Array<{ key: string; value: string }>> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       const { values } = await CapacitorDataStorageSqlite.values();
+
+       const filtered: Array<{ key: string; value: string }> = [];
+
+       keys.forEach((key, index) => {
+         if (key.startsWith(prefix)) {
+           filtered.push({ key, value: values[index] });
+         }
+       });
+
+       return filtered;
+     }
+
+     // Cerrar base de datos cuando hayas terminado
+     async close(): Promise<void> {
+       await CapacitorDataStorageSqlite.closeStore({
+         database: this.dbName
+       });
+     }
+   }
+
+   // Ejemplo de uso
+   const storage = new StorageService();
+   await storage.initialize(true); // Usar encriptación
+
+   // Almacenar datos de usuario
+   await storage.setObject('user_profile', {
+     id: 123,
+     name: 'John Doe',
+     email: 'john@example.com'
+   });
+
+   // Recuperar datos de usuario
+   const profile = await storage.getObject<any>('user_profile');
+   console.log('Perfil de usuario:', profile);
+   ```
+</Steps>
+
+## Referencia de API
+
+### Métodos
+
+#### `openStore(options: OpenStoreOptions)`
+Abre una base de datos de almacenamiento.
+
+**Parámetros:**
+- `options.database`: string - Nombre de la base de datos
+- `options.encrypted`: boolean - Habilitar encriptación
+- `options.mode`: string - 'encryption' o 'no-encryption'
+- `options.version`: number - Versión de la base de datos
+
+#### `closeStore(options: CloseStoreOptions)`
+Cierra la base de datos de almacenamiento.
+
+#### `set(options: SetOptions)`
+Almacena un par clave-valor.
+
+**Parámetros:**
+- `options.key`: string - Clave de almacenamiento
+- `options.value`: string - Valor a almacenar
+
+#### `get(options: GetOptions)`
+Recupera un valor por clave.
+
+**Retorna:** `Promise<{ value: string }>`
+
+#### `remove(options: RemoveOptions)`
+Elimina un par clave-valor.
+
+#### `clear()`
+Limpia todos los datos del almacenamiento.
+
+#### `iskey(options: IskeyOptions)`
+Verifica si existe una clave.
+
+**Retorna:** `Promise<{ result: boolean }>`
+
+#### `keys()`
+Obtiene todas las claves de almacenamiento.
+
+**Retorna:** `Promise<{ keys: string[] }>`
+
+#### `values()`
+Obtiene todos los valores de almacenamiento.
+
+**Retorna:** `Promise<{ values: string[] }>`
+
+#### `tables()`
+Obtiene todos los nombres de tablas.
+
+**Retorna:** `Promise<{ tables: string[] }>`
+
+#### `deleteTable(options: DeleteTableOptions)`
+Elimina una tabla específica.
+
+### Interfaces
+
+```typescript
+interface OpenStoreOptions {
+  database: string;
+  encrypted?: boolean;
+  mode?: string;
+  version?: number;
+}
+
+interface SetOptions {
+  key: string;
+  value: string;
+}
+
+interface GetOptions {
+  key: string;
+}
+
+interface RemoveOptions {
+  key: string;
+}
+```
+
+## Notas de plataforma
+
+### iOS
+- Usa SQLite3 con SQLCipher opcional para encriptación
+- Los datos persisten entre actualizaciones de la aplicación
+- Soporta iOS 11.0+
+
+### Android
+- Usa SQLite con SQLCipher opcional
+- Los datos persisten entre actualizaciones de la aplicación
+- Soporta Android 5.0 (API 21)+
+
+## Casos de uso comunes
+
+1. **Preferencias de usuario**: Almacenar configuraciones y preferencias de la aplicación
+2. **Gestión de caché**: Cachear respuestas API y datos
+3. **Almacenamiento sin conexión**: Almacenar datos para acceso sin conexión
+4. **Gestión de sesiones**: Gestionar sesiones de usuario de forma segura
+5. **Almacenamiento de tokens**: Almacenar tokens de autenticación de forma segura
+
+## Mejores prácticas
+
+1. **Usar encriptación para datos sensibles**
+   ```typescript
+   // Para datos sensibles como tokens
+   await openStore({
+     database: 'secure_db',
+     encrypted: true,
+     mode: 'encryption'
+   });
+   ```
+
+2. **Organizar claves con prefijos**
+   ```typescript
+   // Usar prefijos para organización
+   await set({ key: 'user:123:profile', value: userData });
+   await set({ key: 'cache:api:users', value: apiData });
+   ```
+
+3. **Manejar datos grandes con cuidado**
+   ```typescript
+   // Para objetos grandes, considerar compresión
+   const compressed = compress(largeData);
+   await set({ key: 'large_data', value: compressed });
+   ```
+
+4. **Limpieza regular**
+   ```typescript
+   // Eliminar entradas de caché expiradas
+   const keys = await keys();
+   for (const key of keys.keys) {
+     if (key.startsWith('cache:') && isExpired(key)) {
+       await remove({ key });
+     }
+   }
+   ```
+
+## Solución de problemas
+
+**La base de datos no se abre:**
+- Verifica que el nombre de la base de datos sea válido (alfanumérico, guiones bajos)
+- Asegúrate de que no haya caracteres especiales en el nombre de la base de datos
+- Verifica que el modo de encriptación coincida con la base de datos existente
+
+**Los datos no persisten:**
+- Asegúrate de que `openStore` se llame antes de las operaciones
+- Verifica cualquier error en la consola
+- Verifica que los nombres de claves sean cadenas
+
+**Problemas de rendimiento:**
+- Evita almacenar valores muy grandes
+- Usa operaciones por lotes cuando sea posible
+- Considera usar múltiples bases de datos para diferentes tipos de datos

@@ -1,0 +1,111 @@
+---
+title: 🔹 organisation
+description: 🏢 チームコラボレーションとアプリ管理のためにCapgo Cloudで組織を管理します。
+sidebar_label: organisation
+sidebar:
+  order: 9
+locale: ja
+---
+
+🏢 チームコラボレーションとアプリ管理のためにCapgo Cloudで組織を管理します。
+
+### <a id="organisation-list"></a> 📋 **List**
+
+**エイリアス:** `l`
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+📋 Capgo Cloudでアクセス権のあるすべての組織をリストします。
+
+**例:**
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+**オプション:**
+
+| パラメータ          | タイプ          | 説明          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | アカウントにリンクするAPIキー |
+| **--supa-host** | <code>string</code> | カスタムSupabaseホストURL（セルフホスティングまたはCapgo開発用） |
+| **--supa-anon** | <code>string</code> | カスタムSupabase anonキー（セルフホスティング用） |
+
+### <a id="organisation-add"></a> ➕ **Add**
+
+**エイリアス:** `a`
+
+```bash
+npx @capgo/cli@latest organisation add
+```
+
+➕ チームコラボレーション用にCapgo Cloudで新しい組織を作成します。
+
+**例:**
+
+```bash
+npx @capgo/cli@latest organisation add --name "My Company" --email admin@mycompany.com
+```
+
+**オプション:**
+
+| パラメータ          | タイプ          | 説明          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 組織名 |
+| **-e,** | <code>string</code> | 組織の管理メール |
+| **-a,** | <code>string</code> | アカウントにリンクするAPIキー |
+| **--supa-host** | <code>string</code> | カスタムSupabaseホストURL（セルフホスティングまたはCapgo開発用） |
+| **--supa-anon** | <code>string</code> | カスタムSupabase anonキー（セルフホスティング用） |
+
+### <a id="organisation-set"></a> ⚙️ **Set**
+
+**エイリアス:** `s`
+
+```bash
+npx @capgo/cli@latest organisation set
+```
+
+⚙️ 名前や管理メールなどの組織設定を更新します。
+
+**例:**
+
+```bash
+npx @capgo/cli@latest organisation set ORG_ID --name "Updated Company Name"
+```
+
+**オプション:**
+
+| パラメータ          | タイプ          | 説明          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 組織名 |
+| **-e,** | <code>string</code> | 組織の管理メール |
+| **-a,** | <code>string</code> | アカウントにリンクするAPIキー |
+| **--supa-host** | <code>string</code> | カスタムSupabaseホストURL（セルフホスティングまたはCapgo開発用） |
+| **--supa-anon** | <code>string</code> | カスタムSupabase anonキー（セルフホスティング用） |
+
+### <a id="organisation-delete"></a> 🗑️ **Delete**
+
+**エイリアス:** `d`
+
+```bash
+npx @capgo/cli@latest organisation delete
+```
+
+🗑️ Capgo Cloudから組織を削除します。この操作は元に戻せません。
+組織の所有者のみが組織を削除できます。
+
+**例:**
+
+```bash
+npx @capgo/cli@latest organisation delete ORG_ID
+```
+
+**オプション:**
+
+| パラメータ          | タイプ          | 説明          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | アカウントにリンクするAPIキー |
+| **--supa-host** | <code>string</code> | カスタムSupabaseホストURL（セルフホスティングまたはCapgo開発用） |
+| **--supa-anon** | <code>string</code> | カスタムSupabase anonキー（セルフホスティング用） |

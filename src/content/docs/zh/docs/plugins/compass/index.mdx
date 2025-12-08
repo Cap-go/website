@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-compass"
+locale: zh
+description: 以度为单位读取设备指南针方向，支持持续更新和权限处理。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 在 iOS 和 Android 上访问设备指南针传感器以获取实时更新的方向数据。
+  image:
+    file: ~public/icons/plugins/compass.svg
+  actions:
+    - text: 入门指南
+      link: /docs/plugins/compass/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-compass/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="实时方向" icon="rocket">
+    以度为单位获取连续的指南针方向更新（0-360）
+  </Card>
+  <Card title="跨平台" icon="puzzle">
+    适用于具有原生传感器访问的 iOS 和 Android 设备
+  </Card>
+  <Card title="权限处理" icon="shield">
+    内置位置服务权限管理（iOS）
+  </Card>
+  <Card title="事件驱动" icon="star">
+    使用高效的事件监听器订阅方向变化
+  </Card>
+</CardGrid>

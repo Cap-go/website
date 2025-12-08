@@ -1,0 +1,64 @@
+---
+title: "Capacitor+"
+locale: ja
+description: マージされたコミュニティPRと迅速なリリースを備えた、Capacitorの自動化された常に同期されたフォーク。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Capacitor+は、コミュニティPRをより迅速にマージし、セキュリティレビューされたリリースを提供するCapacitorの自動化されたフォークです。
+  image:
+    file: ~public/icons/plugins/capacitor-plus.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/capacitor-plus/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-plus/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  **なぜCapacitor+？** 優れたPRが公式Capacitorリポジトリで数ヶ月間マージされずに放置されています。Capacitor+は、これらのコミュニティ貢献を積極的にマージするため、待つ必要がありません。
+</Aside>
+
+<CardGrid stagger>
+  <Card title="コミュニティPRを迅速にマージ" icon="rocket">
+    アップストリームで停滞しているバグ修正や機能？私たちがマージするので、すぐに恩恵を受けられます。
+  </Card>
+  <Card title="毎日自動同期" icon="seti:clock">
+    公式Capacitorからのすべての変更は、自動的にプル、テスト、検証されます。
+  </Card>
+  <Card title="セキュリティレビュー" icon="approve-check">
+    すべてのリリースは、セキュリティ脆弱性、破壊的変更、安定性リスクについてAIによって分析されます。
+  </Card>
+  <Card title="ドロップイン置き換え" icon="puzzle">
+    公式Capacitorと同じAPI - パッケージスコープを変更するだけで完了です。
+  </Card>
+</CardGrid>
+
+## 哲学
+
+Ionicチームは、独自の優先順位とリリーススケジュールでCapacitorをメンテナンスしています。コミュニティからの貢献は、マージされるまでに数ヶ月、場合によっては数年待つことがあります。Capacitor+は異なるアプローチを取ります:
+
+1. **フォークからPRをマージ** - アップストリームキューで停滞している価値あるPRを積極的にマージ
+2. **継続的な同期** - すべてのアップストリームの変更は自動的にプルされテストされます
+3. **迅速なリリース** - 変更はCIをパスするとすぐにnpmに公開されます
+4. **コミュニティファースト** - あなたの貢献が重要で優先されます
+5. **透明性** - すべての自動化はオープンソースで可視化されています
+
+## パッケージ
+
+| パッケージ | npm |
+|---------|-----|
+| `@capacitor-plus/core` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/core)](https://www.npmjs.com/package/@capacitor-plus/core) |
+| `@capacitor-plus/cli` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/cli)](https://www.npmjs.com/package/@capacitor-plus/cli) |
+| `@capacitor-plus/android` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/android)](https://www.npmjs.com/package/@capacitor-plus/android) |
+| `@capacitor-plus/ios` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/ios)](https://www.npmjs.com/package/@capacitor-plus/ios) |

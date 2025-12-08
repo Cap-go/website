@@ -1,0 +1,172 @@
+---
+title: 入门指南
+description: @capgo/capacitor-downloader 的安装和使用指南
+locale: zh
+sidebar:
+  order: 2
+  label: "入门指南"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 使用示例
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+// Start a download
+const downloadId = 'my-download-001';
+await CapacitorDownloader.download({
+  id: downloadId,
+  url: 'https://example.com/large-file.zip',
+  destination: '/downloads/large-file.zip',
+  headers: {
+    'Authorization': 'Bearer token123'
+  },
+  network: 'wifi-only',
+  priority: 'high'
+});
+
+// Listen for progress updates
+CapacitorDownloader.addListener('downloadProgress', (data) => {
+  console.log(`Download ${data.id}: ${data.progress}% complete`);
+  console.log(`Downloaded: ${data.bytesDownloaded}/${data.totalBytes} bytes`);
+});
+
+// Handle completion
+CapacitorDownloader.addListener('downloadCompleted', (data) => {
+  console.log(`Download completed: ${data.id}`);
+  console.log(`File saved to: ${data.path}`);
+});
+
+// Handle errors
+CapacitorDownloader.addListener('downloadFailed', (error) => {
+  console.error(`Download failed: ${error.id}`, error.message);
+});
+
+// Pause a download
+await CapacitorDownloader.pause(downloadId);
+
+// Resume the download
+await CapacitorDownloader.resume(downloadId);
+
+// Check download status
+const status = await CapacitorDownloader.checkStatus(downloadId);
+console.log('Download status:', status);
+
+// Stop the download
+await CapacitorDownloader.stop(downloadId);
+```
+
+## 核心 API 方法
+
+### 下载管理
+- `download(options)` - 开始新的文件下载
+- `pause(id)` - 暂停正在进行的下载
+- `resume(id)` - 恢复暂停的下载
+- `stop(id)` - 停止并取消下载
+- `checkStatus(id)` - 获取当前下载状态
+
+### 文件操作
+- `getFileInfo(path)` - 检索文件信息和元数据
+
+## 下载配置
+
+```typescript
+interface DownloadOptions {
+  id: string;                    // Unique download identifier
+  url: string;                   // Download source URL
+  destination: string;           // Local save path
+  headers?: Record<string, string>; // Custom HTTP headers
+  network?: 'cellular' | 'wifi-only'; // Network restrictions
+  priority?: 'high' | 'normal' | 'low'; // Download priority
+}
+```
+
+## 事件监听器
+
+插件提供全面的事件处理：
+
+- `downloadProgress` - 跟踪实时下载进度
+- `downloadCompleted` - 处理成功的下载完成
+- `downloadFailed` - 处理下载错误和失败
+
+## 网络配置
+
+### 仅 WiFi 下载
+```typescript
+await CapacitorDownloader.download({
+  id: 'large-file',
+  url: 'https://example.com/video.mp4',
+  destination: '/downloads/video.mp4',
+  network: 'wifi-only' // Restricts to WiFi networks only
+});
+```
+
+### 优先级管理
+```typescript
+// High priority download
+await CapacitorDownloader.download({
+  id: 'urgent-update',
+  url: 'https://example.com/update.zip',
+  destination: '/downloads/update.zip',
+  priority: 'high'
+});
+```
+
+## 下载状态
+
+下载可以处于各种状态：
+- **Pending**: 排队等待下载
+- **Running**: 正在下载
+- **Paused**: 暂时停止
+- **Completed**: 成功完成
+- **Failed**: 遇到错误
+- **Stopped**: 手动取消
+
+## 文件信息
+
+```typescript
+// Get file details
+const fileInfo = await CapacitorDownloader.getFileInfo('/downloads/my-file.pdf');
+console.log('File size:', fileInfo.size);
+console.log('Last modified:', fileInfo.lastModified);
+console.log('MIME type:', fileInfo.mimeType);
+```
+
+## 最佳实践
+
+- 使用唯一的下载 ID 以避免冲突
+- 实施适当的错误处理以应对网络故障
+- 在开始大型下载前考虑存储空间
+- 对大型文件使用仅 WiFi 模式以节省移动数据
+- 清理已完成的下载以管理存储空间

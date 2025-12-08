@@ -1,0 +1,69 @@
+---
+title: Iniziare
+locale: it
+description: Configura valori di ambiente per build e recuperali a runtime con il plugin Env.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza piattaforme native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Dichiara valori di configurazione
+
+Aggiungi chiavi alla configurazione Capacitor in modo che siano integrate nelle tue build native. Puoi creare più varianti di configurazione (`capacitor.config.prod.ts`, `capacitor.config.dev.ts`, ecc.) per scambiare valori per ambiente.
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    Env: {
+      API_URL: 'https://api.example.com',
+      PUBLIC_KEY: 'pk_live_123',
+    },
+  },
+};
+
+export default config;
+```
+
+Sulle piattaforme native i valori sono memorizzati all'interno dei file di configurazione generati (`ios/App/App/capacitor.config.json` e `android/app/src/main/assets/capacitor.config.json`). Aggiorna quei file per variante se hai bisogno di valori specifici per tenant.
+
+## Leggi i valori nel codice
+
+```typescript
+import { Env } from '@capgo/capacitor-env';
+
+const apiUrl = await Env.getKey({ key: 'API_URL' }).then((result) => result.value);
+
+if (!apiUrl) {
+  throw new Error('Configurazione API_URL mancante');
+}
+```
+
+## Fornisci valori di fallback
+
+```typescript
+const loadConfig = async () => {
+  const { value: endpoint } = await Env.getKey({ key: 'API_URL' });
+  return endpoint || 'https://staging.example.com';
+};
+```
+
+## Suggerimenti
+
+- Usa file `capacitor.config` diversi per ambiente e punta il CLI a quello giusto con `npx cap run ios --configuration=prod`.
+- Combina con i canali updater Capgo per distribuire valori specifici per tenant senza pubblicare nuovi binari.
+- Mantieni i segreti fuori dal controllo versione sostituendoli durante la build CI prima di `npx cap sync`.

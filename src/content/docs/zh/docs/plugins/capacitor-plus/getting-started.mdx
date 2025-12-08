@@ -1,0 +1,189 @@
+---
+title: 入门指南
+locale: zh
+description: 了解如何将 Capacitor+ 作为官方 Capacitor 包的直接替代品进行安装。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+## 新项目安装
+
+<Steps>
+1. **安装核心包**
+   ```bash
+   npm install @capacitor-plus/core @capacitor-plus/cli
+   ```
+
+2. **添加平台包**
+   ```bash
+   npm install @capacitor-plus/android  # 用于 Android
+   npm install @capacitor-plus/ios      # 用于 iOS
+   ```
+
+3. **初始化 Capacitor**
+   <PackageManagers type="exec" pkg="cap" args="init" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+4. **添加平台**
+   <PackageManagers type="exec" pkg="cap" args="add android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="add ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 从官方 Capacitor 迁移
+
+如果您有现有的 Capacitor 项目，迁移到 Capacitor+ 很简单：
+
+<Steps>
+1. **移除官方包**
+   ```bash
+   npm uninstall @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios
+   ```
+
+2. **安装 Capacitor+ 包**
+   ```bash
+   npm install @capacitor-plus/core @capacitor-plus/cli
+   npm install @capacitor-plus/android  # 如果使用 Android
+   npm install @capacitor-plus/ios      # 如果使用 iOS
+   ```
+
+3. **同步项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+<Aside type="note">
+  无需更改代码！Capacitor+ 与官方 Capacitor 具有相同的 API。您的导入和代码保持完全相同。
+</Aside>
+
+## 使用
+
+由于 Capacitor+ 与 API 兼容，您的现有代码无需更改即可工作：
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { registerPlugin } from '@capacitor/core';
+
+// 检查平台
+const platform = Capacitor.getPlatform();
+console.log('Running on:', platform);
+
+// 检查是否为原生
+if (Capacitor.isNativePlatform()) {
+  console.log('Running on native platform');
+}
+
+// 注册自定义插件
+const MyPlugin = registerPlugin('MyPlugin');
+```
+
+### 与官方 Capacitor 插件一起使用
+
+所有官方 Capacitor 插件都可以无缝工作：
+
+```typescript
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { Geolocation } from '@capacitor/geolocation';
+import { Storage } from '@capacitor/preferences';
+
+// Camera
+const photo = await Camera.getPhoto({
+  quality: 90,
+  resultType: CameraResultType.Uri
+});
+
+// Geolocation
+const position = await Geolocation.getCurrentPosition();
+
+// Storage
+await Storage.set({ key: 'name', value: 'John' });
+```
+
+### 与 Capgo 插件一起使用
+
+Capgo 插件与 Capacitor+ 完美配合：
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// 实时更新
+await CapacitorUpdater.notifyAppReady();
+
+// 屏幕方向
+await ScreenOrientation.lock({ orientation: 'portrait' });
+
+// 闪光灯
+await CapacitorFlash.toggle();
+```
+
+## 同步工作原理
+
+```
+┌─────────────────────┐     ┌──────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  ionic-team/        │     │  CI/CD           │     │  Claude Code     │     │  npm publish    │
+│  capacitor          │────▶│  Pipeline        │────▶│  Security Review │────▶│  @capacitor-plus│
+│  (upstream)         │     │  (daily sync)    │     │  (AI analysis)   │     │  packages       │
+└─────────────────────┘     └──────────────────┘     └──────────────────┘     └─────────────────┘
+```
+
+1. **每日同步**：GitHub Actions 从 `ionic-team/capacitor` 获取最新更改
+2. **创建 PR**：更改作为拉取请求提议到 `plus` 分支
+3. **CI 验证**：运行完整的测试套件（lint、单元测试、iOS 构建、Android 构建）
+4. **安全审查**：AI 驱动的分析检查漏洞和破坏性更改
+5. **自动合并**：仅在 CI 通过且安全审查批准时
+6. **自动发布**：新版本发布到 npm 的 `@capacitor-plus/*` 下
+
+## 安全审查详情
+
+每次上游同步都会分析：
+
+| 检查 | 捕获内容 |
+|-------|-----------------|
+| **安全性** | 命令注入、XSS、路径遍历、硬编码秘密 |
+| **破坏性更改** | 删除/重命名的 API、更改的签名、配置更改 |
+| **稳定性** | 空引用、未处理的异常、竞态条件、内存泄漏 |
+| **数据安全** | 数据丢失场景、隐私侵犯、不安全的存储 |
+| **代码完整性** | 混淆代码、可疑的网络调用、后门 |
+
+<Aside type="caution">
+  如果检测到任何问题，PR 将被标记为手动审查，不会自动合并。这确保您始终获得稳定、安全的版本。
+</Aside>
+
+## 提交您的 PR
+
+您的 PR 是否在官方 Capacitor 仓库中受阻？在 Capacitor+ 中合并：
+
+<Steps>
+1. **在 [Capacitor+ 仓库](https://github.com/Cap-go/capacitor-plus/issues)中打开一个问题**，链接到您的上游 PR
+
+2. **或直接提交** 作为对 `plus` 分支的 PR
+
+3. 团队将审查、运行 CI，如果通过则合并
+</Steps>
+
+这样，您和其他人可以立即从您的工作中受益，而无需等待上游发布周期。
+
+## 常见问题
+
+### 这适合生产使用吗？
+
+是的。Capacitor+ 用于生产应用。每个版本都通过与官方 Capacitor 相同的测试套件，以及额外的安全分析。
+
+### 我的官方插件还能工作吗？
+
+是的。所有 `@capacitor/*` 插件都可以与 Capacitor+ 开箱即用。
+
+### 如果上游发布破坏性更改怎么办？
+
+AI 安全审查会标记破坏性更改以进行手动审查。您将在合并之前看到记录的更改。
+
+### 如何报告问题？
+
+在 [Capacitor+ GitHub 仓库](https://github.com/Cap-go/capacitor-plus/issues)上提交问题。对于也影响官方 Capacitor 的问题，我们将帮助协调上游。
+
+### 我可以贡献吗？
+
+绝对可以！欢迎 PR。您可以直接提交修复或请求合并特定的上游 PR。

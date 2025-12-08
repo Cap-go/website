@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-android-age-signals"
+locale: zh
+description: Google Play 年龄信号 API 包装器 - 检测受监管账户、监护人批准和已验证用户。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 访问 Google Play 年龄信号以检测受监管账户、验证用户年龄，并在您的 Android 应用中遵守儿童安全法规。
+  image:
+    file: ~public/icons/plugins/android-age-signals.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/age-signals/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-age-signals/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="受监管账户" icon="setting">
+    检测用户是否拥有由监护人管理的受监管 Google 账户 👨‍👧‍👦
+  </Card>
+  <Card title="年龄验证" icon="approve-check-circle">
+    通过 Google 的年龄验证识别已验证的 18 岁以上用户 🔐
+  </Card>
+  <Card title="合规性" icon="approve-check">
+    遵守 COPPA 和 GDPR 等儿童安全法规 📋
+  </Card>
+  <Card title="监护人批准" icon="star">
+    跟踪待处理的批准和监护人同意状态 ✅
+  </Card>
+  <Card title="仅限 Android" icon="puzzle">
+    专为配合 Google Play Services 的 Android 设计 📱
+  </Card>
+  <Card title="简单的 API" icon="rocket">
+    单一方法调用即可检索所有年龄信号 🚀
+  </Card>
+</CardGrid>

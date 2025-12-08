@@ -1,0 +1,190 @@
+---
+title: Migrationsleitfaden von @codetrix-studio/capacitor-google-auth zu @capgo/capacitor-social-login
+locale: de
+description: Dieser Leitfaden beschreibt den Übergang vom älteren Google Auth Plugin zum neueren Capgo Social Login Paket, das mehrere soziale Authentifizierungsanbieter vereinheitlicht.
+sidebar:
+    order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Übersicht
+
+Dieser Leitfaden bietet umfassende Schritte für die Migration von `@codetrix-studio/capacitor-google-auth` zu `@capgo/capacitor-social-login` und gewährleistet einen reibungslosen Übergang und eine verbesserte Authentifizierungserfahrung. Das neue Plugin vereinheitlicht mehrere soziale Authentifizierungsanbieter unter einer einzigen, konsistenten API.
+
+## Installation
+
+<Steps>
+1. Entfernen Sie das alte Paket:
+   ```bash
+   npm uninstall @codetrix-studio/capacitor-google-auth
+   ```
+
+2. Installieren Sie das neue Paket:
+   ```bash
+   npm install @capgo/capacitor-social-login
+   npx cap sync
+   ```
+</Steps>
+
+## Wichtige Änderungen in der Google Auth-Einrichtung
+
+### Web Client ID-Anforderung
+**Kritische Änderung**: Das aktualisierte Plugin erfordert die Verwendung einer Web Client ID auf allen Plattformen.
+
+Sie müssen:
+1. Eine Web Client ID in der Google Cloud Console erstellen, falls Sie noch keine haben ([Wie Sie die Anmeldedaten erhalten](/docs/plugins/social-login/google/general/))
+2. Diese Web Client ID im `webClientId`-Feld für alle Plattformen verwenden
+3. Für Android müssen Sie immer noch eine Android Client ID mit Ihrem SHA1 erstellen, aber dies dient nur zu Verifizierungszwecken - das Token wird nicht verwendet ([Android-Einrichtungsleitfaden](/docs/plugins/social-login/google/android/))
+
+## Code-Änderungen
+
+### Import-Änderungen
+```diff
+- import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
++ import { SocialLogin } from '@capgo/capacitor-social-login';
+```
+
+### Initialisierung
+
+Die Einrichtung wandelt sich von einem einfachen `GoogleAuth.initialize()`-Aufruf zu einem strukturierteren `SocialLogin.initialize()` mit verschachtelter Google-Konfiguration:
+
+```diff
+- GoogleAuth.initialize({
+-   clientId: 'CLIENT_ID.apps.googleusercontent.com',
+-   scopes: ['profile', 'email'],
+-   grantOfflineAccess: true,
+- });
+
++ await SocialLogin.initialize({
++   google: {
++     webClientId: 'WEB_CLIENT_ID.apps.googleusercontent.com', // Web Client ID für alle Plattformen verwenden
++     iOSClientId: 'IOS_CLIENT_ID', // für iOS
++     mode: 'offline' // ersetzt grantOfflineAccess
++   }
++ });
+```
+
+### Anmelden
+
+Die Login-Methode ändert sich von `GoogleAuth.signIn()` zu `SocialLogin.login()` mit expliziter Provider-Angabe:
+
+```diff
+- const user = await GoogleAuth.signIn();
++ const res = await SocialLogin.login({
++   provider: 'google',
++   options: {
++     scopes: ['email', 'profile'],
++     forceRefreshToken: true // falls Sie Refresh-Token benötigen
++   }
++ });
+```
+
+## Plattformspezifische Änderungen
+
+### Android
+
+1. Aktualisieren Sie Ihre `MainActivity.java` ([Vollständiger Android-Einrichtungsleitfaden](/docs/plugins/social-login/google/android/)):
+```diff
++ import ee.forgr.capacitor.social.login.GoogleProvider;
++ import ee.forgr.capacitor.social.login.SocialLoginPlugin;
++ import ee.forgr.capacitor.social.login.ModifiedMainActivityForSocialLoginPlugin;
++ import com.getcapacitor.PluginHandle;
++ import com.getcapacitor.Plugin;
++ import android.content.Intent;
++ import android.util.Log;
+
+- public class MainActivity extends BridgeActivity {
++ public class MainActivity extends BridgeActivity implements ModifiedMainActivityForSocialLoginPlugin {
+
++   @Override
++   public void onActivityResult(int requestCode, int resultCode, Intent data) {
++     super.onActivityResult(requestCode, resultCode, data);
++
++     if (requestCode >= GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MIN && requestCode < GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MAX) {
++       PluginHandle pluginHandle = getBridge().getPlugin("SocialLogin");
++       if (pluginHandle == null) {
++         Log.i("Google Activity Result", "SocialLogin login handle is null");
++         return;
++       }
++       Plugin plugin = pluginHandle.getInstance();
++       if (!(plugin instanceof SocialLoginPlugin)) {
++         Log.i("Google Activity Result", "SocialLogin plugin instance is not SocialLoginPlugin");
++         return;
++       }
++       ((SocialLoginPlugin) plugin).handleGoogleLoginIntent(requestCode, data);
++     }
++   }
+
++   public void IHaveModifiedTheMainActivityForTheUseWithSocialLoginPlugin() {}
+}
+```
+
+### iOS
+
+1. Keine größeren Änderungen in AppDelegate.swift erforderlich ([iOS-Einrichtungsleitfaden](/docs/plugins/social-login/google/ios/))
+
+2. Aktualisieren Sie Ihre Konfiguration in `capacitor.config.json`, wir verwenden sie nicht im neuen Plugin:
+```diff
+{
+  "plugins": {
+-   "GoogleAuth": {
+-     "scopes": ["profile", "email"],
+-     "serverClientId": "xxxxxx-xxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+-     "forceCodeForRefreshToken": true
+-   }
+}
+```
+
+### Web
+
+1. Entfernen Sie die Google Sign-In Meta-Tags aus Ihrer `index.html`, falls Sie sie verwendet haben:
+```diff
+- <meta name="google-signin-client_id" content="{your client id here}" />
+- <meta name="google-signin-scope" content="profile email" />
+```
+
+## Änderungen des Antworttyps
+
+Die Authentifizierungsantwort liefert jetzt ein strukturiertes Objekt mit Provider-Informationen, Access-Tokens, ID-Tokens und Benutzerprofildaten:
+
+```typescript
+interface GoogleLoginResponse {
+  provider: 'google';
+  result: {
+    accessToken: {
+      token: string;
+      expires: string;
+      // ... andere Token-Felder
+    } | null;
+    idToken: string | null;
+    profile: {
+      email: string | null;
+      familyName: string | null;
+      givenName: string | null;
+      id: string | null;
+      name: string | null;
+      imageUrl: string | null;
+    };
+  };
+}
+```
+
+Die Antwortstruktur umfasst:
+- **provider**: Identifiziert den Authentifizierungsanbieter (`'google'`)
+- **result.accessToken**: Access-Token-Details mit Ablauf
+- **result.idToken**: ID-Token für Authentifizierung
+- **result.profile**: Benutzerprofilinformationen einschließlich E-Mail, Name und Bild-URL
+
+## Zusätzliche Funktionen
+
+Das neue Paket unterstützt mehrere soziale Authentifizierungsanbieter über Google hinaus:
+- [Apple Sign-In](/docs/plugins/social-login/apple/general/)
+- [Facebook Login](/docs/plugins/social-login/facebook/)
+
+Dieser einheitliche Ansatz bietet:
+- Konsistente API über alle Anbieter hinweg
+- Verbesserte TypeScript-Unterstützung
+- Bessere Fehlerbehandlung
+- Aktive Wartung und Community-Support
+
+Konsultieren Sie die [Hauptdokumentation](/docs/plugins/social-login/google/general/) für detaillierte Einrichtungsanweisungen für diese zusätzlichen Anbieter.

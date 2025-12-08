@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-document-scanner"
+locale: id
+description: Tangkap dokumen tajam dengan deteksi tepi otomatis dan ekspor halaman yang dipindai dari aplikasi Capacitor Anda.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Luncurkan pengalaman pemindaian dokumen yang apik dengan cropping otomatis, pengambilan multi-halaman, dan format output yang dapat dikonfigurasi.
+  image:
+    file: ~public/icons/plugins/document-scanner.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/document-scanner/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-document-scanner/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Plugin Document Scanner memberikan aplikasi Capacitor Anda alur pemindaian berkualitas native yang bekerja di perangkat iOS dan Android.
+
+<CardGrid stagger>
+  <Card title="Deteksi otomatis" icon="rocket">
+    Deteksi tepi halaman, crop otomatis, dan biarkan pengguna menyesuaikan sebelum menyimpan.
+  </Card>
+  <Card title="Pengambilan multi-halaman" icon="star">
+    Tangkap satu atau banyak halaman dalam satu sesi scan dengan batas yang dapat disesuaikan.
+  </Card>
+  <Card title="Output kustom" icon="download">
+    Kembalikan path file atau string base64 dengan kualitas gambar yang Anda pilih.
+  </Card>
+  <Card title="API Terpadu" icon="pencil">
+    Satu interface TypeScript mencakup implementasi iOS dan Android.
+  </Card>
+</CardGrid>
+
+Gunakan panduan memulai untuk mengaktifkan izin kamera, mengonfigurasi pengaturan kualitas, dan mengekspor file yang dipindai ke alur kerja penyimpanan Anda.

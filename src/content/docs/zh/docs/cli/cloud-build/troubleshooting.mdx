@@ -1,0 +1,513 @@
+---
+title: 故障排除
+description: Capgo Cloud Build 的常见问题和解决方案
+locale: zh
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+使用 Capgo Cloud Build 构建原生应用时的常见问题解决方案。
+
+## 构建失败
+
+### "上传失败"或"连接超时"
+
+**症状:**
+- 项目上传期间构建失败
+- 60 秒后超时错误
+
+**解决方案:**
+
+1. **检查您的互联网连接**
+   ```bash
+   # 测试连接到 Capgo
+   curl -I https://api.capgo.app
+   ```
+
+2. **减小项目大小**
+   - 确保 `node_modules/` 没有被上传(应自动排除)
+   - 检查项目中的大文件:
+   ```bash
+   find . -type f -size +10M
+   ```
+
+3. **检查上传 URL 过期**
+   - 上传 URL 在 1 小时后过期
+   - 如果收到过期 URL 错误,请重新运行构建命令
+
+<Aside type="tip">
+大型项目(>200MB)可能会达到超时限制。请联系支持获取企业选项。
+</Aside>
+
+### "10 分钟后构建超时"
+
+**症状:**
+- 构建超过最大允许时间
+- 状态显示 `timeout`
+
+**解决方案:**
+
+1. **优化依赖项**
+   - 删除未使用的 npm 包
+   - 在构建前使用 `npm prune --production`
+
+2. **检查构建中的网络问题**
+   - 某些依赖项可能在构建期间下载大文件
+   - 考虑使用 lock 文件预缓存
+
+3. **检查原生依赖项**
+   ```bash
+   # iOS - 检查 Podfile 中的重型依赖项
+   cat ios/App/Podfile
+
+   # Android - 检查 build.gradle
+   cat android/app/build.gradle
+   ```
+
+4. **联系支持**
+   - 如果您的应用确实需要更多时间
+   - 我们可以针对特定用例调整限制
+
+## 身份验证问题
+
+### "API 密钥无效"或"未授权"
+
+**症状:**
+- 构建立即失败并显示身份验证错误
+- 401 或 403 错误
+
+**解决方案:**
+
+1. **验证 API 密钥是否正确**
+   ```bash
+   # 使用简单命令测试
+   npx @capgo/cli@latest app list
+   ```
+
+2. **检查 API 密钥权限**
+   - 密钥必须具有 `write` 或 `all` 权限
+   - 在 Capgo 仪表板的 API Keys 下检查
+
+3. **确保正在读取 API 密钥**
+   ```bash
+   # 检查环境变量
+   echo $CAPGO_TOKEN
+
+   # 或验证本地 .capgo 文件
+   cat .capgo
+   ```
+
+4. **重新身份验证**
+   ```bash
+   npx @capgo/cli@latest login
+   ```
+
+### "找不到应用"或"没有此应用的权限"
+
+**症状:**
+- 身份验证有效但出现应用特定错误
+
+**解决方案:**
+
+1. **验证应用是否已注册**
+   ```bash
+   npx @capgo/cli@latest app list
+   ```
+
+2. **检查应用 ID 是否匹配**
+   - 验证 `capacitor.config.json` 中的 appId
+   - 确保命令使用正确的应用 ID
+
+3. **验证组织访问权限**
+   - 检查您是否在正确的组织中
+   - API 密钥必须有权访问应用的组织
+
+## iOS 构建问题
+
+### "代码签名失败"
+
+**症状:**
+- 构建在代码签名阶段失败
+- 关于证书或配置文件的 Xcode 错误
+
+**解决方案:**
+
+1. **验证证书类型与构建类型匹配**
+   - 开发构建需要开发证书
+   - App Store 构建需要分发证书
+
+2. **检查证书和配置文件是否匹配**
+   ```bash
+   # 解码并检查您的证书
+   echo $BUILD_CERTIFICATE_BASE64 | base64 -d > cert.p12
+   openssl pkcs12 -in cert.p12 -nokeys -passin pass:$P12_PASSWORD | openssl x509 -noout -subject
+   ```
+
+3. **确保配置文件有效**
+   - 检查过期日期
+   - 验证它包含您的 App ID
+   - 确认它包含证书
+
+4. **重新生成凭证**
+   - 删除旧证书/配置文件
+   - 在 Apple Developer Portal 中创建新的
+   - 重新编码并更新环境变量
+
+### "配置文件不包含签名证书"
+
+**症状:**
+- Xcode 在配置文件中找不到证书
+
+**解决方案:**
+
+1. **从 Apple 下载最新配置文件**
+   - 前往 Apple Developer → 证书、ID 和配置文件
+   - 下载配置文件
+   - 确保它包含您的证书
+
+2. **验证证书在配置文件中**
+   ```bash
+   # 提取配置文件
+   echo $BUILD_PROVISION_PROFILE_BASE64 | base64 -d > profile.mobileprovision
+
+   # 查看配置文件内容
+   security cms -D -i profile.mobileprovision
+   ```
+
+3. **使用正确的证书重新创建配置文件**
+   - 在 Apple Developer Portal 中,编辑配置文件
+   - 确保选择了您的分发证书
+   - 下载并重新编码
+
+### "App Store Connect 身份验证失败"
+
+**症状:**
+- 上传到 TestFlight 失败
+- API 密钥错误
+
+**解决方案:**
+
+1. **验证 API 密钥凭证**
+   - 检查 APPLE_KEY_ID(应为 10 个字符)
+   - 检查 APPLE_ISSUER_ID(应为 UUID 格式)
+   - 验证 APPLE_KEY_CONTENT 是否正确 base64 编码
+
+2. **在本地测试 API 密钥**
+   ```bash
+   # 解码密钥
+   echo $APPLE_KEY_CONTENT | base64 -d > AuthKey.p8
+
+   # 使用 fastlane 测试(如果已安装)
+   fastlane pilot list
+   ```
+
+3. **检查 API 密钥权限**
+   - 密钥需要"开发者"角色或更高
+   - 在 App Store Connect → 用户和访问 → 密钥 中验证
+
+4. **确保密钥未被撤销**
+   - 在 App Store Connect 中检查
+   - 如果需要,生成新密钥
+
+### "Pod 安装失败"
+
+**症状:**
+- CocoaPods 安装期间构建失败
+- Podfile 错误
+
+**解决方案:**
+
+1. **验证 Podfile.lock 已提交**
+   ```bash
+   git status ios/App/Podfile.lock
+   ```
+
+2. **在本地测试 pod install**
+   ```bash
+   cd ios/App
+   pod install
+   ```
+
+3. **检查不兼容的 pod**
+   - 检查 Podfile 中的版本冲突
+   - 确保所有 pod 支持您的 iOS 部署目标
+
+4. **清除 pod 缓存**
+   ```bash
+   cd ios/App
+   rm -rf Pods
+   rm Podfile.lock
+   pod install
+   # 然后提交新的 Podfile.lock
+   ```
+
+## Android 构建问题
+
+### "密钥库密码不正确"
+
+**症状:**
+- 签名期间构建失败
+- 关于密钥库的 Gradle 错误
+
+**解决方案:**
+
+1. **验证密钥库密码**
+   ```bash
+   # 在本地测试密钥库
+   keytool -list -keystore my-release-key.keystore
+   # 出现提示时输入密码
+   ```
+
+2. **检查环境变量**
+   ```bash
+   # 确保没有额外的空格或特殊字符
+   echo "$KEYSTORE_STORE_PASSWORD" | cat -A
+   echo "$KEYSTORE_KEY_PASSWORD" | cat -A
+   ```
+
+3. **验证 base64 编码**
+   ```bash
+   # 解码并测试
+   echo $ANDROID_KEYSTORE_FILE | base64 -d > test.keystore
+   keytool -list -keystore test.keystore
+   ```
+
+### "找不到密钥别名"
+
+**症状:**
+- 签名失败并显示别名错误
+
+**解决方案:**
+
+1. **列出密钥库别名**
+   ```bash
+   keytool -list -keystore my-release-key.keystore
+   ```
+
+2. **验证别名完全匹配**
+   - 别名区分大小写
+   - 检查 KEYSTORE_KEY_ALIAS 中的拼写错误
+
+3. **使用密钥库中的正确别名**
+   ```bash
+   # 更新环境变量以匹配
+   export KEYSTORE_KEY_ALIAS="the-exact-alias-name"
+   ```
+
+### "Gradle 构建失败"
+
+**症状:**
+- 通用 Gradle 错误
+- 编译或依赖项问题
+
+**解决方案:**
+
+1. **首先在本地测试构建**
+   ```bash
+   cd android
+   ./gradlew clean
+   ./gradlew assembleRelease
+   ```
+
+2. **检查缺少的依赖项**
+   - 检查 build.gradle 文件
+   - 确保所有插件都在依赖项中列出
+
+3. **验证 Gradle 版本兼容性**
+   ```bash
+   # 检查 gradle 版本
+   cat android/gradle/wrapper/gradle-wrapper.properties
+   ```
+
+4. **清除 Gradle 缓存**
+   ```bash
+   cd android
+   ./gradlew clean
+   rm -rf .gradle build
+   ```
+
+### "Play 商店上传失败"
+
+**症状:**
+- 构建成功但上传失败
+- 服务账户错误
+
+**解决方案:**
+
+1. **验证服务账户 JSON**
+   ```bash
+   # 解码并检查格式
+   echo $PLAY_CONFIG_JSON | base64 -d | jq .
+   ```
+
+2. **检查服务账户权限**
+   - 前往 Play Console → 设置 → API 访问
+   - 确保服务账户可以访问您的应用
+   - 授予"发布到测试轨道"权限
+
+3. **验证应用在 Play Console 中设置**
+   - 应用必须首先在 Play Console 中创建
+   - 至少必须手动上传一个 APK
+
+4. **检查 API 是否已启用**
+   - 必须启用 Google Play Developer API
+   - 在 Google Cloud Console 中检查
+
+## 一般问题
+
+### "找不到作业"或"构建状态不可用"
+
+**症状:**
+- 无法检查构建状态
+- 作业 ID 错误
+
+**解决方案:**
+
+1. **稍等片刻并重试**
+   - 构建作业可能需要几秒钟才能初始化
+
+2. **检查作业 ID 是否正确**
+   - 从初始构建响应验证作业 ID
+
+3. **检查构建是否未过期**
+   - 构建数据可用 24 小时
+
+### "项目同步失败"
+
+**症状:**
+- 构建在编译开始前失败
+- 缺少文件错误
+
+**解决方案:**
+
+1. **在本地运行 Capacitor 同步**
+   ```bash
+   npx cap sync
+   ```
+
+2. **确保所有原生文件已提交**
+   ```bash
+   git status ios/ android/
+   ```
+
+3. **检查 gitignored 的原生文件**
+   - 检查 .gitignore
+   - 确保重要的配置文件未被忽略
+
+### "构建成功但看不到输出"
+
+**症状:**
+- 构建显示成功但没有下载链接
+
+**解决方案:**
+
+1. **检查构建配置**
+   - 可能未配置构建产物存储
+   - 对于公开测试版,请联系支持获取构建产物访问
+
+2. **对于 iOS TestFlight 提交**
+   - 检查 App Store Connect
+   - 上传后处理可能需要 5-30 分钟
+
+3. **对于 Android Play 商店**
+   - 检查 Play Console → 测试 → 内部测试
+   - 处理可能需要几分钟
+
+## CI/CD 特定问题
+
+### GitHub Actions: "找不到命令"
+
+**症状:**
+- `npx @capgo/cli` 在 CI 中失败
+
+**解决方案:**
+
+1. **确保已安装 Node.js**
+   ```yaml
+   - uses: actions/setup-node@v6
+     with:
+       node-version: '24'
+   ```
+
+2. **明确安装 CLI**
+   ```yaml
+   - run: npm install -g @capgo/cli
+   ```
+
+### GitHub Actions: "找不到密钥"
+
+**症状:**
+- 构建中的环境变量为空
+
+**解决方案:**
+
+1. **验证是否设置了密钥**
+   - 前往仓库 Settings → Secrets and variables → Actions
+   - 添加所有必需的密钥
+
+2. **使用正确的语法**
+   ```yaml
+   env:
+     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+   ```
+
+3. **检查密钥名称是否匹配**
+   - 名称区分大小写
+   - 密钥引用中没有拼写错误
+
+## 获取更多帮助
+
+### 启用详细日志记录
+
+```bash
+# 添加 debug 标志(如果可用)
+npx @capgo/cli@latest build com.example.app --verbose
+```
+
+### 收集构建信息
+
+联系支持时,请包括:
+
+1. **使用的构建命令**
+   ```bash
+   npx @capgo/cli@latest build com.example.app --platform ios
+   ```
+
+2. **错误消息**(完整输出)
+
+3. **作业 ID**(来自构建输出)
+
+4. **构建日志**(复制完整的终端输出)
+
+5. **环境信息**
+   ```bash
+   node --version
+   npm --version
+   npx @capgo/cli --version
+   ```
+
+### 联系支持
+
+- **Discord**: [加入我们的社区](https://discord.com/invite/VnYRvBfgA6)
+- **电子邮件**: support@capgo.app
+- **文档**: [Capgo 文档](/docs/)
+
+### 已知限制
+
+公开测试期间的当前限制:
+
+- 最大构建时间: 10 分钟
+- 最大上传大小: ~500MB
+- iOS 构建需要 24 小时的 Mac 租期,Mac 上的构建将排队以确保最佳使用
+- 构建产物下载可能不可用
+
+这些限制可能会根据反馈进行调整。
+
+## 其他资源
+
+- [入门](/docs/cli/cloud-build/getting-started/) - 初始设置指南
+- [iOS 构建](/docs/cli/cloud-build/ios/) - iOS 特定配置
+- [Android 构建](/docs/cli/cloud-build/android/) - Android 特定配置
+- [CLI 参考](/docs/cli/reference/build/) - 完整命令文档

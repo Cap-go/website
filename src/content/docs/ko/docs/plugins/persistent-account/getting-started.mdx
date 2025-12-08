@@ -1,0 +1,339 @@
+---
+title: 시작하기
+locale: ko
+description: 앱 설치 전반에 걸쳐 사용자 데이터를 유지하기 위해 Persistent Account 플러그인을 설치하고 사용하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 플랫폼 지원
+
+- **iOS**: 안전하고 영구적인 저장을 위해 iOS Keychain Services를 사용합니다
+- **Android**: 백업이 있는 Android Account Manager 또는 shared preferences를 사용합니다
+
+## 사용 예제
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// 계정 데이터 구조 정의
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// 계정 데이터 저장
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// 계정 데이터 읽기
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('복원된 계정:', account.username);
+} else {
+  console.log('계정 데이터를 찾을 수 없음');
+}
+```
+
+## API 참조
+
+### saveAccount(options)
+
+```typescript
+saveAccount(options: { data: unknown }) => Promise<void>
+```
+
+계정 데이터를 영구 저장소에 안전하게 저장합니다.
+
+| 매개변수         | 타입                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ data: unknown }` |
+
+### readAccount()
+
+```typescript
+readAccount() => Promise<{ data: unknown | null }>
+```
+
+저장된 계정 데이터를 검색합니다.
+
+**반환:** `Promise<{ data: unknown | null }>`
+
+## 실용적인 구현
+
+### 완전한 인증 서비스 예제
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  authToken?: string;
+  preferences: {
+    theme: string;
+    language: string;
+    notifications: boolean;
+  };
+}
+
+class AuthService {
+  // 로그인 후 사용자 계정 저장
+  async saveUserAccount(user: UserAccount) {
+    try {
+      await PersistentAccount.saveAccount({ data: user });
+      console.log('사용자 계정이 성공적으로 저장됨');
+    } catch (error) {
+      console.error('계정 저장 실패:', error);
+      throw error;
+    }
+  }
+
+  // 앱 시작 시 사용자 계정 복원
+  async restoreUserAccount(): Promise<UserAccount | null> {
+    try {
+      const result = await PersistentAccount.readAccount();
+
+      if (result.data) {
+        const account = result.data as UserAccount;
+        console.log('복원된 사용자 계정:', account.username);
+        return account;
+      }
+
+      console.log('저장된 계정을 찾을 수 없음');
+      return null;
+    } catch (error) {
+      console.error('계정 복원 실패:', error);
+      return null;
+    }
+  }
+
+  // 사용자 기본 설정 업데이트
+  async updatePreferences(preferences: Partial<UserAccount['preferences']>) {
+    const account = await this.restoreUserAccount();
+
+    if (account) {
+      const updatedAccount: UserAccount = {
+        ...account,
+        preferences: {
+          ...account.preferences,
+          ...preferences
+        }
+      };
+
+      await this.saveUserAccount(updatedAccount);
+    }
+  }
+
+  // 계정 데이터 지우기 (로그아웃 시)
+  async clearAccount() {
+    try {
+      await PersistentAccount.saveAccount({ data: null });
+      console.log('계정 데이터가 지워짐');
+    } catch (error) {
+      console.error('계정 지우기 실패:', error);
+    }
+  }
+}
+
+// 사용법
+const authService = new AuthService();
+
+// 로그인 시
+await authService.saveUserAccount({
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  authToken: 'abc123xyz',
+  preferences: {
+    theme: 'dark',
+    language: 'en',
+    notifications: true
+  }
+});
+
+// 앱 시작 시
+const savedAccount = await authService.restoreUserAccount();
+if (savedAccount) {
+  // 사용자가 이전에 로그인했음
+  console.log('환영합니다,', savedAccount.username);
+}
+
+// 기본 설정 업데이트
+await authService.updatePreferences({
+  theme: 'light',
+  notifications: false
+});
+
+// 로그아웃 시
+await authService.clearAccount();
+```
+
+### 계정 복원을 통한 앱 초기화
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function initializeApp() {
+  try {
+    // 저장된 계정 복원 시도
+    const result = await PersistentAccount.readAccount();
+
+    if (result.data) {
+      const account = result.data as UserAccount;
+
+      // 토큰이 여전히 유효한지 확인
+      const isValid = await validateAuthToken(account.authToken);
+
+      if (isValid) {
+        // 사용자 세션 복원
+        setCurrentUser(account);
+        navigateToHome();
+      } else {
+        // 토큰 만료됨, 로그인 표시
+        navigateToLogin();
+      }
+    } else {
+      // 저장된 계정 없음, 로그인 표시
+      navigateToLogin();
+    }
+  } catch (error) {
+    console.error('앱 초기화 실패:', error);
+    navigateToLogin();
+  }
+}
+
+// 앱 시작 시 호출
+initializeApp();
+```
+
+### 백엔드와 동기화
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function syncAccountWithBackend() {
+  const result = await PersistentAccount.readAccount();
+
+  if (result.data) {
+    const localAccount = result.data as UserAccount;
+
+    try {
+      // 서버에서 최신 계정 데이터 가져오기
+      const response = await fetch(`/api/users/${localAccount.userId}`);
+      const serverAccount = await response.json();
+
+      // 로컬 기본 설정과 서버 데이터 병합
+      const mergedAccount: UserAccount = {
+        ...serverAccount,
+        preferences: {
+          ...serverAccount.preferences,
+          ...localAccount.preferences // 로컬 기본 설정이 우선
+        }
+      };
+
+      // 병합된 데이터 저장
+      await PersistentAccount.saveAccount({ data: mergedAccount });
+
+      return mergedAccount;
+    } catch (error) {
+      console.error('백엔드와 동기화 실패:', error);
+      // 대체로 로컬 계정 반환
+      return localAccount;
+    }
+  }
+
+  return null;
+}
+```
+
+## 모범 사례
+
+- **타입 안전성**: 계정 데이터에 대한 명확한 TypeScript 인터페이스를 정의합니다
+- **유효성 검사**: 영구 저장소에서 읽을 때 항상 데이터를 유효성 검사합니다
+- **오류 처리**: 모든 작업에 대해 적절한 try-catch 블록을 구현합니다
+- **보안**: 일반 텍스트로 암호와 같은 민감한 데이터를 저장하지 마세요
+- **토큰 관리**: 계정을 복원할 때 인증 토큰을 새로 고칩니다
+- **데이터 크기**: 빠른 읽기/쓰기 작업을 보장하기 위해 저장된 데이터를 최소화합니다
+- **Null 확인**: 데이터를 사용하기 전에 항상 데이터가 존재하는지 확인합니다
+- **백업 전략**: 추가 안전을 위해 백엔드와 동기화하는 것을 고려하세요
+
+## 보안 고려 사항
+
+- 계정 데이터는 플랫폼별 보안 저장 메커니즘을 사용하여 저장됩니다
+- 데이터는 앱 제거 및 재설치 전반에 걸쳐 유지됩니다
+- 저장하기 전에 민감한 정보를 암호화하는 것을 고려하세요
+- 저장된 계정을 읽을 때 적절한 데이터 유효성 검사를 구현합니다
+- 사용자 데이터 처리에 대한 플랫폼 가이드라인을 따르세요
+- 보안을 위해 만료가 있는 인증 토큰을 사용합니다
+- 사용자 로그아웃 시 계정 데이터를 적절하게 지웁니다
+
+## 플랫폼 구현
+
+### iOS
+
+- 안전하고 영구적인 저장을 위해 iOS Keychain Services를 활용합니다
+- 데이터는 앱 삭제 및 장치 복원에도 유지됩니다
+- iOS 보안 메커니즘으로 보호됩니다
+
+### Android
+
+- 백업이 있는 Android Account Manager 또는 shared preferences를 사용합니다
+- 앱 재설치 및 장치 마이그레이션 전반에 걸쳐 데이터를 유지합니다
+- Android 시스템 보안으로 보호됩니다
+
+## 사용 사례
+
+- **사용자 온보딩**: 앱 재설치를 통해 사용자 진행 상황을 보존합니다
+- **계정 복구**: 앱 업데이트 후 사용자 세션을 복원합니다
+- **기본 설정 저장**: 사용자 설정 및 구성을 유지합니다
+- **오프라인 우선 앱**: 필수 사용자 데이터를 로컬에 저장합니다
+- **세션 관리**: 앱 재시작 전반에 걸쳐 사용자를 로그인 상태로 유지합니다
+- **장치 마이그레이션**: 새 장치로 사용자 데이터를 전송합니다

@@ -1,0 +1,157 @@
+---
+title: 📱 app
+description: 📱 在 Capgo Cloud 中管理您的 Capgo 应用设置和配置。
+sidebar_label: app
+locale: zh
+sidebar:
+  order: 5
+---
+
+📱 在 Capgo Cloud 中管理您的 Capgo 应用设置和配置。
+
+### <a id="app-add"></a> ➕ **Add**
+
+**别名:** `a`
+
+```bash
+npx @capgo/cli@latest app add
+```
+
+➕ 使用格式为 com.test.app 的唯一应用 ID 向 Capgo Cloud 添加新应用。
+如果未提供，所有选项都可以从配置中推断。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest app add com.example.app --name "My App" --icon ./icon.png
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 在 Capgo Cloud 中显示的应用名称 |
+| **-i,** | <code>string</code> | 在 Capgo Cloud 中显示的应用图标路径 |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="app-delete"></a> 🗑️ **Delete**
+
+```bash
+npx @capgo/cli@latest app delete
+```
+
+🗑️ 从 Capgo Cloud 删除应用，可选择指定要删除的版本。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest app delete com.example.app
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="app-list"></a> 📋 **List**
+
+**别名:** `l`
+
+```bash
+npx @capgo/cli@latest app list
+```
+
+📋 列出在 Capgo Cloud 中注册到您账户下的所有应用。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest app list
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="app-debug"></a> 🐞 **Debug**
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+🐞 监听 Capgo Cloud 中的实时更新事件以调试您的应用。
+可选择针对特定设备进行详细诊断。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest app debug com.example.app --device DEVICE_ID
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **-d,** | <code>string</code> | 要调试的特定设备 ID |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="app-setting"></a> ⚙️ **Setting**
+
+```bash
+npx @capgo/cli@latest app setting
+```
+
+⚙️ 以编程方式修改 Capacitor 配置。
+使用 --string 或 --bool 指定设置路径（例如，plugins.CapacitorUpdater.defaultChannel）。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest app setting plugins.CapacitorUpdater.defaultChannel --string "Production"
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **--bool** | <code>string</code> | 作为布尔值修改设置的值，例如：--bool true |
+| **--string** | <code>string</code> | 作为字符串修改设置的值，例如：--string "Production" |
+
+### <a id="app-set"></a> ⚙️ **Set**
+
+**别名:** `s`
+
+```bash
+npx @capgo/cli@latest app set
+```
+
+⚙️ 更新 Capgo Cloud 中现有应用的设置，例如名称、图标或 bundle 保留期。
+保留期为 0 表示无限存储。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest app set com.example.app --name "Updated App" --retention 30
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 在 Capgo Cloud 中显示的应用名称 |
+| **-i,** | <code>string</code> | 在 Capgo Cloud 中显示的应用图标路径 |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **-r,** | <code>string</code> | 保留旧 bundle 的天数（0 = 无限，默认：0） |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |

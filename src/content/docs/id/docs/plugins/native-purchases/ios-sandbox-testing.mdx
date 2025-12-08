@@ -1,0 +1,209 @@
+---
+title: Konfigurasi Sandbox Testing iOS
+locale: id
+description: Pelajari cara mengatur sandbox testing untuk pembelian in-app di iOS menggunakan App Store Connect dan Xcode.
+sidebar:
+  order: 6
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Menguji pembelian in-app di iOS memerlukan konfigurasi yang tepat di App Store Connect dan pada perangkat uji Anda. Panduan ini mencakup semua yang Anda butuhkan untuk memulai sandbox testing.
+
+## Prasyarat
+
+- **Apple Developer Program**: Keanggotaan aktif dengan perpanjangan tahunan
+- **Perjanjian**: "Paid Applications Agreement" ditandatangani dengan informasi perbankan dan pajak lengkap
+- **Proyek Xcode**: Dikonfigurasi dengan bundle identifier dan capabilities yang tepat
+
+:::note
+Persetujuan pengaturan perbankan dan pajak bisa memakan waktu berjam-jam hingga berhari-hari. Selesaikan ini jauh-jauh hari sebelum pengujian.
+:::
+
+## Proses Pengaturan
+
+<Steps>
+
+1. **Tandatangani Paid Applications Agreement**
+
+   Di App Store Connect, navigasikan ke **Agreements, Tax, and Banking** dan lengkapi:
+   - Tandatangani Paid Applications Agreement
+   - Tambahkan informasi perbankan Anda
+   - Lengkapi formulir pajak
+
+   Tunggu Apple menyetujui informasi Anda (ini bisa memakan waktu 24-48 jam).
+
+2. **Buat Sandbox Test User**
+
+   Di App Store Connect, buka **Users and Access > Sandbox Testers**.
+
+   Klik tombol **+** untuk membuat sandbox tester baru.
+
+   **Penting**: Gunakan alamat email yang TIDAK sudah terkait dengan Apple ID. Anda dapat menggunakan alias email:
+   - Gmail: `youremail+test@gmail.com`
+   - iCloud: `youremail+test@icloud.com`
+
+   ![Buat sandbox tester](/native-purchases/ios/sandbox-testing/sandbox-tester-setup.webp)
+
+3. **Konfigurasi Perangkat Uji (iOS 12+)**
+
+   Mulai iOS 12, Anda tidak perlu lagi keluar dari akun iTunes Anda untuk menguji pembelian.
+
+   Di perangkat iOS Anda:
+   1. Buka **Settings**
+   2. Ketuk **App Store**
+   3. Gulir ke bawah
+   4. Ketuk **Sandbox Account**
+   5. Masuk dengan akun sandbox test Anda
+
+   :::tip
+   Ini jauh lebih nyaman daripada metode lama keluar dari akun iTunes Anda!
+   :::
+
+4. **Konfigurasi Proyek Xcode**
+
+   Pastikan proyek Xcode Anda memiliki:
+
+   **Bundle Identifier**
+   - Harus cocok dengan identifier di Developer Center Anda
+   - Harus cocok dengan identifier di App Store Connect
+
+   **In-App Purchase Capability**
+   1. Pilih proyek Anda di Xcode
+   2. Buka **Signing & Capabilities**
+   3. Klik **+ Capability**
+   4. Tambahkan **In-App Purchase**
+
+5. **Buat Produk In-App Purchase**
+
+   Di App Store Connect, navigasikan ke aplikasi Anda dan buat produk in-app purchase Anda (langganan, consumables, dll.).
+
+   Produk harus minimal dalam status "Ready to Submit" untuk sandbox testing.
+
+6. **Uji Implementasi Anda**
+
+   Build dan jalankan aplikasi Anda di perangkat uji. Saat Anda mencoba pembelian, Anda akan melihat:
+
+   > **[Environment: Sandbox]**
+
+   Konfirmasi ini menunjukkan Anda berada di lingkungan sandbox dan tidak akan dikenakan biaya uang sungguhan.
+
+</Steps>
+
+## Catatan Penting
+
+### Karakteristik Lingkungan Sandbox
+
+- **Tidak ada biaya nyata**: Semua pembelian gratis di mode sandbox
+- **Langganan dipercepat**: Durasi langganan diperpendek untuk pengujian lebih cepat
+  - Langganan 1 minggu = 3 menit
+  - Langganan 1 bulan = 5 menit
+  - Langganan 2 bulan = 10 menit
+  - Langganan 3 bulan = 15 menit
+  - Langganan 6 bulan = 30 menit
+  - Langganan 1 tahun = 1 jam
+- **Batas perpanjangan otomatis**: Langganan diperpanjang otomatis hingga 6 kali di sandbox
+- **Pembatalan langsung**: Langganan yang dibatalkan kedaluwarsa segera
+
+### Manajemen Akun Sandbox
+
+- Buat beberapa akun uji untuk skenario berbeda
+- Gunakan akun uji hanya pada perangkat uji
+- Jangan gunakan Apple ID pribadi untuk sandbox testing
+- Akun uji dapat membeli produk apa pun terlepas dari wilayah
+
+## Menggunakan Sandbox Testing
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { isBillingSupported } = await NativePurchases.isBillingSupported();
+if (!isBillingSupported) {
+  throw new Error('StoreKit tidak didukung di perangkat ini');
+}
+
+// Ambil produk (otomatis menggunakan sandbox saat tersedia)
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Lakukan pembelian uji
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Pembelian uji berhasil!', transaction.transactionId);
+```
+
+## Verifikasi
+
+Saat dikonfigurasi dengan benar, Anda harus mengamati:
+
+1. **Banner sandbox** selama pembelian: "[Environment: Sandbox]"
+2. **Produk dimuat** dengan sukses
+3. **Pembelian selesai** tanpa biaya nyata
+4. **Receipt tervalidasi** dengan benar
+5. **Langganan diperpanjang** secara otomatis (dengan kecepatan dipercepat)
+
+## Pemecahan Masalah
+
+**Produk tidak dimuat:**
+- Verifikasi bundle identifier cocok dengan App Store Connect
+- Periksa bahwa perjanjian ditandatangani dan disetujui
+- Pastikan produk setidaknya dalam status "Ready to Submit"
+- Tunggu 2-3 jam setelah membuat produk
+
+**"Cannot connect to iTunes Store":**
+- Verifikasi akun sandbox dikonfigurasi dengan benar
+- Periksa perangkat terhubung ke internet
+- Coba keluar dan masuk kembali ke akun sandbox
+- Restart aplikasi
+
+**Pembelian gagal tanpa pesan:**
+- Periksa konsol Xcode untuk pesan error
+- Verifikasi capability In-App Purchase diaktifkan
+- Pastikan email akun sandbox bukan Apple ID nyata
+- Coba buat akun sandbox test baru
+
+**Error validasi receipt:**
+- Gunakan endpoint validasi receipt sandbox saat pengujian
+- Endpoint produksi: `https://buy.itunes.apple.com/verifyReceipt`
+- Endpoint sandbox: `https://sandbox.itunes.apple.com/verifyReceipt`
+- Plugin native-purchases menangani ini secara otomatis
+
+**Durasi langganan salah:**
+- Ingat langganan dipercepat di sandbox
+- Gunakan tabel konversi di atas untuk durasi yang diharapkan
+- Langganan diperpanjang otomatis maksimal 6 kali di sandbox
+
+**"This Apple ID has not yet been used in the iTunes Store":**
+- Ini normal untuk akun sandbox baru
+- Lanjutkan dengan pembelian untuk mengaktifkan akun
+- Hanya terjadi pada penggunaan pertama
+
+## Praktik Terbaik
+
+1. **Buat beberapa akun uji** untuk skenario pengujian berbeda
+2. **Uji semua durasi langganan** untuk memverifikasi perilaku
+3. **Uji pembatalan dan perpanjangan** alur
+4. **Verifikasi validasi receipt** bekerja dengan benar
+5. **Uji pemulihan pembelian** fungsionalitas
+6. **Periksa perilaku upgrade/downgrade langganan**
+7. **Uji dengan kondisi jaringan buruk**
+
+## Produksi vs. Sandbox
+
+| Fitur | Sandbox | Produksi |
+|---------|---------|------------|
+| Biaya nyata | Tidak | Ya |
+| Durasi langganan | Dipercepat | Normal |
+| Batas perpanjangan otomatis | 6 kali | Tidak terbatas |
+| Efek pembatalan | Langsung | Akhir periode |
+| Endpoint receipt | URL Sandbox | URL Produksi |
+| Akun uji saja | Ya | Tidak |
+
+## Sumber Daya Tambahan
+
+Untuk detail lebih lanjut, lihat [dokumentasi StoreKit resmi Apple](https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox) tentang sandbox testing.

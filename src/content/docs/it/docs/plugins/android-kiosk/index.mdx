@@ -1,0 +1,51 @@
+---
+title: "@capgo/capacitor-android-kiosk"
+description: Plugin Android Kiosk Mode per Capacitor - Blocca il dispositivo in modalità kiosk con funzionalità launcher
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+hero:
+  tagline: Blocca il tuo dispositivo Android in modalità kiosk con controllo completo sui pulsanti hardware e funzionalità launcher per le tue app Capacitor.
+  image:
+    file: ~public/icons/plugins/android-kiosk.svg
+  actions:
+    - text: Inizia
+      link: /docs/plugins/android-kiosk/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-kiosk/
+      icon: external
+      variant: minimal
+locale: it
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Modalità Kiosk" icon="rocket">
+    Nascondi l'interfaccia di sistema ed entra in modalità schermo intero immersiva
+  </Card>
+  <Card title="Integrazione Launcher" icon="setting">
+    Imposta la tua app come launcher/home app del dispositivo
+  </Card>
+  <Card title="Controllo Tasti Hardware" icon="warning">
+    Blocca o consenti specifici pulsanti hardware (indietro, home, recenti, volume, accensione)
+  </Card>
+  <Card title="Rilevamento Stato" icon="approve-check">
+    Verifica se la modalità kiosk è attiva o se l'app è impostata come launcher
+  </Card>
+  <Card title="Android 6.0+" icon="star">
+    Supporta Android API 23 fino ad Android 15 (API 35)
+  </Card>
+  <Card title="Documentazione Completa" icon="open-book">
+    Consulta la [Documentazione](/docs/plugins/android-kiosk/getting-started/) per integrare la modalità kiosk in pochi minuti.
+  </Card>
+</CardGrid>
+
+## Supporto Piattaforme
+
+Questo plugin è **solo per Android**. Per la funzionalità di modalità kiosk su iOS, utilizza la funzione integrata del dispositivo [Guided Access](https://support.apple.com/en-us/HT202612).

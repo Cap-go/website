@@ -1,0 +1,272 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Background Geolocation untuk melacak lokasi perangkat di latar belakang.
+sidebar:
+  order: 2
+locale: id
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+Plugin ini mendukung Capacitor v7:
+
+| Capacitor  | Plugin |
+|------------|--------|
+| v7         | v7     |
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+</Tabs>
+
+## Pengaturan Platform
+
+### iOS
+
+Tambahkan kunci berikut ke `Info.plist.`:
+
+```xml
+<dict>
+  ...
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We need to track your location</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>We need to track your location while your device is locked.</string>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
+  ...
+</dict>
+```
+
+### Android
+
+Atur opsi `android.useLegacyBridge` menjadi `true` dalam konfigurasi Capacitor Anda. Ini mencegah pembaruan lokasi terhenti setelah 5 menit di latar belakang. Lihat https://capacitorjs.com/docs/config dan https://github.com/capacitor-community/background-geolocation/issues/89.
+
+Di Android 13+, aplikasi memerlukan izin runtime `POST_NOTIFICATIONS` untuk menampilkan notifikasi persisten yang memberi tahu pengguna bahwa lokasi mereka digunakan di latar belakang. Izin runtime ini diminta setelah izin lokasi diberikan.
+
+Jika aplikasi Anda meneruskan pembaruan lokasi ke server secara real-time, ketahuilah bahwa setelah 5 menit di latar belakang, Android akan membatasi permintaan HTTP yang dimulai dari WebView. Solusinya adalah menggunakan plugin HTTP native seperti [CapacitorHttp](https://capacitorjs.com/docs/apis/http). Lihat https://github.com/capacitor-community/background-geolocation/issues/14.
+
+Konfigurasi khusus untuk Android dapat dibuat di `strings.xml`:
+```xml
+<resources>
+    <!--
+        The channel name for the background notification. This will be visible
+        when the user presses & holds the notification. It defaults to
+        "Background Tracking".
+    -->
+    <string name="capacitor_background_geolocation_notification_channel_name">
+        Background Tracking
+    </string>
+
+    <!--
+        The icon to use for the background notification. Note the absence of a
+        leading "@". It defaults to "mipmap/ic_launcher", the app's launch icon.
+
+        If a raster image is used to generate the icon (as opposed to a vector
+        image), it must have a transparent background. To make sure your image
+        is compatible, select "Notification Icons" as the Icon Type when
+        creating the image asset in Android Studio.
+
+        An incompatible image asset will cause the notification to misbehave in
+        a few telling ways, even if the icon appears correctly:
+
+          - The notification may be dismissable by the user when it should not
+            be.
+          - Tapping the notification may open the settings, not the app.
+          - The notification text may be incorrect.
+    -->
+    <string name="capacitor_background_geolocation_notification_icon">
+        drawable/ic_tracking
+    </string>
+
+    <!--
+        The color of the notification as a string parseable by
+        android.graphics.Color.parseColor. Optional.
+    -->
+    <string name="capacitor_background_geolocation_notification_color">
+        yellow
+    </string>
+</resources>
+```
+
+## Penggunaan
+
+```javascript
+import { BackgroundGeolocation } from "@capgo/background-geolocation";
+
+BackgroundGeolocation.start(
+    {
+        backgroundMessage: "Cancel to prevent battery drain.",
+        backgroundTitle: "Tracking You.",
+        requestPermissions: true,
+        stale: false,
+        distanceFilter: 50
+    },
+    (location, error) => {
+        if (error) {
+            if (error.code === "NOT_AUTHORIZED") {
+                if (window.confirm(
+                    "This app needs your location, " +
+                    "but does not have permission.\n\n" +
+                    "Open settings now?"
+                )) {
+                    // It can be useful to direct the user to their device's
+                    // settings when location permissions have been denied. The
+                    // plugin provides the 'openSettings' method to do exactly
+                    // this.
+                    BackgroundGeolocation.openSettings();
+                }
+            }
+            return console.error(error);
+        }
+        return console.log(location);
+    }
+).then(() => {
+    // When location updates are no longer needed, the plugin should be stopped by calling
+    BackgroundGeolocation.stop();
+});
+
+// Set a planned route to get a notification sound when a new location arrives and it's not on the route:
+
+BackgroundGeolocation.setPlannedRoute({soundFile: "assets/myFile.mp3", route: [[1,2], [3,4]], distance: 30 });
+
+// If you just want the current location, try something like this. The longer
+// the timeout, the more accurate the guess will be. I wouldn't go below about 100ms.
+function guessLocation(callback, timeout) {
+    let last_location;
+    BackgroundGeolocation.start(
+        {
+            requestPermissions: false,
+            stale: true
+        },
+        (location) => {
+            last_location = location || undefined;
+        }
+    ).then(() => {
+        setTimeout(() => {
+            callback(last_location);
+            BackgroundGeolocation.stop();
+        }, timeout);
+    });
+}
+```
+
+## API
+
+### start(...)
+
+```typescript
+start(options: StartOptions, callback: (position?: Location | undefined, error?: CallbackError | undefined) => void) => Promise<void>
+```
+
+Untuk mulai mendengarkan perubahan lokasi perangkat, panggil metode ini.
+Promise dikembalikan untuk menunjukkan bahwa panggilan telah selesai. Callback akan dipanggil setiap kali lokasi baru tersedia, atau jika terjadi kesalahan saat memanggil metode ini. Jangan mengandalkan penolakan promise untuk ini.
+
+| Param          | Type                                                                                                                      | Description                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **`options`**  | `StartOptions`                                                                     | Opsi konfigurasi                                                         |
+| **`callback`** | `(position?: Location, error?: CallbackError) => void` | Fungsi callback yang dipanggil saat lokasi baru tersedia atau terjadi kesalahan |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+Menghentikan pembaruan lokasi.
+
+### openSettings()
+
+```typescript
+openSettings() => Promise<void>
+```
+
+Membuka halaman pengaturan lokasi perangkat.
+Berguna untuk mengarahkan pengguna untuk mengaktifkan layanan lokasi atau menyesuaikan izin.
+
+### setPlannedRoute(...)
+
+```typescript
+setPlannedRoute(options: SetPlannedRouteOptions) => Promise<void>
+```
+
+Memutar file suara saat pengguna menyimpang dari rute yang direncanakan.
+Ini harus digunakan untuk memutar suara (di latar belakang juga, hanya untuk native).
+
+| Param         | Type                                                                      | Description                                              |
+| ------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **`options`** | `SetPlannedRouteOptions` | Opsi untuk mengatur rute yang direncanakan dan file suara |
+
+## Interface
+
+### StartOptions
+
+Opsi untuk mengkonfigurasi pembaruan lokasi.
+
+| Prop                     | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                          | Default                            |
+| ------------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **`backgroundMessage`**  | `string`  | Jika opsi "backgroundMessage" didefinisikan, plugin akan menyediakan pembaruan lokasi baik saat aplikasi di latar belakang atau di latar depan. Jika tidak didefinisikan, pembaruan lokasi hanya dijamin di latar depan. Ini berlaku di kedua platform. Di Android, notifikasi harus ditampilkan untuk terus menerima pembaruan lokasi di latar belakang. Opsi ini menentukan teks notifikasi tersebut. |                                    |
+| **`backgroundTitle`**    | `string`  | Judul notifikasi yang disebutkan di atas.                                                                                                                                                                                                                                                                                                                                                                       | `"Using your location"` |
+| **`requestPermissions`** | `boolean` | Apakah izin harus diminta dari pengguna secara otomatis, jika belum diberikan.                                                                                                                                                                                                                                                                                                                                | `true`                  |
+| **`stale`**              | `boolean` | Jika "true", lokasi yang sudah usang dapat diberikan saat perangkat mendapatkan posisi GPS. Anda bertanggung jawab untuk memeriksa properti "time". Jika "false", lokasi dijamin up to date.                                                                                                                                                                                                                         | `false`                 |
+| **`distanceFilter`**     | `number`  | Jarak dalam meter yang harus dipindahkan perangkat sebelum pembaruan lokasi baru dipicu. Ini digunakan untuk menyaring gerakan kecil dan mengurangi jumlah pembaruan.                                                                                                                                                                                                                                             | `0`                     |
+
+### Location
+
+Merepresentasikan lokasi geografis dengan berbagai atribut.
+Berisi semua properti lokasi standar yang dikembalikan oleh penyedia GPS/jaringan.
+
+| Prop                   | Type                        | Description                                                                                                                            |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **`latitude`**         | `number`         | Garis lintang dalam derajat. Rentang: -90.0 hingga +90.0                                                                                             |
+| **`longitude`**        | `number`         | Garis bujur dalam derajat. Rentang: -180.0 hingga +180.0                                                                                          |
+| **`accuracy`**         | `number`         | Radius ketidakpastian horizontal dalam meter, dengan kepercayaan 68%. Nilai yang lebih rendah menunjukkan lokasi yang lebih akurat.                         |
+| **`altitude`**         | `number \| null` | Meter di atas permukaan laut (atau null jika tidak tersedia).                                                                                     |
+| **`altitudeAccuracy`** | `number \| null` | Ketidakpastian vertikal dalam meter, dengan kepercayaan 68% (atau null jika tidak tersedia).                                                        |
+| **`simulated`**        | `boolean`        | `true` jika lokasi disimulasikan oleh perangkat lunak, bukan GPS. Berguna untuk mendeteksi lokasi palsu dalam pengembangan atau pengujian.      |
+| **`bearing`**          | `number \| null` | Deviasi dari utara sejati dalam derajat (atau null jika tidak tersedia). Rentang: 0.0 hingga 360.0                                                   |
+| **`speed`**            | `number \| null` | Kecepatan dalam meter per detik (atau null jika tidak tersedia).                                                                                 |
+| **`time`**             | `number \| null` | Waktu saat lokasi dihasilkan, dalam milidetik sejak unix epoch. Gunakan ini untuk memeriksa apakah lokasi sudah usang saat menggunakan stale: true. |
+
+### CallbackError
+
+Objek error yang dapat diteruskan ke callback start lokasi.
+Memperluas Error standar dengan kode kesalahan opsional.
+
+| Prop       | Type                | Description                                           |
+| ---------- | ------------------- | ----------------------------------------------------- |
+| **`code`** | `string` | Kode kesalahan opsional untuk penanganan kesalahan yang lebih spesifik. |
+
+### SetPlannedRouteOptions
+
+| Prop            | Type                            | Description                                                                                                                                                                                                                                        | Default         |
+| --------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| **`soundFile`** | `string`             | Nama file suara yang akan diputar. Harus berupa path relatif suara yang valid di folder publik aplikasi agar berfungsi untuk platform web dan native. Tidak perlu menyertakan folder publik dalam path.                                            |                 |
+| **`route`**     | `[number, number][]` | Rute yang direncanakan sebagai array pasangan garis bujur dan garis lintang. Setiap pasangan mewakili titik pada rute. Ini digunakan untuk menentukan rute yang dapat diikuti pengguna. Rute digunakan untuk memutar suara saat pengguna menyimpang darinya.               |                 |
+| **`distance`**  | `number`             | Jarak dalam meter yang harus disimpangkan pengguna dari rute yang direncanakan untuk memicu suara. Ini digunakan untuk menentukan seberapa jauh dari rute pengguna dapat berada sebelum suara diputar. Jika tidak ditentukan, nilai default 50 meter digunakan. | `50` |

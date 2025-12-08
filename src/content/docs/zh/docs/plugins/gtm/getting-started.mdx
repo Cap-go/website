@@ -1,0 +1,242 @@
+---
+title: 开始使用
+description: 了解如何使用官方 SDK 在您的 Capacitor 应用中安装和集成 Google Tag Manager。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 平台配置
+
+### iOS
+
+1. 从 Google Tag Manager 控制台下载您的 GTM 容器配置文件
+2. 在 Xcode 中将容器 JSON 文件添加到您的 iOS 项目
+3. 文件名应类似于 `GTM-XXXXXX.json`
+
+### Android
+
+1. 从 Google Tag Manager 控制台下载您的 GTM 容器配置文件
+2. 将容器 JSON 文件添加到 `android/app/src/main/assets/`
+3. 文件名应类似于 `GTM-XXXXXX.json`
+
+## 使用示例
+
+```typescript
+import { CapacitorGTM } from '@capgo/capacitor-gtm';
+
+// 使用您的容器 ID 初始化 GTM
+await CapacitorGTM.init({
+  containerId: 'GTM-XXXXXX'
+});
+
+// 将事件推送到 dataLayer
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Home',
+    screen_class: 'HomeScreen'
+  }
+});
+
+// 推送带参数的自定义事件
+await CapacitorGTM.pushEvent({
+  event: 'purchase',
+  parameters: {
+    transaction_id: 'T12345',
+    value: 25.00,
+    currency: 'USD',
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product Name',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+
+// 设置用户属性
+await CapacitorGTM.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+
+// 从 dataLayer 获取值
+const result = await CapacitorGTM.getVariable({
+  key: 'config_value'
+});
+console.log('Config value:', result.value);
+```
+
+## API 参考
+
+### init(options)
+
+```typescript
+init(options: { containerId: string }) => Promise<void>
+```
+
+使用您的容器 ID 初始化 Google Tag Manager。
+
+| 参数         | 类型                             |
+| ------------- | -------------------------------- |
+| **`options`** | `{ containerId: string }` |
+
+### pushEvent(options)
+
+```typescript
+pushEvent(options: GTMEvent) => Promise<void>
+```
+
+将事件推送到 dataLayer，可选参数。
+
+| 参数         | 类型              |
+| ------------- | ----------------- |
+| **`options`** | `GTMEvent` |
+
+### setUserProperty(options)
+
+```typescript
+setUserProperty(options: { key: string; value: string }) => Promise<void>
+```
+
+为分段和定位设置用户属性。
+
+| 参数         | 类型                                      |
+| ------------- | ----------------------------------------- |
+| **`options`** | `{ key: string; value: string }` |
+
+### getVariable(options)
+
+```typescript
+getVariable(options: { key: string }) => Promise<{ value: any }>
+```
+
+从 GTM 容器配置中获取值。
+
+| 参数         | 类型                     |
+| ------------- | ------------------------ |
+| **`options`** | `{ key: string }` |
+
+**返回值：** `Promise<{ value: any }>`
+
+## 接口
+
+### GTMEvent
+
+| 属性             | 类型                                 | 描述                        |
+| ---------------- | ------------------------------------ | ---------------------------------- |
+| **`event`**      | `string`                  | 事件名称                     |
+| **`parameters`** | `Record<string, any>` | 可选的事件参数（可选） |
+
+## 常见事件示例
+
+### 屏幕浏览
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Product Details',
+    screen_class: 'ProductScreen'
+  }
+});
+```
+
+### 用户操作
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'button_click',
+  parameters: {
+    button_name: 'add_to_cart',
+    product_id: 'SKU_12345'
+  }
+});
+```
+
+### 电子商务事件
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'begin_checkout',
+  parameters: {
+    currency: 'USD',
+    value: 75.00,
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product 1',
+        quantity: 2,
+        price: 25.00
+      },
+      {
+        item_id: 'SKU_67890',
+        item_name: 'Product 2',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+```
+
+## 最佳实践
+
+- 在应用生命周期早期初始化 GTM
+- 使用一致的事件命名约定
+- 在每个事件中包含相关参数
+- 在预览模式下测试您的 GTM 配置
+- 在 Google Tag Manager 控制台中监控数据
+- 使用用户属性进行有意义的分段
+
+## 调试
+
+在 Google Tag Manager 控制台中启用调试模式以测试您的实现：
+
+1. 打开 GTM 控制台
+2. 进入预览模式
+3. 使用容器 ID 连接到您的应用
+4. 验证事件是否被正确跟踪
+
+## 使用场景
+
+- 跟踪用户交互和行为
+- 监控应用性能指标
+- 收集电子商务数据
+- 无需代码更改即可管理第三方标签
+- 实现 A/B 测试和个性化
+- 与 Google Analytics 和其他服务集成

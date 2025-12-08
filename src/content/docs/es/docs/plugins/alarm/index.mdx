@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-alarm"
+description: Programa alarmas y notificaciones nativas incluso cuando la aplicación está cerrada.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+locale: es
+hero:
+  tagline: Gestiona alarmas nativas en iOS y Android directamente desde tu aplicación Capacitor.
+  image:
+    file: ~public/icons/plugins/alarm.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/alarm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-alarm/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Integración nativa" icon="puzzle">
+    Usa AlarmKit nativo en iOS e intents de AlarmClock en Android 📱
+  </Card>
+  <Card title="API simple" icon="rocket">
+    Métodos fáciles de usar para crear y gestionar alarmas ⚡
+  </Card>
+  <Card title="Manejo de permisos" icon="approve-check-circle">
+    Soporte integrado para solicitar los permisos necesarios 🔒
+  </Card>
+  <Card title="Documentación completa" icon="open-book">
+    Consulta la [Documentación](/docs/plugins/alarm/getting-started/) para dominar el plugin en solo unos minutos.
+  </Card>
+</CardGrid>

@@ -1,0 +1,414 @@
+---
+title: "Share Target 入门"
+locale: zh
+description: "了解如何让你的应用接收来自其他应用的共享内容"
+---
+
+本指南将引导你集成 Capacitor Share Target 插件,使你的应用能够接收来自其他应用的共享内容。
+
+## 安装
+
+使用 npm 安装插件:
+
+```bash
+npm install @capgo/capacitor-share-target
+npx cap sync
+```
+
+## Android 配置
+
+在 `AndroidManifest.xml` 的 `<activity>` 标签内添加 intent filter:
+
+### 接受文本内容
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="text/*" />
+</intent-filter>
+```
+
+### 接受图片
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="image/*" />
+</intent-filter>
+
+<intent-filter>
+    <action android:name="android.intent.action.SEND_MULTIPLE" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="image/*" />
+</intent-filter>
+```
+
+### 接受所有内容类型
+
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="*/*" />
+</intent-filter>
+
+<intent-filter>
+    <action android:name="android.intent.action.SEND_MULTIPLE" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:mimeType="*/*" />
+</intent-filter>
+```
+
+## iOS 配置
+
+对于 iOS,你需要创建一个 Share Extension:
+
+### 1. 在 Xcode 中创建 Share Extension
+
+1. 在 Xcode 中打开你的项目
+2. 前往 **File > New > Target**
+3. 选择 **Share Extension** 并点击 **Next**
+4. 为其命名(例如,"ShareExtension")并点击 **Finish**
+5. 如果提示,激活 scheme
+
+### 2. 配置 App Group
+
+1. 在主应用 target 中,前往 **Signing & Capabilities**
+2. 点击 **+ Capability** 并添加 **App Groups**
+3. 创建或选择一个 app group(例如,`group.com.yourcompany.yourapp`)
+4. 对 Share Extension target 重复此操作
+
+### 3. 更新 Share Extension 代码
+
+Share Extension 需要将共享数据保存到 app group 容器,以便主应用可以访问它。
+
+有关详细的 iOS 设置,请参阅 [Apple 的 Share Extension 文档](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller)。
+
+## 基本用法
+
+### 导入插件
+
+```typescript
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+```
+
+### 监听共享内容
+
+```typescript
+CapacitorShareTarget.addListener('shareReceived', (event) => {
+  console.log('接收到共享事件');
+  console.log('标题:', event.title);
+  console.log('文本:', event.texts);
+
+  // 处理共享的文件
+  if (event.files && event.files.length > 0) {
+    event.files.forEach(file => {
+      console.log(`文件: ${file.name}`);
+      console.log(`类型: ${file.mimeType}`);
+      console.log(`URI: ${file.uri}`);
+    });
+  }
+});
+```
+
+## 完整示例
+
+以下是处理不同类型共享内容的综合示例:
+
+```typescript
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+class ShareTargetService {
+  private listener: any;
+
+  initialize() {
+    this.listener = CapacitorShareTarget.addListener('shareReceived', (event) => {
+      this.handleSharedContent(event);
+    });
+
+    console.log('Share target 监听器已初始化');
+  }
+
+  handleSharedContent(event: any) {
+    console.log('=== 接收到共享 ===');
+
+    // 处理标题
+    if (event.title) {
+      console.log('标题:', event.title);
+      this.showNotification('已共享: ' + event.title);
+    }
+
+    // 处理文本内容
+    if (event.texts && event.texts.length > 0) {
+      event.texts.forEach((text: string, index: number) => {
+        console.log(`文本 ${index + 1}:`, text);
+        this.processSharedText(text);
+      });
+    }
+
+    // 处理文件
+    if (event.files && event.files.length > 0) {
+      console.log(`接收到 ${event.files.length} 个文件`);
+
+      event.files.forEach((file: any) => {
+        console.log('文件详情:');
+        console.log('  名称:', file.name);
+        console.log('  类型:', file.mimeType);
+        console.log('  URI:', file.uri);
+
+        this.processSharedFile(file);
+      });
+    }
+  }
+
+  processSharedText(text: string) {
+    // 检查是否为 URL
+    if (this.isURL(text)) {
+      console.log('检测到共享 URL:', text);
+      // 处理 URL(例如,创建书签)
+      this.saveBookmark(text);
+    } else {
+      console.log('检测到共享文本');
+      // 处理纯文本(例如,创建笔记)
+      this.createNote(text);
+    }
+  }
+
+  processSharedFile(file: any) {
+    const fileType = file.mimeType.split('/')[0];
+
+    switch (fileType) {
+      case 'image':
+        console.log('处理共享图片');
+        this.handleImage(file);
+        break;
+
+      case 'video':
+        console.log('处理共享视频');
+        this.handleVideo(file);
+        break;
+
+      case 'audio':
+        console.log('处理共享音频');
+        this.handleAudio(file);
+        break;
+
+      case 'application':
+        console.log('处理共享文档');
+        this.handleDocument(file);
+        break;
+
+      default:
+        console.log('处理通用文件');
+        this.handleGenericFile(file);
+    }
+  }
+
+  handleImage(file: any) {
+    // 处理图片文件
+    console.log('保存图片:', file.name);
+    // 实现:保存到相册、上传等
+  }
+
+  handleVideo(file: any) {
+    // 处理视频文件
+    console.log('保存视频:', file.name);
+  }
+
+  handleAudio(file: any) {
+    // 处理音频文件
+    console.log('保存音频:', file.name);
+  }
+
+  handleDocument(file: any) {
+    // 处理文档文件
+    console.log('保存文档:', file.name);
+  }
+
+  handleGenericFile(file: any) {
+    // 处理通用文件
+    console.log('保存文件:', file.name);
+  }
+
+  isURL(text: string): boolean {
+    try {
+      new URL(text);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  saveBookmark(url: string) {
+    console.log('为以下内容创建书签:', url);
+    // 实现
+  }
+
+  createNote(text: string) {
+    console.log('创建笔记,文本内容:', text.substring(0, 50));
+    // 实现
+  }
+
+  showNotification(message: string) {
+    console.log('通知:', message);
+    // 显示 toast 或通知
+  }
+
+  cleanup() {
+    if (this.listener) {
+      this.listener.remove();
+    }
+  }
+}
+
+// 使用方法
+const shareTarget = new ShareTargetService();
+shareTarget.initialize();
+
+// 应用关闭时清理
+// shareTarget.cleanup();
+```
+
+## React 集成
+
+```typescript
+import { useEffect } from 'react';
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+function useShareTarget(onShareReceived: (event: any) => void) {
+  useEffect(() => {
+    const listener = CapacitorShareTarget.addListener('shareReceived', onShareReceived);
+
+    return () => {
+      listener.remove();
+    };
+  }, [onShareReceived]);
+}
+
+// 在组件中使用
+function App() {
+  useShareTarget((event) => {
+    console.log('接收到共享:', event);
+    // 处理共享内容
+  });
+
+  return <div>Your App</div>;
+}
+```
+
+## Vue 集成
+
+```typescript
+import { onMounted, onUnmounted } from 'vue';
+import { CapacitorShareTarget } from '@capgo/capacitor-share-target';
+
+export default {
+  setup() {
+    let listener: any;
+
+    onMounted(() => {
+      listener = CapacitorShareTarget.addListener('shareReceived', (event) => {
+        console.log('接收到共享:', event);
+        // 处理共享内容
+      });
+    });
+
+    onUnmounted(() => {
+      if (listener) {
+        listener.remove();
+      }
+    });
+  }
+};
+```
+
+## 处理不同的内容类型
+
+### URL
+
+```typescript
+if (event.texts && event.texts.length > 0) {
+  const text = event.texts[0];
+
+  if (text.startsWith('http://') || text.startsWith('https://')) {
+    // 处理 URL
+    window.open(text, '_blank');
+  }
+}
+```
+
+### 图片
+
+```typescript
+if (event.files) {
+  const images = event.files.filter(f => f.mimeType.startsWith('image/'));
+
+  images.forEach(async (image) => {
+    // 读取并显示图片
+    const response = await fetch(image.uri);
+    const blob = await response.blob();
+    const imageUrl = URL.createObjectURL(blob);
+
+    // 显示或处理图片
+    console.log('图片 URL:', imageUrl);
+  });
+}
+```
+
+### 多个文件
+
+```typescript
+if (event.files && event.files.length > 1) {
+  console.log(`处理 ${event.files.length} 个文件`);
+
+  const processPromises = event.files.map(file =>
+    processFile(file)
+  );
+
+  await Promise.all(processPromises);
+  console.log('所有文件已处理');
+}
+```
+
+## 最佳实践
+
+1. **处理多种内容类型**: 准备好接收文本、URL 和文件
+2. **验证内容**: 在处理之前检查 MIME 类型
+3. **提供反馈**: 向用户显示接收到的内容
+4. **处理错误**: 文件 URI 可能无效或不可访问
+5. **清理监听器**: 在不需要时移除监听器
+6. **彻底测试**: 使用不同的应用和内容类型进行测试
+7. **请求权限**: 某些文件类型可能需要额外的权限
+
+## 常见问题
+
+### Android 上共享不工作
+
+确保 intent filter 在 `AndroidManifest.xml` 中正确配置,并且位于具有 `android.intent.action.MAIN` 的 `<activity>` 标签内。
+
+### iOS Share Extension 未显示
+
+1. 验证两个 target 中都配置了 App Group
+2. 确保 Share Extension 已激活
+3. 检查 Share Extension 中的 Info.plist 是否有正确的配置
+
+### 文件访问错误
+
+```typescript
+try {
+  const response = await fetch(file.uri);
+  const blob = await response.blob();
+  // 处理 blob
+} catch (error) {
+  console.error('无法访问文件:', error);
+  // 向用户显示错误
+}
+```
+
+## 下一步
+
+- 浏览 [API 参考](https://github.com/Cap-go/capacitor-share-target#api)以获取完整的方法文档
+- 查看[示例应用](https://github.com/Cap-go/capacitor-share-target/tree/main/example)以了解高级用法
+- 参阅[教程](/plugins-tutorials/capacitor-share-target)以获取完整的实现示例

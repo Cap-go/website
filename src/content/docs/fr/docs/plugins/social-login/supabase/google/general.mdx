@@ -1,0 +1,202 @@
+---
+title: Connexion Google Supabase - Configuration générale
+locale: fr
+description: Apprenez à configurer la connexion Google avec l'authentification Supabase en utilisant le plugin Capacitor Social Login.
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Introduction
+
+Ce guide vous guidera dans l'intégration de la connexion Google avec l'authentification Supabase en utilisant le plugin Capacitor Social Login. Cette configuration vous permet d'utiliser la connexion Google native sur les plateformes mobiles tout en tirant parti de Supabase Auth pour l'authentification backend.
+
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir :
+
+1. [Créé un projet Supabase](https://database.new/)
+2. Lu le [guide de configuration générale de connexion Google](/docs/plugins/social-login/google/general/) pour configurer les identifiants OAuth Google
+3. Suivi les guides respectifs spécifiques à la plateforme pour configurer les identifiants OAuth Google pour votre plateforme cible :
+    - [Configuration Android](/docs/plugins/social-login/google/android/)
+    - [Configuration iOS](/docs/plugins/social-login/google/ios/)
+    - [Configuration Web](/docs/plugins/social-login/google/web/)
+
+    :::note
+        Avant de commencer le tutoriel Supabase, vous devez générer les ID client pour les plateformes que vous prévoyez d'utiliser.
+        Vous les utiliserez à l'étape 7 de ce guide.
+    :::
+
+## Activation du fournisseur OAuth Google dans Supabase
+
+<Steps>
+1. Allez sur votre [Tableau de bord Supabase](https://app.supabase.com/)
+2. Cliquez sur votre projet
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Sélecteur de projet Supabase" />
+3. Allez au menu `Authentication`
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Menu d'authentification Supabase" />
+4. Cliquez sur l'onglet `Providers`
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Onglet Fournisseurs Supabase" />
+5. Trouvez le fournisseur `Google`
+    <img src="/social-login-assets/supabase_google_provider.webp" alt="Fournisseur Google Supabase" />
+6. Activez le fournisseur
+    <img src="/social-login-assets/supabase_google_provider_enable.webp" alt="Activation du fournisseur Google Supabase" />
+7. Ajoutez les ID client pour les plateformes que vous prévoyez d'utiliser
+    <img src="/social-login-assets/supabase_google_provider_add_client_ids.webp" alt="Ajout des ID client du fournisseur Google Supabase" />
+
+    :::note
+        Cela inclut l'ID client web, l'ID client iOS et l'ID client Android. Vous pouvez ne pas en fournir certains, selon les plateformes que vous prévoyez d'utiliser.
+    :::
+8. Cliquez sur le bouton `Save`
+    <img src="/social-login-assets/supabase_google_provider_save.webp" alt="Enregistrement du fournisseur Google Supabase" />
+
+</Steps>
+
+:::note
+Vous ne devez **PAS** configurer `Client Secret (for OAuth)` ou `Callback URL (for OAuth)`. Certaines sources peuvent également suggérer de définir `Skip nonce checks` pour Google sur iOS, mais avec ce guide ce n'est pas nécessaire.
+:::
+
+Voilà, vous avez maintenant activé la connexion Google avec l'authentification Supabase
+
+## Comment fonctionne l'assistant de connexion Google avec l'authentification Supabase
+
+Cette section explique comment fonctionne l'intégration de la connexion Google avec Supabase sous le capot. Comprendre ce flux vous aidera à implémenter et dépanner le processus d'authentification.
+
+:::tip[Implémentation complète]
+L'implémentation complète est disponible dans le fichier [`supabaseAuthUtils.ts` de l'application exemple](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts).
+:::
+
+### 1. Génération de nonce
+
+L'implémentation génère une paire de nonces sécurisés suivant les [exigences de nonce de Supabase](https://react-native-google-signin.github.io/docs/security#usage-with-supabase) :
+
+```typescript
+// Générer un nonce aléatoire sécurisé pour URL
+function getUrlSafeNonce(): string {
+  const array = new Uint8Array(32);
+  crypto.getRandomValues(array);
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+// Hacher le nonce avec SHA-256
+async function sha256Hash(message: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Générer une paire de nonces
+async function getNonce(): Promise<{ rawNonce: string; nonceDigest: string }> {
+  const rawNonce = getUrlSafeNonce();
+  const nonceDigest = await sha256Hash(rawNonce);
+  return { rawNonce, nonceDigest };
+}
+```
+
+**Flux :**
+- `rawNonce` : Chaîne aléatoire sécurisée pour URL (64 caractères hexadécimaux)
+- `nonceDigest` : Hash SHA-256 de `rawNonce` (encodé en hexadécimal)
+- `nonceDigest` est passé à Google Sign-In → Google inclut le digest du nonce dans le jeton ID
+- `rawNonce` est passé à Supabase → Supabase hache le nonce brut et le compare avec le nonce du jeton
+
+### 2. Connexion Google
+
+La fonction initialise le plugin et se connecte avec Google :
+
+```typescript
+await SocialLogin.initialize({
+  google: {
+    webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+    // iOS uniquement :
+    iOSClientId: 'YOUR_IOS_CLIENT_ID.apps.googleusercontent.com',
+    mode: 'online', // Requis pour obtenir idToken
+  },
+});
+
+const response = await SocialLogin.login({
+  provider: 'google',
+  options: {
+    scopes: ['email', 'profile'],
+    nonce: nonceDigest, // Passer le nonce haché SHA-256
+  },
+});
+```
+
+### 3. Validation JWT
+
+Avant d'envoyer le jeton à Supabase, l'implémentation valide le jeton JWT :
+
+```typescript
+function validateJWTToken(idToken: string, expectedNonceDigest: string): { valid: boolean; error?: string } {
+  const decodedToken = decodeJWT(idToken);
+
+  // Vérifier que l'audience correspond à vos ID client Google
+  const audience = decodedToken.aud;
+  if (!VALID_GOOGLE_CLIENT_IDS.includes(audience)) {
+    return { valid: false, error: 'Audience invalide' };
+  }
+
+  // Vérifier que le nonce correspond
+  const tokenNonce = decodedToken.nonce;
+  if (tokenNonce && tokenNonce !== expectedNonceDigest) {
+    return { valid: false, error: 'Inadéquation de nonce' };
+  }
+
+  return { valid: true };
+}
+```
+
+**Pourquoi valider avant Supabase ?**
+
+La validation du jeton JWT avant d'envoyer le jeton à Supabase sert plusieurs objectifs importants :
+
+1. **Prévenir les requêtes invalides** : Si le jeton a une audience incorrecte ou une inadéquation de nonce, Supabase rejettera le jeton de toute façon. Valider en premier évite les appels API inutiles et fournit des messages d'erreur plus clairs.
+
+2. **Problèmes de mise en cache des jetons** : Sur certaines plateformes (en particulier iOS), le SDK Google Sign-In peut mettre en cache les jetons pour des raisons de performance. Lorsqu'un jeton en cache est retourné, le jeton en cache peut avoir été généré avec un nonce différent (ou sans nonce du tout), provoquant le rejet du jeton par Supabase avec une erreur "inadéquation de nonce". En validant avant d'envoyer à Supabase, nous pouvons détecter ce problème tôt et réessayer automatiquement avec un nouveau jeton.
+
+3. **Sécurité** (iOS) : Sur iOS, la validation garantit que le jeton a été émis pour vos ID client Google spécifiques, empêchant les problèmes de sécurité potentiels liés à l'utilisation de jetons destinés à d'autres applications.
+
+4. **Meilleure gestion des erreurs** : Détecter les problèmes avant Supabase permet une logique de nouvelle tentative automatique, ce qui est essentiel pour gérer les problèmes de mise en cache iOS de manière transparente.
+
+Si la validation échoue, la fonction automatiquement :
+1. Se déconnecte de Google (efface les jetons en cache - critique sur iOS)
+2. Réessaie l'authentification une fois (force la génération d'un nouveau jeton avec le nonce correct)
+3. Si la nouvelle tentative échoue également, retourne une erreur
+
+### 4. Connexion Supabase
+
+Enfin, le jeton validé est envoyé à Supabase :
+
+```typescript
+const { data, error } = await supabase.auth.signInWithIdToken({
+  provider: 'google',
+  token: googleResponse.idToken,
+  nonce: rawNonce, // Passer le nonce brut (non haché)
+});
+```
+
+## Référence complète du code
+
+L'implémentation complète est disponible dans le fichier [`supabaseAuthUtils.ts` de l'application exemple](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts), qui inclut :
+
+- `getUrlSafeNonce()` - Génère un nonce aléatoire sécurisé pour URL
+- `sha256Hash()` - Hache une chaîne avec SHA-256
+- `getNonce()` - Génère une paire de nonces
+- `decodeJWT()` - Décode un jeton JWT
+- `validateJWTToken()` - Valide l'audience JWT et le nonce
+- `authenticateWithGoogleSupabase()` - Fonction d'authentification principale avec nouvelle tentative automatique
+
+### Fichiers d'exemple supplémentaires
+
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - Composant exemple avec gestion de redirection (Web)
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - Page exemple de création de compte
+
+## Prochaines étapes
+
+Veuillez procéder au guide de configuration spécifique à la plateforme pour votre plateforme cible :
+
+- [Configuration Android](../android/)
+- [Configuration iOS](../ios/)
+- [Configuration Web](../web/)

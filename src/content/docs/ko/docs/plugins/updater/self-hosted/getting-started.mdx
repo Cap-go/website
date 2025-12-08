@@ -1,0 +1,117 @@
+---
+title: "시작하기"
+locale: ko
+description: "원활한 애플리케이션 업데이트 및 유지 관리를 위한 자체 자동 업데이트 서버 설정 및 관리에 대한 포괄적인 가이드"
+sidebar:
+    order: 1
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+이 문서는 자체 자동 업데이트 서버를 실행하는 방법을 설명합니다.
+
+## 소개
+
+이 작업이 도움이 된다면 [Github 스폰서](https://github.com/sponsors/riderx)가 되어 제 작업을 지원하는 것을 고려해 주세요.
+
+저는 여기서 구축한 모든 코드를 유료화하는 대신 오픈소스로 공개하기로 결정했습니다. 싸우고 숨기는 대신 공개함으로써 우리가 세상을 더 나은 곳으로 만들 수 있다고 믿습니다.
+
+또한 저는 Capgo 도구에 집중하고 그것을 개방적이고 투명한 비즈니스로 만들고 싶습니다.
+
+하지만 그것을 가능하게 하려면 당신을 포함한 우리 모두가 각자의 역할을 해야 합니다 🥹.
+
+Capgo가 당신에게 맞지 않다면 자신의 가격을 지불하고 당신의 조건에 따라 [부트스트랩 메이커를 지원하세요](https://github.com/sponsors/riderx).
+
+<LinkCard title="기여 고려하기" href="/docs/plugin/self-hosted/contributing/"/>
+## 기능 동등성
+
+자체 서버를 선택하면 5분 설정 흐름을 잃게 됩니다.\
+이러한 모든 기능을 직접 구현해야 합니다.
+
+
+| 기능                 | Capgo | 자체 호스팅 |
+| ------------------------ | ----- | ----------- |
+| 업데이트                  | ✅     | 🚧         |
+| 자동 되돌리기              | ✅     | 🚧         |
+| 실패 시 이메일 알림     | ✅     | 🚧         |
+| 채널                 | ✅     | 🚧         |
+| 채널 재정의        | ✅     | 🚧         |
+| 장치 재정의          | ✅     | 🚧         |
+| 채널 설정        | ✅     | 🚧         |
+| 장치 설정          | ✅     | 🚧         |
+| 사용자 정의 ID                | ✅     | 🚧         |
+| 자동 채널 설정        | ✅     | 🚧         |
+| API 채널             | ✅     | 🚧         |
+| 업데이트 통계       | ✅     | 🚧         |
+| 다운로드 실패 통계 | ✅     | 🚧         |
+| 앱 사용 통계     | ✅     | 🚧         |
+| 업데이트 암호화        | ✅     | 🚧         |
+| 차등 업데이트     | ✅     | ❌         |
+
+:::danger
+사용자에게 잘못된 업데이트를 보내면 앱이 손상될 수 있습니다.
+:::
+
+> Capgo 클라우드와 자체 서버를 동시에 사용할 수 없다는 점에 유의하세요.
+
+
+
+:::danger
+OTA(Over-the-Air) 업데이트 기능은 HTML, CSS 및 JavaScript 파일에 대한 수정에만 적용됩니다.
+
+Capacitor 플러그인 업데이트와 같은 네이티브 코드를 변경하는 경우 승인을 위해 앱 스토어에 애플리케이션을 다시 제출해야 합니다.
+:::
+
+## 자동과 수동 중 선택
+자동 모드에서는 로직의 일부가 네이티브 코드에서 처리되며 업데이트는 서버 측에서 결정됩니다. 이는 더 안전하고 세밀한 업데이트, 하나의 장치 또는 그룹에 대한 부분 배포 등을 허용합니다.
+
+수동 모드에서는 모든 로직이 JS에서 처리됩니다.
+
+
+
+<LinkCard
+	title="자동 업데이트"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="수동"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+## Capacitor updater 설치
+
+```bash title="Capacitor updater 설치"
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+## 번들 준비
+
+앱에 업데이트를 보내려면 압축해야 합니다.
+zip이 올바른지 확인하는 가장 좋은 방법은 압축을 위해 Capgo CLI를 사용하는 것입니다.
+```bash title="서버에서 제공할 파일로 번들 생성"
+npx @capgo/cli@latest bundle zip
+```
+
+
+이 zip을 자체적으로 서버에서 제공해야 합니다.
+
+<LinkCard
+	title="자동 업데이트"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="수동"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+
+:::note
+이것이 많은 작업처럼 보인다면 Capgo Cloud 체험판을 시도해 보세요.
+:::
+
+:::note
+차등 업데이트는 수동 업데이트에서는 작동하지 않지만 자동 업데이트에서는 작동할 수 있습니다. 지금은 꽤 복잡한 프로세스이므로 문서화되지 않았습니다
+:::

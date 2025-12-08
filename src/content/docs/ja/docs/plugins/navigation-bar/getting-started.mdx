@@ -1,0 +1,200 @@
+---
+title: Getting Started
+locale: ja
+description: Capacitor Navigation Barプラグインをインストールして設定し、Androidナビゲーションバーの色とスタイルをカスタマイズする方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージのインストール**
+   <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトとの同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **プラグインの設定**
+
+   **ナビゲーションバーの色を設定：**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // ナビゲーションバーの色を設定
+   await NavigationBar.setColor({
+     color: '#FF0000', // 赤色
+     darkButtons: false // ライトボタンを使用
+   });
+   ```
+
+   **動的テーマサポート：**
+   ```typescript
+   // テーマに基づいて色を設定
+   const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+   await NavigationBar.setColor({
+     color: isDarkMode ? '#000000' : '#FFFFFF',
+     darkButtons: !isDarkMode
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="Android">
+       **最小要件：**
+       - Android 5.0（APIレベル21）以上
+       - プラグインはAndroidデバイスでのみ動作します
+
+       AndroidManifest.xmlでの追加設定は不要です。
+     </TabItem>
+     <TabItem label="iOS">
+       このプラグインはAndroid専用です。iOSにはカスタマイズ可能なナビゲーションバーがありません。
+     </TabItem>
+   </Tabs>
+
+4. **高度な使用方法**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   export class ThemeService {
+     // 透明なナビゲーションバーを設定
+     async setTransparent() {
+       await NavigationBar.setColor({
+         color: '#00000000', // 透明
+         darkButtons: true
+       });
+     }
+
+     // アプリテーマに合わせる
+     async matchAppTheme(primaryColor: string, isLight: boolean) {
+       await NavigationBar.setColor({
+         color: primaryColor,
+         darkButtons: isLight
+       });
+     }
+
+     // 現在のナビゲーションバーの色を取得
+     async getCurrentColor() {
+       const result = await NavigationBar.getColor();
+       console.log('Current color:', result.color);
+       return result.color;
+     }
+
+     // デフォルトにリセット
+     async resetToDefault() {
+       await NavigationBar.setColor({
+         color: '#000000',
+         darkButtons: false
+       });
+     }
+   }
+   ```
+
+5. **アプリライフサイクルとの統合**
+   ```typescript
+   import { App } from '@capacitor/app';
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // アプリ状態変更時にナビゲーションバーを更新
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       // アプリのナビゲーションバーの色を復元
+       await NavigationBar.setColor({
+         color: '#YourAppColor',
+         darkButtons: true
+       });
+     }
+   });
+
+   // テーマ変更を処理
+   window.matchMedia('(prefers-color-scheme: dark)')
+     .addEventListener('change', async (e) => {
+       await NavigationBar.setColor({
+         color: e.matches ? '#121212' : '#FFFFFF',
+         darkButtons: !e.matches
+       });
+     });
+   ```
+</Steps>
+
+## APIリファレンス
+
+### メソッド
+
+#### `setColor(options: ColorOptions)`
+ナビゲーションバーの色とボタンスタイルを設定します。
+
+**パラメータ：**
+- `options`: 設定オブジェクト
+  - `color`: string - 16進数カラーコード（例：'#FF0000'）
+  - `darkButtons`: boolean - ダークボタンを使用（true）またはライトボタン（false）
+
+**戻り値：** `Promise<void>`
+
+#### `getColor()`
+現在のナビゲーションバーの色を取得します。
+
+**戻り値：** `Promise<{ color: string }>`
+
+### インターフェース
+
+```typescript
+interface ColorOptions {
+  color: string;      // 16進数カラーコード
+  darkButtons: boolean; // ボタンスタイル
+}
+
+interface ColorResult {
+  color: string;      // 現在の16進数カラー
+}
+```
+
+## プラットフォームノート
+
+### Android
+- Android 5.0（APIレベル21）以上が必要
+- 色の変更は即座に反映されます
+- 透明色がサポートされています（アルファチャネルを使用）
+- ジェスチャーナビゲーションを使用するデバイスでは、ナビゲーションバーが表示されない場合があります
+
+### iOS
+- このプラグインはiOSデバイスでは効果がありません
+- iOSはシステムナビゲーションをカスタマイズするAPIを提供していません
+
+## 一般的な使用例
+
+1. **ブランドの一貫性**：ナビゲーションバーをアプリのプライマリカラーに合わせる
+2. **テーマサポート**：ライト/ダークテーマに動的に適応
+3. **没入型体験**：フルスクリーンコンテンツに透明なナビゲーションを使用
+4. **ステータス表示**：アプリの状態（録音中、エラーなど）を示すために色を変更
+
+## ベストプラクティス
+
+1. **色のコントラスト**：ナビゲーションバーとボタンの間に十分なコントラストを確保
+   ```typescript
+   // 良いコントラストの例
+   setColor({ color: '#FFFFFF', darkButtons: true });  // 白いバー、ダークボタン
+   setColor({ color: '#000000', darkButtons: false }); // 黒いバー、ライトボタン
+   ```
+
+2. **テーマの一貫性**：テーマが変更されたときにナビゲーションバーを更新
+3. **アクセシビリティ**：色を選択する際に視覚障害のあるユーザーを考慮
+4. **パフォーマンス**：ユーザーの気を散らす可能性のある頻繁な色の変更を避ける
+
+## トラブルシューティング
+
+**ナビゲーションバーが変更されない：**
+- デバイスがAndroid 5.0以上を実行していることを確認
+- デバイスでジェスチャーナビゲーションが有効になっているか確認
+- 色の形式が有効な16進数（例：'#FF0000'）であることを確認
+
+**ボタンが表示されない：**
+- `darkButtons`パラメータが背景色と一致していることを確認
+- ライトな背景には`darkButtons: true`が必要
+- ダークな背景には`darkButtons: false`が必要
+
+**色が異なって見える：**
+- 一部のAndroidバージョンでは色がわずかに変更される場合があります
+- 最良の結果を得るために完全に不透明な色を使用

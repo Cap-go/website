@@ -1,0 +1,173 @@
+---
+title: Inicio de sesión de Google con Firebase en iOS
+locale: es
+description: Aprende cómo configurar el inicio de sesión de Google con Firebase Authentication en iOS usando el plugin Capacitor Social Login.
+sidebar:
+    order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Introducción
+
+Esta guía te ayudará a integrar el inicio de sesión de Google con Firebase Authentication en iOS. Asumo que ya has completado la [configuración general de Google con Firebase](./general/).
+
+:::note
+Asumiré que aún no has creado tu aplicación de iOS en la consola de Firebase. Si ya lo has hecho, tus pasos serán ligeramente diferentes.
+:::
+
+## Pasos de configuración
+
+<Steps>
+1. Ve a la descripción general de tu proyecto en [console.cloud.google.com](https://console.cloud.google.com/)
+    <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+
+2. Haz clic en el botón `Add app`
+    <img src="/social-login-assets/firebase_project_add_app.webp" alt="Firebase Add App Button" />
+
+    :::note
+    Es posible que tengas que buscar este botón aquí. Esto solo aplica si ya has creado una aplicación diferente en la consola de Firebase.
+    :::
+
+    <img src="/social-login-assets/firebase_project_add_app_2.webp" alt="Firebase Add App Button" />
+3. Selecciona `iOS`
+    <img src="/social-login-assets/firebase_project_add_app_ios.webp" alt="Firebase Add App iOS Button" />
+
+4. Completa la primera parte del formulario
+   1. Completa el `Apple bundle ID`
+      1. Abre Xcode en tu aplicación usando `npx cap open ios`
+      2. Haz doble clic en `App`
+         <img src="/social-login-assets/xcode_app_click.png" alt="App target in Xcode project navigator" />
+      3. Asegúrate de estar en `Targets -> App`
+         <img src="/social-login-assets/xcode_targets_app.png" alt="Targets section in Xcode with App selected" />
+      4. Encuentra tu `Bundle Identifier`
+          <img src="/social-login-assets/xcode_bundle_id.png" alt="Bundle Identifier field in Xcode project settings" />
+          :::note
+          El ID mostrado aquí será diferente del que usaré para el resto de la guía. Usaré `app.capgo.plugin.SocialLogin` para el resto de la guía.
+          :::
+      5. Copia el `Bundle Identifier` y pégalo en la consola de Firebase
+         <img src="/social-login-assets/firebase_project_add_app_ios_bundle_id.webp" alt="Firebase Add App iOS Bundle ID Field" />
+   2. Haz clic en el botón `Register app`
+         <img src="/social-login-assets/firebase_project_add_app_ios_register.webp" alt="Firebase Add App iOS Register Button" />
+5. Omite el paso `Download config file`
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download.webp" alt="Firebase Add App iOS Skip Download Button" />
+6. Omite el paso `Add firebase SDK`
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download_firebase_sdk_2.webp" alt="Firebase Add App iOS Skip Download Firebase SDK Button" />
+7. Omite el paso `Add initialization code`
+    <img src="/social-login-assets/firebase_project_add_app_ios_skip_download_firebase_sdk.webp" alt="Firebase Add App iOS Skip Add Initialization Code Button" />
+8. Haz clic en el botón `Continue to console`
+    <img src="/social-login-assets/firebase_project_add_app_ios_continue_to_console.webp" alt="Firebase Add App iOS Continue to Console Button" />
+9. Obtén tu ID de cliente de iOS y tu `YOUR_DOT_REVERSED_IOS_CLIENT_ID`
+   1. Ve a la consola de Google Cloud en [console.cloud.google.com](https://console.cloud.google.com/)
+   2. Encuentra tu proyecto
+      1. Haz clic en el selector de proyectos
+         <img src="/social-login-assets/firebase_double_check_gc_project_select.webp" alt="Google Cloud Console Project Selector" />
+      2. Busca tu proyecto por el nombre exacto de tu proyecto de Firebase y haz clic en él. En mi caso, es `sociallogin-tutorial-app`.
+         <img src="/social-login-assets/firebase_gc_project_select_project.webp" alt="Firebase Project Selector Project" />
+   3. Abre la barra de búsqueda y abre `credentials`
+      1. Abre la barra de búsqueda
+         <img src="/social-login-assets/firebase_double_check_gc_search_bar.webp" alt="Google Cloud Console Search Bar" />
+      2. Busca `credentials` y haz clic en el de `APIs and Services` (número 2 en la captura de pantalla)
+         <img src="/social-login-assets/firebase_gc_credentials_search.webp" alt="Google Cloud Console Credentials Search" />
+   4. Haz clic en el `iOS client for [YOUR_APP_ID] (auto created by Google Service)`. En mi caso, es `sociallogin-tutorial-app`.
+      <img src="/social-login-assets/firebase_gc_credentials_ios_client_id.webp" alt="Google Cloud Console Credentials iOS Client ID" />
+   5. Copia el `Client ID` así como el `iOS URL scheme`. Estos serán respectivamente tu `iOSClientId` y `YOUR_DOT_REVERSED_IOS_CLIENT_ID`.
+
+      :::note
+      Pasarás el `iOSClientId` en el método `initialize` del plugin, mientras que usarás el `YOUR_DOT_REVERSED_IOS_CLIENT_ID` en el archivo `Info.plist` de tu aplicación, como se explica en la siguiente parte de esta guía.
+      :::
+
+      <img src="/social-login-assets/firebase_gc_credentials_ios_client_id_copy.webp" alt="Google Cloud Console Credentials iOS Client ID Copy" />
+10. Obtén tu ID de cliente web
+    1. Vuelve a la consola de Firebase y ve a `Build` -> `Authentication`
+        <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+    2. Haz clic en el botón `Sign-in method`
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method.webp" alt="Firebase Authentication Sign-in Method Button" />
+    3. Haz clic en el proveedor `Google`
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_google.webp" alt="Firebase Authentication Sign-in Method Google Provider" />
+    4. Haz clic en el botón `Web SDK configuration`
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration.webp" alt="Firebase Authentication Sign-in Method Web SDK Configuration Button" />
+    5. Copia el `Web client ID`. Este será tu `webClientId` en el método `initialize` del plugin.
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration_web_client_id.webp" alt="Firebase Authentication Sign-in Method Web SDK Configuration Web Client ID" />
+11. Modifica el Info.plist de tu aplicación
+    1. Abre Xcode y encuentra el archivo `Info.plist`
+        <img src="/social-login-assets/xcode_info_file.png" alt="Info.plist file in Xcode project navigator" />
+    2. Haz clic derecho en este archivo y ábrelo como código fuente
+        <img src="/social-login-assets/xcode_open_as_src_code.png" alt="Right-click menu showing Open As Source Code option" />
+    3. Al final de tu archivo `Plist`, verás una etiqueta `</dict>`
+        <img src="/social-login-assets/xcode_dict_tag.png" alt="Closing dict tag in Info.plist file" />
+    4. Inserta el siguiente fragmento justo antes de la etiqueta de cierre `</dict>`
+        <img src="/social-login-assets/xcode_plist_inserted.png" alt="Info.plist with URL schemes code inserted before closing dict tag" />
+
+        ```xml
+        <key>CFBundleURLTypes</key>
+        <array>
+        <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>YOUR_DOT_REVERSED_IOS_CLIENT_ID</string>
+          </array>
+        </dict>
+        </array>
+        <key>GIDClientID</key>
+        <string>YOUR_IOS_CLIENT_ID.apps.googleusercontent.com</string>
+        ```
+
+    5. Cambia el `YOUR_DOT_REVERSED_IOS_CLIENT_ID` al valor copiado en el paso 9 (el esquema de URL de iOS)
+        <img src="/social-login-assets/xcode_plist_final.png" alt="Info.plist with actual reversed client ID inserted in URL schemes" />
+
+        :::caution
+        Asegúrate de que este valor **COMIENCE** con `com.googleusercontent.apps`
+        :::
+
+   6. Cambia el `YOUR_IOS_CLIENT_ID` al ID de cliente de iOS que copiaste en el paso 9
+
+   7. Guarda el archivo con `Command + S`
+
+12. Modifica el `AppDelegate.swift`
+    1. Abre el AppDelegate
+        <img src="/social-login-assets/xcode_app_deleg.png" alt="AppDelegate.swift file in Xcode project navigator" />
+    2. Inserta `import GoogleSignIn` en la parte superior del archivo
+        <img src="/social-login-assets/xcode_app_deleg_google_sign_in.png" alt="AppDelegate.swift with GoogleSignIn import added" />
+    3. Encuentra la función `func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])`
+        <img src="/social-login-assets/xcode_app_deleg_app_fn.png" alt="Original application openURL function in AppDelegate" />
+    4. Modifica la función para que se vea así
+
+        ```swift
+        func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+            // Called when the app was launched with a url. Feel free to add additional processing here,
+            // but if you want the App API to support tracking app url opens, make sure to keep this call
+
+            var handled: Bool
+
+            handled = GIDSignIn.sharedInstance.handle(url)
+            if handled {
+              return true
+            }
+
+            return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
+        }
+        ```
+
+        <img src="/social-login-assets/xcode_app_deleg_app_fn_mod.png" alt="Modified application openURL function with GoogleSignIn handling" />
+
+    5. Guarda el archivo con `Command + S`
+
+15. Usando el inicio de sesión de Google en tu aplicación
+
+    En este paso, estás listo para usar el inicio de sesión de Google en tu aplicación.
+    Por favor usa el archivo [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) de la aplicación de ejemplo para autenticarte con Google.
+</Steps>
+
+ El usuario se creará automáticamente en Firebase Auth en el primer inicio de sesión
+
+## Solución de problemas
+
+Si la autenticación se bloquea o falla:
+
+- Verifica que la audiencia del `idToken` coincida con tu ID de cliente web de Firebase
+- Verifica que el inicio de sesión de Google esté habilitado en la consola de Firebase
+- Asegúrate de que Info.plist tenga los esquemas de URL correctos y GIDClientID
+- Verifica que `iOSServerClientId` coincida con tu ID de cliente web
+- Revisa el [código de la aplicación de ejemplo](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/src/authUtils.ts) como referencia
+
+

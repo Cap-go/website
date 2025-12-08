@@ -1,0 +1,426 @@
+---
+title: Integrasi GitLab CI/CD
+description: "Pelajari cara mengintegrasikan Capgo Live Updates dengan GitLab CI/CD untuk deployment otomatis pembaruan aplikasi Anda."
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Integrasikan Capgo Live Updates dengan GitLab CI/CD untuk secara otomatis men-deploy pembaruan aplikasi Anda setiap kali Anda push perubahan kode. Panduan ini mencakup pengaturan build otomatis, testing, dan workflow deployment.
+
+## Prasyarat
+
+Sebelum mengatur integrasi GitLab CI/CD, pastikan Anda memiliki:
+
+- Akun GitLab dengan repositori proyek
+- Akun Capgo dengan aplikasi yang sudah dikonfigurasi
+- Node.js dan npm/yarn yang dikonfigurasi dalam proyek Anda
+
+## Mengatur GitLab CI/CD
+
+### Langkah 1: Konfigurasi Variabel Environment
+
+Pertama, atur variabel yang diperlukan dalam proyek GitLab Anda:
+
+<Steps>
+
+1. Navigasi ke proyek GitLab Anda
+2. Pergi ke **Settings** → **CI/CD** → **Variables**
+3. Tambahkan variabel berikut:
+
+</Steps>
+
+| Nama Variabel | Nilai | Protected | Masked |
+|---------------|-------|-----------|--------|
+| `CAPGO_TOKEN` | Token API Capgo Anda | ✅ Ya | ✅ Ya |
+
+<Aside type="tip">
+
+Dapatkan token API Capgo Anda dari [console.capgo.app/apikeys](https://console.capgo.app/apikeys). ID aplikasi Anda sudah dikonfigurasi dalam file `capacitor.config.ts` Anda.
+
+</Aside>
+
+## Sederhana
+
+Konfigurasi dasar yang men-deploy ke production pada setiap push ke branch main:
+
+```yaml
+# .gitlab-ci.yml - Simple Configuration
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+  only:
+    - main
+
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+    # For encrypted uploads, add: --key-data-v2 "$CAPGO_PRIVATE_KEY"
+  dependencies:
+    - build
+  only:
+    - main
+```
+
+## Lanjutan
+
+### Deployment Branch Fitur
+
+Deploy branch fitur ke channel test untuk review dan testing:
+
+```yaml
+# Feature branch deployment
+deploy_feature:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - CHANNEL_NAME="feature-$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9-]/-/g')"
+    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+  dependencies:
+    - build
+  only:
+    - /^feature\/.*$/
+  environment:
+    name: feature/$CI_COMMIT_REF_NAME
+    url: https://your-app.com/channels/$CHANNEL_NAME
+```
+
+<Aside type="tip">
+
+**Testing dengan Channels**: Setelah men-deploy ke channel fitur, Anda dapat menguji pembaruan dalam aplikasi Anda dengan mengonfigurasinya untuk menggunakan channel tertentu. Pelajari lebih lanjut tentang [mengonfigurasi channel dalam aplikasi Anda](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+
+</Aside>
+
+### Menggunakan Enkripsi
+
+Jika Anda menggunakan [fitur enkripsi Capgo](/docs/live-updates/encryption/), Anda perlu menyimpan private key Anda dengan aman di environment CI/CD Anda.
+
+Setelah [mengatur encryption keys](/docs/live-updates/encryption/#setting-up-encryption) secara lokal, tambahkan private key Anda ke variabel GitLab:
+
+```shell
+# Display your private key content (copy this output)
+cat .capgo_key_v2
+```
+
+Tambahkan konten ini sebagai `CAPGO_PRIVATE_KEY` dalam variabel proyek GitLab Anda (tandai sebagai protected dan masked), kemudian gunakan dalam pipeline:
+
+```yaml
+# Deploy with encryption
+deploy_production:
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**Praktik Terbaik Keamanan:**
+- Jangan pernah commit file `.capgo_key_v2` ke version control
+- Simpan private key hanya dalam manajemen secret CI/CD yang aman
+- Gunakan kunci yang berbeda untuk environment yang berbeda
+
+</Aside>
+
+### Konfigurasi Multi-Channel
+
+Untuk informasi komprehensif tentang pengaturan dan pengelolaan channel deployment multiple, lihat [dokumentasi Channels](/docs/live-updates/channels/).
+
+Konfigurasi lengkap dengan environment multiple dan deployment merge request:
+
+```yaml
+# .gitlab-ci.yml - Advanced Multi-Channel Configuration
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+# Build stage
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 24 hours
+
+# Deploy to development channel
+deploy_development:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel development
+  dependencies:
+    - build
+  only:
+    - develop
+  environment:
+    name: development
+
+# Deploy merge requests to test channels
+deploy_mr:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - CHANNEL_NAME="mr-$CI_MERGE_REQUEST_IID"
+    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+  dependencies:
+    - build
+  only:
+    - merge_requests
+  environment:
+    name: review/$CI_MERGE_REQUEST_IID
+    url: https://your-app.com/channels/mr-$CI_MERGE_REQUEST_IID
+    on_stop: cleanup_mr
+
+# Cleanup MR channels when MR is closed
+cleanup_mr:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli channel delete mr-$CI_MERGE_REQUEST_IID --apikey $CAPGO_TOKEN || true
+  when: manual
+  environment:
+    name: review/$CI_MERGE_REQUEST_IID
+    action: stop
+  only:
+    - merge_requests
+
+# Deploy to staging
+deploy_staging:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel staging
+  dependencies:
+    - build
+  only:
+    - develop
+  environment:
+    name: staging
+
+# Deploy to production
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  dependencies:
+    - build
+  only:
+    - main
+  environment:
+    name: production
+```
+
+### Multi-Environment dengan Persetujuan Manual
+
+Untuk deployment production yang memerlukan persetujuan manual:
+
+```yaml
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  dependencies:
+    - build
+  only:
+    - main
+  when: manual
+  environment:
+    name: production
+```
+
+### Strategi Deployment Berbasis Branch
+
+Deploy branch yang berbeda ke channel yang sesuai secara otomatis:
+
+```yaml
+# Dynamic channel deployment based on branch
+deploy:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        CHANNEL="production"
+      elif [ "$CI_COMMIT_REF_NAME" = "develop" ]; then
+        CHANNEL="staging"
+      else
+        CHANNEL="development"
+      fi
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL
+  dependencies:
+    - build
+  environment:
+    name: $CHANNEL
+```
+
+## Praktik Terbaik Keamanan
+
+### Variabel Protected
+
+<Steps>
+
+1. **Tandai Variabel Sensitif**: Selalu tandai token API sebagai protected dan masked
+2. **Perlindungan Branch**: Gunakan variabel protected untuk deployment production
+3. **Kontrol Akses**: Batasi akses variabel hanya untuk maintainer
+4. **Rotasi Reguler**: Rotasi token API secara berkala
+
+</Steps>
+
+### Konfigurasi Pipeline Aman
+
+```yaml
+# Use protected variables for production
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  only:
+    refs:
+      - main
+    variables:
+      - $CI_COMMIT_REF_PROTECTED == "true"
+```
+
+## Monitoring dan Notifikasi
+
+### Integrasi Slack
+
+Tambahkan notifikasi Slack ke pipeline Anda:
+
+```yaml
+notify_success:
+  stage: .post
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - |
+      curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"✅ Capgo deployment successful for '"$CI_COMMIT_REF_NAME"'"}' \
+        $SLACK_WEBHOOK_URL
+  when: on_success
+
+notify_failure:
+  stage: .post
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - |
+      curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"❌ Capgo deployment failed for '"$CI_COMMIT_REF_NAME"'"}' \
+        $SLACK_WEBHOOK_URL
+  when: on_failure
+```
+
+### Notifikasi Email
+
+Konfigurasi notifikasi email dalam pengaturan proyek GitLab Anda atau gunakan API:
+
+```yaml
+notify_email:
+  stage: .post
+  script:
+    - |
+      curl --request POST \
+        --header "PRIVATE-TOKEN: $GITLAB_API_TOKEN" \
+        --form "to=team@yourcompany.com" \
+        --form "subject=Capgo Deployment Status" \
+        --form "body=Deployment of $CI_COMMIT_REF_NAME completed with status: $CI_JOB_STATUS" \
+        "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/emails"
+  when: always
+```
+
+## Pemecahan Masalah
+
+### Masalah Umum
+
+**Pipeline gagal dengan "Capgo CLI not found":**
+```yaml
+# Debug CLI installation
+debug_cli:
+  script:
+    - npm install -g @capgo/cli
+    - which capgo || echo "Capgo CLI not found"
+    - npx @capgo/cli --version
+```
+
+**Kesalahan autentikasi:**
+```yaml
+# Verify token configuration
+debug_auth:
+  script:
+    - |
+      if [ -z "$CAPGO_TOKEN" ]; then
+        echo "CAPGO_TOKEN is not set"
+        exit 1
+      fi
+      echo "Token length: ${#CAPGO_TOKEN}"
+```
+
+**Build artifacts tidak ditemukan:**
+```yaml
+# List build outputs
+debug_build:
+  script:
+    - ls -la dist/
+    - find dist/ -type f -name "*.js" -o -name "*.html"
+```
+
+### Debug Pipeline
+
+Tambahkan informasi debugging untuk memecahkan masalah:
+
+```yaml
+debug:
+  stage: build
+  script:
+    - echo "Branch: $CI_COMMIT_REF_NAME"
+    - echo "Commit: $CI_COMMIT_SHA"
+    - echo "Build: $CI_PIPELINE_ID"
+    - env | grep CI_ | sort
+  only:
+    - branches
+```
+
+## Langkah Selanjutnya
+
+- Pelajari tentang [Channels](/docs/live-updates/channels/) untuk mengelola environment deployment yang berbeda
+- Jelajahi [Custom Storage](/docs/live-updates/custom-storage/) untuk skenario deployment lanjutan
+- Atur [Encryption](/docs/live-updates/encryption/) untuk deployment yang aman
+- Konfigurasikan [Update Behavior](/docs/live-updates/update-behavior/) untuk menyesuaikan cara penerapan pembaruan
+
+Dengan integrasi GitLab CI/CD, Anda dapat mengotomatiskan deployment Capgo Anda dan memastikan pembaruan yang konsisten dan andal untuk pengguna aplikasi mobile Anda.

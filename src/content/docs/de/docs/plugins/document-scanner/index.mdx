@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-document-scanner"
+locale: de
+description: Erfassen Sie gestochen scharfe Dokumente mit automatischer Kantenerkennung und exportieren Sie gescannte Seiten aus Ihrer Capacitor-App.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Starten Sie eine ausgefeilte Dokumentenscan-Erfahrung mit automatischem Zuschneiden, mehrseitigem Erfassen und konfigurierbaren Ausgabeformaten.
+  image:
+    file: ~public/icons/plugins/document-scanner.svg
+  actions:
+    - text: Los geht's
+      link: /docs/plugins/document-scanner/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-document-scanner/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Das Document Scanner Plugin bietet Ihrer Capacitor-App einen nativen Scan-Workflow in Qualität, der auf iOS- und Android-Geräten funktioniert.
+
+<CardGrid stagger>
+  <Card title="Automatische Erkennung" icon="rocket">
+    Erkennen Sie Seitenkanten, schneiden Sie automatisch zu und lassen Sie Benutzer vor dem Speichern anpassen.
+  </Card>
+  <Card title="Mehrseitiges Erfassen" icon="star">
+    Erfassen Sie eine oder mehrere Seiten in einer einzigen Scan-Sitzung mit anpassbaren Limits.
+  </Card>
+  <Card title="Benutzerdefinierte Ausgabe" icon="download">
+    Geben Sie entweder Dateipfade oder Base64-Strings mit der von Ihnen gewählten Bildqualität zurück.
+  </Card>
+  <Card title="Einheitliche API" icon="pencil">
+    Eine TypeScript-Schnittstelle umfasst sowohl iOS- als auch Android-Implementierungen.
+  </Card>
+</CardGrid>
+
+Verwenden Sie die Anleitung für erste Schritte, um Kameraberechtigungen zu aktivieren, Qualitätseinstellungen zu konfigurieren und gescannte Dateien in Ihren Speicher-Workflow zu exportieren.

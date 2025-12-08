@@ -1,0 +1,302 @@
+---
+title: 自定义存储
+locale: zh
+description: "了解如何在 Capgo 实时更新中使用自定义存储解决方案,包括外部 URL、S3 集成和 bundle 加密,实现安全部署。"
+sidebar:
+  order: 6
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo 支持为应用 bundle 使用自定义存储解决方案,允许您在自己的基础设施或第三方存储服务上托管更新。这对于具有特定安全要求、合规需求或现有存储基础设施的组织特别有用。
+
+## 概述
+
+Capgo 中的自定义存储通过将 bundle 上传到外部位置并向 Capgo 提供访问它的 URL 来工作。然后,Capgo SDK 将直接从您的自定义存储位置下载更新,而不是 Capgo 的默认云存储。
+
+<Aside type="tip">
+
+自定义存储非常适合:
+- 具有严格数据驻留要求的组织
+- 拥有现有 CDN 或存储基础设施的团队
+- 需要额外安全层的应用
+- 针对大型 bundle 大小的成本优化
+
+</Aside>
+
+## 外部 URL 上传
+
+使用自定义存储的最简单方法是将 bundle 上传到任何可公开访问的 URL,并将该 URL 提供给 Capgo。
+
+### 基本外部 URL 上传
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip
+```
+
+此命令告诉 Capgo 引用指定 URL 的 bundle,而不是将其上传到 Capgo 的云存储。
+
+### 使用加密
+
+对于安全的外部存储,您可以加密 bundle 并提供解密密钥:
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip --iv-session-key YOUR_IV_SESSION_KEY
+```
+
+## S3 集成
+
+Capgo 为 Amazon S3 和 S3 兼容存储服务提供内置支持。CLI 可以自动将 bundle 上传到 S3 并配置 Capgo 使用 S3 URL。
+
+### S3 上传选项
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-bucket-name your-bucket-name
+```
+
+### 完整 S3 配置
+
+对于 S3 兼容服务或自定义端点:
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-endpoint https://s3.your-provider.com \
+  --s3-bucket-name your-bucket-name \
+  --s3-port 443 \
+  --no-s3-ssl  # 仅当您的端点不支持 SSL 时
+```
+
+### S3 配置参数
+
+| 参数 | 描述 | 必需 |
+|-----------|-------------|----------|
+| `--s3-region` | S3 存储桶的 AWS 区域 | 是 |
+| `--s3-apikey` | S3 访问密钥 ID | 是 |
+| `--s3-apisecret` | S3 密钥访问密钥 | 是 |
+| `--s3-bucket-name` | S3 存储桶名称 | 是 |
+| `--s3-endpoint` | 自定义 S3 端点 URL | 否 |
+| `--s3-port` | S3 端点端口 | 否 |
+| `--no-s3-ssl` | 禁用 S3 上传的 SSL | 否 |
+
+## Bundle 准备和加密
+
+使用自定义存储时,尤其是使用加密时,您需要正确准备 bundle。这涉及创建 zip 文件并可选择加密它。
+
+### 步骤 1:创建 Zip Bundle
+
+首先,创建应用 bundle 的 zip 文件:
+
+```shell
+npx @capgo/cli@latest bundle zip com.example.app --path ./dist
+```
+
+zip 命令将返回 zip 文件的校验和。如果需要,您可以使用此校验和来加密 zip 文件。使用 `--json` 选项获取包含校验和的结构化输出。
+
+#### Zip 命令选项
+
+```shell
+npx @capgo/cli@latest bundle zip [appId] \
+  --path ./dist \
+  --bundle 1.2.3 \
+  --name myapp-v1.2.3 \
+  --json \
+  --no-code-check \
+  --key-v2 \
+  --package-json ../../package.json,./package.json
+```
+
+| 选项 | 描述 |
+|--------|-------------|
+| `--path` | 要压缩的文件夹路径(默认为 capacitor.config 中的 webDir) |
+| `--bundle` | Bundle 版本号用于命名 zip 文件 |
+| `--name` | zip 文件的自定义名称 |
+| `--json` | 以 JSON 格式输出结果(包括校验和) |
+| `--no-code-check` | 跳过检查 notifyAppReady() 调用和索引文件 |
+| `--key-v2` | 使用加密 v2 |
+| `--package-json` | monorepos 的 package.json 文件路径(逗号分隔) |
+
+### 步骤 2:加密 Bundle(可选)
+
+为增强安全性,在上传前加密 zip bundle:
+
+```shell
+# 使用默认本地密钥
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM
+
+# 使用自定义密钥文件
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key ./path/to/.capgo_key_v2
+
+# 直接使用密钥数据
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key-data "PRIVATE_KEY_CONTENT"
+```
+
+`CHECKSUM` 参数是必需的,应该是 zip 文件的校验和。您可以从 zip 命令输出中获取校验和(使用 `--json` 选项获取结构化输出)。
+
+默认情况下,encrypt 命令将使用本地私有签名密钥。您可以使用 `--key` 或 `--key-data` 选项指定自定义密钥。
+
+encrypt 命令将返回上传或解密所需的 `ivSessionKey`。
+
+#### 加密命令选项
+
+| 选项 | 描述 |
+|--------|-------------|
+| `zipPath` | 要加密的 zip 文件路径(必需) |
+| `checksum` | zip 文件的校验和(必需)- 从 zip 命令获取 |
+| `--key` | 私有签名密钥的自定义路径(可选,默认使用本地密钥) |
+| `--key-data` | 直接提供私有签名密钥数据(可选) |
+| `--json` | 以 JSON 格式输出结果 |
+
+<Aside type="caution">
+
+encrypt 命令将输出一个 `ivSessionKey`,您在使用 `--iv-session-key` 选项上传时需要提供。
+
+</Aside>
+
+## 完整工作流程示例
+
+### 示例 1:使用加密的外部 URL
+
+<Steps>
+
+1. **构建您的应用:**
+   ```shell
+   npm run build
+   ```
+
+2. **创建 zip bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --bundle 1.2.3
+   ```
+
+   记下此命令返回的校验和。
+
+3. **加密 bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app-1.2.3.zip CHECKSUM_FROM_STEP_2
+   ```
+
+   记下输出中的 `ivSessionKey`。
+
+4. **上传到您的存储:**
+   将加密的 zip 文件上传到您的托管服务。
+
+5. **在 Capgo 中注册:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --external https://your-cdn.com/bundles/com.example.app-1.2.3.zip \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_3
+   ```
+
+</Steps>
+
+### 示例 2:直接 S3 上传
+
+<Steps>
+
+1. **构建您的应用:**
+   ```shell
+   npm run build
+   ```
+
+2. **直接上传到 S3:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --channel Production
+   ```
+
+</Steps>
+
+### 示例 3:使用加密的 S3
+
+<Steps>
+
+1. **构建和压缩:**
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **加密 bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM
+   ```
+
+3. **上传到 S3 并加密:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_2 \
+     --channel Production
+   ```
+
+</Steps>
+
+## 安全考虑
+
+使用自定义存储时,请考虑以下安全最佳实践:
+
+### 访问控制
+- 确保您的存储 URL 可供应用用户访问,但不可公开发现
+- 尽可能使用签名 URL 或基于令牌的身份验证
+- 为基于 Web 的应用实施适当的 CORS 标头
+
+### 加密
+- 始终使用 Capgo 加密工具加密敏感 bundle
+- 安全存储加密密钥并定期轮换
+- 对所有 bundle URL 使用 HTTPS(iOS 和 Android 必需)
+
+### 监控
+- 监控访问日志以检测异常下载模式
+- 为失败的 bundle 下载设置警报
+- 定期审核您的存储权限
+
+## 故障排除
+
+### 常见问题
+
+**Bundle 未下载:**
+- 验证 URL 是否可公开访问并使用 HTTPS(iOS 和 Android 必需)
+- 检查 Web 应用的 CORS 标头
+- 确保 bundle 格式正确
+
+**加密错误:**
+- 验证 `ivSessionKey` 是否与加密的 bundle 匹配
+- 检查 bundle 是否使用正确的密钥加密
+- 确保新 bundle 使用加密 v2
+
+**S3 上传失败:**
+- 验证您的 S3 凭据和权限
+- 检查存储桶策略和 CORS 配置
+- 确保指定的区域正确
+
+### 调试命令
+
+检查 bundle 状态:
+```shell
+npx @capgo/cli@latest app debug
+```
+
+验证 bundle 完整性:
+```shell
+npx @capgo/cli@latest bundle list
+```
+
+## 后续步骤
+
+- 了解[渠道](/docs/live-updates/channels/)以管理不同的部署环境
+- 探索[更新行为](/docs/live-updates/update-behavior/)以自定义更新的应用方式
+- 设置 [CI/CD 集成](/docs/getting-started/cicd-integration/)以自动化自定义存储工作流程

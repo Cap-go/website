@@ -1,0 +1,344 @@
+---
+title: Crittografia
+description: "Scopri come la crittografia end-to-end di Capgo protegge i bundle della tua app durante la trasmissione e l'archiviazione, proteggendo il tuo codice e i dati degli utenti."
+sidebar:
+  order: 5
+locale: it
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo fornisce una solida crittografia end-to-end per i bundle della tua app, garantendo che il tuo codice JavaScript e le risorse siano protette durante la trasmissione e l'archiviazione. Questo sistema di crittografia è progettato per darti il controllo completo sulla sicurezza della tua app mantenendo la comodità degli aggiornamenti live.
+
+## Panoramica
+
+Il sistema di crittografia di Capgo utilizza metodi crittografici standard del settore per proteggere i tuoi bundle dall'accesso non autorizzato. Quando la crittografia è abilitata, i tuoi bundle vengono crittografati prima di lasciare il tuo ambiente di sviluppo e rimangono crittografati fino a quando non vengono decrittografati dalla tua app sul dispositivo dell'utente.
+
+**Vera crittografia end-to-end**: A differenza di altre piattaforme di aggiornamento OTA che si limitano a firmare gli aggiornamenti (lasciando il codice leggibile pubblicamente), Capgo fornisce vera crittografia end-to-end. Questo significa che solo i tuoi utenti possono decrittografare i tuoi aggiornamenti - nessun altro, incluso Capgo stesso. Il contenuto del tuo bundle rimane completamente privato e illeggibile durante l'intero processo di distribuzione.
+
+<Aside type="tip">
+
+La crittografia è particolarmente importante per:
+- App che gestiscono dati sensibili o logica di business
+- Applicazioni aziendali con requisiti di conformità
+- App distribuite in settori regolamentati
+- Organizzazioni con politiche di sicurezza rigorose
+
+</Aside>
+
+## Come funziona la crittografia
+
+Capgo utilizza un approccio di crittografia ibrida che combina la crittografia RSA e AES per sicurezza e prestazioni ottimali:
+
+![Flusso di crittografia Capgo](/encryption_flow.webp)
+
+### 1. Generazione delle chiavi
+- **Chiave privata**: Generata e archiviata in modo sicuro nel tuo ambiente di sviluppo (utilizzata per la crittografia)
+- **Chiave pubblica**: Derivata dalla tua chiave privata e archiviata nella configurazione Capacitor della tua app (utilizzata per la decrittografia)
+- **Chiavi di sessione**: Chiavi AES casuali generate per ogni caricamento di bundle
+
+### 2. Processo di crittografia
+1. Viene generata una chiave di sessione AES casuale per ogni caricamento di bundle
+2. Il tuo bundle viene crittografato utilizzando la chiave di sessione AES
+3. Viene calcolato il checksum del bundle
+4. Sia la chiave di sessione AES che il checksum vengono crittografati insieme utilizzando la tua chiave privata RSA (creando la "firma")
+5. Il bundle crittografato e la firma crittografata vengono archiviati
+
+Il checksum viene crittografato insieme alla chiave AES per prevenire manomissioni. Poiché solo la tua chiave privata RSA può creare questa firma, e solo la corrispondente chiave pubblica può decrittografarla, questo garantisce che sia la chiave di sessione AES che il checksum previsto siano autentici e non siano stati modificati da un attaccante.
+
+### 3. Processo di decrittografia
+1. La tua app scarica il bundle crittografato e la firma crittografata
+2. L'SDK Capgo utilizza la tua chiave pubblica RSA (archiviata nell'app) per decrittografare la firma
+3. Questo rivela la chiave di sessione AES e il checksum originale
+4. La chiave di sessione AES viene utilizzata per decrittografare il bundle
+5. Viene calcolato un checksum del bundle decrittografato e confrontato con il checksum originale per la verifica dell'integrità
+
+Questo processo garantisce che anche se un attaccante intercetta il bundle crittografato, non può modificare la chiave di sessione AES o fornire un checksum falso, perché avrebbe bisogno della tua chiave privata per creare una firma valida che la chiave pubblica possa decrittografare.
+
+<Aside type="tip">
+
+RSA non può crittografare grandi quantità di dati in modo efficiente, quindi AES viene utilizzato per la crittografia effettiva del bundle mentre RSA protegge la chiave AES e fornisce la verifica dell'integrità attraverso la firma del checksum.
+
+</Aside>
+
+## Capgo vs altre piattaforme
+
+| Caratteristica | Capgo | Altre piattaforme OTA |
+|---------|-------|-------------------|
+| **Contenuto del bundle** | Completamente crittografato (illeggibile) | Leggibile pubblicamente |
+| **Metodo di sicurezza** | Vera crittografia end-to-end | Solo firma del codice |
+| **Livello di privacy** | Zero-knowledge (nemmeno Capgo può leggere il tuo codice) | La piattaforma può accedere al tuo codice |
+| **Protezione** | Contenuto + integrità + autenticità | Solo integrità + autenticità |
+
+**Perché è importante:**
+- **La firma del codice** verifica solo che gli aggiornamenti non siano stati manomessi e provengano dalla fonte corretta
+- **La crittografia end-to-end** garantisce che il contenuto effettivo del tuo codice rimanga privato e illeggibile durante la trasmissione e l'archiviazione
+- Con la vera crittografia end-to-end di Capgo, solo i tuoi utenti possono decrittografare gli aggiornamenti - nessun altro, incluso Capgo stesso
+
+## Metodi di crittografia
+
+Capgo utilizza Encryption V2 come metodo di crittografia standard:
+
+### Encryption V2 (standard attuale)
+- Utilizza RSA-4096 per una sicurezza maggiore
+- AES-256-GCM per la crittografia autenticata
+- Fornisce verifica dell'integrità
+- Migliori prestazioni e sicurezza
+
+### Encryption V1 (deprecata)
+- Utilizza RSA-2048 per la crittografia della chiave
+- AES-256-CBC per la crittografia del bundle
+- **Non più disponibile nel CLI attuale**
+- Le app legacy che utilizzano V1 devono migrare a V2
+
+<Aside type="danger">
+
+Encryption V1 non è più supportata nel CLI Capgo attuale. Se stai utilizzando la crittografia V1, devi migrare a V2. Consulta la [guida alla migrazione](/docs/upgrade/encryption-v1-to-v2/) per istruzioni dettagliate.
+
+</Aside>
+
+## Configurazione della crittografia
+
+### Passaggio 1: Generare le chiavi di crittografia
+
+Prima, genera le tue chiavi di crittografia usando il CLI Capgo:
+
+```shell
+# Genera nuove chiavi di crittografia (crea file nella directory corrente)
+npx @capgo/cli@latest key create
+```
+
+Questo crea:
+- `.capgo_key_v2`: La tua chiave privata (mantienila sicura!)
+- `.capgo_key_v2.pub`: La tua chiave pubblica (utilizzata dalla tua app)
+
+Questi file vengono creati nella directory corrente dove esegui il comando.
+
+<Aside type="caution">
+
+**Note importanti sull'archiviazione:**
+- **Chiave privata (`.capgo_key_v2`)**: Non committare mai questo nel controllo versione. Questo file dovrebbe essere mantenuto sicuro e utilizzato solo per la crittografia durante il caricamento dei bundle.
+- **Chiave pubblica (`.capgo_key_v2.pub`)**: È sicuro committare questo nel controllo versione come backup della tua chiave pubblica.
+- **Posizione dei file**: Le chiavi vengono create nella directory corrente dove esegui il comando `key create`.
+- **Chiave pubblica nella config**: Devi eseguire `key save` per archiviare la chiave pubblica nella configurazione Capacitor affinché l'app mobile la utilizzi.
+
+Per l'uso in produzione, archivia la chiave privata in modo sicuro (variabili d'ambiente, servizi di gestione chiavi) e rimuovila dal tuo progetto locale dopo la configurazione.
+
+</Aside>
+
+### Passaggio 2: Salvare la chiave pubblica nella configurazione Capacitor (richiesto)
+
+**Devi** salvare la tua chiave pubblica nella configurazione Capacitor in modo che la tua app mobile possa decrittografare i bundle:
+
+```shell
+# Salva la chiave pubblica dal file alla configurazione Capacitor (richiesto)
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+
+# Oppure salva i dati della chiave pubblica direttamente
+npx @capgo/cli@latest key save --key-data "$CAPGO_PUBLIC_KEY"
+```
+
+### Passaggio 3: Sincronizzare la piattaforma Capacitor (richiesto)
+
+Dopo aver salvato la chiave pubblica, **devi** sincronizzare la piattaforma Capacitor per copiare la configurazione aggiornata al layer nativo:
+
+```shell
+# Sincronizza la piattaforma per copiare la config al nativo
+npx cap sync
+```
+
+<Aside type="caution">
+
+**Passaggi richiesti**:
+1. Il comando `key save` archivia la chiave pubblica nella configurazione Capacitor
+2. `npx cap sync` copia questa configurazione al layer nativo dove l'app mobile può accedervi
+3. Senza entrambi i passaggi, la tua app non sarà in grado di decrittografare gli aggiornamenti crittografati
+
+</Aside>
+
+## Crittografare i bundle
+
+### Metodo 1: Crittografare durante il caricamento
+
+Il modo più semplice è crittografare durante il processo di caricamento:
+
+```shell
+# Carica con crittografia automatica
+npx @capgo/cli@latest bundle upload --key-v2
+
+# Per storage esterno, devi prima crittografare (vedi workflow di crittografia manuale sotto)
+```
+
+### Metodo 2: Workflow di crittografia manuale
+
+Per un maggiore controllo, puoi crittografare manualmente i bundle:
+
+<Steps>
+
+1. **Creare un bundle zip:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **Crittografare il bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
+   ```
+
+3. **Caricare sul tuo storage (es. S3) e registrare con Capgo:**
+   ```shell
+   # Prima carica il bundle crittografato sul tuo storage (es. AWS S3)
+   aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
+
+   # Poi registra con Capgo usando l'URL esterno
+   npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
+   ```
+
+</Steps>
+
+## Gestione delle chiavi
+
+### Archiviare le chiavi in modo sicuro
+
+**Opzioni per la chiave privata:**
+
+1. **File-based (sviluppo locale):**
+   ```shell
+   # Chiave archiviata come file .capgo_key_v2 nella root del progetto
+   npx @capgo/cli@latest bundle upload --key-v2
+   ```
+
+2. **Variabile d'ambiente (CI/CD):**
+   ```shell
+   # Archivia nella variabile d'ambiente per CI
+   export CAPGO_PRIVATE_KEY="$(cat .capgo_key_v2)"
+   npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
+   ```
+
+**Configurazione della chiave pubblica (richiesta):**
+```shell
+# Deve salvare la chiave pubblica nella configurazione Capacitor per l'app mobile
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+```
+
+**Ambiente di produzione:**
+- Archivia le chiavi private in servizi di gestione chiavi sicuri (AWS KMS, Azure Key Vault, ecc.)
+- Usa la gestione dei segreti CI/CD per le chiavi private
+- Non committare mai le chiavi private nel controllo versione
+
+**Uso delle chiavi:**
+- **Chiave privata**: Utilizzata dal CLI per la crittografia durante il caricamento del bundle (mantienila sicura)
+- **Chiave pubblica**: Archiviata nella configurazione dell'app per la decrittografia sul dispositivo (sicuro da committare)
+
+### Rotazione delle chiavi
+
+Ruota regolarmente le tue chiavi di crittografia per una sicurezza maggiore:
+
+<Steps>
+
+1. **Generare nuove chiavi:**
+   ```shell
+   # Prima naviga nella directory desiderata, poi crea le chiavi
+   mkdir ./new-keys && cd ./new-keys
+   npx @capgo/cli@latest key create
+   ```
+
+2. **Salvare la nuova chiave pubblica nella configurazione Capacitor:**
+   ```shell
+   npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
+   ```
+
+3. **Aggiornare la configurazione della tua app** con la nuova chiave pubblica
+
+4. **Distribuire l'app aggiornata** prima di caricare bundle crittografati con la nuova chiave
+
+</Steps>
+
+## Best practice di sicurezza
+
+### Sicurezza delle chiavi
+- **Non condividere mai le chiavi private** tra ambienti o membri del team
+- **Utilizzare chiavi diverse** per ambienti diversi (dev, staging, produzione)
+- **Ruotare le chiavi regolarmente** (consigliato: ogni 6-12 mesi)
+- **Archiviare le chiavi in modo sicuro** utilizzando sistemi di gestione chiavi appropriati
+
+### Sicurezza del bundle
+- **Verificare sempre** l'integrità del bundle dopo la decrittografia
+- **Monitorare** pattern di download o fallimenti insoliti
+- **Utilizzare HTTPS** per tutti gli URL dei bundle (richiesto per app mobili)
+- **Implementare** gestione appropriata degli errori per fallimenti di decrittografia
+
+### Controllo degli accessi
+- **Limitare l'accesso** alle chiavi di crittografia solo al personale autorizzato
+- **Utilizzare accesso basato sui ruoli** per le operazioni di gestione chiavi
+- **Verificare** l'uso e l'accesso alle chiavi regolarmente
+- **Implementare** procedure appropriate di backup e ripristino
+
+## Risoluzione dei problemi di crittografia
+
+### Problemi comuni
+
+**Fallimenti di decrittografia:**
+- Verifica che la chiave privata corrisponda alla chiave pubblica utilizzata per la crittografia
+- Controlla che l'`ivSessionKey` sia corretto
+- Assicurati di utilizzare Encryption V2 (V1 non è più supportata)
+
+**Errori relativi alle chiavi:**
+- Conferma che il formato della chiave privata sia corretto (formato PEM)
+- Verifica che la chiave non sia stata corrotta durante l'archiviazione/trasferimento
+- Controlla che la chiave abbia le autorizzazioni appropriate nella configurazione della tua app
+
+**Problemi di prestazioni:**
+- Bundle grandi possono richiedere più tempo per crittografare/decrittografare
+- Considera l'utilizzo di aggiornamenti differenziali per ridurre le dimensioni del bundle
+- Monitora le prestazioni del dispositivo durante la decrittografia
+
+### Comandi di debug
+
+Controlla lo stato della crittografia:
+```shell
+npx @capgo/cli@latest app debug
+```
+
+Testa il workflow crittografia/decrittografia:
+```shell
+# Testa il workflow completo: zip → encrypt → decrypt → unzip
+npx @capgo/cli@latest bundle zip com.example.app --key-v2
+npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM --json
+npx @capgo/cli@latest bundle decrypt ./encrypted-bundle.zip IV_SESSION_KEY
+```
+
+## Conformità e standard
+
+L'implementazione della crittografia di Capgo segue gli standard del settore:
+
+- **AES-256**: Algoritmo di crittografia approvato FIPS 140-2
+- **RSA-4096**: Forte crittografia asimmetrica per la protezione delle chiavi
+- **GCM Mode**: Fornisce sia riservatezza che autenticità
+- **Secure Random**: Generazione di numeri casuali crittograficamente sicura
+
+Questo rende Capgo adatto per applicazioni che richiedono conformità con:
+- GDPR (Regolamento generale sulla protezione dei dati)
+- HIPAA (Health Insurance Portability and Accountability Act)
+- SOC 2 (Service Organization Control 2)
+- ISO 27001 (Gestione della sicurezza delle informazioni)
+
+## Considerazioni sulle prestazioni
+
+### Overhead della crittografia
+- **Dimensione del bundle**: I bundle crittografati sono leggermente più grandi (~1-2% di overhead)
+- **Tempo di elaborazione**: La crittografia/decrittografia aggiunge latenza minima
+- **Uso della memoria**: Aumento temporaneo durante le operazioni di crittografia/decrittografia
+
+### Suggerimenti per l'ottimizzazione
+- Usa aggiornamenti differenziali per minimizzare il trasferimento di dati crittografati
+- Ottimizza la dimensione del bundle convertendo le immagini in formato WebP
+- Minimizza i file JavaScript e CSS prima del bundling
+- Rimuovi dipendenze e codice non utilizzati
+- Monitora le prestazioni del dispositivo su dispositivi più vecchi/lenti
+
+## Prossimi passi
+
+- Scopri lo [Storage personalizzato](/docs/live-updates/custom-storage/) per utilizzare la crittografia con la tua infrastruttura
+- Esplora i [Canali](/docs/live-updates/channels/) per gestire bundle crittografati tra gli ambienti
+- Configura l'[Integrazione CI/CD](/docs/getting-started/cicd-integration/) per automatizzare le distribuzioni crittografate

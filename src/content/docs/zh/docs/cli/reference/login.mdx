@@ -1,0 +1,32 @@
+---
+title: 🔑 login
+description: 🔑 将您的 Capgo API 密钥保存到您的计算机或本地文件夹，以便更轻松地访问 Capgo Cloud 服务。
+sidebar_label: login
+locale: zh
+sidebar:
+  order: 3
+---
+
+🔑 将您的 Capgo API 密钥保存到您的计算机或本地文件夹，以便更轻松地访问 Capgo Cloud 服务。
+
+**别名:** `l`
+
+```bash
+npx @capgo/cli@latest login
+```
+
+在任何命令中使用 --apikey=******** 来覆盖它。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest login YOUR_API_KEY
+```
+
+## <a id="options"></a> 选项
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **--local** | <code>boolean</code> | 仅保存在本地文件夹中，出于安全考虑被 git 忽略。 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |

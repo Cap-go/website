@@ -1,0 +1,129 @@
+---
+title: "Known issues"
+description: "Known issues with Capacitor and Capgo, and our updater, this page will help you understand the weird issue you have with our tool"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Ionic live reload
+
+* When you develop, if you use the Ionic live reload feature from the CLI, it will override the plugin, so you will never see your update.
+
+## Quasar live reload
+
+* It uses the same system as ionic under the hood, so you will not see your updates.
+
+## Updates fail
+
+* This usually happens when large updates (> 20mb) are pushed, a big percentage of users will not get the last version.  
+In the past, users needed to keep the app open until the download was done, now we use background download, but it's still limited to a few seconds.
+
+## Android
+
+### Cannot download
+
+We have seen some issues with devices in india, and got user on the call, made them try different DNS servers, and it worked.
+
+So if you have the issue, try to use a different DNS server like Cloudflare or Google DNS.
+
+Cloudflare: 1.1.1.1 and 1.0.0.1
+
+Google DNS: 8.8.8.8 and 8.8.4.4 or dns.google
+
+<LinkCard
+	title="How to setup a preferred DNS server on Android?"
+	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
+/>
+
+### Self Hosted
+When you are pushing a self-hosted update, be mindful you cannot use "HTTP" endpoint as it's against the security policies of Android apps, if you still want to do it, follow this guide:
+
+<LinkCard
+	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	href="https://stackoverflow.com/a/51902630/5511370"
+/>
+
+### Unzip 
+
+Unzip issue: DEFLATED entries can have EXT descriptor
+
+If you zipped your bundle with something different than the CLI, the format or your zip could be incorrect, please use the CLI command `npx @capgo/cli zip BUNDLE_FOLDER`.
+
+This is a known issue of Java:
+
+<LinkCard
+	title="Unzip issue: DEFLATED entries can have EXT descriptor"
+	href="https://bugs.openjdk.org/browse/JDK-8143613"
+/>
+
+
+### Clearfix issue
+
+* If you have issues with usesCleartextTraffic, it's because the plugin follows the good practice recommended by sonar cloud, in 90% of the cases it will work just fine, but with some plugins that causes issues.
+
+To fix it, add in `android/app/src/main/AndroidManifest.xml` in the `<application>` key :
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemas.android.com/tools"
+```
+
+## IOS
+
+### Privacy manifest
+
+Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Privacy Manifest](https://capacitorjs.com/docs/ios/privacy-manifest) (usually `ios/App/PrivacyInfo.xcprivacy`):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- Add this dict entry to the array if the file already exists. -->
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA92.1</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+We recommend to declare [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) as the reason for accessing the [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API.
+
+
+### Network permissions
+
+When using local server for testing update, the app will ask for network permission, it's a normal behavior, it's not the case when you use a remote server.
+
+
+## Both OS
+
+When doing manual mode updates, some events are not easy to catch, for example the update fail triggers just before your JS code reloads, so you will not be able to catch it.
+
+One alternative is to list the bundles and check error stats to know if the update fails.
+
+We need to find a better way to handle this in the future, but it's not a priority, since auto mode is the recommended way to do update.
+
+PRs are welcome to help us improve this.
+
+## CLI
+
+if your CLI has troubles doing anything,
+
+Check if **appId** and **appName** are present in your **capacitor.config.ts**
+
+Follow the guide of the official doc:
+
+<LinkCard
+	title="Capacitor Configuration"
+	href="https://capacitorjs.com/docs/config"
+/>

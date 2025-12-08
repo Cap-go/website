@@ -1,0 +1,207 @@
+---
+title: 시작하기
+description: Capacitor 앱에서 애플리케이션 분석을 위한 AppInsights 플러그인을 설치하고 사용하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-appinsights" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용법
+
+플러그인을 가져와서 AppInsights 자격 증명으로 초기화합니다:
+
+```typescript
+import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
+
+// Initialize the SDK
+const initializeAnalytics = async () => {
+  await CapacitorAppinsights.init({
+    partnerId: 'your-partner-id',
+    partnerKey: 'your-partner-key'
+  });
+};
+
+// Set user ID for tracking
+const setUser = async (userId: string) => {
+  await CapacitorAppinsights.setUserId({ userId });
+};
+
+// Get SDK state
+const checkSDKState = async () => {
+  const state = await CapacitorAppinsights.getState();
+  console.log('SDK State:', state);
+};
+
+// Get plugin version
+const checkVersion = async () => {
+  const { version } = await CapacitorAppinsights.getPluginVersion();
+  console.log('Plugin version:', version);
+};
+```
+
+## API 참조
+
+### init(options)
+
+자격 증명으로 AppInsights SDK를 초기화합니다.
+
+```typescript
+await CapacitorAppinsights.init({
+  partnerId: 'your-partner-id',
+  partnerKey: 'your-partner-key'
+});
+```
+
+**매개변수:**
+- `partnerId` (string): AppInsights 파트너 ID
+- `partnerKey` (string): AppInsights 파트너 키
+
+### setUserId(options)
+
+초기화 후 사용자 ID를 설정하거나 업데이트합니다.
+
+```typescript
+await CapacitorAppinsights.setUserId({
+  userId: 'user-123'
+});
+```
+
+**매개변수:**
+- `userId` (string): 추적을 위해 설정할 사용자 ID
+
+### getState()
+
+SDK의 현재 상태를 가져옵니다.
+
+```typescript
+const state = await CapacitorAppinsights.getState();
+console.log(state);
+// {
+//   initCompleted: true,
+//   jobScheduled: true,
+//   permissionAcquired: true
+// }
+```
+
+**반환값:**
+- `initCompleted` (boolean): SDK 초기화가 완료되었는지 여부
+- `jobScheduled` (boolean): 데이터 수집 작업이 예약되었는지 여부
+- `permissionAcquired` (boolean): 필요한 권한이 획득되었는지 여부
+
+### getPluginVersion()
+
+네이티브 Capacitor 플러그인 버전을 가져옵니다.
+
+```typescript
+const { version } = await CapacitorAppinsights.getPluginVersion();
+console.log('Version:', version);
+```
+
+## 완전한 예제
+
+```typescript
+import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
+
+export class AnalyticsService {
+  private initialized = false;
+
+  async initialize(partnerId: string, partnerKey: string) {
+    try {
+      await CapacitorAppinsights.init({
+        partnerId,
+        partnerKey
+      });
+
+      const state = await CapacitorAppinsights.getState();
+      this.initialized = state.initCompleted;
+
+      console.log('AppInsights initialized:', state);
+    } catch (error) {
+      console.error('Failed to initialize AppInsights:', error);
+    }
+  }
+
+  async identifyUser(userId: string) {
+    if (!this.initialized) {
+      throw new Error('AppInsights not initialized');
+    }
+
+    await CapacitorAppinsights.setUserId({ userId });
+    console.log('User identified:', userId);
+  }
+
+  async getSDKStatus() {
+    const state = await CapacitorAppinsights.getState();
+    return {
+      ready: state.initCompleted && state.permissionAcquired,
+      tracking: state.jobScheduled,
+      state
+    };
+  }
+}
+```
+
+## 모범 사례
+
+1. **조기 초기화**
+   정확한 추적을 보장하기 위해 앱이 시작되는 즉시 SDK를 초기화하세요:
+   ```typescript
+   // In your app initialization
+   await CapacitorAppinsights.init({
+     partnerId: process.env.APPINSIGHTS_PARTNER_ID,
+     partnerKey: process.env.APPINSIGHTS_PARTNER_KEY
+   });
+   ```
+
+2. **로그인 시 사용자 ID 설정**
+   인증 후 사용자를 식별하세요:
+   ```typescript
+   async function onUserLogin(user) {
+     await CapacitorAppinsights.setUserId({
+       userId: user.id
+     });
+   }
+   ```
+
+3. **SDK 상태 확인**
+   중요한 작업 전에 SDK가 준비되었는지 확인하세요:
+   ```typescript
+   const state = await CapacitorAppinsights.getState();
+   if (!state.initCompleted) {
+     console.warn('AppInsights not ready');
+   }
+   ```
+
+4. **오류를 우아하게 처리**
+   ```typescript
+   try {
+     await CapacitorAppinsights.init(config);
+   } catch (error) {
+     console.error('Analytics initialization failed:', error);
+     // Continue app operation even if analytics fails
+   }
+   ```
+
+## 플랫폼 참고사항
+
+### iOS
+- iOS 10.0+ 필요
+- 추적을 위한 Info.plist에 필요한 권한이 있는지 확인
+
+### Android
+- Android 5.0 (API 21)+ 필요
+- 추적 기능에 따라 사용 통계 권한이 필요할 수 있음
+
+### Web
+- 웹 플랫폼에서 지원되지 않음

@@ -1,0 +1,50 @@
+---
+title: "@capgo/capacitor-speech-recognition"
+locale: zh
+description: 为 Capacitor 应用提供自然、低延迟的语音识别功能，在 iOS 和 Android 平台上具有平等性。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 具有实时转录、流式部分结果和跨平台平等性的全面设备端语音识别。
+  image:
+    file: ~public/icons/plugins/speech-recognition.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/speech-recognition/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-speech-recognition/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="实时转录" icon="rocket">
+    随着用户说话获得即时部分结果 🎤
+  </Card>
+  <Card title="跨平台平等" icon="star">
+    在 iOS 和 Android 上具有一致的 API 和行为 📱
+  </Card>
+  <Card title="分段会话" icon="list-format">
+    根据静音将识别分成片段 🔇
+  </Card>
+  <Card title="标点符号支持" icon="pencil">
+    在 iOS 16+ 上自动添加标点符号 📝
+  </Card>
+  <Card title="权限辅助" icon="approve-check-circle">
+    内置权限请求和状态检查 🔒
+  </Card>
+  <Card title="语言支持" icon="translate">
+    访问设备支持的识别语言 🌍
+  </Card>
+  <Card title="入门指南" icon="open-book">
+    查看[入门指南](/docs/plugins/speech-recognition/getting-started/)以安装和配置插件。
+  </Card>
+</CardGrid>

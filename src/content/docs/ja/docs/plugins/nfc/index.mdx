@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-nfc"
+locale: ja
+description: iOS と Android の Capacitor アプリ向けのネイティブ NFC タグの検出、読み取り、書き込み。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "概要"
+hero:
+  tagline: iOS と Android のネイティブサポートで NFC タグを読み書きし、非接触インタラクションとスマートタグ体験を実現します。
+  image:
+    file: ~public/icons/plugins/nfc.svg
+  actions:
+    - text: はじめに
+      link: /docs/plugins/nfc/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-nfc/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="タグの検出" icon="star">
+    デバイスに近づいたときに NFC タグを自動的に検出 📡
+  </Card>
+  <Card title="NDEF レコードの読み取り" icon="open-book">
+    テキスト、URL、カスタムペイロードを含む NFC タグから構造化データを読み取り 📖
+  </Card>
+  <Card title="タグへの書き込み" icon="pencil">
+    互換性のある NFC タグに NDEF メッセージを書き込み 📝
+  </Card>
+  <Card title="タグのフォーマット" icon="setting">
+    データ書き込み用に NDEF フォーマット可能なタグをフォーマット 🔧
+  </Card>
+  <Card title="ピアツーピア" icon="rocket">
+    Android Beam を使用してデバイス間でデータを共有（Android のみ）📲
+  </Card>
+  <Card title="クロスプラットフォーム" icon="puzzle">
+    一貫した API で iOS と Android の両方で動作 📱
+  </Card>
+</CardGrid>

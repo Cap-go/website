@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-barometer"
+description: Akses pembacaan barometer perangkat untuk data tekanan atmosfer dan ketinggian dari sensor perangkat.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+locale: id
+hero:
+  tagline: Akses data tekanan barometrik dan ketinggian dari sensor perangkat untuk aplikasi cuaca dan kebugaran.
+  image:
+    file: ~public/icons/plugins/barometer.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/barometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-barometer/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Pemantauan Tekanan" icon="rocket">
+    Pembacaan tekanan atmosfer real-time 🌡️
+  </Card>
+  <Card title="Kalkulasi Ketinggian" icon="star">
+    Turunkan ketinggian relatif dari perubahan tekanan 📈
+  </Card>
+  <Card title="Event Listener" icon="setting">
+    Berlangganan event perubahan tekanan 🔔
+  </Card>
+  <Card title="Lintas Platform" icon="laptop">
+    Bekerja pada perangkat iOS dan Android dengan sensor barometer 📱
+  </Card>
+  <Card title="Memulai" icon="open-book">
+    Periksa [Panduan Memulai](/docs/plugins/barometer/getting-started/) untuk menginstal dan mengkonfigurasi plugin.
+  </Card>
+</CardGrid>

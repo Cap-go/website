@@ -1,0 +1,64 @@
+---
+title: "Capacitor+"
+description: Ein automatisierter, immer synchronisierter Fork von Capacitor mit gemergten Community-PRs und schnellen Releases.
+locale: de
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Capacitor+ ist ein automatisierter Fork von Capacitor, der Community-PRs schneller merged, mit sicherheitsgeprüften Releases.
+  image:
+    file: ~public/icons/plugins/capacitor-plus.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/capacitor-plus/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-plus/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  **Warum Capacitor+?** Großartige PRs liegen monatelang ungemergt im offiziellen Capacitor-Repository. Capacitor+ merged diese Community-Beiträge aktiv, damit Sie nicht warten müssen.
+</Aside>
+
+<CardGrid stagger>
+  <Card title="Community-PRs schneller gemergt" icon="rocket">
+    Bug-Fixes und Features stecken in Upstream fest? Wir mergen sie, damit Sie sofort profitieren können.
+  </Card>
+  <Card title="Täglich automatisch synchronisiert" icon="seti:clock">
+    Jede Änderung vom offiziellen Capacitor wird automatisch abgerufen, getestet und verifiziert.
+  </Card>
+  <Card title="Sicherheitsgeprüft" icon="approve-check">
+    Jedes Release wird von KI auf Sicherheitslücken, Breaking Changes und Stabilitätsrisiken analysiert.
+  </Card>
+  <Card title="Drop-in-Ersatz" icon="puzzle">
+    Gleiche API wie offizielles Capacitor - ändern Sie einfach den Paket-Scope und fertig.
+  </Card>
+</CardGrid>
+
+## Philosophie
+
+Das Ionic-Team wartet Capacitor mit ihren eigenen Prioritäten und Release-Zeitplänen. Community-Beiträge können Monate oder sogar Jahre warten, bis sie gemergt werden. Capacitor+ verfolgt einen anderen Ansatz:
+
+1. **PRs von Forks mergen** - Wertvolle PRs, die in der Upstream-Warteschlange feststecken, werden aktiv gemergt
+2. **Kontinuierliche Synchronisierung** - Jede Upstream-Änderung wird automatisch abgerufen und getestet
+3. **Schnelle Releases** - Änderungen werden auf npm veröffentlicht, sobald sie CI bestehen
+4. **Community-First** - Ihre Beiträge zählen und werden priorisiert
+5. **Transparenz** - Alle Automatisierung ist Open Source und sichtbar
+
+## Pakete
+
+| Paket | npm |
+|---------|-----|
+| `@capacitor-plus/core` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/core)](https://www.npmjs.com/package/@capacitor-plus/core) |
+| `@capacitor-plus/cli` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/cli)](https://www.npmjs.com/package/@capacitor-plus/cli) |
+| `@capacitor-plus/android` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/android)](https://www.npmjs.com/package/@capacitor-plus/android) |
+| `@capacitor-plus/ios` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/ios)](https://www.npmjs.com/package/@capacitor-plus/ios) |

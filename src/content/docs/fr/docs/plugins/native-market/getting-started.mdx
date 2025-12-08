@@ -1,0 +1,105 @@
+---
+title: Commencer
+description: Apprenez à installer et utiliser le plugin Native Market pour rediriger les utilisateurs vers Google Play Store ou Apple App Store depuis votre application Capacitor.
+locale: fr
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer le package**
+   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser avec les projets natifs**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilisation
+
+Importez le plugin et utilisez ses méthodes pour rediriger les utilisateurs vers les magasins d'applications :
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+// Ouvrir la page de l'application dans le magasin
+const openAppStore = async () => {
+  await NativeMarket.openStoreListing({
+    appId: 'com.example.app' // L'identifiant de bundle de votre application
+  });
+};
+
+// Demander un avis sur l'application
+const requestReview = async () => {
+  await NativeMarket.requestReview();
+};
+
+// Ouvrir la recherche dans le magasin d'applications
+const searchInStore = async () => {
+  await NativeMarket.search({
+    terms: 'fitness app' // Termes de recherche
+  });
+};
+```
+
+## Référence API
+
+### openStoreListing(options)
+
+Ouvre la page de l'application dans le magasin pour l'application spécifiée.
+
+```typescript
+interface OpenStoreListingOptions {
+  appId: string; // Bundle ID sur iOS, nom de package sur Android
+}
+```
+
+### requestReview()
+
+Demande un avis dans l'application de la part de l'utilisateur. Sur iOS 10.3+, cela affiche la boîte de dialogue de notation sans quitter l'application.
+
+### search(options)
+
+Ouvre le magasin d'applications avec les résultats de recherche.
+
+```typescript
+interface SearchOptions {
+  terms: string; // Termes de recherche à utiliser
+}
+```
+
+## Notes sur les plateformes
+
+### iOS
+- Utilise `SKStoreReviewController` pour les avis dans l'application sur iOS 10.3+
+- Revient à l'ouverture de l'App Store pour les versions plus anciennes
+
+### Android
+- Ouvre Google Play Store
+- Utilise l'API d'avis dans l'application lorsqu'elle est disponible
+
+## Exemple
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+import { Capacitor } from '@capacitor/core';
+
+export class AppService {
+  async rateApp() {
+    try {
+      // Essayer d'abord l'avis dans l'application
+      await NativeMarket.requestReview();
+    } catch (error) {
+      // Revenir à l'ouverture de la page du magasin
+      const platform = Capacitor.getPlatform();
+      const appId = platform === 'ios'
+        ? 'id123456789' // Votre ID d'application iOS
+        : 'com.example.app'; // Votre nom de package Android
+
+      await NativeMarket.openStoreListing({ appId });
+    }
+  }
+}

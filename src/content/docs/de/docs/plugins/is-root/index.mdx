@@ -1,0 +1,122 @@
+---
+title: "@capgo/capacitor-is-root"
+locale: de
+description: Root- und Jailbreak-Erkennungs-Plugin für Capacitor-Apps mit umfassenden Sicherheitsprüfungen und Geräteintegritätsvalidierung.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Erkennen Sie gerootete Android-Geräte und jailbroken iOS-Geräte, um die App-Sicherheit zu erhöhen und sensible Daten zu schützen.
+  image:
+    file: ~public/icons/plugins/is-root.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/is-root/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-is-root/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Übersicht
+
+Das Capacitor Is Root-Plugin bietet umfassende Root- und Jailbreak-Erkennung für Android-Geräte und Emulator-Erkennung. Dieses Plugin hilft, die App-Sicherheit zu erhöhen, indem kompromittierte Geräte und emulierte Umgebungen identifiziert werden, die Sicherheitsrisiken darstellen können.
+
+<CardGrid stagger>
+  <Card title="Root-Erkennung" icon="rocket">
+    Erweiterte Android-Root-Erkennung mit mehreren Methoden
+  </Card>
+  <Card title="Emulator-Erkennung" icon="approve-check">
+    Emulierte Umgebungen und Test-Frameworks identifizieren
+  </Card>
+  <Card title="Sicherheitsvalidierung" icon="approve-check">
+    Mehrere Erkennungstechniken für erhöhte Genauigkeit
+  </Card>
+  <Card title="Android-fokussiert" icon="laptop">
+    Spezialisierte Erkennung für Android-Sicherheitsbewertung
+  </Card>
+</CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-is-root
+npx cap sync
+```
+
+## Kern-API-Methoden
+
+### Root-Erkennung
+- `isRooted()` - Führt umfassende Root-Erkennung mit Standardmethoden durch
+- `isRootedWithBusyBox()` - Erweiterte Erkennung einschließlich BusyBox-Prüfungen
+- `detectRootManagementApps()` - Identifiziert installierte Root-Management-Anwendungen
+- `checkForSuBinary()` - Prüft auf `su`-Binärdatei-Vorhandensein in Systempfaden
+
+### Emulator-Erkennung
+- `isRunningOnEmulator()` - Erkennt gängige Android-Emulator-Fingerabdrücke
+
+## Erkennungstechniken
+
+Das Plugin verwendet mehrere Erkennungsmethoden:
+
+### Root-Erkennung
+- Prüfung auf Root-Management-Anwendungen (SuperSU, Magisk usw.)
+- Scannen auf verdächtige Systemeigenschaften
+- Identifizierung von Test-Build-Tags und Debug-Flags
+- Validierung gefährlicher Binärspeicherorte
+- Untersuchung von Systempfadberechtigungen
+
+### Emulator-Erkennung
+- Hardware-Fingerabdruck-Analyse
+- Build-Eigenschaftsinspektion
+- Emulator-spezifische Merkmale
+- Virtuelle Umgebungsindikatoren
+
+## Verwendungsbeispiel
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// Grundlegende Root-Erkennung
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('Gerät ist gerootet');
+  // Gerootetes Gerät angemessen behandeln
+}
+
+// Erweiterte Root-Erkennung mit BusyBox
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('Gerät ist gerootet (erweiterte Prüfung)');
+}
+
+// Auf Emulator prüfen
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('Läuft auf Emulator');
+}
+
+// Root-Management-Apps erkennen
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('Root-Management-Apps erkannt');
+}
+```
+
+## Sicherheitsüberlegungen
+
+- Verwenden Sie mehrere Erkennungsmethoden für höhere Genauigkeit
+- Implementieren Sie eine angemessene Degradierung für erkannte Umgebungen
+- Berücksichtigen Sie die Privatsphäre der Benutzer bei der Implementierung von Sicherheitsmaßnahmen
+- Regelmäßige Updates empfohlen, da sich Erkennungsmethoden weiterentwickeln
+
+## Dokumentation
+
+Schauen Sie sich die [vollständige Dokumentation](/docs/plugins/is-root/getting-started/) für detaillierte Implementierungsanleitungen und erweiterte Sicherheitsmuster an.

@@ -1,0 +1,257 @@
+---
+title: 📦 bundle
+description: 📦 管理用于在 Capgo Cloud 中部署的应用 bundle，包括上传、兼容性检查和加密。
+sidebar_label: bundle
+locale: zh
+sidebar:
+  order: 4
+---
+
+📦 管理用于在 Capgo Cloud 中部署的应用 bundle，包括上传、兼容性检查和加密。
+
+### <a id="bundle-upload"></a> ⬆️ **Upload**
+
+**别名:** `u`
+
+```bash
+npx @capgo/cli@latest bundle upload
+```
+
+⬆️ 上传新的应用 bundle 到 Capgo Cloud 进行分发。
+版本必须 > 0.0.0 且唯一。出于安全考虑，已删除的版本不能重复使用。
+外部选项：仅存储 URL 链接（适用于大于 200MB 的应用或隐私要求）。
+Capgo 从不检查外部内容。添加加密以实现无信任安全。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest bundle upload com.example.app --path ./dist --channel production
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **-p,** | <code>string</code> | 要上传的文件夹路径，如果未提供，将使用 capacitor.config 中设置的 webDir |
+| **-c,** | <code>string</code> | 要链接的频道 |
+| **-e,** | <code>string</code> | 链接到外部 URL 而不是上传到 Capgo Cloud |
+| **--iv-session-key** | <code>string</code> | 为外部 bundle URL 设置 IV 和会话密钥 |
+| **--s3-region** | <code>string</code> | S3 存储桶的区域 |
+| **--s3-apikey** | <code>string</code> | S3 端点的 API 密钥 |
+| **--s3-apisecret** | <code>string</code> | S3 端点的 API 密钥 |
+| **--s3-endpoint** | <code>string</code> | S3 端点的 URL |
+| **--s3-bucket-name** | <code>string</code> | AWS S3 存储桶的名称 |
+| **--s3-port** | <code>string</code> | S3 端点的端口 |
+| **--no-s3-ssl** | <code>boolean</code> | 禁用 S3 上传的 SSL |
+| **--key-v2** | <code>string</code> | 私钥签名密钥的自定义路径（v2 系统） |
+| **--key-data-v2** | <code>string</code> | 私钥签名密钥（v2 系统） |
+| **--bundle-url** | <code>boolean</code> | 将 bundle URL 打印到 stdout |
+| **--no-key** | <code>boolean</code> | 忽略签名密钥并发送明文更新 |
+| **--no-code-check** | <code>boolean</code> | 忽略检查源代码中是否调用了 notifyAppReady() 以及根文件夹中是否存在索引 |
+| **--display-iv-session** | <code>boolean</code> | 在控制台中显示用于加密更新的 IV 和会话密钥 |
+| **-b,** | <code>string</code> | 要上传的 bundle 版本号 |
+| **--link** | <code>string</code> | 链接到外部资源（例如 GitHub release） |
+| **--comment** | <code>string</code> | 关于此版本的注释，可以是发行说明、提交哈希、提交消息等 |
+| **--min-update-version** | <code>string</code> | 更新到此版本所需的最低版本。仅在频道中禁用自动更新设置为元数据时使用 |
+| **--auto-min-update-version** | <code>boolean</code> | 根据原生包设置最小更新版本 |
+| **--ignore-metadata-check** | <code>boolean</code> | 上传时忽略元数据（node_modules）检查 |
+| **--ignore-checksum-check** | <code>boolean</code> | 上传时忽略校验和检查 |
+| **--timeout** | <code>string</code> | 上传过程的超时时间（秒） |
+| **--multipart** | <code>boolean</code> | [已弃用] 使用 --tus 代替。使用多部分协议进行 S3 上传 |
+| **--zip** | <code>boolean</code> | 使用 zip 上传 bundle 到 Capgo cloud（旧版） |
+| **--tus** | <code>boolean</code> | 使用 TUS 上传 bundle 到 Capgo cloud |
+| **--tus-chunk-size** | <code>string</code> | TUS 可恢复上传的块大小（字节）（默认：自动） |
+| **--partial** | <code>boolean</code> | [已弃用] 使用 --delta 代替。上传增量更新 |
+| **--partial-only** | <code>boolean</code> | [已弃用] 使用 --delta-only 代替。仅上传增量更新，跳过完整 bundle |
+| **--delta** | <code>boolean</code> | 上传增量/差异更新以减少带宽 |
+| **--delta-only** | <code>boolean</code> | 仅上传增量更新而不上传完整 bundle（适用于大型应用） |
+| **--encrypted-checksum** | <code>string</code> | 加密的校验和（签名）。仅在上传外部 bundle 时使用。 |
+| **--auto-set-bundle** | <code>boolean</code> | 在 capacitor.config.json 中设置 bundle |
+| **--dry-upload** | <code>boolean</code> | 干运行 bundle 上传过程，意味着它不会上传文件但会在数据库中添加行（由 Capgo 用于内部测试） |
+| **--package-json** | <code>string</code> | monorepo 的 package.json 文件路径（逗号分隔） |
+| **--node-modules** | <code>string</code> | monorepo 的 node_modules 目录路径（逗号分隔） |
+| **--encrypt-partial** | <code>boolean</code> | 加密增量更新文件（对于 updater > 6.14.4 自动启用） |
+| **--delete-linked-bundle-on-upload** | <code>boolean</code> | 定位您尝试上传到的频道中当前链接的 bundle 并删除它 |
+| **--no-brotli-patterns** | <code>string</code> | 要从 Brotli 压缩中排除的文件（逗号分隔的 glob，例如 "*.jpg,*.png"） |
+| **--disable-brotli** | <code>boolean</code> | 完全禁用 brotli 压缩，即使 updater 版本支持它 |
+| **--version-exists-ok** | <code>boolean</code> | 如果 bundle 版本已存在，则成功退出，对于使用 monorepo 的 CI/CD 工作流很有用 |
+| **--self-assign** | <code>boolean</code> | 允许设备自动加入此频道（更新频道设置） |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="bundle-compatibility"></a> 🧪 **Compatibility**
+
+```bash
+npx @capgo/cli@latest bundle compatibility
+```
+
+🧪 检查 bundle 与 Capgo Cloud 中特定频道的兼容性，以确保更新安全。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest bundle compatibility com.example.app --channel production
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **-c,** | <code>string</code> | 要检查兼容性的频道 |
+| **--text** | <code>boolean</code> | 输出文本而不是表情符号 |
+| **--package-json** | <code>string</code> | monorepo 的 package.json 文件路径（逗号分隔） |
+| **--node-modules** | <code>string</code> | monorepo 的 node_modules 目录路径（逗号分隔） |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="bundle-delete"></a> 🗑️ **Delete**
+
+**别名:** `d`
+
+```bash
+npx @capgo/cli@latest bundle delete
+```
+
+🗑️ 从 Capgo Cloud 删除特定 bundle，可选择针对单个版本。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest bundle delete BUNDLE_ID com.example.app
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="bundle-list"></a> 📋 **List**
+
+**别名:** `l`
+
+```bash
+npx @capgo/cli@latest bundle list
+```
+
+📋 列出为 Capgo Cloud 中的应用上传的所有 bundle。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest bundle list com.example.app
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="bundle-cleanup"></a> 🧹 **Cleanup**
+
+**别名:** `c`
+
+```bash
+npx @capgo/cli@latest bundle cleanup
+```
+
+🧹 删除 Capgo Cloud 中的旧 bundle，保留指定数量的最新版本。
+除非使用 --ignore-channel，否则链接到频道的 bundle 将被保留。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest bundle cleanup com.example.app --bundle=1.0 --keep=3
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-b,** | <code>string</code> | 要删除的应用的 bundle 版本号 |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **-k,** | <code>string</code> | 要保留的版本数量 |
+| **-f,** | <code>string</code> | 强制删除 |
+| **--ignore-channel** | <code>boolean</code> | 即使链接到频道也删除 bundle（警告：也会删除频道） |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="bundle-encrypt"></a> 🔒 **Encrypt**
+
+```bash
+npx @capgo/cli@latest bundle encrypt
+```
+
+🔒 加密 zip bundle 以进行安全的外部存储。
+返回用于上传/解密的 ivSessionKey。使用 'bundle zip --json' 获取校验和。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **--key** | <code>string</code> | 私钥签名密钥的自定义路径 |
+| **--key-data** | <code>string</code> | 私钥签名密钥 |
+| **-j,** | <code>string</code> | 以 JSON 格式输出 |
+
+### <a id="bundle-decrypt"></a> 🔓 **Decrypt**
+
+```bash
+npx @capgo/cli@latest bundle decrypt
+```
+
+🔓 解密加密的 bundle（主要用于测试）。
+打印 base64 会话密钥以进行验证。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest bundle decrypt ./myapp_encrypted.zip CHECKSUM
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **--key** | <code>string</code> | 私钥签名密钥的自定义路径 |
+| **--key-data** | <code>string</code> | 私钥签名密钥 |
+| **--checksum** | <code>string</code> | bundle 的校验和，用于验证 bundle 的完整性 |
+
+### <a id="bundle-zip"></a> 🔹 **Zip**
+
+```bash
+npx @capgo/cli@latest bundle zip
+```
+
+🗜️ 创建应用 bundle 的 zip 文件。
+返回用于加密的校验和。使用 --json 以获取机器可读输出。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest bundle zip com.example.app --path ./dist
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-p,** | <code>string</code> | 要上传的文件夹路径，如果未提供，将使用 capacitor.config 中设置的 webDir |
+| **-b,** | <code>string</code> | 用于命名 zip 文件的 bundle 版本号 |
+| **-n,** | <code>string</code> | zip 文件的名称 |
+| **-j,** | <code>string</code> | 以 JSON 格式输出 |
+| **--no-code-check** | <code>boolean</code> | 忽略检查源代码中是否调用了 notifyAppReady() 以及根文件夹中是否存在索引 |
+| **--key-v2** | <code>boolean</code> | 使用加密 v2 |
+| **--package-json** | <code>string</code> | monorepo 的 package.json 文件路径（逗号分隔） |

@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-compass"
+locale: de
+description: Lesen Sie die Kompassrichtung des Geräts in Grad mit kontinuierlichen Updates und Berechtigungsverwaltung.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Greifen Sie auf den Kompass-Sensor des Geräts zu, um Richtungsdaten mit Echtzeit-Updates auf iOS und Android zu erhalten.
+  image:
+    file: ~public/icons/plugins/compass.svg
+  actions:
+    - text: Los geht's
+      link: /docs/plugins/compass/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-compass/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Echtzeit-Richtung" icon="rocket">
+    Erhalten Sie kontinuierliche Kompass-Richtungsupdates in Grad (0-360)
+  </Card>
+  <Card title="Cross-Plattform" icon="puzzle">
+    Funktioniert auf iOS- und Android-Geräten mit nativem Sensor-Zugriff
+  </Card>
+  <Card title="Berechtigungsverwaltung" icon="shield">
+    Integrierte Berechtigungsverwaltung für Ortungsdienste (iOS)
+  </Card>
+  <Card title="Ereignisgesteuert" icon="star">
+    Abonnieren Sie Richtungsänderungen mit effizienten Event-Listenern
+  </Card>
+</CardGrid>

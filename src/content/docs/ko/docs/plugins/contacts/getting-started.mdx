@@ -1,0 +1,394 @@
+---
+title: "Contacts 시작하기"
+locale: ko
+description: "Capacitor 앱에 연락처 관리를 통합하는 방법을 알아보세요"
+---
+
+이 가이드는 애플리케이션에 Capacitor Contacts 플러그인을 통합하는 과정을 안내합니다.
+
+## 설치
+
+npm을 사용하여 플러그인을 설치합니다:
+
+```bash
+npm install @capgo/capacitor-contacts
+npx cap sync
+```
+
+## iOS 구성
+
+`Info.plist`에 다음을 추가합니다:
+
+```xml
+<key>NSContactsUsageDescription</key>
+<string>이 앱은 수신자 선택을 위해 연락처에 접근해야 합니다</string>
+```
+
+## Android 구성
+
+`AndroidManifest.xml`에 다음 권한을 추가합니다:
+
+```xml
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+<uses-permission android:name="android.permission.WRITE_CONTACTS" />
+```
+
+## 기본 사용법
+
+### 플러그인 가져오기
+
+```typescript
+import { Contacts } from '@capgo/capacitor-contacts';
+```
+
+### 권한 요청
+
+```typescript
+const requestPermissions = async () => {
+  const permission = await Contacts.requestPermissions();
+  console.log('권한 상태:', permission.contacts);
+};
+```
+
+### 모든 연락처 가져오기
+
+```typescript
+const getAllContacts = async () => {
+  const result = await Contacts.getContacts({
+    projection: {
+      name: true,
+      phones: true,
+      emails: true,
+      image: true
+    }
+  });
+
+  console.log('연락처:', result.contacts);
+};
+```
+
+### 연락처 검색
+
+```typescript
+const searchContacts = async (query: string) => {
+  const result = await Contacts.getContacts({
+    projection: {
+      name: true,
+      phones: true,
+      emails: true
+    },
+    query: query
+  });
+
+  console.log('검색 결과:', result.contacts);
+};
+```
+
+### 연락처 생성
+
+```typescript
+const createContact = async () => {
+  const newContact = {
+    name: {
+      given: 'John',
+      family: 'Doe'
+    },
+    phones: [{
+      type: 'mobile',
+      number: '+1234567890'
+    }],
+    emails: [{
+      type: 'work',
+      address: 'john.doe@example.com'
+    }]
+  };
+
+  const result = await Contacts.createContact(newContact);
+  console.log('연락처 생성됨:', result);
+};
+```
+
+### 연락처 업데이트
+
+```typescript
+const updateContact = async (contactId: string) => {
+  const updates = {
+    contactId: contactId,
+    name: {
+      given: 'Jane',
+      family: 'Doe'
+    }
+  };
+
+  await Contacts.updateContact(updates);
+  console.log('연락처 업데이트됨');
+};
+```
+
+### 연락처 삭제
+
+```typescript
+const deleteContact = async (contactId: string) => {
+  await Contacts.deleteContact({ contactId });
+  console.log('연락처 삭제됨');
+};
+```
+
+## 전체 예제
+
+다음은 연락처 서비스를 사용한 전체 예제입니다:
+
+```typescript
+import { Contacts } from '@capgo/capacitor-contacts';
+
+interface Contact {
+  contactId: string;
+  name: {
+    display?: string;
+    given?: string;
+    family?: string;
+  };
+  phones?: Array<{ type: string; number: string }>;
+  emails?: Array<{ type: string; address: string }>;
+  image?: { base64String: string };
+}
+
+class ContactsService {
+  async checkPermissions(): Promise<boolean> {
+    const permission = await Contacts.checkPermissions();
+
+    if (permission.contacts === 'granted') {
+      return true;
+    }
+
+    const requested = await Contacts.requestPermissions();
+    return requested.contacts === 'granted';
+  }
+
+  async getAllContacts(): Promise<Contact[]> {
+    const hasPermission = await this.checkPermissions();
+    if (!hasPermission) {
+      throw new Error('연락처 권한이 거부되었습니다');
+    }
+
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true,
+        image: true
+      }
+    });
+
+    return result.contacts;
+  }
+
+  async searchContacts(query: string): Promise<Contact[]> {
+    if (!query || query.length < 2) {
+      return [];
+    }
+
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true
+      },
+      query: query
+    });
+
+    return result.contacts;
+  }
+
+  async getContactById(contactId: string): Promise<Contact | null> {
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true,
+        image: true,
+        organization: true,
+        birthday: true,
+        note: true,
+        urls: true,
+        postalAddresses: true
+      },
+      contactId: contactId
+    });
+
+    return result.contacts.length > 0 ? result.contacts[0] : null;
+  }
+
+  async createContact(contact: Partial<Contact>): Promise<string> {
+    const hasPermission = await this.checkPermissions();
+    if (!hasPermission) {
+      throw new Error('연락처 권한이 거부되었습니다');
+    }
+
+    const result = await Contacts.createContact(contact);
+    return result.contactId;
+  }
+
+  async updateContact(contactId: string, updates: Partial<Contact>): Promise<void> {
+    await Contacts.updateContact({
+      contactId,
+      ...updates
+    });
+  }
+
+  async deleteContact(contactId: string): Promise<void> {
+    await Contacts.deleteContact({ contactId });
+  }
+
+  formatPhoneNumber(phone: string): string {
+    // 숫자가 아닌 문자 제거
+    const cleaned = phone.replace(/\D/g, '');
+
+    // (XXX) XXX-XXXX 형식으로 포맷
+    if (cleaned.length === 10) {
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+    }
+
+    return phone;
+  }
+
+  getContactInitials(contact: Contact): string {
+    const given = contact.name?.given || '';
+    const family = contact.name?.family || '';
+
+    if (given && family) {
+      return `${given[0]}${family[0]}`.toUpperCase();
+    }
+
+    const display = contact.name?.display || '';
+    const parts = display.split(' ');
+
+    if (parts.length >= 2) {
+      return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+    }
+
+    return display.slice(0, 2).toUpperCase();
+  }
+}
+
+// 사용법
+const contactsService = new ContactsService();
+
+// 모든 연락처 가져오기
+const contacts = await contactsService.getAllContacts();
+console.log('연락처:', contacts);
+
+// 연락처 검색
+const results = await contactsService.searchContacts('john');
+console.log('검색 결과:', results);
+
+// 연락처 생성
+const newContactId = await contactsService.createContact({
+  name: { given: 'Jane', family: 'Smith' },
+  phones: [{ type: 'mobile', number: '+1234567890' }]
+});
+
+// 연락처 업데이트
+await contactsService.updateContact(newContactId, {
+  emails: [{ type: 'work', address: 'jane@example.com' }]
+});
+```
+
+## Projection 이해하기
+
+`projection` 매개변수는 가져올 필드를 제어합니다:
+
+```typescript
+const result = await Contacts.getContacts({
+  projection: {
+    name: true,           // 연락처 이름
+    phones: true,         // 전화번호
+    emails: true,         // 이메일 주소
+    image: true,          // 연락처 사진
+    organization: true,   // 회사/조직
+    birthday: true,       // 생년월일
+    note: true,          // 메모
+    urls: true,          // 웹사이트
+    postalAddresses: true // 실제 주소
+  }
+});
+```
+
+**팁**: 성능 향상을 위해 필요한 필드만 요청하세요.
+
+## 연락처 선택기 UI
+
+많은 앱이 네이티브 연락처 선택기를 사용하는 것을 선호합니다:
+
+```typescript
+const pickContact = async () => {
+  try {
+    const result = await Contacts.pickContact({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true
+      }
+    });
+
+    if (result.contacts.length > 0) {
+      const contact = result.contacts[0];
+      console.log('선택된 연락처:', contact);
+    }
+  } catch (error) {
+    console.error('연락처 선택기가 취소되었거나 실패했습니다:', error);
+  }
+};
+```
+
+## 모범 사례
+
+1. **최소 권한 요청**: 필요할 때만 연락처 권한 요청
+2. **Projection 사용**: 실제로 사용하는 필드만 가져오기
+3. **거부 처리**: 권한이 거부되었을 때 대체 방법 제공
+4. **현명한 캐싱**: 연락처는 변경될 수 있으므로 너무 오래 캐시하지 마세요
+5. **개인정보 보호**: 연락처 사용에 대해 투명하게 공개
+6. **비동기 작업**: 모든 연락처 작업은 비동기입니다
+
+## 일반적인 문제
+
+### 권한 거부됨
+
+```typescript
+const handlePermissionDenied = async () => {
+  const permission = await Contacts.checkPermissions();
+
+  if (permission.contacts === 'denied') {
+    // 권한이 필요한 이유를 설명하는 대화상자 표시
+    showPermissionDialog();
+    // 사용자를 설정으로 안내
+    // iOS: 설정 > [앱] > 연락처
+    // Android: 설정 > 앱 > [앱] > 권한
+  }
+};
+```
+
+### 대량 연락처 목록
+
+```typescript
+const loadContactsInBatches = async () => {
+  // 먼저 개수 가져오기 (가벼움)
+  const projection = { name: true }; // 최소 projection
+
+  // 필요한 경우 페이지네이션 구현
+  const allContacts = await Contacts.getContacts({ projection });
+
+  // 청크로 처리
+  const chunkSize = 100;
+  for (let i = 0; i < allContacts.contacts.length; i += chunkSize) {
+    const chunk = allContacts.contacts.slice(i, i + chunkSize);
+    await processContactChunk(chunk);
+  }
+};
+```
+
+## 다음 단계
+
+- 전체 메서드 문서는 [API Reference](https://github.com/Cap-go/capacitor-contacts#api)를 참조하세요
+- 고급 사용법은 [예제 앱](https://github.com/Cap-go/capacitor-contacts/tree/main/example)을 확인하세요
+- 전체 구현 예제는 [튜토리얼](/plugins-tutorials/capacitor-contacts)을 참조하세요

@@ -1,0 +1,276 @@
+---
+title: 시작하기
+description: Is Root 플러그인을 설치하고 사용하여 루팅된 Android 장치와 에뮬레이터를 감지하여 앱 보안을 강화하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 플랫폼 지원
+
+- **Android**: 루트 및 에뮬레이터 감지 완전 지원
+- **iOS**: 구성 불필요 (플러그인은 Android 중심)
+
+## 사용 예제
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// 기본 루트 감지
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('장치가 루팅되었습니다');
+  // 루팅된 장치를 적절하게 처리
+  // 예: 경고 표시, 기능 제한 또는 액세스 차단
+}
+
+// BusyBox를 사용한 확장 루트 감지
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('장치가 루팅되었습니다 (확장 검사)');
+}
+
+// 에뮬레이터 확인
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('에뮬레이터에서 실행 중');
+  // 에뮬레이터 환경 처리
+}
+
+// 루트 관리 앱 감지
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('루트 관리 앱이 감지되었습니다');
+}
+
+// su 바이너리 확인
+const suResult = await IsRoot.checkForSuBinary();
+if (suResult.hasSu) {
+  console.log('장치에서 SU 바이너리를 찾았습니다');
+}
+```
+
+## API 참조
+
+### isRooted()
+
+```typescript
+isRooted() => Promise<{ isRooted: boolean }>
+```
+
+기본 방법을 사용하여 포괄적인 루트 감지를 수행합니다.
+
+**반환값:** `Promise<{ isRooted: boolean }>`
+
+### isRootedWithBusyBox()
+
+```typescript
+isRootedWithBusyBox() => Promise<{ isRooted: boolean }>
+```
+
+BusyBox 검사를 포함한 확장 루트 감지.
+
+**반환값:** `Promise<{ isRooted: boolean }>`
+
+### detectRootManagementApps()
+
+```typescript
+detectRootManagementApps() => Promise<{ hasRootApps: boolean }>
+```
+
+설치된 루트 관리 애플리케이션(SuperSU, Magisk 등)을 식별합니다.
+
+**반환값:** `Promise<{ hasRootApps: boolean }>`
+
+### checkForSuBinary()
+
+```typescript
+checkForSuBinary() => Promise<{ hasSu: boolean }>
+```
+
+시스템 경로에 `su` 바이너리의 존재를 확인합니다.
+
+**반환값:** `Promise<{ hasSu: boolean }>`
+
+### isRunningOnEmulator()
+
+```typescript
+isRunningOnEmulator() => Promise<{ isEmulator: boolean }>
+```
+
+일반적인 Android 에뮬레이터 지문을 감지합니다.
+
+**반환값:** `Promise<{ isEmulator: boolean }>`
+
+## 포괄적인 보안 검사
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+async function performSecurityCheck() {
+  const checks = {
+    rooted: false,
+    emulator: false,
+    rootApps: false,
+    suBinary: false
+  };
+
+  try {
+    // 모든 감지 방법 실행
+    const [rootResult, emulatorResult, rootAppsResult, suResult] = await Promise.all([
+      IsRoot.isRootedWithBusyBox(),
+      IsRoot.isRunningOnEmulator(),
+      IsRoot.detectRootManagementApps(),
+      IsRoot.checkForSuBinary()
+    ]);
+
+    checks.rooted = rootResult.isRooted;
+    checks.emulator = emulatorResult.isEmulator;
+    checks.rootApps = rootAppsResult.hasRootApps;
+    checks.suBinary = suResult.hasSu;
+
+    // 보안 수준 결정
+    const securityIssues = Object.values(checks).filter(v => v).length;
+
+    if (securityIssues > 0) {
+      console.warn(`장치에 ${securityIssues}개의 보안 문제가 있습니다`, checks);
+      return {
+        secure: false,
+        issues: checks
+      };
+    }
+
+    return {
+      secure: true,
+      issues: checks
+    };
+  } catch (error) {
+    console.error('보안 검사 실패:', error);
+    throw error;
+  }
+}
+
+// 앱에서 사용
+const securityStatus = await performSecurityCheck();
+if (!securityStatus.secure) {
+  // 안전하지 않은 장치 처리
+  showSecurityWarning(securityStatus.issues);
+}
+```
+
+## 감지 기술
+
+### 루트 감지
+
+플러그인은 여러 감지 방법을 사용합니다:
+
+- 루트 관리 애플리케이션 확인(SuperSU, Magisk, KingRoot 등)
+- 의심스러운 시스템 속성 스캔
+- 테스트 빌드 태그 및 디버그 플래그 식별
+- 위험한 바이너리 위치 검증
+- 시스템 경로 권한 검사
+- 알려진 루트 은폐 앱 감지
+
+### 에뮬레이터 감지
+
+- 하드웨어 지문 분석
+- 빌드 속성 검사
+- 에뮬레이터별 특성
+- 가상 환경 표시기
+
+## 보안 문제 처리
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+async function handleDeviceSecurity() {
+  const rootResult = await IsRoot.isRooted();
+
+  if (rootResult.isRooted) {
+    // 옵션 1: 경고를 표시하고 계속
+    showWarning('장치가 루팅된 것으로 보입니다. 일부 기능이 제한될 수 있습니다.');
+
+    // 옵션 2: 기능 제한
+    disableSensitiveFeatures();
+
+    // 옵션 3: 앱 액세스 차단
+    showBlockedScreen('보안상의 이유로 이 앱은 루팅된 장치에서 실행할 수 없습니다.');
+    return false;
+  }
+
+  return true;
+}
+
+function showWarning(message: string) {
+  // 사용자 친화적인 경고 대화 상자 표시
+  alert(message);
+}
+
+function disableSensitiveFeatures() {
+  // 결제 처리, 민감한 데이터 액세스 등 비활성화
+  console.log('루팅된 장치로 인해 민감한 기능이 비활성화되었습니다');
+}
+
+function showBlockedScreen(message: string) {
+  // 차단 화면 표시 및 앱 종료
+  alert(message);
+}
+```
+
+## 모범 사례
+
+- 더 높은 정확도를 위해 여러 감지 방법 사용
+- 액세스를 완전히 차단하는 대신 점진적 기능 저하 구현
+- 보안 문제에 대한 명확한 사용자 커뮤니케이션 제공
+- 보안 조치를 구현할 때 사용자 경험 고려
+- 감지 방법이 발전함에 따라 플러그인을 최신 상태로 유지
+- 루팅된 장치와 루팅되지 않은 장치 모두에서 테스트
+- 감지 실패를 우아하게 처리
+
+## 보안 고려사항
+
+- 100% 완벽한 감지 방법은 없습니다
+- 고급 사용자는 감지 메커니즘을 우회할 수 있습니다
+- 서버 측 보안 조치와 함께 사용
+- 보안 검사를 구현할 때 사용자 프라이버시 고려
+- 보안 구현에 대한 플랫폼 가이드라인 준수
+- 루트 은폐 기술이 발전함에 따라 정기적인 업데이트 권장
+
+## 사용 사례
+
+- **은행 및 금융 앱**: 손상된 장치에서 액세스 방지
+- **DRM 보호 콘텐츠**: 저작권이 있는 자료 보호
+- **엔터프라이즈 앱**: BYOD 보안 정책 시행
+- **결제 처리**: 안전한 거래 환경 보장
+- **민감한 데이터 앱**: 기밀 정보 보호

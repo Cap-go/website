@@ -1,0 +1,255 @@
+---
+title: Getting Started
+locale: ja
+description: StoreKit 2とGoogle Play Billing 7を使用して、@capgo/native-purchasesプラグインをインストールし、単発購入とサブスクリプションを実装する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージのインストール**
+   <PackageManagers pkg="@capgo/native-purchases" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトとの同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **課金サポートの確認**
+
+   ```typescript
+   import { NativePurchases } from '@capgo/native-purchases';
+
+   const { isBillingSupported } = await NativePurchases.isBillingSupported();
+   if (!isBillingSupported) {
+     throw new Error('Billing is not available on this device');
+   }
+   ```
+
+4. **ストアから直接商品を読み込む**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const { products } = await NativePurchases.getProducts({
+     productIdentifiers: [
+       'com.example.premium.monthly',
+       'com.example.premium.yearly',
+       'com.example.one_time_unlock'
+     ],
+     productType: PURCHASE_TYPE.SUBS, // 単発商品にはPURCHASE_TYPE.INAPPを使用
+   });
+
+   products.forEach((product) => {
+     console.log(product.title, product.priceString);
+   });
+   ```
+
+5. **購入とリストアフローの実装**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const monthlyPlanId = 'monthly-plan'; // Google Play ConsoleのBase Plan ID
+
+   const transaction = await NativePurchases.purchaseProduct({
+     productIdentifier: 'com.example.premium.monthly',
+     planIdentifier: monthlyPlanId,        // Androidサブスクリプションに必須、iOSでは無視されます
+     productType: PURCHASE_TYPE.SUBS,
+     quantity: 1,
+   });
+
+   console.log('Transaction ID', transaction.transactionId);
+
+   await NativePurchases.restorePurchases();
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       - App Store Connectでアプリ内商品とサブスクリプションを作成します。<br />
+       - QAにはStoreKitローカルテストまたはSandboxテスターを使用します。<br />
+       - マニフェストの編集は不要です。商品が承認されていることを確認してください。
+     </TabItem>
+     <TabItem label="Android">
+       - Google Play Consoleでアプリ内商品とサブスクリプションを作成します。<br />
+       - 少なくとも内部テストビルドをアップロードし、ライセンステスターを追加します。<br />
+       - `AndroidManifest.xml`に課金パーミッションを追加します：
+       ```xml
+       <uses-permission android:name="com.android.vending.BILLING" />
+       ```
+     </TabItem>
+   </Tabs>
+</Steps>
+
+## 購入サービスの例
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE, Transaction } from '@capgo/native-purchases';
+import { Capacitor } from '@capacitor/core';
+
+class PurchaseService {
+  private premiumProduct = 'com.example.premium.unlock';
+  private monthlySubId = 'com.example.premium.monthly';
+  private monthlyPlanId = 'monthly-plan'; // Base Plan ID (Android専用)
+
+  async initialize() {
+    const { isBillingSupported } = await NativePurchases.isBillingSupported();
+    if (!isBillingSupported) throw new Error('Billing unavailable');
+
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: [this.premiumProduct, this.monthlySubId],
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    console.log('Loaded products', products);
+
+    if (Capacitor.getPlatform() === 'ios') {
+      NativePurchases.addListener('transactionUpdated', (transaction) => {
+        this.handleTransaction(transaction);
+      });
+    }
+  }
+
+  async buyPremium(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.premiumProduct,
+      productType: PURCHASE_TYPE.INAPP,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async buyMonthly(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.monthlySubId,
+      planIdentifier: this.monthlyPlanId, // Androidサブスクリプションに必須
+      productType: PURCHASE_TYPE.SUBS,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async restore() {
+    await NativePurchases.restorePurchases();
+    await this.refreshEntitlements();
+  }
+
+  async openManageSubscriptions() {
+    await NativePurchases.manageSubscriptions();
+  }
+
+  private async processTransaction(transaction: Transaction) {
+    this.unlockContent(transaction.productIdentifier);
+    this.validateOnServer(transaction).catch(console.error);
+  }
+
+  private unlockContent(productIdentifier: string) {
+    // エンタイトルメントをローカルに永続化
+    console.log('Unlocked', productIdentifier);
+  }
+
+  private async refreshEntitlements() {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('Current purchases', purchases);
+  }
+
+  private async handleTransaction(transaction: Transaction) {
+    console.log('StoreKit transaction update:', transaction);
+    await this.processTransaction(transaction);
+  }
+
+  private async validateOnServer(transaction: Transaction) {
+    await fetch('/api/validate-purchase', {
+      method: 'POST',
+      body: JSON.stringify({
+        transactionId: transaction.transactionId,
+        receipt: transaction.receipt,
+        purchaseToken: transaction.purchaseToken,
+      }),
+    });
+  }
+}
+```
+
+## 必要な購入オプション
+
+| オプション | プラットフォーム | 説明 |
+|--------|----------|-------------|
+| `productIdentifier` | iOS + Android | App Store Connect / Google Play Consoleで設定されたSKU/商品ID。 |
+| `productType` | Android専用 | `PURCHASE_TYPE.INAPP`または`PURCHASE_TYPE.SUBS`。デフォルトは`INAPP`。サブスクリプションには常に`SUBS`を設定します。 |
+| `planIdentifier` | Androidサブスクリプション | Google Play ConsoleのBase Plan ID。サブスクリプションに必須、iOSとアプリ内購入では無視されます。 |
+| `quantity` | iOS | アプリ内購入のみ、デフォルトは`1`。Androidは常に1つのアイテムを購入します。 |
+| `appAccountToken` | iOS + Android | 購入をユーザーにリンクするUUID/文字列。iOSではUUIDが必須。Androidでは最大64文字の難読化された文字列を受け入れます。 |
+| `isConsumable` | Android | 消費型商品のエンタイトルメント付与後にトークンを自動消費する場合は`true`に設定。デフォルトは`false`。 |
+
+## エンタイトルメントステータスの確認
+
+ストアが報告するすべてのトランザクションのクロスプラットフォームビューには`getPurchases()`を使用します：
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+purchases.forEach((purchase) => {
+  if (purchase.isActive && purchase.expirationDate) {
+    console.log('iOS sub active until', purchase.expirationDate);
+  }
+
+  const isAndroidIapValid =
+    ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') && purchase.isAcknowledged;
+
+  if (isAndroidIapValid) {
+    console.log('Grant in-app entitlement for', purchase.productIdentifier);
+  }
+});
+```
+
+### プラットフォームの動作
+
+- **iOS**: サブスクリプションには`isActive`、`expirationDate`、`willCancel`、およびStoreKit 2リスナーサポートが含まれます。アプリ内購入にはサーバーレシート検証が必要です。
+- **Android**: `isActive`/`expirationDate`は入力されません。権威あるステータスを取得するには、`purchaseToken`を使用してGoogle Play Developer APIを呼び出します。`purchaseState`は`PURCHASED`である必要があり、`isAcknowledged`は`true`である必要があります。
+
+## APIクイックリファレンス
+
+- `isBillingSupported()` – StoreKit / Google Playの利用可能性を確認します。
+- `getProduct()` / `getProducts()` – 価格、ローカライズされたタイトル、説明、初回特典を取得します。
+- `purchaseProduct()` – StoreKit 2またはBillingクライアントの購入フローを開始します。
+- `restorePurchases()` – 過去の購入を再生し、現在のデバイスに同期します。
+- `getPurchases()` – すべてのiOSトランザクションまたはPlay Billing購入をリストします。
+- `manageSubscriptions()` – ネイティブサブスクリプション管理UIを開きます。
+- `addListener('transactionUpdated')` – アプリ起動時に保留中のStoreKit 2トランザクションを処理します（iOS専用）。
+
+## ベストプラクティス
+
+1. **ストア価格を表示** – Appleは`product.title`と`product.priceString`の表示を要求します。ハードコードしないでください。
+2. **`appAccountToken`を使用** – ユーザーIDから決定論的にUUID（v5）を生成し、購入をアカウントにリンクします。
+3. **サーバー側で検証** – `receipt`（iOS）/`purchaseToken`（Android）をバックエンドに送信して検証します。
+4. **エラーを適切に処理** – ユーザーキャンセル、ネットワーク障害、サポートされていない課金環境を確認します。
+5. **徹底的にテスト** – [iOSサンドボックスガイド](/docs/plugins/native-purchases/ios-sandbox-testing/)と[Androidサンドボックスガイド](/docs/plugins/native-purchases/android-sandbox-testing/)に従ってください。
+6. **リストアと管理を提供** – `restorePurchases()`と`manageSubscriptions()`に接続されたUIボタンを追加します。
+
+## トラブルシューティング
+
+**商品が読み込まれない**
+- バンドルID / アプリケーションIDがストア設定と一致していることを確認してください。
+- 商品IDが有効で承認されている（App Store）または有効化されている（Google Play）ことを確認してください。
+- 商品を作成してから数時間待ってください。ストアの伝播は即座ではありません。
+
+**購入がキャンセルまたはスタックした**
+- ユーザーはフローの途中でキャンセルできます。`try/catch`で呼び出しをラップし、わかりやすいエラーメッセージを表示します。
+- Androidの場合、テストアカウントがPlay Store（内部トラック）からアプリをインストールして、Billingが機能することを確認してください。
+- デバイスで実行する際のlogcat/Xcodeで課金エラーを確認してください。
+
+**サブスクリプション状態が正しくない**
+- `getPurchases()`を使用して、ストアデータをローカルエンタイトルメントキャッシュと比較します。
+- Androidでは、常に`purchaseToken`を使用してGoogle Play Developer APIにクエリを実行し、有効期限日または返金ステータスを取得します。
+- iOSでは、`isActive`/`expirationDate`を確認し、レシートを検証して返金または取り消しを検出します。

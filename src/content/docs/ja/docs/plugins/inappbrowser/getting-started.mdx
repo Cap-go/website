@@ -1,0 +1,410 @@
+---
+title: 始め方
+description: Capacitorアプリで埋め込みWebコンテンツのためにURL変更イベントを持つInAppBrowserプラグインをインストールして使用する方法を学びます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージのインストール**
+   <PackageManagers pkg="@capgo/inappbrowser" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+プラグインをインポートして、2つの主要なエントリーポイントを使用します:
+
+```typescript
+import { InAppBrowser, ToolBarType, BackgroundColor } from '@capgo/inappbrowser';
+
+// 1) シンプルなカスタムタブ / SFSafariViewController
+const openExternal = async () => {
+  await InAppBrowser.open({
+    url: 'https://capgo.app',
+    isPresentAfterPageLoad: true,
+    preventDeeplink: false,
+  });
+};
+
+// 2) ナビゲーション、ヘッダー、共有、メッセージングなどを備えたフルWebView
+const openWebView = async () => {
+  await InAppBrowser.openWebView({
+    url: 'https://capgo.app',
+    title: 'Capgo',
+    toolbarType: ToolBarType.NAVIGATION,
+    backgroundColor: BackgroundColor.BLACK,
+    activeNativeNavigationForWebview: true,
+    showReloadButton: true,
+    shareSubject: 'Check this page',
+    shareDisclaimer: {
+      title: 'Disclaimer',
+      message: 'You are about to share content',
+      confirmBtn: 'Continue',
+      cancelBtn: 'Cancel',
+    },
+  });
+};
+
+// アプリと開かれたWebView間のメッセージング
+const setupListeners = async () => {
+  await InAppBrowser.addListener('urlChangeEvent', (event) => {
+    console.log('URL changed to:', event.url);
+  });
+
+  await InAppBrowser.addListener('messageFromWebview', (event) => {
+    console.log('Message from web:', event.detail);
+  });
+
+  await InAppBrowser.addListener('closeEvent', () => {
+    console.log('WebView closed');
+  });
+};
+
+// WebViewにデータを送信
+const sendData = async () => {
+  await InAppBrowser.postMessage({ detail: { action: 'refresh-profile' } });
+};
+
+// 閉じるとリロードのヘルパー
+const closeBrowser = () => InAppBrowser.close();
+const reloadPage = () => InAppBrowser.reload();
+```
+
+## APIリファレンス
+
+### open(options: OpenOptions)
+カスタムタブ / SFSafariViewControllerでURLを開きます。
+
+```typescript
+interface OpenOptions {
+  /** 読み込むターゲットURL */
+  url: string;
+  /** ページの読み込みが完了した後に表示 */
+  isPresentAfterPageLoad?: boolean;
+  /** 外部アプリを開くディープリンクを防ぐ */
+  preventDeeplink?: boolean;
+}
+
+await InAppBrowser.open({ url: 'https://example.com', preventDeeplink: true });
+```
+
+### openWebView(options: OpenWebViewOptions)
+ナビゲーションUI、ヘッダー、クレデンシャル、スクリプティング、メッセージングを備えたフル機能のWebViewを読み込みます。
+
+```typescript
+interface OpenWebViewOptions {
+  url: string;
+  headers?: Record<string, string>;
+  credentials?: { username: string; password: string };
+  materialPicker?: boolean;
+  shareDisclaimer?: {
+    title: string;
+    message: string;
+    confirmBtn: string;
+    cancelBtn: string;
+  };
+  toolbarType?: ToolBarType;
+  shareSubject?: string;
+  title?: string;
+  backgroundColor?: BackgroundColor;
+  activeNativeNavigationForWebview?: boolean;
+  disableGoBackOnNativeApplication?: boolean;
+  isPresentAfterPageLoad?: boolean;
+  isInspectable?: boolean;
+  isAnimated?: boolean;
+  showReloadButton?: boolean;
+  closeModal?: boolean;
+  closeModalTitle?: string;
+  closeModalDescription?: string;
+  closeModalOk?: string;
+  closeModalCancel?: string;
+  visibleTitle?: boolean;
+  toolbarColor?: string;
+  toolbarTextColor?: string;
+  showArrow?: boolean;
+  ignoreUntrustedSSLError?: boolean;
+  preShowScript?: string;
+  preShowScriptInjectionTime?: 'documentStart' | 'pageLoad';
+  proxyRequests?: string;
+  buttonNearDone?: {
+    ios: { iconType: 'sf-symbol' | 'asset'; icon: string };
+    android: { iconType: 'asset' | 'vector'; icon: string; width?: number; height?: number };
+  };
+  textZoom?: number;
+  preventDeeplink?: boolean;
+  authorizedAppLinks?: string[];
+  enabledSafeBottomMargin?: boolean;
+  useTopInset?: boolean;
+  enableGooglePaySupport?: boolean;
+  blockedHosts?: string[];
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+}
+
+await InAppBrowser.openWebView({
+  url: 'https://new-page.com',
+  toolbarType: ToolBarType.NAVIGATION,
+  showReloadButton: true,
+});
+```
+
+`ToolBarType`の値: `activity` (閉じる + 共有)、`compact` (閉じるのみ)、`navigation` (戻る/進む + 閉じる)、`blank` (ツールバーなし)。`BackgroundColor`の値: `white`または`black`。
+
+### close(options?)
+WebView/カスタムタブを閉じます。
+
+**オプション:**
+- `isAnimated?: boolean` - 閉じるアクションをアニメーション化するかどうか
+
+### reload()
+現在のWebViewページをリロードします。
+
+### goBack()
+WebView履歴で戻り、`{ canGoBack: boolean }`を返します。
+
+### `setUrl({ url: string })`
+現在のWebView URLを置き換えます。
+
+### `executeScript({ code: string })`
+WebViewにJavaScriptを注入します。
+
+### `postMessage({ detail: Record<string, any> })`
+ネイティブアプリからWebViewにデータを送信します (JSで`window.addEventListener('messageFromNative', ...)`を介して受信)。
+
+### `getCookies({ url, includeHttpOnly? })`
+URL用のクッキーを返します。
+
+### `clearCookies({ url })` / clearAllCookies() / clearCache()
+クッキーとキャッシュ管理ヘルパー。
+
+### updateDimensions(options: DimensionOptions)
+実行時にWebViewのサイズ/位置を変更 (`width`、`height`、`x`、`y`)。
+
+### removeAllListeners()
+プラグインのすべてのリスナーを登録解除します。
+
+## イベント
+
+### urlChangeEvent
+
+ブラウザでURLが変更されたときに発火します。
+
+```typescript
+interface UrlChangeEvent {
+  url: string;
+}
+
+InAppBrowser.addListener('urlChangeEvent', (event) => {
+  console.log('New URL:', event.url);
+});
+```
+
+### messageFromWebview
+WebView内で`window.mobileApp.postMessage(...)`が呼び出されたときにトリガーされます。
+
+```typescript
+InAppBrowser.addListener('messageFromWebview', (event) => {
+  console.log('Payload from web:', event.detail);
+});
+```
+
+### closeEvent
+
+ブラウザが閉じられたときに発火します。
+
+```typescript
+InAppBrowser.addListener('closeEvent', () => {
+  console.log('Browser closed');
+});
+```
+
+### buttonNearDoneClick
+`buttonNearDone`で追加されたカスタムボタンが押されたときに発火します。
+
+```typescript
+InAppBrowser.addListener('buttonNearDoneClick', (event) => {
+  console.log('Button near done tapped', event);
+});
+```
+
+### confirmBtnClicked
+確認ダイアログ (免責事項または閉じるモーダル) が受け入れられたときにトリガーされます。
+
+```typescript
+InAppBrowser.addListener('confirmBtnClicked', (event) => {
+  console.log('Confirm accepted, current URL:', event.url);
+});
+```
+
+### browserPageLoaded / pageLoadError
+WebView読み込みの成功または失敗のライフサイクルイベント。
+
+```typescript
+InAppBrowser.addListener('browserPageLoaded', () => console.log('Page loaded'));
+InAppBrowser.addListener('pageLoadError', () => console.log('Page failed to load'));
+```
+
+## 高度な使用方法
+
+### OAuthフローの実装
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class OAuthService {
+  private listeners: any[] = [];
+
+  async authenticate(authUrl: string, redirectUri: string) {
+    return new Promise<string>((resolve, reject) => {
+      // URL変更をリスン
+      const urlListener = InAppBrowser.addListener('urlChangeEvent', (event) => {
+        if (event.url.startsWith(redirectUri)) {
+          // URLからOAuthコード/トークンを抽出
+          const url = new URL(event.url);
+          const code = url.searchParams.get('code');
+
+          if (code) {
+            InAppBrowser.close();
+            resolve(code);
+          } else {
+            const error = url.searchParams.get('error');
+            reject(new Error(error || 'OAuth failed'));
+          }
+        }
+      });
+
+      this.listeners.push(urlListener);
+
+      // OAuthプロバイダを開く
+      InAppBrowser.open({
+        url: authUrl,
+        preventDeeplink: true,
+      });
+    });
+  }
+
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+### カスタムブラウザUI
+
+```typescript
+const openCustomBrowser = async () => {
+  await InAppBrowser.open({
+    url: 'https://example.com',
+    isPresentAfterPageLoad: true,
+    preventDeeplink: false,
+  });
+};
+```
+
+### 外部リンクの処理
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class LinkHandler {
+  async openExternalLink(url: string) {
+    // URLがブラウザで開くべきかチェック
+    if (this.shouldOpenInBrowser(url)) {
+      await InAppBrowser.open({
+        url,
+        preventDeeplink: true,
+      });
+    } else {
+      // 内部で処理
+      window.location.href = url;
+    }
+  }
+
+  private shouldOpenInBrowser(url: string): boolean {
+    // 外部ドメイン
+    const externalDomains = ['youtube.com', 'twitter.com', 'facebook.com'];
+    const urlDomain = new URL(url).hostname;
+
+    return externalDomains.some(domain => urlDomain.includes(domain));
+  }
+}
+```
+
+## ベストプラクティス
+
+1. **常にリスナーを削除する**
+   ```typescript
+   const listener = await InAppBrowser.addListener('urlChangeEvent', handler);
+   // 完了時
+   listener.remove();
+   ```
+
+2. **ブラウザの状態を処理する**
+   ```typescript
+   let browserOpen = false;
+
+   const launch = async () => {
+     browserOpen = true;
+     await InAppBrowser.openWebView({ url: 'https://example.com' });
+   };
+
+   InAppBrowser.addListener('closeEvent', () => {
+     browserOpen = false;
+   });
+   ```
+
+3. **開く前にURLを検証する**
+   ```typescript
+   const isValidUrl = (url: string): boolean => {
+     try {
+       new URL(url);
+       return true;
+     } catch {
+       return false;
+     }
+   };
+
+   if (isValidUrl(url)) {
+     await InAppBrowser.open({ url });
+   }
+   ```
+
+4. **プラットフォームに合わせてカスタマイズする**
+   ```typescript
+   import { Capacitor } from '@capacitor/core';
+
+   const options = {
+     url: 'https://example.com',
+     preventDeeplink: Capacitor.getPlatform() === 'ios',
+   };
+   ```
+
+## プラットフォームに関する注意事項
+
+### iOS
+- `SFSafariViewController`を使用
+- iOS 11.0+をサポート
+- Safe Areaインセットを尊重
+- カスタムプレゼンテーションスタイルをサポート
+
+### Android
+- Chrome Custom Tabsを使用
+- Chromeが利用できない場合はWebViewにフォールバック
+- Android 5.0 (API 21)+をサポート
+- `toolbarType`、`toolbarColor`、`buttonNearDone`などを介したツールバーのカスタマイズをサポート
+
+### Web
+- 新しいブラウザタブ/ウィンドウで開きます
+- カスタマイズオプションは限定的
+- URL変更イベントなし

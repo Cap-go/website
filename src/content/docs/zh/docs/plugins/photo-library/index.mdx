@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-photo-library"
+locale: zh
+description: 使用高效的分页、缩略图和缓存 URL 浏览和选择照片。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 构建利用原生照片图库和强大授权流程的自定义图库。
+  image:
+    file: ~public/icons/plugins/photo-library.svg
+  actions:
+    - text: 快速入门
+      link: /docs/plugins/photo-library/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-photo-library/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Photo Library 帮助您列出相册、分页浏览资源和请求缩略图，同时保持性能检查。
+
+<CardGrid stagger>
+  <Card title="授权助手" icon="approve-check">
+    请求权限并优雅地处理受限访问状态。
+  </Card>
+  <Card title="分页获取" icon="rocket">
+    使用基于游标的加载和可自定义的限制对图库进行分页。
+  </Card>
+  <Card title="优化的缩略图" icon="star">
+    以固定尺寸获取缩略图 URL，实现流畅的滚动列表。
+  </Card>
+  <Card title="媒体选择" icon="download">
+    让用户选择照片或视频，并配置选择限制。
+  </Card>
+</CardGrid>
+
+查看快速入门指南以了解权限设置和图库示例。

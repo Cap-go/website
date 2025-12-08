@@ -1,0 +1,104 @@
+---
+title: "API Overview"
+description: "Explore Capgo's public API for managing resources such as organizations, devices, channels, and bundles using RESTful HTTP methods and authentication."
+sidebar:
+  order: 1
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+This is the documentation of the public API of Capgo cloud. The API allows you to programmatically manage your Capgo resources, including organizations, devices, channels, and bundles. It's designed to be RESTful and uses standard HTTP methods.
+
+## Authentication
+
+All API endpoints require authentication. To authenticate your requests, add your API key in the `authorization` header.
+
+Example:
+```bash
+curl -H "authorization: your-api-key" https://api.capgo.app/organization/
+```
+
+<LinkCard
+	title="Get API key"
+	description="Generate your API key in the Capgo dashboard"
+	href="https://console.capgo.app/dashboard/apikeys/"
+/>
+
+## Rate Limiting
+
+The API implements rate limiting to ensure fair usage. Current limits are:
+- 100 requests per minute for standard accounts
+- 1000 requests per minute for enterprise accounts
+
+If you exceed these limits, you'll receive a 429 (Too Many Requests) response.
+
+## Response Format
+
+All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include an `error` field with a description of what went wrong.
+
+Example success response:
+```json
+{
+  "status": "ok",
+  "data": { ... }
+}
+```
+
+Example error response:
+```json
+{
+  "error": "Invalid API key",
+  "status": "KO"
+}
+```
+
+## Available Endpoints
+
+<LinkCard
+	title="Organizations"
+	description="Create and manage organizations, update settings, and handle organization-level configurations"
+	href="/docs/public-api/organizations/"
+/>
+
+<LinkCard
+	title="API Keys"
+	description="Generate, list, and revoke API keys for secure access to the Capgo API"
+	href="/docs/public-api/api-keys/"
+/>
+
+<LinkCard
+	title="Members"
+	description="Manage organization members, roles, and permissions"
+	href="/docs/public-api/members/"
+/>
+
+<LinkCard
+	title="Statistics"
+	description="Access detailed analytics about app usage, storage, and bandwidth consumption"
+	href="/docs/public-api/statistics/"
+/>
+
+<LinkCard
+	title="Channels"
+	description="Control app update channels, versions, and update policies"
+	href="/docs/public-api/channels/"
+/>
+
+<LinkCard
+	title="Devices"
+	description="Track and manage devices running your app, including version and channel assignments"
+	href="/docs/public-api/devices/"
+/>
+
+<LinkCard
+	title="Bundles"
+	description="Handle app bundles, including uploading, listing, and managing versions"
+	href="/docs/public-api/bundles/"
+/>
+
+## Best Practices
+
+1. **Error Handling**: Always check for error responses and handle them appropriately
+2. **Rate Limiting**: Implement exponential backoff when hitting rate limits
+3. **Caching**: Cache responses when appropriate to reduce API calls
+4. **Versioning**: Keep track of API changes through our changelog 

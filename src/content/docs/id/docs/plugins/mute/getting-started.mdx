@@ -1,0 +1,210 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Mute untuk mendeteksi status mode senyap di aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek asli**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+Impor plugin dan gunakan metodenya untuk memeriksa status mute:
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+// Periksa apakah perangkat dalam mode mute
+const checkMuteState = async () => {
+  const { value } = await CapacitorMute.isMuted();
+
+  if (value) {
+    console.log('Perangkat dalam mode mute/senyap');
+    // Sesuaikan perilaku aplikasi untuk mode senyap
+  } else {
+    console.log('Suara perangkat menyala');
+  }
+};
+```
+
+## Referensi API
+
+### isMuted()
+
+Memeriksa apakah perangkat saat ini dalam mode mute/senyap.
+
+```typescript
+const result = await CapacitorMute.isMuted();
+// Mengembalikan: { value: boolean }
+```
+
+## Contoh Lengkap
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+export class SoundManager {
+  private isMuted = false;
+
+  async initialize() {
+    // Dapatkan status mute awal
+    await this.checkMuteState();
+  }
+
+  async checkMuteState() {
+    try {
+      const { value } = await CapacitorMute.isMuted();
+      this.isMuted = value;
+      this.updateAppBehavior();
+    } catch (error) {
+      console.error('Gagal memeriksa status mute:', error);
+    }
+  }
+
+  private updateAppBehavior() {
+    if (this.isMuted) {
+      // Perangkat dalam mode mute - sesuaikan perilaku aplikasi
+      this.disableSoundEffects();
+      this.showVisualNotifications();
+    } else {
+      // Suara perangkat menyala
+      this.enableSoundEffects();
+      this.useAudioNotifications();
+    }
+  }
+
+  private disableSoundEffects() {
+    // Nonaktifkan suara dalam aplikasi
+    console.log('Menonaktifkan efek suara');
+  }
+
+  private enableSoundEffects() {
+    // Aktifkan suara dalam aplikasi
+    console.log('Mengaktifkan efek suara');
+  }
+
+  private showVisualNotifications() {
+    // Gunakan umpan balik visual daripada audio
+    console.log('Menggunakan notifikasi visual');
+  }
+
+  private useAudioNotifications() {
+    // Gunakan notifikasi audio
+    console.log('Menggunakan notifikasi audio');
+  }
+}
+
+// Penggunaan
+const soundManager = new SoundManager();
+await soundManager.initialize();
+
+// Polling secara berkala untuk memeriksa perubahan
+setInterval(() => {
+  soundManager.checkMuteState();
+}, 5000); // Periksa setiap 5 detik
+```
+
+## Perilaku Platform
+
+### iOS
+- Mendeteksi status sakelar mute fisik
+- Tidak ada event perubahan real-time (diperlukan polling)
+- Bekerja pada iPhone dan iPad dengan sakelar mute
+
+### Android
+- Memeriksa apakah mode dering diatur ke senyap atau getar
+- Tidak ada event perubahan (diperlukan polling)
+- Berdasarkan mode dering AudioManager
+
+## Praktik Terbaik
+
+1. **Polling untuk perubahan**
+   Karena plugin tidak menyediakan event real-time, lakukan polling secara berkala jika Anda perlu melacak perubahan:
+   ```typescript
+   // Periksa status mute secara berkala
+   setInterval(async () => {
+     const { value } = await CapacitorMute.isMuted();
+     if (value !== previousMuteState) {
+       handleMuteStateChange(value);
+     }
+   }, 5000);
+   ```
+
+2. **Hormati preferensi pengguna**
+   Selalu hormati status mute dan sesuaikan perilaku audio aplikasi Anda dengan tepat.
+
+3. **Sediakan alternatif visual**
+   ```typescript
+   const { value: isMuted } = await CapacitorMute.isMuted();
+   if (isMuted) {
+     // Tampilkan notifikasi visual
+     showToast('Pesan baru diterima');
+   } else {
+     // Putar notifikasi suara
+     playNotificationSound();
+   }
+   ```
+
+## Kasus Penggunaan
+
+1. **Manajemen Suara Game**
+   ```typescript
+   const shouldPlaySound = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     return !isMuted && userPreferences.soundEnabled;
+   };
+   ```
+
+2. **Penanganan Notifikasi**
+   ```typescript
+   const sendNotification = async (message: string) => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     if (isMuted) {
+       // Gunakan getaran atau notifikasi visual
+       await Haptics.vibrate();
+       showBanner(message);
+     } else {
+       // Putar notifikasi suara
+       await playSound('notification.mp3');
+     }
+   };
+   ```
+
+3. **Pemutar Video**
+   ```typescript
+   const initVideoPlayer = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     videoPlayer.setMuted(isMuted);
+     if (isMuted) {
+       showSubtitles(true);
+       showMuteIndicator();
+     }
+   };
+   ```
+
+## Pemecahan Masalah
+
+1. **Selalu mengembalikan false di Android**
+   - Periksa apakah mode dering perangkat benar-benar diatur ke senyap
+   - Beberapa perangkat Android mungkin memiliki perilaku yang berbeda
+
+2. **Tidak ada event perubahan yang tersedia**
+   - Plugin tidak menyediakan event perubahan real-time
+   - Implementasikan polling jika Anda perlu mendeteksi perubahan
+
+3. **Tidak berfungsi di simulator**
+   - Simulator iOS tidak memiliki sakelar mute
+   - Uji pada perangkat nyata untuk hasil yang akurat

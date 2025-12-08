@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-alarm"
+description: Planen Sie native Alarme und Benachrichtigungen auch bei geschlossener App.
+locale: de
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Verwalten Sie native Alarme auf iOS und Android direkt aus Ihrer Capacitor-App.
+  image:
+    file: ~public/icons/plugins/alarm.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/alarm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-alarm/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Native Integration" icon="puzzle">
+    Verwendet natives AlarmKit auf iOS und AlarmClock-Intents auf Android
+  </Card>
+  <Card title="Einfache API" icon="rocket">
+    Benutzerfreundliche Methoden zum Erstellen und Verwalten von Alarmen
+  </Card>
+  <Card title="Berechtigungsverwaltung" icon="approve-check-circle">
+    Integrierte Unterstützung für die Anforderung notwendiger Berechtigungen
+  </Card>
+  <Card title="Umfassende Dokumentation" icon="open-book">
+    Schauen Sie sich die [Dokumentation](/docs/plugins/alarm/getting-started/) an, um das Plugin in nur wenigen Minuten zu meistern.
+  </Card>
+</CardGrid>

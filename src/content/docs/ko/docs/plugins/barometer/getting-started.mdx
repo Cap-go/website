@@ -1,0 +1,218 @@
+---
+title: "Barometer 시작하기"
+locale: ko
+description: "Capacitor 앱에 기압 센싱을 통합하는 방법을 알아보세요"
+---
+
+이 가이드는 애플리케이션에 Capacitor Barometer 플러그인을 통합하는 과정을 안내합니다.
+
+## 설치
+
+npm을 사용하여 플러그인을 설치하세요:
+
+```bash
+npm install @capgo/capacitor-barometer
+npx cap sync
+```
+
+## iOS 구성
+
+`Info.plist`에 다음을 추가하세요:
+
+```xml
+<key>NSMotionUsageDescription</key>
+<string>This app uses the barometer to measure atmospheric pressure</string>
+```
+
+## Android 구성
+
+추가 구성이 필요하지 않습니다. 플러그인은 필요한 권한을 자동으로 요청합니다.
+
+## 기본 사용법
+
+### 플러그인 가져오기
+
+```typescript
+import { Barometer } from '@capgo/capacitor-barometer';
+```
+
+### 센서 가용성 확인
+
+```typescript
+const checkBarometer = async () => {
+  const { available } = await Barometer.isAvailable();
+  console.log('Barometer available:', available);
+};
+```
+
+### 압력 모니터링 시작
+
+```typescript
+const startMonitoring = async () => {
+  await Barometer.start({
+    interval: 1000 // Update interval in milliseconds
+  });
+
+  console.log('Barometer monitoring started');
+};
+```
+
+### 압력 이벤트 수신
+
+```typescript
+Barometer.addListener('pressureChange', (data) => {
+  console.log('Pressure (hPa):', data.pressure);
+  console.log('Relative altitude (m):', data.relativeAltitude);
+  console.log('Timestamp:', data.timestamp);
+});
+```
+
+### 현재 판독값 가져오기
+
+```typescript
+const getCurrentPressure = async () => {
+  const reading = await Barometer.getCurrentReading();
+  console.log('Current pressure:', reading.pressure, 'hPa');
+  console.log('Relative altitude:', reading.relativeAltitude, 'm');
+};
+```
+
+### 모니터링 중지
+
+```typescript
+const stopMonitoring = async () => {
+  await Barometer.stop();
+  console.log('Barometer monitoring stopped');
+};
+```
+
+## 완전한 예제
+
+다음은 기압계 통합을 보여주는 완전한 예제입니다:
+
+```typescript
+import { Barometer } from '@capgo/capacitor-barometer';
+
+class BarometerService {
+  private listener: any;
+
+  async initialize() {
+    // Check availability
+    const { available } = await Barometer.isAvailable();
+    if (!available) {
+      console.error('Barometer not available on this device');
+      return;
+    }
+
+    // Start monitoring
+    await Barometer.start({ interval: 1000 });
+
+    // Add listener
+    this.listener = Barometer.addListener('pressureChange', (data) => {
+      this.handlePressureChange(data);
+    });
+  }
+
+  handlePressureChange(data: any) {
+    console.log('Pressure:', data.pressure, 'hPa');
+    console.log('Altitude:', data.relativeAltitude, 'm');
+
+    // Update UI or process data
+    this.updateDisplay(data);
+  }
+
+  updateDisplay(data: any) {
+    // Convert hPa to other units
+    const inHg = (data.pressure * 0.02953).toFixed(2);
+    const mmHg = (data.pressure * 0.750062).toFixed(1);
+
+    console.log(`Pressure: ${data.pressure.toFixed(1)} hPa`);
+    console.log(`         ${inHg} inHg`);
+    console.log(`         ${mmHg} mmHg`);
+    console.log(`Altitude: ${data.relativeAltitude.toFixed(1)} m`);
+  }
+
+  async cleanup() {
+    // Remove listener
+    if (this.listener) {
+      this.listener.remove();
+    }
+
+    // Stop monitoring
+    await Barometer.stop();
+  }
+}
+
+// Usage
+const barometerService = new BarometerService();
+barometerService.initialize();
+
+// Cleanup when done
+// barometerService.cleanup();
+```
+
+## 판독값 이해하기
+
+### 대기압
+
+- 헥토파스칼(hPa) 또는 밀리바(mb) 단위로 측정됩니다
+- 표준 해수면 압력: 1013.25 hPa
+- 고도가 높을수록 압력이 낮아집니다
+- 기상 시스템이 압력 판독값에 영향을 미칩니다
+
+### 상대 고도
+
+- 압력 변화로부터 계산됩니다
+- 시작 기준점을 기준으로 합니다
+- 정확도: ±10-30미터
+- 단기 추적에 가장 적합합니다
+
+## 모범 사례
+
+1. **가용성 확인**: 사용하기 전에 항상 센서 가용성을 확인하세요
+2. **합리적인 간격**: 너무 자주 폴링하지 마세요(1000ms가 좋습니다)
+3. **리스너 제거**: 필요하지 않을 때 리스너를 정리하세요
+4. **보정**: 정확한 판독값을 위해 알려진 고도를 사용하세요
+5. **배터리 영향**: 지속적인 센싱으로 배터리 사용량을 모니터링하세요
+
+## 일반적인 문제
+
+### 센서를 사용할 수 없음
+
+```typescript
+try {
+  const { available } = await Barometer.isAvailable();
+  if (!available) {
+    // Fallback to GPS altitude or manual input
+    showAlternativeMethod();
+  }
+} catch (error) {
+  console.error('Barometer check failed:', error);
+}
+```
+
+### 노이즈가 있는 데이터
+
+```typescript
+class PressureFilter {
+  private readings: number[] = [];
+  private maxReadings = 5;
+
+  addReading(pressure: number): number {
+    this.readings.push(pressure);
+    if (this.readings.length > this.maxReadings) {
+      this.readings.shift();
+    }
+
+    // Return moving average
+    const sum = this.readings.reduce((a, b) => a + b, 0);
+    return sum / this.readings.length;
+  }
+}
+```
+
+## 다음 단계
+
+- 전체 메서드 문서는 [API Reference](https://github.com/Cap-go/capacitor-barometer#api)를 확인하세요
+- 고급 사용법은 [예제 앱](https://github.com/Cap-go/capacitor-barometer/tree/main/example)을 확인하세요
+- 전체 구현 예제는 [튜토리얼](/plugins-tutorials/capacitor-barometer)을 참조하세요

@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-pdf-generator"
+locale: ja
+description: HTML マークアップまたはリモート URL からデバイス上で直接 PDF を生成します。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "概要"
+hero:
+  tagline: Capacitor アプリを離れることなく、テンプレート、領収書、レポートからピクセルパーフェクトな PDF をレンダリングします。
+  image:
+    file: ~public/icons/plugins/pdf-generator.svg
+  actions:
+    - text: はじめに
+      link: /docs/plugins/pdf-generator/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-pdf-generator/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+iOS と Android 用の Capgo のネイティブレンダラーで、HTML またはリモートページを共有可能な PDF に変換します。
+
+<CardGrid stagger>
+  <Card title="HTML から PDF へ" icon="pencil">
+    HTML テンプレートを入力して、数秒で共有可能な PDF ドキュメントを取得します。
+  </Card>
+  <Card title="リモートキャプチャ" icon="rocket">
+    アクセス可能な任意の URL のスナップショットを作成し、生成された PDF を保存または配布します。
+  </Card>
+  <Card title="柔軟な出力" icon="star">
+    ワークフローに応じて、base64 データを返すか、ネイティブ共有シートをトリガーします。
+  </Card>
+  <Card title="ドキュメント制御" icon="setting">
+    各レンダリングの向き、ページサイズ、ファイル名を指定します。
+  </Card>
+</CardGrid>
+
+プラットフォームノートと使用例については、はじめにガイドをご覧ください。

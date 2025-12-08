@@ -1,0 +1,132 @@
+---
+title: "@capgo/capacitor-persistent-account"
+locale: es
+description: Plugin de gestión de cuentas persistentes para aplicaciones Capacitor con almacenamiento seguro, manejo de sesiones y persistencia de datos de usuario.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Gestiona cuentas de usuario con almacenamiento persistente, manejo de sesiones seguro y autenticación sin interrupciones entre sesiones de la aplicación.
+  image:
+    file: ~public/icons/plugins/persistent-account.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/persistent-account/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persistent-account/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Resumen
+
+El plugin Capacitor Persistent Account permite el almacenamiento seguro y la persistencia de datos de cuentas de usuario entre instalaciones de aplicaciones. Este plugin asegura que la información de la cuenta de usuario permanezca disponible incluso después de reinstalaciones de la aplicación, proporcionando una experiencia de usuario sin interrupciones y continuidad de cuenta.
+
+<CardGrid stagger>
+  <Card title="Persistencia entre instalaciones" icon="rocket">
+    Los datos sobreviven a ciclos de desinstalación/reinstalación de aplicaciones 💾
+  </Card>
+  <Card title="Almacenamiento seguro" icon="setting">
+    Almacenamiento seguro de datos de cuenta con integración del sistema 🔐
+  </Card>
+  <Card title="API simple" icon="puzzle">
+    Interfaz limpia de lectura/escritura para gestión de cuentas 📊
+  </Card>
+  <Card title="Multiplataforma" icon="laptop">
+    Implementación nativa en iOS y Android 📱
+  </Card>
+</CardGrid>
+
+## Instalación
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## Métodos principales de la API
+
+### Gestión de datos
+- `saveAccount(options: { data: unknown })` - Guarda de forma segura los datos de cuenta en almacenamiento persistente
+- `readAccount()` - Recupera los datos de cuenta almacenados, devuelve `Promise<{ data: unknown | null }>`
+
+## Características principales
+
+- **Persistencia entre instalaciones**: Los datos de cuenta sobreviven a la desinstalación y reinstalación de la aplicación
+- **Almacenamiento seguro**: Usa mecanismos de almacenamiento seguro específicos de la plataforma
+- **Flexibilidad de tipos**: Almacena cualquier estructura de datos de cuenta serializable
+- **Soporte multiplataforma**: Implementación nativa para iOS y Android
+
+## Ejemplo de uso
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Define your account data structure
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Save account data
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Read account data
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Restored account:', account.username);
+} else {
+  console.log('No account data found');
+}
+```
+
+## Casos de uso
+
+- **Incorporación de usuarios**: Preserva el progreso del usuario a través de reinstalaciones de aplicaciones
+- **Recuperación de cuentas**: Restaura sesiones de usuario después de actualizaciones de la aplicación
+- **Almacenamiento de preferencias**: Mantiene configuraciones y ajustes de usuario
+- **Aplicaciones offline-first**: Almacena datos esenciales de usuario localmente
+
+## Implementación de plataforma
+
+### iOS
+- Utiliza iOS Keychain Services para almacenamiento seguro y persistente
+- Los datos sobreviven a eliminaciones de aplicaciones y restauraciones de dispositivo
+
+### Android
+- Usa Android Account Manager o preferencias compartidas con respaldo
+- Mantiene datos a través de reinstalaciones de aplicaciones y migraciones de dispositivos
+
+## Consideraciones de seguridad
+
+- Los datos de cuenta se almacenan usando almacenamiento seguro específico de la plataforma
+- Considera el cifrado de datos para información sensible
+- Implementa validación adecuada de datos al leer cuentas almacenadas
+- Sigue las directrices de la plataforma para el manejo de datos de usuario
+
+## Documentación
+
+Consulta la [documentación completa](/docs/plugins/persistent-account/getting-started/) para guías de implementación detalladas y mejores prácticas.

@@ -1,0 +1,197 @@
+---
+title: 始め方
+description: Capacitorアプリでデバイスのフラッシュライトを制御するために、Flashプラグインをインストールして使用する方法を学びます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージのインストール**
+   <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+プラグインをインポートして、フラッシュライトを制御するためのメソッドを使用します:
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// フラッシュライトが利用可能か確認
+const checkFlashlight = async () => {
+  const { value } = await CapacitorFlash.isAvailable();
+  console.log('Flashlight available:', value);
+};
+
+// フラッシュライトをオンにする
+const turnOn = async () => {
+  await CapacitorFlash.switchOn();
+};
+
+// フラッシュライトをオフにする
+const turnOff = async () => {
+  await CapacitorFlash.switchOff();
+};
+
+// フラッシュライトがオンかどうかを確認
+const checkStatus = async () => {
+  const { value } = await CapacitorFlash.isSwitchedOn();
+  console.log('Flashlight is on:', value);
+};
+
+// フラッシュライトを切り替える
+const toggle = async () => {
+  await CapacitorFlash.toggle();
+};
+```
+
+## APIリファレンス
+
+### isAvailable()
+
+デバイスでフラッシュライトが利用可能かどうかを確認します。
+
+```typescript
+const result = await CapacitorFlash.isAvailable();
+// 戻り値: { value: boolean }
+```
+
+### switchOn(options?)
+
+フラッシュライトをオンにします。
+
+```typescript
+interface SwitchOnOptions {
+  intensity?: number; // 0.0から1.0まで (iOSのみ)
+}
+
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+### switchOff()
+
+フラッシュライトをオフにします。
+
+```typescript
+await CapacitorFlash.switchOff();
+```
+
+### isSwitchedOn()
+
+フラッシュライトが現在オンかどうかを確認します。
+
+```typescript
+const result = await CapacitorFlash.isSwitchedOn();
+// 戻り値: { value: boolean }
+```
+
+### toggle()
+
+フラッシュライトをオン/オフに切り替えます。
+
+```typescript
+await CapacitorFlash.toggle();
+```
+
+## 完全な例
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+export class FlashlightService {
+  private isOn = false;
+
+  async init() {
+    const { value } = await CapacitorFlash.isAvailable();
+    if (!value) {
+      throw new Error('Flashlight not available on this device');
+    }
+  }
+
+  async toggle() {
+    if (this.isOn) {
+      await CapacitorFlash.switchOff();
+    } else {
+      await CapacitorFlash.switchOn();
+    }
+    this.isOn = !this.isOn;
+  }
+
+  async turnOn(intensity?: number) {
+    await CapacitorFlash.switchOn({ intensity });
+    this.isOn = true;
+  }
+
+  async turnOff() {
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+
+  async strobe(intervalMs: number = 100, duration: number = 3000) {
+    const endTime = Date.now() + duration;
+
+    while (Date.now() < endTime) {
+      await CapacitorFlash.toggle();
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+
+    // ストロボ後にフラッシュライトがオフであることを確認
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+}
+```
+
+## ベストプラクティス
+
+1. **まず利用可能性を確認する**
+   使用する前に、常にフラッシュライトの利用可能性を確認してください:
+   ```typescript
+   const { value } = await CapacitorFlash.isAvailable();
+   if (!value) {
+     // 代替UIを表示するか、フラッシュライト機能を無効にする
+   }
+   ```
+
+2. **エラーを適切に処理する**
+   ```typescript
+   try {
+     await CapacitorFlash.switchOn();
+   } catch (error) {
+     console.error('Failed to turn on flashlight:', error);
+   }
+   ```
+
+3. **必要ないときはオフにする**
+   バッテリーを節約するため、アプリがバックグラウンドに移行したとき、または機能が不要になったときは、常にフラッシュライトをオフにしてください。
+
+4. **急速な切り替えを避ける**
+   LEDを損傷したり、バッテリーを消耗する可能性がある急速なオン/オフ切り替えを防ぐため、デバウンスを実装してください。
+
+## プラットフォームに関する注意事項
+
+### iOS
+- iOS 10.0+が必要
+- `AVCaptureDevice`トーチモードを使用
+- 輝度制御をサポート (0.0から1.0まで)
+
+### Android
+- Android 6.0 (API 23)+が必要
+- Camera2 APIを使用
+- 輝度制御はサポートされていません (デフォルトの明るさを使用)
+
+### Web
+- MediaDevices APIとトーチ機能を持つブラウザでサポート
+- デバイスのフラッシュライトにアクセスするためにカメラストリームを使用
+- カメラへのアクセスにユーザーの許可が必要
+- モバイルブラウザで最適に動作 (AndroidのChrome)
+- デスクトップブラウザは通常`isAvailable: false`を返します (トーチハードウェアがないため)
+- Web上では輝度制御はサポートされていません

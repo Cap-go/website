@@ -1,0 +1,61 @@
+---
+title: Premiers pas
+locale: fr
+description: Ajoutez la numérisation de documents de qualité native avec détection des bords et formats de sortie ajustables.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer le plugin**
+   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser les plateformes natives**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Déclencher une numérisation
+
+```typescript
+import {
+  DocumentScanner,
+  ResponseType,
+  ScanDocumentResponseStatus,
+} from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  croppedImageQuality: 90,
+  letUserAdjustCrop: true,
+  maxNumDocuments: 10,
+  responseType: ResponseType.ImageFilePath,
+});
+
+if (result.status === ScanDocumentResponseStatus.Success) {
+  console.log('Scanned files:', result.scannedImages);
+} else {
+  console.log('Scan cancelled by user');
+}
+```
+
+## Retourner des données base64
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  responseType: ResponseType.Base64,
+});
+
+const [firstPage] = result.scannedImages ?? [];
+if (firstPage) {
+  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
+  // Afficher l'aperçu ou télécharger sur le serveur
+}
+```
+
+## Exigences de la plateforme
+
+- **iOS** : Ajoutez `NSCameraUsageDescription` à `ios/App/App/Info.plist` en expliquant comment vous utilisez la caméra.
+- **Android** : Confirmez que la permission `CAMERA` est déclarée (Capacitor l'ajoute automatiquement) et ajustez `croppedImageQuality`, `letUserAdjustCrop` et `maxNumDocuments` pour correspondre à votre interface utilisateur.
+- **Stockage** : Lors de l'utilisation de `ResponseType.ImageFilePath`, déplacez ou copiez les fichiers numérisés vers votre emplacement de stockage souhaité avant la fin de la session de l'application.

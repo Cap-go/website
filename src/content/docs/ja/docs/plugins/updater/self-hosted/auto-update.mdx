@@ -1,0 +1,109 @@
+---
+title: "自動アップデート"
+locale: ja
+description: "セルフホスティングモードでCapgoのアップデートエンドポイントを自動アップデートプラグインで使用する方法、その用途と期待されること"
+sidebar:
+  order: 4
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+このドキュメントでは、独自の自動アップデートサーバーを実行する方法を説明します。
+
+## バンドルを提供する
+バンドルがHTTPSで提供され、サーバーがアプリがアップデートをダウンロードできるように適切なCORSヘッダーを持っていることを確認してください。
+例: ```https://myserver.com/app/updates/updates.json```
+
+
+バンドルの提供に慣れていない場合は、Capgo Cloudを試すか、こちらの例をご覧ください:
+<LinkCard
+	title="バンドルを提供する"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## 設定
+``capacitor.config.json``に``updateUrl``を追加します。
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myserver.com/app/updates/updates.json",
+		}
+	}
+}
+```
+:::caution
+セルフホスティングのアップデートをプッシュする場合、「HTTP」エンドポイントを使用できないことに注意してください。これはAndroidアプリのセキュリティポリシーに違反するためです。テスト目的で[許可する](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted)ことができます。
+:::
+
+## Update API
+
+プラグインは、アプリが開くたびに、以下のボディでAPIにPOST呼び出しを行います:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSTEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+サーバーAPIは、アップデートが必要な場合、capacitor-updaterプラグインにJSONで応答する必要があります。このデータで:
+
+```json
+{
+"version": "1.2.3",
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
+"checksum": "sha256_checksum_of_bundle"
+}
+```
+
+自動アップデートモードでは、サーバーはバージョンを比較し、正しいものを返す必要があります。URLキーが存在する場合、プラグインはダウンロードプロセスを開始します。
+
+「message」と「error」キーを追加すると、バージョンは設定されず、代わりにログにメッセージが表示されます。
+
+`version`キーは[`semver`](https://semver.org/)形式である必要があります。
+
+zipはルートに`index.html`ファイルを持つか、ルートに`index.html`を含む1つのフォルダーのみを持つ必要があります。
+
+
+CLIのコマンドを使用してバンドルをzipできます:
+
+```bash title="サーバーから提供するファイルでバンドルを作成する"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```
+
+## バンドルチェックサムの生成
+
+**重要:** バンドルzipファイルを作成するには、Capgo CLIを使用する必要があります。Capgoプラグインは、公式CLIツールを使用した場合にのみ保証される特定のzip形式と構造を必要とします。標準のzipユーティリティでは、互換性のないアーカイブが作成される可能性があります。
+
+バンドルのチェックサムを生成するには、`--json`フラグを使用してCapgo CLI zipコマンドを使用します:
+
+```bash title="チェックサム情報付きでバンドルを作成"
+npx @capgo/cli bundle zip [appId] --json
+```
+
+このコマンドは:
+- Capgoプラグインと互換性のある適切にフォーマットされたzipファイルを作成します
+- 整合性検証のためのSHA256チェックサムを生成します
+- バンドル情報をJSON形式で出力します
+
+出力例:
+```json
+{
+  "version": "1.2.3",
+  "checksum": "a1b2c3d4e5f6789...",
+  "size": 1234567
+}
+```
+
+この出力の`checksum`値をAPI応答で使用して、プラグインがインストール前にバンドルの整合性を検証できるようにします。

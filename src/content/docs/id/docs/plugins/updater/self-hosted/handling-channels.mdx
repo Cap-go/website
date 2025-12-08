@@ -1,0 +1,370 @@
+---
+title: "Channel API Endpoint"
+locale: id
+description: "Cara membangun endpoint manajemen channel untuk Capgo self-hosted untuk menangani penugasan perangkat-channel dan kueri channel"
+sidebar:
+  order: 8
+---
+
+Channel adalah mekanisme inti untuk mengelola pembaruan aplikasi di Capgo. Dalam mode self-hosted, Anda perlu mengimplementasikan endpoint channel untuk menangani penugasan perangkat, kueri channel, dan operasi manajemen channel.
+
+## Memahami Channel
+
+Channel memungkinkan Anda untuk:
+- **Kontrol distribusi pembaruan**: Tetapkan versi aplikasi yang berbeda ke grup pengguna yang berbeda
+- **A/B testing**: Uji fitur baru dengan segmen pengguna tertentu
+- **Staged rollouts**: Luncurkan pembaruan secara bertahap untuk meminimalkan risiko
+- **Pemisahan environment**: Pisahkan pembaruan development, staging, dan production
+
+## Konfigurasi
+
+Konfigurasikan URL endpoint channel di `capacitor.config.json` Anda:
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "channelUrl": "https://myserver.com/api/channel_self"
+    }
+  }
+}
+```
+
+## Operasi Channel
+
+Plugin melakukan operasi channel yang berbeda yang perlu ditangani oleh endpoint Anda:
+
+### 1. Get Channel (Request GET)
+
+Ketika plugin memanggil `getChannel()`, ia mengirim request GET untuk mengambil penugasan channel perangkat saat ini.
+
+#### Format Request
+```typescript
+// GET /api/channel_self
+// Headers:
+{
+  "Content-Type": "application/json"
+}
+
+// Query parameters or body:
+interface GetChannelRequest {
+  device_id: string
+  app_id: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+#### Format Response
+```json
+{
+  "status": "ok",
+  "channel": "production",
+  "allowSet": true,
+  "message": "",
+  "error": ""
+}
+```
+
+### 2. Set Channel (Request POST)
+
+Ketika plugin memanggil `setChannel()`, ia mengirim request POST untuk menetapkan perangkat ke channel tertentu.
+
+#### Format Request
+```typescript
+// POST /api/channel_self
+interface SetChannelRequest {
+  device_id: string
+  app_id: string
+  channel: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+#### Format Response
+```json
+{
+  "status": "ok",
+  "message": "Device assigned to channel successfully",
+  "error": ""
+}
+```
+
+### 3. Unset Channel (Request DELETE)
+
+Ketika plugin memanggil `unsetChannel()`, ia mengirim request DELETE untuk menghapus penugasan channel perangkat.
+
+#### Format Request
+```typescript
+// DELETE /api/channel_self
+interface UnsetChannelRequest {
+  device_id: string
+  app_id: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+## Contoh Implementasi
+
+Berikut adalah contoh JavaScript tentang cara mengimplementasikan endpoint channel:
+
+```typescript
+interface ChannelRequest {
+  device_id: string
+  app_id: string
+  channel?: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+
+interface ChannelResponse {
+  status: "ok" | "error"
+  channel?: string
+  allowSet?: boolean
+  message?: string
+  error?: string
+}
+
+export const handler = async (event) => {
+  const method = event.httpMethod || event.method
+  const body = JSON.parse(event.body || '{}') as ChannelRequest
+
+  const { device_id, app_id, channel, platform } = body
+
+  try {
+    switch (method) {
+      case 'GET':
+        return await getDeviceChannel(device_id, app_id)
+
+      case 'POST':
+        return await setDeviceChannel(device_id, app_id, channel!, platform)
+
+      case 'DELETE':
+        return await unsetDeviceChannel(device_id, app_id)
+
+      default:
+        return {
+          status: "error",
+          error: "Method not allowed"
+        }
+    }
+  } catch (error) {
+    return {
+      status: "error",
+      error: error.message
+    }
+  }
+}
+
+async function getDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
+  // Query database Anda untuk penugasan channel perangkat
+  const assignment = await database.getDeviceChannel(deviceId, appId)
+
+  if (assignment) {
+    return {
+      status: "ok",
+      channel: assignment.channel,
+      allowSet: assignment.allowSelfAssign
+    }
+  }
+
+  // Kembalikan channel default jika tidak ada penugasan yang ditemukan
+  return {
+    status: "ok",
+    channel: "production", // Channel default Anda
+    allowSet: true
+  }
+}
+
+async function setDeviceChannel(
+  deviceId: string,
+  appId: string,
+  channel: string,
+  platform: string
+): Promise<ChannelResponse> {
+  // Validasi channel ada dan mengizinkan self-assignment
+  const channelConfig = await database.getChannelConfig(channel, appId)
+
+  if (!channelConfig) {
+    return {
+      status: "error",
+      error: "Channel not found"
+    }
+  }
+
+  if (!channelConfig.allowDeviceSelfSet) {
+    return {
+      status: "error",
+      error: "Channel does not allow self-assignment"
+    }
+  }
+
+  // Periksa batasan platform
+  if (platform === "ios" && !channelConfig.ios) {
+    return {
+      status: "error",
+      error: "Channel not available for iOS"
+    }
+  }
+
+  if (platform === "android" && !channelConfig.android) {
+    return {
+      status: "error",
+      error: "Channel not available for Android"
+    }
+  }
+
+  // Simpan penugasan
+  await database.setDeviceChannel(deviceId, appId, channel)
+
+  return {
+    status: "ok",
+    message: "Device assigned to channel successfully"
+  }
+}
+
+async function unsetDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
+  // Hapus penugasan channel perangkat
+  await database.removeDeviceChannel(deviceId, appId)
+
+  return {
+    status: "ok",
+    message: "Device channel assignment removed"
+  }
+}
+```
+
+## Konfigurasi Channel
+
+Sistem channel Anda harus mendukung opsi konfigurasi berikut:
+
+```typescript
+interface ChannelConfig {
+  name: string
+  appId: string
+
+  // Penargetan platform
+  ios: boolean
+  android: boolean
+
+  // Pembatasan perangkat
+  allowDeviceSelfSet: boolean  // Izinkan pemanggilan setChannel()
+  allowEmulator: boolean
+  allowDev: boolean           // Izinkan build development
+
+  // Kebijakan pembaruan
+  disableAutoUpdate: "major" | "minor" | "version_number" | "none"
+  disableAutoUpdateUnderNative: boolean
+
+  // Penugasan
+  isDefault: boolean          // Channel default untuk perangkat baru
+}
+```
+
+## Contoh Skema Database
+
+Anda perlu menyimpan konfigurasi channel dan penugasan perangkat:
+
+```sql
+-- Tabel Channels
+CREATE TABLE channels (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  app_id VARCHAR(255) NOT NULL,
+  ios BOOLEAN DEFAULT true,
+  android BOOLEAN DEFAULT true,
+  allow_device_self_set BOOLEAN DEFAULT false,
+  allow_emulator BOOLEAN DEFAULT true,
+  allow_dev BOOLEAN DEFAULT true,
+  disable_auto_update VARCHAR(50) DEFAULT 'none',
+  disable_auto_update_under_native BOOLEAN DEFAULT false,
+  is_default BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(name, app_id)
+);
+
+-- Tabel penugasan channel perangkat
+CREATE TABLE device_channels (
+  id SERIAL PRIMARY KEY,
+  device_id VARCHAR(255) NOT NULL,
+  app_id VARCHAR(255) NOT NULL,
+  channel_name VARCHAR(255) NOT NULL,
+  assigned_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(device_id, app_id)
+);
+```
+
+## Penanganan Error
+
+Tangani skenario error umum:
+
+```typescript
+// Channel tidak ditemukan
+{
+  "status": "error",
+  "error": "Channel 'beta' not found"
+}
+
+// Self-assignment tidak diizinkan
+{
+  "status": "error",
+  "error": "Channel does not allow device self-assignment"
+}
+
+// Platform tidak didukung
+{
+  "status": "error",
+  "error": "Channel not available for this platform"
+}
+
+// Request tidak valid
+{
+  "status": "error",
+  "error": "Missing required field: device_id"
+}
+```
+
+## Best Practices
+
+1. **Keamanan**: Validasi semua penugasan channel terhadap aturan bisnis Anda
+2. **Logging**: Log semua operasi channel untuk auditing dan debugging
+3. **Performance**: Cache konfigurasi channel untuk mengurangi kueri database
+4. **Validasi**: Verifikasi keaslian device_id dan app_id
+5. **Rate Limiting**: Implementasikan rate limiting untuk mencegah penyalahgunaan
+
+## Integrasi dengan Updates
+
+Penugasan channel bekerja bersama dengan [Update API Endpoint](/docs/plugin/self-hosted/handling-updates/) Anda. Ketika perangkat meminta pembaruan, periksa penugasan channel-nya untuk menentukan versi mana yang akan disajikan:
+
+```typescript
+async function getUpdateForDevice(deviceId: string, appId: string) {
+  // Dapatkan penugasan channel perangkat
+  const channelAssignment = await getDeviceChannel(deviceId, appId)
+  const channel = channelAssignment.channel || 'production'
+
+  // Dapatkan versi yang ditetapkan ke channel ini
+  const channelVersion = await getChannelVersion(channel, appId)
+
+  return {
+    version: channelVersion.version,
+    url: channelVersion.url,
+    checksum: channelVersion.checksum
+  }
+}
+```
+
+Ini menciptakan sistem manajemen channel self-hosted yang lengkap yang memberi Anda kontrol penuh atas bagaimana pembaruan didistribusikan kepada pengguna Anda.

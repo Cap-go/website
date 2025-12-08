@@ -1,0 +1,55 @@
+---
+title: Login Google con Firebase su Web
+locale: it
+description: Scopri come configurare l'accesso con Google utilizzando Firebase Authentication su Web con il Sign-In integrato di Firebase per Google.
+sidebar:
+    order: 4
+---
+
+## Introduzione
+
+Il plugin Capacitor Social Login **non supporta le piattaforme web**. Per le applicazioni web, dovresti utilizzare direttamente il Sign-In integrato di Firebase per Google, che fornisce un flusso di autenticazione basato su popup più affidabile.
+
+## Perché non usare il plugin su Web?
+
+Il plugin Capacitor Social Login è progettato per piattaforme mobili native (Android e iOS) dove può sfruttare i flussi di autenticazione specifici della piattaforma. Per il web, il metodo nativo `signInWithPopup` di Firebase è:
+
+- ✅ Più affidabile e meglio supportato
+- ✅ Gestisce automaticamente lo storage di sessione del browser
+- ✅ Fornisce una migliore gestione degli errori
+- ✅ Non richiede configurazione aggiuntiva
+
+## Passaggi di configurazione
+
+1. **Configura il progetto Firebase**
+
+   Assicurati che il tuo progetto Firebase abbia l'accesso con Google abilitato:
+   - Vai alla [Console Firebase](https://console.firebase.google.com/)
+   - Naviga su Authentication > Sign-in method
+   - Abilita il provider Google Sign-In
+
+2. Aggiungi i tuoi domini autorizzati
+    1. Vai alla panoramica del progetto su [console.cloud.google.com](https://console.cloud.google.com/)
+        <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+    2. Apri il menu `Authentication`
+        <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+    3. Fai clic sul pulsante `Settings`
+        <img src="/social-login-assets/firebase_select_authentication_settings.webp" alt="Firebase Authentication Sign-in Method Button" />
+    4. Configura i `Authorized domains`
+        <img src="/social-login-assets/firebase_select_authentication_settings_authorized_domains.webp" alt="Firebase Authentication Settings Authorized Domains" />
+
+## Esempio di implementazione
+
+Vedi il file [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) nell'app di esempio per un'implementazione completa che:
+
+- Utilizza il `signInWithPopup` di Firebase per le piattaforme web
+- Utilizza il plugin Capacitor Social Login per le piattaforme Android/iOS
+- Gestisce automaticamente il rilevamento della piattaforma
+
+L'esempio mostra come utilizzare condizionalmente il metodo integrato di Firebase per il web mentre si utilizza il plugin per le piattaforme native.
+
+## Risorse aggiuntive
+
+- [Documentazione Firebase Authentication](https://firebase.google.com/docs/auth) - Documentazione completa di Firebase Auth
+- [Google Sign-In per Web di Firebase](https://firebase.google.com/docs/auth/web/google-signin) - Guida ufficiale di Firebase per Google Sign-In su web
+- [Guida alla configurazione del login Google](/docs/plugins/social-login/google/general/) - Guida per configurare i domini autorizzati e la schermata di consenso OAuth

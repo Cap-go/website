@@ -1,0 +1,397 @@
+---
+title: "Démarrage avec Audio Recorder"
+description: "Apprenez à intégrer l'enregistrement audio dans votre application Capacitor"
+locale: fr
+sidebar:
+  order: 2
+---
+
+Ce guide vous guidera dans l'intégration du plugin Capacitor Audio Recorder dans votre application.
+
+## Installation
+
+Installez le plugin en utilisant npm :
+
+```bash
+npm install @capgo/capacitor-audio-recorder
+npx cap sync
+```
+
+## Configuration iOS
+
+Ajoutez ce qui suit à votre `Info.plist` :
+
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>Cette application a besoin d'accéder au microphone pour enregistrer de l'audio</string>
+```
+
+## Configuration Android
+
+Ajoutez les permissions suivantes à votre `AndroidManifest.xml` :
+
+```xml
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+## Configuration Web
+
+Le plugin utilise l'API MediaRecorder. Nécessite HTTPS en production.
+
+## Utilisation de base
+
+### Importer le plugin
+
+```typescript
+import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
+```
+
+### Demander les permissions
+
+```typescript
+const requestPermission = async () => {
+  const permission = await AudioRecorder.requestPermissions();
+  console.log('Permission status:', permission.recordAudio);
+};
+```
+
+### Démarrer l'enregistrement
+
+```typescript
+const startRecording = async () => {
+  await AudioRecorder.startRecording();
+  console.log('Recording started');
+};
+```
+
+### Arrêter l'enregistrement
+
+```typescript
+const stopRecording = async () => {
+  const result = await AudioRecorder.stopRecording();
+  console.log('Recording path:', result.filePath);
+  console.log('Duration:', result.duration);
+};
+```
+
+### Mettre en pause/Reprendre l'enregistrement
+
+```typescript
+const pauseRecording = async () => {
+  await AudioRecorder.pauseRecording();
+  console.log('Recording paused');
+};
+
+const resumeRecording = async () => {
+  await AudioRecorder.resumeRecording();
+  console.log('Recording resumed');
+};
+```
+
+### Obtenir le statut
+
+```typescript
+const getStatus = async () => {
+  const status = await AudioRecorder.getStatus();
+  console.log('Is recording:', status.isRecording);
+  console.log('Duration:', status.currentTime);
+};
+```
+
+## Exemple complet
+
+Voici une implémentation complète d'un enregistreur vocal :
+
+```typescript
+import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+class VoiceRecorder {
+  private isRecording = false;
+  private isPaused = false;
+  private recordingPath: string | null = null;
+
+  async initialize() {
+    const permission = await AudioRecorder.checkPermissions();
+
+    if (permission.recordAudio !== 'granted') {
+      const requested = await AudioRecorder.requestPermissions();
+
+      if (requested.recordAudio !== 'granted') {
+        throw new Error('Microphone permission denied');
+      }
+    }
+  }
+
+  async startRecording() {
+    try {
+      await AudioRecorder.startRecording();
+      this.isRecording = true;
+      this.isPaused = false;
+      console.log('Recording started');
+    } catch (error) {
+      console.error('Failed to start recording:', error);
+      throw error;
+    }
+  }
+
+  async pauseRecording() {
+    if (!this.isRecording || this.isPaused) {
+      return;
+    }
+
+    try {
+      await AudioRecorder.pauseRecording();
+      this.isPaused = true;
+      console.log('Recording paused');
+    } catch (error) {
+      console.error('Failed to pause recording:', error);
+      throw error;
+    }
+  }
+
+  async resumeRecording() {
+    if (!this.isRecording || !this.isPaused) {
+      return;
+    }
+
+    try {
+      await AudioRecorder.resumeRecording();
+      this.isPaused = false;
+      console.log('Recording resumed');
+    } catch (error) {
+      console.error('Failed to resume recording:', error);
+      throw error;
+    }
+  }
+
+  async stopRecording() {
+    if (!this.isRecording) {
+      return null;
+    }
+
+    try {
+      const result = await AudioRecorder.stopRecording();
+      this.isRecording = false;
+      this.isPaused = false;
+      this.recordingPath = result.filePath;
+
+      console.log('Recording stopped');
+      console.log('File path:', result.filePath);
+      console.log('Duration:', result.duration, 'seconds');
+
+      return result;
+    } catch (error) {
+      console.error('Failed to stop recording:', error);
+      throw error;
+    }
+  }
+
+  async getCurrentStatus() {
+    const status = await AudioRecorder.getStatus();
+    return {
+      isRecording: status.isRecording,
+      duration: status.currentTime,
+      isPaused: this.isPaused
+    };
+  }
+
+  formatDuration(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  getRecordingPath(): string | null {
+    return this.recordingPath;
+  }
+}
+
+// Usage
+const recorder = new VoiceRecorder();
+
+// Initialize
+await recorder.initialize();
+
+// Start recording
+await recorder.startRecording();
+
+// Pause
+await recorder.pauseRecording();
+
+// Resume
+await recorder.resumeRecording();
+
+// Stop and get result
+const result = await recorder.stopRecording();
+console.log('Recording saved:', result?.filePath);
+```
+
+## Configuration avancée
+
+### Configurer la qualité audio
+
+```typescript
+const startHighQualityRecording = async () => {
+  await AudioRecorder.startRecording({
+    format: 'aac',           // aac, mp3, or wav
+    sampleRate: 44100,       // 44100 Hz (CD quality)
+    channels: 2,             // Stereo
+    bitRate: 320000          // 320 kbps
+  });
+};
+```
+
+### Configurer pour la voix
+
+```typescript
+const startVoiceRecording = async () => {
+  await AudioRecorder.startRecording({
+    format: 'aac',
+    sampleRate: 16000,       // 16 kHz (voice optimized)
+    channels: 1,             // Mono
+    bitRate: 64000           // 64 kbps
+  });
+};
+```
+
+## Exemple d'intégration UI
+
+```typescript
+class AudioRecorderUI {
+  private recorder: VoiceRecorder;
+  private updateInterval: any;
+
+  constructor() {
+    this.recorder = new VoiceRecorder();
+  }
+
+  async init() {
+    await this.recorder.initialize();
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    const recordButton = document.getElementById('record-btn');
+    const pauseButton = document.getElementById('pause-btn');
+    const stopButton = document.getElementById('stop-btn');
+
+    recordButton?.addEventListener('click', () => this.handleRecord());
+    pauseButton?.addEventListener('click', () => this.handlePause());
+    stopButton?.addEventListener('click', () => this.handleStop());
+  }
+
+  async handleRecord() {
+    await this.recorder.startRecording();
+    this.startDurationUpdate();
+    this.updateUI('recording');
+  }
+
+  async handlePause() {
+    const status = await this.recorder.getCurrentStatus();
+
+    if (status.isPaused) {
+      await this.recorder.resumeRecording();
+      this.updateUI('recording');
+    } else {
+      await this.recorder.pauseRecording();
+      this.updateUI('paused');
+    }
+  }
+
+  async handleStop() {
+    const result = await this.recorder.stopRecording();
+    this.stopDurationUpdate();
+    this.updateUI('stopped');
+
+    if (result) {
+      this.showRecordingResult(result);
+    }
+  }
+
+  startDurationUpdate() {
+    this.updateInterval = setInterval(async () => {
+      const status = await this.recorder.getCurrentStatus();
+      this.updateDurationDisplay(status.duration);
+    }, 100);
+  }
+
+  stopDurationUpdate() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+  }
+
+  updateDurationDisplay(duration: number) {
+    const display = document.getElementById('duration');
+    if (display) {
+      display.textContent = this.recorder.formatDuration(duration);
+    }
+  }
+
+  updateUI(state: 'recording' | 'paused' | 'stopped') {
+    // Update button states, colors, etc.
+    console.log('UI state:', state);
+  }
+
+  showRecordingResult(result: any) {
+    console.log('Recording complete:', result);
+    // Show playback UI, save options, etc.
+  }
+}
+
+// Initialize UI
+const ui = new AudioRecorderUI();
+ui.init();
+```
+
+## Bonnes pratiques
+
+1. **Demander les permissions tôt** : Vérifiez les permissions avant d'afficher l'UI d'enregistrement
+2. **Gérer les interruptions** : Les appels téléphoniques, les alarmes peuvent interrompre l'enregistrement
+3. **Gérer le stockage** : Nettoyez les anciens enregistrements pour économiser de l'espace
+4. **Fournir des retours** : Affichez le statut d'enregistrement, la durée et la forme d'onde
+5. **Tester sur des appareils** : Les simulateurs/émulateurs ont un support audio limité
+
+## Problèmes courants
+
+### Permission refusée
+
+```typescript
+const handlePermissionDenied = async () => {
+  const permission = await AudioRecorder.checkPermissions();
+
+  if (permission.recordAudio === 'denied') {
+    alert('La permission du microphone est requise pour enregistrer de l\'audio. Veuillez l\'activer dans les Paramètres.');
+  }
+};
+```
+
+### Enregistrement interrompu
+
+```typescript
+// Handle app going to background
+document.addEventListener('pause', async () => {
+  const status = await recorder.getCurrentStatus();
+  if (status.isRecording) {
+    await recorder.pauseRecording();
+    // Notify user
+  }
+});
+```
+
+### Gestion du stockage
+
+```typescript
+const cleanupOldRecordings = async () => {
+  // Implement cleanup logic
+  // Delete recordings older than X days
+  // Or keep only last N recordings
+};
+```
+
+## Prochaines étapes
+
+- Explorez la [Référence API](https://github.com/Cap-go/capacitor-audio-recorder#api) pour la documentation complète des méthodes
+- Consultez l'[application exemple](https://github.com/Cap-go/capacitor-audio-recorder/tree/main/example) pour une utilisation avancée
+- Voir le [tutoriel](/plugins-tutorials/capacitor-audio-recorder) pour des exemples d'implémentation complets

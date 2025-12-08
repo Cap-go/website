@@ -1,0 +1,162 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan mengonfigurasi plugin Capacitor Shake untuk mendeteksi gerakan shake dan membuat pengalaman interaktif di aplikasi Anda.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurasi plugin**
+
+   **Contoh Penggunaan Dasar:**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+
+   // Mulai mendengarkan gerakan shake
+   await Shake.start();
+
+   // Dengarkan event shake
+   Shake.addListener('shake', () => {
+     console.log('Perangkat digoyangkan!');
+     // Lakukan aksi Anda di sini
+   });
+   ```
+
+   **Konfigurasi Sensitivitas:**
+   ```typescript
+   // Konfigurasi sensitivitas shake
+   await Shake.start({
+     threshold: 3.5 // Sesuaikan sensitivitas (default: 3.5)
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Tidak diperlukan pengaturan tambahan untuk iOS.
+     </TabItem>
+     <TabItem label="Android">
+       Tidak diperlukan pengaturan tambahan untuk Android.
+     </TabItem>
+   </Tabs>
+
+4. **Hentikan mendengarkan shake**
+   ```typescript
+   // Hentikan deteksi shake ketika tidak diperlukan
+   await Shake.stop();
+
+   // Hapus listener spesifik
+   const handle = await Shake.addListener('shake', () => {
+     console.log('Digoyangkan!');
+   });
+   handle.remove();
+   ```
+
+5. **Contoh implementasi**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+   import { App } from '@capacitor/app';
+
+   export class ShakeService {
+     private shakeListener: any;
+
+     async initialize() {
+       // Mulai deteksi shake
+       await Shake.start({ threshold: 4.0 });
+
+       // Tambahkan shake listener
+       this.shakeListener = await Shake.addListener('shake', () => {
+         this.handleShake();
+       });
+
+       // Bersihkan saat aplikasi dijeda
+       App.addListener('pause', () => {
+         Shake.stop();
+       });
+
+       // Lanjutkan saat aplikasi dilanjutkan
+       App.addListener('resume', () => {
+         Shake.start({ threshold: 4.0 });
+       });
+     }
+
+     private handleShake() {
+       console.log('Shake terdeteksi!');
+       // Tampilkan menu debug, refresh data, atau picu aksi apapun
+     }
+
+     async cleanup() {
+       if (this.shakeListener) {
+         this.shakeListener.remove();
+       }
+       await Shake.stop();
+     }
+   }
+   ```
+</Steps>
+
+## Referensi API
+
+### Methods
+
+#### `start(options?: ShakeOptions)`
+Mulai mendengarkan gerakan shake.
+
+**Parameter:**
+- `options` (opsional): Objek konfigurasi
+  - `threshold`: number - Ambang sensitivitas (default: 3.5)
+
+#### `stop()`
+Hentikan mendengarkan gerakan shake.
+
+#### `addListener('shake', callback: () => void)`
+Tambahkan listener untuk event shake.
+
+**Mengembalikan:** Promise dengan handle untuk menghapus listener
+
+### Interfaces
+
+```typescript
+interface ShakeOptions {
+  threshold?: number; // Ambang sensitivitas shake
+}
+```
+
+## Catatan Platform
+
+### iOS
+- Menggunakan accelerometer perangkat untuk mendeteksi gerakan shake
+- Bekerja di foreground dan background (jika aplikasi memiliki izin background)
+
+### Android
+- Menggunakan SensorManager untuk mendeteksi event shake
+- Tidak memerlukan izin khusus
+- Bekerja ketika aplikasi di foreground
+
+## Kasus Penggunaan Umum
+
+1. **Menu Debug**: Tampilkan opsi developer ketika perangkat digoyangkan
+2. **Feedback**: Picu formulir feedback atau laporan bug
+3. **Refresh**: Refresh data aplikasi atau bersihkan cache
+4. **Games**: Gunakan shake sebagai mekanisme kontrol game
+5. **Undo**: Implementasikan fungsionalitas shake-to-undo
+
+## Pemecahan Masalah
+
+**Shake tidak terdeteksi:**
+- Pastikan plugin dimulai dengan `Shake.start()`
+- Coba sesuaikan nilai threshold (lebih rendah = lebih sensitif)
+- Periksa bahwa listener terdaftar dengan benar
+
+**Terlalu sensitif/tidak cukup sensitif:**
+- Sesuaikan parameter `threshold` di opsi `start()`
+- Nilai biasanya berkisar dari 2.0 (sangat sensitif) hingga 5.0 (kurang sensitif)

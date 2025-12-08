@@ -1,0 +1,83 @@
+---
+title: 시작하기
+description: Media Session 플러그인을 사용하여 플레이어 UI를 네이티브 미디어 컨트롤과 동기화하세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **플러그인 설치**
+   <PackageManagers pkg="@capgo/capacitor-media-session" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **플랫폼 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+> ℹ️ Media Session API는 Android(Chrome 기반 브라우저, WebView) 및 많은 데스크톱 브라우저에서 사용할 수 있습니다. 지원되지 않는 플랫폼에서는 호출이 효과 없이 해결되므로 UI를 적절히 보호하세요.
+
+## 메타데이터 게시
+
+```typescript
+import { MediaSession } from '@capgo/capacitor-media-session';
+
+await MediaSession.setMetadata({
+  title: 'Weekly Tech Podcast',
+  artist: 'Capgo Studio',
+  album: 'Season 2',
+  artwork: [
+    { src: 'https://cdn.example.com/covers/s02e05-512.png', sizes: '512x512', type: 'image/.png' },
+  ],
+});
+```
+
+## 재생 상태 업데이트
+
+```typescript
+await MediaSession.setPlaybackState({ playbackState: 'playing' });
+
+// 필요시 나중에 일시정지
+await MediaSession.setPlaybackState({ playbackState: 'paused' });
+```
+
+## 미디어 액션 처리
+
+```typescript
+const pauseHandler = async () => {
+  player.pause();
+  await MediaSession.setPlaybackState({ playbackState: 'paused' });
+};
+
+await MediaSession.setActionHandler({ action: 'pause' }, pauseHandler);
+await MediaSession.setActionHandler({ action: 'play' }, async () => {
+  await player.play();
+  await MediaSession.setPlaybackState({ playbackState: 'playing' });
+});
+
+// 플레이어를 해제할 때 핸들러 제거
+await MediaSession.setActionHandler({ action: 'pause' }, null);
+```
+
+## 위치 동기화 유지
+
+```typescript
+const updatePosition = async () => {
+  await MediaSession.setPositionState({
+    duration: player.duration,
+    position: player.currentTime,
+    playbackRate: player.playbackRate,
+  });
+};
+
+player.ontimeupdate = updatePosition;
+player.onratechange = updatePosition;
+```
+
+## 권장사항
+
+- 트랙이 변경될 때 메타데이터를 새로고침하여 알림 및 스마트 스피커가 최신 상태를 유지하도록 하세요.
+- 네이티브 레이어에 스팸을 보내지 않도록 위치 업데이트를 조절하세요(예: 250ms마다).
+- 플레이어 인스턴스를 해제할 때 우발적인 누출을 방지하기 위해 항상 액션 핸들러를 제거하세요.

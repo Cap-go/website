@@ -1,0 +1,296 @@
+---
+title: Comenzando
+locale: es
+description: Aprende cómo instalar y usar el plugin Background Uploader para subidas de archivos confiables en tu app Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurar permisos**
+
+   ### iOS
+   Agrega modos de segundo plano a tu `Info.plist`:
+   ```xml
+   <key>UIBackgroundModes</key>
+   <array>
+     <string>processing</string>
+   </array>
+   ```
+
+   ### Android
+   Agrega permisos a tu `AndroidManifest.xml`:
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+   ```
+</Steps>
+
+## Uso
+
+Importa el plugin y usa sus métodos para subir archivos:
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+// Iniciar una subida
+const startUpload = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/your/file.jpg',
+    serverUrl: 'https://your-server.com/upload',
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer your-token'
+    },
+    parameters: {
+      'userId': '12345',
+      'type': 'profile'
+    },
+    notificationTitle: 'Uploading Photo'
+  });
+
+  console.log('Upload ID:', upload.id);
+};
+
+// Escuchar eventos de subida
+const listener = await Uploader.addListener('events', (event) => {
+  switch (event.name) {
+    case 'uploading':
+      console.log(`Upload ${event.payload.id}: ${event.payload.percent}%`);
+      break;
+    case 'completed':
+      console.log('Upload completed:', event.payload.id);
+      console.log('Status code:', event.payload.statusCode);
+      break;
+    case 'failed':
+      console.error('Upload failed:', event.payload.id);
+      console.error('Error:', event.payload.error);
+      break;
+  }
+});
+
+// Recuerda remover el listener cuando termines
+// listener.remove();
+
+// Cancelar una subida
+const cancelUpload = async (uploadId: string) => {
+  await Uploader.cancelUpload({ id: uploadId });
+};
+
+// Obtener todas las subidas activas
+const getActiveUploads = async () => {
+  const uploads = await Uploader.getUploads();
+  console.log('Active uploads:', uploads);
+};
+```
+
+## Referencia API
+
+### startUpload(options)
+
+Inicia una nueva subida de archivo.
+
+```typescript
+interface UploadOptions {
+  filePath: string;
+  serverUrl: string;
+  method?: 'POST' | 'PUT';
+  headers?: { [key: string]: string };
+  parameters?: { [key: string]: string };
+  notificationTitle?: string;
+  notificationBody?: string;
+  useUtf8Charset?: boolean;
+  maxRetries?: number;
+}
+```
+
+### cancelUpload(options)
+
+Cancela una subida en curso.
+
+```typescript
+interface CancelOptions {
+  id: string;
+}
+```
+
+### getUploads()
+
+Devuelve todas las subidas activas.
+
+### removeUpload(options)
+
+Elimina una subida de la cola.
+
+```typescript
+interface RemoveOptions {
+  id: string;
+}
+```
+
+## Eventos
+
+### events
+
+Todos los eventos de subida se entregan a través de un único listener `events`. El evento contiene un campo `name` para identificar el tipo:
+
+```typescript
+Uploader.addListener('events', (event: UploadEvent) => {
+  switch (event.name) {
+    case 'uploading':
+      // Subida en progreso
+      console.log(`Progress: ${event.payload.percent}%`);
+      console.log(`ID: ${event.payload.id}`);
+      break;
+
+    case 'completed':
+      // Subida finalizada exitosamente
+      console.log(`Completed: ${event.payload.id}`);
+      console.log(`Status code: ${event.payload.statusCode}`);
+      break;
+
+    case 'failed':
+      // Subida fallida
+      console.error(`Failed: ${event.payload.id}`);
+      console.error(`Error: ${event.payload.error}`);
+      break;
+  }
+});
+```
+
+**Tipos de Eventos:**
+- `uploading` - Actualización de progreso con `percent` e `id`
+- `completed` - Subida finalizada con `id` y `statusCode`
+- `failed` - Subida fallida con `id` y mensaje de `error`
+
+## Características Avanzadas
+
+### Subida de Formulario Multipartes
+
+```typescript
+const uploadWithFormData = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/photo.jpg',
+    serverUrl: 'https://api.example.com/upload',
+    method: 'POST',
+    parameters: {
+      'name': 'profile-photo',
+      'description': 'User profile photo'
+    },
+    headers: {
+      'X-API-Key': 'your-api-key'
+    }
+  });
+};
+```
+
+### Subida Binaria
+
+```typescript
+const uploadBinary = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/data.bin',
+    serverUrl: 'https://api.example.com/binary',
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/octet-stream'
+    }
+  });
+};
+```
+
+### Subida Consciente de Red
+
+```typescript
+import { Network } from '@capacitor/network';
+
+const smartUpload = async () => {
+  const status = await Network.getStatus();
+
+  if (status.connectionType === 'wifi') {
+    // Iniciar subidas de archivos grandes en WiFi
+    await startLargeUpload();
+  } else if (status.connectionType === 'cellular') {
+    // Encolar para después o advertir al usuario
+    console.log('Using cellular data');
+  }
+};
+```
+
+## Mejores Prácticas
+
+1. **Manejar todos los tipos de eventos**
+   ```typescript
+   const setupUploadHandlers = () => {
+     Uploader.addListener('events', (event) => {
+       switch (event.name) {
+         case 'uploading':
+           handleProgress(event.payload);
+           break;
+         case 'completed':
+           handleCompleted(event.payload);
+           break;
+         case 'failed':
+           handleError(event.payload);
+           break;
+       }
+     });
+   };
+   ```
+
+2. **Limpiar listeners**
+   ```typescript
+   // Agregar listener
+   const listener = await Uploader.addListener('events', handleEvent);
+
+   // Limpiar cuando termine
+   listener.remove();
+   ```
+
+3. **Reintentar subidas fallidas**
+   ```typescript
+   const retryUpload = async (filePath: string, serverUrl: string) => {
+     try {
+       await Uploader.startUpload({
+         filePath,
+         serverUrl,
+         maxRetries: 3
+       });
+     } catch (error) {
+       console.error('Upload failed after retries:', error);
+     }
+   };
+   ```
+
+4. **Mostrar notificaciones de subida**
+   ```typescript
+   await Uploader.startUpload({
+     filePath: 'file:///path/to/file',
+     serverUrl: 'https://server.com/upload',
+     notificationTitle: 'Uploading File',
+     notificationBody: 'Your file is being uploaded...'
+   });
+   ```
+
+## Notas de Plataforma
+
+### iOS
+- Usa `URLSession` para subidas en segundo plano
+- Requiere capacidad de procesamiento en segundo plano
+- Las subidas continúan cuando la app está suspendida
+
+### Android
+- Usa `WorkManager` para subidas confiables
+- Muestra notificación de servicio en primer plano durante subidas
+- Respeta configuraciones de optimización de batería

@@ -1,0 +1,210 @@
+---
+title: はじめに
+description: Muteプラグインをインストールして使用し、Capacitorアプリでサイレントモード状態を検出する方法を学びます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+プラグインをインポートし、そのメソッドを使用してミュート状態を確認します：
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+// デバイスがミュートされているか確認
+const checkMuteState = async () => {
+  const { value } = await CapacitorMute.isMuted();
+
+  if (value) {
+    console.log('デバイスはミュート/サイレント中');
+    // サイレントモード用にアプリの動作を調整
+  } else {
+    console.log('デバイスの音声はオン');
+  }
+};
+```
+
+## APIリファレンス
+
+### isMuted()
+
+デバイスが現在ミュート/サイレントモードかどうかを確認します。
+
+```typescript
+const result = await CapacitorMute.isMuted();
+// 戻り値: { value: boolean }
+```
+
+## 完全な例
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+export class SoundManager {
+  private isMuted = false;
+
+  async initialize() {
+    // 初期ミュート状態を取得
+    await this.checkMuteState();
+  }
+
+  async checkMuteState() {
+    try {
+      const { value } = await CapacitorMute.isMuted();
+      this.isMuted = value;
+      this.updateAppBehavior();
+    } catch (error) {
+      console.error('ミュート状態の確認に失敗:', error);
+    }
+  }
+
+  private updateAppBehavior() {
+    if (this.isMuted) {
+      // デバイスがミュート中 - アプリの動作を調整
+      this.disableSoundEffects();
+      this.showVisualNotifications();
+    } else {
+      // デバイスの音声がオン
+      this.enableSoundEffects();
+      this.useAudioNotifications();
+    }
+  }
+
+  private disableSoundEffects() {
+    // アプリ内の音を無効化
+    console.log('効果音を無効化');
+  }
+
+  private enableSoundEffects() {
+    // アプリ内の音を有効化
+    console.log('効果音を有効化');
+  }
+
+  private showVisualNotifications() {
+    // オーディオの代わりに視覚的フィードバックを使用
+    console.log('視覚的通知を使用');
+  }
+
+  private useAudioNotifications() {
+    // オーディオ通知を使用
+    console.log('オーディオ通知を使用');
+  }
+}
+
+// 使用方法
+const soundManager = new SoundManager();
+await soundManager.initialize();
+
+// 定期的にポーリングして変更を確認
+setInterval(() => {
+  soundManager.checkMuteState();
+}, 5000); // 5秒ごとに確認
+```
+
+## プラットフォームの動作
+
+### iOS
+- 物理的なミュートスイッチの状態を検出
+- リアルタイムの変更イベントなし（ポーリングが必要）
+- ミュートスイッチ付きのiPhoneとiPadで動作
+
+### Android
+- 着信モードがサイレントまたはバイブレーションに設定されているか確認
+- 変更イベントなし（ポーリングが必要）
+- AudioManagerの着信モードに基づく
+
+## ベストプラクティス
+
+1. **変更をポーリング**
+   プラグインはリアルタイムイベントを提供しないため、変更を追跡する必要がある場合は定期的にポーリングします：
+   ```typescript
+   // ミュート状態を定期的に確認
+   setInterval(async () => {
+     const { value } = await CapacitorMute.isMuted();
+     if (value !== previousMuteState) {
+       handleMuteStateChange(value);
+     }
+   }, 5000);
+   ```
+
+2. **ユーザーの設定を尊重**
+   常にミュート状態を尊重し、アプリのオーディオ動作を適切に調整します。
+
+3. **視覚的な代替手段を提供**
+   ```typescript
+   const { value: isMuted } = await CapacitorMute.isMuted();
+   if (isMuted) {
+     // 視覚的通知を表示
+     showToast('新しいメッセージを受信しました');
+   } else {
+     // 通知音を再生
+     playNotificationSound();
+   }
+   ```
+
+## ユースケース
+
+1. **ゲームサウンド管理**
+   ```typescript
+   const shouldPlaySound = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     return !isMuted && userPreferences.soundEnabled;
+   };
+   ```
+
+2. **通知処理**
+   ```typescript
+   const sendNotification = async (message: string) => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     if (isMuted) {
+       // バイブレーションまたは視覚的通知を使用
+       await Haptics.vibrate();
+       showBanner(message);
+     } else {
+       // 通知音を再生
+       await playSound('notification.mp3');
+     }
+   };
+   ```
+
+3. **ビデオプレーヤー**
+   ```typescript
+   const initVideoPlayer = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     videoPlayer.setMuted(isMuted);
+     if (isMuted) {
+       showSubtitles(true);
+       showMuteIndicator();
+     }
+   };
+   ```
+
+## トラブルシューティング
+
+1. **Androidで常にfalseを返す**
+   - デバイスの着信モードが実際にサイレントに設定されているか確認
+   - 一部のAndroidデバイスは異なる動作をする可能性があります
+
+2. **変更イベントが利用できない**
+   - プラグインはリアルタイムの変更イベントを提供しません
+   - 変更を検出する必要がある場合はポーリングを実装してください
+
+3. **シミュレータで動作しない**
+   - iOSシミュレータにはミュートスイッチがありません
+   - 正確な結果を得るには実機でテストしてください

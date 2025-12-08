@@ -1,0 +1,50 @@
+---
+title: "@capgo/capacitor-fast-sql"
+locale: id
+description: SQLite native berkinerja tinggi dengan protokol HTTP khusus untuk operasi sync yang efisien dan pengganti IndexedDB.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+hero:
+  tagline: SQLite native ultra-cepat dengan protokol khusus untuk sistem sync dan dataset besar, menghadirkan performa hingga 25x lebih cepat.
+  image:
+    file: ~public/icons/plugins/fast-sql.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/fast-sql/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-fast-sql/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Protokol HTTP Khusus" icon="rocket">
+    Melewati bridge Capacitor untuk performa hingga 25x lebih cepat
+  </Card>
+  <Card title="Dukungan SQLite Penuh" icon="list-format">
+    Dukungan SQL lengkap dengan transaksi dan operasi batch
+  </Card>
+  <Card title="Ramah Sync" icon="random">
+    Dirancang untuk sistem sync lokal seperti CRDT dan operational transforms
+  </Card>
+  <Card title="Lintas Platform" icon="laptop">
+    iOS, Android, dan Web menggunakan sql.js + IndexedDB
+  </Card>
+  <Card title="Dukungan Transaksi" icon="approve-check-circle">
+    Transaksi ACID dengan level isolasi yang dapat dikonfigurasi
+  </Card>
+  <Card title="Data Biner" icon="document">
+    Dukungan native untuk penyimpanan Uint8Array/BLOB
+  </Card>
+  <Card title="Memulai" icon="open-book">
+    Lihat [Panduan Memulai](/docs/plugins/fast-sql/getting-started/) untuk menginstal dan mengkonfigurasi plugin.
+  </Card>
+</CardGrid>

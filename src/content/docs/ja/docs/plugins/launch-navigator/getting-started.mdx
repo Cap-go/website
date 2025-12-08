@@ -1,0 +1,337 @@
+---
+title: はじめに
+locale: ja
+description: iOSとAndroidでネイティブナビゲーションアプリと統合するためのLaunch Navigatorプラグインをインストールして使用する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## プラットフォーム設定
+
+### iOS
+
+`Info.plist`にURLスキームを追加して、インストールされているナビゲーションアプリを検出します:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <string>transit</string>
+    <string>moovit</string>
+    <string>uber</string>
+    <string>lyft</string>
+</array>
+```
+
+### Android
+
+追加の設定は不要です。プラグインは自動的にインストールされているナビゲーションアプリを検出します。
+
+## 使用例
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// 座標への基本的なナビゲーション
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // サンフランシスコの座標
+});
+
+// オプション付きの高度なナビゲーション
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // オプションの開始地点
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // 優先ナビゲーションアプリ
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// 特定のアプリが利用可能かチェック
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps is installed');
+} else {
+  console.log('Google Maps is not available');
+}
+
+// すべての利用可能なナビゲーションアプリを取得
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('Available navigation apps:', availableApps);
+
+// プラットフォームでサポートされているすべてのアプリを取得
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('Supported apps:', supportedApps);
+```
+
+## APIリファレンス
+
+### navigate(options)
+
+```typescript
+navigate(options: NavigateOptions) => Promise<void>
+```
+
+指定された座標へのナビゲーションを起動します。
+
+| パラメータ         | タイプ                      |
+| ------------- | ------------------------- |
+| **`options`** | `NavigateOptions` |
+
+### isAppAvailable(options)
+
+```typescript
+isAppAvailable(options: { app: string }) => Promise<{ available: boolean }>
+```
+
+特定のナビゲーションアプリがインストールされているかチェックします。
+
+| パラメータ         | タイプ                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ app: string }` |
+
+**戻り値:** `Promise<{ available: boolean }>`
+
+### getAvailableApps()
+
+```typescript
+getAvailableApps() => Promise<{ apps: string[] }>
+```
+
+デバイス上のすべての利用可能なナビゲーションアプリのリストを取得します。
+
+**戻り値:** `Promise<{ apps: string[] }>`
+
+### getSupportedApps()
+
+```typescript
+getSupportedApps() => Promise<{ apps: string[] }>
+```
+
+現在のプラットフォームでサポートされているすべてのアプリのリストを取得します。
+
+**戻り値:** `Promise<{ apps: string[] }>`
+
+## インターフェース
+
+### NavigateOptions
+
+| プロパティ              | タイプ                          | 説明                     |
+| ----------------- | ----------------------------- | ------------------------------- |
+| **`destination`** | `[number, number]` | 目的地の座標 [緯度, 経度] |
+| **`options`**     | `NavigationOptions` | 追加のナビゲーションオプション(オプション) |
+
+### NavigationOptions
+
+| プロパティ                 | タイプ                  | 説明                           |
+| -------------------- | --------------------- | ------------------------------------- |
+| **`start`**          | `[number, number]` | 開始座標 [緯度, 経度] (オプション) |
+| **`transportMode`**  | `TransportMode` | 交通手段(オプション)       |
+| **`app`**            | `string` | 優先ナビゲーションアプリ(オプション)    |
+| **`appDisplayName`** | `string` | アプリの表示名(オプション)        |
+
+### TransportMode
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## 座標の要件
+
+> **重要**: このプラグインはナビゲーションに緯度/経度座標のみを受け入れます。住所を座標に変換するには[@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder)を使用してください。
+
+```typescript
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+// 住所を座標に変換
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // ジオコーディングされた座標でナビゲーションを起動
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## サポートされているナビゲーションアプリ
+
+### iOS
+- Apple Maps(組み込み)
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- その他多数...
+
+### Android
+- Google Maps(組み込み)
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- その他多数...
+
+## 高度な例
+
+### 複数のアプリをチェックして最初に利用可能なものを使用
+
+```typescript
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('No supported navigation apps found');
+}
+```
+
+### ナビゲーションアプリのユーザー選択
+
+```typescript
+// 利用可能なアプリを取得
+const { apps } = await LaunchNavigator.getAvailableApps();
+
+if (apps.length === 0) {
+  alert('No navigation apps available');
+  return;
+}
+
+// ユーザーにアプリ選択を表示(疑似コード)
+const selectedApp = await showAppSelectionDialog(apps);
+
+// 選択したアプリでナビゲート
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: { app: selectedApp }
+});
+```
+
+### 異なる交通手段でのナビゲーション
+
+```typescript
+// 車での道順
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.DRIVING
+  }
+});
+
+// 徒歩での道順
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.WALKING
+  }
+});
+
+// 公共交通機関での道順
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.TRANSIT
+  }
+});
+```
+
+## ベストプラクティス
+
+- ナビゲーションを試みる前に常にアプリの可用性をチェックする
+- 優先アプリが利用できない場合のフォールバックオプションを提供する
+- ユーザー選択に意味のあるアプリ表示名を使用する
+- ユーザーフレンドリーなメッセージでエラーを適切に処理する
+- デフォルトのナビゲーションアプリのユーザー設定を考慮する
+- iOSとAndroidの両方のデバイスでテストする
+- 無効な座標に対する適切なエラーハンドリングを実装する
+
+## エラーハンドリング
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('Navigation failed:', error);
+  // エラーを処理 - アプリが利用できない、座標が無効など
+  alert('Unable to launch navigation. Please check your coordinates and try again.');
+}
+```
+
+## ユースケース
+
+- **位置情報ベースのサービス**: ユーザーを目的地にナビゲート
+- **配達アプリ**: ドライバーを配達場所に案内
+- **イベントアプリ**: 参加者を会場の場所に誘導
+- **不動産アプリ**: 物件の場所にナビゲート
+- **旅行アプリ**: 観光客を観光地に案内
+- **サービスアプリ**: 現場作業員を作業現場に誘導

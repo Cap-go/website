@@ -1,0 +1,389 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何在 Capacitor 应用中安装和使用 File 插件进行文件系统操作。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-file" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+导入插件并使用其方法进行文件操作：
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+// 写入文本文件
+const writeFile = async () => {
+  const result = await CapacitorFile.writeFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    data: 'Hello, World!',
+    encoding: Encoding.UTF8,
+    recursive: true, // 如果需要，创建父目录
+  });
+  console.log('File written to:', result.uri);
+};
+
+// 读取文本文件
+const readFile = async () => {
+  const result = await CapacitorFile.readFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    encoding: Encoding.UTF8,
+  });
+  console.log('File contents:', result.data);
+};
+
+// 检查文件是否存在
+const checkExists = async () => {
+  const result = await CapacitorFile.exists({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+  console.log('File exists:', result.exists);
+};
+
+// 删除文件
+const deleteFile = async () => {
+  await CapacitorFile.deleteFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+};
+```
+
+## 目录位置
+
+插件提供了多个目录常量：
+
+```typescript
+import { Directory } from '@capgo/capacitor-file';
+
+// 可用目录
+Directory.Documents  // 用户可见文档（已备份）
+Directory.Data       // 私有应用数据存储
+Directory.Library    // 应用支持文件（iOS）/ files（Android）
+Directory.Cache      // 临时缓存（可能被操作系统清除）
+Directory.External   // 外部存储（仅 Android）
+Directory.Application // 只读应用包
+```
+
+## 编码选项
+
+```typescript
+import { Encoding } from '@capgo/capacitor-file';
+
+Encoding.UTF8   // UTF-8 文本编码
+Encoding.ASCII  // ASCII 文本编码
+Encoding.UTF16  // UTF-16 文本编码
+// 省略编码以处理二进制数据（返回 base64）
+```
+
+## API 参考
+
+### writeFile(options)
+
+将数据写入文件。
+
+```typescript
+const result = await CapacitorFile.writeFile({
+  path: 'folder/file.txt',
+  directory: Directory.Documents,
+  data: 'File content',
+  encoding: Encoding.UTF8,
+  recursive: true,  // 如果需要，创建目录
+  append: false,    // 覆盖现有文件
+  position: 0,      // 随机访问写入的字节位置
+});
+// 返回：{ uri: string }
+```
+
+### readFile(options)
+
+读取文件内容。
+
+```typescript
+const result = await CapacitorFile.readFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  encoding: Encoding.UTF8,
+  offset: 0,    // 从字节偏移量开始读取
+  length: 100,  // 仅读取这么多字节
+});
+// 返回：{ data: string }
+```
+
+### appendFile(options)
+
+向文件追加数据。
+
+```typescript
+await CapacitorFile.appendFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  data: '\nNew line',
+  encoding: Encoding.UTF8,
+});
+```
+
+### deleteFile(options)
+
+删除文件。
+
+```typescript
+await CapacitorFile.deleteFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+```
+
+### mkdir(options)
+
+创建目录。
+
+```typescript
+await CapacitorFile.mkdir({
+  path: 'my-folder/sub-folder',
+  directory: Directory.Documents,
+  recursive: true,  // 创建父目录
+});
+```
+
+### rmdir(options)
+
+删除目录。
+
+```typescript
+await CapacitorFile.rmdir({
+  path: 'my-folder',
+  directory: Directory.Documents,
+  recursive: true,  // 递归删除内容
+});
+```
+
+### readdir(options)
+
+列出目录内容。
+
+```typescript
+const result = await CapacitorFile.readdir({
+  path: '',  // 空表示目录的根
+  directory: Directory.Documents,
+});
+// 返回：{ entries: Entry[] }
+// 每个条目包含：{ name, isFile, isDirectory, fullPath, nativeURL }
+```
+
+### stat(options)
+
+获取文件或目录元数据。
+
+```typescript
+const result = await CapacitorFile.stat({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 返回：{ type, size, mtime, ctime, uri }
+```
+
+### exists(options)
+
+检查文件或目录是否存在。
+
+```typescript
+const result = await CapacitorFile.exists({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 返回：{ exists: boolean, type?: 'file' | 'directory' }
+```
+
+### copy(options)
+
+复制文件或目录。
+
+```typescript
+const result = await CapacitorFile.copy({
+  from: 'source.txt',
+  to: 'destination.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+// 返回：{ uri: string }
+```
+
+### rename(options) / move(options)
+
+重命名或移动文件或目录。
+
+```typescript
+await CapacitorFile.rename({
+  from: 'old-name.txt',
+  to: 'new-name.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+```
+
+### truncate(options)
+
+将文件截断到特定大小。
+
+```typescript
+await CapacitorFile.truncate({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  size: 100,  // 截断到 100 字节
+});
+```
+
+### getUri(options)
+
+获取文件的原生 URI。
+
+```typescript
+const result = await CapacitorFile.getUri({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 返回：{ uri: string }
+```
+
+### getDirectories()
+
+获取所有可用的目录路径。
+
+```typescript
+const dirs = await CapacitorFile.getDirectories();
+// 返回路径：documents、data、cache、external 等
+```
+
+### getFreeDiskSpace()
+
+获取可用磁盘空间。
+
+```typescript
+const result = await CapacitorFile.getFreeDiskSpace();
+console.log('Free space:', result.free, 'bytes');
+```
+
+### checkPermissions() / requestPermissions()
+
+处理存储权限（Android）。
+
+```typescript
+const status = await CapacitorFile.checkPermissions();
+if (status.publicStorage !== 'granted') {
+  await CapacitorFile.requestPermissions();
+}
+```
+
+## 完整示例
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+export class FileService {
+  async saveJson(filename: string, data: object): Promise<void> {
+    await CapacitorFile.writeFile({
+      path: filename,
+      directory: Directory.Documents,
+      data: JSON.stringify(data, null, 2),
+      encoding: Encoding.UTF8,
+      recursive: true,
+    });
+  }
+
+  async loadJson<T>(filename: string): Promise<T | null> {
+    try {
+      const { exists } = await CapacitorFile.exists({
+        path: filename,
+        directory: Directory.Documents,
+      });
+
+      if (!exists) return null;
+
+      const result = await CapacitorFile.readFile({
+        path: filename,
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8,
+      });
+
+      return JSON.parse(result.data) as T;
+    } catch (error) {
+      console.error('Failed to load JSON:', error);
+      return null;
+    }
+  }
+
+  async listFiles(folder: string = ''): Promise<string[]> {
+    const result = await CapacitorFile.readdir({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    return result.entries
+      .filter(entry => entry.isFile)
+      .map(entry => entry.name);
+  }
+
+  async deleteAll(folder: string): Promise<void> {
+    const { exists } = await CapacitorFile.exists({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    if (exists) {
+      await CapacitorFile.rmdir({
+        path: folder,
+        directory: Directory.Documents,
+        recursive: true,
+      });
+    }
+  }
+
+  async copyToBackup(filename: string): Promise<string> {
+    const timestamp = Date.now();
+    const backupName = `backup/${timestamp}-${filename}`;
+
+    const result = await CapacitorFile.copy({
+      from: filename,
+      to: backupName,
+      directory: Directory.Documents,
+      toDirectory: Directory.Documents,
+    });
+
+    return result.uri;
+  }
+}
+```
+
+## 平台说明
+
+### iOS
+- 需要 iOS 13.0+
+- Documents 目录在文件应用中可见
+- Library 目录用于应用支持文件
+- 设备存储空间不足时可能会清除缓存
+
+### Android
+- 需要 Android 6.0 (API 23)+
+- 在较旧的 Android 版本上，外部存储需要运行时权限
+- Documents 目录映射到应用的 files 目录
+- 使用 External 目录访问共享存储
+
+### Web
+- Web 平台不支持

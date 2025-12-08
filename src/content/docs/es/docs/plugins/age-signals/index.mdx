@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-android-age-signals"
+description: Envoltorio de API de Google Play Age Signals - detecta cuentas supervisadas, aprobaciones de tutores y usuarios verificados.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+locale: es
+hero:
+  tagline: Accede a Google Play Age Signals para detectar cuentas supervisadas, verificar edades de usuarios y cumplir con las regulaciones de seguridad infantil en tu aplicación Android.
+  image:
+    file: ~public/icons/plugins/android-age-signals.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/age-signals/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-age-signals/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Cuentas supervisadas" icon="setting">
+    Detecta cuando los usuarios tienen cuentas de Google supervisadas administradas por tutores 👨‍👧‍👦
+  </Card>
+  <Card title="Verificación de edad" icon="approve-check-circle">
+    Identifica usuarios verificados que son mayores de 18 años con la verificación de edad de Google 🔐
+  </Card>
+  <Card title="Cumplimiento" icon="approve-check">
+    Cumple con las regulaciones de seguridad infantil como COPPA y GDPR 📋
+  </Card>
+  <Card title="Aprobaciones de tutores" icon="star">
+    Rastrea aprobaciones pendientes y estado de consentimiento del tutor ✅
+  </Card>
+  <Card title="Solo Android" icon="puzzle">
+    Diseñado específicamente para Android con Google Play Services 📱
+  </Card>
+  <Card title="API simple" icon="rocket">
+    Una sola llamada de método para recuperar todas las señales de edad 🚀
+  </Card>
+</CardGrid>

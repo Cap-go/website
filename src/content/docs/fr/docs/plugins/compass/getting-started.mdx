@@ -1,0 +1,218 @@
+---
+title: Getting Started
+description: Learn how to install and use the Compass plugin to read device compass heading in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS Setup
+
+On iOS, compass access requires location permission. Add the following to your `Info.plist`:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need location permission to access the compass</string>
+```
+
+## Android Setup
+
+No additional setup required. The plugin uses the device's magnetometer and accelerometer sensors.
+
+## Usage
+
+Import the plugin and use its methods to read compass heading:
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// Get current heading once
+const getCurrentHeading = async () => {
+  const { value } = await CapgoCompass.getCurrentHeading();
+  console.log('Current heading:', value, 'degrees');
+};
+
+// Start continuous heading updates
+const startCompass = async () => {
+  // Start listening for updates
+  await CapgoCompass.startListening();
+
+  // Add listener for heading changes
+  const handle = await CapgoCompass.addListener('headingChange', (event) => {
+    console.log('Heading:', event.value, 'degrees');
+  });
+
+  // Later, to stop listening:
+  // await CapgoCompass.stopListening();
+  // await handle.remove();
+};
+
+// Check permissions
+const checkPermission = async () => {
+  const status = await CapgoCompass.checkPermissions();
+  console.log('Permission status:', status.compass);
+};
+
+// Request permissions
+const requestPermission = async () => {
+  const status = await CapgoCompass.requestPermissions();
+  if (status.compass === 'granted') {
+    console.log('Compass access granted');
+  }
+};
+```
+
+## API Reference
+
+### getCurrentHeading()
+
+Get the current compass heading in degrees.
+
+```typescript
+const result = await CapgoCompass.getCurrentHeading();
+// Returns: { value: number } - heading in degrees (0-360)
+```
+
+### startListening()
+
+Start listening for compass heading changes. Must be called before heading events are emitted.
+
+```typescript
+await CapgoCompass.startListening();
+```
+
+### stopListening()
+
+Stop listening for compass heading changes.
+
+```typescript
+await CapgoCompass.stopListening();
+```
+
+### addListener('headingChange', callback)
+
+Add a listener for heading change events.
+
+```typescript
+const handle = await CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
+
+// Remove listener when done
+await handle.remove();
+```
+
+### removeAllListeners()
+
+Remove all registered listeners.
+
+```typescript
+await CapgoCompass.removeAllListeners();
+```
+
+### checkPermissions()
+
+Check current permission status.
+
+```typescript
+const status = await CapgoCompass.checkPermissions();
+// Returns: { compass: 'prompt' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+Request permission to access compass data.
+
+```typescript
+const status = await CapgoCompass.requestPermissions();
+```
+
+### getPluginVersion()
+
+Get the native plugin version.
+
+```typescript
+const { version } = await CapgoCompass.getPluginVersion();
+```
+
+## Complete Example
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+export class CompassService {
+  private listenerHandle: any = null;
+
+  async init() {
+    // Check and request permissions
+    const status = await CapgoCompass.checkPermissions();
+    if (status.compass !== 'granted') {
+      const result = await CapgoCompass.requestPermissions();
+      if (result.compass !== 'granted') {
+        throw new Error('Compass permission denied');
+      }
+    }
+  }
+
+  async startTracking(onHeadingChange: (heading: number) => void) {
+    // Start listening for updates
+    await CapgoCompass.startListening();
+
+    // Add event listener
+    this.listenerHandle = await CapgoCompass.addListener(
+      'headingChange',
+      (event) => {
+        onHeadingChange(event.value);
+      }
+    );
+  }
+
+  async stopTracking() {
+    if (this.listenerHandle) {
+      await this.listenerHandle.remove();
+      this.listenerHandle = null;
+    }
+    await CapgoCompass.stopListening();
+  }
+
+  async getHeading(): Promise<number> {
+    const { value } = await CapgoCompass.getCurrentHeading();
+    return value;
+  }
+
+  getCardinalDirection(heading: number): string {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(heading / 45) % 8;
+    return directions[index];
+  }
+}
+```
+
+## Platform Notes
+
+### iOS
+- Requires iOS 10.0+
+- Uses Core Location for heading data
+- Requires location permission (NSLocationWhenInUseUsageDescription)
+- Heading updates are continuous when listening is active
+
+### Android
+- Requires Android 6.0 (API 23)+
+- Uses accelerometer and magnetometer sensors
+- No special permissions required for compass sensors
+- Heading is calculated from sensor fusion
+
+### Web
+- Not supported on web platform
+- Methods will throw errors when called

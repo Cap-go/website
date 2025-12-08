@@ -1,0 +1,122 @@
+---
+title: "@capgo/capacitor-is-root"
+locale: zh
+description: Capacitor 应用的 Root 和越狱检测插件，具有全面的安全检查和设备完整性验证。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 检测已 root 的 Android 设备和越狱的 iOS 设备，以增强应用安全性并保护敏感数据。
+  image:
+    file: ~public/icons/plugins/is-root.svg
+  actions:
+    - text: 入门指南
+      link: /docs/plugins/is-root/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-is-root/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概述
+
+Capacitor Is Root 插件为 Android 设备提供全面的 root 和越狱检测以及模拟器检测。此插件通过识别可能构成安全风险的受损设备和模拟环境来帮助增强应用安全性。
+
+<CardGrid stagger>
+  <Card title="Root 检测" icon="rocket">
+    使用多种方法进行高级 Android root 检测 🔒
+  </Card>
+  <Card title="模拟器检测" icon="approve-check">
+    识别模拟环境和测试框架 🛡️
+  </Card>
+  <Card title="安全验证" icon="approve-check">
+    多种检测技术以提高准确性 ✅
+  </Card>
+  <Card title="专注于 Android" icon="laptop">
+    专门用于 Android 安全评估的检测 🤖
+  </Card>
+</CardGrid>
+
+## 安装
+
+```bash
+npm install @capgo/capacitor-is-root
+npx cap sync
+```
+
+## 核心 API 方法
+
+### Root 检测
+- `isRooted()` - 使用默认方法执行全面的 root 检测
+- `isRootedWithBusyBox()` - 包括 BusyBox 检查的扩展检测
+- `detectRootManagementApps()` - 识别已安装的 root 管理应用程序
+- `checkForSuBinary()` - 检查系统路径中是否存在 `su` 二进制文件
+
+### 模拟器检测
+- `isRunningOnEmulator()` - 检测常见的 Android 模拟器指纹
+
+## 检测技术
+
+插件采用多种检测方法：
+
+### Root 检测
+- 检查 root 管理应用程序（SuperSU、Magisk 等）
+- 扫描可疑的系统属性
+- 识别测试构建标签和调试标志
+- 验证危险二进制文件位置
+- 检查系统路径权限
+
+### 模拟器检测
+- 硬件指纹分析
+- 构建属性检查
+- 模拟器特定特征
+- 虚拟环境指标
+
+## 使用示例
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// 基本 root 检测
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('Device is rooted');
+  // 适当处理已 root 的设备
+}
+
+// 使用 BusyBox 的扩展 root 检测
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('Device is rooted (extended check)');
+}
+
+// 检查模拟器
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('Running on emulator');
+}
+
+// 检测 root 管理应用
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('Root management apps detected');
+}
+```
+
+## 安全注意事项
+
+- 使用多种检测方法以提高准确性
+- 为检测到的环境实施优雅降级
+- 实施安全措施时考虑用户隐私
+- 建议定期更新，因为检测方法不断发展
+
+## 文档
+
+查看[完整文档](/docs/plugins/is-root/getting-started/)以获取详细的实施指南和高级安全模式。

@@ -1,0 +1,193 @@
+---
+title: "API-Schlüssel"
+locale: de
+description: "Umfassende Dokumentation für den API-Schlüssel-Endpunkt mit Details zu Authentifizierung, Berechtigungen und Verwaltung innerhalb der Capgo API"
+sidebar:
+  order: 9
+---
+
+API-Schlüssel werden verwendet, um Anfragen an die Capgo API zu authentifizieren. Jeder Schlüssel kann unterschiedliche Berechtigungen (Modi) haben, um Zugriffsebenen zu steuern. Schlüssel sind organisationsspezifisch und sollten sorgfältig verwaltet werden, da sie Zugriff auf Ihre Capgo-Ressourcen gewähren.
+
+## Schlüssel-Modi
+
+- **read**: Kann nur Daten lesen, keine Änderungen erlaubt
+- **upload**: Kann lesen, ändern und neue Bundles hochladen
+- **write**: Kann Daten lesen, ändern und Bundles hochladen
+- **all**: Vollzugriff auf alle Operationen
+
+Schlüssel-Modi folgen einem gestuften Schema. Wenn Sie einen Upload-Schlüssel haben und dann einen Write-Schlüssel erstellen, kann der Write-Schlüssel alles tun, was der Upload-Schlüssel konnte.
+Bitte schauen Sie sich das folgende Diagramm an, um besser zu verstehen, wie API-Schlüssel funktionieren.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="Ein Diagramm, das erklärt, wie API-Schlüssel funktionieren" /><figcaption></figcaption></figure>
+
+## Unterschlüssel mit eingeschränkten Rechten
+
+Sie können Unterschlüssel mit eingeschränktem Zugriff auf bestimmte Apps oder Organisationen erstellen. Dies ist nützlich, um den Zugriff auf bestimmte Ressourcen einzuschränken und gleichzeitig Operationen auf anderen zu ermöglichen. Verwenden Sie die Parameter `limited_to_apps` und `limited_to_orgs` beim Erstellen eines Schlüssels, um diese Einschränkungen zu definieren.
+
+## Best Practices für Sicherheit
+
+1. **Prinzip der geringsten Berechtigung**: Verwenden Sie immer den restriktivsten Modus, der Ihrer Integration noch ermöglicht zu funktionieren
+2. **Regelmäßige Rotation**: Rotieren Sie Ihre API-Schlüssel regelmäßig
+3. **Sichere Speicherung**: Speichern Sie API-Schlüssel sicher und committen Sie sie niemals in die Versionskontrolle
+4. **Überwachung**: Überwachen Sie die Nutzung von API-Schlüsseln und widerrufen Sie kompromittierte Schlüssel sofort
+5. **Eingeschränkte Unterschlüssel**: Verwenden Sie Unterschlüssel mit eingeschränkten Rechten für spezifische Integrationen, um Risiken zu minimieren
+
+## Endpunkte
+
+### GET
+
+`https://api.capgo.app/apikey/`
+
+Ruft alle API-Schlüssel ab, die mit Ihrem Konto verknüpft sind.
+
+#### Response-Typ
+
+```typescript
+interface ApiKey {
+  created_at: string | null
+  id: number
+  key: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+  name: string
+  updated_at: string | null
+  user_id: string
+  limited_to_apps?: string[]
+  limited_to_orgs?: string[]
+}
+```
+
+#### Beispiel-Anfrage
+
+```bash
+curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
+```
+
+#### Beispiel-Antwort
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "key": "ak_123...",
+      "mode": "read",
+      "name": "CI/CD Read Key",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "user_id": "user_123"
+    },
+    {
+      "id": 2,
+      "key": "ak_456...",
+      "mode": "upload",
+      "name": "Deploy Bot",
+      "created_at": "2024-01-02T00:00:00Z",
+      "updated_at": "2024-01-02T00:00:00Z",
+      "user_id": "user_123",
+      "limited_to_apps": ["com.demo.app"]
+    }
+  ]
+}
+```
+
+### POST
+
+`https://api.capgo.app/apikey/`
+
+Erstellt einen neuen API-Schlüssel für eine bestimmte Organisation.
+
+#### Query-Parameter
+
+```typescript
+interface ApiKeyCreate {
+  name: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+  limited_to_apps?: string[]
+  limited_to_orgs?: string[]
+}
+```
+
+#### Beispiel-Anfrage
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Limited Read Key",
+    "mode": "read",
+    "limited_to_apps": ["com.demo.app"]
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### Beispiel-Antwort
+
+```json
+{
+  "apikey": {
+    "id": 3,
+    "key": "ak_789...",
+    "mode": "read",
+    "name": "Limited Read Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "limited_to_apps": ["com.demo.app"]
+  }
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/apikey/:id/`
+
+Löscht einen bestehenden API-Schlüssel. Verwenden Sie dies, um den Zugriff sofort zu widerrufen.
+
+#### Parameter
+- `id`: Die ID des zu löschenden API-Schlüssels (numerischer Identifikator, nicht der Schlüssel-String selbst)
+
+#### Beispiel-Anfrage
+
+```bash
+curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
+```
+
+#### Erfolgs-Antwort
+
+```json
+{
+  "success": true
+}
+```
+
+## Häufige Anwendungsfälle
+
+1. **CI/CD-Integration**: Erstellen Sie schreibgeschützte Schlüssel für CI-Pipelines, um den Deployment-Status zu überprüfen
+2. **Deployment-Automatisierung**: Verwenden Sie Upload-Modus-Schlüssel für automatisierte Deployment-Skripte
+3. **Überwachungs-Tools**: Verwenden Sie Read-Modus-Schlüssel für externe Überwachungsintegrationen
+4. **Admin-Zugriff**: Verwenden Sie All-Modus-Schlüssel sparsam für administrative Tools
+5. **Eingeschränkter Zugriff**: Erstellen Sie Unterschlüssel mit eingeschränkten Rechten für bestimmte Apps oder Organisationen für Drittanbieter-Integrationen
+
+## Fehlerbehandlung
+
+Häufige Fehlerszenarien und ihre Antworten:
+
+```json
+// Invalid mode
+{
+  "error": "Invalid mode specified. Must be one of: read, write, upload, all",
+  "status": "KO"
+}
+
+// Key not found
+{
+  "error": "API key not found",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage API keys",
+  "status": "KO"
+}
+``` 

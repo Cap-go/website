@@ -1,0 +1,46 @@
+---
+title: "@capgo/capacitor-nfc"
+description: Native NFC tag discovery, reading and writing for Capacitor apps on iOS and Android.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Read and write NFC tags with native support for iOS and Android, enabling contactless interactions and smart tag experiences.
+  image:
+    file: ~public/icons/plugins/nfc.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/nfc/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-nfc/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Tag Discovery" icon="star">
+    Detect NFC tags automatically when they come near the device 📡
+  </Card>
+  <Card title="Read NDEF Records" icon="open-book">
+    Read structured data from NFC tags including text, URLs, and custom payloads 📖
+  </Card>
+  <Card title="Write to Tags" icon="pencil">
+    Write NDEF messages to compatible NFC tags 📝
+  </Card>
+  <Card title="Tag Formatting" icon="setting">
+    Format NDEF-formattable tags for writing data 🔧
+  </Card>
+  <Card title="Peer-to-Peer" icon="rocket">
+    Share data between devices using Android Beam (Android only) 📲
+  </Card>
+  <Card title="Cross-platform" icon="puzzle">
+    Works on both iOS and Android with consistent API 📱
+  </Card>
+</CardGrid>

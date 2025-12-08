@@ -1,0 +1,59 @@
+---
+title: "@capgo/native-purchases"
+locale: ja
+description: iOSとAndroid全体で統一されたシンプルなAPIを使用して、アプリ内課金とサブスクリプションを処理するCapacitorプラグイン。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: iOSとAndroidプラットフォーム全体でシームレスに動作する統一されたAPIで、アプリ内課金とサブスクリプションを簡素化します。
+  image:
+    file: ~public/icons/plugins/native-purchases.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/native-purchases/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/native-purchases/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="統一されたAPI" icon="rocket">
+    iOSとAndroid購入用の単一API 💳
+  </Card>
+  <Card title="サブスクリプション管理" icon="setting">
+    自動更新によるサブスクリプションの処理 🔄
+  </Card>
+  <Card title="レシート検証" icon="approve-check">
+    セキュリティのための組み込みレシート検証 🔒
+  </Card>
+  <Card title="Getting Started" icon="open-book">
+    プラグインをインストールして設定するには、[Getting Startedガイド](/docs/plugins/native-purchases/getting-started/)を確認してください。
+  </Card>
+</CardGrid>
+
+## プラットフォームセットアップガイド
+
+<CardGrid>
+  <Card title="Androidセットアップ" icon="setting">
+    Androidでアプリ内課金を設定するための完全なガイド：
+    - [サンドボックステストの設定](/docs/plugins/native-purchases/android-sandbox-testing/)
+    - [サブスクリプションの作成](/docs/plugins/native-purchases/android-create-subscription/)
+    - [初回特典](/docs/plugins/native-purchases/android-introductory-offer/)
+  </Card>
+  <Card title="iOSセットアップ" icon="star">
+    iOSでアプリ内課金を設定するための完全なガイド：
+    - [サンドボックステストの設定](/docs/plugins/native-purchases/ios-sandbox-testing/)
+    - [サブスクリプショングループ](/docs/plugins/native-purchases/ios-subscription-group/)
+    - [サブスクリプションの作成](/docs/plugins/native-purchases/ios-create-subscription/)
+    - [初回特典](/docs/plugins/native-purchases/ios-introductory-offer/)
+  </Card>
+</CardGrid>

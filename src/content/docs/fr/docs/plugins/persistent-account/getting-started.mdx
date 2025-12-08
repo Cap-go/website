@@ -1,0 +1,339 @@
+---
+title: Premiers pas
+locale: fr
+description: Apprenez à installer et utiliser le plugin Persistent Account pour maintenir les données utilisateur à travers les installations de l'application.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Prise en charge de la plateforme
+
+- **iOS** : Utilise les Services Keychain iOS pour un stockage sécurisé et persistant
+- **Android** : Utilise Android Account Manager ou les préférences partagées avec sauvegarde
+
+## Exemple d'utilisation
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Définissez votre structure de données de compte
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Enregistrer les données de compte
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'jean_dupont',
+  email: 'jean@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Lire les données de compte
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Compte restauré:', account.username);
+} else {
+  console.log('Aucune donnée de compte trouvée');
+}
+```
+
+## Référence API
+
+### saveAccount(options)
+
+```typescript
+saveAccount(options: { data: unknown }) => Promise<void>
+```
+
+Enregistrer en toute sécurité les données de compte dans le stockage persistant.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ data: unknown }` |
+
+### readAccount()
+
+```typescript
+readAccount() => Promise<{ data: unknown | null }>
+```
+
+Récupérer les données de compte stockées.
+
+**Retourne :** `Promise<{ data: unknown | null }>`
+
+## Implémentation pratique
+
+### Exemple complet de service d'authentification
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  authToken?: string;
+  preferences: {
+    theme: string;
+    language: string;
+    notifications: boolean;
+  };
+}
+
+class AuthService {
+  // Enregistrer le compte utilisateur après la connexion
+  async saveUserAccount(user: UserAccount) {
+    try {
+      await PersistentAccount.saveAccount({ data: user });
+      console.log('Compte utilisateur enregistré avec succès');
+    } catch (error) {
+      console.error('Échec de l\'enregistrement du compte:', error);
+      throw error;
+    }
+  }
+
+  // Restaurer le compte utilisateur au démarrage de l'application
+  async restoreUserAccount(): Promise<UserAccount | null> {
+    try {
+      const result = await PersistentAccount.readAccount();
+
+      if (result.data) {
+        const account = result.data as UserAccount;
+        console.log('Compte utilisateur restauré:', account.username);
+        return account;
+      }
+
+      console.log('Aucun compte enregistré trouvé');
+      return null;
+    } catch (error) {
+      console.error('Échec de la restauration du compte:', error);
+      return null;
+    }
+  }
+
+  // Mettre à jour les préférences utilisateur
+  async updatePreferences(preferences: Partial<UserAccount['preferences']>) {
+    const account = await this.restoreUserAccount();
+
+    if (account) {
+      const updatedAccount: UserAccount = {
+        ...account,
+        preferences: {
+          ...account.preferences,
+          ...preferences
+        }
+      };
+
+      await this.saveUserAccount(updatedAccount);
+    }
+  }
+
+  // Effacer les données de compte (lors de la déconnexion)
+  async clearAccount() {
+    try {
+      await PersistentAccount.saveAccount({ data: null });
+      console.log('Données de compte effacées');
+    } catch (error) {
+      console.error('Échec de l\'effacement du compte:', error);
+    }
+  }
+}
+
+// Utilisation
+const authService = new AuthService();
+
+// Lors de la connexion
+await authService.saveUserAccount({
+  userId: '12345',
+  username: 'jean_dupont',
+  email: 'jean@example.com',
+  authToken: 'abc123xyz',
+  preferences: {
+    theme: 'dark',
+    language: 'fr',
+    notifications: true
+  }
+});
+
+// Au démarrage de l'application
+const savedAccount = await authService.restoreUserAccount();
+if (savedAccount) {
+  // L'utilisateur était précédemment connecté
+  console.log('Bon retour,', savedAccount.username);
+}
+
+// Mettre à jour les préférences
+await authService.updatePreferences({
+  theme: 'light',
+  notifications: false
+});
+
+// Lors de la déconnexion
+await authService.clearAccount();
+```
+
+### Initialisation de l'application avec restauration de compte
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function initializeApp() {
+  try {
+    // Essayer de restaurer le compte enregistré
+    const result = await PersistentAccount.readAccount();
+
+    if (result.data) {
+      const account = result.data as UserAccount;
+
+      // Valider que le token est toujours valide
+      const isValid = await validateAuthToken(account.authToken);
+
+      if (isValid) {
+        // Restaurer la session utilisateur
+        setCurrentUser(account);
+        navigateToHome();
+      } else {
+        // Token expiré, afficher la connexion
+        navigateToLogin();
+      }
+    } else {
+      // Aucun compte enregistré, afficher la connexion
+      navigateToLogin();
+    }
+  } catch (error) {
+    console.error('Échec de l\'initialisation de l\'application:', error);
+    navigateToLogin();
+  }
+}
+
+// Appeler au démarrage de l'application
+initializeApp();
+```
+
+### Synchronisation avec le backend
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function syncAccountWithBackend() {
+  const result = await PersistentAccount.readAccount();
+
+  if (result.data) {
+    const localAccount = result.data as UserAccount;
+
+    try {
+      // Récupérer les dernières données de compte depuis le serveur
+      const response = await fetch(`/api/users/${localAccount.userId}`);
+      const serverAccount = await response.json();
+
+      // Fusionner les données du serveur avec les préférences locales
+      const mergedAccount: UserAccount = {
+        ...serverAccount,
+        preferences: {
+          ...serverAccount.preferences,
+          ...localAccount.preferences // Les préférences locales ont la priorité
+        }
+      };
+
+      // Enregistrer les données fusionnées
+      await PersistentAccount.saveAccount({ data: mergedAccount });
+
+      return mergedAccount;
+    } catch (error) {
+      console.error('Échec de la synchronisation avec le backend:', error);
+      // Retourner le compte local en secours
+      return localAccount;
+    }
+  }
+
+  return null;
+}
+```
+
+## Bonnes pratiques
+
+- **Sécurité des types** : Définissez des interfaces TypeScript claires pour vos données de compte
+- **Validation** : Validez toujours les données lors de la lecture depuis le stockage persistant
+- **Gestion des erreurs** : Implémentez des blocs try-catch appropriés pour toutes les opérations
+- **Sécurité** : Ne stockez pas de données sensibles comme les mots de passe en texte clair
+- **Gestion des tokens** : Actualisez les tokens d'authentification lors de la restauration des comptes
+- **Taille des données** : Gardez les données stockées minimales pour garantir des opérations de lecture/écriture rapides
+- **Vérifications nulles** : Vérifiez toujours si les données existent avant de les utiliser
+- **Stratégie de sauvegarde** : Envisagez la synchronisation avec le backend pour une sécurité supplémentaire
+
+## Considérations de sécurité
+
+- Les données de compte sont stockées à l'aide de mécanismes de stockage sécurisé spécifiques à la plateforme
+- Les données persistent à travers les désinstallations et réinstallations de l'application
+- Envisagez de chiffrer les informations sensibles avant de les stocker
+- Implémentez une validation appropriée des données lors de la lecture des comptes stockés
+- Suivez les directives de la plateforme pour la gestion des données utilisateur
+- Utilisez des tokens d'authentification avec expiration pour la sécurité
+- Effacez les données de compte de manière appropriée lors de la déconnexion de l'utilisateur
+
+## Implémentation de la plateforme
+
+### iOS
+
+- Utilise les Services Keychain iOS pour un stockage sécurisé et persistant
+- Les données survivent à la suppression de l'application et aux restaurations de l'appareil
+- Protégé par les mécanismes de sécurité iOS
+
+### Android
+
+- Utilise Android Account Manager ou les préférences partagées avec sauvegarde
+- Maintient les données à travers les réinstallations d'application et les migrations d'appareils
+- Protégé par la sécurité du système Android
+
+## Cas d'utilisation
+
+- **Intégration utilisateur** : Préserver la progression de l'utilisateur à travers les réinstallations d'application
+- **Récupération de compte** : Restaurer les sessions utilisateur après les mises à jour d'application
+- **Stockage de préférences** : Maintenir les paramètres et configurations utilisateur
+- **Applications Offline-First** : Stocker les données utilisateur essentielles localement
+- **Gestion de session** : Garder les utilisateurs connectés à travers les redémarrages d'application
+- **Migration d'appareil** : Transférer les données utilisateur vers de nouveaux appareils

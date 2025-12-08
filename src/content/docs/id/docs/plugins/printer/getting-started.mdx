@@ -1,0 +1,322 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin Printer untuk mencetak konten dari aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+Import plugin dan cetak berbagai jenis konten:
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+// Print HTML content
+const printHTML = async () => {
+  await Printer.print({
+    content: '<h1>Hello World</h1><p>This is a test print.</p>',
+    name: 'test-print'
+  });
+};
+
+// Print a PDF file
+const printPDF = async () => {
+  await Printer.print({
+    content: 'file:///path/to/document.pdf',
+    name: 'my-document'
+  });
+};
+
+// Print an image
+const printImage = async () => {
+  await Printer.print({
+    content: 'file:///path/to/image.jpg',
+    name: 'my-image'
+  });
+};
+```
+
+## Referensi API
+
+### print(options)
+
+Buka dialog cetak native dengan konten yang ditentukan.
+
+```typescript
+interface PrintOptions {
+  content: string;          // HTML string, file URI, or base64 data
+  name?: string;            // Print job name
+  orientation?: 'portrait' | 'landscape';
+  grayscale?: boolean;      // Print in grayscale (default: false)
+}
+
+await Printer.print(options);
+```
+
+### canPrint()
+
+Periksa apakah pencetakan tersedia di perangkat.
+
+```typescript
+const { value } = await Printer.canPrint();
+console.log('Printing available:', value);
+```
+
+## Contoh Lengkap
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+
+export class PrintService {
+  async checkPrintAvailability(): Promise<boolean> {
+    const { value } = await Printer.canPrint();
+    return value;
+  }
+
+  async printHTML(htmlContent: string, jobName: string = 'Document') {
+    try {
+      const canPrint = await this.checkPrintAvailability();
+      if (!canPrint) {
+        throw new Error('Printing not available on this device');
+      }
+
+      await Printer.print({
+        content: htmlContent,
+        name: jobName,
+        orientation: 'portrait'
+      });
+    } catch (error) {
+      console.error('Print failed:', error);
+      throw error;
+    }
+  }
+
+  async printDocument(filePath: string, jobName?: string) {
+    await Printer.print({
+      content: filePath,
+      name: jobName || 'Document'
+    });
+  }
+
+  async printReceipt(receiptData: any) {
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            .header { text-align: center; margin-bottom: 20px; }
+            .item { display: flex; justify-content: space-between; margin: 10px 0; }
+            .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; padding-top: 10px; border-top: 2px solid #000; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h2>Receipt</h2>
+            <p>Date: ${new Date().toLocaleDateString()}</p>
+          </div>
+          ${receiptData.items.map((item: any) => `
+            <div class="item">
+              <span>${item.name}</span>
+              <span>$${item.price.toFixed(2)}</span>
+            </div>
+          `).join('')}
+          <div class="total">
+            <div class="item">
+              <span>Total:</span>
+              <span>$${receiptData.total.toFixed(2)}</span>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    await this.printHTML(html, 'Receipt');
+  }
+
+  async printFromURL(url: string) {
+    // Download the file first
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const reader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+      reader.onloadend = async () => {
+        try {
+          await Printer.print({
+            content: reader.result as string,
+            name: 'Downloaded Document'
+          });
+          resolve(true);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+}
+```
+
+## Penggunaan Lanjutan
+
+### Mencetak dengan Styling Kustom
+
+```typescript
+const printStyledDocument = async () => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          @page {
+            size: A4;
+            margin: 2cm;
+          }
+          body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+          }
+          h1 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+          }
+          .content {
+            margin-top: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Professional Document</h1>
+        <div class="content">
+          <p>This is a professionally styled document ready for printing.</p>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Styled Document',
+    orientation: 'portrait'
+  });
+};
+```
+
+### Mencetak Tabel
+
+```typescript
+const printTable = async (data: any[]) => {
+  const tableRows = data.map(row => `
+    <tr>
+      <td>${row.id}</td>
+      <td>${row.name}</td>
+      <td>${row.value}</td>
+    </tr>
+  `).join('');
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+          }
+        </style>
+      </head>
+      <body>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRows}
+          </tbody>
+        </table>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Data Table'
+  });
+};
+```
+
+### Mencetak Gambar
+
+```typescript
+const printImageWithDetails = async (imagePath: string, title: string) => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body { text-align: center; padding: 20px; }
+          h2 { margin-bottom: 20px; }
+          img { max-width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>
+        <h2>${title}</h2>
+        <img src="${imagePath}" alt="${title}" />
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: title
+  });
+};
+```
+
+## Praktik Terbaik
+
+1. **Periksa Ketersediaan**: Selalu periksa apakah pencetakan tersedia sebelum mencoba mencetak
+2. **Konten Valid**: Pastikan HTML dibuat dengan baik dan path file valid
+3. **Nama Job**: Gunakan nama deskriptif untuk pekerjaan cetak untuk membantu pengguna mengidentifikasinya
+4. **Styling**: Gunakan CSS inline atau style embedded untuk output cetak yang konsisten
+5. **Penanganan Error**: Bungkus panggilan cetak dalam blok try-catch untuk umpan balik pengguna
+
+## Troubleshooting
+
+### Masalah Umum
+
+**Dialog cetak tidak muncul**: Periksa bahwa pencetakan tersedia dengan canPrint()
+**Konten tidak tercetak**: Verifikasi bahwa HTML valid dan path file benar
+**Gambar tidak muncul**: Pastikan path gambar absolut dan file dapat diakses
+**Masalah styling**: Gunakan aturan CSS @page dan uji output cetak

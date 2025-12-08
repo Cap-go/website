@@ -1,0 +1,197 @@
+---
+title: Comenzar
+description: Aprende a instalar y usar el plugin Flash para controlar la linterna de tu dispositivo en tu aplicación Capacitor.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Uso
+
+Importa el plugin y usa sus métodos para controlar la linterna:
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// Check if flashlight is available
+const checkFlashlight = async () => {
+  const { value } = await CapacitorFlash.isAvailable();
+  console.log('Flashlight available:', value);
+};
+
+// Turn on flashlight
+const turnOn = async () => {
+  await CapacitorFlash.switchOn();
+};
+
+// Turn off flashlight
+const turnOff = async () => {
+  await CapacitorFlash.switchOff();
+};
+
+// Check if flashlight is on
+const checkStatus = async () => {
+  const { value } = await CapacitorFlash.isSwitchedOn();
+  console.log('Flashlight is on:', value);
+};
+
+// Toggle flashlight
+const toggle = async () => {
+  await CapacitorFlash.toggle();
+};
+```
+
+## Referencia de API
+
+### isAvailable()
+
+Verifica si la linterna está disponible en el dispositivo.
+
+```typescript
+const result = await CapacitorFlash.isAvailable();
+// Returns: { value: boolean }
+```
+
+### switchOn(options?)
+
+Enciende la linterna.
+
+```typescript
+interface SwitchOnOptions {
+  intensity?: number; // 0.0 to 1.0 (iOS only)
+}
+
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+### switchOff()
+
+Apaga la linterna.
+
+```typescript
+await CapacitorFlash.switchOff();
+```
+
+### isSwitchedOn()
+
+Verifica si la linterna está actualmente encendida.
+
+```typescript
+const result = await CapacitorFlash.isSwitchedOn();
+// Returns: { value: boolean }
+```
+
+### toggle()
+
+Alterna la linterna encendida/apagada.
+
+```typescript
+await CapacitorFlash.toggle();
+```
+
+## Ejemplo Completo
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+export class FlashlightService {
+  private isOn = false;
+
+  async init() {
+    const { value } = await CapacitorFlash.isAvailable();
+    if (!value) {
+      throw new Error('Flashlight not available on this device');
+    }
+  }
+
+  async toggle() {
+    if (this.isOn) {
+      await CapacitorFlash.switchOff();
+    } else {
+      await CapacitorFlash.switchOn();
+    }
+    this.isOn = !this.isOn;
+  }
+
+  async turnOn(intensity?: number) {
+    await CapacitorFlash.switchOn({ intensity });
+    this.isOn = true;
+  }
+
+  async turnOff() {
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+
+  async strobe(intervalMs: number = 100, duration: number = 3000) {
+    const endTime = Date.now() + duration;
+
+    while (Date.now() < endTime) {
+      await CapacitorFlash.toggle();
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+
+    // Ensure flashlight is off after strobe
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+}
+```
+
+## Mejores Prácticas
+
+1. **Verificar disponibilidad primero**
+   Siempre verifica la disponibilidad de la linterna antes de usarla:
+   ```typescript
+   const { value } = await CapacitorFlash.isAvailable();
+   if (!value) {
+     // Show alternative UI or disable flashlight features
+   }
+   ```
+
+2. **Manejar errores con gracia**
+   ```typescript
+   try {
+     await CapacitorFlash.switchOn();
+   } catch (error) {
+     console.error('Failed to turn on flashlight:', error);
+   }
+   ```
+
+3. **Apagar cuando no se necesite**
+   Siempre apaga la linterna cuando tu aplicación pase a segundo plano o cuando la función ya no sea necesaria para ahorrar batería.
+
+4. **Evitar alternar rápidamente**
+   Implementa debouncing para prevenir el encendido/apagado rápido que podría dañar el LED o agotar la batería.
+
+## Notas de Plataforma
+
+### iOS
+- Requiere iOS 10.0+
+- Usa el modo torch de `AVCaptureDevice`
+- Soporta control de intensidad (0.0 a 1.0)
+
+### Android
+- Requiere Android 6.0 (API 23)+
+- Usa Camera2 API
+- Control de intensidad no soportado (usa brillo predeterminado)
+
+### Web
+- Soportado en navegadores con MediaDevices API y capacidad de torch
+- Usa el stream de cámara para acceder a la linterna del dispositivo
+- Requiere permiso del usuario para acceder a la cámara
+- Funciona mejor en navegadores móviles (Chrome en Android)
+- Los navegadores de escritorio típicamente devuelven `isAvailable: false` (sin hardware de torch)
+- Control de intensidad no soportado en web

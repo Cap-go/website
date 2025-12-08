@@ -1,0 +1,276 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Is Root untuk mendeteksi perangkat Android yang di-root dan emulator untuk meningkatkan keamanan aplikasi.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-is-root
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Dukungan Platform
+
+- **Android**: Dukungan penuh untuk deteksi root dan emulator
+- **iOS**: Tidak ada konfigurasi yang diperlukan (plugin berfokus pada Android)
+
+## Contoh Penggunaan
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// Deteksi root dasar
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('Perangkat di-root');
+  // Tangani perangkat yang di-root dengan tepat
+  // Contoh: Tampilkan peringatan, batasi fungsionalitas, atau blokir akses
+}
+
+// Deteksi root diperluas dengan BusyBox
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('Perangkat di-root (pemeriksaan diperluas)');
+}
+
+// Periksa emulator
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('Berjalan di emulator');
+  // Tangani lingkungan emulator
+}
+
+// Deteksi aplikasi manajemen root
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('Aplikasi manajemen root terdeteksi');
+}
+
+// Periksa binary su
+const suResult = await IsRoot.checkForSuBinary();
+if (suResult.hasSu) {
+  console.log('Binary SU ditemukan di perangkat');
+}
+```
+
+## Referensi API
+
+### isRooted()
+
+```typescript
+isRooted() => Promise<{ isRooted: boolean }>
+```
+
+Melakukan deteksi root komprehensif menggunakan metode default.
+
+**Mengembalikan:** `Promise<{ isRooted: boolean }>`
+
+### isRootedWithBusyBox()
+
+```typescript
+isRootedWithBusyBox() => Promise<{ isRooted: boolean }>
+```
+
+Deteksi root diperluas termasuk pemeriksaan BusyBox.
+
+**Mengembalikan:** `Promise<{ isRooted: boolean }>`
+
+### detectRootManagementApps()
+
+```typescript
+detectRootManagementApps() => Promise<{ hasRootApps: boolean }>
+```
+
+Mengidentifikasi aplikasi manajemen root yang terinstal (SuperSU, Magisk, dll.).
+
+**Mengembalikan:** `Promise<{ hasRootApps: boolean }>`
+
+### checkForSuBinary()
+
+```typescript
+checkForSuBinary() => Promise<{ hasSu: boolean }>
+```
+
+Memeriksa keberadaan binary `su` di jalur sistem.
+
+**Mengembalikan:** `Promise<{ hasSu: boolean }>`
+
+### isRunningOnEmulator()
+
+```typescript
+isRunningOnEmulator() => Promise<{ isEmulator: boolean }>
+```
+
+Mendeteksi sidik jari emulator Android umum.
+
+**Mengembalikan:** `Promise<{ isEmulator: boolean }>`
+
+## Pemeriksaan Keamanan Komprehensif
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+async function performSecurityCheck() {
+  const checks = {
+    rooted: false,
+    emulator: false,
+    rootApps: false,
+    suBinary: false
+  };
+
+  try {
+    // Jalankan semua metode deteksi
+    const [rootResult, emulatorResult, rootAppsResult, suResult] = await Promise.all([
+      IsRoot.isRootedWithBusyBox(),
+      IsRoot.isRunningOnEmulator(),
+      IsRoot.detectRootManagementApps(),
+      IsRoot.checkForSuBinary()
+    ]);
+
+    checks.rooted = rootResult.isRooted;
+    checks.emulator = emulatorResult.isEmulator;
+    checks.rootApps = rootAppsResult.hasRootApps;
+    checks.suBinary = suResult.hasSu;
+
+    // Tentukan tingkat keamanan
+    const securityIssues = Object.values(checks).filter(v => v).length;
+
+    if (securityIssues > 0) {
+      console.warn(`Perangkat memiliki ${securityIssues} masalah keamanan`, checks);
+      return {
+        secure: false,
+        issues: checks
+      };
+    }
+
+    return {
+      secure: true,
+      issues: checks
+    };
+  } catch (error) {
+    console.error('Pemeriksaan keamanan gagal:', error);
+    throw error;
+  }
+}
+
+// Gunakan di aplikasi Anda
+const securityStatus = await performSecurityCheck();
+if (!securityStatus.secure) {
+  // Tangani perangkat yang tidak aman
+  showSecurityWarning(securityStatus.issues);
+}
+```
+
+## Teknik Deteksi
+
+### Deteksi Root
+
+Plugin menggunakan beberapa metode deteksi:
+
+- Memeriksa aplikasi manajemen root (SuperSU, Magisk, KingRoot, dll.)
+- Memindai properti sistem yang mencurigakan
+- Mengidentifikasi tag build tes dan flag debug
+- Memvalidasi lokasi binary yang berbahaya
+- Memeriksa izin jalur sistem
+- Mendeteksi aplikasi penyembunyian root yang dikenal
+
+### Deteksi Emulator
+
+- Analisis sidik jari hardware
+- Inspeksi properti build
+- Karakteristik khusus emulator
+- Indikator lingkungan virtual
+
+## Menangani Masalah Keamanan
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+async function handleDeviceSecurity() {
+  const rootResult = await IsRoot.isRooted();
+
+  if (rootResult.isRooted) {
+    // Opsi 1: Tampilkan peringatan dan lanjutkan
+    showWarning('Perangkat Anda tampaknya di-root. Beberapa fitur mungkin dibatasi.');
+
+    // Opsi 2: Batasi fungsionalitas
+    disableSensitiveFeatures();
+
+    // Opsi 3: Blokir akses ke aplikasi
+    showBlockedScreen('Aplikasi ini tidak dapat berjalan di perangkat yang di-root karena alasan keamanan.');
+    return false;
+  }
+
+  return true;
+}
+
+function showWarning(message: string) {
+  // Tampilkan dialog peringatan yang ramah pengguna
+  alert(message);
+}
+
+function disableSensitiveFeatures() {
+  // Nonaktifkan pemrosesan pembayaran, akses data sensitif, dll.
+  console.log('Fitur sensitif dinonaktifkan karena perangkat di-root');
+}
+
+function showBlockedScreen(message: string) {
+  // Tampilkan layar pemblokiran dan keluar dari aplikasi
+  alert(message);
+}
+```
+
+## Praktik Terbaik
+
+- Gunakan beberapa metode deteksi untuk akurasi lebih tinggi
+- Implementasikan degradasi yang anggun daripada memblokir akses sepenuhnya
+- Berikan komunikasi pengguna yang jelas tentang masalah keamanan
+- Pertimbangkan pengalaman pengguna saat menerapkan langkah-langkah keamanan
+- Perbarui plugin secara teratur karena metode deteksi berkembang
+- Uji pada perangkat yang di-root dan tidak di-root
+- Tangani kegagalan deteksi dengan anggun
+
+## Pertimbangan Keamanan
+
+- Tidak ada metode deteksi yang 100% sempurna
+- Pengguna lanjutan dapat melewati mekanisme deteksi
+- Gunakan bersama dengan langkah-langkah keamanan sisi server
+- Pertimbangkan privasi pengguna saat menerapkan pemeriksaan keamanan
+- Ikuti pedoman platform untuk implementasi keamanan
+- Pembaruan rutin direkomendasikan karena teknik penyembunyian root terus berkembang
+
+## Kasus Penggunaan
+
+- **Aplikasi perbankan dan keuangan**: Cegah akses pada perangkat yang disusupi
+- **Konten yang dilindungi DRM**: Lindungi materi berhak cipta
+- **Aplikasi enterprise**: Terapkan kebijakan keamanan BYOD
+- **Pemrosesan pembayaran**: Pastikan lingkungan transaksi yang aman
+- **Aplikasi data sensitif**: Lindungi informasi rahasia

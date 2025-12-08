@@ -1,0 +1,166 @@
+---
+title: Android Auto-Renewable Subscription erstellen
+description: Schritt-für-Schritt-Anleitung zur Erstellung von automatisch verlängernden Abonnements in der Google Play Console für das native-purchases-Plugin.
+locale: de
+sidebar:
+  order: 4
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Automatisch verlängernde Abonnements bieten fortlaufenden Zugang zu Inhalten, Diensten oder Premium-Funktionen in Ihrer App. Dieser Leitfaden hilft Ihnen, Abonnements in der Google Play Console zu erstellen und zu konfigurieren.
+
+## Überblick
+
+Abonnements werden am Ende jeder Abrechnungsperiode automatisch verlängert, bis der Benutzer kündigt. Sie sind ideal für:
+- Zugang zu Premium-Inhalten
+- Werbefreie Erfahrungen
+- Cloud-Speicher
+- Fortlaufende Dienste
+
+## Ein Abonnement erstellen
+
+<Steps>
+
+1. **Zu Abonnements navigieren**
+
+   Wählen Sie in der Google Play Console Ihre App aus und wählen Sie **Monetarisieren > Abonnements** aus dem linken Menü.
+
+   Klicken Sie auf die Schaltfläche **Abonnement erstellen**, um zu beginnen.
+
+   ![Zu Abonnements navigieren](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+
+2. **Grundlegende Informationen eingeben**
+
+   Geben Sie einen Abonnementnamen und eine Produkt-ID an. Die Produkt-ID ist für die Konfiguration in Ihrer App erforderlich und kann später nicht geändert werden.
+
+   ![Abonnementdetails eingeben](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+
+3. **Basisplan erstellen**
+
+   Google Play erfordert genau einen Basisplan pro Abonnement. Das native-purchases-Plugin unterstützt nur einen Basisplan, um die Kompatibilität mit iOS zu gewährleisten.
+
+   Klicken Sie auf **Basisplan hinzufügen**, um fortzufahren.
+
+   ![Basisplan erstellen](/native-purchases/android/create-subscription/create-base-plan.webp)
+
+4. **Basisplan-Details konfigurieren**
+
+   Eingeben:
+   - **Basisplan-ID**: Eindeutige Kennung für diesen Plan
+   - **Abrechnungszeitraum**: Wie oft Benutzer belastet werden (wöchentlich, monatlich, jährlich usw.)
+   - **Nachfrist**: Zeitfenster, während dessen Google das Abonnement aufrechterhält, während die Zahlung vor der Kündigung wiederholt wird
+
+   ![Basisplan konfigurieren](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+
+5. **Preise einrichten**
+
+   Greifen Sie auf den Preisbereich zu und wählen Sie alle Länder/Regionen aus, in denen Sie das Abonnement anbieten möchten.
+
+   ![Regionen auswählen](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+
+6. **Preis konfigurieren**
+
+   Legen Sie Ihren Basispreis in Ihrer Hauptwährung fest. Google Play konvertiert diesen automatisch in lokale Währungen.
+
+   ![Preis festlegen](/native-purchases/android/create-subscription/set-base-price.webp)
+
+7. **Regionale Preise überprüfen**
+
+   Überprüfen Sie die automatisch konvertierten Preise für jedes Land. Sie können einzelne Preise bei Bedarf anpassen.
+
+   ![Preise überprüfen](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+
+8. **Konfiguration speichern**
+
+   Speichern Sie Ihre Preiskonfiguration.
+
+   ![Preise speichern](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+
+9. **Abonnement aktivieren**
+
+   Klicken Sie auf die Schaltfläche **Aktivieren**, um Ihr Abonnementprodukt live und zum Kauf verfügbar zu machen.
+
+   ![Abonnement aktivieren](/native-purchases/android/create-subscription/activate-subscription.webp)
+
+</Steps>
+
+## Wichtige Überlegungen
+
+### Basisplan-Einschränkung
+
+Das native-purchases-Plugin erfordert genau einen Basisplan pro Abonnement, um Konsistenz mit der iOS-Abonnementverwaltung zu gewährleisten. Mehrere Basispläne werden nicht unterstützt.
+
+### Nachfrist
+
+Die Nachfrist ermöglicht es Google Play, fehlgeschlagene Zahlungen zu wiederholen, während der Zugang des Benutzers zum Abonnement aufrechterhalten wird. Übliche Nachfristen sind:
+- 3 Tage für monatliche Abonnements
+- 7 Tage für längere Abonnements
+
+### Abonnementstatus
+
+Nach der Erstellung befindet sich Ihr Abonnement im Status "Entwurf", bis es aktiviert wird. Sie können Entwurfs-Abonnements im Sandbox-Modus testen.
+
+## Verwendung in Ihrer App
+
+Nach der Erstellung verweisen Sie in Ihrer App auf das Abonnement mit der Produkt-ID:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Abonnementinformationen laden
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+console.log(`${product.title} — ${product.priceString}`);
+
+// Kaufen (planIdentifier = Basisplan-ID aus der Google Play Console)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // ERFORDERLICH auf Android, wird auf iOS ignoriert
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Transaktions-ID', transaction.transactionId);
+
+// Später Kaufstatus überprüfen
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const subscription = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.example.premium.monthly',
+);
+
+if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.isAcknowledged) {
+  console.log('Abonnement lokal aktiv');
+  // Für Ablauf/Kündigung validieren Sie purchaseToken über Ihr Backend
+}
+```
+
+## Nächste Schritte
+
+- [Einführungsangebot erstellen](/docs/plugins/native-purchases/android-introductory-offer/) um neue Abonnenten zu gewinnen
+- [Sandbox-Tests konfigurieren](/docs/plugins/native-purchases/android-sandbox-testing/) um Ihre Abonnements zu testen
+- Backend-Beleg-Validierung für Sicherheit einrichten
+
+## Fehlerbehebung
+
+**Abonnement erscheint nicht in der App:**
+- Überprüfen Sie, ob die Produkt-ID genau übereinstimmt
+- Stellen Sie sicher, dass das Abonnement aktiviert ist
+- Überprüfen Sie, ob Ihre App den korrekten Paketnamen hat
+- Warten Sie 2-3 Stunden nach der Aktivierung, bis Änderungen übernommen werden
+
+**Basisplan-Fehler:**
+- Stellen Sie sicher, dass Sie genau einen Basisplan haben
+- Überprüfen Sie, ob alle erforderlichen Felder ausgefüllt sind
+- Prüfen Sie, ob der Abrechnungszeitraum gültig ist
+
+**Preisprobleme:**
+- Bestätigen Sie, dass mindestens ein Land ausgewählt ist
+- Überprüfen Sie, ob der Basispreis über dem zulässigen Minimum liegt
+- Prüfen Sie, ob die Währungsumrechnungskurse akzeptabel sind

@@ -1,0 +1,145 @@
+---
+title: Iniziare
+description: Guida all'installazione e all'uso di @capgo/capacitor-android-inline-install
+sidebar:
+  order: 2
+  label: "Iniziare"
+locale: it
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installazione
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Esempio di Utilizzo
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+// Basic inline install
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp'
+});
+
+// Advanced install with tracking
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp',
+  referrer: 'campaign=my-campaign&source=app',
+  overlay: true,
+  fallback: true
+});
+
+// Handle the installation flow
+try {
+  await AndroidInlineInstall.startInlineInstall({
+    id: 'com.spotify.music',
+    referrer: 'utm_source=myapp&utm_campaign=music_promotion'
+  });
+  console.log('Install overlay triggered successfully');
+} catch (error) {
+  console.error('Install failed:', error);
+}
+```
+
+## Metodi API Principali
+
+### Gestione dell'Installazione
+- `startInlineInstall(options)` - Attiva l'overlay di installazione inline di Google Play per l'app specificata
+
+## Opzioni di Configurazione
+
+```typescript
+interface InlineInstallOptions {
+  id: string;           // Nome del pacchetto dell'app di destinazione (obbligatorio)
+  referrer?: string;    // Stringa della campagna di tracciamento (opzionale)
+  callerId?: string;    // Nome del pacchetto dell'app chiamante (predefinito: app corrente)
+  overlay?: boolean;    // Abilita/disabilita overlay di Play (predefinito: true)
+  fallback?: boolean;   // Usa la pagina completa dello store se l'overlay fallisce (predefinito: true)
+}
+```
+
+## Requisiti di Google Play
+
+### Idoneità per Premium Growth Tools
+La tua app deve qualificarsi per i Premium Growth Tools di Google Play per utilizzare l'installazione inline:
+- App con un coinvolgimento utente significativo
+- Buone valutazioni e recensioni su Play Store
+- Conformità alle politiche di Google Play
+
+### Requisiti dell'App di Destinazione
+- L'app di destinazione deve essere disponibile su Google Play Store
+- L'app di destinazione deve supportare l'installazione inline
+- L'utente deve aver effettuato l'accesso a Google Play Store
+
+## Comportamento e Fallback
+
+### Modalità Overlay (predefinita)
+1. Tenta di aprire l'overlay di Google Play all'interno della tua app
+2. Se l'overlay non è disponibile, torna alla pagina completa di Play Store
+3. Se Play Store non è disponibile, mostra un errore
+
+### Modalità Store Completo
+- Apre direttamente la pagina completa di Google Play Store
+- Bypassa completamente il tentativo dell'overlay
+
+## Supporto Piattaforme
+
+- **Android**: Supporto completo con Google Play Services
+- **iOS**: Non supportato (funzionalità specifica per Android)
+- **Web**: Non supportato (funzionalità nativa Android)
+
+## Dettagli di Implementazione
+
+Il plugin utilizza intent Android per comunicare con Google Play Store:
+- Action intent per overlay di installazione inline
+- Fallback all'intent standard di Play Store
+- Gestione automatica della disponibilità di Play Services
+
+## Casi d'Uso
+
+- **Scoperta di app**: Promuovi app correlate all'interno del tuo ecosistema
+- **Promozione incrociata**: Aumenta le installazioni per applicazioni partner
+- **Sblocco di funzionalità**: Installa moduli o estensioni aggiuntive
+- **App complementari**: Installa applicazioni di supporto senza interruzioni
+
+## Migliori Pratiche
+
+- Fornisci sempre opzioni di fallback per utenti senza Play Services
+- Testa con diverse configurazioni di dispositivo e versioni di Play Store
+- Utilizza il tracciamento referrer per misurare i tassi di conversione
+- Gestisci gli errori di installazione in modo elegante
+- Rispetta la scelta dell'utente se rifiuta l'installazione
+
+## Limitazioni
+
+- Funzionalità solo per Android
+- Richiede Google Play Services
+- Funziona solo con app qualificate per Premium Growth Tools
+- Soggetto alle politiche e alla disponibilità di Google Play Store

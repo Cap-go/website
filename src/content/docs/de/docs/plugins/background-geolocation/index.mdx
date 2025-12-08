@@ -1,0 +1,56 @@
+---
+title: "Background Geolocation"
+description: Ein Capacitor Plugin, das es Ihnen ermöglicht, genaue Standortaktualisierungen zu erhalten, auch wenn die App im Hintergrund läuft
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Erhalten Sie genaue Standortaktualisierungen, auch wenn die App im Hintergrund läuft.
+  image:
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
+locale: de
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Genaue Verfolgung" icon="rocket">
+    Priorisiert Genauigkeit für Anwendungsfälle wie Wandern und Navigation 🎯
+  </Card>
+  <Card title="Hintergrund-Updates" icon="puzzle">
+    Erhält weiterhin Standortaktualisierungen, auch wenn die App im Hintergrund ist 🏃
+  </Card>
+  <Card title="Akkueffizient" icon="setting">
+    Optimiert, um Genauigkeit und Akkuverbrauch auszugleichen 🔋
+  </Card>
+  <Card title="Erste Schritte" icon="open-book">
+    Lesen Sie die [Erste Schritte Anleitung](/docs/plugins/background-geolocation/getting-started/), um das Plugin zu installieren und zu konfigurieren.
+  </Card>
+</CardGrid>
+
+## Plugin-Vergleich
+
+Ein kurzer Vergleich zwischen den drei Haupt-Hintergrund-Geolokalisierungs-Plugins, die häufig in Capacitor Apps verwendet werden.
+
+| Plugin | Genauigkeit | Hintergrund | HTTP Upload | Preisgestaltung |
+|--------|----------|------------|-------------|---------|
+| `@capacitor-community/background-geolocation` (Community) | Nicht genau | Ja | Nein | Kostenlos |
+| `@capgo/background-geolocation` (dieses Plugin) | Genau | Ja | Nein | Kostenlos |
+| Transistorsoft (Original) | Genau | Ja | Ja — integrierter HTTP-Uploader zu Ihrer API | Kostenpflichtig |
+
+**Hinweise:**
+- Das Community-Plugin ist leichtgewichtig und funktioniert weiterhin im Hintergrund, ist aber bekanntermaßen weniger genau als die unten aufgeführten Optionen.
+- Dieses Capgo-Plugin ist optimiert, um genaue Standortfixierungen und zuverlässigen Hintergrundbetrieb ohne kostenpflichtige Lizenz zu bieten.
+- Transistorsoft bietet eine vollständige kommerzielle Lösung, die auch integrierte HTTP-Upload-Funktionen zum Senden von Standortdaten an Ihr Backend umfasst.

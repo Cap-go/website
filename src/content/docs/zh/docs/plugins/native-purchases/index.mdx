@@ -1,0 +1,59 @@
+---
+title: "@capgo/native-purchases"
+locale: zh
+description: 用于处理应用内购买和订阅的 Capacitor 插件，具有简单、统一的 API，可跨 iOS 和 Android 使用。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 简化应用内购买和订阅，使用统一的 API 在 iOS 和 Android 平台上无缝工作。
+  image:
+    file: ~public/icons/plugins/native-purchases.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/native-purchases/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/native-purchases/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="统一 API" icon="rocket">
+    iOS 和 Android 购买的单一 API
+  </Card>
+  <Card title="订阅管理" icon="setting">
+    处理自动续订的订阅
+  </Card>
+  <Card title="收据验证" icon="approve-check">
+    内置收据验证以确保安全
+  </Card>
+  <Card title="开始使用" icon="open-book">
+    查看[开始使用指南](/docs/plugins/native-purchases/getting-started/)以安装和配置插件。
+  </Card>
+</CardGrid>
+
+## 平台设置指南
+
+<CardGrid>
+  <Card title="Android 设置" icon="setting">
+    在 Android 上设置应用内购买的完整指南：
+    - [配置沙盒测试](/docs/plugins/native-purchases/android-sandbox-testing/)
+    - [创建订阅](/docs/plugins/native-purchases/android-create-subscription/)
+    - [引导性优惠](/docs/plugins/native-purchases/android-introductory-offer/)
+  </Card>
+  <Card title="iOS 设置" icon="star">
+    在 iOS 上设置应用内购买的完整指南：
+    - [配置沙盒测试](/docs/plugins/native-purchases/ios-sandbox-testing/)
+    - [订阅组](/docs/plugins/native-purchases/ios-subscription-group/)
+    - [创建订阅](/docs/plugins/native-purchases/ios-create-subscription/)
+    - [引导性优惠](/docs/plugins/native-purchases/ios-introductory-offer/)
+  </Card>
+</CardGrid>

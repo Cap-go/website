@@ -1,0 +1,89 @@
+---
+title: はじめに
+description: CapacitorアプリケーションでCapgo AdMobプラグインをインストールして構成し、広告を配信する方法。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **プラグインをインストール**
+   <PackageManagers pkg="@capgo/capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトを同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## SDKの初期化
+
+```typescript
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
+
+// アプリケーションブートストラップで一度Mobile Ads SDKを開始
+await AdMob.start();
+
+// オプション: グローバルリクエスト設定を構成
+await AdMob.configure({
+  appMuted: false,
+  appVolume: 1,
+});
+
+await AdMob.configRequest({
+  maxAdContentRating: MaxAdContentRating.T,
+  tagForChildDirectedTreatment: false,
+  tagForUnderAgeOfConsent: false,
+});
+```
+
+## バナー広告を表示
+
+```typescript
+import { BannerAd } from '@capgo/capacitor-admob';
+
+const banner = new BannerAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/banner',
+  position: 'bottom',
+});
+
+await banner.show();
+```
+
+## インタースティシャルまたはリワード広告
+
+```typescript
+import { InterstitialAd, RewardedAd } from '@capgo/capacitor-admob';
+
+const interstitial = new InterstitialAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/interstitial',
+});
+await interstitial.load();
+await interstitial.show();
+
+const rewarded = new RewardedAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/rewarded',
+});
+await rewarded.load();
+await rewarded.show();
+```
+
+## 広告イベントをリスニング
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const handle = await AdMob.addListener('adImpression', (event) => {
+  console.log('広告インプレッション', event);
+});
+
+// 後でクリーンアップ時
+await handle.remove();
+```
+
+## プラットフォームに関する注意
+
+- **iOS**: `Info.plist`の`GADApplicationIdentifier`キー下にAdMobアプリIDを追加し、依存するSKAdNetwork IDを含めてください。
+- **Android**: `AndroidManifest.xml`で`<application>`タグ内に`com.google.android.gms.ads.APPLICATION_ID`を追加してAdMobアプリIDを宣言します。
+- **同意とプライバシー**: iOS 14+で`requestTrackingAuthorization()`を使用し、`configRequest()`の児童向けフラグを使用して、地域のプライバシールールに準拠してください。

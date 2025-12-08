@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-textinteraction"
+locale: fr
+description: Activez ou désactivez la loupe d'interaction texte iOS pour un contrôle précis du comportement WebView.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Supprimez la loupe iOS dans les expériences de kiosque ou de jeu, puis restaurez-la avant la saisie de texte.
+  image:
+    file: ~public/icons/plugins/textinteraction.svg
+  actions:
+    - text: Démarrer
+      link: /docs/plugins/textinteraction/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-textinteraction/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Contrôlez le système d'interaction texte d'Apple pour personnaliser l'UX sur les affichages kiosque, les jeux et les installations interactives.
+
+<CardGrid stagger>
+  <Card title="Spécifique iOS" icon="rocket">
+    Basculer la loupe et les poignées de sélection introduites dans iOS 15.
+  </Card>
+  <Card title="API simple" icon="pencil">
+    Appelez une seule méthode pour activer ou désactiver l'état d'interaction texte.
+  </Card>
+  <Card title="Valeurs par défaut sûres" icon="approve-check">
+    Reçoit un résultat booléen pour détecter les versions non supportées.
+  </Card>
+  <Card title="Compatible kiosque" icon="star">
+    Empêchez le copier-coller long-press sur les installations contrôlées ou l'affichage.
+  </Card>
+</CardGrid>
+
+Utilisez le guide de démarrage pour un modèle d'intégration minimal et des rappels pour réactiver l'interaction avant d'afficher les saisies de texte.

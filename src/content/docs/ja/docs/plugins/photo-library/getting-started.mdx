@@ -1,0 +1,76 @@
+---
+title: はじめに
+locale: ja
+description: ページネーションとメディア選択を備えたネイティブフォトギャラリーを統合します。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **プラグインをインストールする**
+   <PackageManagers pkg="@capgo/capacitor-photo-library" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **プラットフォームを同期する**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## プラットフォームパーミッション
+
+- **iOS**: `Info.plist` を `NSPhotoLibraryUsageDescription` で更新します（メディアを保存する予定がある場合は `NSPhotoLibraryAddUsageDescription` も必要です）。
+- **Android**: Android 13+ の場合、写真/動画パーミッション（`READ_MEDIA_IMAGES`、`READ_MEDIA_VIDEO`）を宣言します。Capacitor 5 はこれを自動的に処理しますが、カスタムマニフェストを再確認してください。
+
+## アクセスをリクエストする
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const { state } = await PhotoLibrary.requestAuthorization();
+if (state !== 'authorized' && state !== 'limited') {
+  throw new Error('写真アクセスが拒否されました');
+}
+```
+
+## ギャラリーを読み込む
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+
+const { assets, hasMore, nextPage } = await PhotoLibrary.getLibrary({
+  limit: 100,
+  includeAlbums: false,
+  thumbnailWidth: 256,
+  thumbnailHeight: 256,
+});
+
+const gallery = assets.map((asset) => ({
+  id: asset.id,
+  fileName: asset.fileName,
+  created: asset.creationDate,
+  thumbnailUrl: asset.thumbnail
+    ? asset.thumbnail.webPath ?? Capacitor.convertFileSrc(asset.thumbnail.path)
+    : undefined,
+  photoUrl: asset.file
+    ? asset.file.webPath ?? Capacitor.convertFileSrc(asset.file.path)
+    : undefined,
+}));
+```
+
+追加のページを取得するには、`PhotoLibrary.getLibrary({ cursor: nextPage })` を呼び出します。
+
+## ユーザーにメディアを選択させる
+
+```typescript
+const selection = await PhotoLibrary.pickMedia({
+  selectionLimit: 5,
+  includeVideos: true,
+});
+
+console.log('ユーザーが選択した', selection.assets.length, '項目');
+```
+
+## キャッシュされたファイルをクリーンアップする
+
+生成されたサムネイルとエクスポートは、`photoLibrary` の下にあるアプリキャッシュディレクトリに保存されます。ストレージを再利用する必要がある場合は、お好みのファイル API で削除してください。

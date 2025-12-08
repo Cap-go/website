@@ -1,0 +1,173 @@
+---
+title: 开始使用
+locale: zh
+description: 了解如何安装和使用 Android Usage Stats Manager 插件访问应用使用统计数据和设备使用数据。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 平台配置
+
+### Android
+
+将所需权限添加到您的 `android/app/src/main/AndroidManifest.xml`：
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## 使用示例
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// 检查是否授予了权限
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // 打开设置以授予权限
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// 查询最近 7 天的使用统计数据
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7 天前
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Usage statistics:', usageStats);
+
+// 获取所有已安装的包
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installed packages:', packages);
+```
+
+## API 参考
+
+### isUsageStatsPermissionGranted()
+
+```typescript
+isUsageStatsPermissionGranted() => Promise<{ granted: boolean }>
+```
+
+检查是否授予了 PACKAGE_USAGE_STATS 权限。
+
+**返回：** `Promise<{ granted: boolean }>`
+
+### openUsageStatsSettings()
+
+```typescript
+openUsageStatsSettings() => Promise<void>
+```
+
+打开用于授予使用统计权限的系统设置页面。
+
+### queryAndAggregateUsageStats(options)
+
+```typescript
+queryAndAggregateUsageStats(options: UsageStatsOptions) => Promise<UsageStatsResult>
+```
+
+查询已安装应用的详细使用统计数据。
+
+| 参数         | 类型                           |
+| ------------- | ------------------------------ |
+| **`options`** | `UsageStatsOptions` |
+
+**返回：** `Promise<UsageStatsResult>`
+
+### queryAllPackages()
+
+```typescript
+queryAllPackages() => Promise<PackagesResult>
+```
+
+获取设备上所有已安装包的信息。
+
+**返回：** `Promise<PackagesResult>`
+
+## 接口
+
+### UsageStatsOptions
+
+| 属性               | 类型                | 描述                                         |
+| ------------------ | ------------------- | --------------------------------------------------- |
+| **`intervalType`** | `number` | 间隔类型（0=每日，1=每周，2=每月等） |
+| **`startTime`**    | `number` | 开始时间（毫秒）                          |
+| **`endTime`**      | `number` | 结束时间（毫秒）                            |
+
+### UsageStatsResult
+
+包含每个应用的使用统计数据：
+
+- 应用使用时间和频率
+- 首次和最后一次使用时间
+- 前台总时间
+- 启动次数
+
+### PackagesResult
+
+包含已安装包的信息：
+
+- 包名和版本
+- 安装时间
+- 应用标签和图标
+- 系统应用与用户应用
+
+## 权限处理
+
+该插件需要无法通过正常的运行时权限请求授予的特殊权限：
+
+1. **PACKAGE_USAGE_STATS**：允许访问使用统计数据
+2. **QUERY_ALL_PACKAGES**：包信息所需（Android 11+）
+
+用户必须通过系统设置手动授予这些权限。使用 `openUsageStatsSettings()` 将用户引导到适当的设置页面。
+
+## 最佳实践
+
+- 在查询使用统计数据之前始终检查权限状态
+- 使用用户友好的消息优雅地处理权限拒绝
+- 收集使用数据时考虑用户隐私
+- 实施适当的数据处理和存储实践
+- 遵循 Google Play 的使用数据收集政策
+
+## 使用场景
+
+- **数字健康应用**：监控屏幕时间和应用使用情况
+- **家长控制**：跟踪儿童的设备使用情况
+- **生产力应用**：分析工作模式和专注时间
+- **分析**：了解用户行为和应用参与度

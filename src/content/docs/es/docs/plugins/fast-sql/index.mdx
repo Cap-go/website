@@ -1,0 +1,50 @@
+---
+title: "@capgo/capacitor-fast-sql"
+locale: es
+description: SQLite nativo de alto rendimiento con protocolo HTTP personalizado para operaciones de sincronización eficientes y reemplazo de IndexedDB.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: SQLite nativo ultrarrápido con protocolo personalizado para sistemas de sincronización y grandes conjuntos de datos, ofreciendo hasta 25 veces más rendimiento.
+  image:
+    file: ~public/icons/plugins/fast-sql.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/fast-sql/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-fast-sql/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Protocolo HTTP personalizado" icon="rocket">
+    Evita el puente de Capacitor para hasta 25 veces más rendimiento ⚡
+  </Card>
+  <Card title="Soporte completo de SQLite" icon="list-format">
+    Soporte SQL completo con transacciones y operaciones por lotes 📊
+  </Card>
+  <Card title="Compatible con sincronización" icon="random">
+    Diseñado para sistemas de sincronización local como CRDTs y transformaciones operacionales 🔄
+  </Card>
+  <Card title="Multiplataforma" icon="laptop">
+    iOS, Android y Web usando sql.js + IndexedDB 🌐
+  </Card>
+  <Card title="Soporte de transacciones" icon="approve-check-circle">
+    Transacciones ACID con niveles de aislamiento configurables 🔒
+  </Card>
+  <Card title="Datos binarios" icon="document">
+    Soporte nativo para almacenamiento Uint8Array/BLOB 📁
+  </Card>
+  <Card title="Comenzando" icon="open-book">
+    Consulta la [Guía de inicio](/docs/plugins/fast-sql/getting-started/) para instalar y configurar el plugin.
+  </Card>
+</CardGrid>

@@ -1,0 +1,197 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何在 Capacitor 应用中安装和使用 Flash 插件来控制设备闪光灯。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+导入插件并使用其方法控制闪光灯：
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// 检查闪光灯是否可用
+const checkFlashlight = async () => {
+  const { value } = await CapacitorFlash.isAvailable();
+  console.log('Flashlight available:', value);
+};
+
+// 打开闪光灯
+const turnOn = async () => {
+  await CapacitorFlash.switchOn();
+};
+
+// 关闭闪光灯
+const turnOff = async () => {
+  await CapacitorFlash.switchOff();
+};
+
+// 检查闪光灯是否打开
+const checkStatus = async () => {
+  const { value } = await CapacitorFlash.isSwitchedOn();
+  console.log('Flashlight is on:', value);
+};
+
+// 切换闪光灯
+const toggle = async () => {
+  await CapacitorFlash.toggle();
+};
+```
+
+## API 参考
+
+### isAvailable()
+
+检查设备是否有闪光灯。
+
+```typescript
+const result = await CapacitorFlash.isAvailable();
+// 返回：{ value: boolean }
+```
+
+### switchOn(options?)
+
+打开闪光灯。
+
+```typescript
+interface SwitchOnOptions {
+  intensity?: number; // 0.0 到 1.0（仅 iOS）
+}
+
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+### switchOff()
+
+关闭闪光灯。
+
+```typescript
+await CapacitorFlash.switchOff();
+```
+
+### isSwitchedOn()
+
+检查闪光灯当前是否打开。
+
+```typescript
+const result = await CapacitorFlash.isSwitchedOn();
+// 返回：{ value: boolean }
+```
+
+### toggle()
+
+切换闪光灯开/关。
+
+```typescript
+await CapacitorFlash.toggle();
+```
+
+## 完整示例
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+export class FlashlightService {
+  private isOn = false;
+
+  async init() {
+    const { value } = await CapacitorFlash.isAvailable();
+    if (!value) {
+      throw new Error('Flashlight not available on this device');
+    }
+  }
+
+  async toggle() {
+    if (this.isOn) {
+      await CapacitorFlash.switchOff();
+    } else {
+      await CapacitorFlash.switchOn();
+    }
+    this.isOn = !this.isOn;
+  }
+
+  async turnOn(intensity?: number) {
+    await CapacitorFlash.switchOn({ intensity });
+    this.isOn = true;
+  }
+
+  async turnOff() {
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+
+  async strobe(intervalMs: number = 100, duration: number = 3000) {
+    const endTime = Date.now() + duration;
+
+    while (Date.now() < endTime) {
+      await CapacitorFlash.toggle();
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+
+    // 确保闪光灯在闪烁后关闭
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+}
+```
+
+## 最佳实践
+
+1. **首先检查可用性**
+   在使用闪光灯之前，始终验证其可用性：
+   ```typescript
+   const { value } = await CapacitorFlash.isAvailable();
+   if (!value) {
+     // 显示替代 UI 或禁用闪光灯功能
+   }
+   ```
+
+2. **优雅地处理错误**
+   ```typescript
+   try {
+     await CapacitorFlash.switchOn();
+   } catch (error) {
+     console.error('Failed to turn on flashlight:', error);
+   }
+   ```
+
+3. **不需要时关闭**
+   当应用进入后台或不再需要该功能时，始终关闭闪光灯以节省电池。
+
+4. **避免快速切换**
+   实施防抖以防止快速开/关切换，这可能会损坏 LED 或耗尽电池。
+
+## 平台说明
+
+### iOS
+- 需要 iOS 10.0+
+- 使用 `AVCaptureDevice` 手电筒模式
+- 支持强度控制（0.0 到 1.0）
+
+### Android
+- 需要 Android 6.0 (API 23)+
+- 使用 Camera2 API
+- 不支持强度控制（使用默认亮度）
+
+### Web
+- 在支持 MediaDevices API 和手电筒功能的浏览器上受支持
+- 使用摄像头流访问设备的闪光灯
+- 需要用户权限才能访问摄像头
+- 在移动浏览器上效果最佳（Android 上的 Chrome）
+- 桌面浏览器通常返回 `isAvailable: false`（无手电筒硬件）
+- Web 上不支持强度控制

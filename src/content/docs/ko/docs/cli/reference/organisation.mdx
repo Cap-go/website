@@ -1,0 +1,111 @@
+---
+title: 🔹 organisation
+description: 🏢 팀 협업 및 앱 관리를 위해 Capgo Cloud에서 조직을 관리하세요.
+sidebar_label: organisation
+sidebar:
+  order: 9
+locale: ko
+---
+
+🏢 팀 협업 및 앱 관리를 위해 Capgo Cloud에서 조직을 관리하세요.
+
+### <a id="organisation-list"></a> 📋 **List**
+
+**별칭:** `l`
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+📋 Capgo Cloud에서 액세스 권한이 있는 모든 조직을 나열합니다.
+
+**예시:**
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+**옵션:**
+
+| 매개변수          | 유형          | 설명          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 계정에 연결할 API 키 |
+| **--supa-host** | <code>string</code> | 커스텀 Supabase 호스트 URL (셀프 호스팅 또는 Capgo 개발용) |
+| **--supa-anon** | <code>string</code> | 커스텀 Supabase anon 키 (셀프 호스팅용) |
+
+### <a id="organisation-add"></a> ➕ **Add**
+
+**별칭:** `a`
+
+```bash
+npx @capgo/cli@latest organisation add
+```
+
+➕ 팀 협업을 위해 Capgo Cloud에 새 조직을 만듭니다.
+
+**예시:**
+
+```bash
+npx @capgo/cli@latest organisation add --name "My Company" --email admin@mycompany.com
+```
+
+**옵션:**
+
+| 매개변수          | 유형          | 설명          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 조직 이름 |
+| **-e,** | <code>string</code> | 조직 관리 이메일 |
+| **-a,** | <code>string</code> | 계정에 연결할 API 키 |
+| **--supa-host** | <code>string</code> | 커스텀 Supabase 호스트 URL (셀프 호스팅 또는 Capgo 개발용) |
+| **--supa-anon** | <code>string</code> | 커스텀 Supabase anon 키 (셀프 호스팅용) |
+
+### <a id="organisation-set"></a> ⚙️ **Set**
+
+**별칭:** `s`
+
+```bash
+npx @capgo/cli@latest organisation set
+```
+
+⚙️ 이름 및 관리 이메일과 같은 조직 설정을 업데이트합니다.
+
+**예시:**
+
+```bash
+npx @capgo/cli@latest organisation set ORG_ID --name "Updated Company Name"
+```
+
+**옵션:**
+
+| 매개변수          | 유형          | 설명          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 조직 이름 |
+| **-e,** | <code>string</code> | 조직 관리 이메일 |
+| **-a,** | <code>string</code> | 계정에 연결할 API 키 |
+| **--supa-host** | <code>string</code> | 커스텀 Supabase 호스트 URL (셀프 호스팅 또는 Capgo 개발용) |
+| **--supa-anon** | <code>string</code> | 커스텀 Supabase anon 키 (셀프 호스팅용) |
+
+### <a id="organisation-delete"></a> 🗑️ **Delete**
+
+**별칭:** `d`
+
+```bash
+npx @capgo/cli@latest organisation delete
+```
+
+🗑️ Capgo Cloud에서 조직을 삭제합니다. 이 작업은 실행 취소할 수 없습니다.
+조직 소유자만 조직을 삭제할 수 있습니다.
+
+**예시:**
+
+```bash
+npx @capgo/cli@latest organisation delete ORG_ID
+```
+
+**옵션:**
+
+| 매개변수          | 유형          | 설명          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 계정에 연결할 API 키 |
+| **--supa-host** | <code>string</code> | 커스텀 Supabase 호스트 URL (셀프 호스팅 또는 Capgo 개발용) |
+| **--supa-anon** | <code>string</code> | 커스텀 Supabase anon 키 (셀프 호스팅용) |

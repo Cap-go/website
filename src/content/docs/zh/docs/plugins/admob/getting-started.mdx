@@ -1,0 +1,89 @@
+---
+title: 开始使用
+locale: zh
+description: 安装和配置 Capgo AdMob 插件以在您的 Capacitor 应用程序中投放广告。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装插件**
+   <PackageManagers pkg="@capgo/capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 初始化 SDK
+
+```typescript
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
+
+// 在应用程序引导中启动 Mobile Ads SDK 一次
+await AdMob.start();
+
+// 可选:配置全局请求设置
+await AdMob.configure({
+  appMuted: false,
+  appVolume: 1,
+});
+
+await AdMob.configRequest({
+  maxAdContentRating: MaxAdContentRating.T,
+  tagForChildDirectedTreatment: false,
+  tagForUnderAgeOfConsent: false,
+});
+```
+
+## 显示横幅广告
+
+```typescript
+import { BannerAd } from '@capgo/capacitor-admob';
+
+const banner = new BannerAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/banner',
+  position: 'bottom',
+});
+
+await banner.show();
+```
+
+## 插页式或奖励广告
+
+```typescript
+import { InterstitialAd, RewardedAd } from '@capgo/capacitor-admob';
+
+const interstitial = new InterstitialAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/interstitial',
+});
+await interstitial.load();
+await interstitial.show();
+
+const rewarded = new RewardedAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/rewarded',
+});
+await rewarded.load();
+await rewarded.show();
+```
+
+## 监听广告事件
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const handle = await AdMob.addListener('adImpression', (event) => {
+  console.log('广告展示', event);
+});
+
+// 稍后清理时
+await handle.remove();
+```
+
+## 平台注意事项
+
+- **iOS**:在 `Info.plist` 中的 `GADApplicationIdentifier` 键下添加您的 AdMob 应用 ID,并包含您依赖的任何 SKAdNetwork ID。
+- **Android**:通过在 `<application>` 标签内添加 `com.google.android.gms.ads.APPLICATION_ID` 在 `AndroidManifest.xml` 中声明您的 AdMob 应用 ID。
+- **同意和隐私**:在 iOS 14+ 上使用 `requestTrackingAuthorization()`,并使用 `configRequest()` 儿童导向标志以符合区域隐私规则。

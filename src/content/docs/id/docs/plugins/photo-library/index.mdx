@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-photo-library"
+locale: id
+description: Telusuri dan pilih foto dengan paging yang efisien, thumbnail, dan URL yang di-cache.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Bangun galeri khusus yang memanfaatkan library foto native dengan alur otorisasi yang kuat.
+  image:
+    file: ~public/icons/plugins/photo-library.svg
+  actions:
+    - text: Mulai
+      link: /docs/plugins/photo-library/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-photo-library/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Photo Library membantu Anda membuat daftar album, halaman melalui aset, dan meminta thumbnail sambil menjaga performa tetap terjaga.
+
+<CardGrid stagger>
+  <Card title="Helper otorisasi" icon="approve-check">
+    Minta izin dan tangani status akses terbatas dengan baik.
+  </Card>
+  <Card title="Pengambilan berpaginasi" icon="rocket">
+    Paginasi galeri dengan pemuatan berbasis cursor dan batas yang dapat disesuaikan.
+  </Card>
+  <Card title="Thumbnail yang dioptimalkan" icon="star">
+    Ambil URL thumbnail pada dimensi tetap untuk daftar scrolling yang mulus.
+  </Card>
+  <Card title="Pemilihan media" icon="download">
+    Biarkan pengguna memilih foto atau video dengan batas seleksi yang dapat dikonfigurasi.
+  </Card>
+</CardGrid>
+
+Lihat panduan memulai untuk pengaturan izin dan contoh galeri.

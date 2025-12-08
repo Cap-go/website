@@ -1,0 +1,117 @@
+---
+title: Supabase Google Login im Web
+locale: de
+description: Erfahren Sie, wie Sie Google Sign-In mit Supabase Authentication im Web unter Verwendung des Capacitor Social Login Plugins einrichten.
+sidebar:
+    order: 4
+---
+
+## Einführung
+
+Dieser Leitfaden hilft Ihnen, Google Sign-In mit Supabase Authentication im Web zu integrieren. Es wird vorausgesetzt, dass Sie bereits Folgendes abgeschlossen haben:
+ -  die [Google Login Web-Einrichtung](/docs/plugins/social-login/google/web/)
+ -  die [Supabase Google Login - Allgemeine Einrichtung](/docs/plugins/social-login/supabase/google/general/).
+
+## Implementierung
+
+Die vollständige Implementierung ist in der Datei [`supabaseAuthUtils.ts` der Beispiel-App](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) verfügbar. Dieser Leitfaden erklärt die Kernkonzepte und wie Sie sie verwenden.
+
+### Verwendung des Authentifizierungs-Helfers
+
+Die Funktion `authenticateWithGoogleSupabase` behandelt den gesamten Authentifizierungsablauf:
+
+```typescript
+import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithGoogleSupabase();
+if (result.success) {
+  console.log('Angemeldet:', result.user);
+  // Navigieren Sie zu Ihrem authentifizierten Bereich
+} else {
+  console.error('Fehler:', result.error);
+}
+```
+
+## Kritisch: Redirect-Behandlung
+
+:::warning[Kritisch: Redirect-Behandlung]
+Bei Verwendung von Google-Login im Web **MÜSSEN** Sie beim Redirect eine beliebige Funktion des Plugins aufrufen, um das Plugin zu initialisieren, damit es den Redirect behandeln und das Popup-Fenster schließen kann. Sie können entweder `isLoggedIn()` ODER `initialize()` aufrufen - beide lösen die Redirect-Behandlung aus.
+
+Dies ist für den OAuth-Popup-Ablauf unerlässlich.
+:::
+
+### Implementierungsbeispiel
+
+Fügen Sie dies Ihrer Komponente hinzu, die Google Sign-In behandelt:
+
+```typescript
+import { useEffect } from 'react';
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+function SupabasePage() {
+  // Google-Login-Status beim Mounten überprüfen, um Redirect-Behandlung auszulösen
+  // Dies dient keinem funktionalen Zweck in der UI, stellt aber sicher,
+  // dass ausstehende OAuth-Redirects ordnungsgemäß verarbeitet werden
+  useEffect(() => {
+    const checkGoogleLoginStatus = async () => {
+      try {
+        await SocialLogin.isLoggedIn({ provider: 'google' });
+        // Wir verwenden das Ergebnis nicht, dies dient nur zur Redirect-Behandlung
+      } catch (error) {
+        // Fehler ignorieren - dies dient nur zur Redirect-Behandlung
+        console.log('Google-Login-Statusüberprüfung abgeschlossen (Redirect-Behandlung)');
+      }
+    };
+
+    checkGoogleLoginStatus();
+  }, []);
+
+  // ... Rest Ihrer Komponente
+}
+```
+
+Siehe [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) für ein vollständiges Beispiel.
+
+## Wie es funktioniert
+
+Eine detaillierte Erklärung der Funktionsweise des Authentifizierungsablaufs, einschließlich Nonce-Generierung, JWT-Validierung und Supabase-Anmeldung, finden Sie im [Abschnitt "Wie es funktioniert" im Allgemeinen Einrichtungsleitfaden](/docs/plugins/social-login/supabase/google/general/#how-it-works).
+
+Die vollständige Code-Referenz finden Sie im [Abschnitt "Vollständige Code-Referenz" im Allgemeinen Einrichtungsleitfaden](/docs/plugins/social-login/supabase/google/general/#complete-code-reference).
+
+Siehe auch:
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - Beispielkomponente mit Redirect-Handling
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - Beispiel-Kontoerstellungsseite
+
+## Wichtige Hinweise
+
+### Redirect-Behandlung
+
+Bei Verwendung von Google-Login im Web **MÜSSEN** Sie beim Redirect eine beliebige Funktion des Plugins aufrufen, um das Plugin zu initialisieren, damit es den Redirect behandeln und das Popup-Fenster schließen kann. Sie können entweder `isLoggedIn()` ODER `initialize()` aufrufen - beide lösen die Redirect-Behandlung aus.
+
+Dies ist für den OAuth-Popup-Ablauf unerlässlich. Ohne dies wird das Popup-Fenster nach der Authentifizierung nicht geschlossen.
+
+### Nonce-Behandlung
+
+Die Nonce-Implementierung folgt dem Muster aus der [React Native Google Sign In Dokumentation](https://react-native-google-signin.github.io/docs/security#usage-with-supabase):
+
+- `rawNonce` geht zu Supabase's `signInWithIdToken()`
+- Supabase erstellt einen Hash von `rawNonce` und vergleicht ihn mit dem `nonceDigest`, der im ID-Token von Google Sign-In enthalten ist
+- `nonceDigest` (SHA-256-Hash, hex-codiert) geht zum `nonce`-Parameter in Google Sign-In APIs
+
+### Automatischer Wiederholungsversuch
+
+Die Implementierung umfasst automatische Wiederholungslogik:
+- Wenn die JWT-Validierung beim ersten Versuch fehlschlägt, meldet sie sich ab und versucht es einmal erneut
+- Dies behandelt Fälle, in denen zwischengespeicherte Tokens möglicherweise falsche Nonces haben
+- Wenn der Wiederholungsversuch ebenfalls fehlschlägt, wird ein Fehler zurückgegeben
+
+## Fehlerbehebung
+
+Wenn die Authentifizierung fehlschlägt:
+
+- **Redirect funktioniert nicht**: Stellen Sie sicher, dass Sie `isLoggedIn()` beim Mounten der Komponente aufrufen (siehe Beispiel oben)
+- **Ungültiges Publikum**: Überprüfen Sie, ob Ihre Google Client IDs sowohl in der Google Cloud Console als auch in Supabase übereinstimmen
+- **Autorisierte Redirect-URLs**: Überprüfen Sie, dass autorisierte Redirect-URLs sowohl in der Google Cloud Console als auch in Supabase konfiguriert sind
+- **Nonce-Fehlanpassung**: Überprüfen Sie die Konsolenprotokolle - die Funktion versucht es automatisch erneut, aber Sie können sich bei Bedarf zuerst manuell abmelden
+- **Token-Validierung schlägt fehl**: Stellen Sie sicher, dass Sie `mode: 'online'` im Initialize-Aufruf verwenden, um ein idToken zu erhalten
+- Überprüfen Sie den [Beispiel-App-Code](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) als Referenz

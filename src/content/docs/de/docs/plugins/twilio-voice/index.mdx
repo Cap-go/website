@@ -1,0 +1,108 @@
+---
+title: "@capgo/capacitor-twilio-voice"
+locale: de
+description: Twilio Voice API Integrations-Plugin für Capacitor-Apps mit VoIP-Anrufen, Anrufverwaltung und Audiobehandlung.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Integrieren Sie die Twilio Voice API für hochwertige VoIP-Anrufe mit Anrufverwaltung, Audiosteuerung und Echtzeitkommunikation.
+  image:
+    file: ~public/icons/plugins/twilio-voice.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/twilio-voice/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-twilio-voice/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Übersicht
+
+Das Capacitor Twilio Voice Plugin ermöglicht hochwertige VoIP-Anruffunktionen in iOS- und Android-Anwendungen unter Verwendung der Twilio Voice API. Dieses Plugin bietet umfassende Anrufverwaltung, Authentifizierung und Audiosteuerung für die Erstellung professioneller Anruferlebnisse.
+
+<CardGrid stagger>
+  <Card title="VoIP-Anrufe" icon="rocket">
+    Hochwertige Sprachanrufe über Internet mit Twilio Voice API
+  </Card>
+  <Card title="Anrufverwaltung" icon="setting">
+    Anrufe tätigen, annehmen, ablehnen und beenden mit vollständiger Lebenszykluskontrolle
+  </Card>
+  <Card title="Audiosteuerung" icon="comment">
+    Stummschaltung, Lautsprecherumschaltung und Audio-Routing-Optionen
+  </Card>
+  <Card title="Plattformunterstützung" icon="approve-check">
+    Native iOS- und Android-Implementierung mit Push-Benachrichtigungen
+  </Card>
+</CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-twilio-voice
+npx cap sync
+```
+
+## Kern-API-Methoden
+
+### Authentifizierung
+- `login(options: { accessToken: string })` - Authentifizierung mit Twilio unter Verwendung eines Zugriffstokens
+- `logout()` - Benutzersitzung beenden und Anrufstatus löschen
+- `isLoggedIn()` - Aktuellen Authentifizierungsstatus prüfen
+
+### Anrufverwaltung
+- `makeCall(options: { to: string })` - Ausgehenden Anruf zu angegebener Nummer initiieren
+- `acceptCall(options: { callSid: string })` - Eingehenden Anruf annehmen
+- `rejectCall(options: { callSid: string })` - Eingehenden Anruf ablehnen
+- `endCall(options?: { callSid?: string })` - Aktiven Anruf beenden
+- `muteCall(options: { muted: boolean, callSid?: string })` - Anrufaudio stummschalten/Stummschaltung aufheben
+- `setSpeaker(options: { enabled: boolean })` - Lautsprecherausgabe umschalten
+
+## Ereignis-Listener
+
+Das Plugin bietet umfassende Ereignisbehandlung für:
+- Registrierungsereignisse für Verbindungsstatus
+- Anrufstatusänderungen (verbunden, getrennt, klingelnd)
+- Qualitätswarnungen und Verbindungsprobleme
+- Benachrichtigungen über eingehende Anrufe
+
+## Plattform-Konfiguration
+
+### iOS-Einrichtung
+- Erfordert PushKit-Integration für eingehende Anrufe
+- Zertifikatskonfiguration für Produktionsnutzung
+- Mikrofonberechtigungen in Info.plist
+
+### Android-Einrichtung
+- Firebase-Einrichtung für Push-Benachrichtigungen
+- Mikrofonberechtigungen in AndroidManifest.xml
+- Hintergrunddienst-Konfiguration
+
+## Schnellstart-Beispiel
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+// Authentifizierung mit Twilio
+await TwilioVoice.login({ accessToken: 'ihr-twilio-zugriffstoken' });
+
+// Anruf tätigen
+await TwilioVoice.makeCall({ to: '+1234567890' });
+
+// Auf Anrufereignisse hören
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Anruf verbunden:', data);
+});
+```
+
+## Dokumentation
+
+Schauen Sie sich die [vollständige Dokumentation](/docs/plugins/twilio-voice/getting-started/) für detaillierte Einrichtungsanweisungen, erweiterte Konfiguration und Integrationsbeispiele an.

@@ -1,0 +1,173 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Android Usage Stats Manager Plugin installieren und verwenden, um auf App-Nutzungsstatistiken und Gerätenutzungsdaten zuzugreifen.
+sidebar:
+  order: 2
+locale: de
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Plattform-Konfiguration
+
+### Android
+
+Fügen Sie die erforderlichen Berechtigungen zu Ihrer `android/app/src/main/AndroidManifest.xml` hinzu:
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## Verwendungsbeispiel
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// Prüfen, ob die Berechtigung erteilt wurde
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // Einstellungen öffnen, um die Berechtigung zu erteilen
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// Nutzungsstatistiken für die letzten 7 Tage abfragen
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // vor 7 Tagen
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Nutzungsstatistiken:', usageStats);
+
+// Alle installierten Pakete abrufen
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installierte Pakete:', packages);
+```
+
+## API-Referenz
+
+### isUsageStatsPermissionGranted()
+
+```typescript
+isUsageStatsPermissionGranted() => Promise<{ granted: boolean }>
+```
+
+Prüft, ob die PACKAGE_USAGE_STATS-Berechtigung erteilt wurde.
+
+**Rückgabewert:** `Promise<{ granted: boolean }>`
+
+### openUsageStatsSettings()
+
+```typescript
+openUsageStatsSettings() => Promise<void>
+```
+
+Öffnet die Systemeinstellungsseite zum Erteilen der Berechtigung für Nutzungsstatistiken.
+
+### queryAndAggregateUsageStats(options)
+
+```typescript
+queryAndAggregateUsageStats(options: UsageStatsOptions) => Promise<UsageStatsResult>
+```
+
+Ruft detaillierte Nutzungsstatistiken für installierte Apps ab.
+
+| Parameter     | Typ                           |
+| ------------- | ------------------------------ |
+| **`options`** | `UsageStatsOptions` |
+
+**Rückgabewert:** `Promise<UsageStatsResult>`
+
+### queryAllPackages()
+
+```typescript
+queryAllPackages() => Promise<PackagesResult>
+```
+
+Ruft Informationen über alle auf dem Gerät installierten Pakete ab.
+
+**Rückgabewert:** `Promise<PackagesResult>`
+
+## Schnittstellen
+
+### UsageStatsOptions
+
+| Eigenschaft        | Typ                | Beschreibung                                         |
+| ------------------ | ------------------- | --------------------------------------------------- |
+| **`intervalType`** | `number` | Intervalltyp (0=TÄGLICH, 1=WÖCHENTLICH, 2=MONATLICH, etc.) |
+| **`startTime`**    | `number` | Startzeit in Millisekunden                          |
+| **`endTime`**      | `number` | Endzeit in Millisekunden                            |
+
+### UsageStatsResult
+
+Enthält Nutzungsstatistikdaten für jede App:
+
+- App-Nutzungszeit und -Häufigkeit
+- Erste und letzte Verwendung
+- Gesamtzeit im Vordergrund
+- Anzahl der Starts
+
+### PackagesResult
+
+Enthält Informationen über installierte Pakete:
+
+- Paketname und Version
+- Installationszeit
+- App-Bezeichnungen und Icons
+- System- vs. Benutzer-Apps
+
+## Berechtigungsverwaltung
+
+Das Plugin erfordert spezielle Berechtigungen, die nicht über normale Laufzeit-Berechtigungsanforderungen erteilt werden können:
+
+1. **PACKAGE_USAGE_STATS**: Ermöglicht den Zugriff auf Nutzungsstatistiken
+2. **QUERY_ALL_PACKAGES**: Erforderlich für Paketinformationen (Android 11+)
+
+Benutzer müssen diese Berechtigungen manuell über die Systemeinstellungen erteilen. Verwenden Sie `openUsageStatsSettings()`, um Benutzer zur entsprechenden Einstellungsseite zu leiten.
+
+## Best Practices
+
+- Prüfen Sie immer den Berechtigungsstatus, bevor Sie Nutzungsstatistiken abfragen
+- Gehen Sie mit Berechtigungsablehnungen benutzerfreundlich um
+- Berücksichtigen Sie die Privatsphäre der Benutzer beim Sammeln von Nutzungsdaten
+- Implementieren Sie ordnungsgemäße Datenverarbeitungs- und Speicherpraktiken
+- Befolgen Sie die Google Play-Richtlinien für die Erfassung von Nutzungsdaten
+
+## Anwendungsfälle
+
+- **Digital Wellbeing Apps**: Bildschirmzeit und App-Nutzung überwachen
+- **Kindersicherung**: Gerätenutzung von Kindern verfolgen
+- **Produktivitäts-Apps**: Arbeitsmuster und Fokuszeiten analysieren
+- **Analytics**: Benutzerverhalten und App-Engagement verstehen

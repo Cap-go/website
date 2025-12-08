@@ -1,0 +1,549 @@
+---
+title: GitHub Actions 통합
+description: "앱 업데이트의 자동 배포를 위해 Capgo Live Updates를 GitHub Actions와 통합하는 방법을 알아보세요."
+sidebar:
+  order: 3
+locale: ko
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo Live Updates를 GitHub Actions와 통합하여 코드 변경 사항을 푸시할 때마다 앱 업데이트를 자동으로 배포하세요. 이 가이드는 GitHub의 강력한 CI/CD 플랫폼을 사용한 자동화된 빌드, 테스트 및 배포 워크플로우 설정을 다룹니다.
+
+## 사전 요구 사항
+
+GitHub Actions 통합을 설정하기 전에 다음을 준비해야 합니다:
+
+- 앱 소스 코드가 있는 GitHub 저장소
+- 구성된 앱이 있는 Capgo 계정
+- 프로젝트에 구성된 Node.js 및 npm/yarn
+- 저장소에 대해 활성화된 GitHub Actions
+
+## GitHub Secrets 설정
+
+### 1단계: 저장소 Secrets 구성
+
+GitHub 저장소에 필요한 시크릿을 설정합니다:
+
+<Steps>
+
+1. GitHub 저장소로 이동
+2. **Settings** → **Secrets and variables** → **Actions**로 이동
+3. **New repository secret**을 클릭하고 다음 추가:
+
+</Steps>
+
+| Secret 이름 | 값 |
+|-------------|-------|
+| `CAPGO_TOKEN` | Capgo API 토큰 |
+
+<Aside type="tip">
+
+[console.capgo.app/apikeys](https://console.capgo.app/apikeys)에서 Capgo API 토큰을 받으세요. 앱 ID는 이미 `capacitor.config.ts` 파일에 구성되어 있습니다.
+
+</Aside>
+
+## 간단한 프로덕션 배포
+
+main 브랜치에 푸시할 때마다 프로덕션에 배포하는 기본 구성으로 시작:
+
+```yaml
+# Capgo Live Updates를 위한 간단한 GitHub Actions 워크플로우
+name: Deploy to Capgo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install, test and build
+        run: |
+          npm ci
+          npm run test
+          npm run build
+
+             - name: Deploy to Capgo
+         run: |
+           npm install -g @capgo/cli
+           npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+           # 암호화된 업로드의 경우 추가: --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
+```
+
+## 고급 다중 채널 구성
+
+### 기능 브랜치 배포
+
+테스트를 위해 기능 브랜치를 임시 채널에 배포:
+
+```yaml
+# 기능 브랜치 배포
+name: Deploy Feature Branch to Capgo
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  deploy-feature:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: |
+          npm ci
+          npm run test
+          npm run build
+
+      - name: Deploy to feature channel
+        run: |
+          CHANNEL_NAME=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
+          npm install -g @capgo/cli
+          npx @capgo/cli channel create $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+                     npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
+```
+
+### 암호화 사용
+
+[Capgo의 암호화 기능](/docs/live-updates/encryption/)을 사용하는 경우 CI/CD 환경에 개인 키를 안전하게 저장해야 합니다.
+
+로컬에서 [암호화 키 설정](/docs/live-updates/encryption/#setting-up-encryption) 후 GitHub 시크릿에 개인 키를 추가하세요:
+
+```shell
+# 개인 키 콘텐츠 표시(이 출력 복사)
+cat .capgo_key_v2
+```
+
+이 콘텐츠를 GitHub 저장소 시크릿에 `CAPGO_PRIVATE_KEY`로 추가한 다음 워크플로우에서 사용:
+
+```yaml
+# 암호화로 배포
+- name: Deploy to Capgo with Encryption
+  run: |
+    npm install -g @capgo/cli
+    npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}" --channel production
+```
+
+<Aside type="caution">
+
+**보안 모범 사례:**
+- `.capgo_key_v2` 파일을 절대 버전 관리에 커밋하지 마세요
+- 개인 키는 안전한 CI/CD 비밀 관리에만 저장
+- 다른 환경에 대해 다른 키 사용
+
+</Aside>
+
+### 다중 채널 구성
+
+여러 배포 채널 설정 및 관리에 대한 포괄적인 정보는 [Channels 문서](/docs/live-updates/channels/)를 참조하세요.
+
+개발, 풀 리퀘스트 및 프로덕션 배포가 포함된 완전한 워크플로우:
+
+```yaml
+# 완전한 다중 환경 워크플로우
+name: Deploy to Capgo
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: |
+          npm ci
+          npm run test
+          npm run build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  deploy-development:
+    if: github.ref == 'refs/heads/develop'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel development
+
+  deploy-pr:
+    if: github.event_name == 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Deploy to PR channel
+        run: |
+          CHANNEL_NAME="pr-${{ github.event.number }}"
+          npm install -g @capgo/cli
+          npx @capgo/cli channel create $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
+
+      - name: Comment PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 This PR has been deployed to Capgo channel: \`pr-${{ github.event.number }}\`\n\nTo test this update in your app, configure it to use this channel. [Learn how to configure channels →](/docs/live-updates/channels/#configuring-the-channel-in-your-app)`
+            })
+
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+```
+
+<Aside type="tip">
+
+**채널로 테스트**: PR 또는 개발 채널에 배포한 후 해당 특정 채널을 사용하도록 구성하여 앱에서 업데이트를 테스트할 수 있습니다. [앱에서 채널 구성](/docs/live-updates/channels/#configuring-the-channel-in-your-app)에 대해 자세히 알아보세요.
+
+</Aside>
+
+### 기능 채널 정리
+
+브랜치가 삭제될 때 기능 채널을 자동으로 정리:
+
+```yaml
+name: Cleanup Feature Channels
+
+on:
+  delete:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch' && startsWith(github.event.ref, 'feature/')
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Delete Capgo channel
+        run: |
+          CHANNEL_NAME=$(echo "${{ github.event.ref }}" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
+          npm install -g @capgo/cli
+          npx @capgo/cli channel delete $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+```
+
+## 보안 및 모범 사례
+
+### 환경 보호 규칙
+
+GitHub에서 환경 보호 규칙 설정:
+
+<Steps>
+
+1. 저장소의 **Settings** → **Environments**로 이동
+2. 환경 생성: `development`, `staging`, `production`
+3. 프로덕션 환경의 경우 추가:
+   - **Required reviewers**: 배포를 승인해야 하는 팀원 추가
+   - **Wait timer**: 배포 전 지연 시간 추가(선택 사항)
+   - **Deployment branches**: `main` 브랜치로만 제한
+
+</Steps>
+
+### 안전한 시크릿 관리
+
+환경별 시크릿 사용:
+
+```yaml
+# 환경별로 다른 시크릿 사용
+deploy-production:
+  environment: production
+  steps:
+    - name: Deploy to Production
+      run: |
+        npx @capgo/cli bundle upload \
+          --apikey ${{ secrets.CAPGO_PROD_TOKEN }} \
+          --app ${{ secrets.CAPGO_PROD_APP_ID }} \
+          --channel production
+```
+
+## 모니터링 및 알림
+
+### Slack 통합
+
+워크플로우에 Slack 알림 추가:
+
+```yaml
+name: Deploy with Notifications
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # ... 배포 단계
+
+      - name: Notify Slack on Success
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: '✅ Capgo deployment successful!'
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notify Slack on Failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: '❌ Capgo deployment failed!'
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+```
+
+### Discord 통합
+
+Discord에 알림 전송:
+
+```yaml
+- name: Discord notification
+  if: always()
+  uses: Ilshidur/action-discord@master
+  with:
+    args: |
+      Capgo deployment ${{ job.status }}!
+      App: ${{ secrets.CAPGO_APP_ID }}
+      Channel: ${{ github.ref_name }}
+      Commit: ${{ github.sha }}
+  env:
+    DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+```
+
+### 이메일 알림
+
+이메일 알림 구성:
+
+```yaml
+- name: Send email notification
+  if: failure()
+  uses: dawidd6/action-send-mail@v3
+  with:
+    server_address: smtp.gmail.com
+    server_port: 465
+    username: ${{ secrets.EMAIL_USERNAME }}
+    password: ${{ secrets.EMAIL_PASSWORD }}
+    subject: 'Capgo Deployment Failed - ${{ github.repository }}'
+    to: team@yourcompany.com
+    from: ci-cd@yourcompany.com
+    body: |
+      Deployment failed for ${{ github.repository }}
+      Branch: ${{ github.ref_name }}
+      Commit: ${{ github.sha }}
+      Workflow: ${{ github.workflow }}
+```
+
+## 문제 해결
+
+### 워크플로우 디버그
+
+문제를 해결하기 위한 디버깅 단계 추가:
+
+```yaml
+- name: Debug environment
+  run: |
+    echo "Node version: $(node --version)"
+    echo "NPM version: $(npm --version)"
+    echo "Working directory: $(pwd)"
+    echo "Files in dist/: $(ls -la dist/ || echo 'No dist directory')"
+    echo "Environment variables:"
+    env | grep -E "(GITHUB_|CAPGO_)" | sort
+
+- name: Test Capgo CLI
+  run: |
+    npx @capgo/cli --version
+    npx @capgo/cli app debug --apikey ${{ secrets.CAPGO_TOKEN }} --app ${{ secrets.CAPGO_APP_ID }}
+```
+
+### 일반적인 문제 및 해결 방법
+
+**"CAPGO_TOKEN not found"로 워크플로우 실패:**
+
+```yaml
+- name: Verify secrets
+  run: |
+    if [ -z "${{ secrets.CAPGO_TOKEN }}" ]; then
+      echo "ERROR: CAPGO_TOKEN secret is not set"
+      exit 1
+    fi
+    echo "CAPGO_TOKEN is set (length: ${#CAPGO_TOKEN})"
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+```
+
+**빌드 아티팩트를 찾을 수 없음:**
+
+```yaml
+- name: Debug artifacts
+  run: |
+    echo "Checking for build artifacts..."
+    ls -la dist/ || echo "No dist directory found"
+    find . -name "*.js" -o -name "*.html" | head -10
+```
+
+**네트워크 연결 문제:**
+
+```yaml
+- name: Test connectivity
+  run: |
+    ping -c 3 api.capgo.io || echo "Ping failed"
+    curl -I https://api.capgo.io/health || echo "Health check failed"
+```
+
+## 재사용 가능한 워크플로우
+
+프로젝트 간 일관성을 위한 재사용 가능한 워크플로우 생성:
+
+```yaml
+# .github/workflows/reusable-capgo-deploy.yml
+name: Reusable Capgo Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      channel:
+        required: true
+        type: string
+    secrets:
+      CAPGO_TOKEN:
+        required: true
+      CAPGO_APP_ID:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Capgo
+        run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload \
+            --apikey ${{ secrets.CAPGO_TOKEN }} \
+            --app ${{ secrets.CAPGO_APP_ID }} \
+            --channel ${{ inputs.channel }}
+```
+
+재사용 가능한 워크플로우 사용:
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy App
+
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  deploy-dev:
+    if: github.ref == 'refs/heads/develop'
+    uses: ./.github/workflows/reusable-capgo-deploy.yml
+    with:
+      environment: development
+      channel: development
+    secrets:
+      CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      CAPGO_APP_ID: ${{ secrets.CAPGO_APP_ID }}
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/reusable-capgo-deploy.yml
+    with:
+      environment: production
+      channel: production
+    secrets:
+      CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      CAPGO_APP_ID: ${{ secrets.CAPGO_APP_ID }}
+```
+
+## 다음 단계
+
+- 다양한 배포 환경을 관리하려면 [Channels](/docs/live-updates/channels/)에 대해 알아보기
+- 고급 배포 시나리오를 위해 [Custom Storage](/docs/live-updates/custom-storage/) 살펴보기
+- 안전한 배포를 위해 [Encryption](/docs/live-updates/encryption/) 설정
+- 업데이트 적용 방법을 사용자 정의하기 위해 [Update Behavior](/docs/live-updates/update-behavior/) 구성
+
+GitHub Actions 통합을 통해 GitHub의 강력한 CI/CD 플랫폼을 활용하여 내장된 보안, 모니터링 및 협업 기능을 갖춘 정교한 배포 워크플로우를 Capgo Live Updates를 위해 만들 수 있습니다.

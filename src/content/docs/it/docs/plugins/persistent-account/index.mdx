@@ -1,0 +1,132 @@
+---
+title: "@capgo/capacitor-persistent-account"
+locale: it
+description: Plugin di gestione account persistente per app Capacitor con archiviazione sicura, gestione sessioni e persistenza dati utente.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+hero:
+  tagline: Gestisci account utente con archiviazione persistente, gestione sessioni sicura e autenticazione senza soluzione di continuità tra le sessioni dell'app.
+  image:
+    file: ~public/icons/plugins/persistent-account.svg
+  actions:
+    - text: Inizia
+      link: /docs/plugins/persistent-account/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persistent-account/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Panoramica
+
+Il plugin Capacitor Persistent Account abilita l'archiviazione sicura e la persistenza dei dati dell'account utente tra le installazioni dell'app. Questo plugin garantisce che le informazioni dell'account utente rimangano disponibili anche dopo le reinstallazioni dell'app, fornendo un'esperienza utente senza soluzione di continuità e continuità dell'account.
+
+<CardGrid stagger>
+  <Card title="Persistenza tra installazioni" icon="rocket">
+    I dati sopravvivono ai cicli di disinstallazione/reinstallazione dell'app 💾
+  </Card>
+  <Card title="Archiviazione sicura" icon="setting">
+    Archiviazione sicura dei dati account con integrazione di sistema 🔐
+  </Card>
+  <Card title="API semplice" icon="puzzle">
+    Interfaccia pulita di lettura/scrittura per la gestione account 📊
+  </Card>
+  <Card title="Cross-platform" icon="laptop">
+    Implementazione nativa iOS e Android 📱
+  </Card>
+</CardGrid>
+
+## Installazione
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## Metodi API principali
+
+### Gestione dati
+- `saveAccount(options: { data: unknown })` - Salva in modo sicuro i dati account nell'archiviazione persistente
+- `readAccount()` - Recupera i dati account archiviati, restituisce `Promise<{ data: unknown | null }>`
+
+## Funzionalità principali
+
+- **Persistenza tra installazioni**: I dati account sopravvivono alla disinstallazione e reinstallazione dell'app
+- **Archiviazione sicura**: Utilizza meccanismi di archiviazione sicura specifici della piattaforma
+- **Flessibilità dei tipi**: Archivia qualsiasi struttura di dati account serializzabile
+- **Supporto cross-platform**: Implementazione nativa sia per iOS che per Android
+
+## Esempio di utilizzo
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Definisci la struttura dei dati dell'account
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Salva dati account
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Leggi dati account
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Account ripristinato:', account.username);
+} else {
+  console.log('Nessun dato account trovato');
+}
+```
+
+## Casi d'uso
+
+- **Onboarding utente**: Preserva il progresso dell'utente attraverso le reinstallazioni dell'app
+- **Recupero account**: Ripristina le sessioni utente dopo gli aggiornamenti dell'app
+- **Archiviazione preferenze**: Mantieni le impostazioni e configurazioni utente
+- **App offline-first**: Archivia dati utente essenziali localmente
+
+## Implementazione piattaforma
+
+### iOS
+- Utilizza iOS Keychain Services per archiviazione sicura e persistente
+- I dati sopravvivono all'eliminazione dell'app e al ripristino del dispositivo
+
+### Android
+- Utilizza Android Account Manager o preferenze condivise con backup
+- Mantiene i dati attraverso reinstallazioni app e migrazioni dispositivo
+
+## Considerazioni sulla sicurezza
+
+- I dati account sono archiviati utilizzando archiviazione sicura specifica della piattaforma
+- Considera la crittografia dei dati per informazioni sensibili
+- Implementa una validazione appropriata dei dati quando leggi account archiviati
+- Segui le linee guida della piattaforma per la gestione dei dati utente
+
+## Documentazione
+
+Consulta la [documentazione completa](/docs/plugins/persistent-account/getting-started/) per guide dettagliate all'implementazione e best practice.

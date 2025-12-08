@@ -1,0 +1,152 @@
+---
+title: Android 上的 Firebase Google 登录
+locale: zh
+description: 了解如何使用 Capacitor Social Login 插件在 Android 上设置带有 Firebase Authentication 的 Google 登录。
+sidebar:
+    order: 2
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 简介
+
+本指南将帮助你在 Android 上集成带有 Firebase Authentication 的 Google 登录。我假设你已经完成了[通用 Firebase Google 设置](./general/)
+
+:::note
+我将假设你尚未在 Firebase Console 中创建 Android 应用。如果已创建,你的步骤会略有不同。
+:::
+
+## 设置步骤
+
+<Steps>
+1. 在 [console.cloud.google.com](https://console.cloud.google.com/) 转到项目概览
+    <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+
+2. 点击 `Add app` 按钮
+    <img src="/social-login-assets/firebase_project_add_app.webp" alt="Firebase Add App Button" />
+
+    :::note
+    你可能需要在此处查找此按钮。这仅适用于你已在 Firebase Console 中创建了不同应用的情况。
+    :::
+
+    <img src="/social-login-assets/firebase_project_add_app_2.webp" alt="Firebase Add App Button" />
+
+3. 选择 `Android`
+    <img src="/social-login-assets/firebase_project_add_app_android.webp" alt="Firebase Add App Android Button" />
+
+4. 填写表单的第一部分
+   1. 填写 `Android package name`
+      1. 使用 `npx cap open android` 在 Android Studio 中打开你的应用
+      2. 在导航器的最底部,找到 `Gradle Scripts`
+         <img src="/social-login-assets/studio_gradle_scripts.png" alt="Gradle Scripts section in Android Studio project navigator" />
+      3. 找到模块 `app` 的 `build.gradle`
+         <img src="/social-login-assets/studio_build_gradle.png" alt="build.gradle (Module: app) file in Gradle Scripts section" />
+      4. 复制 `android.defaultConfig.applicationId`。这将是 Firebase 控制台中的 `package name`
+         <img src="/social-login-assets/studio_build_gradle_app_id.png" alt="Build.gradle file showing applicationId configuration" />
+      :::note
+      此处显示的 ID 将与我在本指南其余部分使用的 ID 不同。我将在本指南的其余部分使用 `app.capgo.plugin.SocialLogin`。
+      :::
+      5. 在 Firebase 控制台中粘贴
+          <img src="/social-login-assets/firebase_project_add_app_android_package_name.webp" alt="Firebase Add App Android Package Name Field" />
+    2. 点击 `Register app` 按钮
+        <img src="/social-login-assets/firebase_project_add_app_android_register.webp" alt="Firebase Add App Android Register Button" />
+5. 跳过 `Download and then add config file` 步骤
+    <img src="/social-login-assets/firebase_project_add_app_android_skip_download.webp" alt="Firebase Add App Android Skip 'Download and then add config file'" />
+6. 跳过 `Add firebase SDK` 步骤
+   <img src="/social-login-assets/firebase_project_add_app_android_skip_download_firebase_sdk.webp" alt="Firebase Add App Android Skip 'Add firebase SDK'" />
+7. 点击 `Continue to console` 按钮
+   <img src="/social-login-assets/firebase_project_add_app_android_continue_to_console.webp" alt="Firebase Add App Android Continue to Console Button" />
+8. 如果未自动进行身份验证,请转到 `settings` -> `general` -> `your apps` -> 找到你的 Android 应用并点击它
+   <img src="/social-login-assets/firebase_project_add_app_android_settings_general_your_apps.webp" alt="Firebase Add App Android Settings General Your Apps Button" />
+9. 获取你的 SHA1 指纹
+
+   按照 [Google Login Android 设置指南](/docs/plugins/social-login/google/android/#using-google-login-on-android)中的步骤 10-11:
+
+   1. 现在,打开终端。确保你在应用的 `android` 文件夹中并运行 `./gradlew signInReport`
+      <img src="/social-login-assets/term_sign_report.png" alt="Terminal showing gradlew signInReport command" />
+
+   2. 滚动到此命令的顶部。你应该看到以下内容。复制 `SHA1`。
+      <img src="/social-login-assets/term_sign_report_res.png" alt="Terminal output showing SHA1 certificate fingerprint" />
+
+   :::note
+   我将在本指南的其余部分使用略有不同的 SHA1,因为自编写原始 Google 登录 Android 设置指南以来,我已更换了计算机。
+   :::
+
+   :::caution
+   SHA1 非常重要,必须正确。如果搞错了,身份验证将以奇怪的方式失败。
+   请__**[阅读 GOOGLE LOGIN ANDROID 设置指南](/docs/plugins/social-login/google/android/#using-google-login-on-android)**__以正确获取它。
+   :::
+
+10. 将 SHA1 添加到 Firebase 项目
+      1. 点击 `Add fingerprint` 按钮
+         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint.webp" alt="Firebase Add App Android Add Fingerprint Button" />
+      2. 粘贴你在上一步中复制的 SHA1
+         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint_sha1.webp" alt="Firebase Add App Android Add Fingerprint SHA1 Field" />
+      3. 点击 `Save` 按钮
+         <img src="/social-login-assets/firebase_project_add_app_android_add_fingerprint_add.webp" alt="Firebase Add App Android Add Fingerprint Save Button" />
+
+11. 获取你的 Web 客户端 ID
+      1. 转到 `Build` -> `Authentication`
+         <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+      2. 点击 `Sign-in method` 按钮
+         <img src="/social-login-assets/firebase_select_authentication_sign_in_method.webp" alt="Firebase Authentication Sign-in Method Button" />
+      3. 点击 `Google` 提供商
+         <img src="/social-login-assets/firebase_select_authentication_sign_in_method_google.webp" alt="Firebase Authentication Sign-in Method Google Provider" />
+      4. 点击 `Web SDK configuration` 按钮
+         <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration.webp" alt="Firebase Authentication Sign-in Method Web SDK Configuration Button" />
+      5. 复制 `Web client ID`。这将是插件的 `initialize` 方法中的 `webClientId`。
+        <img src="/social-login-assets/firebase_select_authentication_sign_in_method_web_sdk_configuration_web_client_id.webp" alt="Firebase Authentication Sign-in Method Web SDK Configuration Web Client ID" />
+12. 在 JS 中使用 Web 客户端 ID。
+      :::note
+      我建议使用示例应用的 [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) 文件中提供的 `authenticateWithGoogle` 辅助函数。
+      :::
+</Steps>
+
+此时,你**__技术上__**已准备好在 Android 上使用带有 Firebase Authentication 的 Google 登录。但是,我建议按照下一步中的说明在 Google Cloud 控制台中仔细检查设置。
+
+## 在 Google Cloud 控制台中仔细检查设置
+
+为了确保设置正确,你应该在 Google Cloud 控制台中仔细检查设置。
+<Steps>
+   1. 转到 [console.cloud.google.com](https://console.cloud.google.com/)
+   2. 找到你的项目
+      1. 点击项目选择器
+         <img src="/social-login-assets/firebase_double_check_gc_project_select.webp" alt="Google Cloud Console Project Selector" />
+      2. 按 Firebase 项目的确切名称搜索你的项目并点击它。在我的情况下,它是 `sociallogin-tutorial-app`。
+         <img src="/social-login-assets/firebase_gc_project_select_project.webp" alt="Firebase Project Selector Project" />
+   3. 打开搜索栏并打开 `credentials`
+      1. 打开搜索栏
+         <img src="/social-login-assets/firebase_double_check_gc_search_bar.webp" alt="Google Cloud Console Search Bar" />
+      2. 搜索 `credentials` 并点击 `APIs and Services` 那个(截图上的第 2 个)
+         <img src="/social-login-assets/firebase_gc_credentials_search.webp" alt="Google Cloud Console Credentials Search" />
+   4. 验证你在列表中看到 Android 和 Web 客户端 ID。
+      <img src="/social-login-assets/firebase_gc_credentials_list.webp" alt="Google Cloud Console Credentials List" />
+
+      :::caution
+      如果你在列表中看不到 Android 和 Web 客户端 ID,说明你在设置中犯了错误。请返回并检查你的步骤。
+
+      也有可能,这发生在我身上,你已经在不同的项目中使用相同的应用 ID 添加了 Android SHA1 哈希。这将导致 Firebase 无法创建 Android 客户端 ID。在这种情况下,你需要从其他项目以及 Firebase 上删除 SHA1(使用 Firebase 控制台删除 Android 应用),并在 Firebase 上重新创建它
+      :::
+   5. 验证 Android 客户端 ID 在 Firebase 控制台中是否正确配置。
+      1. 点击 `Android` 应用
+         <img src="/social-login-assets/firebase_gc_android_app_select.webp" alt="Google Cloud Console Android App Select" />
+      2. 确认 SHA1 哈希配置正确,并且与你在之前步骤中复制的匹配。
+         <img src="/social-login-assets/firebase_gc_android_app_sha1_configured.webp" alt="Google Cloud Console Android App SHA1 Configured" />
+   6. 验证 Web 客户端 ID 在 Firebase 控制台中是否正确配置。
+      1. 点击 `Web` 应用
+         <img src="/social-login-assets/firebase_gc_web_app_select.webp" alt="Google Cloud Console Web App Select" />
+      2. 确认客户端 ID 与你在之前步骤中复制的匹配。
+         <img src="/social-login-assets/firebase_gc_web_app_client_id_configured.webp" alt="Google Cloud Console Web App Client ID Configured" />
+      :::note
+      请忽略 Web 客户端的其余设置。我们将在 [Web 设置指南](/docs/plugins/social-login/firebase/google/web/)中讨论这个问题。
+</Steps>
+
+万岁!你现在已准备好在 Android 上使用带有 Firebase Authentication 的 Google 登录。
+
+## 故障排除
+
+如果身份验证挂起或失败:
+
+- 验证 `idToken` audience 是否与你的 Firebase Web 客户端 ID 匹配
+- 检查 Firebase Console 中是否启用了 Google 登录
+- 确保 SHA-1 指纹配置正确
+- 查看[示例应用代码](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/src/authUtils.ts)以供参考

@@ -1,0 +1,513 @@
+---
+title: Fehlerbehebung
+description: Häufige Probleme und Lösungen für Capgo Cloud Build
+sidebar:
+  order: 4
+locale: de
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Lösungen für häufige Probleme beim Erstellen nativer Apps mit Capgo Cloud Build.
+
+## Build-Fehler
+
+### "Upload failed" oder "Connection timeout"
+
+**Symptome:**
+- Build schlägt während des Projekt-Uploads fehl
+- Timeout-Fehler nach 60 Sekunden
+
+**Lösungen:**
+
+1. **Überprüfen Sie Ihre Internetverbindung**
+   ```bash
+   # Verbindung zu Capgo testen
+   curl -I https://api.capgo.app
+   ```
+
+2. **Projektgröße reduzieren**
+   - Stellen Sie sicher, dass `node_modules/` nicht hochgeladen wird (sollte automatisch ausgeschlossen werden)
+   - Überprüfen Sie auf große Dateien in Ihrem Projekt:
+   ```bash
+   find . -type f -size +10M
+   ```
+
+3. **Upload-URL-Ablauf überprüfen**
+   - Upload-URLs laufen nach 1 Stunde ab
+   - Wenn Sie einen Fehler wegen abgelaufener URL erhalten, führen Sie den Build-Befehl erneut aus
+
+<Aside type="tip">
+Große Projekte (>200MB) können Timeout-Limits erreichen. Kontaktieren Sie den Support für Enterprise-Optionen.
+</Aside>
+
+### "Build timeout after 10 minutes"
+
+**Symptome:**
+- Build überschreitet die maximal zulässige Zeit
+- Status zeigt `timeout`
+
+**Lösungen:**
+
+1. **Abhängigkeiten optimieren**
+   - Entfernen Sie nicht verwendete npm-Pakete
+   - Verwenden Sie `npm prune --production` vor dem Erstellen
+
+2. **Auf Netzwerkprobleme im Build prüfen**
+   - Einige Abhängigkeiten laden möglicherweise große Dateien während des Builds herunter
+   - Erwägen Sie Vor-Caching mit einer Lock-Datei
+
+3. **Native Abhängigkeiten überprüfen**
+   ```bash
+   # iOS - Podfile auf schwere Abhängigkeiten prüfen
+   cat ios/App/Podfile
+
+   # Android - build.gradle prüfen
+   cat android/app/build.gradle
+   ```
+
+4. **Support kontaktieren**
+   - Wenn Ihre App wirklich mehr Zeit benötigt
+   - Wir können Limits für spezifische Anwendungsfälle anpassen
+
+## Authentifizierungsprobleme
+
+### "API key invalid" oder "Unauthorized"
+
+**Symptome:**
+- Build schlägt sofort mit Authentifizierungsfehler fehl
+- 401 oder 403 Fehler
+
+**Lösungen:**
+
+1. **API-Schlüssel überprüfen**
+   ```bash
+   # Mit einem einfachen Befehl testen
+   npx @capgo/cli@latest app list
+   ```
+
+2. **API-Schlüssel-Berechtigungen prüfen**
+   - Schlüssel muss `write`- oder `all`-Berechtigungen haben
+   - Im Capgo-Dashboard unter API-Schlüssel überprüfen
+
+3. **Sicherstellen, dass API-Schlüssel gelesen wird**
+   ```bash
+   # Umgebungsvariable überprüfen
+   echo $CAPGO_TOKEN
+
+   # Oder lokale .capgo-Datei überprüfen
+   cat .capgo
+   ```
+
+4. **Erneut authentifizieren**
+   ```bash
+   npx @capgo/cli@latest login
+   ```
+
+### "App not found" oder "No permission for this app"
+
+**Symptome:**
+- Authentifizierung funktioniert, aber App-spezifischer Fehler
+
+**Lösungen:**
+
+1. **App-Registrierung überprüfen**
+   ```bash
+   npx @capgo/cli@latest app list
+   ```
+
+2. **App ID-Übereinstimmung prüfen**
+   - `capacitor.config.json` appId überprüfen
+   - Sicherstellen, dass Befehl korrekte App ID verwendet
+
+3. **Organisationszugriff überprüfen**
+   - Überprüfen Sie, dass Sie in der richtigen Organisation sind
+   - API-Schlüssel muss Zugriff auf die Organisation der App haben
+
+## iOS Build-Probleme
+
+### "Code signing failed"
+
+**Symptome:**
+- Build schlägt während der Code-Signaturphase fehl
+- Xcode-Fehler über Zertifikate oder Profile
+
+**Lösungen:**
+
+1. **Zertifikatstyp mit Build-Typ abgleichen**
+   - Development-Builds benötigen Development-Zertifikate
+   - App Store-Builds benötigen Distribution-Zertifikate
+
+2. **Zertifikat und Profil auf Übereinstimmung prüfen**
+   ```bash
+   # Zertifikat dekodieren und inspizieren
+   echo $BUILD_CERTIFICATE_BASE64 | base64 -d > cert.p12
+   openssl pkcs12 -in cert.p12 -nokeys -passin pass:$P12_PASSWORD | openssl x509 -noout -subject
+   ```
+
+3. **Bereitstellungsprofil auf Gültigkeit prüfen**
+   - Ablaufdatum überprüfen
+   - Überprüfen, dass es Ihre App ID enthält
+   - Bestätigen, dass es das Zertifikat enthält
+
+4. **Zugangsdaten neu generieren**
+   - Altes Zertifikat/Profil löschen
+   - Neue im Apple Developer Portal erstellen
+   - Neu kodieren und Umgebungsvariablen aktualisieren
+
+### "Provisioning profile doesn't include signing certificate"
+
+**Symptome:**
+- Xcode kann Zertifikat im Profil nicht finden
+
+**Lösungen:**
+
+1. **Neuestes Profil von Apple herunterladen**
+   - Zu Apple Developer → Zertifikate, IDs & Profile gehen
+   - Bereitstellungsprofil herunterladen
+   - Sicherstellen, dass es Ihr Zertifikat enthält
+
+2. **Zertifikat im Profil überprüfen**
+   ```bash
+   # Profil extrahieren
+   echo $BUILD_PROVISION_PROFILE_BASE64 | base64 -d > profile.mobileprovision
+
+   # Profilinhalte anzeigen
+   security cms -D -i profile.mobileprovision
+   ```
+
+3. **Profil mit korrektem Zertifikat neu erstellen**
+   - Im Apple Developer Portal Profil bearbeiten
+   - Sicherstellen, dass Ihr Distribution-Zertifikat ausgewählt ist
+   - Herunterladen und neu kodieren
+
+### "App Store Connect authentication failed"
+
+**Symptome:**
+- Upload zu TestFlight schlägt fehl
+- API-Schlüssel-Fehler
+
+**Lösungen:**
+
+1. **API-Schlüssel-Zugangsdaten überprüfen**
+   - APPLE_KEY_ID prüfen (sollte 10 Zeichen sein)
+   - APPLE_ISSUER_ID prüfen (sollte UUID-Format sein)
+   - Überprüfen, dass APPLE_KEY_CONTENT korrekt base64-kodiert ist
+
+2. **API-Schlüssel lokal testen**
+   ```bash
+   # Schlüssel dekodieren
+   echo $APPLE_KEY_CONTENT | base64 -d > AuthKey.p8
+
+   # Mit fastlane testen (falls installiert)
+   fastlane pilot list
+   ```
+
+3. **API-Schlüssel-Berechtigungen prüfen**
+   - Schlüssel benötigt "Developer"-Rolle oder höher
+   - In App Store Connect → Benutzer und Zugriff → Schlüssel überprüfen
+
+4. **Sicherstellen, dass Schlüssel nicht widerrufen wurde**
+   - In App Store Connect prüfen
+   - Neuen Schlüssel generieren, falls erforderlich
+
+### "Pod install failed"
+
+**Symptome:**
+- Build schlägt während CocoaPods-Installation fehl
+- Podfile-Fehler
+
+**Lösungen:**
+
+1. **Podfile.lock ist committed überprüfen**
+   ```bash
+   git status ios/App/Podfile.lock
+   ```
+
+2. **Pod install lokal testen**
+   ```bash
+   cd ios/App
+   pod install
+   ```
+
+3. **Auf inkompatible Pods prüfen**
+   - Podfile auf Versionskonflikte überprüfen
+   - Sicherstellen, dass alle Pods Ihr iOS-Deployment-Ziel unterstützen
+
+4. **Pod-Cache löschen**
+   ```bash
+   cd ios/App
+   rm -rf Pods
+   rm Podfile.lock
+   pod install
+   # Dann neuen Podfile.lock committen
+   ```
+
+## Android Build-Probleme
+
+### "Keystore password incorrect"
+
+**Symptome:**
+- Build schlägt während der Signatur fehl
+- Gradle-Fehler über Keystore
+
+**Lösungen:**
+
+1. **Keystore-Passwort überprüfen**
+   ```bash
+   # Keystore lokal testen
+   keytool -list -keystore my-release-key.keystore
+   # Passwort bei Aufforderung eingeben
+   ```
+
+2. **Umgebungsvariablen prüfen**
+   ```bash
+   # Sicherstellen, dass keine zusätzlichen Leerzeichen oder Sonderzeichen vorhanden sind
+   echo "$KEYSTORE_STORE_PASSWORD" | cat -A
+   echo "$KEYSTORE_KEY_PASSWORD" | cat -A
+   ```
+
+3. **Base64-Kodierung überprüfen**
+   ```bash
+   # Dekodieren und testen
+   echo $ANDROID_KEYSTORE_FILE | base64 -d > test.keystore
+   keytool -list -keystore test.keystore
+   ```
+
+### "Key alias not found"
+
+**Symptome:**
+- Signatur schlägt mit Alias-Fehler fehl
+
+**Lösungen:**
+
+1. **Keystore-Aliase auflisten**
+   ```bash
+   keytool -list -keystore my-release-key.keystore
+   ```
+
+2. **Alias stimmt genau überein überprüfen**
+   - Alias beachtet Groß-/Kleinschreibung
+   - Auf Tippfehler in KEYSTORE_KEY_ALIAS prüfen
+
+3. **Korrekten Alias aus Keystore verwenden**
+   ```bash
+   # Umgebungsvariable aktualisieren, um zu übereinstimmen
+   export KEYSTORE_KEY_ALIAS="the-exact-alias-name"
+   ```
+
+### "Gradle build failed"
+
+**Symptome:**
+- Allgemeine Gradle-Fehler
+- Kompilierungs- oder Abhängigkeitsprobleme
+
+**Lösungen:**
+
+1. **Build zuerst lokal testen**
+   ```bash
+   cd android
+   ./gradlew clean
+   ./gradlew assembleRelease
+   ```
+
+2. **Auf fehlende Abhängigkeiten prüfen**
+   - build.gradle-Dateien überprüfen
+   - Sicherstellen, dass alle Plugins in Abhängigkeiten aufgelistet sind
+
+3. **Gradle-Versionskompatibilität überprüfen**
+   ```bash
+   # Gradle-Version prüfen
+   cat android/gradle/wrapper/gradle-wrapper.properties
+   ```
+
+4. **Gradle-Cache löschen**
+   ```bash
+   cd android
+   ./gradlew clean
+   rm -rf .gradle build
+   ```
+
+### "Play Store upload failed"
+
+**Symptome:**
+- Build erfolgreich, aber Upload schlägt fehl
+- Service Account-Fehler
+
+**Lösungen:**
+
+1. **Service Account JSON überprüfen**
+   ```bash
+   # Dekodieren und Format prüfen
+   echo $PLAY_CONFIG_JSON | base64 -d | jq .
+   ```
+
+2. **Service Account-Berechtigungen prüfen**
+   - Zu Play Console → Einrichtung → API-Zugriff gehen
+   - Sicherstellen, dass Service Account Zugriff auf Ihre App hat
+   - Berechtigung "Release to testing tracks" erteilen
+
+3. **App in Play Console eingerichtet überprüfen**
+   - App muss zuerst in Play Console erstellt werden
+   - Mindestens ein APK muss anfangs manuell hochgeladen werden
+
+4. **API ist aktiviert prüfen**
+   - Google Play Developer API muss aktiviert sein
+   - In Google Cloud Console prüfen
+
+## Allgemeine Probleme
+
+### "Job not found" oder "Build status unavailable"
+
+**Symptome:**
+- Build-Status kann nicht überprüft werden
+- Job-ID-Fehler
+
+**Lösungen:**
+
+1. **Kurz warten und erneut versuchen**
+   - Build-Jobs benötigen möglicherweise einige Sekunden zur Initialisierung
+
+2. **Job-ID ist korrekt prüfen**
+   - Job-ID aus der anfänglichen Build-Antwort überprüfen
+
+3. **Build ist nicht abgelaufen prüfen**
+   - Build-Daten sind 24 Stunden verfügbar
+
+### "Project sync failed"
+
+**Symptome:**
+- Build schlägt vor Kompilierung fehl
+- Fehlende Dateien-Fehler
+
+**Lösungen:**
+
+1. **Capacitor-Sync lokal ausführen**
+   ```bash
+   npx cap sync
+   ```
+
+2. **Alle nativen Dateien sind committed sicherstellen**
+   ```bash
+   git status ios/ android/
+   ```
+
+3. **Auf gitignorierte native Dateien prüfen**
+   - .gitignore überprüfen
+   - Sicherstellen, dass wichtige Config-Dateien nicht ignoriert werden
+
+### "Build succeeded but I don't see output"
+
+**Symptome:**
+- Build zeigt Erfolg, aber kein Download-Link
+
+**Lösungen:**
+
+1. **Build-Konfiguration prüfen**
+   - Artefaktspeicher ist möglicherweise nicht konfiguriert
+   - Für öffentliche Beta, Support wegen Artefaktzugriff kontaktieren
+
+2. **Für iOS TestFlight-Übermittlung**
+   - App Store Connect prüfen
+   - Verarbeitung kann 5-30 Minuten nach Upload dauern
+
+3. **Für Android Play Store**
+   - Play Console → Testing → Internes Testing prüfen
+   - Verarbeitung kann einige Minuten dauern
+
+## CI/CD-spezifische Probleme
+
+### GitHub Actions: "Command not found"
+
+**Symptome:**
+- `npx @capgo/cli` schlägt in CI fehl
+
+**Lösungen:**
+
+1. **Node.js ist installiert sicherstellen**
+   ```yaml
+   - uses: actions/setup-node@v6
+     with:
+       node-version: '24'
+   ```
+
+2. **CLI explizit installieren**
+   ```yaml
+   - run: npm install -g @capgo/cli
+   ```
+
+### GitHub Actions: "Secrets not found"
+
+**Symptome:**
+- Umgebungsvariablen im Build leer
+
+**Lösungen:**
+
+1. **Secrets sind gesetzt überprüfen**
+   - Zu Repo Settings → Secrets and variables → Actions gehen
+   - Alle erforderlichen Secrets hinzufügen
+
+2. **Korrekte Syntax verwenden**
+   ```yaml
+   env:
+     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+   ```
+
+3. **Secret-Namen stimmen überein prüfen**
+   - Namen beachten Groß-/Kleinschreibung
+   - Keine Tippfehler in Secret-Referenzen
+
+## Mehr Hilfe erhalten
+
+### Ausführliche Protokollierung aktivieren
+
+```bash
+# Debug-Flag hinzufügen (falls verfügbar)
+npx @capgo/cli@latest build com.example.app --verbose
+```
+
+### Build-Informationen sammeln
+
+Beim Kontaktieren des Supports folgendes einschließen:
+
+1. **Verwendeter Build-Befehl**
+   ```bash
+   npx @capgo/cli@latest build com.example.app --platform ios
+   ```
+
+2. **Fehlermeldung** (vollständige Ausgabe)
+
+3. **Job-ID** (aus Build-Ausgabe)
+
+4. **Build-Protokolle** (vollständige Terminal-Ausgabe kopieren)
+
+5. **Umgebungsinformationen**
+   ```bash
+   node --version
+   npm --version
+   npx @capgo/cli --version
+   ```
+
+### Support kontaktieren
+
+- **Discord**: [Unserer Community beitreten](https://discord.com/invite/VnYRvBfgA6)
+- **E-Mail**: support@capgo.app
+- **Dokumentation**: [Capgo Docs](/docs/)
+
+### Bekannte Einschränkungen
+
+Aktuelle Einschränkungen während der öffentlichen Beta:
+
+- Maximale Build-Zeit: 10 Minuten
+- Maximale Upload-Größe: ~500MB
+- iOS-Builds erfordern 24-Stunden-Mac-Leases, Build auf Mac wird in die Warteschlange gestellt, um optimale Nutzung sicherzustellen
+- Build-Artefakt-Download ist möglicherweise nicht verfügbar
+
+Diese Einschränkungen können basierend auf Feedback angepasst werden.
+
+## Zusätzliche Ressourcen
+
+- [Erste Schritte](/docs/cli/cloud-build/getting-started/) - Anfängliche Einrichtungsanleitung
+- [iOS Builds](/docs/cli/cloud-build/ios/) - iOS-spezifische Konfiguration
+- [Android Builds](/docs/cli/cloud-build/android/) - Android-spezifische Konfiguration
+- [CLI-Referenz](/docs/cli/reference/build/) - Vollständige Befehlsdokumentation

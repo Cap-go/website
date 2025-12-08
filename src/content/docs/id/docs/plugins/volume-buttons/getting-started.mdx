@@ -1,0 +1,265 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara mendeteksi penekanan tombol volume di aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-volume-buttons" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+// Dengarkan penekanan tombol volume
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  console.log('Tombol volume ditekan:', event.direction);
+
+  if (event.direction === 'up') {
+    console.log('Volume naik ditekan');
+    // Tangani volume naik
+  } else if (event.direction === 'down') {
+    console.log('Volume turun ditekan');
+    // Tangani volume turun
+  }
+});
+
+// Hapus semua listener ketika selesai
+await VolumeButtons.removeAllListeners();
+```
+
+## Referensi API
+
+### addListener('volumeButtonPressed', callback)
+
+Dengarkan event penekanan tombol volume.
+
+```typescript
+const handle = VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  console.log('Direction:', event.direction); // 'up' atau 'down'
+});
+
+// Hapus listener spesifik
+await handle.remove();
+```
+
+**Data Event:**
+- `direction`: `'up' | 'down'` - Arah penekanan tombol
+
+### removeAllListeners()
+
+Hapus semua listener yang terdaftar.
+
+```typescript
+await VolumeButtons.removeAllListeners();
+```
+
+### getPluginVersion()
+
+Dapatkan versi plugin.
+
+```typescript
+const { version } = await VolumeButtons.getPluginVersion();
+console.log('Versi plugin:', version);
+```
+
+## Contoh Lengkap
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+export class VolumeButtonController {
+  private listener: any;
+
+  async initialize() {
+    this.listener = VolumeButtons.addListener(
+      'volumeButtonPressed',
+      this.handleVolumeButton.bind(this)
+    );
+
+    console.log('Volume button listener diinisialisasi');
+  }
+
+  private handleVolumeButton(event: { direction: 'up' | 'down' }) {
+    switch (event.direction) {
+      case 'up':
+        this.handleVolumeUp();
+        break;
+      case 'down':
+        this.handleVolumeDown();
+        break;
+    }
+  }
+
+  private handleVolumeUp() {
+    console.log('Volume naik ditekan');
+    // Logika kustom Anda untuk volume naik
+    // misalnya, navigasi maju, tingkatkan brightness, dll.
+  }
+
+  private handleVolumeDown() {
+    console.log('Volume turun ditekan');
+    // Logika kustom Anda untuk volume turun
+    // misalnya, navigasi mundur, kurangi brightness, dll.
+  }
+
+  async cleanup() {
+    if (this.listener) {
+      await this.listener.remove();
+    }
+    await VolumeButtons.removeAllListeners();
+    console.log('Volume button listener dibersihkan');
+  }
+}
+```
+
+## Kasus Penggunaan
+
+### Pengambilan Foto/Video
+
+Gunakan tombol volume sebagai trigger shutter kamera:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', async (event) => {
+  // Tombol volume apapun memicu kamera
+  await capturePhoto();
+});
+```
+
+### Navigasi Halaman
+
+Navigasi melalui konten dengan tombol volume:
+
+```typescript
+let currentPage = 0;
+
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    currentPage++;
+    showPage(currentPage);
+  } else {
+    currentPage = Math.max(0, currentPage - 1);
+    showPage(currentPage);
+  }
+});
+```
+
+### Kontrol Media
+
+Kontrol pemutaran media:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    skipForward();
+  } else {
+    skipBackward();
+  }
+});
+```
+
+### Kontrol Game
+
+Gunakan tombol volume untuk aksi game:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    player.jump();
+  } else {
+    player.crouch();
+  }
+});
+```
+
+## Praktik Terbaik
+
+1. **Bersihkan listener**
+   Selalu hapus listener ketika komponen Anda unmount:
+   ```typescript
+   useEffect(() => {
+     const listener = VolumeButtons.addListener('volumeButtonPressed', handler);
+
+     return () => {
+       listener.remove();
+     };
+   }, []);
+   ```
+
+2. **Berikan feedback visual**
+   Tunjukkan kepada pengguna bahwa tombol volume digunakan untuk kontrol kustom:
+   ```typescript
+   VolumeButtons.addListener('volumeButtonPressed', (event) => {
+     showNotification(`Volume ${event.direction} ditekan`);
+     performAction(event.direction);
+   });
+   ```
+
+3. **Pertimbangkan aksesibilitas**
+   Ingat bahwa beberapa pengguna bergantung pada tombol volume untuk kontrol volume aktual. Sediakan kontrol alternatif.
+
+4. **Debounce penekanan cepat**
+   Cegah penekanan ganda yang tidak disengaja:
+   ```typescript
+   let lastPress = 0;
+   const DEBOUNCE_MS = 300;
+
+   VolumeButtons.addListener('volumeButtonPressed', (event) => {
+     const now = Date.now();
+     if (now - lastPress < DEBOUNCE_MS) {
+       return; // Abaikan penekanan cepat
+     }
+     lastPress = now;
+     handlePress(event.direction);
+   });
+   ```
+
+5. **Dokumentasikan perilaku**
+   Jelaskan kepada pengguna bahwa tombol volume memiliki fungsionalitas kustom:
+   ```typescript
+   function showVolumeButtonHelp() {
+     alert('Gunakan tombol Volume Naik/Turun untuk navigasi halaman');
+   }
+   ```
+
+## Catatan Platform
+
+### iOS
+- Bekerja di iOS 10.0+
+- Tombol volume terdeteksi dengan andal
+- UI volume sistem mungkin masih muncul sebentar
+
+### Android
+- Bekerja di Android 5.0 (API 21)+
+- Memerlukan aplikasi di foreground
+- Beberapa perangkat mungkin memiliki sedikit delay
+
+### Web
+- Tidak didukung di platform web
+- Listener tidak akan dipicu
+
+## Pemecahan Masalah
+
+**Event tidak dipicu:**
+- Pastikan aplikasi memiliki fokus
+- Periksa bahwa listener terdaftar dengan benar
+- Verifikasi plugin terinstal dan tersinkronisasi
+
+**Perubahan volume sistem mengganggu:**
+- Ini adalah perilaku yang diharapkan - plugin mendeteksi penekanan tetapi tidak mencegah perubahan volume sistem
+- Pertimbangkan UX yang bekerja bersama perubahan volume
+
+**Beberapa event dipicu:**
+- Implementasikan debouncing untuk menangani penekanan cepat
+- Periksa registrasi listener duplikat

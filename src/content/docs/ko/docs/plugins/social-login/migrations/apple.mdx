@@ -1,0 +1,186 @@
+---
+title: @capacitor-community/apple-sign-in에서 @capgo/capacitor-social-login으로 마이그레이션 가이드
+locale: ko
+description: 이 포괄적인 가이드는 @capacitor-community/apple-sign-in 플러그인에서 @capgo/capacitor-social-login 플러그인으로 전환하는 자세한 지침을 제공하여 원활한 마이그레이션 프로세스와 향상된 기능을 보장합니다.
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 개요
+
+이 가이드는 레거시 `@capacitor-community/apple-sign-in` 플러그인에서 현대적인 `@capgo/capacitor-social-login` 패키지로의 전환을 개요합니다. 새 플러그인은 향상된 TypeScript 지원과 적극적인 유지 관리로 여러 소셜 인증 제공업체를 위한 통합 인터페이스를 제공합니다.
+
+## 설치
+
+<Steps>
+1. 이전 패키지를 제거합니다:
+   ```bash
+   npm uninstall @capacitor-community/apple-sign-in
+   ```
+
+2. 새 패키지를 설치합니다:
+   ```bash
+   npm install @capgo/capacitor-social-login
+   npx cap sync
+   ```
+</Steps>
+
+## 코드 변경사항
+
+### Import 변경사항
+```diff
+- import { SignInWithApple } from '@capacitor-community/apple-sign-in';
++ import { SocialLogin } from '@capgo/capacitor-social-login';
+```
+
+### 초기화
+
+**주요 변경사항**: 새 플러그인은 이전에 필요하지 않았던 초기화 단계가 필요합니다.
+
+```diff
+- // No initialization needed in old package
++ // For iOS: Basic configuration
++ await SocialLogin.initialize({
++   apple: {} // Basic iOS configuration
++ });
+
++ // For Android: Additional configuration required
++ await SocialLogin.initialize({
++   apple: {
++     clientId: 'YOUR_SERVICE_ID', // Service ID from Apple Developer Portal
++     redirectUrl: 'https://your-backend.com/callback' // Your backend callback URL
++   }
++ });
+```
+
+**중요 참고사항**: iOS의 경우 기본 구성을 제공하는 반면, Android는 웹 기반 OAuth 인증을 위한 Service ID 및 백엔드 콜백 URL을 포함한 추가 세부 정보가 필요합니다.
+
+### 로그인
+
+로그인 프로세스가 여러 매개변수에서 더 깔끔한 API로 단순화됩니다:
+
+```diff
+- const result = await SignInWithApple.authorize({
+-   clientId: 'com.your.app',
+-   redirectURI: 'https://your-app.com/callback',
+-   scopes: 'email name',
+-   state: '12345',
+-   nonce: 'nonce'
+- });
+
++ const result = await SocialLogin.login({
++   provider: 'apple',
++   options: {
++     // Optional: Add scopes if needed
++     scopes: ['email', 'name'],
++     nonce: 'nonce'
++   }
++ });
+```
+
+새 플러그인은 `clientId` 및 `redirectURI`와 같은 개별 구성 값을 전달하는 대신 `provider: 'apple'` 및 선택적 범위와 함께 `login()`을 사용합니다.
+
+### 응답 유형 변경사항
+
+이제 결과에는 만료 세부 정보가 포함된 `accessToken` 객체와 구조화된 `profile` 섹션이 포함되어 원래 패키지의 평면 응답 형식을 대체합니다:
+
+```typescript
+// Old response type
+interface AppleSignInResponse {
+  response: {
+    user: string;
+    email: string | null;
+    givenName: string | null;
+    familyName: string | null;
+    identityToken: string | null;
+    authorizationCode: string | null;
+  };
+}
+
+// New response type
+interface SocialLoginResponse {
+  provider: 'apple';
+  result: {
+    accessToken: {
+      token: string;
+      expiresIn?: number;
+      refreshToken?: string;
+    } | null;
+    idToken: string | null;
+    profile: {
+      user: string;
+      email: string | null;
+      givenName: string | null;
+      familyName: string | null;
+    };
+  };
+}
+```
+
+### 새로운 기능
+
+업데이트된 플러그인은 이전 버전에서 사용할 수 없었던 기능을 도입합니다:
+
+**로그인 상태 확인**
+```diff
+- // Not available in old package
++ const status = await SocialLogin.isLoggedIn({
++   provider: 'apple'
++ });
+```
+
+**로그아웃 기능**
+```diff
+- // Not available in old package
++ await SocialLogin.logout({
++   provider: 'apple'
++ });
+```
+
+이러한 메서드는 인증 상태를 확인하는 `isLoggedIn()` 및 `logout()` 기능을 제공합니다.
+
+## 플랫폼별 변경사항
+
+### iOS 설정
+
+**iOS**는 Xcode 기능을 통해 익숙한 설정 절차를 유지합니다:
+
+1. iOS 설정은 대체로 동일하게 유지됩니다. 여전히 다음이 필요합니다:
+   - Xcode에서 "Sign In with Apple" 기능 활성화
+   - Apple Developer Portal에서 앱 구성
+   - iOS에 대한 추가 코드 변경이 필요하지 않음
+
+### Android 설정
+
+**Android**는 이제 웹 기반 OAuth 인증을 통해 네이티브 지원을 받습니다:
+
+새 플러그인은 즉시 사용 가능한 Android 지원을 제공하지만 추가 설정이 필요합니다:
+
+1. Apple Developer Portal에서 Services ID 생성
+2. 웹 인증 엔드포인트 구성
+3. OAuth 흐름을 처리하도록 Android 앱 설정
+4. 백엔드 서비스 구성이 필요합니다
+
+자세한 Android 설정 지침은 [Android Setup Guide](/docs/plugins/social-login/apple/android/)를 참조하세요.
+
+## 주요 장점
+
+현대화된 패키지는 다음을 제공합니다:
+
+1. 여러 소셜 제공업체(Google, Facebook, Apple)에 걸친 **통합 API**
+2. 더 나은 유형 정의로 **향상된 TypeScript 타이핑**
+3. 더 이상 사용되지 않는 버전에 비해 **활성 커뮤니티 유지 관리**
+4. 웹 기반 인증을 통한 **내장 Android 지원**
+5. **영구 로그인 상태 관리**
+6. 일관된 오류 유형으로 **더 나은 오류 처리**
+
+## 주요 변경사항
+
+1. **명시적 초기화가 이제 필요합니다** - 기본 구성 없음
+2. **응답 객체 구조가 변경되었습니다** - 중첩된 결과 형식
+3. **Android 구현에는 OAuth를 위한 백엔드 서비스가 필요합니다**
+4. **토큰 새로 고침 처리가 다릅니다** - 향상된 토큰 관리
+5. **오류 처리 및 오류 유형이 변경되었습니다** - 더 자세한 오류
+
+더 자세한 설정 지침은 [공식 문서](/docs/plugins/social-login/apple/general/)를 참조하세요.

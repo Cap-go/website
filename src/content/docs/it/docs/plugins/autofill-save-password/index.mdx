@@ -1,0 +1,279 @@
+---
+title: "@capgo/capacitor-autofill-save-password"
+locale: it
+description: Plugin di supporto per l'autofill delle password per app Capacitor con gestione delle credenziali, archiviazione sicura ed esperienza utente senza interruzioni.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+hero:
+  tagline: Abilita l'autofill delle password e la gestione delle credenziali con integrazione di sistema per esperienze di autenticazione senza interruzioni.
+  image:
+    file: ~public/icons/plugins/autofill-save-password.svg
+  actions:
+    - text: Inizia
+      link: /docs/plugins/autofill-save-password/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-autofill-save-password/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Panoramica
+
+Il plugin Capacitor Autofill Save Password fornisce funzionalità di salvataggio e autofill delle password per applicazioni Capacitor. Questo plugin si integra con la gestione delle credenziali a livello di sistema per offrire esperienze di autenticazione senza interruzioni con archiviazione e recupero sicuri delle password.
+
+<CardGrid stagger>
+  <Card title="Salvataggio password" icon="rocket">
+    Salva le credenziali nel portachiavi di sistema in modo sicuro
+  </Card>
+  <Card title="Integrazione autofill" icon="setting">
+    Supporto autofill password a livello di sistema
+  </Card>
+  <Card title="Cross-platform" icon="laptop">
+    Supporto iOS con sviluppo Android in corso
+  </Card>
+  <Card title="Associazione domini" icon="puzzle">
+    Domini associati per autenticazione senza interruzioni
+  </Card>
+</CardGrid>
+
+## Installazione
+
+```bash
+npm install @capgo/capacitor-autofill-save-password
+npx cap sync
+```
+
+## Supporto Piattaforme
+
+- **iOS**: Supporto completo (funziona con iOS 18.3 e versioni precedenti)
+- **Android**: Lavori in corso
+
+## Configurazione iOS
+
+### 1. Configurazione Domini Associati
+
+Configura i domini associati nel tuo account Apple Developer e aggiungili al tuo file `App.entitlements`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>webcredentials:yourdomain.com</string>
+        <string>webcredentials:www.yourdomain.com</string>
+    </array>
+</dict>
+</plist>
+```
+
+### 2. Configurazione Credenziali Web
+
+Aggiungi un file `.well-known/apple-app-site-association` al tuo sito web:
+
+```json
+{
+  "webcredentials": {
+    "apps": [
+      "TEAMID.com.yourcompany.yourapp"
+    ]
+  }
+}
+```
+
+## Metodi API Principali
+
+### Gestione Password
+- `promptDialog(options)` - Salva la password nel portachiavi di sistema
+- `readPassword()` - Leggi la password salvata dal portachiavi
+
+## Esempio di Utilizzo
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+// Salva la password dopo un login riuscito
+async function login(username: string, password: string) {
+  try {
+    // Esegui qui la tua logica di login
+    const loginSuccess = await performLogin(username, password);
+
+    if (loginSuccess) {
+      // Chiedi all'utente di salvare la password
+      await SavePassword.promptDialog({
+        username: username,
+        password: password,
+        url: 'https://yourdomain.com' // Solo iOS
+      });
+
+      console.log('Password salvata con successo');
+    }
+  } catch (error) {
+    console.error('Impossibile salvare la password:', error);
+  }
+}
+
+// Leggi la password salvata per l'autofill
+async function loadSavedCredentials() {
+  try {
+    const credentials = await SavePassword.readPassword();
+
+    if (credentials.username && credentials.password) {
+      console.log('Credenziali salvate trovate');
+      // Pre-compila il modulo di login
+      return {
+        username: credentials.username,
+        password: credentials.password
+      };
+    }
+  } catch (error) {
+    console.error('Impossibile leggere la password salvata:', error);
+  }
+
+  return null;
+}
+```
+
+## Configurazione Android (Lavori in Corso)
+
+Per il futuro supporto Android, sarà richiesta la seguente configurazione:
+
+### 1. Plugin Google Services
+
+Aggiungi a `android/app/build.gradle`:
+
+```kotlin
+apply plugin: 'com.google.gms.google-services'
+```
+
+### 2. Configurazione Domini
+
+Aggiungi a `android/app/src/main/res/values/strings.xml`:
+
+```xml
+<resources>
+    <string name="asset_statements">
+        [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {
+                "namespace": "web",
+                "site": "https://yourdomain.com"
+            }
+        }]
+    </string>
+</resources>
+```
+
+### 3. JSON Google Services
+
+Aggiungi `google-services.json` al tuo progetto Android.
+
+## Riferimento API
+
+### promptDialog(options)
+
+Salva le credenziali utente nel portachiavi di sistema.
+
+```typescript
+interface SavePasswordOptions {
+  username: string;
+  password: string;
+  url?: string; // Solo iOS - URL del dominio associato
+}
+```
+
+### readPassword()
+
+Recupera le credenziali salvate dal portachiavi di sistema.
+
+```typescript
+interface SavedCredentials {
+  username: string;
+  password: string;
+}
+```
+
+## Integrazione con il Flusso di Login
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+class AuthService {
+  async login(username: string, password: string) {
+    try {
+      // Autentica con il tuo backend
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        // Offri di salvare le credenziali
+        await this.offerToSavePassword(username, password);
+        return true;
+      }
+    } catch (error) {
+      console.error('Login fallito:', error);
+    }
+    return false;
+  }
+
+  private async offerToSavePassword(username: string, password: string) {
+    try {
+      await SavePassword.promptDialog({
+        username,
+        password,
+        url: 'https://yourdomain.com'
+      });
+    } catch (error) {
+      // L'utente ha rifiutato di salvare o si è verificato un errore
+      console.log('Password non salvata:', error);
+    }
+  }
+
+  async loadSavedCredentials() {
+    try {
+      return await SavePassword.readPassword();
+    } catch (error) {
+      console.log('Nessuna credenziale salvata trovata');
+      return null;
+    }
+  }
+}
+```
+
+## Best Practices
+
+- Chiedi di salvare le password solo dopo un'autenticazione riuscita
+- Gestisci i casi in cui gli utenti rifiutano di salvare le password in modo elegante
+- Implementa una corretta gestione degli errori per i fallimenti di accesso al portachiavi
+- Usa i domini associati per una condivisione senza interruzioni delle credenziali tra web e app
+- Testa la funzionalità di autofill su diverse versioni di iOS
+
+## Considerazioni sulla Sicurezza
+
+- Le credenziali sono memorizzate nel portachiavi di sistema con flag di sicurezza appropriati
+- I domini associati assicurano che le credenziali siano accessibili solo alle app autorizzate
+- Segui le linee guida di sicurezza della piattaforma per la gestione delle credenziali
+- Considera l'implementazione di misure di sicurezza aggiuntive per applicazioni sensibili
+
+## Limitazioni
+
+- Il supporto Android è attualmente in fase di sviluppo
+- iOS richiede una corretta configurazione dei domini associati
+- Il comportamento dell'autofill può variare tra diverse versioni di iOS
+- Richiede il consenso dell'utente per salvare e accedere alle credenziali
+
+## Documentazione
+
+Controlla la [documentazione completa](/docs/plugins/autofill-save-password/getting-started/) per guide di implementazione dettagliate e modelli di integrazione avanzati.

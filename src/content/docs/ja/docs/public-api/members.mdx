@@ -1,0 +1,226 @@
+---
+title: "メンバー"
+locale: ja
+description: "Capgoの組織メンバーを管理するための包括的なガイド。役割、権限、セキュリティとコラボレーションのベストプラクティスをカバーしています。"
+sidebar:
+  order: 4
+---
+
+組織メンバーは、Capgo組織へのアクセス権を持つユーザーです。各メンバーには、組織内での権限を決定する特定の役割があります。セキュリティとチーム内のコラボレーションを維持するには、メンバーを効果的に管理することが重要です。
+
+## メンバーの役割
+
+### 通常の役割
+- **read**: リソースを表示できますが、変更はできません
+- **upload**: 新しいバンドルをアップロードし、リソースを表示できます
+- **write**: リソースを変更し、バンドルをアップロードできます
+- **admin**: 組織の設定とメンバーを管理できます
+- **super_admin**: 組織を完全に制御できます
+
+### 招待の役割
+- **invite_read**: 読み取りアクセスの招待待ち
+- **invite_upload**: アップロードアクセスの招待待ち
+- **invite_write**: 書き込みアクセスの招待待ち
+- **invite_admin**: 管理者アクセスの招待待ち
+- **invite_super_admin**: 最高管理者アクセスの招待待ち
+
+## ベストプラクティス
+
+1. **役割の割り当て**: 役割を割り当てる際は、最小特権の原則に従ってください
+2. **定期的な監査**: 定期的にメンバーのアクセスを確認し、未使用のアカウントを削除してください
+3. **オンボーディング**: 新しいメンバーを追加し、役割を割り当てるための明確なプロセスを持ってください
+4. **オフボーディング**: 組織を離れるメンバーのアクセスを速やかに削除してください
+
+## エンドポイント
+
+### POST
+
+`https://api.capgo.app/organization/members/`
+
+組織に新しいメンバーを追加するか、既存のメンバーの役割を更新します。すでにCapgoアカウントを持っているユーザーのみを招待できることに注意してください - メールアドレスは既存のCapgoユーザーに対応している必要があります。
+
+#### リクエストボディ
+
+```typescript
+interface MemberCreate {
+  orgId: string
+  email: string
+  role: "read" | "upload" | "write" | "admin" | "super_admin"
+}
+```
+
+#### リクエスト例
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "email": "newmember@example.com",
+    "role": "write"
+  }' \
+  https://api.capgo.app/organization/members/
+```
+
+#### 成功レスポンス
+
+```json
+{
+  "status": "OK",
+  "data": {
+    "uid": "user_789",
+    "email": "newmember@example.com",
+    "role": "invite_write",
+    "image_url": null
+  }
+}
+```
+
+注意事項:
+- 新しいメンバーを追加すると、招待メールが送信されます。招待を承諾するまで、役割には「invite_」が接頭辞として付きます。
+- ユーザーは招待される前にCapgoアカウントを持っている必要があります。アカウントを持っていない場合は、まずhttps://console.capgo.app/register/でアカウントを作成する必要があります。
+
+### GET
+
+`https://api.capgo.app/organization/members/`
+
+組織のすべてのメンバーを取得します。
+
+#### クエリパラメータ
+
+```typescript
+interface MemberQuery {
+  orgId: string
+}
+```
+
+#### レスポンスタイプ
+
+```typescript
+interface Member {
+  uid: string;
+  email: string;
+  image_url: string;
+  role: "invite_read" | "invite_upload" | "invite_write" | "invite_admin" | "invite_super_admin" | "read" | "upload" | "write" | "admin" | "super_admin";
+}
+```
+
+#### リクエスト例
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/organization/members/?orgId=org_123"
+```
+
+#### レスポンス例
+
+```json
+{
+  "data": [
+    {
+      "uid": "user_123",
+      "email": "john@example.com",
+      "image_url": "https://example.com/avatar.png",
+      "role": "admin"
+    },
+    {
+      "uid": "user_456",
+      "email": "jane@example.com",
+      "image_url": "https://example.com/avatar2.png",
+      "role": "write"
+    },
+    {
+      "uid": "user_789",
+      "email": "bob@example.com",
+      "image_url": null,
+      "role": "invite_read"
+    }
+  ]
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/organization/members/`
+
+組織からメンバーを削除します。これにより、アクセス権が即座に取り消されます。
+
+#### リクエストボディ
+
+```typescript
+interface MemberDelete {
+  orgId: string
+  email: string
+}
+```
+
+#### リクエスト例
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "email": "user@example.com"
+  }' \
+  https://api.capgo.app/organization/members/
+```
+
+#### 成功レスポンス
+
+```json
+{
+  "status": "OK"
+}
+```
+
+## エラーハンドリング
+
+一般的なエラーシナリオとそのレスポンス:
+
+```json
+// Member not found
+{
+  "error": "Member not found",
+  "status": "KO"
+}
+
+// Invalid role
+{
+  "error": "Invalid role specified",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage members",
+  "status": "KO"
+}
+
+// Cannot remove last admin
+{
+  "error": "Cannot remove the last admin from the organization",
+  "status": "KO"
+}
+
+// Invalid email
+{
+  "error": "Invalid email format",
+  "status": "KO"
+}
+
+// Member already exists
+{
+  "error": "Member already exists in organization",
+  "status": "KO"
+}
+```
+
+## 一般的なユースケース
+
+1. **チームの拡大**: 適切な役割を持つ新しいチームメンバーの追加
+2. **アクセス制御**: 責任の変化に応じたメンバー権限の管理
+3. **セキュリティ監査**: 定期的なメンバーリストと役割の確認
+4. **チームの再構築**: 組織変更時の役割の更新

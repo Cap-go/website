@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-android-age-signals"
+description: Wrapper Google Play Age Signals API - mendeteksi akun yang diawasi, persetujuan wali, dan pengguna terverifikasi.
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Akses Google Play Age Signals untuk mendeteksi akun yang diawasi, memverifikasi usia pengguna, dan mematuhi peraturan keamanan anak di aplikasi Android Anda.
+  image:
+    file: ~public/icons/plugins/android-age-signals.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/age-signals/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-age-signals/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Akun yang Diawasi" icon="setting">
+    Deteksi ketika pengguna memiliki Google account yang diawasi yang dikelola oleh wali 👨‍👧‍👦
+  </Card>
+  <Card title="Verifikasi Usia" icon="approve-check-circle">
+    Identifikasi pengguna terverifikasi yang berusia 18+ dengan verifikasi usia Google 🔐
+  </Card>
+  <Card title="Kepatuhan" icon="approve-check">
+    Patuhi peraturan keamanan anak seperti COPPA dan GDPR 📋
+  </Card>
+  <Card title="Persetujuan Wali" icon="star">
+    Lacak persetujuan yang tertunda dan status persetujuan wali ✅
+  </Card>
+  <Card title="Khusus Android" icon="puzzle">
+    Dirancang khusus untuk Android dengan Google Play Services 📱
+  </Card>
+  <Card title="API Sederhana" icon="rocket">
+    Panggilan metode tunggal untuk mengambil semua age signals 🚀
+  </Card>
+</CardGrid>

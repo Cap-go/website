@@ -1,0 +1,210 @@
+---
+title: 开始使用
+description: 了解如何安装和使用 Mute 插件在 Capacitor 应用中检测静音模式状态。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 用法
+
+导入插件并使用其方法检查静音状态：
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+// 检查设备是否静音
+const checkMuteState = async () => {
+  const { value } = await CapacitorMute.isMuted();
+
+  if (value) {
+    console.log('Device is muted/silent');
+    // 调整静音模式下的应用行为
+  } else {
+    console.log('Device sound is on');
+  }
+};
+```
+
+## API 参考
+
+### isMuted()
+
+检查设备当前是否静音/处于静音模式。
+
+```typescript
+const result = await CapacitorMute.isMuted();
+// 返回：{ value: boolean }
+```
+
+## 完整示例
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+export class SoundManager {
+  private isMuted = false;
+
+  async initialize() {
+    // 获取初始静音状态
+    await this.checkMuteState();
+  }
+
+  async checkMuteState() {
+    try {
+      const { value } = await CapacitorMute.isMuted();
+      this.isMuted = value;
+      this.updateAppBehavior();
+    } catch (error) {
+      console.error('Failed to check mute state:', error);
+    }
+  }
+
+  private updateAppBehavior() {
+    if (this.isMuted) {
+      // 设备已静音 - 调整应用行为
+      this.disableSoundEffects();
+      this.showVisualNotifications();
+    } else {
+      // 设备声音已打开
+      this.enableSoundEffects();
+      this.useAudioNotifications();
+    }
+  }
+
+  private disableSoundEffects() {
+    // 禁用应用内声音
+    console.log('Disabling sound effects');
+  }
+
+  private enableSoundEffects() {
+    // 启用应用内声音
+    console.log('Enabling sound effects');
+  }
+
+  private showVisualNotifications() {
+    // 使用视觉反馈而不是音频
+    console.log('Using visual notifications');
+  }
+
+  private useAudioNotifications() {
+    // 使用音频通知
+    console.log('Using audio notifications');
+  }
+}
+
+// 用法
+const soundManager = new SoundManager();
+await soundManager.initialize();
+
+// 定期轮询以检查更改
+setInterval(() => {
+  soundManager.checkMuteState();
+}, 5000); // 每 5 秒检查一次
+```
+
+## 平台行为
+
+### iOS
+- 检测物理静音开关状态
+- 无实时更改事件（需要轮询）
+- 适用于带有静音开关的 iPhone 和 iPad
+
+### Android
+- 检查铃声模式是否设置为静音或振动
+- 无更改事件（需要轮询）
+- 基于 AudioManager 铃声模式
+
+## 最佳实践
+
+1. **轮询更改**
+   由于插件不提供实时事件，如果需要跟踪更改，请定期轮询：
+   ```typescript
+   // 定期检查静音状态
+   setInterval(async () => {
+     const { value } = await CapacitorMute.isMuted();
+     if (value !== previousMuteState) {
+       handleMuteStateChange(value);
+     }
+   }, 5000);
+   ```
+
+2. **尊重用户偏好**
+   始终尊重静音状态并相应调整应用的音频行为。
+
+3. **提供视觉替代方案**
+   ```typescript
+   const { value: isMuted } = await CapacitorMute.isMuted();
+   if (isMuted) {
+     // 显示视觉通知
+     showToast('New message received');
+   } else {
+     // 播放声音通知
+     playNotificationSound();
+   }
+   ```
+
+## 用例
+
+1. **游戏声音管理**
+   ```typescript
+   const shouldPlaySound = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     return !isMuted && userPreferences.soundEnabled;
+   };
+   ```
+
+2. **通知处理**
+   ```typescript
+   const sendNotification = async (message: string) => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     if (isMuted) {
+       // 使用振动或视觉通知
+       await Haptics.vibrate();
+       showBanner(message);
+     } else {
+       // 播放通知声音
+       await playSound('notification.mp3');
+     }
+   };
+   ```
+
+3. **视频播放器**
+   ```typescript
+   const initVideoPlayer = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     videoPlayer.setMuted(isMuted);
+     if (isMuted) {
+       showSubtitles(true);
+       showMuteIndicator();
+     }
+   };
+   ```
+
+## 故障排除
+
+1. **在 Android 上始终返回 false**
+   - 检查设备铃声模式是否实际设置为静音
+   - 某些 Android 设备可能有不同的行为
+
+2. **没有可用的更改事件**
+   - 插件不提供实时更改事件
+   - 如果需要检测更改，请实现轮询
+
+3. **在模拟器上不起作用**
+   - iOS 模拟器没有静音开关
+   - 在真实设备上测试以获得准确结果

@@ -1,0 +1,83 @@
+---
+title: はじめに
+description: Media Sessionプラグインを使用して、プレーヤーUIをネイティブメディアコントロールと同期します。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **プラグインをインストール**
+   <PackageManagers pkg="@capgo/capacitor-media-session" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **プラットフォームを同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+> ℹ️ Media Session APIは、Android（Chromeベースのブラウザ、WebView）および多くのデスクトップブラウザで利用可能です。サポートされていないプラットフォームでは、呼び出しは効果なく解決されるため、それに応じてUIを保護してください。
+
+## メタデータを公開
+
+```typescript
+import { MediaSession } from '@capgo/capacitor-media-session';
+
+await MediaSession.setMetadata({
+  title: 'Weekly Tech Podcast',
+  artist: 'Capgo Studio',
+  album: 'Season 2',
+  artwork: [
+    { src: 'https://cdn.example.com/covers/s02e05-512.png', sizes: '512x512', type: 'image/.png' },
+  ],
+});
+```
+
+## 再生状態を更新
+
+```typescript
+await MediaSession.setPlaybackState({ playbackState: 'playing' });
+
+// 必要に応じて後で一時停止
+await MediaSession.setPlaybackState({ playbackState: 'paused' });
+```
+
+## メディアアクションを処理
+
+```typescript
+const pauseHandler = async () => {
+  player.pause();
+  await MediaSession.setPlaybackState({ playbackState: 'paused' });
+};
+
+await MediaSession.setActionHandler({ action: 'pause' }, pauseHandler);
+await MediaSession.setActionHandler({ action: 'play' }, async () => {
+  await player.play();
+  await MediaSession.setPlaybackState({ playbackState: 'playing' });
+});
+
+// プレーヤーを破棄するときにハンドラを削除
+await MediaSession.setActionHandler({ action: 'pause' }, null);
+```
+
+## 位置を同期
+
+```typescript
+const updatePosition = async () => {
+  await MediaSession.setPositionState({
+    duration: player.duration,
+    position: player.currentTime,
+    playbackRate: player.playbackRate,
+  });
+};
+
+player.ontimeupdate = updatePosition;
+player.onratechange = updatePosition;
+```
+
+## 推奨事項
+
+- トラックが変更されたときにメタデータを更新して、通知とスマートスピーカーを最新の状態に保ちます。
+- ネイティブレイヤーへのスパムを避けるために、位置の更新を調整します（例：250ミリ秒ごと）。
+- プレーヤーインスタンスを破棄するときは、常にアクションハンドラを削除して、誤ったリークを防ぎます。

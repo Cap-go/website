@@ -1,0 +1,166 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin File Compressor untuk mengompres gambar dalam aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-file-compressor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Dukungan Platform
+
+| Platform | Format yang Didukung | Catatan |
+|----------|-------------------|-------|
+| iOS | JPEG | Hanya kompresi JPEG yang didukung |
+| Android | JPEG, WebP | Kedua format sepenuhnya didukung |
+| Web | JPEG, WebP | Kompresi berbasis Canvas API |
+
+Catatan: Metadata EXIF dihapus selama kompresi pada semua platform.
+
+## Penggunaan
+
+Import plugin dan kompres gambar:
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+
+// Compress an image
+const compressImage = async () => {
+  const result = await FileCompressor.compressImage({
+    source: 'file:///path/to/image.jpg',
+    quality: 0.8,
+    width: 1920,
+    height: 1080
+  });
+
+  console.log('Compressed image path:', result.path);
+  console.log('Original size:', result.originalSize);
+  console.log('Compressed size:', result.size);
+};
+```
+
+## Referensi API
+
+### compressImage(options)
+
+Mengompres file gambar dengan dimensi dan pengaturan kualitas yang ditentukan.
+
+```typescript
+interface CompressImageOptions {
+  source: string;           // Path to the image file
+  quality?: number;         // 0.0 to 1.0 (default: 0.8)
+  width?: number;           // Target width in pixels
+  height?: number;          // Target height in pixels
+  format?: 'jpeg' | '.webp'; // Output format
+}
+
+interface CompressImageResult {
+  path: string;             // Path to compressed image
+  size: number;             // Compressed file size in bytes
+  originalSize: number;     // Original file size in bytes
+}
+
+const result = await FileCompressor.compressImage(options);
+```
+
+**Catatan Penting:**
+- Metadata EXIF dihapus selama kompresi pada semua platform
+- Aspect ratio secara otomatis dipertahankan jika hanya satu dimensi yang disediakan
+- File terkompresi disimpan ke direktori sementara pada platform native
+
+### getPluginVersion()
+
+Dapatkan versi plugin native.
+
+```typescript
+const { version } = await FileCompressor.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Contoh Lengkap
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+import { Camera } from '@capacitor/camera';
+
+export class ImageCompressionService {
+  async captureAndCompress() {
+    try {
+      // Take a photo
+      const photo = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: false,
+        resultType: 'uri'
+      });
+
+      if (!photo.path) {
+        throw new Error('No image path');
+      }
+
+      // Compress the photo
+      const compressed = await FileCompressor.compressImage({
+        source: photo.path,
+        quality: 0.7,
+        width: 1920,
+        height: 1080,
+        format: 'jpeg'
+      });
+
+      console.log(`Compression ratio: ${
+        ((1 - compressed.size / compressed.originalSize) * 100).toFixed(1)
+      }%`);
+
+      return compressed.path;
+    } catch (error) {
+      console.error('Compression failed:', error);
+      throw error;
+    }
+  }
+
+  async batchCompress(imagePaths: string[]) {
+    const results = [];
+
+    for (const path of imagePaths) {
+      try {
+        const result = await FileCompressor.compressImage({
+          source: path,
+          quality: 0.8,
+          width: 1280
+        });
+        results.push(result);
+      } catch (error) {
+        console.error(`Failed to compress ${path}:`, error);
+      }
+    }
+
+    return results;
+  }
+}
+```
+
+## Praktik Terbaik
+
+1. **Pengaturan Kualitas**: Mulai dengan kualitas 0.8 untuk keseimbangan yang baik antara ukuran file dan kualitas gambar
+2. **Dimensi Resize**: Hanya tentukan dimensi ketika diperlukan - aspect ratio dipertahankan secara otomatis
+3. **Pemilihan Format**: Gunakan JPEG untuk foto dan WebP untuk kompresi lebih baik (hanya Android/Web)
+4. **Penanganan Error**: Selalu bungkus panggilan kompresi dalam blok try-catch
+5. **Cleanup**: Ingat untuk membersihkan file sementara setelah digunakan
+
+## Pemecahan Masalah
+
+### Masalah Umum
+
+**Gambar tidak dikompres**: Pastikan path sumber valid dan dapat diakses
+**Out of memory**: Kurangi dimensi target atau kompres gambar satu per satu
+**Format tidak didukung**: Periksa tabel dukungan platform di atas

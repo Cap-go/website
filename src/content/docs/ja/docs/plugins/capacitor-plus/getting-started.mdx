@@ -1,0 +1,189 @@
+---
+title: はじめに
+locale: ja
+description: 公式Capacitorパッケージのドロップイン置き換えとしてCapacitor+をインストールする方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+## 新規プロジェクトのインストール
+
+<Steps>
+1. **コアパッケージをインストール**
+   ```bash
+   npm install @capacitor-plus/core @capacitor-plus/cli
+   ```
+
+2. **プラットフォームパッケージを追加**
+   ```bash
+   npm install @capacitor-plus/android  # Android用
+   npm install @capacitor-plus/ios      # iOS用
+   ```
+
+3. **Capacitorを初期化**
+   <PackageManagers type="exec" pkg="cap" args="init" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+4. **プラットフォームを追加**
+   <PackageManagers type="exec" pkg="cap" args="add android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   <PackageManagers type="exec" pkg="cap" args="add ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 公式Capacitorからの移行
+
+既存のCapacitorプロジェクトがある場合、Capacitor+への移行は簡単です:
+
+<Steps>
+1. **公式パッケージを削除**
+   ```bash
+   npm uninstall @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios
+   ```
+
+2. **Capacitor+パッケージをインストール**
+   ```bash
+   npm install @capacitor-plus/core @capacitor-plus/cli
+   npm install @capacitor-plus/android  # Androidを使用している場合
+   npm install @capacitor-plus/ios      # iOSを使用している場合
+   ```
+
+3. **プロジェクトを同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+<Aside type="note">
+  コードの変更は不要です！Capacitor+は公式Capacitorと同じAPIを持っています。インポートとコードはまったく同じままです。
+</Aside>
+
+## 使用方法
+
+Capacitor+はAPI互換なので、既存のコードは変更なしで動作します:
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { registerPlugin } from '@capacitor/core';
+
+// プラットフォームを確認
+const platform = Capacitor.getPlatform();
+console.log('Running on:', platform);
+
+// ネイティブかどうかを確認
+if (Capacitor.isNativePlatform()) {
+  console.log('Running on native platform');
+}
+
+// カスタムプラグインを登録
+const MyPlugin = registerPlugin('MyPlugin');
+```
+
+### 公式Capacitorプラグインと併用
+
+すべての公式Capacitorプラグインがシームレスに動作します:
+
+```typescript
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { Geolocation } from '@capacitor/geolocation';
+import { Storage } from '@capacitor/preferences';
+
+// Camera
+const photo = await Camera.getPhoto({
+  quality: 90,
+  resultType: CameraResultType.Uri
+});
+
+// Geolocation
+const position = await Geolocation.getCurrentPosition();
+
+// Storage
+await Storage.set({ key: 'name', value: 'John' });
+```
+
+### Capgoプラグインと併用
+
+Capgoプラグインは、Capacitor+で完璧に動作します:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// ライブアップデート
+await CapacitorUpdater.notifyAppReady();
+
+// 画面の向き
+await ScreenOrientation.lock({ orientation: 'portrait' });
+
+// 懐中電灯
+await CapacitorFlash.toggle();
+```
+
+## 同期の仕組み
+
+```
+┌─────────────────────┐     ┌──────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  ionic-team/        │     │  CI/CD           │     │  Claude Code     │     │  npm publish    │
+│  capacitor          │────▶│  Pipeline        │────▶│  Security Review │────▶│  @capacitor-plus│
+│  (upstream)         │     │  (daily sync)    │     │  (AI analysis)   │     │  packages       │
+└─────────────────────┘     └──────────────────┘     └──────────────────┘     └─────────────────┘
+```
+
+1. **日次同期**: GitHub Actions が `ionic-team/capacitor` から最新の変更を取得
+2. **PR作成**: 変更は `plus` ブランチへのプルリクエストとして提案されます
+3. **CI検証**: 完全なテストスイートが実行されます（lint、ユニットテスト、iOSビルド、Androidビルド）
+4. **セキュリティレビュー**: AI駆動の分析が脆弱性と破壊的変更をチェック
+5. **自動マージ**: CIがパスし、かつセキュリティレビューが承認した場合のみ
+6. **自動公開**: 新しいバージョンが `@capacitor-plus/*` でnpmに公開されます
+
+## セキュリティレビューの詳細
+
+すべてのアップストリーム同期は以下の分析が行われます:
+
+| チェック | 検出内容 |
+|-------|-----------------|
+| **セキュリティ** | コマンドインジェクション、XSS、パストラバーサル、ハードコードされた秘密 |
+| **破壊的変更** | 削除/名前変更されたAPI、変更されたシグネチャ、設定変更 |
+| **安定性** | Null参照、未処理の例外、競合状態、メモリリーク |
+| **データ安全性** | データ損失シナリオ、プライバシー違反、安全でないストレージ |
+| **コード整合性** | 難読化されたコード、疑わしいネットワーク呼び出し、バックドア |
+
+<Aside type="caution">
+  問題が検出された場合、PRは手動レビューのためにフラグが立てられ、自動マージされません。これにより、常に安定した安全なリリースを受け取ることが保証されます。
+</Aside>
+
+## PRの送信
+
+公式CapacitorリポジトリでPRが停滞していますか？Capacitor+でマージしてもらいましょう:
+
+<Steps>
+1. アップストリームPRへのリンクを含む**issueを開く** [Capacitor+リポジトリ](https://github.com/Cap-go/capacitor-plus/issues)
+
+2. **または直接送信** `plus` ブランチへのPRとして
+
+3. チームがレビューし、CIを実行し、パスすればマージします
+</Steps>
+
+これにより、あなたや他の人はアップストリームのリリースサイクルを待つことなく、すぐにあなたの作業の恩恵を受けることができます。
+
+## FAQ
+
+### これは本番環境対応ですか？
+
+はい。Capacitor+は本番アプリで使用されています。すべてのリリースは、公式Capacitorと同じテストスイートに加えて、追加のセキュリティ分析をパスします。
+
+### 公式プラグインはまだ動作しますか？
+
+はい。すべての `@capacitor/*` プラグインは、Capacitor+でそのまま動作します。
+
+### アップストリームが破壊的変更をリリースした場合はどうなりますか？
+
+AIセキュリティレビューが手動レビューのために破壊的変更にフラグを立てます。変更がマージされる前に、ドキュメント化された変更を確認できます。
+
+### 問題を報告するにはどうすればよいですか？
+
+[Capacitor+ GitHubリポジトリ](https://github.com/Cap-go/capacitor-plus/issues)で問題を報告してください。公式Capacitorにも影響を与える問題については、アップストリームとの調整をお手伝いします。
+
+### 貢献できますか？
+
+もちろんです！PRを歓迎します。修正を直接送信するか、特定のアップストリームPRをマージするようリクエストできます。

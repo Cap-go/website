@@ -1,0 +1,313 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan mengkonfigurasi plugin Capacitor IVS Player untuk mengintegrasikan streaming latensi rendah Amazon IVS di aplikasi Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/ivs-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan project native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurasi plugin**
+
+   **Setup Player Dasar:**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // Buat player
+   const { playerId } = await IvsPlayer.create({
+     url: 'https://your-ivs-playback-url.m3u8',
+     autoplay: true
+   });
+
+   // Mulai pemutaran
+   await IvsPlayer.play({ playerId });
+   ```
+
+   **Kontrol Player:**
+   ```typescript
+   // Jeda pemutaran
+   await IvsPlayer.pause({ playerId });
+
+   // Atur volume
+   await IvsPlayer.setVolume({
+     playerId,
+     volume: 0.5 // 0.0 hingga 1.0
+   });
+
+   // Seek ke posisi
+   await IvsPlayer.seekTo({
+     playerId,
+     position: 30 // detik
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Tambahkan ke `Info.plist` Anda:
+       ```xml
+       <key>NSAppTransportSecurity</key>
+       <dict>
+         <key>NSAllowsArbitraryLoads</key>
+         <true/>
+       </dict>
+       ```
+     </TabItem>
+     <TabItem label="Android">
+       Tambahkan ke `AndroidManifest.xml` Anda:
+       ```xml
+       <uses-permission android:name="android.permission.INTERNET" />
+       ```
+     </TabItem>
+   </Tabs>
+
+4. **Penanganan event**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // Dengarkan event player
+   IvsPlayer.addListener('onState', (event) => {
+     console.log('Status player:', event.state);
+     // Status: idle, buffering, ready, playing, ended
+   });
+
+   IvsPlayer.addListener('onError', (event) => {
+     console.error('Error player:', event.error);
+   });
+
+   IvsPlayer.addListener('onDuration', (event) => {
+     console.log('Durasi video:', event.duration);
+   });
+
+   IvsPlayer.addListener('onProgress', (event) => {
+     console.log('Posisi saat ini:', event.position);
+   });
+
+   // Dengarkan timed metadata
+   IvsPlayer.addListener('onMetadata', (event) => {
+     console.log('Timed metadata:', event.metadata);
+   });
+   ```
+
+5. **Penggunaan lanjutan**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   export class StreamPlayer {
+     private playerId: string | null = null;
+     private listeners: any[] = [];
+
+     async initialize(streamUrl: string) {
+       // Buat player dengan konfigurasi kustom
+       const result = await IvsPlayer.create({
+         url: streamUrl,
+         autoplay: false,
+         muted: true, // Mulai muted untuk kebijakan autoplay
+         controls: true
+       });
+
+       this.playerId = result.playerId;
+       this.setupEventListeners();
+     }
+
+     private setupEventListeners() {
+       // Perubahan status
+       const stateListener = IvsPlayer.addListener('onState', (event) => {
+         this.handleStateChange(event.state);
+       });
+       this.listeners.push(stateListener);
+
+       // Perubahan kualitas
+       const qualityListener = IvsPlayer.addListener('onQuality', (event) => {
+         console.log(`Kualitas berubah ke: ${event.quality.name}`);
+       });
+       this.listeners.push(qualityListener);
+
+       // Update buffer
+       const bufferListener = IvsPlayer.addListener('onBuffer', (event) => {
+         console.log(`Buffer: ${event.percentage}%`);
+       });
+       this.listeners.push(bufferListener);
+     }
+
+     private handleStateChange(state: string) {
+       switch (state) {
+         case 'playing':
+           console.log('Stream sedang diputar');
+           break;
+         case 'buffering':
+           console.log('Stream sedang buffering');
+           break;
+         case 'ended':
+           console.log('Stream berakhir');
+           break;
+       }
+     }
+
+     async play() {
+       if (this.playerId) {
+         await IvsPlayer.play({ playerId: this.playerId });
+       }
+     }
+
+     async pause() {
+       if (this.playerId) {
+         await IvsPlayer.pause({ playerId: this.playerId });
+       }
+     }
+
+     async setQuality(qualityName: string) {
+       if (this.playerId) {
+         await IvsPlayer.setQuality({
+           playerId: this.playerId,
+           quality: qualityName
+         });
+       }
+     }
+
+     async destroy() {
+       // Hapus listener
+       this.listeners.forEach(listener => listener.remove());
+
+       // Hancurkan player
+       if (this.playerId) {
+         await IvsPlayer.destroy({ playerId: this.playerId });
+       }
+     }
+   }
+   ```
+</Steps>
+
+## Referensi API
+
+### Metode
+
+#### `create(options: CreateOptions)`
+Buat instance IVS player baru.
+
+**Parameter:**
+- `options`: Konfigurasi player
+  - `url`: string - URL pemutaran IVS
+  - `autoplay`: boolean - Mulai pemutaran otomatis
+  - `muted`: boolean - Mulai muted
+  - `controls`: boolean - Tampilkan kontrol native
+
+**Mengembalikan:** `Promise<{ playerId: string }>`
+
+#### `play(options: PlayerOptions)`
+Mulai pemutaran.
+
+#### `pause(options: PlayerOptions)`
+Jeda pemutaran.
+
+#### `stop(options: PlayerOptions)`
+Hentikan pemutaran dan reset posisi.
+
+#### `seekTo(options: SeekOptions)`
+Seek ke posisi tertentu.
+
+#### `setVolume(options: VolumeOptions)`
+Atur volume player (0.0 hingga 1.0).
+
+#### `setQuality(options: QualityOptions)`
+Atur kualitas pemutaran.
+
+#### `destroy(options: PlayerOptions)`
+Hancurkan instance player.
+
+### Event
+
+- `onState`: Perubahan status player
+- `onError`: Error pemutaran
+- `onDuration`: Durasi video tersedia
+- `onProgress`: Update progres pemutaran
+- `onQuality`: Perubahan kualitas
+- `onMetadata`: Event timed metadata
+- `onBuffer`: Update status buffer
+
+### Interface
+
+```typescript
+interface CreateOptions {
+  url: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+}
+
+interface PlayerOptions {
+  playerId: string;
+}
+
+interface SeekOptions extends PlayerOptions {
+  position: number; // detik
+}
+
+interface VolumeOptions extends PlayerOptions {
+  volume: number; // 0.0 hingga 1.0
+}
+
+interface QualityOptions extends PlayerOptions {
+  quality: string; // nama kualitas
+}
+```
+
+## Catatan Platform
+
+### iOS
+- Memerlukan iOS 12.0 atau lebih baru
+- Menggunakan AVPlayer native dengan ekstensi IVS
+- Mendukung Picture-in-Picture di iPad
+
+### Android
+- Memerlukan Android 5.0 (API level 21) atau lebih baru
+- Menggunakan Amazon IVS Player SDK
+- Akselerasi hardware direkomendasikan
+
+## Kasus Penggunaan Umum
+
+1. **Streaming Langsung**: Event real-time, olahraga, gaming
+2. **Streaming Interaktif**: Polling penonton, sesi tanya jawab
+3. **E-commerce**: Belanja langsung dengan highlight produk
+4. **Pendidikan**: Kelas langsung dengan konten timed
+5. **Hiburan**: Konser, pertunjukan dengan interaksi penonton
+
+## Praktik Terbaik
+
+1. **Penanganan Jaringan**: Pantau kualitas koneksi
+   ```typescript
+   IvsPlayer.addListener('onError', (event) => {
+     if (event.error.includes('network')) {
+       // Tangani error jaringan
+       showRetryButton();
+     }
+   });
+   ```
+
+2. **Manajemen Resource**: Selalu hancurkan player saat selesai
+3. **Kebijakan Autoplay**: Mulai muted untuk autoplay yang andal
+4. **Pemilihan Kualitas**: Biarkan IVS menangani pergantian kualitas otomatis
+
+## Pemecahan Masalah
+
+**Stream tidak diputar:**
+- Verifikasi URL pemutaran IVS valid
+- Periksa izin jaringan
+- Pastikan stream sedang live
+
+**Latensi tinggi:**
+- IVS dioptimalkan untuk latensi rendah, periksa pengaturan encoder Anda
+- Verifikasi Anda menggunakan URL pemutaran khusus IVS
+
+**Masalah kualitas:**
+- Izinkan pergantian kualitas otomatis
+- Periksa persyaratan bandwidth jaringan

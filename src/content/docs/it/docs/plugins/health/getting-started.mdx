@@ -1,0 +1,86 @@
+---
+title: Iniziare
+description: Abilita l'accesso a HealthKit e Health Connect con il plugin Capgo Health.
+locale: it
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il plugin**
+   <PackageManagers pkg="@capgo/capacitor-health" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Configurazione iOS
+
+- Apri `ios/App/App.xcworkspace` in Xcode e abilita la capacità **HealthKit**.
+- Fornisci descrizioni d'uso in `Info.plist`:
+
+```xml
+<key>NSHealthShareUsageDescription</key>
+<string>Questa app legge le tue metriche di salute per personalizzare la tua esperienza.</string>
+<key>NSHealthUpdateUsageDescription</key>
+<string>Questa app scrive dati sanitari che registri esplicitamente.</string>
+```
+
+## Configurazione Android
+
+I dati sanitari sono alimentati da [Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect). Assicurati che:
+
+- `minSdkVersion` sia **26 o superiore** (Capacitor 5 soddisfa già questo requisito).
+- Gli utenti abbiano Health Connect installato (Android 14+ lo include; le versioni precedenti richiedono un download dal Play Store).
+- Guidi gli utenti attraverso l'interfaccia dei permessi di runtime quando richiedi l'accesso.
+
+## Verifica disponibilità e richiedi accesso
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+const { available, reason } = await Health.isAvailable();
+if (!available) {
+  console.warn('Health APIs unavailable:', reason);
+  return;
+}
+
+await Health.requestAuthorization({
+  read: ['steps', 'heartRate', 'weight'],
+  write: ['weight'],
+});
+```
+
+## Leggi campioni
+
+```typescript
+const { samples } = await Health.readSamples({
+  dataType: 'steps',
+  startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  endDate: new Date().toISOString(),
+  limit: 200,
+});
+
+samples.forEach((sample) => {
+  console.log(sample.value, sample.startDate, sample.endDate);
+});
+```
+
+## Scrivi campioni
+
+```typescript
+await Health.saveSample({
+  dataType: 'weight',
+  value: 74.6,
+  startDate: new Date().toISOString(),
+});
+```
+
+## Gestione autorizzazioni
+
+- Usa `checkAuthorization()` per verificare gli attuali ambiti di lettura/scrittura e regolare la tua interfaccia.
+- Gestisci i rifiuti con attenzione spiegando perché i dati migliorano l'esperienza e offrendo un nuovo tentativo.
+- Rispetta sempre la privacy dell'utente e richiedi solo gli ambiti minimi richiesti dalla tua funzionalità.

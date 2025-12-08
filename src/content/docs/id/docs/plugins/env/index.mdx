@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-env"
+locale: id
+description: Ekspos nilai konfigurasi dari `capacitor.config` saat runtime untuk aplikasi white-label dan multitenant.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+hero:
+  tagline: Kirim pengaturan khusus tenant tanpa build baru dengan membaca nilai konfigurasi aman langsung dari Capacitor.
+  image:
+    file: ~public/settings-go.webp
+  actions:
+    - text: Memulai
+      link: /docs/plugins/env/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-env/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Env memungkinkan Anda menyimpan rahasia dan konfigurasi per-build di dalam `capacitor.config.*` dan mengambilnya saat runtime melalui API sederhana.
+
+<CardGrid stagger>
+  <Card title="Konfigurasi runtime" icon="rocket">
+    Baca nilai dari file konfigurasi native tanpa mengirimkannya dalam bundle JavaScript Anda.
+  </Card>
+  <Card title="Override per build" icon="rocket">
+    Buat beberapa flavor atau tenant aplikasi dengan menyediakan file konfigurasi yang berbeda.
+  </Card>
+  <Card title="Akses typesafe" icon="pencil">
+    Ambil kunci dengan dukungan TypeScript dan pusatkan logika fallback.
+  </Card>
+  <Card title="Aman secara default" icon="approve-check">
+    Jaga kunci API dan rahasia keluar dari Git sambil tetap mengirimkannya dengan binary native.
+  </Card>
+</CardGrid>
+
+Ikuti panduan memulai untuk mendeklarasikan kunci dalam konfigurasi Capacitor Anda dan ambil mereka dengan aman di berbagai platform.

@@ -1,0 +1,549 @@
+---
+title: Integrazione con GitHub Actions
+description: "Scopri come integrare Capgo Live Updates con GitHub Actions per la distribuzione automatizzata degli aggiornamenti della tua app."
+sidebar:
+  order: 3
+locale: it
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Integra Capgo Live Updates con GitHub Actions per distribuire automaticamente gli aggiornamenti della tua app ogni volta che apporti modifiche al codice. Questa guida copre la configurazione di workflow automatizzati di build, test e distribuzione utilizzando la potente piattaforma CI/CD di GitHub.
+
+## Prerequisiti
+
+Prima di configurare l'integrazione con GitHub Actions, assicurati di avere:
+
+- Un repository GitHub con il codice sorgente della tua app
+- Un account Capgo con un'app configurata
+- Node.js e npm/yarn configurati nel tuo progetto
+- GitHub Actions abilitato per il tuo repository
+
+## Configurazione dei segreti GitHub
+
+### Passaggio 1: Configurare i segreti del repository
+
+Configura i segreti necessari nel tuo repository GitHub:
+
+<Steps>
+
+1. Naviga nel tuo repository GitHub
+2. Vai su **Settings** → **Secrets and variables** → **Actions**
+3. Clicca su **New repository secret** e aggiungi quanto segue:
+
+</Steps>
+
+| Nome Segreto | Valore |
+|-------------|-------|
+| `CAPGO_TOKEN` | Il tuo token API Capgo |
+
+<Aside type="tip">
+
+Ottieni il tuo token API Capgo da [console.capgo.app/apikeys](https://console.capgo.app/apikeys). L'ID della tua app è già configurato nel tuo file `capacitor.config.ts`.
+
+</Aside>
+
+## Distribuzione semplice in produzione
+
+Inizia con questa configurazione di base che distribuisce in produzione ad ogni push sul branch main:
+
+```yaml
+# Workflow GitHub Actions semplice per Capgo Live Updates
+name: Distribuzione su Capgo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configurazione Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Installazione, test e build
+        run: |
+          npm ci
+          npm run test
+          npm run build
+
+             - name: Distribuzione su Capgo
+         run: |
+           npm install -g @capgo/cli
+           npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+           # Per caricamenti crittografati, aggiungi: --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
+```
+
+## Configurazione avanzata multi-canale
+
+### Distribuzioni dei branch di funzionalità
+
+Distribuisci branch di funzionalità su canali temporanei per il testing:
+
+```yaml
+# Distribuzione dei branch di funzionalità
+name: Distribuzione branch di funzionalità su Capgo
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  deploy-feature:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: |
+          npm ci
+          npm run test
+          npm run build
+
+      - name: Distribuzione su canale di funzionalità
+        run: |
+          CHANNEL_NAME=$(echo "${{ github.ref_name }}" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
+          npm install -g @capgo/cli
+          npx @capgo/cli channel create $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+                     npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
+```
+
+### Utilizzo della crittografia
+
+Se stai utilizzando la [funzionalità di crittografia di Capgo](/docs/live-updates/encryption/), dovrai archiviare la tua chiave privata in modo sicuro nel tuo ambiente CI/CD.
+
+Dopo aver [configurato le chiavi di crittografia](/docs/live-updates/encryption/#setting-up-encryption) localmente, aggiungi la tua chiave privata ai segreti di GitHub:
+
+```shell
+# Visualizza il contenuto della tua chiave privata (copia questo output)
+cat .capgo_key_v2
+```
+
+Aggiungi questo contenuto come `CAPGO_PRIVATE_KEY` nei segreti del repository GitHub, quindi usalo nei workflow:
+
+```yaml
+# Distribuzione con crittografia
+- name: Distribuzione su Capgo con crittografia
+  run: |
+    npm install -g @capgo/cli
+    npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}" --channel production
+```
+
+<Aside type="caution">
+
+**Best practice di sicurezza:**
+- Non committare mai il file `.capgo_key_v2` nel controllo versione
+- Archivia la chiave privata solo nella gestione sicura dei segreti CI/CD
+- Usa chiavi diverse per ambienti diversi
+
+</Aside>
+
+### Configurazione multi-canale
+
+Per informazioni complete sulla configurazione e gestione di più canali di distribuzione, consulta la [documentazione sui canali](/docs/live-updates/channels/).
+
+Workflow completo con distribuzioni su development, pull request e produzione:
+
+```yaml
+# Workflow multi-ambiente completo
+name: Distribuzione su Capgo
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: |
+          npm ci
+          npm run test
+          npm run build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  deploy-development:
+    if: github.ref == 'refs/heads/develop'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel development
+
+  deploy-pr:
+    if: github.event_name == 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Distribuzione su canale PR
+        run: |
+          CHANNEL_NAME="pr-${{ github.event.number }}"
+          npm install -g @capgo/cli
+          npx @capgo/cli channel create $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel $CHANNEL_NAME
+
+      - name: Commento sulla PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 Questa PR è stata distribuita sul canale Capgo: \`pr-${{ github.event.number }}\`\n\nPer testare questo aggiornamento nella tua app, configurala per usare questo canale. [Scopri come configurare i canali →](/docs/live-updates/channels/#configuring-the-channel-in-your-app)`
+            })
+
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload --apikey ${{ secrets.CAPGO_TOKEN }} --channel production
+```
+
+<Aside type="tip">
+
+**Testing con i canali**: Dopo aver distribuito su un canale PR o development, puoi testare l'aggiornamento nella tua app configurandola per usare quel canale specifico. Scopri di più sulla [configurazione dei canali nella tua app](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+
+</Aside>
+
+### Pulizia dei canali di funzionalità
+
+Pulisci automaticamente i canali di funzionalità quando i branch vengono eliminati:
+
+```yaml
+name: Pulizia canali di funzionalità
+
+on:
+  delete:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch' && startsWith(github.event.ref, 'feature/')
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Eliminazione canale Capgo
+        run: |
+          CHANNEL_NAME=$(echo "${{ github.event.ref }}" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
+          npm install -g @capgo/cli
+          npx @capgo/cli channel delete $CHANNEL_NAME --apikey ${{ secrets.CAPGO_TOKEN }} || true
+```
+
+## Sicurezza e best practice
+
+### Regole di protezione degli ambienti
+
+Configura le regole di protezione degli ambienti in GitHub:
+
+<Steps>
+
+1. Vai su **Settings** → **Environments** nel tuo repository
+2. Crea gli ambienti: `development`, `staging`, `production`
+3. Per l'ambiente di produzione, aggiungi:
+   - **Required reviewers**: Aggiungi i membri del team che devono approvare le distribuzioni
+   - **Wait timer**: Aggiungi un ritardo prima della distribuzione (opzionale)
+   - **Deployment branches**: Limita solo al branch `main`
+
+</Steps>
+
+### Gestione sicura dei segreti
+
+Usa segreti specifici per ambiente:
+
+```yaml
+# Usa segreti diversi per ogni ambiente
+deploy-production:
+  environment: production
+  steps:
+    - name: Distribuzione su produzione
+      run: |
+        npx @capgo/cli bundle upload \
+          --apikey ${{ secrets.CAPGO_PROD_TOKEN }} \
+          --app ${{ secrets.CAPGO_PROD_APP_ID }} \
+          --channel production
+```
+
+## Monitoraggio e notifiche
+
+### Integrazione con Slack
+
+Aggiungi notifiche Slack al tuo workflow:
+
+```yaml
+name: Distribuzione con notifiche
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # ... passaggi di distribuzione
+
+      - name: Notifica Slack in caso di successo
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: '✅ Distribuzione Capgo riuscita!'
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Notifica Slack in caso di fallimento
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: '❌ Distribuzione Capgo fallita!'
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+```
+
+### Integrazione con Discord
+
+Invia notifiche a Discord:
+
+```yaml
+- name: Notifica Discord
+  if: always()
+  uses: Ilshidur/action-discord@master
+  with:
+    args: |
+      Distribuzione Capgo ${{ job.status }}!
+      App: ${{ secrets.CAPGO_APP_ID }}
+      Canale: ${{ github.ref_name }}
+      Commit: ${{ github.sha }}
+  env:
+    DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+```
+
+### Notifiche via email
+
+Configura le notifiche via email:
+
+```yaml
+- name: Invio notifica via email
+  if: failure()
+  uses: dawidd6/action-send-mail@v3
+  with:
+    server_address: smtp.gmail.com
+    server_port: 465
+    username: ${{ secrets.EMAIL_USERNAME }}
+    password: ${{ secrets.EMAIL_PASSWORD }}
+    subject: 'Distribuzione Capgo fallita - ${{ github.repository }}'
+    to: team@yourcompany.com
+    from: ci-cd@yourcompany.com
+    body: |
+      Distribuzione fallita per ${{ github.repository }}
+      Branch: ${{ github.ref_name }}
+      Commit: ${{ github.sha }}
+      Workflow: ${{ github.workflow }}
+```
+
+## Risoluzione dei problemi
+
+### Debug del workflow
+
+Aggiungi passaggi di debug per risolvere i problemi:
+
+```yaml
+- name: Debug ambiente
+  run: |
+    echo "Versione Node: $(node --version)"
+    echo "Versione NPM: $(npm --version)"
+    echo "Directory di lavoro: $(pwd)"
+    echo "File in dist/: $(ls -la dist/ || echo 'Nessuna directory dist')"
+    echo "Variabili d'ambiente:"
+    env | grep -E "(GITHUB_|CAPGO_)" | sort
+
+- name: Test Capgo CLI
+  run: |
+    npx @capgo/cli --version
+    npx @capgo/cli app debug --apikey ${{ secrets.CAPGO_TOKEN }} --app ${{ secrets.CAPGO_APP_ID }}
+```
+
+### Problemi comuni e soluzioni
+
+**Il workflow fallisce con "CAPGO_TOKEN non trovato":**
+
+```yaml
+- name: Verifica segreti
+  run: |
+    if [ -z "${{ secrets.CAPGO_TOKEN }}" ]; then
+      echo "ERRORE: Il segreto CAPGO_TOKEN non è impostato"
+      exit 1
+    fi
+    echo "CAPGO_TOKEN è impostato (lunghezza: ${#CAPGO_TOKEN})"
+  env:
+    CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+```
+
+**Artefatti di build non trovati:**
+
+```yaml
+- name: Debug artefatti
+  run: |
+    echo "Verifica degli artefatti di build..."
+    ls -la dist/ || echo "Directory dist non trovata"
+    find . -name "*.js" -o -name "*.html" | head -10
+```
+
+**Problemi di connettività di rete:**
+
+```yaml
+- name: Test connettività
+  run: |
+    ping -c 3 api.capgo.io || echo "Ping fallito"
+    curl -I https://api.capgo.io/health || echo "Health check fallito"
+```
+
+## Workflow riutilizzabili
+
+Crea workflow riutilizzabili per coerenza tra i progetti:
+
+```yaml
+# .github/workflows/reusable-capgo-deploy.yml
+name: Distribuzione Capgo riutilizzabile
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      channel:
+        required: true
+        type: string
+    secrets:
+      CAPGO_TOKEN:
+        required: true
+      CAPGO_APP_ID:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Configurazione Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Installazione e build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Distribuzione su Capgo
+        run: |
+          npm install -g @capgo/cli
+          npx @capgo/cli bundle upload \
+            --apikey ${{ secrets.CAPGO_TOKEN }} \
+            --app ${{ secrets.CAPGO_APP_ID }} \
+            --channel ${{ inputs.channel }}
+```
+
+Usa il workflow riutilizzabile:
+
+```yaml
+# .github/workflows/deploy.yml
+name: Distribuzione app
+
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  deploy-dev:
+    if: github.ref == 'refs/heads/develop'
+    uses: ./.github/workflows/reusable-capgo-deploy.yml
+    with:
+      environment: development
+      channel: development
+    secrets:
+      CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      CAPGO_APP_ID: ${{ secrets.CAPGO_APP_ID }}
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/reusable-capgo-deploy.yml
+    with:
+      environment: production
+      channel: production
+    secrets:
+      CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+      CAPGO_APP_ID: ${{ secrets.CAPGO_APP_ID }}
+```
+
+## Prossimi passi
+
+- Scopri i [Canali](/docs/live-updates/channels/) per gestire diversi ambienti di distribuzione
+- Esplora lo [Storage personalizzato](/docs/live-updates/custom-storage/) per scenari di distribuzione avanzati
+- Configura la [Crittografia](/docs/live-updates/encryption/) per distribuzioni sicure
+- Configura il [Comportamento degli aggiornamenti](/docs/live-updates/update-behavior/) per personalizzare come vengono applicati gli aggiornamenti
+
+Con l'integrazione GitHub Actions, puoi sfruttare la potente piattaforma CI/CD di GitHub per creare workflow di distribuzione sofisticati con sicurezza integrata, monitoraggio e funzionalità di collaborazione per i tuoi Capgo Live Updates.

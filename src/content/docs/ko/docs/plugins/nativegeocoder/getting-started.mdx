@@ -1,0 +1,354 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor 앱에서 주소 및 좌표 변환을 위한 Native Geocoder 플러그인 설치 및 사용 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/nativegeocoder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **권한 구성**
+
+   ### iOS
+   `Info.plist`에 위치 사용 설명을 추가하세요:
+   ```xml
+   <key>NSLocationWhenInUseUsageDescription</key>
+   <string>To convert addresses to coordinates</string>
+   ```
+
+   ### Android
+   `AndroidManifest.xml`에 권한을 추가하세요:
+   ```xml
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+   ```
+</Steps>
+
+## 사용법
+
+플러그인을 가져와서 지오코딩 메서드를 사용하세요:
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+
+// 정방향 지오코딩: 주소를 좌표로 변환
+const forwardGeocode = async () => {
+  const results = await NativeGeocoder.forwardGeocode({
+    addressString: '1600 Amphitheatre Parkway, Mountain View, CA',
+    useLocale: true,
+    maxResults: 1
+  });
+
+  const location = results.addresses[0];
+  console.log('Latitude:', location.latitude);
+  console.log('Longitude:', location.longitude);
+};
+
+// 역방향 지오코딩: 좌표를 주소로 변환
+const reverseGeocode = async () => {
+  const results = await NativeGeocoder.reverseGeocode({
+    latitude: 37.4220656,
+    longitude: -122.0840897,
+    useLocale: true,
+    maxResults: 1
+  });
+
+  const address = results.addresses[0];
+  console.log('Street:', address.thoroughfare);
+  console.log('City:', address.locality);
+  console.log('Country:', address.countryName);
+};
+```
+
+## API 참조
+
+### forwardGeocode(options)
+
+주소 문자열을 지리적 좌표로 변환합니다.
+
+```typescript
+interface ForwardGeocodeOptions {
+  addressString: string;
+  useLocale?: boolean;
+  maxResults?: number;
+  apiKey?: string; // Android only
+}
+
+interface GeocodeResult {
+  addresses: Address[];
+}
+
+interface Address {
+  latitude: number;
+  longitude: number;
+  countryCode?: string;
+  countryName?: string;
+  postalCode?: string;
+  administrativeArea?: string;
+  subAdministrativeArea?: string;
+  locality?: string;
+  subLocality?: string;
+  thoroughfare?: string;
+  subThoroughfare?: string;
+}
+```
+
+### reverseGeocode(options)
+
+지리적 좌표를 주소 정보로 변환합니다.
+
+```typescript
+interface ReverseGeocodeOptions {
+  latitude: number;
+  longitude: number;
+  useLocale?: boolean;
+  maxResults?: number;
+  apiKey?: string; // Android only
+}
+```
+
+## 완전한 예제
+
+### 오류 처리가 포함된 주소 검색
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+
+export class GeocodingService {
+  async searchAddress(address: string): Promise<{lat: number, lng: number} | null> {
+    try {
+      const results = await NativeGeocoder.forwardGeocode({
+        addressString: address,
+        useLocale: true,
+        maxResults: 5
+      });
+
+      if (results.addresses.length > 0) {
+        const location = results.addresses[0];
+        return {
+          lat: location.latitude,
+          lng: location.longitude
+        };
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Geocoding failed:', error);
+      return null;
+    }
+  }
+
+  async getAddressFromCoordinates(lat: number, lng: number): Promise<string | null> {
+    try {
+      const results = await NativeGeocoder.reverseGeocode({
+        latitude: lat,
+        longitude: lng,
+        useLocale: true,
+        maxResults: 1
+      });
+
+      if (results.addresses.length > 0) {
+        const address = results.addresses[0];
+        return this.formatAddress(address);
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Reverse geocoding failed:', error);
+      return null;
+    }
+  }
+
+  private formatAddress(address: Address): string {
+    const parts = [
+      address.subThoroughfare,
+      address.thoroughfare,
+      address.locality,
+      address.administrativeArea,
+      address.postalCode,
+      address.countryName
+    ].filter(part => part != null && part !== '');
+
+    return parts.join(', ');
+  }
+}
+```
+
+### 위치 선택기 컴포넌트
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { Geolocation } from '@capacitor/geolocation';
+
+export class LocationPicker {
+  currentLocation: { lat: number; lng: number } | null = null;
+  currentAddress: string = '';
+
+  async getCurrentLocation() {
+    try {
+      // 현재 좌표 가져오기
+      const position = await Geolocation.getCurrentPosition();
+      this.currentLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      // 좌표에 대한 주소 가져오기
+      const results = await NativeGeocoder.reverseGeocode({
+        latitude: this.currentLocation.lat,
+        longitude: this.currentLocation.lng,
+        useLocale: true,
+        maxResults: 1
+      });
+
+      if (results.addresses.length > 0) {
+        const address = results.addresses[0];
+        this.currentAddress = [
+          address.thoroughfare,
+          address.locality,
+          address.countryName
+        ].filter(Boolean).join(', ');
+      }
+    } catch (error) {
+      console.error('Failed to get location:', error);
+    }
+  }
+
+  async searchLocation(query: string) {
+    try {
+      const results = await NativeGeocoder.forwardGeocode({
+        addressString: query,
+        useLocale: true,
+        maxResults: 10
+      });
+
+      return results.addresses.map(address => ({
+        coordinates: {
+          lat: address.latitude,
+          lng: address.longitude
+        },
+        displayName: this.formatDisplayName(address)
+      }));
+    } catch (error) {
+      console.error('Search failed:', error);
+      return [];
+    }
+  }
+
+  private formatDisplayName(address: Address): string {
+    const mainPart = [
+      address.thoroughfare,
+      address.locality
+    ].filter(Boolean).join(', ');
+
+    const subPart = [
+      address.administrativeArea,
+      address.countryName
+    ].filter(Boolean).join(', ');
+
+    return mainPart + (subPart ? ` (${subPart})` : '');
+  }
+}
+```
+
+## 모범 사례
+
+1. **먼저 권한 요청**
+   ```typescript
+   import { Geolocation } from '@capacitor/geolocation';
+
+   const requestPermissions = async () => {
+     const permissions = await Geolocation.requestPermissions();
+     if (permissions.location !== 'granted') {
+       throw new Error('Location permission required');
+     }
+   };
+   ```
+
+2. **오류를 우아하게 처리**
+   ```typescript
+   try {
+     const results = await NativeGeocoder.forwardGeocode({
+       addressString: address
+     });
+   } catch (error) {
+     // 특정 오류 케이스 처리
+     if (error.message.includes('network')) {
+       console.error('Network error');
+     } else if (error.message.includes('permission')) {
+       console.error('Permission denied');
+     }
+   }
+   ```
+
+3. **maxResults를 현명하게 사용**
+   - 사용자 검색용: 5-10개 결과 사용
+   - 자동 변환용: 1개 결과 사용
+   - 더 많은 결과 = 느린 응답
+
+4. **가능한 경우 결과 캐싱**
+   ```typescript
+   const geocodeCache = new Map();
+
+   async function geocodeWithCache(address: string) {
+     if (geocodeCache.has(address)) {
+       return geocodeCache.get(address);
+     }
+
+     const result = await NativeGeocoder.forwardGeocode({
+       addressString: address
+     });
+
+     geocodeCache.set(address, result);
+     return result;
+   }
+   ```
+
+## 플랫폼 차이점
+
+### iOS
+- CoreLocation의 `CLGeocoder` 사용
+- API 키 불필요
+- 자동으로 사용자의 로케일 준수
+
+### Android
+- Android Geocoder API 사용
+- 더 나은 결과를 위한 선택적 Google API 키
+- Google의 웹 서비스로 폴백할 수 있음
+
+### API 키 구성 (Android)
+
+Android에서 더 나은 결과를 위해 Google API 키를 제공할 수 있습니다:
+
+```typescript
+await NativeGeocoder.forwardGeocode({
+  addressString: address,
+  apiKey: 'YOUR_GOOGLE_API_KEY' // Android only
+});
+```
+
+## 일반적인 문제
+
+1. **결과가 반환되지 않음**
+   - 인터넷 연결 확인
+   - 주소 형식 확인
+   - 더 일반적인 주소로 시도
+
+2. **권한 오류**
+   - 위치 권한이 부여되었는지 확인
+   - Info.plist/AndroidManifest.xml 확인
+
+3. **부정확한 결과**
+   - 더 구체적인 주소 사용
+   - 가능한 경우 우편번호 포함
+   - 정확한 위치를 위해 좌표 사용 고려

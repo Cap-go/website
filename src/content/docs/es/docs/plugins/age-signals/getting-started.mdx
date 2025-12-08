@@ -1,0 +1,509 @@
+---
+title: Comenzando
+description: Aprende cómo instalar y usar el plugin Age Signals para detectar cuentas supervisadas y usuarios verificados en tu aplicación Android.
+sidebar:
+  order: 2
+locale: es
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Aside type="caution">
+Este plugin es **solo para Android** y requiere Google Play Services. No funcionará en iOS, web o dispositivos Android sin Google Play Store.
+</Aside>
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-android-age-signals" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con el proyecto Android**
+   <PackageManagers type="exec" pkg="cap" args="sync android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Requisitos previos
+
+- Dispositivo Android con Google Play Services
+- Nivel mínimo de Android API 21 (Android 5.0)
+- Google Play Store instalado en el dispositivo
+
+## Uso
+
+### Verificar Age Signals
+
+```typescript
+import { AgeSignals, UserStatus } from '@capgo/capacitor-android-age-signals';
+
+try {
+  const result = await AgeSignals.checkAgeSignals();
+
+  console.log('User status:', result.userStatus);
+
+  switch (result.userStatus) {
+    case UserStatus.Verified:
+      console.log('User is 18+ and verified by Google');
+      // Allow access to age-restricted content
+      break;
+
+    case UserStatus.Supervised:
+      console.log(`Supervised user aged ${result.ageLower}-${result.ageUpper}`);
+      // Apply age-appropriate restrictions
+      break;
+
+    case UserStatus.SupervisedApprovalPending:
+      console.log('Waiting for guardian approval');
+      console.log('Pending since:', result.mostRecentApprovalDate);
+      // Inform user to wait for guardian approval
+      break;
+
+    case UserStatus.SupervisedApprovalDenied:
+      console.log('Guardian denied access');
+      console.log('Last approval:', result.mostRecentApprovalDate);
+      // Block access or show alternative content
+      break;
+
+    case UserStatus.Unknown:
+      console.log('User status unknown - prompt to verify in Play Store');
+      // Guide user to verify their age in Google Play
+      break;
+
+    case UserStatus.Empty:
+      console.log('No age signal available');
+      // Handle as unverified user
+      break;
+  }
+} catch (error) {
+  console.error('Failed to check age signals:', error);
+}
+```
+
+### Manejar usuarios supervisados
+
+```typescript
+async function handleSupervisedUser() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.Supervised) {
+    const age = result.ageLower;
+
+    if (age < 13) {
+      // Apply COPPA restrictions
+      console.log('User is under 13 - COPPA applies');
+      disableDataCollection();
+      disableSocialFeatures();
+      requireParentalConsent();
+    } else if (age < 18) {
+      // Apply teen restrictions
+      console.log('User is 13-17 - Teen restrictions apply');
+      enableModeratedSocialFeatures();
+      restrictAds();
+    }
+
+    // Track install ID for revocation notifications
+    console.log('Install ID:', result.installId);
+    saveInstallId(result.installId);
+  }
+}
+```
+
+### Implementar control de edad
+
+```typescript
+async function ageGate() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  // Allow verified 18+ users
+  if (result.userStatus === UserStatus.Verified) {
+    return true;
+  }
+
+  // Check supervised user age
+  if (result.userStatus === UserStatus.Supervised) {
+    return result.ageUpper >= 18;
+  }
+
+  // Block users with pending or denied approvals
+  if (
+    result.userStatus === UserStatus.SupervisedApprovalPending ||
+    result.userStatus === UserStatus.SupervisedApprovalDenied
+  ) {
+    return false;
+  }
+
+  // For unknown/empty, implement fallback age verification
+  return await showAgeVerificationDialog();
+}
+```
+
+### Monitorear estado de aprobación
+
+```typescript
+async function checkApprovalStatus() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.SupervisedApprovalPending) {
+    console.log('Guardian approval pending');
+    console.log('Age range:', result.ageLower, '-', result.ageUpper);
+    console.log('Most recent approval:', result.mostRecentApprovalDate);
+
+    // Show message to user
+    showMessage(
+      'Your guardian needs to approve this app. ' +
+      'We notified them on ' + result.mostRecentApprovalDate
+    );
+  } else if (result.userStatus === UserStatus.SupervisedApprovalDenied) {
+    console.log('Guardian denied approval');
+    console.log('Last approved on:', result.mostRecentApprovalDate);
+
+    // Show blocked message
+    showMessage(
+      'Your guardian did not approve this app. ' +
+      'Contact them for more information.'
+    );
+  }
+}
+```
+
+## Referencia de API
+
+### checkAgeSignals()
+
+Solicita las señales de edad actuales de Play para el usuario activo.
+
+```typescript
+const result = await AgeSignals.checkAgeSignals();
+```
+
+**Retorna:**
+
+```typescript
+interface CheckAgeSignalsResult {
+  userStatus: UserStatus;
+  ageLower?: number;
+  ageUpper?: number;
+  mostRecentApprovalDate?: string;
+  installId?: string;
+}
+```
+
+### Enum UserStatus
+
+```typescript
+enum UserStatus {
+  Verified = 'VERIFIED',                           // 18+ verified
+  Supervised = 'SUPERVISED',                       // Supervised account
+  SupervisedApprovalPending = 'SUPERVISED_APPROVAL_PENDING',
+  SupervisedApprovalDenied = 'SUPERVISED_APPROVAL_DENIED',
+  Unknown = 'UNKNOWN',                             // Unknown status
+  Empty = 'EMPTY'                                  // No signal
+}
+```
+
+## Campos del resultado
+
+### userStatus
+
+El estado de verificación del usuario según lo reportado por Google Play.
+
+- **Verified**: El usuario tiene más de 18 años y está verificado por Google
+- **Supervised**: El usuario tiene una cuenta de Google supervisada
+- **SupervisedApprovalPending**: Aprobación del tutor pendiente para cambios
+- **SupervisedApprovalDenied**: El tutor denegó el acceso a la aplicación
+- **Unknown**: El usuario debe verificar el estado en Play Store
+- **Empty**: Todos los demás usuarios (estado predeterminado)
+
+### ageLower
+
+Límite inferior inclusivo del rango de edad del usuario supervisado.
+
+Solo presente cuando `userStatus` es:
+- `SUPERVISED`
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+### ageUpper
+
+Límite superior inclusivo del rango de edad del usuario supervisado.
+
+Solo presente cuando:
+- `userStatus` es uno de los estados supervisados
+- La edad del usuario se reporta como menor de 18
+
+### mostRecentApprovalDate
+
+Cadena de fecha para el cambio significativo más reciente que recibió aprobación del tutor.
+
+Solo presente cuando `userStatus` es:
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+Formato: Cadena de fecha ISO 8601
+
+### installId
+
+Identificador asignado a las instalaciones supervisadas en Google Play.
+
+Utilizado para notificaciones de revocación cuando el tutor revoca la aprobación de la aplicación.
+
+Solo presente cuando `userStatus` es:
+- `SUPERVISED`
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+## Casos de uso
+
+### 1. Cumplimiento de COPPA
+
+```typescript
+async function applyCoppaRestrictions() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.Supervised && result.ageLower < 13) {
+    // Disable data collection
+    disableAnalytics();
+    disableAdvertising();
+
+    // Disable social features
+    hideChatFeatures();
+    disableUserProfiles();
+
+    // Require verifiable parental consent
+    await requestParentalConsent(result.installId);
+  }
+}
+```
+
+### 2. Contenido apropiado para la edad
+
+```typescript
+async function filterContent() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  let contentRating;
+
+  if (result.userStatus === UserStatus.Verified) {
+    contentRating = 'MATURE';
+  } else if (result.userStatus === UserStatus.Supervised) {
+    if (result.ageUpper < 13) {
+      contentRating = 'EVERYONE';
+    } else if (result.ageUpper < 18) {
+      contentRating = 'TEEN';
+    } else {
+      contentRating = 'MATURE';
+    }
+  } else {
+    contentRating = 'TEEN'; // Default safe rating
+  }
+
+  loadContentForRating(contentRating);
+}
+```
+
+### 3. Panel de tutor
+
+```typescript
+async function getGuardianInfo() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (
+    result.userStatus === UserStatus.Supervised ||
+    result.userStatus === UserStatus.SupervisedApprovalPending ||
+    result.userStatus === UserStatus.SupervisedApprovalDenied
+  ) {
+    return {
+      isSupervised: true,
+      ageRange: `${result.ageLower}-${result.ageUpper}`,
+      approvalStatus: result.userStatus,
+      lastApprovalDate: result.mostRecentApprovalDate,
+      installId: result.installId,
+    };
+  }
+
+  return { isSupervised: false };
+}
+```
+
+## Ejemplo completo
+
+```typescript
+import { AgeSignals, UserStatus } from '@capgo/capacitor-android-age-signals';
+
+export class AgeVerificationService {
+  async verifyAge(): Promise<{
+    allowed: boolean;
+    reason: string;
+    restrictions: string[];
+  }> {
+    try {
+      const result = await AgeSignals.checkAgeSignals();
+
+      switch (result.userStatus) {
+        case UserStatus.Verified:
+          return {
+            allowed: true,
+            reason: 'User is verified 18+',
+            restrictions: [],
+          };
+
+        case UserStatus.Supervised:
+          return this.handleSupervised(result);
+
+        case UserStatus.SupervisedApprovalPending:
+          return {
+            allowed: false,
+            reason: 'Waiting for guardian approval',
+            restrictions: ['Guardian approval required'],
+          };
+
+        case UserStatus.SupervisedApprovalDenied:
+          return {
+            allowed: false,
+            reason: 'Guardian denied access',
+            restrictions: ['Access denied by guardian'],
+          };
+
+        case UserStatus.Unknown:
+          return {
+            allowed: false,
+            reason: 'Age verification required',
+            restrictions: ['Verify age in Google Play'],
+          };
+
+        case UserStatus.Empty:
+        default:
+          return {
+            allowed: false,
+            reason: 'No age signal available',
+            restrictions: ['Age verification needed'],
+          };
+      }
+    } catch (error) {
+      console.error('Age verification failed:', error);
+      return {
+        allowed: false,
+        reason: 'Verification error',
+        restrictions: ['Try again later'],
+      };
+    }
+  }
+
+  private handleSupervised(result: any) {
+    const age = result.ageLower;
+    const restrictions: string[] = [];
+
+    if (age < 13) {
+      restrictions.push('No data collection (COPPA)');
+      restrictions.push('No social features');
+      restrictions.push('Parental consent required');
+      return {
+        allowed: false,
+        reason: `User is under 13 (${result.ageLower}-${result.ageUpper})`,
+        restrictions,
+      };
+    } else if (age < 18) {
+      restrictions.push('Age-appropriate content only');
+      restrictions.push('Moderated social features');
+      return {
+        allowed: true,
+        reason: `Teen user (${result.ageLower}-${result.ageUpper})`,
+        restrictions,
+      };
+    } else {
+      return {
+        allowed: true,
+        reason: `Adult supervised user (${result.ageLower}+)`,
+        restrictions: [],
+      };
+    }
+  }
+
+  async saveInstallId(installId: string) {
+    // Store install ID for revocation handling
+    localStorage.setItem('ageSignalsInstallId', installId);
+  }
+
+  async checkRevocation() {
+    const result = await AgeSignals.checkAgeSignals();
+    const storedId = localStorage.getItem('ageSignalsInstallId');
+
+    if (result.installId && storedId && result.installId !== storedId) {
+      // Install ID changed - likely revoked and reinstalled
+      console.log('App was revoked and reinstalled');
+      return true;
+    }
+
+    return false;
+  }
+}
+```
+
+## Mejores prácticas
+
+1. **Verificar al iniciar la aplicación**: Verifica las señales de edad cuando la aplicación se inicia
+2. **Almacenar en caché los resultados**: Almacena en caché los resultados pero actualízalos periódicamente
+3. **Manejar todos los estados**: Implementa lógica para todos los valores de UserStatus
+4. **Respetar las denegaciones**: No permitas el acceso cuando el tutor deniega la aprobación
+5. **Almacenar el ID de instalación**: Rastrea el ID de instalación para la detección de revocaciones
+6. **Lógica de respaldo**: Ten una verificación de edad de respaldo para estados Unknown/Empty
+7. **Privacidad primero**: No recopiles datos innecesarios de usuarios supervisados
+
+## Pautas de cumplimiento
+
+### COPPA (Ley de Protección de la Privacidad en Línea de los Niños)
+
+Para usuarios menores de 13 años:
+- Obtener consentimiento parental verificable
+- Limitar la recopilación de datos
+- Deshabilitar publicidad comportamental
+- Proporcionar controles parentales
+
+### GDPR (Reglamento General de Protección de Datos)
+
+Para usuarios supervisados:
+- Procesar datos legalmente
+- Proporcionar mecanismos de consentimiento del tutor
+- Permitir el acceso y eliminación de datos
+- Implementar privacidad por diseño
+
+## Notas de plataforma
+
+### Android
+- Requiere Google Play Services
+- Nivel mínimo de API 21 (Android 5.0+)
+- Solo funciona en dispositivos con Play Store
+- Las señales pueden no estar disponibles en todas las regiones
+- Los resultados pueden cambiar si el tutor modifica la configuración
+
+### iOS / Web
+- **No compatible** - Este es un plugin solo para Android
+- Lanzará un error si se llama en plataformas no compatibles
+
+## Solución de problemas
+
+### No se devuelve señal (estado Empty)
+
+Esto es normal para:
+- Usuarios fuera de las regiones compatibles
+- Dispositivos sin Google Play Services
+- Usuarios que no han configurado Family Link
+- Cuentas nuevas sin verificación
+
+### Estado Unknown
+
+El usuario debe:
+1. Abrir Google Play Store
+2. Ir a Configuración → Familia
+3. Completar el proceso de verificación de edad
+
+### Problemas de permisos
+
+Asegúrate de:
+- Google Play Services está actualizado
+- La aplicación tiene el nombre de paquete correcto en Play Console
+- Realizar pruebas en un dispositivo real (no en emulador sin Play Services)
+
+## Recursos
+
+- [Documentación de Google Play Age Signals](https://developers.google.com/android/reference/com/google/android/gms/agesignals)
+- [Guía del desarrollador de Family Link](https://developers.google.com/families)
+- [Guía de cumplimiento de COPPA](https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions)

@@ -1,0 +1,76 @@
+---
+title: 시작하기
+locale: ko
+description: 페이지네이션 및 미디어 선택을 통해 네이티브 사진 갤러리를 통합합니다.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **플러그인 설치**
+   <PackageManagers pkg="@capgo/capacitor-photo-library" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **플랫폼 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 플랫폼 권한
+
+- **iOS**: `NSPhotoLibraryUsageDescription`(미디어를 저장하려는 경우 `NSPhotoLibraryAddUsageDescription`)으로 `Info.plist`를 업데이트합니다.
+- **Android**: Android 13+의 경우 사진/비디오 권한(`READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`)을 선언합니다. Capacitor 5가 이를 자동으로 처리하지만 사용자 정의 매니페스트를 다시 확인합니다.
+
+## 액세스 요청
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const { state } = await PhotoLibrary.requestAuthorization();
+if (state !== 'authorized' && state !== 'limited') {
+  throw new Error('사진 액세스 거부됨');
+}
+```
+
+## 갤러리 로드
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+
+const { assets, hasMore, nextPage } = await PhotoLibrary.getLibrary({
+  limit: 100,
+  includeAlbums: false,
+  thumbnailWidth: 256,
+  thumbnailHeight: 256,
+});
+
+const gallery = assets.map((asset) => ({
+  id: asset.id,
+  fileName: asset.fileName,
+  created: asset.creationDate,
+  thumbnailUrl: asset.thumbnail
+    ? asset.thumbnail.webPath ?? Capacitor.convertFileSrc(asset.thumbnail.path)
+    : undefined,
+  photoUrl: asset.file
+    ? asset.file.webPath ?? Capacitor.convertFileSrc(asset.file.path)
+    : undefined,
+}));
+```
+
+추가 페이지를 가져오려면 `PhotoLibrary.getLibrary({ cursor: nextPage })`를 호출합니다.
+
+## 사용자가 미디어를 선택하도록 허용
+
+```typescript
+const selection = await PhotoLibrary.pickMedia({
+  selectionLimit: 5,
+  includeVideos: true,
+});
+
+console.log('사용자가 선택함', selection.assets.length, '항목');
+```
+
+## 캐시된 파일 정리
+
+생성된 썸네일 및 내보내기는 `photoLibrary` 아래의 앱 캐시 디렉터리에 저장됩니다. 저장 공간을 회수해야 할 때 선호하는 파일 API로 제거합니다.

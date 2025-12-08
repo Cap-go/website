@@ -1,0 +1,302 @@
+---
+title: Custom Storage
+description: "Pelajari cara menggunakan solusi penyimpanan kustom dengan Capgo Live Updates, termasuk URL eksternal, integrasi S3, dan enkripsi bundle untuk deployment yang aman."
+sidebar:
+  order: 6
+locale: id
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo mendukung solusi penyimpanan kustom untuk bundle aplikasi Anda, memungkinkan Anda untuk meng-host pembaruan Anda di infrastruktur Anda sendiri atau layanan penyimpanan pihak ketiga. Ini sangat berguna untuk organisasi dengan persyaratan keamanan khusus, kebutuhan kepatuhan, atau infrastruktur penyimpanan yang sudah ada.
+
+## Gambaran Umum
+
+Custom storage di Capgo bekerja dengan mengunggah bundle Anda ke lokasi eksternal dan menyediakan Capgo dengan URL untuk mengaksesnya. SDK Capgo kemudian akan mengunduh pembaruan langsung dari lokasi penyimpanan kustom Anda alih-alih penyimpanan cloud default Capgo.
+
+<Aside type="tip">
+
+Custom storage ideal untuk:
+- Organisasi dengan persyaratan residensi data yang ketat
+- Tim dengan infrastruktur CDN atau penyimpanan yang sudah ada
+- Aplikasi yang memerlukan lapisan keamanan tambahan
+- Optimisasi biaya untuk ukuran bundle yang besar
+
+</Aside>
+
+## Upload URL Eksternal
+
+Cara paling sederhana untuk menggunakan custom storage adalah dengan mengunggah bundle Anda ke URL yang dapat diakses publik dan memberikan URL tersebut ke Capgo.
+
+### Upload URL Eksternal Dasar
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip
+```
+
+Perintah ini memberi tahu Capgo untuk mereferensikan bundle di URL yang ditentukan alih-alih mengunggahnya ke penyimpanan cloud Capgo.
+
+### Dengan Enkripsi
+
+Untuk penyimpanan eksternal yang aman, Anda dapat mengenkripsi bundle Anda dan menyediakan kunci dekripsi:
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip --iv-session-key YOUR_IV_SESSION_KEY
+```
+
+## Integrasi S3
+
+Capgo menyediakan dukungan bawaan untuk Amazon S3 dan layanan penyimpanan yang kompatibel dengan S3. CLI dapat secara otomatis mengunggah bundle Anda ke S3 dan mengkonfigurasi Capgo untuk menggunakan URL S3.
+
+### Opsi Upload S3
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-bucket-name your-bucket-name
+```
+
+### Konfigurasi S3 Lengkap
+
+Untuk layanan yang kompatibel dengan S3 atau endpoint kustom:
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-endpoint https://s3.your-provider.com \
+  --s3-bucket-name your-bucket-name \
+  --s3-port 443 \
+  --no-s3-ssl  # Hanya jika endpoint Anda tidak mendukung SSL
+```
+
+### Parameter Konfigurasi S3
+
+| Parameter | Deskripsi | Diperlukan |
+|-----------|-------------|----------|
+| `--s3-region` | Wilayah AWS untuk bucket S3 Anda | Ya |
+| `--s3-apikey` | ID kunci akses S3 | Ya |
+| `--s3-apisecret` | Kunci akses rahasia S3 | Ya |
+| `--s3-bucket-name` | Nama bucket S3 Anda | Ya |
+| `--s3-endpoint` | URL endpoint S3 kustom | Tidak |
+| `--s3-port` | Port untuk endpoint S3 | Tidak |
+| `--no-s3-ssl` | Nonaktifkan SSL untuk upload S3 | Tidak |
+
+## Persiapan dan Enkripsi Bundle
+
+Saat menggunakan custom storage, terutama dengan enkripsi, Anda perlu mempersiapkan bundle Anda dengan benar. Ini melibatkan pembuatan file zip dan secara opsional mengenkripsinya.
+
+### Langkah 1: Buat Zip Bundle
+
+Pertama, buat file zip dari bundle aplikasi Anda:
+
+```shell
+npx @capgo/cli@latest bundle zip com.example.app --path ./dist
+```
+
+Perintah zip akan mengembalikan checksum dari file zip. Anda dapat menggunakan checksum ini untuk mengenkripsi file zip jika diperlukan. Gunakan opsi `--json` untuk mendapatkan output terstruktur termasuk checksum.
+
+#### Opsi Perintah Zip
+
+```shell
+npx @capgo/cli@latest bundle zip [appId] \
+  --path ./dist \
+  --bundle 1.2.3 \
+  --name myapp-v1.2.3 \
+  --json \
+  --no-code-check \
+  --key-v2 \
+  --package-json ../../package.json,./package.json
+```
+
+| Opsi | Deskripsi |
+|--------|-------------|
+| `--path` | Path ke folder yang akan di-zip (default ke webDir dari capacitor.config) |
+| `--bundle` | Nomor versi bundle untuk memberi nama file zip |
+| `--name` | Nama kustom untuk file zip |
+| `--json` | Output hasil dalam format JSON (termasuk checksum) |
+| `--no-code-check` | Lewati pemeriksaan untuk panggilan notifyAppReady() dan file index |
+| `--key-v2` | Gunakan enkripsi v2 |
+| `--package-json` | Path ke file package.json untuk monorepo (dipisahkan koma) |
+
+### Langkah 2: Enkripsi Bundle (Opsional)
+
+Untuk keamanan yang lebih baik, enkripsi bundle zip Anda sebelum mengunggah:
+
+```shell
+# Menggunakan kunci lokal default
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM
+
+# Menggunakan file kunci kustom
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key ./path/to/.capgo_key_v2
+
+# Menggunakan data kunci secara langsung
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key-data "PRIVATE_KEY_CONTENT"
+```
+
+Parameter `CHECKSUM` diperlukan dan harus berupa checksum dari file zip Anda. Anda dapat mendapatkan checksum dari output perintah zip (gunakan opsi `--json` untuk output terstruktur).
+
+Secara default, perintah encrypt akan menggunakan kunci penandatanganan pribadi lokal Anda. Anda dapat menentukan kunci kustom menggunakan opsi `--key` atau `--key-data`.
+
+Perintah encrypt akan mengembalikan `ivSessionKey` yang diperlukan untuk upload atau dekripsi.
+
+#### Opsi Perintah Enkripsi
+
+| Opsi | Deskripsi |
+|--------|-------------|
+| `zipPath` | Path ke file zip yang akan dienkripsi (wajib) |
+| `checksum` | Checksum dari file zip (wajib) - dapatkan dari perintah zip |
+| `--key` | Path kustom untuk kunci penandatanganan pribadi (opsional, menggunakan kunci lokal secara default) |
+| `--key-data` | Data kunci penandatanganan pribadi secara langsung (opsional) |
+| `--json` | Output hasil dalam format JSON |
+
+<Aside type="caution">
+
+Perintah encrypt akan mengeluarkan `ivSessionKey` yang perlu Anda berikan saat mengunggah dengan opsi `--iv-session-key`.
+
+</Aside>
+
+## Contoh Alur Kerja Lengkap
+
+### Contoh 1: URL Eksternal dengan Enkripsi
+
+<Steps>
+
+1. **Build aplikasi Anda:**
+   ```shell
+   npm run build
+   ```
+
+2. **Buat zip bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --bundle 1.2.3
+   ```
+
+   Catat checksum yang dikembalikan oleh perintah ini.
+
+3. **Enkripsi bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app-1.2.3.zip CHECKSUM_FROM_STEP_2
+   ```
+
+   Catat `ivSessionKey` dari output.
+
+4. **Upload ke penyimpanan Anda:**
+   Upload file zip yang dienkripsi ke layanan hosting Anda.
+
+5. **Daftar dengan Capgo:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --external https://your-cdn.com/bundles/com.example.app-1.2.3.zip \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_3
+   ```
+
+</Steps>
+
+### Contoh 2: Upload Langsung S3
+
+<Steps>
+
+1. **Build aplikasi Anda:**
+   ```shell
+   npm run build
+   ```
+
+2. **Upload langsung ke S3:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --channel Production
+   ```
+
+</Steps>
+
+### Contoh 3: S3 dengan Enkripsi
+
+<Steps>
+
+1. **Build dan zip:**
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **Enkripsi bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM
+   ```
+
+3. **Upload ke S3 dengan enkripsi:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_2 \
+     --channel Production
+   ```
+
+</Steps>
+
+## Pertimbangan Keamanan
+
+Saat menggunakan custom storage, pertimbangkan praktik terbaik keamanan ini:
+
+### Kontrol Akses
+- Pastikan URL penyimpanan Anda dapat diakses oleh pengguna aplikasi Anda tetapi tidak dapat ditemukan secara publik
+- Gunakan URL yang ditandatangani atau autentikasi berbasis token jika memungkinkan
+- Implementasikan header CORS yang tepat untuk aplikasi berbasis web
+
+### Enkripsi
+- Selalu enkripsi bundle sensitif menggunakan alat enkripsi Capgo
+- Simpan kunci enkripsi dengan aman dan rotasi secara berkala
+- Gunakan HTTPS untuk semua URL bundle (diperlukan untuk iOS dan Android)
+
+### Pemantauan
+- Pantau log akses untuk mendeteksi pola unduhan yang tidak biasa
+- Siapkan peringatan untuk unduhan bundle yang gagal
+- Audit izin penyimpanan Anda secara berkala
+
+## Pemecahan Masalah
+
+### Masalah Umum
+
+**Bundle tidak terunduh:**
+- Verifikasi URL dapat diakses publik dan menggunakan HTTPS (diperlukan untuk iOS dan Android)
+- Periksa header CORS untuk aplikasi web
+- Pastikan format bundle benar
+
+**Kesalahan enkripsi:**
+- Verifikasi `ivSessionKey` cocok dengan bundle terenkripsi
+- Periksa bahwa bundle dienkripsi dengan kunci yang benar
+- Pastikan enkripsi v2 digunakan untuk bundle baru
+
+**Kegagalan upload S3:**
+- Verifikasi kredensial dan izin S3 Anda
+- Periksa kebijakan bucket dan konfigurasi CORS
+- Pastikan region yang ditentukan benar
+
+### Perintah Debug
+
+Periksa status bundle:
+```shell
+npx @capgo/cli@latest app debug
+```
+
+Verifikasi integritas bundle:
+```shell
+npx @capgo/cli@latest bundle list
+```
+
+## Langkah Selanjutnya
+
+- Pelajari tentang [Channels](/docs/live-updates/channels/) untuk mengelola berbagai lingkungan deployment
+- Jelajahi [Update Behavior](/docs/live-updates/update-behavior/) untuk menyesuaikan bagaimana pembaruan diterapkan
+- Siapkan [CI/CD Integration](/docs/getting-started/cicd-integration/) untuk mengotomatisasi alur kerja custom storage Anda

@@ -1,0 +1,130 @@
+---
+title: "Problemi noti"
+locale: it
+description: "Problemi noti con Capacitor e Capgo, e il nostro updater, questa pagina ti aiuterà a comprendere lo strano problema che hai con il nostro strumento"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Live reload Ionic
+
+* Quando sviluppi, se utilizzi la funzione di live reload di Ionic dalla CLI, sovrascriverà il plugin, quindi non vedrai mai il tuo aggiornamento.
+
+## Live reload Quasar
+
+* Utilizza lo stesso sistema di ionic sotto il cofano, quindi non vedrai i tuoi aggiornamenti.
+
+## Gli aggiornamenti falliscono
+
+* Questo di solito accade quando vengono inviati aggiornamenti di grandi dimensioni (> 20mb), una grande percentuale di utenti non riceverà l'ultima versione.
+In passato, gli utenti dovevano tenere l'app aperta fino al completamento del download, ora utilizziamo il download in background, ma è ancora limitato a pochi secondi.
+
+## Android
+
+### Impossibile scaricare
+
+Abbiamo visto alcuni problemi con dispositivi in India, e abbiamo fatto provare all'utente diversi server DNS durante una chiamata, e ha funzionato.
+
+Quindi se hai il problema, prova a utilizzare un server DNS diverso come Cloudflare o Google DNS.
+
+Cloudflare: 1.1.1.1 e 1.0.0.1
+
+Google DNS: 8.8.8.8 e 8.8.4.4 o dns.google
+
+<LinkCard
+	title="Come configurare un server DNS preferito su Android?"
+	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
+/>
+
+### Self Hosted
+Quando invii un aggiornamento self-hosted, fai attenzione che non puoi utilizzare un endpoint "HTTP" poiché è contro le politiche di sicurezza delle app Android, se vuoi comunque farlo, segui questa guida:
+
+<LinkCard
+	title="Come permettere tutti i tipi di connessione di rete HTTP e HTTPS in Android (9) Pie?"
+	href="https://stackoverflow.com/a/51902630/5511370"
+/>
+
+### Unzip
+
+Problema Unzip: le voci DEFLATED possono avere un descrittore EXT
+
+Se hai compresso il tuo bundle con qualcosa di diverso dalla CLI, il formato del tuo zip potrebbe essere errato, utilizza il comando CLI `npx @capgo/cli zip BUNDLE_FOLDER`.
+
+Questo è un problema noto di Java:
+
+<LinkCard
+	title="Problema Unzip: le voci DEFLATED possono avere un descrittore EXT"
+	href="https://bugs.openjdk.org/browse/JDK-8143613"
+/>
+
+
+### Problema Clearfix
+
+* Se hai problemi con usesCleartextTraffic, è perché il plugin segue le buone pratiche raccomandate da sonar cloud, nel 90% dei casi funzionerà benissimo, ma con alcuni plugin che causa problemi.
+
+Per risolverlo, aggiungi in `android/app/src/main/AndroidManifest.xml` nella chiave `<application>`:
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemas.android.com/tools"
+```
+
+## IOS
+
+### Manifesto della privacy
+
+Aggiungi la chiave del dizionario `NSPrivacyAccessedAPICategoryUserDefaults` al tuo [Manifesto della Privacy](https://capacitorjs.com/docs/ios/privacy-manifest) (solitamente `ios/App/PrivacyInfo.xcprivacy`):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- Aggiungi questa voce dict all'array se il file esiste già. -->
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA92.1</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+Consigliamo di dichiarare [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) come motivo per accedere all'API [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults).
+
+
+### Permessi di rete
+
+Quando utilizzi un server locale per testare gli aggiornamenti, l'app chiederà i permessi di rete, è un comportamento normale, non è il caso quando utilizzi un server remoto.
+
+
+## Entrambi i SO
+
+Quando si effettuano aggiornamenti in modalità manuale, alcuni eventi non sono facili da catturare, ad esempio l'errore di aggiornamento si attiva appena prima che il tuo codice JS si ricarichi, quindi non sarai in grado di catturarlo.
+
+Un'alternativa è elencare i bundle e controllare le statistiche degli errori per sapere se l'aggiornamento fallisce.
+
+Dobbiamo trovare un modo migliore per gestire questo in futuro, ma non è una priorità, poiché la modalità automatica è il modo consigliato per fare aggiornamenti.
+
+Le PR sono benvenute per aiutarci a migliorare questo.
+
+## CLI
+
+se la tua CLI ha problemi a fare qualsiasi cosa,
+
+Controlla se **appId** e **appName** sono presenti nel tuo **capacitor.config.ts**
+
+Segui la guida della documentazione ufficiale:
+
+<LinkCard
+	title="Configurazione Capacitor"
+	href="https://capacitorjs.com/docs/config"
+/>

@@ -1,0 +1,513 @@
+---
+title: Risoluzione dei Problemi
+description: Problemi comuni e soluzioni per Capgo Cloud Build
+locale: it
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Soluzioni ai problemi comuni durante la creazione di app native con Capgo Cloud Build.
+
+## Fallimenti di Build
+
+### "Caricamento fallito" o "Timeout connessione"
+
+**Sintomi:**
+- La build fallisce durante il caricamento del progetto
+- Errori di timeout dopo 60 secondi
+
+**Soluzioni:**
+
+1. **Controlla la tua connessione internet**
+   ```bash
+   # Testa la connessione a Capgo
+   curl -I https://api.capgo.app
+   ```
+
+2. **Riduci la dimensione del progetto**
+   - Assicurati che `node_modules/` non venga caricato (dovrebbe essere escluso automaticamente)
+   - Controlla se ci sono file di grandi dimensioni nel tuo progetto:
+   ```bash
+   find . -type f -size +10M
+   ```
+
+3. **Controlla la scadenza dell'URL di caricamento**
+   - Gli URL di caricamento scadono dopo 1 ora
+   - Se ricevi un errore di URL scaduto, riesegui il comando di build
+
+<Aside type="tip">
+Progetti di grandi dimensioni (>200MB) potrebbero raggiungere i limiti di timeout. Contatta il supporto per opzioni aziendali.
+</Aside>
+
+### "Timeout build dopo 10 minuti"
+
+**Sintomi:**
+- La build supera il tempo massimo consentito
+- Lo stato mostra `timeout`
+
+**Soluzioni:**
+
+1. **Ottimizza le dipendenze**
+   - Rimuovi pacchetti npm non utilizzati
+   - Usa `npm prune --production` prima della build
+
+2. **Controlla problemi di rete nella build**
+   - Alcune dipendenze potrebbero scaricare file di grandi dimensioni durante la build
+   - Considera di pre-cachare con un file di lock
+
+3. **Rivedi le dipendenze native**
+   ```bash
+   # iOS - controlla Podfile per dipendenze pesanti
+   cat ios/App/Podfile
+
+   # Android - controlla build.gradle
+   cat android/app/build.gradle
+   ```
+
+4. **Contatta il supporto**
+   - Se la tua app ha legittimamente bisogno di più tempo
+   - Possiamo regolare i limiti per casi d'uso specifici
+
+## Problemi di Autenticazione
+
+### "Chiave API non valida" o "Non autorizzato"
+
+**Sintomi:**
+- La build fallisce immediatamente con errore di autenticazione
+- Errori 401 o 403
+
+**Soluzioni:**
+
+1. **Verifica che la chiave API sia corretta**
+   ```bash
+   # Testa con un comando semplice
+   npx @capgo/cli@latest app list
+   ```
+
+2. **Controlla le autorizzazioni della chiave API**
+   - La chiave deve avere autorizzazioni `write` o `all`
+   - Controlla nel dashboard Capgo sotto Chiavi API
+
+3. **Assicurati che la chiave API venga letta**
+   ```bash
+   # Controlla la variabile d'ambiente
+   echo $CAPGO_TOKEN
+
+   # Oppure verifica il file .capgo locale
+   cat .capgo
+   ```
+
+4. **Riautentica**
+   ```bash
+   npx @capgo/cli@latest login
+   ```
+
+### "App non trovata" o "Nessun permesso per questa app"
+
+**Sintomi:**
+- L'autenticazione funziona ma errore specifico dell'app
+
+**Soluzioni:**
+
+1. **Verifica che l'app sia registrata**
+   ```bash
+   npx @capgo/cli@latest app list
+   ```
+
+2. **Controlla che l'ID app corrisponda**
+   - Verifica l'appId in `capacitor.config.json`
+   - Assicurati che il comando usi l'ID app corretto
+
+3. **Verifica l'accesso all'organizzazione**
+   - Controlla di essere nell'organizzazione corretta
+   - La chiave API deve avere accesso all'organizzazione dell'app
+
+## Problemi di Build iOS
+
+### "Firma del codice fallita"
+
+**Sintomi:**
+- La build fallisce durante la fase di firma del codice
+- Errori Xcode su certificati o profili
+
+**Soluzioni:**
+
+1. **Verifica che il tipo di certificato corrisponda al tipo di build**
+   - Le build di sviluppo necessitano certificati Development
+   - Le build App Store necessitano certificati Distribution
+
+2. **Controlla che certificato e profilo corrispondano**
+   ```bash
+   # Decodifica e ispeziona il tuo certificato
+   echo $BUILD_CERTIFICATE_BASE64 | base64 -d > cert.p12
+   openssl pkcs12 -in cert.p12 -nokeys -passin pass:$P12_PASSWORD | openssl x509 -noout -subject
+   ```
+
+3. **Assicurati che il profilo di provisioning sia valido**
+   - Controlla la data di scadenza
+   - Verifica che includa il tuo App ID
+   - Conferma che includa il certificato
+
+4. **Rigenera le credenziali**
+   - Elimina vecchio certificato/profilo
+   - Creane di nuovi nel portale Apple Developer
+   - Ricodifica e aggiorna le variabili d'ambiente
+
+### "Il profilo di provisioning non include il certificato di firma"
+
+**Sintomi:**
+- Xcode non riesce a trovare il certificato nel profilo
+
+**Soluzioni:**
+
+1. **Scarica l'ultimo profilo da Apple**
+   - Vai su Apple Developer → Certificati, ID e Profili
+   - Scarica il profilo di provisioning
+   - Assicurati che includa il tuo certificato
+
+2. **Verifica che il certificato sia nel profilo**
+   ```bash
+   # Estrai il profilo
+   echo $BUILD_PROVISION_PROFILE_BASE64 | base64 -d > profile.mobileprovision
+
+   # Visualizza il contenuto del profilo
+   security cms -D -i profile.mobileprovision
+   ```
+
+3. **Ricrea il profilo con il certificato corretto**
+   - Nel portale Apple Developer, modifica il profilo
+   - Assicurati che il tuo certificato di distribuzione sia selezionato
+   - Scarica e ricodifica
+
+### "Autenticazione App Store Connect fallita"
+
+**Sintomi:**
+- Il caricamento su TestFlight fallisce
+- Errori chiave API
+
+**Soluzioni:**
+
+1. **Verifica le credenziali della chiave API**
+   - Controlla APPLE_KEY_ID (dovrebbe essere di 10 caratteri)
+   - Controlla APPLE_ISSUER_ID (dovrebbe essere in formato UUID)
+   - Verifica che APPLE_KEY_CONTENT sia correttamente codificato in base64
+
+2. **Testa la chiave API localmente**
+   ```bash
+   # Decodifica la chiave
+   echo $APPLE_KEY_CONTENT | base64 -d > AuthKey.p8
+
+   # Testa con fastlane (se installato)
+   fastlane pilot list
+   ```
+
+3. **Controlla le autorizzazioni della chiave API**
+   - La chiave necessita del ruolo "Developer" o superiore
+   - Verifica in App Store Connect → Utenti e Accesso → Chiavi
+
+4. **Assicurati che la chiave non sia stata revocata**
+   - Controlla in App Store Connect
+   - Genera una nuova chiave se necessario
+
+### "Installazione Pod fallita"
+
+**Sintomi:**
+- La build fallisce durante l'installazione CocoaPods
+- Errori Podfile
+
+**Soluzioni:**
+
+1. **Verifica che Podfile.lock sia committato**
+   ```bash
+   git status ios/App/Podfile.lock
+   ```
+
+2. **Testa l'installazione pod localmente**
+   ```bash
+   cd ios/App
+   pod install
+   ```
+
+3. **Controlla pod incompatibili**
+   - Rivedi il Podfile per conflitti di versione
+   - Assicurati che tutti i pod supportino il tuo target di deployment iOS
+
+4. **Pulisci la cache dei pod**
+   ```bash
+   cd ios/App
+   rm -rf Pods
+   rm Podfile.lock
+   pod install
+   # Poi committa il nuovo Podfile.lock
+   ```
+
+## Problemi di Build Android
+
+### "Password keystore errata"
+
+**Sintomi:**
+- La build fallisce durante la firma
+- Errori Gradle sul keystore
+
+**Soluzioni:**
+
+1. **Verifica la password del keystore**
+   ```bash
+   # Testa il keystore localmente
+   keytool -list -keystore my-release-key.keystore
+   # Inserisci la password quando richiesto
+   ```
+
+2. **Controlla le variabili d'ambiente**
+   ```bash
+   # Assicurati che non ci siano spazi extra o caratteri speciali
+   echo "$KEYSTORE_STORE_PASSWORD" | cat -A
+   echo "$KEYSTORE_KEY_PASSWORD" | cat -A
+   ```
+
+3. **Verifica la codifica base64**
+   ```bash
+   # Decodifica e testa
+   echo $ANDROID_KEYSTORE_FILE | base64 -d > test.keystore
+   keytool -list -keystore test.keystore
+   ```
+
+### "Alias chiave non trovato"
+
+**Sintomi:**
+- La firma fallisce con errore alias
+
+**Soluzioni:**
+
+1. **Elenca gli alias del keystore**
+   ```bash
+   keytool -list -keystore my-release-key.keystore
+   ```
+
+2. **Verifica che l'alias corrisponda esattamente**
+   - L'alias è sensibile alle maiuscole
+   - Controlla errori di battitura in KEYSTORE_KEY_ALIAS
+
+3. **Usa l'alias corretto dal keystore**
+   ```bash
+   # Aggiorna la variabile d'ambiente per corrispondere
+   export KEYSTORE_KEY_ALIAS="il-nome-esatto-dell-alias"
+   ```
+
+### "Build Gradle fallita"
+
+**Sintomi:**
+- Errori Gradle generici
+- Problemi di compilazione o dipendenze
+
+**Soluzioni:**
+
+1. **Testa la build prima localmente**
+   ```bash
+   cd android
+   ./gradlew clean
+   ./gradlew assembleRelease
+   ```
+
+2. **Controlla dipendenze mancanti**
+   - Rivedi i file build.gradle
+   - Assicurati che tutti i plugin siano elencati nelle dipendenze
+
+3. **Verifica la compatibilità della versione Gradle**
+   ```bash
+   # Controlla la versione gradle
+   cat android/gradle/wrapper/gradle-wrapper.properties
+   ```
+
+4. **Pulisci la cache Gradle**
+   ```bash
+   cd android
+   ./gradlew clean
+   rm -rf .gradle build
+   ```
+
+### "Caricamento Play Store fallito"
+
+**Sintomi:**
+- La build ha successo ma il caricamento fallisce
+- Errori account servizio
+
+**Soluzioni:**
+
+1. **Verifica il JSON dell'account servizio**
+   ```bash
+   # Decodifica e controlla il formato
+   echo $PLAY_CONFIG_JSON | base64 -d | jq .
+   ```
+
+2. **Controlla le autorizzazioni dell'account servizio**
+   - Vai su Console Play → Configurazione → Accesso API
+   - Assicurati che l'account servizio abbia accesso alla tua app
+   - Concedi l'autorizzazione "Rilascia a tracce di test"
+
+3. **Verifica che l'app sia configurata nella Console Play**
+   - L'app deve essere prima creata nella Console Play
+   - Almeno un APK deve essere caricato manualmente inizialmente
+
+4. **Controlla che l'API sia abilitata**
+   - L'API Google Play Developer deve essere abilitata
+   - Controlla nella Console Google Cloud
+
+## Problemi Generali
+
+### "Job non trovato" o "Stato build non disponibile"
+
+**Sintomi:**
+- Impossibile controllare lo stato della build
+- Errori ID job
+
+**Soluzioni:**
+
+1. **Aspetta un momento e riprova**
+   - I job di build potrebbero impiegare alcuni secondi per inizializzare
+
+2. **Controlla che l'ID job sia corretto**
+   - Verifica l'ID job dalla risposta iniziale della build
+
+3. **Controlla che la build non sia scaduta**
+   - I dati della build sono disponibili per 24 ore
+
+### "Sincronizzazione progetto fallita"
+
+**Sintomi:**
+- La build fallisce prima che inizi la compilazione
+- Errori file mancanti
+
+**Soluzioni:**
+
+1. **Esegui la sincronizzazione Capacitor localmente**
+   ```bash
+   npx cap sync
+   ```
+
+2. **Assicurati che tutti i file nativi siano committati**
+   ```bash
+   git status ios/ android/
+   ```
+
+3. **Controlla file nativi ignorati da git**
+   - Rivedi .gitignore
+   - Assicurati che i file di configurazione importanti non siano ignorati
+
+### "Build riuscita ma non vedo l'output"
+
+**Sintomi:**
+- La build mostra successo ma nessun link di download
+
+**Soluzioni:**
+
+1. **Controlla la configurazione della build**
+   - L'archiviazione degli artefatti potrebbe non essere configurata
+   - Per la beta pubblica, contatta il supporto sull'accesso agli artefatti
+
+2. **Per l'invio iOS TestFlight**
+   - Controlla App Store Connect
+   - L'elaborazione potrebbe richiedere 5-30 minuti dopo il caricamento
+
+3. **Per Android Play Store**
+   - Controlla Console Play → Test → Test interno
+   - L'elaborazione potrebbe richiedere alcuni minuti
+
+## Problemi Specifici di CI/CD
+
+### GitHub Actions: "Comando non trovato"
+
+**Sintomi:**
+- `npx @capgo/cli` fallisce in CI
+
+**Soluzioni:**
+
+1. **Assicurati che Node.js sia installato**
+   ```yaml
+   - uses: actions/setup-node@v6
+     with:
+       node-version: '24'
+   ```
+
+2. **Installa esplicitamente il CLI**
+   ```yaml
+   - run: npm install -g @capgo/cli
+   ```
+
+### GitHub Actions: "Segreti non trovati"
+
+**Sintomi:**
+- Variabili d'ambiente vuote nella build
+
+**Soluzioni:**
+
+1. **Verifica che i segreti siano impostati**
+   - Vai su Impostazioni repo → Segreti e variabili → Actions
+   - Aggiungi tutti i segreti richiesti
+
+2. **Usa la sintassi corretta**
+   ```yaml
+   env:
+     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+   ```
+
+3. **Controlla che i nomi dei segreti corrispondano**
+   - I nomi sono sensibili alle maiuscole
+   - Nessun errore di battitura nei riferimenti ai segreti
+
+## Ottenere Maggiore Aiuto
+
+### Abilita Log Dettagliati
+
+```bash
+# Aggiungi flag debug (quando disponibile)
+npx @capgo/cli@latest build com.example.app --verbose
+```
+
+### Raccogli Informazioni di Build
+
+Quando contatti il supporto, includi:
+
+1. **Comando di build utilizzato**
+   ```bash
+   npx @capgo/cli@latest build com.example.app --platform ios
+   ```
+
+2. **Messaggio di errore** (output completo)
+
+3. **ID Job** (dall'output della build)
+
+4. **Log di build** (copia l'output completo del terminale)
+
+5. **Informazioni ambiente**
+   ```bash
+   node --version
+   npm --version
+   npx @capgo/cli --version
+   ```
+
+### Contatta il Supporto
+
+- **Discord**: [Unisciti alla nostra community](https://discord.com/invite/VnYRvBfgA6)
+- **Email**: support@capgo.app
+- **Documentazione**: [Documenti Capgo](/docs/)
+
+### Limitazioni Note
+
+Limitazioni attuali durante la beta pubblica:
+
+- Tempo massimo di build: 10 minuti
+- Dimensione massima caricamento: ~500MB
+- Le build iOS richiedono contratti Mac di 24 ore, la build su Mac verrà accodata per garantire un utilizzo ottimale
+- Il download degli artefatti di build potrebbe non essere disponibile
+
+Queste limitazioni potrebbero essere regolate in base al feedback.
+
+## Risorse Aggiuntive
+
+- [Iniziare](/docs/cli/cloud-build/getting-started/) - Guida alla configurazione iniziale
+- [Build iOS](/docs/cli/cloud-build/ios/) - Configurazione specifica iOS
+- [Build Android](/docs/cli/cloud-build/android/) - Configurazione specifica Android
+- [Riferimento CLI](/docs/cli/reference/build/) - Documentazione completa dei comandi

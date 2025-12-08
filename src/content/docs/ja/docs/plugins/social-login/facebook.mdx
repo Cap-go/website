@@ -1,0 +1,666 @@
+---
+title: Facebookログインの設定
+locale: ja
+description: このガイドでは、Capacitorを使用してFacebookログインを設定する包括的な手順を説明し、アプリケーションのシームレスな統合と強化されたユーザー認証を実現します。
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+
+## はじめに
+
+このガイドでは、Capgo Social LoginでFacebookログインを設定する方法を学びます。次のものが必要です:
+
+- Facebook Developer Account
+- アプリのpackage name/bundle ID
+- key hashを生成するためのターミナルへのアクセス（Android）
+
+## 一般的な設定
+
+まだFacebookアプリを作成していない場合は、次の手順に従ってください:
+
+<Steps>
+1. Facebookアプリを作成する
+
+   [Create an App](https://developers.facebook.com/docs/development/create-an-app/)のチュートリアルに従ってください
+
+2. アプリにFacebookログインを追加する
+
+   Facebook Developer Dashboardで、アプリにFacebook Loginプロダクトを追加します
+
+3. アプリを一般公開する前に、この[チュートリアル](https://developers.facebook.com/docs/development/release/)に従って公開してください
+</Steps>
+
+## 重要な情報
+
+統合に必要な重要な情報の場所は次のとおりです:
+
+1. `CLIENT_TOKEN`:
+   <img src="/social-login-assets/fb_where_to_fiind_client_token.png" alt="Facebook developer dashboard showing where to find the client token" />
+
+2. `APP_ID`:
+   <img src="/social-login-assets/fb_where_to_find_app_id.png" alt="Facebook developer dashboard showing where to find the app ID" />
+
+3. `APP_NAME`:
+   <img src="/social-login-assets/fb_where_to_find_app_name.png" alt="Facebook developer dashboard showing where to find the app name" />
+
+## Androidの設定
+
+<Steps>
+1. `AndroidManifest.xml`にインターネット権限を追加する
+
+   この行が存在することを確認してください:
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET"/>
+   ```
+
+2. Android key hashを生成する
+
+   これはFacebookが要求する重要なセキュリティ手順です。ターミナルを開いて次を実行します:
+
+   ```bash
+   keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64 -A
+   ```
+
+   パスワードを求められたら、`android`を使用してください
+
+   :::note
+   リリースビルドの場合は、リリースkeystoreを使用する必要があります:
+   ```bash
+   keytool -exportcert -alias your-key-name -keystore your-keystore-path | openssl sha1 -binary | openssl base64 -A
+   ```
+   :::
+
+3. key hashをFacebookアプリに追加する
+
+   1. Facebook Developersのアプリダッシュボードにアクセスします
+   2. Settings > Basicに移動します
+   3. 「Android」セクションまでスクロールします
+   4. Androidがまだ追加されていない場合は「Add Platform」をクリックして詳細を入力します
+   5. 生成したkey hashを追加します
+   6. 本番環境では、デバッグとリリースの両方のkey hashを追加します
+
+4. `AndroidManifest.xml`を更新して次を含めます:
+
+   ```xml
+   <application>
+       ...
+       <activity android:name="com.facebook.FacebookActivity"
+           android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+           android:label="@string/app_name" />
+
+       <activity
+           android:name="com.facebook.CustomTabActivity"
+           android:exported="true">
+           <intent-filter>
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <category android:name="android.intent.category.BROWSABLE" />
+               <data android:scheme="FB[APP_ID]" />
+           </intent-filter>
+       </activity>
+   </application>
+   ```
+
+   :::caution
+   `android:scheme`属性の`[APP_ID]`を実際のFacebook app IDに置き換えてください
+   :::
+</Steps>
+
+## iOSの設定
+
+<Steps>
+1. Facebook Developer ConsoleでiOSプラットフォームを追加する
+
+   1. Facebook Developersのアプリダッシュボードにアクセスします
+   2. Settings > Basicに移動します
+   3. ページの一番下までスクロールして「Add Platform」をクリックします
+   4. iOSを選択して必要な詳細を入力します
+
+2. Xcodeプロジェクトを開き、Info.plistに移動します
+
+3. Info.plistに次のエントリを追加します:
+
+   ```xml
+   <key>FacebookAppID</key>
+   <string>[APP-ID]</string>
+   <key>FacebookClientToken</key>
+   <string>[CLIENT-TOKEN]</string>
+   <key>FacebookDisplayName</key>
+   <string>[APP-NAME]</string>
+   <key>LSApplicationQueriesSchemes</key>
+   <array>
+       <string>fbapi</string>
+       <string>fb-messenger-share-api</string>
+   </array>
+   <key>CFBundleURLTypes</key>
+   <array>
+       <dict>
+           <key>CFBundleURLSchemes</key>
+           <array>
+               <string>fb[APP-ID]</string>
+           </array>
+       </dict>
+   </array>
+   ```
+
+   :::caution
+   次の値を置き換えてください:
+   - `[APP-ID]`をFacebook app IDに
+   - `[CLIENT-TOKEN]`をclient tokenに
+   - `[APP-NAME]`をアプリの名前に
+   :::
+
+4. `AppDelegate.swift`を変更する
+
+   ```swift
+   import FBSDKCoreKit
+   @UIApplicationMain
+   class AppDelegate: UIResponder, UIApplicationDelegate {
+         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+           // Override point for customization after application launch.
+
+           // Initialize Facebook SDK
+           FBSDKCoreKit.ApplicationDelegate.shared.application(
+               application,
+               didFinishLaunchingWithOptions: launchOptions
+           )
+
+           return true
+       }
+
+       func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+           // Called when the app was launched with a url. Feel free to add additional processing here,
+           // but if you want the App API to support tracking app url opens, make sure to keep this call
+
+           if (FBSDKCoreKit.ApplicationDelegate.shared.application(
+               app,
+               open: url,
+               sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+               annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+           )) {
+               return true;
+           } else {
+               return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
+           }
+       }
+   }
+   ```
+</Steps>
+
+## アプリでFacebookログインを使用する
+
+:::caution
+**始める前に**: 新しいFacebook SDKでは、受け取るトークンタイプはユーザーのApp Trackingの選択によって完全に決まり、コード設定によって決まるわけではありません。すべてのユーザーで認証が機能するように、バックエンドで常にaccess tokenとJWT tokenの両方の処理を実装してください。
+:::
+
+<Steps>
+1. アプリでFacebookログインを初期化する
+
+   ```typescript
+   import { SocialLogin } from '@capgo/capacitor-social-login';
+
+   // アプリ起動時に初期化
+   await SocialLogin.initialize({
+     facebook: {
+       appId: 'APP_ID',
+       clientToken: 'CLIENT_TOKEN',
+     }
+   })
+   ```
+
+2. ログイン関数を実装する
+
+   ```typescript
+   async function loginWithFacebook() {
+     try {
+       const result = await SocialLogin.login({
+         provider: 'facebook',
+        options: {
+          permissions: ['email', 'public_profile'],
+          limitedLogin: false // 重要な詳細については、以下のLimited Loginセクションを参照してください
+        }
+       });
+       console.log('Facebook login result:', result);
+       // ログイン成功を処理
+     } catch (error) {
+       console.error('Facebook login error:', error);
+       // エラーを処理
+     }
+   }
+   ```
+
+   :::note
+   **Limited Login (iOS のみ)**: FacebookのLimited Login機能を使用する場合は、`limitedLogin`をtrueに設定してください。これはiOS専用の機能で、ログイン時に共有されるデータを制限することで、プライバシーを強化します。
+
+   **重要な制限事項:**
+   - **iOS のみ**: Limited LoginはiOSデバイスのみに影響し、Androidには影響しません
+   - **ATTの上書き**: `limitedLogin: false`に設定しても、ユーザーがApp Tracking Transparency（ATT）権限を付与していない場合、Facebookは自動的にtrueに強制します
+   - **常に両方のケースを処理する**: アプリは常にlimitedとfullログインの両方のシナリオを処理する準備が必要です
+
+   **ATTステータスの確認:**
+   ```typescript
+   // ユーザーがトラッキング権限を付与しているかどうかを確認
+   const trackingStatus = await SocialLogin.providerSpecificCall({
+     call: 'facebook#requestTracking',
+     options: {}
+   });
+   console.log('Tracking status:', trackingStatus.status); // 'authorized', 'denied', 'notDetermined', or 'restricted'
+   ```
+
+   **access_tokenが優先される場合の推奨実装:**
+   ```typescript
+   async function loginWithFacebook() {
+     try {
+       // まずATTステータスを確認
+       const trackingStatus = await SocialLogin.providerSpecificCall({
+         call: 'facebook#requestTracking',
+         options: {}
+       });
+
+       const result = await SocialLogin.login({
+         provider: 'facebook',
+         options: {
+           permissions: ['email', 'public_profile'],
+           limitedLogin: trackingStatus.status === 'denied' // ATTに基づいて自動調整
+         }
+       });
+
+       // limitedログインに基づいて異なる応答タイプを処理
+       if (result.result.accessToken) {
+         // アプリロジックはlimitedとfullログインの両方で動作する必要があります
+         console.log('Login successful:', result);
+       }
+     } catch (error) {
+       console.error('Facebook login error:', error);
+     }
+   }
+   ```
+
+   **Limited Loginで何が起こるか:**
+   - **データアクセスの削減**: 一部のユーザーデータが利用できない場合があります
+   - **異なるトークンタイプ**: Access tokenが異なる機能を持つ場合があります
+   - **プライバシーコンプライアンス**: iOSのプライバシー要件への準拠を支援します
+
+   **重要**: limitedとfullログインの両方のシナリオでアプリをテストして、両方のケースで正しく動作することを確認してください。Limited Loginの詳細については[こちら](https://developers.facebook.com/docs/facebook-login/limited-login/)をご覧ください。
+   :::
+
+3. **ユーザープロファイルデータを取得する**
+
+   ログインが成功した後、追加のプロファイル情報を取得できます:
+
+   ```typescript
+   async function getFacebookProfile() {
+     try {
+       const profileResponse = await SocialLogin.providerSpecificCall({
+         call: 'facebook#getProfile',
+         options: {
+           fields: ['id', 'name', 'email', 'first_name', 'last_name', 'picture']
+         }
+       });
+
+       console.log('Facebook profile:', profileResponse.profile);
+       return profileResponse.profile;
+     } catch (error) {
+       console.error('Failed to get Facebook profile:', error);
+       return null;
+     }
+   }
+
+   // ログイン後の使用例
+   async function loginAndGetProfile() {
+     const loginResult = await loginWithFacebook();
+     if (loginResult) {
+       const profile = await getFacebookProfile();
+       if (profile) {
+         console.log('User ID:', profile.id);
+         console.log('Name:', profile.name);
+         console.log('Email:', profile.email);
+         console.log('Profile Picture:', profile.picture?.data?.url);
+       }
+     }
+   }
+   ```
+
+   :::tip
+   **利用可能なプロファイルフィールド**: FacebookのGraph APIで利用可能な任意のフィールドをリクエストできます。一般的なフィールドには、`id`、`name`、`email`、`first_name`、`last_name`、`picture`、`birthday`、`gender`、`location`、`hometown`が含まれます。一部のフィールドには追加の権限が必要な場合があることに注意してください。
+   :::
+
+   :::warning
+   **トークンタイプの制限**: `getProfile`呼び出しは、**access token**（トラッキングが許可されている標準ログイン）がある場合にのみ機能します。ユーザーがトラッキングを拒否した場合、またはlimited login（JWT tokenのみ）を使用している場合、この呼び出しは失敗します。その場合は、初回ログイン応答で提供されるプロファイルデータを使用してください。
+   :::
+</Steps>
+
+## ⚠️ 重要: バックエンドトークン処理
+
+:::danger
+**重要なiOSの動作**: Limited LoginとApp Tracking Transparency（ATT）は**iOS専用**の機能です。Androidでは、`limitedLogin`設定に関係なく、常にaccess tokenを受け取ります。
+
+**iOSトークンの動作**:
+- **`limitedLogin: true`** → 常にJWT token（iOS のみ）
+- **`limitedLogin: false` + ユーザーがトラッキングを許可** → Access token
+- **`limitedLogin: false` + ユーザーがトラッキングを拒否** → JWT token（iOSが自動的に設定を上書き）
+
+**Androidトークンの動作**: 常にaccess token、`limitedLogin`設定は無視されます。
+:::
+
+バックエンドは**2つの異なるトークンタイプ**を処理する必要があります。iOSユーザーはApp Tracking Transparencyの選択に応じてaccess tokenまたはJWT tokenのいずれかを受け取る可能性があり、Androidユーザーは常にaccess tokenを受け取ります。
+
+### プラットフォーム別のトークンタイプ
+
+| プラットフォーム | limitedLogin設定 | ユーザーATT選択 | 結果のトークンタイプ |
+|----------|---------------------|-----------------|-------------------|
+| **iOS** | `true` | 任意 | JWT Token |
+| **iOS** | `false` | トラッキングを許可 | Access Token |
+| **iOS** | `false` | トラッキングを拒否 | JWT Token（自動上書き） |
+| **Android** | 任意 | N/A | Access Token（常に） |
+
+### バックエンド実装
+
+<Steps>
+1. **トークンタイプを検出して適切に処理する**
+
+   ```typescript
+   async function loginWithFacebook() {
+     try {
+       const loginResult = await SocialLogin.login({
+         provider: 'facebook',
+         options: {
+           permissions: ['email', 'public_profile'],
+           limitedLogin: false // iOS: ATTに依存、Android: 無視される
+         }
+       });
+
+       if (loginResult.accessToken) {
+         // Access token（Androidは常に、iOSはトラッキングが許可されている場合）
+         return handleAccessToken(loginResult.accessToken.token);
+       } else if (loginResult.idToken) {
+         // JWT token（iOSのみ、トラッキングが拒否された場合またはlimitedLogin: true）
+         return handleJWTToken(loginResult.idToken);
+       }
+     } catch (error) {
+       console.error('Facebook login error:', error);
+     }
+   }
+   ```
+
+2. **Firebase統合の例**
+
+   ```typescript
+   import { OAuthProvider, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
+
+   async function handleAccessToken(accessToken: string, nonce: string) {
+     // Access tokenの場合は、OAuthProviderを使用（新しい方法）
+     const fbOAuth = new OAuthProvider("facebook.com");
+     const credential = fbOAuth.credential({
+       idToken: accessToken,
+       rawNonce: nonce
+     });
+
+     try {
+       const userResponse = await signInWithCredential(auth, credential);
+       return userResponse;
+     } catch (error) {
+       console.error('Firebase OAuth error:', error);
+       return false;
+     }
+   }
+
+   async function handleJWTToken(jwtToken: string) {
+     // JWT tokenの場合は、バックエンドに送信して検証
+     try {
+       const response = await fetch('/api/auth/facebook-jwt', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ jwtToken })
+       });
+
+       const result = await response.json();
+       return result;
+     } catch (error) {
+       console.error('JWT validation error:', error);
+       return false;
+     }
+   }
+   ```
+
+3. **バックエンドJWT検証**
+
+   ```typescript
+   // バックエンド: FacebookからのJWT tokenを検証
+   import jwt from 'jsonwebtoken';
+   import { Request, Response } from 'express';
+
+   app.post('/api/auth/facebook-jwt', async (req: Request, res: Response) => {
+     const { jwtToken } = req.body;
+
+     try {
+       // Facebookの公開鍵でJWT tokenを検証
+       // 参照: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
+       const decoded = jwt.verify(jwtToken, getFacebookPublicKey(), {
+         algorithms: ['RS256'],
+         audience: process.env.FACEBOOK_APP_ID,
+         issuer: 'https://www.facebook.com' // From: https://www.facebook.com/.well-known/openid-configuration/?_rdr
+       });
+
+       // JWTからユーザー情報を抽出
+       const userInfo = {
+         id: decoded.sub,
+         email: decoded.email,
+         name: decoded.name,
+         isJWTAuth: true
+       };
+
+       // アプリのセッション/トークンを作成
+       const sessionToken = createUserSession(userInfo);
+
+       res.json({
+         success: true,
+         token: sessionToken,
+         user: userInfo
+       });
+     } catch (error) {
+       console.error('JWT validation failed:', error);
+       res.status(401).json({ success: false, error: 'Invalid token' });
+     }
+   });
+   ```
+
+4. **汎用バックエンドトークンハンドラ**
+
+   ```typescript
+   // バックエンドで両方のトークンタイプを処理
+   async function authenticateFacebookUser(tokenData: any) {
+     if (tokenData.accessToken) {
+       // Access tokenを処理 - Facebook Graph APIで検証
+       const response = await fetch(`https://graph.facebook.com/me?access_token=${tokenData.accessToken}&fields=id,name,email`);
+       const userInfo = await response.json();
+
+       return {
+         user: userInfo,
+         tokenType: 'access_token',
+         expiresIn: tokenData.expiresIn || 3600
+       };
+     } else if (tokenData.jwtToken) {
+       // JWT tokenを処理 - デコードして検証
+       // 参照: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
+       const decoded = jwt.verify(tokenData.jwtToken, getFacebookPublicKey());
+
+       return {
+         user: {
+           id: decoded.sub,
+           name: decoded.name,
+           email: decoded.email
+         },
+         tokenType: 'jwt',
+         expiresIn: decoded.exp - Math.floor(Date.now() / 1000)
+       };
+     } else {
+       throw new Error('No valid token provided');
+     }
+   }
+   ```
+</Steps>
+
+### 主な考慮事項
+
+:::danger
+**重要なiOS専用の理解**:
+- **iOS**: ユーザーのApp Trackingの選択がトークンタイプを決定し、コード設定では決まりません（`limitedLogin: false`の場合でも）
+- **Android**: `limitedLogin`設定に関係なく、常にaccess tokenを受け取ります
+- **Limited LoginはiOS専用** - Androidはこの設定を完全に無視します
+:::
+
+**Access Token（標準ログイン）**:
+- ✅ **Android**: 常に利用可能（iOS専用の制限は適用されません）
+- ✅ **iOS**: ユーザーが明示的にアプリのトラッキングを許可した場合のみ
+- ✅ Facebook Graph APIへのアクセスに使用可能
+- ✅ より長い有効期限
+- ✅ より多くのユーザーデータが利用可能
+- ❌ **iOSではあまり一般的でなくなっている**、ユーザーがトラッキングを拒否することが増えているため
+
+**JWT Token（iOS専用プライバシーモード）**:
+- ❌ **Android**: 発生しない（サポートされていない）
+- ✅ **iOS**: トラッキングが拒否された場合、または`limitedLogin: true`の場合
+- ✅ iOSユーザーのプライバシー設定を尊重
+- ❌ 基本的なユーザー情報のみを含む
+- ❌ より短い有効期限
+- ❌ Facebook Graph APIへのアクセスなし
+- ⚠️ **現在iOSユーザーで最も一般的なシナリオ**
+
+:::warning
+**プラットフォーム固有の動作**:
+- **iOSアプリ**: access tokenとJWT tokenの両方を処理する必要があります
+- **Androidアプリ**: access tokenのみを処理する必要があります
+- **クロスプラットフォームアプリ**: 両方のトークン処理方法を実装する必要があります
+:::
+
+:::tip
+**iOSに必須**: 両方のトークン処理方法を実装する必要があります。多くのiOS開発者は常にaccess tokenを取得できると想定しており、ユーザーがトラッキングを拒否するとアプリが壊れます。
+:::
+
+## セキュアコンテキストの要件（Web/Capacitor）
+
+### Crypto APIの制限
+
+更新されたFacebookログインフローには、nonceの生成に**Web Crypto API**が必要であり、これは**セキュアコンテキスト**でのみ利用可能です:
+
+```typescript
+// これはセキュアコンテキスト（HTTPSまたはlocalhost）が必要です
+async function sha256(message: string) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer); // ❌ セキュアでないコンテキストでは失敗します
+  // ...
+}
+```
+
+### 開発環境の問題
+
+**よくある問題**: HTTP URLの`ionic serve`がFacebook認証を壊す
+
+| 環境 | Crypto API利用可能 | Facebookログイン動作 |
+|-------------|---------------------|---------------------|
+| `http://localhost:3000` | ✅ はい | ✅ はい |
+| `http://127.0.0.1:3000` | ✅ はい | ✅ はい |
+| `http://192.168.1.100:3000` | ❌ いいえ | ❌ いいえ |
+| `https://any-domain.com` | ✅ はい | ✅ はい |
+
+### Capacitor開発のソリューション
+
+<Steps>
+1. **Webテストにlocalhostを使用する**
+   ```bash
+   # ionic serve --host=0.0.0.0の代わりに
+   ionic serve --host=localhost
+   ```
+
+2. **IonicでHTTPSを有効にする**
+   ```bash
+   ionic serve --ssl
+   ```
+
+3. **実機でテストする**
+   ```bash
+   # Capacitorアプリは実機上でセキュアコンテキストで実行されます
+   ionic cap run ios
+   ionic cap run android
+   ```
+
+4. **開発用の代替nonce生成**
+   ```typescript
+   async function generateNonce() {
+     if (typeof crypto !== 'undefined' && crypto.subtle) {
+       // セキュアコンテキスト - crypto.subtleを使用
+       return await sha256(Math.random().toString(36).substring(2, 10));
+     } else {
+       // 開発用のフォールバック（本番環境では安全ではありません）
+       console.warn('Using fallback nonce - not secure for production');
+       return btoa(Math.random().toString(36).substring(2, 10));
+     }
+   }
+   ```
+</Steps>
+
+### Firebase統合に関する注意
+
+最近のFirebaseドキュメントでは、ログイン設定に関係なく、Facebook認証にnonceを含むJWT tokenが必要です。このアプローチは`limitedLogin: true`と`limitedLogin: false`の両方で機能します:
+
+```typescript
+   // 両方のモードは、ユーザーの選択に応じてJWT tokenを返すことができます
+   const loginResult = await SocialLogin.login({
+     provider: 'facebook',
+     options: {
+       permissions: ['email', 'public_profile'],
+       limitedLogin: false, // true = 常にJWT、false = ユーザーのトラッキング選択に依存
+       nonce: nonce
+     }
+   });
+```
+
+:::warning
+**開発の制限**: ネットワークIP（localhostではない）で`ionic serve`を使用している場合、crypto APIの制限によりFacebookログインは失敗します。WebテストにはlocalhostまたはHTTPSを使用してください。
+:::
+
+:::tip
+**本番環境の安全性**: iOS/AndroidのCapacitorアプリは常にセキュアコンテキストで実行されるため、この制限はWeb開発環境にのみ影響します。
+:::
+
+## トラブルシューティング
+
+### よくある問題と解決策
+
+1. **Androidのkey hashエラー**
+   - Facebookダッシュボードに正しいkey hashを追加したことを再確認してください
+   - リリースビルドの場合は、デバッグとリリースの両方のkey hashを追加したことを確認してください
+   - hashを生成する際に正しいkeystoreを使用していることを確認してください
+
+2. **Facebookログインボタンが表示されない**
+   - すべてのマニフェストエントリが正しいことを確認してください
+   - Facebook App IDとClient Tokenが正しいことを確認してください
+   - SDKを適切に初期化したことを確認してください
+
+3. **iOSのよくある問題**
+   - すべてのInfo.plistエントリが正しいことを確認してください
+   - URL schemesが適切に設定されていることを確認してください
+   - bundle IDがFacebookダッシュボードに登録されているものと一致することを確認してください
+
+### テスト
+
+1. **テスト前に、Facebook Developer Consoleでテストユーザーを追加してください**
+   - Roles > Test Usersに移動します
+   - テストユーザーを作成します
+   - これらの資格情報をテストに使用します
+
+2. **デバッグビルドとリリースビルドの両方をテストしてください**
+   - デバッグkey hashを使用したデバッグビルド
+   - リリースkey hashを使用したリリースビルド
+   - エミュレータと実機の両方でテスト
+
+次を含む完全なログインフローをテストすることを忘れないでください:
+- ログイン成功
+- ログインキャンセル
+- エラー処理
+- ログアウト機能

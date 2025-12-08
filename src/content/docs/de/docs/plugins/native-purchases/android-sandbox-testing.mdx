@@ -1,0 +1,93 @@
+---
+title: Android-Sandbox-Tests konfigurieren
+description: Erfahren Sie, wie Sie Sandbox-Tests für In-App-Käufe auf Android mit der Google Play Console einrichten.
+locale: de
+sidebar:
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Das Testen von In-App-Käufen erfordert eine ordnungsgemäße Konfiguration in der Google Play Console. Dieser Leitfaden führt Sie durch die Einrichtung von Sandbox-Tests für Ihre Android-App.
+
+## Voraussetzungen
+
+Sie benötigen ein aktives Google Play Console-Konto mit einem aktuellen Abonnement (jährlich erneuert).
+
+## Einrichtungsprozess
+
+<Steps>
+
+1. **Testkonto hinzufügen**
+
+   Navigieren Sie zu Ihrer Google Play Console, wählen Sie Ihre App aus und gehen Sie zu **Einrichtung > Lizenztests**.
+
+   Fügen Sie das primäre Google-Konto hinzu, das mit dem Android-Gerät verbunden ist, das Sie zum Testen verwenden.
+
+   ![Testkonto hinzufügen](/native-purchases/android/sandbox-testing/add-testing-account.webp)
+
+2. **Test-Track erstellen**
+
+   Gehen Sie zu **Tests > Geschlossene Tests** oder **Tests > Interne Tests** und erstellen Sie einen neuen Track.
+
+   Sie müssen mindestens eine signierte Version Ihrer App in diesen Track hochladen.
+
+   ![Test-Track erstellen](/native-purchases/android/sandbox-testing/create-testing-track.webp)
+
+3. **Tester-Liste erstellen**
+
+   Nach dem Einrichten des Test-Tracks erstellen Sie eine E-Mail-Liste und fügen die E-Mail-Adresse des Testgeräts hinzu.
+
+   ![Tester-Liste erstellen](/native-purchases/android/sandbox-testing/create-tester-list.webp)
+
+4. **Am Testprogramm teilnehmen**
+
+   Öffnen Sie die Opt-in-URL von Ihrem Testgerät aus und klicken Sie auf die Schaltfläche **"Tester werden"**, um sich anzumelden.
+
+   ![Am Test teilnehmen](/native-purchases/android/sandbox-testing/join-testing-program.webp)
+
+5. **Signiertes APK hochladen**
+
+   Generieren Sie ein signiertes APK oder verwenden Sie Android App Bundle, um Ihre App in den Test-Track hochzuladen.
+
+   Ein Rollout ist nicht erforderlich - laden Sie einfach hoch und warten Sie auf die Genehmigung.
+
+   ![APK hochladen](/native-purchases/android/sandbox-testing/upload-signed-apk.webp)
+
+6. **Erstellen und testen**
+
+   Führen Sie Ihre App auf dem Testgerät aus. Beim Versuch eines Kaufs sollten Sie eine Meldung sehen:
+
+   > "Dies ist eine Testbestellung; es wird Ihnen nichts berechnet."
+
+   ![Testkauf](/native-purchases/android/sandbox-testing/test-purchase-confirmation.webp)
+
+</Steps>
+
+## Wichtige Hinweise
+
+- Testkonten werden für Käufe nicht belastet
+- Testkäufe verwenden denselben Ablauf wie Produktionskäufe
+- Sie können alle Abonnementfunktionen testen, einschließlich Testversionen und Einführungsangeboten
+- Testabonnements haben beschleunigte Verlängerungsperioden für schnellere Tests
+
+## Fehlerbehebung
+
+**Produkte werden im Testmodus nicht angezeigt:**
+- Stellen Sie sicher, dass Ihre App in einen Test-Track hochgeladen wurde
+- Überprüfen Sie, ob das Testkonto zu Lizenztests hinzugefügt wurde
+- Prüfen Sie, ob Produkte in der Google Play Console aktiv sind
+
+**Fehler "Artikel nicht verfügbar":**
+- Warten Sie 2-3 Stunden nach dem Erstellen von Produkten, bis sie verfügbar werden
+- Stellen Sie sicher, dass der Paketname Ihrer App mit dem in der Play Console übereinstimmt
+- Überprüfen Sie, ob Sie mit einem Testkonto angemeldet sind
+
+**Testkäufe werden als echte Gebühren angezeigt:**
+- Überprüfen Sie noch einmal, ob das Konto zu Lizenztests hinzugefügt wurde
+- Stellen Sie sicher, dass Sie den Build aus dem Test-Track verwenden
+- Überprüfen Sie, ob das Test-Banner während des Kaufs erscheint
+
+## Zusätzliche Ressourcen
+
+Weitere Details finden Sie in der [offiziellen Google Play-Dokumentation](https://developer.android.com/google/play/billing/test) zum Testen von In-App-Käufen.

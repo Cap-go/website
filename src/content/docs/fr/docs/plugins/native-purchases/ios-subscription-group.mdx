@@ -1,0 +1,300 @@
+---
+title: Create iOS Subscription Group
+description: Learn how to create and configure subscription groups in App Store Connect for organizing your app's subscription offerings.
+sidebar:
+  order: 7
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Subscription groups are essential for organizing and managing multiple subscription levels in your iOS app. Understanding how they work is crucial for implementing upgrade, downgrade, and crossgrade functionality.
+
+## What is a Subscription Group?
+
+A subscription group is a collection of related subscriptions that users can choose between. Users can only subscribe to one subscription within a group at a time. When they switch subscriptions, Apple handles the transition automatically.
+
+## Why Subscription Groups Matter
+
+Subscription groups enable:
+- **Tiered pricing**: Offer basic, premium, and ultimate plans
+- **Different durations**: Monthly, yearly, and lifetime options
+- **Upgrade/downgrade logic**: Automatic handling of subscription changes
+- **Simplified management**: Group related subscriptions together
+
+## Subscription Levels
+
+Within a group, each subscription should be ranked from highest value (level 1) to lowest value. This ranking determines how subscription changes are classified:
+
+![Subscription group hierarchy](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
+
+### Level Examples
+
+**Level 1** (Highest Value)
+- Premium Annual ($99.99/year)
+- Ultimate Monthly ($19.99/month)
+
+**Level 2** (Medium Value)
+- Standard Annual ($49.99/year)
+- Premium Monthly ($9.99/month)
+
+**Level 3** (Lowest Value)
+- Basic Annual ($29.99/year)
+- Standard Monthly ($4.99/month)
+
+## Subscription Change Types
+
+Apple automatically handles three types of subscription changes based on the level ranking:
+
+### 1. Upgrade
+Moving to a **higher-tier** subscription (e.g., level 2 → level 1).
+
+**Behavior:**
+- Takes effect **immediately**
+- User receives **prorated refund** for remaining time
+- New subscription starts right away
+
+**Example:**
+```typescript
+// User currently has: Standard Monthly (Level 2)
+// User upgrades to: Premium Annual (Level 1)
+// Result: Immediate access to Premium, refund for unused Standard time
+```
+
+### 2. Downgrade
+Moving to a **lower-tier** subscription (e.g., level 1 → level 2).
+
+**Behavior:**
+- Takes effect at **next renewal date**
+- User keeps current subscription until period ends
+- New subscription starts automatically after expiration
+
+**Example:**
+```typescript
+// User currently has: Premium Annual (Level 1)
+// User downgrades to: Standard Monthly (Level 2)
+// Result: Premium access continues until annual renewal date, then switches
+```
+
+### 3. Crossgrade
+Switching to another subscription **at the same tier level**.
+
+**Behavior depends on duration:**
+
+**Different Duration** → Behaves like **downgrade**
+- Takes effect at next renewal date
+- Example: Monthly Premium (Level 1) → Annual Premium (Level 1)
+
+**Same Duration** → Behaves like **upgrade**
+- Takes effect immediately
+- Example: Premium Monthly (Level 1) → Ultimate Monthly (Level 1)
+
+## Creating a Subscription Group
+
+<Steps>
+
+1. **Navigate to Subscriptions**
+
+   In App Store Connect, select your app and go to **Monetize > Subscriptions**.
+
+2. **Create Group**
+
+   Click **+** next to "Subscription Groups" to create a new group.
+
+3. **Name the Group**
+
+   Choose a descriptive name that reflects the subscriptions it contains:
+   - "Premium Access"
+   - "Cloud Storage Plans"
+   - "Pro Features"
+
+4. **Add Subscriptions**
+
+   After creating the group, add individual subscriptions to it. Each subscription will have a level ranking.
+
+5. **Set Level Rankings**
+
+   Arrange subscriptions from highest value (1) to lowest value. Consider:
+   - Annual plans typically rank higher than monthly
+   - Higher-priced tiers rank above lower-priced ones
+   - Ultimate/premium tiers rank highest
+
+</Steps>
+
+## Using in Your App
+
+The native-purchases plugin automatically handles subscription group logic:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Fetch all subscriptions in a group
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly', 'premium_annual', 'ultimate_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Display current subscription using StoreKit transactions
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const activeSubs = purchases.filter((purchase) => purchase.isActive);
+
+// Detect pending downgrade/cancellation (StoreKit sets willCancel === true)
+const pendingChange = purchases.find((purchase) => purchase.willCancel === true);
+if (pendingChange) {
+  console.log('Subscription will stop auto-renewing on', pendingChange.expirationDate);
+}
+
+// Purchase (StoreKit handles upgrades/downgrades automatically)
+await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_annual',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Listen for StoreKit updates (fires on upgrades/downgrades/refunds)
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Subscription updated:', transaction);
+});
+```
+
+## Handling Subscription Changes
+
+### Detecting Change Type
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Get current subscription info
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const currentSubscription = purchases.find(
+  (purchase) => purchase.subscriptionState === 'subscribed',
+);
+
+if (currentSubscription) {
+  // StoreKit reports if user cancelled auto-renew
+  if (currentSubscription.willCancel) {
+    console.log(
+      `User cancelled. Access remains until ${currentSubscription.expirationDate}`,
+    );
+  }
+
+  if (currentSubscription.isUpgraded) {
+    console.log('User recently upgraded to this plan.');
+  }
+}
+
+// Listen for automatic upgrades/downgrades
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Subscription changed!', transaction);
+  if (transaction.subscriptionState === 'revoked') {
+    revokeAccess();
+  } else if (transaction.isActive) {
+    unlockPremiumFeatures();
+  }
+});
+```
+
+### User Communication
+
+Always communicate the change behavior clearly:
+
+**For Upgrades:**
+> "You'll get immediate access to Premium features. We'll prorate your current subscription."
+
+**For Downgrades:**
+> "You'll keep Premium access until [renewal date], then switch to Standard."
+
+**For Crossgrades:**
+> "Your plan will change to Annual billing at the next renewal on [date]."
+
+## Server monitoring
+
+Use Apple's App Store Server Notifications v2 or your own receipt-validation backend to mirror StoreKit changes in your database. Pair server notifications with the `transactionUpdated` listener so both client and backend stay in sync.
+
+## Best Practices
+
+### Group Organization
+- Keep related subscriptions in the same group
+- Don't mix unrelated features (e.g., storage and ad removal)
+- Create separate groups for different feature sets
+
+### Level Ranking Strategy
+- Annual plans → Higher level than monthly (for same tier)
+- Higher-priced tiers → Higher level
+- Consider value, not just price
+
+### User Experience
+- Show current subscription clearly
+- Display all available options in the group
+- Indicate which changes are immediate vs. at renewal
+- Allow easy switching between plans
+
+### Testing
+- Test all upgrade scenarios
+- Test all downgrade scenarios
+- Verify crossgrade behavior
+- Check webhook firing
+
+## Common Scenarios
+
+### Scenario 1: Three-Tier Monthly Plans
+```
+Level 1: Ultimate Monthly ($19.99)
+Level 2: Premium Monthly ($9.99)
+Level 3: Basic Monthly ($4.99)
+```
+
+- Basic → Premium: Upgrade (immediate)
+- Premium → Ultimate: Upgrade (immediate)
+- Ultimate → Premium: Downgrade (at renewal)
+- Basic → Ultimate: Upgrade (immediate)
+
+### Scenario 2: Mixed Duration Plans
+```
+Level 1: Premium Annual ($99.99/year)
+Level 2: Premium Monthly ($9.99/month)
+```
+
+- Monthly → Annual: Crossgrade (at renewal)
+- Annual → Monthly: Downgrade (at renewal)
+
+### Scenario 3: Multi-Tier Multi-Duration
+```
+Level 1: Ultimate Annual ($199/year)
+Level 2: Ultimate Monthly ($19.99/month)
+Level 3: Premium Annual ($99/year)
+Level 4: Premium Monthly ($9.99/month)
+Level 5: Basic Annual ($49/year)
+Level 6: Basic Monthly ($4.99/month)
+```
+
+This setup provides maximum flexibility while maintaining clear upgrade/downgrade logic.
+
+## Troubleshooting
+
+**Subscription not appearing in group:**
+- Verify it's assigned to the correct group
+- Check that it's in at least "Ready to Submit" status
+- Ensure product ID is correct
+
+**Wrong upgrade/downgrade behavior:**
+- Review level rankings (1 = highest)
+- Verify subscription tiers make sense
+- Check that levels are set correctly
+
+**Products from different groups:**
+- Users can subscribe to multiple groups simultaneously
+- This is intentional - keep related products in same group
+
+**getActiveProducts showing multiple subscriptions:**
+- Check if subscriptions are in different groups
+- Verify user isn't subscribed via Family Sharing
+- Review subscription status in App Store Connect
+
+## Additional Resources
+
+For more details, refer to the [official Apple documentation on subscription groups](https://developer.apple.com/app-store/subscriptions/).

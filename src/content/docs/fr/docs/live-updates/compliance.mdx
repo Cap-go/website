@@ -1,0 +1,189 @@
+---
+title: Conformité
+description: "Découvrez les pratiques de confidentialité de Capgo, la collecte de données, la conformité en matière de sécurité et comment nous protégeons les informations de vos utilisateurs pendant les mises à jour en direct."
+locale: fr
+sidebar:
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo est conçu en tenant compte de la confidentialité, de la sécurité et de la conformité. Ce document explique quelles données sont collectées, comment elles sont utilisées et quelles mesures sont en place pour protéger la vie privée de vos utilisateurs et garantir la conformité réglementaire lors de l'utilisation du service de mise à jour en direct de Capgo.
+
+## Aperçu de la collecte de données
+
+Capgo collecte un minimum de données nécessaires pour fournir efficacement le service de mise à jour en direct. La collecte de données est axée sur les exigences opérationnelles plutôt que sur le suivi ou l'analyse des utilisateurs.
+
+### Quelles données sont collectées
+
+Capgo collecte uniquement les données nécessaires pour fournir la fonctionnalité de mises à jour en direct. Lorsque votre application vérifie les mises à jour ou télécharge de nouveaux bundles, les informations suivantes sont collectées :
+
+- **ID de l'application** : Un identifiant unique pour votre application utilisé pour associer l'application au compte correct
+- **Code de version de l'application** : Le code de version de l'application utilisé pour déterminer quelles mises à jour sont compatibles avec l'application
+- **Nom de version de l'application** : Le nom de version de l'application utilisé à des fins d'affichage
+- **Plateforme** : La plateforme (iOS, Android) de l'application utilisée pour déterminer quelles mises à jour sont compatibles avec l'application
+- **ID de l'appareil** : Un identifiant unique pour l'appareil utilisé pour livrer des mises à jour à un appareil spécifique et à des fins de facturation. Cet identifiant est une chaîne aléatoire créée au premier démarrage de l'application. **À partir des versions v5.10.0, v6.25.0 et v7.25.0 du plugin**, l'ID de l'appareil persiste désormais lors des réinstallations de l'application (stocké en toute sécurité dans Keychain sur iOS et EncryptedSharedPreferences sur Android) pour fournir un meilleur suivi de l'appareil tout en maintenant la conformité avec les directives de l'app store. Avant ces versions, l'ID de l'appareil était réinitialisé à chaque installation de l'application
+- **ID du bundle** : L'identifiant unique du bundle actuellement installé sur l'appareil
+- **Nom du canal** : Le nom du canal sélectionné pour recevoir les mises à jour
+- **Version du système d'exploitation** : La version du système d'exploitation utilisée pour déterminer quelles mises à jour sont compatibles avec l'appareil
+- **Version du plugin** : La version du plugin @capgo/capacitor-updater utilisée pour livrer les mises à jour à l'appareil
+
+**Données techniques supplémentaires :**
+- Horodatages de vérification des mises à jour
+- Statut de réussite/échec du téléchargement
+- Statut d'installation du bundle
+- Événements de restauration et raisons
+- Adresse IP (pour la géolocalisation et l'optimisation CDN)
+
+<Aside type="note">
+Vous pouvez vérifier les données collectées en inspectant le code source du plugin @capgo/capacitor-updater, qui est open-source et disponible sur [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo ne collecte pas d'informations personnellement identifiables (PII) telles que les noms, adresses e-mail, numéros de téléphone ou identifiants d'appareils persistants pouvant être utilisés pour suivre les utilisateurs individuels à travers les applications.
+</Aside>
+
+### Quelles données ne sont PAS collectées
+
+Capgo ne collecte explicitement pas :
+
+- Informations personnelles ou identifiants de l'utilisateur
+- Analyses d'utilisation de l'application ou données de comportement de l'utilisateur
+- Contenu de votre application ou données générées par l'utilisateur
+- Données de localisation au-delà de la région géographique générale
+- Identifiants d'appareils persistants à des fins de suivi
+- Données biométriques ou données personnelles sensibles
+
+## Utilisation et objectif des données
+
+Les données collectées par Capgo sont utilisées exclusivement pour :
+
+### Fonctionnement du service
+- Déterminer quelles mises à jour sont disponibles pour des versions d'application spécifiques
+- Optimiser la livraison de contenu grâce à la sélection géographique du CDN
+- Assurer la compatibilité entre les mises à jour et les capacités de l'appareil
+- Gérer les déploiements de mises à jour et les affectations de canaux
+
+### Amélioration du service
+- Surveiller les taux de réussite des mises à jour et identifier les problèmes
+- Optimiser les performances et la fiabilité des téléchargements
+- Améliorer le système global de livraison des mises à jour
+- Déboguer et dépanner les échecs de mise à jour
+
+### Sécurité et intégrité
+- Prévenir les abus et garantir la disponibilité du service
+- Valider l'authenticité et l'intégrité des mises à jour
+- Protéger contre les mises à jour malveillantes ou corrompues
+- Maintenir la sécurité et la stabilité du service
+
+## Stockage et conservation des données
+
+### Emplacement de stockage
+- Les bundles de mise à jour et les métadonnées sont stockés sur une infrastructure cloud sécurisée
+- Les données sont réparties sur plusieurs régions géographiques pour les performances
+- Toute transmission de données est chiffrée à l'aide de protocoles standard de l'industrie (HTTPS/TLS)
+
+### Conservation des données
+- Les journaux de vérification des mises à jour sont conservés à des fins opérationnelles (généralement 30-90 jours)
+- Les fichiers de bundle sont conservés tant qu'ils sont attribués à des canaux actifs
+- Les métriques agrégées et non personnelles peuvent être conservées plus longtemps pour l'amélioration du service
+- Les données personnelles, le cas échéant, sont supprimées conformément aux lois applicables sur la protection des données
+
+### Sécurité des données
+- Toutes les données sont chiffrées en transit et au repos
+- L'accès aux données est limité au personnel autorisé uniquement
+- Des audits de sécurité et une surveillance réguliers sont effectués
+- Les pratiques de sécurité standard de l'industrie sont suivies
+- **Certification SOC 2** : Capgo est actuellement certifié SOC 2 Type II, garantissant les normes les plus élevées de sécurité, de disponibilité et de confidentialité. Consultez notre statut de conformité sur [trust.capgo.app](https://trust.capgo.app)
+- **Audit de code continu** : Chaque commit est automatiquement audité par [SonarCloud](https://sonarcloud.io/summary/overall?id=Cap-go_capacitor-updater&branch=main) pour le [plugin](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main) et le [backend](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main), garantissant la qualité du code, la détection des vulnérabilités de sécurité et la maintenabilité
+- **Analyse des vulnérabilités** : Une analyse de sécurité supplémentaire est effectuée par [Snyk](https://snyk.io/test/github/Cap-go/capgo) pour détecter et corriger les vulnérabilités de sécurité dans les dépendances
+- **Sécurité de l'infrastructure** : Notre infrastructure d'hébergement est continuellement surveillée et vérifiée via [des vérifications de sécurité d'hébergement](https://hosting-checker.net/websites/api.capgo.app)
+- **Révision de code assistée par IA** : Chaque pull request est examinée par CodeRabbit AI pour détecter les problèmes potentiels, les préoccupations de sécurité et maintenir les normes de qualité du code
+
+## Contrôles de confidentialité
+
+### Pour les développeurs d'applications
+En tant qu'utilisateur de Capgo, vous avez le contrôle sur :
+
+- **Gestion des canaux** : Contrôlez quelles mises à jour sont distribuées à quels utilisateurs
+- **Minimisation des données** : Configurez quelles informations de l'appareil sont partagées
+- **Contrôles géographiques** : Gérez où vos mises à jour sont distribuées
+- **Paramètres de conservation** : Contrôlez combien de temps les données de mise à jour sont conservées
+
+### Pour les utilisateurs finaux
+Les utilisateurs de votre application bénéficient de :
+
+- **Collecte minimale de données** : Seules les données essentielles pour la livraison des mises à jour sont collectées
+- **Pas de suivi** : Aucun suivi inter-applications ou suivi persistant des utilisateurs
+- **Transparence** : Cette politique de confidentialité explique exactement quelles données sont collectées
+- **Sécurité** : Toute transmission de données est chiffrée et sécurisée
+
+## Conformité et juridique
+
+### Réglementations sur la protection des données
+Capgo est conçu pour se conformer aux principales réglementations sur la protection des données, notamment :
+
+- **RGPD** (Règlement général sur la protection des données)
+- **CCPA** (California Consumer Privacy Act)
+- **COPPA** (Children's Online Privacy Protection Act)
+- Autres lois régionales sur la confidentialité applicables
+
+### Conformité aux app stores
+Capgo adhère strictement aux directives et politiques des app stores :
+
+- **Apple App Store** : Conforme aux [directives d'examen de l'App Store](https://developer.apple.com/app-store/review/guidelines/) section 3.3.2, garantissant que les mises à jour en direct modifient uniquement le comportement de l'application de manière cohérente avec l'application soumise
+- **Google Play Store** : Suit les exigences de la [politique des développeurs Google Play](https://play.google.com/about/developer-content-policy/) pour le chargement dynamique de code et les mises à jour d'application
+- **Restrictions de contenu** : Les mises à jour en direct ne peuvent pas introduire de fonctionnalités absentes de la soumission originale de l'application ou violer les politiques de contenu spécifiques à la plateforme
+- **Exigences de sécurité** : Toutes les mises à jour maintiennent la même posture de sécurité et les mêmes autorisations que l'application d'origine
+
+### Vos responsabilités
+En tant que développeur d'applications utilisant Capgo, vous devriez :
+
+- Inclure des divulgations de confidentialité appropriées dans la politique de confidentialité de votre application
+- Informer les utilisateurs de l'utilisation des services de mise à jour en direct
+- Garantir la conformité avec les lois applicables dans votre juridiction
+- Mettre en œuvre des mécanismes de consentement appropriés si nécessaire
+
+<Aside type="tip">
+**Aucune mise en œuvre de confidentialité supplémentaire requise** : Capgo est conçu pour être conforme à la confidentialité par défaut. Vous n'avez pas besoin de mettre en œuvre de contrôles de confidentialité supplémentaires ou de mécanismes de traitement des données dans le code de votre application. L'approche de collecte minimale de données et de confidentialité dès la conception signifie que l'intégration de Capgo ne nécessite généralement pas de modifications de vos déclarations ou politiques de confidentialité existantes.
+</Aside>
+
+## Confidentialité dès la conception
+
+Capgo suit les principes de confidentialité dès la conception :
+
+### Minimisation des données
+- Ne collecter que les données absolument nécessaires au fonctionnement du service
+- Éviter de collecter des informations personnelles ou sensibles
+- Utiliser des données agrégées et anonymisées dans la mesure du possible
+
+### Limitation des finalités
+- Utiliser les données collectées uniquement aux fins déclarées
+- Ne pas réutiliser les données pour des activités non liées
+- Maintenir des limites claires sur l'utilisation des données
+
+### Transparence
+- Fournir des informations claires sur la collecte et l'utilisation des données
+- Rendre les pratiques de confidentialité facilement accessibles et compréhensibles
+- Mettre à jour régulièrement la documentation sur la confidentialité
+
+## Contact et questions
+
+Si vous avez des questions sur les pratiques de confidentialité de Capgo ou si vous devez signaler un problème de confidentialité :
+
+- Consultez notre politique de confidentialité complète sur [capgo.app/privacy](https://capgo.app/privacy)
+- Consultez notre statut de sécurité et de conformité sur [capgo.app/trust](https://capgo.app/trust)
+- Contactez notre équipe de confidentialité via les canaux d'assistance
+- Signalez tout problème lié à la confidentialité via notre contact de sécurité
+
+<Aside type="tip">
+N'oubliez pas de mettre à jour la politique de confidentialité de votre propre application pour refléter l'utilisation du service de mise à jour en direct de Capgo et toute collecte de données pouvant se produire dans le cadre du processus de mise à jour.
+</Aside>
+
+## Meilleures pratiques en matière de confidentialité
+
+Lors de l'implémentation de Capgo dans votre application :
+
+1. **Soyez transparent** : Informez les utilisateurs de la fonctionnalité de mise à jour en direct
+2. **Minimisez les données** : N'activez que les fonctionnalités de collecte de données dont vous avez réellement besoin
+3. **Implémentation sécurisée** : Suivez les meilleures pratiques de sécurité dans votre intégration
+4. **Examens réguliers** : Examinez périodiquement vos pratiques de confidentialité et mettez à jour les politiques
+5. **Contrôle de l'utilisateur** : Envisagez de fournir aux utilisateurs des options pour contrôler le comportement des mises à jour
+
+En suivant ces pratiques et en comprenant l'approche de confidentialité de Capgo, vous pouvez offrir à vos utilisateurs une expérience de mise à jour en direct sécurisée et respectueuse de la vie privée.

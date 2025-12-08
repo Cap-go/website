@@ -1,0 +1,86 @@
+---
+title: 开始使用
+description: 使用 Capgo Health 插件启用 HealthKit 和 Health Connect 访问。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装插件**
+   <PackageManagers pkg="@capgo/capacitor-health" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS 配置
+
+- 在 Xcode 中打开 `ios/App/App.xcworkspace` 并启用 **HealthKit** 功能。
+- 在 `Info.plist` 中提供使用说明：
+
+```xml
+<key>NSHealthShareUsageDescription</key>
+<string>此应用读取您的健康指标以个性化您的体验。</string>
+<key>NSHealthUpdateUsageDescription</key>
+<string>此应用写入您明确记录的健康数据。</string>
+```
+
+## Android 配置
+
+健康数据由 [Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect) 提供支持。请确保：
+
+- `minSdkVersion` 为 **26 或更高**（Capacitor 5 已经满足此要求）。
+- 用户已安装 Health Connect（Android 14+ 已捆绑；早期版本需要从 Play Store 下载）。
+- 在提示访问权限时，引导用户通过运行时权限 UI。
+
+## 检查可用性并请求访问权限
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+const { available, reason } = await Health.isAvailable();
+if (!available) {
+  console.warn('Health APIs unavailable:', reason);
+  return;
+}
+
+await Health.requestAuthorization({
+  read: ['steps', 'heartRate', 'weight'],
+  write: ['weight'],
+});
+```
+
+## 读取样本
+
+```typescript
+const { samples } = await Health.readSamples({
+  dataType: 'steps',
+  startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  endDate: new Date().toISOString(),
+  limit: 200,
+});
+
+samples.forEach((sample) => {
+  console.log(sample.value, sample.startDate, sample.endDate);
+});
+```
+
+## 写入样本
+
+```typescript
+await Health.saveSample({
+  dataType: 'weight',
+  value: 74.6,
+  startDate: new Date().toISOString(),
+});
+```
+
+## 授权管理
+
+- 使用 `checkAuthorization()` 验证当前的读/写范围并调整您的 UI。
+- 通过解释为什么数据会增强体验并提供重试选项，优雅地处理拒绝。
+- 始终尊重用户的隐私，只请求您的功能所需的最小范围。

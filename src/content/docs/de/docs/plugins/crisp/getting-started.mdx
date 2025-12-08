@@ -1,0 +1,344 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie das Crisp Chat SDK Plugin für In-App-Kundensupport in Ihrer Capacitor-App installieren und verwenden.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-crisp" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Ihre Crisp Website-ID abrufen**
+   - Melden Sie sich bei [crisp.chat](https://crisp.chat) an
+   - Erstellen Sie eine Website/ein Projekt
+   - Finden Sie Ihre Website-ID unter Einstellungen > Setup-Anleitung
+</Steps>
+
+## Grundlegende Verwendung
+
+Importieren Sie das Plugin und konfigurieren Sie es mit Ihrer Website-ID:
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+// Crisp mit Ihrer Website-ID konfigurieren
+const configureCrisp = async () => {
+  await CapacitorCrisp.configure({
+    websiteID: 'YOUR_WEBSITE_ID'
+  });
+};
+
+// Den Chat öffnen
+const openChat = async () => {
+  await CapacitorCrisp.openMessenger();
+};
+
+// Benutzerinformationen festlegen
+const setUserInfo = async () => {
+  await CapacitorCrisp.setUser({
+    email: 'user@example.com',
+    nickname: 'John Doe',
+    phone: '+1234567890',
+    avatar: 'https://example.com/avatar.jpg'
+  });
+};
+
+// Benutzersitzung zurücksetzen (Abmelden)
+const logout = async () => {
+  await CapacitorCrisp.resetChatSession();
+};
+```
+
+## API-Referenz
+
+### configure(options)
+
+Konfigurieren Sie Crisp mit Ihrer Website-ID und optionalen Einstellungen.
+
+```typescript
+interface ConfigureOptions {
+  websiteID: string;
+  locale?: string; // z.B., 'en', 'fr', 'es'
+  tokenID?: string; // Für authentifizierte Sitzungen
+}
+
+await CapacitorCrisp.configure({
+  websiteID: 'YOUR_WEBSITE_ID',
+  locale: 'de'
+});
+```
+
+### openMessenger()
+
+Öffnet die Crisp-Chat-Oberfläche.
+
+```typescript
+await CapacitorCrisp.openMessenger();
+```
+
+### setUser(options)
+
+Setzt Benutzerinformationen für die Chat-Sitzung.
+
+```typescript
+interface UserOptions {
+  email?: string;
+  nickname?: string;
+  phone?: string;
+  avatar?: string;
+}
+
+await CapacitorCrisp.setUser({
+  email: 'user@example.com',
+  nickname: 'John Doe'
+});
+```
+
+### setUserCompany(options)
+
+Setzt Firmeninformationen für Geschäftskunden.
+
+```typescript
+interface CompanyOptions {
+  name: string;
+  url?: string;
+  description?: string;
+  employment?: {
+    title?: string;
+    role?: string;
+  };
+  geolocation?: {
+    city?: string;
+    country?: string;
+  };
+}
+
+await CapacitorCrisp.setUserCompany({
+  name: 'Acme Corp',
+  url: 'https://acme.com',
+  employment: {
+    title: 'CEO',
+    role: 'Leadership'
+  }
+});
+```
+
+### pushEvent(options)
+
+Senden Sie benutzerdefinierte Ereignisse, um Benutzeraktionen zu verfolgen.
+
+```typescript
+interface EventOptions {
+  name: string;
+  color?: 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'pink' | 'brown' | 'grey' | 'black';
+  data?: { [key: string]: any };
+}
+
+await CapacitorCrisp.pushEvent({
+  name: 'checkout_completed',
+  color: 'green',
+  data: {
+    price: 99.99,
+    currency: 'USD'
+  }
+});
+```
+
+### setSessionSegment(segment)
+
+Setzen Sie ein Segment, um die Chat-Sitzung zu kategorisieren.
+
+```typescript
+await CapacitorCrisp.setSessionSegment('premium_customer');
+```
+
+### resetChatSession()
+
+Setzen Sie die aktuelle Chat-Sitzung zurück (nützlich für Abmeldung).
+
+```typescript
+await CapacitorCrisp.resetChatSession();
+```
+
+## Erweiterte Funktionen
+
+### Benutzerdefinierte Benutzerdaten
+
+```typescript
+// Mehrere benutzerdefinierte Datenfelder festlegen
+await CapacitorCrisp.setSessionData({
+  key: 'plan',
+  value: 'premium'
+});
+
+await CapacitorCrisp.setSessionData({
+  key: 'signup_date',
+  value: '2024-01-15'
+});
+```
+
+### Nachrichtenvorlage
+
+Setzen Sie eine vorgefüllte Nachricht in das Chat-Eingabefeld:
+
+```typescript
+await CapacitorCrisp.setMessageText(
+  "Hallo, ich benötige Hilfe bei meiner Bestellung #12345"
+);
+```
+
+### Chat-Verfügbarkeit
+
+Steuern Sie, wann das Chat-Widget verfügbar ist:
+
+```typescript
+// Chat vorübergehend ausblenden
+await CapacitorCrisp.setTokenID('user_token_12345');
+```
+
+## Vollständiges Beispiel
+
+```typescript
+import { CapacitorCrisp } from '@capgo/capacitor-crisp';
+
+export class ChatService {
+  async initialize() {
+    // Crisp konfigurieren
+    await CapacitorCrisp.configure({
+      websiteID: 'YOUR_WEBSITE_ID',
+      locale: 'de'
+    });
+  }
+
+  async loginUser(user: any) {
+    // Benutzerinformationen festlegen
+    await CapacitorCrisp.setUser({
+      email: user.email,
+      nickname: user.name,
+      phone: user.phone,
+      avatar: user.avatarUrl
+    });
+
+    // Benutzerdefinierte Daten festlegen
+    await CapacitorCrisp.setSessionData({
+      key: 'user_id',
+      value: user.id
+    });
+
+    await CapacitorCrisp.setSessionData({
+      key: 'account_type',
+      value: user.accountType
+    });
+
+    // Segment festlegen
+    if (user.isPremium) {
+      await CapacitorCrisp.setSessionSegment('premium');
+    }
+
+    // Login-Ereignis verfolgen
+    await CapacitorCrisp.pushEvent({
+      name: 'user_login',
+      color: 'blue',
+      data: {
+        method: 'email'
+      }
+    });
+  }
+
+  async openSupport(context?: string) {
+    if (context) {
+      await CapacitorCrisp.setMessageText(
+        `Ich benötige Hilfe bei: ${context}`
+      );
+    }
+
+    await CapacitorCrisp.openMessenger();
+  }
+
+  async logout() {
+    await CapacitorCrisp.resetChatSession();
+  }
+}
+```
+
+## Styling und Anpassung
+
+Crisp passt sich automatisch dem Theme Ihrer App an, aber Sie können es über das Crisp-Dashboard weiter anpassen:
+
+1. Gehen Sie zu Ihrem Crisp-Dashboard
+2. Navigieren Sie zu Einstellungen > Website-Einstellungen > Chatbox & E-Mail-Einstellungen
+3. Passen Sie Farben, Position und Verhalten an
+
+## Best Practices
+
+1. **Früh initialisieren**
+   Konfigurieren Sie Crisp während der App-Initialisierung für sofortige Verfügbarkeit:
+   ```typescript
+   import { App } from '@capacitor/app';
+
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       await CapacitorCrisp.configure({
+         websiteID: 'YOUR_WEBSITE_ID'
+       });
+     }
+   });
+   ```
+
+2. **Benutzerkontext festlegen**
+   Geben Sie immer Benutzerinformationen an, wenn verfügbar, für besseren Support:
+   ```typescript
+   if (user.isAuthenticated) {
+     await CapacitorCrisp.setUser({
+       email: user.email,
+       nickname: user.name
+     });
+   }
+   ```
+
+3. **Wichtige Ereignisse verfolgen**
+   Verwenden Sie Ereignisse, um Support-Agenten Kontext zu bieten:
+   ```typescript
+   await CapacitorCrisp.pushEvent({
+     name: 'error_occurred',
+     color: 'red',
+     data: {
+       error: error.message,
+       screen: 'checkout'
+     }
+   });
+   ```
+
+4. **Abmeldung ordnungsgemäß behandeln**
+   Setzen Sie die Sitzung immer zurück, wenn Benutzer sich abmelden:
+   ```typescript
+   async logout() {
+     await CapacitorCrisp.resetChatSession();
+     // Ihre andere Abmeldelogik
+   }
+   ```
+
+## Plattform-Hinweise
+
+### iOS
+- Erfordert iOS 10.0+
+- Verwendet natives Crisp iOS SDK
+- Unterstützt Push-Benachrichtigungen (im Crisp-Dashboard konfigurieren)
+
+### Android
+- Erfordert Android 5.0 (API 21)+
+- Verwendet natives Crisp Android SDK
+- Material Design-konform
+
+### Web
+- Verwendet als Fallback Crisp JavaScript SDK
+- Vollständige Feature-Parität mit nativen Plattformen

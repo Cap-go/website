@@ -1,0 +1,273 @@
+---
+title: Premiers pas
+locale: fr
+description: Apprenez à installer et utiliser le plugin Background Geolocation pour suivre la localisation de l'appareil en arrière-plan.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+Ce plugin supporte Capacitor v7 :
+
+| Capacitor  | Plugin |
+|------------|--------|
+| v7         | v7     |
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+</Tabs>
+
+## Configuration de plateforme
+
+### iOS
+
+Ajoutez les clés suivantes à `Info.plist` :
+
+```xml
+<dict>
+  ...
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Nous devons suivre votre localisation</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Nous devons suivre votre localisation lorsque votre appareil est verrouillé.</string>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
+  ...
+</dict>
+```
+
+### Android
+
+Définissez l'option `android.useLegacyBridge` sur `true` dans votre configuration Capacitor. Cela empêche l'arrêt des mises à jour de localisation après 5 minutes en arrière-plan. Voir https://capacitorjs.com/docs/config et https://github.com/capacitor-community/background-geolocation/issues/89.
+
+Sur Android 13+, l'application nécessite l'autorisation d'exécution `POST_NOTIFICATIONS` pour afficher la notification persistante informant l'utilisateur que sa localisation est utilisée en arrière-plan. Cette autorisation d'exécution est demandée après l'octroi de l'autorisation de localisation.
+
+Si votre application transmet les mises à jour de localisation à un serveur en temps réel, sachez qu'après 5 minutes en arrière-plan, Android limitera les requêtes HTTP initiées depuis le WebView. La solution consiste à utiliser un plugin HTTP natif tel que [CapacitorHttp](https://capacitorjs.com/docs/apis/http). Voir https://github.com/capacitor-community/background-geolocation/issues/14.
+
+La configuration spécifique à Android peut être effectuée dans `strings.xml` :
+```xml
+<resources>
+    <!--
+        Le nom du canal pour la notification en arrière-plan. Ceci sera visible
+        lorsque l'utilisateur appuie et maintient la notification. La valeur par défaut est
+        "Background Tracking".
+    -->
+    <string name="capacitor_background_geolocation_notification_channel_name">
+        Suivi en arrière-plan
+    </string>
+
+    <!--
+        L'icône à utiliser pour la notification en arrière-plan. Notez l'absence d'un
+        "@" au début. La valeur par défaut est "mipmap/ic_launcher", l'icône de lancement de l'application.
+
+        Si une image matricielle est utilisée pour générer l'icône (par opposition à une image
+        vectorielle), elle doit avoir un fond transparent. Pour vous assurer que votre image
+        est compatible, sélectionnez "Notification Icons" comme type d'icône lors de
+        la création de l'actif d'image dans Android Studio.
+
+        Un actif d'image incompatible provoquera un dysfonctionnement de la notification de
+        plusieurs façons révélatrices, même si l'icône apparaît correctement :
+
+          - La notification peut être rejetée par l'utilisateur alors qu'elle ne devrait pas
+            l'être.
+          - Appuyer sur la notification peut ouvrir les paramètres, pas l'application.
+          - Le texte de la notification peut être incorrect.
+    -->
+    <string name="capacitor_background_geolocation_notification_icon">
+        drawable/ic_tracking
+    </string>
+
+    <!--
+        La couleur de la notification sous forme de chaîne analysable par
+        android.graphics.Color.parseColor. Optionnel.
+    -->
+    <string name="capacitor_background_geolocation_notification_color">
+        yellow
+    </string>
+</resources>
+```
+
+## Utilisation
+
+```javascript
+import { BackgroundGeolocation } from "@capgo/background-geolocation";
+
+BackgroundGeolocation.start(
+    {
+        backgroundMessage: "Annuler pour éviter la consommation de batterie.",
+        backgroundTitle: "Vous suivre.",
+        requestPermissions: true,
+        stale: false,
+        distanceFilter: 50
+    },
+    (location, error) => {
+        if (error) {
+            if (error.code === "NOT_AUTHORIZED") {
+                if (window.confirm(
+                    "Cette application a besoin de votre localisation, " +
+                    "mais n'a pas l'autorisation.\n\n" +
+                    "Ouvrir les paramètres maintenant ?"
+                )) {
+                    // Il peut être utile de diriger l'utilisateur vers les paramètres
+                    // de son appareil lorsque les autorisations de localisation ont été refusées. Le
+                    // plugin fournit la méthode 'openSettings' pour faire exactement
+                    // cela.
+                    BackgroundGeolocation.openSettings();
+                }
+            }
+            return console.error(error);
+        }
+        return console.log(location);
+    }
+).then(() => {
+    // Lorsque les mises à jour de localisation ne sont plus nécessaires, le plugin doit être arrêté en appelant
+    BackgroundGeolocation.stop();
+});
+
+// Définir un itinéraire planifié pour recevoir une notification sonore lorsqu'une nouvelle localisation arrive et qu'elle n'est pas sur l'itinéraire :
+
+BackgroundGeolocation.setPlannedRoute({soundFile: "assets/myFile.mp3", route: [[1,2], [3,4]], distance: 30 });
+
+// Si vous voulez juste la localisation actuelle, essayez quelque chose comme ça. Plus le délai
+// d'attente est long, plus l'estimation sera précise. Je ne descendrais pas en dessous de 100ms environ.
+function guessLocation(callback, timeout) {
+    let last_location;
+    BackgroundGeolocation.start(
+        {
+            requestPermissions: false,
+            stale: true
+        },
+        (location) => {
+            last_location = location || undefined;
+        }
+    ).then(() => {
+        setTimeout(() => {
+            callback(last_location);
+            BackgroundGeolocation.stop();
+        }, timeout);
+    });
+}
+```
+
+## API
+
+### start(...)
+
+```typescript
+start(options: StartOptions, callback: (position?: Location | undefined, error?: CallbackError | undefined) => void) => Promise<void>
+```
+
+Pour commencer à écouter les changements de localisation de l'appareil, appelez cette méthode.
+Une Promise est retournée pour indiquer qu'elle a terminé l'appel. Le callback sera appelé à chaque fois qu'une nouvelle localisation
+est disponible, ou s'il y a eu une erreur lors de l'appel de cette méthode. Ne comptez pas sur le rejet de la promise pour cela.
+
+| Param          | Type                                                                                                                      | Description                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **`options`**  | `StartOptions`                                                                     | Les options de configuration                                                      |
+| **`callback`** | `(position?: Location, error?: CallbackError) => void` | La fonction de callback invoquée lorsqu'une nouvelle localisation est disponible ou qu'une erreur se produit |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+Arrête les mises à jour de localisation.
+
+### openSettings()
+
+```typescript
+openSettings() => Promise<void>
+```
+
+Ouvre la page des paramètres de localisation de l'appareil.
+Utile pour diriger les utilisateurs vers l'activation des services de localisation ou l'ajustement des autorisations.
+
+### setPlannedRoute(...)
+
+```typescript
+setPlannedRoute(options: SetPlannedRouteOptions) => Promise<void>
+```
+
+Joue un fichier son lorsque l'utilisateur dévie de l'itinéraire planifié.
+Ceci devrait être utilisé pour jouer un son (en arrière-plan également, uniquement pour natif).
+
+| Param         | Type                                                                      | Description                                              |
+| ------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **`options`** | `SetPlannedRouteOptions` | Les options pour définir l'itinéraire planifié et le fichier son |
+
+## Interfaces
+
+### StartOptions
+
+Les options de configuration pour les mises à jour de localisation.
+
+| Prop                     | Type                 | Description                                                                                                                                                                                                                                                                                                                                                                                                          | Par défaut                         |
+| ------------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **`backgroundMessage`**  | `string`  | Si l'option "backgroundMessage" est définie, le plugin fournira des mises à jour de localisation que l'application soit en arrière-plan ou au premier plan. Si elle n'est pas définie, les mises à jour de localisation ne sont garanties qu'au premier plan. C'est vrai sur les deux plateformes. Sur Android, une notification doit être affichée pour continuer à recevoir des mises à jour de localisation en arrière-plan. Cette option spécifie le texte de cette notification. |                                    |
+| **`backgroundTitle`**    | `string`  | Le titre de la notification mentionnée ci-dessus.                                                                                                                                                                                                                                                                                                                                                                    | `"Utilisation de votre localisation"` |
+| **`requestPermissions`** | `boolean` | Si les autorisations doivent être demandées automatiquement à l'utilisateur, si elles ne sont pas déjà accordées.                                                                                                                                                                                                                                                                                                   | `true`                  |
+| **`stale`**              | `boolean` | Si "true", des localisations obsolètes peuvent être livrées pendant que l'appareil obtient un fix GPS. Vous êtes responsable de la vérification de la propriété "time". Si "false", les localisations sont garanties d'être à jour.                                                                                                                                                                                | `false`                 |
+| **`distanceFilter`**     | `number`  | La distance en mètres que l'appareil doit parcourir avant qu'une nouvelle mise à jour de localisation ne soit déclenchée. Ceci est utilisé pour filtrer les petits mouvements et réduire le nombre de mises à jour.                                                                                                                                                                                                | `0`                     |
+
+### Location
+
+Représente une localisation géographique avec divers attributs.
+Contient toutes les propriétés de localisation standard retournées par les fournisseurs GPS/réseau.
+
+| Prop                   | Type                        | Description                                                                                                                |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **`latitude`**         | `number`         | Latitude en degrés. Plage : -90.0 à +90.0                                                                                  |
+| **`longitude`**        | `number`         | Longitude en degrés. Plage : -180.0 à +180.0                                                                               |
+| **`accuracy`**         | `number`         | Rayon d'incertitude horizontale en mètres, avec 68% de confiance. Des valeurs plus faibles indiquent une localisation plus précise. |
+| **`altitude`**         | `number \| null` | Mètres au-dessus du niveau de la mer (ou null si non disponible).                                                         |
+| **`altitudeAccuracy`** | `number \| null` | Incertitude verticale en mètres, avec 68% de confiance (ou null si non disponible).                                       |
+| **`simulated`**        | `boolean`        | `true` si la localisation a été simulée par logiciel, plutôt que par GPS. Utile pour détecter les localisations simulées en développement ou test. |
+| **`bearing`**          | `number \| null` | Déviation par rapport au nord vrai en degrés (ou null si non disponible). Plage : 0.0 à 360.0                             |
+| **`speed`**            | `number \| null` | Vitesse en mètres par seconde (ou null si non disponible).                                                                |
+| **`time`**             | `number \| null` | Heure à laquelle la localisation a été produite, en millisecondes depuis l'époque unix. Utilisez ceci pour vérifier si une localisation est obsolète lors de l'utilisation de stale: true. |
+
+### CallbackError
+
+Objet d'erreur qui peut être passé au callback de démarrage de localisation.
+Étend l'Error standard avec des codes d'erreur optionnels.
+
+| Prop       | Type                | Description                                           |
+| ---------- | ------------------- | ----------------------------------------------------- |
+| **`code`** | `string` | Code d'erreur optionnel pour une gestion d'erreurs plus spécifique. |
+
+### SetPlannedRouteOptions
+
+| Prop            | Type                            | Description                                                                                                                                                                                                                                        | Par défaut      |
+| --------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| **`soundFile`** | `string`             | Le nom du fichier son à jouer. Doit être un chemin son relatif valide dans le dossier public de l'application pour fonctionner à la fois sur les plateformes web et natives. Il n'est pas nécessaire d'inclure le dossier public dans le chemin. |                 |
+| **`route`**     | `[number, number][]` | L'itinéraire planifié sous forme de tableau de paires longitude et latitude. Chaque paire représente un point sur l'itinéraire. Ceci est utilisé pour définir un itinéraire que l'utilisateur peut suivre. L'itinéraire est utilisé pour jouer un son lorsque l'utilisateur en dévie. |                 |
+| **`distance`**  | `number`             | La distance en mètres que l'utilisateur doit dévier de l'itinéraire planifié pour déclencher le son. Ceci est utilisé pour déterminer à quelle distance de l'itinéraire l'utilisateur peut être avant que le son ne soit joué. Si non spécifié, une valeur par défaut de 50 mètres est utilisée. | `50` |

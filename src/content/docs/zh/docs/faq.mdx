@@ -1,0 +1,348 @@
+---
+title: "常见问题"
+description: "关于 Capgo 的常见问题，如何解决 Capgo 或 Updater 中最常见的问题，什么是 OTA 以及如何管理它们"
+locale: zh
+sidebar:
+  order: 1
+---
+
+如果您有此处未回答的问题，请提问！提交问题或在 [Discord](https://discord.capgo.app) 上询问都可以。
+
+### 什么是"代码推送"？[](https://capgo.app/docs/#what-is-code-push "什么是代码推送的直接链接")
+
+代码推送，也称为"空中更新"（OTA），是一项云服务，使 Capacitor 开发人员能够将更新部署到生产环境中的应用。Capgo 目前适用于 Android 和 iOS，最终将在 Capacitor 支持的所有平台上运行。
+
+"Code Push"是对 React Native 社区使用的部署功能名称的引用，来自 [Microsoft](https://appcenter.ms/) 和 [Expo](https://expo.dev/)，两者都不支持 Capacitor。
+
+### bundle 和 release 之间有什么区别？[](https://capgo.app/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "bundle 和 release 之间有什么区别的直接链接")
+
+我们使用术语"release"来表示为应用商店准备二进制文件。为了稍后生成 bundle，Capgo 需要知道发送到应用商店的确切二进制文件。
+
+我们使用术语"bundle"来表示可应用于 release 以将其更新为新代码的补丁。`npx @capgo/cli@latest bundle upload` 命令用于从您的新本地代码生成 bundle，然后将其发送给您的用户。
+
+### 路线图是什么？[](https://capgo.app/docs/faq/#what-is-the-roadmap "路线图是什么的直接链接")
+
+我们的项目看板也是公开的，可在以下位置找到：[https://github.com/orgs/Cap-go/projects](https://github.com/orgs/Cap-go/projects/)
+
+我们的团队也在公开运作，因此您可以随时查看我们正在做什么。我们很乐意通过 Github 问题或 [Discord](https://discord.capgo.app) 回答您关于我们的路线图或优先事项的任何问题。
+
+### 我可以与我的团队一起使用 Capgo 吗？[](https://capgo.app/docs/faq/#can-i-use-capgo-with-my-team "我可以与我的团队一起使用 Capgo 吗的直接链接")
+
+是的！所有计划都支持无限数量的开发人员。我们仅限制每个组织的应用指标（MAU、存储和带宽）。
+
+有关更多信息，请参阅[团队](https://capgo.app/pricing/)。
+
+### Capgo 会存储我的源代码吗？[](https://capgo.app/docs/faq/#does-capgo-store-my-source-code "Capgo 会存储我的源代码吗的直接链接")
+
+不会。Capgo 服务器永远不会看到您的源代码。当您运行 `npx @capgo/cli@latest bundle upload` 时，Capgo 存储的是压缩/编译代码的 zip 文件 - 浏览器会接收的相同代码，而不是您的源代码。
+
+为了增强安全性，您有两个选项：
+- **端到端加密**：在上传之前加密您的 bundle，使 Capgo 无法读取或修改内容
+- **外部 URL 上传**：将 bundle 存储在您自己的服务器上，仅向 Capgo 提供下载链接，使用选项 `--external <url>`
+
+另请参阅我们的隐私政策：[https://capgo.app/privacy](https://capgo.app/privacy/)
+
+### 我可以从 CI 系统使用 Capgo 吗？[](https://capgo.app/docs/faq/#can-i-use-capgo-from-my-ci-system "我可以从 CI 系统使用 Capgo 吗的直接链接")
+
+是的。Capgo 旨在从 CI 系统使用。我们发布了 [Android 和 Github Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/) 和 [iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/) 以及 [GitLab](https://capgo.app/blog/setup-ci-and-cd-gitlab/) 的指南。其他 CI 系统应该类似。
+
+如果您遇到任何问题，请随时通过 GitHub 问题或 Discord 联系我们。
+
+### 这与 Firebase Remote Config 或 Launch Darkly 有何关系？[](https://capgo.app/docs/faq/#how-does-this-relate-to-firebase-remote-config-or-launch-darkly "这与 Firebase Remote Config 或 Launch Darkly 有何关系的直接链接")
+
+代码推送允许在设备上添加新代码/替换代码。Firebase Remote Config 和 Launch Darkly 都是配置系统。它们允许您更改应用的配置，而无需发布新版本。它们不旨在替换代码。
+
+### 这会增加多大的依赖占用空间？[](https://capgo.app/docs/faq/#how-big-of-a-dependency-footprint-does-this-add "这会增加多大的依赖占用空间的直接链接")
+
+我最近没有测量过，但我预计代码推送库会向 Capacitor 应用添加少于一兆字节。当这成为优先事项时，我们知道可以使其更小的方法。如果大小对您来说是一个阻碍，请告诉我们！
+
+### Capgo 在 iOS 18.4 模拟器上工作吗？[](https://capgo.app/docs/faq/#does-capgo-work-on-the-ios-18-4-simulator "Capgo 在 iOS 18.4 模拟器上工作吗的直接链接")
+
+不会。由于影响 iOS 18.4 模拟器的上游问题，Capgo 在那里无法可靠运行。请在真实设备上测试或使用不同的 iOS 模拟器版本。
+
+有关详细信息，请参阅 React Native 问题：[facebook/react-native#50510](https://github.com/facebook/react-native/issues/50510)
+
+### 代码推送适用于大型应用吗？[](https://capgo.app/docs/faq/#does-code-push-work-with-large-applications "代码推送适用于大型应用吗的直接链接")
+
+是的。可以使用代码推送更新的应用大小没有限制。如[下文](https://capgo.app/docs/faq/#what-types-of-changes-does-capgo-code-push-support)所述，无论大小如何，Capgo 都可以更改应用中的任何 JS 代码。
+
+需要注意的是：更大的大小会使用户更难下载更新。我们建议尽可能保持应用程序小。
+
+### 我可以将 Capgo 代码推送用于什么？[](https://capgo.app/docs/faq/#what-can-i-use-capgo-code-push-for "我可以将 Capgo 代码推送用于什么的直接链接")
+
+我们看到了各种用途，包括：
+
+-   对生产应用的紧急修复。
+-   向使用旧版本应用的用户发送错误修复。
+-   不断发布（例如每小时）。
+
+请注意，大多数应用商店禁止发布以重大方式更改应用行为的代码。有关更多信息，请参阅[下文](https://capgo.app/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies)。
+
+### Capgo 的"MAU"是什么？[](https://capgo.app/docs/faq/#what-counts-as-a-mau-for-capgo "Capgo 的 MAU 是什么的直接链接")
+
+MAU 是"月活跃用户"。在 Capgo 的上下文中，这实际上是指月活跃设备。我们将 MAU 计为在过去 30 天内联系过我们服务器的任何设备。我们不计算在过去 30 天内未联系过我们服务器的设备。
+
+**重要提示**：从插件版本 **v5.10.0**、**v6.25.0** 和 **v7.25.0** 开始，deviceID 现在在应用重新安装时持久存在。在这些版本之前，每次应用重新安装都会生成新的 deviceID 并计为新的 MAU。
+
+使用当前版本：
+- DeviceID 在应用重新安装时持久存在（在 iOS 上安全存储在 Keychain 中，在 Android 上存储在 EncryptedSharedPreferences 中）
+- 更新应用不会创建新的设备 ID
+- 在开发期间，如果您使用较旧的插件版本（< v5.10.0 / v6.25.0 / v7.25.0），每次重新安装仍会创建新的 MAU
+
+注意：TestFlight 下载和 Android 中的频道切换可能仍会根据您的配置生成新的设备注册。
+
+> 我们建议在首次设置后禁用开发设备和模拟器，以减少重复设备的数量。
+
+### 我们不能将 Capgo 代码推送用于什么？[](https://capgo.app/docs/faq/#what-cant-we-use-capgo-code-push-for "我们不能将 Capgo 代码推送用于什么的直接链接")
+
+如上所述，不应使用 Capgo 违反应用商店政策。有关更多信息，请参阅[下文](https://capgo.app/docs/faq/#does-capgo-comply-with-play-store-guidelines)。
+
+此外，Capgo 不支持更改原生代码（例如 Android 上的 Java/Kotlin 或 iOS 上的 Objective-C/Swift）。如果您更改了原生代码，该工具将在尝试更新期间警告您。
+
+### Capgo 会为我提交到商店吗？[](https://capgo.app/docs/faq/#does-capgo-submit-to-the-stores-for-me "Capgo 会为我提交到商店吗的直接链接")
+
+Capgo 目前不支持代表您提交到应用商店。我们计划在将来添加此功能，但目前您需要继续使用现有流程提交到应用商店。
+
+您可以使用我们的 [CI 指南 Android](https://capgo.app/blog/automatic-capacitor-android-build-github-action/) 和 [CI 指南 iOS](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/) 来自动化此过程。
+
+### Capgo 在磁盘上存储什么以及存储在哪里？[](https://capgo.app/docs/faq/#what-does-capgo-store-on-disk-and-where "Capgo 在磁盘上存储什么以及存储在哪里的直接链接")
+
+Capgo 更新程序（在构建应用时包含在应用中）将最新下载的 bundle 缓存在 capacitor 允许加载代码的唯一目录中。在 Android 上，这位于 `/data/user/0/com.example.app/code_cache/capgo_updater`，尽管该路径的基础由 Android 系统提供，并且可以在运行时动态更改。在 iOS 设备上，数据存储在 `Library/Application Support/capgo` 下。
+
+Capgo 命令行工具（例如 `npx @capgo/cli@latest bundle upload`）安装在 npm 缓存的磁盘上，您的登录信息存储在 `~/.capgo` 中的主目录中。
+
+### 这与 Capacitor 热重载有何关系？[](https://capgo.app/docs/faq/#how-does-this-relate-to-capacitor-hot-reload "这与 Capacitor 热重载有何关系的直接链接")
+
+Capacitor 的热重载是仅限开发时的功能。代码推送用于生产。
+
+热重载是 Capacitor 的一项功能，允许您在开发期间更改设备上的代码。它需要使用代理构建 Capacitor 应用以连接到本地计算机。
+
+代码推送是一项允许您在生产中更改设备上代码的功能。我们将使用各种不同的技术使其成为可能，具体取决于平台。
+
+### Capgo 代码推送支持哪些类型的更改？[](https://capgo.app/docs/faq/#what-types-of-changes-does-capgo-code-push-support "Capgo 代码推送支持哪些类型的更改的直接链接")
+
+Capgo 可以更改应用中的任何 JS 代码。这包括应用代码和生成的代码。您还可以更新 `package.json` 中的依赖项，只要它们不需要原生代码更改。
+
+我们没有计划支持更改原生代码（例如 Android 上的 Java/Kotlin 或 iOS 上的 Objective-C/Swift），如果检测到您更改了原生代码，该工具将警告您，因为它不会包含在 bundle 中。
+
+### 这支持 Web 吗？[](https://capgo.app/docs/faq/#does-this-support-web "这支持 Web 吗的直接链接")
+
+Web 不需要代码推送，因为 Web 已经以这种方式工作。当用户打开 Web 应用时，如果需要，它会从服务器下载最新版本。
+
+如果您有 Web 代码推送的用例，我们很想知道！
+
+### 这将适用于 iOS、Android、Mac、Windows、Linux 等吗？[](https://capgo.app/docs/faq/#will-this-work-on-ios-android-mac-windows-linux-etc "这将适用于 iOS、Android、Mac、Windows、Linux 等吗的直接链接")
+
+是的。
+
+到目前为止，我们专注于 Android 和 iOS 支持，但代码推送最终将在 Capacitor 支持的所有平台上运行。在扩展到更多平台之前，我们正在确保我们已经构建了可靠和安全地提供代码推送所需的所有基础设施。
+
+### Capgo 支持哪些操作系统版本？[](https://capgo.app/docs/faq/#what-os-versions-does-capgo-support "Capgo 支持哪些操作系统版本的直接链接")
+
+Capgo 支持 Capacitor 支持的相同 Android 版本。
+
+Capacitor 目前支持 Android API 级别 22+ 和 iOS 13.0+：[https://capacitorjs.com/docs/main/reference/support-policy](https://capacitorjs.com/docs/main/reference/support-policy/)
+
+### Capgo 支持哪些版本的 Capacitor？[](https://capgo.app/docs/faq/#what-versions-of-capacitor-does-capgo-support "Capgo 支持哪些版本的 Capacitor 的直接链接")
+
+Capgo 目前仅支持最新的稳定 Capacitor 版本。我们也可以支持较旧版本的 Capacitor，只是我们尚未构建随时间推移维护所需的基础设施。我们打算在将来支持更多版本的 Capacitor，包括为我们的企业客户提供的任何版本。[https://github.com/Cap-go/capgo/issues/1100](https://github.com/Cap-go/capgo/issues/1100/)
+
+Capgo 跟踪 Capacitor 稳定版本，通常在任何稳定版本发布后的几个小时内更新。我们的更新系统是自动化的，需要几分钟才能运行。然后，在发布到我们的服务器之前，我们会进行额外的手动验证步骤。
+
+### 这与 App/Play Store 审核流程或政策有何关系？[](https://capgo.app/docs/faq/#how-does-this-relate-to-the-appplay-store-review-process-or-policies "这与 App/Play Store 审核流程或政策有何关系的直接链接")
+
+开发人员选择使用这些商店时，受其与商店提供商的协议约束。代码推送旨在允许开发人员更新其应用，同时仍符合 iOS 和 Android 上的商店政策。类似于可用于 React Native 的各种商业产品（例如 [Microsoft](https://appcenter.ms/)、[Expo](https://expo.dev/)）。
+
+Microsoft 还发布了关于其解决方案如何符合应用商店的指南：[https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+
+代码推送是整个应用商店中广泛使用的技术。我所知道的所有大型应用都使用代码推送。需要注意的主要政策是不要以重大方式更改应用的行为。有关更多信息，请参阅[下文](https://capgo.app/docs/faq/#does-capgo-comply-with-play-store-guidelines)。
+
+### Capgo 是否符合 Play Store 准则？[](https://capgo.app/docs/faq/#does-capgo-comply-with-play-store-guidelines "Capgo 是否符合 Play Store 准则的直接链接")
+
+是的。
+
+Play Store 提供了两个与更新工具相关的限制。
+
+1.  更新必须使用解释器或虚拟机（Capgo 在 WebView 中使用 JavaScript）。[https://support.google.com/googleplay/android-developer/answer/9888379?hl=en](https://support.google.com/googleplay/android-developer/answer/9888379/?hl=en)
+
+```
+<span><span>    通过 Google Play 分发的应用不得使用除 Google Play 更新机制之外的任何方法修改、替换或更新自身</span><br></span><span><span>    。同样，应用不得从除 Google Play 之外的来源下载可执行代码（例如 dex、JAR、.so 文件）</span><br></span><span><span>    。*此限制不适用于在虚拟机或解释器中运行的代码*</span><br></span><span><span>    ，其中任何一个都提供对 Android API 的间接访问（例如 WebView 或浏览器中的 JavaScript）</span><br></span><span><span>    。</span><br></span><span><span></span><br></span><span><span>    在运行时加载的具有解释语言（JavaScript、Python、Lua 等）的应用或第三方代码（如 SDK）（例如，未与应用打包）</span><br></span><span><span>    不得允许潜在违反 Google Play 政策。</span><br></span>
+```
+
+2.  对应用的更改不得具有欺骗性（例如通过更新更改应用的目的）。[https://support.google.com/googleplay/android-developer/answer/9888077](https://support.google.com/googleplay/android-developer/answer/9888077/) 请向您的用户清楚地说明您通过应用提供的内容，并且不要通过使用 Capgo 进行重大行为更改来违反他们的期望。
+
+Capgo 旨在与 Play Store 准则兼容。然而，Capgo 是一种工具，与任何工具一样，可能会被滥用。故意滥用 Capgo 以违反 Play Store 准则违反了 Capgo [服务条款](https://capgo.app/tos/)，可能导致您的账户被终止。
+
+最后，代码推送服务在行业中广泛使用（我所知道的所有大型应用都使用它们），并且有多个其他代码推送服务公开可用（例如 expo.dev 和 appcenter.ms）。这是一条走过的路。
+
+Microsoft 还发布了关于其 React Native "codepush" 库如何符合应用商店的指南：[https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+
+### Capgo 是否符合 App Store 准则？[](https://capgo.app/docs/faq/#does-capgo-comply-with-app-store-guidelines "Capgo 是否符合 App Store 准则的直接链接")
+
+是的。
+
+与 Play Store 类似，App Store 提供了技术和政策限制。
+
+```
+<span><span>3.2.2</span><br></span><span><span>... 解释的代码可以下载到应用程序，但前提是</span><br></span><span><span>此类代码：</span><br></span><span><span>(a) 不会通过提供与提交给 App Store 的应用程序的预期和宣传目的不一致的功能来更改应用程序的主要目的</span><br></span><span><span>，</span><br></span><span><span>(b) 不会为其他代码或应用程序创建商店或店面，并且</span><br></span><span><span>(c) 不会绕过操作系统的签名、沙盒或其他安全功能。</span><br></span>
+```
+
+Capgo 在 WebView 中使用 JavaScript 以符合 iOS 上更新的仅解释器限制。只要您的应用程序不通过更新进行欺骗性行为（例如通过更新更改应用的目的），通过 Capgo（或任何其他代码推送解决方案）进行更新是标准行业实践，并符合 App Store 准则。
+
+故意滥用 Capgo 以违反 App Store 准则违反了 Capgo [服务条款](https://capgo.app/tos/)，可能导致您的账户被终止。
+
+Microsoft 还发布了关于其 React Native "codepush" 库如何符合应用商店的指南：[https://github.com/microsoft/react-native-code-push#store-guideline-compliance](https://github.com/microsoft/react-native-code-push/#store-guideline-compliance)
+
+### 我可以在我的国家/地区使用 Capgo 吗？[](https://capgo.app/docs/faq/#can-i-use-capgo-in-my-country "我可以在我的国家/地区使用 Capgo 吗的直接链接")
+
+我们没有尝试限制从任何国家/地区访问 Capgo。
+
+我们认识到某些国家/地区对可以从国家/地区内访问的 URL 有限制。Capgo 目前使用 Cloudflare Cloud 进行托管，包括 R2 Storage 和 Cloudflare workers。
+
+Capgo 使用以下 URL：
+
+-   [https://api.capgo.app](https://api.capgo.app/) -- 由 `npx @capgo/cli` 命令行工具用于与 Capgo 服务器交互，以及用户设备上的 Capgo 更新程序用于检查更新。
+-   [https://*.r2.cloudflarestorage.com](https://*.r2.cloudflarestorage.com/) -- 由 `npx @capgo/cli` 命令行工具用于上传和下载 bundle
+
+如果所有这些 URL 都可以从您的国家/地区访问，那么 Capgo 应该可以工作。
+
+如果您所在的地区需要阻止访问任何这些 URL，请告诉我们，我们可以与您合作找到解决方案。代理服务器是一种选择。
+
+### 我可以自托管 Capgo 吗？[](https://capgo.app/docs/faq/#can-i-self-host-capgo "我可以自托管 Capgo 吗的直接链接")
+
+是的，您可以自托管 Capgo。该指南尚未编写，但代码是开源的，可在 [https://github.com/cap-go/capgo](https://github.com/cap-go/capgo/) 获得
+
+### 代码推送需要互联网才能工作吗？[](https://capgo.app/docs/faq/#does-code-push-require-the-internet-to-work "代码推送需要互联网才能工作吗的直接链接")
+
+是的。可以想象运行一个服务器来分发与一般互联网分开的更新，但需要某种形式的网络连接才能将更新传输到设备。
+
+### Capgo 如何受到缺乏网络连接的影响？[](https://capgo.app/docs/faq/#how-is-capgo-affected-by-lack-of-network-connectivity "Capgo 如何受到缺乏网络连接的影响的直接链接")
+
+Capgo 更新程序（在使用 Capgo 构建应用时包含在应用中）旨在对网络连接问题具有弹性。
+
+在默认更新行为中，当应用启动时，它会通知 Capgo 更新程序，后者会生成一个单独的线程以向 Capgo 的服务器发出网络请求并请求更新。我们有意使用单独的线程以避免影响阻止应用可能正在执行的任何其他操作。如果网络请求失败或超时，更新程序将简单地在下次应用启动时尝试再次检查。
+
+Capgo 命令行工具（例如 `npx @capgo/cli@latest bundle upload`）需要网络连接才能运行。如果您使用 Capgo 分发应用，则应确保您的 CI 系统具有网络连接。
+
+### 如果用户长时间不更新并错过更新会怎样？[](https://capgo.app/docs/faq/#what-happens-if-a-user-doesnt-update-for-a-long-time-and-misses-an-update "如果用户长时间不更新并错过更新会怎样的直接链接")
+
+我们的实现始终发送专门为请求它的设备定制的更新，始终将请求者更新到可用的最新版本。因此，如果用户有一段时间不更新，他们将"错过"中间更新。
+
+可以更改更新服务器以支持响应下一个增量版本或最新版本，具体取决于您的应用的需求。如果替代更新行为对您很重要，请告诉我们。
+
+### Capgo 与 Capacitor 有何关系？[](https://capgo.app/docs/faq/#how-does-capgo-relate-to-capacitor "Capgo 与 Capacitor 有何关系的直接链接")
+
+Capgo 是 Capacitor 的插件，添加了代码推送。Capgo 不是 Capacitor 的替代品。您可以继续使用您已经了解和喜爱的 Capacitor 工具。
+
+我们跟踪 Capacitor 的最新稳定版本，并更新我们的代码推送插件以使其正常工作。
+
+### 更新何时发生？[](https://capgo.app/docs/faq/#when-do-updates-happen "更新何时发生的直接链接")
+
+默认情况下，Capgo 更新程序在应用启动时检查更新。它在后台线程上运行，不会阻塞 UI 线程。任何更新都将在用户使用应用时安装，并将在下次重新启动应用时应用。
+
+也可以使用 `@capgo/capacitor-updater` 包手动运行 Capgo 更新程序，通过该包可以随时触发更新，包括通过推送通知。
+
+Capgo 更新程序的设计使得当网络不可用或服务器宕机或无法访问时，应用将继续正常运行。如果您曾经选择从我们的服务器删除更新，您的所有客户端都将继续正常运行。
+
+我们添加了回滚补丁的能力。最简单的方法是简单地将先前的 bundle 附加到您的频道以撤消。
+
+### 我需要保持 app\_id 秘密吗？[](https://capgo.app/docs/faq/#do-i-need-to-keep-my-app_id-secret "我需要保持 app_id 秘密吗的直接链接")
+
+不需要。`app_id` 包含在您的应用中，可以安全地公开。您可以将其检入版本控制（甚至公开），而不必担心其他人访问它。
+
+拥有您的 `app_id` 的人可以从 Capgo 服务器获取您应用的最新版本，但他们无法向您的应用推送更新或访问您的 Capgo 账户的任何其他方面。
+
+### 哪些信息会发送到 Capgo 服务器？[](https://capgo.app/docs/faq/#what-information-is-sent-to-capgo-servers "哪些信息会发送到 Capgo 服务器的直接链接")
+
+尽管 Capgo 连接到网络，但它不发送任何个人身份信息。包括 Capgo 不应影响您对 Play Store 或 App Store 的声明。
+
+从应用发送到 Capgo 服务器的请求包括：
+
+-   app\_id（在 `capacitor.config.json` 中指定）
+-   channel（在 `capacitor.config.json` 中可选）
+-   release\_version（来自 AndroidManifest.xml 的 versionName 或来自 Info.plist 的 CFBundleShortVersionString，或者如果在 [`CapacitorUpdater.version`](/docs/plugin/settings/#version) 中设置，则来自 `capacitor.config.json`）
+-   version\_number（作为 `npx @capgo/cli@latest bundle upload` 的一部分生成）
+-   os_version（例如 '11.2.1'）
+-   platform（例如 'android'，需要发送正确的补丁）这就是全部。这方面的代码在 `updater/library/src/network.rs` 中
+-   device\_id（在首次运行时在设备上生成，用于去重每个设备的安装，并允许我们根据安装到的用户收费（例如月活跃用户），而不是总补丁或总补丁安装）
+-   custom\_id（可选，由开发人员在运行时设置，用于将设备链接到系统中的用户）
+
+### Capgo 支持哪些平台？[](https://capgo.app/docs/faq/#what-platforms-does-capgo-support "Capgo 支持哪些平台的直接链接")
+
+目前，Capgo 支持 iOS 和 Android。两者都已准备好投入生产。
+
+对 iOS 或 Android 使用 Capgo 可以是独立的决定。您可以在频道中设置发送到 Android 以及构建到 App Store 的 ipa，反之亦然。
+
+Capgo 可以（相对容易地）支持桌面或嵌入式目标。如果这些对您很重要，请告诉我们。
+
+### Capgo 如何与 Play Testing Tracks 或 Apple TestFlight 交互？[](https://capgo.app/docs/faq/#how-does-capgo-interact-with-play-testing-tracks-or-apple-testflight "Capgo 如何与 Play Testing Tracks 或 Apple TestFlight 交互的直接链接")
+
+每个应用商店都有单独的机制将应用分发给有限的用户组（例如"内部测试"、"封闭测试"等）。这些都是将用户分段成组并向每个组分发特定版本应用的机制。
+
+不幸的是，这些机制并非所有都允许第三方检测应用何时安装在任何特定的测试轨道或通过 TestFlight 安装。因此，我们对这些组的组成没有可靠的可见性，并且无法根据这些组可靠地限制对 Capgo 补丁的访问。[https://stackoverflow.com/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play](https://stackoverflow.com/questions/53291007/can-an-android-application-identify-the-test-track-within-google-play/) [https://stackoverflow.com/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i](https://stackoverflow.com/questions/26081543/how-to-tell-at-runtime-whether-an-ios-app-is-running-through-a-testflight-beta-i/)
+
+如果您想细分 Capgo bundle 的可用性，有 4 个潜在选项：
+
+1.  为每个组使用单独的频道。这是最直接的方法，但需要您管理多个频道。您可能已经拥有具有不同可用性的开发频道和生产频道。因此，您可以更新您的开发频道，验证它，然后单独更新您的生产频道。我们建议在版本控制中使用分支/标签来帮助跟踪与每个版本关联的源。
+2.  跟踪您自己的一组选择加入的用户，禁用自动更新，并仅通过 `@capgo/capacitor-updater` 包为某些用户触发更新。这今天有效，但需要您管理自己的选择加入列表。
+3.  Capgo 允许在每个设备的基础上创建自己的选择加入机制（类似于测试轨道或 TestFlight，只是平台无关）。这允许您的 QA 团队在 bundle 向公众推广之前选择加入。
+4.  Capgo 有基于百分比的推出。这不允许您选择发送到哪些设备，但可以帮助您逐步推出并在发现任何问题时回滚。
+
+## 计费[](https://capgo.app/docs/faq/#billing "计费的直接链接")
+
+### 如何升级或降级我的计划？[](https://capgo.app/docs/faq/#how-do-i-upgrade-or-downgrade-my-plan "如何升级或降级我的计划的直接链接")
+
+您可以随时在仪表板中升级或降级计划：[https://console.capgo.app/dashboard/settings/plans](https://console.capgo.app/dashboard/settings/plans/)
+
+### 我的计费周期何时重置？[](https://capgo.app/docs/faq/#when-does-my-billing-period-reset "我的计费周期何时重置的直接链接")
+
+计费周期在您首次订阅 Capgo 的月份的每个月自动重置。例如，如果您在每月 15 日订阅，您的计费周期将在每月 15 日重置。
+
+### 如何取消我的订阅？[](https://capgo.app/docs/faq/#how-do-i-cancel-my-subscription "如何取消我的订阅的直接链接")
+
+您可以随时在仪表板中取消订阅：[https://console.capgo.app/dashboard/settings/plans](https://console.capgo.app/dashboard/settings/plans/)
+
+### 我可以提前支付一年吗？[](https://capgo.app/docs/faq/#can-i-pay-for-a-year-in-advance "我可以提前支付一年吗的直接链接")
+
+是的，您可以随时在仪表板中：[https://console.capgo.app/dashboard/settings/plans](https://console.capgo.app/dashboard/settings/plans/)
+
+### 统计和分析[](https://capgo.app/docs/faq/#stats-and-analytics "统计和分析的直接链接")
+
+仪表板中的统计信息每天午夜 UTC 更新。
+统计信息是根据已安装在您的设备上的 [MAU](https://capgo.app/docs/faq/#what-is-the-difference-between-a-bundle-and-a-release "bundle 和 release 之间有什么区别的直接链接") 数量计算的。
+
+## 设备 ID 是如何生成的[](https://capgo.app/docs/faq/#how-device-id-is-generated "设备 ID 是如何生成的的直接链接")
+
+设备 ID 在首次运行时在设备上生成，用于去重每个设备的安装，并允许我们根据安装到的用户收费（例如月活跃用户），而不是总补丁或总补丁安装。
+
+MAU 是比安装数量更好的解决方案来为 Capgo 定价，因为它更准确，并反映了每个设备的 Capgo 实际成本。
+
+**DeviceID 持久性（在 v6.25.0 和 v7.25.0 中更新）**：
+- **当前行为**：deviceID 现在在应用重新安装时持久存在。它安全地存储在设备的 Keychain（iOS）或 EncryptedSharedPreferences（Android）中，允许我们即使在卸载/重新安装后也能跟踪同一设备。
+- **以前的行为**（在 v6.25.0/v7.25.0 之前）：出于与 Apple 和 Google 商店政策相关的隐私原因，deviceID 在每次应用重新安装时都会重置，因此无法跨重新安装跟踪同一设备。
+
+隐私规则由 Apple 和 Google 强制执行，Capgo 的实现符合其设备识别的最佳实践。
+
+设备 ID 在获得第一个补丁安装之前不会列在您的设备列表中。
+
+## 为什么我的设备数量与我的 MAU 不同？[](https://capgo.app/docs/faq/#why-my-device-number-is-different-than-my-mau "为什么我的设备数量与我的 MAU 不同的直接链接")
+
+目前，设备列表的更新频率不如 MAU。
+
+设备列表仅在设备安装更新时更新。
+
+而 MAU 在每次应用启动时更新。这是平台的当前限制。我们的分析平台不支持原始更新，因此我们使用常规数据库来管理设备列表。
+
+为了限制数据库查询的数量，我们仅在应用更新时更新行。
+
+此限制将在将来删除。
+
+## 如何针对不同平台进行不同的更新？[](https://capgo.app/docs/faq/#how-to-have-different-update-by-platform "如何针对不同平台进行不同的更新的直接链接")
+
+您可以为每个平台创建一个频道。并在每个频道中禁用特定于平台的更新。
+
+在 iOS 频道上禁用 Android 更新，在 Android 频道上禁用 iOS 更新。
+
+然后将 bundle 上传到每个频道，以针对每个平台进行不同的更新。
+
+如果您需要对两个平台进行相同的更新，则可以将一个 bundle 链接到多个频道。无需复制 bundle。

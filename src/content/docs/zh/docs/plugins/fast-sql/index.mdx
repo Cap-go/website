@@ -1,0 +1,50 @@
+---
+title: "@capgo/capacitor-fast-sql"
+description: 高性能原生 SQLite，采用自定义 HTTP 协议，用于高效的同步操作和 IndexedDB 替代。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 超快速原生 SQLite，具有用于同步系统和大型数据集的自定义协议，性能提升高达 25 倍。
+  image:
+    file: ~public/icons/plugins/fast-sql.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/fast-sql/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-fast-sql/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="自定义 HTTP 协议" icon="rocket">
+    绕过 Capacitor 桥接，性能提升高达 25 倍 ⚡
+  </Card>
+  <Card title="完整的 SQLite 支持" icon="list-format">
+    完整的 SQL 支持，具有事务和批量操作 📊
+  </Card>
+  <Card title="同步友好" icon="random">
+    专为本地同步系统设计，如 CRDT 和操作转换 🔄
+  </Card>
+  <Card title="跨平台" icon="laptop">
+    iOS、Android 和 Web，使用 sql.js + IndexedDB 🌐
+  </Card>
+  <Card title="事务支持" icon="approve-check-circle">
+    具有可配置隔离级别的 ACID 事务 🔒
+  </Card>
+  <Card title="二进制数据" icon="document">
+    原生支持 Uint8Array/BLOB 存储 📁
+  </Card>
+  <Card title="入门指南" icon="open-book">
+    查看[入门指南](/docs/plugins/fast-sql/getting-started/)以安装和配置插件。
+  </Card>
+</CardGrid>

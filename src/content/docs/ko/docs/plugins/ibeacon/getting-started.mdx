@@ -1,0 +1,620 @@
+---
+title: 시작하기
+description: iBeacon 플러그인을 설치하고 사용하여 Capacitor 앱에서 Bluetooth 비콘을 감지하고 모니터링하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-ibeacon" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 구성
+
+### iOS 구성
+
+`Info.plist`에 다음을 추가합니다:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>이 앱은 근처 비콘을 감지하기 위해 위치 액세스가 필요합니다</string>
+
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>이 앱은 백그라운드에서 비콘을 모니터링하기 위해 위치 액세스가 필요합니다</string>
+
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>이 앱은 근처 비콘을 감지하기 위해 Bluetooth를 사용합니다</string>
+
+<key>UIBackgroundModes</key>
+<array>
+  <string>location</string>
+</array>
+```
+
+### Android 구성
+
+`AndroidManifest.xml`에 다음을 추가합니다:
+
+```xml
+<manifest>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.BLUETOOTH" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+  <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+</manifest>
+```
+
+**중요**: Android의 경우 비콘 감지가 작동하려면 프로젝트에 [AltBeacon](https://altbeacon.github.io/android-beacon-library/) 라이브러리를 통합해야 합니다.
+
+앱의 `build.gradle`에 추가:
+
+```kotlin
+dependencies {
+    implementation 'org.altbeacon:android-beacon-library:2.20+'
+}
+```
+
+## 사용법
+
+### 기본 설정
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+// 비콘 영역 정의
+const beaconRegion = {
+  identifier: 'MyStore',
+  uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+  major: 1, // 선택 사항
+  minor: 2  // 선택 사항
+};
+```
+
+### 권한 요청
+
+```typescript
+// "사용 중일 때" 권한 요청
+const requestPermission = async () => {
+  const { status } = await CapacitorIbeacon.requestWhenInUseAuthorization();
+  console.log('권한 상태:', status);
+  // status: 'not_determined' | 'restricted' | 'denied' | 'authorized_always' | 'authorized_when_in_use'
+};
+
+// "항상" 권한 요청 (백그라운드 모니터링용)
+const requestAlwaysPermission = async () => {
+  const { status } = await CapacitorIbeacon.requestAlwaysAuthorization();
+  console.log('항상 권한 상태:', status);
+};
+
+// 현재 권한 상태 확인
+const checkPermission = async () => {
+  const { status } = await CapacitorIbeacon.getAuthorizationStatus();
+  console.log('현재 상태:', status);
+};
+```
+
+### 기기 기능 확인
+
+```typescript
+// Bluetooth가 활성화되어 있는지 확인
+const checkBluetooth = async () => {
+  const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+  if (!enabled) {
+    console.log('Bluetooth를 활성화하세요');
+  }
+};
+
+// 레인징이 사용 가능한지 확인
+const checkRanging = async () => {
+  const { available } = await CapacitorIbeacon.isRangingAvailable();
+  console.log('레인징 사용 가능:', available);
+};
+```
+
+### 비콘 영역 모니터링
+
+모니터링은 비콘 영역에 진입하거나 퇴출할 때를 감지합니다. 백그라운드에서 작동합니다.
+
+```typescript
+// 모니터링 시작
+const startMonitoring = async () => {
+  await CapacitorIbeacon.startMonitoringForRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+    major: 1,
+    minor: 2
+  });
+  console.log('비콘 모니터링 시작');
+};
+
+// 모니터링 중지
+const stopMonitoring = async () => {
+  await CapacitorIbeacon.stopMonitoringForRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+};
+```
+
+### 비콘 레인징
+
+레인징은 근처 비콘 및 거리에 대한 지속적인 업데이트를 제공합니다. 앱이 포그라운드에 있어야 합니다.
+
+```typescript
+// 레인징 시작
+const startRanging = async () => {
+  await CapacitorIbeacon.startRangingBeaconsInRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+  console.log('비콘 레인징 시작');
+};
+
+// 레인징 중지
+const stopRanging = async () => {
+  await CapacitorIbeacon.stopRangingBeaconsInRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+};
+```
+
+### 이벤트 수신
+
+```typescript
+import { PluginListenerHandle } from '@capacitor/core';
+
+// 레인징 이벤트 수신 (지속적인 거리 업데이트)
+const rangingListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didRangeBeacons',
+  (data) => {
+    console.log('감지된 비콘:', data.beacons);
+    data.beacons.forEach(beacon => {
+      console.log(`UUID: ${beacon.uuid}`);
+      console.log(`Major: ${beacon.major}, Minor: ${beacon.minor}`);
+      console.log(`거리: ${beacon.accuracy}m`);
+      console.log(`근접도: ${beacon.proximity}`); // immediate, near, far, unknown
+      console.log(`RSSI: ${beacon.rssi}`);
+    });
+  }
+);
+
+// 영역 진입 이벤트 수신
+const enterListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didEnterRegion',
+  (data) => {
+    console.log('영역 진입:', data.region.identifier);
+    // 환영 알림 표시 또는 작업 트리거
+  }
+);
+
+// 영역 퇴출 이벤트 수신
+const exitListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didExitRegion',
+  (data) => {
+    console.log('영역 퇴출:', data.region.identifier);
+    // 작별 작업 트리거
+  }
+);
+
+// 영역 상태 변경 수신
+const stateListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didDetermineStateForRegion',
+  (data) => {
+    console.log(`영역 ${data.region.identifier}: ${data.state}`);
+    // state: 'inside' | 'outside' | 'unknown'
+  }
+);
+
+// 완료 시 리스너 정리
+const cleanup = () => {
+  rangingListener.remove();
+  enterListener.remove();
+  exitListener.remove();
+  stateListener.remove();
+};
+```
+
+### iBeacon으로 광고 (iOS 전용)
+
+기기를 iBeacon 송신기로 전환합니다.
+
+```typescript
+// 광고 시작
+const startAdvertising = async () => {
+  await CapacitorIbeacon.startAdvertising({
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+    major: 1,
+    minor: 2,
+    identifier: 'MyBeacon',
+    measuredPower: -59 // 선택 사항: 1미터에서 보정된 전력
+  });
+  console.log('iBeacon으로 광고 시작');
+};
+
+// 광고 중지
+const stopAdvertising = async () => {
+  await CapacitorIbeacon.stopAdvertising();
+};
+```
+
+## 전체 예제
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+import { PluginListenerHandle } from '@capacitor/core';
+
+export class BeaconService {
+  private listeners: PluginListenerHandle[] = [];
+
+  async init() {
+    // 권한 요청
+    const { status } = await CapacitorIbeacon.requestWhenInUseAuthorization();
+
+    if (status !== 'authorized_when_in_use' && status !== 'authorized_always') {
+      throw new Error('위치 권한이 거부되었습니다');
+    }
+
+    // Bluetooth 확인
+    const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+    if (!enabled) {
+      throw new Error('Bluetooth가 활성화되지 않았습니다');
+    }
+
+    // 이벤트 리스너 설정
+    this.setupListeners();
+  }
+
+  private setupListeners() {
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didEnterRegion', (data) => {
+        console.log('환영합니다! 진입:', data.region.identifier);
+        this.onEnterRegion(data.region);
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didExitRegion', (data) => {
+        console.log('안녕히 가세요! 퇴출:', data.region.identifier);
+        this.onExitRegion(data.region);
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didRangeBeacons', (data) => {
+        this.onRangeBeacons(data.beacons);
+      })
+    );
+  }
+
+  async startMonitoring(uuid: string, identifier: string, major?: number, minor?: number) {
+    await CapacitorIbeacon.startMonitoringForRegion({
+      identifier,
+      uuid,
+      major,
+      minor
+    });
+  }
+
+  async startRanging(uuid: string, identifier: string) {
+    await CapacitorIbeacon.startRangingBeaconsInRegion({
+      identifier,
+      uuid
+    });
+  }
+
+  private onEnterRegion(region: any) {
+    // 영역 진입 처리 (예: 알림 표시, 콘텐츠 트리거)
+    console.log('비콘 영역 진입:', region);
+  }
+
+  private onExitRegion(region: any) {
+    // 영역 퇴출 처리
+    console.log('비콘 영역 퇴출:', region);
+  }
+
+  private onRangeBeacons(beacons: any[]) {
+    // 비콘 거리 처리
+    const nearestBeacon = beacons.reduce((nearest, beacon) => {
+      return beacon.accuracy < nearest.accuracy ? beacon : nearest;
+    }, beacons[0]);
+
+    if (nearestBeacon) {
+      console.log('가장 가까운 비콘:', nearestBeacon);
+      this.handleProximity(nearestBeacon);
+    }
+  }
+
+  private handleProximity(beacon: any) {
+    switch (beacon.proximity) {
+      case 'immediate': // < 0.5m
+        console.log('비콘에 매우 가까움');
+        break;
+      case 'near': // 0.5m - 3m
+        console.log('비콘 근처');
+        break;
+      case 'far': // > 3m
+        console.log('비콘에서 멀리');
+        break;
+      case 'unknown':
+        console.log('거리 알 수 없음');
+        break;
+    }
+  }
+
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+## API 참조
+
+### startMonitoringForRegion(options)
+
+비콘 영역 모니터링을 시작합니다. 진입/퇴출 시 이벤트를 트리거합니다.
+
+```typescript
+interface BeaconRegion {
+  identifier: string;
+  uuid: string;
+  major?: number;
+  minor?: number;
+  notifyEntryStateOnDisplay?: boolean;
+}
+
+await CapacitorIbeacon.startMonitoringForRegion(options);
+```
+
+### stopMonitoringForRegion(options)
+
+비콘 영역 모니터링을 중지합니다.
+
+```typescript
+await CapacitorIbeacon.stopMonitoringForRegion(options);
+```
+
+### startRangingBeaconsInRegion(options)
+
+영역에서 비콘 레인징을 시작하여 지속적인 거리 업데이트를 받습니다.
+
+```typescript
+await CapacitorIbeacon.startRangingBeaconsInRegion(options);
+```
+
+### stopRangingBeaconsInRegion(options)
+
+영역에서 비콘 레인징을 중지합니다.
+
+```typescript
+await CapacitorIbeacon.stopRangingBeaconsInRegion(options);
+```
+
+### startAdvertising(options)
+
+기기를 iBeacon으로 광고하기 시작합니다 (iOS 전용).
+
+```typescript
+interface BeaconAdvertisingOptions {
+  uuid: string;
+  major: number;
+  minor: number;
+  identifier: string;
+  measuredPower?: number; // 1미터에서 보정된 전력
+}
+
+await CapacitorIbeacon.startAdvertising(options);
+```
+
+### stopAdvertising()
+
+기기를 iBeacon으로 광고하기를 중지합니다.
+
+```typescript
+await CapacitorIbeacon.stopAdvertising();
+```
+
+### requestWhenInUseAuthorization()
+
+"사용 중일 때" 위치 권한을 요청합니다.
+
+```typescript
+const result = await CapacitorIbeacon.requestWhenInUseAuthorization();
+// 반환: { status: string }
+```
+
+### requestAlwaysAuthorization()
+
+"항상" 위치 권한을 요청합니다 (백그라운드 모니터링에 필요).
+
+```typescript
+const result = await CapacitorIbeacon.requestAlwaysAuthorization();
+// 반환: { status: string }
+```
+
+### getAuthorizationStatus()
+
+현재 위치 권한 상태를 가져옵니다.
+
+```typescript
+const result = await CapacitorIbeacon.getAuthorizationStatus();
+// 반환: { status: 'not_determined' | 'restricted' | 'denied' | 'authorized_always' | 'authorized_when_in_use' }
+```
+
+### isBluetoothEnabled()
+
+Bluetooth가 활성화되어 있는지 확인합니다.
+
+```typescript
+const result = await CapacitorIbeacon.isBluetoothEnabled();
+// 반환: { enabled: boolean }
+```
+
+### isRangingAvailable()
+
+기기에서 레인징을 사용할 수 있는지 확인합니다.
+
+```typescript
+const result = await CapacitorIbeacon.isRangingAvailable();
+// 반환: { available: boolean }
+```
+
+### enableARMAFilter(options)
+
+거리 계산을 위한 ARMA 필터링을 활성화합니다 (Android 전용).
+
+```typescript
+await CapacitorIbeacon.enableARMAFilter({ enabled: true });
+```
+
+## 이벤트
+
+### didRangeBeacons
+
+레인징 중 비콘이 감지될 때 발생합니다.
+
+```typescript
+interface RangingEvent {
+  region: BeaconRegion;
+  beacons: Beacon[];
+}
+
+interface Beacon {
+  uuid: string;
+  major: number;
+  minor: number;
+  rssi: number; // 신호 강도
+  proximity: 'immediate' | 'near' | 'far' | 'unknown';
+  accuracy: number; // 미터 단위 거리
+}
+```
+
+### didEnterRegion
+
+모니터링되는 비콘 영역에 진입할 때 발생합니다.
+
+```typescript
+interface RegionEvent {
+  region: BeaconRegion;
+}
+```
+
+### didExitRegion
+
+모니터링되는 비콘 영역에서 퇴출할 때 발생합니다.
+
+```typescript
+interface RegionEvent {
+  region: BeaconRegion;
+}
+```
+
+### didDetermineStateForRegion
+
+영역 상태가 결정될 때 발생합니다.
+
+```typescript
+interface StateEvent {
+  region: BeaconRegion;
+  state: 'inside' | 'outside' | 'unknown';
+}
+```
+
+## 근접도 값
+
+- **immediate**: 매우 가까움 (< 0.5미터)
+- **near**: 비교적 가까움 (0.5 - 3미터)
+- **far**: 멀리 (> 3미터)
+- **unknown**: 거리를 결정할 수 없음
+
+## 모범 사례
+
+1. **적절한 권한 요청**
+   - 포그라운드 기능에는 "사용 중일 때" 사용
+   - 백그라운드 모니터링이 필요한 경우에만 "항상" 요청
+   - 위치 액세스가 필요한 이유를 명확하게 설명
+
+2. **Bluetooth 상태 처리**
+   ```typescript
+   const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+   if (!enabled) {
+     // 사용자에게 Bluetooth 활성화 요청
+   }
+   ```
+
+3. **배터리 최적화**
+   - 가능한 경우 레인징 대신 모니터링 사용 (더 배터리 효율적)
+   - 적극적으로 필요하지 않을 때 레인징 중지
+   - 처리를 줄이기 위해 더 큰 major/minor 범위 사용 고려
+
+4. **오류 처리**
+   ```typescript
+   try {
+     await CapacitorIbeacon.startMonitoringForRegion(region);
+   } catch (error) {
+     console.error('모니터링 시작 실패:', error);
+   }
+   ```
+
+5. **리스너 정리**
+   메모리 누수를 방지하기 위해 컴포넌트가 마운트 해제될 때 항상 이벤트 리스너를 제거합니다.
+
+## 플랫폼 참고사항
+
+### iOS
+- iOS 10.0 이상 필요
+- 네이티브 CoreLocation 프레임워크 사용
+- "항상" 권한으로 백그라운드 모니터링 지원
+- CoreBluetooth를 사용하여 iBeacon으로 광고 가능
+- 레인징은 앱이 포그라운드에 있어야 함
+
+### Android
+- Android 6.0 (API 23) 이상 필요
+- AltBeacon 라이브러리 사용
+- 비콘이 Bluetooth를 사용하지만 위치 권한 필요
+- 백그라운드 모니터링에는 ACCESS_BACKGROUND_LOCATION 필요 (Android 10 이상)
+- 대부분의 기기에서 iBeacon으로 광고 불가 (하드웨어 제한)
+
+### Web
+- 웹 플랫폼에서 지원되지 않음
+
+## 일반적인 사용 사례
+
+1. **근접 마케팅**: 사용자가 매장에 접근할 때 알림 또는 콘텐츠 트리거
+2. **실내 내비게이션**: 비콘 웨이포인트를 사용하여 건물 내부에서 사용자 안내
+3. **출석 추적**: 사용자가 위치에 진입할 때 자동으로 체크인
+4. **자산 추적**: 장비 또는 재고 이동 모니터링
+5. **박물관 투어**: 방문자가 전시물에 접근할 때 맥락 정보 제공
+6. **스마트 홈**: 방 존재에 따라 자동화 트리거
+
+## 문제 해결
+
+### 비콘이 감지되지 않음
+- Bluetooth가 활성화되어 있는지 확인
+- 위치 권한이 부여되었는지 확인
+- 비콘 UUID가 정확히 일치하는지 확인 (대소문자 구분)
+- 비콘에 전원이 공급되고 전송 중인지 확인
+- 먼저 major/minor 필터 없이 시도
+
+### 백그라운드 모니터링이 작동하지 않음
+- "항상" 위치 권한이 부여되었는지 확인
+- UIBackgroundModes에 `location` 추가 (iOS)
+- ACCESS_BACKGROUND_LOCATION 요청 (Android 10 이상)
+- 참고: iOS는 배터리를 절약하기 위해 백그라운드 콜백을 지연시킬 수 있음
+
+### 거리 측정이 부정확함
+- 비콘 RSSI는 환경(벽, 간섭)에 따라 달라짐
+- 삼각측량을 위해 여러 비콘 사용
+- 비콘에서 1미터 떨어진 곳에서 measuredPower 보정
+- 더 부드러운 값을 위해 Android에서 ARMA 필터링 활성화

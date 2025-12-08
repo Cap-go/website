@@ -1,0 +1,41 @@
+---
+title: "@capgo/nativegeocoder"
+locale: es
+description: Plugin nativo de geocodificación directa e inversa para convertir direcciones a coordenadas y viceversa.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Convierte entre direcciones y coordenadas geográficas usando APIs de geocodificación nativas de la plataforma para datos de ubicación precisos.
+  image:
+    file: ~public/icons/plugins/nativegeocoder.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/nativegeocoder/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-nativegeocoder/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Geocodificación directa" icon="rocket">
+    Convierte direcciones a coordenadas geográficas 📍
+  </Card>
+  <Card title="Geocodificación inversa" icon="document">
+    Convierte coordenadas a direcciones legibles 🏠
+  </Card>
+  <Card title="Precisión nativa" icon="star">
+    Usa geocodificación nativa de la plataforma para mejores resultados 🎯
+  </Card>
+  <Card title="Documentación Completa" icon="open-book">
+    Consulta la [Documentación](/docs/plugins/nativegeocoder/getting-started/) para dominar el plugin en solo unos minutos.
+  </Card>
+</CardGrid>

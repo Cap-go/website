@@ -1,0 +1,71 @@
+---
+title: Getting Started
+description: Configure the AudioSession plugin to react to iOS audio route changes and interruptions.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+> ℹ️ **Platform support:** The audio session API is available on iOS. Calls on Android and the web resolve without effect so you can keep shared logic.
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync iOS platform**
+   <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Inspect available outputs
+
+```typescript
+import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
+
+const outputs = await AudioSession.currentOutputs();
+
+if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
+  console.log('Bluetooth speaker connected');
+}
+```
+
+## Override to speaker mode
+
+```typescript
+import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
+
+await AudioSession.overrideOutput(OutputOverrideType.speaker);
+
+// Restore system routing when you are done
+await AudioSession.overrideOutput(OutputOverrideType.default);
+```
+
+## Listen for route and interruption events
+
+```typescript
+import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
+
+const routeListener = await AudioSession.addListener('routeChanged', (reason) => {
+  if (reason === RouteChangeReasons.NEW_DEVICE_AVAILABLE) {
+    console.log('User connected a new audio route');
+  }
+});
+
+const interruptionListener = await AudioSession.addListener('interruption', (type) => {
+  if (type === InterruptionTypes.BEGAN) {
+    // Pause playback while we are interrupted
+  } else {
+    // Resume playback
+  }
+});
+
+// Later during cleanup
+await routeListener.remove();
+await interruptionListener.remove();
+```
+
+## Entitlements
+
+- **iOS**: Add any required background audio modes (e.g. `audio`, `voice`) inside `ios/App/App/Info.plist` if your app plays audio in the background.
+- **Other platforms**: No additional setup is necessary; methods will resolve with empty results.

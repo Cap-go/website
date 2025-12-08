@@ -1,0 +1,260 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan mengkonfigurasi plugin Autofill Save Password untuk manajemen kata sandi yang mulus di aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+locale: id
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Dukungan Platform
+
+- **iOS**: Dukungan penuh (iOS 18.3 dan versi lama)
+- **Android**: Dalam pengembangan
+
+## Konfigurasi Platform
+
+### iOS
+
+#### 1. Pengaturan Associated Domains
+
+Konfigurasi associated domains di akun Apple Developer Anda dan tambahkan ke file `App.entitlements` Anda:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>webcredentials:yourdomain.com</string>
+        <string>webcredentials:www.yourdomain.com</string>
+    </array>
+</dict>
+</plist>
+```
+
+#### 2. Konfigurasi Web Credential
+
+Tambahkan file `.well-known/apple-app-site-association` ke situs web Anda:
+
+```json
+{
+  "webcredentials": {
+    "apps": [
+      "TEAMID.com.yourcompany.yourapp"
+    ]
+  }
+}
+```
+
+### Android (Dukungan di Masa Depan)
+
+#### 1. Google Services Plugin
+
+Tambahkan ke `android/app/build.gradle`:
+
+```kotlin
+apply plugin: 'com.google.gms.google-services'
+```
+
+#### 2. Konfigurasi Domain
+
+Tambahkan ke `android/app/src/main/res/values/strings.xml`:
+
+```xml
+<resources>
+    <string name="asset_statements">
+        [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {
+                "namespace": "web",
+                "site": "https://yourdomain.com"
+            }
+        }]
+    </string>
+</resources>
+```
+
+## Contoh Penggunaan
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+// Save password after successful login
+async function login(username: string, password: string) {
+  try {
+    // Perform your login logic here
+    const loginSuccess = await performLogin(username, password);
+
+    if (loginSuccess) {
+      // Prompt user to save password
+      await SavePassword.promptDialog({
+        username: username,
+        password: password,
+        url: 'https://yourdomain.com' // iOS only
+      });
+
+      console.log('Password saved successfully');
+    }
+  } catch (error) {
+    console.error('Failed to save password:', error);
+  }
+}
+
+// Read saved password for autofill
+async function loadSavedCredentials() {
+  try {
+    const credentials = await SavePassword.readPassword();
+
+    if (credentials.username && credentials.password) {
+      console.log('Found saved credentials');
+      // Pre-fill login form
+      return {
+        username: credentials.username,
+        password: credentials.password
+      };
+    }
+  } catch (error) {
+    console.error('Failed to read saved password:', error);
+  }
+
+  return null;
+}
+```
+
+## Referensi API
+
+### promptDialog(options)
+
+```typescript
+promptDialog(options: SavePasswordOptions) => Promise<void>
+```
+
+Menyimpan kredensial pengguna ke keychain sistem.
+
+| Param         | Type                              |
+| ------------- | --------------------------------- |
+| **`options`** | `SavePasswordOptions` |
+
+### readPassword()
+
+```typescript
+readPassword() => Promise<SavedCredentials>
+```
+
+Mengambil kredensial yang disimpan dari keychain sistem.
+
+**Mengembalikan:** `Promise<SavedCredentials>`
+
+## Interface
+
+### SavePasswordOptions
+
+| Prop           | Type               | Description                                   |
+| -------------- | ------------------ | --------------------------------------------- |
+| **`username`** | `string` | Username yang akan disimpan                          |
+| **`password`** | `string` | Password yang akan disimpan                          |
+| **`url`**      | `string` | iOS saja - URL domain terkait (opsional) |
+
+### SavedCredentials
+
+| Prop           | Type              | Description                  |
+| -------------- | ----------------- | ---------------------------- |
+| **`username`** | `string` | Username yang disimpan           |
+| **`password`** | `string` | Password yang disimpan           |
+
+## Integrasi dengan Alur Login
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+class AuthService {
+  async login(username: string, password: string) {
+    try {
+      // Authenticate with your backend
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        // Offer to save credentials
+        await this.offerToSavePassword(username, password);
+        return true;
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+    return false;
+  }
+
+  private async offerToSavePassword(username: string, password: string) {
+    try {
+      await SavePassword.promptDialog({
+        username,
+        password,
+        url: 'https://yourdomain.com'
+      });
+    } catch (error) {
+      // User declined to save or error occurred
+      console.log('Password not saved:', error);
+    }
+  }
+
+  async loadSavedCredentials() {
+    try {
+      return await SavePassword.readPassword();
+    } catch (error) {
+      console.log('No saved credentials found');
+      return null;
+    }
+  }
+}
+```
+
+## Praktik Terbaik
+
+- Hanya minta untuk menyimpan kata sandi setelah autentikasi berhasil
+- Tangani kasus di mana pengguna menolak untuk menyimpan kata sandi dengan baik
+- Implementasikan penanganan error yang tepat untuk kegagalan akses keychain
+- Gunakan associated domains untuk berbagi kredensial web-app yang mulus
+- Uji fungsi autofill di berbagai versi iOS
+
+## Pertimbangan Keamanan
+
+- Kredensial disimpan di keychain sistem dengan flag keamanan yang sesuai
+- Associated domains memastikan kredensial hanya dapat diakses oleh aplikasi yang berwenang
+- Ikuti panduan keamanan platform untuk manajemen kredensial
+- Pertimbangkan untuk menerapkan langkah-langkah keamanan tambahan untuk aplikasi sensitif

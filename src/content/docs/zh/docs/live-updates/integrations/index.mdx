@@ -1,0 +1,82 @@
+---
+title: CI/CD 集成
+locale: zh
+description: "将 Capgo Live Updates 与您喜欢的 CI/CD 平台集成,实现自动化部署工作流。"
+sidebar:
+  order: 1
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+通过与流行的 CI/CD 平台集成来自动化您的 Capgo Live Updates 部署流程。这些集成允许您在推送代码更改时自动部署应用更新、测试功能分支并管理多个部署环境。
+
+## 可用集成
+
+选择您的 CI/CD 平台以开始自动化部署:
+
+<CardGrid>
+  <LinkCard
+    title="Azure DevOps"
+    description="与 Azure DevOps Pipelines 集成,实现自动化构建、测试和部署工作流。"
+    href="/docs/live-updates/integrations/azure-devops/"
+  />
+  <LinkCard
+    title="GitLab CI/CD"
+    description="设置 GitLab CI/CD 管道以自动部署您的应用更新,提供全面的环境管理。"
+    href="/docs/live-updates/integrations/gitlab-ci/"
+  />
+  <LinkCard
+    title="GitHub Actions"
+    description="使用 GitHub Actions 进行强大的自动化,支持多渠道部署和环境保护。"
+    href="/docs/live-updates/integrations/github-actions/"
+  />
+  <LinkCard
+    title="Bitbucket Pipelines"
+    description="使用 Bitbucket Pipelines 进行简单或高级配置的多环境部署。"
+    href="/docs/live-updates/integrations/bitbucket-pipeline/"
+  />
+</CardGrid>
+
+## 您将获得什么
+
+所有集成指南包括:
+
+- **简单设置**:快速入门的基本配置
+- **高级工作流**:包含预发布和生产环境的多环境部署
+- **功能分支测试**:自动将功能分支部署到测试渠道
+- **安全最佳实践**:安全的密钥管理和环境保护
+- **监控**:部署状态的通知和日志记录
+
+<Aside type="tip">
+
+**初次接触 CI/CD?** 从适合您平台的简单配置开始,然后随着需求的增长逐步添加更高级的功能,如多渠道部署和自动化测试。
+
+</Aside>
+
+## 通用功能
+
+每个集成都支持:
+
+- **自动化构建**:在代码更改时触发部署
+- **多渠道支持**:部署到不同的渠道(开发、预发布、生产)
+- **拉取请求/合并请求测试**:在隔离环境中测试更改
+- **加密支持**:使用 Capgo 的加密功能进行安全部署
+- **环境保护**:生产环境的人工批准和受限访问
+- **通知**:Slack、邮件和其他通知集成
+
+## 前置要求
+
+在设置任何集成之前,请确保您具备:
+
+- 已配置应用的 Capgo 账户
+- Git 存储库中的应用源代码
+- 来自 [console.capgo.app/apikeys](https://console.capgo.app/apikeys) 的 Capgo API token
+- 项目中已配置 Node.js 和 npm/yarn
+
+## 相关文档
+
+- [渠道](/docs/live-updates/channels/) - 了解如何管理不同的部署环境
+- [加密](/docs/live-updates/encryption/) - 使用端到端加密保护您的部署
+- [更新行为](/docs/live-updates/update-behavior/) - 自定义更新应用到应用的方式
+
+从上方选择您的 CI/CD 平台以开始自动化您的 Capgo 部署!

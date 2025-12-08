@@ -1,0 +1,145 @@
+---
+title: はじめに
+description: @capgo/capacitor-android-inline-installのインストールと使用ガイド
+locale: ja
+sidebar:
+  order: 2
+  label: "はじめに"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-inline-install
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 使用例
+
+```typescript
+import { AndroidInlineInstall } from '@capgo/capacitor-android-inline-install';
+
+// 基本的なインラインインストール
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp'
+});
+
+// 追跡機能付きの高度なインストール
+await AndroidInlineInstall.startInlineInstall({
+  id: 'com.example.targetapp',
+  referrer: 'campaign=my-campaign&source=app',
+  overlay: true,
+  fallback: true
+});
+
+// インストールフローを処理
+try {
+  await AndroidInlineInstall.startInlineInstall({
+    id: 'com.spotify.music',
+    referrer: 'utm_source=myapp&utm_campaign=music_promotion'
+  });
+  console.log('Install overlay triggered successfully');
+} catch (error) {
+  console.error('Install failed:', error);
+}
+```
+
+## コアAPIメソッド
+
+### インストール管理
+- `startInlineInstall(options)` - 指定されたアプリのGoogle Playインラインインストールオーバーレイをトリガー
+
+## 設定オプション
+
+```typescript
+interface InlineInstallOptions {
+  id: string;           // ターゲットアプリのパッケージ名（必須）
+  referrer?: string;    // 追跡キャンペーン文字列（オプション）
+  callerId?: string;    // 呼び出し元アプリのパッケージ名（デフォルトは現在のアプリ）
+  overlay?: boolean;    // Playオーバーレイを有効/無効（デフォルト: true）
+  fallback?: boolean;   // オーバーレイが失敗した場合にフルストアページを使用（デフォルト: true）
+}
+```
+
+## Google Playの要件
+
+### Premium Growth Toolsの適格性
+インラインインストールを使用するには、アプリがGoogle PlayのPremium Growth Toolsの対象である必要があります:
+- 重要なユーザーエンゲージメントを持つアプリ
+- 良好なPlay Storeの評価とレビュー
+- Google Playポリシーへの準拠
+
+### ターゲットアプリの要件
+- ターゲットアプリがGoogle Play Storeで利用可能である必要があります
+- ターゲットアプリがインラインインストールをサポートしている必要があります
+- ユーザーがGoogle Play Storeにサインインしている必要があります
+
+## 動作とフォールバック
+
+### オーバーレイモード（デフォルト）
+1. アプリ内でGoogle Playオーバーレイを開くことを試みます
+2. オーバーレイが利用できない場合、フルPlay Storeページにフォールバック
+3. Play Storeが利用できない場合、エラーを表示
+
+### フルストアモード
+- フルGoogle Play Storeページを直接開きます
+- オーバーレイの試行を完全にバイパス
+
+## プラットフォームサポート
+
+- **Android**: Google Play Servicesで完全サポート
+- **iOS**: サポート対象外（Android固有の機能）
+- **Web**: サポート対象外（ネイティブAndroid機能）
+
+## 実装の詳細
+
+このプラグインはAndroidインテントを使用してGoogle Play Storeと通信します:
+- インラインインストールオーバーレイ用のインテントアクション
+- 標準Play Storeインテントへのフォールバック
+- Play Servicesの可用性の自動処理
+
+## ユースケース
+
+- **アプリ発見**: エコシステム内の関連アプリを宣伝
+- **クロスプロモーション**: パートナーアプリケーションのインストールを促進
+- **機能のロック解除**: 追加モジュールや拡張機能をインストール
+- **コンパニオンアプリ**: サポートアプリケーションをシームレスにインストール
+
+## ベストプラクティス
+
+- Play Servicesを持たないユーザーのために常にフォールバックオプションを提供
+- 異なるデバイス構成とPlay Storeバージョンでテスト
+- リファラー追跡を使用してコンバージョン率を測定
+- インストールエラーを適切に処理
+- ユーザーがインストールを拒否した場合は選択を尊重
+
+## 制限事項
+
+- Android専用機能
+- Google Play Servicesが必要
+- Premium Growth Toolsの対象となるアプリでのみ動作
+- Google Play Storeのポリシーと可用性に従う

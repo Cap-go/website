@@ -1,0 +1,111 @@
+---
+title: 🔹 organisation
+description: 🏢 在 Capgo Cloud 中管理您的组织以进行团队协作和应用管理。
+sidebar_label: organisation
+locale: zh
+sidebar:
+  order: 9
+---
+
+🏢 在 Capgo Cloud 中管理您的组织以进行团队协作和应用管理。
+
+### <a id="organisation-list"></a> 📋 **列表**
+
+**别名:** `l`
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+📋 列出您在 Capgo Cloud 中有权访问的所有组织。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+**选项:**
+
+| 参数          | 类型          | 描述          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL(用于自托管或 Capgo 开发) |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥(用于自托管) |
+
+### <a id="organisation-add"></a> ➕ **添加**
+
+**别名:** `a`
+
+```bash
+npx @capgo/cli@latest organisation add
+```
+
+➕ 在 Capgo Cloud 中创建新组织以进行团队协作。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest organisation add --name "My Company" --email admin@mycompany.com
+```
+
+**选项:**
+
+| 参数          | 类型          | 描述          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 组织名称 |
+| **-e,** | <code>string</code> | 组织的管理电子邮件 |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL(用于自托管或 Capgo 开发) |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥(用于自托管) |
+
+### <a id="organisation-set"></a> ⚙️ **设置**
+
+**别名:** `s`
+
+```bash
+npx @capgo/cli@latest organisation set
+```
+
+⚙️ 更新组织设置,如名称和管理电子邮件。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest organisation set ORG_ID --name "Updated Company Name"
+```
+
+**选项:**
+
+| 参数          | 类型          | 描述          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | 组织名称 |
+| **-e,** | <code>string</code> | 组织的管理电子邮件 |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL(用于自托管或 Capgo 开发) |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥(用于自托管) |
+
+### <a id="organisation-delete"></a> 🗑️ **删除**
+
+**别名:** `d`
+
+```bash
+npx @capgo/cli@latest organisation delete
+```
+
+🗑️ 从 Capgo Cloud 删除组织。此操作无法撤消。
+只有组织所有者可以删除组织。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest organisation delete ORG_ID
+```
+
+**选项:**
+
+| 参数          | 类型          | 描述          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL(用于自托管或 Capgo 开发) |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥(用于自托管) |

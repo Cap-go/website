@@ -1,0 +1,311 @@
+---
+title: Getting Started
+description: Learn how to install and use the Zip plugin to compress and extract files in your Capacitor app.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Install the package**
+   <PackageManagers pkg="@capgo/capacitor-zip" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sync with native projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Usage
+
+Import the plugin and zip or unzip files:
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+
+// Zip a folder
+const zipFolder = async () => {
+  await CapacitorZip.zip({
+    source: 'file:///path/to/folder',
+    destination: 'file:///path/to/archive.zip'
+  });
+  console.log('Folder zipped successfully!');
+};
+
+// Unzip an archive
+const unzipArchive = async () => {
+  await CapacitorZip.unzip({
+    source: 'file:///path/to/archive.zip',
+    destination: 'file:///path/to/output/folder'
+  });
+  console.log('Archive extracted successfully!');
+};
+```
+
+## API Reference
+
+### zip(options)
+
+Creates a ZIP archive from a source folder.
+
+```typescript
+interface ZipOptions {
+  source: string;       // Path to folder to compress
+  destination: string;  // Path for output ZIP file
+}
+
+await CapacitorZip.zip({
+  source: 'file:///path/to/folder',
+  destination: 'file:///path/to/archive.zip'
+});
+```
+
+### unzip(options)
+
+Extracts files from a ZIP archive.
+
+```typescript
+interface UnzipOptions {
+  source: string;       // Path to ZIP file
+  destination: string;  // Path to extract to
+}
+
+await CapacitorZip.unzip({
+  source: 'file:///path/to/archive.zip',
+  destination: 'file:///path/to/output/folder'
+});
+```
+
+## Complete Example
+
+```typescript
+import { CapacitorZip } from '@capgo/capacitor-zip';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+
+export class ZipService {
+  async createBackup() {
+    try {
+      const timestamp = Date.now();
+      const sourceDir = `${Filesystem.Directory.Data}/userdata`;
+      const destPath = `${Filesystem.Directory.Documents}/backup_${timestamp}.zip`;
+
+      await CapacitorZip.zip({
+        source: sourceDir,
+        destination: destPath
+      });
+
+      console.log('Backup created:', destPath);
+      return destPath;
+    } catch (error) {
+      console.error('Backup failed:', error);
+      throw error;
+    }
+  }
+
+  async restoreBackup(backupPath: string) {
+    try {
+      const destDir = `${Filesystem.Directory.Data}/userdata`;
+
+      // Clear existing data
+      await Filesystem.rmdir({
+        path: 'userdata',
+        directory: Directory.Data,
+        recursive: true
+      });
+
+      // Extract backup
+      await CapacitorZip.unzip({
+        source: backupPath,
+        destination: destDir
+      });
+
+      console.log('Backup restored successfully');
+    } catch (error) {
+      console.error('Restore failed:', error);
+      throw error;
+    }
+  }
+
+  async compressFiles(filePaths: string[], outputPath: string) {
+    try {
+      // Create temporary directory
+      const tempDir = `${Filesystem.Directory.Cache}/temp_zip_${Date.now()}`;
+
+      await Filesystem.mkdir({
+        path: tempDir,
+        directory: Directory.Cache,
+        recursive: true
+      });
+
+      // Copy files to temp directory
+      for (const filePath of filePaths) {
+        const fileName = filePath.split('/').pop();
+        await Filesystem.copy({
+          from: filePath,
+          to: `${tempDir}/${fileName}`
+        });
+      }
+
+      // Zip the temp directory
+      await CapacitorZip.zip({
+        source: tempDir,
+        destination: outputPath
+      });
+
+      // Clean up temp directory
+      await Filesystem.rmdir({
+        path: tempDir,
+        directory: Directory.Cache,
+        recursive: true
+      });
+
+      return outputPath;
+    } catch (error) {
+      console.error('Compression failed:', error);
+      throw error;
+    }
+  }
+
+  async extractSpecificFiles(zipPath: string, fileNames: string[]) {
+    try {
+      // Extract to temp location
+      const tempDir = `${Filesystem.Directory.Cache}/temp_extract_${Date.now()}`;
+
+      await CapacitorZip.unzip({
+        source: zipPath,
+        destination: tempDir
+      });
+
+      // Read only specific files
+      const extractedFiles: { [key: string]: string } = {};
+
+      for (const fileName of fileNames) {
+        const content = await Filesystem.readFile({
+          path: `${tempDir}/${fileName}`,
+          directory: Directory.Cache
+        });
+        extractedFiles[fileName] = content.data;
+      }
+
+      // Clean up
+      await Filesystem.rmdir({
+        path: tempDir,
+        directory: Directory.Cache,
+        recursive: true
+      });
+
+      return extractedFiles;
+    } catch (error) {
+      console.error('Extraction failed:', error);
+      throw error;
+    }
+  }
+}
+```
+
+## Advanced Usage
+
+### Creating Archives with Progress Tracking
+
+```typescript
+const zipWithProgress = async (source: string, destination: string) => {
+  console.log('Starting compression...');
+
+  try {
+    await CapacitorZip.zip({ source, destination });
+    console.log('Compression complete!');
+  } catch (error) {
+    console.error('Compression failed:', error);
+    throw error;
+  }
+};
+```
+
+### Batch Archive Operations
+
+```typescript
+const batchZip = async (folders: string[]) => {
+  const results = [];
+
+  for (const folder of folders) {
+    const folderName = folder.split('/').pop();
+    const zipPath = `${folder}_${Date.now()}.zip`;
+
+    try {
+      await CapacitorZip.zip({
+        source: folder,
+        destination: zipPath
+      });
+      results.push({ folder, zipPath, success: true });
+    } catch (error) {
+      results.push({ folder, error, success: false });
+    }
+  }
+
+  return results;
+};
+```
+
+### Secure Archive Creation
+
+```typescript
+const createSecureBackup = async (dataPath: string) => {
+  // Zip the data
+  const zipPath = `${Filesystem.Directory.Documents}/secure_backup.zip`;
+
+  await CapacitorZip.zip({
+    source: dataPath,
+    destination: zipPath
+  });
+
+  // Optionally encrypt the zip file here using a crypto plugin
+
+  return zipPath;
+};
+```
+
+### Archive Validation
+
+```typescript
+const validateArchive = async (zipPath: string): Promise<boolean> => {
+  try {
+    const tempDir = `${Filesystem.Directory.Cache}/validate_${Date.now()}`;
+
+    // Try to extract
+    await CapacitorZip.unzip({
+      source: zipPath,
+      destination: tempDir
+    });
+
+    // Clean up
+    await Filesystem.rmdir({
+      path: tempDir,
+      directory: Directory.Cache,
+      recursive: true
+    });
+
+    return true;
+  } catch (error) {
+    console.error('Archive validation failed:', error);
+    return false;
+  }
+};
+```
+
+## Best Practices
+
+1. **Path Validation**: Always validate source and destination paths before operations
+2. **Error Handling**: Wrap all zip/unzip operations in try-catch blocks
+3. **Cleanup**: Remove temporary files and folders after operations
+4. **Large Files**: Be cautious with large archives on mobile devices
+5. **Permissions**: Ensure your app has necessary file system permissions
+
+## Troubleshooting
+
+### Common Issues
+
+**Zip operation fails**: Ensure source path exists and is accessible
+**Unzip fails**: Check that ZIP file is valid and destination path is writable
+**Out of storage**: Monitor available disk space before operations
+**Permission denied**: Verify file system permissions in your app configuration

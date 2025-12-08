@@ -1,0 +1,475 @@
+---
+title: "Memulai dengan RealtimeKit"
+locale: id
+description: "Pelajari cara mengintegrasikan konferensi video Cloudflare Calls ke dalam aplikasi Capacitor Anda"
+---
+
+Panduan ini akan memandu Anda mengintegrasikan plugin Capacitor RealtimeKit untuk menambahkan konferensi video yang didukung oleh Cloudflare Calls ke aplikasi Anda.
+
+## Instalasi
+
+Instal plugin menggunakan npm:
+
+```bash
+npm install @capgo/capacitor-realtimekit
+npx cap sync
+```
+
+## Dependensi
+
+Plugin ini menggunakan Cloudflare RealtimeKit SDK:
+
+- **iOS**: RealtimeKitCoreiOS (diinstal secara otomatis melalui Swift Package Manager)
+- **Android**: `com.cloudflare.realtimekit:ui-android` versi `0.2.2`
+
+### Menyesuaikan Versi Android RealtimeKit
+
+Di `build.gradle` aplikasi Anda:
+
+```kotlin
+buildscript {
+    ext {
+        realtimekitUiVersion = '0.2.2'  // or your desired version
+    }
+}
+```
+
+## Konfigurasi iOS
+
+Tambahkan yang berikut ke `Info.plist` aplikasi Anda:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>We need camera access for video calls</string>
+
+<key>NSMicrophoneUsageDescription</key>
+<string>We need microphone access for audio calls</string>
+
+<key>NSPhotoLibraryUsageDescription</key>
+<string>We need photo library access to share images</string>
+
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>We need Bluetooth access for audio routing</string>
+
+<key>UIBackgroundModes</key>
+<array>
+  <string>audio</string>
+  <string>voip</string>
+  <string>fetch</string>
+  <string>remote-notification</string>
+</array>
+```
+
+## Konfigurasi Android
+
+Tambahkan izin berikut ke `AndroidManifest.xml` Anda:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+<uses-feature android:name="android.hardware.camera" android:required="false" />
+<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+```
+
+## Penggunaan Dasar
+
+### Import Plugin
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+```
+
+### Inisialisasi Plugin
+
+```typescript
+async function initializeRealtimeKit() {
+  try {
+    await CapacitorRealtimekit.initialize();
+    console.log('RealtimeKit initialized');
+  } catch (error) {
+    console.error('Failed to initialize RealtimeKit:', error);
+  }
+}
+```
+
+### Mulai Meeting
+
+```typescript
+async function startMeeting(meetingUrl: string) {
+  try {
+    await CapacitorRealtimekit.startMeeting({
+      url: meetingUrl
+    });
+    console.log('Meeting started');
+  } catch (error) {
+    console.error('Failed to start meeting:', error);
+  }
+}
+```
+
+## Contoh Lengkap
+
+Berikut adalah layanan konferensi video yang komprehensif:
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+
+export interface MeetingConfig {
+  url: string;
+  displayName?: string;
+  audioEnabled?: boolean;
+  videoEnabled?: boolean;
+}
+
+export class VideoConferenceService {
+  private isInitialized = false;
+  private currentMeetingUrl: string | null = null;
+
+  async initialize(): Promise<boolean> {
+    if (this.isInitialized) {
+      console.log('RealtimeKit already initialized');
+      return true;
+    }
+
+    try {
+      await CapacitorRealtimekit.initialize();
+      this.isInitialized = true;
+      console.log('RealtimeKit initialized successfully');
+      return true;
+    } catch (error) {
+      console.error('Failed to initialize RealtimeKit:', error);
+      return false;
+    }
+  }
+
+  async startMeeting(config: MeetingConfig): Promise<void> {
+    if (!this.isInitialized) {
+      const initialized = await this.initialize();
+      if (!initialized) {
+        throw new Error('Failed to initialize RealtimeKit');
+      }
+    }
+
+    try {
+      await CapacitorRealtimekit.startMeeting({
+        url: config.url
+      });
+
+      this.currentMeetingUrl = config.url;
+      console.log('Meeting started:', config.url);
+    } catch (error) {
+      console.error('Failed to start meeting:', error);
+      throw error;
+    }
+  }
+
+  async joinMeeting(meetingUrl: string, displayName?: string): Promise<void> {
+    const config: MeetingConfig = {
+      url: meetingUrl,
+      displayName: displayName
+    };
+
+    await this.startMeeting(config);
+  }
+
+  getCurrentMeetingUrl(): string | null {
+    return this.currentMeetingUrl;
+  }
+
+  isInMeeting(): boolean {
+    return this.currentMeetingUrl !== null;
+  }
+
+  async getPluginVersion(): Promise<string> {
+    try {
+      const result = await CapacitorRealtimekit.getPluginVersion();
+      return result.version;
+    } catch (error) {
+      console.error('Failed to get plugin version:', error);
+      return 'unknown';
+    }
+  }
+}
+
+// Usage
+const videoService = new VideoConferenceService();
+
+// Initialize on app start
+await videoService.initialize();
+
+// Start a meeting
+await videoService.startMeeting({
+  url: 'https://your-cloudflare-calls-url.com/meeting/123'
+});
+
+// Join an existing meeting
+await videoService.joinMeeting(
+  'https://your-cloudflare-calls-url.com/meeting/456',
+  'John Doe'
+);
+```
+
+## Pengaturan Cloudflare Calls
+
+Untuk menggunakan plugin ini, Anda perlu mengatur Cloudflare Calls:
+
+### 1. Buat Akun Cloudflare
+
+Daftar di [Cloudflare](https://dash.cloudflare.com/sign-up) jika Anda belum memiliki akun.
+
+### 2. Aktifkan Calls API
+
+1. Navigasi ke dashboard Cloudflare Anda
+2. Pergi ke bagian **Calls**
+3. Aktifkan Calls API
+4. Dapatkan kredensial API Anda
+
+### 3. Buat URL Meeting
+
+Anda memerlukan layanan backend untuk membuat URL meeting. Contoh menggunakan Cloudflare Workers:
+
+```typescript
+// Cloudflare Worker example
+export default {
+  async fetch(request: Request): Promise<Response> {
+    const { pathname } = new URL(request.url);
+
+    if (pathname === '/create-meeting') {
+      const meetingId = generateMeetingId();
+      const meetingUrl = `https://your-app.calls.cloudflare.com/${meetingId}`;
+
+      return new Response(JSON.stringify({
+        meetingId,
+        meetingUrl
+      }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    return new Response('Not found', { status: 404 });
+  }
+};
+
+function generateMeetingId(): string {
+  return Math.random().toString(36).substring(2, 15);
+}
+```
+
+## Penggunaan Lanjutan
+
+### Meeting dengan Konfigurasi Kustom
+
+```typescript
+class MeetingManager {
+  private videoService: VideoConferenceService;
+
+  constructor() {
+    this.videoService = new VideoConferenceService();
+  }
+
+  async createAndJoinMeeting(userName: string): Promise<string> {
+    // Initialize if needed
+    await this.videoService.initialize();
+
+    // Call your backend to create a meeting
+    const meetingUrl = await this.createMeetingOnBackend();
+
+    // Join the meeting
+    await this.videoService.joinMeeting(meetingUrl, userName);
+
+    return meetingUrl;
+  }
+
+  async createMeetingOnBackend(): Promise<string> {
+    const response = await fetch('https://your-api.com/create-meeting', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const data = await response.json();
+    return data.meetingUrl;
+  }
+
+  async shareMeetingLink(meetingUrl: string) {
+    // Use Capacitor Share API
+    if ('share' in navigator) {
+      await (navigator as any).share({
+        title: 'Join my meeting',
+        text: 'Join me for a video call',
+        url: meetingUrl
+      });
+    }
+  }
+}
+```
+
+### Menangani Izin
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+
+async function checkAndRequestPermissions(): Promise<boolean> {
+  if (Capacitor.getPlatform() === 'web') {
+    // Request browser permissions
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true
+      });
+
+      // Stop the stream, we just needed permission
+      stream.getTracks().forEach(track => track.stop());
+      return true;
+    } catch (error) {
+      console.error('Permission denied:', error);
+      return false;
+    }
+  }
+
+  // On native platforms, permissions are requested automatically
+  return true;
+}
+
+// Use before starting a meeting
+const hasPermissions = await checkAndRequestPermissions();
+if (hasPermissions) {
+  await videoService.startMeeting({ url: meetingUrl });
+}
+```
+
+## Integrasi React
+
+```typescript
+import { useEffect, useState } from 'react';
+import { VideoConferenceService } from './VideoConferenceService';
+
+function VideoCallComponent() {
+  const [videoService] = useState(() => new VideoConferenceService());
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    videoService.initialize().then(setIsReady);
+  }, []);
+
+  const joinMeeting = async (meetingUrl: string) => {
+    if (!isReady) {
+      console.error('Video service not ready');
+      return;
+    }
+
+    try {
+      await videoService.joinMeeting(meetingUrl, 'User Name');
+    } catch (error) {
+      console.error('Failed to join meeting:', error);
+    }
+  };
+
+  return (
+    <div>
+      <button
+        onClick={() => joinMeeting('https://your-meeting-url')}
+        disabled={!isReady}
+      >
+        Join Meeting
+      </button>
+    </div>
+  );
+}
+```
+
+## Integrasi Vue
+
+```typescript
+import { ref, onMounted } from 'vue';
+import { VideoConferenceService } from './VideoConferenceService';
+
+export default {
+  setup() {
+    const videoService = new VideoConferenceService();
+    const isReady = ref(false);
+
+    onMounted(async () => {
+      isReady.value = await videoService.initialize();
+    });
+
+    const joinMeeting = async (meetingUrl: string) => {
+      if (!isReady.value) {
+        console.error('Video service not ready');
+        return;
+      }
+
+      try {
+        await videoService.joinMeeting(meetingUrl, 'User Name');
+      } catch (error) {
+        console.error('Failed to join meeting:', error);
+      }
+    };
+
+    return {
+      isReady,
+      joinMeeting
+    };
+  }
+};
+```
+
+## Praktik Terbaik
+
+1. **Inisialisasi Awal**: Inisialisasi RealtimeKit saat aplikasi Anda dimulai
+2. **Tangani Error**: Selalu bungkus panggilan dalam blok try-catch
+3. **Minta Izin**: Pastikan izin kamera/mikrofon sebelum memulai
+4. **Test Network**: Periksa konektivitas internet sebelum bergabung
+5. **Audio Latar Belakang**: Konfigurasi mode latar belakang untuk iOS
+6. **Pengalaman Pengguna**: Tampilkan status loading selama inisialisasi
+7. **URL Bersih**: Validasi URL meeting sebelum digunakan
+
+## Masalah Umum
+
+### Meeting Tidak Dimulai
+
+```typescript
+async function troubleshootMeeting(meetingUrl: string) {
+  // Check initialization
+  const version = await videoService.getPluginVersion();
+  console.log('Plugin version:', version);
+
+  // Verify URL format
+  if (!meetingUrl.startsWith('https://')) {
+    console.error('Invalid meeting URL, must use HTTPS');
+    return;
+  }
+
+  // Try starting meeting
+  try {
+    await videoService.startMeeting({ url: meetingUrl });
+  } catch (error) {
+    console.error('Meeting failed:', error);
+  }
+}
+```
+
+### Izin Ditolak
+
+Di iOS, pastikan Info.plist memiliki semua deskripsi penggunaan yang diperlukan. Di Android, verifikasi izin AndroidManifest.xml ada.
+
+### Masalah Audio di iOS
+
+Pastikan mode audio latar belakang dikonfigurasi di Info.plist:
+
+```xml
+<key>UIBackgroundModes</key>
+<array>
+  <string>audio</string>
+  <string>voip</string>
+</array>
+```
+
+## Langkah Selanjutnya
+
+- Jelajahi [Referensi API](https://github.com/Cap-go/capacitor-realtimekit#api) untuk dokumentasi metode lengkap
+- Baca [Dokumentasi Cloudflare Calls](https://developers.cloudflare.com/calls/)
+- Lihat [aplikasi contoh](https://github.com/Cap-go/capacitor-realtimekit/tree/main/example)
+- Lihat [tutorial](/plugins-tutorials/capacitor-realtimekit) untuk implementasi lengkap

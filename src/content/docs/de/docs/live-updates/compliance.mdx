@@ -1,0 +1,189 @@
+---
+title: Compliance
+description: "Erfahren Sie mehr über Capgos Datenschutzpraktiken, Datenerfassung, Sicherheitskonformität und wie wir die Informationen Ihrer Benutzer während Live-Updates schützen."
+sidebar:
+  order: 6
+locale: de
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo ist mit Fokus auf Datenschutz, Sicherheit und Compliance konzipiert. Dieses Dokument erklärt, welche Daten erfasst werden, wie sie verwendet werden und welche Maßnahmen zum Schutz der Privatsphäre Ihrer Benutzer und zur Gewährleistung der regulatorischen Compliance bei der Nutzung des Live-Update-Dienstes von Capgo getroffen werden.
+
+## Datenerfassungs-Übersicht
+
+Capgo erfasst minimale Daten, die zur effektiven Bereitstellung des Live-Update-Dienstes erforderlich sind. Die Datenerfassung konzentriert sich auf betriebliche Anforderungen statt auf Benutzer-Tracking oder Analysen.
+
+### Welche Daten werden erfasst
+
+Capgo erfasst nur die Daten, die zur Bereitstellung der Live-Updates-Funktion erforderlich sind. Wenn Ihre App nach Updates sucht oder neue Bundles herunterlädt, werden folgende Informationen erfasst:
+
+- **App-ID**: Ein eindeutiger Identifikator für Ihre App, der verwendet wird, um die App mit dem richtigen Konto zu verknüpfen
+- **App-Versionscode**: Der Versionscode der App, der verwendet wird, um zu bestimmen, welche Updates mit der App kompatibel sind
+- **App-Versionsname**: Der Versionsname der App, der für Anzeigezwecke verwendet wird
+- **Plattform**: Die Plattform (iOS, Android) der App, die verwendet wird, um zu bestimmen, welche Updates mit der App kompatibel sind
+- **Geräte-ID**: Ein eindeutiger Identifikator für das Gerät, der verwendet wird, um Updates an ein bestimmtes Gerät zu liefern und für Abrechnungszwecke. Dieser Identifikator ist eine zufällige Zeichenfolge, die beim ersten Start der App erstellt wird. **Ab Plugin-Version v5.10.0, v6.25.0 und v7.25.0** bleibt die Geräte-ID jetzt über App-Neuinstallationen hinweg bestehen (sicher gespeichert im Keychain auf iOS und EncryptedSharedPreferences auf Android), um eine bessere Geräteverfolgung zu ermöglichen und gleichzeitig die Compliance mit App Store-Richtlinien aufrechtzuerhalten. Vor diesen Versionen wurde die Geräte-ID bei jeder App-Installation zurückgesetzt
+- **Bundle-ID**: Der eindeutige Identifikator für das Bundle, das aktuell auf dem Gerät installiert ist
+- **Kanalname**: Der Name des Kanals, der ausgewählt wurde, um Updates zu erhalten
+- **OS-Version**: Die Version des Betriebssystems, die verwendet wird, um zu bestimmen, welche Updates mit dem Gerät kompatibel sind
+- **Plugin-Version**: Die Version des @capgo/capacitor-updater Plugins, das verwendet wird, um Updates an das Gerät zu liefern
+
+**Zusätzliche technische Daten:**
+- Update-Prüfungs-Zeitstempel
+- Download-Erfolgs-/Fehlerstatus
+- Bundle-Installationsstatus
+- Rollback-Ereignisse und Gründe
+- IP-Adresse (für Geolokalisierung und CDN-Optimierung)
+
+<Aside type="note">
+Sie können die erfassten Daten überprüfen, indem Sie den Quellcode des @capgo/capacitor-updater Plugins inspizieren, der Open Source ist und auf [GitHub](https://github.com/Cap-go/capacitor-updater) verfügbar ist. Capgo erfasst keine personenbezogenen Daten (PII) wie Namen, E-Mail-Adressen, Telefonnummern oder persistente Geräte-Identifikatoren, die verwendet werden können, um einzelne Benutzer über Apps hinweg zu verfolgen.
+</Aside>
+
+### Welche Daten werden NICHT erfasst
+
+Capgo erfasst ausdrücklich nicht:
+
+- Persönliche Benutzerinformationen oder Zugangsdaten
+- App-Nutzungsanalysen oder Benutzerverhaltens-Daten
+- Inhalte aus Ihrer App oder benutzergenerierte Daten
+- Standortdaten über die allgemeine geografische Region hinaus
+- Persistente Geräte-Identifikatoren für Tracking
+- Biometrische oder sensible persönliche Daten
+
+## Datennutzung und -zweck
+
+Die von Capgo erfassten Daten werden ausschließlich verwendet für:
+
+### Dienstbetrieb
+- Bestimmen, welche Updates für bestimmte App-Versionen verfügbar sind
+- Optimierung der Inhaltsbereitstellung durch geografische CDN-Auswahl
+- Sicherstellen der Kompatibilität zwischen Updates und Gerätefunktionen
+- Verwaltung von Update-Rollouts und Kanalzuweisungen
+
+### Dienstverbesserung
+- Überwachung der Update-Erfolgsraten und Identifizierung von Problemen
+- Optimierung der Download-Leistung und Zuverlässigkeit
+- Verbesserung des gesamten Update-Liefersystems
+- Fehlersuche und Behebung von Update-Fehlern
+
+### Sicherheit und Integrität
+- Verhinderung von Missbrauch und Sicherstellung der Dienstverfügbarkeit
+- Validierung der Authentizität und Integrität von Updates
+- Schutz vor bösartigen oder beschädigten Updates
+- Aufrechterhaltung der Dienstsicherheit und Stabilität
+
+## Datenspeicherung und Aufbewahrung
+
+### Speicherort
+- Update-Bundles und Metadaten werden auf sicherer Cloud-Infrastruktur gespeichert
+- Daten werden über mehrere geografische Regionen verteilt für bessere Leistung
+- Alle Datenübertragungen werden mit branchenüblichen Protokollen verschlüsselt (HTTPS/TLS)
+
+### Datenaufbewahrung
+- Update-Prüfungsprotokolle werden für betriebliche Zwecke aufbewahrt (typischerweise 30-90 Tage)
+- Bundle-Dateien werden aufbewahrt, solange sie aktiven Kanälen zugewiesen sind
+- Aggregierte, nicht-personenbezogene Metriken können länger für Dienstverbesserungen aufbewahrt werden
+- Persönliche Daten, falls vorhanden, werden gemäß geltenden Datenschutzgesetzen gelöscht
+
+### Datensicherheit
+- Alle Daten werden während der Übertragung und im Ruhezustand verschlüsselt
+- Zugriff auf Daten ist nur autorisiertem Personal vorbehalten
+- Regelmäßige Sicherheitsaudits und Überwachung werden durchgeführt
+- Branchenübliche Sicherheitspraktiken werden befolgt
+- **SOC 2-Zertifizierung**: Capgo ist derzeit SOC 2 Typ II zertifiziert und gewährleistet höchste Standards für Sicherheit, Verfügbarkeit und Vertraulichkeit. Sehen Sie sich unseren Compliance-Status unter [trust.capgo.app](https://trust.capgo.app) an
+- **Kontinuierliche Code-Prüfung**: Jeder Commit wird automatisch von [SonarCloud](https://sonarcloud.io/summary/overall?id=Cap-go_capacitor-updater&branch=main) für das [Plugin](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main) und [Backend](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main) geprüft, um Codequalität, Erkennung von Sicherheitslücken und Wartbarkeit sicherzustellen
+- **Schwachstellen-Scanning**: Zusätzliches Sicherheitsscanning wird von [Snyk](https://snyk.io/test/github/Cap-go/capgo) durchgeführt, um Sicherheitslücken in Abhängigkeiten zu erkennen und zu beheben
+- **Infrastruktur-Sicherheit**: Unsere Hosting-Infrastruktur wird kontinuierlich überwacht und durch [Hosting-Sicherheitsprüfungen](https://hosting-checker.net/websites/api.capgo.app) verifiziert
+- **KI-gestützte Code-Überprüfung**: Jede Pull-Request wird von CodeRabbit AI überprüft, um potenzielle Probleme, Sicherheitsbedenken zu erkennen und Codequalitätsstandards aufrechtzuerhalten
+
+## Datenschutzkontrollen
+
+### Für App-Entwickler
+Als Capgo-Benutzer haben Sie Kontrolle über:
+
+- **Kanalverwaltung**: Steuern Sie, welche Updates an welche Benutzer verteilt werden
+- **Datenminimierung**: Konfigurieren Sie, welche Geräteinformationen geteilt werden
+- **Geografische Kontrollen**: Verwalten Sie, wo Ihre Updates verteilt werden
+- **Aufbewahrungseinstellungen**: Steuern Sie, wie lange Update-Daten aufbewahrt werden
+
+### Für Endbenutzer
+Ihre App-Benutzer profitieren von:
+
+- **Minimale Datenerfassung**: Nur wesentliche Daten für die Update-Bereitstellung werden erfasst
+- **Kein Tracking**: Kein App-übergreifendes oder persistentes Benutzer-Tracking
+- **Transparenz**: Diese Datenschutzrichtlinie erklärt genau, welche Daten erfasst werden
+- **Sicherheit**: Alle Datenübertragungen sind verschlüsselt und sicher
+
+## Compliance und Rechtliches
+
+### Datenschutzvorschriften
+Capgo ist darauf ausgelegt, wichtige Datenschutzvorschriften einzuhalten, einschließlich:
+
+- **GDPR** (Datenschutz-Grundverordnung)
+- **CCPA** (California Consumer Privacy Act)
+- **COPPA** (Children's Online Privacy Protection Act)
+- Andere anwendbare regionale Datenschutzgesetze
+
+### App Store Compliance
+Capgo hält sich strikt an App Store-Richtlinien und -Richtlinien:
+
+- **Apple App Store**: Entspricht den [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) Abschnitt 3.3.2 und stellt sicher, dass Live-Updates nur das Verhalten der App auf eine Weise ändern, die mit der eingereichten App übereinstimmt
+- **Google Play Store**: Befolgt die Anforderungen der [Google Play Developer Policy](https://play.google.com/about/developer-content-policy/) für dynamisches Code-Laden und App-Updates
+- **Inhaltsbeschränkungen**: Live-Updates können keine Funktionalität einführen, die in der ursprünglichen App-Einreichung nicht vorhanden war oder plattformspezifische Inhaltsrichtlinien verletzt
+- **Sicherheitsanforderungen**: Alle Updates behalten die gleiche Sicherheitslage und Berechtigungen wie die ursprüngliche App bei
+
+### Ihre Verantwortlichkeiten
+Als App-Entwickler, der Capgo verwendet, sollten Sie:
+
+- Angemessene Datenschutzerklärungen in die Datenschutzrichtlinie Ihrer App aufnehmen
+- Benutzer über die Verwendung von Live-Update-Diensten informieren
+- Die Einhaltung geltender Gesetze in Ihrer Gerichtsbarkeit sicherstellen
+- Geeignete Einwilligungsmechanismen implementieren, falls erforderlich
+
+<Aside type="tip">
+**Keine zusätzliche Datenschutzimplementierung erforderlich**: Capgo ist standardmäßig datenschutzkonform konzipiert. Sie müssen keine zusätzlichen Datenschutzkontrollen oder Datenverarbeitungsmechanismen in Ihrem App-Code implementieren. Der minimale Datenerfassungsansatz und das Privacy-by-Design-Prinzip bedeuten, dass die Integration von Capgo typischerweise keine Änderungen an Ihren bestehenden Datenschutzerklärungen oder Richtlinien erfordert.
+</Aside>
+
+## Privacy by Design
+
+Capgo folgt Privacy-by-Design-Prinzipien:
+
+### Datenminimierung
+- Nur Daten erfassen, die absolut notwendig für den Dienstbetrieb sind
+- Erfassung persönlicher oder sensibler Informationen vermeiden
+- Wo möglich aggregierte und anonymisierte Daten verwenden
+
+### Zweckbindung
+- Erfasste Daten nur für die angegebenen Zwecke verwenden
+- Daten nicht für unzusammenhängende Aktivitäten umwidmen
+- Klare Grenzen für die Datennutzung aufrechterhalten
+
+### Transparenz
+- Klare Informationen über Datenerfassung und -nutzung bereitstellen
+- Datenschutzpraktiken leicht zugänglich und verständlich machen
+- Datenschutzdokumentation regelmäßig aktualisieren
+
+## Kontakt und Fragen
+
+Wenn Sie Fragen zu Capgos Datenschutzpraktiken haben oder ein Datenschutzanliegen melden möchten:
+
+- Überprüfen Sie unsere vollständige Datenschutzrichtlinie unter [capgo.app/privacy](https://capgo.app/privacy)
+- Sehen Sie sich unseren Sicherheits- und Compliance-Status unter [capgo.app/trust](https://capgo.app/trust) an
+- Kontaktieren Sie unser Datenschutzteam über die Support-Kanäle
+- Melden Sie datenschutzbezogene Probleme über unseren Sicherheitskontakt
+
+<Aside type="tip">
+Denken Sie daran, die Datenschutzrichtlinie Ihrer eigenen App zu aktualisieren, um die Verwendung des Live-Update-Dienstes von Capgo und jegliche Datenerfassung widerzuspiegeln, die als Teil des Update-Prozesses stattfinden kann.
+</Aside>
+
+## Best Practices für Datenschutz
+
+Bei der Implementierung von Capgo in Ihrer App:
+
+1. **Seien Sie transparent**: Informieren Sie Benutzer über die Live-Update-Funktionalität
+2. **Minimieren Sie Daten**: Aktivieren Sie nur Datenerfassungsfunktionen, die Sie tatsächlich benötigen
+3. **Sichere Implementierung**: Befolgen Sie Sicherheits-Best Practices bei Ihrer Integration
+4. **Regelmäßige Überprüfungen**: Überprüfen Sie regelmäßig Ihre Datenschutzpraktiken und aktualisieren Sie Richtlinien
+5. **Benutzerkontrolle**: Erwägen Sie, Benutzern Optionen zur Steuerung des Update-Verhaltens anzubieten
+
+Durch die Befolgung dieser Praktiken und das Verständnis von Capgos Datenschutzansatz können Sie Ihren Benutzern eine sichere, datenschutzfreundliche Live-Update-Erfahrung bieten.

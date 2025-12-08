@@ -1,0 +1,204 @@
+---
+title: 시작하기
+description: Capacitor 앱에서 안전한 생체 인증을 위해 Native Biometric 플러그인을 설치하고 사용하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **권한 구성**
+
+   ### iOS
+   `Info.plist`에 Face ID 사용 설명 추가:
+   ```xml
+   <key>NSFaceIDUsageDescription</key>
+   <string>For secure authentication</string>
+   ```
+
+   ### Android
+   `AndroidManifest.xml`에 생체 인증 권한 추가:
+   ```xml
+   <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+   ```
+</Steps>
+
+## 사용법
+
+생체 인증을 위해 플러그인을 가져와서 메서드를 사용하세요:
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+// 생체 인증을 사용할 수 있는지 확인
+const checkBiometric = async () => {
+  const result = await NativeBiometric.isAvailable();
+
+  if (result.isAvailable) {
+    console.log(`Biometric type: ${result.biometryType}`);
+  }
+};
+
+// 생체 인증 수행
+const verify = async () => {
+  const verified = await NativeBiometric.verifyIdentity({
+    reason: "For secure access to your account",
+    title: "Authentication",
+    subtitle: "Verify your identity",
+    description: "Place your finger on the sensor"
+  })
+    .then(() => true)
+    .catch(() => false);
+
+  if (verified) {
+    console.log("Authentication successful");
+  }
+};
+
+// 자격 증명을 안전하게 저장
+const saveCredentials = async () => {
+  await NativeBiometric.setCredentials({
+    username: "user@example.com",
+    password: "securepassword",
+    server: "https://api.example.com"
+  });
+};
+
+// 저장된 자격 증명 검색
+const getCredentials = async () => {
+  const credentials = await NativeBiometric.getCredentials({
+    server: "https://api.example.com"
+  });
+
+  console.log(credentials.username);
+  console.log(credentials.password);
+};
+
+// 저장된 자격 증명 삭제
+const deleteCredentials = async () => {
+  await NativeBiometric.deleteCredentials({
+    server: "https://api.example.com"
+  });
+};
+```
+
+## API 참조
+
+### isAvailable()
+
+기기에서 생체 인증을 사용할 수 있는지 확인합니다.
+
+```typescript
+interface AvailableResult {
+  isAvailable: boolean;
+  biometryType?: BiometryType;
+  errorCode?: number;
+}
+
+enum BiometryType {
+  NONE = 0,
+  TOUCH_ID = 1,
+  FACE_ID = 2,
+  FINGERPRINT = 3,
+  FACE_AUTHENTICATION = 4,
+  IRIS_AUTHENTICATION = 5
+}
+```
+
+### verifyIdentity(options)
+
+생체 인증을 수행합니다.
+
+```typescript
+interface BiometricOptions {
+  reason?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  fallbackTitle?: string;
+  useFallback?: boolean;
+  maxAttempts?: number;
+}
+```
+
+### setCredentials(options)
+
+생체 보호를 통해 자격 증명을 안전하게 저장합니다.
+
+```typescript
+interface Credentials {
+  username: string;
+  password: string;
+  server: string;
+}
+```
+
+### getCredentials(options)
+
+생체 인증 후 저장된 자격 증명을 검색합니다.
+
+```typescript
+interface GetCredentialOptions {
+  server: string;
+}
+```
+
+### deleteCredentials(options)
+
+저장된 자격 증명을 삭제합니다.
+
+```typescript
+interface DeleteCredentialOptions {
+  server: string;
+}
+```
+
+## 모범 사례
+
+1. **항상 먼저 가용성 확인**
+   ```typescript
+   const result = await NativeBiometric.isAvailable();
+   if (!result.isAvailable) {
+     // 비밀번호 인증으로 대체
+   }
+   ```
+
+2. **명확한 이유 제공**
+   사용자 신뢰를 구축하기 위해 생체 인증이 필요한 이유를 항상 설명하세요.
+
+3. **오류를 우아하게 처리**
+   ```typescript
+   try {
+     await NativeBiometric.verifyIdentity({
+       reason: "Access your secure data"
+     });
+   } catch (error) {
+     // 취소 또는 실패 처리
+     console.log("Authentication failed or cancelled");
+   }
+   ```
+
+4. **적절한 대체 수단 사용**
+   생체 인증이 실패할 수 있는 기기에 대해 패스코드 대체 수단을 활성화하세요.
+
+## 플랫폼 차이점
+
+### iOS
+- Touch ID 및 Face ID 지원
+- Face ID에 `NSFaceIDUsageDescription` 필요
+- 기기 패스코드로 대체 가능
+
+### Android
+- 지문, 얼굴 및 홍채 인식 지원
+- `USE_BIOMETRIC` 권한 필요
+- Android 9+ 에 Biometric Prompt API

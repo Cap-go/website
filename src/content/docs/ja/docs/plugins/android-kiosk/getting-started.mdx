@@ -1,0 +1,336 @@
+---
+title: はじめに
+description: Android Kioskプラグインのインストールと使用方法を学び、CapacitorアプリでAndroidデバイスをキオスクモードにロックします。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## プラットフォームサポート
+
+このプラグインは**Android専用**です。iOSのキオスクモード機能については、デバイスの組み込み[ガイドアクセス](https://support.apple.com/en-us/HT202612)機能を使用してください。
+
+## 機能
+
+- **キオスクモード**: システムUIを非表示にして没入型フルスクリーンモードに入る
+- **ランチャー統合**: アプリをデバイスのランチャー/ホームアプリとして設定
+- **ハードウェアキー制御**: 特定のハードウェアボタンをブロックまたは許可
+- **ステータス検出**: キオスクモードがアクティブかどうか、またはアプリがランチャーとして設定されているかを確認
+- **Android 6.0以降**: Android API 23からAndroid 15（API 35）までサポート
+
+## 基本的な使用方法
+
+### キオスクモードへの入退出
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+// キオスクモードに入る
+await CapacitorAndroidKiosk.enterKioskMode();
+
+// キオスクモードを終了
+await CapacitorAndroidKiosk.exitKioskMode();
+
+// キオスクモードかどうかを確認
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+console.log('Kiosk mode active:', isInKioskMode);
+```
+
+### ランチャー機能
+
+完全なキオスクモード機能のためには、アプリをデバイスのランチャーとして設定する必要があります:
+
+```typescript
+// ユーザーがアプリをランチャーとして選択するためのホーム画面設定を開く
+await CapacitorAndroidKiosk.setAsLauncher();
+
+// アプリがランチャーとして設定されているか確認
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+console.log('App is launcher:', isLauncher);
+```
+
+### ハードウェアキー制御
+
+キオスクモードで機能させるハードウェアボタンを制御:
+
+```typescript
+// 音量キーのみ許可
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false
+});
+
+// すべてのキーをブロック（デフォルト）
+await CapacitorAndroidKiosk.setAllowedKeys({});
+```
+
+## 完全な例
+
+```typescript
+async function setupKioskMode() {
+  try {
+    // すでにランチャーとして設定されているか確認
+    const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+
+    if (!isLauncher) {
+      // ユーザーにランチャーとして設定するよう促す
+      await CapacitorAndroidKiosk.setAsLauncher();
+      alert('Please select this app as your Home app');
+      return;
+    }
+
+    // 許可するキーを設定
+    await CapacitorAndroidKiosk.setAllowedKeys({
+      volumeUp: true,
+      volumeDown: true,
+      back: false,
+      home: false,
+      recent: false,
+      power: false
+    });
+
+    // キオスクモードに入る
+    await CapacitorAndroidKiosk.enterKioskMode();
+    console.log('Kiosk mode activated');
+
+  } catch (error) {
+    console.error('Failed to setup kiosk mode:', error);
+  }
+}
+```
+
+## APIリファレンス
+
+### isInKioskMode()
+
+アプリが現在キオスクモードで実行されているかを確認します。
+
+```typescript
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+```
+
+**戻り値:**
+- `isInKioskMode` (boolean): キオスクモードが現在アクティブかどうか
+
+---
+
+### isSetAsLauncher()
+
+アプリがデバイスのランチャー（ホームアプリ）として設定されているかを確認します。
+
+```typescript
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+```
+
+**戻り値:**
+- `isLauncher` (boolean): アプリがデバイスのランチャーとして設定されているかどうか
+
+---
+
+### enterKioskMode()
+
+キオスクモードに入り、システムUIを非表示にしてハードウェアボタンをブロックします。これが効果的に機能するには、アプリをデバイスのランチャーとして設定する必要があります。
+
+```typescript
+await CapacitorAndroidKiosk.enterKioskMode();
+```
+
+---
+
+### exitKioskMode()
+
+キオスクモードを終了し、通常のシステムUIとハードウェアボタンの機能を復元します。
+
+```typescript
+await CapacitorAndroidKiosk.exitKioskMode();
+```
+
+---
+
+### setAsLauncher()
+
+このアプリをランチャーとして設定できるように、デバイスのホーム画面設定を開きます。完全なキオスクモード機能にはこれが必要です。
+
+```typescript
+await CapacitorAndroidKiosk.setAsLauncher();
+```
+
+---
+
+### setAllowedKeys(options)
+
+キオスクモードで機能させるハードウェアキーを設定します。デフォルトでは、キオスクモードですべてのハードウェアキーがブロックされます。
+
+```typescript
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false,
+  power: false,
+  camera: false,
+  menu: false
+});
+```
+
+**パラメータ:**
+- `volumeUp` (boolean, オプション): 音量アップボタンを許可（デフォルト: false）
+- `volumeDown` (boolean, オプション): 音量ダウンボタンを許可（デフォルト: false）
+- `back` (boolean, オプション): 戻るボタンを許可（デフォルト: false）
+- `home` (boolean, オプション): ホームボタンを許可（デフォルト: false）
+- `recent` (boolean, オプション): 最近使用したアプリボタンを許可（デフォルト: false）
+- `power` (boolean, オプション): 電源ボタンを許可（デフォルト: false）
+- `camera` (boolean, オプション): カメラボタンを許可（存在する場合）（デフォルト: false）
+- `menu` (boolean, オプション): メニューボタンを許可（存在する場合）（デフォルト: false）
+
+---
+
+### getPluginVersion()
+
+ネイティブCapacitorプラグインのバージョンを取得します。
+
+```typescript
+const { version } = await CapacitorAndroidKiosk.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+**戻り値:**
+- `version` (string): プラグインのバージョン番号
+
+## Android設定
+
+### 1. MainActivityのセットアップ
+
+完全なハードウェアキーブロックを有効にするには、`MainActivity.java`で`dispatchKeyEvent`をオーバーライドする必要があります:
+
+```java
+import android.view.KeyEvent;
+import ee.forgr.plugin.android_kiosk.CapacitorAndroidKioskPlugin;
+
+public class MainActivity extends BridgeActivity {
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // キオスクプラグインを取得
+        CapacitorAndroidKioskPlugin kioskPlugin = (CapacitorAndroidKioskPlugin)
+            this.getBridge().getPlugin("CapacitorAndroidKiosk").getInstance();
+
+        if (kioskPlugin != null && kioskPlugin.shouldBlockKey(event.getKeyCode())) {
+            return true; // キーをブロック
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed()を呼び出さずに戻るボタンを無効化
+        // またはプラグインのhandleOnBackPressedを呼び出す
+    }
+}
+```
+
+### 2. AndroidManifest.xml
+
+アプリをランチャーとして選択可能にするためにランチャーインテントフィルターを追加:
+
+```xml
+<activity
+    android:name=".MainActivity"
+    ...>
+
+    <!-- 既存のインテントフィルター -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <!-- アプリをランチャーとして選択可能にするためにこれを追加 -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+```
+
+## 重要な注意事項
+
+1. **ランチャー要件**: 完全なキオスクモード機能（ホームボタンのブロック、タスク切り替えの防止）には、アプリをデバイスのランチャーとして設定する必要があります。
+
+2. **テスト**: テスト時は、プログラムでキオスクモードを終了するか、別のアプリをランチャーとして設定できます。
+
+3. **Androidバージョン**: このプラグインは、Android 11以降の最新Android APIを使用し、Android 6.0以降との互換性のために古いメソッドにフォールバックします。
+
+4. **セキュリティ**: このプラグインは正当なキオスクアプリケーション向けに設計されています。ユーザーがキオスクモードを終了する方法を提供してください。
+
+5. **バッテリー**: キオスクモードは画面をオンのままにします。独自の画面タイムアウトまたは明るさ管理の実装を検討してください。
+
+## iOS代替案
+
+iOSデバイスの場合は、組み込みの[ガイドアクセス](https://support.apple.com/en-us/HT202612)機能を使用してください:
+
+1. 設定 > アクセシビリティ > ガイドアクセスに移動
+2. ガイドアクセスをオンにする
+3. パスコードを設定
+4. アプリを開く
+5. サイドボタンをトリプルクリック
+6. 設定を調整してガイドアクセスを開始
+
+## ベストプラクティス
+
+1. **最初にランチャーステータスを確認**
+   ```typescript
+   const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+   if (!isLauncher) {
+     // 最初にランチャーとして設定するようユーザーに促す
+     await CapacitorAndroidKiosk.setAsLauncher();
+   }
+   ```
+
+2. **終了メカニズムを提供**
+   ```typescript
+   // 特定のキーの組み合わせで終了を許可
+   // または秘密のジェスチャー/パターンを実装
+   async function exitKioskWithConfirmation() {
+     const confirmed = confirm('Exit kiosk mode?');
+     if (confirmed) {
+       await CapacitorAndroidKiosk.exitKioskMode();
+     }
+   }
+   ```
+
+3. **アプリのライフサイクルを処理**
+   ```typescript
+   // アプリが再開したときにキオスクモードに再入
+   window.addEventListener('resume', async () => {
+     const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+     if (!isInKioskMode) {
+       await CapacitorAndroidKiosk.enterKioskMode();
+     }
+   });
+   ```
+
+4. **エラー処理**
+   ```typescript
+   try {
+     await CapacitorAndroidKiosk.enterKioskMode();
+   } catch (error) {
+     console.error('Failed to enter kiosk mode:', error);
+     // ユーザーに通知して代替案を提供
+   }
+   ```

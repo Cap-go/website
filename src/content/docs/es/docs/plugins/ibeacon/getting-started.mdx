@@ -1,0 +1,620 @@
+---
+title: Comenzar
+description: Aprende a instalar y usar el plugin iBeacon para detectar y monitorear beacons Bluetooth en tu aplicación Capacitor.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-ibeacon" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Configuración
+
+### Configuración de iOS
+
+Agrega lo siguiente a tu `Info.plist`:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>This app needs location access to detect nearby beacons</string>
+
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>This app needs location access to monitor beacons in the background</string>
+
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>This app uses Bluetooth to detect nearby beacons</string>
+
+<key>UIBackgroundModes</key>
+<array>
+  <string>location</string>
+</array>
+```
+
+### Configuración de Android
+
+Agrega lo siguiente a tu `AndroidManifest.xml`:
+
+```xml
+<manifest>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.BLUETOOTH" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+  <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+</manifest>
+```
+
+**Importante**: Para Android, necesitas integrar la biblioteca [AltBeacon](https://altbeacon.github.io/android-beacon-library/) en tu proyecto para que la detección de beacons funcione.
+
+Agrega a tu `build.gradle` de la aplicación:
+
+```kotlin
+dependencies {
+    implementation 'org.altbeacon:android-beacon-library:2.20+'
+}
+```
+
+## Uso
+
+### Configuración Básica
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+// Define your beacon region
+const beaconRegion = {
+  identifier: 'MyStore',
+  uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+  major: 1, // Optional
+  minor: 2  // Optional
+};
+```
+
+### Solicitar Permisos
+
+```typescript
+// Request "When In Use" permission
+const requestPermission = async () => {
+  const { status } = await CapacitorIbeacon.requestWhenInUseAuthorization();
+  console.log('Permission status:', status);
+  // status: 'not_determined' | 'restricted' | 'denied' | 'authorized_always' | 'authorized_when_in_use'
+};
+
+// Request "Always" permission (for background monitoring)
+const requestAlwaysPermission = async () => {
+  const { status } = await CapacitorIbeacon.requestAlwaysAuthorization();
+  console.log('Always permission status:', status);
+};
+
+// Check current authorization status
+const checkPermission = async () => {
+  const { status } = await CapacitorIbeacon.getAuthorizationStatus();
+  console.log('Current status:', status);
+};
+```
+
+### Verificar Capacidades del Dispositivo
+
+```typescript
+// Check if Bluetooth is enabled
+const checkBluetooth = async () => {
+  const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+  if (!enabled) {
+    console.log('Please enable Bluetooth');
+  }
+};
+
+// Check if ranging is available
+const checkRanging = async () => {
+  const { available } = await CapacitorIbeacon.isRangingAvailable();
+  console.log('Ranging available:', available);
+};
+```
+
+### Monitorear Regiones de Beacon
+
+El monitoreo detecta cuando entras o sales de una región de beacon. Esto funciona en segundo plano.
+
+```typescript
+// Start monitoring
+const startMonitoring = async () => {
+  await CapacitorIbeacon.startMonitoringForRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+    major: 1,
+    minor: 2
+  });
+  console.log('Started monitoring for beacons');
+};
+
+// Stop monitoring
+const stopMonitoring = async () => {
+  await CapacitorIbeacon.stopMonitoringForRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+};
+```
+
+### Detectar Beacons (Ranging)
+
+El ranging proporciona actualizaciones continuas sobre beacons cercanos y sus distancias. Esto requiere que la aplicación esté en primer plano.
+
+```typescript
+// Start ranging
+const startRanging = async () => {
+  await CapacitorIbeacon.startRangingBeaconsInRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+  console.log('Started ranging beacons');
+};
+
+// Stop ranging
+const stopRanging = async () => {
+  await CapacitorIbeacon.stopRangingBeaconsInRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+};
+```
+
+### Escuchar Eventos
+
+```typescript
+import { PluginListenerHandle } from '@capacitor/core';
+
+// Listen for ranging events (continuous distance updates)
+const rangingListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didRangeBeacons',
+  (data) => {
+    console.log('Beacons detected:', data.beacons);
+    data.beacons.forEach(beacon => {
+      console.log(`UUID: ${beacon.uuid}`);
+      console.log(`Major: ${beacon.major}, Minor: ${beacon.minor}`);
+      console.log(`Distance: ${beacon.accuracy}m`);
+      console.log(`Proximity: ${beacon.proximity}`); // immediate, near, far, unknown
+      console.log(`RSSI: ${beacon.rssi}`);
+    });
+  }
+);
+
+// Listen for region enter events
+const enterListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didEnterRegion',
+  (data) => {
+    console.log('Entered region:', data.region.identifier);
+    // Show welcome notification or trigger action
+  }
+);
+
+// Listen for region exit events
+const exitListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didExitRegion',
+  (data) => {
+    console.log('Exited region:', data.region.identifier);
+    // Trigger goodbye action
+  }
+);
+
+// Listen for region state changes
+const stateListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didDetermineStateForRegion',
+  (data) => {
+    console.log(`Region ${data.region.identifier}: ${data.state}`);
+    // state: 'inside' | 'outside' | 'unknown'
+  }
+);
+
+// Clean up listeners when done
+const cleanup = () => {
+  rangingListener.remove();
+  enterListener.remove();
+  exitListener.remove();
+  stateListener.remove();
+};
+```
+
+### Anunciar como iBeacon (solo iOS)
+
+Convierte tu dispositivo en un transmisor iBeacon.
+
+```typescript
+// Start advertising
+const startAdvertising = async () => {
+  await CapacitorIbeacon.startAdvertising({
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+    major: 1,
+    minor: 2,
+    identifier: 'MyBeacon',
+    measuredPower: -59 // Optional: calibrated power at 1 meter
+  });
+  console.log('Started advertising as iBeacon');
+};
+
+// Stop advertising
+const stopAdvertising = async () => {
+  await CapacitorIbeacon.stopAdvertising();
+};
+```
+
+## Ejemplo Completo
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+import { PluginListenerHandle } from '@capacitor/core';
+
+export class BeaconService {
+  private listeners: PluginListenerHandle[] = [];
+
+  async init() {
+    // Request permissions
+    const { status } = await CapacitorIbeacon.requestWhenInUseAuthorization();
+
+    if (status !== 'authorized_when_in_use' && status !== 'authorized_always') {
+      throw new Error('Location permission denied');
+    }
+
+    // Check Bluetooth
+    const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+    if (!enabled) {
+      throw new Error('Bluetooth is not enabled');
+    }
+
+    // Set up event listeners
+    this.setupListeners();
+  }
+
+  private setupListeners() {
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didEnterRegion', (data) => {
+        console.log('Welcome! Entered:', data.region.identifier);
+        this.onEnterRegion(data.region);
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didExitRegion', (data) => {
+        console.log('Goodbye! Left:', data.region.identifier);
+        this.onExitRegion(data.region);
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didRangeBeacons', (data) => {
+        this.onRangeBeacons(data.beacons);
+      })
+    );
+  }
+
+  async startMonitoring(uuid: string, identifier: string, major?: number, minor?: number) {
+    await CapacitorIbeacon.startMonitoringForRegion({
+      identifier,
+      uuid,
+      major,
+      minor
+    });
+  }
+
+  async startRanging(uuid: string, identifier: string) {
+    await CapacitorIbeacon.startRangingBeaconsInRegion({
+      identifier,
+      uuid
+    });
+  }
+
+  private onEnterRegion(region: any) {
+    // Handle region entry (e.g., show notification, trigger content)
+    console.log('Entered beacon region:', region);
+  }
+
+  private onExitRegion(region: any) {
+    // Handle region exit
+    console.log('Left beacon region:', region);
+  }
+
+  private onRangeBeacons(beacons: any[]) {
+    // Process beacon distances
+    const nearestBeacon = beacons.reduce((nearest, beacon) => {
+      return beacon.accuracy < nearest.accuracy ? beacon : nearest;
+    }, beacons[0]);
+
+    if (nearestBeacon) {
+      console.log('Nearest beacon:', nearestBeacon);
+      this.handleProximity(nearestBeacon);
+    }
+  }
+
+  private handleProximity(beacon: any) {
+    switch (beacon.proximity) {
+      case 'immediate': // < 0.5m
+        console.log('Very close to beacon');
+        break;
+      case 'near': // 0.5m - 3m
+        console.log('Near beacon');
+        break;
+      case 'far': // > 3m
+        console.log('Far from beacon');
+        break;
+      case 'unknown':
+        console.log('Distance unknown');
+        break;
+    }
+  }
+
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+## Referencia de API
+
+### startMonitoringForRegion(options)
+
+Comienza a monitorear una región de beacon. Dispara eventos al entrar/salir.
+
+```typescript
+interface BeaconRegion {
+  identifier: string;
+  uuid: string;
+  major?: number;
+  minor?: number;
+  notifyEntryStateOnDisplay?: boolean;
+}
+
+await CapacitorIbeacon.startMonitoringForRegion(options);
+```
+
+### stopMonitoringForRegion(options)
+
+Detiene el monitoreo de una región de beacon.
+
+```typescript
+await CapacitorIbeacon.stopMonitoringForRegion(options);
+```
+
+### startRangingBeaconsInRegion(options)
+
+Comienza a detectar beacons en una región para actualizaciones continuas de distancia.
+
+```typescript
+await CapacitorIbeacon.startRangingBeaconsInRegion(options);
+```
+
+### stopRangingBeaconsInRegion(options)
+
+Detiene la detección de beacons en una región.
+
+```typescript
+await CapacitorIbeacon.stopRangingBeaconsInRegion(options);
+```
+
+### startAdvertising(options)
+
+Comienza a anunciar el dispositivo como un iBeacon (solo iOS).
+
+```typescript
+interface BeaconAdvertisingOptions {
+  uuid: string;
+  major: number;
+  minor: number;
+  identifier: string;
+  measuredPower?: number; // Calibrated power at 1 meter
+}
+
+await CapacitorIbeacon.startAdvertising(options);
+```
+
+### stopAdvertising()
+
+Detiene el anuncio del dispositivo como iBeacon.
+
+```typescript
+await CapacitorIbeacon.stopAdvertising();
+```
+
+### requestWhenInUseAuthorization()
+
+Solicita autorización de ubicación "Cuando está en Uso".
+
+```typescript
+const result = await CapacitorIbeacon.requestWhenInUseAuthorization();
+// Returns: { status: string }
+```
+
+### requestAlwaysAuthorization()
+
+Solicita autorización de ubicación "Siempre" (requerida para monitoreo en segundo plano).
+
+```typescript
+const result = await CapacitorIbeacon.requestAlwaysAuthorization();
+// Returns: { status: string }
+```
+
+### getAuthorizationStatus()
+
+Obtiene el estado actual de autorización de ubicación.
+
+```typescript
+const result = await CapacitorIbeacon.getAuthorizationStatus();
+// Returns: { status: 'not_determined' | 'restricted' | 'denied' | 'authorized_always' | 'authorized_when_in_use' }
+```
+
+### isBluetoothEnabled()
+
+Verifica si Bluetooth está habilitado.
+
+```typescript
+const result = await CapacitorIbeacon.isBluetoothEnabled();
+// Returns: { enabled: boolean }
+```
+
+### isRangingAvailable()
+
+Verifica si el ranging está disponible en el dispositivo.
+
+```typescript
+const result = await CapacitorIbeacon.isRangingAvailable();
+// Returns: { available: boolean }
+```
+
+### enableARMAFilter(options)
+
+Habilita el filtrado ARMA para cálculos de distancia (solo Android).
+
+```typescript
+await CapacitorIbeacon.enableARMAFilter({ enabled: true });
+```
+
+## Eventos
+
+### didRangeBeacons
+
+Se dispara cuando se detectan beacons durante el ranging.
+
+```typescript
+interface RangingEvent {
+  region: BeaconRegion;
+  beacons: Beacon[];
+}
+
+interface Beacon {
+  uuid: string;
+  major: number;
+  minor: number;
+  rssi: number; // Signal strength
+  proximity: 'immediate' | 'near' | 'far' | 'unknown';
+  accuracy: number; // Distance in meters
+}
+```
+
+### didEnterRegion
+
+Se dispara al entrar a una región de beacon monitoreada.
+
+```typescript
+interface RegionEvent {
+  region: BeaconRegion;
+}
+```
+
+### didExitRegion
+
+Se dispara al salir de una región de beacon monitoreada.
+
+```typescript
+interface RegionEvent {
+  region: BeaconRegion;
+}
+```
+
+### didDetermineStateForRegion
+
+Se dispara cuando se determina el estado de una región.
+
+```typescript
+interface StateEvent {
+  region: BeaconRegion;
+  state: 'inside' | 'outside' | 'unknown';
+}
+```
+
+## Valores de Proximidad
+
+- **immediate**: Muy cerca (< 0.5 metros)
+- **near**: Relativamente cerca (0.5 - 3 metros)
+- **far**: Más lejos (> 3 metros)
+- **unknown**: La distancia no puede determinarse
+
+## Mejores Prácticas
+
+1. **Solicitar permisos apropiados**
+   - Usa "Cuando está en Uso" para funciones en primer plano
+   - Solicita "Siempre" solo si necesitas monitoreo en segundo plano
+   - Explica claramente por qué necesitas acceso a la ubicación
+
+2. **Manejar el estado de Bluetooth**
+   ```typescript
+   const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+   if (!enabled) {
+     // Prompt user to enable Bluetooth
+   }
+   ```
+
+3. **Optimización de batería**
+   - Usa monitoreo en lugar de ranging cuando sea posible (más eficiente en batería)
+   - Detén el ranging cuando no se necesite activamente
+   - Considera usar rangos major/minor más grandes para reducir el procesamiento
+
+4. **Manejo de errores**
+   ```typescript
+   try {
+     await CapacitorIbeacon.startMonitoringForRegion(region);
+   } catch (error) {
+     console.error('Failed to start monitoring:', error);
+   }
+   ```
+
+5. **Limpiar listeners**
+   Siempre elimina los event listeners cuando el componente se desmonte para prevenir fugas de memoria.
+
+## Notas de Plataforma
+
+### iOS
+- Requiere iOS 10.0+
+- Usa el framework nativo CoreLocation
+- Soporta monitoreo en segundo plano con permiso "Siempre"
+- Puede anunciar como iBeacon usando CoreBluetooth
+- El ranging requiere que la aplicación esté en primer plano
+
+### Android
+- Requiere Android 6.0 (API 23)+
+- Usa biblioteca AltBeacon
+- Requiere permisos de ubicación aunque los beacons usan Bluetooth
+- El monitoreo en segundo plano requiere ACCESS_BACKGROUND_LOCATION (Android 10+)
+- No puede anunciar como iBeacon (limitación de hardware en la mayoría de dispositivos)
+
+### Web
+- No soportado en plataforma web
+
+## Casos de Uso Comunes
+
+1. **Marketing de Proximidad**: Activar notificaciones o contenido cuando los usuarios se acercan a tu tienda
+2. **Navegación Interior**: Guiar a los usuarios a través de edificios usando puntos de referencia de beacon
+3. **Seguimiento de Asistencia**: Registrar automáticamente cuando los usuarios entran a una ubicación
+4. **Seguimiento de Activos**: Monitorear el movimiento de equipos o inventario
+5. **Tours de Museo**: Proporcionar información contextual cuando los visitantes se acercan a las exhibiciones
+6. **Casa Inteligente**: Activar automatizaciones basadas en la presencia en habitaciones
+
+## Solución de Problemas
+
+### Beacons no detectados
+- Asegúrate de que Bluetooth esté habilitado
+- Verifica que los permisos de ubicación estén otorgados
+- Verifica que el UUID del beacon coincida exactamente (sensible a mayúsculas)
+- Confirma que el beacon esté encendido y transmitiendo
+- Intenta primero sin filtros major/minor
+
+### Monitoreo en segundo plano no funciona
+- Asegúrate de que el permiso de ubicación "Siempre" esté otorgado
+- Agrega `location` a UIBackgroundModes (iOS)
+- Solicita ACCESS_BACKGROUND_LOCATION (Android 10+)
+- Nota: iOS puede retrasar callbacks en segundo plano para ahorrar batería
+
+### Mediciones de distancia inexactas
+- El RSSI del beacon varía con el entorno (paredes, interferencia)
+- Usa múltiples beacons para triangulación
+- Calibra measuredPower a 1 metro del beacon
+- Habilita filtrado ARMA en Android para valores más suaves

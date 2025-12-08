@@ -1,0 +1,130 @@
+---
+title: Web에서 Google 로그인
+locale: ko
+description: 이 가이드는 Capacitor 및 @capgo/capacitor-social-login 플러그인을 사용하여 웹 애플리케이션에서 Google 로그인을 설정하는 포괄적인 안내를 제공하며, 모든 필요한 단계와 구성을 다루어 원활한 통합 프로세스를 보장합니다.
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 소개
+
+이 가이드에서는 웹 애플리케이션용 Capgo Social Login으로 Google 로그인을 설정하는 방법을 배웁니다.
+[일반 설정 가이드](/docs/plugins/social-login/google/general/)를 이미 읽었다고 가정합니다.
+
+## 웹에서 Google 로그인 사용
+
+웹에서 Google 로그인을 사용하는 것은 매우 간단합니다.
+사용하려면 다음을 수행해야 합니다:
+
+<Steps>
+1. Google Console에서 웹 클라이언트를 만듭니다
+
+   :::note
+   Android용 Google 로그인을 이미 구성한 경우 이미 웹 클라이언트를 만들었으므로 이 단계를 건너뛸 수 있습니다. 2단계로 직접 진행할 수 있습니다.
+   :::
+
+   1. 검색 창을 클릭합니다
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+
+   2. `credentials`를 검색하고 `APIs and Services` 옵션을 클릭합니다(스크린샷의 2번)
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+
+   3. `create credentials`를 클릭합니다
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+
+   4. `OAuth client ID`를 선택합니다
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+
+   5. `Application type`을 `Web application`으로 선택합니다
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Application type selection with Web option highlighted" />
+
+   6. 클라이언트 이름을 지정하고 `Create`를 클릭합니다
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web client creation form with name field highlighted" />
+
+   7. 클라이언트 ID를 복사합니다. 애플리케이션에서 `webClientId`로 사용할 것입니다
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client ID details showing Web client ID to copy" />
+
+2. Google Console에서 웹 클라이언트를 구성합니다
+
+   1. [credentials page](https://console.cloud.google.com/apis/credentials)를 열고 웹 클라이언트를 클릭합니다
+      <img src="/social-login-assets/google_cons_open_web_client_id.png" alt="Credentials list showing web client to click" />
+
+   2. 이제 `Authorized JavaScript origins`를 추가하세요. 여기에는 앱에 사용할 수 있는 모든 주소가 포함되어야 합니다. 제 경우에는 localhost만 사용하지만 사용자 정의 포트를 사용하므로 `http://localhost`와 `http://localhost:5173`을 모두 추가해야 합니다
+
+      1. `add URI`를 클릭하세요
+         <img src="/social-login-assets/google_cons_authorized_js_add_btn.png" alt="Authorized JavaScript origins section with ADD URI button" />
+
+      2. URL을 입력하세요
+         <img src="/social-login-assets/google_cons_authorized_js_typed_url.png" alt="ADD URI dialog with localhost URL entered" />
+
+      3. 모든 URL을 추가할 때까지 반복합니다
+
+      4. 완료되면 화면이 다음과 같이 표시됩니다
+         <img src="/social-login-assets/google_cons_authorized_js_final.png" alt="Authorized JavaScript origins with multiple localhost URLs added" />
+
+   3. 이제 일부 `Authorized redirect URIs`를 추가하세요. 이것은 CapacitorSocialLogin 플러그인을 사용할 페이지에 따라 다릅니다. 제 경우에는 `http://localhost:5173/auth`에서 사용할 것입니다
+
+      1. `ADD URI`를 클릭하세요
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_1.png" alt="Authorized redirect URIs section with ADD URI button" />
+
+      2. URL을 입력하고 `ADD URL`을 다시 클릭합니다
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_2.png" alt="ADD URI dialog with redirect URL entered" />
+
+   4. `save`를 클릭합니다
+      <img src="/social-login-assets/google_cons_web_app_save.png" alt="Save button at bottom of web client configuration" />
+
+3. 이제 다음과 같이 JavaScript에서 `login`을 호출할 준비가 되었습니다:
+
+   1. 먼저 `SocialLogin`을 가져옵니다
+
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      ```
+
+   2. 그런 다음 initialize를 호출합니다. 한 번만 호출해야 합니다.
+
+      ```typescript
+      // onMounted is Vue specific
+      // webClientId is the client ID you got in the web client creation step not the android client ID.
+      onMounted(() => {
+       SocialLogin.initialize({
+         google: {
+           webClientId: '673324426943-avl4v9ubdas7a0u7igf7in03pdj1dkmg.apps.googleusercontent.com',
+         }
+       })
+      })
+      ```
+
+   :::note[웹 리디렉션 처리]
+   웹에서 Google 로그인을 사용할 때 리디렉션이 발생할 때 플러그인의 함수를 **반드시** 호출하여 플러그인을 초기화하고 리디렉션을 처리하고 팝업 창을 닫을 수 있도록 해야 합니다. `isLoggedIn()` 또는 `initialize()` 중 하나를 호출할 수 있습니다. 둘 다 리디렉션 처리를 트리거합니다:
+
+   ```typescript
+   // Option 1: Call isLoggedIn when the redirect page loads
+   SocialLogin.isLoggedIn({ provider: 'google' }).catch(() => {
+     // Ignore the result, this is just to initialize the plugin
+   });
+
+   // Option 2: Call initialize when the redirect page loads
+   SocialLogin.initialize({
+     google: {
+       webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+     }
+   }).catch(() => {
+     // Ignore any errors, this is just to handle the redirect
+   });
+   ```
+   :::
+
+   3. 클릭 시 `SocialLogin.login`을 호출하는 로그인 버튼을 만듭니다
+
+      ```typescript
+      const res = await SocialLogin.login({
+       provider: 'google',
+       options: {}
+      })
+      // Handle the response
+      console.log(JSON.stringify(res));
+      ```
+</Steps>
+

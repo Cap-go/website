@@ -1,0 +1,234 @@
+---
+title: Guide de migration de @capacitor-community/facebook-login vers @capgo/capacitor-social-login
+locale: fr
+description: Ce guide détaillé fournit des instructions étape par étape pour la transition du plugin @capacitor-community/facebook-login vers le plugin @capgo/capacitor-social-login, garantissant un processus de migration fluide avec des fonctionnalités améliorées.
+sidebar:
+    order: 2
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Vue d'ensemble
+
+Ce guide fournit des instructions complètes pour migrer de `@capacitor-community/facebook-login` vers `@capgo/capacitor-social-login`. Le nouveau plugin modernise l'authentification Facebook avec une API unifiée qui prend en charge plusieurs fournisseurs sociaux, un support TypeScript amélioré et des capacités accrues.
+
+## Installation
+
+<Steps>
+1. Supprimez l'ancien package :
+   ```bash
+   npm uninstall @capacitor-community/facebook-login
+   ```
+
+2. Installez le nouveau package :
+   ```bash
+   npm install @capgo/capacitor-social-login
+   npx cap sync
+   ```
+</Steps>
+
+## Modifications du code
+
+### Modifications d'importation
+```diff
+- import { FacebookLogin } from '@capacitor-community/facebook-login';
++ import { SocialLogin } from '@capgo/capacitor-social-login';
+```
+
+### Initialisation
+
+**Changement clé** : Le nouveau package nécessite une configuration explicite dans votre code :
+
+```diff
+- // L'ancien package ne nécessitait pas d'initialisation explicite dans le code
+- // La configuration se faisait uniquement dans les plateformes natives
+
++ // Le nouveau package nécessite une initialisation explicite
++ await SocialLogin.initialize({
++   facebook: {
++     appId: 'YOUR_FACEBOOK_APP_ID',        // Requis pour le web et Android
++     clientToken: 'YOUR_CLIENT_TOKEN'       // Requis pour Android
++   }
++ });
+```
+
+### Connexion
+
+La méthode de connexion accepte maintenant un paramètre de fournisseur :
+
+```diff
+- const FACEBOOK_PERMISSIONS = ['email', 'public_profile'];
+- const result = await FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+
++ const result = await SocialLogin.login({
++   provider: 'facebook',
++   options: {
++     permissions: ['email', 'public_profile'],
++     limitedLogin: false,
++     nonce: 'optional_nonce'
++   }
++ });
+```
+
+### Modifications du type de réponse
+
+La structure de réponse a été modernisée avec un objet de profil plus complet :
+
+```typescript
+// Ancien type de réponse
+interface FacebookLoginResponse {
+  accessToken: {
+    applicationId: string;
+    userId: string;
+    token: string;
+    expires: string;
+  };
+  recentlyGrantedPermissions: string[];
+  recentlyDeniedPermissions: string[];
+}
+
+// Nouveau type de réponse
+interface FacebookLoginResponse {
+  provider: 'facebook';
+  result: {
+    accessToken: {
+      token: string;
+      applicationId?: string;
+      expires?: string;
+      userId?: string;
+      permissions?: string[];
+      declinedPermissions?: string[];
+    } | null;
+    idToken: string | null;
+    profile: {
+      userID: string;
+      email: string | null;
+      friendIDs: string[];
+      birthday: string | null;
+      ageRange: { min?: number; max?: number } | null;
+      gender: string | null;
+      location: { id: string; name: string } | null;
+      hometown: { id: string; name: string } | null;
+      profileURL: string | null;
+      name: string | null;
+      imageURL: string | null;
+    };
+  };
+}
+```
+
+**Différences clés** :
+- La réponse inclut maintenant un champ `provider` identifiant le fournisseur d'authentification
+- Objet `profile` plus détaillé avec des informations utilisateur supplémentaires
+- Structure cohérente sur tous les fournisseurs de connexion sociale
+
+### Vérification de l'état de connexion
+```diff
+- const result = await FacebookLogin.getCurrentAccessToken();
+- const isLoggedIn = result && result.accessToken;
+
++ const status = await SocialLogin.isLoggedIn({
++   provider: 'facebook'
++ });
++ const isLoggedIn = status.isLoggedIn;
+```
+
+### Déconnexion
+```diff
+- await FacebookLogin.logout();
+
++ await SocialLogin.logout({
++   provider: 'facebook'
++ });
+```
+
+## Modifications spécifiques à la plateforme
+
+### Configuration Android
+
+La configuration est maintenant gérée via la méthode initialize :
+
+```diff
+- // Les modifications dans AndroidManifest.xml restent les mêmes
+- // strings.xml devient non pertinent
++ // Initialisez également dans votre code :
++ await SocialLogin.initialize({
++   facebook: {
++     appId: 'your-app-id',
++     clientToken: 'your-client-token'  // Nouvelle exigence
++   }
++ });
+```
+
+**Important** : Le jeton client est maintenant requis pour l'authentification Android.
+
+### Configuration iOS
+
+1. La configuration iOS dans `AppDelegate.swift` reste la même :
+
+```swift
+import FBSDKCoreKit
+
+// Dans application:didFinishLaunchingWithOptions:
+FBSDKCoreKit.ApplicationDelegate.shared.application(
+    application,
+    didFinishLaunchingWithOptions: launchOptions
+)
+
+// Dans application:openURL:options:
+ApplicationDelegate.shared.application(
+    app,
+    open: url,
+    sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+    annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+)
+```
+
+2. La configuration `Info.plist` reste la même :
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>fb[APP_ID]</string>
+        </array>
+    </dict>
+</array>
+<key>FacebookAppID</key>
+<string>[APP_ID]</string>
+<key>FacebookClientToken</key>
+<string>[CLIENT_TOKEN]</string>
+<key>FacebookDisplayName</key>
+<string>[APP_NAME]</string>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>fbapi</string>
+    <string>fbauth</string>
+    <string>fb-messenger-share-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+</array>
+```
+
+## Changements majeurs
+
+Résumé des changements majeurs lors de la migration :
+
+1. **L'initialisation explicite est maintenant requise** - Doit appeler `initialize()` avant utilisation
+2. **La structure de l'objet de réponse a considérablement changé** - Nouveau format de résultat imbriqué avec des données de profil améliorées
+3. **Le jeton client est maintenant requis pour Android** - Configuration supplémentaire nécessaire
+4. **Noms de méthodes et structures de paramètres différents** - Approche basée sur le fournisseur
+5. **La gestion des erreurs et les types d'erreurs ont changé** - Informations d'erreur plus détaillées
+
+## Avantages clés
+
+Le nouveau plugin fournit :
+
+- **API unifiée** pour plusieurs fournisseurs sociaux (Google, Apple, Facebook)
+- **Support TypeScript amélioré** avec de meilleures définitions de types
+- **Données de profil améliorées** avec plus d'informations utilisateur
+- **Maintenance active** et support communautaire
+- **Gestion d'erreurs cohérente** sur tous les fournisseurs
+- **Meilleure gestion des jetons** avec gestion appropriée de l'expiration
+
+Pour des instructions de configuration plus détaillées, veuillez consulter la [documentation officielle](/docs/plugins/social-login/facebook/).

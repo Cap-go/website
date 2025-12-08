@@ -1,0 +1,371 @@
+---
+title: Iniziare
+locale: it
+description: Scopri come installare e utilizzare il plugin WiFi per gestire la connettività di rete nella tua app Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-wifi" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configura i permessi**
+
+   **Android**: Aggiungi a `AndroidManifest.xml`:
+   ```xml
+   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+   <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+   ```
+
+   **iOS**: Aggiungi a `Info.plist`:
+   ```xml
+   <key>NSLocationWhenInUseUsageDescription</key>
+   <string>Abbiamo bisogno dell'accesso alla posizione per scansionare le reti WiFi</string>
+   ```
+</Steps>
+
+## Utilizzo
+
+Importa il plugin e gestisci la connettività WiFi:
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+// Ottieni informazioni sulla connessione WiFi corrente
+const getWifiInfo = async () => {
+  const info = await CapacitorWifi.getWifiInfo();
+  console.log('Connesso a:', info.ssid);
+  console.log('Indirizzo IP:', info.ip);
+};
+
+// Scansiona le reti disponibili
+const scanNetworks = async () => {
+  const { networks } = await CapacitorWifi.scan();
+  networks.forEach(network => {
+    console.log(`SSID: ${network.ssid}, Segnale: ${network.level}`);
+  });
+};
+
+// Connettiti a una rete
+const connectToWifi = async () => {
+  await CapacitorWifi.connect({
+    ssid: 'MiaRete',
+    password: 'miapassword'
+  });
+};
+```
+
+## Riferimento API
+
+### getWifiInfo()
+
+Ottiene informazioni sulla rete WiFi attualmente connessa.
+
+```typescript
+interface WifiInfo {
+  ssid: string;          // Nome rete
+  bssid: string;         // Indirizzo MAC del punto di accesso
+  ip: string;            // Indirizzo IP del dispositivo
+  frequency: number;     // Frequenza rete (MHz)
+  linkSpeed: number;     // Velocità connessione (Mbps)
+  signalStrength: number; // Potenza del segnale (0-100)
+}
+
+const info = await CapacitorWifi.getWifiInfo();
+```
+
+### scan()
+
+Scansiona le reti WiFi disponibili.
+
+```typescript
+interface WifiNetwork {
+  ssid: string;          // Nome rete
+  bssid: string;         // Indirizzo MAC
+  level: number;         // Livello del segnale (dBm)
+  frequency: number;     // Frequenza rete
+  capabilities: string;  // Capacità di sicurezza
+}
+
+const { networks } = await CapacitorWifi.scan();
+```
+
+### connect(options)
+
+Connette a una rete WiFi.
+
+```typescript
+interface ConnectOptions {
+  ssid: string;          // Nome rete
+  password?: string;     // Password rete (se protetta)
+  isHiddenSsid?: boolean; // Se l'SSID è nascosto
+}
+
+await CapacitorWifi.connect({
+  ssid: 'MiaRete',
+  password: 'miapassword'
+});
+```
+
+### disconnect()
+
+Disconnette dalla rete WiFi corrente.
+
+```typescript
+await CapacitorWifi.disconnect();
+```
+
+### getSSID()
+
+Ottiene l'SSID della rete attualmente connessa.
+
+```typescript
+const { ssid } = await CapacitorWifi.getSSID();
+console.log('Connesso a:', ssid);
+```
+
+### getIP()
+
+Ottiene l'indirizzo IP corrente del dispositivo.
+
+```typescript
+const { ip } = await CapacitorWifi.getIP();
+console.log('Indirizzo IP:', ip);
+```
+
+## Esempio completo
+
+```typescript
+import { CapacitorWifi } from '@capgo/capacitor-wifi';
+
+export class WifiService {
+  async getCurrentNetwork() {
+    try {
+      const info = await CapacitorWifi.getWifiInfo();
+      return {
+        name: info.ssid,
+        strength: this.getSignalQuality(info.signalStrength),
+        speed: `${info.linkSpeed} Mbps`,
+        ip: info.ip
+      };
+    } catch (error) {
+      console.error('Impossibile ottenere informazioni WiFi:', error);
+      return null;
+    }
+  }
+
+  async scanAndConnect(targetSsid: string, password: string) {
+    try {
+      // Scansiona le reti
+      const { networks } = await CapacitorWifi.scan();
+
+      // Trova la rete di destinazione
+      const targetNetwork = networks.find(n => n.ssid === targetSsid);
+
+      if (!targetNetwork) {
+        throw new Error(`Rete ${targetSsid} non trovata`);
+      }
+
+      console.log(`Rete trovata con segnale: ${targetNetwork.level} dBm`);
+
+      // Connetti alla rete
+      await CapacitorWifi.connect({
+        ssid: targetSsid,
+        password: password
+      });
+
+      console.log('Connesso con successo!');
+      return true;
+    } catch (error) {
+      console.error('Connessione fallita:', error);
+      return false;
+    }
+  }
+
+  async findBestNetwork(preferredNetworks: string[]) {
+    const { networks } = await CapacitorWifi.scan();
+
+    // Filtra per reti preferite
+    const available = networks.filter(n =>
+      preferredNetworks.includes(n.ssid)
+    );
+
+    if (available.length === 0) {
+      return null;
+    }
+
+    // Ordina per potenza del segnale
+    available.sort((a, b) => b.level - a.level);
+
+    return available[0];
+  }
+
+  async monitorConnection(callback: (info: WifiInfo | null) => void) {
+    const checkConnection = async () => {
+      try {
+        const info = await CapacitorWifi.getWifiInfo();
+        callback(info);
+      } catch (error) {
+        callback(null);
+      }
+    };
+
+    // Controlla ogni 5 secondi
+    const interval = setInterval(checkConnection, 5000);
+
+    // Controllo iniziale
+    await checkConnection();
+
+    // Restituisce la funzione di pulizia
+    return () => clearInterval(interval);
+  }
+
+  private getSignalQuality(strength: number): string {
+    if (strength >= 80) return 'Eccellente';
+    if (strength >= 60) return 'Buono';
+    if (strength >= 40) return 'Discreto';
+    return 'Scarso';
+  }
+
+  async getNetworkSecurity(ssid: string): Promise<string> {
+    const { networks } = await CapacitorWifi.scan();
+    const network = networks.find(n => n.ssid === ssid);
+
+    if (!network) {
+      return 'Sconosciuto';
+    }
+
+    const caps = network.capabilities.toLowerCase();
+
+    if (caps.includes('wpa3')) return 'WPA3';
+    if (caps.includes('wpa2')) return 'WPA2';
+    if (caps.includes('wpa')) return 'WPA';
+    if (caps.includes('wep')) return 'WEP';
+
+    return 'Aperta';
+  }
+}
+```
+
+## Utilizzo avanzato
+
+### Valutazione della qualità della rete
+
+```typescript
+const assessNetworkQuality = async () => {
+  const info = await CapacitorWifi.getWifiInfo();
+
+  const quality = {
+    signal: info.signalStrength >= 70 ? 'Eccellente' :
+            info.signalStrength >= 50 ? 'Buono' :
+            info.signalStrength >= 30 ? 'Discreto' : 'Scarso',
+    speed: info.linkSpeed >= 100 ? 'Veloce' :
+           info.linkSpeed >= 50 ? 'Medio' : 'Lento',
+    frequency: info.frequency >= 5000 ? '5GHz' : '2.4GHz'
+  };
+
+  console.log('Qualità della rete:', quality);
+  return quality;
+};
+```
+
+### Connessione automatica alle reti preferite
+
+```typescript
+const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: string }>) => {
+  const { networks } = await CapacitorWifi.scan();
+
+  for (const preferred of preferredNetworks) {
+    const found = networks.find(n => n.ssid === preferred.ssid);
+
+    if (found) {
+      try {
+        await CapacitorWifi.connect({
+          ssid: preferred.ssid,
+          password: preferred.password
+        });
+        console.log(`Connesso a ${preferred.ssid}`);
+        return true;
+      } catch (error) {
+        console.error(`Impossibile connettersi a ${preferred.ssid}`);
+      }
+    }
+  }
+
+  return false;
+};
+```
+
+### Rilevamento cambio rete
+
+```typescript
+class NetworkMonitor {
+  private currentSsid: string | null = null;
+  private listeners: Array<(ssid: string | null) => void> = [];
+
+  async start() {
+    setInterval(async () => {
+      try {
+        const { ssid } = await CapacitorWifi.getSSID();
+
+        if (ssid !== this.currentSsid) {
+          this.currentSsid = ssid;
+          this.notifyListeners(ssid);
+        }
+      } catch (error) {
+        if (this.currentSsid !== null) {
+          this.currentSsid = null;
+          this.notifyListeners(null);
+        }
+      }
+    }, 3000);
+  }
+
+  onNetworkChange(callback: (ssid: string | null) => void) {
+    this.listeners.push(callback);
+  }
+
+  private notifyListeners(ssid: string | null) {
+    this.listeners.forEach(listener => listener(ssid));
+  }
+}
+```
+
+## Best practices
+
+1. **Permessi**: Richiedi i permessi di localizzazione prima di scansionare le reti
+2. **Gestione errori**: Racchiudi sempre le operazioni WiFi in blocchi try-catch
+3. **Feedback utente**: Mostra indicatori di caricamento durante le operazioni di rete
+4. **Sicurezza**: Non archiviare mai le password WiFi in testo normale
+5. **Test**: Testa su dispositivi reali poiché le API WiFi potrebbero non funzionare negli emulatori
+
+## Differenze tra piattaforme
+
+### iOS
+- Richiede permessi di localizzazione per scansionare le reti
+- Non può connettersi programmaticamente alle reti (aprirà le Impostazioni)
+- Accesso limitato ai dettagli della rete
+
+### Android
+- Controllo WiFi programmatico completo
+- Richiede permessi di localizzazione per la scansione delle reti
+- Può connettersi/disconnettersi programmaticamente
+
+## Risoluzione dei problemi
+
+### Problemi comuni
+
+**La scansione restituisce vuoto**: Verifica che i permessi di localizzazione siano stati concessi
+**Impossibile connettersi alla rete**: Verifica che la password sia corretta e la rete sia nel raggio d'azione
+**getWifiInfo fallisce**: Assicurati che il dispositivo sia connesso a una rete WiFi
+**Permesso negato**: Aggiungi i permessi richiesti ai file di configurazione della piattaforma

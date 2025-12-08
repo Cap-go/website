@@ -1,0 +1,172 @@
+---
+title: Erste Schritte
+locale: de
+description: Installations- und Verwendungsanleitung für @capgo/capacitor-downloader
+sidebar:
+  order: 2
+  label: "Erste Schritte"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Verwendungsbeispiel
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+// Einen Download starten
+const downloadId = 'my-download-001';
+await CapacitorDownloader.download({
+  id: downloadId,
+  url: 'https://example.com/large-file.zip',
+  destination: '/downloads/large-file.zip',
+  headers: {
+    'Authorization': 'Bearer token123'
+  },
+  network: 'wifi-only',
+  priority: 'high'
+});
+
+// Auf Fortschritts-Updates hören
+CapacitorDownloader.addListener('downloadProgress', (data) => {
+  console.log(`Download ${data.id}: ${data.progress}% abgeschlossen`);
+  console.log(`Heruntergeladen: ${data.bytesDownloaded}/${data.totalBytes} Bytes`);
+});
+
+// Abschluss behandeln
+CapacitorDownloader.addListener('downloadCompleted', (data) => {
+  console.log(`Download abgeschlossen: ${data.id}`);
+  console.log(`Datei gespeichert in: ${data.path}`);
+});
+
+// Fehler behandeln
+CapacitorDownloader.addListener('downloadFailed', (error) => {
+  console.error(`Download fehlgeschlagen: ${error.id}`, error.message);
+});
+
+// Einen Download pausieren
+await CapacitorDownloader.pause(downloadId);
+
+// Den Download fortsetzen
+await CapacitorDownloader.resume(downloadId);
+
+// Download-Status prüfen
+const status = await CapacitorDownloader.checkStatus(downloadId);
+console.log('Download-Status:', status);
+
+// Den Download stoppen
+await CapacitorDownloader.stop(downloadId);
+```
+
+## Kern-API-Methoden
+
+### Download-Verwaltung
+- `download(options)` - Neuen Datei-Download starten
+- `pause(id)` - Laufenden Download pausieren
+- `resume(id)` - Pausierten Download fortsetzen
+- `stop(id)` - Download stoppen und abbrechen
+- `checkStatus(id)` - Aktuellen Download-Status abrufen
+
+### Dateioperationen
+- `getFileInfo(path)` - Dateiinformationen und Metadaten abrufen
+
+## Download-Konfiguration
+
+```typescript
+interface DownloadOptions {
+  id: string;                    // Eindeutige Download-Kennung
+  url: string;                   // Download-Quell-URL
+  destination: string;           // Lokaler Speicherpfad
+  headers?: Record<string, string>; // Benutzerdefinierte HTTP-Header
+  network?: 'cellular' | 'wifi-only'; // Netzwerkbeschränkungen
+  priority?: 'high' | 'normal' | 'low'; // Download-Priorität
+}
+```
+
+## Event-Listener
+
+Das Plugin bietet umfassende Ereignisbehandlung:
+
+- `downloadProgress` - Echtzeit-Download-Fortschritt verfolgen
+- `downloadCompleted` - Erfolgreichen Download-Abschluss behandeln
+- `downloadFailed` - Download-Fehler und -Ausfälle behandeln
+
+## Netzwerkkonfiguration
+
+### Nur-WiFi-Downloads
+```typescript
+await CapacitorDownloader.download({
+  id: 'large-file',
+  url: 'https://example.com/video.mp4',
+  destination: '/downloads/video.mp4',
+  network: 'wifi-only' // Beschränkt auf WiFi-Netzwerke
+});
+```
+
+### Prioritätsverwaltung
+```typescript
+// Download mit hoher Priorität
+await CapacitorDownloader.download({
+  id: 'urgent-update',
+  url: 'https://example.com/update.zip',
+  destination: '/downloads/update.zip',
+  priority: 'high'
+});
+```
+
+## Download-Zustände
+
+Downloads können verschiedene Zustände haben:
+- **Pending**: In Warteschlange für Download
+- **Running**: Wird gerade heruntergeladen
+- **Paused**: Vorübergehend gestoppt
+- **Completed**: Erfolgreich abgeschlossen
+- **Failed**: Fehler aufgetreten
+- **Stopped**: Manuell abgebrochen
+
+## Dateiinformationen
+
+```typescript
+// Dateidetails abrufen
+const fileInfo = await CapacitorDownloader.getFileInfo('/downloads/my-file.pdf');
+console.log('Dateigröße:', fileInfo.size);
+console.log('Zuletzt geändert:', fileInfo.lastModified);
+console.log('MIME-Typ:', fileInfo.mimeType);
+```
+
+## Best Practices
+
+- Verwenden Sie eindeutige Download-IDs, um Konflikte zu vermeiden
+- Implementieren Sie ordnungsgemäße Fehlerbehandlung für Netzwerkausfälle
+- Berücksichtigen Sie Speicherplatz vor dem Starten großer Downloads
+- Verwenden Sie den Nur-WiFi-Modus für große Dateien, um mobile Daten zu schonen
+- Bereinigen Sie abgeschlossene Downloads, um Speicher zu verwalten

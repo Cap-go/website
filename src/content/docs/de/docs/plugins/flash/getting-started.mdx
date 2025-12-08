@@ -1,0 +1,197 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Flash-Plugin installieren und verwenden, um die Taschenlampe Ihres Geräts in Ihrer Capacitor-App zu steuern.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Verwendung
+
+Importieren Sie das Plugin und verwenden Sie seine Methoden zur Steuerung der Taschenlampe:
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// Verfügbarkeit der Taschenlampe prüfen
+const checkFlashlight = async () => {
+  const { value } = await CapacitorFlash.isAvailable();
+  console.log('Taschenlampe verfügbar:', value);
+};
+
+// Taschenlampe einschalten
+const turnOn = async () => {
+  await CapacitorFlash.switchOn();
+};
+
+// Taschenlampe ausschalten
+const turnOff = async () => {
+  await CapacitorFlash.switchOff();
+};
+
+// Prüfen, ob Taschenlampe eingeschaltet ist
+const checkStatus = async () => {
+  const { value } = await CapacitorFlash.isSwitchedOn();
+  console.log('Taschenlampe ist an:', value);
+};
+
+// Taschenlampe umschalten
+const toggle = async () => {
+  await CapacitorFlash.toggle();
+};
+```
+
+## API-Referenz
+
+### isAvailable()
+
+Prüft, ob eine Taschenlampe auf dem Gerät verfügbar ist.
+
+```typescript
+const result = await CapacitorFlash.isAvailable();
+// Gibt zurück: { value: boolean }
+```
+
+### switchOn(options?)
+
+Schaltet die Taschenlampe ein.
+
+```typescript
+interface SwitchOnOptions {
+  intensity?: number; // 0.0 bis 1.0 (nur iOS)
+}
+
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+### switchOff()
+
+Schaltet die Taschenlampe aus.
+
+```typescript
+await CapacitorFlash.switchOff();
+```
+
+### isSwitchedOn()
+
+Prüft, ob die Taschenlampe derzeit eingeschaltet ist.
+
+```typescript
+const result = await CapacitorFlash.isSwitchedOn();
+// Gibt zurück: { value: boolean }
+```
+
+### toggle()
+
+Schaltet die Taschenlampe ein/aus.
+
+```typescript
+await CapacitorFlash.toggle();
+```
+
+## Vollständiges Beispiel
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+export class FlashlightService {
+  private isOn = false;
+
+  async init() {
+    const { value } = await CapacitorFlash.isAvailable();
+    if (!value) {
+      throw new Error('Taschenlampe auf diesem Gerät nicht verfügbar');
+    }
+  }
+
+  async toggle() {
+    if (this.isOn) {
+      await CapacitorFlash.switchOff();
+    } else {
+      await CapacitorFlash.switchOn();
+    }
+    this.isOn = !this.isOn;
+  }
+
+  async turnOn(intensity?: number) {
+    await CapacitorFlash.switchOn({ intensity });
+    this.isOn = true;
+  }
+
+  async turnOff() {
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+
+  async strobe(intervalMs: number = 100, duration: number = 3000) {
+    const endTime = Date.now() + duration;
+
+    while (Date.now() < endTime) {
+      await CapacitorFlash.toggle();
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+
+    // Sicherstellen, dass die Taschenlampe nach dem Stroboskop ausgeschaltet ist
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+}
+```
+
+## Best Practices
+
+1. **Verfügbarkeit zuerst prüfen**
+   Überprüfen Sie immer die Verfügbarkeit der Taschenlampe, bevor Sie sie verwenden:
+   ```typescript
+   const { value } = await CapacitorFlash.isAvailable();
+   if (!value) {
+     // Alternative UI anzeigen oder Taschenlampenfunktionen deaktivieren
+   }
+   ```
+
+2. **Fehler elegant behandeln**
+   ```typescript
+   try {
+     await CapacitorFlash.switchOn();
+   } catch (error) {
+     console.error('Taschenlampe konnte nicht eingeschaltet werden:', error);
+   }
+   ```
+
+3. **Ausschalten, wenn nicht benötigt**
+   Schalten Sie die Taschenlampe immer aus, wenn Ihre App in den Hintergrund geht oder wenn die Funktion nicht mehr benötigt wird, um Batterie zu sparen.
+
+4. **Schnelles Umschalten vermeiden**
+   Implementieren Sie Debouncing, um schnelles Ein-/Ausschalten zu verhindern, das die LED beschädigen oder die Batterie entleeren könnte.
+
+## Plattformhinweise
+
+### iOS
+- Erfordert iOS 10.0+
+- Verwendet `AVCaptureDevice` Taschenlampen-Modus
+- Unterstützt Intensitätssteuerung (0.0 bis 1.0)
+
+### Android
+- Erfordert Android 6.0 (API 23)+
+- Verwendet Camera2 API
+- Intensitätssteuerung nicht unterstützt (verwendet Standardhelligkeit)
+
+### Web
+- Unterstützt auf Browsern mit MediaDevices API und Taschenlampenfähigkeit
+- Verwendet den Kamera-Stream, um auf die Taschenlampe des Geräts zuzugreifen
+- Erfordert Benutzerberechtigung für Kamerazugriff
+- Funktioniert am besten auf mobilen Browsern (Chrome auf Android)
+- Desktop-Browser geben normalerweise `isAvailable: false` zurück (keine Taschenlampenhardware)
+- Intensitätssteuerung nicht auf Web unterstützt

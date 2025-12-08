@@ -1,0 +1,76 @@
+---
+title: Iniziare
+locale: it
+description: Integra la galleria fotografica nativa con paginazione e selezione media.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il plugin**
+   <PackageManagers pkg="@capgo/capacitor-photo-library" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza piattaforme**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Permessi piattaforma
+
+- **iOS**: Aggiorna `Info.plist` con `NSPhotoLibraryUsageDescription` (e `NSPhotoLibraryAddUsageDescription` se prevedi di salvare media).
+- **Android**: Per Android 13+, dichiara i permessi foto/video (`READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`). Capacitor 5 gestisce questo automaticamente, ma ricontrolla i manifest personalizzati.
+
+## Richiedi accesso
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const { state } = await PhotoLibrary.requestAuthorization();
+if (state !== 'authorized' && state !== 'limited') {
+  throw new Error('Accesso foto negato');
+}
+```
+
+## Carica la galleria
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+
+const { assets, hasMore, nextPage } = await PhotoLibrary.getLibrary({
+  limit: 100,
+  includeAlbums: false,
+  thumbnailWidth: 256,
+  thumbnailHeight: 256,
+});
+
+const gallery = assets.map((asset) => ({
+  id: asset.id,
+  fileName: asset.fileName,
+  created: asset.creationDate,
+  thumbnailUrl: asset.thumbnail
+    ? asset.thumbnail.webPath ?? Capacitor.convertFileSrc(asset.thumbnail.path)
+    : undefined,
+  photoUrl: asset.file
+    ? asset.file.webPath ?? Capacitor.convertFileSrc(asset.file.path)
+    : undefined,
+}));
+```
+
+Per recuperare pagine aggiuntive, chiama `PhotoLibrary.getLibrary({ cursor: nextPage })`.
+
+## Lascia che gli utenti selezionino media
+
+```typescript
+const selection = await PhotoLibrary.pickMedia({
+  selectionLimit: 5,
+  includeVideos: true,
+});
+
+console.log('Utente ha selezionato', selection.assets.length, 'elementi');
+```
+
+## Pulisci file in cache
+
+Le miniature generate e le esportazioni sono archiviate nella directory cache dell'app sotto `photoLibrary`. Rimuovile con la tua API file preferita quando hai bisogno di recuperare spazio di archiviazione.

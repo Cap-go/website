@@ -1,0 +1,313 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和配置 Capacitor IVS Player 插件，在应用中集成 Amazon IVS 低延迟流媒体。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/ivs-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **配置插件**
+
+   **基本播放器设置：**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // 创建播放器
+   const { playerId } = await IvsPlayer.create({
+     url: 'https://your-ivs-playback-url.m3u8',
+     autoplay: true
+   });
+
+   // 开始播放
+   await IvsPlayer.play({ playerId });
+   ```
+
+   **播放器控制：**
+   ```typescript
+   // 暂停播放
+   await IvsPlayer.pause({ playerId });
+
+   // 设置音量
+   await IvsPlayer.setVolume({
+     playerId,
+     volume: 0.5 // 0.0 到 1.0
+   });
+
+   // 跳转到位置
+   await IvsPlayer.seekTo({
+     playerId,
+     position: 30 // 秒
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       添加到您的 `Info.plist`：
+       ```xml
+       <key>NSAppTransportSecurity</key>
+       <dict>
+         <key>NSAllowsArbitraryLoads</key>
+         <true/>
+       </dict>
+       ```
+     </TabItem>
+     <TabItem label="Android">
+       添加到您的 `AndroidManifest.xml`：
+       ```xml
+       <uses-permission android:name="android.permission.INTERNET" />
+       ```
+     </TabItem>
+   </Tabs>
+
+4. **事件处理**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // 监听播放器事件
+   IvsPlayer.addListener('onState', (event) => {
+     console.log('Player state:', event.state);
+     // 状态：idle、buffering、ready、playing、ended
+   });
+
+   IvsPlayer.addListener('onError', (event) => {
+     console.error('Player error:', event.error);
+   });
+
+   IvsPlayer.addListener('onDuration', (event) => {
+     console.log('Video duration:', event.duration);
+   });
+
+   IvsPlayer.addListener('onProgress', (event) => {
+     console.log('Current position:', event.position);
+   });
+
+   // 监听定时元数据
+   IvsPlayer.addListener('onMetadata', (event) => {
+     console.log('Timed metadata:', event.metadata);
+   });
+   ```
+
+5. **高级用法**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   export class StreamPlayer {
+     private playerId: string | null = null;
+     private listeners: any[] = [];
+
+     async initialize(streamUrl: string) {
+       // 使用自定义配置创建播放器
+       const result = await IvsPlayer.create({
+         url: streamUrl,
+         autoplay: false,
+         muted: true, // 为自动播放策略静音开始
+         controls: true
+       });
+
+       this.playerId = result.playerId;
+       this.setupEventListeners();
+     }
+
+     private setupEventListeners() {
+       // 状态变化
+       const stateListener = IvsPlayer.addListener('onState', (event) => {
+         this.handleStateChange(event.state);
+       });
+       this.listeners.push(stateListener);
+
+       // 质量变化
+       const qualityListener = IvsPlayer.addListener('onQuality', (event) => {
+         console.log(`Quality changed to: ${event.quality.name}`);
+       });
+       this.listeners.push(qualityListener);
+
+       // 缓冲更新
+       const bufferListener = IvsPlayer.addListener('onBuffer', (event) => {
+         console.log(`Buffer: ${event.percentage}%`);
+       });
+       this.listeners.push(bufferListener);
+     }
+
+     private handleStateChange(state: string) {
+       switch (state) {
+         case 'playing':
+           console.log('Stream is playing');
+           break;
+         case 'buffering':
+           console.log('Stream is buffering');
+           break;
+         case 'ended':
+           console.log('Stream ended');
+           break;
+       }
+     }
+
+     async play() {
+       if (this.playerId) {
+         await IvsPlayer.play({ playerId: this.playerId });
+       }
+     }
+
+     async pause() {
+       if (this.playerId) {
+         await IvsPlayer.pause({ playerId: this.playerId });
+       }
+     }
+
+     async setQuality(qualityName: string) {
+       if (this.playerId) {
+         await IvsPlayer.setQuality({
+           playerId: this.playerId,
+           quality: qualityName
+         });
+       }
+     }
+
+     async destroy() {
+       // 删除监听器
+       this.listeners.forEach(listener => listener.remove());
+
+       // 销毁播放器
+       if (this.playerId) {
+         await IvsPlayer.destroy({ playerId: this.playerId });
+       }
+     }
+   }
+   ```
+</Steps>
+
+## API 参考
+
+### 方法
+
+#### `create(options: CreateOptions)`
+创建新的 IVS 播放器实例。
+
+**参数：**
+- `options`：播放器配置
+  - `url`: string - IVS 播放 URL
+  - `autoplay`: boolean - 自动开始播放
+  - `muted`: boolean - 静音开始
+  - `controls`: boolean - 显示原生控件
+
+**返回：** `Promise<{ playerId: string }>`
+
+#### `play(options: PlayerOptions)`
+开始播放。
+
+#### `pause(options: PlayerOptions)`
+暂停播放。
+
+#### `stop(options: PlayerOptions)`
+停止播放并重置位置。
+
+#### `seekTo(options: SeekOptions)`
+跳转到特定位置。
+
+#### `setVolume(options: VolumeOptions)`
+设置播放器音量（0.0 到 1.0）。
+
+#### `setQuality(options: QualityOptions)`
+设置播放质量。
+
+#### `destroy(options: PlayerOptions)`
+销毁播放器实例。
+
+### 事件
+
+- `onState`：播放器状态变化
+- `onError`：播放错误
+- `onDuration`：视频时长可用
+- `onProgress`：播放进度更新
+- `onQuality`：质量变化
+- `onMetadata`：定时元数据事件
+- `onBuffer`：缓冲状态更新
+
+### 接口
+
+```typescript
+interface CreateOptions {
+  url: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+}
+
+interface PlayerOptions {
+  playerId: string;
+}
+
+interface SeekOptions extends PlayerOptions {
+  position: number; // 秒
+}
+
+interface VolumeOptions extends PlayerOptions {
+  volume: number; // 0.0 到 1.0
+}
+
+interface QualityOptions extends PlayerOptions {
+  quality: string; // 质量名称
+}
+```
+
+## 平台说明
+
+### iOS
+- 需要 iOS 12.0 或更高版本
+- 使用带有 IVS 扩展的原生 AVPlayer
+- 在 iPad 上支持画中画
+
+### Android
+- 需要 Android 5.0（API 级别 21）或更高版本
+- 使用 Amazon IVS Player SDK
+- 建议使用硬件加速
+
+## 常见用例
+
+1. **直播流媒体**：实时活动、体育、游戏
+2. **互动流媒体**：观众投票、问答环节
+3. **电子商务**：带产品亮点的直播购物
+4. **教育**：带定时内容的直播课程
+5. **娱乐**：带观众互动的音乐会、节目
+
+## 最佳实践
+
+1. **网络处理**：监控连接质量
+   ```typescript
+   IvsPlayer.addListener('onError', (event) => {
+     if (event.error.includes('network')) {
+       // 处理网络错误
+       showRetryButton();
+     }
+   });
+   ```
+
+2. **资源管理**：完成后始终销毁播放器
+3. **自动播放策略**：为可靠的自动播放静音开始
+4. **质量选择**：让 IVS 处理自动质量切换
+
+## 故障排除
+
+**流媒体无法播放：**
+- 验证 IVS 播放 URL 是否有效
+- 检查网络权限
+- 确保流媒体是实时的
+
+**高延迟：**
+- IVS 针对低延迟进行了优化，检查编码器设置
+- 验证您使用的是 IVS 特定的播放 URL
+
+**质量问题：**
+- 允许自动质量切换
+- 检查网络带宽要求

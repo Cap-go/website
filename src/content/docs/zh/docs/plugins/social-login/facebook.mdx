@@ -1,0 +1,666 @@
+---
+title: Facebook 登录设置
+locale: zh
+description: 本指南提供了使用 Capacitor 设置 Facebook 登录的全面演练,确保无缝集成并增强应用的用户身份验证。
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+
+## 简介
+
+在本指南中,你将学习如何使用 Capgo Social Login 设置 Facebook 登录。你需要以下内容:
+
+- Facebook Developer 账户
+- 你的应用包名/bundle ID
+- 访问终端以生成密钥哈希(Android)
+
+## 常规设置
+
+如果你还没有创建 Facebook 应用,请按照以下步骤操作:
+
+<Steps>
+1. 创建 Facebook 应用
+
+   按照教程[创建应用](https://developers.facebook.com/docs/development/create-an-app/)
+
+2. 向你的应用添加 Facebook 登录
+
+   在 Facebook Developer Dashboard 中,向你的应用添加 Facebook 登录产品
+
+3. 在将应用发布给公众之前,请遵循此[教程](https://developers.facebook.com/docs/development/release/)发布它
+</Steps>
+
+## 重要信息
+
+以下是查找集成所需关键信息的位置:
+
+1. `CLIENT_TOKEN`:
+   <img src="/social-login-assets/fb_where_to_fiind_client_token.png" alt="Facebook developer dashboard showing where to find the client token" />
+
+2. `APP_ID`:
+   <img src="/social-login-assets/fb_where_to_find_app_id.png" alt="Facebook developer dashboard showing where to find the app ID" />
+
+3. `APP_NAME`:
+   <img src="/social-login-assets/fb_where_to_find_app_name.png" alt="Facebook developer dashboard showing where to find the app name" />
+
+## Android 设置
+
+<Steps>
+1. 向你的 `AndroidManifest.xml` 添加互联网权限
+
+   确保存在此行:
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET"/>
+   ```
+
+2. 生成你的 Android 密钥哈希
+
+   这是 Facebook 要求的关键安全步骤。打开终端并运行:
+
+   ```bash
+   keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64 -A
+   ```
+
+   当提示输入密码时,使用:`android`
+
+   :::note
+   对于发布版本,你需要使用发布密钥库:
+   ```bash
+   keytool -exportcert -alias your-key-name -keystore your-keystore-path | openssl sha1 -binary | openssl base64 -A
+   ```
+   :::
+
+3. 将密钥哈希添加到你的 Facebook 应用
+
+   1. 在 Facebook Developers 上转到你的应用仪表板
+   2. 导航到 Settings > Basic
+   3. 向下滚动到"Android"部分
+   4. 如果尚未添加 Android,点击"Add Platform"并填写详细信息
+   5. 添加你生成的密钥哈希
+   6. 对于生产环境,同时添加调试和发布密钥哈希
+
+4. 更新你的 `AndroidManifest.xml` 以包含:
+
+   ```xml
+   <application>
+       ...
+       <activity android:name="com.facebook.FacebookActivity"
+           android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+           android:label="@string/app_name" />
+
+       <activity
+           android:name="com.facebook.CustomTabActivity"
+           android:exported="true">
+           <intent-filter>
+               <action android:name="android.intent.action.VIEW" />
+               <category android:name="android.intent.category.DEFAULT" />
+               <category android:name="android.intent.category.BROWSABLE" />
+               <data android:scheme="FB[APP_ID]" />
+           </intent-filter>
+       </activity>
+   </application>
+   ```
+
+   :::caution
+   确保在 `android:scheme` 属性中将 `[APP_ID]` 替换为你的实际 Facebook 应用 ID
+   :::
+</Steps>
+
+## iOS 设置
+
+<Steps>
+1. 在 Facebook Developer Console 中添加 iOS 平台
+
+   1. 在 Facebook Developers 上转到你的应用仪表板
+   2. 导航到 Settings > Basic
+   3. 向下滚动到页面最底部并点击"Add Platform"
+   4. 选择 iOS 并填写所需的详细信息
+
+2. 打开你的 Xcode 项目并导航到 Info.plist
+
+3. 将以下条目添加到你的 Info.plist:
+
+   ```xml
+   <key>FacebookAppID</key>
+   <string>[APP-ID]</string>
+   <key>FacebookClientToken</key>
+   <string>[CLIENT-TOKEN]</string>
+   <key>FacebookDisplayName</key>
+   <string>[APP-NAME]</string>
+   <key>LSApplicationQueriesSchemes</key>
+   <array>
+       <string>fbapi</string>
+       <string>fb-messenger-share-api</string>
+   </array>
+   <key>CFBundleURLTypes</key>
+   <array>
+       <dict>
+           <key>CFBundleURLSchemes</key>
+           <array>
+               <string>fb[APP-ID]</string>
+           </array>
+       </dict>
+   </array>
+   ```
+
+   :::caution
+   替换以下值:
+   - `[APP-ID]` 替换为你的 Facebook 应用 ID
+   - `[CLIENT-TOKEN]` 替换为你的客户端令牌
+   - `[APP-NAME]` 替换为你的应用名称
+   :::
+
+4. 修改 `AppDelegate.swift`
+
+   ```swift
+   import FBSDKCoreKit
+   @UIApplicationMain
+   class AppDelegate: UIResponder, UIApplicationDelegate {
+         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+           // Override point for customization after application launch.
+
+           // Initialize Facebook SDK
+           FBSDKCoreKit.ApplicationDelegate.shared.application(
+               application,
+               didFinishLaunchingWithOptions: launchOptions
+           )
+
+           return true
+       }
+
+       func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+           // Called when the app was launched with a url. Feel free to add additional processing here,
+           // but if you want the App API to support tracking app url opens, make sure to keep this call
+
+           if (FBSDKCoreKit.ApplicationDelegate.shared.application(
+               app,
+               open: url,
+               sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+               annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+           )) {
+               return true;
+           } else {
+               return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
+           }
+       }
+   }
+   ```
+</Steps>
+
+## 在应用中使用 Facebook 登录
+
+:::caution
+**开始之前**: 请记住,使用新的 Facebook SDK,你收到的令牌类型完全取决于用户的应用跟踪选择,而不是你的代码配置。始终在后端实现访问令牌和 JWT 令牌处理,以确保身份验证适用于所有用户。
+:::
+
+<Steps>
+1. 在应用中初始化 Facebook 登录
+
+   ```typescript
+   import { SocialLogin } from '@capgo/capacitor-social-login';
+
+   // 在应用启动期间初始化
+   await SocialLogin.initialize({
+     facebook: {
+       appId: 'APP_ID',
+       clientToken: 'CLIENT_TOKEN',
+     }
+   })
+   ```
+
+2. 实现登录函数
+
+   ```typescript
+   async function loginWithFacebook() {
+     try {
+       const result = await SocialLogin.login({
+         provider: 'facebook',
+        options: {
+          permissions: ['email', 'public_profile'],
+          limitedLogin: false // 有关重要详细信息,请参阅下面的限制登录部分
+        }
+       });
+       console.log('Facebook 登录结果:', result);
+       // 处理成功登录
+     } catch (error) {
+       console.error('Facebook 登录错误:', error);
+       // 处理错误
+     }
+   }
+   ```
+
+   :::note
+   **限制登录(仅 iOS)**: 如果要使用 Facebook 的限制登录功能,请将 `limitedLogin` 设置为 true。这是一个仅限 iOS 的功能,通过限制登录期间共享的数据来提供增强的隐私。
+
+   **重要限制:**
+   - **仅 iOS**: 限制登录仅影响 iOS 设备,对 Android 没有影响
+   - **ATT 覆盖**: 即使你设置 `limitedLogin: false`,如果用户未授予应用跟踪透明度 (ATT) 权限,Facebook 也会自动强制将其设为 `true`
+   - **始终处理两种情况**: 你的应用应始终准备好处理限制登录和完整登录场景
+
+   **检查 ATT 状态:**
+   ```typescript
+   // 检查用户是否已授予跟踪权限
+   const trackingStatus = await SocialLogin.providerSpecificCall({
+     call: 'facebook#requestTracking',
+     options: {}
+   });
+   console.log('跟踪状态:', trackingStatus.status); // 'authorized'、'denied'、'notDetermined' 或 'restricted'
+   ```
+
+   **如果首选 access_token,推荐的实现:**
+   ```typescript
+   async function loginWithFacebook() {
+     try {
+       // 首先检查 ATT 状态
+       const trackingStatus = await SocialLogin.providerSpecificCall({
+         call: 'facebook#requestTracking',
+         options: {}
+       });
+
+       const result = await SocialLogin.login({
+         provider: 'facebook',
+         options: {
+           permissions: ['email', 'public_profile'],
+           limitedLogin: trackingStatus.status === 'denied' // 根据 ATT 自动调整
+         }
+       });
+
+       // 根据限制登录处理不同的响应类型
+       if (result.result.accessToken) {
+         // 你的应用逻辑应同时适用于限制登录和完整登录
+         console.log('登录成功:', result);
+       }
+     } catch (error) {
+       console.error('Facebook 登录错误:', error);
+     }
+   }
+   ```
+
+   **限制登录中发生的情况:**
+   - **减少数据访问**: 某些用户数据可能不可用
+   - **不同的令牌类型**: 访问令牌可能具有不同的功能
+   - **隐私合规**: 有助于遵守 iOS 隐私要求
+
+   **重要**: 始终使用限制登录和完整登录场景测试你的应用,以确保你的应用在两种情况下都能正常工作。你可以在[此处](https://developers.facebook.com/docs/facebook-login/limited-login/)了解有关限制登录的更多信息。
+   :::
+
+3. **获取用户个人资料数据**
+
+   成功登录后,你可以检索其他个人资料信息:
+
+   ```typescript
+   async function getFacebookProfile() {
+     try {
+       const profileResponse = await SocialLogin.providerSpecificCall({
+         call: 'facebook#getProfile',
+         options: {
+           fields: ['id', 'name', 'email', 'first_name', 'last_name', 'picture']
+         }
+       });
+
+       console.log('Facebook 个人资料:', profileResponse.profile);
+       return profileResponse.profile;
+     } catch (error) {
+       console.error('获取 Facebook 个人资料失败:', error);
+       return null;
+     }
+   }
+
+   // 登录后的示例用法
+   async function loginAndGetProfile() {
+     const loginResult = await loginWithFacebook();
+     if (loginResult) {
+       const profile = await getFacebookProfile();
+       if (profile) {
+         console.log('用户 ID:', profile.id);
+         console.log('姓名:', profile.name);
+         console.log('电子邮件:', profile.email);
+         console.log('个人资料图片:', profile.picture?.data?.url);
+       }
+     }
+   }
+   ```
+
+   :::tip
+   **可用的个人资料字段**: 你可以请求 Facebook Graph API 中可用的任何字段。常见字段包括:`id`、`name`、`email`、`first_name`、`last_name`、`picture`、`birthday`、`gender`、`location`、`hometown`。请注意,某些字段可能需要额外的权限。
+   :::
+
+   :::warning
+   **令牌类型限制**: `getProfile` 调用仅在你拥有**访问令牌**(允许跟踪的标准登录)时有效。如果用户拒绝跟踪或你使用限制登录(仅 JWT 令牌),此调用将失败。在这种情况下,请使用初始登录响应中提供的个人资料数据。
+   :::
+</Steps>
+
+## ⚠️ 关键: 后端令牌处理
+
+:::danger
+**关键的 iOS 行为**: 限制登录和应用跟踪透明度 (ATT) 是**仅限 iOS** 的功能。在 Android 上,无论 `limitedLogin` 设置如何,你始终会收到访问令牌。
+
+**iOS 令牌行为**:
+- **`limitedLogin: true`** → 始终为 JWT 令牌(仅 iOS)
+- **`limitedLogin: false` + 用户允许跟踪** → 访问令牌
+- **`limitedLogin: false` + 用户拒绝跟踪** → JWT 令牌(iOS 自动覆盖你的设置)
+
+**Android 令牌行为**: 始终为访问令牌,`limitedLogin` 设置被忽略。
+:::
+
+你的后端必须处理**两种不同的令牌类型**,因为 iOS 用户可以根据其应用跟踪透明度选择接收访问令牌或 JWT 令牌,而 Android 用户始终接收访问令牌。
+
+### 按平台划分的令牌类型
+
+| 平台 | limitedLogin 设置 | 用户 ATT 选择 | 结果令牌类型 |
+|----------|---------------------|-----------------|-------------------|
+| **iOS** | `true` | 任何 | JWT 令牌 |
+| **iOS** | `false` | 允许跟踪 | 访问令牌 |
+| **iOS** | `false` | 拒绝跟踪 | JWT 令牌(自动覆盖) |
+| **Android** | 任何 | N/A | 访问令牌(始终) |
+
+### 后端实现
+
+<Steps>
+1. **检测令牌类型并相应处理**
+
+   ```typescript
+   async function loginWithFacebook() {
+     try {
+       const loginResult = await SocialLogin.login({
+         provider: 'facebook',
+         options: {
+           permissions: ['email', 'public_profile'],
+           limitedLogin: false // iOS: 取决于 ATT,Android: 忽略
+         }
+       });
+
+       if (loginResult.accessToken) {
+         // 访问令牌(Android 始终,iOS 允许跟踪时)
+         return handleAccessToken(loginResult.accessToken.token);
+       } else if (loginResult.idToken) {
+         // JWT 令牌(仅 iOS,拒绝跟踪或 limitedLogin: true 时)
+         return handleJWTToken(loginResult.idToken);
+       }
+     } catch (error) {
+       console.error('Facebook 登录错误:', error);
+     }
+   }
+   ```
+
+2. **Firebase 集成示例**
+
+   ```typescript
+   import { OAuthProvider, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
+
+   async function handleAccessToken(accessToken: string, nonce: string) {
+     // 对于访问令牌,使用 OAuthProvider(新方法)
+     const fbOAuth = new OAuthProvider("facebook.com");
+     const credential = fbOAuth.credential({
+       idToken: accessToken,
+       rawNonce: nonce
+     });
+
+     try {
+       const userResponse = await signInWithCredential(auth, credential);
+       return userResponse;
+     } catch (error) {
+       console.error('Firebase OAuth 错误:', error);
+       return false;
+     }
+   }
+
+   async function handleJWTToken(jwtToken: string) {
+     // 对于 JWT 令牌,发送到后端进行验证
+     try {
+       const response = await fetch('/api/auth/facebook-jwt', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ jwtToken })
+       });
+
+       const result = await response.json();
+       return result;
+     } catch (error) {
+       console.error('JWT 验证错误:', error);
+       return false;
+     }
+   }
+   ```
+
+3. **后端 JWT 验证**
+
+   ```typescript
+   // 后端: 验证来自 Facebook 的 JWT 令牌
+   import jwt from 'jsonwebtoken';
+   import { Request, Response } from 'express';
+
+   app.post('/api/auth/facebook-jwt', async (req: Request, res: Response) => {
+     const { jwtToken } = req.body;
+
+     try {
+       // 使用 Facebook 的公钥验证 JWT 令牌
+       // 参见: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
+       const decoded = jwt.verify(jwtToken, getFacebookPublicKey(), {
+         algorithms: ['RS256'],
+         audience: process.env.FACEBOOK_APP_ID,
+         issuer: 'https://www.facebook.com' // 来自: https://www.facebook.com/.well-known/openid-configuration/?_rdr
+       });
+
+       // 从 JWT 中提取用户信息
+       const userInfo = {
+         id: decoded.sub,
+         email: decoded.email,
+         name: decoded.name,
+         isJWTAuth: true
+       };
+
+       // 创建你的应用的会话/令牌
+       const sessionToken = createUserSession(userInfo);
+
+       res.json({
+         success: true,
+         token: sessionToken,
+         user: userInfo
+       });
+     } catch (error) {
+       console.error('JWT 验证失败:', error);
+       res.status(401).json({ success: false, error: '无效令牌' });
+     }
+   });
+   ```
+
+4. **通用后端令牌处理程序**
+
+   ```typescript
+   // 在后端中处理两种令牌类型
+   async function authenticateFacebookUser(tokenData: any) {
+     if (tokenData.accessToken) {
+       // 处理访问令牌 - 使用 Facebook Graph API 验证
+       const response = await fetch(`https://graph.facebook.com/me?access_token=${tokenData.accessToken}&fields=id,name,email`);
+       const userInfo = await response.json();
+
+       return {
+         user: userInfo,
+         tokenType: 'access_token',
+         expiresIn: tokenData.expiresIn || 3600
+       };
+     } else if (tokenData.jwtToken) {
+       // 处理 JWT 令牌 - 解码和验证
+       // 参见: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
+       const decoded = jwt.verify(tokenData.jwtToken, getFacebookPublicKey());
+
+       return {
+         user: {
+           id: decoded.sub,
+           name: decoded.name,
+           email: decoded.email
+         },
+         tokenType: 'jwt',
+         expiresIn: decoded.exp - Math.floor(Date.now() / 1000)
+       };
+     } else {
+       throw new Error('未提供有效令牌');
+     }
+   }
+   ```
+</Steps>
+
+### 关键注意事项
+
+:::danger
+**关键的 iOS-Only 理解**:
+- **iOS**: 用户的应用跟踪选择决定令牌类型,而不是你的代码设置(即使是 `limitedLogin: false`)
+- **Android**: 始终接收访问令牌,无论 `limitedLogin` 设置如何
+- **限制登录仅限 iOS** - Android 完全忽略此设置
+:::
+
+**访问令牌(标准登录)**:
+- ✅ **Android**: 始终可用(不适用仅限 iOS 的限制)
+- ✅ **iOS**: 仅当用户明确允许应用跟踪时
+- ✅ 可用于访问 Facebook Graph API
+- ✅ 更长的过期时间
+- ✅ 更多用户数据可用
+- ❌ **在 iOS 上变得越来越不常见**,因为用户越来越多地拒绝跟踪
+
+**JWT 令牌(仅 iOS 隐私模式)**:
+- ❌ **Android**: 从不出现(不支持)
+- ✅ **iOS**: 拒绝跟踪或 `limitedLogin: true` 时
+- ✅ 尊重 iOS 用户隐私偏好
+- ❌ 仅包含基本用户信息
+- ❌ 更短的过期时间
+- ❌ 无法访问 Facebook Graph API
+- ⚠️ **现在是 iOS 用户最常见的场景**
+
+:::warning
+**平台特定行为**:
+- **iOS 应用**: 必须处理访问令牌和 JWT 令牌
+- **Android 应用**: 只需要处理访问令牌
+- **跨平台应用**: 必须实现两种令牌处理方法
+:::
+
+:::tip
+**iOS 必备**: 你必须实现两种令牌处理方法。许多 iOS 开发人员假设他们始终会获得访问令牌,当用户拒绝跟踪时,他们的应用就会崩溃。
+:::
+
+## 安全上下文要求 (Web/Capacitor)
+
+### Crypto API 限制
+
+更新后的 Facebook 登录流程需要 **Web Crypto API** 来生成 nonce,它仅在**安全上下文**中可用:
+
+```typescript
+// 这需要安全上下文(HTTPS 或 localhost)
+async function sha256(message: string) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer); // ❌ 在不安全的上下文中失败
+  // ...
+}
+```
+
+### 开发环境问题
+
+**常见问题**: 使用 HTTP URL 的 `ionic serve` 会破坏 Facebook 身份验证
+
+| 环境 | Crypto API 可用 | Facebook 登录工作 |
+|-------------|---------------------|---------------------|
+| `http://localhost:3000` | ✅ 是 | ✅ 是 |
+| `http://127.0.0.1:3000` | ✅ 是 | ✅ 是 |
+| `http://192.168.1.100:3000` | ❌ 否 | ❌ 否 |
+| `https://any-domain.com` | ✅ 是 | ✅ 是 |
+
+### Capacitor 开发的解决方案
+
+<Steps>
+1. **使用 localhost 进行 Web 测试**
+   ```bash
+   # 不要使用 ionic serve --host=0.0.0.0
+   ionic serve --host=localhost
+   ```
+
+2. **在 Ionic 中启用 HTTPS**
+   ```bash
+   ionic serve --ssl
+   ```
+
+3. **在实际设备上测试**
+   ```bash
+   # Capacitor 应用在设备上的安全上下文中运行
+   ionic cap run ios
+   ionic cap run android
+   ```
+
+4. **开发的替代 nonce 生成**
+   ```typescript
+   async function generateNonce() {
+     if (typeof crypto !== 'undefined' && crypto.subtle) {
+       // 安全上下文 - 使用 crypto.subtle
+       return await sha256(Math.random().toString(36).substring(2, 10));
+     } else {
+       // 开发的备选方案(不适合生产环境)
+       console.warn('使用备选 nonce - 不适合生产环境');
+       return btoa(Math.random().toString(36).substring(2, 10));
+     }
+   }
+   ```
+</Steps>
+
+### Firebase 集成说明
+
+最近的 Firebase 文档要求使用带 nonce 的 JWT 令牌进行 Facebook 身份验证,无论登录设置如何。这种方法适用于 `limitedLogin: true` 和 `limitedLogin: false`:
+
+```typescript
+   // 两种模式都可以根据用户选择返回 JWT 令牌
+   const loginResult = await SocialLogin.login({
+     provider: 'facebook',
+     options: {
+       permissions: ['email', 'public_profile'],
+       limitedLogin: false, // true = 始终 JWT, false = 取决于用户跟踪选择
+       nonce: nonce
+     }
+   });
+```
+
+:::warning
+**开发限制**: 如果你在网络 IP 上使用 `ionic serve`(不是 localhost),由于 crypto API 限制,Facebook 登录将失败。使用 localhost 或 HTTPS 进行 Web 测试。
+:::
+
+:::tip
+**生产安全性**: iOS/Android 上的 Capacitor 应用始终在安全上下文中运行,因此此限制仅影响 Web 开发环境。
+:::
+
+## 故障排除
+
+### 常见问题和解决方案
+
+1. **Android 上的密钥哈希错误**
+   - 仔细检查你是否已将正确的密钥哈希添加到 Facebook 仪表板
+   - 对于发布版本,确保你已添加调试和发布密钥哈希
+   - 验证你在生成哈希时使用的是正确的密钥库
+
+2. **Facebook 登录按钮未显示**
+   - 验证所有清单条目是否正确
+   - 检查你的 Facebook App ID 和 Client Token 是否正确
+   - 确保你已正确初始化 SDK
+
+3. **常见 iOS 问题**
+   - 确保所有 Info.plist 条目正确
+   - 验证 URL schemes 是否正确配置
+   - 检查你的 bundle ID 是否与 Facebook 仪表板中注册的匹配
+
+### 测试
+
+1. **测试前,在 Facebook Developer Console 中添加测试用户**
+   - 转到 Roles > Test Users
+   - 创建测试用户
+   - 使用这些凭据进行测试
+
+2. **测试调试和发布版本**
+   - 使用调试密钥哈希的调试版本
+   - 使用发布密钥哈希的发布版本
+   - 在模拟器和真实设备上测试
+
+请记住测试完整的登录流程,包括:
+- 成功登录
+- 登录取消
+- 错误处理
+- 注销功能

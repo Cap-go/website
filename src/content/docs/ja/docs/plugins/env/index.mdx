@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-env"
+locale: ja
+description: ホワイトラベルおよびマルチテナントアプリのために、実行時に`capacitor.config`から設定値を公開します。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Capacitorから安全な設定値を直接読み取ることで、新しいビルドなしでテナント固有の設定を提供します。
+  image:
+    file: ~public/settings-go.webp
+  actions:
+    - text: はじめる
+      link: /docs/plugins/env/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-env/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Envを使用すると、`capacitor.config.*`内に秘密とビルドごとの設定を保存し、シンプルなAPIを通じて実行時にそれらを解決できます。
+
+<CardGrid stagger>
+  <Card title="実行時設定" icon="rocket">
+    JavaScriptバンドルに含めずにネイティブ設定ファイルから値を読み取ります。
+  </Card>
+  <Card title="ビルドごとのオーバーライド" icon="rocket">
+    異なる設定ファイルを提供することで、複数のアプリフレーバーまたはテナントを作成します。
+  </Card>
+  <Card title="型安全なアクセス" icon="pencil">
+    TypeScriptサポートでキーを取得し、フォールバックロジックを一元化します。
+  </Card>
+  <Card title="デフォルトで安全" icon="approve-check">
+    APIキーと秘密をGitから除外しながら、ネイティブバイナリと一緒に配信します。
+  </Card>
+</CardGrid>
+
+はじめるガイドに従って、Capacitor設定でキーを宣言し、プラットフォーム間で安全に取得します。

@@ -1,0 +1,313 @@
+---
+title: Commencer
+description: Apprenez à installer et configurer le plugin Capacitor IVS Player pour intégrer le streaming à faible latence Amazon IVS dans votre application.
+sidebar:
+  order: 2
+locale: fr
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installez le paquet**
+   <PackageManagers pkg="@capgo/ivs-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchronisez avec les projets natifs**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurez le plugin**
+
+   **Configuration basique du lecteur :**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // Créer un lecteur
+   const { playerId } = await IvsPlayer.create({
+     url: 'https://your-ivs-playback-url.m3u8',
+     autoplay: true
+   });
+
+   // Démarrer la lecture
+   await IvsPlayer.play({ playerId });
+   ```
+
+   **Contrôles du lecteur :**
+   ```typescript
+   // Mettre en pause la lecture
+   await IvsPlayer.pause({ playerId });
+
+   // Régler le volume
+   await IvsPlayer.setVolume({
+     playerId,
+     volume: 0.5 // 0.0 à 1.0
+   });
+
+   // Aller à une position
+   await IvsPlayer.seekTo({
+     playerId,
+     position: 30 // secondes
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Ajoutez à votre `Info.plist` :
+       ```xml
+       <key>NSAppTransportSecurity</key>
+       <dict>
+         <key>NSAllowsArbitraryLoads</key>
+         <true/>
+       </dict>
+       ```
+     </TabItem>
+     <TabItem label="Android">
+       Ajoutez à votre `AndroidManifest.xml` :
+       ```xml
+       <uses-permission android:name="android.permission.INTERNET" />
+       ```
+     </TabItem>
+   </Tabs>
+
+4. **Gestion des événements**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // Écouter les événements du lecteur
+   IvsPlayer.addListener('onState', (event) => {
+     console.log('État du lecteur:', event.state);
+     // États : idle, buffering, ready, playing, ended
+   });
+
+   IvsPlayer.addListener('onError', (event) => {
+     console.error('Erreur du lecteur:', event.error);
+   });
+
+   IvsPlayer.addListener('onDuration', (event) => {
+     console.log('Durée de la vidéo:', event.duration);
+   });
+
+   IvsPlayer.addListener('onProgress', (event) => {
+     console.log('Position actuelle:', event.position);
+   });
+
+   // Écouter les métadonnées temporelles
+   IvsPlayer.addListener('onMetadata', (event) => {
+     console.log('Métadonnées temporelles:', event.metadata);
+   });
+   ```
+
+5. **Utilisation avancée**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   export class StreamPlayer {
+     private playerId: string | null = null;
+     private listeners: any[] = [];
+
+     async initialize(streamUrl: string) {
+       // Créer un lecteur avec une configuration personnalisée
+       const result = await IvsPlayer.create({
+         url: streamUrl,
+         autoplay: false,
+         muted: true, // Démarrer en sourdine pour les politiques d'autoplay
+         controls: true
+       });
+
+       this.playerId = result.playerId;
+       this.setupEventListeners();
+     }
+
+     private setupEventListeners() {
+       // Changements d'état
+       const stateListener = IvsPlayer.addListener('onState', (event) => {
+         this.handleStateChange(event.state);
+       });
+       this.listeners.push(stateListener);
+
+       // Changements de qualité
+       const qualityListener = IvsPlayer.addListener('onQuality', (event) => {
+         console.log(`Qualité changée à : ${event.quality.name}`);
+       });
+       this.listeners.push(qualityListener);
+
+       // Mises à jour du buffer
+       const bufferListener = IvsPlayer.addListener('onBuffer', (event) => {
+         console.log(`Buffer : ${event.percentage}%`);
+       });
+       this.listeners.push(bufferListener);
+     }
+
+     private handleStateChange(state: string) {
+       switch (state) {
+         case 'playing':
+           console.log('Le stream est en cours de lecture');
+           break;
+         case 'buffering':
+           console.log('Le stream est en buffering');
+           break;
+         case 'ended':
+           console.log('Le stream est terminé');
+           break;
+       }
+     }
+
+     async play() {
+       if (this.playerId) {
+         await IvsPlayer.play({ playerId: this.playerId });
+       }
+     }
+
+     async pause() {
+       if (this.playerId) {
+         await IvsPlayer.pause({ playerId: this.playerId });
+       }
+     }
+
+     async setQuality(qualityName: string) {
+       if (this.playerId) {
+         await IvsPlayer.setQuality({
+           playerId: this.playerId,
+           quality: qualityName
+         });
+       }
+     }
+
+     async destroy() {
+       // Supprimer les écouteurs
+       this.listeners.forEach(listener => listener.remove());
+
+       // Détruire le lecteur
+       if (this.playerId) {
+         await IvsPlayer.destroy({ playerId: this.playerId });
+       }
+     }
+   }
+   ```
+</Steps>
+
+## Référence API
+
+### Méthodes
+
+#### `create(options: CreateOptions)`
+Créer une nouvelle instance de lecteur IVS.
+
+**Paramètres :**
+- `options` : Configuration du lecteur
+  - `url` : string - URL de lecture IVS
+  - `autoplay` : boolean - Démarrage automatique de la lecture
+  - `muted` : boolean - Démarrer en sourdine
+  - `controls` : boolean - Afficher les contrôles natifs
+
+**Retourne :** `Promise<{ playerId: string }>`
+
+#### `play(options: PlayerOptions)`
+Démarrer la lecture.
+
+#### `pause(options: PlayerOptions)`
+Mettre en pause la lecture.
+
+#### `stop(options: PlayerOptions)`
+Arrêter la lecture et réinitialiser la position.
+
+#### `seekTo(options: SeekOptions)`
+Aller à une position spécifique.
+
+#### `setVolume(options: VolumeOptions)`
+Régler le volume du lecteur (0.0 à 1.0).
+
+#### `setQuality(options: QualityOptions)`
+Régler la qualité de lecture.
+
+#### `destroy(options: PlayerOptions)`
+Détruire l'instance du lecteur.
+
+### Événements
+
+- `onState` : Changements d'état du lecteur
+- `onError` : Erreurs de lecture
+- `onDuration` : Durée de la vidéo disponible
+- `onProgress` : Mises à jour de la progression de la lecture
+- `onQuality` : Changements de qualité
+- `onMetadata` : Événements de métadonnées temporelles
+- `onBuffer` : Mises à jour du statut du buffer
+
+### Interfaces
+
+```typescript
+interface CreateOptions {
+  url: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+}
+
+interface PlayerOptions {
+  playerId: string;
+}
+
+interface SeekOptions extends PlayerOptions {
+  position: number; // secondes
+}
+
+interface VolumeOptions extends PlayerOptions {
+  volume: number; // 0.0 à 1.0
+}
+
+interface QualityOptions extends PlayerOptions {
+  quality: string; // nom de qualité
+}
+```
+
+## Notes sur les plateformes
+
+### iOS
+- Nécessite iOS 12.0 ou ultérieur
+- Utilise AVPlayer natif avec des extensions IVS
+- Prend en charge Picture-in-Picture sur les iPads
+
+### Android
+- Nécessite Android 5.0 (API level 21) ou ultérieur
+- Utilise Amazon IVS Player SDK
+- Accélération matérielle recommandée
+
+## Cas d'utilisation courants
+
+1. **Streaming en direct** : Événements en temps réel, sports, jeux
+2. **Streaming interactif** : Sondages des spectateurs, sessions de questions-réponses
+3. **E-commerce** : Shopping en direct avec mise en avant des produits
+4. **Éducation** : Cours en direct avec contenu temporisé
+5. **Divertissement** : Concerts, spectacles avec interaction du public
+
+## Bonnes pratiques
+
+1. **Gestion du réseau** : Surveiller la qualité de la connexion
+   ```typescript
+   IvsPlayer.addListener('onError', (event) => {
+     if (event.error.includes('network')) {
+       // Gérer les erreurs réseau
+       showRetryButton();
+     }
+   });
+   ```
+
+2. **Gestion des ressources** : Toujours détruire les lecteurs lorsque c'est terminé
+3. **Politiques d'autoplay** : Démarrer en sourdine pour un autoplay fiable
+4. **Sélection de la qualité** : Laisser IVS gérer le changement automatique de qualité
+
+## Dépannage
+
+**Le stream ne se lit pas :**
+- Vérifiez que l'URL de lecture IVS est valide
+- Vérifiez les permissions réseau
+- Assurez-vous que le stream est en direct
+
+**Latence élevée :**
+- IVS est optimisé pour une faible latence, vérifiez les paramètres de votre encodeur
+- Vérifiez que vous utilisez l'URL de lecture spécifique à IVS
+
+**Problèmes de qualité :**
+- Autoriser le changement automatique de qualité
+- Vérifier les exigences de bande passante réseau

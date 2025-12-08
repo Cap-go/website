@@ -1,0 +1,130 @@
+---
+title: Erste Schritte
+description: Konfigurieren Sie Apple Pay und Google Pay für Ihren Capacitor-Checkout mit dem Pay-Plugin.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Plugin installieren**
+   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Native Projekte synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Native Voraussetzungen
+
+- **Apple Pay (iOS)**
+  1. Erstellen Sie eine Apple Pay-Händler-ID im Apple Developer-Portal.
+  2. Generieren und laden Sie das von Ihrem Gateway benötigte Zahlungsverarbeitungszertifikat hoch.
+  3. Aktivieren Sie die **Apple Pay**-Funktion in Xcode und stellen Sie sicher, dass Ihr Bereitstellungsprofil diese enthält.
+  4. Aktualisieren Sie `Info.plist` mit einer Verwendungsbeschreibung, wenn Ihr Gateway Netzwerkzugriff zur Validierung von Zahlungen benötigt.
+
+- **Google Pay (Android)**
+  1. Melden Sie sich bei der [Google Pay Business Console](https://pay.google.com/business/console/) an.
+  2. Konfigurieren Sie Ihre Payment Gateway-Parameter oder richten Sie direkte Tokenisierung für Tests ein.
+  3. Wenn Sie Produktionskarten verwenden möchten, wechseln Sie `environment` zu `PRODUCTION` und registrieren Sie Testkarten für QA.
+  4. Bestätigen Sie, dass Google Play-Dienste auf dem Gerät verfügbar sind (von Google Pay erforderlich).
+
+Weitere schrittweise Screenshots finden Sie in den Anleitungen unter `docs/` im Plugin-Repository.
+
+## Verfügbarkeit prüfen
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const availability = await Pay.isPayAvailable({
+  apple: { supportedNetworks: ['visa', 'masterCard', 'amex'] },
+  google: {
+    isReadyToPayRequest: {
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+          },
+        },
+      ],
+    },
+  },
+});
+
+if (!availability.available) {
+  console.warn('Native Pay nicht verfügbar:', availability);
+}
+```
+
+## Zahlung anfordern (Apple Pay)
+
+```typescript
+const appleResult = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant.com.example.app',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    supportedNetworks: ['visa', 'masterCard'],
+    paymentSummaryItems: [
+      { label: 'Starter-Plan', amount: '9.99' },
+      { label: 'Capgo Store', amount: '9.99' },
+    ],
+    requiredShippingContactFields: ['name', 'emailAddress'],
+  },
+});
+
+const token = appleResult.apple?.paymentData;
+```
+
+## Zahlung anfordern (Google Pay)
+
+```typescript
+const googleResult = await Pay.requestPayment({
+  google: {
+    environment: 'test',
+    paymentDataRequest: {
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            billingAddressRequired: true,
+            billingAddressParameters: { format: 'FULL' },
+          },
+          tokenizationSpecification: {
+            type: 'PAYMENT_GATEWAY',
+            parameters: {
+              gateway: 'example',
+              gatewayMerchantId: 'exampleMerchantId',
+            },
+          },
+        },
+      ],
+      merchantInfo: {
+        merchantName: 'Capgo Store',
+      },
+      transactionInfo: {
+        totalPriceStatus: 'FINAL',
+        totalPrice: '9.99',
+        currencyCode: 'USD',
+        countryCode: 'US',
+      },
+    },
+  },
+});
+
+const paymentData = googleResult.google?.paymentData;
+```
+
+## Antworten verarbeiten
+
+- Tokenisieren Sie die zurückgegebene Payload mit Ihrem Zahlungsverarbeiter und bestätigen Sie die Transaktion serverseitig.
+- Bieten Sie einen Fallback-Pfad (Karteneingabe, Rechnung) an, wenn native Zahlung nicht verfügbar ist oder der Benutzer das Sheet abbricht.
+- Cachen Sie das Verfügbarkeitsergebnis, damit Sie die Schaltflächen nicht auf nicht unterstützten Geräten anzeigen.

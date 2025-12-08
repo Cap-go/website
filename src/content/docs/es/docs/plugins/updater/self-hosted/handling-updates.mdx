@@ -1,0 +1,111 @@
+---
+title: "Endpoint API de Actualización"
+locale: es
+description: "Cómo construir el endpoint API de tu servidor de actualización para responder a las solicitudes del plugin de Capgo con información apropiada del bundle y checksums"
+sidebar:
+  order: 6
+---
+
+Aquí hay un ejemplo de código en JavaScript para enviar una actualización al plugin
+
+```typescript
+interface AppInfos {
+  version_name: string
+  version_build: string
+  version_os: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSON.parse(event.body || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  console.log('update asked', platform,
+    app_id,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  if (version_name === '1.0.0') {
+    return {
+      version: '1.0.1',
+      url: 'https://apiurl.com/mybuild_101.zip',
+      checksum: 'sha256_checksum_of_bundle',
+    }
+  }
+  else if (version_name === '1.0.1') {
+    return {
+      version: '1.0.2',
+      url: 'https://apiurl.com/mybuild_102.zip',
+      checksum: 'sha256_checksum_of_bundle',
+    }
+  }
+  else {
+    return {
+      message: 'Error version not found'
+      version: '',
+      url: '',
+    }
+  }
+}
+```
+
+## Formato de Respuesta
+
+Para **bundles no encriptados**, tu endpoint debe devolver:
+
+```json
+{
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip",
+  "checksum": "sha256_checksum_of_bundle"
+}
+```
+
+Para **bundles encriptados**, también necesitas incluir la clave de sesión:
+
+```json
+{
+  "version": "1.0.2",
+  "url": "https://apiurl.com/mybuild_102.zip",
+  "checksum": "encrypted_checksum_from_encrypt_command",
+  "session_key": "ivSessionKey_from_encrypt_command"
+}
+```
+
+Y si no hay actualización o error, agrega la clave `message` y opcionalmente un `error`:
+
+```json
+{
+  "message": "Version not found",
+  "error": "The backend crashed",
+  "version": "1.0.2",
+}
+```
+
+## Descripciones de Campos
+
+- **`checksum`**: Hash SHA256 de tu archivo zip del bundle para verificación de integridad
+- **`session_key`**: Requerido solo para bundles encriptados - este es el `ivSessionKey` devuelto por el comando encrypt
+- **`version`**: Identificador de versión en formato semver
+- **`url`**: URL HTTPS donde el bundle puede ser descargado
+
+## Creación de Bundle
+
+Para aprender cómo crear bundles compatibles y generar checksums, consulta la [documentación de Actualización Automática](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
+
+Para bundles encriptados, consulta la [documentación de Bundles Encriptados](/docs/plugin/self-hosted/encrypted-bundles/) que explica el flujo de trabajo completo de encriptación.

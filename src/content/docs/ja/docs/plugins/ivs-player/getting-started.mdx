@@ -1,0 +1,313 @@
+---
+title: はじめに
+description: Capacitor IVS Player プラグインをインストールして設定し、アプリに Amazon IVS 低遅延ストリーミングを統合する方法を学びます。
+sidebar:
+  order: 2
+locale: ja
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/ivs-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **プラグインを設定**
+
+   **基本的なプレーヤーセットアップ:**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // プレーヤーを作成
+   const { playerId } = await IvsPlayer.create({
+     url: 'https://your-ivs-playback-url.m3u8',
+     autoplay: true
+   });
+
+   // 再生を開始
+   await IvsPlayer.play({ playerId });
+   ```
+
+   **プレーヤーコントロール:**
+   ```typescript
+   // 再生を一時停止
+   await IvsPlayer.pause({ playerId });
+
+   // ボリュームを設定
+   await IvsPlayer.setVolume({
+     playerId,
+     volume: 0.5 // 0.0 から 1.0
+   });
+
+   // 位置にシーク
+   await IvsPlayer.seekTo({
+     playerId,
+     position: 30 // 秒
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       `Info.plist` に追加：
+       ```xml
+       <key>NSAppTransportSecurity</key>
+       <dict>
+         <key>NSAllowsArbitraryLoads</key>
+         <true/>
+       </dict>
+       ```
+     </TabItem>
+     <TabItem label="Android">
+       `AndroidManifest.xml` に追加：
+       ```xml
+       <uses-permission android:name="android.permission.INTERNET" />
+       ```
+     </TabItem>
+   </Tabs>
+
+4. **イベント処理**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // プレーヤーイベントをリッスン
+   IvsPlayer.addListener('onState', (event) => {
+     console.log('プレーヤーの状態:', event.state);
+     // 状態: idle, buffering, ready, playing, ended
+   });
+
+   IvsPlayer.addListener('onError', (event) => {
+     console.error('プレーヤーエラー:', event.error);
+   });
+
+   IvsPlayer.addListener('onDuration', (event) => {
+     console.log('ビデオの長さ:', event.duration);
+   });
+
+   IvsPlayer.addListener('onProgress', (event) => {
+     console.log('現在位置:', event.position);
+   });
+
+   // タイムドメタデータをリッスン
+   IvsPlayer.addListener('onMetadata', (event) => {
+     console.log('タイムドメタデータ:', event.metadata);
+   });
+   ```
+
+5. **高度な使用方法**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   export class StreamPlayer {
+     private playerId: string | null = null;
+     private listeners: any[] = [];
+
+     async initialize(streamUrl: string) {
+       // カスタム設定でプレーヤーを作成
+       const result = await IvsPlayer.create({
+         url: streamUrl,
+         autoplay: false,
+         muted: true, // 自動再生ポリシーのためミュートで開始
+         controls: true
+       });
+
+       this.playerId = result.playerId;
+       this.setupEventListeners();
+     }
+
+     private setupEventListeners() {
+       // 状態変更
+       const stateListener = IvsPlayer.addListener('onState', (event) => {
+         this.handleStateChange(event.state);
+       });
+       this.listeners.push(stateListener);
+
+       // 品質変更
+       const qualityListener = IvsPlayer.addListener('onQuality', (event) => {
+         console.log(`品質が次に変更されました: ${event.quality.name}`);
+       });
+       this.listeners.push(qualityListener);
+
+       // バッファ更新
+       const bufferListener = IvsPlayer.addListener('onBuffer', (event) => {
+         console.log(`バッファ: ${event.percentage}%`);
+       });
+       this.listeners.push(bufferListener);
+     }
+
+     private handleStateChange(state: string) {
+       switch (state) {
+         case 'playing':
+           console.log('ストリームが再生中');
+           break;
+         case 'buffering':
+           console.log('ストリームがバッファリング中');
+           break;
+         case 'ended':
+           console.log('ストリームが終了');
+           break;
+       }
+     }
+
+     async play() {
+       if (this.playerId) {
+         await IvsPlayer.play({ playerId: this.playerId });
+       }
+     }
+
+     async pause() {
+       if (this.playerId) {
+         await IvsPlayer.pause({ playerId: this.playerId });
+       }
+     }
+
+     async setQuality(qualityName: string) {
+       if (this.playerId) {
+         await IvsPlayer.setQuality({
+           playerId: this.playerId,
+           quality: qualityName
+         });
+       }
+     }
+
+     async destroy() {
+       // リスナーを削除
+       this.listeners.forEach(listener => listener.remove());
+
+       // プレーヤーを破棄
+       if (this.playerId) {
+         await IvsPlayer.destroy({ playerId: this.playerId });
+       }
+     }
+   }
+   ```
+</Steps>
+
+## API リファレンス
+
+### メソッド
+
+#### `create(options: CreateOptions)`
+新しい IVS プレーヤーインスタンスを作成します。
+
+**パラメータ:**
+- `options`: プレーヤー設定
+  - `url`: string - IVS 再生 URL
+  - `autoplay`: boolean - 自動再生を開始
+  - `muted`: boolean - ミュートで開始
+  - `controls`: boolean - ネイティブコントロールを表示
+
+**戻り値:** `Promise<{ playerId: string }>`
+
+#### `play(options: PlayerOptions)`
+再生を開始します。
+
+#### `pause(options: PlayerOptions)`
+再生を一時停止します。
+
+#### `stop(options: PlayerOptions)`
+再生を停止して位置をリセットします。
+
+#### `seekTo(options: SeekOptions)`
+特定の位置にシークします。
+
+#### `setVolume(options: VolumeOptions)`
+プレーヤーのボリュームを設定します（0.0 から 1.0）。
+
+#### `setQuality(options: QualityOptions)`
+再生品質を設定します。
+
+#### `destroy(options: PlayerOptions)`
+プレーヤーインスタンスを破棄します。
+
+### イベント
+
+- `onState`: プレーヤーの状態変更
+- `onError`: 再生エラー
+- `onDuration`: ビデオの長さが利用可能
+- `onProgress`: 再生進行状況の更新
+- `onQuality`: 品質変更
+- `onMetadata`: タイムドメタデータイベント
+- `onBuffer`: バッファステータスの更新
+
+### インターフェース
+
+```typescript
+interface CreateOptions {
+  url: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+}
+
+interface PlayerOptions {
+  playerId: string;
+}
+
+interface SeekOptions extends PlayerOptions {
+  position: number; // 秒
+}
+
+interface VolumeOptions extends PlayerOptions {
+  volume: number; // 0.0 から 1.0
+}
+
+interface QualityOptions extends PlayerOptions {
+  quality: string; // 品質名
+}
+```
+
+## プラットフォームに関する注記
+
+### iOS
+- iOS 12.0 以降が必要
+- IVS 拡張機能を備えたネイティブ AVPlayer を使用
+- iPad でピクチャーインピクチャーをサポート
+
+### Android
+- Android 5.0（API レベル 21）以降が必要
+- Amazon IVS Player SDK を使用
+- ハードウェアアクセラレーションを推奨
+
+## 一般的なユースケース
+
+1. **ライブストリーミング**: リアルタイムイベント、スポーツ、ゲーム
+2. **インタラクティブストリーミング**: 視聴者投票、Q&A セッション
+3. **E コマース**: 製品ハイライト付きライブショッピング
+4. **教育**: タイムドコンテンツ付きライブクラス
+5. **エンターテインメント**: 観客との対話付きコンサート、ショー
+
+## ベストプラクティス
+
+1. **ネットワーク処理**: 接続品質を監視
+   ```typescript
+   IvsPlayer.addListener('onError', (event) => {
+     if (event.error.includes('network')) {
+       // ネットワークエラーを処理
+       showRetryButton();
+     }
+   });
+   ```
+
+2. **リソース管理**: 使用後は必ずプレーヤーを破棄
+3. **自動再生ポリシー**: 信頼性の高い自動再生のためミュートで開始
+4. **品質選択**: IVS に自動品質切り替えを処理させる
+
+## トラブルシューティング
+
+**ストリームが再生されない:**
+- IVS 再生 URL が有効であることを確認
+- ネットワーク権限を確認
+- ストリームがライブであることを確認
+
+**高遅延:**
+- IVS は低遅延用に最適化されているため、エンコーダー設定を確認
+- IVS 固有の再生 URL を使用していることを確認
+
+**品質の問題:**
+- 自動品質切り替えを許可
+- ネットワーク帯域幅の要件を確認

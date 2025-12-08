@@ -1,0 +1,301 @@
+---
+title: Crear Grupo de Suscripción de iOS
+locale: es
+description: Aprende cómo crear y configurar grupos de suscripción en App Store Connect para organizar las ofertas de suscripción de tu aplicación.
+sidebar:
+  order: 7
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Los grupos de suscripción son esenciales para organizar y gestionar múltiples niveles de suscripción en tu aplicación iOS. Comprender cómo funcionan es crucial para implementar funcionalidad de actualización, degradación y cambio entre niveles.
+
+## ¿Qué es un Grupo de Suscripción?
+
+Un grupo de suscripción es una colección de suscripciones relacionadas entre las que los usuarios pueden elegir. Los usuarios solo pueden suscribirse a una suscripción dentro de un grupo a la vez. Cuando cambian de suscripción, Apple maneja la transición automáticamente.
+
+## Por qué Importan los Grupos de Suscripción
+
+Los grupos de suscripción permiten:
+- **Precios escalonados**: Ofrecer planes básico, premium y ultimate
+- **Diferentes duraciones**: Opciones mensuales, anuales y de por vida
+- **Lógica de actualización/degradación**: Manejo automático de cambios de suscripción
+- **Gestión simplificada**: Agrupar suscripciones relacionadas
+
+## Niveles de Suscripción
+
+Dentro de un grupo, cada suscripción debe clasificarse desde el valor más alto (nivel 1) hasta el más bajo. Esta clasificación determina cómo se clasifican los cambios de suscripción:
+
+![Jerarquía de grupo de suscripción](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
+
+### Ejemplos de Nivel
+
+**Nivel 1** (Valor Más Alto)
+- Premium Anual ($99.99/año)
+- Ultimate Mensual ($19.99/mes)
+
+**Nivel 2** (Valor Medio)
+- Estándar Anual ($49.99/año)
+- Premium Mensual ($9.99/mes)
+
+**Nivel 3** (Valor Más Bajo)
+- Básico Anual ($29.99/año)
+- Estándar Mensual ($4.99/mes)
+
+## Tipos de Cambio de Suscripción
+
+Apple maneja automáticamente tres tipos de cambios de suscripción basados en la clasificación de nivel:
+
+### 1. Actualización
+Moverse a una suscripción de **nivel superior** (ej., nivel 2 → nivel 1).
+
+**Comportamiento:**
+- Tiene efecto **inmediatamente**
+- El usuario recibe **reembolso prorrateado** por el tiempo restante
+- La nueva suscripción comienza de inmediato
+
+**Ejemplo:**
+```typescript
+// El usuario actualmente tiene: Estándar Mensual (Nivel 2)
+// El usuario actualiza a: Premium Anual (Nivel 1)
+// Resultado: Acceso inmediato a Premium, reembolso por tiempo no usado de Estándar
+```
+
+### 2. Degradación
+Moverse a una suscripción de **nivel inferior** (ej., nivel 1 → nivel 2).
+
+**Comportamiento:**
+- Tiene efecto en la **próxima fecha de renovación**
+- El usuario mantiene la suscripción actual hasta que termine el período
+- La nueva suscripción comienza automáticamente después de la expiración
+
+**Ejemplo:**
+```typescript
+// El usuario actualmente tiene: Premium Anual (Nivel 1)
+// El usuario degrada a: Estándar Mensual (Nivel 2)
+// Resultado: El acceso Premium continúa hasta la fecha de renovación anual, luego cambia
+```
+
+### 3. Cambio de Nivel
+Cambiar a otra suscripción **en el mismo nivel**.
+
+**El comportamiento depende de la duración:**
+
+**Duración Diferente** → Se comporta como **degradación**
+- Tiene efecto en la próxima fecha de renovación
+- Ejemplo: Premium Mensual (Nivel 1) → Premium Anual (Nivel 1)
+
+**Misma Duración** → Se comporta como **actualización**
+- Tiene efecto inmediatamente
+- Ejemplo: Premium Mensual (Nivel 1) → Ultimate Mensual (Nivel 1)
+
+## Crear un Grupo de Suscripción
+
+<Steps>
+
+1. **Navegar a Suscripciones**
+
+   En App Store Connect, selecciona tu aplicación y ve a **Monetize > Subscriptions**.
+
+2. **Crear Grupo**
+
+   Haz clic en **+** junto a "Subscription Groups" para crear un nuevo grupo.
+
+3. **Nombrar el Grupo**
+
+   Elige un nombre descriptivo que refleje las suscripciones que contiene:
+   - "Premium Access"
+   - "Cloud Storage Plans"
+   - "Pro Features"
+
+4. **Agregar Suscripciones**
+
+   Después de crear el grupo, agrega suscripciones individuales a él. Cada suscripción tendrá una clasificación de nivel.
+
+5. **Establecer Clasificaciones de Nivel**
+
+   Organiza las suscripciones desde el valor más alto (1) hasta el más bajo. Considera:
+   - Los planes anuales típicamente se clasifican más alto que los mensuales
+   - Los niveles de precio más alto se clasifican por encima de los más bajos
+   - Los niveles Ultimate/premium se clasifican más alto
+
+</Steps>
+
+## Usar en tu Aplicación
+
+El plugin native-purchases maneja automáticamente la lógica del grupo de suscripción:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Obtener todas las suscripciones en un grupo
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly', 'premium_annual', 'ultimate_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Mostrar suscripción actual usando transacciones de StoreKit
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const activeSubs = purchases.filter((purchase) => purchase.isActive);
+
+// Detectar degradación/cancelación pendiente (StoreKit establece willCancel === true)
+const pendingChange = purchases.find((purchase) => purchase.willCancel === true);
+if (pendingChange) {
+  console.log('Subscription will stop auto-renewing on', pendingChange.expirationDate);
+}
+
+// Comprar (StoreKit maneja actualizaciones/degradaciones automáticamente)
+await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_annual',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Escuchar actualizaciones de StoreKit (se dispara en actualizaciones/degradaciones/reembolsos)
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Subscription updated:', transaction);
+});
+```
+
+## Manejar Cambios de Suscripción
+
+### Detectar Tipo de Cambio
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Obtener información de suscripción actual
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const currentSubscription = purchases.find(
+  (purchase) => purchase.subscriptionState === 'subscribed',
+);
+
+if (currentSubscription) {
+  // StoreKit reporta si el usuario canceló la renovación automática
+  if (currentSubscription.willCancel) {
+    console.log(
+      `User cancelled. Access remains until ${currentSubscription.expirationDate}`,
+    );
+  }
+
+  if (currentSubscription.isUpgraded) {
+    console.log('User recently upgraded to this plan.');
+  }
+}
+
+// Escuchar actualizaciones/degradaciones automáticas
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Subscription changed!', transaction);
+  if (transaction.subscriptionState === 'revoked') {
+    revokeAccess();
+  } else if (transaction.isActive) {
+    unlockPremiumFeatures();
+  }
+});
+```
+
+### Comunicación al Usuario
+
+Siempre comunica el comportamiento del cambio claramente:
+
+**Para Actualizaciones:**
+> "Obtendrás acceso inmediato a las funciones Premium. Prorratearemos tu suscripción actual."
+
+**Para Degradaciones:**
+> "Mantendrás acceso Premium hasta [fecha de renovación], luego cambiarás a Estándar."
+
+**Para Cambios de Nivel:**
+> "Tu plan cambiará a facturación Anual en la próxima renovación el [fecha]."
+
+## Monitoreo del Servidor
+
+Usa las App Store Server Notifications v2 de Apple o tu propio backend de validación de recibos para reflejar los cambios de StoreKit en tu base de datos. Combina las notificaciones del servidor con el listener `transactionUpdated` para que tanto el cliente como el backend se mantengan sincronizados.
+
+## Mejores Prácticas
+
+### Organización de Grupos
+- Mantén suscripciones relacionadas en el mismo grupo
+- No mezcles funciones no relacionadas (ej., almacenamiento y eliminación de anuncios)
+- Crea grupos separados para diferentes conjuntos de funciones
+
+### Estrategia de Clasificación de Nivel
+- Planes anuales → Nivel más alto que mensuales (para el mismo nivel)
+- Niveles de precio más alto → Nivel más alto
+- Considera el valor, no solo el precio
+
+### Experiencia del Usuario
+- Muestra la suscripción actual claramente
+- Muestra todas las opciones disponibles en el grupo
+- Indica qué cambios son inmediatos vs. en la renovación
+- Permite cambiar fácilmente entre planes
+
+### Pruebas
+- Prueba todos los escenarios de actualización
+- Prueba todos los escenarios de degradación
+- Verifica el comportamiento de cambio de nivel
+- Verifica el disparo de webhook
+
+## Escenarios Comunes
+
+### Escenario 1: Tres Planes Mensuales
+```
+Nivel 1: Ultimate Mensual ($19.99)
+Nivel 2: Premium Mensual ($9.99)
+Nivel 3: Básico Mensual ($4.99)
+```
+
+- Básico → Premium: Actualización (inmediata)
+- Premium → Ultimate: Actualización (inmediata)
+- Ultimate → Premium: Degradación (en renovación)
+- Básico → Ultimate: Actualización (inmediata)
+
+### Escenario 2: Planes de Duración Mixta
+```
+Nivel 1: Premium Anual ($99.99/año)
+Nivel 2: Premium Mensual ($9.99/mes)
+```
+
+- Mensual → Anual: Cambio de nivel (en renovación)
+- Anual → Mensual: Degradación (en renovación)
+
+### Escenario 3: Multi-Nivel Multi-Duración
+```
+Nivel 1: Ultimate Anual ($199/año)
+Nivel 2: Ultimate Mensual ($19.99/mes)
+Nivel 3: Premium Anual ($99/año)
+Nivel 4: Premium Mensual ($9.99/mes)
+Nivel 5: Básico Anual ($49/año)
+Nivel 6: Básico Mensual ($4.99/mes)
+```
+
+Esta configuración proporciona máxima flexibilidad mientras mantiene una lógica clara de actualización/degradación.
+
+## Solución de Problemas
+
+**La suscripción no aparece en el grupo:**
+- Verifica que esté asignada al grupo correcto
+- Verifica que esté al menos en estado "Ready to Submit"
+- Asegúrate de que el product ID sea correcto
+
+**Comportamiento incorrecto de actualización/degradación:**
+- Revisa las clasificaciones de nivel (1 = más alto)
+- Verifica que los niveles de suscripción tengan sentido
+- Verifica que los niveles estén configurados correctamente
+
+**Productos de diferentes grupos:**
+- Los usuarios pueden suscribirse a múltiples grupos simultáneamente
+- Esto es intencional - mantén productos relacionados en el mismo grupo
+
+**getActiveProducts muestra múltiples suscripciones:**
+- Verifica si las suscripciones están en diferentes grupos
+- Verifica que el usuario no esté suscrito vía Family Sharing
+- Revisa el estado de suscripción en App Store Connect
+
+## Recursos Adicionales
+
+Para más detalles, consulta la [documentación oficial de Apple sobre grupos de suscripción](https://developer.apple.com/app-store/subscriptions/).

@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-health"
+description: Conéctate a Apple HealthKit y Health Connect desde Capacitor con una API unificada y tipada.
+locale: es
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Lee y escribe métricas de fitness en iOS y Android mientras mantienes un contrato TypeScript consistente.
+  image:
+    file: ~public/icons/plugins/health.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/health/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-health/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+El plugin Capgo Health unifica el acceso a HealthKit y Health Connect para que puedas rastrear actividad, métricas biométricas y mediciones corporales con una sola integración de Capacitor.
+
+<CardGrid stagger>
+  <Card title="Datos de salud multiplataforma" icon="rocket">
+    Soporta Apple HealthKit y Android Health Connect desde el inicio.
+  </Card>
+  <Card title="Permisos granulares" icon="approve-check">
+    Solicita permisos separados de lectura/escritura y reacciona a cambios de autorización.
+  </Card>
+  <Card title="Unidades consistentes" icon="star">
+    Trabaja con tipos de datos normalizados como `steps`, `heartRate` y `weight`.
+  </Card>
+  <Card title="Escritura en tiempo real" icon="rocket">
+    Guarda muestras de vuelta en el almacén de salud del usuario cuando registre actividad.
+  </Card>
+</CardGrid>
+
+Sigue la guía de inicio para habilitar capacidades de plataforma, recopilar consentimiento y comenzar a sincronizar métricas.

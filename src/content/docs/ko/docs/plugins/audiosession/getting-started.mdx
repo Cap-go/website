@@ -1,0 +1,72 @@
+---
+title: 시작하기
+description: iOS 오디오 라우트 변경 및 중단에 반응하도록 AudioSession 플러그인을 구성합니다.
+sidebar:
+  order: 2
+locale: ko
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+> ℹ️ **플랫폼 지원:** 오디오 세션 API는 iOS에서 사용할 수 있습니다. Android 및 웹에서 호출은 효과 없이 해결되므로 공유 로직을 유지할 수 있습니다.
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **iOS 플랫폼 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용 가능한 출력 검사
+
+```typescript
+import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
+
+const outputs = await AudioSession.currentOutputs();
+
+if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
+  console.log('Bluetooth speaker connected');
+}
+```
+
+## 스피커 모드로 재정의
+
+```typescript
+import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
+
+await AudioSession.overrideOutput(OutputOverrideType.speaker);
+
+// Restore system routing when you are done
+await AudioSession.overrideOutput(OutputOverrideType.default);
+```
+
+## 라우트 및 중단 이벤트 수신
+
+```typescript
+import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
+
+const routeListener = await AudioSession.addListener('routeChanged', (reason) => {
+  if (reason === RouteChangeReasons.NEW_DEVICE_AVAILABLE) {
+    console.log('User connected a new audio route');
+  }
+});
+
+const interruptionListener = await AudioSession.addListener('interruption', (type) => {
+  if (type === InterruptionTypes.BEGAN) {
+    // Pause playback while we are interrupted
+  } else {
+    // Resume playback
+  }
+});
+
+// Later during cleanup
+await routeListener.remove();
+await interruptionListener.remove();
+```
+
+## 자격
+
+- **iOS**: 앱이 백그라운드에서 오디오를 재생하는 경우 `ios/App/App/Info.plist` 내부에 필요한 백그라운드 오디오 모드(예: `audio`, `voice`)를 추가하세요.
+- **기타 플랫폼**: 추가 설정이 필요하지 않습니다. 메서드는 빈 결과로 해결됩니다.

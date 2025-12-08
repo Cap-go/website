@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-mux-player"
+description: 署名済み再生と分析サポートを備えた、CapacitorアプリからネイティブMux Player SDKを起動します。
+tableOfContents: false
+next: false
+prev: false
+locale: ja
+sidebar:
+  order: 1
+  label: "紹介"
+hero:
+  tagline: iOS、Android、Webで、DRM、分析、一貫したコントロールを備えた高品質なMuxビデオをフルスクリーンでストリーミングします。
+  image:
+    file: ~public/icons/plugins/mux-player.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/mux-player/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mux-player/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+公式Muxネイティブ SDKをシンプルなCapacitorインターフェースでラップすることで、プレミアム再生を提供します。
+
+<CardGrid stagger>
+  <Card title="ネイティブSDKエクスペリエンス" icon="rocket">
+    アダプティブビットレートとDRMを備えたMuxモバイルSDKと同じ再生スタックを使用します。
+  </Card>
+  <Card title="署名済み再生" icon="approve-check">
+    保護されたストリームの安全な配信のために、再生およびDRMトークンを提供します。
+  </Card>
+  <Card title="統一API" icon="pencil">
+    1つのTypeScript APIで再生をトリガー、プレーヤーを閉じ、イベントをリスンします。
+  </Card>
+  <Card title="分析対応" icon="star">
+    Mux Dataテレメトリーを自動的にフィードするために環境キーとプレーヤー名を渡します。
+  </Card>
+</CardGrid>
+
+はじめにガイドでは、ネイティブSDKの接続、トークンの処理、プレーヤーイベントへの応答について説明します。

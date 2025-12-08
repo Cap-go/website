@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-health"
+description: 使用统一的类型化 API 从 Capacitor 连接到 Apple HealthKit 和 Health Connect。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 在 iOS 和 Android 上读写健身指标，同时保持一个一致的 TypeScript 契约。
+  image:
+    file: ~public/icons/plugins/health.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/health/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-health/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Health 插件统一了 HealthKit 和 Health Connect 访问，因此您可以使用一个 Capacitor 集成来跟踪活动、生物识别指标和身体测量。
+
+<CardGrid stagger>
+  <Card title="跨平台健康数据" icon="rocket">
+    开箱即用支持 Apple HealthKit 和 Android Health Connect。
+  </Card>
+  <Card title="细粒度权限" icon="approve-check">
+    请求单独的读/写范围并响应授权更改。
+  </Card>
+  <Card title="一致的单位" icon="star">
+    使用标准化的数据类型，如 `steps`、`heartRate` 和 `weight`。
+  </Card>
+  <Card title="实时写入" icon="rocket">
+    当用户记录活动时，将样本保存回用户的健康存储。
+  </Card>
+</CardGrid>
+
+按照入门指南启用平台功能、收集同意并开始同步指标。

@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-plugin-audiosession"
+locale: zh
+description: 从 Capacitor 应用观察和控制 iOS 音频会话，以处理路由变化和中断。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 监听音频路由变化、响应中断并将播放重新路由到扬声器，无需离开 Capacitor。
+  image:
+    file: ~public/icons/plugins/audiosession.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/audiosession/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-audiosession/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo 的 AudioSession 插件为您提供对 iOS AVAudioSession 层的细粒度控制，因此您可以优雅地处理耳机、蓝牙设备和意外中断。
+
+<CardGrid stagger>
+  <Card title="路由感知" icon="rocket">
+    检测用户何时插入或拔出耳机、AirPods、蓝牙扬声器等。
+  </Card>
+  <Card title="扬声器覆盖" icon="setting">
+    当需要免提音频时，强制通过内置扬声器播放。
+  </Card>
+  <Card title="中断处理" icon="moon">
+    响应电话或 Siri 等中断事件，以安全地暂停和恢复音频。
+  </Card>
+  <Card title="类型安全" icon="pencil">
+    强大的 TypeScript 定义使构建弹性音频体验变得容易。
+  </Card>
+</CardGrid>
+
+此插件针对需要 AVAudioSession 控制的 iOS。在其他平台上，调用会在不产生效果的情况下解决，让您保持一个共享的代码路径。

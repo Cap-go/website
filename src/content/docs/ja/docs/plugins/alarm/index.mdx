@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-alarm"
+description: アプリが閉じていてもネイティブアラームと通知をスケジュールします。
+locale: ja
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: CapacitorアプリからiOSとAndroidのネイティブアラームを直接管理します。
+  image:
+    file: ~public/icons/plugins/alarm.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/alarm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-alarm/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="ネイティブ統合" icon="puzzle">
+    iOSではネイティブAlarmKitを、AndroidではAlarmClockインテントを使用
+  </Card>
+  <Card title="シンプルなAPI" icon="rocket">
+    アラームを作成・管理するための使いやすいメソッド
+  </Card>
+  <Card title="権限処理" icon="approve-check-circle">
+    必要な権限をリクエストするための組み込みサポート
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    [ドキュメント](/docs/plugins/alarm/getting-started/)をチェックして、わずか数分でプラグインをマスター。
+  </Card>
+</CardGrid>

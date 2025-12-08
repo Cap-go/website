@@ -1,0 +1,197 @@
+---
+title: 시작하기
+description: Flash 플러그인을 설치하고 사용하여 Capacitor 앱에서 기기의 손전등을 제어하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용법
+
+플러그인을 가져와서 손전등을 제어하는 메서드를 사용합니다:
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// 손전등 사용 가능 여부 확인
+const checkFlashlight = async () => {
+  const { value } = await CapacitorFlash.isAvailable();
+  console.log('손전등 사용 가능:', value);
+};
+
+// 손전등 켜기
+const turnOn = async () => {
+  await CapacitorFlash.switchOn();
+};
+
+// 손전등 끄기
+const turnOff = async () => {
+  await CapacitorFlash.switchOff();
+};
+
+// 손전등이 켜져 있는지 확인
+const checkStatus = async () => {
+  const { value } = await CapacitorFlash.isSwitchedOn();
+  console.log('손전등 켜짐:', value);
+};
+
+// 손전등 토글
+const toggle = async () => {
+  await CapacitorFlash.toggle();
+};
+```
+
+## API 참조
+
+### isAvailable()
+
+기기에서 손전등을 사용할 수 있는지 확인합니다.
+
+```typescript
+const result = await CapacitorFlash.isAvailable();
+// 반환: { value: boolean }
+```
+
+### switchOn(options?)
+
+손전등을 켭니다.
+
+```typescript
+interface SwitchOnOptions {
+  intensity?: number; // 0.0에서 1.0 (iOS 전용)
+}
+
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+### switchOff()
+
+손전등을 끕니다.
+
+```typescript
+await CapacitorFlash.switchOff();
+```
+
+### isSwitchedOn()
+
+손전등이 현재 켜져 있는지 확인합니다.
+
+```typescript
+const result = await CapacitorFlash.isSwitchedOn();
+// 반환: { value: boolean }
+```
+
+### toggle()
+
+손전등을 켜거나 끕니다.
+
+```typescript
+await CapacitorFlash.toggle();
+```
+
+## 전체 예제
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+export class FlashlightService {
+  private isOn = false;
+
+  async init() {
+    const { value } = await CapacitorFlash.isAvailable();
+    if (!value) {
+      throw new Error('이 기기에서 손전등을 사용할 수 없습니다');
+    }
+  }
+
+  async toggle() {
+    if (this.isOn) {
+      await CapacitorFlash.switchOff();
+    } else {
+      await CapacitorFlash.switchOn();
+    }
+    this.isOn = !this.isOn;
+  }
+
+  async turnOn(intensity?: number) {
+    await CapacitorFlash.switchOn({ intensity });
+    this.isOn = true;
+  }
+
+  async turnOff() {
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+
+  async strobe(intervalMs: number = 100, duration: number = 3000) {
+    const endTime = Date.now() + duration;
+
+    while (Date.now() < endTime) {
+      await CapacitorFlash.toggle();
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+
+    // 깜빡임 후 손전등이 꺼져 있는지 확인
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+}
+```
+
+## 모범 사례
+
+1. **먼저 사용 가능 여부 확인**
+   손전등을 사용하기 전에 항상 사용 가능 여부를 확인합니다:
+   ```typescript
+   const { value } = await CapacitorFlash.isAvailable();
+   if (!value) {
+     // 대체 UI 표시 또는 손전등 기능 비활성화
+   }
+   ```
+
+2. **오류를 우아하게 처리**
+   ```typescript
+   try {
+     await CapacitorFlash.switchOn();
+   } catch (error) {
+     console.error('손전등을 켤 수 없습니다:', error);
+   }
+   ```
+
+3. **필요하지 않을 때 끄기**
+   배터리를 절약하기 위해 앱이 백그라운드로 전환되거나 기능이 더 이상 필요하지 않을 때 항상 손전등을 끕니다.
+
+4. **빠른 토글 방지**
+   LED를 손상시키거나 배터리를 소모할 수 있는 빠른 켜기/끄기 전환을 방지하기 위해 디바운싱을 구현합니다.
+
+## 플랫폼 참고사항
+
+### iOS
+- iOS 10.0 이상 필요
+- `AVCaptureDevice` 토치 모드 사용
+- 밝기 제어 지원 (0.0에서 1.0)
+
+### Android
+- Android 6.0 (API 23) 이상 필요
+- Camera2 API 사용
+- 밝기 제어 미지원 (기본 밝기 사용)
+
+### Web
+- MediaDevices API 및 토치 기능을 지원하는 브라우저에서 지원
+- 카메라 스트림을 사용하여 기기의 손전등에 액세스
+- 카메라 액세스를 위한 사용자 권한 필요
+- 모바일 브라우저에서 가장 잘 작동 (Android의 Chrome)
+- 데스크톱 브라우저는 일반적으로 `isAvailable: false` 반환 (토치 하드웨어 없음)
+- 웹에서 밝기 제어 미지원

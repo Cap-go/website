@@ -1,0 +1,488 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和集成 Stream Video SDK 以在您的 Capacitor 应用中实现专业视频通话。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 先决条件
+
+您需要一个 Stream 账户和 API 凭证。如果您还没有账户，请在 [Stream](https://getstream.io/) 注册。
+
+## 平台配置
+
+### iOS
+
+将所需权限添加到您的 `Info.plist`：
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>This app needs camera access for video calls</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs microphone access for video calls</string>
+```
+
+### Android
+
+将所需权限添加到您的 `AndroidManifest.xml`：
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+```
+
+## 使用示例
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+// 初始化 Stream SDK
+await StreamCall.initialize({
+  apiKey: 'your-stream-api-key',
+  userId: 'user-123',
+  userToken: 'user-token'
+});
+
+// 创建通话
+await StreamCall.createCall({
+  callId: 'call-123',
+  callType: 'default'
+});
+
+// 加入通话
+await StreamCall.joinCall({
+  callId: 'call-123'
+});
+
+// 启用/禁用摄像头
+await StreamCall.toggleCamera({
+  enabled: true
+});
+
+// 启用/禁用麦克风
+await StreamCall.toggleMicrophone({
+  enabled: true
+});
+
+// 切换摄像头（前置/后置）
+await StreamCall.switchCamera();
+
+// 离开通话
+await StreamCall.leaveCall();
+
+// 监听通话事件
+StreamCall.addListener('callStarted', (data) => {
+  console.log('通话已开始：', data);
+});
+
+StreamCall.addListener('callEnded', (data) => {
+  console.log('通话已结束：', data);
+});
+
+StreamCall.addListener('participantJoined', (data) => {
+  console.log('参与者已加入：', data);
+});
+
+StreamCall.addListener('participantLeft', (data) => {
+  console.log('参与者已离开：', data);
+});
+```
+
+## API 参考
+
+### initialize(options)
+
+```typescript
+initialize(options: InitializeOptions) => Promise<void>
+```
+
+初始化 Stream Video SDK。
+
+| 参数         | 类型                        |
+| ------------- | --------------------------- |
+| **`options`** | `InitializeOptions` |
+
+### createCall(options)
+
+```typescript
+createCall(options: CreateCallOptions) => Promise<void>
+```
+
+创建新的视频通话。
+
+| 参数         | 类型                        |
+| ------------- | --------------------------- |
+| **`options`** | `CreateCallOptions` |
+
+### joinCall(options)
+
+```typescript
+joinCall(options: JoinCallOptions) => Promise<void>
+```
+
+加入现有视频通话。
+
+| 参数         | 类型                      |
+| ------------- | ------------------------- |
+| **`options`** | `JoinCallOptions` |
+
+### leaveCall()
+
+```typescript
+leaveCall() => Promise<void>
+```
+
+离开当前通话。
+
+### toggleCamera(options)
+
+```typescript
+toggleCamera(options: { enabled: boolean }) => Promise<void>
+```
+
+启用或禁用摄像头。
+
+| 参数         | 类型                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### toggleMicrophone(options)
+
+```typescript
+toggleMicrophone(options: { enabled: boolean }) => Promise<void>
+```
+
+启用或禁用麦克风。
+
+| 参数         | 类型                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### switchCamera()
+
+```typescript
+switchCamera() => Promise<void>
+```
+
+在前置和后置摄像头之间切换。
+
+### setSpeakerphone(options)
+
+```typescript
+setSpeakerphone(options: { enabled: boolean }) => Promise<void>
+```
+
+启用或禁用扬声器。
+
+| 参数         | 类型                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### sendCallInvite(options)
+
+```typescript
+sendCallInvite(options: InviteOptions) => Promise<void>
+```
+
+向用户发送通话邀请。
+
+| 参数         | 类型                    |
+| ------------- | ----------------------- |
+| **`options`** | `InviteOptions` |
+
+### acceptCall(options)
+
+```typescript
+acceptCall(options: { callId: string }) => Promise<void>
+```
+
+接受来电。
+
+| 参数         | 类型                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callId: string }` |
+
+### rejectCall(options)
+
+```typescript
+rejectCall(options: { callId: string }) => Promise<void>
+```
+
+拒绝来电。
+
+| 参数         | 类型                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callId: string }` |
+
+## 接口
+
+### InitializeOptions
+
+| 属性            | 类型              | 描述                    |
+| --------------- | ----------------- | ------------------------------ |
+| **`apiKey`**    | `string` | Stream API 密钥                 |
+| **`userId`**    | `string` | 用户 ID                        |
+| **`userToken`** | `string` | 用户身份验证令牌      |
+| **`userName`**  | `string` | 用户显示名称（可选）   |
+| **`userImage`** | `string` | 用户头像 URL（可选） |
+
+### CreateCallOptions
+
+| 属性           | 类型              | 描述                        |
+| -------------- | ----------------- | ---------------------------------- |
+| **`callId`**   | `string` | 唯一通话标识符             |
+| **`callType`** | `string` | 通话类型（例如 'default'、'audio-only'） |
+| **`members`**  | `string[]` | 要邀请的用户 ID 数组（可选） |
+
+### JoinCallOptions
+
+| 属性         | 类型              | 描述                |
+| ------------ | ----------------- | -------------------------- |
+| **`callId`** | `string` | 要加入的通话 ID            |
+
+### InviteOptions
+
+| 属性         | 类型              | 描述                |
+| ------------ | ----------------- | -------------------------- |
+| **`callId`** | `string` | 通话 ID                    |
+| **`userId`** | `string` | 要邀请的用户 ID          |
+
+## 事件监听器
+
+### 可用事件
+
+- `callStarted` - 通话已开始
+- `callEnded` - 通话已结束
+- `participantJoined` - 参与者加入通话
+- `participantLeft` - 参与者离开通话
+- `incomingCall` - 收到来电
+- `callAccepted` - 通话已被接受
+- `callRejected` - 通话已被拒绝
+- `error` - 发生错误
+
+### 事件示例
+
+```typescript
+// 监听来电
+StreamCall.addListener('incomingCall', (data) => {
+  console.log('来电来自：', data.callerId);
+  console.log('来电者姓名：', data.callerName);
+
+  // 显示来电界面
+  showIncomingCallScreen({
+    callerId: data.callerId,
+    callerName: data.callerName,
+    callerImage: data.callerImage,
+    callId: data.callId
+  });
+});
+
+// 监听通话接受
+StreamCall.addListener('callAccepted', (data) => {
+  console.log('通话已接受');
+  // 导航到通话界面
+});
+
+// 监听错误
+StreamCall.addListener('error', (error) => {
+  console.error('通话错误：', error.message);
+  // 适当处理错误
+});
+
+// 使用完毕后移除监听器
+const listener = await StreamCall.addListener('callStarted', (data) => {
+  console.log('通话已开始');
+});
+
+// 稍后...
+listener.remove();
+```
+
+## 完整示例
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+class VideoCallService {
+  async initialize(userId: string, userName: string) {
+    try {
+      await StreamCall.initialize({
+        apiKey: 'your-stream-api-key',
+        userId: userId,
+        userToken: await this.getUserToken(userId),
+        userName: userName
+      });
+
+      this.setupEventListeners();
+    } catch (error) {
+      console.error('初始化 Stream 失败：', error);
+    }
+  }
+
+  setupEventListeners() {
+    // 处理来电
+    StreamCall.addListener('incomingCall', async (data) => {
+      const accepted = await this.showIncomingCallDialog(data);
+
+      if (accepted) {
+        await StreamCall.acceptCall({ callId: data.callId });
+        await StreamCall.joinCall({ callId: data.callId });
+      } else {
+        await StreamCall.rejectCall({ callId: data.callId });
+      }
+    });
+
+    // 处理通话事件
+    StreamCall.addListener('callStarted', () => {
+      console.log('通话已开始');
+    });
+
+    StreamCall.addListener('callEnded', () => {
+      console.log('通话已结束');
+      this.navigateToHome();
+    });
+
+    StreamCall.addListener('participantJoined', (data) => {
+      console.log('参与者已加入：', data.participantName);
+    });
+  }
+
+  async startCall(recipientId: string) {
+    try {
+      const callId = `call-${Date.now()}`;
+
+      // 创建并加入通话
+      await StreamCall.createCall({
+        callId: callId,
+        callType: 'default',
+        members: [recipientId]
+      });
+
+      await StreamCall.joinCall({ callId: callId });
+
+      // 发送邀请
+      await StreamCall.sendCallInvite({
+        callId: callId,
+        userId: recipientId
+      });
+
+      console.log('通话已启动');
+    } catch (error) {
+      console.error('启动通话失败：', error);
+    }
+  }
+
+  async endCall() {
+    try {
+      await StreamCall.leaveCall();
+      console.log('通话已结束');
+    } catch (error) {
+      console.error('结束通话失败：', error);
+    }
+  }
+
+  async toggleVideo(enabled: boolean) {
+    await StreamCall.toggleCamera({ enabled });
+  }
+
+  async toggleAudio(enabled: boolean) {
+    await StreamCall.toggleMicrophone({ enabled });
+  }
+
+  async flipCamera() {
+    await StreamCall.switchCamera();
+  }
+
+  private async getUserToken(userId: string): Promise<string> {
+    // 从后端获取用户令牌
+    const response = await fetch(`/api/stream-token?userId=${userId}`);
+    const data = await response.json();
+    return data.token;
+  }
+
+  private async showIncomingCallDialog(data: any): Promise<boolean> {
+    // 显示原生对话框或自定义界面
+    return confirm(`来自 ${data.callerName} 的来电`);
+  }
+
+  private navigateToHome() {
+    // 导航到主屏幕
+    window.location.href = '/';
+  }
+}
+
+// 用法
+const videoCall = new VideoCallService();
+await videoCall.initialize('user-123', 'John Doe');
+
+// 开始通话
+await videoCall.startCall('user-456');
+
+// 切换控制
+await videoCall.toggleVideo(false); // 禁用视频
+await videoCall.toggleAudio(false); // 静音
+await videoCall.flipCamera(); // 切换摄像头
+
+// 结束通话
+await videoCall.endCall();
+```
+
+## 最佳实践
+
+- 在应用生命周期早期初始化 SDK
+- 在开始通话之前处理权限请求
+- 实现适当的网络问题错误处理
+- 在组件卸载时清理监听器
+- 在实际设备上测试（不仅仅是模拟器）
+- 实现网络中断的重新连接逻辑
+- 为通话状态提供视觉反馈
+- 处理后台/前台转换
+
+## 本地化
+
+该插件支持原生 UI 元素的多语言。在平台特定的设置中进行配置。
+
+## 使用案例
+
+- 一对一视频通话
+- 群组视频会议
+- 纯音频通话
+- 屏幕共享会话
+- 客户支持视频聊天
+- 远程医疗咨询
+- 远程协作

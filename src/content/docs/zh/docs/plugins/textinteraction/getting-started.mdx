@@ -1,0 +1,274 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和使用文本交互插件来控制 iOS 文本选择放大镜和放大器。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 平台支持
+
+- **iOS**：iOS 15.0+（需要 UITextInteraction API）
+- **Android**：无操作（返回不支持）
+- **Web**：无操作（返回不支持）
+
+## 使用示例
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+// 禁用文本交互（移除放大镜/放大器）
+const result = await TextInteraction.setEnabled({ enabled: false });
+
+if (result.success) {
+  console.log('文本交互已禁用');
+} else {
+  console.log('此平台不支持');
+}
+
+// 在显示文本输入之前重新启用文本交互
+await TextInteraction.setEnabled({ enabled: true });
+```
+
+## API 参考
+
+### setEnabled(options)
+
+```typescript
+setEnabled(options: { enabled: boolean }) => Promise<{ success: boolean }>
+```
+
+启用或禁用 iOS 文本交互（放大镜和选择手柄）。
+
+| 参数         | 类型                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+**返回：** `Promise<{ success: boolean }>`
+
+- 如果操作成功（iOS 15+），返回 `{ success: true }`
+- 如果不支持（Android、Web 或 iOS < 15），返回 `{ success: false }`
+
+## 实际使用案例
+
+### 自助服务终端应用
+
+在自助服务终端模式下禁用文本交互以防止用户访问复制/粘贴菜单：
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function enterKioskMode() {
+  // 在自助服务终端模式下禁用文本交互
+  const result = await TextInteraction.setEnabled({ enabled: false });
+
+  if (result.success) {
+    console.log('自助服务终端模式：文本交互已禁用');
+  }
+}
+
+async function exitKioskMode() {
+  // 退出自助服务终端模式时重新启用文本交互
+  await TextInteraction.setEnabled({ enabled: true });
+  console.log('自助服务终端模式：文本交互已启用');
+}
+```
+
+### 游戏体验
+
+在游戏过程中移除放大镜，并在文本输入时恢复：
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class GameController {
+  async startGame() {
+    // 游戏过程中禁用文本交互
+    await TextInteraction.setEnabled({ enabled: false });
+    console.log('游戏已开始 - 文本交互已禁用');
+  }
+
+  async showTextInput() {
+    // 显示输入之前启用文本交互
+    await TextInteraction.setEnabled({ enabled: true });
+    console.log('文本输入准备就绪 - 交互已启用');
+
+    // 显示输入字段
+    this.displayInputField();
+  }
+
+  async hideTextInput() {
+    // 隐藏输入并再次禁用交互
+    this.hideInputField();
+    await TextInteraction.setEnabled({ enabled: false });
+  }
+}
+```
+
+### 互动装置
+
+为数字标牌和互动显示屏控制文本交互：
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function setupInteractiveDisplay() {
+  // 为显示模式禁用文本交互
+  await TextInteraction.setEnabled({ enabled: false });
+
+  // 为显示交互设置触摸处理程序
+  document.addEventListener('touchstart', handleDisplayTouch);
+}
+
+async function enableUserInput() {
+  // 当用户需要输入数据时启用文本交互
+  const result = await TextInteraction.setEnabled({ enabled: true });
+
+  if (result.success) {
+    showInputForm();
+  } else {
+    // 不支持平台的回退
+    showInputFormWithoutTextInteraction();
+  }
+}
+```
+
+### 表单管理
+
+根据表单状态切换文本交互：
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class FormManager {
+  private textInteractionEnabled = true;
+
+  async disableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: false });
+    this.textInteractionEnabled = false;
+    return result.success;
+  }
+
+  async enableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: true });
+    this.textInteractionEnabled = true;
+    return result.success;
+  }
+
+  async onFormFocus() {
+    // 显示键盘之前始终启用
+    await this.enableTextSelection();
+  }
+
+  async onFormBlur() {
+    // 输入完成后可选择禁用
+    await this.disableTextSelection();
+  }
+}
+```
+
+### 条件文本交互
+
+具有平台意识的文本交互控制：
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+import { Capacitor } from '@capacitor/core';
+
+async function toggleTextInteraction(enabled: boolean) {
+  // 仅在 iOS 上尝试
+  if (Capacitor.getPlatform() === 'ios') {
+    const result = await TextInteraction.setEnabled({ enabled });
+
+    if (result.success) {
+      console.log(`文本交互${enabled ? '已启用' : '已禁用'}`);
+    } else {
+      console.log('此 iOS 版本不支持文本交互');
+    }
+  } else {
+    console.log('文本交互控制仅在 iOS 上可用');
+  }
+}
+
+// 用法
+await toggleTextInteraction(false); // 禁用
+await toggleTextInteraction(true);  // 启用
+```
+
+## 最佳实践
+
+- **在文本输入之前始终重新启用**：在需要时禁用文本交互，但在显示文本输入字段或键盘之前始终重新启用
+- **检查平台支持**：验证 `result.success` 以优雅地处理不支持的平台
+- **iOS 专用功能**：此插件仅适用于 iOS；为 Android 和 Web 实现回退
+- **用户体验**：考虑禁用文本交互的用户体验影响
+- **状态管理**：跟踪启用/禁用状态以避免冗余调用
+
+## 重要提醒
+
+1. **为文本输入重新启用**：在显示文本输入字段之前，始终调用 `setEnabled({ enabled: true })`，否则用户将无法正确选择或编辑文本
+
+2. **平台检测**：该插件在 Android、Web 和低于 15.0 版本的 iOS 上返回 `{ success: false }`
+
+3. **无视觉反馈**：禁用文本交互会移除放大镜但不提供视觉反馈 - 如需要，请实现您自己的 UI 指示器
+
+4. **安全默认值**：文本交互系统默认启用，与 iOS 的标准行为匹配
+
+## 限制
+
+- 仅限 iOS 15.0+（需要 UITextInteraction API）
+- 对 Android 或 Web 平台无效
+- 无法选择性地仅禁用放大镜或仅禁用选择手柄
+- 当用户尝试使用禁用功能时没有回调
+
+## 使用案例
+
+- **自助服务终端应用**：在受控装置上防止复制/粘贴
+- **游戏体验**：在游戏过程中移除放大镜
+- **互动显示**：在数字标牌上控制文本交互
+- **自定义文本编辑器**：构建专门的文本编辑体验
+- **安全性**：防止在敏感区域进行文本选择
+
+## 故障排除
+
+### 文本交互未禁用
+
+- 验证 iOS 版本是否为 15.0 或更高
+- 检查 `result.success` 是否返回 `true`
+- 确保没有其他代码重新启用文本交互
+
+### 用户无法编辑文本
+
+- 确保在显示文本输入之前调用了 `setEnabled({ enabled: true })`
+- 通过检查 `result.success` 验证启用调用是否成功
+- 在实际 iOS 设备上测试（不仅仅是模拟器）

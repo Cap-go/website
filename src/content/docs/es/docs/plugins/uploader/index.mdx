@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-uploader"
+locale: es
+description: Plugin de subida de archivos en segundo plano para apps Capacitor con seguimiento de progreso y subidas reanudables.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Sube archivos en segundo plano con seguimiento de progreso, subidas reanudables y manejo consciente de red para apps Capacitor.
+  image:
+    file: ~public/icons/plugins/uploader.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/uploader/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-uploader/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Subidas en segundo plano" icon="rocket">
+    Continúa subidas incluso cuando la app está en segundo plano 🚀
+  </Card>
+  <Card title="Seguimiento de progreso" icon="list-format">
+    Progreso de subida en tiempo real con estadísticas detalladas 📊
+  </Card>
+  <Card title="Subidas reanudables" icon="download">
+    Resume automáticamente subidas interrumpidas 🔄
+  </Card>
+  <Card title="Documentación Completa" icon="open-book">
+    Consulta la [Documentación](/docs/plugins/uploader/getting-started/) para dominar el plugin en solo unos minutos.
+  </Card>
+</CardGrid>

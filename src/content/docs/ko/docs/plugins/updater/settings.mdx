@@ -1,0 +1,527 @@
+---
+title: "설정"
+locale: ko
+description: "Capacitor Updater에 사용 가능한 모든 설정, capacitor config에서 설정할 수 있는 모든 구성 및 그 용도"
+sidebar:
+  order: 8
+---
+
+import {  Aside } from '@astrojs/starlight/components';
+
+업데이트 시스템을 더 세밀하게 제어하려면 다음 설정으로 구성할 수 있습니다:
+
+<Aside type="tip">
+capacitor.config 파일의 이러한 설정을 변경하려면 플랫폼을 동기화하고 프로덕션 앱이 받을 수 있도록 스토어에 출시해야 합니다.
+</Aside>
+
+
+## `appReadyTimeout`
+
+> 업데이트가 '실패'로 간주되기 전에 네이티브 플러그인이 대기해야 하는 밀리초를 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `10000` (10초)
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "appReadyTimeout": 1000
+    }
+  }
+}
+```
+
+## `responseTimeout`
+
+> 네이티브 플러그인이 API 타임아웃으로 간주하기 전에 대기해야 하는 밀리초를 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `20` (20초)
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "responseTimeout": 10 // (10 seconds)
+    }
+  }
+}
+```
+
+## `autoDeleteFailed`
+
+> 플러그인이 실패한 번들을 자동으로 삭제해야 하는지 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoDeleteFailed": false
+    }
+  }
+}
+```
+
+## `autoDeletePrevious`
+
+> 성공적인 업데이트 후 플러그인이 이전 번들을 자동으로 삭제해야 하는지 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoDeletePrevious": false
+    }
+  }
+}
+```
+
+## `autoUpdate`
+
+> 플러그인이 업데이트 서버를 통해 자동 업데이트를 사용해야 하는지 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": false
+    }
+  }
+}
+```
+
+## `updateUrl`
+
+> 업데이트 확인이 전송되는 URL / 엔드포인트를 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `https://plugin.capgo.app/updates`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "updateUrl": "https://example.com/api/auto_update"
+    }
+  }
+}
+```
+
+## `statsUrl`
+
+> 업데이트 통계가 전송되는 URL / 엔드포인트를 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다. 통계 보고를 비활성화하려면 ""로 설정하세요.
+
+기본값: `https://plugin.capgo.app/stats`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "statsUrl": "https://example.com/api/stats"
+    }
+  }
+}
+```
+
+## `publicKey`
+
+> 종단 간 라이브 업데이트 암호화 버전 2의 공개 키를 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "publicKey": "YOUR_PUBLIC_KEY"
+    }
+  }
+}
+```
+
+## `directUpdate`
+
+> 플러그인이 언제 직접 업데이트를 설치해야 하는지 구성합니다. autoUpdate 모드에만 해당됩니다.
+> 10MB 미만의 앱 및 --partial 플래그를 사용하여 완료된 업로드에 적합합니다.
+> Zip 또는 10MB 이상의 앱은 사용자가 업데이트하기에 상대적으로 느립니다.
+
+옵션:
+- `false`: 직접 업데이트를 절대 수행하지 않음 (기본 동작 사용: 시작 시 다운로드, 백그라운드 시 설정)
+- `'atInstall'`: 앱이 설치되거나 스토어에서 업데이트될 때만 직접 업데이트, 그렇지 않으면 directUpdate = false로 작동
+- `'onLaunch'`: 앱이 설치되거나 스토어에서 업데이트되거나 앱 종료 후에만 직접 업데이트, 그렇지 않으면 directUpdate = false로 작동
+- `'always'`: 이전의 모든 경우(앱 설치, 스토어에서 업데이트, 앱 종료 또는 앱 재개 후)에 직접 업데이트, directUpdate = false로 절대 작동하지 않음
+- `true`: (사용 중단) 이전 버전과의 호환성을 위해 "always"와 동일
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true,
+      "directUpdate": "atInstall"
+    }
+  }
+}
+```
+
+## `resetWhenUpdate`
+
+> 새로운 네이티브 앱 번들이 장치에 설치될 때 이전에 다운로드한 번들을 자동으로 삭제합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "resetWhenUpdate": false
+    }
+  }
+}
+```
+
+## `defaultChannel`
+
+> 구성에서 앱의 기본 채널을 설정합니다. 대소문자를 구분합니다.
+> 이 설정은 클라우드에 설정된 기본 채널을 재정의하지만 클라우드에서 이루어진 재정의는 여전히 존중됩니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "defaultChannel": "production"
+    }
+  }
+}
+```
+
+## `appId`
+
+> 구성에서 앱의 앱 ID를 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "appId": "com.example.app"
+    }
+  }
+}
+```
+
+## `version`
+
+> 앱의 현재 버전을 구성합니다. 첫 번째 업데이트 요청에 사용됩니다.
+> 설정하지 않으면 플러그인이 네이티브 코드에서 버전을 가져옵니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "version": "1.0.0"
+    }
+  }
+}
+```
+
+## `channelUrl`
+
+> 채널 작업을 위한 URL / 엔드포인트를 구성합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `https://plugin.capgo.app/channel_self`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "channelUrl": "https://example.com/api/channel"
+    }
+  }
+}
+```
+
+## `autoSplashscreen`
+
+> directUpdate를 사용할 때 스플래시 화면 숨기기를 자동으로 처리합니다. 활성화되면 플러그인이 업데이트가 적용된 후 또는 업데이트가 필요하지 않을 때 자동으로 스플래시 화면을 숨깁니다.
+> 이렇게 하면 수동으로 appReady 이벤트를 수신하고 SplashScreen.hide()를 호출할 필요가 없습니다.
+> directUpdate가 "atInstall", "always" 또는 true로 설정된 경우에만 작동합니다.
+> @capacitor/splash-screen 플러그인이 설치되어 있고 launchAutoHide: false로 구성되어 있어야 합니다.
+> autoUpdate 및 directUpdate가 활성화되어 있어야 합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true,
+      "directUpdate": "atInstall",
+      "autoSplashscreen": true
+    }
+  }
+}
+```
+
+## `periodCheckDelay`
+
+> 주기적 업데이트 확인의 지연 시간을 구성합니다. 단위는 초입니다.
+> 600초(10분) 미만일 수 없습니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `600` (10분)
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "periodCheckDelay": 600 // (10 minutes)
+    }
+  }
+}
+```
+
+## `allowModifyUrl`
+
+> 플러그인이 JavaScript 측에서 updateUrl, statsUrl 및 channelUrl을 동적으로 수정할 수 있도록 허용합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "allowModifyUrl": true
+    }
+  }
+}
+```
+
+## `keepUrlPathAfterReload`
+
+> 플러그인이 리로드 후 URL 경로를 유지하도록 구성합니다.
+
+<Aside type="caution">
+리로드가 트리거되면 'window.history'가 지워집니다.
+</Aside>
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "keepUrlPathAfterReload": true
+    }
+  }
+}
+```
+
+## `disableJSLogging`
+
+> 플러그인의 JavaScript 로깅을 비활성화합니다. true인 경우 플러그인은 JavaScript 콘솔에 로그하지 않습니다. 네이티브 로그만 수행됩니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "disableJSLogging": true
+    }
+  }
+}
+```
+
+## `shakeMenu`
+
+> 디버깅/테스트 목적으로 업데이트 메뉴를 표시하기 위해 흔들기 제스처를 활성화합니다.
+
+Android 및 iOS에만 사용 가능합니다.
+
+기본값: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "shakeMenu": true
+    }
+  }
+}
+```
+
+## 개발 설정
+
+### `localHost`
+
+> CLI가 테스트 또는 자체 호스팅 업데이트 서버용 로컬 서버를 사용하도록 구성합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localHost": "http://localhost:5173"
+    }
+  }
+}
+```
+
+### `localWebHost`
+
+> CLI가 테스트 또는 자체 호스팅 업데이트 서버용 로컬 서버를 사용하도록 구성합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localWebHost": "http://localhost:5173"
+    }
+  }
+}
+```
+
+### `localSupa`
+
+> CLI가 테스트 또는 자체 호스팅 업데이트 서버용 로컬 서버를 사용하도록 구성합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localSupa": "http://localhost:54321"
+    }
+  }
+}
+```
+
+### `localSupaAnon`
+
+> CLI가 테스트용 로컬 서버를 사용하도록 구성합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localSupaAnon": "YOUR_LOCAL_ANON_KEY"
+    }
+  }
+}
+```
+
+### `localApi`
+
+> CLI가 테스트용 로컬 API를 사용하도록 구성합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localApi": "http://localhost:54321/functions/v1"
+    }
+  }
+}
+```
+
+### `localApiFiles`
+
+> CLI가 테스트용 로컬 파일 API를 사용하도록 구성합니다.
+
+기본값: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localApiFiles": "http://localhost:54321/functions/v1/files"
+    }
+  }
+}
+```
+
+<Aside type="tip">
+네이티브 앱 출시가 필요 없이 채널별로 구성할 수 있는 [Capgo 웹 앱](https://console.capgo.app/login)에서 사용 가능한 추가 설정이 있습니다.
+</Aside>

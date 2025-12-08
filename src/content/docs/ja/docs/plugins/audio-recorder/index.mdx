@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-audio-recorder"
+description: CapacitorでiOS、Android、Webでオーディオを録音
+locale: ja
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Capacitorアプリケーション用の高品質オーディオ録音
+  image:
+    file: ~public/icons/plugins/audio-recorder.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/audio-recorder/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-audio-recorder
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="クロスプラットフォーム" icon="laptop">
+    統一されたAPIでiOS、Android、Webでオーディオを録音
+  </Card>
+  <Card title="複数のフォーマット" icon="document">
+    AAC、MP3、WAVエンコーディングに対応
+  </Card>
+  <Card title="設定可能な品質" icon="setting">
+    最適な品質のためにサンプルレート、ビットレート、チャンネルを制御
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    [ドキュメント](/docs/plugins/audio-recorder/getting-started/)をチェックして、数分でプラグインをマスター。
+  </Card>
+</CardGrid>

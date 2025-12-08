@@ -1,0 +1,83 @@
+---
+title: Comenzar
+description: Sincroniza la interfaz de usuario de tu reproductor con los controles multimedia nativos usando el plugin Media Session.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el plugin**
+   <PackageManagers pkg="@capgo/capacitor-media-session" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar plataformas**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+> ℹ️ La API de Media Session está disponible en Android (navegadores basados en Chrome, WebView) y muchos navegadores de escritorio. En plataformas no compatibles, las llamadas se resuelven sin tener efecto, por lo que protege tu interfaz de usuario en consecuencia.
+
+## Publicar metadatos
+
+```typescript
+import { MediaSession } from '@capgo/capacitor-media-session';
+
+await MediaSession.setMetadata({
+  title: 'Weekly Tech Podcast',
+  artist: 'Capgo Studio',
+  album: 'Season 2',
+  artwork: [
+    { src: 'https://cdn.example.com/covers/s02e05-512.png', sizes: '512x512', type: 'image/.png' },
+  ],
+});
+```
+
+## Actualizar el estado de reproducción
+
+```typescript
+await MediaSession.setPlaybackState({ playbackState: 'playing' });
+
+// Pausar más tarde si es necesario
+await MediaSession.setPlaybackState({ playbackState: 'paused' });
+```
+
+## Manejar acciones multimedia
+
+```typescript
+const pauseHandler = async () => {
+  player.pause();
+  await MediaSession.setPlaybackState({ playbackState: 'paused' });
+};
+
+await MediaSession.setActionHandler({ action: 'pause' }, pauseHandler);
+await MediaSession.setActionHandler({ action: 'play' }, async () => {
+  await player.play();
+  await MediaSession.setPlaybackState({ playbackState: 'playing' });
+});
+
+// Eliminar un manejador cuando descartes el reproductor
+await MediaSession.setActionHandler({ action: 'pause' }, null);
+```
+
+## Mantener la posición sincronizada
+
+```typescript
+const updatePosition = async () => {
+  await MediaSession.setPositionState({
+    duration: player.duration,
+    position: player.currentTime,
+    playbackRate: player.playbackRate,
+  });
+};
+
+player.ontimeupdate = updatePosition;
+player.onratechange = updatePosition;
+```
+
+## Recomendaciones
+
+- Actualiza los metadatos cuando cambie la pista para que las notificaciones y los altavoces inteligentes se mantengan actualizados.
+- Limita las actualizaciones de posición (por ejemplo, cada 250 ms) para evitar saturar la capa nativa.
+- Siempre elimina los manejadores de acciones al desmontar una instancia del reproductor para evitar fugas accidentales.

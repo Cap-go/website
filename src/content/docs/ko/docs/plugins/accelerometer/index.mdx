@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-accelerometer"
+description: Capacitor로 기기 가속도계 측정값 읽기
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+locale: ko
+hero:
+  tagline: 가속도계 센서에서 기기 움직임 및 가속도 데이터에 액세스
+  image:
+    file: ~public/icons/plugins/accelerometer.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/accelerometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-accelerometer
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="3축 가속도" icon="rocket">
+    X, Y, Z 축에서 가속력 측정
+  </Card>
+  <Card title="움직임 감지" icon="star">
+    기기 흔들림, 기울임 및 움직임 감지
+  </Card>
+  <Card title="실시간 업데이트" icon="setting">
+    가속도 데이터의 지속적인 모니터링
+  </Card>
+  <Card title="포괄적인 문서" icon="open-book">
+    몇 분 안에 플러그인을 마스터하려면 [문서](/docs/plugins/accelerometer/getting-started/)를 확인하세요.
+  </Card>
+</CardGrid>

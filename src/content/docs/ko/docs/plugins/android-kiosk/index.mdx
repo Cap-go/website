@@ -1,0 +1,51 @@
+---
+title: "@capgo/capacitor-android-kiosk"
+description: Capacitor용 Android Kiosk Mode 플러그인 - 런처 기능으로 기기를 키오스크 모드로 잠금
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: Capacitor 앱을 위한 하드웨어 버튼 및 런처 기능에 대한 완전한 제어로 Android 기기를 키오스크 모드로 잠그세요.
+  image:
+    file: ~public/icons/plugins/android-kiosk.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/android-kiosk/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-kiosk/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="키오스크 모드" icon="rocket">
+    시스템 UI 숨기기 및 몰입형 전체 화면 모드 진입
+  </Card>
+  <Card title="런처 통합" icon="setting">
+    앱을 기기 런처/홈 앱으로 설정
+  </Card>
+  <Card title="하드웨어 키 제어" icon="warning">
+    특정 하드웨어 버튼 차단 또는 허용 (뒤로, 홈, 최근, 볼륨, 전원)
+  </Card>
+  <Card title="상태 감지" icon="approve-check">
+    키오스크 모드가 활성 상태인지 또는 앱이 런처로 설정되어 있는지 확인
+  </Card>
+  <Card title="Android 6.0+" icon="star">
+    Android API 23부터 Android 15 (API 35)까지 지원
+  </Card>
+  <Card title="포괄적인 문서" icon="open-book">
+    [문서](/docs/plugins/android-kiosk/getting-started/)를 확인하여 몇 분 안에 키오스크 모드를 통합하세요.
+  </Card>
+</CardGrid>
+
+## 플랫폼 지원
+
+이 플러그인은 **Android 전용**입니다. iOS 키오스크 모드 기능의 경우 기기의 내장 [Guided Access](https://support.apple.com/en-us/HT202612) 기능을 사용하세요.

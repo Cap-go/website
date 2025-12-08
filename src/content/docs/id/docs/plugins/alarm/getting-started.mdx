@@ -1,0 +1,139 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Capacitor Alarm untuk mengelola alarm native di iOS dan Android.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Persyaratan
+
+- **iOS**: Hanya iOS 26+. Plugin ini bergantung pada `AlarmKit` API dan akan melaporkan tidak didukung di versi sebelumnya atau ketika framework tidak tersedia.
+- **Android**: Menggunakan intent `AlarmClock`; perilaku tergantung pada aplikasi Clock default dan kebijakan OEM.
+
+Catatan: Plugin ini hanya mengekspos aksi alarm native (create/open). Plugin ini tidak mengimplementasikan penjadwalan/CRUD alarm in-app kustom.
+
+## API
+
+### createAlarm(...)
+
+```typescript
+createAlarm(options: NativeAlarmCreateOptions) => Promise<NativeActionResult>
+```
+
+Buat alarm OS native menggunakan aplikasi clock platform.
+Di Android ini menggunakan intent Alarm Clock; di iOS ini menggunakan AlarmKit jika tersedia (iOS 26+).
+
+| Param         | Type                                                                          |
+| ------------- | ----------------------------------------------------------------------------- |
+| **`options`** | `NativeAlarmCreateOptions` |
+
+**Mengembalikan:** `Promise<NativeActionResult>`
+
+### openAlarms()
+
+```typescript
+openAlarms() => Promise<NativeActionResult>
+```
+
+Buka UI daftar alarm native platform, jika tersedia.
+
+**Mengembalikan:** `Promise<NativeActionResult>`
+
+### getOSInfo()
+
+```typescript
+getOSInfo() => Promise<OSInfo>
+```
+
+Dapatkan informasi tentang OS dan kemampuannya.
+
+**Mengembalikan:** `Promise<OSInfo>`
+
+### requestPermissions(...)
+
+```typescript
+requestPermissions(options?: { exactAlarm?: boolean | undefined; } | undefined) => Promise<PermissionResult>
+```
+
+Minta izin yang relevan untuk penggunaan alarm di platform.
+Di Android, dapat mengarahkan ke pengaturan untuk alarm exact.
+
+| Param         | Type                                   |
+| ------------- | -------------------------------------- |
+| **`options`** | `{ exactAlarm?: boolean; }` |
+
+**Mengembalikan:** `Promise<PermissionResult>`
+
+## Interface
+
+### NativeActionResult
+
+| Prop          | Type                 |
+| ------------- | -------------------- |
+| **`success`** | `boolean` |
+| **`message`** | `string`  |
+
+### NativeAlarmCreateOptions
+
+Opsi untuk membuat alarm OS native melalui aplikasi clock platform.
+
+| Prop          | Type                 | Description                                  |
+| ------------- | -------------------- | -------------------------------------------- |
+| **`hour`**    | `number`  | Jam dalam format 24 jam (0-23)             |
+| **`minute`**  | `number`  | Menit dalam jam (0-59)                        |
+| **`label`**   | `string`  | Label opsional untuk alarm                 |
+| **`skipUi`**  | `boolean` | Khusus Android: upayakan melewati UI jika memungkinkan |
+| **`vibrate`** | `boolean` | Khusus Android: atur alarm untuk bergetar           |
+
+### OSInfo
+
+Informasi yang dikembalikan tentang OS saat ini dan kemampuannya.
+
+| Prop                                 | Type                 | Description                                                 |
+| ------------------------------------ | -------------------- | ----------------------------------------------------------- |
+| **`platform`**                       | `string`  | 'ios' \| 'android' \| 'web'                                 |
+| **`version`**                        | `string`  | String versi OS                                           |
+| **`supportsNativeAlarms`**           | `boolean` | Apakah platform mengekspos integrasi aplikasi alarm native |
+| **`supportsScheduledNotifications`** | `boolean` | Apakah penjadwalan notifikasi lokal didukung         |
+| **`canScheduleExactAlarms`**         | `boolean` | Khusus Android: apakah alarm exact diizinkan              |
+
+### PermissionResult
+
+Hasil dari permintaan izin.
+
+| Prop          | Type                                                             | Description                        |
+| ------------- | ---------------------------------------------------------------- | ---------------------------------- |
+| **`granted`** | `boolean`                                             | Izin keseluruhan untuk ruang lingkup yang diminta  |
+| **`details`** | `Record<string, boolean>` | Detail opsional berdasarkan kunci izin |

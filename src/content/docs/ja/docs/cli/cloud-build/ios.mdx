@@ -1,0 +1,375 @@
+---
+title: iOSビルド
+description: Capgo Cloud BuildでiOSアプリを設定およびビルドする
+sidebar:
+  order: 2
+locale: ja
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgoの専用Macインフラストラクチャを使用して、iOSアプリをビルドしてTestFlightおよびApp Storeに送信します。
+
+## ビルド前の準備
+
+<CardGrid>
+  <Card title="⚠️ 最初にiOS認証情報を設定してください" icon="warning">
+    **必須:** ビルドする前に、iOS認証情報を保存する必要があります。
+
+    [iOS認証情報を設定 →](/docs/cli/cloud-build/credentials/#saving-ios-credentials)
+  </Card>
+</CardGrid>
+
+## iOSビルドの仕組み
+
+iOSビルドは、オンデマンドでプロビジョニングされた専用Macマシン（Scaleway Mac minis M4）で実行されます:
+
+- **ハードウェア**: macOS 15を搭載したApple Silicon Mac minis
+- **ビルドツール**: Fastlaneを使用したXcode（カスタムCapgo設定）
+- **分離**: 各ビルドは個別のmacOSユーザーアカウントとして実行
+- **有効期間**: マシンは24時間リースされ、自動的にクリーンアップされます
+- **セキュリティ**: すべてのファイルとユーザーアカウントは、マシン解放後に削除されます
+
+## 前提条件
+
+iOSでビルドする前に、以下が必要です:
+
+### 1. 開発環境
+
+- XcodeがインストールされたMacコンピュータ（初期証明書設定用）
+- 有効なApple Developerアカウント（年間$99）
+- `npx cap open ios`でアプリが正常にビルドされる
+
+### 2. コード署名証明書
+
+ビルドに応じて、以下のいずれかの証明書タイプが必要です:
+
+| ビルドタイプ | 必要な証明書 | プロビジョニングプロファイル |
+|------------|---------------------|---------------------|
+| **Development** | Apple Development | 開発用プロファイル |
+| **Ad Hoc** | Apple Distribution | Ad Hocプロファイル |
+| **App Store** | Apple Distribution | App Storeプロファイル |
+
+#### iOS証明書とプロビジョニングプロファイルの取得方法
+
+<Aside type="tip">
+スクリーンショット付きの詳細なステップバイステップガイドについては、以下をご覧ください:
+- [iOS証明書ガイド](https://capawesome.io/cloud/native-builds/certificates/ios/)
+- [ブログ: GitHub Actionsを使用した自動iOSビルド](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
+</Aside>
+
+**クイック概要:**
+
+<Steps>
+
+1. **証明書署名要求（CSR）の作成**
+   - Macでキーチェーンアクセスを開く
+   - キーチェーンアクセス → 証明書アシスタント → 認証局に証明書を要求に移動
+   - メールアドレスと名前を入力し、「ディスクに保存」を選択
+   - `.certSigningRequest`ファイルを保存
+
+2. **Apple Developer Portalで証明書を生成**
+   - [Apple Developer証明書](https://developer.apple.com/account/resources/certificates)に移動
+   - 「+」をクリックして新しい証明書を作成
+   - 証明書タイプを選択（App Storeビルドの場合はiOS Distribution）
+   - CSRファイルをアップロード
+   - 証明書（`.cer`ファイル）をダウンロード
+
+3. **証明書を.p12としてエクスポート**
+   - ダウンロードした`.cer`ファイルをダブルクリックしてキーチェーンに追加
+   - キーチェーンアクセスで、「自分の証明書」の下にある証明書を見つける
+   - 右クリック → 「Apple Distribution...」をエクスポート
+   - `.p12`形式で保存し、パスワードを設定（このパスワードを保存してください！）
+
+4. **プロビジョニングプロファイルの作成**
+   - [Apple Developerプロファイル](https://developer.apple.com/account/resources/profiles)に移動
+   - 「+」をクリックして新しいプロファイルを作成
+   - プロファイルタイプを選択（本番ビルドの場合はApp Store）
+   - App IDを選択
+   - 作成した証明書を選択
+   - `.mobileprovision`ファイルをダウンロード
+
+</Steps>
+
+### 3. App Store Connect APIキー（推奨）
+
+TestFlightへの自動送信のために、APIキーを作成します:
+
+<Steps>
+
+1. [App Store Connect](https://appstoreconnect.apple.com/) → ユーザーとアクセス → キーに移動
+2. 「+」ボタンをクリックして新しいキーを作成
+3. 名前を付け（例: "Capgo CI"）、「Developer」ロールを選択
+4. `.p8`ファイルをダウンロード（1回しかダウンロードできません！）
+5. **キーID**と**発行者ID**をメモ
+
+</Steps>
+
+<Aside type="note">
+**チームID**は、Apple DeveloperアカウントのメンバーシップDetails下でも見つけることができます。
+</Aside>
+
+## ビルド設定
+
+### 必須の環境変数
+
+ビルド前に以下の認証情報を設定してください:
+
+```bash
+# iOS署名（必須）
+BUILD_CERTIFICATE_BASE64="<base64-encoded-p12-certificate>"
+BUILD_PROVISION_PROFILE_BASE64="<base64-encoded-mobileprovision>"
+P12_PASSWORD="<certificate-password>"
+
+# App Store Connect API（送信用）
+APPLE_KEY_ID="ABC1234567"
+APPLE_ISSUER_ID="00000000-0000-0000-0000-000000000000"
+APPLE_KEY_CONTENT="<base64-encoded-p8-key>"
+
+# 追加設定
+APP_STORE_CONNECT_TEAM_ID="1234567890"
+APPLE_PROFILE_NAME="App Store com.example.app"
+```
+
+### Base64認証情報の生成
+
+<Aside type="tip">
+Capgo用に証明書をエンコードするには、以下のコマンドを使用してください:
+</Aside>
+
+**証明書（.p12）:**
+```bash
+base64 -i YourCertificate.p12 | pbcopy
+```
+
+**プロビジョニングプロファイル（.mobileprovision）:**
+```bash
+base64 -i YourProfile.mobileprovision | pbcopy
+```
+
+**App Store Connectキー（.p8）:**
+```bash
+base64 -i AuthKey_ABC1234567.p8 | pbcopy
+```
+
+Base64文字列がクリップボードにコピーされました - 環境変数またはCI/CDシークレットに貼り付けてください。
+
+## iOSでのビルド
+
+### デバッグビルド（開発）
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode debug
+```
+
+これにより、登録されたデバイスにインストールできる開発ビルドが作成されます。
+
+### リリースビルド（App Store）
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode release
+```
+
+App Store Connect API認証情報が設定されている場合、App Storeビルドを作成し、自動的にTestFlightに送信します。
+
+## CI/CD統合
+
+### GitHub Actionsの例
+
+```yaml
+name: Build iOS App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync ios
+
+      - name: Build iOS app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform ios \
+            --build-mode release
+```
+
+## ビルドプロセスの詳細
+
+### iOSビルド中の処理
+
+<Steps>
+
+1. **マシンプロビジョニング** (1-2分)
+   - Scaleway Mac miniがプロビジョニングまたは割り当てられます
+   - XcodeがプリインストールされたmacOS 15
+   - ブートストラップスクリプトが実行（初回使用の場合）
+
+2. **ユーザー分離** (~10秒)
+   - 一意のmacOSユーザーが作成: `job-<jobId>`
+   - 専用ホームディレクトリ: `/Users/job-<jobId>`
+   - 分離されたワークスペースが作成
+
+3. **プロジェクトのセットアップ** (~30秒)
+   - R2からプロジェクトzipをダウンロード
+   - ワークスペースに展開
+   - 環境変数として認証情報を注入
+
+4. **Fastlaneビルド** (3-8分)
+   - 署名証明書を含むキーチェーンが作成
+   - プロビジョニングプロファイルがインストール
+   - Xcodeビルドコマンドが実行
+   - IPAファイルが生成
+
+5. **App Storeへの送信** (1-2分、設定されている場合)
+   - IPAをApp Store Connectにアップロード
+   - TestFlightに送信
+   - Apple側で処理が開始
+
+6. **クリーンアップ** (即座)
+   - ユーザーアカウントが終了して削除
+   - ワークスペースファイルが削除
+   - 一時ファイルがクリア
+
+7. **マシンの解放** (24時間後)
+   - Macマシンが破棄
+   - すべてのデータが完全に削除
+
+</Steps>
+
+### ビルドスタック
+
+iOSビルド環境には以下が含まれます:
+
+- **macOS**: 15（最新の安定版）
+- **Xcode**: 最新の安定版
+- **Fastlane**: 最新の安定版
+- **CocoaPods**: 最新の安定版
+- **Node.js**: 18.x (LTS)
+- **Ruby**: bundlerを使用したシステムruby
+
+## ビルド時間
+
+一般的なiOSビルド時間:
+
+| ビルドタイプ | 初回ビルド | 2回目以降のビルド* |
+|------------|-------------|-------------------|
+| デバッグ | 5-7分 | 4-6分 |
+| リリース | 7-10分 | 5-8分 |
+
+*24時間以内に同じマシンが再利用される場合、2回目以降のビルドは高速になる可能性があります。
+
+<Aside type="note">
+iOSビルドは、専用Macハードウェアの要件のため**基本レートの2倍**のコストがかかります。
+</Aside>
+
+## トラブルシューティング
+
+### 一般的な問題
+
+**「Code signing failed」**
+- 証明書が正しい配布タイプであることを確認
+- プロビジョニングプロファイルがApp IDと一致することを確認
+- P12_PASSWORDが正しいことを確認
+
+**「Provisioning profile doesn't include signing certificate」**
+- 証明書を含むプロビジョニングプロファイルを再生成
+- プロファイルを再ダウンロードして再エンコード
+
+**「App Store Connect authentication failed」**
+- APPLE_KEY_ID、APPLE_ISSUER_ID、APPLE_KEY_CONTENTを確認
+- APIキーが失効していないことを確認
+- キーが「Developer」ロール以上であることを確認
+
+**「Build timeout after 10 minutes」**
+- アプリに大きなネイティブ依存関係があるか確認
+- Podfileの最適化を検討
+- ビルドが一貫してタイムアウトする場合はサポートに連絡
+
+### デバッグログ
+
+すべてのビルドログがリアルタイムでストリーミングされます。これらの主要なフェーズを確認してください:
+
+```
+✔ Machine assigned: m-abc123
+→ Creating user: job-abc123
+→ Installing CocoaPods dependencies...
+→ Building iOS app...
+→ Code signing with certificate...
+→ Uploading to App Store Connect...
+✔ Build succeeded
+```
+
+ビルドが失敗した場合、特定のFastlane/Xcodeエラーメッセージがログに明確に表示されます。
+
+## ベストプラクティス
+
+### 1. 最初にローカルでテスト
+
+クラウドビルドを使用する前に、必ずiOSビルドがローカルで機能することを確認してください:
+
+```bash
+npx cap open ios
+# Xcodeでビルド
+```
+
+### 2. 環境変数を使用
+
+証明書やキーをリポジトリにコミットしないでください。常に以下を使用してください:
+- CI/CDシークレット（GitHub、GitLab）
+- 環境変数
+- 安全なシークレット管理
+
+### 3. 依存関係のキャッシュ
+
+ビルドを高速化するために、`package.json`と`Podfile.lock`がバージョン管理にコミットされていることを確認してください。
+
+### 4. ビルド時間の監視
+
+コストを最適化するためにビルド時間を監視してください:
+
+```bash
+# CLIは最後にビルド時間を表示します
+Build succeeded in 6m 42s (13.4 billing minutes at 2× rate)
+```
+
+## 次のステップ
+
+- [Androidビルド](/docs/cli/cloud-build/android/) - Androidビルドを設定
+- [トラブルシューティング](/docs/cli/cloud-build/troubleshooting/) - 一般的なビルドの問題
+- [CLIリファレンス](/docs/cli/reference/build/) - 完全なコマンドドキュメント
+
+## お困りですか？
+
+- [トラブルシューティングガイド](/docs/cli/cloud-build/troubleshooting/)
+- [Discordコミュニティ](https://discord.com/invite/VnYRvBfgA6)
+- メール: support@capgo.app

@@ -1,0 +1,82 @@
+---
+title: Integrazioni CI/CD
+description: "Integra Capgo Live Updates con la tua piattaforma CI/CD preferita per flussi di lavoro di distribuzione automatizzati."
+sidebar:
+  order: 1
+locale: it
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Automatizza il processo di distribuzione di Capgo Live Updates integrandoti con le piattaforme CI/CD più popolari. Queste integrazioni ti permettono di distribuire automaticamente gli aggiornamenti dell'app ogni volta che apporti modifiche al codice, testare branch di funzionalità e gestire più ambienti di distribuzione.
+
+## Integrazioni disponibili
+
+Scegli la tua piattaforma CI/CD per iniziare con le distribuzioni automatizzate:
+
+<CardGrid>
+  <LinkCard
+    title="Azure DevOps"
+    description="Integra con Azure DevOps Pipelines per flussi di lavoro automatizzati di build, test e distribuzione."
+    href="/docs/live-updates/integrations/azure-devops/"
+  />
+  <LinkCard
+    title="GitLab CI/CD"
+    description="Configura pipeline GitLab CI/CD per distribuire automaticamente gli aggiornamenti della tua app con gestione completa degli ambienti."
+    href="/docs/live-updates/integrations/gitlab-ci/"
+  />
+  <LinkCard
+    title="GitHub Actions"
+    description="Usa GitHub Actions per automazione potente con distribuzioni multi-canale e protezione degli ambienti."
+    href="/docs/live-updates/integrations/github-actions/"
+  />
+  <LinkCard
+    title="Bitbucket Pipelines"
+    description="Distribuisci con Bitbucket Pipelines usando configurazioni semplici o avanzate per più ambienti."
+    href="/docs/live-updates/integrations/bitbucket-pipeline/"
+  />
+</CardGrid>
+
+## Cosa otterrai
+
+Tutte le guide di integrazione includono:
+
+- **Configurazione semplice**: Configurazione di base per iniziare rapidamente
+- **Flussi di lavoro avanzati**: Distribuzioni multi-ambiente con staging e produzione
+- **Test dei branch di funzionalità**: Distribuzione automatica dei branch di funzionalità ai canali di test
+- **Best practice di sicurezza**: Gestione sicura dei segreti e protezione degli ambienti
+- **Monitoraggio**: Notifiche e logging per lo stato della distribuzione
+
+<Aside type="tip">
+
+**Nuovo a CI/CD?** Inizia con la configurazione semplice per la tua piattaforma, poi aggiungi gradualmente funzionalità più avanzate come distribuzioni multi-canale e test automatizzati man mano che le tue esigenze crescono.
+
+</Aside>
+
+## Funzionalità comuni
+
+Ogni integrazione supporta:
+
+- **Build automatizzate**: Attiva distribuzioni sulle modifiche del codice
+- **Supporto multi-canale**: Distribuisci su canali diversi (development, staging, production)
+- **Test di Pull Request/Merge Request**: Testa le modifiche in ambienti isolati
+- **Supporto crittografia**: Distribuzioni sicure con la funzionalità di crittografia di Capgo
+- **Protezione degli ambienti**: Approvazioni manuali e accesso limitato per la produzione
+- **Notifiche**: Integrazioni con Slack, email e altre notifiche
+
+## Prerequisiti
+
+Prima di configurare qualsiasi integrazione, assicurati di avere:
+
+- Un account Capgo con un'app configurata
+- Il codice sorgente della tua app in un repository Git
+- Un token API Capgo da [console.capgo.app/apikeys](https://console.capgo.app/apikeys)
+- Node.js e npm/yarn configurati nel tuo progetto
+
+## Documentazione correlata
+
+- [Canali](/docs/live-updates/channels/) - Scopri come gestire diversi ambienti di distribuzione
+- [Crittografia](/docs/live-updates/encryption/) - Proteggi le tue distribuzioni con crittografia end-to-end
+- [Comportamento degli aggiornamenti](/docs/live-updates/update-behavior/) - Personalizza come vengono applicati gli aggiornamenti alle tue app
+
+Scegli la tua piattaforma CI/CD sopra per iniziare ad automatizzare le tue distribuzioni Capgo!

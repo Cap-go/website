@@ -1,0 +1,432 @@
+---
+title: Premiers pas
+locale: fr
+description: Apprenez à intégrer la lecture de vidéos YouTube dans votre application Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installez le package**
+   <PackageManagers pkg="@capgo/capacitor-youtube-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchronisez avec les projets natifs**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilisation de base
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+// Initialize the player
+const result = await YoutubePlayer.initialize({
+  playerId: 'youtube-player',
+  playerSize: { width: 640, height: 360 },
+  videoId: 'dQw4w9WgXcQ',
+  fullscreen: false,
+  playerVars: {
+    autoplay: 1,
+    controls: 1
+  }
+});
+
+// Play video
+await YoutubePlayer.playVideo(result.player);
+
+// Pause video
+await YoutubePlayer.pauseVideo(result.player);
+
+// Listen to player events
+YoutubePlayer.addEventListener(result.player, 'onStateChange', (event) => {
+  console.log('Player state:', event.data);
+});
+```
+
+## Référence API
+
+### initialize(options)
+
+Initialise une instance du lecteur YouTube.
+
+```typescript
+const { player, playerReady } = await YoutubePlayer.initialize({
+  playerId: 'my-player',
+  playerSize: { width: 1280, height: 720 },
+  videoId: 'VIDEO_ID',
+  fullscreen: false,
+  playerVars: {
+    autoplay: 0,
+    controls: 1,
+    rel: 0
+  }
+});
+```
+
+### Méthodes de contrôle vidéo
+
+```typescript
+// Play
+await YoutubePlayer.playVideo(playerId);
+
+// Pause
+await YoutubePlayer.pauseVideo(playerId);
+
+// Stop
+await YoutubePlayer.stopVideo(playerId);
+
+// Seek to time
+await YoutubePlayer.seekTo(playerId, seconds, allowSeekAhead);
+
+// Load video by ID
+await YoutubePlayer.loadVideoById(playerId, { videoId: 'VIDEO_ID' });
+
+// Cue video (load without playing)
+await YoutubePlayer.cueVideoById(playerId, { videoId: 'VIDEO_ID' });
+```
+
+### Contrôle de la liste de lecture
+
+```typescript
+// Load playlist
+await YoutubePlayer.loadPlaylist(playerId, {
+  listType: 'playlist',
+  list: 'PLAYLIST_ID'
+});
+
+// Cue playlist
+await YoutubePlayer.cuePlaylist(playerId, {
+  playlist: ['VIDEO_ID_1', 'VIDEO_ID_2'],
+  index: 0
+});
+
+// Navigate playlist
+await YoutubePlayer.nextVideo(playerId);
+await YoutubePlayer.previousVideo(playerId);
+await YoutubePlayer.playVideoAt(playerId, index);
+```
+
+### Contrôle audio
+
+```typescript
+// Mute/Unmute
+await YoutubePlayer.mute(playerId);
+await YoutubePlayer.unMute(playerId);
+
+const { result } = await YoutubePlayer.isMuted(playerId);
+console.log('Muted:', result.value);
+
+// Volume (0-100)
+await YoutubePlayer.setVolume(playerId, 50);
+const { result } = await YoutubePlayer.getVolume(playerId);
+```
+
+### Contrôle de lecture
+
+```typescript
+// Playback rate
+await YoutubePlayer.setPlaybackRate(playerId, 1.5);
+const { result } = await YoutubePlayer.getPlaybackRate(playerId);
+
+// Available rates
+const { result } = await YoutubePlayer.getAvailablePlaybackRates(playerId);
+console.log('Available rates:', result.value);
+
+// Loop and shuffle
+await YoutubePlayer.setLoop(playerId, true);
+await YoutubePlayer.setShuffle(playerId, true);
+```
+
+### Contrôle de qualité
+
+```typescript
+// Set quality
+await YoutubePlayer.setPlaybackQuality(playerId, 'hd720');
+
+// Get current quality
+const { result } = await YoutubePlayer.getPlaybackQuality(playerId);
+
+// Get available qualities
+const { result } = await YoutubePlayer.getAvailableQualityLevels(playerId);
+```
+
+### Informations du lecteur
+
+```typescript
+// Duration
+const { result } = await YoutubePlayer.getDuration(playerId);
+
+// Current time
+const { result } = await YoutubePlayer.getCurrentTime(playerId);
+
+// Loaded fraction
+const { result } = await YoutubePlayer.getVideoLoadedFraction(playerId);
+
+// Player state
+const { result } = await YoutubePlayer.getPlayerState(playerId);
+
+// Video URL
+const { result } = await YoutubePlayer.getVideoUrl(playerId);
+```
+
+### Écouteurs d'événements
+
+```typescript
+// State change
+YoutubePlayer.addEventListener(playerId, 'onStateChange', (event) => {
+  console.log('State:', event.data); // -1, 0, 1, 2, 3, 5
+});
+
+// Ready
+YoutubePlayer.addEventListener(playerId, 'onReady', (event) => {
+  console.log('Player ready');
+});
+
+// Error
+YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
+  console.error('Player error:', event.data);
+});
+
+// Quality change
+YoutubePlayer.addEventListener(playerId, 'onPlaybackQualityChange', (event) => {
+  console.log('Quality:', event.data);
+});
+
+// Rate change
+YoutubePlayer.addEventListener(playerId, 'onPlaybackRateChange', (event) => {
+  console.log('Rate:', event.data);
+});
+
+// Remove listener
+YoutubePlayer.removeEventListener(playerId, 'onStateChange', callback);
+```
+
+## Exemple complet
+
+```typescript
+import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
+
+export class YouTubeService {
+  private playerId: string | null = null;
+
+  async initPlayer(videoId: string) {
+    try {
+      const { player, playerReady } = await YoutubePlayer.initialize({
+        playerId: 'main-player',
+        playerSize: { width: 1280, height: 720 },
+        videoId,
+        fullscreen: false,
+        playerVars: {
+          autoplay: 0,
+          controls: 1,
+          modestbranding: 1,
+          rel: 0
+        }
+      });
+
+      this.playerId = player;
+
+      // Set up event listeners
+      YoutubePlayer.addEventListener(player, 'onReady', () => {
+        console.log('Player is ready');
+      });
+
+      YoutubePlayer.addEventListener(player, 'onStateChange', (event) => {
+        this.handleStateChange(event.data);
+      });
+
+      YoutubePlayer.addEventListener(player, 'onError', (event) => {
+        console.error('YouTube error:', event.data);
+      });
+
+      return player;
+    } catch (error) {
+      console.error('Failed to initialize player:', error);
+      throw error;
+    }
+  }
+
+  private handleStateChange(state: number) {
+    switch (state) {
+      case -1:
+        console.log('Unstarted');
+        break;
+      case 0:
+        console.log('Ended');
+        break;
+      case 1:
+        console.log('Playing');
+        break;
+      case 2:
+        console.log('Paused');
+        break;
+      case 3:
+        console.log('Buffering');
+        break;
+      case 5:
+        console.log('Video cued');
+        break;
+    }
+  }
+
+  async play() {
+    if (!this.playerId) return;
+    await YoutubePlayer.playVideo(this.playerId);
+  }
+
+  async pause() {
+    if (!this.playerId) return;
+    await YoutubePlayer.pauseVideo(this.playerId);
+  }
+
+  async loadVideo(videoId: string) {
+    if (!this.playerId) return;
+    await YoutubePlayer.loadVideoById(this.playerId, { videoId });
+  }
+
+  async loadPlaylist(playlistId: string) {
+    if (!this.playerId) return;
+    await YoutubePlayer.loadPlaylist(this.playerId, {
+      listType: 'playlist',
+      list: playlistId,
+      index: 0
+    });
+  }
+
+  async setQuality(quality: 'small' | 'medium' | 'large' | 'hd720' | 'hd1080') {
+    if (!this.playerId) return;
+    await YoutubePlayer.setPlaybackQuality(this.playerId, quality);
+  }
+
+  async getProgress() {
+    if (!this.playerId) return { current: 0, duration: 0 };
+
+    const current = await YoutubePlayer.getCurrentTime(this.playerId);
+    const duration = await YoutubePlayer.getDuration(this.playerId);
+
+    return {
+      current: current.result.value,
+      duration: duration.result.value
+    };
+  }
+
+  async destroy() {
+    if (!this.playerId) return;
+    await YoutubePlayer.destroy(this.playerId);
+    this.playerId = null;
+  }
+}
+```
+
+## États du lecteur
+
+| État | Valeur | Description |
+|-------|-------|-------------|
+| UNSTARTED | -1 | Vidéo non démarrée |
+| ENDED | 0 | Vidéo terminée |
+| PLAYING | 1 | Vidéo en cours de lecture |
+| PAUSED | 2 | Vidéo en pause |
+| BUFFERING | 3 | Vidéo en cours de chargement |
+| CUED | 5 | Vidéo mise en file d'attente |
+
+## Niveaux de qualité
+
+- `small`: 240p
+- `medium`: 360p
+- `large`: 480p
+- `hd720`: 720p
+- `hd1080`: 1080p
+- `highres`: >1080p
+- `default`: Qualité automatique
+
+## Bonnes pratiques
+
+1. **Initialiser une fois**
+   Créez l'instance du lecteur une fois et réutilisez-la :
+   ```typescript
+   let player = await YoutubePlayer.initialize(options);
+   // Réutiliser le lecteur pour différentes vidéos
+   await YoutubePlayer.loadVideoById(player, { videoId: 'NEW_ID' });
+   ```
+
+2. **Gérer les erreurs avec élégance**
+   ```typescript
+   YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
+     switch (event.data) {
+       case 2:
+         console.error('Invalid parameter');
+         break;
+       case 100:
+         console.error('Video not found');
+         break;
+       case 101:
+       case 150:
+         console.error('Embedding not allowed');
+         break;
+     }
+   });
+   ```
+
+3. **Nettoyer**
+   Détruisez le lecteur lorsque le composant est démonté :
+   ```typescript
+   useEffect(() => {
+     return () => {
+       if (playerId) {
+         YoutubePlayer.destroy(playerId);
+       }
+     };
+   }, []);
+   ```
+
+4. **Respecter les préférences de l'utilisateur**
+   ```typescript
+   // Ne pas lire automatiquement sauf si initié par l'utilisateur
+   playerVars: {
+     autoplay: 0
+   }
+   ```
+
+5. **Surveiller la lecture**
+   ```typescript
+   setInterval(async () => {
+     const time = await YoutubePlayer.getCurrentTime(playerId);
+     updateProgressBar(time.result.value);
+   }, 1000);
+   ```
+
+## Notes de plateforme
+
+### iOS
+- Fonctionne sur iOS 9.0+
+- Utilise WKWebView avec l'API iframe YouTube
+- Plein écran supporté
+
+### Android
+- Fonctionne sur Android 5.0 (API 21)+
+- Utilise WebView avec l'API iframe YouTube
+- Plein écran supporté
+
+### Web
+- Intégration directe de l'iframe YouTube
+- Support complet de l'API
+- Meilleures performances
+
+## Dépannage
+
+**Le lecteur ne se charge pas :**
+- Vérifiez que l'ID de la vidéo est valide
+- Vérifiez la connexion Internet
+- Assurez-vous que l'intégration YouTube est autorisée pour la vidéo
+
+**Les événements ne se déclenchent pas :**
+- Assurez-vous que les écouteurs sont ajoutés après l'initialisation
+- Vérifiez que le lecteur est prêt avant d'ajouter des écouteurs
+
+**Problèmes de qualité :**
+- Vérifiez d'abord les niveaux de qualité disponibles
+- Certaines vidéos ne supportent pas toutes les qualités
+- Les changements de qualité peuvent ne pas être immédiats

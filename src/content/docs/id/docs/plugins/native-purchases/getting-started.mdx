@@ -1,0 +1,255 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin @capgo/native-purchases untuk mengimplementasikan pembelian satu kali dan langganan dengan StoreKit 2 dan Google Play Billing 7.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/native-purchases" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Periksa dukungan billing**
+
+   ```typescript
+   import { NativePurchases } from '@capgo/native-purchases';
+
+   const { isBillingSupported } = await NativePurchases.isBillingSupported();
+   if (!isBillingSupported) {
+     throw new Error('Billing tidak tersedia di perangkat ini');
+   }
+   ```
+
+4. **Muat produk langsung dari toko**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const { products } = await NativePurchases.getProducts({
+     productIdentifiers: [
+       'com.example.premium.monthly',
+       'com.example.premium.yearly',
+       'com.example.one_time_unlock'
+     ],
+     productType: PURCHASE_TYPE.SUBS, // Gunakan PURCHASE_TYPE.INAPP untuk produk satu kali
+   });
+
+   products.forEach((product) => {
+     console.log(product.title, product.priceString);
+   });
+   ```
+
+5. **Implementasikan alur pembelian & pemulihan**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const monthlyPlanId = 'monthly-plan'; // Base Plan ID dari Google Play Console
+
+   const transaction = await NativePurchases.purchaseProduct({
+     productIdentifier: 'com.example.premium.monthly',
+     planIdentifier: monthlyPlanId,        // WAJIB untuk langganan Android, diabaikan di iOS
+     productType: PURCHASE_TYPE.SUBS,
+     quantity: 1,
+   });
+
+   console.log('Transaction ID', transaction.transactionId);
+
+   await NativePurchases.restorePurchases();
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       - Buat produk in-app dan langganan di App Store Connect.<br />
+       - Gunakan StoreKit Local Testing atau Sandbox tester untuk QA.<br />
+       - Tidak perlu edit manifest. Pastikan produk Anda disetujui.
+     </TabItem>
+     <TabItem label="Android">
+       - Buat produk in-app dan langganan di Google Play Console.<br />
+       - Unggah setidaknya build uji internal dan tambahkan tester lisensi.<br />
+       - Tambahkan izin billing ke `AndroidManifest.xml`:
+       ```xml
+       <uses-permission android:name="com.android.vending.BILLING" />
+       ```
+     </TabItem>
+   </Tabs>
+</Steps>
+
+## Contoh layanan pembelian
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE, Transaction } from '@capgo/native-purchases';
+import { Capacitor } from '@capacitor/core';
+
+class PurchaseService {
+  private premiumProduct = 'com.example.premium.unlock';
+  private monthlySubId = 'com.example.premium.monthly';
+  private monthlyPlanId = 'monthly-plan'; // Base Plan ID (Android saja)
+
+  async initialize() {
+    const { isBillingSupported } = await NativePurchases.isBillingSupported();
+    if (!isBillingSupported) throw new Error('Billing tidak tersedia');
+
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: [this.premiumProduct, this.monthlySubId],
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    console.log('Produk dimuat', products);
+
+    if (Capacitor.getPlatform() === 'ios') {
+      NativePurchases.addListener('transactionUpdated', (transaction) => {
+        this.handleTransaction(transaction);
+      });
+    }
+  }
+
+  async buyPremium(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.premiumProduct,
+      productType: PURCHASE_TYPE.INAPP,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async buyMonthly(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.monthlySubId,
+      planIdentifier: this.monthlyPlanId, // WAJIB untuk langganan Android
+      productType: PURCHASE_TYPE.SUBS,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async restore() {
+    await NativePurchases.restorePurchases();
+    await this.refreshEntitlements();
+  }
+
+  async openManageSubscriptions() {
+    await NativePurchases.manageSubscriptions();
+  }
+
+  private async processTransaction(transaction: Transaction) {
+    this.unlockContent(transaction.productIdentifier);
+    this.validateOnServer(transaction).catch(console.error);
+  }
+
+  private unlockContent(productIdentifier: string) {
+    // simpan hak akses secara lokal
+    console.log('Membuka kunci', productIdentifier);
+  }
+
+  private async refreshEntitlements() {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('Pembelian saat ini', purchases);
+  }
+
+  private async handleTransaction(transaction: Transaction) {
+    console.log('Update transaksi StoreKit:', transaction);
+    await this.processTransaction(transaction);
+  }
+
+  private async validateOnServer(transaction: Transaction) {
+    await fetch('/api/validate-purchase', {
+      method: 'POST',
+      body: JSON.stringify({
+        transactionId: transaction.transactionId,
+        receipt: transaction.receipt,
+        purchaseToken: transaction.purchaseToken,
+      }),
+    });
+  }
+}
+```
+
+## Opsi pembelian yang diperlukan
+
+| Opsi | Platform | Deskripsi |
+|--------|----------|-------------|
+| `productIdentifier` | iOS + Android | SKU/Product ID yang dikonfigurasi di App Store Connect / Google Play Console. |
+| `productType` | Android saja | `PURCHASE_TYPE.INAPP` atau `PURCHASE_TYPE.SUBS`. Default ke `INAPP`. Selalu set ke `SUBS` untuk langganan. |
+| `planIdentifier` | Langganan Android | Base Plan ID dari Google Play Console. Diperlukan untuk langganan, diabaikan di iOS dan pembelian in-app. |
+| `quantity` | iOS | Hanya untuk pembelian in-app, default ke `1`. Android selalu membeli satu item. |
+| `appAccountToken` | iOS + Android | UUID/string yang menghubungkan pembelian ke pengguna Anda. Harus UUID di iOS; Android menerima string tersamarkan hingga 64 karakter. |
+| `isConsumable` | Android | Set ke `true` untuk otomatis mengonsumsi token setelah memberikan hak akses untuk consumable. Default ke `false`. |
+
+## Memeriksa status hak akses
+
+Gunakan `getPurchases()` untuk tampilan lintas platform dari setiap transaksi yang dilaporkan toko:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+purchases.forEach((purchase) => {
+  if (purchase.isActive && purchase.expirationDate) {
+    console.log('Langganan iOS aktif sampai', purchase.expirationDate);
+  }
+
+  const isAndroidIapValid =
+    ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') && purchase.isAcknowledged;
+
+  if (isAndroidIapValid) {
+    console.log('Berikan hak akses in-app untuk', purchase.productIdentifier);
+  }
+});
+```
+
+### Perilaku platform
+
+- **iOS**: Langganan mencakup `isActive`, `expirationDate`, `willCancel`, dan dukungan listener StoreKit 2. Pembelian in-app memerlukan validasi receipt server.
+- **Android**: `isActive`/`expirationDate` tidak diisi; panggil Google Play Developer API dengan `purchaseToken` untuk status otoritatif. `purchaseState` harus `PURCHASED` dan `isAcknowledged` harus `true`.
+
+## Referensi API cepat
+
+- `isBillingSupported()` – periksa ketersediaan StoreKit / Google Play.
+- `getProduct()` / `getProducts()` – ambil harga, judul lokal, deskripsi, penawaran intro.
+- `purchaseProduct()` – mulai alur pembelian StoreKit 2 atau Billing client.
+- `restorePurchases()` – putar ulang pembelian historis dan sinkronkan ke perangkat saat ini.
+- `getPurchases()` – daftar semua transaksi iOS atau pembelian Play Billing.
+- `manageSubscriptions()` – buka UI manajemen langganan native.
+- `addListener('transactionUpdated')` – tangani transaksi StoreKit 2 yang tertunda saat aplikasi Anda dimulai (iOS saja).
+
+## Praktik terbaik
+
+1. **Tampilkan harga toko** – Apple mengharuskan menampilkan `product.title` dan `product.priceString`; jangan hardcode.
+2. **Gunakan `appAccountToken`** – buat UUID secara deterministik (v5) dari ID pengguna Anda untuk menghubungkan pembelian ke akun.
+3. **Validasi sisi server** – kirim `receipt` (iOS) / `purchaseToken` (Android) ke backend Anda untuk verifikasi.
+4. **Tangani error dengan baik** – periksa pembatalan pengguna, kegagalan jaringan, dan lingkungan billing yang tidak didukung.
+5. **Uji secara menyeluruh** – ikuti [panduan sandbox iOS](/docs/plugins/native-purchases/ios-sandbox-testing/) dan [panduan sandbox Android](/docs/plugins/native-purchases/android-sandbox-testing/).
+6. **Tawarkan pemulihan & manajemen** – tambahkan tombol UI yang terhubung ke `restorePurchases()` dan `manageSubscriptions()`.
+
+## Pemecahan masalah
+
+**Produk tidak dimuat**
+- Pastikan bundle ID / application ID cocok dengan konfigurasi toko.
+- Konfirmasikan product ID aktif dan disetujui (App Store) atau diaktifkan (Google Play).
+- Tunggu beberapa jam setelah membuat produk; propagasi toko tidak instan.
+
+**Pembelian dibatalkan atau macet**
+- Pengguna dapat membatalkan di tengah alur; bungkus panggilan dalam `try/catch` dan tampilkan pesan error yang ramah.
+- Untuk Android, pastikan akun uji menginstal aplikasi dari Play Store (track internal) agar Billing berfungsi.
+- Periksa logcat/Xcode untuk error billing saat berjalan di perangkat.
+
+**Status langganan salah**
+- Gunakan `getPurchases()` untuk membandingkan data toko dengan cache hak akses lokal Anda.
+- Di Android, selalu kueri Google Play Developer API dengan `purchaseToken` untuk mendapatkan tanggal kedaluwarsa atau status refund.
+- Di iOS, periksa `isActive`/`expirationDate` dan validasi receipt untuk mendeteksi refund atau revokasi.

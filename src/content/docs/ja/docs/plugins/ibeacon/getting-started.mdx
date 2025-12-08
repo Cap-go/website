@@ -1,0 +1,620 @@
+---
+title: 始め方
+description: Capacitorアプリでのビーコン検出と監視のために、iBeaconプラグインをインストールして使用する方法を学びます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージのインストール**
+   <PackageManagers pkg="@capgo/capacitor-ibeacon" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 設定
+
+### iOS設定
+
+`Info.plist`に以下を追加します:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>このアプリは近くのビーコンを検出するために位置情報アクセスが必要です</string>
+
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>このアプリはバックグラウンドでビーコンを監視するために位置情報アクセスが必要です</string>
+
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>このアプリは近くのビーコンを検出するためにBluetoothを使用します</string>
+
+<key>UIBackgroundModes</key>
+<array>
+  <string>location</string>
+</array>
+```
+
+### Android設定
+
+`AndroidManifest.xml`に以下を追加します:
+
+```xml
+<manifest>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.BLUETOOTH" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+  <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+</manifest>
+```
+
+**重要**: Androidの場合、ビーコン検出が動作するためには、[AltBeacon](https://altbeacon.github.io/android-beacon-library/)ライブラリをプロジェクトに統合する必要があります。
+
+アプリの`build.gradle`に追加します:
+
+```kotlin
+dependencies {
+    implementation 'org.altbeacon:android-beacon-library:2.20+'
+}
+```
+
+## 使用方法
+
+### 基本的なセットアップ
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+// ビーコンリージョンを定義
+const beaconRegion = {
+  identifier: 'MyStore',
+  uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+  major: 1, // 任意
+  minor: 2  // 任意
+};
+```
+
+### 許可のリクエスト
+
+```typescript
+// "使用中のみ"許可をリクエスト
+const requestPermission = async () => {
+  const { status } = await CapacitorIbeacon.requestWhenInUseAuthorization();
+  console.log('Permission status:', status);
+  // status: 'not_determined' | 'restricted' | 'denied' | 'authorized_always' | 'authorized_when_in_use'
+};
+
+// "常に許可"をリクエスト (バックグラウンド監視用)
+const requestAlwaysPermission = async () => {
+  const { status } = await CapacitorIbeacon.requestAlwaysAuthorization();
+  console.log('Always permission status:', status);
+};
+
+// 現在の認証状態を確認
+const checkPermission = async () => {
+  const { status } = await CapacitorIbeacon.getAuthorizationStatus();
+  console.log('Current status:', status);
+};
+```
+
+### デバイスの機能を確認
+
+```typescript
+// Bluetoothが有効かどうかを確認
+const checkBluetooth = async () => {
+  const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+  if (!enabled) {
+    console.log('Please enable Bluetooth');
+  }
+};
+
+// レンジングが利用可能かどうかを確認
+const checkRanging = async () => {
+  const { available } = await CapacitorIbeacon.isRangingAvailable();
+  console.log('Ranging available:', available);
+};
+```
+
+### ビーコンリージョンの監視
+
+監視は、ビーコンリージョンに入ったとき、または出たときを検出します。これはバックグラウンドで動作します。
+
+```typescript
+// 監視を開始
+const startMonitoring = async () => {
+  await CapacitorIbeacon.startMonitoringForRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+    major: 1,
+    minor: 2
+  });
+  console.log('Started monitoring for beacons');
+};
+
+// 監視を停止
+const stopMonitoring = async () => {
+  await CapacitorIbeacon.stopMonitoringForRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+};
+```
+
+### ビーコンのレンジング
+
+レンジングは、近くのビーコンとその距離について継続的な更新を提供します。これにはアプリがフォアグラウンドにある必要があります。
+
+```typescript
+// レンジングを開始
+const startRanging = async () => {
+  await CapacitorIbeacon.startRangingBeaconsInRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+  console.log('Started ranging beacons');
+};
+
+// レンジングを停止
+const stopRanging = async () => {
+  await CapacitorIbeacon.stopRangingBeaconsInRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+};
+```
+
+### イベントをリスンする
+
+```typescript
+import { PluginListenerHandle } from '@capacitor/core';
+
+// レンジングイベントをリスン (継続的な距離更新)
+const rangingListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didRangeBeacons',
+  (data) => {
+    console.log('Beacons detected:', data.beacons);
+    data.beacons.forEach(beacon => {
+      console.log(`UUID: ${beacon.uuid}`);
+      console.log(`Major: ${beacon.major}, Minor: ${beacon.minor}`);
+      console.log(`Distance: ${beacon.accuracy}m`);
+      console.log(`Proximity: ${beacon.proximity}`); // immediate, near, far, unknown
+      console.log(`RSSI: ${beacon.rssi}`);
+    });
+  }
+);
+
+// リージョン入域イベントをリスン
+const enterListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didEnterRegion',
+  (data) => {
+    console.log('Entered region:', data.region.identifier);
+    // ウェルカム通知を表示するか、アクションをトリガー
+  }
+);
+
+// リージョン退域イベントをリスン
+const exitListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didExitRegion',
+  (data) => {
+    console.log('Exited region:', data.region.identifier);
+    // さよならアクションをトリガー
+  }
+);
+
+// リージョン状態変更をリスン
+const stateListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didDetermineStateForRegion',
+  (data) => {
+    console.log(`Region ${data.region.identifier}: ${data.state}`);
+    // state: 'inside' | 'outside' | 'unknown'
+  }
+);
+
+// 完了時にリスナーをクリーンアップ
+const cleanup = () => {
+  rangingListener.remove();
+  enterListener.remove();
+  exitListener.remove();
+  stateListener.remove();
+};
+```
+
+### iBeaconとして広告 (iOSのみ)
+
+デバイスをiBeacon送信機に変換します。
+
+```typescript
+// 広告を開始
+const startAdvertising = async () => {
+  await CapacitorIbeacon.startAdvertising({
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+    major: 1,
+    minor: 2,
+    identifier: 'MyBeacon',
+    measuredPower: -59 // 任意: 1メートルでの較正パワー
+  });
+  console.log('Started advertising as iBeacon');
+};
+
+// 広告を停止
+const stopAdvertising = async () => {
+  await CapacitorIbeacon.stopAdvertising();
+};
+```
+
+## 完全な例
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+import { PluginListenerHandle } from '@capacitor/core';
+
+export class BeaconService {
+  private listeners: PluginListenerHandle[] = [];
+
+  async init() {
+    // 許可をリクエスト
+    const { status } = await CapacitorIbeacon.requestWhenInUseAuthorization();
+
+    if (status !== 'authorized_when_in_use' && status !== 'authorized_always') {
+      throw new Error('Location permission denied');
+    }
+
+    // Bluetoothを確認
+    const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+    if (!enabled) {
+      throw new Error('Bluetooth is not enabled');
+    }
+
+    // イベントリスナーを設定
+    this.setupListeners();
+  }
+
+  private setupListeners() {
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didEnterRegion', (data) => {
+        console.log('Welcome! Entered:', data.region.identifier);
+        this.onEnterRegion(data.region);
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didExitRegion', (data) => {
+        console.log('Goodbye! Left:', data.region.identifier);
+        this.onExitRegion(data.region);
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didRangeBeacons', (data) => {
+        this.onRangeBeacons(data.beacons);
+      })
+    );
+  }
+
+  async startMonitoring(uuid: string, identifier: string, major?: number, minor?: number) {
+    await CapacitorIbeacon.startMonitoringForRegion({
+      identifier,
+      uuid,
+      major,
+      minor
+    });
+  }
+
+  async startRanging(uuid: string, identifier: string) {
+    await CapacitorIbeacon.startRangingBeaconsInRegion({
+      identifier,
+      uuid
+    });
+  }
+
+  private onEnterRegion(region: any) {
+    // リージョン入域を処理 (例: 通知を表示、コンテンツをトリガー)
+    console.log('Entered beacon region:', region);
+  }
+
+  private onExitRegion(region: any) {
+    // リージョン退域を処理
+    console.log('Left beacon region:', region);
+  }
+
+  private onRangeBeacons(beacons: any[]) {
+    // ビーコンの距離を処理
+    const nearestBeacon = beacons.reduce((nearest, beacon) => {
+      return beacon.accuracy < nearest.accuracy ? beacon : nearest;
+    }, beacons[0]);
+
+    if (nearestBeacon) {
+      console.log('Nearest beacon:', nearestBeacon);
+      this.handleProximity(nearestBeacon);
+    }
+  }
+
+  private handleProximity(beacon: any) {
+    switch (beacon.proximity) {
+      case 'immediate': // < 0.5m
+        console.log('Very close to beacon');
+        break;
+      case 'near': // 0.5m - 3m
+        console.log('Near beacon');
+        break;
+      case 'far': // > 3m
+        console.log('Far from beacon');
+        break;
+      case 'unknown':
+        console.log('Distance unknown');
+        break;
+    }
+  }
+
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+## APIリファレンス
+
+### startMonitoringForRegion(options)
+
+ビーコンリージョンの監視を開始します。入域/退域時にイベントをトリガーします。
+
+```typescript
+interface BeaconRegion {
+  identifier: string;
+  uuid: string;
+  major?: number;
+  minor?: number;
+  notifyEntryStateOnDisplay?: boolean;
+}
+
+await CapacitorIbeacon.startMonitoringForRegion(options);
+```
+
+### stopMonitoringForRegion(options)
+
+ビーコンリージョンの監視を停止します。
+
+```typescript
+await CapacitorIbeacon.stopMonitoringForRegion(options);
+```
+
+### startRangingBeaconsInRegion(options)
+
+継続的な距離更新のためにリージョン内のビーコンのレンジングを開始します。
+
+```typescript
+await CapacitorIbeacon.startRangingBeaconsInRegion(options);
+```
+
+### stopRangingBeaconsInRegion(options)
+
+リージョン内のビーコンのレンジングを停止します。
+
+```typescript
+await CapacitorIbeacon.stopRangingBeaconsInRegion(options);
+```
+
+### startAdvertising(options)
+
+デバイスをiBeaconとして広告開始します (iOSのみ)。
+
+```typescript
+interface BeaconAdvertisingOptions {
+  uuid: string;
+  major: number;
+  minor: number;
+  identifier: string;
+  measuredPower?: number; // 1メートルでの較正パワー
+}
+
+await CapacitorIbeacon.startAdvertising(options);
+```
+
+### stopAdvertising()
+
+デバイスのiBeaconとしての広告を停止します。
+
+```typescript
+await CapacitorIbeacon.stopAdvertising();
+```
+
+### requestWhenInUseAuthorization()
+
+"使用中のみ"の位置情報認証をリクエストします。
+
+```typescript
+const result = await CapacitorIbeacon.requestWhenInUseAuthorization();
+// 戻り値: { status: string }
+```
+
+### requestAlwaysAuthorization()
+
+"常に許可"の位置情報認証をリクエストします (バックグラウンド監視に必要)。
+
+```typescript
+const result = await CapacitorIbeacon.requestAlwaysAuthorization();
+// 戻り値: { status: string }
+```
+
+### getAuthorizationStatus()
+
+現在の位置情報認証状態を取得します。
+
+```typescript
+const result = await CapacitorIbeacon.getAuthorizationStatus();
+// 戻り値: { status: 'not_determined' | 'restricted' | 'denied' | 'authorized_always' | 'authorized_when_in_use' }
+```
+
+### isBluetoothEnabled()
+
+Bluetoothが有効かどうかを確認します。
+
+```typescript
+const result = await CapacitorIbeacon.isBluetoothEnabled();
+// 戻り値: { enabled: boolean }
+```
+
+### isRangingAvailable()
+
+デバイスでレンジングが利用可能かどうかを確認します。
+
+```typescript
+const result = await CapacitorIbeacon.isRangingAvailable();
+// 戻り値: { available: boolean }
+```
+
+### enableARMAFilter(options)
+
+距離計算のためのARMAフィルタリングを有効にします (Androidのみ)。
+
+```typescript
+await CapacitorIbeacon.enableARMAFilter({ enabled: true });
+```
+
+## イベント
+
+### didRangeBeacons
+
+レンジング中にビーコンが検出されたときに発火します。
+
+```typescript
+interface RangingEvent {
+  region: BeaconRegion;
+  beacons: Beacon[];
+}
+
+interface Beacon {
+  uuid: string;
+  major: number;
+  minor: number;
+  rssi: number; // 信号強度
+  proximity: 'immediate' | 'near' | 'far' | 'unknown';
+  accuracy: number; // メートル単位の距離
+}
+```
+
+### didEnterRegion
+
+監視対象のビーコンリージョンに入ったときに発火します。
+
+```typescript
+interface RegionEvent {
+  region: BeaconRegion;
+}
+```
+
+### didExitRegion
+
+監視対象のビーコンリージョンを出たときに発火します。
+
+```typescript
+interface RegionEvent {
+  region: BeaconRegion;
+}
+```
+
+### didDetermineStateForRegion
+
+リージョンの状態が判定されたときに発火します。
+
+```typescript
+interface StateEvent {
+  region: BeaconRegion;
+  state: 'inside' | 'outside' | 'unknown';
+}
+```
+
+## 近接度の値
+
+- **immediate**: 非常に近い (< 0.5メートル)
+- **near**: 比較的近い (0.5 - 3メートル)
+- **far**: より遠く (> 3メートル)
+- **unknown**: 距離を判定できません
+
+## ベストプラクティス
+
+1. **適切な許可をリクエストする**
+   - フォアグラウンド機能には"使用中のみ"を使用
+   - バックグラウンド監視が必要な場合のみ"常に許可"をリクエスト
+   - 位置情報アクセスが必要な理由を明確に説明
+
+2. **Bluetooth状態を処理する**
+   ```typescript
+   const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+   if (!enabled) {
+     // ユーザーにBluetoothを有効にするよう促す
+   }
+   ```
+
+3. **バッテリーの最適化**
+   - 可能な場合は、レンジングの代わりに監視を使用 (よりバッテリー効率的)
+   - 積極的に必要でないときはレンジングを停止
+   - 処理を減らすために、より大きなmajor/minor範囲の使用を検討
+
+4. **エラー処理**
+   ```typescript
+   try {
+     await CapacitorIbeacon.startMonitoringForRegion(region);
+   } catch (error) {
+     console.error('Failed to start monitoring:', error);
+   }
+   ```
+
+5. **リスナーのクリーンアップ**
+   メモリリークを防ぐため、コンポーネントがアンマウントされるときは常にイベントリスナーを削除します。
+
+## プラットフォームに関する注意事項
+
+### iOS
+- iOS 10.0+が必要
+- ネイティブのCoreLocationフレームワークを使用
+- "常に許可"でバックグラウンド監視をサポート
+- CoreBluetoothを使用してiBeaconとして広告可能
+- レンジングにはアプリがフォアグラウンドにある必要があります
+
+### Android
+- Android 6.0 (API 23)+が必要
+- AltBeaconライブラリを使用
+- ビーコンがBluetoothを使用しているにもかかわらず、位置情報許可が必要
+- バックグラウンド監視にはACCESS_BACKGROUND_LOCATIONが必要 (Android 10+)
+- ほとんどのデバイスでiBeaconとして広告できません (ハードウェアの制限)
+
+### Web
+- Webプラットフォームではサポートされていません
+
+## 一般的なユースケース
+
+1. **近接マーケティング**: ユーザーが店舗に近づいたときに通知やコンテンツをトリガー
+2. **屋内ナビゲーション**: ビーコンウェイポイントを使用してユーザーを建物内で案内
+3. **出席追跡**: ユーザーが場所に入ったときに自動チェックイン
+4. **資産追跡**: 機器や在庫の移動を監視
+5. **博物館ツアー**: 訪問者が展示物に近づくにつれてコンテキスト情報を提供
+6. **スマートホーム**: 部屋の存在に基づいて自動化をトリガー
+
+## トラブルシューティング
+
+### ビーコンが検出されない
+- Bluetoothが有効になっていることを確認
+- 位置情報許可が付与されていることを確認
+- ビーコンのUUIDが正確に一致することを確認 (大文字小文字を区別)
+- ビーコンが電源供給され、送信していることを確認
+- まずmajor/minorフィルタなしで試す
+
+### バックグラウンド監視が動作しない
+- "常に許可"の位置情報許可が付与されていることを確認
+- UIBackgroundModesに`location`を追加 (iOS)
+- ACCESS_BACKGROUND_LOCATIONをリクエスト (Android 10+)
+- 注意: iOSはバッテリーを節約するためにバックグラウンドコールバックを遅延させる場合があります
+
+### 距離測定が不正確
+- ビーコンのRSSIは環境によって変動します (壁、干渉)
+- 三角測量のために複数のビーコンを使用
+- ビーコンから1メートルの位置でmeasuredPowerを較正
+- より滑らかな値のためにAndroidでARMAフィルタリングを有効化

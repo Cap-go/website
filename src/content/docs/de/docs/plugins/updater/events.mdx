@@ -1,0 +1,292 @@
+---
+title: "Ereignisse"
+locale: de
+description: "Alle Ereignisse, auf die Sie im Capacitor Updater Plugin lauschen können, um den Update-Status und Fortschritt zu überwachen"
+sidebar:
+  order: 9
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Das Capacitor Updater Plugin bietet mehrere Ereignisse, auf die Sie lauschen können, um den Update-Prozess zu überwachen und auf verschiedene Zustände zu reagieren.
+
+## Event-Listener-Einrichtung
+
+Um auf Ereignisse zu lauschen, verwenden Sie die `addListener`-Methode auf dem `CapacitorUpdater`-Objekt:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Add a listener
+const listener = await CapacitorUpdater.addListener('eventName', (event) => {
+  // Handle the event
+});
+
+// Remove the listener when no longer needed
+listener.remove();
+
+// Remove all listeners
+await CapacitorUpdater.removeAllListeners();
+```
+
+## Verfügbare Ereignisse
+
+### `download`
+
+Wird während des Bundle-Download-Prozesses ausgelöst. Bietet Informationen zum Download-Fortschritt.
+
+```typescript
+CapacitorUpdater.addListener('download', (event) => {
+  console.log(`Download progress: ${event.percent}%`);
+  console.log('Bundle info:', event.bundle);
+});
+```
+
+**Event-Daten:**
+- `percent`: number - Download-Fortschritt in Prozent (0-100)
+- `bundle`: BundleInfo - Informationen über das heruntergeladene Bundle
+
+<Aside>
+Dieses Ereignis wird mehrfach während des Downloads ausgelöst, um den Fortschritt zu melden.
+</Aside>
+
+### `noNeedUpdate`
+
+Wird ausgelöst, wenn eine Überprüfung auf Updates feststellt, dass kein Update erforderlich ist.
+
+```typescript
+CapacitorUpdater.addListener('noNeedUpdate', (event) => {
+  console.log('App is up to date');
+  console.log('Current bundle:', event.bundle);
+});
+```
+
+**Event-Daten:**
+- `bundle`: BundleInfo - Informationen über das aktuelle Bundle
+
+### `updateAvailable`
+
+Wird ausgelöst, wenn ein neues Update zum Download verfügbar ist.
+
+```typescript
+CapacitorUpdater.addListener('updateAvailable', (event) => {
+  console.log('Update available');
+  console.log('New bundle:', event.bundle);
+  // You can trigger a download here if needed
+});
+```
+
+**Event-Daten:**
+- `bundle`: BundleInfo - Informationen über das verfügbare Update-Bundle
+
+### `downloadComplete`
+
+Wird ausgelöst, wenn ein Bundle-Download erfolgreich abgeschlossen wurde.
+
+```typescript
+CapacitorUpdater.addListener('downloadComplete', (event) => {
+  console.log('Download completed');
+  console.log('Downloaded bundle:', event.bundle);
+  // You might want to set this bundle as next
+});
+```
+
+**Event-Daten:**
+- `bundle`: BundleInfo - Informationen über das heruntergeladene Bundle
+
+### `majorAvailable`
+
+Wird ausgelöst, wenn ein größeres Update verfügbar ist, aber durch Auto-Update-Einstellungen blockiert wird.
+
+```typescript
+CapacitorUpdater.addListener('majorAvailable', (event) => {
+  console.log('Major update available:', event.version);
+  // Notify user about major update
+});
+```
+
+**Event-Daten:**
+- `version`: string - Die Versionsnummer des größeren Updates
+
+<Aside type="tip">
+Größere Updates erfordern normalerweise Benutzerbestätigung oder App-Store-Updates. Verwenden Sie dieses Ereignis, um Benutzer entsprechend zu benachrichtigen.
+</Aside>
+
+### `updateFailed`
+
+Wird ausgelöst, wenn ein Update beim nächsten App-Start nicht installiert werden konnte.
+
+```typescript
+CapacitorUpdater.addListener('updateFailed', (event) => {
+  console.error('Update failed to install');
+  console.log('Failed bundle:', event.bundle);
+  // Handle rollback or retry logic
+});
+```
+
+**Event-Daten:**
+- `bundle`: BundleInfo - Informationen über das Bundle, dessen Installation fehlgeschlagen ist
+
+### `downloadFailed`
+
+Wird ausgelöst, wenn ein Bundle-Download fehlgeschlagen ist.
+
+```typescript
+CapacitorUpdater.addListener('downloadFailed', (event) => {
+  console.error('Download failed for version:', event.version);
+  // Handle download retry logic
+});
+```
+
+**Event-Daten:**
+- `version`: string - Die Version, deren Download fehlgeschlagen ist
+
+### `appReloaded`
+
+Wird ausgelöst, wenn die App neu geladen wurde.
+
+```typescript
+CapacitorUpdater.addListener('appReloaded', () => {
+  console.log('App has been reloaded');
+  // Perform any necessary reinitialization
+});
+```
+
+**Event-Daten:** Keine
+
+### `appReady`
+
+Wird ausgelöst, wenn die App nach einem Update einsatzbereit ist.
+
+```typescript
+CapacitorUpdater.addListener('appReady', (event) => {
+  console.log('App is ready');
+  console.log('Current bundle:', event.bundle);
+  console.log('Status:', event.status);
+});
+```
+
+**Event-Daten:**
+- `bundle`: BundleInfo - Informationen über das aktuelle Bundle
+- `status`: string - Der Bereitschaftsstatus
+
+<Aside type="caution">
+Denken Sie daran, `notifyAppReady()` innerhalb des konfigurierten Timeouts (Standard 10 Sekunden) aufzurufen, um ein automatisches Rollback zu verhindern.
+</Aside>
+
+## BundleInfo-Objekt
+
+Viele Ereignisse enthalten ein `BundleInfo`-Objekt mit den folgenden Eigenschaften:
+
+```typescript
+interface BundleInfo {
+  id: string;           // Unique bundle identifier
+  version: string;      // Bundle version
+  downloaded: string;   // Download timestamp
+  checksum?: string;    // Bundle checksum (if available)
+  status: BundleStatus; // Bundle status
+}
+```
+
+Wobei `BundleStatus` sein kann:
+- `'success'` - Bundle erfolgreich heruntergeladen
+- `'error'` - Bundle-Download/Installation fehlgeschlagen
+- `'pending'` - Bundle wartet darauf, als nächstes gesetzt zu werden
+- `'downloading'` - Bundle wird gerade heruntergeladen
+
+## Beispiel: Vollständiger Update-Ablauf
+
+Hier ist ein Beispiel für die Behandlung des vollständigen Update-Ablaufs mit Ereignissen:
+
+<Aside type="caution">
+Diese `UpdateManager`-Klasse enthält nicht den erforderlichen `CapacitorUpdater.notifyAppReady()`-Aufruf für den Auto-Update-Ablauf.
+Weitere Informationen finden Sie in der Dokumentation zum [korrekten Platzieren des notifyAppReady-Aufrufs](/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly).
+</Aside>
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+export class UpdateManager {
+  private listeners: any[] = [];
+
+  async setupListeners() {
+    // Listen for available updates
+    this.listeners.push(
+      await CapacitorUpdater.addListener('updateAvailable', async (event) => {
+        console.log('Update available:', event.bundle.version);
+        // Auto-download the update
+        await CapacitorUpdater.download({
+          url: event.bundle.url,
+          version: event.bundle.version
+        });
+      })
+    );
+
+    // Monitor download progress
+    this.listeners.push(
+      await CapacitorUpdater.addListener('download', (event) => {
+        console.log(`Downloading: ${event.percent}%`);
+        // Update UI progress bar
+        this.updateProgressBar(event.percent);
+      })
+    );
+
+    // Handle download completion
+    this.listeners.push(
+      await CapacitorUpdater.addListener('downloadComplete', async (event) => {
+        console.log('Download complete:', event.bundle.version);
+        // Set as next bundle
+        await CapacitorUpdater.next({ id: event.bundle.id });
+      })
+    );
+
+    // Handle failures
+    this.listeners.push(
+      await CapacitorUpdater.addListener('downloadFailed', (event) => {
+        console.error('Download failed:', event.version);
+        this.showError('Update download failed. Please try again later.');
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorUpdater.addListener('updateFailed', (event) => {
+        console.error('Update installation failed:', event.bundle.version);
+        this.showError('Update installation failed. The app has been rolled back.');
+      })
+    );
+
+    // Handle app ready
+    this.listeners.push(
+      await CapacitorUpdater.addListener('appReady', async (event) => {
+        console.log('App ready with bundle:', event.bundle.version);
+      })
+    );
+  }
+
+  cleanup() {
+    // Remove all listeners when no longer needed
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+
+  private updateProgressBar(percent: number) {
+    // Update your UI progress bar
+  }
+
+  private showError(message: string) {
+    // Show error to user
+  }
+}
+```
+
+## Best Practices
+
+1. **Rufen Sie immer `notifyAppReady()` auf**: Bei Verwendung von Auto-Update rufen Sie diese Methode immer nach der Initialisierung Ihrer App auf, um ein Rollback zu verhindern.
+
+2. **Behandeln Sie Fehler ordnungsgemäß**: Implementieren Sie eine ordnungsgemäße Fehlerbehandlung für Download- und Update-Fehler.
+
+3. **Geben Sie Benutzerfeedback**: Verwenden Sie das Download-Fortschrittsereignis, um den Update-Fortschritt für Benutzer anzuzeigen.
+
+4. **Räumen Sie Event-Listener auf**: Entfernen Sie Event-Listener, wenn sie nicht mehr benötigt werden, um Speicherlecks zu vermeiden.
+
+5. **Testen Sie Update-Szenarien**: Testen Sie verschiedene Update-Szenarien einschließlich Fehler, Rollbacks und größere Updates.

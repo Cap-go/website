@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-contacts"
+locale: ja
+description: Capacitor APIを使用してデバイスの連絡先にアクセスし、検索・管理を行います。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Capacitorアプリでデバイスの連絡先へのアクセス、検索、管理をフルCRUD操作とパーミッション処理で実現します。
+  image:
+    file: ~public/icons/plugins/contacts.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/contacts/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-contacts/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="連絡先の読み取り" icon="rocket">
+    詳細情報を含むデバイスの連絡先リストにアクセス
+  </Card>
+  <Card title="検索機能" icon="magnifier">
+    名前、メール、電話番号で連絡先を検索
+  </Card>
+  <Card title="作成と更新" icon="pencil">
+    新しい連絡先を追加または既存の連絡先を変更
+  </Card>
+  <Card title="連絡先の削除" icon="setting">
+    デバイスから連絡先を安全に削除
+  </Card>
+  <Card title="パーミッション処理" icon="approve-check-circle">
+    Privacy manifestに準拠した適切な連絡先パーミッション処理
+  </Card>
+  <Card title="はじめに" icon="open-book">
+    プラグインのインストールと設定については[はじめるガイド](/docs/plugins/contacts/getting-started/)をご覧ください。
+  </Card>
+</CardGrid>

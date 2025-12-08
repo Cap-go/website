@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-llm"
+description: 在 iOS 和 Android 上本地运行 LLM 模型，具有原生 Apple Intelligence 支持，实现隐私保护和离线功能。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 直接在设备上运行 LLM 模型，具有原生 Apple Intelligence 集成和硬件加速。
+  image:
+    file: ~public/icons/plugins/llm.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/llm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-llm/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="设备端隐私" icon="approve-check-circle">
+    直接在设备上运行 LLM 模型以实现隐私保护和离线功能 🤖
+  </Card>
+  <Card title="Apple Intelligence" icon="star">
+    iOS 26.0+ 上的原生 Apple Intelligence 集成 🍎
+  </Card>
+  <Card title="多种格式" icon="puzzle">
+    支持 .task 和 .litertlm 模型格式 📦
+  </Card>
+  <Card title="硬件加速" icon="rocket">
+    使用原生硬件加速实现快速推理 ⚡
+  </Card>
+  <Card title="流式响应" icon="download">
+    使用事件监听器实现实时流式响应 🔄
+  </Card>
+  <Card title="开始使用" icon="open-book">
+    查看[入门指南](/docs/plugins/llm/getting-started/)安装和配置插件。
+  </Card>
+</CardGrid>

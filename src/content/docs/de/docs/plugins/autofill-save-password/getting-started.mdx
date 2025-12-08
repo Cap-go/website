@@ -1,0 +1,260 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Autofill Save Password Plugin für nahtlose Passwortverwaltung in Ihrer Capacitor App installieren und konfigurieren.
+sidebar:
+  order: 2
+locale: de
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-autofill-save-password
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Plattformunterstützung
+
+- **iOS**: Vollständige Unterstützung (iOS 18.3 und ältere Versionen)
+- **Android**: In Arbeit
+
+## Plattform-Konfiguration
+
+### iOS
+
+#### 1. Associated Domains Einrichtung
+
+Konfigurieren Sie Associated Domains in Ihrem Apple Developer Account und fügen Sie sie zu Ihrer `App.entitlements` Datei hinzu:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>webcredentials:yourdomain.com</string>
+        <string>webcredentials:www.yourdomain.com</string>
+    </array>
+</dict>
+</plist>
+```
+
+#### 2. Web-Anmeldedaten-Konfiguration
+
+Fügen Sie eine `.well-known/apple-app-site-association` Datei zu Ihrer Website hinzu:
+
+```json
+{
+  "webcredentials": {
+    "apps": [
+      "TEAMID.com.yourcompany.yourapp"
+    ]
+  }
+}
+```
+
+### Android (Zukünftige Unterstützung)
+
+#### 1. Google Services Plugin
+
+Fügen Sie zu `android/app/build.gradle` hinzu:
+
+```kotlin
+apply plugin: 'com.google.gms.google-services'
+```
+
+#### 2. Domain-Konfiguration
+
+Fügen Sie zu `android/app/src/main/res/values/strings.xml` hinzu:
+
+```xml
+<resources>
+    <string name="asset_statements">
+        [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {
+                "namespace": "web",
+                "site": "https://yourdomain.com"
+            }
+        }]
+    </string>
+</resources>
+```
+
+## Verwendungsbeispiel
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+// Passwort nach erfolgreicher Anmeldung speichern
+async function login(username: string, password: string) {
+  try {
+    // Führen Sie hier Ihre Anmeldelogik aus
+    const loginSuccess = await performLogin(username, password);
+
+    if (loginSuccess) {
+      // Benutzer zum Speichern des Passworts auffordern
+      await SavePassword.promptDialog({
+        username: username,
+        password: password,
+        url: 'https://yourdomain.com' // nur iOS
+      });
+
+      console.log('Passwort erfolgreich gespeichert');
+    }
+  } catch (error) {
+    console.error('Passwort konnte nicht gespeichert werden:', error);
+  }
+}
+
+// Gespeichertes Passwort für Autofill lesen
+async function loadSavedCredentials() {
+  try {
+    const credentials = await SavePassword.readPassword();
+
+    if (credentials.username && credentials.password) {
+      console.log('Gespeicherte Anmeldedaten gefunden');
+      // Anmeldeformular vorab ausfüllen
+      return {
+        username: credentials.username,
+        password: credentials.password
+      };
+    }
+  } catch (error) {
+    console.error('Gespeichertes Passwort konnte nicht gelesen werden:', error);
+  }
+
+  return null;
+}
+```
+
+## API-Referenz
+
+### promptDialog(options)
+
+```typescript
+promptDialog(options: SavePasswordOptions) => Promise<void>
+```
+
+Speichert Benutzeranmeldedaten im System-Keychain.
+
+| Parameter     | Typ                              |
+| ------------- | --------------------------------- |
+| **`options`** | `SavePasswordOptions` |
+
+### readPassword()
+
+```typescript
+readPassword() => Promise<SavedCredentials>
+```
+
+Ruft gespeicherte Anmeldedaten aus dem System-Keychain ab.
+
+**Rückgabewert:** `Promise<SavedCredentials>`
+
+## Schnittstellen
+
+### SavePasswordOptions
+
+| Eigenschaft    | Typ               | Beschreibung                                   |
+| -------------- | ------------------ | --------------------------------------------- |
+| **`username`** | `string` | Der zu speichernde Benutzername                          |
+| **`password`** | `string` | Das zu speichernde Passwort                          |
+| **`url`**      | `string` | Nur iOS - zugehörige Domain-URL (optional) |
+
+### SavedCredentials
+
+| Eigenschaft    | Typ              | Beschreibung                  |
+| -------------- | ----------------- | ---------------------------- |
+| **`username`** | `string` | Der gespeicherte Benutzername           |
+| **`password`** | `string` | Das gespeicherte Passwort           |
+
+## Integration mit dem Anmeldeablauf
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+class AuthService {
+  async login(username: string, password: string) {
+    try {
+      // Mit Ihrem Backend authentifizieren
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        // Anmeldedaten zum Speichern anbieten
+        await this.offerToSavePassword(username, password);
+        return true;
+      }
+    } catch (error) {
+      console.error('Anmeldung fehlgeschlagen:', error);
+    }
+    return false;
+  }
+
+  private async offerToSavePassword(username: string, password: string) {
+    try {
+      await SavePassword.promptDialog({
+        username,
+        password,
+        url: 'https://yourdomain.com'
+      });
+    } catch (error) {
+      // Benutzer hat abgelehnt zu speichern oder Fehler aufgetreten
+      console.log('Passwort nicht gespeichert:', error);
+    }
+  }
+
+  async loadSavedCredentials() {
+    try {
+      return await SavePassword.readPassword();
+    } catch (error) {
+      console.log('Keine gespeicherten Anmeldedaten gefunden');
+      return null;
+    }
+  }
+}
+```
+
+## Best Practices
+
+- Fordern Sie nur zum Speichern von Passwörtern nach erfolgreicher Authentifizierung auf
+- Behandeln Sie Fälle, in denen Benutzer das Speichern von Passwörtern ablehnen, angemessen
+- Implementieren Sie ordnungsgemäße Fehlerbehandlung für Keychain-Zugriffsfehler
+- Verwenden Sie Associated Domains für nahtloses Web-App-Anmeldedaten-Sharing
+- Testen Sie die Autofill-Funktionalität über verschiedene iOS-Versionen hinweg
+
+## Sicherheitsüberlegungen
+
+- Anmeldedaten werden im System-Keychain mit entsprechenden Sicherheitsflags gespeichert
+- Associated Domains stellen sicher, dass Anmeldedaten nur für autorisierte Apps zugänglich sind
+- Befolgen Sie die Plattform-Sicherheitsrichtlinien für die Anmeldedatenverwaltung
+- Erwägen Sie die Implementierung zusätzlicher Sicherheitsmaßnahmen für sensible Anwendungen

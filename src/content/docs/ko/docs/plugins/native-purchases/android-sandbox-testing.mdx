@@ -1,0 +1,93 @@
+---
+title: Android 샌드박스 테스트 구성
+locale: ko
+description: Google Play Console을 사용하여 Android에서 인앱 구매를 위한 샌드박스 테스트를 설정하는 방법을 알아보세요.
+sidebar:
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+인앱 구매 테스트를 위해서는 Google Play Console에서 적절한 구성이 필요합니다. 이 가이드는 Android 앱의 샌드박스 테스트 설정 과정을 안내합니다.
+
+## 사전 요구 사항
+
+연간 갱신이 포함된 활성 Google Play Console 계정이 필요합니다.
+
+## 설정 프로세스
+
+<Steps>
+
+1. **테스트 계정 추가**
+
+   Google Play Console로 이동하여 앱을 선택한 다음 **설정 > 라이선스 테스트**로 이동하세요.
+
+   테스트에 사용 중인 Android 기기와 연결된 기본 Google 계정을 추가하세요.
+
+   ![테스트 계정 추가](/native-purchases/android/sandbox-testing/add-testing-account.webp)
+
+2. **테스트 트랙 생성**
+
+   **테스트 > 비공개 테스트** 또는 **테스트 > 내부 테스트**로 이동하여 새 트랙을 생성하세요.
+
+   이 트랙에 서명된 앱 버전을 최소 하나 업로드해야 합니다.
+
+   ![테스트 트랙 생성](/native-purchases/android/sandbox-testing/create-testing-track.webp)
+
+3. **테스터 목록 생성**
+
+   테스트 트랙을 설정한 후 이메일 목록을 생성하고 테스트 기기의 계정 이메일 주소를 추가하세요.
+
+   ![테스터 목록 생성](/native-purchases/android/sandbox-testing/create-tester-list.webp)
+
+4. **테스트 프로그램 참여**
+
+   테스트 기기에서 동의 URL을 열고 **"테스터 되기"** 버튼을 클릭하여 등록하세요.
+
+   ![테스트 참여](/native-purchases/android/sandbox-testing/join-testing-program.webp)
+
+5. **서명된 APK 업로드**
+
+   서명된 APK를 생성하거나 Android App Bundle을 사용하여 테스트 트랙에 앱을 업로드하세요.
+
+   출시는 필요하지 않으며, 업로드하고 승인을 기다리기만 하면 됩니다.
+
+   ![APK 업로드](/native-purchases/android/sandbox-testing/upload-signed-apk.webp)
+
+6. **빌드 및 테스트**
+
+   테스트 기기에서 앱을 실행하세요. 구매를 시도하면 다음 메시지가 표시됩니다:
+
+   > "테스트 주문입니다. 요금이 청구되지 않습니다."
+
+   ![테스트 구매](/native-purchases/android/sandbox-testing/test-purchase-confirmation.webp)
+
+</Steps>
+
+## 중요 사항
+
+- 테스트 계정에는 구매 요금이 청구되지 않습니다
+- 테스트 구매는 프로덕션 구매와 동일한 흐름을 사용합니다
+- 평가판 및 출시 특가를 포함한 모든 구독 기능을 테스트할 수 있습니다
+- 테스트 구독은 빠른 테스트를 위해 갱신 기간이 가속화됩니다
+
+## 문제 해결
+
+**테스트 모드에서 제품이 표시되지 않음:**
+- 앱이 테스트 트랙에 업로드되었는지 확인
+- 테스트 계정이 라이선스 테스트에 추가되었는지 확인
+- Google Play Console에서 제품이 활성화되어 있는지 확인
+
+**"항목을 사용할 수 없습니다" 오류:**
+- 제품을 생성한 후 제품을 사용할 수 있을 때까지 2~3시간 대기
+- 앱의 패키지 이름이 Play Console의 이름과 일치하는지 확인
+- 테스트 계정으로 로그인되어 있는지 확인
+
+**테스트 구매가 실제 요금으로 표시됨:**
+- 계정이 라이선스 테스트에 추가되었는지 다시 확인
+- 테스트 트랙의 빌드를 사용하고 있는지 확인
+- 구매 중 테스트 배너가 표시되는지 확인
+
+## 추가 리소스
+
+자세한 내용은 인앱 구매 테스트에 대한 [공식 Google Play 문서](https://developer.android.com/google/play/billing/test)를 참조하세요.

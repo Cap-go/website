@@ -1,0 +1,56 @@
+---
+title: "Background Geolocation"
+locale: fr
+description: Un plugin Capacitor qui vous permet de recevoir des mises à jour de géolocalisation précises même lorsque l'application est en arrière-plan
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Recevez des mises à jour de géolocalisation précises même lorsque l'application est en arrière-plan.
+  image:
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions:
+    - text: Commencer
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Suivi précis" icon="rocket">
+    Priorise la précision pour les cas d'usage comme la randonnée et la navigation 🎯
+  </Card>
+  <Card title="Mises à jour en arrière-plan" icon="puzzle">
+    Continue de recevoir des mises à jour de localisation même lorsque l'application est en arrière-plan 🏃
+  </Card>
+  <Card title="Efficacité de la batterie" icon="setting">
+    Optimisé pour équilibrer précision et consommation de batterie 🔋
+  </Card>
+  <Card title="Premiers pas" icon="open-book">
+    Consultez le [Guide de démarrage](/docs/plugins/background-geolocation/getting-started/) pour installer et configurer le plugin.
+  </Card>
+</CardGrid>
+
+## Comparaison des plugins
+
+Une brève comparaison entre les trois principaux plugins de géolocalisation en arrière-plan couramment utilisés dans les applications Capacitor.
+
+| Plugin | Précision | Arrière-plan | Upload HTTP | Tarification |
+|--------|-----------|--------------|-------------|--------------|
+| `@capacitor-community/background-geolocation` (Community) | Pas précis | Oui | Non | Gratuit |
+| `@capgo/background-geolocation` (ce plugin) | Précis | Oui | Non | Gratuit |
+| Transistorsoft (original) | Précis | Oui | Oui — téléchargeur HTTP intégré vers votre API | Payant |
+
+**Remarques :**
+- Le plugin Community est léger et continue de fonctionner en arrière-plan, mais il est connu pour être moins précis que les options ci-dessous.
+- Ce plugin Capgo est optimisé pour fournir des corrections de localisation précises et un fonctionnement fiable en arrière-plan sans nécessiter de licence payante.
+- Transistorsoft offre une solution commerciale complète qui inclut également des capacités d'upload HTTP intégrées pour envoyer des données de localisation à votre backend.

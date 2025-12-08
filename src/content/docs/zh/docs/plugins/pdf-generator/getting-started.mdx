@@ -1,0 +1,67 @@
+---
+title: 入门指南
+locale: zh
+description: 使用 Capgo PDF Generator 插件将 HTML 和远程页面渲染为 PDF。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装插件**
+   <PackageManagers pkg="@capgo/capacitor-pdf-generator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步平台**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 从 HTML 生成
+
+```typescript
+import { PdfGenerator } from '@capgo/capacitor-pdf-generator';
+
+const receiptHtml = `
+  <html>
+    <body>
+      <h1>Capgo Store</h1>
+      <p>Thank you for your purchase.</p>
+    </body>
+  </html>
+`;
+
+const pdf = await PdfGenerator.fromData({
+  data: receiptHtml,
+  documentSize: 'A4',
+  orientation: 'portrait',
+  type: 'base64',
+  fileName: 'receipt.pdf',
+});
+
+if (pdf.type === 'base64') {
+  const link = document.createElement('a');
+  link.href = `data:application/pdf;base64,${pdf.base64}`;
+  link.download = 'receipt.pdf';
+  link.click();
+}
+```
+
+## 捕获远程 URL
+
+```typescript
+await PdfGenerator.fromURL({
+  url: 'https://docs.capgo.app/invoice?id=123',
+  orientation: 'landscape',
+  documentSize: 'A4',
+  type: 'share', // opens the native share dialog
+  fileName: 'invoice-123.pdf',
+});
+```
+
+## 提示
+
+- 在 HTML 字符串中包含内联 CSS 或提供 `baseUrl`，以便正确解析相对资源。
+- 在移动设备上返回 base64 数据时，在共享之前将其移动到文件系统（例如，Capacitor Filesystem）。
+- landscape 方向适合宽表格，而 portrait 适合大多数文档。
+- 考虑使用作用域 CSS 字体（例如，系统字体）以在各平台上实现一致的渲染。

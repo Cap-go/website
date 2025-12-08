@@ -1,0 +1,61 @@
+---
+title: 入门指南
+description: 添加具有边缘检测和可调输出格式的原生质量文档扫描功能。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装插件**
+   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生平台**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 触发扫描
+
+```typescript
+import {
+  DocumentScanner,
+  ResponseType,
+  ScanDocumentResponseStatus,
+} from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  croppedImageQuality: 90,
+  letUserAdjustCrop: true,
+  maxNumDocuments: 10,
+  responseType: ResponseType.ImageFilePath,
+});
+
+if (result.status === ScanDocumentResponseStatus.Success) {
+  console.log('Scanned files:', result.scannedImages);
+} else {
+  console.log('Scan cancelled by user');
+}
+```
+
+## 返回 base64 数据
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  responseType: ResponseType.Base64,
+});
+
+const [firstPage] = result.scannedImages ?? [];
+if (firstPage) {
+  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
+  // Display preview or upload to server
+}
+```
+
+## 平台要求
+
+- **iOS**: 在 `ios/App/App/Info.plist` 中添加 `NSCameraUsageDescription` 说明如何使用相机。
+- **Android**: 确认已声明 `CAMERA` 权限（Capacitor 会自动添加）并调整 `croppedImageQuality`、`letUserAdjustCrop` 和 `maxNumDocuments` 以匹配您的 UI。
+- **存储**: 使用 `ResponseType.ImageFilePath` 时，请在应用会话结束前将扫描的文件移动或复制到您所需的存储位置。

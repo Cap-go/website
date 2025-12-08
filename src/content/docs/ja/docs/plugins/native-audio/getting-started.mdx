@@ -1,0 +1,478 @@
+---
+title: はじめに
+description: Capacitorアプリで高性能オーディオ再生のためのNative Audioプラグインをインストールして使用する方法を学びます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/native-audio" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **オーディオファイルを追加**
+   オーディオファイルを適切なプラットフォームフォルダに配置します：
+   - **iOS**: `ios/App/App/sounds/`
+   - **Android**: `android/app/src/main/res/raw/`
+</Steps>
+
+## 使用方法
+
+プラグインをインポートし、再生前にオーディオファイルをプリロードします：
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+// オーディオファイルをプリロード
+const preloadAudio = async () => {
+  // 短い音用のシンプルなプリロード
+  await NativeAudio.preload({
+    assetId: 'click',
+    assetPath: 'sounds/click.mp3',
+    audioChannelNum: 1,
+    isUrl: false
+  });
+
+  // 音楽/長いオーディオ用の複雑なプリロード
+  await NativeAudio.preloadComplex({
+    assetId: 'background-music',
+    assetPath: 'sounds/background.mp3',
+    audioChannelNum: 1,
+    volume: 0.5,
+    delay: 0,
+    isUrl: false
+  });
+};
+
+// オーディオを再生
+const playSound = async () => {
+  await NativeAudio.play({
+    assetId: 'click'
+  });
+};
+
+// オプション付きで再生
+const playMusic = async () => {
+  await NativeAudio.play({
+    assetId: 'background-music',
+    time: 0 // 最初から開始
+  });
+};
+
+// オーディオをループ
+const loopMusic = async () => {
+  await NativeAudio.loop({
+    assetId: 'background-music'
+  });
+};
+
+// オーディオを停止
+const stopMusic = async () => {
+  await NativeAudio.stop({
+    assetId: 'background-music'
+  });
+};
+
+// 完了時にアンロード
+const cleanup = async () => {
+  await NativeAudio.unload({
+    assetId: 'click'
+  });
+  await NativeAudio.unload({
+    assetId: 'background-music'
+  });
+};
+```
+
+## APIリファレンス
+
+### preload(options)
+
+シンプルな再生用にオーディオファイルをプリロードします（短い音に最適）。
+
+```typescript
+interface PreloadOptions {
+  assetId: string;
+  assetPath: string;
+  audioChannelNum?: number;
+  isUrl?: boolean;
+}
+
+await NativeAudio.preload({
+  assetId: 'sound-effect',
+  assetPath: 'sounds/effect.mp3',
+  audioChannelNum: 1,
+  isUrl: false
+});
+```
+
+### preloadComplex(options)
+
+高度なオプション付きでオーディオをプリロードします（音楽/バックグラウンドオーディオに最適）。
+
+```typescript
+interface PreloadComplexOptions {
+  assetId: string;
+  assetPath: string;
+  volume?: number; // 0.0から1.0
+  audioChannelNum?: number;
+  delay?: number;
+  isUrl?: boolean;
+  fadeDuration?: number;
+}
+
+await NativeAudio.preloadComplex({
+  assetId: 'theme-song',
+  assetPath: 'sounds/theme.mp3',
+  volume: 0.7,
+  audioChannelNum: 2,
+  isUrl: false
+});
+```
+
+### play(options)
+
+プリロードされたオーディオファイルを再生します。
+
+```typescript
+interface PlayOptions {
+  assetId: string;
+  time?: number; // 開始時間（秒）
+}
+
+await NativeAudio.play({
+  assetId: 'sound-effect',
+  time: 0
+});
+```
+
+### loop(options)
+
+プリロードされたオーディオファイルを連続的にループします。
+
+```typescript
+await NativeAudio.loop({
+  assetId: 'background-music'
+});
+```
+
+### stop(options)
+
+オーディオファイルの再生を停止します。
+
+```typescript
+await NativeAudio.stop({
+  assetId: 'background-music'
+});
+```
+
+### pause(options)
+
+オーディオの再生を一時停止します。
+
+```typescript
+await NativeAudio.pause({
+  assetId: 'background-music'
+});
+```
+
+### resume(options)
+
+一時停止されたオーディオを再開します。
+
+```typescript
+await NativeAudio.resume({
+  assetId: 'background-music'
+});
+```
+
+### setVolume(options)
+
+オーディオアセットの音量を設定します。
+
+```typescript
+interface SetVolumeOptions {
+  assetId: string;
+  volume: number; // 0.0から1.0
+}
+
+await NativeAudio.setVolume({
+  assetId: 'background-music',
+  volume: 0.3
+});
+```
+
+### getDuration(options)
+
+オーディオファイルの長さを秒単位で取得します。
+
+```typescript
+const { duration } = await NativeAudio.getDuration({
+  assetId: 'background-music'
+});
+console.log(`長さ: ${duration}秒`);
+```
+
+### getCurrentTime(options)
+
+現在の再生時間を秒単位で取得します。
+
+```typescript
+const { currentTime } = await NativeAudio.getCurrentTime({
+  assetId: 'background-music'
+});
+console.log(`現在時刻: ${currentTime}秒`);
+```
+
+### isPlaying(options)
+
+オーディオが現在再生中かどうかを確認します。
+
+```typescript
+const { isPlaying } = await NativeAudio.isPlaying({
+  assetId: 'background-music'
+});
+console.log(`再生中: ${isPlaying}`);
+```
+
+### unload(options)
+
+メモリからオーディオファイルをアンロードします。
+
+```typescript
+await NativeAudio.unload({
+  assetId: 'sound-effect'
+});
+```
+
+## 高度な使用方法
+
+### サウンドマネージャークラス
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+export class SoundManager {
+  private sounds: Map<string, boolean> = new Map();
+  private volume = 1.0;
+
+  async init() {
+    // すべての音をプリロード
+    await this.preloadSound('click', 'sounds/click.mp3');
+    await this.preloadSound('success', 'sounds/success.mp3');
+    await this.preloadSound('error', 'sounds/error.mp3');
+
+    // 音楽をプリロード
+    await this.preloadMusic('background', 'sounds/background.mp3', 0.5);
+  }
+
+  private async preloadSound(id: string, path: string) {
+    try {
+      await NativeAudio.preload({
+        assetId: id,
+        assetPath: path,
+        audioChannelNum: 1,
+        isUrl: false
+      });
+      this.sounds.set(id, true);
+    } catch (error) {
+      console.error(`${id}のプリロードに失敗:`, error);
+    }
+  }
+
+  private async preloadMusic(id: string, path: string, volume: number) {
+    try {
+      await NativeAudio.preloadComplex({
+        assetId: id,
+        assetPath: path,
+        volume,
+        audioChannelNum: 2,
+        isUrl: false
+      });
+      this.sounds.set(id, true);
+    } catch (error) {
+      console.error(`${id}のプリロードに失敗:`, error);
+    }
+  }
+
+  async playSound(id: string) {
+    if (!this.sounds.has(id)) {
+      console.warn(`音声${id}がプリロードされていません`);
+      return;
+    }
+
+    try {
+      await NativeAudio.play({ assetId: id });
+    } catch (error) {
+      console.error(`${id}の再生に失敗:`, error);
+    }
+  }
+
+  async playMusic(id: string) {
+    if (!this.sounds.has(id)) return;
+
+    try {
+      await NativeAudio.loop({ assetId: id });
+    } catch (error) {
+      console.error(`音楽${id}の再生に失敗:`, error);
+    }
+  }
+
+  async stopMusic(id: string) {
+    try {
+      await NativeAudio.stop({ assetId: id });
+    } catch (error) {
+      console.error(`${id}の停止に失敗:`, error);
+    }
+  }
+
+  async setMasterVolume(volume: number) {
+    this.volume = Math.max(0, Math.min(1, volume));
+
+    // ロードされたすべての音を更新
+    for (const [id] of this.sounds) {
+      await NativeAudio.setVolume({
+        assetId: id,
+        volume: this.volume
+      });
+    }
+  }
+
+  async cleanup() {
+    for (const [id] of this.sounds) {
+      await NativeAudio.unload({ assetId: id });
+    }
+    this.sounds.clear();
+  }
+}
+```
+
+### URLからの読み込み
+
+```typescript
+// URLからオーディオを読み込む
+await NativeAudio.preloadComplex({
+  assetId: 'remote-audio',
+  assetPath: 'https://example.com/audio.mp3',
+  isUrl: true,
+  volume: 0.8
+});
+```
+
+### フェードイン/アウトエフェクト
+
+```typescript
+const fadeIn = async (assetId: string, duration: number) => {
+  const steps = 20;
+  const stepDuration = duration / steps;
+
+  await NativeAudio.setVolume({ assetId, volume: 0 });
+  await NativeAudio.play({ assetId });
+
+  for (let i = 1; i <= steps; i++) {
+    await new Promise(resolve => setTimeout(resolve, stepDuration));
+    await NativeAudio.setVolume({
+      assetId,
+      volume: i / steps
+    });
+  }
+};
+
+const fadeOut = async (assetId: string, duration: number) => {
+  const steps = 20;
+  const stepDuration = duration / steps;
+
+  for (let i = steps; i >= 0; i--) {
+    await NativeAudio.setVolume({
+      assetId,
+      volume: i / steps
+    });
+    await new Promise(resolve => setTimeout(resolve, stepDuration));
+  }
+
+  await NativeAudio.stop({ assetId });
+};
+```
+
+## ベストプラクティス
+
+1. **アプリ初期化時にプリロード**
+   ```typescript
+   import { App } from '@capacitor/app';
+
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       await soundManager.init();
+     }
+   });
+   ```
+
+2. **エラーを適切に処理**
+   ```typescript
+   try {
+     await NativeAudio.play({ assetId: 'sound' });
+   } catch (error) {
+     console.log('オーディオ再生に失敗、サイレントに続行');
+   }
+   ```
+
+3. **未使用のオーディオをアンロード**
+   ```typescript
+   // 画面を離れるときに音をアンロード
+   ionViewWillLeave() {
+     this.unloadScreenSounds();
+   }
+   ```
+
+4. **適切なプリロードメソッドを使用**
+   - `preload()` 短い効果音用（5秒未満）
+   - `preloadComplex()` 音楽と長いオーディオ用
+
+## プラットフォームノート
+
+### iOS
+- AAC、MP3、WAV、その他のCore Audioフォーマットをサポート
+- 複雑なオーディオにはAVAudioPlayerを使用
+- シンプルなオーディオにはSystem Sound Servicesを使用
+- 適切な設定でバックグラウンドオーディオをサポート
+
+### Android
+- MP3、OGG、WAVフォーマットをサポート
+- シンプルなオーディオにはSoundPoolを使用
+- 複雑なオーディオにはMediaPlayerを使用
+- バックグラウンド再生にはWAKE_LOCK権限が必要な場合があります
+
+### ファイルの配置
+
+#### iOS
+`ios/App/App/sounds/`にファイルを配置するか、Xcodeでフォルダ参照を作成します。
+
+#### Android
+`android/app/src/main/res/raw/`にファイルを配置します。
+注意：ファイル名は小文字で特殊文字を含まない必要があります。
+
+## 一般的な問題
+
+1. **オーディオが再生されない**
+   - ファイルが正しいディレクトリにあることを確認
+   - ファイル形式の互換性を確認
+   - assetIdが正確に一致することを確認
+
+2. **再生の遅延**
+   - 効果音には`preload()`を使用
+   - 再生する前にプリロード
+
+3. **メモリの問題**
+   - 不要なときはオーディオファイルをアンロード
+   - 大きなファイルを多数プリロードしない
+
+4. **バックグラウンド再生**
+   - iOSでバックグラウンドオーディオ機能を設定
+   - Androidでオーディオフォーカスを処理

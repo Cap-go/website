@@ -1,0 +1,179 @@
+---
+title: "API de Estadísticas"
+locale: es
+description: "Cómo usar el endpoint de estadísticas de Capgo con el plugin de actualización automática en modo auto-hospedado, para qué se utilizan y qué esperar"
+sidebar:
+  order: 7
+---
+
+import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
+
+## API de Estadísticas
+
+¡A partir de la versión 1.3.0, el sistema de actualización puede enviar estadísticas!
+
+Por defecto, todas las estadísticas se envían a nuestro servidor, para entender el uso e investigar.
+
+<Aside>
+No se envían datos privados para estadísticas, solo UUID aleatorios, versión de actualización, versión de la aplicación nativa, plataforma, acción e ID de aplicación.
+</Aside>
+
+Si quieres enviar estos datos a tu servidor en su lugar, cambia la configuración a continuación:
+
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"statsUrl": "YOUR_URL"
+		}
+	}
+}
+```
+
+## Estructura de Datos
+
+Lo que tu servidor recibirá es:
+
+```tsx
+interface AppInfosStats {
+	"action": "set", // puede ser set, delete, set_fail, reset, revert
+	// Luego es la misma info que actualización
+	"app_id": "**.***.**", // identificador de la app en la tienda
+	"device_id": "*******", // id único por instalación de app
+	"platform": "ios", // o android
+	"custom_id": "user_1", // representa tu usuario
+        "version_name": "1.2.3", // versión del build web
+        "version_build": "1.2.0", // versión del build nativo
+        "version_code": "120", // número de build del build nativo
+	"version_os": "16", // versión del OS del dispositivo
+        "plugin_version": "4.0.0"// para hacer que tu api se comporte de manera diferente con diferentes plugins
+        "is_emulator": false,
+    	"is_prod": false,
+}
+```
+
+También puedes deshabilitarlo totalmente, con una cadena vacía. Ten en cuenta que las estadísticas se hacen de forma privada amigable y me ayudan a entender cómo las personas usan el plugin, para resolver problemas y mejorarlo.
+
+## Ejemplo de Implementación
+
+Aquí hay un ejemplo de código en JavaScript para guardar las estadísticas del plugin:
+
+```typescript
+interface AppInfos {
+  version_name: string
+  action: 'ping' |
+          'delete' |
+          'reset' |
+          'set' |
+          'get' |
+          'set_fail' |
+          'update_fail' |
+          'download_fail' |
+          'windows_path_fail' |
+          'canonical_path_fail' |
+          'directory_path_fail' |
+          'unzip_fail' |
+          'low_mem_fail' |
+          'download_10' |
+          'download_20' |
+          'download_30' |
+          'download_40' |
+          'download_50' |
+          'download_60' |
+          'download_70' |
+          'download_80' |
+          'download_90' |
+          'download_complete' |
+          'download_manifest_start' |
+          'download_manifest_complete' |
+          'download_zip_start' |
+          'download_zip_complete' |
+          'download_manifest_file_fail' |
+          'download_manifest_checksum_fail' |
+          'download_manifest_brotli_fail' |
+          'decrypt_fail' |
+          'app_moved_to_foreground' |
+          'app_moved_to_background' |
+          'uninstall' |
+          'needPlanUpgrade' |
+          'missingBundle' |
+          'noNew' |
+          'disablePlatformIos' |
+          'disablePlatformAndroid' |
+          'disableAutoUpdateToMajor' |
+          'cannotUpdateViaPrivateChannel' |
+          'disableAutoUpdateToMinor' |
+          'disableAutoUpdateToPatch' |
+          'channelMisconfigured' |
+          'disableAutoUpdateMetadata' |
+          'disableAutoUpdateUnderNative' |
+          'disableDevBuild' |
+          'disableEmulator' |
+          'cannotGetBundle' |
+          'checksum_fail' |
+          'NoChannelOrOverride' |
+          'setChannel' |
+          'getChannel' |
+          'rateLimited' |
+          'disableAutoUpdate' |
+          'InvalidIp' |
+          'blocked_by_server_url'
+  version_build: string
+  version_code: string
+  version_os: string
+  plugin_version: string
+  platform: string
+  app_id: string
+  device_id: string
+  custom_id?: string
+  is_prod?: boolean
+  is_emulator?: boolean
+}
+
+export const handler: Handler = async (event) => {
+  const body = JSON.parse(event.body || '{}') as AppInfos
+  const {
+    platform,
+    app_id,
+    action,
+    version_code,
+    version_os,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version,
+  } = body
+  console.log('update asked', platform,
+    app_id,
+    action,
+    version_os,
+    version_code,
+    device_id,
+    version_name,
+    version_build,
+    plugin_version)
+  // Guárdalo en tu base de datos
+  return { status: 'ok' }
+}
+```
+
+Este endpoint debe devolver un JSON:
+
+```json
+{ "status": "ok" }
+```
+
+## Acciones
+
+Para descripciones detalladas de todos los códigos de acción y sus significados, por favor consulta la documentación de depuración:
+
+* **Acciones enviadas desde el dispositivo**: Ver la sección [documentación de depuración - Enviado desde el dispositivo](/docs/plugins/updater/debugging/#sent-from-the-device)
+* **Acciones enviadas desde el backend**: Ver la sección [documentación de depuración - Enviado desde el backend](/docs/plugins/updater/debugging/#sent-from-the-backend)
+
+<LinkCard
+	title="Manejo de Actualizaciones"
+	href="/docs/plugin/self-hosted/handling-updates/"
+/>

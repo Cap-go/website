@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-llm"
+description: プライバシーとオフライン機能のためのネイティブApple Intelligenceサポートを備えた、iOSとAndroidでLLMモデルをローカル実行します。
+tableOfContents: false
+next: false
+prev: false
+locale: ja
+sidebar:
+  order: 1
+  label: "紹介"
+hero:
+  tagline: ネイティブApple Intelligence統合とハードウェアアクセラレーションにより、LLMモデルをデバイス上で直接実行します。
+  image:
+    file: ~public/icons/plugins/llm.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/llm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-llm/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="デバイス上のプライバシー" icon="approve-check-circle">
+    プライバシーとオフライン機能のために、LLMモデルをデバイス上で直接実行します 🤖
+  </Card>
+  <Card title="Apple Intelligence" icon="star">
+    iOS 26.0以降でネイティブApple Intelligence統合 🍎
+  </Card>
+  <Card title="複数のフォーマット" icon="puzzle">
+    .taskと.litertlmモデルフォーマットをサポート 📦
+  </Card>
+  <Card title="ハードウェアアクセラレーション" icon="rocket">
+    ネイティブハードウェアアクセラレーションによる高速推論 ⚡
+  </Card>
+  <Card title="ストリーミングレスポンス" icon="download">
+    イベントリスナーによるリアルタイムストリーミングレスポンス 🔄
+  </Card>
+  <Card title="はじめに" icon="open-book">
+    プラグインのインストールと設定については、[はじめにガイド](/docs/plugins/llm/getting-started/)をご覧ください。
+  </Card>
+</CardGrid>

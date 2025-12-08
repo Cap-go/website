@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-pay"
+locale: ko
+description: 통합된 워크플로우로 Capacitor에서 Apple Pay 및 Google Pay 시트를 제공합니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 플랫폼별로 적응하는 단일 TypeScript API로 네이티브 Apple Pay 및 Google Pay 체크아웃을 제공합니다.
+  image:
+    file: ~public/icons/plugins/pay.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/pay/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-pay/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Pay는 최신 Apple Pay 및 Google Pay SDK를 연결하여 장치 전반에서 하나의 원활한 체크아웃 경험을 제공할 수 있습니다.
+
+<CardGrid stagger>
+  <Card title="통합 API" icon="pencil">
+    `isPayAvailable` 및 `requestPayment`를 한 번 호출하면 플러그인이 각 플랫폼을 처리합니다.
+  </Card>
+  <Card title="빠른 설정" icon="rocket">
+    플랫폼별 코드를 수동으로 연결하지 않고 완전히 네이티브 결제 시트를 제공합니다.
+  </Card>
+  <Card title="토큰화된 결제" icon="approve-check">
+    게이트웨이 또는 PSP 통합을 위한 결제 토큰을 받습니다.
+  </Card>
+  <Card title="사용자 정의 가능한 흐름" icon="star">
+    체크아웃에 맞게 라인 항목, 연락처 필드 및 청구 요구 사항을 구성합니다.
+  </Card>
+</CardGrid>
+
+각 플랫폼에 대한 설정 체크리스트 및 샘플 페이로드는 시작 가이드를 참조하세요.

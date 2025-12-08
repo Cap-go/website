@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-mute"
+description: Deteksi dan kontrol status sakelar mute pada perangkat iOS dan periksa status volume pada Android.
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+hero:
+  tagline: Periksa apakah perangkat dalam mode mute atau senyap. Mendeteksi sakelar mute pada iOS dan status volume pada Android.
+  image:
+    file: ~public/icons/plugins/mute.svg
+  actions:
+    - text: Mulai
+      link: /docs/plugins/mute/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mute/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Deteksi mode senyap" icon="rocket">
+    Deteksi apakah perangkat dalam mode senyap/mute 🔇
+  </Card>
+  <Card title="Lintas platform" icon="setting">
+    Bekerja pada iOS (sakelar mute) dan Android (volume) 📱
+  </Card>
+  <Card title="API sederhana" icon="pencil">
+    Mudah digunakan dengan metode yang jelas 🎯
+  </Card>
+  <Card title="Dokumentasi Lengkap" icon="open-book">
+    Lihat [Dokumentasi](/docs/plugins/mute/getting-started/) untuk menguasai plugin hanya dalam beberapa menit.
+  </Card>
+</CardGrid>

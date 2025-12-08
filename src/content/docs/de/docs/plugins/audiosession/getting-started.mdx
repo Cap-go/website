@@ -1,0 +1,72 @@
+---
+title: Erste Schritte
+description: Konfigurieren Sie das AudioSession Plugin, um auf iOS Audio-Route-Änderungen und Unterbrechungen zu reagieren.
+sidebar:
+  order: 2
+locale: de
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+> ℹ️ **Plattformunterstützung:** Die Audio-Session-API ist auf iOS verfügbar. Aufrufe auf Android und im Web werden ohne Auswirkung aufgelöst, sodass Sie gemeinsame Logik beibehalten können.
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **iOS-Plattform synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Verfügbare Ausgänge überprüfen
+
+```typescript
+import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
+
+const outputs = await AudioSession.currentOutputs();
+
+if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
+  console.log('Bluetooth-Lautsprecher verbunden');
+}
+```
+
+## Auf Lautsprecher-Modus umschalten
+
+```typescript
+import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
+
+await AudioSession.overrideOutput(OutputOverrideType.speaker);
+
+// System-Routing wiederherstellen, wenn Sie fertig sind
+await AudioSession.overrideOutput(OutputOverrideType.default);
+```
+
+## Auf Routen- und Unterbrechungsereignisse hören
+
+```typescript
+import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
+
+const routeListener = await AudioSession.addListener('routeChanged', (reason) => {
+  if (reason === RouteChangeReasons.NEW_DEVICE_AVAILABLE) {
+    console.log('Benutzer hat eine neue Audio-Route verbunden');
+  }
+});
+
+const interruptionListener = await AudioSession.addListener('interruption', (type) => {
+  if (type === InterruptionTypes.BEGAN) {
+    // Wiedergabe während der Unterbrechung pausieren
+  } else {
+    // Wiedergabe fortsetzen
+  }
+});
+
+// Später während der Bereinigung
+await routeListener.remove();
+await interruptionListener.remove();
+```
+
+## Berechtigungen
+
+- **iOS**: Fügen Sie alle erforderlichen Hintergrund-Audio-Modi (z.B. `audio`, `voice`) in `ios/App/App/Info.plist` hinzu, wenn Ihre App Audio im Hintergrund abspielt.
+- **Andere Plattformen**: Keine zusätzliche Einrichtung erforderlich; Methoden werden mit leeren Ergebnissen aufgelöst.

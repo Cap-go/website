@@ -1,0 +1,275 @@
+---
+title: Comenzar
+description: Aprende cómo instalar y usar el plugin Camera Preview para mostrar la transmisión de cámara en tiempo real y capturar fotos/videos en tu aplicación Capacitor.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/camera-preview" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurar permisos**
+
+   ### iOS
+   Agrega la descripción de uso de la cámara a tu `Info.plist`:
+   ```xml
+   <key>NSCameraUsageDescription</key>
+   <string>To take photos and videos</string>
+   <key>NSMicrophoneUsageDescription</key>
+   <string>To record audio with videos</string>
+   <key>NSPhotoLibraryUsageDescription</key>
+   <string>To save photos and videos</string>
+   ```
+
+   ### Android
+   Agrega permisos de cámara a tu `AndroidManifest.xml`:
+   ```xml
+   <uses-permission android:name="android.permission.CAMERA" />
+   <uses-permission android:name="android.permission.RECORD_AUDIO" />
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   ```
+</Steps>
+
+## Uso
+
+Importa el plugin y usa sus métodos para controlar la cámara:
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+import { CameraPreviewOptions, CameraPreviewPictureOptions } from '@capgo/camera-preview';
+
+// Start camera preview
+const startCamera = async () => {
+  const cameraPreviewOptions: CameraPreviewOptions = {
+    position: 'rear',
+    height: 1920,
+    width: 1080,
+    quality: 50,
+    toBack: false,
+    paddingBottom: 0,
+    rotateWhenOrientationChanged: true,
+    x: 0,
+    y: 0
+  };
+
+  await CameraPreview.start(cameraPreviewOptions);
+};
+
+// Stop camera preview
+const stopCamera = async () => {
+  await CameraPreview.stop();
+};
+
+// Take a picture
+const takePicture = async () => {
+  const pictureOptions: CameraPreviewPictureOptions = {
+    quality: 90,
+    width: 1920,
+    height: 1080
+  };
+
+  const result = await CameraPreview.capture(pictureOptions);
+  const base64PictureData = result.value;
+
+  // Use the base64 image data
+  console.log(base64PictureData);
+};
+
+// Switch camera
+const flipCamera = async () => {
+  await CameraPreview.flip();
+};
+
+// Control flash
+const setFlashMode = async (mode: 'on' | 'off' | 'auto' | 'torch') => {
+  await CameraPreview.setFlashMode({ flashMode: mode });
+};
+
+// Start recording video
+const startRecording = async () => {
+  await CameraPreview.startRecordVideo({
+    storeToFile: true,
+    fileName: 'myvideo'
+  });
+};
+
+// Stop recording
+const stopRecording = async () => {
+  const result = await CameraPreview.stopRecordVideo();
+  console.log('Video path:', result.videoFilePath);
+};
+```
+
+## Referencia de API
+
+### start(options)
+
+Inicia la vista previa de la cámara.
+
+```typescript
+interface CameraPreviewOptions {
+  position?: 'rear' | 'front';
+  height?: number;
+  width?: number;
+  x?: number;
+  y?: number;
+  toBack?: boolean;
+  paddingBottom?: number;
+  rotateWhenOrientationChanged?: boolean;
+  storeToFile?: boolean;
+  disableExifHeaderStripping?: boolean;
+  enableHighResolution?: boolean;
+  disableAudio?: boolean;
+  lockAndroidOrientation?: boolean;
+  enableOpacity?: boolean;
+  enableZoom?: boolean;
+}
+```
+
+### stop()
+
+Detiene la vista previa de la cámara.
+
+### capture(options)
+
+Toma una foto y la devuelve como cadena codificada en base64.
+
+```typescript
+interface CameraPreviewPictureOptions {
+  height?: number;
+  width?: number;
+  quality?: number;
+}
+```
+
+### flip()
+
+Cambia entre la cámara frontal y trasera.
+
+### setFlashMode(options)
+
+Establece el modo de flash.
+
+```typescript
+interface CameraPreviewFlashMode {
+  flashMode: 'off' | 'on' | 'auto' | 'torch';
+}
+```
+
+### startRecordVideo(options)
+
+Inicia la grabación de video.
+
+```typescript
+interface CameraPreviewVideoOptions {
+  storeToFile?: boolean;
+  fileName?: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  withFlash?: boolean;
+}
+```
+
+### stopRecordVideo()
+
+Detiene la grabación de video y devuelve la ruta del archivo de video.
+
+## Funciones Avanzadas
+
+### Control de Enfoque
+
+```typescript
+// Set focus
+await CameraPreview.setFocusCoordinate({
+  x: 100,
+  y: 100
+});
+
+// Get supported focus modes
+const focusModes = await CameraPreview.getFocusModes();
+
+// Set focus mode
+await CameraPreview.setFocusMode({
+  focusMode: 'continuous-picture'
+});
+```
+
+### Control de Zoom
+
+```typescript
+// Get max zoom
+const maxZoom = await CameraPreview.getMaxZoom();
+
+// Set zoom
+await CameraPreview.setZoom({
+  zoom: 2.0
+});
+
+// Get current zoom
+const currentZoom = await CameraPreview.getZoom();
+```
+
+### Control de Exposición
+
+```typescript
+// Get exposure compensation range
+const range = await CameraPreview.getExposureCompensationRange();
+
+// Set exposure compensation
+await CameraPreview.setExposureCompensation({
+  exposureCompensation: 0.5
+});
+```
+
+## Mejores Prácticas
+
+1. **Solicitar permisos primero**
+   ```typescript
+   import { Camera } from '@capacitor/camera';
+
+   const requestPermissions = async () => {
+     const permissions = await Camera.requestPermissions();
+     if (permissions.camera === 'granted') {
+       // Start camera preview
+     }
+   };
+   ```
+
+2. **Manejar cambios de orientación**
+   Establece `rotateWhenOrientationChanged: true` para ajustar automáticamente la vista previa.
+
+3. **Optimizar el rendimiento**
+   - Usa configuraciones de resolución apropiadas
+   - Detén la vista previa cuando no esté en uso
+   - Desactiva las funciones que no necesites
+
+4. **Manejo de errores**
+   ```typescript
+   try {
+     await CameraPreview.start(options);
+   } catch (error) {
+     console.error('Failed to start camera:', error);
+   }
+   ```
+
+## Notas de Plataforma
+
+### iOS
+- Requiere iOS 10.0+
+- Usa el framework AVFoundation
+- Soporta aceleración por hardware
+
+### Android
+- Requiere Android 5.0 (API 21)+
+- Usa Camera2 API
+- Soporta varias funciones de cámara según las capacidades del dispositivo

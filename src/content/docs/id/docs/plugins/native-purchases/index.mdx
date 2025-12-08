@@ -1,0 +1,59 @@
+---
+title: "@capgo/native-purchases"
+locale: id
+description: Plugin Capacitor untuk menangani pembelian in-app dan langganan dengan API sederhana dan terpadu di iOS dan Android.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+hero:
+  tagline: Sederhanakan pembelian in-app dan langganan dengan API terpadu yang bekerja sempurna di platform iOS dan Android.
+  image:
+    file: ~public/icons/plugins/native-purchases.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/native-purchases/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/native-purchases/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="API terpadu" icon="rocket">
+    API tunggal untuk pembelian iOS dan Android 💳
+  </Card>
+  <Card title="Manajemen langganan" icon="setting">
+    Tangani langganan dengan perpanjangan otomatis 🔄
+  </Card>
+  <Card title="Validasi receipt" icon="approve-check">
+    Validasi receipt bawaan untuk keamanan 🔒
+  </Card>
+  <Card title="Memulai" icon="open-book">
+    Lihat [Panduan Memulai](/docs/plugins/native-purchases/getting-started/) untuk menginstal dan mengkonfigurasi plugin.
+  </Card>
+</CardGrid>
+
+## Panduan Pengaturan Platform
+
+<CardGrid>
+  <Card title="Pengaturan Android" icon="setting">
+    Panduan lengkap untuk mengatur pembelian in-app di Android:
+    - [Konfigurasi Sandbox Testing](/docs/plugins/native-purchases/android-sandbox-testing/)
+    - [Buat Langganan](/docs/plugins/native-purchases/android-create-subscription/)
+    - [Penawaran Pengantar](/docs/plugins/native-purchases/android-introductory-offer/)
+  </Card>
+  <Card title="Pengaturan iOS" icon="star">
+    Panduan lengkap untuk mengatur pembelian in-app di iOS:
+    - [Konfigurasi Sandbox Testing](/docs/plugins/native-purchases/ios-sandbox-testing/)
+    - [Grup Langganan](/docs/plugins/native-purchases/ios-subscription-group/)
+    - [Buat Langganan](/docs/plugins/native-purchases/ios-create-subscription/)
+    - [Penawaran Pengantar](/docs/plugins/native-purchases/ios-introductory-offer/)
+  </Card>
+</CardGrid>

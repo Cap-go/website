@@ -1,0 +1,794 @@
+---
+title: Android Play Store IAP 审核指南
+locale: zh
+description: 通过应用内购买和订阅通过 Google Play 审核的完整指南，包括合规要求和最佳实践。
+sidebar:
+  order: 11
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+让您的 Android 应用在 Google Play 上获得批准需要遵守 Google 的政策，特别是对于具有应用内购买和订阅的应用。本指南涵盖了成功通过审核所需的一切。
+
+## Google Play 计费要求
+
+### 强制性计费系统
+
+对于数字商品和服务，您**必须**使用 Google Play 的计费系统：
+
+**数字商品（必须使用 Play 计费）：**
+- 高级功能订阅
+- 应用内货币或积分
+- 数字内容（电子书、音乐、视频）
+- 游戏升级和道具
+- 应用解锁和高级层级
+
+**实体商品（不能使用 Play 计费）：**
+- 实体商品
+- 真实世界服务
+- 向非营利组织的一次性捐赠
+
+:::caution 2025 要求
+新应用必须使用 `monetization.subscriptions` API 来处理订阅目录。旧版计费 API 已弃用。
+:::
+
+### 使用 Native Purchases 实现
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// 确保设备上可用计费
+const { isBillingSupported } = await NativePurchases.isBillingSupported();
+if (!isBillingSupported) throw new Error('Google Play Billing not available');
+
+// 获取订阅产品（需要商店数据——绝不硬编码定价）
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly', 'premium_yearly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// 方案标识符是您在 Google Play Console 中创建的基础方案 ID
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  planIdentifier: 'monthly-plan', // 在 Android 上必需，在 iOS 上被忽略
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Purchase token for server validation:', transaction.purchaseToken);
+```
+
+## 透明度和披露要求
+
+### 预先定价披露
+
+Google Play 要求在购买前清楚披露所有费用：
+
+**必需元素：**
+- 用户本地货币的准确价格
+- 计费频率（每月、每年等）
+- 订阅包含的内容
+- 引导性优惠的总费用
+- 何时收费
+
+![UI 设计最佳实践](/native-purchases/review-guides/ui-design-dos-donts.webp)
+
+**合规 UI 示例：**
+```typescript
+function SubscriptionCard({ product }) {
+  return (
+    <div className="subscription-card">
+      <h3>{product.title}</h3>
+
+      {/* 显示引导优惠（如果有）*/}
+      {product.introductoryPrice && (
+        <div className="intro-offer">
+          <p className="intro-price">{product.introductoryPriceString}</p>
+          <p className="intro-period">
+            for {product.introductoryPricePeriod}
+          </p>
+        </div>
+      )}
+
+      {/* 常规价格 */}
+      <div className="regular-price">
+        <p className="price">{product.priceString}</p>
+        <p className="period">per {product.subscriptionPeriod}</p>
+      </div>
+
+      {/* 清楚的描述 */}
+      <p>{product.description}</p>
+
+      {/* 续订条款 */}
+      <p className="terms">
+        自动续订。随时在 Google Play 中取消。
+      </p>
+
+      <button onClick={() => handlePurchase(product)}>
+        立即订阅
+      </button>
+    </div>
+  );
+}
+```
+
+### 自动续订披露
+
+在订阅自动续订之前，Google 要求：
+- 清楚通知将发生续订
+- 提醒价格
+- 轻松访问取消
+
+:::tip
+native-purchases 插件与 Google Play 配合使用，自动处理自动续订通知。确保您的订阅产品在 Google Play Console 中正确配置。
+:::
+
+### 跨平台价格一致性
+
+**关键规则：**价格必须在您的应用可用的所有平台上保持一致。
+
+**违规示例：**
+- iOS: $9.99/月
+- Android: $7.99/月
+- Web: $11.99/月
+
+**为什么重要：**用户可以截图价格差异并向 Google 报告，触发政策违规。
+
+## 隐私政策要求
+
+### 强制隐私政策
+
+如果您的应用包含应用内购买，您必须：
+
+1. **在 Play Store 列表中链接**
+   - 在 Play Console 中添加隐私政策 URL
+   - 必须公开访问
+   - 必须使用与您的应用相同的语言
+
+2. **在应用内链接**
+   - 在应用设置中显示隐私政策
+   - 在收集任何用户数据之前显示
+   - 使其易于发现
+
+**实现示例：**
+```typescript
+function SettingsScreen() {
+  const openPrivacyPolicy = () => {
+    window.open('https://yourapp.com/privacy', '_blank');
+  };
+
+  const openTerms = () => {
+    window.open('https://yourapp.com/terms', '_blank');
+  };
+
+  return (
+    <div>
+      <h2>设置</h2>
+
+      <button onClick={openPrivacyPolicy}>
+        隐私政策
+      </button>
+
+      <button onClick={openTerms}>
+        服务条款
+      </button>
+
+      <button onClick={() => NativePurchases.showManageSubscriptions()}>
+        管理订阅
+      </button>
+    </div>
+  );
+}
+```
+
+### 数据安全部分
+
+Google Play 要求在数据安全部分进行详细披露：
+
+**对于 IAP 应用，声明：**
+- 购买历史收集
+- 电子邮件地址（用于收据）
+- 设备 ID（用于防欺诈）
+- 支付信息处理
+- 分析数据收集
+
+:::warning
+数据安全部分具有法律约束力。不准确的声明可能导致应用被移除。
+:::
+
+## 常见拒绝原因
+
+### 1. 缺失或不正确的计费实现
+
+**失败原因：**
+- 未对数字商品使用 Google Play 计费
+- 使用已弃用的计费 API
+- 为订阅实现自定义支付解决方案
+
+**预防：**
+```typescript
+// ✅ 正确：使用 native-purchases（使用 Google Play 计费）
+await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly'
+});
+
+// ❌ 错误：为订阅使用自定义支付处理器
+// await CustomPayment.charge(user, 9.99);
+```
+
+### 2. 不清楚的定价或隐藏费用
+
+**失败原因：**
+- 仅在点击购买后显示价格
+- 未预先披露额外费用
+- 含糊的订阅条款
+
+**预防：**
+```typescript
+function PurchaseScreen({ product }) {
+  return (
+    <div>
+      {/* 预先显示所有费用 */}
+      <h2>高级订阅</h2>
+
+      <div className="pricing">
+        <p className="price">{product.priceString}/月</p>
+        <p className="taxes">税费可能根据位置而定</p>
+      </div>
+
+      <div className="features">
+        <h3>包含：</h3>
+        <ul>
+          <li>无广告体验</li>
+          <li>无限云存储</li>
+          <li>优先支持</li>
+        </ul>
+      </div>
+
+      <div className="terms">
+        <p>
+          订阅自动续订，除非在当前期间结束前至少 24 小时取消。
+        </p>
+        <p>
+          在 Google Play 订阅中管理或取消。
+        </p>
+      </div>
+
+      <button onClick={handlePurchase}>
+        开始订阅
+      </button>
+    </div>
+  );
+}
+```
+
+### 3. 欺骗性订阅模式
+
+**失败原因：**
+- 预先选择高级选项
+- 隐藏更便宜的替代方案
+- 使取消变得困难
+- 虚假紧迫性（"仅剩 3 个名额！"）
+
+![描述最佳实践](/native-purchases/review-guides/description-guidelines-1.webp)
+
+![营销指南](/native-purchases/review-guides/description-guidelines-2.webp)
+
+**预防：**
+- 平等显示所有订阅层级
+- 使取消清楚易访问
+- 避免倒计时器或虚假稀缺性
+- 不要使用暗模式推动昂贵选项
+
+### 4. 不完整的测试
+
+**失败原因：**
+- 购买时应用崩溃
+- 产品加载失败
+- 购买确认不显示
+- 购买后高级功能未解锁
+
+**预防：**
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// 提交前的全面测试
+async function testPurchaseFlow() {
+  try {
+    // 1. 测试产品加载
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: ['premium_monthly', 'premium_yearly'],
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('✓ Products loaded:', products.length);
+
+    // 2. 测试购买流程
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: 'premium_monthly',
+      planIdentifier: 'monthly-plan',
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('✓ Purchase completed', transaction.transactionId);
+
+    // 3. 验证权限
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    if (
+      purchases.some(
+        (purchase) =>
+          purchase.productIdentifier === 'premium_monthly' &&
+          ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') &&
+          purchase.isAcknowledged,
+      )
+    ) {
+      console.log('✓ Premium features unlocked');
+    }
+
+    // 4. 测试恢复
+    await NativePurchases.restorePurchases();
+    console.log('✓ Restore works');
+
+  } catch (error) {
+    console.error('✗ Test failed:', error);
+  }
+}
+```
+
+### 5. 隐私政策违规
+
+**失败原因：**
+- 应用中没有隐私政策链接
+- 隐私政策不可访问
+- 数据收集未披露
+- 数据安全部分不准确
+
+**预防：**
+- 将隐私政策添加到 Play Store 列表
+- 在应用设置中包含链接
+- 准确填写数据安全部分
+- 添加新数据收集时更新政策
+
+## 替代计费系统（2025 更新）
+
+### 区域合规
+
+Google 现在在某些地区允许替代计费系统：
+
+**符合条件的地区：**
+- 欧洲经济区（EEA）
+- 韩国
+- 印度（即将推出）
+
+**使用替代计费的要求：**
+- 仍必须提供 Google Play 计费作为选项
+- 向用户清楚传达选择
+- 遵守当地法规
+- 仍需支付服务费（减少）
+
+:::note
+对于大多数开发者，仅坚持 Google Play 计费更简单。native-purchases 插件会自动处理此问题。
+:::
+
+## 订阅管理
+
+### 轻松取消
+
+用户必须能够：
+- 轻松查看活动订阅
+- 无需联系支持即可取消
+- 了解取消何时生效
+
+**实现：**
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+function ManageSubscriptionButton() {
+  const openManagement = async () => {
+    try {
+      // 打开 Google Play 订阅管理
+      await NativePurchases.showManageSubscriptions();
+    } catch (error) {
+      // 回退到直接 URL
+      const playStoreUrl = 'https://play.google.com/store/account/subscriptions';
+      window.open(playStoreUrl, '_blank');
+    }
+  };
+
+  return (
+    <button onClick={openManagement}>
+      在 Google Play 中管理订阅
+    </button>
+  );
+}
+```
+
+### 取消宽限期
+
+**必需披露：**
+- 取消何时生效？
+- 用户是否保持访问权限直到期间结束？
+- 是否提供部分退款？
+
+```typescript
+function CancellationInfo() {
+  return (
+    <div className="cancellation-info">
+      <h3>取消政策</h3>
+      <ul>
+        <li>随时在 Google Play 中取消</li>
+        <li>访问权限持续到计费期间结束</li>
+        <li>部分期间不退款</li>
+        <li>随时重新订阅以重新获得访问权限</li>
+      </ul>
+
+      <button onClick={() => NativePurchases.showManageSubscriptions()}>
+        在 Google Play 中管理
+      </button>
+    </div>
+  );
+}
+```
+
+## 提交前检查清单
+
+![提交前检查清单](/native-purchases/review-guides/pre-submission-checklist.webp)
+
+<Steps>
+
+1. **验证计费实现**
+   - 使用 Google Play 计费（通过 native-purchases）
+   - 所有订阅产品在 Play Console 中创建
+   - 产品已激活并发布
+   - 为所有目标国家设置定价
+
+2. **测试购买流程**
+   - 创建许可测试账户
+   - 测试每个订阅层级
+   - 验证产品正确加载
+   - 测试购买完成
+   - 验证高级功能解锁
+   - 测试订阅恢复
+   - 在多个设备上测试
+
+3. **审核所有文案**
+   - 购买前清楚显示定价
+   - 预先披露所有费用
+   - 订阅条款清楚
+   - 解释取消流程
+   - 没有误导性声明
+
+4. **隐私合规**
+   - 在 Play Console 中链接隐私政策
+   - 隐私政策在应用中可访问
+   - 准确完成数据安全部分
+   - 权限合理并记录
+
+5. **内容分级**
+   - 完成内容分级问卷
+   - 确保分级与实际内容匹配
+   - 在问卷中声明应用内购买
+
+6. **准备商店列表**
+   - 应用描述准确
+   - 截图显示当前版本
+   - 特色图符合要求
+   - 上传所有必需资产
+
+</Steps>
+
+## 审核时间表
+
+**初次审核：**平均 7 天（可能更快）
+**更新：**通常比初次提交更快
+**政策违规：**可能立即暂停
+**申诉：**审核需 7-14 天
+
+:::tip 滚动审核
+与 Apple 不同，Google 持续审核应用。您的应用可能在审核期间的任何时间上线，而不是在固定时间。
+:::
+
+## 提交前测试
+
+### 许可测试
+
+1. **添加测试账户：**
+   - 转到 Play Console
+   - 设置 > 许可测试
+   - 添加 Gmail 账户进行测试
+
+2. **在沙盒中测试：**
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// 使用许可测试账户测试购买
+async function testInSandbox() {
+  const { isBillingSupported } = await NativePurchases.isBillingSupported();
+  if (!isBillingSupported) {
+    console.error('Billing not supported in this environment');
+    return;
+  }
+
+  // 获取产品（使用许可测试者时返回测试定价）
+  const { products } = await NativePurchases.getProducts({
+    productIdentifiers: ['premium_monthly'],
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Test products:', products);
+
+  // 进行测试购买（不收费）
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'premium_monthly',
+    planIdentifier: 'monthly-plan',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Test purchase complete:', transaction.transactionId);
+}
+```
+
+3. **验证测试横幅：**
+   - 使用测试账户购买时
+   - 应看到"测试购买"通知
+   - 不会发生实际收费
+
+### 内部测试轨道
+
+在生产发布之前：
+
+1. 在 Play Console 中创建内部测试轨道
+2. 上传 APK/AAB
+3. 添加测试者电子邮件地址
+4. 测试者从 Play Store 下载（测试轨道）
+5. 验证购买流程端到端工作
+
+## Native Purchases 的最佳实践
+
+### 处理所有购买状态
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function handlePurchase(productId: string, planIdentifier?: string) {
+  try {
+    setLoading(true);
+
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: productId,
+      planIdentifier,
+      productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
+    });
+
+    console.log('Purchase token:', transaction.purchaseToken ?? transaction.receipt);
+
+    // 成功 - 从商店检查权限
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: planIdentifier ? PURCHASE_TYPE.SUBS : PURCHASE_TYPE.INAPP,
+    });
+
+    const isOwned = purchases.some(
+      (purchase) =>
+        purchase.productIdentifier === productId &&
+        (purchase.purchaseState === 'PURCHASED' || purchase.purchaseState === '1') &&
+        purchase.isAcknowledged,
+    );
+
+    if (isOwned) {
+      unlockPremiumFeatures();
+      showSuccess('Premium activated!');
+    }
+
+  } catch (error: any) {
+    // 处理特定错误情况
+    switch (error.code) {
+      case 'USER_CANCELLED':
+        // 用户退出 - 无需错误
+        console.log('Purchase cancelled');
+        break;
+
+      case 'ITEM_ALREADY_OWNED':
+        // 他们已经拥有它 - 改为恢复
+        showInfo('You already own this! Restoring...');
+        await NativePurchases.restorePurchases();
+        break;
+
+      case 'ITEM_UNAVAILABLE':
+        showError('This subscription is currently unavailable. Please try again later.');
+        break;
+
+      case 'NETWORK_ERROR':
+        showError('Network error. Please check your connection and try again.');
+        break;
+
+      default:
+        showError('Purchase failed. Please try again.');
+        console.error('Purchase error:', error);
+    }
+  } finally {
+    setLoading(false);
+  }
+}
+```
+
+### 实现恢复购买
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+function RestorePurchasesButton() {
+  const [loading, setLoading] = useState(false);
+
+  const handleRestore = async () => {
+    setLoading(true);
+
+    try {
+      await NativePurchases.restorePurchases();
+
+      const { purchases } = await NativePurchases.getPurchases({
+        productType: PURCHASE_TYPE.SUBS,
+      });
+
+      const hasSubscription = purchases.some(
+        (purchase) => purchase.productType === 'subs' && purchase.isAcknowledged,
+      );
+
+      if (hasSubscription) {
+        unlockPremiumFeatures();
+        showSuccess('Subscriptions restored!');
+        return;
+      }
+
+      // 如果需要，检查一次性解锁
+      const { purchases: iaps } = await NativePurchases.getPurchases({
+        productType: PURCHASE_TYPE.INAPP,
+      });
+      const hasInApp = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
+
+      if (hasInApp) {
+        unlockPremiumFeatures();
+        showSuccess('Previous purchases restored!');
+        return;
+      }
+
+      showInfo('No previous purchases found.');
+    } catch (error) {
+      showError('Failed to restore purchases. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button onClick={handleRestore} disabled={loading}>
+      {loading ? 'Restoring...' : 'Restore Purchases'}
+    </button>
+  );
+}
+```
+
+### 检查订阅状态
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function checkSubscriptionStatus() {
+  try {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    const subscription = purchases.find(
+      (purchase) =>
+        purchase.productIdentifier === 'premium_monthly' &&
+        (purchase.purchaseState === 'PURCHASED' || purchase.purchaseState === '1') &&
+        purchase.isAcknowledged,
+    );
+
+    if (!subscription) {
+      showPaywall();
+      return;
+    }
+
+    console.log('Subscription active:', {
+      productId: subscription.productIdentifier,
+      expiresAt: subscription.expirationDate,
+      willRenew: subscription.willCancel === false,
+      purchaseToken: subscription.purchaseToken,
+    });
+
+    unlockPremiumFeatures();
+  } catch (error) {
+    console.error('Failed to check subscription:', error);
+  }
+}
+```
+
+## 如果您的应用被拒绝
+
+### 常见政策违规
+
+**支付政策：**
+- 未使用 Google Play 计费
+- 误导性订阅条款
+- 隐藏费用
+
+**用户数据政策：**
+- 缺少隐私政策
+- 不准确的数据安全声明
+- 过度权限
+
+### 解决步骤
+
+<Steps>
+
+1. **审核违规通知**
+   - 阅读引用的特定政策
+   - 了解 Google 标记的内容
+   - 查看他们提供的示例
+
+2. **修复问题**
+   - 解决根本原因，而不仅仅是症状
+   - 修复后彻底测试
+   - 记录所有更改
+
+3. **提交申诉（如适用）**
+
+   ![澄清和申诉流程](/native-purchases/review-guides/clarification-process.webp)
+
+   ```
+   主题：政策违规申诉 - [应用名称]
+
+   尊敬的 Google Play 审核团队，
+
+   我收到了我的应用违反 [政策 X.Y] 的通知。
+   我已进行以下更改以符合要求：
+
+   1. [所做的具体更改]
+   2. [所做的具体更改]
+   3. [所做的具体更改]
+
+   更新的版本 [版本号] 解决了提出的所有问题。
+
+   用于验证的测试账户：
+   电子邮件：test@example.com
+   密码：TestPass123
+
+   感谢您的考虑。
+   ```
+
+   ![请求文档示例](/native-purchases/review-guides/request-documents.webp)
+
+4. **重新提交或更新**
+   - 上传修复版本
+   - 重新提交审核
+   - 在 Play Console 中监控状态
+
+</Steps>
+
+## 其他资源
+
+- [Google Play 开发者政策中心](https://play.google.com/about/developer-content-policy/)
+- [Google Play 计费文档](https://developer.android.com/google/play/billing)
+- [订阅最佳实践](https://developer.android.com/google/play/billing/subscriptions)
+- [Play Console 帮助](https://support.google.com/googleplay/android-developer/)
+
+## 需要专家帮助？
+
+浏览 Play Store 审核可能很复杂，特别是对于 2025 年的新测试要求。如果您需要个性化援助：
+
+**[预约与我们团队的咨询电话](https://cal.com/team/capgo/capacitor-consulting-services)**，获取以下帮助：
+- 完整的 Play Store 审核准备
+- 测试轨道设置和测试者招募
+- IAP 实现审核
+- 数据安全和隐私合规
+- 拒绝故障排除和申诉
+- 完整的应用提交流程
+
+我们的专家已指导数百个应用成功通过 Play Store 提交，可以帮助您应对 2025 年的要求。
+
+## 支持
+
+需要实现帮助？
+- 查看 [Native Purchases 文档](/docs/plugins/native-purchases/getting-started/)
+- 查看 [Android 沙盒测试指南](/docs/plugins/native-purchases/android-sandbox-testing/)
+- 访问 [Google Play 开发者支持](https://support.google.com/googleplay/android-developer/)

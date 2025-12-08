@@ -1,0 +1,246 @@
+---
+title: Google Login auf iOS
+locale: de
+description: Dieser Leitfaden bietet eine umfassende Anleitung zur Konfiguration von Google Login mit Capacitor auf iOS und erläutert jeden Schritt, um einen reibungslosen Integrationsprozess sicherzustellen.
+sidebar:
+    order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Einführung
+
+In diesem Leitfaden lernen Sie, wie Sie Google Login mit Capgo Social Login für iOS einrichten.
+Ich gehe davon aus, dass Sie die [allgemeine Einrichtungsanleitung](/docs/plugins/social-login/google/general/) bereits gelesen haben.
+
+## Verwendung von Google Login auf iOS
+
+In diesem Teil lernen Sie, wie Sie Google Login in iOS einrichten.
+
+<Steps>
+1. Erstellen Sie eine iOS-Client-ID in der Google Console
+
+   1. Klicken Sie auf die Suchleiste
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console Suchleiste" />
+
+   2. Suchen Sie nach `credentials` und klicken Sie auf die `APIs and Services` Option (Nummer 2 auf dem Screenshot)
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="Suchergebnisse zeigen Credentials-Option mit hervorgehobenen APIs and Services" />
+
+   3. Klicken Sie auf `create credentials`
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Credentials erstellen Schaltfläche in Google Console" />
+
+   4. Wählen Sie `OAuth client ID`
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID Option im Credentials-Erstellungsmenü" />
+
+   5. Wählen Sie den `Application type` auf `iOS`
+      <img src="/social-login-assets/goolge_cons_cred_type_app_tye.png" alt="Anwendungstyp-Auswahl mit hervorgehobener iOS-Option" />
+
+   6. Finden Sie die Bundle ID
+
+      1. Öffnen Sie Xcode
+
+      2. Doppelklicken Sie auf `App`
+         <img src="/social-login-assets/xcode_app_click.png" alt="App Target im Xcode Projekt-Navigator" />
+
+      3. Stellen Sie sicher, dass Sie sich bei `Targets -> App` befinden
+         <img src="/social-login-assets/xcode_targets_app.png" alt="Targets Bereich in Xcode mit App ausgewählt" />
+
+      4. Finden Sie Ihre `Bundle Identifier`
+         <img src="/social-login-assets/xcode_bundle_id.png" alt="Bundle Identifier Feld in Xcode Projekteinstellungen" />
+
+      5. Gehen Sie zurück zur Google Console und fügen Sie Ihre `Bundle Identifier` in `Bundle ID` ein
+         <img src="/social-login-assets/google_cons_ios_bd_id.png" alt="Bundle ID Feld im Google Console iOS Client-Erstellungsformular" />
+
+   7. Optional fügen Sie Ihre `App Store ID` oder `Team ID` zur Client-ID hinzu, wenn Sie Ihre App im App Store veröffentlicht haben
+
+   8. Nachdem Sie alle Details ausgefüllt haben, klicken Sie auf `create`
+      <img src="/social-login-assets/google_cons_ios_cred_creat.png" alt="Create Schaltfläche am unteren Ende des iOS Client-Erstellungsformulars" />
+
+   9. Klicken Sie auf `OK`
+      <img src="/social-login-assets/google_cons_ios_click_ok.png" alt="OK Schaltfläche im Client-ID erstellt Bestätigungsdialog" />
+
+   10. Öffnen Sie den neu erstellten iOS-Client
+       <img src="/social-login-assets/google_cons_open_new_ios.png" alt="Neu erstellter iOS-Client in Credentials-Liste" />
+
+   11. Kopieren Sie die folgenden Daten
+       <img src="/social-login-assets/google_cons_ios_what_to_copy.png" alt="Client-ID Details zeigen Client-ID und umgekehrte Client-ID zum Kopieren" />
+
+       :::note
+       Die `nr. 1` in diesem Bild wird später zur `iOSClientId` im `initialize` Aufruf.
+
+       Die `nr. 2` in diesem Bild wird später zu `YOUR_DOT_REVERSED_IOS_CLIENT_ID`
+       :::
+
+2. Ändern Sie die Info.plist Ihrer App
+
+   1. Öffnen Sie Xcode und finden Sie die `Info.plist` Datei
+      <img src="/social-login-assets/xcode_info_file.png" alt="Info.plist Datei im Xcode Projekt-Navigator" />
+
+   2. Rechtsklicken Sie auf diese Datei und öffnen Sie sie als Quellcode
+      <img src="/social-login-assets/xcode_open_as_src_code.png" alt="Rechtsklick-Menü zeigt Als Quellcode öffnen Option" />
+
+   3. Am Ende Ihrer `Plist` Datei sehen Sie ein `</dict>` Tag
+      <img src="/social-login-assets/xcode_dict_tag.png" alt="Schließendes dict Tag in Info.plist Datei" />
+
+   4. Fügen Sie das folgende Fragment direkt vor dem schließenden `</dict>` Tag ein
+      <img src="/social-login-assets/xcode_plist_inserted.png" alt="Info.plist mit URL-Schemas-Code vor schließendem dict Tag eingefügt" />
+
+      ```xml
+      <key>CFBundleURLTypes</key>
+      <array>
+       <dict>
+         <key>CFBundleURLSchemes</key>
+         <array>
+           <string>YOUR_DOT_REVERSED_IOS_CLIENT_ID</string>
+         </array>
+       </dict>
+      </array>
+      ```
+
+   5. Ändern Sie die `YOUR_DOT_REVERSED_IOS_CLIENT_ID` in den im vorherigen Schritt kopierten Wert
+      <img src="/social-login-assets/xcode_plist_final.png" alt="Info.plist mit tatsächlicher umgekehrter Client-ID in URL-Schemas eingefügt" />
+
+      :::caution
+      Stellen Sie sicher, dass dieser Wert **MIT** `com.googleusercontent.apps` **BEGINNT**
+      :::
+
+   6. Speichern Sie die Datei mit `Command + S`
+
+3. Ändern Sie die `AppDelegate.swift`
+
+   1. Öffnen Sie das AppDelegate
+      <img src="/social-login-assets/xcode_app_deleg.png" alt="AppDelegate.swift Datei im Xcode Projekt-Navigator" />
+
+   2. Fügen Sie `import GoogleSignIn` am Anfang der Datei ein
+      <img src="/social-login-assets/xcode_app_deleg_google_sign_in.png" alt="AppDelegate.swift mit GoogleSignIn Import hinzugefügt" />
+
+   3. Finden Sie die `func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])` Funktion
+      <img src="/social-login-assets/xcode_app_deleg_app_fn.png" alt="Original application openURL Funktion im AppDelegate" />
+
+   4. Ändern Sie die Funktion so, dass sie folgendermaßen aussieht
+
+      ```swift
+      func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+          // Called when the app was launched with a url. Feel free to add additional processing here,
+          // but if you want the App API to support tracking app url opens, make sure to keep this call
+
+          var handled: Bool
+
+          handled = GIDSignIn.sharedInstance.handle(url)
+          if handled {
+            return true
+          }
+
+          return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
+      }
+      ```
+
+      <img src="/social-login-assets/xcode_app_deleg_app_fn_mod.png" alt="Geänderte application openURL Funktion mit GoogleSignIn Verarbeitung" />
+
+   5. Speichern Sie die Datei mit `Command + S`
+
+4. Richten Sie Google Login in Ihrem JavaScript/TypeScript Code ein
+
+   1. Importieren Sie `SocialLogin` und `Capacitor`
+
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      import { Capacitor } from '@capacitor/core';
+      ```
+
+   2. Rufen Sie die initialize Methode auf (dies sollte nur einmal aufgerufen werden)
+
+      **Grundlegende Einrichtung (Online-Modus - empfohlen für die meisten Apps):**
+      ```typescript
+      // onMounted ist Vue-spezifisch
+      onMounted(() => {
+        SocialLogin.initialize({
+          google: {
+            iOSClientId: '673324426943-redacted.apps.googleusercontent.com',
+            mode: 'online' // Standard-Modus
+          }
+        })
+      })
+      ```
+
+      **Erweiterte Einrichtung mit zusätzlichen Client-IDs:**
+      ```typescript
+      onMounted(() => {
+        SocialLogin.initialize({
+          google: {
+            webClientId: 'YOUR_WEB_CLIENT_ID',           // Optional: für Web-Plattform-Unterstützung
+            iOSClientId: 'YOUR_IOS_CLIENT_ID',           // Erforderlich: aus Schritt 1
+            iOSServerClientId: 'YOUR_WEB_CLIENT_ID',     // Optional: gleicher Wert wie webClientId, benötigt für einige erweiterte Funktionen
+            mode: 'online'                               // 'online' oder 'offline'
+          }
+        })
+      })
+      ```
+
+      :::note
+      **Client-ID Anforderungen:**
+      - `iOSClientId`: **Erforderlich** - Muss mit `googleusercontent.com` enden (aus Schritt 1 oben)
+      - `webClientId`: **Optional** - Nur benötigt, wenn Sie auch Web-Plattform unterstützen oder erweiterte Funktionen benötigen
+      - `iOSServerClientId`: **Optional** - Sollte derselbe Wert wie `webClientId` sein, wenn bereitgestellt
+
+      Für erweiterte Einrichtung mit `webClientId` und `iOSServerClientId`, siehe [Web-Einrichtungsanleitung](/docs/plugins/social-login/google/web/) zur Erstellung dieser Credentials.
+      :::
+
+      :::caution
+      **Über den Offline-Modus:** Bei Verwendung von `mode: 'offline'` enthält die Login-Antwort nicht direkt Benutzerdaten. Stattdessen erhalten Sie einen Server-Auth-Code, der über Ihren Backend-Server gegen Benutzerinformationen ausgetauscht werden muss. Siehe [allgemeine Einrichtungsanleitung](/docs/plugins/social-login/google/general/#using-offline-access-with-your-own-backend) für Implementierungsdetails.
+      :::
+
+   3. Implementieren Sie die Login-Funktion. Erstellen Sie eine Schaltfläche und führen Sie den folgenden Code beim Klicken aus
+
+      **Für Online-Modus:**
+      ```typescript
+      const res = await SocialLogin.login({
+        provider: 'google',
+        options: {}
+      })
+      // Antwort verarbeiten - enthält Benutzerdaten
+      console.log(JSON.stringify(res))
+      ```
+
+      **Für Offline-Modus:**
+      ```typescript
+      const res = await SocialLogin.login({
+        provider: 'google',
+        options: {
+          forceRefreshToken: true // Empfohlen für Offline-Modus
+        }
+      })
+      // res enthält serverAuthCode, keine Benutzerdaten
+      // Senden Sie serverAuthCode an Ihr Backend, um Benutzerinformationen zu erhalten
+      console.log('Server Auth Code:', res.result.serverAuthCode)
+      ```
+
+5. Testen Sie Ihre Anwendung
+
+   1. Bauen Sie Ihre App und führen Sie `cap sync` aus
+
+   2. Wenn Sie alles richtig gemacht haben, sollten Sie sehen, dass der Google-Login-Ablauf ordnungsgemäß funktioniert
+      <img src="/social-login-assets/google_final_ios_v2.gif" alt="Demo des Google-Login-Ablaufs auf iOS zeigt Anmeldeprozess und erfolgreiche Authentifizierung" />
+</Steps>
+
+:::note
+Die Sprache in der Google-Eingabeaufforderung hängt von den Spracheinstellungen Ihres Geräts ab.
+:::
+
+## Bekannte Probleme
+
+### Privacy Screen Plugin Inkompatibilität
+
+Das Google Login Plugin ist inkompatibel mit [@capacitor/privacy-screen](https://github.com/ionic-team/capacitor-privacy-screen). Wenn beide Plugins zusammen verwendet werden, wird die Google-Login-Webansicht durch den Datenschutzbildschirm unterbrochen.
+
+**Workaround:** Rufen Sie `await PrivacyScreen.disable();` auf, bevor Sie die Login-Funktion aufrufen:
+
+```typescript
+import { PrivacyScreen } from '@capacitor/privacy-screen';
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await PrivacyScreen.disable();
+await SocialLogin.login({
+  provider: 'google',
+  options: {}
+});
+```

@@ -1,0 +1,301 @@
+---
+title: Membuat Grup Langganan iOS
+locale: id
+description: Pelajari cara membuat dan mengonfigurasi grup langganan di App Store Connect untuk mengorganisir penawaran langganan aplikasi Anda.
+sidebar:
+  order: 7
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Grup langganan sangat penting untuk mengorganisir dan mengelola berbagai tingkat langganan di aplikasi iOS Anda. Memahami cara kerjanya sangat penting untuk mengimplementasikan fungsionalitas upgrade, downgrade, dan crossgrade.
+
+## Apa itu Grup Langganan?
+
+Grup langganan adalah kumpulan langganan terkait yang dapat dipilih pengguna. Pengguna hanya dapat berlangganan satu langganan dalam grup pada satu waktu. Ketika mereka beralih langganan, Apple menangani transisi secara otomatis.
+
+## Mengapa Grup Langganan Penting
+
+Grup langganan memungkinkan:
+- **Harga berjenjang**: Menawarkan paket basic, premium, dan ultimate
+- **Durasi berbeda**: Pilihan bulanan, tahunan, dan seumur hidup
+- **Logika upgrade/downgrade**: Penanganan otomatis perubahan langganan
+- **Manajemen yang disederhanakan**: Mengelompokkan langganan terkait bersama
+
+## Level Langganan
+
+Dalam grup, setiap langganan harus diberi peringkat dari nilai tertinggi (level 1) hingga nilai terendah. Peringkat ini menentukan bagaimana perubahan langganan diklasifikasikan:
+
+![Subscription group hierarchy](/native-purchases/ios/subscription-group/subscription-group-hierarchy.webp)
+
+### Contoh Level
+
+**Level 1** (Nilai Tertinggi)
+- Premium Annual ($99.99/tahun)
+- Ultimate Monthly ($19.99/bulan)
+
+**Level 2** (Nilai Menengah)
+- Standard Annual ($49.99/tahun)
+- Premium Monthly ($9.99/bulan)
+
+**Level 3** (Nilai Terendah)
+- Basic Annual ($29.99/tahun)
+- Standard Monthly ($4.99/bulan)
+
+## Jenis Perubahan Langganan
+
+Apple secara otomatis menangani tiga jenis perubahan langganan berdasarkan peringkat level:
+
+### 1. Upgrade
+Berpindah ke langganan **tingkat lebih tinggi** (misalnya, level 2 → level 1).
+
+**Perilaku:**
+- Berlaku **segera**
+- Pengguna menerima **pengembalian dana proporsional** untuk waktu tersisa
+- Langganan baru dimulai segera
+
+**Contoh:**
+```typescript
+// Pengguna saat ini memiliki: Standard Monthly (Level 2)
+// Pengguna upgrade ke: Premium Annual (Level 1)
+// Hasil: Akses langsung ke Premium, pengembalian dana untuk waktu Standard yang tidak digunakan
+```
+
+### 2. Downgrade
+Berpindah ke langganan **tingkat lebih rendah** (misalnya, level 1 → level 2).
+
+**Perilaku:**
+- Berlaku pada **tanggal perpanjangan berikutnya**
+- Pengguna tetap memiliki langganan saat ini hingga periode berakhir
+- Langganan baru dimulai secara otomatis setelah kedaluwarsa
+
+**Contoh:**
+```typescript
+// Pengguna saat ini memiliki: Premium Annual (Level 1)
+// Pengguna downgrade ke: Standard Monthly (Level 2)
+// Hasil: Akses Premium berlanjut hingga tanggal perpanjangan tahunan, lalu beralih
+```
+
+### 3. Crossgrade
+Beralih ke langganan lain **pada tingkat level yang sama**.
+
+**Perilaku tergantung pada durasi:**
+
+**Durasi Berbeda** → Berperilaku seperti **downgrade**
+- Berlaku pada tanggal perpanjangan berikutnya
+- Contoh: Monthly Premium (Level 1) → Annual Premium (Level 1)
+
+**Durasi Sama** → Berperilaku seperti **upgrade**
+- Berlaku segera
+- Contoh: Premium Monthly (Level 1) → Ultimate Monthly (Level 1)
+
+## Membuat Grup Langganan
+
+<Steps>
+
+1. **Navigasi ke Subscriptions**
+
+   Di App Store Connect, pilih aplikasi Anda dan buka **Monetize > Subscriptions**.
+
+2. **Buat Grup**
+
+   Klik **+** di samping "Subscription Groups" untuk membuat grup baru.
+
+3. **Beri Nama Grup**
+
+   Pilih nama deskriptif yang mencerminkan langganan yang dikandungnya:
+   - "Premium Access"
+   - "Cloud Storage Plans"
+   - "Pro Features"
+
+4. **Tambahkan Langganan**
+
+   Setelah membuat grup, tambahkan langganan individual ke dalamnya. Setiap langganan akan memiliki peringkat level.
+
+5. **Atur Peringkat Level**
+
+   Susun langganan dari nilai tertinggi (1) hingga nilai terendah. Pertimbangkan:
+   - Paket tahunan biasanya lebih tinggi dari bulanan
+   - Tingkatan dengan harga lebih tinggi berada di atas yang lebih rendah
+   - Tingkatan ultimate/premium berada paling tinggi
+
+</Steps>
+
+## Menggunakan di Aplikasi Anda
+
+Plugin native-purchases secara otomatis menangani logika grup langganan:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Ambil semua langganan dalam grup
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly', 'premium_annual', 'ultimate_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Tampilkan langganan saat ini menggunakan transaksi StoreKit
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const activeSubs = purchases.filter((purchase) => purchase.isActive);
+
+// Deteksi pending downgrade/pembatalan (StoreKit mengatur willCancel === true)
+const pendingChange = purchases.find((purchase) => purchase.willCancel === true);
+if (pendingChange) {
+  console.log('Langganan akan berhenti diperpanjang otomatis pada', pendingChange.expirationDate);
+}
+
+// Pembelian (StoreKit menangani upgrade/downgrade secara otomatis)
+await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_annual',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Dengarkan pembaruan StoreKit (dipicu pada upgrade/downgrade/pengembalian dana)
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Langganan diperbarui:', transaction);
+});
+```
+
+## Menangani Perubahan Langganan
+
+### Mendeteksi Jenis Perubahan
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Dapatkan info langganan saat ini
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const currentSubscription = purchases.find(
+  (purchase) => purchase.subscriptionState === 'subscribed',
+);
+
+if (currentSubscription) {
+  // StoreKit melaporkan jika pengguna membatalkan perpanjangan otomatis
+  if (currentSubscription.willCancel) {
+    console.log(
+      `Pengguna membatalkan. Akses tetap berlaku hingga ${currentSubscription.expirationDate}`,
+    );
+  }
+
+  if (currentSubscription.isUpgraded) {
+    console.log('Pengguna baru saja upgrade ke paket ini.');
+  }
+}
+
+// Dengarkan upgrade/downgrade otomatis
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  console.log('Langganan berubah!', transaction);
+  if (transaction.subscriptionState === 'revoked') {
+    revokeAccess();
+  } else if (transaction.isActive) {
+    unlockPremiumFeatures();
+  }
+});
+```
+
+### Komunikasi Pengguna
+
+Selalu komunikasikan perilaku perubahan dengan jelas:
+
+**Untuk Upgrade:**
+> "Anda akan mendapatkan akses langsung ke fitur Premium. Kami akan menghitung proporsional langganan Anda saat ini."
+
+**Untuk Downgrade:**
+> "Anda akan tetap memiliki akses Premium hingga [tanggal perpanjangan], kemudian beralih ke Standard."
+
+**Untuk Crossgrade:**
+> "Paket Anda akan berubah ke penagihan Tahunan pada perpanjangan berikutnya pada [tanggal]."
+
+## Pemantauan Server
+
+Gunakan App Store Server Notifications v2 dari Apple atau backend validasi receipt Anda sendiri untuk mencerminkan perubahan StoreKit di database Anda. Pasangkan notifikasi server dengan listener `transactionUpdated` agar klien dan backend tetap sinkron.
+
+## Praktik Terbaik
+
+### Organisasi Grup
+- Simpan langganan terkait dalam grup yang sama
+- Jangan campur fitur yang tidak terkait (misalnya, penyimpanan dan penghapusan iklan)
+- Buat grup terpisah untuk set fitur yang berbeda
+
+### Strategi Peringkat Level
+- Paket tahunan → Level lebih tinggi dari bulanan (untuk tingkatan yang sama)
+- Tingkatan dengan harga lebih tinggi → Level lebih tinggi
+- Pertimbangkan nilai, bukan hanya harga
+
+### Pengalaman Pengguna
+- Tampilkan langganan saat ini dengan jelas
+- Tampilkan semua opsi yang tersedia dalam grup
+- Tunjukkan perubahan mana yang langsung vs. pada perpanjangan
+- Izinkan peralihan mudah antar paket
+
+### Pengujian
+- Uji semua skenario upgrade
+- Uji semua skenario downgrade
+- Verifikasi perilaku crossgrade
+- Periksa webhook dipicu
+
+## Skenario Umum
+
+### Skenario 1: Tiga Tingkatan Paket Bulanan
+```
+Level 1: Ultimate Monthly ($19.99)
+Level 2: Premium Monthly ($9.99)
+Level 3: Basic Monthly ($4.99)
+```
+
+- Basic → Premium: Upgrade (segera)
+- Premium → Ultimate: Upgrade (segera)
+- Ultimate → Premium: Downgrade (pada perpanjangan)
+- Basic → Ultimate: Upgrade (segera)
+
+### Skenario 2: Paket Durasi Campuran
+```
+Level 1: Premium Annual ($99.99/tahun)
+Level 2: Premium Monthly ($9.99/bulan)
+```
+
+- Monthly → Annual: Crossgrade (pada perpanjangan)
+- Annual → Monthly: Downgrade (pada perpanjangan)
+
+### Skenario 3: Multi-Tingkatan Multi-Durasi
+```
+Level 1: Ultimate Annual ($199/tahun)
+Level 2: Ultimate Monthly ($19.99/bulan)
+Level 3: Premium Annual ($99/tahun)
+Level 4: Premium Monthly ($9.99/bulan)
+Level 5: Basic Annual ($49/tahun)
+Level 6: Basic Monthly ($4.99/bulan)
+```
+
+Pengaturan ini memberikan fleksibilitas maksimum sambil mempertahankan logika upgrade/downgrade yang jelas.
+
+## Pemecahan Masalah
+
+**Langganan tidak muncul dalam grup:**
+- Verifikasi telah ditetapkan ke grup yang benar
+- Periksa bahwa statusnya setidaknya "Ready to Submit"
+- Pastikan product ID benar
+
+**Perilaku upgrade/downgrade salah:**
+- Tinjau peringkat level (1 = tertinggi)
+- Verifikasi tingkatan langganan masuk akal
+- Periksa bahwa level diatur dengan benar
+
+**Produk dari grup berbeda:**
+- Pengguna dapat berlangganan beberapa grup secara bersamaan
+- Ini disengaja - simpan produk terkait dalam grup yang sama
+
+**getActiveProducts menampilkan beberapa langganan:**
+- Periksa apakah langganan berada di grup berbeda
+- Verifikasi pengguna tidak berlangganan melalui Family Sharing
+- Tinjau status langganan di App Store Connect
+
+## Sumber Daya Tambahan
+
+Untuk detail lebih lanjut, rujuk ke [dokumentasi resmi Apple tentang grup langganan](https://developer.apple.com/app-store/subscriptions/).

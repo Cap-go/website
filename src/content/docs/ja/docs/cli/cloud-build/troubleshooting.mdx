@@ -1,0 +1,513 @@
+---
+title: トラブルシューティング
+description: Capgo Cloud Buildの一般的な問題と解決策
+sidebar:
+  order: 4
+locale: ja
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo Cloud Buildでネイティブアプリをビルドする際の一般的な問題の解決策。
+
+## ビルド失敗
+
+### 「Upload failed」または「Connection timeout」
+
+**症状:**
+- プロジェクトアップロード中にビルドが失敗
+- 60秒後のタイムアウトエラー
+
+**解決策:**
+
+1. **インターネット接続を確認**
+   ```bash
+   # Capgoへの接続をテスト
+   curl -I https://api.capgo.app
+   ```
+
+2. **プロジェクトサイズを削減**
+   - `node_modules/`がアップロードされていないことを確認（自動除外されるべき）
+   - プロジェクト内の大きなファイルを確認:
+   ```bash
+   find . -type f -size +10M
+   ```
+
+3. **アップロードURL有効期限を確認**
+   - アップロードURLは1時間後に期限切れ
+   - 期限切れURLエラーが発生した場合は、ビルドコマンドを再実行
+
+<Aside type="tip">
+大きなプロジェクト（>200MB）はタイムアウト制限に達する可能性があります。エンタープライズオプションについてはサポートにお問い合わせください。
+</Aside>
+
+### 「Build timeout after 10 minutes」
+
+**症状:**
+- ビルドが許可された最大時間を超過
+- ステータスが`timeout`と表示
+
+**解決策:**
+
+1. **依存関係を最適化**
+   - 未使用のnpmパッケージを削除
+   - ビルド前に`npm prune --production`を使用
+
+2. **ビルド中のネットワーク問題を確認**
+   - 一部の依存関係がビルド中に大きなファイルをダウンロードする可能性があります
+   - ロックファイルでのプリキャッシュを検討
+
+3. **ネイティブ依存関係を確認**
+   ```bash
+   # iOS - 重い依存関係があるPodfileを確認
+   cat ios/App/Podfile
+
+   # Android - build.gradleを確認
+   cat android/app/build.gradle
+   ```
+
+4. **サポートに連絡**
+   - アプリが正当により多くの時間を必要とする場合
+   - 特定のユースケースに合わせて制限を調整できます
+
+## 認証の問題
+
+### 「API key invalid」または「Unauthorized」
+
+**症状:**
+- 認証エラーで即座にビルドが失敗
+- 401または403エラー
+
+**解決策:**
+
+1. **APIキーが正しいことを確認**
+   ```bash
+   # 簡単なコマンドでテスト
+   npx @capgo/cli@latest app list
+   ```
+
+2. **APIキーの権限を確認**
+   - キーは`write`または`all`権限が必要
+   - Capgoダッシュボードのアプリキーで確認
+
+3. **APIキーが読み取られていることを確認**
+   ```bash
+   # 環境変数を確認
+   echo $CAPGO_TOKEN
+
+   # またはローカル.capgoファイルを確認
+   cat .capgo
+   ```
+
+4. **再認証**
+   ```bash
+   npx @capgo/cli@latest login
+   ```
+
+### 「App not found」または「No permission for this app」
+
+**症状:**
+- 認証は機能するがアプリ固有のエラー
+
+**解決策:**
+
+1. **アプリが登録されていることを確認**
+   ```bash
+   npx @capgo/cli@latest app list
+   ```
+
+2. **アプリIDが一致することを確認**
+   - `capacitor.config.json`のappIdを確認
+   - コマンドが正しいアプリIDを使用していることを確認
+
+3. **組織アクセスを確認**
+   - 正しい組織にいることを確認
+   - APIキーがアプリの組織へのアクセス権を持っていることを確認
+
+## iOSビルドの問題
+
+### 「Code signing failed」
+
+**症状:**
+- コード署名フェーズでビルドが失敗
+- 証明書またはプロファイルに関するXcodeエラー
+
+**解決策:**
+
+1. **証明書タイプがビルドタイプと一致することを確認**
+   - 開発ビルドには開発証明書が必要
+   - App Storeビルドには配布証明書が必要
+
+2. **証明書とプロファイルが一致することを確認**
+   ```bash
+   # 証明書をデコードして検査
+   echo $BUILD_CERTIFICATE_BASE64 | base64 -d > cert.p12
+   openssl pkcs12 -in cert.p12 -nokeys -passin pass:$P12_PASSWORD | openssl x509 -noout -subject
+   ```
+
+3. **プロビジョニングプロファイルが有効であることを確認**
+   - 有効期限を確認
+   - App IDが含まれていることを確認
+   - 証明書が含まれていることを確認
+
+4. **認証情報を再生成**
+   - 古い証明書/プロファイルを削除
+   - Apple Developer Portalで新しいものを作成
+   - 再エンコードして環境変数を更新
+
+### 「Provisioning profile doesn't include signing certificate」
+
+**症状:**
+- Xcodeがプロファイル内に証明書を見つけられない
+
+**解決策:**
+
+1. **Appleから最新のプロファイルをダウンロード**
+   - Apple Developer → 証明書、ID＆プロファイルに移動
+   - プロビジョニングプロファイルをダウンロード
+   - 証明書が含まれていることを確認
+
+2. **証明書がプロファイルに含まれていることを確認**
+   ```bash
+   # プロファイルを抽出
+   echo $BUILD_PROVISION_PROFILE_BASE64 | base64 -d > profile.mobileprovision
+
+   # プロファイルの内容を表示
+   security cms -D -i profile.mobileprovision
+   ```
+
+3. **正しい証明書でプロファイルを再作成**
+   - Apple Developer Portalでプロファイルを編集
+   - 配布証明書が選択されていることを確認
+   - ダウンロードして再エンコード
+
+### 「App Store Connect authentication failed」
+
+**症状:**
+- TestFlightへのアップロードが失敗
+- APIキーエラー
+
+**解決策:**
+
+1. **APIキー認証情報を確認**
+   - APPLE_KEY_IDを確認（10文字である必要があります）
+   - APPLE_ISSUER_IDを確認（UUID形式である必要があります）
+   - APPLE_KEY_CONTENTが正しくbase64エンコードされていることを確認
+
+2. **APIキーをローカルでテスト**
+   ```bash
+   # キーをデコード
+   echo $APPLE_KEY_CONTENT | base64 -d > AuthKey.p8
+
+   # fastlaneでテスト（インストールされている場合）
+   fastlane pilot list
+   ```
+
+3. **APIキーの権限を確認**
+   - キーは「Developer」ロール以上が必要
+   - App Store Connect → ユーザーとアクセス → キーで確認
+
+4. **キーが失効していないことを確認**
+   - App Store Connectで確認
+   - 必要に応じて新しいキーを生成
+
+### 「Pod install failed」
+
+**症状:**
+- CocoaPodsインストール中にビルドが失敗
+- Podfileエラー
+
+**解決策:**
+
+1. **Podfile.lockがコミットされていることを確認**
+   ```bash
+   git status ios/App/Podfile.lock
+   ```
+
+2. **ローカルでpod installをテスト**
+   ```bash
+   cd ios/App
+   pod install
+   ```
+
+3. **互換性のないポッドを確認**
+   - バージョン競合がないかPodfileを確認
+   - すべてのポッドがiOSデプロイメントターゲットをサポートしていることを確認
+
+4. **ポッドキャッシュをクリア**
+   ```bash
+   cd ios/App
+   rm -rf Pods
+   rm Podfile.lock
+   pod install
+   # 次に新しいPodfile.lockをコミット
+   ```
+
+## Androidビルドの問題
+
+### 「Keystore password incorrect」
+
+**症状:**
+- 署名中にビルドが失敗
+- キーストアに関するGradleエラー
+
+**解決策:**
+
+1. **キーストアパスワードを確認**
+   ```bash
+   # ローカルでキーストアをテスト
+   keytool -list -keystore my-release-key.keystore
+   # プロンプトが表示されたらパスワードを入力
+   ```
+
+2. **環境変数を確認**
+   ```bash
+   # 余分なスペースや特殊文字がないことを確認
+   echo "$KEYSTORE_STORE_PASSWORD" | cat -A
+   echo "$KEYSTORE_KEY_PASSWORD" | cat -A
+   ```
+
+3. **base64エンコーディングを確認**
+   ```bash
+   # デコードしてテスト
+   echo $ANDROID_KEYSTORE_FILE | base64 -d > test.keystore
+   keytool -list -keystore test.keystore
+   ```
+
+### 「Key alias not found」
+
+**症状:**
+- エイリアスエラーで署名が失敗
+
+**解決策:**
+
+1. **キーストアのエイリアスをリスト**
+   ```bash
+   keytool -list -keystore my-release-key.keystore
+   ```
+
+2. **エイリアスが正確に一致することを確認**
+   - エイリアスは大文字小文字を区別
+   - KEYSTORE_KEY_ALIASにタイプミスがないか確認
+
+3. **キーストアから正しいエイリアスを使用**
+   ```bash
+   # 一致するように環境変数を更新
+   export KEYSTORE_KEY_ALIAS="the-exact-alias-name"
+   ```
+
+### 「Gradle build failed」
+
+**症状:**
+- 一般的なGradleエラー
+- コンパイルまたは依存関係の問題
+
+**解決策:**
+
+1. **最初にローカルでビルドをテスト**
+   ```bash
+   cd android
+   ./gradlew clean
+   ./gradlew assembleRelease
+   ```
+
+2. **欠落している依存関係を確認**
+   - build.gradleファイルを確認
+   - すべてのプラグインが依存関係にリストされていることを確認
+
+3. **Gradleバージョンの互換性を確認**
+   ```bash
+   # gradleバージョンを確認
+   cat android/gradle/wrapper/gradle-wrapper.properties
+   ```
+
+4. **Gradleキャッシュをクリア**
+   ```bash
+   cd android
+   ./gradlew clean
+   rm -rf .gradle build
+   ```
+
+### 「Play Store upload failed」
+
+**症状:**
+- ビルドは成功するがアップロードが失敗
+- サービスアカウントエラー
+
+**解決策:**
+
+1. **サービスアカウントJSONを確認**
+   ```bash
+   # デコードして形式を確認
+   echo $PLAY_CONFIG_JSON | base64 -d | jq .
+   ```
+
+2. **サービスアカウントの権限を確認**
+   - Play Console → 設定 → APIアクセスに移動
+   - サービスアカウントがアプリへのアクセス権を持っていることを確認
+   - 「テストトラックへのリリース」権限を付与
+
+3. **Play Consoleでアプリが設定されていることを確認**
+   - アプリは最初にPlay Consoleで作成する必要があります
+   - 少なくとも1つのAPKを最初に手動でアップロードする必要があります
+
+4. **APIが有効であることを確認**
+   - Google Play Developer APIが有効である必要があります
+   - Google Cloud Consoleで確認
+
+## 一般的な問題
+
+### 「Job not found」または「Build status unavailable」
+
+**症状:**
+- ビルドステータスを確認できない
+- ジョブIDエラー
+
+**解決策:**
+
+1. **少し待ってから再試行**
+   - ビルドジョブの初期化に数秒かかる場合があります
+
+2. **ジョブIDが正しいことを確認**
+   - 初期ビルドレスポンスからのジョブIDを確認
+
+3. **ビルドが期限切れになっていないか確認**
+   - ビルドデータは24時間利用可能
+
+### 「Project sync failed」
+
+**症状:**
+- コンパイル開始前にビルドが失敗
+- ファイル欠落エラー
+
+**解決策:**
+
+1. **ローカルでCapacitor syncを実行**
+   ```bash
+   npx cap sync
+   ```
+
+2. **すべてのネイティブファイルがコミットされていることを確認**
+   ```bash
+   git status ios/ android/
+   ```
+
+3. **gitignoreされたネイティブファイルを確認**
+   - .gitignoreを確認
+   - 重要な設定ファイルが無視されていないことを確認
+
+### 「Build succeeded but I don't see output」
+
+**症状:**
+- ビルドは成功と表示されるがダウンロードリンクがない
+
+**解決策:**
+
+1. **ビルド設定を確認**
+   - アーティファクトストレージが設定されていない可能性があります
+   - パブリックベータの場合、アーティファクトアクセスについてサポートに連絡
+
+2. **iOS TestFlight送信の場合**
+   - App Store Connectを確認
+   - アップロード後5〜30分処理にかかる場合があります
+
+3. **Android Play Storeの場合**
+   - Play Console → テスト → 内部テストを確認
+   - 処理に数分かかる場合があります
+
+## CI/CD固有の問題
+
+### GitHub Actions: 「Command not found」
+
+**症状:**
+- CI内で`npx @capgo/cli`が失敗
+
+**解決策:**
+
+1. **Node.jsがインストールされていることを確認**
+   ```yaml
+   - uses: actions/setup-node@v6
+     with:
+       node-version: '24'
+   ```
+
+2. **CLIを明示的にインストール**
+   ```yaml
+   - run: npm install -g @capgo/cli
+   ```
+
+### GitHub Actions: 「Secrets not found」
+
+**症状:**
+- ビルド内で環境変数が空
+
+**解決策:**
+
+1. **シークレットが設定されていることを確認**
+   - リポジトリ設定 → シークレットと変数 → アクションに移動
+   - すべての必要なシークレットを追加
+
+2. **正しい構文を使用**
+   ```yaml
+   env:
+     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+   ```
+
+3. **シークレット名が一致することを確認**
+   - 名前は大文字小文字を区別
+   - シークレット参照にタイプミスがない
+
+## さらなるサポートを得る
+
+### 詳細ログを有効にする
+
+```bash
+# デバッグフラグを追加（利用可能な場合）
+npx @capgo/cli@latest build com.example.app --verbose
+```
+
+### ビルド情報を収集
+
+サポートに連絡する際は、以下を含めてください:
+
+1. **使用したビルドコマンド**
+   ```bash
+   npx @capgo/cli@latest build com.example.app --platform ios
+   ```
+
+2. **エラーメッセージ**（完全な出力）
+
+3. **ジョブID**（ビルド出力から）
+
+4. **ビルドログ**（完全なターミナル出力をコピー）
+
+5. **環境情報**
+   ```bash
+   node --version
+   npm --version
+   npx @capgo/cli --version
+   ```
+
+### サポートに連絡
+
+- **Discord**: [コミュニティに参加](https://discord.com/invite/VnYRvBfgA6)
+- **メール**: support@capgo.app
+- **ドキュメント**: [Capgoドキュメント](/docs/)
+
+### 既知の制限事項
+
+パブリックベータ中の現在の制限事項:
+
+- 最大ビルド時間: 10分
+- 最大アップロードサイズ: ~500MB
+- iOSビルドには24時間のMacリースが必要、最適な使用を確保するためにMacでのビルドはキューに入れられます
+- ビルドアーティファクトのダウンロードは利用できない場合があります
+
+これらの制限事項はフィードバックに基づいて調整される場合があります。
+
+## 追加リソース
+
+- [はじめに](/docs/cli/cloud-build/getting-started/) - 初期設定ガイド
+- [iOSビルド](/docs/cli/cloud-build/ios/) - iOS固有の設定
+- [Androidビルド](/docs/cli/cloud-build/android/) - Android固有の設定
+- [CLIリファレンス](/docs/cli/reference/build/) - 完全なコマンドドキュメント

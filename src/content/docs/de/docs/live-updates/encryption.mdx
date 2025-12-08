@@ -1,0 +1,344 @@
+---
+title: Encryption
+description: "Erfahren Sie, wie die Ende-zu-Ende-Verschlüsselung von Capgo Ihre App-Bundles während der Übertragung und Speicherung sichert und Ihren Code und Benutzerdaten schützt."
+sidebar:
+  order: 5
+locale: de
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo bietet robuste Ende-zu-Ende-Verschlüsselung für Ihre App-Bundles und stellt sicher, dass Ihr JavaScript-Code und Assets während der Übertragung und Speicherung geschützt sind. Dieses Verschlüsselungssystem ist darauf ausgelegt, Ihnen die vollständige Kontrolle über die Sicherheit Ihrer App zu geben und gleichzeitig den Komfort von Live-Updates beizubehalten.
+
+## Übersicht
+
+Das Verschlüsselungssystem von Capgo verwendet branchenübliche kryptografische Methoden, um Ihre Bundles vor unbefugtem Zugriff zu schützen. Wenn die Verschlüsselung aktiviert ist, werden Ihre Bundles verschlüsselt, bevor sie Ihre Entwicklungsumgebung verlassen, und bleiben verschlüsselt, bis sie von Ihrer App auf dem Gerät des Benutzers entschlüsselt werden.
+
+**Echte Ende-zu-Ende-Verschlüsselung**: Im Gegensatz zu anderen OTA-Update-Plattformen, die nur Updates signieren (wobei der Code öffentlich lesbar bleibt), bietet Capgo echte Ende-zu-Ende-Verschlüsselung. Das bedeutet, dass nur Ihre Benutzer Ihre Updates entschlüsseln können - niemand sonst, einschließlich Capgo selbst. Ihr Bundle-Inhalt bleibt während des gesamten Bereitstellungsprozesses vollständig privat und unlesbar.
+
+<Aside type="tip">
+
+Verschlüsselung ist besonders wichtig für:
+- Apps, die sensible Daten oder Geschäftslogik verarbeiten
+- Unternehmensanwendungen mit Compliance-Anforderungen
+- Apps, die in regulierten Branchen eingesetzt werden
+- Organisationen mit strengen Sicherheitsrichtlinien
+
+</Aside>
+
+## Wie Verschlüsselung funktioniert
+
+Capgo verwendet einen hybriden Verschlüsselungsansatz, der RSA- und AES-Verschlüsselung für optimale Sicherheit und Leistung kombiniert:
+
+![Capgo Encryption Flow](/encryption_flow.webp)
+
+### 1. Schlüsselerzeugung
+- **Privater Schlüssel**: In Ihrer Entwicklungsumgebung generiert und sicher gespeichert (wird für Verschlüsselung verwendet)
+- **Öffentlicher Schlüssel**: Von Ihrem privaten Schlüssel abgeleitet und in der Capacitor-Konfiguration Ihrer App gespeichert (wird für Entschlüsselung verwendet)
+- **Session-Schlüssel**: Zufällige AES-Schlüssel, die für jedes Bundle-Upload generiert werden
+
+### 2. Verschlüsselungsprozess
+1. Ein zufälliger AES-Session-Schlüssel wird für jedes Bundle-Upload generiert
+2. Ihr Bundle wird mit dem AES-Session-Schlüssel verschlüsselt
+3. Die Bundle-Prüfsumme wird berechnet
+4. Sowohl der AES-Session-Schlüssel als auch die Prüfsumme werden zusammen mit Ihrem RSA-Privatschlüssel verschlüsselt (wodurch die "Signatur" erstellt wird)
+5. Das verschlüsselte Bundle und die verschlüsselte Signatur werden gespeichert
+
+Die Prüfsumme wird zusammen mit dem AES-Schlüssel verschlüsselt, um Manipulationen zu verhindern. Da nur Ihr RSA-Privatschlüssel diese Signatur erstellen kann und nur der entsprechende öffentliche Schlüssel sie entschlüsseln kann, wird sichergestellt, dass sowohl der AES-Session-Schlüssel als auch die erwartete Prüfsumme authentisch sind und nicht von einem Angreifer modifiziert wurden.
+
+### 3. Entschlüsselungsprozess
+1. Ihre App lädt das verschlüsselte Bundle und die verschlüsselte Signatur herunter
+2. Das Capgo SDK verwendet Ihren RSA-öffentlichen Schlüssel (in der App gespeichert), um die Signatur zu entschlüsseln
+3. Dies enthüllt den AES-Session-Schlüssel und die ursprüngliche Prüfsumme
+4. Der AES-Session-Schlüssel wird verwendet, um das Bundle zu entschlüsseln
+5. Eine Prüfsumme des entschlüsselten Bundles wird berechnet und mit der ursprünglichen Prüfsumme zur Integritätsprüfung verglichen
+
+Dieser Prozess stellt sicher, dass selbst wenn ein Angreifer das verschlüsselte Bundle abfängt, er weder den AES-Session-Schlüssel ändern noch eine gefälschte Prüfsumme bereitstellen kann, da er Ihren privaten Schlüssel benötigen würde, um eine gültige Signatur zu erstellen, die der öffentliche Schlüssel entschlüsseln kann.
+
+<Aside type="tip">
+
+RSA kann große Datenmengen nicht effizient verschlüsseln, daher wird AES für die eigentliche Bundle-Verschlüsselung verwendet, während RSA den AES-Schlüssel sichert und Integritätsprüfung durch Prüfsummen-Signierung bietet.
+
+</Aside>
+
+## Capgo vs. andere Plattformen
+
+| Merkmal | Capgo | Andere OTA-Plattformen |
+|---------|-------|-------------------|
+| **Bundle-Inhalt** | Vollständig verschlüsselt (unlesbar) | Öffentlich lesbar |
+| **Sicherheitsmethode** | Echte Ende-zu-Ende-Verschlüsselung | Nur Code-Signierung |
+| **Datenschutzniveau** | Zero-Knowledge (selbst Capgo kann Ihren Code nicht lesen) | Plattform kann auf Ihren Code zugreifen |
+| **Schutz** | Inhalt + Integrität + Authentizität | Nur Integrität + Authentizität |
+
+**Warum das wichtig ist:**
+- **Code-Signierung** überprüft nur, dass Updates nicht manipuliert wurden und aus der richtigen Quelle stammen
+- **Ende-zu-Ende-Verschlüsselung** stellt sicher, dass Ihr tatsächlicher Code-Inhalt während der Übertragung und Speicherung privat und unlesbar bleibt
+- Mit Capgos echter Ende-zu-Ende-Verschlüsselung können nur Ihre Benutzer Updates entschlüsseln - niemand sonst, einschließlich Capgo selbst
+
+## Verschlüsselungsmethoden
+
+Capgo verwendet Verschlüsselung V2 als Standard-Verschlüsselungsmethode:
+
+### Verschlüsselung V2 (Aktueller Standard)
+- Verwendet RSA-4096 für erhöhte Sicherheit
+- AES-256-GCM für authentifizierte Verschlüsselung
+- Bietet Integritätsprüfung
+- Bessere Leistung und Sicherheit
+
+### Verschlüsselung V1 (Veraltet)
+- Verwendet RSA-2048 für Schlüsselverschlüsselung
+- AES-256-CBC für Bundle-Verschlüsselung
+- **In der aktuellen CLI nicht mehr verfügbar**
+- Legacy-Apps, die V1 verwenden, müssen auf V2 migrieren
+
+<Aside type="danger">
+
+Verschlüsselung V1 wird in der aktuellen Capgo CLI nicht mehr unterstützt. Wenn Sie V1-Verschlüsselung verwenden, müssen Sie auf V2 migrieren. Siehe den [Migrationsleitfaden](/docs/upgrade/encryption-v1-to-v2/) für detaillierte Anweisungen.
+
+</Aside>
+
+## Verschlüsselung einrichten
+
+### Schritt 1: Verschlüsselungsschlüssel generieren
+
+Generieren Sie zunächst Ihre Verschlüsselungsschlüssel mit der Capgo CLI:
+
+```shell
+# Neue Verschlüsselungsschlüssel generieren (erstellt Dateien im aktuellen Verzeichnis)
+npx @capgo/cli@latest key create
+```
+
+Dies erstellt:
+- `.capgo_key_v2`: Ihr privater Schlüssel (halten Sie diesen sicher!)
+- `.capgo_key_v2.pub`: Ihr öffentlicher Schlüssel (wird von Ihrer App verwendet)
+
+Diese Dateien werden im aktuellen Verzeichnis erstellt, in dem Sie den Befehl ausführen.
+
+<Aside type="caution">
+
+**Wichtige Speicherhinweise:**
+- **Privater Schlüssel (`.capgo_key_v2`)**: Committen Sie diesen niemals in die Versionskontrolle. Diese Datei sollte sicher aufbewahrt und nur für die Verschlüsselung während Bundle-Uploads verwendet werden.
+- **Öffentlicher Schlüssel (`.capgo_key_v2.pub`)**: Dies kann sicher in die Versionskontrolle committiert werden, da es eine Sicherung Ihres öffentlichen Schlüssels ist.
+- **Dateispeicherort**: Schlüssel werden im aktuellen Verzeichnis erstellt, in dem Sie den Befehl `key create` ausführen.
+- **Öffentlicher Schlüssel in Konfiguration**: Sie müssen `key save` ausführen, um den öffentlichen Schlüssel in Ihrer Capacitor-Konfiguration zu speichern, damit die mobile App ihn verwenden kann.
+
+Für die Produktionsnutzung speichern Sie den privaten Schlüssel sicher (Umgebungsvariablen, Schlüsselverwaltungsdienste) und entfernen Sie ihn nach dem Setup aus Ihrem lokalen Projekt.
+
+</Aside>
+
+### Schritt 2: Öffentlichen Schlüssel in Capacitor-Konfiguration speichern (Erforderlich)
+
+Sie **müssen** Ihren öffentlichen Schlüssel in der Capacitor-Konfiguration speichern, damit Ihre mobile App Bundles entschlüsseln kann:
+
+```shell
+# Öffentlichen Schlüssel aus Datei in Capacitor-Konfiguration speichern (erforderlich)
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+
+# Oder öffentliche Schlüsseldaten direkt speichern
+npx @capgo/cli@latest key save --key-data "$CAPGO_PUBLIC_KEY"
+```
+
+### Schritt 3: Capacitor-Plattform synchronisieren (Erforderlich)
+
+Nachdem Sie den öffentlichen Schlüssel gespeichert haben, **müssen** Sie die Capacitor-Plattform synchronisieren, um die aktualisierte Konfiguration auf die native Ebene zu kopieren:
+
+```shell
+# Plattform synchronisieren, um Konfiguration auf native Ebene zu kopieren
+npx cap sync
+```
+
+<Aside type="caution">
+
+**Erforderliche Schritte**:
+1. Der Befehl `key save` speichert den öffentlichen Schlüssel in Ihrer Capacitor-Konfiguration
+2. `npx cap sync` kopiert diese Konfiguration auf die native Ebene, wo die mobile App darauf zugreifen kann
+3. Ohne beide Schritte kann Ihre App verschlüsselte Updates nicht entschlüsseln
+
+</Aside>
+
+## Bundles verschlüsseln
+
+### Methode 1: Während des Uploads verschlüsseln
+
+Der einfachste Weg ist die Verschlüsselung während des Upload-Prozesses:
+
+```shell
+# Upload mit automatischer Verschlüsselung
+npx @capgo/cli@latest bundle upload --key-v2
+
+# Für externen Speicher müssen Sie zuerst verschlüsseln (siehe Manuelle Verschlüsselungs-Workflow unten)
+```
+
+### Methode 2: Manueller Verschlüsselungs-Workflow
+
+Für mehr Kontrolle können Sie Bundles manuell verschlüsseln:
+
+<Steps>
+
+1. **Ein Zip-Bundle erstellen:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **Bundle verschlüsseln:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
+   ```
+
+3. **In Ihren Speicher hochladen (z.B. S3) und bei Capgo registrieren:**
+   ```shell
+   # Zuerst verschlüsseltes Bundle in Ihren Speicher hochladen (z.B. AWS S3)
+   aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
+
+   # Dann bei Capgo mit externer URL registrieren
+   npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
+   ```
+
+</Steps>
+
+## Schlüsselverwaltung
+
+### Schlüssel sicher speichern
+
+**Optionen für privaten Schlüssel:**
+
+1. **Dateibasiert (lokale Entwicklung):**
+   ```shell
+   # Schlüssel als .capgo_key_v2-Datei im Projektstamm gespeichert
+   npx @capgo/cli@latest bundle upload --key-v2
+   ```
+
+2. **Umgebungsvariable (CI/CD):**
+   ```shell
+   # In Umgebungsvariable für CI speichern
+   export CAPGO_PRIVATE_KEY="$(cat .capgo_key_v2)"
+   npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
+   ```
+
+**Öffentliche Schlüssel-Einrichtung (Erforderlich):**
+```shell
+# Öffentlichen Schlüssel in Capacitor-Konfiguration für mobile App speichern
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+```
+
+**Produktionsumgebung:**
+- Speichern Sie private Schlüssel in sicheren Schlüsselverwaltungsdiensten (AWS KMS, Azure Key Vault usw.)
+- Verwenden Sie CI/CD-Geheimnisverwaltung für private Schlüssel
+- Committen Sie niemals private Schlüssel in die Versionskontrolle
+
+**Schlüsselverwendung:**
+- **Privater Schlüssel**: Wird von CLI für Verschlüsselung während Bundle-Upload verwendet (sicher aufbewahren)
+- **Öffentlicher Schlüssel**: In App-Konfiguration für Entschlüsselung auf Gerät gespeichert (sicher zu committen)
+
+### Schlüsselrotation
+
+Rotieren Sie regelmäßig Ihre Verschlüsselungsschlüssel für erhöhte Sicherheit:
+
+<Steps>
+
+1. **Neue Schlüssel generieren:**
+   ```shell
+   # Navigieren Sie zuerst zum gewünschten Verzeichnis, dann Schlüssel erstellen
+   mkdir ./new-keys && cd ./new-keys
+   npx @capgo/cli@latest key create
+   ```
+
+2. **Neuen öffentlichen Schlüssel in Capacitor-Konfiguration speichern:**
+   ```shell
+   npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
+   ```
+
+3. **Aktualisieren Sie Ihre App-Konfiguration** mit dem neuen öffentlichen Schlüssel
+
+4. **Deployen Sie die aktualisierte App**, bevor Sie verschlüsselte Bundles mit dem neuen Schlüssel hochladen
+
+</Steps>
+
+## Sicherheits-Best-Practices
+
+### Schlüsselsicherheit
+- **Teilen Sie niemals private Schlüssel** zwischen Umgebungen oder Teammitgliedern
+- **Verwenden Sie unterschiedliche Schlüssel** für verschiedene Umgebungen (dev, staging, production)
+- **Rotieren Sie Schlüssel regelmäßig** (empfohlen: alle 6-12 Monate)
+- **Speichern Sie Schlüssel sicher** mit geeigneten Schlüsselverwaltungssystemen
+
+### Bundle-Sicherheit
+- **Überprüfen Sie immer** die Bundle-Integrität nach der Entschlüsselung
+- **Überwachen Sie** auf ungewöhnliche Download-Muster oder Fehler
+- **Verwenden Sie HTTPS** für alle Bundle-URLs (erforderlich für mobile Apps)
+- **Implementieren Sie** ordnungsgemäße Fehlerbehandlung für Entschlüsselungsfehler
+
+### Zugriffskontrolle
+- **Beschränken Sie den Zugriff** auf Verschlüsselungsschlüssel nur auf autorisiertes Personal
+- **Verwenden Sie rollenbasierte Zugriffskontrolle** für Schlüsselverwaltungsoperationen
+- **Prüfen Sie** regelmäßig Schlüsselnutzung und -zugriff
+- **Implementieren Sie** ordnungsgemäße Backup- und Wiederherstellungsverfahren
+
+## Fehlerbehebung bei Verschlüsselung
+
+### Häufige Probleme
+
+**Entschlüsselungsfehler:**
+- Überprüfen Sie, ob der private Schlüssel mit dem für die Verschlüsselung verwendeten öffentlichen Schlüssel übereinstimmt
+- Prüfen Sie, ob der `ivSessionKey` korrekt ist
+- Stellen Sie sicher, dass Sie Verschlüsselung V2 verwenden (V1 wird nicht mehr unterstützt)
+
+**Schlüsselbezogene Fehler:**
+- Bestätigen Sie, dass das Format des privaten Schlüssels korrekt ist (PEM-Format)
+- Überprüfen Sie, ob der Schlüssel während der Speicherung/Übertragung nicht beschädigt wurde
+- Prüfen Sie, ob der Schlüssel die richtigen Berechtigungen in Ihrer App-Konfiguration hat
+
+**Leistungsprobleme:**
+- Große Bundles können länger zum Ver-/Entschlüsseln benötigen
+- Erwägen Sie die Verwendung von differenziellen Updates, um Bundle-Größen zu reduzieren
+- Überwachen Sie die Geräteleistung während der Entschlüsselung
+
+### Debug-Befehle
+
+Verschlüsselungsstatus überprüfen:
+```shell
+npx @capgo/cli@latest app debug
+```
+
+Verschlüsselungs-/Entschlüsselungs-Workflow testen:
+```shell
+# Vollständigen Workflow testen: zip → encrypt → decrypt → unzip
+npx @capgo/cli@latest bundle zip com.example.app --key-v2
+npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM --json
+npx @capgo/cli@latest bundle decrypt ./encrypted-bundle.zip IV_SESSION_KEY
+```
+
+## Compliance und Standards
+
+Die Verschlüsselungsimplementierung von Capgo folgt Industriestandards:
+
+- **AES-256**: FIPS 140-2 genehmigter Verschlüsselungsalgorithmus
+- **RSA-4096**: Starke asymmetrische Verschlüsselung für Schlüsselschutz
+- **GCM-Modus**: Bietet sowohl Vertraulichkeit als auch Authentizität
+- **Sichere Zufallszahlen**: Kryptografisch sichere Zufallszahlengenerierung
+
+Dies macht Capgo geeignet für Anwendungen, die Compliance benötigen mit:
+- GDPR (General Data Protection Regulation)
+- HIPAA (Health Insurance Portability and Accountability Act)
+- SOC 2 (Service Organization Control 2)
+- ISO 27001 (Information Security Management)
+
+## Leistungsüberlegungen
+
+### Verschlüsselungs-Overhead
+- **Bundle-Größe**: Verschlüsselte Bundles sind etwas größer (~1-2% Overhead)
+- **Verarbeitungszeit**: Ver-/Entschlüsselung fügt minimale Latenz hinzu
+- **Speichernutzung**: Temporärer Anstieg während Ver-/Entschlüsselungsoperationen
+
+### Optimierungstipps
+- Verwenden Sie differentielle Updates, um verschlüsselte Datenübertragung zu minimieren
+- Optimieren Sie Ihre Bundle-Größe durch Konvertierung von Bildern ins WebP-Format
+- Minimieren Sie JavaScript- und CSS-Dateien vor dem Bundling
+- Entfernen Sie ungenutzte Abhängigkeiten und Code
+- Überwachen Sie die Geräteleistung auf älteren/langsameren Geräten
+
+## Nächste Schritte
+
+- Erfahren Sie mehr über [Custom Storage](/docs/live-updates/custom-storage/), um Verschlüsselung mit Ihrer eigenen Infrastruktur zu verwenden
+- Erkunden Sie [Channels](/docs/live-updates/channels/), um verschlüsselte Bundles über Umgebungen hinweg zu verwalten
+- Richten Sie [CI/CD Integration](/docs/getting-started/cicd-integration/) ein, um verschlüsselte Bereitstellungen zu automatisieren

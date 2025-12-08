@@ -1,0 +1,49 @@
+---
+title: Firebase Google Login - Allgemeine Einrichtung
+locale: de
+description: Erfahren Sie, wie Sie Google Sign-In mit Firebase Authentication mithilfe des Capacitor Social Login Plugins einrichten.
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Einführung
+
+Dieser Leitfaden führt Sie durch die Integration von Google Sign-In mit Firebase Authentication unter Verwendung des Capacitor Social Login Plugins. Diese Einrichtung ermöglicht es Ihnen, natives Google Sign-In auf mobilen Plattformen zu verwenden und gleichzeitig Firebase Auth für die Backend-Authentifizierung zu nutzen.
+
+## Einrichtungsschritte
+
+<Steps>
+1. Bitte gehen Sie zu [console.cloud.google.com](https://console.cloud.google.com/)
+2. Wählen Sie das Projekt aus, das Sie verwenden möchten
+    <img src="/social-login-assets/firebase_project_select.webp" alt="Firebase Projektauswahl" />
+3. Gehen Sie zum `Authentication` Menü
+    1. Klicken Sie auf `build`
+    2. Klicken Sie auf `Authentication`
+    <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menü" />
+4. Klicken Sie auf die `Get started` Schaltfläche
+    <img src="/social-login-assets/firebase_auth_start.webp" alt="Firebase Erste Schritte Schaltfläche" />
+5. Wählen Sie ENTWEDER `Email/Password` UND `Google` ODER NUR `Google`
+    :::note
+    Ich werde `Email/Password` UND `Google` auswählen, da ich beide verwenden möchte, aber Sie könnten nur `Google` auswählen. Dies ist etwas, das Sie später ändern können.
+    :::
+    <img src="/social-login-assets/firebase_google_email_auth.webp" alt="Firebase E-Mail/Passwort und Google auswählen Schaltfläche" />
+    <img src="/social-login-assets/firebase_auth_enable_email.webp" alt="Firebase E-Mail-Authentifizierung aktivieren" />
+    <img src="/social-login-assets/firebase_auth_enable_email_save.webp" alt="Firebase speichern Google-Authentifizierung aktivieren" />
+    <img src="/social-login-assets/firebase_auth_add_provider_after_email.webp" alt="Firebase Anbieter hinzufügen Schaltfläche aktivieren" />
+    <img src="/social-login-assets/firebase_auth_add_google_provider_after_email.webp" alt="Firebase Google-Anbieter hinzufügen nach Hinzufügen des E-Mail-Anbieters" />
+6. Aktivieren Sie den `Google` Anbieter
+    <img src="/social-login-assets/firebase_auth_add_google_provider_enable.webp" alt="Firebase Google-Authentifizierung aktivieren" />
+7. Fügen Sie die Support-E-Mail hinzu
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth.webp" alt="Firebase Support-E-Mail hinzufügen" />
+    <img src="/social-login-assets/firebase_auth_add_support_email_google_auth_2.webp" alt="Firebase Support-E-Mail hinzufügen Teil 2" />
+8. Ändern Sie den `Public-facing name for project`.
+    :::note
+    Dies wird den Benutzern angezeigt, daher empfehle ich, ihn zu etwas Beschreiberem zu ändern.
+    :::
+    <img src="/social-login-assets/firebase_auth_change_public_facing_name.webp" alt="Firebase öffentlich sichtbaren Namen ändern" />
+9. Klicken Sie auf die `Save` Schaltfläche
+    <img src="/social-login-assets/firebase_auth_save_google_auth.webp" alt="Firebase öffentlich sichtbaren Namen speichern" />
+</Steps>
+
+Voilà, Sie haben jetzt Google Sign-In mit Firebase Authentication aktiviert 🎉

@@ -1,0 +1,200 @@
+---
+title: Premiers pas
+locale: fr
+description: Apprenez à installer et configurer le plugin Capacitor Navigation Bar pour personnaliser la couleur et le style de la barre de navigation Android.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer le package**
+   <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser avec les projets natifs**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurer le plugin**
+
+   **Définir la couleur de la barre de navigation :**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Définir la couleur de la barre de navigation
+   await NavigationBar.setColor({
+     color: '#FF0000', // Couleur rouge
+     darkButtons: false // Utiliser des boutons clairs
+   });
+   ```
+
+   **Prise en charge dynamique des thèmes :**
+   ```typescript
+   // Définir la couleur en fonction du thème
+   const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+   await NavigationBar.setColor({
+     color: isDarkMode ? '#000000' : '#FFFFFF',
+     darkButtons: !isDarkMode
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="Android">
+       **Exigences minimales :**
+       - Android 5.0 (niveau d'API 21) ou supérieur
+       - Le plugin fonctionne uniquement sur les appareils Android
+
+       Aucune configuration supplémentaire requise dans AndroidManifest.xml.
+     </TabItem>
+     <TabItem label="iOS">
+       Ce plugin est exclusif à Android. iOS ne dispose pas d'une barre de navigation personnalisable.
+     </TabItem>
+   </Tabs>
+
+4. **Utilisation avancée**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   export class ThemeService {
+     // Définir une barre de navigation transparente
+     async setTransparent() {
+       await NavigationBar.setColor({
+         color: '#00000000', // Transparente
+         darkButtons: true
+       });
+     }
+
+     // Correspondre au thème de l'application
+     async matchAppTheme(primaryColor: string, isLight: boolean) {
+       await NavigationBar.setColor({
+         color: primaryColor,
+         darkButtons: isLight
+       });
+     }
+
+     // Obtenir la couleur actuelle de la barre de navigation
+     async getCurrentColor() {
+       const result = await NavigationBar.getColor();
+       console.log('Couleur actuelle:', result.color);
+       return result.color;
+     }
+
+     // Réinitialiser par défaut
+     async resetToDefault() {
+       await NavigationBar.setColor({
+         color: '#000000',
+         darkButtons: false
+       });
+     }
+   }
+   ```
+
+5. **Intégration avec le cycle de vie de l'application**
+   ```typescript
+   import { App } from '@capacitor/app';
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Mettre à jour la barre de navigation lors des changements d'état de l'application
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       // Restaurer la couleur de la barre de navigation de votre application
+       await NavigationBar.setColor({
+         color: '#YourAppColor',
+         darkButtons: true
+       });
+     }
+   });
+
+   // Gérer les changements de thème
+   window.matchMedia('(prefers-color-scheme: dark)')
+     .addEventListener('change', async (e) => {
+       await NavigationBar.setColor({
+         color: e.matches ? '#121212' : '#FFFFFF',
+         darkButtons: !e.matches
+       });
+     });
+   ```
+</Steps>
+
+## Référence API
+
+### Méthodes
+
+#### `setColor(options: ColorOptions)`
+Définit la couleur de la barre de navigation et le style des boutons.
+
+**Paramètres :**
+- `options` : Objet de configuration
+  - `color` : string - Code couleur hexadécimal (par exemple, '#FF0000')
+  - `darkButtons` : boolean - Utiliser des boutons sombres (true) ou des boutons clairs (false)
+
+**Retourne :** `Promise<void>`
+
+#### `getColor()`
+Obtient la couleur actuelle de la barre de navigation.
+
+**Retourne :** `Promise<{ color: string }>`
+
+### Interfaces
+
+```typescript
+interface ColorOptions {
+  color: string;      // Code couleur hexadécimal
+  darkButtons: boolean; // Style des boutons
+}
+
+interface ColorResult {
+  color: string;      // Couleur hexadécimale actuelle
+}
+```
+
+## Notes de plateforme
+
+### Android
+- Nécessite Android 5.0 (niveau d'API 21) ou supérieur
+- Les changements de couleur sont immédiats
+- Les couleurs transparentes sont prises en charge (utilisez le canal alpha)
+- La barre de navigation peut ne pas être visible sur les appareils avec navigation par gestes
+
+### iOS
+- Ce plugin n'a aucun effet sur les appareils iOS
+- iOS ne fournit pas d'API pour personnaliser la navigation système
+
+## Cas d'utilisation courants
+
+1. **Cohérence de la marque** : Faire correspondre la barre de navigation avec la couleur principale de votre application
+2. **Prise en charge des thèmes** : S'adapter dynamiquement aux thèmes clair/sombre
+3. **Expériences immersives** : Utiliser une navigation transparente pour le contenu en plein écran
+4. **Indication d'état** : Changer la couleur pour indiquer les états de l'application (enregistrement, erreurs, etc.)
+
+## Bonnes pratiques
+
+1. **Contraste des couleurs** : Assurez-vous d'un contraste suffisant entre la barre de navigation et les boutons
+   ```typescript
+   // Exemples de bon contraste
+   setColor({ color: '#FFFFFF', darkButtons: true });  // Barre blanche, boutons sombres
+   setColor({ color: '#000000', darkButtons: false }); // Barre noire, boutons clairs
+   ```
+
+2. **Cohérence du thème** : Mettre à jour la barre de navigation lors des changements de thème
+3. **Accessibilité** : Considérer les utilisateurs ayant des déficiences visuelles lors du choix des couleurs
+4. **Performance** : Éviter les changements de couleur fréquents qui pourraient distraire les utilisateurs
+
+## Dépannage
+
+**La barre de navigation ne change pas :**
+- Vérifiez que l'appareil exécute Android 5.0+
+- Vérifiez si l'appareil a la navigation par gestes activée
+- Assurez-vous que le format de couleur est un hexadécimal valide (par exemple, '#FF0000')
+
+**Les boutons ne sont pas visibles :**
+- Vérifiez que le paramètre `darkButtons` correspond à la couleur de votre arrière-plan
+- Les arrière-plans clairs nécessitent `darkButtons: true`
+- Les arrière-plans sombres nécessitent `darkButtons: false`
+
+**La couleur apparaît différente :**
+- Certaines versions d'Android peuvent modifier légèrement la couleur
+- Utilisez des couleurs totalement opaques pour de meilleurs résultats

@@ -1,0 +1,354 @@
+---
+title: Getting Started
+locale: ja
+description: Capacitorアプリで住所と座標の変換を行うNative Geocoderプラグインをインストールして使用する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージのインストール**
+   <PackageManagers pkg="@capgo/nativegeocoder" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトとの同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **パーミッションの設定**
+
+   ### iOS
+   `Info.plist`に位置情報使用説明を追加します：
+   ```xml
+   <key>NSLocationWhenInUseUsageDescription</key>
+   <string>To convert addresses to coordinates</string>
+   ```
+
+   ### Android
+   `AndroidManifest.xml`にパーミッションを追加します：
+   ```xml
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+   ```
+</Steps>
+
+## 使用方法
+
+プラグインをインポートしてジオコーディングメソッドを使用します：
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+
+// フォワードジオコーディング：住所から座標へ
+const forwardGeocode = async () => {
+  const results = await NativeGeocoder.forwardGeocode({
+    addressString: '1600 Amphitheatre Parkway, Mountain View, CA',
+    useLocale: true,
+    maxResults: 1
+  });
+
+  const location = results.addresses[0];
+  console.log('Latitude:', location.latitude);
+  console.log('Longitude:', location.longitude);
+};
+
+// リバースジオコーディング：座標から住所へ
+const reverseGeocode = async () => {
+  const results = await NativeGeocoder.reverseGeocode({
+    latitude: 37.4220656,
+    longitude: -122.0840897,
+    useLocale: true,
+    maxResults: 1
+  });
+
+  const address = results.addresses[0];
+  console.log('Street:', address.thoroughfare);
+  console.log('City:', address.locality);
+  console.log('Country:', address.countryName);
+};
+```
+
+## APIリファレンス
+
+### forwardGeocode(options)
+
+住所文字列を地理座標に変換します。
+
+```typescript
+interface ForwardGeocodeOptions {
+  addressString: string;
+  useLocale?: boolean;
+  maxResults?: number;
+  apiKey?: string; // Android専用
+}
+
+interface GeocodeResult {
+  addresses: Address[];
+}
+
+interface Address {
+  latitude: number;
+  longitude: number;
+  countryCode?: string;
+  countryName?: string;
+  postalCode?: string;
+  administrativeArea?: string;
+  subAdministrativeArea?: string;
+  locality?: string;
+  subLocality?: string;
+  thoroughfare?: string;
+  subThoroughfare?: string;
+}
+```
+
+### reverseGeocode(options)
+
+地理座標を住所情報に変換します。
+
+```typescript
+interface ReverseGeocodeOptions {
+  latitude: number;
+  longitude: number;
+  useLocale?: boolean;
+  maxResults?: number;
+  apiKey?: string; // Android専用
+}
+```
+
+## 完全な例
+
+### エラーハンドリング付き住所検索
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+
+export class GeocodingService {
+  async searchAddress(address: string): Promise<{lat: number, lng: number} | null> {
+    try {
+      const results = await NativeGeocoder.forwardGeocode({
+        addressString: address,
+        useLocale: true,
+        maxResults: 5
+      });
+
+      if (results.addresses.length > 0) {
+        const location = results.addresses[0];
+        return {
+          lat: location.latitude,
+          lng: location.longitude
+        };
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Geocoding failed:', error);
+      return null;
+    }
+  }
+
+  async getAddressFromCoordinates(lat: number, lng: number): Promise<string | null> {
+    try {
+      const results = await NativeGeocoder.reverseGeocode({
+        latitude: lat,
+        longitude: lng,
+        useLocale: true,
+        maxResults: 1
+      });
+
+      if (results.addresses.length > 0) {
+        const address = results.addresses[0];
+        return this.formatAddress(address);
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Reverse geocoding failed:', error);
+      return null;
+    }
+  }
+
+  private formatAddress(address: Address): string {
+    const parts = [
+      address.subThoroughfare,
+      address.thoroughfare,
+      address.locality,
+      address.administrativeArea,
+      address.postalCode,
+      address.countryName
+    ].filter(part => part != null && part !== '');
+
+    return parts.join(', ');
+  }
+}
+```
+
+### ロケーションピッカーコンポーネント
+
+```typescript
+import { NativeGeocoder } from '@capgo/nativegeocoder';
+import { Geolocation } from '@capacitor/geolocation';
+
+export class LocationPicker {
+  currentLocation: { lat: number; lng: number } | null = null;
+  currentAddress: string = '';
+
+  async getCurrentLocation() {
+    try {
+      // 現在の座標を取得
+      const position = await Geolocation.getCurrentPosition();
+      this.currentLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      // 座標の住所を取得
+      const results = await NativeGeocoder.reverseGeocode({
+        latitude: this.currentLocation.lat,
+        longitude: this.currentLocation.lng,
+        useLocale: true,
+        maxResults: 1
+      });
+
+      if (results.addresses.length > 0) {
+        const address = results.addresses[0];
+        this.currentAddress = [
+          address.thoroughfare,
+          address.locality,
+          address.countryName
+        ].filter(Boolean).join(', ');
+      }
+    } catch (error) {
+      console.error('Failed to get location:', error);
+    }
+  }
+
+  async searchLocation(query: string) {
+    try {
+      const results = await NativeGeocoder.forwardGeocode({
+        addressString: query,
+        useLocale: true,
+        maxResults: 10
+      });
+
+      return results.addresses.map(address => ({
+        coordinates: {
+          lat: address.latitude,
+          lng: address.longitude
+        },
+        displayName: this.formatDisplayName(address)
+      }));
+    } catch (error) {
+      console.error('Search failed:', error);
+      return [];
+    }
+  }
+
+  private formatDisplayName(address: Address): string {
+    const mainPart = [
+      address.thoroughfare,
+      address.locality
+    ].filter(Boolean).join(', ');
+
+    const subPart = [
+      address.administrativeArea,
+      address.countryName
+    ].filter(Boolean).join(', ');
+
+    return mainPart + (subPart ? ` (${subPart})` : '');
+  }
+}
+```
+
+## ベストプラクティス
+
+1. **最初にパーミッションをリクエスト**
+   ```typescript
+   import { Geolocation } from '@capacitor/geolocation';
+
+   const requestPermissions = async () => {
+     const permissions = await Geolocation.requestPermissions();
+     if (permissions.location !== 'granted') {
+       throw new Error('Location permission required');
+     }
+   };
+   ```
+
+2. **エラーを適切に処理**
+   ```typescript
+   try {
+     const results = await NativeGeocoder.forwardGeocode({
+       addressString: address
+     });
+   } catch (error) {
+     // 特定のエラーケースを処理
+     if (error.message.includes('network')) {
+       console.error('Network error');
+     } else if (error.message.includes('permission')) {
+       console.error('Permission denied');
+     }
+   }
+   ```
+
+3. **maxResultsを賢く使用**
+   - ユーザー検索の場合：5〜10件の結果を使用
+   - 自動変換の場合：1件の結果を使用
+   - より多くの結果 = より遅いレスポンス
+
+4. **可能な場合は結果をキャッシュ**
+   ```typescript
+   const geocodeCache = new Map();
+
+   async function geocodeWithCache(address: string) {
+     if (geocodeCache.has(address)) {
+       return geocodeCache.get(address);
+     }
+
+     const result = await NativeGeocoder.forwardGeocode({
+       addressString: address
+     });
+
+     geocodeCache.set(address, result);
+     return result;
+   }
+   ```
+
+## プラットフォームの違い
+
+### iOS
+- CoreLocationの`CLGeocoder`を使用
+- APIキーは不要
+- ユーザーのロケールを自動的に尊重
+
+### Android
+- Android Geocoder APIを使用
+- より良い結果のためのオプションのGoogle APIキー
+- Googleのwebサービスにフォールバック可能
+
+### APIキーの設定（Android）
+
+Androidでより良い結果を得るために、Google APIキーを提供できます：
+
+```typescript
+await NativeGeocoder.forwardGeocode({
+  addressString: address,
+  apiKey: 'YOUR_GOOGLE_API_KEY' // Android専用
+});
+```
+
+## よくある問題
+
+1. **結果が返されない**
+   - インターネット接続を確認
+   - 住所形式を確認
+   - より一般的な住所で試す
+
+2. **パーミッションエラー**
+   - 位置情報パーミッションが付与されていることを確認
+   - Info.plist/AndroidManifest.xmlを確認
+
+3. **不正確な結果**
+   - より具体的な住所を使用
+   - 利用可能な場合は郵便番号を含める
+   - 正確な位置には座標の使用を検討

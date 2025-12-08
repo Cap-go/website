@@ -1,0 +1,130 @@
+---
+title: 시작하기
+locale: ko
+description: Pay 플러그인을 사용하여 Capacitor 체크아웃을 위한 Apple Pay 및 Google Pay를 구성합니다.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **플러그인 설치**
+   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 네이티브 사전 요구 사항
+
+- **Apple Pay (iOS)**
+  1. Apple 개발자 포털에서 Apple Pay merchant ID를 생성합니다.
+  2. 게이트웨이에서 요구하는 결제 처리 인증서를 생성하고 업로드합니다.
+  3. Xcode에서 **Apple Pay** 기능을 활성화하고 프로비저닝 프로파일에 포함되어 있는지 확인합니다.
+  4. 게이트웨이가 결제 유효성 검사를 위해 네트워크 액세스를 요구하는 경우 `Info.plist`를 사용 설명으로 업데이트합니다.
+
+- **Google Pay (Android)**
+  1. [Google Pay Business Console](https://pay.google.com/business/console/)에 로그인합니다.
+  2. 결제 게이트웨이 매개변수를 구성하거나 테스트를 위한 직접 토큰화를 설정합니다.
+  3. 프로덕션 카드를 사용하려는 경우 `environment`를 `PRODUCTION`으로 전환하고 QA용 테스트 카드를 등록합니다.
+  4. 장치에서 Google Play 서비스를 사용할 수 있는지 확인합니다 (Google Pay 필수).
+
+단계별 스크린샷은 플러그인 저장소의 `docs/` 아래에 있는 가이드를 참조하세요.
+
+## 가용성 확인
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const availability = await Pay.isPayAvailable({
+  apple: { supportedNetworks: ['visa', 'masterCard', 'amex'] },
+  google: {
+    isReadyToPayRequest: {
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+          },
+        },
+      ],
+    },
+  },
+});
+
+if (!availability.available) {
+  console.warn('네이티브 결제를 사용할 수 없음:', availability);
+}
+```
+
+## 결제 요청 (Apple Pay)
+
+```typescript
+const appleResult = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant.com.example.app',
+    countryCode: 'US',
+    currencyCode: 'USD',
+    supportedNetworks: ['visa', 'masterCard'],
+    paymentSummaryItems: [
+      { label: 'Starter Plan', amount: '9.99' },
+      { label: 'Capgo Store', amount: '9.99' },
+    ],
+    requiredShippingContactFields: ['name', 'emailAddress'],
+  },
+});
+
+const token = appleResult.apple?.paymentData;
+```
+
+## 결제 요청 (Google Pay)
+
+```typescript
+const googleResult = await Pay.requestPayment({
+  google: {
+    environment: 'test',
+    paymentDataRequest: {
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            billingAddressRequired: true,
+            billingAddressParameters: { format: 'FULL' },
+          },
+          tokenizationSpecification: {
+            type: 'PAYMENT_GATEWAY',
+            parameters: {
+              gateway: 'example',
+              gatewayMerchantId: 'exampleMerchantId',
+            },
+          },
+        },
+      ],
+      merchantInfo: {
+        merchantName: 'Capgo Store',
+      },
+      transactionInfo: {
+        totalPriceStatus: 'FINAL',
+        totalPrice: '9.99',
+        currencyCode: 'USD',
+        countryCode: 'US',
+      },
+    },
+  },
+});
+
+const paymentData = googleResult.google?.paymentData;
+```
+
+## 응답 처리
+
+- 반환된 페이로드를 결제 프로세서로 토큰화하고 서버 측에서 거래를 확인합니다.
+- 네이티브 결제를 사용할 수 없거나 사용자가 시트를 취소하는 경우 대체 경로(카드 입력, 청구서)를 제공합니다.
+- 지원되지 않는 장치에 버튼을 표시하지 않도록 가용성 결과를 캐시합니다.

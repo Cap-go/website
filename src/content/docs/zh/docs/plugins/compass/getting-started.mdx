@@ -1,0 +1,219 @@
+---
+title: 入门指南
+locale: zh
+description: 了解如何安装和使用指南针插件在 Capacitor 应用中读取设备指南针方向。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS 设置
+
+在 iOS 上，访问指南针需要位置权限。将以下内容添加到 `Info.plist`：
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need location permission to access the compass</string>
+```
+
+## Android 设置
+
+无需额外设置。插件使用设备的磁力计和加速度计传感器。
+
+## 使用
+
+导入插件并使用其方法读取指南针方向：
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// 一次性获取当前方向
+const getCurrentHeading = async () => {
+  const { value } = await CapgoCompass.getCurrentHeading();
+  console.log('Current heading:', value, 'degrees');
+};
+
+// 开始持续方向更新
+const startCompass = async () => {
+  // 开始监听更新
+  await CapgoCompass.startListening();
+
+  // 添加方向变化的监听器
+  const handle = await CapgoCompass.addListener('headingChange', (event) => {
+    console.log('Heading:', event.value, 'degrees');
+  });
+
+  // 稍后，停止监听：
+  // await CapgoCompass.stopListening();
+  // await handle.remove();
+};
+
+// 检查权限
+const checkPermission = async () => {
+  const status = await CapgoCompass.checkPermissions();
+  console.log('Permission status:', status.compass);
+};
+
+// 请求权限
+const requestPermission = async () => {
+  const status = await CapgoCompass.requestPermissions();
+  if (status.compass === 'granted') {
+    console.log('Compass access granted');
+  }
+};
+```
+
+## API 参考
+
+### getCurrentHeading()
+
+获取当前指南针方向（度）。
+
+```typescript
+const result = await CapgoCompass.getCurrentHeading();
+// 返回：{ value: number } - 方向（度）（0-360）
+```
+
+### startListening()
+
+开始监听指南针方向变化。在发出方向事件之前必须调用。
+
+```typescript
+await CapgoCompass.startListening();
+```
+
+### stopListening()
+
+停止监听指南针方向变化。
+
+```typescript
+await CapgoCompass.stopListening();
+```
+
+### addListener('headingChange', callback)
+
+添加方向变化事件的监听器。
+
+```typescript
+const handle = await CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
+
+// 完成后移除监听器
+await handle.remove();
+```
+
+### removeAllListeners()
+
+移除所有已注册的监听器。
+
+```typescript
+await CapgoCompass.removeAllListeners();
+```
+
+### checkPermissions()
+
+检查当前权限状态。
+
+```typescript
+const status = await CapgoCompass.checkPermissions();
+// 返回：{ compass: 'prompt' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+请求访问指南针数据的权限。
+
+```typescript
+const status = await CapgoCompass.requestPermissions();
+```
+
+### getPluginVersion()
+
+获取原生插件版本。
+
+```typescript
+const { version } = await CapgoCompass.getPluginVersion();
+```
+
+## 完整示例
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+export class CompassService {
+  private listenerHandle: any = null;
+
+  async init() {
+    // 检查并请求权限
+    const status = await CapgoCompass.checkPermissions();
+    if (status.compass !== 'granted') {
+      const result = await CapgoCompass.requestPermissions();
+      if (result.compass !== 'granted') {
+        throw new Error('Compass permission denied');
+      }
+    }
+  }
+
+  async startTracking(onHeadingChange: (heading: number) => void) {
+    // 开始监听更新
+    await CapgoCompass.startListening();
+
+    // 添加事件监听器
+    this.listenerHandle = await CapgoCompass.addListener(
+      'headingChange',
+      (event) => {
+        onHeadingChange(event.value);
+      }
+    );
+  }
+
+  async stopTracking() {
+    if (this.listenerHandle) {
+      await this.listenerHandle.remove();
+      this.listenerHandle = null;
+    }
+    await CapgoCompass.stopListening();
+  }
+
+  async getHeading(): Promise<number> {
+    const { value } = await CapgoCompass.getCurrentHeading();
+    return value;
+  }
+
+  getCardinalDirection(heading: number): string {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(heading / 45) % 8;
+    return directions[index];
+  }
+}
+```
+
+## 平台说明
+
+### iOS
+- 需要 iOS 10.0+
+- 使用 Core Location 获取方向数据
+- 需要位置权限 (NSLocationWhenInUseUsageDescription)
+- 监听活跃时方向更新是连续的
+
+### Android
+- 需要 Android 6.0 (API 23)+
+- 使用加速度计和磁力计传感器
+- 指南针传感器不需要特殊权限
+- 方向由传感器融合计算得出
+
+### Web
+- Web 平台不支持
+- 调用方法时会抛出错误

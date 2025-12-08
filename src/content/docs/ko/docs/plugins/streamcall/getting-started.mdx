@@ -1,0 +1,488 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor 앱에서 전문적인 화상 통화를 위한 Stream Video SDK를 설치하고 통합하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-stream-call
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 사전 요구사항
+
+Stream 계정과 API 자격 증명이 필요합니다. 계정이 없다면 [Stream](https://getstream.io/)에서 가입하세요.
+
+## 플랫폼 구성
+
+### iOS
+
+`Info.plist`에 필요한 권한을 추가하세요:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>이 앱은 화상 통화를 위해 카메라 접근 권한이 필요합니다</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>이 앱은 화상 통화를 위해 마이크 접근 권한이 필요합니다</string>
+```
+
+### Android
+
+`AndroidManifest.xml`에 필요한 권한을 추가하세요:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+```
+
+## 사용 예제
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+// Stream SDK 초기화
+await StreamCall.initialize({
+  apiKey: 'your-stream-api-key',
+  userId: 'user-123',
+  userToken: 'user-token'
+});
+
+// 통화 생성
+await StreamCall.createCall({
+  callId: 'call-123',
+  callType: 'default'
+});
+
+// 통화 참여
+await StreamCall.joinCall({
+  callId: 'call-123'
+});
+
+// 카메라 켜기/끄기
+await StreamCall.toggleCamera({
+  enabled: true
+});
+
+// 마이크 켜기/끄기
+await StreamCall.toggleMicrophone({
+  enabled: true
+});
+
+// 카메라 전환 (전면/후면)
+await StreamCall.switchCamera();
+
+// 통화 종료
+await StreamCall.leaveCall();
+
+// 통화 이벤트 수신
+StreamCall.addListener('callStarted', (data) => {
+  console.log('통화 시작:', data);
+});
+
+StreamCall.addListener('callEnded', (data) => {
+  console.log('통화 종료:', data);
+});
+
+StreamCall.addListener('participantJoined', (data) => {
+  console.log('참여자 입장:', data);
+});
+
+StreamCall.addListener('participantLeft', (data) => {
+  console.log('참여자 퇴장:', data);
+});
+```
+
+## API 참조
+
+### initialize(options)
+
+```typescript
+initialize(options: InitializeOptions) => Promise<void>
+```
+
+Stream Video SDK를 초기화합니다.
+
+| 매개변수         | 타입                        |
+| ------------- | --------------------------- |
+| **`options`** | `InitializeOptions` |
+
+### createCall(options)
+
+```typescript
+createCall(options: CreateCallOptions) => Promise<void>
+```
+
+새로운 화상 통화를 생성합니다.
+
+| 매개변수         | 타입                        |
+| ------------- | --------------------------- |
+| **`options`** | `CreateCallOptions` |
+
+### joinCall(options)
+
+```typescript
+joinCall(options: JoinCallOptions) => Promise<void>
+```
+
+기존 화상 통화에 참여합니다.
+
+| 매개변수         | 타입                      |
+| ------------- | ------------------------- |
+| **`options`** | `JoinCallOptions` |
+
+### leaveCall()
+
+```typescript
+leaveCall() => Promise<void>
+```
+
+현재 통화를 종료합니다.
+
+### toggleCamera(options)
+
+```typescript
+toggleCamera(options: { enabled: boolean }) => Promise<void>
+```
+
+카메라를 켜거나 끕니다.
+
+| 매개변수         | 타입                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### toggleMicrophone(options)
+
+```typescript
+toggleMicrophone(options: { enabled: boolean }) => Promise<void>
+```
+
+마이크를 켜거나 끕니다.
+
+| 매개변수         | 타입                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### switchCamera()
+
+```typescript
+switchCamera() => Promise<void>
+```
+
+전면 및 후면 카메라 간에 전환합니다.
+
+### setSpeakerphone(options)
+
+```typescript
+setSpeakerphone(options: { enabled: boolean }) => Promise<void>
+```
+
+스피커폰을 켜거나 끕니다.
+
+| 매개변수         | 타입                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+### sendCallInvite(options)
+
+```typescript
+sendCallInvite(options: InviteOptions) => Promise<void>
+```
+
+사용자에게 통화 초대를 보냅니다.
+
+| 매개변수         | 타입                    |
+| ------------- | ----------------------- |
+| **`options`** | `InviteOptions` |
+
+### acceptCall(options)
+
+```typescript
+acceptCall(options: { callId: string }) => Promise<void>
+```
+
+수신 통화를 수락합니다.
+
+| 매개변수         | 타입                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callId: string }` |
+
+### rejectCall(options)
+
+```typescript
+rejectCall(options: { callId: string }) => Promise<void>
+```
+
+수신 통화를 거부합니다.
+
+| 매개변수         | 타입                       |
+| ------------- | -------------------------- |
+| **`options`** | `{ callId: string }` |
+
+## 인터페이스
+
+### InitializeOptions
+
+| 속성            | 타입              | 설명                    |
+| --------------- | ----------------- | ------------------------------ |
+| **`apiKey`**    | `string` | Stream API 키                 |
+| **`userId`**    | `string` | 사용자 ID                        |
+| **`userToken`** | `string` | 사용자 인증 토큰      |
+| **`userName`**  | `string` | 사용자 표시 이름 (선택 사항)   |
+| **`userImage`** | `string` | 사용자 프로필 이미지 URL (선택 사항) |
+
+### CreateCallOptions
+
+| 속성           | 타입              | 설명                        |
+| -------------- | ----------------- | ---------------------------------- |
+| **`callId`**   | `string` | 고유 통화 식별자             |
+| **`callType`** | `string` | 통화 유형 (예: 'default', 'audio-only') |
+| **`members`**  | `string[]` | 초대할 사용자 ID 배열 (선택 사항) |
+
+### JoinCallOptions
+
+| 속성         | 타입              | 설명                |
+| ------------ | ----------------- | -------------------------- |
+| **`callId`** | `string` | 참여할 통화 ID            |
+
+### InviteOptions
+
+| 속성         | 타입              | 설명                |
+| ------------ | ----------------- | -------------------------- |
+| **`callId`** | `string` | 통화 ID                    |
+| **`userId`** | `string` | 초대할 사용자 ID          |
+
+## 이벤트 리스너
+
+### 사용 가능한 이벤트
+
+- `callStarted` - 통화가 시작됨
+- `callEnded` - 통화가 종료됨
+- `participantJoined` - 참여자가 통화에 입장함
+- `participantLeft` - 참여자가 통화에서 퇴장함
+- `incomingCall` - 수신 통화 수신됨
+- `callAccepted` - 통화가 수락됨
+- `callRejected` - 통화가 거부됨
+- `error` - 오류 발생
+
+### 이벤트 예제
+
+```typescript
+// 수신 통화 수신
+StreamCall.addListener('incomingCall', (data) => {
+  console.log('수신 통화 발신자:', data.callerId);
+  console.log('발신자 이름:', data.callerName);
+
+  // 수신 통화 UI 표시
+  showIncomingCallScreen({
+    callerId: data.callerId,
+    callerName: data.callerName,
+    callerImage: data.callerImage,
+    callId: data.callId
+  });
+});
+
+// 통화 수락 수신
+StreamCall.addListener('callAccepted', (data) => {
+  console.log('통화 수락됨');
+  // 통화 화면으로 이동
+});
+
+// 오류 수신
+StreamCall.addListener('error', (error) => {
+  console.error('통화 오류:', error.message);
+  // 적절하게 오류 처리
+});
+
+// 리스너 제거
+const listener = await StreamCall.addListener('callStarted', (data) => {
+  console.log('통화 시작됨');
+});
+
+// 나중에...
+listener.remove();
+```
+
+## 완전한 예제
+
+```typescript
+import { StreamCall } from '@capgo/capacitor-stream-call';
+
+class VideoCallService {
+  async initialize(userId: string, userName: string) {
+    try {
+      await StreamCall.initialize({
+        apiKey: 'your-stream-api-key',
+        userId: userId,
+        userToken: await this.getUserToken(userId),
+        userName: userName
+      });
+
+      this.setupEventListeners();
+    } catch (error) {
+      console.error('Stream 초기화 실패:', error);
+    }
+  }
+
+  setupEventListeners() {
+    // 수신 통화 처리
+    StreamCall.addListener('incomingCall', async (data) => {
+      const accepted = await this.showIncomingCallDialog(data);
+
+      if (accepted) {
+        await StreamCall.acceptCall({ callId: data.callId });
+        await StreamCall.joinCall({ callId: data.callId });
+      } else {
+        await StreamCall.rejectCall({ callId: data.callId });
+      }
+    });
+
+    // 통화 이벤트 처리
+    StreamCall.addListener('callStarted', () => {
+      console.log('통화 시작됨');
+    });
+
+    StreamCall.addListener('callEnded', () => {
+      console.log('통화 종료됨');
+      this.navigateToHome();
+    });
+
+    StreamCall.addListener('participantJoined', (data) => {
+      console.log('참여자 입장:', data.participantName);
+    });
+  }
+
+  async startCall(recipientId: string) {
+    try {
+      const callId = `call-${Date.now()}`;
+
+      // 통화 생성 및 참여
+      await StreamCall.createCall({
+        callId: callId,
+        callType: 'default',
+        members: [recipientId]
+      });
+
+      await StreamCall.joinCall({ callId: callId });
+
+      // 초대 전송
+      await StreamCall.sendCallInvite({
+        callId: callId,
+        userId: recipientId
+      });
+
+      console.log('통화 시작됨');
+    } catch (error) {
+      console.error('통화 시작 실패:', error);
+    }
+  }
+
+  async endCall() {
+    try {
+      await StreamCall.leaveCall();
+      console.log('통화 종료됨');
+    } catch (error) {
+      console.error('통화 종료 실패:', error);
+    }
+  }
+
+  async toggleVideo(enabled: boolean) {
+    await StreamCall.toggleCamera({ enabled });
+  }
+
+  async toggleAudio(enabled: boolean) {
+    await StreamCall.toggleMicrophone({ enabled });
+  }
+
+  async flipCamera() {
+    await StreamCall.switchCamera();
+  }
+
+  private async getUserToken(userId: string): Promise<string> {
+    // 백엔드에서 사용자 토큰 가져오기
+    const response = await fetch(`/api/stream-token?userId=${userId}`);
+    const data = await response.json();
+    return data.token;
+  }
+
+  private async showIncomingCallDialog(data: any): Promise<boolean> {
+    // 네이티브 대화 상자 또는 커스텀 UI 표시
+    return confirm(`${data.callerName}님의 수신 통화`);
+  }
+
+  private navigateToHome() {
+    // 홈 화면으로 이동
+    window.location.href = '/';
+  }
+}
+
+// 사용법
+const videoCall = new VideoCallService();
+await videoCall.initialize('user-123', 'John Doe');
+
+// 통화 시작
+await videoCall.startCall('user-456');
+
+// 컨트롤 토글
+await videoCall.toggleVideo(false); // 비디오 비활성화
+await videoCall.toggleAudio(false); // 음소거
+await videoCall.flipCamera(); // 카메라 전환
+
+// 통화 종료
+await videoCall.endCall();
+```
+
+## 모범 사례
+
+- 앱 수명 주기 초기에 SDK 초기화
+- 통화 시작 전에 권한 요청 처리
+- 네트워크 문제에 대한 적절한 오류 처리 구현
+- 컴포넌트 언마운트 시 리스너 정리
+- 에뮬레이터가 아닌 실제 기기에서 테스트
+- 네트워크 중단에 대한 재연결 로직 구현
+- 통화 상태에 대한 시각적 피드백 제공
+- 백그라운드/포그라운드 전환 처리
+
+## 현지화
+
+플러그인은 네이티브 UI 요소에 대한 다국어를 지원합니다. 플랫폼별 설정에서 구성하세요.
+
+## 사용 사례
+
+- 1:1 화상 통화
+- 그룹 화상 회의
+- 음성 전용 통화
+- 화면 공유 세션
+- 고객 지원 화상 채팅
+- 원격 의료 상담
+- 원격 협업

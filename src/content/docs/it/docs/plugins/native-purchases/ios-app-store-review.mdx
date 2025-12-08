@@ -1,0 +1,541 @@
+---
+title: Linee guida per la revisione App Store iOS per IAP
+locale: it
+description: Guida completa per superare la revisione App Store con acquisti in-app e abbonamenti, inclusi motivi di rifiuto comuni e best practice.
+sidebar:
+  order: 10
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Ottenere l'approvazione della tua app sull'App Store richiede un'attenzione particolare alle linee guida di Apple, specialmente quando si implementano acquisti in-app e abbonamenti. Questa guida copre tutto ciò che devi sapere per superare la revisione al primo invio.
+
+![Processo di revisione App Store iOS](/native-purchases/review-guides/ios-review-hero.webp)
+
+## Requisiti per gli acquisti in-app
+
+### Trasparenza dei prezzi (Critico)
+
+Apple richiede una divulgazione cristallina dei prezzi prima di qualsiasi acquisto:
+
+**Elementi obbligatori:**
+- Mostra il prezzo esatto prima del pulsante di acquisto
+- Indica la frequenza di fatturazione (ad es., "$9.99/mese")
+- Dichiara chiaramente cosa ottengono gli utenti per i loro soldi
+- Indica quando verranno addebitati i costi
+
+**Rifiuto comune:**
+> "I prezzi dell'abbonamento devono essere chiari e anticipati."
+
+:::caution Coerenza dei prezzi
+Tutti i prezzi devono corrispondere tra:
+- Elenco dei metadati App Store
+- Schermate di acquisto in-app
+- Schermate di gestione abbonamenti
+
+Anche una discrepanza di $1 tra l'elenco dello store ($4.99) e l'app ($5.99) attiverà un rifiuto automatico.
+:::
+
+### Presentazione del piano di abbonamento
+
+**Divulgazioni richieste:**
+- Tutti i livelli di abbonamento disponibili mostrati insieme
+- Confronto chiaro delle funzionalità per livello
+- Nessun default automatico sui livelli premium attraverso trucchi UI
+- Istruzioni di cancellazione facili da trovare
+
+![Cosa fare e cosa non fare nella progettazione UI](/native-purchases/review-guides/ui-design-dos-donts.webp)
+
+**Esempio di UI conforme:**
+```typescript
+import { NativePurchases } from '@capgo/native-purchases';
+
+function SubscriptionScreen() {
+  return (
+    <div>
+      <h2>Scegli il tuo piano</h2>
+
+      {/* Mostra tutti i livelli in modo uguale */}
+      <PlanCard
+        title="Base"
+        price="$4.99/mese"
+        features={['Funzione A', 'Funzione B']}
+      />
+      <PlanCard
+        title="Premium"
+        price="$9.99/mese"
+        features={['Tutto Base', 'Funzione C', 'Funzione D']}
+        highlighted={false} // Non forzare premium
+      />
+
+      {/* Informazioni chiare sulla cancellazione */}
+      <Text>
+        Annulla in qualsiasi momento in Impostazioni > Abbonamenti.
+        Nessun rimborso per periodi parziali.
+      </Text>
+    </div>
+  );
+}
+```
+
+### Ripristina acquisti
+
+**Implementazione richiesta:**
+
+Ogni app con IAP deve fornire un modo per gli utenti di ripristinare gli acquisti precedenti senza contattare l'assistenza.
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function restorePurchases() {
+  try {
+    await NativePurchases.restorePurchases();
+
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    const activeSub = purchases.find(
+      (purchase) => purchase.isActive && purchase.expirationDate,
+    );
+
+    if (activeSub) {
+      unlockPremiumFeatures();
+      showMessage('Acquisti ripristinati con successo!');
+      return;
+    }
+
+    const { purchases: iaps } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.INAPP,
+    });
+    const hasIap = iaps.some((purchase) => purchase.productIdentifier === 'premium_unlock');
+
+    showMessage(
+      hasIap ? 'Acquisto premium ripristinato!' : 'Nessun acquisto precedente trovato.',
+    );
+  } catch (error) {
+    showError('Impossibile ripristinare gli acquisti. Riprova.');
+  }
+}
+
+// Aggiungi un pulsante "Ripristina acquisti" visibile
+<Button onClick={restorePurchases}>
+  Ripristina acquisti
+</Button>
+```
+
+## Motivi di rifiuto comuni
+
+### 1. App si blocca o funzionalità non funzionante
+
+**Perché fallisce:**
+- L'app si blocca all'avvio
+- Il flusso di acquisto non riesce a completarsi
+- Le funzionalità mostrate negli screenshot non funzionano
+
+**Prevenzione:**
+- Testa su dispositivi reali (non solo simulatori)
+- Testa tutti i flussi di abbonamento end-to-end
+- Verifica che la convalida della ricevuta funzioni
+- Controlla la gestione degli errori di rete
+
+### 2. Discrepanze nei metadati
+
+**Perché fallisce:**
+- Gli screenshot mostrano funzionalità non nella build corrente
+- La descrizione menziona funzionalità che non esistono
+- I prezzi nei metadati differiscono dai prezzi in-app
+
+![Checklist metadati](/native-purchases/review-guides/metadata-checklist.webp)
+
+**Prevenzione:**
+```typescript
+// Documenta esattamente cosa c'è in ogni livello
+const SUBSCRIPTION_FEATURES = {
+  basic: ['Senza pubblicità', 'Sincronizzazione cloud', 'Temi base'],
+  premium: ['Senza pubblicità', 'Sincronizzazione cloud', 'Tutti i temi', 'Supporto prioritario']
+};
+
+// Usa questi sia nella tua app CHE nella descrizione App Store
+```
+
+### 3. Spiegazioni dei permessi mancanti
+
+**Perché fallisce:**
+- Richiesta di fotocamera/posizione/salute senza spiegazione
+- Richieste di permessi nascoste a diverse schermate di profondità
+- Descrizioni dei permessi vaghe o generiche
+
+**Prevenzione:**
+
+Aggiorna il tuo `Info.plist` con spiegazioni chiare:
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>L'accesso alla fotocamera è necessario per scansionare i codici a barre dei prodotti per aggiornamenti rapidi dell'abbonamento.</string>
+
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>La posizione ci aiuta a mostrare contenuti locali pertinenti nel tuo abbonamento Premium.</string>
+```
+
+### 4. Marketing ingannevole
+
+**Perché fallisce:**
+- Affermazioni come "App #1 al mondo" senza prove
+- Funzionalità "illimitate" che hanno limiti nascosti
+- Tattiche di urgenza false ("Solo 2 posti rimasti!")
+
+![Esempi di linee guida per la descrizione](/native-purchases/review-guides/description-guidelines-1.webp)
+
+![Linee guida aggiuntive per la descrizione](/native-purchases/review-guides/description-guidelines-2.webp)
+
+**Prevenzione:**
+- Sii specifico e fattuale nelle descrizioni
+- Evita superlativi senza prove
+- Non fare pressione sugli utenti con scarsità falsa
+
+### 5. Processo di cancellazione nascosto
+
+**Perché fallisce:**
+- Nessuna menzione di come annullare
+- Pulsante di cancellazione nascosto o oscurato
+- Processo di cancellazione in più passaggi senza il flusso nativo di Apple
+
+**Prevenzione:**
+```typescript
+// Informa sempre gli utenti sulla cancellazione
+function SubscriptionInfo() {
+  return (
+    <div>
+      <h3>Come annullare</h3>
+      <ol>
+        <li>Apri le Impostazioni iPhone</li>
+        <li>Tocca il tuo nome in alto</li>
+        <li>Tocca Abbonamenti</li>
+        <li>Seleziona questa app e tocca Annulla</li>
+      </ol>
+
+      <p>Oppure gestisci direttamente nell'app App Store.</p>
+
+      <Button onClick={openSubscriptionManagement}>
+        Gestisci abbonamento nelle Impostazioni
+      </Button>
+    </div>
+  );
+}
+
+async function openSubscriptionManagement() {
+  // Link diretto alla gestione degli abbonamenti iOS
+  await NativePurchases.showManageSubscriptions();
+}
+```
+
+## Privacy e utilizzo dei dati (Sezione 5.1.1)
+
+Apple ha notevolmente rafforzato i requisiti di privacy nel 2025.
+
+### Divulgazioni richieste
+
+**Per ogni permesso:**
+1. Perché ne hai bisogno (caso d'uso specifico)
+2. Quando verrà utilizzato
+3. Come vengono archiviati/condivisi i dati
+4. Se è facoltativo o richiesto
+
+### Esempio: Flusso di permessi appropriato
+
+```typescript
+async function requestCameraPermission() {
+  // Mostra spiegazione PRIMA di richiedere
+  await showDialog({
+    title: 'Accesso alla fotocamera',
+    message: 'Abbiamo bisogno dell\'accesso alla fotocamera per permetterti di scansionare codici a barre per la ricerca rapida dei prodotti. Le tue foto non vengono mai caricate o archiviate.',
+    buttons: ['Non ora', 'Consenti']
+  });
+
+  // Quindi richiedi il permesso
+  const result = await Camera.requestPermissions();
+  return result.camera === 'granted';
+}
+```
+
+### Etichette nutrizionali per la privacy
+
+Assicurati che le tue etichette di privacy App Store riflettano accuratamente:
+- Raccolta della cronologia degli acquisti
+- Indirizzi email (per ricevute)
+- ID dispositivo (per prevenzione frodi)
+- Dati di utilizzo (per analisi)
+
+:::warning
+Etichette di privacy imprecise sono un motivo comune di rifiuto nel 2025. Controlla attentamente la tua raccolta dati.
+:::
+
+## Checklist pre-invio
+
+![Checklist pre-invio](/native-purchases/review-guides/pre-submission-checklist.webp)
+
+<Steps>
+
+1. **Testa tutti i flussi di acquisto**
+   - Acquista ogni livello di abbonamento
+   - Testa i periodi di prova gratuiti
+   - Verifica che le offerte introduttive si applichino correttamente
+   - Testa il ripristino degli acquisti
+   - Verifica la condivisione familiare (se abilitata)
+   - Testa su più dispositivi
+
+2. **Verifica la coerenza dei prezzi**
+   - Controlla che i metadati App Store corrispondano ai prezzi in-app
+   - Verifica che tutte le valute siano corrette
+   - Conferma che le durate dei periodi di prova gratuiti corrispondano alle descrizioni
+   - Controlla che i termini delle offerte introduttive siano accurati
+
+3. **Rivedi tutti i testi**
+   - Rimuovi il testo segnaposto
+   - Verifica che le affermazioni siano verificabili
+   - Controlla grammatica e ortografia
+   - Assicurati che le descrizioni corrispondano alla build corrente
+   - Rimuovi menzioni di concorrenti
+
+4. **Testa i permessi**
+   - Richiedi solo i permessi necessari
+   - Mostra spiegazioni chiare prima di richiedere
+   - Testa i flussi "Nega" (l'app dovrebbe comunque funzionare)
+   - Verifica che le descrizioni Info.plist siano chiare
+
+5. **Prepara l'account di test**
+   - Crea account sandbox di test
+   - Documenta le credenziali di accesso nelle Note di revisione app
+   - Verifica che l'account di test abbia un abbonamento attivo
+   - Testa che il revisore possa completare il flusso di acquisto
+
+6. **Controlla i metadati**
+   - Gli screenshot corrispondono all'UI corrente
+   - Il video di anteprima dell'app (se presente) mostra la versione corrente
+   - La descrizione descrive accuratamente le funzionalità
+   - La valutazione per età corrisponde al contenuto
+   - La politica sulla privacy è accessibile in-app
+
+7. **Scrivi note di revisione dettagliate**
+   ```
+   Account di test:
+   Email: reviewer@test.com
+   Password: TestPass123!
+
+   Istruzioni di test:
+   1. Accedi con l'account di test sopra
+   2. Tocca il pulsante "Passa a Premium"
+   3. Seleziona l'abbonamento "Premium mensile"
+   4. Completa l'acquisto (nessun addebito in sandbox)
+   5. Verifica che le funzionalità premium si sblocchino
+
+   Nota: I prezzi degli abbonamenti sono mostrati chiaramente prima dell'acquisto.
+   Le istruzioni di cancellazione sono in Impostazioni > Account.
+   ```
+
+</Steps>
+
+## Timeline di revisione
+
+![Timeline di revisione App Store](/native-purchases/review-guides/review-timeline.webp)
+
+**Revisione standard:** 24-48 ore
+**Periodi di punta:** 3-5 giorni (rilasci festivi App Store)
+**Weekend:** Nessuna revisione elaborata
+**Revisione accelerata:** Disponibile per correzioni di bug critici (richiesta tramite App Store Connect)
+
+:::tip
+Invia all'inizio della settimana per evitare ritardi del weekend. Gli invii del lunedì vengono generalmente revisionati entro mercoledì.
+:::
+
+## Aggiornamenti delle linee guida 2025
+
+### Nuovi requisiti
+
+**1. Divulgazione della funzionalità AI**
+Se la tua app utilizza l'AI per qualsiasi funzionalità, devi:
+- Etichettare chiaramente i contenuti generati dall'AI
+- Spiegare come viene utilizzata l'AI
+- Documentare le misure di sicurezza dei contenuti
+
+**2. Maggiore chiarezza sugli abbonamenti**
+- Confronti side-by-side dei piani richiesti
+- Nessun "dark pattern" che nasconda opzioni più economiche
+- Percorsi di downgrade/upgrade chiari
+
+**3. Intensificazione della privacy**
+- Applicazione della sezione 5.1.1 aumentata
+- Maggiore controllo sulla giustificazione della raccolta dati
+- Requisiti più rigorosi per le app per bambini
+
+### Cosa è cambiato dal 2024
+
+- Invii modulari ora consentiti (aggiorna le pagine dei prodotti indipendentemente)
+- Gli eventi in-app possono essere inviati separatamente
+- Applicazione più rigorosa delle UI di abbonamento ingannevoli
+- Nuove linee guida sulle app di criptovalute/NFT
+
+## Best practice per il plugin Native Purchases
+
+### Implementa una corretta gestione degli errori
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+async function handlePurchase(productId: string) {
+  try {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: productId,
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    // Successo
+    await validateReceiptOnServer(transaction.receipt);
+    showSuccess('Abbonamento attivato!');
+    unlockFeatures();
+
+  } catch (error: any) {
+    // Gestisci casi di errore specifici
+    if (error.code === 'USER_CANCELLED') {
+      // Utente annullato - non mostrare errore
+      console.log('Acquisto annullato dall\'utente');
+    } else if (error.code === 'PAYMENT_PENDING') {
+      showInfo('Il pagamento è in sospeso. Controlla più tardi.');
+    } else if (error.code === 'PRODUCT_ALREADY_PURCHASED') {
+      // Ripristina invece
+      await NativePurchases.restorePurchases();
+    } else {
+      // Mostra errore user-friendly
+      showError('Impossibile completare l\'acquisto. Riprova.');
+    }
+  }
+}
+```
+
+### Mostra stati di caricamento
+
+```typescript
+function PurchaseButton({ productId }: { productId: string }) {
+  const [loading, setLoading] = useState(false);
+
+  const handlePurchase = async () => {
+    setLoading(true);
+    try {
+      await NativePurchases.purchaseProduct({ productIdentifier: productId });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button onClick={handlePurchase} disabled={loading}>
+      {loading ? 'Elaborazione...' : 'Abbonati ora'}
+    </button>
+  );
+}
+```
+
+### Mostra chiaramente i termini
+
+```typescript
+function SubscriptionTerms() {
+  return (
+    <div className="terms">
+      <p>
+        L'abbonamento si rinnova automaticamente a meno che non venga annullato almeno 24 ore
+        prima della fine del periodo corrente.
+      </p>
+      <p>
+        Il tuo account verrà addebitato per il rinnovo entro 24 ore prima della
+        fine del periodo corrente.
+      </p>
+      <p>
+        Gli abbonamenti possono essere gestiti dall'utente e il rinnovo automatico può essere
+        disattivato nelle Impostazioni account dopo l'acquisto.
+      </p>
+      <p>
+        <a href="/terms">Termini di servizio</a> |
+        <a href="/privacy">Informativa sulla privacy</a>
+      </p>
+    </div>
+  );
+}
+```
+
+## Se la tua app viene rifiutata
+
+### Passaggi per risolvere
+
+<Steps>
+
+1. **Leggi attentamente il rifiuto**
+   - Nota la linea guida specifica citata (ad es., 3.1.1, 5.1.1)
+   - Comprendi esattamente cosa ha segnalato Apple
+
+2. **Risolvi il problema in modo approfondito**
+   - Non limitarti a una patch - risolvi la causa principale
+   - Testa la correzione in modo approfondito
+   - Documenta cosa hai cambiato
+
+3. **Rispondi nel Centro risoluzione**
+   ```
+   Grazie per il tuo feedback. Ho risolto il problema:
+
+   Problema: Prezzo dell'abbonamento non chiaro in anticipo
+
+   Correzione: Aggiunta visualizzazione esplicita del prezzo nella schermata di selezione
+   abbonamento che mostra "$9.99/mese" prima del pulsante di acquisto. Aggiunte anche
+   istruzioni di cancellazione sulla stessa schermata.
+
+   Le modifiche sono in questo invio e possono essere testate utilizzando l'account
+   di test fornito.
+   ```
+
+4. **Reinvia prontamente**
+   - I reinvii vengono generalmente revisionati più velocemente
+   - Di solito entro 24 ore
+
+</Steps>
+
+### Processo di appello
+
+Se ritieni che il rifiuto sia errato:
+
+![Processo di chiarimento App Store](/native-purchases/review-guides/clarification-process.webp)
+
+1. Clicca "Appello" in App Store Connect
+2. Fornisci prove chiare:
+   - Screenshot che mostrano la conformità
+   - Riferimenti a linee guida specifiche
+   - Spiegazione di come soddisfi i requisiti
+3. Sii professionale e fattuale
+4. Includi account di test se la funzionalità è difficile da trovare
+
+![Esempio di richiesta documenti](/native-purchases/review-guides/request-documents.webp)
+
+## Risorse aggiuntive
+
+- [Linee guida per la revisione App Store di Apple](https://developer.apple.com/app-store/review/guidelines/)
+- [Linee guida per gli acquisti in-app](https://developer.apple.com/app-store/review/guidelines/#in-app-purchase)
+- [Best practice per gli abbonamenti](https://developer.apple.com/app-store/subscriptions/)
+- [Aiuto App Store Connect](https://developer.apple.com/help/app-store-connect/)
+
+## Supporto
+
+Se hai ancora problemi:
+- Rivedi la [documentazione Native Purchases](/docs/plugins/native-purchases/getting-started/)
+- Controlla i [problemi comuni di risoluzione dei problemi](/docs/plugins/native-purchases/getting-started/#troubleshooting)
+- Contatta il supporto Apple Developer per chiarimenti sulle linee guida
+
+### Hai bisogno di aiuto esperto?
+
+Hai difficoltà con la revisione dell'app o hai bisogno di assistenza personalizzata? **[Prenota una chiamata di consulenza con il nostro team](https://cal.com/team/capgo/capacitor-consulting-services)** per supporto dedicato con:
+
+- Revisione e ottimizzazione dell'implementazione IAP
+- Preparazione e strategia per la revisione App Store
+- Revisione della checklist di invio
+- Risoluzione dei rifiuti e appelli
+- Test e convalida completi
+
+I nostri esperti hanno aiutato con successo centinaia di app a superare la revisione!

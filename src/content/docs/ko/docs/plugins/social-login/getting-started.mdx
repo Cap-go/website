@@ -1,0 +1,37 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor Social Login 플러그인을 설치하고 구성하여 Google, Apple 및 Facebook 로그인과 원활하게 통합하여 앱의 인증을 향상시키는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Card, CardGrid } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+import MicroCard from '@/components/MicroCard.astro'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-social-login" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **플러그인 구성**
+   <div class="flex flex-nowrap gap-4 h-full">
+      <div style="display: flex; gap: 1rem; width: 100% !important; max-width: 100% !important;">
+         <MicroCard href="/docs/plugins/social-login/google/general/" title="Google" customIcon="/icons/google.svg">
+            앱용 Google 로그인 구성
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/facebook/" title="Facebook" icon="facebook">
+            Facebook 로그인 통합 설정
+         </MicroCard>
+         <MicroCard href="/docs/plugins/social-login/apple/general/" title="Apple" icon="apple">
+            Apple로 로그인 활성화
+         </MicroCard>
+      </div>
+   </div>
+</Steps>
+
+

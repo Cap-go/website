@@ -1,0 +1,93 @@
+---
+title: Androidサンドボックステストの設定
+locale: ja
+description: Google Play Consoleを使用してAndroidでアプリ内課金のサンドボックステストを設定する方法を学びます。
+sidebar:
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+アプリ内課金のテストには、Google Play Consoleでの適切な設定が必要です。このガイドでは、Androidアプリのサンドボックステストを設定する手順を説明します。
+
+## 前提条件
+
+年次更新されるGoogle Play Consoleの有効なアカウントが必要です。
+
+## セットアップ手順
+
+<Steps>
+
+1. **テストアカウントの追加**
+
+   Google Play Consoleに移動し、アプリを選択して**設定 > ライセンステスト**に移動します。
+
+   テストに使用するAndroidデバイスに関連付けられたプライマリGoogleアカウントを追加します。
+
+   ![テストアカウントの追加](/native-purchases/android/sandbox-testing/add-testing-account.webp)
+
+2. **テストトラックの作成**
+
+   **テスト > クローズドテスト**または**テスト > 内部テスト**に移動し、新しいトラックを作成します。
+
+   このトラックに少なくとも1つの署名済みバージョンのアプリをアップロードする必要があります。
+
+   ![テストトラックの作成](/native-purchases/android/sandbox-testing/create-testing-track.webp)
+
+3. **テスターリストの作成**
+
+   テストトラックを設定した後、メールリストを作成し、テストデバイスのアカウントメールアドレスを追加します。
+
+   ![テスターリストの作成](/native-purchases/android/sandbox-testing/create-tester-list.webp)
+
+4. **テストプログラムへの参加**
+
+   テストデバイスからオプトインURLを開き、**「テスターになる」**ボタンをクリックして登録します。
+
+   ![テストへの参加](/native-purchases/android/sandbox-testing/join-testing-program.webp)
+
+5. **署名済みAPKのアップロード**
+
+   署名済みAPKを生成するか、Android App Bundleを使用してテストトラックにアプリをアップロードします。
+
+   ロールアウトは不要です。アップロードして承認を待つだけです。
+
+   ![APKのアップロード](/native-purchases/android/sandbox-testing/upload-signed-apk.webp)
+
+6. **ビルドとテスト**
+
+   テストデバイスでアプリを実行します。購入を試みると、次のメッセージが表示されます：
+
+   > 「これはテスト注文です。課金されません。」
+
+   ![テスト購入](/native-purchases/android/sandbox-testing/test-purchase-confirmation.webp)
+
+</Steps>
+
+## 重要な注意事項
+
+- テストアカウントは購入に対して課金されません
+- テスト購入は本番環境の購入と同じフローを使用します
+- トライアルや初回特典を含むすべてのサブスクリプション機能をテストできます
+- テストサブスクリプションは、より迅速なテストのために更新期間が短縮されています
+
+## トラブルシューティング
+
+**テストモードで商品が表示されない：**
+- アプリがテストトラックにアップロードされていることを確認してください
+- テストアカウントがライセンステストに追加されていることを確認してください
+- 商品がGoogle Play Consoleで有効であることを確認してください
+
+**「アイテムが利用できません」エラー：**
+- 商品を作成してから2〜3時間待ってください
+- アプリのパッケージ名がPlay Consoleのものと一致していることを確認してください
+- テストアカウントでサインインしていることを確認してください
+
+**テスト購入が実際の課金として表示される：**
+- アカウントがライセンステストに追加されていることを再確認してください
+- テストトラックからのビルドを使用していることを確認してください
+- 購入時にテストバナーが表示されることを確認してください
+
+## 追加リソース
+
+詳細については、アプリ内課金のテストに関する[公式Google Playドキュメント](https://developer.android.com/google/play/billing/test)を参照してください。

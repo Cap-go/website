@@ -1,0 +1,620 @@
+---
+title: 开始使用
+description: 了解如何安装和使用 iBeacon 插件在您的 Capacitor 应用中检测和监控蓝牙信标。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-ibeacon" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 配置
+
+### iOS 配置
+
+在您的 `Info.plist` 中添加以下内容：
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>此应用需要位置访问权限以检测附近的信标</string>
+
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>此应用需要位置访问权限以在后台监控信标</string>
+
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>此应用使用蓝牙检测附近的信标</string>
+
+<key>UIBackgroundModes</key>
+<array>
+  <string>location</string>
+</array>
+```
+
+### Android 配置
+
+在您的 `AndroidManifest.xml` 中添加以下内容：
+
+```xml
+<manifest>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <uses-permission android:name="android.permission.BLUETOOTH" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+  <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+</manifest>
+```
+
+**重要**：对于 Android，您需要将 [AltBeacon](https://altbeacon.github.io/android-beacon-library/) 库集成到您的项目中，以便信标检测工作。
+
+将以下内容添加到您应用的 `build.gradle`：
+
+```kotlin
+dependencies {
+    implementation 'org.altbeacon:android-beacon-library:2.20+'
+}
+```
+
+## 使用
+
+### 基本设置
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+
+// 定义您的信标区域
+const beaconRegion = {
+  identifier: 'MyStore',
+  uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+  major: 1, // 可选
+  minor: 2  // 可选
+};
+```
+
+### 请求权限
+
+```typescript
+// 请求"使用时"权限
+const requestPermission = async () => {
+  const { status } = await CapacitorIbeacon.requestWhenInUseAuthorization();
+  console.log('Permission status:', status);
+  // status: 'not_determined' | 'restricted' | 'denied' | 'authorized_always' | 'authorized_when_in_use'
+};
+
+// 请求"始终"权限（用于后台监控）
+const requestAlwaysPermission = async () => {
+  const { status } = await CapacitorIbeacon.requestAlwaysAuthorization();
+  console.log('Always permission status:', status);
+};
+
+// 检查当前授权状态
+const checkPermission = async () => {
+  const { status } = await CapacitorIbeacon.getAuthorizationStatus();
+  console.log('Current status:', status);
+};
+```
+
+### 检查设备功能
+
+```typescript
+// 检查蓝牙是否启用
+const checkBluetooth = async () => {
+  const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+  if (!enabled) {
+    console.log('Please enable Bluetooth');
+  }
+};
+
+// 检查测距是否可用
+const checkRanging = async () => {
+  const { available } = await CapacitorIbeacon.isRangingAvailable();
+  console.log('Ranging available:', available);
+};
+```
+
+### 监控信标区域
+
+监控检测您何时进入或离开信标区域。这在后台工作。
+
+```typescript
+// 开始监控
+const startMonitoring = async () => {
+  await CapacitorIbeacon.startMonitoringForRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+    major: 1,
+    minor: 2
+  });
+  console.log('Started monitoring for beacons');
+};
+
+// 停止监控
+const stopMonitoring = async () => {
+  await CapacitorIbeacon.stopMonitoringForRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+};
+```
+
+### 测距信标
+
+测距提供关于附近信标及其距离的连续更新。这需要应用在前台。
+
+```typescript
+// 开始测距
+const startRanging = async () => {
+  await CapacitorIbeacon.startRangingBeaconsInRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+  console.log('Started ranging beacons');
+};
+
+// 停止测距
+const stopRanging = async () => {
+  await CapacitorIbeacon.stopRangingBeaconsInRegion({
+    identifier: 'MyStore',
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D'
+  });
+};
+```
+
+### 监听事件
+
+```typescript
+import { PluginListenerHandle } from '@capacitor/core';
+
+// 监听测距事件（连续距离更新）
+const rangingListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didRangeBeacons',
+  (data) => {
+    console.log('Beacons detected:', data.beacons);
+    data.beacons.forEach(beacon => {
+      console.log(`UUID: ${beacon.uuid}`);
+      console.log(`Major: ${beacon.major}, Minor: ${beacon.minor}`);
+      console.log(`Distance: ${beacon.accuracy}m`);
+      console.log(`Proximity: ${beacon.proximity}`); // immediate, near, far, unknown
+      console.log(`RSSI: ${beacon.rssi}`);
+    });
+  }
+);
+
+// 监听区域进入事件
+const enterListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didEnterRegion',
+  (data) => {
+    console.log('Entered region:', data.region.identifier);
+    // 显示欢迎通知或触发操作
+  }
+);
+
+// 监听区域退出事件
+const exitListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didExitRegion',
+  (data) => {
+    console.log('Exited region:', data.region.identifier);
+    // 触发告别操作
+  }
+);
+
+// 监听区域状态变化
+const stateListener: PluginListenerHandle = await CapacitorIbeacon.addListener(
+  'didDetermineStateForRegion',
+  (data) => {
+    console.log(`Region ${data.region.identifier}: ${data.state}`);
+    // state: 'inside' | 'outside' | 'unknown'
+  }
+);
+
+// 完成后清理监听器
+const cleanup = () => {
+  rangingListener.remove();
+  enterListener.remove();
+  exitListener.remove();
+  stateListener.remove();
+};
+```
+
+### 作为 iBeacon 广播（仅限 iOS）
+
+将您的设备变成 iBeacon 发射器。
+
+```typescript
+// 开始广播
+const startAdvertising = async () => {
+  await CapacitorIbeacon.startAdvertising({
+    uuid: 'B9407F30-F5F8-466E-AFF9-25556B57FE6D',
+    major: 1,
+    minor: 2,
+    identifier: 'MyBeacon',
+    measuredPower: -59 // 可选：1米处的校准功率
+  });
+  console.log('Started advertising as iBeacon');
+};
+
+// 停止广播
+const stopAdvertising = async () => {
+  await CapacitorIbeacon.stopAdvertising();
+};
+```
+
+## 完整示例
+
+```typescript
+import { CapacitorIbeacon } from '@capgo/capacitor-ibeacon';
+import { PluginListenerHandle } from '@capacitor/core';
+
+export class BeaconService {
+  private listeners: PluginListenerHandle[] = [];
+
+  async init() {
+    // 请求权限
+    const { status } = await CapacitorIbeacon.requestWhenInUseAuthorization();
+
+    if (status !== 'authorized_when_in_use' && status !== 'authorized_always') {
+      throw new Error('Location permission denied');
+    }
+
+    // 检查蓝牙
+    const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+    if (!enabled) {
+      throw new Error('Bluetooth is not enabled');
+    }
+
+    // 设置事件监听器
+    this.setupListeners();
+  }
+
+  private setupListeners() {
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didEnterRegion', (data) => {
+        console.log('Welcome! Entered:', data.region.identifier);
+        this.onEnterRegion(data.region);
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didExitRegion', (data) => {
+        console.log('Goodbye! Left:', data.region.identifier);
+        this.onExitRegion(data.region);
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorIbeacon.addListener('didRangeBeacons', (data) => {
+        this.onRangeBeacons(data.beacons);
+      })
+    );
+  }
+
+  async startMonitoring(uuid: string, identifier: string, major?: number, minor?: number) {
+    await CapacitorIbeacon.startMonitoringForRegion({
+      identifier,
+      uuid,
+      major,
+      minor
+    });
+  }
+
+  async startRanging(uuid: string, identifier: string) {
+    await CapacitorIbeacon.startRangingBeaconsInRegion({
+      identifier,
+      uuid
+    });
+  }
+
+  private onEnterRegion(region: any) {
+    // 处理区域进入（例如，显示通知，触发内容）
+    console.log('Entered beacon region:', region);
+  }
+
+  private onExitRegion(region: any) {
+    // 处理区域退出
+    console.log('Left beacon region:', region);
+  }
+
+  private onRangeBeacons(beacons: any[]) {
+    // 处理信标距离
+    const nearestBeacon = beacons.reduce((nearest, beacon) => {
+      return beacon.accuracy < nearest.accuracy ? beacon : nearest;
+    }, beacons[0]);
+
+    if (nearestBeacon) {
+      console.log('Nearest beacon:', nearestBeacon);
+      this.handleProximity(nearestBeacon);
+    }
+  }
+
+  private handleProximity(beacon: any) {
+    switch (beacon.proximity) {
+      case 'immediate': // < 0.5m
+        console.log('Very close to beacon');
+        break;
+      case 'near': // 0.5m - 3m
+        console.log('Near beacon');
+        break;
+      case 'far': // > 3m
+        console.log('Far from beacon');
+        break;
+      case 'unknown':
+        console.log('Distance unknown');
+        break;
+    }
+  }
+
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+## API 参考
+
+### startMonitoringForRegion(options)
+
+开始监控信标区域。进入/退出时触发事件。
+
+```typescript
+interface BeaconRegion {
+  identifier: string;
+  uuid: string;
+  major?: number;
+  minor?: number;
+  notifyEntryStateOnDisplay?: boolean;
+}
+
+await CapacitorIbeacon.startMonitoringForRegion(options);
+```
+
+### stopMonitoringForRegion(options)
+
+停止监控信标区域。
+
+```typescript
+await CapacitorIbeacon.stopMonitoringForRegion(options);
+```
+
+### startRangingBeaconsInRegion(options)
+
+在区域中开始测距信标以获得连续距离更新。
+
+```typescript
+await CapacitorIbeacon.startRangingBeaconsInRegion(options);
+```
+
+### stopRangingBeaconsInRegion(options)
+
+在区域中停止测距信标。
+
+```typescript
+await CapacitorIbeacon.stopRangingBeaconsInRegion(options);
+```
+
+### startAdvertising(options)
+
+开始将设备广播为 iBeacon（仅限 iOS）。
+
+```typescript
+interface BeaconAdvertisingOptions {
+  uuid: string;
+  major: number;
+  minor: number;
+  identifier: string;
+  measuredPower?: number; // 1米处的校准功率
+}
+
+await CapacitorIbeacon.startAdvertising(options);
+```
+
+### stopAdvertising()
+
+停止将设备广播为 iBeacon。
+
+```typescript
+await CapacitorIbeacon.stopAdvertising();
+```
+
+### requestWhenInUseAuthorization()
+
+请求"使用时"位置授权。
+
+```typescript
+const result = await CapacitorIbeacon.requestWhenInUseAuthorization();
+// 返回值：{ status: string }
+```
+
+### requestAlwaysAuthorization()
+
+请求"始终"位置授权（后台监控所需）。
+
+```typescript
+const result = await CapacitorIbeacon.requestAlwaysAuthorization();
+// 返回值：{ status: string }
+```
+
+### getAuthorizationStatus()
+
+获取当前位置授权状态。
+
+```typescript
+const result = await CapacitorIbeacon.getAuthorizationStatus();
+// 返回值：{ status: 'not_determined' | 'restricted' | 'denied' | 'authorized_always' | 'authorized_when_in_use' }
+```
+
+### isBluetoothEnabled()
+
+检查蓝牙是否启用。
+
+```typescript
+const result = await CapacitorIbeacon.isBluetoothEnabled();
+// 返回值：{ enabled: boolean }
+```
+
+### isRangingAvailable()
+
+检查设备上是否可用测距。
+
+```typescript
+const result = await CapacitorIbeacon.isRangingAvailable();
+// 返回值：{ available: boolean }
+```
+
+### enableARMAFilter(options)
+
+为距离计算启用 ARMA 过滤（仅限 Android）。
+
+```typescript
+await CapacitorIbeacon.enableARMAFilter({ enabled: true });
+```
+
+## 事件
+
+### didRangeBeacons
+
+在测距期间检测到信标时触发。
+
+```typescript
+interface RangingEvent {
+  region: BeaconRegion;
+  beacons: Beacon[];
+}
+
+interface Beacon {
+  uuid: string;
+  major: number;
+  minor: number;
+  rssi: number; // 信号强度
+  proximity: 'immediate' | 'near' | 'far' | 'unknown';
+  accuracy: number; // 距离（米）
+}
+```
+
+### didEnterRegion
+
+进入被监控的信标区域时触发。
+
+```typescript
+interface RegionEvent {
+  region: BeaconRegion;
+}
+```
+
+### didExitRegion
+
+离开被监控的信标区域时触发。
+
+```typescript
+interface RegionEvent {
+  region: BeaconRegion;
+}
+```
+
+### didDetermineStateForRegion
+
+确定区域状态时触发。
+
+```typescript
+interface StateEvent {
+  region: BeaconRegion;
+  state: 'inside' | 'outside' | 'unknown';
+}
+```
+
+## 接近值
+
+- **immediate**：非常近（< 0.5 米）
+- **near**：相对较近（0.5 - 3 米）
+- **far**：更远（> 3 米）
+- **unknown**：无法确定距离
+
+## 最佳实践
+
+1. **请求适当的权限**
+   - 对于前台功能使用"使用时"
+   - 仅在需要后台监控时请求"始终"
+   - 清楚地解释为什么需要位置访问
+
+2. **处理蓝牙状态**
+   ```typescript
+   const { enabled } = await CapacitorIbeacon.isBluetoothEnabled();
+   if (!enabled) {
+     // 提示用户启用蓝牙
+   }
+   ```
+
+3. **电池优化**
+   - 尽可能使用监控而不是测距（更节省电池）
+   - 不积极需要时停止测距
+   - 考虑使用更大的 major/minor 范围以减少处理
+
+4. **错误处理**
+   ```typescript
+   try {
+     await CapacitorIbeacon.startMonitoringForRegion(region);
+   } catch (error) {
+     console.error('Failed to start monitoring:', error);
+   }
+   ```
+
+5. **清理监听器**
+   组件卸载时始终移除事件监听器以防止内存泄漏。
+
+## 平台说明
+
+### iOS
+- 需要 iOS 10.0+
+- 使用原生 CoreLocation 框架
+- 使用"始终"权限支持后台监控
+- 可以使用 CoreBluetooth 作为 iBeacon 广播
+- 测距需要应用在前台
+
+### Android
+- 需要 Android 6.0（API 23）+
+- 使用 AltBeacon 库
+- 即使信标使用蓝牙，也需要位置权限
+- 后台监控需要 ACCESS_BACKGROUND_LOCATION（Android 10+）
+- 无法作为 iBeacon 广播（大多数设备上的硬件限制）
+
+### Web
+- Web 平台上不支持
+
+## 常见使用场景
+
+1. **接近营销**：当用户接近您的商店时触发通知或内容
+2. **室内导航**：使用信标航点引导用户穿过建筑物
+3. **考勤跟踪**：当用户进入位置时自动签到
+4. **资产跟踪**：监控设备或库存移动
+5. **博物馆导览**：当访客接近展品时提供上下文信息
+6. **智能家居**：根据房间存在触发自动化
+
+## 故障排除
+
+### 未检测到信标
+- 确保蓝牙已启用
+- 验证已授予位置权限
+- 检查信标 UUID 是否完全匹配（区分大小写）
+- 确认信标已通电并正在传输
+- 首先尝试不使用 major/minor 过滤器
+
+### 后台监控不工作
+- 确保已授予"始终"位置权限
+- 将 `location` 添加到 UIBackgroundModes（iOS）
+- 请求 ACCESS_BACKGROUND_LOCATION（Android 10+）
+- 注意：iOS 可能会延迟后台回调以节省电池
+
+### 距离测量不准确
+- 信标 RSSI 随环境变化（墙壁、干扰）
+- 使用多个信标进行三角测量
+- 在距信标 1 米处校准 measuredPower
+- 在 Android 上启用 ARMA 过滤以获得更平滑的值

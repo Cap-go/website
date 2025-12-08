@@ -1,0 +1,59 @@
+---
+title: Iniziare
+locale: it
+description: Recupera i dettagli della scheda SIM e gestisci i permessi di runtime con il plugin Capgo SIM.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il plugin**
+   <PackageManagers pkg="@capgo/capacitor-sim" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza le piattaforme**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Permessi
+
+- **Android**: Assicurati che `android.permission.READ_PHONE_STATE` (e su Android 13+, `READ_BASIC_PHONE_STATE`) sia concesso. Capacitor include le dichiarazioni del manifest, ma devi richiedere il permesso prima di chiamare `getSimCards`.
+- **iOS**: Le informazioni del gestore sono disponibili automaticamente; la piattaforma non richiede permessi aggiuntivi. Tieni presente che i dati restituiti sono limitati su iOS 16.4+ a causa delle restrizioni del sistema operativo.
+
+## Richiedi l'accesso a runtime (Android)
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const status = await Sim.checkPermissions();
+if (status.readSimCard !== 'granted') {
+  const updated = await Sim.requestPermissions();
+  if (updated.readSimCard !== 'granted') {
+    throw new Error('Telephony permission denied');
+  }
+}
+```
+
+## Leggi le schede SIM
+
+```typescript
+const { simCards } = await Sim.getSimCards();
+
+simCards.forEach((card, index) => {
+  console.log(`Slot ${card.simSlotIndex ?? index}:`, {
+    carrier: card.carrierName,
+    mcc: card.mobileCountryCode,
+    mnc: card.mobileNetworkCode,
+    country: card.isoCountryCode,
+    subscriptionId: card.subscriptionId,
+  });
+});
+```
+
+## Considerazioni sulla piattaforma
+
+- **Dispositivi Dual SIM**: Itera attraverso l'array restituito; ogni voce corrisponde a uno slot. Quando presente, `subscriptionId` ti aiuta a interagire con le API di telefonia di Android.
+- **iOS 16.4+**: Apple oscura diversi attributi del gestore. Aspettati valori segnaposto (`--`, `65535`) e prevedi soluzioni alternative nella tua interfaccia utente.
+- **Web**: Il plugin restituisce dati vuoti perché i browser non possono accedere alle informazioni della SIM.

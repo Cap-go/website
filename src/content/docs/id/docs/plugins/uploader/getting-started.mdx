@@ -1,0 +1,296 @@
+---
+title: Memulai
+locale: id
+description: Pelajari cara menginstal dan menggunakan plugin Background Uploader untuk upload file yang andal di aplikasi Capacitor Anda.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurasi izin**
+
+   ### iOS
+   Tambahkan mode latar belakang ke `Info.plist` Anda:
+   ```xml
+   <key>UIBackgroundModes</key>
+   <array>
+     <string>processing</string>
+   </array>
+   ```
+
+   ### Android
+   Tambahkan izin ke `AndroidManifest.xml` Anda:
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+   ```
+</Steps>
+
+## Penggunaan
+
+Impor plugin dan gunakan metodenya untuk mengupload file:
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+// Mulai upload
+const startUpload = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/your/file.jpg',
+    serverUrl: 'https://your-server.com/upload',
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer your-token'
+    },
+    parameters: {
+      'userId': '12345',
+      'type': 'profile'
+    },
+    notificationTitle: 'Uploading Photo'
+  });
+
+  console.log('Upload ID:', upload.id);
+};
+
+// Dengarkan event upload
+const listener = await Uploader.addListener('events', (event) => {
+  switch (event.name) {
+    case 'uploading':
+      console.log(`Upload ${event.payload.id}: ${event.payload.percent}%`);
+      break;
+    case 'completed':
+      console.log('Upload completed:', event.payload.id);
+      console.log('Status code:', event.payload.statusCode);
+      break;
+    case 'failed':
+      console.error('Upload failed:', event.payload.id);
+      console.error('Error:', event.payload.error);
+      break;
+  }
+});
+
+// Ingat untuk menghapus listener saat selesai
+// listener.remove();
+
+// Batalkan upload
+const cancelUpload = async (uploadId: string) => {
+  await Uploader.cancelUpload({ id: uploadId });
+};
+
+// Dapatkan semua upload aktif
+const getActiveUploads = async () => {
+  const uploads = await Uploader.getUploads();
+  console.log('Active uploads:', uploads);
+};
+```
+
+## Referensi API
+
+### startUpload(options)
+
+Memulai upload file baru.
+
+```typescript
+interface UploadOptions {
+  filePath: string;
+  serverUrl: string;
+  method?: 'POST' | 'PUT';
+  headers?: { [key: string]: string };
+  parameters?: { [key: string]: string };
+  notificationTitle?: string;
+  notificationBody?: string;
+  useUtf8Charset?: boolean;
+  maxRetries?: number;
+}
+```
+
+### cancelUpload(options)
+
+Membatalkan upload yang sedang berlangsung.
+
+```typescript
+interface CancelOptions {
+  id: string;
+}
+```
+
+### getUploads()
+
+Mengembalikan semua upload aktif.
+
+### removeUpload(options)
+
+Menghapus upload dari antrian.
+
+```typescript
+interface RemoveOptions {
+  id: string;
+}
+```
+
+## Event
+
+### events
+
+Semua event upload dikirimkan melalui satu listener `events`. Event berisi field `name` untuk mengidentifikasi jenisnya:
+
+```typescript
+Uploader.addListener('events', (event: UploadEvent) => {
+  switch (event.name) {
+    case 'uploading':
+      // Upload sedang berlangsung
+      console.log(`Progress: ${event.payload.percent}%`);
+      console.log(`ID: ${event.payload.id}`);
+      break;
+
+    case 'completed':
+      // Upload selesai dengan sukses
+      console.log(`Completed: ${event.payload.id}`);
+      console.log(`Status code: ${event.payload.statusCode}`);
+      break;
+
+    case 'failed':
+      // Upload gagal
+      console.error(`Failed: ${event.payload.id}`);
+      console.error(`Error: ${event.payload.error}`);
+      break;
+  }
+});
+```
+
+**Jenis Event:**
+- `uploading` - Pembaruan progres dengan `percent` dan `id`
+- `completed` - Upload selesai dengan `id` dan `statusCode`
+- `failed` - Upload gagal dengan `id` dan pesan `error`
+
+## Fitur Lanjutan
+
+### Upload Formulir Multipart
+
+```typescript
+const uploadWithFormData = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/photo.jpg',
+    serverUrl: 'https://api.example.com/upload',
+    method: 'POST',
+    parameters: {
+      'name': 'profile-photo',
+      'description': 'User profile photo'
+    },
+    headers: {
+      'X-API-Key': 'your-api-key'
+    }
+  });
+};
+```
+
+### Upload Binary
+
+```typescript
+const uploadBinary = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/data.bin',
+    serverUrl: 'https://api.example.com/binary',
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/octet-stream'
+    }
+  });
+};
+```
+
+### Upload Sadar Jaringan
+
+```typescript
+import { Network } from '@capacitor/network';
+
+const smartUpload = async () => {
+  const status = await Network.getStatus();
+
+  if (status.connectionType === 'wifi') {
+    // Mulai upload file besar di WiFi
+    await startLargeUpload();
+  } else if (status.connectionType === 'cellular') {
+    // Antri untuk nanti atau peringatkan pengguna
+    console.log('Using cellular data');
+  }
+};
+```
+
+## Praktik Terbaik
+
+1. **Tangani semua jenis event**
+   ```typescript
+   const setupUploadHandlers = () => {
+     Uploader.addListener('events', (event) => {
+       switch (event.name) {
+         case 'uploading':
+           handleProgress(event.payload);
+           break;
+         case 'completed':
+           handleCompleted(event.payload);
+           break;
+         case 'failed':
+           handleError(event.payload);
+           break;
+       }
+     });
+   };
+   ```
+
+2. **Bersihkan listener**
+   ```typescript
+   // Tambahkan listener
+   const listener = await Uploader.addListener('events', handleEvent);
+
+   // Bersihkan saat selesai
+   listener.remove();
+   ```
+
+3. **Coba lagi upload yang gagal**
+   ```typescript
+   const retryUpload = async (filePath: string, serverUrl: string) => {
+     try {
+       await Uploader.startUpload({
+         filePath,
+         serverUrl,
+         maxRetries: 3
+       });
+     } catch (error) {
+       console.error('Upload failed after retries:', error);
+     }
+   };
+   ```
+
+4. **Tampilkan notifikasi upload**
+   ```typescript
+   await Uploader.startUpload({
+     filePath: 'file:///path/to/file',
+     serverUrl: 'https://server.com/upload',
+     notificationTitle: 'Uploading File',
+     notificationBody: 'Your file is being uploaded...'
+   });
+   ```
+
+## Catatan Platform
+
+### iOS
+- Menggunakan `URLSession` untuk upload latar belakang
+- Memerlukan kemampuan pemrosesan latar belakang
+- Upload berlanjut saat aplikasi ditangguhkan
+
+### Android
+- Menggunakan `WorkManager` untuk upload yang andal
+- Menampilkan notifikasi layanan latar depan selama upload
+- Menghormati pengaturan optimasi baterai

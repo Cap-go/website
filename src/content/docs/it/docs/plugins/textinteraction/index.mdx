@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-textinteraction"
+locale: it
+description: Abilita o disabilita la lente di interazione con il testo iOS per un controllo preciso sul comportamento della WebView.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+hero:
+  tagline: Rimuovi la lente di ingrandimento iOS in esperienze kiosk o di gioco, quindi ripristinala prima dell'immissione di testo.
+  image:
+    file: ~public/icons/plugins/textinteraction.svg
+  actions:
+    - text: Guida introduttiva
+      link: /docs/plugins/textinteraction/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-textinteraction/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Controlla il sistema di interazione con il testo di Apple per personalizzare l'UX su display kiosk, giochi e installazioni interattive.
+
+<CardGrid stagger>
+  <Card title="Specifico iOS" icon="rocket">
+    Attiva/disattiva la lente di ingrandimento e le maniglie di selezione introdotte in iOS 15.
+  </Card>
+  <Card title="API semplice" icon="pencil">
+    Chiama un singolo metodo per abilitare o disabilitare lo stato di interazione con il testo.
+  </Card>
+  <Card title="Impostazioni predefinite sicure" icon="approve-check">
+    Riceve un risultato booleano così puoi rilevare versioni non supportate.
+  </Card>
+  <Card title="Adatto per kiosk" icon="star">
+    Previeni copia/incolla tramite pressione prolungata su installazioni controllate o segnaletica.
+  </Card>
+</CardGrid>
+
+Usa la guida introduttiva per un modello di integrazione minimale e promemoria per riabilitare l'interazione prima di mostrare input di testo.

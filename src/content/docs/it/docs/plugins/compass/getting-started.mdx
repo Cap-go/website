@@ -1,0 +1,219 @@
+---
+title: Iniziare
+locale: it
+description: Scopri come installare e utilizzare il plugin Compass per leggere la direzione della bussola del dispositivo nella tua app Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Configurazione iOS
+
+Su iOS, l'accesso alla bussola richiede il permesso di posizione. Aggiungi quanto segue al tuo `Info.plist`:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Abbiamo bisogno del permesso di posizione per accedere alla bussola</string>
+```
+
+## Configurazione Android
+
+Non è richiesta alcuna configurazione aggiuntiva. Il plugin usa i sensori magnetometro e accelerometro del dispositivo.
+
+## Utilizzo
+
+Importa il plugin e usa i suoi metodi per leggere la direzione della bussola:
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// Ottieni la direzione corrente una volta
+const getCurrentHeading = async () => {
+  const { value } = await CapgoCompass.getCurrentHeading();
+  console.log('Direzione corrente:', value, 'gradi');
+};
+
+// Avvia aggiornamenti continui della direzione
+const startCompass = async () => {
+  // Inizia ad ascoltare gli aggiornamenti
+  await CapgoCompass.startListening();
+
+  // Aggiungi listener per cambiamenti di direzione
+  const handle = await CapgoCompass.addListener('headingChange', (event) => {
+    console.log('Direzione:', event.value, 'gradi');
+  });
+
+  // Più tardi, per fermare l'ascolto:
+  // await CapgoCompass.stopListening();
+  // await handle.remove();
+};
+
+// Controlla permessi
+const checkPermission = async () => {
+  const status = await CapgoCompass.checkPermissions();
+  console.log('Stato permesso:', status.compass);
+};
+
+// Richiedi permessi
+const requestPermission = async () => {
+  const status = await CapgoCompass.requestPermissions();
+  if (status.compass === 'granted') {
+    console.log('Accesso bussola concesso');
+  }
+};
+```
+
+## Riferimento API
+
+### getCurrentHeading()
+
+Ottieni la direzione corrente della bussola in gradi.
+
+```typescript
+const result = await CapgoCompass.getCurrentHeading();
+// Ritorna: { value: number } - direzione in gradi (0-360)
+```
+
+### startListening()
+
+Inizia ad ascoltare i cambiamenti di direzione della bussola. Deve essere chiamato prima che vengano emessi eventi di direzione.
+
+```typescript
+await CapgoCompass.startListening();
+```
+
+### stopListening()
+
+Ferma l'ascolto dei cambiamenti di direzione della bussola.
+
+```typescript
+await CapgoCompass.stopListening();
+```
+
+### addListener('headingChange', callback)
+
+Aggiungi un listener per gli eventi di cambio direzione.
+
+```typescript
+const handle = await CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Direzione:', event.value);
+});
+
+// Rimuovi listener quando finito
+await handle.remove();
+```
+
+### removeAllListeners()
+
+Rimuovi tutti i listener registrati.
+
+```typescript
+await CapgoCompass.removeAllListeners();
+```
+
+### checkPermissions()
+
+Controlla lo stato corrente dei permessi.
+
+```typescript
+const status = await CapgoCompass.checkPermissions();
+// Ritorna: { compass: 'prompt' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+Richiedi il permesso per accedere ai dati della bussola.
+
+```typescript
+const status = await CapgoCompass.requestPermissions();
+```
+
+### getPluginVersion()
+
+Ottieni la versione del plugin nativo.
+
+```typescript
+const { version } = await CapgoCompass.getPluginVersion();
+```
+
+## Esempio Completo
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+export class CompassService {
+  private listenerHandle: any = null;
+
+  async init() {
+    // Controlla e richiedi permessi
+    const status = await CapgoCompass.checkPermissions();
+    if (status.compass !== 'granted') {
+      const result = await CapgoCompass.requestPermissions();
+      if (result.compass !== 'granted') {
+        throw new Error('Permesso bussola negato');
+      }
+    }
+  }
+
+  async startTracking(onHeadingChange: (heading: number) => void) {
+    // Inizia ad ascoltare gli aggiornamenti
+    await CapgoCompass.startListening();
+
+    // Aggiungi event listener
+    this.listenerHandle = await CapgoCompass.addListener(
+      'headingChange',
+      (event) => {
+        onHeadingChange(event.value);
+      }
+    );
+  }
+
+  async stopTracking() {
+    if (this.listenerHandle) {
+      await this.listenerHandle.remove();
+      this.listenerHandle = null;
+    }
+    await CapgoCompass.stopListening();
+  }
+
+  async getHeading(): Promise<number> {
+    const { value } = await CapgoCompass.getCurrentHeading();
+    return value;
+  }
+
+  getCardinalDirection(heading: number): string {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(heading / 45) % 8;
+    return directions[index];
+  }
+}
+```
+
+## Note Piattaforma
+
+### iOS
+- Richiede iOS 10.0+
+- Usa Core Location per i dati di direzione
+- Richiede permesso di posizione (NSLocationWhenInUseUsageDescription)
+- Gli aggiornamenti di direzione sono continui quando l'ascolto è attivo
+
+### Android
+- Richiede Android 6.0 (API 23)+
+- Usa sensori accelerometro e magnetometro
+- Nessun permesso speciale richiesto per i sensori bussola
+- La direzione viene calcolata dalla fusione dei sensori
+
+### Web
+- Non supportato sulla piattaforma web
+- I metodi genereranno errori quando chiamati

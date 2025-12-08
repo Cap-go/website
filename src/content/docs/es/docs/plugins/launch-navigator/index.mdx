@@ -1,0 +1,246 @@
+---
+title: "@capgo/capacitor-launch-navigator"
+description: Plugin de inicio de aplicaciones de navegación para apps Capacitor con soporte para Google Maps, Apple Maps, Waze y otros servicios de navegación.
+locale: es
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Inicia aplicaciones de navegación con direcciones paso a paso, soportando múltiples proveedores de mapas y opciones de enrutamiento personalizadas.
+  image:
+    file: ~public/icons/plugins/launch-navigator.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/launch-navigator/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-launch-navigator/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Descripción General
+
+El plugin Capacitor Launch Navigator permite iniciar aplicaciones de navegación nativas en dispositivos iOS y Android con navegación basada en coordenadas. Este plugin proporciona integración perfecta con aplicaciones de mapas populares y soporta múltiples modos de transporte para soluciones de navegación completas.
+
+<CardGrid stagger>
+  <Card title="Soporte multi-app" icon="rocket">
+    Google Maps, Apple Maps, Waze, Citymapper y más 🗺️
+  </Card>
+  <Card title="Modos de transporte" icon="magnifier">
+    Direcciones en coche, a pie, en transporte público y en bicicleta 🧭
+  </Card>
+  <Card title="Detección de apps" icon="magnifier">
+    Verifica disponibilidad y lista aplicaciones de navegación instaladas 🔍
+  </Card>
+  <Card title="Basado en coordenadas" icon="star">
+    Navega usando coordenadas de latitud/longitud 📍
+  </Card>
+</CardGrid>
+
+## Instalación
+
+```bash
+npm install @capgo/capacitor-launch-navigator
+npx cap sync
+```
+
+## Configuración de iOS
+
+Agrega esquemas de URL a tu `Info.plist` para detectar aplicaciones de navegación instaladas:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <!-- Agrega otros esquemas de apps de navegación -->
+</array>
+```
+
+## Métodos Principales de la API
+
+### Navegación
+- `navigate(options)` - Iniciar navegación a coordenadas especificadas
+- `isAppAvailable(options)` - Verificar si una aplicación de navegación específica está instalada
+- `getAvailableApps()` - Listar todas las aplicaciones de navegación disponibles en el dispositivo
+- `getSupportedApps()` - Obtener todas las aplicaciones soportadas para la plataforma actual
+
+## Ejemplo de Uso
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// Navegación básica a coordenadas
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // Coordenadas de San Francisco
+});
+
+// Navegación avanzada con opciones
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // Punto de inicio opcional
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // Aplicación de navegación preferida
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// Verificar si una aplicación específica está disponible
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps está instalado');
+} else {
+  console.log('Google Maps no está disponible');
+}
+
+// Obtener todas las aplicaciones de navegación disponibles
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('Aplicaciones de navegación disponibles:', availableApps);
+
+// Obtener todas las aplicaciones soportadas para la plataforma
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('Aplicaciones soportadas:', supportedApps);
+```
+
+## Opciones de Navegación
+
+```typescript
+interface NavigationOptions {
+  start?: [number, number];      // Coordenadas de inicio [lat, lng]
+  transportMode?: TransportMode; // Método de transporte
+  app?: string;                  // Aplicación de navegación preferida
+  appDisplayName?: string;       // Nombre para mostrar de la app
+  launchMode?: LaunchMode;       // Cómo iniciar la app
+}
+```
+
+## Modos de Transporte
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## Aplicaciones de Navegación Soportadas
+
+### iOS
+- Apple Maps (integrado)
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- Y muchas más...
+
+### Android
+- Google Maps (integrado)
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- Y muchas más...
+
+## Requisitos de Coordenadas
+
+> ⚠️ **Importante**: Este plugin solo acepta coordenadas de latitud/longitud para navegación. Usa [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) para convertir direcciones a coordenadas.
+
+```typescript
+// Ejemplo con geocodificación
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+// Convertir dirección a coordenadas
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // Iniciar navegación con coordenadas geocodificadas
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## Detección y Selección de Apps
+
+```typescript
+// Verificar múltiples apps y usar la primera disponible
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('No se encontraron aplicaciones de navegación soportadas');
+}
+```
+
+## Manejo de Errores
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('La navegación falló:', error);
+  // Manejar error - app no disponible, coordenadas inválidas, etc.
+}
+```
+
+## Casos de Uso
+
+- **Servicios basados en ubicación**: Navegar usuarios a puntos de interés
+- **Apps de entrega**: Guiar conductores a ubicaciones de entrega
+- **Apps de eventos**: Dirigir asistentes a ubicaciones de lugares
+- **Apps inmobiliarias**: Navegar a ubicaciones de propiedades
+- **Apps de viaje**: Guiar turistas a atracciones
+
+## Mejores Prácticas
+
+- Siempre verifica la disponibilidad de la app antes de intentar navegar
+- Proporciona opciones de respaldo cuando las apps preferidas no estén disponibles
+- Usa nombres de visualización significativos para selección del usuario
+- Maneja errores con gracia con mensajes amigables para el usuario
+- Considera las preferencias del usuario para aplicaciones de navegación predeterminadas
+
+## Documentación
+
+Consulta la [documentación completa](/docs/plugins/launch-navigator/getting-started/) para guías de implementación detalladas y patrones de navegación avanzados.

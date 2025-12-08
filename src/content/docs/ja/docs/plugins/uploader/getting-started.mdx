@@ -1,0 +1,296 @@
+---
+title: はじめに
+locale: ja
+description: Capacitorアプリで信頼性の高いファイルアップロードを実現するBackground Uploaderプラグインのインストールと使用方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **パーミッションを設定**
+
+   ### iOS
+   `Info.plist`にバックグラウンドモードを追加：
+   ```xml
+   <key>UIBackgroundModes</key>
+   <array>
+     <string>processing</string>
+   </array>
+   ```
+
+   ### Android
+   `AndroidManifest.xml`にパーミッションを追加：
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+   ```
+</Steps>
+
+## 使用方法
+
+プラグインをインポートし、そのメソッドを使用してファイルをアップロード：
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+// アップロードを開始
+const startUpload = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/your/file.jpg',
+    serverUrl: 'https://your-server.com/upload',
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer your-token'
+    },
+    parameters: {
+      'userId': '12345',
+      'type': 'profile'
+    },
+    notificationTitle: 'Uploading Photo'
+  });
+
+  console.log('Upload ID:', upload.id);
+};
+
+// アップロードイベントをリッスン
+const listener = await Uploader.addListener('events', (event) => {
+  switch (event.name) {
+    case 'uploading':
+      console.log(`Upload ${event.payload.id}: ${event.payload.percent}%`);
+      break;
+    case 'completed':
+      console.log('Upload completed:', event.payload.id);
+      console.log('Status code:', event.payload.statusCode);
+      break;
+    case 'failed':
+      console.error('Upload failed:', event.payload.id);
+      console.error('Error:', event.payload.error);
+      break;
+  }
+});
+
+// 完了したらリスナーを削除することを忘れずに
+// listener.remove();
+
+// アップロードをキャンセル
+const cancelUpload = async (uploadId: string) => {
+  await Uploader.cancelUpload({ id: uploadId });
+};
+
+// すべてのアクティブなアップロードを取得
+const getActiveUploads = async () => {
+  const uploads = await Uploader.getUploads();
+  console.log('Active uploads:', uploads);
+};
+```
+
+## APIリファレンス
+
+### startUpload(options)
+
+新しいファイルアップロードを開始します。
+
+```typescript
+interface UploadOptions {
+  filePath: string;
+  serverUrl: string;
+  method?: 'POST' | 'PUT';
+  headers?: { [key: string]: string };
+  parameters?: { [key: string]: string };
+  notificationTitle?: string;
+  notificationBody?: string;
+  useUtf8Charset?: boolean;
+  maxRetries?: number;
+}
+```
+
+### cancelUpload(options)
+
+進行中のアップロードをキャンセルします。
+
+```typescript
+interface CancelOptions {
+  id: string;
+}
+```
+
+### getUploads()
+
+すべてのアクティブなアップロードを返します。
+
+### removeUpload(options)
+
+キューからアップロードを削除します。
+
+```typescript
+interface RemoveOptions {
+  id: string;
+}
+```
+
+## イベント
+
+### events
+
+すべてのアップロードイベントは、単一の`events`リスナーを通じて配信されます。イベントには、タイプを識別するための`name`フィールドが含まれています：
+
+```typescript
+Uploader.addListener('events', (event: UploadEvent) => {
+  switch (event.name) {
+    case 'uploading':
+      // アップロード進行中
+      console.log(`Progress: ${event.payload.percent}%`);
+      console.log(`ID: ${event.payload.id}`);
+      break;
+
+    case 'completed':
+      // アップロード完了
+      console.log(`Completed: ${event.payload.id}`);
+      console.log(`Status code: ${event.payload.statusCode}`);
+      break;
+
+    case 'failed':
+      // アップロード失敗
+      console.error(`Failed: ${event.payload.id}`);
+      console.error(`Error: ${event.payload.error}`);
+      break;
+  }
+});
+```
+
+**イベントタイプ：**
+- `uploading` - `percent`と`id`を含む進行状況の更新
+- `completed` - `id`と`statusCode`を含むアップロード完了
+- `failed` - `id`とエラー`message`を含むアップロード失敗
+
+## 高度な機能
+
+### マルチパートフォームアップロード
+
+```typescript
+const uploadWithFormData = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/photo.jpg',
+    serverUrl: 'https://api.example.com/upload',
+    method: 'POST',
+    parameters: {
+      'name': 'profile-photo',
+      'description': 'User profile photo'
+    },
+    headers: {
+      'X-API-Key': 'your-api-key'
+    }
+  });
+};
+```
+
+### バイナリアップロード
+
+```typescript
+const uploadBinary = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/data.bin',
+    serverUrl: 'https://api.example.com/binary',
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/octet-stream'
+    }
+  });
+};
+```
+
+### ネットワーク対応アップロード
+
+```typescript
+import { Network } from '@capacitor/network';
+
+const smartUpload = async () => {
+  const status = await Network.getStatus();
+
+  if (status.connectionType === 'wifi') {
+    // WiFi上で大きなファイルのアップロードを開始
+    await startLargeUpload();
+  } else if (status.connectionType === 'cellular') {
+    // 後でキューに入れるかユーザーに警告
+    console.log('Using cellular data');
+  }
+};
+```
+
+## ベストプラクティス
+
+1. **すべてのイベントタイプを処理**
+   ```typescript
+   const setupUploadHandlers = () => {
+     Uploader.addListener('events', (event) => {
+       switch (event.name) {
+         case 'uploading':
+           handleProgress(event.payload);
+           break;
+         case 'completed':
+           handleCompleted(event.payload);
+           break;
+         case 'failed':
+           handleError(event.payload);
+           break;
+       }
+     });
+   };
+   ```
+
+2. **リスナーをクリーンアップ**
+   ```typescript
+   // リスナーを追加
+   const listener = await Uploader.addListener('events', handleEvent);
+
+   // 完了したらクリーンアップ
+   listener.remove();
+   ```
+
+3. **失敗したアップロードを再試行**
+   ```typescript
+   const retryUpload = async (filePath: string, serverUrl: string) => {
+     try {
+       await Uploader.startUpload({
+         filePath,
+         serverUrl,
+         maxRetries: 3
+       });
+     } catch (error) {
+       console.error('Upload failed after retries:', error);
+     }
+   };
+   ```
+
+4. **アップロード通知を表示**
+   ```typescript
+   await Uploader.startUpload({
+     filePath: 'file:///path/to/file',
+     serverUrl: 'https://server.com/upload',
+     notificationTitle: 'Uploading File',
+     notificationBody: 'Your file is being uploaded...'
+   });
+   ```
+
+## プラットフォームノート
+
+### iOS
+- バックグラウンドアップロードに`URLSession`を使用
+- バックグラウンド処理機能が必要
+- アプリが一時停止されている間もアップロードを継続
+
+### Android
+- 信頼性の高いアップロードに`WorkManager`を使用
+- アップロード中にフォアグラウンドサービス通知を表示
+- バッテリー最適化設定を尊重

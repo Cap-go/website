@@ -1,0 +1,139 @@
+---
+title: 开始使用
+locale: zh
+description: 了解如何安装和使用 Capacitor Alarm 插件在 iOS 和 Android 上管理原生闹钟。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 要求
+
+- **iOS**：仅支持 iOS 26+。此插件依赖于 `AlarmKit` API，在早期版本或框架不可用时将报告不支持。
+- **Android**：使用 `AlarmClock` intent；行为取决于默认时钟应用和 OEM 策略。
+
+注意：此插件仅公开原生闹钟操作（创建/打开）。它不实现任何自定义的应用内闹钟调度/CRUD。
+
+## API
+
+### createAlarm(...)
+
+```typescript
+createAlarm(options: NativeAlarmCreateOptions) => Promise<NativeActionResult>
+```
+
+使用平台时钟应用创建原生操作系统闹钟。
+在 Android 上使用 Alarm Clock intent；在 iOS 上如果可用（iOS 26+）则使用 AlarmKit。
+
+| 参数         | 类型                                                                          |
+| ------------- | ----------------------------------------------------------------------------- |
+| **`options`** | `NativeAlarmCreateOptions` |
+
+**返回：** `Promise<NativeActionResult>`
+
+### openAlarms()
+
+```typescript
+openAlarms() => Promise<NativeActionResult>
+```
+
+打开平台的原生闹钟列表 UI（如果可用）。
+
+**返回：** `Promise<NativeActionResult>`
+
+### getOSInfo()
+
+```typescript
+getOSInfo() => Promise<OSInfo>
+```
+
+获取有关操作系统和功能的信息。
+
+**返回：** `Promise<OSInfo>`
+
+### requestPermissions(...)
+
+```typescript
+requestPermissions(options?: { exactAlarm?: boolean | undefined; } | undefined) => Promise<PermissionResult>
+```
+
+请求平台上闹钟使用的相关权限。
+在 Android 上，可能会路由到精确闹钟的设置。
+
+| 参数         | 类型                                   |
+| ------------- | -------------------------------------- |
+| **`options`** | `{ exactAlarm?: boolean; }` |
+
+**返回：** `Promise<PermissionResult>`
+
+## 接口
+
+### NativeActionResult
+
+| 属性          | 类型                 |
+| ------------- | -------------------- |
+| **`success`** | `boolean` |
+| **`message`** | `string`  |
+
+### NativeAlarmCreateOptions
+
+通过平台时钟应用创建原生操作系统闹钟的选项。
+
+| 属性          | 类型                 | 描述                                  |
+| ------------- | -------------------- | -------------------------------------------- |
+| **`hour`**    | `number`  | 24 小时制的小时（0-23）             |
+| **`minute`**  | `number`  | 小时的分钟（0-59）                        |
+| **`label`**   | `string`  | 闹钟的可选标签                 |
+| **`skipUi`**  | `boolean` | 仅限 Android：如果可能，尝试跳过 UI |
+| **`vibrate`** | `boolean` | 仅限 Android：设置闹钟振动           |
+
+### OSInfo
+
+返回有关当前操作系统和功能的信息。
+
+| 属性                                 | 类型                 | 描述                                                 |
+| ------------------------------------ | -------------------- | ----------------------------------------------------------- |
+| **`platform`**                       | `string`  | 'ios' \| 'android' \| 'web'                                 |
+| **`version`**                        | `string`  | 操作系统版本字符串                                           |
+| **`supportsNativeAlarms`**           | `boolean` | 平台是否公开原生闹钟应用集成 |
+| **`supportsScheduledNotifications`** | `boolean` | 是否支持调度本地通知         |
+| **`canScheduleExactAlarms`**         | `boolean` | 仅限 Android：是否允许精确闹钟              |
+
+### PermissionResult
+
+权限请求的结果。
+
+| 属性          | 类型                                                             | 描述                        |
+| ------------- | ---------------------------------------------------------------- | ---------------------------------- |
+| **`granted`** | `boolean`                                             | 请求范围的总体授权  |
+| **`details`** | `Record<string, boolean>` | 按权限键的可选详细信息 |

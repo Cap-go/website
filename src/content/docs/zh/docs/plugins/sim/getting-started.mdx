@@ -1,0 +1,59 @@
+---
+title: 开始使用
+locale: zh
+description: 使用 Capgo SIM 插件检索 SIM 卡详情并处理运行时权限。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装插件**
+   <PackageManagers pkg="@capgo/capacitor-sim" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步平台**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 权限
+
+- **Android**: 确保已授予 `android.permission.READ_PHONE_STATE`(在 Android 13+ 上为 `READ_BASIC_PHONE_STATE`)。Capacitor 包含清单声明,但你必须在调用 `getSimCards` 之前请求权限。
+- **iOS**: 运营商信息会自动可用;该平台不会提示请求额外的权限。请注意,由于操作系统限制,iOS 16.4+ 返回的数据有限。
+
+## 请求运行时访问权限 (Android)
+
+```typescript
+import { Sim } from '@capgo/capacitor-sim';
+
+const status = await Sim.checkPermissions();
+if (status.readSimCard !== 'granted') {
+  const updated = await Sim.requestPermissions();
+  if (updated.readSimCard !== 'granted') {
+    throw new Error('电话权限被拒绝');
+  }
+}
+```
+
+## 读取 SIM 卡
+
+```typescript
+const { simCards } = await Sim.getSimCards();
+
+simCards.forEach((card, index) => {
+  console.log(`卡槽 ${card.simSlotIndex ?? index}:`, {
+    carrier: card.carrierName,
+    mcc: card.mobileCountryCode,
+    mnc: card.mobileNetworkCode,
+    country: card.isoCountryCode,
+    subscriptionId: card.subscriptionId,
+  });
+});
+```
+
+## 平台注意事项
+
+- **双卡设备**: 遍历返回的数组;每个条目对应一个卡槽。如果存在,`subscriptionId` 可帮助你与 Android 的电话 API 交互。
+- **iOS 16.4+**: Apple 隐藏了多个运营商属性。预期会出现占位值(`--`、`65535`),并在 UI 中规划备选方案。
+- **Web**: 插件返回空数据,因为浏览器无法访问 SIM 信息。

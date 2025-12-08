@@ -1,0 +1,274 @@
+---
+title: はじめに
+locale: ja
+description: Text Interactionプラグインをインストールして使用し、iOSのテキスト選択拡大鏡とルーペを制御する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-textinteraction
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## プラットフォームサポート
+
+- **iOS**: iOS 15.0+(UITextInteraction APIが必要)
+- **Android**: 操作なし(サポートされていないを返す)
+- **Web**: 操作なし(サポートされていないを返す)
+
+## 使用例
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+// テキストインタラクションを無効化(拡大鏡/ルーペを削除)
+const result = await TextInteraction.setEnabled({ enabled: false });
+
+if (result.success) {
+  console.log('Text interaction disabled');
+} else {
+  console.log('Not supported on this platform');
+}
+
+// テキスト入力を表示する前にテキストインタラクションを再有効化
+await TextInteraction.setEnabled({ enabled: true });
+```
+
+## APIリファレンス
+
+### setEnabled(options)
+
+```typescript
+setEnabled(options: { enabled: boolean }) => Promise<{ success: boolean }>
+```
+
+iOSのテキストインタラクション(拡大鏡レンズと選択ハンドル)を有効または無効にします。
+
+| Param         | Type                          |
+| ------------- | ----------------------------- |
+| **`options`** | `{ enabled: boolean }` |
+
+**戻り値:** `Promise<{ success: boolean }>`
+
+- iOS 15+で操作が成功した場合は`{ success: true }`を返す
+- サポートされていない場合(Android、Web、またはiOS < 15)は`{ success: false }`を返す
+
+## 実用的なユースケース
+
+### キオスクアプリケーション
+
+キオスクモードでテキストインタラクションを無効にして、ユーザーがコピー/ペーストメニューにアクセスするのを防ぎます:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function enterKioskMode() {
+  // キオスクモードでテキストインタラクションを無効化
+  const result = await TextInteraction.setEnabled({ enabled: false });
+
+  if (result.success) {
+    console.log('Kiosk mode: Text interaction disabled');
+  }
+}
+
+async function exitKioskMode() {
+  // キオスクモードを終了する際にテキストインタラクションを再有効化
+  await TextInteraction.setEnabled({ enabled: true });
+  console.log('Kiosk mode: Text interaction enabled');
+}
+```
+
+### ゲーム体験
+
+ゲームプレイ中は拡大鏡レンズを削除し、テキスト入力用に復元します:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class GameController {
+  async startGame() {
+    // ゲームプレイ中はテキストインタラクションを無効化
+    await TextInteraction.setEnabled({ enabled: false });
+    console.log('Game started - text interaction disabled');
+  }
+
+  async showTextInput() {
+    // 入力を表示する前にテキストインタラクションを有効化
+    await TextInteraction.setEnabled({ enabled: true });
+    console.log('Text input ready - interaction enabled');
+
+    // 入力フィールドを表示
+    this.displayInputField();
+  }
+
+  async hideTextInput() {
+    // 入力を非表示にして再度インタラクションを無効化
+    this.hideInputField();
+    await TextInteraction.setEnabled({ enabled: false });
+  }
+}
+```
+
+### インタラクティブインスタレーション
+
+デジタルサイネージとインタラクティブディスプレイのテキストインタラクションを制御:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+async function setupInteractiveDisplay() {
+  // ディスプレイモード用にテキストインタラクションを無効化
+  await TextInteraction.setEnabled({ enabled: false });
+
+  // ディスプレイインタラクション用のタッチハンドラーを設定
+  document.addEventListener('touchstart', handleDisplayTouch);
+}
+
+async function enableUserInput() {
+  // ユーザーがデータを入力する必要がある場合にテキストインタラクションを有効化
+  const result = await TextInteraction.setEnabled({ enabled: true });
+
+  if (result.success) {
+    showInputForm();
+  } else {
+    // サポートされていないプラットフォームのフォールバック
+    showInputFormWithoutTextInteraction();
+  }
+}
+```
+
+### フォーム管理
+
+フォームの状態に基づいてテキストインタラクションを切り替え:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+
+class FormManager {
+  private textInteractionEnabled = true;
+
+  async disableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: false });
+    this.textInteractionEnabled = false;
+    return result.success;
+  }
+
+  async enableTextSelection() {
+    const result = await TextInteraction.setEnabled({ enabled: true });
+    this.textInteractionEnabled = true;
+    return result.success;
+  }
+
+  async onFormFocus() {
+    // キーボードを表示する前に常に有効化
+    await this.enableTextSelection();
+  }
+
+  async onFormBlur() {
+    // 入力が完了したら任意で無効化
+    await this.disableTextSelection();
+  }
+}
+```
+
+### 条件付きテキストインタラクション
+
+プラットフォームを認識したテキストインタラクション制御:
+
+```typescript
+import { TextInteraction } from '@capgo/capacitor-textinteraction';
+import { Capacitor } from '@capacitor/core';
+
+async function toggleTextInteraction(enabled: boolean) {
+  // iOSでのみ試行
+  if (Capacitor.getPlatform() === 'ios') {
+    const result = await TextInteraction.setEnabled({ enabled });
+
+    if (result.success) {
+      console.log(`Text interaction ${enabled ? 'enabled' : 'disabled'}`);
+    } else {
+      console.log('Text interaction not supported on this iOS version');
+    }
+  } else {
+    console.log('Text interaction control only available on iOS');
+  }
+}
+
+// 使用方法
+await toggleTextInteraction(false); // 無効化
+await toggleTextInteraction(true);  // 有効化
+```
+
+## ベストプラクティス
+
+- **テキスト入力前に常に再有効化**: 必要に応じてテキストインタラクションを無効にしますが、テキスト入力フィールドやキーボードを表示する前に常に再有効化してください
+- **プラットフォームサポートを確認**: `result.success`を確認して、サポートされていないプラットフォームを適切に処理してください
+- **iOS固有の機能**: このプラグインはiOS専用です。AndroidとWeb用のフォールバックを実装してください
+- **ユーザー体験**: テキストインタラクションを無効にすることのUXへの影響を考慮してください
+- **状態管理**: 冗長な呼び出しを避けるために有効/無効状態を追跡してください
+
+## 重要な注意事項
+
+1. **テキスト入力用に再有効化**: テキスト入力フィールドを表示する前に常に`setEnabled({ enabled: true })`を呼び出してください。そうしないと、ユーザーはテキストを適切に選択または編集できません
+
+2. **プラットフォーム検出**: プラグインはAndroid、Web、およびiOS 15.0未満のバージョンで`{ success: false }`を返します
+
+3. **視覚的フィードバックなし**: テキストインタラクションを無効にすると拡大鏡が削除されますが、視覚的フィードバックは提供されません - 必要に応じて独自のUIインジケータを実装してください
+
+4. **安全なデフォルト**: テキストインタラクションシステムはデフォルトで有効になっており、iOSの標準動作と一致します
+
+## 制限事項
+
+- iOS 15.0+のみ(UITextInteraction APIが必要)
+- AndroidまたはWebプラットフォームでは効果なし
+- 拡大鏡または選択ハンドルのみを選択的に無効化できない
+- ユーザーが無効化された機能を使用しようとした際のコールバックなし
+
+## ユースケース
+
+- **キオスクアプリケーション**: 制御されたインストールでコピー/ペーストを防止
+- **ゲーム体験**: ゲームプレイ中に拡大鏡を削除
+- **インタラクティブディスプレイ**: デジタルサイネージでのテキストインタラクションを制御
+- **カスタムテキストエディタ**: 特殊なテキスト編集体験を構築
+- **セキュリティ**: 機密領域でのテキスト選択を防止
+
+## トラブルシューティング
+
+### テキストインタラクションが無効化されない
+
+- iOSバージョンが15.0以上であることを確認
+- `result.success`が`true`を返すことを確認
+- 他のコードがテキストインタラクションを再有効化していないことを確認
+
+### ユーザーがテキストを編集できない
+
+- テキスト入力を表示する前に`setEnabled({ enabled: true })`を呼び出したことを確認
+- `result.success`を確認して有効化呼び出しが成功したことを確認
+- 実際のiOSデバイスでテスト(シミュレータだけでなく)

@@ -1,0 +1,109 @@
+---
+title: "Auto Update"
+locale: id
+description: "Cara menggunakan endpoint pembaruan Capgo dengan plugin auto-update dalam mode self-hosted, untuk apa mereka digunakan dan apa yang diharapkan"
+sidebar:
+  order: 4
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Dokumentasi ini akan menjelaskan cara menjalankan server auto-update Anda sendiri.
+
+## Sajikan bundle Anda
+Pastikan bundle Anda disajikan melalui HTTPS, dan server memiliki header CORS yang benar untuk memungkinkan aplikasi mengunduh pembaruan.
+misalnya ```https://myserver.com/app/updates/updates.json```
+
+
+Jika Anda tidak familiar dengan menyajikan bundle, kami merekomendasikan Anda mencoba Capgo Cloud atau lihat contoh di sini:
+<LinkCard
+	title="Menyajikan Bundle"
+	href="/docs/self-hosted/auto-update/update-endpoint"
+/>
+
+## Konfigurasi
+Tambahkan ``updateUrl`` ke ``capacitor.config.json`` Anda.
+
+```json
+{
+	"plugins": {
+		"CapacitorUpdater": {
+			"updateUrl": "https://myserver.com/app/updates/updates.json",
+		}
+	}
+}
+```
+:::caution
+Saat Anda mengirim pembaruan self-hosted, perhatikan bahwa Anda tidak dapat menggunakan endpoint "HTTP" karena itu bertentangan dengan kebijakan keamanan aplikasi Android, untuk tujuan pengujian Anda dapat [mengizinkannya](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted).
+:::
+
+## Update API
+
+Plugin akan melakukan panggilan POST ke API Anda setiap kali aplikasi dibuka, dengan body ini:
+
+```typescript
+interface AppInfos {
+    "platform": "ios" | "android",
+    "device_id": "UUID_of_device_unique_by_install",
+    "app_id": "APPID_FROM_CAPACITOR_CONFIG",
+    "custom_id": "your_custom_id_set_on_runtime",
+    "plugin_version": "PLUGIN_VERSION",
+    "version_build": "VERSION_NUMBER_FROM_NATIVE_CODE",
+    "version_code": "VERSION_CODE_FROM_NATIVE_CODE",
+    "version_name": "LAST_DOWNLOADER_VERSION" | "builtin"
+    "version_os": "VERSION_OF_SYSTEM_OS",
+    "is_emulator": boolean,
+    "is_prod": boolean,
+}
+```
+
+Server API harus merespons, dalam JSON, ke plugin capacitor-updater. Dengan data ini jika pembaruan diperlukan:
+
+```json
+{
+"version": "1.2.3",
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
+"checksum": "sha256_checksum_of_bundle"
+}
+```
+
+Dalam mode Auto-update, server harus membandingkan versi dan mengembalikan yang benar, jika kunci URL ada, plugin memulai proses unduhan.
+
+Jika Anda menambahkan kunci "message" dan "error", versi tidak akan diatur, dan pesan akan ditampilkan dalam log sebagai gantinya.
+
+Kunci `version` harus dalam format [`semver`](https://semver.org/).
+
+Zip harus memiliki `index.html` sebagai file di root, atau hanya satu folder di root dengan `index.html` di dalamnya.
+
+
+Anda dapat menggunakan perintah CLI untuk zip bundle Anda:
+
+```bash title="Buat bundle dengan file Anda untuk disajikan dari server Anda"
+npx @capgo/cli bundle zip --path [/path/to/my/bundle]
+```
+
+## Menghasilkan Checksum Bundle
+
+**Penting:** Anda harus menggunakan Capgo CLI untuk membuat file zip bundle Anda. Plugin Capgo memerlukan format dan struktur zip tertentu yang hanya dijamin saat menggunakan alat CLI resmi. Utilitas zip standar dapat membuat arsip yang tidak kompatibel.
+
+Untuk menghasilkan checksum untuk bundle Anda, gunakan perintah zip Capgo CLI dengan flag `--json`:
+
+```bash title="Buat bundle dengan informasi checksum"
+npx @capgo/cli bundle zip [appId] --json
+```
+
+Perintah ini akan:
+- Membuat file zip yang diformat dengan benar dan kompatibel dengan plugin Capgo
+- Menghasilkan checksum SHA256 untuk verifikasi integritas
+- Output informasi bundle dalam format JSON
+
+Contoh output:
+```json
+{
+  "version": "1.2.3",
+  "checksum": "a1b2c3d4e5f6789...",
+  "size": 1234567
+}
+```
+
+Gunakan nilai `checksum` dari output ini dalam respons API Anda untuk memastikan plugin dapat memverifikasi integritas bundle sebelum instalasi.

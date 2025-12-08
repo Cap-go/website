@@ -1,0 +1,216 @@
+---
+title: 更新行为
+locale: zh
+description: "探索 Capgo 的全面更新行为,旨在向您的应用用户提供无缝更新,而不会中断他们的体验。"
+sidebar:
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+当您向 Capgo 应用发布更新时,您可能希望用户尽快收到该更新。但您也不想通过强制他们在会话中等待下载或重启应用来打扰他们的体验。
+
+Capgo 的更新行为旨在在快速交付更新和最小化对用户的干扰之间取得平衡。
+
+## 默认更新流程
+
+默认情况下,Capgo 如下处理应用更新:
+
+<Steps>
+
+1. 在应用启动时,Capgo 插件检查是否有新更新可用。
+
+2. 如果找到更新,它将在后台下载,同时用户继续使用当前版本的应用。
+
+3. 一旦下载完成,Capgo 等待用户将应用置于后台或完全关闭它。
+
+4. 当用户下次启动应用时,他们将运行更新的版本。
+
+</Steps>
+
+此流程确保用户始终运行应用的最新版本,而不会被更新提示打断或被迫等待下载。
+
+<Aside type="tip">
+Capgo 还会在应用从后台恢复时检查更新,因此即使用户不完全退出应用,他们也会收到更新。
+</Aside>
+
+## 为什么采用这种方法?
+
+在后台或关闭事件时应用更新对用户体验有几个关键好处:
+
+- 用户不会被更新提示打断,也不会被迫在会话中等待下载。
+
+- 更新在会话之间无缝应用,因此启动应用的体验始终是新鲜的。
+
+- 您可以频繁交付更新,而不用担心打扰活跃用户。
+
+主要的缺点是,如果用户将应用置于后台并快速恢复,他们可能会丢失任何未保存的状态,因为更新是在这些操作之间应用的。
+
+为了缓解这一点,我们建议:
+
+- 频繁保存状态并在应用恢复时优雅地恢复它。
+
+- 避免非常频繁的更新,这些更新会修改应用状态的大部分。
+
+- 考虑为敏感流程自定义更新行为(见下文)。
+
+## 自定义更新应用时间
+
+在某些情况下,您可能需要更多地控制更新应用的确切时间。例如,您可能希望确保用户在更新之前完成正在进行的流程,或者将应用更新与服务器端更改协调。
+
+Capgo 提供了 `setDelay` 函数,允许您指定在安装更新之前必须满足的条件:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'date',
+      value: '2023-06-01T00:00:00.000Z',
+    },
+    {
+      kind: 'background',
+      value: '60000',
+    },
+  ],
+});
+```
+
+此示例将延迟安装更新,直到 2023 年 6 月 1 日之后且应用已在后台至少 60 秒。
+
+可用的延迟条件包括:
+
+- `date`:等到特定日期/时间之后应用更新。
+- `background`:在应用置于后台后等待最短持续时间应用更新。
+- `nativeVersion`:在应用更新之前等待安装具有最低版本的原生二进制文件。
+- `kill`:等到下一次应用关闭事件应用更新。
+
+您可以混合和匹配这些条件以精确控制更新的安装时间。
+
+<Aside type="danger">
+请注意,`kill` 条件目前在第一次关闭事件后触发更新,而不是像其他条件那样在下一次后台事件时触发。此不一致性将在未来版本中修复。
+</Aside>
+
+## 立即应用更新
+
+对于关键更新或状态非常简单的应用,您可能希望在下载更新后立即应用,而不等待后台或关闭事件。Capgo 通过 `directUpdate` 配置选项支持此功能。
+
+<Aside type="tip" title="推荐:将增量更新与直接更新一起使用">
+使用 `directUpdate` 时,我们**强烈建议**启用[增量更新](/docs/live-updates/differentials/)以最小化下载时间并改善用户体验。增量更新仅下载更改的文件而不是整个包,这在用户积极使用应用时立即应用更新时尤其重要。
+
+**为什么这对直接更新很重要:**
+- **更快的更新**:较小的下载意味着更新快速完成,减少用户看到加载屏幕的时间
+- **更好的移动体验**:使用蜂窝网络或较慢连接的用户不会面临长时间等待
+- **更低的带宽使用**:仅下载更改的文件,为您和您的用户节省数据
+
+要启用增量更新,只需在上传包时使用 `--partial` 标志:
+```shell
+npx @capgo/cli@latest bundle upload --partial
+```
+
+在[增量更新文档](/docs/live-updates/differentials/)中了解更多信息。
+</Aside>
+
+`directUpdate` 在您的 `capacitor.config.ts` 文件中设置,而不是在 JavaScript 代码中。它支持三个值:
+
+- `false`(默认):从不进行直接更新(使用默认行为:启动时下载,后台时设置)
+- `'atInstall'`:仅在应用安装、从商店更新时直接更新,否则表现为 directUpdate = false
+- `'onLaunch'`:仅在应用安装、从商店更新或应用关闭后直接更新,否则表现为 directUpdate = false
+- `'always'`:在所有先前情况下直接更新(应用安装、从商店更新、应用关闭或应用恢复后),从不表现为 directUpdate = false
+- `true`(已弃用):与 `'always'` 相同,用于向后兼容
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: 'always', // 或 'atInstall' 仅在应用安装/更新时更新
+      autoSplashscreen: true, // 新功能:自动处理启动画面
+      keepUrlPathAfterReload: true,
+    },
+    SplashScreen: {
+      launchAutoHide: false, // 使用 directUpdate 时仍然需要
+    },
+  },
+};
+
+export default config;
+```
+
+<Aside type="note">
+**重要**:`directUpdate` 仅在应用实际检查更新时应用更新。默认情况下,这仅在应用启动或从后台恢复时发生。请注意,`periodCheckDelay` 与 `directUpdate` 不兼容。
+</Aside>
+
+启用 `directUpdate` 后,Capgo 将在更新检查期间下载完成后立即应用更新,即使用户正在积极使用应用。如果没有启用定期检查,这意味着更新只会在应用启动或从后台恢复时应用。
+
+请注意,因为 `directUpdate` 是原生配置,所以需要在 JavaScript 代码中进行一些额外处理。
+
+<Aside type="caution">
+使用 `directUpdate` 时,必须在 SplashScreen 配置中设置 `launchAutoHide: false`(如上所示),以防止启动画面自动隐藏。这确保您在更新过程完成后完全控制何时隐藏启动画面。
+</Aside>
+
+## 自动启动画面处理
+
+为了使 `directUpdate` 更易于使用,Capgo 提供了一个 `autoSplashscreen` 选项,可以自动为您处理隐藏启动画面(自 7.6.0 版本起可用):
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: 'always', // 或 'atInstall'
+      autoSplashscreen: true, // 自动隐藏启动画面
+      keepUrlPathAfterReload: true,
+    },
+    SplashScreen: {
+      launchAutoHide: false,
+    },
+  },
+};
+```
+
+当启用 `autoSplashscreen` 时:
+- 插件在应用更新时自动隐藏启动画面
+- 插件在不需要更新时自动隐藏启动画面
+- 您无需手动监听 `appReady` 事件或调用 `SplashScreen.hide()`
+
+### 手动启动画面处理
+
+如果您希望手动控制或需要自定义逻辑,可以禁用 `autoSplashscreen` 并自行处理:
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+CapacitorUpdater.addListener('appReady', () => {
+  // 隐藏启动画面
+  SplashScreen.hide();
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+`appReady` 事件在应用完成初始化和应用任何待处理更新后触发。这是显示应用 UI 的安全时间点,因为它确保用户将看到最新版本。
+
+除了处理 `appReady` 事件外,我们建议在使用 `directUpdate` 时将 `keepUrlPathAfterReload` 配置选项设置为 `true`。这在由于更新而重新加载应用时保留当前 URL 路径,有助于维护用户在应用中的位置并减少混乱。
+
+如果您在使用 `directUpdate` 时不处理 `appReady` 事件和设置 `keepUrlPathAfterReload`,用户可能会短暂看到应用的陈旧版本,被带回初始路由,或者在应用更新时看到闪烁。
+
+使用 `directUpdate` 可用于提供关键错误修复或安全补丁,但它带来一些权衡:
+
+- 如果您不正确处理启动画面(使用 `autoSplashscreen` 或手动 `appReady` 事件处理),用户可能会在应用更新时看到短暂的闪烁或加载状态。
+- 如果更新修改了应用状态或 UI,用户可能会在会话中看到破坏性更改。
+- 如果未设置 `keepUrlPathAfterReload`,用户在应用中的位置可能会丢失,可能会使他们迷失方向。
+- 您需要仔细处理保存和恢复状态以确保平滑过渡。
+
+如果您确实启用了 `directUpdate`,我们建议:
+
+- 对于最简单的设置使用 `autoSplashscreen: true`,或者如果需要自定义逻辑则手动处理 `appReady` 事件。
+- 将 `keepUrlPathAfterReload` 设置为 `true` 以保留用户在应用中的位置。
+- 根据需要保存和恢复应用状态,以避免丢失用户进度。
+- 彻底测试应用的更新行为,以确保没有突兀的过渡、丢失的状态或令人迷失方向的位置更改。
+
+在大多数情况下,默认更新行为在快速交付更新和最小化干扰之间提供了最佳平衡。但对于有特定需求的应用,Capgo 提供了自定义更新应用时间和方式的灵活性。

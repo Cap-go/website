@@ -1,0 +1,207 @@
+---
+title: 开始使用
+locale: zh
+description: 了解如何在您的 Capacitor 应用中安装和使用 AppInsights 插件进行应用程序分析。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-appinsights" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用
+
+导入插件并使用您的 AppInsights 凭据初始化它：
+
+```typescript
+import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
+
+// 初始化 SDK
+const initializeAnalytics = async () => {
+  await CapacitorAppinsights.init({
+    partnerId: 'your-partner-id',
+    partnerKey: 'your-partner-key'
+  });
+};
+
+// 设置用户 ID 进行跟踪
+const setUser = async (userId: string) => {
+  await CapacitorAppinsights.setUserId({ userId });
+};
+
+// 获取 SDK 状态
+const checkSDKState = async () => {
+  const state = await CapacitorAppinsights.getState();
+  console.log('SDK State:', state);
+};
+
+// 获取插件版本
+const checkVersion = async () => {
+  const { version } = await CapacitorAppinsights.getPluginVersion();
+  console.log('Plugin version:', version);
+};
+```
+
+## API 参考
+
+### init(options)
+
+使用您的凭据初始化 AppInsights SDK。
+
+```typescript
+await CapacitorAppinsights.init({
+  partnerId: 'your-partner-id',
+  partnerKey: 'your-partner-key'
+});
+```
+
+**参数：**
+- `partnerId` (string)：您的 AppInsights 合作伙伴 ID
+- `partnerKey` (string)：您的 AppInsights 合作伙伴密钥
+
+### setUserId(options)
+
+在初始化后设置或更新用户 ID。
+
+```typescript
+await CapacitorAppinsights.setUserId({
+  userId: 'user-123'
+});
+```
+
+**参数：**
+- `userId` (string)：要设置用于跟踪的用户 ID
+
+### getState()
+
+获取 SDK 的当前状态。
+
+```typescript
+const state = await CapacitorAppinsights.getState();
+console.log(state);
+// {
+//   initCompleted: true,
+//   jobScheduled: true,
+//   permissionAcquired: true
+// }
+```
+
+**返回：**
+- `initCompleted` (boolean)：SDK 初始化是否完成
+- `jobScheduled` (boolean)：数据收集作业是否已计划
+- `permissionAcquired` (boolean)：是否获得了必要的权限
+
+### getPluginVersion()
+
+获取原生 Capacitor 插件版本。
+
+```typescript
+const { version } = await CapacitorAppinsights.getPluginVersion();
+console.log('Version:', version);
+```
+
+## 完整示例
+
+```typescript
+import { CapacitorAppinsights } from '@capgo/capacitor-appinsights';
+
+export class AnalyticsService {
+  private initialized = false;
+
+  async initialize(partnerId: string, partnerKey: string) {
+    try {
+      await CapacitorAppinsights.init({
+        partnerId,
+        partnerKey
+      });
+
+      const state = await CapacitorAppinsights.getState();
+      this.initialized = state.initCompleted;
+
+      console.log('AppInsights initialized:', state);
+    } catch (error) {
+      console.error('Failed to initialize AppInsights:', error);
+    }
+  }
+
+  async identifyUser(userId: string) {
+    if (!this.initialized) {
+      throw new Error('AppInsights not initialized');
+    }
+
+    await CapacitorAppinsights.setUserId({ userId });
+    console.log('User identified:', userId);
+  }
+
+  async getSDKStatus() {
+    const state = await CapacitorAppinsights.getState();
+    return {
+      ready: state.initCompleted && state.permissionAcquired,
+      tracking: state.jobScheduled,
+      state
+    };
+  }
+}
+```
+
+## 最佳实践
+
+1. **尽早初始化**
+   在应用启动时尽快初始化 SDK 以确保准确的跟踪：
+   ```typescript
+   // 在您的应用初始化中
+   await CapacitorAppinsights.init({
+     partnerId: process.env.APPINSIGHTS_PARTNER_ID,
+     partnerKey: process.env.APPINSIGHTS_PARTNER_KEY
+   });
+   ```
+
+2. **在登录时设置用户 ID**
+   在身份验证后识别用户：
+   ```typescript
+   async function onUserLogin(user) {
+     await CapacitorAppinsights.setUserId({
+       userId: user.id
+     });
+   }
+   ```
+
+3. **检查 SDK 状态**
+   在关键操作之前验证 SDK 是否准备就绪：
+   ```typescript
+   const state = await CapacitorAppinsights.getState();
+   if (!state.initCompleted) {
+     console.warn('AppInsights not ready');
+   }
+   ```
+
+4. **优雅地处理错误**
+   ```typescript
+   try {
+     await CapacitorAppinsights.init(config);
+   } catch (error) {
+     console.error('Analytics initialization failed:', error);
+     // 即使分析失败也继续应用操作
+   }
+   ```
+
+## 平台说明
+
+### iOS
+- 需要 iOS 10.0+
+- 确保在 Info.plist 中拥有跟踪所需的必要权限
+
+### Android
+- 需要 Android 5.0（API 21）+
+- 根据跟踪功能可能需要使用统计权限
+
+### Web
+- Web 平台不支持

@@ -1,0 +1,146 @@
+---
+title: "@capgo/capacitor-android-usagestatsmanager"
+description: Capacitorアプリ用のAndroid使用統計プラグイン、アプリ使用追跡、スクリーンタイム監視、使用分析機能付き。
+locale: ja
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Android使用統計にアクセスして、アプリ使用、スクリーンタイム、システムレベルのデータによるユーザー行動分析を監視します。
+  image:
+    file: ~public/icons/plugins/android-usagestatsmanager.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/android-usagestatsmanager/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-usagestatsmanager/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概要
+
+Capacitor Android Usage Stats ManagerプラグインはAndroidのUsageStatsManager SDKをCapacitorアプリケーションに公開し、詳細なアプリ使用統計とデバイス使用データへのアクセスを可能にします。このプラグインにより、開発者はAndroidデバイス上のアプリ使用パターン、スクリーンタイム、ユーザー行動分析を追跡できます。
+
+<CardGrid stagger>
+  <Card title="使用統計" icon="rocket">
+    Android UsageStatsManager SDKデータにアクセス
+  </Card>
+  <Card title="アプリ監視" icon="moon">
+    個別のアプリの使用時間と頻度を追跡
+  </Card>
+  <Card title="権限管理" icon="approve-check">
+    使用統計権限をシームレスに処理
+  </Card>
+  <Card title="パッケージ情報" icon="puzzle">
+    インストールされているパッケージの詳細とメタデータをクエリ
+  </Card>
+</CardGrid>
+
+## インストール
+
+```bash
+npm install @capgo/capacitor-android-usagestatsmanager
+npx cap sync
+```
+
+## 必要な権限
+
+これらの権限を`android/app/src/main/AndroidManifest.xml`に追加:
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## コアAPIメソッド
+
+### 使用統計
+- `queryAndAggregateUsageStats(options)` - インストールされているアプリの詳細な使用統計を取得
+- `isUsageStatsPermissionGranted()` - 使用統計権限が許可されているか確認
+- `openUsageStatsSettings()` - 使用統計権限のシステム設定を開く
+
+### パッケージ情報
+- `queryAllPackages()` - インストールされているすべてのパッケージに関する情報を取得
+
+## 使用例
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// 権限が許可されているか確認
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // 権限を許可するために設定を開く
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// 使用統計をクエリ
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7日前
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Usage statistics:', usageStats);
+
+// インストールされているすべてのパッケージを取得
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installed packages:', packages);
+```
+
+## 権限処理
+
+このプラグインは、通常のランタイム権限リクエストでは許可できない特別な権限が必要です:
+
+1. **PACKAGE_USAGE_STATS**: 使用統計へのアクセスを許可
+2. **QUERY_ALL_PACKAGES**: パッケージ情報に必要（Android 11以降）
+
+ユーザーはシステム設定を通じてこれらの権限を手動で許可する必要があります。`openUsageStatsSettings()`を使用して、ユーザーを適切な設定ページに誘導します。
+
+## データタイプ
+
+### 使用統計
+- アプリの使用時間と頻度
+- 最初と最後に使用された時刻
+- フォアグラウンドでの合計時間
+- 起動回数
+
+### パッケージ情報
+- パッケージ名とバージョン
+- インストール時刻
+- アプリのラベルとアイコン
+- システムアプリ対ユーザーアプリ
+
+## ユースケース
+
+- **デジタルウェルビーイングアプリ**: スクリーンタイムとアプリ使用を監視
+- **ペアレンタルコントロール**: 子供のデバイス使用を追跡
+- **生産性アプリ**: 作業パターンと集中時間を分析
+- **分析**: ユーザー行動とアプリエンゲージメントを理解
+
+## Android互換性
+
+- **最小Androidバージョン**: APIレベル21（Android 5.0）
+- **高度な機能**: APIレベル29以降（Android 10以降）で強化された統計
+- **パッケージクエリ**: APIレベル30以降（Android 11以降）ではQUERY_ALL_PACKAGESが必要
+
+## セキュリティに関する考慮事項
+
+- 使用統計権限はセンシティブであり、ユーザーの同意が必要
+- 使用データを収集する際のユーザープライバシーを考慮
+- 適切なデータ処理とストレージプラクティスを実装
+- 使用データ収集のためのGoogle Playポリシーに従う
+
+## ドキュメント
+
+詳細な実装ガイドと高度な使用パターンについては、[完全なドキュメント](/docs/plugins/android-usagestatsmanager/getting-started/)をご確認ください。

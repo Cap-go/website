@@ -1,0 +1,105 @@
+---
+title: 开始使用
+locale: zh
+description: 学习如何安装和使用 Native Market 插件，从您的 Capacitor 应用将用户重定向到 Google Play Store 或 Apple App Store。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+导入插件并使用其方法将用户重定向到应用商店：
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+// 打开应用商店列表
+const openAppStore = async () => {
+  await NativeMarket.openStoreListing({
+    appId: 'com.example.app' // 您的应用的 bundle ID
+  });
+};
+
+// 请求应用评价
+const requestReview = async () => {
+  await NativeMarket.requestReview();
+};
+
+// 打开应用商店搜索
+const searchInStore = async () => {
+  await NativeMarket.search({
+    terms: 'fitness app' // 搜索词
+  });
+};
+```
+
+## API 参考
+
+### openStoreListing(options)
+
+为指定应用打开应用商店列表。
+
+```typescript
+interface OpenStoreListingOptions {
+  appId: string; // iOS 上的 Bundle ID，Android 上的包名
+}
+```
+
+### requestReview()
+
+请求用户进行应用内评价。在 iOS 10.3+ 上，这会显示评分对话框而不离开应用。
+
+### search(options)
+
+使用搜索结果打开应用商店。
+
+```typescript
+interface SearchOptions {
+  terms: string; // 要使用的搜索词
+}
+```
+
+## 平台说明
+
+### iOS
+- 在 iOS 10.3+ 上使用 `SKStoreReviewController` 进行应用内评价
+- 在旧版本上回退到打开 App Store
+
+### Android
+- 打开 Google Play Store
+- 在可用时使用应用内评价 API
+
+## 示例
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+import { Capacitor } from '@capacitor/core';
+
+export class AppService {
+  async rateApp() {
+    try {
+      // 首先尝试应用内评价
+      await NativeMarket.requestReview();
+    } catch (error) {
+      // 回退到打开商店列表
+      const platform = Capacitor.getPlatform();
+      const appId = platform === 'ios'
+        ? 'id123456789' // 您的 iOS 应用 ID
+        : 'com.example.app'; // 您的 Android 包名
+
+      await NativeMarket.openStoreListing({ appId });
+    }
+  }
+}

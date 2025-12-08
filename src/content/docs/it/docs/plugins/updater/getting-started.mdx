@@ -1,0 +1,327 @@
+---
+title: Guida Introduttiva
+locale: it
+description: Guida rapida per integrare aggiornamenti live nella tua app Capacitor con il plugin Updater.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installazione
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-updater
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-updater
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-updater
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-updater
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Avvio Rapido
+
+Per la maggior parte degli utenti, consigliamo di seguire la [guida Quickstart principale](/docs/getting-started/quickstart/) che copre sia l'installazione del plugin che l'integrazione con Capgo cloud.
+
+Questa guida introduttiva si concentra sui dettagli tecnici del plugin per utenti avanzati che vogliono comprendere i meccanismi sottostanti o implementare aggiornamenti self-hosted.
+
+## Panoramica
+
+Il plugin Capacitor Updater consente aggiornamenti over-the-air (OTA) per le tue applicazioni Capacitor. Questo ti permette di inviare aggiornamenti alla tua app senza passare attraverso le revisioni degli app store.
+
+## Come Funziona
+
+1. **Download del Bundle**: Il plugin scarica i bundle di aggiornamento (file ZIP contenenti le tue risorse web)
+2. **Estrazione**: I bundle vengono estratti nella memoria del dispositivo
+3. **Hot Reload**: L'app passa al nuovo bundle senza richiedere un riavvio
+4. **Fallback**: Se un aggiornamento fallisce, l'app torna alla versione precedente funzionante
+
+## Modalità di Utilizzo
+
+### 1. Modalità Auto-Update (Consigliata)
+
+Il modo più semplice per utilizzare il plugin con gestione automatica degli aggiornamenti:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Il plugin gestisce tutto automaticamente
+// Configura in capacitor.config.ts
+```
+
+Aggiungi al tuo `capacitor.config.ts`:
+
+```typescript
+{
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      updateUrl: 'https://your-update-server.com/api/updates'
+    }
+  }
+}
+```
+
+### 2. Modalità Manuale
+
+Per un controllo avanzato sul processo di aggiornamento:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Scarica un aggiornamento
+const bundle = await CapacitorUpdater.download({
+  url: 'https://your-server.com/updates/v1.0.1.zip',
+  version: '1.0.1'
+});
+
+// Imposta il bundle (verrà usato al prossimo avvio dell'app)
+await CapacitorUpdater.set({
+  id: bundle.id
+});
+
+// Oppure ricarica immediatamente
+await CapacitorUpdater.reload();
+```
+
+## Configurazione della Piattaforma
+
+### iOS
+
+Nessuna configurazione aggiuntiva richiesta. Il plugin funziona out of the box.
+
+### Android
+
+Nessuna configurazione aggiuntiva richiesta. Il plugin funziona out of the box.
+
+## Utilizzo di Base dell'API
+
+### Scaricare un Aggiornamento
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+const bundle = await CapacitorUpdater.download({
+  url: 'https://example.com/update.zip',
+  version: '1.0.1'
+});
+
+console.log('Bundle scaricato:', bundle.id);
+```
+
+### Impostare il Bundle Attivo
+
+```typescript
+// Imposta il bundle da utilizzare al prossimo avvio dell'app
+await CapacitorUpdater.set({
+  id: bundle.id
+});
+```
+
+### Ricaricare con Nuovo Bundle
+
+```typescript
+// Ricarica l'app immediatamente con il nuovo bundle
+await CapacitorUpdater.reload();
+```
+
+### Elencare i Bundle
+
+```typescript
+const { bundles } = await CapacitorUpdater.list();
+console.log('Bundle disponibili:', bundles);
+```
+
+### Eliminare un Bundle
+
+```typescript
+await CapacitorUpdater.delete({
+  id: 'bundle-id'
+});
+```
+
+### Ottenere il Bundle Corrente
+
+```typescript
+const { bundle } = await CapacitorUpdater.current();
+console.log('Bundle corrente:', bundle.version);
+```
+
+## Event Listeners
+
+Ascolta gli eventi di aggiornamento:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Ascolta il progresso del download
+CapacitorUpdater.addListener('download', (info) => {
+  console.log('Progresso download:', info.percent);
+});
+
+// Ascolta il completamento del download
+CapacitorUpdater.addListener('downloadComplete', (bundle) => {
+  console.log('Download completato:', bundle.version);
+});
+
+// Ascolta gli errori di aggiornamento
+CapacitorUpdater.addListener('updateFailed', (error) => {
+  console.error('Aggiornamento fallito:', error);
+});
+
+// Ascolta gli aggiornamenti riusciti
+CapacitorUpdater.addListener('updateAvailable', (info) => {
+  console.log('Aggiornamento disponibile:', info.version);
+});
+```
+
+## Opzioni di Configurazione
+
+Configura il plugin nel tuo `capacitor.config.ts`:
+
+```typescript
+{
+  plugins: {
+    CapacitorUpdater: {
+      // Impostazioni auto-update
+      autoUpdate: true,
+      updateUrl: 'https://api.example.com/updates',
+
+      // Comportamento di aggiornamento
+      resetWhenUpdate: true,
+      directUpdate: false,
+
+      // Impostazioni versione
+      version: '1.0.0',
+
+      // Sicurezza
+      allowModifyUrl: false,
+
+      // Raccolta statistiche
+      statsUrl: 'https://api.example.com/stats',
+
+      // Channel (per Capgo cloud)
+      defaultChannel: 'production'
+    }
+  }
+}
+```
+
+## Pattern di Integrazione
+
+### Con Capgo Cloud
+
+Il modo più semplice per iniziare:
+
+```typescript
+// Installa la CLI Capgo
+npm install -g @capgo/cli
+
+// Login a Capgo
+npx @capgo/cli login
+
+// Carica il tuo primo bundle
+npx @capgo/cli bundle upload
+
+// Il plugin si aggiorna automaticamente da Capgo cloud
+```
+
+Vedi la [guida Quickstart principale](/docs/getting-started/quickstart/) per i dettagli.
+
+### Aggiornamenti Self-Hosted
+
+Ospita il tuo server di aggiornamento:
+
+```typescript
+// Configura il tuo endpoint di aggiornamento
+{
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      updateUrl: 'https://your-server.com/api/check-update'
+    }
+  }
+}
+```
+
+Il tuo server dovrebbe rispondere:
+
+```json
+{
+  "version": "1.0.1",
+  "url": "https://your-server.com/updates/1.0.1.zip"
+}
+```
+
+Vedi [Modalità Self-Hosted](/docs/plugins/updater/self-hosted/getting-started/) per i dettagli completi.
+
+### Flusso di Aggiornamento Manuale
+
+Controllo completo sugli aggiornamenti:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+async function checkAndUpdate() {
+  // Controlla gli aggiornamenti dal tuo server
+  const response = await fetch('https://api.example.com/check-update');
+  const { version, url } = await response.json();
+
+  // Scarica l'aggiornamento
+  const bundle = await CapacitorUpdater.download({
+    url,
+    version
+  });
+
+  // Notifica che il bundle è pronto
+  await CapacitorUpdater.notifyAppReady();
+
+  // Imposta come prossima versione
+  await CapacitorUpdater.set({ id: bundle.id });
+
+  // Ricarica quando pronto
+  await CapacitorUpdater.reload();
+}
+```
+
+## Migliori Pratiche
+
+- Chiama sempre `notifyAppReady()` quando la tua app si carica con successo
+- Testa accuratamente gli aggiornamenti prima di inviarli in produzione
+- Implementa una corretta gestione degli errori per i fallimenti di rete
+- Usa i numeri di versione in modo coerente
+- Mantieni piccole le dimensioni dei bundle per download più veloci
+- Monitora i tassi di successo degli aggiornamenti
+
+## Prossimi Passi
+
+- [Riferimento API del Plugin](/docs/plugins/updater/api/) - Documentazione API completa
+- [Impostazioni del Plugin](/docs/plugins/updater/settings/) - Tutte le opzioni di configurazione
+- [Eventi](/docs/plugins/updater/events/) - Eventi di aggiornamento disponibili
+- [Modalità Self-Hosted](/docs/plugins/updater/self-hosted/getting-started/) - Esegui il tuo server di aggiornamento
+- [Sviluppo Locale](/docs/plugins/updater/local-dev/getting-started/) - Testa gli aggiornamenti localmente
+- [Debug](/docs/plugins/updater/debugging/) - Guida alla risoluzione dei problemi
+
+## Supporto
+
+- [Problemi Noti](/docs/plugins/updater/known-issues/) - Problemi comuni e soluzioni
+- [GitHub Discussions](https://github.com/Cap-go/capacitor-updater/discussions) - Supporto della community
+- [Discord](https://discord.gg/VnYRvBfgA6) - Chat in tempo reale

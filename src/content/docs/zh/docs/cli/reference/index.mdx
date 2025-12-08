@@ -1,0 +1,73 @@
+---
+title: 概述
+description: Capgo CLI 命令的详细文档
+locale: zh
+sidebar:
+  order: 1
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+Capgo CLI 提供了一组用于管理 Capgo 应用和部署的命令。此参考提供了每个可用命令的详细信息，包括其选项和使用示例。
+
+## 命令
+
+<CardGrid stagger>
+  <a href="/docs/cli/reference/init/">
+    <Card title="init" icon="rocket">
+      初始化新的 Capgo 应用
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/bundle/">
+    <Card title="bundle" icon="seti:html">
+      管理您的应用 bundle
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/build/">
+    <Card title="build" icon="seti:gear">
+      在云端构建原生应用
+    </Card>
+  </a>
+
+  <a href="./login/">
+    <Card title="login" icon="approve-check">
+      使用 Capgo 服务进行身份验证
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/doctor/">
+    <Card title="doctor" icon="approve-check-circle">
+      检查您的 Capgo 设置是否存在潜在问题
+    </Card>
+  </a>
+
+  <a href="./app/">
+    <Card title="app" icon="seti:default">
+      管理您的 Capgo 应用
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/channel/">
+    <Card title="channel" icon="seti:git">
+      管理您的发布频道
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/key/">
+    <Card title="key" icon="seti:lock">
+      管理您的应用签名密钥
+    </Card>
+  </a>
+</CardGrid>
+
+## CI 集成
+
+为了自动化您的工作，我们建议使用 GitHub Actions 将您的更新推送到 Capgo。查看我们的 [GitHub Actions 教程](https://capgo.app/blog/automatic-build-and-release-with-github-actions/)以获取更多信息。
+
+不要忘记使用您的 Capgo API 密钥配置您的 CI 环境变量。
+
+## 演示应用
+
+有关使用 CI 集成的 Capgo 应用的完整示例，请查看我们在 [GitHub 上的演示应用](https://github.com/Cap-go/demo-app/)。

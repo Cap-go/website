@@ -1,0 +1,214 @@
+---
+title: 始め方
+description: iOSデバイスのホームインジケータを制御するために、Capacitor Home Indicatorプラグインをインストールして設定する方法を学びます。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージのインストール**
+   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **プラグインの設定**
+
+   **ホームインジケータを非表示にする:**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // ホームインジケータを非表示
+   await HomeIndicator.hide();
+   ```
+
+   **ホームインジケータを表示する:**
+   ```typescript
+   // ホームインジケータを表示
+   await HomeIndicator.show();
+
+   // 表示状態を確認
+   const { hidden } = await HomeIndicator.isHidden();
+   console.log('Is hidden:', hidden);
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       追加のセットアップは不要です。このプラグインは、ホームインジケータを持つiOSデバイス(iPhone X以降)でのみ動作します。
+     </TabItem>
+     <TabItem label="Android">
+       このプラグインはAndroidデバイスでは効果がありません。AndroidはiOS形式のホームインジケータを持っていないためです。
+     </TabItem>
+   </Tabs>
+
+4. **自動非表示の設定**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // 自動非表示動作を設定
+   await HomeIndicator.setAutoHidden({
+     autoHidden: true // 自動非表示を有効化
+   });
+
+   // ホームインジケータは数秒後に自動的に非表示になり、
+   // ユーザーが画面をタッチすると再表示されます
+   ```
+
+5. **高度な使用方法**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+   import { App } from '@capacitor/app';
+
+   export class ImmersiveMode {
+     private isImmersive = false;
+
+     async enterImmersiveMode() {
+       this.isImmersive = true;
+
+       // ホームインジケータを非表示
+       await HomeIndicator.hide();
+
+       // より良いUXのために自動非表示を有効化
+       await HomeIndicator.setAutoHidden({ autoHidden: true });
+
+       // 完全な没入感のためにステータスバーを非表示
+       // StatusBar.hide(); // @capacitor/status-barを使用している場合
+     }
+
+     async exitImmersiveMode() {
+       this.isImmersive = false;
+
+       // ホームインジケータを表示
+       await HomeIndicator.show();
+
+       // 自動非表示を無効化
+       await HomeIndicator.setAutoHidden({ autoHidden: false });
+
+       // ステータスバーを表示
+       // StatusBar.show(); // @capacitor/status-barを使用している場合
+     }
+
+     async toggleImmersiveMode() {
+       const { hidden } = await HomeIndicator.isHidden();
+
+       if (hidden) {
+         await this.exitImmersiveMode();
+       } else {
+         await this.enterImmersiveMode();
+       }
+     }
+
+     setupAppLifecycle() {
+       // アプリの状態変更を処理
+       App.addListener('appStateChange', async ({ isActive }) => {
+         if (!isActive && this.isImmersive) {
+           // アプリがバックグラウンドに移行、インジケータを表示したい場合があります
+           await HomeIndicator.show();
+         } else if (isActive && this.isImmersive) {
+           // アプリがフォアグラウンドに戻る、没入モードを復元
+           await HomeIndicator.hide();
+         }
+       });
+     }
+   }
+   ```
+</Steps>
+
+## APIリファレンス
+
+### メソッド
+
+#### `hide()`
+ホームインジケータを非表示にします。
+
+**戻り値:** `Promise<void>`
+
+#### `show()`
+ホームインジケータを表示します。
+
+**戻り値:** `Promise<void>`
+
+#### `isHidden()`
+ホームインジケータが現在非表示かどうかを確認します。
+
+**戻り値:** `Promise<{ hidden: boolean }>`
+
+#### `setAutoHidden(options: { autoHidden: boolean })`
+ホームインジケータの自動非表示動作を設定します。
+
+**パラメータ:**
+- `options.autoHidden`: boolean - 自動非表示を有効または無効にする
+
+**戻り値:** `Promise<void>`
+
+### インターフェース
+
+```typescript
+interface AutoHiddenOptions {
+  autoHidden: boolean;
+}
+
+interface HiddenResult {
+  hidden: boolean;
+}
+```
+
+## プラットフォームに関する注意事項
+
+### iOS
+- ホームインジケータを持つデバイス(iPhone X以降)でのみ動作
+- iOS 11.0以降が必要
+- 自動非表示により、インジケータは半透明になり、非アクティブ後に非表示になります
+- ユーザーが下から上にスワイプすると、インジケータが再表示されます
+
+### Android
+- このプラグインはAndroidでは効果がありません
+- Androidは異なるナビゲーションジェスチャ/ボタンを使用します
+
+## 一般的なユースケース
+
+1. **ゲーム**: 気を散らさせるもののないフルスクリーンゲーム
+2. **ビデオプレーヤー**: 没入型のビデオ再生
+3. **フォトビューアー**: フルスクリーンのフォトギャラリー
+4. **プレゼンテーション**: 気を散らさせるもののないプレゼンテーション
+5. **キオスクアプリ**: 公共ディスプレイアプリケーション
+
+## ベストプラクティス
+
+1. **ユーザーコントロール**: 常に没入モードを終了する方法を提供する
+   ```typescript
+   // ジェスチャーまたはボタンを追加して没入モードを切り替える
+   const toggleButton = document.getElementById('toggle-immersive');
+   toggleButton.addEventListener('click', () => {
+     immersiveMode.toggleImmersiveMode();
+   });
+   ```
+
+2. **ゲームの自動非表示**: ゲームでは自動非表示を使用してより良い体験を提供
+   ```typescript
+   // ゲームの場合、自動非表示が最適なバランスを提供
+   await HomeIndicator.setAutoHidden({ autoHidden: true });
+   ```
+
+3. **システムジェスチャーの尊重**: システムナビゲーションを妨げない
+4. **状態の保存**: 没入モードに対するユーザーの設定を記憶する
+
+## トラブルシューティング
+
+**ホームインジケータが非表示にならない:**
+- ホームインジケータを持つデバイス(iPhone X+)であることを確認
+- iOSバージョンが11.0以降であることを確認
+- アプリにフォーカスがあることを確認
+
+**自動非表示が動作しない:**
+- 自動非表示を有効にするにはユーザーインタラクションが必要
+- インジケータは完全に非表示にならず、半透明になります
+
+**インジケータが予期せず再表示される:**
+- これはシステムジェスチャーのための通常のiOS動作です
+- より控えめな動作のために自動非表示を使用してください

@@ -1,0 +1,98 @@
+---
+title: Introduction à l'Intégration Firebase
+locale: fr
+description: Apprenez à intégrer Firebase Authentication avec le plugin Capacitor Social Login pour une solution d'authentification complète.
+sidebar:
+    order: 1
+---
+
+## Aperçu
+
+Ce tutoriel vous guidera dans la configuration de Firebase Authentication avec le plugin Capacitor Social Login. Cette intégration vous permet d'utiliser des fournisseurs de connexion sociale natifs (Google, Apple, Facebook, Twitter) sur les plateformes mobiles tout en tirant parti de Firebase Auth pour l'authentification backend et Firestore pour le stockage de données.
+
+## Ce que vous apprendrez
+
+- Comment configurer Firebase Authentication
+- Comment intégrer le plugin Capacitor Social Login avec Firebase Auth
+- Configuration spécifique à la plateforme pour Android, iOS et Web
+
+## Ce dont vous aurez besoin
+
+Avant de commencer, assurez-vous d'avoir :
+
+1. **Un projet Firebase**
+   - Créez un projet sur [Firebase Console](https://console.firebase.google.com/)
+   - Activez Authentication (Email/Password et connexion Google)
+   - Obtenez vos identifiants de configuration Firebase
+
+2. **Firebase JS SDK**
+   - Installez Firebase dans votre projet :
+     ```bash
+     npm install firebase
+     ```
+
+3. **Un projet Capacitor**
+   - Une application Capacitor existante
+   - Plugin Capacitor Social Login installé :
+     ```bash
+     npm install @capgo/capacitor-social-login
+     npx cap sync
+     ```
+
+## Application Exemple
+
+Un exemple complet et fonctionnel est disponible dans le dépôt :
+
+**Dépôt de code** : [Vous pouvez trouver le dépôt de code ici](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app)
+
+L'application exemple démontre :
+- Authentification par email/mot de passe avec Firebase
+- Intégration de la connexion Google (Android, iOS et Web)
+- Un simple magasin clé-valeur utilisant les collections Firebase Firestore
+- Stockage de données spécifiques à l'utilisateur dans les sous-collections Firestore
+
+
+## Un mot sur l'utilisation du SDK Firebase sur Capacitor
+
+Lors de l'utilisation du SDK Firebase JS sur Capacitor, vous devez savoir que lorsque vous utilisez les méthodes d'authentification, vous devez initialiser l'instance Firebase Auth un peu différemment.
+
+Sur la plateforme web, vous utiliseriez la fonction `getAuth` pour obtenir l'instance Firebase Auth.
+
+```typescript
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+```
+
+Malheureusement, sur Capacitor, cela ne fonctionne pas et provoque le blocage de Firebase auth. Comme indiqué dans [cet article de blog](https://harryherskowitz.com/2021/08/23/firebase-capacitor.html), vous devez utiliser la fonction `initializeAuth` pour initialiser l'instance Firebase Auth.
+Cela ressemble à ceci :
+
+```typescript
+import { initializeApp } from 'firebase/app';
+import { initializeAuth } from 'firebase/auth';
+
+const app = initializeApp(firebaseConfig);
+
+function whichAuth() {
+  let auth;
+  if (Capacitor.isNativePlatform()) {
+    auth = initializeAuth(app, {
+      persistence: indexedDBLocalPersistence,
+    });
+  } else {
+    auth = getAuth(app);
+  }
+  return auth;
+}
+
+export const auth = whichAuth();
+```
+## Prochaines Étapes
+
+Continuez avec les guides de configuration :
+- [Configuration Firebase](./google/general/) - Configurer le projet Firebase
+- [Configuration Android](./google/android/) - Configuration spécifique à Android
+- [Configuration iOS](./google/ios/) - Configuration spécifique à iOS
+- [Configuration Web](./google/web/) - Configuration spécifique au Web

@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-sim"
+locale: es
+description: Inspecciona información de tarjetas SIM como operador, código de país e índice de ranura desde aplicaciones Capacitor.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Recupera metadatos del operador SIM y maneja flujos de permisos con un puente ligero de Capacitor.
+  image:
+    file: ~public/icons/plugins/sim.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/sim/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-sim/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Usa Capgo SIM para consultar datos del operador, índices de ranura y estados de permisos mientras permaneces dentro de Capacitor.
+
+<CardGrid stagger>
+  <Card title="Soporte Multi-SIM" icon="rocket">
+    Enumera cada SIM instalada junto con índices de ranura e IDs de suscripción.
+  </Card>
+  <Card title="Ayudantes de permisos" icon="approve-check">
+    Verifica y solicita el permiso de telefonía requerido en Android.
+  </Card>
+  <Card title="Esquema consistente" icon="star">
+    Trabaja con campos de operador normalizados como MCC, MNC, país ISO y números de teléfono.
+  </Card>
+  <Card title="Consciente de iOS" icon="pencil">
+    Maneja las particularidades de la plataforma como datos limitados del operador en iOS 16.4+.
+  </Card>
+</CardGrid>
+
+Obtén la guía de inicio para integrar patrones de permisos y consumo.

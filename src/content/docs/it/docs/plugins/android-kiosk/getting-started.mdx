@@ -1,0 +1,336 @@
+---
+title: Iniziare
+description: Scopri come installare e utilizzare il plugin Android Kiosk per bloccare il tuo dispositivo Android in modalità kiosk nella tua app Capacitor.
+sidebar:
+  order: 2
+locale: it
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Supporto Piattaforme
+
+Questo plugin è **solo per Android**. Per la funzionalità di modalità kiosk su iOS, utilizza la funzione integrata del dispositivo [Guided Access](https://support.apple.com/en-us/HT202612).
+
+## Funzionalità
+
+- **Modalità Kiosk**: Nascondi l'interfaccia di sistema ed entra in modalità schermo intero immersiva
+- **Integrazione Launcher**: Imposta la tua app come launcher/home app del dispositivo
+- **Controllo Tasti Hardware**: Blocca o consenti specifici pulsanti hardware
+- **Rilevamento Stato**: Verifica se la modalità kiosk è attiva o se l'app è impostata come launcher
+- **Android 6.0+**: Supporta Android API 23 fino ad Android 15 (API 35)
+
+## Utilizzo Base
+
+### Entra ed Esci dalla Modalità Kiosk
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+// Enter kiosk mode
+await CapacitorAndroidKiosk.enterKioskMode();
+
+// Exit kiosk mode
+await CapacitorAndroidKiosk.exitKioskMode();
+
+// Check if in kiosk mode
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+console.log('Kiosk mode active:', isInKioskMode);
+```
+
+### Funzionalità Launcher
+
+Per la funzionalità completa della modalità kiosk, devi impostare la tua app come launcher del dispositivo:
+
+```typescript
+// Open home screen settings for user to select your app as launcher
+await CapacitorAndroidKiosk.setAsLauncher();
+
+// Check if app is set as launcher
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+console.log('App is launcher:', isLauncher);
+```
+
+### Controllo Tasti Hardware
+
+Controlla quali pulsanti hardware possono funzionare in modalità kiosk:
+
+```typescript
+// Allow only volume keys
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false
+});
+
+// Block all keys (default)
+await CapacitorAndroidKiosk.setAllowedKeys({});
+```
+
+## Esempio Completo
+
+```typescript
+async function setupKioskMode() {
+  try {
+    // Check if already set as launcher
+    const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+
+    if (!isLauncher) {
+      // Prompt user to set as launcher
+      await CapacitorAndroidKiosk.setAsLauncher();
+      alert('Please select this app as your Home app');
+      return;
+    }
+
+    // Configure allowed keys
+    await CapacitorAndroidKiosk.setAllowedKeys({
+      volumeUp: true,
+      volumeDown: true,
+      back: false,
+      home: false,
+      recent: false,
+      power: false
+    });
+
+    // Enter kiosk mode
+    await CapacitorAndroidKiosk.enterKioskMode();
+    console.log('Kiosk mode activated');
+
+  } catch (error) {
+    console.error('Failed to setup kiosk mode:', error);
+  }
+}
+```
+
+## Riferimento API
+
+### isInKioskMode()
+
+Verifica se l'app è attualmente in esecuzione in modalità kiosk.
+
+```typescript
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+```
+
+**Restituisce:**
+- `isInKioskMode` (boolean): Se la modalità kiosk è attualmente attiva
+
+---
+
+### isSetAsLauncher()
+
+Verifica se l'app è impostata come launcher del dispositivo (home app).
+
+```typescript
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+```
+
+**Restituisce:**
+- `isLauncher` (boolean): Se l'app è impostata come launcher del dispositivo
+
+---
+
+### enterKioskMode()
+
+Entra in modalità kiosk, nascondendo l'interfaccia di sistema e bloccando i pulsanti hardware. L'app deve essere impostata come launcher del dispositivo perché funzioni efficacemente.
+
+```typescript
+await CapacitorAndroidKiosk.enterKioskMode();
+```
+
+---
+
+### exitKioskMode()
+
+Esce dalla modalità kiosk, ripristinando l'interfaccia di sistema normale e la funzionalità dei pulsanti hardware.
+
+```typescript
+await CapacitorAndroidKiosk.exitKioskMode();
+```
+
+---
+
+### setAsLauncher()
+
+Apre le impostazioni della schermata home del dispositivo per consentire all'utente di impostare questa app come launcher. Questo è necessario per la funzionalità completa della modalità kiosk.
+
+```typescript
+await CapacitorAndroidKiosk.setAsLauncher();
+```
+
+---
+
+### setAllowedKeys(options)
+
+Imposta quali tasti hardware possono funzionare in modalità kiosk. Per impostazione predefinita, tutti i tasti hardware sono bloccati in modalità kiosk.
+
+```typescript
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false,
+  power: false,
+  camera: false,
+  menu: false
+});
+```
+
+**Parametri:**
+- `volumeUp` (boolean, opzionale): Consenti pulsante volume su (predefinito: false)
+- `volumeDown` (boolean, opzionale): Consenti pulsante volume giù (predefinito: false)
+- `back` (boolean, opzionale): Consenti pulsante indietro (predefinito: false)
+- `home` (boolean, opzionale): Consenti pulsante home (predefinito: false)
+- `recent` (boolean, opzionale): Consenti pulsante app recenti (predefinito: false)
+- `power` (boolean, opzionale): Consenti pulsante di accensione (predefinito: false)
+- `camera` (boolean, opzionale): Consenti pulsante fotocamera se presente (predefinito: false)
+- `menu` (boolean, opzionale): Consenti pulsante menu se presente (predefinito: false)
+
+---
+
+### getPluginVersion()
+
+Ottieni la versione del plugin Capacitor nativo.
+
+```typescript
+const { version } = await CapacitorAndroidKiosk.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+**Restituisce:**
+- `version` (string): Il numero di versione del plugin
+
+## Configurazione Android
+
+### 1. Configurazione MainActivity
+
+Per abilitare il blocco completo dei tasti hardware, devi sovrascrivere `dispatchKeyEvent` nella tua `MainActivity.java`:
+
+```java
+import android.view.KeyEvent;
+import ee.forgr.plugin.android_kiosk.CapacitorAndroidKioskPlugin;
+
+public class MainActivity extends BridgeActivity {
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // Get the kiosk plugin
+        CapacitorAndroidKioskPlugin kioskPlugin = (CapacitorAndroidKioskPlugin)
+            this.getBridge().getPlugin("CapacitorAndroidKiosk").getInstance();
+
+        if (kioskPlugin != null && kioskPlugin.shouldBlockKey(event.getKeyCode())) {
+            return true; // Block the key
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Don't call super.onBackPressed() to disable back button
+        // Or call the plugin's handleOnBackPressed
+    }
+}
+```
+
+### 2. AndroidManifest.xml
+
+Aggiungi l'intent filter del launcher per rendere la tua app selezionabile come launcher:
+
+```xml
+<activity
+    android:name=".MainActivity"
+    ...>
+
+    <!-- Existing intent filter -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <!-- Add this to make app selectable as launcher -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+```
+
+## Note Importanti
+
+1. **Requisito Launcher**: Per la funzionalità completa della modalità kiosk (blocco del pulsante home, prevenzione del cambio di app), la tua app deve essere impostata come launcher del dispositivo.
+
+2. **Test**: Durante i test, puoi uscire dalla modalità kiosk programmaticamente o impostando un'altra app come launcher.
+
+3. **Versioni Android**: Il plugin utilizza API Android moderne per Android 11+ e ricorre a metodi più vecchi per compatibilità con Android 6.0+.
+
+4. **Sicurezza**: Questo plugin è progettato per applicazioni kiosk legittime. Assicurati di fornire agli utenti un modo per uscire dalla modalità kiosk.
+
+5. **Batteria**: La modalità kiosk mantiene lo schermo acceso. Considera di implementare il tuo timeout dello schermo o la gestione della luminosità.
+
+## Alternativa iOS
+
+Per dispositivi iOS, usa la funzione integrata [Guided Access](https://support.apple.com/en-us/HT202612):
+
+1. Vai su Impostazioni > Accessibilità > Accesso Guidato
+2. Attiva Accesso Guidato
+3. Imposta un codice
+4. Apri la tua app
+5. Premi tre volte il pulsante laterale
+6. Regola le impostazioni e avvia Accesso Guidato
+
+## Migliori Pratiche
+
+1. **Verifica prima lo stato del launcher**
+   ```typescript
+   const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+   if (!isLauncher) {
+     // Prompt user to set as launcher first
+     await CapacitorAndroidKiosk.setAsLauncher();
+   }
+   ```
+
+2. **Fornisci un meccanismo di uscita**
+   ```typescript
+   // Allow specific key combination to exit
+   // Or implement a secret gesture/pattern
+   async function exitKioskWithConfirmation() {
+     const confirmed = confirm('Exit kiosk mode?');
+     if (confirmed) {
+       await CapacitorAndroidKiosk.exitKioskMode();
+     }
+   }
+   ```
+
+3. **Gestisci il ciclo di vita dell'app**
+   ```typescript
+   // Re-enter kiosk mode when app resumes
+   window.addEventListener('resume', async () => {
+     const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+     if (!isInKioskMode) {
+       await CapacitorAndroidKiosk.enterKioskMode();
+     }
+   });
+   ```
+
+4. **Gestione degli errori**
+   ```typescript
+   try {
+     await CapacitorAndroidKiosk.enterKioskMode();
+   } catch (error) {
+     console.error('Failed to enter kiosk mode:', error);
+     // Notify user and provide alternative
+   }
+   ```

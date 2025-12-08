@@ -1,0 +1,172 @@
+---
+title: Memulai
+locale: id
+description: Panduan instalasi dan penggunaan untuk @capgo/capacitor-downloader
+sidebar:
+  order: 2
+  label: "Memulai"
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-downloader
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Contoh Penggunaan
+
+```typescript
+import { CapacitorDownloader } from '@capgo/capacitor-downloader';
+
+// Start a download
+const downloadId = 'my-download-001';
+await CapacitorDownloader.download({
+  id: downloadId,
+  url: 'https://example.com/large-file.zip',
+  destination: '/downloads/large-file.zip',
+  headers: {
+    'Authorization': 'Bearer token123'
+  },
+  network: 'wifi-only',
+  priority: 'high'
+});
+
+// Listen for progress updates
+CapacitorDownloader.addListener('downloadProgress', (data) => {
+  console.log(`Download ${data.id}: ${data.progress}% complete`);
+  console.log(`Downloaded: ${data.bytesDownloaded}/${data.totalBytes} bytes`);
+});
+
+// Handle completion
+CapacitorDownloader.addListener('downloadCompleted', (data) => {
+  console.log(`Download completed: ${data.id}`);
+  console.log(`File saved to: ${data.path}`);
+});
+
+// Handle errors
+CapacitorDownloader.addListener('downloadFailed', (error) => {
+  console.error(`Download failed: ${error.id}`, error.message);
+});
+
+// Pause a download
+await CapacitorDownloader.pause(downloadId);
+
+// Resume the download
+await CapacitorDownloader.resume(downloadId);
+
+// Check download status
+const status = await CapacitorDownloader.checkStatus(downloadId);
+console.log('Download status:', status);
+
+// Stop the download
+await CapacitorDownloader.stop(downloadId);
+```
+
+## Metode API Inti
+
+### Manajemen Download
+- `download(options)` - Mulai download file baru
+- `pause(id)` - Jeda download yang sedang berlangsung
+- `resume(id)` - Lanjutkan download yang dijeda
+- `stop(id)` - Hentikan dan batalkan download
+- `checkStatus(id)` - Dapatkan status download saat ini
+
+### Operasi File
+- `getFileInfo(path)` - Ambil informasi dan metadata file
+
+## Konfigurasi Download
+
+```typescript
+interface DownloadOptions {
+  id: string;                    // Unique download identifier
+  url: string;                   // Download source URL
+  destination: string;           // Local save path
+  headers?: Record<string, string>; // Custom HTTP headers
+  network?: 'cellular' | 'wifi-only'; // Network restrictions
+  priority?: 'high' | 'normal' | 'low'; // Download priority
+}
+```
+
+## Event Listener
+
+Plugin menyediakan penanganan event komprehensif:
+
+- `downloadProgress` - Lacak progress download real-time
+- `downloadCompleted` - Tangani penyelesaian download sukses
+- `downloadFailed` - Tangani error dan kegagalan download
+
+## Konfigurasi Network
+
+### Download WiFi Saja
+```typescript
+await CapacitorDownloader.download({
+  id: 'large-file',
+  url: 'https://example.com/video.mp4',
+  destination: '/downloads/video.mp4',
+  network: 'wifi-only' // Restricts to WiFi networks only
+});
+```
+
+### Manajemen Prioritas
+```typescript
+// High priority download
+await CapacitorDownloader.download({
+  id: 'urgent-update',
+  url: 'https://example.com/update.zip',
+  destination: '/downloads/update.zip',
+  priority: 'high'
+});
+```
+
+## Status Download
+
+Download dapat dalam berbagai status:
+- **Pending**: Antri untuk download
+- **Running**: Sedang mendownload
+- **Paused**: Dihentikan sementara
+- **Completed**: Berhasil selesai
+- **Failed**: Mengalami error
+- **Stopped**: Dibatalkan secara manual
+
+## Informasi File
+
+```typescript
+// Get file details
+const fileInfo = await CapacitorDownloader.getFileInfo('/downloads/my-file.pdf');
+console.log('File size:', fileInfo.size);
+console.log('Last modified:', fileInfo.lastModified);
+console.log('MIME type:', fileInfo.mimeType);
+```
+
+## Praktik Terbaik
+
+- Gunakan ID download unik untuk menghindari konflik
+- Implementasikan penanganan error yang tepat untuk kegagalan jaringan
+- Pertimbangkan ruang penyimpanan sebelum memulai download besar
+- Gunakan mode WiFi saja untuk file besar untuk menghemat data seluler
+- Bersihkan download yang selesai untuk mengelola penyimpanan

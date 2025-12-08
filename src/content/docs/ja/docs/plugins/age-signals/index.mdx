@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-android-age-signals"
+description: Google Play Age Signals APIラッパー - 監視アカウント、保護者の承認、および認証済みユーザーを検出します。
+locale: ja
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Google Play Age Signalsにアクセスして、監視アカウントを検出し、ユーザーの年齢を確認し、Androidアプリで児童安全規制に準拠します。
+  image:
+    file: ~public/icons/plugins/android-age-signals.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/age-signals/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-age-signals/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="監視アカウント" icon="setting">
+    保護者が管理する監視されたGoogleアカウントを持つユーザーを検出
+  </Card>
+  <Card title="年齢確認" icon="approve-check-circle">
+    Googleの年齢確認で18歳以上の認証済みユーザーを識別
+  </Card>
+  <Card title="コンプライアンス" icon="approve-check">
+    COPPAやGDPRなどの児童安全規制に準拠
+  </Card>
+  <Card title="保護者の承認" icon="star">
+    保留中の承認と保護者の同意ステータスを追跡
+  </Card>
+  <Card title="Android専用" icon="puzzle">
+    Google Play Servicesを使用したAndroid専用設計
+  </Card>
+  <Card title="シンプルなAPI" icon="rocket">
+    単一のメソッド呼び出しですべての年齢シグナルを取得
+  </Card>
+</CardGrid>

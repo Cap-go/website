@@ -1,0 +1,108 @@
+---
+title: "@capgo/capacitor-twilio-voice"
+locale: zh
+description: Twilio Voice API 集成插件，适用于具有 VoIP 通话、通话管理和音频处理功能的 Capacitor 应用。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 集成 Twilio Voice API 实现高质量 VoIP 通话，具有通话管理、音频控制和实时通信功能。
+  image:
+    file: ~public/icons/plugins/twilio-voice.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/twilio-voice/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-twilio-voice/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概述
+
+Capacitor Twilio Voice 插件使用 Twilio 的 Voice API 在 iOS 和 Android 应用中启用高质量 VoIP 通话功能。该插件提供全面的通话管理、身份验证和音频控制，用于创建专业的通话体验。
+
+<CardGrid stagger>
+  <Card title="VoIP 通话" icon="rocket">
+    使用 Twilio Voice API 通过互联网进行高质量语音通话 📞
+  </Card>
+  <Card title="通话管理" icon="setting">
+    拨打、接受、拒绝和结束通话，完全控制生命周期 🎛️
+  </Card>
+  <Card title="音频控制" icon="comment">
+    静音、扬声器切换和音频路由选项 🎤
+  </Card>
+  <Card title="平台支持" icon="approve-check">
+    原生 iOS 和 Android 实现，支持推送通知 📱
+  </Card>
+</CardGrid>
+
+## 安装
+
+```bash
+npm install @capgo/capacitor-twilio-voice
+npx cap sync
+```
+
+## 核心 API 方法
+
+### 身份验证
+- `login(options: { accessToken: string })` - 使用访问令牌对 Twilio 进行身份验证
+- `logout()` - 结束用户会话并清除通话状态
+- `isLoggedIn()` - 检查当前身份验证状态
+
+### 通话管理
+- `makeCall(options: { to: string })` - 向指定号码发起呼出通话
+- `acceptCall(options: { callSid: string })` - 接受来电
+- `rejectCall(options: { callSid: string })` - 拒绝来电
+- `endCall(options?: { callSid?: string })` - 终止活动通话
+- `muteCall(options: { muted: boolean, callSid?: string })` - 静音/取消静音通话音频
+- `setSpeaker(options: { enabled: boolean })` - 切换扬声器输出
+
+## 事件监听器
+
+该插件为以下内容提供全面的事件处理：
+- 连接状态的注册事件
+- 通话状态变化（已连接、已断开、响铃中）
+- 质量警告和连接问题
+- 来电通知
+
+## 平台配置
+
+### iOS 设置
+- 需要 PushKit 集成以接收来电
+- 用于生产使用的证书配置
+- Info.plist 中的麦克风权限
+
+### Android 设置
+- 用于推送通知的 Firebase 设置
+- AndroidManifest.xml 中的麦克风权限
+- 后台服务配置
+
+## 快速入门示例
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+// 使用 Twilio 进行身份验证
+await TwilioVoice.login({ accessToken: 'your-twilio-access-token' });
+
+// 拨打电话
+await TwilioVoice.makeCall({ to: '+1234567890' });
+
+// 监听通话事件
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('通话已连接：', data);
+});
+```
+
+## 文档
+
+查看[完整文档](/docs/plugins/twilio-voice/getting-started/)以获取详细的设置说明、高级配置和集成示例。

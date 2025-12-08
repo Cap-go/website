@@ -1,0 +1,478 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何在 Capacitor 应用中安装和使用 Native Audio 插件进行高性能音频播放。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/native-audio" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **添加音频文件**
+   将音频文件放在适当的平台文件夹中：
+   - **iOS**：`ios/App/App/sounds/`
+   - **Android**：`android/app/src/main/res/raw/`
+</Steps>
+
+## 使用方法
+
+在播放前导入插件并预加载音频文件：
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+// 预加载音频文件
+const preloadAudio = async () => {
+  // 简单预加载短音效
+  await NativeAudio.preload({
+    assetId: 'click',
+    assetPath: 'sounds/click.mp3',
+    audioChannelNum: 1,
+    isUrl: false
+  });
+
+  // 复杂预加载音乐/较长音频
+  await NativeAudio.preloadComplex({
+    assetId: 'background-music',
+    assetPath: 'sounds/background.mp3',
+    audioChannelNum: 1,
+    volume: 0.5,
+    delay: 0,
+    isUrl: false
+  });
+};
+
+// 播放音频
+const playSound = async () => {
+  await NativeAudio.play({
+    assetId: 'click'
+  });
+};
+
+// 使用选项播放
+const playMusic = async () => {
+  await NativeAudio.play({
+    assetId: 'background-music',
+    time: 0 // 从头开始
+  });
+};
+
+// 循环播放音频
+const loopMusic = async () => {
+  await NativeAudio.loop({
+    assetId: 'background-music'
+  });
+};
+
+// 停止音频
+const stopMusic = async () => {
+  await NativeAudio.stop({
+    assetId: 'background-music'
+  });
+};
+
+// 完成后卸载
+const cleanup = async () => {
+  await NativeAudio.unload({
+    assetId: 'click'
+  });
+  await NativeAudio.unload({
+    assetId: 'background-music'
+  });
+};
+```
+
+## API 参考
+
+### preload(options)
+
+预加载音频文件以进行简单播放（最适合短音效）。
+
+```typescript
+interface PreloadOptions {
+  assetId: string;
+  assetPath: string;
+  audioChannelNum?: number;
+  isUrl?: boolean;
+}
+
+await NativeAudio.preload({
+  assetId: 'sound-effect',
+  assetPath: 'sounds/effect.mp3',
+  audioChannelNum: 1,
+  isUrl: false
+});
+```
+
+### preloadComplex(options)
+
+使用高级选项预加载音频（最适合音乐/背景音频）。
+
+```typescript
+interface PreloadComplexOptions {
+  assetId: string;
+  assetPath: string;
+  volume?: number; // 0.0 到 1.0
+  audioChannelNum?: number;
+  delay?: number;
+  isUrl?: boolean;
+  fadeDuration?: number;
+}
+
+await NativeAudio.preloadComplex({
+  assetId: 'theme-song',
+  assetPath: 'sounds/theme.mp3',
+  volume: 0.7,
+  audioChannelNum: 2,
+  isUrl: false
+});
+```
+
+### play(options)
+
+播放预加载的音频文件。
+
+```typescript
+interface PlayOptions {
+  assetId: string;
+  time?: number; // 开始时间（秒）
+}
+
+await NativeAudio.play({
+  assetId: 'sound-effect',
+  time: 0
+});
+```
+
+### loop(options)
+
+连续循环播放预加载的音频文件。
+
+```typescript
+await NativeAudio.loop({
+  assetId: 'background-music'
+});
+```
+
+### stop(options)
+
+停止播放音频文件。
+
+```typescript
+await NativeAudio.stop({
+  assetId: 'background-music'
+});
+```
+
+### pause(options)
+
+暂停音频播放。
+
+```typescript
+await NativeAudio.pause({
+  assetId: 'background-music'
+});
+```
+
+### resume(options)
+
+恢复暂停的音频。
+
+```typescript
+await NativeAudio.resume({
+  assetId: 'background-music'
+});
+```
+
+### setVolume(options)
+
+设置音频资源的音量。
+
+```typescript
+interface SetVolumeOptions {
+  assetId: string;
+  volume: number; // 0.0 到 1.0
+}
+
+await NativeAudio.setVolume({
+  assetId: 'background-music',
+  volume: 0.3
+});
+```
+
+### getDuration(options)
+
+获取音频文件的时长（秒）。
+
+```typescript
+const { duration } = await NativeAudio.getDuration({
+  assetId: 'background-music'
+});
+console.log(`Duration: ${duration} seconds`);
+```
+
+### getCurrentTime(options)
+
+获取当前播放时间（秒）。
+
+```typescript
+const { currentTime } = await NativeAudio.getCurrentTime({
+  assetId: 'background-music'
+});
+console.log(`Current time: ${currentTime} seconds`);
+```
+
+### isPlaying(options)
+
+检查音频当前是否正在播放。
+
+```typescript
+const { isPlaying } = await NativeAudio.isPlaying({
+  assetId: 'background-music'
+});
+console.log(`Is playing: ${isPlaying}`);
+```
+
+### unload(options)
+
+从内存中卸载音频文件。
+
+```typescript
+await NativeAudio.unload({
+  assetId: 'sound-effect'
+});
+```
+
+## 高级用法
+
+### 声音管理器类
+
+```typescript
+import { NativeAudio } from '@capgo/native-audio';
+
+export class SoundManager {
+  private sounds: Map<string, boolean> = new Map();
+  private volume = 1.0;
+
+  async init() {
+    // 预加载所有音效
+    await this.preloadSound('click', 'sounds/click.mp3');
+    await this.preloadSound('success', 'sounds/success.mp3');
+    await this.preloadSound('error', 'sounds/error.mp3');
+
+    // 预加载音乐
+    await this.preloadMusic('background', 'sounds/background.mp3', 0.5);
+  }
+
+  private async preloadSound(id: string, path: string) {
+    try {
+      await NativeAudio.preload({
+        assetId: id,
+        assetPath: path,
+        audioChannelNum: 1,
+        isUrl: false
+      });
+      this.sounds.set(id, true);
+    } catch (error) {
+      console.error(`Failed to preload ${id}:`, error);
+    }
+  }
+
+  private async preloadMusic(id: string, path: string, volume: number) {
+    try {
+      await NativeAudio.preloadComplex({
+        assetId: id,
+        assetPath: path,
+        volume,
+        audioChannelNum: 2,
+        isUrl: false
+      });
+      this.sounds.set(id, true);
+    } catch (error) {
+      console.error(`Failed to preload ${id}:`, error);
+    }
+  }
+
+  async playSound(id: string) {
+    if (!this.sounds.has(id)) {
+      console.warn(`Sound ${id} not preloaded`);
+      return;
+    }
+
+    try {
+      await NativeAudio.play({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to play ${id}:`, error);
+    }
+  }
+
+  async playMusic(id: string) {
+    if (!this.sounds.has(id)) return;
+
+    try {
+      await NativeAudio.loop({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to play music ${id}:`, error);
+    }
+  }
+
+  async stopMusic(id: string) {
+    try {
+      await NativeAudio.stop({ assetId: id });
+    } catch (error) {
+      console.error(`Failed to stop ${id}:`, error);
+    }
+  }
+
+  async setMasterVolume(volume: number) {
+    this.volume = Math.max(0, Math.min(1, volume));
+
+    // 更新所有已加载的声音
+    for (const [id] of this.sounds) {
+      await NativeAudio.setVolume({
+        assetId: id,
+        volume: this.volume
+      });
+    }
+  }
+
+  async cleanup() {
+    for (const [id] of this.sounds) {
+      await NativeAudio.unload({ assetId: id });
+    }
+    this.sounds.clear();
+  }
+}
+```
+
+### 从 URL 加载
+
+```typescript
+// 从 URL 加载音频
+await NativeAudio.preloadComplex({
+  assetId: 'remote-audio',
+  assetPath: 'https://example.com/audio.mp3',
+  isUrl: true,
+  volume: 0.8
+});
+```
+
+### 淡入/淡出效果
+
+```typescript
+const fadeIn = async (assetId: string, duration: number) => {
+  const steps = 20;
+  const stepDuration = duration / steps;
+
+  await NativeAudio.setVolume({ assetId, volume: 0 });
+  await NativeAudio.play({ assetId });
+
+  for (let i = 1; i <= steps; i++) {
+    await new Promise(resolve => setTimeout(resolve, stepDuration));
+    await NativeAudio.setVolume({
+      assetId,
+      volume: i / steps
+    });
+  }
+};
+
+const fadeOut = async (assetId: string, duration: number) => {
+  const steps = 20;
+  const stepDuration = duration / steps;
+
+  for (let i = steps; i >= 0; i--) {
+    await NativeAudio.setVolume({
+      assetId,
+      volume: i / steps
+    });
+    await new Promise(resolve => setTimeout(resolve, stepDuration));
+  }
+
+  await NativeAudio.stop({ assetId });
+};
+```
+
+## 最佳实践
+
+1. **在应用初始化期间预加载**
+   ```typescript
+   import { App } from '@capacitor/app';
+
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       await soundManager.init();
+     }
+   });
+   ```
+
+2. **优雅地处理错误**
+   ```typescript
+   try {
+     await NativeAudio.play({ assetId: 'sound' });
+   } catch (error) {
+     console.log('Audio playback failed, continuing silently');
+   }
+   ```
+
+3. **卸载未使用的音频**
+   ```typescript
+   // 离开屏幕时卸载声音
+   ionViewWillLeave() {
+     this.unloadScreenSounds();
+   }
+   ```
+
+4. **使用适当的预加载方法**
+   - `preload()` 用于短音效（< 5 秒）
+   - `preloadComplex()` 用于音乐和较长音频
+
+## 平台说明
+
+### iOS
+- 支持 AAC、MP3、WAV 和其他 Core Audio 格式
+- 对复杂音频使用 AVAudioPlayer
+- 对简单音频使用系统声音服务
+- 通过适当配置支持后台音频
+
+### Android
+- 支持 MP3、OGG、WAV 格式
+- 对简单音频使用 SoundPool
+- 对复杂音频使用 MediaPlayer
+- 后台播放可能需要 WAKE_LOCK 权限
+
+### 文件放置
+
+#### iOS
+将文件放在 `ios/App/App/sounds/` 中，或在 Xcode 中创建文件夹引用。
+
+#### Android
+将文件放在 `android/app/src/main/res/raw/` 中。
+注意：文件名必须为小写，不含特殊字符。
+
+## 常见问题
+
+1. **音频无法播放**
+   - 确保文件在正确的目录中
+   - 检查文件格式兼容性
+   - 验证 assetId 完全匹配
+
+2. **播放延迟**
+   - 对音效使用 `preload()`
+   - 在需要播放之前预加载
+
+3. **内存问题**
+   - 不需要时卸载音频文件
+   - 不要预加载太多大文件
+
+4. **后台播放**
+   - 在 iOS 上配置后台音频功能
+   - 在 Android 上处理音频焦点

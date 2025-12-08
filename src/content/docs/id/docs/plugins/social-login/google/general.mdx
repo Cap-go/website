@@ -1,0 +1,235 @@
+---
+title: Pengaturan Google Login
+locale: id
+description: Panduan ini memberikan gambaran komprehensif tentang pengaturan Google Login menggunakan Capacitor, merinci setiap langkah untuk memastikan proses integrasi yang lancar dan mengatasi tantangan potensial yang mungkin Anda temui.
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Pendahuluan
+
+Dalam panduan ini, Anda akan mempelajari cara mengatur Google Login dengan Capgo Social Login. Anda akan memerlukan hal berikut untuk mengatur Google Login:
+
+- Akun Google
+
+## Pengaturan umum
+
+:::note
+Langkah ini diperlukan terlepas dari platform mana yang Anda putuskan untuk gunakan.
+:::
+
+Dalam bagian ini, Anda akan mengatur layar login yang ditampilkan oleh Google.
+
+<Steps>
+    1. Silakan buka [console.cloud.google.com](https://console.cloud.google.com/)
+    2. Klik pada pemilih proyek
+        <img src="/social-login-assets/google_cons_project_selector.png" alt="Google Console Project Selector" />
+    3. Jika Anda belum memiliki proyek, silakan **buat proyek baru**.
+        1. Klik pada `New project`
+            <img src="/social-login-assets/google_cons_new_project_btn.png" alt="New Project button in Google Console" />
+        2. Beri nama proyek Anda dan klik `Create`
+            <img src="/social-login-assets/google_cons_name_projec.png" alt="Project naming screen showing name field and Create button" />
+        3. Pastikan bahwa Anda berada di proyek yang benar
+            <img src="/social-login-assets/google_cons_right_proj.png" alt="Project name showing in the selector indicating correct project selection" />
+    4. Mulai mengonfigurasi `OAuth consent screen`
+        1. Klik pada bilah pencarian
+            <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+        2. Cari `OAuth consent screen` dan klik padanya
+            <img src="/social-login-assets/google_cons_search_2.png" alt="Search results showing OAuth consent screen option" />
+        3. Konfigurasikan layar persetujuan
+            :::note
+            Saya akan menganggap bahwa Anda mengembangkan aplikasi yang terbuka untuk publik, jadi saya akan menggunakan jenis pengguna `external`. Silakan pilih jenis pengguna yang paling sesuai untuk Anda DAN klik `create`
+            :::
+
+            Klik pada `create`
+            <img src="/social-login-assets/google_cons_oauth_const_scr.png" alt="OAuth consent screen user type selection with External and Internal options" />
+    5. Isi informasi tentang aplikasi Anda
+            1. Mari kita mulai dengan `App Information`
+                <img src="/social-login-assets/google_cons_app_inf.png" alt="App Information section showing App name and User support email fields" />
+
+                    - Silakan ketik `App Name` Anda
+                        :::caution
+                        **INI AKAN DITAMPILKAN KEPADA PENGGUNA**
+                        :::
+                    - Masukkan `user support email`
+                        :::note
+                        Anda dapat mempelajari lebih lanjut tentang email dukungan [di sini](https://support.google.com/cloud/answer/10311615#user-support-email&zippy=%2Cuser-support-email/)
+                        :::
+                2. Anda **DAPAT** menambahkan logo aplikasi.
+                    <img src="/social-login-assets/google_cons_app_logo.png" alt="App logo upload section in OAuth consent screen" />
+                    :::note
+                    Ini tidak wajib dan saya akan melewati langkah ini
+                    :::
+                3. Anda **SEBAIKNYA** mengonfigurasi `App domain`
+                    <img src="/social-login-assets/google_cons_app_doma.png" alt="App domain configuration section with authorized domains field" />
+                    :::note
+                    Saya tidak akan melakukan itu karena ini hanya demonstrasi sederhana yang **TIDAK** akan dipublikasikan, tetapi saya sangat merekomendasikan mengisi bagian ini.
+                    :::
+
+                4. Anda **HARUS** menyediakan email pengembang
+                    <img src="/social-login-assets/google_cons_dev_cont_inf.png" alt="Developer contact information section with email field" />
+                5. Klik pada `save and continue`
+                        <img src="/social-login-assets/google_cons_cons_sav_cont.png" alt="Save and Continue button at bottom of form" />
+    6. Konfigurasikan scope
+        1. Klik pada `add or remove scopes`
+            <img src="/social-login-assets/google_cons_add_rm_sco.png" alt="Add or remove scopes button in scopes configuration screen" />
+
+        2. Pilih scope berikut dan klik `update`
+            <img src="/social-login-assets/google_cons_update_scope.png" alt="Scope selection dialog with email and profile scopes selected" />
+
+        3. Klik `save and continue`
+            <img src="/social-login-assets/google_cons_scope_save.png" alt="Save and Continue button in scopes screen" />
+    7. Tambahkan pengguna uji
+        1. Klik pada `add users`
+            <img src="/social-login-assets/google_cons_add_test_usr.png" alt="Add users button in test users section" />
+        2. Masukkan email Google Anda, tekan enter, dan klik `add`
+            <img src="/social-login-assets/google_cons_add_test_usr_2.png" alt="Email input field and Add button for test users" />
+        3. Klik `save and continue`
+            <img src="/social-login-assets/google_cons_test_usr_save.png" alt="Save and Continue button in test users screen" />
+    8. Klik `back to dashboard`
+        <img src="/social-login-assets/google_cons_back_to_dahs.png" alt="Back to dashboard button at bottom of completion page" />
+    9. Kirim aplikasi Anda untuk verifikasi
+        :::note
+            Saya sangat merekomendasikan mengirimkan aplikasi Anda untuk verifikasi. Ini di luar cakupan tutorial ini. Anda dapat mempelajari lebih lanjut [di sini](https://support.google.com/cloud/answer/13463073/). Ini tidak diperlukan untuk pengujian lokal, tetapi diperlukan untuk produksi.
+        :::
+</Steps>
+
+
+## Perbedaan antara akses online dan offline
+
+Ada beberapa cara untuk menggunakan Google Login dengan Capacitor. Berikut adalah tabel yang merangkum perbedaan antara keduanya:
+
+|                          | Akses online  | Akses offline  |
+|:------------------------:|:-------------:|:--------------:|
+| Memerlukan backend       | ❌             | ✅              |
+| Token akses jangka lama  | ❌             | ✅              |
+| Pengaturan mudah         | ✅             | ❌              |
+
+:::note
+**Mode offline** berarti bahwa backend Anda dapat mengakses API Google bahkan ketika pengguna tidak aktif menggunakan aplikasi Anda (yaitu, ketika pengguna "offline" dari perspektif aplikasi Anda). Token akses jangka lama memungkinkan fungsionalitas ini dengan mengizinkan backend untuk memanggil API Google atas nama pengguna kapan saja.
+:::
+
+:::caution
+**Mode offline MEMERLUKAN server backend.** Saat menggunakan mode offline, frontend menerima informasi minimal (terutama hanya kode autentikasi server). Tanpa backend untuk menukar kode ini dengan token dan informasi pengguna, mode offline tidak memberikan data yang berguna untuk aplikasi frontend Anda.
+:::
+
+Jika Anda masih tidak tahu mana yang harus Anda pilih, pertimbangkan skenario berikut:
+
+1. Anda ingin pengguna login, segera setelah itu Anda akan mengeluarkan JWT kustom kepadanya. Aplikasi Anda TIDAK akan memanggil API Google
+
+   Dalam kasus ini, pilih akses online.
+
+2. Aplikasi Anda akan memanggil beberapa API Google dari klien, tetapi tidak pernah dari backend
+
+   Dalam kasus ini, pilih akses online
+
+3. Aplikasi Anda akan memanggil beberapa API Google dari backend, tetapi hanya ketika pengguna aktif menggunakan aplikasi
+
+   Dalam kasus ini, pilih akses online
+
+4. Aplikasi Anda akan memeriksa kalender pengguna secara berkala, bahkan ketika dia tidak aktif menggunakan aplikasi
+
+   Dalam kasus ini, pilih akses offline
+
+## Contoh backend untuk akses online
+
+Dalam bagian tutorial ini, saya akan menunjukkan cara memvalidasi pengguna di backend Anda.
+
+Contoh ini akan sangat sederhana dan akan didasarkan pada teknologi berikut:
+
+- [Typescript](https://www.typescriptlang.org/)
+
+- [Hono](https://hono.dev/)
+
+- [Javascript's fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
+
+Anda dapat menemukan kode untuk contoh ini [di sini](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/141c01d93a85240e31a0d488a89df13c842708b1/index.ts#L135-L153)
+
+Seperti yang Anda lihat:
+
+<img src="/social-login-assets/vscode_auth_google.png" alt="VS Code showing Google authentication code that verifies tokens" />
+
+Idenya cukup sederhana. Anda mengirim permintaan `GET` sederhana ke `https://www.googleapis.com/oauth2/v3/tokeninfo` dan ini mengembalikan apakah token valid atau tidak dan jika valid, memberikan Anda email pengguna. Ini juga memberikan Anda beberapa informasi lain tentang token pengguna
+<img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Playground showing token information response with user details" />
+
+Dari sana, Anda dapat mengeluarkan JWT Anda sendiri kepada pengguna atau mengeluarkan semacam cookie sesi. Kemungkinannya tidak terbatas, untuk implementasi autentikasi akhir.
+
+Jika Anda ingin memanggil API Google, saya sangat merekomendasikan untuk melihat [Google's OAuth 2.0 Playground](https://developers.google.com/oauthplayground). Dari sana Anda dapat dengan mudah melihat API apa yang dapat Anda panggil.
+
+## Menggunakan akses offline dengan backend Anda sendiri
+
+Untuk menggunakan akses online, Anda akan memerlukan hal berikut:
+
+- Server HTTP
+
+Dalam contoh ini, saya akan menggunakan teknologi berikut untuk menyediakan akses offline di aplikasi saya:
+
+- [Hono](https://hono.dev/)
+
+- [Hono Zod validator](https://hono.dev/docs/guides/validation#with-zod)
+
+- [Zod](https://zod.dev/)
+
+- [Hono JWT](https://hono.dev/docs/helpers/jwt#jwt-authentication-helper)
+
+- [LowDb](https://www.npmjs.com/package/lowdb) (database sederhana)
+
+Kode untuk contoh ini dapat ditemukan [di sini](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/aac7a8c909f650a8c2cd7f88c97f5f3c594ce9ba/index.ts#L139-L287)
+
+Adapun kode klien, tampilannya seperti ini:
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { GoogleLoginOfflineResponse, SocialLogin } from '@capgo/capacitor-social-login';
+import { usePopoutStore } from '@/popoutStore'; // <-- specific to my app
+
+const baseURL = "[redacted]";
+
+async function fullLogin() {
+  await SocialLogin.initialize({
+    google: {
+      webClientId: '[redacted]',  
+      iOSClientId: '[redacted]',
+      iOSServerClientId: 'The same value as webClientId',
+      mode: 'offline' // <-- important
+    } 
+  })
+  const response = await SocialLogin.login({
+    provider: 'google',
+    options: {
+      forceRefreshToken: true // <-- important
+    }
+  })
+
+  if (response.provider === 'google') {
+    const result = response.result as GoogleLoginOfflineResponse
+    const res = await fetch(`${baseURL}/auth/google_offline`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        serverAuthCode: result.serverAuthCode,
+        platform: Capacitor.getPlatform()
+      }),
+      method: "POST"
+    })
+
+    if (res.status !== 200) {
+      popoutStore.popout("Full google login failed", "check console");
+      return
+    }
+
+    const { jwt } = await res.json();
+    const userinfo = await fetch(`${baseURL}/auth/get_google_user`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    })
+    if (userinfo.status !== 200) {
+      popoutStore.popout("Full google (userinfo) login failed", "check console");
+      return
+    }
+    popoutStore.popout("userinfo res", await userinfo.text());
+  }
+}

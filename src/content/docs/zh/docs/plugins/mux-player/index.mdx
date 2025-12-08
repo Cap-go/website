@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-mux-player"
+locale: zh
+description: 从 Capacitor 应用启动原生 Mux Player SDK，支持签名播放和分析。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 以全屏方式流式传输高质量的 Mux 视频，支持 DRM、分析，以及跨 iOS、Android 和 Web 的一致控件。
+  image:
+    file: ~public/icons/plugins/mux-player.svg
+  actions:
+    - text: 入门指南
+      link: /docs/plugins/mux-player/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mux-player/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+通过在简单的 Capacitor 接口中包装官方 Mux 原生 SDK 来提供优质播放。
+
+<CardGrid stagger>
+  <Card title="原生 SDK 体验" icon="rocket">
+    使用与 Mux 移动 SDK 相同的播放堆栈，支持自适应比特率和 DRM。
+  </Card>
+  <Card title="签名播放" icon="approve-check">
+    为受保护流的安全传输提供播放和 DRM 令牌。
+  </Card>
+  <Card title="统一 API" icon="pencil">
+    使用一个 TypeScript API 触发播放、关闭播放器和监听事件。
+  </Card>
+  <Card title="分析就绪" icon="star">
+    传递环境密钥和播放器名称以自动提供 Mux Data 遥测。
+  </Card>
+</CardGrid>
+
+入门指南介绍了如何连接原生 SDK、处理令牌以及响应播放器事件。

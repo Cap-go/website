@@ -1,0 +1,284 @@
+---
+title: 快速入门
+locale: zh
+description: 学习如何安装和使用 Screen Orientation 插件在 Capacitor 应用中控制和检测设备方向。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-screen-orientation" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **iOS 配置（可选）**
+   要在 iOS 上使用运动传感器检测物理设备方向，请在 `Info.plist` 中添加：
+   ```xml
+   <key>NSMotionUsageDescription</key>
+   <string>此应用使用运动传感器来检测设备方向。</string>
+   ```
+</Steps>
+
+## 基本用法
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+// 获取当前方向
+const current = await ScreenOrientation.orientation();
+console.log('当前方向:', current.type);
+
+// 锁定为横向
+await ScreenOrientation.lock({ orientation: 'landscape' });
+
+// 解锁方向
+await ScreenOrientation.unlock();
+
+// 监听方向变化
+const listener = await ScreenOrientation.addListener(
+  'screenOrientationChange',
+  (result) => {
+    console.log('方向已改变:', result.type);
+  }
+);
+```
+
+## 物理方向检测
+
+此插件具有独特功能：即使用户在设备上启用了方向锁定，它也可以使用运动传感器检测**真实的物理方向**。
+
+<Aside type="note">
+  UI 仍将遵守用户的方向锁定设置。运动跟踪允许您了解设备的物理持握方式，但如果启用了方向锁定，UI 不会旋转。
+</Aside>
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+// 启动基于运动的跟踪
+await ScreenOrientation.startOrientationTracking({
+  bypassOrientationLock: true
+});
+
+// 现在方向变化事件将反映物理方向
+const listener = await ScreenOrientation.addListener(
+  'screenOrientationChange',
+  (result) => {
+    console.log('物理方向:', result.type);
+  }
+);
+
+// 检查是否启用了方向锁定
+const lockStatus = await ScreenOrientation.isOrientationLocked();
+if (lockStatus.locked) {
+  console.log('用户已启用方向锁定');
+  console.log('物理方向:', lockStatus.physicalOrientation);
+  console.log('UI 方向:', lockStatus.uiOrientation);
+}
+
+// 完成后停止跟踪
+await ScreenOrientation.stopOrientationTracking();
+```
+
+## API 参考
+
+### orientation()
+
+获取当前屏幕方向。
+
+```typescript
+const result = await ScreenOrientation.orientation();
+// 返回: { type: OrientationType }
+```
+
+**OrientationType 值:**
+- `'portrait-primary'` - 竖屏，主页按钮在底部
+- `'portrait-secondary'` - 竖屏，倒置
+- `'landscape-primary'` - 横屏，主页按钮在右侧
+- `'landscape-secondary'` - 横屏，主页按钮在左侧
+
+### lock(options)
+
+将屏幕锁定为特定方向。
+
+```typescript
+interface OrientationLockOptions {
+  orientation: OrientationLockType;
+  bypassOrientationLock?: boolean; // 启用运动跟踪
+}
+
+await ScreenOrientation.lock({ orientation: 'landscape' });
+```
+
+**OrientationLockType 值:**
+- `'any'` - 任何方向
+- `'natural'` - 设备的自然方向
+- `'landscape'` - 任何横向模式
+- `'portrait'` - 任何竖向模式
+- `'portrait-primary'` / `'portrait-secondary'`
+- `'landscape-primary'` / `'landscape-secondary'`
+
+### unlock()
+
+解锁屏幕方向。
+
+```typescript
+await ScreenOrientation.unlock();
+```
+
+### startOrientationTracking(options?)
+
+使用运动传感器开始跟踪物理设备方向。
+
+```typescript
+await ScreenOrientation.startOrientationTracking({
+  bypassOrientationLock: true
+});
+```
+
+### stopOrientationTracking()
+
+停止基于运动的方向跟踪。
+
+```typescript
+await ScreenOrientation.stopOrientationTracking();
+```
+
+### isOrientationLocked()
+
+检查是否启用了设备方向锁定。
+
+```typescript
+const result = await ScreenOrientation.isOrientationLocked();
+// 返回: {
+//   locked: boolean,
+//   physicalOrientation?: OrientationType,
+//   uiOrientation?: OrientationType
+// }
+```
+
+<Aside type="tip">
+  此方法需要运动跟踪处于活动状态才能正常工作。
+</Aside>
+
+### addListener(eventName, callback)
+
+监听方向变化。
+
+```typescript
+const listener = await ScreenOrientation.addListener(
+  'screenOrientationChange',
+  (result) => {
+    console.log('新方向:', result.type);
+  }
+);
+
+// 完成时移除
+await listener.remove();
+```
+
+### removeAllListeners()
+
+移除所有事件监听器。
+
+```typescript
+await ScreenOrientation.removeAllListeners();
+```
+
+## 完整示例
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+class OrientationManager {
+  private listener: any = null;
+
+  async init() {
+    // 启动运动跟踪以检测物理方向
+    await ScreenOrientation.startOrientationTracking({
+      bypassOrientationLock: true
+    });
+
+    // 监听变化
+    this.listener = await ScreenOrientation.addListener(
+      'screenOrientationChange',
+      this.onOrientationChange.bind(this)
+    );
+
+    // 获取初始方向
+    const { type } = await ScreenOrientation.orientation();
+    console.log('初始方向:', type);
+  }
+
+  onOrientationChange(result: { type: string }) {
+    console.log('方向已更改为:', result.type);
+
+    // 根据方向调整 UI
+    if (result.type.includes('landscape')) {
+      this.showLandscapeUI();
+    } else {
+      this.showPortraitUI();
+    }
+  }
+
+  showLandscapeUI() {
+    // 横屏特定的 UI 调整
+  }
+
+  showPortraitUI() {
+    // 竖屏特定的 UI 调整
+  }
+
+  async lockLandscape() {
+    await ScreenOrientation.lock({ orientation: 'landscape' });
+  }
+
+  async lockPortrait() {
+    await ScreenOrientation.lock({ orientation: 'portrait' });
+  }
+
+  async freeRotation() {
+    await ScreenOrientation.unlock();
+  }
+
+  async checkIfUserHasOrientationLock() {
+    const { locked, physicalOrientation, uiOrientation } =
+      await ScreenOrientation.isOrientationLocked();
+
+    if (locked) {
+      console.log(`设备处于 ${physicalOrientation} 但 UI 显示 ${uiOrientation}`);
+      return true;
+    }
+    return false;
+  }
+
+  async destroy() {
+    await ScreenOrientation.stopOrientationTracking();
+    if (this.listener) {
+      await this.listener.remove();
+    }
+  }
+}
+```
+
+## 平台说明
+
+### iOS
+- 使用 Core Motion 框架进行物理方向检测
+- Info.plist 中需要 `NSMotionUsageDescription` 以使用运动传感器
+- 完全支持所有方向类型
+
+### Android
+- 使用加速度计传感器进行物理方向检测
+- 不需要额外权限
+- 完全支持所有方向类型
+
+### Web
+- 使用 Screen Orientation API
+- 运动传感器检测有限
+- 某些浏览器可能不支持所有锁定类型

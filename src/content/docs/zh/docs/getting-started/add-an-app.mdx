@@ -1,0 +1,58 @@
+---
+title: "添加应用"
+description: "将应用添加到您的 Capgo 账户，并在您的应用中安装插件"
+locale: zh
+sidebar:
+  order: 2
+prev: false
+next: false
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## 要求
+
+在开始使用 Capgo 之前，请确保您具备：
+- 已安装和配置的 Capacitor 应用。[了解如何设置 Capacitor](https://capacitorjs.com/docs/getting-started/)
+- 已安装 Node.js 18 或更高版本
+
+## Capgo 简介
+<YouTube id="NzXXKoyhTIo" title="15 分钟了解 Capgo" />
+
+## 实时更新仅需 3 步
+
+
+### 引导式设置
+
+<Steps>
+
+1. 在 [https://capgo.app/register](https://capgo.app/register) 创建您的账户。
+![注册截图](/signup.webp "注册截图")
+
+2. 使用 Init 命令开始 <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> 您将看到一系列问题。提供必要的答案以完成自动设置。<Aside type="tip">通过遵循这些步骤，您将很快启动并运行。如果您在此过程中需要任何进一步的帮助，我们的支持团队[随时为您提供帮助](https://support.capgo.app)。祝您入门顺利！</Aside>
+
+3. 部署实时更新 <LinkCard href="/docs/getting-started/deploy/" title="部署实时更新" description="了解如何将实时更新部署到您的应用" />
+
+</Steps>
+
+### 手动设置
+
+如果 init 命令对您不起作用，您可以手动添加应用。
+
+<Steps>
+
+1. 将 CLI 连接到您的账户：<Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. 使用此命令将应用添加到您的账户：<Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. 在您的应用中安装插件：<Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. 在您的 `capacitor.config` 中配置插件 <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+  [查看所有可用选项](/docs/plugin/settings/)。如果未提供，此信息将被推断。
+
+5. 在您的应用中尽早调用 init 方法：<Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+
+6. 部署实时更新 <LinkCard href="/docs/getting-started/deploy/" title="部署实时更新" description="了解如何将实时更新部署到您的应用" />
+
+</Steps>

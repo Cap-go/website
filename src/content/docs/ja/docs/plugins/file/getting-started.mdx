@@ -1,0 +1,389 @@
+---
+title: はじめに
+locale: ja
+description: Capacitorアプリでファイルシステム操作のためのFileプラグインをインストールして使用する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-file" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 使用方法
+
+プラグインをインポートし、ファイル操作にメソッドを使用します:
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+// テキストファイルを書き込む
+const writeFile = async () => {
+  const result = await CapacitorFile.writeFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    data: 'Hello, World!',
+    encoding: Encoding.UTF8,
+    recursive: true, // 必要に応じて親ディレクトリを作成
+  });
+  console.log('File written to:', result.uri);
+};
+
+// テキストファイルを読み取る
+const readFile = async () => {
+  const result = await CapacitorFile.readFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    encoding: Encoding.UTF8,
+  });
+  console.log('File contents:', result.data);
+};
+
+// ファイルが存在するかチェック
+const checkExists = async () => {
+  const result = await CapacitorFile.exists({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+  console.log('File exists:', result.exists);
+};
+
+// ファイルを削除
+const deleteFile = async () => {
+  await CapacitorFile.deleteFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+};
+```
+
+## ディレクトリの場所
+
+プラグインはいくつかのディレクトリ定数を提供します:
+
+```typescript
+import { Directory } from '@capgo/capacitor-file';
+
+// 利用可能なディレクトリ
+Directory.Documents  // ユーザーに表示されるドキュメント(バックアップされます)
+Directory.Data       // プライベートアプリデータストレージ
+Directory.Library    // アプリサポートファイル (iOS) / files (Android)
+Directory.Cache      // 一時キャッシュ(OSによってクリアされる可能性があります)
+Directory.External   // 外部ストレージ(Androidのみ)
+Directory.Application // 読み取り専用アプリバンドル
+```
+
+## エンコーディングオプション
+
+```typescript
+import { Encoding } from '@capgo/capacitor-file';
+
+Encoding.UTF8   // UTF-8テキストエンコーディング
+Encoding.ASCII  // ASCIIテキストエンコーディング
+Encoding.UTF16  // UTF-16テキストエンコーディング
+// バイナリデータの場合はエンコーディングを省略(base64を返します)
+```
+
+## APIリファレンス
+
+### writeFile(options)
+
+ファイルにデータを書き込みます。
+
+```typescript
+const result = await CapacitorFile.writeFile({
+  path: 'folder/file.txt',
+  directory: Directory.Documents,
+  data: 'File content',
+  encoding: Encoding.UTF8,
+  recursive: true,  // 必要に応じてディレクトリを作成
+  append: false,    // 既存のファイルを上書き
+  position: 0,      // ランダムアクセス書き込みのバイト位置
+});
+// 戻り値: { uri: string }
+```
+
+### readFile(options)
+
+ファイルの内容を読み取ります。
+
+```typescript
+const result = await CapacitorFile.readFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  encoding: Encoding.UTF8,
+  offset: 0,    // バイトオフセットから読み取りを開始
+  length: 100,  // このバイト数のみを読み取る
+});
+// 戻り値: { data: string }
+```
+
+### appendFile(options)
+
+ファイルにデータを追加します。
+
+```typescript
+await CapacitorFile.appendFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  data: '\nNew line',
+  encoding: Encoding.UTF8,
+});
+```
+
+### deleteFile(options)
+
+ファイルを削除します。
+
+```typescript
+await CapacitorFile.deleteFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+```
+
+### mkdir(options)
+
+ディレクトリを作成します。
+
+```typescript
+await CapacitorFile.mkdir({
+  path: 'my-folder/sub-folder',
+  directory: Directory.Documents,
+  recursive: true,  // 親ディレクトリを作成
+});
+```
+
+### rmdir(options)
+
+ディレクトリを削除します。
+
+```typescript
+await CapacitorFile.rmdir({
+  path: 'my-folder',
+  directory: Directory.Documents,
+  recursive: true,  // 内容を再帰的に削除
+});
+```
+
+### readdir(options)
+
+ディレクトリの内容を一覧表示します。
+
+```typescript
+const result = await CapacitorFile.readdir({
+  path: '',  // ディレクトリのルートの場合は空
+  directory: Directory.Documents,
+});
+// 戻り値: { entries: Entry[] }
+// 各エントリには: { name, isFile, isDirectory, fullPath, nativeURL }
+```
+
+### stat(options)
+
+ファイルまたはディレクトリのメタデータを取得します。
+
+```typescript
+const result = await CapacitorFile.stat({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 戻り値: { type, size, mtime, ctime, uri }
+```
+
+### exists(options)
+
+ファイルまたはディレクトリが存在するかチェックします。
+
+```typescript
+const result = await CapacitorFile.exists({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 戻り値: { exists: boolean, type?: 'file' | 'directory' }
+```
+
+### copy(options)
+
+ファイルまたはディレクトリをコピーします。
+
+```typescript
+const result = await CapacitorFile.copy({
+  from: 'source.txt',
+  to: 'destination.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+// 戻り値: { uri: string }
+```
+
+### rename(options) / move(options)
+
+ファイルまたはディレクトリの名前を変更または移動します。
+
+```typescript
+await CapacitorFile.rename({
+  from: 'old-name.txt',
+  to: 'new-name.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+```
+
+### truncate(options)
+
+ファイルを特定のサイズに切り詰めます。
+
+```typescript
+await CapacitorFile.truncate({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  size: 100,  // 100バイトに切り詰め
+});
+```
+
+### getUri(options)
+
+ファイルのネイティブURIを取得します。
+
+```typescript
+const result = await CapacitorFile.getUri({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 戻り値: { uri: string }
+```
+
+### getDirectories()
+
+すべての利用可能なディレクトリパスを取得します。
+
+```typescript
+const dirs = await CapacitorFile.getDirectories();
+// 戻り値: documents, data, cache, externalなどのパス
+```
+
+### getFreeDiskSpace()
+
+利用可能なディスク容量を取得します。
+
+```typescript
+const result = await CapacitorFile.getFreeDiskSpace();
+console.log('Free space:', result.free, 'bytes');
+```
+
+### checkPermissions() / requestPermissions()
+
+ストレージ権限を処理(Android)。
+
+```typescript
+const status = await CapacitorFile.checkPermissions();
+if (status.publicStorage !== 'granted') {
+  await CapacitorFile.requestPermissions();
+}
+```
+
+## 完全な例
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+export class FileService {
+  async saveJson(filename: string, data: object): Promise<void> {
+    await CapacitorFile.writeFile({
+      path: filename,
+      directory: Directory.Documents,
+      data: JSON.stringify(data, null, 2),
+      encoding: Encoding.UTF8,
+      recursive: true,
+    });
+  }
+
+  async loadJson<T>(filename: string): Promise<T | null> {
+    try {
+      const { exists } = await CapacitorFile.exists({
+        path: filename,
+        directory: Directory.Documents,
+      });
+
+      if (!exists) return null;
+
+      const result = await CapacitorFile.readFile({
+        path: filename,
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8,
+      });
+
+      return JSON.parse(result.data) as T;
+    } catch (error) {
+      console.error('Failed to load JSON:', error);
+      return null;
+    }
+  }
+
+  async listFiles(folder: string = ''): Promise<string[]> {
+    const result = await CapacitorFile.readdir({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    return result.entries
+      .filter(entry => entry.isFile)
+      .map(entry => entry.name);
+  }
+
+  async deleteAll(folder: string): Promise<void> {
+    const { exists } = await CapacitorFile.exists({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    if (exists) {
+      await CapacitorFile.rmdir({
+        path: folder,
+        directory: Directory.Documents,
+        recursive: true,
+      });
+    }
+  }
+
+  async copyToBackup(filename: string): Promise<string> {
+    const timestamp = Date.now();
+    const backupName = `backup/${timestamp}-${filename}`;
+
+    const result = await CapacitorFile.copy({
+      from: filename,
+      to: backupName,
+      directory: Directory.Documents,
+      toDirectory: Directory.Documents,
+    });
+
+    return result.uri;
+  }
+}
+```
+
+## プラットフォームに関する注意事項
+
+### iOS
+- iOS 13.0+が必要
+- DocumentsディレクトリはFilesアプリで表示可能
+- Libraryディレクトリはアプリサポートファイル用
+- デバイスのストレージが少なくなるとキャッシュがクリアされる可能性があります
+
+### Android
+- Android 6.0 (API 23)+が必要
+- 古いAndroidバージョンでは外部ストレージにランタイム権限が必要
+- Documentsディレクトリはアプリのfilesディレクトリにマップされます
+- 共有ストレージアクセスにはExternalディレクトリを使用
+
+### Web
+- webプラットフォームではサポートされていません

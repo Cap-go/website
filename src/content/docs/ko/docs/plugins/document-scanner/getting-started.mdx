@@ -1,0 +1,61 @@
+---
+title: 시작하기
+locale: ko
+description: 가장자리 감지 및 조정 가능한 출력 형식을 갖춘 네이티브 품질의 문서 스캔을 추가합니다.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **플러그인 설치**
+   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 플랫폼 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 스캔 실행
+
+```typescript
+import {
+  DocumentScanner,
+  ResponseType,
+  ScanDocumentResponseStatus,
+} from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  croppedImageQuality: 90,
+  letUserAdjustCrop: true,
+  maxNumDocuments: 10,
+  responseType: ResponseType.ImageFilePath,
+});
+
+if (result.status === ScanDocumentResponseStatus.Success) {
+  console.log('스캔된 파일:', result.scannedImages);
+} else {
+  console.log('사용자가 스캔을 취소했습니다');
+}
+```
+
+## base64 데이터 반환
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  responseType: ResponseType.Base64,
+});
+
+const [firstPage] = result.scannedImages ?? [];
+if (firstPage) {
+  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
+  // 미리보기 표시 또는 서버에 업로드
+}
+```
+
+## 플랫폼 요구사항
+
+- **iOS**: `ios/App/App/Info.plist`에 카메라 사용 방법을 설명하는 `NSCameraUsageDescription`을 추가합니다.
+- **Android**: `CAMERA` 권한이 선언되어 있는지 확인하고(Capacitor가 자동으로 추가) UI에 맞게 `croppedImageQuality`, `letUserAdjustCrop` 및 `maxNumDocuments`를 조정합니다.
+- **저장소**: `ResponseType.ImageFilePath`를 사용할 때 앱 세션이 종료되기 전에 스캔된 파일을 원하는 저장 위치로 이동하거나 복사합니다.

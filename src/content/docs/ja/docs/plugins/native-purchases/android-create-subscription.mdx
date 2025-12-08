@@ -1,0 +1,166 @@
+---
+title: Android自動更新サブスクリプションの作成
+locale: ja
+description: native-purchasesプラグインのためにGoogle Play Consoleで自動更新サブスクリプションを作成する手順ガイド。
+sidebar:
+  order: 4
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+自動更新サブスクリプションは、コンテンツ、サービス、またはアプリ内のプレミアム機能への継続的なアクセスを提供します。このガイドは、Google Play Consoleでサブスクリプションを作成および設定するのに役立ちます。
+
+## 概要
+
+サブスクリプションは、ユーザーがキャンセルするまで各請求期間の終わりに自動的に更新されます。以下に最適です:
+- プレミアムコンテンツアクセス
+- 広告なし体験
+- クラウドストレージ
+- 継続的なサービス
+
+## サブスクリプションの作成
+
+<Steps>
+
+1. **サブスクリプションに移動**
+
+   Google Play Consoleで、アプリを選択し、左メニューから**Monetize > Subscriptions**を選択します。
+
+   **Create subscription**ボタンをクリックして開始します。
+
+   ![サブスクリプションに移動](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+
+2. **基本情報を入力**
+
+   サブスクリプション名とプロダクトIDを入力します。プロダクトIDはアプリでの設定に必要で、後で変更できません。
+
+   ![サブスクリプション詳細を入力](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+
+3. **ベースプランを作成**
+
+   Google Playでは、サブスクリプションごとに正確に1つのベースプランが必要です。native-purchasesプラグインは、iOSとの互換性を維持するために1つのベースプランのみをサポートします。
+
+   **Add base plan**をクリックして続行します。
+
+   ![ベースプランを作成](/native-purchases/android/create-subscription/create-base-plan.webp)
+
+4. **ベースプランの詳細を設定**
+
+   以下を入力します:
+   - **Base plan ID**: このプランの一意の識別子
+   - **Billing period**: ユーザーが請求される頻度(毎週、毎月、毎年など)
+   - **Grace period**: Googleがキャンセル前に支払いを再試行する間、サブスクリプションを維持する時間枠
+
+   ![ベースプランを設定](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+
+5. **価格を設定**
+
+   価格設定セクションにアクセスし、サブスクリプションを提供したいすべての国/地域を選択します。
+
+   ![地域を選択](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+
+6. **価格を設定**
+
+   主要通貨でベース価格を設定します。Google Playは自動的にこれを現地通貨に変換します。
+
+   ![価格を設定](/native-purchases/android/create-subscription/set-base-price.webp)
+
+7. **地域別価格を確認**
+
+   各国の自動変換された価格を確認します。必要に応じて個別の価格を調整できます。
+
+   ![価格を確認](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+
+8. **設定を保存**
+
+   価格設定を保存します。
+
+   ![価格設定を保存](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+
+9. **サブスクリプションを有効化**
+
+   **Activate**ボタンをクリックして、サブスクリプションプロダクトをライブにし、購入可能にします。
+
+   ![サブスクリプションを有効化](/native-purchases/android/create-subscription/activate-subscription.webp)
+
+</Steps>
+
+## 重要な考慮事項
+
+### ベースプランの制限
+
+native-purchasesプラグインは、iOSサブスクリプション処理との一貫性を確保するために、サブスクリプションごとに正確に1つのベースプランを必要とします。複数のベースプランはサポートされていません。
+
+### 猶予期間
+
+猶予期間により、Google Playはユーザーのサブスクリプションアクセスを維持しながら、失敗した支払いを再試行できます。一般的な猶予期間は:
+- 月額サブスクリプションの場合3日
+- より長いサブスクリプションの場合7日
+
+### サブスクリプションステータス
+
+作成後、サブスクリプションは有効化されるまで「下書き」ステータスになります。サンドボックスモードで下書きサブスクリプションをテストできます。
+
+## アプリでの使用
+
+作成後、プロダクトIDを使用してアプリでサブスクリプションを参照します:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// サブスクリプション情報を読み込む
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+console.log(`${product.title} — ${product.priceString}`);
+
+// 購入(planIdentifier = Google Play ConsoleのBase Plan ID)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // Androidで必須、iOSでは無視されます
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Transaction ID', transaction.transactionId);
+
+// 後で、購入状態をチェック
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const subscription = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.example.premium.monthly',
+);
+
+if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.isAcknowledged) {
+  console.log('Subscription active locally');
+  // 有効期限/キャンセルについては、バックエンドを通じてpurchaseTokenを検証
+}
+```
+
+## 次のステップ
+
+- 新規サブスクライバーを引き付けるために[入門オファーを作成](/docs/plugins/native-purchases/android-introductory-offer/)
+- サブスクリプションをテストするために[サンドボックステストを設定](/docs/plugins/native-purchases/android-sandbox-testing/)
+- セキュリティのためにバックエンドレシート検証を設定
+
+## トラブルシューティング
+
+**サブスクリプションがアプリに表示されない:**
+- プロダクトIDが正確に一致することを確認
+- サブスクリプションが有効化されていることを確認
+- アプリが正しいパッケージ名を持っていることを確認
+- 有効化後、変更が伝播するのに2〜3時間待つ
+
+**ベースプランエラー:**
+- 正確に1つのベースプランがあることを確認
+- すべての必須フィールドが入力されていることを確認
+- 請求期間が有効であることを確認
+
+**価格設定の問題:**
+- 少なくとも1つの国が選択されていることを確認
+- ベース価格が許可された最小値より大きいことを確認
+- 通貨換算レートが許容可能であることを確認

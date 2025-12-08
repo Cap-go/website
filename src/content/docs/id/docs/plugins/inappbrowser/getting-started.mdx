@@ -1,0 +1,410 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin InAppBrowser dengan event perubahan URL untuk konten web tertanam dalam aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/inappbrowser" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Penggunaan
+
+Import plugin dan gunakan dua entry point utamanya:
+
+```typescript
+import { InAppBrowser, ToolBarType, BackgroundColor } from '@capgo/inappbrowser';
+
+// 1) Simple custom tab / SFSafariViewController
+const openExternal = async () => {
+  await InAppBrowser.open({
+    url: 'https://capgo.app',
+    isPresentAfterPageLoad: true,
+    preventDeeplink: false,
+  });
+};
+
+// 2) Full WebView with navigation, headers, share, messaging, etc.
+const openWebView = async () => {
+  await InAppBrowser.openWebView({
+    url: 'https://capgo.app',
+    title: 'Capgo',
+    toolbarType: ToolBarType.NAVIGATION,
+    backgroundColor: BackgroundColor.BLACK,
+    activeNativeNavigationForWebview: true,
+    showReloadButton: true,
+    shareSubject: 'Check this page',
+    shareDisclaimer: {
+      title: 'Disclaimer',
+      message: 'You are about to share content',
+      confirmBtn: 'Continue',
+      cancelBtn: 'Cancel',
+    },
+  });
+};
+
+// Messaging between app and the opened WebView
+const setupListeners = async () => {
+  await InAppBrowser.addListener('urlChangeEvent', (event) => {
+    console.log('URL changed to:', event.url);
+  });
+
+  await InAppBrowser.addListener('messageFromWebview', (event) => {
+    console.log('Message from web:', event.detail);
+  });
+
+  await InAppBrowser.addListener('closeEvent', () => {
+    console.log('WebView closed');
+  });
+};
+
+// Send data to the WebView
+const sendData = async () => {
+  await InAppBrowser.postMessage({ detail: { action: 'refresh-profile' } });
+};
+
+// Close and reload helpers
+const closeBrowser = () => InAppBrowser.close();
+const reloadPage = () => InAppBrowser.reload();
+```
+
+## Referensi API
+
+### open(options: OpenOptions)
+Membuka URL dalam custom tab / SFSafariViewController.
+
+```typescript
+interface OpenOptions {
+  /** Target URL to load */
+  url: string;
+  /** Present after the page finishes loading */
+  isPresentAfterPageLoad?: boolean;
+  /** Prevent deep links from opening external apps */
+  preventDeeplink?: boolean;
+}
+
+await InAppBrowser.open({ url: 'https://example.com', preventDeeplink: true });
+```
+
+### openWebView(options: OpenWebViewOptions)
+Memuat WebView berfitur lengkap dengan UI navigasi, header, kredensial, skrip, dan messaging.
+
+```typescript
+interface OpenWebViewOptions {
+  url: string;
+  headers?: Record<string, string>;
+  credentials?: { username: string; password: string };
+  materialPicker?: boolean;
+  shareDisclaimer?: {
+    title: string;
+    message: string;
+    confirmBtn: string;
+    cancelBtn: string;
+  };
+  toolbarType?: ToolBarType;
+  shareSubject?: string;
+  title?: string;
+  backgroundColor?: BackgroundColor;
+  activeNativeNavigationForWebview?: boolean;
+  disableGoBackOnNativeApplication?: boolean;
+  isPresentAfterPageLoad?: boolean;
+  isInspectable?: boolean;
+  isAnimated?: boolean;
+  showReloadButton?: boolean;
+  closeModal?: boolean;
+  closeModalTitle?: string;
+  closeModalDescription?: string;
+  closeModalOk?: string;
+  closeModalCancel?: string;
+  visibleTitle?: boolean;
+  toolbarColor?: string;
+  toolbarTextColor?: string;
+  showArrow?: boolean;
+  ignoreUntrustedSSLError?: boolean;
+  preShowScript?: string;
+  preShowScriptInjectionTime?: 'documentStart' | 'pageLoad';
+  proxyRequests?: string;
+  buttonNearDone?: {
+    ios: { iconType: 'sf-symbol' | 'asset'; icon: string };
+    android: { iconType: 'asset' | 'vector'; icon: string; width?: number; height?: number };
+  };
+  textZoom?: number;
+  preventDeeplink?: boolean;
+  authorizedAppLinks?: string[];
+  enabledSafeBottomMargin?: boolean;
+  useTopInset?: boolean;
+  enableGooglePaySupport?: boolean;
+  blockedHosts?: string[];
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+}
+
+await InAppBrowser.openWebView({
+  url: 'https://new-page.com',
+  toolbarType: ToolBarType.NAVIGATION,
+  showReloadButton: true,
+});
+```
+
+Nilai `ToolBarType`: `activity` (tutup + bagikan), `compact` (tutup saja), `navigation` (mundur/maju + tutup), `blank` (tanpa toolbar). Nilai `BackgroundColor`: `white` atau `black`.
+
+### close(options?)
+Menutup WebView/custom tab.
+
+**Options:**
+- `isAnimated?: boolean` - Apakah menganimasi aksi tutup
+
+### reload()
+Memuat ulang halaman WebView saat ini.
+
+### goBack()
+Kembali dalam riwayat WebView dan mengembalikan `{ canGoBack: boolean }`.
+
+### `setUrl({ url: string })`
+Mengganti URL WebView saat ini.
+
+### `executeScript({ code: string })`
+Menyuntikkan JavaScript ke dalam WebView.
+
+### `postMessage({ detail: Record<string, any> })`
+Mengirim data dari aplikasi native ke WebView (terima di JS melalui `window.addEventListener('messageFromNative', ...)`).
+
+### `getCookies({ url, includeHttpOnly? })`
+Mengembalikan cookie untuk URL.
+
+### `clearCookies({ url })` / clearAllCookies() / clearCache()
+Helper manajemen cookie dan cache.
+
+### updateDimensions(options: DimensionOptions)
+Mengubah ukuran/posisi WebView saat runtime (`width`, `height`, `x`, `y`).
+
+### removeAllListeners()
+Membatalkan registrasi semua listener untuk plugin.
+
+## Event
+
+### urlChangeEvent
+
+Dipicu saat URL berubah di browser.
+
+```typescript
+interface UrlChangeEvent {
+  url: string;
+}
+
+InAppBrowser.addListener('urlChangeEvent', (event) => {
+  console.log('New URL:', event.url);
+});
+```
+
+### messageFromWebview
+Dipicu saat `window.mobileApp.postMessage(...)` dipanggil di dalam WebView.
+
+```typescript
+InAppBrowser.addListener('messageFromWebview', (event) => {
+  console.log('Payload from web:', event.detail);
+});
+```
+
+### closeEvent
+
+Dipicu saat browser ditutup.
+
+```typescript
+InAppBrowser.addListener('closeEvent', () => {
+  console.log('Browser closed');
+});
+```
+
+### buttonNearDoneClick
+Dipicu saat tombol kustom yang ditambahkan dengan `buttonNearDone` ditekan.
+
+```typescript
+InAppBrowser.addListener('buttonNearDoneClick', (event) => {
+  console.log('Button near done tapped', event);
+});
+```
+
+### confirmBtnClicked
+Dipicu saat dialog konfirmasi (disclaimer atau modal tutup) diterima.
+
+```typescript
+InAppBrowser.addListener('confirmBtnClicked', (event) => {
+  console.log('Confirm accepted, current URL:', event.url);
+});
+```
+
+### browserPageLoaded / pageLoadError
+Event lifecycle untuk keberhasilan atau kegagalan pemuatan WebView.
+
+```typescript
+InAppBrowser.addListener('browserPageLoaded', () => console.log('Page loaded'));
+InAppBrowser.addListener('pageLoadError', () => console.log('Page failed to load'));
+```
+
+## Penggunaan Lanjutan
+
+### Implementasi Alur OAuth
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class OAuthService {
+  private listeners: any[] = [];
+
+  async authenticate(authUrl: string, redirectUri: string) {
+    return new Promise<string>((resolve, reject) => {
+      // Listen for URL changes
+      const urlListener = InAppBrowser.addListener('urlChangeEvent', (event) => {
+        if (event.url.startsWith(redirectUri)) {
+          // Extract OAuth code/token from URL
+          const url = new URL(event.url);
+          const code = url.searchParams.get('code');
+
+          if (code) {
+            InAppBrowser.close();
+            resolve(code);
+          } else {
+            const error = url.searchParams.get('error');
+            reject(new Error(error || 'OAuth failed'));
+          }
+        }
+      });
+
+      this.listeners.push(urlListener);
+
+      // Open OAuth provider
+      InAppBrowser.open({
+        url: authUrl,
+        preventDeeplink: true,
+      });
+    });
+  }
+
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+### UI Browser Kustom
+
+```typescript
+const openCustomBrowser = async () => {
+  await InAppBrowser.open({
+    url: 'https://example.com',
+    isPresentAfterPageLoad: true,
+    preventDeeplink: false,
+  });
+};
+```
+
+### Menangani Tautan Eksternal
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class LinkHandler {
+  async openExternalLink(url: string) {
+    // Check if URL should open in browser
+    if (this.shouldOpenInBrowser(url)) {
+      await InAppBrowser.open({
+        url,
+        preventDeeplink: true,
+      });
+    } else {
+      // Handle internally
+      window.location.href = url;
+    }
+  }
+
+  private shouldOpenInBrowser(url: string): boolean {
+    // External domains
+    const externalDomains = ['youtube.com', 'twitter.com', 'facebook.com'];
+    const urlDomain = new URL(url).hostname;
+
+    return externalDomains.some(domain => urlDomain.includes(domain));
+  }
+}
+```
+
+## Praktik Terbaik
+
+1. **Selalu hapus listener**
+   ```typescript
+   const listener = await InAppBrowser.addListener('urlChangeEvent', handler);
+   // When done
+   listener.remove();
+   ```
+
+2. **Tangani status browser**
+   ```typescript
+   let browserOpen = false;
+
+   const launch = async () => {
+     browserOpen = true;
+     await InAppBrowser.openWebView({ url: 'https://example.com' });
+   };
+
+   InAppBrowser.addListener('closeEvent', () => {
+     browserOpen = false;
+   });
+   ```
+
+3. **Validasi URL sebelum membuka**
+   ```typescript
+   const isValidUrl = (url: string): boolean => {
+     try {
+       new URL(url);
+       return true;
+     } catch {
+       return false;
+     }
+   };
+
+   if (isValidUrl(url)) {
+     await InAppBrowser.open({ url });
+   }
+   ```
+
+4. **Sesuaikan untuk platform**
+   ```typescript
+   import { Capacitor } from '@capacitor/core';
+
+   const options = {
+     url: 'https://example.com',
+     preventDeeplink: Capacitor.getPlatform() === 'ios',
+   };
+   ```
+
+## Catatan Platform
+
+### iOS
+- Menggunakan `SFSafariViewController`
+- Mendukung iOS 11.0+
+- Menghormati inset Safe Area
+- Mendukung gaya presentasi kustom
+
+### Android
+- Menggunakan Chrome Custom Tabs
+- Fallback ke WebView jika Chrome tidak tersedia
+- Mendukung Android 5.0 (API 21)+
+- Kustomisasi toolbar didukung melalui `toolbarType`, `toolbarColor`, `buttonNearDone`, dll.
+
+### Web
+- Membuka di tab/jendela browser baru
+- Opsi kustomisasi terbatas
+- Tidak ada event perubahan URL

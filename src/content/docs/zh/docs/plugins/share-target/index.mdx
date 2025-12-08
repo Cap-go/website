@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-share-target"
+locale: zh
+description: 在你的 Capacitor 应用中接收来自其他应用共享的文本、图片、视频和文件。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 让你的应用能够接收来自其他应用共享的文本、图片和文件,并提供跨平台支持。
+  image:
+    file: ~public/icons/plugins/share-target.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/share-target/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-share-target/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="通用共享" icon="rocket">
+    接收来自任何应用共享的内容
+  </Card>
+  <Card title="多种内容类型" icon="document">
+    处理文本、图片、视频和文件
+  </Card>
+  <Card title="跨平台" icon="laptop">
+    支持 iOS 和 Android 的原生集成
+  </Card>
+  <Card title="基于事件" icon="download">
+    实时监听共享事件
+  </Card>
+  <Card title="灵活配置" icon="setting">
+    自定义接受的 MIME 类型
+  </Card>
+  <Card title="开始使用" icon="open-book">
+    查看[入门指南](/docs/plugins/share-target/getting-started/)以安装和配置插件。
+  </Card>
+</CardGrid>

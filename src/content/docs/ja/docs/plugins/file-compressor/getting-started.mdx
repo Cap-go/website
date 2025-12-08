@@ -1,0 +1,166 @@
+---
+title: はじめに
+locale: ja
+description: CapacitorアプリでFile Compressorプラグインをインストールして画像を圧縮する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-file-compressor" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## プラットフォームサポート
+
+| プラットフォーム | サポート形式 | 備考 |
+|----------|-------------------|-------|
+| iOS | JPEG | JPEG圧縮のみサポート |
+| Android | JPEG, WebP | 両方の形式を完全サポート |
+| Web | JPEG, WebP | Canvas APIベースの圧縮 |
+
+注: すべてのプラットフォームで圧縮中にEXIFメタデータは削除されます。
+
+## 使用方法
+
+プラグインをインポートして画像を圧縮:
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+
+// 画像を圧縮
+const compressImage = async () => {
+  const result = await FileCompressor.compressImage({
+    source: 'file:///path/to/image.jpg',
+    quality: 0.8,
+    width: 1920,
+    height: 1080
+  });
+
+  console.log('Compressed image path:', result.path);
+  console.log('Original size:', result.originalSize);
+  console.log('Compressed size:', result.size);
+};
+```
+
+## APIリファレンス
+
+### compressImage(options)
+
+指定された寸法と品質設定で画像ファイルを圧縮します。
+
+```typescript
+interface CompressImageOptions {
+  source: string;           // 画像ファイルへのパス
+  quality?: number;         // 0.0から1.0 (デフォルト: 0.8)
+  width?: number;           // ターゲット幅(ピクセル単位)
+  height?: number;          // ターゲット高さ(ピクセル単位)
+  format?: 'jpeg' | '.webp'; // 出力形式
+}
+
+interface CompressImageResult {
+  path: string;             // 圧縮画像へのパス
+  size: number;             // 圧縮ファイルサイズ(バイト単位)
+  originalSize: number;     // 元のファイルサイズ(バイト単位)
+}
+
+const result = await FileCompressor.compressImage(options);
+```
+
+**重要な注意事項:**
+- すべてのプラットフォームで圧縮中にEXIFメタデータは削除されます
+- 一つの寸法のみが提供された場合、アスペクト比は自動的に維持されます
+- ネイティブプラットフォームでは、圧縮ファイルは一時ディレクトリに保存されます
+
+### getPluginVersion()
+
+ネイティブプラグインのバージョンを取得します。
+
+```typescript
+const { version } = await FileCompressor.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## 完全な例
+
+```typescript
+import { FileCompressor } from '@capgo/capacitor-file-compressor';
+import { Camera } from '@capacitor/camera';
+
+export class ImageCompressionService {
+  async captureAndCompress() {
+    try {
+      // 写真を撮影
+      const photo = await Camera.getPhoto({
+        quality: 100,
+        allowEditing: false,
+        resultType: 'uri'
+      });
+
+      if (!photo.path) {
+        throw new Error('No image path');
+      }
+
+      // 写真を圧縮
+      const compressed = await FileCompressor.compressImage({
+        source: photo.path,
+        quality: 0.7,
+        width: 1920,
+        height: 1080,
+        format: 'jpeg'
+      });
+
+      console.log(`Compression ratio: ${
+        ((1 - compressed.size / compressed.originalSize) * 100).toFixed(1)
+      }%`);
+
+      return compressed.path;
+    } catch (error) {
+      console.error('Compression failed:', error);
+      throw error;
+    }
+  }
+
+  async batchCompress(imagePaths: string[]) {
+    const results = [];
+
+    for (const path of imagePaths) {
+      try {
+        const result = await FileCompressor.compressImage({
+          source: path,
+          quality: 0.8,
+          width: 1280
+        });
+        results.push(result);
+      } catch (error) {
+        console.error(`Failed to compress ${path}:`, error);
+      }
+    }
+
+    return results;
+  }
+}
+```
+
+## ベストプラクティス
+
+1. **品質設定**: ファイルサイズと画像品質のバランスを取るために0.8の品質から始める
+2. **リサイズ寸法**: 必要な場合にのみ寸法を指定 - アスペクト比は自動的に保持されます
+3. **形式の選択**: 写真にはJPEGを、より良い圧縮にはWebPを使用(Android/Webのみ)
+4. **エラーハンドリング**: 常に圧縮呼び出しをtry-catchブロックで囲む
+5. **クリーンアップ**: 使用後は一時ファイルをクリーンアップすることを忘れないでください
+
+## トラブルシューティング
+
+### よくある問題
+
+**画像が圧縮されない**: ソースパスが有効でアクセス可能であることを確認してください
+**メモリ不足**: ターゲット寸法を小さくするか、一度に1つの画像を圧縮してください
+**形式がサポートされていない**: 上記のプラットフォームサポート表を確認してください

@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-live-reload"
+description: 더 빠른 개발을 위해 원격 개발 서버에서 Capacitor 앱을 라이브 리로드하세요.
+locale: ko
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 개발 중 즉각적인 핫 리로딩과 더 빠른 반복을 위해 Capacitor 앱을 로컬 개발 서버에 연결하세요.
+  image:
+    file: ~public/icons/plugins/live-reload.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/live-reload/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-live-reload/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="핫 모듈 교체" icon="rocket">
+    앱을 다시 빌드하지 않고 즉시 업데이트
+  </Card>
+  <Card title="원격 개발 서버" icon="laptop">
+    Vite 또는 호환 가능한 개발 서버에 연결
+  </Card>
+  <Card title="WebSocket 연결" icon="puzzle">
+    라이브 업데이트를 위한 실시간 통신
+  </Card>
+  <Card title="포괄적인 문서" icon="open-book">
+    라이브 리로드를 설정하려면 [문서](/docs/plugins/live-reload/getting-started/)를 확인하세요.
+  </Card>
+</CardGrid>

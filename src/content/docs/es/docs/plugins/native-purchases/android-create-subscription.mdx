@@ -1,0 +1,166 @@
+---
+title: Crear Suscripción Renovable Automática en Android
+description: Guía paso a paso para crear suscripciones renovables automáticas en Google Play Console para el plugin native-purchases.
+locale: es
+sidebar:
+  order: 4
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Las suscripciones renovables automáticas proporcionan acceso a contenido, servicios o funciones premium en tu aplicación de manera continua. Esta guía te ayudará a crear y configurar suscripciones en Google Play Console.
+
+## Descripción General
+
+Las suscripciones se renuevan automáticamente al final de cada período de facturación hasta que el usuario cancela. Son ideales para:
+- Acceso a contenido premium
+- Experiencias sin anuncios
+- Almacenamiento en la nube
+- Servicios continuos
+
+## Crear una Suscripción
+
+<Steps>
+
+1. **Navegar a Suscripciones**
+
+   En Google Play Console, selecciona tu app y elige **Monetizar > Suscripciones** del menú izquierdo.
+
+   Haz clic en el botón **Crear suscripción** para comenzar.
+
+   ![Navegar a suscripciones](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+
+2. **Ingresar Información Básica**
+
+   Proporciona un nombre de suscripción e ID de producto. El ID de producto es necesario para la configuración en tu app y no se puede cambiar después.
+
+   ![Ingresar detalles de suscripción](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+
+3. **Crear Plan Base**
+
+   Google Play requiere exactamente un plan base por suscripción. El plugin native-purchases soporta solo un plan base para mantener compatibilidad con iOS.
+
+   Haz clic en **Agregar plan base** para continuar.
+
+   ![Crear plan base](/native-purchases/android/create-subscription/create-base-plan.webp)
+
+4. **Configurar Detalles del Plan Base**
+
+   Ingresa:
+   - **ID del plan base**: Identificador único para este plan
+   - **Período de facturación**: Con qué frecuencia se cobra a los usuarios (semanal, mensual, anual, etc.)
+   - **Período de gracia**: Ventana de tiempo durante la cual Google mantiene la suscripción mientras reintenta el pago antes de la cancelación
+
+   ![Configurar plan base](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+
+5. **Configurar Precios**
+
+   Accede a la sección de precios y selecciona todos los países/regiones donde quieras ofrecer la suscripción.
+
+   ![Seleccionar regiones](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+
+6. **Configurar Precio**
+
+   Establece tu precio base en tu moneda principal. Google Play convierte automáticamente esto a monedas locales.
+
+   ![Establecer precio](/native-purchases/android/create-subscription/set-base-price.webp)
+
+7. **Revisar Precios Regionales**
+
+   Revisa los precios convertidos automáticamente para cada país. Puedes ajustar precios individuales si es necesario.
+
+   ![Revisar precios](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+
+8. **Guardar Configuración**
+
+   Guarda tu configuración de precios.
+
+   ![Guardar precios](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+
+9. **Activar Suscripción**
+
+   Haz clic en el botón **Activar** para hacer que tu producto de suscripción esté disponible para compra.
+
+   ![Activar suscripción](/native-purchases/android/create-subscription/activate-subscription.webp)
+
+</Steps>
+
+## Consideraciones Importantes
+
+### Limitación del Plan Base
+
+El plugin native-purchases requiere exactamente un plan base por suscripción para asegurar consistencia con el manejo de suscripciones de iOS. No se soportan múltiples planes base.
+
+### Período de Gracia
+
+El período de gracia permite a Google Play reintentar pagos fallidos mientras mantiene el acceso a la suscripción del usuario. Los períodos de gracia comunes son:
+- 3 días para suscripciones mensuales
+- 7 días para suscripciones más largas
+
+### Estado de Suscripción
+
+Después de la creación, tu suscripción estará en estado "Borrador" hasta que sea activada. Puedes probar suscripciones en borrador en modo sandbox.
+
+## Usar en tu App
+
+Una vez creada, referencia la suscripción en tu app usando el ID de producto:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Cargar información de suscripción
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.example.premium.monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+console.log(`${product.title} — ${product.priceString}`);
+
+// Comprar (planIdentifier = ID del Plan Base de Google Play Console)
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'com.example.premium.monthly',
+  planIdentifier: 'monthly-plan', // REQUERIDO en Android, ignorado en iOS
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('ID de Transacción', transaction.transactionId);
+
+// Más tarde, verificar estado de compra
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const subscription = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.example.premium.monthly',
+);
+
+if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.isAcknowledged) {
+  console.log('Suscripción activa localmente');
+  // Para expiración/cancelación, valida purchaseToken a través de tu backend
+}
+```
+
+## Próximos Pasos
+
+- [Crear una oferta introductoria](/docs/plugins/native-purchases/android-introductory-offer/) para atraer nuevos suscriptores
+- [Configurar pruebas en sandbox](/docs/plugins/native-purchases/android-sandbox-testing/) para probar tus suscripciones
+- Configurar validación de recibos en el backend para seguridad
+
+## Solución de Problemas
+
+**La suscripción no aparece en la app:**
+- Verifica que el ID de producto coincida exactamente
+- Asegúrate de que la suscripción esté activada
+- Verifica que tu app tenga el nombre de paquete correcto
+- Espera 2-3 horas después de la activación para que los cambios se propaguen
+
+**Errores del plan base:**
+- Asegúrate de tener exactamente un plan base
+- Verifica que todos los campos requeridos estén completados
+- Verifica que el período de facturación sea válido
+
+**Problemas de precios:**
+- Confirma que al menos un país esté seleccionado
+- Verifica que el precio base sea mayor que el mínimo permitido
+- Verifica que las tasas de conversión de moneda sean aceptables

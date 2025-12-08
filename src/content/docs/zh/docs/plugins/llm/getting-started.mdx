@@ -1,0 +1,484 @@
+---
+title: 开始使用
+description: 了解如何安装和使用 Capacitor LLM 插件在 iOS 和 Android 上本地运行 AI 模型。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 平台配置
+
+### iOS 配置
+
+- **iOS 26.0+**：默认使用 Apple Intelligence（无需模型）- **推荐**
+- **iOS < 26.0**：需要 MediaPipe 自定义模型（实验性，可能存在兼容性问题）
+
+对于旧版 iOS 上的自定义模型，请通过 Xcode 的"Copy Bundle Resources"将模型文件放置在 iOS 应用包中。
+
+### Android 配置
+
+将模型文件放置在 Android assets 文件夹中：
+
+```
+android/app/src/main/assets/
+```
+
+Android 需要**两个**文件：
+- `.task` 文件（主模型）
+- `.litertlm` 文件（配套文件）
+
+从 [Kaggle Gemma models](https://www.kaggle.com/models/google/gemma) 下载 → "LiteRT (formerly TFLite)" 标签
+
+## 推荐模型
+
+### 适用于 Android（Gemma-3 模型）
+
+- **Gemma 3 270M** - 最小、最高效的移动设备模型（约 240-400MB）- **推荐**
+- **Gemma 3 1B** - 较大的文本生成模型（约 892MB-1.5GB）
+
+从 [Kaggle Gemma models](https://www.kaggle.com/models/google/gemma) 下载 → 点击 "LiteRT (formerly TFLite)" 标签
+
+### 适用于 iOS
+
+- **Apple Intelligence**（iOS 26.0+）- 内置，无需下载 - **推荐**
+- **Gemma-2 2B**（实验性）- `.task` 格式可能存在兼容性问题
+
+对于自定义 iOS 模型，从 [Hugging Face MediaPipe models](https://huggingface.co/collections/google/mediapipe-668392ead2d6768e82fb3b87) 下载
+
+## 用法
+
+导入插件并初始化：
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+import { Capacitor } from '@capacitor/core';
+
+// 检查 LLM 是否就绪
+const { readiness } = await CapgoLLM.getReadiness();
+console.log('LLM readiness:', readiness);
+
+// 根据平台设置模型
+const platform = Capacitor.getPlatform();
+if (platform === 'ios') {
+  // iOS：使用 Apple Intelligence（默认）
+  await CapgoLLM.setModel({ path: 'Apple Intelligence' });
+} else {
+  // Android：使用 MediaPipe 模型
+  await CapgoLLM.setModel({ path: '/android_asset/gemma-3-270m-it-int8.task' });
+}
+
+// 创建聊天会话
+const { id: chatId } = await CapgoLLM.createChat();
+
+// 监听 AI 响应
+CapgoLLM.addListener('textFromAi', (event) => {
+  console.log('AI response:', event.text);
+});
+
+// 监听完成
+CapgoLLM.addListener('aiFinished', (event) => {
+  console.log('AI completed response');
+});
+
+// 发送消息
+await CapgoLLM.sendMessage({
+  chatId,
+  message: 'Hello! How are you today?'
+});
+```
+
+## 高级功能
+
+### 下载模型
+
+```typescript
+// 从 URL 下载模型
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/model.task',
+  filename: 'model.task'
+});
+
+// 对于 Android，同时下载 .task 和 .litertlm 文件
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/gemma-3-270m-it-int8.task',
+  companionUrl: 'https://example.com/gemma-3-270m-it-int8.litertlm',
+  filename: 'gemma-3-270m-it-int8.task'
+});
+
+// 监听下载进度
+CapgoLLM.addListener('downloadProgress', (event) => {
+  console.log(`Download progress: ${event.progress}%`);
+  console.log(`Downloaded: ${event.downloadedBytes} / ${event.totalBytes}`);
+});
+```
+
+### 模型管理
+
+```typescript
+// 使用配置设置特定模型
+await CapgoLLM.setModel({
+  path: '/android_asset/gemma-3-270m-it-int8.task',
+  maxTokens: 2048,
+  topk: 40,
+  temperature: 0.8
+});
+
+// 检查就绪状态
+const { readiness } = await CapgoLLM.getReadiness();
+if (readiness === 'ready') {
+  // 模型已加载并准备就绪
+}
+
+// 监听就绪状态变化
+CapgoLLM.addListener('readinessChange', (event) => {
+  console.log('Readiness changed:', event.readiness);
+});
+```
+
+## API 方法
+
+### createChat()
+
+创建新的聊天会话。
+
+```typescript
+const { id: chatId } = await CapgoLLM.createChat();
+```
+
+**返回：** `Promise<{ id: string; instructions?: string }>`
+
+### sendMessage(...)
+
+向 LLM 发送消息。
+
+```typescript
+await CapgoLLM.sendMessage({
+  chatId: 'chat-id',
+  message: 'What is the weather like?'
+});
+```
+
+| 参数      | 类型     | 描述          |
+| ---------- | -------- | -------------------- |
+| **`chatId`**  | `string` | 聊天会话 ID      |
+| **`message`** | `string` | 要发送的消息      |
+
+### getReadiness()
+
+检查 LLM 是否准备好使用。
+
+```typescript
+const { readiness } = await CapgoLLM.getReadiness();
+```
+
+**返回：** `Promise<{ readiness: string }>`
+
+可能的值：
+- `ready` - 模型已加载并准备就绪
+- `loading` - 模型正在加载
+- `not_ready` - 模型尚未加载
+- `error` - 加载模型时出错
+
+### setModel(...)
+
+设置模型配置。
+
+```typescript
+// iOS：使用 Apple Intelligence（推荐）
+await CapgoLLM.setModel({
+  path: 'Apple Intelligence'
+});
+
+// iOS：使用自定义 MediaPipe 模型（实验性）
+await CapgoLLM.setModel({
+  path: 'Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280',
+  modelType: 'task',
+  maxTokens: 1280
+});
+
+// Android：使用 MediaPipe 模型
+await CapgoLLM.setModel({
+  path: '/android_asset/gemma-3-270m-it-int8.task',
+  maxTokens: 2048,
+  topk: 40,
+  temperature: 0.8
+});
+```
+
+| 参数           | 类型     | 描述                                       |
+| --------------- | -------- | ------------------------------------------------- |
+| **`path`**      | `string` | 模型路径或 iOS 系统的"Apple Intelligence" |
+| **`modelType`** | `string` | 可选：模型文件类型（例如 "task"、"bin"）   |
+| **`maxTokens`** | `number` | 可选：模型处理的最大 token 数        |
+| **`topk`**      | `number` | 可选：每步考虑的 token 数|
+| **`temperature`** | `number` | 可选：生成的随机性（0.0-1.0）    |
+| **`randomSeed`** | `number` | 可选：生成的随机种子             |
+
+### downloadModel(...)
+
+从 URL 下载模型并保存到设备存储。
+
+```typescript
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/gemma-3-270m-it-int8.task',
+  companionUrl: 'https://example.com/gemma-3-270m-it-int8.litertlm',
+  filename: 'gemma-3-270m-it-int8.task'
+});
+```
+
+| 参数            | 类型     | 描述                                 |
+| ---------------- | -------- | ------------------------------------------- |
+| **`url`**        | `string` | 下载的 URL                        |
+| **`companionUrl`** | `string` | 可选：配套文件的 URL（.litertlm） |
+| **`filename`**   | `string` | 可选：保存的文件名               |
+
+**返回：** `Promise<{ path: string; companionPath?: string }>`
+
+## 事件
+
+### textFromAi
+
+当 AI 生成文本时触发（流式响应）。
+
+```typescript
+CapgoLLM.addListener('textFromAi', (event) => {
+  console.log('AI text:', event.text);
+  console.log('Chat ID:', event.chatId);
+  console.log('Is chunk:', event.isChunk);
+});
+```
+
+**事件数据：**
+- `text` (string) - 来自 AI 的增量文本块
+- `chatId` (string) - 聊天会话 ID
+- `isChunk` (boolean) - 这是完整块还是部分流数据
+
+### aiFinished
+
+当 AI 完成响应时触发。
+
+```typescript
+CapgoLLM.addListener('aiFinished', (event) => {
+  console.log('Completed for chat:', event.chatId);
+});
+```
+
+**事件数据：**
+- `chatId` (string) - 聊天会话 ID
+
+### downloadProgress
+
+在模型下载期间触发以报告进度。
+
+```typescript
+CapgoLLM.addListener('downloadProgress', (event) => {
+  console.log('Progress:', event.progress, '%');
+  console.log('Downloaded:', event.downloadedBytes, '/', event.totalBytes);
+});
+```
+
+**事件数据：**
+- `progress` (number) - 完成的下载百分比（0-100）
+- `downloadedBytes` (number) - 到目前为止下载的字节数
+- `totalBytes` (number) - 要下载的总字节数
+
+### readinessChange
+
+当 LLM 的就绪状态发生变化时触发。
+
+```typescript
+CapgoLLM.addListener('readinessChange', (event) => {
+  console.log('Readiness changed to:', event.readiness);
+});
+```
+
+**事件数据：**
+- `readiness` (string) - 新的就绪状态
+
+## 完整示例
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+import { Capacitor } from '@capacitor/core';
+
+class AIService {
+  private chatId: string | null = null;
+  private messageBuffer: string = '';
+
+  async initialize() {
+    // 根据平台设置模型
+    const platform = Capacitor.getPlatform();
+
+    if (platform === 'ios') {
+      // iOS：使用 Apple Intelligence（推荐）
+      await CapgoLLM.setModel({ path: 'Apple Intelligence' });
+    } else {
+      // Android：使用 MediaPipe 模型
+      await CapgoLLM.setModel({
+        path: '/android_asset/gemma-3-270m-it-int8.task',
+        maxTokens: 2048,
+        topk: 40,
+        temperature: 0.8
+      });
+    }
+
+    // 等待模型准备就绪
+    let isReady = false;
+    while (!isReady) {
+      const { readiness } = await CapgoLLM.getReadiness();
+      if (readiness === 'ready') {
+        isReady = true;
+      } else if (readiness === 'error') {
+        throw new Error('Failed to load model');
+      }
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    // 创建聊天会话
+    const { id } = await CapgoLLM.createChat();
+    this.chatId = id;
+
+    // 设置事件监听器
+    this.setupListeners();
+  }
+
+  private setupListeners() {
+    CapgoLLM.addListener('textFromAi', (event) => {
+      if (event.chatId === this.chatId) {
+        this.messageBuffer += event.text;
+        this.onTextReceived(event.text);
+      }
+    });
+
+    CapgoLLM.addListener('aiFinished', (event) => {
+      if (event.chatId === this.chatId) {
+        this.onMessageComplete(this.messageBuffer);
+        this.messageBuffer = '';
+      }
+    });
+  }
+
+  async sendMessage(message: string) {
+    if (!this.chatId) {
+      throw new Error('Chat not initialized');
+    }
+
+    await CapgoLLM.sendMessage({
+      chatId: this.chatId,
+      message
+    });
+  }
+
+  onTextReceived(text: string) {
+    // 使用流式文本更新 UI
+    console.log('Received:', text);
+  }
+
+  onMessageComplete(fullMessage: string) {
+    // 处理完整消息
+    console.log('Complete message:', fullMessage);
+  }
+}
+
+// 用法
+const ai = new AIService();
+await ai.initialize();
+await ai.sendMessage('Tell me about AI');
+```
+
+## 平台支持
+
+| 平台 | 支持 | 要求 |
+|----------|-----------|--------------|
+| iOS      | ✅        | iOS 13.0+（26.0+ 用于 Apple Intelligence） |
+| Android  | ✅        | API 24+ |
+| Web      | ❌        | 不支持 |
+
+## 最佳实践
+
+1. **模型选择**：根据设备能力选择模型
+   - 对于大多数移动设备使用 270M
+   - 对于具有更多 RAM 的高端设备使用 1B
+   - 在目标设备上测试性能
+
+2. **内存管理**：完成后清除聊天会话
+   ```typescript
+   // 为新对话创建新聊天
+   const { id } = await CapacitorLLM.createChat();
+   ```
+
+3. **错误处理**：在使用前始终检查就绪状态
+   ```typescript
+   const { readiness } = await CapacitorLLM.getReadiness();
+   if (readiness !== 'ready') {
+     // 处理未就绪状态
+   }
+   ```
+
+4. **流式 UI**：使用流式文本增量更新 UI
+   - 通过 `onAiText` 显示文本到达
+   - 使用 `onAiCompletion` 标记完成
+
+5. **模型下载**：在应用设置期间下载模型，而不是首次使用时
+   ```typescript
+   // 在应用初始化期间
+   await CapacitorLLM.downloadModel({
+     url: 'https://your-cdn.com/model.task',
+     filename: 'model.task'
+   });
+   ```
+
+## 故障排除
+
+### 模型未加载
+- 验证模型文件在正确的位置
+- 检查模型格式是否与平台匹配（iOS 为 .gguf，Android 为 .task）
+- 确保设备存储空间充足
+
+### 性能不佳
+- 尝试较小的模型（270M 而不是 1B）
+- 关闭其他应用以释放内存
+- 在实际设备而不是模拟器上测试
+
+### 无响应
+- 检查就绪状态是否为 'ready'
+- 验证在发送消息前设置了事件监听器
+- 检查控制台是否有错误
+
+## 资源
+
+- [GitHub 仓库](https://github.com/Cap-go/capacitor-llm)
+- [Gemma 模型](https://ai.google.dev/gemma)
+- [Apple Intelligence](https://developer.apple.com/machine-learning/)
+- [MediaPipe](https://developers.google.com/mediapipe)

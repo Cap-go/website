@@ -1,0 +1,484 @@
+---
+title: Comenzando
+description: Aprende cómo instalar y usar el plugin Capacitor LLM para ejecutar modelos de IA localmente en iOS y Android.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalación
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Configuración de Plataforma
+
+### Configuración de iOS
+
+- **iOS 26.0+**: Usa Apple Intelligence por defecto (no necesita modelo) - **Recomendado**
+- **iOS < 26.0**: Requiere modelos personalizados MediaPipe (experimental, puede tener problemas de compatibilidad)
+
+Para modelos personalizados en versiones antiguas de iOS, coloca los archivos del modelo en tu paquete de app iOS a través de "Copy Bundle Resources" de Xcode.
+
+### Configuración de Android
+
+Coloca los archivos del modelo en tu carpeta de assets de Android:
+
+```
+android/app/src/main/assets/
+```
+
+Necesitas **ambos** archivos para Android:
+- Archivo `.task` (modelo principal)
+- Archivo `.litertlm` (archivo complementario)
+
+Descarga desde [modelos Gemma de Kaggle](https://www.kaggle.com/models/google/gemma) → pestaña "LiteRT (formerly TFLite)"
+
+## Modelos Recomendados
+
+### Para Android (Modelos Gemma-3)
+
+- **Gemma 3 270M** - El más pequeño, más eficiente para móviles (~240-400MB) - **Recomendado**
+- **Gemma 3 1B** - Modelo de generación de texto más grande (~892MB-1.5GB)
+
+Descarga desde [modelos Gemma de Kaggle](https://www.kaggle.com/models/google/gemma) → Haz clic en la pestaña "LiteRT (formerly TFLite)"
+
+### Para iOS
+
+- **Apple Intelligence** (iOS 26.0+) - Integrado, no necesita descarga - **Recomendado**
+- **Gemma-2 2B** (experimental) - Puede tener problemas de compatibilidad con formato `.task`
+
+Para modelos personalizados de iOS, descarga desde [modelos MediaPipe de Hugging Face](https://huggingface.co/collections/google/mediapipe-668392ead2d6768e82fb3b87)
+
+## Uso
+
+Importa el plugin e inicializa:
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+import { Capacitor } from '@capacitor/core';
+
+// Verificar si LLM está listo
+const { readiness } = await CapgoLLM.getReadiness();
+console.log('Preparación de LLM:', readiness);
+
+// Establecer el modelo según la plataforma
+const platform = Capacitor.getPlatform();
+if (platform === 'ios') {
+  // iOS: Usar Apple Intelligence (predeterminado)
+  await CapgoLLM.setModel({ path: 'Apple Intelligence' });
+} else {
+  // Android: Usar modelo MediaPipe
+  await CapgoLLM.setModel({ path: '/android_asset/gemma-3-270m-it-int8.task' });
+}
+
+// Crear una sesión de chat
+const { id: chatId } = await CapgoLLM.createChat();
+
+// Escuchar respuestas de IA
+CapgoLLM.addListener('textFromAi', (event) => {
+  console.log('Respuesta de IA:', event.text);
+});
+
+// Escuchar finalización
+CapgoLLM.addListener('aiFinished', (event) => {
+  console.log('IA completó respuesta');
+});
+
+// Enviar un mensaje
+await CapgoLLM.sendMessage({
+  chatId,
+  message: '¡Hola! ¿Cómo estás hoy?'
+});
+```
+
+## Funciones Avanzadas
+
+### Descargar Modelos
+
+```typescript
+// Descargar un modelo desde URL
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/model.task',
+  filename: 'model.task'
+});
+
+// Para Android, descargar ambos archivos .task y .litertlm
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/gemma-3-270m-it-int8.task',
+  companionUrl: 'https://example.com/gemma-3-270m-it-int8.litertlm',
+  filename: 'gemma-3-270m-it-int8.task'
+});
+
+// Escuchar progreso de descarga
+CapgoLLM.addListener('downloadProgress', (event) => {
+  console.log(`Progreso de descarga: ${event.progress}%`);
+  console.log(`Descargado: ${event.downloadedBytes} / ${event.totalBytes}`);
+});
+```
+
+### Gestión de Modelos
+
+```typescript
+// Establecer un modelo específico con configuración
+await CapgoLLM.setModel({
+  path: '/android_asset/gemma-3-270m-it-int8.task',
+  maxTokens: 2048,
+  topk: 40,
+  temperature: 0.8
+});
+
+// Verificar preparación
+const { readiness } = await CapgoLLM.getReadiness();
+if (readiness === 'ready') {
+  // El modelo está cargado y listo
+}
+
+// Escuchar cambios de preparación
+CapgoLLM.addListener('readinessChange', (event) => {
+  console.log('Preparación cambiada:', event.readiness);
+});
+```
+
+## Métodos de la API
+
+### createChat()
+
+Crear una nueva sesión de chat.
+
+```typescript
+const { id: chatId } = await CapgoLLM.createChat();
+```
+
+**Retorna:** `Promise<{ id: string; instructions?: string }>`
+
+### sendMessage(...)
+
+Enviar un mensaje al LLM.
+
+```typescript
+await CapgoLLM.sendMessage({
+  chatId: 'chat-id',
+  message: '¿Cómo está el clima?'
+});
+```
+
+| Param      | Type     | Description          |
+| ---------- | -------- | -------------------- |
+| **`chatId`**  | `string` | ID de sesión de chat      |
+| **`message`** | `string` | Mensaje a enviar      |
+
+### getReadiness()
+
+Verificar si el LLM está listo para usar.
+
+```typescript
+const { readiness } = await CapgoLLM.getReadiness();
+```
+
+**Retorna:** `Promise<{ readiness: string }>`
+
+Valores posibles:
+- `ready` - El modelo está cargado y listo
+- `loading` - El modelo se está cargando
+- `not_ready` - El modelo aún no está cargado
+- `error` - Error al cargar el modelo
+
+### setModel(...)
+
+Establecer la configuración del modelo.
+
+```typescript
+// iOS: Usar Apple Intelligence (recomendado)
+await CapgoLLM.setModel({
+  path: 'Apple Intelligence'
+});
+
+// iOS: Usar modelo MediaPipe personalizado (experimental)
+await CapgoLLM.setModel({
+  path: 'Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280',
+  modelType: 'task',
+  maxTokens: 1280
+});
+
+// Android: Usar modelo MediaPipe
+await CapgoLLM.setModel({
+  path: '/android_asset/gemma-3-270m-it-int8.task',
+  maxTokens: 2048,
+  topk: 40,
+  temperature: 0.8
+});
+```
+
+| Param           | Type     | Description                                       |
+| --------------- | -------- | ------------------------------------------------- |
+| **`path`**      | `string` | Ruta del modelo o "Apple Intelligence" para sistema iOS |
+| **`modelType`** | `string` | Opcional: Tipo de archivo del modelo (ej., "task", "bin")   |
+| **`maxTokens`** | `number` | Opcional: Tokens máximos que maneja el modelo        |
+| **`topk`**      | `number` | Opcional: Número de tokens considerados en cada paso|
+| **`temperature`** | `number` | Opcional: Aleatoriedad en generación (0.0-1.0)    |
+| **`randomSeed`** | `number` | Opcional: Semilla aleatoria para generación             |
+
+### downloadModel(...)
+
+Descargar un modelo desde URL y guardar en almacenamiento del dispositivo.
+
+```typescript
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/gemma-3-270m-it-int8.task',
+  companionUrl: 'https://example.com/gemma-3-270m-it-int8.litertlm',
+  filename: 'gemma-3-270m-it-int8.task'
+});
+```
+
+| Param            | Type     | Description                                 |
+| ---------------- | -------- | ------------------------------------------- |
+| **`url`**        | `string` | URL desde donde descargar                        |
+| **`companionUrl`** | `string` | Opcional: URL para archivo complementario (.litertlm) |
+| **`filename`**   | `string` | Opcional: Nombre de archivo para guardar               |
+
+**Retorna:** `Promise<{ path: string; companionPath?: string }>`
+
+## Eventos
+
+### textFromAi
+
+Se dispara cuando la IA genera texto (respuesta en streaming).
+
+```typescript
+CapgoLLM.addListener('textFromAi', (event) => {
+  console.log('Texto de IA:', event.text);
+  console.log('ID de chat:', event.chatId);
+  console.log('Es fragmento:', event.isChunk);
+});
+```
+
+**Datos del Evento:**
+- `text` (string) - Fragmento de texto incremental de la IA
+- `chatId` (string) - ID de sesión de chat
+- `isChunk` (boolean) - Si esto es un fragmento completo o datos de streaming parciales
+
+### aiFinished
+
+Se dispara cuando la IA completa la respuesta.
+
+```typescript
+CapgoLLM.addListener('aiFinished', (event) => {
+  console.log('Completado para chat:', event.chatId);
+});
+```
+
+**Datos del Evento:**
+- `chatId` (string) - ID de sesión de chat
+
+### downloadProgress
+
+Se dispara durante la descarga del modelo para reportar progreso.
+
+```typescript
+CapgoLLM.addListener('downloadProgress', (event) => {
+  console.log('Progreso:', event.progress, '%');
+  console.log('Descargado:', event.downloadedBytes, '/', event.totalBytes);
+});
+```
+
+**Datos del Evento:**
+- `progress` (number) - Porcentaje de descarga completada (0-100)
+- `downloadedBytes` (number) - Bytes descargados hasta ahora
+- `totalBytes` (number) - Total de bytes a descargar
+
+### readinessChange
+
+Se dispara cuando cambia el estado de preparación del LLM.
+
+```typescript
+CapgoLLM.addListener('readinessChange', (event) => {
+  console.log('Preparación cambiada a:', event.readiness);
+});
+```
+
+**Datos del Evento:**
+- `readiness` (string) - El nuevo estado de preparación
+
+## Ejemplo Completo
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+import { Capacitor } from '@capacitor/core';
+
+class AIService {
+  private chatId: string | null = null;
+  private messageBuffer: string = '';
+
+  async initialize() {
+    // Configurar modelo según plataforma
+    const platform = Capacitor.getPlatform();
+
+    if (platform === 'ios') {
+      // iOS: Usar Apple Intelligence (recomendado)
+      await CapgoLLM.setModel({ path: 'Apple Intelligence' });
+    } else {
+      // Android: Usar modelo MediaPipe
+      await CapgoLLM.setModel({
+        path: '/android_asset/gemma-3-270m-it-int8.task',
+        maxTokens: 2048,
+        topk: 40,
+        temperature: 0.8
+      });
+    }
+
+    // Esperar a que el modelo esté listo
+    let isReady = false;
+    while (!isReady) {
+      const { readiness } = await CapgoLLM.getReadiness();
+      if (readiness === 'ready') {
+        isReady = true;
+      } else if (readiness === 'error') {
+        throw new Error('Falló al cargar el modelo');
+      }
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    // Crear sesión de chat
+    const { id } = await CapgoLLM.createChat();
+    this.chatId = id;
+
+    // Configurar listeners de eventos
+    this.setupListeners();
+  }
+
+  private setupListeners() {
+    CapgoLLM.addListener('textFromAi', (event) => {
+      if (event.chatId === this.chatId) {
+        this.messageBuffer += event.text;
+        this.onTextReceived(event.text);
+      }
+    });
+
+    CapgoLLM.addListener('aiFinished', (event) => {
+      if (event.chatId === this.chatId) {
+        this.onMessageComplete(this.messageBuffer);
+        this.messageBuffer = '';
+      }
+    });
+  }
+
+  async sendMessage(message: string) {
+    if (!this.chatId) {
+      throw new Error('Chat no inicializado');
+    }
+
+    await CapgoLLM.sendMessage({
+      chatId: this.chatId,
+      message
+    });
+  }
+
+  onTextReceived(text: string) {
+    // Actualizar UI con texto en streaming
+    console.log('Recibido:', text);
+  }
+
+  onMessageComplete(fullMessage: string) {
+    // Manejar mensaje completo
+    console.log('Mensaje completo:', fullMessage);
+  }
+}
+
+// Uso
+const ai = new AIService();
+await ai.initialize();
+await ai.sendMessage('Háblame sobre IA');
+```
+
+## Soporte de Plataformas
+
+| Plataforma | Soportado | Requisitos |
+|----------|-----------|--------------|
+| iOS      | ✅        | iOS 13.0+ (26.0+ para Apple Intelligence) |
+| Android  | ✅        | API 24+ |
+| Web      | ❌        | No soportado |
+
+## Mejores Prácticas
+
+1. **Selección de Modelo**: Elige modelos según capacidades del dispositivo
+   - Usa 270M para la mayoría de dispositivos móviles
+   - Usa 1B para dispositivos de gama alta con más RAM
+   - Prueba rendimiento en dispositivos objetivo
+
+2. **Gestión de Memoria**: Limpia sesiones de chat cuando termines
+   ```typescript
+   // Crear nuevo chat para nuevas conversaciones
+   const { id } = await CapacitorLLM.createChat();
+   ```
+
+3. **Manejo de Errores**: Siempre verifica preparación antes de usar
+   ```typescript
+   const { readiness } = await CapacitorLLM.getReadiness();
+   if (readiness !== 'ready') {
+     // Manejar estado no listo
+   }
+   ```
+
+4. **UI de Streaming**: Actualiza UI incrementalmente con texto en streaming
+   - Muestra texto a medida que llega vía `onAiText`
+   - Marca completo con `onAiCompletion`
+
+5. **Descarga de Modelo**: Descarga modelos durante configuración de app, no en primer uso
+   ```typescript
+   // Durante inicialización de app
+   await CapacitorLLM.downloadModel({
+     url: 'https://your-cdn.com/model.task',
+     filename: 'model.task'
+   });
+   ```
+
+## Solución de Problemas
+
+### El modelo no se carga
+- Verifica que el archivo del modelo esté en la ubicación correcta
+- Verifica que el formato del modelo coincida con la plataforma (.gguf para iOS, .task para Android)
+- Asegúrate de tener suficiente almacenamiento en el dispositivo
+
+### Rendimiento pobre
+- Prueba modelo más pequeño (270M en lugar de 1B)
+- Cierra otras apps para liberar memoria
+- Prueba en dispositivo real, no en simulador
+
+### Sin respuestas
+- Verifica que el estado de preparación sea 'ready'
+- Verifica que los listeners de eventos estén configurados antes de enviar mensajes
+- Verifica errores en la consola
+
+## Recursos
+
+- [Repositorio GitHub](https://github.com/Cap-go/capacitor-llm)
+- [Modelos Gemma](https://ai.google.dev/gemma)
+- [Apple Intelligence](https://developer.apple.com/machine-learning/)
+- [MediaPipe](https://developers.google.com/mediapipe)

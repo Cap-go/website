@@ -1,0 +1,395 @@
+---
+title: "Audio Recorder 시작하기"
+description: "Capacitor 앱에 오디오 녹음 기능을 통합하는 방법을 알아보세요"
+locale: ko
+---
+
+이 가이드는 Capacitor Audio Recorder 플러그인을 애플리케이션에 통합하는 과정을 안내합니다.
+
+## 설치
+
+npm을 사용하여 플러그인을 설치합니다:
+
+```bash
+npm install @capgo/capacitor-audio-recorder
+npx cap sync
+```
+
+## iOS 구성
+
+`Info.plist`에 다음을 추가합니다:
+
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs access to the microphone to record audio</string>
+```
+
+## Android 구성
+
+`AndroidManifest.xml`에 다음 권한을 추가합니다:
+
+```xml
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+## Web 구성
+
+플러그인은 MediaRecorder API를 사용합니다. 프로덕션에서는 HTTPS가 필요합니다.
+
+## 기본 사용법
+
+### 플러그인 가져오기
+
+```typescript
+import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
+```
+
+### 권한 요청
+
+```typescript
+const requestPermission = async () => {
+  const permission = await AudioRecorder.requestPermissions();
+  console.log('Permission status:', permission.recordAudio);
+};
+```
+
+### 녹음 시작
+
+```typescript
+const startRecording = async () => {
+  await AudioRecorder.startRecording();
+  console.log('Recording started');
+};
+```
+
+### 녹음 중지
+
+```typescript
+const stopRecording = async () => {
+  const result = await AudioRecorder.stopRecording();
+  console.log('Recording path:', result.filePath);
+  console.log('Duration:', result.duration);
+};
+```
+
+### 녹음 일시 중지/재개
+
+```typescript
+const pauseRecording = async () => {
+  await AudioRecorder.pauseRecording();
+  console.log('Recording paused');
+};
+
+const resumeRecording = async () => {
+  await AudioRecorder.resumeRecording();
+  console.log('Recording resumed');
+};
+```
+
+### 상태 가져오기
+
+```typescript
+const getStatus = async () => {
+  const status = await AudioRecorder.getStatus();
+  console.log('Is recording:', status.isRecording);
+  console.log('Duration:', status.currentTime);
+};
+```
+
+## 완전한 예제
+
+다음은 완전한 음성 녹음기 구현입니다:
+
+```typescript
+import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+class VoiceRecorder {
+  private isRecording = false;
+  private isPaused = false;
+  private recordingPath: string | null = null;
+
+  async initialize() {
+    const permission = await AudioRecorder.checkPermissions();
+
+    if (permission.recordAudio !== 'granted') {
+      const requested = await AudioRecorder.requestPermissions();
+
+      if (requested.recordAudio !== 'granted') {
+        throw new Error('Microphone permission denied');
+      }
+    }
+  }
+
+  async startRecording() {
+    try {
+      await AudioRecorder.startRecording();
+      this.isRecording = true;
+      this.isPaused = false;
+      console.log('Recording started');
+    } catch (error) {
+      console.error('Failed to start recording:', error);
+      throw error;
+    }
+  }
+
+  async pauseRecording() {
+    if (!this.isRecording || this.isPaused) {
+      return;
+    }
+
+    try {
+      await AudioRecorder.pauseRecording();
+      this.isPaused = true;
+      console.log('Recording paused');
+    } catch (error) {
+      console.error('Failed to pause recording:', error);
+      throw error;
+    }
+  }
+
+  async resumeRecording() {
+    if (!this.isRecording || !this.isPaused) {
+      return;
+    }
+
+    try {
+      await AudioRecorder.resumeRecording();
+      this.isPaused = false;
+      console.log('Recording resumed');
+    } catch (error) {
+      console.error('Failed to resume recording:', error);
+      throw error;
+    }
+  }
+
+  async stopRecording() {
+    if (!this.isRecording) {
+      return null;
+    }
+
+    try {
+      const result = await AudioRecorder.stopRecording();
+      this.isRecording = false;
+      this.isPaused = false;
+      this.recordingPath = result.filePath;
+
+      console.log('Recording stopped');
+      console.log('File path:', result.filePath);
+      console.log('Duration:', result.duration, 'seconds');
+
+      return result;
+    } catch (error) {
+      console.error('Failed to stop recording:', error);
+      throw error;
+    }
+  }
+
+  async getCurrentStatus() {
+    const status = await AudioRecorder.getStatus();
+    return {
+      isRecording: status.isRecording,
+      duration: status.currentTime,
+      isPaused: this.isPaused
+    };
+  }
+
+  formatDuration(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  getRecordingPath(): string | null {
+    return this.recordingPath;
+  }
+}
+
+// Usage
+const recorder = new VoiceRecorder();
+
+// Initialize
+await recorder.initialize();
+
+// Start recording
+await recorder.startRecording();
+
+// Pause
+await recorder.pauseRecording();
+
+// Resume
+await recorder.resumeRecording();
+
+// Stop and get result
+const result = await recorder.stopRecording();
+console.log('Recording saved:', result?.filePath);
+```
+
+## 고급 구성
+
+### 오디오 품질 구성
+
+```typescript
+const startHighQualityRecording = async () => {
+  await AudioRecorder.startRecording({
+    format: 'aac',           // aac, mp3, or wav
+    sampleRate: 44100,       // 44100 Hz (CD quality)
+    channels: 2,             // Stereo
+    bitRate: 320000          // 320 kbps
+  });
+};
+```
+
+### 음성용 구성
+
+```typescript
+const startVoiceRecording = async () => {
+  await AudioRecorder.startRecording({
+    format: 'aac',
+    sampleRate: 16000,       // 16 kHz (voice optimized)
+    channels: 1,             // Mono
+    bitRate: 64000           // 64 kbps
+  });
+};
+```
+
+## UI 통합 예제
+
+```typescript
+class AudioRecorderUI {
+  private recorder: VoiceRecorder;
+  private updateInterval: any;
+
+  constructor() {
+    this.recorder = new VoiceRecorder();
+  }
+
+  async init() {
+    await this.recorder.initialize();
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    const recordButton = document.getElementById('record-btn');
+    const pauseButton = document.getElementById('pause-btn');
+    const stopButton = document.getElementById('stop-btn');
+
+    recordButton?.addEventListener('click', () => this.handleRecord());
+    pauseButton?.addEventListener('click', () => this.handlePause());
+    stopButton?.addEventListener('click', () => this.handleStop());
+  }
+
+  async handleRecord() {
+    await this.recorder.startRecording();
+    this.startDurationUpdate();
+    this.updateUI('recording');
+  }
+
+  async handlePause() {
+    const status = await this.recorder.getCurrentStatus();
+
+    if (status.isPaused) {
+      await this.recorder.resumeRecording();
+      this.updateUI('recording');
+    } else {
+      await this.recorder.pauseRecording();
+      this.updateUI('paused');
+    }
+  }
+
+  async handleStop() {
+    const result = await this.recorder.stopRecording();
+    this.stopDurationUpdate();
+    this.updateUI('stopped');
+
+    if (result) {
+      this.showRecordingResult(result);
+    }
+  }
+
+  startDurationUpdate() {
+    this.updateInterval = setInterval(async () => {
+      const status = await this.recorder.getCurrentStatus();
+      this.updateDurationDisplay(status.duration);
+    }, 100);
+  }
+
+  stopDurationUpdate() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+  }
+
+  updateDurationDisplay(duration: number) {
+    const display = document.getElementById('duration');
+    if (display) {
+      display.textContent = this.recorder.formatDuration(duration);
+    }
+  }
+
+  updateUI(state: 'recording' | 'paused' | 'stopped') {
+    // Update button states, colors, etc.
+    console.log('UI state:', state);
+  }
+
+  showRecordingResult(result: any) {
+    console.log('Recording complete:', result);
+    // Show playback UI, save options, etc.
+  }
+}
+
+// Initialize UI
+const ui = new AudioRecorderUI();
+ui.init();
+```
+
+## 모범 사례
+
+1. **조기 권한 요청**: 녹음 UI를 표시하기 전에 권한을 확인하세요
+2. **중단 처리**: 전화 통화, 알람 등이 녹음을 중단할 수 있습니다
+3. **저장 공간 관리**: 공간을 절약하기 위해 오래된 녹음을 정리하세요
+4. **피드백 제공**: 녹음 상태, 재생 시간 및 파형을 표시하세요
+5. **기기에서 테스트**: 시뮬레이터/에뮬레이터는 제한된 오디오 지원을 제공합니다
+
+## 일반적인 문제
+
+### 권한 거부됨
+
+```typescript
+const handlePermissionDenied = async () => {
+  const permission = await AudioRecorder.checkPermissions();
+
+  if (permission.recordAudio === 'denied') {
+    alert('Microphone permission is required to record audio. Please enable it in Settings.');
+  }
+};
+```
+
+### 녹음 중단됨
+
+```typescript
+// Handle app going to background
+document.addEventListener('pause', async () => {
+  const status = await recorder.getCurrentStatus();
+  if (status.isRecording) {
+    await recorder.pauseRecording();
+    // Notify user
+  }
+});
+```
+
+### 저장 공간 관리
+
+```typescript
+const cleanupOldRecordings = async () => {
+  // Implement cleanup logic
+  // Delete recordings older than X days
+  // Or keep only last N recordings
+};
+```
+
+## 다음 단계
+
+- 전체 메서드 문서는 [API Reference](https://github.com/Cap-go/capacitor-audio-recorder#api)를 참조하세요
+- 고급 사용법은 [예제 앱](https://github.com/Cap-go/capacitor-audio-recorder/tree/main/example)을 확인하세요
+- 완전한 구현 예제는 [튜토리얼](/plugins-tutorials/capacitor-audio-recorder)을 참조하세요

@@ -1,0 +1,139 @@
+---
+title: はじめに
+description: Capacitor Alarmプラグインのインストールと使用方法を学び、iOSとAndroidでネイティブアラームを管理します。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## インストール
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 要件
+
+- **iOS**: iOS 26以降のみ。このプラグインは`AlarmKit` APIに依存しており、それ以前のバージョンまたはフレームワークが利用できない場合はサポート対象外と報告されます。
+- **Android**: `AlarmClock`インテントを使用。動作はデフォルトのClockアプリとOEMポリシーに依存します。
+
+注: このプラグインはネイティブアラームアクション（作成/開く）のみを公開します。カスタムのアプリ内アラームスケジューリング/CRUDは実装していません。
+
+## API
+
+### createAlarm(...)
+
+```typescript
+createAlarm(options: NativeAlarmCreateOptions) => Promise<NativeActionResult>
+```
+
+プラットフォームの時計アプリを使用してネイティブOSアラームを作成します。
+AndroidではAlarm Clockインテントを使用し、iOSではAlarmKitを使用します（iOS 26以降で利用可能な場合）。
+
+| パラメータ         | 型                                                                          |
+| ------------- | ----------------------------------------------------------------------------- |
+| **`options`** | `NativeAlarmCreateOptions` |
+
+**戻り値:** `Promise<NativeActionResult>`
+
+### openAlarms()
+
+```typescript
+openAlarms() => Promise<NativeActionResult>
+```
+
+プラットフォームのネイティブアラームリストUIを開きます（利用可能な場合）。
+
+**戻り値:** `Promise<NativeActionResult>`
+
+### getOSInfo()
+
+```typescript
+getOSInfo() => Promise<OSInfo>
+```
+
+OSと機能に関する情報を取得します。
+
+**戻り値:** `Promise<OSInfo>`
+
+### requestPermissions(...)
+
+```typescript
+requestPermissions(options?: { exactAlarm?: boolean | undefined; } | undefined) => Promise<PermissionResult>
+```
+
+プラットフォームでアラーム使用に関連する権限をリクエストします。
+Androidでは、正確なアラームのために設定にルーティングされる場合があります。
+
+| パラメータ         | 型                                   |
+| ------------- | -------------------------------------- |
+| **`options`** | `{ exactAlarm?: boolean; }` |
+
+**戻り値:** `Promise<PermissionResult>`
+
+## インターフェース
+
+### NativeActionResult
+
+| プロパティ          | 型                 |
+| ------------- | -------------------- |
+| **`success`** | `boolean` |
+| **`message`** | `string`  |
+
+### NativeAlarmCreateOptions
+
+プラットフォームの時計アプリを介してネイティブOSアラームを作成するためのオプション。
+
+| プロパティ          | 型                 | 説明                                  |
+| ------------- | -------------------- | -------------------------------------------- |
+| **`hour`**    | `number`  | 24時間形式の時間（0-23）             |
+| **`minute`**  | `number`  | 分（0-59）                        |
+| **`label`**   | `string`  | アラームのオプションラベル                 |
+| **`skipUi`**  | `boolean` | Androidのみ: 可能な場合UIをスキップ |
+| **`vibrate`** | `boolean` | Androidのみ: アラームをバイブレーションに設定           |
+
+### OSInfo
+
+現在のOSと機能に関する返される情報。
+
+| プロパティ                                 | 型                 | 説明                                                 |
+| ------------------------------------ | -------------------- | ----------------------------------------------------------- |
+| **`platform`**                       | `string`  | 'ios' \| 'android' \| 'web'                                 |
+| **`version`**                        | `string`  | OSバージョン文字列                                           |
+| **`supportsNativeAlarms`**           | `boolean` | プラットフォームがネイティブアラームアプリ統合を公開しているかどうか |
+| **`supportsScheduledNotifications`** | `boolean` | ローカル通知のスケジューリングがサポートされているかどうか         |
+| **`canScheduleExactAlarms`**         | `boolean` | Androidのみ: 正確なアラームが許可されているかどうか              |
+
+### PermissionResult
+
+権限リクエストの結果。
+
+| プロパティ          | 型                                                             | 説明                        |
+| ------------- | ---------------------------------------------------------------- | ---------------------------------- |
+| **`granted`** | `boolean`                                             | リクエストされたスコープの全体的な許可  |
+| **`details`** | `Record<string, boolean>` | 権限キー別のオプション詳細 |

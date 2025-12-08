@@ -1,0 +1,470 @@
+---
+title: Build Android
+description: Konfigurasi dan build aplikasi Android dengan Capgo Cloud Build
+locale: id
+sidebar:
+  order: 3
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Build dan submit aplikasi Android ke Google Play Store menggunakan infrastruktur cloud Capgo yang aman.
+
+## Sebelum Anda Build
+
+<CardGrid>
+  <Card title="⚠️ Setup Kredensial Android Terlebih Dahulu" icon="warning">
+    **Wajib:** Anda harus menyimpan kredensial Android sebelum build aplikasi release.
+
+    [Setup Kredensial Android →](/docs/cli/cloud-build/credentials/#saving-android-credentials)
+  </Card>
+</CardGrid>
+
+## Cara Kerja Build Android
+
+Build Android berjalan di sandbox Cloudflare yang aman:
+
+- **Infrastruktur**: Cloudflare Workers dengan Android SDK yang di-containerize
+- **Build Tool**: Gradle dengan Android build tools
+- **Eksekusi**: Lingkungan sandbox terisolasi per build
+- **Cleanup**: Penghapusan instan setelah build selesai
+- **Keamanan**: Tidak ada penyimpanan permanen, isolasi penuh antar build
+
+## Prasyarat
+
+Sebelum build untuk Android, Anda memerlukan:
+
+### 1. Development Environment (Testing Lokal)
+
+- Android Studio terinstal secara lokal (untuk setup keystore awal)
+- Aplikasi Anda berhasil di-build dengan `npx cap open android`
+- Java JDK 17 atau lebih tinggi
+
+### 2. Signing Keystore
+
+Untuk build release, Anda memerlukan signing keystore:
+
+| Tipe Build | Keystore Diperlukan | Tujuan |
+|------------|-------------------|---------|
+| **Debug** | Tidak | Testing saja, auto-generated |
+| **Release** | Ya | Submission Play Store |
+
+## Membuat Keystore
+
+<Aside type="tip">
+Untuk panduan langkah demi langkah dengan screenshot, kunjungi:
+- [Panduan Sertifikat Android](https://capawesome.io/cloud/native-builds/certificates/android/)
+- [Blog: Build Android Otomatis dengan GitHub Actions](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+</Aside>
+
+Jika Anda belum memiliki keystore, buatlah:
+
+```bash
+keytool -genkey -v \
+  -keystore my-release-key.keystore \
+  -alias my-key-alias \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000
+```
+
+Jawab pertanyaan-pertanyaan:
+- **Password**: Pilih password yang kuat (simpan dengan aman!)
+- **Name**: Nama Anda atau nama perusahaan
+- **Organization**: Nama perusahaan Anda
+- **Location**: Kota, provinsi, negara Anda
+
+<Aside type="caution">
+**Penting**: Jaga file keystore dan password Anda tetap aman! Jika Anda kehilangan mereka, Anda tidak dapat mengupdate aplikasi di Play Store.
+</Aside>
+
+### Memahami Komponen Keystore
+
+Saat membuat keystore, Anda perlu mengingat:
+
+1. **Keystore Password** (`KEYSTORE_STORE_PASSWORD`): Password untuk file keystore itu sendiri
+2. **Key Alias** (`KEYSTORE_KEY_ALIAS`): Nama/identifier untuk signing key Anda di dalam keystore
+3. **Key Password** (`KEYSTORE_KEY_PASSWORD`): Password untuk key spesifik (bisa sama dengan store password)
+
+**Contoh workflow:**
+```bash
+# List alias di keystore Anda untuk verifikasi
+keytool -list -keystore my-release-key.keystore
+
+# Lihat informasi detail tentang key Anda
+keytool -list -v -keystore my-release-key.keystore -alias my-key-alias
+```
+
+## Konfigurasi Build
+
+### Environment Variables yang Diperlukan
+
+Untuk **build release**, set kredensial ini:
+
+```bash
+# Android Signing (Wajib untuk release)
+ANDROID_KEYSTORE_FILE="<base64-encoded-keystore>"
+KEYSTORE_KEY_ALIAS="my-key-alias"
+KEYSTORE_KEY_PASSWORD="<key-password>"
+KEYSTORE_STORE_PASSWORD="<store-password>"
+
+# Play Store Publishing (Opsional, untuk auto-submission)
+PLAY_CONFIG_JSON="<base64-encoded-service-account-json>"
+```
+
+### Menghasilkan Kredensial Base64
+
+**File Keystore:**
+```bash
+base64 -i my-release-key.keystore | pbcopy
+```
+
+**Play Store Service Account JSON:**
+```bash
+base64 -i play-store-service-account.json | pbcopy
+```
+
+String base64 sekarang ada di clipboard Anda.
+
+### Setup Play Store Service Account
+
+Untuk mengaktifkan upload otomatis Play Store, Anda perlu membuat service account Google Cloud dengan permission yang tepat.
+
+<Aside type="tip">
+Untuk instruksi detail dengan screenshot, lihat [Panduan Sertifikat Android](https://capawesome.io/cloud/native-builds/certificates/android/).
+</Aside>
+
+<Steps>
+
+1. **Buat Service Account di Google Cloud**
+   - Pergi ke [Google Play Console](https://play.google.com/console) → Setup → API Access
+   - Klik "Create new service account"
+   - Ikuti link ke Google Cloud Console
+   - Klik "Create Service Account"
+   - Masukkan nama (mis., "Capgo CI/CD")
+   - Berikan role "Service Account User"
+   - Klik "Done"
+
+2. **Buat JSON Key**
+   - Di Google Cloud Console, temukan service account Anda
+   - Klik pada email service account
+   - Pergi ke tab "Keys"
+   - Klik "Add Key" → "Create new key"
+   - Pilih format "JSON"
+   - Download file JSON (simpan dengan aman!)
+
+3. **Berikan Permission di Play Console**
+   - Kembali ke Google Play Console → Setup → API Access
+   - Temukan service account Anda di daftar
+   - Klik "Grant access"
+   - Di bawah "App permissions", pilih aplikasi Anda
+   - Di bawah "Account permissions", berikan:
+     - **Releases**: "View app information and download bulk reports (read-only)"
+     - **Releases**: "Create, edit, and delete draft releases"
+     - **Releases**: "Release to production, exclude devices, and use Play App Signing"
+   - Klik "Invite user"
+
+4. **Terima Undangan**
+   - Service account akan menerima email undangan
+   - Terima undangan untuk mengaktifkan permission
+
+</Steps>
+
+<Aside type="caution">
+File JSON service account berisi kredensial sensitif. Jangan commit ke version control atau membagikannya secara publik.
+</Aside>
+
+## Building untuk Android
+
+### Debug Build
+
+Sempurna untuk testing tanpa signing:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode debug
+```
+
+Ini membuat debug APK yang dapat diinstal di perangkat mana pun untuk testing.
+
+### Release Build
+
+Untuk submission Play Store:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release
+```
+
+Memerlukan kredensial signing yang dikonfigurasi sebagai environment variables.
+
+## Integrasi CI/CD
+
+### Contoh GitHub Actions
+
+```yaml
+name: Build Android App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build Android app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform android \
+            --build-mode release
+```
+
+## Detail Proses Build
+
+### Apa yang Terjadi Selama Build Android
+
+<Steps>
+
+1. **Inisialisasi Sandbox** (~5 detik)
+   - Container aman di-spin up
+   - Android SDK dan Gradle dimuat
+   - Sistem file terisolasi dibuat
+
+2. **Setup Proyek** (~20 detik)
+   - Zip proyek didownload dari R2
+   - Diekstrak ke direktori build
+   - Kredensial signing diinjeksi
+
+3. **Gradle Build** (2-4 menit)
+   - Dependencies didownload
+   - Kompilasi APK/AAB
+   - Optimisasi ProGuard/R8 (mode release)
+   - Code signing diterapkan
+
+4. **Upload Play Store** (30 detik, jika dikonfigurasi)
+   - AAB diupload ke Play Console
+   - Release track dikonfigurasi
+   - Submission dimulai
+
+5. **Cleanup** (segera)
+   - Semua file dihapus
+   - Container dihancurkan
+   - Tidak ada artifacts yang disimpan
+
+</Steps>
+
+### Build Stack
+
+Lingkungan build Android kami mencakup:
+
+- **Java**: OpenJDK 17
+- **Android SDK**: Stabil terbaru
+- **Gradle**: 8.x
+- **Build Tools**: 34.x
+- **Node.js**: 18.x (LTS)
+- **NPM**: Stabil terbaru
+
+## Output Build
+
+### APK vs AAB
+
+- **APK** (Android Package): File yang dapat diinstal untuk instalasi langsung
+- **AAB** (Android App Bundle): Format yang direkomendasikan Google Play (download lebih kecil untuk pengguna)
+
+Secara default, build Capgo membuat:
+- **Mode debug**: APK
+- **Mode release**: AAB (dioptimalkan untuk Play Store)
+
+## Waktu Build
+
+Waktu build Android yang khas:
+
+| Tipe Build | Waktu Rata-rata |
+|------------|--------------|
+| Debug | 2-3 menit |
+| Release (tanpa ProGuard) | 3-4 menit |
+| Release (dengan ProGuard) | 4-6 menit |
+
+<Aside type="note">
+Build Android berharga **1× tarif dasar** (setengah dari biaya build iOS).
+</Aside>
+
+## Varian Build
+
+### Varian Build Kustom
+
+Jika aplikasi Anda memiliki varian build kustom (mis., `staging`, `production`), gunakan `build-config`:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release \
+  --build-config '{"variant":"staging"}'
+```
+
+Ini akan build varian `stagingRelease`.
+
+### Flavor Dimensions
+
+Untuk aplikasi dengan flavor dimensions:
+
+```bash
+--build-config '{"flavor":"premium","variant":"production"}'
+```
+
+Ini build varian `premiumProductionRelease`.
+
+## Troubleshooting
+
+### Masalah Umum
+
+**"Keystore password incorrect"**
+- Verifikasi KEYSTORE_STORE_PASSWORD cocok dengan keystore Anda
+- Pastikan KEYSTORE_KEY_PASSWORD cocok dengan password key alias Anda
+- Periksa spasi ekstra atau karakter spesial
+
+**"Key alias not found"**
+- Verifikasi KEYSTORE_KEY_ALIAS cocok persis (case-sensitive)
+- List alias: `keytool -list -keystore my-release-key.keystore`
+
+**"Gradle build failed"**
+- Periksa build logs untuk error spesifik
+- Pastikan aplikasi Anda build secara lokal dengan `./gradlew assembleRelease`
+- Verifikasi semua native dependencies ada di `build.gradle`
+
+**"Play Store upload failed"**
+- Verifikasi service account JSON valid
+- Pastikan service account memiliki permission yang benar di Play Console
+- Periksa bahwa aplikasi sudah disetup dengan benar di Play Console
+
+**"Build timeout"**
+- Aplikasi besar mungkin perlu optimisasi
+- Periksa apakah dependencies yang tidak perlu dapat dihapus
+- Hubungi support jika build terus-menerus timeout
+
+### Debug Logs
+
+Perhatikan fase-fase kunci ini di build logs:
+
+```
+→ Downloading dependencies...
+→ Running Gradle assembleRelease...
+→ Signing APK/AAB...
+→ Uploading to Play Store...
+✔ Build succeeded
+```
+
+Jika build gagal, error Gradle spesifik akan ditampilkan di logs.
+
+## Best Practices
+
+### 1. Test Lokal Terlebih Dahulu
+
+Selalu pastikan build Android Anda berfungsi secara lokal:
+
+```bash
+cd android
+./gradlew assembleRelease
+# atau
+./gradlew bundleRelease
+```
+
+### 2. Amankan Keystore Anda
+
+- Jangan commit keystores ke version control
+- Simpan di secrets management yang aman (1Password, AWS Secrets Manager, dll.)
+- Simpan backup di beberapa lokasi aman
+- Dokumentasikan password di password manager yang aman
+
+### 3. Manajemen Versi
+
+Capgo membaca versi dari `capacitor.config.json` Anda:
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "My App",
+  "version": "1.0.0",
+  "build": "1"
+}
+```
+
+Tambahkan nomor `build` untuk setiap release.
+
+### 4. Konfigurasi ProGuard
+
+Untuk build release, pastikan aturan ProGuard dikonfigurasi dengan benar:
+
+```
+# android/app/proguard-rules.pro
+-keep class com.getcapacitor.** { *; }
+-keep @com.getcapacitor.annotation.CapacitorPlugin public class * {
+  @com.getcapacitor.annotation.PluginMethod public <methods>;
+}
+```
+
+### 5. Monitor Ukuran Build
+
+Perhatikan ukuran APK/AAB untuk memastikan dioptimalkan:
+
+```
+CLI menampilkan ukuran akhir:
+→ APK size: 12.4 MB
+```
+
+Jika aplikasi Anda besar (>50 MB), pertimbangkan:
+- Mengaktifkan ProGuard/R8
+- Menggunakan format AAB (dynamic delivery)
+- Mengoptimalkan gambar dan assets
+
+## Submission Play Store
+
+### Submission Otomatis
+
+Dengan PLAY_CONFIG_JSON dikonfigurasi, build otomatis diupload ke track internal testing Play Console.
+
+### Submission Manual
+
+Jika Anda lebih suka submission manual:
+
+1. Jalankan build tanpa PLAY_CONFIG_JSON
+2. Download AAB dari build artifacts (jika dikonfigurasi)
+3. Upload manual ke Play Console
+
+## Langkah Selanjutnya
+
+- [Build iOS](/docs/cli/cloud-build/ios/) - Konfigurasi build iOS
+- [Troubleshooting](/docs/cli/cloud-build/troubleshooting/) - Masalah build umum
+- [Referensi CLI](/docs/cli/reference/build/) - Dokumentasi command lengkap
+
+## Butuh Bantuan?
+
+- [Panduan Troubleshooting](/docs/cli/cloud-build/troubleshooting/)
+- [Komunitas Discord](https://discord.com/invite/VnYRvBfgA6)
+- Email: support@capgo.app

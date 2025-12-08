@@ -1,0 +1,86 @@
+---
+title: 始め方
+description: Capgo HealthプラグインでHealthKitとHealth Connectへのアクセスを有効にします。
+locale: ja
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **プラグインのインストール**
+   <PackageManagers pkg="@capgo/capacitor-health" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS設定
+
+- Xcodeで`ios/App/App.xcworkspace`を開き、**HealthKit**機能を有効にします。
+- `Info.plist`に使用説明を追加します:
+
+```xml
+<key>NSHealthShareUsageDescription</key>
+<string>このアプリは、体験をパーソナライズするために健康指標を読み取ります。</string>
+<key>NSHealthUpdateUsageDescription</key>
+<string>このアプリは、明示的に記録した健康データを書き込みます。</string>
+```
+
+## Android設定
+
+健康データは[Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect)によって提供されます。以下を確認してください:
+
+- `minSdkVersion`が**26以上** (Capacitor 5はすでにこれを満たしています)。
+- ユーザーがHealth Connectをインストールしている (Android 14+にはバンドルされています。それ以前のバージョンではPlay Storeからのダウンロードが必要です)。
+- アクセスを求める際に、ユーザーをランタイム許可UIに案内する。
+
+## 利用可能性の確認とアクセスリクエスト
+
+```typescript
+import { Health } from '@capgo/capacitor-health';
+
+const { available, reason } = await Health.isAvailable();
+if (!available) {
+  console.warn('Health APIs unavailable:', reason);
+  return;
+}
+
+await Health.requestAuthorization({
+  read: ['steps', 'heartRate', 'weight'],
+  write: ['weight'],
+});
+```
+
+## サンプルの読み取り
+
+```typescript
+const { samples } = await Health.readSamples({
+  dataType: 'steps',
+  startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  endDate: new Date().toISOString(),
+  limit: 200,
+});
+
+samples.forEach((sample) => {
+  console.log(sample.value, sample.startDate, sample.endDate);
+});
+```
+
+## サンプルの書き込み
+
+```typescript
+await Health.saveSample({
+  dataType: 'weight',
+  value: 74.6,
+  startDate: new Date().toISOString(),
+});
+```
+
+## 認証管理
+
+- `checkAuthorization()`を使用して、現在の読み取り/書き込みスコープを確認し、UIを調整します。
+- データが体験を向上させる理由を説明し、再試行の機会を提供することで、拒否を適切に処理します。
+- 常にユーザーのプライバシーを尊重し、機能に必要な最小限のスコープのみをリクエストします。

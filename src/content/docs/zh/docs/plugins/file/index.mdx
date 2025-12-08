@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-file"
+locale: zh
+description: 功能齐全的文件系统插件，用于读取、写入和管理文件和目录。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 完整的文件系统操作，支持读取、写入、复制、移动和目录管理，适用于 iOS 和 Android。
+  image:
+    file: ~public/icons/plugins/file.svg
+  actions:
+    - text: 入门指南
+      link: /docs/plugins/file/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-file/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="完整的文件操作" icon="rocket">
+    轻松读取、写入、追加、复制、移动和删除文件
+  </Card>
+  <Card title="目录管理" icon="folder">
+    创建、列出和删除目录，支持递归操作
+  </Card>
+  <Card title="多种编码" icon="document">
+    支持 UTF-8、ASCII、UTF-16 和二进制（base64）数据
+  </Card>
+  <Card title="跨平台" icon="puzzle">
+    在 iOS 和 Android 上运行，跨平台 API 一致
+  </Card>
+</CardGrid>

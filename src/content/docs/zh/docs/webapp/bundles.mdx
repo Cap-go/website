@@ -1,0 +1,67 @@
+---
+title: "Bundles"
+locale: zh
+description: "了解如何在 Capgo 中管理 bundle，什么是 bundle 以及如何管理它，您可以对它们执行多种操作，它们是 Capgo 中最重要的部分"
+sidebar:
+  order: 7
+---
+
+## 显示所有 bundle
+
+在 Capgo 中，bundle 代表应用程序代码和资源的特定版本，准备分发到设备。首先，让我们看看 bundle 页面。您可以通过[点击您的应用](/docs/webapp/main-page)，然后[点击 bundle 标签](/docs/webapp/main-app-page)来访问它。
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundles.webp" alt="bundle list" /><figcaption></figcaption></figure>
+
+## 删除 bundle
+
+有两种方式可以删除 bundle：
+
+ - 正常删除
+ - 不安全删除
+
+不安全删除 bundle 的方式于 2024 年 8 月 12 日添加到 Capgo 中。
+
+这两种方式的区别在于删除后能否重用版本号。
+
+例如，如果您以正常方式删除版本 `1.0.0`，然后尝试上传 `1.0.0` 版本，将会失败。
+如果您通过不安全删除方式删除此版本，您将能够上传 `1.0.0` 版本。
+
+:::danger
+不安全删除版本并重新上传是非常危险的。
+它可能会在插件中导致各种错误和不可预测的行为。
+绝不应该用于已在公开频道中使用的 bundle。
+正是因为这个原因，不安全删除版本需要 "super_admin" 权限
+:::
+
+## 管理特定 bundle
+
+看到所有 bundle 列表后，点击您想要管理的 bundle。之后您应该会看到类似这样的内容：
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-info.webp" alt="bundle info" /><figcaption></figcaption></figure>
+
+让我们逐一了解此页面上的所有元素。
+
+---
+
+首先，您可以看到一个 `Channel`（频道）。这让您知道此 bundle 是为哪个频道准备的。您可以通过点击它来更改频道。
+点击后，您应该会看到类似这样的内容：
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-change.webp" alt="bundle change" /><figcaption></figcaption></figure>
+
+**将 bundle 设置到频道：** 将此 bundle 指定为所选频道的活动版本。订阅该频道的设备将接收此 bundle。
+**打开频道：** 导航到当前与此 bundle 关联的频道的专用页面，您可以在那里管理特定于频道的设置。
+**从频道取消链接 bundle：** 删除此 bundle 与其当前频道之间的关联。这意味着该频道上的设备将不再接收此特定 bundle（除非重新链接或为该频道设置其他 bundle）。
+
+:::warning
+`从频道取消链接 bundle` 操作仅影响与当前为此 bundle 显示的频道的关联（例如，屏幕截图中的 "dev"）。如果此 bundle 在其他频道上也处于活动状态，那些链接将保持不变。您需要分别管理从其他频道的取消链接，例如，通过导航到相应频道的配置页面。
+:::
+
+---
+
+接下来，您可以看到 `Size`（大小）。如果您点击它，将能够下载此 bundle。
+应该看起来像这样：
+<figure><img style="margin-left: auto; margin-right: auto" src="/download-bundle.webp" alt="download bundle" /><figcaption></figcaption></figure>
+
+---
+
+最后，**Devices**（设备）部分列出了当前正在使用此特定 bundle 版本的所有设备。这对于了解此 bundle 的推出状态和影响很有帮助。

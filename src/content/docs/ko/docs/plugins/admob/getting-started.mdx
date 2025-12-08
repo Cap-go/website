@@ -1,0 +1,89 @@
+---
+title: 시작하기
+description: Capgo AdMob 플러그인을 설치하고 구성하여 Capacitor 애플리케이션 내에서 광고를 제공하세요.
+sidebar:
+  order: 2
+locale: ko
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **플러그인 설치**
+   <PackageManagers pkg="@capgo/capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## SDK 초기화
+
+```typescript
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
+
+// 애플리케이션 부트스트랩에서 한 번 Mobile Ads SDK 시작
+await AdMob.start();
+
+// 선택 사항: 전역 요청 설정 구성
+await AdMob.configure({
+  appMuted: false,
+  appVolume: 1,
+});
+
+await AdMob.configRequest({
+  maxAdContentRating: MaxAdContentRating.T,
+  tagForChildDirectedTreatment: false,
+  tagForUnderAgeOfConsent: false,
+});
+```
+
+## 배너 광고 표시
+
+```typescript
+import { BannerAd } from '@capgo/capacitor-admob';
+
+const banner = new BannerAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/banner',
+  position: 'bottom',
+});
+
+await banner.show();
+```
+
+## 전면 또는 보상형 광고
+
+```typescript
+import { InterstitialAd, RewardedAd } from '@capgo/capacitor-admob';
+
+const interstitial = new InterstitialAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/interstitial',
+});
+await interstitial.load();
+await interstitial.show();
+
+const rewarded = new RewardedAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/rewarded',
+});
+await rewarded.load();
+await rewarded.show();
+```
+
+## 광고 이벤트 수신
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const handle = await AdMob.addListener('adImpression', (event) => {
+  console.log('Ad impression', event);
+});
+
+// 나중에 정리할 때
+await handle.remove();
+```
+
+## 플랫폼 참고사항
+
+- **iOS**: `Info.plist`에 `GADApplicationIdentifier` 키 아래에 AdMob 앱 ID를 추가하고 의존하는 SKAdNetwork ID를 포함하세요.
+- **Android**: `<application>` 태그 내에 `com.google.android.gms.ads.APPLICATION_ID`를 추가하여 `AndroidManifest.xml`에 AdMob 앱 ID를 선언하세요.
+- **동의 및 개인정보**: iOS 14+에서 `requestTrackingAuthorization()`을 사용하고 `configRequest()` 어린이 대상 플래그를 사용하여 지역 개인정보 보호 규칙을 준수하세요.

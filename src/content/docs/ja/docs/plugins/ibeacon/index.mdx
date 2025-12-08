@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-ibeacon"
+description: Capacitor用iBeaconプラグイン - ロケーションベースの機能のための近接度検出とビーコンリージョン監視。
+locale: ja
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: 近接ベースの機能、屋内ナビゲーション、位置情報認識体験のためにBluetoothビーコンを検出・監視します。
+  image:
+    file: ~public/icons/plugins/ibeacon.svg
+  actions:
+    - text: 始める
+      link: /docs/plugins/ibeacon/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-ibeacon/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="ビーコン監視" icon="star">
+    ビーコンリージョンを監視し、入域または退域時に通知を受け取る
+  </Card>
+  <Card title="ビーコンレンジング" icon="rocket">
+    近くのビーコンを検出し、リアルタイムで距離を測定
+  </Card>
+  <Card title="バックグラウンド検出" icon="setting">
+    アプリがバックグラウンドにあってもビーコンを監視
+  </Card>
+  <Card title="ビーコン広告" icon="puzzle">
+    デバイスをiBeacon送信機に変換 (iOSのみ)
+  </Card>
+  <Card title="クロスプラットフォーム" icon="puzzle">
+    ネイティブビーコンライブラリを使用してiOSとAndroidの両方で動作
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    [ドキュメント](/docs/plugins/ibeacon/getting-started/)をチェックして、数分でプラグインをマスターしましょう。
+  </Card>
+</CardGrid>

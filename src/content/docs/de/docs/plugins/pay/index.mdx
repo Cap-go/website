@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-pay"
+description: Präsentieren Sie Apple Pay- und Google Pay-Sheets aus Capacitor mit einem einheitlichen Workflow.
+locale: de
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Bieten Sie native Apple Pay- und Google Pay-Checkouts mit einer einzigen TypeScript-API, die sich pro Plattform anpasst.
+  image:
+    file: ~public/icons/plugins/pay.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/pay/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-pay/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Pay verbindet die neuesten Apple Pay- und Google Pay-SDKs, sodass Sie ein nahtloses Checkout-Erlebnis über alle Geräte hinweg bieten können.
+
+<CardGrid stagger>
+  <Card title="Einheitliche API" icon="pencil">
+    Rufen Sie `isPayAvailable` und `requestPayment` einmal auf und lassen Sie das Plugin jede Plattform handhaben.
+  </Card>
+  <Card title="Schnelle Einrichtung" icon="rocket">
+    Liefern Sie vollständig native Zahlungssheets ohne manuelles Verdrahten plattformspezifischen Codes.
+  </Card>
+  <Card title="Tokenisierte Zahlungen" icon="approve-check">
+    Erhalten Sie Zahlungstoken, die für Ihre Gateway- oder PSP-Integrationen bereit sind.
+  </Card>
+  <Card title="Anpassbare Abläufe" icon="star">
+    Konfigurieren Sie Einzelposten, Kontaktfelder und Abrechnungsanforderungen, um Ihren Checkout anzupassen.
+  </Card>
+</CardGrid>
+
+Tauchen Sie in den Leitfaden für die ersten Schritte ein, um Checklisten für die Einrichtung und Beispiel-Payloads für jede Plattform zu erhalten.

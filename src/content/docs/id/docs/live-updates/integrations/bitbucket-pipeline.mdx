@@ -1,0 +1,498 @@
+---
+title: Integrasi Bitbucket Pipelines
+description: "Pelajari cara mengintegrasikan Capgo Live Updates dengan Bitbucket Pipelines untuk deployment otomatis pembaruan aplikasi Anda."
+locale: id
+sidebar:
+  order: 4
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Integrasikan Capgo Live Updates dengan Bitbucket Pipelines untuk secara otomatis men-deploy pembaruan aplikasi Anda setiap kali Anda push perubahan kode. Panduan ini mencakup pengaturan build otomatis, testing, dan workflow deployment.
+
+## Prasyarat
+
+Sebelum mengatur integrasi Bitbucket Pipelines, pastikan Anda memiliki:
+
+- Akun Bitbucket dengan repositori
+- Akun Capgo dengan aplikasi yang sudah dikonfigurasi
+- Node.js dan npm/yarn yang dikonfigurasi dalam proyek Anda
+
+## Mengatur Bitbucket Pipelines
+
+### Langkah 1: Konfigurasi Variabel Repositori
+
+Pertama, atur variabel yang diperlukan dalam repositori Bitbucket Anda:
+
+<Steps>
+
+1. Navigasi ke repositori Bitbucket Anda
+2. Pergi ke **Repository settings** → **Pipelines** → **Repository variables**
+3. Tambahkan variabel berikut:
+
+</Steps>
+
+| Nama Variabel | Nilai | Secured |
+|---------------|-------|---------|
+| `CAPGO_TOKEN` | Token API Capgo Anda | ✅ Ya |
+
+<Aside type="tip">
+
+Dapatkan token API Capgo Anda dari [console.capgo.app/apikeys](https://console.capgo.app/apikeys). ID aplikasi Anda sudah dikonfigurasi dalam file `capacitor.config.ts` Anda.
+
+</Aside>
+
+## Sederhana
+
+Konfigurasi dasar yang men-deploy ke production pada setiap push ke branch main:
+
+```yaml
+# bitbucket-pipelines.yml - Simple Configuration
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and Deploy to Production
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+          artifacts:
+            - dist/**
+```
+
+## Lanjutan
+
+### Deployment Branch Fitur
+
+Deploy branch fitur ke channel test untuk review dan testing:
+
+```yaml
+# Feature branch deployment
+pipelines:
+  branches:
+    feature/*:
+      - step:
+          name: Deploy Feature Branch
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - BRANCH_NAME=$(echo $BITBUCKET_BRANCH | sed 's/[^a-zA-Z0-9-]/-/g')
+            - CHANNEL_NAME="feature-$BRANCH_NAME"
+            - npm install -g @capgo/cli
+            - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+          artifacts:
+            - dist/**
+```
+
+<Aside type="tip">
+
+**Testing dengan Channels**: Setelah men-deploy ke channel fitur, Anda dapat menguji pembaruan dalam aplikasi Anda dengan mengonfigurasinya untuk menggunakan channel tertentu. Pelajari lebih lanjut tentang [mengonfigurasi channel dalam aplikasi Anda](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+
+</Aside>
+
+### Menggunakan Enkripsi
+
+Jika Anda menggunakan [fitur enkripsi Capgo](/docs/live-updates/encryption/), Anda perlu menyimpan private key Anda dengan aman di environment CI/CD Anda.
+
+Setelah [mengatur encryption keys](/docs/live-updates/encryption/#setting-up-encryption) secara lokal, tambahkan private key Anda ke variabel Bitbucket:
+
+```shell
+# Display your private key content (copy this output)
+cat .capgo_key_v2
+```
+
+Tambahkan konten ini sebagai `CAPGO_PRIVATE_KEY` dalam variabel repositori Bitbucket Anda (tandai sebagai secured), kemudian gunakan dalam pipeline:
+
+```yaml
+# Deploy with encryption
+- step:
+    name: Deploy to Capgo with Encryption
+    script:
+      - npm install -g @capgo/cli
+      - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**Praktik Terbaik Keamanan:**
+- Jangan pernah commit file `.capgo_key_v2` ke version control
+- Simpan private key hanya dalam manajemen secret CI/CD yang aman
+- Gunakan kunci yang berbeda untuk environment yang berbeda
+
+</Aside>
+
+### Konfigurasi Multi-Channel
+
+Untuk informasi komprehensif tentang pengaturan dan pengelolaan channel deployment multiple, lihat [dokumentasi Channels](/docs/live-updates/channels/).
+
+Konfigurasi lengkap dengan environment multiple dan deployment pull request:
+
+```yaml
+# bitbucket-pipelines.yml - Advanced Multi-Channel Configuration
+image: node:22
+
+definitions:
+  steps:
+    - step: &build-step
+        name: Build Application
+        script:
+          - npm ci
+          - npm run test
+          - npm run build
+        artifacts:
+          - dist/**
+
+    - step: &deploy-step
+        name: Deploy to Capgo
+        script:
+          - npm install -g @capgo/cli
+          - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+pipelines:
+  branches:
+    main:
+      - step:
+          <<: *build-step
+      - step:
+          <<: *deploy-step
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - export CHANNEL_NAME=production
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+    develop:
+      - step:
+          <<: *build-step
+      - step:
+          <<: *deploy-step
+          name: Deploy to Development
+          deployment: development
+          script:
+            - export CHANNEL_NAME=development
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+
+  pull-requests:
+    '**':
+      - step:
+          <<: *build-step
+      - step:
+          name: Deploy PR to Test Channel
+          script:
+            - CHANNEL_NAME="pr-$BITBUCKET_PR_ID"
+            - npm install -g @capgo/cli
+            - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+          artifacts:
+            - dist/**
+```
+
+### Pipeline Multi-Environment
+
+Untuk skenario deployment kompleks dengan environment staging dan production:
+
+```yaml
+# Multi-environment pipeline
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to Staging
+          deployment: staging
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel staging
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+
+    develop:
+      - step:
+          name: Build and Deploy to Development
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel development
+          artifacts:
+            - dist/**
+```
+
+### Strategi Deployment Berbasis Branch
+
+Deploy branch yang berbeda secara otomatis ke channel yang sesuai:
+
+```yaml
+# Dynamic channel deployment
+image: node:22
+
+definitions:
+  scripts:
+    - script: &determine-channel |
+        if [ "$BITBUCKET_BRANCH" = "main" ]; then
+          export CHANNEL_NAME="production"
+        elif [ "$BITBUCKET_BRANCH" = "develop" ]; then
+          export CHANNEL_NAME="staging"
+        else
+          export CHANNEL_NAME="development"
+        fi
+        echo "Deploying to channel: $CHANNEL_NAME"
+
+pipelines:
+  default:
+    - step:
+        name: Build and Deploy
+        script:
+          - npm ci
+          - npm run test
+          - npm run build
+          - *determine-channel
+          - npm install -g @capgo/cli
+          - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+        artifacts:
+          - dist/**
+```
+
+### Eksekusi Pipeline Paralel
+
+Optimalkan waktu build dengan langkah paralel:
+
+```yaml
+# Parallel execution pipeline
+image: node:22
+
+pipelines:
+  branches:
+    main:
+      - parallel:
+          - step:
+              name: Run Tests
+              script:
+                - npm ci
+                - npm run test
+          - step:
+              name: Lint Code
+              script:
+                - npm ci
+                - npm run lint
+      - step:
+          name: Build Application
+          script:
+            - npm ci
+            - npm run build
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to Production
+          deployment: production
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+## Praktik Terbaik Keamanan
+
+### Variabel Repositori
+
+<Steps>
+
+1. **Variabel Secured**: Selalu tandai token API sebagai secured
+2. **Variabel Environment**: Gunakan variabel khusus deployment jika diperlukan
+3. **Kontrol Akses**: Batasi akses repositori hanya untuk anggota tim yang berwenang
+4. **Rotasi Token**: Secara berkala rotasi token API Capgo Anda
+
+</Steps>
+
+### Environment Deployment
+
+Konfigurasi environment deployment untuk keamanan yang lebih baik:
+
+```yaml
+# Deployment with environment restrictions
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          script:
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+## Monitoring dan Notifikasi
+
+### Integrasi Slack
+
+Tambahkan notifikasi Slack ke pipeline Anda:
+
+```yaml
+# Pipeline with Slack notifications
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and Deploy
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+          after-script:
+            - |
+              if [ $BITBUCKET_EXIT_CODE -eq 0 ]; then
+                curl -X POST -H 'Content-type: application/json' \
+                  --data '{"text":"✅ Capgo deployment successful for '$BITBUCKET_BRANCH'"}' \
+                  $SLACK_WEBHOOK_URL
+              else
+                curl -X POST -H 'Content-type: application/json' \
+                  --data '{"text":"❌ Capgo deployment failed for '$BITBUCKET_BRANCH'"}' \
+                  $SLACK_WEBHOOK_URL
+              fi
+```
+
+### Notifikasi Email
+
+Konfigurasi notifikasi email melalui fitur bawaan Bitbucket atau menggunakan layanan eksternal:
+
+```yaml
+# Email notification step
+- step:
+    name: Send Notification
+    script:
+      - |
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -d '{
+            "to": "team@yourcompany.com",
+            "subject": "Capgo Deployment Status",
+            "body": "Deployment of '$BITBUCKET_BRANCH' completed with status: '$BITBUCKET_EXIT_CODE'"
+          }' \
+          $EMAIL_SERVICE_URL
+    condition:
+      result: [successful, failed]
+```
+
+## Pemecahan Masalah
+
+### Masalah Umum
+
+**Pipeline gagal dengan "Capgo CLI not found":**
+```yaml
+# Debug CLI installation
+- step:
+    name: Debug CLI
+    script:
+      - npm install -g @capgo/cli
+      - which capgo || echo "Capgo CLI not found"
+      - npx @capgo/cli --version
+```
+
+**Kesalahan autentikasi:**
+```yaml
+# Verify token configuration
+- step:
+    name: Debug Auth
+    script:
+      - |
+        if [ -z "$CAPGO_TOKEN" ]; then
+          echo "CAPGO_TOKEN is not set"
+          exit 1
+        fi
+        echo "Token length: ${#CAPGO_TOKEN}"
+```
+
+**Build artifacts tidak ditemukan:**
+```yaml
+# List build outputs
+- step:
+    name: Debug Build
+    script:
+      - ls -la dist/
+      - find dist/ -type f -name "*.js" -o -name "*.html"
+```
+
+### Debug Pipeline
+
+Tambahkan informasi debugging untuk memecahkan masalah:
+
+```yaml
+# Debug pipeline
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Debug Information
+          script:
+            - echo "Branch: $BITBUCKET_BRANCH"
+            - echo "Commit: $BITBUCKET_COMMIT"
+            - echo "Build: $BITBUCKET_BUILD_NUMBER"
+            - env | grep BITBUCKET_ | sort
+      - step:
+          name: Build and Deploy
+          script:
+            - npm ci
+            - npm run test
+            - npm run build
+            - npm install -g @capgo/cli
+            - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+```
+
+### Validasi Pipeline
+
+Aktifkan validasi pipeline untuk menangkap kesalahan konfigurasi:
+
+```yaml
+# Enable pipeline validation
+options:
+  docker: true
+  size: 2x
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Validate Pipeline
+          script:
+            - echo "Pipeline validation successful"
+      - step:
+          name: Build and Deploy
+          script:
+            # ... deployment steps
+```
+
+## Langkah Selanjutnya
+
+- Pelajari tentang [Channels](/docs/live-updates/channels/) untuk mengelola environment deployment yang berbeda
+- Jelajahi [Custom Storage](/docs/live-updates/custom-storage/) untuk skenario deployment lanjutan
+- Atur [Encryption](/docs/live-updates/encryption/) untuk deployment yang aman
+- Konfigurasikan [Update Behavior](/docs/live-updates/update-behavior/) untuk menyesuaikan cara penerapan pembaruan
+
+Dengan integrasi Bitbucket Pipelines, Anda dapat mengotomatiskan deployment Capgo Anda dan memastikan pembaruan yang konsisten dan andal untuk pengguna aplikasi mobile Anda.

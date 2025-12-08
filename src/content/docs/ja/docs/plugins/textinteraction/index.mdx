@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-textinteraction"
+locale: ja
+description: WebViewの動作を正確に制御するためにiOSテキストインタラクションルーペを有効または無効にします。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "紹介"
+hero:
+  tagline: キオスクまたはゲーム体験でiOS拡大鏡レンズを削除し、テキスト入力前に復元します。
+  image:
+    file: ~public/icons/plugins/textinteraction.svg
+  actions:
+    - text: はじめに
+      link: /docs/plugins/textinteraction/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-textinteraction/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+キオスクディスプレイ、ゲーム、インタラクティブインスタレーションでUXを調整するために、Appleのテキストインタラクションシステムを制御します。
+
+<CardGrid stagger>
+  <Card title="iOS固有" icon="rocket">
+    iOS 15で導入された拡大鏡レンズと選択ハンドルを切り替えます。
+  </Card>
+  <Card title="シンプルなAPI" icon="pencil">
+    単一のメソッドを呼び出してテキストインタラクション状態を有効または無効にします。
+  </Card>
+  <Card title="安全なデフォルト" icon="approve-check">
+    サポートされていないバージョンを検出できるようにブール結果を受け取ります。
+  </Card>
+  <Card title="キオスクフレンドリー" icon="star">
+    制御されたインストールまたはサイネージでの長押しコピー/ペーストを防止します。
+  </Card>
+</CardGrid>
+
+最小限の統合パターンとテキスト入力を表示する前にインタラクションを再有効化するためのリマインダーについては、はじめにガイドを使用してください。

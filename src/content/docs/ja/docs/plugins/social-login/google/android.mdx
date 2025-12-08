@@ -1,0 +1,222 @@
+---
+title: AndroidでのGoogleログイン
+locale: ja
+description: このガイドでは、AndroidデバイスでCapacitorを使用してGoogleログインを設定する包括的な手順を説明し、スムーズな統合プロセスを確保し、発生する可能性のある課題に対処します。
+sidebar:
+    order: 2
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## はじめに
+
+このガイドでは、Capgo Social LoginでAndroid用のGoogleログインを設定する方法を学びます。
+[一般的なセットアップガイド](/docs/plugins/social-login/google/general/)をすでに読んでいることを前提としています。
+
+## Androidでのgoogleログインの使用
+
+このパートでは、AndroidでGoogleログインを設定する方法を学びます。
+
+:::caution
+AndroidのSHA1証明書は非常に面倒で、この設定をしなければならない人には同情します。次の手順は、Google Play Storeに公開されておらず、ローカルシミュレータまたは開発用ハードウェアデバイスでのみ使用されるアプリの最も単純なシナリオを前提としています。
+
+Google Play Storeにアプリをデプロイした場合は、本番環境リリース用のGoogle Play consoleからのSHA1を含む追加のAndroid client IDを追加する**必要があります**。Google Playがリリースバンドルの署名に使用するSHA1ハッシュは、`Test and release > Setup > App Signing`で確認できます。
+
+最後に、間違えた場合、エラーは明確では**ありません**。デバッグが非常に困難な場合があります。セットアップで苦労している場合は、[Githubの問題](https://github.com/Cap-go/capacitor-social-login/issues)を確認してください。
+
+さらに、詳細については[AndroidのGoogleログインセットアップのトラブルシューティングセクション](#troubleshooting)を参照してください。
+:::
+
+:::note
+複数のAndroid client IDを作成できます。これは、複数のSHA1証明書がある場合に必要です。
+:::
+
+<Steps>
+1. Android client IDを作成します。
+   1. 検索バーをクリックします
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+
+   2. `credentials`を検索し、`APIs and Services`（スクリーンショットの2番）をクリックします
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+
+   3. `create credentials`をクリックします
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+
+   4. `OAuth client ID`を選択します
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+
+   5. `Android`アプリケーションタイプを選択します
+      <img src="/social-login-assets/google_cons_app_type_android.png" alt="Application type selection with Android option highlighted" />
+
+   6. Android Studioを開きます
+
+   7. ナビゲーターの一番下にある`Gradle Scripts`を見つけます
+      <img src="/social-login-assets/studio_gradle_scripts.png" alt="Gradle Scripts section in Android Studio project navigator" />
+
+   8. モジュール`app`の`build.gradle`を見つけます
+      <img src="/social-login-assets/studio_build_gradle.png" alt="build.gradle (Module: app) file in Gradle Scripts section" />
+
+   9. `android.defaultConfig.applicationId`をコピーします。これがGoogle consoleの`package name`になります
+      <img src="/social-login-assets/studio_build_gradle_app_id.png" alt="Build.gradle file showing applicationId configuration" />
+
+   10. ターミナルを開きます。アプリの`android`フォルダにいることを確認し、`./gradlew signInReport`を実行します
+      <img src="/social-login-assets/term_sign_report.png" alt="Terminal showing gradlew signInReport command" />
+
+   11. このコマンドの先頭までスクロールします。次のように表示されるはずです。`SHA1`をコピーします。
+      <img src="/social-login-assets/term_sign_report_res.png" alt="Terminal output showing SHA1 certificate fingerprint" />
+
+   12. Google Consoleに戻ります。`Package Name`として`applicationId`を入力し、証明書フィールドにSHA1を入力して`create`をクリックします
+      <img src="/social-login-assets/google_cons_creat_android_client.png" alt="Android client creation form with package name and SHA1 fields filled in" />
+
+2. Webクライアントを作成します（これはAndroidに必要です）
+
+   1. Google Consoleの`Create credentials`ページに移動します
+
+   2. アプリケーションタイプを`Web`に設定します
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Application type selection with Web option highlighted" />
+
+   3. `Create`をクリックします
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web client creation form with Create button at bottom" />
+
+   4. client IDをコピーします。これをJS/TSコードで`webClientId`として使用します
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client ID details showing Web client ID to copy" />
+
+3. `MainActivity`を変更します
+
+   1. Android Studioでアプリを開いてください。`cap open android`を実行できます
+
+   2. `MainActivity.java`を見つけます
+
+      1. `app`フォルダを開きます
+         <img src="/social-login-assets/studio_app_folder.png" alt="App folder in Android Studio project navigator" />
+
+      2. `java`を見つけます
+         <img src="/social-login-assets/studio_app_java.png" alt="Java folder in Android Studio project structure" />
+
+      3. `MainActivity.java`を見つけてクリックします
+         <img src="/social-login-assets/studio_app_java_activity_main.png" alt="MainActivity.java file in package structure" />
+
+   3. `MainActivity.java`を変更します。次のコードを追加してください
+
+      ```java
+      import ee.forgr.capacitor.social.login.GoogleProvider;
+      import ee.forgr.capacitor.social.login.SocialLoginPlugin;
+      import ee.forgr.capacitor.social.login.ModifiedMainActivityForSocialLoginPlugin;
+      import com.getcapacitor.PluginHandle;
+      import com.getcapacitor.Plugin;
+      import android.content.Intent;
+      import android.util.Log;
+      import com.getcapacitor.BridgeActivity;
+
+      // ModifiedMainActivityForSocialLoginPlugin is VERY VERY important !!!!!!
+      public class MainActivity extends BridgeActivity implements ModifiedMainActivityForSocialLoginPlugin {
+
+            @Override
+            public void onActivityResult(int requestCode, int resultCode, Intent data) {
+              super.onActivityResult(requestCode, resultCode, data);
+
+              if (requestCode >= GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MIN && requestCode < GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MAX) {
+                PluginHandle pluginHandle = getBridge().getPlugin("SocialLogin");
+                if (pluginHandle == null) {
+                  Log.i("Google Activity Result", "SocialLogin login handle is null");
+                  return;
+                }
+                Plugin plugin = pluginHandle.getInstance();
+                if (!(plugin instanceof SocialLoginPlugin)) {
+                  Log.i("Google Activity Result", "SocialLogin plugin instance is not SocialLoginPlugin");
+                  return;
+                }
+                ((SocialLoginPlugin) plugin).handleGoogleLoginIntent(requestCode, data);
+              }
+            }
+
+            // This function will never be called, leave it empty
+            @Override
+            public void IHaveModifiedTheMainActivityForTheUseWithSocialLoginPlugin() {}
+      }
+      ```
+
+   4. ファイルを保存します
+
+4. アプリケーションでGoogleログインを使用します
+
+   1. まず、`SocialLogin`をインポートします
+
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      ```
+
+   2. initializeを呼び出します。これは一度だけ呼び出す必要があります。
+
+      ```typescript
+      // onMountedはVue固有のものです
+      // webClientIdは、Android client IDではなく、Webクライアント作成ステップで取得したclient IDです。
+      onMounted(() => {
+        SocialLogin.initialize({
+          google: {
+            webClientId: '673324426943-avl4v9ubdas7a0u7igf7in03pdj1dkmg.apps.googleusercontent.com',
+          }
+        })
+      })
+      ```
+
+   3. `SocialLogin.login`を呼び出します。ボタンを作成し、クリック時に次のコードを実行します。
+
+      ```typescript
+      const res = await SocialLogin.login({
+        provider: 'google',
+        options: {}
+      })
+      // レスポンスを処理します
+      console.log(JSON.stringify(res))
+      ```
+
+5. テスト用のエミュレータを設定します
+
+   1. `Device manager`に移動してプラスボタンをクリックします
+      <img src="/social-login-assets/studio_device_man.png" alt="Device Manager in Android Studio with plus button highlighted" />
+
+   2. 仮想デバイスを作成します
+      <img src="/social-login-assets/studio_create_virt_dev.png" alt="Create Virtual Device button in Virtual Device Configuration" />
+
+   3. `Play Store`アイコンがあるデバイスを選択します
+      <img src="/social-login-assets/studio_new_dev_select_hardware.png" alt="Hardware selection showing devices with Play Store support" />
+
+      ご覧のとおり、`pixel 8`は`Play Store`サービスをサポートしています
+
+   4. `next`をクリックします
+      <img src="/social-login-assets/studio_new_dev_next_1.png" alt="Next button in device creation wizard" />
+
+   5. OSイメージが`Google Play`タイプであることを確認します。`Google Play`タイプである**必要があります**
+      <img src="/social-login-assets/studio_new_dev_google_play_dev_type.png" alt="System image selection showing Google Play type images" />
+
+   6. nextをクリックします
+      <img src="/social-login-assets/studio_new_dev_next_1.png" alt="Next button in system image selection screen" />
+
+   7. デバイスを確認します。エミュレータに好きな名前を付けることができます
+      <img src="/social-login-assets/studio_new_dev_next_3.png" alt="Device configuration verification screen with Finish button" />
+
+   8. `Device Manager`に移動してシミュレータを起動します
+      <img src="/social-login-assets/studio_dev_manager.png" alt="Device Manager with virtual device listed and play button" />
+
+   9. シミュレータが起動したら、設定に移動します
+      <img src="/social-login-assets/emul_and_settings_1.png" alt="Android emulator showing settings app" />
+
+   10. `Google Play`に移動します
+      <img src="/social-login-assets/emul_and_settings_2.png" alt="Settings screen with Google Play option" />
+
+   11. `Update`をクリックして約60秒待ちます
+      <img src="/social-login-assets/emul_and_settings_update_play_store.png" alt="Google Play update screen with Update button" />
+
+6. アプリケーションをテストします
+
+   すべて正しく行った場合、Googleログインフローが正しく動作することを確認できます:
+   <img src="/social-login-assets/google_android_final_login_show.gif" alt="Demo of Google login flow on Android showing sign-in process and successful authentication" />
+</Steps>
+
+## トラブルシューティング
+
+問題がある場合は、[Githubの問題](https://github.com/Cap-go/capacitor-social-login/issues)を確認してください。
+
+Googleログインの問題は**常に**SHA1証明書に関連しています。
+
+開発SHA1証明書を取得できない場合は、カスタムkeystoreを使用してみてください。[こちら](https://github.com/Cap-go/capacitor-social-login/issues/147#issuecomment-2849742574)は、プロジェクトにkeystoreを追加する方法を説明するコメントです。

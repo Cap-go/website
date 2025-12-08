@@ -1,0 +1,154 @@
+---
+title: 📢 channel
+description: 📢 管理 Capgo Cloud 中应用更新的分发频道，控制如何将更新传递给设备。
+sidebar_label: channel
+locale: zh
+sidebar:
+  order: 6
+---
+
+📢 管理 Capgo Cloud 中应用更新的分发频道，控制如何将更新传递给设备。
+
+### <a id="channel-add"></a> ➕ **Add**
+
+**别名:** `a`
+
+```bash
+npx @capgo/cli@latest channel add
+```
+
+➕ 在 Capgo Cloud 中创建新的应用分发频道以管理更新交付。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest channel add production com.example.app --default
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-d,** | <code>string</code> | 将频道设置为默认 |
+| **--self-assign** | <code>boolean</code> | 允许设备自我分配到此频道 |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="channel-delete"></a> 🗑️ **Delete**
+
+**别名:** `d`
+
+```bash
+npx @capgo/cli@latest channel delete
+```
+
+🗑️ 从 Capgo Cloud 删除频道，可选择删除相关 bundle 以释放资源。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest channel delete production com.example.app
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--delete-bundle** | <code>boolean</code> | 删除与频道关联的 bundle |
+| **--success-if-not-found** | <code>boolean</code> | 如果未找到频道则成功 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="channel-list"></a> 📋 **List**
+
+**别名:** `l`
+
+```bash
+npx @capgo/cli@latest channel list
+```
+
+📋 列出在 Capgo Cloud 中为应用配置的所有频道以查看分发设置。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest channel list com.example.app
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="channel-currentBundle"></a> 📦 **CurrentBundle**
+
+```bash
+npx @capgo/cli@latest channel currentBundle
+```
+
+📦 获取链接到 Capgo Cloud 中特定频道的当前 bundle 以进行更新跟踪。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest channel currentBundle production com.example.app
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-c,** | <code>string</code> | 要从中获取当前 bundle 的频道 |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **--quiet** | <code>boolean</code> | 仅打印 bundle 版本 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |
+
+### <a id="channel-set"></a> ⚙️ **Set**
+
+**别名:** `s`
+
+```bash
+npx @capgo/cli@latest channel set
+```
+
+⚙️ 配置频道设置，例如链接 bundle、设置更新策略（major、minor、metadata、patch、none）或设备定位（iOS、Android、dev、emulator）。
+必须有一个频道为默认。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest channel set production com.example.app --bundle 1.0.0 --state default
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | 用于链接到您账户的 API 密钥 |
+| **-b,** | <code>string</code> | 要设置的文件的 bundle 版本号 |
+| **-s,** | <code>string</code> | 设置频道的状态，default 或 normal |
+| **--latest-remote** | <code>boolean</code> | 获取 capgo cloud 中上传的最新 bundle 并将其设置到频道 |
+| **--latest** | <code>boolean</code> | 获取 package.json 中的最新版本密钥并将其设置到频道 |
+| **--downgrade** | <code>boolean</code> | 允许降级到原生版本以下的版本 |
+| **--no-downgrade** | <code>boolean</code> | 禁止降级到原生版本以下的版本 |
+| **--ios** | <code>boolean</code> | 允许向 iOS 设备发送更新 |
+| **--no-ios** | <code>boolean</code> | 禁止向 iOS 设备发送更新 |
+| **--android** | <code>boolean</code> | 允许向 Android 设备发送更新 |
+| **--no-android** | <code>boolean</code> | 禁止向 Android 设备发送更新 |
+| **--self-assign** | <code>boolean</code> | 允许设备自我分配到此频道 |
+| **--no-self-assign** | <code>boolean</code> | 禁止设备自我分配到此频道 |
+| **--disable-auto-update** | <code>string</code> | 按类型阻止更新：major、minor、metadata、patch 或 none（允许所有） |
+| **--dev** | <code>boolean</code> | 允许向开发设备发送更新 |
+| **--no-dev** | <code>boolean</code> | 禁止向开发设备发送更新 |
+| **--emulator** | <code>boolean</code> | 允许向模拟器设备发送更新 |
+| **--no-emulator** | <code>boolean</code> | 禁止向模拟器设备发送更新 |
+| **--package-json** | <code>string</code> | monorepo 的 package.json 文件路径（逗号分隔） |
+| **--ignore-metadata-check** | <code>boolean</code> | 如果 bundle 中存在 node_modules，则忽略检查其兼容性 |
+| **--supa-host** | <code>string</code> | 自定义 Supabase 主机 URL（用于自托管或 Capgo 开发） |
+| **--supa-anon** | <code>string</code> | 自定义 Supabase anon 密钥（用于自托管） |

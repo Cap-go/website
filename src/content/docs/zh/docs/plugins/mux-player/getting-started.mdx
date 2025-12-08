@@ -1,0 +1,91 @@
+---
+title: 入门指南
+locale: zh
+description: 在 Capacitor 应用程序中连接原生 Mux Player SDK。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装插件**
+   <PackageManagers pkg="@capgo/capacitor-mux-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS 准备
+
+1. 在 `ios/App/` 下打开 Xcode 工作区。
+2. 将 Swift 包 `https://github.com/muxinc/mux-player-swift` 添加到应用目标，以便 `MuxPlayerSwift` 模块可用。
+3. 确保部署目标为 **iOS 15+** 并重新构建。
+
+## Android 准备
+
+Gradle 模块附带正确的存储库和依赖项。如果您使用自定义企业代理，请允许请求 `https://muxinc.jfrog.io/artifactory/default-maven-release-local`。
+
+## 启动播放器
+
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
+
+await MuxPlayer.play({
+  playbackId: 'your-playback-id',
+  environmentKey: 'your-mux-data-key',
+  title: 'Launch Announcement',
+  subtitle: 'Filmed live at Capgo HQ',
+  poster: 'https://stream.example.com/poster.jpg',
+});
+```
+
+## 监听播放器事件
+
+```typescript
+const readyHandle = await MuxPlayer.addListener('ready', ({ playerName }) => {
+  console.log('Mux player ready', playerName);
+});
+
+const errorHandle = await MuxPlayer.addListener('error', ({ message }) => {
+  console.error('Mux player error:', message);
+});
+
+// 关闭播放器后清理
+const dismissPlayer = async () => {
+  await MuxPlayer.dismiss();
+  await readyHandle.remove();
+  await errorHandle.remove();
+};
+```
+
+## 基于令牌的播放
+
+```typescript
+await MuxPlayer.play({
+  playbackId: 'signed-playback-id',
+  playbackToken: signedPlaybackToken,
+  drmToken: signedDrmToken, // 如果启用了 DRM 策略，则为可选
+  autoPlay: true,
+  startTime: 120, // 从 2 分钟开始
+});
+```
+
+## 响应播放器生命周期
+
+```typescript
+const { active } = await MuxPlayer.isActive();
+if (active) {
+  console.log('Player currently visible');
+}
+
+// 卸载时删除所有监听器注册
+await MuxPlayer.removeAllListeners();
+```
+
+## 提示
+
+- 使用 Mux 签名密钥在后端生成已签名的播放和 DRM 令牌。
+- 传递 `playerName` 以在应用中运行多个播放器时分离分析。
+- 与 `enableSmartCache` 结合使用，以提高支持平台上的离线弹性。

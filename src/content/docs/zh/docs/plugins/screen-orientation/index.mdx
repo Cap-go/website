@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-screen-orientation"
+locale: zh
+description: 控制和检测屏幕方向，具有使用运动传感器检测物理设备方向的独特能力。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 屏幕方向插件，支持检测真实的物理设备方向 - 即使启用了方向锁定。
+  image:
+    file: ~public/icons/plugins/screen-orientation.svg
+  actions:
+    - text: 快速入门
+      link: /docs/plugins/screen-orientation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-screen-orientation/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="物理方向检测" icon="rocket">
+    使用运动传感器检测真实的物理设备方向，即使启用了方向锁定
+  </Card>
+  <Card title="方向锁定检测" icon="puzzle">
+    通过比较物理方向与 UI 方向来确定用户是否启用了方向锁定
+  </Card>
+  <Card title="跨平台" icon="laptop">
+    在 iOS（Core Motion）、Android（加速度计）和 Web 上工作
+  </Card>
+  <Card title="实时更新" icon="open-book">
+    通过事件监听器在设备方向更改时获得即时通知
+  </Card>
+</CardGrid>

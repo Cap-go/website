@@ -1,0 +1,255 @@
+---
+title: 开始使用
+locale: zh
+description: 学习如何安装和使用 @capgo/native-purchases 插件，通过 StoreKit 2 和 Google Play Billing 7 实现一次性购买和订阅。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/native-purchases" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **检查计费支持**
+
+   ```typescript
+   import { NativePurchases } from '@capgo/native-purchases';
+
+   const { isBillingSupported } = await NativePurchases.isBillingSupported();
+   if (!isBillingSupported) {
+     throw new Error('Billing is not available on this device');
+   }
+   ```
+
+4. **直接从商店加载产品**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const { products } = await NativePurchases.getProducts({
+     productIdentifiers: [
+       'com.example.premium.monthly',
+       'com.example.premium.yearly',
+       'com.example.one_time_unlock'
+     ],
+     productType: PURCHASE_TYPE.SUBS, // 对一次性产品使用 PURCHASE_TYPE.INAPP
+   });
+
+   products.forEach((product) => {
+     console.log(product.title, product.priceString);
+   });
+   ```
+
+5. **实现购买和恢复流程**
+
+   ```typescript
+   import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+   const monthlyPlanId = 'monthly-plan'; // Google Play Console 中的基础方案 ID
+
+   const transaction = await NativePurchases.purchaseProduct({
+     productIdentifier: 'com.example.premium.monthly',
+     planIdentifier: monthlyPlanId,        // Android 订阅必需，iOS 上忽略
+     productType: PURCHASE_TYPE.SUBS,
+     quantity: 1,
+   });
+
+   console.log('Transaction ID', transaction.transactionId);
+
+   await NativePurchases.restorePurchases();
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       - 在 App Store Connect 中创建应用内产品和订阅。<br />
+       - 使用 StoreKit Local Testing 或 Sandbox 测试者进行 QA。<br />
+       - 不需要清单编辑。确保您的产品已获批准。
+     </TabItem>
+     <TabItem label="Android">
+       - 在 Google Play Console 中创建应用内产品和订阅。<br />
+       - 至少上传一个内部测试构建并添加许可测试者。<br />
+       - 将计费权限添加到 `AndroidManifest.xml`：
+       ```xml
+       <uses-permission android:name="com.android.vending.BILLING" />
+       ```
+     </TabItem>
+   </Tabs>
+</Steps>
+
+## 购买服务示例
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE, Transaction } from '@capgo/native-purchases';
+import { Capacitor } from '@capacitor/core';
+
+class PurchaseService {
+  private premiumProduct = 'com.example.premium.unlock';
+  private monthlySubId = 'com.example.premium.monthly';
+  private monthlyPlanId = 'monthly-plan'; // 基础方案 ID（仅 Android）
+
+  async initialize() {
+    const { isBillingSupported } = await NativePurchases.isBillingSupported();
+    if (!isBillingSupported) throw new Error('Billing unavailable');
+
+    const { products } = await NativePurchases.getProducts({
+      productIdentifiers: [this.premiumProduct, this.monthlySubId],
+      productType: PURCHASE_TYPE.SUBS,
+    });
+
+    console.log('Loaded products', products);
+
+    if (Capacitor.getPlatform() === 'ios') {
+      NativePurchases.addListener('transactionUpdated', (transaction) => {
+        this.handleTransaction(transaction);
+      });
+    }
+  }
+
+  async buyPremium(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.premiumProduct,
+      productType: PURCHASE_TYPE.INAPP,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async buyMonthly(appAccountToken?: string) {
+    const transaction = await NativePurchases.purchaseProduct({
+      productIdentifier: this.monthlySubId,
+      planIdentifier: this.monthlyPlanId, // Android 订阅必需
+      productType: PURCHASE_TYPE.SUBS,
+      appAccountToken,
+    });
+
+    await this.processTransaction(transaction);
+  }
+
+  async restore() {
+    await NativePurchases.restorePurchases();
+    await this.refreshEntitlements();
+  }
+
+  async openManageSubscriptions() {
+    await NativePurchases.manageSubscriptions();
+  }
+
+  private async processTransaction(transaction: Transaction) {
+    this.unlockContent(transaction.productIdentifier);
+    this.validateOnServer(transaction).catch(console.error);
+  }
+
+  private unlockContent(productIdentifier: string) {
+    // 在本地持久化权限
+    console.log('Unlocked', productIdentifier);
+  }
+
+  private async refreshEntitlements() {
+    const { purchases } = await NativePurchases.getPurchases({
+      productType: PURCHASE_TYPE.SUBS,
+    });
+    console.log('Current purchases', purchases);
+  }
+
+  private async handleTransaction(transaction: Transaction) {
+    console.log('StoreKit transaction update:', transaction);
+    await this.processTransaction(transaction);
+  }
+
+  private async validateOnServer(transaction: Transaction) {
+    await fetch('/api/validate-purchase', {
+      method: 'POST',
+      body: JSON.stringify({
+        transactionId: transaction.transactionId,
+        receipt: transaction.receipt,
+        purchaseToken: transaction.purchaseToken,
+      }),
+    });
+  }
+}
+```
+
+## 必需的购买选项
+
+| 选项 | 平台 | 描述 |
+|--------|----------|-------------|
+| `productIdentifier` | iOS + Android | 在 App Store Connect / Google Play Console 中配置的 SKU/产品 ID。 |
+| `productType` | 仅 Android | `PURCHASE_TYPE.INAPP` 或 `PURCHASE_TYPE.SUBS`。默认为 `INAPP`。订阅始终设置为 `SUBS`。 |
+| `planIdentifier` | Android 订阅 | Google Play Console 中的基础方案 ID。订阅必需，iOS 和应用内购买上忽略。 |
+| `quantity` | iOS | 仅用于应用内购买，默认为 `1`。Android 始终购买一个项目。 |
+| `appAccountToken` | iOS + Android | 将购买链接到您的用户的 UUID/字符串。iOS 上必须是 UUID；Android 接受任何混淆字符串，最多 64 个字符。 |
+| `isConsumable` | Android | 设置为 `true` 可在授予消耗品权限后自动消耗令牌。默认为 `false`。 |
+
+## 检查权限状态
+
+使用 `getPurchases()` 获取商店报告的每个交易的跨平台视图：
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+purchases.forEach((purchase) => {
+  if (purchase.isActive && purchase.expirationDate) {
+    console.log('iOS sub active until', purchase.expirationDate);
+  }
+
+  const isAndroidIapValid =
+    ['PURCHASED', '1'].includes(purchase.purchaseState ?? '') && purchase.isAcknowledged;
+
+  if (isAndroidIapValid) {
+    console.log('Grant in-app entitlement for', purchase.productIdentifier);
+  }
+});
+```
+
+### 平台行为
+
+- **iOS**: 订阅包括 `isActive`、`expirationDate`、`willCancel` 和 StoreKit 2 监听器支持。应用内购买需要服务器收据验证。
+- **Android**: `isActive`/`expirationDate` 未填充；使用 `purchaseToken` 调用 Google Play Developer API 以获取权威状态。`purchaseState` 必须为 `PURCHASED`，`isAcknowledged` 必须为 `true`。
+
+## API 快速参考
+
+- `isBillingSupported()` – 检查 StoreKit / Google Play 可用性。
+- `getProduct()` / `getProducts()` – 获取价格、本地化标题、描述、引导优惠。
+- `purchaseProduct()` – 启动 StoreKit 2 或 Billing 客户端购买流程。
+- `restorePurchases()` – 重放历史购买并同步到当前设备。
+- `getPurchases()` – 列出所有 iOS 交易或 Play Billing 购买。
+- `manageSubscriptions()` – 打开原生订阅管理 UI。
+- `addListener('transactionUpdated')` – 在应用启动时处理待处理的 StoreKit 2 交易（仅 iOS）。
+
+## 最佳实践
+
+1. **显示商店定价** – Apple 要求显示 `product.title` 和 `product.priceString`；绝不硬编码。
+2. **使用 `appAccountToken`** – 从您的用户 ID 确定性生成 UUID（v5）以将购买链接到账户。
+3. **服务器端验证** – 将 `receipt`（iOS）/ `purchaseToken`（Android）发送到后端进行验证。
+4. **优雅地处理错误** – 检查用户取消、网络故障和不支持的计费环境。
+5. **彻底测试** – 遵循 [iOS 沙盒指南](/docs/plugins/native-purchases/ios-sandbox-testing/) 和 [Android 沙盒指南](/docs/plugins/native-purchases/android-sandbox-testing/)。
+6. **提供恢复和管理** – 添加连接到 `restorePurchases()` 和 `manageSubscriptions()` 的 UI 按钮。
+
+## 故障排除
+
+**产品加载失败**
+- 确保 bundle ID / application ID 与商店配置匹配。
+- 确认产品 ID 已激活并获批准（App Store）或已激活（Google Play）。
+- 创建产品后等待几个小时；商店传播不是即时的。
+
+**购买取消或卡住**
+- 用户可以中途取消；将调用包装在 `try/catch` 中并显示友好的错误消息。
+- 对于 Android，确保测试账户从 Play Store（内部轨道）安装应用，以便 Billing 工作。
+- 在设备上运行时检查 logcat/Xcode 的计费错误。
+
+**订阅状态不正确**
+- 使用 `getPurchases()` 将商店数据与本地权限缓存进行比较。
+- 在 Android 上，始终使用 `purchaseToken` 查询 Google Play Developer API 以获取过期日期或退款状态。
+- 在 iOS 上，检查 `isActive`/`expirationDate` 并验证收据以检测退款或撤销。

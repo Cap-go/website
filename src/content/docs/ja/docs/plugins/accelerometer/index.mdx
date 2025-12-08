@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-accelerometer"
+description: Capacitorでデバイスの加速度計測定値を読み取る
+locale: ja
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: 加速度計センサーからデバイスの動きと加速度データにアクセス
+  image:
+    file: ~public/icons/plugins/accelerometer.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/accelerometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-accelerometer
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="3軸加速度" icon="rocket">
+    X、Y、Z軸の加速度を測定
+  </Card>
+  <Card title="モーション検出" icon="star">
+    デバイスの振動、傾き、動きを検出
+  </Card>
+  <Card title="リアルタイム更新" icon="setting">
+    加速度データの継続的な監視
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    [ドキュメント](/docs/plugins/accelerometer/getting-started/)をチェックして、わずか数分でプラグインをマスターしましょう。
+  </Card>
+</CardGrid>

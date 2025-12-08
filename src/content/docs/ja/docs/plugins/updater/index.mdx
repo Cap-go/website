@@ -1,0 +1,76 @@
+---
+title: "@capgo/capacitor-updater"
+locale: ja
+description: Capgoのライブアップデート機能を支えるCapacitorプラグイン。アプリのシームレスなover-the-airアップデートを可能にします。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: Capacitorアプリでライブアップデートを可能にするコアテクノロジー。アプリストアの承認なしにアップデートをプッシュできます。
+  image:
+    file: ~public/icons/plugins/updater.svg
+  actions:
+    - text: はじめる
+      link: /docs/getting-started/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-updater/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Over-the-airアップデート" icon="rocket">
+    アプリストアのレビューなしに即座にアップデートをプッシュ
+  </Card>
+  <Card title="高度なAPI" icon="setting">
+    包括的なAPIメソッドでアップデートフローを完全に制御
+  </Card>
+  <Card title="セルフホスティング対応" icon="download">
+    完全な制御のために独自のアップデートサーバーを運用
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    [Plugin API](/docs/plugins/updater/api/)をチェックして、わずか数分でプラグインをマスター
+  </Card>
+</CardGrid>
+
+## クイックリンク
+
+<LinkCard
+  title="ライブアップデートドキュメント"
+  description="メインのライブアップデートセクションで、チャンネル、アップデート動作、ロールバックなどについて学びます。"
+  href="/docs/live-updates/"
+/>
+
+<LinkCard
+  title="はじめにガイド"
+  description="クイックスタートガイドに従って、アプリにライブアップデートを追加します。"
+  href="/docs/getting-started/quickstart/"
+/>
+
+## プラグインドキュメント
+
+この技術リファレンスは以下をカバーします:
+
+- **[Plugin API](/docs/plugins/updater/api/)** - すべての利用可能なメソッドとその使用法
+- **[Plugin Settings](/docs/plugins/updater/settings/)** - capacitor.configの設定オプション
+- **[Known Issues](/docs/plugins/updater/known-issues/)** - 一般的な問題と解決策
+- **[Debugging](/docs/plugins/updater/debugging/)** - アップデートの問題をトラブルシューティングする方法
+- **[Events](/docs/plugins/updater/events/)** - 利用可能なアップデートイベント
+- **[Local Development](/docs/plugins/updater/local-dev/getting-started/)** - アップデートをローカルでテスト
+- **[Self-Hosted Mode](/docs/plugins/updater/self-hosted/getting-started/)** - 独自のアップデートサーバーを運用
+
+## インストール
+
+```bash
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+セットアップと設定については、[はじめにガイド](/docs/getting-started/quickstart/)をご覧ください。

@@ -1,0 +1,470 @@
+---
+title: Android 빌드
+description: Capgo Cloud Build로 Android 앱을 구성하고 빌드하기
+sidebar:
+  order: 3
+locale: ko
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo의 안전한 클라우드 인프라를 사용하여 Android 앱을 빌드하고 Google Play Store에 제출하세요.
+
+## 빌드하기 전에
+
+<CardGrid>
+  <Card title="⚠️ 먼저 Android 자격 증명 설정" icon="warning">
+    **필수:** 릴리스 앱을 빌드하기 전에 Android 자격 증명을 저장해야 합니다.
+
+    [Android 자격 증명 설정 →](/docs/cli/cloud-build/credentials/#saving-android-credentials)
+  </Card>
+</CardGrid>
+
+## Android 빌드 작동 방식
+
+Android 빌드는 안전한 Cloudflare 샌드박스에서 실행됩니다:
+
+- **인프라**: 컨테이너화된 Android SDK가 포함된 Cloudflare Workers
+- **빌드 도구**: Android 빌드 도구가 포함된 Gradle
+- **실행**: 빌드당 격리된 샌드박스 환경
+- **정리**: 빌드 완료 후 즉시 삭제
+- **보안**: 영구 저장소 없음, 빌드 간 완전한 격리
+
+## 전제 조건
+
+Android용으로 빌드하기 전에 다음이 필요합니다:
+
+### 1. 개발 환경 (로컬 테스트)
+
+- Android Studio가 로컬에 설치되어 있어야 합니다 (초기 키스토어 설정용)
+- `npx cap open android`로 앱이 성공적으로 빌드되어야 합니다
+- Java JDK 17 이상
+
+### 2. 서명 키스토어
+
+릴리스 빌드를 위해서는 서명 키스토어가 필요합니다:
+
+| 빌드 유형 | 키스토어 필요 여부 | 목적 |
+|------------|-------------------|---------|
+| **Debug** | 아니오 | 테스트 전용, 자동 생성됨 |
+| **Release** | 예 | Play Store 제출 |
+
+## 키스토어 생성
+
+<Aside type="tip">
+스크린샷이 포함된 자세한 단계별 가이드는 다음을 참조하세요:
+- [Android 인증서 가이드](https://capawesome.io/cloud/native-builds/certificates/android/)
+- [블로그: GitHub Actions로 자동 Android 빌드](https://capgo.app/blog/automatic-capacitor-android-build-github-action/)
+</Aside>
+
+아직 키스토어가 없다면 다음과 같이 생성하세요:
+
+```bash
+keytool -genkey -v \
+  -keystore my-release-key.keystore \
+  -alias my-key-alias \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000
+```
+
+프롬프트에 답변하세요:
+- **비밀번호**: 강력한 비밀번호를 선택하세요 (안전하게 저장하세요!)
+- **이름**: 귀하의 이름 또는 회사 이름
+- **조직**: 귀하의 회사 이름
+- **위치**: 귀하의 도시, 주, 국가
+
+<Aside type="caution">
+**중요**: 키스토어 파일과 비밀번호를 안전하게 보관하세요! 이를 분실하면 Play Store에서 앱을 업데이트할 수 없습니다.
+</Aside>
+
+### 키스토어 구성 요소 이해
+
+키스토어를 생성할 때 다음을 기억해야 합니다:
+
+1. **키스토어 비밀번호** (`KEYSTORE_STORE_PASSWORD`): 키스토어 파일 자체의 비밀번호
+2. **키 별칭** (`KEYSTORE_KEY_ALIAS`): 키스토어 내 서명 키의 이름/식별자
+3. **키 비밀번호** (`KEYSTORE_KEY_PASSWORD`): 특정 키의 비밀번호 (스토어 비밀번호와 같을 수 있음)
+
+**예시 워크플로:**
+```bash
+# 키스토어의 별칭을 나열하여 확인
+keytool -list -keystore my-release-key.keystore
+
+# 키에 대한 자세한 정보 보기
+keytool -list -v -keystore my-release-key.keystore -alias my-key-alias
+```
+
+## 빌드 구성
+
+### 필수 환경 변수
+
+**릴리스 빌드**를 위해 다음 자격 증명을 설정하세요:
+
+```bash
+# Android 서명 (릴리스에 필수)
+ANDROID_KEYSTORE_FILE="<base64-encoded-keystore>"
+KEYSTORE_KEY_ALIAS="my-key-alias"
+KEYSTORE_KEY_PASSWORD="<key-password>"
+KEYSTORE_STORE_PASSWORD="<store-password>"
+
+# Play Store 게시 (선택사항, 자동 제출용)
+PLAY_CONFIG_JSON="<base64-encoded-service-account-json>"
+```
+
+### Base64 자격 증명 생성
+
+**키스토어 파일:**
+```bash
+base64 -i my-release-key.keystore | pbcopy
+```
+
+**Play Store 서비스 계정 JSON:**
+```bash
+base64 -i play-store-service-account.json | pbcopy
+```
+
+base64 문자열이 이제 클립보드에 있습니다.
+
+### Play Store 서비스 계정 설정
+
+자동 Play Store 업로드를 활성화하려면 적절한 권한을 가진 Google Cloud 서비스 계정을 생성해야 합니다.
+
+<Aside type="tip">
+스크린샷이 포함된 자세한 지침은 [Android 인증서 가이드](https://capawesome.io/cloud/native-builds/certificates/android/)를 참조하세요.
+</Aside>
+
+<Steps>
+
+1. **Google Cloud에서 서비스 계정 생성**
+   - [Google Play Console](https://play.google.com/console) → 설정 → API 액세스로 이동
+   - "새 서비스 계정 만들기" 클릭
+   - Google Cloud Console로 이동하는 링크를 따라가세요
+   - "서비스 계정 만들기" 클릭
+   - 이름 입력 (예: "Capgo CI/CD")
+   - "서비스 계정 사용자" 역할 부여
+   - "완료" 클릭
+
+2. **JSON 키 생성**
+   - Google Cloud Console에서 서비스 계정 찾기
+   - 서비스 계정 이메일 클릭
+   - "키" 탭으로 이동
+   - "키 추가" → "새 키 만들기" 클릭
+   - "JSON" 형식 선택
+   - JSON 파일 다운로드 (안전하게 보관하세요!)
+
+3. **Play Console에서 권한 부여**
+   - Google Play Console → 설정 → API 액세스로 돌아가기
+   - 목록에서 서비스 계정 찾기
+   - "액세스 권한 부여" 클릭
+   - "앱 권한"에서 앱 선택
+   - "계정 권한"에서 다음 권한 부여:
+     - **릴리스**: "앱 정보 보기 및 대량 보고서 다운로드 (읽기 전용)"
+     - **릴리스**: "초안 릴리스 생성, 수정 및 삭제"
+     - **릴리스**: "프로덕션에 릴리스, 기기 제외 및 Play 앱 서명 사용"
+   - "사용자 초대" 클릭
+
+4. **초대 수락**
+   - 서비스 계정이 초대 이메일을 받습니다
+   - 초대를 수락하여 권한을 활성화합니다
+
+</Steps>
+
+<Aside type="caution">
+서비스 계정 JSON 파일에는 민감한 자격 증명이 포함되어 있습니다. 버전 관리에 커밋하거나 공개적으로 공유하지 마세요.
+</Aside>
+
+## Android용 빌드
+
+### 디버그 빌드
+
+서명 없이 테스트하기에 완벽합니다:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode debug
+```
+
+이렇게 하면 테스트용으로 모든 기기에 설치할 수 있는 디버그 APK가 생성됩니다.
+
+### 릴리스 빌드
+
+Play Store 제출용:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release
+```
+
+서명 자격 증명을 환경 변수로 구성해야 합니다.
+
+## CI/CD 통합
+
+### GitHub Actions 예시
+
+```yaml
+name: Build Android App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build Android app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform android \
+            --build-mode release
+```
+
+## 빌드 프로세스 세부 정보
+
+### Android 빌드 중 발생하는 일
+
+<Steps>
+
+1. **샌드박스 초기화** (~5초)
+   - 보안 컨테이너 시작
+   - Android SDK 및 Gradle 로드
+   - 격리된 파일 시스템 생성
+
+2. **프로젝트 설정** (~20초)
+   - R2에서 프로젝트 zip 다운로드
+   - 빌드 디렉토리로 추출
+   - 서명 자격 증명 주입
+
+3. **Gradle 빌드** (2-4분)
+   - 종속성 다운로드
+   - APK/AAB 컴파일
+   - ProGuard/R8 최적화 (릴리스 모드)
+   - 코드 서명 적용
+
+4. **Play Store 업로드** (30초, 구성된 경우)
+   - AAB를 Play Console에 업로드
+   - 릴리스 트랙 구성
+   - 제출 시작
+
+5. **정리** (즉시)
+   - 모든 파일 삭제
+   - 컨테이너 파괴
+   - 아티팩트 보관 안 함
+
+</Steps>
+
+### 빌드 스택
+
+Android 빌드 환경에는 다음이 포함됩니다:
+
+- **Java**: OpenJDK 17
+- **Android SDK**: 최신 안정 버전
+- **Gradle**: 8.x
+- **빌드 도구**: 34.x
+- **Node.js**: 18.x (LTS)
+- **NPM**: 최신 안정 버전
+
+## 빌드 출력
+
+### APK vs AAB
+
+- **APK** (Android Package): 직접 설치를 위한 설치 가능한 파일
+- **AAB** (Android App Bundle): Google Play의 권장 형식 (사용자를 위한 더 작은 다운로드)
+
+기본적으로 Capgo 빌드는 다음을 생성합니다:
+- **디버그 모드**: APK
+- **릴리스 모드**: AAB (Play Store에 최적화됨)
+
+## 빌드 시간
+
+일반적인 Android 빌드 시간:
+
+| 빌드 유형 | 평균 시간 |
+|------------|--------------|
+| Debug | 2-3분 |
+| Release (ProGuard 없음) | 3-4분 |
+| Release (ProGuard 포함) | 4-6분 |
+
+<Aside type="note">
+Android 빌드 비용은 **기본 요율의 1배**입니다 (iOS 빌드 비용의 절반).
+</Aside>
+
+## 빌드 변형
+
+### 커스텀 빌드 변형
+
+앱에 커스텀 빌드 변형(예: `staging`, `production`)이 있는 경우 `build-config`를 사용하세요:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release \
+  --build-config '{"variant":"staging"}'
+```
+
+이렇게 하면 `stagingRelease` 변형이 빌드됩니다.
+
+### 플레이버 차원
+
+플레이버 차원이 있는 앱의 경우:
+
+```bash
+--build-config '{"flavor":"premium","variant":"production"}'
+```
+
+이렇게 하면 `premiumProductionRelease` 변형이 빌드됩니다.
+
+## 문제 해결
+
+### 일반적인 문제
+
+**"Keystore password incorrect"**
+- KEYSTORE_STORE_PASSWORD가 키스토어와 일치하는지 확인
+- KEYSTORE_KEY_PASSWORD가 키 별칭 비밀번호와 일치하는지 확인
+- 추가 공백이나 특수 문자 확인
+
+**"Key alias not found"**
+- KEYSTORE_KEY_ALIAS가 정확히 일치하는지 확인 (대소문자 구분)
+- 별칭 나열: `keytool -list -keystore my-release-key.keystore`
+
+**"Gradle build failed"**
+- 빌드 로그에서 특정 오류 확인
+- 로컬에서 `./gradlew assembleRelease`로 앱이 빌드되는지 확인
+- 모든 네이티브 종속성이 `build.gradle`에 있는지 확인
+
+**"Play Store upload failed"**
+- 서비스 계정 JSON이 유효한지 확인
+- 서비스 계정이 Play Console에서 올바른 권한을 가지고 있는지 확인
+- 앱이 Play Console에서 제대로 설정되어 있는지 확인
+
+**"Build timeout"**
+- 대형 앱은 최적화가 필요할 수 있습니다
+- 불필요한 종속성을 제거할 수 있는지 확인
+- 빌드가 지속적으로 시간 초과되면 지원팀에 문의하세요
+
+### 디버그 로그
+
+빌드 로그에서 다음 주요 단계를 확인하세요:
+
+```
+→ Downloading dependencies...
+→ Running Gradle assembleRelease...
+→ Signing APK/AAB...
+→ Uploading to Play Store...
+✔ Build succeeded
+```
+
+빌드가 실패하면 특정 Gradle 오류가 로그에 표시됩니다.
+
+## 모범 사례
+
+### 1. 먼저 로컬에서 테스트
+
+항상 Android 빌드가 로컬에서 작동하는지 확인하세요:
+
+```bash
+cd android
+./gradlew assembleRelease
+# 또는
+./gradlew bundleRelease
+```
+
+### 2. 키스토어 보안 유지
+
+- 키스토어를 버전 관리에 커밋하지 마세요
+- 안전한 비밀 관리(1Password, AWS Secrets Manager 등)에 저장하세요
+- 여러 안전한 위치에 백업 사본을 보관하세요
+- 안전한 비밀번호 관리자에 비밀번호를 문서화하세요
+
+### 3. 버전 관리
+
+Capgo는 `capacitor.config.json`에서 버전을 읽습니다:
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "My App",
+  "version": "1.0.0",
+  "build": "1"
+}
+```
+
+각 릴리스마다 `build` 번호를 증가시키세요.
+
+### 4. ProGuard 구성
+
+릴리스 빌드의 경우 ProGuard 규칙이 올바르게 구성되어 있는지 확인하세요:
+
+```
+# android/app/proguard-rules.pro
+-keep class com.getcapacitor.** { *; }
+-keep @com.getcapacitor.annotation.CapacitorPlugin public class * {
+  @com.getcapacitor.annotation.PluginMethod public <methods>;
+}
+```
+
+### 5. 빌드 크기 모니터링
+
+APK/AAB 크기가 최적화되었는지 확인하세요:
+
+```
+CLI가 최종 크기를 표시합니다:
+→ APK size: 12.4 MB
+```
+
+앱이 큰 경우(>50 MB) 다음을 고려하세요:
+- ProGuard/R8 활성화
+- AAB 형식 사용 (동적 전달)
+- 이미지 및 에셋 최적화
+
+## Play Store 제출
+
+### 자동 제출
+
+PLAY_CONFIG_JSON이 구성되면 빌드가 자동으로 Play Console의 내부 테스트 트랙에 업로드됩니다.
+
+### 수동 제출
+
+수동 제출을 선호하는 경우:
+
+1. PLAY_CONFIG_JSON 없이 빌드 실행
+2. 빌드 아티팩트에서 AAB 다운로드 (구성된 경우)
+3. Play Console에 수동으로 업로드
+
+## 다음 단계
+
+- [iOS 빌드](/docs/cli/cloud-build/ios/) - iOS 빌드 구성
+- [문제 해결](/docs/cli/cloud-build/troubleshooting/) - 일반적인 빌드 문제
+- [CLI 참조](/docs/cli/reference/build/) - 전체 명령 문서
+
+## 도움이 필요하신가요?
+
+- [문제 해결 가이드](/docs/cli/cloud-build/troubleshooting/)
+- [Discord 커뮤니티](https://discord.com/invite/VnYRvBfgA6)
+- 이메일: support@capgo.app

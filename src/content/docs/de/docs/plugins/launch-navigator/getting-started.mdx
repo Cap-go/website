@@ -1,0 +1,337 @@
+---
+title: Loslegen
+description: Erfahren Sie, wie Sie das Launch Navigator-Plugin installieren und verwenden, um native Navigations-Apps auf iOS und Android zu integrieren.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Plattform-Konfiguration
+
+### iOS
+
+Fügen Sie URL-Schemata zu Ihrer `Info.plist` hinzu, um installierte Navigations-Apps zu erkennen:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <string>transit</string>
+    <string>moovit</string>
+    <string>uber</string>
+    <string>lyft</string>
+</array>
+```
+
+### Android
+
+Keine zusätzliche Konfiguration erforderlich. Das Plugin erkennt installierte Navigations-Apps automatisch.
+
+## Verwendungsbeispiel
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// Grundlegende Navigation zu Koordinaten
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // San Francisco Koordinaten
+});
+
+// Erweiterte Navigation mit Optionen
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // Optionaler Startpunkt
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // Bevorzugte Navigations-App
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// Prüfen, ob bestimmte App verfügbar ist
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps ist installiert');
+} else {
+  console.log('Google Maps ist nicht verfügbar');
+}
+
+// Alle verfügbaren Navigations-Apps abrufen
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('Verfügbare Navigations-Apps:', availableApps);
+
+// Alle unterstützten Apps für die Plattform abrufen
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('Unterstützte Apps:', supportedApps);
+```
+
+## API-Referenz
+
+### navigate(options)
+
+```typescript
+navigate(options: NavigateOptions) => Promise<void>
+```
+
+Startet die Navigation zu angegebenen Koordinaten.
+
+| Param         | Typ                      |
+| ------------- | ------------------------- |
+| **`options`** | `NavigateOptions` |
+
+### isAppAvailable(options)
+
+```typescript
+isAppAvailable(options: { app: string }) => Promise<{ available: boolean }>
+```
+
+Prüft, ob eine bestimmte Navigations-App installiert ist.
+
+| Param         | Typ                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ app: string }` |
+
+**Rückgabe:** `Promise<{ available: boolean }>`
+
+### getAvailableApps()
+
+```typescript
+getAvailableApps() => Promise<{ apps: string[] }>
+```
+
+Ruft die Liste aller verfügbaren Navigations-Apps auf dem Gerät ab.
+
+**Rückgabe:** `Promise<{ apps: string[] }>`
+
+### getSupportedApps()
+
+```typescript
+getSupportedApps() => Promise<{ apps: string[] }>
+```
+
+Ruft die Liste aller unterstützten Apps für die aktuelle Plattform ab.
+
+**Rückgabe:** `Promise<{ apps: string[] }>`
+
+## Schnittstellen
+
+### NavigateOptions
+
+| Eigenschaft       | Typ                          | Beschreibung                     |
+| ----------------- | ----------------------------- | ------------------------------- |
+| **`destination`** | `[number, number]` | Zielkoordinaten [lat, lng] |
+| **`options`**     | `NavigationOptions` | Zusätzliche Navigationsoptionen (optional) |
+
+### NavigationOptions
+
+| Eigenschaft          | Typ                  | Beschreibung                           |
+| -------------------- | --------------------- | ------------------------------------- |
+| **`start`**          | `[number, number]` | Startkoordinaten [lat, lng] (optional) |
+| **`transportMode`**  | `TransportMode` | Transportmethode (optional)       |
+| **`app`**            | `string` | Bevorzugte Navigations-App (optional)    |
+| **`appDisplayName`** | `string` | Anzeigename für App (optional)        |
+
+### TransportMode
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## Koordinaten-Anforderung
+
+> **Wichtig**: Dieses Plugin akzeptiert nur Breiten-/Längengrad-Koordinaten für die Navigation. Verwenden Sie [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder), um Adressen in Koordinaten umzuwandeln.
+
+```typescript
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+// Adresse in Koordinaten umwandeln
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // Navigation mit geokodierten Koordinaten starten
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## Unterstützte Navigations-Apps
+
+### iOS
+- Apple Maps (integriert)
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- Und viele mehr...
+
+### Android
+- Google Maps (integriert)
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- Und viele mehr...
+
+## Erweiterte Beispiele
+
+### Mehrere Apps prüfen und die erste verfügbare verwenden
+
+```typescript
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('Keine unterstützten Navigations-Apps gefunden');
+}
+```
+
+### Benutzerauswahl der Navigations-App
+
+```typescript
+// Verfügbare Apps abrufen
+const { apps } = await LaunchNavigator.getAvailableApps();
+
+if (apps.length === 0) {
+  alert('Keine Navigations-Apps verfügbar');
+  return;
+}
+
+// App-Auswahl dem Benutzer zeigen (Pseudo-Code)
+const selectedApp = await showAppSelectionDialog(apps);
+
+// Mit ausgewählter App navigieren
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: { app: selectedApp }
+});
+```
+
+### Navigation mit verschiedenen Transportmodi
+
+```typescript
+// Fahranweisungen
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.DRIVING
+  }
+});
+
+// Gehrichtungen
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.WALKING
+  }
+});
+
+// Öffentliche Verkehrsmittel
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.TRANSIT
+  }
+});
+```
+
+## Best Practices
+
+- Prüfen Sie immer die App-Verfügbarkeit, bevor Sie die Navigation versuchen
+- Bieten Sie Fallback-Optionen an, wenn bevorzugte Apps nicht verfügbar sind
+- Verwenden Sie aussagekräftige App-Anzeigenamen für die Benutzerauswahl
+- Behandeln Sie Fehler mit benutzerfreundlichen Meldungen
+- Berücksichtigen Sie Benutzerpräferenzen für Standard-Navigations-Apps
+- Testen Sie auf iOS- und Android-Geräten
+- Implementieren Sie eine ordnungsgemäße Fehlerbehandlung für ungültige Koordinaten
+
+## Fehlerbehandlung
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('Navigation fehlgeschlagen:', error);
+  // Fehler behandeln - App nicht verfügbar, ungültige Koordinaten, etc.
+  alert('Navigation konnte nicht gestartet werden. Bitte überprüfen Sie Ihre Koordinaten und versuchen Sie es erneut.');
+}
+```
+
+## Anwendungsfälle
+
+- **Standortbasierte Dienste**: Benutzer zu Sehenswürdigkeiten navigieren
+- **Liefer-Apps**: Fahrer zu Lieferorten führen
+- **Event-Apps**: Teilnehmer zu Veranstaltungsorten leiten
+- **Immobilien-Apps**: Zu Immobilienstandorten navigieren
+- **Reise-Apps**: Touristen zu Attraktionen führen
+- **Service-Apps**: Außendienstmitarbeiter zu Einsatzorten leiten

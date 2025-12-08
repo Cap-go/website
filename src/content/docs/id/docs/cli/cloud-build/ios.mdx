@@ -1,0 +1,375 @@
+---
+title: Build iOS
+description: Konfigurasi dan build aplikasi iOS dengan Capgo Cloud Build
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Build dan submit aplikasi iOS ke TestFlight dan App Store menggunakan infrastruktur Mac dedicated Capgo.
+
+## Sebelum Anda Build
+
+<CardGrid>
+  <Card title="⚠️ Setup Kredensial iOS Terlebih Dahulu" icon="warning">
+    **Wajib:** Anda harus menyimpan kredensial iOS sebelum build.
+
+    [Setup Kredensial iOS →](/docs/cli/cloud-build/credentials/#saving-ios-credentials)
+  </Card>
+</CardGrid>
+
+## Cara Kerja Build iOS
+
+Build iOS berjalan di mesin Mac dedicated (Scaleway Mac minis M4) yang diprovision on-demand:
+
+- **Hardware**: Apple Silicon Mac minis dengan macOS 15
+- **Build Tool**: Xcode dengan Fastlane (konfigurasi kustom Capgo)
+- **Isolasi**: Setiap build berjalan sebagai akun pengguna macOS terpisah
+- **Lifetime**: Mesin memiliki lease 24 jam dan otomatis dibersihkan
+- **Keamanan**: Semua file dan akun pengguna dihapus setelah mesin di-dismiss
+
+## Prasyarat
+
+Sebelum build untuk iOS, Anda memerlukan:
+
+### 1. Development Environment
+
+- Komputer Mac dengan Xcode terinstal (untuk setup sertifikat awal)
+- Akun Apple Developer yang valid ($99/tahun)
+- Aplikasi Anda berhasil di-build dengan `npx cap open ios`
+
+### 2. Sertifikat Code Signing
+
+Anda memerlukan salah satu tipe sertifikat ini tergantung build Anda:
+
+| Tipe Build | Sertifikat Diperlukan | Provisioning Profile |
+|------------|---------------------|---------------------|
+| **Development** | Apple Development | Development Profile |
+| **Ad Hoc** | Apple Distribution | Ad Hoc Profile |
+| **App Store** | Apple Distribution | App Store Profile |
+
+#### Cara Mendapatkan Sertifikat iOS dan Provisioning Profile
+
+<Aside type="tip">
+Untuk panduan langkah demi langkah dengan screenshot, kunjungi:
+- [Panduan Sertifikat iOS](https://capawesome.io/cloud/native-builds/certificates/ios/)
+- [Blog: Build iOS Otomatis dengan GitHub Actions](https://capgo.app/blog/automatic-capacitor-ios-build-github-action/)
+</Aside>
+
+**Gambaran Singkat:**
+
+<Steps>
+
+1. **Buat Certificate Signing Request (CSR)**
+   - Buka Keychain Access di Mac Anda
+   - Pergi ke Keychain Access → Certificate Assistant → Request a Certificate from a Certificate Authority
+   - Masukkan email dan nama Anda, pilih "Saved to disk"
+   - Simpan file `.certSigningRequest`
+
+2. **Generate Sertifikat di Apple Developer Portal**
+   - Pergi ke [Apple Developer Certificates](https://developer.apple.com/account/resources/certificates)
+   - Klik "+" untuk membuat sertifikat baru
+   - Pilih tipe sertifikat (iOS Distribution untuk build App Store)
+   - Upload file CSR Anda
+   - Download sertifikat (file `.cer`)
+
+3. **Export Sertifikat sebagai .p12**
+   - Double-click file `.cer` yang didownload untuk ditambahkan ke Keychain
+   - Di Keychain Access, temukan sertifikat Anda di bawah "My Certificates"
+   - Klik kanan → Export "Apple Distribution..."
+   - Simpan sebagai format `.p12` dan set password (simpan password ini!)
+
+4. **Buat Provisioning Profile**
+   - Pergi ke [Apple Developer Profiles](https://developer.apple.com/account/resources/profiles)
+   - Klik "+" untuk membuat profile baru
+   - Pilih tipe profile (App Store untuk build produksi)
+   - Pilih App ID Anda
+   - Pilih sertifikat yang baru Anda buat
+   - Download file `.mobileprovision`
+
+</Steps>
+
+### 3. App Store Connect API Key (Direkomendasikan)
+
+Untuk submission TestFlight otomatis, buat API key:
+
+<Steps>
+
+1. Pergi ke [App Store Connect](https://appstoreconnect.apple.com/) → Users and Access → Keys
+2. Klik tombol "+" untuk membuat key baru
+3. Beri nama (mis., "Capgo CI") dan pilih role "Developer"
+4. Download file `.p8` (Anda hanya bisa download sekali!)
+5. Catat **Key ID** dan **Issuer ID**
+
+</Steps>
+
+<Aside type="note">
+Anda juga dapat menemukan **Team ID** Anda di akun Apple Developer Anda di bawah Membership details.
+</Aside>
+
+## Konfigurasi Build
+
+### Environment Variables yang Diperlukan
+
+Set kredensial ini sebelum build:
+
+```bash
+# iOS Signing (Wajib)
+BUILD_CERTIFICATE_BASE64="<base64-encoded-p12-certificate>"
+BUILD_PROVISION_PROFILE_BASE64="<base64-encoded-mobileprovision>"
+P12_PASSWORD="<certificate-password>"
+
+# App Store Connect API (untuk submission)
+APPLE_KEY_ID="ABC1234567"
+APPLE_ISSUER_ID="00000000-0000-0000-0000-000000000000"
+APPLE_KEY_CONTENT="<base64-encoded-p8-key>"
+
+# Config Tambahan
+APP_STORE_CONNECT_TEAM_ID="1234567890"
+APPLE_PROFILE_NAME="App Store com.example.app"
+```
+
+### Menghasilkan Kredensial Base64
+
+<Aside type="tip">
+Gunakan command ini untuk encode sertifikat Anda untuk Capgo:
+</Aside>
+
+**Sertifikat (.p12):**
+```bash
+base64 -i YourCertificate.p12 | pbcopy
+```
+
+**Provisioning Profile (.mobileprovision):**
+```bash
+base64 -i YourProfile.mobileprovision | pbcopy
+```
+
+**App Store Connect Key (.p8):**
+```bash
+base64 -i AuthKey_ABC1234567.p8 | pbcopy
+```
+
+String base64 sekarang ada di clipboard Anda - paste ke environment variable atau CI/CD secrets Anda.
+
+## Building untuk iOS
+
+### Debug Build (Development)
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode debug
+```
+
+Ini membuat development build yang dapat diinstal di perangkat terdaftar.
+
+### Release Build (App Store)
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode release
+```
+
+Ini membuat build App Store dan otomatis submit ke TestFlight jika Anda memiliki kredensial App Store Connect API yang dikonfigurasi.
+
+## Integrasi CI/CD
+
+### Contoh GitHub Actions
+
+```yaml
+name: Build iOS App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync ios
+
+      - name: Build iOS app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform ios \
+            --build-mode release
+```
+
+## Detail Proses Build
+
+### Apa yang Terjadi Selama Build iOS
+
+<Steps>
+
+1. **Provisioning Mesin** (1-2 menit)
+   - Scaleway Mac mini diprovision atau di-assign
+   - macOS 15 dengan Xcode pre-installed
+   - Bootstrap scripts berjalan (jika pertama kali)
+
+2. **Isolasi Pengguna** (~10 detik)
+   - Pengguna macOS unik dibuat: `job-<jobId>`
+   - Home directory dedicated: `/Users/job-<jobId>`
+   - Workspace terisolasi dibuat
+
+3. **Setup Proyek** (~30 detik)
+   - Zip proyek didownload dari R2
+   - Diekstrak ke workspace
+   - Kredensial diinjeksi sebagai environment variables
+
+4. **Fastlane Build** (3-8 menit)
+   - Keychain dibuat dengan sertifikat signing
+   - Provisioning profile diinstal
+   - Command build Xcode dijalankan
+   - File IPA dihasilkan
+
+5. **Submission App Store** (1-2 menit, jika dikonfigurasi)
+   - IPA diupload ke App Store Connect
+   - Disubmit ke TestFlight
+   - Pemrosesan dimulai di sisi Apple
+
+6. **Cleanup** (segera)
+   - Akun pengguna di-kill dan dihapus
+   - File workspace dihapus
+   - File temporary dibersihkan
+
+7. **Dismissal Mesin** (setelah 24 jam)
+   - Mesin Mac dihancurkan
+   - Semua data dihapus permanen
+
+</Steps>
+
+### Build Stack
+
+Lingkungan build iOS kami mencakup:
+
+- **macOS**: 15 (stabil terbaru)
+- **Xcode**: Versi stabil terbaru
+- **Fastlane**: Versi stabil terbaru
+- **CocoaPods**: Versi stabil terbaru
+- **Node.js**: 18.x (LTS)
+- **Ruby**: System ruby dengan bundler
+
+## Waktu Build
+
+Waktu build iOS yang khas:
+
+| Tipe Build | Build Pertama | Build Berikutnya* |
+|------------|-------------|-------------------|
+| Debug | 5-7 menit | 4-6 menit |
+| Release | 7-10 menit | 5-8 menit |
+
+*Build berikutnya mungkin lebih cepat jika mesin yang sama digunakan kembali dalam window 24 jam.
+
+<Aside type="note">
+Build iOS berharga **2× tarif dasar** karena persyaratan hardware Mac dedicated.
+</Aside>
+
+## Troubleshooting
+
+### Masalah Umum
+
+**"Code signing failed"**
+- Verifikasi sertifikat Anda untuk tipe distribusi yang benar
+- Pastikan provisioning profile cocok dengan App ID Anda
+- Periksa bahwa P12_PASSWORD benar
+
+**"Provisioning profile doesn't include signing certificate"**
+- Regenerate provisioning profile Anda termasuk sertifikat
+- Re-download dan re-encode profile
+
+**"App Store Connect authentication failed"**
+- Verifikasi APPLE_KEY_ID, APPLE_ISSUER_ID, dan APPLE_KEY_CONTENT
+- Pastikan API key tidak di-revoke
+- Periksa bahwa key memiliki role "Developer" atau lebih tinggi
+
+**"Build timeout after 10 minutes"**
+- Periksa apakah aplikasi Anda memiliki native dependencies besar
+- Pertimbangkan optimisasi Podfile Anda
+- Hubungi support jika build terus-menerus timeout
+
+### Debug Logs
+
+Semua build logs di-stream real-time. Perhatikan fase-fase kunci ini:
+
+```
+✔ Machine assigned: m-abc123
+→ Creating user: job-abc123
+→ Installing CocoaPods dependencies...
+→ Building iOS app...
+→ Code signing with certificate...
+→ Uploading to App Store Connect...
+✔ Build succeeded
+```
+
+Jika build gagal, error akan ditampilkan dengan jelas di logs dengan pesan error Fastlane/Xcode yang spesifik.
+
+## Best Practices
+
+### 1. Test Lokal Terlebih Dahulu
+
+Selalu pastikan build iOS Anda berfungsi secara lokal sebelum menggunakan cloud build:
+
+```bash
+npx cap open ios
+# Build di Xcode
+```
+
+### 2. Gunakan Environment Variables
+
+Jangan commit sertifikat atau key ke repository Anda. Selalu gunakan:
+- CI/CD secrets (GitHub, GitLab)
+- Environment variables
+- Secure secret management
+
+### 3. Cache Dependencies
+
+Untuk build lebih cepat, pastikan `package.json` dan `Podfile.lock` Anda dicommit ke version control.
+
+### 4. Monitor Waktu Build
+
+Perhatikan durasi build untuk optimisasi biaya:
+
+```bash
+# CLI menampilkan waktu build di akhir
+Build succeeded in 6m 42s (13.4 billing minutes at 2× rate)
+```
+
+## Langkah Selanjutnya
+
+- [Build Android](/docs/cli/cloud-build/android/) - Konfigurasi build Android
+- [Troubleshooting](/docs/cli/cloud-build/troubleshooting/) - Masalah build umum
+- [Referensi CLI](/docs/cli/reference/build/) - Dokumentasi command lengkap
+
+## Butuh Bantuan?
+
+- [Panduan Troubleshooting](/docs/cli/cloud-build/troubleshooting/)
+- [Komunitas Discord](https://discord.com/invite/VnYRvBfgA6)
+- Email: support@capgo.app

@@ -1,0 +1,426 @@
+---
+title: GitLab CI/CD 集成
+locale: zh
+description: "了解如何将 Capgo Live Updates 与 GitLab CI/CD 集成,实现应用更新的自动化部署。"
+sidebar:
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+将 Capgo Live Updates 与 GitLab CI/CD 集成,在您推送代码更改时自动部署应用更新。本指南涵盖了自动化构建、测试和部署工作流的设置。
+
+## 前置要求
+
+在设置 GitLab CI/CD 集成之前,请确保您具备:
+
+- 拥有项目存储库的 GitLab 账户
+- 已配置应用的 Capgo 账户
+- 项目中已配置 Node.js 和 npm/yarn
+
+## 设置 GitLab CI/CD
+
+### 步骤 1:配置环境变量
+
+首先,在您的 GitLab 项目中设置必要的变量:
+
+<Steps>
+
+1. 导航到您的 GitLab 项目
+2. 进入 **Settings** → **CI/CD** → **Variables**
+3. 添加以下变量:
+
+</Steps>
+
+| 变量名 | 值 | 受保护 | 掩码 |
+|---------------|-------|-----------|--------|
+| `CAPGO_TOKEN` | 您的 Capgo API token | ✅ 是 | ✅ 是 |
+
+<Aside type="tip">
+
+从 [console.capgo.app/apikeys](https://console.capgo.app/apikeys) 获取您的 Capgo API token。您的应用 ID 已在 `capacitor.config.ts` 文件中配置。
+
+</Aside>
+
+## 简单配置
+
+基本配置,在每次推送到主分支时部署到生产环境:
+
+```yaml
+# .gitlab-ci.yml - 简单配置
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+  only:
+    - main
+
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+    # 对于加密上传,添加: --key-data-v2 "$CAPGO_PRIVATE_KEY"
+  dependencies:
+    - build
+  only:
+    - main
+```
+
+## 高级配置
+
+### 功能分支部署
+
+将功能分支部署到测试渠道以供审查和测试:
+
+```yaml
+# 功能分支部署
+deploy_feature:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - CHANNEL_NAME="feature-$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9-]/-/g')"
+    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+  dependencies:
+    - build
+  only:
+    - /^feature\/.*$/
+  environment:
+    name: feature/$CI_COMMIT_REF_NAME
+    url: https://your-app.com/channels/$CHANNEL_NAME
+```
+
+<Aside type="tip">
+
+**使用渠道进行测试**:部署到功能渠道后,您可以通过配置应用使用该特定渠道来测试更新。了解更多关于[在应用中配置渠道](/docs/live-updates/channels/#configuring-the-channel-in-your-app)的信息。
+
+</Aside>
+
+### 使用加密
+
+如果您使用 [Capgo 的加密功能](/docs/live-updates/encryption/),则需要在 CI/CD 环境中安全地存储您的私钥。
+
+在本地[设置加密密钥](/docs/live-updates/encryption/#setting-up-encryption)后,将您的私钥添加到 GitLab 变量:
+
+```shell
+# 显示您的私钥内容(复制此输出)
+cat .capgo_key_v2
+```
+
+将此内容作为 `CAPGO_PRIVATE_KEY` 添加到您的 GitLab 项目变量(标记为受保护和掩码),然后在管道中使用它:
+
+```yaml
+# 使用加密部署
+deploy_production:
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**安全最佳实践:**
+- 切勿将 `.capgo_key_v2` 文件提交到版本控制
+- 仅在安全的 CI/CD 密钥管理中存储私钥
+- 为不同环境使用不同的密钥
+
+</Aside>
+
+### 多渠道配置
+
+有关设置和管理多个部署渠道的综合信息,请参阅[渠道文档](/docs/live-updates/channels/)。
+
+包含多个环境和合并请求部署的完整配置:
+
+```yaml
+# .gitlab-ci.yml - 高级多渠道配置
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+# 构建阶段
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 24 hours
+
+# 部署到开发渠道
+deploy_development:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel development
+  dependencies:
+    - build
+  only:
+    - develop
+  environment:
+    name: development
+
+# 将合并请求部署到测试渠道
+deploy_mr:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - CHANNEL_NAME="mr-$CI_MERGE_REQUEST_IID"
+    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+  dependencies:
+    - build
+  only:
+    - merge_requests
+  environment:
+    name: review/$CI_MERGE_REQUEST_IID
+    url: https://your-app.com/channels/mr-$CI_MERGE_REQUEST_IID
+    on_stop: cleanup_mr
+
+# 关闭 MR 时清理 MR 渠道
+cleanup_mr:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli channel delete mr-$CI_MERGE_REQUEST_IID --apikey $CAPGO_TOKEN || true
+  when: manual
+  environment:
+    name: review/$CI_MERGE_REQUEST_IID
+    action: stop
+  only:
+    - merge_requests
+
+# 部署到预发布
+deploy_staging:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel staging
+  dependencies:
+    - build
+  only:
+    - develop
+  environment:
+    name: staging
+
+# 部署到生产
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  dependencies:
+    - build
+  only:
+    - main
+  environment:
+    name: production
+```
+
+### 需要人工批准的多环境
+
+对于需要人工批准的生产部署:
+
+```yaml
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  dependencies:
+    - build
+  only:
+    - main
+  when: manual
+  environment:
+    name: production
+```
+
+### 基于分支的部署策略
+
+自动将不同分支部署到适当的渠道:
+
+```yaml
+# 基于分支的动态渠道部署
+deploy:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        CHANNEL="production"
+      elif [ "$CI_COMMIT_REF_NAME" = "develop" ]; then
+        CHANNEL="staging"
+      else
+        CHANNEL="development"
+      fi
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL
+  dependencies:
+    - build
+  environment:
+    name: $CHANNEL
+```
+
+## 安全最佳实践
+
+### 受保护变量
+
+<Steps>
+
+1. **标记敏感变量**:始终将 API token 标记为受保护和掩码
+2. **分支保护**:对生产部署使用受保护变量
+3. **访问控制**:仅将变量访问权限限制为维护者
+4. **定期轮换**:定期轮换 API token
+
+</Steps>
+
+### 安全管道配置
+
+```yaml
+# 对生产使用受保护变量
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  only:
+    refs:
+      - main
+    variables:
+      - $CI_COMMIT_REF_PROTECTED == "true"
+```
+
+## 监控和通知
+
+### Slack 集成
+
+向管道添加 Slack 通知:
+
+```yaml
+notify_success:
+  stage: .post
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - |
+      curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"✅ Capgo deployment successful for '"$CI_COMMIT_REF_NAME"'"}' \
+        $SLACK_WEBHOOK_URL
+  when: on_success
+
+notify_failure:
+  stage: .post
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - |
+      curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"❌ Capgo deployment failed for '"$CI_COMMIT_REF_NAME"'"}' \
+        $SLACK_WEBHOOK_URL
+  when: on_failure
+```
+
+### 邮件通知
+
+在 GitLab 项目设置中配置邮件通知或使用 API:
+
+```yaml
+notify_email:
+  stage: .post
+  script:
+    - |
+      curl --request POST \
+        --header "PRIVATE-TOKEN: $GITLAB_API_TOKEN" \
+        --form "to=team@yourcompany.com" \
+        --form "subject=Capgo Deployment Status" \
+        --form "body=Deployment of $CI_COMMIT_REF_NAME completed with status: $CI_JOB_STATUS" \
+        "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/emails"
+  when: always
+```
+
+## 故障排除
+
+### 常见问题
+
+**管道失败并显示 "Capgo CLI not found":**
+```yaml
+# 调试 CLI 安装
+debug_cli:
+  script:
+    - npm install -g @capgo/cli
+    - which capgo || echo "Capgo CLI not found"
+    - npx @capgo/cli --version
+```
+
+**身份验证错误:**
+```yaml
+# 验证 token 配置
+debug_auth:
+  script:
+    - |
+      if [ -z "$CAPGO_TOKEN" ]; then
+        echo "CAPGO_TOKEN is not set"
+        exit 1
+      fi
+      echo "Token length: ${#CAPGO_TOKEN}"
+```
+
+**找不到构建产物:**
+```yaml
+# 列出构建输出
+debug_build:
+  script:
+    - ls -la dist/
+    - find dist/ -type f -name "*.js" -o -name "*.html"
+```
+
+### 调试管道
+
+添加调试信息以解决问题:
+
+```yaml
+debug:
+  stage: build
+  script:
+    - echo "Branch: $CI_COMMIT_REF_NAME"
+    - echo "Commit: $CI_COMMIT_SHA"
+    - echo "Build: $CI_PIPELINE_ID"
+    - env | grep CI_ | sort
+  only:
+    - branches
+```
+
+## 下一步
+
+- 了解[渠道](/docs/live-updates/channels/)以管理不同的部署环境
+- 探索[自定义存储](/docs/live-updates/custom-storage/)以进行高级部署场景
+- 设置[加密](/docs/live-updates/encryption/)以进行安全部署
+- 配置[更新行为](/docs/live-updates/update-behavior/)以自定义更新的应用方式
+
+通过 GitLab CI/CD 集成,您可以自动化 Capgo 部署,并确保为移动应用用户提供一致、可靠的更新。

@@ -1,0 +1,68 @@
+---
+title: "수동 업데이트"
+locale: ko
+description: "자체 호스팅 환경에서 수동 업데이트 플러그인을 활용하는 상세한 가이드로, 자동 프로세스에 의존하지 않고 효과적으로 업데이트를 관리하기 위한 구성 및 사용에 대한 포괄적인 지침을 제공합니다."
+sidebar:
+  order: 3
+---
+
+## 구성
+
+자동 업데이트를 비활성화하려면 ``capacitor.config.json``에 다음을 추가하세요.
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false,
+		}
+	}
+}
+```
+
+## 사용법
+
+이 예제를 사용하거나 앱에서 로직을 재생성할 수 있습니다.
+
+:::caution
+코드에 선언된 정적 버전으로 사용자가 앱을 업데이트하도록 강제하고 있습니다. 이는 권장되지 않으며 서버에서 동적 버전을 사용해야 합니다.
+:::
+
+:::danger
+이 예제에서는 버전 확인, 복호화 또는 체크섬 검증을 수행하지 않습니다. 직접 수행해야 합니다.
+:::
+
+```tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+let data = {version: ""}
+ CapacitorUpdater.notifyAppReady()
+App.addListener('appStateChange', async(state) => {
+     if (state.isActive) {
+       // Do the download during user active app time to prevent failed download
+       data = await CapacitorUpdater.download({
+       version: '0.0.4',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/0.0.4/dist.zip',
+       })
+     }
+     if (!state.isActive && data.version !== "") {
+       // Do the switch when user leave app
+       SplashScreen.show()
+       try {
+         await CapacitorUpdater.set(data)
+       } catch (err) {
+         console.log(err)
+         SplashScreen.hide() // in case the set fail, otherwise the new app will have to hide it
+       }
+     }
+ })
+```
+
+
+
+:::note
+이것이 많은 작업처럼 보인다면 [Capgo 체험판](https://capgo.app/register/)을 고려해 보세요. 모든 것을 처리해 드립니다.
+:::

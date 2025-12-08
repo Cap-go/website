@@ -1,0 +1,322 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor 앱에서 콘텐츠를 인쇄하기 위해 Printer 플러그인을 설치하고 사용하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용법
+
+플러그인을 가져와서 다양한 유형의 콘텐츠를 인쇄합니다:
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+// HTML 콘텐츠 인쇄
+const printHTML = async () => {
+  await Printer.print({
+    content: '<h1>Hello World</h1><p>테스트 인쇄입니다.</p>',
+    name: 'test-print'
+  });
+};
+
+// PDF 파일 인쇄
+const printPDF = async () => {
+  await Printer.print({
+    content: 'file:///path/to/document.pdf',
+    name: 'my-document'
+  });
+};
+
+// 이미지 인쇄
+const printImage = async () => {
+  await Printer.print({
+    content: 'file:///path/to/image.jpg',
+    name: 'my-image'
+  });
+};
+```
+
+## API 참조
+
+### print(options)
+
+지정된 콘텐츠로 네이티브 인쇄 대화 상자를 엽니다.
+
+```typescript
+interface PrintOptions {
+  content: string;          // HTML 문자열, 파일 URI 또는 base64 데이터
+  name?: string;            // 인쇄 작업 이름
+  orientation?: 'portrait' | 'landscape';
+  grayscale?: boolean;      // 회색조로 인쇄 (기본값: false)
+}
+
+await Printer.print(options);
+```
+
+### canPrint()
+
+장치에서 인쇄를 사용할 수 있는지 확인합니다.
+
+```typescript
+const { value } = await Printer.canPrint();
+console.log('인쇄 사용 가능:', value);
+```
+
+## 완전한 예제
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+
+export class PrintService {
+  async checkPrintAvailability(): Promise<boolean> {
+    const { value } = await Printer.canPrint();
+    return value;
+  }
+
+  async printHTML(htmlContent: string, jobName: string = 'Document') {
+    try {
+      const canPrint = await this.checkPrintAvailability();
+      if (!canPrint) {
+        throw new Error('이 장치에서는 인쇄를 사용할 수 없습니다');
+      }
+
+      await Printer.print({
+        content: htmlContent,
+        name: jobName,
+        orientation: 'portrait'
+      });
+    } catch (error) {
+      console.error('인쇄 실패:', error);
+      throw error;
+    }
+  }
+
+  async printDocument(filePath: string, jobName?: string) {
+    await Printer.print({
+      content: filePath,
+      name: jobName || 'Document'
+    });
+  }
+
+  async printReceipt(receiptData: any) {
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            .header { text-align: center; margin-bottom: 20px; }
+            .item { display: flex; justify-content: space-between; margin: 10px 0; }
+            .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; padding-top: 10px; border-top: 2px solid #000; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h2>영수증</h2>
+            <p>날짜: ${new Date().toLocaleDateString()}</p>
+          </div>
+          ${receiptData.items.map((item: any) => `
+            <div class="item">
+              <span>${item.name}</span>
+              <span>$${item.price.toFixed(2)}</span>
+            </div>
+          `).join('')}
+          <div class="total">
+            <div class="item">
+              <span>합계:</span>
+              <span>$${receiptData.total.toFixed(2)}</span>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    await this.printHTML(html, 'Receipt');
+  }
+
+  async printFromURL(url: string) {
+    // 먼저 파일을 다운로드합니다
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const reader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+      reader.onloadend = async () => {
+        try {
+          await Printer.print({
+            content: reader.result as string,
+            name: 'Downloaded Document'
+          });
+          resolve(true);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+}
+```
+
+## 고급 사용법
+
+### 사용자 정의 스타일링으로 인쇄
+
+```typescript
+const printStyledDocument = async () => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          @page {
+            size: A4;
+            margin: 2cm;
+          }
+          body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+          }
+          h1 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+          }
+          .content {
+            margin-top: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>전문 문서</h1>
+        <div class="content">
+          <p>인쇄할 준비가 된 전문적으로 스타일이 지정된 문서입니다.</p>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Styled Document',
+    orientation: 'portrait'
+  });
+};
+```
+
+### 테이블 인쇄
+
+```typescript
+const printTable = async (data: any[]) => {
+  const tableRows = data.map(row => `
+    <tr>
+      <td>${row.id}</td>
+      <td>${row.name}</td>
+      <td>${row.value}</td>
+    </tr>
+  `).join('');
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+          }
+        </style>
+      </head>
+      <body>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>이름</th>
+              <th>값</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRows}
+          </tbody>
+        </table>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Data Table'
+  });
+};
+```
+
+### 이미지 인쇄
+
+```typescript
+const printImageWithDetails = async (imagePath: string, title: string) => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body { text-align: center; padding: 20px; }
+          h2 { margin-bottom: 20px; }
+          img { max-width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>
+        <h2>${title}</h2>
+        <img src="${imagePath}" alt="${title}" />
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: title
+  });
+};
+```
+
+## 모범 사례
+
+1. **가용성 확인**: 인쇄를 시도하기 전에 항상 인쇄가 가능한지 확인합니다
+2. **유효한 콘텐츠**: HTML이 올바르게 형성되어 있고 파일 경로가 유효한지 확인합니다
+3. **작업 이름**: 사용자가 인쇄 작업을 식별하는 데 도움이 되도록 설명적인 이름을 사용합니다
+4. **스타일링**: 일관된 인쇄 출력을 위해 인라인 CSS 또는 임베디드 스타일을 사용합니다
+5. **오류 처리**: 사용자 피드백을 위해 try-catch 블록으로 인쇄 호출을 래핑합니다
+
+## 문제 해결
+
+### 일반적인 문제
+
+**인쇄 대화 상자가 나타나지 않음**: canPrint()로 인쇄가 가능한지 확인합니다
+**콘텐츠가 인쇄되지 않음**: HTML이 유효하고 파일 경로가 올바른지 확인합니다
+**이미지가 표시되지 않음**: 이미지 경로가 절대 경로이고 파일에 액세스할 수 있는지 확인합니다
+**스타일링 문제**: @page CSS 규칙을 사용하고 인쇄 출력을 테스트합니다

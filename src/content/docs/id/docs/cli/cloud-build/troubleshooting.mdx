@@ -1,0 +1,513 @@
+---
+title: Troubleshooting
+description: Masalah umum dan solusi untuk Capgo Cloud Build
+locale: id
+sidebar:
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Solusi untuk masalah umum saat building aplikasi native dengan Capgo Cloud Build.
+
+## Build Failures
+
+### "Upload failed" atau "Connection timeout"
+
+**Gejala:**
+- Build gagal selama upload proyek
+- Error timeout setelah 60 detik
+
+**Solusi:**
+
+1. **Periksa koneksi internet Anda**
+   ```bash
+   # Test koneksi ke Capgo
+   curl -I https://api.capgo.app
+   ```
+
+2. **Kurangi ukuran proyek**
+   - Pastikan `node_modules/` tidak diupload (seharusnya auto-excluded)
+   - Periksa file besar di proyek Anda:
+   ```bash
+   find . -type f -size +10M
+   ```
+
+3. **Periksa expirasi upload URL**
+   - Upload URL kedaluwarsa setelah 1 jam
+   - Jika Anda mendapat error URL kedaluwarsa, jalankan ulang command build
+
+<Aside type="tip">
+Proyek besar (>200MB) mungkin mencapai batas timeout. Hubungi support untuk opsi enterprise.
+</Aside>
+
+### "Build timeout after 10 minutes"
+
+**Gejala:**
+- Build melebihi waktu maksimal yang diizinkan
+- Status menampilkan `timeout`
+
+**Solusi:**
+
+1. **Optimisasi dependencies**
+   - Hapus package npm yang tidak digunakan
+   - Gunakan `npm prune --production` sebelum building
+
+2. **Periksa masalah jaringan dalam build**
+   - Beberapa dependencies mungkin download file besar selama build
+   - Pertimbangkan pre-caching dengan lock file
+
+3. **Review native dependencies**
+   ```bash
+   # iOS - periksa Podfile untuk dependencies berat
+   cat ios/App/Podfile
+
+   # Android - periksa build.gradle
+   cat android/app/build.gradle
+   ```
+
+4. **Hubungi support**
+   - Jika aplikasi Anda memang membutuhkan lebih banyak waktu
+   - Kami dapat menyesuaikan limit untuk kasus penggunaan spesifik
+
+## Masalah Autentikasi
+
+### "API key invalid" atau "Unauthorized"
+
+**Gejala:**
+- Build gagal segera dengan error autentikasi
+- Error 401 atau 403
+
+**Solusi:**
+
+1. **Verifikasi API key benar**
+   ```bash
+   # Test dengan command sederhana
+   npx @capgo/cli@latest app list
+   ```
+
+2. **Periksa permission API key**
+   - Key harus memiliki permission `write` atau `all`
+   - Periksa di dashboard Capgo di bawah API Keys
+
+3. **Pastikan API key terbaca**
+   ```bash
+   # Periksa environment variable
+   echo $CAPGO_TOKEN
+
+   # Atau verifikasi file .capgo lokal
+   cat .capgo
+   ```
+
+4. **Re-autentikasi**
+   ```bash
+   npx @capgo/cli@latest login
+   ```
+
+### "App not found" atau "No permission for this app"
+
+**Gejala:**
+- Autentikasi berfungsi tapi error spesifik aplikasi
+
+**Solusi:**
+
+1. **Verifikasi aplikasi terdaftar**
+   ```bash
+   npx @capgo/cli@latest app list
+   ```
+
+2. **Periksa app ID cocok**
+   - Verifikasi `capacitor.config.json` appId
+   - Pastikan command menggunakan app ID yang benar
+
+3. **Verifikasi akses organisasi**
+   - Periksa Anda berada di organisasi yang benar
+   - API key harus memiliki akses ke organisasi aplikasi
+
+## Masalah Build iOS
+
+### "Code signing failed"
+
+**Gejala:**
+- Build gagal selama fase code signing
+- Error Xcode tentang sertifikat atau profile
+
+**Solusi:**
+
+1. **Verifikasi tipe sertifikat cocok dengan tipe build**
+   - Build development butuh sertifikat Development
+   - Build App Store butuh sertifikat Distribution
+
+2. **Periksa sertifikat dan profile cocok**
+   ```bash
+   # Decode dan inspect sertifikat Anda
+   echo $BUILD_CERTIFICATE_BASE64 | base64 -d > cert.p12
+   openssl pkcs12 -in cert.p12 -nokeys -passin pass:$P12_PASSWORD | openssl x509 -noout -subject
+   ```
+
+3. **Pastikan provisioning profile valid**
+   - Periksa tanggal kedaluwarsa
+   - Verifikasi mencakup App ID Anda
+   - Konfirmasi mencakup sertifikat
+
+4. **Regenerate kredensial**
+   - Hapus sertifikat/profile lama
+   - Buat yang baru di Apple Developer portal
+   - Re-encode dan update environment variables
+
+### "Provisioning profile doesn't include signing certificate"
+
+**Gejala:**
+- Xcode tidak dapat menemukan sertifikat di profile
+
+**Solusi:**
+
+1. **Download profile terbaru dari Apple**
+   - Pergi ke Apple Developer → Certificates, IDs & Profiles
+   - Download provisioning profile
+   - Pastikan mencakup sertifikat Anda
+
+2. **Verifikasi sertifikat ada di profile**
+   ```bash
+   # Ekstrak profile
+   echo $BUILD_PROVISION_PROFILE_BASE64 | base64 -d > profile.mobileprovision
+
+   # Lihat konten profile
+   security cms -D -i profile.mobileprovision
+   ```
+
+3. **Buat ulang profile dengan sertifikat yang benar**
+   - Di Apple Developer portal, edit profile
+   - Pastikan distribution certificate Anda dipilih
+   - Download dan re-encode
+
+### "App Store Connect authentication failed"
+
+**Gejala:**
+- Upload ke TestFlight gagal
+- Error API key
+
+**Solusi:**
+
+1. **Verifikasi kredensial API key**
+   - Periksa APPLE_KEY_ID (harus 10 karakter)
+   - Periksa APPLE_ISSUER_ID (harus format UUID)
+   - Verifikasi APPLE_KEY_CONTENT di-encode base64 dengan benar
+
+2. **Test API key secara lokal**
+   ```bash
+   # Decode key
+   echo $APPLE_KEY_CONTENT | base64 -d > AuthKey.p8
+
+   # Test dengan fastlane (jika terinstal)
+   fastlane pilot list
+   ```
+
+3. **Periksa permission API key**
+   - Key butuh role "Developer" atau lebih tinggi
+   - Verifikasi di App Store Connect → Users and Access → Keys
+
+4. **Pastikan key tidak di-revoke**
+   - Periksa di App Store Connect
+   - Generate key baru jika diperlukan
+
+### "Pod install failed"
+
+**Gejala:**
+- Build gagal selama instalasi CocoaPods
+- Error Podfile
+
+**Solusi:**
+
+1. **Verifikasi Podfile.lock dicommit**
+   ```bash
+   git status ios/App/Podfile.lock
+   ```
+
+2. **Test pod install secara lokal**
+   ```bash
+   cd ios/App
+   pod install
+   ```
+
+3. **Periksa pods yang tidak kompatibel**
+   - Review Podfile untuk konflik versi
+   - Pastikan semua pods mendukung iOS deployment target Anda
+
+4. **Clear pod cache**
+   ```bash
+   cd ios/App
+   rm -rf Pods
+   rm Podfile.lock
+   pod install
+   # Lalu commit Podfile.lock baru
+   ```
+
+## Masalah Build Android
+
+### "Keystore password incorrect"
+
+**Gejala:**
+- Build gagal selama signing
+- Error Gradle tentang keystore
+
+**Solusi:**
+
+1. **Verifikasi password keystore**
+   ```bash
+   # Test keystore secara lokal
+   keytool -list -keystore my-release-key.keystore
+   # Masukkan password saat diminta
+   ```
+
+2. **Periksa environment variables**
+   ```bash
+   # Pastikan tidak ada spasi ekstra atau karakter spesial
+   echo "$KEYSTORE_STORE_PASSWORD" | cat -A
+   echo "$KEYSTORE_KEY_PASSWORD" | cat -A
+   ```
+
+3. **Verifikasi encoding base64**
+   ```bash
+   # Decode dan test
+   echo $ANDROID_KEYSTORE_FILE | base64 -d > test.keystore
+   keytool -list -keystore test.keystore
+   ```
+
+### "Key alias not found"
+
+**Gejala:**
+- Signing gagal dengan error alias
+
+**Solusi:**
+
+1. **List alias keystore**
+   ```bash
+   keytool -list -keystore my-release-key.keystore
+   ```
+
+2. **Verifikasi alias cocok persis**
+   - Alias case-sensitive
+   - Periksa typo di KEYSTORE_KEY_ALIAS
+
+3. **Gunakan alias yang benar dari keystore**
+   ```bash
+   # Update environment variable agar cocok
+   export KEYSTORE_KEY_ALIAS="the-exact-alias-name"
+   ```
+
+### "Gradle build failed"
+
+**Gejala:**
+- Error Gradle generik
+- Masalah kompilasi atau dependency
+
+**Solusi:**
+
+1. **Test build lokal terlebih dahulu**
+   ```bash
+   cd android
+   ./gradlew clean
+   ./gradlew assembleRelease
+   ```
+
+2. **Periksa dependencies yang hilang**
+   - Review file build.gradle
+   - Pastikan semua plugin ada di dependencies
+
+3. **Verifikasi kompatibilitas versi Gradle**
+   ```bash
+   # Periksa versi gradle
+   cat android/gradle/wrapper/gradle-wrapper.properties
+   ```
+
+4. **Clear Gradle cache**
+   ```bash
+   cd android
+   ./gradlew clean
+   rm -rf .gradle build
+   ```
+
+### "Play Store upload failed"
+
+**Gejala:**
+- Build berhasil tapi upload gagal
+- Error service account
+
+**Solusi:**
+
+1. **Verifikasi service account JSON**
+   ```bash
+   # Decode dan periksa format
+   echo $PLAY_CONFIG_JSON | base64 -d | jq .
+   ```
+
+2. **Periksa permission service account**
+   - Pergi ke Play Console → Setup → API Access
+   - Pastikan service account memiliki akses ke aplikasi Anda
+   - Berikan permission "Release to testing tracks"
+
+3. **Verifikasi aplikasi disetup di Play Console**
+   - Aplikasi harus dibuat di Play Console terlebih dahulu
+   - Setidaknya satu APK harus diupload manual awalnya
+
+4. **Periksa API diaktifkan**
+   - Google Play Developer API harus diaktifkan
+   - Periksa di Google Cloud Console
+
+## Masalah Umum
+
+### "Job not found" atau "Build status unavailable"
+
+**Gejala:**
+- Tidak dapat memeriksa status build
+- Error job ID
+
+**Solusi:**
+
+1. **Tunggu sebentar dan coba lagi**
+   - Build jobs mungkin butuh beberapa detik untuk inisialisasi
+
+2. **Periksa job ID benar**
+   - Verifikasi job ID dari respons build awal
+
+3. **Periksa build belum kedaluwarsa**
+   - Data build tersedia selama 24 jam
+
+### "Project sync failed"
+
+**Gejala:**
+- Build gagal sebelum kompilasi dimulai
+- Error file yang hilang
+
+**Solusi:**
+
+1. **Jalankan Capacitor sync secara lokal**
+   ```bash
+   npx cap sync
+   ```
+
+2. **Pastikan semua file native dicommit**
+   ```bash
+   git status ios/ android/
+   ```
+
+3. **Periksa file native yang di-gitignore**
+   - Review .gitignore
+   - Pastikan file config penting tidak diabaikan
+
+### "Build succeeded but I don't see output"
+
+**Gejala:**
+- Build menampilkan sukses tapi tidak ada link download
+
+**Solusi:**
+
+1. **Periksa konfigurasi build**
+   - Artifact storage mungkin tidak dikonfigurasi
+   - Untuk public beta, hubungi support tentang akses artifact
+
+2. **Untuk submission TestFlight iOS**
+   - Periksa App Store Connect
+   - Pemrosesan mungkin butuh 5-30 menit setelah upload
+
+3. **Untuk Android Play Store**
+   - Periksa Play Console → Testing → Internal testing
+   - Pemrosesan mungkin butuh beberapa menit
+
+## Masalah Spesifik CI/CD
+
+### GitHub Actions: "Command not found"
+
+**Gejala:**
+- `npx @capgo/cli` gagal di CI
+
+**Solusi:**
+
+1. **Pastikan Node.js terinstal**
+   ```yaml
+   - uses: actions/setup-node@v6
+     with:
+       node-version: '24'
+   ```
+
+2. **Instal CLI secara eksplisit**
+   ```yaml
+   - run: npm install -g @capgo/cli
+   ```
+
+### GitHub Actions: "Secrets not found"
+
+**Gejala:**
+- Environment variables kosong dalam build
+
+**Solusi:**
+
+1. **Verifikasi secrets diset**
+   - Pergi ke repo Settings → Secrets and variables → Actions
+   - Tambahkan semua secrets yang diperlukan
+
+2. **Gunakan syntax yang benar**
+   ```yaml
+   env:
+     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+   ```
+
+3. **Periksa nama secret cocok**
+   - Nama case-sensitive
+   - Tidak ada typo di referensi secret
+
+## Mendapatkan Bantuan Lebih Lanjut
+
+### Aktifkan Verbose Logging
+
+```bash
+# Tambahkan flag debug (saat tersedia)
+npx @capgo/cli@latest build com.example.app --verbose
+```
+
+### Kumpulkan Informasi Build
+
+Saat menghubungi support, sertakan:
+
+1. **Command build yang digunakan**
+   ```bash
+   npx @capgo/cli@latest build com.example.app --platform ios
+   ```
+
+2. **Pesan error** (output penuh)
+
+3. **Job ID** (dari output build)
+
+4. **Build logs** (copy output terminal penuh)
+
+5. **Info environment**
+   ```bash
+   node --version
+   npm --version
+   npx @capgo/cli --version
+   ```
+
+### Hubungi Support
+
+- **Discord**: [Gabung komunitas kami](https://discord.com/invite/VnYRvBfgA6)
+- **Email**: support@capgo.app
+- **Dokumentasi**: [Docs Capgo](/docs/)
+
+### Keterbatasan yang Diketahui
+
+Keterbatasan saat ini selama public beta:
+
+- Waktu build maksimal: 10 menit
+- Ukuran upload maksimal: ~500MB
+- Build iOS memerlukan lease Mac 24 jam, build di Mac akan antri untuk memastikan penggunaan optimal
+- Download build artifact mungkin tidak tersedia
+
+Keterbatasan ini mungkin disesuaikan berdasarkan feedback.
+
+## Resource Tambahan
+
+- [Getting Started](/docs/cli/cloud-build/getting-started/) - Panduan setup awal
+- [Build iOS](/docs/cli/cloud-build/ios/) - Konfigurasi spesifik iOS
+- [Build Android](/docs/cli/cloud-build/android/) - Konfigurasi spesifik Android
+- [Referensi CLI](/docs/cli/reference/build/) - Dokumentasi command lengkap

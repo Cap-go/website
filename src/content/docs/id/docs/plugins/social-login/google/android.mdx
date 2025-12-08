@@ -1,0 +1,222 @@
+---
+title: Google Login di Android
+locale: id
+description: Panduan ini memberikan panduan komprehensif tentang pengaturan Google Login menggunakan Capacitor untuk perangkat Android, merinci setiap langkah untuk memastikan proses integrasi yang lancar dan mengatasi tantangan potensial yang mungkin Anda hadapi.
+sidebar:
+    order: 2
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Pengantar
+
+Dalam panduan ini, Anda akan mempelajari cara mengatur Google Login dengan Capgo Social Login untuk Android.
+Saya berasumsi bahwa Anda telah membaca [panduan pengaturan umum](/docs/plugins/social-login/google/general/).
+
+## Menggunakan login Google di Android
+
+Di bagian ini, Anda akan mempelajari cara mengatur login Google di Android.
+
+:::caution
+Sertifikat SHA1 Android sangat menyakitkan dan saya tidak akan menginginkan siapa pun harus mengaturnya. Langkah-langkah berikut mengasumsikan skenario paling sederhana dari aplikasi yang tidak dipublikasikan ke Google Play Store dan hanya digunakan oleh simulator lokal, atau perangkat keras pengembangan.
+
+Jika Anda telah men-deploy aplikasi Anda ke Google Play Store, Anda **HARUS** menambahkan Android client ID tambahan yang berisi SHA1 dari Google Play console untuk rilis production. Anda dapat menemukan SHA1 hash yang digunakan Google Play untuk menandatangani bundle rilis Anda di bawah `Test and release > Setup > App Signing`.
+
+Terakhir, penting untuk disebutkan bahwa jika Anda salah, kesalahan TIDAK akan jelas. Mungkin sangat sulit untuk di-debug. Jika Anda kesulitan dengan pengaturan, silakan lihat [Github issues](https://github.com/Cap-go/capacitor-social-login/issues).
+
+Selain itu, Anda dapat melihat bagian troubleshooting dari [pengaturan Google Login untuk Android](#troubleshooting) untuk informasi lebih lanjut.
+:::
+
+:::note
+Anda dapat membuat beberapa Android client ID. Ini diperlukan jika Anda memiliki beberapa sertifikat SHA1.
+:::
+
+<Steps>
+1. Buat Android client ID.
+   1. Klik pada search bar
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+
+   2. Cari `credentials` dan klik yang `APIs and Services` (nomor 2 pada screenshot)
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+
+   3. Klik pada `create credentials`
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+
+   4. Pilih `OAuth client ID`
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+
+   5. Pilih tipe aplikasi `Android`
+      <img src="/social-login-assets/google_cons_app_type_android.png" alt="Application type selection with Android option highlighted" />
+
+   6. Buka Android Studio
+
+   7. Di bagian paling bawah navigator, temukan `Gradle Scripts`
+      <img src="/social-login-assets/studio_gradle_scripts.png" alt="Gradle Scripts section in Android Studio project navigator" />
+
+   8. Temukan `build.gradle` untuk modul `app`
+      <img src="/social-login-assets/studio_build_gradle.png" alt="build.gradle (Module: app) file in Gradle Scripts section" />
+
+   9. Salin `android.defaultConfig.applicationId`. Ini akan menjadi `package name` Anda di Google console
+      <img src="/social-login-assets/studio_build_gradle_app_id.png" alt="Build.gradle file showing applicationId configuration" />
+
+   10. Sekarang, buka terminal. Pastikan Anda berada di folder `android` aplikasi Anda dan jalankan `./gradlew signInReport`
+      <img src="/social-login-assets/term_sign_report.png" alt="Terminal showing gradlew signInReport command" />
+
+   11. Gulir ke bagian atas perintah ini. Anda akan melihat yang berikut. Salin `SHA1`.
+      <img src="/social-login-assets/term_sign_report_res.png" alt="Terminal output showing SHA1 certificate fingerprint" />
+
+   12. Sekarang, kembali ke Google Console. Masukkan `applicationId` Anda sebagai `Package Name` dan SHA1 Anda di field sertifikat dan klik `create`
+      <img src="/social-login-assets/google_cons_creat_android_client.png" alt="Android client creation form with package name and SHA1 fields filled in" />
+
+2. Buat web client (ini diperlukan untuk Android)
+
+   1. Buka halaman `Create credentials` di Google Console
+
+   2. Atur tipe aplikasi ke `Web`
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Application type selection with Web option highlighted" />
+
+   3. Klik `Create`
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web client creation form with Create button at bottom" />
+
+   4. Salin client ID, Anda akan menggunakan ini sebagai `webClientId` dalam kode JS/TS Anda
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client ID details showing Web client ID to copy" />
+
+3. Modifikasi `MainActivity` Anda
+
+   1. Silakan buka aplikasi Anda di Android Studio. Anda dapat menjalankan `cap open android`
+
+   2. Temukan `MainActivity.java`
+
+      1. Buka folder `app`
+         <img src="/social-login-assets/studio_app_folder.png" alt="App folder in Android Studio project navigator" />
+
+      2. Temukan `java`
+         <img src="/social-login-assets/studio_app_java.png" alt="Java folder in Android Studio project structure" />
+
+      3. Temukan `MainActivity.java` Anda dan klik di atasnya
+         <img src="/social-login-assets/studio_app_java_activity_main.png" alt="MainActivity.java file in package structure" />
+
+   3. Modifikasi `MainActivity.java`. Silakan tambahkan kode berikut
+
+      ```java
+      import ee.forgr.capacitor.social.login.GoogleProvider;
+      import ee.forgr.capacitor.social.login.SocialLoginPlugin;
+      import ee.forgr.capacitor.social.login.ModifiedMainActivityForSocialLoginPlugin;
+      import com.getcapacitor.PluginHandle;
+      import com.getcapacitor.Plugin;
+      import android.content.Intent;
+      import android.util.Log;
+      import com.getcapacitor.BridgeActivity;
+
+      // ModifiedMainActivityForSocialLoginPlugin is VERY VERY important !!!!!!
+      public class MainActivity extends BridgeActivity implements ModifiedMainActivityForSocialLoginPlugin {
+
+            @Override
+            public void onActivityResult(int requestCode, int resultCode, Intent data) {
+              super.onActivityResult(requestCode, resultCode, data);
+
+              if (requestCode >= GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MIN && requestCode < GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MAX) {
+                PluginHandle pluginHandle = getBridge().getPlugin("SocialLogin");
+                if (pluginHandle == null) {
+                  Log.i("Google Activity Result", "SocialLogin login handle is null");
+                  return;
+                }
+                Plugin plugin = pluginHandle.getInstance();
+                if (!(plugin instanceof SocialLoginPlugin)) {
+                  Log.i("Google Activity Result", "SocialLogin plugin instance is not SocialLoginPlugin");
+                  return;
+                }
+                ((SocialLoginPlugin) plugin).handleGoogleLoginIntent(requestCode, data);
+              }
+            }
+
+            // This function will never be called, leave it empty
+            @Override
+            public void IHaveModifiedTheMainActivityForTheUseWithSocialLoginPlugin() {}
+      }
+      ```
+
+   4. Simpan file
+
+4. Gunakan Google Login di aplikasi Anda
+
+   1. Pertama, import `SocialLogin`
+
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      ```
+
+   2. Panggil initialize. Ini harus dipanggil hanya sekali.
+
+      ```typescript
+      // onMounted is Vue specific
+      // webClientId is the client ID you got in the web client creation step not the android client ID.
+      onMounted(() => {
+        SocialLogin.initialize({
+          google: {
+            webClientId: '673324426943-avl4v9ubdas7a0u7igf7in03pdj1dkmg.apps.googleusercontent.com',
+          }
+        })
+      })
+      ```
+
+   3. Panggil `SocialLogin.login`. Buat tombol dan jalankan kode berikut saat diklik.
+
+      ```typescript
+      const res = await SocialLogin.login({
+        provider: 'google',
+        options: {}
+      })
+      // handle the response
+      console.log(JSON.stringify(res))
+      ```
+
+5. Konfigurasikan emulator untuk pengujian
+
+   1. Masuk ke `Device manager` dan klik tombol plus
+      <img src="/social-login-assets/studio_device_man.png" alt="Device Manager in Android Studio with plus button highlighted" />
+
+   2. Buat virtual device
+      <img src="/social-login-assets/studio_create_virt_dev.png" alt="Create Virtual Device button in Virtual Device Configuration" />
+
+   3. Pilih perangkat apa pun dengan ikon `Play Store`
+      <img src="/social-login-assets/studio_new_dev_select_hardware.png" alt="Hardware selection showing devices with Play Store support" />
+
+      Seperti yang Anda lihat, `pixel 8` mendukung layanan `Play Store`
+
+   4. Klik `next`
+      <img src="/social-login-assets/studio_new_dev_next_1.png" alt="Next button in device creation wizard" />
+
+   5. Pastikan bahwa OS image bertipe `Google Play`. **HARUS** bertipe `Google Play`
+      <img src="/social-login-assets/studio_new_dev_google_play_dev_type.png" alt="System image selection showing Google Play type images" />
+
+   6. Klik next
+      <img src="/social-login-assets/studio_new_dev_next_1.png" alt="Next button in system image selection screen" />
+
+   7. Konfirmasi perangkat Anda. Anda dapat memberi nama emulator sesuai keinginan Anda
+      <img src="/social-login-assets/studio_new_dev_next_3.png" alt="Device configuration verification screen with Finish button" />
+
+   8. Masuk ke `Device Manager` dan boot up simulator Anda
+      <img src="/social-login-assets/studio_dev_manager.png" alt="Device Manager with virtual device listed and play button" />
+
+   9. Setelah simulator boot up, masuk ke pengaturannya
+      <img src="/social-login-assets/emul_and_settings_1.png" alt="Android emulator showing settings app" />
+
+   10. Masuk ke `Google Play`
+      <img src="/social-login-assets/emul_and_settings_2.png" alt="Settings screen with Google Play option" />
+
+   11. Klik `Update` dan tunggu sekitar 60 detik
+      <img src="/social-login-assets/emul_and_settings_update_play_store.png" alt="Google Play update screen with Update button" />
+
+6. Uji aplikasi Anda
+
+   Jika Anda melakukan semuanya dengan benar, Anda akan melihat alur login Google berfungsi dengan baik:
+   <img src="/social-login-assets/google_android_final_login_show.gif" alt="Demo of Google login flow on Android showing sign-in process and successful authentication" />
+</Steps>
+
+## Pemecahan Masalah
+
+Jika Anda mengalami masalah, silakan lihat [Github issues](https://github.com/Cap-go/capacitor-social-login/issues).
+
+Masalah dengan login Google **SELALU** terkait dengan sertifikat SHA1.
+
+Jika Anda tidak dapat mendapatkan sertifikat SHA1 pengembangan, coba gunakan keystore kustom. [Di sini](https://github.com/Cap-go/capacitor-social-login/issues/147#issuecomment-2849742574) adalah komentar yang menjelaskan cara menambahkan keystore ke proyek Anda.

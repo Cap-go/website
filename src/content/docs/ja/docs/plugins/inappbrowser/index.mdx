@@ -1,0 +1,41 @@
+---
+title: "@capgo/inappbrowser"
+description: Capacitorアプリ用のURL変更イベントサポートを備えたアプリ内ブラウザプラグイン。
+locale: ja
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: URL変更イベントとナビゲーションコントロールをサポートする完全機能のアプリ内ブラウザで、アプリ内でWebコンテンツを開きます。
+  image:
+    file: ~public/icons/plugins/inappbrowser.svg
+  actions:
+    - text: 始める
+      link: /docs/plugins/inappbrowser/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/inappbrowser/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="URL変更イベント" icon="rocket">
+    URL変更イベントリスナーでナビゲーションを追跡
+  </Card>
+  <Card title="完全なナビゲーション制御" icon="pencil">
+    戻る、進む、リロード、閉じるコントロール
+  </Card>
+  <Card title="カスタマイズ可能なUI" icon="pencil">
+    ツールバーの色、ボタン、表示オプション
+  </Card>
+  <Card title="包括的なドキュメント" icon="open-book">
+    [ドキュメント](/docs/plugins/inappbrowser/getting-started/)をチェックして、数分でプラグインをマスターしましょう。
+  </Card>
+</CardGrid>

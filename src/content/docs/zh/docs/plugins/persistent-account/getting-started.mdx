@@ -1,0 +1,339 @@
+---
+title: 快速入门
+locale: zh
+description: 学习如何安装和使用 Persistent Account 插件来维护应用程序安装后的用户数据。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 安装
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 平台支持
+
+- **iOS**: 使用 iOS Keychain Services 进行安全的持久化存储
+- **Android**: 使用 Android Account Manager 或带备份的共享首选项
+
+## 使用示例
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// 定义您的账户数据结构
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// 保存账户数据
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// 读取账户数据
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('已恢复账户:', account.username);
+} else {
+  console.log('未找到账户数据');
+}
+```
+
+## API 参考
+
+### saveAccount(options)
+
+```typescript
+saveAccount(options: { data: unknown }) => Promise<void>
+```
+
+安全地保存账户数据到持久化存储。
+
+| 参数         | 类型                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ data: unknown }` |
+
+### readAccount()
+
+```typescript
+readAccount() => Promise<{ data: unknown | null }>
+```
+
+检索已存储的账户数据。
+
+**返回:** `Promise<{ data: unknown | null }>`
+
+## 实际应用
+
+### 完整的身份验证服务示例
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  authToken?: string;
+  preferences: {
+    theme: string;
+    language: string;
+    notifications: boolean;
+  };
+}
+
+class AuthService {
+  // 登录后保存用户账户
+  async saveUserAccount(user: UserAccount) {
+    try {
+      await PersistentAccount.saveAccount({ data: user });
+      console.log('用户账户保存成功');
+    } catch (error) {
+      console.error('保存账户失败:', error);
+      throw error;
+    }
+  }
+
+  // 应用启动时恢复用户账户
+  async restoreUserAccount(): Promise<UserAccount | null> {
+    try {
+      const result = await PersistentAccount.readAccount();
+
+      if (result.data) {
+        const account = result.data as UserAccount;
+        console.log('已恢复用户账户:', account.username);
+        return account;
+      }
+
+      console.log('未找到已保存的账户');
+      return null;
+    } catch (error) {
+      console.error('恢复账户失败:', error);
+      return null;
+    }
+  }
+
+  // 更新用户偏好设置
+  async updatePreferences(preferences: Partial<UserAccount['preferences']>) {
+    const account = await this.restoreUserAccount();
+
+    if (account) {
+      const updatedAccount: UserAccount = {
+        ...account,
+        preferences: {
+          ...account.preferences,
+          ...preferences
+        }
+      };
+
+      await this.saveUserAccount(updatedAccount);
+    }
+  }
+
+  // 清除账户数据（登出时）
+  async clearAccount() {
+    try {
+      await PersistentAccount.saveAccount({ data: null });
+      console.log('账户数据已清除');
+    } catch (error) {
+      console.error('清除账户失败:', error);
+    }
+  }
+}
+
+// 使用方法
+const authService = new AuthService();
+
+// 登录时
+await authService.saveUserAccount({
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  authToken: 'abc123xyz',
+  preferences: {
+    theme: 'dark',
+    language: 'en',
+    notifications: true
+  }
+});
+
+// 应用启动时
+const savedAccount = await authService.restoreUserAccount();
+if (savedAccount) {
+  // 用户之前已登录
+  console.log('欢迎回来,', savedAccount.username);
+}
+
+// 更新偏好设置
+await authService.updatePreferences({
+  theme: 'light',
+  notifications: false
+});
+
+// 登出时
+await authService.clearAccount();
+```
+
+### 带账户恢复的应用初始化
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function initializeApp() {
+  try {
+    // 尝试恢复已保存的账户
+    const result = await PersistentAccount.readAccount();
+
+    if (result.data) {
+      const account = result.data as UserAccount;
+
+      // 验证令牌是否仍然有效
+      const isValid = await validateAuthToken(account.authToken);
+
+      if (isValid) {
+        // 恢复用户会话
+        setCurrentUser(account);
+        navigateToHome();
+      } else {
+        // 令牌已过期，显示登录界面
+        navigateToLogin();
+      }
+    } else {
+      // 没有已保存的账户，显示登录界面
+      navigateToLogin();
+    }
+  } catch (error) {
+    console.error('应用初始化失败:', error);
+    navigateToLogin();
+  }
+}
+
+// 在应用启动时调用
+initializeApp();
+```
+
+### 与后端同步
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function syncAccountWithBackend() {
+  const result = await PersistentAccount.readAccount();
+
+  if (result.data) {
+    const localAccount = result.data as UserAccount;
+
+    try {
+      // 从服务器获取最新的账户数据
+      const response = await fetch(`/api/users/${localAccount.userId}`);
+      const serverAccount = await response.json();
+
+      // 合并服务器数据和本地偏好设置
+      const mergedAccount: UserAccount = {
+        ...serverAccount,
+        preferences: {
+          ...serverAccount.preferences,
+          ...localAccount.preferences // 本地偏好设置优先
+        }
+      };
+
+      // 保存合并后的数据
+      await PersistentAccount.saveAccount({ data: mergedAccount });
+
+      return mergedAccount;
+    } catch (error) {
+      console.error('与后端同步失败:', error);
+      // 返回本地账户作为备选
+      return localAccount;
+    }
+  }
+
+  return null;
+}
+```
+
+## 最佳实践
+
+- **类型安全**: 为账户数据定义清晰的 TypeScript 接口
+- **验证**: 从持久化存储读取数据时始终进行验证
+- **错误处理**: 为所有操作实现适当的 try-catch 块
+- **安全性**: 不要以明文形式存储敏感数据（如密码）
+- **令牌管理**: 恢复账户时刷新身份验证令牌
+- **数据大小**: 保持存储数据最小化以确保快速读写操作
+- **空值检查**: 使用数据前始终检查数据是否存在
+- **备份策略**: 考虑与后端同步以获得额外的安全保障
+
+## 安全注意事项
+
+- 账户数据使用特定于平台的安全存储机制存储
+- 数据在应用卸载和重新安装后仍然存在
+- 考虑在存储前加密敏感信息
+- 读取存储的账户时实施适当的数据验证
+- 遵循平台关于用户数据处理的指南
+- 使用带有过期时间的身份验证令牌以确保安全
+- 在用户登出时适当清除账户数据
+
+## 平台实现
+
+### iOS
+
+- 利用 iOS Keychain Services 进行安全的持久化存储
+- 数据在应用删除和设备恢复后仍然存在
+- 受 iOS 安全机制保护
+
+### Android
+
+- 使用 Android Account Manager 或带备份的共享首选项
+- 在应用重新安装和设备迁移期间保持数据
+- 受 Android 系统安全保护
+
+## 使用场景
+
+- **用户引导**: 在应用重新安装期间保留用户进度
+- **账户恢复**: 在应用更新后恢复用户会话
+- **偏好设置存储**: 维护用户设置和配置
+- **离线优先应用**: 在本地存储必要的用户数据
+- **会话管理**: 使用户在应用重启后保持登录状态
+- **设备迁移**: 将用户数据传输到新设备

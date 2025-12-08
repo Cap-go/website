@@ -1,0 +1,296 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor 앱에서 안정적인 파일 업로드를 위한 Background Uploader 플러그인을 설치하고 사용하는 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-uploader" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **권한 구성**
+
+   ### iOS
+   `Info.plist`에 백그라운드 모드를 추가하세요:
+   ```xml
+   <key>UIBackgroundModes</key>
+   <array>
+     <string>processing</string>
+   </array>
+   ```
+
+   ### Android
+   `AndroidManifest.xml`에 권한을 추가하세요:
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+   ```
+</Steps>
+
+## 사용법
+
+플러그인을 가져오고 파일을 업로드하는 메서드를 사용하세요:
+
+```typescript
+import { Uploader } from '@capgo/capacitor-uploader';
+
+// Start an upload
+const startUpload = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/your/file.jpg',
+    serverUrl: 'https://your-server.com/upload',
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer your-token'
+    },
+    parameters: {
+      'userId': '12345',
+      'type': 'profile'
+    },
+    notificationTitle: 'Uploading Photo'
+  });
+
+  console.log('Upload ID:', upload.id);
+};
+
+// Listen for upload events
+const listener = await Uploader.addListener('events', (event) => {
+  switch (event.name) {
+    case 'uploading':
+      console.log(`Upload ${event.payload.id}: ${event.payload.percent}%`);
+      break;
+    case 'completed':
+      console.log('Upload completed:', event.payload.id);
+      console.log('Status code:', event.payload.statusCode);
+      break;
+    case 'failed':
+      console.error('Upload failed:', event.payload.id);
+      console.error('Error:', event.payload.error);
+      break;
+  }
+});
+
+// Remember to remove listener when done
+// listener.remove();
+
+// Cancel an upload
+const cancelUpload = async (uploadId: string) => {
+  await Uploader.cancelUpload({ id: uploadId });
+};
+
+// Get all active uploads
+const getActiveUploads = async () => {
+  const uploads = await Uploader.getUploads();
+  console.log('Active uploads:', uploads);
+};
+```
+
+## API 참조
+
+### startUpload(options)
+
+새 파일 업로드를 시작합니다.
+
+```typescript
+interface UploadOptions {
+  filePath: string;
+  serverUrl: string;
+  method?: 'POST' | 'PUT';
+  headers?: { [key: string]: string };
+  parameters?: { [key: string]: string };
+  notificationTitle?: string;
+  notificationBody?: string;
+  useUtf8Charset?: boolean;
+  maxRetries?: number;
+}
+```
+
+### cancelUpload(options)
+
+진행 중인 업로드를 취소합니다.
+
+```typescript
+interface CancelOptions {
+  id: string;
+}
+```
+
+### getUploads()
+
+모든 활성 업로드를 반환합니다.
+
+### removeUpload(options)
+
+큐에서 업로드를 제거합니다.
+
+```typescript
+interface RemoveOptions {
+  id: string;
+}
+```
+
+## 이벤트
+
+### events
+
+모든 업로드 이벤트는 단일 `events` 리스너를 통해 전달됩니다. 이벤트에는 유형을 식별하는 `name` 필드가 포함됩니다:
+
+```typescript
+Uploader.addListener('events', (event: UploadEvent) => {
+  switch (event.name) {
+    case 'uploading':
+      // Upload in progress
+      console.log(`Progress: ${event.payload.percent}%`);
+      console.log(`ID: ${event.payload.id}`);
+      break;
+
+    case 'completed':
+      // Upload finished successfully
+      console.log(`Completed: ${event.payload.id}`);
+      console.log(`Status code: ${event.payload.statusCode}`);
+      break;
+
+    case 'failed':
+      // Upload failed
+      console.error(`Failed: ${event.payload.id}`);
+      console.error(`Error: ${event.payload.error}`);
+      break;
+  }
+});
+```
+
+**이벤트 유형:**
+- `uploading` - `percent` 및 `id`가 있는 진행률 업데이트
+- `completed` - `id` 및 `statusCode`로 업로드 완료
+- `failed` - `id` 및 `error` 메시지로 업로드 실패
+
+## 고급 기능
+
+### 멀티파트 폼 업로드
+
+```typescript
+const uploadWithFormData = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/photo.jpg',
+    serverUrl: 'https://api.example.com/upload',
+    method: 'POST',
+    parameters: {
+      'name': 'profile-photo',
+      'description': 'User profile photo'
+    },
+    headers: {
+      'X-API-Key': 'your-api-key'
+    }
+  });
+};
+```
+
+### 바이너리 업로드
+
+```typescript
+const uploadBinary = async () => {
+  const upload = await Uploader.startUpload({
+    filePath: 'file:///path/to/data.bin',
+    serverUrl: 'https://api.example.com/binary',
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/octet-stream'
+    }
+  });
+};
+```
+
+### 네트워크 인식 업로드
+
+```typescript
+import { Network } from '@capacitor/network';
+
+const smartUpload = async () => {
+  const status = await Network.getStatus();
+
+  if (status.connectionType === 'wifi') {
+    // Start large file uploads on WiFi
+    await startLargeUpload();
+  } else if (status.connectionType === 'cellular') {
+    // Queue for later or warn user
+    console.log('Using cellular data');
+  }
+};
+```
+
+## 모범 사례
+
+1. **모든 이벤트 유형 처리**
+   ```typescript
+   const setupUploadHandlers = () => {
+     Uploader.addListener('events', (event) => {
+       switch (event.name) {
+         case 'uploading':
+           handleProgress(event.payload);
+           break;
+         case 'completed':
+           handleCompleted(event.payload);
+           break;
+         case 'failed':
+           handleError(event.payload);
+           break;
+       }
+     });
+   };
+   ```
+
+2. **리스너 정리**
+   ```typescript
+   // Add listener
+   const listener = await Uploader.addListener('events', handleEvent);
+
+   // Clean up when done
+   listener.remove();
+   ```
+
+3. **실패한 업로드 재시도**
+   ```typescript
+   const retryUpload = async (filePath: string, serverUrl: string) => {
+     try {
+       await Uploader.startUpload({
+         filePath,
+         serverUrl,
+         maxRetries: 3
+       });
+     } catch (error) {
+       console.error('Upload failed after retries:', error);
+     }
+   };
+   ```
+
+4. **업로드 알림 표시**
+   ```typescript
+   await Uploader.startUpload({
+     filePath: 'file:///path/to/file',
+     serverUrl: 'https://server.com/upload',
+     notificationTitle: 'Uploading File',
+     notificationBody: 'Your file is being uploaded...'
+   });
+   ```
+
+## 플랫폼 참고사항
+
+### iOS
+- 백그라운드 업로드에 `URLSession` 사용
+- 백그라운드 처리 기능 필요
+- 앱이 일시 중단될 때 업로드 계속
+
+### Android
+- 안정적인 업로드를 위해 `WorkManager` 사용
+- 업로드 중 포어그라운드 서비스 알림 표시
+- 배터리 최적화 설정 존중

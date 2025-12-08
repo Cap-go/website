@@ -1,0 +1,370 @@
+---
+title: "Channel APIエンドポイント"
+locale: ja
+description: "デバイス-チャンネル割り当てとチャンネルクエリを処理するセルフホスティングCapgo用のチャンネル管理エンドポイントの構築方法"
+sidebar:
+  order: 8
+---
+
+チャンネルは、Capgoでアプリのアップデートを管理するためのコアメカニズムです。セルフホスティングモードでは、デバイスの割り当て、チャンネルクエリ、およびチャンネル管理操作を処理するためのチャンネルエンドポイントを実装する必要があります。
+
+## チャンネルを理解する
+
+チャンネルを使用すると、次のことができます:
+- **アップデート配信の制御**: 異なるユーザーグループに異なるアプリバージョンを割り当てる
+- **A/Bテスト**: 特定のユーザーセグメントで新機能をテストする
+- **段階的なロールアウト**: リスクを最小限に抑えるためにアップデートを段階的に展開する
+- **環境の分離**: 開発、ステージング、本番のアップデートを分離する
+
+## 設定
+
+`capacitor.config.json`でチャンネルエンドポイントURLを設定します:
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "channelUrl": "https://myserver.com/api/channel_self"
+    }
+  }
+}
+```
+
+## チャンネル操作
+
+プラグインは、エンドポイントが処理する必要があるさまざまなチャンネル操作を実行します:
+
+### 1. チャンネルを取得（GETリクエスト）
+
+プラグインが`getChannel()`を呼び出すと、デバイスの現在のチャンネル割り当てを取得するためにGETリクエストを送信します。
+
+#### リクエスト形式
+```typescript
+// GET /api/channel_self
+// Headers:
+{
+  "Content-Type": "application/json"
+}
+
+// クエリパラメータまたはボディ:
+interface GetChannelRequest {
+  device_id: string
+  app_id: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+#### レスポンス形式
+```json
+{
+  "status": "ok",
+  "channel": "production",
+  "allowSet": true,
+  "message": "",
+  "error": ""
+}
+```
+
+### 2. チャンネルを設定（POSTリクエスト）
+
+プラグインが`setChannel()`を呼び出すと、デバイスを特定のチャンネルに割り当てるためにPOSTリクエストを送信します。
+
+#### リクエスト形式
+```typescript
+// POST /api/channel_self
+interface SetChannelRequest {
+  device_id: string
+  app_id: string
+  channel: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+#### レスポンス形式
+```json
+{
+  "status": "ok",
+  "message": "Device assigned to channel successfully",
+  "error": ""
+}
+```
+
+### 3. チャンネルの設定を解除（DELETEリクエスト）
+
+プラグインが`unsetChannel()`を呼び出すと、デバイスのチャンネル割り当てを削除するためにDELETEリクエストを送信します。
+
+#### リクエスト形式
+```typescript
+// DELETE /api/channel_self
+interface UnsetChannelRequest {
+  device_id: string
+  app_id: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+## 実装例
+
+チャンネルエンドポイントの実装方法のJavaScriptの例を以下に示します:
+
+```typescript
+interface ChannelRequest {
+  device_id: string
+  app_id: string
+  channel?: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+
+interface ChannelResponse {
+  status: "ok" | "error"
+  channel?: string
+  allowSet?: boolean
+  message?: string
+  error?: string
+}
+
+export const handler = async (event) => {
+  const method = event.httpMethod || event.method
+  const body = JSON.parse(event.body || '{}') as ChannelRequest
+
+  const { device_id, app_id, channel, platform } = body
+
+  try {
+    switch (method) {
+      case 'GET':
+        return await getDeviceChannel(device_id, app_id)
+
+      case 'POST':
+        return await setDeviceChannel(device_id, app_id, channel!, platform)
+
+      case 'DELETE':
+        return await unsetDeviceChannel(device_id, app_id)
+
+      default:
+        return {
+          status: "error",
+          error: "Method not allowed"
+        }
+    }
+  } catch (error) {
+    return {
+      status: "error",
+      error: error.message
+    }
+  }
+}
+
+async function getDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
+  // デバイスのチャンネル割り当てをデータベースにクエリ
+  const assignment = await database.getDeviceChannel(deviceId, appId)
+
+  if (assignment) {
+    return {
+      status: "ok",
+      channel: assignment.channel,
+      allowSet: assignment.allowSelfAssign
+    }
+  }
+
+  // 割り当てが見つからない場合はデフォルトチャンネルを返す
+  return {
+    status: "ok",
+    channel: "production", // デフォルトチャンネル
+    allowSet: true
+  }
+}
+
+async function setDeviceChannel(
+  deviceId: string,
+  appId: string,
+  channel: string,
+  platform: string
+): Promise<ChannelResponse> {
+  // チャンネルが存在し、自己割り当てを許可しているかを検証
+  const channelConfig = await database.getChannelConfig(channel, appId)
+
+  if (!channelConfig) {
+    return {
+      status: "error",
+      error: "Channel not found"
+    }
+  }
+
+  if (!channelConfig.allowDeviceSelfSet) {
+    return {
+      status: "error",
+      error: "Channel does not allow self-assignment"
+    }
+  }
+
+  // プラットフォーム制限を確認
+  if (platform === "ios" && !channelConfig.ios) {
+    return {
+      status: "error",
+      error: "Channel not available for iOS"
+    }
+  }
+
+  if (platform === "android" && !channelConfig.android) {
+    return {
+      status: "error",
+      error: "Channel not available for Android"
+    }
+  }
+
+  // 割り当てを保存
+  await database.setDeviceChannel(deviceId, appId, channel)
+
+  return {
+    status: "ok",
+    message: "Device assigned to channel successfully"
+  }
+}
+
+async function unsetDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
+  // デバイスのチャンネル割り当てを削除
+  await database.removeDeviceChannel(deviceId, appId)
+
+  return {
+    status: "ok",
+    message: "Device channel assignment removed"
+  }
+}
+```
+
+## チャンネル設定
+
+チャンネルシステムは、これらの設定オプションをサポートする必要があります:
+
+```typescript
+interface ChannelConfig {
+  name: string
+  appId: string
+
+  // プラットフォームターゲティング
+  ios: boolean
+  android: boolean
+
+  // デバイス制限
+  allowDeviceSelfSet: boolean  // setChannel()呼び出しを許可
+  allowEmulator: boolean
+  allowDev: boolean           // 開発ビルドを許可
+
+  // アップデートポリシー
+  disableAutoUpdate: "major" | "minor" | "version_number" | "none"
+  disableAutoUpdateUnderNative: boolean
+
+  // 割り当て
+  isDefault: boolean          // 新しいデバイスのデフォルトチャンネル
+}
+```
+
+## データベーススキーマ例
+
+チャンネル設定とデバイス割り当てを保存する必要があります:
+
+```sql
+-- チャンネルテーブル
+CREATE TABLE channels (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  app_id VARCHAR(255) NOT NULL,
+  ios BOOLEAN DEFAULT true,
+  android BOOLEAN DEFAULT true,
+  allow_device_self_set BOOLEAN DEFAULT false,
+  allow_emulator BOOLEAN DEFAULT true,
+  allow_dev BOOLEAN DEFAULT true,
+  disable_auto_update VARCHAR(50) DEFAULT 'none',
+  disable_auto_update_under_native BOOLEAN DEFAULT false,
+  is_default BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(name, app_id)
+);
+
+-- デバイスのチャンネル割り当てテーブル
+CREATE TABLE device_channels (
+  id SERIAL PRIMARY KEY,
+  device_id VARCHAR(255) NOT NULL,
+  app_id VARCHAR(255) NOT NULL,
+  channel_name VARCHAR(255) NOT NULL,
+  assigned_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(device_id, app_id)
+);
+```
+
+## エラー処理
+
+一般的なエラーシナリオを処理します:
+
+```typescript
+// チャンネルが見つからない
+{
+  "status": "error",
+  "error": "Channel 'beta' not found"
+}
+
+// 自己割り当てが許可されていない
+{
+  "status": "error",
+  "error": "Channel does not allow device self-assignment"
+}
+
+// プラットフォームがサポートされていない
+{
+  "status": "error",
+  "error": "Channel not available for this platform"
+}
+
+// 無効なリクエスト
+{
+  "status": "error",
+  "error": "Missing required field: device_id"
+}
+```
+
+## ベストプラクティス
+
+1. **セキュリティ**: ビジネスルールに対してすべてのチャンネル割り当てを検証する
+2. **ロギング**: 監査とデバッグのためにすべてのチャンネル操作をログに記録する
+3. **パフォーマンス**: データベースクエリを減らすためにチャンネル設定をキャッシュする
+4. **検証**: device_idとapp_idの真正性を検証する
+5. **レート制限**: 悪用を防ぐためにレート制限を実装する
+
+## アップデートとの統合
+
+チャンネル割り当ては[Update API Endpoint](/docs/plugin/self-hosted/handling-updates/)と連携して機能します。デバイスがアップデートを要求する場合、そのチャンネル割り当てを確認して、どのバージョンを提供するかを決定します:
+
+```typescript
+async function getUpdateForDevice(deviceId: string, appId: string) {
+  // デバイスのチャンネル割り当てを取得
+  const channelAssignment = await getDeviceChannel(deviceId, appId)
+  const channel = channelAssignment.channel || 'production'
+
+  // このチャンネルに割り当てられたバージョンを取得
+  const channelVersion = await getChannelVersion(channel, appId)
+
+  return {
+    version: channelVersion.version,
+    url: channelVersion.url,
+    checksum: channelVersion.checksum
+  }
+}
+```
+
+これにより、ユーザーへのアップデート配信を完全に制御できる完全なセルフホスティングチャンネル管理システムが作成されます。

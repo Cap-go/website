@@ -1,0 +1,275 @@
+---
+title: 入门指南
+locale: zh
+description: 了解如何安装和使用相机预览插件，在 Capacitor 应用中显示实时相机画面并捕获照片/视频。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/camera-preview" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **配置权限**
+
+   ### iOS
+   将相机使用说明添加到 `Info.plist`：
+   ```xml
+   <key>NSCameraUsageDescription</key>
+   <string>To take photos and videos</string>
+   <key>NSMicrophoneUsageDescription</key>
+   <string>To record audio with videos</string>
+   <key>NSPhotoLibraryUsageDescription</key>
+   <string>To save photos and videos</string>
+   ```
+
+   ### Android
+   将相机权限添加到 `AndroidManifest.xml`：
+   ```xml
+   <uses-permission android:name="android.permission.CAMERA" />
+   <uses-permission android:name="android.permission.RECORD_AUDIO" />
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   ```
+</Steps>
+
+## 使用
+
+导入插件并使用其方法控制相机：
+
+```typescript
+import { CameraPreview } from '@capgo/camera-preview';
+import { CameraPreviewOptions, CameraPreviewPictureOptions } from '@capgo/camera-preview';
+
+// 启动相机预览
+const startCamera = async () => {
+  const cameraPreviewOptions: CameraPreviewOptions = {
+    position: 'rear',
+    height: 1920,
+    width: 1080,
+    quality: 50,
+    toBack: false,
+    paddingBottom: 0,
+    rotateWhenOrientationChanged: true,
+    x: 0,
+    y: 0
+  };
+
+  await CameraPreview.start(cameraPreviewOptions);
+};
+
+// 停止相机预览
+const stopCamera = async () => {
+  await CameraPreview.stop();
+};
+
+// 拍照
+const takePicture = async () => {
+  const pictureOptions: CameraPreviewPictureOptions = {
+    quality: 90,
+    width: 1920,
+    height: 1080
+  };
+
+  const result = await CameraPreview.capture(pictureOptions);
+  const base64PictureData = result.value;
+
+  // 使用 base64 图像数据
+  console.log(base64PictureData);
+};
+
+// 切换相机
+const flipCamera = async () => {
+  await CameraPreview.flip();
+};
+
+// 控制闪光灯
+const setFlashMode = async (mode: 'on' | 'off' | 'auto' | 'torch') => {
+  await CameraPreview.setFlashMode({ flashMode: mode });
+};
+
+// 开始录制视频
+const startRecording = async () => {
+  await CameraPreview.startRecordVideo({
+    storeToFile: true,
+    fileName: 'myvideo'
+  });
+};
+
+// 停止录制
+const stopRecording = async () => {
+  const result = await CameraPreview.stopRecordVideo();
+  console.log('Video path:', result.videoFilePath);
+};
+```
+
+## API 参考
+
+### start(options)
+
+启动相机预览。
+
+```typescript
+interface CameraPreviewOptions {
+  position?: 'rear' | 'front';
+  height?: number;
+  width?: number;
+  x?: number;
+  y?: number;
+  toBack?: boolean;
+  paddingBottom?: number;
+  rotateWhenOrientationChanged?: boolean;
+  storeToFile?: boolean;
+  disableExifHeaderStripping?: boolean;
+  enableHighResolution?: boolean;
+  disableAudio?: boolean;
+  lockAndroidOrientation?: boolean;
+  enableOpacity?: boolean;
+  enableZoom?: boolean;
+}
+```
+
+### stop()
+
+停止相机预览。
+
+### capture(options)
+
+拍照并以 base64 编码字符串返回。
+
+```typescript
+interface CameraPreviewPictureOptions {
+  height?: number;
+  width?: number;
+  quality?: number;
+}
+```
+
+### flip()
+
+在前置和后置相机之间切换。
+
+### setFlashMode(options)
+
+设置闪光灯模式。
+
+```typescript
+interface CameraPreviewFlashMode {
+  flashMode: 'off' | 'on' | 'auto' | 'torch';
+}
+```
+
+### startRecordVideo(options)
+
+开始视频录制。
+
+```typescript
+interface CameraPreviewVideoOptions {
+  storeToFile?: boolean;
+  fileName?: string;
+  width?: number;
+  height?: number;
+  quality?: number;
+  withFlash?: boolean;
+}
+```
+
+### stopRecordVideo()
+
+停止视频录制并返回视频文件路径。
+
+## 高级功能
+
+### 焦点控制
+
+```typescript
+// 设置焦点
+await CameraPreview.setFocusCoordinate({
+  x: 100,
+  y: 100
+});
+
+// 获取支持的焦点模式
+const focusModes = await CameraPreview.getFocusModes();
+
+// 设置焦点模式
+await CameraPreview.setFocusMode({
+  focusMode: 'continuous-picture'
+});
+```
+
+### 缩放控制
+
+```typescript
+// 获取最大缩放
+const maxZoom = await CameraPreview.getMaxZoom();
+
+// 设置缩放
+await CameraPreview.setZoom({
+  zoom: 2.0
+});
+
+// 获取当前缩放
+const currentZoom = await CameraPreview.getZoom();
+```
+
+### 曝光控制
+
+```typescript
+// 获取曝光补偿范围
+const range = await CameraPreview.getExposureCompensationRange();
+
+// 设置曝光补偿
+await CameraPreview.setExposureCompensation({
+  exposureCompensation: 0.5
+});
+```
+
+## 最佳实践
+
+1. **首先请求权限**
+   ```typescript
+   import { Camera } from '@capacitor/camera';
+
+   const requestPermissions = async () => {
+     const permissions = await Camera.requestPermissions();
+     if (permissions.camera === 'granted') {
+       // 启动相机预览
+     }
+   };
+   ```
+
+2. **处理方向变化**
+   设置 `rotateWhenOrientationChanged: true` 以自动调整预览。
+
+3. **优化性能**
+   - 使用适当的分辨率设置
+   - 不使用时停止预览
+   - 禁用不需要的功能
+
+4. **错误处理**
+   ```typescript
+   try {
+     await CameraPreview.start(options);
+   } catch (error) {
+     console.error('Failed to start camera:', error);
+   }
+   ```
+
+## 平台说明
+
+### iOS
+- 需要 iOS 10.0+
+- 使用 AVFoundation 框架
+- 支持硬件加速
+
+### Android
+- 需要 Android 5.0 (API 21)+
+- 使用 Camera2 API
+- 根据设备功能支持各种相机功能

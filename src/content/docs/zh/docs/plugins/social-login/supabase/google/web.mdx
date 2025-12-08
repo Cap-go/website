@@ -1,0 +1,117 @@
+---
+title: Supabase Google Login on Web
+locale: zh
+description: 了解如何在 Web 上使用 Capacitor Social Login 插件设置 Google 登录与 Supabase 身份验证。
+sidebar:
+    order: 4
+---
+
+## 简介
+
+本指南将帮助您在 Web 上集成 Google 登录与 Supabase 身份验证。假设您已经完成：
+ -  [Google Login Web 设置](/docs/plugins/social-login/google/web/)
+ -  [Supabase Google Login - 通用设置](/docs/plugins/social-login/supabase/google/general/)
+
+## 实现
+
+完整的实现可在[示例应用的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。本指南解释了关键概念以及如何使用它。
+
+### 使用身份验证助手
+
+`authenticateWithGoogleSupabase` 函数处理整个身份验证流程：
+
+```typescript
+import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithGoogleSupabase();
+if (result.success) {
+  console.log('Signed in:', result.user);
+  // Navigate to your authenticated area
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## 关键：重定向处理
+
+:::warning[关键：重定向处理]
+在 Web 上使用 Google 登录时，当发生重定向时，您**必须**调用插件的任何函数来初始化插件，以便它可以处理重定向并关闭弹出窗口。您可以调用 `isLoggedIn()` 或 `initialize()` - 两者都会触发重定向处理。
+
+这对于 OAuth 弹出流程正常工作至关重要。
+:::
+
+### 实现示例
+
+将此添加到处理 Google 登录的组件中：
+
+```typescript
+import { useEffect } from 'react';
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+function SupabasePage() {
+  // Check Google login status on mount to invoke redirect handling
+  // This doesn't serve any functional purpose in the UI but ensures
+  // that any pending OAuth redirects are properly processed
+  useEffect(() => {
+    const checkGoogleLoginStatus = async () => {
+      try {
+        await SocialLogin.isLoggedIn({ provider: 'google' });
+        // We don't use the result, this is just to trigger redirect handling
+      } catch (error) {
+        // Ignore errors - this is just for redirect handling
+        console.log('Google login status check completed (redirect handling)');
+      }
+    };
+    
+    checkGoogleLoginStatus();
+  }, []);
+
+  // ... rest of your component
+}
+```
+
+查看 [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) 获取完整示例。
+
+## 工作原理
+
+有关身份验证流程如何工作的详细说明，包括 nonce 生成、JWT 验证和 Supabase 登录，请参阅[通用设置指南中的工作原理部分](/docs/plugins/social-login/supabase/google/general/#how-it-works)。
+
+有关完整的代码参考，请参阅[通用设置指南中的完整代码参考部分](/docs/plugins/social-login/supabase/google/general/#complete-code-reference)。
+
+另请参阅：
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabasePage.tsx) - 带有重定向处理的示例组件
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/SupabaseCreateAccountPage.tsx) - 示例创建账户页面
+
+## 重要说明
+
+### 重定向处理
+
+在 Web 上使用 Google 登录时，当发生重定向时，您**必须**调用插件的任何函数来初始化插件，以便它可以处理重定向并关闭弹出窗口。您可以调用 `isLoggedIn()` 或 `initialize()` - 两者都会触发重定向处理。
+
+这对于 OAuth 弹出流程正常工作至关重要。如果没有这个，弹出窗口在身份验证后不会关闭。
+
+### Nonce 处理
+
+nonce 实现遵循 [React Native Google Sign In 文档](https://react-native-google-signin.github.io/docs/security#usage-with-supabase)中的模式：
+
+- `rawNonce` 传递给 Supabase 的 `signInWithIdToken()`
+- Supabase 对 `rawNonce` 进行哈希处理，并将其与 Google Sign-In ID 令牌中包含的 `nonceDigest` 进行比较
+- `nonceDigest`（SHA-256 哈希，十六进制编码）传递给 Google Sign-In API 中的 `nonce` 参数
+
+### 自动重试
+
+该实现包含自动重试逻辑：
+- 如果首次尝试 JWT 验证失败，它会注销并重试一次
+- 这处理缓存的令牌可能具有不正确 nonce 的情况
+- 如果重试也失败，则返回错误
+
+## 故障排除
+
+如果身份验证失败：
+
+- **重定向不工作**：确保在组件挂载时调用 `isLoggedIn()`（参见上面的示例）
+- **无效的 audience**：验证您的 Google 客户端 ID 在 Google Cloud Console 和 Supabase 中是否匹配
+- **授权重定向 URL**：检查在 Google Cloud Console 和 Supabase 中是否配置了授权重定向 URL
+- **Nonce 不匹配**：检查控制台日志 - 该函数会自动重试，但如果需要，您可以先手动注销
+- **令牌验证失败**：确保在 initialize 调用中使用 `mode: 'online'` 以获取 idToken
+- 查看[示例应用代码](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)作为参考

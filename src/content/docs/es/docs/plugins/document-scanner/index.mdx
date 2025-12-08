@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-document-scanner"
+locale: es
+description: Captura documentos nítidos con detección automática de bordes y exporta páginas escaneadas desde tu aplicación Capacitor.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Lanza una experiencia de escaneo de documentos pulida con recorte automático, captura multipágina y formatos de salida configurables.
+  image:
+    file: ~public/icons/plugins/document-scanner.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/document-scanner/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-document-scanner/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+El plugin Document Scanner brinda a tu aplicación Capacitor un flujo de escaneo con calidad nativa que funciona en dispositivos iOS y Android.
+
+<CardGrid stagger>
+  <Card title="Detección automática" icon="rocket">
+    Detecta bordes de página, recorta automáticamente y permite a los usuarios ajustar antes de guardar.
+  </Card>
+  <Card title="Captura multipágina" icon="star">
+    Captura una o muchas páginas en una sola sesión de escaneo con límites ajustables.
+  </Card>
+  <Card title="Salida personalizada" icon="download">
+    Devuelve rutas de archivo o cadenas base64 con la calidad de imagen que elijas.
+  </Card>
+  <Card title="API unificada" icon="pencil">
+    Una interfaz TypeScript abarca las implementaciones de iOS y Android.
+  </Card>
+</CardGrid>
+
+Usa la guía de inicio para habilitar permisos de cámara, configurar ajustes de calidad y exportar archivos escaneados a tu flujo de trabajo de almacenamiento.

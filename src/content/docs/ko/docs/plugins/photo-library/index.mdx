@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-photo-library"
+locale: ko
+description: 효율적인 페이징, 썸네일 및 캐시된 URL로 사진을 탐색하고 선택합니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 강력한 권한 흐름을 통해 네이티브 사진 라이브러리를 활용하는 사용자 정의 갤러리를 구축합니다.
+  image:
+    file: ~public/icons/plugins/photo-library.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/photo-library/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-photo-library/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Photo Library는 성능을 유지하면서 앨범을 나열하고, 자산을 페이지로 나누고, 썸네일을 요청하는 데 도움이 됩니다.
+
+<CardGrid stagger>
+  <Card title="권한 도우미" icon="approve-check">
+    권한을 요청하고 제한된 액세스 상태를 우아하게 처리합니다.
+  </Card>
+  <Card title="페이지된 가져오기" icon="rocket">
+    커서 기반 로딩 및 사용자 정의 가능한 제한으로 갤러리를 페이지로 나눕니다.
+  </Card>
+  <Card title="최적화된 썸네일" icon="star">
+    부드러운 스크롤 목록을 위해 고정된 크기의 썸네일 URL을 가져옵니다.
+  </Card>
+  <Card title="미디어 선택" icon="download">
+    구성 가능한 선택 제한으로 사용자가 사진이나 비디오를 선택하도록 합니다.
+  </Card>
+</CardGrid>
+
+권한 설정 및 갤러리 예제는 시작 가이드를 확인하세요.

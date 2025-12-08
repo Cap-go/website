@@ -1,0 +1,242 @@
+---
+title: 시작하기
+description: 공식 SDK를 사용하여 Capacitor 앱에 Google Tag Manager를 설치하고 통합하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 플랫폼 구성
+
+### iOS
+
+1. Google Tag Manager 콘솔에서 GTM 컨테이너 구성 파일을 다운로드합니다
+2. Xcode에서 컨테이너 JSON 파일을 iOS 프로젝트에 추가합니다
+3. 파일 이름은 `GTM-XXXXXX.json`과 같은 형식이어야 합니다
+
+### Android
+
+1. Google Tag Manager 콘솔에서 GTM 컨테이너 구성 파일을 다운로드합니다
+2. 컨테이너 JSON 파일을 `android/app/src/main/assets/`에 추가합니다
+3. 파일 이름은 `GTM-XXXXXX.json`과 같은 형식이어야 합니다
+
+## 사용 예제
+
+```typescript
+import { CapacitorGTM } from '@capgo/capacitor-gtm';
+
+// 컨테이너 ID로 GTM 초기화
+await CapacitorGTM.init({
+  containerId: 'GTM-XXXXXX'
+});
+
+// dataLayer에 이벤트 푸시
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Home',
+    screen_class: 'HomeScreen'
+  }
+});
+
+// 매개변수가 있는 사용자 정의 이벤트 푸시
+await CapacitorGTM.pushEvent({
+  event: 'purchase',
+  parameters: {
+    transaction_id: 'T12345',
+    value: 25.00,
+    currency: 'USD',
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product Name',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+
+// 사용자 속성 설정
+await CapacitorGTM.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+
+// dataLayer에서 값 가져오기
+const result = await CapacitorGTM.getVariable({
+  key: 'config_value'
+});
+console.log('구성 값:', result.value);
+```
+
+## API 참조
+
+### init(options)
+
+```typescript
+init(options: { containerId: string }) => Promise<void>
+```
+
+컨테이너 ID로 Google Tag Manager를 초기화합니다.
+
+| 매개변수         | 타입                             |
+| ------------- | -------------------------------- |
+| **`options`** | `{ containerId: string }` |
+
+### pushEvent(options)
+
+```typescript
+pushEvent(options: GTMEvent) => Promise<void>
+```
+
+선택적 매개변수와 함께 이벤트를 dataLayer에 푸시합니다.
+
+| 매개변수         | 타입              |
+| ------------- | ----------------- |
+| **`options`** | `GTMEvent` |
+
+### setUserProperty(options)
+
+```typescript
+setUserProperty(options: { key: string; value: string }) => Promise<void>
+```
+
+세분화 및 타겟팅을 위한 사용자 속성을 설정합니다.
+
+| 매개변수         | 타입                                      |
+| ------------- | ----------------------------------------- |
+| **`options`** | `{ key: string; value: string }` |
+
+### getVariable(options)
+
+```typescript
+getVariable(options: { key: string }) => Promise<{ value: any }>
+```
+
+GTM 컨테이너 구성에서 값을 가져옵니다.
+
+| 매개변수         | 타입                     |
+| ------------- | ------------------------ |
+| **`options`** | `{ key: string }` |
+
+**반환:** `Promise<{ value: any }>`
+
+## 인터페이스
+
+### GTMEvent
+
+| 속성             | 타입                                 | 설명                        |
+| ---------------- | ------------------------------------ | ---------------------------------- |
+| **`event`**      | `string`                  | 이벤트 이름                     |
+| **`parameters`** | `Record<string, any>` | 선택적 이벤트 매개변수 (선택 사항) |
+
+## 일반적인 이벤트 예제
+
+### 화면 보기
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Product Details',
+    screen_class: 'ProductScreen'
+  }
+});
+```
+
+### 사용자 작업
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'button_click',
+  parameters: {
+    button_name: 'add_to_cart',
+    product_id: 'SKU_12345'
+  }
+});
+```
+
+### 전자상거래 이벤트
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'begin_checkout',
+  parameters: {
+    currency: 'USD',
+    value: 75.00,
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product 1',
+        quantity: 2,
+        price: 25.00
+      },
+      {
+        item_id: 'SKU_67890',
+        item_name: 'Product 2',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+```
+
+## 모범 사례
+
+- 앱 라이프사이클 초기에 GTM 초기화
+- 일관된 이벤트 명명 규칙 사용
+- 각 이벤트에 관련 매개변수 포함
+- 미리보기 모드에서 GTM 구성 테스트
+- Google Tag Manager 콘솔에서 데이터 모니터링
+- 의미 있는 세분화를 위해 사용자 속성 사용
+
+## 디버깅
+
+Google Tag Manager 콘솔에서 디버그 모드를 활성화하여 구현을 테스트합니다:
+
+1. GTM 콘솔 열기
+2. 미리보기 모드로 이동
+3. 컨테이너 ID를 사용하여 앱에 연결
+4. 이벤트가 올바르게 추적되는지 확인
+
+## 사용 사례
+
+- 사용자 상호작용 및 행동 추적
+- 앱 성능 지표 모니터링
+- 전자상거래 데이터 수집
+- 코드 변경 없이 타사 태그 관리
+- A/B 테스트 및 개인화 구현
+- Google Analytics 및 기타 서비스와 통합

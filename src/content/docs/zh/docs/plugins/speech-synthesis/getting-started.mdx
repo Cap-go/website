@@ -1,0 +1,252 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和使用语音合成插件在您的 Capacitor 应用中将文本转换为语音。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **与原生项目同步**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 用法
+
+导入插件并从文本合成语音：
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+// 基本文本转语音
+const speak = async () => {
+  await SpeechSynthesis.speak({
+    text: 'Hello, world!',
+    language: 'en-US'
+  });
+};
+
+// 带语音控制的高级用法
+const speakWithVoice = async () => {
+  await SpeechSynthesis.speak({
+    text: 'This is a test of speech synthesis.',
+    language: 'en-US',
+    rate: 1.0,      // 语音速率：0.1 到 10.0
+    pitch: 1.0,     // 音高：0.5 到 2.0
+    volume: 1.0,    // 音量：0.0 到 1.0
+    voice: 'com.apple.ttsbundle.Samantha-compact'
+  });
+};
+```
+
+## API 参考
+
+### speak(options)
+
+使用指定的语音设置说出给定的文本。
+
+```typescript
+interface SpeakOptions {
+  text: string;           // 要说的文本
+  language?: string;      // 语言代码（例如 'en-US'、'es-ES'）
+  rate?: number;          // 语音速率：0.1 到 10.0（默认：1.0）
+  pitch?: number;         // 音高：0.5 到 2.0（默认：1.0）
+  volume?: number;        // 音量：0.0 到 1.0（默认：1.0）
+  voice?: string;         // 语音标识符（从 getVoices() 获取）
+}
+
+await SpeechSynthesis.speak(options);
+```
+
+### stop()
+
+停止任何正在进行的语音合成。
+
+```typescript
+await SpeechSynthesis.stop();
+```
+
+### getVoices()
+
+获取可用于语音合成的语音列表。
+
+```typescript
+interface Voice {
+  voiceURI: string;       // 唯一语音标识符
+  name: string;           // 人类可读的语音名称
+  lang: string;           // 语言代码
+  default: boolean;       // 这是否是默认语音
+}
+
+const { voices } = await SpeechSynthesis.getVoices();
+console.log('可用语音：', voices);
+```
+
+### getSupportedLanguages()
+
+获取支持的语言代码列表。
+
+```typescript
+const { languages } = await SpeechSynthesis.getSupportedLanguages();
+console.log('支持的语言：', languages);
+```
+
+### isSpeaking()
+
+检查语音合成是否当前处于活动状态。
+
+```typescript
+const { speaking } = await SpeechSynthesis.isSpeaking();
+console.log('当前正在说话：', speaking);
+```
+
+## 完整示例
+
+```typescript
+import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
+
+export class TextToSpeechService {
+  private currentVoice: string | undefined;
+
+  async init() {
+    // 获取可用语音
+    const { voices } = await SpeechSynthesis.getVoices();
+
+    // 查找英语语音
+    const englishVoice = voices.find(v => v.lang.startsWith('en'));
+    this.currentVoice = englishVoice?.voiceURI;
+
+    console.log(`使用语音：${englishVoice?.name}`);
+  }
+
+  async speak(text: string, options?: Partial<SpeakOptions>) {
+    try {
+      // 停止任何正在进行的语音
+      await SpeechSynthesis.stop();
+
+      // 说出文本
+      await SpeechSynthesis.speak({
+        text,
+        language: 'en-US',
+        rate: 1.0,
+        pitch: 1.0,
+        volume: 1.0,
+        voice: this.currentVoice,
+        ...options
+      });
+    } catch (error) {
+      console.error('语音合成失败：', error);
+      throw error;
+    }
+  }
+
+  async speakWithRate(text: string, rate: number) {
+    await this.speak(text, { rate });
+  }
+
+  async stop() {
+    await SpeechSynthesis.stop();
+  }
+
+  async checkIfSpeaking(): Promise<boolean> {
+    const { speaking } = await SpeechSynthesis.isSpeaking();
+    return speaking;
+  }
+
+  async listVoicesByLanguage(languageCode: string) {
+    const { voices } = await SpeechSynthesis.getVoices();
+    return voices.filter(v => v.lang.startsWith(languageCode));
+  }
+}
+```
+
+## 高级用法
+
+### 多语言支持
+
+```typescript
+// 使用不同语言说话
+const speakMultiLanguage = async () => {
+  await SpeechSynthesis.speak({
+    text: 'Hello!',
+    language: 'en-US'
+  });
+
+  await SpeechSynthesis.speak({
+    text: 'Bonjour!',
+    language: 'fr-FR'
+  });
+
+  await SpeechSynthesis.speak({
+    text: 'こんにちは!',
+    language: 'ja-JP'
+  });
+};
+```
+
+### 语音选择
+
+```typescript
+// 选择特定语音
+const selectVoice = async (languageCode: string) => {
+  const { voices } = await SpeechSynthesis.getVoices();
+
+  // 按语言过滤语音
+  const languageVoices = voices.filter(v =>
+    v.lang.startsWith(languageCode)
+  );
+
+  // 使用第一个可用语音
+  if (languageVoices.length > 0) {
+    await SpeechSynthesis.speak({
+      text: 'Testing voice selection',
+      language: languageCode,
+      voice: languageVoices[0].voiceURI
+    });
+  }
+};
+```
+
+### 朗读长文本
+
+```typescript
+// 将长文本分块并朗读
+const speakLongText = async (longText: string) => {
+  const sentences = longText.match(/[^.!?]+[.!?]+/g) || [longText];
+
+  for (const sentence of sentences) {
+    await SpeechSynthesis.speak({
+      text: sentence.trim(),
+      language: 'en-US',
+      rate: 0.9
+    });
+
+    // 在句子之间稍作停顿
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+};
+```
+
+## 最佳实践
+
+1. **语音选择**：在使用特定语音 ID 之前，始终检查可用语音
+2. **语言代码**：使用标准语言代码（例如 'en-US'、'es-ES'、'fr-FR'）
+3. **速率控制**：将速率保持在 0.5 到 2.0 之间以获得自然的语音
+4. **说话前停止**：在开始新语音之前调用 stop() 以避免重叠
+5. **错误处理**：将所有调用包装在 try-catch 块中以进行稳健的错误处理
+
+## 故障排除
+
+### 常见问题
+
+**无语音输出**：检查设备音量并确保文本不为空
+**找不到语音**：使用 getVoices() 查找设备上的可用语音
+**语音中断**：在开始新合成之前停止任何正在进行的语音
+**不支持的语言**：检查 getSupportedLanguages() 以获取可用语言

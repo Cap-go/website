@@ -1,0 +1,108 @@
+---
+title: "@capgo/capacitor-twilio-voice"
+locale: fr
+description: Plugin d'intégration de l'API Twilio Voice pour les applications Capacitor avec appels VoIP, gestion des appels et traitement audio.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+hero:
+  tagline: Intégrez l'API Twilio Voice pour des appels VoIP de haute qualité avec gestion des appels, contrôles audio et communication en temps réel.
+  image:
+    file: ~public/icons/plugins/twilio-voice.svg
+  actions:
+    - text: Commencer
+      link: /docs/plugins/twilio-voice/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-twilio-voice/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Vue d'ensemble
+
+Le plugin Capacitor Twilio Voice active la fonctionnalité d'appels VoIP de haute qualité dans les applications iOS et Android en utilisant l'API Voice de Twilio. Ce plugin fournit une gestion complète des appels, l'authentification et les contrôles audio pour créer des expériences d'appel professionnelles.
+
+<CardGrid stagger>
+  <Card title="Appels VoIP" icon="rocket">
+    Appels vocaux de haute qualité via Internet en utilisant l'API Twilio Voice 📞
+  </Card>
+  <Card title="Gestion des appels" icon="setting">
+    Effectuer, accepter, rejeter et terminer les appels avec un contrôle complet du cycle de vie 🎛️
+  </Card>
+  <Card title="Contrôles audio" icon="comment">
+    Muet, basculement du haut-parleur et options de routage audio 🎤
+  </Card>
+  <Card title="Support de plateforme" icon="approve-check">
+    Implémentation native iOS et Android avec notifications push 📱
+  </Card>
+</CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-twilio-voice
+npx cap sync
+```
+
+## Méthodes API principales
+
+### Authentification
+- `login(options: { accessToken: string })` - S'authentifier avec Twilio en utilisant un jeton d'accès
+- `logout()` - Terminer la session utilisateur et effacer l'état de l'appel
+- `isLoggedIn()` - Vérifier l'état d'authentification actuel
+
+### Gestion des appels
+- `makeCall(options: { to: string })` - Initier un appel sortant vers un numéro spécifié
+- `acceptCall(options: { callSid: string })` - Accepter un appel entrant
+- `rejectCall(options: { callSid: string })` - Rejeter un appel entrant
+- `endCall(options?: { callSid?: string })` - Terminer l'appel actif
+- `muteCall(options: { muted: boolean, callSid?: string })` - Activer/désactiver le son de l'appel
+- `setSpeaker(options: { enabled: boolean })` - Basculer la sortie haut-parleur
+
+## Écouteurs d'événements
+
+Le plugin fournit une gestion complète des événements pour :
+- Événements d'enregistrement pour l'état de la connexion
+- Changements d'état des appels (connecté, déconnecté, sonnerie)
+- Avertissements de qualité et problèmes de connexion
+- Notifications d'appels entrants
+
+## Configuration de plateforme
+
+### Configuration iOS
+- Nécessite l'intégration PushKit pour les appels entrants
+- Configuration de certificat pour l'utilisation en production
+- Permissions du microphone dans Info.plist
+
+### Configuration Android
+- Configuration Firebase pour les notifications push
+- Permissions du microphone dans AndroidManifest.xml
+- Configuration du service en arrière-plan
+
+## Exemple de démarrage rapide
+
+```typescript
+import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
+
+// Authenticate with Twilio
+await TwilioVoice.login({ accessToken: 'your-twilio-access-token' });
+
+// Make a call
+await TwilioVoice.makeCall({ to: '+1234567890' });
+
+// Listen for call events
+TwilioVoice.addListener('callConnected', (data) => {
+  console.log('Call connected:', data);
+});
+```
+
+## Documentation
+
+Consultez la [documentation complète](/docs/plugins/twilio-voice/getting-started/) pour des instructions de configuration détaillées, une configuration avancée et des exemples d'intégration.

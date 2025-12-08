@@ -1,0 +1,219 @@
+---
+title: Comenzar
+locale: es
+description: Aprende cómo instalar y usar el plugin Compass para leer el rumbo de la brújula del dispositivo en tu aplicación Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Configuración de iOS
+
+En iOS, el acceso a la brújula requiere permiso de ubicación. Agrega lo siguiente a tu `Info.plist`:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need location permission to access the compass</string>
+```
+
+## Configuración de Android
+
+No se requiere configuración adicional. El plugin usa los sensores magnetómetro y acelerómetro del dispositivo.
+
+## Uso
+
+Importa el plugin y usa sus métodos para leer el rumbo de la brújula:
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// Obtener rumbo actual una vez
+const getCurrentHeading = async () => {
+  const { value } = await CapgoCompass.getCurrentHeading();
+  console.log('Current heading:', value, 'degrees');
+};
+
+// Iniciar actualizaciones continuas de rumbo
+const startCompass = async () => {
+  // Comenzar a escuchar actualizaciones
+  await CapgoCompass.startListening();
+
+  // Agregar listener para cambios de rumbo
+  const handle = await CapgoCompass.addListener('headingChange', (event) => {
+    console.log('Heading:', event.value, 'degrees');
+  });
+
+  // Más tarde, para dejar de escuchar:
+  // await CapgoCompass.stopListening();
+  // await handle.remove();
+};
+
+// Verificar permisos
+const checkPermission = async () => {
+  const status = await CapgoCompass.checkPermissions();
+  console.log('Permission status:', status.compass);
+};
+
+// Solicitar permisos
+const requestPermission = async () => {
+  const status = await CapgoCompass.requestPermissions();
+  if (status.compass === 'granted') {
+    console.log('Compass access granted');
+  }
+};
+```
+
+## Referencia de API
+
+### getCurrentHeading()
+
+Obtiene el rumbo actual de la brújula en grados.
+
+```typescript
+const result = await CapgoCompass.getCurrentHeading();
+// Retorna: { value: number } - rumbo en grados (0-360)
+```
+
+### startListening()
+
+Comienza a escuchar cambios de rumbo de la brújula. Debe llamarse antes de que se emitan eventos de rumbo.
+
+```typescript
+await CapgoCompass.startListening();
+```
+
+### stopListening()
+
+Detiene la escucha de cambios de rumbo de la brújula.
+
+```typescript
+await CapgoCompass.stopListening();
+```
+
+### addListener('headingChange', callback)
+
+Agrega un listener para eventos de cambio de rumbo.
+
+```typescript
+const handle = await CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Heading:', event.value);
+});
+
+// Eliminar listener cuando termine
+await handle.remove();
+```
+
+### removeAllListeners()
+
+Elimina todos los listeners registrados.
+
+```typescript
+await CapgoCompass.removeAllListeners();
+```
+
+### checkPermissions()
+
+Verifica el estado actual de permisos.
+
+```typescript
+const status = await CapgoCompass.checkPermissions();
+// Retorna: { compass: 'prompt' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+Solicita permiso para acceder a datos de la brújula.
+
+```typescript
+const status = await CapgoCompass.requestPermissions();
+```
+
+### getPluginVersion()
+
+Obtiene la versión del plugin nativo.
+
+```typescript
+const { version } = await CapgoCompass.getPluginVersion();
+```
+
+## Ejemplo Completo
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+export class CompassService {
+  private listenerHandle: any = null;
+
+  async init() {
+    // Verificar y solicitar permisos
+    const status = await CapgoCompass.checkPermissions();
+    if (status.compass !== 'granted') {
+      const result = await CapgoCompass.requestPermissions();
+      if (result.compass !== 'granted') {
+        throw new Error('Compass permission denied');
+      }
+    }
+  }
+
+  async startTracking(onHeadingChange: (heading: number) => void) {
+    // Comenzar a escuchar actualizaciones
+    await CapgoCompass.startListening();
+
+    // Agregar listener de eventos
+    this.listenerHandle = await CapgoCompass.addListener(
+      'headingChange',
+      (event) => {
+        onHeadingChange(event.value);
+      }
+    );
+  }
+
+  async stopTracking() {
+    if (this.listenerHandle) {
+      await this.listenerHandle.remove();
+      this.listenerHandle = null;
+    }
+    await CapgoCompass.stopListening();
+  }
+
+  async getHeading(): Promise<number> {
+    const { value } = await CapgoCompass.getCurrentHeading();
+    return value;
+  }
+
+  getCardinalDirection(heading: number): string {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(heading / 45) % 8;
+    return directions[index];
+  }
+}
+```
+
+## Notas de Plataforma
+
+### iOS
+- Requiere iOS 10.0+
+- Usa Core Location para datos de rumbo
+- Requiere permiso de ubicación (NSLocationWhenInUseUsageDescription)
+- Las actualizaciones de rumbo son continuas cuando la escucha está activa
+
+### Android
+- Requiere Android 6.0 (API 23)+
+- Usa sensores de acelerómetro y magnetómetro
+- No se requieren permisos especiales para sensores de brújula
+- El rumbo se calcula a partir de fusión de sensores
+
+### Web
+- No soportado en plataforma web
+- Los métodos lanzarán errores cuando se llamen

@@ -1,0 +1,52 @@
+---
+title: Panduan Migrasi V7
+locale: id
+description: Panduan untuk migrasi dari versi sebelumnya ke V7 dari @capgo/capacitor-social-login
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Pendahuluan
+
+:::caution
+Panduan ini untuk versi `V1`/`V7` dari plugin untuk orang-orang yang masih menggunakan plugin ini dengan versi `0.x.x`.
+:::
+
+Panduan ini akan mencakup hal berikut:
+
+- Migrasi ke versi V1 dari versi `main`
+- Migrasi ke versi V1 dari versi `development`
+
+## Perubahan penting di V1
+
+V1 hanyalah port dari versi development ke main. Namun, ini mencakup banyak perubahan penting yang tidak tersedia di versi V0 `main`. Perubahan tersebut meliputi:
+
+- Scope akses untuk login Google
+- Mode offline untuk login Google
+- Unifikasi implementasi yang berbeda
+  - Pengujian ekstensif dilakukan untuk memastikan bahwa semua implementasi dari Provider Google berperilaku dengan cara yang sama antar platform
+
+## Migrasi dari versi V0 main
+
+- Perubahan dalam `MainActivity.java` untuk Android
+  - Silakan ikuti [Panduan Setup Google](/docs/plugins/social-login/google/android/). Secara khusus, silakan cari `MainActivity.java`
+
+- Silakan tambahkan redirect url di Google Console. Tanpa menambahkan redirect url, login Google tidak akan berfungsi.
+  - Sekali lagi, silakan ikuti [Panduan Setup Google](/docs/plugins/social-login/google/android/). Secara khusus, silakan cari `Authorized redirect URIs`
+
+- Silakan pastikan Anda tidak menggunakan `grantOfflineAccess` di config. Fitur ini tidak didukung di V1.
+
+- Silakan pastikan bahwa autentikasi berfungsi di semua platform.
+
+## Migrasi dari versi V0 development
+
+- Perubahan dalam `MainActivity.java` untuk Android
+  - Silakan ikuti [Panduan Setup Google](/docs/plugins/social-login/google/android/). Secara khusus, silakan cari `MainActivity.java`. Di V1, Anda **HARUS** mengimplementasikan `ModifiedMainActivityForSocialLoginPlugin` di main activity Anda. Perubahan ini sangat penting agar plugin berfungsi
+
+- Silakan tambahkan redirect url di Google Console. Tanpa menambahkan redirect url, login Google tidak akan berfungsi.
+  - Sekali lagi, silakan ikuti [Panduan Setup Google](/docs/plugins/social-login/google/android/). Secara khusus, silakan cari `Authorized redirect URIs`
+
+- Silakan pastikan bahwa tipe dan nama variabel sudah benar. Harap ketahui bahwa tipe dan variabel mungkin tidak cocok antara development dan V1.
+
+- Silakan pastikan bahwa autentikasi berfungsi di semua platform.

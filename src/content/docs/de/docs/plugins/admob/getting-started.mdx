@@ -1,0 +1,89 @@
+---
+title: Erste Schritte
+description: Installieren und konfigurieren Sie das Capgo AdMob Plugin, um Anzeigen in Ihrer Capacitor-Anwendung zu schalten.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Plugin installieren**
+   <PackageManagers pkg="@capgo/capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Native Projekte synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## SDK initialisieren
+
+```typescript
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
+
+// Starten Sie das Mobile Ads SDK einmal beim Anwendungsstart
+await AdMob.start();
+
+// Optional: Globale Anforderungseinstellungen konfigurieren
+await AdMob.configure({
+  appMuted: false,
+  appVolume: 1,
+});
+
+await AdMob.configRequest({
+  maxAdContentRating: MaxAdContentRating.T,
+  tagForChildDirectedTreatment: false,
+  tagForUnderAgeOfConsent: false,
+});
+```
+
+## Banner-Anzeige anzeigen
+
+```typescript
+import { BannerAd } from '@capgo/capacitor-admob';
+
+const banner = new BannerAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/banner',
+  position: 'bottom',
+});
+
+await banner.show();
+```
+
+## Interstitial- oder Belohnungsanzeigen
+
+```typescript
+import { InterstitialAd, RewardedAd } from '@capgo/capacitor-admob';
+
+const interstitial = new InterstitialAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/interstitial',
+});
+await interstitial.load();
+await interstitial.show();
+
+const rewarded = new RewardedAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/rewarded',
+});
+await rewarded.load();
+await rewarded.show();
+```
+
+## Auf Anzeigenereignisse lauschen
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const handle = await AdMob.addListener('adImpression', (event) => {
+  console.log('Ad impression', event);
+});
+
+// Später beim Aufräumen
+await handle.remove();
+```
+
+## Plattformhinweise
+
+- **iOS**: Fügen Sie Ihre AdMob App-ID zu `Info.plist` unter dem Schlüssel `GADApplicationIdentifier` hinzu und fügen Sie alle SKAdNetwork-IDs hinzu, auf die Sie angewiesen sind.
+- **Android**: Deklarieren Sie Ihre AdMob App-ID in `AndroidManifest.xml`, indem Sie `com.google.android.gms.ads.APPLICATION_ID` innerhalb des `<application>`-Tags hinzufügen.
+- **Einwilligung & Datenschutz**: Verwenden Sie `requestTrackingAuthorization()` auf iOS 14+ und die `configRequest()` Flags für kinderfreundliche Inhalte, um die regionalen Datenschutzbestimmungen einzuhalten.

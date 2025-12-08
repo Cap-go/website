@@ -1,0 +1,336 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Android Kiosk Plugin installieren und verwenden, um Ihr Android-Gerät in den Kiosk-Modus zu sperren.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Plattformunterstützung
+
+Dieses Plugin ist **nur für Android**. Für die iOS-Kiosk-Modus-Funktionalität verwenden Sie bitte die integrierte Funktion [Geführter Zugriff](https://support.apple.com/en-us/HT202612) des Geräts.
+
+## Funktionen
+
+- **Kiosk-Modus**: System-UI ausblenden und in immersiven Vollbildmodus wechseln
+- **Launcher-Integration**: Legen Sie Ihre App als Geräte-Launcher/Home-App fest
+- **Hardware-Tastensteuerung**: Blockieren oder erlauben Sie spezifische Hardware-Tasten
+- **Statuserkennung**: Prüfen Sie, ob der Kiosk-Modus aktiv ist oder die App als Launcher festgelegt ist
+- **Android 6.0+**: Unterstützt Android API 23 bis Android 15 (API 35)
+
+## Grundlegende Verwendung
+
+### Kiosk-Modus aktivieren und beenden
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+// Kiosk-Modus aktivieren
+await CapacitorAndroidKiosk.enterKioskMode();
+
+// Kiosk-Modus beenden
+await CapacitorAndroidKiosk.exitKioskMode();
+
+// Prüfen, ob im Kiosk-Modus
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+console.log('Kiosk-Modus aktiv:', isInKioskMode);
+```
+
+### Launcher-Funktionalität
+
+Für die vollständige Kiosk-Modus-Funktionalität müssen Sie Ihre App als Geräte-Launcher festlegen:
+
+```typescript
+// Home-Bildschirm-Einstellungen öffnen, damit der Benutzer Ihre App als Launcher auswählen kann
+await CapacitorAndroidKiosk.setAsLauncher();
+
+// Prüfen, ob die App als Launcher festgelegt ist
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+console.log('App ist Launcher:', isLauncher);
+```
+
+### Hardware-Tastensteuerung
+
+Steuern Sie, welche Hardware-Tasten im Kiosk-Modus funktionieren dürfen:
+
+```typescript
+// Nur Lautstärketasten erlauben
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false
+});
+
+// Alle Tasten blockieren (Standard)
+await CapacitorAndroidKiosk.setAllowedKeys({});
+```
+
+## Vollständiges Beispiel
+
+```typescript
+async function setupKioskMode() {
+  try {
+    // Prüfen, ob bereits als Launcher festgelegt
+    const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+
+    if (!isLauncher) {
+      // Benutzer auffordern, als Launcher festzulegen
+      await CapacitorAndroidKiosk.setAsLauncher();
+      alert('Bitte wählen Sie diese App als Ihre Home-App aus');
+      return;
+    }
+
+    // Erlaubte Tasten konfigurieren
+    await CapacitorAndroidKiosk.setAllowedKeys({
+      volumeUp: true,
+      volumeDown: true,
+      back: false,
+      home: false,
+      recent: false,
+      power: false
+    });
+
+    // Kiosk-Modus aktivieren
+    await CapacitorAndroidKiosk.enterKioskMode();
+    console.log('Kiosk-Modus aktiviert');
+
+  } catch (error) {
+    console.error('Fehler beim Einrichten des Kiosk-Modus:', error);
+  }
+}
+```
+
+## API-Referenz
+
+### isInKioskMode()
+
+Prüft, ob die App derzeit im Kiosk-Modus läuft.
+
+```typescript
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+```
+
+**Rückgabe:**
+- `isInKioskMode` (boolean): Ob der Kiosk-Modus derzeit aktiv ist
+
+---
+
+### isSetAsLauncher()
+
+Prüft, ob die App als Geräte-Launcher (Home-App) festgelegt ist.
+
+```typescript
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+```
+
+**Rückgabe:**
+- `isLauncher` (boolean): Ob die App als Geräte-Launcher festgelegt ist
+
+---
+
+### enterKioskMode()
+
+Aktiviert den Kiosk-Modus, blendet die System-UI aus und blockiert Hardware-Tasten. Die App muss als Geräte-Launcher festgelegt sein, damit dies effektiv funktioniert.
+
+```typescript
+await CapacitorAndroidKiosk.enterKioskMode();
+```
+
+---
+
+### exitKioskMode()
+
+Beendet den Kiosk-Modus und stellt die normale System-UI und Hardware-Tastenfunktionalität wieder her.
+
+```typescript
+await CapacitorAndroidKiosk.exitKioskMode();
+```
+
+---
+
+### setAsLauncher()
+
+Öffnet die Home-Bildschirm-Einstellungen des Geräts, damit der Benutzer diese App als Launcher festlegen kann. Dies ist für die vollständige Kiosk-Modus-Funktionalität erforderlich.
+
+```typescript
+await CapacitorAndroidKiosk.setAsLauncher();
+```
+
+---
+
+### setAllowedKeys(options)
+
+Legt fest, welche Hardware-Tasten im Kiosk-Modus funktionieren dürfen. Standardmäßig sind alle Hardware-Tasten im Kiosk-Modus blockiert.
+
+```typescript
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false,
+  power: false,
+  camera: false,
+  menu: false
+});
+```
+
+**Parameter:**
+- `volumeUp` (boolean, optional): Lautstärke-Plus-Taste erlauben (Standard: false)
+- `volumeDown` (boolean, optional): Lautstärke-Minus-Taste erlauben (Standard: false)
+- `back` (boolean, optional): Zurück-Taste erlauben (Standard: false)
+- `home` (boolean, optional): Home-Taste erlauben (Standard: false)
+- `recent` (boolean, optional): Kürzlich-verwendete-Apps-Taste erlauben (Standard: false)
+- `power` (boolean, optional): Power-Taste erlauben (Standard: false)
+- `camera` (boolean, optional): Kamera-Taste erlauben, falls vorhanden (Standard: false)
+- `menu` (boolean, optional): Menü-Taste erlauben, falls vorhanden (Standard: false)
+
+---
+
+### getPluginVersion()
+
+Plugin-Version des nativen Capacitor-Plugins abrufen.
+
+```typescript
+const { version } = await CapacitorAndroidKiosk.getPluginVersion();
+console.log('Plugin-Version:', version);
+```
+
+**Rückgabe:**
+- `version` (string): Die Plugin-Versionsnummer
+
+## Android-Konfiguration
+
+### 1. MainActivity-Einrichtung
+
+Um die vollständige Hardware-Tastenblockierung zu aktivieren, müssen Sie `dispatchKeyEvent` in Ihrer `MainActivity.java` überschreiben:
+
+```java
+import android.view.KeyEvent;
+import ee.forgr.plugin.android_kiosk.CapacitorAndroidKioskPlugin;
+
+public class MainActivity extends BridgeActivity {
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // Kiosk-Plugin abrufen
+        CapacitorAndroidKioskPlugin kioskPlugin = (CapacitorAndroidKioskPlugin)
+            this.getBridge().getPlugin("CapacitorAndroidKiosk").getInstance();
+
+        if (kioskPlugin != null && kioskPlugin.shouldBlockKey(event.getKeyCode())) {
+            return true; // Taste blockieren
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed() nicht aufrufen, um Zurück-Taste zu deaktivieren
+        // Oder handleOnBackPressed des Plugins aufrufen
+    }
+}
+```
+
+### 2. AndroidManifest.xml
+
+Launcher-Intent-Filter hinzufügen, um Ihre App als Launcher auswählbar zu machen:
+
+```xml
+<activity
+    android:name=".MainActivity"
+    ...>
+
+    <!-- Vorhandener Intent-Filter -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <!-- Dies hinzufügen, um App als Launcher auswählbar zu machen -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+```
+
+## Wichtige Hinweise
+
+1. **Launcher-Anforderung**: Für die vollständige Kiosk-Modus-Funktionalität (Home-Taste blockieren, Task-Wechsel verhindern) muss Ihre App als Geräte-Launcher festgelegt sein.
+
+2. **Testen**: Beim Testen können Sie den Kiosk-Modus programmatisch beenden oder eine andere App als Launcher festlegen.
+
+3. **Android-Versionen**: Das Plugin verwendet moderne Android-APIs für Android 11+ und fällt für die Kompatibilität mit Android 6.0+ auf ältere Methoden zurück.
+
+4. **Sicherheit**: Dieses Plugin ist für legitime Kiosk-Anwendungen konzipiert. Stellen Sie sicher, dass Sie Benutzern eine Möglichkeit bieten, den Kiosk-Modus zu beenden.
+
+5. **Akku**: Der Kiosk-Modus hält den Bildschirm an. Erwägen Sie, Ihre eigene Bildschirm-Timeout- oder Helligkeitsverwaltung zu implementieren.
+
+## iOS-Alternative
+
+Für iOS-Geräte verwenden Sie die integrierte Funktion [Geführter Zugriff](https://support.apple.com/en-us/HT202612):
+
+1. Gehen Sie zu Einstellungen > Bedienungshilfen > Geführter Zugriff
+2. Aktivieren Sie Geführter Zugriff
+3. Legen Sie einen Code fest
+4. Öffnen Sie Ihre App
+5. Dreimal auf die Seitentaste klicken
+6. Einstellungen anpassen und Geführten Zugriff starten
+
+## Best Practices
+
+1. **Launcher-Status zuerst prüfen**
+   ```typescript
+   const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+   if (!isLauncher) {
+     // Benutzer zuerst auffordern, als Launcher festzulegen
+     await CapacitorAndroidKiosk.setAsLauncher();
+   }
+   ```
+
+2. **Ausstiegsmechanismus bereitstellen**
+   ```typescript
+   // Spezifische Tastenkombination zum Beenden erlauben
+   // Oder geheime Geste/Muster implementieren
+   async function exitKioskWithConfirmation() {
+     const confirmed = confirm('Kiosk-Modus beenden?');
+     if (confirmed) {
+       await CapacitorAndroidKiosk.exitKioskMode();
+     }
+   }
+   ```
+
+3. **App-Lebenszyklus behandeln**
+   ```typescript
+   // Kiosk-Modus erneut aktivieren, wenn App fortgesetzt wird
+   window.addEventListener('resume', async () => {
+     const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+     if (!isInKioskMode) {
+       await CapacitorAndroidKiosk.enterKioskMode();
+     }
+   });
+   ```
+
+4. **Fehlerbehandlung**
+   ```typescript
+   try {
+     await CapacitorAndroidKiosk.enterKioskMode();
+   } catch (error) {
+     console.error('Fehler beim Aktivieren des Kiosk-Modus:', error);
+     // Benutzer benachrichtigen und Alternative bereitstellen
+   }
+   ```

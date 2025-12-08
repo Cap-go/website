@@ -1,0 +1,246 @@
+---
+title: "@capgo/capacitor-launch-navigator"
+description: Google Maps、Apple Maps、Waze、その他のナビゲーションサービスをサポートする Capacitor アプリ用ナビゲーションアプリ起動プラグイン。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+locale: ja
+hero:
+  tagline: ターンバイターンのナビゲーション付きでナビゲーションアプリを起動し、複数の地図プロバイダーとカスタムルーティングオプションをサポートします。
+  image:
+    file: ~public/icons/plugins/launch-navigator.svg
+  actions:
+    - text: はじめに
+      link: /docs/plugins/launch-navigator/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-launch-navigator/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概要
+
+Capacitor Launch Navigator プラグインは、座標ベースのナビゲーションで iOS および Android デバイス上のネイティブナビゲーションアプリを起動できるようにします。このプラグインは、人気のあるマッピングアプリケーションとのシームレスな統合を提供し、包括的なナビゲーションソリューションのための複数の交通手段をサポートします。
+
+<CardGrid stagger>
+  <Card title="マルチアプリサポート" icon="rocket">
+    Google Maps、Apple Maps、Waze、Citymapper など 🗺️
+  </Card>
+  <Card title="交通手段" icon="magnifier">
+    運転、徒歩、公共交通機関、自転車のナビゲーション 🧭
+  </Card>
+  <Card title="アプリ検出" icon="magnifier">
+    利用可能性をチェックしてインストールされたナビゲーションアプリをリスト 🔍
+  </Card>
+  <Card title="座標ベース" icon="star">
+    緯度/経度座標を使用してナビゲート 📍
+  </Card>
+</CardGrid>
+
+## インストール
+
+```bash
+npm install @capgo/capacitor-launch-navigator
+npx cap sync
+```
+
+## iOS 設定
+
+インストールされたナビゲーションアプリを検出するために、`Info.plist` に URL スキームを追加します：
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <!-- 他のナビゲーションアプリスキームを追加 -->
+</array>
+```
+
+## コア API メソッド
+
+### ナビゲーション
+- `navigate(options)` - 指定された座標へのナビゲーションを起動
+- `isAppAvailable(options)` - 特定のナビゲーションアプリがインストールされているかチェック
+- `getAvailableApps()` - デバイス上のすべての利用可能なナビゲーションアプリをリスト
+- `getSupportedApps()` - 現在のプラットフォーム用のすべてのサポートされているアプリを取得
+
+## 使用例
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// 座標への基本的なナビゲーション
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // サンフランシスコの座標
+});
+
+// オプション付きの高度なナビゲーション
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // オプションの出発点
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // 優先ナビゲーションアプリ
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// 特定のアプリが利用可能かチェック
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps がインストールされています');
+} else {
+  console.log('Google Maps は利用できません');
+}
+
+// すべての利用可能なナビゲーションアプリを取得
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('利用可能なナビゲーションアプリ:', availableApps);
+
+// プラットフォーム用のすべてのサポートされているアプリを取得
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('サポートされているアプリ:', supportedApps);
+```
+
+## ナビゲーションオプション
+
+```typescript
+interface NavigationOptions {
+  start?: [number, number];      // 開始座標 [lat, lng]
+  transportMode?: TransportMode; // 交通手段
+  app?: string;                  // 優先ナビゲーションアプリ
+  appDisplayName?: string;       // アプリの表示名
+  launchMode?: LaunchMode;       // アプリの起動方法
+}
+```
+
+## 交通手段
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## サポートされているナビゲーションアプリ
+
+### iOS
+- Apple Maps（組み込み）
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- その他多数...
+
+### Android
+- Google Maps（組み込み）
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- その他多数...
+
+## 座標の要件
+
+> ⚠️ **重要**: このプラグインは、ナビゲーションに緯度/経度座標のみを受け入れます。住所を座標に変換するには、[@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) を使用してください。
+
+```typescript
+// ジオコーディングの例
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+// 住所を座標に変換
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // ジオコードされた座標でナビゲーションを起動
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## アプリ検出と選択
+
+```typescript
+// 複数のアプリをチェックして最初に利用可能なものを使用
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('サポートされているナビゲーションアプリが見つかりません');
+}
+```
+
+## エラーハンドリング
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('ナビゲーションに失敗しました:', error);
+  // エラーを処理 - アプリが利用できない、無効な座標など
+}
+```
+
+## ユースケース
+
+- **位置情報ベースのサービス**: 興味のあるポイントにユーザーをナビゲート
+- **配達アプリ**: ドライバーを配達場所に案内
+- **イベントアプリ**: 参加者を会場にナビゲート
+- **不動産アプリ**: 物件の場所にナビゲート
+- **旅行アプリ**: 観光客を観光スポットに案内
+
+## ベストプラクティス
+
+- ナビゲーションを試みる前に、必ずアプリの可用性をチェック
+- 優先アプリが利用できない場合のフォールバックオプションを提供
+- ユーザー選択のために意味のあるアプリ表示名を使用
+- ユーザーフレンドリーなメッセージでエラーを適切に処理
+- デフォルトのナビゲーションアプリに関するユーザーの好みを考慮
+
+## ドキュメント
+
+詳細な実装ガイドと高度なナビゲーションパターンについては、[完全なドキュメント](/docs/plugins/launch-navigator/getting-started/)をご覧ください。

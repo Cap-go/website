@@ -1,0 +1,111 @@
+---
+title: 🔹 organisation
+description: 🏢 Gestiona tus organizaciones en Capgo Cloud para colaboración en equipo y gestión de aplicaciones.
+sidebar_label: organisation
+locale: es
+sidebar:
+  order: 9
+---
+
+🏢 Gestiona tus organizaciones en Capgo Cloud para colaboración en equipo y gestión de aplicaciones.
+
+### <a id="organisation-list"></a> 📋 **List**
+
+**Alias:** `l`
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+📋 Lista todas las organizaciones a las que tienes acceso en Capgo Cloud.
+
+**Ejemplo:**
+
+```bash
+npx @capgo/cli@latest organisation list
+```
+
+**Opciones:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | Clave API para vincular a tu cuenta |
+| **--supa-host** | <code>string</code> | URL personalizada del host Supabase (para auto-alojamiento o desarrollo de Capgo) |
+| **--supa-anon** | <code>string</code> | Clave anon personalizada de Supabase (para auto-alojamiento) |
+
+### <a id="organisation-add"></a> ➕ **Add**
+
+**Alias:** `a`
+
+```bash
+npx @capgo/cli@latest organisation add
+```
+
+➕ Crea una nueva organización en Capgo Cloud para colaboración en equipo.
+
+**Ejemplo:**
+
+```bash
+npx @capgo/cli@latest organisation add --name "Mi Empresa" --email admin@miempresa.com
+```
+
+**Opciones:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | Nombre de la organización |
+| **-e,** | <code>string</code> | Email de gestión para la organización |
+| **-a,** | <code>string</code> | Clave API para vincular a tu cuenta |
+| **--supa-host** | <code>string</code> | URL personalizada del host Supabase (para auto-alojamiento o desarrollo de Capgo) |
+| **--supa-anon** | <code>string</code> | Clave anon personalizada de Supabase (para auto-alojamiento) |
+
+### <a id="organisation-set"></a> ⚙️ **Set**
+
+**Alias:** `s`
+
+```bash
+npx @capgo/cli@latest organisation set
+```
+
+⚙️ Actualiza la configuración de la organización como el nombre y el email de gestión.
+
+**Ejemplo:**
+
+```bash
+npx @capgo/cli@latest organisation set ORG_ID --name "Nombre de Empresa Actualizado"
+```
+
+**Opciones:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | Nombre de la organización |
+| **-e,** | <code>string</code> | Email de gestión para la organización |
+| **-a,** | <code>string</code> | Clave API para vincular a tu cuenta |
+| **--supa-host** | <code>string</code> | URL personalizada del host Supabase (para auto-alojamiento o desarrollo de Capgo) |
+| **--supa-anon** | <code>string</code> | Clave anon personalizada de Supabase (para auto-alojamiento) |
+
+### <a id="organisation-delete"></a> 🗑️ **Delete**
+
+**Alias:** `d`
+
+```bash
+npx @capgo/cli@latest organisation delete
+```
+
+🗑️ Elimina una organización de Capgo Cloud. Esta acción no se puede deshacer.
+Solo los propietarios de organizaciones pueden eliminar organizaciones.
+
+**Ejemplo:**
+
+```bash
+npx @capgo/cli@latest organisation delete ORG_ID
+```
+
+**Opciones:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | Clave API para vincular a tu cuenta |
+| **--supa-host** | <code>string</code> | URL personalizada del host Supabase (para auto-alojamiento o desarrollo de Capgo) |
+| **--supa-anon** | <code>string</code> | Clave anon personalizada de Supabase (para auto-alojamiento) |

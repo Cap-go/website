@@ -1,0 +1,174 @@
+---
+title: CI/CD 集成
+locale: zh
+description: 将 Capgo 集成到您的 CI/CD 流程中,可以完全自动化构建和部署应用更新的过程。通过利用 Capgo CLI 和 semantic-release,您可以确保一致、可靠的部署并实现快速迭代。
+sidebar:
+  order: 4
+---
+
+import { Steps, Code } from '@astrojs/starlight/components';
+
+将 Capgo 集成到您的 CI/CD 流程中,可以完全自动化构建和部署应用更新的过程。通过利用 Capgo CLI 和 semantic-release,您可以确保一致、可靠的部署并实现快速迭代。
+
+## CI/CD 集成的好处
+
+- **自动化**:不再需要手动步骤或人为错误的空间。您的整个构建、测试和部署过程可以端到端自动化。
+
+- **一致性**:每次部署都遵循相同的步骤集,确保可预测和可重复的过程。这在有多个团队成员贡献代码时特别有价值。
+
+- **更快的迭代**:通过自动化部署,您可以更频繁、更自信地发布更新。不再等待手动 QA 或发布审批。
+
+## Capgo CLI
+
+Capgo CLI 是将 Capgo 集成到 CI/CD 工作流程的关键。它提供了推送新 bundle 版本、管理渠道等命令。
+
+CI/CD 集成最重要的命令是 `bundle upload`:
+
+```shell
+npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY
+```
+
+如果您使用加密,应通过以下方式之一提供:
+
+**使用私钥文件路径:**
+```shell
+npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY --key-v2 PRIVATE_KEY_PATH
+```
+
+**直接使用私钥内容(推荐用于 CI/CD):**
+```shell
+npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY --key-data-v2 PRIVATE_KEY_CONTENT
+```
+
+**使用环境变量(CI/CD 最佳实践):**
+```shell
+npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY --key-data-v2 "$CAPGO_PRIVATE_KEY"
+```
+
+### 为加密设置环境变量
+
+对于 CI/CD 环境,建议将私钥存储为环境变量而不是文件。以下是设置方法:
+
+1. **获取您的私钥内容:**
+   ```shell
+   cat .capgo_key_v2 | pbcopy
+   ```
+   这会将密钥内容复制到剪贴板。
+
+2. **将其添加到 CI/CD 环境:**
+   - **GitHub Actions**: 将 `CAPGO_PRIVATE_KEY` 添加到存储库密钥
+   - **GitLab CI**: 在项目设置中将其添加为掩码变量
+   - **CircleCI**: 在项目设置中将其添加为环境变量
+   - **Jenkins**: 将其添加为密钥文本凭据
+
+3. **在管道中使用:**
+   ```yaml
+   - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=${{ secrets.CAPGO_API_KEY }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
+   ```
+
+**注意**: `--key-data-v2` 标志允许您直接以字符串形式传递私钥内容,使其非常适合 CI/CD 管道中的环境变量,在那里您不想创建临时文件。
+
+此命令将当前 Web 构建上传到指定渠道。您通常在 Web 构建成功完成后,作为 CI/CD 管道的最后一步运行此命令。
+
+## 在 CI/CD 管道中设置 Capgo
+
+虽然确切步骤因您选择的 CI/CD 工具而异,但集成 Capgo 的一般过程如下:
+
+<Steps>
+1. **生成 API 密钥**: 登录 Capgo 仪表板并创建新的 API 密钥。此密钥将用于在 CI/CD 环境中验证 CLI。保密并永远不要将其提交到存储库!
+
+3. **配置 `bundle upload` 命令**: 在 CI/CD 配置中添加一个步骤,使用适当的参数运行 `bundle upload` 命令: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n 将 `Production` 替换为您要部署到的渠道,`${{ secrets.CAPGO_API_KEY }}` 替换为保存您的 API 密钥的环境变量,如果使用加密,添加 `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"`。
+
+4. **在 Web 构建后添加 `upload` 步骤**: 确保 `upload` 步骤在 Web 构建成功完成后执行。这确保您始终部署最新代码。\n  以下是 GitHub Actions 的示例配置:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\} --key-data-v2 "$\{\{ secrets.CAPGO_PRIVATE_KEY \}\}"`} />
+
+</Steps>
+
+## 使用 Semantic-release 进行版本管理
+
+使用 Capgo 处理版本控制的推荐方法是通过从 `package.json` 导入来在 `capacitor.config.ts` 文件中设置版本:
+
+```ts
+import pkg from './package.json'
+
+const config: CapacitorConfig = {
+  // ... 其他配置
+  plugins: {
+    CapacitorUpdater: {
+      version: pkg.version,
+    }
+  }
+}
+```
+
+这种方法允许您:
+1. 使用 semantic-release(或任何其他工具)更新 `package.json` 版本
+2. 构建您的应用,自动包含更新的版本
+3. 使用正确的版本上传 bundle
+
+您的 CI/CD 工作流程将如下所示:
+```yaml
+- run: npm ci
+- run: npx semantic-release  # 更新 package.json 版本
+- run: npm run build         # 使用来自 capacitor.config 的新版本构建
+- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=${{ secrets.CAPGO_API_KEY }}
+```
+
+以下是 semantic-release 的示例 `.releaserc` 配置文件:
+
+```json
+{
+  "branches": [
+    "main",
+    {
+      "name": "beta",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md", "package.json"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}
+```
+
+此配置执行以下操作:
+
+1. 分析提交消息以确定下一个版本号,遵循约定式提交规范。
+2. 根据自上次发布以来的提交生成发布说明。
+3. 使用新的发布说明更新 `CHANGELOG.md` 文件。
+4. 更新 `package.json` 版本,这将被您的 capacitor.config 获取。
+5. 将更新的 `CHANGELOG.md`、`package.json` 和任何其他更改的文件提交回存储库。
+
+确保在构建应用之前运行 semantic-release,以便 `package.json` 的更新版本通过 capacitor.config 包含在构建中。
+
+## 故障排除
+
+如果您在 Capgo CI/CD 集成方面遇到问题,以下是一些需要检查的事项:
+
+- **API 密钥**: 确保您的 API 密钥有效并具有必要的权限。如果使用环境变量,请仔细检查它是否设置正确。
+
+- **CLI 版本**: 确保您使用的是最新版本的 Capgo CLI。旧版本可能存在兼容性问题或缺少某些功能。
+
+- **构建产物**: 确认您的 Web 构建正在生成预期的输出文件。Capgo CLI 需要有效的 Web 构建来创建 bundle。
+
+- **网络连接**: 检查您的 CI/CD 环境是否具有对 Capgo 服务器的网络访问权限。防火墙或代理问题有时会干扰 `upload` 命令。
+
+如果您仍然遇到问题,请联系 Capgo 支持寻求帮助。他们可以帮助解决您特定设置的任何问题。
+
+## 结论
+
+通过适当的版本管理将 Capgo 集成到 CI/CD 管道可以大大简化您的开发工作流程。通过 capacitor.config 方法自动化部署和版本控制,您可以更快、更自信地发布更新。
+
+在 `capacitor.config.ts` 文件中设置版本并使用 semantic-release 更新 `package.json` 的推荐方法提供了强大可靠的部署过程,使您能够专注于构建出色的功能,而不是担心手动发布步骤。
+
+有关 Capgo CLI 命令和选项的更多详细信息,请查看 [CLI 参考](/docs/cli/overview)。有关 semantic-release 配置的深入探讨,请参阅 [semantic-release 文档](https://github.com/semantic-release/semantic-release)。
+
+祝您部署愉快!

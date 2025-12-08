@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-env"
+locale: ko
+description: 화이트 라벨 및 멀티테넌트 앱을 위해 런타임에 `capacitor.config`의 구성 값을 노출합니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: Capacitor에서 직접 보안 구성 값을 읽어 새 빌드 없이 테넌트별 설정을 제공합니다.
+  image:
+    file: ~public/settings-go.webp
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/env/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-env/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo Env를 사용하면 `capacitor.config.*` 내부에 비밀 및 빌드별 구성을 저장하고 간단한 API를 통해 런타임에 해결할 수 있습니다.
+
+<CardGrid stagger>
+  <Card title="런타임 구성" icon="rocket">
+    JavaScript 번들에 포함하지 않고 네이티브 구성 파일에서 값을 읽습니다.
+  </Card>
+  <Card title="빌드별 재정의" icon="rocket">
+    다른 구성 파일을 제공하여 여러 앱 flavor 또는 테넌트를 만듭니다.
+  </Card>
+  <Card title="타입 안전 접근" icon="pencil">
+    TypeScript 지원과 함께 키를 가져오고 폴백 로직을 중앙 집중화합니다.
+  </Card>
+  <Card title="기본적으로 보안" icon="approve-check">
+    Git에서 API 키와 비밀을 제외하면서도 네이티브 바이너리와 함께 제공합니다.
+  </Card>
+</CardGrid>
+
+시작 가이드에 따라 Capacitor 구성에 키를 선언하고 플랫폼 전반에 걸쳐 안전하게 가져옵니다.

@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-barometer"
+description: Zugriff auf Geräte-Barometer-Messwerte für atmosphärischen Druck und Höhendaten von Gerätesensoren.
+locale: de
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Zugriff auf barometrischen Druck und Höhendaten von Gerätesensoren für Wetter- und Fitness-Anwendungen.
+  image:
+    file: ~public/icons/plugins/barometer.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/barometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-barometer/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Drucküberwachung" icon="rocket">
+    Echtzeit-Messungen des atmosphärischen Drucks
+  </Card>
+  <Card title="Höhenberechnung" icon="star">
+    Relative Höhe aus Druckänderungen ableiten
+  </Card>
+  <Card title="Event-Listener" icon="setting">
+    Auf Druckänderungsereignisse abonnieren
+  </Card>
+  <Card title="Plattformübergreifend" icon="laptop">
+    Funktioniert auf iOS- und Android-Geräten mit Barometer-Sensoren
+  </Card>
+  <Card title="Erste Schritte" icon="open-book">
+    Schauen Sie sich die [Erste Schritte Anleitung](/docs/plugins/barometer/getting-started/) an, um das Plugin zu installieren und zu konfigurieren.
+  </Card>
+</CardGrid>

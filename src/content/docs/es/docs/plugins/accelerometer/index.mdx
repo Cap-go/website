@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-accelerometer"
+locale: es
+description: Lea las mediciones del acelerómetro del dispositivo con Capacitor
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Acceda a datos de movimiento y aceleración del dispositivo desde sensores de acelerómetro
+  image:
+    file: ~public/icons/plugins/accelerometer.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/accelerometer/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-accelerometer
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Aceleración de 3 ejes" icon="rocket">
+    Mida las fuerzas de aceleración en los ejes X, Y y Z
+  </Card>
+  <Card title="Detección de movimiento" icon="star">
+    Detecte sacudidas, inclinaciones y movimientos del dispositivo
+  </Card>
+  <Card title="Actualizaciones en tiempo real" icon="setting">
+    Monitoreo continuo de datos de aceleración
+  </Card>
+  <Card title="Documentación completa" icon="open-book">
+    Revise la [Documentación](/docs/plugins/accelerometer/getting-started/) para dominar el plugin en solo unos minutos.
+  </Card>
+</CardGrid>

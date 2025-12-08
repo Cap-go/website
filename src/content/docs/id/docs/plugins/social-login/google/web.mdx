@@ -1,0 +1,129 @@
+---
+title: Google Login di Web
+locale: id
+description: Panduan ini memberikan panduan komprehensif untuk mengatur Google Login di aplikasi web menggunakan Capacitor dan plugin @capgo/capacitor-social-login, memastikan proses integrasi yang lancar dengan mencakup semua langkah dan konfigurasi yang diperlukan.
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Pengantar
+
+Dalam panduan ini, Anda akan mempelajari cara mengatur Google Login dengan Capgo Social Login untuk aplikasi web.
+Saya berasumsi bahwa Anda telah membaca [panduan pengaturan umum](/docs/plugins/social-login/google/general/).
+
+## Menggunakan login Google di web
+
+Menggunakan login Google di web cukup sederhana.
+Untuk menggunakannya, Anda harus melakukan hal berikut:
+
+<Steps>
+1. Buat web client di Google Console
+
+   :::note
+   Jika Anda telah mengonfigurasi Google Login untuk Android, Anda dapat melewati langkah ini karena Anda telah membuat web client. Anda dapat langsung ke langkah 2.
+   :::
+
+   1. Klik pada search bar
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+
+   2. Cari `credentials` dan klik opsi `APIs and Services` (nomor 2 pada screenshot)
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+
+   3. Klik pada `create credentials`
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+
+   4. Pilih `OAuth client ID`
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+
+   5. Pilih `Application type` sebagai `Web application`
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Application type selection with Web option highlighted" />
+
+   6. Beri nama client Anda dan klik `Create`
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web client creation form with name field highlighted" />
+
+   7. Salin client ID, Anda akan menggunakan ini sebagai `webClientId` dalam aplikasi Anda
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client ID details showing Web client ID to copy" />
+
+2. Konfigurasikan web client di Google Console
+
+   1. Silakan buka [halaman credentials](https://console.cloud.google.com/apis/credentials) dan klik pada web client Anda
+      <img src="/social-login-assets/google_cons_open_web_client_id.png" alt="Credentials list showing web client to click" />
+
+   2. Sekarang, silakan tambahkan `Authorized JavaScript origins`. Ini harus mencakup semua alamat yang mungkin Anda gunakan untuk aplikasi Anda. Dalam kasus saya, saya akan **HANYA** menggunakan localhost, tetapi karena saya menggunakan port kustom, saya harus menambahkan `http://localhost` dan `http://localhost:5173`
+
+      1. Silakan klik pada `add URI`
+         <img src="/social-login-assets/google_cons_authorized_js_add_btn.png" alt="Authorized JavaScript origins section with ADD URI button" />
+
+      2. Silakan ketik URL Anda
+         <img src="/social-login-assets/google_cons_authorized_js_typed_url.png" alt="ADD URI dialog with localhost URL entered" />
+
+      3. Silakan ulangi sampai Anda menambahkan semua URL
+
+      4. Ketika Anda selesai, layar Anda akan terlihat seperti ini
+         <img src="/social-login-assets/google_cons_authorized_js_final.png" alt="Authorized JavaScript origins with multiple localhost URLs added" />
+
+   3. Sekarang, silakan tambahkan beberapa `Authorized redirect URIs`. Ini akan bergantung pada halaman mana yang Anda putuskan untuk menggunakan plugin CapacitorSocialLogin. Dalam kasus saya, saya akan menggunakannya di `http://localhost:5173/auth`
+
+      1. Silakan klik pada `ADD URI`
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_1.png" alt="Authorized redirect URIs section with ADD URI button" />
+
+      2. Masukkan URL Anda dan klik `ADD URL` lagi
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_2.png" alt="ADD URI dialog with redirect URL entered" />
+
+   4. Klik `save`
+      <img src="/social-login-assets/google_cons_web_app_save.png" alt="Save button at bottom of web client configuration" />
+
+3. Sekarang, Anda seharusnya siap untuk memanggil `login` dari JavaScript seperti ini:
+
+   1. Pertama, import `SocialLogin`
+
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      ```
+
+   2. Kemudian, panggil initialize. Ini harus dipanggil HANYA sekali.
+
+      ```typescript
+      // onMounted adalah spesifik Vue
+      // webClientId adalah client ID yang Anda dapatkan dalam langkah pembuatan client web bukan client ID android.
+      onMounted(() => {
+       SocialLogin.initialize({
+         google: {
+           webClientId: '673324426943-avl4v9ubdas7a0u7igf7in03pdj1dkmg.apps.googleusercontent.com',
+         }
+       })
+      })
+      ```
+
+   :::note[Penanganan Redirect Web]
+   Saat menggunakan login Google di web, Anda **HARUS** memanggil fungsi apa pun dari plugin saat redirect terjadi untuk menginisialisasi plugin sehingga dapat menangani redirect dan menutup jendela popup. Anda dapat memanggil `isLoggedIn()` ATAU `initialize()` - keduanya akan memicu penanganan redirect:
+
+   ```typescript
+   // Opsi 1: Panggil isLoggedIn saat halaman redirect dimuat
+   SocialLogin.isLoggedIn({ provider: 'google' }).catch(() => {
+     // Abaikan hasilnya, ini hanya untuk menginisialisasi plugin
+   });
+
+   // Opsi 2: Panggil initialize saat halaman redirect dimuat
+   SocialLogin.initialize({
+     google: {
+       webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+     }
+   }).catch(() => {
+     // Abaikan error apa pun, ini hanya untuk menangani redirect
+   });
+   ```
+   :::
+
+   3. Buat tombol login yang memanggil `SocialLogin.login` saat diklik
+
+      ```typescript
+      const res = await SocialLogin.login({
+       provider: 'google',
+       options: {}
+      })
+      // Tangani respons
+      console.log(JSON.stringify(res));
+      ```
+</Steps>

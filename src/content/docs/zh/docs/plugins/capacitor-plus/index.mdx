@@ -1,0 +1,64 @@
+---
+title: "Capacitor+"
+locale: zh
+description: Capacitor 的自动化分支，始终保持同步，合并社区 PR 并快速发布。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: Capacitor+ 是 Capacitor 的自动化分支，更快地合并社区 PR，并经过安全审查的发布。
+  image:
+    file: ~public/icons/plugins/capacitor-plus.svg
+  actions:
+    - text: 入门指南
+      link: /docs/plugins/capacitor-plus/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-plus/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  **为什么选择 Capacitor+？** 优秀的 PR 在官方 Capacitor 仓库中未合并数月。Capacitor+ 积极合并这些社区贡献，因此您无需等待。
+</Aside>
+
+<CardGrid stagger>
+  <Card title="更快合并社区 PR" icon="rocket">
+    上游中受阻的错误修复和功能？我们合并它们，以便您可以立即受益。
+  </Card>
+  <Card title="每日自动同步" icon="seti:clock">
+    来自官方 Capacitor 的每一项更改都会自动拉取、测试和验证。
+  </Card>
+  <Card title="安全审查" icon="approve-check">
+    每个版本都由 AI 分析安全漏洞、破坏性更改和稳定性风险。
+  </Card>
+  <Card title="直接替代" icon="puzzle">
+    与官方 Capacitor 具有相同的 API - 只需更改包作用域即可完成。
+  </Card>
+</CardGrid>
+
+## 理念
+
+Ionic 团队根据自己的优先级和发布计划维护 Capacitor。社区贡献可能需要等待数月甚至数年才能合并。Capacitor+ 采用不同的方法：
+
+1. **合并来自分支的 PR** - 积极合并上游队列中受阻的有价值 PR
+2. **持续同步** - 自动拉取和测试每个上游更改
+3. **快速发布** - 更改通过 CI 后立即发布到 npm
+4. **社区优先** - 您的贡献很重要并获得优先考虑
+5. **透明度** - 所有自动化都是开源的且可见
+
+## 包
+
+| 包 | npm |
+|---------|-----|
+| `@capacitor-plus/core` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/core)](https://www.npmjs.com/package/@capacitor-plus/core) |
+| `@capacitor-plus/cli` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/cli)](https://www.npmjs.com/package/@capacitor-plus/cli) |
+| `@capacitor-plus/android` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/android)](https://www.npmjs.com/package/@capacitor-plus/android) |
+| `@capacitor-plus/ios` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/ios)](https://www.npmjs.com/package/@capacitor-plus/ios) |

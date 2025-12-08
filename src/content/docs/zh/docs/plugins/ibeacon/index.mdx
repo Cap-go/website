@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-ibeacon"
+description: 用于 Capacitor 的 iBeacon 插件 - 用于基于位置功能的接近检测和信标区域监控。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 检测和监控蓝牙信标，实现基于接近的功能、室内导航和位置感知体验。
+  image:
+    file: ~public/icons/plugins/ibeacon.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/ibeacon/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-ibeacon/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="信标监控" icon="star">
+    监控信标区域并在进入或退出时收到通知 🎯
+  </Card>
+  <Card title="信标测距" icon="rocket">
+    检测附近的信标并实时测量其距离 📡
+  </Card>
+  <Card title="后台检测" icon="setting">
+    即使应用在后台也能监控信标 🔔
+  </Card>
+  <Card title="信标广播" icon="puzzle">
+    将您的设备变成 iBeacon 发射器（仅限 iOS）📱
+  </Card>
+  <Card title="跨平台" icon="puzzle">
+    使用原生信标库在 iOS 和 Android 上都能工作 📱
+  </Card>
+  <Card title="全面的文档" icon="open-book">
+    查看[文档](/docs/plugins/ibeacon/getting-started/)，只需几分钟即可掌握该插件。
+  </Card>
+</CardGrid>

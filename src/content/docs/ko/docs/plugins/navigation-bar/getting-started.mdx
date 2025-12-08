@@ -1,0 +1,200 @@
+---
+title: 시작하기
+locale: ko
+description: Android 내비게이션 바 색상 및 스타일을 사용자 정의하기 위한 Capacitor Navigation Bar 플러그인 설치 및 구성 방법을 알아보세요.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **플러그인 구성**
+
+   **내비게이션 바 색상 설정:**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // 내비게이션 바 색상 설정
+   await NavigationBar.setColor({
+     color: '#FF0000', // 빨간색
+     darkButtons: false // 밝은 버튼 사용
+   });
+   ```
+
+   **동적 테마 지원:**
+   ```typescript
+   // 테마에 따라 색상 설정
+   const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+   await NavigationBar.setColor({
+     color: isDarkMode ? '#000000' : '#FFFFFF',
+     darkButtons: !isDarkMode
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="Android">
+       **최소 요구사항:**
+       - Android 5.0 (API level 21) 이상
+       - 플러그인은 Android 기기에서만 작동합니다
+
+       AndroidManifest.xml에서 추가 설정이 필요하지 않습니다.
+     </TabItem>
+     <TabItem label="iOS">
+       이 플러그인은 Android 전용입니다. iOS에는 사용자 정의 가능한 내비게이션 바가 없습니다.
+     </TabItem>
+   </Tabs>
+
+4. **고급 사용법**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   export class ThemeService {
+     // 투명한 내비게이션 바 설정
+     async setTransparent() {
+       await NavigationBar.setColor({
+         color: '#00000000', // 투명
+         darkButtons: true
+       });
+     }
+
+     // 앱 테마와 일치
+     async matchAppTheme(primaryColor: string, isLight: boolean) {
+       await NavigationBar.setColor({
+         color: primaryColor,
+         darkButtons: isLight
+       });
+     }
+
+     // 현재 내비게이션 바 색상 가져오기
+     async getCurrentColor() {
+       const result = await NavigationBar.getColor();
+       console.log('Current color:', result.color);
+       return result.color;
+     }
+
+     // 기본값으로 재설정
+     async resetToDefault() {
+       await NavigationBar.setColor({
+         color: '#000000',
+         darkButtons: false
+       });
+     }
+   }
+   ```
+
+5. **앱 라이프사이클과 통합**
+   ```typescript
+   import { App } from '@capacitor/app';
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // 앱 상태 변경 시 내비게이션 바 업데이트
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       // 앱의 내비게이션 바 색상 복원
+       await NavigationBar.setColor({
+         color: '#YourAppColor',
+         darkButtons: true
+       });
+     }
+   });
+
+   // 테마 변경 처리
+   window.matchMedia('(prefers-color-scheme: dark)')
+     .addEventListener('change', async (e) => {
+       await NavigationBar.setColor({
+         color: e.matches ? '#121212' : '#FFFFFF',
+         darkButtons: !e.matches
+       });
+     });
+   ```
+</Steps>
+
+## API 참조
+
+### 메서드
+
+#### `setColor(options: ColorOptions)`
+내비게이션 바 색상 및 버튼 스타일을 설정합니다.
+
+**매개변수:**
+- `options`: 구성 객체
+  - `color`: string - 16진수 색상 코드 (예: '#FF0000')
+  - `darkButtons`: boolean - 어두운 버튼 사용 (true) 또는 밝은 버튼 사용 (false)
+
+**반환:** `Promise<void>`
+
+#### `getColor()`
+현재 내비게이션 바 색상을 가져옵니다.
+
+**반환:** `Promise<{ color: string }>`
+
+### 인터페이스
+
+```typescript
+interface ColorOptions {
+  color: string;      // 16진수 색상 코드
+  darkButtons: boolean; // 버튼 스타일
+}
+
+interface ColorResult {
+  color: string;      // 현재 16진수 색상
+}
+```
+
+## 플랫폼 참고사항
+
+### Android
+- Android 5.0 (API level 21) 이상 필요
+- 색상 변경은 즉시 적용됨
+- 투명 색상 지원 (알파 채널 사용)
+- 제스처 내비게이션이 있는 기기에서는 내비게이션 바가 표시되지 않을 수 있음
+
+### iOS
+- 이 플러그인은 iOS 기기에서 효과가 없음
+- iOS는 시스템 내비게이션을 사용자 정의하는 API를 제공하지 않음
+
+## 일반적인 사용 사례
+
+1. **브랜드 일관성**: 내비게이션 바를 앱의 기본 색상과 일치
+2. **테마 지원**: 밝은/어두운 테마에 동적으로 적응
+3. **몰입형 경험**: 전체 화면 콘텐츠에 투명한 내비게이션 사용
+4. **상태 표시**: 색상을 변경하여 앱 상태 표시 (녹화, 오류 등)
+
+## 모범 사례
+
+1. **색상 대비**: 내비게이션 바와 버튼 간에 충분한 대비 보장
+   ```typescript
+   // 좋은 대비 예제
+   setColor({ color: '#FFFFFF', darkButtons: true });  // 흰색 바, 어두운 버튼
+   setColor({ color: '#000000', darkButtons: false }); // 검은색 바, 밝은 버튼
+   ```
+
+2. **테마 일관성**: 테마가 변경될 때 내비게이션 바 업데이트
+3. **접근성**: 색상을 선택할 때 시각 장애가 있는 사용자 고려
+4. **성능**: 사용자를 산만하게 할 수 있는 빈번한 색상 변경 방지
+
+## 문제 해결
+
+**내비게이션 바가 변경되지 않음:**
+- 기기가 Android 5.0+ 실행 중인지 확인
+- 기기에 제스처 내비게이션이 활성화되어 있는지 확인
+- 색상 형식이 유효한 16진수인지 확인 (예: '#FF0000')
+
+**버튼이 보이지 않음:**
+- `darkButtons` 매개변수가 배경 색상과 일치하는지 확인
+- 밝은 배경은 `darkButtons: true` 필요
+- 어두운 배경은 `darkButtons: false` 필요
+
+**색상이 다르게 표시됨:**
+- 일부 Android 버전에서 색상을 약간 수정할 수 있음
+- 최상의 결과를 위해 완전히 불투명한 색상 사용

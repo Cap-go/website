@@ -1,0 +1,214 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan mengkonfigurasi plugin Capacitor Home Indicator untuk mengontrol home indicator pada perangkat iOS.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Konfigurasi plugin**
+
+   **Sembunyikan Home Indicator:**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Hide the home indicator
+   await HomeIndicator.hide();
+   ```
+
+   **Tampilkan Home Indicator:**
+   ```typescript
+   // Show the home indicator
+   await HomeIndicator.show();
+
+   // Check visibility status
+   const { hidden } = await HomeIndicator.isHidden();
+   console.log('Is hidden:', hidden);
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Tidak diperlukan pengaturan tambahan. Plugin hanya bekerja pada perangkat iOS dengan home indicator (iPhone X dan yang lebih baru).
+     </TabItem>
+     <TabItem label="Android">
+       Plugin ini tidak memiliki efek pada perangkat Android karena mereka tidak memiliki home indicator bergaya iOS.
+     </TabItem>
+   </Tabs>
+
+4. **Konfigurasi auto-hide**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+
+   // Configure auto-hide behavior
+   await HomeIndicator.setAutoHidden({
+     autoHidden: true // Enable auto-hide
+   });
+
+   // The home indicator will automatically hide after a few seconds
+   // and reappear when the user touches the screen
+   ```
+
+5. **Penggunaan lanjutan**
+   ```typescript
+   import { HomeIndicator } from '@capgo/home-indicator';
+   import { App } from '@capacitor/app';
+
+   export class ImmersiveMode {
+     private isImmersive = false;
+
+     async enterImmersiveMode() {
+       this.isImmersive = true;
+
+       // Hide home indicator
+       await HomeIndicator.hide();
+
+       // Enable auto-hide for better UX
+       await HomeIndicator.setAutoHidden({ autoHidden: true });
+
+       // Hide status bar for full immersion
+       // StatusBar.hide(); // If using @capacitor/status-bar
+     }
+
+     async exitImmersiveMode() {
+       this.isImmersive = false;
+
+       // Show home indicator
+       await HomeIndicator.show();
+
+       // Disable auto-hide
+       await HomeIndicator.setAutoHidden({ autoHidden: false });
+
+       // Show status bar
+       // StatusBar.show(); // If using @capacitor/status-bar
+     }
+
+     async toggleImmersiveMode() {
+       const { hidden } = await HomeIndicator.isHidden();
+
+       if (hidden) {
+         await this.exitImmersiveMode();
+       } else {
+         await this.enterImmersiveMode();
+       }
+     }
+
+     setupAppLifecycle() {
+       // Handle app state changes
+       App.addListener('appStateChange', async ({ isActive }) => {
+         if (!isActive && this.isImmersive) {
+           // App went to background, might want to show indicator
+           await HomeIndicator.show();
+         } else if (isActive && this.isImmersive) {
+           // App came to foreground, restore immersive mode
+           await HomeIndicator.hide();
+         }
+       });
+     }
+   }
+   ```
+</Steps>
+
+## Referensi API
+
+### Metode
+
+#### `hide()`
+Sembunyikan home indicator.
+
+**Returns:** `Promise<void>`
+
+#### `show()`
+Tampilkan home indicator.
+
+**Returns:** `Promise<void>`
+
+#### `isHidden()`
+Periksa apakah home indicator saat ini disembunyikan.
+
+**Returns:** `Promise<{ hidden: boolean }>`
+
+#### `setAutoHidden(options: { autoHidden: boolean })`
+Konfigurasi perilaku auto-hide untuk home indicator.
+
+**Parameter:**
+- `options.autoHidden`: boolean - Aktifkan atau nonaktifkan auto-hide
+
+**Returns:** `Promise<void>`
+
+### Interface
+
+```typescript
+interface AutoHiddenOptions {
+  autoHidden: boolean;
+}
+
+interface HiddenResult {
+  hidden: boolean;
+}
+```
+
+## Catatan Platform
+
+### iOS
+- Hanya bekerja pada perangkat dengan home indicator (iPhone X dan yang lebih baru)
+- Memerlukan iOS 11.0 atau yang lebih baru
+- Auto-hide membuat indicator menjadi tembus pandang dan menyembunyikannya setelah tidak aktif
+- Indicator muncul kembali saat pengguna menggesek dari bawah
+
+### Android
+- Plugin ini tidak memiliki efek pada Android
+- Android menggunakan gestur/tombol navigasi yang berbeda
+
+## Kasus Penggunaan Umum
+
+1. **Game**: Gaming layar penuh tanpa gangguan
+2. **Video Player**: Pemutaran video yang immersive
+3. **Penampil Foto**: Galeri foto layar penuh
+4. **Presentasi**: Presentasi tanpa gangguan
+5. **Aplikasi Kiosk**: Aplikasi tampilan publik
+
+## Praktik Terbaik
+
+1. **Kontrol Pengguna**: Selalu sediakan cara untuk keluar dari mode immersive
+   ```typescript
+   // Add a gesture or button to toggle immersive mode
+   const toggleButton = document.getElementById('toggle-immersive');
+   toggleButton.addEventListener('click', () => {
+     immersiveMode.toggleImmersiveMode();
+   });
+   ```
+
+2. **Auto-Hide untuk Game**: Gunakan auto-hide untuk pengalaman gaming yang lebih baik
+   ```typescript
+   // For games, auto-hide provides the best balance
+   await HomeIndicator.setAutoHidden({ autoHidden: true });
+   ```
+
+3. **Hormati Gestur Sistem**: Jangan mengganggu navigasi sistem
+4. **Simpan Status**: Ingat preferensi pengguna untuk mode immersive
+
+## Pemecahan Masalah
+
+**Home indicator tidak tersembunyi:**
+- Verifikasi perangkat memiliki home indicator (iPhone X+)
+- Periksa versi iOS adalah 11.0 atau lebih tinggi
+- Pastikan aplikasi memiliki fokus
+
+**Auto-hide tidak berfungsi:**
+- Auto-hide memerlukan interaksi pengguna untuk mengaktifkan
+- Indicator menjadi tembus pandang, tidak sepenuhnya tersembunyi
+
+**Indicator muncul kembali secara tidak terduga:**
+- Ini adalah perilaku iOS normal untuk gestur sistem
+- Gunakan auto-hide untuk perilaku yang kurang mengganggu

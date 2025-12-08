@@ -1,0 +1,475 @@
+---
+title: "RealtimeKit 快速入门"
+locale: zh
+description: "学习如何将 Cloudflare Calls 视频会议集成到 Capacitor 应用中"
+---
+
+本指南将引导您完成集成 Capacitor RealtimeKit 插件，将由 Cloudflare Calls 提供支持的视频会议添加到您的应用程序中。
+
+## 安装
+
+使用 npm 安装插件：
+
+```bash
+npm install @capgo/capacitor-realtimekit
+npx cap sync
+```
+
+## 依赖项
+
+此插件使用 Cloudflare RealtimeKit SDK：
+
+- **iOS**: RealtimeKitCoreiOS（通过 Swift Package Manager 自动安装）
+- **Android**: `com.cloudflare.realtimekit:ui-android` 版本 `0.2.2`
+
+### 自定义 Android RealtimeKit 版本
+
+在您的应用 `build.gradle` 中：
+
+```kotlin
+buildscript {
+    ext {
+        realtimekitUiVersion = '0.2.2'  // 或您想要的版本
+    }
+}
+```
+
+## iOS 配置
+
+将以下内容添加到您的应用 `Info.plist`：
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>我们需要访问相机进行视频通话</string>
+
+<key>NSMicrophoneUsageDescription</key>
+<string>我们需要访问麦克风进行音频通话</string>
+
+<key>NSPhotoLibraryUsageDescription</key>
+<string>我们需要访问照片库以分享图片</string>
+
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>我们需要访问蓝牙进行音频路由</string>
+
+<key>UIBackgroundModes</key>
+<array>
+  <string>audio</string>
+  <string>voip</string>
+  <string>fetch</string>
+  <string>remote-notification</string>
+</array>
+```
+
+## Android 配置
+
+将以下权限添加到您的 `AndroidManifest.xml`：
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+<uses-feature android:name="android.hardware.camera" android:required="false" />
+<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+```
+
+## 基本用法
+
+### 导入插件
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+```
+
+### 初始化插件
+
+```typescript
+async function initializeRealtimeKit() {
+  try {
+    await CapacitorRealtimekit.initialize();
+    console.log('RealtimeKit 已初始化');
+  } catch (error) {
+    console.error('初始化 RealtimeKit 失败:', error);
+  }
+}
+```
+
+### 开始会议
+
+```typescript
+async function startMeeting(meetingUrl: string) {
+  try {
+    await CapacitorRealtimekit.startMeeting({
+      url: meetingUrl
+    });
+    console.log('会议已开始');
+  } catch (error) {
+    console.error('启动会议失败:', error);
+  }
+}
+```
+
+## 完整示例
+
+这是一个全面的视频会议服务：
+
+```typescript
+import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
+
+export interface MeetingConfig {
+  url: string;
+  displayName?: string;
+  audioEnabled?: boolean;
+  videoEnabled?: boolean;
+}
+
+export class VideoConferenceService {
+  private isInitialized = false;
+  private currentMeetingUrl: string | null = null;
+
+  async initialize(): Promise<boolean> {
+    if (this.isInitialized) {
+      console.log('RealtimeKit 已经初始化');
+      return true;
+    }
+
+    try {
+      await CapacitorRealtimekit.initialize();
+      this.isInitialized = true;
+      console.log('RealtimeKit 初始化成功');
+      return true;
+    } catch (error) {
+      console.error('初始化 RealtimeKit 失败:', error);
+      return false;
+    }
+  }
+
+  async startMeeting(config: MeetingConfig): Promise<void> {
+    if (!this.isInitialized) {
+      const initialized = await this.initialize();
+      if (!initialized) {
+        throw new Error('初始化 RealtimeKit 失败');
+      }
+    }
+
+    try {
+      await CapacitorRealtimekit.startMeeting({
+        url: config.url
+      });
+
+      this.currentMeetingUrl = config.url;
+      console.log('会议已开始:', config.url);
+    } catch (error) {
+      console.error('启动会议失败:', error);
+      throw error;
+    }
+  }
+
+  async joinMeeting(meetingUrl: string, displayName?: string): Promise<void> {
+    const config: MeetingConfig = {
+      url: meetingUrl,
+      displayName: displayName
+    };
+
+    await this.startMeeting(config);
+  }
+
+  getCurrentMeetingUrl(): string | null {
+    return this.currentMeetingUrl;
+  }
+
+  isInMeeting(): boolean {
+    return this.currentMeetingUrl !== null;
+  }
+
+  async getPluginVersion(): Promise<string> {
+    try {
+      const result = await CapacitorRealtimekit.getPluginVersion();
+      return result.version;
+    } catch (error) {
+      console.error('获取插件版本失败:', error);
+      return 'unknown';
+    }
+  }
+}
+
+// 使用方法
+const videoService = new VideoConferenceService();
+
+// 在应用启动时初始化
+await videoService.initialize();
+
+// 开始会议
+await videoService.startMeeting({
+  url: 'https://your-cloudflare-calls-url.com/meeting/123'
+});
+
+// 加入现有会议
+await videoService.joinMeeting(
+  'https://your-cloudflare-calls-url.com/meeting/456',
+  'John Doe'
+);
+```
+
+## Cloudflare Calls 设置
+
+要使用此插件，您需要设置 Cloudflare Calls：
+
+### 1. 创建 Cloudflare 账户
+
+如果您还没有账户，请在 [Cloudflare](https://dash.cloudflare.com/sign-up) 注册。
+
+### 2. 启用 Calls API
+
+1. 导航到您的 Cloudflare 仪表板
+2. 转到 **Calls** 部分
+3. 启用 Calls API
+4. 获取您的 API 凭据
+
+### 3. 创建会议 URL
+
+您需要一个后端服务来创建会议 URL。使用 Cloudflare Workers 的示例：
+
+```typescript
+// Cloudflare Worker 示例
+export default {
+  async fetch(request: Request): Promise<Response> {
+    const { pathname } = new URL(request.url);
+
+    if (pathname === '/create-meeting') {
+      const meetingId = generateMeetingId();
+      const meetingUrl = `https://your-app.calls.cloudflare.com/${meetingId}`;
+
+      return new Response(JSON.stringify({
+        meetingId,
+        meetingUrl
+      }), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    return new Response('Not found', { status: 404 });
+  }
+};
+
+function generateMeetingId(): string {
+  return Math.random().toString(36).substring(2, 15);
+}
+```
+
+## 高级用法
+
+### 带自定义配置的会议
+
+```typescript
+class MeetingManager {
+  private videoService: VideoConferenceService;
+
+  constructor() {
+    this.videoService = new VideoConferenceService();
+  }
+
+  async createAndJoinMeeting(userName: string): Promise<string> {
+    // 如果需要则初始化
+    await this.videoService.initialize();
+
+    // 调用后端创建会议
+    const meetingUrl = await this.createMeetingOnBackend();
+
+    // 加入会议
+    await this.videoService.joinMeeting(meetingUrl, userName);
+
+    return meetingUrl;
+  }
+
+  async createMeetingOnBackend(): Promise<string> {
+    const response = await fetch('https://your-api.com/create-meeting', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const data = await response.json();
+    return data.meetingUrl;
+  }
+
+  async shareMeetingLink(meetingUrl: string) {
+    // 使用 Capacitor Share API
+    if ('share' in navigator) {
+      await (navigator as any).share({
+        title: '加入我的会议',
+        text: '加入我的视频通话',
+        url: meetingUrl
+      });
+    }
+  }
+}
+```
+
+### 处理权限
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+
+async function checkAndRequestPermissions(): Promise<boolean> {
+  if (Capacitor.getPlatform() === 'web') {
+    // 请求浏览器权限
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true
+      });
+
+      // 停止流，我们只需要权限
+      stream.getTracks().forEach(track => track.stop());
+      return true;
+    } catch (error) {
+      console.error('权限被拒绝:', error);
+      return false;
+    }
+  }
+
+  // 在原生平台上，权限会自动请求
+  return true;
+}
+
+// 在开始会议前使用
+const hasPermissions = await checkAndRequestPermissions();
+if (hasPermissions) {
+  await videoService.startMeeting({ url: meetingUrl });
+}
+```
+
+## React 集成
+
+```typescript
+import { useEffect, useState } from 'react';
+import { VideoConferenceService } from './VideoConferenceService';
+
+function VideoCallComponent() {
+  const [videoService] = useState(() => new VideoConferenceService());
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    videoService.initialize().then(setIsReady);
+  }, []);
+
+  const joinMeeting = async (meetingUrl: string) => {
+    if (!isReady) {
+      console.error('视频服务未就绪');
+      return;
+    }
+
+    try {
+      await videoService.joinMeeting(meetingUrl, 'User Name');
+    } catch (error) {
+      console.error('加入会议失败:', error);
+    }
+  };
+
+  return (
+    <div>
+      <button
+        onClick={() => joinMeeting('https://your-meeting-url')}
+        disabled={!isReady}
+      >
+        加入会议
+      </button>
+    </div>
+  );
+}
+```
+
+## Vue 集成
+
+```typescript
+import { ref, onMounted } from 'vue';
+import { VideoConferenceService } from './VideoConferenceService';
+
+export default {
+  setup() {
+    const videoService = new VideoConferenceService();
+    const isReady = ref(false);
+
+    onMounted(async () => {
+      isReady.value = await videoService.initialize();
+    });
+
+    const joinMeeting = async (meetingUrl: string) => {
+      if (!isReady.value) {
+        console.error('视频服务未就绪');
+        return;
+      }
+
+      try {
+        await videoService.joinMeeting(meetingUrl, 'User Name');
+      } catch (error) {
+        console.error('加入会议失败:', error);
+      }
+    };
+
+    return {
+      isReady,
+      joinMeeting
+    };
+  }
+};
+```
+
+## 最佳实践
+
+1. **早期初始化**: 在应用启动时初始化 RealtimeKit
+2. **处理错误**: 始终将调用包装在 try-catch 块中
+3. **请求权限**: 在开始前确保已获得相机/麦克风权限
+4. **测试网络**: 在加入前检查互联网连接
+5. **后台音频**: 为 iOS 配置后台模式
+6. **用户体验**: 在初始化期间显示加载状态
+7. **清理 URL**: 在使用前验证会议 URL
+
+## 常见问题
+
+### 会议无法启动
+
+```typescript
+async function troubleshootMeeting(meetingUrl: string) {
+  // 检查初始化
+  const version = await videoService.getPluginVersion();
+  console.log('插件版本:', version);
+
+  // 验证 URL 格式
+  if (!meetingUrl.startsWith('https://')) {
+    console.error('无效的会议 URL，必须使用 HTTPS');
+    return;
+  }
+
+  // 尝试启动会议
+  try {
+    await videoService.startMeeting({ url: meetingUrl });
+  } catch (error) {
+    console.error('会议失败:', error);
+  }
+}
+```
+
+### 权限被拒绝
+
+在 iOS 上，确保 Info.plist 包含所有必需的使用说明。在 Android 上，验证 AndroidManifest.xml 中存在权限。
+
+### iOS 音频问题
+
+确保在 Info.plist 中配置了后台音频模式：
+
+```xml
+<key>UIBackgroundModes</key>
+<array>
+  <string>audio</string>
+  <string>voip</string>
+</array>
+```
+
+## 下一步
+
+- 探索 [API 参考](https://github.com/Cap-go/capacitor-realtimekit#api) 获取完整的方法文档
+- 阅读 [Cloudflare Calls 文档](https://developers.cloudflare.com/calls/)
+- 查看[示例应用](https://github.com/Cap-go/capacitor-realtimekit/tree/main/example)
+- 查看[教程](/plugins-tutorials/capacitor-realtimekit)获取完整实现

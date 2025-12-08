@@ -1,0 +1,302 @@
+---
+title: カスタムストレージ
+description: "Capgo Live Updatesでカスタムストレージソリューションを使用する方法、外部URL、S3統合、セキュアなデプロイのためのバンドル暗号化について学びます。"
+locale: ja
+sidebar:
+  order: 6
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgoは、アプリバンドル用のカスタムストレージソリューションをサポートしており、独自のインフラストラクチャまたはサードパーティのストレージサービスでアップデートをホストできます。これは、特定のセキュリティ要件、コンプライアンスニーズ、または既存のストレージインフラストラクチャを持つ組織に特に便利です。
+
+## 概要
+
+Capgoのカスタムストレージは、バンドルを外部の場所にアップロードし、CapgoにアクセスするためのURLを提供することで機能します。Capgo SDKは、Capgoのデフォルトクラウドストレージではなく、カスタムストレージの場所から直接アップデートをダウンロードします。
+
+<Aside type="tip">
+
+カスタムストレージは以下に最適です：
+- 厳格なデータ所在地要件を持つ組織
+- 既存のCDNまたはストレージインフラストラクチャを持つチーム
+- 追加のセキュリティレイヤーを必要とするアプリケーション
+- 大きなバンドルサイズのコスト最適化
+
+</Aside>
+
+## 外部URLアップロード
+
+カスタムストレージを使用する最も簡単な方法は、バンドルを公開アクセス可能な任意のURLにアップロードし、そのURLをCapgoに提供することです。
+
+### 基本的な外部URLアップロード
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip
+```
+
+このコマンドは、Capgoのクラウドストレージにアップロードする代わりに、指定されたURLのバンドルを参照するようにCapgoに指示します。
+
+### 暗号化を使用
+
+安全な外部ストレージの場合、バンドルを暗号化して復号化キーを提供できます：
+
+```shell
+npx @capgo/cli@latest bundle upload --external https://your-domain.com/bundles/v1.2.3.zip --iv-session-key YOUR_IV_SESSION_KEY
+```
+
+## S3統合
+
+Capgoは、Amazon S3およびS3互換のストレージサービスの組み込みサポートを提供します。CLIは、バンドルをS3に自動的にアップロードし、S3 URLを使用するようにCapgoを構成できます。
+
+### S3アップロードオプション
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-bucket-name your-bucket-name
+```
+
+### 完全なS3構成
+
+S3互換サービスまたはカスタムエンドポイントの場合：
+
+```shell
+npx @capgo/cli@latest bundle upload \
+  --s3-region us-east-1 \
+  --s3-apikey YOUR_ACCESS_KEY \
+  --s3-apisecret YOUR_SECRET_KEY \
+  --s3-endpoint https://s3.your-provider.com \
+  --s3-bucket-name your-bucket-name \
+  --s3-port 443 \
+  --no-s3-ssl  # エンドポイントがSSLをサポートしていない場合のみ
+```
+
+### S3構成パラメータ
+
+| パラメータ | 説明 | 必須 |
+|-----------|-------------|----------|
+| `--s3-region` | S3バケットのAWSリージョン | はい |
+| `--s3-apikey` | S3アクセスキーID | はい |
+| `--s3-apisecret` | S3シークレットアクセスキー | はい |
+| `--s3-bucket-name` | S3バケットの名前 | はい |
+| `--s3-endpoint` | カスタムS3エンドポイントURL | いいえ |
+| `--s3-port` | S3エンドポイントのポート | いいえ |
+| `--no-s3-ssl` | S3アップロードのSSLを無効化 | いいえ |
+
+## バンドルの準備と暗号化
+
+カスタムストレージを使用する場合、特に暗号化を使用する場合は、バンドルを適切に準備する必要があります。これには、zipファイルの作成とオプションで暗号化することが含まれます。
+
+### ステップ1: Zipバンドルの作成
+
+まず、アプリバンドルのzipファイルを作成します：
+
+```shell
+npx @capgo/cli@latest bundle zip com.example.app --path ./dist
+```
+
+zipコマンドは、zipファイルのチェックサムを返します。必要に応じて、このチェックサムを使用してzipファイルを暗号化できます。チェックサムを含む構造化された出力を取得するには、`--json`オプションを使用してください。
+
+#### Zipコマンドオプション
+
+```shell
+npx @capgo/cli@latest bundle zip [appId] \
+  --path ./dist \
+  --bundle 1.2.3 \
+  --name myapp-v1.2.3 \
+  --json \
+  --no-code-check \
+  --key-v2 \
+  --package-json ../../package.json,./package.json
+```
+
+| オプション | 説明 |
+|--------|-------------|
+| `--path` | zip化するフォルダへのパス（capacitor.configのwebDirがデフォルト） |
+| `--bundle` | zipファイルに名前を付けるためのバンドルバージョン番号 |
+| `--name` | zipファイルのカスタム名 |
+| `--json` | JSON形式で結果を出力（チェックサムを含む） |
+| `--no-code-check` | notifyAppReady()呼び出しとインデックスファイルのチェックをスキップ |
+| `--key-v2` | 暗号化v2を使用 |
+| `--package-json` | モノレポ用のpackage.jsonファイルへのパス（カンマ区切り） |
+
+### ステップ2: バンドルの暗号化（オプション）
+
+セキュリティを強化するために、アップロード前にzipバンドルを暗号化します：
+
+```shell
+# デフォルトのローカルキーを使用
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM
+
+# カスタムキーファイルを使用
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key ./path/to/.capgo_key_v2
+
+# キーデータを直接使用
+npx @capgo/cli@latest bundle encrypt ./myapp.zip CHECKSUM --key-data "PRIVATE_KEY_CONTENT"
+```
+
+`CHECKSUM`パラメータは必須で、zipファイルのチェックサムである必要があります。zipコマンドの出力からチェックサムを取得できます（構造化された出力には`--json`オプションを使用）。
+
+デフォルトでは、encryptコマンドはローカルのプライベート署名キーを使用します。`--key`または`--key-data`オプションを使用してカスタムキーを指定できます。
+
+encryptコマンドは、アップロードまたは復号化に必要な`ivSessionKey`を返します。
+
+#### 暗号化コマンドオプション
+
+| オプション | 説明 |
+|--------|-------------|
+| `zipPath` | 暗号化するzipファイルへのパス（必須） |
+| `checksum` | zipファイルのチェックサム（必須） - zipコマンドから取得 |
+| `--key` | プライベート署名キーのカスタムパス（オプション、デフォルトではローカルキーを使用） |
+| `--key-data` | プライベート署名キーデータを直接（オプション） |
+| `--json` | JSON形式で結果を出力 |
+
+<Aside type="caution">
+
+encryptコマンドは、`--iv-session-key`オプションでアップロード時に提供する必要がある`ivSessionKey`を出力します。
+
+</Aside>
+
+## 完全なワークフローの例
+
+### 例1: 暗号化を使用した外部URL
+
+<Steps>
+
+1. **アプリをビルド:**
+   ```shell
+   npm run build
+   ```
+
+2. **zipバンドルを作成:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --bundle 1.2.3
+   ```
+
+   このコマンドによって返されるチェックサムをメモしてください。
+
+3. **バンドルを暗号化:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app-1.2.3.zip CHECKSUM_FROM_STEP_2
+   ```
+
+   出力から`ivSessionKey`をメモしてください。
+
+4. **ストレージにアップロード:**
+   暗号化されたzipファイルをホスティングサービスにアップロードします。
+
+5. **Capgoに登録:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --external https://your-cdn.com/bundles/com.example.app-1.2.3.zip \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_3
+   ```
+
+</Steps>
+
+### 例2: 直接S3アップロード
+
+<Steps>
+
+1. **アプリをビルド:**
+   ```shell
+   npm run build
+   ```
+
+2. **S3に直接アップロード:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --channel Production
+   ```
+
+</Steps>
+
+### 例3: 暗号化を使用したS3
+
+<Steps>
+
+1. **ビルドとzip:**
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **バンドルを暗号化:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM
+   ```
+
+3. **暗号化してS3にアップロード:**
+   ```shell
+   npx @capgo/cli@latest bundle upload \
+     --s3-region us-west-2 \
+     --s3-apikey YOUR_ACCESS_KEY \
+     --s3-apisecret YOUR_SECRET_KEY \
+     --s3-bucket-name your-app-bundles \
+     --iv-session-key IV_SESSION_KEY_FROM_STEP_2 \
+     --channel Production
+   ```
+
+</Steps>
+
+## セキュリティに関する考慮事項
+
+カスタムストレージを使用する際は、以下のセキュリティのベストプラクティスを考慮してください：
+
+### アクセス制御
+- ストレージURLがアプリユーザーにはアクセス可能だが、公開的に発見可能ではないことを確認
+- 可能な場合は署名付きURLまたはトークンベースの認証を使用
+- Webベースのアプリケーションには適切なCORSヘッダーを実装
+
+### 暗号化
+- Capgo暗号化ツールを使用して、機密性の高いバンドルを常に暗号化
+- 暗号化キーを安全に保存し、定期的にローテーション
+- すべてのバンドルURLにHTTPSを使用（iOSとAndroidで必須）
+
+### 監視
+- 異常なダウンロードパターンを検出するためにアクセスログを監視
+- バンドルダウンロード失敗のアラートを設定
+- ストレージ権限を定期的に監査
+
+## トラブルシューティング
+
+### 一般的な問題
+
+**バンドルがダウンロードされない:**
+- URLが公開アクセス可能で、HTTPSを使用していることを確認（iOSとAndroidで必須）
+- WebアプリのCORSヘッダーを確認
+- バンドル形式が正しいことを確認
+
+**暗号化エラー:**
+- `ivSessionKey`が暗号化されたバンドルと一致することを確認
+- バンドルが正しいキーで暗号化されたことを確認
+- 新しいバンドルには暗号化v2が使用されていることを確認
+
+**S3アップロード失敗:**
+- S3認証情報と権限を確認
+- バケットポリシーとCORS構成を確認
+- 指定されたリージョンが正しいことを確認
+
+### デバッグコマンド
+
+バンドルステータスを確認：
+```shell
+npx @capgo/cli@latest app debug
+```
+
+バンドルの整合性を検証：
+```shell
+npx @capgo/cli@latest bundle list
+```
+
+## 次のステップ
+
+- [チャネル](/docs/live-updates/channels/)について学び、異なるデプロイメント環境を管理
+- [アップデート動作](/docs/live-updates/update-behavior/)を探索して、アップデートの適用方法をカスタマイズ
+- [CI/CD統合](/docs/getting-started/cicd-integration/)をセットアップして、カスタムストレージワークフローを自動化

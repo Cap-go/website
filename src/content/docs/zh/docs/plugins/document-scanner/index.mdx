@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-document-scanner"
+description: 从 Capacitor 应用中捕获清晰的文档，具有自动边缘检测并导出扫描页面的功能。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 启动优雅的文档扫描体验，具有自动裁剪、多页捕获和可配置的输出格式。
+  image:
+    file: ~public/icons/plugins/document-scanner.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/document-scanner/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-document-scanner/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Document Scanner 插件为您的 Capacitor 应用提供了一个在 iOS 和 Android 设备上都能正常工作的原生质量扫描流程。
+
+<CardGrid stagger>
+  <Card title="自动检测" icon="rocket">
+    检测页面边缘，自动裁剪，并让用户在保存前进行调整。
+  </Card>
+  <Card title="多页捕获" icon="star">
+    在单个扫描会话中捕获一页或多页，具有可调限制。
+  </Card>
+  <Card title="自定义输出" icon="download">
+    以您选择的图像质量返回文件路径或 base64 字符串。
+  </Card>
+  <Card title="统一的 API" icon="pencil">
+    一个 TypeScript 接口涵盖 iOS 和 Android 实现。
+  </Card>
+</CardGrid>
+
+使用入门指南启用相机权限、配置质量设置并将扫描的文件导出到您的存储工作流程。

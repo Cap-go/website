@@ -1,0 +1,197 @@
+---
+title: Iniziare
+description: Scopri come installare e utilizzare il plugin Flash per controllare il flash del tuo dispositivo nella tua app Capacitor.
+locale: it
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-flash" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilizzo
+
+Importa il plugin e usa i suoi metodi per controllare il flash:
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+// Check if flashlight is available
+const checkFlashlight = async () => {
+  const { value } = await CapacitorFlash.isAvailable();
+  console.log('Flashlight available:', value);
+};
+
+// Turn on flashlight
+const turnOn = async () => {
+  await CapacitorFlash.switchOn();
+};
+
+// Turn off flashlight
+const turnOff = async () => {
+  await CapacitorFlash.switchOff();
+};
+
+// Check if flashlight is on
+const checkStatus = async () => {
+  const { value } = await CapacitorFlash.isSwitchedOn();
+  console.log('Flashlight is on:', value);
+};
+
+// Toggle flashlight
+const toggle = async () => {
+  await CapacitorFlash.toggle();
+};
+```
+
+## Riferimento API
+
+### isAvailable()
+
+Controlla se il flash è disponibile sul dispositivo.
+
+```typescript
+const result = await CapacitorFlash.isAvailable();
+// Returns: { value: boolean }
+```
+
+### switchOn(options?)
+
+Accende il flash.
+
+```typescript
+interface SwitchOnOptions {
+  intensity?: number; // 0.0 to 1.0 (iOS only)
+}
+
+await CapacitorFlash.switchOn({ intensity: 0.5 });
+```
+
+### switchOff()
+
+Spegne il flash.
+
+```typescript
+await CapacitorFlash.switchOff();
+```
+
+### isSwitchedOn()
+
+Controlla se il flash è attualmente acceso.
+
+```typescript
+const result = await CapacitorFlash.isSwitchedOn();
+// Returns: { value: boolean }
+```
+
+### toggle()
+
+Attiva/disattiva il flash.
+
+```typescript
+await CapacitorFlash.toggle();
+```
+
+## Esempio Completo
+
+```typescript
+import { CapacitorFlash } from '@capgo/capacitor-flash';
+
+export class FlashlightService {
+  private isOn = false;
+
+  async init() {
+    const { value } = await CapacitorFlash.isAvailable();
+    if (!value) {
+      throw new Error('Flashlight not available on this device');
+    }
+  }
+
+  async toggle() {
+    if (this.isOn) {
+      await CapacitorFlash.switchOff();
+    } else {
+      await CapacitorFlash.switchOn();
+    }
+    this.isOn = !this.isOn;
+  }
+
+  async turnOn(intensity?: number) {
+    await CapacitorFlash.switchOn({ intensity });
+    this.isOn = true;
+  }
+
+  async turnOff() {
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+
+  async strobe(intervalMs: number = 100, duration: number = 3000) {
+    const endTime = Date.now() + duration;
+
+    while (Date.now() < endTime) {
+      await CapacitorFlash.toggle();
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+
+    // Ensure flashlight is off after strobe
+    await CapacitorFlash.switchOff();
+    this.isOn = false;
+  }
+}
+```
+
+## Migliori Pratiche
+
+1. **Controlla prima la disponibilità**
+   Verifica sempre la disponibilità del flash prima di utilizzarlo:
+   ```typescript
+   const { value } = await CapacitorFlash.isAvailable();
+   if (!value) {
+     // Show alternative UI or disable flashlight features
+   }
+   ```
+
+2. **Gestisci gli errori con attenzione**
+   ```typescript
+   try {
+     await CapacitorFlash.switchOn();
+   } catch (error) {
+     console.error('Failed to turn on flashlight:', error);
+   }
+   ```
+
+3. **Spegni quando non necessario**
+   Spegni sempre il flash quando l'app va in background o quando la funzione non è più necessaria per risparmiare batteria.
+
+4. **Evita attivazioni rapide**
+   Implementa il debouncing per evitare rapide accensioni/spegnimenti che potrebbero danneggiare il LED o scaricare la batteria.
+
+## Note sulla Piattaforma
+
+### iOS
+- Richiede iOS 10.0+
+- Utilizza la modalità torcia `AVCaptureDevice`
+- Supporta il controllo dell'intensità (da 0.0 a 1.0)
+
+### Android
+- Richiede Android 6.0 (API 23)+
+- Utilizza Camera2 API
+- Controllo dell'intensità non supportato (utilizza la luminosità predefinita)
+
+### Web
+- Supportato su browser con MediaDevices API e capacità torcia
+- Utilizza lo stream della fotocamera per accedere al flash del dispositivo
+- Richiede il permesso dell'utente per accedere alla fotocamera
+- Funziona meglio su browser mobili (Chrome su Android)
+- I browser desktop tipicamente restituiscono `isAvailable: false` (nessun hardware torcia)
+- Controllo dell'intensità non supportato sul web

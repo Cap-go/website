@@ -1,0 +1,64 @@
+---
+title: "Capacitor+"
+locale: es
+description: Un fork automatizado y siempre sincronizado de Capacitor con PRs de la comunidad fusionados y lanzamientos rápidos.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introducción"
+hero:
+  tagline: Capacitor+ es un fork automatizado de Capacitor que fusiona PRs de la comunidad más rápido, con lanzamientos revisados por seguridad.
+  image:
+    file: ~public/icons/plugins/capacitor-plus.svg
+  actions:
+    - text: Comenzar
+      link: /docs/plugins/capacitor-plus/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-plus/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  **¿Por qué Capacitor+?** Grandes PRs se quedan sin fusionar en el repositorio oficial de Capacitor durante meses. Capacitor+ fusiona activamente estas contribuciones de la comunidad para que no tengas que esperar.
+</Aside>
+
+<CardGrid stagger>
+  <Card title="PRs de la Comunidad Fusionados Más Rápido" icon="rocket">
+    ¿Correcciones de errores y funciones atascadas en upstream? Las fusionamos para que puedas beneficiarte inmediatamente.
+  </Card>
+  <Card title="Auto-Sincronizado Diariamente" icon="seti:clock">
+    Cada cambio de Capacitor oficial es automáticamente extraído, probado y verificado.
+  </Card>
+  <Card title="Revisión de Seguridad" icon="approve-check">
+    Cada lanzamiento es analizado por IA para vulnerabilidades de seguridad, cambios importantes y riesgos de estabilidad.
+  </Card>
+  <Card title="Reemplazo Directo" icon="puzzle">
+    Misma API que Capacitor oficial - solo cambia el ámbito del paquete y listo.
+  </Card>
+</CardGrid>
+
+## Filosofía
+
+El equipo de Ionic mantiene Capacitor con sus propias prioridades y calendario de lanzamientos. Las contribuciones de la comunidad pueden esperar meses o incluso años para ser fusionadas. Capacitor+ toma un enfoque diferente:
+
+1. **Fusionar PRs de Forks** - PRs valiosos atascados en la cola upstream son fusionados activamente
+2. **Sincronización Continua** - Cada cambio upstream es automáticamente extraído y probado
+3. **Lanzamientos Rápidos** - Los cambios se publican en npm tan pronto como pasan CI
+4. **Comunidad Primero** - Tus contribuciones importan y son priorizadas
+5. **Transparencia** - Toda la automatización es de código abierto y visible
+
+## Paquetes
+
+| Paquete | npm |
+|---------|-----|
+| `@capacitor-plus/core` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/core)](https://www.npmjs.com/package/@capacitor-plus/core) |
+| `@capacitor-plus/cli` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/cli)](https://www.npmjs.com/package/@capacitor-plus/cli) |
+| `@capacitor-plus/android` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/android)](https://www.npmjs.com/package/@capacitor-plus/android) |
+| `@capacitor-plus/ios` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/ios)](https://www.npmjs.com/package/@capacitor-plus/ios) |

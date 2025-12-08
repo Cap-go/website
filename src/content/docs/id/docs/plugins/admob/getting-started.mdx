@@ -1,0 +1,89 @@
+---
+title: Memulai
+description: Instal dan konfigurasi plugin Capgo AdMob untuk menampilkan iklan di dalam aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal plugin**
+   <PackageManagers pkg="@capgo/capacitor-admob" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan proyek native**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Inisialisasi SDK
+
+```typescript
+import { AdMob, MaxAdContentRating } from '@capgo/capacitor-admob';
+
+// Mulai Mobile Ads SDK sekali dalam bootstrap aplikasi Anda
+await AdMob.start();
+
+// Opsional: konfigurasi pengaturan request global
+await AdMob.configure({
+  appMuted: false,
+  appVolume: 1,
+});
+
+await AdMob.configRequest({
+  maxAdContentRating: MaxAdContentRating.T,
+  tagForChildDirectedTreatment: false,
+  tagForUnderAgeOfConsent: false,
+});
+```
+
+## Tampilkan iklan banner
+
+```typescript
+import { BannerAd } from '@capgo/capacitor-admob';
+
+const banner = new BannerAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/banner',
+  position: 'bottom',
+});
+
+await banner.show();
+```
+
+## Iklan interstitial atau rewarded
+
+```typescript
+import { InterstitialAd, RewardedAd } from '@capgo/capacitor-admob';
+
+const interstitial = new InterstitialAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/interstitial',
+});
+await interstitial.load();
+await interstitial.show();
+
+const rewarded = new RewardedAd({
+  adUnitId: 'ca-app-pub-xxxxxxxxxxxxxxxx/rewarded',
+});
+await rewarded.load();
+await rewarded.show();
+```
+
+## Dengarkan event iklan
+
+```typescript
+import { AdMob } from '@capgo/capacitor-admob';
+
+const handle = await AdMob.addListener('adImpression', (event) => {
+  console.log('Ad impression', event);
+});
+
+// Nanti saat pembersihan
+await handle.remove();
+```
+
+## Catatan platform
+
+- **iOS**: Tambahkan ID aplikasi AdMob Anda ke `Info.plist` di bawah kunci `GADApplicationIdentifier` dan sertakan ID SKAdNetwork yang Anda andalkan.
+- **Android**: Deklarasikan ID aplikasi AdMob Anda dalam `AndroidManifest.xml` dengan menambahkan `com.google.android.gms.ads.APPLICATION_ID` di dalam tag `<application>`.
+- **Persetujuan & Privasi**: Gunakan `requestTrackingAuthorization()` di iOS 14+ dan flag child-directed `configRequest()` untuk mematuhi aturan privasi regional.

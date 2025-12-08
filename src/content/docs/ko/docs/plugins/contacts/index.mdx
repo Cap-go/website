@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-contacts"
+locale: ko
+description: Capacitor API를 사용하여 기기 연락처에 접근하고 검색하며 관리합니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 완전한 CRUD 작업과 권한 처리를 통해 Capacitor 앱에서 기기 연락처를 접근, 검색 및 관리합니다.
+  image:
+    file: ~public/icons/plugins/contacts.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/contacts/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-contacts/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="연락처 읽기" icon="rocket">
+    전체 세부 정보가 포함된 기기 연락처 목록에 접근
+  </Card>
+  <Card title="검색 기능" icon="magnifier">
+    이름, 이메일 또는 전화번호로 연락처 찾기
+  </Card>
+  <Card title="생성 및 업데이트" icon="pencil">
+    새 연락처를 추가하거나 기존 연락처 수정
+  </Card>
+  <Card title="연락처 삭제" icon="setting">
+    기기에서 연락처를 안전하게 제거
+  </Card>
+  <Card title="권한 처리" icon="approve-check-circle">
+    Privacy manifest 준수와 함께 연락처 권한을 적절하게 처리
+  </Card>
+  <Card title="시작하기" icon="open-book">
+    플러그인을 설치하고 구성하려면 [시작 가이드](/docs/plugins/contacts/getting-started/)를 확인하세요.
+  </Card>
+</CardGrid>

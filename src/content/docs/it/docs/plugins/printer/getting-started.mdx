@@ -1,0 +1,322 @@
+---
+title: Guida Introduttiva
+locale: it
+description: Scopri come installare e utilizzare il plugin Printer per stampare contenuti dalla tua app Capacitor.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il pacchetto**
+   <PackageManagers pkg="@capgo/capacitor-printer" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza con i progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilizzo
+
+Importa il plugin e stampa vari tipi di contenuto:
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+
+// Print HTML content
+const printHTML = async () => {
+  await Printer.print({
+    content: '<h1>Hello World</h1><p>This is a test print.</p>',
+    name: 'test-print'
+  });
+};
+
+// Print a PDF file
+const printPDF = async () => {
+  await Printer.print({
+    content: 'file:///path/to/document.pdf',
+    name: 'my-document'
+  });
+};
+
+// Print an image
+const printImage = async () => {
+  await Printer.print({
+    content: 'file:///path/to/image.jpg',
+    name: 'my-image'
+  });
+};
+```
+
+## Riferimento API
+
+### print(options)
+
+Apre la finestra di stampa nativa con il contenuto specificato.
+
+```typescript
+interface PrintOptions {
+  content: string;          // HTML string, file URI, or base64 data
+  name?: string;            // Print job name
+  orientation?: 'portrait' | 'landscape';
+  grayscale?: boolean;      // Print in grayscale (default: false)
+}
+
+await Printer.print(options);
+```
+
+### canPrint()
+
+Verifica se la stampa è disponibile sul dispositivo.
+
+```typescript
+const { value } = await Printer.canPrint();
+console.log('Printing available:', value);
+```
+
+## Esempio Completo
+
+```typescript
+import { Printer } from '@capgo/capacitor-printer';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+
+export class PrintService {
+  async checkPrintAvailability(): Promise<boolean> {
+    const { value } = await Printer.canPrint();
+    return value;
+  }
+
+  async printHTML(htmlContent: string, jobName: string = 'Document') {
+    try {
+      const canPrint = await this.checkPrintAvailability();
+      if (!canPrint) {
+        throw new Error('Printing not available on this device');
+      }
+
+      await Printer.print({
+        content: htmlContent,
+        name: jobName,
+        orientation: 'portrait'
+      });
+    } catch (error) {
+      console.error('Print failed:', error);
+      throw error;
+    }
+  }
+
+  async printDocument(filePath: string, jobName?: string) {
+    await Printer.print({
+      content: filePath,
+      name: jobName || 'Document'
+    });
+  }
+
+  async printReceipt(receiptData: any) {
+    const html = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            .header { text-align: center; margin-bottom: 20px; }
+            .item { display: flex; justify-content: space-between; margin: 10px 0; }
+            .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; padding-top: 10px; border-top: 2px solid #000; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h2>Receipt</h2>
+            <p>Date: ${new Date().toLocaleDateString()}</p>
+          </div>
+          ${receiptData.items.map((item: any) => `
+            <div class="item">
+              <span>${item.name}</span>
+              <span>$${item.price.toFixed(2)}</span>
+            </div>
+          `).join('')}
+          <div class="total">
+            <div class="item">
+              <span>Total:</span>
+              <span>$${receiptData.total.toFixed(2)}</span>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    await this.printHTML(html, 'Receipt');
+  }
+
+  async printFromURL(url: string) {
+    // Download the file first
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const reader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+      reader.onloadend = async () => {
+        try {
+          await Printer.print({
+            content: reader.result as string,
+            name: 'Downloaded Document'
+          });
+          resolve(true);
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+}
+```
+
+## Utilizzo Avanzato
+
+### Stampa con Stili Personalizzati
+
+```typescript
+const printStyledDocument = async () => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          @page {
+            size: A4;
+            margin: 2cm;
+          }
+          body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+          }
+          h1 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+          }
+          .content {
+            margin-top: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Professional Document</h1>
+        <div class="content">
+          <p>This is a professionally styled document ready for printing.</p>
+        </div>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Styled Document',
+    orientation: 'portrait'
+  });
+};
+```
+
+### Stampa di Tabelle
+
+```typescript
+const printTable = async (data: any[]) => {
+  const tableRows = data.map(row => `
+    <tr>
+      <td>${row.id}</td>
+      <td>${row.name}</td>
+      <td>${row.value}</td>
+    </tr>
+  `).join('');
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+          }
+        </style>
+      </head>
+      <body>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRows}
+          </tbody>
+        </table>
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: 'Data Table'
+  });
+};
+```
+
+### Stampa di Immagini
+
+```typescript
+const printImageWithDetails = async (imagePath: string, title: string) => {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body { text-align: center; padding: 20px; }
+          h2 { margin-bottom: 20px; }
+          img { max-width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>
+        <h2>${title}</h2>
+        <img src="${imagePath}" alt="${title}" />
+      </body>
+    </html>
+  `;
+
+  await Printer.print({
+    content: html,
+    name: title
+  });
+};
+```
+
+## Migliori Pratiche
+
+1. **Verifica Disponibilità**: Controlla sempre se la stampa è disponibile prima di tentare di stampare
+2. **Contenuto Valido**: Assicurati che l'HTML sia ben formato e che i percorsi dei file siano validi
+3. **Nomi dei Lavori**: Usa nomi descrittivi per i lavori di stampa per aiutare gli utenti a identificarli
+4. **Stili**: Usa CSS inline o stili incorporati per un output di stampa coerente
+5. **Gestione Errori**: Avvolgi le chiamate di stampa in blocchi try-catch per il feedback dell'utente
+
+## Risoluzione dei Problemi
+
+### Problemi Comuni
+
+**Finestra di stampa non appare**: Verifica che la stampa sia disponibile con canPrint()
+**Contenuto non stampa**: Verifica che l'HTML sia valido e che i percorsi dei file siano corretti
+**Immagini non appaiono**: Assicurati che i percorsi delle immagini siano assoluti e che i file siano accessibili
+**Problemi di stile**: Usa le regole CSS @page e testa l'output di stampa

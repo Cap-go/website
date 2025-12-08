@@ -1,0 +1,61 @@
+---
+title: はじめに
+locale: ja
+description: エッジ検出と調整可能な出力形式を備えたネイティブ品質のドキュメントスキャンを追加します。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **プラグインをインストール**
+   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプラットフォームと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## スキャンをトリガー
+
+```typescript
+import {
+  DocumentScanner,
+  ResponseType,
+  ScanDocumentResponseStatus,
+} from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  croppedImageQuality: 90,
+  letUserAdjustCrop: true,
+  maxNumDocuments: 10,
+  responseType: ResponseType.ImageFilePath,
+});
+
+if (result.status === ScanDocumentResponseStatus.Success) {
+  console.log('Scanned files:', result.scannedImages);
+} else {
+  console.log('Scan cancelled by user');
+}
+```
+
+## base64データを返す
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  responseType: ResponseType.Base64,
+});
+
+const [firstPage] = result.scannedImages ?? [];
+if (firstPage) {
+  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
+  // プレビューを表示またはサーバーにアップロード
+}
+```
+
+## プラットフォーム要件
+
+- **iOS**: カメラの使用方法を説明する`NSCameraUsageDescription`を`ios/App/App/Info.plist`に追加します。
+- **Android**: `CAMERA`パーミッションが宣言されていることを確認します (Capacitorが自動的に追加します) し、UIに合わせて`croppedImageQuality`、`letUserAdjustCrop`、`maxNumDocuments`を調整します。
+- **ストレージ**: `ResponseType.ImageFilePath`を使用する場合、アプリセッションが終了する前にスキャンされたファイルを希望するストレージの場所に移動またはコピーしてください。

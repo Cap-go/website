@@ -1,0 +1,82 @@
+---
+title: CI/CD Integrationen
+description: "Integrieren Sie Capgo Live Updates mit Ihrer bevorzugten CI/CD-Plattform für automatisierte Bereitstellungs-Workflows."
+sidebar:
+  order: 1
+locale: de
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Automatisieren Sie Ihren Capgo Live Updates-Bereitstellungsprozess durch Integration mit beliebten CI/CD-Plattformen. Diese Integrationen ermöglichen es Ihnen, App-Updates automatisch bereitzustellen, wenn Sie Code-Änderungen pushen, Feature-Branches zu testen und mehrere Bereitstellungsumgebungen zu verwalten.
+
+## Verfügbare Integrationen
+
+Wählen Sie Ihre CI/CD-Plattform, um mit automatisierten Bereitstellungen zu beginnen:
+
+<CardGrid>
+  <LinkCard
+    title="Azure DevOps"
+    description="Integrieren Sie mit Azure DevOps Pipelines für automatisierte Builds, Tests und Bereitstellungs-Workflows."
+    href="/docs/live-updates/integrations/azure-devops/"
+  />
+  <LinkCard
+    title="GitLab CI/CD"
+    description="Richten Sie GitLab CI/CD-Pipelines ein, um Ihre App-Updates automatisch mit umfassendem Umgebungsmanagement bereitzustellen."
+    href="/docs/live-updates/integrations/gitlab-ci/"
+  />
+  <LinkCard
+    title="GitHub Actions"
+    description="Verwenden Sie GitHub Actions für leistungsstarke Automatisierung mit Multi-Channel-Bereitstellungen und Umgebungsschutz."
+    href="/docs/live-updates/integrations/github-actions/"
+  />
+  <LinkCard
+    title="Bitbucket Pipelines"
+    description="Deployen Sie mit Bitbucket Pipelines unter Verwendung einfacher oder erweiterter Konfigurationen für mehrere Umgebungen."
+    href="/docs/live-updates/integrations/bitbucket-pipeline/"
+  />
+</CardGrid>
+
+## Was Sie erhalten
+
+Alle Integrationsleitfäden enthalten:
+
+- **Einfache Einrichtung**: Grundkonfiguration zum schnellen Einstieg
+- **Erweiterte Workflows**: Multi-Umgebungs-Bereitstellungen mit Staging und Production
+- **Feature-Branch-Tests**: Automatische Bereitstellung von Feature-Branches zu Test-Channels
+- **Sicherheits-Best-Practices**: Sichere Geheimnisverwaltung und Umgebungsschutz
+- **Überwachung**: Benachrichtigungen und Protokollierung für Bereitstellungsstatus
+
+<Aside type="tip">
+
+**Neu bei CI/CD?** Beginnen Sie mit der einfachen Konfiguration für Ihre Plattform und fügen Sie dann schrittweise erweiterte Funktionen wie Multi-Channel-Bereitstellungen und automatisierte Tests hinzu, wenn Ihre Anforderungen wachsen.
+
+</Aside>
+
+## Gemeinsame Funktionen
+
+Jede Integration unterstützt:
+
+- **Automatisierte Builds**: Bereitstellungen bei Code-Änderungen auslösen
+- **Multi-Channel-Unterstützung**: Zu verschiedenen Channels bereitstellen (development, staging, production)
+- **Pull-Request/Merge-Request-Tests**: Änderungen in isolierten Umgebungen testen
+- **Verschlüsselungs-Unterstützung**: Sichere Bereitstellungen mit Capgos Verschlüsselungsfunktion
+- **Umgebungsschutz**: Manuelle Genehmigungen und eingeschränkter Zugriff für Production
+- **Benachrichtigungen**: Slack-, E-Mail- und andere Benachrichtigungsintegrationen
+
+## Voraussetzungen
+
+Bevor Sie eine Integration einrichten, stellen Sie sicher, dass Sie haben:
+
+- Ein Capgo-Konto mit einer konfigurierten App
+- Den Quellcode Ihrer App in einem Git-Repository
+- Ein Capgo API-Token von [console.capgo.app/apikeys](https://console.capgo.app/apikeys)
+- Node.js und npm/yarn in Ihrem Projekt konfiguriert
+
+## Verwandte Dokumentation
+
+- [Channels](/docs/live-updates/channels/) - Erfahren Sie, wie Sie verschiedene Bereitstellungsumgebungen verwalten
+- [Encryption](/docs/live-updates/encryption/) - Sichern Sie Ihre Bereitstellungen mit Ende-zu-Ende-Verschlüsselung
+- [Update Behavior](/docs/live-updates/update-behavior/) - Passen Sie an, wie Updates auf Ihre Apps angewendet werden
+
+Wählen Sie oben Ihre CI/CD-Plattform, um mit der Automatisierung Ihrer Capgo-Bereitstellungen zu beginnen!

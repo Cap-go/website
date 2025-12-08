@@ -1,0 +1,69 @@
+---
+title: Erste Schritte
+locale: de
+description: Konfigurieren Sie Build-spezifische Umgebungswerte und rufen Sie sie zur Laufzeit mit dem Env-Plugin ab.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Native Plattformen synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Konfigurationswerte deklarieren
+
+Fügen Sie Schlüssel zur Capacitor-Konfiguration hinzu, damit sie in Ihre nativen Builds eingebettet werden. Sie können mehrere Konfigurationsvarianten (`capacitor.config.prod.ts`, `capacitor.config.dev.ts`, etc.) erstellen, um Werte pro Umgebung auszutauschen.
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    Env: {
+      API_URL: 'https://api.example.com',
+      PUBLIC_KEY: 'pk_live_123',
+    },
+  },
+};
+
+export default config;
+```
+
+Auf nativen Plattformen werden die Werte in den generierten Konfigurationsdateien gespeichert (`ios/App/App/capacitor.config.json` und `android/app/src/main/assets/capacitor.config.json`). Aktualisieren Sie diese Dateien pro Variante, wenn Sie mandantenspezifische Werte benötigen.
+
+## Werte im Code lesen
+
+```typescript
+import { Env } from '@capgo/capacitor-env';
+
+const apiUrl = await Env.getKey({ key: 'API_URL' }).then((result) => result.value);
+
+if (!apiUrl) {
+  throw new Error('Fehlende API_URL-Konfiguration');
+}
+```
+
+## Fallbacks bereitstellen
+
+```typescript
+const loadConfig = async () => {
+  const { value: endpoint } = await Env.getKey({ key: 'API_URL' });
+  return endpoint || 'https://staging.example.com';
+};
+```
+
+## Tipps
+
+- Verwenden Sie unterschiedliche `capacitor.config`-Dateien pro Umgebung und verweisen Sie die CLI mit `npx cap run ios --configuration=prod` auf die richtige.
+- Kombinieren Sie mit Capgo Updater-Kanälen, um mandantenspezifische Werte zu liefern, ohne neue Binärdateien zu veröffentlichen.
+- Halten Sie Geheimnisse aus der Versionskontrolle heraus, indem Sie sie während Ihres CI-Builds vor `npx cap sync` ersetzen.

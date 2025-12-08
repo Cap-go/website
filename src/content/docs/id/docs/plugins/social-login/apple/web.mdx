@@ -1,0 +1,63 @@
+---
+title: Login Apple untuk browser web
+locale: id
+description: Panduan ini memberikan panduan rinci tentang pengaturan Login Apple menggunakan Capacitor untuk aplikasi web, menggunakan plugin @capgo/capacitor-social-login untuk memastikan proses integrasi yang lancar.
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+
+Mengonfigurasi login web tidaklah mudah. Ini lebih sulit daripada mengatur `Sign in with Apple` di iOS tetapi lebih sulit daripada mengatur `Sign in with Apple` di Android.
+
+## Menghasilkan layanan
+
+:::note
+Langkah ini berlebihan jika Anda telah mengonfigurasi `Sign in with Apple` di Android.
+:::
+
+Silakan ikuti panduan [di sini](/docs/plugins/social-login/apple/android/#creating-the-service-id/) untuk menghasilkan layanan.
+
+## Mengonfigurasi `Return URLs`
+
+<Steps>
+
+1. **Buka konfigurasi Service ID Anda**
+
+   Di [Apple Developer Portal](https://developer.apple.com), navigasikan ke `Identifiers` > `Services IDs` dan klik pada service ID Anda.
+
+2. **Konfigurasikan Sign in with Apple**
+
+   Klik pada `Configure` di samping `Sign in with Apple`.
+
+   ![apple_dev_configure_login](/social-login-assets/apple_dev_configure_login.webp)
+
+3. **Tambahkan Return URLs**
+
+   Klik tombol `+` untuk menambahkan return URL baru.
+
+   ![apple_dev_return_url_plus](/social-login-assets/apple_dev_return_url_plus.webp)
+
+4. **Tambahkan Return URLs**
+
+   Tambahkan domain Anda untuk aplikasi web Anda di `Domains and Subdomains`.
+   :::caution
+   Anda **TIDAK DAPAT** menambahkan `localhost` atau `127.0.0.1` sebagai domain di sini.
+   :::
+
+   Kemudian, tambahkan domain Anda dengan awalan `https://` dan path dari mana Anda akan memanggil Apple Login.
+   Misalnya, jika domain Anda adalah `https://my-app.com` dan Anda akan memanggil Apple Login dari `/login`, Anda harus menambahkan `https://my-app.com/login` sebagai return URL.
+
+   :::caution
+   Anda **HARUS** menambahkan domain dengan trailing slash dan tanpa trailing slash.
+   :::
+
+   ![apple_dev_return_url_add](/social-login-assets/apple_dev_return_url_add.webp)
+
+5. **Simpan perubahan**
+
+   1. Klik tombol `Next` untuk menyimpan perubahan.
+   2. Klik tombol `Save` untuk menyimpan perubahan.
+
+6. Anda seharusnya siap untuk menguji login untuk JavaScript. Harap dicatat bahwa Anda tidak dapat menguji dari localhost.
+</Steps>

@@ -1,0 +1,91 @@
+---
+title: Memulai
+description: Hubungkan Mux Player SDK asli di dalam aplikasi Capacitor Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal plugin**
+   <PackageManagers pkg="@capgo/capacitor-mux-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan proyek asli**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Persiapan iOS
+
+1. Buka workspace Xcode di bawah `ios/App/`.
+2. Tambahkan paket Swift `https://github.com/muxinc/mux-player-swift` ke target aplikasi Anda sehingga modul `MuxPlayerSwift` tersedia.
+3. Pastikan target deployment adalah **iOS 15+** dan rebuild.
+
+## Persiapan Android
+
+Modul Gradle dikirimkan dengan repositori dan dependensi yang benar. Jika Anda menggunakan proxy korporat khusus, izinkan permintaan ke `https://muxinc.jfrog.io/artifactory/default-maven-release-local`.
+
+## Luncurkan pemutar
+
+```typescript
+import { MuxPlayer } from '@capgo/capacitor-mux-player';
+
+await MuxPlayer.play({
+  playbackId: 'your-playback-id',
+  environmentKey: 'your-mux-data-key',
+  title: 'Launch Announcement',
+  subtitle: 'Filmed live at Capgo HQ',
+  poster: 'https://stream.example.com/poster.jpg',
+});
+```
+
+## Dengarkan event pemutar
+
+```typescript
+const readyHandle = await MuxPlayer.addListener('ready', ({ playerName }) => {
+  console.log('Mux player ready', playerName);
+});
+
+const errorHandle = await MuxPlayer.addListener('error', ({ message }) => {
+  console.error('Mux player error:', message);
+});
+
+// Bersihkan setelah menutup pemutar
+const dismissPlayer = async () => {
+  await MuxPlayer.dismiss();
+  await readyHandle.remove();
+  await errorHandle.remove();
+};
+```
+
+## Pemutaran berbasis token
+
+```typescript
+await MuxPlayer.play({
+  playbackId: 'signed-playback-id',
+  playbackToken: signedPlaybackToken,
+  drmToken: signedDrmToken, // Opsional jika Anda mengaktifkan kebijakan DRM
+  autoPlay: true,
+  startTime: 120, // mulai pada 2 menit
+});
+```
+
+## Bereaksi terhadap siklus hidup pemutar
+
+```typescript
+const { active } = await MuxPlayer.isActive();
+if (active) {
+  console.log('Pemutar saat ini terlihat');
+}
+
+// Hapus semua registrasi listener saat unmounting
+await MuxPlayer.removeAllListeners();
+```
+
+## Tips
+
+- Hasilkan token pemutaran dan DRM yang ditandatangani di backend Anda menggunakan kunci penandatanganan Mux.
+- Kirimkan `playerName` untuk memisahkan analitik saat menjalankan beberapa pemutar di aplikasi Anda.
+- Gabungkan dengan `enableSmartCache` untuk meningkatkan ketahanan offline pada platform yang didukung.

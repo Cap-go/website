@@ -1,0 +1,395 @@
+---
+title: 入门指南
+locale: zh
+description: 学习如何安装和配置 Capacitor Data Storage SQLite 插件，实现快速的键值存储，支持可选加密。
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-data-storage-sqlite" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生项目**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **配置插件**
+
+   **基本存储示例：**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   // 打开存储数据库
+   await CapacitorDataStorageSqlite.openStore({
+     database: 'myapp_storage'
+   });
+
+   // 存储数据
+   await CapacitorDataStorageSqlite.set({
+     key: 'user_preferences',
+     value: JSON.stringify({ theme: 'dark' })
+   });
+   ```
+
+   **加密存储示例：**
+   ```typescript
+   // 打开加密存储
+   await CapacitorDataStorageSqlite.openStore({
+     database: 'secure_storage',
+     encrypted: true,
+     mode: 'encryption'
+   });
+
+   // 存储敏感数据
+   await CapacitorDataStorageSqlite.set({
+     key: 'api_token',
+     value: 'secret_token_value'
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       iOS 无需额外设置。
+     </TabItem>
+     <TabItem label="Android">
+       Android 无需额外设置。
+     </TabItem>
+   </Tabs>
+
+4. **基本操作**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   // 设置值
+   await CapacitorDataStorageSqlite.set({
+     key: 'username',
+     value: 'john_doe'
+   });
+
+   // 获取值
+   const { value } = await CapacitorDataStorageSqlite.get({
+     key: 'username'
+   });
+   console.log('Username:', value); // "john_doe"
+
+   // 删除值
+   await CapacitorDataStorageSqlite.remove({
+     key: 'username'
+   });
+
+   // 清空所有数据
+   await CapacitorDataStorageSqlite.clear();
+
+   // 检查键是否存在
+   const { result } = await CapacitorDataStorageSqlite.iskey({
+     key: 'username'
+   });
+   console.log('Key exists:', result); // true 或 false
+
+   // 获取所有键
+   const { keys } = await CapacitorDataStorageSqlite.keys();
+   console.log('All keys:', keys);
+
+   // 获取所有值
+   const { values } = await CapacitorDataStorageSqlite.values();
+   console.log('All values:', values);
+   ```
+
+5. **高级用法**
+   ```typescript
+   import { CapacitorDataStorageSqlite } from '@capgo/capacitor-data-storage-sqlite';
+
+   export class StorageService {
+     private dbName = 'app_storage';
+     private isEncrypted = false;
+
+     async initialize(encrypted = false) {
+       this.isEncrypted = encrypted;
+
+       // 使用选项打开存储
+       await CapacitorDataStorageSqlite.openStore({
+         database: this.dbName,
+         encrypted: encrypted,
+         mode: encrypted ? 'encryption' : 'no-encryption',
+         version: 1
+       });
+     }
+
+     // 通用存储方法
+     async setObject<T>(key: string, data: T): Promise<void> {
+       const value = JSON.stringify(data);
+       await CapacitorDataStorageSqlite.set({ key, value });
+     }
+
+     async getObject<T>(key: string): Promise<T | null> {
+       try {
+         const { value } = await CapacitorDataStorageSqlite.get({ key });
+         return value ? JSON.parse(value) : null;
+       } catch (error) {
+         console.error('Error getting object:', error);
+         return null;
+       }
+     }
+
+     // 批量操作
+     async setMultiple(items: Record<string, any>): Promise<void> {
+       for (const [key, value] of Object.entries(items)) {
+         await CapacitorDataStorageSqlite.set({
+           key,
+           value: typeof value === 'string' ? value : JSON.stringify(value)
+         });
+       }
+     }
+
+     async getMultiple(keys: string[]): Promise<Record<string, any>> {
+       const results: Record<string, any> = {};
+
+       for (const key of keys) {
+         try {
+           const { value } = await CapacitorDataStorageSqlite.get({ key });
+           results[key] = value;
+         } catch (error) {
+           results[key] = null;
+         }
+       }
+
+       return results;
+     }
+
+     // 表管理
+     async getTables(): Promise<string[]> {
+       const { tables } = await CapacitorDataStorageSqlite.tables();
+       return tables;
+     }
+
+     async deleteTable(table: string): Promise<void> {
+       await CapacitorDataStorageSqlite.deleteTable({ table });
+     }
+
+     // 导入/导出功能
+     async exportToJson(): Promise<any[]> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       const { values } = await CapacitorDataStorageSqlite.values();
+
+       return keys.map((key, index) => ({
+         key,
+         value: values[index]
+       }));
+     }
+
+     async importFromJson(data: Array<{ key: string; value: string }>): Promise<void> {
+       // 清空现有数据
+       await CapacitorDataStorageSqlite.clear();
+
+       // 导入新数据
+       for (const item of data) {
+         await CapacitorDataStorageSqlite.set({
+           key: item.key,
+           value: item.value
+         });
+       }
+     }
+
+     // 过滤和搜索
+     async keysStartingWith(prefix: string): Promise<string[]> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       return keys.filter(key => key.startsWith(prefix));
+     }
+
+     async filterByPrefix(prefix: string): Promise<Array<{ key: string; value: string }>> {
+       const { keys } = await CapacitorDataStorageSqlite.keys();
+       const { values } = await CapacitorDataStorageSqlite.values();
+
+       const filtered: Array<{ key: string; value: string }> = [];
+
+       keys.forEach((key, index) => {
+         if (key.startsWith(prefix)) {
+           filtered.push({ key, value: values[index] });
+         }
+       });
+
+       return filtered;
+     }
+
+     // 完成后关闭数据库
+     async close(): Promise<void> {
+       await CapacitorDataStorageSqlite.closeStore({
+         database: this.dbName
+       });
+     }
+   }
+
+   // 使用示例
+   const storage = new StorageService();
+   await storage.initialize(true); // 使用加密
+
+   // 存储用户数据
+   await storage.setObject('user_profile', {
+     id: 123,
+     name: 'John Doe',
+     email: 'john@example.com'
+   });
+
+   // 检索用户数据
+   const profile = await storage.getObject<any>('user_profile');
+   console.log('User profile:', profile);
+   ```
+</Steps>
+
+## API 参考
+
+### 方法
+
+#### `openStore(options: OpenStoreOptions)`
+打开存储数据库。
+
+**参数：**
+- `options.database`: string - 数据库名称
+- `options.encrypted`: boolean - 启用加密
+- `options.mode`: string - 'encryption' 或 'no-encryption'
+- `options.version`: number - 数据库版本
+
+#### `closeStore(options: CloseStoreOptions)`
+关闭存储数据库。
+
+#### `set(options: SetOptions)`
+存储键值对。
+
+**参数：**
+- `options.key`: string - 存储键
+- `options.value`: string - 要存储的值
+
+#### `get(options: GetOptions)`
+通过键检索值。
+
+**返回：** `Promise<{ value: string }>`
+
+#### `remove(options: RemoveOptions)`
+删除键值对。
+
+#### `clear()`
+清空存储中的所有数据。
+
+#### `iskey(options: IskeyOptions)`
+检查键是否存在。
+
+**返回：** `Promise<{ result: boolean }>`
+
+#### `keys()`
+获取所有存储键。
+
+**返回：** `Promise<{ keys: string[] }>`
+
+#### `values()`
+获取所有存储值。
+
+**返回：** `Promise<{ values: string[] }>`
+
+#### `tables()`
+获取所有表名。
+
+**返回：** `Promise<{ tables: string[] }>`
+
+#### `deleteTable(options: DeleteTableOptions)`
+删除特定表。
+
+### 接口
+
+```typescript
+interface OpenStoreOptions {
+  database: string;
+  encrypted?: boolean;
+  mode?: string;
+  version?: number;
+}
+
+interface SetOptions {
+  key: string;
+  value: string;
+}
+
+interface GetOptions {
+  key: string;
+}
+
+interface RemoveOptions {
+  key: string;
+}
+```
+
+## 平台说明
+
+### iOS
+- 使用 SQLite3，可选 SQLCipher 加密
+- 数据在应用更新后保持
+- 支持 iOS 11.0+
+
+### Android
+- 使用 SQLite，可选 SQLCipher 加密
+- 数据在应用更新后保持
+- 支持 Android 5.0 (API 21)+
+
+## 常见用例
+
+1. **用户偏好**：存储应用设置和偏好
+2. **缓存管理**：缓存 API 响应和数据
+3. **离线存储**：存储数据以供离线访问
+4. **会话管理**：安全地管理用户会话
+5. **令牌存储**：安全地存储身份验证令牌
+
+## 最佳实践
+
+1. **对敏感数据使用加密**
+   ```typescript
+   // 对于令牌等敏感数据
+   await openStore({
+     database: 'secure_db',
+     encrypted: true,
+     mode: 'encryption'
+   });
+   ```
+
+2. **使用前缀组织键**
+   ```typescript
+   // 使用前缀进行组织
+   await set({ key: 'user:123:profile', value: userData });
+   await set({ key: 'cache:api:users', value: apiData });
+   ```
+
+3. **小心处理大数据**
+   ```typescript
+   // 对于大对象，考虑压缩
+   const compressed = compress(largeData);
+   await set({ key: 'large_data', value: compressed });
+   ```
+
+4. **定期清理**
+   ```typescript
+   // 删除过期的缓存条目
+   const keys = await keys();
+   for (const key of keys.keys) {
+     if (key.startsWith('cache:') && isExpired(key)) {
+       await remove({ key });
+     }
+   }
+   ```
+
+## 故障排除
+
+**数据库无法打开：**
+- 检查数据库名称是否有效（字母数字、下划线）
+- 确保数据库名称中没有特殊字符
+- 验证加密模式是否与现有数据库匹配
+
+**数据未保持：**
+- 确保在操作前调用 `openStore`
+- 检查控制台是否有任何错误
+- 验证键名是字符串
+
+**性能问题：**
+- 避免存储非常大的值
+- 尽可能使用批量操作
+- 考虑对不同数据类型使用多个数据库

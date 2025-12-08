@@ -1,0 +1,294 @@
+---
+title: "Apps"
+description: "Detailed documentation for the Apps endpoint, providing comprehensive insights into managing and interacting with Capacitor applications through Capgo's platform."
+sidebar:
+  order: 7
+---
+
+Apps are the foundational entities in Capgo. Each app represents a unique Capacitor application that you can manage and update through the platform. The Apps API allows you to create, retrieve, update, and delete app configurations.
+
+## Understanding Apps
+
+An app in Capgo represents your Capacitor application and includes:
+- **App ID**: Unique identifier for your application
+- **Name**: Human-readable name of your application
+- **Icons**: Visual identifiers for your app in the dashboard
+- **Configuration**: Settings that control how updates are delivered
+- **Ownership**: Organization and user access information
+- **Usage Statistics**: Metrics about installs and updates
+
+## Best Practices
+
+1. **Naming Convention**: Use clear, identifiable names for your apps
+2. **Security**: Protect your API keys and access credentials
+3. **Organization**: Group related apps under the same organization
+4. **Monitoring**: Regularly check app statistics and performance
+5. **Backup**: Maintain configuration backups for critical apps
+
+## Endpoints
+
+### GET
+
+`https://api.capgo.app/app/`
+
+Retrieve information about your apps.
+
+#### Query Parameters
+- `page`: Optional. Page number for pagination
+- `limit`: Optional. Number of results per page (default: 50)
+- `org_id`: Optional. Filter apps by organization ID. If not provided, returns apps from all organizations the user has access to
+
+For getting a specific app:
+- Use the app ID in the URL path: `https://api.capgo.app/app/:app_id`
+
+#### Response Type
+
+```typescript
+interface App {
+  app_id: string
+  created_at: string | null
+  default_upload_channel: string
+  icon_url: string
+  id: string | null
+  last_version: string | null
+  name: string | null
+  owner_org: string
+  retention: number
+  transfer_history: Json[] | null
+  updated_at: string | null
+  user_id: string | null
+}
+```
+
+#### Example Request
+
+```bash
+# Get all apps
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/app/"
+
+# Get apps from a specific organization
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
+
+# Get specific app
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/app/com.demo.app"
+```
+
+#### Example Response
+
+```json
+{
+  "data": [
+    {
+      "app_id": "com.demo.app",
+      "created_at": "2024-01-01T00:00:00Z",
+      "default_upload_channel": "dev",
+      "icon_url": "https://example.com/icon.png",
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "last_version": "1.0.0",
+      "name": "Demo App",
+      "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8",
+      "retention": 2592000,
+      "transfer_history": null,
+      "updated_at": "2024-01-01T00:00:00Z",
+      "user_id": "6aa76066-55ef-4238-ade6-0b32334a4097"
+    }
+  ]
+}
+```
+
+### POST
+
+`https://api.capgo.app/app/`
+
+Create a new app.
+
+#### Request Body
+
+```typescript
+interface CreateApp {
+  app_id: string
+  name: string
+  icon?: string
+  owner_org: string
+}
+```
+
+#### Example Request
+
+```bash
+# Create new app
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My New App",
+    "app_id": "com.demo.myapp", // this id is unique in Capgo This cannot be reused by any account.
+    "icon": "https://example.com/icon.png",
+    "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8"
+  }' \
+  https://api.capgo.app/app/
+```
+
+#### Success Response
+
+```json
+{
+  "app_id": "My New App",
+  "created_at": "2024-01-01T00:00:00Z",
+  "default_upload_channel": "dev",
+  "icon_url": "https://example.com/icon.png",
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "My New App",
+  "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8",
+  "retention": 2592000,
+  "updated_at": "2024-01-01T00:00:00Z"
+}
+```
+
+### PUT
+
+`https://api.capgo.app/app/:app_id`
+
+Update an existing app. The app ID is specified in the URL path.
+
+#### Request Body
+
+```typescript
+interface UpdateApp {
+  name?: string
+  icon?: string
+  retention?: number
+}
+```
+
+#### Example Request
+
+```bash
+curl -X PUT \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Updated App Name",
+    "icon": "https://example.com/updated-icon.png",
+    "retention": 45
+  }' \
+  https://api.capgo.app/app/com.demo.app
+```
+
+#### Success Response
+
+```json
+{
+  "app_id": "com.demo.app",
+  "created_at": "2024-01-01T00:00:00Z",
+  "default_upload_channel": "dev",
+  "icon_url": "https://example.com/updated-icon.png",
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Updated App Name",
+  "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8",
+  "retention": 45,
+  "updated_at": "2024-01-01T00:00:00Z"
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/app/:app_id`
+
+Delete an app and all associated resources. The app ID is specified in the URL path. Use with extreme caution as this action cannot be undone.
+
+#### Example Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  https://api.capgo.app/app/com.demo.app
+```
+
+#### Success Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## Error Handling
+
+Common error scenarios and their responses:
+
+```json
+// App not found
+{
+  "error": "App not found",
+  "status": "KO"
+}
+
+// Duplicate custom ID
+{
+  "error": "Custom ID already in use",
+  "status": "KO"
+}
+
+// Invalid parameters
+{
+  "error": "Invalid app configuration",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage app",
+  "status": "KO"
+}
+
+// Organization access denied
+{
+  "status": "You do not have access to this organization"
+}
+```
+
+## Common Use Cases
+
+1. **Create New App**
+```typescript
+// Set up a new app
+{
+  "name": "Production App",
+  "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8"
+}
+```
+
+2. **Update App Configuration**
+```typescript
+// Change app name and icon
+{
+  "name": "Rebranded App Name",
+  "icon": "https://example.com/new-icon.png"
+}
+```
+
+3. **Set Retention Policy**
+```typescript
+// Configure automatic bundle cleanup
+{
+  "retention": 30 // Keep bundles for 30 days
+}
+```
+
+4. **Get Apps by Organization**
+```bash
+# List all apps in a specific organization
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
+```
+
+## Resource Management
+
+1. **Storage Optimization**: Monitor storage usage and set appropriate retention policies
+2. **Organization**: Group related apps under a single organization
+3. **Access Control**: Manage which team members can modify app settings
+4. **Backup Strategy**: Back up critical app configurations and settings

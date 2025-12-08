@@ -1,0 +1,93 @@
+---
+title: Configurar Pruebas en Sandbox de Android
+description: Aprende cómo configurar pruebas en sandbox para compras dentro de la aplicación en Android usando Google Play Console.
+locale: es
+sidebar:
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Probar compras dentro de la aplicación requiere una configuración adecuada en Google Play Console. Esta guía te llevará a través de la configuración de pruebas en sandbox para tu app de Android.
+
+## Requisitos Previos
+
+Necesitas una cuenta activa de Google Play Console con una suscripción actual (renovada anualmente).
+
+## Proceso de Configuración
+
+<Steps>
+
+1. **Agregar Cuenta de Prueba**
+
+   Navega a tu Google Play Console, selecciona tu app y ve a **Configuración > Pruebas de licencia**.
+
+   Agrega la cuenta principal de Google asociada con el dispositivo Android que estás usando para pruebas.
+
+   ![Agregar cuenta de prueba](/native-purchases/android/sandbox-testing/add-testing-account.webp)
+
+2. **Crear Pista de Prueba**
+
+   Ve a **Pruebas > Pruebas cerradas** o **Pruebas > Pruebas internas** y crea una nueva pista.
+
+   Debes subir al menos una versión firmada de tu app a esta pista.
+
+   ![Crear pista de prueba](/native-purchases/android/sandbox-testing/create-testing-track.webp)
+
+3. **Crear Lista de Probadores**
+
+   Después de configurar la pista de prueba, crea una lista de correos electrónicos y agrega la dirección de correo electrónico de la cuenta del dispositivo de prueba.
+
+   ![Crear lista de probadores](/native-purchases/android/sandbox-testing/create-tester-list.webp)
+
+4. **Unirse al Programa de Pruebas**
+
+   Abre la URL de opt-in desde tu dispositivo de prueba y haz clic en el botón **"Convertirse en probador"** para inscribirte.
+
+   ![Unirse a pruebas](/native-purchases/android/sandbox-testing/join-testing-program.webp)
+
+5. **Subir APK Firmado**
+
+   Genera un APK firmado o usa Android App Bundle para subir tu app a la pista de prueba.
+
+   No es necesario lanzar - solo sube y espera la aprobación.
+
+   ![Subir APK](/native-purchases/android/sandbox-testing/upload-signed-apk.webp)
+
+6. **Compilar y Probar**
+
+   Ejecuta tu app en el dispositivo de prueba. Al intentar una compra, deberías ver un mensaje:
+
+   > "Esto es un pedido de prueba; no se te cobrará."
+
+   ![Compra de prueba](/native-purchases/android/sandbox-testing/test-purchase-confirmation.webp)
+
+</Steps>
+
+## Notas Importantes
+
+- Las cuentas de prueba no serán cobradas por las compras
+- Las compras de prueba usan el mismo flujo que las compras de producción
+- Puedes probar todas las funciones de suscripción incluyendo pruebas y ofertas introductorias
+- Las suscripciones de prueba tienen períodos de renovación acelerados para pruebas más rápidas
+
+## Solución de Problemas
+
+**Los productos no se muestran en modo de prueba:**
+- Asegúrate de que tu app esté subida a una pista de prueba
+- Verifica que la cuenta de prueba esté agregada a Pruebas de licencia
+- Verifica que los productos estén activos en Google Play Console
+
+**Error "Artículo no disponible":**
+- Espera 2-3 horas después de crear productos para que estén disponibles
+- Asegúrate de que el nombre de paquete de tu app coincida con el de Play Console
+- Verifica que hayas iniciado sesión con una cuenta de prueba
+
+**Las compras de prueba se muestran como cargos reales:**
+- Verifica dos veces que la cuenta esté agregada a Pruebas de licencia
+- Asegúrate de estar usando la compilación de la pista de prueba
+- Verifica que el banner de prueba aparezca durante la compra
+
+## Recursos Adicionales
+
+Para más detalles, consulta la [documentación oficial de Google Play](https://developer.android.com/google/play/billing/test) sobre pruebas de compras dentro de la aplicación.

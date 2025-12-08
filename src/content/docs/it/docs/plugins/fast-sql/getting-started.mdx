@@ -1,0 +1,360 @@
+---
+title: Iniziare con Fast SQL
+locale: it
+description: Installa e configura il plugin Fast SQL per accesso database SQLite nativo ad alte prestazioni
+---
+
+Questa guida ti aiuterà a installare e configurare il plugin **@capgo/capacitor-fast-sql** per accesso database SQLite ad alte prestazioni.
+
+## Perché Fast SQL?
+
+I plugin SQLite tradizionali per Capacitor si basano sul bridge JavaScript standard per comunicare tra il tuo codice web e il codice nativo. Anche se questo funziona bene per piccole operazioni, il bridge diventa un collo di bottiglia significativo quando devi trasferire grandi quantità di dati. Ogni pezzo di dati deve essere serializzato in JSON, inviato attraverso il bridge e quindi deserializzato dall'altra parte. Questo overhead di serializzazione rende le operazioni con migliaia di righe o dati binari grandi incredibilmente lente.
+
+**Fast SQL risolve questo problema** stabilendo un server HTTP locale sul dispositivo che comunica direttamente con il database SQLite nativo. Questo protocollo personalizzato bypassa completamente il bridge di Capacitor, eliminando l'overhead di serializzazione e abilitando:
+
+- **Prestazioni fino a 25x più veloci** per operazioni batch e grandi dataset
+- **Trasferimento efficiente di dati binari** senza codifica base64
+- **Streaming di risultati grandi** senza problemi di memoria
+- **Prestazioni ottimali per sistemi di sincronizzazione** come CRDT e trasformazioni operazionali
+
+Questo rende Fast SQL ideale per applicazioni local-first, sistemi di sincronizzazione offline e scenari in cui devi sostituire IndexedDB con una soluzione più affidabile e performante.
+
+## Installazione
+
+```bash
+npm install @capgo/capacitor-fast-sql
+npx cap sync
+```
+
+## Configurazione Piattaforma
+
+### Configurazione iOS
+
+Aggiungi quanto segue al tuo `Info.plist` per consentire il networking locale:
+
+```xml title="ios/App/App/Info.plist"
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
+```
+
+### Configurazione Android
+
+Se necessario, aggiungi al tuo `AndroidManifest.xml`:
+
+```xml title="android/app/src/main/AndroidManifest.xml"
+<application
+    android:usesCleartextTraffic="true">
+    ...
+</application>
+```
+
+### Configurazione Web
+
+Per il supporto della piattaforma web, installa sql.js:
+
+```bash
+npm install sql.js
+```
+
+## Utilizzo Base
+
+### Connessione a un Database
+
+```typescript
+import { FastSQL } from '@capgo/capacitor-fast-sql';
+
+// Connetti al database (crea il file se non esiste)
+const db = await FastSQL.connect({
+  database: 'myapp'
+});
+
+console.log('Connesso al database sulla porta:', db.port);
+```
+
+### Creazione Tabelle
+
+```typescript
+// Crea una tabella
+await db.execute(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE,
+    created_at INTEGER DEFAULT (strftime('%s', 'now'))
+  )
+`);
+```
+
+### Inserimento Dati
+
+```typescript
+// Inserisci singola riga
+const result = await db.run(
+  'INSERT INTO users (name, email) VALUES (?, ?)',
+  ['John Doe', 'john@example.com']
+);
+
+console.log('ID riga inserita:', result.insertId);
+console.log('Righe interessate:', result.rowsAffected);
+```
+
+### Query Dati
+
+```typescript
+// Query con parametri
+const users = await db.query(
+  'SELECT * FROM users WHERE name LIKE ?',
+  ['John%']
+);
+
+console.log('Utenti trovati:', users);
+
+// users è un array di oggetti:
+// [{ id: 1, name: 'John Doe', email: 'john@example.com', created_at: 1234567890 }]
+```
+
+### Aggiornamento Dati
+
+```typescript
+const result = await db.run(
+  'UPDATE users SET email = ? WHERE id = ?',
+  ['newemail@example.com', 1]
+);
+
+console.log('Righe aggiornate:', result.rowsAffected);
+```
+
+### Eliminazione Dati
+
+```typescript
+const result = await db.run(
+  'DELETE FROM users WHERE id = ?',
+  [1]
+);
+
+console.log('Righe eliminate:', result.rowsAffected);
+```
+
+## Transazioni
+
+Le transazioni garantiscono l'atomicità - tutte le operazioni hanno successo o tutte vengono annullate:
+
+```typescript
+try {
+  await db.transaction(async (tx) => {
+    // Tutte le operazioni in questo blocco fanno parte della transazione
+    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Alice', 1000]);
+    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Bob', 500]);
+
+    // Trasferisci denaro
+    await tx.run('UPDATE accounts SET balance = balance - 100 WHERE name = ?', ['Alice']);
+    await tx.run('UPDATE accounts SET balance = balance + 100 WHERE name = ?', ['Bob']);
+  });
+
+  console.log('Transazione committata con successo!');
+} catch (error) {
+  console.error('Transazione annullata:', error);
+  // Tutte le modifiche sono automaticamente annullate in caso di errore
+}
+```
+
+### Livelli di Isolamento Transazione
+
+```typescript
+import { FastSQL, IsolationLevel } from '@capgo/capacitor-fast-sql';
+
+await db.transaction(async (tx) => {
+  // Le tue operazioni
+}, IsolationLevel.Serializable);
+```
+
+Livelli di isolamento disponibili:
+- `ReadUncommitted` - Isolamento più basso, prestazioni più alte
+- `ReadCommitted` - Previeni letture sporche
+- `RepeatableRead` - Previeni letture non ripetibili
+- `Serializable` - Isolamento più alto, previene tutte le anomalie
+
+## Operazioni Batch
+
+Esegui più istruzioni in modo efficiente:
+
+```typescript
+const results = await db.executeBatch([
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['App avviata', 'INFO']
+  },
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['Utente loggato', 'INFO']
+  },
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['Errore verificato', 'ERROR']
+  },
+]);
+
+console.log('Eseguite', results.length, 'istruzioni');
+```
+
+## Dati Binari (BLOB)
+
+Memorizza e recupera dati binari usando Uint8Array:
+
+```typescript
+// Memorizza dati binari
+const imageData = new Uint8Array([0xFF, 0xD8, 0xFF, 0xE0, /* ... */]);
+
+await db.run(
+  'INSERT INTO images (name, data) VALUES (?, ?)',
+  ['photo.jpg', imageData]
+);
+
+// Recupera dati binari
+const rows = await db.query('SELECT data FROM images WHERE name = ?', ['photo.jpg']);
+const retrievedData = rows[0].data; // Uint8Array
+```
+
+## Crittografia (iOS/Android)
+
+Abilita la crittografia SQLCipher per archiviazione sicura:
+
+```typescript
+const db = await FastSQL.connect({
+  database: 'secure_db',
+  encrypted: true,
+  encryptionKey: 'your-secure-encryption-key'
+});
+```
+
+:::caution
+- La crittografia è disponibile solo su iOS e Android
+- Memorizza le chiavi di crittografia in modo sicuro (usa Keychain/Keystore)
+- Non è possibile aprire database crittografati senza la chiave corretta
+- La piattaforma web non supporta la crittografia
+:::
+
+## Modalità Sola Lettura
+
+Apri database in modalità sola lettura per prevenire modifiche:
+
+```typescript
+const db = await FastSQL.connect({
+  database: 'myapp',
+  readOnly: true
+});
+```
+
+## Chiusura Connessioni
+
+Chiudi sempre le connessioni database quando hai finito:
+
+```typescript
+await FastSQL.disconnect('myapp');
+```
+
+## Protocollo HTTP Diretto
+
+Per prestazioni massime con grandi dataset, usa direttamente il protocollo HTTP:
+
+```typescript
+const { port, token } = await FastSQL.getServerInfo({ database: 'myapp' });
+
+// Effettua richieste HTTP dirette a localhost:port
+// Includi il token nell'header Authorization
+const response = await fetch(`http://localhost:${port}/execute`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    statement: 'SELECT * FROM users',
+    params: []
+  })
+});
+
+const result = await response.json();
+```
+
+## Gestione Errori
+
+```typescript
+import { FastSQL } from '@capgo/capacitor-fast-sql';
+
+try {
+  const db = await FastSQL.connect({ database: 'myapp' });
+
+  await db.run('INSERT INTO users (name, email) VALUES (?, ?)', ['John', 'john@example.com']);
+
+} catch (error) {
+  if (error.message.includes('UNIQUE constraint failed')) {
+    console.error('Email già esistente');
+  } else if (error.message.includes('no such table')) {
+    console.error('La tabella non esiste');
+  } else {
+    console.error('Errore database:', error);
+  }
+}
+```
+
+## Pattern SQL Comuni
+
+### Verifica se Tabella Esiste
+
+```typescript
+const result = await db.query(
+  "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+  ['users']
+);
+
+const tableExists = result.length > 0;
+```
+
+### Ottieni Schema Tabella
+
+```typescript
+const schema = await db.query('PRAGMA table_info(users)');
+console.log('Colonne:', schema);
+```
+
+### Conta Righe
+
+```typescript
+const result = await db.query('SELECT COUNT(*) as count FROM users');
+const count = result[0].count;
+```
+
+### Paginazione
+
+```typescript
+const pageSize = 20;
+const page = 1;
+const offset = (page - 1) * pageSize;
+
+const users = await db.query(
+  'SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?',
+  [pageSize, offset]
+);
+```
+
+## Suggerimenti per le Prestazioni
+
+1. **Usa Transazioni** per operazioni multiple - significativamente più veloce dei commit individuali
+2. **Usa Operazioni Batch** per inserimenti massivi - più efficienti dei cicli
+3. **Crea Indici** sulle colonne frequentemente interrogate
+4. **Usa Prepared Statement** con parametri (?) - previene SQL injection e migliora le prestazioni
+5. **Usa Protocollo HTTP Direttamente** per set di risultati molto grandi
+6. **Chiudi Connessioni** quando non in uso per liberare risorse
+
+## Prossimi Passi
+
+Consulta il [tutorial completo](/plugins-tutorials/capacitor-fast-sql) per pattern avanzati inclusi:
+- Architettura servizio database
+- Sistemi di migrazione
+- Motori di sincronizzazione
+- Query e join complessi
+- Ottimizzazione prestazioni

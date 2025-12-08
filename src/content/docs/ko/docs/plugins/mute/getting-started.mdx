@@ -1,0 +1,210 @@
+---
+title: 시작하기
+description: Capacitor 앱에서 무음 모드 상태를 감지하기 위해 Mute 플러그인을 설치하고 사용하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-mute" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용법
+
+플러그인을 가져와서 메서드를 사용하여 무음 상태를 확인하세요:
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+// 기기가 무음인지 확인
+const checkMuteState = async () => {
+  const { value } = await CapacitorMute.isMuted();
+
+  if (value) {
+    console.log('Device is muted/silent');
+    // 무음 모드에 맞게 앱 동작 조정
+  } else {
+    console.log('Device sound is on');
+  }
+};
+```
+
+## API 참조
+
+### isMuted()
+
+기기가 현재 무음/무음 모드인지 확인합니다.
+
+```typescript
+const result = await CapacitorMute.isMuted();
+// 반환: { value: boolean }
+```
+
+## 완전한 예제
+
+```typescript
+import { CapacitorMute } from '@capgo/capacitor-mute';
+
+export class SoundManager {
+  private isMuted = false;
+
+  async initialize() {
+    // 초기 무음 상태 가져오기
+    await this.checkMuteState();
+  }
+
+  async checkMuteState() {
+    try {
+      const { value } = await CapacitorMute.isMuted();
+      this.isMuted = value;
+      this.updateAppBehavior();
+    } catch (error) {
+      console.error('Failed to check mute state:', error);
+    }
+  }
+
+  private updateAppBehavior() {
+    if (this.isMuted) {
+      // 기기가 무음 - 앱 동작 조정
+      this.disableSoundEffects();
+      this.showVisualNotifications();
+    } else {
+      // 기기 사운드가 켜짐
+      this.enableSoundEffects();
+      this.useAudioNotifications();
+    }
+  }
+
+  private disableSoundEffects() {
+    // 앱 내 사운드 비활성화
+    console.log('Disabling sound effects');
+  }
+
+  private enableSoundEffects() {
+    // 앱 내 사운드 활성화
+    console.log('Enabling sound effects');
+  }
+
+  private showVisualNotifications() {
+    // 오디오 대신 시각적 피드백 사용
+    console.log('Using visual notifications');
+  }
+
+  private useAudioNotifications() {
+    // 오디오 알림 사용
+    console.log('Using audio notifications');
+  }
+}
+
+// 사용법
+const soundManager = new SoundManager();
+await soundManager.initialize();
+
+// 주기적으로 폴링하여 변경 사항 확인
+setInterval(() => {
+  soundManager.checkMuteState();
+}, 5000); // 5초마다 확인
+```
+
+## 플랫폼 동작
+
+### iOS
+- 물리적 무음 스위치 상태 감지
+- 실시간 변경 이벤트 없음 (폴링 필요)
+- 무음 스위치가 있는 iPhone 및 iPad에서 작동
+
+### Android
+- 벨소리 모드가 무음 또는 진동으로 설정되어 있는지 확인
+- 변경 이벤트 없음 (폴링 필요)
+- AudioManager 벨소리 모드 기반
+
+## 모범 사례
+
+1. **변경 사항 폴링**
+   플러그인이 실시간 이벤트를 제공하지 않으므로 변경 사항을 추적해야 하는 경우 주기적으로 폴링하세요:
+   ```typescript
+   // 주기적으로 무음 상태 확인
+   setInterval(async () => {
+     const { value } = await CapacitorMute.isMuted();
+     if (value !== previousMuteState) {
+       handleMuteStateChange(value);
+     }
+   }, 5000);
+   ```
+
+2. **사용자 기본 설정 존중**
+   항상 무음 상태를 존중하고 앱의 오디오 동작을 그에 맞게 조정하세요.
+
+3. **시각적 대안 제공**
+   ```typescript
+   const { value: isMuted } = await CapacitorMute.isMuted();
+   if (isMuted) {
+     // 시각적 알림 표시
+     showToast('New message received');
+   } else {
+     // 사운드 알림 재생
+     playNotificationSound();
+   }
+   ```
+
+## 사용 사례
+
+1. **게임 사운드 관리**
+   ```typescript
+   const shouldPlaySound = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+     return !isMuted && userPreferences.soundEnabled;
+   };
+   ```
+
+2. **알림 처리**
+   ```typescript
+   const sendNotification = async (message: string) => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     if (isMuted) {
+       // 진동 또는 시각적 알림 사용
+       await Haptics.vibrate();
+       showBanner(message);
+     } else {
+       // 알림 사운드 재생
+       await playSound('notification.mp3');
+     }
+   };
+   ```
+
+3. **비디오 플레이어**
+   ```typescript
+   const initVideoPlayer = async () => {
+     const { value: isMuted } = await CapacitorMute.isMuted();
+
+     videoPlayer.setMuted(isMuted);
+     if (isMuted) {
+       showSubtitles(true);
+       showMuteIndicator();
+     }
+   };
+   ```
+
+## 문제 해결
+
+1. **Android에서 항상 false 반환**
+   - 기기 벨소리 모드가 실제로 무음으로 설정되어 있는지 확인
+   - 일부 Android 기기는 다른 동작을 보일 수 있음
+
+2. **변경 이벤트를 사용할 수 없음**
+   - 플러그인은 실시간 변경 이벤트를 제공하지 않음
+   - 변경 사항을 감지해야 하는 경우 폴링 구현
+
+3. **시뮬레이터에서 작동하지 않음**
+   - iOS 시뮬레이터에는 무음 스위치가 없음
+   - 정확한 결과를 얻으려면 실제 기기에서 테스트

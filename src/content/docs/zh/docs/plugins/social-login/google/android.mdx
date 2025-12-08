@@ -1,0 +1,222 @@
+---
+title: Android 上的 Google 登录
+locale: zh
+description: 本指南提供使用 Capacitor 为 Android 设备设置 Google 登录的全面演练，详细说明每个步骤以确保顺利的集成过程，并解决您可能遇到的潜在挑战。
+sidebar:
+    order: 2
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 简介
+
+在本指南中，您将学习如何为 Android 设置 Capgo Social Login 的 Google 登录。
+我假设您已经阅读了[通用设置指南](/docs/plugins/social-login/google/general/)。
+
+## 在 Android 上使用 Google 登录
+
+在这部分中，您将学习如何在 Android 中设置 Google 登录。
+
+:::caution
+Android SHA1 证书非常痛苦，我不希望任何人必须设置它。以下步骤假设最简单的场景，即应用未发布到 Google Play Store，仅由本地模拟器或开发硬件设备使用。
+
+如果您已将应用部署到 Google Play Store，您**必须**添加一个包含来自 Google Play 控制台的 SHA1 的额外 Android client ID 用于生产版本。您可以在 `Test and release > Setup > App Signing` 下找到 Google Play 用于签名发布包的 SHA1 哈希。
+
+最后，重要的是要提到，如果您搞砸了，错误将不会明显。调试可能非常困难。如果您在设置方面遇到困难，请查看 [Github issues](https://github.com/Cap-go/capacitor-social-login/issues)。
+
+此外，您可以查看 [Google Login setup for Android](#troubleshooting) 的故障排除部分以获取更多信息。
+:::
+
+:::note
+您可以创建多个 Android client ID。如果您有多个 SHA1 证书，则需要这样做。
+:::
+
+<Steps>
+1. 创建 Android client ID。
+   1. 点击搜索栏
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console 搜索栏" />
+
+   2. 搜索 `credentials` 并点击 `APIs and Services` 选项（屏幕截图中的数字 2）
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="显示 credentials 选项的搜索结果，APIs and Services 高亮显示" />
+
+   3. 点击 `create credentials`
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Google Console 中的创建凭据按钮" />
+
+   4. 选择 `OAuth client ID`
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="凭据创建菜单中的 OAuth client ID 选项" />
+
+   5. 选择 `Android` 应用程序类型
+      <img src="/social-login-assets/google_cons_app_type_android.png" alt="应用程序类型选择，Android 选项高亮显示" />
+   
+   6. Open Android Studio
+   
+   7. At the very bottom of the navigator, find the `Gradle Scripts`
+      <img src="/social-login-assets/studio_gradle_scripts.png" alt="Gradle Scripts section in Android Studio project navigator" />
+   
+   8. Find `build.gradle` for the module `app`
+      <img src="/social-login-assets/studio_build_gradle.png" alt="build.gradle (Module: app) file in Gradle Scripts section" />
+   
+   9. Copy the `android.defaultConfig.applicationId`. This will be your `package name` in the Google console
+      <img src="/social-login-assets/studio_build_gradle_app_id.png" alt="Build.gradle file showing applicationId configuration" />
+   
+   10. Now, open the terminal. Make sure that you are in the `android` folder of your app and run `./gradlew signInReport`
+      <img src="/social-login-assets/term_sign_report.png" alt="Terminal showing gradlew signInReport command" />
+   
+   11. Scroll to the top of this command. You should see the following. Copy the `SHA1`.
+      <img src="/social-login-assets/term_sign_report_res.png" alt="Terminal output showing SHA1 certificate fingerprint" />
+   
+   12. Now, go back to the Google Console. Enter your `applicationId` as the `Package Name` and your SHA1 in the certificate field and click `create`
+      <img src="/social-login-assets/google_cons_creat_android_client.png" alt="Android client creation form with package name and SHA1 fields filled in" />
+   
+2. Create a web client (this is required for Android)
+   
+   1. Go to the `Create credentials` page in Google Console
+   
+   2. Set application type to `Web`
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Application type selection with Web option highlighted" />
+   
+   3. Click `Create`
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web client creation form with Create button at bottom" />
+   
+   4. Copy the client ID, you'll use this as the `webClientId` in your JS/TS code
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client ID details showing Web client ID to copy" />
+
+3. Modify your `MainActivity`
+   
+   1. Please open your app in Android Studio. You can run `cap open android`
+   
+   2. Find `MainActivity.java`
+     
+      1. Open the `app` folder
+         <img src="/social-login-assets/studio_app_folder.png" alt="App folder in Android Studio project navigator" />
+     
+      2. Find `java`
+         <img src="/social-login-assets/studio_app_java.png" alt="Java folder in Android Studio project structure" />
+     
+      3. Find your `MainActivity.java` and click on it
+         <img src="/social-login-assets/studio_app_java_activity_main.png" alt="MainActivity.java file in package structure" />
+   
+   3. Modify `MainActivity.java`. Please add the following code
+     
+      ```java
+      import ee.forgr.capacitor.social.login.GoogleProvider;
+      import ee.forgr.capacitor.social.login.SocialLoginPlugin;
+      import ee.forgr.capacitor.social.login.ModifiedMainActivityForSocialLoginPlugin;
+      import com.getcapacitor.PluginHandle;
+      import com.getcapacitor.Plugin;
+      import android.content.Intent;
+      import android.util.Log;
+      import com.getcapacitor.BridgeActivity;
+      
+      // ModifiedMainActivityForSocialLoginPlugin is VERY VERY important !!!!!!    
+      public class MainActivity extends BridgeActivity implements ModifiedMainActivityForSocialLoginPlugin {
+      
+            @Override
+            public void onActivityResult(int requestCode, int resultCode, Intent data) {
+              super.onActivityResult(requestCode, resultCode, data);
+      
+              if (requestCode >= GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MIN && requestCode < GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MAX) {
+                PluginHandle pluginHandle = getBridge().getPlugin("SocialLogin");
+                if (pluginHandle == null) {
+                  Log.i("Google Activity Result", "SocialLogin login handle is null");
+                  return;
+                }
+                Plugin plugin = pluginHandle.getInstance();
+                if (!(plugin instanceof SocialLoginPlugin)) {
+                  Log.i("Google Activity Result", "SocialLogin plugin instance is not SocialLoginPlugin");
+                  return;
+                }
+                ((SocialLoginPlugin) plugin).handleGoogleLoginIntent(requestCode, data);
+              }
+            }
+      
+            // This function will never be called, leave it empty
+            @Override
+            public void IHaveModifiedTheMainActivityForTheUseWithSocialLoginPlugin() {}
+      }
+      ```
+
+   4. Save the file
+
+4. Use Google Login in your application
+   
+   1. First, import `SocialLogin`
+     
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      ```
+   
+   2. Call initialize. This should be called only once.
+     
+      ```typescript
+      // onMounted is Vue specific
+      // webClientId is the client ID you got in the web client creation step not the android client ID.
+      onMounted(() => {
+        SocialLogin.initialize({
+          google: {
+            webClientId: '673324426943-avl4v9ubdas7a0u7igf7in03pdj1dkmg.apps.googleusercontent.com',
+          }
+        })
+      })
+      ```
+     
+   3. Call `SocialLogin.login`. Create a button and run the following code on click.
+     
+      ```typescript
+      const res = await SocialLogin.login({
+        provider: 'google',
+        options: {}
+      })
+      // handle the response
+      console.log(JSON.stringify(res))
+      ```
+
+5. Configure the emulator for testing
+   
+   1. Go into `Device manager` and click the plus button
+      <img src="/social-login-assets/studio_device_man.png" alt="Device Manager in Android Studio with plus button highlighted" />
+   
+   2. Create a virtual device
+      <img src="/social-login-assets/studio_create_virt_dev.png" alt="Create Virtual Device button in Virtual Device Configuration" />
+   
+   3. Select any device with a `Play Store` icon
+      <img src="/social-login-assets/studio_new_dev_select_hardware.png" alt="Hardware selection showing devices with Play Store support" />
+     
+      As you can see, the `pixel 8` supports the `Play Store` services
+   
+   4. Click `next`
+      <img src="/social-login-assets/studio_new_dev_next_1.png" alt="Next button in device creation wizard" />
+   
+   5. Make sure that the OS image is of type `Google Play`. **IT MUST** be of type `Google Play`
+      <img src="/social-login-assets/studio_new_dev_google_play_dev_type.png" alt="System image selection showing Google Play type images" />
+   
+   6. Click next
+      <img src="/social-login-assets/studio_new_dev_next_1.png" alt="Next button in system image selection screen" />
+   
+   7. Confirm your device. You can name your emulator as you prefer
+      <img src="/social-login-assets/studio_new_dev_next_3.png" alt="Device configuration verification screen with Finish button" />
+   
+   8. Go into `Device Manager` and boot up your simulator
+      <img src="/social-login-assets/studio_dev_manager.png" alt="Device Manager with virtual device listed and play button" />
+   
+   9. After the simulator boots up, go into its settings
+      <img src="/social-login-assets/emul_and_settings_1.png" alt="Android emulator showing settings app" />
+   
+   10. Go into `Google Play`
+      <img src="/social-login-assets/emul_and_settings_2.png" alt="Settings screen with Google Play option" />
+   
+   11. Click `Update` and wait about 60 seconds
+      <img src="/social-login-assets/emul_and_settings_update_play_store.png" alt="Google Play update screen with Update button" />
+
+6. Test your application
+   
+   If you did everything correctly, you should see the Google login flow working properly:
+   <img src="/social-login-assets/google_android_final_login_show.gif" alt="Demo of Google login flow on Android showing sign-in process and successful authentication" />
+</Steps>
+
+## Troubleshooting
+
+If you have any issues, please look at the [Github issues](https://github.com/Cap-go/capacitor-social-login/issues).
+
+The issues with Google login are **ALWAYS** related to the SHA1 certificate.
+
+If you cannot get the development SHA1 certificate, try to use a custom keystore. [Here](https://github.com/Cap-go/capacitor-social-login/issues/147#issuecomment-2849742574) is a comment explaining how to add keystore to your project.

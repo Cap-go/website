@@ -1,0 +1,173 @@
+---
+title: Iniziare
+description: Scopri come installare e utilizzare il plugin Android Usage Stats Manager per accedere alle statistiche di utilizzo delle app e ai dati di utilizzo del dispositivo.
+sidebar:
+  order: 2
+locale: it
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installazione
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-android-usagestatsmanager
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Configurazione Piattaforma
+
+### Android
+
+Aggiungi i permessi richiesti al tuo `android/app/src/main/AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+```
+
+## Esempio di Utilizzo
+
+```typescript
+import { AndroidUsageStatsManager } from '@capgo/capacitor-android-usagestatsmanager';
+
+// Check if permission is granted
+const permissionResult = await AndroidUsageStatsManager.isUsageStatsPermissionGranted();
+if (!permissionResult.granted) {
+  // Open settings to grant permission
+  await AndroidUsageStatsManager.openUsageStatsSettings();
+  return;
+}
+
+// Query usage statistics for the last 7 days
+const statsOptions = {
+  intervalType: 0, // INTERVAL_DAILY
+  startTime: Date.now() - (7 * 24 * 60 * 60 * 1000), // 7 days ago
+  endTime: Date.now()
+};
+
+const usageStats = await AndroidUsageStatsManager.queryAndAggregateUsageStats(statsOptions);
+console.log('Usage statistics:', usageStats);
+
+// Get all installed packages
+const packages = await AndroidUsageStatsManager.queryAllPackages();
+console.log('Installed packages:', packages);
+```
+
+## Riferimento API
+
+### isUsageStatsPermissionGranted()
+
+```typescript
+isUsageStatsPermissionGranted() => Promise<{ granted: boolean }>
+```
+
+Verifica se il permesso PACKAGE_USAGE_STATS è concesso.
+
+**Restituisce:** `Promise<{ granted: boolean }>`
+
+### openUsageStatsSettings()
+
+```typescript
+openUsageStatsSettings() => Promise<void>
+```
+
+Apri la pagina delle impostazioni di sistema per concedere il permesso delle statistiche di utilizzo.
+
+### queryAndAggregateUsageStats(options)
+
+```typescript
+queryAndAggregateUsageStats(options: UsageStatsOptions) => Promise<UsageStatsResult>
+```
+
+Interroga le statistiche di utilizzo dettagliate per le app installate.
+
+| Param         | Type                           |
+| ------------- | ------------------------------ |
+| **`options`** | `UsageStatsOptions` |
+
+**Restituisce:** `Promise<UsageStatsResult>`
+
+### queryAllPackages()
+
+```typescript
+queryAllPackages() => Promise<PackagesResult>
+```
+
+Ottieni informazioni su tutti i pacchetti installati sul dispositivo.
+
+**Restituisce:** `Promise<PackagesResult>`
+
+## Interfacce
+
+### UsageStatsOptions
+
+| Prop               | Type                | Description                                         |
+| ------------------ | ------------------- | --------------------------------------------------- |
+| **`intervalType`** | `number` | Tipo di intervallo (0=DAILY, 1=WEEKLY, 2=MONTHLY, ecc.) |
+| **`startTime`**    | `number` | Tempo di inizio in millisecondi                          |
+| **`endTime`**      | `number` | Tempo di fine in millisecondi                            |
+
+### UsageStatsResult
+
+Contiene dati sulle statistiche di utilizzo per ogni app:
+
+- Tempo di utilizzo e frequenza dell'app
+- Prima e ultima volta utilizzata
+- Tempo totale in primo piano
+- Conteggio dei lanci
+
+### PackagesResult
+
+Contiene informazioni sui pacchetti installati:
+
+- Nome e versione del pacchetto
+- Tempo di installazione
+- Etichette e icone dell'app
+- App di sistema vs app utente
+
+## Gestione dei Permessi
+
+Il plugin richiede permessi speciali che non possono essere concessi tramite normali richieste di permesso di runtime:
+
+1. **PACKAGE_USAGE_STATS**: Consente l'accesso alle statistiche di utilizzo
+2. **QUERY_ALL_PACKAGES**: Richiesto per le informazioni sui pacchetti (Android 11+)
+
+Gli utenti devono concedere manualmente questi permessi attraverso le impostazioni di sistema. Utilizza `openUsageStatsSettings()` per indirizzare gli utenti alla pagina delle impostazioni appropriata.
+
+## Migliori Pratiche
+
+- Verifica sempre lo stato del permesso prima di interrogare le statistiche di utilizzo
+- Gestisci il rifiuto del permesso in modo elegante con messaggi user-friendly
+- Considera la privacy dell'utente quando raccogli dati di utilizzo
+- Implementa pratiche appropriate di gestione e archiviazione dei dati
+- Segui le politiche di Google Play per la raccolta di dati di utilizzo
+
+## Casi d'Uso
+
+- **App di benessere digitale**: Monitora il tempo di utilizzo dello schermo e l'uso delle app
+- **Controlli parentali**: Traccia l'utilizzo del dispositivo dei bambini
+- **App di produttività**: Analizza i modelli di lavoro e il tempo di concentrazione
+- **Analytics**: Comprendi il comportamento degli utenti e il coinvolgimento con le app

@@ -1,0 +1,76 @@
+---
+title: Memulai
+locale: id
+description: Integrasikan galeri foto native dengan pagination dan pemilihan media.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instal plugin**
+   <PackageManagers pkg="@capgo/capacitor-photo-library" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan platform**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Izin platform
+
+- **iOS**: Perbarui `Info.plist` dengan `NSPhotoLibraryUsageDescription` (dan `NSPhotoLibraryAddUsageDescription` jika Anda berencana menyimpan media).
+- **Android**: Untuk Android 13+, deklarasikan izin foto/video (`READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`). Capacitor 5 menangani ini secara otomatis, tetapi periksa kembali manifest khusus.
+
+## Minta akses
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const { state } = await PhotoLibrary.requestAuthorization();
+if (state !== 'authorized' && state !== 'limited') {
+  throw new Error('Photo access denied');
+}
+```
+
+## Muat galeri
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+
+const { assets, hasMore, nextPage } = await PhotoLibrary.getLibrary({
+  limit: 100,
+  includeAlbums: false,
+  thumbnailWidth: 256,
+  thumbnailHeight: 256,
+});
+
+const gallery = assets.map((asset) => ({
+  id: asset.id,
+  fileName: asset.fileName,
+  created: asset.creationDate,
+  thumbnailUrl: asset.thumbnail
+    ? asset.thumbnail.webPath ?? Capacitor.convertFileSrc(asset.thumbnail.path)
+    : undefined,
+  photoUrl: asset.file
+    ? asset.file.webPath ?? Capacitor.convertFileSrc(asset.file.path)
+    : undefined,
+}));
+```
+
+Untuk mengambil halaman tambahan, panggil `PhotoLibrary.getLibrary({ cursor: nextPage })`.
+
+## Biarkan pengguna memilih media
+
+```typescript
+const selection = await PhotoLibrary.pickMedia({
+  selectionLimit: 5,
+  includeVideos: true,
+});
+
+console.log('User selected', selection.assets.length, 'items');
+```
+
+## Bersihkan file yang di-cache
+
+Thumbnail dan ekspor yang dihasilkan disimpan dalam direktori cache aplikasi di bawah `photoLibrary`. Hapus mereka dengan API file pilihan Anda ketika Anda perlu mengklaim kembali penyimpanan.

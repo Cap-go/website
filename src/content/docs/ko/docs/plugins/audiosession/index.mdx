@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-plugin-audiosession"
+description: Capacitor 앱에서 iOS 오디오 세션을 관찰하고 제어하여 라우트 변경 및 중단을 처리합니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+locale: ko
+hero:
+  tagline: Capacitor를 떠나지 않고 오디오 라우트 변경을 수신하고, 중단에 반응하며, 스피커로 재생을 재라우팅합니다.
+  image:
+    file: ~public/icons/plugins/audiosession.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/audiosession/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-audiosession/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo의 AudioSession 플러그인은 iOS AVAudioSession 레이어에 대한 세밀한 제어를 제공하여 헤드폰, Bluetooth 장치 및 예상치 못한 중단을 우아하게 처리할 수 있습니다.
+
+<CardGrid stagger>
+  <Card title="라우트 인식" icon="rocket">
+    사용자가 헤드셋, AirPods, Bluetooth 스피커 등을 연결하거나 분리할 때 감지합니다.
+  </Card>
+  <Card title="스피커 재정의" icon="setting">
+    핸즈프리 오디오가 필요할 때 내장 스피커를 통해 재생을 강제합니다.
+  </Card>
+  <Card title="중단 처리" icon="moon">
+    전화 통화 또는 Siri와 같은 중단 이벤트에 반응하여 오디오를 안전하게 일시 중지하고 재개합니다.
+  </Card>
+  <Card title="타입 안전성" icon="pencil">
+    강력한 TypeScript 정의로 탄력적인 오디오 경험을 쉽게 구축할 수 있습니다.
+  </Card>
+</CardGrid>
+
+이 플러그인은 AVAudioSession 제어가 필요한 iOS를 대상으로 합니다. 다른 플랫폼에서는 호출이 효과 없이 해결되므로 하나의 공유 코드 경로를 유지할 수 있습니다.

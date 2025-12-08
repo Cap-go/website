@@ -1,0 +1,527 @@
+---
+title: "Settings"
+locale: id
+description: "Semua pengaturan yang tersedia untuk Capacitor Updater, semua konfigurasi yang dapat Anda atur di capacitor config Anda dan untuk apa mereka digunakan"
+sidebar:
+  order: 8
+---
+
+import {  Aside } from '@astrojs/starlight/components';
+
+Untuk memiliki kontrol yang lebih detail atas sistem pembaruan, Anda dapat mengkonfigurasinya dengan pengaturan ini:
+
+<Aside type="tip">
+ Setiap perubahan pada pengaturan ini di file capacitor.config, memerlukan sinkronisasi platform dan rilis ke store agar aplikasi production menerimanya.
+</Aside>
+
+
+## `appReadyTimeout`
+
+> Konfigurasikan jumlah milidetik yang harus ditunggu plugin native sebelum menganggap pembaruan 'gagal'.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `10000` (10 detik)
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "appReadyTimeout": 1000
+    }
+  }
+}
+```
+
+## `responseTimeout`
+
+> Konfigurasikan jumlah milidetik yang harus ditunggu plugin native sebelum menganggap API timeout.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `20` (20 detik)
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "responseTimeout": 10 // (10 detik)
+    }
+  }
+}
+```
+
+## `autoDeleteFailed`
+
+> Konfigurasikan apakah plugin harus secara otomatis menghapus bundle yang gagal.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoDeleteFailed": false
+    }
+  }
+}
+```
+
+## `autoDeletePrevious`
+
+> Konfigurasikan apakah plugin harus secara otomatis menghapus bundle sebelumnya setelah pembaruan berhasil.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoDeletePrevious": false
+    }
+  }
+}
+```
+
+## `autoUpdate`
+
+> Konfigurasikan apakah plugin harus menggunakan Auto Update melalui server pembaruan.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": false
+    }
+  }
+}
+```
+
+## `updateUrl`
+
+> Konfigurasikan URL / endpoint ke mana pemeriksaan pembaruan dikirim.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `https://plugin.capgo.app/updates`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "updateUrl": "https://example.com/api/auto_update"
+    }
+  }
+}
+```
+
+## `statsUrl`
+
+> Konfigurasikan URL / endpoint ke mana statistik pembaruan dikirim.
+
+Hanya tersedia untuk Android dan iOS. Atur ke "" untuk menonaktifkan pelaporan statistik.
+
+Default: `https://plugin.capgo.app/stats`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "statsUrl": "https://example.com/api/stats"
+    }
+  }
+}
+```
+
+## `publicKey`
+
+> Konfigurasikan public key untuk enkripsi live update end to end Versi 2.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "publicKey": "YOUR_PUBLIC_KEY"
+    }
+  }
+}
+```
+
+## `directUpdate`
+
+> Konfigurasikan kapan plugin harus menginstal pembaruan secara langsung. Hanya untuk mode autoUpdate.
+> Bekerja dengan baik untuk aplikasi kurang dari 10MB dan dengan upload yang dilakukan menggunakan flag --partial.
+> Zip atau aplikasi lebih dari 10MB akan relatif lambat bagi pengguna untuk diperbarui.
+
+Opsi:
+- `false`: Tidak pernah melakukan pembaruan langsung (gunakan perilaku default: unduh saat start, set saat backgrounded)
+- `'atInstall'`: Pembaruan langsung hanya ketika aplikasi diinstal, diperbarui dari store, jika tidak bertindak seperti directUpdate = false
+- `'onLaunch'`: Pembaruan langsung hanya saat aplikasi diinstal, diperbarui dari store atau setelah app kill, jika tidak bertindak seperti directUpdate = false
+- `'always'`: Pembaruan langsung dalam semua kasus sebelumnya (aplikasi diinstal, diperbarui dari store, setelah app kill atau app resume), tidak pernah bertindak seperti directUpdate = false
+- `true`: (deprecated) Sama dengan "always" untuk kompatibilitas mundur
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true,
+      "directUpdate": "atInstall"
+    }
+  }
+}
+```
+
+## `resetWhenUpdate`
+
+> Secara otomatis menghapus bundle yang diunduh sebelumnya ketika bundle aplikasi native yang lebih baru diinstal ke perangkat.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `true`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "resetWhenUpdate": false
+    }
+  }
+}
+```
+
+## `defaultChannel`
+
+> Atur channel default untuk aplikasi di config. Case sensitive.
+> Pengaturan ini akan mengesampingkan channel default yang diatur di cloud, tetapi akan tetap menghormati override yang dibuat di cloud.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "defaultChannel": "production"
+    }
+  }
+}
+```
+
+## `appId`
+
+> Konfigurasikan app id untuk aplikasi di config.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "appId": "com.example.app"
+    }
+  }
+}
+```
+
+## `version`
+
+> Konfigurasikan versi saat ini dari aplikasi. Ini akan digunakan untuk permintaan pembaruan pertama.
+> Jika tidak diatur, plugin akan mendapatkan versi dari kode native.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "version": "1.0.0"
+    }
+  }
+}
+```
+
+## `channelUrl`
+
+> Konfigurasikan URL / endpoint untuk operasi channel.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `https://plugin.capgo.app/channel_self`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "channelUrl": "https://example.com/api/channel"
+    }
+  }
+}
+```
+
+## `autoSplashscreen`
+
+> Secara otomatis menangani penyembunyian splashscreen saat menggunakan directUpdate. Ketika diaktifkan, plugin akan secara otomatis menyembunyikan splashscreen setelah pembaruan diterapkan atau ketika tidak ada pembaruan yang diperlukan.
+> Ini menghilangkan kebutuhan untuk secara manual mendengarkan event appReady dan memanggil SplashScreen.hide().
+> Hanya bekerja ketika directUpdate diatur ke "atInstall", "always", atau true.
+> Memerlukan plugin @capacitor/splash-screen untuk diinstal dan dikonfigurasi dengan launchAutoHide: false.
+> Memerlukan autoUpdate dan directUpdate untuk diaktifkan.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": true,
+      "directUpdate": "atInstall",
+      "autoSplashscreen": true
+    }
+  }
+}
+```
+
+## `periodCheckDelay`
+
+> Konfigurasikan periode delay untuk pemeriksaan pembaruan periodik. Satuannya dalam detik.
+> Tidak boleh kurang dari 600 detik (10 menit).
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `600` (10 menit)
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "periodCheckDelay": 600 // (10 menit)
+    }
+  }
+}
+```
+
+## `allowModifyUrl`
+
+> Izinkan plugin untuk memodifikasi updateUrl, statsUrl dan channelUrl secara dinamis dari sisi JavaScript.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "allowModifyUrl": true
+    }
+  }
+}
+```
+
+## `keepUrlPathAfterReload`
+
+> Konfigurasikan plugin untuk menjaga path URL setelah reload.
+
+<Aside type="caution">
+Ketika reload dipicu, 'window.history' akan dibersihkan.
+</Aside>
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "keepUrlPathAfterReload": true
+    }
+  }
+}
+```
+
+## `disableJSLogging`
+
+> Nonaktifkan logging JavaScript dari plugin. Jika true, plugin tidak akan log ke konsol JavaScript. Hanya log native yang akan dilakukan.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "disableJSLogging": true
+    }
+  }
+}
+```
+
+## `shakeMenu`
+
+> Aktifkan gesture shake untuk menampilkan menu pembaruan untuk tujuan debugging/testing.
+
+Hanya tersedia untuk Android dan iOS.
+
+Default: `false`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "shakeMenu": true
+    }
+  }
+}
+```
+
+## Pengaturan Development
+
+### `localHost`
+
+> Konfigurasikan CLI untuk menggunakan server lokal untuk testing atau server pembaruan self-hosted.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localHost": "http://localhost:5173"
+    }
+  }
+}
+```
+
+### `localWebHost`
+
+> Konfigurasikan CLI untuk menggunakan server lokal untuk testing atau server pembaruan self-hosted.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localWebHost": "http://localhost:5173"
+    }
+  }
+}
+```
+
+### `localSupa`
+
+> Konfigurasikan CLI untuk menggunakan server lokal untuk testing atau server pembaruan self-hosted.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localSupa": "http://localhost:54321"
+    }
+  }
+}
+```
+
+### `localSupaAnon`
+
+> Konfigurasikan CLI untuk menggunakan server lokal untuk testing.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localSupaAnon": "YOUR_LOCAL_ANON_KEY"
+    }
+  }
+}
+```
+
+### `localApi`
+
+> Konfigurasikan CLI untuk menggunakan api lokal untuk testing.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localApi": "http://localhost:54321/functions/v1"
+    }
+  }
+}
+```
+
+### `localApiFiles`
+
+> Konfigurasikan CLI untuk menggunakan file api lokal untuk testing.
+
+Default: `undefined`
+
+```json
+// capacitor.config.json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "localApiFiles": "http://localhost:54321/functions/v1/files"
+    }
+  }
+}
+```
+
+<Aside type="tip">
+Ada pengaturan tambahan yang tersedia di [aplikasi web Capgo](https://console.capgo.app/login) yang dapat dikonfigurasi per channel tanpa memerlukan rilis aplikasi native.
+</Aside>

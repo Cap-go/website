@@ -1,0 +1,369 @@
+---
+title: "Channel API Endpoint"
+description: "How to build channel management endpoints for self-hosted Capgo to handle device-channel assignments and channel queries"
+sidebar:
+  order: 8
+---
+
+Channels are a core mechanism for managing app updates in Capgo. In self-hosted mode, you need to implement channel endpoints to handle device assignments, channel queries, and channel management operations.
+
+## Understanding Channels
+
+Channels allow you to:
+- **Control update distribution**: Assign different app versions to different user groups
+- **A/B testing**: Test new features with specific user segments  
+- **Staged rollouts**: Gradually deploy updates to minimize risk
+- **Environment separation**: Separate development, staging, and production updates
+
+## Configuration
+
+Configure the channel endpoint URL in your `capacitor.config.json`:
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "channelUrl": "https://myserver.com/api/channel_self"
+    }
+  }
+}
+```
+
+## Channel Operations
+
+The plugin performs different channel operations that your endpoint needs to handle:
+
+### 1. Get Channel (GET Request)
+
+When the plugin calls `getChannel()`, it sends a GET request to retrieve the device's current channel assignment.
+
+#### Request Format
+```typescript
+// GET /api/channel_self
+// Headers:
+{
+  "Content-Type": "application/json"
+}
+
+// Query parameters or body:
+interface GetChannelRequest {
+  device_id: string
+  app_id: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+#### Response Format
+```json
+{
+  "status": "ok",
+  "channel": "production",
+  "allowSet": true,
+  "message": "",
+  "error": ""
+}
+```
+
+### 2. Set Channel (POST Request)
+
+When the plugin calls `setChannel()`, it sends a POST request to assign the device to a specific channel.
+
+#### Request Format
+```typescript
+// POST /api/channel_self
+interface SetChannelRequest {
+  device_id: string
+  app_id: string
+  channel: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+#### Response Format
+```json
+{
+  "status": "ok",
+  "message": "Device assigned to channel successfully",
+  "error": ""
+}
+```
+
+### 3. Unset Channel (DELETE Request)
+
+When the plugin calls `unsetChannel()`, it sends a DELETE request to remove the device's channel assignment.
+
+#### Request Format
+```typescript
+// DELETE /api/channel_self
+interface UnsetChannelRequest {
+  device_id: string
+  app_id: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+## Implementation Example
+
+Here's a JavaScript example of how to implement the channel endpoint:
+
+```typescript
+interface ChannelRequest {
+  device_id: string
+  app_id: string
+  channel?: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+
+interface ChannelResponse {
+  status: "ok" | "error"
+  channel?: string
+  allowSet?: boolean
+  message?: string
+  error?: string
+}
+
+export const handler = async (event) => {
+  const method = event.httpMethod || event.method
+  const body = JSON.parse(event.body || '{}') as ChannelRequest
+  
+  const { device_id, app_id, channel, platform } = body
+
+  try {
+    switch (method) {
+      case 'GET':
+        return await getDeviceChannel(device_id, app_id)
+        
+      case 'POST':
+        return await setDeviceChannel(device_id, app_id, channel!, platform)
+        
+      case 'DELETE':
+        return await unsetDeviceChannel(device_id, app_id)
+        
+      default:
+        return {
+          status: "error",
+          error: "Method not allowed"
+        }
+    }
+  } catch (error) {
+    return {
+      status: "error",
+      error: error.message
+    }
+  }
+}
+
+async function getDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
+  // Query your database for device channel assignment
+  const assignment = await database.getDeviceChannel(deviceId, appId)
+  
+  if (assignment) {
+    return {
+      status: "ok",
+      channel: assignment.channel,
+      allowSet: assignment.allowSelfAssign
+    }
+  }
+  
+  // Return default channel if no assignment found
+  return {
+    status: "ok",
+    channel: "production", // Your default channel
+    allowSet: true
+  }
+}
+
+async function setDeviceChannel(
+  deviceId: string, 
+  appId: string, 
+  channel: string, 
+  platform: string
+): Promise<ChannelResponse> {
+  // Validate channel exists and allows self-assignment
+  const channelConfig = await database.getChannelConfig(channel, appId)
+  
+  if (!channelConfig) {
+    return {
+      status: "error",
+      error: "Channel not found"
+    }
+  }
+  
+  if (!channelConfig.allowDeviceSelfSet) {
+    return {
+      status: "error",
+      error: "Channel does not allow self-assignment"
+    }
+  }
+  
+  // Check platform restrictions
+  if (platform === "ios" && !channelConfig.ios) {
+    return {
+      status: "error", 
+      error: "Channel not available for iOS"
+    }
+  }
+  
+  if (platform === "android" && !channelConfig.android) {
+    return {
+      status: "error",
+      error: "Channel not available for Android" 
+    }
+  }
+  
+  // Save the assignment
+  await database.setDeviceChannel(deviceId, appId, channel)
+  
+  return {
+    status: "ok",
+    message: "Device assigned to channel successfully"
+  }
+}
+
+async function unsetDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
+  // Remove device channel assignment
+  await database.removeDeviceChannel(deviceId, appId)
+  
+  return {
+    status: "ok",
+    message: "Device channel assignment removed"
+  }
+}
+```
+
+## Channel Configuration
+
+Your channel system should support these configuration options:
+
+```typescript
+interface ChannelConfig {
+  name: string
+  appId: string
+  
+  // Platform targeting
+  ios: boolean
+  android: boolean
+  
+  // Device restrictions
+  allowDeviceSelfSet: boolean  // Allow setChannel() calls
+  allowEmulator: boolean
+  allowDev: boolean           // Allow development builds
+  
+  // Update policies
+  disableAutoUpdate: "major" | "minor" | "version_number" | "none"
+  disableAutoUpdateUnderNative: boolean
+  
+  // Assignment
+  isDefault: boolean          // Default channel for new devices
+}
+```
+
+## Database Schema Example
+
+You'll need to store channel configurations and device assignments:
+
+```sql
+-- Channels table
+CREATE TABLE channels (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  app_id VARCHAR(255) NOT NULL,
+  ios BOOLEAN DEFAULT true,
+  android BOOLEAN DEFAULT true,
+  allow_device_self_set BOOLEAN DEFAULT false,
+  allow_emulator BOOLEAN DEFAULT true,
+  allow_dev BOOLEAN DEFAULT true,
+  disable_auto_update VARCHAR(50) DEFAULT 'none',
+  disable_auto_update_under_native BOOLEAN DEFAULT false,
+  is_default BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(name, app_id)
+);
+
+-- Device channel assignments table  
+CREATE TABLE device_channels (
+  id SERIAL PRIMARY KEY,
+  device_id VARCHAR(255) NOT NULL,
+  app_id VARCHAR(255) NOT NULL, 
+  channel_name VARCHAR(255) NOT NULL,
+  assigned_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(device_id, app_id)
+);
+```
+
+## Error Handling
+
+Handle common error scenarios:
+
+```typescript
+// Channel not found
+{
+  "status": "error",
+  "error": "Channel 'beta' not found"
+}
+
+// Self-assignment not allowed
+{
+  "status": "error", 
+  "error": "Channel does not allow device self-assignment"
+}
+
+// Platform not supported
+{
+  "status": "error",
+  "error": "Channel not available for this platform"
+}
+
+// Invalid request
+{
+  "status": "error",
+  "error": "Missing required field: device_id"
+}
+```
+
+## Best Practices
+
+1. **Security**: Validate all channel assignments against your business rules
+2. **Logging**: Log all channel operations for auditing and debugging
+3. **Performance**: Cache channel configurations to reduce database queries
+4. **Validation**: Verify device_id and app_id authenticity
+5. **Rate Limiting**: Implement rate limiting to prevent abuse
+
+## Integration with Updates
+
+Channel assignments work together with your [Update API Endpoint](/docs/plugin/self-hosted/handling-updates/). When a device requests an update, check its channel assignment to determine which version to serve:
+
+```typescript
+async function getUpdateForDevice(deviceId: string, appId: string) {
+  // Get device's channel assignment
+  const channelAssignment = await getDeviceChannel(deviceId, appId)
+  const channel = channelAssignment.channel || 'production'
+  
+  // Get the version assigned to this channel
+  const channelVersion = await getChannelVersion(channel, appId)
+  
+  return {
+    version: channelVersion.version,
+    url: channelVersion.url,
+    checksum: channelVersion.checksum
+  }
+}
+```
+
+This creates a complete self-hosted channel management system that gives you full control over how updates are distributed to your users.

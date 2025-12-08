@@ -1,0 +1,78 @@
+---
+title: "Guida Introduttiva"
+locale: it
+description: "Questo tutorial mostrerà come avviare Supabase da zero e avviare le edge functions, per eseguire Capgo autonomamente"
+sidebar:
+    order: 1
+---
+
+## Cosa coprirà questo tutorial?
+
+Questo tutorial mostrerà come avviare supabase da zero e avviare le edge functions
+
+## Requisiti
+ 1. [capgo](https://github.com/Cap-go/capgo) clonato
+ 3. [supabase](https://supabase.com/)
+
+## Guida Introduttiva
+
+Per iniziare esegui
+```bash
+supabase start
+```
+
+Successivamente dovresti vedere qualcosa del genere:
+```js
+Started supabase local development setup.
+
+         API URL: http://localhost:54321
+     GraphQL URL: http://localhost:54321/graphql/v1
+          DB URL: postgresql://postgres:postgres@localhost:54322/postgres
+      Studio URL: http://localhost:54323
+    Inbucket URL: http://localhost:54324
+      JWT secret: [troncato]
+        anon key: supa_key_anon
+service_role key: supa_key_admin
+```
+
+Successivamente apri `configs.json` e imposta i seguenti valori:
+```json
+{
+  "base_domain": {
+    "prod": "console.capgo.app",
+    "development": "development.console.capgo.app",
+    "local": "localhost:3332"
+  },
+  "supa_anon": {
+    "prod": "supa_key_anon",
+    "development": "supa_key_anon",
+    "local": "supa_key_anon"
+  },
+  "supa_url": {
+    "prod": "http://localhost:54321",
+    "development": "http://localhost:54321",
+    "local": "http://localhost:54321"
+  }
+}
+```
+
+dove `supa_key_anon` è il valore del passaggio precedente.
+
+:::danger
+⚠️ Non fare commit di `configs.json` nel repository remoto
+:::
+
+Successivamente, verifica di poter andare su [localhost:54323](http://localhost:54323/projects) e che la tabella `users` appaia così
+
+<figure><img src="/supabase.webp" alt="Dashboard Supabase che mostra la tabella users" /><figcaption></figcaption></figure>
+
+Se è così avvia le edge functions eseguendo:
+
+```bash
+supabase functions serve
+```
+
+e avvia il frontend eseguendo:
+```bash
+bun run serve
+```

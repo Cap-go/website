@@ -1,0 +1,82 @@
+---
+title: Integraciones de CI/CD
+locale: es
+description: "Integre las Actualizaciones en Vivo de Capgo con su plataforma de CI/CD favorita para flujos de trabajo de despliegue automatizados."
+sidebar:
+  order: 1
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Automatice su proceso de despliegue de Actualizaciones en Vivo de Capgo integrándose con plataformas populares de CI/CD. Estas integraciones le permiten desplegar automáticamente las actualizaciones de aplicaciones cada vez que realice cambios en el código, probar ramas de características y gestionar múltiples entornos de despliegue.
+
+## Integraciones disponibles
+
+Elija su plataforma de CI/CD para comenzar con despliegues automatizados:
+
+<CardGrid>
+  <LinkCard
+    title="Azure DevOps"
+    description="Integre con Azure DevOps Pipelines para flujos de trabajo automatizados de construcción, pruebas y despliegue."
+    href="/docs/live-updates/integrations/azure-devops/"
+  />
+  <LinkCard
+    title="GitLab CI/CD"
+    description="Configure pipelines de GitLab CI/CD para desplegar automáticamente las actualizaciones de su aplicación con gestión completa de entornos."
+    href="/docs/live-updates/integrations/gitlab-ci/"
+  />
+  <LinkCard
+    title="GitHub Actions"
+    description="Use GitHub Actions para automatización poderosa con despliegues multicanal y protección de entorno."
+    href="/docs/live-updates/integrations/github-actions/"
+  />
+  <LinkCard
+    title="Bitbucket Pipelines"
+    description="Despliegue con Bitbucket Pipelines usando configuraciones simples o avanzadas para múltiples entornos."
+    href="/docs/live-updates/integrations/bitbucket-pipeline/"
+  />
+</CardGrid>
+
+## Lo que obtendrá
+
+Todas las guías de integración incluyen:
+
+- **Configuración simple**: Configuración básica para comenzar rápidamente
+- **Flujos de trabajo avanzados**: Despliegues multi-entorno con staging y producción
+- **Prueba de ramas de características**: Despliegue automático de ramas de características a canales de prueba
+- **Mejores prácticas de seguridad**: Gestión segura de secretos y protección de entorno
+- **Monitoreo**: Notificaciones y registro para el estado del despliegue
+
+<Aside type="tip">
+
+**¿Nuevo en CI/CD?** Comience con la configuración simple para su plataforma, luego agregue gradualmente características más avanzadas como despliegues multicanal y pruebas automatizadas a medida que crezcan sus necesidades.
+
+</Aside>
+
+## Características comunes
+
+Cada integración admite:
+
+- **Construcciones automatizadas**: Activar despliegues en cambios de código
+- **Soporte multicanal**: Desplegar a diferentes canales (desarrollo, staging, producción)
+- **Pruebas de Pull Request/Merge Request**: Probar cambios en entornos aislados
+- **Soporte de cifrado**: Despliegues seguros con la función de cifrado de Capgo
+- **Protección de entorno**: Aprobaciones manuales y acceso restringido para producción
+- **Notificaciones**: Integraciones de Slack, correo electrónico y otras notificaciones
+
+## Requisitos previos
+
+Antes de configurar cualquier integración, asegúrese de tener:
+
+- Una cuenta de Capgo con una aplicación configurada
+- El código fuente de su aplicación en un repositorio Git
+- Un token de API de Capgo desde [console.capgo.app/apikeys](https://console.capgo.app/apikeys)
+- Node.js y npm/yarn configurados en su proyecto
+
+## Documentación relacionada
+
+- [Canales](/docs/live-updates/channels/) - Aprenda cómo gestionar diferentes entornos de despliegue
+- [Cifrado](/docs/live-updates/encryption/) - Asegure sus despliegues con cifrado de extremo a extremo
+- [Comportamiento de actualización](/docs/live-updates/update-behavior/) - Personalice cómo se aplican las actualizaciones a sus aplicaciones
+
+¡Elija su plataforma de CI/CD arriba para comenzar a automatizar sus despliegues de Capgo!

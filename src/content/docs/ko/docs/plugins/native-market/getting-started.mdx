@@ -1,0 +1,106 @@
+---
+title: 시작하기
+description: Capacitor 앱에서 사용자를 Google Play Store 또는 Apple App Store로 리디렉션하기 위해 Native Market 플러그인을 설치하고 사용하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용법
+
+플러그인을 가져와서 메서드를 사용하여 사용자를 앱 스토어로 리디렉션하세요:
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+// 앱 스토어 목록 열기
+const openAppStore = async () => {
+  await NativeMarket.openStoreListing({
+    appId: 'com.example.app' // 앱의 번들 ID
+  });
+};
+
+// 앱 리뷰 요청
+const requestReview = async () => {
+  await NativeMarket.requestReview();
+};
+
+// 앱 스토어 검색 열기
+const searchInStore = async () => {
+  await NativeMarket.search({
+    terms: 'fitness app' // 검색어
+  });
+};
+```
+
+## API 참조
+
+### openStoreListing(options)
+
+지정된 앱의 앱 스토어 목록을 엽니다.
+
+```typescript
+interface OpenStoreListingOptions {
+  appId: string; // iOS의 번들 ID, Android의 패키지 이름
+}
+```
+
+### requestReview()
+
+사용자에게 앱 내 리뷰를 요청합니다. iOS 10.3+에서는 앱을 떠나지 않고 평가 대화 상자를 표시합니다.
+
+### search(options)
+
+검색 결과와 함께 앱 스토어를 엽니다.
+
+```typescript
+interface SearchOptions {
+  terms: string; // 사용할 검색어
+}
+```
+
+## 플랫폼 참고사항
+
+### iOS
+- iOS 10.3+에서 앱 내 리뷰에 `SKStoreReviewController` 사용
+- 이전 버전에서는 App Store를 여는 것으로 대체
+
+### Android
+- Google Play Store 열기
+- 사용 가능한 경우 앱 내 리뷰 API 사용
+
+## 예제
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+import { Capacitor } from '@capacitor/core';
+
+export class AppService {
+  async rateApp() {
+    try {
+      // 먼저 앱 내 리뷰 시도
+      await NativeMarket.requestReview();
+    } catch (error) {
+      // 스토어 목록 열기로 대체
+      const platform = Capacitor.getPlatform();
+      const appId = platform === 'ios'
+        ? 'id123456789' // iOS 앱 ID
+        : 'com.example.app'; // Android 패키지 이름
+
+      await NativeMarket.openStoreListing({ appId });
+    }
+  }
+}
+```

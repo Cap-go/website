@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-sim"
+locale: zh
+description: 从 Capacitor 应用中检查 SIM 卡信息,如运营商、国家代码和卡槽索引。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 使用轻量级 Capacitor 桥接检索 SIM 运营商元数据并处理权限流程。
+  image:
+    file: ~public/icons/plugins/sim.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/sim/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-sim/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+使用 Capgo SIM 查询运营商数据、卡槽索引和权限状态,同时保持在 Capacitor 内部。
+
+<CardGrid stagger>
+  <Card title="多 SIM 卡支持" icon="rocket">
+    枚举每个已安装的 SIM 卡及其卡槽索引和订阅 ID。
+  </Card>
+  <Card title="权限助手" icon="approve-check">
+    检查和请求 Android 上所需的电话权限。
+  </Card>
+  <Card title="一致的架构" icon="star">
+    使用规范化的运营商字段,如 MCC、MNC、ISO 国家代码和电话号码。
+  </Card>
+  <Card title="iOS 感知" icon="pencil">
+    处理平台细微差别,例如 iOS 16.4+ 上的有限运营商数据。
+  </Card>
+</CardGrid>
+
+获取入门指南以集成权限和使用模式。

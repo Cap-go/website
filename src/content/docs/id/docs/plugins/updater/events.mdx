@@ -1,0 +1,292 @@
+---
+title: "Events"
+locale: id
+description: "Semua event yang dapat Anda dengarkan di plugin Capacitor Updater untuk memantau status dan progres pembaruan"
+sidebar:
+  order: 9
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Plugin Capacitor Updater menyediakan beberapa event yang dapat Anda dengarkan untuk memantau proses pembaruan dan merespons berbagai status.
+
+## Pengaturan Event Listener
+
+Untuk mendengarkan event, gunakan metode `addListener` pada objek `CapacitorUpdater`:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// Tambahkan listener
+const listener = await CapacitorUpdater.addListener('eventName', (event) => {
+  // Tangani event
+});
+
+// Hapus listener ketika tidak lagi diperlukan
+listener.remove();
+
+// Hapus semua listener
+await CapacitorUpdater.removeAllListeners();
+```
+
+## Event yang Tersedia
+
+### `download`
+
+Dipicu selama proses unduhan bundle. Menyediakan informasi progres unduhan.
+
+```typescript
+CapacitorUpdater.addListener('download', (event) => {
+  console.log(`Download progress: ${event.percent}%`);
+  console.log('Bundle info:', event.bundle);
+});
+```
+
+**Data Event:**
+- `percent`: number - Persentase progres unduhan (0-100)
+- `bundle`: BundleInfo - Informasi tentang bundle yang sedang diunduh
+
+<Aside>
+Event ini dipicu beberapa kali selama unduhan untuk melaporkan progres.
+</Aside>
+
+### `noNeedUpdate`
+
+Dipicu ketika pemeriksaan pembaruan menentukan bahwa tidak ada pembaruan yang diperlukan.
+
+```typescript
+CapacitorUpdater.addListener('noNeedUpdate', (event) => {
+  console.log('App is up to date');
+  console.log('Current bundle:', event.bundle);
+});
+```
+
+**Data Event:**
+- `bundle`: BundleInfo - Informasi tentang bundle saat ini
+
+### `updateAvailable`
+
+Dipicu ketika pembaruan baru tersedia untuk diunduh.
+
+```typescript
+CapacitorUpdater.addListener('updateAvailable', (event) => {
+  console.log('Pembaruan tersedia');
+  console.log('Bundle baru:', event.bundle);
+  // Anda dapat memicu unduhan di sini jika diperlukan
+});
+```
+
+**Data Event:**
+- `bundle`: BundleInfo - Informasi tentang bundle pembaruan yang tersedia
+
+### `downloadComplete`
+
+Dipicu ketika unduhan bundle telah selesai dengan sukses.
+
+```typescript
+CapacitorUpdater.addListener('downloadComplete', (event) => {
+  console.log('Unduhan selesai');
+  console.log('Bundle yang diunduh:', event.bundle);
+  // Anda mungkin ingin mengatur bundle ini sebagai bundle berikutnya
+});
+```
+
+**Data Event:**
+- `bundle`: BundleInfo - Informasi tentang bundle yang diunduh
+
+### `majorAvailable`
+
+Dipicu ketika pembaruan major tersedia tetapi diblokir oleh pengaturan auto-update.
+
+```typescript
+CapacitorUpdater.addListener('majorAvailable', (event) => {
+  console.log('Pembaruan major tersedia:', event.version);
+  // Beri tahu pengguna tentang pembaruan major
+});
+```
+
+**Data Event:**
+- `version`: string - Nomor versi dari pembaruan major
+
+<Aside type="tip">
+Pembaruan major biasanya memerlukan konfirmasi pengguna atau pembaruan app store. Gunakan event ini untuk memberi tahu pengguna dengan tepat.
+</Aside>
+
+### `updateFailed`
+
+Dipicu ketika pembaruan gagal dipasang saat aplikasi dimulai berikutnya.
+
+```typescript
+CapacitorUpdater.addListener('updateFailed', (event) => {
+  console.error('Pembaruan gagal dipasang');
+  console.log('Bundle yang gagal:', event.bundle);
+  // Tangani logika rollback atau coba lagi
+});
+```
+
+**Data Event:**
+- `bundle`: BundleInfo - Informasi tentang bundle yang gagal dipasang
+
+### `downloadFailed`
+
+Dipicu ketika unduhan bundle gagal.
+
+```typescript
+CapacitorUpdater.addListener('downloadFailed', (event) => {
+  console.error('Unduhan gagal untuk versi:', event.version);
+  // Tangani logika coba lagi unduhan
+});
+```
+
+**Data Event:**
+- `version`: string - Versi yang gagal diunduh
+
+### `appReloaded`
+
+Dipicu ketika aplikasi telah dimuat ulang.
+
+```typescript
+CapacitorUpdater.addListener('appReloaded', () => {
+  console.log('Aplikasi telah dimuat ulang');
+  // Lakukan inisialisasi ulang yang diperlukan
+});
+```
+
+**Data Event:** Tidak ada
+
+### `appReady`
+
+Dipicu ketika aplikasi siap digunakan setelah pembaruan.
+
+```typescript
+CapacitorUpdater.addListener('appReady', (event) => {
+  console.log('Aplikasi siap');
+  console.log('Bundle saat ini:', event.bundle);
+  console.log('Status:', event.status);
+});
+```
+
+**Data Event:**
+- `bundle`: BundleInfo - Informasi tentang bundle saat ini
+- `status`: string - Status kesiapan
+
+<Aside type="caution">
+Ingat untuk memanggil `notifyAppReady()` dalam batas waktu yang dikonfigurasi (default 10 detik) untuk mencegah rollback otomatis.
+</Aside>
+
+## Objek BundleInfo
+
+Banyak event menyertakan objek `BundleInfo` dengan properti berikut:
+
+```typescript
+interface BundleInfo {
+  id: string;           // Identifier unik bundle
+  version: string;      // Versi bundle
+  downloaded: string;   // Timestamp unduhan
+  checksum?: string;    // Checksum bundle (jika tersedia)
+  status: BundleStatus; // Status bundle
+}
+```
+
+Di mana `BundleStatus` dapat berupa:
+- `'success'` - Bundle berhasil diunduh
+- `'error'` - Unduhan/instalasi bundle gagal
+- `'pending'` - Bundle menunggu untuk diatur sebagai berikutnya
+- `'downloading'` - Bundle sedang diunduh
+
+## Contoh: Alur Pembaruan Lengkap
+
+Berikut adalah contoh menangani alur pembaruan lengkap dengan event:
+
+<Aside type="caution">
+Kelas `UpdateManager` ini tidak menyertakan panggilan `CapacitorUpdater.notifyAppReady()` yang diperlukan untuk alur auto-update.
+Silakan lihat dokumentasi [menempatkan panggilan notifyAppReady dengan benar](/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly) untuk informasi lebih lanjut.
+</Aside>
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+export class UpdateManager {
+  private listeners: any[] = [];
+
+  async setupListeners() {
+    // Dengarkan pembaruan yang tersedia
+    this.listeners.push(
+      await CapacitorUpdater.addListener('updateAvailable', async (event) => {
+        console.log('Pembaruan tersedia:', event.bundle.version);
+        // Unduh pembaruan secara otomatis
+        await CapacitorUpdater.download({
+          url: event.bundle.url,
+          version: event.bundle.version
+        });
+      })
+    );
+
+    // Pantau progres unduhan
+    this.listeners.push(
+      await CapacitorUpdater.addListener('download', (event) => {
+        console.log(`Mengunduh: ${event.percent}%`);
+        // Perbarui progress bar UI
+        this.updateProgressBar(event.percent);
+      })
+    );
+
+    // Tangani penyelesaian unduhan
+    this.listeners.push(
+      await CapacitorUpdater.addListener('downloadComplete', async (event) => {
+        console.log('Unduhan selesai:', event.bundle.version);
+        // Atur sebagai bundle berikutnya
+        await CapacitorUpdater.next({ id: event.bundle.id });
+      })
+    );
+
+    // Tangani kegagalan
+    this.listeners.push(
+      await CapacitorUpdater.addListener('downloadFailed', (event) => {
+        console.error('Unduhan gagal:', event.version);
+        this.showError('Unduhan pembaruan gagal. Silakan coba lagi nanti.');
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorUpdater.addListener('updateFailed', (event) => {
+        console.error('Instalasi pembaruan gagal:', event.bundle.version);
+        this.showError('Instalasi pembaruan gagal. Aplikasi telah di-rollback.');
+      })
+    );
+
+    // Tangani aplikasi siap
+    this.listeners.push(
+      await CapacitorUpdater.addListener('appReady', async (event) => {
+        console.log('Aplikasi siap dengan bundle:', event.bundle.version);
+      })
+    );
+  }
+
+  cleanup() {
+    // Hapus semua listener ketika tidak lagi diperlukan
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+
+  private updateProgressBar(percent: number) {
+    // Perbarui progress bar UI Anda
+  }
+
+  private showError(message: string) {
+    // Tampilkan error kepada pengguna
+  }
+}
+```
+
+## Praktik Terbaik
+
+1. **Selalu panggil `notifyAppReady()`**: Ketika menggunakan auto-update, selalu panggil metode ini setelah aplikasi Anda diinisialisasi untuk mencegah rollback.
+
+2. **Tangani kegagalan dengan baik**: Implementasikan penanganan error yang tepat untuk kegagalan unduhan dan pembaruan.
+
+3. **Berikan umpan balik pengguna**: Gunakan event progres unduhan untuk menampilkan progres pembaruan kepada pengguna.
+
+4. **Bersihkan listener**: Hapus event listener ketika tidak lagi diperlukan untuk mencegah kebocoran memori.
+
+5. **Uji skenario pembaruan**: Uji berbagai skenario pembaruan termasuk kegagalan, rollback, dan pembaruan major.

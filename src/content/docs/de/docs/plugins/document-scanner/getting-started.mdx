@@ -1,0 +1,61 @@
+---
+title: Erste Schritte
+locale: de
+description: Fügen Sie natives Dokumentenscannen in Qualität mit Kantenerkennung und anpassbaren Ausgabeformaten hinzu.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Plugin installieren**
+   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Native Plattformen synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Einen Scan auslösen
+
+```typescript
+import {
+  DocumentScanner,
+  ResponseType,
+  ScanDocumentResponseStatus,
+} from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  croppedImageQuality: 90,
+  letUserAdjustCrop: true,
+  maxNumDocuments: 10,
+  responseType: ResponseType.ImageFilePath,
+});
+
+if (result.status === ScanDocumentResponseStatus.Success) {
+  console.log('Gescannte Dateien:', result.scannedImages);
+} else {
+  console.log('Scan vom Benutzer abgebrochen');
+}
+```
+
+## Base64-Daten zurückgeben
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  responseType: ResponseType.Base64,
+});
+
+const [firstPage] = result.scannedImages ?? [];
+if (firstPage) {
+  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
+  // Vorschau anzeigen oder auf Server hochladen
+}
+```
+
+## Plattformanforderungen
+
+- **iOS**: Fügen Sie `NSCameraUsageDescription` zu `ios/App/App/Info.plist` hinzu und erklären Sie, wie Sie die Kamera verwenden.
+- **Android**: Bestätigen Sie, dass die `CAMERA`-Berechtigung deklariert ist (Capacitor fügt sie automatisch hinzu) und passen Sie `croppedImageQuality`, `letUserAdjustCrop` und `maxNumDocuments` an Ihre Benutzeroberfläche an.
+- **Speicher**: Wenn Sie `ResponseType.ImageFilePath` verwenden, verschieben oder kopieren Sie die gescannten Dateien an Ihren gewünschten Speicherort, bevor die App-Sitzung endet.

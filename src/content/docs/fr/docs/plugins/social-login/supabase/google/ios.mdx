@@ -1,0 +1,95 @@
+---
+title: Connexion Google Supabase sur iOS
+locale: fr
+description: Apprenez à configurer la connexion Google avec l'authentification Supabase sur iOS en utilisant le plugin Capacitor Social Login.
+sidebar:
+    order: 3
+---
+
+## Introduction
+
+Ce guide vous aidera à intégrer la connexion Google avec l'authentification Supabase sur iOS. Il est supposé que vous avez déjà terminé :
+ -  la [configuration iOS de connexion Google](/docs/plugins/social-login/google/ios/)
+ -  la [Configuration générale de connexion Google Supabase](/docs/plugins/social-login/supabase/google/general/).
+
+## Implémentation
+
+L'implémentation complète est disponible dans le fichier [`supabaseAuthUtils.ts` de l'application exemple](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts). Ce guide explique les concepts clés et comment l'utiliser.
+
+### Utilisation de l'assistant d'authentification
+
+La fonction `authenticateWithGoogleSupabase` gère l'ensemble du flux d'authentification :
+
+```typescript
+import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithGoogleSupabase();
+if (result.success) {
+  console.log('Connecté :', result.user);
+  // Naviguez vers votre zone authentifiée
+} else {
+  console.error('Erreur :', result.error);
+}
+```
+
+## Comment ça fonctionne
+
+Pour une explication détaillée du fonctionnement du flux d'authentification, incluant la génération de nonce, la validation JWT et la connexion Supabase, consultez la [section Comment ça fonctionne dans le guide de configuration générale](/docs/plugins/social-login/supabase/google/general/#how-it-works).
+
+## Mises en garde importantes
+
+### Problèmes de mise en cache de jetons iOS et de nonce
+
+:::warning[Problème de mise en cache de nonce iOS]
+Sur iOS, Google Sign-In peut mettre en cache les jetons, ce qui peut entraîner l'échec de la validation du nonce. La fonction `validateJWTToken` détecte cela et le gère automatiquement :
+
+1. **Détection automatique** : La fonction vérifie si le nonce dans le jeton correspond au `nonceDigest` attendu
+2. **Nouvelle tentative automatique** : Si la validation échoue, elle se déconnecte automatiquement de Google et réessaie une fois
+3. **Gestion des erreurs** : Si la nouvelle tentative échoue également, une erreur est retournée
+
+**Pourquoi cela se produit** : Le SDK Google Sign-In iOS met en cache les jetons pour des raisons de performance. Lorsqu'un jeton en cache est retourné, il peut avoir été généré avec un nonce différent (ou sans nonce), provoquant une inadéquation.
+
+**La solution** : L'implémentation gère automatiquement cela en se déconnectant et en réessayant, ce qui force Google à générer un nouveau jeton avec le nonce correct.
+:::
+
+**Solution de contournement manuelle** (si la nouvelle tentative automatique ne fonctionne pas) :
+
+```typescript
+// Se déconnecter d'abord pour effacer les jetons en cache
+await SocialLogin.logout({ provider: 'google' });
+
+// Puis s'authentifier
+const result = await authenticateWithGoogleSupabase();
+```
+
+Cela garantit qu'un nouveau jeton est obtenu avec le nonce correct.
+
+Pour la référence complète du code, consultez la [section Référence complète du code dans le guide de configuration générale](/docs/plugins/social-login/supabase/google/general/#complete-code-reference).
+
+## Notes importantes
+
+### Gestion du nonce
+
+L'implémentation du nonce suit le modèle de la [documentation React Native Google Sign In](https://react-native-google-signin.github.io/docs/security#usage-with-supabase) :
+
+- `rawNonce` va à `signInWithIdToken()` de Supabase
+- Supabase crée un hash de `rawNonce` et le compare avec le `nonceDigest` qui est inclus dans le jeton ID de Google Sign-In
+- `nonceDigest` (hash SHA-256, encodé en hexadécimal) va au paramètre `nonce` dans les API Google Sign-In
+
+### Mécanisme de nouvelle tentative automatique
+
+La fonction `authenticateWithGoogleSupabase` inclut un paramètre `retry` :
+- Premier appel (`retry=false`) : Si la validation échoue, se déconnecte automatiquement et réessaie une fois
+- Appel de nouvelle tentative (`retry=true`) : Si la validation échoue à nouveau, retourne immédiatement une erreur
+
+Cela gère automatiquement le problème de mise en cache de jetons iOS.
+
+## Dépannage
+
+Si l'authentification échoue :
+
+- **Inadéquation de nonce** : La fonction réessaie automatiquement - vérifiez les logs de la console pour plus de détails. Si cela persiste, déconnectez-vous manuellement d'abord
+- **Audience invalide** : Vérifiez que vos ID client Google correspondent à la fois dans Google Cloud Console et Supabase (ID client iOS et Web)
+- **La validation du jeton échoue** : Assurez-vous d'utiliser `mode: 'online'` dans l'appel initialize pour obtenir un idToken
+- **Configuration Info.plist** : Assurez-vous que Info.plist a les schémas d'URL et GIDClientID corrects
+- Consultez le [code de l'application exemple](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) pour référence

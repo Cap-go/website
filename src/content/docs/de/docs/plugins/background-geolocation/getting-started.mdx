@@ -1,0 +1,273 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Background Geolocation Plugin installieren und verwenden, um den Gerätestandort im Hintergrund zu verfolgen.
+sidebar:
+  order: 2
+locale: de
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+Dieses Plugin unterstützt Capacitor v7:
+
+| Capacitor  | Plugin |
+|------------|--------|
+| v7         | v7     |
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+</Tabs>
+
+## Plattform-Einrichtung
+
+### iOS
+
+Fügen Sie die folgenden Schlüssel zu `Info.plist.` hinzu:
+
+```xml
+<dict>
+  ...
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Wir müssen Ihren Standort verfolgen</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Wir müssen Ihren Standort verfolgen, während Ihr Gerät gesperrt ist.</string>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
+  ...
+</dict>
+```
+
+### Android
+
+Setzen Sie die Option `android.useLegacyBridge` in Ihrer Capacitor-Konfiguration auf `true`. Dies verhindert, dass Standortaktualisierungen nach 5 Minuten im Hintergrund anhalten. Siehe https://capacitorjs.com/docs/config und https://github.com/capacitor-community/background-geolocation/issues/89.
+
+Ab Android 13+ benötigt die App die Laufzeitberechtigung `POST_NOTIFICATIONS`, um die dauerhafte Benachrichtigung anzuzeigen, die den Benutzer darüber informiert, dass sein Standort im Hintergrund verwendet wird. Diese Laufzeitberechtigung wird nach Erteilung der Standortberechtigung angefordert.
+
+Wenn Ihre App Standortaktualisierungen in Echtzeit an einen Server weiterleitet, beachten Sie, dass Android nach 5 Minuten im Hintergrund HTTP-Anfragen drosselt, die von der WebView initiiert werden. Die Lösung besteht darin, ein natives HTTP-Plugin wie [CapacitorHttp](https://capacitorjs.com/docs/apis/http) zu verwenden. Siehe https://github.com/capacitor-community/background-geolocation/issues/14.
+
+Android-spezifische Konfiguration kann in `strings.xml` vorgenommen werden:
+```xml
+<resources>
+    <!--
+        Der Kanalname für die Hintergrundbenachrichtigung. Dieser wird sichtbar
+        sein, wenn der Benutzer die Benachrichtigung drückt und hält. Standardwert ist
+        "Background Tracking".
+    -->
+    <string name="capacitor_background_geolocation_notification_channel_name">
+        Background Tracking
+    </string>
+
+    <!--
+        Das Symbol für die Hintergrundbenachrichtigung. Beachten Sie das Fehlen eines
+        führenden "@". Standardwert ist "mipmap/ic_launcher", das App-Startsymbol.
+
+        Wenn ein Rasterbild verwendet wird, um das Symbol zu generieren (im Gegensatz zu einem Vektor
+        bild), muss es einen transparenten Hintergrund haben. Um sicherzustellen, dass Ihr Bild
+        kompatibel ist, wählen Sie "Notification Icons" als Icon Type beim
+        Erstellen des Bildelements in Android Studio.
+
+        Ein inkompatibles Bildelement führt dazu, dass die Benachrichtigung auf einige
+        verräterische Arten fehlerhaft wird, auch wenn das Symbol korrekt angezeigt wird:
+
+          - Die Benachrichtigung kann vom Benutzer geschlossen werden, obwohl sie es nicht
+            sollte.
+          - Das Tippen auf die Benachrichtigung kann die Einstellungen öffnen, nicht die App.
+          - Der Benachrichtigungstext kann falsch sein.
+    -->
+    <string name="capacitor_background_geolocation_notification_icon">
+        drawable/ic_tracking
+    </string>
+
+    <!--
+        Die Farbe der Benachrichtigung als String, der von
+        android.graphics.Color.parseColor analysiert werden kann. Optional.
+    -->
+    <string name="capacitor_background_geolocation_notification_color">
+        yellow
+    </string>
+</resources>
+```
+
+## Verwendung
+
+```javascript
+import { BackgroundGeolocation } from "@capgo/background-geolocation";
+
+BackgroundGeolocation.start(
+    {
+        backgroundMessage: "Abbrechen, um Akkuverbrauch zu verhindern.",
+        backgroundTitle: "Verfolge Sie.",
+        requestPermissions: true,
+        stale: false,
+        distanceFilter: 50
+    },
+    (location, error) => {
+        if (error) {
+            if (error.code === "NOT_AUTHORIZED") {
+                if (window.confirm(
+                    "Diese App benötigt Ihren Standort, " +
+                    "hat aber keine Berechtigung.\n\n" +
+                    "Einstellungen jetzt öffnen?"
+                )) {
+                    // Es kann nützlich sein, den Benutzer zu den Einstellungen seines Geräts
+                    // zu leiten, wenn Standortberechtigungen verweigert wurden. Das
+                    // Plugin bietet die 'openSettings' Methode, um genau
+                    // dies zu tun.
+                    BackgroundGeolocation.openSettings();
+                }
+            }
+            return console.error(error);
+        }
+        return console.log(location);
+    }
+).then(() => {
+    // Wenn Standortaktualisierungen nicht mehr benötigt werden, sollte das Plugin durch Aufruf gestoppt werden
+    BackgroundGeolocation.stop();
+});
+
+// Setzen Sie eine geplante Route, um einen Benachrichtigungston zu erhalten, wenn ein neuer Standort ankommt und nicht auf der Route liegt:
+
+BackgroundGeolocation.setPlannedRoute({soundFile: "assets/myFile.mp3", route: [[1,2], [3,4]], distance: 30 });
+
+// Wenn Sie nur den aktuellen Standort wollen, versuchen Sie etwas wie dies. Je länger
+// das Timeout, desto genauer wird die Schätzung sein. Ich würde nicht unter ca. 100ms gehen.
+function guessLocation(callback, timeout) {
+    let last_location;
+    BackgroundGeolocation.start(
+        {
+            requestPermissions: false,
+            stale: true
+        },
+        (location) => {
+            last_location = location || undefined;
+        }
+    ).then(() => {
+        setTimeout(() => {
+            callback(last_location);
+            BackgroundGeolocation.stop();
+        }, timeout);
+    });
+}
+```
+
+## API
+
+### start(...)
+
+```typescript
+start(options: StartOptions, callback: (position?: Location | undefined, error?: CallbackError | undefined) => void) => Promise<void>
+```
+
+Um mit dem Lauschen auf Änderungen am Standort des Geräts zu beginnen, rufen Sie diese Methode auf.
+Ein Promise wird zurückgegeben, um anzuzeigen, dass der Aufruf abgeschlossen wurde. Der Callback wird jedes Mal aufgerufen, wenn ein neuer Standort
+verfügbar ist, oder wenn bei Aufruf dieser Methode ein Fehler aufgetreten ist. Verlassen Sie sich nicht auf Promise-Ablehnung dafür.
+
+| Parameter      | Typ                                                                                                                      | Beschreibung                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **`options`**  | `StartOptions`                                                                     | Die Konfigurationsoptionen                                                         |
+| **`callback`** | `(position?: Location, error?: CallbackError) => void` | Die Callback-Funktion, die aufgerufen wird, wenn ein neuer Standort verfügbar ist oder ein Fehler auftritt |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+Stoppt Standortaktualisierungen.
+
+### openSettings()
+
+```typescript
+openSettings() => Promise<void>
+```
+
+Öffnet die Standorteinstellungsseite des Geräts.
+Nützlich, um Benutzer zu leiten, Standortdienste zu aktivieren oder Berechtigungen anzupassen.
+
+### setPlannedRoute(...)
+
+```typescript
+setPlannedRoute(options: SetPlannedRouteOptions) => Promise<void>
+```
+
+Spielt eine Audiodatei ab, wenn der Benutzer von der geplanten Route abweicht.
+Dies sollte verwendet werden, um einen Ton abzuspielen (auch im Hintergrund, nur für native).
+
+| Parameter     | Typ                                                                      | Beschreibung                                              |
+| ------------- | ------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **`options`** | `SetPlannedRouteOptions` | Die Optionen zum Festlegen der geplanten Route und Audiodatei |
+
+## Schnittstellen
+
+### StartOptions
+
+Die Optionen zum Konfigurieren von Standortaktualisierungen.
+
+| Eigenschaft              | Typ                 | Beschreibung                                                                                                                                                                                                                                                                                                                                                                                                          | Standard                            |
+| ------------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **`backgroundMessage`**  | `string`  | Wenn die Option "backgroundMessage" definiert ist, stellt das Plugin Standortaktualisierungen bereit, egal ob die App im Hintergrund oder Vordergrund ist. Wenn es nicht definiert ist, werden Standortaktualisierungen nur im Vordergrund garantiert. Dies gilt für beide Plattformen. Auf Android muss eine Benachrichtigung angezeigt werden, um Standortaktualisierungen im Hintergrund weiter zu erhalten. Diese Option gibt den Text dieser Benachrichtigung an. |                                    |
+| **`backgroundTitle`**    | `string`  | Der Titel der oben genannten Benachrichtigung.                                                                                                                                                                                                                                                                                                                                                                       | `"Using your location"` |
+| **`requestPermissions`** | `boolean` | Ob Berechtigungen automatisch vom Benutzer angefordert werden sollen, wenn sie nicht bereits erteilt wurden.                                                                                                                                                                                                                                                                                                                                | `true`                  |
+| **`stale`**              | `boolean` | Wenn "true", können veraltete Standorte geliefert werden, während das Gerät eine GPS-Fixierung erhält. Sie sind dafür verantwortlich, die "time" Eigenschaft zu überprüfen. Wenn "false", sind Standorte garantiert aktuell.                                                                                                                                                                                                                         | `false`                 |
+| **`distanceFilter`**     | `number`  | Die Entfernung in Metern, die sich das Gerät bewegen muss, bevor eine neue Standortaktualisierung ausgelöst wird. Dies wird verwendet, um kleine Bewegungen herauszufiltern und die Anzahl der Aktualisierungen zu reduzieren.                                                                                                                                                                                                                             | `0`                     |
+
+### Location
+
+Repräsentiert einen geografischen Standort mit verschiedenen Attributen.
+Enthält alle standardmäßigen Standorteigenschaften, die von GPS/Netzwerkanbietern zurückgegeben werden.
+
+| Eigenschaft            | Typ                        | Beschreibung                                                                                                                            |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **`latitude`**         | `number`         | Breitengrad in Grad. Bereich: -90.0 bis +90.0                                                                                             |
+| **`longitude`**        | `number`         | Längengrad in Grad. Bereich: -180.0 bis +180.0                                                                                          |
+| **`accuracy`**         | `number`         | Radius der horizontalen Unsicherheit in Metern, mit 68% Konfidenz. Niedrigere Werte zeigen einen genaueren Standort an.                         |
+| **`altitude`**         | `number \| null` | Meter über dem Meeresspiegel (oder null, wenn nicht verfügbar).                                                                                     |
+| **`altitudeAccuracy`** | `number \| null` | Vertikale Unsicherheit in Metern, mit 68% Konfidenz (oder null, wenn nicht verfügbar).                                                        |
+| **`simulated`**        | `boolean`        | `true`, wenn der Standort durch Software simuliert wurde, anstatt durch GPS. Nützlich zum Erkennen von Mock-Standorten in der Entwicklung oder beim Testen.      |
+| **`bearing`**          | `number \| null` | Abweichung vom wahren Norden in Grad (oder null, wenn nicht verfügbar). Bereich: 0.0 bis 360.0                                                   |
+| **`speed`**            | `number \| null` | Geschwindigkeit in Metern pro Sekunde (oder null, wenn nicht verfügbar).                                                                                 |
+| **`time`**             | `number \| null` | Zeit, zu der der Standort produziert wurde, in Millisekunden seit der Unix-Epoche. Verwenden Sie dies, um zu prüfen, ob ein Standort veraltet ist, wenn stale: true verwendet wird. |
+
+### CallbackError
+
+Fehlerobjekt, das möglicherweise an den Standort-Start-Callback übergeben wird.
+Erweitert den Standard-Error mit optionalen Fehlercodes.
+
+| Eigenschaft | Typ                | Beschreibung                                           |
+| ---------- | ------------------- | ----------------------------------------------------- |
+| **`code`** | `string` | Optionaler Fehlercode für spezifischere Fehlerbehandlung. |
+
+### SetPlannedRouteOptions
+
+| Eigenschaft     | Typ                            | Beschreibung                                                                                                                                                                                                                                        | Standard         |
+| --------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| **`soundFile`** | `string`             | Der Name der abzuspielenden Audiodatei. Muss ein gültiger relativer Pfad im öffentlichen Ordner der App sein, um sowohl für Web- als auch für native Plattformen zu funktionieren. Es ist nicht erforderlich, den öffentlichen Ordner im Pfad anzugeben.                                            |                 |
+| **`route`**     | `[number, number][]` | Die geplante Route als Array von Längen- und Breitengradpaaren. Jedes Paar repräsentiert einen Punkt auf der Route. Dies wird verwendet, um eine Route zu definieren, der der Benutzer folgen kann. Die Route wird verwendet, um einen Ton abzuspielen, wenn der Benutzer davon abweicht.               |                 |
+| **`distance`**  | `number`             | Die Entfernung in Metern, die der Benutzer von der geplanten Route abweichen muss, um den Ton auszulösen. Dies wird verwendet, um zu bestimmen, wie weit der Benutzer von der Route entfernt sein kann, bevor der Ton abgespielt wird. Wenn nicht angegeben, wird ein Standardwert von 50 Metern verwendet. | `50` |

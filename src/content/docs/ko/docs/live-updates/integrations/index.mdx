@@ -1,0 +1,82 @@
+---
+title: CI/CD 통합
+description: "자동화된 배포 워크플로우를 위해 Capgo Live Updates를 선호하는 CI/CD 플랫폼과 통합하세요."
+sidebar:
+  order: 1
+locale: ko
+---
+
+import { Aside, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+인기 있는 CI/CD 플랫폼과 통합하여 Capgo Live Updates 배포 프로세스를 자동화하세요. 이러한 통합을 통해 코드 변경 사항을 푸시할 때마다, 기능 브랜치를 테스트하고, 여러 배포 환경을 관리하는 앱 업데이트를 자동으로 배포할 수 있습니다.
+
+## 사용 가능한 통합
+
+자동화된 배포를 시작하려면 CI/CD 플랫폼을 선택하세요:
+
+<CardGrid>
+  <LinkCard
+    title="Azure DevOps"
+    description="자동화된 빌드, 테스트 및 배포 워크플로우를 위해 Azure DevOps Pipelines와 통합하세요."
+    href="/docs/live-updates/integrations/azure-devops/"
+  />
+  <LinkCard
+    title="GitLab CI/CD"
+    description="포괄적인 환경 관리를 통해 앱 업데이트를 자동으로 배포하는 GitLab CI/CD 파이프라인을 설정하세요."
+    href="/docs/live-updates/integrations/gitlab-ci/"
+  />
+  <LinkCard
+    title="GitHub Actions"
+    description="다중 채널 배포 및 환경 보호를 통한 강력한 자동화를 위해 GitHub Actions를 사용하세요."
+    href="/docs/live-updates/integrations/github-actions/"
+  />
+  <LinkCard
+    title="Bitbucket Pipelines"
+    description="여러 환경을 위한 간단하거나 고급 구성을 사용하여 Bitbucket Pipelines로 배포하세요."
+    href="/docs/live-updates/integrations/bitbucket-pipeline/"
+  />
+</CardGrid>
+
+## 제공되는 기능
+
+모든 통합 가이드에는 다음이 포함됩니다:
+
+- **간단한 설정**: 빠르게 시작할 수 있는 기본 구성
+- **고급 워크플로우**: 스테이징 및 프로덕션을 포함한 다중 환경 배포
+- **기능 브랜치 테스트**: 기능 브랜치를 테스트 채널에 자동 배포
+- **보안 모범 사례**: 안전한 시크릿 관리 및 환경 보호
+- **모니터링**: 배포 상태에 대한 알림 및 로깅
+
+<Aside type="tip">
+
+**CI/CD를 처음 사용하시나요?** 플랫폼의 간단한 구성으로 시작한 다음 필요에 따라 다중 채널 배포 및 자동화된 테스트와 같은 고급 기능을 점진적으로 추가하세요.
+
+</Aside>
+
+## 공통 기능
+
+각 통합은 다음을 지원합니다:
+
+- **자동화된 빌드**: 코드 변경 시 배포 트리거
+- **다중 채널 지원**: 다른 채널에 배포(개발, 스테이징, 프로덕션)
+- **풀 리퀘스트/병합 요청 테스트**: 격리된 환경에서 변경 사항 테스트
+- **암호화 지원**: Capgo의 암호화 기능으로 안전한 배포
+- **환경 보호**: 프로덕션에 대한 수동 승인 및 제한된 액세스
+- **알림**: Slack, 이메일 및 기타 알림 통합
+
+## 사전 요구 사항
+
+통합을 설정하기 전에 다음을 준비해야 합니다:
+
+- 구성된 앱이 있는 Capgo 계정
+- Git 저장소에 있는 앱의 소스 코드
+- [console.capgo.app/apikeys](https://console.capgo.app/apikeys)에서 받은 Capgo API 토큰
+- 프로젝트에 구성된 Node.js 및 npm/yarn
+
+## 관련 문서
+
+- [Channels](/docs/live-updates/channels/) - 다양한 배포 환경을 관리하는 방법 알아보기
+- [Encryption](/docs/live-updates/encryption/) - 엔드투엔드 암호화로 배포 보호
+- [Update Behavior](/docs/live-updates/update-behavior/) - 앱에 업데이트가 적용되는 방식 사용자 정의
+
+위에서 CI/CD 플랫폼을 선택하여 Capgo 배포 자동화를 시작하세요!

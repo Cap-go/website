@@ -1,0 +1,52 @@
+---
+title: V7 마이그레이션 가이드
+locale: ko
+description: @capgo/capacitor-social-login의 이전 버전에서 V7로 마이그레이션하기 위한 가이드
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 소개
+
+:::caution
+이 가이드는 여전히 `0.x.x` 버전으로 이 플러그인을 사용하는 사람들을 위한 플러그인의 `V1`/`V7` 버전용입니다.
+:::
+
+이 가이드는 다음을 다룹니다:
+
+- `main` 버전에서 V1 버전으로 마이그레이션
+- `development` 버전에서 V1 버전으로 마이그레이션
+
+## V1의 중요한 변경사항
+
+V1은 development 버전을 main으로 포트한 것입니다. 그러나 `main` V0 버전에서는 사용할 수 없는 많은 중요한 변경사항이 포함되어 있습니다. 이러한 변경사항에는 다음이 포함됩니다:
+
+- Google 로그인을 위한 액세스 범위
+- Google 로그인을 위한 오프라인 모드
+- 다양한 구현의 통합
+  - 모든 Google Provider 구현이 플랫폼 간에 동일하게 작동하도록 광범위한 테스트가 수행되었습니다
+
+## V0 main 버전에서 마이그레이션
+
+- Android용 `MainActivity.java`의 변경사항
+  - [Google Setup Guide](/docs/plugins/social-login/google/android/)를 따르세요. 특히 `MainActivity.java`를 검색하세요
+
+- Google Console에서 리디렉션 URL을 추가하세요. 리디렉션 URL을 추가하지 않으면 Google 로그인이 작동하지 않습니다.
+  - 다시 [Google Setup Guide](/docs/plugins/social-login/google/android/)를 따르세요. 특히 `Authorized redirect URIs`를 검색하세요
+
+- 구성에서 `grantOfflineAccess`를 사용하지 않는지 확인하세요. 이 기능은 V1에서 지원되지 않습니다.
+
+- 모든 플랫폼에서 인증이 작동하는지 확인하세요.
+
+## V0 development 버전에서 마이그레이션
+
+- Android용 `MainActivity.java`의 변경사항
+  - [Google Setup Guide](/docs/plugins/social-login/google/android/)를 따르세요. 특히 `MainActivity.java`를 검색하세요. V1에서는 main activity에서 `ModifiedMainActivityForSocialLoginPlugin`을 **반드시** 구현해야 합니다. 이 변경사항은 플러그인이 작동하는 데 매우 중요합니다
+
+- Google Console에서 리디렉션 URL을 추가하세요. 리디렉션 URL을 추가하지 않으면 Google 로그인이 작동하지 않습니다.
+  - 다시 [Google Setup Guide](/docs/plugins/social-login/google/android/)를 따르세요. 특히 `Authorized redirect URIs`를 검색하세요
+
+- 유형 및 변수 이름이 올바른지 확인하세요. development와 V1 간에 유형과 변수가 일치하지 않을 수 있습니다.
+
+- 모든 플랫폼에서 인증이 작동하는지 확인하세요.

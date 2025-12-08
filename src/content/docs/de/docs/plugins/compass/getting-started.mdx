@@ -1,0 +1,219 @@
+---
+title: Erste Schritte
+description: Erfahren Sie, wie Sie das Compass Plugin installieren und verwenden, um die Gerätekompassrichtung in Ihrer Capacitor App auszulesen.
+locale: de
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Paket installieren**
+   <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Mit nativen Projekten synchronisieren**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## iOS-Einrichtung
+
+Unter iOS erfordert der Kompasszugriff Standortberechtigung. Fügen Sie Folgendes zu Ihrer `Info.plist` hinzu:
+
+```xml
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Wir benötigen Standortberechtigung, um auf den Kompass zuzugreifen</string>
+```
+
+## Android-Einrichtung
+
+Keine zusätzliche Einrichtung erforderlich. Das Plugin verwendet die Magnetometer- und Beschleunigungssensoren des Geräts.
+
+## Verwendung
+
+Importieren Sie das Plugin und verwenden Sie seine Methoden zum Auslesen der Kompassrichtung:
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+// Aktuelle Richtung einmalig abrufen
+const getCurrentHeading = async () => {
+  const { value } = await CapgoCompass.getCurrentHeading();
+  console.log('Aktuelle Richtung:', value, 'Grad');
+};
+
+// Kontinuierliche Richtungsaktualisierungen starten
+const startCompass = async () => {
+  // Lauschen auf Updates starten
+  await CapgoCompass.startListening();
+
+  // Listener für Richtungsänderungen hinzufügen
+  const handle = await CapgoCompass.addListener('headingChange', (event) => {
+    console.log('Richtung:', event.value, 'Grad');
+  });
+
+  // Später zum Stoppen:
+  // await CapgoCompass.stopListening();
+  // await handle.remove();
+};
+
+// Berechtigungen prüfen
+const checkPermission = async () => {
+  const status = await CapgoCompass.checkPermissions();
+  console.log('Berechtigungsstatus:', status.compass);
+};
+
+// Berechtigungen anfordern
+const requestPermission = async () => {
+  const status = await CapgoCompass.requestPermissions();
+  if (status.compass === 'granted') {
+    console.log('Kompasszugriff gewährt');
+  }
+};
+```
+
+## API-Referenz
+
+### getCurrentHeading()
+
+Ruft die aktuelle Kompassrichtung in Grad ab.
+
+```typescript
+const result = await CapgoCompass.getCurrentHeading();
+// Gibt zurück: { value: number } - Richtung in Grad (0-360)
+```
+
+### startListening()
+
+Startet das Lauschen auf Kompassrichtungsänderungen. Muss aufgerufen werden, bevor Richtungsereignisse ausgegeben werden.
+
+```typescript
+await CapgoCompass.startListening();
+```
+
+### stopListening()
+
+Stoppt das Lauschen auf Kompassrichtungsänderungen.
+
+```typescript
+await CapgoCompass.stopListening();
+```
+
+### addListener('headingChange', callback)
+
+Fügt einen Listener für Richtungsänderungsereignisse hinzu.
+
+```typescript
+const handle = await CapgoCompass.addListener('headingChange', (event) => {
+  console.log('Richtung:', event.value);
+});
+
+// Listener entfernen wenn fertig
+await handle.remove();
+```
+
+### removeAllListeners()
+
+Entfernt alle registrierten Listener.
+
+```typescript
+await CapgoCompass.removeAllListeners();
+```
+
+### checkPermissions()
+
+Prüft den aktuellen Berechtigungsstatus.
+
+```typescript
+const status = await CapgoCompass.checkPermissions();
+// Gibt zurück: { compass: 'prompt' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+Fordert Berechtigung zum Zugriff auf Kompassdaten an.
+
+```typescript
+const status = await CapgoCompass.requestPermissions();
+```
+
+### getPluginVersion()
+
+Ruft die native Plugin-Version ab.
+
+```typescript
+const { version } = await CapgoCompass.getPluginVersion();
+```
+
+## Vollständiges Beispiel
+
+```typescript
+import { CapgoCompass } from '@capgo/capacitor-compass';
+
+export class CompassService {
+  private listenerHandle: any = null;
+
+  async init() {
+    // Berechtigungen prüfen und anfordern
+    const status = await CapgoCompass.checkPermissions();
+    if (status.compass !== 'granted') {
+      const result = await CapgoCompass.requestPermissions();
+      if (result.compass !== 'granted') {
+        throw new Error('Kompassberechtigung verweigert');
+      }
+    }
+  }
+
+  async startTracking(onHeadingChange: (heading: number) => void) {
+    // Lauschen auf Updates starten
+    await CapgoCompass.startListening();
+
+    // Event-Listener hinzufügen
+    this.listenerHandle = await CapgoCompass.addListener(
+      'headingChange',
+      (event) => {
+        onHeadingChange(event.value);
+      }
+    );
+  }
+
+  async stopTracking() {
+    if (this.listenerHandle) {
+      await this.listenerHandle.remove();
+      this.listenerHandle = null;
+    }
+    await CapgoCompass.stopListening();
+  }
+
+  async getHeading(): Promise<number> {
+    const { value } = await CapgoCompass.getCurrentHeading();
+    return value;
+  }
+
+  getCardinalDirection(heading: number): string {
+    const directions = ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(heading / 45) % 8;
+    return directions[index];
+  }
+}
+```
+
+## Plattform-Hinweise
+
+### iOS
+- Erfordert iOS 10.0+
+- Verwendet Core Location für Richtungsdaten
+- Erfordert Standortberechtigung (NSLocationWhenInUseUsageDescription)
+- Richtungsaktualisierungen sind kontinuierlich, wenn Lauschen aktiv ist
+
+### Android
+- Erfordert Android 6.0 (API 23)+
+- Verwendet Beschleunigungs- und Magnetometersensoren
+- Keine speziellen Berechtigungen für Kompasssensoren erforderlich
+- Richtung wird aus Sensorfusion berechnet
+
+### Web
+- Nicht auf Web-Plattform unterstützt
+- Methoden werfen Fehler, wenn aufgerufen

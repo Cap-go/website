@@ -1,0 +1,336 @@
+---
+title: 시작하기
+description: Android Kiosk 플러그인을 설치하고 사용하여 Capacitor 앱에서 Android 기기를 키오스크 모드로 잠그는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 플랫폼 지원
+
+이 플러그인은 **Android 전용**입니다. iOS 키오스크 모드 기능의 경우 기기의 내장 [Guided Access](https://support.apple.com/en-us/HT202612) 기능을 사용하세요.
+
+## 기능
+
+- **키오스크 모드**: 시스템 UI 숨기기 및 몰입형 전체 화면 모드 진입
+- **런처 통합**: 앱을 기기 런처/홈 앱으로 설정
+- **하드웨어 키 제어**: 특정 하드웨어 버튼 차단 또는 허용
+- **상태 감지**: 키오스크 모드가 활성 상태인지 또는 앱이 런처로 설정되어 있는지 확인
+- **Android 6.0+**: Android API 23부터 Android 15 (API 35)까지 지원
+
+## 기본 사용법
+
+### 키오스크 모드 진입 및 종료
+
+```typescript
+import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
+
+// Enter kiosk mode
+await CapacitorAndroidKiosk.enterKioskMode();
+
+// Exit kiosk mode
+await CapacitorAndroidKiosk.exitKioskMode();
+
+// Check if in kiosk mode
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+console.log('Kiosk mode active:', isInKioskMode);
+```
+
+### 런처 기능
+
+전체 키오스크 모드 기능을 사용하려면 앱을 기기 런처로 설정해야 합니다:
+
+```typescript
+// Open home screen settings for user to select your app as launcher
+await CapacitorAndroidKiosk.setAsLauncher();
+
+// Check if app is set as launcher
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+console.log('App is launcher:', isLauncher);
+```
+
+### 하드웨어 키 제어
+
+키오스크 모드에서 기능할 수 있는 하드웨어 버튼을 제어합니다:
+
+```typescript
+// Allow only volume keys
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false
+});
+
+// Block all keys (default)
+await CapacitorAndroidKiosk.setAllowedKeys({});
+```
+
+## 완전한 예제
+
+```typescript
+async function setupKioskMode() {
+  try {
+    // Check if already set as launcher
+    const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+
+    if (!isLauncher) {
+      // Prompt user to set as launcher
+      await CapacitorAndroidKiosk.setAsLauncher();
+      alert('Please select this app as your Home app');
+      return;
+    }
+
+    // Configure allowed keys
+    await CapacitorAndroidKiosk.setAllowedKeys({
+      volumeUp: true,
+      volumeDown: true,
+      back: false,
+      home: false,
+      recent: false,
+      power: false
+    });
+
+    // Enter kiosk mode
+    await CapacitorAndroidKiosk.enterKioskMode();
+    console.log('Kiosk mode activated');
+
+  } catch (error) {
+    console.error('Failed to setup kiosk mode:', error);
+  }
+}
+```
+
+## API 참조
+
+### isInKioskMode()
+
+앱이 현재 키오스크 모드에서 실행 중인지 확인합니다.
+
+```typescript
+const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+```
+
+**반환값:**
+- `isInKioskMode` (boolean): 키오스크 모드가 현재 활성화되어 있는지 여부
+
+---
+
+### isSetAsLauncher()
+
+앱이 기기 런처(홈 앱)로 설정되어 있는지 확인합니다.
+
+```typescript
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+```
+
+**반환값:**
+- `isLauncher` (boolean): 앱이 기기 런처로 설정되어 있는지 여부
+
+---
+
+### enterKioskMode()
+
+키오스크 모드로 진입하여 시스템 UI를 숨기고 하드웨어 버튼을 차단합니다. 효과적으로 작동하려면 앱이 기기 런처로 설정되어 있어야 합니다.
+
+```typescript
+await CapacitorAndroidKiosk.enterKioskMode();
+```
+
+---
+
+### exitKioskMode()
+
+키오스크 모드를 종료하여 일반 시스템 UI 및 하드웨어 버튼 기능을 복원합니다.
+
+```typescript
+await CapacitorAndroidKiosk.exitKioskMode();
+```
+
+---
+
+### setAsLauncher()
+
+기기의 홈 화면 설정을 열어 사용자가 이 앱을 런처로 설정할 수 있도록 합니다. 전체 키오스크 모드 기능을 위해 필요합니다.
+
+```typescript
+await CapacitorAndroidKiosk.setAsLauncher();
+```
+
+---
+
+### setAllowedKeys(options)
+
+키오스크 모드에서 기능할 수 있는 하드웨어 키를 설정합니다. 기본적으로 키오스크 모드에서는 모든 하드웨어 키가 차단됩니다.
+
+```typescript
+await CapacitorAndroidKiosk.setAllowedKeys({
+  volumeUp: true,
+  volumeDown: true,
+  back: false,
+  home: false,
+  recent: false,
+  power: false,
+  camera: false,
+  menu: false
+});
+```
+
+**매개변수:**
+- `volumeUp` (boolean, 선택): 볼륨 업 버튼 허용 (기본값: false)
+- `volumeDown` (boolean, 선택): 볼륨 다운 버튼 허용 (기본값: false)
+- `back` (boolean, 선택): 뒤로 버튼 허용 (기본값: false)
+- `home` (boolean, 선택): 홈 버튼 허용 (기본값: false)
+- `recent` (boolean, 선택): 최근 앱 버튼 허용 (기본값: false)
+- `power` (boolean, 선택): 전원 버튼 허용 (기본값: false)
+- `camera` (boolean, 선택): 카메라 버튼 허용 (있는 경우) (기본값: false)
+- `menu` (boolean, 선택): 메뉴 버튼 허용 (있는 경우) (기본값: false)
+
+---
+
+### getPluginVersion()
+
+네이티브 Capacitor 플러그인 버전을 가져옵니다.
+
+```typescript
+const { version } = await CapacitorAndroidKiosk.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+**반환값:**
+- `version` (string): 플러그인 버전 번호
+
+## Android 구성
+
+### 1. MainActivity 설정
+
+전체 하드웨어 키 차단을 활성화하려면 `MainActivity.java`에서 `dispatchKeyEvent`를 재정의해야 합니다:
+
+```java
+import android.view.KeyEvent;
+import ee.forgr.plugin.android_kiosk.CapacitorAndroidKioskPlugin;
+
+public class MainActivity extends BridgeActivity {
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // Get the kiosk plugin
+        CapacitorAndroidKioskPlugin kioskPlugin = (CapacitorAndroidKioskPlugin)
+            this.getBridge().getPlugin("CapacitorAndroidKiosk").getInstance();
+
+        if (kioskPlugin != null && kioskPlugin.shouldBlockKey(event.getKeyCode())) {
+            return true; // Block the key
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Don't call super.onBackPressed() to disable back button
+        // Or call the plugin's handleOnBackPressed
+    }
+}
+```
+
+### 2. AndroidManifest.xml
+
+앱을 런처로 선택할 수 있도록 런처 인텐트 필터를 추가합니다:
+
+```xml
+<activity
+    android:name=".MainActivity"
+    ...>
+
+    <!-- Existing intent filter -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <!-- Add this to make app selectable as launcher -->
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.HOME" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+```
+
+## 중요 참고사항
+
+1. **런처 요구 사항**: 전체 키오스크 모드 기능(홈 버튼 차단, 작업 전환 방지)을 위해서는 앱이 기기 런처로 설정되어 있어야 합니다.
+
+2. **테스트**: 테스트할 때 프로그래밍 방식으로 키오스크 모드를 종료하거나 다른 앱을 런처로 설정할 수 있습니다.
+
+3. **Android 버전**: 플러그인은 Android 11+에는 최신 Android API를 사용하고 Android 6.0+와의 호환성을 위해 이전 방법으로 대체합니다.
+
+4. **보안**: 이 플러그인은 합법적인 키오스크 애플리케이션용으로 설계되었습니다. 사용자에게 키오스크 모드를 종료할 방법을 제공해야 합니다.
+
+5. **배터리**: 키오스크 모드는 화면을 켜진 상태로 유지합니다. 자체 화면 시간 초과 또는 밝기 관리를 구현하는 것을 고려하세요.
+
+## iOS 대안
+
+iOS 기기의 경우 내장 [Guided Access](https://support.apple.com/en-us/HT202612) 기능을 사용하세요:
+
+1. 설정 > 접근성 > Guided Access로 이동
+2. Guided Access 켜기
+3. 암호 설정
+4. 앱 열기
+5. 측면 버튼을 세 번 클릭
+6. 설정 조정 및 Guided Access 시작
+
+## 모범 사례
+
+1. **런처 상태 먼저 확인**
+   ```typescript
+   const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+   if (!isLauncher) {
+     // Prompt user to set as launcher first
+     await CapacitorAndroidKiosk.setAsLauncher();
+   }
+   ```
+
+2. **종료 메커니즘 제공**
+   ```typescript
+   // Allow specific key combination to exit
+   // Or implement a secret gesture/pattern
+   async function exitKioskWithConfirmation() {
+     const confirmed = confirm('Exit kiosk mode?');
+     if (confirmed) {
+       await CapacitorAndroidKiosk.exitKioskMode();
+     }
+   }
+   ```
+
+3. **앱 라이프사이클 처리**
+   ```typescript
+   // Re-enter kiosk mode when app resumes
+   window.addEventListener('resume', async () => {
+     const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
+     if (!isInKioskMode) {
+       await CapacitorAndroidKiosk.enterKioskMode();
+     }
+   });
+   ```
+
+4. **오류 처리**
+   ```typescript
+   try {
+     await CapacitorAndroidKiosk.enterKioskMode();
+   } catch (error) {
+     console.error('Failed to enter kiosk mode:', error);
+     // Notify user and provide alternative
+   }
+   ```

@@ -1,0 +1,360 @@
+---
+title: Erste Schritte mit Fast SQL
+locale: de
+description: Installieren und konfigurieren Sie das Fast SQL Plugin für leistungsstarken nativen SQLite-Datenbankzugriff
+---
+
+Diese Anleitung hilft Ihnen bei der Installation und Konfiguration des **@capgo/capacitor-fast-sql** Plugins für leistungsstarken SQLite-Datenbankzugriff.
+
+## Warum Fast SQL?
+
+Traditionelle SQLite-Plugins für Capacitor verwenden die Standard-JavaScript-Bridge zur Kommunikation zwischen Ihrem Web-Code und nativem Code. Während dies für kleine Operationen gut funktioniert, wird die Bridge zu einem erheblichen Engpass, wenn große Datenmengen übertragen werden müssen. Jedes Datenstück muss in JSON serialisiert, über die Bridge gesendet und auf der anderen Seite wieder deserialisiert werden. Dieser Serialisierungs-Overhead macht Operationen mit Tausenden von Zeilen oder großen Binärdaten unglaublich langsam.
+
+**Fast SQL löst dieses Problem**, indem es einen lokalen HTTP-Server auf dem Gerät einrichtet, der direkt mit der nativen SQLite-Datenbank kommuniziert. Dieses benutzerdefinierte Protokoll umgeht Capacitors Bridge vollständig, eliminiert den Serialisierungs-Overhead und ermöglicht:
+
+- **Bis zu 25x schnellere Leistung** für Batch-Operationen und große Datensätze
+- **Effizienten binären Datentransfer** ohne base64-Kodierung
+- **Streaming großer Ergebnisse** ohne Speicherprobleme
+- **Optimale Leistung für Sync-Systeme** wie CRDTs und Operational Transforms
+
+Dies macht Fast SQL ideal für Local-First-Anwendungen, Offline-Sync-Systeme und Szenarien, in denen Sie IndexedDB durch eine zuverlässigere und leistungsstärkere Lösung ersetzen müssen.
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-fast-sql
+npx cap sync
+```
+
+## Plattform-Konfiguration
+
+### iOS-Konfiguration
+
+Fügen Sie Folgendes zu Ihrer `Info.plist` hinzu, um lokale Netzwerkverbindungen zu erlauben:
+
+```xml title="ios/App/App/Info.plist"
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
+```
+
+### Android-Konfiguration
+
+Falls erforderlich, fügen Sie dies zu Ihrer `AndroidManifest.xml` hinzu:
+
+```xml title="android/app/src/main/AndroidManifest.xml"
+<application
+    android:usesCleartextTraffic="true">
+    ...
+</application>
+```
+
+### Web-Konfiguration
+
+Für die Unterstützung der Web-Plattform installieren Sie sql.js:
+
+```bash
+npm install sql.js
+```
+
+## Grundlegende Verwendung
+
+### Verbindung zu einer Datenbank herstellen
+
+```typescript
+import { FastSQL } from '@capgo/capacitor-fast-sql';
+
+// Verbindung zur Datenbank herstellen (erstellt Datei, falls sie nicht existiert)
+const db = await FastSQL.connect({
+  database: 'myapp'
+});
+
+console.log('Mit Datenbank auf Port verbunden:', db.port);
+```
+
+### Tabellen erstellen
+
+```typescript
+// Eine Tabelle erstellen
+await db.execute(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE,
+    created_at INTEGER DEFAULT (strftime('%s', 'now'))
+  )
+`);
+```
+
+### Daten einfügen
+
+```typescript
+// Einzelne Zeile einfügen
+const result = await db.run(
+  'INSERT INTO users (name, email) VALUES (?, ?)',
+  ['John Doe', 'john@example.com']
+);
+
+console.log('Eingefügte Zeilen-ID:', result.insertId);
+console.log('Betroffene Zeilen:', result.rowsAffected);
+```
+
+### Daten abfragen
+
+```typescript
+// Abfrage mit Parametern
+const users = await db.query(
+  'SELECT * FROM users WHERE name LIKE ?',
+  ['John%']
+);
+
+console.log('Gefundene Benutzer:', users);
+
+// users ist ein Array von Objekten:
+// [{ id: 1, name: 'John Doe', email: 'john@example.com', created_at: 1234567890 }]
+```
+
+### Daten aktualisieren
+
+```typescript
+const result = await db.run(
+  'UPDATE users SET email = ? WHERE id = ?',
+  ['newemail@example.com', 1]
+);
+
+console.log('Aktualisierte Zeilen:', result.rowsAffected);
+```
+
+### Daten löschen
+
+```typescript
+const result = await db.run(
+  'DELETE FROM users WHERE id = ?',
+  [1]
+);
+
+console.log('Gelöschte Zeilen:', result.rowsAffected);
+```
+
+## Transaktionen
+
+Transaktionen gewährleisten Atomarität - entweder werden alle Operationen erfolgreich ausgeführt oder alle werden zurückgesetzt:
+
+```typescript
+try {
+  await db.transaction(async (tx) => {
+    // Alle Operationen in diesem Block sind Teil der Transaktion
+    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Alice', 1000]);
+    await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Bob', 500]);
+
+    // Geld überweisen
+    await tx.run('UPDATE accounts SET balance = balance - 100 WHERE name = ?', ['Alice']);
+    await tx.run('UPDATE accounts SET balance = balance + 100 WHERE name = ?', ['Bob']);
+  });
+
+  console.log('Transaktion erfolgreich abgeschlossen!');
+} catch (error) {
+  console.error('Transaktion zurückgesetzt:', error);
+  // Alle Änderungen werden bei einem Fehler automatisch zurückgesetzt
+}
+```
+
+### Transaktions-Isolationsstufen
+
+```typescript
+import { FastSQL, IsolationLevel } from '@capgo/capacitor-fast-sql';
+
+await db.transaction(async (tx) => {
+  // Ihre Operationen
+}, IsolationLevel.Serializable);
+```
+
+Verfügbare Isolationsstufen:
+- `ReadUncommitted` - Niedrigste Isolation, höchste Leistung
+- `ReadCommitted` - Verhindert Dirty Reads
+- `RepeatableRead` - Verhindert nicht wiederholbare Lesevorgänge
+- `Serializable` - Höchste Isolation, verhindert alle Anomalien
+
+## Batch-Operationen
+
+Führen Sie mehrere Anweisungen effizient aus:
+
+```typescript
+const results = await db.executeBatch([
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['App started', 'INFO']
+  },
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['User logged in', 'INFO']
+  },
+  {
+    statement: 'INSERT INTO logs (message, level) VALUES (?, ?)',
+    params: ['Error occurred', 'ERROR']
+  },
+]);
+
+console.log('Ausgeführt', results.length, 'Anweisungen');
+```
+
+## Binärdaten (BLOBs)
+
+Speichern und abrufen Sie Binärdaten mit Uint8Array:
+
+```typescript
+// Binärdaten speichern
+const imageData = new Uint8Array([0xFF, 0xD8, 0xFF, 0xE0, /* ... */]);
+
+await db.run(
+  'INSERT INTO images (name, data) VALUES (?, ?)',
+  ['photo.jpg', imageData]
+);
+
+// Binärdaten abrufen
+const rows = await db.query('SELECT data FROM images WHERE name = ?', ['photo.jpg']);
+const retrievedData = rows[0].data; // Uint8Array
+```
+
+## Verschlüsselung (iOS/Android)
+
+Aktivieren Sie SQLCipher-Verschlüsselung für sichere Speicherung:
+
+```typescript
+const db = await FastSQL.connect({
+  database: 'secure_db',
+  encrypted: true,
+  encryptionKey: 'your-secure-encryption-key'
+});
+```
+
+:::caution
+- Verschlüsselung ist nur auf iOS und Android verfügbar
+- Speichern Sie Verschlüsselungsschlüssel sicher (verwenden Sie Keychain/Keystore)
+- Verschlüsselte Datenbanken können nicht ohne den richtigen Schlüssel geöffnet werden
+- Die Web-Plattform unterstützt keine Verschlüsselung
+:::
+
+## Nur-Lese-Modus
+
+Öffnen Sie Datenbanken im Nur-Lese-Modus, um Änderungen zu verhindern:
+
+```typescript
+const db = await FastSQL.connect({
+  database: 'myapp',
+  readOnly: true
+});
+```
+
+## Verbindungen schließen
+
+Schließen Sie Datenbankverbindungen immer, wenn Sie fertig sind:
+
+```typescript
+await FastSQL.disconnect('myapp');
+```
+
+## Direktes HTTP-Protokoll
+
+Für maximale Leistung bei großen Datensätzen verwenden Sie das HTTP-Protokoll direkt:
+
+```typescript
+const { port, token } = await FastSQL.getServerInfo({ database: 'myapp' });
+
+// Direkte HTTP-Anfragen an localhost:port stellen
+// Token im Authorization-Header einschließen
+const response = await fetch(`http://localhost:${port}/execute`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    statement: 'SELECT * FROM users',
+    params: []
+  })
+});
+
+const result = await response.json();
+```
+
+## Fehlerbehandlung
+
+```typescript
+import { FastSQL } from '@capgo/capacitor-fast-sql';
+
+try {
+  const db = await FastSQL.connect({ database: 'myapp' });
+
+  await db.run('INSERT INTO users (name, email) VALUES (?, ?)', ['John', 'john@example.com']);
+
+} catch (error) {
+  if (error.message.includes('UNIQUE constraint failed')) {
+    console.error('E-Mail existiert bereits');
+  } else if (error.message.includes('no such table')) {
+    console.error('Tabelle existiert nicht');
+  } else {
+    console.error('Datenbankfehler:', error);
+  }
+}
+```
+
+## Gängige SQL-Muster
+
+### Prüfen, ob Tabelle existiert
+
+```typescript
+const result = await db.query(
+  "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+  ['users']
+);
+
+const tableExists = result.length > 0;
+```
+
+### Tabellenschema abrufen
+
+```typescript
+const schema = await db.query('PRAGMA table_info(users)');
+console.log('Spalten:', schema);
+```
+
+### Zeilen zählen
+
+```typescript
+const result = await db.query('SELECT COUNT(*) as count FROM users');
+const count = result[0].count;
+```
+
+### Paginierung
+
+```typescript
+const pageSize = 20;
+const page = 1;
+const offset = (page - 1) * pageSize;
+
+const users = await db.query(
+  'SELECT * FROM users ORDER BY created_at DESC LIMIT ? OFFSET ?',
+  [pageSize, offset]
+);
+```
+
+## Leistungstipps
+
+1. **Verwenden Sie Transaktionen** für mehrere Operationen - deutlich schneller als einzelne Commits
+2. **Verwenden Sie Batch-Operationen** für Masseneinfügungen - effizienter als Schleifen
+3. **Erstellen Sie Indizes** für häufig abgefragte Spalten
+4. **Verwenden Sie vorbereitete Anweisungen** mit Parametern (?) - verhindert SQL-Injection und verbessert Leistung
+5. **Verwenden Sie HTTP-Protokoll direkt** für sehr große Ergebnismengen
+6. **Schließen Sie Verbindungen** wenn nicht in Verwendung, um Ressourcen freizugeben
+
+## Nächste Schritte
+
+Schauen Sie sich das [vollständige Tutorial](/plugins-tutorials/capacitor-fast-sql) an für fortgeschrittene Muster einschließlich:
+- Datenbank-Service-Architektur
+- Migrationssysteme
+- Sync-Engines
+- Komplexe Abfragen und Joins
+- Leistungsoptimierung

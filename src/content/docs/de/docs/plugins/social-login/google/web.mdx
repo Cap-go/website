@@ -1,0 +1,129 @@
+---
+title: Google Login im Web
+locale: de
+description: Dieser Leitfaden bietet eine umfassende Anleitung zur Einrichtung von Google Login für Webanwendungen mit Capacitor und dem @capgo/capacitor-social-login Plugin und gewährleistet einen nahtlosen Integrationsprozess durch Abdeckung aller notwendigen Schritte und Konfigurationen.
+sidebar:
+    order: 4
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Einführung
+
+In diesem Leitfaden lernen Sie, wie Sie Google Login mit Capgo Social Login für Webanwendungen einrichten.
+Ich gehe davon aus, dass Sie die [allgemeine Einrichtungsanleitung](/docs/plugins/social-login/google/general/) bereits gelesen haben.
+
+## Verwendung von Google Login im Web
+
+Die Verwendung des Google-Logins im Web ist ziemlich einfach.
+Um es zu verwenden, müssen Sie Folgendes tun:
+
+<Steps>
+1. Erstellen Sie einen Web-Client in der Google Console
+
+   :::note
+   Wenn Sie Google Login für Android bereits konfiguriert haben, können Sie diesen Schritt überspringen, da Sie bereits einen Web-Client erstellt haben. Sie können direkt zu Schritt 2 übergehen.
+   :::
+
+   1. Klicken Sie auf die Suchleiste
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console Suchleiste" />
+
+   2. Suchen Sie nach `credentials` und klicken Sie auf die `APIs and Services` Option (Nummer 2 auf dem Screenshot)
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="Suchergebnisse zeigen Credentials-Option mit hervorgehobenen APIs and Services" />
+
+   3. Klicken Sie auf `create credentials`
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Credentials erstellen Schaltfläche in Google Console" />
+
+   4. Wählen Sie `OAuth client ID`
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID Option im Credentials-Erstellungsmenü" />
+
+   5. Wählen Sie den `Application type` als `Web application`
+      <img src="/social-login-assets/google_cons_app_type_web.png" alt="Anwendungstyp-Auswahl mit hervorgehobener Web-Option" />
+
+   6. Benennen Sie Ihren Client und klicken Sie auf `Create`
+      <img src="/social-login-assets/google_cons_web_app_create.png" alt="Web-Client-Erstellungsformular mit hervorgehobenem Namensfeld" />
+
+   7. Kopieren Sie die Client-ID, Sie werden diese als `webClientId` in Ihrer Anwendung verwenden
+      <img src="/social-login-assets/google_cons_copy_web_client_id.png" alt="Client-ID Details zeigen Web-Client-ID zum Kopieren" />
+
+2. Konfigurieren Sie den Web-Client in der Google Console
+
+   1. Bitte öffnen Sie die [Credentials-Seite](https://console.cloud.google.com/apis/credentials) und klicken Sie auf Ihren Web-Client
+      <img src="/social-login-assets/google_cons_open_web_client_id.png" alt="Credentials-Liste zeigt Web-Client zum Klicken" />
+
+   2. Fügen Sie nun die `Authorized JavaScript origins` hinzu. Dies sollte alle Adressen enthalten, die Sie möglicherweise für Ihre App verwenden. In meinem Fall werde ich **NUR** localhost verwenden, aber da ich einen benutzerdefinierten Port verwende, muss ich sowohl `http://localhost` als auch `http://localhost:5173` hinzufügen
+
+      1. Bitte klicken Sie auf `add URI`
+         <img src="/social-login-assets/google_cons_authorized_js_add_btn.png" alt="Authorized JavaScript origins Bereich mit ADD URI Schaltfläche" />
+
+      2. Bitte geben Sie Ihre URL ein
+         <img src="/social-login-assets/google_cons_authorized_js_typed_url.png" alt="ADD URI Dialog mit eingegebener localhost URL" />
+
+      3. Bitte wiederholen Sie dies, bis Sie alle URLs hinzugefügt haben
+
+      4. Wenn Sie fertig sind, sollte Ihr Bildschirm ungefähr so aussehen
+         <img src="/social-login-assets/google_cons_authorized_js_final.png" alt="Authorized JavaScript origins mit mehreren hinzugefügten localhost URLs" />
+
+   3. Fügen Sie nun einige `Authorized redirect URIs` hinzu. Dies hängt davon ab, auf welcher Seite Sie das CapacitorSocialLogin Plugin verwenden möchten. In meinem Fall werde ich es auf `http://localhost:5173/auth` verwenden
+
+      1. Bitte klicken Sie auf `ADD URI`
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_1.png" alt="Authorized redirect URIs Bereich mit ADD URI Schaltfläche" />
+
+      2. Geben Sie Ihre URL ein und klicken Sie erneut auf `ADD URL`
+         <img src="/social-login-assets/google_cons_web_add_redirect_url_2.png" alt="ADD URI Dialog mit eingegebener Redirect-URL" />
+
+   4. Klicken Sie auf `save`
+      <img src="/social-login-assets/google_cons_web_app_save.png" alt="Save Schaltfläche am unteren Ende der Web-Client-Konfiguration" />
+
+3. Jetzt sollten Sie bereit sein, `login` von JavaScript wie folgt aufzurufen:
+
+   1. Importieren Sie zuerst `SocialLogin`
+
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      ```
+
+   2. Rufen Sie dann initialize auf. Dies sollte NUR einmal aufgerufen werden.
+
+      ```typescript
+      // onMounted ist Vue-spezifisch
+      // webClientId ist die Client-ID, die Sie im Web-Client-Erstellungsschritt erhalten haben, nicht die Android-Client-ID.
+      onMounted(() => {
+       SocialLogin.initialize({
+         google: {
+           webClientId: '673324426943-avl4v9ubdas7a0u7igf7in03pdj1dkmg.apps.googleusercontent.com',
+         }
+       })
+      })
+      ```
+
+   :::note[Web Redirect Verarbeitung]
+   Wenn Sie Google Login im Web verwenden, **MÜSSEN** Sie beim Redirect eine beliebige Funktion des Plugins aufrufen, um das Plugin zu initialisieren, damit es den Redirect verarbeiten und das Popup-Fenster schließen kann. Sie können entweder `isLoggedIn()` ODER `initialize()` aufrufen - beide lösen die Redirect-Verarbeitung aus:
+
+   ```typescript
+   // Option 1: Rufen Sie isLoggedIn auf, wenn die Redirect-Seite lädt
+   SocialLogin.isLoggedIn({ provider: 'google' }).catch(() => {
+     // Ignorieren Sie das Ergebnis, dies dient nur zur Initialisierung des Plugins
+   });
+
+   // Option 2: Rufen Sie initialize auf, wenn die Redirect-Seite lädt
+   SocialLogin.initialize({
+     google: {
+       webClientId: 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+     }
+   }).catch(() => {
+     // Ignorieren Sie eventuelle Fehler, dies dient nur zur Verarbeitung des Redirects
+   });
+   ```
+   :::
+
+   3. Erstellen Sie eine Login-Schaltfläche, die `SocialLogin.login` beim Klicken aufruft
+
+      ```typescript
+      const res = await SocialLogin.login({
+       provider: 'google',
+       options: {}
+      })
+      // Verarbeiten Sie die Antwort
+      console.log(JSON.stringify(res));
+      ```
+</Steps>

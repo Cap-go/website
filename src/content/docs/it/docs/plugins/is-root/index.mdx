@@ -1,0 +1,122 @@
+---
+title: "@capgo/capacitor-is-root"
+description: Plugin di rilevamento root e jailbreak per app Capacitor con controlli di sicurezza completi e validazione dell'integrità del dispositivo.
+locale: it
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduzione"
+hero:
+  tagline: Rileva dispositivi Android rootati e dispositivi iOS jailbroken per migliorare la sicurezza dell'app e proteggere dati sensibili.
+  image:
+    file: ~public/icons/plugins/is-root.svg
+  actions:
+    - text: Per iniziare
+      link: /docs/plugins/is-root/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-is-root/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Panoramica
+
+Il plugin Capacitor Is Root fornisce rilevamento completo di root e jailbreak per dispositivi Android e rilevamento emulatori. Questo plugin aiuta a migliorare la sicurezza dell'app identificando dispositivi compromessi e ambienti emulati che potrebbero rappresentare rischi per la sicurezza.
+
+<CardGrid stagger>
+  <Card title="Rilevamento root" icon="rocket">
+    Rilevamento root Android avanzato con molteplici metodi 🔒
+  </Card>
+  <Card title="Rilevamento emulatore" icon="approve-check">
+    Identifica ambienti emulati e framework di testing 🛡️
+  </Card>
+  <Card title="Validazione sicurezza" icon="approve-check">
+    Molteplici tecniche di rilevamento per maggiore precisione ✅
+  </Card>
+  <Card title="Focalizzato su Android" icon="laptop">
+    Rilevamento specializzato per valutazione sicurezza Android 🤖
+  </Card>
+</CardGrid>
+
+## Installazione
+
+```bash
+npm install @capgo/capacitor-is-root
+npx cap sync
+```
+
+## Metodi API Principali
+
+### Rilevamento Root
+- `isRooted()` - Esegue rilevamento root completo utilizzando metodi predefiniti
+- `isRootedWithBusyBox()` - Rilevamento esteso inclusi controlli BusyBox
+- `detectRootManagementApps()` - Identifica applicazioni di gestione root installate
+- `checkForSuBinary()` - Controlla la presenza del binario `su` nei percorsi di sistema
+
+### Rilevamento Emulatore
+- `isRunningOnEmulator()` - Rileva impronte digitali comuni degli emulatori Android
+
+## Tecniche di Rilevamento
+
+Il plugin utilizza molteplici metodi di rilevamento:
+
+### Rilevamento Root
+- Controlla per applicazioni di gestione root (SuperSU, Magisk, ecc.)
+- Scansiona per proprietà di sistema sospette
+- Identifica tag di build di test e flag di debug
+- Valida posizioni di binari pericolosi
+- Esamina permessi del percorso di sistema
+
+### Rilevamento Emulatore
+- Analisi dell'impronta digitale hardware
+- Ispezione delle proprietà di build
+- Caratteristiche specifiche dell'emulatore
+- Indicatori di ambiente virtuale
+
+## Esempio di Utilizzo
+
+```typescript
+import { IsRoot } from '@capgo/capacitor-is-root';
+
+// Rilevamento root di base
+const rootResult = await IsRoot.isRooted();
+if (rootResult.isRooted) {
+  console.log('Il dispositivo è rootato');
+  // Gestisci il dispositivo rootato in modo appropriato
+}
+
+// Rilevamento root esteso con BusyBox
+const extendedResult = await IsRoot.isRootedWithBusyBox();
+if (extendedResult.isRooted) {
+  console.log('Il dispositivo è rootato (controllo esteso)');
+}
+
+// Controlla per emulatore
+const emulatorResult = await IsRoot.isRunningOnEmulator();
+if (emulatorResult.isEmulator) {
+  console.log('In esecuzione su emulatore');
+}
+
+// Rileva app di gestione root
+const rootAppsResult = await IsRoot.detectRootManagementApps();
+if (rootAppsResult.hasRootApps) {
+  console.log('App di gestione root rilevate');
+}
+```
+
+## Considerazioni sulla Sicurezza
+
+- Usa molteplici metodi di rilevamento per una maggiore precisione
+- Implementa degradazione graduale per ambienti rilevati
+- Considera la privacy degli utenti quando implementi misure di sicurezza
+- Aggiornamenti regolari raccomandati poiché i metodi di rilevamento evolvono
+
+## Documentazione
+
+Consulta la [documentazione completa](/docs/plugins/is-root/getting-started/) per guide di implementazione dettagliate e pattern di sicurezza avanzati.

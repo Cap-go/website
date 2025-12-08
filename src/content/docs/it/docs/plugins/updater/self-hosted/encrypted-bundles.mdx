@@ -1,0 +1,60 @@
+---
+title: "Bundle Crittografati"
+locale: it
+description: "Una guida completa sull'utilizzo del plugin di aggiornamento manuale in un ambiente self-hosted, dettagliando i passaggi e i processi coinvolti nella gestione dei bundle crittografati per aggiornamenti sicuri ed efficienti."
+sidebar:
+  order: 5
+---
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Crittografia End-to-End
+
+A partire dalla versione 4.15.0 il plugin ti permette di inviare aggiornamenti crittografati.
+
+### Passaggio 1: Crea una chiave privata
+```bash title='Crea una chiave privata'
+npx @capgo/cli key create
+```
+
+### Passaggio 2: Crea e zippa il tuo bundle
+```bash title="Crea bundle zip con checksum"
+npx @capgo/cli bundle zip [appId] --key-v2 --json
+```
+
+Il flag `--key-v2` utilizza il nuovo sistema di crittografia con migliori checksum, e il flag `--json` produrrà le informazioni del bundle incluso il checksum che ti servirà per la crittografia.
+
+### Passaggio 3: Cripta il tuo bundle
+```bash title="Cripta zip del bundle con checksum"
+npx @capgo/cli encrypt [path/to/zip] [checksum]
+```
+
+Il parametro `checksum` è il checksum SHA256 generato dal comando zip nel passaggio 2. Il comando encrypt restituirà un `ivSessionKey` e genererà un checksum crittografato. Ricorda di rinominare la chiave `ivSessionKey` come `session_key` nel payload di aggiornamento.
+
+### Passaggio 4: Usa nel tuo payload di aggiornamento
+```json
+{
+"version": "1.2.3",
+"url": "https://myserver.com/app/updates/my-new-app-2.0.0.zip",
+"session_key": "encrypted_session_key",
+"checksum": "encrypted_checksum_from_encrypt_command"
+}
+```
+
+La `session_key` è l'`ivSessionKey` restituito dal comando encrypt, e il `checksum` è il checksum crittografato generato durante la crittografia (non il checksum originale dal comando zip).
+
+Quindi la tua app sarà in grado di utilizzare la chiave privata per decrittare la `session_key` e utilizzare la `session_key` decrittata per decrittare l'aggiornamento. Il checksum crittografato assicura la verifica dell'integrità del bundle.
+
+## Per Saperne di Più
+
+<CardGrid>
+<LinkCard
+	title="Guida alla Crittografia End-to-End"
+	href="https://capgo.app/blog/introducing-end-to-end-security-to-capacitor-updater-with-code-signing/"
+	description="Approfondimento su come funziona il sistema di crittografia di Capgo con crittografia RSA + AES"
+/>
+<LinkCard
+	title="Aggiornamenti Live Self-Hosted"
+	href="https://capgo.app/blog/self-hosted-live-updates/"
+	description="Flusso di lavoro completo per configurare aggiornamenti self-hosted"
+/>
+</CardGrid>

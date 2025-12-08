@@ -1,0 +1,339 @@
+---
+title: Erste Schritte
+locale: de
+description: Erfahren Sie, wie Sie das Persistent Account-Plugin installieren und verwenden, um Benutzerdaten über App-Installationen hinweg zu erhalten.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Plattformunterstützung
+
+- **iOS**: Verwendet iOS Keychain Services für sicheren, persistenten Speicher
+- **Android**: Verwendet Android Account Manager oder Shared Preferences mit Backup
+
+## Verwendungsbeispiel
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Ihre Kontodatenstruktur definieren
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Kontodaten speichern
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Kontodaten lesen
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Konto wiederhergestellt:', account.username);
+} else {
+  console.log('Keine Kontodaten gefunden');
+}
+```
+
+## API-Referenz
+
+### saveAccount(options)
+
+```typescript
+saveAccount(options: { data: unknown }) => Promise<void>
+```
+
+Speichert Kontodaten sicher im persistenten Speicher.
+
+| Param         | Typ                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ data: unknown }` |
+
+### readAccount()
+
+```typescript
+readAccount() => Promise<{ data: unknown | null }>
+```
+
+Ruft gespeicherte Kontodaten ab.
+
+**Gibt zurück:** `Promise<{ data: unknown | null }>`
+
+## Praktische Implementierung
+
+### Vollständiges Auth Service-Beispiel
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  authToken?: string;
+  preferences: {
+    theme: string;
+    language: string;
+    notifications: boolean;
+  };
+}
+
+class AuthService {
+  // Benutzerkonto nach Anmeldung speichern
+  async saveUserAccount(user: UserAccount) {
+    try {
+      await PersistentAccount.saveAccount({ data: user });
+      console.log('Benutzerkonto erfolgreich gespeichert');
+    } catch (error) {
+      console.error('Konto konnte nicht gespeichert werden:', error);
+      throw error;
+    }
+  }
+
+  // Benutzerkonto beim App-Start wiederherstellen
+  async restoreUserAccount(): Promise<UserAccount | null> {
+    try {
+      const result = await PersistentAccount.readAccount();
+
+      if (result.data) {
+        const account = result.data as UserAccount;
+        console.log('Benutzerkonto wiederhergestellt:', account.username);
+        return account;
+      }
+
+      console.log('Kein gespeichertes Konto gefunden');
+      return null;
+    } catch (error) {
+      console.error('Konto konnte nicht wiederhergestellt werden:', error);
+      return null;
+    }
+  }
+
+  // Benutzereinstellungen aktualisieren
+  async updatePreferences(preferences: Partial<UserAccount['preferences']>) {
+    const account = await this.restoreUserAccount();
+
+    if (account) {
+      const updatedAccount: UserAccount = {
+        ...account,
+        preferences: {
+          ...account.preferences,
+          ...preferences
+        }
+      };
+
+      await this.saveUserAccount(updatedAccount);
+    }
+  }
+
+  // Kontodaten löschen (bei Abmeldung)
+  async clearAccount() {
+    try {
+      await PersistentAccount.saveAccount({ data: null });
+      console.log('Kontodaten gelöscht');
+    } catch (error) {
+      console.error('Konto konnte nicht gelöscht werden:', error);
+    }
+  }
+}
+
+// Verwendung
+const authService = new AuthService();
+
+// Bei Anmeldung
+await authService.saveUserAccount({
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  authToken: 'abc123xyz',
+  preferences: {
+    theme: 'dark',
+    language: 'de',
+    notifications: true
+  }
+});
+
+// Beim App-Start
+const savedAccount = await authService.restoreUserAccount();
+if (savedAccount) {
+  // Benutzer war zuvor angemeldet
+  console.log('Willkommen zurück,', savedAccount.username);
+}
+
+// Einstellungen aktualisieren
+await authService.updatePreferences({
+  theme: 'light',
+  notifications: false
+});
+
+// Bei Abmeldung
+await authService.clearAccount();
+```
+
+### App-Initialisierung mit Kontowiederherstellung
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function initializeApp() {
+  try {
+    // Versuchen, gespeichertes Konto wiederherzustellen
+    const result = await PersistentAccount.readAccount();
+
+    if (result.data) {
+      const account = result.data as UserAccount;
+
+      // Token ist noch gültig prüfen
+      const isValid = await validateAuthToken(account.authToken);
+
+      if (isValid) {
+        // Benutzersitzung wiederherstellen
+        setCurrentUser(account);
+        navigateToHome();
+      } else {
+        // Token abgelaufen, Anmeldung anzeigen
+        navigateToLogin();
+      }
+    } else {
+      // Kein gespeichertes Konto, Anmeldung anzeigen
+      navigateToLogin();
+    }
+  } catch (error) {
+    console.error('App konnte nicht initialisiert werden:', error);
+    navigateToLogin();
+  }
+}
+
+// Beim App-Start aufrufen
+initializeApp();
+```
+
+### Mit Backend synchronisieren
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function syncAccountWithBackend() {
+  const result = await PersistentAccount.readAccount();
+
+  if (result.data) {
+    const localAccount = result.data as UserAccount;
+
+    try {
+      // Neueste Kontodaten vom Server abrufen
+      const response = await fetch(`/api/users/${localAccount.userId}`);
+      const serverAccount = await response.json();
+
+      // Serverdaten mit lokalen Einstellungen zusammenführen
+      const mergedAccount: UserAccount = {
+        ...serverAccount,
+        preferences: {
+          ...serverAccount.preferences,
+          ...localAccount.preferences // Lokale Einstellungen haben Priorität
+        }
+      };
+
+      // Zusammengeführte Daten speichern
+      await PersistentAccount.saveAccount({ data: mergedAccount });
+
+      return mergedAccount;
+    } catch (error) {
+      console.error('Synchronisation mit Backend fehlgeschlagen:', error);
+      // Lokales Konto als Fallback zurückgeben
+      return localAccount;
+    }
+  }
+
+  return null;
+}
+```
+
+## Best Practices
+
+- **Typsicherheit**: Klare TypeScript-Schnittstellen für Ihre Kontodaten definieren
+- **Validierung**: Daten beim Lesen aus persistentem Speicher immer validieren
+- **Fehlerbehandlung**: Ordnungsgemäße try-catch-Blöcke für alle Operationen implementieren
+- **Sicherheit**: Sensible Daten wie Passwörter nicht im Klartext speichern
+- **Token-Verwaltung**: Auth-Token beim Wiederherstellen von Konten aktualisieren
+- **Datengröße**: Gespeicherte Daten minimal halten, um schnelle Lese-/Schreibvorgänge zu gewährleisten
+- **Null-Prüfungen**: Immer prüfen, ob Daten vorhanden sind, bevor sie verwendet werden
+- **Backup-Strategie**: Für zusätzliche Sicherheit Synchronisation mit Backend erwägen
+
+## Sicherheitsüberlegungen
+
+- Kontodaten werden mit plattformspezifischen sicheren Speichermechanismen gespeichert
+- Daten bleiben über App-Deinstallationen und -Neuinstallationen hinweg erhalten
+- Verschlüsselung sensibler Informationen vor dem Speichern erwägen
+- Ordnungsgemäße Datenvalidierung beim Lesen gespeicherter Konten implementieren
+- Plattformrichtlinien für Benutzerdatenverarbeitung befolgen
+- Authentifizierungstoken mit Ablauf für Sicherheit verwenden
+- Kontodaten bei Benutzerabmeldung angemessen löschen
+
+## Plattform-Implementierung
+
+### iOS
+
+- Nutzt iOS Keychain Services für sicheren, persistenten Speicher
+- Daten überleben App-Löschung und Gerätwiederherstellungen
+- Geschützt durch iOS-Sicherheitsmechanismen
+
+### Android
+
+- Verwendet Android Account Manager oder Shared Preferences mit Backup
+- Behält Daten über App-Neuinstallationen und Gerätemigrationen hinweg
+- Geschützt durch Android-Systemsicherheit
+
+## Anwendungsfälle
+
+- **Benutzer-Onboarding**: Benutzerfortschritt durch App-Neuinstallationen bewahren
+- **Kontowiederherstellung**: Benutzersitzungen nach App-Updates wiederherstellen
+- **Einstellungsspeicherung**: Benutzereinstellungen und Konfigurationen beibehalten
+- **Offline-First-Apps**: Wesentliche Benutzerdaten lokal speichern
+- **Sitzungsverwaltung**: Benutzer über App-Neustarts hinweg angemeldet halten
+- **Gerätemigration**: Benutzerdaten auf neue Geräte übertragen

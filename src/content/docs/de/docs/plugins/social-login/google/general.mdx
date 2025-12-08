@@ -1,0 +1,236 @@
+---
+title: Google Login Einrichtung
+locale: de
+description: Dieser Leitfaden bietet eine umfassende Übersicht zur Einrichtung von Google Login mit Capacitor und erläutert jeden Schritt, um einen nahtlosen Integrationsprozess sicherzustellen und potenzielle Herausforderungen anzusprechen, die auftreten können.
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Einführung
+
+In diesem Leitfaden lernen Sie, wie Sie Google Login mit Capgo Social Login einrichten. Sie benötigen Folgendes, um Google Login einzurichten:
+
+- Ein Google-Konto
+
+## Allgemeine Einrichtung
+
+:::note
+Dieser Schritt ist unabhängig von der Plattform erforderlich, die Sie verwenden möchten.
+:::
+
+In diesem Teil richten Sie den Login-Bildschirm ein, der von Google angezeigt wird.
+
+<Steps>
+    1. Bitte gehen Sie zu [console.cloud.google.com](https://console.cloud.google.com/)
+    2. Klicken Sie auf die Projektauswahl
+        <img src="/social-login-assets/google_cons_project_selector.png" alt="Google Console Projektauswahl" />
+    3. Wenn Sie noch kein Projekt haben, **erstellen Sie bitte ein neues Projekt**.
+        1. Klicken Sie auf `New project`
+            <img src="/social-login-assets/google_cons_new_project_btn.png" alt="Neues Projekt Schaltfläche in Google Console" />
+        2. Benennen Sie Ihr Projekt und klicken Sie auf `Create`
+            <img src="/social-login-assets/google_cons_name_projec.png" alt="Projekt-Benennungsbildschirm zeigt Namensfeld und Create-Schaltfläche" />
+        3. Stellen Sie sicher, dass Sie im richtigen Projekt sind
+            <img src="/social-login-assets/google_cons_right_proj.png" alt="Projektname in der Auswahl zeigt korrekte Projektauswahl" />
+    4. Beginnen Sie mit der Konfiguration des `OAuth consent screen`
+        1. Klicken Sie auf die Suchleiste
+            <img src="/social-login-assets/google_cons_search.png" alt="Google Console Suchleiste" />
+        2. Suchen Sie nach `OAuth consent screen` und klicken Sie darauf
+            <img src="/social-login-assets/google_cons_search_2.png" alt="Suchergebnisse zeigen OAuth Consent Screen Option" />
+        3. Konfigurieren Sie den Consent Screen
+            :::note
+            Ich gehe davon aus, dass Sie eine App entwickeln, die für die Öffentlichkeit zugänglich ist, daher werde ich den `external` Benutzertyp verwenden. Bitte wählen Sie den Benutzertyp aus, der am besten zu Ihnen passt UND klicken Sie auf `create`
+            :::
+
+            Klicken Sie auf `create`
+            <img src="/social-login-assets/google_cons_oauth_const_scr.png" alt="OAuth Consent Screen Benutzertyp-Auswahl mit External und Internal Optionen" />
+    5. Füllen Sie die Informationen über Ihre App aus
+            1. Beginnen wir mit den `App Information`
+                <img src="/social-login-assets/google_cons_app_inf.png" alt="App Information Bereich zeigt App Name und User Support Email Felder" />
+
+                    - Bitte geben Sie Ihren `App Name` ein
+                        :::caution
+                        **DIES WIRD DEN BENUTZERN ANGEZEIGT**
+                        :::
+                    - Geben Sie die `user support email` ein
+                        :::note
+                        Sie können mehr über die Support-E-Mail [hier](https://support.google.com/cloud/answer/10311615#user-support-email&zippy=%2Cuser-support-email/) erfahren
+                        :::
+                2. Sie **KÖNNEN** das App-Logo hinzufügen.
+                    <img src="/social-login-assets/google_cons_app_logo.png" alt="App Logo Upload-Bereich im OAuth Consent Screen" />
+                    :::note
+                    Dies ist nicht obligatorisch und ich werde diesen Schritt überspringen
+                    :::
+                3. Sie **SOLLTEN** die `App domain` konfigurieren
+                    <img src="/social-login-assets/google_cons_app_doma.png" alt="App Domain Konfigurationsbereich mit Feld für autorisierte Domains" />
+                    :::note
+                    Ich werde das nicht tun, da dies nur eine einfache Demonstration ist, die **NICHT** veröffentlicht wird, aber ich empfehle dringend, diesen Bereich auszufüllen.
+                    :::
+
+                4. Sie **MÜSSEN** die E-Mail des Entwicklers angeben
+                    <img src="/social-login-assets/google_cons_dev_cont_inf.png" alt="Developer Contact Information Bereich mit E-Mail-Feld" />
+                5. Klicken Sie auf `save and continue`
+                        <img src="/social-login-assets/google_cons_cons_sav_cont.png" alt="Save and Continue Schaltfläche am unteren Ende des Formulars" />
+    6. Konfigurieren Sie die Scopes
+        1. Klicken Sie auf `add or remove scopes`
+            <img src="/social-login-assets/google_cons_add_rm_sco.png" alt="Add or remove scopes Schaltfläche im Scopes-Konfigurationsbildschirm" />
+
+        2. Wählen Sie die folgenden Scopes aus und klicken Sie auf `update`
+            <img src="/social-login-assets/google_cons_update_scope.png" alt="Scope-Auswahl-Dialog mit ausgewählten E-Mail- und Profil-Scopes" />
+
+        3. Klicken Sie auf `save and continue`
+            <img src="/social-login-assets/google_cons_scope_save.png" alt="Save and Continue Schaltfläche im Scopes-Bildschirm" />
+    7. Fügen Sie einen Testbenutzer hinzu
+        1. Klicken Sie auf `add users`
+            <img src="/social-login-assets/google_cons_add_test_usr.png" alt="Add users Schaltfläche im Testbenutzer-Bereich" />
+        2. Geben Sie Ihre Google-E-Mail ein, drücken Sie Enter und klicken Sie auf `add`
+            <img src="/social-login-assets/google_cons_add_test_usr_2.png" alt="E-Mail-Eingabefeld und Add-Schaltfläche für Testbenutzer" />
+        3. Klicken Sie auf `save and continue`
+            <img src="/social-login-assets/google_cons_test_usr_save.png" alt="Save and Continue Schaltfläche im Testbenutzer-Bildschirm" />
+    8. Klicken Sie auf `back to dashboard`
+        <img src="/social-login-assets/google_cons_back_to_dahs.png" alt="Back to dashboard Schaltfläche am unteren Ende der Abschlussseite" />
+    9. Reichen Sie Ihre App zur Überprüfung ein
+        :::note
+            Ich empfehle dringend, Ihre App zur Überprüfung einzureichen. Dies liegt außerhalb des Umfangs dieses Tutorials. Sie können mehr [hier](https://support.google.com/cloud/answer/13463073/) erfahren. Dies ist nicht erforderlich für lokale Tests, aber für die Produktion erforderlich.
+        :::
+</Steps>
+
+
+## Unterschiede zwischen Online-Zugriff und Offline-Zugriff
+
+Es gibt mehrere Möglichkeiten, Google Login mit Capacitor zu verwenden. Hier ist eine Tabelle, die die Unterschiede zwischen den beiden zusammenfasst:
+
+|                         | Online-Zugriff | Offline-Zugriff |
+|:-----------------------:|:-------------:|:--------------:|
+| Erfordert ein Backend      | ❌             | ✅              |
+| Langlebiges Access Token | ❌             | ✅              |
+| Einfache Einrichtung              | ✅             | ❌              |
+
+:::note
+**Offline-Modus** bedeutet, dass Ihr Backend auf Googles APIs zugreifen kann, auch wenn der Benutzer Ihre App nicht aktiv verwendet (d.h. wenn der Benutzer aus Sicht Ihrer App "offline" ist). Langlebige Access Tokens ermöglichen diese Funktionalität, indem sie es dem Backend ermöglichen, Google APIs jederzeit im Namen des Benutzers aufzurufen.
+:::
+
+:::caution
+**Offline-Modus ERFORDERT einen Backend-Server.** Wenn Sie den Offline-Modus verwenden, erhält das Frontend minimale Informationen (hauptsächlich nur einen Server-Auth-Code). Ohne ein Backend zum Austausch dieses Codes gegen Tokens und Benutzerinformationen bietet der Offline-Modus keine nützlichen Daten für Ihre Frontend-Anwendung.
+:::
+
+Wenn Sie immer noch nicht wissen, welchen Sie wählen sollten, beachten Sie bitte die folgenden Szenarien:
+
+1. Sie möchten, dass sich der Benutzer anmeldet, unmittelbar danach werden Sie ihm ein benutzerdefiniertes JWT ausstellen. Ihre App wird KEINE Google APIs aufrufen
+
+   Wählen Sie in diesem Fall Online-Zugriff.
+
+2. Ihre App wird einige Google APIs vom Client aufrufen, aber nie vom Backend
+
+   Wählen Sie in diesem Fall Online-Zugriff
+
+3. Ihre App wird einige Google APIs vom Backend aufrufen, aber nur wenn der Benutzer die App aktiv verwendet
+
+   Wählen Sie in diesem Fall Online-Zugriff
+
+4. Ihre App wird regelmäßig den Kalender des Benutzers überprüfen, auch wenn er die App nicht aktiv verwendet
+
+   Wählen Sie in diesem Fall Offline-Zugriff
+
+## Ein Beispiel-Backend für Online-Zugriff
+
+In diesem Teil des Tutorials zeige ich, wie Sie den Benutzer auf Ihrem Backend validieren.
+
+Dieses Beispiel wird sehr einfach sein und basiert auf den folgenden Technologien:
+
+- [Typescript](https://www.typescriptlang.org/)
+
+- [Hono](https://hono.dev/)
+
+- [Javascript's fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
+
+Sie können den Code für dieses Beispiel [hier](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/141c01d93a85240e31a0d488a89df13c842708b1/index.ts#L135-L153) finden
+
+Wie Sie sehen können:
+
+<img src="/social-login-assets/vscode_auth_google.png" alt="VS Code zeigt Google-Authentifizierungscode, der Tokens verifiziert" />
+
+Die Idee ist ziemlich einfach. Sie senden eine einfache `GET` Anfrage an `https://www.googleapis.com/oauth2/v3/tokeninfo` und diese gibt Ihnen zurück, ob der Token gültig ist oder nicht, und wenn ja, gibt sie Ihnen die E-Mail des Benutzers. Sie gibt Ihnen auch einige andere Informationen über den Benutzer-Token
+<img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Playground zeigt Token-Informationsantwort mit Benutzerdetails" />
+
+Von dort aus könnten Sie dem Benutzer Ihr eigenes JWT ausstellen oder eine Art Session-Cookie ausstellen. Die Möglichkeiten sind endlos für die endgültige Auth-Implementierung.
+
+Wenn Sie Google API's aufrufen möchten, empfehle ich dringend, sich [Google's OAuth 2.0 Playground](https://developers.google.com/oauthplayground) anzusehen. Von dort aus können Sie leicht sehen, welche APIs Sie aufrufen können.
+
+## Verwendung von Offline-Zugriff mit Ihrem eigenen Backend
+
+Um Online-Zugriff zu verwenden, benötigen Sie Folgendes:
+
+- Einen HTTP-Server
+
+In diesem Beispiel werde ich die folgenden Technologien verwenden, um den Offline-Zugriff in meiner App bereitzustellen:
+
+- [Hono](https://hono.dev/)
+
+- [Hono Zod validator](https://hono.dev/docs/guides/validation#with-zod)
+
+- [Zod](https://zod.dev/)
+
+- [Hono JWT](https://hono.dev/docs/helpers/jwt#jwt-authentication-helper)
+
+- [LowDb](https://www.npmjs.com/package/lowdb) (eine einfache Datenbank)
+
+Der Code für dieses Beispiel ist [hier](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/aac7a8c909f650a8c2cd7f88c97f5f3c594ce9ba/index.ts#L139-L287) zu finden
+
+Was den Client-Code betrifft, sieht er so aus:
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { GoogleLoginOfflineResponse, SocialLogin } from '@capgo/capacitor-social-login';
+import { usePopoutStore } from '@/popoutStore'; // <-- spezifisch für meine App
+
+const baseURL = "[redacted]";
+
+async function fullLogin() {
+  await SocialLogin.initialize({
+    google: {
+      webClientId: '[redacted]',
+      iOSClientId: '[redacted]',
+      iOSServerClientId: 'The same value as webClientId',
+      mode: 'offline' // <-- wichtig
+    }
+  })
+  const response = await SocialLogin.login({
+    provider: 'google',
+    options: {
+      forceRefreshToken: true // <-- wichtig
+    }
+  })
+
+  if (response.provider === 'google') {
+    const result = response.result as GoogleLoginOfflineResponse
+    const res = await fetch(`${baseURL}/auth/google_offline`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        serverAuthCode: result.serverAuthCode,
+        platform: Capacitor.getPlatform()
+      }),
+      method: "POST"
+    })
+
+    if (res.status !== 200) {
+      popoutStore.popout("Full google login failed", "check console");
+      return
+    }
+
+    const { jwt } = await res.json();
+    const userinfo = await fetch(`${baseURL}/auth/get_google_user`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    })
+    if (userinfo.status !== 200) {
+      popoutStore.popout("Full google (userinfo) login failed", "check console");
+      return
+    }
+    popoutStore.popout("userinfo res", await userinfo.text());
+  }
+}
+```

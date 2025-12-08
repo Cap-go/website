@@ -1,0 +1,130 @@
+---
+title: Iniziare
+locale: it
+description: Configura Apple Pay e Google Pay per il tuo checkout Capacitor con il plugin Pay.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installa il plugin**
+   <PackageManagers pkg="@capgo/capacitor-pay" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizza progetti nativi**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Prerequisiti nativi
+
+- **Apple Pay (iOS)**
+  1. Crea un ID commerciante Apple Pay nel portale Apple Developer.
+  2. Genera e carica il certificato di elaborazione dei pagamenti richiesto dal tuo gateway.
+  3. Abilita la capacità **Apple Pay** in Xcode e assicurati che il tuo profilo di provisioning la includa.
+  4. Aggiorna `Info.plist` con una descrizione di utilizzo se il tuo gateway richiede accesso alla rete per convalidare i pagamenti.
+
+- **Google Pay (Android)**
+  1. Accedi alla [Console aziendale Google Pay](https://pay.google.com/business/console/).
+  2. Configura i parametri del tuo gateway di pagamento o imposta la tokenizzazione diretta per i test.
+  3. Se prevedi di utilizzare carte di produzione, passa `environment` a `PRODUCTION` e registra carte di test per il QA.
+  4. Conferma che i servizi Google Play siano disponibili sul dispositivo (richiesto da Google Pay).
+
+Consulta le guide in `docs/` nel repository del plugin per screenshot dettagliati.
+
+## Controlla disponibilità
+
+```typescript
+import { Pay } from '@capgo/capacitor-pay';
+
+const availability = await Pay.isPayAvailable({
+  apple: { supportedNetworks: ['visa', 'masterCard', 'amex'] },
+  google: {
+    isReadyToPayRequest: {
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+          },
+        },
+      ],
+    },
+  },
+});
+
+if (!availability.available) {
+  console.warn('Pagamento nativo non disponibile:', availability);
+}
+```
+
+## Richiedi pagamento (Apple Pay)
+
+```typescript
+const appleResult = await Pay.requestPayment({
+  apple: {
+    merchantIdentifier: 'merchant.com.example.app',
+    countryCode: 'IT',
+    currencyCode: 'EUR',
+    supportedNetworks: ['visa', 'masterCard'],
+    paymentSummaryItems: [
+      { label: 'Piano Starter', amount: '9.99' },
+      { label: 'Negozio Capgo', amount: '9.99' },
+    ],
+    requiredShippingContactFields: ['name', 'emailAddress'],
+  },
+});
+
+const token = appleResult.apple?.paymentData;
+```
+
+## Richiedi pagamento (Google Pay)
+
+```typescript
+const googleResult = await Pay.requestPayment({
+  google: {
+    environment: 'test',
+    paymentDataRequest: {
+      apiVersion: 2,
+      apiVersionMinor: 0,
+      allowedPaymentMethods: [
+        {
+          type: 'CARD',
+          parameters: {
+            allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+            allowedCardNetworks: ['VISA', 'MASTERCARD'],
+            billingAddressRequired: true,
+            billingAddressParameters: { format: 'FULL' },
+          },
+          tokenizationSpecification: {
+            type: 'PAYMENT_GATEWAY',
+            parameters: {
+              gateway: 'example',
+              gatewayMerchantId: 'exampleMerchantId',
+            },
+          },
+        },
+      ],
+      merchantInfo: {
+        merchantName: 'Negozio Capgo',
+      },
+      transactionInfo: {
+        totalPriceStatus: 'FINAL',
+        totalPrice: '9.99',
+        currencyCode: 'EUR',
+        countryCode: 'IT',
+      },
+    },
+  },
+});
+
+const paymentData = googleResult.google?.paymentData;
+```
+
+## Gestione delle risposte
+
+- Tokenizza il payload restituito con il tuo elaboratore di pagamenti e conferma la transazione lato server.
+- Offri un percorso alternativo (inserimento carta, fattura) se il pagamento nativo non è disponibile o l'utente annulla.
+- Memorizza nella cache il risultato della disponibilità in modo da non visualizzare i pulsanti su dispositivi non supportati.

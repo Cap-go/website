@@ -1,0 +1,389 @@
+---
+title: 시작하기
+description: Capacitor 앱에서 파일 시스템 작업을 위한 File 플러그인을 설치하고 사용하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-file" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용법
+
+플러그인을 가져와서 파일 작업에 메서드를 사용합니다:
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+// 텍스트 파일 쓰기
+const writeFile = async () => {
+  const result = await CapacitorFile.writeFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    data: 'Hello, World!',
+    encoding: Encoding.UTF8,
+    recursive: true, // 필요한 경우 상위 디렉터리 생성
+  });
+  console.log('File written to:', result.uri);
+};
+
+// 텍스트 파일 읽기
+const readFile = async () => {
+  const result = await CapacitorFile.readFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    encoding: Encoding.UTF8,
+  });
+  console.log('File contents:', result.data);
+};
+
+// 파일 존재 여부 확인
+const checkExists = async () => {
+  const result = await CapacitorFile.exists({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+  console.log('File exists:', result.exists);
+};
+
+// 파일 삭제
+const deleteFile = async () => {
+  await CapacitorFile.deleteFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+};
+```
+
+## 디렉터리 위치
+
+플러그인은 여러 디렉터리 상수를 제공합니다:
+
+```typescript
+import { Directory } from '@capgo/capacitor-file';
+
+// 사용 가능한 디렉터리
+Directory.Documents  // 사용자가 볼 수 있는 문서 (백업됨)
+Directory.Data       // 비공개 앱 데이터 저장소
+Directory.Library    // 앱 지원 파일 (iOS) / files (Android)
+Directory.Cache      // 임시 캐시 (OS에 의해 지워질 수 있음)
+Directory.External   // 외부 저장소 (Android만 해당)
+Directory.Application // 읽기 전용 앱 번들
+```
+
+## 인코딩 옵션
+
+```typescript
+import { Encoding } from '@capgo/capacitor-file';
+
+Encoding.UTF8   // UTF-8 텍스트 인코딩
+Encoding.ASCII  // ASCII 텍스트 인코딩
+Encoding.UTF16  // UTF-16 텍스트 인코딩
+// 바이너리 데이터에 대한 인코딩 생략 (base64 반환)
+```
+
+## API 참조
+
+### writeFile(options)
+
+파일에 데이터를 씁니다.
+
+```typescript
+const result = await CapacitorFile.writeFile({
+  path: 'folder/file.txt',
+  directory: Directory.Documents,
+  data: 'File content',
+  encoding: Encoding.UTF8,
+  recursive: true,  // 필요한 경우 디렉터리 생성
+  append: false,    // 기존 파일 덮어쓰기
+  position: 0,      // 랜덤 액세스 쓰기를 위한 바이트 위치
+});
+// 반환: { uri: string }
+```
+
+### readFile(options)
+
+파일의 내용을 읽습니다.
+
+```typescript
+const result = await CapacitorFile.readFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  encoding: Encoding.UTF8,
+  offset: 0,    // 바이트 오프셋부터 읽기 시작
+  length: 100,  // 이 바이트 수만큼만 읽기
+});
+// 반환: { data: string }
+```
+
+### appendFile(options)
+
+파일에 데이터를 추가합니다.
+
+```typescript
+await CapacitorFile.appendFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  data: '\nNew line',
+  encoding: Encoding.UTF8,
+});
+```
+
+### deleteFile(options)
+
+파일을 삭제합니다.
+
+```typescript
+await CapacitorFile.deleteFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+```
+
+### mkdir(options)
+
+디렉터리를 생성합니다.
+
+```typescript
+await CapacitorFile.mkdir({
+  path: 'my-folder/sub-folder',
+  directory: Directory.Documents,
+  recursive: true,  // 상위 디렉터리 생성
+});
+```
+
+### rmdir(options)
+
+디렉터리를 삭제합니다.
+
+```typescript
+await CapacitorFile.rmdir({
+  path: 'my-folder',
+  directory: Directory.Documents,
+  recursive: true,  // 내용을 재귀적으로 삭제
+});
+```
+
+### readdir(options)
+
+디렉터리 내용을 나열합니다.
+
+```typescript
+const result = await CapacitorFile.readdir({
+  path: '',  // 디렉터리의 루트에 대해 비어 있음
+  directory: Directory.Documents,
+});
+// 반환: { entries: Entry[] }
+// 각 항목에는: { name, isFile, isDirectory, fullPath, nativeURL }
+```
+
+### stat(options)
+
+파일 또는 디렉터리 메타데이터를 가져옵니다.
+
+```typescript
+const result = await CapacitorFile.stat({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 반환: { type, size, mtime, ctime, uri }
+```
+
+### exists(options)
+
+파일 또는 디렉터리가 존재하는지 확인합니다.
+
+```typescript
+const result = await CapacitorFile.exists({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 반환: { exists: boolean, type?: 'file' | 'directory' }
+```
+
+### copy(options)
+
+파일 또는 디렉터리를 복사합니다.
+
+```typescript
+const result = await CapacitorFile.copy({
+  from: 'source.txt',
+  to: 'destination.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+// 반환: { uri: string }
+```
+
+### rename(options) / move(options)
+
+파일 또는 디렉터리의 이름을 변경하거나 이동합니다.
+
+```typescript
+await CapacitorFile.rename({
+  from: 'old-name.txt',
+  to: 'new-name.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+```
+
+### truncate(options)
+
+파일을 특정 크기로 잘라냅니다.
+
+```typescript
+await CapacitorFile.truncate({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  size: 100,  // 100바이트로 자르기
+});
+```
+
+### getUri(options)
+
+파일의 네이티브 URI를 가져옵니다.
+
+```typescript
+const result = await CapacitorFile.getUri({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// 반환: { uri: string }
+```
+
+### getDirectories()
+
+사용 가능한 모든 디렉터리 경로를 가져옵니다.
+
+```typescript
+const dirs = await CapacitorFile.getDirectories();
+// 반환 경로: documents, data, cache, external 등
+```
+
+### getFreeDiskSpace()
+
+사용 가능한 디스크 공간을 가져옵니다.
+
+```typescript
+const result = await CapacitorFile.getFreeDiskSpace();
+console.log('Free space:', result.free, 'bytes');
+```
+
+### checkPermissions() / requestPermissions()
+
+저장소 권한 처리 (Android).
+
+```typescript
+const status = await CapacitorFile.checkPermissions();
+if (status.publicStorage !== 'granted') {
+  await CapacitorFile.requestPermissions();
+}
+```
+
+## 전체 예제
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+export class FileService {
+  async saveJson(filename: string, data: object): Promise<void> {
+    await CapacitorFile.writeFile({
+      path: filename,
+      directory: Directory.Documents,
+      data: JSON.stringify(data, null, 2),
+      encoding: Encoding.UTF8,
+      recursive: true,
+    });
+  }
+
+  async loadJson<T>(filename: string): Promise<T | null> {
+    try {
+      const { exists } = await CapacitorFile.exists({
+        path: filename,
+        directory: Directory.Documents,
+      });
+
+      if (!exists) return null;
+
+      const result = await CapacitorFile.readFile({
+        path: filename,
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8,
+      });
+
+      return JSON.parse(result.data) as T;
+    } catch (error) {
+      console.error('Failed to load JSON:', error);
+      return null;
+    }
+  }
+
+  async listFiles(folder: string = ''): Promise<string[]> {
+    const result = await CapacitorFile.readdir({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    return result.entries
+      .filter(entry => entry.isFile)
+      .map(entry => entry.name);
+  }
+
+  async deleteAll(folder: string): Promise<void> {
+    const { exists } = await CapacitorFile.exists({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    if (exists) {
+      await CapacitorFile.rmdir({
+        path: folder,
+        directory: Directory.Documents,
+        recursive: true,
+      });
+    }
+  }
+
+  async copyToBackup(filename: string): Promise<string> {
+    const timestamp = Date.now();
+    const backupName = `backup/${timestamp}-${filename}`;
+
+    const result = await CapacitorFile.copy({
+      from: filename,
+      to: backupName,
+      directory: Directory.Documents,
+      toDirectory: Directory.Documents,
+    });
+
+    return result.uri;
+  }
+}
+```
+
+## 플랫폼 참고사항
+
+### iOS
+- iOS 13.0 이상 필요
+- Documents 디렉터리는 Files 앱에서 볼 수 있습니다
+- Library 디렉터리는 앱 지원 파일용입니다
+- 기기 저장 공간이 부족할 때 캐시가 지워질 수 있습니다
+
+### Android
+- Android 6.0 (API 23) 이상 필요
+- 외부 저장소는 이전 Android 버전에서 런타임 권한이 필요합니다
+- Documents 디렉터리는 앱의 files 디렉터리에 매핑됩니다
+- 공유 저장소 액세스를 위해 External 디렉터리 사용
+
+### Web
+- 웹 플랫폼에서 지원되지 않음

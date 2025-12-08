@@ -1,0 +1,47 @@
+---
+title: "@capgo/capacitor-contacts"
+locale: zh
+description: 使用 Capacitor API 处理设备联系人，以访问、搜索和管理联系人信息。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 在您的 Capacitor 应用中访问、搜索和管理设备联系人，具有完整的 CRUD 操作和权限处理。
+  image:
+    file: ~public/icons/plugins/contacts.svg
+  actions:
+    - text: Get started
+      link: /docs/plugins/contacts/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-contacts/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="读取联系人" icon="rocket">
+    访问带有完整详细信息的设备联系人列表 📇
+  </Card>
+  <Card title="搜索功能" icon="magnifier">
+    按姓名、电子邮件或电话查找联系人 🔍
+  </Card>
+  <Card title="创建和更新" icon="pencil">
+    添加新联系人或修改现有联系人 ✏️
+  </Card>
+  <Card title="删除联系人" icon="setting">
+    安全地从设备中删除联系人 🗑️
+  </Card>
+  <Card title="权限处理" icon="approve-check-circle">
+    正确处理联系人权限，符合隐私清单要求 🔒
+  </Card>
+  <Card title="入门指南" icon="open-book">
+    查看[入门指南](/docs/plugins/contacts/getting-started/)以安装和配置插件。
+  </Card>
+</CardGrid>

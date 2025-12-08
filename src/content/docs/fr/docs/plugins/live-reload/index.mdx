@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-live-reload"
+description: Rechargez en direct votre application Capacitor depuis un serveur de développement distant pour un développement plus rapide.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Introduction"
+locale: fr
+hero:
+  tagline: Connectez votre application Capacitor à votre serveur de développement local pour un rechargement à chaud instantané et une itération plus rapide pendant le développement.
+  image:
+    file: ~public/icons/plugins/live-reload.svg
+  actions:
+    - text: Commencer
+      link: /docs/plugins/live-reload/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-live-reload/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Remplacement de module à chaud" icon="rocket">
+    Mises à jour instantanées sans reconstruire votre application
+  </Card>
+  <Card title="Serveur de développement distant" icon="laptop">
+    Connectez-vous à Vite ou tout serveur de développement compatible
+  </Card>
+  <Card title="Connexion WebSocket" icon="puzzle">
+    Communication en temps réel pour les mises à jour en direct
+  </Card>
+  <Card title="Documentation complète" icon="open-book">
+    Consultez la [Documentation](/docs/plugins/live-reload/getting-started/) pour configurer le rechargement en direct.
+  </Card>
+</CardGrid>

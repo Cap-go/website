@@ -1,0 +1,235 @@
+---
+title: Google 로그인 설정
+locale: ko
+description: 이 가이드는 Capacitor를 사용하여 Google 로그인을 설정하는 포괄적인 개요를 제공하며, 원활한 통합 프로세스를 보장하고 발생할 수 있는 잠재적인 문제를 해결하기 위한 각 단계를 자세히 설명합니다.
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 소개
+
+이 가이드에서는 Capgo Social Login으로 Google 로그인을 설정하는 방법을 배웁니다. Google 로그인을 설정하려면 다음이 필요합니다:
+
+- Google 계정
+
+## 일반 설정
+
+:::note
+사용하기로 결정한 플랫폼에 관계없이 이 단계는 필수입니다.
+:::
+
+이 부분에서는 Google에서 표시하는 로그인 화면을 설정합니다.
+
+<Steps>
+    1. [console.cloud.google.com](https://console.cloud.google.com/)으로 이동하세요
+    2. 프로젝트 선택기를 클릭합니다
+        <img src="/social-login-assets/google_cons_project_selector.png" alt="Google Console Project Selector" />
+    3. 아직 프로젝트가 없다면 **새 프로젝트를 만드세요**.
+        1. `New project`를 클릭합니다
+            <img src="/social-login-assets/google_cons_new_project_btn.png" alt="New Project button in Google Console" />
+        2. 프로젝트 이름을 지정하고 `Create`를 클릭합니다
+            <img src="/social-login-assets/google_cons_name_projec.png" alt="Project naming screen showing name field and Create button" />
+        3. 올바른 프로젝트에 있는지 확인합니다
+            <img src="/social-login-assets/google_cons_right_proj.png" alt="Project name showing in the selector indicating correct project selection" />
+    4. `OAuth consent screen` 구성을 시작합니다
+        1. 검색 창을 클릭합니다
+            <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+        2. `OAuth consent screen`을 검색하고 클릭합니다
+            <img src="/social-login-assets/google_cons_search_2.png" alt="Search results showing OAuth consent screen option" />
+        3. 동의 화면을 구성합니다
+            :::note
+            공개된 앱을 개발한다고 가정하므로 `external` 사용자 유형을 사용하겠습니다. 가장 적합한 사용자 유형을 선택하고 `create`를 클릭하세요
+            :::
+
+            `create`를 클릭합니다
+            <img src="/social-login-assets/google_cons_oauth_const_scr.png" alt="OAuth consent screen user type selection with External and Internal options" />
+    5. 앱에 대한 정보를 입력합니다
+            1. `App Information`부터 시작하겠습니다
+                <img src="/social-login-assets/google_cons_app_inf.png" alt="App Information section showing App name and User support email fields" />
+
+                    - `App Name`을 입력하세요
+                        :::caution
+                        **이것은 사용자에게 표시됩니다**
+                        :::
+                    - `user support email`을 입력합니다
+                        :::note
+                        지원 이메일에 대해 자세히 알아볼 수 있습니다 [여기](https://support.google.com/cloud/answer/10311615#user-support-email&zippy=%2Cuser-support-email/)
+                        :::
+                2. 앱 로고를 추가**할 수 있습니다**.
+                    <img src="/social-login-assets/google_cons_app_logo.png" alt="App logo upload section in OAuth consent screen" />
+                    :::note
+                    이것은 필수가 아니며 이 단계를 건너뛰겠습니다
+                    :::
+                3. `App domain`을 구성**해야 합니다**
+                    <img src="/social-login-assets/google_cons_app_doma.png" alt="App domain configuration section with authorized domains field" />
+                    :::note
+                    게시되지 **않을** 간단한 데모이기 때문에 이 작업을 수행하지 않겠지만 이 섹션을 작성하는 것이 좋습니다.
+                    :::
+
+                4. 개발자의 이메일을 제공**해야 합니다**
+                    <img src="/social-login-assets/google_cons_dev_cont_inf.png" alt="Developer contact information section with email field" />
+                5. `save and continue`를 클릭합니다
+                        <img src="/social-login-assets/google_cons_cons_sav_cont.png" alt="Save and Continue button at bottom of form" />
+    6. 범위를 구성합니다
+        1. `add or remove scopes`를 클릭합니다
+            <img src="/social-login-assets/google_cons_add_rm_sco.png" alt="Add or remove scopes button in scopes configuration screen" />
+
+        2. 다음 범위를 선택하고 `update`를 클릭합니다
+            <img src="/social-login-assets/google_cons_update_scope.png" alt="Scope selection dialog with email and profile scopes selected" />
+
+        3. `save and continue`를 클릭합니다
+            <img src="/social-login-assets/google_cons_scope_save.png" alt="Save and Continue button in scopes screen" />
+    7. 테스트 사용자를 추가합니다
+        1. `add users`를 클릭합니다
+            <img src="/social-login-assets/google_cons_add_test_usr.png" alt="Add users button in test users section" />
+        2. Google 이메일을 입력하고 Enter 키를 누른 다음 `add`를 클릭합니다
+            <img src="/social-login-assets/google_cons_add_test_usr_2.png" alt="Email input field and Add button for test users" />
+        3. `save and continue`를 클릭합니다
+            <img src="/social-login-assets/google_cons_test_usr_save.png" alt="Save and Continue button in test users screen" />
+    8. `back to dashboard`를 클릭합니다
+        <img src="/social-login-assets/google_cons_back_to_dahs.png" alt="Back to dashboard button at bottom of completion page" />
+    9. 앱을 검증을 위해 제출합니다
+        :::note
+            앱을 검증을 위해 제출하는 것이 좋습니다. 이것은 이 튜토리얼의 범위를 벗어납니다. 자세한 내용은 [여기](https://support.google.com/cloud/answer/13463073/)에서 확인할 수 있습니다. 로컬 테스트에는 필요하지 않지만 프로덕션에는 필요합니다.
+        :::
+</Steps>
+
+
+## 온라인 액세스와 오프라인 액세스의 차이점
+
+Capacitor와 함께 Google 로그인을 사용하는 방법에는 여러 가지가 있습니다. 다음은 두 가지의 차이점을 요약한 표입니다:
+
+|                         | 온라인 액세스 | 오프라인 액세스 |
+|:-----------------------:|:-------------:|:--------------:|
+| 백엔드가 필요합니다      | ❌             | ✅              |
+| 장기 액세스 토큰 | ❌             | ✅              |
+| 쉬운 설정              | ✅             | ❌              |
+
+:::note
+**오프라인 모드**는 사용자가 앱을 적극적으로 사용하지 않을 때도(즉, 사용자가 앱의 관점에서 "오프라인"일 때) 백엔드가 Google의 API에 액세스할 수 있음을 의미합니다. 장기 액세스 토큰은 백엔드가 언제든지 사용자를 대신하여 Google API를 호출할 수 있도록 하여 이 기능을 가능하게 합니다.
+:::
+
+:::caution
+**오프라인 모드에는 백엔드 서버가 필요합니다.** 오프라인 모드를 사용하면 프론트엔드는 최소한의 정보(주로 서버 인증 코드만)를 받습니다. 이 코드를 토큰 및 사용자 정보로 교환할 백엔드가 없으면 오프라인 모드는 프론트엔드 애플리케이션에 유용한 데이터를 제공하지 않습니다.
+:::
+
+어떤 것을 선택해야 할지 아직 모르겠다면 다음 시나리오를 고려하세요:
+
+1. 사용자가 로그인하기를 원하고 즉시 사용자 정의 JWT를 발급할 것입니다. 앱은 Google API를 호출하지 않습니다
+
+   이 경우 온라인 액세스를 선택하세요.
+
+2. 앱이 클라이언트에서 일부 Google API를 호출하지만 백엔드에서는 절대 호출하지 않습니다
+
+   이 경우 온라인 액세스를 선택하세요
+
+3. 앱이 백엔드에서 일부 Google API를 호출하지만 사용자가 앱을 적극적으로 사용할 때만 호출합니다
+
+   이 경우 온라인 액세스를 선택하세요
+
+4. 앱이 사용자가 앱을 적극적으로 사용하지 않을 때도 주기적으로 사용자의 캘린더를 확인합니다
+
+   이 경우 오프라인 액세스를 선택하세요
+
+## 온라인 액세스를 위한 예제 백엔드
+
+튜토리얼의 이 부분에서는 백엔드에서 사용자를 검증하는 방법을 보여드리겠습니다.
+
+이 예제는 매우 간단하며 다음 기술을 기반으로 합니다:
+
+- [Typescript](https://www.typescriptlang.org/)
+
+- [Hono](https://hono.dev/)
+
+- [Javascript's fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch)
+
+이 예제의 코드는 [여기](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/141c01d93a85240e31a0d488a89df13c842708b1/index.ts#L135-L153)에서 찾을 수 있습니다
+
+보시다시피:
+
+<img src="/social-login-assets/vscode_auth_google.png" alt="VS Code showing Google authentication code that verifies tokens" />
+
+아이디어는 매우 간단합니다. `https://www.googleapis.com/oauth2/v3/tokeninfo`에 간단한 `GET` 요청을 보내면 토큰이 유효한지 여부와 유효한 경우 사용자의 이메일을 반환합니다. 또한 사용자 토큰에 대한 다른 정보도 제공합니다
+<img src="/social-login-assets/google_auth_playground_token_info.png" alt="Google OAuth Playground showing token information response with user details" />
+
+거기에서 사용자에게 자체 JWT를 발급하거나 일종의 세션 쿠키를 발급할 수 있습니다. 최종 인증 구현에 대한 가능성은 무궁무진합니다.
+
+Google API를 호출하려면 [Google's OAuth 2.0 Playground](https://developers.google.com/oauthplayground)를 살펴보는 것이 좋습니다. 거기에서 호출할 수 있는 API를 쉽게 확인할 수 있습니다.
+
+## 자체 백엔드로 오프라인 액세스 사용
+
+온라인 액세스를 사용하려면 다음이 필요합니다:
+
+- HTTP 서버
+
+이 예제에서는 다음 기술을 사용하여 앱에서 오프라인 액세스를 제공하겠습니다:
+
+- [Hono](https://hono.dev/)
+
+- [Hono Zod validator](https://hono.dev/docs/guides/validation#with-zod)
+
+- [Zod](https://zod.dev/)
+
+- [Hono JWT](https://hono.dev/docs/helpers/jwt#jwt-authentication-helper)
+
+- [LowDb](https://www.npmjs.com/package/lowdb) (간단한 데이터베이스)
+
+이 예제의 코드는 [여기](https://github.com/WcaleNieWolny/capgo-social-login-backend-demo/blob/aac7a8c909f650a8c2cd7f88c97f5f3c594ce9ba/index.ts#L139-L287)에서 찾을 수 있습니다
+
+클라이언트 코드의 경우 다음과 같습니다:
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+import { GoogleLoginOfflineResponse, SocialLogin } from '@capgo/capacitor-social-login';
+import { usePopoutStore } from '@/popoutStore'; // <-- specific to my app
+
+const baseURL = "[redacted]";
+
+async function fullLogin() {
+  await SocialLogin.initialize({
+    google: {
+      webClientId: '[redacted]',
+      iOSClientId: '[redacted]',
+      iOSServerClientId: 'The same value as webClientId',
+      mode: 'offline' // <-- important
+    }
+  })
+  const response = await SocialLogin.login({
+    provider: 'google',
+    options: {
+      forceRefreshToken: true // <-- important
+    }
+  })
+
+  if (response.provider === 'google') {
+    const result = response.result as GoogleLoginOfflineResponse
+    const res = await fetch(`${baseURL}/auth/google_offline`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        serverAuthCode: result.serverAuthCode,
+        platform: Capacitor.getPlatform()
+      }),
+      method: "POST"
+    })
+
+    if (res.status !== 200) {
+      popoutStore.popout("Full google login failed", "check console");
+      return
+    }
+
+    const { jwt } = await res.json();
+    const userinfo = await fetch(`${baseURL}/auth/get_google_user`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    })
+    if (userinfo.status !== 200) {
+      popoutStore.popout("Full google (userinfo) login failed", "check console");
+      return
+    }
+    popoutStore.popout("userinfo res", await userinfo.text());
+  }
+}

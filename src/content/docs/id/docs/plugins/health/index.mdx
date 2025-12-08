@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-health"
+description: Hubungkan ke Apple HealthKit dan Health Connect dari Capacitor dengan API terpadu dan bertipe.
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+hero:
+  tagline: Baca dan tulis metrik kebugaran di iOS dan Android sambil menjaga satu kontrak TypeScript yang konsisten.
+  image:
+    file: ~public/icons/plugins/health.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/health/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-health/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Plugin Capgo Health menyatukan akses HealthKit dan Health Connect sehingga Anda dapat melacak aktivitas, metrik biometrik, dan pengukuran tubuh dengan satu integrasi Capacitor.
+
+<CardGrid stagger>
+  <Card title="Data kesehatan lintas platform" icon="rocket">
+    Mendukung Apple HealthKit dan Android Health Connect secara out of the box.
+  </Card>
+  <Card title="Izin terperinci" icon="approve-check">
+    Minta scope baca/tulis terpisah dan bereaksi terhadap perubahan otorisasi.
+  </Card>
+  <Card title="Unit konsisten" icon="star">
+    Bekerja dengan tipe data yang dinormalisasi seperti `steps`, `heartRate`, dan `weight`.
+  </Card>
+  <Card title="Penulisan real-time" icon="rocket">
+    Simpan sampel kembali ke penyimpanan kesehatan pengguna saat mereka mencatat aktivitas.
+  </Card>
+</CardGrid>
+
+Ikuti panduan memulai untuk mengaktifkan kemampuan platform, mengumpulkan persetujuan, dan mulai menyinkronkan metrik.

@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-media-session"
+description: Capacitorからロック画面、通知、ヘッドセットのメディアコントロールを直接制御します。
+tableOfContents: false
+next: false
+prev: false
+locale: ja
+sidebar:
+  order: 1
+  label: "紹介"
+hero:
+  tagline: トラックメタデータを公開し、再生/一時停止イベントに反応し、再生状態をネイティブメディアコントロールと同期します。
+  image:
+    file: ~public/icons/plugins/media-session.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/media-session/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-media-session/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Media SessionプラグインはCapacitorをMedia Session APIと橋渡しし、オーディオおよびビデオプレーヤーがどこでもネイティブに感じられるようにします。
+
+<CardGrid stagger>
+  <Card title="リッチメタデータ" icon="star">
+    ロック画面と通知コントロールのためのアルバムアート、アーティスト、タイトルを提供します。
+  </Card>
+  <Card title="再生状態の同期" icon="rocket">
+    再生/一時停止ボタンと進行状況インジケーターをプレーヤーと整合させます。
+  </Card>
+  <Card title="アクションコールバック" icon="pencil">
+    CapacitorコードからヘッドセットボタンとOSメディアアクションを処理します。
+  </Card>
+  <Card title="位置レポート" icon="download">
+    スクラビングがスムーズに機能するように、期間、位置、レートをプッシュします。
+  </Card>
+</CardGrid>
+
+プレーヤーのライフサイクルにメタデータ更新を組み込むために、はじめにガイドにジャンプしてください。

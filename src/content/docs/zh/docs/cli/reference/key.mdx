@@ -1,0 +1,70 @@
+---
+title: 🔐 key
+description: 🔐 管理 Capgo Cloud 中安全 bundle 分发的加密密钥，支持使用 RSA 和 AES 组合的端到端加密。
+sidebar_label: key
+locale: zh
+sidebar:
+  order: 7
+---
+
+🔐 管理 Capgo Cloud 中安全 bundle 分发的加密密钥，支持使用 RSA 和 AES 组合的端到端加密。
+
+### <a id="key-save"></a> 🔹 **Save**
+
+```bash
+npx @capgo/cli@latest key save
+```
+
+💾 在 Capacitor 配置中保存公钥，对 CI 环境很有用。
+出于安全考虑，建议不要提交密钥。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest key save --key ./path/to/key.pub
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-f,** | <code>string</code> | 强制生成新密钥 |
+| **--key** | <code>string</code> | 要保存到 Capacitor 配置中的密钥路径 |
+| **--key-data** | <code>string</code> | 要保存到 Capacitor 配置中的密钥数据 |
+
+### <a id="key-create"></a> 🔨 **Create**
+
+```bash
+npx @capgo/cli@latest key create
+```
+
+🔨 创建用于端到端加密的 RSA 密钥对。
+在项目根目录中创建 .capgo_key_v2（私钥）和 .capgo_key_v2.pub（公钥）。
+公钥保存到 capacitor.config 以用于移动应用解密。
+绝对不要提交私钥 - 请安全存储！
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest key create
+```
+
+**选项:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-f,** | <code>string</code> | 强制生成新密钥 |
+
+### <a id="key-delete_old"></a> 🗑️ **Delete_old**
+
+```bash
+npx @capgo/cli@latest key delete_old
+```
+
+🧹 从 Capacitor 配置中删除旧的加密密钥，以确保仅使用当前密钥。
+
+**示例:**
+
+```bash
+npx @capgo/cli@latest key delete_old
+```

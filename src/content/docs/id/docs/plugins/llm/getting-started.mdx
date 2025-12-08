@@ -1,0 +1,484 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Capacitor LLM untuk menjalankan model AI secara lokal di iOS dan Android.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalasi
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-llm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Konfigurasi Platform
+
+### Konfigurasi iOS
+
+- **iOS 26.0+**: Menggunakan Apple Intelligence secara default (tidak perlu model) - **Direkomendasikan**
+- **iOS < 26.0**: Memerlukan model kustom MediaPipe (eksperimental, mungkin ada masalah kompatibilitas)
+
+Untuk model kustom di versi iOS yang lebih lama, tempatkan file model di bundle aplikasi iOS Anda melalui "Copy Bundle Resources" Xcode.
+
+### Konfigurasi Android
+
+Tempatkan file model di folder aset Android Anda:
+
+```
+android/app/src/main/assets/
+```
+
+Anda memerlukan **kedua** file untuk Android:
+- File `.task` (model utama)
+- File `.litertlm` (file pendamping)
+
+Unduh dari [model Gemma Kaggle](https://www.kaggle.com/models/google/gemma) → tab "LiteRT (formerly TFLite)"
+
+## Model yang Direkomendasikan
+
+### Untuk Android (Model Gemma-3)
+
+- **Gemma 3 270M** - Terkecil, paling efisien untuk mobile (~240-400MB) - **Direkomendasikan**
+- **Gemma 3 1B** - Model generasi teks yang lebih besar (~892MB-1.5GB)
+
+Unduh dari [model Gemma Kaggle](https://www.kaggle.com/models/google/gemma) → Klik tab "LiteRT (formerly TFLite)"
+
+### Untuk iOS
+
+- **Apple Intelligence** (iOS 26.0+) - Bawaan, tidak perlu unduhan - **Direkomendasikan**
+- **Gemma-2 2B** (eksperimental) - Mungkin ada masalah kompatibilitas dengan format `.task`
+
+Untuk model iOS kustom, unduh dari [model MediaPipe Hugging Face](https://huggingface.co/collections/google/mediapipe-668392ead2d6768e82fb3b87)
+
+## Penggunaan
+
+Impor plugin dan inisialisasi:
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+import { Capacitor } from '@capacitor/core';
+
+// Periksa apakah LLM siap
+const { readiness } = await CapgoLLM.getReadiness();
+console.log('Kesiapan LLM:', readiness);
+
+// Atur model berdasarkan platform
+const platform = Capacitor.getPlatform();
+if (platform === 'ios') {
+  // iOS: Gunakan Apple Intelligence (default)
+  await CapgoLLM.setModel({ path: 'Apple Intelligence' });
+} else {
+  // Android: Gunakan model MediaPipe
+  await CapgoLLM.setModel({ path: '/android_asset/gemma-3-270m-it-int8.task' });
+}
+
+// Buat sesi chat
+const { id: chatId } = await CapgoLLM.createChat();
+
+// Dengarkan respons AI
+CapgoLLM.addListener('textFromAi', (event) => {
+  console.log('Respons AI:', event.text);
+});
+
+// Dengarkan penyelesaian
+CapgoLLM.addListener('aiFinished', (event) => {
+  console.log('AI menyelesaikan respons');
+});
+
+// Kirim pesan
+await CapgoLLM.sendMessage({
+  chatId,
+  message: 'Halo! Apa kabar hari ini?'
+});
+```
+
+## Fitur Lanjutan
+
+### Unduh Model
+
+```typescript
+// Unduh model dari URL
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/model.task',
+  filename: 'model.task'
+});
+
+// Untuk Android, unduh file .task dan .litertlm
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/gemma-3-270m-it-int8.task',
+  companionUrl: 'https://example.com/gemma-3-270m-it-int8.litertlm',
+  filename: 'gemma-3-270m-it-int8.task'
+});
+
+// Dengarkan progres unduhan
+CapgoLLM.addListener('downloadProgress', (event) => {
+  console.log(`Progres unduhan: ${event.progress}%`);
+  console.log(`Diunduh: ${event.downloadedBytes} / ${event.totalBytes}`);
+});
+```
+
+### Manajemen Model
+
+```typescript
+// Atur model tertentu dengan konfigurasi
+await CapgoLLM.setModel({
+  path: '/android_asset/gemma-3-270m-it-int8.task',
+  maxTokens: 2048,
+  topk: 40,
+  temperature: 0.8
+});
+
+// Periksa kesiapan
+const { readiness } = await CapgoLLM.getReadiness();
+if (readiness === 'ready') {
+  // Model dimuat dan siap
+}
+
+// Dengarkan perubahan kesiapan
+CapgoLLM.addListener('readinessChange', (event) => {
+  console.log('Kesiapan berubah:', event.readiness);
+});
+```
+
+## Metode API
+
+### createChat()
+
+Buat sesi chat baru.
+
+```typescript
+const { id: chatId } = await CapgoLLM.createChat();
+```
+
+**Mengembalikan:** `Promise<{ id: string; instructions?: string }>`
+
+### sendMessage(...)
+
+Kirim pesan ke LLM.
+
+```typescript
+await CapgoLLM.sendMessage({
+  chatId: 'chat-id',
+  message: 'Bagaimana cuaca hari ini?'
+});
+```
+
+| Param      | Type     | Description          |
+| ---------- | -------- | -------------------- |
+| **`chatId`**  | `string` | ID sesi chat      |
+| **`message`** | `string` | Pesan untuk dikirim      |
+
+### getReadiness()
+
+Periksa apakah LLM siap digunakan.
+
+```typescript
+const { readiness } = await CapgoLLM.getReadiness();
+```
+
+**Mengembalikan:** `Promise<{ readiness: string }>`
+
+Nilai yang mungkin:
+- `ready` - Model dimuat dan siap
+- `loading` - Model sedang dimuat
+- `not_ready` - Model belum dimuat
+- `error` - Error saat memuat model
+
+### setModel(...)
+
+Atur konfigurasi model.
+
+```typescript
+// iOS: Gunakan Apple Intelligence (direkomendasikan)
+await CapgoLLM.setModel({
+  path: 'Apple Intelligence'
+});
+
+// iOS: Gunakan model MediaPipe kustom (eksperimental)
+await CapgoLLM.setModel({
+  path: 'Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280',
+  modelType: 'task',
+  maxTokens: 1280
+});
+
+// Android: Gunakan model MediaPipe
+await CapgoLLM.setModel({
+  path: '/android_asset/gemma-3-270m-it-int8.task',
+  maxTokens: 2048,
+  topk: 40,
+  temperature: 0.8
+});
+```
+
+| Param           | Type     | Description                                       |
+| --------------- | -------- | ------------------------------------------------- |
+| **`path`**      | `string` | Jalur model atau "Apple Intelligence" untuk sistem iOS |
+| **`modelType`** | `string` | Opsional: Tipe file model (mis., "task", "bin")   |
+| **`maxTokens`** | `number` | Opsional: Token maksimum yang ditangani model        |
+| **`topk`**      | `number` | Opsional: Jumlah token yang dipertimbangkan di setiap langkah|
+| **`temperature`** | `number` | Opsional: Keacakan dalam generasi (0.0-1.0)    |
+| **`randomSeed`** | `number` | Opsional: Seed acak untuk generasi             |
+
+### downloadModel(...)
+
+Unduh model dari URL dan simpan ke penyimpanan perangkat.
+
+```typescript
+await CapgoLLM.downloadModel({
+  url: 'https://example.com/gemma-3-270m-it-int8.task',
+  companionUrl: 'https://example.com/gemma-3-270m-it-int8.litertlm',
+  filename: 'gemma-3-270m-it-int8.task'
+});
+```
+
+| Param            | Type     | Description                                 |
+| ---------------- | -------- | ------------------------------------------- |
+| **`url`**        | `string` | URL untuk diunduh                        |
+| **`companionUrl`** | `string` | Opsional: URL untuk file pendamping (.litertlm) |
+| **`filename`**   | `string` | Opsional: Nama file untuk disimpan               |
+
+**Mengembalikan:** `Promise<{ path: string; companionPath?: string }>`
+
+## Event
+
+### textFromAi
+
+Dipicu saat AI menghasilkan teks (respons streaming).
+
+```typescript
+CapgoLLM.addListener('textFromAi', (event) => {
+  console.log('Teks AI:', event.text);
+  console.log('Chat ID:', event.chatId);
+  console.log('Apakah chunk:', event.isChunk);
+});
+```
+
+**Data Event:**
+- `text` (string) - Chunk teks inkremental dari AI
+- `chatId` (string) - ID sesi chat
+- `isChunk` (boolean) - Apakah ini chunk lengkap atau data streaming parsial
+
+### aiFinished
+
+Dipicu saat AI menyelesaikan respons.
+
+```typescript
+CapgoLLM.addListener('aiFinished', (event) => {
+  console.log('Selesai untuk chat:', event.chatId);
+});
+```
+
+**Data Event:**
+- `chatId` (string) - ID sesi chat
+
+### downloadProgress
+
+Dipicu selama unduhan model untuk melaporkan progres.
+
+```typescript
+CapgoLLM.addListener('downloadProgress', (event) => {
+  console.log('Progres:', event.progress, '%');
+  console.log('Diunduh:', event.downloadedBytes, '/', event.totalBytes);
+});
+```
+
+**Data Event:**
+- `progress` (number) - Persentase unduhan selesai (0-100)
+- `downloadedBytes` (number) - Byte yang diunduh sejauh ini
+- `totalBytes` (number) - Total byte untuk diunduh
+
+### readinessChange
+
+Dipicu saat status kesiapan LLM berubah.
+
+```typescript
+CapgoLLM.addListener('readinessChange', (event) => {
+  console.log('Kesiapan berubah ke:', event.readiness);
+});
+```
+
+**Data Event:**
+- `readiness` (string) - Status kesiapan baru
+
+## Contoh Lengkap
+
+```typescript
+import { CapgoLLM } from '@capgo/capacitor-llm';
+import { Capacitor } from '@capacitor/core';
+
+class AIService {
+  private chatId: string | null = null;
+  private messageBuffer: string = '';
+
+  async initialize() {
+    // Siapkan model berdasarkan platform
+    const platform = Capacitor.getPlatform();
+
+    if (platform === 'ios') {
+      // iOS: Gunakan Apple Intelligence (direkomendasikan)
+      await CapgoLLM.setModel({ path: 'Apple Intelligence' });
+    } else {
+      // Android: Gunakan model MediaPipe
+      await CapgoLLM.setModel({
+        path: '/android_asset/gemma-3-270m-it-int8.task',
+        maxTokens: 2048,
+        topk: 40,
+        temperature: 0.8
+      });
+    }
+
+    // Tunggu model siap
+    let isReady = false;
+    while (!isReady) {
+      const { readiness } = await CapgoLLM.getReadiness();
+      if (readiness === 'ready') {
+        isReady = true;
+      } else if (readiness === 'error') {
+        throw new Error('Gagal memuat model');
+      }
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    // Buat sesi chat
+    const { id } = await CapgoLLM.createChat();
+    this.chatId = id;
+
+    // Siapkan event listener
+    this.setupListeners();
+  }
+
+  private setupListeners() {
+    CapgoLLM.addListener('textFromAi', (event) => {
+      if (event.chatId === this.chatId) {
+        this.messageBuffer += event.text;
+        this.onTextReceived(event.text);
+      }
+    });
+
+    CapgoLLM.addListener('aiFinished', (event) => {
+      if (event.chatId === this.chatId) {
+        this.onMessageComplete(this.messageBuffer);
+        this.messageBuffer = '';
+      }
+    });
+  }
+
+  async sendMessage(message: string) {
+    if (!this.chatId) {
+      throw new Error('Chat tidak diinisialisasi');
+    }
+
+    await CapgoLLM.sendMessage({
+      chatId: this.chatId,
+      message
+    });
+  }
+
+  onTextReceived(text: string) {
+    // Update UI dengan teks streaming
+    console.log('Diterima:', text);
+  }
+
+  onMessageComplete(fullMessage: string) {
+    // Tangani pesan lengkap
+    console.log('Pesan lengkap:', fullMessage);
+  }
+}
+
+// Penggunaan
+const ai = new AIService();
+await ai.initialize();
+await ai.sendMessage('Ceritakan tentang AI');
+```
+
+## Dukungan Platform
+
+| Platform | Didukung | Persyaratan |
+|----------|-----------|--------------|
+| iOS      | ✅        | iOS 13.0+ (26.0+ untuk Apple Intelligence) |
+| Android  | ✅        | API 24+ |
+| Web      | ❌        | Tidak didukung |
+
+## Praktik Terbaik
+
+1. **Pemilihan Model**: Pilih model berdasarkan kemampuan perangkat
+   - Gunakan 270M untuk sebagian besar perangkat mobile
+   - Gunakan 1B untuk perangkat high-end dengan RAM lebih banyak
+   - Uji kinerja di perangkat target
+
+2. **Manajemen Memori**: Bersihkan sesi chat saat selesai
+   ```typescript
+   // Buat chat baru untuk percakapan baru
+   const { id } = await CapacitorLLM.createChat();
+   ```
+
+3. **Penanganan Error**: Selalu periksa kesiapan sebelum digunakan
+   ```typescript
+   const { readiness } = await CapacitorLLM.getReadiness();
+   if (readiness !== 'ready') {
+     // Tangani status tidak siap
+   }
+   ```
+
+4. **Streaming UI**: Update UI secara inkremental dengan teks streaming
+   - Tampilkan teks saat tiba melalui `onAiText`
+   - Tandai selesai dengan `onAiCompletion`
+
+5. **Unduh Model**: Unduh model selama setup aplikasi, bukan saat penggunaan pertama
+   ```typescript
+   // Selama inisialisasi aplikasi
+   await CapacitorLLM.downloadModel({
+     url: 'https://your-cdn.com/model.task',
+     filename: 'model.task'
+   });
+   ```
+
+## Pemecahan Masalah
+
+### Model tidak dimuat
+- Verifikasi file model di lokasi yang benar
+- Periksa format model cocok dengan platform (.gguf untuk iOS, .task untuk Android)
+- Pastikan penyimpanan perangkat yang cukup
+
+### Kinerja buruk
+- Coba model yang lebih kecil (270M bukan 1B)
+- Tutup aplikasi lain untuk membebaskan memori
+- Uji di perangkat sebenarnya, bukan simulator
+
+### Tidak ada respons
+- Periksa status kesiapan adalah 'ready'
+- Verifikasi event listener diatur sebelum mengirim pesan
+- Periksa console untuk error
+
+## Sumber Daya
+
+- [Repositori GitHub](https://github.com/Cap-go/capacitor-llm)
+- [Model Gemma](https://ai.google.dev/gemma)
+- [Apple Intelligence](https://developer.apple.com/machine-learning/)
+- [MediaPipe](https://developers.google.com/mediapipe)

@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-alarm"
+locale: zh
+description: 即使在应用关闭时也能调度原生闹钟和通知。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 直接从您的 Capacitor 应用在 iOS 和 Android 上管理原生闹钟。
+  image:
+    file: ~public/icons/plugins/alarm.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/alarm/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-alarm/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="原生集成" icon="puzzle">
+    在 iOS 上使用原生 AlarmKit，在 Android 上使用 AlarmClock intent 📱
+  </Card>
+  <Card title="简单的 API" icon="rocket">
+    易于使用的方法来创建和管理闹钟 ⚡
+  </Card>
+  <Card title="权限处理" icon="approve-check-circle">
+    内置支持请求必要权限 🔒
+  </Card>
+  <Card title="全面的文档" icon="open-book">
+    查看[文档](/docs/plugins/alarm/getting-started/)，只需几分钟即可掌握该插件。
+  </Card>
+</CardGrid>

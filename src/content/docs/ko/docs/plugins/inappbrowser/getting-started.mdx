@@ -1,0 +1,410 @@
+---
+title: 시작하기
+description: Capacitor 앱에서 임베디드 웹 콘텐츠를 위한 URL 변경 이벤트와 함께 InAppBrowser 플러그인을 설치하고 사용하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/inappbrowser" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용법
+
+플러그인을 가져와서 두 가지 주요 진입점을 사용합니다:
+
+```typescript
+import { InAppBrowser, ToolBarType, BackgroundColor } from '@capgo/inappbrowser';
+
+// 1) 간단한 커스텀 탭 / SFSafariViewController
+const openExternal = async () => {
+  await InAppBrowser.open({
+    url: 'https://capgo.app',
+    isPresentAfterPageLoad: true,
+    preventDeeplink: false,
+  });
+};
+
+// 2) 탐색, 헤더, 공유, 메시징 등이 있는 전체 WebView
+const openWebView = async () => {
+  await InAppBrowser.openWebView({
+    url: 'https://capgo.app',
+    title: 'Capgo',
+    toolbarType: ToolBarType.NAVIGATION,
+    backgroundColor: BackgroundColor.BLACK,
+    activeNativeNavigationForWebview: true,
+    showReloadButton: true,
+    shareSubject: '이 페이지 확인',
+    shareDisclaimer: {
+      title: '면책 조항',
+      message: '콘텐츠를 공유하려고 합니다',
+      confirmBtn: '계속',
+      cancelBtn: '취소',
+    },
+  });
+};
+
+// 앱과 열린 WebView 간의 메시징
+const setupListeners = async () => {
+  await InAppBrowser.addListener('urlChangeEvent', (event) => {
+    console.log('URL 변경:', event.url);
+  });
+
+  await InAppBrowser.addListener('messageFromWebview', (event) => {
+    console.log('웹에서 메시지:', event.detail);
+  });
+
+  await InAppBrowser.addListener('closeEvent', () => {
+    console.log('WebView 닫힘');
+  });
+};
+
+// WebView에 데이터 전송
+const sendData = async () => {
+  await InAppBrowser.postMessage({ detail: { action: 'refresh-profile' } });
+};
+
+// 닫기 및 새로고침 헬퍼
+const closeBrowser = () => InAppBrowser.close();
+const reloadPage = () => InAppBrowser.reload();
+```
+
+## API 참조
+
+### open(options: OpenOptions)
+커스텀 탭 / SFSafariViewController에서 URL을 엽니다.
+
+```typescript
+interface OpenOptions {
+  /** 로드할 대상 URL */
+  url: string;
+  /** 페이지 로드 완료 후 표시 */
+  isPresentAfterPageLoad?: boolean;
+  /** 딥링크가 외부 앱을 여는 것을 방지 */
+  preventDeeplink?: boolean;
+}
+
+await InAppBrowser.open({ url: 'https://example.com', preventDeeplink: true });
+```
+
+### openWebView(options: OpenWebViewOptions)
+탐색 UI, 헤더, 자격 증명, 스크립팅 및 메시징이 있는 완전한 기능의 WebView를 로드합니다.
+
+```typescript
+interface OpenWebViewOptions {
+  url: string;
+  headers?: Record<string, string>;
+  credentials?: { username: string; password: string };
+  materialPicker?: boolean;
+  shareDisclaimer?: {
+    title: string;
+    message: string;
+    confirmBtn: string;
+    cancelBtn: string;
+  };
+  toolbarType?: ToolBarType;
+  shareSubject?: string;
+  title?: string;
+  backgroundColor?: BackgroundColor;
+  activeNativeNavigationForWebview?: boolean;
+  disableGoBackOnNativeApplication?: boolean;
+  isPresentAfterPageLoad?: boolean;
+  isInspectable?: boolean;
+  isAnimated?: boolean;
+  showReloadButton?: boolean;
+  closeModal?: boolean;
+  closeModalTitle?: string;
+  closeModalDescription?: string;
+  closeModalOk?: string;
+  closeModalCancel?: string;
+  visibleTitle?: boolean;
+  toolbarColor?: string;
+  toolbarTextColor?: string;
+  showArrow?: boolean;
+  ignoreUntrustedSSLError?: boolean;
+  preShowScript?: string;
+  preShowScriptInjectionTime?: 'documentStart' | 'pageLoad';
+  proxyRequests?: string;
+  buttonNearDone?: {
+    ios: { iconType: 'sf-symbol' | 'asset'; icon: string };
+    android: { iconType: 'asset' | 'vector'; icon: string; width?: number; height?: number };
+  };
+  textZoom?: number;
+  preventDeeplink?: boolean;
+  authorizedAppLinks?: string[];
+  enabledSafeBottomMargin?: boolean;
+  useTopInset?: boolean;
+  enableGooglePaySupport?: boolean;
+  blockedHosts?: string[];
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+}
+
+await InAppBrowser.openWebView({
+  url: 'https://new-page.com',
+  toolbarType: ToolBarType.NAVIGATION,
+  showReloadButton: true,
+});
+```
+
+`ToolBarType` 값: `activity` (닫기 + 공유), `compact` (닫기만), `navigation` (뒤로/앞으로 + 닫기), `blank` (툴바 없음). `BackgroundColor` 값: `white` 또는 `black`.
+
+### close(options?)
+WebView/커스텀 탭을 닫습니다.
+
+**옵션:**
+- `isAnimated?: boolean` - 닫기 작업을 애니메이션할지 여부
+
+### reload()
+현재 WebView 페이지를 새로고침합니다.
+
+### goBack()
+WebView 기록에서 뒤로 이동하고 `{ canGoBack: boolean }`을 반환합니다.
+
+### `setUrl({ url: string })`
+현재 WebView URL을 교체합니다.
+
+### `executeScript({ code: string })`
+WebView에 JavaScript를 주입합니다.
+
+### `postMessage({ detail: Record<string, any> })`
+네이티브 앱에서 WebView로 데이터를 전송합니다 (JS에서 `window.addEventListener('messageFromNative', ...)`를 통해 수신).
+
+### `getCookies({ url, includeHttpOnly? })`
+URL에 대한 쿠키를 반환합니다.
+
+### `clearCookies({ url })` / clearAllCookies() / clearCache()
+쿠키 및 캐시 관리 헬퍼.
+
+### updateDimensions(options: DimensionOptions)
+런타임에 WebView 크기/위치 변경 (`width`, `height`, `x`, `y`).
+
+### removeAllListeners()
+플러그인에 대한 모든 리스너 등록 취소.
+
+## 이벤트
+
+### urlChangeEvent
+
+브라우저에서 URL이 변경될 때 발생합니다.
+
+```typescript
+interface UrlChangeEvent {
+  url: string;
+}
+
+InAppBrowser.addListener('urlChangeEvent', (event) => {
+  console.log('새 URL:', event.url);
+});
+```
+
+### messageFromWebview
+WebView 내부에서 `window.mobileApp.postMessage(...)`가 호출될 때 트리거됩니다.
+
+```typescript
+InAppBrowser.addListener('messageFromWebview', (event) => {
+  console.log('웹에서 페이로드:', event.detail);
+});
+```
+
+### closeEvent
+
+브라우저가 닫힐 때 발생합니다.
+
+```typescript
+InAppBrowser.addListener('closeEvent', () => {
+  console.log('브라우저 닫힘');
+});
+```
+
+### buttonNearDoneClick
+`buttonNearDone`으로 추가된 커스텀 버튼을 누를 때 발생합니다.
+
+```typescript
+InAppBrowser.addListener('buttonNearDoneClick', (event) => {
+  console.log('완료 버튼 근처 탭', event);
+});
+```
+
+### confirmBtnClicked
+확인 대화 상자(면책 조항 또는 닫기 모달)가 수락될 때 트리거됩니다.
+
+```typescript
+InAppBrowser.addListener('confirmBtnClicked', (event) => {
+  console.log('확인 승인됨, 현재 URL:', event.url);
+});
+```
+
+### browserPageLoaded / pageLoadError
+WebView 로드 성공 또는 실패에 대한 라이프사이클 이벤트.
+
+```typescript
+InAppBrowser.addListener('browserPageLoaded', () => console.log('페이지 로드됨'));
+InAppBrowser.addListener('pageLoadError', () => console.log('페이지 로드 실패'));
+```
+
+## 고급 사용법
+
+### OAuth 플로우 구현
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class OAuthService {
+  private listeners: any[] = [];
+
+  async authenticate(authUrl: string, redirectUri: string) {
+    return new Promise<string>((resolve, reject) => {
+      // URL 변경 수신
+      const urlListener = InAppBrowser.addListener('urlChangeEvent', (event) => {
+        if (event.url.startsWith(redirectUri)) {
+          // URL에서 OAuth 코드/토큰 추출
+          const url = new URL(event.url);
+          const code = url.searchParams.get('code');
+
+          if (code) {
+            InAppBrowser.close();
+            resolve(code);
+          } else {
+            const error = url.searchParams.get('error');
+            reject(new Error(error || 'OAuth 실패'));
+          }
+        }
+      });
+
+      this.listeners.push(urlListener);
+
+      // OAuth 제공자 열기
+      InAppBrowser.open({
+        url: authUrl,
+        preventDeeplink: true,
+      });
+    });
+  }
+
+  cleanup() {
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+}
+```
+
+### 커스텀 브라우저 UI
+
+```typescript
+const openCustomBrowser = async () => {
+  await InAppBrowser.open({
+    url: 'https://example.com',
+    isPresentAfterPageLoad: true,
+    preventDeeplink: false,
+  });
+};
+```
+
+### 외부 링크 처리
+
+```typescript
+import { InAppBrowser } from '@capgo/inappbrowser';
+
+export class LinkHandler {
+  async openExternalLink(url: string) {
+    // URL이 브라우저에서 열려야 하는지 확인
+    if (this.shouldOpenInBrowser(url)) {
+      await InAppBrowser.open({
+        url,
+        preventDeeplink: true,
+      });
+    } else {
+      // 내부적으로 처리
+      window.location.href = url;
+    }
+  }
+
+  private shouldOpenInBrowser(url: string): boolean {
+    // 외부 도메인
+    const externalDomains = ['youtube.com', 'twitter.com', 'facebook.com'];
+    const urlDomain = new URL(url).hostname;
+
+    return externalDomains.some(domain => urlDomain.includes(domain));
+  }
+}
+```
+
+## 모범 사례
+
+1. **항상 리스너 제거**
+   ```typescript
+   const listener = await InAppBrowser.addListener('urlChangeEvent', handler);
+   // 완료 시
+   listener.remove();
+   ```
+
+2. **브라우저 상태 처리**
+   ```typescript
+   let browserOpen = false;
+
+   const launch = async () => {
+     browserOpen = true;
+     await InAppBrowser.openWebView({ url: 'https://example.com' });
+   };
+
+   InAppBrowser.addListener('closeEvent', () => {
+     browserOpen = false;
+   });
+   ```
+
+3. **열기 전에 URL 유효성 검사**
+   ```typescript
+   const isValidUrl = (url: string): boolean => {
+     try {
+       new URL(url);
+       return true;
+     } catch {
+       return false;
+     }
+   };
+
+   if (isValidUrl(url)) {
+     await InAppBrowser.open({ url });
+   }
+   ```
+
+4. **플랫폼에 맞게 사용자 정의**
+   ```typescript
+   import { Capacitor } from '@capacitor/core';
+
+   const options = {
+     url: 'https://example.com',
+     preventDeeplink: Capacitor.getPlatform() === 'ios',
+   };
+   ```
+
+## 플랫폼 참고사항
+
+### iOS
+- `SFSafariViewController` 사용
+- iOS 11.0 이상 지원
+- Safe Area 인셋 존중
+- 커스텀 프레젠테이션 스타일 지원
+
+### Android
+- Chrome Custom Tabs 사용
+- Chrome을 사용할 수 없는 경우 WebView로 대체
+- Android 5.0 (API 21) 이상 지원
+- `toolbarType`, `toolbarColor`, `buttonNearDone` 등을 통한 툴바 사용자 정의 지원
+
+### Web
+- 새 브라우저 탭/창에서 열림
+- 제한된 사용자 정의 옵션
+- URL 변경 이벤트 없음

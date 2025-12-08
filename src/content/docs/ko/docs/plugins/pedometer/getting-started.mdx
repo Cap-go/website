@@ -1,0 +1,209 @@
+---
+title: "Pedometer 시작하기"
+locale: ko
+description: "Capacitor 앱에 걸음 수 카운팅 및 피트니스 추적을 통합하는 방법을 알아보세요"
+---
+
+이 가이드는 Capacitor Pedometer 플러그인을 애플리케이션에 통합하는 방법을 안내합니다.
+
+## 설치
+
+npm을 사용하여 플러그인을 설치합니다:
+
+```bash
+npm install @capgo/capacitor-pedometer
+npx cap sync
+```
+
+## iOS 구성
+
+`Info.plist`에 모션 사용 설명을 추가합니다:
+
+```xml
+<key>NSMotionUsageDescription</key>
+<string>걸음 수와 활동을 추적하기 위해 모션 데이터에 대한 액세스가 필요합니다</string>
+```
+
+## Android 구성
+
+플러그인은 `ACTIVITY_RECOGNITION` 권한을 자동으로 추가합니다. Android 10+ (API 29)의 경우 런타임에 이 권한을 요청해야 합니다.
+
+## 기본 사용법
+
+### 플러그인 가져오기
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+```
+
+### 가용성 확인
+
+```typescript
+const checkPedometer = async () => {
+  const result = await CapacitorPedometer.isAvailable();
+  console.log('걸음 수 카운팅 사용 가능:', result.stepCounting);
+  console.log('거리 사용 가능:', result.distance);
+  console.log('층 카운팅 사용 가능:', result.floorCounting);
+  console.log('페이스 사용 가능:', result.pace);
+  console.log('케이던스 사용 가능:', result.cadence);
+};
+```
+
+### 권한 요청
+
+```typescript
+const requestPermission = async () => {
+  const permission = await CapacitorPedometer.requestPermissions();
+  console.log('권한 상태:', permission.activityRecognition);
+};
+```
+
+### 현재 측정값 가져오기
+
+```typescript
+const getMeasurements = async () => {
+  const measurements = await CapacitorPedometer.getMeasurement({
+    startDate: new Date(Date.now() - 24 * 60 * 60 * 1000), // 24시간 전
+    endDate: new Date()
+  });
+
+  console.log('걸음 수:', measurements.numberOfSteps);
+  console.log('거리:', measurements.distance, '미터');
+  console.log('오른 층:', measurements.floorsAscended);
+  console.log('내려간 층:', measurements.floorsDescended);
+};
+```
+
+### 실시간 업데이트 시작
+
+```typescript
+// 실시간 업데이트를 위한 리스너 추가
+CapacitorPedometer.addListener('measurement', (data) => {
+  console.log('걸음 수:', data.numberOfSteps);
+  console.log('거리:', data.distance);
+  console.log('페이스:', data.currentPace);
+  console.log('케이던스:', data.currentCadence);
+});
+
+// 업데이트 수신 시작
+await CapacitorPedometer.startMeasurementUpdates();
+```
+
+### 업데이트 중지
+
+```typescript
+await CapacitorPedometer.stopMeasurementUpdates();
+CapacitorPedometer.removeAllListeners();
+```
+
+## 완전한 예제
+
+```typescript
+import { CapacitorPedometer } from '@capgo/capacitor-pedometer';
+
+class PedometerService {
+  private listener: any;
+
+  async initialize() {
+    // 가용성 확인
+    const available = await CapacitorPedometer.isAvailable();
+    if (!available.stepCounting) {
+      console.error('걸음 수 카운팅을 사용할 수 없음');
+      return false;
+    }
+
+    // 권한 요청
+    const permission = await CapacitorPedometer.requestPermissions();
+    if (permission.activityRecognition !== 'granted') {
+      console.error('권한 거부됨');
+      return false;
+    }
+
+    return true;
+  }
+
+  async startTracking() {
+    // 리스너 추가
+    this.listener = CapacitorPedometer.addListener('measurement', (data) => {
+      this.onMeasurement(data);
+    });
+
+    // 업데이트 시작
+    await CapacitorPedometer.startMeasurementUpdates();
+    console.log('만보계 추적 시작됨');
+  }
+
+  async stopTracking() {
+    await CapacitorPedometer.stopMeasurementUpdates();
+    if (this.listener) {
+      this.listener.remove();
+    }
+    console.log('만보계 추적 중지됨');
+  }
+
+  onMeasurement(data: any) {
+    console.log('오늘의 걸음 수:', data.numberOfSteps);
+    console.log('거리:', (data.distance / 1000).toFixed(2), 'km');
+  }
+
+  async getTodaySteps() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const measurements = await CapacitorPedometer.getMeasurement({
+      startDate: today,
+      endDate: new Date()
+    });
+
+    return measurements.numberOfSteps;
+  }
+}
+
+// 사용법
+const pedometer = new PedometerService();
+await pedometer.initialize();
+await pedometer.startTracking();
+```
+
+## 모범 사례
+
+1. **가용성 확인**: 사용하기 전에 항상 만보계 기능을 확인합니다
+2. **권한 요청**: 권한 요청을 우아하게 처리합니다
+3. **배터리 최적화**: 필요하지 않을 때 업데이트를 중지합니다
+4. **오류 처리**: try-catch 블록으로 호출을 래핑합니다
+5. **백그라운드 업데이트**: 지속적인 추적을 위해 백그라운드 모드를 구성합니다
+
+## 일반적인 문제
+
+### 권한 거부됨
+
+```typescript
+const handlePermissionDenied = async () => {
+  const permission = await CapacitorPedometer.checkPermissions();
+
+  if (permission.activityRecognition === 'denied') {
+    alert('모션 추적 권한이 필요합니다. 설정에서 활성화하세요.');
+  }
+};
+```
+
+### 장치에서 사용할 수 없음
+
+```typescript
+const checkSupport = async () => {
+  const available = await CapacitorPedometer.isAvailable();
+
+  if (!available.stepCounting) {
+    alert('이 장치에서는 걸음 수 카운팅을 사용할 수 없습니다');
+    return false;
+  }
+
+  return true;
+};
+```
+
+## 다음 단계
+
+- 전체 문서는 [API Reference](https://github.com/Cap-go/capacitor-pedometer#api)를 참조하세요
+- [예제 앱](https://github.com/Cap-go/capacitor-pedometer/tree/main/example)을 확인하세요
+- 고급 구현은 [튜토리얼](/plugins-tutorials/capacitor-pedometer)을 참조하세요

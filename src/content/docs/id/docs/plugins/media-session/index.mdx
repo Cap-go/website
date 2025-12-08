@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-media-session"
+description: Kontrol media lock-screen, notifikasi, dan headset langsung dari Capacitor.
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+hero:
+  tagline: Publikasikan metadata trek, bereaksi terhadap event play/pause, dan sinkronkan status pemutaran dengan kontrol media asli.
+  image:
+    file: ~public/icons/plugins/media-session.svg
+  actions:
+    - text: Mulai
+      link: /docs/plugins/media-session/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-media-session/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Plugin Media Session menghubungkan Capacitor dengan Media Session API sehingga pemutar audio dan video Anda terasa asli di mana saja.
+
+<CardGrid stagger>
+  <Card title="Metadata kaya" icon="star">
+    Sediakan album art, artis, dan judul untuk kontrol lock-screen dan notifikasi.
+  </Card>
+  <Card title="Sinkronisasi status pemutaran" icon="rocket">
+    Jaga tombol play/pause dan indikator progres selaras dengan pemutar Anda.
+  </Card>
+  <Card title="Callback aksi" icon="pencil">
+    Tangani tombol headset dan aksi media OS dari kode Capacitor Anda.
+  </Card>
+  <Card title="Pelaporan posisi" icon="download">
+    Kirim durasi, posisi, dan rate agar scrubbing bekerja dengan lancar.
+  </Card>
+</CardGrid>
+
+Langsung ke panduan memulai untuk menghubungkan pembaruan metadata ke siklus hidup pemutar Anda.

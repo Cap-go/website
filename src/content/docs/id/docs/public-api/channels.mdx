@@ -1,0 +1,266 @@
+---
+title: "Channels"
+locale: id
+description: "Panduan untuk mengelola saluran pembaruan aplikasi di Capgo, mencakup kontrol versi, penargetan platform, dan kebijakan pembaruan."
+sidebar:
+  order: 6
+---
+
+Channel adalah mekanisme inti untuk mengelola pembaruan aplikasi di Capgo. Mereka memungkinkan Anda mengontrol bagaimana dan kapan pengguna Anda menerima pembaruan, memungkinkan fitur seperti pengujian A/B, peluncuran bertahap, dan pembaruan khusus platform.
+
+## Memahami Channel
+
+Channel mewakili jalur distribusi untuk pembaruan aplikasi Anda. Setiap channel dapat dikonfigurasi dengan aturan dan batasan tertentu:
+
+- **Kontrol Versi**: Tentukan versi mana yang diterima pengguna
+- **Penargetan Platform**: Targetkan platform tertentu (iOS/Android)
+- **Kebijakan Pembaruan**: Kontrol bagaimana pembaruan dikirimkan
+- **Pembatasan Perangkat**: Kelola perangkat mana yang dapat mengakses pembaruan
+
+## Opsi Konfigurasi Channel
+
+- **public**: Tetapkan sebagai channel default untuk perangkat baru
+- **disableAutoUpdateUnderNative**: Cegah pembaruan ketika versi aplikasi native perangkat lebih baru dari versi pembaruan yang tersedia di channel (misalnya, perangkat berada di versi 1.2.3, tetapi channel memiliki 1.2.2)
+- **disableAutoUpdate**: Kontrol perilaku pembaruan ("major", "minor", "version_number", "none")
+- **ios/android**: Aktifkan/nonaktifkan untuk platform tertentu
+- **allow_device_self_set**: Biarkan perangkat memilih channel mereka
+- **allow_emulator**: Izinkan pembaruan pada perangkat emulator
+- **allow_dev**: Izinkan pembaruan pada build development
+
+## Praktik Terbaik
+
+1. **Channel Pengujian**: Pertahankan channel pengujian untuk validasi internal
+2. **Peluncuran Bertahap**: Gunakan beberapa channel untuk deployment pembaruan secara bertahap
+3. **Pemisahan Platform**: Buat channel terpisah untuk iOS dan Android saat diperlukan
+4. **Kontrol Versi**: Gunakan semantic versioning untuk jalur pembaruan yang jelas
+
+## Endpoint
+
+### POST
+
+`https://api.capgo.app/channel/`
+
+Buat atau perbarui konfigurasi channel.
+
+#### Request Body
+
+```typescript
+type disable_update = "major" | "minor" | "version_number" | "none"
+interface ChannelSet {
+  app_id: string
+  channel: string
+  version?: string
+  public?: boolean
+  disableAutoUpdateUnderNative?: boolean
+  disableAutoUpdate?: disable_update
+  ios?: boolean
+  android?: boolean
+  allow_device_self_set?: boolean
+  allow_emulator?: boolean
+  allow_dev?: boolean
+}
+```
+
+#### Example Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "channel": "beta",
+    "version": "1.2.0",
+    "public": false,
+    "disableAutoUpdate": "minor",
+    "ios": true,
+    "android": true,
+    "allow_emulator": true
+  }' \
+  https://api.capgo.app/channel/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### GET
+
+`https://api.capgo.app/channel/`
+
+Ambil informasi channel. Mengembalikan 50 channel per halaman.
+
+#### Query Parameters
+- `app_id`: Wajib. ID aplikasi Anda
+- `page`: Opsional. Nomor halaman untuk pagination
+- `channel`: Opsional. Nama channel spesifik untuk diambil
+
+#### Contoh Request
+
+```bash
+# Get all channels
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=app_123"
+
+# Get specific channel
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=app_123&channel=beta"
+
+# Get next page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=app_123&page=1"
+```
+
+#### Tipe Response
+
+```typescript
+interface Channel {
+    id: number;
+    created_at: string;
+    name: string;
+    app_id: string;
+    version: {
+        id: number,
+        name: string
+    };
+    created_by: string;
+    updated_at: string;
+    public: boolean;
+    disableAutoUpdateUnderNative: boolean;
+    disableAutoUpdate: boolean;
+    allow_emulator: boolean;
+    allow_dev: boolean;
+}
+```
+
+#### Contoh Response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "production",
+      "app_id": "app_123",
+      "version": {
+        "id": 1,
+        "name": "1.0.0"
+      },
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "created_by": "user_123",
+      "public": true,
+      "disableAutoUpdateUnderNative": false,
+      "disableAutoUpdate": false,
+      "allow_emulator": false,
+      "allow_dev": false
+    }
+  ]
+}
+```
+
+### DELETE
+
+`https://api.capgo.app/channel/`
+
+Hapus channel. Perhatikan bahwa ini akan mempengaruhi semua perangkat yang menggunakan channel ini.
+
+#### Query Parameters
+
+```typescript
+interface Channel {
+  channel: string
+  app_id: string
+}
+```
+
+#### Example Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "channel": "beta"
+  }' \
+  https://api.capgo.app/channel/
+```
+
+#### Success Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## Penanganan Error
+
+Skenario error umum dan responsnya:
+
+```json
+// Channel not found
+{
+  "error": "Channel not found",
+  "status": "KO"
+}
+
+// Invalid version format
+{
+  "error": "Invalid version format. Use semantic versioning",
+  "status": "KO"
+}
+
+// Invalid update policy
+{
+  "error": "Invalid disableAutoUpdate value",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage channels",
+  "status": "KO"
+}
+```
+
+## Kasus Penggunaan Umum
+
+1. **Beta Testing**
+```typescript
+{
+  "app_id": "app_123",
+  "channel": "beta",
+  "version": "1.2.0-beta",
+  "public": false,
+  "allow_emulator": true,
+  "allow_dev": true
+}
+```
+
+2. **Peluncuran Produksi**
+```typescript
+{
+  "app_id": "app_123",
+  "channel": "production",
+  "version": "1.2.0",
+  "public": true,
+  "disableAutoUpdate": "minor"
+}
+```
+
+3. **Platform-Specific Updates**
+```typescript
+{
+  "app_id": "app_123",
+  "channel": "ios-hotfix",
+  "version": "1.2.1",
+  "ios": true,
+  "android": false
+}
+``` 

@@ -1,0 +1,200 @@
+---
+title: Comenzando
+locale: es
+description: Aprende cómo instalar y configurar el plugin Capacitor Navigation Bar para personalizar el color y estilo de la barra de navegación de Android.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instalar el paquete**
+   <PackageManagers pkg="@capgo/capacitor-navigation-bar" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincronizar con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configurar el plugin**
+
+   **Establecer Color de Barra de Navegación:**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Establecer color de barra de navegación
+   await NavigationBar.setColor({
+     color: '#FF0000', // Color rojo
+     darkButtons: false // Usar botones claros
+   });
+   ```
+
+   **Soporte de Tema Dinámico:**
+   ```typescript
+   // Establecer color basado en el tema
+   const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+   await NavigationBar.setColor({
+     color: isDarkMode ? '#000000' : '#FFFFFF',
+     darkButtons: !isDarkMode
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="Android">
+       **Requisitos Mínimos:**
+       - Android 5.0 (API nivel 21) o superior
+       - El plugin solo funciona en dispositivos Android
+
+       No se requiere configuración adicional en AndroidManifest.xml.
+     </TabItem>
+     <TabItem label="iOS">
+       Este plugin es solo para Android. iOS no tiene una barra de navegación personalizable.
+     </TabItem>
+   </Tabs>
+
+4. **Uso avanzado**
+   ```typescript
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   export class ThemeService {
+     // Establecer barra de navegación transparente
+     async setTransparent() {
+       await NavigationBar.setColor({
+         color: '#00000000', // Transparente
+         darkButtons: true
+       });
+     }
+
+     // Coincidir con tema de aplicación
+     async matchAppTheme(primaryColor: string, isLight: boolean) {
+       await NavigationBar.setColor({
+         color: primaryColor,
+         darkButtons: isLight
+       });
+     }
+
+     // Obtener color actual de barra de navegación
+     async getCurrentColor() {
+       const result = await NavigationBar.getColor();
+       console.log('Current color:', result.color);
+       return result.color;
+     }
+
+     // Restablecer a predeterminado
+     async resetToDefault() {
+       await NavigationBar.setColor({
+         color: '#000000',
+         darkButtons: false
+       });
+     }
+   }
+   ```
+
+5. **Integración con ciclo de vida de la aplicación**
+   ```typescript
+   import { App } from '@capacitor/app';
+   import { NavigationBar } from '@capgo/capacitor-navigation-bar';
+
+   // Actualizar barra de navegación en cambios de estado de aplicación
+   App.addListener('appStateChange', async ({ isActive }) => {
+     if (isActive) {
+       // Restaurar color de barra de navegación de tu aplicación
+       await NavigationBar.setColor({
+         color: '#YourAppColor',
+         darkButtons: true
+       });
+     }
+   });
+
+   // Manejar cambios de tema
+   window.matchMedia('(prefers-color-scheme: dark)')
+     .addEventListener('change', async (e) => {
+       await NavigationBar.setColor({
+         color: e.matches ? '#121212' : '#FFFFFF',
+         darkButtons: !e.matches
+       });
+     });
+   ```
+</Steps>
+
+## Referencia de API
+
+### Métodos
+
+#### `setColor(options: ColorOptions)`
+Establece el color de la barra de navegación y el estilo de botones.
+
+**Parámetros:**
+- `options`: Objeto de configuración
+  - `color`: string - Código de color hexadecimal (ej., '#FF0000')
+  - `darkButtons`: boolean - Usar botones oscuros (true) o botones claros (false)
+
+**Retorna:** `Promise<void>`
+
+#### `getColor()`
+Obtiene el color actual de la barra de navegación.
+
+**Retorna:** `Promise<{ color: string }>`
+
+### Interfaces
+
+```typescript
+interface ColorOptions {
+  color: string;      // Código de color hexadecimal
+  darkButtons: boolean; // Estilo de botones
+}
+
+interface ColorResult {
+  color: string;      // Color hexadecimal actual
+}
+```
+
+## Notas de Plataforma
+
+### Android
+- Requiere Android 5.0 (API nivel 21) o superior
+- Los cambios de color son inmediatos
+- Se soportan colores transparentes (usar canal alfa)
+- La barra de navegación podría no ser visible en dispositivos con navegación por gestos
+
+### iOS
+- Este plugin no tiene efecto en dispositivos iOS
+- iOS no proporciona APIs para personalizar la navegación del sistema
+
+## Casos de Uso Comunes
+
+1. **Consistencia de Marca**: Coincidir barra de navegación con el color primario de tu aplicación
+2. **Soporte de Tema**: Adaptarse a temas claro/oscuro dinámicamente
+3. **Experiencias Inmersivas**: Usar navegación transparente para contenido de pantalla completa
+4. **Indicación de Estado**: Cambiar color para indicar estados de aplicación (grabación, errores, etc.)
+
+## Mejores Prácticas
+
+1. **Contraste de Color**: Asegurar suficiente contraste entre barra de navegación y botones
+   ```typescript
+   // Ejemplos de buen contraste
+   setColor({ color: '#FFFFFF', darkButtons: true });  // Barra blanca, botones oscuros
+   setColor({ color: '#000000', darkButtons: false }); // Barra negra, botones claros
+   ```
+
+2. **Consistencia de Tema**: Actualizar barra de navegación cuando cambie el tema
+3. **Accesibilidad**: Considerar usuarios con discapacidades visuales al elegir colores
+4. **Rendimiento**: Evitar cambios frecuentes de color que puedan distraer a los usuarios
+
+## Solución de Problemas
+
+**La barra de navegación no cambia:**
+- Verifica que el dispositivo esté ejecutando Android 5.0+
+- Verifica si el dispositivo tiene navegación por gestos habilitada
+- Asegúrate de que el formato de color sea hexadecimal válido (ej., '#FF0000')
+
+**Botones no visibles:**
+- Verifica que el parámetro `darkButtons` coincida con tu color de fondo
+- Fondos claros necesitan `darkButtons: true`
+- Fondos oscuros necesitan `darkButtons: false`
+
+**El color aparece diferente:**
+- Algunas versiones de Android pueden modificar el color ligeramente
+- Usa colores totalmente opacos para mejores resultados

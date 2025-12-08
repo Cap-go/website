@@ -1,0 +1,355 @@
+---
+title: はじめに
+locale: ja
+description: Capacitorアプリでより高速な開発のためにライブリロードを設定する方法を学びます。
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **パッケージをインストール**
+   <PackageManagers pkg="@capgo/capacitor-live-reload" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **ネイティブプロジェクトと同期**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## セットアップ
+
+Vite開発サーバーをライブリロードと連携するように設定します。以下が必要です:
+1. 組み込みHMRクライアントを無効化
+2. 専用のWebSocketエンドポイント経由でリロードイベントを転送
+
+## 使用方法
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+// 開発サーバーを設定
+await LiveReload.configureServer({
+  url: 'http://localhost:5173',
+  websocketPath: '/capgo-livereload',
+  autoReconnect: true,
+  reconnectInterval: 2000
+});
+
+// 開発サーバーに接続
+await LiveReload.connect();
+
+// リロードイベントをリッスン
+LiveReload.addListener('reloadEvent', (event) => {
+  console.log('Reload event:', event);
+  if (event.type === 'full-reload') {
+    console.log('Full page reload triggered');
+  } else if (event.type === 'file-update') {
+    console.log('File updated:', event.file);
+  }
+});
+
+// 接続ステータスの変更をリッスン
+LiveReload.addListener('statusChange', (status) => {
+  console.log('Connection status:', status.connected);
+  console.log('Server URL:', status.url);
+});
+```
+
+## APIリファレンス
+
+### configureServer(options)
+
+後続の接続のためにリモート開発サーバー設定を保存します。
+
+```typescript
+const status = await LiveReload.configureServer({
+  url: 'http://192.168.1.100:5173',
+  websocketPath: '/capgo-livereload',
+  headers: {
+    'Authorization': 'Bearer token'
+  },
+  autoReconnect: true,
+  reconnectInterval: 2000
+});
+```
+
+**パラメータ:**
+- `url` (string): 開発サーバーのベースURL (例: `http://dev.local:5173`)
+- `websocketPath` (string, オプション): WebSocketパスのオーバーライド (デフォルト: `/ws`)
+- `headers` (Record\<string, string\>, オプション): WebSocket接続用の追加ヘッダー
+- `autoReconnect` (boolean, オプション): 切断時に自動再接続 (デフォルト: `true`)
+- `reconnectInterval` (number, オプション): 再接続試行間の遅延(ミリ秒) (デフォルト: `2000`)
+
+**戻り値:** 接続情報を含む`LiveReloadStatus`
+
+### connect()
+
+まだアクティブでない場合はWebSocket接続を確立します。
+
+```typescript
+const status = await LiveReload.connect();
+console.log('Connected:', status.connected);
+```
+
+**戻り値:** 現在の接続ステータス
+
+### disconnect()
+
+現在のWebSocket接続を閉じ、自動再接続を無効にします。
+
+```typescript
+await LiveReload.disconnect();
+```
+
+### getStatus()
+
+現在の接続ステータスを取得します。
+
+```typescript
+const status = await LiveReload.getStatus();
+console.log('Connected:', status.connected);
+console.log('URL:', status.url);
+```
+
+### reload()
+
+Capacitor WebViewの完全なリロードを手動でトリガーします。
+
+```typescript
+await LiveReload.reload();
+```
+
+### reloadFile(options)
+
+単一のファイル/モジュールをリロードします(サポートされていない場合は完全なリロードにフォールバック)。
+
+```typescript
+await LiveReload.reloadFile({
+  path: '/src/components/MyComponent.tsx',
+  hash: 'abc123'
+});
+```
+
+### addListener('reloadEvent', callback)
+
+サーバーからの受信リロードイベントをリッスンします。
+
+```typescript
+const handle = await LiveReload.addListener('reloadEvent', (event) => {
+  switch (event.type) {
+    case 'full-reload':
+      console.log('Full reload requested');
+      break;
+    case 'file-update':
+      console.log('File updated:', event.file?.path);
+      break;
+    case 'error':
+      console.error('Error:', event.message);
+      break;
+  }
+});
+
+// 完了時にリスナーを削除
+await handle.remove();
+```
+
+### addListener('statusChange', callback)
+
+ソケットステータスの変更をリッスンします。
+
+```typescript
+await LiveReload.addListener('statusChange', (status) => {
+  console.log(status.connected ? 'Connected' : 'Disconnected');
+});
+```
+
+### removeAllListeners()
+
+すべての登録済みリスナーを削除します。
+
+```typescript
+await LiveReload.removeAllListeners();
+```
+
+## 完全な例
+
+```typescript
+import { LiveReload } from '@capgo/capacitor-live-reload';
+
+export class DevServer {
+  private connected = false;
+
+  async initialize() {
+    // 開発時のみ有効
+    if (process.env.NODE_ENV !== 'development') {
+      return;
+    }
+
+    try {
+      // サーバーを設定
+      await LiveReload.configureServer({
+        url: 'http://192.168.1.100:5173',
+        websocketPath: '/capgo-livereload',
+        autoReconnect: true,
+        reconnectInterval: 3000
+      });
+
+      // 接続前にリスナーを設定
+      await LiveReload.addListener('reloadEvent', this.handleReloadEvent.bind(this));
+      await LiveReload.addListener('statusChange', this.handleStatusChange.bind(this));
+
+      // 接続
+      await LiveReload.connect();
+    } catch (error) {
+      console.error('Failed to initialize live reload:', error);
+    }
+  }
+
+  private handleReloadEvent(event: any) {
+    console.log('Reload event received:', event.type);
+
+    switch (event.type) {
+      case 'full-reload':
+        this.performFullReload();
+        break;
+      case 'file-update':
+        this.handleFileUpdate(event.file);
+        break;
+      case 'error':
+        console.error('Server error:', event.message);
+        break;
+      case 'connected':
+        console.log('Server connected');
+        break;
+      case 'disconnected':
+        console.log('Server disconnected');
+        break;
+    }
+  }
+
+  private handleStatusChange(status: any) {
+    this.connected = status.connected;
+    console.log(`Live reload ${status.connected ? 'connected' : 'disconnected'}`);
+  }
+
+  private performFullReload() {
+    console.log('Performing full page reload...');
+    window.location.reload();
+  }
+
+  private handleFileUpdate(file: any) {
+    console.log('File updated:', file?.path);
+    // HMRはほとんどの場合自動的にこれを処理します
+  }
+
+  async disconnect() {
+    await LiveReload.disconnect();
+    await LiveReload.removeAllListeners();
+    this.connected = false;
+  }
+
+  isConnected(): boolean {
+    return this.connected;
+  }
+}
+```
+
+## Vite設定例
+
+ライブリロードプラグインと連携するようにViteサーバーを設定します:
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    host: '0.0.0.0', // ネットワークからの接続を許可
+    port: 5173,
+    hmr: {
+      // ライブリロード用のカスタムWebSocketパス
+      path: '/capgo-livereload',
+    }
+  }
+});
+```
+
+## ベストプラクティス
+
+1. **開発時のみ使用**
+   ```typescript
+   if (import.meta.env.DEV) {
+     await LiveReload.configureServer({
+       url: 'http://localhost:5173',
+       websocketPath: '/capgo-livereload'
+     });
+     await LiveReload.connect();
+   }
+   ```
+
+2. **モバイルテスト用にローカルIPを使用**
+   ```typescript
+   const devServerUrl = process.env.VITE_DEV_SERVER_URL || 'http://192.168.1.100:5173';
+   await LiveReload.configureServer({ url: devServerUrl });
+   ```
+
+3. **接続エラーを適切に処理**
+   ```typescript
+   try {
+     await LiveReload.connect();
+   } catch (error) {
+     console.warn('Could not connect to dev server, using production build');
+   }
+   ```
+
+4. **アプリ終了時にクリーンアップ**
+   ```typescript
+   window.addEventListener('beforeunload', async () => {
+     await LiveReload.disconnect();
+   });
+   ```
+
+5. **UIに接続ステータスを表示**
+   ```typescript
+   LiveReload.addListener('statusChange', (status) => {
+     // 開発ビルドでインジケーターを表示
+     updateDevIndicator(status.connected);
+   });
+   ```
+
+## プラットフォームに関する注意事項
+
+### iOS
+- iOS 11.0+で動作
+- 開発サーバーがデバイスのネットワークからアクセス可能であることを確認
+- 接続を許可するためにファイアウォールの設定が必要な場合があります
+
+### Android
+- Android 5.0 (API 21)+で動作
+- localhost接続には`adb reverse`を使用:
+  ```bash
+  adb reverse tcp:5173 tcp:5173
+  ```
+
+### Web
+- webプラットフォームを完全サポート
+- Vite開発サーバーへの直接WebSocket接続
+
+## トラブルシューティング
+
+**接続が失敗する:**
+- 開発サーバーが実行中であることを確認
+- デバイスとコンピューターが同じネットワーク上にあることを確認
+- ファイアウォールがポートでの接続を許可していることを確認
+- モバイルデバイスにはlocalhostの代わりにIPアドレスを使用
+
+**リロードが遅い:**
+- ネットワーク速度を確認
+- 再接続間隔を減らす
+- Viteビルド設定を最適化
+
+**WebSocketエラー:**
+- websocketPathがVite設定と一致していることを確認
+- ポートの競合を確認
+- 認証を使用している場合はヘッダーが正しいことを確認

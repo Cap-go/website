@@ -1,0 +1,265 @@
+---
+title: 시작하기
+locale: ko
+description: Capacitor 앱에서 볼륨 버튼 누름을 감지하는 방법을 배웁니다.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **패키지 설치**
+   <PackageManagers pkg="@capgo/capacitor-volume-buttons" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **네이티브 프로젝트와 동기화**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 사용법
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+// 볼륨 버튼 누름 리스닝
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  console.log('Volume button pressed:', event.direction);
+
+  if (event.direction === 'up') {
+    console.log('Volume up pressed');
+    // 볼륨 업 처리
+  } else if (event.direction === 'down') {
+    console.log('Volume down pressed');
+    // 볼륨 다운 처리
+  }
+});
+
+// 완료 시 모든 리스너 제거
+await VolumeButtons.removeAllListeners();
+```
+
+## API 참조
+
+### addListener('volumeButtonPressed', callback)
+
+볼륨 버튼 누름 이벤트를 수신합니다.
+
+```typescript
+const handle = VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  console.log('Direction:', event.direction); // 'up' 또는 'down'
+});
+
+// 특정 리스너 제거
+await handle.remove();
+```
+
+**이벤트 데이터:**
+- `direction`: `'up' | 'down'` - 버튼 누름 방향
+
+### removeAllListeners()
+
+등록된 모든 리스너를 제거합니다.
+
+```typescript
+await VolumeButtons.removeAllListeners();
+```
+
+### getPluginVersion()
+
+플러그인 버전을 가져옵니다.
+
+```typescript
+const { version } = await VolumeButtons.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## 완전한 예제
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+export class VolumeButtonController {
+  private listener: any;
+
+  async initialize() {
+    this.listener = VolumeButtons.addListener(
+      'volumeButtonPressed',
+      this.handleVolumeButton.bind(this)
+    );
+
+    console.log('Volume button listener initialized');
+  }
+
+  private handleVolumeButton(event: { direction: 'up' | 'down' }) {
+    switch (event.direction) {
+      case 'up':
+        this.handleVolumeUp();
+        break;
+      case 'down':
+        this.handleVolumeDown();
+        break;
+    }
+  }
+
+  private handleVolumeUp() {
+    console.log('Volume up pressed');
+    // 볼륨 업을 위한 커스텀 로직
+    // 예: 앞으로 탐색, 밝기 증가 등
+  }
+
+  private handleVolumeDown() {
+    console.log('Volume down pressed');
+    // 볼륨 다운을 위한 커스텀 로직
+    // 예: 뒤로 탐색, 밝기 감소 등
+  }
+
+  async cleanup() {
+    if (this.listener) {
+      await this.listener.remove();
+    }
+    await VolumeButtons.removeAllListeners();
+    console.log('Volume button listener cleaned up');
+  }
+}
+```
+
+## 사용 사례
+
+### 사진/비디오 촬영
+
+볼륨 버튼을 카메라 셔터 트리거로 사용:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', async (event) => {
+  // 모든 볼륨 버튼이 카메라를 트리거
+  await capturePhoto();
+});
+```
+
+### 페이지 탐색
+
+볼륨 버튼으로 콘텐츠 탐색:
+
+```typescript
+let currentPage = 0;
+
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    currentPage++;
+    showPage(currentPage);
+  } else {
+    currentPage = Math.max(0, currentPage - 1);
+    showPage(currentPage);
+  }
+});
+```
+
+### 미디어 제어
+
+미디어 재생 제어:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    skipForward();
+  } else {
+    skipBackward();
+  }
+});
+```
+
+### 게임 컨트롤
+
+게임 액션에 볼륨 버튼 사용:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    player.jump();
+  } else {
+    player.crouch();
+  }
+});
+```
+
+## 모범 사례
+
+1. **리스너 정리**
+   컴포넌트가 언마운트될 때 항상 리스너를 제거하세요:
+   ```typescript
+   useEffect(() => {
+     const listener = VolumeButtons.addListener('volumeButtonPressed', handler);
+
+     return () => {
+       listener.remove();
+     };
+   }, []);
+   ```
+
+2. **시각적 피드백 제공**
+   볼륨 버튼이 커스텀 컨트롤에 사용되고 있음을 사용자에게 표시:
+   ```typescript
+   VolumeButtons.addListener('volumeButtonPressed', (event) => {
+     showNotification(`Volume ${event.direction} pressed`);
+     performAction(event.direction);
+   });
+   ```
+
+3. **접근성 고려**
+   일부 사용자는 실제 볼륨 제어를 위해 볼륨 버튼에 의존한다는 점을 기억하세요. 대체 컨트롤을 제공하세요.
+
+4. **빠른 누름 디바운스**
+   실수로 인한 이중 누름 방지:
+   ```typescript
+   let lastPress = 0;
+   const DEBOUNCE_MS = 300;
+
+   VolumeButtons.addListener('volumeButtonPressed', (event) => {
+     const now = Date.now();
+     if (now - lastPress < DEBOUNCE_MS) {
+       return; // 빠른 누름 무시
+     }
+     lastPress = now;
+     handlePress(event.direction);
+   });
+   ```
+
+5. **동작 문서화**
+   볼륨 버튼에 커스텀 기능이 있음을 사용자에게 명확히 알리세요:
+   ```typescript
+   function showVolumeButtonHelp() {
+     alert('볼륨 업/다운 버튼을 사용하여 페이지를 탐색하세요');
+   }
+   ```
+
+## 플랫폼 참고사항
+
+### iOS
+- iOS 10.0+ 에서 작동
+- 볼륨 버튼이 안정적으로 감지됨
+- 시스템 볼륨 UI가 여전히 잠깐 나타날 수 있음
+
+### Android
+- Android 5.0 (API 21)+ 에서 작동
+- 앱이 포그라운드에 있어야 함
+- 일부 기기에서 약간의 지연이 있을 수 있음
+
+### Web
+- 웹 플랫폼에서 지원되지 않음
+- 리스너가 실행되지 않음
+
+## 문제 해결
+
+**이벤트가 발생하지 않음:**
+- 앱에 포커스가 있는지 확인
+- 리스너가 제대로 등록되었는지 확인
+- 플러그인이 설치되고 동기화되었는지 확인
+
+**시스템 볼륨 변경이 간섭:**
+- 이는 예상된 동작입니다 - 플러그인은 누름을 감지하지만 시스템 볼륨 변경을 방지하지 않습니다
+- 볼륨 변경과 함께 작동하는 UX를 고려하세요
+
+**여러 이벤트가 발생:**
+- 빠른 누름을 처리하기 위해 디바운싱 구현
+- 중복 리스너 등록 확인

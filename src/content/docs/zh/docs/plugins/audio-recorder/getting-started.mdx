@@ -1,0 +1,395 @@
+---
+title: "开始使用 Audio Recorder"
+locale: zh
+description: "了解如何将音频录制集成到您的 Capacitor 应用中"
+---
+
+本指南将引导您将 Capacitor Audio Recorder 插件集成到您的应用程序中。
+
+## 安装
+
+使用 npm 安装插件：
+
+```bash
+npm install @capgo/capacitor-audio-recorder
+npx cap sync
+```
+
+## iOS 配置
+
+将以下内容添加到您的 `Info.plist`：
+
+```xml
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs access to the microphone to record audio</string>
+```
+
+## Android 配置
+
+将以下权限添加到您的 `AndroidManifest.xml`：
+
+```xml
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+## Web 配置
+
+该插件使用 MediaRecorder API。在生产环境中需要 HTTPS。
+
+## 基本使用
+
+### 导入插件
+
+```typescript
+import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
+```
+
+### 请求权限
+
+```typescript
+const requestPermission = async () => {
+  const permission = await AudioRecorder.requestPermissions();
+  console.log('Permission status:', permission.recordAudio);
+};
+```
+
+### 开始录制
+
+```typescript
+const startRecording = async () => {
+  await AudioRecorder.startRecording();
+  console.log('Recording started');
+};
+```
+
+### 停止录制
+
+```typescript
+const stopRecording = async () => {
+  const result = await AudioRecorder.stopRecording();
+  console.log('Recording path:', result.filePath);
+  console.log('Duration:', result.duration);
+};
+```
+
+### 暂停/恢复录制
+
+```typescript
+const pauseRecording = async () => {
+  await AudioRecorder.pauseRecording();
+  console.log('Recording paused');
+};
+
+const resumeRecording = async () => {
+  await AudioRecorder.resumeRecording();
+  console.log('Recording resumed');
+};
+```
+
+### 获取状态
+
+```typescript
+const getStatus = async () => {
+  const status = await AudioRecorder.getStatus();
+  console.log('Is recording:', status.isRecording);
+  console.log('Duration:', status.currentTime);
+};
+```
+
+## 完整示例
+
+以下是一个完整的语音录制器实现：
+
+```typescript
+import { AudioRecorder } from '@capgo/capacitor-audio-recorder';
+
+class VoiceRecorder {
+  private isRecording = false;
+  private isPaused = false;
+  private recordingPath: string | null = null;
+
+  async initialize() {
+    const permission = await AudioRecorder.checkPermissions();
+
+    if (permission.recordAudio !== 'granted') {
+      const requested = await AudioRecorder.requestPermissions();
+
+      if (requested.recordAudio !== 'granted') {
+        throw new Error('Microphone permission denied');
+      }
+    }
+  }
+
+  async startRecording() {
+    try {
+      await AudioRecorder.startRecording();
+      this.isRecording = true;
+      this.isPaused = false;
+      console.log('Recording started');
+    } catch (error) {
+      console.error('Failed to start recording:', error);
+      throw error;
+    }
+  }
+
+  async pauseRecording() {
+    if (!this.isRecording || this.isPaused) {
+      return;
+    }
+
+    try {
+      await AudioRecorder.pauseRecording();
+      this.isPaused = true;
+      console.log('Recording paused');
+    } catch (error) {
+      console.error('Failed to pause recording:', error);
+      throw error;
+    }
+  }
+
+  async resumeRecording() {
+    if (!this.isRecording || !this.isPaused) {
+      return;
+    }
+
+    try {
+      await AudioRecorder.resumeRecording();
+      this.isPaused = false;
+      console.log('Recording resumed');
+    } catch (error) {
+      console.error('Failed to resume recording:', error);
+      throw error;
+    }
+  }
+
+  async stopRecording() {
+    if (!this.isRecording) {
+      return null;
+    }
+
+    try {
+      const result = await AudioRecorder.stopRecording();
+      this.isRecording = false;
+      this.isPaused = false;
+      this.recordingPath = result.filePath;
+
+      console.log('Recording stopped');
+      console.log('File path:', result.filePath);
+      console.log('Duration:', result.duration, 'seconds');
+
+      return result;
+    } catch (error) {
+      console.error('Failed to stop recording:', error);
+      throw error;
+    }
+  }
+
+  async getCurrentStatus() {
+    const status = await AudioRecorder.getStatus();
+    return {
+      isRecording: status.isRecording,
+      duration: status.currentTime,
+      isPaused: this.isPaused
+    };
+  }
+
+  formatDuration(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  getRecordingPath(): string | null {
+    return this.recordingPath;
+  }
+}
+
+// 使用
+const recorder = new VoiceRecorder();
+
+// 初始化
+await recorder.initialize();
+
+// 开始录制
+await recorder.startRecording();
+
+// 暂停
+await recorder.pauseRecording();
+
+// 恢复
+await recorder.resumeRecording();
+
+// 停止并获取结果
+const result = await recorder.stopRecording();
+console.log('Recording saved:', result?.filePath);
+```
+
+## 高级配置
+
+### 配置音频质量
+
+```typescript
+const startHighQualityRecording = async () => {
+  await AudioRecorder.startRecording({
+    format: 'aac',           // aac, mp3, 或 wav
+    sampleRate: 44100,       // 44100 Hz（CD 质量）
+    channels: 2,             // 立体声
+    bitRate: 320000          // 320 kbps
+  });
+};
+```
+
+### 配置为语音
+
+```typescript
+const startVoiceRecording = async () => {
+  await AudioRecorder.startRecording({
+    format: 'aac',
+    sampleRate: 16000,       // 16 kHz（语音优化）
+    channels: 1,             // 单声道
+    bitRate: 64000           // 64 kbps
+  });
+};
+```
+
+## UI 集成示例
+
+```typescript
+class AudioRecorderUI {
+  private recorder: VoiceRecorder;
+  private updateInterval: any;
+
+  constructor() {
+    this.recorder = new VoiceRecorder();
+  }
+
+  async init() {
+    await this.recorder.initialize();
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    const recordButton = document.getElementById('record-btn');
+    const pauseButton = document.getElementById('pause-btn');
+    const stopButton = document.getElementById('stop-btn');
+
+    recordButton?.addEventListener('click', () => this.handleRecord());
+    pauseButton?.addEventListener('click', () => this.handlePause());
+    stopButton?.addEventListener('click', () => this.handleStop());
+  }
+
+  async handleRecord() {
+    await this.recorder.startRecording();
+    this.startDurationUpdate();
+    this.updateUI('recording');
+  }
+
+  async handlePause() {
+    const status = await this.recorder.getCurrentStatus();
+
+    if (status.isPaused) {
+      await this.recorder.resumeRecording();
+      this.updateUI('recording');
+    } else {
+      await this.recorder.pauseRecording();
+      this.updateUI('paused');
+    }
+  }
+
+  async handleStop() {
+    const result = await this.recorder.stopRecording();
+    this.stopDurationUpdate();
+    this.updateUI('stopped');
+
+    if (result) {
+      this.showRecordingResult(result);
+    }
+  }
+
+  startDurationUpdate() {
+    this.updateInterval = setInterval(async () => {
+      const status = await this.recorder.getCurrentStatus();
+      this.updateDurationDisplay(status.duration);
+    }, 100);
+  }
+
+  stopDurationUpdate() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+  }
+
+  updateDurationDisplay(duration: number) {
+    const display = document.getElementById('duration');
+    if (display) {
+      display.textContent = this.recorder.formatDuration(duration);
+    }
+  }
+
+  updateUI(state: 'recording' | 'paused' | 'stopped') {
+    // 更新按钮状态、颜色等
+    console.log('UI state:', state);
+  }
+
+  showRecordingResult(result: any) {
+    console.log('Recording complete:', result);
+    // 显示播放 UI、保存选项等
+  }
+}
+
+// 初始化 UI
+const ui = new AudioRecorderUI();
+ui.init();
+```
+
+## 最佳实践
+
+1. **提前请求权限**：在显示录制 UI 之前检查权限
+2. **处理中断**：电话、闹钟可能会中断录制
+3. **管理存储**：清理旧录音以节省空间
+4. **提供反馈**：显示录制状态、持续时间和波形
+5. **在设备上测试**：模拟器/仿真器的音频支持有限
+
+## 常见问题
+
+### 权限被拒绝
+
+```typescript
+const handlePermissionDenied = async () => {
+  const permission = await AudioRecorder.checkPermissions();
+
+  if (permission.recordAudio === 'denied') {
+    alert('Microphone permission is required to record audio. Please enable it in Settings.');
+  }
+};
+```
+
+### 录制中断
+
+```typescript
+// 处理应用进入后台
+document.addEventListener('pause', async () => {
+  const status = await recorder.getCurrentStatus();
+  if (status.isRecording) {
+    await recorder.pauseRecording();
+    // 通知用户
+  }
+});
+```
+
+### 存储管理
+
+```typescript
+const cleanupOldRecordings = async () => {
+  // 实现清理逻辑
+  // 删除超过 X 天的录音
+  // 或仅保留最近的 N 个录音
+};
+```
+
+## 下一步
+
+- 浏览 [API 参考](https://github.com/Cap-go/capacitor-audio-recorder#api)以获取完整的方法文档
+- 查看[示例应用](https://github.com/Cap-go/capacitor-audio-recorder/tree/main/example)以了解高级用法
+- 参阅[教程](/plugins-tutorials/capacitor-audio-recorder)以获取完整的实现示例

@@ -1,0 +1,41 @@
+---
+title: "@capgo/capacitor-live-reload"
+description: Live reload aplikasi Capacitor Anda dari server dev jarak jauh untuk development yang lebih cepat.
+locale: id
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengantar"
+hero:
+  tagline: Hubungkan aplikasi Capacitor Anda ke server development lokal Anda untuk hot reloading instan dan iterasi yang lebih cepat selama development.
+  image:
+    file: ~public/icons/plugins/live-reload.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/live-reload/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-live-reload/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Hot Module Replacement" icon="rocket">
+    Pembaruan instan tanpa rebuild aplikasi Anda
+  </Card>
+  <Card title="Server Dev Jarak Jauh" icon="laptop">
+    Terhubung ke Vite atau server dev yang kompatibel lainnya
+  </Card>
+  <Card title="Koneksi WebSocket" icon="puzzle">
+    Komunikasi real-time untuk pembaruan langsung
+  </Card>
+  <Card title="Dokumentasi Lengkap" icon="open-book">
+    Periksa [Dokumentasi](/docs/plugins/live-reload/getting-started/) untuk mengatur live reload.
+  </Card>
+</CardGrid>

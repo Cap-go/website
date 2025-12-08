@@ -1,0 +1,292 @@
+---
+title: "이벤트"
+locale: ko
+description: "업데이트 상태와 진행 상황을 모니터링하기 위해 Capacitor Updater 플러그인에서 수신할 수 있는 모든 이벤트"
+sidebar:
+  order: 9
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+Capacitor Updater 플러그인은 업데이트 프로세스를 모니터링하고 다양한 상태에 대응할 수 있도록 여러 이벤트를 제공합니다.
+
+## 이벤트 리스너 설정
+
+이벤트를 수신하려면 `CapacitorUpdater` 객체의 `addListener` 메서드를 사용하세요:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+// 리스너 추가
+const listener = await CapacitorUpdater.addListener('eventName', (event) => {
+  // 이벤트 처리
+});
+
+// 더 이상 필요하지 않을 때 리스너 제거
+listener.remove();
+
+// 모든 리스너 제거
+await CapacitorUpdater.removeAllListeners();
+```
+
+## 사용 가능한 이벤트
+
+### `download`
+
+번들 다운로드 프로세스 중에 발생합니다. 다운로드 진행 정보를 제공합니다.
+
+```typescript
+CapacitorUpdater.addListener('download', (event) => {
+  console.log(`Download progress: ${event.percent}%`);
+  console.log('Bundle info:', event.bundle);
+});
+```
+
+**이벤트 데이터:**
+- `percent`: number - 다운로드 진행률 (0-100)
+- `bundle`: BundleInfo - 다운로드 중인 번들 정보
+
+<Aside>
+이 이벤트는 다운로드 중 진행 상황을 보고하기 위해 여러 번 발생합니다.
+</Aside>
+
+### `noNeedUpdate`
+
+업데이트 확인 결과 업데이트가 필요하지 않다고 판단될 때 발생합니다.
+
+```typescript
+CapacitorUpdater.addListener('noNeedUpdate', (event) => {
+  console.log('App is up to date');
+  console.log('Current bundle:', event.bundle);
+});
+```
+
+**이벤트 데이터:**
+- `bundle`: BundleInfo - 현재 번들 정보
+
+### `updateAvailable`
+
+새로운 업데이트를 다운로드할 수 있을 때 발생합니다.
+
+```typescript
+CapacitorUpdater.addListener('updateAvailable', (event) => {
+  console.log('Update available');
+  console.log('New bundle:', event.bundle);
+  // 필요한 경우 여기서 다운로드를 트리거할 수 있습니다
+});
+```
+
+**이벤트 데이터:**
+- `bundle`: BundleInfo - 사용 가능한 업데이트 번들 정보
+
+### `downloadComplete`
+
+번들 다운로드가 성공적으로 완료되었을 때 발생합니다.
+
+```typescript
+CapacitorUpdater.addListener('downloadComplete', (event) => {
+  console.log('Download completed');
+  console.log('Downloaded bundle:', event.bundle);
+  // 이 번들을 다음 번들로 설정하고 싶을 수 있습니다
+});
+```
+
+**이벤트 데이터:**
+- `bundle`: BundleInfo - 다운로드된 번들 정보
+
+### `majorAvailable`
+
+주요 업데이트를 사용할 수 있지만 자동 업데이트 설정에 의해 차단된 경우 발생합니다.
+
+```typescript
+CapacitorUpdater.addListener('majorAvailable', (event) => {
+  console.log('Major update available:', event.version);
+  // 사용자에게 주요 업데이트에 대해 알림
+});
+```
+
+**이벤트 데이터:**
+- `version`: string - 주요 업데이트의 버전 번호
+
+<Aside type="tip">
+주요 업데이트는 일반적으로 사용자 확인 또는 앱 스토어 업데이트가 필요합니다. 이 이벤트를 사용하여 사용자에게 적절하게 알리세요.
+</Aside>
+
+### `updateFailed`
+
+다음 앱 시작 시 업데이트 설치에 실패했을 때 발생합니다.
+
+```typescript
+CapacitorUpdater.addListener('updateFailed', (event) => {
+  console.error('Update failed to install');
+  console.log('Failed bundle:', event.bundle);
+  // 롤백 또는 재시도 로직 처리
+});
+```
+
+**이벤트 데이터:**
+- `bundle`: BundleInfo - 설치에 실패한 번들 정보
+
+### `downloadFailed`
+
+번들 다운로드가 실패했을 때 발생합니다.
+
+```typescript
+CapacitorUpdater.addListener('downloadFailed', (event) => {
+  console.error('Download failed for version:', event.version);
+  // 다운로드 재시도 로직 처리
+});
+```
+
+**이벤트 데이터:**
+- `version`: string - 다운로드에 실패한 버전
+
+### `appReloaded`
+
+앱이 리로드되었을 때 발생합니다.
+
+```typescript
+CapacitorUpdater.addListener('appReloaded', () => {
+  console.log('App has been reloaded');
+  // 필요한 재초기화 수행
+});
+```
+
+**이벤트 데이터:** 없음
+
+### `appReady`
+
+업데이트 후 앱이 사용 준비가 되었을 때 발생합니다.
+
+```typescript
+CapacitorUpdater.addListener('appReady', (event) => {
+  console.log('App is ready');
+  console.log('Current bundle:', event.bundle);
+  console.log('Status:', event.status);
+});
+```
+
+**이벤트 데이터:**
+- `bundle`: BundleInfo - 현재 번들 정보
+- `status`: string - 준비 상태
+
+<Aside type="caution">
+자동 롤백을 방지하려면 구성된 타임아웃(기본 10초) 내에 `notifyAppReady()`를 호출해야 합니다.
+</Aside>
+
+## BundleInfo 객체
+
+많은 이벤트에는 다음 속성을 가진 `BundleInfo` 객체가 포함됩니다:
+
+```typescript
+interface BundleInfo {
+  id: string;           // 고유 번들 식별자
+  version: string;      // 번들 버전
+  downloaded: string;   // 다운로드 타임스탬프
+  checksum?: string;    // 번들 체크섬 (사용 가능한 경우)
+  status: BundleStatus; // 번들 상태
+}
+```
+
+여기서 `BundleStatus`는 다음과 같을 수 있습니다:
+- `'success'` - 번들이 성공적으로 다운로드됨
+- `'error'` - 번들 다운로드/설치 실패
+- `'pending'` - 번들이 다음으로 설정되기를 대기 중
+- `'downloading'` - 번들이 현재 다운로드 중
+
+## 예제: 완전한 업데이트 흐름
+
+이벤트를 사용하여 완전한 업데이트 흐름을 처리하는 예제입니다:
+
+<Aside type="caution">
+이 `UpdateManager` 클래스에는 자동 업데이트 흐름에 필요한 `CapacitorUpdater.notifyAppReady()` 호출이 포함되어 있지 않습니다.
+자세한 내용은 [notifyAppReady 호출을 올바르게 배치하기](/docs/plugins/updater/auto-update#placing-notifyappready-call-correctly) 문서를 참조하세요.
+</Aside>
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+export class UpdateManager {
+  private listeners: any[] = [];
+
+  async setupListeners() {
+    // 사용 가능한 업데이트 수신
+    this.listeners.push(
+      await CapacitorUpdater.addListener('updateAvailable', async (event) => {
+        console.log('Update available:', event.bundle.version);
+        // 업데이트 자동 다운로드
+        await CapacitorUpdater.download({
+          url: event.bundle.url,
+          version: event.bundle.version
+        });
+      })
+    );
+
+    // 다운로드 진행 상황 모니터링
+    this.listeners.push(
+      await CapacitorUpdater.addListener('download', (event) => {
+        console.log(`Downloading: ${event.percent}%`);
+        // UI 진행률 표시줄 업데이트
+        this.updateProgressBar(event.percent);
+      })
+    );
+
+    // 다운로드 완료 처리
+    this.listeners.push(
+      await CapacitorUpdater.addListener('downloadComplete', async (event) => {
+        console.log('Download complete:', event.bundle.version);
+        // 다음 번들로 설정
+        await CapacitorUpdater.next({ id: event.bundle.id });
+      })
+    );
+
+    // 실패 처리
+    this.listeners.push(
+      await CapacitorUpdater.addListener('downloadFailed', (event) => {
+        console.error('Download failed:', event.version);
+        this.showError('Update download failed. Please try again later.');
+      })
+    );
+
+    this.listeners.push(
+      await CapacitorUpdater.addListener('updateFailed', (event) => {
+        console.error('Update installation failed:', event.bundle.version);
+        this.showError('Update installation failed. The app has been rolled back.');
+      })
+    );
+
+    // 앱 준비 처리
+    this.listeners.push(
+      await CapacitorUpdater.addListener('appReady', async (event) => {
+        console.log('App ready with bundle:', event.bundle.version);
+      })
+    );
+  }
+
+  cleanup() {
+    // 더 이상 필요하지 않을 때 모든 리스너 제거
+    this.listeners.forEach(listener => listener.remove());
+    this.listeners = [];
+  }
+
+  private updateProgressBar(percent: number) {
+    // UI 진행률 표시줄 업데이트
+  }
+
+  private showError(message: string) {
+    // 사용자에게 오류 표시
+  }
+}
+```
+
+## 모범 사례
+
+1. **항상 `notifyAppReady()` 호출**: 자동 업데이트를 사용할 때 앱이 초기화된 후 항상 이 메서드를 호출하여 롤백을 방지하세요.
+
+2. **실패를 우아하게 처리**: 다운로드 및 업데이트 실패에 대한 적절한 오류 처리를 구현하세요.
+
+3. **사용자 피드백 제공**: 다운로드 진행 이벤트를 사용하여 사용자에게 업데이트 진행 상황을 표시하세요.
+
+4. **리스너 정리**: 메모리 누수를 방지하기 위해 더 이상 필요하지 않을 때 이벤트 리스너를 제거하세요.
+
+5. **업데이트 시나리오 테스트**: 실패, 롤백 및 주요 업데이트를 포함한 다양한 업데이트 시나리오를 테스트하세요.

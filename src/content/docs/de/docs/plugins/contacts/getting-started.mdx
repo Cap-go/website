@@ -1,0 +1,394 @@
+---
+title: "Erste Schritte mit Contacts"
+locale: de
+description: "Erfahren Sie, wie Sie die Kontaktverwaltung in Ihre Capacitor-App integrieren"
+---
+
+Diese Anleitung führt Sie durch die Integration des Capacitor Contacts Plugins in Ihre Anwendung.
+
+## Installation
+
+Installieren Sie das Plugin mit npm:
+
+```bash
+npm install @capgo/capacitor-contacts
+npx cap sync
+```
+
+## iOS Konfiguration
+
+Fügen Sie Folgendes zu Ihrer `Info.plist` hinzu:
+
+```xml
+<key>NSContactsUsageDescription</key>
+<string>Diese App benötigt Zugriff auf Kontakte, damit Sie Empfänger auswählen können</string>
+```
+
+## Android Konfiguration
+
+Fügen Sie die folgenden Berechtigungen zu Ihrer `AndroidManifest.xml` hinzu:
+
+```xml
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+<uses-permission android:name="android.permission.WRITE_CONTACTS" />
+```
+
+## Grundlegende Verwendung
+
+### Plugin importieren
+
+```typescript
+import { Contacts } from '@capgo/capacitor-contacts';
+```
+
+### Berechtigungen anfordern
+
+```typescript
+const requestPermissions = async () => {
+  const permission = await Contacts.requestPermissions();
+  console.log('Berechtigungsstatus:', permission.contacts);
+};
+```
+
+### Alle Kontakte abrufen
+
+```typescript
+const getAllContacts = async () => {
+  const result = await Contacts.getContacts({
+    projection: {
+      name: true,
+      phones: true,
+      emails: true,
+      image: true
+    }
+  });
+
+  console.log('Kontakte:', result.contacts);
+};
+```
+
+### Kontakte suchen
+
+```typescript
+const searchContacts = async (query: string) => {
+  const result = await Contacts.getContacts({
+    projection: {
+      name: true,
+      phones: true,
+      emails: true
+    },
+    query: query
+  });
+
+  console.log('Suchergebnisse:', result.contacts);
+};
+```
+
+### Kontakt erstellen
+
+```typescript
+const createContact = async () => {
+  const newContact = {
+    name: {
+      given: 'John',
+      family: 'Doe'
+    },
+    phones: [{
+      type: 'mobile',
+      number: '+1234567890'
+    }],
+    emails: [{
+      type: 'work',
+      address: 'john.doe@example.com'
+    }]
+  };
+
+  const result = await Contacts.createContact(newContact);
+  console.log('Kontakt erstellt:', result);
+};
+```
+
+### Kontakt aktualisieren
+
+```typescript
+const updateContact = async (contactId: string) => {
+  const updates = {
+    contactId: contactId,
+    name: {
+      given: 'Jane',
+      family: 'Doe'
+    }
+  };
+
+  await Contacts.updateContact(updates);
+  console.log('Kontakt aktualisiert');
+};
+```
+
+### Kontakt löschen
+
+```typescript
+const deleteContact = async (contactId: string) => {
+  await Contacts.deleteContact({ contactId });
+  console.log('Kontakt gelöscht');
+};
+```
+
+## Vollständiges Beispiel
+
+Hier ist ein vollständiges Beispiel mit einem Kontakt-Service:
+
+```typescript
+import { Contacts } from '@capgo/capacitor-contacts';
+
+interface Contact {
+  contactId: string;
+  name: {
+    display?: string;
+    given?: string;
+    family?: string;
+  };
+  phones?: Array<{ type: string; number: string }>;
+  emails?: Array<{ type: string; address: string }>;
+  image?: { base64String: string };
+}
+
+class ContactsService {
+  async checkPermissions(): Promise<boolean> {
+    const permission = await Contacts.checkPermissions();
+
+    if (permission.contacts === 'granted') {
+      return true;
+    }
+
+    const requested = await Contacts.requestPermissions();
+    return requested.contacts === 'granted';
+  }
+
+  async getAllContacts(): Promise<Contact[]> {
+    const hasPermission = await this.checkPermissions();
+    if (!hasPermission) {
+      throw new Error('Kontaktberechtigung verweigert');
+    }
+
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true,
+        image: true
+      }
+    });
+
+    return result.contacts;
+  }
+
+  async searchContacts(query: string): Promise<Contact[]> {
+    if (!query || query.length < 2) {
+      return [];
+    }
+
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true
+      },
+      query: query
+    });
+
+    return result.contacts;
+  }
+
+  async getContactById(contactId: string): Promise<Contact | null> {
+    const result = await Contacts.getContacts({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true,
+        image: true,
+        organization: true,
+        birthday: true,
+        note: true,
+        urls: true,
+        postalAddresses: true
+      },
+      contactId: contactId
+    });
+
+    return result.contacts.length > 0 ? result.contacts[0] : null;
+  }
+
+  async createContact(contact: Partial<Contact>): Promise<string> {
+    const hasPermission = await this.checkPermissions();
+    if (!hasPermission) {
+      throw new Error('Kontaktberechtigung verweigert');
+    }
+
+    const result = await Contacts.createContact(contact);
+    return result.contactId;
+  }
+
+  async updateContact(contactId: string, updates: Partial<Contact>): Promise<void> {
+    await Contacts.updateContact({
+      contactId,
+      ...updates
+    });
+  }
+
+  async deleteContact(contactId: string): Promise<void> {
+    await Contacts.deleteContact({ contactId });
+  }
+
+  formatPhoneNumber(phone: string): string {
+    // Nicht-numerische Zeichen entfernen
+    const cleaned = phone.replace(/\D/g, '');
+
+    // Als (XXX) XXX-XXXX formatieren
+    if (cleaned.length === 10) {
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+    }
+
+    return phone;
+  }
+
+  getContactInitials(contact: Contact): string {
+    const given = contact.name?.given || '';
+    const family = contact.name?.family || '';
+
+    if (given && family) {
+      return `${given[0]}${family[0]}`.toUpperCase();
+    }
+
+    const display = contact.name?.display || '';
+    const parts = display.split(' ');
+
+    if (parts.length >= 2) {
+      return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+    }
+
+    return display.slice(0, 2).toUpperCase();
+  }
+}
+
+// Verwendung
+const contactsService = new ContactsService();
+
+// Alle Kontakte abrufen
+const contacts = await contactsService.getAllContacts();
+console.log('Kontakte:', contacts);
+
+// Kontakte suchen
+const results = await contactsService.searchContacts('john');
+console.log('Suchergebnisse:', results);
+
+// Kontakt erstellen
+const newContactId = await contactsService.createContact({
+  name: { given: 'Jane', family: 'Smith' },
+  phones: [{ type: 'mobile', number: '+1234567890' }]
+});
+
+// Kontakt aktualisieren
+await contactsService.updateContact(newContactId, {
+  emails: [{ type: 'work', address: 'jane@example.com' }]
+});
+```
+
+## Projektion verstehen
+
+Der Parameter `projection` steuert, welche Felder abgerufen werden:
+
+```typescript
+const result = await Contacts.getContacts({
+  projection: {
+    name: true,           // Kontaktname
+    phones: true,         // Telefonnummern
+    emails: true,         // E-Mail-Adressen
+    image: true,          // Kontaktfoto
+    organization: true,   // Firma/Organisation
+    birthday: true,       // Geburtsdatum
+    note: true,          // Notizen
+    urls: true,          // Webseiten
+    postalAddresses: true // Postanschriften
+  }
+});
+```
+
+**Tipp**: Fordern Sie nur die Felder an, die Sie tatsächlich benötigen, um die Leistung zu verbessern.
+
+## Kontaktauswahl-UI
+
+Viele Apps bevorzugen die native Kontaktauswahl:
+
+```typescript
+const pickContact = async () => {
+  try {
+    const result = await Contacts.pickContact({
+      projection: {
+        name: true,
+        phones: true,
+        emails: true
+      }
+    });
+
+    if (result.contacts.length > 0) {
+      const contact = result.contacts[0];
+      console.log('Ausgewählter Kontakt:', contact);
+    }
+  } catch (error) {
+    console.error('Kontaktauswahl abgebrochen oder fehlgeschlagen:', error);
+  }
+};
+```
+
+## Best Practices
+
+1. **Minimale Berechtigungen anfordern**: Fordern Sie Kontaktberechtigung nur bei Bedarf an
+2. **Projektion verwenden**: Rufen Sie nur die Felder ab, die Sie tatsächlich verwenden
+3. **Ablehnungen behandeln**: Bieten Sie eine Alternative, wenn Berechtigungen verweigert werden
+4. **Weise zwischenspeichern**: Kontakte können sich ändern, speichern Sie nicht zu lange zwischen
+5. **Privatsphäre respektieren**: Seien Sie transparent über die Kontaktnutzung
+6. **Asynchrone Operationen**: Alle Kontaktoperationen sind asynchron
+
+## Häufige Probleme
+
+### Berechtigung verweigert
+
+```typescript
+const handlePermissionDenied = async () => {
+  const permission = await Contacts.checkPermissions();
+
+  if (permission.contacts === 'denied') {
+    // Dialog anzeigen, der erklärt, warum die Berechtigung benötigt wird
+    showPermissionDialog();
+    // Benutzer zu den Einstellungen leiten
+    // Auf iOS: Einstellungen > [App] > Kontakte
+    // Auf Android: Einstellungen > Apps > [App] > Berechtigungen
+  }
+};
+```
+
+### Große Kontaktlisten
+
+```typescript
+const loadContactsInBatches = async () => {
+  // Zuerst Anzahl abrufen (leichtgewichtig)
+  const projection = { name: true }; // Minimale Projektion
+
+  // Paginierung implementieren, falls nötig
+  const allContacts = await Contacts.getContacts({ projection });
+
+  // In Blöcken verarbeiten
+  const chunkSize = 100;
+  for (let i = 0; i < allContacts.contacts.length; i += chunkSize) {
+    const chunk = allContacts.contacts.slice(i, i + chunkSize);
+    await processContactChunk(chunk);
+  }
+};
+```
+
+## Nächste Schritte
+
+- Erkunden Sie die [API-Referenz](https://github.com/Cap-go/capacitor-contacts#api) für vollständige Methodendokumentation
+- Schauen Sie sich die [Beispiel-App](https://github.com/Cap-go/capacitor-contacts/tree/main/example) für erweiterte Verwendung an
+- Sehen Sie sich das [Tutorial](/plugins-tutorials/capacitor-contacts) für vollständige Implementierungsbeispiele an

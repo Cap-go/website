@@ -1,0 +1,250 @@
+---
+title: Google Login di iOS
+locale: id
+description: Panduan ini menawarkan panduan komprehensif untuk mengonfigurasi Google Login dengan Capacitor di iOS, merinci setiap langkah untuk memastikan proses integrasi yang lancar.
+sidebar:
+    order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Pendahuluan
+
+Dalam panduan ini, Anda akan mempelajari cara mengatur Google Login dengan Capgo Social Login untuk iOS.
+Saya menganggap bahwa Anda telah membaca [panduan pengaturan umum](/docs/plugins/social-login/google/general/).
+
+## Menggunakan Google login di iOS
+
+Dalam bagian ini, Anda akan mempelajari cara mengatur Google login di iOS.
+
+<Steps>
+1. Buat client ID iOS di konsol Google
+
+   1. Klik pada bilah pencarian
+      <img src="/social-login-assets/google_cons_search.png" alt="Google Console search bar" />
+
+   2. Cari `credentials` dan klik pada yang `APIs and Services` (nomor 2 pada tangkapan layar)
+      <img src="/social-login-assets/google_cons_cred_search.png" alt="Search results showing credentials option with APIs and Services highlighted" />
+
+   3. Klik pada `create credentials`
+      <img src="/social-login-assets/google_cons_create_cred.png" alt="Create credentials button in Google Console" />
+
+   4. Pilih `OAuth client ID`
+      <img src="/social-login-assets/google_cons_cred_oauth.png" alt="OAuth client ID option in credentials creation menu" />
+
+   5. Pilih `Application type` menjadi `iOS`
+      <img src="/social-login-assets/goolge_cons_cred_type_app_tye.png" alt="Application type selection with iOS option highlighted" />
+
+   6. Temukan bundle ID
+
+      1. Buka Xcode
+
+      2. Klik dua kali pada `App`
+         <img src="/social-login-assets/xcode_app_click.png" alt="App target in Xcode project navigator" />
+
+      3. Pastikan bahwa Anda berada di `Targets -> App`
+         <img src="/social-login-assets/xcode_targets_app.png" alt="Targets section in Xcode with App selected" />
+
+      4. Temukan `Bundle Identifier` Anda
+         <img src="/social-login-assets/xcode_bundle_id.png" alt="Bundle Identifier field in Xcode project settings" />
+
+      5. Kembali ke Google Console dan tempelkan `Bundle Identifier` Anda ke `Bundle ID`
+         <img src="/social-login-assets/google_cons_ios_bd_id.png" alt="Bundle ID field in Google Console iOS client creation form" />
+
+   7. Secara opsional, tambahkan `App Store ID` atau `Team ID` Anda ke client ID jika Anda telah mempublikasikan aplikasi Anda ke App Store
+
+   8. Setelah mengisi semua detail, klik `create`
+      <img src="/social-login-assets/google_cons_ios_cred_creat.png" alt="Create button at bottom of iOS client creation form" />
+
+   9. Klik `OK`
+      <img src="/social-login-assets/google_cons_ios_click_ok.png" alt="OK button on client ID created confirmation dialog" />
+
+   10. Buka client iOS yang baru dibuat
+       <img src="/social-login-assets/google_cons_open_new_ios.png" alt="Newly created iOS client in credentials list" />
+
+   11. Salin data berikut
+       <img src="/social-login-assets/google_cons_ios_what_to_copy.png" alt="Client ID details showing Client ID and reversed client ID to copy" />
+
+       :::note
+       `nr. 1` dalam gambar ini nantinya akan menjadi `iOSClientId` dalam panggilan `initialize`.
+
+       `nr. 2` dalam gambar ini nantinya akan menjadi `YOUR_DOT_REVERSED_IOS_CLIENT_ID`
+       :::
+
+2. Modifikasi Info.plist aplikasi Anda
+
+   1. Buka Xcode dan temukan file `Info.plist`
+      <img src="/social-login-assets/xcode_info_file.png" alt="Info.plist file in Xcode project navigator" />
+
+   2. Klik kanan file ini dan buka sebagai kode sumber
+      <img src="/social-login-assets/xcode_open_as_src_code.png" alt="Right-click menu showing Open As Source Code option" />
+
+   3. Di bagian bawah file `Plist` Anda, Anda akan melihat tag `</dict>`
+      <img src="/social-login-assets/xcode_dict_tag.png" alt="Closing dict tag in Info.plist file" />
+
+   4. Masukkan fragmen berikut tepat sebelum tag `</dict>` penutup
+      <img src="/social-login-assets/xcode_plist_inserted.png" alt="Info.plist with URL schemes code inserted before closing dict tag" />
+
+      ```xml
+      <key>CFBundleURLTypes</key>
+      <array>
+       <dict>
+         <key>CFBundleURLSchemes</key>
+         <array>
+           <string>YOUR_DOT_REVERSED_IOS_CLIENT_ID</string>
+         </array>
+       </dict>
+      </array>
+      ```
+
+   5. Ubah `YOUR_DOT_REVERSED_IOS_CLIENT_ID` ke nilai yang disalin pada langkah sebelumnya
+      <img src="/social-login-assets/xcode_plist_final.png" alt="Info.plist with actual reversed client ID inserted in URL schemes" />
+
+      :::caution
+      Pastikan bahwa nilai ini **DIMULAI** dengan `com.googleusercontent.apps`
+      :::
+
+   6. Simpan file dengan `Command + S`
+
+3. Modifikasi `AppDelegate.swift`
+
+   1. Buka AppDelegate
+      <img src="/social-login-assets/xcode_app_deleg.png" alt="AppDelegate.swift file in Xcode project navigator" />
+
+   2. Masukkan `import GoogleSignIn` di bagian atas file
+      <img src="/social-login-assets/xcode_app_deleg_google_sign_in.png" alt="AppDelegate.swift with GoogleSignIn import added" />
+
+   3. Temukan fungsi `func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:])`
+      <img src="/social-login-assets/xcode_app_deleg_app_fn.png" alt="Original application openURL function in AppDelegate" />
+
+   4. Modifikasi fungsi agar terlihat seperti ini
+
+      ```swift
+      func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+          // Called when the app was launched with a url. Feel free to add additional processing here,
+          // but if you want the App API to support tracking app url opens, make sure to keep this call
+
+          var handled: Bool
+
+          handled = GIDSignIn.sharedInstance.handle(url)
+          if handled {
+            return true
+          }
+
+          return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
+      }
+      ```
+
+      <img src="/social-login-assets/xcode_app_deleg_app_fn_mod.png" alt="Modified application openURL function with GoogleSignIn handling" />
+
+   5. Simpan file dengan `Command + S`
+
+4. Atur Google login di kode JavaScript/TypeScript Anda
+
+   1. Impor `SocialLogin` dan `Capacitor`
+
+      ```typescript
+      import { SocialLogin } from '@capgo/capacitor-social-login';
+      import { Capacitor } from '@capacitor/core';
+      ```
+
+   2. Panggil metode initialize (ini harus dipanggil hanya sekali)
+
+      **Pengaturan dasar (mode online - direkomendasikan untuk sebagian besar aplikasi):**
+      ```typescript
+      // onMounted adalah spesifik Vue
+      onMounted(() => {
+        SocialLogin.initialize({
+          google: {
+            iOSClientId: '673324426943-redacted.apps.googleusercontent.com',
+            mode: 'online' // Mode default
+          }
+        })
+      })
+      ```
+
+      **Pengaturan lanjutan dengan client ID tambahan:**
+      ```typescript
+      onMounted(() => {
+        SocialLogin.initialize({
+          google: {
+            webClientId: 'YOUR_WEB_CLIENT_ID',           // Opsional: untuk dukungan platform web
+            iOSClientId: 'YOUR_IOS_CLIENT_ID',           // Wajib: dari langkah 1
+            iOSServerClientId: 'YOUR_WEB_CLIENT_ID',     // Opsional: sama dengan webClientId, diperlukan untuk beberapa fitur lanjutan
+            mode: 'online'                               // 'online' atau 'offline'
+          }
+        })
+      })
+      ```
+
+      :::note
+      **Persyaratan Client ID:**
+      - `iOSClientId`: **Wajib** - Harus diakhiri dengan `googleusercontent.com` (dari langkah 1 di atas)
+      - `webClientId`: **Opsional** - Hanya diperlukan jika Anda juga mendukung platform web atau memerlukan fitur lanjutan
+      - `iOSServerClientId`: **Opsional** - Harus sama dengan nilai `webClientId` ketika disediakan
+
+      Untuk pengaturan lanjutan dengan `webClientId` dan `iOSServerClientId`, lihat [panduan pengaturan web](/docs/plugins/social-login/google/web/) untuk membuat kredensial ini.
+      :::
+
+      :::caution
+      **Tentang mode offline:** Saat menggunakan `mode: 'offline'`, respons login tidak akan berisi data pengguna secara langsung. Sebagai gantinya, Anda akan menerima kode autentikasi server yang harus ditukar dengan informasi pengguna melalui server backend Anda. Lihat [panduan pengaturan umum](/docs/plugins/social-login/google/general/#using-offline-access-with-your-own-backend) untuk detail implementasi.
+      :::
+
+   3. Implementasikan fungsi login. Buat tombol dan jalankan kode berikut saat diklik
+
+      **Untuk mode online:**
+      ```typescript
+      const res = await SocialLogin.login({
+        provider: 'google',
+        options: {}
+      })
+      // menangani respons - berisi data pengguna
+      console.log(JSON.stringify(res))
+      ```
+
+      **Untuk mode offline:**
+      ```typescript
+      const res = await SocialLogin.login({
+        provider: 'google',
+        options: {
+          forceRefreshToken: true // Direkomendasikan untuk mode offline
+        }
+      })
+      // res berisi serverAuthCode, bukan data pengguna
+      // Kirim serverAuthCode ke backend Anda untuk mendapatkan informasi pengguna
+      console.log('Server auth code:', res.result.serverAuthCode)
+      ```
+
+5. Uji aplikasi Anda
+
+   1. Build aplikasi Anda dan jalankan `cap sync`
+
+   2. Jika Anda telah melakukan semuanya dengan benar, Anda harus melihat alur Google login berfungsi dengan baik
+      <img src="/social-login-assets/google_final_ios_v2.gif" alt="Demo of Google login flow on iOS showing sign-in process and successful authentication" />
+</Steps>
+
+:::note
+Bahasa dalam prompt Google bergantung pada pengaturan bahasa perangkat Anda.
+:::
+
+## Masalah yang Diketahui
+
+### Inkompatibilitas Plugin Privacy Screen
+
+Plugin Google Login tidak kompatibel dengan [@capacitor/privacy-screen](https://github.com/ionic-team/capacitor-privacy-screen). Ketika menggunakan kedua plugin bersama-sama, webview Google login akan terganggu oleh layar privasi.
+
+**Solusi:** Panggil `await PrivacyScreen.disable();` sebelum memanggil fungsi login:
+
+```typescript
+import { PrivacyScreen } from '@capacitor/privacy-screen';
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+await PrivacyScreen.disable();
+await SocialLogin.login({
+  provider: 'google',
+  options: {}
+});
+```
+
+
+
+

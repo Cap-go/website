@@ -1,0 +1,41 @@
+---
+title: "@capgo/camera-preview"
+description: Plugin Capacitor untuk fungsionalitas pratinjau kamera dengan tampilan feed kamera real-time dan kemampuan menangkap foto/video.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+locale: id
+hero:
+  tagline: Tampilkan pratinjau kamera di aplikasi Anda dengan kontrol penuh atas pengaturan kamera, ambil foto dan video langsung dari pratinjau.
+  image:
+    file: ~public/icons/plugins/camera-preview.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/camera-preview/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-camera-preview/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Pratinjau real-time" icon="rocket">
+    Tampilkan feed kamera langsung di UI aplikasi Anda
+  </Card>
+  <Card title="Kontrol penuh" icon="setting">
+    Kontrol flash, zoom, fokus, dan beralih antar kamera
+  </Card>
+  <Card title="Kemampuan menangkap" icon="pencil">
+    Ambil foto dan rekam video dari pratinjau
+  </Card>
+  <Card title="Dokumentasi Komprehensif" icon="open-book">
+    Lihat [Dokumentasi](/docs/plugins/camera-preview/getting-started/) untuk menguasai plugin dalam beberapa menit.
+  </Card>
+</CardGrid>

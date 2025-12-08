@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-document-scanner"
+locale: ja
+description: 自動エッジ検出でシャープなドキュメントをキャプチャし、Capacitorアプリからスキャンしたページをエクスポートします。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: 自動クロップ、複数ページキャプチャ、設定可能な出力形式を備えた洗練されたドキュメントスキャン体験を起動します。
+  image:
+    file: ~public/icons/plugins/document-scanner.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/document-scanner/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-document-scanner/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Document ScannerプラグインはCapacitorアプリにiOSとAndroidデバイスの両方で動作するネイティブ品質のスキャンフローを提供します。
+
+<CardGrid stagger>
+  <Card title="自動検出" icon="rocket">
+    ページのエッジを検出し、自動的にクロップし、保存前にユーザーが調整できるようにします。
+  </Card>
+  <Card title="複数ページキャプチャ" icon="star">
+    調整可能な制限を持つ1つのスキャンセッションで1つまたは多くのページをキャプチャします。
+  </Card>
+  <Card title="カスタム出力" icon="download">
+    選択した画質でファイルパスまたはbase64文字列のいずれかを返します。
+  </Card>
+  <Card title="統一API" icon="pencil">
+    1つのTypeScriptインターフェースがiOSとAndroidの両方の実装にまたがります。
+  </Card>
+</CardGrid>
+
+はじめるガイドを使用して、カメラパーミッションを有効にし、品質設定を構成し、スキャンしたファイルをストレージワークフローにエクスポートします。

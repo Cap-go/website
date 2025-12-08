@@ -1,0 +1,55 @@
+---
+title: Firebase Google Login on Web
+locale: zh
+description: 了解如何在 Web 上使用 Firebase 内置的 Google 登录设置 Google 登录与 Firebase 身份验证。
+sidebar:
+    order: 4
+---
+
+## 简介
+
+Capacitor Social Login 插件**不支持 Web 平台**。对于 Web 应用程序，您应该直接使用 Firebase 内置的 Google 登录，它提供了更可靠的基于弹出窗口的身份验证流程。
+
+## 为什么不在 Web 上使用该插件？
+
+Capacitor Social Login 插件专为原生移动平台（Android 和 iOS）设计，它可以利用特定于平台的身份验证流程。对于 Web，Firebase 原生的 `signInWithPopup` 方法：
+
+- ✅ 更可靠且支持更好
+- ✅ 自动处理浏览器会话存储
+- ✅ 提供更好的错误处理
+- ✅ 无需额外配置
+
+## 设置步骤
+
+1. **配置 Firebase 项目**
+
+   确保您的 Firebase 项目已启用 Google 登录：
+   - 转到 [Firebase 控制台](https://console.firebase.google.com/)
+   - 导航到身份验证 > 登录方法
+   - 启用 Google 登录提供商
+
+2. 添加您的授权域
+    1. 在 [console.cloud.google.com](https://console.cloud.google.com/) 转到项目概览
+        <img src="/social-login-assets/firebase_project_overview.webp" alt="Firebase Project Overview" />
+    2. 打开 `Authentication` 菜单
+        <img src="/social-login-assets/firebase_select_authentication.webp" alt="Firebase Authentication Menu" />
+    3. 点击 `Settings` 按钮
+        <img src="/social-login-assets/firebase_select_authentication_settings.webp" alt="Firebase Authentication Sign-in Method Button" />
+    4. 设置 `Authorized domains`
+        <img src="/social-login-assets/firebase_select_authentication_settings_authorized_domains.webp" alt="Firebase Authentication Settings Authorized Domains" />
+
+## 示例实现
+
+查看示例应用中的 [authUtils.ts](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/authUtils.ts) 文件以获取完整实现，它：
+
+- 在 Web 平台上使用 Firebase 的 `signInWithPopup`
+- 在 Android/iOS 平台上使用 Capacitor Social Login 插件
+- 自动处理平台检测
+
+该示例展示了如何在 Web 上有条件地使用 Firebase 的内置方法，同时在原生平台上使用插件。
+
+## 其他资源
+
+- [Firebase 身份验证文档](https://firebase.google.com/docs/auth) - 完整的 Firebase Auth 文档
+- [Firebase Google Sign-In for Web](https://firebase.google.com/docs/auth/web/google-signin) - Web 上 Google 登录的官方 Firebase 指南
+- [Google Login 设置指南](/docs/plugins/social-login/google/general/) - 配置授权域和 OAuth 同意屏幕的指南

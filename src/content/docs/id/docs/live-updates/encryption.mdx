@@ -1,0 +1,344 @@
+---
+title: Enkripsi
+description: "Pelajari bagaimana enkripsi end-to-end Capgo mengamankan bundle aplikasi Anda selama transmisi dan penyimpanan, melindungi kode dan data pengguna Anda."
+sidebar:
+  order: 5
+locale: id
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Capgo menyediakan enkripsi end-to-end yang kuat untuk bundle aplikasi Anda, memastikan bahwa kode JavaScript dan aset Anda dilindungi selama transmisi dan penyimpanan. Sistem enkripsi ini dirancang untuk memberi Anda kontrol penuh atas keamanan aplikasi Anda sambil mempertahankan kenyamanan pembaruan langsung.
+
+## Gambaran Umum
+
+Sistem enkripsi Capgo menggunakan metode kriptografi standar industri untuk melindungi bundle Anda dari akses yang tidak sah. Ketika enkripsi diaktifkan, bundle Anda dienkripsi sebelum meninggalkan lingkungan pengembangan Anda dan tetap terenkripsi sampai didekripsi oleh aplikasi Anda di perangkat pengguna.
+
+**Enkripsi End-to-End Sejati**: Tidak seperti platform pembaruan OTA lain yang hanya menandatangani pembaruan (membiarkan kode dapat dibaca publik), Capgo menyediakan enkripsi end-to-end sejati. Ini berarti hanya pengguna Anda yang dapat mendekripsi pembaruan Anda - tidak ada orang lain, termasuk Capgo sendiri. Konten bundle Anda tetap sepenuhnya pribadi dan tidak dapat dibaca selama seluruh proses pengiriman.
+
+<Aside type="tip">
+
+Enkripsi sangat penting untuk:
+- Aplikasi yang menangani data sensitif atau logika bisnis
+- Aplikasi enterprise dengan persyaratan kepatuhan
+- Aplikasi yang diterapkan di industri yang diatur
+- Organisasi dengan kebijakan keamanan yang ketat
+
+</Aside>
+
+## Cara Kerja Enkripsi
+
+Capgo menggunakan pendekatan enkripsi hibrid yang menggabungkan enkripsi RSA dan AES untuk keamanan dan kinerja optimal:
+
+![Alur Enkripsi Capgo](/encryption_flow.webp)
+
+### 1. Generasi Kunci
+- **Kunci Pribadi**: Dihasilkan dan disimpan dengan aman di lingkungan pengembangan Anda (digunakan untuk enkripsi)
+- **Kunci Publik**: Diturunkan dari kunci pribadi Anda dan disimpan dalam konfigurasi Capacitor aplikasi Anda (digunakan untuk dekripsi)
+- **Kunci Sesi**: Kunci AES acak yang dihasilkan untuk setiap upload bundle
+
+### 2. Proses Enkripsi
+1. Kunci sesi AES acak dihasilkan untuk setiap upload bundle
+2. Bundle Anda dienkripsi menggunakan kunci sesi AES
+3. Checksum bundle dihitung
+4. Baik kunci sesi AES dan checksum dienkripsi bersama menggunakan kunci pribadi RSA Anda (membuat "tanda tangan")
+5. Bundle terenkripsi dan tanda tangan terenkripsi disimpan
+
+Checksum dienkripsi bersama kunci AES untuk mencegah manipulasi. Karena hanya kunci pribadi RSA Anda yang dapat membuat tanda tangan ini, dan hanya kunci publik yang sesuai yang dapat mendekripsinya, ini memastikan bahwa baik kunci sesi AES dan checksum yang diharapkan adalah autentik dan tidak dimodifikasi oleh penyerang.
+
+### 3. Proses Dekripsi
+1. Aplikasi Anda mengunduh bundle terenkripsi dan tanda tangan terenkripsi
+2. SDK Capgo menggunakan kunci publik RSA Anda (disimpan dalam aplikasi) untuk mendekripsi tanda tangan
+3. Ini mengungkapkan kunci sesi AES dan checksum asli
+4. Kunci sesi AES digunakan untuk mendekripsi bundle
+5. Checksum dari bundle yang didekripsi dihitung dan dibandingkan dengan checksum asli untuk verifikasi integritas
+
+Proses ini memastikan bahwa bahkan jika penyerang mencegat bundle terenkripsi, mereka tidak dapat memodifikasi kunci sesi AES atau memberikan checksum palsu, karena mereka memerlukan kunci pribadi Anda untuk membuat tanda tangan valid yang dapat didekripsi oleh kunci publik.
+
+<Aside type="tip">
+
+RSA tidak dapat mengenkripsi data dalam jumlah besar secara efisien, jadi AES digunakan untuk enkripsi bundle aktual sementara RSA mengamankan kunci AES dan memberikan verifikasi integritas melalui penandatanganan checksum.
+
+</Aside>
+
+## Capgo vs Platform Lain
+
+| Fitur | Capgo | Platform OTA Lain |
+|---------|-------|-------------------|
+| **Konten Bundle** | Sepenuhnya terenkripsi (tidak dapat dibaca) | Dapat dibaca publik |
+| **Metode Keamanan** | Enkripsi end-to-end sejati | Hanya penandatanganan kode |
+| **Tingkat Privasi** | Zero-knowledge (bahkan Capgo tidak dapat membaca kode Anda) | Platform dapat mengakses kode Anda |
+| **Perlindungan** | Konten + integritas + keaslian | Hanya integritas + keaslian |
+
+**Mengapa Ini Penting:**
+- **Penandatanganan kode** hanya memverifikasi bahwa pembaruan belum diubah dan berasal dari sumber yang benar
+- **Enkripsi end-to-end** memastikan bahwa konten kode aktual Anda tetap pribadi dan tidak dapat dibaca selama transmisi dan penyimpanan
+- Dengan enkripsi end-to-end sejati Capgo, hanya pengguna Anda yang dapat mendekripsi pembaruan - tidak ada orang lain, termasuk Capgo sendiri
+
+## Metode Enkripsi
+
+Capgo menggunakan Enkripsi V2 sebagai metode enkripsi standar:
+
+### Enkripsi V2 (Standar Saat Ini)
+- Menggunakan RSA-4096 untuk keamanan yang ditingkatkan
+- AES-256-GCM untuk enkripsi terotentikasi
+- Menyediakan verifikasi integritas
+- Kinerja dan keamanan yang lebih baik
+
+### Enkripsi V1 (Deprecated)
+- Menggunakan RSA-2048 untuk enkripsi kunci
+- AES-256-CBC untuk enkripsi bundle
+- **Tidak lagi tersedia di CLI saat ini**
+- Aplikasi lama yang menggunakan V1 harus migrasi ke V2
+
+<Aside type="danger">
+
+Enkripsi V1 tidak lagi didukung di CLI Capgo saat ini. Jika Anda menggunakan enkripsi V1, Anda harus migrasi ke V2. Lihat [panduan migrasi](/docs/upgrade/encryption-v1-to-v2/) untuk instruksi terperinci.
+
+</Aside>
+
+## Menyiapkan Enkripsi
+
+### Langkah 1: Generate Kunci Enkripsi
+
+Pertama, generate kunci enkripsi Anda menggunakan CLI Capgo:
+
+```shell
+# Generate kunci enkripsi baru (membuat file di direktori saat ini)
+npx @capgo/cli@latest key create
+```
+
+Ini membuat:
+- `.capgo_key_v2`: Kunci pribadi Anda (jaga keamanannya!)
+- `.capgo_key_v2.pub`: Kunci publik Anda (digunakan oleh aplikasi Anda)
+
+File-file ini dibuat di direktori saat ini tempat Anda menjalankan perintah.
+
+<Aside type="caution">
+
+**Catatan Penyimpanan Penting:**
+- **Kunci Pribadi (`.capgo_key_v2`)**: Jangan pernah commit ini ke version control. File ini harus dijaga keamanannya dan hanya digunakan untuk enkripsi selama upload bundle.
+- **Kunci Publik (`.capgo_key_v2.pub`)**: Ini aman untuk di-commit ke version control sebagai cadangan kunci publik Anda.
+- **Lokasi File**: Kunci dibuat di direktori saat ini tempat Anda menjalankan perintah `key create`.
+- **Kunci Publik di Config**: Anda harus menjalankan `key save` untuk menyimpan kunci publik di konfigurasi Capacitor Anda agar aplikasi mobile dapat menggunakannya.
+
+Untuk penggunaan produksi, simpan kunci pribadi dengan aman (environment variables, layanan manajemen kunci) dan hapus dari proyek lokal Anda setelah setup.
+
+</Aside>
+
+### Langkah 2: Simpan Kunci Publik Anda ke Capacitor Config (Wajib)
+
+Anda **harus** menyimpan kunci publik Anda ke konfigurasi Capacitor agar aplikasi mobile Anda dapat mendekripsi bundle:
+
+```shell
+# Simpan kunci publik dari file ke konfigurasi Capacitor (wajib)
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+
+# Atau simpan data kunci publik secara langsung
+npx @capgo/cli@latest key save --key-data "$CAPGO_PUBLIC_KEY"
+```
+
+### Langkah 3: Sync Platform Capacitor (Wajib)
+
+Setelah menyimpan kunci publik, Anda **harus** sync platform Capacitor untuk menyalin konfigurasi yang diperbarui ke lapisan native:
+
+```shell
+# Sync platform untuk menyalin config ke native
+npx cap sync
+```
+
+<Aside type="caution">
+
+**Langkah yang Diperlukan**:
+1. Perintah `key save` menyimpan kunci publik di konfigurasi Capacitor Anda
+2. `npx cap sync` menyalin konfigurasi ini ke lapisan native di mana aplikasi mobile dapat mengaksesnya
+3. Tanpa kedua langkah ini, aplikasi Anda tidak akan dapat mendekripsi pembaruan terenkripsi
+
+</Aside>
+
+## Mengenkripsi Bundle
+
+### Metode 1: Enkripsi Selama Upload
+
+Cara paling sederhana adalah mengenkripsi selama proses upload:
+
+```shell
+# Upload dengan enkripsi otomatis
+npx @capgo/cli@latest bundle upload --key-v2
+
+# Untuk penyimpanan eksternal, Anda harus mengenkripsi terlebih dahulu (lihat Alur Kerja Enkripsi Manual di bawah)
+```
+
+### Metode 2: Alur Kerja Enkripsi Manual
+
+Untuk kontrol lebih, Anda dapat mengenkripsi bundle secara manual:
+
+<Steps>
+
+1. **Buat zip bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle zip com.example.app --path ./dist --key-v2
+   ```
+
+2. **Enkripsi bundle:**
+   ```shell
+   npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM_FROM_STEP_1
+   ```
+
+3. **Upload ke penyimpanan Anda (mis., S3) dan daftar dengan Capgo:**
+   ```shell
+   # Pertama upload bundle terenkripsi ke penyimpanan Anda (mis., AWS S3)
+   aws s3 cp ./encrypted-bundle.zip s3://your-bucket/encrypted-bundle.zip
+
+   # Kemudian daftar dengan Capgo menggunakan URL eksternal
+   npx @capgo/cli@latest bundle upload --external https://your-storage.com/encrypted-bundle.zip --iv-session-key IV_SESSION_KEY_FROM_STEP_2
+   ```
+
+</Steps>
+
+## Manajemen Kunci
+
+### Menyimpan Kunci dengan Aman
+
+**Opsi Kunci Pribadi:**
+
+1. **Berbasis file (pengembangan lokal):**
+   ```shell
+   # Kunci disimpan sebagai file .capgo_key_v2 di root proyek
+   npx @capgo/cli@latest bundle upload --key-v2
+   ```
+
+2. **Environment variable (CI/CD):**
+   ```shell
+   # Simpan di environment variable untuk CI
+   export CAPGO_PRIVATE_KEY="$(cat .capgo_key_v2)"
+   npx @capgo/cli@latest bundle upload --key-data-v2 "$CAPGO_PRIVATE_KEY"
+   ```
+
+**Setup Kunci Publik (Wajib):**
+```shell
+# Harus menyimpan kunci publik ke konfigurasi Capacitor untuk aplikasi mobile
+npx @capgo/cli@latest key save --key ./.capgo_key_v2.pub
+```
+
+**Lingkungan Produksi:**
+- Simpan kunci pribadi di layanan manajemen kunci yang aman (AWS KMS, Azure Key Vault, dll.)
+- Gunakan manajemen secret CI/CD untuk kunci pribadi
+- Jangan pernah commit kunci pribadi ke version control
+
+**Penggunaan Kunci:**
+- **Kunci Pribadi**: Digunakan oleh CLI untuk enkripsi selama upload bundle (jaga keamanan)
+- **Kunci Publik**: Disimpan di konfigurasi aplikasi untuk dekripsi di perangkat (aman untuk di-commit)
+
+### Rotasi Kunci
+
+Rotasi kunci enkripsi Anda secara berkala untuk keamanan yang lebih baik:
+
+<Steps>
+
+1. **Generate kunci baru:**
+   ```shell
+   # Navigasi ke direktori yang diinginkan terlebih dahulu, lalu buat kunci
+   mkdir ./new-keys && cd ./new-keys
+   npx @capgo/cli@latest key create
+   ```
+
+2. **Simpan kunci publik baru ke konfigurasi Capacitor:**
+   ```shell
+   npx @capgo/cli@latest key save --key ./new-keys/.capgo_key_v2.pub
+   ```
+
+3. **Perbarui konfigurasi aplikasi Anda** dengan kunci publik baru
+
+4. **Deploy aplikasi yang diperbarui** sebelum mengunggah bundle terenkripsi dengan kunci baru
+
+</Steps>
+
+## Praktik Terbaik Keamanan
+
+### Keamanan Kunci
+- **Jangan pernah bagikan kunci pribadi** antara lingkungan atau anggota tim
+- **Gunakan kunci yang berbeda** untuk lingkungan yang berbeda (dev, staging, production)
+- **Rotasi kunci secara berkala** (disarankan: setiap 6-12 bulan)
+- **Simpan kunci dengan aman** menggunakan sistem manajemen kunci yang tepat
+
+### Keamanan Bundle
+- **Selalu verifikasi** integritas bundle setelah dekripsi
+- **Pantau** untuk pola unduhan atau kegagalan yang tidak biasa
+- **Gunakan HTTPS** untuk semua URL bundle (diperlukan untuk aplikasi mobile)
+- **Implementasikan** penanganan error yang tepat untuk kegagalan dekripsi
+
+### Kontrol Akses
+- **Batasi akses** ke kunci enkripsi hanya untuk personel yang berwenang
+- **Gunakan akses berbasis peran** untuk operasi manajemen kunci
+- **Audit** penggunaan dan akses kunci secara berkala
+- **Implementasikan** prosedur backup dan recovery yang tepat
+
+## Pemecahan Masalah Enkripsi
+
+### Masalah Umum
+
+**Kegagalan dekripsi:**
+- Verifikasi kunci pribadi cocok dengan kunci publik yang digunakan untuk enkripsi
+- Periksa bahwa `ivSessionKey` benar
+- Pastikan Anda menggunakan Enkripsi V2 (V1 tidak lagi didukung)
+
+**Kesalahan terkait kunci:**
+- Konfirmasi format kunci pribadi benar (format PEM)
+- Verifikasi kunci belum rusak selama penyimpanan/transfer
+- Periksa bahwa kunci memiliki izin yang tepat di konfigurasi aplikasi Anda
+
+**Masalah kinerja:**
+- Bundle besar mungkin memerlukan waktu lebih lama untuk enkripsi/dekripsi
+- Pertimbangkan menggunakan pembaruan diferensial untuk mengurangi ukuran bundle
+- Pantau kinerja perangkat selama dekripsi
+
+### Perintah Debug
+
+Periksa status enkripsi:
+```shell
+npx @capgo/cli@latest app debug
+```
+
+Uji alur kerja enkripsi/dekripsi:
+```shell
+# Uji alur kerja lengkap: zip → enkripsi → dekripsi → unzip
+npx @capgo/cli@latest bundle zip com.example.app --key-v2
+npx @capgo/cli@latest bundle encrypt ./com.example.app.zip CHECKSUM --json
+npx @capgo/cli@latest bundle decrypt ./encrypted-bundle.zip IV_SESSION_KEY
+```
+
+## Kepatuhan dan Standar
+
+Implementasi enkripsi Capgo mengikuti standar industri:
+
+- **AES-256**: Algoritma enkripsi yang disetujui FIPS 140-2
+- **RSA-4096**: Enkripsi asimetris yang kuat untuk perlindungan kunci
+- **Mode GCM**: Menyediakan kerahasiaan dan keaslian
+- **Secure Random**: Generasi angka acak yang aman secara kriptografis
+
+Ini membuat Capgo cocok untuk aplikasi yang memerlukan kepatuhan dengan:
+- GDPR (General Data Protection Regulation)
+- HIPAA (Health Insurance Portability and Accountability Act)
+- SOC 2 (Service Organization Control 2)
+- ISO 27001 (Information Security Management)
+
+## Pertimbangan Kinerja
+
+### Overhead Enkripsi
+- **Ukuran bundle**: Bundle terenkripsi sedikit lebih besar (~1-2% overhead)
+- **Waktu pemrosesan**: Enkripsi/dekripsi menambah latensi minimal
+- **Penggunaan memori**: Peningkatan sementara selama operasi enkripsi/dekripsi
+
+### Tips Optimisasi
+- Gunakan pembaruan diferensial untuk meminimalkan transfer data terenkripsi
+- Optimalkan ukuran bundle Anda dengan mengonversi gambar ke format WebP
+- Minimalkan file JavaScript dan CSS sebelum bundling
+- Hapus dependensi dan kode yang tidak digunakan
+- Pantau kinerja perangkat pada perangkat yang lebih lama/lambat
+
+## Langkah Selanjutnya
+
+- Pelajari tentang [Custom Storage](/docs/live-updates/custom-storage/) untuk menggunakan enkripsi dengan infrastruktur Anda sendiri
+- Jelajahi [Channels](/docs/live-updates/channels/) untuk mengelola bundle terenkripsi di berbagai lingkungan
+- Siapkan [CI/CD Integration](/docs/getting-started/cicd-integration/) untuk mengotomatisasi deployment terenkripsi

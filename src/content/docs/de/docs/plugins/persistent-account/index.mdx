@@ -1,0 +1,132 @@
+---
+title: "@capgo/capacitor-persistent-account"
+locale: de
+description: Persistentes Kontoverwaltungs-Plugin für Capacitor-Apps mit sicherem Speicher, Sitzungsbehandlung und Benutzerdatenpersistenz.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Verwalten Sie Benutzerkonten mit persistentem Speicher, sicherer Sitzungsbehandlung und nahtloser Authentifizierung über App-Sitzungen hinweg.
+  image:
+    file: ~public/icons/plugins/persistent-account.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/persistent-account/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persistent-account/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Übersicht
+
+Das Capacitor Persistent Account-Plugin ermöglicht sichere Speicherung und Persistenz von Benutzerkontodaten zwischen App-Installationen. Dieses Plugin stellt sicher, dass Benutzerkontoinformationen auch nach App-Neuinstallationen verfügbar bleiben, was nahtloses Benutzererlebnis und Kontinuität des Kontos bietet.
+
+<CardGrid stagger>
+  <Card title="Installations-übergreifende Persistenz" icon="rocket">
+    Daten überleben App-Deinstallations-/Neuinstallationszyklen 💾
+  </Card>
+  <Card title="Sicherer Speicher" icon="setting">
+    Sichere Kontodatenspeicherung mit Systemintegration 🔐
+  </Card>
+  <Card title="Einfache API" icon="puzzle">
+    Saubere Lese-/Schreibschnittstelle für Kontoverwaltung 📊
+  </Card>
+  <Card title="Plattformübergreifend" icon="laptop">
+    Native iOS- und Android-Implementierung 📱
+  </Card>
+</CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## Kern-API-Methoden
+
+### Datenverwaltung
+- `saveAccount(options: { data: unknown })` - Speichert Kontodaten sicher im persistenten Speicher
+- `readAccount()` - Ruft gespeicherte Kontodaten ab, gibt `Promise<{ data: unknown | null }>` zurück
+
+## Hauptfunktionen
+
+- **Installations-übergreifende Persistenz**: Kontodaten überleben App-Deinstallation und -Neuinstallation
+- **Sicherer Speicher**: Verwendet plattformspezifische sichere Speichermechanismen
+- **Typ-Flexibilität**: Speichert jede serialisierbare Kontodatenstruktur
+- **Plattformübergreifende Unterstützung**: Native Implementierung für iOS und Android
+
+## Verwendungsbeispiel
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Ihre Kontodatenstruktur definieren
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Kontodaten speichern
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Kontodaten lesen
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Konto wiederhergestellt:', account.username);
+} else {
+  console.log('Keine Kontodaten gefunden');
+}
+```
+
+## Anwendungsfälle
+
+- **Benutzer-Onboarding**: Benutzerfortschritt durch App-Neuinstallationen bewahren
+- **Kontowiederherstellung**: Benutzersitzungen nach App-Updates wiederherstellen
+- **Einstellungsspeicherung**: Benutzereinstellungen und Konfigurationen beibehalten
+- **Offline-First-Apps**: Wesentliche Benutzerdaten lokal speichern
+
+## Plattform-Implementierung
+
+### iOS
+- Nutzt iOS Keychain Services für sicheren, persistenten Speicher
+- Daten überleben App-Löschung und Gerätwiederherstellungen
+
+### Android
+- Verwendet Android Account Manager oder Shared Preferences mit Backup
+- Behält Daten über App-Neuinstallationen und Gerätemigrationen hinweg
+
+## Sicherheitsüberlegungen
+
+- Kontodaten werden mit plattformspezifischem sicherem Speicher gespeichert
+- Verschlüsselung sensibler Informationen erwägen
+- Ordnungsgemäße Datenvalidierung beim Lesen gespeicherter Konten implementieren
+- Plattformrichtlinien für Benutzerdatenverarbeitung befolgen
+
+## Dokumentation
+
+Siehe die [vollständige Dokumentation](/docs/plugins/persistent-account/getting-started/) für detaillierte Implementierungsanleitungen und Best Practices.

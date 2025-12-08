@@ -1,0 +1,370 @@
+---
+title: "Endpoint API Canali"
+locale: it
+description: "Come costruire endpoint di gestione canali per Capgo self-hosted per gestire le assegnazioni dispositivo-canale e le query sui canali"
+sidebar:
+  order: 8
+---
+
+I canali sono un meccanismo fondamentale per gestire gli aggiornamenti delle app in Capgo. In modalità self-hosted, devi implementare endpoint per i canali per gestire le assegnazioni dei dispositivi, le query sui canali e le operazioni di gestione dei canali.
+
+## Comprendere i Canali
+
+I canali ti permettono di:
+- **Controllare la distribuzione degli aggiornamenti**: Assegnare versioni diverse dell'app a gruppi di utenti diversi
+- **Test A/B**: Testare nuove funzionalità con segmenti specifici di utenti
+- **Rilasci graduali**: Distribuire gradualmente gli aggiornamenti per minimizzare i rischi
+- **Separazione degli ambienti**: Separare gli aggiornamenti di sviluppo, staging e produzione
+
+## Configurazione
+
+Configura l'URL dell'endpoint dei canali nel tuo `capacitor.config.json`:
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "channelUrl": "https://myserver.com/api/channel_self"
+    }
+  }
+}
+```
+
+## Operazioni sui Canali
+
+Il plugin esegue diverse operazioni sui canali che il tuo endpoint deve gestire:
+
+### 1. Ottieni Canale (Richiesta GET)
+
+Quando il plugin chiama `getChannel()`, invia una richiesta GET per recuperare l'assegnazione del canale corrente del dispositivo.
+
+#### Formato Richiesta
+```typescript
+// GET /api/channel_self
+// Headers:
+{
+  "Content-Type": "application/json"
+}
+
+// Parametri query o body:
+interface GetChannelRequest {
+  device_id: string
+  app_id: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+#### Formato Risposta
+```json
+{
+  "status": "ok",
+  "channel": "production",
+  "allowSet": true,
+  "message": "",
+  "error": ""
+}
+```
+
+### 2. Imposta Canale (Richiesta POST)
+
+Quando il plugin chiama `setChannel()`, invia una richiesta POST per assegnare il dispositivo a un canale specifico.
+
+#### Formato Richiesta
+```typescript
+// POST /api/channel_self
+interface SetChannelRequest {
+  device_id: string
+  app_id: string
+  channel: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+#### Formato Risposta
+```json
+{
+  "status": "ok",
+  "message": "Dispositivo assegnato al canale con successo",
+  "error": ""
+}
+```
+
+### 3. Rimuovi Canale (Richiesta DELETE)
+
+Quando il plugin chiama `unsetChannel()`, invia una richiesta DELETE per rimuovere l'assegnazione del canale del dispositivo.
+
+#### Formato Richiesta
+```typescript
+// DELETE /api/channel_self
+interface UnsetChannelRequest {
+  device_id: string
+  app_id: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+```
+
+## Esempio di Implementazione
+
+Ecco un esempio in JavaScript di come implementare l'endpoint dei canali:
+
+```typescript
+interface ChannelRequest {
+  device_id: string
+  app_id: string
+  channel?: string
+  platform: "ios" | "android"
+  plugin_version: string
+  version_build: string
+  version_code: string
+  version_name: string
+}
+
+interface ChannelResponse {
+  status: "ok" | "error"
+  channel?: string
+  allowSet?: boolean
+  message?: string
+  error?: string
+}
+
+export const handler = async (event) => {
+  const method = event.httpMethod || event.method
+  const body = JSON.parse(event.body || '{}') as ChannelRequest
+
+  const { device_id, app_id, channel, platform } = body
+
+  try {
+    switch (method) {
+      case 'GET':
+        return await getDeviceChannel(device_id, app_id)
+
+      case 'POST':
+        return await setDeviceChannel(device_id, app_id, channel!, platform)
+
+      case 'DELETE':
+        return await unsetDeviceChannel(device_id, app_id)
+
+      default:
+        return {
+          status: "error",
+          error: "Metodo non consentito"
+        }
+    }
+  } catch (error) {
+    return {
+      status: "error",
+      error: error.message
+    }
+  }
+}
+
+async function getDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
+  // Query del database per l'assegnazione del canale del dispositivo
+  const assignment = await database.getDeviceChannel(deviceId, appId)
+
+  if (assignment) {
+    return {
+      status: "ok",
+      channel: assignment.channel,
+      allowSet: assignment.allowSelfAssign
+    }
+  }
+
+  // Restituisci il canale predefinito se non viene trovata un'assegnazione
+  return {
+    status: "ok",
+    channel: "production", // Il tuo canale predefinito
+    allowSet: true
+  }
+}
+
+async function setDeviceChannel(
+  deviceId: string,
+  appId: string,
+  channel: string,
+  platform: string
+): Promise<ChannelResponse> {
+  // Valida che il canale esista e permetta l'auto-assegnazione
+  const channelConfig = await database.getChannelConfig(channel, appId)
+
+  if (!channelConfig) {
+    return {
+      status: "error",
+      error: "Canale non trovato"
+    }
+  }
+
+  if (!channelConfig.allowDeviceSelfSet) {
+    return {
+      status: "error",
+      error: "Il canale non permette l'auto-assegnazione"
+    }
+  }
+
+  // Controlla le restrizioni di piattaforma
+  if (platform === "ios" && !channelConfig.ios) {
+    return {
+      status: "error",
+      error: "Canale non disponibile per iOS"
+    }
+  }
+
+  if (platform === "android" && !channelConfig.android) {
+    return {
+      status: "error",
+      error: "Canale non disponibile per Android"
+    }
+  }
+
+  // Salva l'assegnazione
+  await database.setDeviceChannel(deviceId, appId, channel)
+
+  return {
+    status: "ok",
+    message: "Dispositivo assegnato al canale con successo"
+  }
+}
+
+async function unsetDeviceChannel(deviceId: string, appId: string): Promise<ChannelResponse> {
+  // Rimuovi l'assegnazione del canale del dispositivo
+  await database.removeDeviceChannel(deviceId, appId)
+
+  return {
+    status: "ok",
+    message: "Assegnazione del canale del dispositivo rimossa"
+  }
+}
+```
+
+## Configurazione dei Canali
+
+Il tuo sistema di canali dovrebbe supportare queste opzioni di configurazione:
+
+```typescript
+interface ChannelConfig {
+  name: string
+  appId: string
+
+  // Targeting della piattaforma
+  ios: boolean
+  android: boolean
+
+  // Restrizioni del dispositivo
+  allowDeviceSelfSet: boolean  // Permetti chiamate setChannel()
+  allowEmulator: boolean
+  allowDev: boolean           // Permetti build di sviluppo
+
+  // Politiche di aggiornamento
+  disableAutoUpdate: "major" | "minor" | "version_number" | "none"
+  disableAutoUpdateUnderNative: boolean
+
+  // Assegnazione
+  isDefault: boolean          // Canale predefinito per nuovi dispositivi
+}
+```
+
+## Esempio di Schema Database
+
+Dovrai memorizzare le configurazioni dei canali e le assegnazioni dei dispositivi:
+
+```sql
+-- Tabella canali
+CREATE TABLE channels (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  app_id VARCHAR(255) NOT NULL,
+  ios BOOLEAN DEFAULT true,
+  android BOOLEAN DEFAULT true,
+  allow_device_self_set BOOLEAN DEFAULT false,
+  allow_emulator BOOLEAN DEFAULT true,
+  allow_dev BOOLEAN DEFAULT true,
+  disable_auto_update VARCHAR(50) DEFAULT 'none',
+  disable_auto_update_under_native BOOLEAN DEFAULT false,
+  is_default BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(name, app_id)
+);
+
+-- Tabella assegnazioni canali dispositivi
+CREATE TABLE device_channels (
+  id SERIAL PRIMARY KEY,
+  device_id VARCHAR(255) NOT NULL,
+  app_id VARCHAR(255) NOT NULL,
+  channel_name VARCHAR(255) NOT NULL,
+  assigned_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(device_id, app_id)
+);
+```
+
+## Gestione degli Errori
+
+Gestisci scenari di errore comuni:
+
+```typescript
+// Canale non trovato
+{
+  "status": "error",
+  "error": "Canale 'beta' non trovato"
+}
+
+// Auto-assegnazione non consentita
+{
+  "status": "error",
+  "error": "Il canale non permette l'auto-assegnazione del dispositivo"
+}
+
+// Piattaforma non supportata
+{
+  "status": "error",
+  "error": "Canale non disponibile per questa piattaforma"
+}
+
+// Richiesta non valida
+{
+  "status": "error",
+  "error": "Campo obbligatorio mancante: device_id"
+}
+```
+
+## Migliori Pratiche
+
+1. **Sicurezza**: Valida tutte le assegnazioni dei canali rispetto alle tue regole aziendali
+2. **Logging**: Registra tutte le operazioni sui canali per auditing e debugging
+3. **Performance**: Memorizza nella cache le configurazioni dei canali per ridurre le query del database
+4. **Validazione**: Verifica l'autenticità di device_id e app_id
+5. **Rate Limiting**: Implementa rate limiting per prevenire abusi
+
+## Integrazione con gli Aggiornamenti
+
+Le assegnazioni dei canali funzionano insieme al tuo [Endpoint API Aggiornamenti](/docs/plugin/self-hosted/handling-updates/). Quando un dispositivo richiede un aggiornamento, controlla la sua assegnazione di canale per determinare quale versione servire:
+
+```typescript
+async function getUpdateForDevice(deviceId: string, appId: string) {
+  // Ottieni l'assegnazione del canale del dispositivo
+  const channelAssignment = await getDeviceChannel(deviceId, appId)
+  const channel = channelAssignment.channel || 'production'
+
+  // Ottieni la versione assegnata a questo canale
+  const channelVersion = await getChannelVersion(channel, appId)
+
+  return {
+    version: channelVersion.version,
+    url: channelVersion.url,
+    checksum: channelVersion.checksum
+  }
+}
+```
+
+Questo crea un sistema completo di gestione dei canali self-hosted che ti dà il controllo completo su come gli aggiornamenti vengono distribuiti ai tuoi utenti.

@@ -1,0 +1,64 @@
+---
+title: "Capacitor+"
+description: Fork otomatis dan selalu tersinkronisasi dari Capacitor dengan PR komunitas yang digabungkan dan rilis cepat.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Pengenalan"
+locale: id
+hero:
+  tagline: Capacitor+ adalah fork otomatis dari Capacitor yang menggabungkan PR komunitas lebih cepat, dengan rilis yang ditinjau keamanannya.
+  image:
+    file: ~public/icons/plugins/capacitor-plus.svg
+  actions:
+    - text: Memulai
+      link: /docs/plugins/capacitor-plus/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-plus/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  **Mengapa Capacitor+?** PR yang bagus tertahan tanpa di-merge di repositori Capacitor resmi selama berbulan-bulan. Capacitor+ secara aktif menggabungkan kontribusi komunitas ini sehingga Anda tidak perlu menunggu.
+</Aside>
+
+<CardGrid stagger>
+  <Card title="PR Komunitas Digabungkan Lebih Cepat" icon="rocket">
+    Perbaikan bug dan fitur terjebak di upstream? Kami menggabungkannya sehingga Anda dapat mengambil manfaat segera.
+  </Card>
+  <Card title="Auto-Synced Setiap Hari" icon="seti:clock">
+    Setiap perubahan dari Capacitor resmi secara otomatis ditarik, diuji, dan diverifikasi.
+  </Card>
+  <Card title="Ditinjau Keamanan" icon="approve-check">
+    Setiap rilis dianalisis oleh AI untuk kerentanan keamanan, perubahan yang merusak, dan risiko stabilitas.
+  </Card>
+  <Card title="Pengganti Drop-in" icon="puzzle">
+    API yang sama dengan Capacitor resmi - cukup ubah scope paket dan Anda selesai.
+  </Card>
+</CardGrid>
+
+## Filosofi
+
+Tim Ionic memelihara Capacitor dengan prioritas dan jadwal rilis mereka sendiri. Kontribusi komunitas bisa menunggu berbulan-bulan atau bahkan bertahun-tahun untuk digabungkan. Capacitor+ mengambil pendekatan yang berbeda:
+
+1. **Gabungkan PR dari Fork** - PR berharga yang terjebak di antrian upstream secara aktif digabungkan
+2. **Sinkronisasi Berkelanjutan** - Setiap perubahan upstream secara otomatis ditarik dan diuji
+3. **Rilis Cepat** - Perubahan dipublikasikan ke npm segera setelah lulus CI
+4. **Komunitas Pertama** - Kontribusi Anda penting dan diprioritaskan
+5. **Transparansi** - Semua otomasi bersifat open source dan terlihat
+
+## Paket
+
+| Paket | npm |
+|---------|-----|
+| `@capacitor-plus/core` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/core)](https://www.npmjs.com/package/@capacitor-plus/core) |
+| `@capacitor-plus/cli` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/cli)](https://www.npmjs.com/package/@capacitor-plus/cli) |
+| `@capacitor-plus/android` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/android)](https://www.npmjs.com/package/@capacitor-plus/android) |
+| `@capacitor-plus/ios` | [![npm](https://img.shields.io/npm/v/@capacitor-plus/ios)](https://www.npmjs.com/package/@capacitor-plus/ios) |

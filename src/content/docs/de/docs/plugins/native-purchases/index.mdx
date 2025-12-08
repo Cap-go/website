@@ -1,0 +1,59 @@
+---
+title: "@capgo/native-purchases"
+locale: de
+description: Capacitor-Plugin zur Verwaltung von In-App-Käufen und Abonnements mit einer einfachen, einheitlichen API für iOS und Android.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Vereinfachen Sie In-App-Käufe und Abonnements mit einer einheitlichen API, die nahtlos auf iOS- und Android-Plattformen funktioniert.
+  image:
+    file: ~public/icons/plugins/native-purchases.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/native-purchases/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/native-purchases/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Einheitliche API" icon="rocket">
+    Einzelne API für iOS- und Android-Käufe 💳
+  </Card>
+  <Card title="Abonnementverwaltung" icon="setting">
+    Verwalten Sie Abonnements mit automatischer Verlängerung 🔄
+  </Card>
+  <Card title="Quittungsvalidierung" icon="approve-check">
+    Integrierte Quittungsvalidierung für Sicherheit 🔒
+  </Card>
+  <Card title="Erste Schritte" icon="open-book">
+    Sehen Sie sich den [Leitfaden für die ersten Schritte](/docs/plugins/native-purchases/getting-started/) an, um das Plugin zu installieren und zu konfigurieren.
+  </Card>
+</CardGrid>
+
+## Plattform-Setup-Anleitungen
+
+<CardGrid>
+  <Card title="Android-Setup" icon="setting">
+    Vollständige Anleitungen zum Einrichten von In-App-Käufen auf Android:
+    - [Sandbox-Tests konfigurieren](/docs/plugins/native-purchases/android-sandbox-testing/)
+    - [Abonnements erstellen](/docs/plugins/native-purchases/android-create-subscription/)
+    - [Einführungsangebote](/docs/plugins/native-purchases/android-introductory-offer/)
+  </Card>
+  <Card title="iOS-Setup" icon="star">
+    Vollständige Anleitungen zum Einrichten von In-App-Käufen auf iOS:
+    - [Sandbox-Tests konfigurieren](/docs/plugins/native-purchases/ios-sandbox-testing/)
+    - [Abonnementgruppen](/docs/plugins/native-purchases/ios-subscription-group/)
+    - [Abonnements erstellen](/docs/plugins/native-purchases/ios-create-subscription/)
+    - [Einführungsangebote](/docs/plugins/native-purchases/ios-introductory-offer/)
+  </Card>
+</CardGrid>

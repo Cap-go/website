@@ -1,0 +1,273 @@
+---
+title: Comenzar
+locale: es
+description: Aprende cómo instalar y usar el plugin Background Geolocation para rastrear la ubicación del dispositivo en segundo plano.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Instalación
+
+Este plugin soporta Capacitor v7:
+
+| Capacitor  | Plugin |
+|------------|--------|
+| v7         | v7     |
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/background-geolocation
+    npx cap update
+    ```
+  </TabItem>
+</Tabs>
+
+## Configuración de Plataforma
+
+### iOS
+
+Agrega las siguientes claves a `Info.plist.`:
+
+```xml
+<dict>
+  ...
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We need to track your location</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>We need to track your location while your device is locked.</string>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>location</string>
+  </array>
+  ...
+</dict>
+```
+
+### Android
+
+Establece la opción `android.useLegacyBridge` en `true` en tu configuración de Capacitor. Esto evita que las actualizaciones de ubicación se detengan después de 5 minutos en segundo plano. Ver https://capacitorjs.com/docs/config y https://github.com/capacitor-community/background-geolocation/issues/89.
+
+En Android 13+, la aplicación necesita el permiso de tiempo de ejecución `POST_NOTIFICATIONS` para mostrar la notificación persistente que informa al usuario que su ubicación está siendo utilizada en segundo plano. Este permiso de tiempo de ejecución se solicita después de que se otorga el permiso de ubicación.
+
+Si tu aplicación reenvía actualizaciones de ubicación a un servidor en tiempo real, ten en cuenta que después de 5 minutos en segundo plano Android limitará las solicitudes HTTP iniciadas desde el WebView. La solución es usar un plugin HTTP nativo como [CapacitorHttp](https://capacitorjs.com/docs/apis/http). Ver https://github.com/capacitor-community/background-geolocation/issues/14.
+
+La configuración específica de Android se puede hacer en `strings.xml`:
+```xml
+<resources>
+    <!--
+        El nombre del canal para la notificación de segundo plano. Esto será visible
+        cuando el usuario presione y mantenga la notificación. Por defecto es
+        "Background Tracking".
+    -->
+    <string name="capacitor_background_geolocation_notification_channel_name">
+        Background Tracking
+    </string>
+
+    <!--
+        El icono a usar para la notificación de segundo plano. Nota la ausencia de
+        "@". Por defecto es "mipmap/ic_launcher", el icono de inicio de la app.
+
+        Si se usa una imagen rasterizada para generar el icono (en lugar de una
+        imagen vectorial), debe tener un fondo transparente. Para asegurarte de que
+        tu imagen es compatible, selecciona "Notification Icons" como Tipo de Icono
+        al crear el recurso de imagen en Android Studio.
+
+        Un recurso de imagen incompatible causará que la notificación funcione mal
+        de varias formas reveladoras, incluso si el icono aparece correctamente:
+
+          - La notificación puede ser descartable por el usuario cuando no debería
+            serlo.
+          - Tocar la notificación puede abrir la configuración, no la app.
+          - El texto de la notificación puede ser incorrecto.
+    -->
+    <string name="capacitor_background_geolocation_notification_icon">
+        drawable/ic_tracking
+    </string>
+
+    <!--
+        El color de la notificación como una cadena analizable por
+        android.graphics.Color.parseColor. Opcional.
+    -->
+    <string name="capacitor_background_geolocation_notification_color">
+        yellow
+    </string>
+</resources>
+```
+
+## Uso
+
+```javascript
+import { BackgroundGeolocation } from "@capgo/background-geolocation";
+
+BackgroundGeolocation.start(
+    {
+        backgroundMessage: "Cancel to prevent battery drain.",
+        backgroundTitle: "Tracking You.",
+        requestPermissions: true,
+        stale: false,
+        distanceFilter: 50
+    },
+    (location, error) => {
+        if (error) {
+            if (error.code === "NOT_AUTHORIZED") {
+                if (window.confirm(
+                    "This app needs your location, " +
+                    "but does not have permission.\n\n" +
+                    "Open settings now?"
+                )) {
+                    // Puede ser útil dirigir al usuario a la configuración de su
+                    // dispositivo cuando se han denegado los permisos de ubicación.
+                    // El plugin proporciona el método 'openSettings' para hacer
+                    // exactamente esto.
+                    BackgroundGeolocation.openSettings();
+                }
+            }
+            return console.error(error);
+        }
+        return console.log(location);
+    }
+).then(() => {
+    // Cuando ya no se necesiten actualizaciones de ubicación, el plugin debe detenerse llamando a
+    BackgroundGeolocation.stop();
+});
+
+// Establece una ruta planificada para obtener un sonido de notificación cuando llega una nueva ubicación y no está en la ruta:
+
+BackgroundGeolocation.setPlannedRoute({soundFile: "assets/myFile.mp3", route: [[1,2], [3,4]], distance: 30 });
+
+// Si solo quieres la ubicación actual, prueba algo como esto. Cuanto mayor sea el
+// tiempo de espera, más precisa será la estimación. Yo no bajaría de unos 100ms.
+function guessLocation(callback, timeout) {
+    let last_location;
+    BackgroundGeolocation.start(
+        {
+            requestPermissions: false,
+            stale: true
+        },
+        (location) => {
+            last_location = location || undefined;
+        }
+    ).then(() => {
+        setTimeout(() => {
+            callback(last_location);
+            BackgroundGeolocation.stop();
+        }, timeout);
+    });
+}
+```
+
+## API
+
+### start(...)
+
+```typescript
+start(options: StartOptions, callback: (position?: Location | undefined, error?: CallbackError | undefined) => void) => Promise<void>
+```
+
+Para comenzar a escuchar cambios en la ubicación del dispositivo, llama a este método.
+Se devuelve una Promise para indicar que finalizó la llamada. El callback se llamará cada vez que una nueva ubicación
+esté disponible, o si hubo un error al llamar a este método. No confíes en el rechazo de la promesa para esto.
+
+| Parámetro      | Tipo                                                                                                                      | Descripción                                                                               |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **`options`**  | `StartOptions`                                                                     | Las opciones de configuración                                                             |
+| **`callback`** | `(position?: Location, error?: CallbackError) => void` | La función de callback invocada cuando una nueva ubicación está disponible o ocurre un error |
+
+### stop()
+
+```typescript
+stop() => Promise<void>
+```
+
+Detiene las actualizaciones de ubicación.
+
+### openSettings()
+
+```typescript
+openSettings() => Promise<void>
+```
+
+Abre la página de configuración de ubicación del dispositivo.
+Útil para dirigir a los usuarios a habilitar servicios de ubicación o ajustar permisos.
+
+### setPlannedRoute(...)
+
+```typescript
+setPlannedRoute(options: SetPlannedRouteOptions) => Promise<void>
+```
+
+Reproduce un archivo de sonido cuando el usuario se desvía de la ruta planificada.
+Esto debe usarse para reproducir un sonido (también en segundo plano, solo para nativo).
+
+| Parámetro     | Tipo                                                                      | Descripción                                                      |
+| ------------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **`options`** | `SetPlannedRouteOptions` | Las opciones para establecer la ruta planificada y el archivo de sonido |
+
+## Interfaces
+
+### StartOptions
+
+Las opciones para configurar las actualizaciones de ubicación.
+
+| Propiedad                | Tipo                 | Descripción                                                                                                                                                                                                                                                                                                                                                                                                          | Predeterminado                     |
+| ------------------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **`backgroundMessage`**  | `string`  | Si la opción "backgroundMessage" está definida, el plugin proporcionará actualizaciones de ubicación tanto si la app está en segundo plano como en primer plano. Si no está definida, las actualizaciones de ubicación solo están garantizadas en primer plano. Esto es cierto en ambas plataformas. En Android, debe mostrarse una notificación para continuar recibiendo actualizaciones de ubicación en segundo plano. Esta opción especifica el texto de esa notificación. |                                    |
+| **`backgroundTitle`**    | `string`  | El título de la notificación mencionada anteriormente.                                                                                                                                                                                                                                                                                                                                                               | `"Using your location"` |
+| **`requestPermissions`** | `boolean` | Si los permisos deben solicitarse automáticamente al usuario, si no están ya otorgados.                                                                                                                                                                                                                                                                                                                              | `true`                  |
+| **`stale`**              | `boolean` | Si es "true", pueden entregarse ubicaciones obsoletas mientras el dispositivo obtiene una posición GPS. Eres responsable de verificar la propiedad "time". Si es "false", las ubicaciones están garantizadas de estar actualizadas.                                                                                                                                                                                  | `false`                 |
+| **`distanceFilter`**     | `number`  | La distancia en metros que el dispositivo debe moverse antes de que se active una nueva actualización de ubicación. Esto se usa para filtrar movimientos pequeños y reducir el número de actualizaciones.                                                                                                                                                                                                            | `0`                     |
+
+### Location
+
+Representa una ubicación geográfica con varios atributos.
+Contiene todas las propiedades estándar de ubicación devueltas por proveedores GPS/red.
+
+| Propiedad              | Tipo                        | Descripción                                                                                                                                    |
+| ---------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`latitude`**         | `number`         | Latitud en grados. Rango: -90.0 a +90.0                                                                                                       |
+| **`longitude`**        | `number`         | Longitud en grados. Rango: -180.0 a +180.0                                                                                                    |
+| **`accuracy`**         | `number`         | Radio de incertidumbre horizontal en metros, con 68% de confianza. Valores más bajos indican ubicación más precisa.                           |
+| **`altitude`**         | `number \| null` | Metros sobre el nivel del mar (o null si no está disponible).                                                                                 |
+| **`altitudeAccuracy`** | `number \| null` | Incertidumbre vertical en metros, con 68% de confianza (o null si no está disponible).                                                        |
+| **`simulated`**        | `boolean`        | `true` si la ubicación fue simulada por software, en lugar de GPS. Útil para detectar ubicaciones simuladas en desarrollo o pruebas.          |
+| **`bearing`**          | `number \| null` | Desviación del norte verdadero en grados (o null si no está disponible). Rango: 0.0 a 360.0                                                   |
+| **`speed`**            | `number \| null` | Velocidad en metros por segundo (o null si no está disponible).                                                                               |
+| **`time`**             | `number \| null` | Tiempo en que se produjo la ubicación, en milisegundos desde la época unix. Usa esto para verificar si una ubicación está obsoleta al usar stale: true. |
+
+### CallbackError
+
+Objeto de error que puede pasarse al callback de inicio de ubicación.
+Extiende el Error estándar con códigos de error opcionales.
+
+| Propiedad  | Tipo                | Descripción                                               |
+| ---------- | ------------------- | --------------------------------------------------------- |
+| **`code`** | `string` | Código de error opcional para manejo de errores más específico. |
+
+### SetPlannedRouteOptions
+
+| Propiedad       | Tipo                            | Descripción                                                                                                                                                                                                                                                                                                                        | Predeterminado  |
+| --------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| **`soundFile`** | `string`             | El nombre del archivo de sonido a reproducir. Debe ser una ruta de sonido relativa válida en la carpeta pública de la app para funcionar tanto en plataformas web como nativas. No es necesario incluir la carpeta pública en la ruta.                                                                                            |                 |
+| **`route`**     | `[number, number][]` | La ruta planificada como un array de pares de longitud y latitud. Cada par representa un punto en la ruta. Esto se usa para definir una ruta que el usuario puede seguir. La ruta se usa para reproducir un sonido cuando el usuario se desvía de ella.                                                                           |                 |
+| **`distance`**  | `number`             | La distancia en metros que el usuario debe desviarse de la ruta planificada para activar el sonido. Esto se usa para determinar qué tan lejos de la ruta puede estar el usuario antes de que se reproduzca el sonido. Si no se especifica, se usa un valor predeterminado de 50 metros. | `50` |

@@ -1,0 +1,69 @@
+---
+title: 入门指南
+description: 使用 Env 插件配置每个构建的环境值并在运行时获取它们。
+locale: zh
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **安装包**
+   <PackageManagers pkg="@capgo/capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **同步原生平台**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## 声明配置值
+
+将键添加到 Capacitor 配置中，以便它们被嵌入到您的原生构建中。您可以创建多个配置变体（`capacitor.config.prod.ts`、`capacitor.config.dev.ts` 等）以在不同环境中交换值。
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    Env: {
+      API_URL: 'https://api.example.com',
+      PUBLIC_KEY: 'pk_live_123',
+    },
+  },
+};
+
+export default config;
+```
+
+在原生平台上，这些值存储在生成的配置文件中（`ios/App/App/capacitor.config.json` 和 `android/app/src/main/assets/capacitor.config.json`）。如果需要特定租户的值，请根据不同的构建类型更新这些文件。
+
+## 在代码中读取值
+
+```typescript
+import { Env } from '@capgo/capacitor-env';
+
+const apiUrl = await Env.getKey({ key: 'API_URL' }).then((result) => result.value);
+
+if (!apiUrl) {
+  throw new Error('Missing API_URL configuration');
+}
+```
+
+## 提供备用值
+
+```typescript
+const loadConfig = async () => {
+  const { value: endpoint } = await Env.getKey({ key: 'API_URL' });
+  return endpoint || 'https://staging.example.com';
+};
+```
+
+## 提示
+
+- 为每个环境使用不同的 `capacitor.config` 文件，并使用 `npx cap run ios --configuration=prod` 将 CLI 指向正确的文件。
+- 与 Capgo 更新器频道结合使用，无需发布新的二进制文件即可传送特定租户的值。
+- 通过在 `npx cap sync` 之前在 CI 构建期间替换它们，将秘密排除在源代码控制之外。

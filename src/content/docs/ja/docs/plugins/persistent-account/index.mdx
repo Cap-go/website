@@ -1,0 +1,132 @@
+---
+title: "@capgo/capacitor-persistent-account"
+locale: ja
+description: 安全なストレージ、セッション処理、ユーザーデータの永続化を備えた Capacitor アプリ用の永続的なアカウント管理プラグイン。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "概要"
+hero:
+  tagline: 永続的なストレージ、安全なセッション処理、アプリセッション間でのシームレスな認証でユーザーアカウントを管理します。
+  image:
+    file: ~public/icons/plugins/persistent-account.svg
+  actions:
+    - text: はじめに
+      link: /docs/plugins/persistent-account/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persistent-account/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概要
+
+Capacitor Persistent Account プラグインは、アプリのインストール間でユーザーアカウントデータの安全な保存と永続化を可能にします。このプラグインは、アプリの再インストール後もユーザーアカウント情報が利用可能であることを保証し、シームレスなユーザー体験とアカウントの継続性を提供します。
+
+<CardGrid stagger>
+  <Card title="インストール間の永続化" icon="rocket">
+    アプリのアンインストール/再インストールサイクルを越えてデータが存続 💾
+  </Card>
+  <Card title="安全なストレージ" icon="setting">
+    システム統合による安全なアカウントデータストレージ 🔐
+  </Card>
+  <Card title="シンプルな API" icon="puzzle">
+    アカウント管理のためのクリーンな読み取り/書き込みインターフェース 📊
+  </Card>
+  <Card title="クロスプラットフォーム" icon="laptop">
+    ネイティブ iOS と Android 実装 📱
+  </Card>
+</CardGrid>
+
+## インストール
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## コア API メソッド
+
+### データ管理
+- `saveAccount(options: { data: unknown })` - アカウントデータを永続ストレージに安全に保存
+- `readAccount()` - 保存されたアカウントデータを取得、`Promise<{ data: unknown | null }>` を返す
+
+## 主な機能
+
+- **インストール間の永続化**: アカウントデータはアプリのアンインストールと再インストールを越えて存続
+- **安全なストレージ**: プラットフォーム固有の安全なストレージメカニズムを使用
+- **型の柔軟性**: 任意のシリアライズ可能なアカウントデータ構造を保存
+- **クロスプラットフォームサポート**: iOS と Android の両方のネイティブ実装
+
+## 使用例
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// アカウントデータ構造を定義
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// アカウントデータを保存
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// アカウントデータを読み取る
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('復元されたアカウント:', account.username);
+} else {
+  console.log('アカウントデータが見つかりません');
+}
+```
+
+## 使用例
+
+- **ユーザーオンボーディング**: アプリの再インストール間でユーザーの進行状況を保持
+- **アカウント復旧**: アプリ更新後にユーザーセッションを復元
+- **設定ストレージ**: ユーザー設定と構成を維持
+- **オフラインファーストアプリ**: 重要なユーザーデータをローカルに保存
+
+## プラットフォーム実装
+
+### iOS
+- 安全で永続的なストレージに iOS Keychain Services を利用
+- データはアプリの削除とデバイスの復元後も存続
+
+### Android
+- バックアップ付きの Android Account Manager または共有設定を使用
+- アプリの再インストールとデバイス移行間でデータを維持
+
+## セキュリティに関する考慮事項
+
+- アカウントデータはプラットフォーム固有の安全なストレージを使用して保存されます
+- 機密情報についてはデータ暗号化を検討してください
+- 保存されたアカウントを読み取る際は適切なデータ検証を実装してください
+- ユーザーデータの取り扱いに関するプラットフォームガイドラインに従ってください
+
+## ドキュメント
+
+詳細な実装ガイドとベストプラクティスについては、[完全なドキュメント](/docs/plugins/persistent-account/getting-started/)をご覧ください。

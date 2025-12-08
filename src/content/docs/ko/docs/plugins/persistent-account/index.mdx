@@ -1,0 +1,132 @@
+---
+title: "@capgo/capacitor-persistent-account"
+locale: ko
+description: 안전한 저장소, 세션 처리 및 사용자 데이터 지속성을 갖춘 Capacitor 앱용 영구 계정 관리 플러그인입니다.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "소개"
+hero:
+  tagline: 영구 저장소, 안전한 세션 처리 및 앱 세션 전반에 걸친 원활한 인증으로 사용자 계정을 관리합니다.
+  image:
+    file: ~public/icons/plugins/persistent-account.svg
+  actions:
+    - text: 시작하기
+      link: /docs/plugins/persistent-account/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persistent-account/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 개요
+
+Capacitor Persistent Account 플러그인은 앱 설치 간에 사용자 계정 데이터의 안전한 저장 및 지속성을 가능하게 합니다. 이 플러그인은 앱 재설치 후에도 사용자 계정 정보를 사용할 수 있도록 하여 원활한 사용자 경험과 계정 연속성을 제공합니다.
+
+<CardGrid stagger>
+  <Card title="설치 간 지속성" icon="rocket">
+    데이터는 앱 제거/재설치 주기에서 유지됩니다 💾
+  </Card>
+  <Card title="안전한 저장소" icon="setting">
+    시스템 통합을 통한 안전한 계정 데이터 저장 🔐
+  </Card>
+  <Card title="간단한 API" icon="puzzle">
+    계정 관리를 위한 깔끔한 읽기/쓰기 인터페이스 📊
+  </Card>
+  <Card title="크로스 플랫폼" icon="laptop">
+    네이티브 iOS 및 Android 구현 📱
+  </Card>
+</CardGrid>
+
+## 설치
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## 핵심 API 메서드
+
+### 데이터 관리
+- `saveAccount(options: { data: unknown })` - 계정 데이터를 영구 저장소에 안전하게 저장합니다
+- `readAccount()` - 저장된 계정 데이터를 검색하고, `Promise<{ data: unknown | null }>`을 반환합니다
+
+## 주요 기능
+
+- **설치 간 지속성**: 계정 데이터는 앱 제거 및 재설치에도 유지됩니다
+- **안전한 저장소**: 플랫폼별 보안 저장 메커니즘을 사용합니다
+- **타입 유연성**: 직렬화 가능한 모든 계정 데이터 구조를 저장합니다
+- **크로스 플랫폼 지원**: iOS 및 Android 모두에 대한 네이티브 구현
+
+## 사용 예제
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// 계정 데이터 구조 정의
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// 계정 데이터 저장
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// 계정 데이터 읽기
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('복원된 계정:', account.username);
+} else {
+  console.log('계정 데이터를 찾을 수 없음');
+}
+```
+
+## 사용 사례
+
+- **사용자 온보딩**: 앱 재설치를 통해 사용자 진행 상황을 보존합니다
+- **계정 복구**: 앱 업데이트 후 사용자 세션을 복원합니다
+- **기본 설정 저장**: 사용자 설정 및 구성을 유지합니다
+- **오프라인 우선 앱**: 필수 사용자 데이터를 로컬에 저장합니다
+
+## 플랫폼 구현
+
+### iOS
+- 안전하고 영구적인 저장을 위해 iOS Keychain Services를 활용합니다
+- 데이터는 앱 삭제 및 장치 복원에도 유지됩니다
+
+### Android
+- 백업이 있는 Android Account Manager 또는 shared preferences를 사용합니다
+- 앱 재설치 및 장치 마이그레이션 전반에 걸쳐 데이터를 유지합니다
+
+## 보안 고려 사항
+
+- 계정 데이터는 플랫폼별 보안 저장소를 사용하여 저장됩니다
+- 민감한 정보에 대해 데이터 암호화를 고려하세요
+- 저장된 계정을 읽을 때 적절한 데이터 유효성 검사를 구현합니다
+- 사용자 데이터 처리에 대한 플랫폼 가이드라인을 따르세요
+
+## 문서
+
+자세한 구현 가이드 및 모범 사례는 [전체 문서](/docs/plugins/persistent-account/getting-started/)를 확인하세요.

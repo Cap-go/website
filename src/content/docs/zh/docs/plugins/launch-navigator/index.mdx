@@ -1,0 +1,246 @@
+---
+title: "@capgo/capacitor-launch-navigator"
+description: 用于 Capacitor 应用的导航应用启动插件，支持 Google Maps、Apple Maps、Waze 和其他导航服务。
+locale: zh
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "介绍"
+hero:
+  tagline: 启动导航应用并提供转弯提示，支持多个地图提供商和自定义路线选项。
+  image:
+    file: ~public/icons/plugins/launch-navigator.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/launch-navigator/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-launch-navigator/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概述
+
+Capacitor Launch Navigator 插件可在 iOS 和 Android 设备上启动原生导航应用，支持基于坐标的导航。此插件提供与流行地图应用的无缝集成，并支持多种交通方式，提供全面的导航解决方案。
+
+<CardGrid stagger>
+  <Card title="多应用支持" icon="rocket">
+    Google Maps、Apple Maps、Waze、Citymapper 等 🗺️
+  </Card>
+  <Card title="交通方式" icon="magnifier">
+    驾车、步行、公交和骑行路线 🧭
+  </Card>
+  <Card title="应用检测" icon="magnifier">
+    检查可用性并列出已安装的导航应用 🔍
+  </Card>
+  <Card title="基于坐标" icon="star">
+    使用纬度/经度坐标导航 📍
+  </Card>
+</CardGrid>
+
+## 安装
+
+```bash
+npm install @capgo/capacitor-launch-navigator
+npx cap sync
+```
+
+## iOS 配置
+
+将 URL schemes 添加到您的 `Info.plist` 以检测已安装的导航应用：
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <!-- 添加其他导航应用的 schemes -->
+</array>
+```
+
+## 核心 API 方法
+
+### 导航
+- `navigate(options)` - 启动到指定坐标的导航
+- `isAppAvailable(options)` - 检查是否已安装特定导航应用
+- `getAvailableApps()` - 列出设备上所有可用的导航应用
+- `getSupportedApps()` - 获取当前平台支持的所有应用
+
+## 使用示例
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// 基本导航到坐标
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // 旧金山坐标
+});
+
+// 带选项的高级导航
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // 可选起点
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // 首选导航应用
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// 检查特定应用是否可用
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps is installed');
+} else {
+  console.log('Google Maps is not available');
+}
+
+// 获取所有可用的导航应用
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('Available navigation apps:', availableApps);
+
+// 获取平台支持的所有应用
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('Supported apps:', supportedApps);
+```
+
+## 导航选项
+
+```typescript
+interface NavigationOptions {
+  start?: [number, number];      // 起始坐标 [纬度, 经度]
+  transportMode?: TransportMode; // 交通方式
+  app?: string;                  // 首选导航应用
+  appDisplayName?: string;       // 应用的显示名称
+  launchMode?: LaunchMode;       // 如何启动应用
+}
+```
+
+## 交通方式
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## 支持的导航应用
+
+### iOS
+- Apple Maps（内置）
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- 以及更多...
+
+### Android
+- Google Maps（内置）
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- 以及更多...
+
+## 坐标要求
+
+> ⚠️ **重要**：此插件仅接受纬度/经度坐标进行导航。使用 [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) 将地址转换为坐标。
+
+```typescript
+// 使用地理编码的示例
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+
+// 将地址转换为坐标
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // 使用地理编码坐标启动导航
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## 应用检测和选择
+
+```typescript
+// 检查多个应用并使用第一个可用的
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('No supported navigation apps found');
+}
+```
+
+## 错误处理
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('Navigation failed:', error);
+  // 处理错误 - 应用不可用、无效坐标等
+}
+```
+
+## 用例
+
+- **基于位置的服务**：将用户导航到兴趣点
+- **配送应用**：引导司机到达配送位置
+- **活动应用**：引导参与者到达场馆位置
+- **房地产应用**：导航到物业位置
+- **旅游应用**：引导游客到达景点
+
+## 最佳实践
+
+- 在尝试导航之前始终检查应用可用性
+- 在首选应用不可用时提供备用选项
+- 为用户选择使用有意义的应用显示名称
+- 通过用户友好的消息优雅地处理错误
+- 考虑用户对默认导航应用的偏好
+
+## 文档
+
+查看[完整文档](/docs/plugins/launch-navigator/getting-started/)了解详细的实现指南和高级导航模式。

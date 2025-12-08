@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-admob"
+locale: zh
+description: 将 Google AdMob 广告集成到您的 Capacitor 应用中,支持横幅、插页式和奖励广告格式。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "简介"
+hero:
+  tagline: 使用完全由 JavaScript 管理的 Google AdMob 横幅、插页式和奖励广告将您的 Capacitor 应用变现。
+  image:
+    file: ~public/icons/plugins/admob.svg
+  actions:
+    - text: 开始使用
+      link: /docs/plugins/admob/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-admob/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Capgo 的 AdMob 插件提供了与 Google Mobile Ads SDK 的一流桥接,让您可以在不牺牲 Capacitor 简洁性的情况下将原生体验变现。
+
+<CardGrid stagger>
+  <Card title="灵活的广告格式" icon="star">
+    通过统一的 API 提供横幅、插页式、奖励和应用开屏广告。
+  </Card>
+  <Card title="请求配置" icon="setting">
+    使用儿童导向标志、内容评级和额外网络参数微调广告请求。
+  </Card>
+  <Card title="生命周期管理" icon="rocket">
+    按需创建、加载、显示、隐藏和销毁广告,同时跟踪加载状态。
+  </Card>
+  <Card title="隐私就绪" icon="approve-check">
+    处理 ATT 提示并监控跟踪授权状态以保持合规。
+  </Card>
+</CardGrid>
+
+使用入门指南连接您的 AdMob 应用 ID、配置同意并直接从您的 Capacitor 项目管理广告库存。

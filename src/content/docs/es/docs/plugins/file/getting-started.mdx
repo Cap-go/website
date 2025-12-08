@@ -1,0 +1,389 @@
+---
+title: Comenzando
+description: Aprende cómo instalar y usar el plugin File para operaciones del sistema de archivos en tu aplicación Capacitor.
+locale: es
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Instala el paquete**
+   <PackageManagers pkg="@capgo/capacitor-file" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sincroniza con proyectos nativos**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Uso
+
+Importa el plugin y usa sus métodos para operaciones de archivos:
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+// Escribir un archivo de texto
+const writeFile = async () => {
+  const result = await CapacitorFile.writeFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    data: 'Hello, World!',
+    encoding: Encoding.UTF8,
+    recursive: true, // Crear directorios padres si es necesario
+  });
+  console.log('Archivo escrito en:', result.uri);
+};
+
+// Leer un archivo de texto
+const readFile = async () => {
+  const result = await CapacitorFile.readFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+    encoding: Encoding.UTF8,
+  });
+  console.log('Contenido del archivo:', result.data);
+};
+
+// Verificar si el archivo existe
+const checkExists = async () => {
+  const result = await CapacitorFile.exists({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+  console.log('El archivo existe:', result.exists);
+};
+
+// Eliminar un archivo
+const deleteFile = async () => {
+  await CapacitorFile.deleteFile({
+    path: 'my-file.txt',
+    directory: Directory.Documents,
+  });
+};
+```
+
+## Ubicaciones de Directorios
+
+El plugin proporciona varias constantes de directorio:
+
+```typescript
+import { Directory } from '@capgo/capacitor-file';
+
+// Directorios disponibles
+Directory.Documents  // Documentos visibles para el usuario (con copia de seguridad)
+Directory.Data       // Almacenamiento de datos privados de la app
+Directory.Library    // Archivos de soporte de la app (iOS) / archivos (Android)
+Directory.Cache      // Caché temporal (puede ser borrado por el SO)
+Directory.External   // Almacenamiento externo (solo Android)
+Directory.Application // Bundle de la app de solo lectura
+```
+
+## Opciones de Codificación
+
+```typescript
+import { Encoding } from '@capgo/capacitor-file';
+
+Encoding.UTF8   // Codificación de texto UTF-8
+Encoding.ASCII  // Codificación de texto ASCII
+Encoding.UTF16  // Codificación de texto UTF-16
+// Omitir codificación para datos binarios (devuelve base64)
+```
+
+## Referencia de API
+
+### writeFile(options)
+
+Escribe datos en un archivo.
+
+```typescript
+const result = await CapacitorFile.writeFile({
+  path: 'folder/file.txt',
+  directory: Directory.Documents,
+  data: 'Contenido del archivo',
+  encoding: Encoding.UTF8,
+  recursive: true,  // Crear directorios si es necesario
+  append: false,    // Sobrescribir archivo existente
+  position: 0,      // Posición en bytes para escrituras de acceso aleatorio
+});
+// Devuelve: { uri: string }
+```
+
+### readFile(options)
+
+Lee el contenido de un archivo.
+
+```typescript
+const result = await CapacitorFile.readFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  encoding: Encoding.UTF8,
+  offset: 0,    // Comenzar lectura desde desplazamiento de bytes
+  length: 100,  // Leer solo esta cantidad de bytes
+});
+// Devuelve: { data: string }
+```
+
+### appendFile(options)
+
+Añade datos a un archivo.
+
+```typescript
+await CapacitorFile.appendFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  data: '\nNueva línea',
+  encoding: Encoding.UTF8,
+});
+```
+
+### deleteFile(options)
+
+Elimina un archivo.
+
+```typescript
+await CapacitorFile.deleteFile({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+```
+
+### mkdir(options)
+
+Crea un directorio.
+
+```typescript
+await CapacitorFile.mkdir({
+  path: 'my-folder/sub-folder',
+  directory: Directory.Documents,
+  recursive: true,  // Crear directorios padres
+});
+```
+
+### rmdir(options)
+
+Elimina un directorio.
+
+```typescript
+await CapacitorFile.rmdir({
+  path: 'my-folder',
+  directory: Directory.Documents,
+  recursive: true,  // Eliminar contenidos recursivamente
+});
+```
+
+### readdir(options)
+
+Lista el contenido del directorio.
+
+```typescript
+const result = await CapacitorFile.readdir({
+  path: '',  // Vacío para la raíz del directorio
+  directory: Directory.Documents,
+});
+// Devuelve: { entries: Entry[] }
+// Cada entrada tiene: { name, isFile, isDirectory, fullPath, nativeURL }
+```
+
+### stat(options)
+
+Obtiene metadatos de archivo o directorio.
+
+```typescript
+const result = await CapacitorFile.stat({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// Devuelve: { type, size, mtime, ctime, uri }
+```
+
+### exists(options)
+
+Verifica si existe un archivo o directorio.
+
+```typescript
+const result = await CapacitorFile.exists({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// Devuelve: { exists: boolean, type?: 'file' | 'directory' }
+```
+
+### copy(options)
+
+Copia un archivo o directorio.
+
+```typescript
+const result = await CapacitorFile.copy({
+  from: 'source.txt',
+  to: 'destination.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+// Devuelve: { uri: string }
+```
+
+### rename(options) / move(options)
+
+Renombra o mueve un archivo o directorio.
+
+```typescript
+await CapacitorFile.rename({
+  from: 'old-name.txt',
+  to: 'new-name.txt',
+  directory: Directory.Documents,
+  toDirectory: Directory.Documents,
+});
+```
+
+### truncate(options)
+
+Trunca un archivo a un tamaño específico.
+
+```typescript
+await CapacitorFile.truncate({
+  path: 'file.txt',
+  directory: Directory.Documents,
+  size: 100,  // Truncar a 100 bytes
+});
+```
+
+### getUri(options)
+
+Obtiene el URI nativo para un archivo.
+
+```typescript
+const result = await CapacitorFile.getUri({
+  path: 'file.txt',
+  directory: Directory.Documents,
+});
+// Devuelve: { uri: string }
+```
+
+### getDirectories()
+
+Obtiene todas las rutas de directorios disponibles.
+
+```typescript
+const dirs = await CapacitorFile.getDirectories();
+// Devuelve rutas para: documents, data, cache, external, etc.
+```
+
+### getFreeDiskSpace()
+
+Obtiene el espacio disponible en disco.
+
+```typescript
+const result = await CapacitorFile.getFreeDiskSpace();
+console.log('Espacio libre:', result.free, 'bytes');
+```
+
+### checkPermissions() / requestPermissions()
+
+Maneja permisos de almacenamiento (Android).
+
+```typescript
+const status = await CapacitorFile.checkPermissions();
+if (status.publicStorage !== 'granted') {
+  await CapacitorFile.requestPermissions();
+}
+```
+
+## Ejemplo Completo
+
+```typescript
+import { CapacitorFile, Directory, Encoding } from '@capgo/capacitor-file';
+
+export class FileService {
+  async saveJson(filename: string, data: object): Promise<void> {
+    await CapacitorFile.writeFile({
+      path: filename,
+      directory: Directory.Documents,
+      data: JSON.stringify(data, null, 2),
+      encoding: Encoding.UTF8,
+      recursive: true,
+    });
+  }
+
+  async loadJson<T>(filename: string): Promise<T | null> {
+    try {
+      const { exists } = await CapacitorFile.exists({
+        path: filename,
+        directory: Directory.Documents,
+      });
+
+      if (!exists) return null;
+
+      const result = await CapacitorFile.readFile({
+        path: filename,
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8,
+      });
+
+      return JSON.parse(result.data) as T;
+    } catch (error) {
+      console.error('Error al cargar JSON:', error);
+      return null;
+    }
+  }
+
+  async listFiles(folder: string = ''): Promise<string[]> {
+    const result = await CapacitorFile.readdir({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    return result.entries
+      .filter(entry => entry.isFile)
+      .map(entry => entry.name);
+  }
+
+  async deleteAll(folder: string): Promise<void> {
+    const { exists } = await CapacitorFile.exists({
+      path: folder,
+      directory: Directory.Documents,
+    });
+
+    if (exists) {
+      await CapacitorFile.rmdir({
+        path: folder,
+        directory: Directory.Documents,
+        recursive: true,
+      });
+    }
+  }
+
+  async copyToBackup(filename: string): Promise<string> {
+    const timestamp = Date.now();
+    const backupName = `backup/${timestamp}-${filename}`;
+
+    const result = await CapacitorFile.copy({
+      from: filename,
+      to: backupName,
+      directory: Directory.Documents,
+      toDirectory: Directory.Documents,
+    });
+
+    return result.uri;
+  }
+}
+```
+
+## Notas de Plataforma
+
+### iOS
+- Requiere iOS 13.0+
+- El directorio Documents es visible en la app Files
+- El directorio Library es para archivos de soporte de la app
+- Cache puede ser borrado cuando el almacenamiento del dispositivo es bajo
+
+### Android
+- Requiere Android 6.0 (API 23)+
+- El almacenamiento externo requiere permisos de tiempo de ejecución en versiones antiguas de Android
+- El directorio Documents se mapea al directorio de archivos de la app
+- Usa el directorio External para acceso a almacenamiento compartido
+
+### Web
+- No soportado en plataforma web

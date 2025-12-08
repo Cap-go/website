@@ -1,0 +1,509 @@
+---
+title: Memulai
+description: Pelajari cara menginstal dan menggunakan plugin Age Signals untuk mendeteksi akun yang diawasi dan pengguna terverifikasi di aplikasi Android Anda.
+locale: id
+sidebar:
+  order: 2
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Aside type="caution">
+Plugin ini **khusus Android** dan memerlukan Google Play Services. Plugin ini tidak akan berfungsi di iOS, web, atau perangkat Android tanpa Google Play Store.
+</Aside>
+
+<Steps>
+1. **Instal paket**
+   <PackageManagers pkg="@capgo/capacitor-android-age-signals" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Sinkronkan dengan proyek Android**
+   <PackageManagers type="exec" pkg="cap" args="sync android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Prasyarat
+
+- Perangkat Android dengan Google Play Services
+- Minimum Android API level 21 (Android 5.0)
+- Google Play Store terinstal di perangkat
+
+## Penggunaan
+
+### Periksa Age Signals
+
+```typescript
+import { AgeSignals, UserStatus } from '@capgo/capacitor-android-age-signals';
+
+try {
+  const result = await AgeSignals.checkAgeSignals();
+
+  console.log('User status:', result.userStatus);
+
+  switch (result.userStatus) {
+    case UserStatus.Verified:
+      console.log('User is 18+ and verified by Google');
+      // Allow access to age-restricted content
+      break;
+
+    case UserStatus.Supervised:
+      console.log(`Supervised user aged ${result.ageLower}-${result.ageUpper}`);
+      // Apply age-appropriate restrictions
+      break;
+
+    case UserStatus.SupervisedApprovalPending:
+      console.log('Waiting for guardian approval');
+      console.log('Pending since:', result.mostRecentApprovalDate);
+      // Inform user to wait for guardian approval
+      break;
+
+    case UserStatus.SupervisedApprovalDenied:
+      console.log('Guardian denied access');
+      console.log('Last approval:', result.mostRecentApprovalDate);
+      // Block access or show alternative content
+      break;
+
+    case UserStatus.Unknown:
+      console.log('User status unknown - prompt to verify in Play Store');
+      // Guide user to verify their age in Google Play
+      break;
+
+    case UserStatus.Empty:
+      console.log('No age signal available');
+      // Handle as unverified user
+      break;
+  }
+} catch (error) {
+  console.error('Failed to check age signals:', error);
+}
+```
+
+### Menangani Pengguna yang Diawasi
+
+```typescript
+async function handleSupervisedUser() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.Supervised) {
+    const age = result.ageLower;
+
+    if (age < 13) {
+      // Apply COPPA restrictions
+      console.log('User is under 13 - COPPA applies');
+      disableDataCollection();
+      disableSocialFeatures();
+      requireParentalConsent();
+    } else if (age < 18) {
+      // Apply teen restrictions
+      console.log('User is 13-17 - Teen restrictions apply');
+      enableModeratedSocialFeatures();
+      restrictAds();
+    }
+
+    // Track install ID for revocation notifications
+    console.log('Install ID:', result.installId);
+    saveInstallId(result.installId);
+  }
+}
+```
+
+### Implementasi Age Gate
+
+```typescript
+async function ageGate() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  // Allow verified 18+ users
+  if (result.userStatus === UserStatus.Verified) {
+    return true;
+  }
+
+  // Check supervised user age
+  if (result.userStatus === UserStatus.Supervised) {
+    return result.ageUpper >= 18;
+  }
+
+  // Block users with pending or denied approvals
+  if (
+    result.userStatus === UserStatus.SupervisedApprovalPending ||
+    result.userStatus === UserStatus.SupervisedApprovalDenied
+  ) {
+    return false;
+  }
+
+  // For unknown/empty, implement fallback age verification
+  return await showAgeVerificationDialog();
+}
+```
+
+### Memantau Status Persetujuan
+
+```typescript
+async function checkApprovalStatus() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.SupervisedApprovalPending) {
+    console.log('Guardian approval pending');
+    console.log('Age range:', result.ageLower, '-', result.ageUpper);
+    console.log('Most recent approval:', result.mostRecentApprovalDate);
+
+    // Show message to user
+    showMessage(
+      'Your guardian needs to approve this app. ' +
+      'We notified them on ' + result.mostRecentApprovalDate
+    );
+  } else if (result.userStatus === UserStatus.SupervisedApprovalDenied) {
+    console.log('Guardian denied approval');
+    console.log('Last approved on:', result.mostRecentApprovalDate);
+
+    // Show blocked message
+    showMessage(
+      'Your guardian did not approve this app. ' +
+      'Contact them for more information.'
+    );
+  }
+}
+```
+
+## Referensi API
+
+### checkAgeSignals()
+
+Meminta Play Age Signals saat ini untuk pengguna yang aktif.
+
+```typescript
+const result = await AgeSignals.checkAgeSignals();
+```
+
+**Mengembalikan:**
+
+```typescript
+interface CheckAgeSignalsResult {
+  userStatus: UserStatus;
+  ageLower?: number;
+  ageUpper?: number;
+  mostRecentApprovalDate?: string;
+  installId?: string;
+}
+```
+
+### UserStatus Enum
+
+```typescript
+enum UserStatus {
+  Verified = 'VERIFIED',                           // 18+ verified
+  Supervised = 'SUPERVISED',                       // Supervised account
+  SupervisedApprovalPending = 'SUPERVISED_APPROVAL_PENDING',
+  SupervisedApprovalDenied = 'SUPERVISED_APPROVAL_DENIED',
+  Unknown = 'UNKNOWN',                             // Unknown status
+  Empty = 'EMPTY'                                  // No signal
+}
+```
+
+## Field Hasil
+
+### userStatus
+
+Status verifikasi pengguna seperti yang dilaporkan oleh Google Play.
+
+- **Verified**: Pengguna berusia di atas 18 tahun dan terverifikasi usia oleh Google
+- **Supervised**: Pengguna memiliki Google Account yang diawasi
+- **SupervisedApprovalPending**: Menunggu persetujuan wali untuk perubahan
+- **SupervisedApprovalDenied**: Wali menolak akses aplikasi
+- **Unknown**: Pengguna harus memverifikasi status di Play Store
+- **Empty**: Semua pengguna lainnya (status default)
+
+### ageLower
+
+Batas bawah inklusif dari rentang usia pengguna yang diawasi.
+
+Hanya ada ketika `userStatus` adalah:
+- `SUPERVISED`
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+### ageUpper
+
+Batas atas inklusif dari rentang usia pengguna yang diawasi.
+
+Hanya ada ketika:
+- `userStatus` adalah salah satu status yang diawasi
+- Usia pengguna dilaporkan kurang dari 18 tahun
+
+### mostRecentApprovalDate
+
+String tanggal untuk perubahan signifikan terbaru yang menerima persetujuan wali.
+
+Hanya ada ketika `userStatus` adalah:
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+Format: String tanggal ISO 8601
+
+### installId
+
+Identifier yang diberikan untuk instalasi yang diawasi di Google Play.
+
+Digunakan untuk notifikasi pencabutan ketika wali mencabut persetujuan aplikasi.
+
+Hanya ada ketika `userStatus` adalah:
+- `SUPERVISED`
+- `SUPERVISED_APPROVAL_PENDING`
+- `SUPERVISED_APPROVAL_DENIED`
+
+## Kasus Penggunaan
+
+### 1. Kepatuhan COPPA
+
+```typescript
+async function applyCoppaRestrictions() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (result.userStatus === UserStatus.Supervised && result.ageLower < 13) {
+    // Disable data collection
+    disableAnalytics();
+    disableAdvertising();
+
+    // Disable social features
+    hideChatFeatures();
+    disableUserProfiles();
+
+    // Require verifiable parental consent
+    await requestParentalConsent(result.installId);
+  }
+}
+```
+
+### 2. Konten Sesuai Usia
+
+```typescript
+async function filterContent() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  let contentRating;
+
+  if (result.userStatus === UserStatus.Verified) {
+    contentRating = 'MATURE';
+  } else if (result.userStatus === UserStatus.Supervised) {
+    if (result.ageUpper < 13) {
+      contentRating = 'EVERYONE';
+    } else if (result.ageUpper < 18) {
+      contentRating = 'TEEN';
+    } else {
+      contentRating = 'MATURE';
+    }
+  } else {
+    contentRating = 'TEEN'; // Default safe rating
+  }
+
+  loadContentForRating(contentRating);
+}
+```
+
+### 3. Dashboard Wali
+
+```typescript
+async function getGuardianInfo() {
+  const result = await AgeSignals.checkAgeSignals();
+
+  if (
+    result.userStatus === UserStatus.Supervised ||
+    result.userStatus === UserStatus.SupervisedApprovalPending ||
+    result.userStatus === UserStatus.SupervisedApprovalDenied
+  ) {
+    return {
+      isSupervised: true,
+      ageRange: `${result.ageLower}-${result.ageUpper}`,
+      approvalStatus: result.userStatus,
+      lastApprovalDate: result.mostRecentApprovalDate,
+      installId: result.installId,
+    };
+  }
+
+  return { isSupervised: false };
+}
+```
+
+## Contoh Lengkap
+
+```typescript
+import { AgeSignals, UserStatus } from '@capgo/capacitor-android-age-signals';
+
+export class AgeVerificationService {
+  async verifyAge(): Promise<{
+    allowed: boolean;
+    reason: string;
+    restrictions: string[];
+  }> {
+    try {
+      const result = await AgeSignals.checkAgeSignals();
+
+      switch (result.userStatus) {
+        case UserStatus.Verified:
+          return {
+            allowed: true,
+            reason: 'User is verified 18+',
+            restrictions: [],
+          };
+
+        case UserStatus.Supervised:
+          return this.handleSupervised(result);
+
+        case UserStatus.SupervisedApprovalPending:
+          return {
+            allowed: false,
+            reason: 'Waiting for guardian approval',
+            restrictions: ['Guardian approval required'],
+          };
+
+        case UserStatus.SupervisedApprovalDenied:
+          return {
+            allowed: false,
+            reason: 'Guardian denied access',
+            restrictions: ['Access denied by guardian'],
+          };
+
+        case UserStatus.Unknown:
+          return {
+            allowed: false,
+            reason: 'Age verification required',
+            restrictions: ['Verify age in Google Play'],
+          };
+
+        case UserStatus.Empty:
+        default:
+          return {
+            allowed: false,
+            reason: 'No age signal available',
+            restrictions: ['Age verification needed'],
+          };
+      }
+    } catch (error) {
+      console.error('Age verification failed:', error);
+      return {
+        allowed: false,
+        reason: 'Verification error',
+        restrictions: ['Try again later'],
+      };
+    }
+  }
+
+  private handleSupervised(result: any) {
+    const age = result.ageLower;
+    const restrictions: string[] = [];
+
+    if (age < 13) {
+      restrictions.push('No data collection (COPPA)');
+      restrictions.push('No social features');
+      restrictions.push('Parental consent required');
+      return {
+        allowed: false,
+        reason: `User is under 13 (${result.ageLower}-${result.ageUpper})`,
+        restrictions,
+      };
+    } else if (age < 18) {
+      restrictions.push('Age-appropriate content only');
+      restrictions.push('Moderated social features');
+      return {
+        allowed: true,
+        reason: `Teen user (${result.ageLower}-${result.ageUpper})`,
+        restrictions,
+      };
+    } else {
+      return {
+        allowed: true,
+        reason: `Adult supervised user (${result.ageLower}+)`,
+        restrictions: [],
+      };
+    }
+  }
+
+  async saveInstallId(installId: string) {
+    // Store install ID for revocation handling
+    localStorage.setItem('ageSignalsInstallId', installId);
+  }
+
+  async checkRevocation() {
+    const result = await AgeSignals.checkAgeSignals();
+    const storedId = localStorage.getItem('ageSignalsInstallId');
+
+    if (result.installId && storedId && result.installId !== storedId) {
+      // Install ID changed - likely revoked and reinstalled
+      console.log('App was revoked and reinstalled');
+      return true;
+    }
+
+    return false;
+  }
+}
+```
+
+## Praktik Terbaik
+
+1. **Periksa saat Aplikasi Dimulai**: Verifikasi age signals ketika aplikasi diluncurkan
+2. **Cache Hasil**: Cache hasil tetapi refresh secara berkala
+3. **Tangani Semua Status**: Implementasikan logika untuk semua nilai UserStatus
+4. **Hormati Penolakan**: Jangan izinkan akses ketika wali menolak persetujuan
+5. **Simpan Install ID**: Lacak install ID untuk deteksi pencabutan
+6. **Logika Fallback**: Miliki verifikasi usia fallback untuk status Unknown/Empty
+7. **Privasi Pertama**: Jangan kumpulkan data yang tidak perlu dari pengguna yang diawasi
+
+## Panduan Kepatuhan
+
+### COPPA (Children's Online Privacy Protection Act)
+
+Untuk pengguna di bawah 13 tahun:
+- Dapatkan persetujuan orang tua yang dapat diverifikasi
+- Batasi pengumpulan data
+- Nonaktifkan iklan berbasis perilaku
+- Sediakan kontrol orang tua
+
+### GDPR (General Data Protection Regulation)
+
+Untuk pengguna yang diawasi:
+- Proses data secara sah
+- Sediakan mekanisme persetujuan wali
+- Izinkan akses dan penghapusan data
+- Implementasikan privasi by design
+
+## Catatan Platform
+
+### Android
+- Memerlukan Google Play Services
+- Minimum API level 21 (Android 5.0+)
+- Hanya berfungsi di perangkat dengan Play Store
+- Sinyal mungkin tidak tersedia di semua wilayah
+- Hasil dapat berubah jika wali mengubah pengaturan
+
+### iOS / Web
+- **Tidak didukung** - Ini adalah plugin khusus Android
+- Akan melempar error jika dipanggil di platform yang tidak didukung
+
+## Pemecahan Masalah
+
+### Tidak Ada Sinyal yang Dikembalikan (Status Empty)
+
+Ini normal untuk:
+- Pengguna di luar wilayah yang didukung
+- Perangkat tanpa Google Play Services
+- Pengguna yang belum menyiapkan Family Link
+- Akun baru tanpa verifikasi
+
+### Status Unknown
+
+Pengguna harus:
+1. Buka Google Play Store
+2. Pergi ke Settings → Family
+3. Selesaikan proses verifikasi usia
+
+### Masalah Izin
+
+Pastikan:
+- Google Play Services diperbarui
+- Aplikasi memiliki nama paket yang benar di Play Console
+- Pengujian di perangkat nyata (bukan emulator tanpa Play Services)
+
+## Sumber Daya
+
+- [Google Play Age Signals Documentation](https://developers.google.com/android/reference/com/google/android/gms/agesignals)
+- [Family Link Developer Guide](https://developers.google.com/families)
+- [COPPA Compliance Guide](https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions)

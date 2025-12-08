@@ -1,0 +1,279 @@
+---
+title: "@capgo/capacitor-autofill-save-password"
+locale: ja
+description: 認証情報管理、安全なストレージ、シームレスなユーザーエクスペリエンスを備えたCapacitorアプリ用のパスワード自動入力サポートプラグイン。
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "はじめに"
+hero:
+  tagline: シームレスな認証エクスペリエンスのためにシステム統合でパスワード自動入力と認証情報管理を有効にします。
+  image:
+    file: ~public/icons/plugins/autofill-save-password.svg
+  actions:
+    - text: はじめる
+      link: /docs/plugins/autofill-save-password/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-autofill-save-password/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 概要
+
+Capacitor Autofill Save Passwordプラグインは、Capacitorアプリケーション用のパスワード保存および自動入力機能を提供します。このプラグインは、安全なパスワードストレージと取得でシームレスな認証エクスペリエンスを提供するために、システムレベルの認証情報管理と統合します。
+
+<CardGrid stagger>
+  <Card title="パスワード保存" icon="rocket">
+    認証情報をシステムキーチェーンに安全に保存 🔐
+  </Card>
+  <Card title="自動入力統合" icon="setting">
+    システムレベルのパスワード自動入力サポート 🗝️
+  </Card>
+  <Card title="クロスプラットフォーム" icon="laptop">
+    iOSサポート、Androidは開発中 📱
+  </Card>
+  <Card title="ドメイン関連付け" icon="puzzle">
+    シームレスな認証のための関連ドメイン ❤️
+  </Card>
+</CardGrid>
+
+## インストール
+
+```bash
+npm install @capgo/capacitor-autofill-save-password
+npx cap sync
+```
+
+## プラットフォームサポート
+
+- **iOS**: 完全サポート（iOS 18.3以前のバージョンで動作）
+- **Android**: 開発中
+
+## iOS設定
+
+### 1. Associated Domainsの設定
+
+Apple Developer アカウントで Associated Domains を設定し、`App.entitlements` ファイルに追加します:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>webcredentials:yourdomain.com</string>
+        <string>webcredentials:www.yourdomain.com</string>
+    </array>
+</dict>
+</plist>
+```
+
+### 2. Web Credentialの設定
+
+ウェブサイトに `.well-known/apple-app-site-association` ファイルを追加します:
+
+```json
+{
+  "webcredentials": {
+    "apps": [
+      "TEAMID.com.yourcompany.yourapp"
+    ]
+  }
+}
+```
+
+## コアAPIメソッド
+
+### パスワード管理
+- `promptDialog(options)` - パスワードをシステムキーチェーンに保存
+- `readPassword()` - キーチェーンから保存されたパスワードを読み取る
+
+## 使用例
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+// ログイン成功後にパスワードを保存
+async function login(username: string, password: string) {
+  try {
+    // ここでログインロジックを実行
+    const loginSuccess = await performLogin(username, password);
+
+    if (loginSuccess) {
+      // パスワードを保存するようユーザーに促す
+      await SavePassword.promptDialog({
+        username: username,
+        password: password,
+        url: 'https://yourdomain.com' // iOSのみ
+      });
+
+      console.log('Password saved successfully');
+    }
+  } catch (error) {
+    console.error('Failed to save password:', error);
+  }
+}
+
+// 自動入力用に保存されたパスワードを読み取る
+async function loadSavedCredentials() {
+  try {
+    const credentials = await SavePassword.readPassword();
+
+    if (credentials.username && credentials.password) {
+      console.log('Found saved credentials');
+      // ログインフォームに事前入力
+      return {
+        username: credentials.username,
+        password: credentials.password
+      };
+    }
+  } catch (error) {
+    console.error('Failed to read saved password:', error);
+  }
+
+  return null;
+}
+```
+
+## Android設定（開発中）
+
+将来のAndroidサポートには、以下の設定が必要になります:
+
+### 1. Google Services Plugin
+
+`android/app/build.gradle` に追加します:
+
+```kotlin
+apply plugin: 'com.google.gms.google-services'
+```
+
+### 2. ドメイン設定
+
+`android/app/src/main/res/values/strings.xml` に追加します:
+
+```xml
+<resources>
+    <string name="asset_statements">
+        [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": {
+                "namespace": "web",
+                "site": "https://yourdomain.com"
+            }
+        }]
+    </string>
+</resources>
+```
+
+### 3. Google Services JSON
+
+Androidプロジェクトに `google-services.json` を追加します。
+
+## APIリファレンス
+
+### promptDialog(options)
+
+ユーザー認証情報をシステムキーチェーンに保存します。
+
+```typescript
+interface SavePasswordOptions {
+  username: string;
+  password: string;
+  url?: string; // iOSのみ - 関連ドメインURL
+}
+```
+
+### readPassword()
+
+システムキーチェーンから保存された認証情報を取得します。
+
+```typescript
+interface SavedCredentials {
+  username: string;
+  password: string;
+}
+```
+
+## ログインフローとの統合
+
+```typescript
+import { SavePassword } from '@capgo/capacitor-autofill-save-password';
+
+class AuthService {
+  async login(username: string, password: string) {
+    try {
+      // バックエンドで認証
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (response.ok) {
+        // 認証情報の保存を提案
+        await this.offerToSavePassword(username, password);
+        return true;
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+    return false;
+  }
+
+  private async offerToSavePassword(username: string, password: string) {
+    try {
+      await SavePassword.promptDialog({
+        username,
+        password,
+        url: 'https://yourdomain.com'
+      });
+    } catch (error) {
+      // ユーザーが保存を拒否したか、エラーが発生した
+      console.log('Password not saved:', error);
+    }
+  }
+
+  async loadSavedCredentials() {
+    try {
+      return await SavePassword.readPassword();
+    } catch (error) {
+      console.log('No saved credentials found');
+      return null;
+    }
+  }
+}
+```
+
+## ベストプラクティス
+
+- 認証が成功した後にのみパスワードの保存を促す
+- ユーザーがパスワードの保存を拒否した場合を適切に処理する
+- キーチェーンアクセスの失敗に対する適切なエラーハンドリングを実装する
+- シームレスなウェブアプリ認証情報共有のために関連ドメインを使用する
+- 異なるiOSバージョン間で自動入力機能をテストする
+
+## セキュリティに関する考慮事項
+
+- 認証情報は適切なセキュリティフラグでシステムキーチェーンに保存されます
+- 関連ドメインにより、認証情報は認可されたアプリのみがアクセスできることが保証されます
+- 認証情報管理については、プラットフォームのセキュリティガイドラインに従ってください
+- 機密性の高いアプリケーションには追加のセキュリティ対策の実装を検討してください
+
+## 制限事項
+
+- Androidサポートは現在開発中です
+- iOSには適切な関連ドメイン設定が必要です
+- 自動入力の動作は異なるiOSバージョン間で異なる場合があります
+- 認証情報の保存とアクセスにはユーザーの同意が必要です
+
+## ドキュメント
+
+詳細な実装ガイドと高度な統合パターンについては、[完全なドキュメント](/docs/plugins/autofill-save-password/getting-started/)を確認してください。

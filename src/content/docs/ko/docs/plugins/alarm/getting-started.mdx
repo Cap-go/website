@@ -1,0 +1,139 @@
+---
+title: 시작하기
+description: Capacitor Alarm 플러그인을 설치하고 사용하여 iOS 및 Android에서 네이티브 알람을 관리하는 방법을 알아보세요.
+locale: ko
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## 설치
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## 요구 사항
+
+- **iOS**: iOS 26+ 전용. 이 플러그인은 `AlarmKit` API에 의존하며 이전 버전이나 프레임워크를 사용할 수 없는 경우 지원되지 않는다고 보고합니다.
+- **Android**: `AlarmClock` 인텐트를 사용하며 동작은 기본 시계 앱 및 OEM 정책에 따라 달라집니다.
+
+참고: 이 플러그인은 네이티브 알람 작업(생성/열기)만 노출합니다. 사용자 지정 인앱 알람 예약/CRUD를 구현하지 않습니다.
+
+## API
+
+### createAlarm(...)
+
+```typescript
+createAlarm(options: NativeAlarmCreateOptions) => Promise<NativeActionResult>
+```
+
+플랫폼 시계 앱을 사용하여 네이티브 OS 알람을 생성합니다.
+Android에서는 Alarm Clock 인텐트를 사용하고, iOS에서는 사용 가능한 경우 AlarmKit을 사용합니다 (iOS 26+).
+
+| Param         | Type                                                                          |
+| ------------- | ----------------------------------------------------------------------------- |
+| **`options`** | `NativeAlarmCreateOptions` |
+
+**반환값:** `Promise<NativeActionResult>`
+
+### openAlarms()
+
+```typescript
+openAlarms() => Promise<NativeActionResult>
+```
+
+사용 가능한 경우 플랫폼의 네이티브 알람 목록 UI를 엽니다.
+
+**반환값:** `Promise<NativeActionResult>`
+
+### getOSInfo()
+
+```typescript
+getOSInfo() => Promise<OSInfo>
+```
+
+OS 및 기능에 대한 정보를 가져옵니다.
+
+**반환값:** `Promise<OSInfo>`
+
+### requestPermissions(...)
+
+```typescript
+requestPermissions(options?: { exactAlarm?: boolean | undefined; } | undefined) => Promise<PermissionResult>
+```
+
+플랫폼에서 알람 사용을 위한 관련 권한을 요청합니다.
+Android에서는 정확한 알람을 위한 설정으로 라우팅할 수 있습니다.
+
+| Param         | Type                                   |
+| ------------- | -------------------------------------- |
+| **`options`** | `{ exactAlarm?: boolean; }` |
+
+**반환값:** `Promise<PermissionResult>`
+
+## 인터페이스
+
+### NativeActionResult
+
+| Prop          | Type                 |
+| ------------- | -------------------- |
+| **`success`** | `boolean` |
+| **`message`** | `string`  |
+
+### NativeAlarmCreateOptions
+
+플랫폼 시계 앱을 통해 네이티브 OS 알람을 생성하기 위한 옵션입니다.
+
+| Prop          | Type                 | Description                                  |
+| ------------- | -------------------- | -------------------------------------------- |
+| **`hour`**    | `number`  | 24시간 형식의 시간 (0-23)             |
+| **`minute`**  | `number`  | 분 (0-59)                        |
+| **`label`**   | `string`  | 알람의 선택적 레이블                 |
+| **`skipUi`**  | `boolean` | Android 전용: 가능한 경우 UI 건너뛰기 시도 |
+| **`vibrate`** | `boolean` | Android 전용: 알람을 진동으로 설정           |
+
+### OSInfo
+
+현재 OS 및 기능에 대한 반환 정보입니다.
+
+| Prop                                 | Type                 | Description                                                 |
+| ------------------------------------ | -------------------- | ----------------------------------------------------------- |
+| **`platform`**                       | `string`  | 'ios' \| 'android' \| 'web'                                 |
+| **`version`**                        | `string`  | OS 버전 문자열                                           |
+| **`supportsNativeAlarms`**           | `boolean` | 플랫폼이 네이티브 알람 앱 통합을 노출하는지 여부 |
+| **`supportsScheduledNotifications`** | `boolean` | 로컬 알림 예약이 지원되는지 여부         |
+| **`canScheduleExactAlarms`**         | `boolean` | Android 전용: 정확한 알람이 허용되는지 여부              |
+
+### PermissionResult
+
+권한 요청 결과입니다.
+
+| Prop          | Type                                                             | Description                        |
+| ------------- | ---------------------------------------------------------------- | ---------------------------------- |
+| **`granted`** | `boolean`                                             | 요청한 범위에 대한 전체 권한  |
+| **`details`** | `Record<string, boolean>` | 권한 키별 선택적 세부정보 |

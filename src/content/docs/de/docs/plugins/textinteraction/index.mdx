@@ -1,0 +1,45 @@
+---
+title: "@capgo/capacitor-textinteraction"
+locale: de
+description: Aktivieren oder deaktivieren Sie die iOS-Textinteraktionslupe für präzise Kontrolle über das WebView-Verhalten.
+tableOfContents: false
+next: false
+prev: false
+sidebar:
+  order: 1
+  label: "Einführung"
+hero:
+  tagline: Entfernen Sie die iOS-Lupenlupe in Kiosk- oder Spielerlebnissen und stellen Sie sie vor der Texteingabe wieder her.
+  image:
+    file: ~public/icons/plugins/textinteraction.svg
+  actions:
+    - text: Erste Schritte
+      link: /docs/plugins/textinteraction/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-textinteraction/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Steuern Sie das Textinteraktionssystem von Apple, um die Benutzererfahrung auf Kiosk-Displays, Spielen und interaktiven Installationen anzupassen.
+
+<CardGrid stagger>
+  <Card title="iOS-spezifisch" icon="rocket">
+    Schalten Sie die Lupenlupe und Auswahlgriffe um, die in iOS 15 eingeführt wurden.
+  </Card>
+  <Card title="Einfache API" icon="pencil">
+    Rufen Sie eine einzelne Methode auf, um den Textinteraktionszustand zu aktivieren oder zu deaktivieren.
+  </Card>
+  <Card title="Sichere Standardwerte" icon="approve-check">
+    Empfängt ein boolesches Ergebnis, damit Sie nicht unterstützte Versionen erkennen können.
+  </Card>
+  <Card title="Kiosk-freundlich" icon="star">
+    Verhindern Sie langes Drücken für Kopieren/Einfügen auf kontrollierten Installationen oder Beschilderungen.
+  </Card>
+</CardGrid>
+
+Verwenden Sie den Leitfaden für die ersten Schritte für ein minimales Integrationsmuster und Erinnerungen, die Interaktion vor dem Anzeigen von Texteingaben wieder zu aktivieren.
