@@ -1,6 +1,5 @@
 ---
-slug: >-
-  preguntas-frecuentes-sobre-actualizaciones-en-vivo-respuestas-para-desarrolladores-de-apps
+slug: live-updates-faq-answers-for-app-developers
 title: >-
   Questions fréquentes sur les mises à jour en direct : réponses pour les
   développeurs d'applications

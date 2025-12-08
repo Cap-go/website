@@ -1,6 +1,5 @@
 ---
-slug: >-
-  questions-frequentes-sur-les-mises-a-jour-en-direct-reponses-pour-les-developpeurs-d-applications
+slug: live-updates-faq-answers-for-app-developers
 title: 'Pertanyaan Umum Pembaruan Langsung: Jawaban untuk Pengembang Aplikasi'
 description: >-
   Temukan manfaat pembaruan langsung untuk pengembang aplikasi, termasuk

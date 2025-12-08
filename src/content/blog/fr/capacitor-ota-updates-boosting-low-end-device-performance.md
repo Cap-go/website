@@ -1,6 +1,5 @@
 ---
-slug: >-
-  actualizaciones-ota-de-capacitor-mejorando-el-rendimiento-en-dispositivos-de-gama-baja
+slug: capacitor-ota-updates-boosting-low-end-device-performance
 title: >-
   Mises à jour OTA de Capacitor : Amélioration des Performances sur les
   Appareils d'Entrée de Gamme

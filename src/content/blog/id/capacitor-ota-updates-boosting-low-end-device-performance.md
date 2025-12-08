@@ -1,6 +1,5 @@
 ---
-slug: >-
-  mises-a-jour-ota-capacitor-amelioration-des-performances-sur-les-appareils-bas-de-gamme
+slug: capacitor-ota-updates-boosting-low-end-device-performance
 title: 'Pembaruan OTA Capacitor: Peningkatan Kinerja pada Perangkat Kelas Bawah'
 description: >-
   Pelajari bagaimana pembaruan OTA meningkatkan kinerja aplikasi pada perangkat

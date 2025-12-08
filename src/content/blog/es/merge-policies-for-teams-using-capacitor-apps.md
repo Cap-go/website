@@ -1,5 +1,5 @@
 ---
-slug: 'Merge-Richtlinien für Teams, die Capacitor-Apps verwenden'
+slug: merge-policies-for-teams-using-capacitor-apps
 title: Directrices de fusión para equipos con aplicaciones Capacitor
 description: >-
   Aprenda cómo crear políticas de fusión efectivas para aplicaciones Capacitor

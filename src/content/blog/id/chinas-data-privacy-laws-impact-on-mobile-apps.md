@@ -1,6 +1,5 @@
 ---
-slug: >-
-  el-impacto-de-las-leyes-de-privacidad-de-datos-de-china-en-las-aplicaciones-moviles
+slug: chinas-data-privacy-laws-impact-on-mobile-apps
 title: 'Undang-Undang Privasi Data China: Dampak pada Aplikasi Seluler'
 description: >-
   Memahami undang-undang privasi data China sangat penting bagi pengembang

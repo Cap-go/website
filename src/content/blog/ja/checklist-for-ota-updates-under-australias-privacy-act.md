@@ -1,6 +1,5 @@
 ---
-slug: >-
-  checklist-per-gli-aggiornamenti-ota-ai-sensi-della-legge-sulla-privacy-australiana
+slug: checklist-for-ota-updates-under-australias-privacy-act
 title: OTAアップデートにおけるオーストラリアのプライバシー法に基づくチェックリスト
 description: オーストラリアのプライバシー法に準拠するために、堅牢なデータセキュリティとユーザープライバシー対策を実装してOTAアップデートを確実に行ってください。
 author: Martin Donadieu

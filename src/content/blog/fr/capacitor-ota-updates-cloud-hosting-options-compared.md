@@ -1,6 +1,5 @@
 ---
-slug: >-
-  opciones-comparadas-de-alojamiento-en-la-nube-para-actualizaciones-ota-de-capacitor
+slug: capacitor-ota-updates-cloud-hosting-options-compared
 title: >-
   Options d'hébergement dans le cloud pour les mises à jour OTA de Capacitor
   comparées

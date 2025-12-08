@@ -1,7 +1,5 @@
 ---
-slug: >-
-  Explicación del direccionamiento de versiones de actualizaciones OTA de
-  Capacitor
+slug: capacitor-ota-updates-version-targeting-explained
 title: 'Pembaruan OTA Capacitor: Penjelasan Versi'
 description: >-
   Pelajari bagaimana segmentasi versi untuk pembaruan OTA memastikan stabilitas

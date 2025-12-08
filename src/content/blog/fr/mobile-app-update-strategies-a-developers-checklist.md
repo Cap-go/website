@@ -1,6 +1,5 @@
 ---
-slug: >-
-  estrategias-de-actualizacion-de-aplicaciones-moviles-una-lista-de-verificacion-para-desarrolladores
+slug: mobile-app-update-strategies-a-developers-checklist
 title: >-
   Stratégies de mise à jour des applications mobiles : Une checklist pour les
   développeurs

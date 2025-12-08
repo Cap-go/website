@@ -41,7 +41,7 @@ export default defineConfig({
     },
     '/docs/plugins/updater/cloud-mode/getting-started/': {
       status: 302,
-      destination: '/docs/getting-started/quickstart',
+      destination: '/docs/getting-started/quickstart/',
     },
   },
   i18n: {

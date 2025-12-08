@@ -1,6 +1,5 @@
 ---
-slug: >-
-  introduction-de-la-securite-de-bout-en-bout-dans-capacitor-updater-avec-signature-de-code
+slug: introducing-end-to-end-security-to-capacitor-updater-with-code-signing
 title: Pengenalan Enkripsi End-to-end di capacitor-updater dengan Code Signing
 description: >-
   Menggunakan enkripsi RSA + AES untuk mengenkripsi update, dirancang untuk

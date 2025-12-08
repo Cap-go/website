@@ -1,6 +1,5 @@
 ---
-slug: >-
-  strategies-de-mise-a-jour-des-applications-mobiles-une-liste-de-verification-pour-les-developpeurs
+slug: mobile-app-update-strategies-a-developers-checklist
 title: 'Strategi Update Aplikasi Mobile: Checklist untuk Developer'
 description: >-
   Pelajari strategi penting untuk pembaruan aplikasi seluler, mulai dari

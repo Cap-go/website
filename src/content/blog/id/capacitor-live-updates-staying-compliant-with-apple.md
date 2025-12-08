@@ -1,7 +1,5 @@
 ---
-slug: >-
-  Les mises à jour en direct avec Capacitor: Rester conforme aux exigences
-  d'Apple
+slug: capacitor-live-updates-staying-compliant-with-apple
 title: 'Live Updates pada Capacitor: Tetap Mengikuti Persyaratan Apple'
 description: >-
   Pelajari cara mengimplementasikan pembaruan langsung dalam aplikasi seluler

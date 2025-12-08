@@ -1,6 +1,5 @@
 ---
-slug: >-
-  problemes-frequents-de-mise-a-jour-en-direct-et-solutions-pour-les-developpeurs
+slug: common-live-update-issues-and-solutions-for-developers
 title: Masalah dan Solusi Umum Live Updates untuk Developer
 description: >-
   Temukan lebih banyak solusi untuk tantangan umum dalam pembaruan langsung,

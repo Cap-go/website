@@ -1,7 +1,5 @@
 ---
-slug: >-
-  Le guide ultime de la sécurité des mises à jour OTA pour les applications
-  Capacitor
+slug: ultimate-guide-to-ota-update-security-for-capacitor-apps
 title: Panduan Lengkap Keamanan Update OTA untuk Aplikasi Capacitor
 description: >-
   Temukan strategi penting untuk mengamankan pembaruan OTA aplikasi seluler,
