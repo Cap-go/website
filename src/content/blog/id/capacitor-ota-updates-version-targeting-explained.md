@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://github.com/riderx'
 created_at: 2025-03-14T03:00:49.720Z
-updated_at: 2025-03-24T13:14:15.818Z
+updated_at: 2025-12-08T00:17:46.000Z
 head_image: >-
   https://assets.seobotai.com/capgo.app/67d37b87bca46a2e63b4584d-1741921265630.jpg
 head_image_alt: Pengembangan Seluler

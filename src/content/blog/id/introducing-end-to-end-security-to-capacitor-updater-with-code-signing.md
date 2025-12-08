@@ -8,7 +8,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-11-27T00:00:00.000Z
-updated_at: 2024-08-27T00:00:00.000Z
+updated_at: 2025-12-08T00:17:46.000Z
 head_image: /secure_upload.webp
 head_image_alt: Download Capgo Dengan Aman
 keywords: >-
