@@ -27,6 +27,14 @@ Capgo's Live Update system has two key components:
 
 When you upload a new JS bundle to Capgo and assign it to a channel, the Capgo SDK in apps configured for that channel will detect the update and download it. The next time the app restarts, the new bundle will be loaded.
 
+## Why Capgo Logs Matter (marketing view)
+
+- **Instant x-ray of every rollout**: Per-device timelines show checks, downloads, installs, policy blocks, and rollbacks, so you know exactly what happened—no guesswork or “it works on my phone” debates.
+- **Faster incident response**: Alert-like codes (e.g., rate limits, checksum fails, notifyAppReady misses) surface before users start flooding support, letting you ship a fix or rollback in minutes.
+- **Channel policy proof**: Logs verify that guardrails (block majors, disable emulators/dev builds, platform limits) are actively protecting production.
+- **Revenue & reputation protection**: See when updates stall on poor networks or hit plan limits, so you can intervene before conversions, sessions, or reviews drop.
+- **Single source of truth**: Product, QA, and Support share the same cloud log stream—no digging through Xcode/Android Studio or DM’ing engineers for native logs.
+
 ## Getting Started
 
 To start using Live Updates, follow these steps:

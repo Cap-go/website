@@ -13,7 +13,25 @@ From there you should see a page similar to this, displaying a list of log entri
 
 <figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="show logs" /><figcaption>Logs Page Overview</figcaption></figure>
 
-Each log entry typically includes information such as the timestamp, the device ID, the log message or code, and the bundle version involved.
+Each row shows:
+- **Timestamp** (UTC)
+- **Device ID**
+- **Action code** (what happened)
+- **Version name** (bundle or `builtin`)
+
+Click a row to jump to the device detail page for the full history.
+
+### Sample log snippet (fake data)
+
+| Time (UTC) | Device ID | Action | Version | What it tells you |
+|------------|-----------|--------|---------|-------------------|
+| 2025-01-14 10:00:01 | `A1B2C3` | `get` | 2.4.1 | Device asked Capgo if an update is available |
+| 2025-01-14 10:00:03 | `A1B2C3` | `download_manifest_start` | 2.4.1 | Manifest fetch kicked off; SDK is about to download files |
+| 2025-01-14 10:00:07 | `A1B2C3` | `download_40` | 2.4.1 | Bundle download is 40% complete |
+| 2025-01-14 10:00:12 | `A1B2C3` | `download_zip_complete` | 2.4.1 | Zip finished downloading |
+| 2025-01-14 10:00:13 | `A1B2C3` | `set` | 2.4.1 | Bundle installed and marked as next to run |
+| 2025-01-14 10:05:00 | `B9C8D7` | `disableAutoUpdateToMajor` | 1.9.0 | Channel policy blocked a jump to 2.x |
+| 2025-01-14 10:05:05 | `B9C8D7` | `rateLimited` | builtin | Device hit the request limit; SDK backs off until restart |
 
 ## Example Log Scenarios
 
@@ -87,31 +105,53 @@ When channel settings prevent an update:
 
 **Action needed**: These are intentional protections. If you want to allow these updates, modify your [channel settings](/docs/webapp/channels/).
 
-## Quick Reference: Common Log Codes
+## Log codes (Capgo backend enum)
 
-| Code | Category | Description |
-|------|----------|-------------|
-| `get` | Success | Device received update information |
-| `noNew` | Success | Already on latest version |
-| `download_XX` | Progress | Download progress (10%, 20%... 90%) |
-| `download_complete` | Success | Download finished |
-| `set` | Success | Bundle activated on device |
-| `update_fail` | Error | Update installed but app didn't confirm readiness (rollback occurred) |
-| `download_fail` | Error | Download failed (network issue) |
-| `checksum_fail` | Error | Downloaded file was corrupted |
-| `reset` | Info | Device reverted to a previous version |
-| `needPlanUpgrade` | Billing | Plan limit reached |
-| `disableAutoUpdateToMajor` | Config | Major version updates blocked by channel |
-| `disableAutoUpdateToMinor` | Config | Minor version updates blocked by channel |
-| `disablePlatformIos` | Config | iOS disabled on this channel |
-| `disablePlatformAndroid` | Config | Android disabled on this channel |
-| `disableEmulator` | Config | Emulators blocked by channel |
-| `disableDevBuild` | Config | Dev builds blocked by channel |
-| `rateLimited` | Access | Too many requests from this device |
+These codes come from the `stats_action` enum used by the dashboard API (`capgo/src/types/supabase.types.ts`). If you see a new code in the UI, it was emitted by the SDK or backend and validated against this list.
 
-For a comprehensive list of all possible log codes (both from the backend and the device) and their detailed explanations, please refer to our detailed debugging guide:
+**Happy path & lifecycle**
 
-➡️ **[Full Log Code Reference and Debugging Guide](/docs/plugins/updater/debugging/#understanding-cloud-logs)**
+| Code(s) | Meaning |
+|---------|---------|
+| `get` | Device asked Capgo for the current channel manifest |
+| `download_manifest_start`, `download_manifest_complete` | Manifest download began / finished (for delta or multi-file bundles) |
+| `download_zip_start`, `download_zip_complete` | Zip archive download began / finished |
+| `download_10` … `download_90` | Download progress milestones |
+| `download_complete` | Entire bundle downloaded |
+| `set` | Bundle staged for next launch |
+| `reset` | Device reverted to the builtin bundle |
+| `delete` | Bundle removed from local storage |
+| `uninstall` | App uninstall detected |
+| `app_moved_to_foreground`, `app_moved_to_background` | App lifecycle events recorded by SDK |
+| `ping` | Health/heartbeat check from device |
+| `setChannel`, `getChannel` | Channel overridden or fetched via SDK call |
+
+**Configuration or policy blocks**
+
+| Code(s) | Why the update was blocked |
+|---------|---------------------------|
+| `disableAutoUpdate`, `disableAutoUpdateToMajor`, `disableAutoUpdateToMinor`, `disableAutoUpdateToPatch`, `disableAutoUpdateMetadata`, `disableAutoUpdateUnderNative` | Channel strategy forbids this semver jump |
+| `disablePlatformIos`, `disablePlatformAndroid` | Platform is disabled on the channel |
+| `disableDevBuild`, `disableEmulator` | Dev builds or emulators not allowed |
+| `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | Channel selection or override failed |
+| `missingBundle`, `cannotGetBundle` | Manifest refers to a bundle Capgo cannot serve |
+| `needPlanUpgrade` | Org hit its plan/device limit |
+| `rateLimited` | Too many requests; SDK throttles until restart |
+| `blocked_by_server_url`, `backend_refusal`, `InvalidIp` | Server-side rule blocked the request |
+
+**Download / integrity / install failures**
+
+| Code(s) | Meaning |
+|---------|---------|
+| `download_fail` | Bundle download failed (network or response error) |
+| `download_manifest_file_fail`, `download_manifest_checksum_fail`, `download_manifest_brotli_fail` | Manifest file couldn’t be retrieved or validated |
+| `checksum_fail`, `checksum_required` | Integrity check failed or checksum missing |
+| `unzip_fail`, `directory_path_fail`, `canonical_path_fail`, `windows_path_fail` | File system or unzip validation failed |
+| `decrypt_fail` | Decryption failed (encrypted bundle) |
+| `update_fail` | Bundle installed but app never called `notifyAppReady()`; rollback triggered |
+| `download_zip_*` with no subsequent `set` | Download finished but install phase never completed |
+
+➡️ Need deeper per-code guidance? See **[Full Log Code Reference and Debugging Guide](/docs/plugins/updater/debugging/#understanding-cloud-logs)**.
 
 ## Getting More Details About a Log
 

@@ -8,7 +8,7 @@ import SharedNumbers from '@/components/SharedNumbers.astro'
 import Hero from '@/components/Hero.astro'
 import Manifesto from '@/components/Manifesto.astro'
 import * as m from '@/paraglide/messages'
-import CompaniesLogo from '@/components/companies-logo.astro'
+import DeviceLogs from '@/components/landing/DeviceLogs.astro'
 import HowItWorks from '@/components/HowItWorks.astro'
 import GlobalInfrastructure from '@/components/GlobalInfrastructure.astro'
 import MonitoringFeatures from '@/components/landing/MonitoringFeatures.astro'
@@ -18,6 +18,7 @@ import { createLdJsonGraph, createServiceLdJson, createSoftwareApplicationLdJson
 import AppflowShutdown from '@/components/AppflowShutdown.astro'
 
 const config = Astro.locals.runtimeConfig
+const locale = Astro.locals.locale
 
 const stats = {
   stars: shortNumber(645),
@@ -106,14 +107,15 @@ content.ldJSON['@graph'].push(capgoSoftware)
     <Hero />
     <!-- <CompaniesLogo /> -->
     <ProblemSolution />
-    <Manifesto />
     <HowItWorks />
     <MonitoringFeatures />
+    <DeviceLogs />
     <AutomationFeatures />
     <GlobalInfrastructure />
     <BuiltForDevelopers />
     <SharedNumbers />
     <Testimonials />
+    <Manifesto />
     <Orgs />
     <AppflowShutdown />
   </div>
