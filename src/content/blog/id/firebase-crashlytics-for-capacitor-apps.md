@@ -97,7 +97,7 @@ Anda perlu menginstal yang berikut:
 
 ### Pengaturan [Firebase](https://firebase.google.com/) Console
 
-![Firebase](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
+![Firebase Platform Dashboard](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
 
 Atur Firebase dan aktifkan Crashlytics melalui langkah-langkah ini:
 
@@ -270,7 +270,7 @@ Untuk memastikan kepatuhan dan melindungi data pengguna, ikuti pedoman ini:
 
 ## Integrasi [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/12eddca90b08193253253ea10516a6c4.jpg)
 
 Permudah proses dari deteksi keruntuhan hingga penerapan perbaikan dengan memadukan sistem pembaruan langsung Capgo dengan Crashlytics.
 

@@ -80,7 +80,7 @@ Avec vos utilisateurs regroupés, vous pouvez concevoir des [stratégies de mise
 
 ## Utiliser [Capgo](https://capgo.app/) pour le Ciblage des Utilisateurs
 
-![Capgo](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgo propose des outils qui rendent le ciblage des mises à jour pour des groupes d'utilisateurs spécifiques plus précis, grâce à ses fonctionnalités de segmentation par fréquence d'utilisation. Ces capacités affinent les stratégies de mise à jour ciblée discutées précédemment.
 

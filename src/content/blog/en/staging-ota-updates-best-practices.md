@@ -165,7 +165,7 @@ Sticking to app store guidelines is crucial to avoid delays or disruptions durin
 
 ## Using [Capgo](https://capgo.app/) for OTA Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
 
 ### Capgo Core Functions
 

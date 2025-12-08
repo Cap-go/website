@@ -42,7 +42,7 @@ next_blog: ''
 
 ## [Firebase](https://firebase.google.com/) 성능 모니터링으로 앱 상태 최적화...
 
-![Firebase](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
+![Firebase Platform Dashboard](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/ENaOg5YefjQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -197,7 +197,7 @@ await FirebasePerformance.putMetric({
 
 ## [Sentry](https://sentry.io/) 오류 추적 설정
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
 
 Firebase가 성능 지표를 처리하는 반면, Sentry는 오류를 포착하고 진단하는 데 중점을 둡니다. 함께 사용하면 강력한 모니터링 설정이 됩니다.
 
@@ -339,7 +339,7 @@ Capgo의 750개 프로덕션 앱 분석 [\[1\]](https://capgo.app/)에서 강조
 
 ## [Capgo](https://capgo.app/) 업데이트와 모니터링
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 ### Capgo 핵심 기능
 

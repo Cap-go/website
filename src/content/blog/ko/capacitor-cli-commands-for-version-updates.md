@@ -29,7 +29,7 @@ next_blog: ''
 
 ## Ionic 앱을 [Capacitor](https://capacitorjs.com/) 3으로 마이그레이트하는 방법
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/d5H729a-rBM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -197,7 +197,7 @@ Gradle 구성에 세심한 주의를 기울이세요. 일부 업데이트는 최
 
 ## [Capgo](https://capgo.app/)로 라이브 업데이트
 
-![Capgo](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/0270fe931d56d422c8e52846495749c7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/0270fe931d56d422c8e52846495749c7.jpg)
 
 플랫폼이 구성되면 Capgo를 사용하여 앱 스토어 승인을 기다리지 않고 즉시 변경 사항을 배포할 수 있습니다. 이 단계는 실시간 배포 기능을 통해 플랫폼 업데이트를 개선합니다.
 

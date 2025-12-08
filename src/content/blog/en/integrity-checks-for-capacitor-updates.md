@@ -57,7 +57,7 @@ TLS (Transport Layer Security) mutual authentication ensures both the client and
 
 ### Using [Capgo](https://capgo.app/) for Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-25.jpg?auto=compress)
 
 Capgo offers a streamlined and secure solution for managing OTA updates. With over 23.5 million updates delivered across 750 production apps, Capgo provides:
 

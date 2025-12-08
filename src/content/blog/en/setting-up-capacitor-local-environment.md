@@ -266,7 +266,7 @@ Expand your Capacitor setup with tools that improve update delivery, streamline 
 
 ### [Capgo](https://capgo.app/) Setup
 
-![Capgo](https://assets.seobotai.com/capgo.app/67edd19cebbb9dc8064069d2/6f70cafcdfe95287b465212dfd047c63.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67edd19cebbb9dc8064069d2/6f70cafcdfe95287b465212dfd047c63.jpg)
 
 Simplify your workflow using Capgo's live update system. To get started, run:
 

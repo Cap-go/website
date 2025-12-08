@@ -57,7 +57,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/)を始める
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
 
 位置情報対応の[Capacitorアプリ](https://capgo.app/plugins/ivs-player/)をOTAアップデート機能付きで構築するには、以下が必要です：
 

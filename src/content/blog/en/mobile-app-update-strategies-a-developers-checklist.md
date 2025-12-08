@@ -111,7 +111,7 @@ Once your pipeline is ready, adding OTA updates makes delivering changes to user
 
 ### Using [Capacitor](https://capacitorjs.com/) OTA Updates with [Capgo](https://capgo.app/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
 
 Capgo makes OTA updates simple, secure, and fast with features like encryption and compliance. Here's how to get started:
 

@@ -99,7 +99,7 @@ Um diese Probleme zu vermeiden, ist es wichtig, die Capacitor-spezifischen Imple
 
 ## OTA Update-Richtlinien für [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
 
 ### Technische Compliance-Schritte
 
@@ -149,7 +149,7 @@ Diese Sicherheitsmaßnahmen entsprechen Apples Code-Signing-Anforderungen und Go
 
 ## [Capgo](https://capgo.app/) Update-Managementsystem
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
 Capgo bietet eine sichere Möglichkeit, [Capacitor OTA-Updates](https://capgo.app/) bereitzustellen und zu verwalten, um eine reibungslose Verteilung unter Einhaltung der Compliance-Standards zu gewährleisten. Es bietet auch fortschrittliche Tools für [Update-Management](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) auf Unternehmensebene
 

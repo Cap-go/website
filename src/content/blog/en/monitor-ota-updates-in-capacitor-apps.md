@@ -36,7 +36,7 @@ Capgo has already managed **23.5M updates across 750 apps** with fast download s
 
 ## Explore Capawesome's New [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) Live Update ...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -70,7 +70,7 @@ Once version control is set up, you can monitor updates to ensure security and p
 
 ### Setting Up [Capgo](https://capgo.app/) Monitoring
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
 
 1.  **Configure Analytics Integration**: Use real-time analytics to monitor update performance and user engagement.
 2.  **Enable Error Tracking**: Activate error tracking to capture detailed logs and performance metrics.

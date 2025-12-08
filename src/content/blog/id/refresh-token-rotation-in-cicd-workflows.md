@@ -131,7 +131,7 @@ Pendekatan terstruktur ini meminimalkan waktu mati dan memastikan standar keaman
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Keamanan CI/CD
 
-![Capgo](https://assets.seobotai.com/capgo.app/68214ae55e3fe4823b5f6cab/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68214ae55e3fe4823b5f6cab/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgo membangun strategi rotasi token yang terbukti untuk memperkuat keamanan CI/CD, menawarkan alat yang menjadikan penyebaran yang aman baik lancar maupun dapat diandalkan.
 

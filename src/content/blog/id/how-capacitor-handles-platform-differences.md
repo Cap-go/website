@@ -46,7 +46,7 @@ Capacitor menjembatani kesenjangan antara pengembangan aplikasi web dan native, 
 
 ## Bagaimana [Capacitor](https://capacitorjs.com/) Menangani Kode Platform
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Capacitor menawarkan alat untuk mengelola kode khusus platform, memungkinkan pengembang membuat pengalaman yang disesuaikan untuk iOS dan Android menggunakan API tunggal.
 
@@ -241,7 +241,7 @@ Berikut beberapa pertimbangan build utama:
 
 ## Perbarui Aplikasi dengan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
 
 Menjaga [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) tetap diperbarui secara efisien untuk iOS dan Android sangat penting. Capgo menawarkan sistem pembaruan langsung yang selaras dengan pedoman kedua platform.
 

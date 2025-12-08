@@ -67,7 +67,7 @@ xcode-select -p
 
 ### Creating a [Capacitor](https://capacitorjs.com/) Project
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-11.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-11.jpg?auto=compress)
 
 Your Capacitor project needs to be configured correctly for CI/CD workflows. The `capacitor.config.ts` file is at the heart of this setup:
 
@@ -187,7 +187,7 @@ Once your builds are validated and packaged, you’re ready to move on to live u
 
 ## Adding [Capgo](https://capgo.app/) for Live Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-11.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-11.jpg?auto=compress)
 
 Integrating Capgo into your workflow enhances your CI/CD process by enabling post-release updates. Here's how to set it up:
 

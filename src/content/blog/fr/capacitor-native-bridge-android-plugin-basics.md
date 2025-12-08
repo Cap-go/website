@@ -124,7 +124,7 @@ Voici un aperçu rapide des versions minimales et recommandées des composants c
 
 ### Optimiser les paramètres [Gradle](https://gradle.org/)
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 Pour améliorer les performances et la compatibilité, mettez à jour votre fichier `gradle.properties` avec ces paramètres :
 
@@ -435,7 +435,7 @@ Les outils de suivi des erreurs et de retour en arrière de Capgo peuvent vous a
 
 ## Guide d'intégration [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Sur la base de nos résultats de tests en direct, l'intégration de Capgo aide à rationaliser le déploiement des mises à jour.
 

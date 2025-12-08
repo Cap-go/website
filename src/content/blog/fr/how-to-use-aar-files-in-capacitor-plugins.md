@@ -203,7 +203,7 @@ Le maintien des fichiers de configuration dans des sous-répertoires spécifique
 
 ## Étapes de configuration [Gradle](https://gradle.org/)
 
-![Gradle](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
+![Gradle Build Tool Interface](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
 
 ### Mise à jour de build.gradle
 

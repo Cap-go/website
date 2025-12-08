@@ -39,7 +39,7 @@ next_blog: ''
 
 ## [Appflow](https://ionic.io/appflow/live-updates) 라이브 업데이트: 사용자에게 즉각적인 업데이트 배포
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -130,7 +130,7 @@ App Store 검토 프로세스를 원활하게 하기 위해 모든 변경사항�
 
 ### [Capgo](https://capgo.app/): 라이브 업데이트 관리
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
 
 Capgo는 라이브 업데이트 관리를 단순화하고 Apple의 요구사항 준수를 보장합니다. 이미 **1,400개 이상의 프로덕션 앱**에서 **9억 4,760만 건** 이상의 업데이트를 지원했습니다 [\[1\]](https://capgo.app/).
 

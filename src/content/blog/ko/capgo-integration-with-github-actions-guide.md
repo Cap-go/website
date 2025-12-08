@@ -84,7 +84,7 @@ jobs:
 
 ### 프로젝트에 [Capgo](https://capgo.app/) 추가하기
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16.jpg?auto=compress)
 
 Capgo를 통합하려면 CLI 도구를 사용하여 Capacitor 프로젝트에 설치하세요. Capgo의 창립자 Martin Donadieu의 말에 따르면:
 

@@ -108,7 +108,7 @@ RBAC는 권한이 부여되지 않은 배포를 차단하면서 효율적인 프
 
 ### [Capgo](https://capgo.app/)'의 RBAC 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Capgo는 진정한 종단간 암호화와 역할 기반 권한을 제공하는 오픈 소스 플랫폼을 통해 이러한 아이디어를 발전시키고 있습니다. 이를 통해 여러 조직 간의 안전하고 확장 가능한 [업데이트 관리](https://capgo.app/docs/plugin/cloud-mode/manual-update/)를 허용합니다 [\[1\]](https://capgo.app/).
 

@@ -271,7 +271,7 @@ Nach der Installation konfigurieren Sie die Plugins in Ihren nativen Projekten. 
 
 ### Live-Updates mit [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-28.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-28.jpg?auto=compress)
 
 Um die Bereitstellung und das Testen zu vereinfachen, können Sie Live-Update-Tools wie Capgo integrieren. Dieser Dienst hat bereits über 235 Millionen Updates ausgeliefert, wobei 95% der Nutzer Updates innerhalb von 24 Stunden erhalten und eine globale Erfolgsquote von 82% erreicht wird [\[1\]](https://capgo.app/)
 

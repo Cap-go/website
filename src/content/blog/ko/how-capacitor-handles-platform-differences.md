@@ -44,7 +44,7 @@ Capacitor는 웹과 네이티브 앱 개발 간의 간격을 메워주어 플랫
 
 ## [Capacitor](https://capacitorjs.com/)이 플랫폼 코드를 처리하는 방법
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Capacitor는 플랫폼별 코드를 관리할 수 있는 도구를 제공하여 개발자가 단일 API를 사용하여 iOS 및 Android용 맞춤형 경험을 만들어낼 수 있도록 합니다.
 
@@ -239,7 +239,7 @@ android {
 
 ## [Capgo](https://capgo.app/)로 앱 업데이트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
 
 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)을 iOS와 Android 모두 효율적으로 업데이트하는 것이 중요합니다. Capgo는 두 플랫폼의 지침에 맞는 실시간 업데이트 시스템을 제공합니다.
 

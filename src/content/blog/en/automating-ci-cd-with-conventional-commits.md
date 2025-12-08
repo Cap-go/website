@@ -51,7 +51,7 @@ Streamline your CI/CD pipeline by automating it with Conventional Commits. Follo
 
 ### Setting Up [Commitlint](https://commitlint.js.org/)
 
-![Commitlint](https://assets.seobotai.com/capgo.app/682a83945642a17d106f059a/8461397ae4d63c2641a01948372bfa37.jpg)
+![Commitlint Commit Convention Tool](https://assets.seobotai.com/capgo.app/682a83945642a17d106f059a/8461397ae4d63c2641a01948372bfa37.jpg)
 
 Commitlint helps enforce the Conventional Commits specification, ensuring consistent and meaningful commit messages.
 
@@ -255,7 +255,7 @@ Here's an overview of the tools and their purposes:
 
 ## Mobile App CI/CD with [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/682a83945642a17d106f059a/af307f845c8469eb7eb1448e75535c2b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682a83945642a17d106f059a/af307f845c8469eb7eb1448e75535c2b.jpg)
 
 Capgo extends automated workflows into the mobile ecosystem, making it a seamless addition to established CI/CD practices.
 

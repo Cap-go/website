@@ -35,7 +35,7 @@ OTA updates, like those powered by [Capgo](https://capgo.app/), ensure faster, s
 
 ## [Appflow](https://ionic.io/appflow/) Deploy: Ship real-time updates to your [Ionic](https://ionicframework.com/) app users
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-03-19.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-03-19.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -65,7 +65,7 @@ Modern OTA systems provide a way to push critical updates quickly without breaki
 
 ## How [Capacitor](https://capacitorjs.com/) OTA Updates Work
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 [Capacitor OTA updates](https://capgo.app/ja/) make app deployment faster and more efficient, allowing developers to push changes without waiting for app store approvals.
 
@@ -86,7 +86,7 @@ OTA updates bring more than just speed - they give developers better control ove
 
 ### [Capgo](https://capgo.app/)'s OTA Tools
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo enhances the OTA update experience with extra tools and features. Security is a top priority, with end-to-end encryption ensuring only authorized users can access updates [\[1\]](https://capgo.app/). Key features include:
 

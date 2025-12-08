@@ -108,7 +108,7 @@ Revisar regularmente los límites de tasa es esencial para mantener el rendimien
 
 ## Herramientas de Límites de Tasa de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo ofrece herramientas integradas diseñadas para imponer límites de tasa de API mientras asegura alto rendimiento y conformidad con los requisitos de las tiendas de aplicaciones.
 

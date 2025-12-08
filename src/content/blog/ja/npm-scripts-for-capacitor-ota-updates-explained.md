@@ -44,7 +44,7 @@ Capgoのようなプラットフォームが迅速な更新を提供し（24時�
 
 ## Capawesomeの新しいIonic [Capacitor](https://capacitorjs.com/)ライブ更新を探る...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 ## OTA更新のためのnpmスクリプト設定
 
@@ -158,7 +158,7 @@ OTA更新におけるセキュリティは重要です。ここにいくつか�
 
 ### [Capgo](https://capgo.app/)の特徴
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04cc402ef2e8f7dc781d2b86cd364db3.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04cc402ef2e8f7dc781d2b86cd364db3.jpg)
 
 CapgoはCapacitor OTA更新専用に設計されており、平均更新速度434ミリ秒を提供し、95％のユーザー更新率を達成しています [\[1\]](https://capgo.app/) 。次の例のように、npmスクリプトとシームレスに統合されます：
 

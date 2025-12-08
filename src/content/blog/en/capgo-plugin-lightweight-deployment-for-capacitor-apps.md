@@ -28,7 +28,7 @@ Capgo is designed for seamless, lightweight deployment, so you can focus on impr
 
 ## Getting Started with [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/682e72b04fa53d4220800503/f1896dc16fb40f15e325c34706864676.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682e72b04fa53d4220800503/f1896dc16fb40f15e325c34706864676.jpg)
 
 Getting Capgo up and running in your [Capacitor project](https://capgo.app/blog/capacitor-comprehensive-guide/) is straightforward. It involves a quick installation process and some basic configuration.
 

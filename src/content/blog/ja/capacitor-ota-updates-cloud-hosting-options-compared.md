@@ -137,7 +137,7 @@ Azureはまた、段階的なロールアウトと自動ロールバックメカ
 
 ## 4. OTAアップデートのための[Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-17.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-17.jpg?auto=compress)
 
 Capgoは汎用クラウドプロバイダーを超えて、Capacitor OTAアップデート専用のソリューションを提供します。5 MBのバンドルを114 msでダウンロードし、グローバルでの平均API応答時間が434 msという効率的なアップデート配信を実現します。これにより、アップデートの高速性と信頼性が確保されます。
 

@@ -30,7 +30,7 @@ Capacitor CLI simplifica el desarrollo y mantenimiento de aplicaciones. Sigue la
 
 ## ¡Construye una Aplicación Móvil Rápido! React + [Capacitor](https://capacitorjs.com/) + [Tailwind](https://tailwindcss.com/) + [DaisyUI](https://daisyui.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/PPXktTJXMPE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -281,7 +281,7 @@ Una vez que todo esté funcionando sin problemas, puedes avanzar con la explorac
 
 ## Actualizaciones en Vivo con [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ef362eebbb9dc80641f34f/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
 
 Simplifica [las actualizaciones de aplicaciones](https://capgo.app/plugins/capacitor-updater/) utilizando Capgo. Te permite enviar actualizaciones directamente a los usuarios, saltándote la necesidad de revisiones en la tienda de aplicaciones.
 

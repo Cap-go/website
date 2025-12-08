@@ -42,7 +42,7 @@ Ecco come integrare OAuth2 nella tua [app Capacitor](https://capgo.app/plugins/i
 
 ## Come aggiungere l'Accesso Google usando [Capacitor](https://capacitorjs.com/) alla tua App [Ionic](https://ionicframework.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/683598e6d3b96619818496d3/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/683598e6d3b96619818496d3/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ## Step 1: Configura il tuo Provider [OAuth2](https://en.wikipedia.org/?title=OAuth2&redirect=no)
 

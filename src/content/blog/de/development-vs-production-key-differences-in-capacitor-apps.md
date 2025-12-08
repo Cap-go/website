@@ -182,7 +182,7 @@ Capgo kann diesen Prozess noch weiter optimieren, besonders bei Updates.
 
 ### [Capgo](https://capgo.app/) für Updates nutzen
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
 
 Capgo vereinfacht den Update-Prozess mit Funktionen, die Zeit sparen und die Sicherheit verbessern.
 

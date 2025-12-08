@@ -87,7 +87,7 @@ Pour les données sensibles comme les clés API et les certificats, assurez-vous
 
 ## Guide d'intégration de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Une fois que vous avez configuré vos étapes de construction et de déploiement, il est temps d'intégrer Capgo. Cela vous permet de pousser des mises à jour en direct directement dans votre application, contournant les délais d'approbation de l'App Store.
 

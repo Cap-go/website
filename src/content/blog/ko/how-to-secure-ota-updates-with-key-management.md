@@ -166,7 +166,7 @@ Capgo는 이 프로세스를 더욱 발전시켜 의도된 수신자만 업데�
 
 ### [Capgo](https://capgo.app/) 보안 도구
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ea1c64283d21cbd67bff14/f3ac818a2fec22e90998e19561d68a19.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ea1c64283d21cbd67bff14/f3ac818a2fec22e90998e19561d68a19.jpg)
 
 Capgo와 같은 현대적인 솔루션은 강력한 보안 조치로 OTA 업데이트 전달을 단순화하여 이러한 이점을 강조합니다. 750개의 프로덕션 앱을 지원하는 [\[1\]](https://capgo.app/) Capgo는 고급 암호화와 기타 주요 기능을 통해 업데이트 보안을 강화합니다.
 

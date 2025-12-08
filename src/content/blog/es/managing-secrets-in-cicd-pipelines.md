@@ -88,7 +88,7 @@ Muchas herramientas CI/CD vienen con capacidades integradas de gestión de secre
 
 ### Características de Seguridad de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 Capgo mejora la seguridad de las actualizaciones en vivo en aplicaciones Capacitor mediante la extensión de la gestión estándar de secretos CI/CD. Utiliza cifrado de extremo a extremo para asegurar que solo los usuarios autorizados puedan descifrar datos sensibles [\[1\]](https://capgo.app/).
 

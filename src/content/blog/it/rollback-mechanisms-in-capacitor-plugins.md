@@ -65,7 +65,7 @@ I rollback sono essenziali quando un aggiornamento causa problemi come bug criti
 
 ### Architettura di Rollback [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Il sistema di rollback in Capacitor si basa su tre componenti principali per gestire efficacemente le versioni:
 
@@ -122,7 +122,7 @@ La gestione efficace dei rollback richiede strumenti che possano gestire il vers
 
 ### [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
 
 Capgo è emerso come una solida soluzione di gestione rollback dopo la chiusura di [Microsoft Code Push](https://learnmicrosoftcom/en-us/appcenter/distribution/codepush/) nel 2024. Semplifica gli aggiornamenti dei plugin con una serie di funzionalità:
 

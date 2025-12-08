@@ -268,7 +268,7 @@ Après l'installation, configurez les plugins dans vos projets natifs. Voici un 
 
 ### Mises à jour en direct avec [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-28.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-28.jpg?auto=compress)
 
 Pour simplifier le déploiement et le test, vous pouvez intégrer des outils de mise à jour en direct comme Capgo. Ce service a déjà livré plus de 23,5 millions de mises à jour, avec 95 % des utilisateurs recevant des mises à jour dans les 24 heures et un taux de réussite mondial de 82 % [\[1\]](https://capgo.app/).
 

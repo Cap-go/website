@@ -85,7 +85,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) OTAアップデートの説明
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-08.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-08.jpg?auto=compress)
 
 Over-the-air（OTA）アップデートは、モバイルアプリのメンテナンスとアップデート方法を変革しました。[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)の場合、この方法により開発者はアプリストアのレビューを待たずに直接ユーザーに変更を届けることができます。### 主要コンポーネント
 
@@ -116,7 +116,7 @@ Capgoはセキュリティを確保し、CI/CDワークフローとシームレ�
 
 ### [Capgo](https://capgo.app/) OTAアップデートプラットフォーム
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-08.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-08.jpg?auto=compress)
 
 CapgoはCapacitorアプリ向けの一流OTAソリューションで、[アップデート管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/) を簡素化するツールを提供します：
 

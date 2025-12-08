@@ -106,7 +106,7 @@ RBAC ensures secure over-the-air (OTA) updates in Capacitor apps by using detail
 
 ### [Capgo](https://capgo.app/)'s RBAC Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Capgo builds on these ideas with an open-source platform offering true end-to-end encryption and role-based permissions. This allows secure and scalable [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) across multiple organizations [\[1\]](https://capgo.app/).
 

@@ -206,7 +206,7 @@ With security measures in place, the next step is ensuring a smooth update exper
 
 ## [Capgo](https://capgo.app/): OTA Update Platform
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-28.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-28.jpg?auto=compress)
 
 Capgo offers a reliable way to handle app store-compliant over-the-air (OTA) updates, building on the practices mentioned earlier.
 

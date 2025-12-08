@@ -143,7 +143,7 @@ Capgo는 엔드-투-엔드 암호화와 고급 보안 프로토콜을 갖춘 "�
 
 ### [Capgo](https://capgo.app/) 플랫폼 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
 
 신뢰할 수 있는 OTA 업데이트 플랫폼은 이러한 사례를 통합하여 배포를 안전하고 단순화합니다. 필수 보안 기능을 제공하는 플랫폼을 찾으십시오.
 

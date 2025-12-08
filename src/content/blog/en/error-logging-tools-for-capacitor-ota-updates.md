@@ -39,7 +39,7 @@ Each tool offers unique benefits depending on your team's needs, budget, and exp
 
 ## [Sentry](https://sentry.io/) and Capacitor: How to Build and Monitor User Experiences
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/shzKcE79GXI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -77,13 +77,13 @@ Bugsnag, on the other hand, focuses on error prioritization and app stability.
 
 ### [Bugsnag](https://www.bugsnag.com/): Error Management
 
-![Bugsnag](https://mars-images.imgix.net/seobot/screenshots/www.bugsnag.com-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
+![Bugsnag Error Monitoring Dashboard](https://mars-images.imgix.net/seobot/screenshots/www.bugsnag.com-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
 
 Bugsnag helps prioritize errors and monitor app stability. Its stability scoring feature evaluates how OTA updates affect overall app performance. Additional features include automated error grouping, release tracking, and integration with CI/CD pipelines.
 
 ### [Capgo](https://capgo.app/): Built-in Error Tracking
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Capgo takes a different approach by embedding error tracking directly into its OTA update process.
 

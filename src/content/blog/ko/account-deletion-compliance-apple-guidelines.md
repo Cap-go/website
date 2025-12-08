@@ -108,7 +108,7 @@ Capgo와 함께 Capacitor를 사용하는 개발자의 경우, 실시간 업데�
 
 ### [Capgo](https://capgo.app/) 업데이트 관리
 
-![Capgo](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 실시간 업데이트 관리는 플랫폼과 플러그인 전반에 걸쳐 규정 준수를 유지하는 데 중요한 역할을 합니다. 여기서 **Capgo**는 계정 삭제 업데이트 관리 프로세스를 단순화할 수 있습니다.
 

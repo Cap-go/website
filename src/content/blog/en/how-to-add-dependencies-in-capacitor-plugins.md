@@ -56,7 +56,7 @@ next_blog: ''
 
 ## How to create a [Capacitor](https://capacitorjs.com/) plugin for iOS/Android
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-27.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-27.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Dq_BmheGAig" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -332,7 +332,7 @@ Set up Android dependencies to ensure smooth native integration. Here's how to m
 
 ### [Gradle](https://gradle.org/) Dependencies
 
-![Gradle](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-27.jpg?auto=compress)
+![Gradle Build Tool Interface](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-27.jpg?auto=compress)
 
 Add the following configurations to your `build.gradle` file:
 
@@ -434,7 +434,7 @@ org.gradle.jvmargs=-Xmx2048m
 
 ## [Capgo](https://capgo.app/) Integration
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Using Capgo alongside native and JavaScript dependency management makes updating your plugin faster and easier.
 

@@ -295,7 +295,7 @@ Jika perintah CLI tidak menyelesaikan masalah, periksa repositori GitHub plugin 
 
 ## Integrasi [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Capgo bekerja lancar dengan CLI Capacitor, memungkinkan [pembaruan plugin waktu nyata](https://capgo.app/docs/plugin/self-hosted/auto-update) dan menyederhanakan tugas pemeliharaan untuk pengembang.
 

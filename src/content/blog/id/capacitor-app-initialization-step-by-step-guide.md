@@ -267,7 +267,7 @@ Setelah instalasi, konfigurasikan plugin di proyek native Anda. Berikut ikhtisar
 
 ### Pembaruan Langsung dengan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-28.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-28.jpg?auto=compress)
 
 Untuk menyederhanakan penerapan dan pengujian, Anda dapat mengintegrasikan alat pembaruan langsung seperti Capgo. Layanan ini telah mengirimkan lebih dari 23,5 juta pembaruan, dengan 95% pengguna menerima pembaruan dalam 24 jam dan tingkat keberhasilan global 82% [\[1\]](https://capgo.app/).
 

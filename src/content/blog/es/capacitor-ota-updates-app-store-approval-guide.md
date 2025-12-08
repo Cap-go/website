@@ -103,7 +103,7 @@ Para evitar estos problemas, es crucial seguir las pautas de implementación esp
 
 ## Pautas de Actualizaciones OTA para [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
 
 ### Pasos de Cumplimiento Técnico
 
@@ -151,7 +151,7 @@ Estas medidas de seguridad se alinean con los requisitos de firma de código de 
 
 ## Sistema de Gestión de Actualizaciones [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
 Capgo proporciona una forma segura de entregar y gestionar [actualizaciones OTA de Capacitor](https://capgo.app/), asegurando una distribución fluida mientras cumple con los estándares de conformidad. También ofrece herramientas avanzadas para la [gestión de actualizaciones](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) a nivel empresarial.
 

@@ -269,7 +269,7 @@ Live update systems cut out the delays of app store approvals, making deployment
 
 ### [Capgo](https://capgo.app/) Update Integration
 
-![Capgo](https://assets.seobotai.com/capgo.app/682dbf604fa53d42207ee932/b22e3ca8adc90efccae83141abc5debd.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682dbf604fa53d42207ee932/b22e3ca8adc90efccae83141abc5debd.jpg)
 
 Capgo’s live update integration speeds up deployment times significantly - 95% of users update within 24 hours [\[10\]](https://capgo.app). Here’s how you can configure differential updates:
 

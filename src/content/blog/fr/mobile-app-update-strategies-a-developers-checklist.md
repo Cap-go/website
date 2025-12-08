@@ -116,7 +116,7 @@ Une fois votre pipeline prêt, l'ajout de mises à jour OTA rend la livraison de
 
 ### Utilisation des mises à jour OTA [Capacitor](https://capacitorjs.com/) avec [Capgo](https://capgo.app/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
 
 Capgo rend les mises à jour OTA simples, sécurisées et rapides avec des fonctionnalités comme le chiffrement et la conformité. Voici comment commencer :
 

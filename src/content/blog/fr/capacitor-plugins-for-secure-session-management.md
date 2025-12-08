@@ -107,7 +107,7 @@ Pour les applications d'entreprise, Identity Vault offre une solution de gestion
 
 ## 5. [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/e81a00d3e5c2480025c05b94a848a495.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/e81a00d3e5c2480025c05b94a848a495.jpg)
 
 Capgo va au-delà des solutions de stockage robuste et biométrique en offrant une gestion sécurisée des sessions couplée à la livraison de mises à jour en direct. Avec un accent fort sur l'intégrité des données, Capgo garantit que les données de session restent protégées grâce au **chiffrement de bout en bout** et aux mises à jour en temps réel.
 

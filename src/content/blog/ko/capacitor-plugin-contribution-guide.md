@@ -212,7 +212,7 @@ fun testBatteryLevel() {
 
 ### [Capgo](https://capgo.app/)를 통한 OTA 테스트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
 
 Capgo의 오픈소스 도구를 사용하면 쉽게 업데이트를 배포하고 테스트할 수 있습니다. 사용 방법:
 

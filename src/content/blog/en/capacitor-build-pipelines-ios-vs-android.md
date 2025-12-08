@@ -124,7 +124,7 @@ Both platforms require developers to follow specific security protocols to ensur
 
 ### [Capgo](https://capgo.app/) Update System
 
-![Capgo](https://assets.seobotai.com/capgo.app/682a1cea5642a17d106e7413/3f08bf3ebb984c6cd433c331def99e48.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682a1cea5642a17d106e7413/3f08bf3ebb984c6cd433c331def99e48.jpg)
 
 Managing live updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) involves [platform-specific storage](https://capgo.app/plugins/capacitor-data-storage-sqlite/) and configuration. On **iOS**, update paths are stored in `UserDefaults` under `/Library/NoCloud/ionic_built_snapshots`. For **Android**, updates rely on `SharedPreferences` and are deployed using the `serverBasePath` in `CapWebViewSettings` [\[9\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
 

@@ -30,7 +30,7 @@ next_blog: ''
 
 ## [Ionic](https://ionicframework.com/)에서 [Capacitor](https://capacitorjs.com/)를 사용한 [Sentry](https://sentry.io/) 오류 로깅
 
-![Ionic](https://assets.seobotai.com/capgo.app/67fc8d0aaf1a45e500bcc0f5/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/67fc8d0aaf1a45e500bcc0f5/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 <iframe src="https://www.youtube.com/embed/REiJTqu3-88" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

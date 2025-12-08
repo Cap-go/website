@@ -62,7 +62,7 @@ Autentikasi mutual TLS (Transport Layer Security) memastikan klien dan server me
 
 ### Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-25.jpg?auto=compress)
 
 Capgo menawarkan solusi yang efisien dan aman untuk mengelola pembaruan OTA. Dengan lebih dari 23,5 juta pembaruan yang dikirimkan di 750 aplikasi produksi, Capgo menyediakan:
 

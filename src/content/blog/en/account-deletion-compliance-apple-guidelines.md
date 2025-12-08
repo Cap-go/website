@@ -107,7 +107,7 @@ After handling platform-wide deletion, you’ll need to address plugin-specific 
 
 ### [Capgo](https://capgo.app/) Update Management
 
-![Capgo](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Real-time update management plays a pivotal role in maintaining compliance across platforms and plugins. This is where **Capgo** can simplify the process of managing account deletion updates.
 

@@ -222,7 +222,7 @@ Bersiaplah untuk masalah kepatuhan dengan membuat rencana tanggap:
 
 ## [Capgo](https://capgo.app/) untuk Pembaruan Aplikasi Tiongkok
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 Capgo menawarkan alat yang dirancang untuk menyederhanakan pembaruan real-time sambil memastikan aplikasi Anda mematuhi peraturan Tiongkok. Alat-alat ini penting untuk menjaga aplikasi Anda tetap berjalan lancar dan memenuhi persyaratan lokal.
 

@@ -117,7 +117,7 @@ Fitur keamanan native Capacitor berfungsi sebagai fondasi yang kuat, namun alat 
 
 ### [Capgo](https://capgo.app): Update OTA yang Aman
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
 
 Capgo dirancang khusus untuk mengelola update over-the-air (OTA) yang aman dalam aplikasi Capacitor. Ini memastikan integritas kode dengan fitur seperti:
 

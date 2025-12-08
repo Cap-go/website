@@ -212,7 +212,7 @@ For plugins with complex features, simulate real-world user scenarios. For insta
 
 ### OTA Testing with [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
 
 Capgo’s open-source tools make it easy to deploy and test updates quickly. Here’s how to use it:
 

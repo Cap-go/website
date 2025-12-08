@@ -49,7 +49,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 업데이트 기능
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### 내장 업데이트 시스템
 

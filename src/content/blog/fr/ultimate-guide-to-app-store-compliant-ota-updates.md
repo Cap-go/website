@@ -209,7 +209,7 @@ Avec des mesures de sécurité en place, l'étape suivante consiste à garantir 
 
 ## [Capgo](https://capgo.app/): Plateforme de mise à jour OTA
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-28.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-28.jpg?auto=compress)
 
 Capgo offre un moyen fiable de gérer les mises à jour over-the-air (OTA) conformes aux magasins d'applications, s'appuyant sur les pratiques mentionnées précédemment.
 

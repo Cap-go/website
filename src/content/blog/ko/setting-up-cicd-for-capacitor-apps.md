@@ -69,7 +69,7 @@ xcode-select -p
 
 ### [Capacitor](https://capacitorjs.com/) 프로젝트 생성
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-11.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-11.jpg?auto=compress)
 
 CI/CD 워크플로우를 위해 Capacitor 프로젝트가 올바르게 구성되어야 합니다. `capacitor.config.ts` 파일이 이 설정의 핵심입니다:
 

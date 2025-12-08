@@ -158,7 +158,7 @@ S'appuyant sur un déploiement et des tests sécurisés, des outils solides de g
 
 ### Aperçu des fonctionnalités de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
 
 Capgo fournit une sécurité avancée pour les [mises à jour OTA Capacitor](https://capgo.app/ja/) avec un **chiffrement de bout en bout**, garantissant que seuls les utilisateurs autorisés peuvent déchiffrer les mises à jour.
 

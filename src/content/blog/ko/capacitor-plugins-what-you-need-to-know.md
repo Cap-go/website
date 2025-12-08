@@ -36,7 +36,7 @@ Capacitor의 플러그인 시스템은 네이티브 성능을 유지하면서 �
 
 ## 자신만의 [Capacitor](https://capacitorjs.com/) 플러그인 만들기
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Nf-mOfmD7X4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -134,7 +134,7 @@ Capacitor 앱에 플러그인을 추가하는 것은 성능과 보안을 모두 
 
 ### [Capgo](https://capgo.app/): 앱을 위한 실시간 업데이트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
 
 Capgo는 Capacitor와 원활하게 작동하는 [실시간 업데이트 플러그인](https://capgo.app/docs/plugin/self-hosted/auto-update/)을 제공합니다. 이 플러그인은 버그 수정이나 새로운 기능과 같은 업데이트를 암호화된 채널을 통해 앱에 직접 배포할 수 있게 해주며, 앱 스토어 정책을 준수합니다 [\[3\]](https://github.com/riderx/awesome-capacitor).
 

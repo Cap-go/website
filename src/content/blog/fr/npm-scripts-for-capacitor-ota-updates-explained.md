@@ -47,7 +47,7 @@ Avec des plateformes comme Capgo offrant des mises à jour rapides (95% d'adopti
 
 ## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) Ionic de Capawesome ...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -275,7 +275,7 @@ Le choix de la bonne plateforme de mise à jour OTA est crucial pour intégrer e
 
 ### Fonctionnalités de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04cc402ef2e8f7dc781d2b86cd364db3.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04cc402ef2e8f7dc781d2b86cd364db3.jpg)
 
 Capgo est conçu spécifiquement pour les mises à jour OTA Capacitor, offrant une vitesse de mise à jour moyenne de 434 millisecondes et atteignant un taux de mise à jour utilisateur de 95 % [\[1\]](https://capgo.app/). Il fournit une intégration transparente avec les scripts npm, comme montré dans l'exemple ci-dessous :
 

@@ -127,7 +127,7 @@ Combinar este enfoque con las herramientas adecuadas asegura un proceso robusto 
 
 ### Usando [Capgo](https://capgo.app/) para Actualizaciones
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ff1c0bb0912f75a97f349a/bff1fb0606ef072e3c605788ba21e2a7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ff1c0bb0912f75a97f349a/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
 Capgo simplifica las actualizaciones OTA con características diseñadas para mejorar la eficiencia:
 

@@ -28,7 +28,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) CI/CD를 위한 병합 정책 기본
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6809ac119bd9ce97f26bdef5/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6809ac119bd9ce97f26bdef5/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### 병합 정책이란 무엇인가요?
 

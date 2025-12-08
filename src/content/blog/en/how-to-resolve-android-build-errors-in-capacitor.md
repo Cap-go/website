@@ -157,7 +157,7 @@ dependencies {
 
 ### Understanding [Gradle](https://gradle.org/) Outputs
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 Use `./gradlew app:dependencies` and enable build scans to uncover dependency conflicts or script issues. These tools provide a detailed view of your project's setup.
 
@@ -236,7 +236,7 @@ For immediate updates without resubmitting to app stores, consider using Capgo's
 
 ## Using [Capgo](https://capgo.app/) for Quick Fixes
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 When facing Android build errors in Capacitor, resolving issues quickly is key to avoiding delays and keeping your project on track. Here's how Capgo helps you deploy fixes instantly.
 

@@ -87,7 +87,7 @@ Estas herramientas complementan la depuración basada en navegador al abordar de
 
 ### Comandos de Depuración de [Capacitor](https://capacitorjs.com/) CLI
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 El CLI de Capacitor incluye comandos útiles para agilizar la depuración:
 
@@ -294,7 +294,7 @@ Si usas source maps en producción, restringe el acceso a desarrolladores autori
 
 ## Usando [Capgo](https://capgo.app/) para Actualizaciones Rápidas
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Basándose en sólidas [técnicas de depuración](https://capgo.app/docs/plugin/debugging/), herramientas como Capgo facilitan mantener tu aplicación estable permitiendo actualizaciones instantáneas. Capgo permite a los desarrolladores enviar actualizaciones sin esperar aprobaciones de la tienda de aplicaciones, manteniendo intactas las características de depuración.
 

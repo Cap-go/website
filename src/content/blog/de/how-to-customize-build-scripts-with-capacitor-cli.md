@@ -39,7 +39,7 @@ next_blog: ''
 
 ## Einführung in [Capacitor](https://capacitorjs.com/) Configure
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67ec7f117747adc4bca87873/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67ec7f117747adc4bca87873/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <Steps>
 1. Konfiguration einrichten
@@ -312,7 +312,7 @@ Zusätzliche Tipps zum Testen:
 
 ## [Capgo](https://capgo.app/) Build-Funktionen
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ec7f117747adc4bca87873/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ec7f117747adc4bca87873/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo hebt Build-Skripte mit automatisiertem Deployment auf die nächste Stufe und verbessert die Effizienz und vereinfacht den Prozess.
 

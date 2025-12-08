@@ -93,7 +93,7 @@ Capacitorで構築されたアプリの場合、頻繁な更新により同意�
 
 ## [Capacitor](https://capacitorjs.com/)アプリでの同意設定
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### 同意UIの作成
 
@@ -152,7 +152,7 @@ AppleとGoogleには、同意管理に関する特定のルールがあります
 
 ### [Capgo](https://capgo.app/)の更新機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
 
 Capgoは、Capacitorアプリの同意管理を簡略化するためにライブアップデートを活用します。24時間以内に**95%のユーザー更新率**と、更新に関して世界的に**82%の成功率**を達成しています[\[1\]](https://capgo.app/) 。
 

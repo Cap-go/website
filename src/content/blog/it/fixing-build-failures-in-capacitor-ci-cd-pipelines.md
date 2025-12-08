@@ -45,7 +45,7 @@ next_blog: ''
 
 ## Principali Tipi di Errori di Build di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Gli errori di build di Capacitor possono derivare da varie fonti, ognuna richiedente soluzioni specifiche. Di seguito, analizzeremo alcune delle cause più comuni e come si manifestano durante il processo di build.
 
@@ -265,7 +265,7 @@ Per le build iOS, verifica la compatibilità con Xcode e le configurazioni di fi
 
 ## Utilizzare [Capgo](https://capgo.app/) per Gestire i Fallimenti delle Build
 
-![Capgo](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 Capgo fornisce una suite di strumenti progettati per aiutare i team a gestire i fallimenti delle build nelle [pipeline CI/CD di Capacitor](https://capgo.app/blog/automatic-capacitor-android-build-gitlab/). Combinando monitoraggio, configurazioni sicure e analisi approfondite, supporta i team nell'identificazione, risoluzione e prevenzione dei problemi di build. Di seguito, esploreremo come Capgo semplifica questi processi per migliorare l'efficienza CI/CD.
 

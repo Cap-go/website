@@ -116,7 +116,7 @@ Live updates take compliance to the next level by bridging the gap between detec
 
 ### [Capgo](https://capgo.app/) Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/6806fd96e572faef8699cea8/3963f7973abbc5791f2fae6e45924907.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6806fd96e572faef8699cea8/3963f7973abbc5791f2fae6e45924907.jpg)
 
 Capgo ensures swift compliance updates, with 95% of active users receiving updates within 24 hours and an 82% success rate globally [\[1\]](https://capgo.app/). The platform combines key compliance tools with an efficient [update management](https://capgo.app/docs/plugin/cloud-mode/manual-update/) system:
 

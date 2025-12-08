@@ -140,7 +140,7 @@ async function testRateLimits() {
 
 ## [Capgo](https://capgo.app/)의 속도 제한 도구
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo는 높은 성능과 앱 스토어 요구사항 준수를 보장하면서 API 속도 제한을 적용하도록 설계된 통합 도구를 제공합니다.
 

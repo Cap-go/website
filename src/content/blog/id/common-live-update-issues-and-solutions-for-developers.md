@@ -64,7 +64,7 @@ Berikut cara pendekatan kontrol versi:
 
 ### Menggunakan [Capgo](https://capgo.app/) untuk Update OTA
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
 
 Capgo adalah tools yang powerful untuk mengelola update OTA. Menawarkan fitur seperti monitoring bawaan, opsi rollback, dan pengiriman yang aman melalui enkripsi end-to-end. Plus, integrasi CI/CD-nya membuat deployment lebih lancar [\[3\]](https://appinventiv.com/blog/how-ci-cd-helps-mobile-app-development/).
 

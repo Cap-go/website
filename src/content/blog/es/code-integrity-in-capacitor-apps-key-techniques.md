@@ -117,7 +117,7 @@ Las características de seguridad nativas de Capacitor sirven como una base sól
 
 ### [Capgo](https://capgo.app): Actualizaciones OTA Seguras
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
 
 Capgo está diseñado específicamente para gestionar actualizaciones seguras over-the-air (OTA) en aplicaciones Capacitor. Asegura la integridad del código con características como:
 

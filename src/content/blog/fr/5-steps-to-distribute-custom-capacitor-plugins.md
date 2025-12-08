@@ -31,7 +31,7 @@ Ce processus étape par étape garantit que votre plugin est bien construit, fac
 
 ## Comment créer un plugin [Capacitor](https://capacitorjs.com/) pour iOS/Android
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ## Étape 1 : Construire et Tester Votre Plugin
 
@@ -120,7 +120,7 @@ Une fois que vous avez confirmé que tout fonctionne, vous êtes prêt à intég
 
 ### Configuration des Mises à Jour en Direct [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 **Pourquoi utiliser Capgo ?** Il offre une gamme de fonctionnalités pour rationaliser les mises à jour :
 

@@ -78,7 +78,7 @@ Con tus usuarios agrupados, puedes diseñar [estrategias de actualización](http
 
 ## Usando [Capgo](https://capgo.app/) para la Segmentación de Usuarios
 
-![Capgo](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgo ofrece herramientas que facilitan dirigirse a actualizaciones para grupos de usuarios específicos con precisión, gracias a sus características de segmentación por frecuencia de uso. Estas capacidades refinan las estrategias de actualización dirigidas discutidas anteriormente.
 

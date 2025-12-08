@@ -114,7 +114,7 @@ Setelah pipeline Anda siap, menambahkan pembaruan OTA membuat pengiriman perubah
 
 ### Menggunakan Pembaruan OTA [Capacitor](https://capacitorjs.com/) dengan [Capgo](https://capgo.app/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
 
 Capgo membuat pembaruan OTA menjadi sederhana, aman, dan cepat dengan fitur seperti enkripsi dan kepatuhan. Berikut cara memulainya:
 

@@ -53,7 +53,7 @@ next_blog: ''
 
 ## [Capgo](https://capgo.app/)プラットフォームの特徴
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 [Capgoプラットフォーム](https://capgo.app/docs/webapp/)は、Capacitorの更新機能を強化し、セキュリティの追加や高度なデプロイメントオプションを提供します。750の本番アプリで2350万回の更新を管理し [\[1\]](https://capgo.app/)、パフォーマンス向上のための重要な機能を提供しています。
 
@@ -245,7 +245,7 @@ OTAアップデートのベストプラクティスについての簡単な概�
 
 ### [Capgo](https://capgo.app/) の機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e211687856e801f1f2973e/248f5ad4814006d64d1f6a7ab727c6b9.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e211687856e801f1f2973e/248f5ad4814006d64d1f6a7ab727c6b9.jpg)
 
 Capgoはこれらのベストプラクティスに従い、信頼できるOTAアップデートを実現しています。現在、Capgoは750の運用中アプリをサポートし、2350万回の更新を成功裏に配信しています [\[1\]](https://capgo.app/) 。
 

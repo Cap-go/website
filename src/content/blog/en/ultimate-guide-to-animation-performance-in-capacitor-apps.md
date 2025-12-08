@@ -24,7 +24,7 @@ next_blog: ''
 
 ### Quick Comparison of Animation Performance in [Capacitor](https://capacitorjs.com/) Apps
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68303244d3b96619817e58e3/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68303244d3b96619817e58e3/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 | **Platform** | **Rendering Approach** | **Performance Level** |
 | --- | --- | --- |
@@ -265,7 +265,7 @@ For Capacitor developers, the challenge lies in balancing rich animations with c
 
 ## Using [Capgo](https://capgo.app/) for Animation Performance Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/68303244d3b96619817e58e3/5b6bff845d4f518aae19a2192d6260cf.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68303244d3b96619817e58e3/5b6bff845d4f518aae19a2192d6260cf.jpg)
 
 When performance hiccups appear after deployment, ensuring smooth animations becomes crucial. Capgo steps in by enabling instant fixes and optimizations, bypassing the usual delays of app store approvals. This real-time update capability works hand-in-hand with earlier optimization efforts, ensuring your app continues to deliver a seamless user experience across all platforms.
 

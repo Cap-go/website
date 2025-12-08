@@ -51,7 +51,7 @@ next_blog: ''
 
 ## Cómo Solucionar el Comando Dev de Quasar-Framework y [Capacitor](https://capacitorjs.com/) ...
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/0E0en7ulaWg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -151,7 +151,7 @@ Gestionar actualizaciones OTA efectivamente requiere herramientas que manejen el
 
 ### Usando Actualizaciones de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/5667dd288bf82910fbf4a9affbd7b492.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/5667dd288bf82910fbf4a9affbd7b492.jpg)
 
 Capgo es una plataforma popular para manejar actualizaciones OTA de Capacitor, presumiendo un impresionante registro de entrega de 1155.1 mil millones de actualizaciones con una tasa de éxito global del 82% [\[1\]](https://capgo.app/). Aborda desafíos comunes de CLI a través de las siguientes características:
 

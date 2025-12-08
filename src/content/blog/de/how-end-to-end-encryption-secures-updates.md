@@ -72,7 +72,7 @@ Dieser mehrstufige Prozess stellt sicher, dass Updates von ihrer Erstellung bis 
 
 ## Ende-zu-Ende-Verschlüsselung in [Capacitor](https://capacitorjs.com/) einrichten
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Dieser Abschnitt erklärt, wie man Ende-zu-Ende-Verschlüsselung in [Capacitor-Apps](https://capgo.app/blog/capacitor-comprehensive-guide/) implementiert, aufbauend auf den zuvor behandelten Konzepten.
 

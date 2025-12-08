@@ -41,7 +41,7 @@ Each tool offers unique benefits depending on your team's needs, budget, and exp
 
 ## [Sentry](https://sentry.io/) and Capacitor: How to Build and Monitor User Experiences
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/shzKcE79GXI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -79,13 +79,13 @@ LogRocket을 사용하면 세션 재생 기능을 통해 OTA 업데이트 중 �
 
 ### [Bugsnag](https://www.bugsnag.com/): 오류 관리
 
-![Bugsnag](https://mars-images.imgix.net/seobot/screenshots/www.bugsnag.com-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
+![Bugsnag Error Monitoring Dashboard](https://mars-images.imgix.net/seobot/screenshots/www.bugsnag.com-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
 
 Bugsnag은 오류의 우선순위를 지정하고 앱 안정성을 모니터링하는 데 도움을 줍니다. 안정성 점수 기능은 OTA 업데이트가 전반적인 앱 성능에 미치는 영향을 평가합니다. 추가 기능으로는 자동화된 오류 그룹화, 릴리스 추적, CI/CD 파이프라인과의 통합이 있습니다.
 
 ### [Capgo](https://capgo.app/): 내장된 오류 추적
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Capgo는 OTA 업데이트 프로세스에 오류 추적을 직접 내장하는 다른 접근 방식을 취합니다.
 

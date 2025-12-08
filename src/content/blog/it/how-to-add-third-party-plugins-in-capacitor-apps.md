@@ -43,7 +43,7 @@ Esto es lo que aprenderás:
 
 ## [Capacitor](https://capacitorjs.com/) + Nx = Desarrollo de Plugins Multiplataforma
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 ## Antes de Comenzar
 
@@ -308,7 +308,7 @@ Para problemas em andamento, verifique o repositório do plugin no GitHub para q
 
 ## Usando [Capgo](https://capgo.app/) para Atualizações
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Depois de resolver problemas comuns de integração, o Capgo facilita a gestão de atualizações para seus [aplicativos Capacitor](https://capgo.app/top_capacitor_app/).
 

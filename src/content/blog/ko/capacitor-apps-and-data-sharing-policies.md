@@ -122,7 +122,7 @@ Capgo와 같은 보안 업데이트 시스템을 사용하면 규정 준수율�
 
 ### [Capgo](https://capgo.app/) 보안 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
 
 Capgo의 보안 인프라는 개발자에게 규정 준수를 유지하는 데 도움이 되는 도구를 제공합니다. 주요 기능은 다음과 같습니다:
 

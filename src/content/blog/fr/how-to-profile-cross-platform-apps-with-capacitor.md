@@ -102,7 +102,7 @@ Une fois le profilage web terminé, passez à l'analyse de performance iOS.
 
 ### Profilage iOS avec [Xcode](https://developer.apple.com/xcode/)
 
-![Xcode](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Dans Xcode, accédez à **Produit > Profil (⌘I)** et sélectionnez un modèle de profilage :
 
@@ -154,7 +154,7 @@ Post-déploiement, surveillez des métriques importantes telles que les temps de
 
 ### Mises à Jour Rapides avec [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
 
 Capgo simplifie le processus de mise à jour en offrant des mises à jour chiffrées et échelonnées avec des fonctions de retour arrière automatiques. Il fournit également des analyses en temps réel, vous aidant à contourner les retards des magasins d'applications et garantissant que les mises à jour atteignent vos utilisateurs rapidement et efficacement.
 

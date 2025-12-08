@@ -84,7 +84,7 @@ API 키와 인증서와 같은 민감한 데이터는 CI 플랫폼의 보안 관
 
 ## [Capgo](https://capgo.app/) 통합 가이드
 
-![Capgo](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 빌드 및 배포 단계를 설정한 후에는 Capgo를 통합할 차례입니다. 이를 통해 앱 스토어 승인 지연을 우회하여 앱에 직접 실시간 업데이트를 푸시할 수 있습니다.
 

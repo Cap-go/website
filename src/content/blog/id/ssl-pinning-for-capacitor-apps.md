@@ -69,7 +69,7 @@ Langkah pertama adalah memilih plugin yang bekerja dengan baik untuk iOS dan And
 
 ### Mengkonfigurasi Aplikasi [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Setelah Anda memilih plugin, langkah selanjutnya adalah menyiapkan aplikasi Capacitor Anda untuk mengaktifkan SSL pinning. Berikut adalah contoh konfigurasi Anda:
 

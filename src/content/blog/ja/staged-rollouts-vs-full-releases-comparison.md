@@ -214,7 +214,7 @@ Capgoは、更新の世界的な成功率が82%で、世界中での平均APIレ
 
 ## [Capgo](https://capgo.app/)のリリース管理機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgoは、効果的なリリース戦略を基に、ステージドおよびフルリリースプロセスを簡素化し改善するように設計されたツールを提供します。
 

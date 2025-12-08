@@ -183,7 +183,7 @@ Bei der Verwaltung von Live-Updates ist es wichtig, wichtige Details wie die Bun
 
 ### [Capgo](https://capgo.app/) Update-Verwaltung
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Für Live-OTA-Updates ist eine detaillierte Dokumentation unerlässlich, um Ihre gesamte Changelog-Strategie zu ergänzen. Capgo vereinfacht diesen Prozess, indem es automatisch Versionen verfolgt, die Aktualisierungsleistung überwacht, Rollbacks protokolliert und Bereitstellungen nach Kanal aufzeichnet.
 

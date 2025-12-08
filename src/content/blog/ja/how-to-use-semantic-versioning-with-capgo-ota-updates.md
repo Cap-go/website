@@ -62,7 +62,7 @@ Capgoは、中断を処理し安定性を維持するためのツールととも
 
 ## [Capgo](https://capgo.app/)セットアップガイド
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
 
 OTAアップデートとバージョン管理を簡単に管理するためのCapgoのセットアップ方法を説明します。
 

@@ -44,7 +44,7 @@ Bleiben Sie konform, sicher und effizient mit angemessenen CI/CD-Praktiken für 
 
 ## CI/CD-Pipelines für [Capacitor](https://capacitorjs.com/) aufbauen
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
 
 Eine gut gestaltete CI/CD-Pipeline vereinfacht die Bereitstellung und hilft sicherzustellen, dass Ihre App durchgängig die App-Store-Richtlinien erfüllt.
 
@@ -108,7 +108,7 @@ Die Verwendung integrierter Tools für die Compliance-Automatisierung kann diese
 
 ### [Capgo](https://capgo.app/)'s Compliance-Tools
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgo verbessert Compliance-Workflows mit Tools, die sich direkt in Ihre CI/CD-Pipeline integrieren lassen. So kann Capgo helfen:
 

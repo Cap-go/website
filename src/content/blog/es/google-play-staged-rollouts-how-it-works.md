@@ -175,7 +175,7 @@ Los estudios muestran que los lanzamientos graduales bien ejecutados logran una 
 
 ### Cómo [Capgo](https://capgo.app/) Agrega Valor
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Para aplicaciones de [Capacitor](https://capacitorjs.com/), Capgo agiliza los lanzamientos graduales ofreciendo una gestión precisa de actualizaciones mientras cumple con las pautas de Google Play. Su sistema de canales se integra perfectamente con los planes de lanzamiento existentes
 

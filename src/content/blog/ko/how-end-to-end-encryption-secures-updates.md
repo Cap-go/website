@@ -69,7 +69,7 @@ Capgo는 이 접근 방식을 강조하면서 말합니다:
 
 ## [Capacitor](https://capacitorjs.com/)에서 종단 간 암호화를 설정하는 방법
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 이 섹션에서는 이전에 다룬 개념을 기반으로 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)에서 종단 간 암호화를 구현하는 방법을 설명합니다.
 

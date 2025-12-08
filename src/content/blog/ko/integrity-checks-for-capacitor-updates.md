@@ -59,7 +59,7 @@ TLS(Transport Layer Security) 상호 인증은 클라이언트와 서버가 서�
 
 ### [Capgo](https://capgo.app/)를 사용한 업데이트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-25.jpg?auto=compress)
 
 Capgo는 OTA 업데이트 관리를 위한 간소화되고 안전한 솔루션을 제공합니다. 750개의 프로덕션 앱에서 2,350만 건 이상의 업데이트를 제공한 Capgo는 다음을 제공합니다:
 

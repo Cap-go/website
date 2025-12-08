@@ -36,13 +36,13 @@ next_blog: ''
 
 ## [Appflow](https://ionic.io/appflow/) Deploy: Ionic 앱 사용자에게 실시간 업데이트 배포
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capacitor](https://capacitorjs.com/) OTA 업데이트 설명
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21.jpg?auto=compress)
 
 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)의 OTA 업데이트는 출시 후 앱 유지보수를 단순화합니다. 전체 앱스토어 제출을 요구하는 대신, 개발자가 사용자에게 직접 업데이트를 푸시할 수 있습니다.
 
@@ -63,7 +63,7 @@ OTA 업데이트는 네이티브 코드를 변경하지 않고 웹 레이어(HTM
 
 ### OTA 업데이트에서 [Capgo](https://capgo.app/)의 역할
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21.jpg?auto=compress)
 
 Capgo는 Capacitor 앱의 OTA 업데이트 관리 프로세스를 단순화합니다. 이 플랫폼은 종단간 암호화로 보안을 우선시하여 업데이트 콘텐츠를 보호합니다.
 

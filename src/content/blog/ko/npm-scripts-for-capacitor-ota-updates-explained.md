@@ -44,7 +44,7 @@ Capgo와 같은 플랫폼은 빠른 업데이트(24시간 내 95% 사용자 적�
 
 ## Capawesome의 새로운 Ionic [Capacitor](https://capacitorjs.com/) 라이브 업데이트 탐색...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 npm 스크립트를 사용하면 Capacitor OTA 업데이트 관리 프로세스가 간소화됩니다. CI/CD 파이프라인에 통합되면 이러한 스크립트는 보안을 보장하고 성능 수준을 유지하면서 배포를 자동화하는 데 도움이 됩니다.
 

@@ -77,7 +77,7 @@ Mit Ihren gruppierten Nutzern können Sie [Update-Strategien](https://capgo.app/
 
 ## Nutzung von [Capgo](https://capgo.app/) für das Nutzer-Targeting
 
-![Capgo](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgo bietet Tools, die es erleichtern, Updates gezielt an bestimmte Nutzergruppen auszurichten, dank seiner Funktionen zur Segmentierung der Nutzerfrequenz. Diese Fähigkeiten verfeinern die zuvor besprochenen zielgerichteten Update-Strategien.
 

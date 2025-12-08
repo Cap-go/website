@@ -84,7 +84,7 @@ APIキーや証明書などの機密データは、CIプラットフォームの
 
 ## [Capgo](https://capgo.app/)統合ガイド
 
-![Capgo](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 ビルドとデプロイステージを設定したら、Capgoを統合する時です。これにより、アプリストアの承認遅延をバイパスして、直接アプリにライブアップデートをプッシュできます。
 

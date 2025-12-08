@@ -176,7 +176,7 @@ Les études montrent que les déploiements progressifs bien exécutés atteignen
 
 ### Comment [Capgo](https://capgo.app/) ajoute de la valeur
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Pour les applications [Capacitor](https://capacitorjs.com/), Capgo simplifie les déploiements progressifs en offrant une gestion précise des mises à jour tout en respectant les directives de Google Play. Son système de canaux s'intègre parfaitement aux plans de déploiement existants.
 

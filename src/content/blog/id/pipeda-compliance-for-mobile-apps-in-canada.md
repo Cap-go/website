@@ -199,7 +199,7 @@ Proses penyimpanan dan penghapusan data yang tepat adalah kunci untuk tetap mema
 
 ## [Capgo](https://capgo.app/)'s Pembaruan Siap PIPEDA
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd/574f3a2cd27791454624262312a6c223.jpg)
 
 ### Fitur Pembaruan Aman
 

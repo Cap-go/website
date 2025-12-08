@@ -36,7 +36,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)における依存関係の種類
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
 
 Capacitorプロジェクトは、クロスプラットフォーム開発において特定の役割を果たす様々な依存関係に依存しています。プラグインとプラットフォーム固有の設定について見ていきましょう。
 
@@ -163,7 +163,7 @@ Capacitorプラグインのテストには、TypeScriptのパスマッピング�
 
 ## [Capgo](https://capgo.app/)を使用した依存関係の更新
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
 
 Capgoは、Capacitorプロジェクトでの依存関係管理を次のレベルに引き上げ、更新のデプロイメントをより迅速かつ効率的にします。**1,800**以上の本番アプリに対して**4億6,440万**以上の更新を提供しており [\[14\]](https://capgo.app/)、開発者にとってプロセスを簡素化します。
 

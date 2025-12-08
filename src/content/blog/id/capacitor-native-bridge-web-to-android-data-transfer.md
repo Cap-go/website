@@ -33,7 +33,7 @@ next_blog: ''
 
 ## Cara membuat plugin [Capacitor](https://capacitorjs.com/) untuk iOS/Android
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/Dq_BmheGAig" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -171,7 +171,7 @@ Integrasikan mekanisme pemulihan kesalahan, seperti mencoba kembali secara otoma
 
 ## Fitur Platform [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/bff1fb0606ef072e3c605788ba21e2a7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
 Capgo mengatasi tantangan sebelumnya dengan sistem pembaruan langsung yang dirancang untuk transfer data yang mulus antara lapisan web dan Android. Arsitekturnya memastikan penanganan data yang aman dan berkinerja tinggi.
 

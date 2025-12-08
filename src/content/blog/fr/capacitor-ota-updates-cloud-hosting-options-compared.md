@@ -140,7 +140,7 @@ Avec son infrastructure cloud étendue et ses outils évolutifs, Azure fournit t
 
 ## 4. [Capgo](https://capgo.app/) pour les mises à jour OTA
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-17.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-17.jpg?auto=compress)
 
 Capgo fournit une solution dédiée aux mises à jour OTA Capacitor, allant au-delà des fournisseurs cloud généraux. Il livre les mises à jour efficacement, avec un bundle de 5 MB téléchargeable en seulement 114 ms et un temps de réponse API moyen de 434 ms globalement. Cela garantit des mises à jour rapides et fiables.
 

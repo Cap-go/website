@@ -186,7 +186,7 @@ Cette approche structurée minimise les temps d'arrêt et garantit que les norme
 
 ## Utilisation de [Capgo](https://capgo.app/) pour la Sécurité CI/CD
 
-![Capgo](https://assets.seobotai.com/capgo.app/68214ae55e3fe4823b5f6cab/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68214ae55e3fe4823b5f6cab/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgo s'appuie sur des stratégies de rotation de tokens éprouvées pour renforcer la sécurité CI/CD, offrant des outils qui rendent les déploiements sécurisés à la fois fluides et fiables.
 

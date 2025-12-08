@@ -123,7 +123,7 @@ dependencies {
 
 ### [Gradle](https://gradle.org/)設定の最適化
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 パフォーマンスと互換性を向上させるため、`gradle.properties`ファイルを以下の設定で更新してください：
 
@@ -435,7 +435,7 @@ Capgoのエラートラッキングとロールバックツールで、障害か
 
 ## [Capgo](https://capgo.app/)統合ガイド
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 ライブテストの結果に基づき、Capgoの統合によりアップデートのデプロイメントを効率化できます。
 

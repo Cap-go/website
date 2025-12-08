@@ -81,7 +81,7 @@ Para aplicaciones empresariales, considera integrar plugins diseñados para alma
 
 ## JWT Authentication (Revocar Tokens de Acceso Usando [Redis](https://redis.io/)) - FastAPI Beyond CRUD (Parte 12)
 
-![Redis](https://assets.seobotai.com/capgo.app/68268a500209458b3ff4fe45/2e78e5b01f7fb6de1a584710a9d487ab.jpg)
+![Redis In-Memory Data Store](https://assets.seobotai.com/capgo.app/68268a500209458b3ff4fe45/2e78e5b01f7fb6de1a584710a9d487ab.jpg)
 
 <iframe src="https://www.youtube.com/embed/e954e-i5DgQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

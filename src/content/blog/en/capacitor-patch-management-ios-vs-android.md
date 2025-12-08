@@ -122,7 +122,7 @@ Capacitor [update management](https://capgo.app/docs/plugin/cloud-mode/manual-up
 
 ### [Capgo](https://capgo.app/) Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/682b2ab25642a17d106fc1f4/974242599310258c114f19dd9b6b5656.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682b2ab25642a17d106fc1f4/974242599310258c114f19dd9b6b5656.jpg)
 
 Capgo stands out with impressive performance metrics. Its CDN can deliver a 5MB bundle in just **114ms**, while the average API response time clocks in at **434ms** [\[14\]](https://capgo.app).
 

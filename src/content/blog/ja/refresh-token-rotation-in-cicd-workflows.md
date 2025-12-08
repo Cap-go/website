@@ -186,7 +186,7 @@ error_handling:
 
 ## [Capgo](https://capgo.app/) を使用したCI/CDセキュリティ
 
-![Capgo](https://assets.seobotai.com/capgo.app/68214ae55e3fe4823b5f6cab/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68214ae55e3fe4823b5f6cab/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgoは、証明されたトークンローテーション戦略に基づき、CI/CDセキュリティを強化し、安全なデプロイメントをシームレスかつ信頼性の高いものにするツールを提供します。
 

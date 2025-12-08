@@ -45,7 +45,7 @@ Al elegir, considera tu presupuesto, frecuencia de actualización y necesidad de
 
 ## Demo en Vivo: Construyendo Aplicaciones [Capacitor](https://capacitorjs.com/) en Ionic [Appflow](https://ionic.io/docs/appflow)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/tkgNuSG5FJQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -110,7 +110,7 @@ Gestionar el control de versiones para [aplicaciones Capacitor](https://capgo.ap
 
 ### Sistema de Actualización [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo ofrece una solución para equipos que buscan agilizar el control de versiones sin romper el banco. Proporciona actualizaciones en vivo mientras mantiene el cumplimiento con las políticas de las tiendas de Apple y Google. Algunas características clave incluyen:
 

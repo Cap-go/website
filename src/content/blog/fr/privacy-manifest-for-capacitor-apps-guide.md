@@ -86,7 +86,7 @@ Selon Capgo, 95% des utilisateurs sont conformes aux mises à jour dans les 24 h
 
 ## Créer des Manifestes de Confidentialité pour [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Prérequis
 
@@ -208,7 +208,7 @@ Après avoir effectué des mises à jour, testez votre manifeste dans un environ
 
 ## Outils de confidentialité [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo simplifie la gestion des manifestes de confidentialité et des mises à jour d'applications, en s'assurant que vos normes de confidentialité restent intactes sans retarder les déploiements.
 

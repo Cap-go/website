@@ -162,7 +162,7 @@ Place these controls in a spot that's easy to find within your app's settings me
 
 ### Using [Capgo](https://capgo.app/) for Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
 
 Once you’ve established strong in-app controls, keeping your app updated is key to staying compliant. That’s where Capgo comes in. It lets you deploy updates instantly - no waiting for app store approvals. In fact, 95% of active users receive updates within 24 hours of release [\[1\]](https://capgo.app/).
 

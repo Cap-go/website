@@ -155,7 +155,7 @@ OTA 업데이트는 앱 보안과 사용자 신뢰를 손상시킬 수 있는 �
 
 ### [Capgo](https://capgo.app/) 기능 개요
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
 
 Capgo는 **종단간 암호화**로 [Capacitor OTA 업데이트](https://capgo.app/ja/)에 대한 고급 보안을 제공하여 인가된 사용자만이 업데이트를 복호화할 수 있도록 합니다.
 

@@ -184,7 +184,7 @@ Aquí algunas características esenciales para priorizar:
 
 ### Características de la Plataforma [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Lanzada en 2022, Capgo entrega actualizaciones OTA diseñadas con la seguridad en mente. Sus características incluyen cifrado de extremo a extremo, capacidades de auto-alojamiento, implementaciones graduales, seguimiento de errores y control de versiones.
 

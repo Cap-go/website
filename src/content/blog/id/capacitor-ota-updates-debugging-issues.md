@@ -126,7 +126,7 @@ Menggabungkan pendekatan ini dengan alat yang tepat memastikan proses pembaruan 
 
 ### Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ff1c0bb0912f75a97f349a/bff1fb0606ef072e3c605788ba21e2a7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ff1c0bb0912f75a97f349a/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
 Capgo menyederhanakan pembaruan OTA dengan fitur yang dirancang untuk meningkatkan efisiensi:
 

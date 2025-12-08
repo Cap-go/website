@@ -140,7 +140,7 @@ Mantener los archivos de configuración en subdirectorios específicos del prove
 
 ## Pasos de Configuración de [Gradle](https://gradleorg/)
 
-![Gradle](https://mars-images.imgix.net/seobot/screenshots/gradleorg-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
+![Gradle Build Tool Interface](https://mars-images.imgix.net/seobot/screenshots/gradleorg-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
 
 ### Actualizando buildgradle
 

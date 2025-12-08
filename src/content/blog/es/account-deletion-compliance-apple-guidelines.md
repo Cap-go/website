@@ -112,7 +112,7 @@ Después de manejar la eliminación en toda la plataforma, necesitarás abordar 
 
 ### Gestión de Actualizaciones de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 La gestión de actualizaciones en tiempo real juega un papel fundamental en mantener el cumplimiento a través de plataformas y plugins. Aquí es donde **Capgo** puede simplificar el proceso de gestión de actualizaciones de eliminación de cuenta.
 

@@ -103,7 +103,7 @@ Sobald das Web-Profiling abgeschlossen ist, gehen Sie zur iOS-Leistungsanalyse �
 
 ### iOS-Profiling mit [Xcode](https://developer.apple.com/xcode/)
 
-![Xcode](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Navigieren Sie in Xcode zu **Produkt > Profil (⌘I)** und wählen Sie eine Profiling-Vorlage:
 
@@ -155,7 +155,7 @@ Nach der Bereitstellung überwachen Sie wichtige Metriken wie API-Antwortzeiten,
 
 ### Schnelle Updates mit [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
 
 Capgo vereinfacht den Update-Prozess durch verschlüsselte, stufenweise Updates mit automatischen Rollback-Funktionen. Es bietet auch Echtzeit-Analytik und hilft Ihnen, App-Store-Verzögerungen zu umgehen und sicherzustellen, dass Updates Ihre Benutzer schnell und effizient erreichen.
 

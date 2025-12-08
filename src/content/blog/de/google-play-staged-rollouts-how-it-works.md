@@ -176,7 +176,7 @@ Studien zeigen, dass gut ausgeführte gestufte Rollouts eine globale Update-Erfo
 
 ### Wie [Capgo](https://capgo.app/) Mehrwert schafft
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Für [Capacitor](https://capacitorjs.com/)-Apps optimiert Capgo gestufte Rollouts durch präzises Update-Management unter Einhaltung der Google Play-Richtlinien. Sein Kanalsystem integriert sich nahtlos in bestehende Rollout-Pläne.
 

@@ -154,7 +154,7 @@ builds/
 
 ### [Capgo](https://capgo.app/) 업데이트 관리
 
-![Capgo](https://assets.seobotai.com/capgo.app/6824286159ff6128992275a6/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6824286159ff6128992275a6/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Capgo를 사용하면 앱 스토어 승인 지연을 우회하여 즉각적인 모바일 업데이트가 가능합니다. 빌드가 저장되면 Capgo의 롤아웃 및 롤백 기능을 사용하여 배포를 자동화할 수 있습니다.
 

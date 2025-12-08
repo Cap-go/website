@@ -38,7 +38,7 @@ Capgo는 이미 **750개의 앱에서 2,350만 건의 업데이트**를 관리�
 
 ## Capawesome의 새로운 [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) 실시간 업데이트 살펴보기...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -72,7 +72,7 @@ npx @capgo/cli init
 
 ### [Capgo](https://capgo.app/) 모니터링 설정
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
 
 1.  **분석 통합 구성**: 실시간 분석을 사용하여 업데이트 성능과 사용자 참여도 모니터링
 2.  **오류 추적 활성화**: 상세 로그와 성능 지표를 캡처하기 위한 오류 추적 활성화

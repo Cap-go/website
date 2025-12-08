@@ -32,7 +32,7 @@ OTAアップデートを自動化することで、より速い配信、少な�
 
 ## [Appflow](https://ionicio/appflow/live-updates) ライブアップデート：即時アップデートをユーザーに直接デプロイ
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionicio-f18932d1af08bf70cb14b84540039486-2025-02-12.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionicio-f18932d1af08bf70cb14b84540039486-2025-02-12.jpg?auto=compress)
 
 <Steps>
 
@@ -45,7 +45,7 @@ OTAアップデートを自動化することで、より速い配信、少な�
 
 ## [Capacitor](https://capacitorjs.com/)のOTAアップデート準備
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12.jpg?auto=compress)
 
 Capacitorの[自動over-the-air](https://capgo.app/blog/open-source-licecing/) (OTA)アップデートの設定には、セットアップの構成、セキュリティ対策の実装、[アップデートシステムの統合](https://capgo.app/docs/plugin/cloud-mode/hybrid-update)という3つの重要なステップが含まれます。このプロセスにより、CI/CD自動化との互換性を確保しながら、アプリのセキュリティを維持します。
 
@@ -90,7 +90,7 @@ OTAアップデートプロセスのセキュリティ確保は、不正なア�
 
 ### [Capgo](https://capgo.app/)のOTAアップデート設定
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12.jpg?auto=compress)
 
 Capgoは、OTAアップデートプロセスを簡素化します。まず、必要なプラグインをインストールします：
 

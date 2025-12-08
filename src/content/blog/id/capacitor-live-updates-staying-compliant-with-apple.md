@@ -42,7 +42,7 @@ Untuk tetap patuh, fokus pada perbaikan bug, amankan pembaruan dengan enkripsi, 
 
 ## [Appflow](https://ionic.io/appflow/live-updates) Live Updates: Deploy pembaruan instan langsung ke pengguna Anda
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -133,7 +133,7 @@ Simpan dokumentasi detail semua perubahan untuk memperlancar proses tinjauan App
 
 ### [Capgo](https://capgo.app/): Manajemen Live Update
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
 
 Capgo menyederhanakan manajemen live update dan memastikan kepatuhan dengan persyaratan Apple. Ini telah mendukung lebih dari **947,6 juta pembaruan** di **1.400+ aplikasi produksi** [\[1\]](https://capgo.app/).
 

@@ -217,7 +217,7 @@ Para plugins con características complejas, simula escenarios de usuario del mu
 
 ### Pruebas OTA con [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
 
 Las herramientas de código abierto de Capgo facilitan el despliegue y prueba de actualizaciones rápidamente. Aquí se explica cómo usarlo:
 

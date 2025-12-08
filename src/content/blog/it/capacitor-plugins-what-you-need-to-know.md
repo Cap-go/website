@@ -38,7 +38,7 @@ Il sistema di plugin di Capacitor semplifica lo sviluppo delle app mantenendo le
 
 ## Come Costruire il Tuo Plugin [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Nf-mOfmD7X4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -134,7 +134,7 @@ Per funzionalità che coinvolgono dati sensibili o sicurezza, esegui strumenti c
 
 ### [Capgo](https://capgo.app/): Aggiornamenti Live per App
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
 
 Capgo fornisce un [plugin per aggiornamenti live](https://capgo.app/docs/plugin/self-hosted/auto-update/) che funziona perfettamente con Capacitor. Ti permette di distribuire aggiornamenti - come correzioni di bug o nuove funzionalità - direttamente alla tua app usando canali criptati, il tutto rimanendo conforme alle politiche degli app store [\[3\]](https://github.com/riderx/awesome-capacitor).
 

@@ -159,7 +159,7 @@ dependencies {
 
 ### [Gradle](https://gradle.org/) 출력 이해하기
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 `./gradlew app:dependencies`를 사용하고 빌드 스캔을 활성화하여 종속성 충돌이나 스크립트 문제를 밝힐 수 있습니다. 이러한 도구는 프로젝트 설정에 대한 상세한 뷰를 제공합니다.
 
@@ -238,7 +238,7 @@ ProGuard 규칙을 조정하여 중요한 Capacitor 플러그인 클래스와 We
 
 ## 빠른 수정을 위한 [Capgo](https://capgo.app/) 사용하기
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Capacitor에서 안드로이드 빌드 오류에 직면했을 때 문제를 신속하게 해결하는 것이 지연을 피하고 프로젝트를 정상 궤도로 유지하는 데 중요합니다. 다음은 Capgo가 즉시 수정을 배포하는 데 어떻게 도움이 되는지입니다.
 

@@ -122,7 +122,7 @@ Capgoのようなセキュアなアップデートシステムを使用するこ
 
 ### [Capgo](https://capgo.app/)のセキュリティ機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
 
 Capgoのセキュリティインフラストラクチャは、開発者にコンプライアンスを維持するためのツールを提供します。主要な機能には以下が含まれます：
 

@@ -51,7 +51,7 @@ next_blog: ''
 
 ## Funzionalità di Aggiornamento di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Sistema di Aggiornamento Integrato
 

@@ -44,7 +44,7 @@ Configura oggi gli strumenti di rollback per garantire aggiornamenti fluidi e ma
 
 ## Come Migrare la tua App [Ionic](https://ionicframework.com/) a [Capacitor](https://capacitorjs.com/) 3
 
-![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 Le strategie di rollback svolgono un ruolo chiave nel mantenere la stabilità delle app e garantire la fiducia degli utenti. Le metriche mostrano costantemente come queste strategie supportino un approccio strutturato per gestire gli aggiornamenti in modo efficace.
 

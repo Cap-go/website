@@ -102,7 +102,7 @@ Una vez que el perfilado web esté completo, pasa al análisis de rendimiento de
 
 ### Perfilado de iOS con [Xcode](https://developer.apple.com/xcode/)
 
-![Xcode](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
 
 En Xcode, navega a **Producto > Perfil (⌘I)** y selecciona una plantilla de perfilado:
 
@@ -154,7 +154,7 @@ Después del despliegue, monitorea métricas importantes como tiempos de respues
 
 ### Actualizaciones Rápidas con [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
 
 Capgo simplifica el proceso de actualización ofreciendo actualizaciones encriptadas, escalonadas con características de reversión automática. También proporciona análisis en tiempo real, ayudándote a eludir los retrasos de la tienda de aplicaciones y asegurando que las actualizaciones lleguen a tus usuarios de manera rápida y eficiente.
 

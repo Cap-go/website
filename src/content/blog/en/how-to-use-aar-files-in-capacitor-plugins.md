@@ -198,7 +198,7 @@ Keeping configuration files in vendor-specific subdirectories helps maintain org
 
 ## [Gradle](https://gradle.org/) Configuration Steps
 
-![Gradle](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
+![Gradle Build Tool Interface](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
 
 ### Updating build.gradle
 

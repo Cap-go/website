@@ -114,7 +114,7 @@ Capacitor의 기본 보안 기능은 강력한 기반을 제공하지만, 전문
 
 ### [Capgo](https://capgo.app): 안전한 OTA 업데이트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
 
 Capgo는 Capacitor 애플리케이션에서 안전한 무선 업데이트(OTA)를 관리하기 위해 특별히 설계되었습니다. 다음과 같은 기능으로 코드 무결성을 보장합니다:
 

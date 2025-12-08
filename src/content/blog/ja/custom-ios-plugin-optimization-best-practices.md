@@ -28,7 +28,7 @@ next_blog: ''
 
 ## シニアiOS開発者が[Instruments](https://developer.apple.com/tutorials/instruments).appでパフォーマンスの問題をプロファイリングし解決する方法 | ライブ開発メンタリング
 
-![Instruments](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
+![Instruments Performance Analysis Tool](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
 
 <iframe src="https://www.youtube.com/embed/HIsECG5s4DU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -62,7 +62,7 @@ JavaScriptとネイティブiOSコード間のやり取りは、慎重に扱わ�
 
 ### [Swift](https://developer.apple.com/swift/) コードパフォーマンスのヒント
 
-![Swift](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/2e2b0430a9aab611e781d4d45224ac43.jpg)
+![Swift Programming Language Website](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/2e2b0430a9aab611e781d4d45224ac43.jpg)
 
 Swiftはコードを最適化するためのいくつかのツールを提供しています。プラグインを最大限活用するために、以下の領域に集中してください：
 
@@ -82,7 +82,7 @@ iOSプラグインを次のレベルに引き上げるには、プラットフ�
 
 ### [Xcode](https://developer.apple.com/xcode/) パフォーマンス設定
 
-![Xcode](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Xcodeのビルド設定を調整することで、プラグインのサイズを抑えながらパフォーマンスを大幅に向上させることができます。主要な設定の概要は以下の通りです：
 
@@ -139,7 +139,7 @@ pod 'AnalyticsLib', :git => 'https://github.com/example/analytics.git', :tag => 
 
 ### [Capgo](https://capgo.app/)を使用したOTAアップデート
 
-![Capgo](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 依存関係が合理化されたら、次のステップはプラグインが時間とともにスムーズに進化することを確保することです。Over-the-air (OTA)アップデートは画期的な機能であり、CapgoはApp Storeのルールに準拠しながら迅速なデプロイメントを可能にする強力なツールです。最近のデータによると、Capgoの配信システムを使用すると、**アクティブユーザーの95%が24時間以内にアップデートを受信する**とされています[\[1\]](https://capgo.app/)。
 

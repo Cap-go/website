@@ -152,7 +152,7 @@ Untuk mengelola penyimpanan secara efisien, terapkan kebijakan retensi yang meny
 
 ### Manajemen Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6824286159ff6128992275a6/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6824286159ff6128992275a6/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Capgo memungkinkan pembaruan seluler instan, melewati penundaan persetujuan app store. Setelah build Anda disimpan, Anda dapat mengotomatisasi deployment menggunakan fitur Capgo untuk rollout dan rollback.
 

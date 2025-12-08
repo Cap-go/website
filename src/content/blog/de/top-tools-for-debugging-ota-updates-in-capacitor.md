@@ -82,13 +82,13 @@ Halten Sie die Versionskontrolle organisiert, um Änderungen zu verfolgen und da
 
 ## 3 Hauptdebugging-Tools für [Capacitor](https://capacitorjs.com/) OTA-Updates
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
 
 Diese Tools helfen Entwicklern, spezifische [Debugging-Herausforderungen](https://capgo.app/docs/plugin/debugging/) beim Verwalten von OTA-Updates effektiv zu bewältigen
 
 ### [Capgo](https://capgo.app
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20.jpg?auto=compress)
 
 Capgo bietet eine zuverlässige Lösung für OTA-Updates in Capacitor-Apps. Es gewährleistet sichere und schnelle Updates unter Einhaltung der Plattform-Richtlinien.
 
@@ -117,7 +117,7 @@ Für ein [Debugging-Tool](https://capgo.app/docs/plugin/debugging/) mit plattfor
 
 ### [Inspectdev](https://inspectdev/)
 
-![Inspectdev](https://mars-images.imgix.net/seobot/screenshots/inspectdev-9bbcb0a3366f33fde5bbabd7b9e5d36a-2025-02-20.jpg?auto=compress)
+![Inspectdev Mobile Debugging Tool](https://mars-images.imgix.net/seobot/screenshots/inspectdev-9bbcb0a3366f33fde5bbabd7b9e5d36a-2025-02-20.jpg?auto=compress)
 
 Inspectdev wurde entwickelt, um das Debugging für Android und iOS zu vereinfachen, einschließlich iOS-Debugging unter Windows - eine häufige Herausforderung für Entwickler.
 

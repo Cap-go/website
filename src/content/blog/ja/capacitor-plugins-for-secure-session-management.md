@@ -229,7 +229,7 @@ Identity Vaultは12の個別APIを1つのプラグインに統合し、統合を
 
 ## 5\. [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/e81a00d3e5c2480025c05b94a848a495.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/e81a00d3e5c2480025c05b94a848a495.jpg)
 
 Capgoは、セキュアなストレージと生体認証のソリューションを超えて、ライブアップデート配信と組み合わせたセキュアなセッション管理を提供します。データの整合性に重点を置き、**エンドツーエンドの暗号化**とリアルタイムアップデートを通じてセッションデータを保護します。
 

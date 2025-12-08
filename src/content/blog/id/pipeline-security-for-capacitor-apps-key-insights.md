@@ -35,7 +35,7 @@ Keamanan pipeline untuk aplikasi [Capacitor](https://capacitorjs.com/) sangat pe
 
 ## Risiko Keamanan dalam Pipeline Aplikasi [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Seiring berkembangnya [pengembangan aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), hal ini memunculkan tantangan keamanan khusus untuk pipeline CI/CD. Mengatasi risiko-risiko ini penting untuk menjaga lingkungan pengembangan yang aman.
 
@@ -117,7 +117,7 @@ Platform OTA baru kini memprioritaskan keamanan dalam pipeline Capacitor mereka.
 
 ### Fitur Keamanan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo menyediakan pengaturan yang berfokus pada keamanan yang dirancang khusus untuk [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Enkripsi end-to-end memastikan bahwa pembaruan hanya dapat didekripsi oleh pengguna yang berwenang, melampaui ketergantungan biasa pada paket yang ditandatangani. Fitur utama meliputi:
 

@@ -47,7 +47,7 @@ By following these strategies, you can ensure smooth app performance and user sa
 
 ## How to Create Background Tasks in [Ionic](https://ionicframework.com/) with [Capacitor](https://capacitorjs.com/) ⚡️
 
-![Ionic](https://assets.seobotai.com/capgo.app/68326c08d3b9661981804b2c/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/68326c08d3b9661981804b2c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 <iframe src="https://www.youtube.com/embed/SMW1FQz3Yrc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -179,7 +179,7 @@ Lastly, consider integrating **[New Relic](https://newrelic.com/)'s mobile monit
 
 ## Using [Capgo](https://capgo.app) for Background Task Optimization
 
-![Capgo](https://assets.seobotai.com/capgo.app/68326c08d3b9661981804b2c/a11b1d51b473300e3b6ffdca4eaa552a.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68326c08d3b9661981804b2c/a11b1d51b473300e3b6ffdca4eaa552a.jpg)
 
 Once you've identified performance issues in your app using monitoring tools, the next step is deploying fixes as fast as possible. Here's where things can get tricky: traditional app store submission processes can take days - or even weeks - to approve updates. This delay can leave your app stuck with performance bottlenecks. Enter [Capgo](https://capgo.app), a tool that lets you bypass these delays by enabling [instant updates](https://capgo.app/docs/) to your background task logic. No app store approvals required. This means you can implement fixes immediately, keeping your app running smoothly.
 

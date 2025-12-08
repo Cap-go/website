@@ -232,7 +232,7 @@ Pour assurer des déploiements fluides, il est crucial d'éviter les erreurs cou
 
 ## Fonctionnalités de gestion des versions de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgo fournit des outils conçus pour simplifier et améliorer à la fois les processus de déploiement par étapes et les versions complètes, en s'appuyant sur des stratégies de publication efficaces.
 

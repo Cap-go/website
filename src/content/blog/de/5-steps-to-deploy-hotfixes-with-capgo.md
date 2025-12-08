@@ -64,7 +64,7 @@ Sobald Ihr Hotfix alle Tests bestanden hat, sind Sie bereit, Capgo für die Bere
 
 ## Schritt 2: [Capgo](https://capgo.app/) einrichten
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-13.jpg?auto=compress)
 
 ### Erforderliche Pakete installieren
 
@@ -134,7 +134,7 @@ Sobald Ihr Hotfix hochgeladen und gekennzeichnet ist, gehen Sie zu Schritt 4 üb
 
 ## Capgo Live Update System für [Capacitor](https://capacitorjs.com/) Apps
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-13.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/NzXXKoyhTIo" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

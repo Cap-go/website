@@ -41,7 +41,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 프로젝트를 자동으로 구성하는 방법 ⚡️
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
 
 ## Capacitor의 버전 설정
 
@@ -189,7 +189,7 @@ Git 버전 태그는 [Capacitor 앱 릴리스](https://capgo.app/docs/)를 추�
 
 ### [Capgo](https://capgo.app/) 버전 관리 기능
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 Capgo는 다음을 포함한 강력한 버전 관리 기능을 제공합니다:
 

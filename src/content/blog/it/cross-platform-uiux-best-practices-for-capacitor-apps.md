@@ -37,7 +37,7 @@ next_blog: ''
 
 ## Construye componentes multiplataforma con [Stencil](https://stenciljs.com/) y [Capacitor](https://capacitorjs.com/)
 
-![Stencil](https://mars-images.imgix.net/seobot/screenshots/stenciljs.com-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
+![Stencil Web Components Compiler](https://mars-images.imgix.net/seobot/screenshots/stenciljs.com-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/O5xfY9LPl0s" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -91,7 +91,7 @@ Crear componentes UI de alto rendimiento requiere atención cuidadosa a la compa
 
 ### Usando componentes de [Ionic](https://ionicframework.com/)
 
-![Ionic](https://mars-images.imgix.net/seobot/screenshots/ionicframework.com-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
+![Ionic Framework Website](https://mars-images.imgix.net/seobot/screenshots/ionicframework.com-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
 
 Ionic ofrece componentes preconstruidos que simplifican el desarrollo multiplataforma. Estos componentes se alinean automáticamente con los patrones de diseño específicos de la plataforma mientras garantizan una funcionalidad coherente.
 
@@ -230,7 +230,7 @@ Mempertahankan aplikasi Anda yang diperbarui sangat penting untuk menjaga pengal
 
 ### Pembaruan Langsung dengan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Setelah merampungkan desain dan fase pengujian, tantangan berikutnya adalah meluncurkan pembaruan dengan lancar. Capgo membuat proses ini lebih mudah dengan memungkinkan pembaruan instan tanpa menunggu persetujuan dari toko aplikasi.
 

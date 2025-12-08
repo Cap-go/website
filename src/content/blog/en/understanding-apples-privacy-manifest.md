@@ -48,7 +48,7 @@ Next, we’ll walk through creating and verifying your manifest in a Capacitor p
 
 ## Setting Up Privacy Manifest in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Creating the Manifest File
 
@@ -69,7 +69,7 @@ In Xcode, navigate to **Product > Analyze** to generate a Privacy Report. Carefu
 
 ### Updates with [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 After passing Xcode analysis, use Capgo for live updates to keep your app's privacy manifest up-to-date. Capgo provides:
 

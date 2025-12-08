@@ -58,4 +58,4 @@ OTA 업데이트는 시간을 절약하고, 사용자 경험을 개선하며, �
 
 ## Capawesome의 새로운 Ionic [Capacitor](https://capacitorjs.com/) 라이브 업데이트 살펴보기 ...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)

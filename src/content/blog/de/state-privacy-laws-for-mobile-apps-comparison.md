@@ -110,7 +110,7 @@ Der CPA drängt auf besseren Verbraucherdatenschutz, stärkere Sicherheit und gr
 
 ## 4. [Capgo](https://capgo.app/) Datenschutzstandards
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Capgo richtet sich nach CCPA, VCDPA und CPA und überbrückt die Lücke zwischen staatlichen Vorschriften und praktischen App-Entwicklungsanforderungen.
 

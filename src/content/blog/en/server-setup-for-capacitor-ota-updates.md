@@ -246,7 +246,7 @@ Regular monitoring is essential to identify and mitigate potential security brea
 
 ## Using [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/682f07854fa53d422080d523/f1896dc16fb40f15e325c34706864676.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682f07854fa53d422080d523/f1896dc16fb40f15e325c34706864676.jpg)
 
 Capgo builds on a secure and efficient server setup to simplify OTA (Over-The-Air) update delivery for Capacitor apps. With a strong focus on security and compliance, Capgo ensures updates are handled seamlessly. Backed by a history of delivering over 1.7 trillion updates across more than 2,000 production apps [\[2\]](https://capgo.app), it’s a dependable choice for managing server-side updates.
 

@@ -38,7 +38,7 @@ Spotting version conflicts early can save you hours of debugging and prevent pot
 
 ### Check Versions with [Capacitor](https://capacitorjs.com/) CLI
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 The Capacitor CLI provides helpful commands to inspect your project's dependency versions. Open your terminal, navigate to your project directory, and run:
 
@@ -130,7 +130,7 @@ npm ls @capacitor/*
 
 ### Use npm and [Yarn](https://yarnpkg.com/) Tools
 
-![Yarn](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
+![Yarn Package Manager Website](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
 
 Package managers like npm and Yarn offer helpful commands to detect and address dependency issues. Here's how they can assist:
 
@@ -326,7 +326,7 @@ Once local tests confirm that the app's basic functionality is intact, move on t
 
 ### Live Testing with [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
 
 After verifying your changes locally, it's time to test in a live environment. Set up testing channels with these commands:
 

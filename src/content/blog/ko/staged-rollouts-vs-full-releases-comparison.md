@@ -195,7 +195,7 @@ Capgo는 전 세계적으로 82%의 업데이트 성공률과 평균 57ms의 API
 
 ## [Capgo](https://capgo.app/) 출시 관리 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgo는 효과적인 출시 전략을 기반으로 단계적 및 전체 출시 프로세스를 단순화하고 개선하도록 설계된 도구를 제공합니다.
 

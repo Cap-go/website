@@ -64,7 +64,7 @@ Capacitor apps also have dedicated plugins designed to handle SSL pinning effect
 
 ### [Capacitor](https://capacitorjs.com/) Plugins
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682a44fe5642a17d106eb21b/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682a44fe5642a17d106eb21b/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 For Capacitor apps, the `@aalzehla/capacitor-ssl-pinning` plugin is a standout option. This plugin integrates seamlessly by leveraging native configuration files like Android's `network_security_config.xml` and iOS's `Info.plist` for certificate validation [\[5\]](https://www.npmjs.com/package/%40aalzehla%2Fcapacitor-ssl-pinning).
 
@@ -170,7 +170,7 @@ In the next section, learn how solutions like Capgo can expand on these practice
 
 ## [Capgo](https://capgo.app/) SSL Pinning Support
 
-![Capgo](https://assets.seobotai.com/capgo.app/682a44fe5642a17d106eb21b/3f08bf3ebb984c6cd433c331def99e48.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682a44fe5642a17d106eb21b/3f08bf3ebb984c6cd433c331def99e48.jpg)
 
 Capgo strengthens SSL pinning with a focus on automated security and seamless live updates. Once SSL pinning is verified through rigorous testing, developers can rely on Capgo to streamline security during update rollouts, ensuring both speed and protection.
 

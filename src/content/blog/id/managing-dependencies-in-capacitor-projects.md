@@ -37,7 +37,7 @@ Manajemen dependensi mempengaruhi stabilitas dan efisiensi aplikasi Anda. Fokus 
 
 ## Jenis Dependensi di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
 
 Proyek Capacitor bergantung pada berbagai dependensi, masing-masing memainkan peran spesifik dalam pengembangan lintas platform. Mari kita uraikan plugin dan konfigurasi spesifik platform.
 
@@ -164,7 +164,7 @@ Untuk membuat pengujian dan pemeliharaan lebih mudah dalam jangka panjang, ekspo
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan Dependensi
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
 
 Capgo membawa manajemen dependensi dalam proyek Capacitor ke level berikutnya, membuat deployment pembaruan lebih cepat dan lebih efisien. Dengan lebih dari **464,4 juta pembaruan** yang disampaikan di **1.800 aplikasi produksi** [\[14\]](https://capgo.app/), Capgo menyederhanakan proses untuk pengembang.
 

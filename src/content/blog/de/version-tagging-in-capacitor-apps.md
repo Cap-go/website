@@ -44,7 +44,7 @@ Versionskennzeichnung vereinfacht [App-Updates](https://capgo.app/plugins/capaci
 
 ## So konfigurieren Sie Ihr [Capacitor](https://capacitorjs.com/)-Projekt AUTOMATISCH ⚡️
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
 
 <Steps>
 
@@ -307,7 +307,7 @@ Ein herausragendes Tool in diesem Bereich ist Capgo, das speziell für [Capacito
 
 ### [Capgo](https://capgo.app/) Versionskontroll-Funktionen
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 Capgo bietet robuste Versionsverwaltungsfunktionen, darunter:
 

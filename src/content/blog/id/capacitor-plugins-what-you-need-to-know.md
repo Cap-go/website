@@ -39,7 +39,7 @@ Sistem plugin Capacitor menyederhanakan pengembangan aplikasi sambil mempertahan
 
 ## Cara Membangun Plugin [Capacitor](https://capacitorjs.com/) Anda Sendiri
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
 
 <Steps>
 
@@ -144,7 +144,7 @@ Untuk fitur yang melibatkan data sensitif atau keamanan, jalankan alat seperti `
 
 ### [Capgo](https://capgo.app/): Pembaruan Langsung untuk Aplikasi
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
 
 Capgo menyediakan [plugin pembaruan langsung](https://capgo.app/docs/plugin/self-hosted/auto-update/) yang bekerja secara mulus dengan Capacitor. Ini memungkinkan Anda menerapkan pembaruan - seperti perbaikan bug atau fitur baru - langsung ke aplikasi Anda menggunakan saluran terenkripsi, sambil tetap mematuhi kebijakan app store [\[3\]](https://github.com/riderx/awesome-capacitor)### Metode Pengujian Plugin
 

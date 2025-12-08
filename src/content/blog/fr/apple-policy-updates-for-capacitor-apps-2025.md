@@ -77,7 +77,7 @@ Cette méthode permet un développement rapide et des mises à jour fiables tout
 
 ## Mises à jour [Capacitor](https://capacitorjs.com/) pour 2025
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Maintenance des plugins
 
@@ -89,7 +89,7 @@ Avec les politiques mises à jour d'Apple, la migration des PWA vers des applica
 
 ## Outils de conformité [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/6f70cafcdfe95287b465212dfd047c63.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/6f70cafcdfe95287b465212dfd047c63.jpg)
 
 Capgo propose des outils qui simplifient la maintenance des applications tout en garantissant que les mises à jour en direct sont conformes aux directives d'Apple. Ces outils aident les développeurs à déployer des mises à jour en toute sécurité sans enfreindre les règles de l'App Store.
 

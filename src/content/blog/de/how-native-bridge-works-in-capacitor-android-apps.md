@@ -46,7 +46,7 @@ Capgo, ein Tool für Over-the-Air-Updates, integriert sich mit der Native Bridge
 
 ## So erstellen Sie projektspezifische lokale Plugins | Ionic | [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22.jpg?auto=compress)
 
 ## Native Bridge Kommunikationsfluss
 
@@ -225,7 +225,7 @@ Regelmäßige Tests und Überwachung sind wichtig, um Kompatibilitätsprobleme f
 
 ## [Capgo](https://capgo.app/) Integration
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Capgo verbessert die Native-Bridge-Leistung durch sofortige Over-the-Air (OTA) Updates. Mit 23,5 Millionen ausgelieferten Updates über 750 Apps ist es zu einem zuverlässigen Werkzeug für die Verwaltung von Updates über die Native Bridge geworden.
 

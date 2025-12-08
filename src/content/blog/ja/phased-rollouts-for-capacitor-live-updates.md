@@ -94,7 +94,7 @@ Capgoのウェブインターフェースを使用すると、配布とユーザ
 
 ## [Capacitor](https://capacitorjs.com/)でのフェーズドロールアウトの設定
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
 
 ### ライブアップデートの設定
 
@@ -108,7 +108,7 @@ npx @capgo/cli init
 
 ### [Capgo](https://capgo.app/)統合ガイド
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
 
 Capgoのウェブプラットフォームは、以下のコア機能でアップデート配布を効率化します:
 

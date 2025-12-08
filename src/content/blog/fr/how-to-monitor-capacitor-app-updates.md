@@ -68,7 +68,7 @@ Lors de la comparaison des outils de surveillance, concentrez-vous sur les fonct
 
 ### Utilisation de [Capgo](https://capgo.app/) pour les Mises à Jour
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-16.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-16.jpg?auto=compress)
 
 Capgo se distingue comme un choix fiable pour les équipes qui ont besoin d'un contrôle détaillé sur leurs mises à jour d'applications. Il offre des **analyses de performance spécifiques aux versions** et d'autres outils de surveillance avancés.
 

@@ -29,7 +29,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/)でのライブ更新の使用方法:
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
 
 1.  **SDKのセットアップ**: ライブ更新SDKをインストールし、アプリを構成します。
 2.  **更新ロジックの統合**: 自動的に更新をチェックし、適用するコードを追加します。
@@ -223,7 +223,7 @@ CapgoのCLIはわずか1つのコマンドでデプロイを簡単にし、安�
 
 ### [Capgo](https://capgo.app/)機能の概要
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
 
 Capgoは毎月150,000件以上のライブ更新を処理しており、中規模企業向けに拡張するために設計されています。これが他と差別化される点です：
 

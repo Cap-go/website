@@ -171,7 +171,7 @@ Studies show that well-executed staged rollouts achieve an 82% global update suc
 
 ### How [Capgo](https://capgo.app/) Adds Value
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 For [Capacitor](https://capacitorjs.com/) apps, Capgo streamlines staged rollouts by offering precise update management while adhering to Google Play guidelines. Its channel system integrates smoothly with existing rollout plans.
 

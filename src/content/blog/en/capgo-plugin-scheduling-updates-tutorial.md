@@ -30,7 +30,7 @@ Capgo ensures updates are fast, secure, and user-friendly, making it a must-have
 
 ## Setting Up [Capgo](https://capgo.app/) for Update Scheduling
 
-![Capgo](https://assets.seobotai.com/capgo.app/68311bb4d3b96619817f3ed6/146f21857bbfc9b0e31de0c031b7d889.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68311bb4d3b96619817f3ed6/146f21857bbfc9b0e31de0c031b7d889.jpg)
 
 To schedule updates with Capgo, you’ll need to install the plugin, set up your project, and configure the [auto-update features](https://capgo.app/docs/plugin/cloud-mode/auto-update/) to suit your needs. This process ensures your app can handle updates efficiently while maintaining compatibility with Capgo’s server.
 

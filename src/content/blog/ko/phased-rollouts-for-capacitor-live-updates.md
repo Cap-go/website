@@ -95,7 +95,7 @@ Capgo의 웹 인터페이스를 사용하면 배포와 사용자 채택을 실�
 
 ## Capacitor에서 단계적 롤아웃 설정
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
 
 ### 실시간 업데이트 구성
 
@@ -109,7 +109,7 @@ npx @capgo/cli init
 
 ### [Capgo](https://capgo.app/) 통합 가이드
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
 
 Capgo의 웹 플랫폼은 다음과 같은 핵심 기능으로 업데이트 배포를 간소화합니다:
 

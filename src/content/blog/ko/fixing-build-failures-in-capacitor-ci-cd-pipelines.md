@@ -45,7 +45,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 빌드 실패의 주요 유형
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Capacitor 빌드 실패는 다양한 원인에서 발생할 수 있으며, 각각 특정 해결책이 필요합니다. 아래에서 가장 일반적인 원인과 빌드 프로세스 중 발생하는 방식을 살펴보겠습니다.
 
@@ -221,7 +221,7 @@ iOS 빌드의 경우 Xcode 호환성과 서명 구성을 확인하세요. Androi
 
 ## [Capgo](https://capgo.app/)를 사용하여 빌드 실패 관리하기
 
-![Capgo](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 Capgo는 [Capacitor CI/CD 파이프라인](https://capgo.app/blog/automatic-capacitor-android-build-gitlab/)에서 빌드 실패를 처리하는데 도움이 되는 도구 모음을 제공합니다. 모니터링, 보안 구성 및 심층 분석을 결합하여 팀이 빌드 문제를 식별, 해결 및 예방하는 것을 지원합니다. 아래에서 Capgo가 CI/CD 효율성을 향상시키기 위해 이러한 프로세스를 어떻게 단순화하는지 살펴보겠습니다.
 

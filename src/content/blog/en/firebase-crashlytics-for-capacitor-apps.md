@@ -92,7 +92,7 @@ You'll need to install the following:
 
 ### [Firebase](https://firebase.google.com/) Console Setup
 
-![Firebase](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
+![Firebase Platform Dashboard](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
 
 Set up Firebase and enable Crashlytics through these steps:
 
@@ -265,7 +265,7 @@ To ensure compliance and safeguard user data, follow these guidelines:
 
 ## [Capgo](https://capgo.app/) Integration
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/12eddca90b08193253253ea10516a6c4.jpg)
 
 Streamline the process from crash detection to fix deployment by pairing Capgo's live update system with Crashlytics.
 

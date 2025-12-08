@@ -40,7 +40,7 @@ Pembaruan OTA, seperti yang didukung oleh [Capgo](https://capgo.app/), memastika
 
 ## [Appflow](https://ionic.io/appflow/) Deploy: Kirim pembaruan real-time ke pengguna aplikasi [Ionic](https://ionicframework.com/) Anda
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-03-19.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-03-19.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -70,7 +70,7 @@ Sistem OTA modern menyediakan cara untuk mendorong pembaruan penting dengan cepa
 
 ## Cara Kerja Pembaruan OTA [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 [Pembaruan OTA Capacitor](https://capgo.app/ja/) membuat penerapan aplikasi lebih cepat dan efisien, memungkinkan pengembang mendorong perubahan tanpa menunggu persetujuan toko aplikasi.
 
@@ -91,7 +91,7 @@ Pembaruan OTA membawa lebih dari sekadar kecepatan - mereka memberikan pengemban
 
 ### Alat OTA [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo meningkatkan pengalaman pembaruan OTA dengan alat dan fitur tambahan. Keamanan adalah prioritas utama, dengan enkripsi end-to-end memastikan hanya pengguna yang berwenang yang dapat mengakses pembaruan [\[1\]](https://capgo.app/). Fitur utama meliputi:
 

@@ -386,7 +386,7 @@ async function optimizedBiometricCheck() {
 
 ### [Capgo](https://capgo.app/)でのアップデート
 
-![Capgo](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Capgoはバイオメトリック更新を簡素化します。
 

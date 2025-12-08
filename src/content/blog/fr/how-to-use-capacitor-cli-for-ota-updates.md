@@ -59,4 +59,4 @@ Les mises à jour OTA font gagner du temps, améliorent l'expérience utilisateu
 
 ## Explorez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) de Capawesome pour Ionic...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)

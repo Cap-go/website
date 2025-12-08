@@ -22,7 +22,7 @@ next_blog: ''
 
 ### [Capgo](https://capgo.app/)의 주요 이점:
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-07.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-07.jpg?auto=compress)
 
 -   **즉각적인 업데이트**: 지연 없이 버그를 수정하거나 기능을 출시할 수 있습니다.
 -   **안전한 배포**: 업데이트는 암호화되어 인증된 사용자만 접근할 수 있습니다.

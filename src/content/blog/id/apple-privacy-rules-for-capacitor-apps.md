@@ -282,7 +282,7 @@ Saat mengirimkan aplikasi Anda, berikan informasi akurat tentang praktik privasi
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf/f3ac818a2fec22e90998e19561d68a19.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf/f3ac818a2fec22e90998e19561d68a19.jpg)
 
 Capgo menawarkan sistem yang aman untuk pembaruan langsung sambil mematuhi aturan privasi Apple.
 

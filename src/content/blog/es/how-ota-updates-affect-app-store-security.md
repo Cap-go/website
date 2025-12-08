@@ -146,7 +146,7 @@ Para gestionar actualizaciones de forma segura y efectiva, sigue estos pasos:
 
 ### Características de la Plataforma [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
 
 Una plataforma confiable de actualización OTA incorpora estas prácticas para asegurar y simplificar despliegues. Busca plataformas que ofrezcan características esenciales de seguridad.
 

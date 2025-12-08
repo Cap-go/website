@@ -42,7 +42,7 @@ Para mantener el cumplimiento, enfócate en correcciones de errores, actualizaci
 
 ## [Appflow](https://ionic.io/appflow/live-updates) Actualizaciones en Vivo: Despliega actualizaciones instantáneas directamente a tus usuarios
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Twj-Bx6ZRw8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -133,7 +133,7 @@ Mantén documentación detallada de todos los cambios para hacer el proceso de r
 
 ### [Capgo](https://capgo.app/): Gestión de Actualizaciones en Vivo
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
 
 Capgo simplifica la gestión de actualizaciones en vivo y asegura el cumplimiento de los requisitos de Apple. Ya ha respaldado más de **947.6 millones de actualizaciones** en más de **1,400 apps de producción** [\[1\]](https://capgo.app/).
 

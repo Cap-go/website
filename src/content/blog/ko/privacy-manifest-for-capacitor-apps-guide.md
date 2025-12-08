@@ -81,7 +81,7 @@ Capgo에 따르면, 사용자의 95%가 24시간 이내에 업데이트를 준�
 
 ## [Capacitor](https://capacitorjs.com/)를 위한 Privacy Manifest 구축
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### 설정 요구 사항
 
@@ -229,7 +229,7 @@ Apple의 가이드라인을 충족하는 Privacy Manifest를 만드는 것이 �
 
 ## [Capgo](https://capgo.app/) 개인정보 보호 도구
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo는 개인정보 보호 매니페스트와 앱 업데이트 관리를 단순화하여 배포 지연 없이 개인정보 보호 기준을 유지할 수 있도록 합니다.
 

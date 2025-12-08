@@ -158,7 +158,7 @@ dependencies {
 
 ### [Gradle](https://gradle.org/)の出力の理解
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 `./gradlew app:dependencies`を使用し、ビルドスキャンを有効にして依存関係の競合やスクリプトの問題を見つけます。これらのツールはプロジェクトのセットアップの詳細なビューを提供します。
 
@@ -235,7 +235,7 @@ dependencies {
 
 ## [Capgo](https://capgo.app/)を使用したクイック修正
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e75df8283d21cbd679ae1b/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 CapacitorのAndroidビルドエラーに直面した際、プロジェクトの遅延を避け、進行を維持するために、問題を迅速に解決することが重要です。以下にCapgoがどのように即座に修正をデプロイするのに役立つかを説明します。
 

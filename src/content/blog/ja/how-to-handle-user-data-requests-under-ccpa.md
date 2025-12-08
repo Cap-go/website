@@ -164,7 +164,7 @@ next_blog: ''
 
 ### [Capgo](https://capgo.app/)を使用した更新
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
 
 アプリ内コントロールを確立した後、アプリを最新の状態に保つことがコンプライアンス維持の鍵となります。ここでCapgoの出番です。アプリストアの承認を待たずに即時更新を展開できます。実際、アクティブユーザーの95%がリリースから24時間以内に更新を受け取ります[\[1\]](https://capgo.app/) 。
 

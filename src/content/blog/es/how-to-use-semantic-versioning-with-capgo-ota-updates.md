@@ -59,7 +59,7 @@ Capgo asegura que las actualizaciones lleguen a los usuarios de forma rápida y 
 
 ## Guía de Configuración de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
 
 Aquí te explicamos cómo configurar Capgo para gestionar actualizaciones OTA y control de versiones fácilmente.
 

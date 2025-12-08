@@ -173,7 +173,7 @@ Google Playはステージドロールアウトに特定の基準を設定して
 
 ### [Capgo](https://capgo.app/)が提供する価値
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Capacitorアプリの場合、CapgoはGoogle Playのガイドラインに従いながら、正確な更新管理を提供することでステージドロールアウトを合理化します。そのチャネルシステムは既存のロールアウト計画とスムーズに統合されます。
 

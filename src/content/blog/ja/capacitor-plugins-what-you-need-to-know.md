@@ -36,7 +36,7 @@ Capacitor のプラグインシステムは、ネイティブパフォーマン�
 
 ## 自分の [Capacitor](https://capacitorjs.com/) プラグインを作成する方法
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-10.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Nf-mOfmD7X4" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -134,7 +134,7 @@ Capacitor アプリにプラグインを追加するには、パフォーマン�
 
 ### [Capgo](https://capgo.app/): アプリのライブアップデート
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-10.jpg?auto=compress)
 
 Capgo は、Capacitor とシームレスに連携する [ライブアップデートプラグイン](https://capgo.app/docs/plugin/self-hosted/auto-update/) を提供します。このプラグインを使用すると、アプリに直接アップデートをデプロイできます - バグ修正や新機能を暗号化されたチャネルを使用して行い、すべてアプリストアのポリシーに準拠しています [\[3\]](https://github.com/riderx/awesome-capacitor)。
 

@@ -84,7 +84,7 @@ Secondo Capgo, il 95% degli utenti si adegua agli aggiornamenti entro 24 ore. Co
 
 ## Costruire Privacy Manifest per [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Requisiti di configurazione
 
@@ -232,7 +232,7 @@ Dopo aver apportato aggiornamenti, testa il tuo manifest in un ambiente di svilu
 
 ## Strumenti di Privacy [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo semplifica la gestione dei privacy manifest e gli aggiornamenti delle app, assicurando che i tuoi standard di privacy rimangano intatti senza ritardare i deployment.
 

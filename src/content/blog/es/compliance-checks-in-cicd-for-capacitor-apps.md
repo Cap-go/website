@@ -44,7 +44,7 @@ Mantente conforme, seguro y eficiente con prácticas adecuadas de CI/CD para [ap
 
 ## Construyendo Tuberías CI/CD para [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
 
 Una tubería CI/CD bien diseñada simplifica el despliegue y ayuda a asegurar que tu aplicación cumpla consistentemente con las pautas de la tienda de aplicaciones.
 
@@ -108,7 +108,7 @@ Usar herramientas integradas para la automatización del cumplimiento puede hace
 
 ### Herramientas de Cumplimiento de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgo mejora los flujos de trabajo de cumplimiento con herramientas que se integran directamente en tu tubería CI/CD. Así es como Capgo puede ayudar:
 

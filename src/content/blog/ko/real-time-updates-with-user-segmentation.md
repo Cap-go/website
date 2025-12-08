@@ -111,7 +111,7 @@ Capgo의 도구를 사용하면 사용자 행동이 변경됨에 따라 이러�
 
 ### [Capgo](https://capgo.app/)의 업데이트 관리 시스템
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 이러한 개인화된 상호작용을 지원하기 위해 효과적인 [업데이트 관리](https://capgo.app/docs/plugin/cloud-mode/manual-update/)가 핵심입니다. Capgo의 채널 시스템은 베타 테스트, 단계적 출시 및 특정 사용자 세그먼트를 대상으로 하는 기능 출시를 위한 정밀한 제어를 제공합니다. 실시간 분석과 상세한 권한 설정을 통해 Capgo는 앱스토어 규칙 준수를 보장합니다 - 특히 기업용 앱에서 중요합니다.
 

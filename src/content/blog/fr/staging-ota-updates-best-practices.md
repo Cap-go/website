@@ -170,7 +170,7 @@ Le respect des directives de l'app store est crucial pour éviter les retards ou
 
 ## Utilisation de [Capgo](https://capgo.app/) pour les mises à jour OTA
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
 
 ### Fonctions principales de Capgo
 

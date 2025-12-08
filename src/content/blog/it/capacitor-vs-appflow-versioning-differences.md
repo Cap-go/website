@@ -45,7 +45,7 @@ Nella scelta, considera il tuo budget, la frequenza degli aggiornamenti e la nec
 
 ## Demo Live: Sviluppare App [Capacitor](https://capacitorjs.com/) in Ionic [Appflow](https://ionicio/docs/appflow)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/tkgNuSG5FJQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -108,7 +108,7 @@ La gestione del controllo versione per le [app Capacitor](https://capgo.app/blog
 
 ### Sistema di Aggiornamento [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo offre una soluzione per i team che cercano di semplificare il controllo versione senza svuotare il portafoglio. Fornisce aggiornamenti in tempo reale rimanendo conforme alle policy degli store Apple e Google. Alcune caratteristiche principali includono:
 

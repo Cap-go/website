@@ -157,7 +157,7 @@ Membangun di atas penerapan dan pengujian yang aman, alat manajemen OTA yang kua
 
 ### Gambaran Fitur [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
 
 Capgo menyediakan keamanan canggih untuk [pembaruan OTA Capacitor](https://capgo.app/ja/) dengan **enkripsi end-to-end**, memastikan bahwa hanya pengguna yang berwenang yang dapat mendekripsi pembaruan.
 

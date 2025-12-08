@@ -46,7 +46,7 @@ next_blog: ''
 
 ## Tipos Principales de Fallos de Compilación de [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Los fallos de compilación de Capacitor pueden surgir de varias fuentes, cada una requiriendo soluciones específicas. A continuación, analizaremos algunas de las causas más comunes y cómo se manifiestan durante el proceso de compilación.
 
@@ -266,7 +266,7 @@ Para compilaciones iOS, confirme la compatibilidad de Xcode y las configuracione
 
 ## Usando [Capgo](https://capgo.app/) para Gestionar Fallos de Compilación
 
-![Capgo](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 Capgo proporciona un conjunto de herramientas diseñadas para ayudar a los equipos a manejar fallos de compilación en [pipelines de CI/CD de Capacitor](https://capgo.app/blog/automatic-capacitor-android-build-gitlab/). Al combinar monitoreo, configuraciones seguras y análisis en profundidad, ayuda a los equipos a identificar, abordar y prevenir problemas de compilación. A continuación, exploraremos cómo Capgo simplifica estos procesos para mejorar la eficiencia de CI/CD.
 

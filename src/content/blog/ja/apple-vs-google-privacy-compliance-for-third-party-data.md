@@ -132,7 +132,7 @@ GoogleのPlay Storeデータ安全性ガイドラインも、データ取り扱�
 
 ### プライバシーツールと[Capgo](https://capgo.app/)の統合
 
-![Capgo](https://assets.seobotai.com/capgo.app/680d81465a08fca8917a02c4/002013533a2d2ba7b874d9490aa8d76e.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680d81465a08fca8917a02c4/002013533a2d2ba7b874d9490aa8d76e.jpg)
 
 現代の開発ツールは、プライバシーコンプライアンスと迅速な更新のロールアウト能力を組み合わせています。CapgoはAppleとGoogleの両方のプライバシー基準に準拠することでこれらの取り組みをサポートしています。1.4Kのアプリが使用し、82%のグローバル成功率を達成し、Capgoはその効果を証明しています[\[1\]](https://capgo.app/) 。
 

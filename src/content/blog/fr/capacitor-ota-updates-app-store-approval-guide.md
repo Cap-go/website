@@ -98,7 +98,7 @@ Pour éviter ces problèmes, il est crucial de suivre les directives d'implémen
 
 ## Directives de Mise à Jour OTA pour [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
 
 ### Étapes de Conformité Technique
 
@@ -145,7 +145,7 @@ Ces mesures de sécurité s'alignent sur les exigences de signature de code d'Ap
 
 ## Système de Gestion des Mises à Jour de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
 Capgo fournit un moyen sécurisé de livrer et de gérer les [mises à jour OTA de Capacitor](https://capgo.app/), garantissant une distribution fluide tout en respectant les normes de conformité. Il offre également des outils avancés pour la [gestion des mises à jour](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) au niveau entreprise.
 

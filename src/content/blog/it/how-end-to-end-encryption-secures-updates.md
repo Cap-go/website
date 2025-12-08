@@ -72,7 +72,7 @@ Questo processo in più fasi garantisce che gli aggiornamenti siano protetti dal
 
 ## Configurazione della crittografia end-to-end in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Questa sezione spiega come implementare la crittografia end-to-end nelle [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), basandosi sui concetti trattati in precedenza.
 

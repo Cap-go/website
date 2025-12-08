@@ -59,7 +59,7 @@ Prima di immergersi negli aggiornamenti OTA con targeting geolocalizzato, assicu
 
 ### Iniziare con [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
 
 Per costruire un'[app Capacitor](https://capgo.app/plugins/ivs-player/) consapevole della posizione con aggiornamenti OTA, avrai bisogno di:
 

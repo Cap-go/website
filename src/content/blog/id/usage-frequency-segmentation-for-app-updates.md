@@ -77,7 +77,7 @@ Dengan pengguna Anda terkelompok, Anda dapat merancang [strategi pembaruan](http
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Penargetan Pengguna
 
-![Capgo](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgo menawarkan alat yang membuat penargetan pembaruan ke kelompok pengguna tertentu lebih tepat, berkat fitur segmentasi frekuensi pengguna. Kemampuan ini memperhalus strategi pembaruan terarah yang dibahas sebelumnya.
 

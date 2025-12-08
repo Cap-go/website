@@ -32,7 +32,7 @@ Pembaruan langsung memungkinkan pengembang untuk dengan cepat mendorong pembarua
 
 ### Cara Menggunakan Pembaruan Langsung di [Capacitor](https://capacitorjs.com/):
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
 
 1.  **Siapkan SDK**: Instal SDK Pembaruan Langsung dan konfigurasikan aplikasi Anda.
 2.  **Integrasikan Logika Pembaruan**: Tambahkan kode untuk memeriksa dan menerapkan pembaruan secara otomatis.
@@ -224,7 +224,7 @@ Berikut ringkasan cepat alat pembaruan langsung populer dan bagaimana mereka dib
 
 ### Ikhtisar Fitur [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
 
 Capgo menangani lebih dari 150.000 pembaruan langsung per bulan, membuktikan bahwa ini dibangun untuk skala perusahaan menengah. Berikut yang membuatnya berbeda:
 

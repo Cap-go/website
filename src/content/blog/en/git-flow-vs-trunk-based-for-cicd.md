@@ -156,7 +156,7 @@ Up next: How to set up CI/CD pipelines for either approach.
 
 ### [Capgo](https://capgo.app/) CI/CD Integration
 
-![Capgo](https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 To add live over-the-air updates to either CI/CD setup, Capgo can be integrated seamlessly:
 

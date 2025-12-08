@@ -40,7 +40,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 3でWebネイティブアプリを構築する
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
 
 <Steps>
 1. パッケージをインストール

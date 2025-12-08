@@ -56,7 +56,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/) 시작하기
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
 
 위치 인식 [Capacitor 앱](https://capgo.app/plugins/ivs-player/)을 OTA 업데이트와 함께 구축하려면 다음이 필요합니다:
 

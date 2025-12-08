@@ -33,7 +33,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 앱 파이프라인의 보안 위험
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 [Capacitor 앱 개발](https://capgo.app/blog/capacitor-comprehensive-guide/)이 발전함에 따라 CI/CD 파이프라인에 특정 보안 문제를 도입합니다. 이러한 위험을 해결하는 것은 안전한 개발 환경을 유지하는 데 중요합니다.
 
@@ -115,7 +115,7 @@ OTA 업데이트를 보호하기 위해:
 
 ### [Capgo](https://capgo.app/) 보안 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo는 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)을 위해 특별히 설계된 보안 중심의 설정을 제공합니다. 그 종단 간 암호화는 업데이트가 승인된 사용자만 복호화할 수 있도록 보장하며, 일반적으로 서명된 패키지에 의존하는 것을 넘어섭니다. 주요 기능은 다음과 같습니다:
 

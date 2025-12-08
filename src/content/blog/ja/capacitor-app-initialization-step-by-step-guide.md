@@ -227,4 +227,4 @@ Capacitorプロジェクトが初期化されたら、次のステップはiOS�
 
 ### [Capgo](https://capgo.app/)でのライブアップデート
 
-![Capgo](https://mars-imagesimgix
+![Capgo Live Update Dashboard Interface](https://mars-imagesimgix

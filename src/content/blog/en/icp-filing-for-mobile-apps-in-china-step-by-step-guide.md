@@ -218,7 +218,7 @@ Be prepared for compliance issues by establishing a response plan:
 
 ## [Capgo](https://capgo.app/) for Chinese App Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 Capgo offers tools designed to simplify real-time updates while ensuring your app complies with Chinese regulations. These tools are essential for keeping your app running smoothly and meeting local requirements.
 

@@ -181,7 +181,7 @@ OTA 업데이트는 여러 주요 영역에서 테스트되어야 합니다:
 
 ## [Capgo](https://capgo.app/) 컴플라이언스 도구
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae/574f3a2cd27791
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae/574f3a2cd27791
 
 Capgo는 클라우드 기반 및 자체 호스팅 솔루션을 포함한 유연한 호스팅 옵션을 제공합니다. 이러한 옵션을 통해 조직은 Google Play의 보안 표준을 충족하면서 업데이트 인프라를 제어할 수 있습니다. 실시간 모니터링 및 즉각적인 롤백과 같은 기능은 82%의 전역 성공률 기준을 달성하는 데 도움이 됩니다.
 

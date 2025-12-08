@@ -51,7 +51,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) Update-Funktionen
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Integriertes Update-System
 

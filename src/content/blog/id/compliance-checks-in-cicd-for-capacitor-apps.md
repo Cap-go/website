@@ -45,7 +45,7 @@ Tetap patuh, aman, dan efisien dengan praktik CI/CD yang tepat untuk [aplikasi C
 
 ## Membangun Pipeline CI/CD untuk [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
 
 Pipeline CI/CD yang dirancang dengan baik menyederhanakan penerapan dan membantu memastikan aplikasi Anda secara konsisten memenuhi pedoman app store
 
@@ -109,7 +109,7 @@ Menggunakan tools bawaan untuk otomatisasi kepatuhan dapat membuat proses ini le
 
 ### Tool Kepatuhan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgo meningkatkan alur kerja kepatuhan dengan tools yang terintegrasi langsung ke pipeline CI/CD Anda. Berikut cara Capgo dapat membantu:
 

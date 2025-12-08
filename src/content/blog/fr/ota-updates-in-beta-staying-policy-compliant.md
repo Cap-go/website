@@ -140,7 +140,7 @@ La gestion des mises à jour OTA pendant les tests bêta nécessite des outils f
 
 ### Fonctionnalités de mise à jour [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5/574f3a2cd27791454624262312a6c223.jpg)
 
 La plateforme Capgo se concentre sur la sécurité et la conformité, offrant des fonctionnalités clés adaptées aux tests bêta :
 

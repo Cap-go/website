@@ -34,7 +34,7 @@ Las actualizaciones en vivo permiten a los desarrolladores enviar rápidamente a
 
 ### Cómo Usar Actualizaciones en Vivo en [Capacitor](https://capacitorjs.com/):
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
 
 1.   **Configurar el SDK**: Instala el SDK de Actualizaciones en Vivo y configura tu aplicación.
 2.   **Integrar Lógica de Actualización**: Añade código para verificar y aplicar actualizaciones automáticamente.
@@ -226,7 +226,7 @@ Aquí hay un desglose rápido de las herramientas populares de actualización en
 
 ### Visión General de Características de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
 
 Capgo maneja más de 150,000 actualizaciones en vivo mensualmente, demostrando que está construido para escalar para empresas medianas. Aquí está lo que lo hace destacar:
 

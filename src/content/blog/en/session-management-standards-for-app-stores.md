@@ -177,7 +177,7 @@ A strong testing approach combines SAST (Static Application Security Testing), D
 
 ### [Capgo](https://capgo.app/) Security Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/682d1da84fa53d42207e38b6/b22e3ca8adc90efccae83141abc5debd.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682d1da84fa53d42207e38b6/b22e3ca8adc90efccae83141abc5debd.jpg)
 
 Capgo emphasizes the importance of robust testing for session management. Its built-in security measures strengthen both session integrity and compliance, as outlined below:
 

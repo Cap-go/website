@@ -40,7 +40,7 @@ Mendeteksi konflik versi sejak awal dapat menghemat waktu debugging dan mencegah
 
 ### Periksa Versi dengan CLI [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 CLI Capacitor menyediakan perintah yang membantu untuk memeriksa versi dependensi proyek Anda. Buka terminal, navigasi ke direktori proyek Anda, dan jalankan:
 
@@ -132,7 +132,7 @@ npm ls @capacitor/*
 
 ### Gunakan Alat npm dan [Yarn](https://yarnpkg.com/)
 
-![Yarn](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
+![Yarn Package Manager Website](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
 
 Package manager seperti npm dan Yarn menawarkan perintah yang membantu untuk mendeteksi dan mengatasi masalah dependensi. Berikut cara mereka dapat membantu:
 
@@ -328,7 +328,7 @@ Setelah pengujian lokal mengkonfirmasi bahwa fungsionalitas dasar aplikasi utuh,
 
 ### Pengujian Langsung dengan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
 
 Setelah memverifikasi perubahan Anda secara lokal, saatnya menguji di lingkungan live. Siapkan channel pengujian dengan perintah berikut:
 

@@ -72,7 +72,7 @@ Proses multi-langkah ini memastikan bahwa pembaruan dilindungi sejak saat dibuat
 
 ## Menyiapkan Enkripsi End-to-End di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Bagian ini menjelaskan cara mengimplementasikan enkripsi end-to-end dalam [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), berdasarkan konsep yang dibahas sebelumnya.
 

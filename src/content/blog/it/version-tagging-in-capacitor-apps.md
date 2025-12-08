@@ -44,7 +44,7 @@ Il tag delle versioni semplifica gli [aggiornamenti delle app](https://capgo.app
 
 ## Come configurare AUTOMATICAMENTE il tuo progetto [Capacitor](https://capacitorjs.com/) ⚡️
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/kYFZkmJ6rAc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -54,7 +54,7 @@ Uno strumento che spicca in questo ambito è Capgo, che offre funzionalità spec
 
 ### Funzionalità di Controllo Versione di [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 Capgo fornisce robuste capacità di gestione delle versioni, tra cui:
 

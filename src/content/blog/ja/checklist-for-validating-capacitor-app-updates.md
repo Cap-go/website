@@ -60,7 +60,7 @@ iOS、Android、Webプラットフォーム用の個別のテスト環境を、C
 
 ### [Capgo](https://capgo.app/)セットアップ
 
-![Capgo](https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 以下の手順でCapgoを設定します[\[1\]](https://capgo.app/)：
 

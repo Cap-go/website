@@ -63,7 +63,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/) 롤백 아키텍처
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Capacitor의 롤백 시스템은 버전 관리를 효과적으로 처리하기 위해 세 가지 주요 구성 요소에 의존합니다:
 
@@ -121,7 +121,7 @@ Capacitor 플러그인의 롤백 시스템을 만들기 위해서는 버전 및 
 
 ### [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
 
 Capgo는 2024년 [Microsoft Code Push](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/)'의 종료 후 강력한 롤백 관리 솔루션으로 떠올랐습니다. 플러그인 업데이트를 단순화하는 다양한 기능을 제공합니다:
 

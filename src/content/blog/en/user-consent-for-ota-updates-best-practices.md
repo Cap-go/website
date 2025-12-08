@@ -62,7 +62,7 @@ Since updates are deployed automatically in the background [\[1\]](https://capgo
 
 ## Adding Consent to [Capacitor](https://capacitorjs.com/) OTA Updates
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680c46c45a08fca89178f92d/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680c46c45a08fca89178f92d/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Incorporating user consent into Capacitor apps ensures smooth OTA updates while respecting user choices. Here’s how you can integrate a consent system into your updates.
 
@@ -84,7 +84,7 @@ For a simpler integration process, consider using Capgo’s built-in tools for m
 
 ### Managing Consent with [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/680c46c45a08fca89178f92d/c4b9497df1c5d14f98df25934b50bafa.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680c46c45a08fca89178f92d/c4b9497df1c5d14f98df25934b50bafa.jpg)
 
 Capgo simplifies the process of handling user consent for OTA updates with its [channel system](https://capgo.app/docs/plugin/cloud-mode/channel-system/) and other tools. Below is an overview of what it offers:
 

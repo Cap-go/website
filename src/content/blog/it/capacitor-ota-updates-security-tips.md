@@ -158,7 +158,7 @@ Costruendo su distribuzione e test sicuri, robusti strumenti di gestione OTA son
 
 ### Panoramica Funzionalità [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1d348ebbb9dc80644cb8d/241c8f19433e01f315154c8988becf9c.jpg)
 
 Capgo fornisce sicurezza avanzata per [aggiornamenti OTA Capacitor](https://capgo.app/ja/) con **crittografia end-to-end**, garantendo che solo gli utenti autorizzati possano decifrare gli aggiornamenti.
 

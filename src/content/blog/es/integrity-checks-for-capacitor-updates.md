@@ -62,7 +62,7 @@ La autenticación mutua TLS (Transport Layer Security) asegura que tanto el clie
 
 ### Uso de [Capgo](https://capgo.app/) para Actualizaciones
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-25.jpg?auto=compress)
 
 Capgo ofrece una solución optimizada y segura para gestionar actualizaciones OTA. Con más de 23.5 millones de actualizaciones entregadas en 750 aplicaciones en producción, Capgo proporciona:
 

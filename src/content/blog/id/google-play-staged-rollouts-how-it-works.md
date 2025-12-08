@@ -175,7 +175,7 @@ Studi menunjukkan bahwa staged rollout yang dilaksanakan dengan baik mencapai ti
 
 ### Bagaimana [Capgo](https://capgo.app/) Menambah Nilai
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Untuk aplikasi [Capacitor](https://capacitorjs.com/), Capgo merampingkan staged rollout dengan menawarkan manajemen pembaruan yang tepat sambil mematuhi pedoman Google Play. Sistem channelnya terintegrasi dengan lancar dengan rencana rollout yang ada.
 

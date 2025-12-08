@@ -40,7 +40,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)アプリでのデルタアップデート
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 [Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)でのデルタアップデートは、差分パッチングと呼ばれる方法に依存し、修正されたコード部分のみを送信します。このアプローチによりデータ転送量を最小限に抑え、ユーザーにとってアップデートをより迅速かつ簡単にします。
 
@@ -212,7 +212,7 @@ Capgoでは、ワンクリックで以前のバージョンにロールバック
 
 ## [Capgo](https://capgo.app/)のデルタアップデート機能
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Capgoは、パフォーマンスとセキュリティの両方を向上させるように設計された機能でデルタアップデートシステムを強化しています。これまでに、プラットフォームは**750の本番アプリ**で**2,350万回のアップデート**を管理してきました [\[1\]](https://capgo.app/) 。
 

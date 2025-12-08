@@ -69,7 +69,7 @@ SSLピンニングは、API通信を保護しユーザーデータを守るた�
 
 ### あなたの[Capacitor](https://capacitorjs.com/)アプリを構成する
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 プラグインを選択したら、次のステップはSSLピンニングを有効にするためにCapacitorアプリを設定することです。構成の例は次のようになります：
 

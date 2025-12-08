@@ -45,7 +45,7 @@ Mettez en place des outils de rollback aujourd'hui pour assurer des mises à jou
 
 ## Comment Migrer Votre Application [Ionic](https://ionicframeworkcom/) vers [Capacitor](https://capacitorjs.com/) 3
 
-![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 

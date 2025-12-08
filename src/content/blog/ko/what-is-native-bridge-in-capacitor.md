@@ -42,7 +42,7 @@ Capacitor의 네이티브 브리지는 웹 기술의 유연성과 네이티브 �
 
 ## 프로젝트 특정 로컬 플러그인 생성 방법 | Ionic | [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/q5kQcTqPtGY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -141,7 +141,7 @@ Capacitor의 네이티브 브리는 웹 애플리케이션과 [네이티브 장�
 
 ### [Capgo](https://capgo.app/)로 실시간 업데이트 제공
 
-![Capgo](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/4305c974119f10d25560fe363e5513b1.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/4305c974119f10d25560fe363e5513b1.jpg)
 
 Capgo는 네이티브 브리지를 활용하여 실시간 업데이트를 제공하며, 앱 변경을 즉시 푸시할 수 있도록 하여 앱 스토어 제출을 요구하지 않습니다.
 

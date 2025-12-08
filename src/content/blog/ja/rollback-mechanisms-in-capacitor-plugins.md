@@ -63,7 +63,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/) ロールバックアーキテクチャ
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Capacitorのロールバックシステムは、バージョン管理を効果的に処理するための3つの主要コンポーネントに依存しています:
 
@@ -121,7 +121,7 @@ Capacitorプラグインのロールバックシステムを作成するには�
 
 ### [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
 
 Capgoは2024年の[Microsoft Code Push](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/)のシャットダウン後、強力なロールバック管理ソリューションとして台頭しました。様々な機能でプラグインの更新を簡素化します:
 

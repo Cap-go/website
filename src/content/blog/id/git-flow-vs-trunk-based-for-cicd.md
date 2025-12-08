@@ -160,7 +160,7 @@ Berikutnya: Cara mengatur pipa CI/CD untuk salah satu pendekatan ini.
 
 ### Integrasi CI/CD [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Untuk menambahkan pembaruan langsung melalui udara ke salah satu pengaturan CI/CD, Capgo dapat diintegrasikan dengan mulus:
 

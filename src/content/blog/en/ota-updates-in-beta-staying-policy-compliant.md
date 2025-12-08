@@ -135,7 +135,7 @@ Managing OTA updates during beta testing requires reliable tools to ensure effic
 
 ### [Capgo](https://capgo.app/) Update Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5/574f3a2cd27791454624262312a6c223.jpg)
 
 Capgo’s platform focuses on security and compliance, offering key features tailored for beta testing:
 

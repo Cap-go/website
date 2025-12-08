@@ -172,7 +172,7 @@ Aderire alle linee guida degli app store è cruciale per evitare ritardi o inter
 
 ## Utilizzo di [Capgo](https://capgo.app/) per Aggiornamenti OTA
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
 
 ### Funzioni Core di Capgo
 

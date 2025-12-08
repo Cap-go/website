@@ -62,7 +62,7 @@ Siapkan repositori Anda dengan praktik berikut:
 
 ### Persiapan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 Konfigurasi Capgo dengan langkah-langkah berikut [\[1\]](https://capgo.app/):
 

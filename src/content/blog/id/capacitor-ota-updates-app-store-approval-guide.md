@@ -101,7 +101,7 @@ Untuk menghindari masalah ini, mengikuti pedoman implementasi khusus Capacitor s
 
 ## Pedoman Pembaruan OTA untuk [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
 
 ### Langkah Kepatuhan Teknis
 
@@ -149,7 +149,7 @@ Langkah-langkah keamanan ini sesuai dengan persyaratan penandatanganan kode Appl
 
 ## Sistem Manajemen Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
 Capgo menyediakan cara aman untuk mengirim dan mengelola [pembaruan OTA Capacitor](https://capgo.app/), memastikan distribusi yang lancar sambil memenuhi standar kepatuhan. Ini juga menawarkan alat canggih untuk [manajemen pembaruan](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/) tingkat enterprise.
 

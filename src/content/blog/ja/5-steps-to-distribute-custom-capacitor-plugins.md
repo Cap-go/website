@@ -28,7 +28,7 @@ next_blog: ''
 
 ## iOSとAndroid向け[Capacitor](https://capacitorjs.com/)プラグインの作成方法
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ## ステップ1：プラグインのビルドとテスト
 
@@ -117,7 +117,7 @@ npmに公開された後、次のステップはプロジェクトへの統合�
 
 ### [Capgo](https://capgo.app/)ライブアップデートの設定
 
-![Capgo](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 **Capgoを使用する理由？** 更新を効率化する様々な機能を提供します：
 

@@ -45,7 +45,7 @@ Pour les mises à jour en direct, intégrez des outils comme **[Capgo](https://c
 
 ## Optimisez la santé de l'application avec [Firebase](https://firebase.google.com/) Performance Monitoring ...
 
-![Firebase](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
+![Firebase Platform Dashboard](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
 
 ## Sélectionnez un outil de surveillance
 
@@ -199,7 +199,7 @@ Utilisez ces outils pour identifier et résoudre efficacement les goulots d'étr
 
 ## Configuration du suivi des erreurs [Sentry](https://sentry.io/)
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
 
 Firebase gère les métriques de performance, mais Sentry est tout au sujet de la capture et du diagnostic des erreurs. Ensemble, ils vous donnent une configuration de surveillance solide.
 
@@ -342,7 +342,7 @@ Une fois vos alertes en place, concentrez-vous sur la surveillance continue et l
 
 ## Mises à jour et surveillance [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 ### Fonctionnalités principales de Capgo
 

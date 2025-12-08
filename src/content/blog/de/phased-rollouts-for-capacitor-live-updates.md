@@ -96,7 +96,7 @@ Diese Schritte helfen Ihnen, Ihre Einführung effektiv zu verwalten und dabei Ri
 
 ## Einrichten gestaffelter Einführungen in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
 
 ### Live-Update-Konfiguration
 
@@ -110,7 +110,7 @@ Diese Einrichtung erfüllt die Apple- und Google-Richtlinien und stellt sicher, 
 
 ### [Capgo](https://capgo.app/) Integrationsanleitung
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
 
 Capgos Webplattform rationalisiert die Update-Verteilung mit diesen Kernfunktionen:
 

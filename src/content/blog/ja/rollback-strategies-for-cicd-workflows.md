@@ -44,7 +44,7 @@ next_blog: ''
 
 ## 1. [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6806ece2e572faef86999f28/3963f7973abbc5791f2fae6e45924907.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6806ece2e572faef86999f28/3963f7973abbc5791f2fae6e45924907.jpg)
 
 Capgoは、既存のパイプラインとスムーズに統合できるシンプルなワンクリックのロールバック機能を提供することで、CI/CDプロセスを加速します。このロールバック機能により、チームは迅速に以前のリリースを復元し、稼働中のアプリを長時間のダウンタイムから保護します。
 
@@ -75,13 +75,13 @@ Capgoは帯域幅の使用を減らすために部分的な更新をサポート
 
 ## 2. Capawesome
 
-![Capawesome](https://assets.seobotai.com/capgo.app/6806ece2e572faef86999f28/04d155e1ac5e3041660c0e8da59e2e54.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/6806ece2e572faef86999f28/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 Capawesomeのロールバック機能は十分に文書化されておらず、広く議論されてもいないため、その機能性は不明確です。次に、Appflowの高度なエンタープライズフレームワークによるロールバックの取り扱いを詳しく見てみましょう。
 
 ## 3. [Appflow](https://ionic.io/docs/appflow)
 
-![Appflow](https://assets.seobotai.com/capgo.app/6806ece2e572faef86999f28/e3b5a6ca6da391fe9a61210f3bd95bb8.jpg)
+![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806ece2e572faef86999f28/e3b5a6ca6da391fe9a61210f3bd95bb8.jpg)
 
 AppflowはCI/CDプランに対して年間約$6,000の料金を請求し、多くのチームがより手頃なロールバックオプションを探ることになります。その主な機能の一つは、リリースのスナップショットを作成できることであり、開発者は必要に応じて迅速に以前のビルドに戻ることができます。
 

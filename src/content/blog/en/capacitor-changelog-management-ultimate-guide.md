@@ -192,7 +192,7 @@ When managing live updates, it's important to document key details such as the b
 
 ### [Capgo](https://capgo.app/) Update Management
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 For live OTA updates, detailed documentation is a must to complement your overall changelog strategy. Capgo simplifies this process by automatically tracking versions, monitoring update performance, logging rollbacks, and recording deployments by channel.
 

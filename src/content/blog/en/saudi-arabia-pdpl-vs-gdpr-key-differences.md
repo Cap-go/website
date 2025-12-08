@@ -42,7 +42,7 @@ next_blog: ''
 
 ## Understanding Data Governance in GCC Countries | An Overview | [Tsaaro](https://tsaaro.com/) Exclusive Webinar | #gcc
 
-![Tsaaro](https://assets.seobotai.com/capgo.app/68365728d3b9661981859b67/68bbf17375951ddeb53190bacec8126f.jpg)
+![Tsaaro Privacy Compliance Platform](https://assets.seobotai.com/capgo.app/68365728d3b9661981859b67/68bbf17375951ddeb53190bacec8126f.jpg)
 
 <iframe src="https://www.youtube.com/embed/CQDqhDEpLbU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

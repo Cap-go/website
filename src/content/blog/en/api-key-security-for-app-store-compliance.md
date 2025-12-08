@@ -246,7 +246,7 @@ Regularly review who has access, adjust permissions as needed, and set up automa
 
 ## [Capgo](https://capgo.app/) Security Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8ac6c283d21cbd67ac65e/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8ac6c283d21cbd67ac65e/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgo strengthens app security by combining secure storage and transport methods with advanced features built into its platform.
 

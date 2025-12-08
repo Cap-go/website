@@ -75,7 +75,7 @@ next_blog: ''
 
 ## [Capgo](https://capgo.app/)を使ったユーザーターゲティング
 
-![Capgo](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgoは、ユーザー頻度セグメンテーション機能により、特定のユーザーグループへの更新のターゲティングをより正確に行うためのツールを提供します。これらの機能は、前述のターゲット更新戦略を洗練します。
 

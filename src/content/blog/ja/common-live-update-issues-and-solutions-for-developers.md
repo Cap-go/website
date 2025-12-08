@@ -62,7 +62,7 @@ OTAアップデートはネットワークの問題やバージョンの競合�
 
 ### [Capgo](https://capgo.app/)でOTAアップデートを実施
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
 
 CapgoはOTAアップデート管理のための強力なツールです。組み込みのモニタリング、ロールバックオプション、エンドツーエンドの暗号化による安全な配信などの機能を提供します。さらに、CI/CD統合によりデプロイメントがスムーズになります[\[3\]](https://appinventiv.com/blog/how-ci-cd-helps-mobile-app-development/) 。
 

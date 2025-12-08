@@ -45,7 +45,7 @@ Au moment de choisir, considérez votre budget, la fréquence des mises à jour 
 
 ## Démo en direct : Création d'applications [Capacitor](https://capacitorjs.com/) dans Ionic [Appflow](https://ionic.io/docs/appflow)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/tkgNuSG5FJQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -110,7 +110,7 @@ La gestion du contrôle de version pour les [applications Capacitor](https://cap
 
 ### Système de mise à jour [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo offre une solution pour les équipes cherchant à rationaliser le contrôle de version sans se ruiner. Il fournit des mises à jour en direct tout en restant conforme aux politiques des stores Apple et Google. Quelques fonctionnalités clés incluent :
 

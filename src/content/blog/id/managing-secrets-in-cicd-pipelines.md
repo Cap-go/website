@@ -89,7 +89,7 @@ Banyak alat CI/CD dilengkapi dengan kemampuan manajemen rahasia bawaan:
 
 ### Fitur Keamanan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 Capgo meningkatkan keamanan pembaruan langsung dalam aplikasi Capacitor dengan memperluas manajemen rahasia CI/CD standar. Ini menggunakan enkripsi end-to-end untuk memastikan hanya pengguna yang berwenang yang dapat mendekripsi data sensitif [\[1\]](https://capgo.app/)
 

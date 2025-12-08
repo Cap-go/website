@@ -156,7 +156,7 @@ Pour les développeurs envisageant des mises à jour OTA directes, intégrer ces
 
 ### Utilisation d'outils comme [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
 
 Livrer des mises à jour rapidement et efficacement est une nécessité pour les équipes de développement modernes. Des outils comme **Capgo** simplifient cela en offrant des fonctionnalités comme le contrôle de version, l'analytique et les déploiements progressifs. Ces capacités facilitent la gestion des mises à jour OTA, particulièrement pour les équipes d'entreprise qui gèrent des déploiements à grande échelle. Le ciblage des utilisateurs et les options de déploiement flexibles améliorent encore le processus.
 

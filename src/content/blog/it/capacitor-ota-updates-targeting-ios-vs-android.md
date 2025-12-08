@@ -147,7 +147,7 @@ Per gli sviluppatori che lavorano con strumenti come Capgo, comprendere queste d
 
 ## Panoramica della Piattaforma [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-01.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-01.jpg?auto=compress)
 
 Capgo unisce le regole di aggiornamento OTA specifiche della piattaforma in un'unica piattaforma di aggiornamento semplificata.
 

@@ -38,13 +38,13 @@ Capacitor-Foren sind Ihre Anlaufstelle für effiziente Plug-in-Entwicklung. Tauc
 
 ## Haupt [Capacitor](https://capacitorjs.com/) Foren
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 Capacitor-Entwickler haben mehrere Anlaufstellen für Vernetzung, Zusammenarbeit und Problemlösungen.
 
 ### [Discord](https://ionic.io/blog/announcing-official-ionic-discord-server) Kanalübersicht
 
-![Discord](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
+![Discord Community Platform](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
 
 Der offizielle Discord-Server ist ein großartiger Ort für Echtzeit-Diskussionen und schnelles Troubleshooting. Er ist in fokussierte Kanäle unterteilt, wie:
 
@@ -212,7 +212,7 @@ Die offizielle Dokumentation von Capacitor ist eine wichtige Ressource. Sie enth
 
 ### [Capgo](https://capgo.app/) Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo macht sofortige App-Updates einfach. Es hat 23,5 Millionen Updates über 750 Produktions-Apps bereitgestellt, mit einer Erfolgsquote von 82 %. Beeindruckenderweise erhalten 95 % der aktiven Nutzer innerhalb von 24 Stunden Updates. Sein globales CDN kann ein 5 MB-Bündel in nur 114 ms herunterladen. Capgo unterstützt Capacitor 6 und 7 und bietet die Möglichkeit von partiellen Updates [\[1\]](https://capgo.app/).
 

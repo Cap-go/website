@@ -67,7 +67,7 @@ next_blog: ''
 
 ## So erstellen Sie ein [Capacitor](https://capacitorjs.com/) Plugin für iOS/Android
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-27.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-27.jpg?auto=compress)
 
 Capgo arbeitet nahtlos mit CI/CD-Tools wie GitHub Actions, GitLab CI und Jenkins zusammen, automatisiert Dependency-Updates und gewährleistet einheitliche Plugin-Versionen. Diese Tools erleichtern die Integration von Capgo in Ihren Workflow.
 

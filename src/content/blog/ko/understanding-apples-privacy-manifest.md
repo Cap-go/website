@@ -53,7 +53,7 @@ Apple의 개인정보 보호 매니페스트는 세 가지 주요 구성 요소�
 
 ## [Capacitor](https://capacitorjs.com/)에서 개인정보 보호 매니페스트 설정하기
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### 매니페스트 파일 생성
 
@@ -74,7 +74,7 @@ Xcode에서 **Product > Analyze**로 이동하여 개인정보 보호 보고서�
 
 ### [Capgo](https://capgo.app/)를 통한 업데이트
 
-![Capgo](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 Xcode 분석을 통과한 후, Capgo를 사용하여 앱의 개인정보 보호 매니페스트를 최신 상태로 유지하세요. Capgo는 다음을 제공합니다:
 

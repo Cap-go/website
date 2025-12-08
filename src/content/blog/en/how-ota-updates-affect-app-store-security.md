@@ -143,7 +143,7 @@ To manage updates securely and effectively, follow these steps:
 
 ### [Capgo](https://capgo.app/) Platform Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
 
 A reliable OTA update platform incorporates these practices to secure and simplify deployments. Look for platforms offering essential security features.
 

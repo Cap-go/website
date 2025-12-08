@@ -40,7 +40,7 @@ Les mises à jour OTA, comme celles fournies par [Capgo](https://capgo.app/), ga
 
 ## [Appflow](https://ionic.io/appflow/) Déploiement : Expédiez des mises à jour en temps réel à vos utilisateurs d'[Ionic](https://ionicframework.com/) 
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-03-19.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-03-19.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -70,7 +70,7 @@ Les systèmes OTA modernes offrent un moyen de pousser des mises à jour critiqu
 
 ## Comment fonctionnent les mises à jour OTA de [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 Les [mises à jour OTA de Capacitor](https://capgo.app/ja/) rendent le déploiement des applications plus rapide et plus efficace, permettant aux développeurs d'envoyer des modifications sans attendre les approbations des stores d'applications.
 
@@ -91,7 +91,7 @@ Les mises à jour OTA apportent plus que de la vitesse - elles offrent aux déve
 
 ### Outils OTA de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo améliore l'expérience de mise à jour OTA avec des outils et des fonctionnalités supplémentaires. La sécurité est une priorité absolue, avec un chiffrement de bout en bout garantissant que seuls les utilisateurs autorisés peuvent accéder aux mises à jour [\[1\]](https://capgo.app/). Les fonctionnalités clés incluent :
 

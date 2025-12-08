@@ -39,13 +39,13 @@ Los foros de [Capacitor](https://capacitorjs.com/) son esenciales para que los d
 
 ## Foros Principales de [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 Los desarrolladores de Capacitor tienen varios foros de referencia para conectarse, colaborar y resolver problemas.
 
 ### Guía del Canal de [Discord](https://ionic.io/blog/announcing-official-ionic-discord-server)
 
-![Discord](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
+![Discord Community Platform](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
 
 El servidor oficial de Discord es un excelente lugar para discusiones en tiempo real y solución rápida de problemas. Está organizado en canales específicos, como:
 
@@ -164,7 +164,7 @@ La documentación oficial de Capacitor es un recurso de referencia. Incluye refe
 
 ### Actualizaciones de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo hace que las actualizaciones instantáneas de apps sean simples. Ha entregado 23.5 millones de actualizaciones en 750 apps de producción, con una tasa de éxito del 82%. Impresionantemente, el 95% de los usuarios activos reciben actualizaciones dentro de 24 horas. Su CDN global puede descargar un paquete de 5MB en solo 114ms. Capgo soporta Capacitor 6 y 7, ofreciendo capacidades de actualización parcial [\[1\]](https://capgo.app/).
 

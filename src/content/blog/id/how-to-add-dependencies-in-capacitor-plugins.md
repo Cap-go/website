@@ -60,7 +60,7 @@ next_blog: ''
 
 ## Bagaimana cara membuat plugin [Capacitor](https://capacitorjs.com/) untuk iOS/Android
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-27.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-27.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/Dq_BmheGAig" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -336,7 +336,7 @@ Atur ketergantungan Android untuk memastikan integrasi native yang lancar. Berik
 
 ### Ketergantungan [Gradle](https://gradle.org/)
 
-![Gradle](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-27.jpg?auto=compress)
+![Gradle Build Tool Interface](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-27.jpg?auto=compress)
 
 Tambahkan konfigurasi berikut ke file `build.gradle` Anda:
 
@@ -438,7 +438,7 @@ org.gradle.jvmargs=-Xmx2048m
 
 ## Integrasi [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Menggunakan Capgo bersama dengan manajemen ketergantungan native dan JavaScript membuat pembaruan plugin Anda lebih cepat dan mudah.
 

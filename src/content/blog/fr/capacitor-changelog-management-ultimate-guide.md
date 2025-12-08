@@ -194,7 +194,7 @@ Lors de la gestion des mises à jour en direct, il est important de documenter l
 
 ### Gestion des Mises à Jour [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Pour les mises à jour OTA en direct, une documentation détaillée est indispensable pour compléter votre stratégie globale de gestion des changements. Capgo simplifie ce processus en suivant automatiquement les versions, en surveillant les performances des mises à jour, en enregistrant les retours en arrière et en documentant les déploiements par canal.
 

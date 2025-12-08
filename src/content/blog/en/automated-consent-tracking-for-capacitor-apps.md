@@ -418,7 +418,7 @@ It's critical to test consent flows across different OS versions and devices to 
 
 ### Using [Capgo](https://capgo.app/) for Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
 
 Capgo's live update capabilities allow you to make compliance adjustments efficiently. Here's an example:
 

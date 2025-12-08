@@ -207,7 +207,7 @@ Automated compliance tools can simplify this process by:
 
 ## [Capgo](https://capgo.app/) Privacy Features
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 When updating your mobile app to meet privacy requirements, speed and security are key. Capgo offers tools to help you stay compliant with U.S. privacy laws, ensuring updates are both fast and secure.
 

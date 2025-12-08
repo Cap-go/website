@@ -77,7 +77,7 @@ Este método permite un desarrollo rápido y actualizaciones confiables mientras
 
 ## Actualizaciones de [Capacitor](https://capacitorjs.com/) para 2025
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Mantenimiento de Plugins
 
@@ -89,7 +89,7 @@ Con las políticas actualizadas de Apple, la conversión de PWAs a aplicaciones 
 
 ## Herramientas de Cumplimiento de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/6f70cafcdfe95287b465212dfd047c63.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/6f70cafcdfe95287b465212dfd047c63.jpg)
 
 Capgo ofrece herramientas que simplifican el mantenimiento de aplicaciones mientras aseguran que las actualizaciones en vivo cumplan con las pautas de Apple. Estas herramientas ayudan a los desarrolladores a implementar actualizaciones de forma segura sin infringir las reglas de la App Store.
 

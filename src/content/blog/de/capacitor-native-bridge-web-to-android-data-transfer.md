@@ -33,7 +33,7 @@ next_blog: ''
 
 ## So erstellen Sie ein [Capacitor](https://capacitorjs.com/) Plugin für iOS/Android
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <Steps>
 
@@ -178,7 +178,7 @@ Integrieren Sie Mechanismen zur Fehlerbehebung, wie automatische Wiederholungsve
 
 ## [Capgo](https://capgo.app/) Plattform-Funktionen
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/bff1fb0606ef072e3c605788ba21e2a7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
 Capgo bewältigt bisherige Herausforderungen mit einem Live-Update-System, das für reibungslose Datenübertragungen zwischen Web- und Android-Schichten konzipiert ist. Seine Architektur gewährleistet sichere und leistungsstarke Datenverarbeitung.
 

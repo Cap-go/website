@@ -31,7 +31,7 @@ Pipeline security for [Capacitor](https://capacitorjs.com/) apps is essential to
 
 ## Security Risks in [Capacitor](https://capacitorjs.com/) App Pipelines
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 As [Capacitor app development](https://capgo.app/blog/capacitor-comprehensive-guide/) evolves, it introduces specific security challenges to CI/CD pipelines. Addressing these risks is critical to maintaining a secure development environment.
 
@@ -113,7 +113,7 @@ New OTA platforms now prioritize security in their Capacitor pipelines. These to
 
 ### [Capgo](https://capgo.app/) Security Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo provides a security-focused setup specifically designed for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/). Its end-to-end encryption ensures that updates can only be decrypted by authorized users, going beyond the usual reliance on signed packages. Key features include:
 

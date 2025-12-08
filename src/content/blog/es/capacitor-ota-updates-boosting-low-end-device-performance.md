@@ -84,7 +84,7 @@ A diferencia de las actualizaciones tradicionales de la tienda de aplicaciones, 
 
 ### Sistema de Actualización de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
 
 El sistema de Capgo está construido para abordar las limitaciones de hardware y red que muchos usuarios enfrentan. Esto se alinea con los conocimientos previos de rendimiento [\[1\]](https://capgo.app/). Como compartió un desarrollador:
 

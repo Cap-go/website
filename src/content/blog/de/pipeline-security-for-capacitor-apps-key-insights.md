@@ -36,7 +36,7 @@ Pipeline-Sicherheit für [Capacitor](https://capacitorjs.com/)-Apps ist wichtig,
 
 ## Sicherheitsrisiken in [Capacitor](https://capacitorjs.com/) App-Pipelines
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Mit der Entwicklung von [Capacitor-App-Entwicklung](https://capgo.app/blog/capacitor-comprehensive-guide/) entstehen spezifische Sicherheitsherausforderungen für CI/CD-Pipelines. Die Bewältigung dieser Risiken ist entscheidend für die Aufrechterhaltung einer sicheren Entwicklungsumgebung.
 
@@ -118,7 +118,7 @@ Neue OTA-Plattformen priorisieren jetzt Sicherheit in ihren Capacitor-Pipelines.
 
 ### [Capgo](https://capgo.app/) Sicherheitsfunktionen
 
-![Capgo](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo bietet ein sicherheitsorientiertes Setup speziell für [Capacitor-Apps](https://capgo.app/blog/capacitor-comprehensive-guide/). Seine Ende-zu-Ende-Verschlüsselung stellt sicher, dass Updates nur von autorisierten Benutzern entschlüsselt werden können und geht damit über die übliche Abhängigkeit von signierten Paketen hinaus. Zu den wichtigsten Funktionen gehören:
 

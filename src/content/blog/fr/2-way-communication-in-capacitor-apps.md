@@ -38,7 +38,7 @@ Ce guide explique comment configurer la communication bidirectionnelle, impléme
 
 ## Comment créer un plugin [Capacitor](https://capacitorjs.com/) pour iOS/Android
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680c247c5a08fca89178b068/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680c247c5a08fca89178b068/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <Steps>
 

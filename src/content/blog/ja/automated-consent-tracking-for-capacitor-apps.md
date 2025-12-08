@@ -420,7 +420,7 @@ class ConsentValidator {
 
 ### 更新のための[Capgo](https://capgo.app/)の使用
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
 
 Capgoのライブ更新機能により、コンプライアンスの調整を効率的に行うことができます。以下はその例です：
 

@@ -81,7 +81,7 @@ OTAアップデートの際立った特徴の1つは**増分（またはデル�
 
 ### [Capgo](https://capgo.app/) アップデートシステム
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
 
 Capgoのシステムは、多くのユーザーが直面するハードウェアとネットワークの制限に対処するように構築されています。これは以前のパフォーマンスの洞察と一致します[\[1\]](https://capgo.app/) 。あるデベロッパーが共有したように：
 

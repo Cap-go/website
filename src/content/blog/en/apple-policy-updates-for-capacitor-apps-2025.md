@@ -72,7 +72,7 @@ This method allows for quick development and reliable updates while staying comp
 
 ## [Capacitor](https://capacitorjs.com/) Updates for 2025
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Plugin Maintenance
 
@@ -84,7 +84,7 @@ With Apple's updated policies, moving PWAs to native apps now requires following
 
 ## [Capgo](https://capgo.app/) Compliance Tools
 
-![Capgo](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/6f70cafcdfe95287b465212dfd047c63.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67edf689ebbb9dc80640b580/6f70cafcdfe95287b465212dfd047c63.jpg)
 
 Capgo offers tools that simplify app maintenance while ensuring live updates comply with Apple's guidelines. These tools help developers securely deploy updates without breaking App Store rules.
 

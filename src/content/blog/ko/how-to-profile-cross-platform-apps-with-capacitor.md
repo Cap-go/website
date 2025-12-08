@@ -102,7 +102,7 @@ Chrome에서 앱을 실행하는 동안 **DevTools**(우클릭 > 검사)를 열�
 
 ### [Xcode](https://developer.apple.com/xcode/)를 사용한 iOS 프로파일링
 
-![Xcode](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Xcode에서 **Product > Profile (⌘I)**로 이동하여 프로파일링 템플릿을 선택하세요:
 
@@ -154,7 +154,7 @@ Capacitor 앱의 일반적인 성능 문제는 주로 **큰 번들 크기**, **�
 
 ### [Capgo](https://capgo.app/)를 사용한 빠른 업데이트
 
-![Capgo](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
 
 Capgo는 자동 롤백 기능이 있는 암호화된 단계별 업데이트를 제공하여 업데이트 프로세스를 단순화합니다. 또한 실시간 분석을 제공하여 앱 스토어 지연을 우회하고 업데이트가 사용자에게 빠르고 효율적으로 도달하도록 보장합니다.
 

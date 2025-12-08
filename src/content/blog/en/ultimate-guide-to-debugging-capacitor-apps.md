@@ -82,7 +82,7 @@ These tools complement browser-based debugging by addressing platform-specific c
 
 ### [Capacitor](https://capacitorjs.com/) CLI Debug Commands
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 The Capacitor CLI includes helpful commands to streamline debugging:
 
@@ -289,7 +289,7 @@ If you use source maps in production, restrict access to authorized developers t
 
 ## Using [Capgo](https://capgo.app/) for Quick Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Building on solid [debugging techniques](https://capgo.app/docs/plugin/debugging), tools like Capgo make it easier to keep your app stable by allowing instant updates. Capgo lets developers push updates without waiting for app store approvals, all while keeping debugging features intact.
 

@@ -33,7 +33,7 @@ Mengotomatisasi pembaruan OTA memastikan pengiriman lebih cepat, lebih sedikit k
 
 ## [Appflow](https://ionic.io/appflow/live-updates) Live Updates: Deploy pembaruan instan langsung ke pengguna Anda
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-02-12.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-02-12.jpg?auto=compress)
 
 <Steps>
 
@@ -45,7 +45,7 @@ Mengotomatisasi pembaruan OTA memastikan pengiriman lebih cepat, lebih sedikit k
 
 ## Menyiapkan [Capacitor](https://capacitorjs.com/) untuk Pembaruan OTA
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-12.jpg?auto=compress)
 
 Menyiapkan Capacitor untuk [pembaruan over-the-air](https://capgo.app/blog/open-source-licecing/) (OTA) otomatis melibatkan tiga langkah utama: mengkonfigurasi setup, menerapkan langkah-langkah keamanan, dan [mengintegrasikan sistem pembaruan](https://capgo.app/docs/plugin/cloud-mode/hybrid-update). Proses ini memastikan kompatibilitas dengan otomatisasi CI/CD sambil menjaga keamanan aplikasi Anda.
 
@@ -99,7 +99,7 @@ Untuk menerapkan fitur keamanan ini, sertakan yang berikut dalam konfigurasi And
 
 ### Mengkonfigurasi [Capgo](https://capgo.app/) untuk Pembaruan OTA
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-12.jpg?auto=compress)
 
 Capgo menyederhanakan proses pembaruan OTA. Mulai dengan menginstal plugin yang diperlukan:
 

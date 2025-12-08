@@ -30,7 +30,7 @@ Optimisasi plugin iOS kustom sangat penting untuk meningkatkan performa aplikasi
 
 ## Bagaimana pengembang iOS senior memprofil dan menyelesaikan masalah performa dengan [Instruments](https://developer.apple.com/tutorials/instruments).app | Live Dev Mentoring
 
-![Instruments](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
+![Instruments Performance Analysis Tool](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
 
 <iframe src="https://www.youtube.com/embed/HIsECG5s4DU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -64,7 +64,7 @@ Setelah mengatasi masalah memori, Anda dapat fokus pada meningkatkan efisiensi k
 
 ### Tips Performa Kode [Swift](https://developer.apple.com/swift/)
 
-![Swift](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/2e2b0430a9aab611e781d4d45224ac43.jpg)
+![Swift Programming Language Website](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/2e2b0430a9aab611e781d4d45224ac43.jpg)
 
 Swift menyediakan beberapa alat untuk membantu mengoptimalkan kode Anda. Konsentrasi pada area-area ini untuk mendapatkan hasil maksimal dari plugin Anda:
 
@@ -84,7 +84,7 @@ Untuk membawa plugin iOS Anda ke level berikutnya, menyetel performanya dengan o
 
 ### Pengaturan Performa [Xcode](https://developer.apple.com/xcode/)
 
-![Xcode](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Menyesuaikan pengaturan build Xcode dapat secara signifikan meningkatkan performa plugin Anda sambil menjaga ukurannya. Berikut ikhtisar cepat konfigurasi utama:
 
@@ -141,7 +141,7 @@ Dengan cermat memilih dan mengkonfigurasi dependensi, Anda mengurangi risiko dan
 
 ### Pembaruan OTA dengan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 Setelah dependensi dioptimalkan, langkah selanjutnya adalah memastikan plugin Anda berkembang dengan mulus seiring waktu. Pembaruan over-the-air (OTA) adalah game-changer, dan Capgo adalah alat yang kuat untuk deployment cepat sambil tetap mematuhi aturan App Store. Menurut data terbaru, **95% pengguna aktif menerima pembaruan dalam 24 jam** menggunakan sistem distribusi Capgo [\[1\]](https://capgo.app/).
 

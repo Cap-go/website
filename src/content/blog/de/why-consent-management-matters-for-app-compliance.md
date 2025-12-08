@@ -96,7 +96,7 @@ Echtzeit-Updates sind entscheidend für die Pflege genauer Compliance-Aufzeichnu
 
 ## Einrichtung der Einwilligung in [Capacitor](https://capacitorjs.com/) Apps
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Erstellen einer Einwilligungs-UI
 
@@ -155,7 +155,7 @@ Diese Tabelle zeigt, wie sich Live-Updates durch ihre Geschwindigkeit und Benutz
 
 ### [Capgo](https://capgo.app/) Update-Funktionen
 
-![Capgo](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
 
 Capgo nutzt Live-Updates, um die Einwilligungsverwaltung für Capacitor Apps zu vereinfachen. Es erreicht eine beeindruckende **95% Nutzer-Update-Rate innerhalb von 24 Stunden** und eine **82% globale Erfolgsrate** für Updates [\[1\]](https://capgo.app/).
 

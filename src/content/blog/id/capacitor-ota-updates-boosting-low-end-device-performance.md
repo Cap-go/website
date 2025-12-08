@@ -82,7 +82,7 @@ Tidak seperti pembaruan toko aplikasi tradisional yang membutuhkan unduhan aplik
 
 ### Sistem Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
 
 Sistem Capgo dibangun untuk mengatasi keterbatasan perangkat keras dan jaringan yang dihadapi banyak pengguna. Ini sejalan dengan wawasan kinerja sebelumnya [\[1\]](https://capgo.app/). Seperti yang dibagikan oleh seorang pengembang:
 

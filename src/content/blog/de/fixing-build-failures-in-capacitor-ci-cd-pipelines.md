@@ -46,7 +46,7 @@ next_blog: ''
 
 ## Hauptarten von [Capacitor](https://capacitorjs.com/) Build-Fehlern
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Capacitor Build-Fehler können verschiedene Ursachen haben, die jeweils spezifische Lösungen erfordern. Nachfolgend erläutern wir einige der häufigsten Ursachen und wie sie sich während des Build-Prozesses manifestieren.
 
@@ -266,7 +266,7 @@ Zusätzliche Tipps für gründliches Testen:
 
 ## [Capgo](https://capgo.app/) zur Verwaltung von Build-Fehlern verwenden
 
-![Capgo](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 Capgo bietet eine Suite von Tools, die Teams bei der Behandlung von Build-Fehlern in [Capacitor CI/CD-Pipelines](https://capgo.app/blog/automatic-capacitor-android-build-gitlab/) unterstützen. Durch die Kombination von Überwachung, sicheren Konfigurationen und tiefgehender Analyse unterstützt es Teams bei der Identifizierung, Behebung und Prävention von Build-Problemen. Im Folgenden erfahren Sie, wie Capgo diese Prozesse vereinfacht, um die CI/CD-Effizienz zu verbessern.
 

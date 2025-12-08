@@ -270,7 +270,7 @@ Expande tu configuración de Capacitor con herramientas que mejoran la entrega d
 
 ### Configuración de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67edd19cebbb9dc8064069d2/6f70cafcdfe95287b465212dfd047c63.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67edd19cebbb9dc8064069d2/6f70cafcdfe95287b465212dfd047c63.jpg)
 
 Simplifica tu flujo de trabajo usando el sistema de actualización en vivo de Capgo. Para comenzar, ejecuta:
 

@@ -32,7 +32,7 @@ next_blog: ''
 
 ## Cómo usar el Almacenamiento Seguro de Ionic [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-18.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/VsZECyPIOYY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -315,7 +315,7 @@ Firmar paquetes de actualización es un paso crítico en la protección contra c
 
 ### Sistema de Actualización [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-18.jpg?auto=compress)
 
 Capgo simplifica las actualizaciones OTA seguras para apps Capacitor ofreciendo características de seguridad automatizadas. Aquí un ejemplo de cómo usar el sistema de actualización de Capgo en tu app:
 

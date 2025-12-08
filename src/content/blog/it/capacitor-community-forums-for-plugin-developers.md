@@ -39,13 +39,13 @@ Los foros de Capacitor son tu recurso principal para un desarrollo eficiente de 
 
 ## Principales Foros de [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 Los desarrolladores de Capacitor tienen varios foros de referencia para conectar, colaborar y resolver problemas.
 
 ### Guía del Canal [Discord](https://ionic.io/blog/announcing-official-ionic-discord-server)
 
-![Discord](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
+![Discord Community Platform](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
 
 El servidor oficial de Discord es un excelente lugar para discusiones en tiempo real y resolución rápida de problemas. Está organizado en canales enfocados, tales como:
 
@@ -213,7 +213,7 @@ La documentación oficial de Capacitor es un recurso esencial. Incluye referenci
 
 ### Actualizaciones de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo hace que las actualizaciones instantáneas de aplicaciones sean simples. Ha entregado 23.5 millones de actualizaciones en 750 aplicaciones en producción, con una tasa de éxito del 82%. Impresionantemente, el 95% de los usuarios activos reciben actualizaciones en 24 horas. Su CDN global puede descargar un paquete de 5MB en solo 114ms. Capgo soporta Capacitor 6 y 7, ofreciendo capacidades de actualización parcial [\[1\]](https://capgo.app/).
 

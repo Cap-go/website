@@ -34,7 +34,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)의 의존성 유형
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
 
 Capacitor 프로젝트는 크로스 플랫폼 개발에서 각각 특정 역할을 하는 다양한 의존성에 의존합니다. 플러그인과 플랫폼별 구성을 살펴보겠습니다.
 

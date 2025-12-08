@@ -147,7 +147,7 @@ For developers working with tools like Capgo, understanding these distinctions i
 
 ## [Capgo](https://capgo.app/) Platform Overview
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-01.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-01.jpg?auto=compress)
 
 Capgo brings together platform-specific OTA update rules into one streamlined update platform.
 

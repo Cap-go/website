@@ -197,7 +197,7 @@ Al gestionar actualizaciones en vivo, es importante documentar detalles clave co
 
 ### Gestión de Actualizaciones con [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Para actualizaciones OTA en vivo, la documentación detallada es imprescindible para complementar tu estrategia general de registro de cambios. Capgo simplifica este proceso rastreando automáticamente versiones, monitoreando rendimiento de actualizaciones, registrando reversiones y grabando despliegues por canal.
 

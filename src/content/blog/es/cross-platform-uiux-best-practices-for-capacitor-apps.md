@@ -37,7 +37,7 @@ next_blog: ''
 
 ## Construye Componentes Multiplataforma con [Stencil](https://stenciljscom/) y [Capacitor](https://capacitorjs.com/)
 
-![Stencil](https://mars-images.imgix.net/seobot/screenshots/stenciljscom-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
+![Stencil Web Components Compiler](https://mars-images.imgix.net/seobot/screenshots/stenciljscom-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -89,6 +89,6 @@ Crear componentes UI de alto rendimiento requiere atención cuidadosa a la compa
 
 ### Usando Componentes de [Ionic](https://ionicframeworkcom/)
 
-![Ionic](https://mars-images.imgix.net/seobot/screenshots/ionicframeworkcom-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
+![Ionic Framework Website](https://mars-images.imgix.net/seobot/screenshots/ionicframeworkcom-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
 
 Ionic ofrece componentes pre-construidos que simplifican el desarrollo multiplataforma. Estos componentes se alinean automáticamente con patrones de diseño específicos de plataforma mientras aseguran una funcionalidad consistente

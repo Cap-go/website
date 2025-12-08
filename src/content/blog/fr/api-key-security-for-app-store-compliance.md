@@ -251,7 +251,7 @@ Revoyez régulièrement qui a accès, ajustez les permissions si nécessaire et 
 
 ## Fonctionnalités de sécurité de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8ac6c283d21cbd67ac65e/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8ac6c283d21cbd67ac65e/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgo renforce la sécurité des applications en combinant des méthodes de stockage et de transport sécurisées avec des fonctionnalités avancées intégrées dans sa plateforme.
 

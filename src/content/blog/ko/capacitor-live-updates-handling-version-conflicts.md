@@ -29,7 +29,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 실시간 업데이트의 버전 충돌
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### 일반적인 충돌 원인
 
@@ -53,7 +53,7 @@ next_blog: ''
 
 ## Capawesome의 새로운 Ionic Capacitor 실시간 업데이트 살펴보기 ...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/5d1ba8681722600db788c5ef0c9fe764.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/5d1ba8681722600db788c5ef0c9fe764.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -118,7 +118,7 @@ iOS와 Android에 대해 별도의 업데이트 테스트를 실행하세요. �
 
 ### [Capgo](https://capgo.app/) 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/29f394e74984c052f31714ba4759b80a.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/29f394e74984c052f31714ba4759b80a.jpg)
 
 Capgo는 다른 플랫폼이 남긴 공백을 채우기 위해 설계된 다양한 기능을 제공합니다. **[클라우드 또는 자체 호스팅 배포](https://capgo.app/blog/self-hosted-capgo/)**, **종단간 암호화**, **CI/CD 통합**, **채널 기반 배포**가 포함됩니다. 주요 성능 지표는 다음과 같습니다:
 

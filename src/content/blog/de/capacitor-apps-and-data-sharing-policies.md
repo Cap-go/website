@@ -125,7 +125,7 @@ Um die Plattformregeln und sicheren Updatepraktiken zu ergänzen, vereinfachen d
 
 ### [Capgo](https://capgo.app/) Sicherheitsmerkmale
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
 
 Die Sicherheitsinfrastruktur von Capgo bietet Entwicklern Werkzeuge zur Einhaltung. Wichtige Merkmale umfassen:
 

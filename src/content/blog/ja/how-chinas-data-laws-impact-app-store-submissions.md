@@ -82,7 +82,7 @@ Capgoは、エンドツーエンドの暗号化とカスタマイズ可能なロ
 
 ### [Capgo](https://capgo.app/)でのアップデート管理
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 Capgoは、コンプライアンスを維持しながらアップデートを管理するプロセスを簡素化します。
 

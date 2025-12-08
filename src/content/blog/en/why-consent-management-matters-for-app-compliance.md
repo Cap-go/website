@@ -90,7 +90,7 @@ Real-time updates are crucial for maintaining accurate compliance records. As pr
 
 ## Setting Up Consent in [Capacitor](https://capacitorjs.com/) Apps
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Creating a Consent UI
 
@@ -149,7 +149,7 @@ This table shows how live updates stand out for their speed and ease of use. Cap
 
 ### [Capgo](https://capgo.app/) Update Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
 
 Capgo leverages live updates to simplify consent management for Capacitor apps. It achieves an impressive **95% user update rate within 24 hours** and an **82% success rate globally** for updates [\[1\]](https://capgo.app/).
 

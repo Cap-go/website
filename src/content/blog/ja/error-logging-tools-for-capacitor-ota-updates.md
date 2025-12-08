@@ -40,7 +40,7 @@ Each tool offers unique benefits depending on your team's needs, budget, and exp
 
 ## [Sentry](https://sentry.io/) and Capacitor: How to Build and Monitor User Experiences
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/shzKcE79GXI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -78,13 +78,13 @@ LogRocketは、OTAアップデート中のユーザーエクスペリエンス�
 
 ### [Bugsnag](https://www.bugsnag.com/): エラーマネジメント
 
-![Bugsnag](https://mars-images.imgix.net/seobot/screenshots/www.bugsnag.com-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
+![Bugsnag Error Monitoring Dashboard](https://mars-images.imgix.net/seobot/screenshots/www.bugsnag.com-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
 
 Bugsnagはエラーの優先順位をつけ、アプリの安定性を監視するのを助けます。その安定性スコアリング機能は、OTAアップデートがアプリの全体的なパフォーマンスにどのように影響するかを評価します。その他の機能には、自動エラーグルーピング、リリーストラッキング、CI/CDパイプラインとの統合があります。
 
 ### [Capgo](https://capgo.app/): 組み込みのエラートラッキング
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Capgoは、OTAアップデートプロセスに直接エラートラッキングを組み込んだアプローチを取ります。
 

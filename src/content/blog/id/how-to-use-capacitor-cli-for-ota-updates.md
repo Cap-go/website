@@ -59,4 +59,4 @@ Pembaruan OTA menghemat waktu, meningkatkan pengalaman pengguna, dan memastikan 
 
 ## Jelajahi Pembaruan Langsung [Capacitor](https://capacitorjs.com/) Ionic Baru dari Capawesome ...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)

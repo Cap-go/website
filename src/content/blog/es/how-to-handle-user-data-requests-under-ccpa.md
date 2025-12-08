@@ -167,7 +167,7 @@ Coloca estos controles en un lugar fácil de encontrar dentro del menú de confi
 
 ### Usando [Capgo](https://capgo.app/) para Actualizaciones
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
 
 Una vez que hayas establecido controles sólidos en la aplicación, mantener tu aplicación actualizada es clave para mantener el cumplimiento. Ahí es donde entra Capgo. Te permite implementar actualizaciones instantáneamente - sin esperar aprobaciones de la tienda de aplicaciones. De hecho, el 95% de los usuarios activos reciben actualizaciones dentro de las 24 horas posteriores al lanzamiento [\[1\]](https://capgo.app/).
 

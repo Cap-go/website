@@ -216,7 +216,7 @@ Pour les plugins avec des fonctionnalités complexes, simulez des scénarios ré
 
 ### Tests OTA avec [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
 
 Les outils open-source de Capgo facilitent le déploiement et le test des mises à jour rapidement. Voici comment les utiliser :
 

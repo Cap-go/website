@@ -179,7 +179,7 @@ Capgo can streamline this process even further, especially when it comes to upda
 
 ### Using [Capgo](https://capgo.app/) for Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
 
 Capgo simplifies the update process with features designed to save time and improve security.
 

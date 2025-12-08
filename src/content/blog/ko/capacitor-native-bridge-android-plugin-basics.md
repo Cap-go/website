@@ -123,7 +123,7 @@ dependencies {
 
 ### [Gradle](https://gradle.org/) 설정 최적화
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 성능과 호환성을 향상시키기 위해 `gradle.properties` 파일을 다음 설정으로 업데이트하세요:
 

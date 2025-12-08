@@ -96,7 +96,7 @@ Pembaruan real-time sangat penting untuk menjaga catatan kepatuhan yang akurat. 
 
 ## Menyiapkan Persetujuan di Aplikasi Capacitor
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Membuat UI Persetujuan
 
@@ -155,6 +155,6 @@ Tabel ini menunjukkan bagaimana pembaruan langsung unggul dalam hal kecepatan da
 
 ### Fitur Pembaruan Capgo
 
-![Capgo](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
 
 Capgo memanfaatkan pembaruan langsung untuk menyederhanakan manajemen persetujuan untuk aplikasi Capacitor.

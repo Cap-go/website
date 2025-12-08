@@ -174,7 +174,7 @@ Google은 여전히 보안 조치를 시행하고 정책 위반을 모니터링�
 
 ## [Capgo](https://capgo.app/): OTA 업데이트 플랫폼
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-28.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-28.jpg?auto=compress)
 
 Capgo는 앞서 언급한 사례들을 바탕으로 앱 스토어 규정을 준수하는 무선 업데이트(OTA)를 처리하는 안정적인 방법을 제공합니다.
 

@@ -53,7 +53,7 @@ A continuación, veremos cómo crear y verificar tu manifiesto en un proyecto de
 
 ## Configurando Privacy Manifest en [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Creando el Archivo de Manifiesto
 
@@ -74,7 +74,7 @@ En Xcode, navega a **Product > Analyze** para generar un Reporte de Privacidad. 
 
 ### Actualizaciones con [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 Después de pasar el análisis de Xcode, usa Capgo para actualizaciones en vivo y mantener actualizado el manifiesto de privacidad de tu app. Capgo proporciona:
 

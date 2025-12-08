@@ -47,7 +47,7 @@ Dengan platform seperti Capgo yang menawarkan pembaruan cepat (95% adopsi penggu
 
 ## Jelajahi Capawesome Live Update [Capacitor](https://capacitorjs.com/) Ionic Baru ...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -275,7 +275,7 @@ Memilih platform pembaruan OTA yang tepat sangat penting untuk mengintegrasikan 
 
 ### Fitur [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04cc402ef2e8f7dc781d2b86cd364db3.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04cc402ef2e8f7dc781d2b86cd364db3.jpg)
 
 Capgo dirancang khusus untuk pembaruan OTA Capacitor, menawarkan kecepatan pembaruan rata-rata 434 milidetik dan mencapai tingkat pembaruan pengguna 95% [\[1\]](https://capgo.app/). Ini menyediakan integrasi mulus dengan skrip npm, seperti yang ditunjukkan dalam contoh di bawah ini:
 

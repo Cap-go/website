@@ -128,7 +128,7 @@ Tinjau secara rutin siapa yang memiliki akses, sesuaikan izin sesuai kebutuhan, 
 
 ## Fitur Keamanan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8ac6c283d21cbd67ac65e/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8ac6c283d21cbd67ac65e/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgo memperkuat keamanan aplikasi dengan menggabungkan metode penyimpanan dan transportasi yang aman dengan fitur-fitur canggih yang dibangun dalam platformnya.
 

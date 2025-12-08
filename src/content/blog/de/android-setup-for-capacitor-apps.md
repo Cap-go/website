@@ -207,7 +207,7 @@ Nachdem Sie diese Schritte abgeschlossen haben, ist Ihr Android SDK bereit für 
 
 ## [Capacitor](https://capacitorjs.com/) Android-Einrichtung
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 ### Plattforminstallation
 
@@ -321,7 +321,7 @@ Die Lösung dieser Probleme bereitet Ihre Umgebung auf erweiterte Funktionen und
 
 ## [Capgo](https://capgo.app/) Integration
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Sobald Ihre Android-Umgebung bereit ist, ist es Zeit, Capgo zu integrieren. Dieses Tool vereinfacht Ihren [Update-Prozess](https://capgo.app/docs/plugin/cloud-mode/manual-update/), indem es Ihnen ermöglicht, Updates sofort an Ihre Capacitor-App zu pushen - keine Überprüfung im Play Store erforderlich.
 

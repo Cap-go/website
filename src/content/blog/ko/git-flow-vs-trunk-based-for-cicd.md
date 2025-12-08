@@ -156,7 +156,7 @@ TBD를 성공적으로 도입하려면 견고한 자동화 테스트와 팀 간 
 
 ### [Capgo](https://capgo.app/) CI/CD 통합
 
-![Capgo](https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 둘 중 하나의 CI/CD 설정에 실시간 오버더에어 업데이트를 추가하려면 Capgo를 매끄럽게 통합할 수 있습니다:
 

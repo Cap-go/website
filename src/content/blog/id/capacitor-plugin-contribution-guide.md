@@ -215,7 +215,7 @@ Untuk plugin dengan fitur kompleks, simulasikan skenario pengguna dunia nyata. M
 
 ### Pengujian OTA dengan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-17.jpg?auto=compress)
 
 Alat open-source Capgo memudahkan untuk menerapkan dan menguji pembaruan dengan cepat. Berikut cara menggunakannya:
 

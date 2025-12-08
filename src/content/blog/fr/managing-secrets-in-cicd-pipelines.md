@@ -89,7 +89,7 @@ De nombreux outils CI/CD disposent de fonctionnalités de gestion des secrets in
 
 ### Fonctionnalités de Sécurité de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 Capgo améliore la sécurité des mises à jour en direct dans les applications Capacitor en étendant la gestion standard des secrets CI/CD. Il utilise le chiffrement de bout en bout pour garantir que seuls les utilisateurs autorisés peuvent déchiffrer des données sensibles [\[1\]](https://capgo.app/).
 

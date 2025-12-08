@@ -423,7 +423,7 @@ Es ist wichtig, Einwilligungsabläufe über verschiedene OS-Versionen und Gerät
 
 ### Verwendung von [Capgo](https://capgo.app/) für Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
 
 Capgos Live-Update-Funktionen ermöglichen effiziente Compliance-Anpassungen. Hier ein Beispiel:
 

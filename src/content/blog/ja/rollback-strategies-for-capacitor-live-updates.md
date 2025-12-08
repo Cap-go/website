@@ -41,7 +41,7 @@ next_blog: ''
 
 ## [Ionic](https://ionicframework.com/)アプリを[Capacitor](https://capacitorjs.com/) 3に移行する方法
 
-![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 ロールバック戦略は、アプリの安定性維持とユーザーの信頼確保に重要な役割を果たします。メトリクスは、これらの戦略が更新を効果的に管理するための体系的なアプローチをどのようにサポートしているかを一貫して示しています。
 

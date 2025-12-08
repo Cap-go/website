@@ -113,7 +113,7 @@ While general alert strategies cover most CI/CD pipelines, some tools and workfl
 
 ### Mobile App Alerts with [Capgo](https://capgo.app)
 
-![Capgo](https://assets.seobotai.com/capgo.app/683001c0d3b96619817df6c1/5b6bff845d4f518aae19a2192d6260cf.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/683001c0d3b96619817df6c1/5b6bff845d4f518aae19a2192d6260cf.jpg)
 
 Mobile CI/CD pipelines bring their own set of challenges - app store deployments, device fragmentation, and heightened security concerns, to name a few. Standard alerts often fall short in addressing these complexities. As Barnabás Birmacher, founder and CEO of [Bitrise](https://bitrise.io/), explains:
 

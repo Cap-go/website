@@ -44,7 +44,7 @@ El etiquetado de versiones simplifica las [actualizaciones de la aplicación](ht
 
 ## Cómo configurar AUTOMÁTICAMENTE tu proyecto [Capacitor](https://capacitorjs.com/) ⚡️
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
 
 <Steps>
 
@@ -109,7 +109,7 @@ Una herramienta destacada en este espacio es Capgo, que ofrece características 
 
 ### Características de Control de Versiones de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 Capgo proporciona capacidades robustas de gestión de versiones, incluyendo:
 

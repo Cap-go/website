@@ -39,7 +39,7 @@ next_blog: ''
 
 ## Introduzione a [Capacitor](https://capacitorjs.com/) Configure
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67ec7f117747adc4bca87873/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67ec7f117747adc4bca87873/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <Steps>
 

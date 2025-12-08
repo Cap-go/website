@@ -102,7 +102,7 @@ Google Play는 OTA 업데이트에 대해 더 관대한 입장을 취하지만 �
 
 ## [Capacitor](https://capacitorjs.com/)를 위한 OTA 업데이트 가이드라인
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
 
 ### 기술적 준수 단계
 
@@ -150,7 +150,7 @@ Google Play는 OTA 업데이트에 대해 더 관대한 입장을 취하지만 �
 
 ## [Capgo](https://capgo.app/) 업데이트 관리 시스템
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
 Capgo는 [Capacitor OTA 업데이트](https://capgo.app/)를 안전하게 전달하고 관리하는 방법을 제공하여 규정 표준을 충족하면서 원활한 배포를 보장합니다. 또한 엔터프라이즈 수준의 [업데이트 관리](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/)를 위한 고급 도구를 제공합니다.
 

@@ -31,7 +31,7 @@ Capacitor makes it easy for web developers to build native-like apps with one co
 
 ## How to create a [Capacitor](https://capacitorjs.com/) plugin for iOS/Android
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6832a665d3b96619818090ef/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6832a665d3b96619818090ef/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/Dq_BmheGAig" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -322,7 +322,7 @@ Finally, test your deployment process thoroughly. Ensure updates apply correctly
 
 ## Using [Capgo](https://capgo.app/) for Live Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/6832a665d3b96619818090ef/a11b1d51b473300e3b6ffdca4eaa552a.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6832a665d3b96619818090ef/a11b1d51b473300e3b6ffdca4eaa552a.jpg)
 
 Live updates allow developers to skip the lengthy app store review process, making it possible to roll out bug fixes and new features almost instantly. For developers working with Capacitor plugins, a reliable live update solution is a game-changer.
 

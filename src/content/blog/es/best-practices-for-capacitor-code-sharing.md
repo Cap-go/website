@@ -212,7 +212,7 @@ Estos métodos se han implementado con éxito en más de 750 aplicaciones en pro
 
 ### Integración con [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fc5744af1a45e500bc59a4/460b6a71189963262e0579d8af2972b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fc5744af1a45e500bc59a4/460b6a71189963262e0579d8af2972b5.jpg)
 
 Capgo se alinea con estas prácticas, optimizando el desarrollo de Capacitor con actualizaciones avanzadas over-the-air (OTA) y flujos de trabajo CI/CD integrados. Ofrece resultados impresionantes, incluyendo velocidades de descarga de 114ms para paquetes de 5MB a través de una CDN global, un tiempo de respuesta promedio de API de 57ms en todo el mundo y 23.5 millones de actualizaciones exitosas [\[1\]](https://capgo.app/).
 

@@ -25,7 +25,7 @@ next_blog: ''
 
 ### Avantages clés de [Capgo](https://capgo.app/) :
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-07.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-07.jpg?auto=compress)
 
 -   **Mises à jour instantanées** : Corrigez les bugs ou déployez des fonctionnalités sans retard.
 -   **Déploiements sécurisés** : Les mises à jour sont cryptées et accessibles uniquement aux utilisateurs autorisés.

@@ -34,7 +34,7 @@ next_blog: ''
 
 ## [Stencil](https://stenciljs.com/)と[Capacitor](https://capacitorjs.com/)を使用したクロスプラットフォームコンポーネントの構築
 
-![Stencil](https://mars-images.imgix.net/seobot/screenshots/stenciljs.com-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
+![Stencil Web Components Compiler](https://mars-images.imgix.net/seobot/screenshots/stenciljs.com-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/O5xfY9LPl0s" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -89,7 +89,7 @@ Capgoのライブアップデート機能を使用することで、デザイン
 
 ### [Ionic](https://ionicframework.com/)コンポーネントの使用
 
-![Ionic](https://mars-images.imgix.net/seobot/screenshots/ionicframework.com-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
+![Ionic Framework Website](https://mars-images.imgix.net/seobot/screenshots/ionicframework.com-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
 
 Ionicは、クロスプラットフォーム開発を簡素化するプリビルドのコンポーネントを提供します。これらのコンポーネントは、自動的にプラットフォーム特有のデザインパターンに合わせ、機能の一貫性を保ちます。
 
@@ -232,7 +232,7 @@ Capgoのアップデートメカニズムは、プラットフォーム全体で
 
 ### [Capgo](https://capgo.app/)を使用したライブアップデート
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 デザインとテストフェーズを終えた後の次の課題は、アップデートをスムーズに展開することです。Capgoは、アプリストアの承認を待つことなく、瞬時のアップデートを可能にすることでこのプロセスを簡素化します。
 

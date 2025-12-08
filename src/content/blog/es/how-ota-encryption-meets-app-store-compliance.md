@@ -130,7 +130,7 @@ Estas medidas están diseñadas para cumplir con la verificación de código de 
 
 ## Sistema de Encriptación OTA de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-14.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-14.jpg?auto=compress)
 
 Capgo utiliza técnicas avanzadas de encriptación para entregar actualizaciones OTA seguras mientras cumple totalmente con las regulaciones de la tienda de aplicaciones.
 

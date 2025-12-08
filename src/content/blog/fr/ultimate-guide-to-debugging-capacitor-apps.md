@@ -87,7 +87,7 @@ Ces outils complètent le débogage basé sur le navigateur en abordant les déf
 
 ### Commandes de Débogage CLI [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 Le CLI Capacitor inclut des commandes utiles pour simplifier le débogage :
 
@@ -294,7 +294,7 @@ Si vous utilisez des source maps en production, restreignez l'accès aux dévelo
 
 ## Utilisation de [Capgo](https://capgo.app/) pour les Mises à Jour Rapides
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 S'appuyant sur des [techniques de débogage](https://capgo.app/docs/plugin/debugging/) solides, des outils comme Capgo facilitent le maintien de la stabilité de votre application en permettant des mises à jour instantanées. Capgo permet aux développeurs de déployer des mises à jour sans attendre les approbations de l'app store, tout en conservant les fonctionnalités de débogage.
 

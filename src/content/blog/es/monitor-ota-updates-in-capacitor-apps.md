@@ -40,7 +40,7 @@ Capgo ya ha gestionado **23.5M de actualizaciones en 750 aplicaciones** con velo
 
 ## Explora las Nuevas Actualizaciones en Vivo de Capawesome para [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) ...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -74,7 +74,7 @@ Una vez que el control de versiones está configurado, puedes monitorear las act
 
 ### Configuración del Monitoreo de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
 
 1.  **Configurar Integración de Análisis**: Usa análisis en tiempo real para monitorear el rendimiento de las actualizaciones y la participación del usuario.
 2.  **Habilitar Seguimiento de Errores**: Activa el seguimiento de errores para capturar registros detallados y métricas de rendimiento.

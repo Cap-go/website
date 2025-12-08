@@ -53,7 +53,7 @@ Selanjutnya, kami akan memandu Anda membuat dan memverifikasi manifest dalam pro
 
 ## Menyiapkan Privacy Manifest di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Membuat File Manifest
 
@@ -74,7 +74,7 @@ Di Xcode, navigasi ke **Product > Analyze** untuk menghasilkan Laporan Privasi. 
 
 ### Pembaruan dengan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 Setelah lulus analisis Xcode, gunakan Capgo untuk pembaruan langsung agar privacy manifest aplikasi Anda tetap up-to-date. Capgo menyediakan:
 

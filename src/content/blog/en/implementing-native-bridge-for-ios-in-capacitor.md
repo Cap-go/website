@@ -33,7 +33,7 @@ Keep reading for step-by-step instructions, code examples, and best practices!
 
 ## How to create a [Capacitor](https://capacitorjs.com/) plugin for iOS/Android
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682ef9754fa53d422080b6bb/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682ef9754fa53d422080b6bb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/Dq_BmheGAig" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -56,7 +56,7 @@ Once the setup is complete, open your project in Xcode to continue integrating t
 
 ### [Xcode](https://developer.apple.com/xcode/) Project Setup
 
-![Xcode](https://assets.seobotai.com/capgo.app/682ef9754fa53d422080b6bb/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/682ef9754fa53d422080b6bb/15516018a4284df8a7d0585815c62b4c.jpg)
 
 You can open your Xcode project using the command below or manually navigate to the workspace file:
 
@@ -257,7 +257,7 @@ Security is just as critical as performance. Protecting bridge communication ens
 
 ## [Capgo](https://capgo.app/) Integration
 
-![Capgo](https://assets.seobotai.com/capgo.app/682ef9754fa53d422080b6bb/f1896dc16fb40f15e325c34706864676.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682ef9754fa53d422080b6bb/f1896dc16fb40f15e325c34706864676.jpg)
 
 ### About Capgo
 

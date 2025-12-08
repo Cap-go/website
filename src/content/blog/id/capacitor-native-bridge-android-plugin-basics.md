@@ -123,7 +123,7 @@ Berikut referensi cepat untuk versi minimum dan yang direkomendasikan dari kompo
 
 ### Optimasi Pengaturan [Gradle](https://gradle.org/)
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 Untuk meningkatkan kinerja dan kompatibilitas, perbarui file `gradle.properties` Anda dengan pengaturan ini:
 
@@ -435,7 +435,7 @@ Alat pelacakan kesalahan dan rollback Capgo dapat membantu Anda pulih dengan cep
 
 ## Panduan Integrasi [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Berdasarkan hasil pengujian langsung kami, mengintegrasikan Capgo membantu merampingkan deployment pembaruan.
 

@@ -90,7 +90,7 @@ Capgo proporciona herramientas incorporadas para actualizaciones seguras e incre
 
 ## Configuración de actualizaciones OTA en [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
 
 La configuración de actualizaciones Over-the-Air (OTA) en Capacitor requiere pruebas cuidadosas y adherencia a pautas estrictas.
 
@@ -121,7 +121,7 @@ Para evitar problemas con las aprobaciones de la tienda de aplicaciones, sigue e
 
 ### Usando [Capgo](https://capgo.app/) para actualizaciones
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
 
 Después de probar y asegurar el cumplimiento, implementar actualizaciones eficientemente se convierte en el siguiente paso. Capgo es una herramienta que simplifica este proceso.
 

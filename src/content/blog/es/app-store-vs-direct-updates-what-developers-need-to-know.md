@@ -157,7 +157,7 @@ Para desarrolladores que consideran actualizaciones OTA directas, integrar estas
 
 ### Usando Herramientas Como [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
 
 Entregar actualizaciones rápida y eficientemente es imprescindible para los equipos de desarrollo modernos. Herramientas como **Capgo** simplifican esto ofreciendo características como control de versiones, análisis y despliegues graduales. Estas capacidades facilitan la gestión de actualizaciones OTA, especialmente para equipos empresariales que manejan implementaciones a gran escala. La orientación a usuarios y las opciones flexibles de implementación mejoran aún más el proceso.
 

@@ -84,13 +84,13 @@ Apple has also introduced **SDK signatures** alongside privacy manifests. These 
 
 ## How to Audit Third-Party Libraries in [Capacitor](https://capacitorjs.com/) Apps
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68316df8d3b96619817fa763/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68316df8d3b96619817fa763/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Auditing third-party libraries in your Capacitor app is a critical step to ensure compliance with Apple’s policies. By leveraging tools like Xcode and conducting thorough dependency analysis, you can identify and address potential issues effectively.
 
 ### Using [Xcode](https://developer.apple.com/xcode/) Privacy Reports
 
-![Xcode](https://assets.seobotai.com/capgo.app/68316df8d3b96619817fa763/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/68316df8d3b96619817fa763/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Xcode's privacy report feature provides a detailed overview of how your app and its integrated SDKs handle data. It consolidates privacy manifests into a single report, making it easier to see what data is collected and how it’s being used.
 
@@ -152,7 +152,7 @@ Capgo offers a solution that simplifies this process through real-time updates a
 
 ### [Capgo](https://capgo.app/) for Simplified Compliance
 
-![Capgo](https://assets.seobotai.com/capgo.app/68316df8d3b96619817fa763/146f21857bbfc9b0e31de0c031b7d889.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68316df8d3b96619817fa763/146f21857bbfc9b0e31de0c031b7d889.jpg)
 
 Capgo provides a practical solution for managing compliance challenges, especially when live updates are crucial. With Capgo, you can push compliance fixes instantly, bypassing the need for App Store reviews.
 

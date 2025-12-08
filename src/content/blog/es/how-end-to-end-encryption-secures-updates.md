@@ -73,7 +73,7 @@ Este proceso de múltiples pasos asegura que las actualizaciones estén protegid
 
 ## Configurando el Cifrado de Extremo a Extremo en [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Esta sección explica cómo implementar el cifrado de extremo a extremo en [aplicaciones Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), basándose en los conceptos cubiertos anteriormente.
 

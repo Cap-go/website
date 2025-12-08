@@ -205,7 +205,7 @@ COPPAの下では、アプリは子どもからのデータを収集する前に
 
 ## [Capgo](https://capgo.app/) プライバシー機能
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 モバイルアプリをプライバシー要件に対応させる際には、スピードとセキュリティが重要です。Capgoは、米国のプライバシー法を遵守するためのツールを提供し、更新が迅速かつ安全であることを保証します。
 

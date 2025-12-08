@@ -293,7 +293,7 @@ CLIコマンドで問題が解決しない場合は、手動修正を試みる�
 
 ## [Capgo](https://capgo.app/)統合
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 CapgoはCapacitor CLIとシームレスに連携し、[リアルタイムプラグイン更新](https://capgo.app/docs/plugin/self-hosted/auto-update)を可能にし、開発者のメンテナンスタスクを簡素化します。
 

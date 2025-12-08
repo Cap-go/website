@@ -140,7 +140,7 @@ Gestionar actualizaciones OTA durante las pruebas beta requiere herramientas con
 
 ### Características de actualización de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5/574f3a2cd27791454624262312a6c223.jpg)
 
 La plataforma de Capgo se centra en la seguridad y el cumplimiento, ofreciendo características clave diseñadas para pruebas beta:
 

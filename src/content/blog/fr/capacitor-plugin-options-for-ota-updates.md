@@ -50,11 +50,11 @@ Pour la plupart des développeurs, **Capgo** offre le meilleur compromis entre a
 
 ## Meilleurs plugins de mise à jour OTA pour [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/bff1fb0606ef072e3c605788ba21e2a7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
 Capgo prend en charge plus de 1 900 applications en production, livrant des mises à jour OTA avec une vitesse impressionnante - des paquets de 5MB en seulement 114ms et un temps de réponse API moyen de 57ms via son CDN mondial [\[1\]](https://capgo.app/).
 

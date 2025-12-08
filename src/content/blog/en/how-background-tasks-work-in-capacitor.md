@@ -34,7 +34,7 @@ next_blog: ''
 
 ## How to Create Background Tasks in [Ionic](https://ionicframework.com/) with [Capacitor](https://capacitorjs.com/) ⚡️
 
-![Ionic](https://assets.seobotai.com/capgo.app/6836bd7bd3b96619818630a6/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/6836bd7bd3b96619818630a6/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 <iframe src="https://www.youtube.com/embed/SMW1FQz3Yrc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -196,7 +196,7 @@ Not all devices support background tasks equally. Older Android devices or those
 
 ## Using Background Tasks with [Capgo](https://capgo.app/)'s Live Update Solution
 
-![Capgo](https://assets.seobotai.com/capgo.app/6836bd7bd3b96619818630a6/3a45e1e15428dc8ea4181fc969577a5d.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6836bd7bd3b96619818630a6/3a45e1e15428dc8ea4181fc969577a5d.jpg)
 
 Managing background tasks can be tricky, especially when traditional app store updates slow down the process. Capgo's live update solution eliminates this delay by allowing you to instantly update your background task logic - no app store approval needed.
 

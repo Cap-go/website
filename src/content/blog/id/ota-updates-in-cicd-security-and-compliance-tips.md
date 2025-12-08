@@ -184,7 +184,7 @@ Berikut adalah beberapa fitur penting yang perlu diprioritaskan:
 
 ### Fitur Platform [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Diluncurkan pada tahun 2022, Capgo memberikan pembaruan OTA yang dirancang dengan keamanan dalam pikiran. Fitur-fiturnya termasuk enkripsi end-to-end, kemampuan self-hosting, peluncuran bertahap, pelacakan kesalahan, dan kontrol versi.
 

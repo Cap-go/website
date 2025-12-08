@@ -44,7 +44,7 @@ Para actualizaciones en vivo, integra herramientas como **[Capgo](https://capgo.
 
 ## Optimiza la salud de la app con monitoreo de rendimiento de [Firebase](https://firebase.google.com/) ...
 
-![Firebase](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
+![Firebase Platform Dashboard](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/ENaOg5YefjQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -200,7 +200,7 @@ Usa estas herramientas para identificar y abordar cuellos de botella de rendimie
 
 ## Configuración de seguimiento de errores de [Sentry](https://sentry.io/)
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
 
 Firebase maneja métricas de rendimiento, pero Sentry se trata de capturar y diagnosticar errores. Juntos, te dan una sólida configuración de monitoreo.
 
@@ -343,7 +343,7 @@ Una vez que tus alertas están configuradas, concéntrate en monitoreo continuo 
 
 ## Actualizaciones y monitoreo de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 ### Características principales de Capgo
 

@@ -75,7 +75,7 @@ next_blog: ''
 
 ## [Capgo](https://capgo.app/)를 사용한 사용자 타겟팅
 
-![Capgo](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6821a5b33c68b32f40f8057e/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgo는 사용자 빈도 세분화 기능 덕분에 특정 사용자 그룹에 대한 업데이트 타겟팅을 보다 정밀하게 만들어 주는 도구를 제공합니다. 이러한 기능은 앞서 논의한 타겟 업데이트 전략을 정교하게 만듭니다.
 

@@ -187,7 +187,7 @@ error_handling:
 
 ## CI/CD 보안을 위한 [Capgo](https://capgo.app/) 사용
 
-![Capgo](https://assets.seobotai.com/capgo.app/68214ae55e3fe4823b5f6cab/31786236ae15cc787e247ce46cbc68b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68214ae55e3fe4823b5f6cab/31786236ae15cc787e247ce46cbc68b5.jpg)
 
 Capgo는 검증된 토큰 회전 전략을 기반으로 CI/CD 보안을 강화하고, 안전한 배포를 원활하고 신뢰할 수 있도록 만드는 도구를 제공합니다.
 

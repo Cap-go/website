@@ -48,7 +48,7 @@ next_blog: ''
 
 ## Quasar-Frameworkと[Capacitor](https://capacitorjs.com/)開発コマンドの修正方法 ...
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/0E0en7ulaWg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -148,7 +148,7 @@ OTAアップデートを効果的に管理するためには、デプロイメ�
 
 ### [Capgo](https://capgo.app/)アップデートの使用
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/5667dd288bf82910fbf4a9affbd7b492.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/5667dd288bf82910fbf4a9affbd7b492.jpg)
 
 Capgoは、Capacitor OTAアップデートの管理に人気のあるプラットフォームで、1155.1億回のアップデート配信記録と82％のグローバル成功率を誇ります [\[1\]](https://capgo.app/) 。以下の機能を通じて一般的なCLIの課題に対処します：
 

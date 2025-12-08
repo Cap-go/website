@@ -276,7 +276,7 @@ Le système de canaux de Capgo est un excellent outil pour les tests bêta et le
 
 ### Configuration de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67edd19cebbb9dc8064069d2/6f70cafcdfe95287b465212dfd047c63.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67edd19cebbb9dc8064069d2/6f70cafcdfe95287b465212dfd047c63.jpg)
 
 Simplifiez votre flux de travail en utilisant le système de mise à jour en direct de Capgo. Pour commencer, exécutez :
 

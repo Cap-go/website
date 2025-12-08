@@ -142,7 +142,7 @@ Meninjau ulang batas laju secara teratur sangat penting untuk mempertahankan kin
 
 ## Perangkat Pembatasan Laju [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo menawarkan perangkat terintegrasi yang dirancang untuk menerapkan batas laju API sambil memastikan kinerja tinggi dan kepatuhan terhadap persyaratan app store.
 

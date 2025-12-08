@@ -63,7 +63,7 @@ When comparing monitoring tools, focus on features that align with your app's ne
 
 ### Using [Capgo](https://capgo.app/) for Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-16.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-16.jpg?auto=compress)
 
 Capgo stands out as a reliable choice for teams that need detailed control over their app updates. It offers **version-specific performance analytics** and other advanced monitoring tools.
 

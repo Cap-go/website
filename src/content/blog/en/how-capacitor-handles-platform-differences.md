@@ -42,7 +42,7 @@ Capacitor bridges the gap between web and native app development, making it easi
 
 ## How [Capacitor](https://capacitorjs.com/) Handles Platform Code
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Capacitor offers tools to manage platform-specific code, allowing developers to create tailored experiences for iOS and Android using a single API.
 
@@ -237,7 +237,7 @@ Here are some key build considerations:
 
 ## Update Apps with [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
 
 Keeping [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) updated efficiently for both iOS and Android is crucial. Capgo offers a live update system that aligns with the guidelines of both platforms.
 

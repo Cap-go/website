@@ -123,7 +123,7 @@ Pairing this approach with the right tools ensures a robust OTA update process.
 
 ### Using [Capgo](https://capgo.app/) for Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ff1c0bb0912f75a97f349a/bff1fb0606ef072e3c605788ba21e2a7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ff1c0bb0912f75a97f349a/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
 Capgo simplifies OTA updates with features designed to enhance efficiency:
 

@@ -220,7 +220,7 @@ ICP登録が承認された後、コンプライアンスを維持するには�
 
 ## 中国のアプリ更新のための[Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 Capgoは、中国の規制に準拠しながらリアルタイム更新を簡素化するように設計されたツールを提供します。これらのツールは、アプリをスムーズに運営し、現地の要件を満たすために不可欠です。
 

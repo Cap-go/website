@@ -97,7 +97,7 @@ Ces étapes vous aident à gérer efficacement votre déploiement tout en minimi
 
 ## Configuration des déploiements progressifs dans [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
 
 ### Configuration de la mise à jour en direct
 
@@ -111,7 +111,7 @@ Cette configuration respecte les directives d'Apple et Google tout en garantissa
 
 ### Guide d'intégration [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
 
 La plateforme web de Capgo simplifie la distribution des mises à jour avec ces fonctionnalités principales :
 

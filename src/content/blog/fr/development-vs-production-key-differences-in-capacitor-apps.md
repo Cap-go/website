@@ -184,7 +184,7 @@ Capgo peut simplifier davantage ce processus, en particulier pour les mises à j
 
 ### Utilisation de [Capgo](https://capgo.app/) pour les mises à jour
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
 
 Capgo simplifie le processus de mise à jour avec des fonctionnalités conçues pour gagner du temps et améliorer la sécurité.
 

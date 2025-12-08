@@ -145,7 +145,7 @@ Capgoは、エンドツーエンドの暗号化と高度なセキュリティプ
 
 ### [Capgo](https://capgo.app/)プラットフォームの機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
 
 信頼できるOTAアップデートプラットフォームは、これらのプラクティスを組み込んでデプロイメントを安全かつシンプルにします。必須のセキュリティ機能を提供するプラットフォームを探してください。
 

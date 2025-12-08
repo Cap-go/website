@@ -40,7 +40,7 @@ Per rimanere conformi alle regole dell'App Store e del [GDPR](https://en.wikiped
 
 ## [Capacitor](https://capacitorjs.com/) per Enterprise
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13.jpg?auto=compress)
 
 ## Basi di Sicurezza per Aggiornamenti OTA
 
@@ -77,7 +77,7 @@ Queste misure di rilevamento e risposta lavorano in sinergia con i protocolli di
 
 ## Funzionalità di Sicurezza di [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-13.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-13.jpg?auto=compress)
 
 Capgo garantisce la sicurezza attraverso tre approcci chiave che operano insieme ai suoi sistemi di monitoraggio:
 

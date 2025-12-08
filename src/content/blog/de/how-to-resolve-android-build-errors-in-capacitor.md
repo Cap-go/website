@@ -117,7 +117,7 @@ Die korrekte Konfiguration ist der Schlüssel für erfolgreiche Builds. Achten S
 
 ### Verstehen von [Gradle](https://gradle.org/) Ausgaben
 
-![Gradle](https://assets.seobot.ai.com/capgo.app/67e75df8283d21cbd679ae1b/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobot.ai.com/capgo.app/67e75df8283d21cbd679ae1b/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 Verwenden Sie `/gradlew app:dependencies` und aktivieren Sie Build-Scans, um Abhängigkeitskonflikte oder Skriptprobleme aufzudecken. Diese Tools bieten eine detaillierte Ansicht Ihres Projekt-Setups.
 
@@ -176,7 +176,7 @@ Für sofortige Updates ohne erneute App-Store-Einreichung, erwägen Sie die Verw
 
 ## Verwendung von [Capgo](https://capgo.app/) für schnelle Korrekturen
 
-![Capgo](https://assets.seobot.ai.com/capgo.app/67e75df8283d21cbd679ae1b/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobot.ai.com/capgo.app/67e75df8283d21cbd679ae1b/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Bei Android-Build-Fehlern in Capacitor ist die schnelle Problemlösung der Schlüssel, um Verzögerungen zu vermeiden und Ihr Projekt auf Kurs zu halten. So hilft Ihnen Capgo dabei, Korrekturen sofort zu implementieren.
 

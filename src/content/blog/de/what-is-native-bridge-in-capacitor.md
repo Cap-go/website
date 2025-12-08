@@ -43,7 +43,7 @@ Die Native Bridge von Capacitor vereinfacht die App-Entwicklung, indem sie die F
 
 ## So erstellen Sie ein projekt-spezifisches lokales Plugin | Ionic | [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/q5kQcTqPtGY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -142,7 +142,7 @@ Die Native Bridge spielt eine Schlüsselrolle bei der Verbindung von Web- und na
 
 ### Live-Updates mit [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/4305c974119f10d25560fe363e5513b1.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/4305c974119f10d25560fe363e5513b1.jpg)
 
 Capgo nutzt die Native Bridge, um Live-Updates bereitzustellen, wodurch Änderungen der App sofort ohne App-Store-Einreichungen bereitgestellt werden können.
 

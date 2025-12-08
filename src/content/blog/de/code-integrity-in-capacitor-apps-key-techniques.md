@@ -119,7 +119,7 @@ Die nativen Sicherheitsfunktionen von Capacitor dienen als starke Grundlage, abe
 
 ### [Capgo](https://capgo.app): Sichere OTA-Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
 
 Capgo wurde speziell für die Verwaltung sicherer Over-the-Air (OTA) Updates in Capacitor-Anwendungen entwickelt. Es gewährleistet die Code-Integrität mit Funktionen wie:
 

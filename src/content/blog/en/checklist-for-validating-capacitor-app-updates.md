@@ -60,7 +60,7 @@ Set up your repository with the following practices:
 
 ### [Capgo](https://capgo.app/) Setup
 
-![Capgo](https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 Configure Capgo with these steps [\[1\]](https://capgo.app/):
 

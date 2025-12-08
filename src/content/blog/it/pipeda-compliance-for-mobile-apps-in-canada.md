@@ -200,7 +200,7 @@ Processi appropriati di archiviazione e rimozione dei dati sono fondamentali per
 
 ## Aggiornamenti pronti per PIPEDA di [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd/574f3a2cd27791454624262312a6c223.jpg)
 
 ### Funzionalità di aggiornamento sicuro
 

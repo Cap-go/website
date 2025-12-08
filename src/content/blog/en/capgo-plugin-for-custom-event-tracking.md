@@ -61,7 +61,7 @@ Capgo is already powering **1.7K apps** and improving customer satisfaction by *
 
 ## How to Use [Firebase](https://firebase.google.com/) Analytics with Ionic
 
-![Firebase](https://assets.seobotai.com/capgo.app/6827d67c5642a17d106c5d28/014a4142c673710597e3d13705ab1760.jpg)
+![Firebase Platform Dashboard](https://assets.seobotai.com/capgo.app/6827d67c5642a17d106c5d28/014a4142c673710597e3d13705ab1760.jpg)
 
 <iframe src="https://www.youtube.com/embed/_mks8zECJ7A" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

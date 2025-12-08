@@ -87,7 +87,7 @@ Une fois cela en place, vous pouvez procéder à l'ajout de Capgo à votre proje
 
 ### Ajout de [Capgo](https://capgo.app/) à votre projet
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-16.jpg?auto=compress)
 
 Pour intégrer Capgo, installez-le dans votre projet Capacitor en utilisant son outil CLI. Selon Martin Donadieu, fondateur de Capgo :
 

@@ -138,7 +138,7 @@ Regularly revisiting rate limits is essential for maintaining performance and me
 
 ## [Capgo](https://capgo.app/)'s Rate Limiting Tools
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo offers integrated tools designed to enforce API rate limits while ensuring high performance and compliance with app store requirements.
 

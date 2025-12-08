@@ -232,7 +232,7 @@ Untuk memastikan penerapan yang lancar, penting untuk menghindari kesalahan umum
 
 ## Fitur Manajemen Rilis [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgo menyediakan perangkat yang dirancang untuk menyederhanakan dan meningkatkan proses staged dan full release, membangun strategi rilis yang efektif.
 

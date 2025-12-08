@@ -28,7 +28,7 @@ next_blog: ''
 
 ## [Instruments](https://developer.apple.com/tutorials/instruments).app으로 시니어 iOS 개발자가 성능 문제를 프로파일링하고 해결하는 방법 | 라이브 개발 멘토링
 
-![Instruments](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
+![Instruments Performance Analysis Tool](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
 
 <iframe src="https://www.youtube.com/embed/HIsECG5s4DU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -62,7 +62,7 @@ JavaScript와 네이티브 iOS 코드 간의 상호 작용은 신중하게 처�
 
 ### [Swift](https://developer.apple.com/swift/) 코드 성능 팁
 
-![Swift](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/2e2b0430a9aab611e781d4d45224ac43.jpg)
+![Swift Programming Language Website](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/2e2b0430a9aab611e781d4d45224ac43.jpg)
 
 Swift는 코드를 최적화하는 데 도움이 되는 여러 도구를 제공합니다. 플러그인에서 최상의 결과를 얻으려면 다음 영역에 집중하세요:
 
@@ -82,7 +82,7 @@ iOS 플러그인을 한 단계 더 발전시키려면 플랫폼별 최적화로 
 
 ### [Xcode](https://developer.apple.com/xcode/) 성능 설정
 
-![Xcode](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Xcode의 빌드 설정을 조정하면 플러그인의 크기를 유지하면서 성능을 크게 향상시킬 수 있습니다. 다음은 주요 구성에 대한 간단한 개요입니다:
 
@@ -139,7 +139,7 @@ pod 'AnalyticsLib', :git => 'https://github.com/example/analytics.git', :tag => 
 
 ### [Capgo](https://capgo.app/)를 통한 OTA 업데이트
 
-![Capgo](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 종속성이 간소화되면 다음 단계는 시간이 지남에 따라 플러그인이 원활하게 발전하도록 보장하는 것입니다. OTA(Over-the-air) 업데이트는 게임 체인저이며, Capgo는 App Store 규칙을 준수하면서 빠른 배포를 위한 강력한 도구입니다. 최근 데이터에 따르면 Capgo의 배포 시스템을 사용하면 **활성 사용자의 95%가 24시간 이내에 업데이트를 받습니다** [\[1\]](https://capgo.app/).
 

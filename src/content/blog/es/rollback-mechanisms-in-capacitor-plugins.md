@@ -65,7 +65,7 @@ Los retrocesos son esenciales cuando una actualización causa problemas como err
 
 ### Arquitectura de Retroceso de [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 El sistema de retroceso en Capacitor se basa en tres componentes principales para manejar la gestión de versiones de manera efectiva:
 
@@ -123,7 +123,7 @@ Gestionar retrocesos de manera efectiva requiere herramientas que puedan manejar
 
 ### [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
 
 Capgo apareció como una fuerte solución de gestión de retrocesos tras el cierre de [Microsoft Code Push](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/)'s en 2024. Simplifica las actualizaciones de complementos con una variedad de características:
 

@@ -125,7 +125,7 @@ Para complementar las reglas de plataforma y las prácticas de actualización se
 
 ### Características de Seguridad de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
 
 La infraestructura de seguridad de Capgo proporciona a los desarrolladores herramientas para ayudar a mantener el cumplimiento. Las características clave incluyen:
 

@@ -77,7 +77,7 @@ Unlike traditional app store updates, which demand a full app download, OTA upda
 
 ### [Capgo](https://capgo.app/) Update System
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
 
 Capgo's system is built to address the hardware and network limitations many users face. This aligns with earlier performance insights [\[1\]](https://capgo.app/). As one developer shared:
 

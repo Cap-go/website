@@ -73,13 +73,13 @@ Bugsnag, quant à lui, se concentre sur la priorisation des erreurs et la stabil
 
 ### [Bugsnag](https://wwwbugsnagcom/) : Gestion des Erreurs
 
-![Bugsnag](https://mars-images.imgix.net/seobot/screenshots/wwwbugsnagcom-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
+![Bugsnag Error Monitoring Dashboard](https://mars-images.imgix.net/seobot/screenshots/wwwbugsnagcom-76749d2e4d72514946f463d57dc57ffc-2025-03-18.jpg?auto=compress)
 
 Bugsnag aide à prioriser les erreurs et surveiller la stabilité des applications. Sa fonction de score de stabilité évalue l'impact des mises à jour OTA sur les performances globales de l'application. Les fonctionnalités supplémentaires incluent le regroupement automatique des erreurs, le suivi des versions et l'intégration avec les pipelines CI/CD.
 
 ### [Capgo](https://capgo.app/) : Suivi des Erreurs Intégré
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Capgo adopte une approche différente en intégrant directement le suivi des erreurs dans son processus de mise à jour OTA.
 
@@ -138,7 +138,7 @@ Each tool offers unique benefits depending on your team's needs, budget, and exp
 
 ## [Sentry](https://sentry.io/) and Capacitor: How to Build and Monitor User Experiences
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-18.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/shzKcE79GXI" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen> "J'ai réussi à mettre en place les mises à jour auto-hébergées avec très peu d'effort !" – SP-CMingay [\[1\]](https://capgo.app/)
 

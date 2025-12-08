@@ -42,7 +42,7 @@ next_blog: ''
 
 ## ライブデモ：[Capacitor](https://capacitorjs.com/) アプリを Ionic [Appflow](https://ionic.io/docs/appflow) で構築
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/tkgNuSG5FJQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -107,7 +107,7 @@ Appflowは、バージョンの更新とデプロイメントのプロセスを�
 
 ### [Capgo](https://capgo.app/) 更新システム
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgoは、経済的な負担をかけずにバージョン管理を効率化したいチームにソリューションを提供します。AppleおよびGoogleのストアポリシーに準拠しながらライブ更新を提供します。主な機能は次のとおりです：
 

@@ -150,7 +150,7 @@ Pour les développeurs travaillant avec des outils comme Capgo, comprendre ces d
 
 ## [Capgo](https://capgo.app/) Aperçu de la Plateforme
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-01.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-01.jpg?auto=compress)
 
 Capgo regroupe les règles de mise à jour OTA spécifiques à la plate-forme en une seule plateforme de mise à jour rationalisée.
 

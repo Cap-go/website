@@ -180,7 +180,7 @@ OTAアップデートプラットフォームを選択する際は、セキュ�
 
 ### [Capgo](https://capgo.app/)プラットフォームの機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 2022年に立ち上げられたCapgoは、セキュリティを念頭に置いて設計されたOTAアップデートを提供します。その機能には、エンドツーエンド暗号化、セルフホスティング機能、段階的ロールアウト、エラー追跡、バージョン管理が含まれます。
 

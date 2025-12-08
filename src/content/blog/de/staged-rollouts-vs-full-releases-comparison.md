@@ -232,7 +232,7 @@ Um reibungslose Bereitstellungen zu gewährleisten, ist es wichtig, häufige Feh
 
 ## [Capgo](https://capgo.app/) Release-Management-Funktionen
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgo bietet Tools, die sowohl gestaffelte als auch vollständige Veröffentlichungsprozesse vereinfachen und verbessern und dabei auf effektiven Veröffentlichungsstrategien aufbauen.
 

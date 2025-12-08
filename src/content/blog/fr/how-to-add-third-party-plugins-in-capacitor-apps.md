@@ -43,7 +43,7 @@ Prêt à dynamiser votre application ? Plongez pour apprendre le processus étap
 
 ## [Capacitor](https://capacitorjs.com/) + Nx = Développement de Plugins Multiplateformes
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/0E1l2UgXh5k" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -412,7 +412,7 @@ Pour les problèmes persistants, consultez le dépôt GitHub du plugin pour les 
 
 ## Utiliser [Capgo](https://capgo.app/) pour les Mises à Jour
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Une fois que vous avez résolu les problèmes d'intégration courants, Capgo facilite la gestion des mises à jour pour vos [applications Capacitor](https://capgo.app/top_capacitor_app/).
 

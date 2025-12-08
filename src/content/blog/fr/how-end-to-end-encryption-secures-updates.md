@@ -72,7 +72,7 @@ Ce processus en plusieurs étapes garantit que les mises à jour sont protégée
 
 ## Configuration du chiffrement de bout en bout dans [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Cette section explique comment implémenter le chiffrement de bout en bout dans les [applications Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), en s'appuyant sur les concepts abordés précédemment.
 

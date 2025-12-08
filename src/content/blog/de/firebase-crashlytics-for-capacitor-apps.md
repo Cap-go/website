@@ -97,7 +97,7 @@ Sie müssen Folgendes installieren:
 
 ### [Firebase](https://firebase.google.com/) Konsolen-Einrichtung
 
-![Firebase](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
+![Firebase Platform Dashboard](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
 
 Richten Sie Firebase ein und aktivieren Sie Crashlytics, indem Sie diese Schritte befolgen:
 
@@ -270,7 +270,7 @@ Um die Einhaltung zu gewährleisten und die Benutzerdaten zu schützen, befolgen
 
 ## [Capgo](https://capgo.app/) Integration
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/12eddca90b08193253253ea10516a6c4.jpg)
 
 Optimieren Sie den Prozess von der Absturzdetektion bis zur Bereitstellung von Fixes, indem Sie das Live-Update-System von Capgo mit Crashlytics kombinieren.
 

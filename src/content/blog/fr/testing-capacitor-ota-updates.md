@@ -44,7 +44,7 @@ next_blog: ''
 
 ## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) de [Capawesome](https://capawesomeio/) pour Ionic
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 
@@ -160,7 +160,7 @@ Le système de canaux de Capgo simplifie également la gestion des versions, gar
 
 ## Outils de Test [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/c9663ca23e94ac8ce625337d9d850085.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/c9663ca23e94ac8ce625337d9d850085.jpg)
 
 ### Fonctionnalités Capgo
 

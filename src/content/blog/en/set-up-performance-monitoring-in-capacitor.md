@@ -40,7 +40,7 @@ For live updates, integrate tools like **[Capgo](https://capgo.app/)** to push f
 
 ## Optimize app health with [Firebase](https://firebase.google.com/) Performance Monitoring ...
 
-![Firebase](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
+![Firebase Platform Dashboard](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/ENaOg5YefjQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -196,7 +196,7 @@ Use these tools to identify and address performance bottlenecks effectively.
 
 ## [Sentry](https://sentry.io/) Error Tracking Setup
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
 
 Firebase handles performance metrics, but Sentry is all about catching and diagnosing errors. Together, they give you a strong monitoring setup.
 
@@ -339,7 +339,7 @@ Once your alerts are in place, focus on continuous monitoring and refinement:
 
 ## [Capgo](https://capgo.app/) Updates and Monitoring
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 ### Capgo Core Features
 

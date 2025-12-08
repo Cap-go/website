@@ -112,7 +112,7 @@ Nach der Handhabung der plattformweiten Löschung müssen Sie sich Plugin-spezif
 
 ### [Capgo](https://capgo.app/) Update-Management
 
-![Capgo](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Echtzeit-Update-Management spielt eine zentrale Rolle bei der Aufrechterhaltung der Compliance über Plattformen und Plugins hinweg. Hier kann **Capgo** den Prozess der Verwaltung von Kontolöschungs-Updates vereinfachen.
 

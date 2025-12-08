@@ -31,7 +31,7 @@ La optimización de plugins iOS personalizados es esencial para mejorar el rendi
 
 ## Cómo los desarrolladores senior de iOS perfilan y resuelven problemas de rendimiento con [Instruments](https://developer.apple.com/tutorials/instruments).app | Mentoría en Vivo
 
-![Instruments](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
+![Instruments Performance Analysis Tool](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/e22eff9f9e9ed463ea162436d1a0a9d2.jpg)
 
 <iframe src="https://www.youtube.com/embed/HIsECG5s4DU" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -65,7 +65,7 @@ Después de abordar las preocupaciones de memoria, puedes centrarte en mejorar l
 
 ### Consejos de Rendimiento para [Swift](https://developer.apple.com/swift/)
 
-![Swift](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/2e2b0430a9aab611e781d4d45224ac43.jpg)
+![Swift Programming Language Website](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/2e2b0430a9aab611e781d4d45224ac43.jpg)
 
 Swift proporciona varias herramientas para ayudar a optimizar tu código. Concéntrate en estas áreas para obtener el máximo de tu plugin:
 
@@ -85,7 +85,7 @@ Para llevar tu plugin iOS al siguiente nivel, es esencial ajustar su rendimiento
 
 ### Configuración de Rendimiento de [Xcode](https://developer.apple.com/xcode/)
 
-![Xcode](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Ajustar la configuración de compilación de Xcode puede mejorar significativamente el rendimiento de tu plugin mientras mantienes su tamaño bajo control. Aquí hay una visión general rápida de las configuraciones clave:
 
@@ -142,7 +142,7 @@ Al seleccionar y configurar cuidadosamente las dependencias, reduces riesgos y a
 
 ### Actualizaciones OTA con [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6825647b0209458b3ff370ad/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 Una vez que las dependencias están optimizadas, el siguiente paso es asegurar que tu plugin evolucione sin problemas a lo largo del tiempo. Las actualizaciones over-the-air (OTA) son un cambio de juego, y Capgo es una herramienta poderosa para la implementación rápida mientras se mantiene el cumplimiento con las reglas de la App Store. Según datos recientes, **95% de los usuarios activos reciben actualizaciones dentro de 24 horas** usando el sistema de distribución de Capgo [\[1\]](https://capgo.app/).
 

@@ -31,7 +31,7 @@ next_blog: ''
 
 ## [Ionic](https://ionicframework.com/)で[Sentry](https://sentry.io/)を使用した[Capacitor](https://capacitorjs.com/)のエラーロギング
 
-![Ionic](https://assets.seobotai.com/capgo.app/67fc8d0aaf1a45e500bcc0f5/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/67fc8d0aaf1a45e500bcc0f5/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 ## 主要なエラー処理ガイドライン
 

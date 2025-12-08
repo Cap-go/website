@@ -47,7 +47,7 @@ Capacitor cierra la brecha entre el desarrollo de aplicaciones web y nativas, fa
 
 ## Cómo [Capacitor](https://capacitorjs.com/) Maneja el Código de Plataforma
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Capacitor ofrece herramientas para gestionar el código específico de la plataforma, permitiendo a los desarrolladores crear experiencias personalizadas para iOS y Android utilizando una única API.
 
@@ -242,7 +242,7 @@ Aquí hay algunas consideraciones clave para la construcción:
 
 ## Actualizar Aplicaciones con [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
 
 Mantener actualizadas las [aplicaciones de Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) de manera eficiente para iOS y Android es crucial. Capgo ofrece un sistema de actualización en vivo que se alinea con las pautas de ambas plataformas.
 

@@ -119,7 +119,7 @@ Here’s a quick reference for the minimum and recommended versions of key compo
 
 ### Optimize [Gradle](https://gradle.org/) Settings
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 To improve performance and compatibility, update your `gradle.properties` file with these settings:
 
@@ -431,7 +431,7 @@ Capgo’s error tracking and rollback tools can help you recover quickly from fa
 
 ## [Capgo](https://capgo.app/) Integration Guide
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Based on our live testing results, integrating Capgo helps streamline update deployment.
 

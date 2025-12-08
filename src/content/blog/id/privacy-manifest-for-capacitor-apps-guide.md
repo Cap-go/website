@@ -83,7 +83,7 @@ Menurut Capgo, 95% pengguna mematuhi pembaruan dalam 24 jam. Dengan lebih dari 2
 
 ## Membangun Privacy Manifest untuk [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Persyaratan Setup
 
@@ -231,7 +231,7 @@ Setelah melakukan pembaruan, uji manifest Anda di lingkungan pengembangan. Gunak
 
 ## Alat Privasi [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ec9a7d7747adc4bca8a776/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo menyederhanakan pengelolaan privacy manifest dan pembaruan aplikasi, memastikan standar privasi Anda tetap utuh tanpa menunda deployment.
 

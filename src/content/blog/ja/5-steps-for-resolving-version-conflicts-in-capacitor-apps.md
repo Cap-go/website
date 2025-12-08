@@ -38,7 +38,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/) CLIでバージョンを確認
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Capacitor CLIは、プロジェクトの依存関係バージョンを検査するための便利なコマンドを提供します。ターミナルを開き、プロジェクトディレクトリに移動して実行します：
 
@@ -130,7 +130,7 @@ npm ls @capacitor/*
 
 ### npmと[Yarn](https://yarnpkg.com/)ツールを使用する
 
-![Yarn](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
+![Yarn Package Manager Website](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
 
 npmやYarnなどのパッケージマネージャーは、依存関係の問題を検出して対処するのに役立つコマンドを提供します。以下がその方法です：
 

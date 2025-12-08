@@ -41,7 +41,7 @@ next_blog: ''
 
 ## [Ionic](https://ionicframework.com/) 앱을 [Capacitor](https://capacitorjs.com/) 3로 마이그레이션하는 방법
 
-![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 롤백 전략은 앱 안정성 유지와 사용자 신뢰 확보에 중요한 역할을 합니다. 지표들은 이러한 전략들이 업데이트를 효과적으로 관리하는 체계적인 접근 방식을 어떻게 지원하는지 일관되게 보여줍니다.
 

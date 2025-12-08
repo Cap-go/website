@@ -88,7 +88,7 @@ next_blog: ''
 
 ### [Firebase](https://firebasegooglecom/) コンソールのセットアップ
 
-![Firebase](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
+![Firebase Platform Dashboard](https://assets.seobotai.com/capgo.app/6805ba51360079f947b8a1bf/e510e8ab32244fff0b09e93222500c83.jpg)
 
 以下のステップでFirebaseをセットアップしCrashlyticsを有効化します：
 

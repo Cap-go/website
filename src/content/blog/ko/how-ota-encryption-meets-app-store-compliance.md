@@ -127,7 +127,7 @@ AES-256 암호화를 기반으로 하여 이러한 업데이트가 보호되도�
 
 ## [Capgo](https://capgo.app/)의 OTA 암호화 시스템
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-14.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-14.jpg?auto=compress)
 
 Capgo는 앱스토어 규정을 완벽히 준수하면서 안전한 OTA 업데이트를 제공하기 위해 고급 암호화 기술을 사용합니다.
 

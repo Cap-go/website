@@ -42,7 +42,7 @@ Delta-Updates sind ideal für [Capacitor](https://capacitorjs.com/) Apps und erm
 
 ## Delta Updates in [Capacitor](https://capacitorjs.com/) Apps
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 Delta-Updates in [Capacitor Apps](https://capgo.app/blog/capacitor-comprehensive-guide/) basieren auf einer Methode namens differenzielles Patching, bei der nur die modifizierten Teile des Codes gesendet werden. Dieser Ansatz minimiert die Menge der übertragenen Daten und macht Updates für Benutzer schneller und einfacher.
 

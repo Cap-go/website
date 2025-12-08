@@ -45,7 +45,7 @@ Pronto a semplificare i tuoi [aggiornamenti OTA Capacitor](https://capgo.app/ja/
 
 ## Linee guida per il controllo versione per [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-26.jpg?auto=compress)
 
 La gestione degli aggiornamenti OTA di Capacitor richiede una chiara strategia di controllo versione. Ecco come mantenere le cose stabili e garantire aggiornamenti fluidi.
 

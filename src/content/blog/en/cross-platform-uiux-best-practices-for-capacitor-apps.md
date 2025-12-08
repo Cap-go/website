@@ -29,7 +29,7 @@ next_blog: ''
 
 ## Build Cross Platform Components with [Stencil](https://stenciljs.com/) and [Capacitor](https://capacitorjs.com/)
 
-![Stencil](https://mars-images.imgix.net/seobot/screenshots/stenciljs.com-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
+![Stencil Web Components Compiler](https://mars-images.imgix.net/seobot/screenshots/stenciljs.com-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/O5xfY9LPl0s" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -83,7 +83,7 @@ Creating high-performance UI components requires careful attention to cross-plat
 
 ### Using [Ionic](https://ionicframework.com/) Components
 
-![Ionic](https://mars-images.imgix.net/seobot/screenshots/ionicframework.com-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
+![Ionic Framework Website](https://mars-images.imgix.net/seobot/screenshots/ionicframework.com-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
 
 Ionic offers pre-built components that simplify cross-platform development. These components automatically align with platform-specific design patterns while ensuring consistent functionality.
 
@@ -222,7 +222,7 @@ Keeping your app updated is crucial for maintaining a smooth and consistent user
 
 ### Live Updates with [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 After nailing the design and testing phases, the next challenge is rolling out updates smoothly. Capgo makes this process easier by allowing instant updates without waiting for app store approvals.
 

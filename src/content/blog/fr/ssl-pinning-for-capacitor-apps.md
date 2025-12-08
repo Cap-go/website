@@ -72,7 +72,7 @@ La première étape consiste à sélectionner un plugin qui fonctionne bien à l
 
 ### Configurer Votre Application [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Une fois que vous avez choisi un plugin, l'étape suivante consiste à configurer votre application Capacitor pour activer le pinning SSL. Voici un exemple de ce à quoi pourrait ressembler votre configuration :
 

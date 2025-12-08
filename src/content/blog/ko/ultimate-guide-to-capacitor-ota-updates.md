@@ -55,7 +55,7 @@ next_blog: ''
 
 ## [Capgo](https://capgo.app/) 플랫폼 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 [Capgo 플랫폼](https://capgo.app/docs/webapp/)은 Capacitor의 업데이트 기능을 향상된 보안과 고급 배포 옵션으로 강화합니다. 750개의 프로덕션 앱에서 2억 3,500만 건의 업데이트를 관리한 [\[1\]](https://capgo.app/) 경험을 바탕으로, 성능 향상을 위한 주요 기능을 제공합니다:
 
@@ -232,4 +232,4 @@ OTA 업데이트에 대한 모범 사례 개요:
 
 ### [Capgo](https://capgo.app/) 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e211687856e801f1f2973e/248f5ad4814006d64d1f6a7ab727c6b9
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e211687856e801f1f2973e/248f5ad4814006d64d1f6a7ab727c6b9

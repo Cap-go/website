@@ -113,7 +113,7 @@ Capacitorのネイティブセキュリティ機能は強固な基盤となり�
 
 ### [Capgo](https://capgo.app): 安全なOTAアップデート
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-09.jpg?auto=compress)
 
 Capgoは、Capacitorアプリケーションでの安全なOver-the-Air（OTA）アップデートの管理に特化して設計されています。以下のような機能でコードの整合性を確保します：
 

@@ -181,7 +181,7 @@ OTA 업데이트 플랫폼을 선택할 때 보안 및 기능성에 집중하세
 
 ### [Capgo](https://capgo.app/) 플랫폼 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 2022년에 출시된 Capgo는 보안을 염두에 두고 설계된 OTA 업데이트를 제공합니다. 그 기능으로는 종단 간 암호화, 자체 호스팅 기능, 스테이지 롤아웃, 오류 추적, 버전 관리 등이 있습니다.
 

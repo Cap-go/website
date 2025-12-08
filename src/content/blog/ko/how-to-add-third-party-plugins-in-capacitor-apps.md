@@ -41,7 +41,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) + Nx = 크로스 플랫폼 플러그인 개발
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 <div style="text-align: center"></div>
 
@@ -325,7 +325,7 @@ npm install @capacitor/camera @capacitor/geolocation @capacitor/storage
 
 ## [Capgo](https://capgo.app/)를 사용한 업데이트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 일반적인 통합 문제를 해결했다면, Capgo를 통해 [Capacitor 앱](https://capgo.app/top_capacitor_app/) 업데이트를 쉽게 관리할 수 있습니다.
 

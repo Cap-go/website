@@ -107,7 +107,7 @@ CPAはより良い消費者プライバシー、強力なセキュリティ、�
 
 ## 4. [Capgo](https://capgo.app/) プライバシースタンダード
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Capgoは、CCPA、VCDPA、CPAに沿っており、州の規制と実用的なアプリ開発ニーズのギャップを埋めています。
 

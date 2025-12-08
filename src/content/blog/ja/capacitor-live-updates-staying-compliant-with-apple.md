@@ -39,7 +39,7 @@ next_blog: ''
 
 ## [Appflow](https://ionic.io/appflow/live-updates)ライブアップデート：即時アップデートを直接ユーザーに配信
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-f18932d1af08bf70cb14b84540039486-2025-03-12.jpg?auto=compress)
 
 ## Appleのライブアップデートルール
 
@@ -128,7 +128,7 @@ App Storeのレビュープロセスをスムーズにするために、すべ�
 
 ### [Capgo](https://capgo.app/)：ライブアップデート管理
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-12.jpg?auto=compress)
 
 Capgoはライブアップデート管理を簡素化し、Appleの要件への準拠を確保します。すでに**1,400以上の本番アプリ**で**9億4,760万回**以上のアップデートをサポートしています[\[1\]](https://capgo.app/) 。
 

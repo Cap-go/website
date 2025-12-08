@@ -174,7 +174,7 @@ Gli studi mostrano che i rollout graduali ben eseguiti raggiungono un tasso di s
 
 ### Come [Capgo](https://capgo.app/) Aggiunge Valore
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Per le app [Capacitor](https://capacitorjs.com/), Capgo semplifica i rollout graduali offrendo una gestione precisa degli aggiornamenti rispettando le linee guida di Google Play. Il suo sistema di canali si integra perfettamente con i piani di rollout esistenti.
 

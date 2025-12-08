@@ -34,7 +34,7 @@ Les mises à jour en direct permettent aux développeurs de déployer rapidement
 
 ### Comment utiliser les mises à jour en direct dans Capacitor :
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
 
 1.  **Configurer le SDK** : Installez le SDK de mises à jour en direct et configurez votre application.
 2.  **Intégrer la logique de mise à jour** : Ajoutez du code pour vérifier et appliquer les mises à jour automatiquement.
@@ -222,7 +222,7 @@ Voici une analyse rapide des outils populaires de mise à jour en direct et comm
 
 ### Aperçu des fonctionnalités de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
 
 Capgo gère plus de 150 000 mises à jour en direct mensuellement, prouvant qu'il est conçu pour évoluer pour les entreprises de taille moyenne. Voici ce qui le distingue :
 

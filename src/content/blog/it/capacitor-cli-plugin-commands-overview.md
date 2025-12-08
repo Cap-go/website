@@ -296,7 +296,7 @@ Se i comandi CLI non risolvono il problema, controlla il repository GitHub del p
 
 ## Integrazione di [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Capgo funziona in modo fluido con il Capacitor CLI, abilitando [aggiornamenti dei plugin in tempo reale](https://capgo.app/docs/plugin/self-hosted/auto-update) e semplificando le attività di manutenzione per gli sviluppatori.
 

@@ -423,7 +423,7 @@ Es fundamental probar los flujos de consentimiento en diferentes versiones de SO
 
 ### Usando [Capgo](https://capgo.app/) para Actualizaciones
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
 
 Las capacidades de actualización en vivo de Capgo le permiten hacer ajustes de cumplimiento de manera eficiente. Aquí hay un ejemplo:
 

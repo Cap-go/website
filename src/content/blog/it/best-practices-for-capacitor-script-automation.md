@@ -42,7 +42,7 @@ L'automazione garantisce aggiornamenti delle app più veloci, sicuri e affidabil
 
 ## Come configurare AUTOMATICAMENTE il tuo progetto [Capacitor](https://capacitorjs.com/) ⚡️
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/kYFZkmJ6rAc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -216,7 +216,7 @@ Le moderne piattaforme di automazione semplificano gli aggiornamenti mantenendo 
 
 ### Funzionalità di [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-21.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-21.jpg?auto=compress)
 
 La piattaforma di automazione di Capgo offre prestazioni elevate in scenari reali. Raggiunge un **tasso di aggiornamento del 95% degli utenti entro 24 ore** e un **tasso di successo globale dell'82% per gli aggiornamenti** [\[1\]](https://capgo.app/). Ecco una panoramica delle sue caratteristiche principali:
 

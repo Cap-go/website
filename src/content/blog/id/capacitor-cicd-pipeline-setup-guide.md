@@ -87,7 +87,7 @@ Untuk data sensitif seperti API key dan sertifikat, pastikan untuk menyimpannya 
 
 ## Panduan Integrasi [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Setelah menyiapkan tahap build dan deploy, saatnya mengintegrasikan Capgo. Ini memungkinkan Anda mengirim pembaruan langsung ke aplikasi, melewati penundaan persetujuan app store.
 

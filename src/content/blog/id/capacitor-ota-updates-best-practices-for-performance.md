@@ -95,7 +95,7 @@ Capgo menyediakan alat terintegrasi untuk pembaruan aman dan bertahap, dengan fi
 
 ## Menyiapkan Pembaruan OTA di [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
 
 Menyiapkan pembaruan Over-the-Air (OTA) di Capacitor memerlukan pengujian yang hati-hati dan kepatuhan pada pedoman yang ketat.
 
@@ -126,7 +126,7 @@ Untuk menghindari masalah dengan persetujuan toko aplikasi, ikuti aturan khusus 
 
 ### Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
 
 Setelah pengujian dan memastikan kepatuhan, menerapkan pembaruan secara efisien menjadi langkah berikutnya. Capgo adalah alat yang menyederhanakan proses ini.
 

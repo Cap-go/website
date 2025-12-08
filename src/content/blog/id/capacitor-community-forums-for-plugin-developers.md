@@ -39,13 +39,13 @@ Forum Capacitor adalah tujuan utama Anda untuk pengembangan plugin yang efisien.
 
 ## Forum [Capacitor](https://capacitorjs.com/) Utama
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 Pengembang Capacitor memiliki beberapa forum utama untuk terhubung, berkolaborasi, dan menyelesaikan masalah.
 
 ### Panduan Saluran [Discord](https://ionic.io/blog/announcing-official-ionic-discord-server)
 
-![Discord](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
+![Discord Community Platform](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
 
 Server Discord resmi adalah tempat yang bagus untuk diskusi real-time dan pemecahan masalah cepat. Server ini diorganisir ke dalam saluran yang terfokus, seperti:
 
@@ -213,7 +213,7 @@ Dokumentasi resmi Capacitor adalah sumber daya utama. Ini mencakup referensi API
 
 ### Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo membuat pembaruan aplikasi instan menjadi sederhana. Telah mengirimkan 23,5 juta pembaruan di 750 aplikasi produksi, dengan tingkat keberhasilan 82%. Mengesankan, 95% pengguna aktif menerima pembaruan dalam 24 jam. CDN globalnya dapat mengunduh bundle 5MB hanya dalam 114ms. Capgo mendukung Capacitor 6 dan 7, menawarkan kemampuan pembaruan parsial [\[1\]](https://capgo.app/).
 

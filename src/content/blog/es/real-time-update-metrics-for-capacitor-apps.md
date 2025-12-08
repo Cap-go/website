@@ -47,7 +47,7 @@ Monitorear actualizaciones te ayuda a entregar actualizaciones sin problemas, so
 
 ## [Capgo](https://capgo.app/), plugin de Capacitor para actualizaciones en vivo
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-02.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-02.jpg?auto=compress)
 
 ## Configuración del Seguimiento de Actualizaciones
 

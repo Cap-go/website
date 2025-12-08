@@ -118,7 +118,7 @@ Una vez que tu pipeline está listo, agregar actualizaciones OTA hace que la ent
 
 ### Usando Actualizaciones OTA de [Capacitor](https://capacitorjs.com/) con [Capgo](https://capgo.app/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
 
 Capgo hace que las actualizaciones OTA sean simples, seguras y rápidas con características como encriptación y cumplimiento. Aquí está cómo comenzar:
 

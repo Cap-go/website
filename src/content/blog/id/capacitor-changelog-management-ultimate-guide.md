@@ -197,7 +197,7 @@ Saat mengelola pembaruan langsung, penting untuk mendokumentasikan detail utama 
 
 ### Manajemen Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Untuk pembaruan OTA langsung, dokumentasi terperinci adalah keharusan untuk melengkapi strategi changelog Anda secara keseluruhan. Capgo menyederhanakan proses ini dengan secara otomatis melacak versi, memantau kinerja pembaruan, mencatat rollback, dan merekam penerapan berdasarkan saluran.
 

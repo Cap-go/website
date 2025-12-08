@@ -93,7 +93,7 @@ Gli aggiornamenti in tempo reale sono cruciali per mantenere registri di conform
 
 ## Configurazione del consenso nelle app [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Creazione di un'interfaccia utente per il consenso
 
@@ -152,7 +152,7 @@ Questa tabella mostra come gli aggiornamenti live si distinguano per velocità e
 
 ### Funzionalità di aggiornamento [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
 
 Capgo sfrutta gli aggiornamenti live per semplificare la gestione del consenso per le app Capacitor. Raggiunge un impressionante **tasso di aggiornamento del 95% degli utenti entro 24 ore** e un **tasso di successo globale dell'82%** per gli aggiornamenti [\[1\]](https://capgo.app/).
 

@@ -41,7 +41,7 @@ next_blog: ''
 
 ## Main Types of [Capacitor](https://capacitorjs.com/) Build Failures
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Capacitor build failures can arise from various sources, each requiring specific solutions. Below, we’ll break down some of the most common causes and how they manifest during the build process.
 
@@ -261,7 +261,7 @@ For iOS builds, confirm Xcode compatibility and signing configurations. For Andr
 
 ## Using [Capgo](https://capgo.app/) to Manage Build Failures
 
-![Capgo](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 Capgo provides a suite of tools designed to help teams handle build failures in [Capacitor CI/CD pipelines](https://capgo.app/blog/automatic-capacitor-android-build-gitlab/). By combining monitoring, secure configurations, and in-depth analysis, it supports teams in identifying, addressing, and preventing build issues. Below, we’ll explore how Capgo simplifies these processes to improve CI/CD efficiency.
 

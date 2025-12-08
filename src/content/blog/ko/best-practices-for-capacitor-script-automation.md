@@ -39,7 +39,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 프로젝트를 자동으로 구성하는 방법 ⚡️
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/kYFZkmJ6rAc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -184,7 +184,7 @@ Capgo는 GitHub Actions, GitLab CI, [Jenkins](https://www.jenkins.io/)와 같은
 
 ### [Capgo](https://capgo.app/) 기능
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-21.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-21.jpg?auto=compress)
 
 Capgo의 자동화 플랫폼은 실제 환경에서 강력한 성능을 제공합니다. **24시간 이내 95%의 사용자 업데이트율**과 **82%의 전체 업데이트 성공률**을 달성합니다 [\[1\]](https://capgo.app/). 주요 기능은 다음과 같습니다:
 

@@ -209,7 +209,7 @@ Usa questi insight per perfezionare la tua app e affrontare eventuali preoccupaz
 
 ### Strumenti di Performance [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgo fornisce strumenti per semplificare il monitoraggio e la risoluzione dei problemi durante gli aggiornamenti:
 

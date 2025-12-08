@@ -84,7 +84,7 @@ Contrairement aux mises à jour traditionnelles de l'app store, qui exigent un t
 
 ### Système de mise à jour [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-10.jpg?auto=compress)
 
 Le système de Capgo est conçu pour répondre aux limitations matérielles et réseau auxquelles font face de nombreux utilisateurs. Cela s'aligne avec les observations de performance antérieures [\[1\]](https://capgo.app/). Comme l'a partagé un développeur :
 

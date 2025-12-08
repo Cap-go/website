@@ -387,7 +387,7 @@ Para aprovechar al máximo el rendimiento de tu sistema biométrico:
 
 ### Actualizaciones con [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Capgo simplifica las biométricas.
 

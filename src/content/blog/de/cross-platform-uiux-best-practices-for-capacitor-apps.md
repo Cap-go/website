@@ -34,7 +34,7 @@ next_blog: ''
 
 ## Plattformübergreifende Komponenten mit [Stencil](https://stenciljs.com/) und [Capacitor](https://capacitorjs.com/) erstellen
 
-![Stencil](https://mars-images.imgix.net/seobot/screenshots/stenciljs.com-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
+![Stencil Web Components Compiler](https://mars-images.imgix.net/seobot/screenshots/stenciljs.com-6020276454429265c3dac5ec0634b1fb-2025-03-24.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/O5xfY9LPl0s" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -87,7 +87,7 @@ Die Erstellung von leistungsstarken UI-Komponenten erfordert sorgfältige Beacht
 
 ### Verwendung von [Ionic](https://ionicframework.com/) Komponenten
 
-![Ionic](https://mars-images.imgix.net/seobot/screenshots/ionicframework.com-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
+![Ionic Framework Website](https://mars-images.imgix.net/seobot/screenshots/ionicframework.com-e736941a658f3b6da09d169d589f75bb-2025-03-24.jpg?auto=compress)
 
 Ionic bietet vorgefertigte Komponenten, die die plattformübergreifende Entwicklung vereinfachen. Diese Komponenten passen sich automatisch an plattformspezifische Designmuster an und gewährleisten gleichzeitig konsistente Funktionalität.
 
@@ -226,7 +226,7 @@ Die Aktualisierung Ihrer App ist entscheidend für die Aufrechterhaltung einer r
 
 ### Live-Updates mit [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Nach Abschluss der Design- und Testphasen besteht die nächste Herausforderung darin, Updates reibungslos auszurollen. Capgo vereinfacht diesen Prozess, indem es sofortige Updates ohne Wartezeit auf App-Store-Genehmigungen ermöglicht.
 

@@ -124,7 +124,7 @@ Capacitorを使用する開発者は、ロシアのユーザーからの個人�
 
 ### [Capgo](https://capgo.app/) プラットフォーム機能の概要
 
-![Capgo](https://assets.seobotai.com/capgo.app/680ae0495a08fca891774cdd/66b4651f868ecdcc17d750c697bea294.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680ae0495a08fca891774cdd/66b4651f868ecdcc17d750c697bea294.jpg)
 
 遵守と安全なデータ管理を優先する更新プラットフォームを選択します。Capgoの自己ホスティングオプションは、データがロシア国内に留まることを保証し、データローカリゼーション法と一致します。
 

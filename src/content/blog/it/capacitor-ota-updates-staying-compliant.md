@@ -35,7 +35,7 @@ Continua a leggere per una guida passo-passo sull'implementazione degli aggiorna
 
 ## Nozioni di Base sugli Aggiornamenti OTA per [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Come Funzionano gli Aggiornamenti OTA
 
@@ -128,7 +128,7 @@ Una comunicazione chiara favorisce la fiducia degli utenti e rafforza la conform
 
 ## Usare [Capgo](https://capgo.app/) per gli Aggiornamenti OTA
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/cf21af63f433895b269de0da5dc7d74c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/cf21af63f433895b269de0da5dc7d74c.jpg)
 
 Capgo fornisce una soluzione per gestire gli aggiornamenti over-the-air (OTA) nelle app Capacitor, affrontando i requisiti di conformità con un sistema integrato. Con più di 750 app in produzione e 23,5 milioni di aggiornamenti distribuiti, Capgo assicura un [processo di aggiornamento](https://capgo.app/docs/plugin/cloud-mode/manual-update/) fluido e conforme [\[1\]](https://capgo.app/).
 

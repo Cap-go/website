@@ -99,7 +99,7 @@ Les mises à jour en temps réel sont cruciales pour maintenir des registres de 
 
 ## Configuration du Consentement dans les Applications [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Création d'une Interface de Consentement
 
@@ -158,7 +158,7 @@ Ce tableau montre comment les mises à jour en direct se distinguent par leur ra
 
 ### Fonctionnalités de Mise à Jour [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c697bea294.jpg)
 
 Capgo exploite les mises à jour en direct pour simplifier la gestion du consentement pour les applications Capacitor.Il atteint un impressionnant **95% de taux de mise à jour des utilisateurs en 24 heures** et un **82% de taux de réussite mondial** pour les mises à jour [\[1\]](https://capgo.app/)
 

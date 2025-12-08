@@ -179,7 +179,7 @@ Here are some essential features to prioritize:
 
 ### [Capgo](https://capgo.app/) Platform Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Launched in 2022, Capgo delivers OTA updates designed with security in mind. Its features include end-to-end encryption, self-hosting capabilities, staged rollouts, error tracking, and version control.
 

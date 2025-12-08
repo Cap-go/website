@@ -31,7 +31,7 @@ Untuk mengelola konflik versi secara efisien, fokus pada pemantauan real-time, p
 
 ## Konflik Versi dalam [Capacitor](https://capacitorjs.com/) Live Updates
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Pemicu Konflik Umum
 
@@ -56,7 +56,7 @@ Konflik versi dapat menyebabkan berbagai masalah yang berdampak negatif pada apl
 
 ## Jelajahi Capawesome New Ionic Capacitor Live Update ...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/5d1ba8681722600db788c5ef0c9fe764.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/5d1ba8681722600db788c5ef0c9fe764.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -121,7 +121,7 @@ Saat ini, pengembang mencari solusi yang memungkinkan update cepat dan mematuhi 
 
 ### Fitur [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/29f394e74984c052f31714ba4759b80a.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/29f394e74984c052f31714ba4759b80a.jpg)
 
 Capgo menawarkan berbagai fitur yang dirancang untuk mengisi celah yang ditinggalkan platform lain. Ini termasuk **[deployment cloud atau self-hosted](https://capgo.app/blog/self-hosted-capgo/)**, **enkripsi end-to-end**, **integrasi CI/CD**, dan **distribusi berbasis kanal**. Berikut beberapa metrik kinerja utama:
 

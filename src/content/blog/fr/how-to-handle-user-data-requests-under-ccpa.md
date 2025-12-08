@@ -165,7 +165,7 @@ Placez ces contrôles à un endroit facilement trouvable dans le menu des param�
 
 ### Utilisation de [Capgo](https://capgo.app/) pour les mises à jour
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
 
 Une fois que vous avez établi de solides contrôles dans l'application, maintenir votre application à jour est essentiel pour rester conforme. C'est là que Capgo entre en jeu. Il vous permet de déployer des mises à jour instantanément - sans attendre l'approbation des stores d'applications. En fait, 95 % des utilisateurs actifs reçoivent les mises à jour dans les 24 heures suivant leur publication [\[1\]](https://capgo.app/).
 

@@ -43,7 +43,7 @@ El Puente Nativo de Capacitor simplifica el desarrollo de aplicaciones al combin
 
 ## Cómo crear un complemento local específico del proyecto | Ionic | [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/q5kQcTqPtGY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -142,7 +142,7 @@ El puente nativo juega un papel clave al conectar funcionalidades web y nativas,
 
 ### Actualizaciones en Vivo con [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/4305c974119f10d25560fe363e5513b1.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6822b2de266b1f3f751ffb5b/4305c974119f10d25560fe363e5513b1.jpg)
 
 Capgo aprovecha el puente nativo para ofrecer actualizaciones en vivo, permitiendo que los cambios en la aplicación se envíen al instante sin requerir envíos a la tienda de aplicaciones.
 

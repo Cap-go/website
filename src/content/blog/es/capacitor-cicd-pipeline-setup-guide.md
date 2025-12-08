@@ -87,7 +87,7 @@ Para datos sensibles como claves API y certificados, asegúrate de almacenarlos 
 
 ## Guía de integración de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Una vez que hayas configurado tus etapas de compilación y despliegue, es momento de integrar Capgo. Esto te permite enviar actualizaciones en vivo directamente a tu aplicación, evitando retrasos de aprobación de la tienda de aplicaciones.
 

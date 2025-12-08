@@ -114,7 +114,7 @@ Envoyez des notifications qui comptent, quand elles comptent. En adaptant à la 
 
 ### Système de Gestion des Mises à Jour de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Pour soutenir ces interactions personnalisées, une [gestion des mises à jour](https://capgo.app/docs/plugin/cloud-mode/manual-update/) efficace est essentielle. Le système de canaux de Capgo offre un contrôle précis sur les mises à jour, permettant des tests bêta, des déploiements échelonnés et des sorties de fonctionnalités ciblées pour des segments d'utilisateurs spécifiques. Avec des analyses en temps réel et des paramètres de permission détaillés, Capgo garantit la conformité avec les règles des magasins d'applications - particulièrement importante pour les applications d'entreprise.
 

@@ -40,7 +40,7 @@ next_blog: ''
 
 ## Mengatasi No Matching View Exception di [Capacitor](https://capacitorjs.com/) ...
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <Steps>
 
@@ -132,7 +132,7 @@ Anda dapat mengintegrasikan langkah ini ke dalam alat seperti [GitHub Actions](h
 
 ### Menggunakan Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/f3ac818a2fec22e90998e19561d68a19.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/f3ac818a2fec22e90998e19561d68a19.jpg)
 
 Capgo menyediakan sistem pembaruan langsung yang mengatasi konflik versi dengan cepat. Menurut data mereka, 95% pengguna aktif menginstal pembaruan dalam 24 jam [\[1\]](https://capgo.app/).
 

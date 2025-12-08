@@ -40,7 +40,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)의 일치하는 뷰 없음 예외 해결하기...
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <Steps>
 
@@ -132,7 +132,7 @@ CI/CD 파이프라인에서 자동화된 버전 검사를 설정하여 충돌을
 
 ### [Capgo](https://capgo.app/) 업데이트 사용하기
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/f3ac818a2fec22e90998e19561d68a19.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/f3ac818a2fec22e90998e19561d68a19.jpg)
 
 Capgo는 버전 충돌을 빠르게 해결하는 실시간 업데이트 시스템을 제공합니다. 그들의 데이터에 따르면, 활성 사용자의 95%가 24시간 이내에 업데이트를 설치합니다 [\[1\]](https://capgo.app/).
 

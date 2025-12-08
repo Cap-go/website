@@ -41,7 +41,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)用のCI/CDパイプラインの構築
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
 
 適切に設計されたCI/CDパイプラインはデプロイメントを簡素化し、アプリが一貫してアプリストアのガイドラインを満たすことを支援します。
 
@@ -105,7 +105,7 @@ Google Playをターゲットにする場合、以下の主要な検証に焦点
 
 ### [Capgo](https://capgo.app/)のコンプライアンスツール
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgoは、CI/CDパイプラインに直接統合されるツールでコンプライアンスワークフローを強化します。Capgoは以下の支援を提供します：
 

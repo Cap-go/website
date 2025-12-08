@@ -36,7 +36,7 @@ Baca terus untuk panduan langkah demi langkah dalam menerapkan pembaruan OTA sam
 
 ## Dasar-Dasar Pembaruan OTA untuk [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Cara Kerja Pembaruan OTA
 
@@ -129,7 +129,7 @@ Komunikasi yang jelas membangun kepercayaan dengan pengguna dan memperkuat kepat
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan OTA
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/cf21af63f433895b269de0da5dc7d74c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/cf21af63f433895b269de0da5dc7d74c.jpg)
 
 Capgo menyediakan solusi untuk mengelola pembaruan over-the-air (OTA) dalam aplikasi Capacitor, menangani persyaratan kepatuhan dengan sistem terintegrasi. Dengan lebih dari 750 aplikasi dalam produksi dan 23,5 juta pembaruan yang dikirimkan, Capgo memastikan [proses pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) yang lancar dan sesuai [\[1\]](https://capgo.app/).
 

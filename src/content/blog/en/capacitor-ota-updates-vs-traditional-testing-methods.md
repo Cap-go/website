@@ -34,13 +34,13 @@ Capacitor OTA updates, supported by tools like [Capgo](https://capgo.app/), prov
 
 ## [Appflow](https://ionic.io/appflow/) Deploy: Ship real-time updates to your Ionic app users
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/3gj54AewoC8" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capacitor](https://capacitorjs.com/) OTA Updates Explained
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21.jpg?auto=compress)
 
 OTA updates in [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) simplify app maintenance after release. Instead of requiring full app store submissions, developers can push updates directly to users.
 
@@ -61,7 +61,7 @@ These features provide developers with greater flexibility and control, especial
 
 ### [Capgo](https://capgo.app/)'s Role in OTA Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21.jpg?auto=compress)
 
 Capgo simplifies the process of managing OTA updates for Capacitor apps. Its platform prioritizes security with end-to-end encryption, ensuring update content remains protected.
 

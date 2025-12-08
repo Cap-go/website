@@ -117,7 +117,7 @@ Creating a Privacy Manifest file in Xcode can be straightforward with the right 
 
 ### [Xcode](https://developer.apple.com/xcode/) Setup Steps
 
-![Xcode](https://assets.seobotai.com/capgo.app/682d66c84fa53d42207e6f25/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/682d66c84fa53d42207e6f25/15516018a4284df8a7d0585815c62b4c.jpg)
 
 1.  **Create the Privacy Manifest File**
     

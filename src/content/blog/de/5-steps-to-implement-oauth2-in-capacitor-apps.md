@@ -42,7 +42,7 @@ So integrieren Sie OAuth2 in nur 5 Schritten in Ihre [Capacitor App](https://cap
 
 ## So fügen Sie Google Sign In mit [Capacitor](https://capacitorjs.com/) zu Ihrer [Ionic](https://ionicframework.com/) App hinzu
 
-![Capacitor](https://assets.seobotai.com/capgo.app/683598e6d3b96619818496d3/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/683598e6d3b96619818496d3/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/GwtpoWZ_78E" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 

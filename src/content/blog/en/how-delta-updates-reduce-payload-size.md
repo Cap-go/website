@@ -37,7 +37,7 @@ Delta updates are ideal for [Capacitor](https://capacitorjs.com/) apps, enabling
 
 ## Delta Updates in [Capacitor](https://capacitorjs.com/) Apps
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 Delta updates in [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) rely on a method called differential patching, which sends only the modified portions of the code. This approach minimizes the amount of data transferred, making updates quicker and easier for users.
 
@@ -210,7 +210,7 @@ For enterprise-level deployments, consider using staged rollouts. Capgo's channe
 
 ## [Capgo](https://capgo.app/) Delta Update Features
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Capgo builds on its delta update system with features designed to improve both performance and security. So far, the platform has managed an impressive **23.5 million updates** across **750 production apps** [\[1\]](https://capgo.app/).
 

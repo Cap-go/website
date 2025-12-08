@@ -81,13 +81,13 @@ Jaga kontrol versi tetap terorganisir untuk melacak perubahan dan menyederhanaka
 
 ## 3 Alat Debug Utama untuk Pembaruan OTA [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
 
 Alat-alat ini membantu pengembang mengatasi [tantangan debugging](https://capgo.app/docs/plugin/debugging/) tertentu sambil mengelola pembaruan OTA secara efektif.
 
 ### [Capgo](https://capgo.app)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20.jpg?auto=compress)
 
 Capgo menyediakan solusi andal untuk menangani pembaruan OTA dalam aplikasi Capacitor. Ini memastikan pembaruan yang aman dan cepat, sambil mematuhi pedoman platform.
 

@@ -86,7 +86,7 @@ next_blog: ''
 
 ### [Capgo](https://capgo.app/) 보안 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 Capgo는 표준 CI/CD 비밀 정보 관리를 확장하여 Capacitor 앱의 실시간 업데이트 보안을 강화합니다. 승인된 사용자만 민감한 데이터를 복호화할 수 있도록 종단 간 암호화를 사용합니다[\[1\]](https://capgo.app/).
 

@@ -28,7 +28,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) iOS/Android 플러그인 만드는 방법
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/Dq_BmheGAig" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -124,7 +124,7 @@ npm에 플러그인이 게시된 후, 다음 단계는 프로젝트에 통합하
 
 ### [Capgo](https://capgo.app/) 실시간 업데이트 설정
 
-![Capgo](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 시작하려면 다음 명령어를 실행하세요:
 

@@ -56,7 +56,7 @@ Avec une configuration adéquate et des outils comme Capgo, vous pouvez garantir
 
 ## Comment fonctionne le retour arrière dans [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Capacitor comprend une fonctionnalité de retour arrière qui garantit la stabilité de l'application pendant les mises à jour over-the-air, agissant comme un garde-fou contre d'éventuels problèmes.
 

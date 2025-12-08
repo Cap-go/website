@@ -38,7 +38,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/) CLI로 버전 확인
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Capacitor CLI는 프로젝트의 의존성 버전을 검사하는 데 도움이 되는 명령어를 제공합니다. 터미널을 열고 프로젝트 디렉토리로 이동한 후 실행하세요:
 
@@ -130,7 +130,7 @@ npm ls @capacitor/*
 
 ### npm과 [Yarn](https://yarnpkg.com/) 도구 사용
 
-![Yarn](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
+![Yarn Package Manager Website](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
 
 npm과 Yarn 같은 패키지 관리자는 의존성 문제를 감지하고 해결하는 데 도움이 되는 명령어를 제공합니다. 다음은 이들이 어떻게 도움이 될 수 있는지 보여줍니다:
 

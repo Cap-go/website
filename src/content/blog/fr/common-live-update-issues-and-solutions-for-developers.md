@@ -64,7 +64,7 @@ Voici comment aborder le contrôle de version :
 
 ### Utilisation de [Capgo](https://capgo.app/) pour les mises à jour OTA
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
 
 Capgo est un outil puissant pour gérer les mises à jour OTA. Il propose des fonctionnalités telles que la surveillance intégrée, des options de rollback et une livraison sécurisée par chiffrement de bout en bout. De plus, son intégration CI/CD rend les déploiements plus fluides [\[3\]](https://appinventiv.com/blog/how-ci-cd-helps-mobile-app-development/).
 

@@ -207,7 +207,7 @@ Setelah menyelesaikan langkah-langkah ini, Android SDK Anda siap digunakan denga
 
 ## Pengaturan Android [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 ### Instalasi Platform
 
@@ -321,7 +321,7 @@ Menyelesaikan masalah-masalah ini akan mempersiapkan lingkungan Anda untuk fitur
 
 ## Integrasi [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Setelah lingkungan Android Anda siap, saatnya mengintegrasikan Capgo. Alat ini menyederhanakan [proses pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) dengan memungkinkan Anda mendorong pembaruan ke aplikasi Capacitor Anda secara instan - tanpa perlu peninjauan Play Store.
 

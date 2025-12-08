@@ -153,7 +153,7 @@ Capgo는 특히 업데이트와 관련하여 이 프로세스를 더욱 간소�
 
 ### [Capgo](https://capgo.app/)를 사용한 업데이트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
 
 Capgo는 시간을 절약하고 보안을 개선하도록 설계된 기능으로 업데이트 프로세스를 단순화합니다.
 

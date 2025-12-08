@@ -420,7 +420,7 @@ class ConsentValidator {
 
 ### [Capgo](https://capgo.app/) 업데이트 사용
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
 
 Capgo의 실시간 업데이트 기능을 통해 규정 준수 조정을 효율적으로 수행할 수 있습니다. 예시:
 

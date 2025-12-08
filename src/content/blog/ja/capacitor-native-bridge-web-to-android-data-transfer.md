@@ -31,7 +31,7 @@ next_blog: ''
 
 ## iOS/Android向けの[Capacitor](https://capacitorjs.com/)プラグインの作成方法
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/Dq_BmheGAig" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -169,7 +169,7 @@ export interface DataTransferPlugin {
 
 ## [Capgo](https://capgo.app/)プラットフォーム機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/bff1fb0606ef072e3c605788ba21e2a7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fef684b0912f75a97ee71d/bff1fb0606ef072e3c605788ba21e2a7.jpg)
 
 Capgoは、ウェブとAndroidレイヤー間のスムーズなデータ転送を目的としたライブ更新システムで以前の課題に対処します。そのアーキテクチャは、安全で高パフォーマンスなデータ処理を確保します。
 

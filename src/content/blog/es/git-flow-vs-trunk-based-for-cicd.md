@@ -160,7 +160,7 @@ A continuación: Cómo configurar pipelines de CI/CD para cualquier enfoque.
 
 ### Integración CI/CD de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68085193fe5cbf0502dde6ad/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Para agregar actualizaciones en vivo over-the-air a cualquier configuración de CI/CD, Capgo puede integrarse sin problemas:
 

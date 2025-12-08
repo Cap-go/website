@@ -124,7 +124,7 @@ Untuk melengkapi aturan platform dan praktik pembaruan yang aman, alat-alat di b
 
 ### Fitur Keamanan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f9d78a2e221594daf32292/c9663ca23e94ac8ce625337d9d850085.jpg)
 
 Infrastruktur keamanan Capgo menyediakan alat bagi pengembang untuk membantu menjaga kepatuhan. Fitur utama meliputi:
 

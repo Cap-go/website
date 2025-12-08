@@ -50,7 +50,7 @@ next_blog: ''
 
 ## Cara Memperbaiki Perintah Dev Quasar-Framework dan [Capacitor](https://capacitorjs.com/) ...
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/0E0en7ulaWg" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -150,7 +150,7 @@ Mengelola pembaruan OTA secara efektif membutuhkan alat yang menangani deploymen
 
 ### Menggunakan Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/5667dd288bf82910fbf4a9affbd7b492.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fdb53472a40527486bfab3/5667dd288bf82910fbf4a9affbd7b492.jpg)
 
 Capgo adalah platform populer untuk menangani pembaruan OTA Capacitor, membanggakan rekor pengiriman yang mengesankan sebanyak 1155,1 miliar pembaruan dengan tingkat keberhasilan global 82% [\[1\]](https://capgo.app/). Ini mengatasi tantangan CLI umum melalui fitur-fitur berikut:
 

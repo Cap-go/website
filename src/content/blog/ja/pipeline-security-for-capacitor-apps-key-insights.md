@@ -35,7 +35,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)アプリパイプラインのセキュリティリスク
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 [Capacitorアプリ開発](https://capgo.app/blog/capacitor-comprehensive-guide/)が進化するにつれ、CI/CDパイプラインに特有のセキュリティ課題が生じています。これらのリスクに対処することは、安全な開発環境を維持するために重要です。
 
@@ -117,7 +117,7 @@ OTAアップデートを安全にするために：
 
 ### [Capgo](https://capgo.app/)のセキュリティ機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68059152360079f947b84e10/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgoは[Capacitorアプリ](https://capgo.app/blog/capacitor-comprehensive-guide/)向けに特別に設計されたセキュリティ重視のセットアップを提供します。そのエンドツーエンドの暗号化により、署名付きパッケージへの通常の依存を超えて、アップデートが承認されたユーザーによってのみ復号できることを保証します。主な機能には以下が含まれます：
 

@@ -36,7 +36,7 @@ Capgo ensures your app stays stable and user-friendly by addressing issues insta
 
 ## Setting Up [Capgo](https://capgo.app/) for Rollback Management
 
-![Capgo](https://assets.seobotai.com/capgo.app/68341bdfd3b966198181c1ad/ae0e696178a553558fb76d876ab0786c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68341bdfd3b966198181c1ad/ae0e696178a553558fb76d876ab0786c.jpg)
 
 To manage rollbacks effectively with Capgo, you'll need to install its core package, configure your app's settings, and set up update channels. This ensures smooth deployments and a reliable safety net for handling issues.
 

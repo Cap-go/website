@@ -41,7 +41,7 @@ next_blog: ''
 
 ## Résoudre l'Exception No Matching View dans [Capacitor](https://capacitorjs.com/) ...
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/1uqVqhJ0bkY" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -193,7 +193,7 @@ Vous pouvez intégrer cette étape dans des outils comme [GitHub Actions](https:
 
 ### Utiliser les Mises à Jour de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/f3ac818a2fec22e90998e19561d68a19.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/f3ac818a2fec22e90998e19561d68a19.jpg)
 
 Capgo fournit un système de mise à jour en direct qui résout rapidement les conflits de version. Selon leurs données, 95 % des utilisateurs actifs installent des mises à jour dans les 24 heures [\[1\]](https://capgo.app/).
 

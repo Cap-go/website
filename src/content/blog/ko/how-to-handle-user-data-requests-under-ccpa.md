@@ -164,6 +164,6 @@ next_blog: ''
 
 ### [Capgo](https://capgo.app/) 사용하여 업데이트하기
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
 
 앱 내 제어를 강력하게 설정한 후, 앱을 최신 상태로 유지하는 것이 규정 준수의 핵심입니다. 여기서 Capgo가 필요합니다. 앱 스토어 

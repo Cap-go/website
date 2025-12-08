@@ -52,7 +52,7 @@ next_blog: ''
 
 ## Fonctionnalités de mise à jour [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### Système de mise à jour intégré
 
@@ -64,7 +64,7 @@ Le système de mise à jour de Capacitor fonctionne en harmonie avec divers outi
 
 ### Fonctionnalités de la plateforme [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 La [plateforme Capgo](https://capgo.app/docs/webapp/) améliore les capacités de mise à jour de Capacitor avec une sécurité accrue et des options de déploiement avancées. Ayant géré 235 millions de mises à jour sur 750 applications en production [\[1\]](https://capgo.app/), elle fournit des fonctionnalités clés pour améliorer les performances :
 
@@ -79,11 +79,11 @@ Le système de canaux de Capgo permet une distribution précise des mises à jou
 
 ## [Appflow](https://ionicSystème de mise à jour io/appflow/)
 
-![Appflow](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/d621f8c4ec61e7471b0153517889f4cc.jpg)
+![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/d621f8c4ec61e7471b0153517889f4cc.jpg)
 
 ### Connexion à la Plateforme [Ionic](https://ionicframeworkcom/)
 
-![Ionic](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 Appflow fonctionne directement avec le système de build d'Ionic pour packager et distribuer les [mises à jour d'applications](https://capgo.app/plugins/capacitor-updater/) efficacement
 

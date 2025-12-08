@@ -59,7 +59,7 @@ Bevor Sie mit standortbasierten OTA-Updates beginnen, stellen Sie sicher, dass f
 
 ### Erste Schritte mit [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
 
 Um eine standortbewusste [Capacitor App](https://capgo.app/plugins/ivs-player/) mit OTA-Updates zu erstellen, benötigen Sie:
 

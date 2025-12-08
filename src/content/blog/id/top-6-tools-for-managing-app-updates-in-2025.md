@@ -48,7 +48,7 @@ Alat-alat ini memenuhi kebutuhan berbeda, dari tim kecil hingga enterprise besar
 
 ## 1. [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
 
 Capgo fokus pada pengiriman pembaruan over-the-air (OTA) cepat untuk aplikasi Capacitor, menghindari penundaan yang disebabkan oleh persetujuan app store di 2025. Menggabungkan langkah-langkah keamanan yang kuat dengan opsi integrasi yang lancar, termasuk enkripsi end-to-end dan kontrol versi detail, semuanya sambil tetap mematuhi pedoman Apple dan Android.
 
@@ -75,7 +75,7 @@ Sebagai platform open-source, Capgo mendorong transparansi dan kreativitas. Mesk
 
 ## 2. [Automox](https://www.automox.com/)
 
-![Automox](https://mars-images.imgix.net/seobot/screenshots/www.automox.com-06187acabed7a8a7c05012071bb9b83e-2025-02-06.jpg?auto=compress)
+![Automox Patch Management Platform](https://mars-images.imgix.net/seobot/screenshots/www.automox.com-06187acabed7a8a7c05012071bb9b83e-2025-02-06.jpg?auto=compress)
 
 Automox membuat pengelolaan pembaruan aplikasi di Windows, macOS, dan Linux menjadi mudah, keuntungan utama bagi tim pengembangan yang menangani lingkungan aplikasi beragam di 2025.
 

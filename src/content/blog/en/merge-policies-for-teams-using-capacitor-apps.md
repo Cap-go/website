@@ -28,7 +28,7 @@ Merge policies are the backbone of maintaining code quality and smooth updates i
 
 ## Merge Policies Basics for [Capacitor](https://capacitorjs.com/) CI/CD
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6809ac119bd9ce97f26bdef5/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6809ac119bd9ce97f26bdef5/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### What Are Merge Policies?
 

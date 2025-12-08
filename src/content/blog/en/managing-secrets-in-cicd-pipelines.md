@@ -86,7 +86,7 @@ Many CI/CD tools come with built-in secret management capabilities:
 
 ### [Capgo](https://capgo.app/) Security Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 Capgo enhances the security of live updates in Capacitor apps by extending standard CI/CD secret management. It uses end-to-end encryption to ensure only authorized users can decrypt sensitive data [\[1\]](https://capgo.app/).
 

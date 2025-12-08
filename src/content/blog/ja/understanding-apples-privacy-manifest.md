@@ -50,7 +50,7 @@ Appleのプライバシーマニフェストには3つの主要コンポーネ�
 
 ## Capacitorでのプライバシーマニフェストの設定
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### マニフェストファイルの作成
 
@@ -71,7 +71,7 @@ Xcodeで**Product > Analyze**に移動してプライバシーレポートを生
 
 ### [Capgo](https://capgo.app/)での更新
 
-![Capgo](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68019d453c6b972ab5063e92/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 Xcode分析をパスした後、Capgoを使用してアプリのプライバシーマニフェストを最新の状態に保ちます。Capgoは以下を提供します：
 

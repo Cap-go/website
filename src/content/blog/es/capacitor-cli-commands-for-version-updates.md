@@ -29,7 +29,7 @@ Actualizar garantiza que tu aplicación se mantenga eficiente y fácil de usar. 
 
 ## Cómo migrar tu aplicación Ionic a [Capacitor](https://capacitorjs.com/) 3
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/d5H729a-rBM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -197,7 +197,7 @@ Asegúrate de prestar especial atención a tu configuración de Gradle. Algunas 
 
 ## Actualizaciones en vivo con [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/0270fe931d56d422c8e52846495749c7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/0270fe931d56d422c8e52846495749c7.jpg)
 
 Una vez que tu plataforma esté configurada, puedes usar Capgo para implementar cambios al instante sin esperar aprobaciones de la tienda de aplicaciones. Este paso mejora tus actualizaciones de plataforma al habilitar capacidades de despliegue en tiempo real.
 

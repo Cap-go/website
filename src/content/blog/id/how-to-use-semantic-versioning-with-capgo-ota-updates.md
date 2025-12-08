@@ -59,7 +59,7 @@ Capgo memastikan pembaruan tiba kepada pengguna dengan cepat dan dapat diandalka
 
 ## [Panduan Pengaturan Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
 
 Berikut adalah cara mengatur Capgo untuk mengelola pembaruan OTA dan kontrol versi dengan mudah.
 

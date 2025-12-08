@@ -69,7 +69,7 @@ This multi-step process ensures that updates are protected from the moment theyâ
 
 ## Setting Up End-to-End Encryption in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67fc6fa4af1a45e500bc7deb/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 This section explains how to implement end-to-end encryption in [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/), building on the concepts covered earlier.
 

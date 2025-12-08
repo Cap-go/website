@@ -197,7 +197,7 @@ PIPEDAの下では、個人データを収集する前に明確で十分な情�
 
 ## [Capgo](https://capgo.app/)のPIPEDA対応更新
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb5b27283d21cbd67d62bd/574f3a2cd27791454624262312a6c223.jpg)
 
 ### セキュアな更新機能
 

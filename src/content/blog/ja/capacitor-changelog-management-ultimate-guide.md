@@ -194,7 +194,7 @@ over-the-air (OTA)アップデートの変更履歴の管理には、これら�
 
 ### [Capgo](https://capgo.app/)アップデート管理
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 ライブOTAアップデートには、全体的な変更履歴戦略を補完するための詳細な文書化が必須です。Capgoは、バージョンの自動追跡、アップデートパフォーマンスのモニタリング、ロールバックのログ記録、チャンネル別のデプロイメント記録により、このプロセスを簡素化します。
 

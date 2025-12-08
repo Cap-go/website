@@ -207,7 +207,7 @@ Después de completar estos pasos, tu SDK de Android está listo para usar con C
 
 ## Configuración de Android en [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 ### Instalación de la Plataforma
 
@@ -321,7 +321,7 @@ Resolver estos problemas preparará tu entorno para funciones avanzadas e integr
 
 ## Integración de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Una vez que tu entorno Android esté listo, es momento de integrar Capgo. Esta herramienta simplifica tu [proceso de actualización](https://capgo.app/docs/plugin/cloud-mode/manual-update/) permitiéndote enviar actualizaciones a tu aplicación Capacitor instantáneamente - sin necesidad de revisión en la Play Store.
 

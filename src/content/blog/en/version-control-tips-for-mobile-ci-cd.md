@@ -147,7 +147,7 @@ To manage storage efficiently, implement retention policies that balance cost co
 
 ### [Capgo](https://capgo.app/) Update Management
 
-![Capgo](https://assets.seobotai.com/capgo.app/6824286159ff6128992275a6/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6824286159ff6128992275a6/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Capgo allows for instant mobile updates, bypassing the delays of app store approvals. Once your builds are stored, you can automate deployment using Capgo's features for rollouts and rollbacks.
 

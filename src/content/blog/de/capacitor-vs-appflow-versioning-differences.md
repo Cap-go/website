@@ -45,7 +45,7 @@ Bei der Auswahl sollten Sie Ihr Budget, die Update-Häufigkeit und den Bedarf an
 
 ## Live-Demo: Entwicklung von [Capacitor](https://capacitorjs.com/) Apps in Ionic [Appflow](https://ionic.io/docs/appflow)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/tkgNuSG5FJQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -110,7 +110,7 @@ Die Verwaltung der Versionskontrolle für [Capacitor Apps](https://capgo.app/blo
 
 ### [Capgo](https://capgo.app/) Update-System
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo bietet eine Lösung für Teams, die die Versionskontrolle optimieren möchten, ohne das Budget zu sprengen. Es bietet Live-Updates unter Einhaltung der Richtlinien von Apple und Google Store. Einige Hauptfunktionen sind:
 

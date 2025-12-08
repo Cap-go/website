@@ -37,7 +37,7 @@ La gestión de dependencias impacta en la estabilidad y eficiencia de tu app. En
 
 ## Tipos de Dependencias en [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
 
 Los proyectos Capacitor dependen de varias dependencias, cada una jugando un rol específico en el desarrollo multiplataforma. Analicemos los plugins y configuraciones específicas de plataforma.
 
@@ -164,7 +164,7 @@ Para facilitar las pruebas y el mantenimiento a largo plazo, exporta tus depende
 
 ## Usando [Capgo](https://capgo.app/) para Actualizaciones de Dependencias
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
 
 Capgo lleva la gestión de dependencias en proyectos Capacitor al siguiente nivel, haciendo el despliegue de actualizaciones más rápido y eficiente. Con más de **464.4 millones de actualizaciones** entregadas en **1,800 apps de producción** [\[14\]](https://capgo.app/), Capgo simplifica el proceso para los desarrolladores.
 

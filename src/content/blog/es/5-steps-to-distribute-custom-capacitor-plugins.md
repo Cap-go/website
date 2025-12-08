@@ -30,7 +30,7 @@ Este proceso paso a paso asegura que tu complemento esté bien construido, sea f
 
 ## Cómo crear un complemento de [Capacitor](https://capacitorjs.com/) para iOS/Android
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ## Paso 1: Construir y Probar Tu Complemento
 
@@ -124,7 +124,7 @@ Expande tu proceso de distribución incorporando actualizaciones en vivo. Usando
 
 ### Configurar Actualizaciones en Vivo de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 Para comenzar, ejecuta el siguiente comando:
 

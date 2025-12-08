@@ -215,7 +215,7 @@ OTA 업데이트의 성공을 추적하는 것은 주요 지표와 사용자들�
 
 ### [Capgo](https://capgo.app/) 성능 도구
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgo는 업데이트 중 모니터링과 문제 해결을 단순화하는 도구를 제공합니다:
 

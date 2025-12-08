@@ -96,7 +96,7 @@ Questi passaggi aiutano a gestire il rollout in modo efficace minimizzando i ris
 
 ## Configurare rollout graduali in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-11.jpg?auto=compress)
 
 ### Configurazione Live Update
 
@@ -110,7 +110,7 @@ Questa configurazione soddisfa le linee guida Apple e Google garantendo aggiorna
 
 ### Guida all'integrazione [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-11.jpg?auto=compress)
 
 La piattaforma console.capgo semplifica la distribuzione degli aggiornamenti con queste funzionalità principali:
 

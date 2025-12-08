@@ -56,7 +56,7 @@ Las [actualizaciones OTA de Capacitor](https://capgo.app/) son ideales para desa
 
 ## Características de la plataforma [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 La [plataforma Capgo](https://capgo.app/docs/webapp/) mejora las capacidades de actualización de Capacitor con seguridad adicional y opciones avanzadas de despliegue. Habiendo gestionado 23.5 millones de actualizaciones en 750 aplicaciones de producción [\[1\]](https://capgo.app/), proporciona características clave para mejorar el rendimiento:
 
@@ -248,7 +248,7 @@ Estas prácticas son esenciales para que plataformas como Capgo ofrezcan actuali
 
 ### [Características de Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e211687856e801f1f2973e/248f5ad4814006d64d1f6a7ab727c6b9.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e211687856e801f1f2973e/248f5ad4814006d64d1f6a7ab727c6b9.jpg)
 
 Capgo se destaca al seguir estas mejores prácticas, permitiendo actualizaciones OTA confiables. Actualmente, Capgo soporta 750 aplicaciones en producción y ha entregado con éxito 23.5 millones de actualizaciones [\[1\]](https://capgo.app/).
 

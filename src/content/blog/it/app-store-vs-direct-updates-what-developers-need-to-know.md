@@ -156,7 +156,7 @@ Per gli sviluppatori che considerano gli aggiornamenti OTA diretti, integrare qu
 
 ### Utilizzare Strumenti Come [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
 
 Distribuire aggiornamenti rapidamente ed efficientemente è un must per i team di sviluppo moderni. Strumenti come **Capgo** semplificano questo offrendo funzionalità come controllo versione, analytics e rilasci graduali. Queste capacità rendono più facile gestire gli aggiornamenti OTA, specialmente per i team aziendali che gestiscono distribuzioni su larga scala. Il targeting degli utenti e le opzioni di distribuzione flessibili migliorano ulteriormente il processo.
 

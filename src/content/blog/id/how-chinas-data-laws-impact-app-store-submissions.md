@@ -87,7 +87,7 @@ Sebelum mengelola pembaruan, penting untuk mengevaluasi alur data dan sistem ken
 
 ### Manajemen Pembaruan dengan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 Capgo menyederhanakan proses pengelolaan pembaruan sambil tetap patuh.
 

@@ -162,7 +162,7 @@ OTA更新は以下の主要な分野でテストする必要があります:
 
 ## [Capgo](https://capgo.app/) コンプライアンスツール
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae/574f3a2cd27791454624262312a6c223.jpg)
 
 Capgoは、コンプライアンスのために設計されたツールを提供するため、厳格な更新とセキュリティプロトコルに基づいて構築されています。750のプロダクションアプリにわたり2億3500万回以上の更新を提供した実績[\[1\]](https://capgo.app/)を持ち、主要な基準を満たしながらスムーズな更新を確実にします。これらのツールは、バージョン管理、セキュリティ、品質保証などの原則に基づいています。
 

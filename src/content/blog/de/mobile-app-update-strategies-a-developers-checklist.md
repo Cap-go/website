@@ -113,7 +113,7 @@ Sobald Ihre Pipeline bereit ist, machen OTA Updates die Auslieferung von Änderu
 
 ### Nutzung von [Capacitor](https://capacitorjs.com/) OTA Updates mit [Capgo](https://capgo.app/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
 
 Capgo macht OTA Updates einfach, sicher und schnell mit Funktionen wie Verschlüsselung und Compliance. So beginnen Sie:
 

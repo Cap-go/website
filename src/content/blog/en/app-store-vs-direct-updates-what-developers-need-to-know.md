@@ -153,7 +153,7 @@ For developers considering direct OTA updates, weaving these updates into CI/CD 
 
 ### Using Tools Like [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
 
 Delivering updates quickly and efficiently is a must for modern development teams. Tools like **Capgo** simplify this by offering features like version control, analytics, and staged rollouts. These capabilities make it easier to manage OTA updates, especially for enterprise teams that deal with large-scale deployments. User targeting and flexible deployment options further enhance the process.
 

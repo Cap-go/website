@@ -45,7 +45,7 @@ Esto es lo que aprenderás en esta guía:
 
 ## Directrices de Control de Versiones para [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-26.jpg?auto=compress)
 
 La gestión de actualizaciones OTA de Capacitor requiere una estrategia clara de control de versiones. Así es como mantener las cosas estables y asegurar que las actualizaciones funcionen sin problemas.
 

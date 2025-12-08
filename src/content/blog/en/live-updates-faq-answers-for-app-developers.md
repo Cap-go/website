@@ -27,7 +27,7 @@ Live updates let developers quickly push updates and fixes to users’ apps with
 
 ### How to Use Live Updates in [Capacitor](https://capacitorjs.com/):
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-07.jpg?auto=compress)
 
 1.  **Set Up the SDK**: Install the Live Updates SDK and configure your app.
 2.  **Integrate Update Logic**: Add code to check and apply updates automatically.
@@ -221,7 +221,7 @@ Here’s a quick breakdown of popular live update tools and how they stack up:
 
 ### [Capgo](https://capgo.app/) Features Overview
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-07.jpg?auto=compress)
 
 Capgo handles over 150,000 live updates monthly, proving it’s built to scale for medium-sized enterprises. Here’s what sets it apart:
 

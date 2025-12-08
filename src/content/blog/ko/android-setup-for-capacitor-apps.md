@@ -204,7 +204,7 @@ chmod +x $ANDROID_HOME/platform-tools/*
 
 ## [Capacitor](https://capacitorjs.com/) Android 설정
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 ### 플랫폼 설치
 
@@ -255,7 +255,7 @@ Android Studio에서 프로젝트가 열리면 연결된 기기나 에뮬레이�
 
 ## [Capgo](https://capgo.app/) 통합
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Android 환경이 준비되면 Capgo를 통합할 차례입니다. 이 도구는 Play Store 검토 없이도 Capacitor 앱에 즉시 업데이트를 푸시할 수 있게 해주어 [업데이트 프로세스](https://capgo.app/docs/plugin/cloud-mode/manual-update/)를 단순화합니다.
 

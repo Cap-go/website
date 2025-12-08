@@ -48,7 +48,7 @@ Ces outils répondent à différents besoins, des petites équipes aux grandes e
 
 ## 1. [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-06.jpg?auto=compress)
 
 Capgo se concentre sur la fourniture de mises à jour rapides en direct (OTA) pour les applications Capacitor, évitant ainsi les retards causés par les approbations des magasins d'applications en 2025. Il combine des mesures de sécurité robustes avec des options d'intégration fluides, y compris le cryptage de bout en bout et un contrôle des versions détaillé, tout en respectant les directives d'Apple et d'Android.
 
@@ -75,7 +75,7 @@ En tant que plateforme open source, Capgo favorise la transparence et encourage 
 
 ## 2. [Automox](https://www.automox.com/)
 
-![Automox](https://mars-images.imgix.net/seobot/screenshots/www.automox.com-06187acabed7a8a7c05012071bb9b83e-2025-02-06.jpg?auto=compress)
+![Automox Patch Management Platform](https://mars-images.imgix.net/seobot/screenshots/www.automox.com-06187acabed7a8a7c05012071bb9b83e-2025-02-06.jpg?auto=compress)
 
 Automox rend la gestion des mises à jour des applications sur Windows, macOS et Linux simple, un atout clé pour les équipes de développement gérant des environnements d'applications divers en 2025.
 

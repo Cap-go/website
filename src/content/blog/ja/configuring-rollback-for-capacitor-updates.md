@@ -54,7 +54,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)におけるロールバックの仕組み
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Capacitorは、OTAアップデート中のアプリの安定性を確保するロールバック機能を備えており、潜在的な問題に対する安全策として機能します。
 

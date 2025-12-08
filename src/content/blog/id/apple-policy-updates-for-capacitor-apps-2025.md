@@ -78,4 +78,4 @@ Metode ini memungkinkan pengembangan cepat dan pembaruan yang andal sambil tetap
 
 ## Pembaruan [Capacitor](https://capacitorjs.com/) untuk 2025
 
-![Capacitor](https://assets
+![Capacitor Framework Documentation Website](https://assets

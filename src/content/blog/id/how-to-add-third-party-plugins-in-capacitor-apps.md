@@ -45,7 +45,7 @@ Siap meningkatkan aplikasi Anda? Mari pelajari proses langkah demi langkah untuk
 
 ## [Capacitor](https://capacitorjs.com/) + Nx = Pengembangan Plugin Lintas Platform
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 <Steps>
 
@@ -307,7 +307,7 @@ Untuk masalah yang berkelanjutan, periksa repositori GitHub plugin untuk masalah
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Setelah Anda mengatasi masalah integrasi umum, Capgo membuat pengelolaan pembaruan untuk [aplikasi Capacitor](https://capgo.app/top_capacitor_app/) Anda menjadi mudah.
 

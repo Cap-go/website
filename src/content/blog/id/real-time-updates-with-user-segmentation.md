@@ -114,7 +114,7 @@ Kirim notifikasi yang penting, saat diperlukan. Dengan menyesuaikan pesan dan wa
 
 ### Sistem Manajemen Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Untuk mendukung interaksi yang dipersonalisasi ini, [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) yang efektif sangat penting. Sistem channel Capgo memberikan kontrol presisi atas pembaruan, memungkinkan pengujian beta, peluncuran bertahap, dan rilis fitur yang ditargetkan ke segmen pengguna tertentu. Dengan analitik real-time dan pengaturan izin terperinci, Capgo memastikan kepatuhan terhadap aturan app store - terutama penting untuk aplikasi perusahaan.
 

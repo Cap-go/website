@@ -38,7 +38,7 @@ Capgoはすでに**750のアプリで2350万のアップデートを管理**し�
 
 ## Capawesomeの新しい[Ionic](https://ionicframework.com/)[Capacitor](https://capacitorjs.com/)ライブアップデートを探る…
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -72,7 +72,7 @@ npx @capgo/cli init
 
 ### [Capgo](https://capgo.app/)監視の設定
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/a64cd6a83185b5ac05d3640337221542.jpg)
 
 1.  **分析統合の設定**：リアルタイム分析を使用して、アップデートのパフォーマンスとユーザーエンゲージメントを監視します。
 2.  **エラー追跡の有効化**：エラー追跡を有効にして、詳細なログとパフォーマンス指標をキャプチャします。

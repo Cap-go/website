@@ -43,7 +43,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 버전 관리 가이드라인
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-26.jpg?auto=compress)
 
 Capacitor OTA 업데이트 관리에는 명확한 버전 관리 전략이 필요합니다. 여기 안정적인 업데이트를 위한 방법을 소개합니다.
 

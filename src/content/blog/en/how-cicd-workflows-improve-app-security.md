@@ -76,7 +76,7 @@ Access control is another area where traditional methods fall short. Without aut
 
 ## 2\. CI/CD Workflows with [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6832b835d3b966198180b547/a11b1d51b473300e3b6ffdca4eaa552a.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6832b835d3b966198180b547/a11b1d51b473300e3b6ffdca4eaa552a.jpg)
 
 Capgo brings modern automation to CI/CD workflows, streamlining security checks and minimizing manual vulnerabilities. This continuous approach ensures a strong security foundation throughout the development lifecycle, shifting away from outdated, manual methods that often left gaps.
 

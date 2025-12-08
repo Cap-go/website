@@ -35,7 +35,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) iOS/Android 플러그인 생성 방법
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680c247c5a08fca89178b068/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680c247c5a08fca89178b068/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <Steps>
 

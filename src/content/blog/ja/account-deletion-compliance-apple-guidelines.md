@@ -109,7 +109,7 @@ iOSとAndroidでのデータ削除が適切に同期されないことがあり�
 
 ### [Capgo](https://capgo.app/) アップデート管理
 
-![Capgo](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 リアルタイムアップデート管理は、プラットフォームとプラグイン全体でコンプライアンスを維持する上で重要な役割を果たします。ここで**Capgo**がアカウント削除アップデートの管理プロセスを簡素化できます。
 

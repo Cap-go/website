@@ -37,7 +37,7 @@ Die Verwaltung von Abhängigkeiten hat Auswirkungen auf die Stabilität und Effi
 
 ## Arten von Abhängigkeiten in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
 
 Capacitor-Projekte basieren auf verschiedenen Abhängigkeiten, von denen jede eine spezifische Rolle in der plattformübergreifenden Entwicklung spielt. Lassen Sie uns Plugins und plattformspezifische Konfigurationen aufschlüsseln.
 
@@ -166,7 +166,7 @@ Um das Testen und die Wartung langfristig zu erleichtern, exportieren Sie Ihre A
 
 ## Verwendung von [Capgo](https://capgo.app/) für Abhängigkeiten-Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
 
 Capgo hebt das Management von Abhängigkeiten in Capacitor-Projekten auf die nächste Stufe und macht die Bereitstellung von Updates schneller und effizienter. Mit über **464,4 Millionen Updates**, die in **1.800 Produktions-Apps** bereitgestellt wurden [\[14\]](https://capgo.app/), vereinfacht Capgo den Prozess für Entwickler.
 

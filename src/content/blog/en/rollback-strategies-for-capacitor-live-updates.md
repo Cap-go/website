@@ -39,7 +39,7 @@ Set up rollback tools today to ensure smooth updates and maintain user trust.
 
 ## How to Migrate Your [Ionic](https://ionicframework.com/) App to [Capacitor](https://capacitorjs.com/) 3
 
-![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 <iframe src="https://www.youtube.com/embed/d5H729a-rBM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -145,7 +145,7 @@ These features highlight Capgo's ability to deliver fast updates, strong securit
 
 ### [Capgo](https://capgo.app/) Rollback Features
 
-![Capgo](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/66b4651f868ecdcc17d750c697bea294.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/66b4651f868ecdcc17d750c697bea294.jpg)
 
 Capgo has powered 1.4K active apps and delivered over 947.6M updates globally [\[1\]](https://capgo.app/). Its rollback capabilities include:
 

@@ -42,7 +42,7 @@ Delta update sangat ideal untuk aplikasi [Capacitor](https://capacitorjs.com/), 
 
 ## Delta Update dalam Aplikasi [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 Delta update dalam [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) mengandalkan metode yang disebut patching diferensial, yang hanya mengirimkan bagian kode yang dimodifikasi. Pendekatan ini meminimalkan jumlah data yang ditransfer, membuat pembaruan lebih cepat dan lebih mudah bagi pengguna.
 
@@ -213,7 +213,7 @@ Untuk penerapan tingkat enterprise, pertimbangkan menggunakan peluncuran bertaha
 
 ## Fitur Delta Update [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Capgo membangun sistem delta update-nya dengan fitur yang dirancang untuk meningkatkan kinerja dan keamanan. Sejauh ini, platform ini telah mengelola **23,5 juta pembaruan** di **750 aplikasi produksi** yang mengesankan [\[1\]](https://capgo.app/).
 

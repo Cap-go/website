@@ -111,7 +111,7 @@ Après avoir géré la suppression à l'échelle de la plateforme, vous devrez a
 
 ### Gestion des mises à jour [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 La gestion des mises à jour en temps réel joue un rôle central dans le maintien de la conformité à travers les plateformes et les plugins. C'est là que **Capgo** peut simplifier le processus de gestion des mises à jour de suppression de compte.
 

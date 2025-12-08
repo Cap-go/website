@@ -59,7 +59,7 @@ Antes de sumergirte en actualizaciones OTA dirigidas por geolocalización, aseg�
 
 ### Comenzando con [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
 
 Para construir una [aplicación Capacitor](https://capgo.app/plugins/ivs-player/) con actualizaciones OTA que sea consciente de la ubicación, necesitarás:
 

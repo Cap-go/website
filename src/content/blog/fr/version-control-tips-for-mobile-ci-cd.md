@@ -152,7 +152,7 @@ Pour gérer efficacement le stockage, mettez en place des politiques de rétenti
 
 ### Gestion des mises à jour [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6824286159ff6128992275a6/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6824286159ff6128992275a6/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Capgo permet des mises à jour mobiles instantanées, contournant les délais d'approbation des app stores. Une fois vos builds stockés, vous pouvez automatiser le déploiement en utilisant les fonctionnalités de Capgo pour les déploiements et les retours arrière.
 

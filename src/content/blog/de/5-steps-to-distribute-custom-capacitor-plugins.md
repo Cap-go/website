@@ -31,7 +31,7 @@ Dieser schrittweise Prozess stellt sicher, dass Ihr Plugin gut entwickelt, einfa
 
 ## Wie man ein [Capacitor](https://capacitorjs.com/) Plugin für iOS/Android erstellt
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 
 ## Schritt 1: Plugin erstellen und testen
@@ -117,7 +117,7 @@ Erweitern Sie Ihren Verteilungsprozess durch die Integration von Live-Updates. M
 
 ### Einrichten von [Capgo](https://capgo.app/) Live-Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6801c2733c6b972ab5069136/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 **Warum Capgo verwenden?** Es bietet eine Reihe von Funktionen zur Optimierung von Updates:
 

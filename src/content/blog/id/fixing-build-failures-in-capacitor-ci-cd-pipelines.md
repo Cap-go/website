@@ -46,7 +46,7 @@ next_blog: ''
 
 ## Jenis Utama Kegagalan Build [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Kegagalan build Capacitor dapat muncul dari berbagai sumber, masing-masing memerlukan solusi spesifik. Di bawah ini, kita akan menguraikan beberapa penyebab paling umum dan bagaimana mereka muncul selama proses build.
 
@@ -266,7 +266,7 @@ Untuk build iOS, konfirmasi kompatibilitas Xcode dan konfigurasi signing. Untuk 
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Mengelola Kegagalan Build
 
-![Capgo](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682580e10209458b3ff3c0b1/16f6435e7b8929d180a4e4057c0b6dcc.jpg)
 
 Capgo menyediakan rangkaian tools yang dirancang untuk membantu tim menangani kegagalan build dalam [pipeline CI/CD Capacitor](https://capgo.app/blog/automatic-capacitor-android-build-gitlab/). Dengan menggabungkan pemantauan, konfigurasi yang aman, dan analisis mendalam, ini mendukung tim dalam mengidentifikasi, menangani, dan mencegah masalah build. Di bawah ini, kita akan melihat bagaimana Capgo menyederhanakan proses-proses ini untuk meningkatkan efisiensi CI/CD.
 

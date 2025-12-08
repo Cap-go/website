@@ -124,7 +124,7 @@ Aquí hay una referencia rápida para las versiones mínimas y recomendadas de l
 
 ### Optimizar Configuraciones de [Gradle](https://gradle.org/)
 
-![Gradle](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
+![Gradle Build Tool Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/ea42b2d6446e3f23d9417eaa9ba23d71.jpg)
 
 Para mejorar el rendimiento y la compatibilidad, actualiza tu archivo `gradle.properties` con estas configuraciones:
 
@@ -436,7 +436,7 @@ Las herramientas de seguimiento de errores y reversión de Capgo pueden ayudarte
 
 ## Guía de Integración de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e73f80283d21cbd679794c/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Basado en nuestros resultados de pruebas en vivo, integrar Capgo ayuda a optimizar el despliegue de actualizaciones.
 

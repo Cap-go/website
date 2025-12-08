@@ -110,7 +110,7 @@ La CPA impulsa una mejor privacidad del consumidor, seguridad más sólida y may
 
 ## 4. Estándares de Privacidad de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Capgo se alinea con CCPA, VCDPA y CPA, cerrando la brecha entre las regulaciones estatales y las necesidades prácticas del desarrollo de aplicaciones.
 

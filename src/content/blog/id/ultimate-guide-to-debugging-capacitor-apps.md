@@ -86,7 +86,7 @@ Alat-alat ini melengkapi debugging berbasis browser dengan menangani tantangan s
 
 ### Perintah Debug CLI [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 CLI Capacitor menyertakan perintah-perintah yang membantu memperlancar debugging:
 
@@ -293,7 +293,7 @@ Jika Anda menggunakan source map dalam produksi, batasi akses hanya untuk pengem
 
 ## Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan Cepat
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 Membangun di atas [teknik debugging](https://capgo.app/docs/plugin/debugging/) yang solid, alat seperti Capgo memudahkan menjaga stabilitas aplikasi Anda dengan memungkinkan pembaruan instan. Capgo memungkinkan pengembang mendorong pembaruan tanpa menunggu persetujuan app store, sambil tetap menjaga fitur debugging.
 

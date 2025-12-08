@@ -184,7 +184,7 @@ Voici quelques fonctionnalités essentielles à privilégier :
 
 ### Fonctionnalités de la plateforme [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e7635c283d21cbd679bdb8/62c1b4dece964ef24ef070504a9b15e5.jpg)
 
 Lancé en 2022, Capgo propose des mises à jour OTA conçues avec la sécurité à l'esprit. Ses fonctionnalités incluent le chiffrement de bout en bout, les capacités d'auto-hébergement, les déploiements progressifs, le suivi des erreurs et le contrôle de version.
 

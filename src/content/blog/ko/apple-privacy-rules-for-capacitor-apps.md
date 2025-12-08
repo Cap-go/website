@@ -240,7 +240,7 @@ iOS의 경우 앱의 `Info.plist`에서 권한을 정의해야 합니다. 다음
 
 ## [Capgo](https://capgo.app/)를 사용한 업데이트
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf/f3ac818a2fec22e90998e19561d68a19.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf/f3ac818a2fec22e90998e19561d68a19.jpg)
 
 Capgo는 애플의 프라이버시 규칙을 준수하면서 실시간 업데이트를 위한 안전한 시스템을 제공합니다.
 

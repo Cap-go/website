@@ -41,7 +41,7 @@ Das frühzeitige Erkennen von Versionskonflikten kann Ihnen stundenlange Fehlers
 
 ### Versionen mit [Capacitor](https://capacitorjs.com/) CLI prüfen
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Die Capacitor CLI bietet hilfreiche Befehle zur Überprüfung der Abhängigkeitsversionen Ihres Projekts. Öffnen Sie Ihr Terminal, navigieren Sie zu Ihrem Projektverzeichnis und führen Sie aus:
 
@@ -133,7 +133,7 @@ npm ls @capacitor/*
 
 ### npm- und [Yarn](https://yarnpkg.com/)-Tools verwenden
 
-![Yarn](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
+![Yarn Package Manager Website](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
 
 Paketmanager wie npm und Yarn bieten hilfreiche Befehle zum Erkennen und Beheben von Abhängigkeitsproblemen. So können sie helfen:
 

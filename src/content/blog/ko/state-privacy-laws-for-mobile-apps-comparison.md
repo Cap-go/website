@@ -110,7 +110,7 @@ CPA는 모바일 앱에서 더 나은 소비자 개인정보보호, 더 강력�
 
 ## 4. [Capgo](https://capgo.app/) 개인정보보호 표준
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Capgo는 CCPA, VCDPA, CPA와 연계하여 주 규정과 실제 앱 개발 요구 사항 사이의 격차를 해소합니다.
 

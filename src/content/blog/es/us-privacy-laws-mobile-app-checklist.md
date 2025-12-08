@@ -212,7 +212,7 @@ Las herramientas automatizadas de cumplimiento pueden simplificar este proceso a
 
 ## Características de Privacidad de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 Al actualizar su aplicación móvil para cumplir con los requisitos de privacidad, la velocidad y la seguridad son clave. Capgo ofrece herramientas para ayudarte a mantener el cumplimiento de las leyes de privacidad de EE. UU., garantizando que las actualizaciones sean rápidas y seguras.
 

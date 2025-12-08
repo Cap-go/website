@@ -86,7 +86,7 @@ next_blog: ''
 
 ### [Capgo](https://capgo.app/)のセキュリティ機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68043aae6000445eb1a64c9e/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 Capgoは、標準的なCI/CD機密情報管理を拡張することで、Capacitorアプリのライブアップデートのセキュリティを強化します。エンドツーエンドの暗号化を使用して、認可されたユーザーのみが機密データを復号化できるようにします[\[1\]](https://capgo.app/) 。
 

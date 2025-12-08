@@ -178,7 +178,7 @@ CCPAの権利に関連するユーザーリクエストを処理するシステ�
 
 ### [Capgo](https://capgo.app/)アップデート
 
-![Capgo](https://assets.seobotai.com/capgo.app/680d75de5a08fca89179eb81/002013533a2d2ba7b874d9490aa8d76e.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680d75de5a08fca89179eb81/002013533a2d2ba7b874d9490aa8d76e.jpg)
 
 Capgoは、CCPAの要件に沿った安全で効率的なアプリアップデートを提供します。エンドツーエンドの暗号化を使用することで、アップデート中の機密データの保護を確保します。印象的なことに、Capgoは24時間以内にアクティブユーザーの95%を更新状態に保ちます[\[1\]](https://capgo.app/) 。
 

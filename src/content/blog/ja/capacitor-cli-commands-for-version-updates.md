@@ -29,7 +29,7 @@ next_blog: ''
 
 ## Ionicアプリを[Capacitor](https://capacitorjs.com/) 3にマイグレーションする方法
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <iframe src="https://www.youtube.com/embed/d5H729a-rBM" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -197,7 +197,7 @@ Gradleの構成には特に注意してください。一部の更新は、最�
 
 ## [Capgo](https://capgo.app/)を使用したライブ更新
 
-![Capgo](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/0270fe931d56d422c8e52846495749c7.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682028f45e3fe4823b5e5a52/0270fe931d56d422c8e52846495749c7.jpg)
 
 プラットフォームが構成されたら、Capgoを使用してアプリストアの承認を待つことなく即座に変更を展開できます。このステップは、リアルタイム展開機能を有効にすることでプラットフォーム更新を強化します。
 

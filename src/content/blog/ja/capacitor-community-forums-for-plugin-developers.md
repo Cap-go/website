@@ -36,13 +36,13 @@ Capacitorフォーラムは、効率的なプラグイン開発のための重�
 
 ## 主要な[Capacitor](https://capacitorjs.com/)フォーラム
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 Capacitor開発者には、接続、コラボレーション、問題解決のための複数の定番フォーラムがあります。
 
 ### [Discord](https://ionic.io/blog/announcing-official-ionic-discord-server)チャンネルガイド
 
-![Discord](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
+![Discord Community Platform](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
 
 公式Discordサーバーは、リアルタイムのディスカッションとクイックトラブルシューティングに最適な場所です。以下のような専用チャンネルが用意されています：
 

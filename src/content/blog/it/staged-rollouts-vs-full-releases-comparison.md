@@ -232,7 +232,7 @@ Per garantire deployment fluidi, è fondamentale evitare errori comuni.
 
 ## Funzionalità di Gestione dei Rilasci di [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e8a654283d21cbd67ab720/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 Capgo fornisce strumenti progettati per semplificare e migliorare sia i processi di rilascio graduale che completo, basandosi su strategie di rilascio efficaci.
 

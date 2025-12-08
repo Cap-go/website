@@ -67,7 +67,7 @@ Der erste Schritt besteht darin, ein Plugin auszuwählen, das sowohl für iOS al
 
 ### Konfigurieren Sie Ihre [Capacitor](https://capacitorjs.com/)-App
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Nachdem Sie ein Plugin gewählt haben, besteht der nächste Schritt darin, Ihre Capacitor-App so einzurichten, dass SSL-Pinning aktiviert wird. Hier ist ein Beispiel, wie Ihre Konfiguration aussehen könnte:
 

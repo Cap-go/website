@@ -34,7 +34,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)のOTAアップデートの基本
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### OTAアップデートの仕組み
 
@@ -125,6 +125,6 @@ OTAアップデートは、視覚的アセットや単純な設定など、重�
 
 ## [Capgo](https://capgo.app/)を使用したOTAアップデート
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/cf21af63f433895b269de0da5dc7d74c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e61434a2c14cac42f85a37/cf21af63f433895b269de0da5dc7d74c.jpg)
 
 Capgoは、Capacitorアプリにおけるover-the-air（OTA）アップデートの管理ソリューションを提供し、統合されたシステムでコンプライアンス要件に対応します。

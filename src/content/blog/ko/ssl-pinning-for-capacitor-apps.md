@@ -67,7 +67,7 @@ SSL 핀닝은 API 통신을 보호하고 사용자 데이터를 안전하게 유
 
 ### [Capacitor](https://capacitorjs.com/) 앱 구성
 
-![Capacitor](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/682117615e3fe4823b5f0a24/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 플러그인을 선택한 후 다음 단계는 SSL 핀닝을 활성화하기 위해 Capacitor 앱을 설정하는 것입니다. 구성 예는 다음과 같습니다:
 

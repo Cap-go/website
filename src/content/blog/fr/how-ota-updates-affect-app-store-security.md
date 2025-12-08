@@ -146,7 +146,7 @@ Pour gérer les mises à jour de manière sécurisée et efficace, suivez ces é
 
 ### Fonctionnalités de la plateforme [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680c33b45a08fca89178cc78/c4b9497df1c5d14f98df25934b50bafa.jpg)
 
 Une plateforme de mise à jour OTA fiable intègre ces pratiques pour sécuriser et simplifier les déploiements. Recherchez des plateformes offrant des fonctionnalités de sécurité essentielles.
 

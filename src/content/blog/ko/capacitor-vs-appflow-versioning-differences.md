@@ -42,7 +42,7 @@ next_blog: ''
 
 ## 라이브 데모: [Capacitor](https://capacitorjs.com/) 앱을 Ionic [Appflow](https://ionic.io/docs/appflow)에서 구축하기
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 <Steps>
 
@@ -113,7 +113,7 @@ Appflow는 버전 업데이트와 배포를 자동화하여 프로세스를 단�
 
 ### [Capgo](https://capgo.app/) 업데이트 시스템
 
-![Capgo](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6805c3ba360079f947b8c4ac/12eddca90b08193253253ea10516a6c4.jpg)
 
 Capgo는 비용을 크게 들이지 않고 버전 관리를 간소화하려는 팀들을 위한 솔루션을 제공합니다. Apple과 Google 스토어 정책을 준수하면서 실시간 업데이트를 제공합니다. 주요 기능:
 

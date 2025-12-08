@@ -278,7 +278,7 @@ When submitting your app, provide accurate information about your privacy practi
 
 ## Using [Capgo](https://capgo.app/) for Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf/f3ac818a2fec22e90998e19561d68a19.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf/f3ac818a2fec22e90998e19561d68a19.jpg)
 
 Capgo offers a secure system for live updates while adhering to Apple's privacy rules.
 

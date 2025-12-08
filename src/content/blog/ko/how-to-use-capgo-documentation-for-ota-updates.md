@@ -36,7 +36,7 @@ Capgo 문서([capgo.app/docs](https://capgo.app/docs))에서 설정, 보안, 문
 
 ## [Capgo](https://capgo.app/), 실시간 업데이트를 위한 CapacitorJs 플러그인
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-19.jpg?auto=compress)
 
 <Steps>
 </Steps>

@@ -41,7 +41,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)를 위한 CI/CD 파이프라인 구축
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-24.jpg?auto=compress)
 
 잘 설계된 CI/CD 파이프라인은 배포를 단순화하고 앱이 앱스토어 가이드라인을 일관되게 충족하도록 돕습니다.
 
@@ -105,7 +105,7 @@ Google Play를 대상으로 할 때는 다음 주요 검증에 집중하세요:
 
 ### [Capgo](https://capgo.app/)의 컴플라이언스 도구
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-24.jpg?auto=compress)
 
 Capgo는 CI/CD 파이프라인에 직접 통합되는 도구로 컴플라이언스 워크플로우를 향상시킵니다. Capgo가 도움이 되는 방법:
 

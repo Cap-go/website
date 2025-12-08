@@ -42,7 +42,7 @@ next_blog: ''
 
 ## [Firebase](https://firebase.google.com/)パフォーマンス監視でアプリの健全性を最適化...
 
-![Firebase](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
+![Firebase Platform Dashboard](https://mars-images.imgix.net/seobot/screenshots/firebase.google.com-ab24bd47674782df651734052f495a0c-2025-03-23.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/ENaOg5YefjQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -198,7 +198,7 @@ await FirebasePerformance.putMetric({
 
 ## [Sentry](https://sentry.io/)エラー追跡のセットアップ
 
-![Sentry](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
+![Sentry Error Tracking Dashboard](https://mars-images.imgix.net/seobot/screenshots/sentry.io-925fc70e12ac801815ba3ab27e6adcda-2025-03-23.jpg?auto=compress)
 
 Firebaseはパフォーマンスメトリクスを扱いますが、Sentryはエラーのキャッチと診断に特化しています。両者を組み合わせることで、強力な監視セットアップが得られます。
 
@@ -341,7 +341,7 @@ Capgoの750の本番アプリの分析[\[1\]](https://capgo.app/)は、監視す
 
 ## [Capgo](https://capgo.app/)のアップデートと監視
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 ### Capgoの主要機能
 

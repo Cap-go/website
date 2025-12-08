@@ -56,7 +56,7 @@ Con una configuración adecuada y herramientas como Capgo, puedes garantizar act
 
 ## Cómo Funciona el Rollback en [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6802ea903c6b972ab5077c74/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Capacitor incluye una función de rollback que garantiza la estabilidad de la aplicación durante las actualizaciones por aire, actuando como una medida de seguridad contra posibles problemas.
 

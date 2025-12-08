@@ -186,7 +186,7 @@ Capgo puede agilizar aún más este proceso, especialmente cuando se trata de ac
 
 ### Usando [Capgo](https://capgo.app/) para Actualizaciones
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-09.jpg?auto=compress)
 
 Capgo simplifica el proceso de actualización con funciones diseñadas para ahorrar tiempo y mejorar la seguridad.
 

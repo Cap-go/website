@@ -79,13 +79,13 @@ Keep version control organized to track changes and simplify debugging. Use Capa
 
 ## 3 Main Debugging Tools for [Capacitor](https://capacitorjs.com/) OTA Updates
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-20.jpg?auto=compress)
 
 These tools help developers tackle specific [debugging challenges](https://capgo.app/docs/plugin/debugging/) while managing OTA updates effectively.
 
 ### [Capgo](https://capgo.app)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-20.jpg?auto=compress)
 
 Capgo provides a reliable solution for handling OTA updates in Capacitor apps. It ensures secure and fast updates, while adhering to platform guidelines.
 

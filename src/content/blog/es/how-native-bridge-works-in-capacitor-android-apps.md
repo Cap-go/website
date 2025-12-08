@@ -46,7 +46,7 @@ Capgo, una herramienta para actualizaciones over-the-air, se integra con el puen
 
 ## Cómo crear un plugin local específico para el proyecto | Ionic | [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-22.jpg?auto=compress)
 
 <Steps>
 
@@ -230,7 +230,7 @@ Las pruebas y el monitoreo regulares son esenciales para detectar problemas de c
 
 ## Integración de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-22.jpg?auto=compress)
 
 Capgo mejora el rendimiento del puente nativo permitiendo actualizaciones instantáneas por aire (OTA). Con 23.5 millones de actualizaciones entregadas en 750 apps, se ha convertido en una herramienta confiable para gestionar actualizaciones a través del puente nativo.
 

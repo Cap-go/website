@@ -115,7 +115,7 @@ next_blog: ''
 
 ### [Capacitor](https://capacitorjs.com/)와 [Capgo](https://capgo.app/)의 OTA 업데이트 사용하기
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
 
 Capgo는 암호화 및 준수와 같은 기능으로 OTA 업데이트를 간단하고 안전하며 빠르게 만들어줍니다. 시작하는 방법은 다음과 같습니다:
 

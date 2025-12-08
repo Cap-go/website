@@ -90,7 +90,7 @@ Capacitorアプリのウェブレイヤーをデバッグするには、**Chrome
 
 ### [Capacitor](https://capacitorjs.com/) CLIデバッグコマンド
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 ## Webとネイティブのデバッグメソッド
 
@@ -188,7 +188,7 @@ Capgoのエラートラッキングツールは、アップデートのデプロ
 
 ## [Capgo](https://capgo.app/)を使用した迅速なアップデート
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-18.jpg?auto=compress)
 
 堅実な[デバッグ技術](https://capgo.app/docs/plugin/debugging/)に基づき、Capgoのようなツールは即時のアップデートを可能にすることで、アプリの安定性維持を容易にします。Capgoを使用すると、開発者はアプリストアの承認を待つことなくアップデートをプッシュでき、デバッグ機能も維持されます。
 

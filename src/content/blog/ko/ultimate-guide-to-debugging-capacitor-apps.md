@@ -84,7 +84,7 @@ Capacitor 앱의 웹 레이어를 디버깅하기 위해서는 **Chrome DevTools
 
 ### [Capacitor](https://capacitorjs.com/) CLI 디버그 명령어
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-18.jpg?auto=compress)
 
 Capacitor CLI는 디버깅을 간소화하는 유용한 명령어를 포함합니다:
 

@@ -202,7 +202,7 @@ android/libs/
 
 ## [Gradle](https://gradle.org/) 구성 단계
 
-![Gradle](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
+![Gradle Build Tool Interface](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-15.jpg?auto=compress)
 
 ### build.gradle 업데이트
 

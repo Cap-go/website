@@ -283,7 +283,7 @@ Al enviar tu aplicación, proporciona información precisa sobre tus prácticas 
 
 ## Usando [Capgo](https://capgo.app/) para Actualizaciones
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf/f3ac818a2fec22e90998e19561d68a19.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e9dc69283d21cbd67b72cf/f3ac818a2fec22e90998e19561d68a19.jpg)
 
 Capgo ofrece un sistema seguro para actualizaciones en vivo mientras se adhiere a las reglas de privacidad de Apple.
 

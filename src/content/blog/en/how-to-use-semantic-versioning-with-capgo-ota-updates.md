@@ -56,7 +56,7 @@ Capgo ensures updates reach users quickly and reliably, with tools to handle dis
 
 ## [Capgo](https://capgo.app/) Setup Guide
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
 
 Here's how to set up Capgo for managing OTA updates and version control with ease.
 

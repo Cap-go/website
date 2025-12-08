@@ -34,7 +34,7 @@ Dependency management impacts your app's stability and efficiency. Focus on cons
 
 ## Types of Dependencies in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-24.jpg?auto=compress)
 
 Capacitor projects rely on various dependencies, each playing a specific role in cross-platform development. Let’s break down plugins and platform-specific configurations.
 
@@ -163,7 +163,7 @@ To make testing and maintenance easier in the long run, export your dependencies
 
 ## Using [Capgo](https://capgo.app/) for Dependency Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-24.jpg?auto=compress)
 
 Capgo takes dependency management in Capacitor projects to the next level, making update deployment faster and more efficient. With over **464.4 million updates** delivered across **1,800 production apps** [\[14\]](https://capgo.app/), Capgo simplifies the process for developers.
 

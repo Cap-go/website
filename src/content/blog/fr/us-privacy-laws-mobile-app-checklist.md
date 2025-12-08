@@ -214,7 +214,7 @@ Les outils de conformité automatisés peuvent simplifier ce processus en :
 
 ## Fonctionnalités de confidentialité [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 Lors de la mise à jour de votre application mobile pour répondre aux exigences de confidentialité, la rapidité et la sécurité sont essentielles. Capgo propose des outils pour vous aider à rester conforme aux lois américaines sur la confidentialité, garantissant des mises à jour à la fois rapides et sécurisées.
 

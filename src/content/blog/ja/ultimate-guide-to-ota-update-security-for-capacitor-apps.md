@@ -37,7 +37,7 @@ App Storeや[GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulat
 
 ## [Capacitor](https://capacitorjs.com/)のエンタープライズ向け機能
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-13.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/m2kFUvSFcSs" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -164,7 +164,7 @@ Capgoは、疑わしい更新を隔離し、より深い分析のためのフォ
 
 ## [Capgo](https://capgo.app/) セキュリティ機能
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-13.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-13.jpg?auto=compress)
 
 Capgoは、監視システムと連携して機能する3つの主要なアプローチを通じてセキュリティを確保します：
 

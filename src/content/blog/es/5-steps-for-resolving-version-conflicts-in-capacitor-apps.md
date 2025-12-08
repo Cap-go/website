@@ -40,7 +40,7 @@ Detectar conflictos de versiones temprano puede ahorrarte horas de depuración y
 
 ### Verificar Versiones con el CLI de [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 El CLI de Capacitor proporciona comandos útiles para inspeccionar las versiones de dependencias de tu proyecto. Abre tu terminal, navega al directorio de tu proyecto y ejecuta:
 
@@ -132,7 +132,7 @@ npm ls @capacitor/*
 
 ### Usar Herramientas de npm y [Yarn](https://yarnpkg.com/)
 
-![Yarn](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
+![Yarn Package Manager Website](https://mars-images.imgix.net/seobot/screenshots/yarnpkg.com-310d80dc5a96a440e9276d02217e08fa-2025-03-25.jpg?auto=compress)
 
 Los gestores de paquetes como npm y Yarn ofrecen comandos útiles para detectar y abordar problemas de dependencias. Aquí cómo pueden ayudar:
 
@@ -328,7 +328,7 @@ Una vez que las pruebas locales confirmen que la funcionalidad básica de la app
 
 ### Pruebas en Vivo con [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-25.jpg?auto=compress)
 
 Después de verificar tus cambios localmente, es hora de probar en un entorno en vivo. Configura los canales de prueba con estos comandos:
 

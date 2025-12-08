@@ -153,7 +153,7 @@ Capgo는 개발자를 위해 설계된 암호화와 관리 도구로 안전한 O
 
 ### [Capgo](https://capgo.app/) 같은 도구 사용하기
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737
 
 [Blackmagic Design](https://www.blackmagicdesign.com/)의 Resolve는 앱스토어를 우회하여 직접 다운로드를 제공하는 좋은 예시입니다. 이러한 선택은 앱스토어의 제한 사항에 맞지 않을 수 있는 고급 기능을 제공할 수 있게 합니다 [\[2\]](https://forum.blackmagicdesign.com/viewtopic.php?f=21&t=117780). 이는 특수 기능 지원과 같은 특정 산업의 요구사항이 업데이트 전략을 어떻게 형성할 수 있는지 보여줍니다.
 

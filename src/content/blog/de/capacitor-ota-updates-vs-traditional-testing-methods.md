@@ -39,11 +39,11 @@ Capacitor OTA-Updates, unterstützt durch Tools wie [Capgo](https://capgo.app/),
 
 ## [Appflow](https://ionic.io/appflow/) Deploy: Liefern Sie Echtzeit-Updates an Ihre Ionic App-Benutzer
 
-![Appflow](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21.jpg?auto=compress)
+![Appflow CI/CD Platform Interface](https://mars-images.imgix.net/seobot/screenshots/ionic.io-7ef34251b5ccfe1dba6d8c040dae490b-2025-02-21.jpg?auto=compress)
 
 ## [Capacitor](https://capacitorjs.com/) OTA-Updates erklärt
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-21.jpg?auto=compress)
 
 OTA-Updates in [Capacitor-Apps](https://capgo.app/blog/capacitor-comprehensive-guide/) vereinfachen die App-Wartung nach der Veröffentlichung. Statt vollständiger App Store-Einreichungen können Entwickler Updates direkt an Benutzer pushen.
 
@@ -64,7 +64,7 @@ Diese Funktionen bieten Entwicklern mehr Flexibilität und Kontrolle, besonders 
 
 ### Die Rolle von [Capgo](https://capgo.app/) bei OTA-Updates
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-21.jpg?auto=compress)
 
 Capgo vereinfacht den Prozess der Verwaltung von OTA-Updates für Capacitor-Apps. Die Plattform priorisiert Sicherheit mit Ende-zu-Ende-Verschlüsselung und stellt sicher, dass Update-Inhalte geschützt bleiben.
 

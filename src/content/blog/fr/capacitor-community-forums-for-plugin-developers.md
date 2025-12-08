@@ -39,13 +39,13 @@ Les forums Capacitor sont votre référence pour un développement efficace de p
 
 ## Forums principaux [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-19.jpg?auto=compress)
 
 Les développeurs de Capacitor ont plusieurs forums de référence pour se connecter, collaborer et résoudre des problèmes.
 
 ### Guide du canal [Discord](https://ionic.io/blog/announcing-official-ionic-discord-server)
 
-![Discord](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
+![Discord Community Platform](https://mars-images.imgix.net/seobot/screenshots/ionic.io-731d02617347fde57eccb2bd555c6e2e-2025-03-19.jpg?auto=compress)
 
 Le serveur Discord officiel est un excellent endroit pour des discussions en temps réel et un dépannage rapide. Il est organisé en canaux dédiés, tels que :
 
@@ -213,7 +213,7 @@ La documentation officielle de Capacitor est une ressource de référence. Elle 
 
 ### Mises à jour de [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 Capgo simplifie les mises à jour instantanées des applications. Il a délivré 23,5 millions de mises à jour à travers 750 applications en production, avec un taux de réussite de 82%. Impressionnant, 95% des utilisateurs actifs reçoivent des mises à jour dans les 24 heures. Son CDN mondial peut télécharger un paquet de 5 Mo en seulement 114 ms. Capgo prend en charge Capacitor 6 et 7, offrant des capacités de mise à jour partielle \[1\](https://capgo.app/).
 

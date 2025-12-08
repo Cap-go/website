@@ -64,7 +64,7 @@ Les retours en arrière sont essentiels lorsqu'une mise à jour entraîne des pr
 
 ### Architecture de retour en arrière de [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 Le système de retour en arrière dans Capacitor repose sur trois composants principaux pour gérer efficacement la gestion des versions :
 
@@ -122,7 +122,7 @@ Gérer efficacement les retours en arrière nécessite des outils capables de g�
 
 ### [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f09788ebbb9dc80643dc99/a64cd6a83185b5ac05d3640337221542.jpg)
 
 Capgo a émergé comme une solution de gestion des retours en arrière solide après l'arrêt de [Microsoft Code Push](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) en 2024. Il simplifie les mises à jour des plugins avec un éventail de fonctionnalités :
 

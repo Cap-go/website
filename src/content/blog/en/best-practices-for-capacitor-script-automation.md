@@ -37,7 +37,7 @@ Automation ensures faster, safer, and more reliable app updates. Dive into the d
 
 ## How to AUTOMATICALLY configure your [Capacitor](https://capacitorjs.com/) project ⚡️
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-21.jpg?auto=compress)
 
 <iframe src="https://www.youtube.com/embed/kYFZkmJ6rAc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -211,7 +211,7 @@ Modern automation platforms simplify updates while maintaining security and comp
 
 ### [Capgo](https://capgo.app/) Features
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-21.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-21.jpg?auto=compress)
 
 Capgo's automation platform delivers strong performance in real-world scenarios. It achieves a **95% user update rate within 24 hours** and an **82% global success rate for updates** [\[1\]](https://capgo.app/). Here’s a breakdown of its key features:
 

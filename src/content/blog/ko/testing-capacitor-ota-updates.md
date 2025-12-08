@@ -42,7 +42,7 @@ next_blog: ''
 
 ## Capawesome의 새로운 Ionic [Capacitor](https://capacitorjs.com/) 라이브 업데이트 살펴보기...
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
 
 <iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
@@ -160,7 +160,7 @@ Capgo의 채널 시스템은 또한 버전 관리를 단순화하여 업데이�
 
 ## [Capgo](https://capgo.app/) 테스트 도구
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/c9663ca23e94ac8ce625337d9d850085.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/c9663ca23e94ac8ce625337d9d850085.jpg)
 
 ### Capgo 기능
 

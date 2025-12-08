@@ -110,7 +110,7 @@ Setelah menangani penghapusan di seluruh platform, Anda perlu mengatasi tantanga
 
 ### Manajemen Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6823e678f8b9f5df39f52ef5/21f0f35e63cf5752e2e56f9c4dd03eab.jpg)
 
 Manajemen pembaruan real-time memainkan peran penting dalam mempertahankan kepatuhan di seluruh platform dan plugin. Di sinilah **Capgo** dapat menyederhanakan proses pengelolaan pembaruan penghapusan akun.
 

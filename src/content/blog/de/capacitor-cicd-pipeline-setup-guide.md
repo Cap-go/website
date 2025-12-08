@@ -87,7 +87,7 @@ Für sensible Daten wie API-Schlüssel und Zertifikate, stellen Sie sicher, dass
 
 ## [Capgo](https://capgo.app/) Integrationsanleitung
 
-![Capgo](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Nachdem Sie Ihre Build- und Bereitstellungsphasen eingerichtet haben, ist es Zeit, Capgo zu integrieren. Dies ermöglicht es Ihnen, Live-Updates direkt an Ihre App zu senden, ohne App-Store-Genehmigungsverzögerungen.
 

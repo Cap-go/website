@@ -84,7 +84,7 @@ Capgo는 종단간 암호화와 맞춤형 로컬 데이터 저장을 사용하�
 
 ### [Capgo](https://capgo.app/)를 통한 업데이트 관리
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-23.jpg?auto=compress)
 
 Capgo는 규정을 준수하면서 업데이트를 관리하는 프로세스를 단순화합니다.
 

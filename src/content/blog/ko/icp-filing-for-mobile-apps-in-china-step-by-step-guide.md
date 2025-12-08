@@ -218,7 +218,7 @@ ICP 등록이 승인되면 지속적인 관심과 관리를 통해 규정을 준
 
 ## 중국 앱 업데이트를 위한 [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 Capgo는 앱이 중국 규정을 준수하면서 실시간 업데이트를 단순화할 수 있도록 설계된 도구를 제공합니다. 이러한 도구는 앱을 원활하게 운영하고 현지 요구사항을 충족하는 데 필수적입니다.
 

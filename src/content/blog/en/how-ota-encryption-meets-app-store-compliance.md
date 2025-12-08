@@ -127,7 +127,7 @@ These measures are designed to meet Apple's code verification and Google's updat
 
 ## [Capgo](https://capgo.app/)'s OTA Encryption System
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-14.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-14.jpg?auto=compress)
 
 Capgo uses advanced encryption techniques to deliver secure OTA updates while fully adhering to app store regulations.
 

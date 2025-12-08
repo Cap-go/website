@@ -59,7 +59,7 @@ Capgo는 업데이트가 사용자에게 빠르고 안정적으로 도달하도�
 
 ## [Capgo](https://capgo.app/) 설정 가이드
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-03.jpg?auto=compress)
 
 OTA 업데이트와 버전 관리를 쉽게 관리하기 위한 Capgo 설정 방법입니다.
 

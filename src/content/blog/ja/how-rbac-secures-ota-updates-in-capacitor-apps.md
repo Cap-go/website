@@ -109,7 +109,7 @@ RBACは、不正な展開をブロックする詳細な制御を使用しなが�
 
 ### [Capgo](https://capgo.app/)のRBAC機能
 
-![Capgo](https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680839e8fe5cbf0502ddad36/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Capgoは、真のエンドツーエンド暗号化とロールベースの権限を提供するオープンソースプラットフォームとしてこれらのアイデアを発展させています。これにより、複数の組織にわたる安全でスケーラブルな[アップデート管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)が可能になります[\[1\]](https://capgo.app/) 。
 

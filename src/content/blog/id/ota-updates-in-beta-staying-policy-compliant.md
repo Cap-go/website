@@ -140,7 +140,7 @@ Mengelola pembaruan OTA selama pengujian beta membutuhkan alat yang andal untuk 
 
 ### Fitur Pembaruan [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb2df2283d21cbd67cfdb5/574f3a2cd27791454624262312a6c223.jpg)
 
 Platform Capgo berfokus pada keamanan dan kepatuhan, menawarkan fitur utama yang disesuaikan untuk pengujian beta:
 

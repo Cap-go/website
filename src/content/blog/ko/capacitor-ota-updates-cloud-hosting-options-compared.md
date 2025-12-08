@@ -136,7 +136,7 @@ Azure는 또한 앱 스토어 가이드라인과 산업 표준을 충족하는 �
 
 ## 4. [Capgo](https://capgo.app/)를 통한 OTA 업데이트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-17.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-17.jpg?auto=compress)
 
 Capgo는 일반 클라우드 제공업체를 넘어서 Capacitor OTA 업데이트를 위한 전용 솔루션을 제공합니다. 5MB 번들을 단 114ms 만에 다운로드하고 전 세계적으로 평균 API 응답 시간이 57ms로, 업데이트가 빠르고 안정적임을 보장합니다.
 

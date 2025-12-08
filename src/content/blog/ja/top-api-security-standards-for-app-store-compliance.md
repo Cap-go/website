@@ -289,7 +289,7 @@ Capacitor用の効果的なセキュリティツールには以下が含まれ�
 
 ### トップピック：[Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6809811c9bd9ce97f26b7b78/29f394e74984c052f31714ba4759b80a.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6809811c9bd9ce97f26b7b78/29f394e74984c052f31714ba4759b80a.jpg)
 
 Capgoは、AppleとGoogleのガイドラインに準拠しながらCapacitorアプリのライブアップデートを管理するための優れたツールです。82%のグローバルアップデート成功率と印象的な434ミリ秒の平均APIレスポンスタイムを誇ります[\[1\]](https://capgo.app/) 。
 

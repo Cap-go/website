@@ -165,7 +165,7 @@ Pour les tests bêta et les déploiements progressifs, utilisez des systèmes de
 
 ## Outils de conformité [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae/574f3a2cd27791454624262312a6c223.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67eb4a47283d21cbd67d2aae/574f3a2cd27791454624262312a6c223.jpg)
 
 Capgo s'appuie sur des protocoles stricts de mise à jour et de sécurité pour fournir des outils conçus pour la conformité. Avec plus de 235 millions de mises à jour distribuées sur 750 applications en production [\[1\]](https://capgo.app/), Capgo assure des mises à jour fluides tout en respectant les normes essentielles. Ces outils sont fondés sur des principes tels que le contrôle de version, la sécurité et l'assurance qualité.
 

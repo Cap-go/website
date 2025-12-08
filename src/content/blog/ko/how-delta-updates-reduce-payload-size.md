@@ -39,7 +39,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/) 앱의 델타 업데이트
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-20.jpg?auto=compress)
 
 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)의 델타 업데이트는 수정된 코드 부분만 전송하는 차등 패치 방식을 사용합니다. 이 접근 방식은 전송되는 데이터양을 최소화하여 업데이트를 더 빠르고 사용자에게 더 쉽게 만듭니다.
 
@@ -210,7 +210,7 @@ Capgo를 사용하면 한 번의 클릭으로 이전 버전으로 쉽게 롤백�
 
 ## [Capgo](https://capgo.app/) 델타 업데이트 기능
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Capgo는 성능과 보안을 모두 개선하도록 설계된 기능으로 델타 업데이트 시스템을 구축했습니다. 지금까지 플랫폼은 **750개의 프로덕션 앱**에서 인상적인 **2,350만 건의 업데이트**를 관리했습니다 [\[1\]](https://capgo.app/).
 

@@ -40,7 +40,7 @@ next_blog: ''
 
 ## [Appflow](https://ionicio/appflow/)をCICDパイプラインと統合する
 
-![Appflow](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/d621f8c4ec61e7471b0153517889f4cc.jpg)
+![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/d621f8c4ec61e7471b0153517889f4cc.jpg)
 
 ## Appflow CI/CDの主要機能
 

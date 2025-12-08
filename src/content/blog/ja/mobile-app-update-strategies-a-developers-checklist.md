@@ -110,7 +110,7 @@ Over-the-Air（OTA）アップデートについては、Capacitorなどのツ�
 
 ### [Capacitor](https://capacitorjs.com/) OTAアップデートと[Capgo](https://capgo.app/)の使用
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d.jpg?auto=compress)
 
 Capgoは、暗号化とコンプライアンスなどの機能を備え、OTAアップデートをシンプル、安全、迅速に行えます。始め方は以下の通りです：
 

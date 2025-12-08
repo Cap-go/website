@@ -60,7 +60,7 @@ Capacitor의 공식 가이드라인에 따라 iOS, Android, 웹 플랫폼을 위
 
 ### [Capgo](https://capgo.app/) 설정
 
-![Capgo](https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6/37a0fc028bf1f414683e8dee42eedfb0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680445af6000445eb1a661a6/37a0fc028bf1f414683e8dee42eedfb0.jpg)
 
 다음 단계로 Capgo를 구성하세요 [\[1\]](https://capgo.app/):
 

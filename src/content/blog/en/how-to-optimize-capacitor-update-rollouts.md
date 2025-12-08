@@ -123,7 +123,7 @@ Finally, upgrading to modern protocols like HTTP/2 can make a big difference. HT
 
 ## Using [Capgo](https://capgo.app/) for Real-Time Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/68354087d3b966198183f9df/a379a64d1c0ded9a7a701dedf408b4b5.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68354087d3b966198183f9df/a379a64d1c0ded9a7a701dedf408b4b5.jpg)
 
 Capgo is a service tailored for Capacitor apps that enables real-time over-the-air (OTA) updates, bypassing the need for app store reviews entirely [\[9\]](https://www.uneed.best/blog/capgo-review). This makes it an excellent complement to existing strategies like staged rollouts and delta updates.
 

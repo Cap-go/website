@@ -152,7 +152,7 @@ Für Entwickler, die direkte OTA-Updates in Betracht ziehen, kann die Einbettung
 
 ### Verwendung von Tools wie [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5.jpg?auto=compress)
 
 Schnelle und effektive Bereitstellung von Updates ist ein Muss für moderne Entwicklungsteams. Tools wie **Capgo** vereinfachen dies, indem sie Funktionen wie Versionskontrolle, Analytik und gestaffelte Rollouts anbieten. Diese Funktionen erleichtern das Management von OTA-Updates, insbesondere für Unternehmens-Teams, die mit großflächigen Bereitstellungen umgehen. Benutzerzielgruppen und flexible Bereitstellungsoptionen verbessern den Prozess weiter.
 

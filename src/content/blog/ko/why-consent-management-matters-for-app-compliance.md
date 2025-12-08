@@ -94,7 +94,7 @@ Capacitor로 구축된 앱의 경우 잦은 업데이트로 인해 동의 관리
 
 ## [Capacitor](https://capacitorjs.com/) 앱에서 동의 설정하기
 
-![Capacitor](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### 동의 UI 만들기
 
@@ -153,7 +153,7 @@ Apple과 Google 모두 동의 관리에 대한 특정 규칙이 있습니다. �
 
 ### [Capgo](https://capgo.app/) 업데이트 기능
 
-![Capgo](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/680ad2755a08fca8917730ce/66b4651f868ecdcc17d750c
 
 1. **[자동 업데이트](https://capgo.app/docs/live-updates/update-behavior/)**: 신속한 배포가 가능한 플랫폼을 선택하세요. 예를 들어, Capgo는 24시간 이내에 95%의 사용자 업데이트율을 달성하여 [\[1\]](https://capgo.app/), 규정 준수 조정이 신속하게 이루어지도록 보장합니다.
 2. **안전한 데이터 처리 보장**: 개인정보 보호 규정을 충족하기 위해 종단간 암호화로 동의 업데이트를 보호하세요.

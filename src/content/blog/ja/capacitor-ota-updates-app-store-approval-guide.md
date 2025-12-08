@@ -99,7 +99,7 @@ Google Playは、OTAアップデートについてより寛容なスタンスを
 
 ## [Capacitor](https://capacitorjs.com/)のOTAアップデートガイドライン
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-15.jpg?auto=compress)
 
 ### 技術的なコンプライアンスのステップ
 
@@ -144,7 +144,7 @@ Google Playは、OTAアップデートについてより寛容なスタンスを
 
 ## [Capgo](https://capgo.app/)アップデート管理システム
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-15.jpg?auto=compress)
 
 Capgoは[Capacitor OTAアップデート](https://capgo.app/)を安全に配信・管理する方法を提供し、コンプライアンス基準を満たしながらスムーズな配布を実現します。また、エンタープライズレベルの[アップデート管理](https://capgo.app/it/docs/plugin/cloud-mode/manual-update/)のための高度なツールも提供しています。
 

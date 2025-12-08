@@ -65,7 +65,7 @@ next_blog: ''
 
 ### [Capgo](https://capgo.app/)を使用したアップデート
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-16.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-16.jpg?auto=compress)
 
 Capgoは、アプリのアップデートに詳細な制御が必要なチームにとって信頼できる選択肢です。**バージョン固有のパフォーマンス分析**や他の高度な監視ツールを提供します。
 

@@ -45,7 +45,7 @@ Capacitorは、ウェブとネイティブアプリ開発の間のギャップ�
 
 ## [Capacitor](https://capacitorjs.com/)によるプラットフォームコードの処理
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-25.jpg?auto=compress)
 
 Capacitorは、プラットフォーム固有のコードを管理するツールを提供し、開発者が単一のAPIを使用してiOSとAndroid向けにカスタマイズされた体験を作成できるようにします。
 

@@ -216,7 +216,7 @@ const handleUpdateFailure = async () => {
 
 ### [Capgo](https://capgo.app/) 사용하기
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-19.jpg?auto=compress)
 
 테스트의 이점은 **Capgo**와 같은 플랫폼을 통해 증대됩니다. 이는 고급 검증 도구를 통해 OTA 업데이트 테스트를 단순화하고, 안전하고 효율적인 업데이트를 제공하기 위해 검증된 테스트 결과를 통합합니다. Capgo의 채널 시스템은 베타 테스트 및 단계적 롤아웃을 지원하여 업데이트가 완전히 배포되기 전에 철저하게 검토될 수 있도록 합니다. 자세한 분석, 오류 추적 및 글로벌 CDN 성능과 같은 기능을 통해 Capgo는 5MB 번들의 다운로드 속도를 114ms로 지원합니다 [\[1\]](https://capgo.app/).
 

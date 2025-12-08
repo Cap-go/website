@@ -390,7 +390,7 @@ So optimieren Sie die Leistung Ihres biometrischen Systems:
 
 ### Updates mit [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4d
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68240bea59ff61289922287e/21f0f35e63cf5752e2e56f9c4d
 
 Capgo vereinfacht Updates.
 

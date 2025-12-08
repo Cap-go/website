@@ -158,7 +158,7 @@ Bagi pengembang yang mempertimbangkan pembaruan OTA langsung, mengintegrasikan p
 
 ### Menggunakan Alat Seperti [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5).jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5).jpg?auto=compress)
 
 Mengirimkan pembaruan dengan cepat dan efisien adalah keharusan bagi tim pengembangan modern. Alat seperti **Capgo** menyederhanakan hal ini dengan menawarkan fitur seperti kontrol versi, analitik, dan peluncuran bertahap. Kemampuan ini memudahkan pengelolaan pembaruan OTA, terutama untuk tim enterprise yang menangani deployment skala besar. Penargetan pengguna dan opsi deployment yang fleksibel semakin meningkatkan prosesnya.
 

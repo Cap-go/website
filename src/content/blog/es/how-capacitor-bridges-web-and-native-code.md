@@ -40,7 +40,7 @@ next_blog: ''
 
 ## Construyendo aplicaciones web nativas con [Capacitor](https://capacitorjs.com/) 3
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-26.jpg?auto=compress)
 
 ## Funciones principales del puente
 
@@ -213,7 +213,7 @@ Para funciones en tiempo real, considera usar una cola de mensajes para evitar c
 
 ## Actualizaciones en Vivo con [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-26.jpg?auto=compress)
 
 ### Características de Capgo
 

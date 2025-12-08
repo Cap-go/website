@@ -166,7 +166,7 @@ Tempatkan kontrol ini di tempat yang mudah ditemukan dalam menu pengaturan aplik
 
 ### Menggunakan [Capgo](https://capgo.app/) untuk Pembaruan
 
-![Capgo](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67f1c538ebbb9dc80644b1ad/241c8f19433e01f315154c8988becf9c.jpg)
 
 Setelah Anda menetapkan kontrol dalam aplikasi yang kuat, menjaga aplikasi Anda tetap diperbarui adalah kunci untuk tetap patuh. Di sinilah Capgo berperan. Ini memungkinkan Anda menerapkan pembaruan secara instan - tanpa menunggu persetujuan app store. Faktanya, 95% pengguna aktif menerima pembaruan dalam 24 jam setelah rilis [\[1\]](https://capgo.app/).
 

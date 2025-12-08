@@ -106,7 +106,7 @@ Revisiter régulièrement les limites de taux est essentiel pour maintenir la pe
 
 ## Outils de limitation de taux de [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ecaaaa7747adc4bca8d9b6/454adbba4c00491adce88db59812b177.jpg)
 
 Capgo propose des outils intégrés conçus pour appliquer les limites de taux d'API tout en assurant une haute performance et la conformité avec les exigences de l'app store.
 

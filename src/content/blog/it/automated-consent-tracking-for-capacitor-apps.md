@@ -423,7 +423,7 @@ class ConsentValidator {
 
 ### Utilizzo di [Capgo](https://capgo.app/) per gli aggiornamenti
 
-![Capgo](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67ef2243ebbb9dc80641c5e1/435c1a19c50c4ff1b7d76cbc4edeb6d0.jpg)
 
 Le capacità di aggiornamento live di Capgo ti permettono di apportare modifiche alla conformità in modo efficiente. Ecco un esempio:
 

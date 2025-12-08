@@ -85,7 +85,7 @@ Selanjutnya, kita akan mendalami bagaimana pembaruan OTA Capacitor dapat mengata
 
 ## Penjelasan Pembaruan OTA [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-08.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-08.jpg?auto=compress)
 
 Pembaruan over-the-air (OTA) telah mengubah cara aplikasi mobile dikelola dan diperbarui. Untuk [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/), metode ini memungkinkan developer mengirimkan perubahan langsung ke pengguna tanpa menunggu peninjauan app store.
 
@@ -118,7 +118,7 @@ Capgo meningkatkan manfaat ini lebih jauh dengan menawarkan platform yang efisie
 
 ### Platform Pembaruan OTA [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-08.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-08.jpg?auto=compress)
 
 Capgo adalah solusi OTA tingkat atas untuk aplikasi Capacitor, menawarkan alat untuk menyederhanakan [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/):
 

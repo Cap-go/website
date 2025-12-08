@@ -82,7 +82,7 @@ For sensitive data like API keys and certificates, make sure to store them secur
 
 ## [Capgo](https://capgo.app/) Integration Guide
 
-![Capgo](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68082f5bfe5cbf0502dd901c/95506b8280be0626e7b237b754ba8f1b.jpg)
 
 Once you've set up your build and deploy stages, it's time to integrate Capgo. This allows you to push live updates directly to your app, bypassing app store approval delays.
 

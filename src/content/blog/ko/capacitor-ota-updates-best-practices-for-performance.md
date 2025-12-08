@@ -92,7 +92,7 @@ Capgo는 엔드-투-엔드 암호화와 유연한 배포 옵션을 갖춘 보안
 
 ## [Capacitor](https://capacitorjs.com/)에서 OTA 업데이트 설정
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
 
 Capacitor에서 Over-the-Air(OTA) 업데이트를 설정하려면 신중한 테스트와 엄격한 가이드라인 준수가 필요합니다.
 
@@ -123,7 +123,7 @@ Capacitor에서 Over-the-Air(OTA) 업데이트를 설정하려면 신중한 테�
 
 ### [Capgo](https://capgo.app/)를 사용한 업데이트
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
 
 테스트와 규정 준수를 확인한 후에는 효율적인 업데이트 배포가 다음 단계입니다. Capgo는 이 과정을 단순화하는 도구입니다.
 

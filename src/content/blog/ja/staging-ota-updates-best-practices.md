@@ -168,7 +168,7 @@ Capgoはエラー追跡と分析のためのツールを提供し、リカバリ
 
 ## [Capgo](https://capgo.app/)を使用したOTAアップデート
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
 
 ### Capgoの主要機能
 

@@ -53,7 +53,7 @@ next_blog: ''
 
 ## Come creare un plugin [Capacitor](https://capacitorjs.com/) per iOS/Android
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-27.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-03-27.jpg?auto=compress)
 
 <Steps>
 
@@ -167,7 +167,7 @@ Configura le dipendenze Android per garantire una perfetta integrazione nativa. 
 
 ### Dipendenze [Gradle](https://gradle.org/)
 
-![Gradle](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-27.jpg?auto=compress)
+![Gradle Build Tool Interface](https://mars-images.imgix.net/seobot/screenshots/gradle.org-85d271057dfb5e2e134ec99beaad5682-2025-03-27.jpg?auto=compress)
 
 ### Configurazione Repository
 
@@ -195,7 +195,7 @@ Infine, ottimizza il processo di build abilitando la cache e l'esecuzione parall
 
 ## Integrazione [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-27.jpg?auto=compress)
 
 Usare Capgo insieme alla gestione delle dipendenze native e JavaScript rende più veloce e facile l'aggiornamento del tuo plugin.
 

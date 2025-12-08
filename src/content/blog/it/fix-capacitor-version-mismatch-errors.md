@@ -41,7 +41,7 @@ next_blog: ''
 
 ## Risoluzione dell'eccezione No Matching View in [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/67e9f504283d21cbd67ba572/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 

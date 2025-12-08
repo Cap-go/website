@@ -168,7 +168,7 @@ Die Einhaltung der Richtlinien des App-Stores ist entscheidend, um Verzögerunge
 
 ## Verwendung von [Capgo](https://capgo.app/) für OTA-Updates
 
-![Capgo](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67fda45772a40527486bdcbd/5667dd288bf82910fbf4a9affbd7b492.jpg)
 
 ### Capgo-Kernfunktionen
 

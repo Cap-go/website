@@ -59,7 +59,7 @@ Avant de vous lancer dans les mises à jour OTA ciblées par géolocalisation, a
 
 ### Débuter avec [Capacitor](https://capacitorjs.com/)
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-23.jpg?auto=compress)
 
 Pour construire une application Capacitor avec géolocalisation et mises à jour OTA, vous aurez besoin de :
 

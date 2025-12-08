@@ -44,7 +44,7 @@ Configura las herramientas de reversión hoy para asegurar actualizaciones fluid
 
 ## Cómo Migrar Tu Aplicación [Ionic](https://ionicframework.com/) a [Capacitor](https://capacitorjs.com/) 3
 
-![Ionic](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
+![Ionic Framework Website](https://assets.seobotai.com/capgo.app/680afd1e5a08fca891778b0c/e144b5b930d9d793c665f9f08c6b1196.jpg)
 
 Las estrategias de reversión juegan un papel clave en mantener la estabilidad de la aplicación y asegurar la confianza del usuario. Las métricas muestran consistentemente cómo estas estrategias apoyan un enfoque estructurado para gestionar las actualizaciones de manera efectiva.
 

@@ -30,7 +30,7 @@ next_blog: ''
 
 ## [Capacitor](https://capacitorjs.com/)ライブアップデートにおけるバージョンの競合
 
-![Capacitor](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ### 一般的な競合のトリガー
 

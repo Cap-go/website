@@ -108,7 +108,7 @@ Untuk aplikasi enterprise, Identity Vault menawarkan solusi manajemen identitas 
 
 ## 5\. [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/e81a00d3e5c2480025c05b94a848a495.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/e81a00d3e5c2480025c05b94a848a495.jpg)
 
 Capgo melampaui solusi penyimpanan dan biometrik yang kuat dengan menawarkan manajemen sesi yang aman berpasangan dengan pengiriman update langsung. Dengan fokus kuat pada integritas data, Capgo memastikan data sesi tetap terlindungi melalui **enkripsi end-to-end** dan update real-time.
 

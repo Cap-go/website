@@ -102,7 +102,7 @@ Webプロファイリングが完了したら、iOSパフォーマンス分析�
 
 ### [Xcode](https://developer.apple.com/xcode/)を使用したiOSプロファイリング
 
-![Xcode](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
+![Xcode IDE Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/15516018a4284df8a7d0585815c62b4c.jpg)
 
 Xcodeで、**Product > Profile (⌘I)**に移動し、プロファイリングテンプレートを選択します：
 
@@ -154,7 +154,7 @@ Capacitorアプリの一般的なパフォーマンスの問題は、**大きな
 
 ### [Capgo](https://capgo.app/)を使用した迅速な更新
 
-![Capgo](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6803080d9291ae98c5004a60/65550a0697b495ada9159b05fd8b2a91.jpg)
 
 Capgoは、暗号化された段階的な更新と自動ロールバック機能を提供することで、更新プロセスを簡素化します。また、リアルタイム分析も提供し、アプリストアの遅延をバイパスして、更新が迅速かつ効率的にユーザーに届くことを保証します。
 

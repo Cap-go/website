@@ -56,7 +56,7 @@ Les mises à jour OTA de [Capacitor](https://capgo.app/) sont idéales pour les 
 
 ## Fonctionnalités de la plateforme [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e88f5c283d21cbd67a8bd9/93c1d42fe1ebf1e9553e1e7f4f856f98.jpg)
 
 La [plateforme Capgo](https://capgo.app/docs/webapp/) améliore les capacités de mise à jour de Capacitor avec une sécurité accrue et des options de déploiement avancées. Ayant géré 235 millions de mises à jour sur 750 applications en production [\[1\]](https://capgo.app/), elle fournit des fonctionnalités clés pour améliorer les performances :
 
@@ -244,7 +244,7 @@ Ces pratiques sont essentielles pour que des plateformes comme Capgo puissent li
 
 ### [Capgo](https://capgo.app/) Fonctionnalités
 
-![Capgo](https://assets.seobotai.com/capgo.app/67e211687856e801f1f2973e/248f5ad4814006d64d1f6a7ab727c6b9.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/67e211687856e801f1f2973e/248f5ad4814006d64d1f6a7ab727c6b9.jpg)
 
 Capgo se démarque en suivant ces meilleures pratiques, permettant des mises à jour OTA fiables. Actuellement, Capgo prend en charge 750 applications en production et a livré avec succès 235 millions de mises à jour [\[1\]](https://capgo.app/)
 

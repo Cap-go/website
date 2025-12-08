@@ -59,7 +59,7 @@ OTAアップデートは時間を節約し、ユーザー体験を向上させ�
 
 ## [Capawesome](https://capawesomeio/)の新しいIonic [Capacitor](https://capacitorjs.com/) ライブアップデートを探る
 
-![Capawesome](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
+![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
 
 [[HTML_TAG]][[HTML_TAG]]
 

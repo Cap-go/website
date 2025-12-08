@@ -114,7 +114,7 @@ Invia notifiche che contano, quando contano. Personalizzando sia il messaggio ch
 
 ### Sistema di Gestione Aggiornamenti di [Capgo](https://capgo.app/)
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-03-20.jpg?auto=compress)
 
 Per supportare queste interazioni personalizzate, una gestione efficace degli [aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/manual-update/) è fondamentale. Il sistema di canali di Capgo fornisce un controllo preciso sugli aggiornamenti, permettendo beta testing, rilasci graduali e funzionalità mirate a specifici segmenti utente. Con analytics in tempo reale e impostazioni dettagliate dei permessi, Capgo garantisce la conformità alle regole degli app store - particolarmente importante per le app enterprise.
 

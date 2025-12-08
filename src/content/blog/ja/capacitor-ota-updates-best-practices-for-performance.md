@@ -87,7 +87,7 @@ Capgoは、エンドツーエンド暗号化と柔軟なデプロイメントオ
 
 ## [Capacitor](https://capacitorjs.com/)でのOTAアップデートの設定
 
-![Capacitor](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
+![Capacitor Framework Documentation Website](https://mars-images.imgix.net/seobot/screenshots/capacitorjs.com-4c1a6a7e452082d30f5bff9840b00b7d-2025-02-22.jpg?auto=compress)
 
 Capacitorでのエアー経由（OTA）アップデートの設定には、慎重なテストと厳格なガイドラインの遵守が必要です。
 
@@ -117,7 +117,7 @@ Capacitorでのエアー経由（OTA）アップデートの設定には、慎�
 
 ### [Capgo](https://capgo.app/)を使用したアップデート
 
-![Capgo](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
+![Capgo Live Update Dashboard Interface](https://mars-images.imgix.net/seobot/screenshots/capgo.app-26aea05b7e2e737b790a9becb40f7bc5-2025-02-22.jpg?auto=compress)
 
 テストとコンプライアンスの確認後、効率的なアップデートのデプロイが次のステップとなります。Capgoはこのプロセスを簡素化するツールです。
 

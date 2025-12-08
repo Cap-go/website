@@ -38,7 +38,7 @@ Ce guide couvre tout ce dont vous avez besoin pour configurer Capacitor CLI, con
 
 ## Présentation de [Capacitor](https://capacitorjs.com/) Configure
 
-![Capacitor](https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847/7e137b9b90adb3934b29b03381f213c1.jpg)
+![Capacitor Framework Documentation Website](https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847/7e137b9b90adb3934b29b03381f213c1.jpg)
 
 ## Prérequis d'Installation
 
@@ -143,7 +143,7 @@ Lorsque tout est configuré, construisez les projets en utilisant `npx cap build
 
 ## Guide d'Installation [Capgo](https://capgo.app/)
 
-![Capgo](https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
+![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/6801ba663c6b972ab5067847/d09851ee64a6d6c4e2e08ff1d656af11.jpg)
 
 Configurez Capgo pour activer les mises à jour instantanées par voie aérienne pour votre application.
 
