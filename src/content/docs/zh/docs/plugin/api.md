@@ -1,8 +1,9 @@
 ---
-title: "Functions and settings"
-description: "All available method and settings of the plugin"
+title: Functions and settings
+description: All available method and settings of the plugin
 sidebar:
   order: 2
+locale: zh
 ---
 
 # Updater Plugin Config

@@ -1,8 +1,11 @@
 ---
-title: "Cordova"
-description: "Exploring the potential availability of the capacitor-updater plugin for Cordova and the challenges involved in its development."
+title: Cordova
+description: >-
+  Exploring the potential availability of the capacitor-updater plugin for
+  Cordova and the challenges involved in its development.
 sidebar:
   order: 8
+locale: ko
 ---
 
 You've been wondering if this plugin will ever be available for Cordova.
