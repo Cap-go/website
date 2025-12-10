@@ -207,7 +207,7 @@ The key to effective scheduling lies in starting small, monitoring performance m
 
 Capgo’s simplicity is one of its standout features. In April 2025, Thomas Sanlis from Uneed demonstrated just how accessible it is. With no prior experience in Capacitor, he installed Capgo in a [Nuxt 3](https://nuxt.com/) project in about 20 minutes. He then simulated a bug fix by editing text on the home page and redeploying the update - all in under a minute [\[2\]](https://www.uneed.best/blog/capgo-review).
 
-Ready to roll out your updates? Start with a **15-day free trial** to explore Capgo’s scheduling features and see how they align with your app’s needs [\[2\]](https://www.uneed.best/blog/capgo-review). When you’re prepared to deploy, the CLI command `npx @capgo/cli@latest bundle upload --channel=Production` makes the process seamless [\[2\]](https://www.uneed.best/blog/capgo-review).
+Ready to roll out your updates? Start with a **15-day free trial** to explore Capgo’s scheduling features and see how they align with your app’s needs [\[2\]](https://www.uneed.best/blog/capgo-review). When you’re prepared to deploy, the CLI command `npx @capgo/cli@latest bundle upload --channel=production` makes the process seamless [\[2\]](https://www.uneed.best/blog/capgo-review).
 
 **Keep an eye on your progress** by tracking update adoption rates, setting up automated error tracking for quick rollbacks, and using staged rollouts to control delivery [\[1\]](https://capgo.app/blog). Make sure your app confirms updates as outlined earlier [\[4\]](https://capgo.app/docs/plugin/cloud-mode/auto-update).
 

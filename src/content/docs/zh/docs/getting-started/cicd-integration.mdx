@@ -63,7 +63,7 @@ npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY -
 
 3. **在管道中使用:**
    ```yaml
-   - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=${{ secrets.CAPGO_API_KEY }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
+   - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=${{ secrets.CAPGO_API_KEY }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
    ```
 
 **注意**: `--key-data-v2` 标志允许您直接以字符串形式传递私钥内容,使其非常适合 CI/CD 管道中的环境变量,在那里您不想创建临时文件。
@@ -77,9 +77,9 @@ npx @capgo/cli@latest bundle upload --channel Production --apikey YOUR_API_KEY -
 <Steps>
 1. **生成 API 密钥**: 登录 Capgo 仪表板并创建新的 API 密钥。此密钥将用于在 CI/CD 环境中验证 CLI。保密并永远不要将其提交到存储库!
 
-3. **配置 `bundle upload` 命令**: 在 CI/CD 配置中添加一个步骤,使用适当的参数运行 `bundle upload` 命令: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n 将 `Production` 替换为您要部署到的渠道,`${{ secrets.CAPGO_API_KEY }}` 替换为保存您的 API 密钥的环境变量,如果使用加密,添加 `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"`。
+3. **配置 `bundle upload` 命令**: 在 CI/CD 配置中添加一个步骤,使用适当的参数运行 `bundle upload` 命令: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n 将 `Production` 替换为您要部署到的渠道,`${{ secrets.CAPGO_API_KEY }}` 替换为保存您的 API 密钥的环境变量,如果使用加密,添加 `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"`。
 
-4. **在 Web 构建后添加 `upload` 步骤**: 确保 `upload` 步骤在 Web 构建成功完成后执行。这确保您始终部署最新代码。\n  以下是 GitHub Actions 的示例配置:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\} --key-data-v2 "$\{\{ secrets.CAPGO_PRIVATE_KEY \}\}"`} />
+4. **在 Web 构建后添加 `upload` 步骤**: 确保 `upload` 步骤在 Web 构建成功完成后执行。这确保您始终部署最新代码。\n  以下是 GitHub Actions 的示例配置:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\} --key-data-v2 "$\{\{ secrets.CAPGO_PRIVATE_KEY \}\}"`} />
 
 </Steps>
 
@@ -110,7 +110,7 @@ const config: CapacitorConfig = {
 - run: npm ci
 - run: npx semantic-release  # 更新 package.json 版本
 - run: npm run build         # 使用来自 capacitor.config 的新版本构建
-- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=${{ secrets.CAPGO_API_KEY }}
+- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=${{ secrets.CAPGO_API_KEY }}
 ```
 
 以下是 semantic-release 的示例 `.releaserc` 配置文件:

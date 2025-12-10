@@ -62,7 +62,7 @@ For CI/CD environments, it's recommended to store your private key as an environ
 
 3. **Use it in your pipeline:**
    ```yaml
-   - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=${{ secrets.CAPGO_API_KEY }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
+   - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=${{ secrets.CAPGO_API_KEY }} --key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"
    ```
 
 **Note**: The `--key-data-v2` flag allows you to pass the private key content directly as a string, making it perfect for environment variables in CI/CD pipelines where you don't want to create temporary files.
@@ -76,9 +76,9 @@ While the exact steps will vary depending on your CI/CD tool of choice, the gene
 <Steps>
 1. **Generate an API key**: Log in to the Capgo dashboard and create a new API key. This key will be used to authenticate the CLI in your CI/CD environment. Keep it secret and never commit it to your repository!
 
-3. **Configure the `bundle upload` command**: Add a step to your CI/CD configuration that runs the `bundle upload` command with the appropriate arguments: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Replace `Production` with the channel you want to deploy to, `${{ secrets.CAPGO_API_KEY }}` with the environment variable holding your API key, and add `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"` if using encryption.
+3. **Configure the `bundle upload` command**: Add a step to your CI/CD configuration that runs the `bundle upload` command with the appropriate arguments: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Replace `Production` with the channel you want to deploy to, `${{ secrets.CAPGO_API_KEY }}` with the environment variable holding your API key, and add `--key-data-v2 "${{ secrets.CAPGO_PRIVATE_KEY }}"` if using encryption.
 
-4. **Add the `upload` step after your web build**: Ensure that the `upload` step comes after your web build has completed successfully. This ensures you're always deploying your latest code.\n  Here's an example configuration for GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\} --key-data-v2 "$\{\{ secrets.CAPGO_PRIVATE_KEY \}\}"`} />
+4. **Add the `upload` step after your web build**: Ensure that the `upload` step comes after your web build has completed successfully. This ensures you're always deploying your latest code.\n  Here's an example configuration for GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\} --key-data-v2 "$\{\{ secrets.CAPGO_PRIVATE_KEY \}\}"`} />
 
 </Steps>
 
@@ -109,7 +109,7 @@ Your CI/CD workflow would look like this:
 - run: npm ci
 - run: npx semantic-release  # Updates package.json version
 - run: npm run build         # Builds with new version from capacitor.config
-- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=${{ secrets.CAPGO_API_KEY }}
+- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=${{ secrets.CAPGO_API_KEY }}
 ```
 
 Here's a sample `.releaserc` configuration file for semantic-release:

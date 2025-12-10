@@ -22,7 +22,7 @@ CLI Capgo adalah kunci untuk mengintegrasikan Capgo ke dalam alur kerja CI/CD An
 Perintah yang paling penting untuk integrasi CI/CD adalah `upload`:
 
 ```shell
-npx @capgo/cli@latest bundle upload --channel=Production --apikey YOUR_API_KEY
+npx @capgo/cli@latest bundle upload --channel=production --apikey YOUR_API_KEY
 ```
 
 Perintah ini mengunggah build web saat ini ke channel yang ditentukan. Anda biasanya akan menjalankan ini sebagai langkah terakhir dalam pipeline CI/CD Anda, setelah build web Anda berhasil diselesaikan.
@@ -34,9 +34,9 @@ Meskipun langkah-langkah pastinya akan bervariasi tergantung pada pilihan alat C
 <Steps>
 1. **Buat API key**: Masuk ke dashboard Capgo dan buat API key baru. Kunci ini akan digunakan untuk mengautentikasi CLI di lingkungan CI/CD Anda. Jaga kerahasiaannya dan jangan pernah menyimpannya di repositori Anda!
 
-3. **Konfigurasi perintah `upload`**: Tambahkan langkah ke konfigurasi CI/CD Anda yang menjalankan perintah `upload` dengan argumen yang sesuai: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Ganti `Production` dengan channel yang ingin Anda terapkan, dan `${{ secrets.CAPGO_API_KEY }}` dengan variabel lingkungan yang menyimpan API key Anda.
+3. **Konfigurasi perintah `upload`**: Tambahkan langkah ke konfigurasi CI/CD Anda yang menjalankan perintah `upload` dengan argumen yang sesuai: <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Ganti `Production` dengan channel yang ingin Anda terapkan, dan `${{ secrets.CAPGO_API_KEY }}` dengan variabel lingkungan yang menyimpan API key Anda.
 
-4. **Tambahkan langkah `upload` setelah build web Anda**: Pastikan bahwa langkah `upload` datang setelah build web Anda berhasil diselesaikan. Ini memastikan Anda selalu menerapkan kode terbaru Anda.\n  Berikut contoh konfigurasi untuk GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
+4. **Tambahkan langkah `upload` setelah build web Anda**: Pastikan bahwa langkah `upload` datang setelah build web Anda berhasil diselesaikan. Ini memastikan Anda selalu menerapkan kode terbaru Anda.\n  Berikut contoh konfigurasi untuk GitHub Actions:\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
 
 </Steps>
 

@@ -22,7 +22,7 @@ Le CLI Capgo est la clé pour intégrer Capgo dans votre workflow CI/CD. Il four
 La commande la plus importante pour l'intégration CI/CD est `upload` :
 
 ```shell
-npx @capgo/cli@latest bundle upload --channel=Production --apikey YOUR_API_KEY
+npx @capgo/cli@latest bundle upload --channel=production --apikey YOUR_API_KEY
 ```
 
 Cette commande télécharge la construction web actuelle vers le canal spécifié. Vous l'exécuterez généralement comme dernière étape de votre pipeline CI/CD, après que votre construction web s'est terminée avec succès.
@@ -34,9 +34,9 @@ Bien que les étapes exactes varient selon votre outil CI/CD, le processus gén�
 <Steps>
 1. **Générer une clé API** : Connectez-vous au tableau de bord Capgo et créez une nouvelle clé API. Cette clé sera utilisée pour authentifier le CLI dans votre environnement CI/CD. Gardez-la secrète et ne la committez jamais dans votre dépôt !
 
-3. **Configurer la commande `upload`** : Ajoutez une étape à votre configuration CI/CD qui exécute la commande `upload` avec les arguments appropriés : <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Remplacez `Production` par le canal vers lequel vous souhaitez déployer, et `${{ secrets.CAPGO_API_KEY }}` par la variable d'environnement contenant votre clé API.
+3. **Configurer la commande `upload`** : Ajoutez une étape à votre configuration CI/CD qui exécute la commande `upload` avec les arguments appropriés : <Code lang="yaml" title="upload.yml" code={`- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />\n Remplacez `Production` par le canal vers lequel vous souhaitez déployer, et `${{ secrets.CAPGO_API_KEY }}` par la variable d'environnement contenant votre clé API.
 
-4. **Ajouter l'étape `upload` après votre construction web** : Assurez-vous que l'étape `upload` vient après que votre construction web s'est terminée avec succès. Cela garantit que vous déployez toujours votre code le plus récent.\n  Voici un exemple de configuration pour GitHub Actions :\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
+4. **Ajouter l'étape `upload` après votre construction web** : Assurez-vous que l'étape `upload` vient après que votre construction web s'est terminée avec succès. Cela garantit que vous déployez toujours votre code le plus récent.\n  Voici un exemple de configuration pour GitHub Actions :\n<Code lang="yaml" title="upload.yml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secrets.CAPGO_API_KEY \}\}`} />
 
 </Steps>
 

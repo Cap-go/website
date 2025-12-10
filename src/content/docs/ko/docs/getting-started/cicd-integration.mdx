@@ -22,7 +22,7 @@ Capgo CLI는 CI/CD 워크플로우에 Capgo를 통합하는 핵심입니다. 새
 CI/CD 통합에서 가장 중요한 명령어는 `upload`입니다:
 
 ```shell
-npx @capgo/cli@latest bundle upload --channel=Production --apikey YOUR_API_KEY
+npx @capgo/cli@latest bundle upload --channel=production --apikey YOUR_API_KEY
 ```
 
 이 명령어는 현재 웹 빌드를 지정된 채널에 업로드합니다. 일반적으로 웹 빌드가 성공적으로 완료된 후 CI/CD 파이프라인의 마지막 단계로 실행됩니다.
@@ -34,9 +34,9 @@ npx @capgo/cli@latest bundle upload --channel=Production --apikey YOUR_API_KEY
 <Steps>
 1. **API 키 생성**: Capgo 대시보드에 로그인하여 새 API 키를 생성합니다. 이 키는 CI/CD 환경에서 CLI를 인증하는 데 사용됩니다. 비밀로 유지하고 절대 저장소에 커밋하지 마세요!
 
-3. **`upload` 명령어 구성**: CI/CD 구성에 적절한 인수와 함께 `upload` 명령어를 실행하는 단계를 추가합니다: <Code lang="yaml" title="uploadyml" code={`- run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />\n `Production`을 배포하려는 채널로 바꾸고, `${{ secretsCAPGO_API_KEY }}`를 API 키를 보유한 환경 변수로 바꾸세요.
+3. **`upload` 명령어 구성**: CI/CD 구성에 적절한 인수와 함께 `upload` 명령어를 실행하는 단계를 추가합니다: <Code lang="yaml" title="uploadyml" code={`- run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />\n `Production`을 배포하려는 채널로 바꾸고, `${{ secretsCAPGO_API_KEY }}`를 API 키를 보유한 환경 변수로 바꾸세요.
 
-4. **웹 빌드 후 `upload` 단계 추가**: `upload` 단계가 웹 빌드가 성공적으로 완료된 후에 오도록 하세요. 이렇게 하면 항상 최신 코드를 배포할 수 있습니다.\n  GitHub Actions용 구성 예시입니다:\n<Code lang="yaml" title="uploadyml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=Production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />
+4. **웹 빌드 후 `upload` 단계 추가**: `upload` 단계가 웹 빌드가 성공적으로 완료된 후에 오도록 하세요. 이렇게 하면 항상 최신 코드를 배포할 수 있습니다.\n  GitHub Actions용 구성 예시입니다:\n<Code lang="yaml" title="uploadyml" code={`name: Deploy to Capgo\n on:\n  push:\n   branches: [main]\n\njobs:\n deploy:\n runs-on: ubuntu-latest\n\n steps:\n - uses: actions/checkout@v6\n - uses: actions/setup-node@v6\n  with:\n   node-version: '24'\n\n - run: npm ci\n - run: npm run build\n\n - run: npm install -g @capgo/cli\n - run: npx @capgo/cli@latest bundle upload --channel=production --apikey=$\{\{ secretsCAPGO_API_KEY \}\}`} />
 
 </Steps>
 
