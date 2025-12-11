@@ -198,7 +198,12 @@ interface Device {
 
 `https://api.capgo.app/device/`
 
-Unlink a device from its channel and version override. This resets the device to use its default channel.
+Unlink a device from its channel override. This resets the device to use its default channel.
+
+:::note[Delete device]
+Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
+You can't delete a device with this endpoint, it only affect the channel override.
+:::
 
 #### Query Parameters
 
