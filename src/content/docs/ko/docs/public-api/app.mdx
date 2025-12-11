@@ -1,49 +1,45 @@
 ---
-title: Apps
-description: >-
-  Detailed documentation for the Apps endpoint, providing comprehensive insights
-  into managing and interacting with Capacitor applications through Capgo's
-  platform.
+title: "Apps"
+description: "Capgo 플랫폼을 통해 Capacitor 애플리케이션을 관리하고 상호작용하는 포괄적인 통찰력을 제공하는 Apps 엔드포인트에 대한 상세한 문서입니다."
 sidebar:
   order: 7
-locale: ko
 ---
 
-Apps are the foundational entities in Capgo. Each app represents a unique Capacitor application that you can manage and update through the platform. The Apps API allows you to create, retrieve, update, and delete app configurations.
+Apps는 Capgo의 기본 엔티티입니다. 각 앱은 플랫폼을 통해 관리하고 업데이트할 수 있는 고유한 Capacitor 애플리케이션을 나타냅니다. Apps API를 사용하면 앱 구성을 생성, 검색, 업데이트 및 삭제할 수 있습니다.
 
-## Understanding Apps
+## Apps 이해하기
 
-An app in Capgo represents your Capacitor application and includes:
-- **App ID**: Unique identifier for your application
-- **Name**: Human-readable name of your application
-- **Icons**: Visual identifiers for your app in the dashboard
-- **Configuration**: Settings that control how updates are delivered
-- **Ownership**: Organization and user access information
-- **Usage Statistics**: Metrics about installs and updates
+Capgo의 앱은 Capacitor 애플리케이션을 나타내며 다음을 포함합니다:
+- **App ID**: 애플리케이션의 고유 식별자
+- **Name**: 애플리케이션의 사람이 읽을 수 있는 이름
+- **Icons**: 대시보드에서 앱의 시각적 식별자
+- **Configuration**: 업데이트 전달 방법을 제어하는 설정
+- **Ownership**: 조직 및 사용자 액세스 정보
+- **Usage Statistics**: 설치 및 업데이트에 대한 메트릭
 
-## Best Practices
+## 모범 사례
 
-1. **Naming Convention**: Use clear, identifiable names for your apps
-2. **Security**: Protect your API keys and access credentials
-3. **Organization**: Group related apps under the same organization
-4. **Monitoring**: Regularly check app statistics and performance
-5. **Backup**: Maintain configuration backups for critical apps
+1. **명명 규칙**: 앱에 명확하고 식별 가능한 이름 사용
+2. **보안**: API 키 및 액세스 자격 증명 보호
+3. **조직화**: 관련 앱을 동일한 조직 아래에 그룹화
+4. **모니터링**: 앱 통계 및 성능을 정기적으로 확인
+5. **백업**: 중요한 앱의 구성 백업 유지
 
-## Endpoints
+## 엔드포인트
 
 ### GET
 
 `https://api.capgo.app/app/`
 
-Retrieve information about your apps.
+앱에 대한 정보를 검색합니다.
 
-#### Query Parameters
-- `page`: Optional. Page number for pagination
-- `limit`: Optional. Number of results per page (default: 50)
-- `org_id`: Optional. Filter apps by organization ID. If not provided, returns apps from all organizations the user has access to
+#### 쿼리 파라미터
+- `page`: 선택 사항. 페이지네이션을 위한 페이지 번호
+- `limit`: 선택 사항. 페이지당 결과 수 (기본값: 50)
+- `org_id`: 선택 사항. 조직 ID로 앱 필터링. 제공되지 않으면 사용자가 액세스할 수 있는 모든 조직의 앱을 반환합니다
 
-For getting a specific app:
-- Use the app ID in the URL path: `https://api.capgo.app/app/:app_id`
+특정 앱을 가져오려면:
+- URL 경로에 앱 ID 사용: `https://api.capgo.app/app/:app_id`
 
 #### Response Type
 
@@ -107,7 +103,7 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/app/`
 
-Create a new app.
+새 앱을 생성합니다.
 
 #### Request Body
 
@@ -156,7 +152,7 @@ curl -X POST \
 
 `https://api.capgo.app/app/:app_id`
 
-Update an existing app. The app ID is specified in the URL path.
+기존 앱을 업데이트합니다. 앱 ID는 URL 경로에 지정됩니다.
 
 #### Request Body
 
@@ -202,7 +198,7 @@ curl -X PUT \
 
 `https://api.capgo.app/app/:app_id`
 
-Delete an app and all associated resources. The app ID is specified in the URL path. Use with extreme caution as this action cannot be undone.
+앱과 관련된 모든 리소스를 삭제합니다. 앱 ID는 URL 경로에 지정됩니다. 이 작업은 되돌릴 수 없으므로 극도로 주의하여 사용하십시오.
 
 #### Example Request
 
@@ -220,9 +216,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## 오류 처리
 
-Common error scenarios and their responses:
+일반적인 오류 시나리오 및 응답:
 
 ```json
 // App not found
@@ -255,7 +251,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 일반적인 사용 사례
 
 1. **Create New App**
 ```typescript
@@ -290,9 +286,9 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 ```
 
-## Resource Management
+## 리소스 관리
 
-1. **Storage Optimization**: Monitor storage usage and set appropriate retention policies
-2. **Organization**: Group related apps under a single organization
-3. **Access Control**: Manage which team members can modify app settings
-4. **Backup Strategy**: Back up critical app configurations and settings
+1. **스토리지 최적화**: 스토리지 사용량을 모니터링하고 적절한 보존 정책 설정
+2. **조직화**: 관련 앱을 단일 조직 아래에 그룹화
+3. **액세스 제어**: 앱 설정을 수정할 수 있는 팀 구성원 관리
+4. **백업 전략**: 중요한 앱 구성 및 설정 백업

@@ -1,9 +1,6 @@
 ---
-title: Overview
-description: >-
-  This document provides a comprehensive overview of the Capgo CLI, how it can
-  be utilized to enhance your app development process by enabling seamless live
-  updates
+title: "概述"
+description: "本文档提供 Capgo CLI 的全面概述,以及如何利用它通过启用无缝实时更新来增强应用开发过程"
 sidebar:
   order: 1
 prev: false
@@ -13,31 +10,31 @@ locale: zh
 
 import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
-Use Capgo's Live Updates feature to update the JavaScript bundles of your app remotely, in real-time. Push JS updates directly to your users without going through the app store review process to instantly fix bugs and ship new features.
+使用 Capgo 的实时更新功能远程实时更新应用的 JavaScript bundle。直接向用户推送 JS 更新,无需通过应用商店审核流程即可立即修复错误和发布新功能。
 
 <Aside>
 
-Live Updates are limited to JavaScript bundle changes. If you need to update native code, such as adding or removing a plugin or changing native project configuration, you'll need to submit a new native binary build to the app stores.
+实时更新仅限于 JavaScript bundle 更改。如果您需要更新原生代码,例如添加或删除插件或更改原生项目配置,则需要向应用商店提交新的原生二进制构建。
 
 </Aside>
 
-## How Live Updates Work
+## 实时更新的工作原理
 
-Capgo's Live Update system has two key components:
+Capgo 的实时更新系统有两个关键组件:
 
-1. The Capgo SDK, which you install in your app. The SDK checks for available updates and downloads them in the background.
+1. Capgo SDK,您将其安装在应用中。SDK 检查可用更新并在后台下载它们。
 
-2. Channels, which let you target updates to specific groups of users. You can use channels to manage different release tracks, such as `Production`, `Staging`, and `Dev`.
+2. 频道,让您将更新定向到特定的用户组。您可以使用频道来管理不同的发布轨道,例如 `Production`、`Staging` 和 `Dev`。
 
-When you upload a new JS bundle to Capgo and assign it to a channel, the Capgo SDK in apps configured for that channel will detect the update and download it. The next time the app restarts, the new bundle will be loaded.
+当您上传新的 JS bundle 到 Capgo 并将其分配给频道时,为该频道配置的应用中的 Capgo SDK 将检测到更新并下载它。下次应用重新启动时,将加载新的 bundle。
 
-## Getting Started
+## 入门
 
-To start using Live Updates, follow these steps:
+要开始使用实时更新,请按照以下步骤操作:
 
 <Steps>
 
-1. Complete the [Capgo Quickstart](/docs/getting-started/quickstart) to set up your app in Capgo and install the Capgo SDK.
+1. 完成 [Capgo 快速入门](/docs/getting-started/quickstart)以在 Capgo 中设置您的应用并安装 Capgo SDK。
 
 2. In your app code, call `CapacitorUpdater.notifyAppReady()` after your app has finished initializing. This tells the Capgo SDK that your app is ready to receive updates.
 

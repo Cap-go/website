@@ -1,8 +1,6 @@
 ---
-title: Debugging
-description: >-
-  How to debug your updates of Capgo and understand the issue you can have with
-  your configuration
+title: "调试"
+description: "如何调试 Capgo 的更新并理解配置可能出现的问题"
 sidebar:
   order: 6
 locale: zh
@@ -10,165 +8,165 @@ locale: zh
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Understanding cloud logs:
+## 理解云日志:
 
-### Sent from the backend
+### 从后端发送
 
-| code                          | Description                                                                                                                                                                 |
+| 代码                          | 描述                                                                                                                                                                 |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **InvalidIp**                                    | The user is located in a Google data center and the update is less than 4 hours old. This is done to prevent Google bots' devices from counting as devices in your account. |
-| **needPlanUpgrade** (previously **needUpgrade**) | Indicates that you have reached the limit of your plan, and the device will not receive updates until you upgrade or until the next month.                                  |
-| **noNew**                                        | The device has the latest available version.                                                                                                                                |
-| **disablePlatformIos**                           | The device is on the iOS platform, but that is disabled in the channel settings.                                                                                            |
-| **disablePlatformAndroid**                       | The device is on the Android platform, but that is disabled in the channel settings.                                                                                        |
-| **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
-| **disableAutoUpdateUnderNative**                 | The device has version (`1.2.3`), and the channel has an update (`1.2.2`) under the device version to send, but that is disabled in the channel settings.                   |
-| **disableDevBuild**                              | The device has a dev build, but that is disabled in the channel settings.                                                                                                   |
-| **disableEmulator**                              | The device is an emulator, but that is disabled in the channel settings.                                                                                                    |
-| **cannotGetBundle**                          | Failed to generate a valid signed URL for the bundle download. This occurs when the bundle URL generation fails or returns an invalid URL (not starting with http/https) and there's no manifest available as a fallback.                                                                                          |
-| **cannotUpdateViaPrivateChannel**              | The device tried to self-associate with a private channel, but the channel settings don't allow device self-association (`allow_device_self_set` is false) and the channel is not public.                                                                                    |
-| **channelMisconfigured**                       | The channel is configured to disable auto-update by version number (`disable_auto_update: 'version_number'`), but the bundle's `min_update_version` field is null, making it impossible to determine which devices should receive the update.                                                                                                                 |
-| **disableAutoUpdateMetadata**                  | Auto-update is disabled by version number metadata. The channel requires the device's version to be at least `min_update_version`, but the device's current version is lower than this threshold.                                                                                                         |
-| **disableAutoUpdateToMajor**                   | Channel setting `disable_auto_update: 'major'` prevents updates that would increase the major version number (e.g., blocking 1.x.x from updating to 2.x.x).                                                                                             |
-| **disableAutoUpdateToMinor**                   | Channel setting `disable_auto_update: 'minor'` prevents updates that would increase the minor version number (e.g., blocking 1.2.x from updating to 1.3.x).                                                                                             |
-| **disableAutoUpdateToPatch**                   | Channel setting `disable_auto_update: 'patch'` prevents updates that would increase the patch version number, or allows only patch-level updates within the same major.minor version (e.g., 1.2.3 can update to 1.2.4 but not 1.2.2 or 1.3.0).                                                                                             |
-| **missingBundle**                              | The bundle assigned to this channel has no downloadable content. This means the bundle has no `external_url`, no `r2_path`, it's not a built-in version, and there are no manifest entries available for download.                                                                                                                   |
-| **NoChannelOrOverride**                        | No default channel is configured for this app and the device has no specific channel override assigned. At least one must be present for updates to work.                                                                                                     |
-| **rateLimited**                                | The device has been rate limited due to excessive requests.                                                                                                        |
+| **InvalidIp**                                    | 用户位于 Google 数据中心且更新小于 4 小时。这样做是为了防止 Google 机器人的设备计入您帐户的设备数。 |
+| **needPlanUpgrade**(以前称为 **needUpgrade**)    | 表示您已达到计划的限制,在您升级或下个月之前,设备将不会收到更新。                                  |
+| **noNew**                                        | 设备具有最新可用版本。                                                                                                                                |
+| **disablePlatformIos**                           | 设备在 iOS 平台上,但在频道设置中已禁用该平台。                                                                                            |
+| **disablePlatformAndroid**                       | 设备在 Android 平台上,但在频道设置中已禁用该平台。                                                                                        |
+| **disableAutoUpdate**                            | "major" \| "minor" \| "version_number" \| "none"                                       |
+| **disableAutoUpdateUnderNative**                 | 设备版本为 (`1.2.3`),频道有一个要发送的更新 (`1.2.2`) 低于设备版本,但在频道设置中已禁用。                   |
+| **disableDevBuild**                              | 设备有开发构建,但在频道设置中已禁用。                                                                                                   |
+| **disableEmulator**                              | 设备是模拟器,但在频道设置中已禁用。                                                                                                    |
+| **cannotGetBundle**                          | 无法为 bundle 下载生成有效的签名 URL。当 bundle URL 生成失败或返回无效 URL(不以 http/https 开头)且没有可用的清单作为后备时会发生这种情况。                                                                                          |
+| **cannotUpdateViaPrivateChannel**              | 设备尝试自我关联到私有频道,但频道设置不允许设备自我关联(`allow_device_self_set` 为 false)且频道不是公共的。                                                                                    |
+| **channelMisconfigured**                       | 频道配置为按版本号禁用自动更新(`disable_auto_update: 'version_number'`),但 bundle 的 `min_update_version` 字段为 null,使得无法确定哪些设备应该接收更新。                                                                                                                 |
+| **disableAutoUpdateMetadata**                  | 按版本号元数据禁用自动更新。频道要求设备版本至少为 `min_update_version`,但设备的当前版本低于此阈值。                                                                                                         |
+| **disableAutoUpdateToMajor**                   | 频道设置 `disable_auto_update: 'major'` 阻止会增加主版本号的更新(例如,阻止 1.x.x 更新到 2.x.x)。                                                                                             |
+| **disableAutoUpdateToMinor**                   | 频道设置 `disable_auto_update: 'minor'` 阻止会增加次版本号的更新(例如,阻止 1.2.x 更新到 1.3.x)。                                                                                             |
+| **disableAutoUpdateToPatch**                   | 频道设置 `disable_auto_update: 'patch'` 阻止会增加补丁版本号的更新,或仅允许在相同 major.minor 版本内的补丁级更新(例如,1.2.3 可以更新到 1.2.4 但不能更新到 1.2.2 或 1.3.0)。                                                                                             |
+| **missingBundle**                              | 分配给此频道的 bundle 没有可下载的内容。这意味着 bundle 没有 `external_url`,没有 `r2_path`,它不是内置版本,并且没有可供下载的清单条目。                                                                                                                   |
+| **NoChannelOrOverride**                        | 此应用未配置默认频道,并且设备没有分配特定的频道覆盖。必须至少存在一个才能使更新工作。                                                                                                     |
+| **rateLimited**                                | 设备由于过多请求而受到速率限制。                                                                                                        |
 
 
-### Sent from the device
+### 从设备发送
 
-| code  | Description                                                                       |
+| 代码  | 描述                                                                       |
 | --------------------- | --------------------------------------------------------------------------------- |
-| **ping**              | Internal test action used to verify the stats system is working correctly.        |
-| **get**               | Info for downloading the new version has been sent to the device.                 |
-| **delete**            | One bundle has been deleted on the device.                                        |
-| **set**               | A bundle has been set on the device.                                              |
-| **set_fail**          | The bundle failed to set.                                                         |
-| **reset**             | The device reset to the `builtin` bundle.                                         |
-| **download_XX**       | A new bundle has been downloaded - progress indicated by XX% (increments of 10%). |
-| **download_complete** | The new bundle has finished downloading.                                          |
-| **download_manifest_start** | The device started downloading the update manifest.                             |
-| **download_manifest_complete** | The device finished downloading the update manifest.                          |
-| **download_zip_start** | The device started downloading the bundle archive.                                   |
-| **download_zip_complete** | The device finished downloading the bundle archive.                                 |
-| **download_manifest_file_fail** | One manifest entry failed to download; the stats payload puts `version_name` in the form `version:fileName` to pinpoint the asset. |
-| **download_manifest_checksum_fail** | The manifest file failed checksum validation.                           |
-| **download_manifest_brotli_fail** | The manifest file failed to decompress using Brotli.                       |
-| **download_fail**     | The new bundle failed to download.                                                |
-| **update_fail**       | The new bundle has been installed but failed to call `notifyAppReady`.            |
-| **checksum_fail**     | The new bundle failed to validate the checksum. If you're using Capgo Cloud and encounter this error, it typically means your app version is expecting a different checksum type. The latest version of the CLI and plugins (version 5.10.0+, 6.25.0+ or 7+) use SHA256 checksums, while older plugins used CRC32. If you see a checksum fail, check if the checksum is CRC32 (a shorter hash) rather than SHA256. This usually indicates the bundle was uploaded with an old version of the CLI. Verify your bundle version in the Capgo dashboard - bundles created since version 5.10.0/6.25.0/7 should use SHA256. If you're seeing CRC32 checksums, ensure you have the latest plugin version installed locally (the CLI checks your local plugin version to determine which checksum type to upload), then upgrade your CLI and re-upload the bundle.                                   |
-| **windows_path_fail** | The zip has files who contain windows path who are illegal                        |
-| **canonical_path_fail** | The path of files is not canonical                                              |
-| **directory_path_fail** | There is an error in the path of zip files                                         |
-| **unzip_fail**          | unzip failed                                                                   |
-| **low_mem_fail** | Download failed because of low memory in the device                                    |
-| **app_moved_to_background** | The application entered the background state.                                   |
-| **app_moved_to_foreground** | The application entered the foreground state.                                   |
-| **decrypt_fail**        | Failed to decrypt the downloaded bundle.                                          |
-| **getChannel**          | The current channel for the device was queried.                                   |
-| **setChannel**          | A channel was successfully set for the device.                                    |
-| **uninstall**           | The application was uninstalled or Capgo data cleared.                            |
-| **blocked_by_server_url** | Server.url is present in your capacitor config, this make Capacitor serve remote url and ignore local files, while our updater is made to function with local file, Server.url Is consider by Capacitor Makers as bad practice in production and will lead to many issue and plugin not working correctly.                         |
+| **ping**              | 用于验证统计系统是否正常工作的内部测试操作。        |
+| **get**               | 下载新版本的信息已发送到设备。                 |
+| **delete**            | 设备上已删除一个 bundle。                                        |
+| **set**               | 设备上已设置一个 bundle。                                              |
+| **set_fail**          | bundle 设置失败。                                                         |
+| **reset**             | 设备重置为 `builtin` bundle。                                         |
+| **download_XX**       | 已下载新 bundle - XX% 表示进度(以 10% 递增)。 |
+| **download_complete** | 新 bundle 已完成下载。                                          |
+| **download_manifest_start** | 设备开始下载更新清单。                             |
+| **download_manifest_complete** | 设备完成下载更新清单。                          |
+| **download_zip_start** | 设备开始下载 bundle 归档。                                   |
+| **download_zip_complete** | 设备完成下载 bundle 归档。                                 |
+| **download_manifest_file_fail** | 一个清单条目下载失败;统计负载将 `version_name` 以 `version:fileName` 的形式放置以确定资产。 |
+| **download_manifest_checksum_fail** | 清单文件校验和验证失败。                           |
+| **download_manifest_brotli_fail** | 清单文件使用 Brotli 解压失败。                       |
+| **download_fail**     | 新 bundle 下载失败。                                                |
+| **update_fail**       | 新 bundle 已安装但未能调用 `notifyAppReady`。            |
+| **checksum_fail**     | 新 bundle 校验和验证失败。如果您使用 Capgo Cloud 并遇到此错误,这通常意味着您的应用版本期望不同的校验和类型。最新版本的 CLI 和插件(版本 5.10.0+、6.25.0+ 或 7+)使用 SHA256 校验和,而旧插件使用 CRC32。如果看到校验和失败,请检查校验和是否为 CRC32(较短的哈希)而不是 SHA256。这通常表示 bundle 是用旧版本的 CLI 上传的。在 Capgo 仪表板中验证您的 bundle 版本 - 自版本 5.10.0/6.25.0/7 以来创建的 bundle 应使用 SHA256。如果您看到 CRC32 校验和,请确保在本地安装了最新的插件版本(CLI 检查您的本地插件版本以确定要上传哪种校验和类型),然后升级您的 CLI 并重新上传 bundle。                                   |
+| **windows_path_fail** | zip 中包含非法的 Windows 路径文件                        |
+| **canonical_path_fail** | 文件路径不是规范的                                              |
+| **directory_path_fail** | zip 文件路径中存在错误                                         |
+| **unzip_fail**          | 解压失败                                                                   |
+| **low_mem_fail** | 由于设备内存不足导致下载失败                                    |
+| **app_moved_to_background** | 应用程序进入后台状态。                                   |
+| **app_moved_to_foreground** | 应用程序进入前台状态。                                   |
+| **decrypt_fail**        | 解密下载的 bundle 失败。                                          |
+| **getChannel**          | 查询设备的当前频道。                                   |
+| **setChannel**          | 成功为设备设置频道。                                    |
+| **uninstall**           | 应用程序已卸载或清除 Capgo 数据。                            |
+| **blocked_by_server_url** | capacitor 配置中存在 Server.url,这使 Capacitor 提供远程 url 并忽略本地文件,而我们的更新程序是为本地文件功能设计的。Server.url 被 Capacitor 制造商视为生产中的不良做法,并将导致许多问题和插件无法正常工作。                         |
 
-### Bundle status
+### Bundle 状态
 
-* `SUCCESS`: install bundle done
-* `ERROR`: install or download failed
-* `PENDING`: Download done, pending release
-* `DELETED`: Bundle deleted, still presented for stats
-* `DOWNLOADING`: Currently downloading a bundle
+* `SUCCESS`: 安装 bundle 完成
+* `ERROR`: 安装或下载失败
+* `PENDING`: 下载完成,待发布
+* `DELETED`: Bundle 已删除,仍为统计信息呈现
+* `DOWNLOADING`: 当前正在下载 bundle
 
-## Understanding device logs:
+## 理解设备日志:
 
-### Debug command:
+### 调试命令:
 
-There is a debug command for Capgo cloud users.
+Capgo 云用户有一个调试命令。
 
 ```bash
 npx @capgo/cli@latest app debug
 ```
 
-This will allow you to check all events happening in the app and find a solution if updates don't happen.
+这将允许您检查应用中发生的所有事件,并在更新未发生时找到解决方案。
 
-### IOS
+### iOS
 
-to find your logs on Xcode
+在 Xcode 上查找您的日志
 
 <LinkCard
-    title="Getting the Device Log in Xcode"
+    title="在 Xcode 中获取设备日志"
     href="https://intercom.help/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
 />
 
 ### Android:
 
-to find your logs on Android studio
+在 Android Studio 上查找您的日志
 
 <LinkCard
-    title="View logs with Logcat"
+    title="使用 Logcat 查看日志"
     href="https://developer.android.com/studio/debug/am-logcat"
 />
 
-### Explanations Logs
+### 日志说明
 
-* `Failed to download from` **=>** same as **download\_fail**
-* `notifyAppReady was not called, roll back current bundle` => same as as **update\_fail**
+* `Failed to download from` **=>** 与 **download\_fail** 相同
+* `notifyAppReady was not called, roll back current bundle` => 与 **update\_fail** 相同
 
-## Finding the downloaded bundle in your device
+## 在设备中查找下载的 bundle
 
 ### iOS
 
-To debug on iOS, you need to dump the app on your computer, you can do it like this:
+要在 iOS 上调试,您需要将应用转储到计算机上,可以这样做:
 
-Xcode has a built-in feature for inspecting the file system of developer-installed apps on an iOS device.
-![Xcode Window menu showing Devices and Simulators option](/ios_debug_update_1.webp)
+Xcode 具有内置功能,用于检查 iOS 设备上开发者安装的应用的文件系统。
+![Xcode Window 菜单显示设备和模拟器选项](/ios_debug_update_1.webp)
 
-To achieve this:
+要实现这一点:
 
-* Connect your device to your Mac and select Window > Devices in the Xcode menubar.
-* Select your device in the left pane under the Devices section.
-* This will show a list of developer-installed apps for that device.
-* Select the app you want to inspect and then select the 3 dots icon near the bottom of the screen.
-* Here you can view the current file system by selecting download a snapshot of it.
+* 将您的设备连接到 Mac,在 Xcode 菜单栏中选择 Window > Devices。
+* 在左侧窗格的 Devices 部分下选择您的设备。
+* 这将显示该设备的开发者安装的应用列表。
+* 选择要检查的应用,然后选择屏幕底部附近的 3 个点图标。
+* 在这里,您可以通过选择下载快照来查看当前文件系统。
 
-![Xcode Devices panel showing app container download option](/ios_debug_update_2.webp)
+![Xcode Devices 面板显示应用容器下载选项](/ios_debug_update_2.webp)
 
-Selecting Download Container... will download and export a snapshot of the file system as a .xcappdata file that you can browse through.
+选择 Download Container... 将下载并导出文件系统的快照作为 .xcappdata 文件,您可以浏览该文件。
 
-![Downloaded xcappdata file with Show Package Contents context menu](/ios_debug_update_3.webp)
+![已下载的 xcappdata 文件及显示包内容上下文菜单](/ios_debug_update_3.webp)
 
-Right-click on this file and select Show Package Contents to open the folder.
+右键单击此文件并选择 Show Package Contents 以打开文件夹。
 
-Open the App Data folder, and you should now see a few folders like Documents, Library, tmp, etc.
+打开 App Data 文件夹,您现在应该看到几个文件夹,如 Documents、Library、tmp 等。
 
-![iOS app container folder structure showing Documents and Library folders](/ios_debug_update_4.webp)
+![iOS 应用容器文件夹结构显示 Documents 和 Library 文件夹](/ios_debug_update_4.webp)
 
-Then you will find a version in 2 folders:
+然后您将在 2 个文件夹中找到一个版本:
 
-`library/NoCloud/ionic_built_snapshots` is necessary after the app reboot
+`library/NoCloud/ionic_built_snapshots` 在应用重启后是必需的
 
-and `documents/versions` for hot reload
+以及 `documents/versions` 用于热重载
 
 ### Android
 
-To debug on Android, you need to access the device from Android Studio:
+要在 Android 上调试,您需要从 Android Studio 访问设备:
 
-* Click View > Tool Windows > Device File Explorer or click the Device File Explorer button in the tool window bar to open the Device File Explorer.
-* Select a device from the dropdown list.
-* Open the path **data/data/APP\_NAME/** where **APP\_NAME is your app ID.**
+* 单击 View > Tool Windows > Device File Explorer 或单击工具窗口栏中的 Device File Explorer 按钮以打开 Device File Explorer。
+* 从下拉列表中选择一个设备。
+* 打开路径 **data/data/APP\_NAME/** 其中 **APP\_NAME 是您的应用 ID。**
 
-![Android Studio Device File Explorer showing app data directory](/android_debug_update.webp)
+![Android Studio Device File Explorer 显示应用数据目录](/android_debug_update.webp)
 
-Then Find the `versions` folder to see all the versions
+然后找到 `versions` 文件夹以查看所有版本
 
-:::tip[Did you know?]
-On Android, all versions are stored in one folder, unlike IOS where it has to be duplicated in two locations.
+:::tip[您知道吗?]
+在 Android 上,所有版本都存储在一个文件夹中,与 iOS 不同,iOS 必须在两个位置复制。
 :::
 
-## Understanding ios production crash logs
+## 理解 iOS 生产崩溃日志
 
 <LinkCard
-    title="How to review your app's crash logs"
+    title="如何查看您应用的崩溃日志"
     href="https://developer.apple.com/news/?id=nra79npr"
 />

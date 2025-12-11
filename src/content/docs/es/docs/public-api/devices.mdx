@@ -1,34 +1,31 @@
 ---
-title: Devices
-description: >-
-  Docs for managing devices via Capgo API, covering tracking, versioning, and
-  channel assignments for app installations.
+title: "Devices"
+description: "Documentación para gestionar dispositivos a través de la API de Capgo, que cubre seguimiento, versiones y asignaciones de canales para instalaciones de aplicaciones."
 sidebar:
   order: 7
-locale: es
 ---
 
-Devices represent individual installations of your app that are managed by Capgo. The Devices API allows you to track and manage devices, including their versions, channels, and update status.
+Los Devices representan instalaciones individuales de su aplicación que son gestionadas por Capgo. La API de Devices le permite rastrear y gestionar dispositivos, incluyendo sus versiones, canales y estado de actualización.
 
-:::note[Data Retention]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
+:::note[Retención de Datos]
+Los datos del dispositivo se retienen durante **90 días** desde la última actividad del dispositivo. Los dispositivos que no se han conectado a Capgo dentro de este período se eliminarán automáticamente del sistema. Los dispositivos activos se rastrean continuamente a medida que verifican las actualizaciones.
 :::
 
-## Understanding Devices
+## Comprender los Devices
 
-Each device has unique characteristics and states:
-- **Platform**: iOS or Android
-- **Version**: Current bundle version and native build version
-- **Environment**: Production or development, emulator or physical device
-- **Channel**: Current update channel assignment
-- **Custom ID**: Optional identifier for your own tracking purposes
+Cada dispositivo tiene características y estados únicos:
+- **Platform**: iOS o Android
+- **Version**: Versión actual del bundle y versión de compilación nativa
+- **Environment**: Producción o desarrollo, emulador o dispositivo físico
+- **Channel**: Asignación actual del canal de actualización
+- **Custom ID**: Identificador opcional para sus propios fines de seguimiento
 
-## Best Practices
+## Mejores Prácticas
 
-1. **Version Tracking**: Monitor device versions to ensure update adoption
-2. **Channel Management**: Assign devices to appropriate channels based on testing needs
-3. **Environment Awareness**: Handle different environments (prod/dev/emulator) appropriately
-4. **Custom Identification**: Use custom IDs to integrate with your existing systems
+1. **Seguimiento de Versiones**: Monitoree las versiones de los dispositivos para asegurar la adopción de actualizaciones
+2. **Gestión de Canales**: Asigne dispositivos a canales apropiados según las necesidades de prueba
+3. **Conciencia del Entorno**: Maneje diferentes entornos (prod/dev/emulador) apropiadamente
+4. **Identificación Personalizada**: Use IDs personalizados para integrar con sus sistemas existentes
 
 ## Endpoints
 
@@ -36,7 +33,7 @@ Each device has unique characteristics and states:
 
 `https://api.capgo.app/device/`
 
-Link a device to a specific version or channel.
+Vincular un dispositivo a una versión o canal específico.
 
 #### Request Body
 
@@ -49,7 +46,7 @@ interface DeviceLink {
 }
 ```
 
-#### Example Request
+#### Solicitud de Ejemplo
 
 ```bash
 curl -X POST \
@@ -63,7 +60,7 @@ curl -X POST \
   https://api.capgo.app/device/
 ```
 
-#### Success Response
+#### Respuesta Exitosa
 
 ```json
 {
@@ -75,15 +72,15 @@ curl -X POST \
 
 `https://api.capgo.app/device/`
 
-Retrieve device information. Uses cursor-based pagination for efficient retrieval of large device lists.
+Recuperar información del dispositivo. Utiliza paginación basada en cursor para una recuperación eficiente de listas grandes de dispositivos.
 
-#### Query Parameters
-- `app_id`: Required. The ID of your app
-- `device_id`: Optional. Specific device ID to retrieve a single device
-- `cursor`: Optional. Cursor from previous response for pagination
-- `limit`: Optional. Number of devices per page (default: 50)
+#### Parámetros de Consulta
+- `app_id`: Requerido. El ID de su aplicación
+- `device_id`: Opcional. ID de dispositivo específico para recuperar un solo dispositivo
+- `cursor`: Opcional. Cursor de la respuesta anterior para paginación
+- `limit`: Opcional. Número de dispositivos por página (predeterminado: 50)
 
-#### Example Requests
+#### Solicitud de Ejemplos
 
 ```bash
 # Get all devices (first page)
@@ -99,15 +96,15 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/device/?app_id=app_123&cursor=2024-01-01T00:00:00Z|device_456"
 ```
 
-#### Response Type (List)
+#### Tipo de Respuesta (Lista)
 
-When requesting multiple devices (no `device_id` parameter):
+Al solicitar múltiples dispositivos (sin parámetro `device_id`):
 
 ```typescript
 interface DeviceListResponse {
   data: Device[];
-  nextCursor?: string;  // Pass this as 'cursor' param to get next page
-  hasMore: boolean;     // true if more pages available
+  nextCursor?: string;  // Pase esto como parámetro 'cursor' para obtener la siguiente página
+  hasMore: boolean;     // true si hay más páginas disponibles
 }
 
 interface Device {
@@ -127,9 +124,9 @@ interface Device {
 }
 ```
 
-#### Response Type (Single Device)
+#### Tipo de Respuesta (Dispositivo Individual)
 
-When requesting a specific device with `device_id` parameter, returns the device object directly:
+Al solicitar un dispositivo específico con parámetro `device_id`, devuelve el objeto de dispositivo directamente:
 
 ```typescript
 interface Device {
@@ -149,7 +146,7 @@ interface Device {
 }
 ```
 
-#### Example Response (List)
+#### Respuesta de Ejemplo (Lista)
 
 ```json
 {
@@ -174,7 +171,7 @@ interface Device {
 }
 ```
 
-#### Example Response (Single Device)
+#### Respuesta de Ejemplo (Dispositivo Individual)
 
 ```json
 {
@@ -198,11 +195,11 @@ interface Device {
 
 `https://api.capgo.app/device/`
 
-Unlink a device from its channel override. This resets the device to use its default channel.
+Desvincular un dispositivo de su anulación de canal. Esto restablece el dispositivo para usar su canal predeterminado.
 
-:::note[Delete device]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
-You can't delete a device with this endpoint, it only affect the channel override.
+:::note[Eliminar dispositivo]
+Los datos del dispositivo se retienen durante **90 días** desde la última actividad del dispositivo. Los dispositivos que no se han conectado a Capgo dentro de este período se eliminarán automáticamente del sistema. Los dispositivos activos se rastrean continuamente a medida que verifican las actualizaciones.
+No puede eliminar un dispositivo con este endpoint, solo afecta la anulación del canal.
 :::
 
 #### Query Parameters
@@ -214,7 +211,7 @@ interface Device {
 }
 ```
 
-#### Example Request
+#### Solicitud de Ejemplo
 
 ```bash
 curl -X DELETE \
@@ -227,7 +224,7 @@ curl -X DELETE \
   https://api.capgo.app/device/
 ```
 
-#### Success Response
+#### Respuesta Exitosa
 
 ```json
 {
@@ -235,9 +232,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Manejo de Errores
 
-Common error scenarios and their responses:
+Escenarios de error comunes y sus respuestas:
 
 ```json
 // Device not found
@@ -265,7 +262,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## Casos de Uso Comunes
 
 1. **Beta Device Registration**
 ```typescript
@@ -290,9 +287,9 @@ Common error scenarios and their responses:
 // Use DELETE endpoint to remove overrides
 ```
 
-## Tips for Device Management
+## Consejos para la Gestión de Dispositivos
 
-1. **Monitoring**: Regularly check device status and version distribution
-2. **Testing**: Use custom IDs to identify test devices easily
-3. **Troubleshooting**: Track device updates and channel assignments
-4. **Version Control**: Monitor native app versions to ensure compatibility 
+1. **Monitoreo**: Verifique regularmente el estado del dispositivo y la distribución de versiones
+2. **Pruebas**: Use IDs personalizados para identificar fácilmente los dispositivos de prueba
+3. **Solución de Problemas**: Rastree las actualizaciones de dispositivos y las asignaciones de canales
+4. **Control de Versiones**: Monitoree las versiones nativas de la aplicación para garantizar la compatibilidad 

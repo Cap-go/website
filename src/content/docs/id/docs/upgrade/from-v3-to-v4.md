@@ -1,5 +1,5 @@
 ---
-title: V3 から V4 へ
+title: Dari V3 ke V4
 description: Bagaimana Cara Mengupgrade dari V3 ke V4
 sidebar:
   order: 3

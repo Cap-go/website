@@ -1,14 +1,12 @@
 ---
-title: Update API Endpoint
-description: >-
-  How to build your update server API endpoint to respond to Capgo plugin
-  requests with proper bundle information and checksums
+title: "更新 API 端点"
+description: "如何构建更新服务器 API 端点以使用正确的 bundle 信息和校验和响应 Capgo 插件请求"
 sidebar:
   order: 6
 locale: zh
 ---
 
-Here is an example of code in JavaScript to send an update to the plugin
+这是向插件发送更新的 JavaScript 代码示例
 
 ```typescript
 interface AppInfos {
@@ -66,9 +64,9 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-## Response Format
+## 响应格式
 
-For **non-encrypted bundles**, your endpoint should return:
+对于**非加密 bundle**,您的端点应返回:
 
 ```json
 {
@@ -78,7 +76,7 @@ For **non-encrypted bundles**, your endpoint should return:
 }
 ```
 
-For **encrypted bundles**, you also need to include the session key:
+对于**加密 bundle**,您还需要包含会话密钥:
 
 ```json
 {
@@ -89,7 +87,7 @@ For **encrypted bundles**, you also need to include the session key:
 }
 ```
 
-And if no update or error, add the `message` key and optionally an `error`:
+如果没有更新或出现错误,请添加 `message` 键和可选的 `error`:
 
 ```json
 {
@@ -99,15 +97,15 @@ And if no update or error, add the `message` key and optionally an `error`:
 }
 ```
 
-## Field Descriptions
+## 字段说明
 
-- **`checksum`**: SHA256 hash of your bundle zip file for integrity verification
-- **`session_key`**: Required only for encrypted bundles - this is the `ivSessionKey` returned by the encrypt command
-- **`version`**: Version identifier in semver format
-- **`url`**: HTTPS URL where the bundle can be downloaded
+- **`checksum`**: 您的 bundle zip 文件的 SHA256 哈希,用于完整性验证
+- **`session_key`**: 仅加密 bundle 需要 - 这是 encrypt 命令返回的 `ivSessionKey`
+- **`version`**: semver 格式的版本标识符
+- **`url`**: 可以下载 bundle 的 HTTPS URL
 
-## Bundle Creation
+## Bundle 创建
 
-To learn how to create compatible bundles and generate checksums, see the [Auto Update documentation](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum).
+要了解如何创建兼容的 bundle 并生成校验和,请参阅[自动更新文档](/docs/plugin/self-hosted/auto-update/#generating-bundle-checksum)。
 
-For encrypted bundles, see the [Encrypted Bundles documentation](/docs/plugin/self-hosted/encrypted-bundles/) which explains the complete encryption workflow.
+对于加密 bundle,请参阅[加密 Bundle 文档](/docs/plugin/self-hosted/encrypted-bundles/),其中说明了完整的加密工作流程。

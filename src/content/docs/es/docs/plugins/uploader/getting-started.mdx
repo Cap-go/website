@@ -57,7 +57,7 @@ const startUpload = async () => {
       'userId': '12345',
       'type': 'profile'
     },
-    notificationTitle: 'Uploading Photo'
+    notificationTitle: 'Subiendo Foto'
   });
 
   console.log('Upload ID:', upload.id);
@@ -91,7 +91,7 @@ const cancelUpload = async (uploadId: string) => {
 // Obtener todas las subidas activas
 const getActiveUploads = async () => {
   const uploads = await Uploader.getUploads();
-  console.log('Active uploads:', uploads);
+  console.log('Subidas activas:', uploads);
 };
 ```
 
@@ -185,8 +185,8 @@ const uploadWithFormData = async () => {
     serverUrl: 'https://api.example.com/upload',
     method: 'POST',
     parameters: {
-      'name': 'profile-photo',
-      'description': 'User profile photo'
+      'name': 'foto-perfil',
+      'description': 'Foto de perfil de usuario'
     },
     headers: {
       'X-API-Key': 'your-api-key'
@@ -223,7 +223,7 @@ const smartUpload = async () => {
     await startLargeUpload();
   } else if (status.connectionType === 'cellular') {
     // Encolar para después o advertir al usuario
-    console.log('Using cellular data');
+    console.log('Usando datos celulares');
   }
 };
 ```
@@ -268,7 +268,7 @@ const smartUpload = async () => {
          maxRetries: 3
        });
      } catch (error) {
-       console.error('Upload failed after retries:', error);
+       console.error('Subida fallida después de reintentos:', error);
      }
    };
    ```
@@ -278,8 +278,8 @@ const smartUpload = async () => {
    await Uploader.startUpload({
      filePath: 'file:///path/to/file',
      serverUrl: 'https://server.com/upload',
-     notificationTitle: 'Uploading File',
-     notificationBody: 'Your file is being uploaded...'
+     notificationTitle: 'Subiendo Archivo',
+     notificationBody: 'Tu archivo se está subiendo...'
    });
    ```
 

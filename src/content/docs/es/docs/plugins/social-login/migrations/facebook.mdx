@@ -1,65 +1,59 @@
 ---
-title: >-
-  Migration Guide from @capacitor-community/facebook-login to
-  @capgo/capacitor-social-login
-description: >-
-  This detailed guide provides step-by-step instructions for transitioning from
-  the @capacitor-community/facebook-login plugin to the
-  @capgo/capacitor-social-login plugin, ensuring a smooth migration process with
-  enhanced features.
+title: Guía de Migración de @capacitor-community/facebook-login a @capgo/capacitor-social-login
+description: Esta guía detallada proporciona instrucciones paso a paso para la transición del plugin @capacitor-community/facebook-login al plugin @capgo/capacitor-social-login, asegurando un proceso de migración fluido con funciones mejoradas.
 sidebar:
   order: 2
 locale: es
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## Overview
+## Descripción General
 
-This guide provides comprehensive instructions for migrating from `@capacitor-community/facebook-login` to `@capgo/capacitor-social-login`. The new plugin modernizes Facebook authentication with a unified API that supports multiple social providers, improved TypeScript support, and enhanced capabilities.
+Esta guía proporciona instrucciones completas para migrar de `@capacitor-community/facebook-login` a `@capgo/capacitor-social-login`. El nuevo plugin moderniza la autenticación de Facebook con una API unificada que admite múltiples proveedores sociales, soporte mejorado de TypeScript y capacidades mejoradas.
 
-## Installation
+## Instalación
 
 <Steps>
-1. Remove the old package:
+1. Elimina el paquete antiguo:
    ```bash
    npm uninstall @capacitor-community/facebook-login
    ```
 
-2. Install the new package:
+2. Instala el nuevo paquete:
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Code Changes
+## Cambios en el Código
 
-### Import Changes
+### Cambios en las Importaciones
 ```diff
 - import { FacebookLogin } from '@capacitor-community/facebook-login';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### Initialization
+### Inicialización
 
-**Key Change**: The new package requires explicit setup in your code:
+**Cambio Clave**: El nuevo paquete requiere configuración explícita en tu código:
 
 ```diff
-- // Old package required no explicit initialization in code
-- // Configuration was done only in native platforms
+- // El paquete antiguo no requería inicialización explícita en el código
+- // La configuración se realizaba solo en las plataformas nativas
 
-+ // New package requires explicit initialization
++ // El nuevo paquete requiere inicialización explícita
 + await SocialLogin.initialize({
 +   facebook: {
-+     appId: 'YOUR_FACEBOOK_APP_ID',        // Required for web and Android
-+     clientToken: 'YOUR_CLIENT_TOKEN'       // Required for Android
++     appId: 'YOUR_FACEBOOK_APP_ID',        // Requerido para web y Android
++     clientToken: 'YOUR_CLIENT_TOKEN'       // Requerido para Android
 +   }
 + });
 ```
 
-### Login
+### Inicio de Sesión
 
-The login method now accepts a provider parameter:
+El método de inicio de sesión ahora acepta un parámetro de proveedor:
 
 ```diff
 - const FACEBOOK_PERMISSIONS = ['email', 'public_profile'];
@@ -75,12 +69,12 @@ The login method now accepts a provider parameter:
 + });
 ```
 
-### Response Type Changes
+### Cambios en el Tipo de Respuesta
 
-The response structure has been modernized with a more comprehensive profile object:
+La estructura de respuesta se ha modernizado con un objeto de perfil más completo:
 
 ```typescript
-// Old response type
+// Tipo de respuesta antiguo
 interface FacebookLoginResponse {
   accessToken: {
     applicationId: string;
@@ -92,7 +86,7 @@ interface FacebookLoginResponse {
   recentlyDeniedPermissions: string[];
 }
 
-// New response type
+// Nuevo tipo de respuesta
 interface FacebookLoginResponse {
   provider: 'facebook';
   result: {
@@ -122,12 +116,12 @@ interface FacebookLoginResponse {
 }
 ```
 
-**Key Differences**:
-- Response now includes a `provider` field identifying the authentication provider
-- More detailed `profile` object with additional user information
-- Consistent structure across all social login providers
+**Diferencias Clave**:
+- La respuesta ahora incluye un campo `provider` que identifica el proveedor de autenticación
+- Objeto `profile` más detallado con información adicional del usuario
+- Estructura consistente en todos los proveedores de inicio de sesión social
 
-### Checking Login Status
+### Verificar Estado de Inicio de Sesión
 ```diff
 - const result = await FacebookLogin.getCurrentAccessToken();
 - const isLoggedIn = result && result.accessToken;
@@ -138,7 +132,7 @@ interface FacebookLoginResponse {
 + const isLoggedIn = status.isLoggedIn;
 ```
 
-### Logout
+### Cerrar Sesión
 ```diff
 - await FacebookLogin.logout();
 
@@ -147,40 +141,40 @@ interface FacebookLoginResponse {
 + });
 ```
 
-## Platform Specific Changes
+## Cambios Específicos de Plataforma
 
-### Android Setup
+### Configuración de Android
 
-Configuration is now handled through the initialize method:
+La configuración ahora se maneja a través del método de inicialización:
 
 ```diff
-- // AndroidManifest.xml changes remain the same
-- // strings.xml become irrelevant
-+ // Additionally initialize in your code:
+- // Los cambios en AndroidManifest.xml permanecen iguales
+- // strings.xml se vuelve irrelevante
++ // Además, inicializa en tu código:
 + await SocialLogin.initialize({
 +   facebook: {
 +     appId: 'your-app-id',
-+     clientToken: 'your-client-token'  // New requirement
++     clientToken: 'your-client-token'  // Nuevo requisito
 +   }
 + });
 ```
 
-**Important**: Client token is now required for Android authentication.
+**Importante**: El token de cliente ahora es requerido para la autenticación de Android.
 
-### iOS Setup
+### Configuración de iOS
 
-1. The iOS setup in `AppDelegate.swift` remains the same:
+1. La configuración de iOS en `AppDelegate.swift` permanece igual:
 
 ```swift
 import FBSDKCoreKit
 
-// In application:didFinishLaunchingWithOptions:
+// En application:didFinishLaunchingWithOptions:
 FBSDKCoreKit.ApplicationDelegate.shared.application(
     application,
     didFinishLaunchingWithOptions: launchOptions
 )
 
-// In application:openURL:options:
+// En application:openURL:options:
 ApplicationDelegate.shared.application(
     app,
     open: url,
@@ -189,7 +183,7 @@ ApplicationDelegate.shared.application(
 )
 ```
 
-2. The `Info.plist` configuration remains the same:
+2. La configuración de `Info.plist` permanece igual:
 ```xml
 <key>CFBundleURLTypes</key>
 <array>
@@ -216,25 +210,25 @@ ApplicationDelegate.shared.application(
 </array>
 ```
 
-## Breaking Changes
+## Cambios Disruptivos
 
-Summary of breaking changes when migrating:
+Resumen de cambios disruptivos al migrar:
 
-1. **Explicit initialization is now required** - Must call `initialize()` before use
-2. **Response object structure has changed significantly** - New nested result format with enhanced profile data
-3. **Client token is now required for Android** - Additional configuration needed
-4. **Different method names and parameter structures** - Provider-based approach
-5. **Error handling and error types have changed** - More detailed error information
+1. **Ahora se requiere inicialización explícita** - Debe llamar a `initialize()` antes de usar
+2. **La estructura del objeto de respuesta ha cambiado significativamente** - Nuevo formato de resultado anidado con datos de perfil mejorados
+3. **El token de cliente ahora es requerido para Android** - Se necesita configuración adicional
+4. **Diferentes nombres de métodos y estructuras de parámetros** - Enfoque basado en proveedores
+5. **El manejo de errores y los tipos de errores han cambiado** - Información de error más detallada
 
-## Key Advantages
+## Ventajas Clave
 
-The new plugin provides:
+El nuevo plugin proporciona:
 
-- **Unified API** across multiple social providers (Google, Apple, Facebook)
-- **Improved TypeScript support** with better type definitions
-- **Enhanced profile data** with more user information
-- **Active maintenance** and community support
-- **Consistent error handling** across all providers
-- **Better token management** with proper expiration handling
+- **API Unificada** en múltiples proveedores sociales (Google, Apple, Facebook)
+- **Soporte mejorado de TypeScript** con mejores definiciones de tipos
+- **Datos de perfil mejorados** con más información del usuario
+- **Mantenimiento activo** y soporte de la comunidad
+- **Manejo consistente de errores** en todos los proveedores
+- **Mejor gestión de tokens** con manejo adecuado de expiración
 
-For more detailed setup instructions, please refer to the [official documentation](/docs/plugins/social-login/facebook/). 
+Para instrucciones de configuración más detalladas, consulta la [documentación oficial](/docs/plugins/social-login/facebook/).

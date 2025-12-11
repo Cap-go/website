@@ -1,45 +1,42 @@
 ---
-title: API Overview
-description: >-
-  Explore Capgo's public API for managing resources such as organizations,
-  devices, channels, and bundles using RESTful HTTP methods and authentication.
+title: "API 概述"
+description: "探索 Capgo 的公共 API,使用 RESTful HTTP 方法和身份验证管理组织、设备、渠道和捆绑包等资源。"
 sidebar:
   order: 1
-locale: zh
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
 
-This is the documentation of the public API of Capgo cloud. The API allows you to programmatically manage your Capgo resources, including organizations, devices, channels, and bundles. It's designed to be RESTful and uses standard HTTP methods.
+这是 Capgo cloud 公共 API 的文档。该 API 允许您以编程方式管理您的 Capgo 资源,包括组织、设备、渠道和捆绑包。它设计为 RESTful 并使用标准 HTTP 方法。
 
-## Authentication
+## 身份验证
 
-All API endpoints require authentication. To authenticate your requests, add your API key in the `authorization` header.
+所有 API 端点都需要身份验证。要验证您的请求,请在 `authorization` 标头中添加您的 API 密钥。
 
-Example:
+示例:
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 ```
 
 <LinkCard
-	title="Get API key"
-	description="Generate your API key in the Capgo dashboard"
+	title="获取 API 密钥"
+	description="在 Capgo 仪表板中生成您的 API 密钥"
 	href="https://console.capgo.app/dashboard/apikeys/"
 />
 
-## Rate Limiting
+## 速率限制
 
-The API implements rate limiting to ensure fair usage. Current limits are:
-- 100 requests per minute for standard accounts
-- 1000 requests per minute for enterprise accounts
+API 实施速率限制以确保公平使用。当前限制为:
+- 标准账户每分钟 100 个请求
+- 企业账户每分钟 1000 个请求
 
-If you exceed these limits, you'll receive a 429 (Too Many Requests) response.
+如果超过这些限制,您将收到 429 (Too Many Requests) 响应。
 
-## Response Format
+## 响应格式
 
-All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include an `error` field with a description of what went wrong.
+所有响应均为 JSON 格式。成功响应通常包括 `data` 对象或 `status` 字段。错误响应包括带有问题描述的 `error` 字段。
 
-Example success response:
+成功响应示例:
 ```json
 {
   "status": "ok",
@@ -47,7 +44,7 @@ Example success response:
 }
 ```
 
-Example error response:
+错误响应示例:
 ```json
 {
   "error": "Invalid API key",
@@ -55,53 +52,53 @@ Example error response:
 }
 ```
 
-## Available Endpoints
+## 可用端点
 
 <LinkCard
-	title="Organizations"
-	description="Create and manage organizations, update settings, and handle organization-level configurations"
+	title="组织"
+	description="创建和管理组织,更新设置并处理组织级别配置"
 	href="/docs/public-api/organizations/"
 />
 
 <LinkCard
-	title="API Keys"
-	description="Generate, list, and revoke API keys for secure access to the Capgo API"
+	title="API 密钥"
+	description="生成、列出和撤销 API 密钥以安全访问 Capgo API"
 	href="/docs/public-api/api-keys/"
 />
 
 <LinkCard
-	title="Members"
-	description="Manage organization members, roles, and permissions"
+	title="成员"
+	description="管理组织成员、角色和权限"
 	href="/docs/public-api/members/"
 />
 
 <LinkCard
-	title="Statistics"
-	description="Access detailed analytics about app usage, storage, and bandwidth consumption"
+	title="统计"
+	description="访问有关应用使用、存储和带宽消耗的详细分析"
 	href="/docs/public-api/statistics/"
 />
 
 <LinkCard
-	title="Channels"
-	description="Control app update channels, versions, and update policies"
+	title="渠道"
+	description="控制应用更新渠道、版本和更新策略"
 	href="/docs/public-api/channels/"
 />
 
 <LinkCard
-	title="Devices"
-	description="Track and manage devices running your app, including version and channel assignments"
+	title="设备"
+	description="跟踪和管理运行您应用的设备,包括版本和渠道分配"
 	href="/docs/public-api/devices/"
 />
 
 <LinkCard
-	title="Bundles"
-	description="Handle app bundles, including uploading, listing, and managing versions"
+	title="捆绑包"
+	description="处理应用捆绑包,包括上传、列出和管理版本"
 	href="/docs/public-api/bundles/"
 />
 
-## Best Practices
+## 最佳实践
 
-1. **Error Handling**: Always check for error responses and handle them appropriately
-2. **Rate Limiting**: Implement exponential backoff when hitting rate limits
-3. **Caching**: Cache responses when appropriate to reduce API calls
-4. **Versioning**: Keep track of API changes through our changelog 
+1. **错误处理**:始终检查错误响应并适当处理
+2. **速率限制**:在达到速率限制时实施指数退避
+3. **缓存**:在适当时缓存响应以减少 API 调用
+4. **版本控制**:通过我们的更改日志跟踪 API 更改 

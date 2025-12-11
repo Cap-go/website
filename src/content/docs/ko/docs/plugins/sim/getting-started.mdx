@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Retrieve SIM card details and handle runtime permissions with the Capgo SIM
-  plugin.
+title: 시작하기
+description: Capgo SIM 플러그인으로 SIM 카드 세부 정보를 가져오고 런타임 권한을 처리하세요.
 sidebar:
   order: 2
 locale: ko
@@ -12,19 +10,19 @@ import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the plugin**
+1. **플러그인 설치**
    <PackageManagers pkg="@capgo/capacitor-sim" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync platforms**
+2. **플랫폼 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Permissions
+## 권한
 
-- **Android**: Ensure `android.permission.READ_PHONE_STATE` (and on Android 13+, `READ_BASIC_PHONE_STATE`) is granted. Capacitor includes the manifest declarations, but you must request the permission before calling `getSimCards`.
-- **iOS**: Carrier information is available automatically; the platform does not prompt for additional permissions. Be mindful of the limited data returned on iOS 16.4+ due to OS restrictions.
+- **Android**: `android.permission.READ_PHONE_STATE` (Android 13+ 에서는 `READ_BASIC_PHONE_STATE`) 권한이 부여되어야 합니다. Capacitor는 매니페스트 선언을 포함하지만, `getSimCards`를 호출하기 전에 권한을 요청해야 합니다.
+- **iOS**: 통신사 정보는 자동으로 제공되며, 플랫폼은 추가 권한을 요청하지 않습니다. iOS 16.4+ 의 OS 제한으로 인해 반환되는 데이터가 제한적임을 유의하세요.
 
-## Request runtime access (Android)
+## 런타임 액세스 요청 (Android)
 
 ```typescript
 import { Sim } from '@capgo/capacitor-sim';
@@ -38,7 +36,7 @@ if (status.readSimCard !== 'granted') {
 }
 ```
 
-## Read SIM cards
+## SIM 카드 읽기
 
 ```typescript
 const { simCards } = await Sim.getSimCards();
@@ -54,8 +52,8 @@ simCards.forEach((card, index) => {
 });
 ```
 
-## Platform considerations
+## 플랫폼 고려사항
 
-- **Dual SIM devices**: Iterate through the returned array; each entry corresponds to a slot. When present, `subscriptionId` helps you interact with Android's telephony APIs.
-- **iOS 16.4+**: Apple redacts several carrier attributes. Expect placeholder values (`--`, `65535`) and plan fallbacks in your UI.
-- **Web**: The plugin resolves with empty data because browsers cannot access SIM information.
+- **듀얼 SIM 기기**: 반환된 배열을 반복합니다. 각 항목은 슬롯에 해당합니다. `subscriptionId`가 있으면 Android의 telephony API와 상호 작용하는 데 도움이 됩니다.
+- **iOS 16.4+**: Apple은 여러 통신사 속성을 편집합니다. 플레이스홀더 값(`--`, `65535`)을 예상하고 UI에서 대체 방법을 계획하세요.
+- **Web**: 브라우저는 SIM 정보에 액세스할 수 없으므로 플러그인은 빈 데이터로 해결됩니다.

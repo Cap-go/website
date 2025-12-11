@@ -1,6 +1,6 @@
 ---
-title: Getting Started
-description: Learn how to integrate YouTube video playback in your Capacitor app.
+title: 시작하기
+description: Capacitor 앱에서 YouTube 비디오 재생을 통합하는 방법을 알아보세요.
 sidebar:
   order: 2
 locale: ko
@@ -10,14 +10,14 @@ import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **패키지 설치**
    <PackageManagers pkg="@capgo/capacitor-youtube-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Basic Usage
+## 기본 사용법
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -46,11 +46,11 @@ YoutubePlayer.addEventListener(result.player, 'onStateChange', (event) => {
 });
 ```
 
-## API Reference
+## API 참조
 
 ### initialize(options)
 
-Initialize a YouTube player instance.
+YouTube 플레이어 인스턴스를 초기화합니다.
 
 ```typescript
 const { player, playerReady } = await YoutubePlayer.initialize({
@@ -66,7 +66,7 @@ const { player, playerReady } = await YoutubePlayer.initialize({
 });
 ```
 
-### Video Control Methods
+### 비디오 제어 메서드
 
 ```typescript
 // Play
@@ -88,7 +88,7 @@ await YoutubePlayer.loadVideoById(playerId, { videoId: 'VIDEO_ID' });
 await YoutubePlayer.cueVideoById(playerId, { videoId: 'VIDEO_ID' });
 ```
 
-### Playlist Control
+### 재생목록 제어
 
 ```typescript
 // Load playlist
@@ -109,7 +109,7 @@ await YoutubePlayer.previousVideo(playerId);
 await YoutubePlayer.playVideoAt(playerId, index);
 ```
 
-### Audio Control
+### 오디오 제어
 
 ```typescript
 // Mute/Unmute
@@ -124,7 +124,7 @@ await YoutubePlayer.setVolume(playerId, 50);
 const { result } = await YoutubePlayer.getVolume(playerId);
 ```
 
-### Playback Control
+### 재생 제어
 
 ```typescript
 // Playback rate
@@ -140,7 +140,7 @@ await YoutubePlayer.setLoop(playerId, true);
 await YoutubePlayer.setShuffle(playerId, true);
 ```
 
-### Quality Control
+### 품질 제어
 
 ```typescript
 // Set quality
@@ -153,7 +153,7 @@ const { result } = await YoutubePlayer.getPlaybackQuality(playerId);
 const { result } = await YoutubePlayer.getAvailableQualityLevels(playerId);
 ```
 
-### Player Information
+### 플레이어 정보
 
 ```typescript
 // Duration
@@ -172,7 +172,7 @@ const { result } = await YoutubePlayer.getPlayerState(playerId);
 const { result } = await YoutubePlayer.getVideoUrl(playerId);
 ```
 
-### Event Listeners
+### 이벤트 리스너
 
 ```typescript
 // State change
@@ -204,7 +204,7 @@ YoutubePlayer.addEventListener(playerId, 'onPlaybackRateChange', (event) => {
 YoutubePlayer.removeEventListener(playerId, 'onStateChange', callback);
 ```
 
-## Complete Example
+## 완전한 예제
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -287,32 +287,6 @@ export class YouTubeService {
     await YoutubePlayer.loadVideoById(this.playerId, { videoId });
   }
 
-  async loadPlaylist(playlistId: string) {
-    if (!this.playerId) return;
-    await YoutubePlayer.loadPlaylist(this.playerId, {
-      listType: 'playlist',
-      list: playlistId,
-      index: 0
-    });
-  }
-
-  async setQuality(quality: 'small' | 'medium' | 'large' | 'hd720' | 'hd1080') {
-    if (!this.playerId) return;
-    await YoutubePlayer.setPlaybackQuality(this.playerId, quality);
-  }
-
-  async getProgress() {
-    if (!this.playerId) return { current: 0, duration: 0 };
-
-    const current = await YoutubePlayer.getCurrentTime(this.playerId);
-    const duration = await YoutubePlayer.getDuration(this.playerId);
-
-    return {
-      current: current.result.value,
-      duration: duration.result.value
-    };
-  }
-
   async destroy() {
     if (!this.playerId) return;
     await YoutubePlayer.destroy(this.playerId);
@@ -321,18 +295,18 @@ export class YouTubeService {
 }
 ```
 
-## Player States
+## 플레이어 상태
 
-| State | Value | Description |
+| 상태 | 값 | 설명 |
 |-------|-------|-------------|
-| UNSTARTED | -1 | Video not started |
-| ENDED | 0 | Video has ended |
-| PLAYING | 1 | Video is playing |
-| PAUSED | 2 | Video is paused |
-| BUFFERING | 3 | Video is buffering |
-| CUED | 5 | Video is cued |
+| UNSTARTED | -1 | 비디오 시작 안됨 |
+| ENDED | 0 | 비디오 종료됨 |
+| PLAYING | 1 | 비디오 재생 중 |
+| PAUSED | 2 | 비디오 일시 중지됨 |
+| BUFFERING | 3 | 비디오 버퍼링 중 |
+| CUED | 5 | 비디오 준비됨 |
 
-## Quality Levels
+## 품질 레벨
 
 - `small`: 240p
 - `medium`: 360p
@@ -340,93 +314,29 @@ export class YouTubeService {
 - `hd720`: 720p
 - `hd1080`: 1080p
 - `highres`: >1080p
-- `default`: Auto quality
+- `default`: 자동 품질
 
-## Best Practices
+## 모범 사례
 
-1. **Initialize once**
-   Create player instance once and reuse it:
-   ```typescript
-   let player = await YoutubePlayer.initialize(options);
-   // Reuse player for different videos
-   await YoutubePlayer.loadVideoById(player, { videoId: 'NEW_ID' });
-   ```
+1. **한 번 초기화**: 플레이어 인스턴스를 한 번 생성하고 재사용하세요
+2. **오류를 우아하게 처리**: 오류 이벤트 리스너를 구현하세요
+3. **정리**: 컴포넌트 언마운트 시 플레이어를 제거하세요
+4. **사용자 선호 존중**: 사용자가 시작하지 않는 한 자동 재생하지 마세요
+5. **재생 모니터링**: 진행 상황을 추적하세요
 
-2. **Handle errors gracefully**
-   ```typescript
-   YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
-     switch (event.data) {
-       case 2:
-         console.error('Invalid parameter');
-         break;
-       case 100:
-         console.error('Video not found');
-         break;
-       case 101:
-       case 150:
-         console.error('Embedding not allowed');
-         break;
-     }
-   });
-   ```
-
-3. **Clean up**
-   Destroy player when component unmounts:
-   ```typescript
-   useEffect(() => {
-     return () => {
-       if (playerId) {
-         YoutubePlayer.destroy(playerId);
-       }
-     };
-   }, []);
-   ```
-
-4. **Respect user preferences**
-   ```typescript
-   // Don't autoplay unless user initiated
-   playerVars: {
-     autoplay: 0
-   }
-   ```
-
-5. **Monitor playback**
-   ```typescript
-   setInterval(async () => {
-     const time = await YoutubePlayer.getCurrentTime(playerId);
-     updateProgressBar(time.result.value);
-   }, 1000);
-   ```
-
-## Platform Notes
+## 플랫폼 참고사항
 
 ### iOS
-- Works on iOS 9.0+
-- Uses WKWebView with YouTube iframe API
-- Fullscreen supported
+- iOS 9.0+ 에서 작동
+- YouTube iframe API와 함께 WKWebView 사용
+- 전체 화면 지원
 
 ### Android
-- Works on Android 5.0 (API 21)+
-- Uses WebView with YouTube iframe API
-- Fullscreen supported
+- Android 5.0 (API 21)+ 에서 작동
+- YouTube iframe API와 함께 WebView 사용
+- 전체 화면 지원
 
 ### Web
-- Direct YouTube iframe integration
-- Full API support
-- Best performance
-
-## Troubleshooting
-
-**Player not loading:**
-- Check video ID is valid
-- Verify internet connection
-- Ensure YouTube embedding is allowed for the video
-
-**Events not firing:**
-- Make sure listeners are added after initialization
-- Check player is ready before adding listeners
-
-**Quality issues:**
-- Check available quality levels first
-- Some videos don't support all qualities
-- Quality changes may not be immediate
+- 직접 YouTube iframe 통합
+- 전체 API 지원
+- 최고의 성능

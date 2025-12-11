@@ -1,8 +1,6 @@
 ---
-title: Getting started
-description: >-
-  A comprehensive guide on setting up and managing your own auto-update server
-  for seamless application updates and maintenance
+title: "开始使用"
+description: "关于设置和管理您自己的自动更新服务器以实现无缝应用更新和维护的综合指南"
 sidebar:
   order: 1
 locale: zh
@@ -10,25 +8,25 @@ locale: zh
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-This documentation will explain how to run your own auto-update server.
+本文档将说明如何运行您自己的自动更新服务器。
 
-## Introduction
+## 介绍
 
-If you find this work helpful, please consider supporting my work by becoming a [Github sponsor](https://github.com/sponsors/riderx).
+如果您觉得这项工作有帮助,请考虑通过成为 [Github 赞助者](https://github.com/sponsors/riderx)来支持我的工作。
 
-I made a bet to open-source all the code I built here instead of paywalling it. By opening it up instead of fighting and hiding, I believe we can make the world a better place.
+我打赌将我在这里构建的所有代码开源,而不是将其设为付费墙。通过开放而不是对抗和隐藏,我相信我们可以让世界变得更美好。
 
-Furthermore, I want to focus on Capgo tooling, and make it an open and transparent business.
+此外,我希望专注于 Capgo 工具,并使其成为一个开放和透明的业务。
 
-But to make it possible, it is necessary for all of us to do our part, including you 🥹.
+但要使之成为可能,我们所有人都有必要尽自己的一份力,包括你。
 
-If Capgo doesn't suit you, then pay your own price and [back a bootstrapped Maker](https://github.com/sponsors/riderx) on your terms.
+如果 Capgo 不适合您,那么按您自己的价格支付,并按您的条件[支持自举创客](https://github.com/sponsors/riderx)。
 
-<LinkCard title="Consider Contributing" href="/docs/plugin/self-hosted/contributing/"/>
-## Features parity
+<LinkCard title="考虑贡献" href="/docs/plugin/self-hosted/contributing/"/>
+## 功能对等
 
-If you choose to go with your own server, you will lose the 5-min setup flow.\
-You need to implement all of these features yourself.
+如果您选择使用自己的服务器,您将失去 5 分钟的设置流程。\
+您需要自己实现所有这些功能。
 
 
 | Features                 | Capgo | Self hosted |
@@ -51,23 +49,23 @@ You need to implement all of these features yourself.
 | Differential updates     | ✅     | ❌         |
 
 :::danger
-If you send a bad update to your users you can and will break their app.
+如果您向用户发送错误的更新,您可能会并且将会破坏他们的应用。
 :::
 
-> Be mindful that you can't use the Capgo cloud and your server at the same time.
+> 请注意,您不能同时使用 Capgo 云和您的服务器。
 
 
 
 :::danger
-The Over-the-Air (OTA) update feature is applicable only for modifications made to HTML, CSS, and JavaScript files.
+空中下载 (OTA) 更新功能仅适用于对 HTML、CSS 和 JavaScript 文件所做的修改。
 
-If you make any changes to the native code, such as updates to Capacitor plugins, it is mandatory to resubmit the application to the app store for approval.
+如果您对原生代码进行任何更改,例如更新 Capacitor 插件,则必须将应用重新提交到应用商店以供审批。
 :::
 
-## Choose between Auto and Manual
-In auto mode, part of the logic is handled by the Native code, updates are decided server side, this is more secure and allows fine grain updates, partial deployment to one device or group and more.
+## 在自动和手动之间选择
+在自动模式下,部分逻辑由原生代码处理,更新由服务器端决定,这更安全并允许细粒度更新、部分部署到一个设备或组等。
 
-In manual mode, all the logic is handled by the JS.
+在手动模式下,所有逻辑都由 JS 处理。
 
 
 
@@ -81,23 +79,23 @@ In manual mode, all the logic is handled by the JS.
 	href="/docs/plugin/self-hosted/manual-update/"
 />
 
-## Install Capacitor updater
+## 安装 Capacitor Updater
 
-```bash title="Install the Capacitor updater"
+```bash title="安装 Capacitor updater"
 npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-## Prepare your bundle
+## 准备您的 bundle
 
-To send updates to your app, you need to zip it.
-The best way to be certain your zip is good is to use the Capgo CLI for zipping.
-```bash title="Create a bundle with your files to serve from your server"
+要向应用发送更新,您需要压缩它。
+确保 zip 文件正确的最佳方法是使用 Capgo CLI 进行压缩。
+```bash title="创建一个包含要从服务器提供的文件的 bundle"
 npx @capgo/cli@latest bundle zip
 ```
 
 
-You will have to serve this zip from your server on your own.
+您将必须自己从服务器提供此 zip 文件。
 
 <LinkCard
 	title="Auto Update"
@@ -111,9 +109,9 @@ You will have to serve this zip from your server on your own.
 
 
 :::note
-If this seems like a lot of work, try the trial Capgo Cloud.
+如果这似乎工作量很大,请尝试 Capgo Cloud 试用版。
 :::
 
 :::note
-Differential update will not work in manual updates, but it can work in auto update, right now it's not documented as it's pretty complex process
+差异更新在手动更新中不起作用,但它可以在自动更新中起作用,现在它没有文档,因为这是一个相当复杂的过程
 :::

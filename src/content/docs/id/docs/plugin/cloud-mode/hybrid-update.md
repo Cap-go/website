@@ -1,5 +1,5 @@
 ---
-title: Mise à jour hybride
+title: Pembaruan Hibrid
 description: Metode pembaruan untuk pembaruan otomatis
 sidebar:
   order: 3

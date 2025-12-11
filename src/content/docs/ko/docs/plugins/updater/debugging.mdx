@@ -1,8 +1,7 @@
 ---
-title: Debugging
+title: 디버깅
 description: >-
-  How to debug your updates of Capgo and understand the issue you can have with
-  your configuration
+  Capgo 업데이트를 디버깅하고 구성 관련 문제를 이해하는 방법
 sidebar:
   order: 6
 locale: ko
@@ -10,165 +9,165 @@ locale: ko
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Understanding cloud logs:
+## 클라우드 로그 이해하기:
 
-### Sent from the backend
+### 백엔드에서 전송됨
 
-| code                          | Description                                                                                                                                                                 |
+| 코드                          | 설명                                                                                                                                                                 |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **InvalidIp**                                    | The user is located in a Google data center and the update is less than 4 hours old. This is done to prevent Google bots' devices from counting as devices in your account. |
-| **needPlanUpgrade** (previously **needUpgrade**) | Indicates that you have reached the limit of your plan, and the device will not receive updates until you upgrade or until the next month.                                  |
-| **noNew**                                        | The device has the latest available version.                                                                                                                                |
-| **disablePlatformIos**                           | The device is on the iOS platform, but that is disabled in the channel settings.                                                                                            |
-| **disablePlatformAndroid**                       | The device is on the Android platform, but that is disabled in the channel settings.                                                                                        |
+| **InvalidIp**                                    | 사용자가 Google 데이터 센터에 위치하고 업데이트가 4시간 미만입니다. Google 봇의 기기가 계정의 기기로 집계되는 것을 방지하기 위해 수행됩니다. |
+| **needPlanUpgrade** (이전: **needUpgrade**) | 플랜 한도에 도달했으며, 업그레이드하거나 다음 달까지 기기가 업데이트를 받지 않음을 나타냅니다.                                  |
+| **noNew**                                        | 기기에 최신 사용 가능한 버전이 있습니다.                                                                                                                                |
+| **disablePlatformIos**                           | 기기가 iOS 플랫폼이지만 채널 설정에서 비활성화되어 있습니다.                                                                                            |
+| **disablePlatformAndroid**                       | 기기가 Android 플랫폼이지만 채널 설정에서 비활성화되어 있습니다.                                                                                        |
 | **disableAutoUpdate**                            | "major" | "minor" | "version_number" | "none"                                       |
-| **disableAutoUpdateUnderNative**                 | The device has version (`1.2.3`), and the channel has an update (`1.2.2`) under the device version to send, but that is disabled in the channel settings.                   |
-| **disableDevBuild**                              | The device has a dev build, but that is disabled in the channel settings.                                                                                                   |
-| **disableEmulator**                              | The device is an emulator, but that is disabled in the channel settings.                                                                                                    |
-| **cannotGetBundle**                          | Failed to generate a valid signed URL for the bundle download. This occurs when the bundle URL generation fails or returns an invalid URL (not starting with http/https) and there's no manifest available as a fallback.                                                                                          |
-| **cannotUpdateViaPrivateChannel**              | The device tried to self-associate with a private channel, but the channel settings don't allow device self-association (`allow_device_self_set` is false) and the channel is not public.                                                                                    |
-| **channelMisconfigured**                       | The channel is configured to disable auto-update by version number (`disable_auto_update: 'version_number'`), but the bundle's `min_update_version` field is null, making it impossible to determine which devices should receive the update.                                                                                                                 |
-| **disableAutoUpdateMetadata**                  | Auto-update is disabled by version number metadata. The channel requires the device's version to be at least `min_update_version`, but the device's current version is lower than this threshold.                                                                                                         |
-| **disableAutoUpdateToMajor**                   | Channel setting `disable_auto_update: 'major'` prevents updates that would increase the major version number (e.g., blocking 1.x.x from updating to 2.x.x).                                                                                             |
-| **disableAutoUpdateToMinor**                   | Channel setting `disable_auto_update: 'minor'` prevents updates that would increase the minor version number (e.g., blocking 1.2.x from updating to 1.3.x).                                                                                             |
-| **disableAutoUpdateToPatch**                   | Channel setting `disable_auto_update: 'patch'` prevents updates that would increase the patch version number, or allows only patch-level updates within the same major.minor version (e.g., 1.2.3 can update to 1.2.4 but not 1.2.2 or 1.3.0).                                                                                             |
-| **missingBundle**                              | The bundle assigned to this channel has no downloadable content. This means the bundle has no `external_url`, no `r2_path`, it's not a built-in version, and there are no manifest entries available for download.                                                                                                                   |
-| **NoChannelOrOverride**                        | No default channel is configured for this app and the device has no specific channel override assigned. At least one must be present for updates to work.                                                                                                     |
-| **rateLimited**                                | The device has been rate limited due to excessive requests.                                                                                                        |
+| **disableAutoUpdateUnderNative**                 | 기기 버전(`1.2.3`)이 있고 채널에 기기 버전보다 낮은 업데이트(`1.2.2`)가 있지만 채널 설정에서 비활성화되어 있습니다.                   |
+| **disableDevBuild**                              | 기기에 개발 빌드가 있지만 채널 설정에서 비활성화되어 있습니다.                                                                                                   |
+| **disableEmulator**                              | 기기가 에뮬레이터이지만 채널 설정에서 비활성화되어 있습니다.                                                                                                    |
+| **cannotGetBundle**                          | 번들 다운로드를 위한 유효한 서명된 URL 생성에 실패했습니다. 번들 URL 생성이 실패하거나 유효하지 않은 URL(http/https로 시작하지 않음)을 반환하고 대체할 매니페스트가 없을 때 발생합니다.                                                                                          |
+| **cannotUpdateViaPrivateChannel**              | 기기가 비공개 채널과 자동 연결을 시도했지만 채널 설정에서 기기 자동 연결을 허용하지 않으며(`allow_device_self_set`이 false) 채널이 공개되지 않았습니다.                                                                                    |
+| **channelMisconfigured**                       | 채널이 버전 번호로 자동 업데이트를 비활성화하도록 구성되었지만(`disable_auto_update: 'version_number'`) 번들의 `min_update_version` 필드가 null이어서 어떤 기기가 업데이트를 받아야 하는지 결정할 수 없습니다.                                                                                                                 |
+| **disableAutoUpdateMetadata**                  | 버전 번호 메타데이터로 자동 업데이트가 비활성화되었습니다. 채널은 기기 버전이 최소한 `min_update_version`이어야 하지만 기기의 현재 버전이 이 임계값보다 낮습니다.                                                                                                         |
+| **disableAutoUpdateToMajor**                   | 채널 설정 `disable_auto_update: 'major'`는 주 버전 번호를 증가시키는 업데이트를 방지합니다(예: 1.x.x에서 2.x.x로 업데이트 차단).                                                                                             |
+| **disableAutoUpdateToMinor**                   | 채널 설정 `disable_auto_update: 'minor'`는 부 버전 번호를 증가시키는 업데이트를 방지합니다(예: 1.2.x에서 1.3.x로 업데이트 차단).                                                                                             |
+| **disableAutoUpdateToPatch**                   | 채널 설정 `disable_auto_update: 'patch'`는 패치 버전 번호를 증가시키는 업데이트를 방지하거나 동일한 major.minor 버전 내에서 패치 수준 업데이트만 허용합니다(예: 1.2.3은 1.2.4로 업데이트할 수 있지만 1.2.2 또는 1.3.0은 안됨).                                                                                             |
+| **missingBundle**                              | 이 채널에 할당된 번들에 다운로드 가능한 콘텐츠가 없습니다. 번들에 `external_url`, `r2_path`가 없고, 내장 버전이 아니며, 다운로드할 매니페스트 항목이 없음을 의미합니다.                                                                                                                   |
+| **NoChannelOrOverride**                        | 이 앱에 대한 기본 채널이 구성되지 않았으며 기기에 할당된 특정 채널 재정의가 없습니다. 업데이트가 작동하려면 최소한 하나가 있어야 합니다.                                                                                                     |
+| **rateLimited**                                | 과도한 요청으로 인해 기기가 속도 제한되었습니다.                                                                                                        |
 
 
-### Sent from the device
+### 기기에서 전송됨
 
-| code  | Description                                                                       |
+| 코드  | 설명                                                                       |
 | --------------------- | --------------------------------------------------------------------------------- |
-| **ping**              | Internal test action used to verify the stats system is working correctly.        |
-| **get**               | Info for downloading the new version has been sent to the device.                 |
-| **delete**            | One bundle has been deleted on the device.                                        |
-| **set**               | A bundle has been set on the device.                                              |
-| **set_fail**          | The bundle failed to set.                                                         |
-| **reset**             | The device reset to the `builtin` bundle.                                         |
-| **download_XX**       | A new bundle has been downloaded - progress indicated by XX% (increments of 10%). |
-| **download_complete** | The new bundle has finished downloading.                                          |
-| **download_manifest_start** | The device started downloading the update manifest.                             |
-| **download_manifest_complete** | The device finished downloading the update manifest.                          |
-| **download_zip_start** | The device started downloading the bundle archive.                                   |
-| **download_zip_complete** | The device finished downloading the bundle archive.                                 |
-| **download_manifest_file_fail** | One manifest entry failed to download; the stats payload puts `version_name` in the form `version:fileName` to pinpoint the asset. |
-| **download_manifest_checksum_fail** | The manifest file failed checksum validation.                           |
-| **download_manifest_brotli_fail** | The manifest file failed to decompress using Brotli.                       |
-| **download_fail**     | The new bundle failed to download.                                                |
-| **update_fail**       | The new bundle has been installed but failed to call `notifyAppReady`.            |
-| **checksum_fail**     | The new bundle failed to validate the checksum. If you're using Capgo Cloud and encounter this error, it typically means your app version is expecting a different checksum type. The latest version of the CLI and plugins (version 5.10.0+, 6.25.0+ or 7+) use SHA256 checksums, while older plugins used CRC32. If you see a checksum fail, check if the checksum is CRC32 (a shorter hash) rather than SHA256. This usually indicates the bundle was uploaded with an old version of the CLI. Verify your bundle version in the Capgo dashboard - bundles created since version 5.10.0/6.25.0/7 should use SHA256. If you're seeing CRC32 checksums, ensure you have the latest plugin version installed locally (the CLI checks your local plugin version to determine which checksum type to upload), then upgrade your CLI and re-upload the bundle.                                   |
-| **windows_path_fail** | The zip has files who contain windows path who are illegal                        |
-| **canonical_path_fail** | The path of files is not canonical                                              |
-| **directory_path_fail** | There is an error in the path of zip files                                         |
-| **unzip_fail**          | unzip failed                                                                   |
-| **low_mem_fail** | Download failed because of low memory in the device                                    |
-| **app_moved_to_background** | The application entered the background state.                                   |
-| **app_moved_to_foreground** | The application entered the foreground state.                                   |
-| **decrypt_fail**        | Failed to decrypt the downloaded bundle.                                          |
-| **getChannel**          | The current channel for the device was queried.                                   |
-| **setChannel**          | A channel was successfully set for the device.                                    |
-| **uninstall**           | The application was uninstalled or Capgo data cleared.                            |
-| **blocked_by_server_url** | Server.url is present in your capacitor config, this make Capacitor serve remote url and ignore local files, while our updater is made to function with local file, Server.url Is consider by Capacitor Makers as bad practice in production and will lead to many issue and plugin not working correctly.                         |
+| **ping**              | 통계 시스템이 올바르게 작동하는지 확인하는 내부 테스트 작업입니다.        |
+| **get**               | 새 버전을 다운로드하기 위한 정보가 기기로 전송되었습니다.                 |
+| **delete**            | 기기에서 하나의 번들이 삭제되었습니다.                                        |
+| **set**               | 기기에 번들이 설정되었습니다.                                              |
+| **set_fail**          | 번들 설정에 실패했습니다.                                                         |
+| **reset**             | 기기가 `builtin` 번들로 재설정되었습니다.                                         |
+| **download_XX**       | 새 번들이 다운로드되었습니다 - XX%로 진행률 표시(10% 단위 증가). |
+| **download_complete** | 새 번들 다운로드가 완료되었습니다.                                          |
+| **download_manifest_start** | 기기가 업데이트 매니페스트 다운로드를 시작했습니다.                             |
+| **download_manifest_complete** | 기기가 업데이트 매니페스트 다운로드를 완료했습니다.                          |
+| **download_zip_start** | 기기가 번들 아카이브 다운로드를 시작했습니다.                                   |
+| **download_zip_complete** | 기기가 번들 아카이브 다운로드를 완료했습니다.                                 |
+| **download_manifest_file_fail** | 매니페스트 항목 하나가 다운로드에 실패했습니다. 통계 페이로드는 `version_name`을 `version:fileName` 형식으로 넣어 자산을 정확히 찾습니다. |
+| **download_manifest_checksum_fail** | 매니페스트 파일이 체크섬 검증에 실패했습니다.                           |
+| **download_manifest_brotli_fail** | 매니페스트 파일이 Brotli를 사용한 압축 해제에 실패했습니다.                       |
+| **download_fail**     | 새 번들 다운로드에 실패했습니다.                                                |
+| **update_fail**       | 새 번들이 설치되었지만 `notifyAppReady` 호출에 실패했습니다.            |
+| **checksum_fail**     | 새 번들이 체크섬 검증에 실패했습니다. Capgo Cloud를 사용 중이고 이 오류가 발생하면 일반적으로 앱 버전이 다른 체크섬 유형을 예상하고 있음을 의미합니다. 최신 버전의 CLI 및 플러그인(버전 5.10.0+, 6.25.0+ 또는 7+)은 SHA256 체크섬을 사용하는 반면 이전 플러그인은 CRC32를 사용했습니다. 체크섬 실패가 표시되면 체크섬이 SHA256이 아닌 CRC32(더 짧은 해시)인지 확인하세요. 이는 일반적으로 번들이 이전 버전의 CLI로 업로드되었음을 나타냅니다. Capgo 대시보드에서 번들 버전을 확인하세요 - 버전 5.10.0/6.25.0/7 이후 생성된 번들은 SHA256을 사용해야 합니다. CRC32 체크섬이 표시되면 로컬에 최신 플러그인 버전이 설치되어 있는지 확인한 다음(CLI는 로컬 플러그인 버전을 확인하여 업로드할 체크섬 유형을 결정합니다) CLI를 업그레이드하고 번들을 다시 업로드하세요.                                   |
+| **windows_path_fail** | zip에 불법적인 Windows 경로를 포함하는 파일이 있습니다                        |
+| **canonical_path_fail** | 파일 경로가 표준 형식이 아닙니다                                              |
+| **directory_path_fail** | zip 파일 경로에 오류가 있습니다                                         |
+| **unzip_fail**          | 압축 해제 실패                                                                   |
+| **low_mem_fail** | 기기의 메모리 부족으로 다운로드 실패                                    |
+| **app_moved_to_background** | 애플리케이션이 백그라운드 상태로 전환되었습니다.                                   |
+| **app_moved_to_foreground** | 애플리케이션이 포그라운드 상태로 전환되었습니다.                                   |
+| **decrypt_fail**        | 다운로드한 번들 암호 해독에 실패했습니다.                                          |
+| **getChannel**          | 기기의 현재 채널을 쿼리했습니다.                                   |
+| **setChannel**          | 기기에 채널이 성공적으로 설정되었습니다.                                    |
+| **uninstall**           | 애플리케이션이 제거되었거나 Capgo 데이터가 지워졌습니다.                            |
+| **blocked_by_server_url** | capacitor config에 Server.url이 있으면 Capacitor가 원격 URL을 제공하고 로컬 파일을 무시하게 되는데, 우리 업데이터는 로컬 파일로 작동하도록 만들어졌습니다. Server.url은 Capacitor 제작자들이 프로덕션에서 나쁜 관행으로 간주하며 많은 문제와 플러그인이 올바르게 작동하지 않는 원인이 됩니다.                         |
 
-### Bundle status
+### 번들 상태
 
-* `SUCCESS`: install bundle done
-* `ERROR`: install or download failed
-* `PENDING`: Download done, pending release
-* `DELETED`: Bundle deleted, still presented for stats
-* `DOWNLOADING`: Currently downloading a bundle
+* `SUCCESS`: 번들 설치 완료
+* `ERROR`: 설치 또는 다운로드 실패
+* `PENDING`: 다운로드 완료, 릴리스 대기 중
+* `DELETED`: 번들 삭제됨, 통계용으로 여전히 표시됨
+* `DOWNLOADING`: 현재 번들 다운로드 중
 
-## Understanding device logs:
+## 기기 로그 이해하기:
 
-### Debug command:
+### 디버그 명령:
 
-There is a debug command for Capgo cloud users.
+Capgo 클라우드 사용자를 위한 디버그 명령이 있습니다.
 
 ```bash
 npx @capgo/cli@latest app debug
 ```
 
-This will allow you to check all events happening in the app and find a solution if updates don't happen.
+이를 통해 앱에서 발생하는 모든 이벤트를 확인하고 업데이트가 발생하지 않는 경우 해결책을 찾을 수 있습니다.
 
-### IOS
+### iOS
 
-to find your logs on Xcode
+Xcode에서 로그를 찾으려면
 
 <LinkCard
-    title="Getting the Device Log in Xcode"
+    title="Xcode에서 기기 로그 가져오기"
     href="https://intercom.help/deploygate/en/articles/4682692-getting-the-device-log-in-xcode"
 />
 
 ### Android:
 
-to find your logs on Android studio
+Android Studio에서 로그를 찾으려면
 
 <LinkCard
-    title="View logs with Logcat"
+    title="Logcat으로 로그 보기"
     href="https://developer.android.com/studio/debug/am-logcat"
 />
 
-### Explanations Logs
+### 로그 설명
 
-* `Failed to download from` **=>** same as **download\_fail**
-* `notifyAppReady was not called, roll back current bundle` => same as as **update\_fail**
+* `Failed to download from` **=>** **download\_fail**과 동일
+* `notifyAppReady was not called, roll back current bundle` => **update\_fail**과 동일
 
-## Finding the downloaded bundle in your device
+## 기기에서 다운로드한 번들 찾기
 
 ### iOS
 
-To debug on iOS, you need to dump the app on your computer, you can do it like this:
+iOS에서 디버깅하려면 앱을 컴퓨터에 덤프해야 합니다. 다음과 같이 할 수 있습니다:
 
-Xcode has a built-in feature for inspecting the file system of developer-installed apps on an iOS device.
-![Xcode Window menu showing Devices and Simulators option](/ios_debug_update_1.webp)
+Xcode에는 iOS 기기에 개발자가 설치한 앱의 파일 시스템을 검사하는 내장 기능이 있습니다.
+![기기 및 시뮬레이터 옵션을 보여주는 Xcode 윈도우 메뉴](/ios_debug_update_1.webp)
 
-To achieve this:
+이를 수행하려면:
 
-* Connect your device to your Mac and select Window > Devices in the Xcode menubar.
-* Select your device in the left pane under the Devices section.
-* This will show a list of developer-installed apps for that device.
-* Select the app you want to inspect and then select the 3 dots icon near the bottom of the screen.
-* Here you can view the current file system by selecting download a snapshot of it.
+* 기기를 Mac에 연결하고 Xcode 메뉴바에서 Window > Devices를 선택합니다.
+* 왼쪽 창의 Devices 섹션에서 기기를 선택합니다.
+* 해당 기기에 대한 개발자 설치 앱 목록이 표시됩니다.
+* 검사하려는 앱을 선택한 다음 화면 하단 근처의 3점 아이콘을 선택합니다.
+* 여기에서 스냅샷을 다운로드하여 현재 파일 시스템을 볼 수 있습니다.
 
-![Xcode Devices panel showing app container download option](/ios_debug_update_2.webp)
+![앱 컨테이너 다운로드 옵션을 보여주는 Xcode 기기 패널](/ios_debug_update_2.webp)
 
-Selecting Download Container... will download and export a snapshot of the file system as a .xcappdata file that you can browse through.
+Download Container...를 선택하면 탐색할 수 있는 .xcappdata 파일로 파일 시스템의 스냅샷을 다운로드하고 내보냅니다.
 
-![Downloaded xcappdata file with Show Package Contents context menu](/ios_debug_update_3.webp)
+![패키지 내용 표시 컨텍스트 메뉴가 있는 다운로드된 xcappdata 파일](/ios_debug_update_3.webp)
 
-Right-click on this file and select Show Package Contents to open the folder.
+이 파일을 마우스 오른쪽 버튼으로 클릭하고 Show Package Contents를 선택하여 폴더를 엽니다.
 
-Open the App Data folder, and you should now see a few folders like Documents, Library, tmp, etc.
+App Data 폴더를 열면 Documents, Library, tmp 등과 같은 몇 개의 폴더가 표시됩니다.
 
-![iOS app container folder structure showing Documents and Library folders](/ios_debug_update_4.webp)
+![Documents 및 Library 폴더를 보여주는 iOS 앱 컨테이너 폴더 구조](/ios_debug_update_4.webp)
 
-Then you will find a version in 2 folders:
+그러면 2개의 폴더에서 버전을 찾을 수 있습니다:
 
-`library/NoCloud/ionic_built_snapshots` is necessary after the app reboot
+`library/NoCloud/ionic_built_snapshots`는 앱 재부팅 후 필요합니다
 
-and `documents/versions` for hot reload
+그리고 `documents/versions`는 핫 리로드용입니다
 
 ### Android
 
-To debug on Android, you need to access the device from Android Studio:
+Android에서 디버깅하려면 Android Studio에서 기기에 액세스해야 합니다:
 
-* Click View > Tool Windows > Device File Explorer or click the Device File Explorer button in the tool window bar to open the Device File Explorer.
-* Select a device from the dropdown list.
-* Open the path **data/data/APP\_NAME/** where **APP\_NAME is your app ID.**
+* View > Tool Windows > Device File Explorer를 클릭하거나 도구 창 막대에서 Device File Explorer 버튼을 클릭하여 Device File Explorer를 엽니다.
+* 드롭다운 목록에서 기기를 선택합니다.
+* 경로 **data/data/APP\_NAME/**을 엽니다. 여기서 **APP\_NAME은 앱 ID입니다.**
 
-![Android Studio Device File Explorer showing app data directory](/android_debug_update.webp)
+![앱 데이터 디렉토리를 보여주는 Android Studio Device File Explorer](/android_debug_update.webp)
 
-Then Find the `versions` folder to see all the versions
+그런 다음 `versions` 폴더를 찾아 모든 버전을 확인합니다.
 
-:::tip[Did you know?]
-On Android, all versions are stored in one folder, unlike IOS where it has to be duplicated in two locations.
+:::tip[알고 계셨나요?]
+Android에서는 모든 버전이 하나의 폴더에 저장되는 반면, iOS에서는 두 위치에 복제되어야 합니다.
 :::
 
-## Understanding ios production crash logs
+## iOS 프로덕션 충돌 로그 이해하기
 
 <LinkCard
-    title="How to review your app's crash logs"
+    title="앱의 충돌 로그를 검토하는 방법"
     href="https://developer.apple.com/news/?id=nra79npr"
 />

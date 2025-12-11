@@ -1,41 +1,69 @@
 ---
-title: Selamat datang di Capgo
-description: >-
-  Capgo est une plateforme de mise à jour en direct open source pour Capacitor
-  et les équipes de développement mobile qui vous permet de livrer des mises à
-  jour en direct à vos utilisateurs en quelques minutes au lieu de plusieurs
-  jours.
+title: Capgo 문서에 오신 것을 환영합니다
+description: 강력한 모바일 앱 구축을 위한 Capgo 클라우드 실시간 업데이트 및 Capacitor 플러그인 전체 제품군에 대한 포괄적인 가이드입니다.
 tableOfContents: false
 next: false
 hero:
-  tagline: >-
-    Capgo는 Capacitor와 모바일 개발팀을 위한 오픈 소스 실시간 업데이트 플랫폼으로, 사용자에게 수일이 아닌 수분 만에 실시간
-    업데이트를 제공할 수 있게 해줍니다
+  tagline: 즉각적인 앱 업데이트를 위한 Capgo 클라우드를 마스터하고 모바일 개발을 향상시키는 포괄적인 Capacitor 플러그인 컬렉션을 탐색하세요
   actions:
-    - text: 시작하기
+    - text: Capgo 클라우드 시작하기
       link: /docs/getting-started/quickstart/
       icon: right-arrow
       variant: primary
-    - text: Github
-      link: 'https://github.com/Cap-go/Capgo/'
-      icon: external
+    - text: 모든 플러그인 보기
+      link: /docs/plugins/
+      icon: puzzle
       variant: minimal
 locale: ko
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## 🚀 Capgo 클라우드 - 간편한 실시간 업데이트
 
 <CardGrid stagger>
-  <Card title="실시간 업데이트의 힘" icon="rocket">
-    사용자에게 최상의 경험을 제공하기 위해 실시간 앱 업데이트, 중요한 버그 수정, 콘텐츠 변경, 베타 기능 등을 원활하게 제공합니다
+  <Card title="즉각적인 업데이트" icon="rocket">
+    앱 스토어 지연 없이 JavaScript, HTML, CSS 업데이트를 사용자에게 직접 배포합니다. 버그를 수정하고 며칠이 아닌 몇 분 만에 기능을 제공하세요.
   </Card>
-  <Card title="쉬운 통합" icon="pencil">
-    플러그인은 코드베이스에 통합하는 데 3단계만 필요하며, 며칠이 아닌 몇 분 만에 사용자에게 업데이트를 보낼 수 있습니다!
+  <Card title="3단계 통합" icon="pencil">
+    `npx @capgo/cli@latest init [APIKEY]` 명령어만으로 시작하고 간단한 통합으로 즉시 업데이트를 푸시하세요.
   </Card>
-  <Card title="설치" icon="setting">
-    Run `npx @capgo/cli@latest init [APIKEY]` 를 실행하여 시작하세요
+  <Card title="고급 기능" icon="setting">
+    A/B 테스팅을 위한 채널, 자동 롤백, 업데이트 분석, 암호화된 번들, 엔터프라이즈급 보안 기능을 제공합니다.
   </Card>
-  <Card title="광범위한 문서" icon="open-book">
-    온보딩 비디오와 함께 5분 안에 플러그인을 마스터하는 방법을 [문서](/docs/getting-started/quickstart/)에서 알아보세요
+  <Card title="완전한 가이드" icon="open-book">
+    포괄적인 문서에서 [빠른 설정](/docs/getting-started/quickstart/)부터 고급 배포 전략까지 모든 것을 배우세요.
   </Card>
 </CardGrid>
+
+## 📚 문서 내용
+
+<CardGrid>
+  <LinkCard
+    title="Capgo 클라우드 설정"
+    description="실시간 업데이트 통합, 채널 관리, CI/CD 통합, 배포 모니터링에 대한 완전한 가이드."
+    href="/docs/getting-started/quickstart/"
+  />
+  <LinkCard
+    title="20개 이상의 Capacitor 플러그인"
+    description="생체 인증, 구매, 카메라, 저장소 등 네이티브 기능을 위한 프로덕션 준비 플러그인 컬렉션을 탐색하세요."
+    href="/docs/plugins/"
+  />
+  <LinkCard
+    title="CLI 및 공개 API"
+    description="CLI 도구로 워크플로우를 자동화하고 REST API로 Capgo를 기존 시스템에 통합하세요."
+    href="/docs/cli/overview/"
+  />
+  <LinkCard
+    title="엔터프라이즈 솔루션"
+    description="더 많은 것이 필요한 팀을 위한 전담 지원, SLA, 맞춤 기능, 고급 보안 옵션."
+    href="/enterprise/"
+  />
+</CardGrid>
+
+## 🎯 빠른 링크
+
+- **처음이신가요?** [5분 퀵스타트](/docs/getting-started/quickstart/)로 시작하세요
+- **플러그인이 필요하신가요?** [플러그인 컬렉션](/docs/plugins/)을 둘러보거나 [맞춤 개발](/consulting/)을 요청하세요
+- **문제가 있으신가요?** [FAQ](/docs/faq/)를 확인하거나 [Discord](https://discord.capgo.app)에 참여하세요
+- **엔터프라이즈가 필요하신가요?** [엔터프라이즈 솔루션](/enterprise/)을 확인하거나 [문의하세요](mailto:support@capgo.app)

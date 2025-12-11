@@ -1,37 +1,35 @@
 ---
-title: Logs
-description: >-
-  Understand and utilize the application logs of Capgo to diagnostics and track
-  the action of your devices with the updates.
+title: "日志"
+description: "了解并使用 Capgo 的应用程序日志来诊断和跟踪设备更新的操作"
 sidebar:
   order: 8
 locale: zh
 ---
 
-## Understanding Application Logs
+## 理解应用程序日志
 
-The Logs page provides a detailed history of update events and diagnostic information for your application. This is crucial for monitoring the update process, troubleshooting issues, and understanding how your devices interact with Capgo. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the "Logs" tab (previously named "updates" in some older screenshots or documentation)](/docs/webapp/main-app-page).
+日志页面提供了应用程序更新事件和诊断信息的详细历史记录。这对于监控更新过程、解决问题以及了解设备如何与 Capgo 交互至关重要。您可以通过[点击您的应用](/docs/webapp/main-page)然后[点击"日志"标签(在一些较旧的屏幕截图或文档中以前称为"更新")](/docs/webapp/main-app-page)来访问它。
 
-From there you should see a page similar to this, displaying a list of log entries:
+从那里您应该看到类似这样的页面,显示日志条目列表:
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="show logs" /><figcaption>Logs Page Overview</figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="显示日志" /><figcaption>日志页面概览</figcaption></figure>
 
-Each log entry typically includes information such as the timestamp, the device ID, the log message or code, and the bundle version involved.
+每个日志条目通常包括时间戳、设备 ID、日志消息或代码以及所涉及的 bundle 版本等信息。
 
-### Example Log Entries and Meanings
+### 日志条目示例及含义
 
-Here are a few examples of common log codes you might encounter:
+以下是您可能遇到的一些常见日志代码示例:
 
-*   **`noNew`**: This indicates that the device checked for an update but already has the latest available version for its assigned channel.
-*   **`get`**: Signifies that the device successfully received information to download a new bundle.
-*   **`download_complete`**: Confirms that a new bundle has been successfully downloaded to the device.
-*   **`set`**: Means a downloaded bundle has been successfully installed and set as the active version on the device.
-*   **`update_fail`**: Indicates that a new bundle was installed, but the application failed to confirm its readiness (e.g., `notifyAppReady` was not called), leading to a rollback.
+*   **`noNew`**: 这表示设备检查了更新,但已经拥有其分配频道的最新可用版本。
+*   **`get`**: 表示设备成功接收到下载新 bundle 的信息。
+*   **`download_complete`**: 确认新 bundle 已成功下载到设备。
+*   **`set`**: 表示已下载的 bundle 已成功安装并设置为设备上的活动版本。
+*   **`update_fail`**: 表示安装了新 bundle,但应用程序未能确认其就绪状态(例如,未调用 `notifyAppReady`),导致回滚。
 
-These are just a few examples. For a comprehensive list of all possible log codes (both from the backend and the device) and their detailed explanations, please refer to our detailed debugging guide:
+这些只是几个示例。有关所有可能的日志代码(来自后端和设备)及其详细说明的完整列表,请参阅我们的详细调试指南:
 
-➡️ **[Full Log Code Reference and Debugging Guide](/docs/plugin/debugging/#understanding-cloud-logs)**
+➡️ **[完整日志代码参考和调试指南](/docs/plugin/debugging/#understanding-cloud-logs)**
 
-## Getting More Details About a Log
+## 获取有关日志的更多详细信息
 
-If you click on a specific log entry, it will typically take you to the [device's page](/docs/webapp/devices/). This allows you to see the full history for that particular device, which can be very helpful for diagnosing device-specific issues or understanding its update journey.
+如果您点击特定的日志条目,它通常会将您带到[设备页面](/docs/webapp/devices/)。这允许您查看该特定设备的完整历史记录,这对于诊断特定于设备的问题或了解其更新历程非常有帮助。

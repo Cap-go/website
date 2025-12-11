@@ -1,5 +1,6 @@
 ---
 title: Canales
+description: "Aprende cómo gestionar y configurar canales de Actualización en Vivo en Capgo, permitiendo actualizaciones de aplicaciones sin problemas dirigiendo compilaciones específicas de bundles JS a dispositivos configurados para esos canales."
 sidebar:
   order: 2
 locale: es
@@ -9,26 +10,55 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 Un canal de Actualización en Vivo apunta a una compilación específica del bundle JS de tu aplicación que se compartirá con cualquier dispositivo configurado para escuchar ese canal para actualizaciones. Cuando [instalas el SDK de Actualizaciones en Vivo de Capgo](/docs/getting-started/quickstart/) en tu aplicación, cualquier binario nativo configurado para ese canal verificará las actualizaciones disponibles cada vez que se inicie la aplicación. Puedes cambiar la compilación a la que apunta un canal en cualquier momento y también puedes revertir a compilaciones anteriores si es necesario.
 
-## Configurando un Canal
+## Cómo un dispositivo elige un canal (precedencia)
 
-Cada aplicación viene con un canal predeterminado llamado "Production" que no se puede eliminar. Para añadir nuevos canales:
+Cuando un dispositivo verifica una actualización, Capgo decide qué canal usar en este orden estricto (prioridad más alta primero):
 
-1. Ve a la sección "Channels" del panel de control de Capgo
+1. **Mapeo forzado de dispositivo (Panel)** – Ancla manualmente un ID de dispositivo específico a un canal. Úsalo para depuración urgente o pruebas controladas con un solo usuario real. Esto siempre gana.
+2. **Anulación en la nube (por dispositivo) vía `setChannel()` o Panel** – Creado cuando tu aplicación llama a `setChannel()` (a menudo expuesto en un menú QA/debug) o cambias el canal del dispositivo en el panel. Úsalo para usuarios de QA cambiando entre canales de características / PR o para reproducir un problema de usuario. Reinstalar el binario no lo borra; eliminar la entrada del dispositivo sí lo hace.
+3. **Config de Capacitor `defaultChannel` (predeterminado de compilación de prueba)** – Si está presente en `capacitor.config.*` y no existe forzado/anulación, la aplicación comienza en este canal (por ejemplo, `beta`, `qa`, `pr-123`). Destinado para TestFlight / compilaciones internas para que los evaluadores aterricen automáticamente en un canal de pre-lanzamiento. Las compilaciones de producción típicamente dejan esto sin configurar.
+4. **Canal Predeterminado en la Nube (ruta principal ~99% de usuarios)** – Si marcas un canal predeterminado en el panel, todos los usuarios finales normales (sin forzado, sin anulación, sin config defaultChannel) se conectan aquí. Cámbialo para desplegar o revertir al instante—sin nuevo binario. Si tienes predeterminados específicos de plataforma (uno solo para iOS, uno solo para Android), cada dispositivo aterriza en el predeterminado que coincida con su plataforma. Dejar el predeterminado en la nube sin configurar está permitido; en ese caso, el dispositivo debe coincidir en los pasos 1–3 para recibir actualizaciones.
+
+Mejor práctica:
+- Trata 1–3 como capas de excepción / prueba; cuando establezcas un predeterminado en la nube, los usuarios reales deberían fluir hacia él. Si eliges no establecer uno, sé deliberado sobre cómo los usuarios se conectan (típicamente vía `defaultChannel` en la configuración o anulaciones por dispositivo).
+- Solo configura `defaultChannel` en binarios que explícitamente envíes a evaluadores. Dejarlo sin configurar mantiene la lógica de producción centralizada en el panel.
+- Usa `setChannel()` con moderación en producción—principalmente para QA o diagnósticos dirigidos.
+
+Si un canal está deshabilitado para la plataforma (interruptores iOS/Android) cuando de otro modo sería elegido, el proceso de selección lo omite y continúa en la lista.
+
+> Resumen: Forzado > Anulación > Config `defaultChannel` > Predeterminado en la Nube.
+
+## Comportamiento del Canal Predeterminado
+
+Establecer un predeterminado en la nube es opcional, pero generalmente sirve como la ruta general para nuevos dispositivos. Sin uno, solo los dispositivos que coincidan en mapeos forzados, anulaciones o un `defaultChannel` en la configuración de Capacitor recibirán actualizaciones. Cuando elijas marcar predeterminados, ten en cuenta estos patrones:
+
+- **Predeterminado único (más común)** – Si el canal tiene tanto iOS como Android habilitados, se convierte en el único predeterminado; cualquier dispositivo sin anulaciones se conectará aquí.
+- **Predeterminados específicos de plataforma** – Si divides canales por plataforma (por ejemplo, `ios-production` con solo iOS habilitado y `android-production` con solo Android habilitado), marca cada uno como el predeterminado para su plataforma. Los dispositivos iOS van al predeterminado de iOS, los dispositivos Android van al predeterminado de Android.
+
+Recuerda que el predeterminado en la nube y `defaultChannel` en `capacitor.config.*` ocupan la misma capa de decisión. Si estableces un predeterminado en la nube, no necesitas duplicar el valor en tu configuración de Capacitor—deja `defaultChannel` vacío para compilaciones de producción. Reserva `defaultChannel` para binarios que intencionalmente envíes a evaluadores o QA cuando quieras que comiencen en un canal que no sea de producción incluso si el predeterminado en la nube es diferente.
+
+Puedes cambiar los predeterminados en cualquier momento en el panel. Cuando cambias un predeterminado, los nuevos dispositivos obedecen el nuevo enrutamiento inmediatamente y los dispositivos existentes siguen las reglas normales de precedencia la próxima vez que se registren.
+
+## Configurar un Canal
+
+Durante la incorporación creas el primer canal (la mayoría de los equipos lo nombran "Production"), pero nada está bloqueado—puedes renombrar o eliminar cualquier canal en cualquier momento. Para agregar canales adicionales más tarde:
+
+1. Ve a la sección "Channels" del panel de Capgo
 2. Haz clic en el botón "New Channel"
 3. Ingresa un nombre para el canal y haz clic en "Create"
 
-Los nombres de los canales pueden ser cualquier cosa que desees. Una estrategia común es hacer coincidir los canales con tus etapas de desarrollo, como:
+Los nombres de los canales pueden ser lo que desees. Una estrategia común es hacer coincidir los canales con tus etapas de desarrollo, tales como:
 
 - `Development` - para probar actualizaciones en vivo en dispositivos locales o emuladores
 - `QA` - para que tu equipo de QA verifique las actualizaciones antes de un lanzamiento más amplio
 - `Staging` - para pruebas finales en un entorno similar a producción
 - `Production` - para la versión de tu aplicación que los usuarios finales reciben de las tiendas de aplicaciones
 
-## Configurando el Canal en Tu Aplicación
+## Configurar el Canal en Tu Aplicación
 
-Con tus canales creados, necesitas configurar tu aplicación para escuchar el canal apropiado. En este ejemplo, usaremos el canal `Development`
+Con tus canales creados, necesitas configurar tu aplicación para escuchar el canal apropiado. En este ejemplo, usaremos el canal `Development`.
 
-Abre tu archivo `capacitor.config.ts` (o `capacitor.config.json`). En la sección `plugins`, establece la propiedad `channel` del plugin `CapacitorUpdater` con el nombre de tu canal deseado:
+Abre tu archivo `capacitor.config.ts` (o `capacitor.config.json`). Bajo la sección `plugins`, opcionalmente establece `defaultChannel` para **compilaciones de prueba** (internas / QA). Para compilaciones de producción, prefiere omitirlo para que los dispositivos usen el Predeterminado en la Nube a menos que se anule explícitamente.
 
 ```ts
 import { CapacitorConfig } from '@capacitor/cli';
@@ -36,56 +66,98 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   plugins: {
     CapacitorUpdater: {
+      // Para una compilación QA/TestFlight – los evaluadores comienzan en el canal Development automáticamente.
       defaultChannel: 'Development',
+      // Las compilaciones de producción generalmente omiten esto para que los usuarios se conecten al canal Predeterminado en la Nube.
     },
   },
 };
 ```
 
-Luego, compila tu aplicación web y ejecuta `npx cap sync` para copiar el archivo de configuración actualizado a tus proyectos iOS y Android. Si te saltas este paso de sincronización, tus proyectos nativos continuarán usando el canal que tenían configurado previamente.
+A continuación, compila tu aplicación web y ejecuta `npx cap sync` para copiar el archivo de configuración actualizado a tus proyectos iOS y Android. Si omites este paso de sincronización, tus proyectos nativos continuarán usando el canal para el que estaban previamente configurados.
 
 <Aside type="caution">
+Orden de selección de canal: Forzado > Anulación (`setChannel` / panel) > Config `defaultChannel` > Predeterminado en la Nube.
 
-La propiedad `defaultChannel` siempre anulará el canal predeterminado en la nube. Pero aún puedes forzar el deviceId a un canal en la nube.
+Usa `defaultChannel` solo en compilaciones de prueba/internas; déjalo fuera para producción para que los usuarios sigan el Predeterminado en la Nube (cuando esté establecido) en lugar de duplicar el enrutamiento en la configuración nativa.
 
+Aún puedes forzar (anclar) un dispositivo o aplicar una anulación más tarde—esos superan inmediatamente el valor de configuración.
+
+> Los nombres de los canales distinguen entre mayúsculas y minúsculas.
 </Aside>
 
-## Asignando un Bundle a un Canal
 
-Para desplegar una actualización en vivo, necesitas subir una nueva compilación del bundle JS y asignarla a un canal. Puedes hacer esto en un solo paso con el CLI de Capgo:
+## Opciones y Estrategias de Canales
+
+Los canales tienen varias opciones que controlan quién puede recibir actualizaciones y cómo se entregan las actualizaciones. Las más importantes están a continuación. Puedes configurarlas desde la aplicación web, la CLI o la API Pública.
+
+- Canal predeterminado: Opcionalmente marca el canal o canales específicos de plataforma a los que se conectan los nuevos dispositivos. Ve "Comportamiento del Canal Predeterminado" para escenarios de enrutamiento.
+- Filtros de plataforma: Habilita o deshabilita la entrega a dispositivos `iOS` y/o `Android` por canal.
+- Deshabilitar degradación automática bajo nativo: Previene enviar una actualización cuando la versión de la aplicación nativa del dispositivo es más nueva que el bundle del canal (por ejemplo, dispositivo en 1.2.3 mientras el canal tiene 1.2.2).
+- Permitir compilaciones de desarrollo: Permite actualizaciones a compilaciones de desarrollo (útil para pruebas).
+- Permitir dispositivos emuladores: Permite actualizaciones a emuladores/simuladores (útil para pruebas).
+- Permitir auto-asignación de dispositivo: Permite a la aplicación cambiar a este canal en tiempo de ejecución usando `setChannel`. Si está deshabilitado, `setChannel` fallará para este canal.
+
+### Estrategias de Deshabilitar Actualización Automática
+
+Usa esto para restringir qué tipos de actualizaciones el canal entregará automáticamente. Opciones:
+
+- major: Bloquea actualizaciones entre versiones mayores (0.0.0 → 1.0.0). Actualizaciones menores y de parche aún permitidas.
+- minor: Bloquea actualizaciones entre versiones menores (por ejemplo, 1.1.0 → 1.2.0) y mayores. Actualizaciones de parche aún permitidas. Nota: no bloquea 0.1.0 → 1.1.0.
+- patch: Muy estricto. Permite solo versiones de parche crecientes dentro de la misma versión mayor y menor. Ejemplos: 0.0.311 → 0.0.314 ✅, 0.1.312 → 0.0.314 ❌, 1.0.312 → 0.0.314 ❌.
+- metadata: Requiere metadatos de versión mínima de actualización en cada bundle. Configura vía CLI usando `--min-update-version` o `--auto-min-update-version`. Si falta, el canal se marca como mal configurado y las actualizaciones serán rechazadas hasta que se establezca.
+- none: Permite todas las actualizaciones según compatibilidad semver.
+
+Aprende más detalles y ejemplos en Estrategia de deshabilitar actualizaciones en /docs/cli/commands/#disable-updates-strategy.
+
+Ejemplo (CLI):
+
+```bash
+# Bloquear actualizaciones mayores en el canal Production
+npx @capgo/cli@latest channel set production com.example.app \
+  --disable-auto-update major
+
+# Permitir que los dispositivos se auto-asignen al canal Beta
+npx @capgo/cli@latest channel set beta com.example.app --self-assign
+```
+
+
+## Asignar un Bundle a un Canal
+
+Para implementar una actualización en vivo, necesitas subir una nueva compilación de bundle JS y asignarla a un canal. Puedes hacer esto en un solo paso con la CLI de Capgo:
 
 ```shell
 npx @capgo/cli@latest bundle upload --channel=Development
 ```
 
-Esto subirá tus activos web compilados y establecerá el nuevo bundle como la compilación activa para el canal `Development`. Cualquier aplicación configurada para escuchar ese canal recibirá la actualización la próxima vez que busque una.
+Esto subirá tus activos web compilados y establecerá el nuevo bundle como la compilación activa para el canal `Development`. Cualquier aplicación configurada para escuchar ese canal recibirá la actualización la próxima vez que verifique una.
 
-También puedes asignar compilaciones a canales desde la sección "Bundles" del panel de control de Capgo. Haz clic en el ícono de menú junto a una compilación y selecciona "Assign to Channel" para elegir el canal para esa compilación.
+También puedes asignar compilaciones a canales desde la sección "Bundles" del panel de Capgo. Haz clic en el ícono de menú junto a una compilación y selecciona "Assign to Channel" para elegir el canal para esa compilación.
 
 ## Versionado de Bundles y Canales
 
-Es importante notar que los bundles en Capgo son globales para tu aplicación, no específicos para canales individuales. El mismo bundle puede ser asignado a múltiples canales.
+Es importante notar que los bundles en Capgo son globales para tu aplicación, no específicos de canales individuales. El mismo bundle puede ser asignado a múltiples canales.
 
-Al versionar tus bundles, recomendamos usar versionado semántico [semver](https://semver.org/) con identificadores de prelanzamiento para compilaciones específicas de canal. Por ejemplo, una versión beta podría versionarse como `1.2.3-beta.1`.
+Al versionar tus bundles, recomendamos usar versionado semántico [semver](https://semver.org/) con identificadores de pre-lanzamiento para compilaciones específicas de canales. Por ejemplo, un lanzamiento beta podría versionarse como `1.2.3-beta.1`.
 
 Este enfoque tiene varios beneficios:
 
-- Comunica claramente la relación entre compilaciones. `1.2.3-beta.1` es obviamente un prelanzamiento de `1.2.3`
-- Permite reutilizar números de versión entre canales, reduciendo la confusión
-- Habilita rutas claras de reversión. Si necesitas revertir desde `1.2.3`, sabes que `1.2.2` es la versión estable anterior
+- Comunica claramente la relación entre compilaciones. `1.2.3-beta.1` es obviamente un pre-lanzamiento de `1.2.3`.
+- Permite reutilizar números de versión entre canales, reduciendo la confusión.
+- Habilita rutas de reversión claras. Si necesitas revertir desde `1.2.3`, sabes que `1.2.2` es la versión estable anterior.
 
-Aquí hay un ejemplo de cómo podrías alinear tus versiones de bundle con una configuración típica de canal:
+Aquí hay un ejemplo de cómo podrías alinear las versiones de tus bundles con una configuración típica de canales:
 
 - Canal `Development`: `1.2.3-dev.1`, `1.2.3-dev.2`, etc.
 - Canal `QA`: `1.2.3-qa.1`, `1.2.3-qa.2`, etc.
 - Canal `Staging`: `1.2.3-rc.1`, `1.2.3-rc.2`, etc.
 - Canal `Production`: `1.2.3`, `1.2.4`, etc.
 
-Usar semver con identificadores de prelanzamiento es un enfoque recomendado, pero no estrictamente requerido. La clave es encontrar un esquema de versionado que comunique claramente las relaciones entre tus compilaciones y se alinee con el proceso de desarrollo de tu equipo.
+Usar semver con identificadores de pre-lanzamiento es un enfoque recomendado, pero no estrictamente requerido. La clave es encontrar un esquema de versionado que comunique claramente las relaciones entre tus compilaciones y se alinee con el proceso de desarrollo de tu equipo.
 
-## Revirtiendo una Actualización en Vivo
+## Revertir una Actualización en Vivo
 
-Si despliegas una actualización en vivo que introduce un error o que necesita ser revertida por otros motivos, puedes fácilmente volver a una compilación anterior. Desde la sección "Channels" del panel de control:
+Si implementas una actualización en vivo que introduce un error o necesita ser revertida, puedes fácilmente revertir a una compilación anterior. Desde la sección "Channels" del panel:
 
 <Steps>
 
@@ -96,21 +168,32 @@ Si despliegas una actualización en vivo que introduce un error o que necesita s
 
 </Steps>
 
-La compilación seleccionada se convertirá inmediatamente en la compilación activa para ese canal nuevamente. Las aplicaciones recibirán la versión revertida la próxima vez que busquen una actualización.
+La compilación seleccionada se convertirá inmediatamente en la compilación activa para ese canal nuevamente. Las aplicaciones recibirán la versión revertida la próxima vez que verifiquen una actualización.
 
-## Automatizando Despliegues
+## Automatizar Implementaciones
 
-Para flujos de trabajo más avanzados, puedes automatizar tus despliegues de actualizaciones en vivo como parte de tu pipeline CI/CD. Al integrar Capgo en tu proceso de compilación, puedes subir automáticamente nuevos bundles y asignarlos a canales cuando hagas push a ciertas ramas o crees nuevos lanzamientos.
+Para flujos de trabajo más avanzados, puedes automatizar tus implementaciones de actualización en vivo como parte de tu pipeline de CI/CD. Al integrar Capgo en tu proceso de compilación, puedes subir automáticamente nuevos bundles y asignarlos a canales cada vez que hagas push a ciertas ramas o crees nuevos lanzamientos.
 
-Consulta la documentación de [Integración CI/CD](/docs/getting-started/cicd-integration/) para aprender más sobre la automatización de actualizaciones en vivo de Capgo.
+Consulta los documentos de [Integración CI/CD](/docs/getting-started/cicd-integration/) para aprender más sobre automatizar actualizaciones en vivo de Capgo.
 
-## Desplegando a un Dispositivo
+## Implementar en un Dispositivo
 
-Ahora que entiendes los canales, estás listo para comenzar a desplegar actualizaciones en vivo a dispositivos reales. El proceso básico es:
+Ahora que entiendes los canales, estás listo para comenzar a implementar actualizaciones en vivo en dispositivos reales. El proceso básico es:
 
 1. Instalar el SDK de Capgo en tu aplicación
 2. Configurar la aplicación para escuchar tu canal deseado
 3. Subir una compilación y asignarla a ese canal
-4. ¡Iniciar la aplicación y esperar la actualización!
+4. ¡Lanzar la aplicación y esperar la actualización!
 
-Para una guía más detallada, consulta la guía de [Desplegando Actualizaciones en Vivo](/docs/getting-started/deploy/). ¡Felices actualizaciones!
+Para un recorrido más detallado, consulta la guía de [Implementación de Actualizaciones en Vivo](/docs/getting-started/deploy/). ¡Felices actualizaciones!
+
+## Uso Avanzado de Canales: Segmentación de Usuarios
+
+Los canales pueden usarse para más que solo etapas de desarrollo. Son una herramienta poderosa para la segmentación de usuarios, habilitando características como:
+
+- Banderas de características para diferentes niveles de usuario
+- Pruebas A/B
+- Despliegues graduales de características
+- Programas de pruebas beta
+
+Aprende cómo implementar estos casos de uso avanzados en nuestra guía: [Cómo Segmentar Usuarios por Plan y Canales para Banderas de Características y Pruebas A/B](/blog/how-to-segment-users-by-plan-and-channels/).

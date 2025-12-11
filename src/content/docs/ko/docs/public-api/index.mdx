@@ -1,45 +1,42 @@
 ---
-title: API Overview
-description: >-
-  Explore Capgo's public API for managing resources such as organizations,
-  devices, channels, and bundles using RESTful HTTP methods and authentication.
+title: "API 개요"
+description: "RESTful HTTP 메서드와 인증을 사용하여 조직, 기기, 채널 및 번들과 같은 리소스를 관리하기 위한 Capgo의 공개 API를 탐색하세요."
 sidebar:
   order: 1
-locale: ko
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
 
-This is the documentation of the public API of Capgo cloud. The API allows you to programmatically manage your Capgo resources, including organizations, devices, channels, and bundles. It's designed to be RESTful and uses standard HTTP methods.
+이것은 Capgo cloud의 공개 API 문서입니다. API를 사용하면 조직, 기기, 채널 및 번들을 포함한 Capgo 리소스를 프로그래밍 방식으로 관리할 수 있습니다. RESTful로 설계되었으며 표준 HTTP 메서드를 사용합니다.
 
-## Authentication
+## 인증
 
-All API endpoints require authentication. To authenticate your requests, add your API key in the `authorization` header.
+모든 API 엔드포인트는 인증이 필요합니다. 요청을 인증하려면 `authorization` 헤더에 API 키를 추가하세요.
 
-Example:
+예시:
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 ```
 
 <LinkCard
-	title="Get API key"
-	description="Generate your API key in the Capgo dashboard"
+	title="API 키 받기"
+	description="Capgo 대시보드에서 API 키 생성"
 	href="https://console.capgo.app/dashboard/apikeys/"
 />
 
-## Rate Limiting
+## 속도 제한
 
-The API implements rate limiting to ensure fair usage. Current limits are:
-- 100 requests per minute for standard accounts
-- 1000 requests per minute for enterprise accounts
+API는 공정한 사용을 보장하기 위해 속도 제한을 구현합니다. 현재 제한은:
+- 표준 계정의 경우 분당 100개 요청
+- 엔터프라이즈 계정의 경우 분당 1000개 요청
 
-If you exceed these limits, you'll receive a 429 (Too Many Requests) response.
+이러한 제한을 초과하면 429 (Too Many Requests) 응답을 받게 됩니다.
 
-## Response Format
+## 응답 형식
 
-All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include an `error` field with a description of what went wrong.
+모든 응답은 JSON 형식입니다. 성공 응답에는 일반적으로 `data` 객체 또는 `status` 필드가 포함됩니다. 오류 응답에는 무엇이 잘못되었는지에 대한 설명이 포함된 `error` 필드가 포함됩니다.
 
-Example success response:
+성공 응답 예시:
 ```json
 {
   "status": "ok",
@@ -47,7 +44,7 @@ Example success response:
 }
 ```
 
-Example error response:
+오류 응답 예시:
 ```json
 {
   "error": "Invalid API key",
@@ -55,53 +52,53 @@ Example error response:
 }
 ```
 
-## Available Endpoints
+## 사용 가능한 엔드포인트
 
 <LinkCard
-	title="Organizations"
-	description="Create and manage organizations, update settings, and handle organization-level configurations"
+	title="조직"
+	description="조직 생성 및 관리, 설정 업데이트 및 조직 수준 구성 처리"
 	href="/docs/public-api/organizations/"
 />
 
 <LinkCard
-	title="API Keys"
-	description="Generate, list, and revoke API keys for secure access to the Capgo API"
+	title="API 키"
+	description="Capgo API에 대한 안전한 액세스를 위한 API 키 생성, 나열 및 취소"
 	href="/docs/public-api/api-keys/"
 />
 
 <LinkCard
-	title="Members"
-	description="Manage organization members, roles, and permissions"
+	title="회원"
+	description="조직 회원, 역할 및 권한 관리"
 	href="/docs/public-api/members/"
 />
 
 <LinkCard
-	title="Statistics"
-	description="Access detailed analytics about app usage, storage, and bandwidth consumption"
+	title="통계"
+	description="앱 사용, 스토리지 및 대역폭 소비에 대한 상세한 분석에 액세스"
 	href="/docs/public-api/statistics/"
 />
 
 <LinkCard
-	title="Channels"
-	description="Control app update channels, versions, and update policies"
+	title="채널"
+	description="앱 업데이트 채널, 버전 및 업데이트 정책 제어"
 	href="/docs/public-api/channels/"
 />
 
 <LinkCard
-	title="Devices"
-	description="Track and manage devices running your app, including version and channel assignments"
+	title="기기"
+	description="앱을 실행하는 기기 추적 및 관리, 버전 및 채널 할당 포함"
 	href="/docs/public-api/devices/"
 />
 
 <LinkCard
-	title="Bundles"
-	description="Handle app bundles, including uploading, listing, and managing versions"
+	title="번들"
+	description="업로드, 나열 및 버전 관리를 포함한 앱 번들 처리"
 	href="/docs/public-api/bundles/"
 />
 
-## Best Practices
+## 모범 사례
 
-1. **Error Handling**: Always check for error responses and handle them appropriately
-2. **Rate Limiting**: Implement exponential backoff when hitting rate limits
-3. **Caching**: Cache responses when appropriate to reduce API calls
-4. **Versioning**: Keep track of API changes through our changelog 
+1. **오류 처리**: 항상 오류 응답을 확인하고 적절하게 처리하세요
+2. **속도 제한**: 속도 제한에 도달할 때 지수 백오프를 구현하세요
+3. **캐싱**: API 호출을 줄이기 위해 적절한 경우 응답을 캐시하세요
+4. **버전 관리**: 변경 로그를 통해 API 변경 사항을 추적하세요 

@@ -1,7 +1,7 @@
 ---
 title: "Cordova"
 locale: id
-description: "Menjelajahi potensi ketersediaan plugin capacitor-updater untuk Cordova dan tantangan yang terlibat dalam pengembangannya."
+description: "Menjelajahi potensi ketersediaan plugin capacitor-updater untuk Cordova dan tantangan yang terlibat dalam pengembangannya"
 sidebar:
   order: 8
 ---

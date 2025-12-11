@@ -1,47 +1,44 @@
 ---
-title: Bundles
-description: >-
-  Detailed guide for managing Capgo Bundles, covering listing, deleting,
-  versioning, and storage optimization for app update packages.
+title: "Bundles"
+description: "管理 Capgo Bundles 的详细指南，涵盖应用更新包的列表显示、删除、版本管理和存储优化。"
 sidebar:
   order: 8
-locale: zh
 ---
 
-Bundles are the core update packages in Capgo. Each bundle contains the web assets (HTML, CSS, JS) that make up your app's content. The Bundles API allows you to manage these update packages, including listing and deleting them.
+Bundles 是 Capgo 的核心更新包。每个 bundle 包含构成应用内容的 web 资源（HTML、CSS、JS）。Bundles API 允许您管理这些更新包，包括列表显示和删除。
 
-## Understanding Bundles
+## 了解 Bundles
 
-A bundle represents a specific version of your app's web content and includes:
-- **Version**: Semantic version number of the bundle
-- **Checksum**: Unique hash to verify bundle integrity
-- **Storage Info**: Details about where and how the bundle is stored
-- **Native Requirements**: Minimum native app version requirements
-- **Metadata**: Creation time, ownership, and other tracking information
+bundle 代表应用 web 内容的特定版本，包括：
+- **Version**：bundle 的语义版本号
+- **Checksum**：用于验证 bundle 完整性的唯一哈希
+- **Storage Info**：有关 bundle 存储位置和方式的详细信息
+- **Native Requirements**：原生应用的最低版本要求
+- **Metadata**：创建时间、所有权和其他跟踪信息
 
-## Manual Bundle Creation (Without CLI)
+## 手动 Bundle 创建（无需 CLI）
 
-Here's how to create and upload bundles manually without using the Capgo CLI:
+如何在不使用 Capgo CLI 的情况下手动创建和上传 bundle：
 
-### Step 1: Build Your App
+### 步骤 1：构建应用
 
-First, build your app's web assets:
+首先，构建应用的 web 资源：
 
 ```bash
 npm run build
 ```
 
-### Step 2: Create Bundle Zip Using Same Packages as Capgo CLI
+### 步骤 2：使用与 Capgo CLI 相同的包创建 Bundle Zip
 
-**Important**: Use the exact same JavaScript packages that Capgo CLI uses internally to ensure compatibility.
+**重要**：使用与 Capgo CLI 内部使用完全相同的 JavaScript 包以确保兼容性。
 
-#### Install Required Packages
+#### 安装所需的包
 
 ```bash
 npm install adm-zip @tomasklaen/checksum
 ```
 
-#### Create Zip Bundle with JavaScript (Same as Capgo CLI)
+#### 使用 JavaScript 创建 Zip Bundle（与 Capgo CLI 相同）
 
 ```javascript
 const fs = require('node:fs');
@@ -121,7 +118,7 @@ async function main() {
 main();
 ```
 
-### Step 3: Calculate SHA256 Checksum Using Same Package as CLI
+### 步骤 3：使用与 CLI 相同的包计算 SHA256 校验和
 
 ```javascript
 const fs = require('node:fs');
@@ -143,7 +140,7 @@ async function main() {
 main();
 ```
 
-### Step 4: Upload Bundle to Your Storage
+### 步骤 4：将 Bundle 上传到存储
 
 Upload your zip file to any web-accessible storage:
 
@@ -167,7 +164,7 @@ Examples of valid public URLs:
 - `https://github.com/username/repo/releases/download/v1.2.3/bundle.zip`
 - `https://cdn.jsdelivr.net/gh/username/repo@v1.2.3/dist.zip`
 
-### Step 5: Register Bundle with Capgo API
+### 步骤 5：向 Capgo API 注册 Bundle
 
 Register the external bundle with Capgo using direct API calls:
 
@@ -201,7 +198,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 }
 ```
 
-#### API Parameters
+#### API 参数
 
 | Parameter | Description | Required |
 |-----------|-------------|----------|
@@ -210,7 +207,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 | `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
 | `checksum` | SHA256 checksum of the zip file | Yes |
 
-## Bundle Structure Requirements
+## Bundle 结构要求
 
 Your bundle zip must follow these requirements:
 
@@ -218,7 +215,7 @@ Your bundle zip must follow these requirements:
 2. **Capacitor Integration**: Must call `notifyAppReady()` in your app code
 3. **Asset Paths**: Use relative paths for all assets
 
-### Valid Bundle Structure
+### 有效的 Bundle 结构
 
 ```
 bundle.zip
@@ -229,7 +226,7 @@ bundle.zip
 └── images/
 ```
 
-## Complete Manual Workflow Example
+## 完整的手动工作流程示例
 
 Simple Node.js script to zip, checksum, and upload to Capgo:
 
@@ -290,9 +287,9 @@ Install dependencies:
 npm install adm-zip @tomasklaen/checksum node-fetch
 ```
 
-## Checksum Verification
+## 校验和验证
 
-### JavaScript Checksum Calculation (Same as Capgo CLI)
+### JavaScript 校验和计算（与 Capgo CLI 相同）
 
 Use the exact same package and method that Capgo CLI uses internally:
 
@@ -329,7 +326,7 @@ async function main() {
 main();
 ```
 
-### Checksum Importance
+### 校验和的重要性
 
 - **Bundle Integrity**: Ensures the bundle hasn't been corrupted during transfer
 - **API Verification**: Capgo verifies checksums before accepting bundles
@@ -350,11 +347,11 @@ main();
 
 Retrieve bundle information. Returns 50 bundles per page.
 
-#### Query Parameters
+#### 查询参数
 - `app_id`: Required. The ID of your app
 - `page`: Optional. Page number for pagination
 
-#### Response Type
+#### 响应类型
 
 ```typescript
 interface Bundle {
@@ -377,7 +374,7 @@ interface Bundle {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 # Get all bundles
@@ -389,7 +386,7 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/bundle/?app_id=app_123&page=1"
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -417,7 +414,7 @@ curl -H "authorization: your-api-key" \
 
 Delete one or all bundles for an app. Use with caution as this action cannot be undone.
 
-#### Query Parameters
+#### 查询参数
 
 For deleting a specific bundle:
 ```typescript
@@ -434,7 +431,7 @@ interface BundleDeleteAll {
 }
 ```
 
-#### Example Requests
+#### 请求示例s
 
 ```bash
 # Delete specific bundle
@@ -457,7 +454,7 @@ curl -X DELETE \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -482,7 +479,7 @@ interface CreateBundleBody {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X POST \
@@ -497,7 +494,7 @@ curl -X POST \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -522,7 +519,7 @@ interface UpdateMetadataBody {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X POST \
@@ -537,7 +534,7 @@ curl -X POST \
   https://api.capgo.app/bundle/metadata
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -561,7 +558,7 @@ interface SetChannelBody {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X PUT \
@@ -575,7 +572,7 @@ curl -X PUT \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -584,7 +581,7 @@ curl -X PUT \
 }
 ```
 
-## Error Handling
+## 错误处理
 
 Common error scenarios and their responses:
 
@@ -614,7 +611,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 常见用例
 
 1. **Cleanup Old Versions**
 ```typescript
@@ -633,7 +630,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Storage Considerations
+## 存储考虑因素
 
 1. **Retention Policy**: Define how long to keep old bundles
 2. **Size Management**: Monitor bundle sizes and storage usage

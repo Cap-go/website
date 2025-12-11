@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Learn how to install and use the NFC plugin to read and write NFC tags in your
-  Capacitor app.
+title: 시작하기
+description: Capacitor 앱에서 NFC 태그를 읽고 쓰기 위해 NFC 플러그인을 설치하고 사용하는 방법을 알아보세요.
 sidebar:
   order: 2
 locale: ko
@@ -12,29 +10,29 @@ import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **패키지 설치**
    <PackageManagers pkg="@capgo/capacitor-nfc" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Configuration
+## 구성
 
-### iOS Configuration
+### iOS 구성
 
-Add the NFC usage description to your `Info.plist`:
+`Info.plist`에 NFC 사용 설명을 추가하세요:
 
 ```xml
 <key>NFCReaderUsageDescription</key>
 <string>This app needs NFC access to read and write tags</string>
 ```
 
-Enable the Near Field Communication Tag Reading capability in your Xcode project.
+Xcode 프로젝트에서 Near Field Communication Tag Reading 기능을 활성화하세요.
 
-### Android Configuration
+### Android 구성
 
-Add the NFC permission to your `AndroidManifest.xml`:
+`AndroidManifest.xml`에 NFC 권한을 추가하세요:
 
 ```xml
 <manifest>
@@ -43,9 +41,9 @@ Add the NFC permission to your `AndroidManifest.xml`:
 </manifest>
 ```
 
-## Usage
+## 사용법
 
-### Start Scanning for NFC Tags
+### NFC 태그 스캔 시작
 
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
@@ -62,7 +60,7 @@ const listener = await CapacitorNfc.addListener('nfcEvent', (event) => {
 });
 ```
 
-### Read NFC Tag
+### NFC 태그 읽기
 
 ```typescript
 await CapacitorNfc.addListener('nfcEvent', (event) => {
@@ -85,7 +83,7 @@ await CapacitorNfc.addListener('nfcEvent', (event) => {
 });
 ```
 
-### Write to NFC Tag
+### NFC 태그에 쓰기
 
 ```typescript
 // Prepare a text record
@@ -109,7 +107,7 @@ await CapacitorNfc.write({
 console.log('Tag written successfully');
 ```
 
-### Write URL to NFC Tag
+### NFC 태그에 URL 쓰기
 
 ```typescript
 const url = 'https://capgo.app';
@@ -128,28 +126,28 @@ await CapacitorNfc.write({
 });
 ```
 
-### Erase NFC Tag
+### NFC 태그 지우기
 
 ```typescript
 await CapacitorNfc.erase();
 console.log('Tag erased');
 ```
 
-### Make Tag Read-Only
+### 태그를 읽기 전용으로 만들기
 
 ```typescript
 await CapacitorNfc.makeReadOnly();
 console.log('Tag is now read-only');
 ```
 
-### Stop Scanning
+### 스캔 중지
 
 ```typescript
 await listener.remove();
 await CapacitorNfc.stopScanning();
 ```
 
-### Check NFC Status
+### NFC 상태 확인
 
 ```typescript
 const { status } = await CapacitorNfc.getStatus();
@@ -162,7 +160,7 @@ if (status === 'NFC_DISABLED') {
 }
 ```
 
-### Android Beam (P2P Sharing)
+### Android Beam (P2P 공유)
 
 ```typescript
 // Share data via Android Beam
@@ -183,11 +181,11 @@ await CapacitorNfc.share(message);
 await CapacitorNfc.unshare();
 ```
 
-## API Reference
+## API 참조
 
 ### startScanning(options?)
 
-Start listening for NFC tags.
+NFC 태그 수신 대기를 시작합니다.
 
 ```typescript
 interface StartScanningOptions {
@@ -201,7 +199,7 @@ await CapacitorNfc.startScanning(options);
 
 ### stopScanning()
 
-Stop the NFC scanning session.
+NFC 스캔 세션을 중지합니다.
 
 ```typescript
 await CapacitorNfc.stopScanning();
@@ -209,7 +207,7 @@ await CapacitorNfc.stopScanning();
 
 ### write(options)
 
-Write NDEF records to the last discovered tag.
+마지막으로 발견된 태그에 NDEF 레코드를 씁니다.
 
 ```typescript
 interface WriteTagOptions {
@@ -229,7 +227,7 @@ await CapacitorNfc.write(options);
 
 ### erase()
 
-Erase the last discovered tag.
+마지막으로 발견된 태그를 지웁니다.
 
 ```typescript
 await CapacitorNfc.erase();
@@ -237,7 +235,7 @@ await CapacitorNfc.erase();
 
 ### makeReadOnly()
 
-Make the last discovered tag read-only (permanent).
+마지막으로 발견된 태그를 읽기 전용으로 만듭니다 (영구적).
 
 ```typescript
 await CapacitorNfc.makeReadOnly();
@@ -245,7 +243,7 @@ await CapacitorNfc.makeReadOnly();
 
 ### share(options)
 
-Share NDEF message via Android Beam (Android only).
+Android Beam을 통해 NDEF 메시지를 공유합니다 (Android 전용).
 
 ```typescript
 await CapacitorNfc.share({ records: [...] });
@@ -253,7 +251,7 @@ await CapacitorNfc.share({ records: [...] });
 
 ### unshare()
 
-Stop sharing (Android only).
+공유를 중지합니다 (Android 전용).
 
 ```typescript
 await CapacitorNfc.unshare();
@@ -261,7 +259,7 @@ await CapacitorNfc.unshare();
 
 ### getStatus()
 
-Get current NFC adapter status.
+현재 NFC 어댑터 상태를 가져옵니다.
 
 ```typescript
 const { status } = await CapacitorNfc.getStatus();
@@ -270,17 +268,17 @@ const { status } = await CapacitorNfc.getStatus();
 
 ### showSettings()
 
-Open system NFC settings.
+시스템 NFC 설정을 엽니다.
 
 ```typescript
 await CapacitorNfc.showSettings();
 ```
 
-## Events
+## 이벤트
 
 ### nfcEvent
 
-Fired when an NFC tag is discovered.
+NFC 태그가 발견되었을 때 발생합니다.
 
 ```typescript
 interface NfcEvent {
@@ -301,7 +299,7 @@ interface NfcTag {
 
 ### nfcStateChange
 
-Fired when NFC adapter availability changes (Android only).
+NFC 어댑터 가용성이 변경되었을 때 발생합니다 (Android 전용).
 
 ```typescript
 interface NfcStateChangeEvent {
@@ -310,7 +308,7 @@ interface NfcStateChangeEvent {
 }
 ```
 
-## Complete Example
+## 완전한 예제
 
 ```typescript
 import { CapacitorNfc } from '@capgo/capacitor-nfc';
@@ -401,7 +399,7 @@ export class NfcService {
 }
 ```
 
-## NDEF Record Types
+## NDEF 레코드 유형
 
 ### TNF (Type Name Format)
 
@@ -414,13 +412,13 @@ export class NfcService {
 - `0x06`: Unchanged
 - `0x07`: Reserved
 
-### Common Record Types
+### 일반적인 레코드 유형
 
 - **Text**: `type: [0x54]` ('T')
 - **URI**: `type: [0x55]` ('U')
 - **Smart Poster**: `type: [0x53, 0x70]` ('Sp')
 
-### URI Prefixes
+### URI 접두사
 
 - `0x00`: (no prefix)
 - `0x01`: `https://`
@@ -428,31 +426,31 @@ export class NfcService {
 - `0x03`: `http://`
 - `0x04`: `https://www.`
 
-## Best Practices
+## 모범 사례
 
-1. **Check NFC Status**: Always verify NFC is available and enabled
-2. **Handle Permissions**: Request NFC permissions appropriately
-3. **Stop Scanning**: Always stop scanning when done to save battery
-4. **Error Handling**: Wrap NFC operations in try-catch blocks
-5. **Test on Devices**: NFC features don't work on simulators/emulators
+1. **NFC 상태 확인**: NFC가 사용 가능하고 활성화되어 있는지 항상 확인
+2. **권한 처리**: NFC 권한을 적절히 요청
+3. **스캔 중지**: 배터리를 절약하기 위해 작업 완료 후 항상 스캔 중지
+4. **오류 처리**: NFC 작업을 try-catch 블록으로 감싸기
+5. **기기에서 테스트**: NFC 기능은 시뮬레이터/에뮬레이터에서 작동하지 않음
 
-## Platform Notes
+## 플랫폼 참고사항
 
 ### iOS
-- Requires iOS 11.0+
-- Uses Core NFC framework
-- Supports background tag reading (iOS 13+)
-- Limited to reading NDEF-formatted tags
-- Cannot write tags in background
-- Requires NFCReaderUsageDescription in Info.plist
+- iOS 11.0+ 필요
+- Core NFC 프레임워크 사용
+- 백그라운드 태그 읽기 지원 (iOS 13+)
+- NDEF 형식 태그 읽기로 제한
+- 백그라운드에서 태그 쓰기 불가
+- Info.plist에 NFCReaderUsageDescription 필요
 
 ### Android
-- Requires Android 4.4 (API 19)+
-- Uses Android NFC API
-- Supports both foreground and background tag reading
-- Can write to tags
-- Supports Android Beam (P2P) on devices with NFC
-- Requires NFC permission in AndroidManifest.xml
+- Android 4.4 (API 19)+ 필요
+- Android NFC API 사용
+- 포그라운드 및 백그라운드 태그 읽기 모두 지원
+- 태그에 쓰기 가능
+- NFC가 있는 기기에서 Android Beam (P2P) 지원
+- AndroidManifest.xml에 NFC 권한 필요
 
 ### Web
-- Not supported on web platform
+- 웹 플랫폼에서 지원되지 않음

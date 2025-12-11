@@ -1,41 +1,69 @@
 ---
-title: Selamat datang di Capgo
-description: >-
-  Capgo est une plateforme de mise à jour en direct open source pour Capacitor
-  et les équipes de développement mobile qui vous permet de livrer des mises à
-  jour en direct à vos utilisateurs en quelques minutes au lieu de plusieurs
-  jours.
+title: Willkommen zur Capgo-Dokumentation
+description: Ihr umfassender Leitfaden für Capgo Cloud Live-Updates und unsere komplette Suite von Capacitor-Plugins zum Erstellen leistungsstarker mobiler Apps.
 tableOfContents: false
 next: false
 hero:
-  tagline: >-
-    Capgo는 Capacitor와 모바일 개발팀을 위한 오픈 소스 실시간 업데이트 플랫폼으로, 사용자에게 수일이 아닌 수분 만에 실시간
-    업데이트를 제공할 수 있게 해줍니다
+  tagline: Meistern Sie Capgo Cloud für sofortige App-Updates und erkunden Sie unsere umfassende Sammlung von Capacitor-Plugins zur Verbesserung Ihrer mobilen Entwicklung
   actions:
-    - text: 시작하기
+    - text: Erste Schritte mit Capgo Cloud
       link: /docs/getting-started/quickstart/
       icon: right-arrow
       variant: primary
-    - text: GitHub
-      link: 'https://github.com/Cap-go/Capgo/'
-      icon: external
+    - text: Alle Plugins durchsuchen
+      link: /docs/plugins/
+      icon: puzzle
       variant: minimal
 locale: de
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## 🚀 Capgo Cloud - Live-Updates leicht gemacht
 
 <CardGrid stagger>
-  <Card title="Die Kraft des Live-Updates" icon="rocket">
-    Liefern Sie nahtlos Live-App-Updates, kritische Fehlerbehebungen, Inhaltsänderungen, Beta-Funktionen und mehr, um Ihren Nutzern das bestmögliche Erlebnis zu bieten
+  <Card title="Sofortige Updates" icon="rocket">
+    Stellen Sie JavaScript-, HTML- und CSS-Updates direkt an Benutzer bereit, ohne App-Store-Verzögerungen. Beheben Sie Fehler und liefern Sie Funktionen in Minuten statt Tagen.
   </Card>
-  <Card title="Einfach zu integrieren" icon="pencil">
-    Das Plugin benötigt 3 Schritte zur Integration in Ihren Codebase und ermöglicht es Ihnen, Updates in Minuten statt Tagen an Ihre Nutzer zu senden!
+  <Card title="3-Schritte-Integration" icon="pencil">
+    Starten Sie mit nur `npx @capgo/cli@latest init [APIKEY]` und beginnen Sie sofort mit dem Pushen von Updates dank unserer einfachen Integration.
   </Card>
-  <Card title="Installation" icon="setting">
-    Führen Sie `npx @capgo/cli@latest init [APIKEY]` aus, um zu beginnen
+  <Card title="Erweiterte Funktionen" icon="setting">
+    Kanäle für A/B-Tests, automatische Rollbacks, Update-Analysen, verschlüsselte Bundles und Enterprise-Sicherheitsfunktionen.
   </Card>
-  <Card title="Umfangreiche Dokumentation" icon="open-book">
-    Lernen Sie in der [Dokumentation](/docs/getting-started/quickstart/), wie Sie das Plugin in 5 Minuten mit unserem Einführungsvideo meistern
+  <Card title="Vollständiger Leitfaden" icon="open-book">
+    Lernen Sie alles von der [Schnelleinrichtung](/docs/getting-started/quickstart/) bis zu fortgeschrittenen Bereitstellungsstrategien in unserer umfassenden Dokumentation.
   </Card>
 </CardGrid>
+
+## 📚 Was ist in dieser Dokumentation enthalten
+
+<CardGrid>
+  <LinkCard
+    title="Capgo Cloud-Einrichtung"
+    description="Vollständige Anleitungen zur Integration von Live-Updates, Verwaltung von Kanälen, CI/CD-Integration und Überwachung Ihrer Bereitstellungen."
+    href="/docs/getting-started/quickstart/"
+  />
+  <LinkCard
+    title="20+ Capacitor-Plugins"
+    description="Erkunden Sie unsere Sammlung produktionsbereiter Plugins für Biometrie, Käufe, Kamera, Speicher und weitere native Funktionen."
+    href="/docs/plugins/"
+  />
+  <LinkCard
+    title="CLI & Öffentliche API"
+    description="Automatisieren Sie Ihren Workflow mit unseren CLI-Tools und integrieren Sie Capgo in Ihre bestehenden Systeme mit unserer REST-API."
+    href="/docs/cli/overview/"
+  />
+  <LinkCard
+    title="Enterprise-Lösungen"
+    description="Dedizierter Support, SLAs, benutzerdefinierte Funktionen und erweiterte Sicherheitsoptionen für Teams, die mehr benötigen."
+    href="/enterprise/"
+  />
+</CardGrid>
+
+## 🎯 Schnellzugriff
+
+- **Erstes Mal?** Beginnen Sie mit dem [5-Minuten-Schnellstart](/docs/getting-started/quickstart/)
+- **Brauchen Sie ein Plugin?** Durchsuchen Sie unsere [Plugin-Sammlung](/docs/plugins/) oder fordern Sie [individuelle Entwicklung](/consulting/) an
+- **Haben Sie Probleme?** Schauen Sie in die [FAQ](/docs/faq/) oder treten Sie unserem [Discord](https://discord.capgo.app) bei
+- **Enterprise-Bedürfnisse?** Sehen Sie sich unsere [Enterprise-Lösungen](/enterprise/) an oder [kontaktieren Sie uns](mailto:support@capgo.app)

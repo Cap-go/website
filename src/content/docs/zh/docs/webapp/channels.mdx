@@ -1,29 +1,26 @@
 ---
-title: Channels
-description: >-
-  Channels are a way to manage your app's updates. Each channel can have one
-  version. This allows you to have multiple versions of your app in production
-  at the same time.
+title: "频道"
+description: "频道是管理应用更新的一种方式。每个频道可以有一个版本。这允许您同时在生产中拥有应用的多个版本"
 sidebar:
   order: 6
 locale: zh
 ---
 
-## How Capgo chooses a channel (precedence)
+## Capgo 如何选择频道(优先级)
 
-When a device asks Capgo for an update, the channel it will use is decided in the following order (highest priority first):
+当设备向 Capgo 请求更新时,将按以下顺序决定使用的频道(优先级从高到低):
 
-1. **Forced device mapping**: If the device ID is explicitly forced to a channel (see the *Forced devices* list inside the channel settings), that channel always wins.
-2. **Cloud override (created by `setChannel()` or Webapp action)**: Calling [`setChannel`](/docs/plugin/api/#setchannel) (or changing a device's channel in the dashboard) writes a persistent override in the cloud tied to that device ID. That override is consulted after forced mapping but before any defaults. Re‑installing the app does **not** clear it; deleting the device entry does.
-3. **Capacitor config `defaultChannel` (test build default)**: For internal / beta / test builds you can set `defaultChannel` (legacy key `channel`) in `capacitor.config.*` so test devices start on a pre-release channel (e.g. `beta`, `pr-123`). If absent, the device will proceed to the cloud default. Production builds usually leave this unset.
-4. **Cloud Default Channel (primary strategy for ~99% of users)**: The main production channel virtually all real users land on. Any new device without a force, without an override, and without a config `defaultChannel` uses this. Changing it rolls out (or rolls back) for everyone in seconds—no new binary.
+1. **强制设备映射**: 如果设备 ID 明确强制到某个频道(请参阅频道设置中的*强制设备*列表),则该频道始终优先。
+2. **云覆盖(由 `setChannel()` 或 Web 应用操作创建)**: 调用 [`setChannel`](/docs/plugin/api/#setchannel)(或在仪表板中更改设备的频道)会在云中写入与该设备 ID 绑定的持久覆盖。该覆盖在强制映射之后但在任何默认值之前被查询。重新安装应用**不会**清除它;删除设备条目会清除。
+3. **Capacitor 配置 `defaultChannel`(测试构建默认值)**: 对于内部/beta/测试构建,您可以在 `capacitor.config.*` 中设置 `defaultChannel`(旧键 `channel`),以便测试设备从预发布频道开始(例如 `beta`、`pr-123`)。如果不存在,设备将进入云默认值。生产构建通常不设置此项。
+4. **云默认频道(约 99% 用户的主要策略)**: 几乎所有真实用户都会进入的主要生产频道。任何没有强制、没有覆盖且没有配置 `defaultChannel` 的新设备都使用此频道。更改它会在几秒钟内为所有人推出(或回滚)——无需新的二进制文件。
 
-Why the **cloud default** is the main path:
-- Instant rollout or rollback without rebuilding or re‑publishing native binaries.
-- One place to manage both iOS & Android behavior.
-- Safer: you can confirm bundles exist and settings are correct before switching default.
-- Auditable changes (team members can see who changed what in the UI / logs).
-Design principle: Layers above (force / override / config) are *exceptions* (debug single user, QA switching, test build defaults). Normal users flow to the cloud default.
+为什么**云默认**是主要路径:
+- 无需重新构建或重新发布原生二进制文件即可立即推出或回滚。
+- 一个地方管理 iOS 和 Android 行为。
+- 更安全:您可以在切换默认值之前确认 bundle 存在且设置正确。
+- 可审计的更改(团队成员可以在 UI/日志中看到谁更改了什么)。
+设计原则:上层(强制/覆盖/配置)是*例外*(调试单个用户、QA 切换、测试构建默认值)。普通用户流向云默认值。
 
 Changing the *cloud default* channel affects *new* normal devices that:
 - Are not forced
@@ -61,33 +58,33 @@ If you later change the dashboard default to `production`, devices already on an
 
 ---
 
-## Managing channels
+## 管理频道
 
-First, let's take a look at the channels page. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the channels tab](/docs/webapp/main-app-page).
+首先,让我们看一下频道页面。您可以通过[点击您的应用](/docs/webapp/main-page)然后[点击频道标签](/docs/webapp/main-app-page)来访问它。
 
 
-<figure><img src="/channels.webp" alt="channel list" /><figcaption></figcaption></figure>
+<figure><img src="/channels.webp" alt="频道列表" /><figcaption></figcaption></figure>
 
-## Creating a channel
+## 创建频道
 
-As you can see, there exists a plus button in the lower right corner. (`1` in the image) Clicking on it will open a modal where you can create a new channel.
-<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modal.webp" alt="new channel" /><figcaption></figcaption></figure>
+如您所见,右下角有一个加号按钮。(图中的 `1`)点击它将打开一个模态框,您可以在其中创建新频道。
+<figure><img style="margin-left: auto; margin-right: auto" src="/new_channel_modal.webp" alt="新频道" /><figcaption></figcaption></figure>
 
-Then after you click on `Add` a new channel should appear in the list.
-<figure><img src="/post-channel-create.webp" alt="after channel create" /><figcaption></figcaption></figure>
+然后,在您点击 `添加` 后,列表中应该会出现一个新频道。
+<figure><img src="/post-channel-create.webp" alt="频道创建后" /><figcaption></figcaption></figure>
 
-## What does misconfigured mean?
-Sometimes the configuration of a channel is not valid. In that case, you will get a big warning and the `Misconfigured` column will say `Yes` for one or more of the channels.
-You can learn more about it [here](/docs/cli/commands/#disable-updates-strategy)
+## "配置错误"是什么意思?
+有时频道的配置无效。在这种情况下,您会收到一个大警告,`配置错误` 列会对一个或多个频道显示 `是`。
+您可以在[此处](/docs/cli/commands/#disable-updates-strategy)了解更多信息
 
-## Deleting a channel
+## 删除频道
 
-Deleting a channel is straight forward. Just click on the trash icon and confirm the deletion. (`2` in the image)
+删除频道很简单。只需点击垃圾桶图标并确认删除即可。(图中的 `2`)
 
-## Managing a channel
+## 管理频道
 
-Clicking on the channel name will open a modal where you can manage the channel. (`3` in the image)
-This page should look something like this:
+点击频道名称将打开一个模态框,您可以在其中管理频道。(图中的 `3`)
+此页面应该看起来像这样:
 
 <figure><img src="/manage_channel_main.webp" alt="manage channel" /><figcaption></figcaption></figure>
 

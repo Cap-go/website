@@ -1,5 +1,5 @@
 ---
-title: V2에서 V3로
+title: De V2 à V3
 description: Comment passer de la V2 à la V3
 sidebar:
   order: 4

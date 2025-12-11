@@ -1,5 +1,6 @@
 ---
 title: Fehlerbehebung
+description: "Lösen Sie häufige Probleme bei der Verwendung von Capgo mit detaillierten Fehlerbehebungsschritten und erweiterten Optionen für Upload und Debugging."
 sidebar:
   order: 5
 next: false
@@ -16,9 +17,9 @@ Hier sind einige häufige Probleme, auf die Sie bei der Verwendung von Capgo sto
     Stecken Sie bei einem komplexen Problem fest? Unser Expertenteam ist hier, um zu helfen! Erhalten Sie persönlichen Support, Code-Reviews und maßgeschneiderte Lösungen für Ihre spezifischen Bedürfnisse.
   </p>
   <div style="margin-top: 1rem;">
-    <a href="/de/consulting/" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: #2563eb; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s;">
+    <a href="/consulting/" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: #2563eb; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s;">
       Professionellen Support erhalten
-      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin:0">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
       </svg>
     </a>
@@ -28,7 +29,7 @@ Hier sind einige häufige Probleme, auf die Sie bei der Verwendung von Capgo sto
 ### Upload-Fehler
 
 Wenn Ihr Bundle-Upload fehlschlägt, überprüfen Sie:
-- Ihre App-ID in `capacitorconfigts` stimmt mit Ihrer App im Capgo Dashboard überein
+- Ihre App-ID in `capacitor.config.ts` stimmt mit Ihrer App im Capgo-Dashboard überein
 - Sie führen den Upload-Befehl vom Root-Verzeichnis Ihres Capacitor-Projekts aus
 - Ihre Web-Assets sind gebaut und aktuell
 
@@ -41,15 +42,15 @@ Die Capgo CLI bietet einige zusätzliche Flags zur Lösung häufiger Upload-Prob
   npx @capgo/cli@latest bundle upload --tus
   ```
 
-- `--package-json` und `--node-modules`: Teilt Capgo mit, wo Ihre root `packagejson` und `node_modules` zu finden sind, wenn Ihre App eine nicht-standardmäßige Struktur wie ein Monorepo oder npm Workspace verwendet. Übergeben Sie den Pfad zur root `packagejson` und den `--node-modules` Pfad:
+- `--package-json` und `--node-modules`: Teilt Capgo mit, wo Ihre root `package.json` und `node_modules` zu finden sind, wenn Ihre App eine nicht-standardmäßige Struktur wie ein Monorepo oder npm Workspace verwendet. Übergeben Sie den Pfad zur root `package.json` und den `--node_modules` Pfad:
   ```shell
-  npx @capgo/cli@latest bundle upload --package-json=path/to/packagejson --node-modules=path/to/node_modules
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node_modules=path/to/node_modules
   ```
-  Capgo benötigt diese Informationen, um die Abhängigkeiten Ihrer App korrekt zu bündeln
+  Capgo benötigt diese Informationen, um die Abhängigkeiten Ihrer App korrekt zu bündeln.
 
-Sie können diese Flags mit anderen Optionen wie `--channel` nach Bedarf kombinieren. Siehe die [Capgo CLI Dokumentation](/docs/cli/overview/) für vollständige Details zu den verfügbaren Upload-Optionen
+Sie können diese Flags mit anderen Optionen wie `--channel` nach Bedarf kombinieren. Siehe die [Capgo CLI Dokumentation](/docs/cli/overview/) für vollständige Details zu den verfügbaren Upload-Optionen.
 
-Wenn Sie immer noch Probleme mit Uploads haben, wenden Sie sich an den [Capgo Support](https://support.capgo.app) für weitere Unterstützung
+Wenn Sie immer noch Probleme mit Uploads haben, wenden Sie sich an den [Capgo Support](https://support.capgo.app) für weitere Unterstützung.
 
 ### Updates debuggen
 
@@ -73,11 +74,11 @@ Wenn Sie Probleme mit Live-Updates haben, ist der Capgo Debug-Befehl ein hilfrei
    - Wenn das Update heruntergeladen, aber nicht installiert wird, stellen Sie sicher, dass Sie `CapacitorUpdater.notifyAppReady()` aufgerufen haben und die App vollständig geschlossen und neu geöffnet wurde
    - Wenn Sie eine Fehlermeldung sehen, suchen Sie nach diesem spezifischen Fehler in der Capgo-Dokumentation oder wenden Sie sich an den Support
 
-Der Debug-Befehl ist besonders nützlich, um Probleme mit dem Update-Download und Installationsprozess zu identifizieren. Wenn die Logs zeigen, dass die erwartete Update-Version gefunden, aber nicht letztendlich angewendet wurde, konzentrieren Sie Ihre Fehlerbehebung auf die Schritte nach dem Download
+Der Debug-Befehl ist besonders nützlich, um Probleme mit dem Update-Download und Installationsprozess zu identifizieren. Wenn die Logs zeigen, dass die erwartete Update-Version gefunden, aber nicht letztendlich angewendet wurde, konzentrieren Sie Ihre Fehlerbehebung auf die Schritte nach dem Download.
 
 ### Debugging mit nativen Logs
 
-Zusätzlich zum Capgo Debug-Befehl können die nativen Logs auf Android und iOS wertvolle Fehlerbehebungsinformationen liefern, besonders für Probleme auf der nativen Seite des Update-Prozesses
+Zusätzlich zum Capgo Debug-Befehl können die nativen Logs auf Android und iOS wertvolle Fehlerbehebungsinformationen liefern, besonders für Probleme auf der nativen Seite des Update-Prozesses.
 
 #### Android Logs
 
@@ -88,7 +89,7 @@ So greifen Sie auf die Android-Logs zu:
 3. Im Logcat-Fenster filtern Sie die Logs auf den Prozess Ihrer App, indem Sie ihn aus dem Dropdown-Menü oben auswählen
 4. Suchen Sie nach Zeilen, die `Capgo` enthalten, um die SDK-Logs zu finden
 
-Alternativ können Sie den `adb logcat` Befehl verwenden und nach `Capgo` grep'en, um die Logs zu filtern
+Alternativ können Sie den `adb logcat` Befehl verwenden und nach `Capgo` grep'en, um die Logs zu filtern.
 
 Das Capgo SDK protokolliert wichtige Ereignisse während des Update-Prozesses, wie zum Beispiel:
 - Wann eine Update-Prüfung initiiert wird
@@ -112,7 +113,7 @@ So greifen Sie auf die iOS-Logs zu:
 3. Wählen Sie Ihr Gerät und klicken Sie auf "Open Console"
 4. Suchen Sie in der Konsolenausgabe nach Zeilen, die `Capgo` enthalten, um die SDK-Logs zu finden
 
-Sie können auch den `log stream` Befehl im Terminal verwenden und nach `Capgo` grep'en, um die Logs zu filtern
+Sie können auch den `log stream` Befehl im Terminal verwenden und nach `Capgo` grep'en, um die Logs zu filtern.
 
 Ähnlich wie bei Android protokolliert das Capgo SDK wichtige iOS-seitige Ereignisse:
 - Update-Prüfung Initiierung und Ergebnis
@@ -126,9 +127,9 @@ iOS-spezifische Probleme, die Sie in den Logs identifizieren könnten, sind:
 - Unzureichender Speicherplatz für das Update-Bundle
 - Fehler beim korrekten Extrahieren oder Anwenden des Update-Bundles
 
-Auf beiden Plattformen bieten die nativen Logs einen tieferen Einblick in den Update-Prozess mit mehr Details zur nativen Implementierung. Sie sind besonders nützlich für die Identifizierung von Problemen, die außerhalb der Capgo JavaScript-Schicht auftreten
+Auf beiden Plattformen bieten die nativen Logs einen tieferen Einblick in den Update-Prozess mit mehr Details zur nativen Implementierung. Sie sind besonders nützlich für die Identifizierung von Problemen, die außerhalb der Capgo JavaScript-Schicht auftreten.
 
-Bei der Fehlerbehebung eines kniffligen Live-Update-Problems ist es eine gute Idee, sowohl die Capgo Debug-Logs als auch die nativen Logs für ein umfassendes Bild der Situation zu erfassen. Die beiden Logs zusammen geben Ihnen die beste Chance, das Problem zu identifizieren und zu lösen
+Bei der Fehlerbehebung eines kniffligen Live-Update-Problems ist es eine gute Idee, sowohl die Capgo Debug-Logs als auch die nativen Logs für ein umfassendes Bild der Situation zu erfassen. Die beiden Logs zusammen geben Ihnen die beste Chance, das Problem zu identifizieren und zu lösen.
 
 ### Updates werden nicht angewendet
 
@@ -138,7 +139,7 @@ Wenn Sie ein Bundle hochgeladen haben, aber die Änderungen auf Ihrem Gerät nic
 - Versuchen Sie, die App vollständig zu schließen und neu zu öffnen, da Updates nur bei einem Neustart angewendet werden
 - Suchen Sie in den nativen Logs nach Fehlern, die auf ein Problem beim Anwenden des Updates hinweisen könnten
 
-Weitere Details zum Update-Prozess finden Sie im [Live-Updates Deployment Guide](/docs/getting-started/deploy). Wenn Sie immer noch Probleme haben, verwenden Sie den `npx @capgo/cli@latest app debug` Befehl und native Logs, um mehr Einblick in das Geschehen zu bekommen
+Weitere Details zum Update-Prozess finden Sie im [Live-Updates Deployment Guide](/docs/getting-started/deploy). Wenn Sie immer noch Probleme haben, verwenden Sie den `npx @capgo/cli@latest app debug` Befehl und native Logs, um mehr Einblick in das Geschehen zu bekommen.
 
 ## SDK-Installation
 
@@ -153,4 +154,4 @@ Bei Problemen mit dem Auslösen von Capgo-Uploads aus Ihrer CI/CD-Pipeline:
 - Stellen Sie sicher, dass Sie den Upload-Befehl nach dem Build Ihrer Web-Assets ausführen
 - Prüfen Sie, ob der Upload-Befehl den richtigen Kanalnamen für Ihre Zielumgebung verwendet
 
-Weitere Fehlerbehebungstipps finden Sie in der [CI/CD-Integration](/docs/getting-started/cicd-integration) Dokumentation. Sie können auch den `npx @capgo/cli@latest app debug` Befehl verwenden, um zu bestätigen, ob Ihre CI/CD-ausgelösten Updates von der App empfangen werden
+Weitere Fehlerbehebungstipps finden Sie in der [CI/CD-Integration](/docs/getting-started/cicd-integration/) Dokumentation. Sie können auch den `npx @capgo/cli@latest app debug` Befehl verwenden, um zu bestätigen, ob Ihre CI/CD-ausgelösten Updates von der App empfangen werden.

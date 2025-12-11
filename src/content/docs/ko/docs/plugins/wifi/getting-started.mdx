@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Learn how to install and use the WiFi plugin to manage network connectivity in
-  your Capacitor app.
+title: 시작하기
+description: Capacitor 앱에서 네트워크 연결을 관리하기 위해 WiFi 플러그인을 설치하고 사용하는 방법을 알아보세요.
 sidebar:
   order: 2
 locale: ko
@@ -13,15 +11,15 @@ import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **패키지 설치**
    <PackageManagers pkg="@capgo/capacitor-wifi" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **권한 구성**
 
-   **Android**: Add to `AndroidManifest.xml`:
+   **Android**: `AndroidManifest.xml`에 추가:
    ```xml
    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -29,16 +27,16 @@ import { PackageManagers } from 'starlight-package-managers'
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    ```
 
-   **iOS**: Add to `Info.plist`:
+   **iOS**: `Info.plist`에 추가:
    ```xml
    <key>NSLocationWhenInUseUsageDescription</key>
    <string>We need location access to scan WiFi networks</string>
    ```
 </Steps>
 
-## Usage
+## 사용법
 
-Import the plugin and manage WiFi connectivity:
+플러그인을 가져와서 WiFi 연결을 관리하세요:
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
@@ -67,11 +65,11 @@ const connectToWifi = async () => {
 };
 ```
 
-## API Reference
+## API 참조
 
 ### getWifiInfo()
 
-Gets information about the currently connected WiFi network.
+현재 연결된 WiFi 네트워크에 대한 정보를 가져옵니다.
 
 ```typescript
 interface WifiInfo {
@@ -88,7 +86,7 @@ const info = await CapacitorWifi.getWifiInfo();
 
 ### scan()
 
-Scans for available WiFi networks.
+사용 가능한 WiFi 네트워크를 스캔합니다.
 
 ```typescript
 interface WifiNetwork {
@@ -104,7 +102,7 @@ const { networks } = await CapacitorWifi.scan();
 
 ### connect(options)
 
-Connects to a WiFi network.
+WiFi 네트워크에 연결합니다.
 
 ```typescript
 interface ConnectOptions {
@@ -121,7 +119,7 @@ await CapacitorWifi.connect({
 
 ### disconnect()
 
-Disconnects from the current WiFi network.
+현재 WiFi 네트워크에서 연결을 해제합니다.
 
 ```typescript
 await CapacitorWifi.disconnect();
@@ -129,7 +127,7 @@ await CapacitorWifi.disconnect();
 
 ### getSSID()
 
-Gets the SSID of the currently connected network.
+현재 연결된 네트워크의 SSID를 가져옵니다.
 
 ```typescript
 const { ssid } = await CapacitorWifi.getSSID();
@@ -138,14 +136,14 @@ console.log('Connected to:', ssid);
 
 ### getIP()
 
-Gets the current device IP address.
+현재 기기의 IP 주소를 가져옵니다.
 
 ```typescript
 const { ip } = await CapacitorWifi.getIP();
 console.log('IP Address:', ip);
 ```
 
-## Complete Example
+## 완전한 예제
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
@@ -259,9 +257,9 @@ export class WifiService {
 }
 ```
 
-## Advanced Usage
+## 고급 사용법
 
-### Network Quality Assessment
+### 네트워크 품질 평가
 
 ```typescript
 const assessNetworkQuality = async () => {
@@ -281,7 +279,7 @@ const assessNetworkQuality = async () => {
 };
 ```
 
-### Auto-Connect to Preferred Networks
+### 선호하는 네트워크에 자동 연결
 
 ```typescript
 const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: string }>) => {
@@ -308,7 +306,7 @@ const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: st
 };
 ```
 
-### Network Change Detection
+### 네트워크 변경 감지
 
 ```typescript
 class NetworkMonitor {
@@ -343,31 +341,31 @@ class NetworkMonitor {
 }
 ```
 
-## Best Practices
+## 모범 사례
 
-1. **Permissions**: Request location permissions before scanning networks
-2. **Error Handling**: Always wrap WiFi operations in try-catch blocks
-3. **User Feedback**: Show loading indicators during network operations
-4. **Security**: Never store WiFi passwords in plain text
-5. **Testing**: Test on real devices as WiFi APIs may not work in emulators
+1. **권한**: 네트워크 스캔 전에 위치 권한 요청
+2. **오류 처리**: WiFi 작업은 항상 try-catch 블록으로 감싸기
+3. **사용자 피드백**: 네트워크 작업 중 로딩 인디케이터 표시
+4. **보안**: WiFi 비밀번호를 일반 텍스트로 저장하지 않기
+5. **테스팅**: 에뮬레이터에서는 WiFi API가 작동하지 않을 수 있으므로 실제 기기에서 테스트
 
-## Platform Differences
+## 플랫폼 차이점
 
 ### iOS
-- Requires location permissions to scan networks
-- Cannot programmatically connect to networks (will open Settings)
-- Limited access to network details
+- 네트워크 스캔에 위치 권한 필요
+- 프로그래밍 방식으로 네트워크에 연결할 수 없음 (설정 앱 열기)
+- 네트워크 세부 정보에 대한 제한된 액세스
 
 ### Android
-- Full programmatic WiFi control
-- Requires location permissions for network scanning
-- Can connect/disconnect programmatically
+- 완전한 프로그래밍 방식의 WiFi 제어
+- 네트워크 스캔에 위치 권한 필요
+- 프로그래밍 방식으로 연결/연결 해제 가능
 
-## Troubleshooting
+## 문제 해결
 
-### Common Issues
+### 일반적인 문제
 
-**Scan returns empty**: Check location permissions are granted
-**Cannot connect to network**: Verify password is correct and network is in range
-**getWifiInfo fails**: Ensure device is connected to a WiFi network
-**Permission denied**: Add required permissions to platform configuration files
+**스캔 결과가 비어 있음**: 위치 권한이 부여되었는지 확인
+**네트워크에 연결할 수 없음**: 비밀번호가 올바른지, 네트워크가 범위 내에 있는지 확인
+**getWifiInfo 실패**: 기기가 WiFi 네트워크에 연결되어 있는지 확인
+**권한 거부**: 플랫폼 구성 파일에 필요한 권한 추가

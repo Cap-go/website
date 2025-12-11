@@ -1,14 +1,14 @@
 ---
-title: Functions and settings
-description: All available method and settings of the plugin
+title: Funzioni e impostazioni
+description: Tutti i metodi e le impostazioni disponibili del plugin
 sidebar:
   order: 2
 locale: it
 ---
 
-# Updater Plugin Config
+# Configurazione del Plugin Updater
 
-See the Github [Readme](https://github.com/Cap-go/capacitor-updater) for more information.
+Consulta il [Readme](https://github.com/Cap-go/capacitor-updater) su Github per maggiori informazioni.
 
 <docgen-config>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->

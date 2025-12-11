@@ -1,5 +1,5 @@
 ---
-title: V3 から V4 へ
+title: De V3 à V4
 description: Comment mettre à niveau de V3 vers V4
 sidebar:
   order: 3

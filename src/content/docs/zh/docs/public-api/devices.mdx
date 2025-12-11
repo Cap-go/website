@@ -1,34 +1,31 @@
 ---
-title: Devices
-description: >-
-  Docs for managing devices via Capgo API, covering tracking, versioning, and
-  channel assignments for app installations.
+title: "Devices"
+description: "通过 Capgo API 管理设备的文档，涵盖应用安装的跟踪、版本管理和渠道分配。"
 sidebar:
   order: 7
-locale: zh
 ---
 
-Devices represent individual installations of your app that are managed by Capgo. The Devices API allows you to track and manage devices, including their versions, channels, and update status.
+Devices 代表由 Capgo 管理的应用程序的各个安装。Devices API 允许您跟踪和管理设备，包括其版本、渠道和更新状态。
 
-:::note[Data Retention]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
+:::note[数据保留]
+设备数据从最后一次设备活动起保留 **90 天**。在此期间内未连接到 Capgo 的设备将自动从系统中删除。活跃设备在检查更新时会被持续跟踪。
 :::
 
-## Understanding Devices
+## 了解 Devices
 
-Each device has unique characteristics and states:
-- **Platform**: iOS or Android
-- **Version**: Current bundle version and native build version
-- **Environment**: Production or development, emulator or physical device
-- **Channel**: Current update channel assignment
-- **Custom ID**: Optional identifier for your own tracking purposes
+每个设备都有独特的特征和状态：
+- **Platform**：iOS 或 Android
+- **Version**：当前 bundle 版本和原生构建版本
+- **Environment**：生产或开发环境、模拟器或物理设备
+- **Channel**：当前更新渠道分配
+- **Custom ID**：用于您自己跟踪目的的可选标识符
 
-## Best Practices
+## 最佳实践
 
-1. **Version Tracking**: Monitor device versions to ensure update adoption
-2. **Channel Management**: Assign devices to appropriate channels based on testing needs
-3. **Environment Awareness**: Handle different environments (prod/dev/emulator) appropriately
-4. **Custom Identification**: Use custom IDs to integrate with your existing systems
+1. **版本跟踪**：监控设备版本以确保更新采用
+2. **渠道管理**：根据测试需求将设备分配到适当的渠道
+3. **环境意识**：适当处理不同环境（生产/开发/模拟器）
+4. **自定义识别**：使用自定义 ID 与现有系统集成
 
 ## Endpoints
 
@@ -36,7 +33,7 @@ Each device has unique characteristics and states:
 
 `https://api.capgo.app/device/`
 
-Link a device to a specific version or channel.
+将设备链接到特定版本或渠道。
 
 #### Request Body
 
@@ -49,7 +46,7 @@ interface DeviceLink {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X POST \
@@ -63,7 +60,7 @@ curl -X POST \
   https://api.capgo.app/device/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -75,15 +72,15 @@ curl -X POST \
 
 `https://api.capgo.app/device/`
 
-Retrieve device information. Uses cursor-based pagination for efficient retrieval of large device lists.
+检索设备信息。使用基于游标的分页来高效检索大型设备列表。
 
-#### Query Parameters
-- `app_id`: Required. The ID of your app
-- `device_id`: Optional. Specific device ID to retrieve a single device
-- `cursor`: Optional. Cursor from previous response for pagination
-- `limit`: Optional. Number of devices per page (default: 50)
+#### 查询参数
+- `app_id`：必需。您的应用程序 ID
+- `device_id`：可选。用于检索单个设备的特定设备 ID
+- `cursor`：可选。来自上一个响应的游标，用于分页
+- `limit`：可选。每页设备数（默认值：50）
 
-#### Example Requests
+#### 请求示例s
 
 ```bash
 # Get all devices (first page)
@@ -99,15 +96,15 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/device/?app_id=app_123&cursor=2024-01-01T00:00:00Z|device_456"
 ```
 
-#### Response Type (List)
+#### 响应类型（列表）
 
-When requesting multiple devices (no `device_id` parameter):
+请求多个设备时（无 `device_id` 参数）：
 
 ```typescript
 interface DeviceListResponse {
   data: Device[];
-  nextCursor?: string;  // Pass this as 'cursor' param to get next page
-  hasMore: boolean;     // true if more pages available
+  nextCursor?: string;  // 将此作为 'cursor' 参数传递以获取下一页
+  hasMore: boolean;     // 如果有更多页面可用则为 true
 }
 
 interface Device {
@@ -127,9 +124,9 @@ interface Device {
 }
 ```
 
-#### Response Type (Single Device)
+#### 响应类型（单个设备）
 
-When requesting a specific device with `device_id` parameter, returns the device object directly:
+使用 `device_id` 参数请求特定设备时，直接返回设备对象：
 
 ```typescript
 interface Device {
@@ -149,7 +146,7 @@ interface Device {
 }
 ```
 
-#### Example Response (List)
+#### 响应示例（列表）
 
 ```json
 {
@@ -174,7 +171,7 @@ interface Device {
 }
 ```
 
-#### Example Response (Single Device)
+#### 响应示例（单个设备）
 
 ```json
 {
@@ -198,11 +195,11 @@ interface Device {
 
 `https://api.capgo.app/device/`
 
-Unlink a device from its channel override. This resets the device to use its default channel.
+从其渠道覆盖中取消链接设备。这会将设备重置为使用其默认渠道。
 
-:::note[Delete device]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
-You can't delete a device with this endpoint, it only affect the channel override.
+:::note[删除设备]
+设备数据从最后一次设备活动起保留 **90 天**。在此期间内未连接到 Capgo 的设备将自动从系统中删除。活跃设备在检查更新时会被持续跟踪。
+您无法使用此端点删除设备，它仅影响渠道覆盖。
 :::
 
 #### Query Parameters
@@ -214,7 +211,7 @@ interface Device {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X DELETE \
@@ -227,7 +224,7 @@ curl -X DELETE \
   https://api.capgo.app/device/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -235,9 +232,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## 错误处理
 
-Common error scenarios and their responses:
+常见错误场景及其响应：
 
 ```json
 // Device not found
@@ -265,7 +262,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 常见用例
 
 1. **Beta Device Registration**
 ```typescript
@@ -290,9 +287,9 @@ Common error scenarios and their responses:
 // Use DELETE endpoint to remove overrides
 ```
 
-## Tips for Device Management
+## 设备管理提示
 
-1. **Monitoring**: Regularly check device status and version distribution
-2. **Testing**: Use custom IDs to identify test devices easily
-3. **Troubleshooting**: Track device updates and channel assignments
-4. **Version Control**: Monitor native app versions to ensure compatibility 
+1. **监控**：定期检查设备状态和版本分布
+2. **测试**：使用自定义 ID 轻松识别测试设备
+3. **故障排除**：跟踪设备更新和渠道分配
+4. **版本控制**：监控原生应用版本以确保兼容性 

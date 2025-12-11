@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Quick start guide for integrating live updates into your Capacitor app with
-  the Updater plugin.
+title: 开始使用
+description: 使用 Updater 插件将实时更新集成到 Capacitor 应用的快速入门指南。
 sidebar:
   order: 2
 locale: zh
@@ -10,7 +8,7 @@ locale: zh
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Installation
+## 安装
 
 <Tabs>
   <TabItem label="npm">
@@ -39,37 +37,37 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
-## Quick Start
+## 快速入门
 
-For most users, we recommend following the [main Quickstart guide](/docs/getting-started/quickstart/) which covers both the plugin installation and Capgo cloud integration.
+对于大多数用户,我们建议遵循[主快速入门指南](/docs/getting-started/quickstart/),它涵盖了插件安装和 Capgo 云集成。
 
-This getting-started guide focuses on the technical plugin details for advanced users who want to understand the underlying mechanisms or implement self-hosted updates.
+本入门指南专注于技术插件细节,适合想要了解底层机制或实现自托管更新的高级用户。
 
-## Overview
+## 概述
 
-The Capacitor Updater plugin enables over-the-air (OTA) updates for your Capacitor applications. This allows you to push updates to your app without going through app store reviews.
+Capacitor Updater 插件为您的 Capacitor 应用启用空中下载 (OTA) 更新。这允许您在不经过应用商店审核的情况下向应用推送更新。
 
-## How It Works
+## 工作原理
 
-1. **Bundle Download**: The plugin downloads update bundles (ZIP files containing your web assets)
-2. **Extraction**: Bundles are extracted to the device's storage
-3. **Hot Reload**: The app switches to the new bundle without requiring a restart
-4. **Fallback**: If an update fails, the app reverts to the previous working version
+1. **Bundle 下载**: 插件下载更新 bundle(包含 Web 资源的 ZIP 文件)
+2. **解压**: Bundle 被解压到设备的存储中
+3. **热重载**: 应用切换到新 bundle,无需重启
+4. **回退**: 如果更新失败,应用会回退到之前的工作版本
 
-## Usage Modes
+## 使用模式
 
-### 1. Auto-Update Mode (Recommended)
+### 1. 自动更新模式(推荐)
 
-The simplest way to use the plugin with automatic update management:
+使用插件的最简单方式,具有自动更新管理:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-// Plugin handles everything automatically
-// Configure in capacitor.config.ts
+// 插件自动处理所有事情
+// 在 capacitor.config.ts 中配置
 ```
 
-Add to your `capacitor.config.ts`:
+添加到您的 `capacitor.config.ts`:
 
 ```typescript
 {
@@ -82,41 +80,41 @@ Add to your `capacitor.config.ts`:
 }
 ```
 
-### 2. Manual Mode
+### 2. 手动模式
 
-For advanced control over the update process:
+对更新过程进行高级控制:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-// Download an update
+// 下载更新
 const bundle = await CapacitorUpdater.download({
   url: 'https://your-server.com/updates/v1.0.1.zip',
   version: '1.0.1'
 });
 
-// Set the bundle (will be used on next app start)
+// 设置 bundle(将在下次应用启动时使用)
 await CapacitorUpdater.set({
   id: bundle.id
 });
 
-// Or reload immediately
+// 或立即重新加载
 await CapacitorUpdater.reload();
 ```
 
-## Platform Configuration
+## 平台配置
 
 ### iOS
 
-No additional configuration required. The plugin works out of the box.
+无需额外配置。插件开箱即用。
 
 ### Android
 
-No additional configuration required. The plugin works out of the box.
+无需额外配置。插件开箱即用。
 
-## Basic API Usage
+## 基本 API 使用
 
-### Download an Update
+### 下载更新
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
@@ -126,33 +124,33 @@ const bundle = await CapacitorUpdater.download({
   version: '1.0.1'
 });
 
-console.log('Downloaded bundle:', bundle.id);
+console.log('已下载 bundle:', bundle.id);
 ```
 
-### Set Active Bundle
+### 设置活动 Bundle
 
 ```typescript
-// Set bundle to be used on next app start
+// 设置在下次应用启动时使用的 bundle
 await CapacitorUpdater.set({
   id: bundle.id
 });
 ```
 
-### Reload with New Bundle
+### 使用新 Bundle 重新加载
 
 ```typescript
-// Reload app immediately with new bundle
+// 立即使用新 bundle 重新加载应用
 await CapacitorUpdater.reload();
 ```
 
-### List Bundles
+### 列出 Bundles
 
 ```typescript
 const { bundles } = await CapacitorUpdater.list();
-console.log('Available bundles:', bundles);
+console.log('可用的 bundles:', bundles);
 ```
 
-### Delete a Bundle
+### 删除 Bundle
 
 ```typescript
 await CapacitorUpdater.delete({
@@ -160,100 +158,100 @@ await CapacitorUpdater.delete({
 });
 ```
 
-### Get Current Bundle
+### 获取当前 Bundle
 
 ```typescript
 const { bundle } = await CapacitorUpdater.current();
-console.log('Current bundle:', bundle.version);
+console.log('当前 bundle:', bundle.version);
 ```
 
-## Event Listeners
+## 事件监听器
 
-Listen for update events:
+监听更新事件:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
-// Listen for download progress
+// 监听下载进度
 CapacitorUpdater.addListener('download', (info) => {
-  console.log('Download progress:', info.percent);
+  console.log('下载进度:', info.percent);
 });
 
-// Listen for download completion
+// 监听下载完成
 CapacitorUpdater.addListener('downloadComplete', (bundle) => {
-  console.log('Download complete:', bundle.version);
+  console.log('下载完成:', bundle.version);
 });
 
-// Listen for update failures
+// 监听更新失败
 CapacitorUpdater.addListener('updateFailed', (error) => {
-  console.error('Update failed:', error);
+  console.error('更新失败:', error);
 });
 
-// Listen for successful updates
+// 监听成功更新
 CapacitorUpdater.addListener('updateAvailable', (info) => {
-  console.log('Update available:', info.version);
+  console.log('更新可用:', info.version);
 });
 ```
 
-## Configuration Options
+## 配置选项
 
-Configure the plugin in your `capacitor.config.ts`:
+在您的 `capacitor.config.ts` 中配置插件:
 
 ```typescript
 {
   plugins: {
     CapacitorUpdater: {
-      // Auto-update settings
+      // 自动更新设置
       autoUpdate: true,
       updateUrl: 'https://api.example.com/updates',
 
-      // Update behavior
+      // 更新行为
       resetWhenUpdate: true,
       directUpdate: false,
 
-      // Version settings
+      // 版本设置
       version: '1.0.0',
 
-      // Security
+      // 安全性
       allowModifyUrl: false,
 
-      // Stats collection
+      // 统计收集
       statsUrl: 'https://api.example.com/stats',
 
-      // Channel (for Capgo cloud)
+      // 频道(用于 Capgo 云)
       defaultChannel: 'production'
     }
   }
 }
 ```
 
-## Integration Patterns
+## 集成模式
 
-### With Capgo Cloud
+### 使用 Capgo 云
 
-The easiest way to get started:
+最简单的入门方式:
 
 ```typescript
-// Install the Capgo CLI
+// 安装 Capgo CLI
 npm install -g @capgo/cli
 
-// Login to Capgo
+// 登录 Capgo
 npx @capgo/cli login
 
-// Upload your first bundle
+// 上传您的第一个 bundle
 npx @capgo/cli bundle upload
 
-// The plugin auto-updates from Capgo cloud
+// 插件从 Capgo 云自动更新
 ```
 
-See the [main Quickstart guide](/docs/getting-started/quickstart/) for details.
+详情请参阅[主快速入门指南](/docs/getting-started/quickstart/)。
 
-### Self-Hosted Updates
+### 自托管更新
 
-Host your own update server:
+托管您自己的更新服务器:
 
 ```typescript
-// Configure your update endpoint
+// 配置您的更新端点
 {
   plugins: {
     CapacitorUpdater: {
@@ -264,7 +262,7 @@ Host your own update server:
 }
 ```
 
-Your server should return:
+您的服务器应返回:
 
 ```json
 {
@@ -273,57 +271,57 @@ Your server should return:
 }
 ```
 
-See [Self-Hosted Mode](/docs/plugins/updater/self-hosted/getting-started/) for complete details.
+完整详情请参阅[自托管模式](/docs/plugins/updater/self-hosted/getting-started/)。
 
-### Manual Update Flow
+### 手动更新流程
 
-Complete control over updates:
+完全控制更新:
 
 ```typescript
 import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
 async function checkAndUpdate() {
-  // Check for updates from your server
+  // 从您的服务器检查更新
   const response = await fetch('https://api.example.com/check-update');
   const { version, url } = await response.json();
 
-  // Download the update
+  // 下载更新
   const bundle = await CapacitorUpdater.download({
     url,
     version
   });
 
-  // Notify bundle is ready
+  // 通知 bundle 已准备好
   await CapacitorUpdater.notifyAppReady();
 
-  // Set as next version
+  // 设置为下一版本
   await CapacitorUpdater.set({ id: bundle.id });
 
-  // Reload when ready
+  // 准备好时重新加载
   await CapacitorUpdater.reload();
 }
 ```
 
-## Best Practices
+## 最佳实践
 
-- Always call `notifyAppReady()` when your app successfully loads
-- Test updates thoroughly before pushing to production
-- Implement proper error handling for network failures
-- Use version numbers consistently
-- Keep bundle sizes small for faster downloads
-- Monitor update success rates
+- 当应用成功加载时,始终调用 `notifyAppReady()`
+- 在推送到生产环境之前彻底测试更新
+- 为网络故障实现适当的错误处理
+- 一致地使用版本号
+- 保持 bundle 大小小以加快下载速度
+- 监控更新成功率
 
-## Next Steps
+## 后续步骤
 
-- [Plugin API Reference](/docs/plugins/updater/api/) - Complete API documentation
-- [Plugin Settings](/docs/plugins/updater/settings/) - All configuration options
-- [Events](/docs/plugins/updater/events/) - Available update events
-- [Self-Hosted Mode](/docs/plugins/updater/self-hosted/getting-started/) - Run your own update server
-- [Local Development](/docs/plugins/updater/local-dev/getting-started/) - Test updates locally
-- [Debugging](/docs/plugins/updater/debugging/) - Troubleshooting guide
+- [插件 API 参考](/docs/plugins/updater/api/) - 完整 API 文档
+- [插件设置](/docs/plugins/updater/settings/) - 所有配置选项
+- [事件](/docs/plugins/updater/events/) - 可用的更新事件
+- [自托管模式](/docs/plugins/updater/self-hosted/getting-started/) - 运行您自己的更新服务器
+- [本地开发](/docs/plugins/updater/local-dev/getting-started/) - 本地测试更新
+- [调试](/docs/plugins/updater/debugging/) - 故障排除指南
 
-## Support
+## 支持
 
-- [Known Issues](/docs/plugins/updater/known-issues/) - Common problems and solutions
-- [GitHub Discussions](https://github.com/Cap-go/capacitor-updater/discussions) - Community support
-- [Discord](https://discord.gg/VnYRvBfgA6) - Real-time chat
+- [已知问题](/docs/plugins/updater/known-issues/) - 常见问题和解决方案
+- [GitHub 讨论](https://github.com/Cap-go/capacitor-updater/discussions) - 社区支持
+- [Discord](https://discord.gg/VnYRvBfgA6) - 实时聊天

@@ -1,47 +1,44 @@
 ---
-title: Bundles
-description: >-
-  Detailed guide for managing Capgo Bundles, covering listing, deleting,
-  versioning, and storage optimization for app update packages.
+title: "Bundles"
+description: "앱 업데이트 패키지의 목록 표시, 삭제, 버전 관리 및 스토리지 최적화를 다루는 Capgo Bundles 관리를 위한 상세 가이드."
 sidebar:
   order: 8
-locale: ko
 ---
 
-Bundles are the core update packages in Capgo. Each bundle contains the web assets (HTML, CSS, JS) that make up your app's content. The Bundles API allows you to manage these update packages, including listing and deleting them.
+Bundles는 Capgo의 핵심 업데이트 패키지입니다. 각 번들에는 앱의 콘텐츠를 구성하는 웹 자산(HTML, CSS, JS)이 포함됩니다. Bundles API를 사용하면 목록 표시 및 삭제를 포함하여 이러한 업데이트 패키지를 관리할 수 있습니다.
 
-## Understanding Bundles
+## Bundles 이해하기
 
-A bundle represents a specific version of your app's web content and includes:
-- **Version**: Semantic version number of the bundle
-- **Checksum**: Unique hash to verify bundle integrity
-- **Storage Info**: Details about where and how the bundle is stored
-- **Native Requirements**: Minimum native app version requirements
-- **Metadata**: Creation time, ownership, and other tracking information
+번들은 앱의 웹 콘텐츠의 특정 버전을 나타내며 다음을 포함합니다:
+- **Version**: 번들의 시맨틱 버전 번호
+- **Checksum**: 번들 무결성을 검증하기 위한 고유 해시
+- **Storage Info**: 번들이 저장된 위치 및 방법에 대한 세부 정보
+- **Native Requirements**: 네이티브 앱의 최소 버전 요구 사항
+- **Metadata**: 생성 시간, 소유권 및 기타 추적 정보
 
-## Manual Bundle Creation (Without CLI)
+## 수동 Bundle 생성 (CLI 없이)
 
-Here's how to create and upload bundles manually without using the Capgo CLI:
+Capgo CLI를 사용하지 않고 수동으로 번들을 생성하고 업로드하는 방법:
 
-### Step 1: Build Your App
+### 단계 1: 앱 빌드하기
 
-First, build your app's web assets:
+먼저 앱의 웹 자산을 빌드합니다:
 
 ```bash
 npm run build
 ```
 
-### Step 2: Create Bundle Zip Using Same Packages as Capgo CLI
+### 단계 2: Capgo CLI와 동일한 패키지를 사용하여 Bundle Zip 생성
 
-**Important**: Use the exact same JavaScript packages that Capgo CLI uses internally to ensure compatibility.
+**중요**: 호환성을 보장하기 위해 Capgo CLI가 내부적으로 사용하는 것과 정확히 동일한 JavaScript 패키지를 사용하세요.
 
-#### Install Required Packages
+#### 필요한 패키지 설치
 
 ```bash
 npm install adm-zip @tomasklaen/checksum
 ```
 
-#### Create Zip Bundle with JavaScript (Same as Capgo CLI)
+#### JavaScript로 Zip Bundle 생성 (Capgo CLI와 동일)
 
 ```javascript
 const fs = require('node:fs');
@@ -121,7 +118,7 @@ async function main() {
 main();
 ```
 
-### Step 3: Calculate SHA256 Checksum Using Same Package as CLI
+### 단계 3: CLI와 동일한 패키지를 사용하여 SHA256 체크섬 계산
 
 ```javascript
 const fs = require('node:fs');
@@ -143,7 +140,7 @@ async function main() {
 main();
 ```
 
-### Step 4: Upload Bundle to Your Storage
+### 단계 4: 스토리지에 Bundle 업로드
 
 Upload your zip file to any web-accessible storage:
 
@@ -167,7 +164,7 @@ Examples of valid public URLs:
 - `https://github.com/username/repo/releases/download/v1.2.3/bundle.zip`
 - `https://cdn.jsdelivr.net/gh/username/repo@v1.2.3/dist.zip`
 
-### Step 5: Register Bundle with Capgo API
+### 단계 5: Capgo API에 Bundle 등록
 
 Register the external bundle with Capgo using direct API calls:
 
@@ -201,7 +198,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 }
 ```
 
-#### API Parameters
+#### API 매개변수
 
 | Parameter | Description | Required |
 |-----------|-------------|----------|
@@ -210,7 +207,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 | `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
 | `checksum` | SHA256 checksum of the zip file | Yes |
 
-## Bundle Structure Requirements
+## Bundle 구조 요구사항
 
 Your bundle zip must follow these requirements:
 
@@ -218,7 +215,7 @@ Your bundle zip must follow these requirements:
 2. **Capacitor Integration**: Must call `notifyAppReady()` in your app code
 3. **Asset Paths**: Use relative paths for all assets
 
-### Valid Bundle Structure
+### 유효한 Bundle 구조
 
 ```
 bundle.zip
@@ -229,7 +226,7 @@ bundle.zip
 └── images/
 ```
 
-## Complete Manual Workflow Example
+## 완전한 수동 워크플로우 예제
 
 Simple Node.js script to zip, checksum, and upload to Capgo:
 
@@ -290,9 +287,9 @@ Install dependencies:
 npm install adm-zip @tomasklaen/checksum node-fetch
 ```
 
-## Checksum Verification
+## 체크섬 검증
 
-### JavaScript Checksum Calculation (Same as Capgo CLI)
+### JavaScript 체크섬 계산 (Capgo CLI와 동일)
 
 Use the exact same package and method that Capgo CLI uses internally:
 
@@ -329,7 +326,7 @@ async function main() {
 main();
 ```
 
-### Checksum Importance
+### 체크섬의 중요성
 
 - **Bundle Integrity**: Ensures the bundle hasn't been corrupted during transfer
 - **API Verification**: Capgo verifies checksums before accepting bundles
@@ -350,11 +347,11 @@ main();
 
 Retrieve bundle information. Returns 50 bundles per page.
 
-#### Query Parameters
+#### 쿼리 매개변수
 - `app_id`: Required. The ID of your app
 - `page`: Optional. Page number for pagination
 
-#### Response Type
+#### 응답 타입
 
 ```typescript
 interface Bundle {
@@ -377,7 +374,7 @@ interface Bundle {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 # Get all bundles
@@ -389,7 +386,7 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/bundle/?app_id=app_123&page=1"
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 {
@@ -417,7 +414,7 @@ curl -H "authorization: your-api-key" \
 
 Delete one or all bundles for an app. Use with caution as this action cannot be undone.
 
-#### Query Parameters
+#### 쿼리 매개변수
 
 For deleting a specific bundle:
 ```typescript
@@ -434,7 +431,7 @@ interface BundleDeleteAll {
 }
 ```
 
-#### Example Requests
+#### 요청 예시s
 
 ```bash
 # Delete specific bundle
@@ -457,7 +454,7 @@ curl -X DELETE \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -482,7 +479,7 @@ interface CreateBundleBody {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X POST \
@@ -497,7 +494,7 @@ curl -X POST \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -522,7 +519,7 @@ interface UpdateMetadataBody {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X POST \
@@ -537,7 +534,7 @@ curl -X POST \
   https://api.capgo.app/bundle/metadata
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -561,7 +558,7 @@ interface SetChannelBody {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X PUT \
@@ -575,7 +572,7 @@ curl -X PUT \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -584,7 +581,7 @@ curl -X PUT \
 }
 ```
 
-## Error Handling
+## 오류 처리
 
 Common error scenarios and their responses:
 
@@ -614,7 +611,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 일반적인 사용 사례
 
 1. **Cleanup Old Versions**
 ```typescript
@@ -633,7 +630,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Storage Considerations
+## 스토리지 고려사항
 
 1. **Retention Policy**: Define how long to keep old bundles
 2. **Size Management**: Monitor bundle sizes and storage usage

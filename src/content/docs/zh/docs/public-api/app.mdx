@@ -1,49 +1,45 @@
 ---
-title: Apps
-description: >-
-  Detailed documentation for the Apps endpoint, providing comprehensive insights
-  into managing and interacting with Capacitor applications through Capgo's
-  platform.
+title: "Apps"
+description: "Apps端点的详细文档，提供通过Capgo平台管理和与Capacitor应用程序交互的全面见解。"
 sidebar:
   order: 7
-locale: zh
 ---
 
-Apps are the foundational entities in Capgo. Each app represents a unique Capacitor application that you can manage and update through the platform. The Apps API allows you to create, retrieve, update, and delete app configurations.
+Apps是Capgo中的基础实体。每个应用程序代表一个独特的Capacitor应用程序，您可以通过平台进行管理和更新。Apps API允许您创建、检索、更新和删除应用程序配置。
 
-## Understanding Apps
+## 理解Apps
 
-An app in Capgo represents your Capacitor application and includes:
-- **App ID**: Unique identifier for your application
-- **Name**: Human-readable name of your application
-- **Icons**: Visual identifiers for your app in the dashboard
-- **Configuration**: Settings that control how updates are delivered
-- **Ownership**: Organization and user access information
-- **Usage Statistics**: Metrics about installs and updates
+Capgo中的应用程序代表您的Capacitor应用程序，包括：
+- **App ID**：应用程序的唯一标识符
+- **Name**：应用程序的可读名称
+- **Icons**：仪表板中应用程序的视觉标识符
+- **Configuration**：控制更新交付方式的设置
+- **Ownership**：组织和用户访问信息
+- **Usage Statistics**：关于安装和更新的指标
 
-## Best Practices
+## 最佳实践
 
-1. **Naming Convention**: Use clear, identifiable names for your apps
-2. **Security**: Protect your API keys and access credentials
-3. **Organization**: Group related apps under the same organization
-4. **Monitoring**: Regularly check app statistics and performance
-5. **Backup**: Maintain configuration backups for critical apps
+1. **命名约定**：为您的应用程序使用清晰、可识别的名称
+2. **安全性**：保护您的API密钥和访问凭据
+3. **组织**：将相关应用程序分组到同一组织下
+4. **监控**：定期检查应用程序统计信息和性能
+5. **备份**：维护关键应用程序的配置备份
 
-## Endpoints
+## 端点
 
 ### GET
 
 `https://api.capgo.app/app/`
 
-Retrieve information about your apps.
+检索有关您的应用程序的信息。
 
-#### Query Parameters
-- `page`: Optional. Page number for pagination
-- `limit`: Optional. Number of results per page (default: 50)
-- `org_id`: Optional. Filter apps by organization ID. If not provided, returns apps from all organizations the user has access to
+#### 查询参数
+- `page`：可选。分页的页码
+- `limit`：可选。每页结果数（默认值：50）
+- `org_id`：可选。按组织ID筛选应用程序。如果未提供，则返回用户有权访问的所有组织的应用程序
 
-For getting a specific app:
-- Use the app ID in the URL path: `https://api.capgo.app/app/:app_id`
+获取特定应用程序：
+- 在URL路径中使用应用程序ID：`https://api.capgo.app/app/:app_id`
 
 #### Response Type
 
@@ -107,7 +103,7 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/app/`
 
-Create a new app.
+创建新应用程序。
 
 #### Request Body
 
@@ -156,7 +152,7 @@ curl -X POST \
 
 `https://api.capgo.app/app/:app_id`
 
-Update an existing app. The app ID is specified in the URL path.
+更新现有应用程序。应用程序ID在URL路径中指定。
 
 #### Request Body
 
@@ -202,7 +198,7 @@ curl -X PUT \
 
 `https://api.capgo.app/app/:app_id`
 
-Delete an app and all associated resources. The app ID is specified in the URL path. Use with extreme caution as this action cannot be undone.
+删除应用程序及所有相关资源。应用程序ID在URL路径中指定。请极其谨慎使用，因为此操作无法撤消。
 
 #### Example Request
 
@@ -220,9 +216,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## 错误处理
 
-Common error scenarios and their responses:
+常见错误场景及其响应：
 
 ```json
 // App not found
@@ -255,7 +251,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 常见用例
 
 1. **Create New App**
 ```typescript
@@ -290,9 +286,9 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 ```
 
-## Resource Management
+## 资源管理
 
-1. **Storage Optimization**: Monitor storage usage and set appropriate retention policies
-2. **Organization**: Group related apps under a single organization
-3. **Access Control**: Manage which team members can modify app settings
-4. **Backup Strategy**: Back up critical app configurations and settings
+1. **存储优化**：监控存储使用情况并设置适当的保留策略
+2. **组织**：将相关应用程序分组到单个组织下
+3. **访问控制**：管理哪些团队成员可以修改应用程序设置
+4. **备份策略**：备份关键应用程序配置和设置

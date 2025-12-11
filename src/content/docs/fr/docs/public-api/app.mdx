@@ -1,33 +1,29 @@
 ---
-title: Apps
-description: >-
-  Detailed documentation for the Apps endpoint, providing comprehensive insights
-  into managing and interacting with Capacitor applications through Capgo's
-  platform.
+title: "Applications"
+description: "Documentation détaillée pour le endpoint Applications, fournissant des informations complètes sur la gestion et l'interaction avec les applications Capacitor via la plateforme Capgo."
 sidebar:
   order: 7
-locale: fr
 ---
 
-Apps are the foundational entities in Capgo. Each app represents a unique Capacitor application that you can manage and update through the platform. The Apps API allows you to create, retrieve, update, and delete app configurations.
+Les applications sont les entités fondamentales dans Capgo. Chaque application représente une application Capacitor unique que vous pouvez gérer et mettre à jour via la plateforme. L'API Applications vous permet de créer, récupérer, mettre à jour et supprimer des configurations d'applications.
 
-## Understanding Apps
+## Comprendre les Applications
 
-An app in Capgo represents your Capacitor application and includes:
-- **App ID**: Unique identifier for your application
-- **Name**: Human-readable name of your application
-- **Icons**: Visual identifiers for your app in the dashboard
-- **Configuration**: Settings that control how updates are delivered
-- **Ownership**: Organization and user access information
-- **Usage Statistics**: Metrics about installs and updates
+Une application dans Capgo représente votre application Capacitor et inclut :
+- **App ID** : Identifiant unique pour votre application
+- **Name** : Nom lisible pour votre application
+- **Icons** : Identifiants visuels pour votre application dans le tableau de bord
+- **Configuration** : Paramètres qui contrôlent comment les mises à jour sont livrées
+- **Ownership** : Informations d'accès à l'organisation et à l'utilisateur
+- **Usage Statistics** : Métriques sur les installations et les mises à jour
 
-## Best Practices
+## Meilleures Pratiques
 
-1. **Naming Convention**: Use clear, identifiable names for your apps
-2. **Security**: Protect your API keys and access credentials
-3. **Organization**: Group related apps under the same organization
-4. **Monitoring**: Regularly check app statistics and performance
-5. **Backup**: Maintain configuration backups for critical apps
+1. **Convention de Nommage** : Utilisez des noms clairs et identifiables pour vos applications
+2. **Sécurité** : Protégez vos clés API et vos informations d'identification
+3. **Organisation** : Regroupez les applications connexes sous la même organisation
+4. **Surveillance** : Vérifiez régulièrement les statistiques et les performances des applications
+5. **Sauvegarde** : Maintenez des sauvegardes de configuration pour les applications critiques
 
 ## Endpoints
 
@@ -35,17 +31,17 @@ An app in Capgo represents your Capacitor application and includes:
 
 `https://api.capgo.app/app/`
 
-Retrieve information about your apps.
+Récupérer des informations sur vos applications.
 
-#### Query Parameters
-- `page`: Optional. Page number for pagination
-- `limit`: Optional. Number of results per page (default: 50)
-- `org_id`: Optional. Filter apps by organization ID. If not provided, returns apps from all organizations the user has access to
+#### Paramètres de Requête
+- `page` : Optionnel. Numéro de page pour la pagination
+- `limit` : Optionnel. Nombre de résultats par page (par défaut : 50)
+- `org_id` : Optionnel. Filtrer les applications par ID d'organisation. Si non fourni, renvoie les applications de toutes les organisations auxquelles l'utilisateur a accès
 
-For getting a specific app:
-- Use the app ID in the URL path: `https://api.capgo.app/app/:app_id`
+Pour obtenir une application spécifique :
+- Utilisez l'ID de l'application dans le chemin URL : `https://api.capgo.app/app/:app_id`
 
-#### Response Type
+#### Type de Réponse
 
 ```typescript
 interface App {
@@ -64,23 +60,23 @@ interface App {
 }
 ```
 
-#### Example Request
+#### Exemple de Requête
 
 ```bash
-# Get all apps
+# Obtenir toutes les applications
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/"
 
-# Get apps from a specific organization
+# Obtenir les applications d'une organisation spécifique
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 
-# Get specific app
+# Obtenir une application spécifique
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/com.demo.app"
 ```
 
-#### Example Response
+#### Exemple de Réponse
 
 ```json
 {
@@ -107,7 +103,7 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/app/`
 
-Create a new app.
+Créer une nouvelle application.
 
 #### Request Body
 
@@ -120,23 +116,23 @@ interface CreateApp {
 }
 ```
 
-#### Example Request
+#### Exemple de Requête
 
 ```bash
-# Create new app
+# Créer une nouvelle application
 curl -X POST \
   -H "authorization: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "My New App",
-    "app_id": "com.demo.myapp", // this id is unique in Capgo This cannot be reused by any account.
+    "app_id": "com.demo.myapp", // cet ID est unique dans Capgo et ne peut pas être réutilisé par aucun compte.
     "icon": "https://example.com/icon.png",
     "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8"
   }' \
   https://api.capgo.app/app/
 ```
 
-#### Success Response
+#### Réponse de Succès
 
 ```json
 {
@@ -156,7 +152,7 @@ curl -X POST \
 
 `https://api.capgo.app/app/:app_id`
 
-Update an existing app. The app ID is specified in the URL path.
+Mettre à jour une application existante. L'ID de l'application est spécifié dans le chemin URL.
 
 #### Request Body
 
@@ -168,7 +164,7 @@ interface UpdateApp {
 }
 ```
 
-#### Example Request
+#### Exemple de Requête
 
 ```bash
 curl -X PUT \
@@ -182,7 +178,7 @@ curl -X PUT \
   https://api.capgo.app/app/com.demo.app
 ```
 
-#### Success Response
+#### Réponse de Succès
 
 ```json
 {
@@ -202,9 +198,9 @@ curl -X PUT \
 
 `https://api.capgo.app/app/:app_id`
 
-Delete an app and all associated resources. The app ID is specified in the URL path. Use with extreme caution as this action cannot be undone.
+Supprimer une application et toutes les ressources associées. L'ID de l'application est spécifié dans le chemin URL. Utilisez avec une extrême prudence car cette action ne peut pas être annulée.
 
-#### Example Request
+#### Exemple de Requête
 
 ```bash
 curl -X DELETE \
@@ -212,7 +208,7 @@ curl -X DELETE \
   https://api.capgo.app/app/com.demo.app
 ```
 
-#### Success Response
+#### Réponse de Succès
 
 ```json
 {
@@ -220,79 +216,79 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Gestion des Erreurs
 
-Common error scenarios and their responses:
+Scénarios d'erreur courants et leurs réponses :
 
 ```json
-// App not found
+// Application non trouvée
 {
   "error": "App not found",
   "status": "KO"
 }
 
-// Duplicate custom ID
+// ID personnalisé en double
 {
   "error": "Custom ID already in use",
   "status": "KO"
 }
 
-// Invalid parameters
+// Paramètres invalides
 {
   "error": "Invalid app configuration",
   "status": "KO"
 }
 
-// Permission denied
+// Permission refusée
 {
   "error": "Insufficient permissions to manage app",
   "status": "KO"
 }
 
-// Organization access denied
+// Accès à l'organisation refusé
 {
   "status": "You do not have access to this organization"
 }
 ```
 
-## Common Use Cases
+## Cas d'Usage Courants
 
-1. **Create New App**
+1. **Créer une Nouvelle Application**
 ```typescript
-// Set up a new app
+// Configurer une nouvelle application
 {
   "name": "Production App",
   "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 }
 ```
 
-2. **Update App Configuration**
+2. **Mettre à Jour la Configuration de l'Application**
 ```typescript
-// Change app name and icon
+// Changer le nom et l'icône de l'application
 {
   "name": "Rebranded App Name",
   "icon": "https://example.com/new-icon.png"
 }
 ```
 
-3. **Set Retention Policy**
+3. **Définir la Politique de Rétention**
 ```typescript
-// Configure automatic bundle cleanup
+// Configurer le nettoyage automatique des bundles
 {
-  "retention": 30 // Keep bundles for 30 days
+  "retention": 30 // Conserver les bundles pendant 30 jours
 }
 ```
 
-4. **Get Apps by Organization**
+4. **Obtenir les Applications par Organisation**
 ```bash
-# List all apps in a specific organization
+# Lister toutes les applications dans une organisation spécifique
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 ```
 
-## Resource Management
+## Gestion des Ressources
 
-1. **Storage Optimization**: Monitor storage usage and set appropriate retention policies
-2. **Organization**: Group related apps under a single organization
-3. **Access Control**: Manage which team members can modify app settings
-4. **Backup Strategy**: Back up critical app configurations and settings
+1. **Optimisation du Stockage** : Surveillez l'utilisation du stockage et définissez des politiques de rétention appropriées
+2. **Organisation** : Regroupez les applications connexes sous une seule organisation
+3. **Contrôle d'Accès** : Gérez quels membres de l'équipe peuvent modifier les paramètres de l'application
+4. **Stratégie de Sauvegarde** : Sauvegardez les configurations et les paramètres critiques de l'application

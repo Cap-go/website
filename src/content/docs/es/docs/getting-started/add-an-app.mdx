@@ -1,8 +1,6 @@
 ---
-title: Ajouter une App
-description: >-
-  Agregar una aplicación a tu cuenta de Capgo e instalar plugins en la
-  aplicación
+title: "Añadir una Aplicación"
+description: "Añade una aplicación a tu cuenta de Capgo e instala el plugin en tu aplicación"
 sidebar:
   order: 2
 prev: false
@@ -13,39 +11,48 @@ locale: es
 import { YouTube } from 'astro-embed';
 import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
-## Introducción a Capgo
-<YouTube id="NzXXKoyhTIo" title="Capgo en 15 minutos" />
+## Requisitos
 
-## Las actualizaciones en vivo están a 3 pasos
+Antes de comenzar con Capgo, asegúrate de tener:
+- Una aplicación Capacitor instalada y configurada. [Aprende cómo configurar Capacitor](https://capacitorjs.com/docs/getting-started/)
+- Node.js 18 o posterior instalado
+
+## Introducción a Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo en 15 min" />
+
+## Las actualizaciones en vivo están a 3 pasos de distancia
 
 
 ### Configuración guiada
 
 <Steps>
 
-1. Crea tu cuenta en [https://capgo.app/register](https://capgo.app/register)
-![captura de pantalla del registro](/signup.webp "captura de pantalla del registro")
+1. Crea tu cuenta en [https://capgo.app/register](https://capgo.app/register).
+![captura de pantalla de registro](/signup.webp "captura de pantalla de registro")
 
-2. Usa los comandos de inicialización para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada<Aside type="tip">Siguiendo estos pasos, estarás listo en poco tiempo. Si necesitas ayuda adicional durante el proceso, nuestro equipo de soporte está [aquí para ayudarte](https://support.capgo.app) ¡Feliz incorporación!</Aside>
+2. Usa el comando Init para comenzar <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> Se te presentará una serie de preguntas. Proporciona las respuestas necesarias para completar la configuración automatizada.<Aside type="tip">Siguiendo estos pasos, estarás en funcionamiento en poco tiempo. Si necesitas más asistencia durante el proceso, nuestro equipo de soporte está [aquí para ayudar](https://support.capgo.app). ¡Feliz incorporación!</Aside>
 
-3. Despliega una actualización en vivo <LinkCard href="/docs/getting-started/deploy/" title="Despliega una actualización en vivo" description="Aprende cómo desplegar una actualización en vivo en tu aplicación" />
+3. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/deploy/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
 
 </Steps>
 
 ### Configuración manual
 
-En caso de que el comando init no funcione para ti, puedes agregar una aplicación manualmente
+En caso de que el comando init no funcione para ti, puedes añadir manualmente una aplicación.
 
 <Steps>
 
-1. Conecta el CLI a tu cuenta: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+1. Conecta la CLI a tu cuenta: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
 
-2. Agrega la aplicación a tu cuenta con este comando: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+2. Añade la aplicación a tu cuenta con este comando: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. Instala el plugin en tu aplicación: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+3. Instala el plugin en tu aplicación: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4. Llama al método init lo antes posible en tu aplicación: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+4. Configura el plugin en tu `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+  [Ver todas las opciones disponibles](/docs/plugin/settings/). Esta información se inferirá si no se proporciona.
 
-5. Despliega una actualización en vivo <LinkCard href="/docs/getting-started/deploy/" title="Despliega una actualización en vivo" description="Aprende cómo desplegar una actualización en vivo en tu aplicación" />
+5. Llama al método init lo más temprano posible en tu aplicación: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+
+6. Implementa una actualización en vivo <LinkCard href="/docs/getting-started/deploy/" title="Implementar una actualización en vivo" description="Aprende cómo implementar una actualización en vivo en tu aplicación" />
 
 </Steps>

@@ -1,47 +1,44 @@
 ---
-title: Members
-description: >-
-  Comprehensive guide to managing organization members in Capgo, covering roles,
-  permissions, and best practices for security and collaboration.
+title: "成员"
+description: "关于在Capgo中管理组织成员的综合指南,涵盖角色、权限以及安全和协作的最佳实践。"
 sidebar:
   order: 4
-locale: zh
 ---
 
-Organization members are users who have access to your Capgo organization. Each member has a specific role that determines their permissions within the organization. Managing members effectively is crucial for maintaining security and collaboration in your team.
+组织成员是有权访问您的Capgo组织的用户。每个成员都有一个特定的角色,该角色决定了他们在组织内的权限。有效管理成员对于维护团队的安全和协作至关重要。
 
-## Member Roles
+## 成员角色
 
-### Regular Roles
-- **read**: Can view resources but cannot make changes
-- **upload**: Can upload new bundles and view resources
-- **write**: Can modify resources and upload bundles
-- **admin**: Can manage organization settings and members
-- **super_admin**: Has full control over the organization
+### 常规角色
+- **read**: 可以查看资源但不能进行更改
+- **upload**: 可以上传新捆绑包并查看资源
+- **write**: 可以修改资源并上传捆绑包
+- **admin**: 可以管理组织设置和成员
+- **super_admin**: 对组织拥有完全控制权
 
-### Invite Roles
-- **invite_read**: Pending invitation for read access
-- **invite_upload**: Pending invitation for upload access
-- **invite_write**: Pending invitation for write access
-- **invite_admin**: Pending invitation for admin access
-- **invite_super_admin**: Pending invitation for super admin access
+### 邀请角色
+- **invite_read**: 待处理的读取访问邀请
+- **invite_upload**: 待处理的上传访问邀请
+- **invite_write**: 待处理的写入访问邀请
+- **invite_admin**: 待处理的管理员访问邀请
+- **invite_super_admin**: 待处理的超级管理员访问邀请
 
-## Best Practices
+## 最佳实践
 
-1. **Role Assignment**: Follow the principle of least privilege when assigning roles
-2. **Regular Audits**: Periodically review member access and remove unused accounts
-3. **Onboarding**: Have a clear process for adding new members and assigning roles
-4. **Offboarding**: Promptly remove access for members who leave the organization
+1. **角色分配**: 分配角色时遵循最小权限原则
+2. **定期审计**: 定期审查成员访问权限并删除未使用的账户
+3. **入职培训**: 制定清晰的流程来添加新成员和分配角色
+4. **离职处理**: 及时删除离开组织的成员的访问权限
 
-## Endpoints
+## 端点
 
 ### POST
 
 `https://api.capgo.app/organization/members/`
 
-Add a new member to an organization or update an existing member's role. Note that you can only invite users who already have a Capgo account - the email must correspond to an existing Capgo user.
+向组织添加新成员或更新现有成员的角色。请注意,您只能邀请已经拥有Capgo账户的用户 - 电子邮件必须对应现有的Capgo用户。
 
-#### Request Body
+#### 请求体
 
 ```typescript
 interface MemberCreate {
@@ -51,7 +48,7 @@ interface MemberCreate {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X POST \
@@ -65,7 +62,7 @@ curl -X POST \
   https://api.capgo.app/organization/members/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -79,17 +76,17 @@ curl -X POST \
 }
 ```
 
-Notes: 
-- When adding a new member, they will receive an invitation email. Their role will be prefixed with "invite_" until they accept the invitation.
-- The user must already have a Capgo account before they can be invited. If they don't have an account, they should first create one at https://console.capgo.app/register/
+注意事项: 
+- 添加新成员时,他们将收到邀请电子邮件。在接受邀请之前,其角色将以"invite_"为前缀。
+- 用户必须在被邀请之前已经拥有Capgo账户。如果他们没有账户,应首先在 https://console.capgo.app/register/ 创建一个账户
 
 ### GET 
 
 `https://api.capgo.app/organization/members/`
 
-Retrieve all members of an organization.
+检索组织的所有成员。
 
-#### Query Parameters
+#### 查询参数
 
 ```typescript
 interface MemberQuery {
@@ -97,7 +94,7 @@ interface MemberQuery {
 }
 ```
 
-#### Response Type
+#### 响应类型
 
 ```typescript
 interface Member {
@@ -108,14 +105,14 @@ interface Member {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/organization/members/?orgId=org_123"
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -146,9 +143,9 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/organization/members/`
 
-Remove a member from an organization. This will immediately revoke their access.
+从组织中删除成员。这将立即撤销其访问权限。
 
-#### Request Body
+#### 请求体
 
 ```typescript
 interface MemberDelete {
@@ -157,7 +154,7 @@ interface MemberDelete {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X DELETE \
@@ -170,7 +167,7 @@ curl -X DELETE \
   https://api.capgo.app/organization/members/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -178,51 +175,51 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## 错误处理
 
-Common error scenarios and their responses:
+常见错误场景及其响应:
 
 ```json
-// Member not found
+// 未找到成员
 {
   "error": "Member not found",
   "status": "KO"
 }
 
-// Invalid role
+// 无效的角色
 {
   "error": "Invalid role specified",
   "status": "KO"
 }
 
-// Permission denied
+// 权限被拒绝
 {
   "error": "Insufficient permissions to manage members",
   "status": "KO"
 }
 
-// Cannot remove last admin
+// 无法删除最后一个管理员
 {
   "error": "Cannot remove the last admin from the organization",
   "status": "KO"
 }
 
-// Invalid email
+// 无效的电子邮件
 {
   "error": "Invalid email format",
   "status": "KO"
 }
 
-// Member already exists
+// 成员已存在
 {
   "error": "Member already exists in organization",
   "status": "KO"
 }
 ```
 
-## Common Use Cases
+## 常见用例
 
-1. **Team Expansion**: Adding new team members with appropriate roles
-2. **Access Control**: Managing member permissions as responsibilities change
-3. **Security Audit**: Reviewing member list and roles periodically
-4. **Team Restructuring**: Updating roles during organizational changes
+1. **团队扩展**: 添加具有适当角色的新团队成员
+2. **访问控制**: 随着职责变化管理成员权限
+3. **安全审计**: 定期审查成员列表和角色
+4. **团队重组**: 在组织变更期间更新角色

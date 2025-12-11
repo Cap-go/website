@@ -1,8 +1,6 @@
 ---
-title: Known issues
-description: >-
-  Known issues with Capacitor and Capgo, and our updater, this page will help
-  you understand the weird issue you have with our tool
+title: "已知问题"
+description: "Capacitor 和 Capgo 以及我们的更新程序的已知问题,本页面将帮助您理解工具中遇到的奇怪问题"
 sidebar:
   order: 7
 locale: zh
@@ -10,74 +8,74 @@ locale: zh
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Ionic live reload
+## Ionic 实时重载
 
-* When you develop, if you use the Ionic live reload feature from the CLI, it will override the plugin, so you will never see your update.
+* 当您开发时,如果您使用 CLI 的 Ionic 实时重载功能,它会覆盖插件,因此您将永远看不到更新。
 
-## Quasar live reload
+## Quasar 实时重载
 
-* It uses the same system as ionic under the hood, so you will not see your updates.
+* 它在底层使用与 Ionic 相同的系统,因此您将看不到更新。
 
-## Updates fail
+## 更新失败
 
-* This usually happens when large updates (> 20mb) are pushed, a big percentage of users will not get the last version.  
-In the past, users needed to keep the app open until the download was done, now we use background download, but it's still limited to a few seconds.
+* 当推送大型更新 (> 20mb) 时通常会发生这种情况,很大比例的用户将无法获得最新版本。
+过去,用户需要保持应用打开直到下载完成,现在我们使用后台下载,但仍限制在几秒钟内。
 
 ## Android
 
-### Cannot download
+### 无法下载
 
-We have seen some issues with devices in india, and got user on the call, made them try different DNS servers, and it worked.
+我们在印度的设备上发现了一些问题,并与用户通话,让他们尝试不同的 DNS 服务器,结果成功了。
 
-So if you have the issue, try to use a different DNS server like Cloudflare or Google DNS.
+因此,如果您遇到此问题,请尝试使用不同的 DNS 服务器,如 Cloudflare 或 Google DNS。
 
-Cloudflare: 1.1.1.1 and 1.0.0.1
+Cloudflare: 1.1.1.1 和 1.0.0.1
 
-Google DNS: 8.8.8.8 and 8.8.4.4 or dns.google
+Google DNS: 8.8.8.8 和 8.8.4.4 或 dns.google
 
 <LinkCard
-	title="How to setup a preferred DNS server on Android?"
+	title="如何在 Android 上设置首选 DNS 服务器?"
 	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
 />
 
-### Self Hosted
-When you are pushing a self-hosted update, be mindful you cannot use "HTTP" endpoint as it's against the security policies of Android apps, if you still want to do it, follow this guide:
+### 自托管
+当您推送自托管更新时,请注意不能使用 "HTTP" 端点,因为这违反了 Android 应用的安全策略,如果您仍想这样做,请遵循此指南:
 
 <LinkCard
-	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	title="如何在 Android (9) Pie 中允许所有网络连接类型 HTTP 和 HTTPS?"
 	href="https://stackoverflow.com/a/51902630/5511370"
 />
 
-### Unzip 
+### 解压
 
-Unzip issue: DEFLATED entries can have EXT descriptor
+解压问题: DEFLATED 条目可以有 EXT 描述符
 
-If you zipped your bundle with something different than the CLI, the format or your zip could be incorrect, please use the CLI command `npx @capgo/cli zip BUNDLE_FOLDER`.
+如果您使用 CLI 以外的工具压缩 bundle,您的 zip 格式可能不正确,请使用 CLI 命令 `npx @capgo/cli zip BUNDLE_FOLDER`。
 
-This is a known issue of Java:
+这是 Java 的已知问题:
 
 <LinkCard
-	title="Unzip issue: DEFLATED entries can have EXT descriptor"
+	title="解压问题: DEFLATED 条目可以有 EXT 描述符"
 	href="https://bugs.openjdk.org/browse/JDK-8143613"
 />
 
 
-### Clearfix issue
+### Clearfix 问题
 
-* If you have issues with usesCleartextTraffic, it's because the plugin follows the good practice recommended by sonar cloud, in 90% of the cases it will work just fine, but with some plugins that causes issues.
+* 如果您遇到 usesCleartextTraffic 问题,这是因为插件遵循 sonar cloud 推荐的良好实践,在 90% 的情况下它会正常工作,但某些插件会导致问题。
 
-To fix it, add in `android/app/src/main/AndroidManifest.xml` in the `<application>` key :
+要修复它,请在 `android/app/src/main/AndroidManifest.xml` 的 `<application>` 键中添加:
 
 ```xml
 tools:replace="android:usesCleartextTraffic"
 xmlns:tools="http://schemas.android.com/tools"
 ```
 
-## IOS
+## iOS
 
-### Privacy manifest
+### 隐私清单
 
-Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Privacy Manifest](https://capacitorjs.com/docs/ios/privacy-manifest) (usually `ios/App/PrivacyInfo.xcprivacy`):
+将 `NSPrivacyAccessedAPICategoryUserDefaults` 字典键添加到您的[隐私清单](https://capacitorjs.com/docs/ios/privacy-manifest)(通常为 `ios/App/PrivacyInfo.xcprivacy`):
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -86,7 +84,7 @@ Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Priva
   <dict>
     <key>NSPrivacyAccessedAPITypes</key>
     <array>
-      <!-- Add this dict entry to the array if the file already exists. -->
+      <!-- 如果文件已存在,请将此 dict 条目添加到数组中。 -->
       <dict>
         <key>NSPrivacyAccessedAPIType</key>
         <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
@@ -100,33 +98,33 @@ Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Priva
 </plist>
 ```
 
-We recommend to declare [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) as the reason for accessing the [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API.
+我们建议声明 [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) 作为访问 [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API 的原因。
 
 
-### Network permissions
+### 网络权限
 
-When using local server for testing update, the app will ask for network permission, it's a normal behavior, it's not the case when you use a remote server.
+使用本地服务器测试更新时,应用会请求网络权限,这是正常行为,使用远程服务器时不会出现此情况。
 
 
-## Both OS
+## 两个操作系统
 
-When doing manual mode updates, some events are not easy to catch, for example the update fail triggers just before your JS code reloads, so you will not be able to catch it.
+在手动模式更新时,某些事件不易捕获,例如更新失败会在 JS 代码重新加载之前触发,因此您将无法捕获它。
 
-One alternative is to list the bundles and check error stats to know if the update fails.
+一种替代方法是列出 bundle 并检查错误统计信息以了解更新是否失败。
 
-We need to find a better way to handle this in the future, but it's not a priority, since auto mode is the recommended way to do update.
+我们需要在未来找到更好的方法来处理这个问题,但这不是优先事项,因为自动模式是推荐的更新方式。
 
-PRs are welcome to help us improve this.
+欢迎提交 PR 帮助我们改进这一点。
 
 ## CLI
 
-if your CLI has troubles doing anything,
+如果您的 CLI 在执行任何操作时遇到问题,
 
-Check if **appId** and **appName** are present in your **capacitor.config.ts**
+请检查 **appId** 和 **appName** 是否存在于您的 **capacitor.config.ts** 中
 
-Follow the guide of the official doc:
+遵循官方文档的指南:
 
 <LinkCard
-	title="Capacitor Configuration"
+	title="Capacitor 配置"
 	href="https://capacitorjs.com/docs/config"
 />

@@ -1,45 +1,42 @@
 ---
-title: Members
-description: >-
-  Comprehensive guide to managing organization members in Capgo, covering roles,
-  permissions, and best practices for security and collaboration.
+title: "Anggota"
+description: "Panduan komprehensif untuk mengelola anggota organisasi di Capgo, mencakup peran, izin, dan praktik terbaik untuk keamanan dan kolaborasi."
 sidebar:
   order: 4
-locale: id
 ---
 
-Organization members are users who have access to your Capgo organization. Each member has a specific role that determines their permissions within the organization. Managing members effectively is crucial for maintaining security and collaboration in your team.
+Anggota organisasi adalah pengguna yang memiliki akses ke organisasi Capgo Anda. Setiap anggota memiliki peran spesifik yang menentukan izin mereka dalam organisasi. Mengelola anggota secara efektif sangat penting untuk menjaga keamanan dan kolaborasi dalam tim Anda.
 
-## Member Roles
+## Peran Anggota
 
-### Regular Roles
-- **read**: Can view resources but cannot make changes
-- **upload**: Can upload new bundles and view resources
-- **write**: Can modify resources and upload bundles
-- **admin**: Can manage organization settings and members
-- **super_admin**: Has full control over the organization
+### Peran Reguler
+- **read**: Dapat melihat sumber daya tetapi tidak dapat membuat perubahan
+- **upload**: Dapat mengunggah bundle baru dan melihat sumber daya
+- **write**: Dapat memodifikasi sumber daya dan mengunggah bundle
+- **admin**: Dapat mengelola pengaturan organisasi dan anggota
+- **super_admin**: Memiliki kontrol penuh atas organisasi
 
-### Invite Roles
-- **invite_read**: Pending invitation for read access
-- **invite_upload**: Pending invitation for upload access
-- **invite_write**: Pending invitation for write access
-- **invite_admin**: Pending invitation for admin access
-- **invite_super_admin**: Pending invitation for super admin access
+### Peran Undangan
+- **invite_read**: Undangan tertunda untuk akses baca
+- **invite_upload**: Undangan tertunda untuk akses unggah
+- **invite_write**: Undangan tertunda untuk akses tulis
+- **invite_admin**: Undangan tertunda untuk akses admin
+- **invite_super_admin**: Undangan tertunda untuk akses super admin
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Role Assignment**: Follow the principle of least privilege when assigning roles
-2. **Regular Audits**: Periodically review member access and remove unused accounts
-3. **Onboarding**: Have a clear process for adding new members and assigning roles
-4. **Offboarding**: Promptly remove access for members who leave the organization
+1. **Penugasan Peran**: Ikuti prinsip hak istimewa paling rendah saat menugaskan peran
+2. **Audit Reguler**: Tinjau secara berkala akses anggota dan hapus akun yang tidak digunakan
+3. **Orientasi**: Miliki proses yang jelas untuk menambahkan anggota baru dan menugaskan peran
+4. **Pemberhentian**: Segera hapus akses untuk anggota yang meninggalkan organisasi
 
-## Endpoints
+## Endpoint
 
 ### POST
 
 `https://api.capgo.app/organization/members/`
 
-Add a new member to an organization or update an existing member's role. Note that you can only invite users who already have a Capgo account - the email must correspond to an existing Capgo user.
+Tambahkan anggota baru ke organisasi atau perbarui peran anggota yang ada. Perhatikan bahwa Anda hanya dapat mengundang pengguna yang sudah memiliki akun Capgo - email harus sesuai dengan pengguna Capgo yang ada.
 
 #### Request Body
 
@@ -51,7 +48,7 @@ interface MemberCreate {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X POST \
@@ -65,7 +62,7 @@ curl -X POST \
   https://api.capgo.app/organization/members/
 ```
 
-#### Success Response
+#### Respons Sukses
 
 ```json
 {
@@ -79,17 +76,17 @@ curl -X POST \
 }
 ```
 
-Notes: 
-- When adding a new member, they will receive an invitation email. Their role will be prefixed with "invite_" until they accept the invitation.
-- The user must already have a Capgo account before they can be invited. If they don't have an account, they should first create one at https://console.capgo.app/register/
+Catatan: 
+- Saat menambahkan anggota baru, mereka akan menerima email undangan. Peran mereka akan diawali dengan "invite_" sampai mereka menerima undangan.
+- Pengguna harus sudah memiliki akun Capgo sebelum dapat diundang. Jika mereka tidak memiliki akun, mereka harus membuat satu terlebih dahulu di https://console.capgo.app/register/
 
 ### GET 
 
 `https://api.capgo.app/organization/members/`
 
-Retrieve all members of an organization.
+Ambil semua anggota dari sebuah organisasi.
 
-#### Query Parameters
+#### Parameter Query
 
 ```typescript
 interface MemberQuery {
@@ -97,7 +94,7 @@ interface MemberQuery {
 }
 ```
 
-#### Response Type
+#### Tipe Respons
 
 ```typescript
 interface Member {
@@ -108,14 +105,14 @@ interface Member {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/organization/members/?orgId=org_123"
 ```
 
-#### Example Response
+#### Contoh Respons
 
 ```json
 {
@@ -146,7 +143,7 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/organization/members/`
 
-Remove a member from an organization. This will immediately revoke their access.
+Hapus anggota dari organisasi. Ini akan segera mencabut akses mereka.
 
 #### Request Body
 
@@ -157,7 +154,7 @@ interface MemberDelete {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X DELETE \
@@ -170,7 +167,7 @@ curl -X DELETE \
   https://api.capgo.app/organization/members/
 ```
 
-#### Success Response
+#### Respons Sukses
 
 ```json
 {
@@ -178,51 +175,51 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Penanganan Kesalahan
 
-Common error scenarios and their responses:
+Skenario kesalahan umum dan responsnya:
 
 ```json
-// Member not found
+// Anggota tidak ditemukan
 {
   "error": "Member not found",
   "status": "KO"
 }
 
-// Invalid role
+// Peran tidak valid
 {
   "error": "Invalid role specified",
   "status": "KO"
 }
 
-// Permission denied
+// Izin ditolak
 {
   "error": "Insufficient permissions to manage members",
   "status": "KO"
 }
 
-// Cannot remove last admin
+// Tidak dapat menghapus admin terakhir
 {
   "error": "Cannot remove the last admin from the organization",
   "status": "KO"
 }
 
-// Invalid email
+// Email tidak valid
 {
   "error": "Invalid email format",
   "status": "KO"
 }
 
-// Member already exists
+// Anggota sudah ada
 {
   "error": "Member already exists in organization",
   "status": "KO"
 }
 ```
 
-## Common Use Cases
+## Kasus Penggunaan Umum
 
-1. **Team Expansion**: Adding new team members with appropriate roles
-2. **Access Control**: Managing member permissions as responsibilities change
-3. **Security Audit**: Reviewing member list and roles periodically
-4. **Team Restructuring**: Updating roles during organizational changes
+1. **Ekspansi Tim**: Menambahkan anggota tim baru dengan peran yang sesuai
+2. **Kontrol Akses**: Mengelola izin anggota saat tanggung jawab berubah
+3. **Audit Keamanan**: Meninjau daftar anggota dan peran secara berkala
+4. **Restrukturisasi Tim**: Memperbarui peran selama perubahan organisasi

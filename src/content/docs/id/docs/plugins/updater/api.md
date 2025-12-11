@@ -1,5 +1,5 @@
 ---
-title: "Functions and settings"
+title: "Fungsi dan Pengaturan"
 locale: id
 description: "Semua metode dan pengaturan yang tersedia dari plugin"
 sidebar:

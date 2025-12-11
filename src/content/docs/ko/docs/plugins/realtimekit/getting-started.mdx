@@ -1,32 +1,30 @@
 ---
-title: Getting Started with RealtimeKit
-description: >-
-  Learn how to integrate Cloudflare Calls video conferencing into your Capacitor
-  app
+title: "RealtimeKit 시작하기"
+description: "Capacitor 앱에 Cloudflare Calls 화상 회의를 통합하는 방법을 알아보세요"
 locale: ko
 ---
 
-This guide will walk you through integrating the Capacitor RealtimeKit plugin to add video conferencing powered by Cloudflare Calls to your application.
+이 가이드는 Capacitor RealtimeKit 플러그인을 통합하여 애플리케이션에 Cloudflare Calls로 구동되는 화상 회의를 추가하는 방법을 안내합니다.
 
-## Installation
+## 설치
 
-Install the plugin using npm:
+npm을 사용하여 플러그인을 설치하세요:
 
 ```bash
 npm install @capgo/capacitor-realtimekit
 npx cap sync
 ```
 
-## Dependencies
+## 종속성
 
-This plugin uses the Cloudflare RealtimeKit SDK:
+이 플러그인은 Cloudflare RealtimeKit SDK를 사용합니다:
 
-- **iOS**: RealtimeKitCoreiOS (automatically installed via Swift Package Manager)
-- **Android**: `com.cloudflare.realtimekit:ui-android` version `0.2.2`
+- **iOS**: RealtimeKitCoreiOS (Swift Package Manager를 통해 자동 설치)
+- **Android**: `com.cloudflare.realtimekit:ui-android` 버전 `0.2.2`
 
-### Customizing Android RealtimeKit Version
+### Android RealtimeKit 버전 사용자 정의
 
-In your app's `build.gradle`:
+앱의 `build.gradle`에서:
 
 ```kotlin
 buildscript {
@@ -36,9 +34,9 @@ buildscript {
 }
 ```
 
-## iOS Configuration
+## iOS 구성
 
-Add the following to your app's `Info.plist`:
+앱의 `Info.plist`에 다음을 추가하세요:
 
 ```xml
 <key>NSCameraUsageDescription</key>
@@ -47,44 +45,33 @@ Add the following to your app's `Info.plist`:
 <key>NSMicrophoneUsageDescription</key>
 <string>We need microphone access for audio calls</string>
 
-<key>NSPhotoLibraryUsageDescription</key>
-<string>We need photo library access to share images</string>
-
-<key>NSBluetoothPeripheralUsageDescription</key>
-<string>We need Bluetooth access for audio routing</string>
-
 <key>UIBackgroundModes</key>
 <array>
   <string>audio</string>
   <string>voip</string>
-  <string>fetch</string>
-  <string>remote-notification</string>
 </array>
 ```
 
-## Android Configuration
+## Android 구성
 
-Add the following permissions to your `AndroidManifest.xml`:
+`AndroidManifest.xml`에 다음 권한을 추가하세요:
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
-<uses-feature android:name="android.hardware.camera" android:required="false" />
-<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 ```
 
-## Basic Usage
+## 기본 사용법
 
-### Import the Plugin
+### 플러그인 가져오기
 
 ```typescript
 import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
 ```
 
-### Initialize the Plugin
+### 플러그인 초기화
 
 ```typescript
 async function initializeRealtimeKit() {
@@ -97,7 +84,7 @@ async function initializeRealtimeKit() {
 }
 ```
 
-### Start a Meeting
+### 미팅 시작
 
 ```typescript
 async function startMeeting(meetingUrl: string) {
@@ -112,19 +99,12 @@ async function startMeeting(meetingUrl: string) {
 }
 ```
 
-## Complete Example
+## 완전한 예제
 
-Here's a comprehensive video conferencing service:
+포괄적인 화상 회의 서비스는 다음과 같습니다:
 
 ```typescript
 import { CapacitorRealtimekit } from '@capgo/capacitor-realtimekit';
-
-export interface MeetingConfig {
-  url: string;
-  displayName?: string;
-  audioEnabled?: boolean;
-  videoEnabled?: boolean;
-}
 
 export class VideoConferenceService {
   private isInitialized = false;
@@ -132,14 +112,12 @@ export class VideoConferenceService {
 
   async initialize(): Promise<boolean> {
     if (this.isInitialized) {
-      console.log('RealtimeKit already initialized');
       return true;
     }
 
     try {
       await CapacitorRealtimekit.initialize();
       this.isInitialized = true;
-      console.log('RealtimeKit initialized successfully');
       return true;
     } catch (error) {
       console.error('Failed to initialize RealtimeKit:', error);
@@ -147,21 +125,16 @@ export class VideoConferenceService {
     }
   }
 
-  async startMeeting(config: MeetingConfig): Promise<void> {
+  async startMeeting(meetingUrl: string): Promise<void> {
     if (!this.isInitialized) {
-      const initialized = await this.initialize();
-      if (!initialized) {
-        throw new Error('Failed to initialize RealtimeKit');
-      }
+      await this.initialize();
     }
 
     try {
       await CapacitorRealtimekit.startMeeting({
-        url: config.url
+        url: meetingUrl
       });
-
-      this.currentMeetingUrl = config.url;
-      console.log('Meeting started:', config.url);
+      this.currentMeetingUrl = meetingUrl;
     } catch (error) {
       console.error('Failed to start meeting:', error);
       throw error;
@@ -169,72 +142,40 @@ export class VideoConferenceService {
   }
 
   async joinMeeting(meetingUrl: string, displayName?: string): Promise<void> {
-    const config: MeetingConfig = {
-      url: meetingUrl,
-      displayName: displayName
-    };
-
-    await this.startMeeting(config);
-  }
-
-  getCurrentMeetingUrl(): string | null {
-    return this.currentMeetingUrl;
+    await this.startMeeting(meetingUrl);
   }
 
   isInMeeting(): boolean {
     return this.currentMeetingUrl !== null;
   }
-
-  async getPluginVersion(): Promise<string> {
-    try {
-      const result = await CapacitorRealtimekit.getPluginVersion();
-      return result.version;
-    } catch (error) {
-      console.error('Failed to get plugin version:', error);
-      return 'unknown';
-    }
-  }
 }
 
 // Usage
 const videoService = new VideoConferenceService();
-
-// Initialize on app start
 await videoService.initialize();
-
-// Start a meeting
-await videoService.startMeeting({
-  url: 'https://your-cloudflare-calls-url.com/meeting/123'
-});
-
-// Join an existing meeting
-await videoService.joinMeeting(
-  'https://your-cloudflare-calls-url.com/meeting/456',
-  'John Doe'
-);
+await videoService.startMeeting('https://your-meeting-url.com/meeting/123');
 ```
 
-## Cloudflare Calls Setup
+## Cloudflare Calls 설정
 
-To use this plugin, you need to set up Cloudflare Calls:
+이 플러그인을 사용하려면 Cloudflare Calls를 설정해야 합니다:
 
-### 1. Create Cloudflare Account
+### 1. Cloudflare 계정 생성
 
-Sign up at [Cloudflare](https://dash.cloudflare.com/sign-up) if you don't have an account.
+계정이 없다면 [Cloudflare](https://dash.cloudflare.com/sign-up)에서 가입하세요.
 
-### 2. Enable Calls API
+### 2. Calls API 활성화
 
-1. Navigate to your Cloudflare dashboard
-2. Go to **Calls** section
-3. Enable the Calls API
-4. Get your API credentials
+1. Cloudflare 대시보드로 이동
+2. **Calls** 섹션으로 이동
+3. Calls API 활성화
+4. API 자격 증명 받기
 
-### 3. Create Meeting URLs
+### 3. 미팅 URL 생성
 
-You need a backend service to create meeting URLs. Example using Cloudflare Workers:
+미팅 URL을 생성하려면 백엔드 서비스가 필요합니다. Cloudflare Workers 사용 예제:
 
 ```typescript
-// Cloudflare Worker example
 export default {
   async fetch(request: Request): Promise<Response> {
     const { pathname } = new URL(request.url);
@@ -254,224 +195,12 @@ export default {
     return new Response('Not found', { status: 404 });
   }
 };
-
-function generateMeetingId(): string {
-  return Math.random().toString(36).substring(2, 15);
-}
 ```
 
-## Advanced Usage
+## 모범 사례
 
-### Meeting with Custom Configuration
-
-```typescript
-class MeetingManager {
-  private videoService: VideoConferenceService;
-
-  constructor() {
-    this.videoService = new VideoConferenceService();
-  }
-
-  async createAndJoinMeeting(userName: string): Promise<string> {
-    // Initialize if needed
-    await this.videoService.initialize();
-
-    // Call your backend to create a meeting
-    const meetingUrl = await this.createMeetingOnBackend();
-
-    // Join the meeting
-    await this.videoService.joinMeeting(meetingUrl, userName);
-
-    return meetingUrl;
-  }
-
-  async createMeetingOnBackend(): Promise<string> {
-    const response = await fetch('https://your-api.com/create-meeting', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
-    });
-
-    const data = await response.json();
-    return data.meetingUrl;
-  }
-
-  async shareMeetingLink(meetingUrl: string) {
-    // Use Capacitor Share API
-    if ('share' in navigator) {
-      await (navigator as any).share({
-        title: 'Join my meeting',
-        text: 'Join me for a video call',
-        url: meetingUrl
-      });
-    }
-  }
-}
-```
-
-### Handling Permissions
-
-```typescript
-import { Capacitor } from '@capacitor/core';
-
-async function checkAndRequestPermissions(): Promise<boolean> {
-  if (Capacitor.getPlatform() === 'web') {
-    // Request browser permissions
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: true
-      });
-
-      // Stop the stream, we just needed permission
-      stream.getTracks().forEach(track => track.stop());
-      return true;
-    } catch (error) {
-      console.error('Permission denied:', error);
-      return false;
-    }
-  }
-
-  // On native platforms, permissions are requested automatically
-  return true;
-}
-
-// Use before starting a meeting
-const hasPermissions = await checkAndRequestPermissions();
-if (hasPermissions) {
-  await videoService.startMeeting({ url: meetingUrl });
-}
-```
-
-## React Integration
-
-```typescript
-import { useEffect, useState } from 'react';
-import { VideoConferenceService } from './VideoConferenceService';
-
-function VideoCallComponent() {
-  const [videoService] = useState(() => new VideoConferenceService());
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    videoService.initialize().then(setIsReady);
-  }, []);
-
-  const joinMeeting = async (meetingUrl: string) => {
-    if (!isReady) {
-      console.error('Video service not ready');
-      return;
-    }
-
-    try {
-      await videoService.joinMeeting(meetingUrl, 'User Name');
-    } catch (error) {
-      console.error('Failed to join meeting:', error);
-    }
-  };
-
-  return (
-    <div>
-      <button
-        onClick={() => joinMeeting('https://your-meeting-url')}
-        disabled={!isReady}
-      >
-        Join Meeting
-      </button>
-    </div>
-  );
-}
-```
-
-## Vue Integration
-
-```typescript
-import { ref, onMounted } from 'vue';
-import { VideoConferenceService } from './VideoConferenceService';
-
-export default {
-  setup() {
-    const videoService = new VideoConferenceService();
-    const isReady = ref(false);
-
-    onMounted(async () => {
-      isReady.value = await videoService.initialize();
-    });
-
-    const joinMeeting = async (meetingUrl: string) => {
-      if (!isReady.value) {
-        console.error('Video service not ready');
-        return;
-      }
-
-      try {
-        await videoService.joinMeeting(meetingUrl, 'User Name');
-      } catch (error) {
-        console.error('Failed to join meeting:', error);
-      }
-    };
-
-    return {
-      isReady,
-      joinMeeting
-    };
-  }
-};
-```
-
-## Best Practices
-
-1. **Initialize Early**: Initialize RealtimeKit when your app starts
-2. **Handle Errors**: Always wrap calls in try-catch blocks
-3. **Request Permissions**: Ensure camera/microphone permissions before starting
-4. **Test Network**: Check internet connectivity before joining
-5. **Background Audio**: Configure background modes for iOS
-6. **User Experience**: Show loading states during initialization
-7. **Clean URLs**: Validate meeting URLs before use
-
-## Common Issues
-
-### Meeting Not Starting
-
-```typescript
-async function troubleshootMeeting(meetingUrl: string) {
-  // Check initialization
-  const version = await videoService.getPluginVersion();
-  console.log('Plugin version:', version);
-
-  // Verify URL format
-  if (!meetingUrl.startsWith('https://')) {
-    console.error('Invalid meeting URL, must use HTTPS');
-    return;
-  }
-
-  // Try starting meeting
-  try {
-    await videoService.startMeeting({ url: meetingUrl });
-  } catch (error) {
-    console.error('Meeting failed:', error);
-  }
-}
-```
-
-### Permission Denied
-
-On iOS, ensure Info.plist has all required usage descriptions. On Android, verify AndroidManifest.xml permissions are present.
-
-### Audio Issues on iOS
-
-Ensure background audio mode is configured in Info.plist:
-
-```xml
-<key>UIBackgroundModes</key>
-<array>
-  <string>audio</string>
-  <string>voip</string>
-</array>
-```
-
-## Next Steps
-
-- Explore the [API Reference](https://github.com/Cap-go/capacitor-realtimekit#api) for complete method documentation
-- Read [Cloudflare Calls Documentation](https://developers.cloudflare.com/calls/)
-- Check out the [example app](https://github.com/Cap-go/capacitor-realtimekit/tree/main/example)
-- See the [tutorial](/plugins-tutorials/capacitor-realtimekit) for complete implementation
+1. **조기 초기화**: 앱이 시작될 때 RealtimeKit 초기화
+2. **오류 처리**: 항상 try-catch 블록으로 호출 감싸기
+3. **권한 요청**: 시작하기 전에 카메라/마이크 권한 확보
+4. **네트워크 테스트**: 참여하기 전에 인터넷 연결 확인
+5. **백그라운드 오디오**: iOS용 백그라운드 모드 구성

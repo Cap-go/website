@@ -1,8 +1,7 @@
 ---
-title: Known issues
+title: 알려진 문제
 description: >-
-  Known issues with Capacitor and Capgo, and our updater, this page will help
-  you understand the weird issue you have with our tool
+  Capacitor와 Capgo, 그리고 업데이터의 알려진 문제. 이 페이지는 도구의 이상한 문제를 이해하는 데 도움이 됩니다
 sidebar:
   order: 7
 locale: ko
@@ -10,74 +9,74 @@ locale: ko
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Ionic live reload
+## Ionic 라이브 리로드
 
-* When you develop, if you use the Ionic live reload feature from the CLI, it will override the plugin, so you will never see your update.
+* 개발 시 CLI의 Ionic 라이브 리로드 기능을 사용하면 플러그인이 재정의되므로 업데이트를 볼 수 없습니다.
 
-## Quasar live reload
+## Quasar 라이브 리로드
 
-* It uses the same system as ionic under the hood, so you will not see your updates.
+* 내부적으로 ionic과 동일한 시스템을 사용하므로 업데이트를 볼 수 없습니다.
 
-## Updates fail
+## 업데이트 실패
 
-* This usually happens when large updates (> 20mb) are pushed, a big percentage of users will not get the last version.  
-In the past, users needed to keep the app open until the download was done, now we use background download, but it's still limited to a few seconds.
+* 일반적으로 큰 업데이트(> 20mb)를 푸시할 때 발생하며, 상당한 비율의 사용자가 최신 버전을 받지 못합니다.
+과거에는 사용자가 다운로드가 완료될 때까지 앱을 열어두어야 했지만, 이제는 백그라운드 다운로드를 사용하지만 여전히 몇 초로 제한됩니다.
 
 ## Android
 
-### Cannot download
+### 다운로드할 수 없음
 
-We have seen some issues with devices in india, and got user on the call, made them try different DNS servers, and it worked.
+인도의 일부 기기에서 문제를 발견했고, 사용자와 통화하여 다양한 DNS 서버를 시도하게 했더니 작동했습니다.
 
-So if you have the issue, try to use a different DNS server like Cloudflare or Google DNS.
+따라서 문제가 있다면 Cloudflare 또는 Google DNS와 같은 다른 DNS 서버를 사용해 보세요.
 
-Cloudflare: 1.1.1.1 and 1.0.0.1
+Cloudflare: 1.1.1.1 및 1.0.0.1
 
-Google DNS: 8.8.8.8 and 8.8.4.4 or dns.google
+Google DNS: 8.8.8.8 및 8.8.4.4 또는 dns.google
 
 <LinkCard
-	title="How to setup a preferred DNS server on Android?"
+	title="Android에서 선호하는 DNS 서버를 설정하는 방법은?"
 	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
 />
 
-### Self Hosted
-When you are pushing a self-hosted update, be mindful you cannot use "HTTP" endpoint as it's against the security policies of Android apps, if you still want to do it, follow this guide:
+### 자체 호스팅
+자체 호스팅 업데이트를 푸시할 때 "HTTP" 엔드포인트를 사용할 수 없다는 점에 유의하세요. 이는 Android 앱의 보안 정책에 위배됩니다. 그래도 사용하려면 다음 가이드를 따르세요:
 
 <LinkCard
-	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	title="Android (9) Pie에서 HTTP 및 HTTPS를 포함한 모든 네트워크 연결 유형을 허용하는 방법은?"
 	href="https://stackoverflow.com/a/51902630/5511370"
 />
 
-### Unzip 
+### 압축 해제
 
-Unzip issue: DEFLATED entries can have EXT descriptor
+압축 해제 문제: DEFLATED 항목에 EXT 설명자가 있을 수 있습니다
 
-If you zipped your bundle with something different than the CLI, the format or your zip could be incorrect, please use the CLI command `npx @capgo/cli zip BUNDLE_FOLDER`.
+CLI가 아닌 다른 것으로 번들을 압축한 경우 zip의 형식이 올바르지 않을 수 있습니다. CLI 명령 `npx @capgo/cli zip BUNDLE_FOLDER`를 사용하세요.
 
-This is a known issue of Java:
+이것은 Java의 알려진 문제입니다:
 
 <LinkCard
-	title="Unzip issue: DEFLATED entries can have EXT descriptor"
+	title="압축 해제 문제: DEFLATED 항목에 EXT 설명자가 있을 수 있습니다"
 	href="https://bugs.openjdk.org/browse/JDK-8143613"
 />
 
 
-### Clearfix issue
+### Clearfix 문제
 
-* If you have issues with usesCleartextTraffic, it's because the plugin follows the good practice recommended by sonar cloud, in 90% of the cases it will work just fine, but with some plugins that causes issues.
+* usesCleartextTraffic 문제가 있는 경우, 플러그인이 sonar cloud에서 권장하는 모범 사례를 따르기 때문입니다. 90%의 경우 잘 작동하지만 일부 플러그인에서는 문제가 발생합니다.
 
-To fix it, add in `android/app/src/main/AndroidManifest.xml` in the `<application>` key :
+이를 수정하려면 `android/app/src/main/AndroidManifest.xml`의 `<application>` 키에 다음을 추가하세요:
 
 ```xml
 tools:replace="android:usesCleartextTraffic"
 xmlns:tools="http://schemas.android.com/tools"
 ```
 
-## IOS
+## iOS
 
-### Privacy manifest
+### 개인정보 보호 매니페스트
 
-Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Privacy Manifest](https://capacitorjs.com/docs/ios/privacy-manifest) (usually `ios/App/PrivacyInfo.xcprivacy`):
+`NSPrivacyAccessedAPICategoryUserDefaults` 딕셔너리 키를 [개인정보 보호 매니페스트](https://capacitorjs.com/docs/ios/privacy-manifest)(일반적으로 `ios/App/PrivacyInfo.xcprivacy`)에 추가하세요:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -86,7 +85,7 @@ Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Priva
   <dict>
     <key>NSPrivacyAccessedAPITypes</key>
     <array>
-      <!-- Add this dict entry to the array if the file already exists. -->
+      <!-- 파일이 이미 존재하는 경우 이 dict 항목을 배열에 추가합니다. -->
       <dict>
         <key>NSPrivacyAccessedAPIType</key>
         <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
@@ -100,33 +99,33 @@ Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Priva
 </plist>
 ```
 
-We recommend to declare [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) as the reason for accessing the [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API.
+[`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API에 액세스하는 이유로 [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401)을 선언하는 것이 좋습니다.
 
 
-### Network permissions
+### 네트워크 권한
 
-When using local server for testing update, the app will ask for network permission, it's a normal behavior, it's not the case when you use a remote server.
+업데이트 테스트를 위해 로컬 서버를 사용할 때 앱이 네트워크 권한을 요청하는 것은 정상적인 동작입니다. 원격 서버를 사용할 때는 그렇지 않습니다.
 
 
-## Both OS
+## 두 OS 모두
 
-When doing manual mode updates, some events are not easy to catch, for example the update fail triggers just before your JS code reloads, so you will not be able to catch it.
+수동 모드 업데이트를 수행할 때 일부 이벤트는 포착하기 어렵습니다. 예를 들어 업데이트 실패는 JS 코드가 다시 로드되기 직전에 트리거되므로 포착할 수 없습니다.
 
-One alternative is to list the bundles and check error stats to know if the update fails.
+한 가지 대안은 번들 목록을 나열하고 오류 통계를 확인하여 업데이트가 실패했는지 알아보는 것입니다.
 
-We need to find a better way to handle this in the future, but it's not a priority, since auto mode is the recommended way to do update.
+향후 이를 처리하는 더 나은 방법을 찾아야 하지만, 자동 모드가 권장되는 업데이트 방법이므로 우선순위는 아닙니다.
 
-PRs are welcome to help us improve this.
+이를 개선하는 데 도움이 되는 PR을 환영합니다.
 
 ## CLI
 
-if your CLI has troubles doing anything,
+CLI가 무언가를 수행하는 데 문제가 있는 경우,
 
-Check if **appId** and **appName** are present in your **capacitor.config.ts**
+**capacitor.config.ts**에 **appId** 및 **appName**이 있는지 확인하세요.
 
-Follow the guide of the official doc:
+공식 문서의 가이드를 따르세요:
 
 <LinkCard
-	title="Capacitor Configuration"
+	title="Capacitor 구성"
 	href="https://capacitorjs.com/docs/config"
 />

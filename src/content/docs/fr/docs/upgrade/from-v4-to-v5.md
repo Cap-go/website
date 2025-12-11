@@ -1,5 +1,5 @@
 ---
-title: Dari V4 ke V5
+title: De V4 à V5
 description: Comment passer de la V4 à la V5
 sidebar:
   order: 2

@@ -1,5 +1,5 @@
 ---
-title: 기능 및 설정
+title: Fungsi dan Pengaturan
 description: Semua metode dan konfigurasi plugin yang tersedia
 sidebar:
   order: 2

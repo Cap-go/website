@@ -1,17 +1,14 @@
 ---
-title: Manual Update
-description: >-
-  A detailed guide on utilizing the manual update plugin within a self-hosted
-  environment, providing comprehensive instructions on configuration and usage
-  to effectively manage updates without relying on automatic processes.
+title: "手动更新"
+description: "在自托管环境中使用手动更新插件的详细指南,提供有关配置和使用的全面说明,以有效管理更新而无需依赖自动过程"
 sidebar:
   order: 3
 locale: zh
 ---
 
-## Configuration
+## 配置
 
-Add this to your ``capacitor.config.json``, to disable auto-update.
+将此添加到您的 ``capacitor.config.json`` 以禁用自动更新。
 ```tsx
 // capacitor.config.json
 {
@@ -25,16 +22,16 @@ Add this to your ``capacitor.config.json``, to disable auto-update.
 }
 ```
 
-## Usage
+## 使用
 
-You can use this example or re-create the logic in your app.
+您可以使用此示例或在您的应用中重新创建逻辑。
 
 :::caution
-We are forcing the user to update the app with a static version declared in the code. This is not recommended, you should use a dynamic version from your server.
+我们强制用户使用代码中声明的静态版本更新应用。这不推荐,您应该使用来自服务器的动态版本。
 :::
 
 :::danger
-We are not doing any version checking, decryption or checksum validation in this example. You should do that on your own.
+在此示例中,我们没有进行任何版本检查、解密或校验和验证。您应该自己完成。
 :::
 
 ```tsx
@@ -45,20 +42,20 @@ let data = {version: ""}
 CapacitorUpdater.notifyAppReady()
 App.addListener('appStateChange', async(state) => {
      if (state.isActive) {
-       // Do the download during user active app time to prevent failed download
+       // 在用户活动应用时间期间执行下载以防止下载失败
        data = await CapacitorUpdater.download({
        version: '0.0.4',
        url: 'https://github.com/Cap-go/demo-app/releases/download/0.0.4/dist.zip',
        })
      }
      if (!state.isActive && data.version !== "") {
-       // Do the switch when user leave app
+       // 当用户离开应用时进行切换
        SplashScreen.show()
        try {
          await CapacitorUpdater.set(data)
        } catch (err) {
          console.log(err)
-         SplashScreen.hide() // in case the set fail, otherwise the new app will have to hide it
+         SplashScreen.hide() // 如果设置失败,否则新应用将必须隐藏它
        }
      }
  })
@@ -67,5 +64,5 @@ App.addListener('appStateChange', async(state) => {
 
 
 :::note
-If this seems like a lot of work consider trying [Capgo trial](https://capgo.app/register/). It will handle all of this for you.
+如果这似乎工作量很大,请考虑尝试 [Capgo 试用版](https://capgo.app/register/)。它会为您处理所有这些。
 :::

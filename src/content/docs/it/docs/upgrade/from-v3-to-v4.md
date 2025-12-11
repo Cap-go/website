@@ -1,6 +1,6 @@
 ---
 title: Da V3 a V4
-description: How to upgrade from V3 to V4
+description: Come aggiornare da V3 a V4 di Capgo updater, capire quali sono i cambiamenti incompatibili e come gestirli
 sidebar:
   order: 3
 locale: it

@@ -1,6 +1,6 @@
 ---
-title: Getting Started
-description: Learn how to integrate native video playback in your Capacitor app.
+title: 시작하기
+description: Capacitor 앱에서 네이티브 비디오 재생을 통합하는 방법을 알아보세요.
 sidebar:
   order: 2
 locale: ko
@@ -10,14 +10,14 @@ import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **패키지 설치**
    <PackageManagers pkg="@capgo/capacitor-video-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Basic Usage
+## 기본 사용법
 
 ```typescript
 import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
@@ -57,11 +57,11 @@ await CapacitorVideoPlayer.setVolume({
 });
 ```
 
-## API Reference
+## API 참조
 
 ### initPlayer(options)
 
-Initialize a video player instance.
+비디오 플레이어 인스턴스를 초기화합니다.
 
 ```typescript
 await CapacitorVideoPlayer.initPlayer({
@@ -80,7 +80,7 @@ await CapacitorVideoPlayer.initPlayer({
 
 ### play(options)
 
-Play the video.
+비디오를 재생합니다.
 
 ```typescript
 await CapacitorVideoPlayer.play({ playerId: 'player1' });
@@ -88,7 +88,7 @@ await CapacitorVideoPlayer.play({ playerId: 'player1' });
 
 ### pause(options)
 
-Pause the video.
+비디오를 일시 중지합니다.
 
 ```typescript
 await CapacitorVideoPlayer.pause({ playerId: 'player1' });
@@ -96,7 +96,7 @@ await CapacitorVideoPlayer.pause({ playerId: 'player1' });
 
 ### getDuration(options)
 
-Get video duration in seconds.
+비디오 길이를 초 단위로 가져옵니다.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getDuration({ playerId: 'player1' });
@@ -105,7 +105,7 @@ console.log('Duration:', value, 'seconds');
 
 ### getCurrentTime(options)
 
-Get current playback position in seconds.
+현재 재생 위치를 초 단위로 가져옵니다.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'player1' });
@@ -113,7 +113,7 @@ const { value } = await CapacitorVideoPlayer.getCurrentTime({ playerId: 'player1
 
 ### setCurrentTime(options)
 
-Seek to a specific time.
+특정 시간으로 탐색합니다.
 
 ```typescript
 await CapacitorVideoPlayer.setCurrentTime({
@@ -124,7 +124,7 @@ await CapacitorVideoPlayer.setCurrentTime({
 
 ### setVolume(options)
 
-Set volume (0.0 to 1.0).
+볼륨을 설정합니다 (0.0에서 1.0).
 
 ```typescript
 await CapacitorVideoPlayer.setVolume({
@@ -135,7 +135,7 @@ await CapacitorVideoPlayer.setVolume({
 
 ### getVolume(options)
 
-Get current volume.
+현재 볼륨을 가져옵니다.
 
 ```typescript
 const { value } = await CapacitorVideoPlayer.getVolume({ playerId: 'player1' });
@@ -143,7 +143,7 @@ const { value } = await CapacitorVideoPlayer.getVolume({ playerId: 'player1' });
 
 ### setMuted(options)
 
-Mute or unmute the video.
+비디오를 음소거하거나 음소거를 해제합니다.
 
 ```typescript
 await CapacitorVideoPlayer.setMuted({
@@ -154,7 +154,7 @@ await CapacitorVideoPlayer.setMuted({
 
 ### setRate(options)
 
-Set playback speed.
+재생 속도를 설정합니다.
 
 ```typescript
 await CapacitorVideoPlayer.setRate({
@@ -165,7 +165,7 @@ await CapacitorVideoPlayer.setRate({
 
 ### stopAllPlayers()
 
-Stop all active players.
+모든 활성 플레이어를 중지합니다.
 
 ```typescript
 await CapacitorVideoPlayer.stopAllPlayers();
@@ -173,13 +173,13 @@ await CapacitorVideoPlayer.stopAllPlayers();
 
 ### exitPlayer()
 
-Exit the video player.
+비디오 플레이어를 종료합니다.
 
 ```typescript
 await CapacitorVideoPlayer.exitPlayer();
 ```
 
-## Complete Example
+## 완전한 예제
 
 ```typescript
 import { CapacitorVideoPlayer } from '@capgo/capacitor-video-player';
@@ -274,29 +274,29 @@ export class VideoPlayerService {
 }
 ```
 
-## Platform Notes
+## 플랫폼 참고사항
 
 ### iOS
-- Requires iOS 10.0+
-- Uses native AVPlayer
-- Supports Picture-in-Picture
-- Background playback supported
+- iOS 10.0+ 필요
+- 네이티브 AVPlayer 사용
+- Picture-in-Picture 지원
+- 백그라운드 재생 지원
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses ExoPlayer
-- Supports Chromecast
-- Custom accent colors available
+- Android 5.0 (API 21)+ 필요
+- ExoPlayer 사용
+- Chromecast 지원
+- 커스텀 액센트 색상 사용 가능
 
 ### Web
-- Uses HTML5 video player
-- Embedded mode only
-- Limited native features
+- HTML5 비디오 플레이어 사용
+- 임베디드 모드만 지원
+- 제한된 네이티브 기능
 
-## Best Practices
+## 모범 사례
 
-1. **Clean up players**: Always stop players when done
-2. **Handle errors**: Wrap player calls in try-catch
-3. **Unique player IDs**: Use unique IDs for multiple players
-4. **Check playback status**: Verify state before operations
-5. **Resource management**: Release players to free memory
+1. **플레이어 정리**: 작업 완료 후 항상 플레이어 중지
+2. **오류 처리**: 플레이어 호출을 try-catch로 감싸기
+3. **고유한 플레이어 ID**: 여러 플레이어에 고유한 ID 사용
+4. **재생 상태 확인**: 작업 전 상태 확인
+5. **리소스 관리**: 메모리 확보를 위해 플레이어 해제

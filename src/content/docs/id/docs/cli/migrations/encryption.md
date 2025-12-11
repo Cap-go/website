@@ -1,5 +1,5 @@
 ---
-title: Crittografia
+title: Enkripsi
 description: Cara mengenkripsi data Anda dengan enkripsi baru
 sidebar:
   order: 5

@@ -1,5 +1,5 @@
 ---
-title: 설정
+title: Paramètres
 description: Tous les paramètres disponibles pour Capacitor Updater
 sidebar:
   order: 8

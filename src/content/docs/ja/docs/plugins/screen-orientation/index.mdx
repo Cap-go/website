@@ -1,27 +1,23 @@
 ---
-title: '@capgo/capacitor-screen-orientation'
-description: >-
-  Control and detect screen orientation with the unique ability to detect
-  physical device orientation using motion sensors.
+title: "@capgo/capacitor-screen-orientation"
+description: モーションセンサーを使用して物理的なデバイスの向きを検出する独自の機能で、画面の向きを制御および検出します。
 tableOfContents: false
 next: false
 prev: false
 sidebar:
   order: 1
-  label: Introduction
+  label: "はじめに"
 hero:
-  tagline: >-
-    Screen orientation plugin with support for detecting true physical device
-    orientation - even when orientation lock is enabled.
+  tagline: 真の物理的なデバイスの向きを検出するサポート付きの画面向きプラグイン - 向きロックが有効な場合でも機能します。
   image:
     file: ~public/icons/plugins/screen-orientation.svg
   actions:
-    - text: Get started
+    - text: はじめる
       link: /docs/plugins/screen-orientation/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: 'https://github.com/Cap-go/capacitor-screen-orientation/'
+      link: https://github.com/Cap-go/capacitor-screen-orientation/
       icon: external
       variant: minimal
 locale: ja
@@ -30,16 +26,16 @@ locale: ja
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Physical Orientation Detection" icon="rocket">
-    Detect true physical device orientation using motion sensors, even when orientation lock is enabled
+  <Card title="物理的な向き検出" icon="rocket">
+    向きロックが有効な場合でも、モーションセンサーを使用して真の物理的なデバイスの向きを検出
   </Card>
-  <Card title="Orientation Lock Detection" icon="puzzle">
-    Determine if the user has enabled orientation lock by comparing physical vs UI orientation
+  <Card title="向きロック検出" icon="puzzle">
+    物理的な向きとUIの向きを比較して、ユーザーが向きロックを有効にしているかどうかを判断
   </Card>
-  <Card title="Cross-platform" icon="laptop">
-    Works on iOS (Core Motion), Android (Accelerometer), and Web
+  <Card title="クロスプラットフォーム" icon="laptop">
+    iOS（Core Motion）、Android（加速度計）、Webで動作
   </Card>
-  <Card title="Real-time Updates" icon="open-book">
-    Get instant notifications when device orientation changes with event listeners
+  <Card title="リアルタイム更新" icon="open-book">
+    イベントリスナーでデバイスの向きが変更されたときに即座に通知を取得
   </Card>
 </CardGrid>

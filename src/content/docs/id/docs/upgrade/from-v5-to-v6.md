@@ -1,5 +1,5 @@
 ---
-title: De V5 à V6
+title: Dari V5 ke V6
 description: Bagaimana cara memperbarui dari V5 ke V6
 sidebar:
   order: 1

@@ -1,8 +1,6 @@
 ---
-title: Auto Update
-description: >-
-  How to use the update endpoint of Capgo with the auto-update plugin in
-  self-hosted mode, what they are used for and what to expect
+title: "自动更新"
+description: "如何在自托管模式下将 Capgo 的更新端点与自动更新插件一起使用,它们的用途以及预期结果"
 sidebar:
   order: 4
 locale: zh
@@ -10,21 +8,21 @@ locale: zh
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-This documentation will explain how to run your auto-update server.
+本文档将说明如何运行您的自动更新服务器。
 
-## Serve your bundle
-Make sure your bundle is served over HTTPS, and the server has the right CORS headers to allow the app to download the update.
-e.g. ```https://myserver.com/app/updates/updates.json```
+## 提供您的 bundle
+确保您的 bundle 通过 HTTPS 提供,并且服务器具有正确的 CORS 标头以允许应用下载更新。
+例如 ```https://myserver.com/app/updates/updates.json```
 
 
-If you're unfamiliar with serving a bundle, we recommend you try Capgo Cloud or see an example here:
+如果您不熟悉提供 bundle,我们建议您尝试 Capgo Cloud 或在此处查看示例:
 <LinkCard
-	title="Serving a Bundle"
+	title="提供 Bundle"
 	href="/docs/self-hosted/auto-update/update-endpoint"
 />
 
-## Configuration
-Add an ``updateUrl`` to your ``capacitor.config.json``.
+## 配置
+将 ``updateUrl`` 添加到您的 ``capacitor.config.json``。
 
 ```json
 {
@@ -36,12 +34,12 @@ Add an ``updateUrl`` to your ``capacitor.config.json``.
 }
 ```
 :::caution
-When you are pushing a self-hosted update, be mindful you cannot use "HTTP" endpoint as it's against the security policies of Android apps, for testing purposes you can [allow it](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted).
+当您推送自托管更新时,请注意您不能使用 "HTTP" 端点,因为这违反了 Android 应用的安全策略,出于测试目的,您可以[允许它](https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted)。
 :::
 
-## Update API
+## 更新 API
 
-The plugin will do a POST call to your API each time the app is open, with this body:
+每次打开应用时,插件都会向您的 API 发出 POST 调用,主体如下:
 
 ```typescript
 interface AppInfos {
@@ -59,7 +57,7 @@ interface AppInfos {
 }
 ```
 
-The server API should respond, in JSON, to the capacitor-updater plugin. With this data if an update is necessary:
+服务器 API 应以 JSON 格式响应 capacitor-updater 插件。如果需要更新,则使用此数据:
 
 ```json
 {
@@ -69,37 +67,37 @@ The server API should respond, in JSON, to the capacitor-updater plugin. With th
 }
 ```
 
-In Auto-update mode the server should compare the versions and return the right one, if the URL key is present, the plugin starts the download process.
+在自动更新模式下,服务器应比较版本并返回正确的版本,如果存在 URL 键,插件将启动下载过程。
 
-If you add "message" and "error" key, the version will not be set, and the message will be displayed in logs instead.
+如果您添加 "message" 和 "error" 键,则不会设置版本,消息将显示在日志中。
 
-`version` key should be in [`semver`](https://semver.org/) format.
+`version` 键应采用 [`semver`](https://semver.org/) 格式。
 
-The zip should have `index.html` as a file at the root, or only one folder at the root with `index.html` inside.
+zip 文件应在根目录有 `index.html` 文件,或者根目录只有一个文件夹,其中包含 `index.html`。
 
 
-You can use the command of the CLI to zip your bundle:
+您可以使用 CLI 命令压缩您的 bundle:
 
-```bash title="Create a bundle with your files to serve from your server"
+```bash title="创建一个包含要从服务器提供的文件的 bundle"
 npx @capgo/cli bundle zip --path [/path/to/my/bundle]
 ```
 
-## Generating Bundle Checksum
+## 生成 Bundle 校验和
 
-**Important:** You must use the Capgo CLI to create your bundle zip file. The Capgo plugin requires a specific zip format and structure that is only guaranteed when using the official CLI tool. Standard zip utilities may create incompatible archives.
+**重要:** 您必须使用 Capgo CLI 创建 bundle zip 文件。Capgo 插件需要特定的 zip 格式和结构,只有使用官方 CLI 工具才能保证。标准 zip 实用程序可能会创建不兼容的存档。
 
-To generate the checksum for your bundle, use the Capgo CLI zip command with the `--json` flag:
+要为您的 bundle 生成校验和,请使用带有 `--json` 标志的 Capgo CLI zip 命令:
 
-```bash title="Create bundle with checksum information"
+```bash title="创建包含校验和信息的 bundle"
 npx @capgo/cli bundle zip [appId] --json
 ```
 
-This command will:
-- Create a properly formatted zip file compatible with the Capgo plugin
-- Generate the SHA256 checksum for integrity verification
-- Output bundle information in JSON format
+此命令将:
+- 创建与 Capgo 插件兼容的格式正确的 zip 文件
+- 生成用于完整性验证的 SHA256 校验和
+- 以 JSON 格式输出 bundle 信息
 
-Example output:
+示例输出:
 ```json
 {
   "version": "1.2.3",
@@ -108,4 +106,4 @@ Example output:
 }
 ```
 
-Use the `checksum` value from this output in your API response to ensure the plugin can verify the bundle integrity before installation.
+在您的 API 响应中使用此输出的 `checksum` 值,以确保插件可以在安装前验证 bundle 完整性。

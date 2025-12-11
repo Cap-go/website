@@ -1,48 +1,45 @@
 ---
-title: Channels
-description: >-
-  Guide to managing app update channels in Capgo, covering version control,
-  platform targeting, and update policies.
+title: "渠道"
+description: "Capgo中管理应用更新渠道的指南,涵盖版本控制、平台定向和更新策略。"
 sidebar:
   order: 6
-locale: zh
 ---
 
-Channels are the core mechanism for managing app updates in Capgo. They allow you to control how and when your users receive updates, enabling features like A/B testing, staged rollouts, and platform-specific updates.
+渠道是Capgo中管理应用更新的核心机制。它们允许您控制用户如何以及何时接收更新,启用A/B测试、分阶段推出和特定平台更新等功能。
 
-## Understanding Channels
+## 了解渠道
 
-A channel represents a distribution track for your app updates. Each channel can be configured with specific rules and constraints:
+渠道代表应用更新的分发轨道。每个渠道都可以配置特定的规则和约束:
 
-- **Version Control**: Specify which version users receive
-- **Platform Targeting**: Target specific platforms (iOS/Android)
-- **Update Policies**: Control how updates are delivered
-- **Device Restrictions**: Manage which devices can access updates
+- **版本控制**: 指定用户接收的版本
+- **平台定向**: 针对特定平台(iOS/Android)
+- **更新策略**: 控制如何交付更新
+- **设备限制**: 管理哪些设备可以访问更新
 
-## Channel Configuration Options
+## 渠道配置选项
 
-- **public**: Set as default channel for new devices
-- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the update version available in the channel (e.g., device is on version 1.2.3, but channel has 1.2.2)
-- **disableAutoUpdate**: Control update behavior ("major", "minor", "version_number", "none")
-- **ios/android**: Enable/disable for specific platforms
-- **allow_device_self_set**: Let devices choose their channel
-- **allow_emulator**: Allow updates on emulator devices
-- **allow_dev**: Allow updates on development builds
+- **public**: 设置为新设备的默认渠道
+- **disableAutoUpdateUnderNative**: 当设备的原生应用版本比渠道中可用的更新版本更新时阻止更新(例如,设备版本为1.2.3,但渠道有1.2.2)
+- **disableAutoUpdate**: 控制更新行为("major", "minor", "version_number", "none")
+- **ios/android**: 为特定平台启用/禁用
+- **allow_device_self_set**: 允许设备选择其渠道
+- **allow_emulator**: 允许在模拟器设备上更新
+- **allow_dev**: 允许在开发构建上更新
 
-## Best Practices
+## 最佳实践
 
-1. **Testing Channel**: Maintain a testing channel for internal validation
-2. **Staged Rollout**: Use multiple channels for gradual update deployment
-3. **Platform Separation**: Create separate channels for iOS and Android when needed
-4. **Version Control**: Use semantic versioning for clear update paths
+1. **测试渠道**: 维护用于内部验证的测试渠道
+2. **分阶段推出**: 使用多个渠道进行渐进式更新部署
+3. **平台分离**: 必要时为iOS和Android创建单独的渠道
+4. **版本控制**: 使用语义版本控制以获得清晰的更新路径
 
-## Endpoints
+## 端点
 
 ### POST
 
 `https://api.capgo.app/channel/`
 
-Create or update a channel configuration.
+创建或更新渠道配置。
 
 #### Request Body
 
@@ -63,7 +60,7 @@ interface ChannelSet {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X POST \
@@ -82,7 +79,7 @@ curl -X POST \
   https://api.capgo.app/channel/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -94,30 +91,30 @@ curl -X POST \
 
 `https://api.capgo.app/channel/`
 
-Retrieve channel information. Returns 50 channels per page.
+检索渠道信息。每页返回50个渠道。
 
-#### Query Parameters
-- `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
-- `channel`: Optional. Specific channel name to retrieve
+#### 查询参数
+- `app_id`: 必需。您的应用ID
+- `page`: 可选。分页的页码
+- `channel`: 可选。要检索的特定渠道名称
 
-#### Example Requests
+#### 请求示例
 
 ```bash
-# Get all channels
+# 获取所有渠道
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123"
 
-# Get specific channel
+# 获取特定渠道
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123&channel=beta"
 
-# Get next page
+# 获取下一页
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123&page=1"
 ```
 
-#### Response Type
+#### 响应类型
 
 ```typescript
 interface Channel {
@@ -139,7 +136,7 @@ interface Channel {
 }
 ```
 
-#### Example Response
+#### 响应示例
 
 ```json
 {
@@ -169,9 +166,9 @@ interface Channel {
 
 `https://api.capgo.app/channel/`
 
-Delete a channel. Note that this will affect all devices using this channel.
+删除渠道。请注意,这将影响使用此渠道的所有设备。
 
-#### Query Parameters
+#### 查询参数
 
 ```typescript
 interface Channel {
@@ -180,7 +177,7 @@ interface Channel {
 }
 ```
 
-#### Example Request
+#### 请求示例
 
 ```bash
 curl -X DELETE \
@@ -193,7 +190,7 @@ curl -X DELETE \
   https://api.capgo.app/channel/
 ```
 
-#### Success Response
+#### 成功响应
 
 ```json
 {
@@ -201,39 +198,39 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## 错误处理
 
-Common error scenarios and their responses:
+常见错误场景及其响应:
 
 ```json
-// Channel not found
+// 未找到渠道
 {
   "error": "Channel not found",
   "status": "KO"
 }
 
-// Invalid version format
+// 无效的版本格式
 {
   "error": "Invalid version format. Use semantic versioning",
   "status": "KO"
 }
 
-// Invalid update policy
+// 无效的更新策略
 {
   "error": "Invalid disableAutoUpdate value",
   "status": "KO"
 }
 
-// Permission denied
+// 权限被拒绝
 {
   "error": "Insufficient permissions to manage channels",
   "status": "KO"
 }
 ```
 
-## Common Use Cases
+## 常见用例
 
-1. **Beta Testing**
+1. **Beta测试**
 ```typescript
 {
   "app_id": "app_123",
@@ -245,7 +242,7 @@ Common error scenarios and their responses:
 }
 ```
 
-2. **Production Rollout**
+2. **生产推出**
 ```typescript
 {
   "app_id": "app_123",
@@ -256,7 +253,7 @@ Common error scenarios and their responses:
 }
 ```
 
-3. **Platform-Specific Updates**
+3. **特定平台更新**
 ```typescript
 {
   "app_id": "app_123",
@@ -265,4 +262,4 @@ Common error scenarios and their responses:
   "ios": true,
   "android": false
 }
-``` 
+```

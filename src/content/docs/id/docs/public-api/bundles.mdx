@@ -1,47 +1,44 @@
 ---
-title: Bundles
-description: >-
-  Detailed guide for managing Capgo Bundles, covering listing, deleting,
-  versioning, and storage optimization for app update packages.
+title: "Bundles"
+description: "Panduan terperinci untuk mengelola Capgo Bundles, mencakup daftar, penghapusan, versioning, dan optimasi penyimpanan untuk paket pembaruan aplikasi."
 sidebar:
   order: 8
-locale: id
 ---
 
-Bundles are the core update packages in Capgo. Each bundle contains the web assets (HTML, CSS, JS) that make up your app's content. The Bundles API allows you to manage these update packages, including listing and deleting them.
+Bundles adalah paket pembaruan inti di Capgo. Setiap bundle berisi aset web (HTML, CSS, JS) yang membentuk konten aplikasi Anda. API Bundles memungkinkan Anda mengelola paket pembaruan ini, termasuk daftar dan penghapusannya.
 
-## Understanding Bundles
+## Memahami Bundles
 
-A bundle represents a specific version of your app's web content and includes:
-- **Version**: Semantic version number of the bundle
-- **Checksum**: Unique hash to verify bundle integrity
-- **Storage Info**: Details about where and how the bundle is stored
-- **Native Requirements**: Minimum native app version requirements
-- **Metadata**: Creation time, ownership, and other tracking information
+Sebuah bundle mewakili versi spesifik dari konten web aplikasi Anda dan mencakup:
+- **Version**: Nomor versi semantik dari bundle
+- **Checksum**: Hash unik untuk memverifikasi integritas bundle
+- **Storage Info**: Detail tentang di mana dan bagaimana bundle disimpan
+- **Native Requirements**: Persyaratan versi aplikasi native minimum
+- **Metadata**: Waktu pembuatan, kepemilikan, dan informasi pelacakan lainnya
 
-## Manual Bundle Creation (Without CLI)
+## Pembuatan Bundle Manual (Tanpa CLI)
 
-Here's how to create and upload bundles manually without using the Capgo CLI:
+Berikut cara membuat dan mengunggah bundle secara manual tanpa menggunakan Capgo CLI:
 
-### Step 1: Build Your App
+### Langkah 1: Bangun Aplikasi Anda
 
-First, build your app's web assets:
+Pertama, bangun aset web aplikasi Anda:
 
 ```bash
 npm run build
 ```
 
-### Step 2: Create Bundle Zip Using Same Packages as Capgo CLI
+### Langkah 2: Buat Bundle Zip Menggunakan Paket yang Sama dengan Capgo CLI
 
-**Important**: Use the exact same JavaScript packages that Capgo CLI uses internally to ensure compatibility.
+**Penting**: Gunakan paket JavaScript yang persis sama dengan yang digunakan Capgo CLI secara internal untuk memastikan kompatibilitas.
 
-#### Install Required Packages
+#### Instal Paket yang Diperlukan
 
 ```bash
 npm install adm-zip @tomasklaen/checksum
 ```
 
-#### Create Zip Bundle with JavaScript (Same as Capgo CLI)
+#### Buat Bundle Zip dengan JavaScript (Sama dengan Capgo CLI)
 
 ```javascript
 const fs = require('node:fs');
@@ -121,7 +118,7 @@ async function main() {
 main();
 ```
 
-### Step 3: Calculate SHA256 Checksum Using Same Package as CLI
+### Langkah 3: Hitung Checksum SHA256 Menggunakan Paket yang Sama dengan CLI
 
 ```javascript
 const fs = require('node:fs');
@@ -143,7 +140,7 @@ async function main() {
 main();
 ```
 
-### Step 4: Upload Bundle to Your Storage
+### Langkah 4: Unggah Bundle ke Penyimpanan Anda
 
 Upload your zip file to any web-accessible storage:
 
@@ -167,7 +164,7 @@ Examples of valid public URLs:
 - `https://github.com/username/repo/releases/download/v1.2.3/bundle.zip`
 - `https://cdn.jsdelivr.net/gh/username/repo@v1.2.3/dist.zip`
 
-### Step 5: Register Bundle with Capgo API
+### Langkah 5: Daftarkan Bundle dengan API Capgo
 
 Register the external bundle with Capgo using direct API calls:
 
@@ -201,7 +198,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 }
 ```
 
-#### API Parameters
+#### Parameter API
 
 | Parameter | Description | Required |
 |-----------|-------------|----------|
@@ -210,7 +207,7 @@ async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
 | `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
 | `checksum` | SHA256 checksum of the zip file | Yes |
 
-## Bundle Structure Requirements
+## Persyaratan Struktur Bundle
 
 Your bundle zip must follow these requirements:
 
@@ -218,7 +215,7 @@ Your bundle zip must follow these requirements:
 2. **Capacitor Integration**: Must call `notifyAppReady()` in your app code
 3. **Asset Paths**: Use relative paths for all assets
 
-### Valid Bundle Structure
+### Struktur Bundle yang Valid
 
 ```
 bundle.zip
@@ -229,7 +226,7 @@ bundle.zip
 └── images/
 ```
 
-## Complete Manual Workflow Example
+## Contoh Alur Kerja Manual Lengkap
 
 Simple Node.js script to zip, checksum, and upload to Capgo:
 
@@ -290,9 +287,9 @@ Install dependencies:
 npm install adm-zip @tomasklaen/checksum node-fetch
 ```
 
-## Checksum Verification
+## Verifikasi Checksum
 
-### JavaScript Checksum Calculation (Same as Capgo CLI)
+### Perhitungan Checksum JavaScript (Sama dengan Capgo CLI)
 
 Use the exact same package and method that Capgo CLI uses internally:
 
@@ -329,7 +326,7 @@ async function main() {
 main();
 ```
 
-### Checksum Importance
+### Pentingnya Checksum
 
 - **Bundle Integrity**: Ensures the bundle hasn't been corrupted during transfer
 - **API Verification**: Capgo verifies checksums before accepting bundles
@@ -350,11 +347,11 @@ main();
 
 Retrieve bundle information. Returns 50 bundles per page.
 
-#### Query Parameters
+#### Parameter Query
 - `app_id`: Required. The ID of your app
 - `page`: Optional. Page number for pagination
 
-#### Response Type
+#### Tipe Respons
 
 ```typescript
 interface Bundle {
@@ -377,7 +374,7 @@ interface Bundle {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 # Get all bundles
@@ -389,7 +386,7 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/bundle/?app_id=app_123&page=1"
 ```
 
-#### Example Response
+#### Contoh Respons
 
 ```json
 {
@@ -417,7 +414,7 @@ curl -H "authorization: your-api-key" \
 
 Delete one or all bundles for an app. Use with caution as this action cannot be undone.
 
-#### Query Parameters
+#### Parameter Query
 
 For deleting a specific bundle:
 ```typescript
@@ -434,7 +431,7 @@ interface BundleDeleteAll {
 }
 ```
 
-#### Example Requests
+#### Contoh Permintaans
 
 ```bash
 # Delete specific bundle
@@ -457,7 +454,7 @@ curl -X DELETE \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### Respons Sukses
 
 ```json
 {
@@ -482,7 +479,7 @@ interface CreateBundleBody {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X POST \
@@ -497,7 +494,7 @@ curl -X POST \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### Respons Sukses
 
 ```json
 {
@@ -522,7 +519,7 @@ interface UpdateMetadataBody {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X POST \
@@ -537,7 +534,7 @@ curl -X POST \
   https://api.capgo.app/bundle/metadata
 ```
 
-#### Success Response
+#### Respons Sukses
 
 ```json
 {
@@ -561,7 +558,7 @@ interface SetChannelBody {
 }
 ```
 
-#### Example Request
+#### Contoh Permintaan
 
 ```bash
 curl -X PUT \
@@ -575,7 +572,7 @@ curl -X PUT \
   https://api.capgo.app/bundle/
 ```
 
-#### Success Response
+#### Respons Sukses
 
 ```json
 {
@@ -584,7 +581,7 @@ curl -X PUT \
 }
 ```
 
-## Error Handling
+## Penanganan Kesalahan
 
 Common error scenarios and their responses:
 
@@ -614,7 +611,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## Kasus Penggunaan Umum
 
 1. **Cleanup Old Versions**
 ```typescript
@@ -633,7 +630,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Storage Considerations
+## Pertimbangan Penyimpanan
 
 1. **Retention Policy**: Define how long to keep old bundles
 2. **Size Management**: Monitor bundle sizes and storage usage

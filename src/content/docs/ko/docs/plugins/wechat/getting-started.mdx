@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Learn how to install and use the WeChat plugin to integrate WeChat
-  functionality in your Capacitor app.
+title: 시작하기
+description: Capacitor 앱에서 WeChat 기능을 통합하기 위해 WeChat 플러그인을 설치하고 사용하는 방법을 알아보세요.
 sidebar:
   order: 2
 locale: ko
@@ -13,22 +11,22 @@ import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **패키지 설치**
    <PackageManagers pkg="@capgo/capacitor-wechat" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Configuration
+## 구성
 
-### WeChat App Registration
+### WeChat 앱 등록
 
-Before using this plugin, you must register your app on the [WeChat Open Platform](https://open.weixin.qq.com/) to obtain an App ID.
+이 플러그인을 사용하기 전에 [WeChat 오픈 플랫폼](https://open.weixin.qq.com/)에 앱을 등록하여 앱 ID를 받아야 합니다.
 
-### iOS Configuration
+### iOS 구성
 
-Add the following to your `Info.plist`:
+`Info.plist`에 다음을 추가하세요:
 
 ```xml
 <key>LSApplicationQueriesSchemes</key>
@@ -52,11 +50,11 @@ Add the following to your `Info.plist`:
 </array>
 ```
 
-You'll need to integrate the WeChat SDK into your iOS project. Add the WeChat SDK to your `Podfile` or download it from the [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/iOS.html).
+iOS 프로젝트에 WeChat SDK를 통합해야 합니다. `Podfile`에 WeChat SDK를 추가하거나 [WeChat 오픈 플랫폼](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/iOS.html)에서 다운로드하세요.
 
-### Android Configuration
+### Android 구성
 
-Add the following to your `AndroidManifest.xml`:
+`AndroidManifest.xml`에 다음을 추가하세요:
 
 ```xml
 <manifest>
@@ -77,11 +75,11 @@ Add the following to your `AndroidManifest.xml`:
 </manifest>
 ```
 
-You'll need to integrate the WeChat SDK into your Android project. Add the WeChat SDK dependency to your `build.gradle` or download it from the [WeChat Open Platform](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/Android.html).
+Android 프로젝트에 WeChat SDK를 통합해야 합니다. `build.gradle`에 WeChat SDK 종속성을 추가하거나 [WeChat 오픈 플랫폼](https://developers.weixin.qq.com/doc/oplatform/en/Mobile_App/Access_Guide/Android.html)에서 다운로드하세요.
 
-## Usage
+## 사용법
 
-### Check WeChat Installation
+### WeChat 설치 확인
 
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
@@ -96,7 +94,7 @@ const checkWeChat = async () => {
 };
 ```
 
-### Authentication
+### 인증
 
 ```typescript
 const loginWithWeChat = async () => {
@@ -121,9 +119,9 @@ const loginWithWeChat = async () => {
 };
 ```
 
-### Share Content
+### 콘텐츠 공유
 
-#### Share Text
+#### 텍스트 공유
 
 ```typescript
 const shareText = async () => {
@@ -135,7 +133,7 @@ const shareText = async () => {
 };
 ```
 
-#### Share Link
+#### 링크 공유
 
 ```typescript
 const shareLink = async () => {
@@ -150,7 +148,7 @@ const shareLink = async () => {
 };
 ```
 
-#### Share Image
+#### 이미지 공유
 
 ```typescript
 const shareImage = async () => {
@@ -187,7 +185,7 @@ const payWithWeChat = async () => {
 };
 ```
 
-### Open Mini Program
+### 미니 프로그램 열기
 
 ```typescript
 const openMiniProgram = async () => {
@@ -199,11 +197,11 @@ const openMiniProgram = async () => {
 };
 ```
 
-## API Reference
+## API 참조
 
 ### isInstalled()
 
-Check if WeChat app is installed on the device.
+기기에 WeChat 앱이 설치되어 있는지 확인합니다.
 
 ```typescript
 const result = await CapacitorWechat.isInstalled();
@@ -212,7 +210,7 @@ const result = await CapacitorWechat.isInstalled();
 
 ### auth(options)
 
-Authenticate user with WeChat OAuth.
+WeChat OAuth로 사용자를 인증합니다.
 
 ```typescript
 interface WechatAuthOptions {
@@ -226,7 +224,7 @@ const result = await CapacitorWechat.auth(options);
 
 ### share(options)
 
-Share content to WeChat.
+WeChat에 콘텐츠를 공유합니다.
 
 ```typescript
 interface WechatShareOptions {
@@ -250,7 +248,7 @@ await CapacitorWechat.share(options);
 
 ### sendPaymentRequest(options)
 
-Send payment request to WeChat Pay.
+WeChat Pay에 결제 요청을 보냅니다.
 
 ```typescript
 interface WechatPaymentOptions {
@@ -267,7 +265,7 @@ await CapacitorWechat.sendPaymentRequest(options);
 
 ### openMiniProgram(options)
 
-Open WeChat mini-program.
+WeChat 미니 프로그램을 엽니다.
 
 ```typescript
 interface WechatMiniProgramOptions {
@@ -281,7 +279,7 @@ await CapacitorWechat.openMiniProgram(options);
 
 ### chooseInvoice(options)
 
-Choose invoice from WeChat (for business apps).
+WeChat에서 인보이스를 선택합니다 (비즈니스 앱용).
 
 ```typescript
 interface WechatInvoiceOptions {
@@ -298,14 +296,14 @@ const result = await CapacitorWechat.chooseInvoice(options);
 
 ### getPluginVersion()
 
-Get the native plugin version.
+네이티브 플러그인 버전을 가져옵니다.
 
 ```typescript
 const result = await CapacitorWechat.getPluginVersion();
 // Returns: { version: string }
 ```
 
-## Complete Example
+## 완전한 예제
 
 ```typescript
 import { CapacitorWechat } from '@capgo/capacitor-wechat';
@@ -357,37 +355,37 @@ export class WeChatService {
 }
 ```
 
-## Important Notes
+## 중요 참고사항
 
-1. **WeChat SDK Integration**: This plugin provides the Capacitor interface, but you need to integrate the official WeChat SDK into your native projects.
+1. **WeChat SDK 통합**: 이 플러그인은 Capacitor 인터페이스를 제공하지만, 네이티브 프로젝트에 공식 WeChat SDK를 통합해야 합니다.
 
-2. **App Registration**: You must register your app on the [WeChat Open Platform](https://open.weixin.qq.com/) to get an App ID.
+2. **앱 등록**: 앱 ID를 받으려면 [WeChat 오픈 플랫폼](https://open.weixin.qq.com/)에 앱을 등록해야 합니다.
 
-3. **Universal Links (iOS)**: For iOS 13+, you need to configure Universal Links for WeChat callbacks.
+3. **Universal Links (iOS)**: iOS 13+의 경우, WeChat 콜백을 위해 Universal Links를 구성해야 합니다.
 
-4. **Backend Integration**: Authentication and payment features require backend integration to exchange codes for tokens and prepare payment parameters.
+4. **백엔드 통합**: 인증 및 결제 기능은 코드를 토큰으로 교환하고 결제 매개변수를 준비하기 위해 백엔드 통합이 필요합니다.
 
-5. **Testing**: WeChat features require testing on physical devices - they will not work in simulators.
+5. **테스팅**: WeChat 기능은 물리적 기기에서 테스트해야 하며, 시뮬레이터에서는 작동하지 않습니다.
 
-## Best Practices
+## 모범 사례
 
-1. **Always check if WeChat is installed** before attempting to use features.
-2. **Handle errors gracefully** with try-catch blocks.
-3. **Use state parameter** in auth requests for CSRF protection.
-4. **Validate payment responses** on your backend before granting access.
-5. **Compress images** before sharing to reduce data usage.
+1. **WeChat 설치 확인**: 기능을 사용하기 전에 WeChat이 설치되어 있는지 항상 확인하세요.
+2. **오류를 우아하게 처리**: try-catch 블록을 사용하세요.
+3. **state 매개변수 사용**: CSRF 보호를 위해 인증 요청에 state 매개변수를 사용하세요.
+4. **결제 응답 검증**: 액세스 권한을 부여하기 전에 백엔드에서 결제 응답을 검증하세요.
+5. **이미지 압축**: 데이터 사용량을 줄이기 위해 공유하기 전에 이미지를 압축하세요.
 
-## Platform Notes
+## 플랫폼 참고사항
 
 ### iOS
-- Requires iOS 10.0+
-- Uses official WeChat SDK for iOS
-- Requires Universal Links configuration for iOS 13+
+- iOS 10.0+ 필요
+- iOS용 공식 WeChat SDK 사용
+- iOS 13+를 위한 Universal Links 구성 필요
 
 ### Android
-- Requires Android 5.0 (API 21)+
-- Uses official WeChat SDK for Android
-- Requires WXEntryActivity configuration
+- Android 5.0 (API 21)+ 필요
+- Android용 공식 WeChat SDK 사용
+- WXEntryActivity 구성 필요
 
 ### Web
-- Not supported on web platform
+- 웹 플랫폼에서 지원되지 않음

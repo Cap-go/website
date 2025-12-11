@@ -1,38 +1,36 @@
 ---
-title: API Keys
-description: >-
-  Comprehensive documentation for API Keys endpoint, detailing authentication,
-  permissions, and management within Capgo API
+title: "API 密钥"
+description: "API 密钥端点的全面文档,详细说明 Capgo API 中的身份验证、权限和管理"
 sidebar:
   order: 9
 locale: zh
 ---
 
-API keys are used to authenticate requests to the Capgo API. Each key can have different permissions (modes) to control access levels. Keys are organization-specific and should be managed carefully as they grant access to your Capgo resources.
+API 密钥用于验证对 Capgo API 的请求。每个密钥可以具有不同的权限(模式)以控制访问级别。密钥是特定于组织的,应谨慎管理,因为它们授予对您的 Capgo 资源的访问权限。
 
-## Key Modes
+## 密钥模式
 
-- **read**: Can only read data, no modifications allowed
-- **upload**: Can read, modify, and upload new bundles
-- **write**: Can read, modify data, and upload bundles
-- **all**: Full access to all operations
+- **read**: 只能读取数据,不允许修改
+- **upload**: 可以读取、修改和上传新 bundle
+- **write**: 可以读取、修改数据和上传 bundle
+- **all**: 对所有操作的完全访问权限
 
-Key modes follow a stepped/gradual schema. If you have an upload key, and then you create a write key, the write key will be able to do everything that the upload key could.
-Please take a look at the following diagram to better understand how API keys work.
+密钥模式遵循阶梯式/渐进式架构。如果您有上传密钥,然后创建写入密钥,写入密钥将能够执行上传密钥可以执行的所有操作。
+请查看以下图表以更好地了解 API 密钥的工作原理。
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="解释 API 密钥工作原理的图表" /><figcaption></figcaption></figure>
 
-## Subkeys with Limited Rights
+## 具有受限权限的子密钥
 
-You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+您可以创建对特定应用或组织具有受限访问权限的子密钥。这对于限制对某些资源的访问同时仍允许对其他资源进行操作很有用。创建密钥时使用 `limited_to_apps` 和 `limited_to_orgs` 参数来定义这些限制。
 
-## Security Best Practices
+## 安全最佳实践
 
-1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
-2. **Regular Rotation**: Rotate your API keys periodically
-3. **Secure Storage**: Store API keys securely and never commit them to version control
-4. **Monitoring**: Monitor API key usage and revoke any compromised keys immediately
-5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+1. **最小权限原则**: 始终使用仍允许集成运行的最严格模式
+2. **定期轮换**: 定期轮换您的 API 密钥
+3. **安全存储**: 安全存储 API 密钥,切勿将它们提交到版本控制
+4. **监控**: 监控 API 密钥使用情况并立即撤销任何受损的密钥
+5. **受限子密钥**: 对特定集成使用具有受限权限的子密钥以最小化风险
 
 ## Endpoints
 

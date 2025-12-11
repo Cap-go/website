@@ -1,6 +1,6 @@
 ---
-title: Sistem Channel
-description: How to use capacitor-updater with the channel system
+title: Sistema dei Canali
+description: Come utilizzare capacitor-updater con il sistema dei canali
 sidebar:
   order: 6
 locale: it

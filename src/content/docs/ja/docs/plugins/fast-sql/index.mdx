@@ -1,27 +1,23 @@
 ---
-title: '@capgo/capacitor-fast-sql'
-description: >-
-  High-performance native SQLite with custom HTTP protocol for efficient sync
-  operations and IndexedDB replacement.
+title: "@capgo/capacitor-fast-sql"
+description: 効率的な同期操作とIndexedDB置き換えのためのカスタムHTTPプロトコルを持つ高性能ネイティブSQLite。
 tableOfContents: false
 next: false
 prev: false
 sidebar:
   order: 1
-  label: Introduction
+  label: "はじめに"
 hero:
-  tagline: >-
-    Ultra-fast native SQLite with custom protocol for sync systems and large
-    datasets, delivering up to 25x faster performance.
+  tagline: 同期システムと大規模データセット用のカスタムプロトコルを持つ超高速ネイティブSQLite。最大25倍の高速パフォーマンスを実現。
   image:
     file: ~public/icons/plugins/fast-sql.svg
   actions:
-    - text: Get started
+    - text: はじめる
       link: /docs/plugins/fast-sql/getting-started/
       icon: right-arrow
       variant: primary
     - text: Github
-      link: 'https://github.com/Cap-go/capacitor-fast-sql/'
+      link: https://github.com/Cap-go/capacitor-fast-sql/
       icon: external
       variant: minimal
 locale: ja
@@ -30,25 +26,25 @@ locale: ja
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Custom HTTP Protocol" icon="rocket">
-    Bypasses Capacitor's bridge for up to 25x faster performance ⚡
+  <Card title="カスタムHTTPプロトコル" icon="rocket">
+    Capacitorのブリッジをバイパスして最大25倍の高速パフォーマンス ⚡
   </Card>
-  <Card title="Full SQLite Support" icon="list-format">
-    Complete SQL support with transactions and batch operations 📊
+  <Card title="完全なSQLiteサポート" icon="list-format">
+    トランザクションとバッチ操作による完全なSQLサポート 📊
   </Card>
-  <Card title="Sync-Friendly" icon="random">
-    Designed for local sync systems like CRDTs and operational transforms 🔄
+  <Card title="同期対応" icon="random">
+    CRDTや操作変換などのローカル同期システム向けに設計 🔄
   </Card>
-  <Card title="Cross-Platform" icon="laptop">
-    iOS, Android, and Web using sql.js + IndexedDB 🌐
+  <Card title="クロスプラットフォーム" icon="laptop">
+    iOS、Android、およびsql.js + IndexedDBを使用したWeb 🌐
   </Card>
-  <Card title="Transaction Support" icon="approve-check-circle">
-    ACID transactions with configurable isolation levels 🔒
+  <Card title="トランザクションサポート" icon="approve-check-circle">
+    設定可能な分離レベルを持つACIDトランザクション 🔒
   </Card>
-  <Card title="Binary Data" icon="document">
-    Native support for Uint8Array/BLOB storage 📁
+  <Card title="バイナリデータ" icon="document">
+    Uint8Array/BLOBストレージのネイティブサポート 📁
   </Card>
-  <Card title="Getting Started" icon="open-book">
-    Check the [Getting Started Guide](/docs/plugins/fast-sql/getting-started/) to install and configure the plugin.
+  <Card title="はじめる" icon="open-book">
+    [スタートガイド](/docs/plugins/fast-sql/getting-started/)をチェックして、プラグインをインストールして設定しましょう。
   </Card>
 </CardGrid>

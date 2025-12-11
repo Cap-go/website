@@ -1,33 +1,29 @@
 ---
-title: Apps
-description: >-
-  Detailed documentation for the Apps endpoint, providing comprehensive insights
-  into managing and interacting with Capacitor applications through Capgo's
-  platform.
+title: "Apps"
+description: "Dokumentasi terperinci untuk endpoint Apps, memberikan wawasan komprehensif tentang pengelolaan dan interaksi dengan aplikasi Capacitor melalui platform Capgo."
 sidebar:
   order: 7
-locale: id
 ---
 
-Apps are the foundational entities in Capgo. Each app represents a unique Capacitor application that you can manage and update through the platform. The Apps API allows you to create, retrieve, update, and delete app configurations.
+Apps adalah entitas dasar di Capgo. Setiap app mewakili aplikasi Capacitor unik yang dapat Anda kelola dan perbarui melalui platform. API Apps memungkinkan Anda untuk membuat, mengambil, memperbarui, dan menghapus konfigurasi app.
 
-## Understanding Apps
+## Memahami Apps
 
-An app in Capgo represents your Capacitor application and includes:
-- **App ID**: Unique identifier for your application
-- **Name**: Human-readable name of your application
-- **Icons**: Visual identifiers for your app in the dashboard
-- **Configuration**: Settings that control how updates are delivered
-- **Ownership**: Organization and user access information
-- **Usage Statistics**: Metrics about installs and updates
+Sebuah app di Capgo mewakili aplikasi Capacitor Anda dan mencakup:
+- **App ID**: Pengidentifikasi unik untuk aplikasi Anda
+- **Name**: Nama yang dapat dibaca manusia dari aplikasi Anda
+- **Icons**: Pengidentifikasi visual untuk app Anda di dashboard
+- **Configuration**: Pengaturan yang mengontrol bagaimana pembaruan dikirimkan
+- **Ownership**: Informasi akses organisasi dan pengguna
+- **Usage Statistics**: Metrik tentang instalasi dan pembaruan
 
 ## Best Practices
 
-1. **Naming Convention**: Use clear, identifiable names for your apps
-2. **Security**: Protect your API keys and access credentials
-3. **Organization**: Group related apps under the same organization
-4. **Monitoring**: Regularly check app statistics and performance
-5. **Backup**: Maintain configuration backups for critical apps
+1. **Naming Convention**: Gunakan nama yang jelas dan dapat diidentifikasi untuk app Anda
+2. **Security**: Lindungi kunci API dan kredensial akses Anda
+3. **Organization**: Kelompokkan app terkait di bawah organisasi yang sama
+4. **Monitoring**: Periksa statistik dan performa app secara teratur
+5. **Backup**: Pertahankan cadangan konfigurasi untuk app kritis
 
 ## Endpoints
 
@@ -35,15 +31,15 @@ An app in Capgo represents your Capacitor application and includes:
 
 `https://api.capgo.app/app/`
 
-Retrieve information about your apps.
+Mengambil informasi tentang app Anda.
 
 #### Query Parameters
-- `page`: Optional. Page number for pagination
-- `limit`: Optional. Number of results per page (default: 50)
-- `org_id`: Optional. Filter apps by organization ID. If not provided, returns apps from all organizations the user has access to
+- `page`: Opsional. Nomor halaman untuk paginasi
+- `limit`: Opsional. Jumlah hasil per halaman (default: 50)
+- `org_id`: Opsional. Filter app berdasarkan ID organisasi. Jika tidak disediakan, mengembalikan app dari semua organisasi yang dapat diakses pengguna
 
-For getting a specific app:
-- Use the app ID in the URL path: `https://api.capgo.app/app/:app_id`
+Untuk mendapatkan app tertentu:
+- Gunakan app ID di path URL: `https://api.capgo.app/app/:app_id`
 
 #### Response Type
 
@@ -107,7 +103,7 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/app/`
 
-Create a new app.
+Membuat app baru.
 
 #### Request Body
 
@@ -129,7 +125,7 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -d '{
     "name": "My New App",
-    "app_id": "com.demo.myapp", // this id is unique in Capgo This cannot be reused by any account.
+    "app_id": "com.demo.myapp", // id ini unik di Capgo. Tidak dapat digunakan ulang oleh akun manapun.
     "icon": "https://example.com/icon.png",
     "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8"
   }' \
@@ -156,7 +152,7 @@ curl -X POST \
 
 `https://api.capgo.app/app/:app_id`
 
-Update an existing app. The app ID is specified in the URL path.
+Memperbarui app yang ada. App ID ditentukan di path URL.
 
 #### Request Body
 
@@ -202,7 +198,7 @@ curl -X PUT \
 
 `https://api.capgo.app/app/:app_id`
 
-Delete an app and all associated resources. The app ID is specified in the URL path. Use with extreme caution as this action cannot be undone.
+Menghapus app dan semua sumber daya terkait. App ID ditentukan di path URL. Gunakan dengan sangat hati-hati karena tindakan ini tidak dapat dibatalkan.
 
 #### Example Request
 
@@ -222,7 +218,7 @@ curl -X DELETE \
 
 ## Error Handling
 
-Common error scenarios and their responses:
+Skenario error umum dan responnya:
 
 ```json
 // App not found
@@ -292,7 +288,7 @@ curl -H "authorization: your-api-key" \
 
 ## Resource Management
 
-1. **Storage Optimization**: Monitor storage usage and set appropriate retention policies
-2. **Organization**: Group related apps under a single organization
-3. **Access Control**: Manage which team members can modify app settings
-4. **Backup Strategy**: Back up critical app configurations and settings
+1. **Storage Optimization**: Pantau penggunaan penyimpanan dan atur kebijakan retensi yang sesuai
+2. **Organization**: Kelompokkan app terkait di bawah satu organisasi
+3. **Access Control**: Kelola anggota tim mana yang dapat mengubah pengaturan app
+4. **Backup Strategy**: Cadangkan konfigurasi dan pengaturan app yang kritis

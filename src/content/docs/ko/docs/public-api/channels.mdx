@@ -1,48 +1,45 @@
 ---
-title: Channels
-description: >-
-  Guide to managing app update channels in Capgo, covering version control,
-  platform targeting, and update policies.
+title: "채널"
+description: "Capgo에서 앱 업데이트 채널 관리에 대한 가이드로, 버전 제어, 플랫폼 타겟팅 및 업데이트 정책을 다룹니다."
 sidebar:
   order: 6
-locale: ko
 ---
 
-Channels are the core mechanism for managing app updates in Capgo. They allow you to control how and when your users receive updates, enabling features like A/B testing, staged rollouts, and platform-specific updates.
+채널은 Capgo에서 앱 업데이트를 관리하는 핵심 메커니즘입니다. A/B 테스팅, 단계적 출시 및 플랫폼별 업데이트와 같은 기능을 활성화하면서 사용자가 업데이트를 받는 방법과 시기를 제어할 수 있습니다.
 
-## Understanding Channels
+## 채널 이해하기
 
-A channel represents a distribution track for your app updates. Each channel can be configured with specific rules and constraints:
+채널은 앱 업데이트의 배포 트랙을 나타냅니다. 각 채널은 특정 규칙과 제약 조건으로 구성될 수 있습니다:
 
-- **Version Control**: Specify which version users receive
-- **Platform Targeting**: Target specific platforms (iOS/Android)
-- **Update Policies**: Control how updates are delivered
-- **Device Restrictions**: Manage which devices can access updates
+- **버전 제어**: 사용자가 받는 버전 지정
+- **플랫폼 타겟팅**: 특정 플랫폼(iOS/Android) 타겟
+- **업데이트 정책**: 업데이트 전달 방식 제어
+- **장치 제한**: 업데이트에 액세스할 수 있는 장치 관리
 
-## Channel Configuration Options
+## 채널 구성 옵션
 
-- **public**: Set as default channel for new devices
-- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the update version available in the channel (e.g., device is on version 1.2.3, but channel has 1.2.2)
-- **disableAutoUpdate**: Control update behavior ("major", "minor", "version_number", "none")
-- **ios/android**: Enable/disable for specific platforms
-- **allow_device_self_set**: Let devices choose their channel
-- **allow_emulator**: Allow updates on emulator devices
-- **allow_dev**: Allow updates on development builds
+- **public**: 새 장치의 기본 채널로 설정
+- **disableAutoUpdateUnderNative**: 장치의 네이티브 앱 버전이 채널에서 사용 가능한 업데이트 버전보다 최신인 경우 업데이트 방지(예: 장치가 버전 1.2.3이지만 채널에 1.2.2가 있음)
+- **disableAutoUpdate**: 업데이트 동작 제어("major", "minor", "version_number", "none")
+- **ios/android**: 특정 플랫폼에 대해 활성화/비활성화
+- **allow_device_self_set**: 장치가 자체 채널을 선택하도록 허용
+- **allow_emulator**: 에뮬레이터 장치에서 업데이트 허용
+- **allow_dev**: 개발 빌드에서 업데이트 허용
 
-## Best Practices
+## 모범 사례
 
-1. **Testing Channel**: Maintain a testing channel for internal validation
-2. **Staged Rollout**: Use multiple channels for gradual update deployment
-3. **Platform Separation**: Create separate channels for iOS and Android when needed
-4. **Version Control**: Use semantic versioning for clear update paths
+1. **테스트 채널**: 내부 검증을 위한 테스트 채널 유지
+2. **단계적 출시**: 점진적 업데이트 배포를 위해 여러 채널 사용
+3. **플랫폼 분리**: 필요시 iOS와 Android용 별도 채널 생성
+4. **버전 제어**: 명확한 업데이트 경로를 위해 시맨틱 버전 관리 사용
 
-## Endpoints
+## 엔드포인트
 
 ### POST
 
 `https://api.capgo.app/channel/`
 
-Create or update a channel configuration.
+채널 구성을 생성하거나 업데이트합니다.
 
 #### Request Body
 
@@ -63,7 +60,7 @@ interface ChannelSet {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X POST \
@@ -82,7 +79,7 @@ curl -X POST \
   https://api.capgo.app/channel/
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -94,30 +91,30 @@ curl -X POST \
 
 `https://api.capgo.app/channel/`
 
-Retrieve channel information. Returns 50 channels per page.
+채널 정보를 검색합니다. 페이지당 50개의 채널을 반환합니다.
 
-#### Query Parameters
-- `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
-- `channel`: Optional. Specific channel name to retrieve
+#### 쿼리 매개변수
+- `app_id`: 필수. 앱의 ID
+- `page`: 선택사항. 페이지네이션을 위한 페이지 번호
+- `channel`: 선택사항. 검색할 특정 채널 이름
 
-#### Example Requests
+#### 요청 예시
 
 ```bash
-# Get all channels
+# 모든 채널 가져오기
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123"
 
-# Get specific channel
+# 특정 채널 가져오기
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123&channel=beta"
 
-# Get next page
+# 다음 페이지 가져오기
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123&page=1"
 ```
 
-#### Response Type
+#### 응답 타입
 
 ```typescript
 interface Channel {
@@ -139,7 +136,7 @@ interface Channel {
 }
 ```
 
-#### Example Response
+#### 응답 예시
 
 ```json
 {
@@ -169,9 +166,9 @@ interface Channel {
 
 `https://api.capgo.app/channel/`
 
-Delete a channel. Note that this will affect all devices using this channel.
+채널을 삭제합니다. 이는 이 채널을 사용하는 모든 장치에 영향을 미칩니다.
 
-#### Query Parameters
+#### 쿼리 매개변수
 
 ```typescript
 interface Channel {
@@ -180,7 +177,7 @@ interface Channel {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X DELETE \
@@ -193,7 +190,7 @@ curl -X DELETE \
   https://api.capgo.app/channel/
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -201,39 +198,39 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## 오류 처리
 
-Common error scenarios and their responses:
+일반적인 오류 시나리오 및 응답:
 
 ```json
-// Channel not found
+// 채널을 찾을 수 없음
 {
   "error": "Channel not found",
   "status": "KO"
 }
 
-// Invalid version format
+// 잘못된 버전 형식
 {
   "error": "Invalid version format. Use semantic versioning",
   "status": "KO"
 }
 
-// Invalid update policy
+// 잘못된 업데이트 정책
 {
   "error": "Invalid disableAutoUpdate value",
   "status": "KO"
 }
 
-// Permission denied
+// 권한 거부
 {
   "error": "Insufficient permissions to manage channels",
   "status": "KO"
 }
 ```
 
-## Common Use Cases
+## 일반적인 사용 사례
 
-1. **Beta Testing**
+1. **베타 테스팅**
 ```typescript
 {
   "app_id": "app_123",
@@ -245,7 +242,7 @@ Common error scenarios and their responses:
 }
 ```
 
-2. **Production Rollout**
+2. **프로덕션 출시**
 ```typescript
 {
   "app_id": "app_123",
@@ -256,7 +253,7 @@ Common error scenarios and their responses:
 }
 ```
 
-3. **Platform-Specific Updates**
+3. **플랫폼별 업데이트**
 ```typescript
 {
   "app_id": "app_123",
@@ -265,4 +262,4 @@ Common error scenarios and their responses:
   "ios": true,
   "android": false
 }
-``` 
+```

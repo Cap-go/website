@@ -1,34 +1,31 @@
 ---
-title: Devices
-description: >-
-  Docs for managing devices via Capgo API, covering tracking, versioning, and
-  channel assignments for app installations.
+title: "Devices"
+description: "앱 설치에 대한 추적, 버전 관리 및 채널 할당을 다루는 Capgo API를 통한 기기 관리 문서."
 sidebar:
   order: 7
-locale: ko
 ---
 
-Devices represent individual installations of your app that are managed by Capgo. The Devices API allows you to track and manage devices, including their versions, channels, and update status.
+Devices는 Capgo에서 관리하는 앱의 개별 설치를 나타냅니다. Devices API를 사용하면 버전, 채널 및 업데이트 상태를 포함한 기기를 추적하고 관리할 수 있습니다.
 
-:::note[Data Retention]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
+:::note[데이터 보존]
+기기 데이터는 마지막 기기 활동으로부터 **90일** 동안 보존됩니다. 이 기간 내에 Capgo에 연결하지 않은 기기는 시스템에서 자동으로 제거됩니다. 활성 기기는 업데이트를 확인할 때 지속적으로 추적됩니다.
 :::
 
-## Understanding Devices
+## Devices 이해하기
 
-Each device has unique characteristics and states:
-- **Platform**: iOS or Android
-- **Version**: Current bundle version and native build version
-- **Environment**: Production or development, emulator or physical device
-- **Channel**: Current update channel assignment
-- **Custom ID**: Optional identifier for your own tracking purposes
+각 기기는 고유한 특성과 상태를 가지고 있습니다:
+- **Platform**: iOS 또는 Android
+- **Version**: 현재 번들 버전 및 네이티브 빌드 버전
+- **Environment**: 프로덕션 또는 개발, 에뮬레이터 또는 물리적 기기
+- **Channel**: 현재 업데이트 채널 할당
+- **Custom ID**: 자체 추적 목적을 위한 선택적 식별자
 
-## Best Practices
+## 모범 사례
 
-1. **Version Tracking**: Monitor device versions to ensure update adoption
-2. **Channel Management**: Assign devices to appropriate channels based on testing needs
-3. **Environment Awareness**: Handle different environments (prod/dev/emulator) appropriately
-4. **Custom Identification**: Use custom IDs to integrate with your existing systems
+1. **버전 추적**: 업데이트 채택을 보장하기 위해 기기 버전을 모니터링합니다
+2. **채널 관리**: 테스트 요구 사항에 따라 적절한 채널에 기기를 할당합니다
+3. **환경 인식**: 다양한 환경(프로덕션/개발/에뮬레이터)을 적절하게 처리합니다
+4. **사용자 정의 식별**: 기존 시스템과 통합하기 위해 사용자 정의 ID를 사용합니다
 
 ## Endpoints
 
@@ -36,7 +33,7 @@ Each device has unique characteristics and states:
 
 `https://api.capgo.app/device/`
 
-Link a device to a specific version or channel.
+기기를 특정 버전 또는 채널에 연결합니다.
 
 #### Request Body
 
@@ -49,7 +46,7 @@ interface DeviceLink {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X POST \
@@ -63,7 +60,7 @@ curl -X POST \
   https://api.capgo.app/device/
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -75,15 +72,15 @@ curl -X POST \
 
 `https://api.capgo.app/device/`
 
-Retrieve device information. Uses cursor-based pagination for efficient retrieval of large device lists.
+기기 정보를 검색합니다. 대규모 기기 목록의 효율적인 검색을 위해 커서 기반 페이지네이션을 사용합니다.
 
-#### Query Parameters
-- `app_id`: Required. The ID of your app
-- `device_id`: Optional. Specific device ID to retrieve a single device
-- `cursor`: Optional. Cursor from previous response for pagination
-- `limit`: Optional. Number of devices per page (default: 50)
+#### 쿼리 매개변수
+- `app_id`: 필수. 앱의 ID
+- `device_id`: 선택사항. 단일 기기를 검색하기 위한 특정 기기 ID
+- `cursor`: 선택사항. 페이지네이션을 위한 이전 응답의 커서
+- `limit`: 선택사항. 페이지당 기기 수 (기본값: 50)
 
-#### Example Requests
+#### 요청 예시s
 
 ```bash
 # Get all devices (first page)
@@ -99,15 +96,15 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/device/?app_id=app_123&cursor=2024-01-01T00:00:00Z|device_456"
 ```
 
-#### Response Type (List)
+#### 응답 타입 (목록)
 
-When requesting multiple devices (no `device_id` parameter):
+여러 기기를 요청할 때 (`device_id` 매개변수 없음):
 
 ```typescript
 interface DeviceListResponse {
   data: Device[];
-  nextCursor?: string;  // Pass this as 'cursor' param to get next page
-  hasMore: boolean;     // true if more pages available
+  nextCursor?: string;  // 다음 페이지를 가져오려면 이것을 'cursor' 매개변수로 전달하세요
+  hasMore: boolean;     // 더 많은 페이지가 있으면 true
 }
 
 interface Device {
@@ -127,9 +124,9 @@ interface Device {
 }
 ```
 
-#### Response Type (Single Device)
+#### 응답 타입 (단일 기기)
 
-When requesting a specific device with `device_id` parameter, returns the device object directly:
+`device_id` 매개변수로 특정 기기를 요청하면 기기 객체를 직접 반환합니다:
 
 ```typescript
 interface Device {
@@ -149,7 +146,7 @@ interface Device {
 }
 ```
 
-#### Example Response (List)
+#### 응답 예시 (목록)
 
 ```json
 {
@@ -174,7 +171,7 @@ interface Device {
 }
 ```
 
-#### Example Response (Single Device)
+#### 응답 예시 (단일 기기)
 
 ```json
 {
@@ -198,11 +195,11 @@ interface Device {
 
 `https://api.capgo.app/device/`
 
-Unlink a device from its channel override. This resets the device to use its default channel.
+기기를 채널 재정의에서 연결 해제합니다. 이렇게 하면 기기가 기본 채널을 사용하도록 재설정됩니다.
 
-:::note[Delete device]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the system. Active devices are continuously tracked as they check for updates.
-You can't delete a device with this endpoint, it only affect the channel override.
+:::note[기기 삭제]
+기기 데이터는 마지막 기기 활동으로부터 **90일** 동안 보존됩니다. 이 기간 내에 Capgo에 연결하지 않은 기기는 시스템에서 자동으로 제거됩니다. 활성 기기는 업데이트를 확인할 때 지속적으로 추적됩니다.
+이 엔드포인트로는 기기를 삭제할 수 없으며, 채널 재정의에만 영향을 미칩니다.
 :::
 
 #### Query Parameters
@@ -214,7 +211,7 @@ interface Device {
 }
 ```
 
-#### Example Request
+#### 요청 예시
 
 ```bash
 curl -X DELETE \
@@ -227,7 +224,7 @@ curl -X DELETE \
   https://api.capgo.app/device/
 ```
 
-#### Success Response
+#### 성공 응답
 
 ```json
 {
@@ -235,9 +232,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## 오류 처리
 
-Common error scenarios and their responses:
+일반적인 오류 시나리오 및 응답:
 
 ```json
 // Device not found
@@ -265,7 +262,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## 일반적인 사용 사례
 
 1. **Beta Device Registration**
 ```typescript
@@ -290,9 +287,9 @@ Common error scenarios and their responses:
 // Use DELETE endpoint to remove overrides
 ```
 
-## Tips for Device Management
+## 기기 관리 팁
 
-1. **Monitoring**: Regularly check device status and version distribution
-2. **Testing**: Use custom IDs to identify test devices easily
-3. **Troubleshooting**: Track device updates and channel assignments
-4. **Version Control**: Monitor native app versions to ensure compatibility 
+1. **모니터링**: 기기 상태와 버전 분포를 정기적으로 확인합니다
+2. **테스트**: 사용자 정의 ID를 사용하여 테스트 기기를 쉽게 식별합니다
+3. **문제 해결**: 기기 업데이트 및 채널 할당을 추적합니다
+4. **버전 관리**: 호환성을 보장하기 위해 네이티브 앱 버전을 모니터링합니다 

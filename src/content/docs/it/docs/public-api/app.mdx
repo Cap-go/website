@@ -1,33 +1,29 @@
 ---
-title: Apps
-description: >-
-  Detailed documentation for the Apps endpoint, providing comprehensive insights
-  into managing and interacting with Capacitor applications through Capgo's
-  platform.
+title: "Apps"
+description: "Documentazione dettagliata per l'endpoint Apps, che fornisce informazioni complete sulla gestione e l'interazione con le applicazioni Capacitor attraverso la piattaforma Capgo."
 sidebar:
   order: 7
-locale: it
 ---
 
-Apps are the foundational entities in Capgo. Each app represents a unique Capacitor application that you can manage and update through the platform. The Apps API allows you to create, retrieve, update, and delete app configurations.
+Le Apps sono le entità fondamentali in Capgo. Ogni app rappresenta un'applicazione Capacitor unica che puoi gestire e aggiornare attraverso la piattaforma. L'API Apps ti permette di creare, recuperare, aggiornare ed eliminare configurazioni delle app.
 
-## Understanding Apps
+## Comprendere le Apps
 
-An app in Capgo represents your Capacitor application and includes:
-- **App ID**: Unique identifier for your application
-- **Name**: Human-readable name of your application
-- **Icons**: Visual identifiers for your app in the dashboard
-- **Configuration**: Settings that control how updates are delivered
-- **Ownership**: Organization and user access information
-- **Usage Statistics**: Metrics about installs and updates
+Un'app in Capgo rappresenta la tua applicazione Capacitor e include:
+- **App ID**: Identificatore univoco per la tua applicazione
+- **Name**: Nome leggibile della tua applicazione
+- **Icons**: Identificatori visivi per la tua app nel dashboard
+- **Configuration**: Impostazioni che controllano come vengono consegnati gli aggiornamenti
+- **Ownership**: Informazioni sull'accesso dell'organizzazione e dell'utente
+- **Usage Statistics**: Metriche su installazioni e aggiornamenti
 
 ## Best Practices
 
-1. **Naming Convention**: Use clear, identifiable names for your apps
-2. **Security**: Protect your API keys and access credentials
-3. **Organization**: Group related apps under the same organization
-4. **Monitoring**: Regularly check app statistics and performance
-5. **Backup**: Maintain configuration backups for critical apps
+1. **Convenzione di denominazione**: Usa nomi chiari e identificabili per le tue app
+2. **Sicurezza**: Proteggi le chiavi API e le credenziali di accesso
+3. **Organizzazione**: Raggruppa le app correlate sotto la stessa organizzazione
+4. **Monitoraggio**: Controlla regolarmente le statistiche e le prestazioni dell'app
+5. **Backup**: Mantieni backup delle configurazioni per le app critiche
 
 ## Endpoints
 
@@ -35,15 +31,15 @@ An app in Capgo represents your Capacitor application and includes:
 
 `https://api.capgo.app/app/`
 
-Retrieve information about your apps.
+Recupera informazioni sulle tue app.
 
-#### Query Parameters
-- `page`: Optional. Page number for pagination
-- `limit`: Optional. Number of results per page (default: 50)
-- `org_id`: Optional. Filter apps by organization ID. If not provided, returns apps from all organizations the user has access to
+#### Parametri Query
+- `page`: Opzionale. Numero di pagina per la paginazione
+- `limit`: Opzionale. Numero di risultati per pagina (predefinito: 50)
+- `org_id`: Opzionale. Filtra le app per ID organizzazione. Se non fornito, restituisce le app da tutte le organizzazioni a cui l'utente ha accesso
 
-For getting a specific app:
-- Use the app ID in the URL path: `https://api.capgo.app/app/:app_id`
+Per ottenere un'app specifica:
+- Usa l'ID dell'app nel percorso URL: `https://api.capgo.app/app/:app_id`
 
 #### Response Type
 
@@ -107,7 +103,7 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/app/`
 
-Create a new app.
+Crea una nuova app.
 
 #### Request Body
 
@@ -156,7 +152,7 @@ curl -X POST \
 
 `https://api.capgo.app/app/:app_id`
 
-Update an existing app. The app ID is specified in the URL path.
+Aggiorna un'app esistente. L'ID dell'app è specificato nel percorso URL.
 
 #### Request Body
 
@@ -202,7 +198,7 @@ curl -X PUT \
 
 `https://api.capgo.app/app/:app_id`
 
-Delete an app and all associated resources. The app ID is specified in the URL path. Use with extreme caution as this action cannot be undone.
+Elimina un'app e tutte le risorse associate. L'ID dell'app è specificato nel percorso URL. Usare con estrema cautela poiché questa azione non può essere annullata.
 
 #### Example Request
 
@@ -220,9 +216,9 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Gestione degli Errori
 
-Common error scenarios and their responses:
+Scenari di errore comuni e le loro risposte:
 
 ```json
 // App not found
@@ -255,7 +251,7 @@ Common error scenarios and their responses:
 }
 ```
 
-## Common Use Cases
+## Casi d'Uso Comuni
 
 1. **Create New App**
 ```typescript
@@ -290,9 +286,9 @@ curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 ```
 
-## Resource Management
+## Gestione delle Risorse
 
-1. **Storage Optimization**: Monitor storage usage and set appropriate retention policies
-2. **Organization**: Group related apps under a single organization
-3. **Access Control**: Manage which team members can modify app settings
-4. **Backup Strategy**: Back up critical app configurations and settings
+1. **Ottimizzazione dello Storage**: Monitora l'utilizzo dello storage e imposta politiche di conservazione appropriate
+2. **Organizzazione**: Raggruppa le app correlate sotto un'unica organizzazione
+3. **Controllo degli Accessi**: Gestisci quali membri del team possono modificare le impostazioni dell'app
+4. **Strategia di Backup**: Esegui il backup di configurazioni e impostazioni critiche dell'app

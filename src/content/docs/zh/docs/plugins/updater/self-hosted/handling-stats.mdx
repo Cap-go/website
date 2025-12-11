@@ -1,8 +1,6 @@
 ---
-title: Statistics API
-description: >-
-  How to use the statistics endpoint of Capgo with the auto-update plugin in
-  self-hosted mode, what they are used for and what to expect
+title: "统计 API"
+description: "如何在自托管模式下将 Capgo 的统计端点与自动更新插件一起使用,它们的用途以及预期结果"
 sidebar:
   order: 7
 locale: zh
@@ -10,17 +8,17 @@ locale: zh
 
 import { LinkCard, CardGrid, Aside } from '@astrojs/starlight/components';
 
-## Statistics API
+## 统计 API
 
-Starting from version 1.3.0 the update system is able to send stats!
+从版本 1.3.0 开始,更新系统能够发送统计信息!
 
-By default, all stats are sent to our server, to understand usage and research. 
+默认情况下,所有统计信息都发送到我们的服务器,以了解使用情况和研究。
 
 <Aside>
-No private data is sent for stats, only random UUID, version update, version native app, platform, action, and app ID.
+统计信息不发送私人数据,仅发送随机 UUID、版本更新、原生应用版本、平台、操作和应用 ID。
 </Aside>
 
-If you want to send this data to your server instead, change the config below:
+如果您想将此数据发送到您的服务器,请更改以下配置:
 
 ```tsx
 // capacitor.config.json
@@ -35,9 +33,9 @@ If you want to send this data to your server instead, change the config below:
 }
 ```
 
-## Data Structure
+## 数据结构
 
-What your server will receive is:
+您的服务器将接收:
 
 ```tsx
 interface AppInfosStats {
@@ -57,11 +55,11 @@ interface AppInfosStats {
 }
 ```
 
-You can also totally disable it, with an empty string. Keep in mind, statistics are made private friendly and help me to understand how people use the plugin, to resolve issues and improve it.
+您也可以使用空字符串完全禁用它。请记住,统计信息对隐私友好,并帮助我了解人们如何使用插件,以解决问题并改进它。
 
-## Implementation Example
+## 实现示例
 
-Here is an example of code in JavaScript to save the stats of the plugin:
+这是保存插件统计信息的 JavaScript 代码示例:
 
 ```typescript
 interface AppInfos {
@@ -162,18 +160,18 @@ export const handler: Handler = async (event) => {
 }
 ```
 
-This endpoint should return a JSON:
+此端点应返回 JSON:
 
 ```json
 { "status": "ok" }
 ```
 
-## Actions
+## 操作
 
-For detailed descriptions of all action codes and their meanings, please refer to the debugging documentation:
+有关所有操作代码及其含义的详细说明,请参阅调试文档:
 
-* **Actions sent from the device**: See the [debugging documentation - Sent from the device](/docs/plugins/updater/debugging/#sent-from-the-device) section
-* **Actions sent from the backend**: See the [debugging documentation - Sent from the backend](/docs/plugins/updater/debugging/#sent-from-the-backend) section
+* **从设备发送的操作**: 请参阅[调试文档 - 从设备发送](/docs/plugins/updater/debugging/#sent-from-the-device)部分
+* **从后端发送的操作**: 请参阅[调试文档 - 从后端发送](/docs/plugins/updater/debugging/#sent-from-the-backend)部分
 
 <LinkCard
 	title="Handling Updates"

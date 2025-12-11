@@ -1,5 +1,6 @@
 ---
 title: Überblick
+description: "Erste Schritte mit Capgo durch Erlernen der wichtigsten Konzepte und Schritte zur Integration und Bereitstellung von Live-Updates für Ihre App."
 sidebar:
   order: 1
 next: false
@@ -27,43 +28,48 @@ Das Quickstart-Tutorial führt Sie durch die wichtigsten Konzepte von Capgo! Zu 
 
 </Steps>
 
-Folgen Sie einfach der Anleitung Schritt für Schritt oder navigieren Sie direkt zur Dokumentation der Komponente, die Sie interessiert
+Folgen Sie einfach der Anleitung Schritt für Schritt oder navigieren Sie direkt zur Dokumentation der Komponente, die Sie interessiert.
+
 
 <CardGrid stagger>
   <a href="/docs/getting-started/add-an-app/" ><Card title="Tutorial starten" icon="rocket" >
     Folgen Sie dem Quickstart-Tutorial und nutzen Sie Capgo in kürzester Zeit!
   </Card></a>
-  <a href="/docs/getting-started/deploy/"><Card title="Einfach zu integrieren" icon="pencil">
-    Integrieren Sie Capgo in Ihre CI/CD und lösen Sie Bundle-Uploads auf Capgo durch Pushen von Commits aus
+  <a href="/docs/getting-started/deploy/"><Card title="Updates ausliefern" icon="pencil">
+    Liefern Sie Updates für Ihre App über das Capgo-Dashboard aus.
   </Card></a>
-  <a href="/docs/live-updates/"><Card title="Live Update Dokumentation" icon="setting">
-    Aktualisieren Sie Ihre App aus der Ferne in Echtzeit ohne App Store Verzögerungen
+  <a href="/docs/getting-started/cicd-integration/"><Card title="Updates automatisieren" icon="pencil">
+    Integrieren Sie Capgo in Ihre CI/CD und lösen Sie Bundle-Uploads auf Capgo durch Pushen von Commits aus.
   </Card></a>
-  <a href="/docs/getting-started/troubleshooting"><Card title="Fehlerbehebung" icon="open-book">
-    Häufige Probleme und deren Lösungen
+  <a href="/docs/getting-started/troubleshooting/"><Card title="Fehlerbehebung" icon="open-book">
+    Häufige Probleme und deren Lösungen.
+  </Card></a>
+  <a href="/docs/getting-started/wrapping-up/"><Card title="Zusammenfassung" icon="pencil">
+    Schließen Sie das Tutorial ab und erhalten Sie einen schnellen Überblick über das Gelernte.
   </Card></a>
 </CardGrid>
 
 <Aside type="tip">
-Die Over-the-Air (OTA) Update-Funktion gilt nur für Änderungen an HTML-, CSS- und JavaScript-Dateien
+Die Over-the-Air (OTA) Update-Funktion gilt nur für Änderungen an HTML-, CSS- und JavaScript-Dateien.
 
-Wenn Sie Änderungen am nativen Code vornehmen, wie z.B. Updates von Capacitor-Plugins, müssen Sie die Anwendung erneut zur Genehmigung im App Store einreichen
+Wenn Sie Änderungen am nativen Code vornehmen, wie z.B. Updates von Capacitor-Plugins, müssen Sie die Anwendung erneut zur Genehmigung im App Store einreichen.
 </Aside>
 
 ## Discord Community beitreten
 
-[Treten Sie dem Capacitor-updater Discord Server bei!](https://discordcom/invite/VnYRvBfgA6)
+[Treten Sie dem Capgo Discord Server bei!](https://discord.capgo.app)
 
 ## Wartung
 
 | Plugin-Version | Capacitor-Kompatibilität | Gewartet         |
-| -------------- | ------------------------ | ----------------- |
-| v7\*\* (≥7.25.0) | v7\*\*                 | ✅ Vollständig unterstützt |
-| v6\*\*  (≥6.25.0)      | v6\*\*                 | ✅ Vollständig unterstützt                 |
-| v5\*\*       | v5\*\*                 | ⚠️ Veraltet |
-| v4\*\*       | v4\*\*                 | ⚠️ Veraltet |
-| v3\*\*       | v3\*\*                 | ⚠️ Veraltet     |
-| > 7            | v4\*\*                 | ⚠️ Veraltet, unsere CI ist durchgedreht und hat zu viele Versionen erhöht     |
+| -------------- | ----------------------- | ----------------- |
+| v7.\*.\* (≥7.25.0)       | v7.\*.\*                | ✅ Vollständig unterstützt                 |
+| v6.\*.\* (≥6.25.0)       | v6.\*.\*                | ✅ Vollständig unterstützt |
+| v5.\*.\* (≥5.10.0)       | v5.\*.\*                | ✅ Vollständig unterstützt |
+| v5.\*.\* (<5.10.0)       | v5.\*.\*                | ⚠️ Veraltet |
+| v4.\*.\*       | v4.\*.\*                | ❌ Nicht mehr unterstützt |
+| v3.\*.\*       | v3.\*.\*                | ❌ Nicht mehr unterstützt     |
+| >= 8            | v4.\*.\*                | ⚠️ Veraltet aufgrund von Versionierungsproblemen in unserem CI-Prozess     |
 
 ## Einhaltung der Store-Richtlinien
 

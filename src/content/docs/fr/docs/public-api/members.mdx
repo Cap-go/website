@@ -1,37 +1,34 @@
 ---
-title: Members
-description: >-
-  Comprehensive guide to managing organization members in Capgo, covering roles,
-  permissions, and best practices for security and collaboration.
+title: "Membres"
+description: "Guide complet pour gérer les membres de l'organisation dans Capgo, couvrant les rôles, les permissions et les meilleures pratiques pour la sécurité et la collaboration."
 sidebar:
   order: 4
-locale: fr
 ---
 
-Organization members are users who have access to your Capgo organization. Each member has a specific role that determines their permissions within the organization. Managing members effectively is crucial for maintaining security and collaboration in your team.
+Les membres de l'organisation sont des utilisateurs qui ont accès à votre organisation Capgo. Chaque membre a un rôle spécifique qui détermine ses permissions au sein de l'organisation. Une gestion efficace des membres est essentielle pour maintenir la sécurité et la collaboration au sein de votre équipe.
 
-## Member Roles
+## Rôles des Membres
 
-### Regular Roles
-- **read**: Can view resources but cannot make changes
-- **upload**: Can upload new bundles and view resources
-- **write**: Can modify resources and upload bundles
-- **admin**: Can manage organization settings and members
-- **super_admin**: Has full control over the organization
+### Rôles Réguliers
+- **read**: Peut consulter les ressources mais ne peut pas apporter de modifications
+- **upload**: Peut télécharger de nouveaux paquets et consulter les ressources
+- **write**: Peut modifier les ressources et télécharger des paquets
+- **admin**: Peut gérer les paramètres de l'organisation et les membres
+- **super_admin**: A un contrôle total sur l'organisation
 
-### Invite Roles
-- **invite_read**: Pending invitation for read access
-- **invite_upload**: Pending invitation for upload access
-- **invite_write**: Pending invitation for write access
-- **invite_admin**: Pending invitation for admin access
-- **invite_super_admin**: Pending invitation for super admin access
+### Rôles d'Invitation
+- **invite_read**: Invitation en attente pour l'accès en lecture
+- **invite_upload**: Invitation en attente pour l'accès au téléchargement
+- **invite_write**: Invitation en attente pour l'accès en écriture
+- **invite_admin**: Invitation en attente pour l'accès administrateur
+- **invite_super_admin**: Invitation en attente pour l'accès super administrateur
 
-## Best Practices
+## Meilleures Pratiques
 
-1. **Role Assignment**: Follow the principle of least privilege when assigning roles
-2. **Regular Audits**: Periodically review member access and remove unused accounts
-3. **Onboarding**: Have a clear process for adding new members and assigning roles
-4. **Offboarding**: Promptly remove access for members who leave the organization
+1. **Attribution des Rôles**: Suivez le principe du moindre privilège lors de l'attribution des rôles
+2. **Audits Réguliers**: Examinez périodiquement l'accès des membres et supprimez les comptes inutilisés
+3. **Intégration**: Ayez un processus clair pour ajouter de nouveaux membres et attribuer des rôles
+4. **Départ**: Supprimez rapidement l'accès des membres qui quittent l'organisation
 
 ## Endpoints
 
@@ -39,7 +36,7 @@ Organization members are users who have access to your Capgo organization. Each 
 
 `https://api.capgo.app/organization/members/`
 
-Add a new member to an organization or update an existing member's role. Note that you can only invite users who already have a Capgo account - the email must correspond to an existing Capgo user.
+Ajoutez un nouveau membre à une organisation ou mettez à jour le rôle d'un membre existant. Notez que vous ne pouvez inviter que des utilisateurs qui ont déjà un compte Capgo - l'e-mail doit correspondre à un utilisateur Capgo existant.
 
 #### Request Body
 
@@ -51,7 +48,7 @@ interface MemberCreate {
 }
 ```
 
-#### Example Request
+#### Exemple de Requête
 
 ```bash
 curl -X POST \
@@ -65,7 +62,7 @@ curl -X POST \
   https://api.capgo.app/organization/members/
 ```
 
-#### Success Response
+#### Réponse de Succès
 
 ```json
 {
@@ -79,17 +76,17 @@ curl -X POST \
 }
 ```
 
-Notes: 
-- When adding a new member, they will receive an invitation email. Their role will be prefixed with "invite_" until they accept the invitation.
-- The user must already have a Capgo account before they can be invited. If they don't have an account, they should first create one at https://console.capgo.app/register/
+Notes : 
+- Lors de l'ajout d'un nouveau membre, il recevra un e-mail d'invitation. Son rôle sera préfixé par "invite_" jusqu'à ce qu'il accepte l'invitation.
+- L'utilisateur doit déjà avoir un compte Capgo avant de pouvoir être invité. S'il n'a pas de compte, il doit d'abord en créer un sur https://console.capgo.app/register/
 
 ### GET 
 
 `https://api.capgo.app/organization/members/`
 
-Retrieve all members of an organization.
+Récupérez tous les membres d'une organisation.
 
-#### Query Parameters
+#### Paramètres de Requête
 
 ```typescript
 interface MemberQuery {
@@ -97,7 +94,7 @@ interface MemberQuery {
 }
 ```
 
-#### Response Type
+#### Type de Réponse
 
 ```typescript
 interface Member {
@@ -108,14 +105,14 @@ interface Member {
 }
 ```
 
-#### Example Request
+#### Exemple de Requête
 
 ```bash
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/organization/members/?orgId=org_123"
 ```
 
-#### Example Response
+#### Exemple de Réponse
 
 ```json
 {
@@ -146,7 +143,7 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/organization/members/`
 
-Remove a member from an organization. This will immediately revoke their access.
+Supprimez un membre d'une organisation. Cela révoquera immédiatement son accès.
 
 #### Request Body
 
@@ -157,7 +154,7 @@ interface MemberDelete {
 }
 ```
 
-#### Example Request
+#### Exemple de Requête
 
 ```bash
 curl -X DELETE \
@@ -170,7 +167,7 @@ curl -X DELETE \
   https://api.capgo.app/organization/members/
 ```
 
-#### Success Response
+#### Réponse de Succès
 
 ```json
 {
@@ -178,51 +175,51 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Gestion des Erreurs
 
-Common error scenarios and their responses:
+Scénarios d'erreur courants et leurs réponses :
 
 ```json
-// Member not found
+// Membre non trouvé
 {
   "error": "Member not found",
   "status": "KO"
 }
 
-// Invalid role
+// Rôle invalide
 {
   "error": "Invalid role specified",
   "status": "KO"
 }
 
-// Permission denied
+// Permission refusée
 {
   "error": "Insufficient permissions to manage members",
   "status": "KO"
 }
 
-// Cannot remove last admin
+// Impossible de supprimer le dernier administrateur
 {
   "error": "Cannot remove the last admin from the organization",
   "status": "KO"
 }
 
-// Invalid email
+// E-mail invalide
 {
   "error": "Invalid email format",
   "status": "KO"
 }
 
-// Member already exists
+// Le membre existe déjà
 {
   "error": "Member already exists in organization",
   "status": "KO"
 }
 ```
 
-## Common Use Cases
+## Cas d'Usage Courants
 
-1. **Team Expansion**: Adding new team members with appropriate roles
-2. **Access Control**: Managing member permissions as responsibilities change
-3. **Security Audit**: Reviewing member list and roles periodically
-4. **Team Restructuring**: Updating roles during organizational changes
+1. **Expansion de l'Équipe**: Ajout de nouveaux membres de l'équipe avec des rôles appropriés
+2. **Contrôle d'Accès**: Gestion des permissions des membres à mesure que les responsabilités changent
+3. **Audit de Sécurité**: Examen périodique de la liste des membres et des rôles
+4. **Restructuration de l'Équipe**: Mise à jour des rôles lors de changements organisationnels

@@ -1,51 +1,47 @@
 ---
-title: Apps
-description: >-
-  Detailed documentation for the Apps endpoint, providing comprehensive insights
-  into managing and interacting with Capacitor applications through Capgo's
-  platform.
+title: "Apps"
+description: "Appsエンドポイントの詳細なドキュメント。Capgoプラットフォームを通じてCapacitorアプリケーションを管理し、対話するための包括的な洞察を提供します。"
 sidebar:
   order: 7
-locale: ja
 ---
 
-Apps are the foundational entities in Capgo. Each app represents a unique Capacitor application that you can manage and update through the platform. The Apps API allows you to create, retrieve, update, and delete app configurations.
+AppsはCapgoの基本的なエンティティです。各アプリは、プラットフォームを通じて管理および更新できる一意のCapacitorアプリケーションを表します。Apps APIを使用すると、アプリの設定を作成、取得、更新、削除できます。
 
-## Understanding Apps
+## Appsの理解
 
-An app in Capgo represents your Capacitor application and includes:
-- **App ID**: Unique identifier for your application
-- **Name**: Human-readable name of your application
-- **Icons**: Visual identifiers for your app in the dashboard
-- **Configuration**: Settings that control how updates are delivered
-- **Ownership**: Organization and user access information
-- **Usage Statistics**: Metrics about installs and updates
+Capgoのアプリは、Capacitorアプリケーションを表し、以下を含みます:
+- **App ID**: アプリケーションの一意の識別子
+- **Name**: アプリケーションの人間が読める名前
+- **Icons**: ダッシュボード内のアプリの視覚的な識別子
+- **Configuration**: 更新の配信方法を制御する設定
+- **Ownership**: 組織とユーザーのアクセス情報
+- **Usage Statistics**: インストールと更新に関するメトリクス
 
-## Best Practices
+## ベストプラクティス
 
-1. **Naming Convention**: Use clear, identifiable names for your apps
-2. **Security**: Protect your API keys and access credentials
-3. **Organization**: Group related apps under the same organization
-4. **Monitoring**: Regularly check app statistics and performance
-5. **Backup**: Maintain configuration backups for critical apps
+1. **命名規則**: アプリには明確で識別可能な名前を使用する
+2. **セキュリティ**: APIキーとアクセス認証情報を保護する
+3. **組織化**: 関連するアプリを同じ組織の下にグループ化する
+4. **監視**: アプリの統計とパフォーマンスを定期的に確認する
+5. **バックアップ**: 重要なアプリの設定バックアップを維持する
 
-## Endpoints
+## エンドポイント
 
 ### GET
 
 `https://api.capgo.app/app/`
 
-Retrieve information about your apps.
+アプリに関する情報を取得します。
 
-#### Query Parameters
-- `page`: Optional. Page number for pagination
-- `limit`: Optional. Number of results per page (default: 50)
-- `org_id`: Optional. Filter apps by organization ID. If not provided, returns apps from all organizations the user has access to
+#### クエリパラメータ
+- `page`: オプション。ページネーションのページ番号
+- `limit`: オプション。ページあたりの結果数（デフォルト: 50）
+- `org_id`: オプション。組織IDでアプリをフィルタリング。提供されない場合、ユーザーがアクセスできるすべての組織のアプリを返します
 
-For getting a specific app:
-- Use the app ID in the URL path: `https://api.capgo.app/app/:app_id`
+特定のアプリを取得する場合:
+- URLパスでアプリIDを使用: `https://api.capgo.app/app/:app_id`
 
-#### Response Type
+#### レスポンスタイプ
 
 ```typescript
 interface App {
@@ -64,23 +60,23 @@ interface App {
 }
 ```
 
-#### Example Request
+#### リクエスト例
 
 ```bash
-# Get all apps
+# すべてのアプリを取得
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/"
 
-# Get apps from a specific organization
+# 特定の組織のアプリを取得
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 
-# Get specific app
+# 特定のアプリを取得
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/com.demo.app"
 ```
 
-#### Example Response
+#### レスポンス例
 
 ```json
 {
@@ -107,9 +103,9 @@ curl -H "authorization: your-api-key" \
 
 `https://api.capgo.app/app/`
 
-Create a new app.
+新しいアプリを作成します。
 
-#### Request Body
+#### リクエストボディ
 
 ```typescript
 interface CreateApp {
@@ -120,23 +116,23 @@ interface CreateApp {
 }
 ```
 
-#### Example Request
+#### リクエスト例
 
 ```bash
-# Create new app
+# 新しいアプリを作成
 curl -X POST \
   -H "authorization: your-api-key" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "My New App",
-    "app_id": "com.demo.myapp", // this id is unique in Capgo This cannot be reused by any account.
+    "app_id": "com.demo.myapp", // このIDはCapgoで一意です。どのアカウントでも再利用できません。
     "icon": "https://example.com/icon.png",
     "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8"
   }' \
   https://api.capgo.app/app/
 ```
 
-#### Success Response
+#### 成功レスポンス
 
 ```json
 {
@@ -156,9 +152,9 @@ curl -X POST \
 
 `https://api.capgo.app/app/:app_id`
 
-Update an existing app. The app ID is specified in the URL path.
+既存のアプリを更新します。アプリIDはURLパスで指定します。
 
-#### Request Body
+#### リクエストボディ
 
 ```typescript
 interface UpdateApp {
@@ -168,7 +164,7 @@ interface UpdateApp {
 }
 ```
 
-#### Example Request
+#### リクエスト例
 
 ```bash
 curl -X PUT \
@@ -182,7 +178,7 @@ curl -X PUT \
   https://api.capgo.app/app/com.demo.app
 ```
 
-#### Success Response
+#### 成功レスポンス
 
 ```json
 {
@@ -202,9 +198,9 @@ curl -X PUT \
 
 `https://api.capgo.app/app/:app_id`
 
-Delete an app and all associated resources. The app ID is specified in the URL path. Use with extreme caution as this action cannot be undone.
+アプリと関連するすべてのリソースを削除します。アプリIDはURLパスで指定します。この操作は元に戻せないため、細心の注意を払って使用してください。
 
-#### Example Request
+#### リクエスト例
 
 ```bash
 curl -X DELETE \
@@ -212,7 +208,7 @@ curl -X DELETE \
   https://api.capgo.app/app/com.demo.app
 ```
 
-#### Success Response
+#### 成功レスポンス
 
 ```json
 {
@@ -220,79 +216,79 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## エラーハンドリング
 
-Common error scenarios and their responses:
+一般的なエラーシナリオとそのレスポンス:
 
 ```json
-// App not found
+// アプリが見つかりません
 {
   "error": "App not found",
   "status": "KO"
 }
 
-// Duplicate custom ID
+// カスタムIDの重複
 {
   "error": "Custom ID already in use",
   "status": "KO"
 }
 
-// Invalid parameters
+// 無効なパラメータ
 {
   "error": "Invalid app configuration",
   "status": "KO"
 }
 
-// Permission denied
+// 権限拒否
 {
   "error": "Insufficient permissions to manage app",
   "status": "KO"
 }
 
-// Organization access denied
+// 組織アクセス拒否
 {
   "status": "You do not have access to this organization"
 }
 ```
 
-## Common Use Cases
+## 一般的なユースケース
 
-1. **Create New App**
+1. **新しいアプリの作成**
 ```typescript
-// Set up a new app
+// 新しいアプリをセットアップ
 {
   "name": "Production App",
   "owner_org": "046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 }
 ```
 
-2. **Update App Configuration**
+2. **アプリ設定の更新**
 ```typescript
-// Change app name and icon
+// アプリ名とアイコンを変更
 {
   "name": "Rebranded App Name",
   "icon": "https://example.com/new-icon.png"
 }
 ```
 
-3. **Set Retention Policy**
+3. **保持ポリシーの設定**
 ```typescript
-// Configure automatic bundle cleanup
+// 自動バンドルクリーンアップを設定
 {
-  "retention": 30 // Keep bundles for 30 days
+  "retention": 30 // バンドルを30日間保持
 }
 ```
 
-4. **Get Apps by Organization**
+4. **組織別にアプリを取得**
 ```bash
-# List all apps in a specific organization
+# 特定の組織のすべてのアプリをリスト表示
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/app/?org_id=046a36ac-e03c-4590-9257-bd6c9dba9ee8"
 ```
 
-## Resource Management
+## リソース管理
 
-1. **Storage Optimization**: Monitor storage usage and set appropriate retention policies
-2. **Organization**: Group related apps under a single organization
-3. **Access Control**: Manage which team members can modify app settings
-4. **Backup Strategy**: Back up critical app configurations and settings
+1. **ストレージの最適化**: ストレージ使用量を監視し、適切な保持ポリシーを設定
+2. **組織化**: 関連するアプリを単一の組織の下にグループ化
+3. **アクセス制御**: アプリ設定を変更できるチームメンバーを管理
+4. **バックアップ戦略**: 重要なアプリの設定と設定をバックアップ

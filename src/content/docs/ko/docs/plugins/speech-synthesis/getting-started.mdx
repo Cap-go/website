@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Learn how to install and use the Speech Synthesis plugin to convert text to
-  speech in your Capacitor app.
+title: 시작하기
+description: Capacitor 앱에서 텍스트를 음성으로 변환하기 위해 Speech Synthesis 플러그인을 설치하고 사용하는 방법을 알아보세요.
 sidebar:
   order: 2
 locale: ko
@@ -13,16 +11,16 @@ import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **패키지 설치**
    <PackageManagers pkg="@capgo/capacitor-speech-synthesis" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **네이티브 프로젝트와 동기화**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Usage
+## 사용법
 
-Import the plugin and synthesize speech from text:
+플러그인을 가져와서 텍스트에서 음성을 합성하세요:
 
 ```typescript
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
@@ -48,11 +46,11 @@ const speakWithVoice = async () => {
 };
 ```
 
-## API Reference
+## API 참조
 
 ### speak(options)
 
-Speaks the given text using the specified voice settings.
+지정된 음성 설정을 사용하여 주어진 텍스트를 말합니다.
 
 ```typescript
 interface SpeakOptions {
@@ -69,7 +67,7 @@ await SpeechSynthesis.speak(options);
 
 ### stop()
 
-Stops any ongoing speech synthesis.
+진행 중인 음성 합성을 중지합니다.
 
 ```typescript
 await SpeechSynthesis.stop();
@@ -77,7 +75,7 @@ await SpeechSynthesis.stop();
 
 ### getVoices()
 
-Gets the list of available voices for speech synthesis.
+음성 합성에 사용 가능한 음성 목록을 가져옵니다.
 
 ```typescript
 interface Voice {
@@ -93,7 +91,7 @@ console.log('Available voices:', voices);
 
 ### getSupportedLanguages()
 
-Gets the list of supported language codes.
+지원되는 언어 코드 목록을 가져옵니다.
 
 ```typescript
 const { languages } = await SpeechSynthesis.getSupportedLanguages();
@@ -102,14 +100,14 @@ console.log('Supported languages:', languages);
 
 ### isSpeaking()
 
-Checks if speech synthesis is currently active.
+음성 합성이 현재 활성 상태인지 확인합니다.
 
 ```typescript
 const { speaking } = await SpeechSynthesis.isSpeaking();
 console.log('Currently speaking:', speaking);
 ```
 
-## Complete Example
+## 완전한 예제
 
 ```typescript
 import { SpeechSynthesis } from '@capgo/capacitor-speech-synthesis';
@@ -149,10 +147,6 @@ export class TextToSpeechService {
     }
   }
 
-  async speakWithRate(text: string, rate: number) {
-    await this.speak(text, { rate });
-  }
-
   async stop() {
     await SpeechSynthesis.stop();
   }
@@ -161,17 +155,12 @@ export class TextToSpeechService {
     const { speaking } = await SpeechSynthesis.isSpeaking();
     return speaking;
   }
-
-  async listVoicesByLanguage(languageCode: string) {
-    const { voices } = await SpeechSynthesis.getVoices();
-    return voices.filter(v => v.lang.startsWith(languageCode));
-  }
 }
 ```
 
-## Advanced Usage
+## 고급 사용법
 
-### Multi-language Support
+### 다국어 지원
 
 ```typescript
 // Speak in different languages
@@ -193,7 +182,7 @@ const speakMultiLanguage = async () => {
 };
 ```
 
-### Voice Selection
+### 음성 선택
 
 ```typescript
 // Select a specific voice
@@ -216,39 +205,10 @@ const selectVoice = async (languageCode: string) => {
 };
 ```
 
-### Reading Long Text
+## 모범 사례
 
-```typescript
-// Split and speak long text in chunks
-const speakLongText = async (longText: string) => {
-  const sentences = longText.match(/[^.!?]+[.!?]+/g) || [longText];
-
-  for (const sentence of sentences) {
-    await SpeechSynthesis.speak({
-      text: sentence.trim(),
-      language: 'en-US',
-      rate: 0.9
-    });
-
-    // Wait a bit between sentences
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
-};
-```
-
-## Best Practices
-
-1. **Voice Selection**: Always check available voices before using a specific voice ID
-2. **Language Codes**: Use standard language codes (e.g., 'en-US', 'es-ES', 'fr-FR')
-3. **Rate Control**: Keep rate between 0.5 and 2.0 for natural-sounding speech
-4. **Stop Before Speak**: Call stop() before starting new speech to avoid overlap
-5. **Error Handling**: Wrap all calls in try-catch blocks for robust error handling
-
-## Troubleshooting
-
-### Common Issues
-
-**No speech output**: Check device volume and ensure text is not empty
-**Voice not found**: Use getVoices() to find available voices on the device
-**Speech interrupted**: Stop any ongoing speech before starting new synthesis
-**Language not supported**: Check getSupportedLanguages() for available languages
+1. **음성 선택**: 특정 음성 ID를 사용하기 전에 항상 사용 가능한 음성을 확인하세요
+2. **언어 코드**: 표준 언어 코드 사용 (예: 'en-US', 'es-ES', 'fr-FR')
+3. **속도 제어**: 자연스러운 음성을 위해 속도를 0.5에서 2.0 사이로 유지하세요
+4. **말하기 전 중지**: 겹침을 피하기 위해 새 음성을 시작하기 전에 stop()을 호출하세요
+5. **오류 처리**: 강력한 오류 처리를 위해 모든 호출을 try-catch 블록으로 감싸세요

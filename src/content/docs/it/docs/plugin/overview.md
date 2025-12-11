@@ -1,5 +1,5 @@
 ---
-title: Vue d'ensemble
+title: Panoramica
 description: Spiegazione dei due diversi approcci
 sidebar:
   order: 1

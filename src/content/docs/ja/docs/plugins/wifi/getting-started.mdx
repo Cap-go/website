@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Learn how to install and use the WiFi plugin to manage network connectivity in
-  your Capacitor app.
+title: はじめに
+description: WiFiプラグインをインストールして、Capacitorアプリでネットワーク接続を管理する方法を学びます。
 sidebar:
   order: 2
 locale: ja
@@ -13,15 +11,15 @@ import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **パッケージのインストール**
    <PackageManagers pkg="@capgo/capacitor-wifi" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **ネイティブプロジェクトと同期**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configure permissions**
+3. **パーミッションの設定**
 
-   **Android**: Add to `AndroidManifest.xml`:
+   **Android**: `AndroidManifest.xml`に追加:
    ```xml
    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -29,36 +27,36 @@ import { PackageManagers } from 'starlight-package-managers'
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    ```
 
-   **iOS**: Add to `Info.plist`:
+   **iOS**: `Info.plist`に追加:
    ```xml
    <key>NSLocationWhenInUseUsageDescription</key>
-   <string>We need location access to scan WiFi networks</string>
+   <string>WiFiネットワークをスキャンするには位置情報へのアクセスが必要です</string>
    ```
 </Steps>
 
-## Usage
+## 使用方法
 
-Import the plugin and manage WiFi connectivity:
+プラグインをインポートしてWiFi接続を管理します:
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
 
-// Get current WiFi connection info
+// 現在のWiFi接続情報を取得
 const getWifiInfo = async () => {
   const info = await CapacitorWifi.getWifiInfo();
-  console.log('Connected to:', info.ssid);
-  console.log('IP Address:', info.ip);
+  console.log('接続先:', info.ssid);
+  console.log('IPアドレス:', info.ip);
 };
 
-// Scan for available networks
+// 利用可能なネットワークをスキャン
 const scanNetworks = async () => {
   const { networks } = await CapacitorWifi.scan();
   networks.forEach(network => {
-    console.log(`SSID: ${network.ssid}, Signal: ${network.level}`);
+    console.log(`SSID: ${network.ssid}, 信号: ${network.level}`);
   });
 };
 
-// Connect to a network
+// ネットワークに接続
 const connectToWifi = async () => {
   await CapacitorWifi.connect({
     ssid: 'MyNetwork',
@@ -67,20 +65,20 @@ const connectToWifi = async () => {
 };
 ```
 
-## API Reference
+## APIリファレンス
 
 ### getWifiInfo()
 
-Gets information about the currently connected WiFi network.
+現在接続されているWiFiネットワークの情報を取得します。
 
 ```typescript
 interface WifiInfo {
-  ssid: string;          // Network name
-  bssid: string;         // MAC address of access point
-  ip: string;            // Device IP address
-  frequency: number;     // Network frequency (MHz)
-  linkSpeed: number;     // Connection speed (Mbps)
-  signalStrength: number; // Signal strength (0-100)
+  ssid: string;          // ネットワーク名
+  bssid: string;         // アクセスポイントのMACアドレス
+  ip: string;            // デバイスのIPアドレス
+  frequency: number;     // ネットワーク周波数（MHz）
+  linkSpeed: number;     // 接続速度（Mbps）
+  signalStrength: number; // 信号強度（0-100）
 }
 
 const info = await CapacitorWifi.getWifiInfo();
@@ -88,15 +86,15 @@ const info = await CapacitorWifi.getWifiInfo();
 
 ### scan()
 
-Scans for available WiFi networks.
+利用可能なWiFiネットワークをスキャンします。
 
 ```typescript
 interface WifiNetwork {
-  ssid: string;          // Network name
-  bssid: string;         // MAC address
-  level: number;         // Signal level (dBm)
-  frequency: number;     // Network frequency
-  capabilities: string;  // Security capabilities
+  ssid: string;          // ネットワーク名
+  bssid: string;         // MACアドレス
+  level: number;         // 信号レベル（dBm）
+  frequency: number;     // ネットワーク周波数
+  capabilities: string;  // セキュリティ機能
 }
 
 const { networks } = await CapacitorWifi.scan();
@@ -104,13 +102,13 @@ const { networks } = await CapacitorWifi.scan();
 
 ### connect(options)
 
-Connects to a WiFi network.
+WiFiネットワークに接続します。
 
 ```typescript
 interface ConnectOptions {
-  ssid: string;          // Network name
-  password?: string;     // Network password (if secured)
-  isHiddenSsid?: boolean; // Whether SSID is hidden
+  ssid: string;          // ネットワーク名
+  password?: string;     // ネットワークパスワード（保護されている場合）
+  isHiddenSsid?: boolean; // SSIDが非表示かどうか
 }
 
 await CapacitorWifi.connect({
@@ -121,7 +119,7 @@ await CapacitorWifi.connect({
 
 ### disconnect()
 
-Disconnects from the current WiFi network.
+現在のWiFiネットワークから切断します。
 
 ```typescript
 await CapacitorWifi.disconnect();
@@ -129,23 +127,23 @@ await CapacitorWifi.disconnect();
 
 ### getSSID()
 
-Gets the SSID of the currently connected network.
+現在接続されているネットワークのSSIDを取得します。
 
 ```typescript
 const { ssid } = await CapacitorWifi.getSSID();
-console.log('Connected to:', ssid);
+console.log('接続先:', ssid);
 ```
 
 ### getIP()
 
-Gets the current device IP address.
+現在のデバイスのIPアドレスを取得します。
 
 ```typescript
 const { ip } = await CapacitorWifi.getIP();
-console.log('IP Address:', ip);
+console.log('IPアドレス:', ip);
 ```
 
-## Complete Example
+## 完全な例
 
 ```typescript
 import { CapacitorWifi } from '@capgo/capacitor-wifi';
@@ -233,10 +231,10 @@ export class WifiService {
   }
 
   private getSignalQuality(strength: number): string {
-    if (strength >= 80) return 'Excellent';
-    if (strength >= 60) return 'Good';
-    if (strength >= 40) return 'Fair';
-    return 'Poor';
+    if (strength >= 80) return '優秀';
+    if (strength >= 60) return '良好';
+    if (strength >= 40) return '普通';
+    return '弱い';
   }
 
   async getNetworkSecurity(ssid: string): Promise<string> {
@@ -259,29 +257,29 @@ export class WifiService {
 }
 ```
 
-## Advanced Usage
+## 高度な使用方法
 
-### Network Quality Assessment
+### ネットワーク品質評価
 
 ```typescript
 const assessNetworkQuality = async () => {
   const info = await CapacitorWifi.getWifiInfo();
 
   const quality = {
-    signal: info.signalStrength >= 70 ? 'Excellent' :
-            info.signalStrength >= 50 ? 'Good' :
-            info.signalStrength >= 30 ? 'Fair' : 'Poor',
-    speed: info.linkSpeed >= 100 ? 'Fast' :
-           info.linkSpeed >= 50 ? 'Medium' : 'Slow',
+    signal: info.signalStrength >= 70 ? '優秀' :
+            info.signalStrength >= 50 ? '良好' :
+            info.signalStrength >= 30 ? '普通' : '弱い',
+    speed: info.linkSpeed >= 100 ? '高速' :
+           info.linkSpeed >= 50 ? '中速' : '低速',
     frequency: info.frequency >= 5000 ? '5GHz' : '2.4GHz'
   };
 
-  console.log('Network Quality:', quality);
+  console.log('ネットワーク品質:', quality);
   return quality;
 };
 ```
 
-### Auto-Connect to Preferred Networks
+### 優先ネットワークへの自動接続
 
 ```typescript
 const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: string }>) => {
@@ -308,7 +306,7 @@ const autoConnect = async (preferredNetworks: Array<{ ssid: string, password: st
 };
 ```
 
-### Network Change Detection
+### ネットワーク変更検出
 
 ```typescript
 class NetworkMonitor {
@@ -343,31 +341,31 @@ class NetworkMonitor {
 }
 ```
 
-## Best Practices
+## ベストプラクティス
 
-1. **Permissions**: Request location permissions before scanning networks
-2. **Error Handling**: Always wrap WiFi operations in try-catch blocks
-3. **User Feedback**: Show loading indicators during network operations
-4. **Security**: Never store WiFi passwords in plain text
-5. **Testing**: Test on real devices as WiFi APIs may not work in emulators
+1. **パーミッション**: ネットワークをスキャンする前に位置情報パーミッションをリクエスト
+2. **エラー処理**: WiFi操作は常にtry-catchブロックでラップ
+3. **ユーザーフィードバック**: ネットワーク操作中はローディングインジケーターを表示
+4. **セキュリティ**: WiFiパスワードを平文で保存しない
+5. **テスト**: WiFi APIはエミュレーターで動作しない可能性があるため、実デバイスでテスト
 
-## Platform Differences
+## プラットフォームの違い
 
 ### iOS
-- Requires location permissions to scan networks
-- Cannot programmatically connect to networks (will open Settings)
-- Limited access to network details
+- ネットワークをスキャンするには位置情報パーミッションが必要
+- プログラム的にネットワークに接続できない（設定アプリを開く）
+- ネットワーク詳細へのアクセスが制限されている
 
 ### Android
-- Full programmatic WiFi control
-- Requires location permissions for network scanning
-- Can connect/disconnect programmatically
+- 完全なプログラム的WiFi制御
+- ネットワークスキャンには位置情報パーミッションが必要
+- プログラム的に接続/切断が可能
 
-## Troubleshooting
+## トラブルシューティング
 
-### Common Issues
+### よくある問題
 
-**Scan returns empty**: Check location permissions are granted
-**Cannot connect to network**: Verify password is correct and network is in range
-**getWifiInfo fails**: Ensure device is connected to a WiFi network
-**Permission denied**: Add required permissions to platform configuration files
+**スキャンが空を返す**: 位置情報パーミッションが許可されているか確認
+**ネットワークに接続できない**: パスワードが正しく、ネットワークが範囲内にあるか確認
+**getWifiInfoが失敗する**: デバイスがWiFiネットワークに接続されているか確認
+**パーミッション拒否**: プラットフォーム設定ファイルに必要なパーミッションを追加

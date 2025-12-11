@@ -1,40 +1,40 @@
 ---
 title: Implementar una Actualización en Vivo
+description: "Aprende cómo implementar una actualización en vivo en tu aplicación usando la función de Actualizaciones en Vivo de Capgo, permitiendo actualizaciones de UI y lógica en tiempo real sin reenvío a la tienda de aplicaciones."
 sidebar:
   order: 3
 locale: es
 ---
-
 import { Steps, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Utilice la función de Actualizaciones en Vivo de Capgo para actualizar la interfaz de usuario y la lógica de negocio de su aplicación de forma remota y en tiempo real. Envíe actualizaciones del paquete JS directamente a sus usuarios sin pasar por la tienda de aplicaciones para corregir errores y lanzar nuevas funciones al instante.
+Utiliza la función de Actualizaciones en Vivo de Capgo para actualizar la interfaz de usuario y la lógica de negocio de tu aplicación de forma remota y en tiempo real. Envía actualizaciones de bundles JS directamente a tus usuarios sin pasar por la tienda de aplicaciones para corregir errores al instante y lanzar nuevas funciones.
 
-Esta guía asume que ha completado el [Inicio Rápido de Capgo](/docs/getting-started/quickstart) y ya ha:
+Esta guía asume que has completado el [Inicio Rápido de Capgo](/docs/getting-started/quickstart) y ya has:
 
 <Steps>
 
-1. Instalado el SDK `@capgo/capacitor-updater` en su aplicación Capacitor
+1. Instalado el SDK `@capgo/capacitor-updater` en tu aplicación Capacitor
 
-2. Configurado su ID de aplicación y canal de actualización en `capacitor.config.ts`
+2. Configurado tu ID de aplicación y canal de actualización en `capacitor.config.ts`
 
-3. Añadido en su código el método `CapacitorUpdater.notifyAppReady()`
+3. Añadido en tu código el método `CapacitorUpdater.notifyAppReady()`
 
 </Steps>
 
-Si aún no ha completado estos pasos, por favor regrese y complete primero el inicio rápido
+Si aún no has completado estos pasos, por favor regresa y completa primero el inicio rápido.
 
-<LinkCard href="/docs/getting-started/add-an-app/" title="Añadir una aplicación" description="Añada una aplicación a su cuenta Capgo e instale el plugin en su aplicación" />
+<LinkCard href="/docs/getting-started/add-an-app/" title="Añadir una aplicación" description="Añade una aplicación a tu cuenta Capgo e instala el plugin en tu aplicación" />
 
-## Subiendo un Paquete
+## Subir un Bundle
 
-Con el SDK de Capgo instalado y configurado, está listo para subir su primer paquete de actualización en vivo:
+Con el SDK de Capgo instalado y configurado, estás listo para subir tu primer bundle de actualización en vivo:
 
-1. Compile sus activos web:
+1. Compila tus activos web:
    ```shell
    npm run build
    ```
 
-2. Suba el paquete a Capgo:
+2. Sube el bundle a Capgo:
     <Tabs>
       <TabItem label="Consola">
         ```shell
@@ -43,7 +43,7 @@ Con el SDK de Capgo instalado y configurado, está listo para subir su primer pa
       </TabItem>
       <TabItem label="Github Actions">
       ```yml
-      // github/workflows/build_and_deploy.yml
+      // .github/workflows/build_and_deploy.yml
     name: Build source code and send to Capgo
 
     concurrency:
@@ -69,14 +69,14 @@ Con el SDK de Capgo instalado y configurado, está listo para subir su primer pa
           - name: Build
             run: npm run build
           - name: Deploy to Capgo
-            run: bunx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
+            run: npx @capgo/cli@latest bundle upload -a ${{ secrets.CAPGO_TOKEN }} --channel ${{ env.CHANNEL }}
             env:
               CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
       ```
       </TabItem>
       <TabItem label="Gitlab">
       ```yml
-      // gitlab-ci.yml
+      // .gitlab-ci.yml
       stages:
         - build
 
@@ -88,7 +88,7 @@ Con el SDK de Capgo instalado y configurado, está listo para subir su primer pa
               files:
                 - package-lock.json
             paths:
-              - node_modules/
+              - .node_modules/
         script:
           - npm install
           - npm run build
@@ -102,50 +102,50 @@ Con el SDK de Capgo instalado y configurado, está listo para subir su primer pa
       ```
       </TabItem>
     </Tabs>
-   Esto subirá una nueva versión del paquete al canal especificado en el comando
+   Esto subirá una nueva versión de bundle al canal especificado en el comando.
 
-### Solución de problemas de carga
+### Solución de Problemas de Subida
 
-Si su carga falla, verifique:
-- Su ID de aplicación en `capacitor.config.ts` coincide con su aplicación en el panel de Capgo
-- Está ejecutando el comando de carga desde la raíz de su proyecto Capacitor
-- Sus activos web están compilados y actualizados
+Si tu subida falla, verifica dos veces:
+- Tu ID de aplicación en `capacitor.config.ts` coincide con tu aplicación en el panel de Capgo
+- Estás ejecutando el comando de subida desde la raíz de tu proyecto Capacitor
+- Tus activos web están compilados y actualizados
 
-Si aún tiene problemas, vaya a la sección de [Solución de problemas](/docs/getting-started/troubleshooting/)
+Si aún tienes problemas, ve a la sección de [Solución de Problemas](/docs/getting-started/troubleshooting/).
 
-## Recibiendo una Actualización en un Dispositivo
+## Recibir una Actualización en un Dispositivo
 
-Una vez que su paquete esté subido, puede probar la actualización en vivo en un dispositivo:
+Una vez que tu bundle está subido, puedes probar la actualización en vivo en un dispositivo:
 
-1. Sincronice su aplicación con el dispositivo:
+1. Sincroniza tu aplicación con el dispositivo:
    ```shell
    npx cap sync ios
    ```
 
-2. Abra otra terminal y ejecute el siguiente comando para verificar el estado de la actualización:
+2. Abre otra terminal y ejecuta el siguiente comando para verificar el estado de la actualización:
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-3. Ejecute su aplicación localmente:
+3. Ejecuta tu aplicación localmente:
    ```shell
    npx cap run ios
    ```
-   O abra el proyecto iOS/Android en Xcode/Android Studio y realice una ejecución nativa
+   O abre el proyecto iOS/Android en Xcode/Android Studio y haz una ejecución nativa.
 
-4. Mantenga la aplicación abierta durante unos 30 segundos para permitir que la actualización se descargue en segundo plano
+4. Mantén la aplicación abierta durante aproximadamente 30 segundos para permitir que la actualización se descargue en segundo plano.
 
-5. Los registros tardarán unos segundos en actualizarse y mostrar el estado de la actualización
+5. Los logs tardarán unos segundos en actualizarse y mostrar el estado de la actualización.
 
-6. Cierre y vuelva a abrir la aplicación. ¡Debería ver su actualización en vivo aplicada!
+6. Cierra y vuelve a abrir la aplicación. ¡Deberías ver tu actualización en vivo aplicada!
 
-Consulte el [Inicio Rápido de Capgo](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) para más detalles sobre cómo probar actualizaciones en vivo
+Consulta el [Inicio Rápido de Capgo](/docs/getting-started/quickstart#receiving-a-live-update-on-a-device) para más detalles sobre cómo probar actualizaciones en vivo.
 
-## Siguientes Pasos
+## Próximos Pasos
 
-¡Felicitaciones por implementar su primera actualización en vivo con Capgo! 🎉
+¡Felicidades por implementar tu primera actualización en vivo con Capgo! 🎉
 
-Para aprender más, revise el resto de la [documentación de Actualizaciones en Vivo de Capgo](/docs/live-updates). Algunos temas clave para revisar a continuación:
-- [Direccionamiento de Actualizaciones con Canales](/docs/live-updates/channels)
-- [Personalización del Comportamiento de Actualización](/docs/live-updates/update-behavior)
+Para aprender más, revisa el resto de la [documentación de Actualizaciones en Vivo de Capgo](/docs/live-updates). Algunos temas clave para revisar a continuación:
+- [Dirigir Actualizaciones con Canales](/docs/live-updates/channels)
+- [Personalizar Comportamiento de Actualización](/docs/live-updates/update-behavior)
 - [Reversiones de Actualizaciones en Vivo](/docs/live-updates/rollbacks)

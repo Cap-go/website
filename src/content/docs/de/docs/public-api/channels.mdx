@@ -1,48 +1,45 @@
 ---
-title: Channels
-description: >-
-  Guide to managing app update channels in Capgo, covering version control,
-  platform targeting, and update policies.
+title: "Kanäle"
+description: "Leitfaden zur Verwaltung von App-Update-Kanälen in Capgo, einschließlich Versionskontrolle, Plattform-Targeting und Update-Richtlinien."
 sidebar:
   order: 6
-locale: de
 ---
 
-Channels are the core mechanism for managing app updates in Capgo. They allow you to control how and when your users receive updates, enabling features like A/B testing, staged rollouts, and platform-specific updates.
+Kanäle sind der zentrale Mechanismus zur Verwaltung von App-Updates in Capgo. Sie ermöglichen es Ihnen zu kontrollieren, wie und wann Ihre Benutzer Updates erhalten, und ermöglichen Funktionen wie A/B-Tests, gestaffelte Rollouts und plattformspezifische Updates.
 
-## Understanding Channels
+## Kanäle verstehen
 
-A channel represents a distribution track for your app updates. Each channel can be configured with specific rules and constraints:
+Ein Kanal stellt einen Verteilungsweg für Ihre App-Updates dar. Jeder Kanal kann mit spezifischen Regeln und Einschränkungen konfiguriert werden:
 
-- **Version Control**: Specify which version users receive
-- **Platform Targeting**: Target specific platforms (iOS/Android)
-- **Update Policies**: Control how updates are delivered
-- **Device Restrictions**: Manage which devices can access updates
+- **Versionskontrolle**: Geben Sie an, welche Version Benutzer erhalten
+- **Plattform-Targeting**: Zielen Sie auf bestimmte Plattformen ab (iOS/Android)
+- **Update-Richtlinien**: Kontrollieren Sie, wie Updates bereitgestellt werden
+- **Gerätebeschränkungen**: Verwalten Sie, welche Geräte auf Updates zugreifen können
 
-## Channel Configuration Options
+## Kanal-Konfigurationsoptionen
 
-- **public**: Set as default channel for new devices
-- **disableAutoUpdateUnderNative**: Prevent updates when the device's native app version is newer than the update version available in the channel (e.g., device is on version 1.2.3, but channel has 1.2.2)
-- **disableAutoUpdate**: Control update behavior ("major", "minor", "version_number", "none")
-- **ios/android**: Enable/disable for specific platforms
-- **allow_device_self_set**: Let devices choose their channel
-- **allow_emulator**: Allow updates on emulator devices
-- **allow_dev**: Allow updates on development builds
+- **public**: Als Standardkanal für neue Geräte festlegen
+- **disableAutoUpdateUnderNative**: Verhindert Updates, wenn die native App-Version des Geräts neuer ist als die im Kanal verfügbare Update-Version (z.B. Gerät ist auf Version 1.2.3, aber Kanal hat 1.2.2)
+- **disableAutoUpdate**: Update-Verhalten steuern ("major", "minor", "version_number", "none")
+- **ios/android**: Für bestimmte Plattformen aktivieren/deaktivieren
+- **allow_device_self_set**: Geräten erlauben, ihren Kanal selbst zu wählen
+- **allow_emulator**: Updates auf Emulator-Geräten zulassen
+- **allow_dev**: Updates auf Entwicklungs-Builds zulassen
 
 ## Best Practices
 
-1. **Testing Channel**: Maintain a testing channel for internal validation
-2. **Staged Rollout**: Use multiple channels for gradual update deployment
-3. **Platform Separation**: Create separate channels for iOS and Android when needed
-4. **Version Control**: Use semantic versioning for clear update paths
+1. **Test-Kanal**: Pflegen Sie einen Test-Kanal für interne Validierung
+2. **Gestaffelter Rollout**: Verwenden Sie mehrere Kanäle für schrittweise Update-Bereitstellung
+3. **Plattform-Trennung**: Erstellen Sie bei Bedarf separate Kanäle für iOS und Android
+4. **Versionskontrolle**: Verwenden Sie semantische Versionierung für klare Update-Pfade
 
-## Endpoints
+## Endpunkte
 
 ### POST
 
 `https://api.capgo.app/channel/`
 
-Create or update a channel configuration.
+Erstellen oder aktualisieren Sie eine Kanal-Konfiguration.
 
 #### Request Body
 
@@ -63,7 +60,7 @@ interface ChannelSet {
 }
 ```
 
-#### Example Request
+#### Beispielanfrage
 
 ```bash
 curl -X POST \
@@ -82,7 +79,7 @@ curl -X POST \
   https://api.capgo.app/channel/
 ```
 
-#### Success Response
+#### Erfolgsantwort
 
 ```json
 {
@@ -94,30 +91,30 @@ curl -X POST \
 
 `https://api.capgo.app/channel/`
 
-Retrieve channel information. Returns 50 channels per page.
+Abrufen von Kanal-Informationen. Gibt 50 Kanäle pro Seite zurück.
 
-#### Query Parameters
-- `app_id`: Required. The ID of your app
-- `page`: Optional. Page number for pagination
-- `channel`: Optional. Specific channel name to retrieve
+#### Query-Parameter
+- `app_id`: Erforderlich. Die ID Ihrer App
+- `page`: Optional. Seitennummer für Paginierung
+- `channel`: Optional. Spezifischer Kanalname zum Abrufen
 
-#### Example Requests
+#### Beispielanfragen
 
 ```bash
-# Get all channels
+# Alle Kanäle abrufen
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123"
 
-# Get specific channel
+# Bestimmten Kanal abrufen
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123&channel=beta"
 
-# Get next page
+# Nächste Seite abrufen
 curl -H "authorization: your-api-key" \
   "https://api.capgo.app/channel/?app_id=app_123&page=1"
 ```
 
-#### Response Type
+#### Antworttyp
 
 ```typescript
 interface Channel {
@@ -139,7 +136,7 @@ interface Channel {
 }
 ```
 
-#### Example Response
+#### Beispielantwort
 
 ```json
 {
@@ -169,9 +166,9 @@ interface Channel {
 
 `https://api.capgo.app/channel/`
 
-Delete a channel. Note that this will affect all devices using this channel.
+Löschen Sie einen Kanal. Beachten Sie, dass dies alle Geräte betrifft, die diesen Kanal verwenden.
 
-#### Query Parameters
+#### Query-Parameter
 
 ```typescript
 interface Channel {
@@ -180,7 +177,7 @@ interface Channel {
 }
 ```
 
-#### Example Request
+#### Beispielanfrage
 
 ```bash
 curl -X DELETE \
@@ -193,7 +190,7 @@ curl -X DELETE \
   https://api.capgo.app/channel/
 ```
 
-#### Success Response
+#### Erfolgsantwort
 
 ```json
 {
@@ -201,39 +198,39 @@ curl -X DELETE \
 }
 ```
 
-## Error Handling
+## Fehlerbehandlung
 
-Common error scenarios and their responses:
+Häufige Fehlerszenarien und ihre Antworten:
 
 ```json
-// Channel not found
+// Kanal nicht gefunden
 {
   "error": "Channel not found",
   "status": "KO"
 }
 
-// Invalid version format
+// Ungültiges Versionsformat
 {
   "error": "Invalid version format. Use semantic versioning",
   "status": "KO"
 }
 
-// Invalid update policy
+// Ungültige Update-Richtlinie
 {
   "error": "Invalid disableAutoUpdate value",
   "status": "KO"
 }
 
-// Permission denied
+// Berechtigung verweigert
 {
   "error": "Insufficient permissions to manage channels",
   "status": "KO"
 }
 ```
 
-## Common Use Cases
+## Häufige Anwendungsfälle
 
-1. **Beta Testing**
+1. **Beta-Tests**
 ```typescript
 {
   "app_id": "app_123",
@@ -245,7 +242,7 @@ Common error scenarios and their responses:
 }
 ```
 
-2. **Production Rollout**
+2. **Produktions-Rollout**
 ```typescript
 {
   "app_id": "app_123",
@@ -256,7 +253,7 @@ Common error scenarios and their responses:
 }
 ```
 
-3. **Platform-Specific Updates**
+3. **Plattformspezifische Updates**
 ```typescript
 {
   "app_id": "app_123",
@@ -265,4 +262,4 @@ Common error scenarios and their responses:
   "ios": true,
   "android": false
 }
-``` 
+```

@@ -1,5 +1,6 @@
 ---
 title: Visión General
+description: "Descubre cómo las Actualizaciones en Vivo de Capgo permiten actualizaciones fluidas de bundles JavaScript, permitiéndote enviar cambios directamente a los usuarios sin demoras de la tienda de aplicaciones."
 sidebar:
   order: 1
 prev: false
@@ -9,38 +10,46 @@ locale: es
 
 import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
-Utiliza la función de Actualizaciones en Vivo de Capgo para actualizar los paquetes JavaScript de tu aplicación de forma remota y en tiempo real. Envía actualizaciones JS directamente a tus usuarios sin pasar por el proceso de revisión de la tienda de aplicaciones para corregir errores y lanzar nuevas funciones instantáneamente.
+Usa la función de Actualizaciones en Vivo de Capgo para actualizar los bundles JavaScript de tu aplicación de forma remota y en tiempo real. Envía actualizaciones JS directamente a tus usuarios sin pasar por el proceso de revisión de la tienda de aplicaciones para corregir errores al instante y lanzar nuevas funciones.
 
 <Aside>
 
-Las Actualizaciones en Vivo están limitadas a cambios en el paquete JavaScript. Si necesitas actualizar código nativo, como agregar o eliminar un plugin o cambiar la configuración del proyecto nativo, necesitarás enviar una nueva compilación binaria nativa a las tiendas de aplicaciones.
+Las Actualizaciones en Vivo están limitadas a cambios en el bundle JavaScript. Si necesitas actualizar código nativo, como agregar o eliminar un plugin o cambiar la configuración del proyecto nativo, necesitarás enviar una nueva compilación binaria nativa a las tiendas de aplicaciones.
 
 </Aside>
 
-## Cómo funcionan las Actualizaciones en Vivo
+## Cómo Funcionan las Actualizaciones en Vivo
 
-El sistema de Actualización en Vivo de Capgo tiene dos componentes clave:
+El sistema de Actualizaciones en Vivo de Capgo tiene dos componentes clave:
 
 1. El SDK de Capgo, que instalas en tu aplicación. El SDK verifica las actualizaciones disponibles y las descarga en segundo plano.
 
 2. Canales, que te permiten dirigir actualizaciones a grupos específicos de usuarios. Puedes usar canales para gestionar diferentes pistas de lanzamiento, como `Production`, `Staging` y `Dev`.
 
-Cuando subes un nuevo paquete JS a Capgo y lo asignas a un canal, el SDK de Capgo en las aplicaciones configuradas para ese canal detectará la actualización y la descargará. La próxima vez que la aplicación se reinicie, se cargará el nuevo paquete.
+Cuando subes un nuevo bundle JS a Capgo y lo asignas a un canal, el SDK de Capgo en aplicaciones configuradas para ese canal detectará la actualización y la descargará. La próxima vez que la aplicación se reinicie, se cargará el nuevo bundle.
 
-## Primeros Pasos
+## Por Qué Importan los Registros de Capgo (vista de marketing)
 
-Para comenzar a usar las Actualizaciones en Vivo, sigue estos pasos:
+- **Radiografía instantánea de cada despliegue**: Las líneas de tiempo por dispositivo muestran verificaciones, descargas, instalaciones, bloqueos de políticas y reversiones, para que sepas exactamente qué sucedió—sin conjeturas ni debates de "funciona en mi teléfono".
+- **Respuesta más rápida a incidentes**: Los códigos tipo alerta (por ejemplo, límites de tasa, fallas de checksum, pérdidas de notifyAppReady) aparecen antes de que los usuarios comiencen a inundar el soporte, permitiéndote enviar una corrección o reversión en minutos.
+- **Prueba de política de canal**: Los registros verifican que las barreras (bloquear mayores, deshabilitar emuladores/compilaciones de desarrollo, límites de plataforma) estén protegiendo activamente la producción.
+- **Protección de ingresos y reputación**: Ve cuándo las actualizaciones se detienen en redes deficientes o alcanzan límites del plan, para que puedas intervenir antes de que caigan conversiones, sesiones o reseñas.
+- **Fuente única de verdad**: Producto, QA y Soporte comparten la misma transmisión de registros en la nube—sin rebuscar en Xcode/Android Studio o enviar DM a ingenieros para registros nativos.
+
+## Comenzar
+
+Para empezar a usar Actualizaciones en Vivo, sigue estos pasos:
 
 <Steps>
 
-1. Completa el [Inicio Rápido de Capgo](/docs/getting-started/quickstart) para configurar tu aplicación en Capgo e instalar el SDK de Capgo
+1. Completa el [Inicio Rápido de Capgo](/docs/getting-started/quickstart) para configurar tu aplicación en Capgo e instalar el SDK de Capgo.
 
-2. En el código de tu aplicación, llama a `CapacitorUpdater.notifyAppReady()` después de que tu aplicación haya terminado de inicializarse. Esto le indica al SDK de Capgo que tu aplicación está lista para recibir actualizaciones
+2. En el código de tu aplicación, llama a `CapacitorUpdater.notifyAppReady()` después de que tu aplicación haya terminado de inicializarse. Esto le dice al SDK de Capgo que tu aplicación está lista para recibir actualizaciones.
 
-3. Construye tu paquete JS y súbelo a Capgo:
+3. Compila tu bundle JS y súbelo a Capgo:
    ```shell
    npm run build
-   npx @capgo/cli@latest bundle upload --channel=production 
+   npx @capgo/cli@latest bundle upload --channel=production
    ```
 
 4. Abre tu aplicación y espera a que se descargue la actualización. Puedes verificar el estado con:
@@ -48,35 +57,36 @@ Para comenzar a usar las Actualizaciones en Vivo, sigue estos pasos:
    npx @capgo/cli@latest app debug
    ```
 
-5. Una vez que se descargue la actualización, cierra y vuelve a abrir tu aplicación para cargar el nuevo paquete
+5. Una vez que se descarga la actualización, cierra y vuelve a abrir tu aplicación para cargar el nuevo bundle.
 
 </Steps>
 
-Consulta la guía [Implementando Actualizaciones en Vivo](/docs/getting-started/deploy) para más detalles
+Consulta la guía de [Implementación de Actualizaciones en Vivo](/docs/getting-started/deploy) para más detalles.
 
-## Siguientes Pasos
+
+## Próximos Pasos
 
 <CardGrid stagger>
   <a href="/docs/live-updates/channels/">
     <Card title="Canales" icon="bars">
-      Aprende cómo usar canales para gestionar diferentes pistas de lanzamiento y dirigir actualizaciones a usuarios específicos
+      Aprende cómo usar canales para gestionar diferentes pistas de lanzamiento y dirigir actualizaciones a usuarios específicos.
     </Card>
   </a>
 
   <a href="/docs/live-updates/rollbacks/">
     <Card title="Reversiones" icon="left-arrow">
-      Descubre cómo revertir a una versión anterior del paquete JS si una actualización causa problemas
+      Descubre cómo revertir a una versión anterior del bundle JS si una actualización causa problemas.
     </Card>
   </a>
 
   <a href="/docs/live-updates/update-behavior/">
     <Card title="Comportamiento de Actualización" icon="setting">
-      Personaliza cómo y cuándo se descargan y aplican las actualizaciones en tu aplicación
+      Personaliza cómo y cuándo se descargan y aplican las actualizaciones en tu aplicación.
     </Card>
   </a>
   <a href="/docs/live-updates/differentials/">
     <Card title="Actualizaciones Rápidas" icon="starlight">
-      Aprende cómo usar actualizaciones rápidas para acelerar el proceso de actualización
+      Aprende cómo usar actualizaciones rápidas para acelerar el proceso de actualización.
     </Card>
   </a>
 </CardGrid>

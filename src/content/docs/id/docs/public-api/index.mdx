@@ -1,45 +1,42 @@
 ---
-title: API Overview
-description: >-
-  Explore Capgo's public API for managing resources such as organizations,
-  devices, channels, and bundles using RESTful HTTP methods and authentication.
+title: "Ikhtisar API"
+description: "Jelajahi API publik Capgo untuk mengelola sumber daya seperti organisasi, perangkat, saluran, dan bundle menggunakan metode HTTP RESTful dan autentikasi."
 sidebar:
   order: 1
-locale: id
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
 
-This is the documentation of the public API of Capgo cloud. The API allows you to programmatically manage your Capgo resources, including organizations, devices, channels, and bundles. It's designed to be RESTful and uses standard HTTP methods.
+Ini adalah dokumentasi API publik Capgo cloud. API memungkinkan Anda untuk mengelola sumber daya Capgo secara programatis, termasuk organisasi, perangkat, saluran, dan bundle. Ini dirancang untuk menjadi RESTful dan menggunakan metode HTTP standar.
 
-## Authentication
+## Autentikasi
 
-All API endpoints require authentication. To authenticate your requests, add your API key in the `authorization` header.
+Semua endpoint API memerlukan autentikasi. Untuk mengautentikasi permintaan Anda, tambahkan kunci API Anda di header `authorization`.
 
-Example:
+Contoh:
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 ```
 
 <LinkCard
-	title="Get API key"
-	description="Generate your API key in the Capgo dashboard"
+	title="Dapatkan kunci API"
+	description="Hasilkan kunci API Anda di dasbor Capgo"
 	href="https://console.capgo.app/dashboard/apikeys/"
 />
 
-## Rate Limiting
+## Pembatasan Kecepatan
 
-The API implements rate limiting to ensure fair usage. Current limits are:
-- 100 requests per minute for standard accounts
-- 1000 requests per minute for enterprise accounts
+API menerapkan pembatasan kecepatan untuk memastikan penggunaan yang adil. Batas saat ini adalah:
+- 100 permintaan per menit untuk akun standar
+- 1000 permintaan per menit untuk akun perusahaan
 
-If you exceed these limits, you'll receive a 429 (Too Many Requests) response.
+Jika Anda melebihi batas ini, Anda akan menerima respons 429 (Too Many Requests).
 
-## Response Format
+## Format Respons
 
-All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include an `error` field with a description of what went wrong.
+Semua respons dalam format JSON. Respons yang berhasil biasanya mencakup objek `data` atau bidang `status`. Respons kesalahan mencakup bidang `error` dengan deskripsi tentang apa yang salah.
 
-Example success response:
+Contoh respons berhasil:
 ```json
 {
   "status": "ok",
@@ -47,7 +44,7 @@ Example success response:
 }
 ```
 
-Example error response:
+Contoh respons kesalahan:
 ```json
 {
   "error": "Invalid API key",
@@ -55,53 +52,53 @@ Example error response:
 }
 ```
 
-## Available Endpoints
+## Endpoint yang Tersedia
 
 <LinkCard
-	title="Organizations"
-	description="Create and manage organizations, update settings, and handle organization-level configurations"
+	title="Organisasi"
+	description="Buat dan kelola organisasi, perbarui pengaturan, dan tangani konfigurasi tingkat organisasi"
 	href="/docs/public-api/organizations/"
 />
 
 <LinkCard
-	title="API Keys"
-	description="Generate, list, and revoke API keys for secure access to the Capgo API"
+	title="Kunci API"
+	description="Hasilkan, daftarkan, dan cabut kunci API untuk akses aman ke API Capgo"
 	href="/docs/public-api/api-keys/"
 />
 
 <LinkCard
-	title="Members"
-	description="Manage organization members, roles, and permissions"
+	title="Anggota"
+	description="Kelola anggota organisasi, peran, dan izin"
 	href="/docs/public-api/members/"
 />
 
 <LinkCard
-	title="Statistics"
-	description="Access detailed analytics about app usage, storage, and bandwidth consumption"
+	title="Statistik"
+	description="Akses analitik terperinci tentang penggunaan aplikasi, penyimpanan, dan konsumsi bandwidth"
 	href="/docs/public-api/statistics/"
 />
 
 <LinkCard
-	title="Channels"
-	description="Control app update channels, versions, and update policies"
+	title="Saluran"
+	description="Kontrol saluran pembaruan aplikasi, versi, dan kebijakan pembaruan"
 	href="/docs/public-api/channels/"
 />
 
 <LinkCard
-	title="Devices"
-	description="Track and manage devices running your app, including version and channel assignments"
+	title="Perangkat"
+	description="Lacak dan kelola perangkat yang menjalankan aplikasi Anda, termasuk penugasan versi dan saluran"
 	href="/docs/public-api/devices/"
 />
 
 <LinkCard
-	title="Bundles"
-	description="Handle app bundles, including uploading, listing, and managing versions"
+	title="Bundle"
+	description="Tangani bundle aplikasi, termasuk mengunggah, mendaftarkan, dan mengelola versi"
 	href="/docs/public-api/bundles/"
 />
 
-## Best Practices
+## Praktik Terbaik
 
-1. **Error Handling**: Always check for error responses and handle them appropriately
-2. **Rate Limiting**: Implement exponential backoff when hitting rate limits
-3. **Caching**: Cache responses when appropriate to reduce API calls
-4. **Versioning**: Keep track of API changes through our changelog 
+1. **Penanganan Kesalahan**: Selalu periksa respons kesalahan dan tangani dengan tepat
+2. **Pembatasan Kecepatan**: Terapkan backoff eksponensial saat mencapai batas kecepatan
+3. **Caching**: Cache respons bila sesuai untuk mengurangi panggilan API
+4. **Versi**: Lacak perubahan API melalui changelog kami 

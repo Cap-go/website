@@ -1,22 +1,20 @@
 ---
 title: '@capgo/capacitor-updater'
 description: >-
-  Capacitor plugin that powers Capgo's live update functionality, enabling
-  seamless over-the-air updates for your apps.
+  Capgo의 라이브 업데이트 기능을 구동하는 Capacitor 플러그인으로, 앱에 대한 원활한 무선 업데이트를 가능하게 합니다.
 tableOfContents: false
 next: false
 prev: false
 sidebar:
   order: 1
-  label: Introduction
+  label: 소개
 hero:
   tagline: >-
-    The core technology that enables live updates in Capacitor apps, allowing
-    you to push updates without app store approvals.
+    Capacitor 앱에서 라이브 업데이트를 가능하게 하는 핵심 기술로, 앱 스토어 승인 없이 업데이트를 푸시할 수 있습니다.
   image:
     file: ~public/icons/plugins/updater.svg
   actions:
-    - text: Get started
+    - text: 시작하기
       link: /docs/getting-started/quickstart/
       icon: right-arrow
       variant: primary
@@ -30,51 +28,51 @@ locale: ko
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Over-the-air updates" icon="rocket">
-    Push updates instantly without app store reviews 🚀
+  <Card title="무선 업데이트" icon="rocket">
+    앱 스토어 검토 없이 즉시 업데이트 푸시 🚀
   </Card>
-  <Card title="Advanced API" icon="setting">
-    Full control over update flow with comprehensive API methods 🛠️
+  <Card title="고급 API" icon="setting">
+    포괄적인 API 메서드로 업데이트 흐름 완전 제어 🛠️
   </Card>
-  <Card title="Self-hosting ready" icon="download">
-    Run your own update server for complete control 🏠
+  <Card title="자체 호스팅 지원" icon="download">
+    완전한 제어를 위해 자체 업데이트 서버 실행 🏠
   </Card>
-  <Card title="Comprehensive Documentation" icon="open-book">
-    Check the [Plugin API](/docs/plugins/updater/api/) to master the plugin in just a few minutes.
+  <Card title="포괄적인 문서" icon="open-book">
+    [플러그인 API](/docs/plugins/updater/api/)를 확인하여 몇 분 만에 플러그인을 마스터하세요.
   </Card>
 </CardGrid>
 
-## Quick Links
+## 빠른 링크
 
 <LinkCard
-  title="Live Updates Documentation"
-  description="Learn about channels, update behavior, rollbacks, and more in the main Live Updates section."
+  title="라이브 업데이트 문서"
+  description="메인 라이브 업데이트 섹션에서 채널, 업데이트 동작, 롤백 등에 대해 알아보세요."
   href="/docs/live-updates/"
 />
 
 <LinkCard
-  title="Getting Started Guide"
-  description="Follow our quickstart guide to add live updates to your app."
+  title="시작 가이드"
+  description="빠른 시작 가이드를 따라 앱에 라이브 업데이트를 추가하세요."
   href="/docs/getting-started/quickstart/"
 />
 
-## Plugin Documentation
+## 플러그인 문서
 
-This technical reference covers:
+이 기술 참조는 다음을 다룹니다:
 
-- **[Plugin API](/docs/plugins/updater/api/)** - All available methods and their usage
-- **[Plugin Settings](/docs/plugins/updater/settings/)** - Configuration options for capacitor.config
-- **[Known Issues](/docs/plugins/updater/known-issues/)** - Common problems and solutions
-- **[Debugging](/docs/plugins/updater/debugging/)** - How to troubleshoot update issues
-- **[Events](/docs/plugins/updater/events/)** - Available update events
-- **[Local Development](/docs/plugins/updater/local-dev/getting-started/)** - Test updates locally
-- **[Self-Hosted Mode](/docs/plugins/updater/self-hosted/getting-started/)** - Run your own update server
+- **[플러그인 API](/docs/plugins/updater/api/)** - 사용 가능한 모든 메서드 및 사용법
+- **[플러그인 설정](/docs/plugins/updater/settings/)** - capacitor.config를 위한 구성 옵션
+- **[알려진 문제](/docs/plugins/updater/known-issues/)** - 일반적인 문제 및 해결책
+- **[디버깅](/docs/plugins/updater/debugging/)** - 업데이트 문제 해결 방법
+- **[이벤트](/docs/plugins/updater/events/)** - 사용 가능한 업데이트 이벤트
+- **[로컬 개발](/docs/plugins/updater/local-dev/getting-started/)** - 로컬에서 업데이트 테스트
+- **[자체 호스팅 모드](/docs/plugins/updater/self-hosted/getting-started/)** - 자체 업데이트 서버 실행
 
-## Installation
+## 설치
 
 ```bash
 npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-For setup and configuration, see the [Getting Started guide](/docs/getting-started/quickstart/).
+설정 및 구성은 [시작 가이드](/docs/getting-started/quickstart/)를 참조하세요.

@@ -1,8 +1,6 @@
 ---
-title: Settings
-description: >-
-  All available settings for Capacitor Updater, all the configuration you can
-  set in you capacitor config and what they used for
+title: "设置"
+description: "Capacitor Updater 的所有可用设置,您可以在 capacitor 配置中设置的所有配置及其用途"
 sidebar:
   order: 8
 locale: zh
@@ -10,20 +8,20 @@ locale: zh
 
 import {  Aside } from '@astrojs/starlight/components';
 
-To have more fine-grained control over the update system, you can configure it with these settings:
+要对更新系统进行更精细的控制,您可以使用以下设置进行配置:
 
 <Aside type="tip">
- Any changes to these settings in capacitor.config file, require syncing the platform and releasing to the store for production apps to receive them.
+ 对 capacitor.config 文件中这些设置的任何更改都需要同步平台并发布到商店,生产应用才能接收这些更改。
 </Aside>
 
 
-## `appReadyTimeout` 
+## `appReadyTimeout`
 
-> Configure the number of milliseconds the native plugin should wait before considering an update 'failed'.
+> 配置原生插件在将更新视为"失败"之前应等待的毫秒数。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `10000` (10 seconds)
+默认值: `10000` (10 秒)
 
 ```json
 // capacitor.config.json
@@ -36,13 +34,13 @@ Default: `10000` (10 seconds)
 }
 ```
 
-## `responseTimeout` 
+## `responseTimeout`
 
-> Configure the number of milliseconds the native plugin should wait before considering API timeout.
+> 配置原生插件在将 API 视为超时之前应等待的毫秒数。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `20` (20 seconds)
+默认值: `20` (20 秒)
 
 ```json
 // capacitor.config.json
@@ -55,13 +53,13 @@ Default: `20` (20 seconds)
 }
 ```
 
-## `autoDeleteFailed` 
+## `autoDeleteFailed`
 
-> Configure whether the plugin should automatically delete failed bundles.
+> 配置插件是否应自动删除失败的 bundle。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `true`
+默认值: `true`
 
 ```json
 // capacitor.config.json
@@ -74,13 +72,13 @@ Default: `true`
 }
 ```
 
-## `autoDeletePrevious` 
+## `autoDeletePrevious`
 
-> Configure whether the plugin should automatically delete previous bundles after a successful update.
+> 配置插件是否应在成功更新后自动删除之前的 bundle。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `true`
+默认值: `true`
 
 ```json
 // capacitor.config.json
@@ -93,13 +91,13 @@ Default: `true`
 }
 ```
 
-## `autoUpdate` 
+## `autoUpdate`
 
-> Configure whether the plugin should use Auto Update via an update server.
+> 配置插件是否应通过更新服务器使用自动更新。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `true`
+默认值: `true`
 
 ```json
 // capacitor.config.json
@@ -112,13 +110,13 @@ Default: `true`
 }
 ```
 
-## `updateUrl` 
+## `updateUrl`
 
-> Configure the URL / endpoint to which update checks are sent.
+> 配置发送更新检查的 URL / 端点。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `https://plugin.capgo.app/updates`
+默认值: `https://plugin.capgo.app/updates`
 
 ```json
 // capacitor.config.json
@@ -131,13 +129,13 @@ Default: `https://plugin.capgo.app/updates`
 }
 ```
 
-## `statsUrl` 
+## `statsUrl`
 
-> Configure the URL / endpoint to which update statistics are sent.
+> 配置发送更新统计信息的 URL / 端点。
 
-Only available for Android and iOS. Set to "" to disable stats reporting.
+仅适用于 Android 和 iOS。设置为 "" 以禁用统计报告。
 
-Default: `https://plugin.capgo.app/stats`
+默认值: `https://plugin.capgo.app/stats`
 
 ```json
 // capacitor.config.json
@@ -150,13 +148,13 @@ Default: `https://plugin.capgo.app/stats`
 }
 ```
 
-## `publicKey` 
+## `publicKey`
 
-> Configure the public key for end to end live update encryption Version 2.
+> 配置端到端实时更新加密版本 2 的公钥。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -169,22 +167,22 @@ Default: `undefined`
 }
 ```
 
-## `directUpdate` 
+## `directUpdate`
 
-> Configure when the plugin should direct install updates. Only for autoUpdate mode.
-> Works well for apps less than 10MB and with uploads done using --partial flag.
-> Zip or apps more than 10MB will be relatively slow for users to update.
+> 配置插件何时应直接安装更新。仅适用于 autoUpdate 模式。
+> 适用于小于 10MB 的应用以及使用 --partial 标志完成的上传。
+> Zip 或超过 10MB 的应用对用户来说更新会相对较慢。
 
-Options:
-- `false`: Never do direct updates (use default behavior: download at start, set when backgrounded)
-- `'atInstall'`: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false
-- `'onLaunch'`: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false
-- `'always'`: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false
-- `true`: (deprecated) Same as "always" for backward compatibility
+选项:
+- `false`: 永不执行直接更新(使用默认行为:启动时下载,后台时设置)
+- `'atInstall'`: 仅在应用安装、从商店更新时直接更新,否则表现为 directUpdate = false
+- `'onLaunch'`: 仅在应用安装、从商店更新或应用终止后直接更新,否则表现为 directUpdate = false
+- `'always'`: 在所有先前情况下直接更新(应用安装、从商店更新、应用终止或应用恢复后),永不表现为 directUpdate = false
+- `true`: (已弃用)与 "always" 相同,用于向后兼容
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `false`
+默认值: `false`
 
 ```json
 // capacitor.config.json
@@ -198,13 +196,13 @@ Default: `false`
 }
 ```
 
-## `resetWhenUpdate` 
+## `resetWhenUpdate`
 
-> Automatically delete previous downloaded bundles when a newer native app bundle is installed to the device.
+> 当较新的原生应用 bundle 安装到设备时,自动删除之前下载的 bundle。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `true`
+默认值: `true`
 
 ```json
 // capacitor.config.json
@@ -219,12 +217,12 @@ Default: `true`
 
 ## `defaultChannel`
 
-> Set the default channel for the app in the config. Case sensitive.
-> This setting will override the default channel set in the cloud, but will still respect overrides made in the cloud.
+> 在配置中设置应用的默认频道。区分大小写。
+> 此设置将覆盖云中设置的默认频道,但仍会遵守云中所做的覆盖。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -239,11 +237,11 @@ Default: `undefined`
 
 ## `appId`
 
-> Configure the app id for the app in the config.
+> 在配置中配置应用的应用 ID。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -258,12 +256,12 @@ Default: `undefined`
 
 ## `version`
 
-> Configure the current version of the app. This will be used for the first update request.
-> If not set, the plugin will get the version from the native code.
+> 配置应用的当前版本。这将用于第一个更新请求。
+> 如果未设置,插件将从原生代码获取版本。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -278,11 +276,11 @@ Default: `undefined`
 
 ## `channelUrl`
 
-> Configure the URL / endpoint for channel operations.
+> 配置频道操作的 URL / 端点。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `https://plugin.capgo.app/channel_self`
+默认值: `https://plugin.capgo.app/channel_self`
 
 ```json
 // capacitor.config.json
@@ -297,15 +295,15 @@ Default: `https://plugin.capgo.app/channel_self`
 
 ## `autoSplashscreen`
 
-> Automatically handle splashscreen hiding when using directUpdate. When enabled, the plugin will automatically hide the splashscreen after updates are applied or when no update is needed.
-> This removes the need to manually listen for appReady events and call SplashScreen.hide().
-> Only works when directUpdate is set to "atInstall", "always", or true.
-> Requires the @capacitor/splash-screen plugin to be installed and configured with launchAutoHide: false.
-> Requires autoUpdate and directUpdate to be enabled.
+> 使用 directUpdate 时自动处理启动屏隐藏。启用后,插件将在应用更新后或不需要更新时自动隐藏启动屏。
+> 这消除了手动监听 appReady 事件并调用 SplashScreen.hide() 的需要。
+> 仅在 directUpdate 设置为 "atInstall"、"always" 或 true 时有效。
+> 需要安装 @capacitor/splash-screen 插件并配置 launchAutoHide: false。
+> 需要启用 autoUpdate 和 directUpdate。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `false`
+默认值: `false`
 
 ```json
 // capacitor.config.json
@@ -322,12 +320,12 @@ Default: `false`
 
 ## `periodCheckDelay`
 
-> Configure the delay period for period update check. The unit is in seconds.
-> Cannot be less than 600 seconds (10 minutes).
+> 配置定期更新检查的延迟时间。单位为秒。
+> 不能少于 600 秒 (10 分钟)。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `600` (10 minutes)
+默认值: `600` (10 分钟)
 
 ```json
 // capacitor.config.json
@@ -342,11 +340,11 @@ Default: `600` (10 minutes)
 
 ## `allowModifyUrl`
 
-> Allow the plugin to modify the updateUrl, statsUrl and channelUrl dynamically from the JavaScript side.
+> 允许插件从 JavaScript 端动态修改 updateUrl、statsUrl 和 channelUrl。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `false`
+默认值: `false`
 
 ```json
 // capacitor.config.json
@@ -361,15 +359,15 @@ Default: `false`
 
 ## `keepUrlPathAfterReload`
 
-> Configure the plugin to keep the URL path after a reload.
+> 配置插件在重新加载后保留 URL 路径。
 
 <Aside type="caution">
-When a reload is triggered, 'window.history' will be cleared.
+触发重新加载时,'window.history' 将被清除。
 </Aside>
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `false`
+默认值: `false`
 
 ```json
 // capacitor.config.json
@@ -384,11 +382,11 @@ Default: `false`
 
 ## `disableJSLogging`
 
-> Disable the JavaScript logging of the plugin. If true, the plugin will not log to the JavaScript console. Only the native log will be done.
+> 禁用插件的 JavaScript 日志记录。如果为 true,插件将不会记录到 JavaScript 控制台。只会执行原生日志。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `false`
+默认值: `false`
 
 ```json
 // capacitor.config.json
@@ -403,11 +401,11 @@ Default: `false`
 
 ## `shakeMenu`
 
-> Enable shake gesture to show update menu for debugging/testing purposes.
+> 启用摇动手势以显示更新菜单,用于调试/测试目的。
 
-Only available for Android and iOS.
+仅适用于 Android 和 iOS。
 
-Default: `false`
+默认值: `false`
 
 ```json
 // capacitor.config.json
@@ -420,13 +418,13 @@ Default: `false`
 }
 ```
 
-## Development Settings
+## 开发设置
 
 ### `localHost`
 
-> Configure the CLI to use a local server for testing or self-hosted update server.
+> 配置 CLI 使用本地服务器进行测试或自托管更新服务器。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -441,9 +439,9 @@ Default: `undefined`
 
 ### `localWebHost`
 
-> Configure the CLI to use a local server for testing or self-hosted update server.
+> 配置 CLI 使用本地服务器进行测试或自托管更新服务器。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -458,9 +456,9 @@ Default: `undefined`
 
 ### `localSupa`
 
-> Configure the CLI to use a local server for testing or self-hosted update server.
+> 配置 CLI 使用本地服务器进行测试或自托管更新服务器。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -475,9 +473,9 @@ Default: `undefined`
 
 ### `localSupaAnon`
 
-> Configure the CLI to use a local server for testing.
+> 配置 CLI 使用本地服务器进行测试。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -492,9 +490,9 @@ Default: `undefined`
 
 ### `localApi`
 
-> Configure the CLI to use a local api for testing.
+> 配置 CLI 使用本地 API 进行测试。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -509,9 +507,9 @@ Default: `undefined`
 
 ### `localApiFiles`
 
-> Configure the CLI to use a local file api for testing.
+> 配置 CLI 使用本地文件 API 进行测试。
 
-Default: `undefined`
+默认值: `undefined`
 
 ```json
 // capacitor.config.json
@@ -525,5 +523,5 @@ Default: `undefined`
 ```
 
 <Aside type="tip">
-There are additional settings available in the [Capgo web app](https://console.capgo.app/login) that can be configured per channel without requiring a native app release.
+[Capgo Web 应用](https://console.capgo.app/login)中还有其他可用的设置,可以按频道配置,无需发布原生应用。
 </Aside>

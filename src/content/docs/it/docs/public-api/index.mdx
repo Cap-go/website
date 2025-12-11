@@ -1,45 +1,42 @@
 ---
-title: API Overview
-description: >-
-  Explore Capgo's public API for managing resources such as organizations,
-  devices, channels, and bundles using RESTful HTTP methods and authentication.
+title: "Panoramica API"
+description: "Esplora l'API pubblica di Capgo per gestire risorse come organizzazioni, dispositivi, canali e bundle utilizzando metodi HTTP RESTful e autenticazione."
 sidebar:
   order: 1
-locale: it
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
 
-This is the documentation of the public API of Capgo cloud. The API allows you to programmatically manage your Capgo resources, including organizations, devices, channels, and bundles. It's designed to be RESTful and uses standard HTTP methods.
+Questa è la documentazione dell'API pubblica di Capgo cloud. L'API consente di gestire programmaticamente le tue risorse Capgo, incluse organizzazioni, dispositivi, canali e bundle. È progettata per essere RESTful e utilizza metodi HTTP standard.
 
-## Authentication
+## Autenticazione
 
-All API endpoints require authentication. To authenticate your requests, add your API key in the `authorization` header.
+Tutti gli endpoint API richiedono autenticazione. Per autenticare le tue richieste, aggiungi la tua chiave API nell'header `authorization`.
 
-Example:
+Esempio:
 ```bash
 curl -H "authorization: your-api-key" https://api.capgo.app/organization/
 ```
 
 <LinkCard
-	title="Get API key"
-	description="Generate your API key in the Capgo dashboard"
+	title="Ottieni chiave API"
+	description="Genera la tua chiave API nel dashboard di Capgo"
 	href="https://console.capgo.app/dashboard/apikeys/"
 />
 
-## Rate Limiting
+## Limitazione del tasso
 
-The API implements rate limiting to ensure fair usage. Current limits are:
-- 100 requests per minute for standard accounts
-- 1000 requests per minute for enterprise accounts
+L'API implementa la limitazione del tasso per garantire un uso equo. I limiti attuali sono:
+- 100 richieste al minuto per account standard
+- 1000 richieste al minuto per account aziendali
 
-If you exceed these limits, you'll receive a 429 (Too Many Requests) response.
+Se superi questi limiti, riceverai una risposta 429 (Too Many Requests).
 
-## Response Format
+## Formato della risposta
 
-All responses are in JSON format. Successful responses typically include either a `data` object or a `status` field. Error responses include an `error` field with a description of what went wrong.
+Tutte le risposte sono in formato JSON. Le risposte di successo in genere includono un oggetto `data` o un campo `status`. Le risposte di errore includono un campo `error` con una descrizione di cosa è andato storto.
 
-Example success response:
+Esempio di risposta di successo:
 ```json
 {
   "status": "ok",
@@ -47,7 +44,7 @@ Example success response:
 }
 ```
 
-Example error response:
+Esempio di risposta di errore:
 ```json
 {
   "error": "Invalid API key",
@@ -55,53 +52,53 @@ Example error response:
 }
 ```
 
-## Available Endpoints
+## Endpoint disponibili
 
 <LinkCard
-	title="Organizations"
-	description="Create and manage organizations, update settings, and handle organization-level configurations"
+	title="Organizzazioni"
+	description="Crea e gestisci organizzazioni, aggiorna le impostazioni e gestisci le configurazioni a livello di organizzazione"
 	href="/docs/public-api/organizations/"
 />
 
 <LinkCard
-	title="API Keys"
-	description="Generate, list, and revoke API keys for secure access to the Capgo API"
+	title="Chiavi API"
+	description="Genera, elenca e revoca chiavi API per l'accesso sicuro all'API Capgo"
 	href="/docs/public-api/api-keys/"
 />
 
 <LinkCard
-	title="Members"
-	description="Manage organization members, roles, and permissions"
+	title="Membri"
+	description="Gestisci i membri dell'organizzazione, i ruoli e i permessi"
 	href="/docs/public-api/members/"
 />
 
 <LinkCard
-	title="Statistics"
-	description="Access detailed analytics about app usage, storage, and bandwidth consumption"
+	title="Statistiche"
+	description="Accedi ad analisi dettagliate sull'utilizzo dell'app, lo storage e il consumo di larghezza di banda"
 	href="/docs/public-api/statistics/"
 />
 
 <LinkCard
-	title="Channels"
-	description="Control app update channels, versions, and update policies"
+	title="Canali"
+	description="Controlla i canali di aggiornamento dell'app, le versioni e le politiche di aggiornamento"
 	href="/docs/public-api/channels/"
 />
 
 <LinkCard
-	title="Devices"
-	description="Track and manage devices running your app, including version and channel assignments"
+	title="Dispositivi"
+	description="Traccia e gestisci i dispositivi che eseguono la tua app, incluse le assegnazioni di versione e canale"
 	href="/docs/public-api/devices/"
 />
 
 <LinkCard
-	title="Bundles"
-	description="Handle app bundles, including uploading, listing, and managing versions"
+	title="Bundle"
+	description="Gestisci i bundle delle app, incluso il caricamento, l'elenco e la gestione delle versioni"
 	href="/docs/public-api/bundles/"
 />
 
-## Best Practices
+## Best practice
 
-1. **Error Handling**: Always check for error responses and handle them appropriately
-2. **Rate Limiting**: Implement exponential backoff when hitting rate limits
-3. **Caching**: Cache responses when appropriate to reduce API calls
-4. **Versioning**: Keep track of API changes through our changelog 
+1. **Gestione degli errori**: Controlla sempre le risposte di errore e gestiscile in modo appropriato
+2. **Limitazione del tasso**: Implementa il backoff esponenziale quando si raggiungono i limiti di tasso
+3. **Caching**: Memorizza in cache le risposte quando appropriato per ridurre le chiamate API
+4. **Versionamento**: Tieni traccia delle modifiche API tramite il nostro changelog 

@@ -1,41 +1,38 @@
 ---
-title: Devices
-description: >-
-  A comprehensive guide on utilizing the devices page to manage and configure
-  your devices effectively, including filtering options and detailed
-  configuration settings for individual devices.
+title: "设备"
+description: "利用设备页面有效管理和配置设备的综合指南,包括过滤选项和各个设备的详细配置设置"
 sidebar:
   order: 7
 locale: zh
 ---
 
-:::note[Data Retention]
-Device data is retained for **90 days** from the last device activity. Devices that haven't connected to Capgo within this period will be automatically removed from the list. Active devices are continuously tracked as they check for updates.
+:::note[数据保留]
+设备数据从最后一次设备活动起保留 **90 天**。在此期间内未连接到 Capgo 的设备将自动从列表中删除。活动设备在检查更新时会持续被跟踪。
 :::
 
-## Show the list of all devices
-First, let's take a look at the devices page. You can access it by [clicking on your app](/docs/webapp/main-page) and then [clicking on the devices tab](/docs/webapp/main-app-page).
+## 显示所有设备列表
+首先,让我们看一下设备页面。您可以通过[点击您的应用](/docs/webapp/main-page)然后[点击设备标签](/docs/webapp/main-app-page)来访问它。
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="devices list" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="设备列表" /><figcaption></figcaption></figure>
 
-## Show only developer devices
-You might want to show only the overwritten devices (Devices that have a [custom channel](/docs/plugin/api/#setchannel) or a custom version)
-To do that click on `Filters` and then on `Override`. It should look something like this:
+## 仅显示开发人员设备
+您可能想仅显示被覆盖的设备(具有[自定义频道](/docs/plugin/api/#setchannel)或自定义版本的设备)
+要执行此操作,请点击 `过滤器`,然后点击 `覆盖`。应该看起来像这样:
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filter.webp" alt="filter devices" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filter.webp" alt="过滤设备" /><figcaption></figcaption></figure>
 
-## Configuring a device
+## 配置设备
 
-To configure a specific device click on it in the table and then you should see something like this:
+要配置特定设备,请在表格中点击它,然后您应该看到类似这样的内容:
 
-<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="show one device" /><figcaption></figcaption></figure>
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="显示一个设备" /><figcaption></figcaption></figure>
 
-First the `Custom ID`. This is a very useful field that helps you connect the device to an ID you can recognize for your own users. 
+首先是 `自定义 ID`。这是一个非常有用的字段,可帮助您将设备连接到您可以为自己的用户识别的 ID。
 
-Use it to easily identify which device belongs to which user. 
+使用它可以轻松识别哪个设备属于哪个用户。
 
-You can set it from the WebUI or from the device with `CapacitorUpdater.setCustomId({ customId: user });`
+您可以从 WebUI 或使用 `CapacitorUpdater.setCustomId({ customId: user });` 从设备设置它
 
-Next the force version. If this is set then this device will **ALWAYS** receive this version. It takes precedence over the channel.
+接下来是强制版本。如果设置了此项,则此设备将**始终**接收此版本。它优先于频道。
 
-Lastly the custom channel. If this is set then this device will not care about the public (default) channel and just use this one.
+最后是自定义频道。如果设置了此项,则此设备将不关心公共(默认)频道,只使用这个频道。
