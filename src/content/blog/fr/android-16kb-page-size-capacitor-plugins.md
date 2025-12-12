@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-09-12T13:55:00.000Z
-updated_at: 2025-09-13T15:50:36.000Z
+updated_at: 2025-12-12T10:19:39.000Z
 head_image: /android-16kb-page-size-capacitor-plugins.webp
 head_image_alt: Débogage de la taille de page Android 16 KB pour Capacitor
 keywords: Capacitor, taille de page Android 16KB, plugins, dépannage, plantages d'applications, maintenance, fork
