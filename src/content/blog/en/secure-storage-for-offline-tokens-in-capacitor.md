@@ -6,7 +6,7 @@ author: Martin Donadieu
 author_image_url: https://avatars.githubusercontent.com/u/4084527?v=4
 author_url: https://github.com/riderx
 created_at: 2025-04-19T02:09:43.027Z
-updated_at: 2025-12-12T10:43:53.000Z
+updated_at: 2025-12-12T11:31:04.000Z
 head_image: https://assets.seobotai.com/capgo.app/6802fa419291ae98c5002559-1745028797889.jpg
 head_image_alt: Mobile Development
 keywords: offline tokens, secure storage, AES-256 encryption, biometric authentication, token management

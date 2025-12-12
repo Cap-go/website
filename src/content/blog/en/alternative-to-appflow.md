@@ -9,7 +9,7 @@ author: Martin Donadieu
 author_image_url: 'https://avatars.githubusercontent.com/u/4084527?v=4'
 author_url: 'https://x.com/martindonadieu'
 created_at: 2022-03-02T00:00:00.000Z
-updated_at: 2025-12-12T10:43:53.000Z
+updated_at: 2025-12-12T11:31:04.000Z
 head_image: /appflow_alt.webp
 head_image_alt: Appflow alternative illustration
 keywords: Ionic Appflow, mobile app development, live updates, OTA updates, continuous integration, mobile app updates
