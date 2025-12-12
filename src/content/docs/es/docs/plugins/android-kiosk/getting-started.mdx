@@ -1,149 +1,105 @@
 ---
-title: Comenzando
-description: Aprende cómo instalar y usar el plugin Android Kiosk para bloquear tu dispositivo Android en modo quiosco en tu aplicación Capacitor.
+title: Getting Started
+description: Learn how to install and use the Android Kiosk plugin to lock your Android device into kiosk mode in your Capacitor app.
 sidebar:
-  order: 2
-locale: es
----
-
+order: 2
+locale: es---
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
-
 <Steps>
-1. **Instalar el paquete**
-   <PackageManagers pkg="@capgo/capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
-
-2. **Sincronizar con proyectos nativos**
-   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+1. **Install the package**
+<PackageManagers pkg="@capgo/capacitor-android-kiosk" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+2. **Sync with native projects**
+<PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
-
-## Soporte de plataforma
-
-Este plugin es **solo para Android**. Para la funcionalidad de modo quiosco en iOS, por favor usa la función integrada del dispositivo [Acceso Guiado](https://support.apple.com/en-us/HT202612).
-
-## Características
-
-- **Modo quiosco**: Oculta la interfaz de usuario del sistema y entra en modo de pantalla completa inmersivo
-- **Integración de lanzador**: Establece tu aplicación como el lanzador/aplicación de inicio del dispositivo
-- **Control de teclas físicas**: Bloquea o permite botones físicos específicos
-- **Detección de estado**: Verifica si el modo quiosco está activo o si la aplicación está configurada como lanzador
-- **Android 6.0+**: Compatible con Android API 23 hasta Android 15 (API 35)
-
-## Uso básico
-
-### Entrar y salir del modo quiosco
-
+This plugin is **Android-only**. For iOS kiosk mode functionality, please use the device's built-in [Guided Access](https://support.apple.com/en-us/HT202612) feature.
+- **Kiosk Mode**: Hide system UI and enter immersive fullscreen mode
+- **Launcher Integration**: Set your app as the device launcher/home app
+- **Hardware Key Control**: Block or allow specific hardware buttons
+- **Status Detection**: Check if kiosk mode is active or if app is set as launcher
+- **Android 6.0+**: Supports Android API 23 through Android 15 (API 35)
 ```typescript
 import { CapacitorAndroidKiosk } from '@capgo/capacitor-android-kiosk';
-
 // Enter kiosk mode
 await CapacitorAndroidKiosk.enterKioskMode();
-
 // Exit kiosk mode
 await CapacitorAndroidKiosk.exitKioskMode();
-
 // Check if in kiosk mode
 const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
 console.log('Kiosk mode active:', isInKioskMode);
 ```
-
-### Funcionalidad de lanzador
-
-Para la funcionalidad completa del modo quiosco, necesitas establecer tu aplicación como el lanzador del dispositivo:
-
+For full kiosk mode functionality, you need to set your app as the device launcher:
 ```typescript
 // Open home screen settings for user to select your app as launcher
 await CapacitorAndroidKiosk.setAsLauncher();
-
 // Check if app is set as launcher
 const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
 console.log('App is launcher:', isLauncher);
 ```
-
-### Control de teclas físicas
-
-Controla qué botones físicos pueden funcionar en modo quiosco:
-
+Control which hardware buttons are allowed to function in kiosk mode:
 ```typescript
 // Allow only volume keys
 await CapacitorAndroidKiosk.setAllowedKeys({
-  volumeUp: true,
-  volumeDown: true,
-  back: false,
-  home: false,
-  recent: false
+volumeUp: true,
+volumeDown: true,
+back: false,
+home: false,
+recent: false
 });
-
 // Block all keys (default)
 await CapacitorAndroidKiosk.setAllowedKeys({});
 ```
-
-## Ejemplo completo
-
 ```typescript
 async function setupKioskMode() {
-  try {
-    // Check if already set as launcher
-    const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
-
-    if (!isLauncher) {
-      // Prompt user to set as launcher
-      await CapacitorAndroidKiosk.setAsLauncher();
-      alert('Please select this app as your Home app');
-      return;
-    }
-
-    // Configure allowed keys
-    await CapacitorAndroidKiosk.setAllowedKeys({
-      volumeUp: true,
-      volumeDown: true,
-      back: false,
-      home: false,
-      recent: false,
-      power: false
-    });
-
-    // Enter kiosk mode
-    await CapacitorAndroidKiosk.enterKioskMode();
-    console.log('Kiosk mode activated');
-
-  } catch (error) {
-    console.error('Failed to setup kiosk mode:', error);
-  }
+try {
+// Check if already set as launcher
+const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
+if (!isLauncher) {
+// Prompt user to set as launcher
+await CapacitorAndroidKiosk.setAsLauncher();
+alert('Please select this app as your Home app');
+return;
+}
+// Configure allowed keys
+await CapacitorAndroidKiosk.setAllowedKeys({
+volumeUp: true,
+volumeDown: true,
+back: false,
+home: false,
+recent: false,
+power: false
+});
+// Enter kiosk mode
+await CapacitorAndroidKiosk.enterKioskMode();
+console.log('Kiosk mode activated');
+} catch (error) {
+console.error('Failed to setup kiosk mode:', error);
+}
 }
 ```
-
-## Referencia de API
-
-### isInKioskMode()
-
-Verifica si la aplicación está ejecutándose actualmente en modo quiosco.
-
+Checks if the app is currently running in kiosk mode.
 ```typescript
 const { isInKioskMode } = await CapacitorAndroidKiosk.isInKioskMode();
 ```
-
-**Retorna:**
-- `isInKioskMode` (boolean): Si el modo quiosco está actualmente activo
-
+**Returns:**
+- `isInKioskMode` (boolean): Whether kiosk mode is currently active
 ---
-
 ### isSetAsLauncher()
 
-Verifica si la aplicación está configurada como el lanzador del dispositivo (aplicación de inicio).
+Checks if the app is set as the device launcher (home app).
 
 ```typescript
 const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
 ```
 
-**Retorna:**
-- `isLauncher` (boolean): Si la aplicación está configurada como el lanzador del dispositivo
+**Returns:**
+- `isLauncher` (boolean): Whether the app is set as the device launcher
 
 ---
 
 ### enterKioskMode()
 
-Entra en modo quiosco, ocultando la interfaz de usuario del sistema y bloqueando botones físicos. La aplicación debe estar configurada como el lanzador del dispositivo para que esto funcione eficazmente.
+Enters kiosk mode, hiding system UI and blocking hardware buttons. The app must be set as the device launcher for this to work effectively.
 
 ```typescript
 await CapacitorAndroidKiosk.enterKioskMode();
@@ -153,7 +109,7 @@ await CapacitorAndroidKiosk.enterKioskMode();
 
 ### exitKioskMode()
 
-Sale del modo quiosco, restaurando la interfaz de usuario normal del sistema y la funcionalidad de los botones físicos.
+Exits kiosk mode, restoring normal system UI and hardware button functionality.
 
 ```typescript
 await CapacitorAndroidKiosk.exitKioskMode();
@@ -163,7 +119,7 @@ await CapacitorAndroidKiosk.exitKioskMode();
 
 ### setAsLauncher()
 
-Abre la configuración de pantalla de inicio del dispositivo para permitir al usuario establecer esta aplicación como el lanzador. Esto es requerido para la funcionalidad completa del modo quiosco.
+Opens the device's home screen settings to allow user to set this app as the launcher. This is required for full kiosk mode functionality.
 
 ```typescript
 await CapacitorAndroidKiosk.setAsLauncher();
@@ -173,7 +129,7 @@ await CapacitorAndroidKiosk.setAsLauncher();
 
 ### setAllowedKeys(options)
 
-Establece qué teclas físicas pueden funcionar en modo quiosco. Por defecto, todas las teclas físicas están bloqueadas en modo quiosco.
+Sets which hardware keys are allowed to function in kiosk mode. By default, all hardware keys are blocked in kiosk mode.
 
 ```typescript
 await CapacitorAndroidKiosk.setAllowedKeys({
@@ -188,35 +144,35 @@ await CapacitorAndroidKiosk.setAllowedKeys({
 });
 ```
 
-**Parámetros:**
-- `volumeUp` (boolean, opcional): Permitir botón de subir volumen (predeterminado: false)
-- `volumeDown` (boolean, opcional): Permitir botón de bajar volumen (predeterminado: false)
-- `back` (boolean, opcional): Permitir botón de retroceso (predeterminado: false)
-- `home` (boolean, opcional): Permitir botón de inicio (predeterminado: false)
-- `recent` (boolean, opcional): Permitir botón de aplicaciones recientes (predeterminado: false)
-- `power` (boolean, opcional): Permitir botón de encendido (predeterminado: false)
-- `camera` (boolean, opcional): Permitir botón de cámara si está presente (predeterminado: false)
-- `menu` (boolean, opcional): Permitir botón de menú si está presente (predeterminado: false)
+**Parameters:**
+- `volumeUp` (boolean, optional): Allow volume up button (default: false)
+- `volumeDown` (boolean, optional): Allow volume down button (default: false)
+- `back` (boolean, optional): Allow back button (default: false)
+- `home` (boolean, optional): Allow home button (default: false)
+- `recent` (boolean, optional): Allow recent apps button (default: false)
+- `power` (boolean, optional): Allow power button (default: false)
+- `camera` (boolean, optional): Allow camera button if present (default: false)
+- `menu` (boolean, optional): Allow menu button if present (default: false)
 
 ---
 
 ### getPluginVersion()
 
-Obtiene la versión nativa del plugin Capacitor.
+Get the native Capacitor plugin version.
 
 ```typescript
 const { version } = await CapacitorAndroidKiosk.getPluginVersion();
 console.log('Plugin version:', version);
 ```
 
-**Retorna:**
-- `version` (string): El número de versión del plugin
+**Returns:**
+- `version` (string): The plugin version number
 
-## Configuración de Android
+## Android Configuration
 
-### 1. Configuración de MainActivity
+### 1. MainActivity Setup
 
-Para habilitar el bloqueo completo de teclas físicas, necesitas sobrescribir `dispatchKeyEvent` en tu `MainActivity.java`:
+To enable full hardware key blocking, you need to override `dispatchKeyEvent` in your `MainActivity.java`:
 
 ```java
 import android.view.KeyEvent;
@@ -246,7 +202,7 @@ public class MainActivity extends BridgeActivity {
 
 ### 2. AndroidManifest.xml
 
-Agrega el filtro de intent de lanzador para que tu aplicación sea seleccionable como lanzador:
+Add launcher intent filter to make your app selectable as a launcher:
 
 ```xml
 <activity
@@ -268,32 +224,32 @@ Agrega el filtro de intent de lanzador para que tu aplicación sea seleccionable
 </activity>
 ```
 
-## Notas importantes
+## Important Notes
 
-1. **Requisito de lanzador**: Para la funcionalidad completa del modo quiosco (bloqueo del botón de inicio, prevención del cambio de tareas), tu aplicación debe estar configurada como el lanzador del dispositivo.
+1. **Launcher Requirement**: For full kiosk mode functionality (blocking home button, preventing task switching), your app must be set as the device launcher.
 
-2. **Pruebas**: Al probar, puedes salir del modo quiosco programáticamente o configurando otra aplicación como el lanzador.
+2. **Testing**: When testing, you can exit kiosk mode programmatically or by setting another app as the launcher.
 
-3. **Versiones de Android**: El plugin usa APIs modernas de Android para Android 11+ y vuelve a métodos antiguos para compatibilidad con Android 6.0+.
+3. **Android Versions**: The plugin uses modern Android APIs for Android 11+ and falls back to older methods for compatibility with Android 6.0+.
 
-4. **Seguridad**: Este plugin está diseñado para aplicaciones quiosco legítimas. Asegúrate de proporcionar a los usuarios una forma de salir del modo quiosco.
+4. **Security**: This plugin is designed for legitimate kiosk applications. Ensure you provide users with a way to exit kiosk mode.
 
-5. **Batería**: El modo quiosco mantiene la pantalla encendida. Considera implementar tu propio tiempo de espera de pantalla o gestión de brillo.
+5. **Battery**: Kiosk mode keeps the screen on. Consider implementing your own screen timeout or brightness management.
 
-## Alternativa para iOS
+## iOS Alternative
 
-Para dispositivos iOS, usa la función integrada [Acceso Guiado](https://support.apple.com/en-us/HT202612):
+For iOS devices, use the built-in [Guided Access](https://support.apple.com/en-us/HT202612) feature:
 
-1. Ve a Configuración > Accesibilidad > Acceso Guiado
-2. Activa el Acceso Guiado
-3. Establece un código de acceso
-4. Abre tu aplicación
-5. Triple clic en el botón lateral
-6. Ajusta la configuración e inicia el Acceso Guiado
+1. Go to Settings > Accessibility > Guided Access
+2. Turn on Guided Access
+3. Set a passcode
+4. Open your app
+5. Triple-click the side button
+6. Adjust settings and start Guided Access
 
-## Mejores prácticas
+## Best Practices
 
-1. **Verifica el estado del lanzador primero**
+1. **Check launcher status first**
    ```typescript
    const { isLauncher } = await CapacitorAndroidKiosk.isSetAsLauncher();
    if (!isLauncher) {
@@ -302,7 +258,7 @@ Para dispositivos iOS, usa la función integrada [Acceso Guiado](https://support
    }
    ```
 
-2. **Proporciona un mecanismo de salida**
+2. **Provide exit mechanism**
    ```typescript
    // Allow specific key combination to exit
    // Or implement a secret gesture/pattern
@@ -314,7 +270,7 @@ Para dispositivos iOS, usa la función integrada [Acceso Guiado](https://support
    }
    ```
 
-3. **Maneja el ciclo de vida de la aplicación**
+3. **Handle app lifecycle**
    ```typescript
    // Re-enter kiosk mode when app resumes
    window.addEventListener('resume', async () => {
@@ -325,7 +281,7 @@ Para dispositivos iOS, usa la función integrada [Acceso Guiado](https://support
    });
    ```
 
-4. **Manejo de errores**
+4. **Error handling**
    ```typescript
    try {
      await CapacitorAndroidKiosk.enterKioskMode();

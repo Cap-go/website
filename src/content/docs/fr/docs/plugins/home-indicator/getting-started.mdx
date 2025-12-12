@@ -11,15 +11,15 @@ import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installer le package**
+1. **Install the package**
    <PackageManagers pkg="@capgo/home-indicator" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser avec les projets natifs**
+2. **Sync with native projects**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-3. **Configurer le plugin**
+3. **Configure the plugin**
 
-   **Masquer l'indicateur d'accueil :**
+   **Hide Home Indicator:**
    ```typescript
    import { HomeIndicator } from '@capgo/home-indicator';
 
@@ -27,7 +27,7 @@ import { PackageManagers } from 'starlight-package-managers'
    await HomeIndicator.hide();
    ```
 
-   **Afficher l'indicateur d'accueil :**
+   **Show Home Indicator:**
    ```typescript
    // Show the home indicator
    await HomeIndicator.show();
@@ -39,14 +39,14 @@ import { PackageManagers } from 'starlight-package-managers'
 
    <Tabs>
      <TabItem label="iOS">
-       Aucune configuration supplémentaire requise. Le plugin fonctionne uniquement sur les appareils iOS avec un indicateur d'accueil (iPhone X et ultérieur).
+       No additional setup required. The plugin only works on iOS devices with a home indicator (iPhone X and later).
      </TabItem>
      <TabItem label="Android">
-       Ce plugin n'a aucun effet sur les appareils Android car ils n'ont pas d'indicateur d'accueil de type iOS.
+       This plugin has no effect on Android devices as they don't have an iOS-style home indicator.
      </TabItem>
    </Tabs>
 
-4. **Configuration du masquage automatique**
+4. **Auto-hide configuration**
    ```typescript
    import { HomeIndicator } from '@capgo/home-indicator';
 
@@ -59,7 +59,7 @@ import { PackageManagers } from 'starlight-package-managers'
    // and reappear when the user touches the screen
    ```
 
-5. **Utilisation avancée**
+5. **Advanced usage**
    ```typescript
    import { HomeIndicator } from '@capgo/home-indicator';
    import { App } from '@capacitor/app';
@@ -69,33 +69,33 @@ import { PackageManagers } from 'starlight-package-managers'
 
      async enterImmersiveMode() {
        this.isImmersive = true;
-
+       
        // Hide home indicator
        await HomeIndicator.hide();
-
+       
        // Enable auto-hide for better UX
        await HomeIndicator.setAutoHidden({ autoHidden: true });
-
+       
        // Hide status bar for full immersion
        // StatusBar.hide(); // If using @capacitor/status-bar
      }
 
      async exitImmersiveMode() {
        this.isImmersive = false;
-
+       
        // Show home indicator
        await HomeIndicator.show();
-
+       
        // Disable auto-hide
        await HomeIndicator.setAutoHidden({ autoHidden: false });
-
+       
        // Show status bar
        // StatusBar.show(); // If using @capacitor/status-bar
      }
 
      async toggleImmersiveMode() {
        const { hidden } = await HomeIndicator.isHidden();
-
+       
        if (hidden) {
          await this.exitImmersiveMode();
        } else {
@@ -119,32 +119,32 @@ import { PackageManagers } from 'starlight-package-managers'
    ```
 </Steps>
 
-## Référence API
+## API Reference
 
-### Méthodes
+### Methods
 
 #### `hide()`
-Masque l'indicateur d'accueil.
+Hide the home indicator.
 
-**Retourne:** `Promise<void>`
+**Returns:** `Promise<void>`
 
 #### `show()`
-Affiche l'indicateur d'accueil.
+Show the home indicator.
 
-**Retourne:** `Promise<void>`
+**Returns:** `Promise<void>`
 
 #### `isHidden()`
-Vérifie si l'indicateur d'accueil est actuellement masqué.
+Check if the home indicator is currently hidden.
 
-**Retourne:** `Promise<{ hidden: boolean }>`
+**Returns:** `Promise<{ hidden: boolean }>`
 
 #### `setAutoHidden(options: { autoHidden: boolean })`
-Configure le comportement de masquage automatique de l'indicateur d'accueil.
+Configure auto-hide behavior for the home indicator.
 
-**Paramètres:**
-- `options.autoHidden`: boolean - Activer ou désactiver le masquage automatique
+**Parameters:**
+- `options.autoHidden`: boolean - Enable or disable auto-hide
 
-**Retourne:** `Promise<void>`
+**Returns:** `Promise<void>`
 
 ### Interfaces
 
@@ -158,29 +158,29 @@ interface HiddenResult {
 }
 ```
 
-## Notes de plateforme
+## Platform Notes
 
 ### iOS
-- Fonctionne uniquement sur les appareils avec indicateur d'accueil (iPhone X et ultérieur)
-- Nécessite iOS 11.0 ou ultérieur
-- Le masquage automatique rend l'indicateur translucide et se masque après inactivité
-- L'indicateur réapparaît lorsque les utilisateurs glissent depuis le bas
+- Only works on devices with home indicator (iPhone X and later)
+- Requires iOS 11.0 or later
+- Auto-hide makes the indicator translucent and hides after inactivity
+- The indicator reappears when users swipe from the bottom
 
 ### Android
-- Ce plugin n'a aucun effet sur Android
-- Android utilise différents gestes/boutons de navigation
+- This plugin has no effect on Android
+- Android uses different navigation gestures/buttons
 
-## Cas d'utilisation courants
+## Common Use Cases
 
-1. **Jeux**: Jeu en plein écran sans distractions
-2. **Lecteurs vidéo**: Lecture vidéo immersive
-3. **Visionneuses de photos**: Galeries de photos en plein écran
-4. **Présentations**: Présentations sans distraction
-5. **Applications kiosque**: Applications d'affichage public
+1. **Games**: Full-screen gaming without distractions
+2. **Video Players**: Immersive video playback
+3. **Photo Viewers**: Full-screen photo galleries
+4. **Presentations**: Distraction-free presentations
+5. **Kiosk Apps**: Public display applications
 
-## Bonnes pratiques
+## Best Practices
 
-1. **Contrôle utilisateur**: Fournissez toujours un moyen de sortir du mode immersif
+1. **User Control**: Always provide a way to exit immersive mode
    ```typescript
    // Add a gesture or button to toggle immersive mode
    const toggleButton = document.getElementById('toggle-immersive');
@@ -189,26 +189,27 @@ interface HiddenResult {
    });
    ```
 
-2. **Masquage automatique pour les jeux**: Utilisez le masquage automatique pour une meilleure expérience de jeu
+2. **Auto-Hide for Games**: Use auto-hide for better gaming experience
    ```typescript
    // For games, auto-hide provides the best balance
    await HomeIndicator.setAutoHidden({ autoHidden: true });
    ```
 
-3. **Respectez les gestes système**: N'interférez pas avec la navigation système
-4. **Sauvegarder l'état**: Mémorisez la préférence de l'utilisateur pour le mode immersif
+3. **Respect System Gestures**: Don't interfere with system navigation
+4. **Save State**: Remember user's preference for immersive mode
 
-## Dépannage
+## Troubleshooting
 
-**L'indicateur d'accueil ne se masque pas:**
-- Vérifiez que l'appareil a un indicateur d'accueil (iPhone X+)
-- Vérifiez que la version iOS est 11.0 ou supérieure
-- Assurez-vous que l'application a le focus
+**Home indicator not hiding:**
+- Verify the device has a home indicator (iPhone X+)
+- Check iOS version is 11.0 or higher
+- Ensure the app has focus
 
-**Le masquage automatique ne fonctionne pas:**
-- Le masquage automatique nécessite une interaction de l'utilisateur pour s'activer
-- L'indicateur devient translucide, pas complètement masqué
+**Auto-hide not working:**
+- Auto-hide requires user interaction to activate
+- The indicator becomes translucent, not completely hidden
 
-**L'indicateur réapparaît de manière inattendue:**
-- C'est le comportement normal d'iOS pour les gestes système
-- Utilisez le masquage automatique pour un comportement moins intrusif
+**Indicator reappears unexpectedly:**
+- This is normal iOS behavior for system gestures
+- Use auto-hide for less intrusive behavior
+

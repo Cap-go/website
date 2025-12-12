@@ -10,28 +10,28 @@ locale: id
 
 import { Steps } from '@astrojs/starlight/components';
 
-Getting your Android app approved on Google Play requires compliance with Google's policies, especially for apps with in-app purchases and subscriptions. This guide covers everything you need to pass review successfully.
+Mendapatkan persetujuan aplikasi Android Anda di Google Play memerlukan kepatuhan terhadap kebijakan Google, terutama untuk aplikasi dengan pembelian dalam aplikasi dan langganan. Panduan ini mencakup semua yang Anda butuhkan untuk lulus review dengan sukses.
 
-## Google Play Billing Requirements
+## Persyaratan Penagihan Google Play
 
-### Mandatory Billing System
+### Sistem Penagihan Wajib
 
-For digital goods and services, you **must** use Google Play's billing system:
+Untuk barang digital dan layanan, Anda **harus** menggunakan sistem penagihan Google Play:
 
-**Digital Goods (Must Use Play Billing):**
-- Subscriptions to premium features
-- In-app currency or credits
-- Digital content (ebooks, music, videos)
-- Game upgrades and power-ups
-- App unlocks and premium tiers
+**Barang Digital (Harus Menggunakan Play Billing):**
+- Langganan ke fitur premium
+- Mata uang dalam aplikasi atau kredit
+- Konten digital (ebook, musik, video)
+- Peningkatan permainan dan power-up
+- Pembukaan aplikasi dan tingkat premium
 
-**Physical Goods (Cannot Use Play Billing):**
-- Physical merchandise
-- Real-world services
-- One-time donations to nonprofits
+**Barang Fisik (Tidak Dapat Menggunakan Play Billing):**
+- Barang dagangan fisik
+- Layanan dunia nyata
+- Sumbangan satu kali untuk organisasi nirlaba
 
-:::caution 2025 Requirement
-New apps must use the `monetization.subscriptions` APIs for handling subscription catalogs. Legacy billing APIs are deprecated.
+:::caution Persyaratan 2025
+Aplikasi baru harus menggunakan API `monetization.subscriptions` untuk menangani katalog langganan. API penagihan warisan sudah usang.
 :::
 
 ### Implementation with Native Purchases

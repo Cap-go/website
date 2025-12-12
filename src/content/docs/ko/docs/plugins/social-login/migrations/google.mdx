@@ -7,46 +7,46 @@ sidebar:
 ---
 import { Steps } from '@astrojs/starlight/components';
 
-## 개요
+## Overview
 
-이 가이드는 `@codetrix-studio/capacitor-google-auth`에서 `@capgo/capacitor-social-login`으로 마이그레이션하기 위한 포괄적인 단계를 제공하여 원활한 전환과 향상된 인증 경험을 보장합니다. 새 플러그인은 단일의 일관된 API로 여러 소셜 인증 제공업체를 통합합니다.
+This guide provides comprehensive steps for migrating from `@codetrix-studio/capacitor-google-auth` to `@capgo/capacitor-social-login`, ensuring a smooth transition and improved authentication experience. The new plugin unifies multiple social authentication providers under a single, consistent API.
 
-## 설치
+## Installation
 
 <Steps>
-1. 이전 패키지를 제거합니다:
+1. Remove the old package:
    ```bash
    npm uninstall @codetrix-studio/capacitor-google-auth
    ```
 
-2. 새 패키지를 설치합니다:
+2. Install the new package:
    ```bash
    npm install @capgo/capacitor-social-login
    npx cap sync
    ```
 </Steps>
 
-## Google Auth 설정의 중요한 변경사항
+## Important Changes in Google Auth Setup
 
-### 웹 클라이언트 ID 요구사항
-**중요한 변경사항**: 업데이트된 플러그인은 모든 플랫폼에서 웹 클라이언트 ID를 사용해야 합니다.
+### Web Client ID Requirement
+**Critical Change**: The updated plugin requires using a Web Client ID across all platforms.
 
-다음이 필요합니다:
-1. Google Cloud Console에서 웹 클라이언트 ID를 생성합니다(없는 경우) ([자격 증명을 얻는 방법](/docs/plugins/social-login/google/general/))
-2. 모든 플랫폼의 `webClientId` 필드에서 이 웹 클라이언트 ID를 사용합니다
-3. Android의 경우 SHA1이 있는 Android 클라이언트 ID를 생성해야 하지만 이것은 검증 목적으로만 사용됩니다 - 토큰은 사용되지 않습니다 ([Android 설정 가이드](/docs/plugins/social-login/google/android/))
+You'll need to:
+1. Create a Web Client ID in Google Cloud Console if you don't have one ([How to get the credentials](/docs/plugins/social-login/google/general/))
+2. Use this Web Client ID in the `webClientId` field for all platforms
+3. For Android, you still need to create an Android Client ID with your SHA1, but this is only for verification purposes - the token won't be used ([Android setup guide](/docs/plugins/social-login/google/android/))
 
-## 코드 변경사항
+## Code Changes
 
-### Import 변경사항
+### Import Changes
 ```diff
 - import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 + import { SocialLogin } from '@capgo/capacitor-social-login';
 ```
 
-### 초기화
+### Initialization
 
-설정이 간단한 `GoogleAuth.initialize()` 호출에서 중첩된 Google 구성이 포함된 더 구조화된 `SocialLogin.initialize()`로 변환됩니다:
+The setup transforms from a simple `GoogleAuth.initialize()` call to a more structured `SocialLogin.initialize()` with nested Google configuration:
 
 ```diff
 - GoogleAuth.initialize({
@@ -64,9 +64,9 @@ import { Steps } from '@astrojs/starlight/components';
 + });
 ```
 
-### 로그인
+### Sign In
 
-로그인 메서드가 `GoogleAuth.signIn()`에서 명시적인 제공자 지정이 포함된 `SocialLogin.login()`으로 변경됩니다:
+The login method changes from `GoogleAuth.signIn()` to `SocialLogin.login()` with explicit provider specification:
 
 ```diff
 - const user = await GoogleAuth.signIn();
@@ -79,11 +79,11 @@ import { Steps } from '@astrojs/starlight/components';
 + });
 ```
 
-## 플랫폼별 변경사항
+## Platform Specific Changes
 
 ### Android
 
-1. `MainActivity.java`를 업데이트합니다 ([전체 Android 설정 가이드](/docs/plugins/social-login/google/android/)):
+1. Update your `MainActivity.java` ([Full Android setup guide](/docs/plugins/social-login/google/android/)):
 ```diff
 + import ee.forgr.capacitor.social.login.GoogleProvider;
 + import ee.forgr.capacitor.social.login.SocialLoginPlugin;
@@ -99,7 +99,7 @@ import { Steps } from '@astrojs/starlight/components';
 +   @Override
 +   public void onActivityResult(int requestCode, int resultCode, Intent data) {
 +     super.onActivityResult(requestCode, resultCode, data);
-+
++     
 +     if (requestCode >= GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MIN && requestCode < GoogleProvider.REQUEST_AUTHORIZE_GOOGLE_MAX) {
 +       PluginHandle pluginHandle = getBridge().getPlugin("SocialLogin");
 +       if (pluginHandle == null) {
@@ -121,9 +121,9 @@ import { Steps } from '@astrojs/starlight/components';
 
 ### iOS
 
-1. AppDelegate.swift에 주요 변경사항이 필요하지 않습니다 ([iOS 설정 가이드](/docs/plugins/social-login/google/ios/))
+1. No major changes needed in AppDelegate.swift ([iOS setup guide](/docs/plugins/social-login/google/ios/))
 
-2. `capacitor.config.json`의 구성을 업데이트합니다. 새 플러그인에서는 사용하지 않습니다:
+2. Update your configuration in `capacitor.config.json`, we don't use it in the new plugin:
 ```diff
 {
   "plugins": {
@@ -137,15 +137,15 @@ import { Steps } from '@astrojs/starlight/components';
 
 ### Web
 
-1. 사용 중이던 경우 `index.html`에서 Google Sign-In 메타 태그를 제거합니다:
+1. Remove the Google Sign-In meta tags from your `index.html` if you were using them:
 ```diff
 - <meta name="google-signin-client_id" content="{your client id here}" />
 - <meta name="google-signin-scope" content="profile email" />
 ```
 
-## 응답 유형 변경사항
+## Response Type Changes
 
-이제 인증 응답은 제공자 정보, 액세스 토큰, ID 토큰 및 사용자 프로필 데이터를 포함하는 구조화된 객체를 제공합니다:
+The authentication response now provides a structured object containing provider information, access tokens, ID tokens, and user profile data:
 
 ```typescript
 interface GoogleLoginResponse {
@@ -169,22 +169,22 @@ interface GoogleLoginResponse {
 }
 ```
 
-응답 구조에는 다음이 포함됩니다:
-- **provider**: 인증 제공업체를 식별합니다(`'google'`)
-- **result.accessToken**: 만료가 포함된 액세스 토큰 세부 정보
-- **result.idToken**: 인증을 위한 ID 토큰
-- **result.profile**: 이메일, 이름 및 이미지 URL을 포함한 사용자 프로필 정보
+The response structure includes:
+- **provider**: Identifies the authentication provider (`'google'`)
+- **result.accessToken**: Access token details with expiration
+- **result.idToken**: ID token for authentication
+- **result.profile**: User profile information including email, name, and image URL
 
-## 추가 기능
+## Additional Capabilities
 
-새 패키지는 Google 외에 여러 소셜 인증 제공업체를 지원합니다:
+The new package supports multiple social authentication providers beyond Google:
 - [Apple Sign-In](/docs/plugins/social-login/apple/general/)
 - [Facebook Login](/docs/plugins/social-login/facebook/)
 
-이 통합 접근 방식은 다음을 제공합니다:
-- 모든 제공업체에 걸쳐 일관된 API
-- 향상된 TypeScript 지원
-- 더 나은 오류 처리
-- 활성 유지 관리 및 커뮤니티 지원
+This unified approach provides:
+- Consistent API across all providers
+- Improved TypeScript support
+- Better error handling
+- Active maintenance and community support
 
-이러한 추가 제공업체에 대한 자세한 설정 지침은 [주요 문서](/docs/plugins/social-login/google/general/)를 확인하세요.
+Check the [main documentation](/docs/plugins/social-login/google/general/) for detailed setup instructions for these additional providers.

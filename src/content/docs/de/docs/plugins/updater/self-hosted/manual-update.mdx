@@ -1,17 +1,17 @@
 ---
-title: Manual Update
+title: Manuelles Update
 description: >-
-  A detailed guide on utilizing the manual update plugin within a self-hosted
-  environment, providing comprehensive instructions on configuration and usage
-  to effectively manage updates without relying on automatic processes.
+  Ein detaillierter Leitfaden zur Nutzung des manuellen Update-Plugins in einer Self-Hosted-
+  Umgebung mit umfassenden Anweisungen zur Konfiguration und Nutzung
+  um Updates effektiv ohne automatische Prozesse zu verwalten.
 sidebar:
   order: 3
 locale: de
 ---
 
-## Configuration
+## Konfiguration
 
-Add this to your ``capacitor.config.json``, to disable auto-update.
+Fügen Sie dies zu Ihrer ``capacitor.config.json`` hinzu, um Auto-Update zu deaktivieren.
 ```tsx
 // capacitor.config.json
 {
@@ -25,16 +25,16 @@ Add this to your ``capacitor.config.json``, to disable auto-update.
 }
 ```
 
-## Usage
+## Nutzung
 
-You can use this example or re-create the logic in your app.
+Sie können dieses Beispiel verwenden oder die Logik in Ihrer App neu erstellen.
 
 :::caution
-We are forcing the user to update the app with a static version declared in the code. This is not recommended, you should use a dynamic version from your server.
+Wir zwingen den Benutzer, die App mit einer statischen, im Code deklarierten Version zu aktualisieren. Dies ist nicht empfohlen. Sie sollten eine dynamische Version von Ihrem Server verwenden.
 :::
 
 :::danger
-We are not doing any version checking, decryption or checksum validation in this example. You should do that on your own.
+Wir führen in diesem Beispiel keine Versionsprüfung, Entschlüsselung oder Checksummen-Validierung durch. Sie sollten dies selbst durchführen.
 :::
 
 ```tsx
@@ -45,20 +45,20 @@ let data = {version: ""}
 CapacitorUpdater.notifyAppReady()
 App.addListener('appStateChange', async(state) => {
      if (state.isActive) {
-       // Do the download during user active app time to prevent failed download
+       // Führen Sie den Download während aktiver App-Zeit durch, um fehlgeschlagene Downloads zu verhindern
        data = await CapacitorUpdater.download({
        version: '0.0.4',
        url: 'https://github.com/Cap-go/demo-app/releases/download/0.0.4/dist.zip',
        })
      }
      if (!state.isActive && data.version !== "") {
-       // Do the switch when user leave app
+       // Führen Sie den Wechsel durch, wenn der Benutzer die App verlässt
        SplashScreen.show()
        try {
          await CapacitorUpdater.set(data)
        } catch (err) {
          console.log(err)
-         SplashScreen.hide() // in case the set fail, otherwise the new app will have to hide it
+         SplashScreen.hide() // falls der Wechsel fehlschlägt, ansonsten muss die neue App ihn ausblenden
        }
      }
  })
@@ -67,5 +67,5 @@ App.addListener('appStateChange', async(state) => {
 
 
 :::note
-If this seems like a lot of work consider trying [Capgo trial](https://capgo.app/register/). It will handle all of this for you.
+Wenn dies wie viel Arbeit klingt, versuchen Sie die [Capgo-Testversion](https://capgo.app/register/). Sie werden all dies für Sie übernehmen.
 :::

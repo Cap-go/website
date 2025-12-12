@@ -1,8 +1,7 @@
 ---
-title: Getting Started
+title: Démarrage
 description: >-
-  Learn how to install and use the Compass plugin to read device compass heading
-  in your Capacitor app.
+  Apprenez comment installer et utiliser le plugin Compass pour lire la direction de la boussole de l'appareil dans votre application Capacitor.
 sidebar:
   order: 2
 locale: fr
@@ -13,29 +12,29 @@ import { Code, Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Install the package**
+1. **Installez le package**
    <PackageManagers pkg="@capgo/capacitor-compass" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync with native projects**
+2. **Synchronisez avec les projets natifs**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## iOS Setup
+## Configuration iOS
 
-On iOS, compass access requires location permission. Add the following to your `Info.plist`:
+Sur iOS, l'accès à la boussole nécessite une permission de localisation. Ajoutez les éléments suivants à votre `Info.plist`:
 
 ```xml
 <key>NSLocationWhenInUseUsageDescription</key>
 <string>We need location permission to access the compass</string>
 ```
 
-## Android Setup
+## Configuration Android
 
-No additional setup required. The plugin uses the device's magnetometer and accelerometer sensors.
+Aucune configuration supplémentaire requise. Le plugin utilise les capteurs magnétométre et accéléromètre de l'appareil.
 
-## Usage
+## Utilisation
 
-Import the plugin and use its methods to read compass heading:
+Importez le plugin et utilisez ses méthodes pour lire la direction de la boussole:
 
 ```typescript
 import { CapgoCompass } from '@capgo/capacitor-compass';
@@ -219,3 +218,4 @@ export class CompassService {
 ### Web
 - Not supported on web platform
 - Methods will throw errors when called
+

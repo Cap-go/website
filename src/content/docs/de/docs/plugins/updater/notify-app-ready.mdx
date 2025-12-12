@@ -1,14 +1,14 @@
 ---
-title: Placing CapacitorUpdater.notifyAppReady() call correctly
+title: CapacitorUpdater.notifyAppReady()-Aufruf korrekt platzieren
 description: >-
-  How to properly place the CapacitorUpdater.notifyAppReady() call in your app
-  to ensure correct auto-update flow.
+  Wie Sie den CapacitorUpdater.notifyAppReady()-Aufruf in Ihrer App korrekt platzieren,
+  um einen korrekten Auto-Update-Ablauf zu gewährleisten.
 tableOfContents: false
 next: false
 prev: false
 sidebar:
   order: 1
-  label: Introduction
+  label: Einführung
 locale: de
 ---
 
@@ -17,21 +17,21 @@ import { Code } from '@astrojs/starlight/components';
 import { Aside } from '@astrojs/starlight/components';
 import ConditionalQuestionnaire from '@/components/ConditionalQuestionnaire.astro'
 
-The placement of the `CapacitorUpdater.notifyAppReady()` call is crucial for the correct auto-update flow.
+Die Platzierung des `CapacitorUpdater.notifyAppReady()`-Aufrufs ist entscheidend für den korrekten Auto-Update-Ablauf.
 
 
-If not done correctly, the app will not be able to update to the latest version. Each version that does not call `notifyAppReady()` within 10 seconds will be marked as invalid and will be replaced by the previous valid version or the default (built-in) version.
+Wenn dies nicht korrekt durchgeführt wird, kann die App nicht auf die neueste Version aktualisiert werden. Jede Version, die `notifyAppReady()` nicht innerhalb von 10 Sekunden aufruft, wird als ungültig markiert und durch die vorherige gültige Version oder die Standard-(integrierte) Version ersetzt.
 
 
-In this guide we will show you how to properly place the `notifyAppReady()` call in your app to ensure correct auto-update flow.
+In diesem Leitfaden zeigen wir Ihnen, wie Sie den `notifyAppReady()`-Aufruf in Ihrer App korrekt platzieren, um einen korrekten Auto-Update-Ablauf zu gewährleisten.
 
-### `notifyAppReady()` Call Placement questionnaire
+### `notifyAppReady()`-Aufrufplatzierungsfragebogen
 
 <ConditionalQuestionnaire />
 
 
 <div style="margin-top: 3rem;">
 <Aside type="note">
-If you cannot find your framework in the questionnaire, please don't hesitate to ask on our [Discord](https://discord.capgo.app).
+Wenn Sie Ihr Framework nicht im Fragebogen finden können, zögern Sie nicht, uns auf [Discord](https://discord.capgo.app) zu fragen.
 </Aside>
 </div>

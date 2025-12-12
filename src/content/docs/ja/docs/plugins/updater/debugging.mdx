@@ -10,9 +10,9 @@ locale: ja
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-## Understanding cloud logs:
+## クラウドログについて:
 
-### Sent from the backend
+### バックエンドから送信
 
 | code                          | Description                                                                                                                                                                 |
 | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -37,16 +37,16 @@ import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 | **rateLimited**                                | The device has been rate limited due to excessive requests.                                                                                                        |
 
 
-### Sent from the device
+### デバイスから送信
 
-| code  | Description                                                                       |
-| --------------------- | --------------------------------------------------------------------------------- |
-| **ping**              | Internal test action used to verify the stats system is working correctly.        |
-| **get**               | Info for downloading the new version has been sent to the device.                 |
-| **delete**            | One bundle has been deleted on the device.                                        |
-| **set**               | A bundle has been set on the device.                                              |
-| **set_fail**          | The bundle failed to set.                                                         |
-| **reset**             | The device reset to the `builtin` bundle.                                         |
+| コード  | 説明                                                                       |
+| --------------------- | ------------------------------------------------------------------------- |
+| **ping**              | 統計システムが正常に機能していることを確認するために使用される内部テストアクション。        |
+| **get**               | 新しいバージョンをダウンロードするための情報がデバイスに送信されました。                 |
+| **delete**            | 1つのバンドルがデバイスから削除されました。                                        |
+| **set**               | バンドルがデバイスに設定されました。                                              |
+| **set_fail**          | バンドルの設定に失敗しました。                                                         |
+| **reset**             | デバイスが `builtin` バンドルにリセットされました。                                         |
 | **download_XX**       | A new bundle has been downloaded - progress indicated by XX% (increments of 10%). |
 | **download_complete** | The new bundle has finished downloading.                                          |
 | **download_manifest_start** | The device started downloading the update manifest.                             |

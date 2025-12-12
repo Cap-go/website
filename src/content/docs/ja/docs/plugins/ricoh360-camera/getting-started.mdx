@@ -63,9 +63,9 @@ Add required permissions to your `AndroidManifest.xml`:
 <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 ```
 
-## Supported Devices
+## サポートされるデバイス
 
-This plugin supports Ricoh Theta series cameras:
+このプラグインはRicoh Thetaシリーズカメラをサポートしています:
 - Ricoh Theta V
 - Ricoh Theta Z1
 - Ricoh Theta SC2
@@ -384,33 +384,33 @@ await camera.recordVideo(10); // 10 seconds
 await camera.cleanup();
 ```
 
-## Best Practices
+## ベストプラクティス
 
-- Always initialize the plugin before connecting to the camera
-- Ensure the device is connected to the camera's WiFi network
-- Handle errors gracefully, especially connection failures
-- Stop preview and disconnect when done to save battery
-- Check camera battery level before long recording sessions
-- Test on actual Ricoh Theta hardware
-- Use appropriate video quality based on storage constraints
+- プラグインを初期化してからカメラに接続してください
+- デバイスがカメラのWiFiネットワークに接続していることを確認してください
+- エラーを適切に処理してください。特に接続エラーについて
+- 完了したらプレビューを停止して切断し、バッテリーを節約してください
+- 長時間の録画セッション前にカメラのバッテリーレベルを確認してください
+- 実際のRicoh Thetaハードウェアでテストしてください
+- ストレージの制約に基づいて適切なビデオ品質を使用してください
 
-## Troubleshooting
+## トラブルシューティング
 
-### Connection Issues
+### 接続の問題
 
-- Verify the camera is powered on
-- Check WiFi SSID and password are correct
-- Ensure no other app is connected to the camera
-- Reset camera WiFi settings if connection fails
+- カメラの電源が入っていることを確認してください
+- WiFi SSIDとパスワードが正しいことを確認してください
+- 他のアプリがカメラに接続していないことを確認してください
+- 接続に失敗した場合、カメラのWiFi設定をリセットしてください
 
-### Preview Not Showing
+### プレビューが表示されない
 
-- Verify the HTML container element exists
-- Check camera permissions are granted
-- Ensure preview is started after successful connection
+- HTMLコンテナ要素が存在することを確認してください
+- カメラの権限が付与されていることを確認してください
+- 接続に成功した後、プレビューを開始していることを確認してください
 
-### Capture Failures
+### キャプチャの失敗
 
-- Check available storage space
-- Verify camera battery level is sufficient
-- Ensure camera is not in sleep mode
+- 利用可能なストレージスペースを確認してください
+- カメラのバッテリーレベルが十分なことを確認してください
+- カメラがスリープモードでないことを確認してください

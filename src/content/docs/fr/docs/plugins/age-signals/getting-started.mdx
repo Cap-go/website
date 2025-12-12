@@ -10,26 +10,26 @@ import { Steps, Aside } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Aside type="caution">
-Ce plugin est **uniquement Android** et nécessite Google Play Services. Il ne fonctionnera pas sur iOS, le web ou les appareils Android sans Google Play Store.
+This plugin is **Android-only** and requires Google Play Services. It will not work on iOS, web, or Android devices without Google Play Store.
 </Aside>
 
 <Steps>
-1. **Installer le package**
+1. **Install the package**
    <PackageManagers pkg="@capgo/capacitor-android-age-signals" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchroniser avec le projet Android**
+2. **Sync with Android project**
    <PackageManagers type="exec" pkg="cap" args="sync android" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Prérequis
+## Prerequisites
 
-- Appareil Android avec Google Play Services
-- Niveau API Android minimum 21 (Android 5.0)
-- Google Play Store installé sur l'appareil
+- Android device with Google Play Services
+- Minimum Android API level 21 (Android 5.0)
+- Google Play Store installed on the device
 
-## Utilisation
+## Usage
 
-### Vérifier les signaux d'âge
+### Check Age Signals
 
 ```typescript
 import { AgeSignals, UserStatus } from '@capgo/capacitor-android-age-signals';
@@ -77,7 +77,7 @@ try {
 }
 ```
 
-### Gérer les utilisateurs supervisés
+### Handle Supervised Users
 
 ```typescript
 async function handleSupervisedUser() {
@@ -106,7 +106,7 @@ async function handleSupervisedUser() {
 }
 ```
 
-### Implémenter une barrière d'âge
+### Implement Age Gate
 
 ```typescript
 async function ageGate() {
@@ -135,7 +135,7 @@ async function ageGate() {
 }
 ```
 
-### Surveiller le statut d'approbation
+### Monitor Approval Status
 
 ```typescript
 async function checkApprovalStatus() {
@@ -164,17 +164,17 @@ async function checkApprovalStatus() {
 }
 ```
 
-## Référence API
+## API Reference
 
 ### checkAgeSignals()
 
-Demander les signaux d'âge Play actuels pour l'utilisateur actif.
+Request the current Play Age Signals for the active user.
 
 ```typescript
 const result = await AgeSignals.checkAgeSignals();
 ```
 
-**Retourne :**
+**Returns:**
 
 ```typescript
 interface CheckAgeSignalsResult {
@@ -186,7 +186,7 @@ interface CheckAgeSignalsResult {
 }
 ```
 
-### Énumération UserStatus
+### UserStatus Enum
 
 ```typescript
 enum UserStatus {
@@ -199,60 +199,60 @@ enum UserStatus {
 }
 ```
 
-## Champs de résultat
+## Result Fields
 
 ### userStatus
 
-Le statut de vérification de l'utilisateur tel que rapporté par Google Play.
+The user's verification status as reported by Google Play.
 
-- **Verified** : L'utilisateur a plus de 18 ans et est vérifié par Google
-- **Supervised** : L'utilisateur a un compte Google supervisé
-- **SupervisedApprovalPending** : En attente de l'approbation du tuteur pour les modifications
-- **SupervisedApprovalDenied** : Le tuteur a refusé l'accès à l'application
-- **Unknown** : L'utilisateur doit vérifier son statut dans le Play Store
-- **Empty** : Tous les autres utilisateurs (état par défaut)
+- **Verified**: User is over 18 and age-verified by Google
+- **Supervised**: User has a supervised Google Account
+- **SupervisedApprovalPending**: Pending guardian approval for changes
+- **SupervisedApprovalDenied**: Guardian denied app access
+- **Unknown**: User should verify status in Play Store
+- **Empty**: All other users (default state)
 
 ### ageLower
 
-Limite inférieure inclusive de la tranche d'âge de l'utilisateur supervisé.
+Inclusive lower bound of the supervised user's age range.
 
-Présent uniquement lorsque `userStatus` est :
+Only present when `userStatus` is:
 - `SUPERVISED`
 - `SUPERVISED_APPROVAL_PENDING`
 - `SUPERVISED_APPROVAL_DENIED`
 
 ### ageUpper
 
-Limite supérieure inclusive de la tranche d'âge de l'utilisateur supervisé.
+Inclusive upper bound of the supervised user's age range.
 
-Présent uniquement lorsque :
-- `userStatus` est l'un des statuts supervisés
-- L'âge de l'utilisateur est rapporté comme inférieur à 18 ans
+Only present when:
+- `userStatus` is one of the supervised statuses
+- User's age is reported as less than 18
 
 ### mostRecentApprovalDate
 
-Chaîne de date pour le changement significatif le plus récent ayant reçu l'approbation du tuteur.
+Date string for the most recent significant change that received guardian approval.
 
-Présent uniquement lorsque `userStatus` est :
+Only present when `userStatus` is:
 - `SUPERVISED_APPROVAL_PENDING`
 - `SUPERVISED_APPROVAL_DENIED`
 
-Format : Chaîne de date ISO 8601
+Format: ISO 8601 date string
 
 ### installId
 
-Identifiant attribué aux installations supervisées dans Google Play.
+Identifier assigned to supervised installs in Google Play.
 
-Utilisé pour les notifications de révocation lorsque le tuteur révoque l'approbation de l'application.
+Used for revocation notifications when guardian revokes app approval.
 
-Présent uniquement lorsque `userStatus` est :
+Only present when `userStatus` is:
 - `SUPERVISED`
 - `SUPERVISED_APPROVAL_PENDING`
 - `SUPERVISED_APPROVAL_DENIED`
 
-## Cas d'utilisation
+## Use Cases
 
-### 1. Conformité COPPA
+### 1. COPPA Compliance
 
 ```typescript
 async function applyCoppaRestrictions() {
@@ -273,7 +273,7 @@ async function applyCoppaRestrictions() {
 }
 ```
 
-### 2. Contenu adapté à l'âge
+### 2. Age-Appropriate Content
 
 ```typescript
 async function filterContent() {
@@ -299,7 +299,7 @@ async function filterContent() {
 }
 ```
 
-### 3. Tableau de bord du tuteur
+### 3. Guardian Dashboard
 
 ```typescript
 async function getGuardianInfo() {
@@ -323,7 +323,7 @@ async function getGuardianInfo() {
 }
 ```
 
-## Exemple complet
+## Complete Example
 
 ```typescript
 import { AgeSignals, UserStatus } from '@capgo/capacitor-android-age-signals';
@@ -437,73 +437,74 @@ export class AgeVerificationService {
 }
 ```
 
-## Bonnes pratiques
+## Best Practices
 
-1. **Vérifier au démarrage de l'application** : Vérifiez les signaux d'âge au lancement de l'application
-2. **Mettre en cache les résultats** : Mettez en cache les résultats mais rafraîchissez périodiquement
-3. **Gérer tous les états** : Implémentez une logique pour toutes les valeurs UserStatus
-4. **Respecter les refus** : Ne pas autoriser l'accès lorsque le tuteur refuse l'approbation
-5. **Stocker l'ID d'installation** : Suivez l'ID d'installation pour la détection de révocation
-6. **Logique de secours** : Ayez une vérification d'âge de secours pour les états Unknown/Empty
-7. **Priorité à la vie privée** : Ne collectez pas de données inutiles des utilisateurs supervisés
+1. **Check on App Start**: Verify age signals when the app launches
+2. **Cache Results**: Cache results but refresh periodically
+3. **Handle All States**: Implement logic for all UserStatus values
+4. **Respect Denials**: Don't allow access when guardian denies approval
+5. **Store Install ID**: Track install ID for revocation detection
+6. **Fallback Logic**: Have fallback age verification for Unknown/Empty states
+7. **Privacy First**: Don't collect unnecessary data from supervised users
 
-## Directives de conformité
+## Compliance Guidelines
 
 ### COPPA (Children's Online Privacy Protection Act)
 
-Pour les utilisateurs de moins de 13 ans :
-- Obtenir le consentement parental vérifiable
-- Limiter la collecte de données
-- Désactiver la publicité comportementale
-- Fournir des contrôles parentaux
+For users under 13:
+- Obtain verifiable parental consent
+- Limit data collection
+- Disable behavioral advertising
+- Provide parental controls
 
-### RGPD (Règlement Général sur la Protection des Données)
+### GDPR (General Data Protection Regulation)
 
-Pour les utilisateurs supervisés :
-- Traiter les données de manière légale
-- Fournir des mécanismes de consentement du tuteur
-- Permettre l'accès et la suppression des données
-- Implémenter la confidentialité dès la conception
+For supervised users:
+- Process data lawfully
+- Provide guardian consent mechanisms
+- Allow data access and deletion
+- Implement privacy by design
 
-## Notes de plateforme
+## Platform Notes
 
 ### Android
-- Nécessite Google Play Services
-- Niveau API minimum 21 (Android 5.0+)
-- Fonctionne uniquement sur les appareils avec Play Store
-- Les signaux peuvent ne pas être disponibles dans toutes les régions
-- Les résultats peuvent changer si le tuteur modifie les paramètres
+- Requires Google Play Services
+- Minimum API level 21 (Android 5.0+)
+- Only works on devices with Play Store
+- Signals may not be available in all regions
+- Results can change if guardian modifies settings
 
 ### iOS / Web
-- **Non supporté** - Il s'agit d'un plugin uniquement Android
-- Génèrera une erreur si appelé sur des plateformes non supportées
+- **Not supported** - This is an Android-only plugin
+- Will throw an error if called on unsupported platforms
 
-## Dépannage
+## Troubleshooting
 
-### Aucun signal retourné (statut vide)
+### No Signal Returned (Empty Status)
 
-C'est normal pour :
-- Les utilisateurs en dehors des régions supportées
-- Les appareils sans Google Play Services
-- Les utilisateurs qui n'ont pas configuré Family Link
-- Les nouveaux comptes sans vérification
+This is normal for:
+- Users outside supported regions
+- Devices without Google Play Services
+- Users who haven't set up Family Link
+- New accounts without verification
 
-### Statut inconnu
+### Unknown Status
 
-L'utilisateur doit :
-1. Ouvrir Google Play Store
-2. Aller dans Paramètres → Famille
-3. Terminer le processus de vérification de l'âge
+User should:
+1. Open Google Play Store
+2. Go to Settings → Family
+3. Complete age verification process
 
-### Problèmes de permission
+### Permission Issues
 
-Assurez-vous que :
-- Google Play Services est à jour
-- L'application a le nom de package correct dans Play Console
-- Tester sur un appareil réel (pas un émulateur sans Play Services)
+Ensure:
+- Google Play Services is updated
+- App has correct package name in Play Console
+- Testing on real device (not emulator without Play Services)
 
-## Ressources
+## Resources
 
-- [Documentation Google Play Age Signals](https://developers.google.com/android/reference/com/google/android/gms/agesignals)
-- [Guide développeur Family Link](https://developers.google.com/families)
-- [Guide de conformité COPPA](https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions)
+- [Google Play Age Signals Documentation](https://developers.google.com/android/reference/com/google/android/gms/agesignals)
+- [Family Link Developer Guide](https://developers.google.com/families)
+- [COPPA Compliance Guide](https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions)
+

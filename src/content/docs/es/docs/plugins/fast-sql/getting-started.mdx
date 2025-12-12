@@ -1,36 +1,34 @@
----
-title: Comenzando con Fast SQL
-locale: es
-description: Instala y configura el plugin Fast SQL para acceso de base de datos SQLite nativo de alto rendimiento
----
+---title: Getting Started with Fast SQL
+description: Install and configure the Fast SQL plugin for high-performance native SQLite database access
+locale: es---
 
-Esta guía te ayudará a instalar y configurar el plugin **@capgo/capacitor-fast-sql** para acceso de base de datos SQLite de alto rendimiento.
+This guide will help you install and configure the **@capgo/capacitor-fast-sql** plugin for high-performance SQLite database access.
 
-## ¿Por qué Fast SQL?
+## Why Fast SQL?
 
-Los plugins SQLite tradicionales para Capacitor dependen del puente JavaScript estándar para comunicarse entre tu código web y el código nativo. Aunque esto funciona bien para operaciones pequeñas, el puente se convierte en un cuello de botella significativo cuando necesitas transferir grandes cantidades de datos. Cada dato debe serializarse a JSON, enviarse a través del puente y luego deserializarse del otro lado. Esta sobrecarga de serialización hace que las operaciones con miles de filas o datos binarios grandes sean increíblemente lentas.
+Traditional SQLite plugins for Capacitor rely on the standard JavaScript bridge to communicate between your web code and native code. While this works fine for small operations, the bridge becomes a significant bottleneck when you need to transfer large amounts of data. Every piece of data must be serialized to JSON, sent across the bridge, and then deserialized on the other side. This serialization overhead makes operations with thousands of rows or large binary data incredibly slow.
 
-**Fast SQL resuelve este problema** estableciendo un servidor HTTP local en el dispositivo que se comunica directamente con la base de datos SQLite nativa. Este protocolo personalizado evita completamente el puente de Capacitor, eliminando la sobrecarga de serialización y habilitando:
+**Fast SQL solves this problem** by establishing a local HTTP server on the device that communicates directly with the native SQLite database. This custom protocol bypasses Capacitor's bridge entirely, eliminating serialization overhead and enabling:
 
-- **Hasta 25 veces más rendimiento** para operaciones por lotes y grandes conjuntos de datos
-- **Transferencia eficiente de datos binarios** sin codificación base64
-- **Transmisión de resultados grandes** sin problemas de memoria
-- **Rendimiento óptimo para sistemas de sincronización** como CRDTs y transformaciones operacionales
+- **Up to 25x faster performance** for batch operations and large datasets
+- **Efficient binary data transfer** without base64 encoding
+- **Streaming large results** without memory issues
+- **Optimal performance for sync systems** like CRDTs and operational transforms
 
-Esto hace que Fast SQL sea ideal para aplicaciones local-first, sistemas de sincronización sin conexión y escenarios donde necesitas reemplazar IndexedDB con una solución más confiable y de mejor rendimiento.
+This makes Fast SQL ideal for local-first applications, offline sync systems, and scenarios where you need to replace IndexedDB with a more reliable and performant solution.
 
-## Instalación
+## Installation
 
 ```bash
 npm install @capgo/capacitor-fast-sql
 npx cap sync
 ```
 
-## Configuración de plataforma
+## Platform Configuration
 
-### Configuración de iOS
+### iOS Configuration
 
-Agrega lo siguiente a tu `Info.plist` para permitir redes locales:
+Add the following to your `Info.plist` to allow local networking:
 
 ```xml title="ios/App/App/Info.plist"
 <key>NSAppTransportSecurity</key>
@@ -40,9 +38,9 @@ Agrega lo siguiente a tu `Info.plist` para permitir redes locales:
 </dict>
 ```
 
-### Configuración de Android
+### Android Configuration
 
-Si es necesario, agrega a tu `AndroidManifest.xml`:
+If needed, add to your `AndroidManifest.xml`:
 
 ```xml title="android/app/src/main/AndroidManifest.xml"
 <application
@@ -51,33 +49,33 @@ Si es necesario, agrega a tu `AndroidManifest.xml`:
 </application>
 ```
 
-### Configuración Web
+### Web Configuration
 
-Para soporte de plataforma web, instala sql.js:
+For web platform support, install sql.js:
 
 ```bash
 npm install sql.js
 ```
 
-## Uso básico
+## Basic Usage
 
-### Conectarse a una base de datos
+### Connecting to a Database
 
 ```typescript
 import { FastSQL } from '@capgo/capacitor-fast-sql';
 
-// Conectar a base de datos (crea archivo si no existe)
+// Connect to database (creates file if it doesn't exist)
 const db = await FastSQL.connect({
   database: 'myapp'
 });
 
-console.log('Conectado a base de datos en puerto:', db.port);
+console.log('Connected to database on port:', db.port);
 ```
 
-### Crear tablas
+### Creating Tables
 
 ```typescript
-// Crear una tabla
+// Create a table
 await db.execute(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -88,35 +86,35 @@ await db.execute(`
 `);
 ```
 
-### Insertar datos
+### Inserting Data
 
 ```typescript
-// Insertar una sola fila
+// Insert single row
 const result = await db.run(
   'INSERT INTO users (name, email) VALUES (?, ?)',
   ['John Doe', 'john@example.com']
 );
 
-console.log('ID de fila insertada:', result.insertId);
-console.log('Filas afectadas:', result.rowsAffected);
+console.log('Inserted row ID:', result.insertId);
+console.log('Rows affected:', result.rowsAffected);
 ```
 
-### Consultar datos
+### Querying Data
 
 ```typescript
-// Consultar con parámetros
+// Query with parameters
 const users = await db.query(
   'SELECT * FROM users WHERE name LIKE ?',
   ['John%']
 );
 
-console.log('Usuarios encontrados:', users);
+console.log('Found users:', users);
 
-// users es un array de objetos:
+// users is an array of objects:
 // [{ id: 1, name: 'John Doe', email: 'john@example.com', created_at: 1234567890 }]
 ```
 
-### Actualizar datos
+### Updating Data
 
 ```typescript
 const result = await db.run(
@@ -124,10 +122,10 @@ const result = await db.run(
   ['newemail@example.com', 1]
 );
 
-console.log('Filas actualizadas:', result.rowsAffected);
+console.log('Updated rows:', result.rowsAffected);
 ```
 
-### Eliminar datos
+### Deleting Data
 
 ```typescript
 const result = await db.run(
@@ -135,51 +133,51 @@ const result = await db.run(
   [1]
 );
 
-console.log('Filas eliminadas:', result.rowsAffected);
+console.log('Deleted rows:', result.rowsAffected);
 ```
 
-## Transacciones
+## Transactions
 
-Las transacciones garantizan atomicidad: todas las operaciones tienen éxito o todas se revierten:
+Transactions ensure atomicity - either all operations succeed or all are rolled back:
 
 ```typescript
 try {
   await db.transaction(async (tx) => {
-    // Todas las operaciones en este bloque son parte de la transacción
+    // All operations in this block are part of the transaction
     await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Alice', 1000]);
     await tx.run('INSERT INTO accounts (name, balance) VALUES (?, ?)', ['Bob', 500]);
 
-    // Transferir dinero
+    // Transfer money
     await tx.run('UPDATE accounts SET balance = balance - 100 WHERE name = ?', ['Alice']);
     await tx.run('UPDATE accounts SET balance = balance + 100 WHERE name = ?', ['Bob']);
   });
 
-  console.log('¡Transacción confirmada exitosamente!');
+  console.log('Transaction committed successfully!');
 } catch (error) {
-  console.error('Transacción revertida:', error);
-  // Todos los cambios se revierten automáticamente en caso de error
+  console.error('Transaction rolled back:', error);
+  // All changes are automatically rolled back on error
 }
 ```
 
-### Niveles de aislamiento de transacciones
+### Transaction Isolation Levels
 
 ```typescript
 import { FastSQL, IsolationLevel } from '@capgo/capacitor-fast-sql';
 
 await db.transaction(async (tx) => {
-  // Tus operaciones
+  // Your operations
 }, IsolationLevel.Serializable);
 ```
 
-Niveles de aislamiento disponibles:
-- `ReadUncommitted` - Aislamiento más bajo, mayor rendimiento
-- `ReadCommitted` - Previene lecturas sucias
-- `RepeatableRead` - Previene lecturas no repetibles
-- `Serializable` - Aislamiento más alto, previene todas las anomalías
+Available isolation levels:
+- `ReadUncommitted` - Lowest isolation, highest performance
+- `ReadCommitted` - Prevent dirty reads
+- `RepeatableRead` - Prevent non-repeatable reads
+- `Serializable` - Highest isolation, prevents all anomalies
 
-## Operaciones por lotes
+## Batch Operations
 
-Ejecuta múltiples sentencias eficientemente:
+Execute multiple statements efficiently:
 
 ```typescript
 const results = await db.executeBatch([
@@ -197,15 +195,15 @@ const results = await db.executeBatch([
   },
 ]);
 
-console.log('Ejecutadas', results.length, 'sentencias');
+console.log('Executed', results.length, 'statements');
 ```
 
-## Datos binarios (BLOBs)
+## Binary Data (BLOBs)
 
-Almacena y recupera datos binarios usando Uint8Array:
+Store and retrieve binary data using Uint8Array:
 
 ```typescript
-// Almacenar datos binarios
+// Store binary data
 const imageData = new Uint8Array([0xFF, 0xD8, 0xFF, 0xE0, /* ... */]);
 
 await db.run(
@@ -213,14 +211,14 @@ await db.run(
   ['photo.jpg', imageData]
 );
 
-// Recuperar datos binarios
+// Retrieve binary data
 const rows = await db.query('SELECT data FROM images WHERE name = ?', ['photo.jpg']);
 const retrievedData = rows[0].data; // Uint8Array
 ```
 
-## Encriptación (iOS/Android)
+## Encryption (iOS/Android)
 
-Habilita la encriptación SQLCipher para almacenamiento seguro:
+Enable SQLCipher encryption for secure storage:
 
 ```typescript
 const db = await FastSQL.connect({
@@ -231,15 +229,15 @@ const db = await FastSQL.connect({
 ```
 
 :::caution
-- La encriptación solo está disponible en iOS y Android
-- Almacena las claves de encriptación de forma segura (usa Keychain/Keystore)
-- No se pueden abrir bases de datos encriptadas sin la clave correcta
-- La plataforma web no soporta encriptación
+- Encryption is only available on iOS and Android
+- Store encryption keys securely (use Keychain/Keystore)
+- Cannot open encrypted databases without the correct key
+- Web platform does not support encryption
 :::
 
-## Modo de solo lectura
+## Read-Only Mode
 
-Abre bases de datos en modo de solo lectura para prevenir modificaciones:
+Open databases in read-only mode to prevent modifications:
 
 ```typescript
 const db = await FastSQL.connect({
@@ -248,23 +246,23 @@ const db = await FastSQL.connect({
 });
 ```
 
-## Cerrar conexiones
+## Closing Connections
 
-Siempre cierra las conexiones de base de datos cuando hayas terminado:
+Always close database connections when done:
 
 ```typescript
 await FastSQL.disconnect('myapp');
 ```
 
-## Protocolo HTTP directo
+## Direct HTTP Protocol
 
-Para máximo rendimiento con grandes conjuntos de datos, usa el protocolo HTTP directamente:
+For maximum performance with large datasets, use the HTTP protocol directly:
 
 ```typescript
 const { port, token } = await FastSQL.getServerInfo({ database: 'myapp' });
 
-// Hacer solicitudes HTTP directas a localhost:port
-// Incluir token en encabezado Authorization
+// Make direct HTTP requests to localhost:port
+// Include token in Authorization header
 const response = await fetch(`http://localhost:${port}/execute`, {
   method: 'POST',
   headers: {
@@ -280,7 +278,7 @@ const response = await fetch(`http://localhost:${port}/execute`, {
 const result = await response.json();
 ```
 
-## Manejo de errores
+## Error Handling
 
 ```typescript
 import { FastSQL } from '@capgo/capacitor-fast-sql';
@@ -292,18 +290,18 @@ try {
 
 } catch (error) {
   if (error.message.includes('UNIQUE constraint failed')) {
-    console.error('El email ya existe');
+    console.error('Email already exists');
   } else if (error.message.includes('no such table')) {
-    console.error('La tabla no existe');
+    console.error('Table does not exist');
   } else {
-    console.error('Error de base de datos:', error);
+    console.error('Database error:', error);
   }
 }
 ```
 
-## Patrones SQL comunes
+## Common SQL Patterns
 
-### Verificar si existe una tabla
+### Check if Table Exists
 
 ```typescript
 const result = await db.query(
@@ -314,21 +312,21 @@ const result = await db.query(
 const tableExists = result.length > 0;
 ```
 
-### Obtener esquema de tabla
+### Get Table Schema
 
 ```typescript
 const schema = await db.query('PRAGMA table_info(users)');
-console.log('Columnas:', schema);
+console.log('Columns:', schema);
 ```
 
-### Contar filas
+### Count Rows
 
 ```typescript
 const result = await db.query('SELECT COUNT(*) as count FROM users');
 const count = result[0].count;
 ```
 
-### Paginación
+### Pagination
 
 ```typescript
 const pageSize = 20;
@@ -341,20 +339,20 @@ const users = await db.query(
 );
 ```
 
-## Consejos de rendimiento
+## Performance Tips
 
-1. **Usa transacciones** para múltiples operaciones: significativamente más rápido que confirmaciones individuales
-2. **Usa operaciones por lotes** para inserciones masivas: más eficiente que bucles
-3. **Crea índices** en columnas consultadas frecuentemente
-4. **Usa sentencias preparadas** con parámetros (?): previene inyección SQL y mejora el rendimiento
-5. **Usa el protocolo HTTP directamente** para conjuntos de resultados muy grandes
-6. **Cierra conexiones** cuando no estén en uso para liberar recursos
+1. **Use Transactions** for multiple operations - significantly faster than individual commits
+2. **Use Batch Operations** for bulk inserts - more efficient than loops
+3. **Create Indexes** on frequently queried columns
+4. **Use Prepared Statements** with parameters (?) - prevents SQL injection and improves performance
+5. **Use HTTP Protocol Directly** for very large result sets
+6. **Close Connections** when not in use to free resources
 
-## Siguientes pasos
+## Next Steps
 
-Consulta el [tutorial completo](/plugins-tutorials/capacitor-fast-sql) para patrones avanzados que incluyen:
-- Arquitectura de servicio de base de datos
-- Sistemas de migración
-- Motores de sincronización
-- Consultas complejas y uniones
-- Optimización de rendimiento
+Check out the [complete tutorial](/plugins-tutorials/capacitor-fast-sql) for advanced patterns including:
+- Database service architecture
+- Migration systems
+- Sync engines
+- Complex queries and joins
+- Performance optimization

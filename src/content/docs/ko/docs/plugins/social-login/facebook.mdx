@@ -9,80 +9,80 @@ locale: ko
 import { Steps } from '@astrojs/starlight/components';
 
 
-## 소개
+## Introduction
 
-이 가이드에서는 Capgo Social Login으로 Facebook 로그인을 설정하는 방법을 배우게 됩니다. 다음이 필요합니다:
+In this guide, you will learn how to setup Facebook Login with Capgo Social Login. You will need the following:
 
-- Facebook 개발자 계정
-- 앱의 패키지 이름/번들 ID
-- 키 해시 생성을 위한 터미널 액세스 (Android)
+- A Facebook Developer Account
+- Your app's package name/bundle ID
+- Access to a terminal for generating key hashes (Android)
 
-## 일반 설정
+## General Setup
 
-Facebook 앱이 아직 없다면 다음 단계를 따르세요:
+If you don't already have a Facebook app created, follow these steps:
 
 <Steps>
-1. Facebook 앱 생성
+1. Create a Facebook App
+   
+   Follow the tutorial to [Create an App](https://developers.facebook.com/docs/development/create-an-app/)
 
-   [앱 만들기](https://developers.facebook.com/docs/development/create-an-app/) 튜토리얼을 따르세요
+2. Add Facebook Login to your app
+   
+   In your Facebook Developer Dashboard, add the Facebook Login product to your app
 
-2. 앱에 Facebook 로그인 추가
-
-   Facebook 개발자 대시보드에서 앱에 Facebook 로그인 제품을 추가하세요
-
-3. 앱을 대중에게 공개하기 전에 이 [튜토리얼](https://developers.facebook.com/docs/development/release/)을 따라 게시하세요
+3. Before you can release your app to the public, follow this [tutorial](https://developers.facebook.com/docs/development/release/) to publish it
 </Steps>
 
-## 중요 정보
+## Important Information
 
-통합에 필요한 주요 정보를 찾을 수 있는 위치는 다음과 같습니다:
+Here's where to find the key information you'll need for integration:
 
 1. `CLIENT_TOKEN`:
-   <img src="/social-login-assets/fb_where_to_fiind_client_token.png" alt="클라이언트 토큰을 찾을 수 있는 위치를 보여주는 Facebook 개발자 대시보드" />
-
+   <img src="/social-login-assets/fb_where_to_fiind_client_token.png" alt="Facebook developer dashboard showing where to find the client token" />
+  
 2. `APP_ID`:
-   <img src="/social-login-assets/fb_where_to_find_app_id.png" alt="앱 ID를 찾을 수 있는 위치를 보여주는 Facebook 개발자 대시보드" />
+   <img src="/social-login-assets/fb_where_to_find_app_id.png" alt="Facebook developer dashboard showing where to find the app ID" />
 
 3. `APP_NAME`:
-   <img src="/social-login-assets/fb_where_to_find_app_name.png" alt="앱 이름을 찾을 수 있는 위치를 보여주는 Facebook 개발자 대시보드" />
+   <img src="/social-login-assets/fb_where_to_find_app_name.png" alt="Facebook developer dashboard showing where to find the app name" />
 
-## Android 설정
+## Android Setup
 
 <Steps>
-1. `AndroidManifest.xml`에 인터넷 권한 추가
+1. Add internet permission to your `AndroidManifest.xml`
 
-   이 줄이 있는지 확인하세요:
+   Ensure this line is present:
    ```xml
    <uses-permission android:name="android.permission.INTERNET"/>
    ```
 
-2. Android 키 해시 생성
-
-   Facebook에서 요구하는 중요한 보안 단계입니다. 터미널을 열고 다음을 실행하세요:
+2. Generate your Android key hash
+   
+   This is a crucial security step required by Facebook. Open your terminal and run:
 
    ```bash
    keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64 -A
    ```
 
-   비밀번호를 묻는 메시지가 표시되면 `android`를 사용하세요
+   When prompted for a password, use: `android`
 
    :::note
-   릴리스 빌드의 경우 릴리스 키스토어를 사용해야 합니다:
+   For release builds, you'll need to use your release keystore:
    ```bash
    keytool -exportcert -alias your-key-name -keystore your-keystore-path | openssl sha1 -binary | openssl base64 -A
    ```
    :::
 
-3. Facebook 앱에 키 해시 추가
+3. Add the key hash to your Facebook app
+   
+   1. Go to your app's dashboard on Facebook Developers
+   2. Navigate to Settings > Basic
+   3. Scroll down to "Android" section
+   4. Click "Add Platform" if Android isn't added yet and fill in the details
+   5. Add the key hash you generated
+   6. For production, add both debug and release key hashes
 
-   1. Facebook Developers의 앱 대시보드로 이동
-   2. 설정 > 기본으로 이동
-   3. "Android" 섹션으로 스크롤
-   4. Android가 아직 추가되지 않은 경우 "플랫폼 추가"를 클릭하고 세부 정보를 입력
-   5. 생성한 키 해시 추가
-   6. 프로덕션의 경우 디버그 및 릴리스 키 해시를 모두 추가
-
-4. `AndroidManifest.xml`을 업데이트하여 다음을 포함:
+4. Update your `AndroidManifest.xml` to include:
 
    ```xml
    <application>
@@ -90,7 +90,7 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
        <activity android:name="com.facebook.FacebookActivity"
            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
            android:label="@string/app_name" />
-
+       
        <activity
            android:name="com.facebook.CustomTabActivity"
            android:exported="true">
@@ -105,23 +105,23 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
    ```
 
    :::caution
-   `android:scheme` 속성에서 `[APP_ID]`를 실제 Facebook 앱 ID로 교체해야 합니다
+   Make sure to replace `[APP_ID]` with your actual Facebook app ID in the `android:scheme` attribute
    :::
 </Steps>
 
-## iOS 설정
+## iOS Setup
 
 <Steps>
-1. Facebook 개발자 콘솔에 iOS 플랫폼 추가
+1. Add the iOS platform in Facebook Developer Console
+   
+   1. Go to your app's dashboard on Facebook Developers
+   2. Navigate to Settings > Basic
+   3. Scroll down to very bottom of the page and click "Add Platform"
+   4. Select iOS and fill in the required details
 
-   1. Facebook Developers의 앱 대시보드로 이동
-   2. 설정 > 기본으로 이동
-   3. 페이지 맨 아래로 스크롤하여 "플랫폼 추가"를 클릭
-   4. iOS를 선택하고 필요한 세부 정보를 입력
+2. Open your Xcode project and navigate to Info.plist
 
-2. Xcode 프로젝트를 열고 Info.plist로 이동
-
-3. Info.plist에 다음 항목 추가:
+3. Add the following entries to your Info.plist:
 
    ```xml
    <key>FacebookAppID</key>
@@ -147,13 +147,13 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
    ```
 
    :::caution
-   다음 값을 교체하세요:
-   - `[APP-ID]` - Facebook 앱 ID로
-   - `[CLIENT-TOKEN]` - 클라이언트 토큰으로
-   - `[APP-NAME]` - 앱 이름으로
+   Replace the following values:
+   - `[APP-ID]` with your Facebook app ID
+   - `[CLIENT-TOKEN]` with your client token
+   - `[APP-NAME]` with your app's name
    :::
 
-4. `AppDelegate.swift` 수정
+4. Modify the `AppDelegate.swift`
 
    ```swift
    import FBSDKCoreKit
@@ -161,20 +161,20 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
    class AppDelegate: UIResponder, UIApplicationDelegate {
          func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
            // Override point for customization after application launch.
-
+           
            // Initialize Facebook SDK
            FBSDKCoreKit.ApplicationDelegate.shared.application(
                application,
                didFinishLaunchingWithOptions: launchOptions
            )
-
+           
            return true
        }
 
        func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
            // Called when the app was launched with a url. Feel free to add additional processing here,
            // but if you want the App API to support tracking app url opens, make sure to keep this call
-
+           
            if (FBSDKCoreKit.ApplicationDelegate.shared.application(
                app,
                open: url,
@@ -190,19 +190,19 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
    ```
 </Steps>
 
-## 앱에서 Facebook 로그인 사용
+## Using Facebook Login in Your App
 
 :::caution
-**시작하기 전에**: 새로운 Facebook SDK에서는 받는 토큰 유형이 코드 구성이 아니라 사용자의 앱 추적 선택에 전적으로 달려 있다는 것을 기억하세요. 모든 사용자에 대한 인증이 작동하도록 백엔드에서 액세스 토큰과 JWT 토큰 처리를 모두 구현하세요.
+**Before You Start**: Remember that with the new Facebook SDK, the token type you receive depends entirely on the user's App Tracking choice, not on your code configuration. Always implement both access token and JWT token handling in your backend to ensure authentication works for all users.
 :::
 
 <Steps>
-1. 앱에서 Facebook 로그인 초기화
+1. Initialize the Facebook login in your app
 
    ```typescript
    import { SocialLogin } from '@capgo/capacitor-social-login';
 
-   // 앱 시작 시 초기화
+   // Initialize during app startup
    await SocialLogin.initialize({
      facebook: {
        appId: 'APP_ID',
@@ -211,7 +211,7 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
    })
    ```
 
-2. 로그인 함수 구현
+2. Implement the login function
 
    ```typescript
    async function loginWithFacebook() {
@@ -220,76 +220,76 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
          provider: 'facebook',
         options: {
           permissions: ['email', 'public_profile'],
-          limitedLogin: false // 중요한 세부 사항은 아래 제한된 로그인 섹션 참조
+          limitedLogin: false // See Limited Login section below for important details
         }
        });
-       console.log('Facebook 로그인 결과:', result);
-       // 성공적인 로그인 처리
+       console.log('Facebook login result:', result);
+       // Handle successful login
      } catch (error) {
-       console.error('Facebook 로그인 오류:', error);
-       // 오류 처리
+       console.error('Facebook login error:', error);
+       // Handle error
      }
    }
    ```
 
    :::note
-   **제한된 로그인 (iOS 전용)**: Facebook의 제한된 로그인 기능을 사용하려면 `limitedLogin`을 true로 설정하세요. 이것은 로그인 중 공유되는 데이터를 제한하여 향상된 개인 정보 보호를 제공하는 iOS 전용 기능입니다.
+   **Limited Login (iOS Only)**: Set `limitedLogin` to true if you want to use Facebook's Limited Login feature. This is an iOS-only feature that provides enhanced privacy by restricting the data shared during login.
 
-   **중요한 제한 사항:**
-   - **iOS 전용**: 제한된 로그인은 iOS 기기에만 영향을 미치며 Android에는 영향을 주지 않습니다
-   - **ATT 재정의**: `limitedLogin: false`로 설정해도 사용자가 앱 추적 투명성(ATT) 권한을 부여하지 않았다면 Facebook이 자동으로 true로 강제합니다
-   - **항상 두 경우 모두 처리**: 앱은 항상 제한된 로그인과 전체 로그인 시나리오를 모두 처리할 준비가 되어 있어야 합니다
+   **Important Limitations:**
+   - **iOS Only**: Limited Login only affects iOS devices and has no impact on Android
+   - **ATT Override**: Even if you set `limitedLogin: false`, Facebook will automatically force it to `true` if the user hasn't granted App Tracking Transparency (ATT) permission
+   - **Always Handle Both Cases**: Your app should always be prepared to handle both limited and full login scenarios
 
-   **ATT 상태 확인:**
+   **Checking ATT Status:**
    ```typescript
-   // 사용자가 추적 권한을 부여했는지 확인
+   // Check if user has granted tracking permission
    const trackingStatus = await SocialLogin.providerSpecificCall({
      call: 'facebook#requestTracking',
      options: {}
    });
-   console.log('추적 상태:', trackingStatus.status); // 'authorized', 'denied', 'notDetermined', 또는 'restricted'
+   console.log('Tracking status:', trackingStatus.status); // 'authorized', 'denied', 'notDetermined', or 'restricted'
    ```
 
-   **access_token이 선호되는 경우 권장 구현:**
+   **Recommended Implementation if access_token is preferred:**
    ```typescript
    async function loginWithFacebook() {
      try {
-       // 먼저 ATT 상태 확인
+       // Check ATT status first
        const trackingStatus = await SocialLogin.providerSpecificCall({
          call: 'facebook#requestTracking',
          options: {}
        });
-
+       
        const result = await SocialLogin.login({
          provider: 'facebook',
          options: {
            permissions: ['email', 'public_profile'],
-           limitedLogin: trackingStatus.status === 'denied' // ATT에 따라 자동 조정
+           limitedLogin: trackingStatus.status === 'denied' // Auto-adjust based on ATT
          }
        });
-
-       // 제한된 로그인에 따라 다른 응답 유형 처리
+       
+       // Handle different response types based on limited login
        if (result.result.accessToken) {
-         // 앱 로직은 제한된 로그인과 전체 로그인 모두에서 작동해야 합니다
-         console.log('로그인 성공:', result);
+         // Your app logic should work with both limited and full login
+         console.log('Login successful:', result);
        }
      } catch (error) {
-       console.error('Facebook 로그인 오류:', error);
+       console.error('Facebook login error:', error);
      }
    }
    ```
 
-   **제한된 로그인에서 발생하는 일:**
-   - **데이터 액세스 감소**: 일부 사용자 데이터를 사용할 수 없을 수 있습니다
-   - **다른 토큰 유형**: 액세스 토큰은 다른 기능을 가질 수 있습니다
-   - **개인 정보 보호 준수**: iOS 개인 정보 보호 요구 사항을 준수하는 데 도움이 됩니다
+   **What Happens in Limited Login:**
+   - **Reduced Data Access**: Some user data may not be available
+   - **Different Token Types**: Access tokens may have different capabilities
+   - **Privacy Compliance**: Helps comply with iOS privacy requirements
 
-   **중요**: 앱이 두 경우 모두에서 올바르게 작동하도록 제한된 로그인과 전체 로그인 시나리오를 모두 테스트하세요. 제한된 로그인에 대해 [여기](https://developers.facebook.com/docs/facebook-login/limited-login/)에서 자세히 알아볼 수 있습니다.
+   **Important**: Always test your app with both limited and full login scenarios to ensure your app works correctly in both cases. You can learn more about Limited Login [here](https://developers.facebook.com/docs/facebook-login/limited-login/).
    :::
 
-3. **사용자 프로필 데이터 가져오기**
+3. **Get User Profile Data**
 
-   성공적인 로그인 후 추가 프로필 정보를 검색할 수 있습니다:
+   After successful login, you can retrieve additional profile information:
 
    ```typescript
    async function getFacebookProfile() {
@@ -301,66 +301,66 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
          }
        });
 
-       console.log('Facebook 프로필:', profileResponse.profile);
+       console.log('Facebook profile:', profileResponse.profile);
        return profileResponse.profile;
      } catch (error) {
-       console.error('Facebook 프로필 가져오기 실패:', error);
+       console.error('Failed to get Facebook profile:', error);
        return null;
      }
    }
 
-   // 로그인 후 사용 예제
+   // Example usage after login
    async function loginAndGetProfile() {
      const loginResult = await loginWithFacebook();
      if (loginResult) {
        const profile = await getFacebookProfile();
        if (profile) {
-         console.log('사용자 ID:', profile.id);
-         console.log('이름:', profile.name);
-         console.log('이메일:', profile.email);
-         console.log('프로필 사진:', profile.picture?.data?.url);
+         console.log('User ID:', profile.id);
+         console.log('Name:', profile.name);
+         console.log('Email:', profile.email);
+         console.log('Profile Picture:', profile.picture?.data?.url);
        }
      }
    }
    ```
 
    :::tip
-   **사용 가능한 프로필 필드**: Facebook의 Graph API에서 사용 가능한 모든 필드를 요청할 수 있습니다. 일반적인 필드에는 `id`, `name`, `email`, `first_name`, `last_name`, `picture`, `birthday`, `gender`, `location`, `hometown`이 포함됩니다. 일부 필드는 추가 권한이 필요할 수 있습니다.
+   **Available Profile Fields**: You can request any fields available in Facebook's Graph API. Common fields include: `id`, `name`, `email`, `first_name`, `last_name`, `picture`, `birthday`, `gender`, `location`, `hometown`. Note that some fields may require additional permissions.
    :::
 
    :::warning
-   **토큰 유형 제한**: `getProfile` 호출은 **액세스 토큰**(추적이 허용된 표준 로그인)이 있을 때만 작동합니다. 사용자가 추적을 거부했거나 제한된 로그인을 사용 중인 경우(JWT 토큰만), 이 호출은 실패합니다. 이 경우 초기 로그인 응답에 제공된 프로필 데이터를 사용하세요.
+   **Token Type Limitation**: The `getProfile` call only works when you have an **access token** (standard login with tracking allowed). If the user denied tracking or you're using limited login (JWT token only), this call will fail. In that case, use the profile data provided in the initial login response.
    :::
 </Steps>
 
-## ⚠️ 중요: 백엔드 토큰 처리
+## ⚠️ Critical: Backend Token Handling
 
 :::danger
-**중요한 iOS 동작**: 제한된 로그인 및 앱 추적 투명성(ATT)은 **iOS 전용** 기능입니다. Android에서는 `limitedLogin` 설정에 관계없이 항상 액세스 토큰을 받습니다.
+**CRITICAL iOS BEHAVIOR**: Limited Login and App Tracking Transparency (ATT) are **iOS-ONLY** features. On Android, you will always receive access tokens regardless of the `limitedLogin` setting.
 
-**iOS 토큰 동작**:
-- **`limitedLogin: true`** → 항상 JWT 토큰 (iOS만)
-- **`limitedLogin: false` + 사용자가 추적 허용** → 액세스 토큰
-- **`limitedLogin: false` + 사용자가 추적 거부** → JWT 토큰 (iOS가 자동으로 설정 재정의)
+**iOS Token Behavior**: 
+- **`limitedLogin: true`** → Always JWT token (iOS only)
+- **`limitedLogin: false` + User ALLOWS tracking** → Access token  
+- **`limitedLogin: false` + User DENIES tracking** → JWT token (iOS automatically overrides your setting)
 
-**Android 토큰 동작**: 항상 액세스 토큰, `limitedLogin` 설정 무시됨.
+**Android Token Behavior**: Always access token, `limitedLogin` setting is ignored.
 :::
 
-백엔드는 **두 가지 다른 토큰 유형**을 처리해야 합니다. iOS 사용자는 앱 추적 투명성 선택에 따라 액세스 토큰 또는 JWT 토큰을 받을 수 있지만 Android 사용자는 항상 액세스 토큰을 받습니다.
+Your backend must handle **two different token types** because iOS users can receive either access tokens or JWT tokens depending on their App Tracking Transparency choice, while Android users always receive access tokens.
 
-### 플랫폼별 토큰 유형
+### Token Types by Platform
 
-| 플랫폼 | limitedLogin 설정 | 사용자 ATT 선택 | 결과 토큰 유형 |
+| Platform | limitedLogin Setting | User ATT Choice | Result Token Type |
 |----------|---------------------|-----------------|-------------------|
-| **iOS** | `true` | 모두 | JWT 토큰 |
-| **iOS** | `false` | 추적 허용 | 액세스 토큰 |
-| **iOS** | `false` | 추적 거부 | JWT 토큰 (자동 재정의) |
-| **Android** | 모두 | 해당 없음 | 액세스 토큰 (항상) |
+| **iOS** | `true` | Any | JWT Token |
+| **iOS** | `false` | Allows tracking | Access Token |
+| **iOS** | `false` | Denies tracking | JWT Token (auto-override) |
+| **Android** | Any | N/A | Access Token (always) |
 
-### 백엔드 구현
+### Backend Implementation
 
 <Steps>
-1. **토큰 유형 감지 및 적절히 처리**
+1. **Detect Token Type and Handle Accordingly**
 
    ```typescript
    async function loginWithFacebook() {
@@ -369,30 +369,30 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
          provider: 'facebook',
          options: {
            permissions: ['email', 'public_profile'],
-           limitedLogin: false // iOS: ATT에 따라 다름, Android: 무시됨
+           limitedLogin: false // iOS: depends on ATT, Android: ignored
          }
        });
 
        if (loginResult.accessToken) {
-         // 액세스 토큰 (Android 항상, iOS 추적 허용 시)
+         // Access token (Android always, iOS when tracking allowed)
          return handleAccessToken(loginResult.accessToken.token);
        } else if (loginResult.idToken) {
-         // JWT 토큰 (추적 거부 시 또는 limitedLogin: true일 때 iOS만)
+         // JWT token (iOS only when tracking denied or limitedLogin: true)
          return handleJWTToken(loginResult.idToken);
        }
      } catch (error) {
-       console.error('Facebook 로그인 오류:', error);
+       console.error('Facebook login error:', error);
      }
    }
    ```
 
-2. **Firebase 통합 예제**
+2. **Firebase Integration Example**
 
    ```typescript
    import { OAuthProvider, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
 
    async function handleAccessToken(accessToken: string, nonce: string) {
-     // 액세스 토큰의 경우 OAuthProvider 사용 (새 방법)
+     // For access tokens, use OAuthProvider (new method)
      const fbOAuth = new OAuthProvider("facebook.com");
      const credential = fbOAuth.credential({
        idToken: accessToken,
@@ -403,13 +403,13 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
        const userResponse = await signInWithCredential(auth, credential);
        return userResponse;
      } catch (error) {
-       console.error('Firebase OAuth 오류:', error);
+       console.error('Firebase OAuth error:', error);
        return false;
      }
    }
 
    async function handleJWTToken(jwtToken: string) {
-     // JWT 토큰의 경우 검증을 위해 백엔드로 전송
+     // For JWT tokens, send to your backend for validation
      try {
        const response = await fetch('/api/auth/facebook-jwt', {
          method: 'POST',
@@ -422,16 +422,16 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
        const result = await response.json();
        return result;
      } catch (error) {
-       console.error('JWT 검증 오류:', error);
+       console.error('JWT validation error:', error);
        return false;
      }
    }
    ```
 
-3. **백엔드 JWT 검증**
+3. **Backend JWT Validation**
 
    ```typescript
-   // 백엔드: Facebook의 JWT 토큰 검증
+   // Backend: Validate JWT token from Facebook
    import jwt from 'jsonwebtoken';
    import { Request, Response } from 'express';
 
@@ -439,15 +439,15 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
      const { jwtToken } = req.body;
 
      try {
-       // Facebook의 공개 키로 JWT 토큰 검증
-       // 참조: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
+       // Verify JWT token with Facebook's public key
+       // See: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
        const decoded = jwt.verify(jwtToken, getFacebookPublicKey(), {
          algorithms: ['RS256'],
          audience: process.env.FACEBOOK_APP_ID,
          issuer: 'https://www.facebook.com' // From: https://www.facebook.com/.well-known/openid-configuration/?_rdr
        });
 
-       // JWT에서 사용자 정보 추출
+       // Extract user info from JWT
        const userInfo = {
          id: decoded.sub,
          email: decoded.email,
@@ -455,7 +455,7 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
          isJWTAuth: true
        };
 
-       // 앱의 세션/토큰 생성
+       // Create your app's session/token
        const sessionToken = createUserSession(userInfo);
 
        res.json({
@@ -464,106 +464,204 @@ Facebook 앱이 아직 없다면 다음 단계를 따르세요:
          user: userInfo
        });
      } catch (error) {
-       console.error('JWT 검증 실패:', error);
-       res.status(401).json({ success: false, error: '잘못된 토큰' });
+       console.error('JWT validation failed:', error);
+       res.status(401).json({ success: false, error: 'Invalid token' });
      }
    });
    ```
+
+4. **Generic Backend Token Handler**
+
+   ```typescript
+   // Handle both token types in your backend
+   async function authenticateFacebookUser(tokenData: any) {
+     if (tokenData.accessToken) {
+       // Handle access token - validate with Facebook Graph API
+       const response = await fetch(`https://graph.facebook.com/me?access_token=${tokenData.accessToken}&fields=id,name,email`);
+       const userInfo = await response.json();
+       
+       return {
+         user: userInfo,
+         tokenType: 'access_token',
+         expiresIn: tokenData.expiresIn || 3600
+       };
+     } else if (tokenData.jwtToken) {
+       // Handle JWT token - decode and validate
+       // See: https://developers.facebook.com/docs/facebook-login/limited-login/token/validating/#standard-claims
+       const decoded = jwt.verify(tokenData.jwtToken, getFacebookPublicKey());
+       
+       return {
+         user: {
+           id: decoded.sub,
+           name: decoded.name,
+           email: decoded.email
+         },
+         tokenType: 'jwt',
+         expiresIn: decoded.exp - Math.floor(Date.now() / 1000)
+       };
+     } else {
+       throw new Error('No valid token provided');
+     }
+   }
+   ```
 </Steps>
 
-:::tip
-**iOS 필수**: 두 가지 토큰 처리 방법을 모두 구현해야 합니다. 많은 iOS 개발자가 항상 액세스 토큰을 받을 것이라고 가정하지만 사용자가 추적을 거부하면 앱이 중단됩니다.
+### Key Considerations
+
+:::danger
+**Critical iOS-Only Understanding**: 
+- **iOS**: User's App Tracking choice determines token type, NOT your code settings (even when `limitedLogin: false`)
+- **Android**: Always receives access tokens, regardless of `limitedLogin` setting
+- **Limited Login is iOS-ONLY** - Android ignores this setting completely
 :::
 
-## 보안 컨텍스트 요구 사항 (Web/Capacitor)
+**Access Token (Standard Login)**:
+- ✅ **Android**: Always available (iOS-only restrictions don't apply)
+- ✅ **iOS**: Only when user explicitly allows app tracking
+- ✅ Can be used to access Facebook Graph API
+- ✅ Longer expiration times
+- ✅ More user data available
+- ❌ **Becoming less common on iOS** as users increasingly deny tracking
 
-### Crypto API 제한 사항
+**JWT Token (iOS-Only Privacy Mode)**:
+- ❌ **Android**: Never occurs (not supported)
+- ✅ **iOS**: When tracking denied or `limitedLogin: true`
+- ✅ Respects iOS user privacy preferences
+- ❌ Contains basic user info only
+- ❌ Shorter expiration times
+- ❌ No access to Facebook Graph API
+- ⚠️ **Now the most common scenario for iOS users**
 
-업데이트된 Facebook 로그인 플로우는 nonce 생성을 위해 **Web Crypto API**가 필요하며, 이는 **보안 컨텍스트**에서만 사용할 수 있습니다:
+:::warning
+**Platform-Specific Behavior**: 
+- **iOS apps**: Must handle both access tokens AND JWT tokens
+- **Android apps**: Only need to handle access tokens
+- **Cross-platform apps**: Must implement both token handling methods
+:::
+
+:::tip
+**Essential for iOS**: You MUST implement both token handling methods. Many iOS developers assume they'll always get access tokens and their apps break when users deny tracking.
+:::
+
+## Secure Context Requirements (Web/Capacitor)
+
+### Crypto API Limitations
+
+The updated Facebook login flow requires the **Web Crypto API** for nonce generation, which is only available in **secure contexts**:
 
 ```typescript
-// 보안 컨텍스트 필요 (HTTPS 또는 localhost)
+// This requires secure context (HTTPS or localhost)
 async function sha256(message: string) {
   const msgBuffer = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer); // ❌ 비보안 컨텍스트에서 실패
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer); // ❌ Fails in insecure context
   // ...
 }
 ```
 
-### 개발 환경 문제
+### Development Environment Issues
 
-**일반적인 문제**: HTTP URL을 사용하는 `ionic serve`는 Facebook 인증을 중단시킵니다
+**Common Problem**: `ionic serve` with HTTP URLs breaks Facebook authentication
 
-| 환경 | Crypto API 사용 가능 | Facebook 로그인 작동 |
+| Environment | Crypto API Available | Facebook Login Works |
 |-------------|---------------------|---------------------|
-| `http://localhost:3000` | ✅ 예 | ✅ 예 |
-| `http://127.0.0.1:3000` | ✅ 예 | ✅ 예 |
-| `http://192.168.1.100:3000` | ❌ 아니요 | ❌ 아니요 |
-| `https://any-domain.com` | ✅ 예 | ✅ 예 |
+| `http://localhost:3000` | ✅ Yes | ✅ Yes |
+| `http://127.0.0.1:3000` | ✅ Yes | ✅ Yes |
+| `http://192.168.1.100:3000` | ❌ No | ❌ No |
+| `https://any-domain.com` | ✅ Yes | ✅ Yes |
 
-### Capacitor 개발을 위한 솔루션
+### Solutions for Capacitor Development
 
 <Steps>
-1. **웹 테스트에 localhost 사용**
+1. **Use localhost for web testing**
    ```bash
-   # ionic serve --host=0.0.0.0 대신
+   # Instead of ionic serve --host=0.0.0.0
    ionic serve --host=localhost
    ```
 
-2. **Ionic에서 HTTPS 활성화**
+2. **Enable HTTPS in Ionic**
    ```bash
    ionic serve --ssl
    ```
 
-3. **실제 기기에서 테스트**
+3. **Test on actual devices**
    ```bash
-   # Capacitor 앱은 기기에서 보안 컨텍스트로 실행됩니다
+   # Capacitor apps run in secure context on devices
    ionic cap run ios
    ionic cap run android
    ```
+
+4. **Alternative nonce generation for development**
+   ```typescript
+   async function generateNonce() {
+     if (typeof crypto !== 'undefined' && crypto.subtle) {
+       // Secure context - use crypto.subtle
+       return await sha256(Math.random().toString(36).substring(2, 10));
+     } else {
+       // Fallback for development (not secure for production)
+       console.warn('Using fallback nonce - not secure for production');
+       return btoa(Math.random().toString(36).substring(2, 10));
+     }
+   }
+   ```
 </Steps>
 
+### Firebase Integration Note
+
+Recent Firebase documentation requires JWT tokens with nonces for Facebook authentication, regardless of login settings. This approach works with both `limitedLogin: true` and `limitedLogin: false`:
+
+```typescript
+   // Both modes can return JWT tokens depending on user choice
+   const loginResult = await SocialLogin.login({
+     provider: 'facebook',
+     options: {
+       permissions: ['email', 'public_profile'],
+       limitedLogin: false, // true = always JWT, false = depends on user tracking choice
+       nonce: nonce
+     }
+   });
+```
+
 :::warning
-**개발 제한**: 네트워크 IP(localhost가 아님)에서 `ionic serve`를 사용하는 경우 crypto API 제한으로 인해 Facebook 로그인이 실패합니다. 웹 테스트에는 localhost 또는 HTTPS를 사용하세요.
+**Development Limitation**: If you're using `ionic serve` on a network IP (not localhost), Facebook login will fail due to crypto API restrictions. Use localhost or HTTPS for web testing.
 :::
 
 :::tip
-**프로덕션 안전성**: iOS/Android의 Capacitor 앱은 항상 보안 컨텍스트에서 실행되므로 이 제한은 웹 개발 환경에만 영향을 미칩니다.
+**Production Safety**: Capacitor apps on iOS/Android always run in secure contexts, so this limitation only affects web development environments.
 :::
 
-## 문제 해결
+## Troubleshooting
 
-### 일반적인 문제 및 해결 방법
+### Common Issues and Solutions
 
-1. **Android의 키 해시 오류**
-   - Facebook 대시보드에 올바른 키 해시를 추가했는지 다시 확인
-   - 릴리스 빌드의 경우 디버그 및 릴리스 키 해시를 모두 추가했는지 확인
-   - 해시 생성 시 올바른 키스토어를 사용하고 있는지 확인
+1. **Key hash errors on Android**
+   - Double check that you've added the correct key hash to the Facebook dashboard
+   - For release builds, make sure you've added both debug and release key hashes
+   - Verify you're using the correct keystore when generating the hash
 
-2. **Facebook 로그인 버튼이 나타나지 않음**
-   - 모든 매니페스트 항목이 올바른지 확인
-   - Facebook 앱 ID 및 클라이언트 토큰이 올바른지 확인
-   - SDK를 제대로 초기화했는지 확인
+2. **Facebook login button doesn't appear**
+   - Verify all manifest entries are correct
+   - Check that your Facebook App ID and Client Token are correct
+   - Ensure you've properly initialized the SDK
 
-3. **일반적인 iOS 문제**
-   - 모든 Info.plist 항목이 올바른지 확인
-   - URL 스킴이 제대로 구성되었는지 확인
-   - 번들 ID가 Facebook 대시보드에 등록된 것과 일치하는지 확인
+3. **Common iOS issues**
+   - Make sure all Info.plist entries are correct
+   - Verify URL schemes are properly configured
+   - Check that your bundle ID matches what's registered in the Facebook dashboard
 
-### 테스트
+### Testing
 
-1. **테스트하기 전에 Facebook 개발자 콘솔에서 테스트 사용자 추가**
-   - 역할 > 테스트 사용자로 이동
-   - 테스트 사용자 생성
-   - 테스트에 이러한 자격 증명 사용
+1. **Before testing, add test users in the Facebook Developer Console**
+   - Go to Roles > Test Users
+   - Create a test user
+   - Use these credentials for testing
 
-2. **디버그 및 릴리스 빌드 모두 테스트**
-   - 디버그 키 해시를 사용한 디버그 빌드
-   - 릴리스 키 해시를 사용한 릴리스 빌드
-   - 에뮬레이터 및 실제 기기 모두에서 테스트
+2. **Test both debug and release builds**
+   - Debug build with debug key hash
+   - Release build with release key hash
+   - Test on both emulator and physical devices
 
-다음을 포함한 전체 로그인 플로우를 테스트하는 것을 잊지 마세요:
-- 성공적인 로그인
-- 로그인 취소
-- 오류 처리
-- 로그아웃 기능
+Remember to test the full login flow, including:
+- Successful login
+- Login cancellation
+- Error handling
+- Logout functionality

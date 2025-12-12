@@ -6,20 +6,20 @@ description: >-
 locale: ja
 ---
 
-This guide will help you install and configure the **@capgo/capacitor-fast-sql** plugin for high-performance SQLite database access.
+このガイドでは、高性能なSQLiteデータベースアクセスのための**@capgo/capacitor-fast-sql**プラグインをインストールして設定する方法を説明します。
 
-## Why Fast SQL?
+## Fast SQLとは？
 
-Traditional SQLite plugins for Capacitor rely on the standard JavaScript bridge to communicate between your web code and native code. While this works fine for small operations, the bridge becomes a significant bottleneck when you need to transfer large amounts of data. Every piece of data must be serialized to JSON, sent across the bridge, and then deserialized on the other side. This serialization overhead makes operations with thousands of rows or large binary data incredibly slow.
+Capacitor用の従来のSQLiteプラグインは、標準的なJavaScriptブリッジに依存してWebコードとネイティブコード間の通信を行っています。小規模な操作では問題ありませんが、大量のデータを転送する必要がある場合、ブリッジが大きなボトルネックになります。すべてのデータはJSONにシリアル化され、ブリッジ経由で送信され、その後、相手側でデシリアル化されます。このシリアル化のオーバーヘッドにより、数千行のデータまたは大きなバイナリデータの操作は非常に遅くなります。
 
-**Fast SQL solves this problem** by establishing a local HTTP server on the device that communicates directly with the native SQLite database. This custom protocol bypasses Capacitor's bridge entirely, eliminating serialization overhead and enabling:
+**Fast SQLはこの問題を解決します**。デバイス上にローカルHTTPサーバーを確立し、ネイティブSQLiteデータベースと直接通信します。このカスタムプロトコルはCapacitorのブリッジをバイパスし、シリアル化のオーバーヘッドを排除し、以下を実現します:
 
-- **Up to 25x faster performance** for batch operations and large datasets
-- **Efficient binary data transfer** without base64 encoding
-- **Streaming large results** without memory issues
-- **Optimal performance for sync systems** like CRDTs and operational transforms
+- **バッチ操作と大規模データセットで最大25倍高速化**
+- **base64エンコードなしの効率的なバイナリデータ転送**
+- **メモリの問題のない大規模な結果のストリーミング**
+- **CRDTとオペレーショナルトランスフォームのような同期システムの最適なパフォーマンス**
 
-This makes Fast SQL ideal for local-first applications, offline sync systems, and scenarios where you need to replace IndexedDB with a more reliable and performant solution.
+これにより、Fast SQLはローカルファースト アプリケーション、オフライン同期システム、およびIndexedDBをより信頼性が高く高性能なソリューションに置き換える必要があるシナリオに最適です。
 
 ## Installation
 
@@ -343,20 +343,20 @@ const users = await db.query(
 );
 ```
 
-## Performance Tips
+## パフォーマンスティップス
 
-1. **Use Transactions** for multiple operations - significantly faster than individual commits
-2. **Use Batch Operations** for bulk inserts - more efficient than loops
-3. **Create Indexes** on frequently queried columns
-4. **Use Prepared Statements** with parameters (?) - prevents SQL injection and improves performance
-5. **Use HTTP Protocol Directly** for very large result sets
-6. **Close Connections** when not in use to free resources
+1. **複数の操作にはトランザクションを使用** - 個別のコミットより大幅に高速
+2. **バルク挿入にはバッチ操作を使用** - ループより効率的
+3. **頻繁にクエリされるカラムにインデックスを作成**
+4. **パラメータ (?) 付きの準備済みステートメントを使用** - SQLインジェクションを防止しパフォーマンスを向上
+5. **非常に大きな結果セットにはHTTPプロトコルを直接使用**
+6. **使用しない場合は接続を閉じて** リソースを解放
 
-## Next Steps
+## 次のステップ
 
-Check out the [complete tutorial](/plugins-tutorials/capacitor-fast-sql) for advanced patterns including:
-- Database service architecture
-- Migration systems
-- Sync engines
-- Complex queries and joins
-- Performance optimization
+[完全なチュートリアル](/plugins-tutorials/capacitor-fast-sql)で以下を含む高度なパターンを確認してください:
+- データベースサービスアーキテクチャ
+- マイグレーションシステム
+- 同期エンジン
+- 複雑なクエリとジョイン
+- パフォーマンス最適化

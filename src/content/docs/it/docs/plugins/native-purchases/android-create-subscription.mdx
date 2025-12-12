@@ -1,8 +1,6 @@
 ---
-title: Create Android Auto-Renewable Subscription
-description: >-
-  Step-by-step guide to creating auto-renewable subscriptions in Google Play
-  Console for the native-purchases plugin.
+title: Crea Abbonamento Auto-Rinnovabile Android
+description: Guida passo dopo passo per creare abbonamenti auto-rinnovabili in Google Play Console per il plugin native-purchases.
 sidebar:
   order: 4
 locale: it
@@ -10,107 +8,107 @@ locale: it
 
 import { Steps } from '@astrojs/starlight/components';
 
-Auto-renewable subscriptions provide access to content, services, or premium features in your app on an ongoing basis. This guide will help you create and configure subscriptions in Google Play Console.
+Gli abbonamenti auto-rinnovabili forniscono accesso a contenuti, servizi o funzionalità premium nella tua app su base continuativa. Questa guida ti aiuterà a creare e configurare abbonamenti in Google Play Console.
 
-## Overview
+## Panoramica
 
-Subscriptions automatically renew at the end of each billing period until the user cancels. They're ideal for:
-- Premium content access
-- Ad-free experiences
-- Cloud storage
-- Ongoing services
+Gli abbonamenti si rinnovano automaticamente alla fine di ogni periodo di fatturazione fino a quando l'utente non li annulla. Sono ideali per:
+- Accesso ai contenuti Premium
+- Esperienze senza annunci
+- Archiviazione cloud
+- Servizi continui
 
-## Creating a Subscription
+## Creazione di un Abbonamento
 
 <Steps>
 
-1. **Navigate to Subscriptions**
+1. **Vai agli Abbonamenti**
 
-   In Google Play Console, select your app and choose **Monetize > Subscriptions** from the left menu.
+   In Google Play Console, seleziona la tua app e scegli **Monetizzazione > Abbonamenti** dal menu a sinistra.
 
-   Click the **Create subscription** button to begin.
+   Fai clic sul pulsante **Crea abbonamento** per iniziare.
 
-   ![Navigate to subscriptions](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
+   ![Vai agli abbonamenti](/native-purchases/android/create-subscription/navigate-to-subscriptions.webp)
 
-2. **Enter Basic Information**
+2. **Inserisci Informazioni di Base**
 
-   Provide a subscription name and product ID. The product ID is required for configuration in your app and cannot be changed later.
+   Fornisci un nome di abbonamento e un ID prodotto. L'ID del prodotto è richiesto per la configurazione nella tua app e non può essere modificato in seguito.
 
-   ![Enter subscription details](/native-purchases/android/create-subscription/enter-subscription-details.webp)
+   ![Inserisci dettagli dell'abbonamento](/native-purchases/android/create-subscription/enter-subscription-details.webp)
 
-3. **Create Base Plan**
+3. **Crea Piano di Base**
 
-   Google Play requires exactly one base plan per subscription. The native-purchases plugin supports only one base plan to maintain compatibility with iOS.
+   Google Play richiede esattamente un piano di base per abbonamento. Il plugin native-purchases supporta un solo piano di base per mantenere la compatibilità con iOS.
 
-   Click **Add base plan** to continue.
+   Fai clic su **Aggiungi piano di base** per continuare.
 
-   ![Create base plan](/native-purchases/android/create-subscription/create-base-plan.webp)
+   ![Crea piano di base](/native-purchases/android/create-subscription/create-base-plan.webp)
 
-4. **Configure Base Plan Details**
+4. **Configura Dettagli Piano di Base**
 
-   Enter:
-   - **Base plan ID**: Unique identifier for this plan
-   - **Billing period**: How often users are charged (weekly, monthly, yearly, etc.)
-   - **Grace period**: Time window during which Google maintains the subscription while retrying payment before cancellation
+   Inserisci:
+   - **ID piano di base**: Identificatore univoco per questo piano
+   - **Periodo di fatturazione**: Con che frequenza gli utenti vengono addebitati (settimanale, mensile, annuale, ecc.)
+   - **Periodo di grazia**: Finestra temporale durante la quale Google mantiene l'abbonamento mentre riprova il pagamento prima dell'annullamento
 
-   ![Configure base plan](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
+   ![Configura piano di base](/native-purchases/android/create-subscription/configure-base-plan-details.webp)
 
-5. **Set Up Pricing**
+5. **Imposta Prezzi**
 
-   Access the pricing section and select all countries/regions where you want to offer the subscription.
+   Accedi alla sezione dei prezzi e seleziona tutti i paesi/regioni in cui desideri offrire l'abbonamento.
 
-   ![Select regions](/native-purchases/android/create-subscription/select-pricing-regions.webp)
+   ![Seleziona regioni](/native-purchases/android/create-subscription/select-pricing-regions.webp)
 
-6. **Configure Price**
+6. **Configura Prezzo**
 
-   Set your base price in your primary currency. Google Play automatically converts this to local currencies.
+   Imposta il tuo prezzo di base nella tua valuta principale. Google Play lo converte automaticamente nelle valute locali.
 
-   ![Set price](/native-purchases/android/create-subscription/set-base-price.webp)
+   ![Imposta prezzo](/native-purchases/android/create-subscription/set-base-price.webp)
 
-7. **Review Regional Pricing**
+7. **Rivedi Prezzi Regionali**
 
-   Review the automatically converted prices for each country. You can adjust individual prices if needed.
+   Rivedi i prezzi convertiti automaticamente per ogni paese. Puoi modificare i singoli prezzi se necessario.
 
-   ![Review pricing](/native-purchases/android/create-subscription/review-regional-pricing.webp)
+   ![Rivedi prezzi](/native-purchases/android/create-subscription/review-regional-pricing.webp)
 
-8. **Save Configuration**
+8. **Salva Configurazione**
 
-   Save your pricing configuration.
+   Salva la tua configurazione dei prezzi.
 
-   ![Save pricing](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
+   ![Salva prezzi](/native-purchases/android/create-subscription/save-pricing-configuration.webp)
 
-9. **Activate Subscription**
+9. **Attiva Abbonamento**
 
-   Click the **Activate** button to make your subscription product live and available for purchase.
+   Fai clic sul pulsante **Attiva** per rendere il tuo prodotto di abbonamento attivo e disponibile per l'acquisto.
 
-   ![Activate subscription](/native-purchases/android/create-subscription/activate-subscription.webp)
+   ![Attiva abbonamento](/native-purchases/android/create-subscription/activate-subscription.webp)
 
 </Steps>
 
-## Important Considerations
+## Considerazioni Importanti
 
-### Base Plan Limitation
+### Limitazione Piano di Base
 
-The native-purchases plugin requires exactly one base plan per subscription to ensure consistency with iOS subscription handling. Multiple base plans are not supported.
+Il plugin native-purchases richiede esattamente un piano di base per abbonamento per garantire coerenza con la gestione degli abbonamenti iOS. Più piani di base non sono supportati.
 
-### Grace Period
+### Periodo di Grazia
 
-The grace period allows Google Play to retry failed payments while maintaining the user's subscription access. Common grace periods are:
-- 3 days for monthly subscriptions
-- 7 days for longer subscriptions
+Il periodo di grazia consente a Google Play di riprovare i pagamenti non riusciti mantenendo l'accesso all'abbonamento dell'utente. I periodi di grazia comuni sono:
+- 3 giorni per gli abbonamenti mensili
+- 7 giorni per gli abbonamenti più lunghi
 
-### Subscription Status
+### Stato dell'Abbonamento
 
-After creation, your subscription will be in "Draft" status until activated. You can test draft subscriptions in sandbox mode.
+Dopo la creazione, il tuo abbonamento avrà lo stato "Bozza" fino all'attivazione. Puoi testare gli abbonamenti in bozza in modalità sandbox.
 
-## Using in Your App
+## Utilizzo nella Tua App
 
-Once created, reference the subscription in your app using the product ID:
+Una volta creato, fai riferimento all'abbonamento nella tua app utilizzando l'ID del prodotto:
 
 ```typescript
 import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
 
-// Load subscription info
+// Carica informazioni sull'abbonamento
 const { products } = await NativePurchases.getProducts({
   productIdentifiers: ['com.example.premium.monthly'],
   productType: PURCHASE_TYPE.SUBS,
@@ -119,16 +117,16 @@ const { products } = await NativePurchases.getProducts({
 const product = products[0];
 console.log(`${product.title} — ${product.priceString}`);
 
-// Purchase (planIdentifier = Base Plan ID from Google Play Console)
+// Acquista (planIdentifier = ID Piano di Base da Google Play Console)
 const transaction = await NativePurchases.purchaseProduct({
   productIdentifier: 'com.example.premium.monthly',
-  planIdentifier: 'monthly-plan', // REQUIRED on Android, ignored on iOS
+  planIdentifier: 'monthly-plan', // RICHIESTO su Android, ignorato su iOS
   productType: PURCHASE_TYPE.SUBS,
 });
 
-console.log('Transaction ID', transaction.transactionId);
+console.log('ID Transazione', transaction.transactionId);
 
-// Later, check purchase state
+// Successivamente, controlla lo stato dell'acquisto
 const { purchases } = await NativePurchases.getPurchases({
   productType: PURCHASE_TYPE.SUBS,
 });
@@ -138,31 +136,31 @@ const subscription = purchases.find(
 );
 
 if (subscription && subscription.purchaseState === 'PURCHASED' && subscription.isAcknowledged) {
-  console.log('Subscription active locally');
-  // For expiration/cancellation, validate purchaseToken through your backend
+  console.log('Abbonamento attivo localmente');
+  // Per la scadenza/annullamento, convalida purchaseToken tramite il tuo backend
 }
 ```
 
-## Next Steps
+## Prossimi Passi
 
-- [Create an introductory offer](/docs/plugins/native-purchases/android-introductory-offer/) to attract new subscribers
-- [Configure sandbox testing](/docs/plugins/native-purchases/android-sandbox-testing/) to test your subscriptions
-- Set up backend receipt validation for security
+- [Crea un'offerta introduttiva](/docs/plugins/native-purchases/android-introductory-offer/) per attirare nuovi abbonati
+- [Configura test sandbox](/docs/plugins/native-purchases/android-sandbox-testing/) per testare i tuoi abbonamenti
+- Configura la convalida della ricevuta del backend per la sicurezza
 
-## Troubleshooting
+## Risoluzione dei Problemi
 
-**Subscription not appearing in app:**
-- Verify the product ID matches exactly
-- Ensure the subscription is activated
-- Check that your app has the correct package name
-- Wait 2-3 hours after activation for changes to propagate
+**L'abbonamento non appare nell'app:**
+- Verifica che l'ID del prodotto corrisponda esattamente
+- Assicurati che l'abbonamento sia attivato
+- Controlla che la tua app abbia il nome del pacchetto corretto
+- Attendi 2-3 ore dopo l'attivazione affinché le modifiche si propaghino
 
-**Base plan errors:**
-- Ensure you have exactly one base plan
-- Verify all required fields are filled
-- Check that billing period is valid
+**Errori del piano di base:**
+- Assicurati di avere esattamente un piano di base
+- Verifica che tutti i campi obbligatori siano compilati
+- Controlla che il periodo di fatturazione sia valido
 
-**Pricing issues:**
-- Confirm at least one country is selected
-- Verify base price is greater than minimum allowed
-- Check currency conversion rates are acceptable
+**Problemi di prezzi:**
+- Conferma che almeno un paese sia selezionato
+- Verifica che il prezzo di base sia maggiore del minimo consentito
+- Controlla che i tassi di conversione della valuta siano accettabili

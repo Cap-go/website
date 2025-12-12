@@ -6,7 +6,7 @@ description: >-
 locale: ja
 ---
 
-This guide will walk you through integrating the Capacitor RealtimeKit plugin to add video conferencing powered by Cloudflare Calls to your application.
+このガイドでは、Cloudflare Callsを活用したビデオ会議を追加するために、Capacitor RealtimeKitプラグインを統合する方法を説明します。
 
 ## Installation
 
@@ -418,19 +418,19 @@ export default {
 };
 ```
 
-## Best Practices
+## ベストプラクティス
 
-1. **Initialize Early**: Initialize RealtimeKit when your app starts
-2. **Handle Errors**: Always wrap calls in try-catch blocks
-3. **Request Permissions**: Ensure camera/microphone permissions before starting
-4. **Test Network**: Check internet connectivity before joining
-5. **Background Audio**: Configure background modes for iOS
-6. **User Experience**: Show loading states during initialization
-7. **Clean URLs**: Validate meeting URLs before use
+1. **早期に初期化**: アプリの起動時にRealtimeKitを初期化します
+2. **エラー処理**: 常にtry-catchブロックで呼び出しをラップします
+3. **権限をリクエスト**: 開始前にカメラ/マイク権限を確認します
+4. **ネットワークをテスト**: 参加前にインターネット接続を確認します
+5. **バックグラウンドオーディオ**: iOSのバックグラウンドモードを設定します
+6. **ユーザー体験**: 初期化中に読み込み状態を表示します
+7. **URLをクリーンにする**: 使用前にミーティングURLを検証します
 
-## Common Issues
+## 一般的な問題
 
-### Meeting Not Starting
+### ミーティングが開始しない
 
 ```typescript
 async function troubleshootMeeting(meetingUrl: string) {

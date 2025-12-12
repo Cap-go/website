@@ -1,8 +1,8 @@
 ---
-title: Getting started
+title: Erste Schritte
 description: >-
-  A comprehensive guide on setting up and managing your own auto-update server
-  for seamless application updates and maintenance
+  Ein umfassender Leitfaden zum Einrichten und Verwalten Ihres eigenen Auto-Update-Servers
+  für nahtlose Anwendungsupdates und Wartung
 sidebar:
   order: 1
 locale: de
@@ -10,64 +10,64 @@ locale: de
 
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
-This documentation will explain how to run your own auto-update server.
+Diese Dokumentation erklärt, wie Sie Ihren eigenen Auto-Update-Server ausführen.
 
-## Introduction
+## Einführung
 
-If you find this work helpful, please consider supporting my work by becoming a [Github sponsor](https://github.com/sponsors/riderx).
+Wenn Sie diese Arbeit hilfreich finden, bitte unterstützen Sie meine Arbeit, indem Sie ein [Github-Sponsor](https://github.com/sponsors/riderx) werden.
 
-I made a bet to open-source all the code I built here instead of paywalling it. By opening it up instead of fighting and hiding, I believe we can make the world a better place.
+Ich habe die Wette eingegangen, all den Code, den ich hier gebaut habe, Open-Source zu machen, anstatt ihn hinter einer Paywall zu verstecken. Indem ich ihn öffne, anstatt zu kämpfen und mich zu verstecken, glaube ich, dass wir die Welt besser machen können.
 
-Furthermore, I want to focus on Capgo tooling, and make it an open and transparent business.
+Darüber hinaus möchte ich mich auf die Capgo-Werkzeuge konzentrieren und ein offenes und transparentes Geschäft aufbauen.
 
-But to make it possible, it is necessary for all of us to do our part, including you 🥹.
+Aber damit es möglich ist, ist es notwendig, dass wir alle unseren Teil dazu beitragen, einschließlich Ihnen 🥹.
 
-If Capgo doesn't suit you, then pay your own price and [back a bootstrapped Maker](https://github.com/sponsors/riderx) on your terms.
+Wenn Capgo nicht zu Ihnen passt, zahlen Sie Ihren eigenen Preis und [unterstützen Sie einen unabhängigen Entwickler](https://github.com/sponsors/riderx) nach Ihren Bedingungen.
 
-<LinkCard title="Consider Contributing" href="/docs/plugin/self-hosted/contributing/"/>
-## Features parity
+<LinkCard title="Erwägen Sie einen Beitrag" href="/docs/plugin/self-hosted/contributing/"/>
+## Paritäts-Features
 
-If you choose to go with your own server, you will lose the 5-min setup flow.\
-You need to implement all of these features yourself.
+Wenn Sie sich für Ihren eigenen Server entscheiden, verlieren Sie den 5-Minuten-Setup-Ablauf.\
+Sie müssen alle diese Funktionen selbst implementieren.
 
 
-| Features                 | Capgo | Self hosted |
+| Features                 | Capgo | Self-Hosted |
 | ------------------------ | ----- | ----------- |
 | Updates                  | ✅     | 🚧         |
-| Auto revert              | ✅     | 🚧         |
-| Email alerts on fail     | ✅     | 🚧         |
-| Channels                 | ✅     | 🚧         |
-| Channels Override        | ✅     | 🚧         |
-| Device Override          | ✅     | 🚧         |
-| Channels Settings        | ✅     | 🚧         |
-| Device Settings          | ✅     | 🚧         |
-| Custom ID                | ✅     | 🚧         |
-| Auto Set Channels        | ✅     | 🚧         |
-| API Channels             | ✅     | 🚧         |
-| Updates Statistics       | ✅     | 🚧         |
-| Fail Download Statistics | ✅     | 🚧         |
-| App Usage Statistics     | ✅     | 🚧         |
-| Update Encryption        | ✅     | 🚧         |
-| Differential updates     | ✅     | ❌         |
+| Automatische Wiederherstellung | ✅     | 🚧         |
+| E-Mail-Benachrichtigungen bei Fehler | ✅     | 🚧         |
+| Kanäle                   | ✅     | 🚧         |
+| Kanäl-Überschreitung     | ✅     | 🚧         |
+| Geräte-Überschreitung    | ✅     | 🚧         |
+| Kanäl-Einstellungen      | ✅     | 🚧         |
+| Geräte-Einstellungen     | ✅     | 🚧         |
+| Benutzerdefinierte ID    | ✅     | 🚧         |
+| Kanäle automatisch festlegen | ✅     | 🚧         |
+| API-Kanäle              | ✅     | 🚧         |
+| Update-Statistiken       | ✅     | 🚧         |
+| Download-Fehler-Statistiken | ✅     | 🚧         |
+| App-Nutzungsstatistiken  | ✅     | 🚧         |
+| Update-Verschlüsselung   | ✅     | 🚧         |
+| Differenzielle Updates   | ✅     | ❌         |
 
 :::danger
-If you send a bad update to your users you can and will break their app.
+Wenn Sie ein schlechtes Update an Ihre Benutzer senden, können Sie deren App beschädigen.
 :::
 
-> Be mindful that you can't use the Capgo cloud and your server at the same time.
+> Beachten Sie, dass Sie Capgo Cloud und Ihren Server nicht gleichzeitig nutzen können.
 
 
 
 :::danger
-The Over-the-Air (OTA) update feature is applicable only for modifications made to HTML, CSS, and JavaScript files.
+Die Over-the-Air (OTA)-Update-Funktion ist nur für Änderungen an HTML-, CSS- und JavaScript-Dateien anwendbar.
 
-If you make any changes to the native code, such as updates to Capacitor plugins, it is mandatory to resubmit the application to the app store for approval.
+Wenn Sie Änderungen am nativen Code vornehmen, z. B. an Capacitor-Plugins, müssen Sie die Anwendung zum App Store zur Genehmigung erneut einreichen.
 :::
 
-## Choose between Auto and Manual
-In auto mode, part of the logic is handled by the Native code, updates are decided server side, this is more secure and allows fine grain updates, partial deployment to one device or group and more.
+## Wählen Sie zwischen Auto und Manuell
+Im Auto-Modus wird ein Teil der Logik vom nativen Code verarbeitet, Updates werden serverseitig entschieden, dies ist sicherer und ermöglicht granulare Updates, teilweise Bereitstellung auf einem Gerät oder einer Gruppe und mehr.
 
-In manual mode, all the logic is handled by the JS.
+Im manuellen Modus wird die gesamte Logik vom JS verarbeitet.
 
 
 
@@ -77,27 +77,27 @@ In manual mode, all the logic is handled by the JS.
 />
 
 <LinkCard
-	title="Manual"
+	title="Manuell"
 	href="/docs/plugin/self-hosted/manual-update/"
 />
 
-## Install Capacitor updater
+## Installieren Sie Capacitor Updater
 
-```bash title="Install the Capacitor updater"
+```bash title="Installieren Sie den Capacitor Updater"
 npm install @capgo/capacitor-updater
 npx cap sync
 ```
 
-## Prepare your bundle
+## Bereiten Sie Ihr Bundle vor
 
-To send updates to your app, you need to zip it.
-The best way to be certain your zip is good is to use the Capgo CLI for zipping.
-```bash title="Create a bundle with your files to serve from your server"
+Um Updates an Ihre App zu senden, müssen Sie sie zippen.
+Die beste Möglichkeit, um sicherzustellen, dass Ihre ZIP-Datei gut ist, besteht darin, die Capgo CLI zum Zippen zu verwenden.
+```bash title="Erstellen Sie ein Bundle mit Ihren Dateien, das Sie von Ihrem Server bereitstellen"
 npx @capgo/cli@latest bundle zip
 ```
 
 
-You will have to serve this zip from your server on your own.
+Sie müssen diese ZIP-Datei selbst von Ihrem Server bereitstellen.
 
 <LinkCard
 	title="Auto Update"
@@ -105,15 +105,15 @@ You will have to serve this zip from your server on your own.
 />
 
 <LinkCard
-	title="Manual"
+	title="Manuell"
 	href="/docs/plugin/self-hosted/manual-update/"
 />
 
 
 :::note
-If this seems like a lot of work, try the trial Capgo Cloud.
+Wenn dies wie viel Arbeit klingt, versuchen Sie die Testversion von Capgo Cloud.
 :::
 
 :::note
-Differential update will not work in manual updates, but it can work in auto update, right now it's not documented as it's pretty complex process
+Differenzielle Updates funktionieren nicht bei manuellen Updates, können aber bei Auto-Updates funktionieren. Derzeit ist es nicht dokumentiert, da es ein ziemlich komplexer Prozess ist
 :::

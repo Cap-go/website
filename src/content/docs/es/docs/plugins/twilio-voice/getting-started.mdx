@@ -1,14 +1,12 @@
----
-title: Primeros Pasos
-locale: es
-description: Aprende cómo instalar e integrar Twilio Voice para llamadas VoIP en tu aplicación Capacitor.
+---title: Getting Started
+description: Learn how to install and integrate Twilio Voice for VoIP calling in your Capacitor app.
 sidebar:
-  order: 2
----
+order: 2
+locale: es---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Instalación
+## Installation
 
 <Tabs>
   <TabItem label="npm">
@@ -37,30 +35,30 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
   </TabItem>
 </Tabs>
 
-## Prerrequisitos
+## Prerequisites
 
-Necesitarás una cuenta de Twilio y tokens de acceso para la autenticación. Regístrate en [Twilio](https://www.twilio.com/) si no tienes una cuenta.
+You'll need a Twilio account and access tokens for authentication. Sign up at [Twilio](https://www.twilio.com/) if you don't have an account.
 
-## Configuración de la Plataforma
+## Platform Configuration
 
 ### iOS
 
-Agrega los permisos requeridos a tu `Info.plist`:
+Add required permissions to your `Info.plist`:
 
 ```xml
 <key>NSMicrophoneUsageDescription</key>
-<string>Esta aplicación necesita acceso al micrófono para llamadas de voz</string>
+<string>This app needs microphone access for voice calls</string>
 ```
 
-Para llamadas entrantes con PushKit:
+For incoming calls with PushKit:
 
-1. Habilita las Notificaciones Push en las capacidades de Xcode
-2. Agrega el modo de fondo VoIP
-3. Configura el certificado VoIP en la consola de Twilio
+1. Enable Push Notifications in Xcode capabilities
+2. Add VoIP background mode
+3. Configure VoIP certificate in Twilio console
 
 ### Android
 
-Agrega los permisos requeridos a tu `AndroidManifest.xml`:
+Add required permissions to your `AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -70,66 +68,66 @@ Agrega los permisos requeridos a tu `AndroidManifest.xml`:
 <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 ```
 
-Configura Firebase para notificaciones push:
+Configure Firebase for push notifications:
 
-1. Agrega `google-services.json` a tu proyecto Android
-2. Configura FCM en la consola de Twilio
+1. Add `google-services.json` to your Android project
+2. Configure FCM in Twilio console
 
-## Ejemplo de Uso
+## Usage Example
 
 ```typescript
 import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
 
-// Autenticarse con Twilio
+// Authenticate with Twilio
 await TwilioVoice.login({
-  accessToken: 'tu-token-de-acceso-twilio'
+  accessToken: 'your-twilio-access-token'
 });
 
-// Hacer una llamada
+// Make a call
 await TwilioVoice.makeCall({
   to: '+1234567890'
 });
 
-// Escuchar eventos de llamada
+// Listen for call events
 TwilioVoice.addListener('callConnected', (data) => {
-  console.log('Llamada conectada:', data.callSid);
+  console.log('Call connected:', data.callSid);
 });
 
 TwilioVoice.addListener('callDisconnected', (data) => {
-  console.log('Llamada desconectada:', data.callSid);
+  console.log('Call disconnected:', data.callSid);
 });
 
 TwilioVoice.addListener('incomingCall', (data) => {
-  console.log('Llamada entrante de:', data.from);
+  console.log('Incoming call from:', data.from);
 
-  // Aceptar la llamada
+  // Accept the call
   TwilioVoice.acceptCall({ callSid: data.callSid });
 
-  // O rechazarla
+  // Or reject it
   // TwilioVoice.rejectCall({ callSid: data.callSid });
 });
 
-// Silenciar/activar llamada
+// Mute/unmute call
 await TwilioVoice.muteCall({
   muted: true,
-  callSid: 'sid-de-llamada-actual'
+  callSid: 'current-call-sid'
 });
 
-// Activar altavoz
+// Toggle speaker
 await TwilioVoice.setSpeaker({
   enabled: true
 });
 
-// Finalizar llamada
+// End call
 await TwilioVoice.endCall({
-  callSid: 'sid-de-llamada-actual'
+  callSid: 'current-call-sid'
 });
 
-// Cerrar sesión
+// Logout
 await TwilioVoice.logout();
 ```
 
-## Referencia de API
+## API Reference
 
 ### login(options)
 
@@ -137,9 +135,9 @@ await TwilioVoice.logout();
 login(options: { accessToken: string }) => Promise<void>
 ```
 
-Autenticarse con Twilio usando un token de acceso.
+Authenticate with Twilio using an access token.
 
-| Parámetro     | Tipo                              |
+| Param         | Type                              |
 | ------------- | --------------------------------- |
 | **`options`** | `{ accessToken: string }` |
 
@@ -149,7 +147,7 @@ Autenticarse con Twilio usando un token de acceso.
 logout() => Promise<void>
 ```
 
-Finalizar la sesión del usuario y limpiar el estado de llamadas.
+End user session and clear call state.
 
 ### isLoggedIn()
 
@@ -157,9 +155,9 @@ Finalizar la sesión del usuario y limpiar el estado de llamadas.
 isLoggedIn() => Promise<{ loggedIn: boolean }>
 ```
 
-Verificar el estado de autenticación actual.
+Check current authentication status.
 
-**Retorna:** `Promise<{ loggedIn: boolean }>`
+**Returns:** `Promise<{ loggedIn: boolean }>`
 
 ### makeCall(options)
 
@@ -167,13 +165,13 @@ Verificar el estado de autenticación actual.
 makeCall(options: { to: string; params?: Record<string, string> }) => Promise<{ callSid: string }>
 ```
 
-Iniciar una llamada saliente a un número específico.
+Initiate an outgoing call to a specified number.
 
-| Parámetro     | Tipo                                                    |
+| Param         | Type                                                    |
 | ------------- | ------------------------------------------------------- |
 | **`options`** | `{ to: string; params?: Record<string, string> }` |
 
-**Retorna:** `Promise<{ callSid: string }>`
+**Returns:** `Promise<{ callSid: string }>`
 
 ### acceptCall(options)
 
@@ -181,9 +179,9 @@ Iniciar una llamada saliente a un número específico.
 acceptCall(options: { callSid: string }) => Promise<void>
 ```
 
-Aceptar una llamada entrante.
+Accept an incoming call.
 
-| Parámetro     | Tipo                       |
+| Param         | Type                       |
 | ------------- | -------------------------- |
 | **`options`** | `{ callSid: string }` |
 
@@ -193,9 +191,9 @@ Aceptar una llamada entrante.
 rejectCall(options: { callSid: string }) => Promise<void>
 ```
 
-Rechazar una llamada entrante.
+Reject an incoming call.
 
-| Parámetro     | Tipo                       |
+| Param         | Type                       |
 | ------------- | -------------------------- |
 | **`options`** | `{ callSid: string }` |
 
@@ -205,11 +203,11 @@ Rechazar una llamada entrante.
 endCall(options?: { callSid?: string }) => Promise<void>
 ```
 
-Terminar una llamada activa.
+Terminate an active call.
 
-| Parámetro     | Tipo                         |
+| Param         | Type                         |
 | ------------- | ---------------------------- |
-| **`options`** | `{ callSid?: string }` (opcional) |
+| **`options`** | `{ callSid?: string }` (optional) |
 
 ### muteCall(options)
 
@@ -217,9 +215,9 @@ Terminar una llamada activa.
 muteCall(options: { muted: boolean; callSid?: string }) => Promise<void>
 ```
 
-Silenciar o activar el audio de la llamada.
+Mute or unmute call audio.
 
-| Parámetro     | Tipo                                            |
+| Param         | Type                                            |
 | ------------- | ----------------------------------------------- |
 | **`options`** | `{ muted: boolean; callSid?: string }` |
 
@@ -229,9 +227,9 @@ Silenciar o activar el audio de la llamada.
 setSpeaker(options: { enabled: boolean }) => Promise<void>
 ```
 
-Activar o desactivar el altavoz.
+Toggle speaker output.
 
-| Parámetro     | Tipo                          |
+| Param         | Type                          |
 | ------------- | ----------------------------- |
 | **`options`** | `{ enabled: boolean }` |
 
@@ -241,77 +239,77 @@ Activar o desactivar el altavoz.
 sendDigits(options: { digits: string; callSid?: string }) => Promise<void>
 ```
 
-Enviar tonos DTMF durante una llamada.
+Send DTMF tones during a call.
 
-| Parámetro     | Tipo                                          |
+| Param         | Type                                          |
 | ------------- | --------------------------------------------- |
 | **`options`** | `{ digits: string; callSid?: string }` |
 
-## Listeners de Eventos
+## Event Listeners
 
-### Eventos Disponibles
+### Available Events
 
-- `registered` - Registrado exitosamente con Twilio
-- `unregistered` - Desregistrado de Twilio
-- `registrationFailed` - Fallo en el registro
-- `incomingCall` - Llamada entrante recibida
-- `callConnected` - Llamada conectada exitosamente
-- `callDisconnected` - Llamada desconectada
-- `callRinging` - Llamada saliente sonando
-- `callReconnecting` - Llamada reconectando
-- `callReconnected` - Llamada reconectada después de interrupción
-- `qualityWarning` - Advertencia de calidad de llamada
-- `error` - Ocurrió un error
+- `registered` - Successfully registered with Twilio
+- `unregistered` - Unregistered from Twilio
+- `registrationFailed` - Registration failed
+- `incomingCall` - Incoming call received
+- `callConnected` - Call successfully connected
+- `callDisconnected` - Call disconnected
+- `callRinging` - Outgoing call is ringing
+- `callReconnecting` - Call is reconnecting
+- `callReconnected` - Call reconnected after interruption
+- `qualityWarning` - Call quality warning
+- `error` - An error occurred
 
-### Ejemplos de Eventos
+### Event Examples
 
 ```typescript
-// Manejar llamadas entrantes
+// Handle incoming calls
 TwilioVoice.addListener('incomingCall', (data) => {
-  console.log('Llamada entrante de:', data.from);
+  console.log('Incoming call from:', data.from);
   console.log('Call SID:', data.callSid);
 
-  // Mostrar UI de llamada entrante
+  // Show incoming call UI
   showIncomingCallScreen({
     from: data.from,
     callSid: data.callSid
   });
 });
 
-// Manejar cambios de estado de llamada
+// Handle call state changes
 TwilioVoice.addListener('callConnected', (data) => {
-  console.log('Llamada conectada:', data.callSid);
+  console.log('Call connected:', data.callSid);
   startCallTimer();
 });
 
 TwilioVoice.addListener('callDisconnected', (data) => {
-  console.log('Llamada finalizada:', data.callSid);
+  console.log('Call ended:', data.callSid);
   stopCallTimer();
   hideCallScreen();
 });
 
-// Manejar advertencias de calidad
+// Handle quality warnings
 TwilioVoice.addListener('qualityWarning', (data) => {
-  console.warn('Advertencia de calidad de llamada:', data.warning);
+  console.warn('Call quality warning:', data.warning);
   showQualityWarning(data.warning);
 });
 
-// Manejar errores
+// Handle errors
 TwilioVoice.addListener('error', (error) => {
-  console.error('Error de Twilio:', error.message);
+  console.error('Twilio error:', error.message);
   handleError(error);
 });
 
-// Remover listeners cuando termines
+// Remove listeners when done
 const listener = await TwilioVoice.addListener('callConnected', (data) => {
-  console.log('Conectado');
+  console.log('Connected');
 });
 
-// Más tarde...
+// Later...
 listener.remove();
 ```
 
-## Ejemplo Completo
+## Complete Example
 
 ```typescript
 import { TwilioVoice } from '@capgo/capacitor-twilio-voice';
@@ -323,34 +321,34 @@ class VoiceCallService {
 
   async initialize(accessToken: string) {
     try {
-      // Iniciar sesión en Twilio
+      // Login to Twilio
       await TwilioVoice.login({ accessToken });
 
-      // Verificar estado de inicio de sesión
+      // Check login status
       const { loggedIn } = await TwilioVoice.isLoggedIn();
-      console.log('Estado de inicio de sesión:', loggedIn);
+      console.log('Login status:', loggedIn);
 
-      // Configurar listeners de eventos
+      // Setup event listeners
       this.setupEventListeners();
 
     } catch (error) {
-      console.error('Fallo al inicializar:', error);
+      console.error('Failed to initialize:', error);
     }
   }
 
   setupEventListeners() {
-    // Eventos de registro
+    // Registration events
     TwilioVoice.addListener('registered', () => {
-      console.log('Registrado exitosamente con Twilio');
+      console.log('Successfully registered with Twilio');
     });
 
     TwilioVoice.addListener('registrationFailed', (error) => {
-      console.error('Fallo en el registro:', error);
+      console.error('Registration failed:', error);
     });
 
-    // Llamada entrante
+    // Incoming call
     TwilioVoice.addListener('incomingCall', async (data) => {
-      console.log('Llamada entrante de:', data.from);
+      console.log('Incoming call from:', data.from);
 
       const accepted = await this.showIncomingCallDialog(data.from);
 
@@ -362,26 +360,26 @@ class VoiceCallService {
       }
     });
 
-    // Eventos de llamada
+    // Call events
     TwilioVoice.addListener('callConnected', (data) => {
-      console.log('Llamada conectada');
+      console.log('Call connected');
       this.currentCallSid = data.callSid;
       this.showCallScreen();
     });
 
     TwilioVoice.addListener('callDisconnected', () => {
-      console.log('Llamada desconectada');
+      console.log('Call disconnected');
       this.currentCallSid = null;
       this.hideCallScreen();
     });
 
     TwilioVoice.addListener('callRinging', () => {
-      console.log('Llamada sonando...');
+      console.log('Call ringing...');
     });
 
-    // Advertencias de calidad
+    // Quality warnings
     TwilioVoice.addListener('qualityWarning', (data) => {
-      console.warn('Advertencia de calidad de llamada:', data.warning);
+      console.warn('Call quality warning:', data.warning);
       this.showQualityIndicator(data.warning);
     });
   }
@@ -391,15 +389,15 @@ class VoiceCallService {
       const result = await TwilioVoice.makeCall({
         to: phoneNumber,
         params: {
-          // Parámetros personalizados opcionales
+          // Optional custom parameters
           customerId: 'customer-123'
         }
       });
 
       this.currentCallSid = result.callSid;
-      console.log('Llamada iniciada:', result.callSid);
+      console.log('Call initiated:', result.callSid);
     } catch (error) {
-      console.error('Fallo al hacer llamada:', error);
+      console.error('Failed to make call:', error);
     }
   }
 
@@ -437,98 +435,98 @@ class VoiceCallService {
   }
 
   private async showIncomingCallDialog(from: string): Promise<boolean> {
-    // Mostrar diálogo nativo o UI personalizada
-    return confirm(`Llamada entrante de ${from}`);
+    // Show native dialog or custom UI
+    return confirm(`Incoming call from ${from}`);
   }
 
   private showCallScreen() {
-    // Mostrar UI de llamada
-    console.log('Mostrando pantalla de llamada');
+    // Show call UI
+    console.log('Showing call screen');
   }
 
   private hideCallScreen() {
-    // Ocultar UI de llamada
-    console.log('Ocultando pantalla de llamada');
+    // Hide call UI
+    console.log('Hiding call screen');
   }
 
   private showQualityIndicator(warning: string) {
-    // Mostrar advertencia de calidad
-    console.log('Advertencia de calidad:', warning);
+    // Show quality warning
+    console.log('Quality warning:', warning);
   }
 }
 
-// Uso
+// Usage
 const voiceService = new VoiceCallService();
 
-// Inicializar con token de acceso desde tu backend
+// Initialize with access token from your backend
 const token = await fetchTwilioToken();
 await voiceService.initialize(token);
 
-// Hacer una llamada
+// Make a call
 await voiceService.makeCall('+1234567890');
 
-// Controlar llamada
+// Control call
 await voiceService.toggleMute();
 await voiceService.toggleSpeaker();
 await voiceService.sendDTMF('1');
 
-// Finalizar llamada
+// End call
 await voiceService.endCall();
 
-// Cerrar sesión
+// Logout
 await voiceService.logout();
 ```
 
-## Mejores Prácticas
+## Best Practices
 
-- Obtén tokens de acceso desde tu servidor backend, nunca los incluyas en la aplicación
-- Implementa lógica de renovación de tokens para sesiones de larga duración
-- Maneja interrupciones de red con lógica de reconexión
-- Proporciona retroalimentación visual para los estados de llamada
-- Prueba en dispositivos reales con notificaciones push
-- Implementa manejo de errores apropiado
-- Limpia los listeners cuando los componentes se desmonten
-- Solicita permisos de micrófono antes de hacer llamadas
+- Fetch access tokens from your backend server, never embed them in the app
+- Implement token refresh logic for long-running sessions
+- Handle network interruptions with reconnection logic
+- Provide visual feedback for call states
+- Test on actual devices with push notifications
+- Implement proper error handling
+- Clean up listeners when components unmount
+- Request microphone permissions before making calls
 
-## Consideraciones de Seguridad
+## Security Considerations
 
-- Nunca almacenes credenciales de Twilio en la aplicación
-- Genera tokens de acceso en tu backend
-- Implementa expiración y renovación de tokens
-- Usa HTTPS para todas las solicitudes de tokens
-- Valida las llamadas entrantes del lado del servidor
+- Never store Twilio credentials in the app
+- Generate access tokens on your backend
+- Implement token expiration and refresh
+- Use HTTPS for all token requests
+- Validate incoming calls server-side
 
-## Solución de Problemas
+## Troubleshooting
 
-### Las Llamadas no se Conectan
+### Calls Not Connecting
 
-- Verifica que el token de acceso sea válido y no haya expirado
-- Verifica la conectividad de red
-- Asegúrate de que los permisos de micrófono estén otorgados
-- Verifica que la cuenta de Twilio esté configurada correctamente
+- Verify access token is valid and not expired
+- Check network connectivity
+- Ensure microphone permissions are granted
+- Verify Twilio account is properly configured
 
-### Las Notificaciones Push no Funcionan
+### Push Notifications Not Working
 
-- Verifica que los certificados de PushKit/FCM estén configurados en Twilio
-- Verifica que el dispositivo esté registrado para notificaciones push
-- Prueba con certificados de producción
+- Verify PushKit/FCM certificates are configured in Twilio
+- Check device is registered for push notifications
+- Test with production certificates
 
-### Problemas de Audio
+### Audio Issues
 
-- Verifica los permisos de micrófono
-- Verifica la configuración de altavoz/bluetooth
-- Prueba el enrutamiento de audio en dispositivos reales
+- Check microphone permissions
+- Verify speaker/bluetooth settings
+- Test audio routing on actual devices
 
-## Visualización del Nombre del Llamante (CapacitorTwilioCallerName)
+## Caller Name Display (CapacitorTwilioCallerName)
 
-Por defecto, las llamadas entrantes muestran el número de teléfono del llamante o el ID del cliente. Puedes personalizar esto pasando un parámetro `CapacitorTwilioCallerName` desde tu backend TwiML para mostrar un nombre amigable en su lugar.
+By default, incoming calls display the caller's phone number or client ID. You can customize this by passing a `CapacitorTwilioCallerName` parameter from your TwiML backend to display a friendly name instead.
 
-### Configuración del Backend
+### Backend Setup
 
-Al generar tu respuesta TwiML para la marcación `<Client>`, agrega el parámetro `CapacitorTwilioCallerName`:
+When generating your TwiML response for the `<Client>` dial, add the `CapacitorTwilioCallerName` parameter:
 
 ```java
-// Ejemplo en Java
+// Java example
 Parameter callerNameParam = new Parameter.Builder()
     .name("CapacitorTwilioCallerName")
     .value("John Doe")
@@ -544,7 +542,7 @@ Dial dial = new Dial.Builder()
 ```
 
 ```javascript
-// Ejemplo en Node.js
+// Node.js example
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
 
 const response = new VoiceResponse();
@@ -555,14 +553,14 @@ dial.client({
 }, identity);
 ```
 
-### Cómo Funciona
+### How It Works
 
-1. Cuando tu backend recibe una llamada entrante, genera TwiML para enrutar la llamada
-2. Incluye el parámetro `CapacitorTwilioCallerName` con el nombre de visualización del llamante
-3. El plugin extrae automáticamente este parámetro y lo usa para:
-   - Pantalla de llamada entrante de CallKit en iOS
-   - Notificación de llamada entrante en Android
-   - El campo `from` en eventos `incomingCall`
-   - El array `pendingInvites` en el estado de llamada
+1. When your backend receives an incoming call, it generates TwiML to route the call
+2. Include the `CapacitorTwilioCallerName` parameter with the caller's display name
+3. The plugin automatically extracts this parameter and uses it for:
+   - iOS CallKit incoming call screen
+   - Android incoming call notification
+   - The `from` field in `incomingCall` events
+   - The `pendingInvites` array in call status
 
-Si `CapacitorTwilioCallerName` no se proporciona, el plugin recurre al número de teléfono del llamante o al ID del cliente.
+If `CapacitorTwilioCallerName` is not provided, the plugin falls back to the caller's phone number or client ID.

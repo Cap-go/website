@@ -1,31 +1,29 @@
----
-title: Directrices de revisión de App Store de iOS para IAP
-locale: es
-description: Guía completa para aprobar la revisión de App Store con compras y suscripciones en la aplicación, incluyendo razones comunes de rechazo y mejores prácticas.
+---title: iOS App Store Review Guidelines for IAP
+description: Complete guide to passing App Store review with in-app purchases and subscriptions, including common rejection reasons and best practices.
 sidebar:
-  order: 10
----
+order: 10
+locale: es---
 
 import { Steps } from '@astrojs/starlight/components';
 
-Lograr la aprobación de tu aplicación en App Store requiere una atención cuidadosa a las directrices de Apple, especialmente al implementar compras y suscripciones en la aplicación. Esta guía cubre todo lo que necesitas saber para aprobar la revisión en tu primer envío.
+Getting your app approved on the App Store requires careful attention to Apple's guidelines, especially when implementing in-app purchases and subscriptions. This guide covers everything you need to know to pass review on your first submission.
 
 ![iOS App Store Review Process](/native-purchases/review-guides/ios-review-hero.webp)
 
-## Requisitos de compras en la aplicación
+## In-App Purchase Requirements
 
-### Transparencia de precios (Crítico)
+### Pricing Transparency (Critical)
 
-Apple requiere una divulgación de precios cristalina antes de cualquier compra:
+Apple requires crystal-clear pricing disclosure before any purchase:
 
-**Elementos imprescindibles:**
-- Mostrar el precio exacto antes del botón de compra
-- Mostrar la frecuencia de facturación (por ejemplo, "$9.99/mes")
-- Indicar claramente qué obtienen los usuarios por su dinero
-- Indicar cuándo se realizarán los cargos
+**Must-Have Elements:**
+- Display exact price before purchase button
+- Show billing frequency (e.g., "$9.99/month")
+- Clearly state what users get for their money
+- Indicate when charges will occur
 
-**Rechazo común:**
-> "El precio de la suscripción debe ser claro y transparente."
+**Common Rejection:**
+> "Subscription pricing must be clear and upfront."
 
 :::caution Price Consistency
 All prices must match across:

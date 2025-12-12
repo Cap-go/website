@@ -51,12 +51,12 @@ const listener = await ScreenOrientation.addListener(
 );
 ```
 
-## Physical Orientation Detection
+## 物理的な向き検出
 
-This plugin has a unique feature: it can detect the **true physical orientation** of the device using motion sensors, even when the user has enabled orientation lock on their device.
+このプラグインには独自の機能があります。ユーザーが向きロックを有効にしている場合でも、モーションセンサーを使用してデバイスの**真の物理的な向き**を検出できます。
 
 <Aside type="note">
-  The UI will still respect the user's orientation lock setting. Motion tracking allows you to know how the device is physically held, but the UI won't rotate if orientation lock is enabled.
+  UIはユーザーの向きロック設定を尊重します。モーショントラッキングでは、デバイスがどのように物理的に保持されているかを知ることができますが、向きロックが有効な場合、UIは回転しません。
 </Aside>
 
 ```typescript

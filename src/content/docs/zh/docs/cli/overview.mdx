@@ -36,82 +36,82 @@ Capgo 的实时更新系统有两个关键组件:
 
 1. 完成 [Capgo 快速入门](/docs/getting-started/quickstart)以在 Capgo 中设置您的应用并安装 Capgo SDK。
 
-2. In your app code, call `CapacitorUpdater.notifyAppReady()` after your app has finished initializing. This tells the Capgo SDK that your app is ready to receive updates.
+2. 在您的应用代码中,在应用完成初始化后调用 `CapacitorUpdater.notifyAppReady()`。这告诉 Capgo SDK 您的应用已准备好接收更新。
 
-3. Build your JS bundle and upload it to Capgo:
+3. 构建您的 JS bundle 并将其上传到 Capgo:
    ```shell
    npm run build
-   npx @capgo/cli@latest bundle upload --channel=production 
+   npx @capgo/cli@latest bundle upload --channel=production
    ```
 
-4. Open your app and wait for the update to download. You can check the status with:
+4. 打开您的应用并等待更新下载。您可以使用以下命令检查状态:
    ```shell
    npx @capgo/cli@latest app debug
    ```
 
-5. Once the update is downloaded, close and reopen your app to load the new bundle.
+5. 下载更新后,关闭并重新打开您的应用以加载新的 bundle。
 
 </Steps>
 
-See the [Deploying Live Updates](/docs/getting-started/deploy) guide for more details.
+有关更多详细信息,请参阅 [部署实时更新](/docs/getting-started/deploy) 指南。
 
-## The Capgo CLI
+## Capgo CLI
 
-The Capgo CLI is a powerful tool that allows developers to interact with Capgo's services from their own CI/CD pipelines. With the CLI, you have granular control over when builds are produced and deployed, enabling you to integrate Capgo into your existing enterprise workflows.
+Capgo CLI 是一个强大的工具,允许开发者从自己的 CI/CD 管道中与 Capgo 服务交互。使用 CLI,您可以对何时生成和部署构建进行细粒度控制,使您能够将 Capgo 集成到现有的企业工作流中。
 
-### What is the Capgo CLI for?
+### Capgo CLI 有什么用?
 
-The Capgo CLI is designed for developers and teams who need more control and flexibility in their live update workflows. By using the CLI in your CI/CD pipelines, you can:
+Capgo CLI 为需要在实时更新工作流中获得更多控制和灵活性的开发者和团队而设计。通过在 CI/CD 管道中使用 CLI,您可以:
 
-- Decide exactly when to build and deploy updates, rather than relying on Capgo's built-in automation
-- Insert your own processes, such as code signing, QA testing, or manager approvals, between the build and deploy steps
-- Integrate Capgo into your existing DevOps tooling and workflows
+- 准确决定何时构建和部署更新,而不是依赖 Capgo 的内置自动化
+- 插入您自己的流程,例如代码签名、QA 测试或管理员批准,在构建和部署步骤之间
+- 将 Capgo 集成到现有的 DevOps 工具和工作流中
 
-### Authentication
+### 身份验证
 
-To use the Capgo CLI, you'll need to authenticate with your API key. You can generate an API key in your Capgo account settings.
+要使用 Capgo CLI,您需要使用 API 密钥进行身份验证。您可以在 Capgo 帐户设置中生成 API 密钥。
 
-To log in and securely store your API key, run:
+要登录并安全地存储您的 API 密钥,请运行:
 
 ```shell
 npx @capgo/cli@latest login [API_KEY]
 ```
 
-This command will then be saved for future use. You won't need to provide your API key with each command after logging in.
+此命令将保存供今后使用。登录后,您无需为每个命令都提供 API 密钥。
 
-### Key Differences from Other CLI Tools
+### 与其他 CLI 工具的主要区别
 
-If you're familiar with other live update CLI tools, there are a few key things to note about Capgo's CLI:
+如果您熟悉其他实时更新 CLI 工具,有一些关于 Capgo CLI 的关键点需要注意:
 
-- Capgo uses a single CLI for both development and CI/CD use cases, as Capgo is focused solely on the live update feature set.
+- Capgo 将单个 CLI 用于开发和 CI/CD 用例,因为 Capgo 仅专注于实时更新功能集。
 
-- The Capgo CLI doesn't require a separate installation step. It's bundled with the `@capgo/cli` package and can be run directly using `npx`.
+- Capgo CLI 不需要单独的安装步骤。它与 `@capgo/cli` 包捆绑在一起,可以直接使用 `npx` 运行。
 
-- Capgo's CLI is designed specifically for the live update workflow, so it may not include some features or commands found in more general-purpose CLI tools.
+- Capgo CLI 专门为实时更新工作流而设计,因此它可能不包括在通用 CLI 工具中找到的某些功能或命令。
 
-## Next Steps
+## 后续步骤
 
 <CardGrid stagger>
   <a href="/docs/live-updates/channels/">
-    <Card title="Channels" icon="bars">
-      Learn how to use channels to manage different release tracks and target updates to specific users.
+    <Card title="频道" icon="bars">
+      了解如何使用频道来管理不同的发布轨道并针对特定用户定位更新。
     </Card>
   </a>
 
   <a href="/docs/live-updates/rollbacks/">
-    <Card title="Rollbacks" icon="left-arrow">
-      Discover how to roll back to a previous JS bundle version if an update causes issues.
+    <Card title="回滚" icon="left-arrow">
+      发现如果更新导致问题,如何回滚到以前的 JS bundle 版本。
     </Card>
   </a>
 
   <a href="/docs/live-updates/update-behavior/">
-    <Card title="Update Behavior" icon="setting">
-      Customize how and when updates are downloaded and applied in your app.  
+    <Card title="更新行为" icon="setting">
+      自定义应用中如何以及何时下载和应用更新。
     </Card>
   </a>
   <a href="/docs/live-updates/differentials/">
-    <Card title="Fast Updates" icon="starlight">
-      Learn how to use fast updates to speed up the update process.
+    <Card title="快速更新" icon="starlight">
+      了解如何使用快速更新来加快更新过程。
     </Card>
   </a>
 </CardGrid>

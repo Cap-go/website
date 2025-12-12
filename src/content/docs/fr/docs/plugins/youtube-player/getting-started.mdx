@@ -10,14 +10,14 @@ import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
-1. **Installez le package**
+1. **Install the package**
    <PackageManagers pkg="@capgo/capacitor-youtube-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Synchronisez avec les projets natifs**
+2. **Sync with native projects**
    <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Utilisation de base
+## Basic Usage
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -46,11 +46,11 @@ YoutubePlayer.addEventListener(result.player, 'onStateChange', (event) => {
 });
 ```
 
-## Référence API
+## API Reference
 
 ### initialize(options)
 
-Initialise une instance du lecteur YouTube.
+Initialize a YouTube player instance.
 
 ```typescript
 const { player, playerReady } = await YoutubePlayer.initialize({
@@ -66,7 +66,7 @@ const { player, playerReady } = await YoutubePlayer.initialize({
 });
 ```
 
-### Méthodes de contrôle vidéo
+### Video Control Methods
 
 ```typescript
 // Play
@@ -88,7 +88,7 @@ await YoutubePlayer.loadVideoById(playerId, { videoId: 'VIDEO_ID' });
 await YoutubePlayer.cueVideoById(playerId, { videoId: 'VIDEO_ID' });
 ```
 
-### Contrôle de la liste de lecture
+### Playlist Control
 
 ```typescript
 // Load playlist
@@ -109,7 +109,7 @@ await YoutubePlayer.previousVideo(playerId);
 await YoutubePlayer.playVideoAt(playerId, index);
 ```
 
-### Contrôle audio
+### Audio Control
 
 ```typescript
 // Mute/Unmute
@@ -124,7 +124,7 @@ await YoutubePlayer.setVolume(playerId, 50);
 const { result } = await YoutubePlayer.getVolume(playerId);
 ```
 
-### Contrôle de lecture
+### Playback Control
 
 ```typescript
 // Playback rate
@@ -140,7 +140,7 @@ await YoutubePlayer.setLoop(playerId, true);
 await YoutubePlayer.setShuffle(playerId, true);
 ```
 
-### Contrôle de qualité
+### Quality Control
 
 ```typescript
 // Set quality
@@ -153,7 +153,7 @@ const { result } = await YoutubePlayer.getPlaybackQuality(playerId);
 const { result } = await YoutubePlayer.getAvailableQualityLevels(playerId);
 ```
 
-### Informations du lecteur
+### Player Information
 
 ```typescript
 // Duration
@@ -172,7 +172,7 @@ const { result } = await YoutubePlayer.getPlayerState(playerId);
 const { result } = await YoutubePlayer.getVideoUrl(playerId);
 ```
 
-### Écouteurs d'événements
+### Event Listeners
 
 ```typescript
 // State change
@@ -204,7 +204,7 @@ YoutubePlayer.addEventListener(playerId, 'onPlaybackRateChange', (event) => {
 YoutubePlayer.removeEventListener(playerId, 'onStateChange', callback);
 ```
 
-## Exemple complet
+## Complete Example
 
 ```typescript
 import { YoutubePlayer } from '@capgo/capacitor-youtube-player';
@@ -321,18 +321,18 @@ export class YouTubeService {
 }
 ```
 
-## États du lecteur
+## Player States
 
-| État | Valeur | Description |
+| State | Value | Description |
 |-------|-------|-------------|
-| UNSTARTED | -1 | Vidéo non démarrée |
-| ENDED | 0 | Vidéo terminée |
-| PLAYING | 1 | Vidéo en cours de lecture |
-| PAUSED | 2 | Vidéo en pause |
-| BUFFERING | 3 | Vidéo en cours de chargement |
-| CUED | 5 | Vidéo mise en file d'attente |
+| UNSTARTED | -1 | Video not started |
+| ENDED | 0 | Video has ended |
+| PLAYING | 1 | Video is playing |
+| PAUSED | 2 | Video is paused |
+| BUFFERING | 3 | Video is buffering |
+| CUED | 5 | Video is cued |
 
-## Niveaux de qualité
+## Quality Levels
 
 - `small`: 240p
 - `medium`: 360p
@@ -340,19 +340,19 @@ export class YouTubeService {
 - `hd720`: 720p
 - `hd1080`: 1080p
 - `highres`: >1080p
-- `default`: Qualité automatique
+- `default`: Auto quality
 
-## Bonnes pratiques
+## Best Practices
 
-1. **Initialiser une fois**
-   Créez l'instance du lecteur une fois et réutilisez-la :
+1. **Initialize once**
+   Create player instance once and reuse it:
    ```typescript
    let player = await YoutubePlayer.initialize(options);
-   // Réutiliser le lecteur pour différentes vidéos
+   // Reuse player for different videos
    await YoutubePlayer.loadVideoById(player, { videoId: 'NEW_ID' });
    ```
 
-2. **Gérer les erreurs avec élégance**
+2. **Handle errors gracefully**
    ```typescript
    YoutubePlayer.addEventListener(playerId, 'onError', (event) => {
      switch (event.data) {
@@ -370,8 +370,8 @@ export class YouTubeService {
    });
    ```
 
-3. **Nettoyer**
-   Détruisez le lecteur lorsque le composant est démonté :
+3. **Clean up**
+   Destroy player when component unmounts:
    ```typescript
    useEffect(() => {
      return () => {
@@ -382,15 +382,15 @@ export class YouTubeService {
    }, []);
    ```
 
-4. **Respecter les préférences de l'utilisateur**
+4. **Respect user preferences**
    ```typescript
-   // Ne pas lire automatiquement sauf si initié par l'utilisateur
+   // Don't autoplay unless user initiated
    playerVars: {
      autoplay: 0
    }
    ```
 
-5. **Surveiller la lecture**
+5. **Monitor playback**
    ```typescript
    setInterval(async () => {
      const time = await YoutubePlayer.getCurrentTime(playerId);
@@ -398,35 +398,36 @@ export class YouTubeService {
    }, 1000);
    ```
 
-## Notes de plateforme
+## Platform Notes
 
 ### iOS
-- Fonctionne sur iOS 9.0+
-- Utilise WKWebView avec l'API iframe YouTube
-- Plein écran supporté
+- Works on iOS 9.0+
+- Uses WKWebView with YouTube iframe API
+- Fullscreen supported
 
 ### Android
-- Fonctionne sur Android 5.0 (API 21)+
-- Utilise WebView avec l'API iframe YouTube
-- Plein écran supporté
+- Works on Android 5.0 (API 21)+
+- Uses WebView with YouTube iframe API
+- Fullscreen supported
 
 ### Web
-- Intégration directe de l'iframe YouTube
-- Support complet de l'API
-- Meilleures performances
+- Direct YouTube iframe integration
+- Full API support
+- Best performance
 
-## Dépannage
+## Troubleshooting
 
-**Le lecteur ne se charge pas :**
-- Vérifiez que l'ID de la vidéo est valide
-- Vérifiez la connexion Internet
-- Assurez-vous que l'intégration YouTube est autorisée pour la vidéo
+**Player not loading:**
+- Check video ID is valid
+- Verify internet connection
+- Ensure YouTube embedding is allowed for the video
 
-**Les événements ne se déclenchent pas :**
-- Assurez-vous que les écouteurs sont ajoutés après l'initialisation
-- Vérifiez que le lecteur est prêt avant d'ajouter des écouteurs
+**Events not firing:**
+- Make sure listeners are added after initialization
+- Check player is ready before adding listeners
 
-**Problèmes de qualité :**
-- Vérifiez d'abord les niveaux de qualité disponibles
-- Certaines vidéos ne supportent pas toutes les qualités
-- Les changements de qualité peuvent ne pas être immédiats
+**Quality issues:**
+- Check available quality levels first
+- Some videos don't support all qualities
+- Quality changes may not be immediate
+

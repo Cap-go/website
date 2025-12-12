@@ -11,12 +11,12 @@ locale: ja
 import AndroidAppleLoginGraph from '@/components/AndroidAppleLoginGraph.astro'
 import { Steps } from '@astrojs/starlight/components';
 
-Apple login on android is hacky. Apple has no official support for `Sign in with Apple` on Android, so the solution is slightly hacky.
+AndroidでのAppleログインはハッキー的です。AppleはAndroidで「Sign in with Apple」の公式サポートがないため、ソリューションはやや不格好です。
 
-Android currently uses a chrome tabs to display an OAuth2 website. This approach has the challenges:
+Android は現在、Chrome タブを使用して OAuth2 Web サイトを表示しています。このアプローチには以下の課題があります:
 
-- Difficult configuration
-- A backend is required
+- 難しい構成
+- バックエンドが必要
 
 ## Understanding the flow on android.
 

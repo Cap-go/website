@@ -1,21 +1,21 @@
 ---
-title: "Iniziare con Accelerometer"
+title: "Inizia con l'Accelerometro"
 description: "Scopri come integrare il rilevamento dell'accelerometro nella tua app Capacitor"
 locale: it
 ---
 
-Questa guida ti accompagnerà nell'integrazione del plugin Capacitor Accelerometer nella tua applicazione.
+Questa guida ti guiderà attraverso l'integrazione del plugin Capacitor Accelerometer nella tua applicazione.
 
 ## Installazione
 
-Installa il plugin usando npm:
+Installa il plugin utilizzando npm:
 
 ```bash
 npm install @capgo/capacitor-accelerometer
 npx cap sync
 ```
 
-## Configurazione della piattaforma
+## Configurazione della Piattaforma
 
 ### iOS
 Nessuna configurazione aggiuntiva richiesta. L'accelerometro è sempre disponibile.
@@ -26,15 +26,15 @@ Nessuna configurazione aggiuntiva richiesta. L'accelerometro è sempre disponibi
 ### Web
 Il plugin utilizza l'API DeviceMotion. Richiede HTTPS in produzione.
 
-## Uso di base
+## Uso di Base
 
-### Importare il plugin
+### Importare il Plugin
 
 ```typescript
 import { Accelerometer } from '@capgo/capacitor-accelerometer';
 ```
 
-### Avviare il monitoraggio
+### Avviare il Monitoraggio
 
 ```typescript
 const startAccelerometer = async () => {
@@ -46,7 +46,7 @@ const startAccelerometer = async () => {
 };
 ```
 
-### Ascoltare gli eventi di accelerazione
+### Ascoltare gli Eventi di Accelerazione
 
 ```typescript
 Accelerometer.addListener('accelerationChange', (data) => {
@@ -57,16 +57,16 @@ Accelerometer.addListener('accelerationChange', (data) => {
 });
 ```
 
-### Ottenere la lettura corrente
+### Ottenere la Lettura Attuale
 
 ```typescript
 const getCurrentAcceleration = async () => {
   const reading = await Accelerometer.getCurrentAcceleration();
-  console.log('Accelerazione corrente:', reading);
+  console.log('Accelerazione attuale:', reading);
 };
 ```
 
-### Interrompere il monitoraggio
+### Interrompere il Monitoraggio
 
 ```typescript
 const stopAccelerometer = async () => {
@@ -75,9 +75,9 @@ const stopAccelerometer = async () => {
 };
 ```
 
-## Esempio completo
+## Esempio Completo
 
-Ecco un esempio completo con rilevamento degli scossoni:
+Ecco un esempio completo con rilevamento delle scosse:
 
 ```typescript
 import { Accelerometer } from '@capgo/capacitor-accelerometer';
@@ -103,7 +103,7 @@ class AccelerometerService {
     const deltaY = Math.abs(data.y - this.lastY);
     const deltaZ = Math.abs(data.z - this.lastZ);
 
-    // Controlla lo scossone
+    // Controlla la scossa
     if (deltaX > this.shakeThreshold ||
         deltaY > this.shakeThreshold ||
         deltaZ > this.shakeThreshold) {
@@ -115,13 +115,13 @@ class AccelerometerService {
     this.lastY = data.y;
     this.lastZ = data.z;
 
-    // Aggiorna l'UI
+    // Aggiorna l'interfaccia utente
     this.updateDisplay(data);
   }
 
   onShake() {
     console.log('Dispositivo scosso!');
-    // Attiva l'azione di scossone
+    // Attiva l'azione di scossa
   }
 
   updateDisplay(data: any) {
@@ -129,13 +129,13 @@ class AccelerometerService {
     console.log(`Y: ${data.y.toFixed(2)} m/s²`);
     console.log(`Z: ${data.z.toFixed(2)} m/s²`);
 
-    // Calcola la grandezza
+    // Calcola la magnitudine
     const magnitude = Math.sqrt(
       data.x * data.x +
       data.y * data.y +
       data.z * data.z
     );
-    console.log(`Grandezza: ${magnitude.toFixed(2)} m/s²`);
+    console.log(`Magnitudine: ${magnitude.toFixed(2)} m/s²`);
   }
 
   async cleanup() {
@@ -146,32 +146,32 @@ class AccelerometerService {
   }
 }
 
-// Uso
+// Utilizzo
 const accelService = new AccelerometerService();
 accelService.initialize();
 
-// Pulizia quando finito
+// Pulizia al termine
 // accelService.cleanup();
 ```
 
-## Comprensione delle letture
+## Comprensione delle Letture
 
-### Assi di accelerazione
+### Assi di Accelerazione
 - **Asse X**: Sinistra (-) a Destra (+)
-- **Asse Y**: Basso (-) a Alto (+)
-- **Asse Z**: Dietro (-) a Avanti (+)
+- **Asse Y**: Basso (-) ad Alto (+)
+- **Asse Z**: Dietro (-) a Davanti (+)
 
 ### Gravità
-- Il dispositivo a riposo mostra ~9.8 m/s² su un asse (gravità)
-- Il movimento del dispositivo mostra accelerazione in aggiunta alla gravità
+- Il dispositivo a riposo mostra ~9,8 m/s² su un asse (gravità)
+- Il movimento del dispositivo mostra accelerazione oltre alla gravità
 
 ### Unità
-- Misurato in metri al secondo quadrato (m/s²)
-- Gravità = 9.8 m/s²
+- Misurato in metri al secondo al quadrato (m/s²)
+- Gravità = 9,8 m/s²
 
-## Casi d'uso comuni
+## Casi d'Uso Comuni
 
-### Rilevamento degli scossoni
+### Rilevamento delle Scosse
 
 ```typescript
 class ShakeDetector {
@@ -201,7 +201,7 @@ class ShakeDetector {
 }
 ```
 
-### Rilevamento dell'inclinazione
+### Rilevamento dell'Inclinazione
 
 ```typescript
 class TiltDetector {
@@ -244,19 +244,19 @@ class StepCounter {
 }
 ```
 
-## Best practice
+## Migliori Pratiche
 
-1. **Scegli intervalli appropriati**: Bilancia reattività e durata della batteria
+1. **Scegli Intervalli Appropriati**: Equilibra la reattività e la durata della batteria
    - Gaming: 16-50ms
    - Fitness: 100-200ms
    - Generale: 200-500ms
 
-2. **Rimuovi i listener**: Pulisci sempre quando hai finito
-3. **Filtra il rumore**: Usa medie mobili per dati più fluidi
-4. **Considera la batteria**: Il polling ad alta frequenza scarica la batteria
-5. **Testa sui dispositivi reali**: I simulatori non forniscono dati accurati
+2. **Rimuovi i Listener**: Pulisci sempre quando hai finito
+3. **Filtra il Rumore**: Usa medie mobili per dati più fluidi
+4. **Considera la Batteria**: Il polling ad alta frequenza scarica la batteria
+5. **Testa su Dispositivi Reali**: I simulatori non forniscono dati accurati
 
-## Suggerimenti per le prestazioni
+## Suggerimenti per le Prestazioni
 
 ### Debouncing
 
@@ -273,7 +273,7 @@ class AccelerometerDebouncer {
 }
 ```
 
-### Smoothing dei dati
+### Smoothing dei Dati
 
 ```typescript
 class AccelerometerFilter {
@@ -296,8 +296,8 @@ class AccelerometerFilter {
 }
 ```
 
-## Prossimi passi
+## Prossimi Passi
 
-- Esplora la [Guida di riferimento API](https://github.com/Cap-go/capacitor-accelerometer#api) per la documentazione completa dei metodi
+- Esplora il [Riferimento API](https://github.com/Cap-go/capacitor-accelerometer#api) per la documentazione completa dei metodi
 - Dai un'occhiata all'[app di esempio](https://github.com/Cap-go/capacitor-accelerometer/tree/main/example) per l'uso avanzato
 - Vedi il [tutorial](/plugins-tutorials/capacitor-accelerometer) per esempi di implementazione completa

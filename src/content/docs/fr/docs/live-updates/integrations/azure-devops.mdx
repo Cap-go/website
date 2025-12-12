@@ -8,48 +8,48 @@ sidebar:
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-Intégrez Capgo Live Updates avec Azure DevOps Pipelines pour déployer automatiquement vos mises à jour d'application à chaque fois que vous poussez des modifications de code. Ce guide couvre la configuration des workflows de build, de test et de déploiement automatisés.
+Integrate Capgo Live Updates with Azure DevOps Pipelines to automatically deploy your app updates whenever you push code changes. This guide covers setting up automated builds, testing, and deployment workflows.
 
-## Prérequis
+## Prerequisites
 
-Avant de configurer l'intégration Azure DevOps, assurez-vous d'avoir :
+Before setting up Azure DevOps integration, ensure you have:
 
-- Une organisation et un projet Azure DevOps
-- Un compte Capgo avec une application configurée
-- Le code source de votre application dans un référentiel Git Azure Repos
-- Node.js et npm/yarn configurés dans votre projet
+- An Azure DevOps organization and project
+- A Capgo account with an app configured
+- Your app's source code in an Azure Repos Git repository
+- Node.js and npm/yarn configured in your project
 
-## Configuration du pipeline Azure DevOps
+## Setting Up Azure DevOps Pipeline
 
-### Étape 1 : Créer des variables de pipeline
+### Step 1: Create Pipeline Variables
 
-Tout d'abord, configurez les variables nécessaires dans votre projet Azure DevOps :
+First, set up the necessary variables in your Azure DevOps project:
 
 <Steps>
 
-1. Accédez à votre projet Azure DevOps
-2. Allez dans **Pipelines** → **Library** → **Variable groups**
-3. Créez un nouveau groupe de variables nommé `Capgo-Variables`
-4. Ajoutez les variables suivantes :
+1. Navigate to your Azure DevOps project
+2. Go to **Pipelines** → **Library** → **Variable groups**
+3. Create a new variable group named `Capgo-Variables`
+4. Add the following variables:
 
 </Steps>
 
-| Nom de variable | Valeur | Sécurisé |
+| Variable Name | Value | Secure |
 |---------------|-------|---------|
-| `CAPGO_TOKEN` | Votre jeton API Capgo | ✅ Oui |
+| `CAPGO_TOKEN` | Your Capgo API token | ✅ Yes |
 
 <Aside type="tip">
 
-Obtenez votre jeton API Capgo depuis [console.capgo.app/apikeys](https://console.capgo.app/apikeys). L'ID de votre application est déjà configuré dans votre fichier `capacitor.config.ts`.
+Get your Capgo API token from [console.capgo.app/apikeys](https://console.capgo.app/apikeys). Your app ID is already configured in your `capacitor.config.ts` file.
 
 </Aside>
 
 ## Simple
 
-Configuration de base qui déploie en production à chaque push vers la branche main :
+Basic configuration that deploys to production on every push to the main branch:
 
 ```yaml
-# Simple Azure DevOps Pipeline pour Capgo Live Updates
+# Simple Azure DevOps Pipeline for Capgo Live Updates
 trigger:
   branches:
     include:
@@ -63,33 +63,33 @@ jobs:
     displayName: 'Build and Deploy to Capgo'
     pool:
       vmImage: 'ubuntu-latest'
-
+    
     steps:
       - task: NodeTool@0
         displayName: 'Setup Node.js'
         inputs:
           versionSpec: '22.x'
-
+      
       - script: |
           npm ci
           npm run test
           npm run build
         displayName: 'Install, test and build'
-
+      
       - script: |
           npm install -g @capgo/cli
           npx @capgo/cli bundle upload --apikey $(CAPGO_TOKEN) --channel production
         displayName: 'Deploy to Capgo'
 ```
 
-## Avancé
+## Advanced
 
-### Déploiements de branches de fonctionnalités
+### Feature Branch Deployments
 
-Déployez les branches de fonctionnalités vers des canaux de test pour révision et test :
+Deploy feature branches to test channels for review and testing:
 
 ```yaml
-# Déploiement de branche de fonctionnalité
+# Feature branch deployment
 trigger:
   branches:
     include:
@@ -104,18 +104,18 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')
-
+    
     steps:
       - task: NodeTool@0
         inputs:
           versionSpec: '22.x'
-
+      
       - script: |
           npm ci
           npm run test
           npm run build
         displayName: 'Install, test and build'
-
+      
       - script: |
           BRANCH_NAME=$(echo "$(Build.SourceBranchName)" | sed 's/[^a-zA-Z0-9-]/-/g')
           CHANNEL_NAME="feature-$BRANCH_NAME"
@@ -127,25 +127,25 @@ jobs:
 
 <Aside type="tip">
 
-**Tests avec les canaux** : Après le déploiement vers un canal de fonctionnalité, vous pouvez tester la mise à jour dans votre application en la configurant pour utiliser ce canal spécifique. En savoir plus sur [la configuration des canaux dans votre application](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+**Testing with Channels**: After deploying to a feature channel, you can test the update in your app by configuring it to use that specific channel. Learn more about [configuring channels in your app](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
 
 </Aside>
 
-### Utilisation du chiffrement
+### Using Encryption
 
-Si vous utilisez [la fonctionnalité de chiffrement de Capgo](/docs/live-updates/encryption/), vous devrez stocker votre clé privée en toute sécurité dans votre environnement CI/CD.
+If you're using [Capgo's encryption feature](/docs/live-updates/encryption/), you'll need to store your private key securely in your CI/CD environment.
 
-Après avoir [configuré les clés de chiffrement](/docs/live-updates/encryption/#setting-up-encryption) localement, ajoutez votre clé privée aux variables Azure DevOps :
+After [setting up encryption keys](/docs/live-updates/encryption/#setting-up-encryption) locally, add your private key to Azure DevOps variables:
 
 ```shell
-# Afficher le contenu de votre clé privée (copiez cette sortie)
+# Display your private key content (copy this output)
 cat .capgo_key_v2
 ```
 
-Ajoutez ce contenu en tant que `CAPGO_PRIVATE_KEY` dans votre groupe de variables Azure DevOps (marquez comme secret), puis utilisez-le dans les pipelines :
+Add this content as `CAPGO_PRIVATE_KEY` in your Azure DevOps variable group (mark as secret), then use it in pipelines:
 
 ```yaml
-# Déployer avec chiffrement
+# Deploy with encryption
 - script: |
     npm install -g @capgo/cli
     npx @capgo/cli bundle upload --apikey $(CAPGO_TOKEN) --key-data-v2 "$(CAPGO_PRIVATE_KEY)" --channel production
@@ -154,21 +154,21 @@ Ajoutez ce contenu en tant que `CAPGO_PRIVATE_KEY` dans votre groupe de variable
 
 <Aside type="caution">
 
-**Meilleures pratiques de sécurité :**
-- Ne jamais valider le fichier `.capgo_key_v2` dans le contrôle de version
-- Stocker la clé privée uniquement dans la gestion sécurisée des secrets CI/CD
-- Utiliser des clés différentes pour différents environnements
+**Security Best Practices:**
+- Never commit the `.capgo_key_v2` file to version control
+- Store the private key only in secure CI/CD secret management
+- Use different keys for different environments
 
 </Aside>
 
-### Configuration multi-canaux
+### Multi-Channel Configuration
 
-Pour des informations complètes sur la configuration et la gestion de plusieurs canaux de déploiement, consultez la [documentation sur les canaux](/docs/live-updates/channels/).
+For comprehensive information about setting up and managing multiple deployment channels, see the [Channels documentation](/docs/live-updates/channels/).
 
-Configuration complète avec plusieurs environnements et déploiements de pull request :
+Complete configuration with multiple environments and pull request deployments:
 
 ```yaml
-# Pipeline Azure DevOps avancé avec plusieurs canaux
+# Advanced Azure DevOps Pipeline with Multiple Channels
 trigger:
   branches:
     include:
@@ -185,7 +185,7 @@ variables:
   - group: Capgo-Variables
 
 stages:
-  # Étape de build
+  # Build stage
   - stage: Build
     jobs:
       - job: BuildApp
@@ -195,19 +195,19 @@ stages:
           - task: NodeTool@0
             inputs:
               versionSpec: '22.x'
-
+          
           - script: |
               npm ci
               npm run test
               npm run build
             displayName: 'Install, test and build'
-
+          
           - task: PublishBuildArtifacts@1
             inputs:
               pathToPublish: 'dist'
               artifactName: 'app-build'
 
-  # Déployer en développement
+  # Deploy to development
   - stage: DeployDev
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
     jobs:
@@ -222,18 +222,18 @@ stages:
                 - task: NodeTool@0
                   inputs:
                     versionSpec: '22.x'
-
+                
                 - task: DownloadBuildArtifacts@0
                   inputs:
                     artifactName: 'app-build'
                     downloadPath: '$(Pipeline.Workspace)'
-
+                
                 - script: |
                     npm install -g @capgo/cli
                     npx @capgo/cli bundle upload --apikey $(CAPGO_TOKEN) --channel development --path $(Pipeline.Workspace)/app-build
                   displayName: 'Deploy to Development'
 
-  # Déployer PR vers canal de test
+  # Deploy PR to test channel
   - stage: DeployPR
     condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
     jobs:
@@ -244,12 +244,12 @@ stages:
           - task: NodeTool@0
             inputs:
               versionSpec: '22.x'
-
+          
           - task: DownloadBuildArtifacts@0
             inputs:
               artifactName: 'app-build'
               downloadPath: '$(Pipeline.Workspace)'
-
+          
           - script: |
               CHANNEL_NAME="pr-$(System.PullRequest.PullRequestNumber)"
               npm install -g @capgo/cli
@@ -257,7 +257,7 @@ stages:
               npx @capgo/cli bundle upload --apikey $(CAPGO_TOKEN) --channel $CHANNEL_NAME --path $(Pipeline.Workspace)/app-build
             displayName: 'Deploy to PR Channel'
 
-  # Déployer en production
+  # Deploy to production
   - stage: DeployProd
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
     jobs:
@@ -272,24 +272,24 @@ stages:
                 - task: NodeTool@0
                   inputs:
                     versionSpec: '22.x'
-
+                
                 - task: DownloadBuildArtifacts@0
                   inputs:
                     artifactName: 'app-build'
                     downloadPath: '$(Pipeline.Workspace)'
-
+                
                 - script: |
                     npm install -g @capgo/cli
                     npx @capgo/cli bundle upload --apikey $(CAPGO_TOKEN) --channel production --path $(Pipeline.Workspace)/app-build
                   displayName: 'Deploy to Production'
 ```
 
-### Déploiement multi-environnements
+### Multi-Environment Deployment
 
-Pour des scénarios complexes avec plusieurs environnements :
+For complex scenarios with multiple environments:
 
 ```yaml
-# Pipeline étendu avec plusieurs environnements
+# Extended pipeline with multiple environments
 parameters:
   - name: deployEnvironment
     displayName: 'Deploy Environment'
@@ -308,7 +308,7 @@ variables:
       value: 'staging'
 
 stages:
-  # Étape de build
+  # Build stage
   - stage: Build
     jobs:
       - job: BuildApp
@@ -318,18 +318,18 @@ stages:
           - task: NodeTool@0
             inputs:
               versionSpec: '22.x'
-
+          
           - script: |
               npm ci
               npm run test
               npm run build
             displayName: 'Install, test and build'
-
+          
           - task: PublishBuildArtifacts@1
             inputs:
               pathToPublish: 'dist'
               artifactName: 'app-build'
-
+  
   - stage: DeployStaging
     displayName: 'Deploy to Staging'
     dependsOn: Build
@@ -347,7 +347,7 @@ stages:
                 - template: deploy-steps.yml
                   parameters:
                     channel: 'staging'
-
+  
   - stage: DeployProduction
     displayName: 'Deploy to Production'
     dependsOn: Build
@@ -367,9 +367,9 @@ stages:
                     channel: 'production'
 ```
 
-### Modèle de déploiement (deploy-steps.yml)
+### Deployment Template (deploy-steps.yml)
 
-Créez un fichier de modèle réutilisable `deploy-steps.yml` :
+Create a reusable template file `deploy-steps.yml`:
 
 ```yaml
 # deploy-steps.yml
@@ -382,17 +382,17 @@ steps:
     displayName: 'Install Node.js'
     inputs:
       versionSpec: '22.x'
-
+  
   - task: DownloadBuildArtifacts@0
     displayName: 'Download build artifacts'
     inputs:
       artifactName: 'app-build'
       downloadPath: '$(System.ArtifactsDirectory)'
-
+  
   - script: |
       npm install -g @capgo/cli
     displayName: 'Install Capgo CLI'
-
+  
   - script: |
       npx @capgo/cli bundle upload \
         --apikey $(CAPGO_TOKEN) \
@@ -401,9 +401,9 @@ steps:
     displayName: 'Upload to Capgo (${{ parameters.channel }})'
 ```
 
-### Stratégie de déploiement basée sur les branches
+### Branch-Based Deployment Strategy
 
-Configurez différentes stratégies de déploiement basées sur les branches Git :
+Configure different deployment strategies based on Git branches:
 
 ```yaml
 trigger:
@@ -433,18 +433,18 @@ stages:
           - task: NodeTool@0
             inputs:
               versionSpec: '22.x'
-
+          
           - script: |
               npm ci
               npm run test
               npm run build
             displayName: 'Install, test and build'
-
+          
           - task: PublishBuildArtifacts@1
             inputs:
               pathToPublish: 'dist'
               artifactName: 'app-build'
-
+  
   - stage: Deploy
     displayName: 'Deploy to $(targetChannel)'
     dependsOn: Build
@@ -464,24 +464,24 @@ stages:
                     channel: '$(targetChannel)'
 ```
 
-## Meilleures pratiques de sécurité
+## Security Best Practices
 
-### Gestion sécurisée des variables
+### Secure Variable Management
 
 <Steps>
 
-1. **Utiliser des groupes de variables** : Stocker les données sensibles dans des groupes de variables Azure DevOps
-2. **Marquer comme secret** : Toujours marquer les jetons API et les clés comme variables secrètes
-3. **Limiter l'accès** : Limiter l'accès aux groupes de variables à des pipelines et utilisateurs spécifiques
-4. **Rotation des clés** : Effectuer régulièrement la rotation de vos jetons API Capgo
+1. **Use Variable Groups**: Store sensitive data in Azure DevOps variable groups
+2. **Mark as Secret**: Always mark API tokens and keys as secret variables
+3. **Scope Access**: Limit variable group access to specific pipelines and users
+4. **Rotate Keys**: Regularly rotate your Capgo API tokens
 
 </Steps>
 
-## Surveillance et notifications
+## Monitoring and Notifications
 
-### Intégration Teams
+### Teams Integration
 
-Ajoutez des notifications Microsoft Teams à votre pipeline :
+Add Microsoft Teams notifications to your pipeline:
 
 ```yaml
 - task: ms-teams-deploy-card@1.4.1
@@ -503,9 +503,9 @@ Ajoutez des notifications Microsoft Teams à votre pipeline :
     themeColor: 'FF0000'
 ```
 
-### Notifications par e-mail
+### Email Notifications
 
-Configurez les notifications par e-mail pour le statut de déploiement :
+Configure email notifications for deployment status:
 
 ```yaml
 - task: EmailReport@1
@@ -522,22 +522,22 @@ Configurez les notifications par e-mail pour le statut de déploiement :
       Commit: $(Build.SourceVersion)
 ```
 
-## Dépannage
+## Troubleshooting
 
-### Problèmes courants
+### Common Issues
 
-**Le pipeline échoue avec "Capgo CLI not found" :**
+**Pipeline fails with "Capgo CLI not found":**
 ```yaml
-# Assurer l'installation globale
+# Ensure global installation
 - script: |
     npm install -g @capgo/cli
     which capgo || echo "Capgo CLI not found in PATH"
   displayName: 'Install and verify Capgo CLI'
 ```
 
-**Erreurs d'authentification :**
+**Authentication errors:**
 ```yaml
-# Vérifier que le jeton est correctement défini
+# Verify token is correctly set
 - script: |
     echo "Token length: ${#CAPGO_TOKEN}"
     if [ -z "$CAPGO_TOKEN" ]; then
@@ -549,18 +549,18 @@ Configurez les notifications par e-mail pour le statut de déploiement :
     CAPGO_TOKEN: $(CAPGO_TOKEN)
 ```
 
-**Artefacts de build introuvables :**
+**Build artifacts not found:**
 ```yaml
-# Lister les artefacts disponibles pour le débogage
+# List available artifacts for debugging
 - script: |
     ls -la $(System.ArtifactsDirectory)
     find $(System.ArtifactsDirectory) -name "*.js" -o -name "*.html"
   displayName: 'Debug artifacts'
 ```
 
-### Pipeline de débogage
+### Debug Pipeline
 
-Ajoutez des étapes de débogage pour résoudre les problèmes :
+Add debugging steps to troubleshoot issues:
 
 ```yaml
 - script: |
@@ -574,11 +574,12 @@ Ajoutez des étapes de débogage pour résoudre les problèmes :
   displayName: 'Debug Capgo App Status'
 ```
 
-## Prochaines étapes
+## Next Steps
 
-- Découvrez les [Canaux](/docs/live-updates/channels/) pour gérer différents environnements de déploiement
-- Explorez le [Stockage personnalisé](/docs/live-updates/custom-storage/) pour des scénarios de déploiement avancés
-- Configurez le [Chiffrement](/docs/live-updates/encryption/) pour des déploiements sécurisés
-- Configurez le [Comportement des mises à jour](/docs/live-updates/update-behavior/) pour personnaliser l'application des mises à jour
+- Learn about [Channels](/docs/live-updates/channels/) to manage different deployment environments
+- Explore [Custom Storage](/docs/live-updates/custom-storage/) for advanced deployment scenarios
+- Set up [Encryption](/docs/live-updates/encryption/) for secure deployments
+- Configure [Update Behavior](/docs/live-updates/update-behavior/) to customize how updates are applied
 
-Avec l'intégration Azure DevOps, vous pouvez automatiser vos déploiements Capgo et garantir des mises à jour cohérentes et fiables pour les utilisateurs de votre application mobile.
+With Azure DevOps integration, you can automate your Capgo deployments and ensure consistent, reliable updates to your mobile app users.
+

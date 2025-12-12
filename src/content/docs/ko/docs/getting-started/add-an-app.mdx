@@ -1,6 +1,6 @@
 ---
-title: Ajouter une App
-description: Capgo 계정에 앱을 추가하고 앱에 플러그인을 설치하세요
+title: "앱 추가하기"
+description: "Capgo 계정에 앱을 추가하고 앱에 플러그인을 설치하세요"
 sidebar:
   order: 2
 prev: false
@@ -10,6 +10,12 @@ locale: ko
 
 import { YouTube } from 'astro-embed';
 import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## 요구사항
+
+Capgo를 시작하기 전에 다음을 확인하세요:
+- Capacitor 앱이 설치되고 구성되어 있어야 합니다. [Capacitor 설정 방법 배우기](https://capacitorjs.com/docs/getting-started/)
+- Node.js 18 이상이 설치되어 있어야 합니다
 
 ## Capgo 소개
 <YouTube id="NzXXKoyhTIo" title="15분 안에 보는 Capgo" />
@@ -31,7 +37,7 @@ import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
 
 ### 수동 설정
 
-init 명령어가 작동하지 않는 경우, 수동으로 앱을 추가할 수 있습니다
+Init 명령어가 작동하지 않는 경우, 수동으로 앱을 추가할 수 있습니다.
 
 <Steps>
 
@@ -39,10 +45,13 @@ init 명령어가 작동하지 않는 경우, 수동으로 앱을 추가할 수 
 
 2. 이 명령어로 계정에 앱을 추가하세요: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
 
-3. 앱에 플러그인을 설치하세요: <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+3. 앱에 플러그인을 설치하세요: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
 
-4. 앱에서 가능한 한 빨리 init 메소드를 호출하세요: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+4. 앱 설정 파일에서 플러그인을 구성하세요 <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+  [사용 가능한 모든 옵션 보기](/docs/plugin/settings/). 제공되지 않으면 이 정보가 유추됩니다.
 
-5. 실시간 업데이트 배포하기 <LinkCard href="/docs/getting-started/deploy/" title="실시간 업데이트 배포" description="앱에 실시간 업데이트를 배포하는 방법 알아보기" />
+5. 앱에서 가능한 한 빨리 init 메소드를 호출하세요: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+
+6. 실시간 업데이트 배포하기 <LinkCard href="/docs/getting-started/deploy/" title="실시간 업데이트 배포" description="앱에 실시간 업데이트를 배포하는 방법 알아보기" />
 
 </Steps>
