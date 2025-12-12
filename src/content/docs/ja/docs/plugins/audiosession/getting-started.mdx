@@ -1,8 +1,6 @@
 ---
-title: Getting Started
-description: >-
-  Configure the AudioSession plugin to react to iOS audio route changes and
-  interruptions.
+title: はじめに
+description: iOS のオーディオルート変更と中断に反応するように AudioSession プラグインを設定する
 sidebar:
   order: 2
 locale: ja
@@ -11,17 +9,17 @@ locale: ja
 import { Steps } from '@astrojs/starlight/components';
 import { PackageManagers } from 'starlight-package-managers'
 
-> ℹ️ **Platform support:** The audio session API is available on iOS. Calls on Android and the web resolve without effect so you can keep shared logic.
+> ℹ️ **プラットフォームサポート:** オーディオセッション API は iOS で利用可能です。Android と Web での呼び出しは影響なく解決するため、共有ロジックを保持できます。
 
 <Steps>
-1. **Install the package**
+1. **パッケージをインストール**
    <PackageManagers pkg="@capgo/capacitor-plugin-audiosession" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 
-2. **Sync iOS platform**
+2. **iOS プラットフォームを同期**
    <PackageManagers type="exec" pkg="cap" args="sync ios" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
 </Steps>
 
-## Inspect available outputs
+## 利用可能な出力を検査
 
 ```typescript
 import { AudioSession, AudioSessionPorts } from '@capgo/capacitor-plugin-audiosession';
@@ -33,7 +31,7 @@ if (outputs.includes(AudioSessionPorts.BLUETOOTH_A2DP)) {
 }
 ```
 
-## Override to speaker mode
+## スピーカーモードでのオーバーライド
 
 ```typescript
 import { AudioSession, OutputOverrideType } from '@capgo/capacitor-plugin-audiosession';
@@ -44,7 +42,7 @@ await AudioSession.overrideOutput(OutputOverrideType.speaker);
 await AudioSession.overrideOutput(OutputOverrideType.default);
 ```
 
-## Listen for route and interruption events
+## ルート変更と中断イベントをリッスン
 
 ```typescript
 import { AudioSession, RouteChangeReasons, InterruptionTypes } from '@capgo/capacitor-plugin-audiosession';
@@ -68,7 +66,7 @@ await routeListener.remove();
 await interruptionListener.remove();
 ```
 
-## Entitlements
+## 権限
 
-- **iOS**: Add any required background audio modes (e.g. `audio`, `voice`) inside `ios/App/App/Info.plist` if your app plays audio in the background.
-- **Other platforms**: No additional setup is necessary; methods will resolve with empty results.
+- **iOS**: アプリがバックグラウンドでオーディオを再生する場合は、`ios/App/App/Info.plist` 内に必要なバックグラウンド オーディオ モード (`audio`、`voice` など) を追加してください。
+- **その他のプラットフォーム**: 追加のセットアップは不要です。メソッドは空の結果で解決します。

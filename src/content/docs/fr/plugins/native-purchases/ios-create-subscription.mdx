@@ -1,0 +1,311 @@
+---
+title: Créer iOS Auto-Renewable Subscription
+description: Step-by-step Guide to creating auto-renewable subscriptions in Application Store Connect for the Natif-purchases plugin.
+sidebar: 
+  order: 8
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Auto-renewable subscriptions provide recurring access to content, services, or premium Fonctionnalités in your iOS Application. This Guide walks you through creating subscriptions in Application Store Connect.
+
+## Aperçu
+
+Auto-renewable subscriptions automatically renew at the end of each billing period until Utilisateurs Annuler. They're perfect for:
+- Premium content and Fonctionnalités
+- Ad-free experiences
+- Cloud storage and Synchroniser
+- Streaming services
+- Professional tools and utilities
+
+## Prerequisites
+
+Before creating subscriptions, you must:
+1. [Créer a subscription group](/docs/plugins/Natif-purchases/iOS-subscription-group/) to organize your subscriptions
+2. Have an Actif Apple Developer Program membership
+3. Terminé banking and tax Information in Application Store Connect
+
+## Creating a Subscription
+
+<Steps>
+
+1. **Navigate to Subscriptions**
+
+   In Application Store Connect, select your Application and go to **Monetize > Subscriptions**.
+
+   Select your subscription group or Créer a Nouveau one if needed.
+
+   ![Navigate to subscriptions](/Natif-purchases/iOS/Créer-subscription/navigate-to-subscriptions.webp)
+
+2. **Créer Nouveau Subscription**
+
+   Click the **+** icon Suivant to your subscription group to Ajouter a Nouveau subscription.
+
+3. **Enter Basic Information**
+
+   **Reference Name**: Descriptive name for your internal use (not shown to customers)
+   - Exemples: "Premium Monthly", "Ultimate Annual", "Basic Plan"
+
+   **Product ID**: Unique identifier for this subscription (cannot be changed later)
+   - Format: `com.yourcompany.yourapp.premium_monthly`
+   - Use descriptive, lowercase names with underscores
+   - Required for configuring the Natif-purchases plugin
+
+   ![Enter subscription details](/Natif-purchases/iOS/Créer-subscription/enter-subscription-Info.webp)
+
+4. **Configure Duration**
+
+   Select the subscription duration from Disponible Options:
+   - 1 week
+   - 1 month
+   - 2 months
+   - 3 months
+   - 6 months
+   - 1 year
+
+   The duration determines how often Utilisateurs are billed.
+
+5. **Set Up Pricing**
+
+   Click **Ajouter Subscription Price** to configure pricing:
+
+   **Base Territory**: Select your primary market (usually your country)
+
+   **Price**: Set the subscription price
+   - Apple automatically converts to other currencies
+   - Choose from Apple's price tiers
+   - Consider perceived value and market rates
+
+   ![Configure pricing](/Natif-purchases/iOS/Créer-subscription/configure-pricing.webp)
+
+6. **Family Sharing (Optional)**
+
+   Decide whether to Activer Family Sharing, which allows up to 6 family Membres to access the subscription.
+
+   :::Attention
+   Once Family Sharing is enabled, it cannot be turned off for this product.
+   :::
+
+   **Enable if:**
+   - Content is appropriate for family use
+   - You want to increase value proposition
+   - Your business model supports it
+
+   **Don't enable if:**
+   - Subscription is for individual use only
+   - Content is personalized to the Utilisateur
+   - You want to maximize revenue per Utilisateur
+
+7. **Ajouter Localizations**
+
+   Ajouter subscription display Information in all languages your Application supports:
+
+   **Subscription Display Name**: Customer-facing name (e.g., "Premium Monthly")
+
+   **Description**: Brief description of what the subscription includes
+   - Keep it concise and benefit-focused
+   - Mention key Fonctionnalités
+   - Highlight value proposition
+
+   ![Ajouter localizations](/Natif-purchases/iOS/Créer-subscription/Ajouter-localization.webp)
+
+8. **Application Store Promotional Image (Optional)**
+
+   Télécharger a promotional image for this subscription (312x390 pixels):
+   - Shows in the Application Store subscription page
+   - Should match your Application's design
+   - Include subscription name for clarity
+
+   :::Remarque
+   While images are optional for initial submission, they're required for promotional display in the Application Store. You can Ajouter them later.
+   :::
+
+9. **Enregistrer and Soumettre**
+
+   Click **Enregistrer** to Créer the subscription.
+
+   **For First Subscription:**
+   - Must be submitted with a Nouveau Application Version
+   - Include in your Suivant Application Store submission
+   - Cannot Soumettre independently
+
+   **For Subsequent Subscriptions:**
+   - Can be submitted directly from the Subscriptions page
+   - Don't require a Nouveau Application Version
+   - Disponible after first subscription is approved
+
+</Steps>
+
+## Subscription Status
+
+Your subscription will have one of these statuses:
+
+| Status | Description | Can Test? |
+|--------|-------------|-----------|
+| **Missing Metadata** | Incomplet Configuration | Yes (sandbox) |
+| **Ready to Soumettre** | Terminé but not submitted | Yes (sandbox) |
+| **Waiting for Review** | Submitted to Apple | Yes (sandbox) |
+| **In Review** | Being reviewed by Apple | Yes (sandbox) |
+| **Approved** | Disponible for purchase | Yes |
+| **Rejected** | Needs changes | Yes (sandbox) |
+
+:::Conseil
+You can Test subscriptions in sandbox mode even if they show "Missing Metadata" or "Ready to Soumettre"!
+:::
+
+## Using in Your Application
+
+Once created, Référence the subscription in your Application using the product ID:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Fetch subscription products direct from StoreKit
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: [
+    'com.yourcompany.yourapp.premium_monthly',
+    'com.yourcompany.yourapp.premium_annual',
+  ],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+products.forEach((product) => {
+  console.log(`${product.title}: ${product.priceString}`);
+  console.log(`Duration: ${product.subscriptionPeriod}`);
+  console.log(`Description: ${product.description}`);
+});
+
+// Purchase a subscription (StoreKit 2 automatically handles intro pricing and offers)
+try {
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.yourcompany.yourapp.premium_monthly',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Transaction ID:', transaction.transactionId);
+
+  // StoreKit receipts are included on iOS for server-side validation
+  await sendReceiptToBackend(transaction.receipt);
+} catch (error) {
+  console.error('Purchase failed:', error);
+}
+
+// Check subscription status using the store's data
+const { purchases } = await NativePurchases.getPurchases({
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const premium = purchases.find(
+  (purchase) => purchase.productIdentifier === 'com.yourcompany.yourapp.premium_monthly',
+);
+
+if (premium?.isActive) {
+  console.log('Expires:', premium.expirationDate);
+  console.log('Will renew:', premium.willCancel === false);
+  console.log('Store state:', premium.subscriptionState);
+  unlockPremiumFeatures();
+} else {
+  showPaywall();
+}
+```
+
+## Best Practices
+
+### Pricing Strategy
+- **Monthly plans**: Lower barrier to entry, builds habit
+- **Annual plans**: Better value, higher LTV, lower churn
+- **Multiple tiers**: Basic, Premium, Ultimate for different Utilisateur segments
+- **Competitive analysis**: Research similar apps' pricing
+
+### Product IDs
+- Use consistent naming: `company.app.tier_duration`
+- Include tier and duration in ID: `premium_monthly`, `ultimate_annual`
+- Avoid changing product IDs (they're permanent)
+- Document all product IDs for your team
+
+### Family Sharing
+- Activer for family-oriented apps (games, educational, entertainment)
+- Consider impact on revenue
+- Test sharing behavior thoroughly
+- Communicate sharing capability in marketing
+
+### Localization
+- Translate all subscription names and descriptions
+- Consider regional pricing differences
+- Test display in all supported languages
+- Use culturally appropriate marketing language
+
+### Promotional Images
+- Maintain consistent visual style
+- Include subscription name and key benefit
+- Mise à jour for seasonal promotions
+- Match Application's overall design language
+
+## Common Subscription Patterns
+
+### Single Tier (Freemium)
+```
+Free App + Premium Subscription
+- Basic: Free (limited features)
+- Premium Monthly: $4.99
+- Premium Annual: $39.99 (save 33%)
+```
+
+### Multi-Tier (Good, Better, Best)
+```
+- Basic Monthly: $4.99
+- Premium Monthly: $9.99
+- Ultimate Monthly: $19.99
+
+- Basic Annual: $49.99
+- Premium Annual: $99.99
+- Ultimate Annual: $199.99
+```
+
+### Consumable + Subscription Hybrid
+```
+- Credit packs (consumable)
+- Monthly subscription (unlimited credits)
+- Annual subscription (unlimited + bonus features)
+```
+
+## Dépannage
+
+**Subscription not loading in app:**
+- Verify product ID matches exactly (case-sensitive)
+- Vérifier subscription is in subscription group
+- Ensure Bundle identifier matches Application Store Connect
+- Wait 2-3 hours after creating product
+
+**Cannot submit subscription:**
+- Terminé all required fields (name, description, price)
+- Ajouter at least one localization
+- Verify banking/tax Info is approved
+- Vérifier if first subscription (requires Application Version)
+
+**Family Sharing toggle disabled:**
+- Already enabled (cannot be disabled)
+- Vérifier in subscription details
+- Contact Apple Support if stuck
+
+**Price tier not available:**
+- May be restricted in some territories
+- Choose alternative tier
+- Contact Apple for pricing questions
+
+**"Invalid Product ID" error:**
+- Must be reverse domain format
+- Cannot contain spaces or special characters
+- Vérifier for typos
+- Verify uniqueness across all products
+
+## Suivant Steps
+
+- [Créer an introductory offer](/docs/plugins/Natif-purchases/iOS-introductory-offer/) to attract Nouveau subscribers
+- [Configure sandbox Test](/docs/plugins/Natif-purchases/iOS-sandbox-Test/) to Test your subscriptions
+- Set up promotional offers for win-Retour and retention
+- Implement subscription Analyse tracking
+
+## Additional Resources
+
+For more details, refer to the [official Apple Documentation on auto-renewable subscriptions](https://developer.apple.com/Documentation/storekit/in-app_purchase/subscriptions_and_offers).

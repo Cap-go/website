@@ -1,0 +1,425 @@
+---
+title: GitLab CI/CD Integration
+description: "Learn how to integrate Capgo Mises à jour en direct with GitLab CI/CD for automated Déploiement of your Application Mises à jour."
+sidebar: 
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Integrate Capgo Mises à jour en direct with GitLab CI/CD to automatically Déployer your Application Mises à jour whenever you Pousser code changes. This Guide covers setting up automated builds, Test, and Déploiement workflows.
+
+## Prerequisites
+
+Before setting up GitLab CI/CD integration, ensure you have:
+
+- A GitLab Compte with a project repository
+- A Capgo Compte with an Application configured
+- Node.js and npm/yarn configured in your project
+
+## Setting Up GitLab CI/CD
+
+### Step 1: Configure Environment Variables
+
+First, set up the necessary variables in your GitLab project:
+
+<Steps>
+
+1. Navigate to your GitLab project
+2. Go to **Paramètres** → **CI/CD** → **Variables**
+3. Ajouter the following variables:
+
+</Steps>
+
+| Variable Name | Value | Protected | Masked |
+|---------------|-------|-----------|--------|
+| `CAPGO_TOKEN` | Your Capgo API token | ✅ Yes | ✅ Yes |
+
+<Aside type="tip">
+
+Get your Capgo API token from [console.capgo.app/apikeys](https://console.capgo.app/apikeys). Your app ID is already configured in your `capacitor.config.ts` file.
+
+</Aside>
+
+## Simple
+
+Basic Configuration that deploys to Production on every Pousser to the main branch:
+
+```yaml
+# .gitlab-ci.yml - Simple Configuration
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+  only:
+    - main
+
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+    # For encrypted uploads, add: --key-data-v2 "$CAPGO_PRIVATE_KEY"
+  dependencies:
+    - build
+  only:
+    - main
+```
+
+## Advanced
+
+### Fonctionnalité Branch Deployments
+
+Déployer Fonctionnalité branches to Test Canaux for review and Test:
+
+```yaml
+# Feature branch deployment
+deploy_feature:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - CHANNEL_NAME="feature-$(echo $CI_COMMIT_REF_NAME | sed 's/[^a-zA-Z0-9-]/-/g')"
+    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+  dependencies:
+    - build
+  only:
+    - /^feature\/.*$/
+  environment:
+    name: feature/$CI_COMMIT_REF_NAME
+    url: https://your-app.com/channels/$CHANNEL_NAME
+```
+
+<Aside type="tip">
+
+**Testing with Channels**: After deploying to a feature channel, you can test the update in your app by configuring it to use that specific channel. Learn more about [configuring channels in your app](/docs/live-updates/channels/#configuring-the-channel-in-your-app).
+
+</Aside>
+
+### Using Chiffrement
+
+If you're using [Capgo's Chiffrement Fonctionnalité](/docs/live-Mises à jour/Chiffrement/), you'll need to store your private key securely in your CI/CD environment.
+
+After [setting up Chiffrement keys](/docs/live-Mises à jour/Chiffrement/#setting-up-Chiffrement) locally, Ajouter your private key to GitLab variables:
+
+```shell
+# Display your private key content (copy this output)
+cat .capgo_key_v2
+```
+
+Add this content as `CAPGO_PRIVATE_KEY` in your GitLab project variables (mark as protected and masked), then use it in pipelines:
+
+```yaml
+# Deploy with encryption
+deploy_production:
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --key-data-v2 "$CAPGO_PRIVATE_KEY" --channel production
+```
+
+<Aside type="caution">
+
+**Security Best Practices:**
+- Never commit the `.capgo_key_v2` file to version control
+- Store the private key only in secure CI/CD secret management
+- Use different keys for different environments
+
+</Aside>
+
+### Multi-Canal Configuration
+
+For comprehensive Information À propos setting up and managing multiple Déploiement Canaux, see the [Canaux Documentation](/docs/live-Mises à jour/Canaux/).
+
+Terminé Configuration with multiple environments and merge request deployments:
+
+```yaml
+# .gitlab-ci.yml - Advanced Multi-Channel Configuration
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+# Build stage
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 24 hours
+
+# Deploy to development channel
+deploy_development:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel development
+  dependencies:
+    - build
+  only:
+    - develop
+  environment:
+    name: development
+
+# Deploy merge requests to test channels
+deploy_mr:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - CHANNEL_NAME="mr-$CI_MERGE_REQUEST_IID"
+    - npx @capgo/cli channel create $CHANNEL_NAME --apikey $CAPGO_TOKEN || true
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL_NAME
+  dependencies:
+    - build
+  only:
+    - merge_requests
+  environment:
+    name: review/$CI_MERGE_REQUEST_IID
+    url: https://your-app.com/channels/mr-$CI_MERGE_REQUEST_IID
+    on_stop: cleanup_mr
+
+# Cleanup MR channels when MR is closed
+cleanup_mr:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli channel delete mr-$CI_MERGE_REQUEST_IID --apikey $CAPGO_TOKEN || true
+  when: manual
+  environment:
+    name: review/$CI_MERGE_REQUEST_IID
+    action: stop
+  only:
+    - merge_requests
+
+# Deploy to staging
+deploy_staging:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel staging
+  dependencies:
+    - build
+  only:
+    - develop
+  environment:
+    name: staging
+
+# Deploy to production
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  dependencies:
+    - build
+  only:
+    - main
+  environment:
+    name: production
+```
+
+### Multi-Environment with Manual Approval
+
+For Production deployments requiring manual approval:
+
+```yaml
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  dependencies:
+    - build
+  only:
+    - main
+  when: manual
+  environment:
+    name: production
+```
+
+### Branch-Based Déploiement Strategy
+
+Déployer different branches to appropriate Canaux automatically:
+
+```yaml
+# Dynamic channel deployment based on branch
+deploy:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        CHANNEL="production"
+      elif [ "$CI_COMMIT_REF_NAME" = "develop" ]; then
+        CHANNEL="staging"
+      else
+        CHANNEL="development"
+      fi
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel $CHANNEL
+  dependencies:
+    - build
+  environment:
+    name: $CHANNEL
+```
+
+## Sécurité Best Practices
+
+### Protected Variables
+
+<Steps>
+
+1. **Mark Sensitive Variables**: Always mark API tokens as protected and masked
+2. **Branch Protection**: Use protected variables for Production deployments
+3. **Access Control**: Limit variable access to maintainers only
+4. **Regular Rotation**: Rotate API tokens regularly
+
+</Steps>
+
+### Secure Pipeline Configuration
+
+```yaml
+# Use protected variables for production
+deploy_production:
+  stage: deploy
+  script:
+    - npm install -g @capgo/cli
+    - npx @capgo/cli bundle upload --apikey $CAPGO_TOKEN --channel production
+  only:
+    refs:
+      - main
+    variables:
+      - $CI_COMMIT_REF_PROTECTED == "true"
+```
+
+## Monitoring and Notifications
+
+### Slack Integration
+
+Ajouter Slack notifications to your pipeline:
+
+```yaml
+notify_success:
+  stage: .post
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - |
+      curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"✅ Capgo deployment successful for '"$CI_COMMIT_REF_NAME"'"}' \
+        $SLACK_WEBHOOK_URL
+  when: on_success
+
+notify_failure:
+  stage: .post
+  image: alpine:latest
+  before_script:
+    - apk add --no-cache curl
+  script:
+    - |
+      curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"❌ Capgo deployment failed for '"$CI_COMMIT_REF_NAME"'"}' \
+        $SLACK_WEBHOOK_URL
+  when: on_failure
+```
+
+### Email Notifications
+
+Configure email notifications in your GitLab project Paramètres or use the API:
+
+```yaml
+notify_email:
+  stage: .post
+  script:
+    - |
+      curl --request POST \
+        --header "PRIVATE-TOKEN: $GITLAB_API_TOKEN" \
+        --form "to=team@yourcompany.com" \
+        --form "subject=Capgo Deployment Status" \
+        --form "body=Deployment of $CI_COMMIT_REF_NAME completed with status: $CI_JOB_STATUS" \
+        "https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/emails"
+  when: always
+```
+
+## Dépannage
+
+### Problèmes courants
+
+**Pipeline fails with "Capgo CLI not found":**
+```yaml
+# Debug CLI installation
+debug_cli:
+  script:
+    - npm install -g @capgo/cli
+    - which capgo || echo "Capgo CLI not found"
+    - npx @capgo/cli --version
+```
+
+**Authentication errors:**
+```yaml
+# Verify token configuration
+debug_auth:
+  script:
+    - |
+      if [ -z "$CAPGO_TOKEN" ]; then
+        echo "CAPGO_TOKEN is not set"
+        exit 1
+      fi
+      echo "Token length: ${#CAPGO_TOKEN}"
+```
+
+**Build artifacts not found:**
+```yaml
+# List build outputs
+debug_build:
+  script:
+    - ls -la dist/
+    - find dist/ -type f -name "*.js" -o -name "*.html"
+```
+
+### Débogage Pipeline
+
+Ajouter Débogage Information to troubleshoot issues:
+
+```yaml
+debug:
+  stage: build
+  script:
+    - echo "Branch: $CI_COMMIT_REF_NAME"
+    - echo "Commit: $CI_COMMIT_SHA"
+    - echo "Build: $CI_PIPELINE_ID"
+    - env | grep CI_ | sort
+  only:
+    - branches
+```
+
+## Suivant Steps
+
+- Learn À propos [Canaux](/docs/live-Mises à jour/Canaux/) to manage different Déploiement environments
+- Explore [Custom Storage](/docs/live-Mises à jour/custom-storage/) for advanced Déploiement scenarios
+- Set up [Chiffrement](/docs/live-Mises à jour/Chiffrement/) for secure deployments
+- Configure [Mise à jour Behavior](/docs/live-Mises à jour/Mise à jour-behavior/) to customize how Mises à jour are applied
+
+With GitLab CI/CD integration, you can automate your Capgo deployments and ensure consistent, reliable Mises à jour to your mobile Application Utilisateurs.

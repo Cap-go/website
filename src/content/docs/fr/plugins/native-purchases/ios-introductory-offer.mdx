@@ -1,0 +1,412 @@
+---
+title: Créer iOS Subscription Introductory Offer
+description: Learn how to Créer introductory offers for auto-renewable subscriptions on iOS to attract and convert Nouveau subscribers.
+sidebar: 
+  order: 9
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Introductory offers allow you to provide eligible Utilisateurs with free trials or discounted introductory pricing to reduce barriers to entry and increase subscription conversions.
+
+## Aperçu
+
+Introductory offers are one of the most effective tools for growing your subscriber base. They allow Utilisateurs to:
+- Try your premium Fonctionnalités risk-free
+- Experience value before committing
+- Démarrer at a lower price point
+- Construction confidence in your product
+
+## Offer Types
+
+iOS supports three types of introductory offers:
+
+### 1. Free Trial
+Customers get complimentary access for a specified duration. After the trial, they're charged at standard rates if they don't Annuler.
+
+**Examples:**
+- 7 days free
+- 14 days free
+- 1 month free
+
+**Best for:**
+- High-value subscriptions
+- Fonctionnalité-rich apps
+- Construction Utilisateur habit
+
+### 2. Pay Up Front
+Customers pay a single discounted price that covers the introductory period.
+
+**Examples:**
+- $1.99 for 2 months (then $9.99/month)
+- $9.99 for 3 months (then $19.99/month)
+
+**Best for:**
+- Commitment signals
+- Cash flow needs
+- Test price sensitivity
+
+### 3. Pay As You Go
+Customers pay a reduced price for multiple billing cycles.
+
+**Examples:**
+- $1.99/month for 3 months (then $9.99/month)
+- $4.99/month for 6 months (then $14.99/month)
+
+**Best for:**
+- Gradual commitment
+- Long-term value demonstration
+- Reducing perceived risk
+
+## Eligibility Requirements
+
+Utilisateurs can only receive introductory offers if they:
+- Haven't previously received an introductory offer for the product
+- Haven't received an introductory offer for any product in the same subscription group
+- Haven't had an Actif subscription to the product
+
+:::Remarque
+Apple handles eligibility checking automatically. The Natif-purchases plugin provides methods to Vérifier eligibility before presenting offers.
+:::
+
+## Prerequisites
+
+You must first [Créer an auto-renewable subscription](/docs/plugins/Natif-purchases/iOS-Créer-subscription/) before adding an introductory offer.
+
+## Creating an Introductory Offer
+
+<Steps>
+
+1. **Navigate to Subscription**
+
+   In Application Store Connect, go to your Application's **Monetize > Subscriptions** section and select the subscription you want to Ajouter an offer to.
+
+2. **Ajouter Subscription Price**
+
+   Click the **+** icon Suivant to "Subscription Prices" to open the pricing modal.
+
+3. **Créer Introductory Offer**
+
+   Select **"Créer introductory offer"** from the Options.
+
+   ![Créer introductory offer](/Natif-purchases/iOS/introductory-offer/Créer-introductory-offer.webp)
+
+4. **Configure Countries and Démarrer Date**
+
+   **Countries and Regions**: Select where the offer will be available
+   - Choose all countries for maximum reach
+   - Or limit to specific markets for Test
+
+   **Start Date**: When the offer becomes available
+   - Can be immediate or scheduled for the future
+   - Useful for coordinating with marketing campaigns
+
+   **End Date (Optional)**: When the offer expires
+   - Leave blank for ongoing availability
+   - Set a date for limited-time promotions
+
+5. **Select Offer Type**
+
+   Choose one of the three offer types:
+
+   **Free** (Free Trial)
+   - Select duration (days, weeks, months)
+   - Exemples: 7 days, 2 weeks, 1 month
+
+   **Pay Up Front**
+   - Set single payment price
+   - Set duration covered by payment
+   - Exemple: $1.99 for 2 months
+
+   **Pay As You Go**
+   - Set discounted price per period
+   - Set number of periods
+   - Exemple: $2.99/month for 3 months
+
+6. **Review and Confirm**
+
+   Review the summary showing:
+   - Offer type and duration
+   - Pricing details
+   - Regular price after intro period
+   - Availability dates and countries
+
+7. **Enregistrer**
+
+   Click **Enregistrer** to Créer the introductory offer. It will be Disponible for Test immediately in sandbox mode.
+
+</Steps>
+
+## Offer Configuration Exemples
+
+### Exemple 1: Standard Free Trial
+```
+Type: Free
+Duration: 7 days
+Then: $9.99/month
+```
+**User Journey:**
+- Day 1-7: Free access
+- Day 8: First charge of $9.99
+- Monthly charges continue
+
+### Exemple 2: Upfront Discounted Period
+```
+Type: Pay Up Front
+Price: $4.99
+Duration: 3 months
+Then: $9.99/month
+```
+**User Journey:**
+- Day 1: Charged $4.99
+- 90 days access
+- Day 91: Charged $9.99/month
+
+### Exemple 3: Gradual Introduction
+```
+Type: Pay As You Go
+Price: $2.99/month
+Periods: 6 months
+Then: $9.99/month
+```
+**User Journey:**
+- Months 1-6: $2.99/month
+- Month 7+: $9.99/month
+
+## Using in Your Application
+
+The Natif-purchases plugin automatically handles introductory offer presentation and eligibility:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// Fetch products with intro offer information
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['com.yourapp.premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+const product = products[0];
+
+// Display intro offer details (StoreKit sends localized metadata)
+if (product.introductoryPrice) {
+  console.log('Intro price:', product.introductoryPriceString);
+  console.log('Intro period:', product.introductoryPricePeriod);
+  console.log('Intro cycles:', product.introductoryPriceCycles);
+  console.log('Regular price:', product.priceString);
+} else {
+  console.log('No intro offer configured');
+}
+
+// Purchase (StoreKit automatically applies intro pricing if eligible)
+try {
+  const transaction = await NativePurchases.purchaseProduct({
+    productIdentifier: 'com.yourapp.premium_monthly',
+    productType: PURCHASE_TYPE.SUBS,
+  });
+
+  console.log('Subscription active, receipt length:', transaction.receipt?.length);
+  await validateReceiptOnServer(transaction.receipt);
+} catch (error) {
+  console.error('Purchase failed:', error);
+}
+```
+
+## Displaying Intro Offers to Utilisateurs
+
+### Best Practices for UI
+
+**Clear Value Proposition:**
+```
+Try Premium Free for 7 Days
+Then $9.99/month. Cancel anytime.
+```
+
+**Emphasize Savings:**
+```
+Start at Just $1.99
+Get 3 months of Premium for only $1.99
+Then $9.99/month
+```
+
+**Transparent Communication:**
+```
+Your Free Trial
+• Access all premium features
+• No charge for 7 days
+• $9.99/month after trial
+• Cancel anytime, even during trial
+```
+
+### Exemple Implementation
+
+```typescript
+function formatIntroOffer(product: any): string {
+  if (!product.introductoryPrice) {
+    return `${product.priceString} per ${product.subscriptionPeriod}`;
+  }
+
+  const intro = product.introductoryPrice;
+  const regular = product.priceString;
+
+  if (intro.price === 0) {
+    // Free trial
+    return `Try free for ${intro.periodString}, then ${regular}`;
+  } else if (intro.cycles === 1) {
+    // Pay up front
+    return `${intro.priceString} for ${intro.periodString}, then ${regular}`;
+  } else {
+    // Pay as you go
+    return `${intro.priceString} for ${intro.cycles} ${intro.periodString}s, then ${regular}`;
+  }
+}
+```
+
+## Marketing Best Practices
+
+### Trial Length Strategy
+- **3-7 days**: Quick decision apps, games
+- **7-14 days**: Standard for most apps
+- **14-30 days**: Complex tools, professional apps
+- **30+ days**: High-value B2B or Entreprise
+
+### Pricing Psychology
+- **$0.99-$1.99**: Very low barrier, good for Test
+- **50% off**: Strong perceived value
+- **First month free**: Common, familiar pattern
+
+### Communication Timing
+- **Before trial ends**: Remind Utilisateurs of upcoming charge
+- **Highlight value**: Show Utilisation stats, achievements
+- **Easy cancellation**: Construction trust with transparent process
+
+## Test Intro Offers
+
+Use sandbox Test to verify behavior:
+
+```typescript
+import { NativePurchases, PURCHASE_TYPE } from '@capgo/native-purchases';
+
+// In sandbox mode, accelerated subscription durations apply:
+// - 3 days free trial = 3 minutes
+// - 1 week free trial = 3 minutes
+// - 1 month free trial = 5 minutes
+
+const { products } = await NativePurchases.getProducts({
+  productIdentifiers: ['premium_monthly'],
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+// Purchase with intro offer
+const transaction = await NativePurchases.purchaseProduct({
+  productIdentifier: 'premium_monthly',
+  productType: PURCHASE_TYPE.SUBS,
+});
+
+console.log('Intro purchase transaction:', transaction.transactionId);
+
+// Wait for accelerated renewal
+setTimeout(async () => {
+  const { purchases } = await NativePurchases.getPurchases({
+    productType: PURCHASE_TYPE.SUBS,
+  });
+  const premium = purchases.find((purchase) => purchase.productIdentifier === 'premium_monthly');
+  console.log('After trial state:', premium?.subscriptionState);
+}, 180000); // 3 minutes for weekly trial
+```
+
+## Important Notes
+
+### Eligibility Rules
+- One intro offer per Utilisateur per subscription group (lifetime)
+- Applies to Nouveau subscribers only
+- Cannot be used again after cancellation
+- Not Disponible for subscription upgrades/crossgrades
+
+### StoreKit API
+- `introductoryPrice` shows intro offer details
+- `eligibility` method checks if user qualifies
+- Automatically applied at purchase time
+- No special purchase method needed
+
+### Limitations
+- Only one intro offer Actif per subscription at a time
+- Cannot combine with other discount types
+- Cannot change eligibility rules
+- Apple controls eligibility checking
+
+## Dépannage
+
+**Intro offer not showing:**
+- Vérifier if offer is activated in Application Store Connect
+- Verify Utilisateur hasn't used an intro offer before
+- Ensure Utilisateur hasn't subscribed to anything in the group
+- Test with Nouveau sandbox Compte
+
+**Eligibility check failing:**
+- Wait for Application Store Synchroniser (can take 2-3 hours)
+- Verify product ID is correct
+- Vérifier subscription group Configuration
+- Test in sandbox with fresh Test Compte
+
+**Wrong price displaying:**
+- Vérifier regional pricing Paramètres
+- Verify currency conversion
+- Ensure offer dates are current
+- Actualiser product Information
+
+**Sandbox testing issues:**
+- Use accelerated durations (3 min = 1 week)
+- Créer Nouveau Test accounts for each Test
+- Wait for trial to Terminé naturally
+- Vérifier renewal count (max 6 in sandbox)
+
+## Analyse and Optimization
+
+### Track These Metrics
+- Intro offer acceptance rate
+- Trial-to-paid conversion rate
+- Cancellation during trial
+- Retention after first charge
+- Revenue impact
+
+### A/B Test Ideas
+- Free trial vs. paid intro
+- Trial length variations
+- Discount percentage
+- Single payment vs. recurring discount
+
+### Optimization Strategy
+```typescript
+// Track offer performance
+analytics.track('intro_offer_displayed', {
+  product_id: product.identifier,
+  offer_type: product.introductoryPriceType,
+  offer_duration: product.introductoryPricePeriod
+});
+
+analytics.track('intro_offer_accepted', {
+  product_id: product.identifier
+});
+
+// Monitor conversion
+NativePurchases.addListener('transactionUpdated', (transaction) => {
+  if (transaction.productIdentifier === product.identifier && transaction.isActive) {
+    analytics.track('trial_converted', {
+      transactionId: transaction.transactionId,
+      productId: transaction.productIdentifier,
+    });
+  }
+});
+```
+
+## Suivant Steps
+
+- [Configure sandbox Test](/docs/plugins/Natif-purchases/iOS-sandbox-Test/) to Test your intro offers
+- Set up promotional offers for win-Retour campaigns
+- Implement subscription Analyse
+- Créer targeted marketing campaigns
+
+## Additional Resources
+
+For more details, refer to the [official Apple Documentation on introductory offers](https://developer.apple.com/Documentation/storekit/in-app_purchase/subscriptions_and_offers/implementing_introductory_offers_in_your_app).

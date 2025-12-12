@@ -1,0 +1,131 @@
+---
+title: "@capgo/capacitor-persistent-Compte"
+description: Persistent Compte management plugin for Capacitor apps with secure storage, session handling, and Utilisateur data persistence.
+tableOfContents: false
+next: false
+prev: false
+sidebar: 
+  order: 1
+  label: "Introduction"
+hero: 
+  tagline: Manage Utilisateur accounts with persistent storage, secure session handling, and seamless authentication across Application sessions.
+  image: 
+    file: ~public/icons/plugins/persistent-Compte.svg
+  actions: 
+    - text: Get started
+      link: /docs/plugins/persistent-Compte/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-persistent-account/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Aperçu
+
+The Capacitor Persistent Compte plugin enables secure storage and persistence of Utilisateur Compte data between Application installations. This plugin ensures that Utilisateur Compte Information remains Disponible even after Application reinstalls, providing seamless Utilisateur experience and Compte continuity.
+
+<CardGrid stagger>
+  <Card title="Cross-install persistence" icon="rocket">
+    Data survives Application uninstall/reinstall cycles 💾
+  </Card>
+  <Card title="Secure storage" icon="setting">
+    Secure Compte data storage with system integration 🔐
+  </Card>
+  <Card title="Simple API" icon="puzzle">
+    Clean read/write interface for Compte management 📊
+  </Card>
+  <Card title="Cross-platform" icon="laptop">
+    Natif iOS and Android implementation 📱
+  </Card>
+</CardGrid>
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-persistent-account
+npx cap sync
+```
+
+## Core API Methods
+
+### Data Management
+- `saveAccount(options: { data: unknown })` - Securely save account data to persistent storage
+- `readAccount()` - Retrieve stored account data, returns `Promise<{ data: unknown | null }>`
+
+## Key Fonctionnalités
+
+- **Cross-Installation persistence**: Compte data survives Application uninstall and reinstall
+- **Secure storage**: Uses platform-specific secure storage mechanisms
+- **Type flexibility**: Store any serializable Compte data structure
+- **Cross-platform Support**: Natif implementation for both iOS and Android
+
+## Utilisation Exemple
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Define your account data structure
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Save account data
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Read account data
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Restored account:', account.username);
+} else {
+  console.log('No account data found');
+}
+```
+
+## Use Cases
+
+- **Utilisateur onboarding**: Preserve Utilisateur progress through Application reinstalls
+- **Compte recovery**: Restore Utilisateur sessions after Application Mises à jour
+- **Preferences storage**: Maintain Utilisateur Paramètres and configurations
+- **Offline-first apps**: Store essential Utilisateur data locally
+
+## Platform Implementation
+
+### iOS
+- Utilizes iOS Keychain Services for secure, persistent storage
+- Data survives Application deletion and Appareil restores
+
+### Android
+- Uses Android Compte Manager or shared preferences with backup
+- Maintains data across Application reinstalls and Appareil migrations
+
+## Sécurité Considerations
+
+- Compte data is stored using platform-specific secure storage
+- Consider data Chiffrement for sensitive Information
+- Implement proper data validation when reading stored accounts
+- Follow platform guidelines for Utilisateur data handling
+
+## Documentation
+
+Vérifier the [Terminé Documentation](/docs/plugins/persistent-Compte/getting-started/) for detailed implementation guides and best practices.

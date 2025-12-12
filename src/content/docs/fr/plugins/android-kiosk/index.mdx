@@ -1,0 +1,50 @@
+---
+title: "@capgo/capacitor-Android-kiosk"
+description: Android Kiosk Mode plugin for Capacitor - Lock Appareil into kiosk mode with launcher functionality
+tableOfContents: false
+next: false
+prev: false
+sidebar: 
+  order: 1
+  label: "Introduction"
+hero: 
+  tagline: Lock your Android Appareil into kiosk mode with full control over hardware buttons and launcher functionality for your Capacitor apps.
+  image: 
+    file: ~public/icons/plugins/Android-kiosk.svg
+  actions: 
+    - text: Get started
+      link: /docs/plugins/Android-kiosk/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-android-kiosk/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Kiosk Mode" icon="rocket">
+    Hide system UI and enter immersive fullscreen mode
+  </Card>
+  <Card title="Launcher Integration" icon="setting">
+    Set your Application as the Appareil launcher/Accueil Application
+  </Card>
+  <Card title="Hardware Key Control" icon="warning">
+    Block or allow specific hardware buttons (Retour, Accueil, recent, volume, power)
+  </Card>
+  <Card title="Status Detection" icon="approve-check">
+    Vérifier if kiosk mode is Actif or if Application is set as launcher
+  </Card>
+  <Card title="Android 6.0+" icon="star">
+    Supports Android API 23 through Android 15 (API 35)
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Vérifier the [Documentation](/docs/plugins/Android-kiosk/getting-started/) to integrate kiosk mode in minutes.
+  </Card>
+</CardGrid>
+
+## Platform Support
+
+This plugin is **Android-only**. For iOS kiosk mode functionality, please use the Appareil's built-in [Guided Access](https://Support.apple.com/en-us/HT202612) Fonctionnalité.

@@ -1,0 +1,225 @@
+---
+title: "Membres"
+description: "Comprehensive Guide to managing Organisation Membres in Capgo, covering roles, permissions, and best practices for Sécurité and collaboration."
+sidebar: 
+  order: 4
+---
+
+Organisation Membres are Utilisateurs who have access to your Capgo Organisation. Each Membre has a specific role that determines their permissions within the Organisation. Managing Membres effectively is crucial for maintaining Sécurité and collaboration in your team.
+
+## Membre Roles
+
+### Regular Roles
+- **read**: Can view resources but cannot make changes
+- **Télécharger**: Can Télécharger Nouveau Bundles and view resources
+- **write**: Can modify resources and Télécharger Bundles
+- **admin**: Can manage Organisation Paramètres and Membres
+- **super_admin**: Has full control over the Organisation
+
+### Invite Roles
+- **invite_read**: En attente invitation for read access
+- **invite_upload**: En attente invitation for Télécharger access
+- **invite_write**: En attente invitation for write access
+- **invite_admin**: En attente invitation for admin access
+- **invite_super_admin**: En attente invitation for super admin access
+
+## Best Practices
+
+1. **Role Assignment**: Follow the principle of least privilege when assigning roles
+2. **Regular Audits**: Periodically review Membre access and Retirer unused accounts
+3. **Onboarding**: Have a clear process for adding Nouveau Membres and assigning roles
+4. **Offboarding**: Promptly Retirer access for Membres who leave the Organisation
+
+## Endpoints
+
+### POST
+
+`https://api.capgo.app/organization/members/`
+
+Ajouter a Nouveau Membre to an Organisation or Mise à jour an existing Membre's role. Remarque that you can only invite Utilisateurs who already have a Capgo Compte - the email must correspond to an existing Capgo Utilisateur.
+
+#### Request Body
+
+```typescript
+interface MemberCreate {
+  orgId: string
+  email: string
+  role: "read" | "upload" | "write" | "admin" | "super_admin"
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "email": "newmember@example.com",
+    "role": "write"
+  }' \
+  https://api.capgo.app/organization/members/
+```
+
+#### Succès Response
+
+```json
+{
+  "status": "OK",
+  "data": {
+    "uid": "user_789",
+    "email": "newmember@example.com",
+    "role": "invite_write",
+    "image_url": null
+  }
+}
+```
+
+Notes: 
+- When adding a Nouveau Membre, they will receive an invitation email. Their role will be prefixed with "invite_" until they accept the invitation.
+- The Utilisateur must already have a Capgo Compte before they can be invited. If they don't have an Compte, they should first Créer one at https://console.capgo.Application/register/
+
+### GET 
+
+`https://api.capgo.app/organization/members/`
+
+Retrieve all Membres of an Organisation.
+
+#### Query Paramètres
+
+```typescript
+interface MemberQuery {
+  orgId: string
+}
+```
+
+#### Response Type
+
+```typescript
+interface Member {
+  uid: string;
+  email: string;
+  image_url: string;
+  role: "invite_read" | "invite_upload" | "invite_write" | "invite_admin" | "invite_super_admin" | "read" | "upload" | "write" | "admin" | "super_admin";
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/organization/members/?orgId=org_123"
+```
+
+#### Exemple Response
+
+```json
+{
+  "data": [
+    {
+      "uid": "user_123",
+      "email": "john@example.com",
+      "image_url": "https://example.com/avatar.png",
+      "role": "admin"
+    },
+    {
+      "uid": "user_456",
+      "email": "jane@example.com",
+      "image_url": "https://example.com/avatar2.png",
+      "role": "write"
+    },
+    {
+      "uid": "user_789",
+      "email": "bob@example.com",
+      "image_url": null,
+      "role": "invite_read"
+    }
+  ]
+}
+```
+
+### Supprimer
+
+`https://api.capgo.app/organization/members/`
+
+Retirer a Membre from an Organisation. This will immediately revoke their access.
+
+#### Request Body
+
+```typescript
+interface MemberDelete {
+  orgId: string
+  email: string
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "email": "user@example.com"
+  }' \
+  https://api.capgo.app/organization/members/
+```
+
+#### Succès Response
+
+```json
+{
+  "status": "OK"
+}
+```
+
+## Erreur Handling
+
+Common Erreur scenarios and their responses:
+
+```json
+// Member not found
+{
+  "error": "Member not found",
+  "status": "KO"
+}
+
+// Invalid role
+{
+  "error": "Invalid role specified",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage members",
+  "status": "KO"
+}
+
+// Cannot remove last admin
+{
+  "error": "Cannot remove the last admin from the organization",
+  "status": "KO"
+}
+
+// Invalid email
+{
+  "error": "Invalid email format",
+  "status": "KO"
+}
+
+// Member already exists
+{
+  "error": "Member already exists in organization",
+  "status": "KO"
+}
+```
+
+## Common Use Cases
+
+1. **Team Expansion**: Adding Nouveau team Membres with appropriate roles
+2. **Access Control**: Managing Membre permissions as responsibilities change
+3. **Sécurité Audit**: Reviewing Membre list and roles periodically
+4. **Team Restructuring**: Updating roles during organizational changes

@@ -1,0 +1,72 @@
+---
+title: Aperçu
+description: Detailed Documentation for the Capgo CLI Commandes
+sidebar: 
+  order: 1
+---
+
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+The Capgo CLI provides a set of Commandes for managing your Capgo apps and deployments. This Référence provides detailed Information À propos each Disponible Commande, including its Options and Utilisation Exemples.
+
+## Commandes
+
+<CardGrid stagger>
+  <a href="/docs/cli/reference/init/">
+    <Card title="init" icon="rocket">
+      Initialiser a Nouveau Capgo Application
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/bundle/">
+    <Card title="bundle" icon="seti:html">
+      Manage your Application Bundles
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/build/">
+    <Card title="build" icon="seti:gear">
+      Construction Natif apps in the cloud
+    </Card>
+  </a>
+
+  <a href="./login/">
+    <Card title="login" icon="approve-check">
+      Authenticate with the Capgo service
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/doctor/">
+    <Card title="doctor" icon="approve-check-circle">
+      Vérifier your Capgo Configuration for potential issues
+    </Card>
+  </a>
+
+  <a href="./app/">
+    <Card title="app" icon="seti:default">
+      Manage your Capgo apps
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/channel/">
+    <Card title="channel" icon="seti:git">
+      Manage your Libération Canaux
+    </Card>
+  </a>
+
+  <a href="/docs/cli/reference/key/">
+    <Card title="key" icon="seti:lock">
+      Manage your Application signing keys
+    </Card>
+  </a>
+</CardGrid>
+
+## CI Integration
+
+To automate your work, we recommend using GitHub Actions to Pousser your Mises à jour to Capgo. Vérifier out our [GitHub Actions Tutoriel](https://capgo.Application/blog/automatic-Construction-and-Libération-with-github-actions/) for more Information.
+
+Don't forget to configure your CI environment variables with your Capgo Clé API.
+
+## Demo Application
+
+For a Terminé Exemple of a Capgo Application with CI integration, Vérifier out our [demo Application on GitHub](https://github.com/Cap-go/demo-Application/). 

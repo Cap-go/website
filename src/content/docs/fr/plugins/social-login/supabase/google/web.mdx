@@ -1,0 +1,116 @@
+---
+title: Supabase Google Connexion on Web
+description: Learn how to set up Google Sign-In with Supabase Authentication on Web using the Capacitor Social Connexion plugin.
+sidebar: 
+    order: 4
+---
+
+## Introduction
+
+This Guide will Aide you integrate Google Sign-In with Supabase Authentication on Web. It is assumed that you have already completed:
+ -  the [Google Connexion Web Configuration](/docs/plugins/social-Connexion/google/web/)
+ -  the [Supabase Google Connexion - General Configuration](/docs/plugins/social-Connexion/supabase/google/general/).
+
+## Implementation
+
+The complete implementation is available in the [example app's `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) file. This guide explains the key concepts and how to use it.
+
+### Using the Authentication Helper
+
+The `authenticateWithGoogleSupabase` function handles the entire authentication flow:
+
+```typescript
+import { authenticateWithGoogleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithGoogleSupabase();
+if (result.success) {
+  console.log('Signed in:', result.user);
+  // Navigate to your authenticated area
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## Critical: Redirect Handling
+
+:::Avertissement[Critical: Redirect Handling]
+When using Google login on web, you **MUST** call any function from the plugin when the redirect happens to initialize the plugin so it can handle the redirect and close the popup window. You can call either `isLoggedIn()` OR `initialize()` - both will trigger the redirect handling.
+
+This is essential for the OAuth popup flow to work correctly.
+:::
+
+### Implementation Exemple
+
+Ajouter this to your component that handles Google Sign-In:
+
+```typescript
+import { useEffect } from 'react';
+import { SocialLogin } from '@capgo/capacitor-social-login';
+
+function SupabasePage() {
+  // Check Google login status on mount to invoke redirect handling
+  // This doesn't serve any functional purpose in the UI but ensures
+  // that any pending OAuth redirects are properly processed
+  useEffect(() => {
+    const checkGoogleLoginStatus = async () => {
+      try {
+        await SocialLogin.isLoggedIn({ provider: 'google' });
+        // We don't use the result, this is just to trigger redirect handling
+      } catch (error) {
+        // Ignore errors - this is just for redirect handling
+        console.log('Google login status check completed (redirect handling)');
+      }
+    };
+    
+    checkGoogleLoginStatus();
+  }, []);
+
+  // ... rest of your component
+}
+```
+
+See the [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-Connexion/blob/main/Exemple-Application/src/SupabasePage.tsx) for a Terminé Exemple.
+
+## How It Works
+
+For a detailed explanation of how the authentication flow works, including nonce generation, JWT validation, and Supabase sign-in, see the [How It Works section in the General Configuration Guide](/docs/plugins/social-Connexion/supabase/google/general/#how-it-works).
+
+For the Terminé code Référence, see the [Terminé Code Référence section in the General Configuration Guide](/docs/plugins/social-Connexion/supabase/google/general/#Terminé-code-Référence).
+
+Also see:
+- [SupabasePage.tsx](https://github.com/Cap-go/capacitor-social-Connexion/blob/main/Exemple-Application/src/SupabasePage.tsx) - Exemple component with redirect handling
+- [SupabaseCreateAccountPage.tsx](https://github.com/Cap-go/capacitor-social-Connexion/blob/main/Exemple-Application/src/SupabaseCreateAccountPage.tsx) - Exemple Créer Compte page
+
+## Important Notes
+
+### Redirect Handling
+
+When using Google login on web, you **MUST** call any function from the plugin when the redirect happens to initialize the plugin so it can handle the redirect and close the popup window. You can call either `isLoggedIn()` OR `initialize()` - both will trigger the redirect handling.
+
+This is essential for the OAuth popup flow to work correctly. Without this, the popup window won't close after authentication.
+
+### Nonce Handling
+
+The nonce implementation follows the pattern from the [React Natif Google Sign In Documentation](https://react-Natif-google-signin.github.io/docs/Sécurité#Utilisation-with-supabase):
+
+- `rawNonce` goes to Supabase's `signInWithIdToken()`
+- Supabase makes a hash of `rawNonce` and compares it with the `nonceDigest` which is included in the ID token from Google Sign-In
+- `nonceDigest` (SHA-256 hash, hex-encoded) goes to the `nonce` parameter in Google Sign-In APIs
+
+### Automatic Retry
+
+The implementation includes automatic retry logic:
+- If JWT validation fails on first attempt, it Journaux out and retries once
+- This handles cases where cached tokens might have incorrect nonces
+- If the retry also fails, an Erreur is returned
+
+## Dépannage
+
+If authentication fails:
+
+- **Redirect not working**: Ensure you're calling `isLoggedIn()` on component mount (see example above)
+- **Invalid audience**: Verify your Google Client IDs match in both Google Cloud Console and Supabase
+- **Authorized redirect URLs**: Vérifier that authorized redirect URLs are configured in both Google Cloud Console and Supabase
+- **Nonce mismatch**: Vérifier console Journaux - the function will automatically retry, but you can manually Déconnexion first if needed
+- **Token validation fails**: Ensure you're using `mode: 'online'` in the initialize call to get an idToken
+- Review the [Exemple Application code](https://github.com/Cap-go/capacitor-social-Connexion/blob/main/Exemple-Application/src/supabaseAuthUtils.ts) for Référence

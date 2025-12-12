@@ -1,0 +1,241 @@
+---
+title: Commencer
+description: Learn how to Installer and integrate Google Tag Manager into your Capacitor Application using the official SDK.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-gtm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Platform Configuration
+
+### iOS
+
+1. Télécharger your GTM container Configuration file from Google Tag Manager console
+2. Ajouter the container JSON file to your iOS project in Xcode
+3. The file should be named something like `GTM-XXXXXX.json`
+
+### Android
+
+1. Télécharger your GTM container Configuration file from Google Tag Manager console
+2. Add the container JSON file to `android/app/src/main/assets/`
+3. The file should be named something like `GTM-XXXXXX.json`
+
+## Utilisation Exemple
+
+```typescript
+import { CapacitorGTM } from '@capgo/capacitor-gtm';
+
+// Initialize GTM with your container ID
+await CapacitorGTM.init({
+  containerId: 'GTM-XXXXXX'
+});
+
+// Push events to dataLayer
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Home',
+    screen_class: 'HomeScreen'
+  }
+});
+
+// Push custom events with parameters
+await CapacitorGTM.pushEvent({
+  event: 'purchase',
+  parameters: {
+    transaction_id: 'T12345',
+    value: 25.00,
+    currency: 'USD',
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product Name',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+
+// Set user properties
+await CapacitorGTM.setUserProperty({
+  key: 'user_type',
+  value: 'premium'
+});
+
+// Get values from dataLayer
+const result = await CapacitorGTM.getVariable({
+  key: 'config_value'
+});
+console.log('Config value:', result.value);
+```
+
+## API Référence
+
+### init(Options)
+
+```typescript
+init(options: { containerId: string }) => Promise<void>
+```
+
+Initialiser Google Tag Manager with your container ID.
+
+| Param         | Type                             |
+| ------------- | -------------------------------- |
+| **`options`** | `{ containerId: string }` |
+
+### pushEvent(Options)
+
+```typescript
+pushEvent(options: GTMEvent) => Promise<void>
+```
+
+Pousser an event to the dataLayer with optional Paramètres.
+
+| Param         | Type              |
+| ------------- | ----------------- |
+| **`options`** | `GTMEvent` |
+
+### setUserProperty(Options)
+
+```typescript
+setUserProperty(options: { key: string; value: string }) => Promise<void>
+```
+
+Set a Utilisateur property for segmentation and targeting.
+
+| Param         | Type                                      |
+| ------------- | ----------------------------------------- |
+| **`options`** | `{ key: string; value: string }` |
+
+### getVariable(Options)
+
+```typescript
+getVariable(options: { key: string }) => Promise<{ value: any }>
+```
+
+Get a value from the GTM container Configuration.
+
+| Param         | Type                     |
+| ------------- | ------------------------ |
+| **`options`** | `{ key: string }` |
+
+**Returns:** `Promise<{ value: any }>`
+
+## Interfaces
+
+### GTMEvent
+
+| Prop             | Type                                 | Description                        |
+| ---------------- | ------------------------------------ | ---------------------------------- |
+| **`event`**      | `string`                  | The event name                     |
+| **`parameters`** | `Record<string, any>` | Optional event parameters (optional) |
+
+## Common Event Exemples
+
+### Screen Views
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'screen_view',
+  parameters: {
+    screen_name: 'Product Details',
+    screen_class: 'ProductScreen'
+  }
+});
+```
+
+### Utilisateur Actions
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'button_click',
+  parameters: {
+    button_name: 'add_to_cart',
+    product_id: 'SKU_12345'
+  }
+});
+```
+
+### E-commerce Events
+
+```typescript
+await CapacitorGTM.pushEvent({
+  event: 'begin_checkout',
+  parameters: {
+    currency: 'USD',
+    value: 75.00,
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product 1',
+        quantity: 2,
+        price: 25.00
+      },
+      {
+        item_id: 'SKU_67890',
+        item_name: 'Product 2',
+        quantity: 1,
+        price: 25.00
+      }
+    ]
+  }
+});
+```
+
+## Best Practices
+
+- Initialiser GTM early in your Application lifecycle
+- Use consistent event naming conventions
+- Include relevant Paramètres with each event
+- Test your GTM Configuration in preview mode
+- Monitor data in Google Tag Manager console
+- Use Utilisateur properties for meaningful segmentation
+
+## Débogage
+
+Activer Débogage mode in Google Tag Manager console to Test your implementation:
+
+1. Open GTM console
+2. Go to Preview mode
+3. Connect to your Application using the container ID
+4. Verify events are being tracked correctly
+
+## Use Cases
+
+- Track Utilisateur interactions and behavior
+- Monitor Application performance metrics
+- Collect e-commerce data
+- Manage third-party tags without code changes
+- Implement A/B Test and personalization
+- Integrate with Google Analyse and other services

@@ -1,0 +1,154 @@
+---
+title: 📢 Canal
+description: 📢 Manage distribution Canaux for Application Mises à jour in Capgo Cloud, controlling how Mises à jour are delivered to Appareils.
+sidebar_label: Canal
+sidebar: 
+  order: 6
+---
+
+📢 Manage distribution Canaux for Application Mises à jour in Capgo Cloud, controlling how Mises à jour are delivered to Appareils.
+
+### <a id="Canal-Ajouter"></a> ➕ **Ajouter**
+
+**Alias:** `a`
+
+```bash
+npx @capgo/cli@latest channel add
+```
+
+➕ Créer a Nouveau Canal for Application distribution in Capgo Cloud to manage Mise à jour delivery.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel add production com.example.app --default
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-d,** | <code>string</code> | Set the Canal as default |
+| **--self-assign** | <code>boolean</code> | Allow Appareil to self-assign to this Canal |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="Canal-Supprimer"></a> 🗑️ **Supprimer**
+
+**Alias:** `d`
+
+```bash
+npx @capgo/cli@latest channel delete
+```
+
+🗑️ Supprimer a Canal from Capgo Cloud, optionally removing associated Bundles to free up resources.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel delete production com.example.app
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **--Supprimer-Bundle** | <code>boolean</code> | Supprimer the Bundle associated with the Canal |
+| **--Succès-if-not-found** | <code>boolean</code> | Succès if the Canal is not found |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="Canal-list"></a> 📋 **List**
+
+**Alias:** `l`
+
+```bash
+npx @capgo/cli@latest channel list
+```
+
+📋 List all Canaux configured for an Application in Capgo Cloud to review distribution Paramètres.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel list com.example.app
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="Canal-currentBundle"></a> 📦 **CurrentBundle**
+
+```bash
+npx @capgo/cli@latest channel currentBundle
+```
+
+📦 Get the current Bundle linked to a specific Canal in Capgo Cloud for Mise à jour tracking.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel currentBundle production com.example.app
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-c,** | <code>string</code> | Canal to get the current Bundle from |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **--quiet** | <code>boolean</code> | Only print the Bundle Version |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="Canal-set"></a> ⚙️ **Set**
+
+**Alias:** `s`
+
+```bash
+npx @capgo/cli@latest channel set
+```
+
+⚙️ Configure Paramètres for a Canal, such as linking a Bundle, setting Mise à jour strategies (major, minor, metadata, patch, none), or Appareil targeting (iOS, Android, dev, emulator).
+One Canal must be default.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest channel set production com.example.app --bundle 1.0.0 --state default
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **-b,** | <code>string</code> | Bundle Version number of the file to set |
+| **-s,** | <code>string</code> | Set the state of the Canal, default or normal |
+| **--latest-remote** | <code>boolean</code> | Get the latest Bundle uploaded in capgo cloud and set it to the Canal |
+| **--latest** | <code>boolean</code> | Get the latest Version key in the package.json to set it to the Canal |
+| **--downgrade** | <code>boolean</code> | Allow to downgrade to Version under Natif one |
+| **--no-downgrade** | <code>boolean</code> | Désactiver downgrade to Version under Natif one |
+| **--iOS** | <code>boolean</code> | Allow sending Mise à jour to iOS Appareils |
+| **--no-iOS** | <code>boolean</code> | Désactiver sending Mise à jour to iOS Appareils |
+| **--Android** | <code>boolean</code> | Allow sending Mise à jour to Android Appareils |
+| **--no-Android** | <code>boolean</code> | Désactiver sending Mise à jour to Android Appareils |
+| **--self-assign** | <code>boolean</code> | Allow Appareil to self-assign to this Canal |
+| **--no-self-assign** | <code>boolean</code> | Désactiver Appareils to self-assign to this Canal |
+| **--Désactiver-auto-Mise à jour** | <code>string</code> | Block Mises à jour by type: major, minor, metadata, patch, or none (allows all) |
+| **--dev** | <code>boolean</code> | Allow sending Mise à jour to Développement Appareils |
+| **--no-dev** | <code>boolean</code> | Désactiver sending Mise à jour to Développement Appareils |
+| **--emulator** | <code>boolean</code> | Allow sending Mise à jour to emulator Appareils |
+| **--no-emulator** | <code>boolean</code> | Désactiver sending Mise à jour to emulator Appareils |
+| **--package-json** | <code>string</code> | Paths to package.json files for monorepos (comma-separated) |
+| **--ignore-metadata-Vérifier** | <code>boolean</code> | Ignore checking node_modules compatibility if present in the Bundle |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+

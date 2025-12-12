@@ -1,0 +1,81 @@
+---
+title: "Organisation system"
+description: "A detailed Guide on managing and organizing your teams and applications within your Capgo Compte, ensuring secure collaboration and efficient access control for all Membres involved."
+sidebar: 
+  order: 11
+---
+
+
+## What is the Organisation system?
+
+The Organisation system is a system in capgo that allows you to securely share your apps with Membres of your team.
+
+### Q: How can I access my Organisation's Info?
+
+In order to access your organization's info, please go to [settings](/docs/webapp/settings/#how-to-get-to-the-settings-page) and then click on the `Organization settings`
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-settings.webp" alt="Org settings" /><figcaption></figcaption></figure>
+
+### Q: How can I change the Organisation I am viewing?
+
+To view the Paramètres of a different Organisation, please click on the Organisation selector near your name.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-selector.webp" alt="Org selector" /><figcaption></figcaption></figure>
+
+If you cannot see this, then you are likely not on the Paramètres page.
+
+### Q: How can I see the Membres of my Organisation?
+
+Please click on the `members`
+<figure><img style="margin-left: auto; margin-right: auto" src="/org-show-members.webp" alt="Org Show members" /><figcaption></figcaption></figure>
+
+### Q: How can I invite a Utilisateur to an Organisation?
+
+Please click on `Add member`
+<figure><img style="margin-left: auto; margin-right: auto" src="/orgs-add-member.webp" alt="Org add member" /><figcaption></figcaption></figure>
+
+Then a pop-out will showup - please enter the Utilisateur's email address.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/invite-to-org-email-enter.webp" alt="Invite to org" /><figcaption></figcaption></figure>
+
+Then click `invite`. Another popout will show up, this time asking you about the permission that the invited user should have.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/select-perm-orgs.webp" alt="Select perm for org" /><figcaption></figcaption></figure>
+
+Here is a breakdown of all the permissions:
+
+| Permission                        | Read | Télécharger | Write | Admin | Super Admin |
+|-----------------------------------|------|--------|-------|-------|-------------|
+| Show Application stats                    |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Show Application Canaux                 |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Show Appareils                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Show Journaux                         |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Show Bundles                      |   ✅  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Supprimer Application                        |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| Supprimer Canal                    |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| Supprimer Version                    |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Change org's Paramètres             |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| Manage org Utilisateurs                  |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| Alter Canal Paramètres            |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Télécharger Nouveau Version                |   ❌  |    ✅   |   ✅   |   ✅   |   ✅   |
+| Alter Appareils                     |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Change Canal's  current Version |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Créer Nouveau Canal                |   ❌  |    ❌   |   ❌   |   ✅   |   ✅   |
+| Alter Version  (metadata)         |   ❌  |    ❌   |   ✅   |   ✅   |   ✅   |
+| Manage billing                    |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+| Supprimer a Version unsafely      |   ❌  |    ❌   |   ❌   |   ❌   |   ✅   |
+
+
+### Q: How is billing done within orgs?
+
+Anyone with a **super admin** permission can manage the billing for a given Organisation.
+Plans are linked to a Organisation and not to your personal Compte.
+
+:::danger
+⚠️ Buying a plan will ONLY affect the organizations that you have currently selected  
+:::
+
+### Q: Can I Créer more than one Organisation?
+
+No, not yet.
+

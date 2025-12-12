@@ -1,0 +1,96 @@
+---
+title: Supabase Apple Login on Web
+description: Learn how to integrate Apple Sign-In with Supabase Authentication on Web.
+locale: zh
+sidebar:
+    order: 4
+---
+
+## 前置条件
+
+本指南将帮助您在 Web 上集成 Apple 登录与 Supabase 身份验证。假定您已完成以下步骤：
+- [Apple Login Web 设置](/docs/plugins/social-login/apple/web/)
+- [Supabase Apple Login - 通用设置](./general/)
+
+## 实现
+
+完整的实现可在 [example app 的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。本指南解释了关键概念以及如何使用它。
+
+### 使用身份验证助手
+
+`authenticateWithAppleSupabase` 函数处理整个身份验证流程：
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Signed in:', result.user);
+  // Navigate to your authenticated area
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## 工作原理
+
+在 Web 上，Apple 登录使用 OAuth 弹出窗口流程：
+
+1. **初始化**: 使用您的服务 ID 和当前页面 URL 作为重定向 URL 初始化插件
+2. **OAuth 弹出窗口**: 使用 Apple 的 OAuth 页面打开弹出窗口
+3. **用户身份验证**: 用户在弹出窗口中通过 Apple 进行身份验证
+4. **身份令牌**: Apple 返回一个包含用户信息的身份令牌（JWT）
+5. **Supabase 身份验证**: 身份令牌使用 `signInWithIdToken()` 发送给 Supabase
+
+助手函数自动检测 web 平台并相应地配置所有内容。
+
+## 重要说明
+
+### 服务 ID 配置
+
+- Web 需要您的 Apple 服务 ID（与 Android 相同）
+- 服务 ID 必须在 Apple Developer Portal 中配置正确的返回 URL
+- 确保您的域已添加到 Apple Developer Portal 中的允许域
+
+### 重定向 URL
+
+- 在 web 上，重定向 URL 自动设置为 `window.location.href`（当前页面 URL）
+- 这必须与 Apple Developer Portal 中配置的返回 URL 之一匹配
+- 确保在 Apple Developer Portal 中配置了带尾部斜杠和不带尾部斜杠的 URL
+
+### Supabase 客户端 ID
+
+在 Supabase 中，使用以下内容配置您的 Apple 提供商：
+- **Client ID**: 您的 Apple 服务 ID（例如，`com.example.app.service`）
+
+如果您还使用 iOS，您需要在 Supabase 的客户端 ID 字段中同时提供应用 ID 和服务 ID（逗号分隔）。
+
+### 更新助手函数
+
+使用 `authenticateWithAppleSupabase` 助手函数时，您**必须**更新 `clientId` 以匹配您的 Apple 服务 ID：
+
+```typescript
+await SocialLogin.initialize({
+  apple: {
+    clientId: isIOS
+      ? undefined // iOS uses bundle ID automatically
+      : 'your.service.id.here', // Your Apple Service ID for Web and Android
+    redirectUrl: redirectUrl,
+  },
+});
+```
+
+:::caution[重要]
+将 `'your.service.id.here'` 替换为您的实际 Apple 服务 ID（与您在 Apple Developer Portal 中配置的值相同）。
+:::
+
+## 故障排除
+
+如果身份验证失败：
+
+- **服务 ID 不匹配**: 验证您的服务 ID 在 Apple Developer Portal 和您的代码中都匹配
+- **未配置返回 URL**: 确保您的当前页面 URL（带尾部斜杠和不带尾部斜杠）已在 Apple Developer Portal 中配置
+- **弹出窗口被阻止**: 检查浏览器设置 - 某些浏览器默认阻止弹出窗口
+- **不允许域**: 验证您的域已添加到 Apple Developer Portal 中的允许域
+- **Supabase 配置**: 验证您的服务 ID 是否在 Supabase Apple 提供商设置中正确配置
+- 参考 [example app 代码](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)

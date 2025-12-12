@@ -1,0 +1,138 @@
+---
+title: Commencer
+description: Learn how to Installer and use the Capacitor Alarm plugin to manage Natif alarms on iOS and Android.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-alarm
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Requirements
+
+- **iOS**: iOS 26+ only. This plugin relies on `AlarmKit` APIs and will report unsupported on earlier versions or when the framework is unavailable.
+- **Android**: Uses `AlarmClock` intents; behavior depends on the default Clock app and OEM policies.
+
+Remarque: This plugin only exposes Natif alarm actions (Créer/open). It does not implement any custom in-Application alarm scheduling/CRUD.
+
+## API
+
+### createAlarm(...)
+
+```typescript
+createAlarm(options: NativeAlarmCreateOptions) => Promise<NativeActionResult>
+```
+
+Créer a Natif OS alarm using the platform clock Application.
+On Android this uses the Alarm Clock intent; on iOS this use AlarmKit if Disponible (iOS 26+).
+
+| Param         | Type                                                                          |
+| ------------- | ----------------------------------------------------------------------------- |
+| **`options`** | `NativeAlarmCreateOptions` |
+
+**Returns:** `Promise<NativeActionResult>`
+
+### openAlarms()
+
+```typescript
+openAlarms() => Promise<NativeActionResult>
+```
+
+Open the platform's Natif alarm list UI, if Disponible.
+
+**Returns:** `Promise<NativeActionResult>`
+
+### getOSInfo()
+
+```typescript
+getOSInfo() => Promise<OSInfo>
+```
+
+Get Information À propos the OS and capabilities.
+
+**Returns:** `Promise<OSInfo>`
+
+### requestPermissions(...)
+
+```typescript
+requestPermissions(options?: { exactAlarm?: boolean | undefined; } | undefined) => Promise<PermissionResult>
+```
+
+Request relevant permissions for alarm Utilisation on the platform.
+On Android, may route to Paramètres for exact alarms.
+
+| Param         | Type                                   |
+| ------------- | -------------------------------------- |
+| **`options`** | `{ exactAlarm?: boolean; }` |
+
+**Returns:** `Promise<PermissionResult>`
+
+## Interfaces
+
+### NativeActionResult
+
+| Prop          | Type                 |
+| ------------- | -------------------- |
+| **`success`** | `boolean` |
+| **`message`** | `string`  |
+
+### NativeAlarmCreateOptions
+
+Options for creating a Natif OS alarm via the platform clock Application.
+
+| Prop          | Type                 | Description                                  |
+| ------------- | -------------------- | -------------------------------------------- |
+| **`hour`**    | `number`  | Hour of day in 24h format (0-23)             |
+| **`minute`**  | `number`  | Minute of hour (0-59)                        |
+| **`label`**   | `string`  | Optional label for the alarm                 |
+| **`skipUi`**  | `boolean` | Android only: attempt to skip UI if possible |
+| **`vibrate`** | `boolean` | Android only: set alarm to vibrate           |
+
+### OSInfo
+
+Returned Info À propos current OS and capabilities.
+
+| Prop                                 | Type                 | Description                                                 |
+| ------------------------------------ | -------------------- | ----------------------------------------------------------- |
+| **`platform`**                       | `string`  | 'ios' \| 'android' \| 'web'                                 |
+| **`version`**                        | `string`  | OS version string                                           |
+| **`supportsNativeAlarms`**           | `boolean` | Whether the platform exposes a native alarm app integration |
+| **`supportsScheduledNotifications`** | `boolean` | Whether scheduling local notifications is supported         |
+| **`canScheduleExactAlarms`**         | `boolean` | Android only: whether exact alarms are allowed              |
+
+### PermissionResult
+
+Result of a permissions request.
+
+| Prop          | Type                                                             | Description                        |
+| ------------- | ---------------------------------------------------------------- | ---------------------------------- |
+| **`granted`** | `boolean`                                             | Overall grant for requested scope  |
+| **`details`** | `Record<string, boolean>` | Optional details by permission key |

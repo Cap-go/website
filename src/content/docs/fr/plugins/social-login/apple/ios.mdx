@@ -1,0 +1,66 @@
+---
+title: Apple Connexion on iOS
+description: This comprehensive Guide will walk you through the process of setting up Apple Connexion using Capacitor on iOS Appareils, ensuring a seamless integration by covering all necessary steps and configurations.
+sidebar: 
+    order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Let's break down what you are going to need in order to Configuration Apple Connexion on iOS.
+
+<Steps>
+1. Configure the capabilities of your Application.
+
+    In order to do this, please open Xcode, click on `App`
+    ![Application XCode](/social-Connexion-assets/Application-xcode.png)
+
+2. Make sure that you select the right target.
+
+    ![XCode Application Target](/social-Connexion-assets/xcode-Application-target.png)
+
+3. Please make sure that you add the `Sign in with Apple` capability.
+
+    ![Application XCode Ajouter Capability](/social-Connexion-assets/Application-xcode-Ajouter-cap.png)
+
+    ![Application XCode Ajouter Capability](/social-Connexion-assets/sign-with-apple-cap.png)
+
+    :::Attention
+    If you don't see the `Sign in with Apple` capability, configure the [Account & Organizational Data Sharing](https://developer.apple.com/account/resources/services/cwa/configure/)
+    :::
+
+4. Initialiser the Apple Connexion in your Application.
+
+    :::Remarque
+    I am using Vue as my framework, the exact implementation will vary depending on the framework of your choice
+    :::
+
+    ```ts
+    //  onMounted is vue specific
+    onMounted(() => {
+    SocialLogin.initialize({
+        apple: {}
+    })
+    });
+    ```
+
+5. Créer a button that will begin the Connexion process.
+
+    Said button should call the following function:
+
+    ```ts
+    async function loginApple() {
+    const res = await SocialLogin.login({
+        provider: 'apple',
+        options: {}
+    })
+    ```
+
+6. Run your Application on a **<u>PHYSICAL</u>** Appareil and Test it. 
+
+    If you followed the steps closely you will see the following screen after clicking your button.
+
+    ![Apple Sign In prompt on iOS Appareil](/social-Connexion-assets/apple-sign-in-iOS-final.png)
+</Steps>
+
+That's it! You are all set.

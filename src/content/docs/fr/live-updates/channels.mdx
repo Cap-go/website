@@ -1,0 +1,198 @@
+---
+title: Canaux
+description: "Learn how to manage and configure Live Mise à jour Canaux in Capgo, enabling seamless Application Mises à jour by directing specific JS Bundle builds to Appareils configured for those Canaux."
+sidebar: 
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+A Live Mise à jour Canal points to a specific JS Bundle Construction of your Application that will be shared with any Appareils configured to listen to that Canal for Mises à jour. When you [Installer the Capgo Mises à jour en direct SDK](/docs/getting-started/Démarrage rapide/) in your Application, any Natif binary configured to that Canal will Vérifier for Disponible Mises à jour whenever the Application is launched. You can change the Construction a Canal points to at any time and can also roll Retour to Précédent builds if needed.
+
+## How a Appareil picks a Canal (precedence)
+
+When a Appareil checks for an Mise à jour, Capgo decides which Canal to use in this strict order (highest priority first):
+
+1. **Forced Appareil mapping (Tableau de bord)** – Manually pin a specific Appareil ID to a Canal. Use for urgent Débogage or controlled Test with a single real Utilisateur. This always wins.
+2. **Cloud override (per‑device) via `setChannel()` or Dashboard** – Created when your app calls `setChannel()` (often exposed in a QA/debug menu) or you change the device's channel in the dashboard. Use for QA users switching between feature / PR channels or to reproduce a user issue. Reinstalling the binary does not clear it; deleting the device entry does.
+3. **Capacitor config `defaultChannel` (test build default)** – If present in `capacitor.config.*` and no force/override exists, the app starts on this channel (e.g. `beta`, `qa`, `pr-123`). Intended for TestFlight / internal builds so testers land on a pre‑release channel automatically. Production builds typically leave this unset.
+4. **Cloud Default Canal (primary path ~99% of Utilisateurs)** – If you mark a default Canal in the Tableau de bord, all normal end‑Utilisateurs (no force, no override, no config defaultChannel) attach here. Change it to roll out or roll Retour instantly—no Nouveau binary. If you have platform-specific defaults (one iOS-only, one Android-only), each Appareil lands on the default matching its platform. Leaving the cloud default unset is allowed; in that case the Appareil must match on steps 1–3 to receive Mises à jour.
+
+Best practice:
+- Treat 1–3 as exception / testing layers; when you set a cloud default, real users should flow into it. If you choose not to set one, be deliberate about how users attach (typically via `defaultChannel` in config or per-device overrides).
+- Only configure `defaultChannel` in binaries you explicitly ship to testers. Leaving it unset keeps production logic centralized in the dashboard.
+- Use `setChannel()` sparingly in production—mainly for QA or targeted diagnostics.
+
+If a Canal is disabled for the platform (iOS/Android toggles) when it would otherwise be chosen, the selection process skips it and continues down the list.
+
+> Summary: Force > Override > Config `defaultChannel` > Cloud Default.
+
+## Default Canal Behavior
+
+Setting a cloud default is optional, but it usually serves as the catch-all path for new devices. Without one, only devices that match on forced mappings, overrides, or a `defaultChannel` in the Capacitor config will receive updates. When you do choose to mark defaults, keep these patterns in mind:
+
+- **Single default (most common)** – If the Canal has both iOS and Android enabled, it becomes the lone default; any Appareil without overrides will attach here.
+- **Platform-specific defaults** – If you split channels by platform (for example, `ios-production` with only iOS enabled and `android-production` with only Android enabled), mark each one as the default for its platform. iOS devices go to the iOS default, Android devices go to the Android default.
+
+Remember that the cloud default and `defaultChannel` in `capacitor.config.*` both occupy the same decision layer. If you set a cloud default, you don't need to duplicate the value in your Capacitor config—leave `defaultChannel` empty for production builds. Reserve `defaultChannel` for binaries you intentionally ship to testers or QA when you want them to start on a non-production channel even if the cloud default is different.
+
+You can change defaults at any time in the Tableau de bord. When you swap a default, Nouveau Appareils obey the Nouveau routing immediately and existing Appareils follow the normal precedence rules the Suivant time they Vérifier in.
+
+## Setting up a Canal
+
+During onboarding you Créer the first Canal (most teams name it "Production"), but nothing is locked—you can rename or Supprimer any Canal at any time. To Ajouter additional Canaux later:
+
+1. Go to the "Canaux" section of the Capgo Tableau de bord 
+2. Click the "Nouveau Canal" button
+3. Enter a name for the Canal and click "Créer"
+
+Canal names can be anything you'd like. A common strategy is to match Canaux to your Développement stages, such as:
+
+- `Development` - for testing live updates on local devices or emulators
+- `QA` - for your QA team to verify updates before wider release
+- `Staging` - for final testing in a production-like environment 
+- `Production` - for the version of your app that end users receive from the app stores
+
+## Configuring the Canal in Your Application
+
+With your channels created, you need to configure your app to listen to the appropriate channel. In this example, we'll use the `Development` channel.
+
+Open your `capacitor.config.ts` (or `capacitor.config.json`) file. Under the `plugins` section, optionally set `defaultChannel` for **test builds** (internal / QA). For production builds, prefer omitting it so devices use the Cloud Default unless explicitly overridden.
+
+```ts
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      // For a QA/TestFlight build – testers start on the Development channel automatically.
+      defaultChannel: 'Development',
+      // Production builds usually omit this so users attach to the Cloud Default channel.
+    },
+  },
+};
+```
+
+Next, build your web app and run `npx cap sync` to copy the updated config file to your iOS and Android projects. If you skip this sync step, your native projects will continue to use whichever channel they were previously configured for.
+
+<Aside type="caution">
+Channel selection order: Force > Override (`setChannel` / dashboard) > Config `defaultChannel` > Cloud Default.
+
+Use `defaultChannel` only in test/internal builds; leave it out for production so users follow the Cloud Default (when set) instead of duplicating the routing in native config.
+
+You can still force (pin) a Appareil or apply an override later—those immediately supersede the config value.
+
+> Canal names are case sensitive.
+</Aside>
+
+
+## Canal Options and Strategies
+
+Canaux have several Options that control who can receive Mises à jour and how Mises à jour are delivered. The most Important ones are below. You can configure these from the web Application, the CLI, or the Public API.
+
+- Default Canal: Optionally mark the Canal or platform-specific Canaux that Nouveau Appareils attach to. See "Default Canal Behavior" for routing scenarios.
+- Platform filters: Enable or disable delivery to `iOS` and/or `Android` devices per channel.
+- Désactiver auto downgrade under Natif: Prevents sending an Mise à jour when the Appareil’s Natif Application Version is newer than the Canal’s Bundle (for Exemple, Appareil on 1.2.3 while Canal has 1.2.2).
+- Allow Développement builds: Permit Mises à jour to Développement builds (useful for Test).
+- Allow emulator Appareils: Permit Mises à jour to emulators/simulators (useful for Test).
+- Allow device self‑assignment: Lets the app switch to this channel at runtime using `setChannel`. If disabled, `setChannel` will fail for this channel.
+
+### Désactiver Auto Mise à jour strategies
+
+Use this to restrict which kinds of Mises à jour the Canal will automatically deliver. Options:
+
+- major: Block cross‑major Mises à jour (0.0.0 → 1.0.0). Minor and patch Mises à jour still allowed.
+- minor: Block cross‑minor Mises à jour (e.g., 1.1.0 → 1.2.0) and majors. Patch Mises à jour still allowed. Remarque: does not block 0.1.0 → 1.1.0.
+- patch: Very strict. Allows only increasing patch versions within the same major and minor. Exemples: 0.0.311 → 0.0.314 ✅, 0.1.312 → 0.0.314 ❌, 1.0.312 → 0.0.314 ❌.
+- metadata: Require a minimum update version metadata on each bundle. Configure via CLI using `--min-update-version` or `--auto-min-update-version`. If missing, the channel is marked misconfigured and updates will be rejected until set.
+- none: Allow all Mises à jour according to semver compatibility.
+
+Learn more details and Exemples in Désactiver Mises à jour strategy at /docs/CLI/Commandes/#Désactiver-Mises à jour-strategy.
+
+Exemple (CLI):
+
+```bash
+# Block major updates on the Production channel
+npx @capgo/cli@latest channel set production com.example.app \
+  --disable-auto-update major
+
+# Allow devices to self-assign to the Beta channel
+npx @capgo/cli@latest channel set beta com.example.app --self-assign
+```
+
+
+## Assigning a Bundle to a Canal
+
+To Déployer a live Mise à jour, you need to Télécharger a Nouveau JS Bundle Construction and assign it to a Canal. You can do this in one step with the Capgo CLI:
+
+```shell
+npx @capgo/cli@latest bundle upload --channel=Development
+```
+
+This will upload your built web assets and set the new bundle as the active build for the `Development` channel. Any apps configured to listen to that channel will receive the update the next time they check for one.
+
+You can also assign builds to Canaux from the "Bundles" section of the Capgo Tableau de bord. Click the menu icon Suivant to a Construction and select "Assign to Canal" to choose the Canal for that Construction.
+
+## Bundle Versioning and Canaux
+
+It's Important to Remarque that Bundles in Capgo are global to your Application, not specific to individual Canaux. The same Bundle can be assigned to multiple Canaux.
+
+When versioning your bundles, we recommend using semantic versioning [semver](https://semver.org/) with pre-release identifiers for channel-specific builds. For example, a beta release might be versioned as `1.2.3-beta.1`.
+
+This approach has several benefits:
+
+- It clearly communicates the relationship between builds. `1.2.3-beta.1` is obviously a pre-release of `1.2.3`.
+- It allows for reusing Version numbers across Canaux, reducing confusion.
+- It enables clear rollback paths. If you need to roll back from `1.2.3`, you know `1.2.2` is the previous stable release.
+
+Here's an Exemple of how you might align your Bundle versions with a typical Canal Configuration:
+
+- `Development` channel: `1.2.3-dev.1`, `1.2.3-dev.2`, etc.
+- `QA` channel: `1.2.3-qa.1`, `1.2.3-qa.2`, etc.
+- `Staging` channel: `1.2.3-rc.1`, `1.2.3-rc.2`, etc.
+- `Production` channel: `1.2.3`, `1.2.4`, etc.
+
+Using semver with pre-Libération identifiers is a recommended approach, but not strictly required. The key is to find a versioning scheme that clearly communicates the relationships between your builds and aligns with your team's Développement process.
+
+## Rolling Retour a Live Mise à jour
+
+If you Déployer a live Mise à jour that introduces a bug or otherwise needs to be reverted, you can easily roll Retour to a Précédent Construction. From the "Canaux" section of the Tableau de bord:
+
+<Steps>
+
+1. Click the name of the Canal you want to roll Retour
+2. Find the Construction you want to revert to and click the crown icon
+![Restauration Construction](/select_bundle.webp)
+3. Confirm the action 
+
+</Steps>
+
+The selected Construction will immediately become the Actif Construction for that Canal again. Apps will receive the rolled Retour Version the Suivant time they Vérifier for an Mise à jour.
+
+## Automating Deployments
+
+For more advanced workflows, you can automate your live Mise à jour deployments as part of your CI/CD pipeline. By integrating Capgo into your Construction process, you can automatically Télécharger Nouveau Bundles and assign them to Canaux whenever you Pousser to certain branches or Créer Nouveau releases.
+
+Vérifier out the [CI/CD Integration](/docs/getting-started/cicd-integration/) docs to learn more À propos automating Capgo Mises à jour en direct.
+
+## Deploying to a Appareil
+
+Now that you understand Canaux, you're ready to Démarrer deploying Mises à jour en direct to real Appareils. The basic process is:
+
+1. Installer the Capgo SDK in your Application
+2. Configure the Application to listen to your desired Canal
+3. Télécharger a Construction and assign it to that Canal
+4. Launch the Application and wait for the Mise à jour!
+
+For a more detailed walkthrough, see the [Deploying Mises à jour en direct](/docs/getting-started/Déployer/) Guide. Happy updating!
+
+## Advanced Canal Utilisation: Utilisateur Segmentation
+
+Canaux can be used for more than just Développement stages. They're a powerful tool for Utilisateur segmentation, enabling Fonctionnalités like:
+
+- Fonctionnalité flags for different Utilisateur tiers
+- A/B Test
+- Gradual Fonctionnalité rollouts
+- Bêta Test programs
+
+Learn how to implement these advanced use cases in our Guide: [How to Segment Utilisateurs by Plan and Canaux for Fonctionnalité Flags and A/B Test](/blog/how-to-segment-Utilisateurs-by-plan-and-Canaux/).

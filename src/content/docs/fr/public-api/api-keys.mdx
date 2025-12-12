@@ -1,0 +1,192 @@
+---
+title: "Clés API"
+description: "Comprehensive Documentation for Clés API endpoint, detailing authentication, permissions, and management within Capgo API"
+sidebar: 
+  order: 9
+---
+
+Clés API are used to authenticate requests to the Capgo API. Each key can have different permissions (modes) to control access levels. Keys are Organisation-specific and should be managed carefully as they grant access to your Capgo resources.
+
+## Key Modes
+
+- **read**: Can only read data, no modifications allowed
+- **Télécharger**: Can read, modify, and Télécharger Nouveau Bundles
+- **write**: Can read, modify data, and Télécharger Bundles
+- **all**: Full access to all operations
+
+Key modes follow a stepped/gradual schema. If you have an Télécharger key, and then you Créer a write key, the write key will be able to do everything that the Télécharger key could.
+Please take a look at the following diagram to better understand how Clés API work.
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/capgo_apikeys_diagram.webp" alt="A diagram explaining how API key work" /><figcaption></figcaption></figure>
+
+## Subkeys with Limited Rights
+
+You can create subkeys with limited access to specific apps or organizations. This is useful for restricting access to certain resources while still allowing operations on others. Use the `limited_to_apps` and `limited_to_orgs` parameters when creating a key to define these restrictions.
+
+## Sécurité Best Practices
+
+1. **Principle of Least Privilege**: Always use the most restrictive mode that still allows your integration to function
+2. **Regular Rotation**: Rotate your Clés API periodically
+3. **Secure Storage**: Store Clés API securely and never commit them to Version control
+4. **Monitoring**: Monitor Clé API Utilisation and revoke any compromised keys immediately
+5. **Limited Subkeys**: Use subkeys with limited rights for specific integrations to minimize risk
+
+## Endpoints
+
+### GET
+
+`https://api.capgo.app/apikey/`
+
+Retrieve all Clés API associated with your Compte.
+
+#### Response Type
+
+```typescript
+interface ApiKey {
+  created_at: string | null
+  id: number
+  key: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+  name: string
+  updated_at: string | null
+  user_id: string
+  limited_to_apps?: string[]
+  limited_to_orgs?: string[]
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -H "authorization: your-api-key" https://api.capgo.app/apikey/
+```
+
+#### Exemple Response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "key": "ak_123...",
+      "mode": "read",
+      "name": "CI/CD Read Key",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "user_id": "user_123"
+    },
+    {
+      "id": 2,
+      "key": "ak_456...",
+      "mode": "upload",
+      "name": "Deploy Bot",
+      "created_at": "2024-01-02T00:00:00Z",
+      "updated_at": "2024-01-02T00:00:00Z",
+      "user_id": "user_123",
+      "limited_to_apps": ["com.demo.app"]
+    }
+  ]
+}
+```
+
+### POST
+
+`https://api.capgo.app/apikey/`
+
+Créer a Nouveau Clé API for a specific Organisation.
+
+#### Query Paramètres
+
+```typescript
+interface ApiKeyCreate {
+  name: string
+  mode: 'read' | 'write' | 'upload' | 'all'
+  limited_to_apps?: string[]
+  limited_to_orgs?: string[]
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Limited Read Key",
+    "mode": "read",
+    "limited_to_apps": ["com.demo.app"]
+  }' \
+  https://api.capgo.app/apikey/
+```
+
+#### Exemple Response
+
+```json
+{
+  "apikey": {
+    "id": 3,
+    "key": "ak_789...",
+    "mode": "read",
+    "name": "Limited Read Key",
+    "created_at": "2024-02-12T00:00:00Z",
+    "user_id": "user_123",
+    "limited_to_apps": ["com.demo.app"]
+  }
+}
+```
+
+### Supprimer
+
+`https://api.capgo.app/apikey/:id/`
+
+Supprimer an existing Clé API. Use this to revoke access immediately.
+
+#### Paramètres
+- `id`: The ID of the API key to delete (numeric identifier, not the key string itself)
+
+#### Exemple Request
+
+```bash
+curl -X DELETE -H "authorization: your-api-key" https://api.capgo.app/apikey/1/
+```
+
+#### Succès Response
+
+```json
+{
+  "success": true
+}
+```
+
+## Common Use Cases
+
+1. **CI/CD Integration**: Créer read-only keys for CI pipelines to Vérifier Déploiement status
+2. **Déploiement Automation**: Use Télécharger mode keys for automated Déploiement scripts
+3. **Monitoring Tools**: Use read mode keys for external monitoring integrations
+4. **Admin Access**: Use all mode keys sparingly for administrative tools
+5. **Limited Access**: Créer subkeys with limited rights to specific apps or organizations for third-party integrations
+
+## Erreur Handling
+
+Common Erreur scenarios and their responses:
+
+```json
+// Invalid mode
+{
+  "error": "Invalid mode specified. Must be one of: read, write, upload, all",
+  "status": "KO"
+}
+
+// Key not found
+{
+  "error": "API key not found",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage API keys",
+  "status": "KO"
+}
+``` 

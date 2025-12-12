@@ -1,0 +1,264 @@
+---
+title: Commencer
+description: Learn how to detect volume button presses in your Capacitor Application.
+sidebar: 
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the package**
+   <PackageManagers pkg="@capgo/capacitor-volume-buttons" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser with Natif projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilisation
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+// Listen for volume button presses
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  console.log('Volume button pressed:', event.direction);
+
+  if (event.direction === 'up') {
+    console.log('Volume up pressed');
+    // Handle volume up
+  } else if (event.direction === 'down') {
+    console.log('Volume down pressed');
+    // Handle volume down
+  }
+});
+
+// Remove all listeners when done
+await VolumeButtons.removeAllListeners();
+```
+
+## API Référence
+
+### addListener('volumeButtonPressed', callback)
+
+Listen for volume button press events.
+
+```typescript
+const handle = VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  console.log('Direction:', event.direction); // 'up' or 'down'
+});
+
+// Remove specific listener
+await handle.remove();
+```
+
+**Event Data:**
+- `direction`: `'up' | 'down'` - Direction of the button press
+
+### removeAllListeners()
+
+Retirer all registered listeners.
+
+```typescript
+await VolumeButtons.removeAllListeners();
+```
+
+### getPluginVersion()
+
+Get the plugin Version.
+
+```typescript
+const { version } = await VolumeButtons.getPluginVersion();
+console.log('Plugin version:', version);
+```
+
+## Terminé Exemple
+
+```typescript
+import { VolumeButtons } from '@capgo/capacitor-volume-buttons';
+
+export class VolumeButtonController {
+  private listener: any;
+
+  async initialize() {
+    this.listener = VolumeButtons.addListener(
+      'volumeButtonPressed',
+      this.handleVolumeButton.bind(this)
+    );
+
+    console.log('Volume button listener initialized');
+  }
+
+  private handleVolumeButton(event: { direction: 'up' | 'down' }) {
+    switch (event.direction) {
+      case 'up':
+        this.handleVolumeUp();
+        break;
+      case 'down':
+        this.handleVolumeDown();
+        break;
+    }
+  }
+
+  private handleVolumeUp() {
+    console.log('Volume up pressed');
+    // Your custom logic for volume up
+    // e.g., navigate forward, increase brightness, etc.
+  }
+
+  private handleVolumeDown() {
+    console.log('Volume down pressed');
+    // Your custom logic for volume down
+    // e.g., navigate backward, decrease brightness, etc.
+  }
+
+  async cleanup() {
+    if (this.listener) {
+      await this.listener.remove();
+    }
+    await VolumeButtons.removeAllListeners();
+    console.log('Volume button listener cleaned up');
+  }
+}
+```
+
+## Use Cases
+
+### Photo/Video Capture
+
+Use volume buttons as camera shutter triggers:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', async (event) => {
+  // Any volume button triggers camera
+  await capturePhoto();
+});
+```
+
+### Page Navigation
+
+Navigate through content with volume buttons:
+
+```typescript
+let currentPage = 0;
+
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    currentPage++;
+    showPage(currentPage);
+  } else {
+    currentPage = Math.max(0, currentPage - 1);
+    showPage(currentPage);
+  }
+});
+```
+
+### Media Control
+
+Control media playback:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    skipForward();
+  } else {
+    skipBackward();
+  }
+});
+```
+
+### Game Controls
+
+Use volume buttons for game actions:
+
+```typescript
+VolumeButtons.addListener('volumeButtonPressed', (event) => {
+  if (event.direction === 'up') {
+    player.jump();
+  } else {
+    player.crouch();
+  }
+});
+```
+
+## Best Practices
+
+1. **Clean up listeners**
+   Always Retirer listeners when your component unmounts:
+   ```typescript
+   useEffect(() => {
+     const listener = VolumeButtons.addListener('volumeButtonPressed', handler);
+
+     return () => {
+       listener.remove();
+     };
+   }, []);
+   ```
+
+2. **Provide visual Retour**
+   Show Utilisateurs that volume buttons are being used for custom controls:
+   ```typescript
+   VolumeButtons.addListener('volumeButtonPressed', (event) => {
+     showNotification(`Volume ${event.direction} pressed`);
+     performAction(event.direction);
+   });
+   ```
+
+3. **Consider accessibility**
+   Remember that some Utilisateurs rely on volume buttons for actual volume control. Provide alternative controls.
+
+4. **Debounce rapid presses**
+   Prevent accidental double-presses:
+   ```typescript
+   let lastPress = 0;
+   const DEBOUNCE_MS = 300;
+
+   VolumeButtons.addListener('volumeButtonPressed', (event) => {
+     const now = Date.now();
+     if (now - lastPress < DEBOUNCE_MS) {
+       return; // Ignore rapid presses
+     }
+     lastPress = now;
+     handlePress(event.direction);
+   });
+   ```
+
+5. **Document the behavior**
+   Make it clear to Utilisateurs that volume buttons have custom functionality:
+   ```typescript
+   function showVolumeButtonHelp() {
+     alert('Use Volume Up/Down buttons to navigate pages');
+   }
+   ```
+
+## Platform Notes
+
+### iOS
+- Works on iOS 10.0+
+- Volume buttons detected reliably
+- System volume UI may still appear briefly
+
+### Android
+- Works on Android 5.0 (API 21)+
+- Requires Application to be in foreground
+- Some Appareils may have slight delay
+
+### Web
+- Not supported on web platform
+- Listeners will not fire
+
+## Dépannage
+
+**Events not firing:**
+- Ensure Application has focus
+- Vérifier that listeners are properly registered
+- Verify plugin is installed and synced
+
+**System volume changes interfere:**
+- This is expected behavior - the plugin detects presses but doesn't prevent system volume changes
+- Consider UX that works alongside volume changes
+
+**Multiple events firing:**
+- Implement debouncing to handle rapid presses
+- Vérifier for duplicate listener registration

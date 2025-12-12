@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-mux-player"
+description: Launch the Natif Mux Player SDK from Capacitor apps with signed playback and Analyse Support.
+tableOfContents: false
+next: false
+prev: false
+sidebar: 
+  order: 1
+  label: "Introduction"
+hero: 
+  tagline: Stream high-quality Mux video in fullscreen with DRM, Analyse, and consistent controls across iOS, Android, and web.
+  image: 
+    file: ~public/icons/plugins/mux-player.svg
+  actions: 
+    - text: Get started
+      link: /docs/plugins/mux-player/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-mux-player/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Deliver premium playback by wrapping the official Mux Natif SDKs in a simple Capacitor interface.
+
+<CardGrid stagger>
+  <Card title="Native SDK experience" icon="rocket">
+    Use the same playback stack as the Mux mobile SDKs with adaptive bitrate and DRM.
+  </Card>
+  <Card title="Signed playback" icon="approve-check">
+    Provide playback and DRM tokens for secure delivery of protected streams.
+  </Card>
+  <Card title="Uniform API" icon="pencil">
+    Trigger playback, dismiss the player, and listen to events with one TypeScript API.
+  </Card>
+  <Card title="Analytics ready" icon="star">
+    Pass environment keys and player names to feed Mux Data telemetry automatically.
+  </Card>
+</CardGrid>
+
+The Commencer Guide walks through hooking up the Natif SDKs, handling tokens, and responding to player events.

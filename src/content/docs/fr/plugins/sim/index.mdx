@@ -1,0 +1,44 @@
+---
+title: "@capgo/capacitor-sim"
+description: Inspect SIM card Information such as carrier, country code, and slot index from Capacitor apps.
+tableOfContents: false
+next: false
+prev: false
+sidebar: 
+  order: 1
+  label: "Introduction"
+hero: 
+  tagline: Retrieve SIM carrier metadata and handle permission flows with a lightweight Capacitor bridge.
+  image: 
+    file: ~public/icons/plugins/sim.svg
+  actions: 
+    - text: Get started
+      link: /docs/plugins/sim/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-sim/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Use Capgo SIM to query carrier data, slot indexes, and permission states while remaining inside Capacitor.
+
+<CardGrid stagger>
+  <Card title="Multi-SIM support" icon="rocket">
+    Enumerate every installed SIM along with slot indices and subscription IDs.
+  </Card>
+  <Card title="Permission helpers" icon="approve-check">
+    Vérifier and request the telephony permission required on Android.
+  </Card>
+  <Card title="Consistent schema" icon="star">
+    Work with normalized carrier fields like MCC, MNC, ISO country, and phone numbers.
+  </Card>
+  <Card title="iOS-aware" icon="pencil">
+    Handle platform nuances such as limited carrier data on iOS 16.4+.
+  </Card>
+</CardGrid>
+
+Grab the Commencer Guide to integrate permissions and consumption patterns.

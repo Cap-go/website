@@ -1,0 +1,338 @@
+---
+title: Commencer
+description: Learn how to Installer and use the Persistent Compte plugin to maintain Utilisateur data across Application installations.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-persistent-account
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Platform Support
+
+- **iOS**: Uses iOS Keychain Services for secure, persistent storage
+- **Android**: Uses Android Compte Manager or shared preferences with backup
+
+## Utilisation Exemple
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+// Define your account data structure
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  preferences: {
+    theme: string;
+    notifications: boolean;
+  };
+}
+
+// Save account data
+const accountData: UserAccount = {
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+    notifications: true
+  }
+};
+
+await PersistentAccount.saveAccount({ data: accountData });
+
+// Read account data
+const result = await PersistentAccount.readAccount();
+if (result.data) {
+  const account = result.data as UserAccount;
+  console.log('Restored account:', account.username);
+} else {
+  console.log('No account data found');
+}
+```
+
+## API Référence
+
+### saveAccount(Options)
+
+```typescript
+saveAccount(options: { data: unknown }) => Promise<void>
+```
+
+Securely Enregistrer Compte data to persistent storage.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ data: unknown }` |
+
+### readAccount()
+
+```typescript
+readAccount() => Promise<{ data: unknown | null }>
+```
+
+Retrieve stored Compte data.
+
+**Returns:** `Promise<{ data: unknown | null }>`
+
+## Practical Implementation
+
+### Terminé Auth Service Exemple
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+interface UserAccount {
+  userId: string;
+  username: string;
+  email: string;
+  authToken?: string;
+  preferences: {
+    theme: string;
+    language: string;
+    notifications: boolean;
+  };
+}
+
+class AuthService {
+  // Save user account after login
+  async saveUserAccount(user: UserAccount) {
+    try {
+      await PersistentAccount.saveAccount({ data: user });
+      console.log('User account saved successfully');
+    } catch (error) {
+      console.error('Failed to save account:', error);
+      throw error;
+    }
+  }
+
+  // Restore user account on app start
+  async restoreUserAccount(): Promise<UserAccount | null> {
+    try {
+      const result = await PersistentAccount.readAccount();
+
+      if (result.data) {
+        const account = result.data as UserAccount;
+        console.log('Restored user account:', account.username);
+        return account;
+      }
+
+      console.log('No saved account found');
+      return null;
+    } catch (error) {
+      console.error('Failed to restore account:', error);
+      return null;
+    }
+  }
+
+  // Update user preferences
+  async updatePreferences(preferences: Partial<UserAccount['preferences']>) {
+    const account = await this.restoreUserAccount();
+
+    if (account) {
+      const updatedAccount: UserAccount = {
+        ...account,
+        preferences: {
+          ...account.preferences,
+          ...preferences
+        }
+      };
+
+      await this.saveUserAccount(updatedAccount);
+    }
+  }
+
+  // Clear account data (on logout)
+  async clearAccount() {
+    try {
+      await PersistentAccount.saveAccount({ data: null });
+      console.log('Account data cleared');
+    } catch (error) {
+      console.error('Failed to clear account:', error);
+    }
+  }
+}
+
+// Usage
+const authService = new AuthService();
+
+// On login
+await authService.saveUserAccount({
+  userId: '12345',
+  username: 'john_doe',
+  email: 'john@example.com',
+  authToken: 'abc123xyz',
+  preferences: {
+    theme: 'dark',
+    language: 'en',
+    notifications: true
+  }
+});
+
+// On app start
+const savedAccount = await authService.restoreUserAccount();
+if (savedAccount) {
+  // User was previously logged in
+  console.log('Welcome back,', savedAccount.username);
+}
+
+// Update preferences
+await authService.updatePreferences({
+  theme: 'light',
+  notifications: false
+});
+
+// On logout
+await authService.clearAccount();
+```
+
+### Application Initialisation with Compte Restoration
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function initializeApp() {
+  try {
+    // Try to restore saved account
+    const result = await PersistentAccount.readAccount();
+
+    if (result.data) {
+      const account = result.data as UserAccount;
+
+      // Validate token is still valid
+      const isValid = await validateAuthToken(account.authToken);
+
+      if (isValid) {
+        // Restore user session
+        setCurrentUser(account);
+        navigateToHome();
+      } else {
+        // Token expired, show login
+        navigateToLogin();
+      }
+    } else {
+      // No saved account, show login
+      navigateToLogin();
+    }
+  } catch (error) {
+    console.error('Failed to initialize app:', error);
+    navigateToLogin();
+  }
+}
+
+// Call on app start
+initializeApp();
+```
+
+### Syncing with Backend
+
+```typescript
+import { PersistentAccount } from '@capgo/capacitor-persistent-account';
+
+async function syncAccountWithBackend() {
+  const result = await PersistentAccount.readAccount();
+
+  if (result.data) {
+    const localAccount = result.data as UserAccount;
+
+    try {
+      // Fetch latest account data from server
+      const response = await fetch(`/api/users/${localAccount.userId}`);
+      const serverAccount = await response.json();
+
+      // Merge server data with local preferences
+      const mergedAccount: UserAccount = {
+        ...serverAccount,
+        preferences: {
+          ...serverAccount.preferences,
+          ...localAccount.preferences // Local preferences take priority
+        }
+      };
+
+      // Save merged data
+      await PersistentAccount.saveAccount({ data: mergedAccount });
+
+      return mergedAccount;
+    } catch (error) {
+      console.error('Failed to sync with backend:', error);
+      // Return local account as fallback
+      return localAccount;
+    }
+  }
+
+  return null;
+}
+```
+
+## Best Practices
+
+- **Type Safety**: Define clear TypeScript interfaces for your Compte data
+- **Validation**: Always Valider data when reading from persistent storage
+- **Erreur Handling**: Implement proper try-catch blocks for all operations
+- **Sécurité**: Don't store sensitive data like passwords in plain text
+- **Token Management**: Actualiser auth tokens when restoring accounts
+- **Data Size**: Keep stored data minimal to ensure quick read/write operations
+- **Null Checks**: Always Vérifier if data exists before using it
+- **Backup Strategy**: Consider syncing with backend for additional safety
+
+## Sécurité Considerations
+
+- Compte data is stored using platform-specific secure storage mechanisms
+- Data persists across Application uninstalls and reinstalls
+- Consider encrypting sensitive Information before storing
+- Implement proper data validation when reading stored accounts
+- Follow platform guidelines for Utilisateur data handling
+- Use authentication tokens with expiration for Sécurité
+- Clear Compte data appropriately on Utilisateur Déconnexion
+
+## Platform Implementation
+
+### iOS
+
+- Utilizes iOS Keychain Services for secure, persistent storage
+- Data survives Application deletion and Appareil restores
+- Protected by iOS Sécurité mechanisms
+
+### Android
+
+- Uses Android Compte Manager or shared preferences with backup
+- Maintains data across Application reinstalls and Appareil migrations
+- Protected by Android system Sécurité
+
+## Use Cases
+
+- **Utilisateur Onboarding**: Preserve Utilisateur progress through Application reinstalls
+- **Compte Recovery**: Restore Utilisateur sessions after Application Mises à jour
+- **Preferences Storage**: Maintain Utilisateur Paramètres and configurations
+- **Offline-First Apps**: Store essential Utilisateur data locally
+- **Session Management**: Keep Utilisateurs logged in across Application restarts
+- **Appareil Migration**: Transfer Utilisateur data to Nouveau Appareils

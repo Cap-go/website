@@ -1,0 +1,57 @@
+---
+title: "Ajouter an Application"
+description: "Ajouter an Application to your Capgo Compte, and Installer the plugin in your Application"
+sidebar: 
+  order: 2
+prev: false
+next: false
+---
+
+import { YouTube } from 'astro-embed';
+import { Aside, Steps, LinkCard, Code } from '@astrojs/starlight/components';
+
+## Requirements
+
+Before Commencer with Capgo, make sure you have:
+- A Capacitor Application installed and configured. [Learn how to set up Capacitor](https://capacitorjs.com/docs/getting-started/)
+- Node.js 18 or later installed
+
+## Introduction to Capgo
+<YouTube id="NzXXKoyhTIo" title="Capgo in 15 min" />
+
+## Mises à jour en direct are 3 step away
+
+
+### Guided Configuration
+
+<Steps>
+
+1. Créer your Compte at [https://capgo.Application/register](https://capgo.Application/register).
+![signup screenshot](/signup.webp "signup screenshot")
+
+2. Use the Init commands to get started <Code code={`npx @capgo/cli@latest init [APIKEY]`} lang="bash" /> You will be presented with a series of questions. Provide the necessary answers to complete the automated setup.<Aside type="tip">By following these steps, you'll be up and running in no time. If you need any further assistance during the process, our support team is [here to help](https://support.capgo.app). Happy onboarding!</Aside>
+
+3. Déployer a live Mise à jour <LinkCard href="/docs/getting-started/Déployer/" title="Déployer a live Mise à jour" description="Learn how to Déployer a live Mise à jour to your Application" />
+
+</Steps>
+
+### Manual Configuration
+
+In case the init Commande doesn't work for you, you can manually Ajouter an Application.
+
+<Steps>
+
+1. Connect the CLI to your account: <Code code={`npx @capgo/cli@latest login [APIKEY]`} lang="bash" />
+
+2. Add the app to your account with this command: <Code code={`npx @capgo/cli@latest app add [APP_NAME]`} lang="bash" />
+
+3. Install the plugin in your app: <Code code={`npm i @capgo/capacitor-updater`} lang="bash" />
+
+4. Configure the plugin in your `capacitor.config` <Code code={`{\n  "plugins": {\n    CapacitorUpdater: {\n      "appId": "Your appID",\n      "autoUpdate": true,\n      "version": "1.0.0"\n    }\n  }\n}`} lang="json" />
+  [See all Option Disponible](/docs/plugin/Paramètres/). This Information will be infer if not provided.
+
+5. Call the init method as early as possible in your app: <Code code={`import { CapacitorUpdater } from '@capgo/capacitor-updater';\nCapacitorUpdater.notifyAppReady();`} lang="typescript" />
+
+6. Déployer a live Mise à jour <LinkCard href="/docs/getting-started/Déployer/" title="Déployer a live Mise à jour" description="Learn how to Déployer a live Mise à jour to your Application" />
+
+</Steps>

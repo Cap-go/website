@@ -1,0 +1,68 @@
+---
+title: Commencer
+description: Configure per-Construction environment values and fetch them at runtime with the Env plugin.
+sidebar: 
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the package**
+   <PackageManagers pkg="@capgo/capacitor-env" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser Natif platforms**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Declare Configuration values
+
+Add keys to the Capacitor config so they are baked into your native builds. You can create multiple config variants (`capacitor.config.prod.ts`, `capacitor.config.dev.ts`, etc.) to swap values per environment.
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.example.app',
+  appName: 'Example',
+  webDir: 'dist',
+  plugins: {
+    Env: {
+      API_URL: 'https://api.example.com',
+      PUBLIC_KEY: 'pk_live_123',
+    },
+  },
+};
+
+export default config;
+```
+
+On native platforms the values are stored inside the generated configuration files (`ios/App/App/capacitor.config.json` and `android/app/src/main/assets/capacitor.config.json`). Update those files per flavor if you need tenant-specific values.
+
+## Read values in code
+
+```typescript
+import { Env } from '@capgo/capacitor-env';
+
+const apiUrl = await Env.getKey({ key: 'API_URL' }).then((result) => result.value);
+
+if (!apiUrl) {
+  throw new Error('Missing API_URL configuration');
+}
+```
+
+## Provide fallbacks
+
+```typescript
+const loadConfig = async () => {
+  const { value: endpoint } = await Env.getKey({ key: 'API_URL' });
+  return endpoint || 'https://staging.example.com';
+};
+```
+
+## Tips
+
+- Use different `capacitor.config` files per environment and point the CLI to the right one with `npx cap run ios --configuration=prod`.
+- Combine with Capgo updater Canaux to ship tenant-specific values without publishing Nouveau binaries.
+- Keep secrets out of source control by substituting them during your CI build before `npx cap sync`.

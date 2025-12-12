@@ -1,0 +1,205 @@
+---
+title: "Organizations"
+description: "Guide to managing organizations in Capgo, covering creation, Paramètres, Mises à jour, and retrieval of Organisation details."
+sidebar: 
+  order: 2
+---
+
+Organizations are the top-level entities in Capgo. They allow you to group apps, team Membres, and resources under a single umbrella. Each Organisation can have multiple Membres with different roles and permissions.
+
+## Common Use Cases
+
+- Creating a Nouveau Organisation for your company
+- Managing Organisation Paramètres
+- Updating Organisation Information
+- Retrieving Organisation details
+
+## Endpoints
+
+### GET
+
+`https://api.capgo.app/organization/`
+
+Retrieve organization information. If `orgId` is provided in the parameters, returns a single organization. Otherwise, returns all accessible organizations.
+
+#### Query Paramètres
+
+- `orgId` (optional): The ID of the specific organization to retrieve
+
+#### Response Type
+
+```typescript
+interface Organization {
+  id: string
+  created_by: string
+  created_at: string
+  updated_at: string
+  logo: string | null
+  name: string
+  management_email: string
+  customer_id: string | null
+}
+```
+
+#### Exemple Request
+
+```bash
+# Get all organizations
+curl -H "authorization: your-api-key" https://api.capgo.app/organization/
+
+# Get specific organization
+curl -H "authorization: your-api-key" https://api.capgo.app/organization/?orgId=org_123
+```
+
+#### Exemple Response
+
+```json
+{
+  "data": {
+    "id": "org_123",
+    "name": "My Company",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "logo": "https://example.com/logo.png",
+    "management_email": "admin@example.com",
+    "customer_id": "cus_123"
+  }
+}
+```
+
+### POST
+
+`https://api.capgo.app/organization/`
+
+Créer a Nouveau Organisation.
+
+#### Request Body
+
+```typescript
+interface OrganizationCreate {
+  name: string
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "New Organization"
+  }' \
+  https://api.capgo.app/organization/
+```
+
+#### Exemple Response
+
+```json
+{
+  "status": "Organization created",
+  "id": "org_456"
+}
+```
+
+### PUT
+
+`https://api.capgo.app/organization/`
+
+Mise à jour an existing Organisation. Requires admin role.
+
+#### Request Body
+
+```typescript
+interface OrganizationUpdate {
+  orgId: string
+  logo?: string
+  name?: string
+  management_email?: string
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X PUT \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "orgId": "org_123",
+    "name": "New Company Name",
+    "management_email": "newemail@example.com"
+  }' \
+  https://api.capgo.app/organization/
+```
+
+#### Exemple Response
+
+```json
+{
+  "status": "Organization updated",
+  "data": {
+    "id": "org_123",
+    "name": "New Company Name",
+    "management_email": "newemail@example.com"
+  }
+}
+```
+
+### Supprimer
+
+`https://api.capgo.app/organization/`
+
+Supprimer an existing Organisation. Requires admin role. This action is irreversible and will Retirer all associated apps, versions, and resources.
+
+#### Query Paramètres
+
+- `orgId`: The ID of the organization to delete
+
+#### Exemple Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  https://api.capgo.app/organization/?orgId=org_123
+```
+
+#### Exemple Response
+
+```json
+{
+  "status": "Organization deleted",
+  "id": "org_123"
+}
+```
+
+## Erreur Handling
+
+Common Erreur scenarios and their responses:
+
+```json
+// Invalid API key
+{
+  "error": "Invalid API key",
+  "status": "KO"
+}
+
+// Missing required field
+{
+  "error": "Name is required",
+  "status": "KO"
+}
+
+// Insufficient permissions
+{
+  "error": "Admin role required",
+  "status": "KO"
+}
+```
+
+## Best Practices
+
+1. **Naming**: Use clear, descriptive names for organizations
+2. **Roles**: Assign appropriate roles to team Membres
+3. **Email**: Use a group email for management_email to avoid issues with personal email changes
+4. **Logo**: Host logos on a reliable CDN and use HTTPS URLs 

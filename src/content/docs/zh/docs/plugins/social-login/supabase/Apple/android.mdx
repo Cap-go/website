@@ -1,0 +1,292 @@
+---
+title: Supabase Apple Login on Android
+description: Learn how to set up Apple Sign-In with Supabase Authentication on Android using the Capacitor Social Login plugin.
+locale: zh
+sidebar:
+    order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 前置条件
+
+本指南将帮助您在 Android 上集成 Apple 登录与 Supabase 身份验证。假定您已完成以下步骤：
+- [Supabase Apple Login - 通用设置](./general/)。
+
+:::note[重要]
+Android 上的 Apple 登录需要后端服务器，因为 Apple 不提供原生 Android 支持。我们将使用 Supabase Edge Function 作为后端。
+:::
+
+## 步骤 1：部署后端 Edge Function
+
+首先，我们需要部署 Supabase Edge Function 来处理 Apple OAuth 回调。
+
+<Steps>
+
+1. **导航到您的 Supabase 项目目录**
+
+   ```bash
+   cd your-project/supabase
+   ```
+
+2. **创建 edge function**（如果不存在）
+
+   ```bash
+   supabase functions new apple-signin-callback
+   ```
+
+3. **复制 edge function 代码**
+
+   完整的 edge function 实现可在 [example app](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/supabase/functions/apple-signin-callback) 中找到。
+
+   将以下文件复制到您的项目：
+   - `supabase/functions/apple-signin-callback/index.ts` - 主 edge function 代码
+   - `supabase/functions/apple-signin-callback/deno.json` - 依赖项导入映射（包括用于 JWT 签名的 `jose` 库）
+
+4. **配置 JWT 验证**
+
+   Apple OAuth 回调端点必须是公开的（不需要身份验证），因为 Apple 会重定向到它。更新您的 `supabase/config.toml` 文件：
+
+   ```toml
+   [functions.apple-signin-callback]
+   enabled = true
+   verify_jwt = false  # Important: Set to false for public OAuth callback
+   import_map = "./functions/apple-signin-callback/deno.json"
+   entrypoint = "./functions/apple-signin-callback/index.ts"
+   ```
+
+   :::caution[重要]
+   设置 `verify_jwt = false` 使此端点成为公开的。这是必需的，因为 Apple 的 OAuth 重定向不包含 Supabase 身份验证标头。端点将验证 OAuth 流本身。
+   :::
+
+5. **部署函数**
+
+   ```bash
+   supabase functions deploy apple-signin-callback
+   ```
+
+6. **获取您的函数 URL**
+
+   部署后，您将获得类似的 URL：
+   ```
+   https://your-project-ref.supabase.co/functions/v1/apple-signin-callback
+   ```
+
+   如果找不到它，您可以执行以下操作：
+
+   1. 打开 `https://supabase.com/dashboard/project/YOUR_PROJECT_REF/functions`
+   2. 点击 `apple-signin-callback` 函数 URL 来复制它。
+      <img src="/social-login-assets/supabase_functions_apple_signin_callback.webp" alt="Supabase Functions Apple Sign-In Callback" />
+
+   :::note[保存此 URL]
+   在下一步配置 Apple Developer Portal 时，您将需要此 URL。
+   :::
+
+</Steps>
+
+## 步骤 2：配置 Apple Developer Portal
+
+现在我们需要使用后端 URL 配置 Apple Developer Portal 并获取所有必需的值。
+
+:::note[Function URL]
+确保您已从步骤 1 获得 Supabase Edge Function URL，然后再继续。您需要它来配置 Apple Developer Portal 中的返回 URL。
+:::
+
+<Steps>
+
+1. **按照 Apple Login Android 设置指南**
+
+   完成 [Apple Login Android 设置指南](/docs/plugins/social-login/apple/android/) 以：
+   - 创建服务 ID
+   - 生成私钥（.p8 文件）
+   - 获取您的团队 ID 和密钥 ID
+   - 配置返回 URL
+
+2. **在 Apple Developer Portal 中设置返回 URL**
+
+   在 Apple Developer Portal 中配置返回 URL 时（Apple 指南的步骤 6.9），使用您的 Supabase Edge Function URL：
+
+   ```
+   https://your-project-ref.supabase.co/functions/v1/apple-signin-callback
+   ```
+
+   :::warning[重要：使用 Supabase Edge Function URL]
+   **不要**使用 [Apple Login Android 设置指南](/docs/plugins/social-login/apple/android/) 中的重定向 URL。该指南使用自定义后端服务器 URL。对于 Supabase 集成，您**必须**改为使用您的 Supabase Edge Function URL。
+   :::
+
+   :::caution[需要精确匹配]
+   返回 URL 必须**完全**匹配您在此处配置的内容。Apple 对重定向 URI 匹配的要求非常严格。
+   :::
+
+3. **收集所有必需的值**
+
+   完成 Apple 设置指南后，您应该拥有：
+   - **APPLE_TEAM_ID**: 您的 Apple 开发者团队 ID
+   - **APPLE_KEY_ID**: 来自 Apple Developer Portal 的密钥 ID
+   - **APPLE_PRIVATE_KEY**: 您的 .p8 私钥文件（需要 base64 编码）
+   - **ANDROID_SERVICE_ID**: 您的 Apple 服务 ID（例如，`com.example.app.service`）
+   - **BASE_REDIRECT_URL**: 您的深层链接 URL（例如，`capgo-demo-app://path`）
+
+   :::note[深层链接 URL]
+   `BASE_REDIRECT_URL` 是在您的 `AndroidManifest.xml` 中配置的深层链接方案。这是身份验证后后端将重定向的位置。
+
+   您的深层链接的值取决于 `android:scheme="capgo-demo-app"` 代码。如果您在 `AndroidManifest.xml` 中设置了 `android:scheme="capgo-demo-app"`，则您的深层链接将为 `capgo-demo-app://path`。
+   :::
+
+</Steps>
+
+## 步骤 3：设置 Supabase Secrets
+
+现在我们需要为 Supabase Edge Function 配置环境变量（secrets）。
+
+<Steps>
+
+1. **编码您的私钥**
+
+   首先，将您的 Apple 私钥（.p8 文件）编码为 base64：
+
+   ```bash
+   base64 -i AuthKey_XXXXX.p8
+   ```
+
+   复制整个输出（它是一个很长的字符串）。
+
+2. **使用 Supabase CLI 设置 secrets**
+
+   ```bash
+   supabase secrets set APPLE_TEAM_ID=your_team_id
+   supabase secrets set APPLE_KEY_ID=your_key_id
+   supabase secrets set APPLE_PRIVATE_KEY=your_base64_encoded_key
+   supabase secrets set ANDROID_SERVICE_ID=your.service.id
+   supabase secrets set BASE_REDIRECT_URL=your-app://path
+   supabase secrets set APPLE_REDIRECT_URI=https://your-project-ref.supabase.co/functions/v1/apple-signin-callback
+   ```
+
+   :::note[替换占位符]
+   将所有占位符值替换为来自步骤 2 的实际值。
+   :::
+
+3. **替代方案：在 Supabase Dashboard 中设置 secrets**
+
+   如果您更喜欢使用仪表板：
+   1. 转到您的 Supabase 项目仪表板
+   2. 导航到 **Edge Functions** → **Settings** → **Secrets**
+   3. 添加每个 secret 变量及其值
+
+</Steps>
+
+:::note[Android App 配置]
+[Apple Login Android 设置指南](/docs/plugins/social-login/apple/android/) 已涵盖配置您的 Android 应用：
+- 将深层链接意图过滤器添加到 `AndroidManifest.xml`
+- 将 `onNewIntent` 处理程序添加到 `MainActivity.java`
+
+在继续之前，请确保您已完成这些步骤。您在那里配置的深层链接方案将是步骤 3 中的 `BASE_REDIRECT_URL`。
+:::
+
+## 步骤 4：使用身份验证助手
+
+现在您可以在应用代码中使用身份验证助手。
+
+### 实现
+
+完整的实现可在 [example app 的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。
+
+### 使用身份验证助手
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Signed in:', result.user);
+  // Navigate to your authenticated area
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+### 更新助手函数
+
+使用 `authenticateWithAppleSupabase` 助手函数时，您**必须**更新以下值以匹配您的配置：
+
+1. **更新 `redirectUrl`** - 将其设置为您的 Supabase Edge Function URL：
+
+   ```typescript
+   const redirectUrl = platform === 'android'
+     ? 'https://your-project-ref.supabase.co/functions/v1/apple-signin-callback'
+     : undefined;
+   ```
+
+2. **更新 `clientId`** - 将其设置为您的 Apple 服务 ID：
+
+   ```typescript
+   await SocialLogin.initialize({
+     apple: {
+       clientId: isIOS
+         ? undefined // iOS uses bundle ID automatically
+         : 'your.service.id.here', // Your Apple Service ID for Android
+       redirectUrl: redirectUrl,
+     },
+   });
+   ```
+
+   :::caution[重要]
+   将 `'your.service.id.here'` 替换为您的实际 Apple 服务 ID（与您在步骤 3 中用于 `ANDROID_SERVICE_ID` 的值相同）。
+   :::
+
+有关参考，请参阅 [完整实现](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)。
+
+## 步骤 5：测试集成
+
+<Steps>
+
+1. **构建并运行您的 Android 应用**
+
+   ```bash
+   npx cap sync android
+   npx cap run android
+   ```
+
+2. **测试身份验证流程**
+
+   - 点击"Sign in with Apple"按钮
+   - 您应该看到浏览器中的 Apple OAuth 页面
+   - 身份验证后，您应该被重定向回您的应用
+   - 检查控制台日志以获取任何错误
+
+3. **验证流程**
+
+   完整的流程应该是：
+   1. 用户点击"Sign in with Apple"
+   2. 应用使用 Apple OAuth 打开浏览器
+   3. 用户通过 Apple 身份验证
+   4. Apple 重定向到：`https://your-project-ref.supabase.co/functions/v1/apple-signin-callback`
+   5. Edge function 交换代码以获取令牌
+   6. Edge function 重定向到：`your-app://path?id_token=...&access_token=...`
+   7. Android 应用接收深层链接并处理身份令牌
+   8. 应用使用身份令牌登录到 Supabase
+
+</Steps>
+
+## 故障排除
+
+如果身份验证失败：
+
+- **重定向 URI 不匹配**: 验证 Apple Developer Portal 中的返回 URL 是否与 `APPLE_REDIRECT_URI` secret 完全匹配
+- **深层链接不工作**: 检查 `AndroidManifest.xml` 意图过滤器是否与您的 `BASE_REDIRECT_URL` 匹配
+- **缺少 secrets**: 使用 `supabase secrets list` 验证所有 secrets 是否设置正确
+- **令牌交换失败**: 检查 Supabase Dashboard 中的 edge function 日志以获取详细的错误消息
+- **应用未收到回调**: 确保在 MainActivity 中正确实现了 `onNewIntent`
+- 参考 [example app 代码](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)
+
+## 工作原理
+
+在 Android 上，Apple 登录使用 OAuth 重定向流程：
+
+1. **初始化**: 使用您的服务 ID 和后端重定向 URL 初始化插件
+2. **OAuth 流程**: 使用 Apple 的 OAuth 页面打开浏览器/Chrome 自定义选项卡
+3. **后端回调**: Apple 重定向到您的 Supabase Edge Function，并带有授权代码
+4. **令牌交换**: edge function 使用 Apple 的令牌端点交换代码以获取令牌
+5. **深层链接重定向**: edge function 使用身份令牌重定向回您的应用
+6. **Supabase 身份验证**: 应用接收令牌并登录到 Supabase
+
+此流程是必需的，因为 Apple 不为使用 Apple 登录提供原生 Android 支持。

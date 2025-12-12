@@ -1,22 +1,20 @@
 ---
 title: '@capgo/capacitor-compass'
 description: >-
-  Read device compass heading in degrees with continuous updates and permission
-  handling.
+  デバイスコンパスの方向を度数で読み取り、継続的な更新と権限処理を行います。
 tableOfContents: false
 next: false
 prev: false
 sidebar:
   order: 1
-  label: Introduction
+  label: 紹介
 hero:
   tagline: >-
-    Access device compass sensor for heading data with real-time updates on iOS
-    and Android.
+    デバイスコンパスセンサーにアクセスして、iOS と Android でリアルタイム更新で方向データを取得します。
   image:
     file: ~public/icons/plugins/compass.svg
   actions:
-    - text: Get started
+    - text: はじめに
       link: /docs/plugins/compass/getting-started/
       icon: right-arrow
       variant: primary
@@ -30,16 +28,16 @@ locale: ja
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid stagger>
-  <Card title="Real-time Heading" icon="rocket">
-    Get continuous compass heading updates in degrees (0-360)
+  <Card title="リアルタイム方向" icon="rocket">
+    度数 (0-360) でコンパス方向の継続的な更新を取得します
   </Card>
-  <Card title="Cross-platform" icon="puzzle">
-    Works on both iOS and Android devices with native sensor access
+  <Card title="クロスプラットフォーム" icon="puzzle">
+    ネイティブセンサーアクセスで iOS と Android の両デバイスで機能します
   </Card>
-  <Card title="Permission Handling" icon="shield">
-    Built-in permission management for location services (iOS)
+  <Card title="権限処理" icon="shield">
+    位置情報サービス (iOS) の組み込み権限管理
   </Card>
-  <Card title="Event-driven" icon="star">
-    Subscribe to heading changes with efficient event listeners
+  <Card title="イベント駆動型" icon="star">
+    効率的なイベントリスナーで方向の変更をサブスクライブします
   </Card>
 </CardGrid>

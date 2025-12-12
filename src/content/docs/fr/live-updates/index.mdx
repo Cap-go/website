@@ -1,0 +1,91 @@
+---
+title: Aperçu
+description: "Discover how Capgo's Mises à jour en direct Activer seamless JavaScript Bundle Mises à jour, allowing you to Pousser changes directly to Utilisateurs without Application Store delays."
+sidebar: 
+  order: 1
+prev: false
+next: false
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Use Capgo's Mises à jour en direct Fonctionnalité to Mise à jour the JavaScript Bundles of your Application remotely, in real-time. Pousser JS Mises à jour directly to your Utilisateurs without going through the Application Store review process to instantly fix bugs and ship Nouveau Fonctionnalités.
+
+<Aside>
+
+Mises à jour en direct are limited to JavaScript Bundle changes. If you need to Mise à jour Natif code, such as adding or removing a plugin or changing Natif project Configuration, you'll need to Soumettre a Nouveau Natif binary Construction to the Application stores.
+
+</Aside>
+
+## How Mises à jour en direct Work
+
+Capgo's Live Mise à jour system has two key components:
+
+1. The Capgo SDK, which you Installer in your Application. The SDK checks for Disponible Mises à jour and downloads them in the background.
+
+2. Channels, which let you target updates to specific groups of users. You can use channels to manage different release tracks, such as `Production`, `Staging`, and `Dev`.
+
+When you Télécharger a Nouveau JS Bundle to Capgo and assign it to a Canal, the Capgo SDK in apps configured for that Canal will detect the Mise à jour and Télécharger it. The Suivant time the Application restarts, the Nouveau Bundle will be loaded.
+
+## Why Capgo Journaux Matter (marketing view)
+
+- **Instant x-ray of every rollout**: Per-Appareil timelines show checks, downloads, installs, policy blocks, and Restaurations, so you know exactly what happened—no guesswork or “it works on my phone” debates.
+- **Faster incident response**: Alert-like codes (e.g., rate limits, checksum fails, notifyAppReady misses) surface before Utilisateurs Démarrer flooding Support, letting you ship a fix or Restauration in minutes.
+- **Canal policy proof**: Journaux verify that guardrails (block majors, Désactiver emulators/dev builds, platform limits) are actively protecting Production.
+- **Revenue & reputation protection**: See when Mises à jour stall on poor networks or hit plan limits, so you can intervene before conversions, sessions, or reviews drop.
+- **Single source of truth**: Product, QA, and Support share the same cloud Journal stream—no digging through Xcode/Android Studio or DM’ing engineers for Natif Journaux.
+
+## Commencer
+
+To Démarrer using Mises à jour en direct, follow these steps:
+
+<Steps>
+
+1. Terminé the [Capgo Démarrage rapide](/docs/getting-started/Démarrage rapide) to set up your Application in Capgo and Installer the Capgo SDK.
+
+2. In your app code, call `CapacitorUpdater.notifyAppReady()` after your app has finished initializing. This tells the Capgo SDK that your app is ready to receive updates.
+
+3. Construction your JS Bundle and Télécharger it to Capgo:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle upload --channel=production 
+   ```
+
+4. Open your Application and wait for the Mise à jour to Télécharger. You can Vérifier the status with:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5. Once the Mise à jour is downloaded, close and reopen your Application to load the Nouveau Bundle.
+
+</Steps>
+
+See the [Deploying Mises à jour en direct](/docs/getting-started/Déployer) Guide for more details.
+
+
+## Suivant Steps
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="Channels" icon="bars">
+      Learn how to use Canaux to manage different Libération tracks and target Mises à jour to specific Utilisateurs.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="Rollbacks" icon="left-arrow">
+      Discover how to roll Retour to a Précédent JS Bundle Version if an Mise à jour causes issues.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="Update Behavior" icon="setting">
+      Customize how and when Mises à jour are downloaded and applied in your Application.  
+    </Card>
+  </a>
+  <a href="/docs/live-updates/differentials/">
+    <Card title="Fast Updates" icon="starlight">
+      Learn how to use fast Mises à jour to speed up the Mise à jour process.
+    </Card>
+  </a>
+</CardGrid>

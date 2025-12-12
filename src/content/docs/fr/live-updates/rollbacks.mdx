@@ -1,0 +1,161 @@
+---
+title: Restaurations
+description: "Learn how to manage Restaurations in Capgo, allowing you to revert to Précédent Application versions seamlessly when needed."
+sidebar: 
+  order: 5
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+While Capgo's Mises à jour en direct allow you to quickly deliver improvements and fixes to your Utilisateurs, there may be situations where you need to roll Retour to a Précédent Version of your Application. Perhaps a Nouveau Mise à jour introduced an unexpected critical Problème, or maybe you want to revert a specific change while you work on a fix.
+
+Capgo provides several ways to manage a Canal's builds and control the Version of your Application that Utilisateurs receive, including both manual Restauration Options and automatic safety mechanisms.
+
+## Automatic Restauration Protection
+
+Capgo includes a built-in safety mechanism to protect your users from broken updates. If a JavaScript error occurs before the `notifyAppReady()` method is called, the plugin will automatically roll back to the previous working version.
+
+### How Automatic Restauration Works
+
+When a new update is downloaded and applied, Capgo expects your app to call `notifyAppReady()` within a configurable timeframe to confirm that the update loaded successfully. This method signals that:
+
+- The JavaScript Bundle loaded without critical errors
+- Your Application's core functionality is working
+- The Mise à jour is safe to keep
+
+If `notifyAppReady()` is not called due to a JavaScript crash or critical error, Capgo will:
+
+1. Detect that the Mise à jour Échoué to Initialiser properly
+2. Automatically revert to the Précédent working Bundle
+3. Mark the problematic Mise à jour as Échoué to prevent it from being applied again
+
+<Aside type="tip">
+Make sure to call `notifyAppReady()` in your app's initialization code after your core components have loaded successfully. This ensures the automatic rollback protection works as intended.
+</Aside>
+
+```javascript
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+// Call this after your app has successfully initialized
+await CapacitorUpdater.notifyAppReady()
+```
+
+This automatic protection helps ensure that even if you accidentally Pousser a broken Mise à jour, your Utilisateurs won't be stuck with a non-functional Application.
+
+### Configuring the Timeout
+
+You can configure how long Capgo waits for `notifyAppReady()` to be called by setting the `appReadyTimeout` in your Capacitor configuration:
+
+```json
+{
+  "plugins": {
+    "CapacitorUpdater": {
+      "appReadyTimeout": 10000
+    }
+  }
+}
+```
+
+The `appReadyTimeout` value is specified in milliseconds. The default timeout is typically 10 seconds, but you can adjust this based on your app's initialization requirements. If your app takes longer to load due to complex initialization processes, you may want to increase this value.
+
+## Rolling Retour to a Précédent Bundle
+
+Every time you Télécharger a Nouveau Construction and assign it to a Canal, Capgo keeps a history of those builds. If you need to revert a specific Mise à jour, you can select one of these Précédent builds to redeploy to the Canal.
+
+![Restauration UI interface](/rollback_ui.webp)
+
+The primary way to roll Retour is through the Restauration interface, which is located in the 4th tab (History) when viewing a Canal in the Capgo Tableau de bord. This tab provides a comprehensive view of all Disponible builds for the Canal, allowing you to easily select and revert to any Précédent Version.
+
+To roll Retour using the History tab:
+
+<Steps>
+
+1. Journal in to the [Capgo Tableau de bord](https://Application.capgo.io).
+
+2. Navigate to the "Canaux" section.
+
+3. Click the name of the Canal you want to roll Retour.
+
+4. Go to the 4th tab (History) in the Canal view.
+
+5. Find the Construction you want to revert to in the Construction history.
+
+6. Select that Construction to make it the Actif Construction for the Canal.
+
+7. Confirm that you want to roll Retour to this Construction.
+
+</Steps>
+
+### Alternative Method: Using the Crown Icon
+
+As a second way, you can also roll Retour directly from the first tab by clicking the crown icon Suivant to any Construction in the Canal's Construction history:
+
+<Steps>
+
+1. In the first tab of the Canal view, find the Construction you want to revert to.
+2. Click the crown icon Suivant to that Construction to make it the Actif Construction for the Canal. ![Canal management Options](/select_bundle.webp)
+3. Confirm that you want to roll Retour to this Construction.
+
+</Steps>
+
+<Aside type="note">
+Rolling Retour to a Précédent Construction only affects the selected Canal. If you have multiple Canaux (e.g. Production, Staging, etc.), you'll need to repeat the Restauration process for each affected Canal.
+</Aside>
+
+After rolling Retour, Appareils configured to listen to the updated Canal will receive the Précédent Construction the Suivant time they Vérifier for an Mise à jour. The rolled-Retour Construction will be treated as a Nouveau Mise à jour, so the usual Mise à jour flow and conditions apply.
+
+## Unlinking a Canal
+
+If you want to temporarily halt Mises à jour on a Canal while you investigate an Problème, you can unlink the Canal from its current Construction. 
+
+To unlink a Canal:
+
+<Steps>
+1. Navigate to the Canal in the Capgo Tableau de bord.
+
+2. Click the "Unlink" button Suivant to the current Construction.
+
+3. Confirm that you want to unlink the Canal.
+
+</Steps>
+
+Once a Canal is unlinked, it will not distribute any Nouveau Mises à jour. Appareils configured to that Canal will stay on their current Construction until the Canal is linked to a Construction again.
+
+This is useful if you've identified a problem with an Mise à jour but aren't yet sure which Construction you want to roll Retour to. Unlinking the Canal gives you time to investigate without pushing out further Mises à jour.
+
+## Forcing the Built-In Bundle
+
+In more severe situations, you may want to revert all Appareils on a Canal Retour to the web Construction that was originally packaged with your Application's Natif binary. This is known as the "built-in Bundle".
+
+To force the built-in Bundle on a Canal:
+
+<Steps>
+
+1. Navigate to the Canal in the Capgo Tableau de bord.
+
+2. Click the "Built-in Bundle" button.
+
+3. Confirm that you want to force the built-in Bundle.
+
+</Steps>
+
+When you force the built-in Bundle, all Appareils configured to that Canal will revert Retour to the original packaged web Construction on their Suivant Mise à jour Vérifier. This happens regardless of what Construction they're currently on.
+
+This is a more aggressive Restauration Option than reverting to a specific Précédent Construction, as it discards all Mises à jour en direct released since the Application was last published to the Application stores.
+
+<Aside type="caution">
+Be cautious when forcing the built-in Bundle, as it will affect all Appareils on the Canal. Make sure you've considered the impact and have a plan to move forward before taking this action.
+</Aside>
+
+## Monitoring and Responding to Issues
+
+To catch issues quickly and minimize the impact of problematic Mises à jour, it's Important to have a plan for monitoring your releases and responding to problems.
+
+Some strategies include:
+
+- Monitoring crash reports and Utilisateur Retour immediately after releasing an Mise à jour
+- Using phased rollouts or a staged Canal system to Test Mises à jour on a smaller group before wide Libération
+- Having a clear decision process for when to roll Retour, unlink, or force the built-in Bundle, and who has the authority to do so
+- Communicating to Utilisateurs À propos the Problème and the resolution, if appropriate
+
+By combining careful monitoring with the ability to quickly manage problematic Mises à jour, you can deliver a continuously improving Application experience while minimizing disruptions for your Utilisateurs.

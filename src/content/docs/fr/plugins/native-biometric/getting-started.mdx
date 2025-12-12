@@ -1,0 +1,203 @@
+---
+title: Commencer
+description: Learn how to Installer and use the Natif Biometric plugin for secure biometric authentication in your Capacitor Application.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the package**
+   <PackageManagers pkg="@capgo/capacitor-native-biometric" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser with Natif projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure permissions**
+   
+   ### iOS
+   Add Face ID usage description to your `Info.plist`:
+   ```xml
+   <key>NSFaceIDUsageDescription</key>
+   <string>For secure authentication</string>
+   ```
+   
+   ### Android
+   Add biometric permission to your `AndroidManifest.xml`:
+   ```xml
+   <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+   ```
+</Steps>
+
+## Utilisation
+
+Importer the plugin and use its methods for biometric authentication:
+
+```typescript
+import { NativeBiometric } from '@capgo/capacitor-native-biometric';
+
+// Check if biometric authentication is available
+const checkBiometric = async () => {
+  const result = await NativeBiometric.isAvailable();
+  
+  if (result.isAvailable) {
+    console.log(`Biometric type: ${result.biometryType}`);
+  }
+};
+
+// Perform biometric verification
+const verify = async () => {
+  const verified = await NativeBiometric.verifyIdentity({
+    reason: "For secure access to your account",
+    title: "Authentication",
+    subtitle: "Verify your identity",
+    description: "Place your finger on the sensor"
+  })
+    .then(() => true)
+    .catch(() => false);
+  
+  if (verified) {
+    console.log("Authentication successful");
+  }
+};
+
+// Store credentials securely
+const saveCredentials = async () => {
+  await NativeBiometric.setCredentials({
+    username: "user@example.com",
+    password: "securepassword",
+    server: "https://api.example.com"
+  });
+};
+
+// Retrieve stored credentials
+const getCredentials = async () => {
+  const credentials = await NativeBiometric.getCredentials({
+    server: "https://api.example.com"
+  });
+  
+  console.log(credentials.username);
+  console.log(credentials.password);
+};
+
+// Delete stored credentials
+const deleteCredentials = async () => {
+  await NativeBiometric.deleteCredentials({
+    server: "https://api.example.com"
+  });
+};
+```
+
+## API Référence
+
+### isAvailable()
+
+Checks if biometric authentication is Disponible on the Appareil.
+
+```typescript
+interface AvailableResult {
+  isAvailable: boolean;
+  biometryType?: BiometryType;
+  errorCode?: number;
+}
+
+enum BiometryType {
+  NONE = 0,
+  TOUCH_ID = 1,
+  FACE_ID = 2,
+  FINGERPRINT = 3,
+  FACE_AUTHENTICATION = 4,
+  IRIS_AUTHENTICATION = 5
+}
+```
+
+### verifyIdentity(Options)
+
+Performs biometric authentication.
+
+```typescript
+interface BiometricOptions {
+  reason?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  fallbackTitle?: string;
+  useFallback?: boolean;
+  maxAttempts?: number;
+}
+```
+
+### setCredentials(Options)
+
+Stores credentials securely with biometric protection.
+
+```typescript
+interface Credentials {
+  username: string;
+  password: string;
+  server: string;
+}
+```
+
+### getCredentials(Options)
+
+Retrieves stored credentials after biometric authentication.
+
+```typescript
+interface GetCredentialOptions {
+  server: string;
+}
+```
+
+### deleteCredentials(Options)
+
+Deletes stored credentials.
+
+```typescript
+interface DeleteCredentialOptions {
+  server: string;
+}
+```
+
+## Best Practices
+
+1. **Always Vérifier availability first**
+   ```typescript
+   const result = await NativeBiometric.isAvailable();
+   if (!result.isAvailable) {
+     // Fall back to password authentication
+   }
+   ```
+
+2. **Provide clear reasons**
+   Always explain why you need biometric authentication to Construction Utilisateur trust.
+
+3. **Handle errors gracefully**
+   ```typescript
+   try {
+     await NativeBiometric.verifyIdentity({
+       reason: "Access your secure data"
+     });
+   } catch (error) {
+     // Handle cancellation or failure
+     console.log("Authentication failed or cancelled");
+   }
+   ```
+
+4. **Use appropriate fallbacks**
+   Activer passcode fallback for Appareils where biometrics may fail.
+
+## Platform Differences
+
+### iOS
+- Supports Touch ID and Face ID
+- Requires `NSFaceIDUsageDescription` for Face ID
+- Fallback to Appareil passcode Disponible
+
+### Android
+- Supports fingerprint, face, and iris recognition
+- Requires `USE_BIOMETRIC` permission
+- Biometric Prompt API for Android 9+

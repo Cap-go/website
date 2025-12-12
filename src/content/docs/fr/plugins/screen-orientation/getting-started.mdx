@@ -1,0 +1,283 @@
+---
+title: Commencer
+description: Learn how to Installer and use the Screen Orientation plugin to control and detect Appareil orientation in your Capacitor Application.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps, Aside } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the package**
+   <PackageManagers pkg="@capgo/capacitor-screen-orientation" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser with Natif projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **iOS Configuration (optional)**
+   To detect physical device orientation using motion sensors on iOS, add to your `Info.plist`:
+   ```xml
+   <key>NSMotionUsageDescription</key>
+   <string>This app uses motion sensors to detect device orientation.</string>
+   ```
+</Steps>
+
+## Basic Utilisation
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+// Get current orientation
+const current = await ScreenOrientation.orientation();
+console.log('Current orientation:', current.type);
+
+// Lock to landscape
+await ScreenOrientation.lock({ orientation: 'landscape' });
+
+// Unlock orientation
+await ScreenOrientation.unlock();
+
+// Listen for orientation changes
+const listener = await ScreenOrientation.addListener(
+  'screenOrientationChange',
+  (result) => {
+    console.log('Orientation changed:', result.type);
+  }
+);
+```
+
+## Physical Orientation Detection
+
+This plugin has a unique Fonctionnalité: it can detect the **true physical orientation** of the Appareil using motion sensors, even when the Utilisateur has enabled orientation lock on their Appareil.
+
+<Aside type="note">
+  The UI will still respect the Utilisateur's orientation lock setting. Motion tracking allows you to know how the Appareil is physically held, but the UI won't rotate if orientation lock is enabled.
+</Aside>
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+// Start motion-based tracking
+await ScreenOrientation.startOrientationTracking({
+  bypassOrientationLock: true
+});
+
+// Now orientation change events will reflect physical orientation
+const listener = await ScreenOrientation.addListener(
+  'screenOrientationChange',
+  (result) => {
+    console.log('Physical orientation:', result.type);
+  }
+);
+
+// Check if orientation lock is enabled
+const lockStatus = await ScreenOrientation.isOrientationLocked();
+if (lockStatus.locked) {
+  console.log('User has orientation lock enabled');
+  console.log('Physical:', lockStatus.physicalOrientation);
+  console.log('UI:', lockStatus.uiOrientation);
+}
+
+// Stop tracking when done
+await ScreenOrientation.stopOrientationTracking();
+```
+
+## API Référence
+
+### orientation()
+
+Get the current screen orientation.
+
+```typescript
+const result = await ScreenOrientation.orientation();
+// Returns: { type: OrientationType }
+```
+
+**OrientationType values:**
+- `'portrait-primary'` - Portrait, home button at bottom
+- `'portrait-secondary'` - Portrait, upside down
+- `'landscape-primary'` - Landscape, home button on right
+- `'landscape-secondary'` - Landscape, home button on left
+
+### lock(Options)
+
+Lock the screen to a specific orientation.
+
+```typescript
+interface OrientationLockOptions {
+  orientation: OrientationLockType;
+  bypassOrientationLock?: boolean; // Enable motion tracking
+}
+
+await ScreenOrientation.lock({ orientation: 'landscape' });
+```
+
+**OrientationLockType values:**
+- `'any'` - Any orientation
+- `'natural'` - Device's natural orientation
+- `'landscape'` - Any landscape mode
+- `'portrait'` - Any portrait mode
+- `'portrait-primary'` / `'portrait-secondary'`
+- `'landscape-primary'` / `'landscape-secondary'`
+
+### unlock()
+
+Unlock the screen orientation.
+
+```typescript
+await ScreenOrientation.unlock();
+```
+
+### startOrientationTracking(Options?)
+
+Démarrer tracking physical Appareil orientation using motion sensors.
+
+```typescript
+await ScreenOrientation.startOrientationTracking({
+  bypassOrientationLock: true
+});
+```
+
+### stopOrientationTracking()
+
+Arrêter motion-based orientation tracking.
+
+```typescript
+await ScreenOrientation.stopOrientationTracking();
+```
+
+### isOrientationLocked()
+
+Vérifier if Appareil orientation lock is enabled.
+
+```typescript
+const result = await ScreenOrientation.isOrientationLocked();
+// Returns: {
+//   locked: boolean,
+//   physicalOrientation?: OrientationType,
+//   uiOrientation?: OrientationType
+// }
+```
+
+<Aside type="tip">
+  This method requires motion tracking to be Actif to work properly.
+</Aside>
+
+### addListener(eventName, callback)
+
+Listen for orientation changes.
+
+```typescript
+const listener = await ScreenOrientation.addListener(
+  'screenOrientationChange',
+  (result) => {
+    console.log('New orientation:', result.type);
+  }
+);
+
+// Remove when done
+await listener.remove();
+```
+
+### removeAllListeners()
+
+Retirer all event listeners.
+
+```typescript
+await ScreenOrientation.removeAllListeners();
+```
+
+## Terminé Exemple
+
+```typescript
+import { ScreenOrientation } from '@capgo/capacitor-screen-orientation';
+
+class OrientationManager {
+  private listener: any = null;
+
+  async init() {
+    // Start motion tracking for physical orientation detection
+    await ScreenOrientation.startOrientationTracking({
+      bypassOrientationLock: true
+    });
+
+    // Listen for changes
+    this.listener = await ScreenOrientation.addListener(
+      'screenOrientationChange',
+      this.onOrientationChange.bind(this)
+    );
+
+    // Get initial orientation
+    const { type } = await ScreenOrientation.orientation();
+    console.log('Initial orientation:', type);
+  }
+
+  onOrientationChange(result: { type: string }) {
+    console.log('Orientation changed to:', result.type);
+
+    // Adjust UI based on orientation
+    if (result.type.includes('landscape')) {
+      this.showLandscapeUI();
+    } else {
+      this.showPortraitUI();
+    }
+  }
+
+  showLandscapeUI() {
+    // Landscape-specific UI adjustments
+  }
+
+  showPortraitUI() {
+    // Portrait-specific UI adjustments
+  }
+
+  async lockLandscape() {
+    await ScreenOrientation.lock({ orientation: 'landscape' });
+  }
+
+  async lockPortrait() {
+    await ScreenOrientation.lock({ orientation: 'portrait' });
+  }
+
+  async freeRotation() {
+    await ScreenOrientation.unlock();
+  }
+
+  async checkIfUserHasOrientationLock() {
+    const { locked, physicalOrientation, uiOrientation } =
+      await ScreenOrientation.isOrientationLocked();
+
+    if (locked) {
+      console.log(`Device is held in ${physicalOrientation} but UI shows ${uiOrientation}`);
+      return true;
+    }
+    return false;
+  }
+
+  async destroy() {
+    await ScreenOrientation.stopOrientationTracking();
+    if (this.listener) {
+      await this.listener.remove();
+    }
+  }
+}
+```
+
+## Platform Notes
+
+### iOS
+- Uses Core Motion framework for physical orientation detection
+- Requires `NSMotionUsageDescription` in Info.plist for motion sensors
+- Full Support for all orientation types
+
+### Android
+- Uses accelerometer sensor for physical orientation detection
+- No additional permissions required
+- Full Support for all orientation types
+
+### Web
+- Uses Screen Orientation API
+- Motion sensor detection is limited
+- Some browsers may not Support all lock types

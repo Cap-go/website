@@ -1,14 +1,14 @@
 ---
 title: "Cordova"
-locale: it
 description: "Esplorare la potenziale disponibilità del plugin capacitor-updater per Cordova e le sfide coinvolte nel suo sviluppo."
 sidebar:
   order: 8
+locale: it
 ---
 
 Ti sei chiesto se questo plugin sarà mai disponibile per Cordova.
 
-Abbiamo avviato un repository di R&D per questo, ma è un'enorme quantità di lavoro.
+Abbiamo avviato un repository di R&D per questo, ma è una quantità enorme di lavoro.
 
 ## Problemi
 
@@ -21,5 +21,5 @@ La versione Android è più facile da fare poiché entrambi usano Java, ma iOS n
 Nel frattempo ecco cosa puoi fare:
 
 * [Supportaci](https://github.com/sponsors/cap-go) su GitHub e possiamo dare priorità a questo.
-Questo richiederà almeno 1 mese di lavoro.
+Questo avrà bisogno di almeno 1 mese di lavoro.
 * Assumici come [Consulenti](https://capgo.app/consulting/), siamo abituati ad aiutare grandi aziende a migrare a Capacitor, solitamente ci vuole un mese, e il [beneficio](https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) è enorme per il tuo team

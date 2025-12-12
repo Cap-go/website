@@ -1,0 +1,452 @@
+---
+title: Adding or Updating Plugins
+description: Terminé Guide for contributors and agents on how to Ajouter Nouveau plugins or Mise à jour existing plugins in the Capgo Documentation.
+sidebar: 
+  order: 10
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+This Guide explains how to Ajouter Nouveau Capacitor plugins to the Capgo website or Mise à jour existing plugin Documentation. This is useful for contributors, maintainers, and AI agents helping to maintain the Documentation.
+
+## Aperçu
+
+When adding a Nouveau plugin to the Capgo ecosystem, you need to Mise à jour several files and locations across the website to ensure the plugin appears correctly in all relevant places:
+
+1. **Plugin List Configuration** - Ajouter plugin metadata to the master list
+2. **Plugin Index Page** - Ajouter plugin to the categorized plugin listing page
+3. **Sidebar Navigation** - Ajouter plugin to the Documentation sidebar
+4. **Plugin Documentation** - Créer Aperçu and getting-started pages
+5. **Plugin Tutoriel** - Créer a comprehensive Tutoriel
+
+## File Locations
+
+### Key Files to Mise à jour
+
+| File | Purpose |
+|------|---------|
+| `/src/config/plugins.ts` | Master plugin list with metadata |
+| `/src/content/docs/docs/plugins/index.mdx` | Plugin index page with categories |
+| `/astro.config.mjs` | Sidebar navigation configuration |
+| `/src/content/docs/docs/plugins/[plugin-name]/` | Plugin documentation directory |
+| `/src/content/plugins-tutorials/en/` | English tutorial files |
+
+## Step-by-Step Guide
+
+<Steps>
+
+1. ### Ajouter Plugin to Master List
+
+   Open `/src/config/plugins.ts` and add your plugin to the `actions` array:
+
+   ```typescript
+   // First, import an appropriate Heroicon
+   import YourIconName from 'astro-heroicons/mini/IconName.astro'
+
+   // Then add to the actions array
+   {
+     name: '@capgo/your-plugin-name',
+     author: 'github.com/Cap-go',
+     description: 'Brief description of what the plugin does',
+     href: 'https://github.com/Cap-go/your-plugin-name/',
+     title: 'Display Name',
+     icon: YourIconName,
+   }
+   ```
+
+   **Available Icons**: Check `/node_modules/astro-heroicons/mini/` for available icons.
+
+2. ### Ajouter Plugin to Index Page
+
+   Open `/src/content/docs/docs/plugins/index.mdx` and add your plugin under the appropriate category:
+
+   ```mdx
+   <LinkCard
+     title="Your Plugin Name"
+     description="Brief description of what the plugin does"
+     href="/docs/plugins/your-plugin-name/"
+   />
+   ```
+
+   **Categories**:
+   - ⭐ Featured Plugins
+   - 📱 Appareil & System Plugins
+   - 🎥 Media & Camera Plugins
+   - 🛠️ Utility Plugins
+   - 🤖 AI & Advanced Media
+   - 📍 Location & Background Services
+   - 📞 Communication & Analyse
+   - 🔐 Sécurité & System
+   - 📊 Android-Specific Fonctionnalités
+   - 📥 Télécharger & Navigation
+
+3. ### Ajouter to Sidebar Navigation
+
+   Open `/astro.config.mjs` and add your plugin to the sidebar configuration (around line 540):
+
+   ```javascript
+   {
+     label: 'Your Plugin Name',
+     items: [
+       { label: 'Overview', link: '/docs/plugins/your-plugin-name/' },
+       { label: 'Getting started', link: '/docs/plugins/your-plugin-name/getting-started' },
+     ],
+     collapsed: true,
+   }
+   ```
+
+   Plugins are listed alphabetically in the sidebar.
+
+4. ### Créer Plugin Documentation Directory
+
+   Créer a Nouveau directory for your plugin Documentation:
+
+   ```bash
+   mkdir -p /src/content/docs/docs/plugins/your-plugin-name/
+   ```
+
+5. ### Créer Plugin Aperçu Page
+
+   Create `/src/content/docs/docs/plugins/your-plugin-name/index.mdx`:
+
+   ```mdx
+   ---
+   title: "@capgo/your-plugin-name"
+   description: Brief description of the plugin's purpose
+   tableOfContents: false
+   next: false
+   prev: false
+   sidebar:
+     order: 1
+     label: "Introduction"
+   hero:
+     tagline: Detailed tagline explaining what the plugin does
+     image:
+       file: ~public/your-plugin-icon.svg
+     actions:
+       - text: Get started
+         link: /docs/plugins/your-plugin-name/getting-started/
+         icon: right-arrow
+         variant: primary
+       - text: Github
+         link: https://github.com/Cap-go/your-plugin-name/
+         icon: external
+         variant: minimal
+   ---
+
+   import { Card, CardGrid } from '@astrojs/starlight/components';
+
+   <CardGrid stagger>
+     <Card title="Feature 1" icon="puzzle">
+       Description of first key feature
+     </Card>
+     <Card title="Feature 2" icon="rocket">
+       Description of second key feature
+     </Card>
+     <Card title="Cross-platform" icon="puzzle">
+       Works on both iOS and Android 📱
+     </Card>
+     <Card title="Comprehensive Documentation" icon="open-book">
+       Check the [Documentation](/docs/plugins/your-plugin-name/getting-started/) to master the plugin.
+     </Card>
+   </CardGrid>
+   ```
+
+6. ### Créer Commencer Guide
+
+   Create `/src/content/docs/docs/plugins/your-plugin-name/getting-started.mdx`:
+
+   ```mdx
+   ---
+   title: Getting Started
+   description: Learn how to install and use the plugin in your Capacitor app.
+   sidebar:
+     order: 2
+   ---
+
+   import { Steps } from '@astrojs/starlight/components';
+   import { PackageManagers } from 'starlight-package-managers'
+
+   <Steps>
+   1. **Install the package**
+      <PackageManagers pkg="@capgo/your-plugin-name" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+   2. **Sync with native projects**
+      <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+   </Steps>
+
+   ## Configuration
+
+   ### iOS Configuration
+   [iOS-specific setup instructions]
+
+   ### Android Configuration
+   [Android-specific setup instructions]
+
+   ## Usage
+
+   [Basic usage examples]
+
+   ## API Reference
+
+   [Detailed API documentation]
+
+   ## Complete Example
+
+   [Full working example]
+
+   ## Best Practices
+
+   [Recommended practices and tips]
+
+   ## Platform Notes
+
+   [Platform-specific notes and limitations]
+   ```
+
+7. ### Créer Tutoriel File
+
+   Create `/src/content/plugins-tutorials/en/your-plugin-name.md`:
+
+   ```markdown
+   ---
+   locale: en
+   ---
+   # Using @capgo/your-plugin-name Package
+
+   The `@capgo/your-plugin-name` package [brief description]. In this tutorial, we will guide you through the installation, configuration, and usage of this package in your Ionic Capacitor app.
+
+   ## Installation
+
+   [Installation steps]
+
+   ## Configuration
+
+   [Configuration steps for iOS and Android]
+
+   ## API Usage
+
+   [Detailed API usage examples]
+
+   ## Complete Example
+
+   [Full working example]
+
+   ## Best Practices
+
+   [Tips and best practices]
+
+   ## Troubleshooting
+
+   [Common issues and solutions]
+
+   ## Conclusion
+
+   [Summary and links to additional resources]
+   ```
+
+</Steps>
+
+## Plugin Documentation Structure
+
+### Required Files
+
+```
+src/content/docs/docs/plugins/your-plugin-name/
+├── index.mdx           # Overview page with hero and feature cards
+└── getting-started.mdx # Installation and usage guide
+
+src/content/plugins-tutorials/en/
+└── your-plugin-name.md # Comprehensive tutorial
+```
+
+### Optional Files
+
+For complex plugins, you may Ajouter additional Documentation pages:
+
+```
+src/content/docs/docs/plugins/your-plugin-name/
+├── index.mdx
+├── getting-started.mdx
+├── api-reference.mdx   # Detailed API documentation
+├── examples.mdx        # Additional examples
+├── troubleshooting.mdx # Troubleshooting guide
+└── migrations.mdx      # Migration guides
+```
+
+## Content Guidelines
+
+### Writing Plugin Descriptions
+
+- **Be Concise**: Keep descriptions under 100 characters
+- **Be Specific**: Explain what the plugin does, not what it is
+- **Use Action Words**: Démarrer with verbs like "Control", "Integrate", "Activer"
+
+**Good Examples**:
+- "Control Appareil flashlight and torch with simple on/off toggle"
+- "Integrate Crisp live chat and customer Support into your Application"
+- "Activer secure authentication using Face ID and Touch ID"
+
+**Bad Examples**:
+- "A plugin for flash"
+- "This is a Crisp plugin"
+- "Biometric plugin"
+
+### Writing Documentation
+
+1. **Démarrer with Installation**: Always begin with clear Installation steps
+2. **Provide Configuration**: Include platform-specific Configuration requirements
+3. **Show Utilisation Exemples**: Provide working code Exemples
+4. **Include API Référence**: Document all methods and Paramètres
+5. **Ajouter Terminé Exemples**: Show real-world Utilisation patterns
+6. **List Best Practices**: Share tips for optimal Utilisation
+7. **Document Platform Differences**: Clarify iOS vs Android behavior
+8. **Ajouter Dépannage**: Address Problèmes courants
+
+### Code Exemples
+
+- Use TypeScript for all code Exemples
+- Include imports at the top
+- Ajouter comments explaining key steps
+- Show Erreur handling
+- Demonstrate both basic and advanced Utilisation
+
+## Checklist
+
+Use this checklist when adding a Nouveau plugin:
+
+- [ ] Added plugin to `/src/config/plugins.ts`
+- [ ] Selected appropriate icon from Heroicons
+- [ ] Added plugin to `/src/content/docs/docs/plugins/index.mdx` under correct category
+- [ ] Added sidebar entry in `/astro.config.mjs`
+- [ ] Created plugin Documentation directory
+- [ ] Created `index.mdx` overview page
+- [ ] Created `getting-started.mdx` guide
+- [ ] Created tutorial in `/src/content/plugins-tutorials/en/`
+- [ ] Included Installation instructions
+- [ ] Documented iOS Configuration
+- [ ] Documented Android Configuration
+- [ ] Provided Utilisation Exemples
+- [ ] Added API Référence
+- [ ] Included Terminé working Exemple
+- [ ] Listed best practices
+- [ ] Added platform-specific notes
+- [ ] Tested all links work correctly
+
+## Icon Référence
+
+Common icons used for plugins (from `astro-heroicons/mini/`):
+
+| Icon | Use Case |
+|------|----------|
+| `BoltIcon` | Flash, power, energy |
+| `CameraIcon` | Camera, photo, video |
+| `ChatBubbleLeftIcon` | Chat, messaging, communication |
+| `FingerPrintIcon` | Biometric, security, authentication |
+| `MapPinIcon` | Location, geolocation, maps |
+| `SpeakerWaveIcon` | Audio, sound, music |
+| `VideoCameraIcon` | Video, recording, streaming |
+| `CreditCardIcon` | Payments, purchases |
+| `PlayCircleIcon` | Media players, video players |
+| `SignalIcon` | Connectivity, network, beacon |
+| `RadioIcon` | Beacon, broadcast, wireless |
+| `ChatBubbleOvalLeftIcon` | Social media, WeChat |
+
+## Updating Existing Plugins
+
+When updating an existing plugin:
+
+1. **Mise à jour Version numbers** in Documentation
+2. **Ajouter Migration guides** if breaking changes exist
+3. **Mise à jour API Référence** with Nouveau methods
+4. **Ajouter Nouveau Exemples** for Nouveau Fonctionnalités
+5. **Mise à jour platform requirements** if changed
+6. **Revise best practices** based on Nouveau Fonctionnalités
+7. **Keep Tutoriel current** with latest API
+
+## Multi-language Support
+
+The website supports multiple languages. After creating English Documentation:
+
+1. Run the translation script:
+   ```bash
+   bun run plugins:translate_all
+   ```
+
+2. Review generated translations in:
+   - `/src/content/plugins-tutorials/de/` (German)
+   - `/src/content/plugins-tutorials/es/` (Spanish)
+   - `/src/content/plugins-tutorials/fr/` (French)
+   - `/src/content/plugins-tutorials/it/` (Italian)
+   - `/src/content/plugins-tutorials/ja/` (Japanese)
+   - `/src/content/plugins-tutorials/ko/` (Korean)
+   - `/src/content/plugins-tutorials/id/` (Indonesian)
+
+## Test Your Changes
+
+After adding or updating plugin Documentation:
+
+1. **Construction the site locally**:
+   ```bash
+   npm run build
+   ```
+
+2. **Vérifier for errors**:
+   - Verify all links work
+   - Ensure images load correctly
+   - Confirm code Exemples are valid
+   - Test navigation works
+
+3. **Preview the site**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Verify your plugin appears**:
+   - Vérifier plugin listing page
+   - Verify sidebar navigation
+   - Test all Documentation pages
+   - Confirm Tutoriel page works
+
+## Common Pitfalls
+
+<Aside type="caution">
+**Avoid these common mistakes:**
+
+1. **Forgetting to sync**: Always run `npx cap sync` in examples
+2. **Inconsistent naming**: Use the same plugin name everywhere
+3. **Missing platform config**: Document both iOS and Android Configuration
+4. **Broken links**: Use relative links and verify they work
+5. **No Erreur handling**: Always show try-catch in Exemples
+6. **Missing imports**: Include all necessary imports in Exemples
+7. **Unclear descriptions**: Be specific À propos what the plugin does
+</Aside>
+
+## Getting Aide
+
+If you need Aide adding or updating plugin Documentation:
+
+- **Discord**: Join our [Discord Communauté](https://discord.capgo.Application)
+- **GitHub**: Open an Problème on the [website repository](https://github.com/Cap-go/website)
+- **Email**: Contact the team at Support@capgo.Application
+
+## Exemples
+
+For Référence, Vérifier these well-documented plugins:
+
+- **Updater**: `/src/content/docs/docs/plugins/updater/` (complex plugin with multiple pages)
+- **Flash**: `/src/content/docs/docs/plugins/flash/` (simple plugin, good starter example)
+- **Social Login**: `/src/content/docs/docs/plugins/social-login/` (plugin with sub-pages)
+
+## Summary
+
+Adding a plugin to the Capgo Documentation involves:
+
+1. Adding metadata to the master Configuration
+2. Adding the plugin to the categorized index page
+3. Configuring sidebar navigation
+4. Creating comprehensive Documentation pages
+5. Writing a detailed Tutoriel
+6. Test all changes locally
+
+By following this Guide, you ensure that plugins are consistently documented and easily discoverable by Utilisateurs.

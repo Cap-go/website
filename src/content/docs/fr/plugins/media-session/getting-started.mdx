@@ -1,0 +1,82 @@
+---
+title: Commencer
+description: Synchronize your player UI with Natif media controls using the Media Session plugin.
+sidebar: 
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the plugin**
+   <PackageManagers pkg="@capgo/capacitor-media-session" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser platforms**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+> ℹ️ The Media Session API is Disponible on Android (Chrome based browsers, WebView) and many desktop browsers. On unsupported platforms the calls resolve without taking effect, so guard your UI accordingly.
+
+## Publish metadata
+
+```typescript
+import { MediaSession } from '@capgo/capacitor-media-session';
+
+await MediaSession.setMetadata({
+  title: 'Weekly Tech Podcast',
+  artist: 'Capgo Studio',
+  album: 'Season 2',
+  artwork: [
+    { src: 'https://cdn.example.com/covers/s02e05-512.png', sizes: '512x512', type: 'image/.png' },
+  ],
+});
+```
+
+## Mise à jour playback state
+
+```typescript
+await MediaSession.setPlaybackState({ playbackState: 'playing' });
+
+// Pause later if needed
+await MediaSession.setPlaybackState({ playbackState: 'paused' });
+```
+
+## Handle media actions
+
+```typescript
+const pauseHandler = async () => {
+  player.pause();
+  await MediaSession.setPlaybackState({ playbackState: 'paused' });
+};
+
+await MediaSession.setActionHandler({ action: 'pause' }, pauseHandler);
+await MediaSession.setActionHandler({ action: 'play' }, async () => {
+  await player.play();
+  await MediaSession.setPlaybackState({ playbackState: 'playing' });
+});
+
+// Remove a handler when you dispose the player
+await MediaSession.setActionHandler({ action: 'pause' }, null);
+```
+
+## Keep position in Synchroniser
+
+```typescript
+const updatePosition = async () => {
+  await MediaSession.setPositionState({
+    duration: player.duration,
+    position: player.currentTime,
+    playbackRate: player.playbackRate,
+  });
+};
+
+player.ontimeupdate = updatePosition;
+player.onratechange = updatePosition;
+```
+
+## Recommendations
+
+- Actualiser metadata when the track changes so notifications and smart speakers stay up to date.
+- Throttle position Mises à jour (e.g. every 250 ms) to avoid spamming the Natif layer.
+- Always Retirer action handlers when tearing down a player instance to prevent accidental leakage.

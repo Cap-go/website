@@ -1,0 +1,75 @@
+---
+title: "@capgo/capacitor-updater"
+description: Capacitor plugin that powers Capgo's live Mise à jour functionality, enabling seamless over-the-air Mises à jour for your apps.
+tableOfContents: false
+next: false
+prev: false
+sidebar: 
+  order: 1
+  label: "Introduction"
+hero: 
+  tagline: The core technology that enables Mises à jour en direct in Capacitor apps, allowing you to Pousser Mises à jour without Application Store approvals.
+  image: 
+    file: ~public/icons/plugins/updater.svg
+  actions: 
+    - text: Get started
+      link: /docs/getting-started/Démarrage rapide/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-updater/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Over-the-air updates" icon="rocket">
+    Pousser Mises à jour instantly without Application Store reviews 🚀
+  </Card>
+  <Card title="Advanced API" icon="setting">
+    Full control over Mise à jour flow with comprehensive API methods 🛠️
+  </Card>
+  <Card title="Self-hosting ready" icon="download">
+    Run your own Mise à jour server for Terminé control 🏠
+  </Card>
+  <Card title="Comprehensive Documentation" icon="open-book">
+    Vérifier the [Plugin API](/docs/plugins/updater/api/) to master the plugin in just a few minutes.
+  </Card>
+</CardGrid>
+
+## Quick Links
+
+<LinkCard
+  title="Mises à jour en direct Documentation"
+  description="Learn À propos Canaux, Mise à jour behavior, Restaurations, and more in the main Mises à jour en direct section."
+  href="/docs/live-updates/"
+/>
+
+<LinkCard
+  title="Commencer Guide"
+  description="Follow our Démarrage rapide Guide to Ajouter Mises à jour en direct to your Application."
+  href="/docs/getting-started/quickstart/"
+/>
+
+## Plugin Documentation
+
+This technical Référence covers:
+
+- **[Plugin API](/docs/plugins/updater/api/)** - All Disponible methods and their Utilisation
+- **[Plugin Paramètres](/docs/plugins/updater/Paramètres/)** - Configuration Options for capacitor.config
+- **[Problèmes connus](/docs/plugins/updater/known-issues/)** - Common problems and Solutions
+- **[Débogage](/docs/plugins/updater/Débogage/)** - How to troubleshoot Mise à jour issues
+- **[Events](/docs/plugins/updater/events/)** - Disponible Mise à jour events
+- **[Local Développement](/docs/plugins/updater/local-dev/getting-started/)** - Test Mises à jour locally
+- **[Self-Hosted Mode](/docs/plugins/updater/self-hosted/getting-started/)** - Run your own Mise à jour server
+
+## Installation
+
+```bash
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+For Configuration and Configuration, see the [Commencer Guide](/docs/getting-started/Démarrage rapide/).

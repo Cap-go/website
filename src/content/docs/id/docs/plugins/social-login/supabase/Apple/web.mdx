@@ -1,0 +1,96 @@
+---
+title: Supabase Apple Login di Web
+description: Pelajari cara mengintegrasikan Apple Sign-In dengan Supabase Authentication di Web.
+sidebar:
+    order: 4
+locale: id
+---
+
+## Prasyarat
+
+Panduan ini akan membantu Anda mengintegrasikan Apple Sign-In dengan Supabase Authentication di Web. Diasumsikan Anda telah menyelesaikan:
+- [pengaturan Apple Login Web](/docs/plugins/social-login/apple/web/)
+- [Pengaturan Umum Supabase Apple Login](./general/).
+
+## Implementasi
+
+Implementasi lengkap tersedia di file [`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) contoh aplikasi. Panduan ini menjelaskan konsep kunci dan cara menggunakannya.
+
+### Menggunakan Authentication Helper
+
+Fungsi `authenticateWithAppleSupabase` menangani seluruh alur autentikasi:
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Masuk:', result.user);
+  // Navigasi ke area yang sudah diautentikasi
+} else {
+  console.error('Kesalahan:', result.error);
+}
+```
+
+## Cara Kerjanya
+
+Di Web, Apple Sign-In menggunakan alur OAuth popup:
+
+1. **Inisialisasi**: Plugin diinisialisasi dengan ID Layanan Anda dan URL halaman saat ini sebagai redirect URL
+2. **OAuth Popup**: Membuka jendela popup dengan halaman OAuth Apple
+3. **Autentikasi Pengguna**: Pengguna mengautentikasi dengan Apple di popup
+4. **Identity Token**: Apple mengembalikan identity token (JWT) yang berisi informasi pengguna
+5. **Supabase Authentication**: Identity token dikirim ke Supabase menggunakan `signInWithIdToken()`
+
+Fungsi helper secara otomatis mendeteksi platform web dan mengonfigurasi semuanya dengan tepat.
+
+## Catatan Penting
+
+### Konfigurasi Service ID
+
+- Web memerlukan ID Layanan Apple Anda (sama dengan Android)
+- ID Layanan harus dikonfigurasi di Apple Developer Portal dengan Return URL yang benar
+- Pastikan domain Anda ditambahkan ke domain yang diizinkan di Apple Developer Portal
+
+### Redirect URL
+
+- Di web, redirect URL secara otomatis ditetapkan ke `window.location.href` (URL halaman saat ini)
+- Ini harus cocok dengan salah satu Return URL yang dikonfigurasi di Apple Developer Portal
+- Pastikan URL dengan dan tanpa garis miring trailing dikonfigurasi di Apple Developer Portal
+
+### ID Klien Supabase
+
+Di Supabase, konfigurasikan penyedia Apple Anda dengan:
+- **Client ID**: ID Layanan Apple Anda (misalnya, `com.example.app.service`)
+
+Jika Anda juga menggunakan iOS, Anda perlu menyediakan ID Aplikasi dan ID Layanan di bidang ID Klien Supabase (dipisahkan dengan koma).
+
+### Perbarui Fungsi Helper
+
+Saat menggunakan fungsi helper `authenticateWithAppleSupabase`, Anda **harus** memperbarui `clientId` agar cocok dengan ID Layanan Apple Anda:
+
+```typescript
+await SocialLogin.initialize({
+  apple: {
+    clientId: isIOS
+      ? undefined // iOS menggunakan bundle ID secara otomatis
+      : 'your.service.id.here', // ID Layanan Apple Anda untuk Web dan Android
+    redirectUrl: redirectUrl,
+  },
+});
+```
+
+:::caution[Penting]
+Ganti `'your.service.id.here'` dengan ID Layanan Apple aktual Anda (nilai yang sama yang Anda konfigurasikan di Apple Developer Portal).
+:::
+
+## Pemecahan Masalah
+
+Jika autentikasi gagal:
+
+- **Ketidakcocokan Service ID**: Verifikasi Service ID Anda cocok di Apple Developer Portal dan kode Anda
+- **Return URL tidak dikonfigurasi**: Pastikan URL halaman saat ini (dengan dan tanpa garis miring trailing) dikonfigurasi di Apple Developer Portal
+- **Popup diblokir**: Periksa pengaturan browser - beberapa browser memblokir popup secara default
+- **Domain tidak diizinkan**: Verifikasi domain Anda ditambahkan ke domain yang diizinkan di Apple Developer Portal
+- **Konfigurasi Supabase**: Verifikasi Service ID Anda dikonfigurasi dengan benar di pengaturan penyedia Apple Supabase
+- Tinjau [kode aplikasi contoh](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) untuk referensi

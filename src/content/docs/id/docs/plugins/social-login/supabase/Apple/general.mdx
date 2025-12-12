@@ -1,0 +1,102 @@
+---
+title: Pengaturan Umum Supabase Apple Login
+description: Pelajari cara mengintegrasikan Apple Sign-In dengan Supabase Authentication menggunakan plugin Capacitor Social Login.
+sidebar:
+    order: 1
+locale: id
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Ringkasan
+
+Panduan ini akan membantu Anda mengintegrasikan Apple Sign-In dengan Supabase Authentication. Apple Sign-In menyediakan metode autentikasi yang aman dan berfokus pada privasi yang bekerja di seluruh platform iOS, Android, dan Web.
+
+## Prasyarat
+
+Sebelum memulai, pastikan Anda telah:
+
+1. [Membuat proyek Supabase](https://database.new/)
+2. Membaca panduan [Pengaturan Umum Apple Login](/docs/plugins/social-login/apple/general/) untuk menyiapkan kredensial OAuth Apple
+3. Mengikuti panduan khusus platform masing-masing untuk menyiapkan kredensial OAuth Apple untuk platform target Anda:
+    - [Pengaturan Android](/docs/plugins/social-login/apple/android/)
+    - [Pengaturan iOS](/docs/plugins/social-login/apple/ios/)
+    - [Pengaturan Web](/docs/plugins/social-login/apple/web/)
+
+    :::note
+        Sebelum memulai tutorial Supabase, Anda perlu membuat ID klien untuk platform yang berencana Anda gunakan.
+
+        Untuk iOS, ID klien sama dengan ID aplikasi Anda.
+        Untuk Android dan Web, ID klien sama dengan ID layanan Anda.
+        Anda akan menggunakannya di langkah 7 panduan ini.
+    :::
+
+## Mengaktifkan penyedia OAuth Apple di Supabase
+
+<Steps>
+1. Buka [Dasbor Supabase](https://app.supabase.com/) Anda
+2. Klik pada proyek Anda
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Pemilih Proyek Supabase" />
+3. Buka menu `Authentication`
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Menu Autentikasi Supabase" />
+4. Klik tab `Providers`
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Tab Penyedia Supabase" />
+5. Temukan penyedia `Apple`
+    <img src="/social-login-assets/supabase_apple_provider.webp" alt="Penyedia Apple Supabase" />
+6. Aktifkan penyedia `Apple`
+    <img src="/social-login-assets/supabase_apple_provider_enable.webp" alt="Aktifkan Penyedia Apple Supabase" />
+7. Isi konfigurasi ID klien:
+
+    :::note
+      Jika Anda menggunakan Apple login untuk iOS, ID klien sama dengan ID aplikasi Anda.
+      Jika Anda menggunakan Apple login untuk Android atau Web, ID klien sama dengan ID layanan Anda.
+      Jika Anda menggunakan keduanya, Anda perlu menyediakan ID aplikasi dan ID layanan.
+    :::
+
+    <img src="/social-login-assets/supabase_apple_provider_client_id.webp" alt="ID Klien Penyedia Apple Supabase" />
+8. Klik tombol `Save`
+    <img src="/social-login-assets/supabase_apple_provider_save.webp" alt="Simpan Penyedia Apple Supabase" />
+
+
+    :::note
+      Anda __**TIDAK PERLU**__ menyiapkan `Secret key (for OAuth)`. Kami akan melakukan implementasi backend khusus untuk menangani Apple login.
+    :::
+</Steps>
+
+Voilà, Anda sekarang telah mengaktifkan Apple Sign-In dengan Supabase Authentication 🎉
+
+## Menggunakan Authentication Helper
+
+Implementasi lengkap mencakup fungsi helper `authenticateWithAppleSupabase()` yang menangani seluruh alur Apple Sign-In dengan Supabase. Fungsi ini:
+
+- Menginisialisasi Apple Sign-In dengan konfigurasi khusus platform
+- Menangani alur autentikasi (native di iOS, OAuth redirect di Android/Web)
+- Mengekstrak identity token dari Apple
+- Masuk ke Supabase dengan identity token
+
+:::tip[Implementasi Lengkap]
+Implementasi lengkap tersedia di file [`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) contoh aplikasi.
+:::
+
+### Penggunaan Dasar
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Masuk:', result.user);
+  // Navigasi ke area yang sudah diautentikasi
+} else {
+  console.error('Kesalahan:', result.error);
+}
+```
+
+### Cara Kerjanya
+
+Fungsi helper secara otomatis menangani perbedaan khusus platform:
+
+- **iOS**: Menggunakan Apple Sign-In native (tidak perlu redirect URL, menggunakan bundle ID secara otomatis)
+- **Android**: Menggunakan alur OAuth redirect dengan edge function backend (memerlukan Service ID)
+- **Web**: Menggunakan alur OAuth popup (memerlukan Service ID dan URL halaman saat ini sebagai redirect)
+
+Fungsi ini mengembalikan identity token dari Apple, yang kemudian digunakan untuk mengautentikasi dengan Supabase menggunakan `supabase.auth.signInWithIdToken()`.

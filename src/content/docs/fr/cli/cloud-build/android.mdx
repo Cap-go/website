@@ -1,0 +1,469 @@
+---
+title: Android Builds
+description: Configure and Construction Android apps with Capgo Cloud Construction
+sidebar: 
+  order: 3
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Construction and Soumettre Android apps to the Google Play Store using Capgo's secure cloud infrastructure.
+
+## Before You Construction
+
+<CardGrid>
+  <Card title="⚠️ Setup Android Credentials First" icon="warning">
+    **Required:** You must save your Android credentials before building release apps.
+
+    [Configuration Android Credentials →](/docs/CLI/cloud-Construction/credentials/#saving-Android-credentials)
+  </Card>
+</CardGrid>
+
+## How Android Builds Work
+
+Android builds run in secure Cloudflare sandboxes:
+
+- **Infrastructure**: Cloudflare Workers with containerized Android SDK
+- **Construction Tool**: Gradle with Android Construction tools
+- **Execution**: Isolated sandbox environment per Construction
+- **Cleanup**: Instant deletion after Construction completion
+- **Sécurité**: No persistent storage, Terminé isolation between builds
+
+## Prerequisites
+
+Before Construction for Android, you need:
+
+### 1. Développement Environment (Local Test)
+
+- Android Studio installed locally (for initial keystore Configuration)
+- Your app building successfully with `npx cap open android`
+- Java JDK 17 or higher
+
+### 2. Signing Keystore
+
+For Libération builds, you need a signing keystore:
+
+| Construction Type | Keystore Required | Purpose |
+|------------|-------------------|---------|
+| **Débogage** | No | Test only, auto-generated |
+| **Libération** | Yes | Play Store submission |
+
+## Creating a Keystore
+
+<Aside type="tip">
+For detailed step-by-step guides with screenshots, visit:
+- [Android Certificates Guide](https://capawesome.io/cloud/Natif-builds/certificates/Android/)
+- [Blog: Automatic Android Builds with GitHub Actions](https://capgo.Application/blog/automatic-capacitor-Android-Construction-github-action/)
+</Aside>
+
+If you don't have a keystore yet, Créer one:
+
+```bash
+keytool -genkey -v \
+  -keystore my-release-key.keystore \
+  -alias my-key-alias \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000
+```
+
+Answer the prompts:
+- **Password**: Choose a strong password (Enregistrer it securely!)
+- **Name**: Your name or company name
+- **Organisation**: Your company name
+- **Location**: Your city, state, country
+
+<Aside type="caution">
+**Important**: Keep your keystore file and passwords secure! If you lose them, you cannot update your app on the Play Store.
+</Aside>
+
+### Understanding Keystore Components
+
+When creating a keystore, you'll need to remember:
+
+1. **Keystore Password** (`KEYSTORE_STORE_PASSWORD`): The password for the keystore file itself
+2. **Key Alias** (`KEYSTORE_KEY_ALIAS`): The name/identifier for your signing key within the keystore
+3. **Key Password** (`KEYSTORE_KEY_PASSWORD`): The password for the specific key (can be the same as store password)
+
+**Example workflow:**
+```bash
+# List aliases in your keystore to verify
+keytool -list -keystore my-release-key.keystore
+
+# View detailed information about your key
+keytool -list -v -keystore my-release-key.keystore -alias my-key-alias
+```
+
+## Construction Configuration
+
+### Required Environment Variables
+
+For **Libération builds**, set these credentials:
+
+```bash
+# Android Signing (Required for release)
+ANDROID_KEYSTORE_FILE="<base64-encoded-keystore>"
+KEYSTORE_KEY_ALIAS="my-key-alias"
+KEYSTORE_KEY_PASSWORD="<key-password>"
+KEYSTORE_STORE_PASSWORD="<store-password>"
+
+# Play Store Publishing (Optional, for auto-submission)
+PLAY_CONFIG_JSON="<base64-encoded-service-account-json>"
+```
+
+### Generating Base64 Credentials
+
+**Keystore File:**
+```bash
+base64 -i my-release-key.keystore | pbcopy
+```
+
+**Play Store Service Account JSON:**
+```bash
+base64 -i play-store-service-account.json | pbcopy
+```
+
+The base64 string is now in your clipboard.
+
+### Play Store Service Compte Configuration
+
+To Activer automatic Play Store uploads, you need to Créer a Google Cloud service Compte with proper permissions.
+
+<Aside type="tip">
+For detailed instructions with screenshots, see the [Android Certificates Guide](https://capawesome.io/cloud/Natif-builds/certificates/Android/).
+</Aside>
+
+<Steps>
+
+1. **Créer Service Compte in Google Cloud**
+   - Go to [Google Play Console](https://play.google.com/console) → Configuration → API Access
+   - Click "Créer Nouveau service Compte"
+   - Follow the link to Google Cloud Console
+   - Click "Créer Service Compte"
+   - Enter a name (e.g., "Capgo CI/CD")
+   - Grant the "Service Compte Utilisateur" role
+   - Click "Done"
+
+2. **Créer JSON Key**
+   - In Google Cloud Console, find your service Compte
+   - Click on the service Compte email
+   - Go to "Keys" tab
+   - Click "Ajouter Key" → "Créer Nouveau key"
+   - Choose "JSON" format
+   - Télécharger the JSON file (keep it secure!)
+
+3. **Grant Permissions in Play Console**
+   - Go Retour to Google Play Console → Configuration → API Access
+   - Find your service Compte in the list
+   - Click "Grant access"
+   - Under "Application permissions", select your Application
+   - Under "Compte permissions", grant:
+     - **Releases**: "View Application Information and Télécharger bulk reports (read-only)"
+     - **Releases**: "Créer, Modifier, and Supprimer draft releases"
+     - **Releases**: "Libération to Production, exclude Appareils, and use Play Application Signing"
+   - Click "Invite Utilisateur"
+
+4. **Accept the Invitation**
+   - The service Compte will receive an invitation email
+   - Accept the invitation to activate the permissions
+
+</Steps>
+
+<Aside type="caution">
+The service Compte JSON file contains sensitive credentials. Never commit it to Version control or share it publicly.
+</Aside>
+
+## Construction for Android
+
+### Débogage Construction
+
+Perfect for Test without signing:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode debug
+```
+
+This creates a Débogage APK that can be installed on any Appareil for Test.
+
+### Libération Construction
+
+For Play Store submission:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release
+```
+
+Requires signing credentials to be configured as environment variables.
+
+## CI/CD Integration
+
+### GitHub Actions Exemple
+
+```yaml
+name: Build Android App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build Android app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          PLAY_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform android \
+            --build-mode release
+```
+
+## Construction Process Details
+
+### What Happens During an Android Construction
+
+<Steps>
+
+1. **Sandbox Initialisation** (~5 seconds)
+   - Secure container spun up
+   - Android SDK and Gradle loaded
+   - Isolated file system created
+
+2. **Project Configuration** (~20 seconds)
+   - Project zip downloaded from R2
+   - Extracted to Construction directory
+   - Signing credentials injected
+
+3. **Gradle Construction** (2-4 minutes)
+   - Dependencies downloaded
+   - APK/AAB compilation
+   - ProGuard/R8 optimization (Libération mode)
+   - Code signing applied
+
+4. **Play Store Télécharger** (30 seconds, if configured)
+   - AAB uploaded to Play Console
+   - Libération track configured
+   - Submission initiated
+
+5. **Cleanup** (immediate)
+   - All files deleted
+   - Container destroyed
+   - No artifacts retained
+
+</Steps>
+
+### Construction Stack
+
+Our Android Construction environment includes:
+
+- **Java**: OpenJDK 17
+- **Android SDK**: Latest Stable
+- **Gradle**: 8.x
+- **Construction Tools**: 34.x
+- **Node.js**: 18.x (LTS)
+- **NPM**: Latest Stable
+
+## Construction Output
+
+### APK vs AAB
+
+- **APK** (Android Package): Installable file for direct Installation
+- **AAB** (Android Application Bundle): Google Play's recommended format (smaller downloads for Utilisateurs)
+
+By default, Capgo builds Créer:
+- **Débogage mode**: APK
+- **Libération mode**: AAB (optimized for Play Store)
+
+## Construction Times
+
+Typical Android Construction times:
+
+| Construction Type | Average Time |
+|------------|--------------|
+| Débogage | 2-3 minutes |
+| Libération (no ProGuard) | 3-4 minutes |
+| Libération (with ProGuard) | 4-6 minutes |
+
+<Aside type="note">
+Android builds cost **1× the base rate** (half the cost of iOS builds).
+</Aside>
+
+## Construction Variants
+
+### Custom Construction Variants
+
+If your app has custom build variants (e.g., `staging`, `production`), use `build-config`:
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform android \
+  --build-mode release \
+  --build-config '{"variant":"staging"}'
+```
+
+This will build the `stagingRelease` variant.
+
+### Flavor Dimensions
+
+For apps with flavor dimensions:
+
+```bash
+--build-config '{"flavor":"premium","variant":"production"}'
+```
+
+This builds the `premiumProductionRelease` variant.
+
+## Dépannage
+
+### Problèmes courants
+
+**"Keystore password incorrect"**
+- Verify KEYSTORE_STORE_PASSWORD matches your keystore
+- Ensure KEYSTORE_KEY_PASSWORD matches your key alias password
+- Vérifier for extra spaces or special characters
+
+**"Key alias not found"**
+- Verify KEYSTORE_KEY_ALIAS matches exactly (case-sensitive)
+- List aliases: `keytool -list -keystore my-release-key.keystore`
+
+**"Gradle build failed"**
+- Vérifier Construction Journaux for the specific Erreur
+- Ensure your app builds locally with `./gradlew assembleRelease`
+- Verify all native dependencies are in `build.gradle`
+
+**"Play Store upload failed"**
+- Verify service Compte JSON is valid
+- Ensure service Compte has correct permissions in Play Console
+- Vérifier that Application is properly set up in Play Console
+
+**"Build timeout"**
+- Large apps may need optimization
+- Vérifier if unnecessary dependencies can be removed
+- Contact Support if builds consistently timeout
+
+### Débogage Journaux
+
+Watch for these key phases in the Construction Journaux:
+
+```
+→ Downloading dependencies...
+→ Running Gradle assembleRelease...
+→ Signing APK/AAB...
+→ Uploading to Play Store...
+✔ Build succeeded
+```
+
+If a Construction fails, the specific Gradle Erreur will be shown in the Journaux.
+
+## Best Practices
+
+### 1. Test Locally First
+
+Always ensure your Android Construction works locally:
+
+```bash
+cd android
+./gradlew assembleRelease
+# or
+./gradlew bundleRelease
+```
+
+### 2. Secure Your Keystore
+
+- Never commit keystores to Version control
+- Store in secure secrets management (1Password, AWS Secrets Manager, etc.)
+- Keep backup copies in multiple secure locations
+- Document passwords in a secure password manager
+
+### 3. Version Management
+
+Capgo reads version from your `capacitor.config.json`:
+
+```json
+{
+  "appId": "com.example.app",
+  "appName": "My App",
+  "version": "1.0.0",
+  "build": "1"
+}
+```
+
+Increment the `build` number for each release.
+
+### 4. ProGuard Configuration
+
+For Libération builds, ensure ProGuard rules are properly configured:
+
+```
+# android/app/proguard-rules.pro
+-keep class com.getcapacitor.** { *; }
+-keep @com.getcapacitor.annotation.CapacitorPlugin public class * {
+  @com.getcapacitor.annotation.PluginMethod public <methods>;
+}
+```
+
+### 5. Monitor Construction Size
+
+Keep an eye on APK/AAB size to ensure it's optimized:
+
+```
+The CLI shows final size:
+→ APK size: 12.4 MB
+```
+
+If your Application is large (>50 MB), consider:
+- Enabling ProGuard/R8
+- Using AAB format (dynamic delivery)
+- Optimizing images and assets
+
+## Play Store Submission
+
+### Automatic Submission
+
+With PLAY_CONFIG_JSON configured, builds are automatically uploaded to Play Console's internal Test track.
+
+### Manual Submission
+
+If you prefer manual submission:
+
+1. Run the Construction without PLAY_CONFIG_JSON
+2. Télécharger the AAB from Construction artifacts (if configured)
+3. Télécharger manually to Play Console
+
+## Suivant Steps
+
+- [iOS Builds](/docs/CLI/cloud-Construction/iOS/) - Configure iOS builds
+- [Dépannage](/docs/CLI/cloud-Construction/Dépannage/) - Common Construction issues
+- [CLI Référence](/docs/CLI/Référence/Construction/) - Full Commande Documentation
+
+## Need Aide?
+
+- [Dépannage Guide](/docs/CLI/cloud-Construction/Dépannage/)
+- [Discord Communauté](https://discord.com/invite/VnYRvBfgA6)
+- Email: Support@capgo.Application

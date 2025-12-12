@@ -1,0 +1,157 @@
+---
+title: 📱 Application
+description: 📱 Manage your Capgo Application Paramètres and configurations in Capgo Cloud.
+sidebar_label: Application
+sidebar: 
+  order: 5
+---
+
+📱 Manage your Capgo Application Paramètres and configurations in Capgo Cloud.
+
+### <a id="Application-Ajouter"></a> ➕ **Ajouter**
+
+**Alias:** `a`
+
+```bash
+npx @capgo/cli@latest app add
+```
+
+➕ Ajouter a Nouveau Application to Capgo Cloud with a unique Application ID in the format com.Test.Application.
+All Options can be guessed from config if not provided.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app add com.example.app --name "My App" --icon ./icon.png
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | Application name for display in Capgo Cloud |
+| **-i,** | <code>string</code> | Application icon path for display in Capgo Cloud |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="Application-Supprimer"></a> 🗑️ **Supprimer**
+
+```bash
+npx @capgo/cli@latest app delete
+```
+
+🗑️ Supprimer an Application from Capgo Cloud, optionally specifying a Version to Supprimer only that Bundle.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app delete com.example.app
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="Application-list"></a> 📋 **List**
+
+**Alias:** `l`
+
+```bash
+npx @capgo/cli@latest app list
+```
+
+📋 List all apps registered under your Compte in Capgo Cloud.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app list
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="Application-Débogage"></a> 🐞 **Débogage**
+
+```bash
+npx @capgo/cli@latest app debug
+```
+
+🐞 Listen for live Mise à jour events in Capgo Cloud to Débogage your Application.
+Optionally target a specific Appareil for detailed diagnostics.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app debug com.example.app --device DEVICE_ID
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **-d,** | <code>string</code> | The specific Appareil ID to Débogage |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+
+### <a id="Application-setting"></a> ⚙️ **Setting**
+
+```bash
+npx @capgo/cli@latest app setting
+```
+
+⚙️ Modify Capacitor Configuration programmatically.
+Specify setting path (e.g., plugins.CapacitorUpdater.defaultChannel) with --string or --bool.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app setting plugins.CapacitorUpdater.defaultChannel --string "Production"
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **--bool** | <code>string</code> | A value for the setting to modify as a boolean, ex: --bool true |
+| **--string** | <code>string</code> | A value for the setting to modify as a string, ex: --string "Production" |
+
+### <a id="Application-set"></a> ⚙️ **Set**
+
+**Alias:** `s`
+
+```bash
+npx @capgo/cli@latest app set
+```
+
+⚙️ Mise à jour Paramètres for an existing Application in Capgo Cloud, such as name, icon, or retention period for Bundles.
+Retention of 0 means infinite storage.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest app set com.example.app --name "Updated App" --retention 30
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-n,** | <code>string</code> | Application name for display in Capgo Cloud |
+| **-i,** | <code>string</code> | Application icon path for display in Capgo Cloud |
+| **-a,** | <code>string</code> | Clé API to link to your Compte |
+| **-r,** | <code>string</code> | Days to keep old Bundles (0 = infinite, default: 0) |
+| **--supa-host** | <code>string</code> | Custom Supabase host URL (for self-hosting or Capgo Développement) |
+| **--supa-anon** | <code>string</code> | Custom Supabase anon key (for self-hosting) |
+

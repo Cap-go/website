@@ -1,0 +1,512 @@
+---
+title: Dépannage
+description: Problèmes courants and Solutions for Capgo Cloud Construction
+sidebar: 
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Solutions to Problèmes courants when Construction Natif apps with Capgo Cloud Construction.
+
+## Construction Failures
+
+### "Télécharger Échoué" or "Connection timeout"
+
+**Symptoms:**
+- Construction fails during project Télécharger
+- Timeout errors after 60 seconds
+
+**Solutions:**
+
+1. **Vérifier your internet connection**
+   ```bash
+   # Test connection to Capgo
+   curl -I https://api.capgo.app
+   ```
+
+2. **Reduce project size**
+   - Ensure `node_modules/` is not being uploaded (should be auto-excluded)
+   - Vérifier for large files in your project:
+   ```bash
+   find . -type f -size +10M
+   ```
+
+3. **Vérifier Télécharger URL expiration**
+   - Télécharger URLs expire after 1 hour
+   - If you get an expired URL Erreur, re-run the Construction Commande
+
+<Aside type="tip">
+Large projects (>200MB) may hit timeout limits. Contact Support for Entreprise Options.
+</Aside>
+
+### "Construction timeout after 10 minutes"
+
+**Symptoms:**
+- Construction exceeds maximum allowed time
+- Status shows `timeout`
+
+**Solutions:**
+
+1. **Optimize dependencies**
+   - Retirer unused npm packages
+   - Use `npm prune --production` before building
+
+2. **Vérifier for network issues in Construction**
+   - Some dependencies may Télécharger large files during Construction
+   - Consider pre-caching with a lock file
+
+3. **Review Natif dependencies**
+   ```bash
+   # iOS - check Podfile for heavy dependencies
+   cat ios/App/Podfile
+
+   # Android - check build.gradle
+   cat android/app/build.gradle
+   ```
+
+4. **Contact Support**
+   - If your Application legitimately needs more time
+   - We can adjust limits for specific use cases
+
+## Authentication Issues
+
+### "Clé API invalid" or "Unauthorized"
+
+**Symptoms:**
+- Construction fails immediately with authentication Erreur
+- 401 or 403 errors
+
+**Solutions:**
+
+1. **Verify Clé API is correct**
+   ```bash
+   # Test with a simple command
+   npx @capgo/cli@latest app list
+   ```
+
+2. **Vérifier Clé API permissions**
+   - Key must have `write` or `all` permissions
+   - Vérifier in Capgo Tableau de bord under Clés API
+
+3. **Ensure Clé API is being read**
+   ```bash
+   # Check environment variable
+   echo $CAPGO_TOKEN
+
+   # Or verify local .capgo file
+   cat .capgo
+   ```
+
+4. **Re-authenticate**
+   ```bash
+   npx @capgo/cli@latest login
+   ```
+
+### "Application not found" or "No permission for this Application"
+
+**Symptoms:**
+- Authentication works but Application-specific Erreur
+
+**Solutions:**
+
+1. **Verify Application is registered**
+   ```bash
+   npx @capgo/cli@latest app list
+   ```
+
+2. **Vérifier Application ID matches**
+   - Verify `capacitor.config.json` appId
+   - Ensure Commande uses correct Application ID
+
+3. **Verify Organisation access**
+   - Vérifier you're in the correct Organisation
+   - Clé API must have access to the Application's Organisation
+
+## iOS Construction Issues
+
+### "Code signing Échoué"
+
+**Symptoms:**
+- Construction fails during code signing phase
+- Xcode errors À propos certificates or profiles
+
+**Solutions:**
+
+1. **Verify certificate type matches Construction type**
+   - Développement builds need Développement certificates
+   - Application Store builds need Distribution certificates
+
+2. **Vérifier certificate and Profil match**
+   ```bash
+   # Decode and inspect your certificate
+   echo $BUILD_CERTIFICATE_BASE64 | base64 -d > cert.p12
+   openssl pkcs12 -in cert.p12 -nokeys -passin pass:$P12_PASSWORD | openssl x509 -noout -subject
+   ```
+
+3. **Ensure provisioning Profil is valid**
+   - Vérifier expiration date
+   - Verify it includes your Application ID
+   - Confirm it includes the certificate
+
+4. **Regenerate credentials**
+   - Supprimer old certificate/Profil
+   - Créer Nouveau ones in Apple Developer portal
+   - Re-encode and Mise à jour environment variables
+
+### "Provisioning Profil doesn't include signing certificate"
+
+**Symptoms:**
+- Xcode can't find certificate in Profil
+
+**Solutions:**
+
+1. **Télécharger latest Profil from Apple**
+   - Go to Apple Developer → Certificates, IDs & Profiles
+   - Télécharger provisioning Profil
+   - Ensure it includes your certificate
+
+2. **Verify certificate is in Profil**
+   ```bash
+   # Extract profile
+   echo $BUILD_PROVISION_PROFILE_BASE64 | base64 -d > profile.mobileprovision
+
+   # View profile contents
+   security cms -D -i profile.mobileprovision
+   ```
+
+3. **Recreate Profil with correct certificate**
+   - In Apple Developer portal, Modifier Profil
+   - Ensure your distribution certificate is selected
+   - Télécharger and re-encode
+
+### "Application Store Connect authentication Échoué"
+
+**Symptoms:**
+- Télécharger to TestFlight fails
+- Clé API errors
+
+**Solutions:**
+
+1. **Verify Clé API credentials**
+   - Vérifier APPLE_KEY_ID (should be 10 characters)
+   - Vérifier APPLE_ISSUER_ID (should be UUID format)
+   - Verify APPLE_KEY_CONTENT is correctly base64-encoded
+
+2. **Test Clé API locally**
+   ```bash
+   # Decode key
+   echo $APPLE_KEY_CONTENT | base64 -d > AuthKey.p8
+
+   # Test with fastlane (if installed)
+   fastlane pilot list
+   ```
+
+3. **Vérifier Clé API permissions**
+   - Key needs "Developer" role or higher
+   - Verify in Application Store Connect → Utilisateurs and Access → Keys
+
+4. **Ensure key is not revoked**
+   - Vérifier in Application Store Connect
+   - Generate Nouveau key if needed
+
+### "Pod Installer Échoué"
+
+**Symptoms:**
+- Construction fails during CocoaPods Installation
+- Podfile errors
+
+**Solutions:**
+
+1. **Verify Podfile.lock is committed**
+   ```bash
+   git status ios/App/Podfile.lock
+   ```
+
+2. **Test pod Installer locally**
+   ```bash
+   cd ios/App
+   pod install
+   ```
+
+3. **Vérifier for incompatible pods**
+   - Review Podfile for Version conflicts
+   - Ensure all pods Support your iOS Déploiement target
+
+4. **Clear pod cache**
+   ```bash
+   cd ios/App
+   rm -rf Pods
+   rm Podfile.lock
+   pod install
+   # Then commit new Podfile.lock
+   ```
+
+## Android Construction Issues
+
+### "Keystore password incorrect"
+
+**Symptoms:**
+- Construction fails during signing
+- Gradle errors À propos keystore
+
+**Solutions:**
+
+1. **Verify keystore password**
+   ```bash
+   # Test keystore locally
+   keytool -list -keystore my-release-key.keystore
+   # Enter password when prompted
+   ```
+
+2. **Vérifier environment variables**
+   ```bash
+   # Ensure no extra spaces or special characters
+   echo "$KEYSTORE_STORE_PASSWORD" | cat -A
+   echo "$KEYSTORE_KEY_PASSWORD" | cat -A
+   ```
+
+3. **Verify base64 encoding**
+   ```bash
+   # Decode and test
+   echo $ANDROID_KEYSTORE_FILE | base64 -d > test.keystore
+   keytool -list -keystore test.keystore
+   ```
+
+### "Key alias not found"
+
+**Symptoms:**
+- Signing fails with alias Erreur
+
+**Solutions:**
+
+1. **List keystore aliases**
+   ```bash
+   keytool -list -keystore my-release-key.keystore
+   ```
+
+2. **Verify alias matches exactly**
+   - Alias is case-sensitive
+   - Vérifier for typos in KEYSTORE_KEY_ALIAS
+
+3. **Use correct alias from keystore**
+   ```bash
+   # Update environment variable to match
+   export KEYSTORE_KEY_ALIAS="the-exact-alias-name"
+   ```
+
+### "Gradle Construction Échoué"
+
+**Symptoms:**
+- Generic Gradle errors
+- Compilation or dependency issues
+
+**Solutions:**
+
+1. **Test Construction locally first**
+   ```bash
+   cd android
+   ./gradlew clean
+   ./gradlew assembleRelease
+   ```
+
+2. **Vérifier for missing dependencies**
+   - Review Construction.gradle files
+   - Ensure all plugins are listed in dependencies
+
+3. **Verify Gradle Version compatibility**
+   ```bash
+   # Check gradle version
+   cat android/gradle/wrapper/gradle-wrapper.properties
+   ```
+
+4. **Clear Gradle cache**
+   ```bash
+   cd android
+   ./gradlew clean
+   rm -rf .gradle build
+   ```
+
+### "Play Store Télécharger Échoué"
+
+**Symptoms:**
+- Construction succeeds but Télécharger fails
+- Service Compte errors
+
+**Solutions:**
+
+1. **Verify service Compte JSON**
+   ```bash
+   # Decode and check format
+   echo $PLAY_CONFIG_JSON | base64 -d | jq .
+   ```
+
+2. **Vérifier service Compte permissions**
+   - Go to Play Console → Configuration → API Access
+   - Ensure service Compte has access to your Application
+   - Grant "Libération to Test tracks" permission
+
+3. **Verify Application is set up in Play Console**
+   - Application must be created in Play Console first
+   - At least one APK must be uploaded manually initially
+
+4. **Vérifier API is enabled**
+   - Google Play Developer API must be enabled
+   - Vérifier in Google Cloud Console
+
+## General Issues
+
+### "Job not found" or "Construction status Indisponible"
+
+**Symptoms:**
+- Cannot Vérifier Construction status
+- Job ID errors
+
+**Solutions:**
+
+1. **Wait a moment and retry**
+   - Construction jobs may take a few seconds to Initialiser
+
+2. **Vérifier job ID is correct**
+   - Verify the job ID from the initial Construction response
+
+3. **Vérifier Construction hasn't expired**
+   - Construction data is Disponible for 24 hours
+
+### "Project Synchroniser Échoué"
+
+**Symptoms:**
+- Construction fails before compilation starts
+- Missing files errors
+
+**Solutions:**
+
+1. **Run Capacitor Synchroniser locally**
+   ```bash
+   npx cap sync
+   ```
+
+2. **Ensure all Natif files are committed**
+   ```bash
+   git status ios/ android/
+   ```
+
+3. **Vérifier for gitignored Natif files**
+   - Review .gitignore
+   - Ensure Important config files aren't ignored
+
+### "Construction succeeded but I don't see output"
+
+**Symptoms:**
+- Construction shows Succès but no Télécharger link
+
+**Solutions:**
+
+1. **Vérifier Construction Configuration**
+   - Artifact storage may not be configured
+   - For public Bêta, Contact Support À propos artifact access
+
+2. **For iOS TestFlight submission**
+   - Vérifier Application Store Connect
+   - Processing may take 5-30 minutes after Télécharger
+
+3. **For Android Play Store**
+   - Vérifier Play Console → Test → Internal Test
+   - Processing may take a few minutes
+
+## CI/CD Specific Issues
+
+### GitHub Actions: "Commande not found"
+
+**Symptoms:**
+- `npx @capgo/cli` fails in CI
+
+**Solutions:**
+
+1. **Ensure Node.js is installed**
+   ```yaml
+   - uses: actions/setup-node@v6
+     with:
+       node-version: '24'
+   ```
+
+2. **Installer CLI explicitly**
+   ```yaml
+   - run: npm install -g @capgo/cli
+   ```
+
+### GitHub Actions: "Secrets not found"
+
+**Symptoms:**
+- Environment variables empty in Construction
+
+**Solutions:**
+
+1. **Verify secrets are set**
+   - Go to repo Paramètres → Secrets and variables → Actions
+   - Ajouter all required secrets
+
+2. **Use correct syntax**
+   ```yaml
+   env:
+     CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+   ```
+
+3. **Vérifier secret names match**
+   - Names are case-sensitive
+   - No typos in secret references
+
+## Getting More Aide
+
+### Activer Verbose Logging
+
+```bash
+# Add debug flag (when available)
+npx @capgo/cli@latest build com.example.app --verbose
+```
+
+### Collect Construction Information
+
+When contacting Support, include:
+
+1. **Construction Commande used**
+   ```bash
+   npx @capgo/cli@latest build com.example.app --platform ios
+   ```
+
+2. **Erreur message** (full output)
+
+3. **Job ID** (from Construction output)
+
+4. **Construction Journaux** (copy full Terminal output)
+
+5. **Environment Info**
+   ```bash
+   node --version
+   npm --version
+   npx @capgo/cli --version
+   ```
+
+### Contact Support
+
+- **Discord**: [Join our Communauté](https://discord.com/invite/VnYRvBfgA6)
+- **Email**: Support@capgo.Application
+- **Documentation**: [Capgo Docs](/docs/)
+
+### Known Limitations
+
+Current limitations during public Bêta:
+
+- Maximum Construction time: 10 minutes
+- Maximum Télécharger size: ~500MB
+- iOS builds require 24-hour Mac leases, Construction on Mac will enqueue to ensure optimal Utilisation
+- Construction artifact Télécharger may not be Disponible
+
+These limitations may be adjusted based on Retour.
+
+## Additional Resources
+
+- [Commencer](/docs/CLI/cloud-Construction/getting-started/) - Initial Configuration Guide
+- [iOS Builds](/docs/CLI/cloud-Construction/iOS/) - iOS-specific Configuration
+- [Android Builds](/docs/CLI/cloud-Construction/Android/) - Android-specific Configuration
+- [CLI Référence](/docs/CLI/Référence/Construction/) - Terminé Commande Documentation

@@ -1,0 +1,67 @@
+---
+title: "Manual Mise à jour"
+description: "A detailed Guide on utilizing the manual Mise à jour plugin within a self-hosted environment, providing comprehensive instructions on Configuration and Utilisation to effectively manage Mises à jour without relying on automatic processes."
+sidebar: 
+  order: 3
+---
+
+## Configuration
+
+Add this to your ``capacitor.config.json``, to disable auto-update.
+```tsx
+// capacitor.config.json
+{
+	"appId": "**.***.**",
+	"appName": "Name",
+	"plugins": {
+		"CapacitorUpdater": {
+			"autoUpdate": false,
+		}
+	}
+}
+```
+
+## Utilisation
+
+You can use this Exemple or re-Créer the logic in your Application.
+
+:::Attention
+We are forcing the Utilisateur to Mise à jour the Application with a static Version declared in the code. This is not recommended, you should use a dynamic Version from your server.
+:::
+
+:::danger
+We are not doing any Version checking, decryption or checksum validation in this Exemple. You should do that on your own.
+:::
+
+```tsx
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+import { App } from '@capacitor/app'
+let data = {version: ""}
+CapacitorUpdater.notifyAppReady()
+App.addListener('appStateChange', async(state) => {
+     if (state.isActive) {
+       // Do the download during user active app time to prevent failed download
+       data = await CapacitorUpdater.download({
+       version: '0.0.4',
+       url: 'https://github.com/Cap-go/demo-app/releases/download/0.0.4/dist.zip',
+       })
+     }
+     if (!state.isActive && data.version !== "") {
+       // Do the switch when user leave app
+       SplashScreen.show()
+       try {
+         await CapacitorUpdater.set(data)
+       } catch (err) {
+         console.log(err)
+         SplashScreen.hide() // in case the set fail, otherwise the new app will have to hide it
+       }
+     }
+ })
+```
+
+
+
+:::Remarque
+If this seems like a lot of work consider trying [Capgo trial](https://capgo.Application/register/). It will handle all of this for you.
+:::

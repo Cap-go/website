@@ -1,0 +1,292 @@
+---
+title: Supabase Android에서 Apple 로그인
+description: Capacitor Social Login 플러그인을 사용하여 Android에서 Supabase Authentication과 Apple Sign-In을 설정하는 방법을 알아봅니다.
+sidebar:
+    order: 3
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## 사전 요구사항
+
+이 가이드는 Android에서 Supabase Authentication과 Apple Sign-In을 통합하는 데 도움이 됩니다. 다음을 이미 완료했다고 가정합니다:
+- [Supabase Apple 로그인 - 일반 설정](./general/).
+
+:::note[중요]
+Android에서 Apple Sign-In에는 Apple이 기본 Android 지원을 제공하지 않기 때문에 백엔드 서버가 필요합니다. Supabase Edge Function을 백엔드로 사용할 것입니다.
+:::
+
+## 단계 1: 백엔드 Edge Function 배포
+
+먼저 Apple OAuth 콜백을 처리할 Supabase Edge Function을 배포해야 합니다.
+
+<Steps>
+
+1. **Supabase 프로젝트 디렉토리로 이동하세요**
+
+   ```bash
+   cd your-project/supabase
+   ```
+
+2. **Edge Function 생성(아직 없는 경우)**
+
+   ```bash
+   supabase functions new apple-signin-callback
+   ```
+
+3. **Edge Function 코드 복사**
+
+   완전한 Edge Function 구현은 [예제 앱](https://github.com/Cap-go/capacitor-social-login/tree/main/example-app/supabase/functions/apple-signin-callback)에서 사용할 수 있습니다.
+
+   프로젝트에 다음 파일을 복사합니다:
+   - `supabase/functions/apple-signin-callback/index.ts` - 기본 Edge Function 코드
+   - `supabase/functions/apple-signin-callback/deno.json` - 의존성 가져오기 맵(JWT 서명을 위한 `jose` 라이브러리 포함)
+
+4. **JWT 검증 구성**
+
+   Apple OAuth 콜백 엔드포인트는 Apple이 이를 리다이렉트하기 때문에 공개 상태여야 합니다(인증 필요 없음). `supabase/config.toml` 파일을 업데이트합니다:
+
+   ```toml
+   [functions.apple-signin-callback]
+   enabled = true
+   verify_jwt = false  # 중요: 공개 OAuth 콜백을 위해 false로 설정
+   import_map = "./functions/apple-signin-callback/deno.json"
+   entrypoint = "./functions/apple-signin-callback/index.ts"
+   ```
+
+   :::caution[중요]
+   `verify_jwt = false` 설정은 이 엔드포인트를 공개합니다. Apple의 OAuth 리다이렉트는 Supabase 인증 헤더를 포함하지 않기 때문에 필요합니다. 엔드포인트는 OAuth 흐름 자체를 검증합니다.
+   :::
+
+5. **함수 배포**
+
+   ```bash
+   supabase functions deploy apple-signin-callback
+   ```
+
+6. **함수 URL 획득**
+
+   배포 후 다음과 같은 URL을 얻게 됩니다:
+   ```
+   https://your-project-ref.supabase.co/functions/v1/apple-signin-callback
+   ```
+
+   찾을 수 없는 경우 다음을 수행할 수 있습니다:
+
+   1. `https://supabase.com/dashboard/project/YOUR_PROJECT_REF/functions` 열기
+   2. `apple-signin-callback` 함수 URL을 클릭하여 복사합니다.
+      <img src="/social-login-assets/supabase_functions_apple_signin_callback.webp" alt="Supabase Functions Apple Sign-In Callback" />
+
+   :::note[이 URL 저장]
+   Apple Developer Portal을 구성할 때 다음 단계에서 필요합니다.
+   :::
+
+</Steps>
+
+## 단계 2: Apple Developer Portal 구성
+
+이제 Apple Developer Portal을 백엔드 URL로 구성하고 필요한 모든 값을 얻어야 합니다.
+
+:::note[함수 URL]
+계속하기 전에 1단계에서 Supabase Edge Function URL이 있는지 확인하세요. Apple Developer Portal에서 Return URL을 구성할 때 필요합니다.
+:::
+
+<Steps>
+
+1. **Apple 로그인 Android 설정 가이드 따르기**
+
+   다음을 수행하려면 [Apple 로그인 Android 설정 가이드](/docs/plugins/social-login/apple/android/)를 완료합니다:
+   - 서비스 ID 생성
+   - 개인 키(.p8 파일) 생성
+   - Team ID와 Key ID 획득
+   - Return URL 구성
+
+2. **Apple Developer Portal에서 Return URL 설정**
+
+   Apple Developer Portal에서 Return URL을 구성할 때(Apple 가이드의 6.9단계), Supabase Edge Function URL을 사용합니다:
+
+   ```
+   https://your-project-ref.supabase.co/functions/v1/apple-signin-callback
+   ```
+
+   :::warning[중요: Supabase Edge Function URL 사용]
+   **하지 않습니다** [Apple 로그인 Android 설정 가이드](/docs/plugins/social-login/apple/android/)의 리다이렉트 URL을 사용합니다. 이 가이드는 사용자 정의 백엔드 서버 URL을 사용합니다. Supabase 통합의 경우 Supabase Edge Function URL을 대신 사용해야 합니다.
+   :::
+
+   :::caution[정확한 일치 필요]
+   Return URL은 여기서 구성한 것과 정확히 일치해야 합니다. Apple은 리다이렉트 URI 일치에 매우 엄격합니다.
+   :::
+
+3. **모든 필요한 값 수집**
+
+   Apple 설정 가이드를 완료한 후 다음을 가져야 합니다:
+   - **APPLE_TEAM_ID**: Apple 개발자 Team ID
+   - **APPLE_KEY_ID**: Apple Developer Portal의 Key ID
+   - **APPLE_PRIVATE_KEY**: .p8 개인 키 파일(base64 인코딩 필요)
+   - **ANDROID_SERVICE_ID**: Apple 서비스 ID(예: `com.example.app.service`)
+   - **BASE_REDIRECT_URL**: Deep Link URL(예: `capgo-demo-app://path`)
+
+   :::note[Deep Link URL]
+   `BASE_REDIRECT_URL`은 `AndroidManifest.xml`에서 구성된 Deep Link 구성표입니다. 인증 후 백엔드가 리다이렉트할 위치입니다.
+
+   Deep Link 값은 `android:scheme="capgo-demo-app"` 코드에 따라 다릅니다. `AndroidManifest.xml`에서 `android:scheme="capgo-demo-app"`를 설정한 경우 Deep Link는 `capgo-demo-app://path`입니다.
+   :::
+
+</Steps>
+
+## 단계 3: Supabase Secrets 설정
+
+이제 Supabase Edge Function의 환경 변수(Secrets)를 구성해야 합니다.
+
+<Steps>
+
+1. **개인 키 인코딩**
+
+   먼저 Apple 개인 키(.p8 파일)를 base64로 인코딩합니다:
+
+   ```bash
+   base64 -i AuthKey_XXXXX.p8
+   ```
+
+   전체 출력을 복사합니다(긴 문자열 하나입니다).
+
+2. **Supabase CLI를 사용하여 Secrets 설정**
+
+   ```bash
+   supabase secrets set APPLE_TEAM_ID=your_team_id
+   supabase secrets set APPLE_KEY_ID=your_key_id
+   supabase secrets set APPLE_PRIVATE_KEY=your_base64_encoded_key
+   supabase secrets set ANDROID_SERVICE_ID=your.service.id
+   supabase secrets set BASE_REDIRECT_URL=your-app://path
+   supabase secrets set APPLE_REDIRECT_URI=https://your-project-ref.supabase.co/functions/v1/apple-signin-callback
+   ```
+
+   :::note[자리표시자 바꾸기]
+   2단계의 실제 값으로 모든 자리표시자 값을 바꿉니다.
+   :::
+
+3. **대체: Supabase 대시보드에서 Secrets 설정**
+
+   대시보드를 사용하는 것을 선호하는 경우:
+   1. Supabase 프로젝트 대시보드로 이동합니다
+   2. **Edge Functions** → **Settings** → **Secrets**로 이동합니다
+   3. 각 비밀 변수를 값과 함께 추가합니다
+
+</Steps>
+
+:::note[Android 앱 구성]
+[Apple 로그인 Android 설정 가이드](/docs/plugins/social-login/apple/android/)는 이미 Android 앱을 구성하는 방법을 다룹니다:
+- `AndroidManifest.xml`에 Deep Link Intent 필터 추가
+- `MainActivity.java`에 `onNewIntent` 핸들러 추가
+
+계속하기 전에 이 단계들을 완료했는지 확인하세요. 거기서 구성한 Deep Link 구성표가 3단계의 `BASE_REDIRECT_URL`이 됩니다.
+:::
+
+## 단계 4: 인증 도우미 사용
+
+이제 앱 코드에서 인증 도우미를 사용할 수 있습니다.
+
+### 구현
+
+전체 구현은 [예제 앱의 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 파일에서 사용할 수 있습니다.
+
+### 인증 도우미 사용
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Signed in:', result.user);
+  // 인증된 영역으로 이동합니다
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+### 도우미 함수 업데이트
+
+`authenticateWithAppleSupabase` 도우미 함수를 사용할 때 구성과 일치하도록 다음 값을 업데이트해야 합니다:
+
+1. **`redirectUrl` 업데이트** - Supabase Edge Function URL로 설정합니다:
+
+   ```typescript
+   const redirectUrl = platform === 'android'
+     ? 'https://your-project-ref.supabase.co/functions/v1/apple-signin-callback'
+     : undefined;
+   ```
+
+2. **`clientId` 업데이트** - Apple 서비스 ID로 설정합니다:
+
+   ```typescript
+   await SocialLogin.initialize({
+     apple: {
+       clientId: isIOS
+         ? undefined // iOS는 번들 ID를 자동으로 사용합니다
+         : 'your.service.id.here', // Android용 Apple 서비스 ID
+       redirectUrl: redirectUrl,
+     },
+   });
+   ```
+
+   :::caution[중요]
+   `'your.service.id.here'`를 실제 Apple 서비스 ID로 바꿉니다(3단계에서 `ANDROID_SERVICE_ID`에 사용한 값과 동일).
+   :::
+
+[전체 구현](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)을 참조하세요.
+
+## 단계 5: 통합 테스트
+
+<Steps>
+
+1. **Android 앱 빌드 및 실행**
+
+   ```bash
+   npx cap sync android
+   npx cap run android
+   ```
+
+2. **인증 흐름 테스트**
+
+   - "Sign in with Apple" 버튼을 탭합니다
+   - 브라우저에서 Apple OAuth 페이지를 볼 수 있어야 합니다
+   - 인증 후 앱으로 다시 리다이렉트되어야 합니다
+   - 오류 메시지가 있는지 콘솔 로그를 확인합니다
+
+3. **흐름 확인**
+
+   전체 흐름은 다음과 같아야 합니다:
+   1. 사용자가 "Sign in with Apple" 탭
+   2. 앱이 Apple OAuth로 브라우저 열기
+   3. 사용자가 Apple로 인증
+   4. Apple이 `https://your-project-ref.supabase.co/functions/v1/apple-signin-callback`으로 리다이렉트
+   5. Edge Function이 코드를 토큰으로 교환
+   6. Edge Function이 `your-app://path?id_token=...&access_token=...`으로 리다이렉트
+   7. Android 앱이 Deep Link를 수신하고 신원 토큰 처리
+   8. 앱이 신원 토큰으로 Supabase에 로그인
+
+</Steps>
+
+## 문제 해결
+
+인증이 실패하면:
+
+- **Redirect URI 불일치**: Apple Developer Portal의 Return URL이 `APPLE_REDIRECT_URI` Secret과 정확히 일치하는지 확인합니다
+- **Deep Link가 작동하지 않음**: `AndroidManifest.xml` Intent 필터가 `BASE_REDIRECT_URL`과 일치하는지 확인합니다
+- **누락된 Secrets**: `supabase secrets list`를 사용하여 모든 Secrets이 올바르게 설정되었는지 확인합니다
+- **토큰 교환 실패**: 자세한 오류 메시지는 Supabase Dashboard에서 Edge Function 로그를 확인합니다
+- **앱이 콜백을 수신하지 않음**: MainActivity에서 `onNewIntent`가 올바르게 구현되었는지 확인합니다
+- [예제 앱 코드](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)를 참조하세요
+
+## 작동 방식
+
+Android에서 Apple Sign-In은 OAuth 리다이렉트 흐름을 사용합니다:
+
+1. **초기화**: 플러그인은 서비스 ID와 백엔드 리다이렉트 URL로 초기화됩니다
+2. **OAuth 흐름**: Apple OAuth 페이지로 브라우저/Chrome Custom Tab 열기
+3. **백엔드 콜백**: Apple이 인증 코드와 함께 Supabase Edge Function으로 리다이렉트
+4. **토큰 교환**: Edge Function이 Apple 토큰 엔드포인트를 사용하여 코드를 토큰으로 교환
+5. **Deep Link 리다이렉트**: Edge Function이 신원 토큰과 함께 앱으로 다시 리다이렉트
+6. **Supabase 인증**: 앱이 토큰을 수신하고 Supabase에 로그인
+
+Apple이 Apple Sign-In에 대한 기본 Android 지원을 제공하지 않기 때문에 이 흐름이 필요합니다.
+

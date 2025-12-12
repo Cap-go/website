@@ -1,22 +1,22 @@
 ---
 title: '@capgo/capacitor-env'
 description: >-
-  Expose configuration values from `capacitor.config` at runtime for white-label
-  and multitenant apps.
+  Stellen Sie Konfigurationswerte aus `capacitor.config` zur Laufzeit für
+  White-Label- und Multi-Tenant-Apps bereit.
 tableOfContents: false
 next: false
 prev: false
 sidebar:
   order: 1
-  label: Introduction
+  label: Einführung
 hero:
   tagline: >-
-    Deliver tenant-specific settings without new builds by reading secure
-    configuration values directly from Capacitor.
+    Liefern Sie mandantenspezifische Einstellungen ohne neue Builds, indem Sie
+    sichere Konfigurationswerte direkt von Capacitor lesen.
   image:
     file: ~public/settings-go.webp
   actions:
-    - text: Get started
+    - text: Los geht's
       link: /docs/plugins/env/getting-started/
       icon: right-arrow
       variant: primary
@@ -29,21 +29,21 @@ locale: de
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Capgo Env lets you store secrets and per-build configuration inside `capacitor.config.*` and resolve them at runtime through a simple API.
+Mit Capgo Env können Sie Secrets und Build-spezifische Konfigurationen in `capacitor.config.*` speichern und zur Laufzeit durch eine einfache API auflösen.
 
 <CardGrid stagger>
-  <Card title="Runtime configuration" icon="rocket">
-    Read values from native config files without shipping them in your JavaScript bundle.
+  <Card title="Laufzeitkonfiguration" icon="rocket">
+    Lesen Sie Werte aus nativen Konfigurationsdateien, ohne sie in Ihrem JavaScript-Bundle zu versenden.
   </Card>
-  <Card title="Per build overrides" icon="rocket">
-    Create multiple app flavors or tenants by providing different config files.
+  <Card title="Build-spezifische Overrides" icon="rocket">
+    Erstellen Sie mehrere App-Varianten oder Mandanten, indem Sie unterschiedliche Konfigurationsdateien bereitstellen.
   </Card>
-  <Card title="Typesafe access" icon="pencil">
-    Fetch keys with TypeScript support and centralize fallback logic.
+  <Card title="Typsicherer Zugriff" icon="pencil">
+    Rufen Sie Schlüssel mit TypeScript-Unterstützung ab und zentralisieren Sie Fallback-Logik.
   </Card>
-  <Card title="Secure by default" icon="approve-check">
-    Keep API keys and secrets out of Git while still shipping them with native binaries.
+  <Card title="Standardmäßig sicher" icon="approve-check">
+    Halten Sie API-Schlüssel und Secrets aus Git heraus, während Sie sie dennoch mit nativen Binärdateien versenden.
   </Card>
 </CardGrid>
 
-Follow the getting started guide to declare keys in your Capacitor config and fetch them safely across platforms.
+Folgen Sie dem Leitfaden für Erste Schritte, um Schlüssel in Ihrer Capacitor-Konfiguration zu deklarieren und diese sicher auf allen Plattformen abzurufen.

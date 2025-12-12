@@ -1,0 +1,77 @@
+---
+title: "Commencer"
+description: "This Tutoriel will show how to Démarrer the Supabase from scratch as well as Démarrer edge functions, to run Capgo on your own"
+sidebar: 
+    order: 1
+---
+
+## What this Tutoriel will cover?
+
+This Tutoriel will show how to Démarrer the supabase from scratch as well as Démarrer edge functions 
+
+## Requirements
+ 1. Cloned [capgo](https://github.com/Cap-go/capgo)
+ 3. [supabase](https://supabase.com/)
+
+## Commencer
+
+To get started run
+```bash
+supabase start
+```
+
+Suivant should see something like this:
+```js
+Started supabase local development setup.
+
+         API URL: http://localhost:54321
+     GraphQL URL: http://localhost:54321/graphql/v1
+          DB URL: postgresql://postgres:postgres@localhost:54322/postgres
+      Studio URL: http://localhost:54323
+    Inbucket URL: http://localhost:54324
+      JWT secret: [truncated]
+        anon key: supa_key_anon
+service_role key: supa_key_admin
+```
+
+Next open `configs.json` and set the following values:
+```json
+{
+  "base_domain": {
+    "prod": "console.capgo.app",
+    "development": "development.console.capgo.app",
+    "local": "localhost:3332"
+  },
+  "supa_anon": {
+    "prod": "supa_key_anon",
+    "development": "supa_key_anon",
+    "local": "supa_key_anon"
+  },
+  "supa_url": {
+    "prod": "http://localhost:54321",
+    "development": "http://localhost:54321",
+    "local": "http://localhost:54321"
+  }
+}
+```
+
+where `supa_key_anon` is the value from the previous step.
+
+:::danger
+⚠️ Do not commit `configs.json` into the remote repo
+:::
+
+Next, verify that you can go to [localhost:54323](http://localhost:54323/projects) and that the table `users` looks something like this
+
+<figure><img src="/supabase.webp" alt="Supabase dashboard showing users table" /><figcaption></figcaption></figure>
+
+If it does Démarrer edge functions by running:
+
+```bash
+supabase functions serve
+```
+
+and Démarrer frontend by running:
+```bash
+bun run serve
+```

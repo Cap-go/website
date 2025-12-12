@@ -1,0 +1,104 @@
+---
+title: Commencer
+description: Learn how to Installer and use the Natif Market plugin to redirect Utilisateurs to Google Play Store or Apple Application Store from your Capacitor Application.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Code, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the package**
+   <PackageManagers pkg="@capgo/native-market" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser with Natif projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Utilisation
+
+Importer the plugin and use its methods to redirect Utilisateurs to Application stores:
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+
+// Open app store listing
+const openAppStore = async () => {
+  await NativeMarket.openStoreListing({
+    appId: 'com.example.app' // Your app's bundle ID
+  });
+};
+
+// Request app review
+const requestReview = async () => {
+  await NativeMarket.requestReview();
+};
+
+// Open app store search
+const searchInStore = async () => {
+  await NativeMarket.search({
+    terms: 'fitness app' // Search terms
+  });
+};
+```
+
+## API Référence
+
+### openStoreListing(Options)
+
+Opens the Application Store listing for the specified Application.
+
+```typescript
+interface OpenStoreListingOptions {
+  appId: string; // Bundle ID on iOS, Package name on Android
+}
+```
+
+### requestReview()
+
+Requests an in-Application review from the Utilisateur. On iOS 10.3+, this shows the rating dialog without leaving the Application.
+
+### Recherche(Options)
+
+Opens the Application Store with Recherche results.
+
+```typescript
+interface SearchOptions {
+  terms: string; // Search terms to use
+}
+```
+
+## Platform Notes
+
+### iOS
+- Uses `SKStoreReviewController` for in-app reviews on iOS 10.3+
+- Falls Retour to opening Application Store for older versions
+
+### Android
+- Opens Google Play Store
+- Uses in-Application review API when Disponible
+
+## Exemple
+
+```typescript
+import { NativeMarket } from '@capgo/native-market';
+import { Capacitor } from '@capacitor/core';
+
+export class AppService {
+  async rateApp() {
+    try {
+      // Try in-app review first
+      await NativeMarket.requestReview();
+    } catch (error) {
+      // Fallback to opening store listing
+      const platform = Capacitor.getPlatform();
+      const appId = platform === 'ios' 
+        ? 'id123456789' // Your iOS app ID
+        : 'com.example.app'; // Your Android package name
+        
+      await NativeMarket.openStoreListing({ appId });
+    }
+  }
+}

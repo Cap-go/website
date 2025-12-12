@@ -1,0 +1,215 @@
+---
+title: Mise à jour Behavior
+description: "Explore the comprehensive Mise à jour behavior of Capgo, designed to deliver seamless Mises à jour to your Application Utilisateurs without interrupting their experience."
+sidebar: 
+  order: 3
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+When you Libération an Mise à jour to your Capgo Application, you probably want your Utilisateurs to receive that Mise à jour as soon as possible. But you also don't want to disrupt their experience by forcing them to wait for a Télécharger or Redémarrer the Application in the middle of a session.
+
+Capgo's Mise à jour behavior is designed to strike a balance between delivering Mises à jour quickly and minimizing disruption to your Utilisateurs.
+
+## Default Mise à jour Flow
+
+By default, here's how Capgo handles Application Mises à jour:
+
+<Steps>
+
+1. On Application launch, the Capgo plugin checks to see if a Nouveau Mise à jour is Disponible.
+
+2. If an Mise à jour is found, it's downloaded in the background while the Utilisateur continues using the current Version of the Application.
+
+3. Once the Télécharger completes, Capgo waits for the Utilisateur to either background the Application or kill it entirely.
+
+4. When the Utilisateur Suivant launches the Application, they'll be running the updated Version.
+
+</Steps>
+
+This flow ensures that Utilisateurs are always running the latest Version of your Application, without ever being interrupted by Mise à jour prompts or forced to wait for downloads.
+
+<Aside type="tip">
+Capgo also checks for Mises à jour when the Application resumes from the background, so Utilisateurs will receive Mises à jour even if they don't fully quit the Application.
+</Aside>
+
+## Why This Approach?
+
+Applying Mises à jour on a background or kill event has a few key benefits for Utilisateur experience:
+
+- Utilisateurs aren't interrupted by Mise à jour prompts or forced to wait for downloads in the middle of a session.
+
+- Mises à jour are applied seamlessly in between sessions, so the experience of launching the Application is always fresh.
+
+- You can deliver Mises à jour frequently without worrying À propos disrupting Actif Utilisateurs.
+
+The main downside is that if a Utilisateur backgrounds and quickly resumes your Application, they may lose any unsaved state since the Mise à jour was applied in between those actions. 
+
+To mitigate this, we recommend:
+
+- Saving state frequently and restoring it gracefully when the Application resumes.
+
+- Avoiding very frequent Mises à jour that modify large parts of the Application state.
+
+- Considering customizing the Mise à jour behavior for sensitive flows (see below).
+
+## Customizing When Mises à jour Are Applied
+
+In some cases, you may want more control over exactly when an Mise à jour is applied. For Exemple, you might want to ensure a Utilisateur completes an in-progress flow before updating, or coordinate an Application Mise à jour with a server-side change.
+
+Capgo provides a `setDelay` function that lets you specify conditions that must be met before an update is installed:
+
+```typescript
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+
+await CapacitorUpdater.setMultiDelay({
+  delayConditions: [
+    {
+      kind: 'date',
+      value: '2023-06-01T00:00:00.000Z',
+    },
+    {
+      kind: 'background',
+      value: '60000',
+    },
+  ],
+});
+```
+
+This Exemple would delay installing an Mise à jour until after June 1, 2023 AND the Application has been backgrounded for at least 60 seconds.
+
+The Disponible delay conditions are:
+
+- `date`: Wait until after a specific date/time to apply the update.
+- `background`: Wait a minimum duration after the app is backgrounded to apply the update.
+- `nativeVersion`: Wait for a native binary with a minimum version to be installed before applying the update.
+- `kill`: Wait until the next app kill event to apply the update.
+
+You can mix and match these conditions to precisely control when an Mise à jour is installed.
+
+<Aside type="danger">
+Note that the `kill` condition currently triggers the update after the first kill event, not the next background event like the other conditions. This inconsistency will be fixed in a future release.
+</Aside>
+
+## Applying Mises à jour Immediately
+
+For critical updates or apps with very simple state, you may want to apply an update as soon as it's downloaded, without waiting for a background or kill event. Capgo supports this via the `directUpdate` configuration option.
+
+<Aside type="tip" title="Recommended: Use Delta Updates with Direct Update">
+When using `directUpdate`, we **strongly recommend** enabling [Delta Updates](/docs/live-updates/differentials/) to minimize download times and improve the user experience. Delta Updates only download changed files instead of the entire bundle, which is especially important when updates are applied immediately while users are actively using your app.
+
+**Why this matters for Direct Updates:**
+- **Faster Mises à jour**: Smaller downloads mean Mises à jour Terminé quickly, reducing the time Utilisateurs see loading screens
+- **Better mobile experience**: Utilisateurs on cellular networks or slower connections won't face long wait times
+- **Lower bandwidth Utilisation**: Only changed files are downloaded, saving data for both you and your Utilisateurs
+
+To enable Delta Updates, simply use the `--partial` flag when uploading bundles:
+```shell
+npx @capgo/cli@latest bundle upload --partial
+```
+
+Learn more in the [Delta Mises à jour Documentation](/docs/live-Mises à jour/differentials/).
+</Aside>
+
+`directUpdate` is set in your `capacitor.config.ts` file, not in JavaScript code. It supports three values:
+
+- `false` (default): Never do direct updates (use default behavior: download at start, set when backgrounded)
+- `'atInstall'`: Direct update only when app is installed, updated from store, otherwise act as directUpdate = false
+- `'onLaunch'`: Direct update only on app installed, updated from store or after app kill, otherwise act as directUpdate = false
+- `'always'`: Direct update in all previous cases (app installed, updated from store, after app kill or app resume), never act as directUpdate = false
+- `true` (deprecated): Same as `'always'` for backward compatibility
+
+```typescript
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: 'always', // or 'atInstall' for updates only on app install/update
+      autoSplashscreen: true, // NEW: Automatically handle splashscreen
+      keepUrlPathAfterReload: true,
+    },
+    SplashScreen: {
+      launchAutoHide: false, // Still required when using directUpdate
+    },
+  },
+};
+
+export default config;
+```
+
+<Aside type="note">
+**Important**: `directUpdate` only applies updates when the app actually checks for them. By default, this happens only at app startup or when resuming from background. Note that `periodCheckDelay` is not compatible with `directUpdate`.
+</Aside>
+
+With `directUpdate` enabled, Capgo will immediately apply an update as soon as the download completes during an update check, even if the user is actively using the app. Without periodic checking enabled, this means updates will only be applied when the app starts or resumes from background.
+
+Note that because `directUpdate` is a native configuration, it requires some additional handling in your JavaScript code.
+
+<Aside type="caution">
+When using `directUpdate`, you must set `launchAutoHide: false` in the SplashScreen configuration (as shown above) to prevent the splash screen from hiding automatically. This ensures you have full control over when the splash screen is hidden after the update process completes.
+</Aside>
+
+## Automatic Splashscreen Handling
+
+To make `directUpdate` easier to use, Capgo provides an `autoSplashscreen` option that automatically handles hiding the splashscreen for you (available since version 7.6.0):
+
+```typescript
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      directUpdate: 'always', // or 'atInstall' 
+      autoSplashscreen: true, // Automatically hide splashscreen
+      keepUrlPathAfterReload: true,
+    },
+    SplashScreen: {
+      launchAutoHide: false,
+    },
+  },
+};
+```
+
+When `autoSplashscreen` is enabled:
+- The plugin automatically hides the splashscreen when an Mise à jour is applied
+- The plugin automatically hides the splashscreen when no Mise à jour is needed
+- You don't need to manually listen for `appReady` events or call `SplashScreen.hide()`
+
+### Manual Splashscreen Handling
+
+If you prefer manual control or need custom logic, you can disable `autoSplashscreen` and handle it yourself:
+
+```js
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
+import { SplashScreen } from '@capacitor/splash-screen';
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Hide splash screen
+  SplashScreen.hide();
+});
+
+CapacitorUpdater.notifyAppReady();
+```
+
+The `appReady` event fires once the app has finished initializing and applying any pending updates. This is the point at which it's safe to show your app's UI, as it ensures the user will see the latest version.
+
+In addition to handling the `appReady` event, we recommend setting the `keepUrlPathAfterReload` configuration option to `true` when using `directUpdate`. This preserves the current URL path when the app is reloaded due to an update, helping maintain the user's location in the app and reducing disorientation.
+
+If you don't handle the `appReady` event and set `keepUrlPathAfterReload` when using `directUpdate`, the user may briefly see a stale version of the app, be taken back to the initial route, or see a flicker as the update is applied.
+
+Using `directUpdate` can be useful for delivering critical bug fixes or security patches, but it comes with some tradeoffs:
+
+- The user may see a brief flicker or loading state as the update is applied if you don't properly handle the splashscreen (either with `autoSplashscreen` or manual `appReady` event handling).
+- If the Mise à jour modifies the Application state or UI, the Utilisateur may see a disruptive change in the middle of a session.
+- The user's location in the app may be lost if `keepUrlPathAfterReload` is not set, potentially disorienting them.
+- You'll need to carefully handle saving and restoring state to ensure a smooth transition.
+
+If you do enable `directUpdate`, we recommend:
+
+- Using `autoSplashscreen: true` for the simplest setup, or manually handling the `appReady` event if you need custom logic.
+- Setting `keepUrlPathAfterReload` to `true` to preserve the user's location in the app.
+- Saving and restoring the Application state as needed to avoid losing Utilisateur progress.
+- Thoroughly Test your Application's Mise à jour behavior to ensure there are no jarring transitions, lost state, or disorienting location changes.
+
+In most cases, the default Mise à jour behavior provides the best balance of delivering Mises à jour quickly and minimizing disruption. But for apps with specific needs, Capgo provides the flexibility to customize when and how Mises à jour are applied.

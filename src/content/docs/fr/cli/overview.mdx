@@ -1,0 +1,116 @@
+---
+title: Aperçu
+description: "This document provides a comprehensive Aperçu of the Capgo CLI, how it can be utilized to enhance your Application Développement process by enabling seamless Mises à jour en direct"
+sidebar: 
+  order: 1
+prev: false
+next: false
+---
+
+import { Steps, CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+Use Capgo's Mises à jour en direct Fonctionnalité to Mise à jour the JavaScript Bundles of your Application remotely, in real-time. Pousser JS Mises à jour directly to your Utilisateurs without going through the Application Store review process to instantly fix bugs and ship Nouveau Fonctionnalités.
+
+<Aside>
+
+Mises à jour en direct are limited to JavaScript Bundle changes. If you need to Mise à jour Natif code, such as adding or removing a plugin or changing Natif project Configuration, you'll need to Soumettre a Nouveau Natif binary Construction to the Application stores.
+
+</Aside>
+
+## How Mises à jour en direct Work
+
+Capgo's Live Mise à jour system has two key components:
+
+1. The Capgo SDK, which you Installer in your Application. The SDK checks for Disponible Mises à jour and downloads them in the background.
+
+2. Channels, which let you target updates to specific groups of users. You can use channels to manage different release tracks, such as `Production`, `Staging`, and `Dev`.
+
+When you Télécharger a Nouveau JS Bundle to Capgo and assign it to a Canal, the Capgo SDK in apps configured for that Canal will detect the Mise à jour and Télécharger it. The Suivant time the Application restarts, the Nouveau Bundle will be loaded.
+
+## Commencer
+
+To Démarrer using Mises à jour en direct, follow these steps:
+
+<Steps>
+
+1. Terminé the [Capgo Démarrage rapide](/docs/getting-started/Démarrage rapide) to set up your Application in Capgo and Installer the Capgo SDK.
+
+2. In your app code, call `CapacitorUpdater.notifyAppReady()` after your app has finished initializing. This tells the Capgo SDK that your app is ready to receive updates.
+
+3. Construction your JS Bundle and Télécharger it to Capgo:
+   ```shell
+   npm run build
+   npx @capgo/cli@latest bundle upload --channel=production 
+   ```
+
+4. Open your Application and wait for the Mise à jour to Télécharger. You can Vérifier the status with:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+5. Once the Mise à jour is downloaded, close and reopen your Application to load the Nouveau Bundle.
+
+</Steps>
+
+See the [Deploying Mises à jour en direct](/docs/getting-started/Déployer) Guide for more details.
+
+## The Capgo CLI
+
+The Capgo CLI is a powerful tool that allows developers to interact with Capgo's services from their own CI/CD pipelines. With the CLI, you have granular control over when builds are produced and deployed, enabling you to integrate Capgo into your existing Entreprise workflows.
+
+### What is the Capgo CLI for?
+
+The Capgo CLI is designed for developers and teams who need more control and flexibility in their live Mise à jour workflows. By using the CLI in your CI/CD pipelines, you can:
+
+- Decide exactly when to Construction and Déployer Mises à jour, rather than relying on Capgo's built-in automation
+- Insert your own processes, such as code signing, QA Test, or manager approvals, between the Construction and Déployer steps
+- Integrate Capgo into your existing DevOps tooling and workflows
+
+### Authentication
+
+To use the Capgo CLI, you'll need to authenticate with your Clé API. You can generate an Clé API in your Capgo Compte Paramètres.
+
+To Journal in and securely store your Clé API, run:
+
+```shell
+npx @capgo/cli@latest login [API_KEY]
+```
+
+This Commande will then be saved for future use. You won't need to provide your Clé API with each Commande after logging in.
+
+### Key Differences from Other CLI Tools
+
+If you're familiar with other live Mise à jour CLI tools, there are a few key things to Remarque À propos Capgo's CLI:
+
+- Capgo uses a single CLI for both Développement and CI/CD use cases, as Capgo is focused solely on the live Mise à jour Fonctionnalité set.
+
+- The Capgo CLI doesn't require a separate installation step. It's bundled with the `@capgo/cli` package and can be run directly using `npx`.
+
+- Capgo's CLI is designed specifically for the live Mise à jour workflow, so it may not include some Fonctionnalités or Commandes found in more general-purpose CLI tools.
+
+## Suivant Steps
+
+<CardGrid stagger>
+  <a href="/docs/live-updates/channels/">
+    <Card title="Channels" icon="bars">
+      Learn how to use Canaux to manage different Libération tracks and target Mises à jour to specific Utilisateurs.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/rollbacks/">
+    <Card title="Rollbacks" icon="left-arrow">
+      Discover how to roll Retour to a Précédent JS Bundle Version if an Mise à jour causes issues.
+    </Card>
+  </a>
+
+  <a href="/docs/live-updates/update-behavior/">
+    <Card title="Update Behavior" icon="setting">
+      Customize how and when Mises à jour are downloaded and applied in your Application.  
+    </Card>
+  </a>
+  <a href="/docs/live-updates/differentials/">
+    <Card title="Fast Updates" icon="starlight">
+      Learn how to use fast Mises à jour to speed up the Mise à jour process.
+    </Card>
+  </a>
+</CardGrid>

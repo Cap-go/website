@@ -1,0 +1,374 @@
+---
+title: iOS Builds
+description: Configure and Construction iOS apps with Capgo Cloud Construction
+sidebar: 
+  order: 2
+---
+
+import { Steps, Aside, Card, CardGrid } from '@astrojs/starlight/components';
+
+Construction and Soumettre iOS apps to TestFlight and the Application Store using Capgo's dedicated Mac infrastructure.
+
+## Before You Construction
+
+<CardGrid>
+  <Card title="⚠️ Setup iOS Credentials First" icon="warning">
+    **Required:** You must save your iOS credentials before building.
+
+    [Configuration iOS Credentials →](/docs/CLI/cloud-Construction/credentials/#saving-iOS-credentials)
+  </Card>
+</CardGrid>
+
+## How iOS Builds Work
+
+iOS builds run on dedicated Mac machines (Scaleway Mac minis M4) provisioned on-demand:
+
+- **Hardware**: Apple Silicon Mac minis with macOS 15
+- **Construction Tool**: Xcode with Fastlane (custom Capgo Configuration)
+- **Isolation**: Each Construction runs as a separate macOS Utilisateur Compte
+- **Lifetime**: Machines have 24-hour leases and are automatically cleaned up
+- **Sécurité**: All files and Utilisateur accounts are deleted after the machine is dismissed
+
+## Prerequisites
+
+Before Construction for iOS, you need:
+
+### 1. Développement Environment
+
+- Mac computer with Xcode installed (for initial certificate Configuration)
+- Valid Apple Developer Compte ($99/year)
+- Your app building successfully locally with `npx cap open ios`
+
+### 2. Code Signing Certificates
+
+You'll need one of these certificate types depending on your Construction:
+
+| Construction Type | Certificate Required | Provisioning Profil |
+|------------|---------------------|---------------------|
+| **Développement** | Apple Développement | Développement Profil |
+| **Ad Hoc** | Apple Distribution | Ad Hoc Profil |
+| **Application Store** | Apple Distribution | Application Store Profil |
+
+#### How to Get iOS Certificates and Provisioning Profiles
+
+<Aside type="tip">
+For detailed step-by-step guides with screenshots, visit:
+- [iOS Certificates Guide](https://capawesome.io/cloud/Natif-builds/certificates/iOS/)
+- [Blog: Automatic iOS Builds with GitHub Actions](https://capgo.Application/blog/automatic-capacitor-iOS-Construction-github-action/)
+</Aside>
+
+**Quick Overview:**
+
+<Steps>
+
+1. **Créer a Certificate Signing Request (CSR)**
+   - Open Keychain Access on your Mac
+   - Go to Keychain Access → Certificate Assistant → Request a Certificate from a Certificate Authority
+   - Enter your email and name, select "Saved to disk"
+   - Save the `.certSigningRequest` file
+
+2. **Generate Certificate in Apple Developer Portal**
+   - Go to [Apple Developer Certificates](https://developer.apple.com/Compte/resources/certificates)
+   - Click "+" to Créer a Nouveau certificate
+   - Choose certificate type (iOS Distribution for Application Store builds)
+   - Télécharger your CSR file
+   - Download the certificate (`.cer` file)
+
+3. **Exporter Certificate as .p12**
+   - Double-click the downloaded `.cer` file to add it to Keychain
+   - In Keychain Access, find your certificate under "My Certificates"
+   - Right-click → Exporter "Apple Distribution..."
+   - Save as `.p12` format and set a password (save this password!)
+
+4. **Créer Provisioning Profil**
+   - Go to [Apple Developer Profiles](https://developer.apple.com/Compte/resources/profiles)
+   - Click "+" to Créer a Nouveau Profil
+   - Choose Profil type (Application Store for Production builds)
+   - Select your Application ID
+   - Select the certificate you just created
+   - Download the `.mobileprovision` file
+
+</Steps>
+
+### 3. Application Store Connect Clé API (Recommended)
+
+For automatic TestFlight submission, Créer an Clé API:
+
+<Steps>
+
+1. Go to [Application Store Connect](https://appstoreconnect.apple.com/) → Utilisateurs and Access → Keys
+2. Click the "+" button to Créer a Nouveau key
+3. Give it a name (e.g., "Capgo CI") and select "Developer" role
+4. Download the `.p8` file (you can only download it once!)
+5. Remarque the **Key ID** and **Issuer ID**
+
+</Steps>
+
+<Aside type="note">
+You can also find your **Team ID** in your Apple Developer Compte under Membership details.
+</Aside>
+
+## Construction Configuration
+
+### Required Environment Variables
+
+Set these credentials before Construction:
+
+```bash
+# iOS Signing (Required)
+BUILD_CERTIFICATE_BASE64="<base64-encoded-p12-certificate>"
+BUILD_PROVISION_PROFILE_BASE64="<base64-encoded-mobileprovision>"
+P12_PASSWORD="<certificate-password>"
+
+# App Store Connect API (for submission)
+APPLE_KEY_ID="ABC1234567"
+APPLE_ISSUER_ID="00000000-0000-0000-0000-000000000000"
+APPLE_KEY_CONTENT="<base64-encoded-p8-key>"
+
+# Additional Config
+APP_STORE_CONNECT_TEAM_ID="1234567890"
+APPLE_PROFILE_NAME="App Store com.example.app"
+```
+
+### Generating Base64 Credentials
+
+<Aside type="tip">
+Use these Commandes to encode your certificates for Capgo:
+</Aside>
+
+**Certificate (.p12):**
+```bash
+base64 -i YourCertificate.p12 | pbcopy
+```
+
+**Provisioning Profile (.mobileprovision):**
+```bash
+base64 -i YourProfile.mobileprovision | pbcopy
+```
+
+**App Store Connect Key (.p8):**
+```bash
+base64 -i AuthKey_ABC1234567.p8 | pbcopy
+```
+
+The base64 string is now in your clipboard - paste it into your environment variable or CI/CD secrets.
+
+## Construction for iOS
+
+### Débogage Construction (Développement)
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode debug
+```
+
+This creates a Développement Construction that can be installed on registered Appareils.
+
+### Libération Construction (Application Store)
+
+```bash
+npx @capgo/cli@latest build com.example.app \
+  --platform ios \
+  --build-mode release
+```
+
+This creates an Application Store Construction and automatically submits to TestFlight if you have the Application Store Connect API credentials configured.
+
+## CI/CD Integration
+
+### GitHub Actions Exemple
+
+```yaml
+name: Build iOS App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor
+        run: npx cap sync ios
+
+      - name: Build iOS app
+        env:
+          CAPGO_TOKEN: ${{ secrets.CAPGO_TOKEN }}
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
+          BUILD_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          APPLE_KEY_ID: ${{ secrets.APPLE_KEY_ID }}
+          APPLE_ISSUER_ID: ${{ secrets.APPLE_ISSUER_ID }}
+          APPLE_KEY_CONTENT: ${{ secrets.APPLE_KEY_CONTENT }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          npx @capgo/cli@latest build ${{ secrets.APP_ID }} \
+            --platform ios \
+            --build-mode release
+```
+
+## Construction Process Details
+
+### What Happens During an iOS Construction
+
+<Steps>
+
+1. **Machine Provisioning** (1-2 minutes)
+   - Scaleway Mac mini is provisioned or assigned
+   - macOS 15 with Xcode pre-installed
+   - Bootstrap scripts run (if first use)
+
+2. **Utilisateur Isolation** (~10 seconds)
+   - Unique macOS user created: `job-<jobId>`
+   - Dedicated home directory: `/Users/job-<jobId>`
+   - Isolated workspace created
+
+3. **Project Configuration** (~30 seconds)
+   - Project zip downloaded from R2
+   - Extracted to workspace
+   - Credentials injected as environment variables
+
+4. **Fastlane Construction** (3-8 minutes)
+   - Keychain created with signing certificate
+   - Provisioning Profil installed
+   - Xcode Construction Commande executed
+   - IPA file generated
+
+5. **Application Store Submission** (1-2 minutes, if configured)
+   - IPA uploaded to Application Store Connect
+   - Submitted to TestFlight
+   - Processing begins on Apple's side
+
+6. **Cleanup** (immediate)
+   - Utilisateur Compte killed and deleted
+   - Workspace files removed
+   - Temporary files cleared
+
+7. **Machine Dismissal** (after 24 hours)
+   - Mac machine is destroyed
+   - All data permanently deleted
+
+</Steps>
+
+### Construction Stack
+
+Our iOS Construction environment includes:
+
+- **macOS**: 15 (latest Stable)
+- **Xcode**: Latest Stable Version
+- **Fastlane**: Latest Stable Version
+- **CocoaPods**: Latest Stable Version
+- **Node.js**: 18.x (LTS)
+- **Ruby**: System ruby with bundler
+
+## Construction Times
+
+Typical iOS Construction times:
+
+| Construction Type | First Construction | Subsequent Builds* |
+|------------|-------------|-------------------|
+| Débogage | 5-7 minutes | 4-6 minutes |
+| Libération | 7-10 minutes | 5-8 minutes |
+
+*Subsequent builds may be faster if the same machine is reused within the 24-hour window.
+
+<Aside type="note">
+iOS builds cost **2× the base rate** due to dedicated Mac hardware requirements.
+</Aside>
+
+## Dépannage
+
+### Problèmes courants
+
+**"Code signing failed"**
+- Verify your certificate is for the correct distribution type
+- Ensure provisioning Profil matches your Application ID
+- Vérifier that P12_PASSWORD is correct
+
+**"Provisioning profile doesn't include signing certificate"**
+- Regenerate your provisioning Profil including the certificate
+- Re-Télécharger and re-encode the Profil
+
+**"App Store Connect authentication failed"**
+- Verify APPLE_KEY_ID, APPLE_ISSUER_ID, and APPLE_KEY_CONTENT
+- Ensure the Clé API has not been revoked
+- Vérifier that the key has "Developer" role or higher
+
+**"Build timeout after 10 minutes"**
+- Vérifier if your Application has large Natif dependencies
+- Consider optimizing your Podfile
+- Contact Support if builds consistently timeout
+
+### Débogage Journaux
+
+All Construction Journaux are streamed in real-time. Watch for these key phases:
+
+```
+✔ Machine assigned: m-abc123
+→ Creating user: job-abc123
+→ Installing CocoaPods dependencies...
+→ Building iOS app...
+→ Code signing with certificate...
+→ Uploading to App Store Connect...
+✔ Build succeeded
+```
+
+If a Construction fails, the Erreur will be clearly shown in the Journaux with the specific Fastlane/Xcode Erreur message.
+
+## Best Practices
+
+### 1. Test Locally First
+
+Always ensure your iOS Construction works locally before using cloud Construction:
+
+```bash
+npx cap open ios
+# Build in Xcode
+```
+
+### 2. Use Environment Variables
+
+Never commit certificates or keys to your repository. Always use:
+- CI/CD secrets (GitHub, GitLab)
+- Environment variables
+- Secure secret management
+
+### 3. Cache Dependencies
+
+For faster builds, ensure your `package.json` and `Podfile.lock` are committed to version control.
+
+### 4. Monitor Construction Time
+
+Keep an eye on Construction duration to optimize costs:
+
+```bash
+# The CLI shows build time at the end
+Build succeeded in 6m 42s (13.4 billing minutes at 2× rate)
+```
+
+## Suivant Steps
+
+- [Android Builds](/docs/CLI/cloud-Construction/Android/) - Configure Android builds
+- [Dépannage](/docs/CLI/cloud-Construction/Dépannage/) - Common Construction issues
+- [CLI Référence](/docs/CLI/Référence/Construction/) - Full Commande Documentation
+
+## Need Aide?
+
+- [Dépannage Guide](/docs/CLI/cloud-Construction/Dépannage/)
+- [Discord Communauté](https://discord.com/invite/VnYRvBfgA6)
+- Email: Support@capgo.Application

@@ -1,0 +1,92 @@
+---
+title: Configure Android Sandbox Test
+description: Learn how to set up sandbox Test for in-Application purchases on Android using Google Play Console.
+sidebar: 
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Test in-Application purchases requires proper Configuration in Google Play Console. This Guide will walk you through setting up sandbox Test for your Android Application.
+
+## Prerequisites
+
+You need an Actif Google Play Console Compte with a current subscription (renewed annually).
+
+## Configuration Process
+
+<Steps>
+
+1. **Ajouter Test Compte**
+
+   Navigate to your Google Play Console, select your Application, and go to **Configuration > Licence Test**.
+
+   Ajouter the primary Google Compte associated with the Android Appareil you're using for Test.
+
+   ![Ajouter Test Compte](/Natif-purchases/Android/sandbox-Test/Ajouter-Test-Compte.webp)
+
+2. **Créer Test Track**
+
+   Go to **Test > Closed Test** or **Test > Internal Test** and Créer a Nouveau track.
+
+   You must Télécharger at least one signed Version of your Application to this track.
+
+   ![Créer Test track](/Natif-purchases/Android/sandbox-Test/Créer-Test-track.webp)
+
+3. **Créer Tester List**
+
+   After setting up the Test track, Créer an email list and Ajouter the Test Appareil's Compte email address.
+
+   ![Créer tester list](/Natif-purchases/Android/sandbox-Test/Créer-tester-list.webp)
+
+4. **Join Test Program**
+
+   Open the opt-in URL from your Test Appareil and click the **"Become a tester"** button to enroll.
+
+   ![Join Test](/Natif-purchases/Android/sandbox-Test/join-Test-program.webp)
+
+5. **Télécharger Signed APK**
+
+   Generate a signed APK or use Android Application Bundle to Télécharger your Application to the Test track.
+
+   Rolling out isn't required - just Télécharger and await approval.
+
+   ![Télécharger APK](/Natif-purchases/Android/sandbox-Test/Télécharger-signed-apk.webp)
+
+6. **Construction and Test**
+
+   Run your Application on the Test Appareil. When attempting a purchase, you should see a message:
+
+   > "This is a Test order; you will not be charged."
+
+   ![Test purchase](/Natif-purchases/Android/sandbox-Test/Test-purchase-confirmation.webp)
+
+</Steps>
+
+## Important Notes
+
+- Test accounts will not be charged for purchases
+- Test purchases use the same flow as Production purchases
+- You can Test all subscription Fonctionnalités including trials and introductory offers
+- Test subscriptions have accelerated renewal periods for faster Test
+
+## Dépannage
+
+**Products not showing in test mode:**
+- Ensure your Application is uploaded to a Test track
+- Verify the Test Compte is added to Licence Test
+- Vérifier that products are Actif in Google Play Console
+
+**"Item not available" error:**
+- Wait 2-3 hours after creating products for them to become Disponible
+- Ensure your Application's package name matches the one in Play Console
+- Verify you're signed in with a Test Compte
+
+**Test purchases showing as real charges:**
+- Double-Vérifier the Compte is added to Licence Test
+- Ensure you're using the Construction from the Test track
+- Verify the Test banner appears during purchase
+
+## Additional Resources
+
+For more details, refer to the [official Google Play Documentation](https://developer.Android.com/google/play/billing/Test) on Test in-Application purchases.

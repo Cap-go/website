@@ -1,0 +1,158 @@
+---
+title: "Journaux"
+description: "Understand and utilize the Application Journaux of Capgo to diagnostics and track the action of your Appareils with the Mises à jour."
+sidebar: 
+  order: 8
+---
+
+## Understanding Application Journaux
+
+The Journaux page provides a detailed history of Mise à jour events and diagnostic Information for your Application. This is crucial for monitoring the Mise à jour process, Dépannage issues, and understanding how your Appareils interact with Capgo. You can access it by [clicking on your Application](/docs/webapp/main-page) and then [clicking on the "Journaux" tab (previously named "Mises à jour" in some older screenshots or Documentation)](/docs/webapp/main-Application-page).
+
+From there you should see a page similar to this, displaying a list of Journal entries:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/logs.webp" alt="show logs" /><figcaption>Logs Page Overview</figcaption></figure>
+
+Each row shows:
+- **Timestamp** (UTC)
+- **Appareil ID**
+- **Action code** (what happened)
+- **Version name** (bundle or `builtin`)
+
+Click a row to jump to the Appareil detail page for the full history.
+
+### Sample Journal snippet (fake data)
+
+| Time (UTC) | Appareil ID | Action | Version | What it tells you |
+|------------|-----------|--------|---------|-------------------|
+| 2025-01-14 10:00:01 | `A1B2C3` | `get` | 2.4.1 | Device asked Capgo if an update is available |
+| 2025-01-14 10:00:03 | `A1B2C3` | `download_manifest_start` | 2.4.1 | Manifest fetch kicked off; SDK is about to download files |
+| 2025-01-14 10:00:07 | `A1B2C3` | `download_40` | 2.4.1 | Bundle download is 40% complete |
+| 2025-01-14 10:00:12 | `A1B2C3` | `download_zip_complete` | 2.4.1 | Zip finished downloading |
+| 2025-01-14 10:00:13 | `A1B2C3` | `set` | 2.4.1 | Bundle installed and marked as next to run |
+| 2025-01-14 10:05:00 | `B9C8D7` | `disableAutoUpdateToMajor` | 1.9.0 | Channel policy blocked a jump to 2.x |
+| 2025-01-14 10:05:05 | `B9C8D7` | `rateLimited` | builtin | Device hit the request limit; SDK backs off until restart |
+
+## Exemple Journal Scenarios
+
+To Aide you understand what the Journaux tell you, here are Exemple sequences showing real Appareil Mise à jour journeys:
+
+### Successful Mise à jour Flow
+
+This is what a healthy Mise à jour looks like in your Journaux:
+
+| Time | Appareil ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 10:00:01 | `a1b2c3d4` | `get` | 1.2.0 | Device checked for updates and received version 1.2.0 info |
+| 10:00:02 | `a1b2c3d4` | `download_10` | 1.2.0 | Download started, 10% complete |
+| 10:00:03 | `a1b2c3d4` | `download_50` | 1.2.0 | Download at 50% |
+| 10:00:05 | `a1b2c3d4` | `download_complete` | 1.2.0 | Download finished successfully |
+| 10:00:06 | `a1b2c3d4` | `set` | 1.2.0 | Bundle installed and activated |
+
+### Appareil Already Up-to-Date
+
+When a Appareil checks but already has the latest Version:
+
+| Time | Appareil ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 14:30:00 | `e5f6g7h8` | `noNew` | 1.2.0 | Device is already on the latest version, no update needed |
+
+### Échoué Mise à jour with Restauration
+
+When an Mise à jour fails and the Appareil rolls Retour:
+
+| Time | Appareil ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 11:15:00 | `i9j0k1l2` | `get` | 1.3.0 | Device received update info |
+| 11:15:02 | `i9j0k1l2` | `download_complete` | 1.3.0 | Download completed |
+| 11:15:03 | `i9j0k1l2` | `set` | 1.3.0 | Bundle was set |
+| 11:15:10 | `i9j0k1l2` | `update_fail` | 1.3.0 | App crashed or `notifyAppReady()` wasn't called - rollback triggered |
+| 11:15:11 | `i9j0k1l2` | `reset` | builtin | Device reverted to the built-in version |
+
+**Action needed**: Check that your app calls `notifyAppReady()` after successful initialization. See [the plugin documentation](/docs/plugin/api/#notifyappready) for details.
+
+### Télécharger Failure
+
+When network issues prevent the Télécharger:
+
+| Time | Appareil ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 09:45:00 | `m3n4o5p6` | `get` | 1.2.0 | Device received update info |
+| 09:45:01 | `m3n4o5p6` | `download_30` | 1.2.0 | Download started but... |
+| 09:45:15 | `m3n4o5p6` | `download_fail` | 1.2.0 | Download failed (network timeout, connection lost, etc.) |
+
+**Action needed**: The device will retry automatically on next app launch. No action required unless this happens frequently.
+
+### Plan Limit Reached
+
+When your Compte reaches its Appareil limit:
+
+| Time | Appareil ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 16:00:00 | `q7r8s9t0` | `needPlanUpgrade` | - | This device won't receive updates until you upgrade or the billing cycle resets |
+
+**Action needed**: [Upgrade your plan](/docs/webapp/settings/) or wait for the next billing cycle.
+
+### Canal Configuration Blocking Mises à jour
+
+When Canal Paramètres prevent an Mise à jour:
+
+| Time | Appareil ID | Action | Version | What it means |
+|------|-----------|--------|---------|---------------|
+| 12:00:00 | `u1v2w3x4` | `disableAutoUpdateToMajor` | 2.0.0 | Device on v1.x can't auto-update to v2.x (major version jump blocked) |
+| 12:05:00 | `y5z6a7b8` | `disableEmulator` | 1.2.0 | Emulator detected, and channel blocks emulators |
+| 12:10:00 | `c9d0e1f2` | `disableDevBuild` | 1.2.0 | Dev build detected, and channel blocks dev builds |
+
+**Action needed**: These are intentional protections. If you want to allow these updates, modify your [channel settings](/docs/webapp/channels/).
+
+## Journal codes (Capgo backend enum)
+
+These codes come from the `stats_action` enum used by the dashboard API (`capgo/src/types/supabase.types.ts`). If you see a new code in the UI, it was emitted by the SDK or backend and validated against this list.
+
+**Happy path & lifecycle**
+
+| Code(s) | Meaning |
+|---------|---------|
+| `get` | Device asked Capgo for the current channel manifest |
+| `download_manifest_start`, `download_manifest_complete` | Manifest download began / finished (for delta or multi-file bundles) |
+| `download_zip_start`, `download_zip_complete` | Zip archive download began / finished |
+| `download_10` … `download_90` | Download progress milestones |
+| `download_complete` | Entire bundle downloaded |
+| `set` | Bundle staged for next launch |
+| `reset` | Device reverted to the builtin bundle |
+| `delete` | Bundle removed from local storage |
+| `uninstall` | App uninstall detected |
+| `app_moved_to_foreground`, `app_moved_to_background` | App lifecycle events recorded by SDK |
+| `ping` | Health/heartbeat check from device |
+| `setChannel`, `getChannel` | Channel overridden or fetched via SDK call |
+
+**Configuration or policy blocks**
+
+| Code(s) | Why the Mise à jour was blocked |
+|---------|---------------------------|
+| `disableAutoUpdate`, `disableAutoUpdateToMajor`, `disableAutoUpdateToMinor`, `disableAutoUpdateToPatch`, `disableAutoUpdateMetadata`, `disableAutoUpdateUnderNative` | Channel strategy forbids this semver jump |
+| `disablePlatformIos`, `disablePlatformAndroid` | Platform is disabled on the channel |
+| `disableDevBuild`, `disableEmulator` | Dev builds or emulators not allowed |
+| `cannotUpdateViaPrivateChannel`, `NoChannelOrOverride`, `channelMisconfigured` | Channel selection or override failed |
+| `missingBundle`, `cannotGetBundle` | Manifest refers to a bundle Capgo cannot serve |
+| `needPlanUpgrade` | Org hit its plan/device limit |
+| `rateLimited` | Too many requests; SDK throttles until restart |
+| `blocked_by_server_url`, `backend_refusal`, `InvalidIp` | Server-side rule blocked the request |
+
+**Download / integrity / install failures**
+
+| Code(s) | Meaning |
+|---------|---------|
+| `download_fail` | Bundle download failed (network or response error) |
+| `download_manifest_file_fail`, `download_manifest_checksum_fail`, `download_manifest_brotli_fail` | Manifest file couldn’t be retrieved or validated |
+| `checksum_fail`, `checksum_required` | Integrity check failed or checksum missing |
+| `unzip_fail`, `directory_path_fail`, `canonical_path_fail`, `windows_path_fail` | File system or unzip validation failed |
+| `decrypt_fail` | Decryption failed (encrypted bundle) |
+| `update_fail` | Bundle installed but app never called `notifyAppReady()`; rollback triggered |
+| `download_zip_*` with no subsequent `set` | Download finished but install phase never completed |
+
+➡️ Need deeper per-code guidance? See **[Full Journal Code Référence and Débogage Guide](/docs/plugins/updater/Débogage/#understanding-cloud-Journaux)**.
+
+## Getting More Details À propos a Journal
+
+If you click on a specific Journal entry, it will typically take you to the [Appareil's page](/docs/webapp/Appareils/). This allows you to see the full history for that particular Appareil, which can be very helpful for diagnosing Appareil-specific issues or understanding its Mise à jour journey.

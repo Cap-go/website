@@ -1,0 +1,161 @@
+---
+title: Commencer
+description: Learn how to Installer and configure the Capacitor Shake plugin to detect shake gestures and Créer interactive experiences in your Application.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the package**
+   <PackageManagers pkg="@capgo/capacitor-shake" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser with Natif projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure the plugin**
+
+   **Basic Usage Example:**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+
+   // Start listening for shake gestures
+   await Shake.start();
+
+   // Listen for shake events
+   Shake.addListener('shake', () => {
+     console.log('Device was shaken!');
+     // Perform your action here
+   });
+   ```
+
+   **Sensitivity Configuration:**
+   ```typescript
+   // Configure shake sensitivity
+   await Shake.start({
+     threshold: 3.5 // Adjust sensitivity (default: 3.5)
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       No additional Configuration required for iOS.
+     </TabItem>
+     <TabItem label="Android">
+       No additional Configuration required for Android.
+     </TabItem>
+   </Tabs>
+
+4. **Arrêter listening for shakes**
+   ```typescript
+   // Stop shake detection when not needed
+   await Shake.stop();
+   
+   // Remove specific listener
+   const handle = await Shake.addListener('shake', () => {
+     console.log('Shaken!');
+   });
+   handle.remove();
+   ```
+
+5. **Exemple implementation**
+   ```typescript
+   import { Shake } from '@capgo/capacitor-shake';
+   import { App } from '@capacitor/app';
+
+   export class ShakeService {
+     private shakeListener: any;
+
+     async initialize() {
+       // Start shake detection
+       await Shake.start({ threshold: 4.0 });
+
+       // Add shake listener
+       this.shakeListener = await Shake.addListener('shake', () => {
+         this.handleShake();
+       });
+
+       // Clean up on app pause
+       App.addListener('pause', () => {
+         Shake.stop();
+       });
+
+       // Resume on app resume
+       App.addListener('resume', () => {
+         Shake.start({ threshold: 4.0 });
+       });
+     }
+
+     private handleShake() {
+       console.log('Shake detected!');
+       // Show debug menu, refresh data, or trigger any action
+     }
+
+     async cleanup() {
+       if (this.shakeListener) {
+         this.shakeListener.remove();
+       }
+       await Shake.stop();
+     }
+   }
+   ```
+</Steps>
+
+## API Référence
+
+### Methods
+
+#### `start(options?: ShakeOptions)`
+Démarrer listening for shake gestures.
+
+**Parameters:**
+- `options` (optional): Configuration object
+  - `threshold`: number - Sensitivity threshold (default: 3.5)
+
+#### `stop()`
+Arrêter listening for shake gestures.
+
+#### `addListener('shake', callback: () => void)`
+Ajouter a listener for shake events.
+
+**Returns:** Promise with a handle to remove the listener
+
+### Interfaces
+
+```typescript
+interface ShakeOptions {
+  threshold?: number; // Shake sensitivity threshold
+}
+```
+
+## Platform Notes
+
+### iOS
+- Uses the Appareil's accelerometer to detect shake gestures
+- Works in both foreground and background (if Application has background permissions)
+
+### Android
+- Uses the SensorManager to detect shake events
+- Requires no special permissions
+- Works when Application is in foreground
+
+## Common Use Cases
+
+1. **Débogage Menu**: Show developer Options when Appareil is shaken
+2. **Retour**: Trigger Retour form or bug Signaler
+3. **Actualiser**: Actualiser Application data or clear cache
+4. **Games**: Use shake as a game control mechanism
+5. **Undo**: Implement shake-to-undo functionality
+
+## Dépannage
+
+**Shake not detected:**
+- Ensure the plugin is started with `Shake.start()`
+- Try adjusting the threshold value (lower = more sensitive)
+- Vérifier that listeners are properly registered
+
+**Too sensitive/not sensitive enough:**
+- Adjust the `threshold` parameter in `start()` options
+- Values typically range from 2.0 (very sensitive) to 5.0 (less sensitive)

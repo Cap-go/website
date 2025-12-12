@@ -1,0 +1,55 @@
+---
+title: "Background Geolocation"
+description: A Capacitor plugin that lets you receive accurate geolocation Mises à jour even while the Application is backgrounded
+tableOfContents: false
+next: false
+prev: false
+sidebar: 
+  order: 1
+  label: "Introduction"
+hero: 
+  tagline: Receive accurate geolocation Mises à jour even while the Application is backgrounded.
+  image: 
+    file: ~public/icons/plugins/background-geolocation.svg
+  actions: 
+    - text: Get started
+      link: /docs/plugins/background-geolocation/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Github
+      link: https://github.com/Cap-go/capacitor-background-geolocation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Accurate Tracking" icon="rocket">
+    Prioritizes accuracy for use cases like hiking and navigation 🎯
+  </Card>
+  <Card title="Background Updates" icon="puzzle">
+    Continues to receive location Mises à jour even when the Application is in the background 🏃
+  </Card>
+  <Card title="Battery Efficient" icon="setting">
+    Optimized to balance accuracy and battery consumption 🔋
+  </Card>
+  <Card title="Getting Started" icon="open-book">
+    Vérifier the [Commencer Guide](/docs/plugins/background-geolocation/getting-started/) to Installer and configure the plugin.
+  </Card>
+</CardGrid>
+
+## Plugin comparison
+
+A short comparison between the three main background-geolocation plugins commonly used in Capacitor apps.
+
+| Plugin | Accuracy | Background | HTTP Télécharger | Pricing |
+|--------|----------|------------|-------------|---------|
+| `@capacitor-community/background-geolocation` (Community) | Not accurate | Yes | No | Free |
+| `@capgo/background-geolocation` (this plugin) | Accurate | Yes | No | Free |
+| Transistorsoft (original) | Accurate | Yes | Yes — built-in HTTP uploader to your API | Paid |
+
+**Notes:**
+- The Communauté plugin is lightweight and continues to work in the background, but it is known to be less accurate than the Options below.
+- This Capgo plugin is optimized to provide accurate location fixes and reliable background operation without requiring a paid Licence.
+- Transistorsoft offers a Terminé commercial Solution that also includes built-in HTTP Télécharger capabilities for sending location data to your backend.

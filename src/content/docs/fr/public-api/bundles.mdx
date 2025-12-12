@@ -1,0 +1,638 @@
+---
+title: "Bundles"
+description: "Detailed Guide for managing Capgo Bundles, covering listing, deleting, versioning, and storage optimization for Application Mise à jour packages."
+sidebar: 
+  order: 8
+---
+
+Bundles are the core Mise à jour packages in Capgo. Each Bundle contains the web assets (HTML, CSS, JS) that make up your Application's content. The Bundles API allows you to manage these Mise à jour packages, including listing and deleting them.
+
+## Understanding Bundles
+
+A Bundle represents a specific Version of your Application's web content and includes:
+- **Version**: Semantic Version number of the Bundle
+- **Checksum**: Unique hash to verify Bundle integrity
+- **Storage Info**: Details À propos where and how the Bundle is stored
+- **Natif Requirements**: Minimum Natif Application Version requirements
+- **Metadata**: Creation time, ownership, and other tracking Information
+
+## Manual Bundle Creation (Without CLI)
+
+Here's how to Créer and Télécharger Bundles manually without using the Capgo CLI:
+
+### Step 1: Construction Your Application
+
+First, Construction your Application's web assets:
+
+```bash
+npm run build
+```
+
+### Step 2: Créer Bundle Zip Using Same Packages as Capgo CLI
+
+**Important**: Use the exact same JavaScript packages that Capgo CLI uses internally to ensure compatibility.
+
+#### Installer Required Packages
+
+```bash
+npm install adm-zip @tomasklaen/checksum
+```
+
+#### Créer Zip Bundle with JavaScript (Same as Capgo CLI)
+
+```javascript
+const fs = require('node:fs');
+const path = require('node:path');
+const os = require('node:os');
+const AdmZip = require('adm-zip');
+const { checksum: getChecksum } = require('@tomasklaen/checksum');
+
+// Exact same implementation as Capgo CLI
+function zipFileUnix(filePath) {
+  const zip = new AdmZip();
+  zip.addLocalFolder(filePath);
+  return zip.toBuffer();
+}
+
+async function zipFileWindows(filePath) {
+  console.log('Zipping file windows mode');
+  const zip = new AdmZip();
+
+  const addToZip = (folderPath, zipPath) => {
+    const items = fs.readdirSync(folderPath);
+
+    for (const item of items) {
+      const itemPath = path.join(folderPath, item);
+      const stats = fs.statSync(itemPath);
+
+      if (stats.isFile()) {
+        const fileContent = fs.readFileSync(itemPath);
+        zip.addFile(path.join(zipPath, item).split(path.sep).join('/'), fileContent);
+      } else if (stats.isDirectory()) {
+        addToZip(itemPath, path.join(zipPath, item));
+      }
+    }
+  };
+
+  addToZip(filePath, '');
+  return zip.toBuffer();
+}
+
+// Main zipFile function (exact same logic as CLI)
+async function zipFile(filePath) {
+  if (os.platform() === 'win32') {
+    return zipFileWindows(filePath);
+  } else {
+    return zipFileUnix(filePath);
+  }
+}
+
+async function createBundle(inputPath, outputPath, version) {
+  // Create zip using exact same method as Capgo CLI
+  const zipped = await zipFile(inputPath);
+  
+  // Write to file
+  fs.writeFileSync(outputPath, zipped);
+  
+  // Calculate checksum using exact same package as CLI
+  const checksum = await getChecksum(zipped, 'sha256');
+  
+  return {
+    filename: path.basename(outputPath),
+    version: version,
+    size: zipped.length,
+    checksum: checksum
+  };
+}
+
+// Usage
+async function main() {
+  try {
+    const result = await createBundle('./dist', './my-app-1.2.3.zip', '1.2.3');
+    console.log('Bundle info:', JSON.stringify(result, null, 2));
+  } catch (error) {
+    console.error('Error creating bundle:', error);
+  }
+}
+
+main();
+```
+
+### Step 3: Calculate SHA256 Checksum Using Same Package as CLI
+
+```javascript
+const fs = require('node:fs');
+const { checksum: getChecksum } = require('@tomasklaen/checksum');
+
+async function calculateChecksum(filePath) {
+  const fileBuffer = fs.readFileSync(filePath);
+  // Use exact same package and method as Capgo CLI
+  const checksum = await getChecksum(fileBuffer, 'sha256');
+  return checksum;
+}
+
+// Usage
+async function main() {
+  const checksum = await calculateChecksum('./my-app-1.2.3.zip');
+  console.log('Checksum:', checksum);
+}
+
+main();
+```
+
+### Step 4: Télécharger Bundle to Your Storage
+
+Télécharger your zip file to any web-accessible storage:
+
+```bash
+# Example: Upload to your server via scp
+scp my-app-1.2.3.zip user@your-server.com:/var/www/bundles/
+
+# Example: Upload to S3 using AWS CLI
+aws s3 cp my-app-1.2.3.zip s3://your-bucket/bundles/
+
+# Example: Upload via curl to a custom endpoint
+curl -X POST https://your-storage-api.com/upload \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "file=@my-app-1.2.3.zip"
+```
+
+**Important**: Your bundle must be **publicly accessible** via HTTPS URL (no authentication required). Capgo's servers need to download the bundle from this URL.
+
+Exemples of valid public URLs:
+- `https://your-storage.com/bundles/my-app-1.2.3.zip`
+- `https://github.com/username/repo/releases/download/v1.2.3/bundle.zip`
+- `https://cdn.jsdelivr.net/gh/username/repo@v1.2.3/dist.zip`
+
+### Step 5: Register Bundle with Capgo API
+
+Register the external Bundle with Capgo using direct API calls:
+
+```javascript
+async function registerWithCapgo(appId, version, bundleUrl, checksum, apiKey) {
+  const fetch = require('node-fetch');
+  
+  // Create bundle version
+  const response = await fetch('https://api.capgo.app/bundle/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': apiKey
+    },
+    body: JSON.stringify({
+      app_id: appId,
+      version: version,
+      external_url: bundleUrl,
+      checksum: checksum
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to create bundle: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  console.log('Bundle created:', data);
+  
+  return data;
+}
+```
+
+#### API Paramètres
+
+| Paramètre | Description | Required |
+|-----------|-------------|----------|
+| `app_id` | Your app identifier | Yes |
+| `version` | Semantic version (e.g., "1.2.3") | Yes |
+| `external_url` | **Publicly accessible** HTTPS URL where bundle can be downloaded (no auth required) | Yes |
+| `checksum` | SHA256 checksum of the zip file | Yes |
+
+## Bundle Structure Requirements
+
+Your Bundle zip must follow these requirements:
+
+1. **Root Index File**: Must have `index.html` at the root level
+2. **Capacitor Integration**: Must call `notifyAppReady()` in your app code
+3. **Asset Paths**: Use relative paths for all assets
+
+### Valid Bundle Structure
+
+```
+bundle.zip
+├── index.html
+├── assets/
+│   ├── app.js
+│   └── styles.css
+└── images/
+```
+
+## Terminé Manual Workflow Exemple
+
+Simple Node.js script to zip, checksum, and Télécharger to Capgo:
+
+```javascript
+const fs = require('node:fs');
+const os = require('node:os');
+const AdmZip = require('adm-zip');
+const { checksum: getChecksum } = require('@tomasklaen/checksum');
+const fetch = require('node-fetch');
+
+async function deployToCapgo() {
+  const APP_ID = 'com.example.app';
+  const VERSION = '1.2.3';
+  const BUNDLE_URL = 'https://your-storage.com/bundles/app-1.2.3.zip';
+  const API_KEY = process.env.CAPGO_API_KEY;
+
+  // 1. Create zip (same as Capgo CLI)
+  const zip = new AdmZip();
+  zip.addLocalFolder('./dist');
+  const zipped = zip.toBuffer();
+
+  // 2. Calculate checksum (same as Capgo CLI)
+  const checksum = await getChecksum(zipped, 'sha256');
+  console.log('Checksum:', checksum);
+
+  // 3. Upload to your storage (replace with your upload logic)
+  // fs.writeFileSync('./bundle.zip', zipped);
+  // ... upload bundle.zip to your storage ...
+
+  // 4. Register with Capgo API
+  const response = await fetch('https://api.capgo.app/bundle/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': API_KEY
+    },
+    body: JSON.stringify({
+      app_id: APP_ID,
+      version: VERSION,
+      external_url: BUNDLE_URL,
+      checksum: checksum
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed: ${response.statusText}`);
+  }
+
+  console.log('Bundle registered with Capgo!');
+}
+
+deployToCapgo().catch(console.error);
+```
+
+Installer dependencies:
+
+```bash
+npm install adm-zip @tomasklaen/checksum node-fetch
+```
+
+## Checksum Verification
+
+### JavaScript Checksum Calculation (Same as Capgo CLI)
+
+Use the exact same package and method that Capgo CLI uses internally:
+
+```javascript
+const fs = require('node:fs');
+const { checksum: getChecksum } = require('@tomasklaen/checksum');
+
+async function calculateChecksum(filePath) {
+  const fileBuffer = fs.readFileSync(filePath);
+  // Use exact same package and method as Capgo CLI
+  const checksum = await getChecksum(fileBuffer, 'sha256');
+  return checksum;
+}
+
+// Verify checksum matches
+async function verifyChecksum(filePath, expectedChecksum) {
+  const actualChecksum = await calculateChecksum(filePath);
+  const isValid = actualChecksum === expectedChecksum;
+  
+  console.log(`File: ${filePath}`);
+  console.log(`Expected: ${expectedChecksum}`);
+  console.log(`Actual:   ${actualChecksum}`);
+  console.log(`Valid:    ${isValid}`);
+  
+  return isValid;
+}
+
+// Usage
+async function main() {
+  const bundleChecksum = await calculateChecksum('./my-app-1.2.3.zip');
+  console.log('SHA256 Checksum:', bundleChecksum);
+}
+
+main();
+```
+
+### Checksum Importance
+
+- **Bundle Integrity**: Ensures the Bundle hasn't been corrupted during transfer
+- **API Verification**: Capgo verifies checksums before accepting Bundles
+- **Plugin Verification**: The mobile plugin verifies checksums before applying Mises à jour
+
+## Best Practices
+
+1. **Version Management**: Use semantic versioning consistently
+2. **Storage Optimization**: Retirer unused Bundles periodically
+3. **Version Compatibility**: Set appropriate minimum Natif Version requirements
+4. **Backup Strategy**: Maintain backups of critical Bundle versions
+
+## Endpoints
+
+### GET
+
+`https://api.capgo.app/bundle/`
+
+Retrieve Bundle Information. Retourne 50 Bundles per page.
+
+#### Query Paramètres
+- `app_id`: Required. The ID of your app
+- `page`: Optional. Page number for pagination
+
+#### Response Type
+
+```typescript
+interface Bundle {
+  app_id: string
+  bucket_id: string | null
+  checksum: string | null
+  created_at: string | null
+  deleted: boolean
+  external_url: string | null
+  id: number
+  minUpdateVersion: string | null
+  name: string
+  native_packages: Json[] | null
+  owner_org: string
+  r2_path: string | null
+  session_key: string | null
+  storage_provider: string
+  updated_at: string | null
+  user_id: string | null
+}
+```
+
+#### Exemple Request
+
+```bash
+# Get all bundles
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/bundle/?app_id=app_123"
+
+# Get next page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/bundle/?app_id=app_123&page=1"
+```
+
+#### Exemple Response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "app_id": "app_123",
+      "name": "1.0.0",
+      "checksum": "abc123...",
+      "minUpdateVersion": "1.0.0",
+      "storage_provider": "r2",
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "deleted": false,
+      "owner_org": "org_123",
+      "user_id": "user_123"
+    }
+  ]
+}
+```
+
+### Supprimer
+
+`https://api.capgo.app/bundle/`
+
+Supprimer one or all Bundles for an Application. Use with Attention as this action cannot be undone.
+
+#### Query Paramètres
+
+For deleting a specific Bundle:
+```typescript
+interface BundleDelete {
+  app_id: string
+  version: string
+}
+```
+
+For deleting all Bundles:
+```typescript
+interface BundleDeleteAll {
+  app_id: string
+}
+```
+
+#### Exemple Requests
+
+```bash
+# Delete specific bundle
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "version": "1.0.0"
+  }' \
+  https://api.capgo.app/bundle/
+
+# Delete all bundles
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123"
+  }' \
+  https://api.capgo.app/bundle/
+```
+
+#### Succès Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### POST
+
+`https://api.capgo.app/bundle/`
+
+Créer a Nouveau Bundle with external URL.
+
+#### Request Body
+
+```typescript
+interface CreateBundleBody {
+  app_id: string
+  version: string
+  external_url: string // Must be publicly accessible HTTPS URL
+  checksum: string
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "com.example.app",
+    "version": "1.2.3",
+    "external_url": "https://your-storage.com/bundles/app-1.2.3.zip",
+    "checksum": "a1b2c3d4e5f6789abcdef123456789abcdef123456789abcdef123456789abcd"
+  }' \
+  https://api.capgo.app/bundle/
+```
+
+#### Succès Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### POST (Metadata)
+
+`https://api.capgo.app/bundle/metadata`
+
+Mise à jour Bundle metadata such as link and comment Information.
+
+#### Request Body
+
+```typescript
+interface UpdateMetadataBody {
+  app_id: string
+  version_id: number
+  link?: string
+  comment?: string
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "version_id": 456,
+    "link": "https://github.com/myorg/myapp/releases/tag/v1.0.0",
+    "comment": "Fixed critical bug in authentication"
+  }' \
+  https://api.capgo.app/bundle/metadata
+```
+
+#### Succès Response
+
+```json
+{
+  "status": "success"
+}
+```
+
+### PUT
+
+`https://api.capgo.app/bundle/`
+
+Set a Bundle to a specific Canal. This links a Bundle Version to a Canal for distribution.
+
+#### Request Body
+
+```typescript
+interface SetChannelBody {
+  app_id: string
+  version_id: number
+  channel_id: number
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X PUT \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "version_id": 456,
+    "channel_id": 789
+  }' \
+  https://api.capgo.app/bundle/
+```
+
+#### Succès Response
+
+```json
+{
+  "status": "success",
+  "message": "Bundle 1.0.0 set to channel production"
+}
+```
+
+## Erreur Handling
+
+Common Erreur scenarios and their responses:
+
+```json
+// Bundle not found
+{
+  "error": "Bundle not found",
+  "status": "KO"
+}
+
+// Invalid version format
+{
+  "error": "Invalid version format",
+  "status": "KO"
+}
+
+// Storage error
+{
+  "error": "Failed to delete bundle from storage",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage bundles",
+  "status": "KO"
+}
+```
+
+## Common Use Cases
+
+1. **Cleanup Old Versions**
+```typescript
+// Delete outdated beta versions
+{
+  "app_id": "app_123",
+  "version": "1.0.0-beta.1"
+}
+```
+
+2. **Application Réinitialiser**
+```typescript
+// Remove all bundles to start fresh
+{
+  "app_id": "app_123"
+}
+```
+
+## Storage Considerations
+
+1. **Retention Policy**: Define how long to keep old Bundles
+2. **Size Management**: Monitor Bundle sizes and storage Utilisation
+3. **Backup Strategy**: Consider backing up critical versions
+4. **Cost Optimization**: Retirer unnecessary Bundles to optimize storage costs 

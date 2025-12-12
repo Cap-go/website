@@ -1,0 +1,37 @@
+---
+title: "Appareils"
+description: "A comprehensive Guide on utilizing the Appareils page to manage and configure your Appareils effectively, including filtering Options and detailed Configuration Paramètres for individual Appareils."
+sidebar: 
+  order: 7
+---
+
+:::Remarque[Data Retention]
+Appareil data is retained for **90 days** from the last Appareil activity. Appareils that haven't connected to Capgo within this period will be automatically removed from the list. Actif Appareils are continuously tracked as they Vérifier for Mises à jour.
+:::
+
+## Show the list of all Appareils
+First, let's take a look at the Appareils page. You can access it by [clicking on your Application](/docs/webapp/main-page) and then [clicking on the Appareils tab](/docs/webapp/main-Application-page).
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/devices.webp" alt="devices list" /><figcaption></figcaption></figure>
+
+## Show only developer Appareils
+You might want to show only the overwritten Appareils (Appareils that have a [custom Canal](/docs/plugin/api/#setchannel) or a custom Version)
+To do that click on `Filters` and then on `Override`. It should look something like this:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/overwrite-filter.webp" alt="filter devices" /><figcaption></figcaption></figure>
+
+## Configuring a Appareil
+
+To configure a specific Appareil click on it in the table and then you should see something like this:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/device-specific.webp" alt="show one device" /><figcaption></figcaption></figure>
+
+First the `Custom ID`. This is a very useful field that helps you connect the device to an ID you can recognize for your own users. 
+
+Use it to easily identify which Appareil belongs to which Utilisateur. 
+
+You can set it from the WebUI or from the device with `CapacitorUpdater.setCustomId({ customId: user });`
+
+Suivant the force Version. If this is set then this Appareil will **ALWAYS** receive this Version. It takes precedence over the Canal.
+
+Lastly the custom Canal. If this is set then this Appareil will not care À propos the public (default) Canal and just use this one.

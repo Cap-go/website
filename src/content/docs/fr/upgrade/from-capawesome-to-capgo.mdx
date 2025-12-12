@@ -1,0 +1,252 @@
+---
+title: Migrer from Capawesome Cloud to Capgo
+description: Step-by-step Guide to move from Capawesome Cloud to Capgo while gaining Natif OTA safety, Appareil-level observability, and full automation.
+sidebar: 
+  order: 8
+---
+
+> ⚡️ Capgo automates Canaux, Bundle cleanup, Restaurations, Analyse, and CLI uploads natively. Use this Guide to perform the minimal steps required to Migrer and optionally recreate any custom behaviour you still need.
+
+## Aperçu
+
+1. Gather your existing Capawesome Cloud Configuration (Application ID, Canaux, signing keys, CLI tokens) so you can archive or audit it later.
+2. Install the Capgo plugin, remove the Capawesome SDK, and call `CapacitorUpdater.notifyAppReady()`.
+3. Configure optional behaviour (manual downloads, pinning Bundles, reloads) if you rely on those flows today.
+
+With Capgo you only need to install our plugin and call `CapacitorUpdater.notifyAppReady()`. Everything else—channels, bundle cleanup, rollbacks, analytics, and CLI automation—is handled natively. The sections below walk through each task directly.
+
+## Before you Démarrer
+
+- Make sure your project is already using Capacitor 5 or later.
+- Install the Capgo CLI (`npm install -g @capgo/cli`) if you plan to push bundles from CI/CD.
+
+## Step 1 – Installer Capgo and Retirer the Capawesome SDK
+
+```bash
+npm uninstall @capawesome/capacitor-live-update
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+That is the only mandatory swap. Capgo’s Natif code ships with the plugin; no extra JavaScript helpers are required.
+
+## Step 2 – Minimal Configuration
+
+The previous setup required mapping dozens of options in `capacitor.config`. Capgo recognises your project automatically, so the minimal configuration looks like this:
+
+```ts title="capacitor.config.ts"
+import { CapacitorConfig } from '@capacitor/cli'
+
+const config: CapacitorConfig = {
+  plugins: {
+    CapacitorUpdater: {
+      autoUpdate: true,
+      autoDeletePrevious: true,
+      periodCheckDelay: 10 * 60 * 1000, // optional: check every 10 minutes
+    },
+  },
+}
+
+export default config
+```
+
+Everything Capawesome lists as manual flags (`defaultChannel`, `autoDeleteBundles`, retention policies, etc.) is managed through the Capgo dashboard or API. You only need to override these keys if you want behaviour that differs from Capgo’s defaults.
+
+### Configuration quick Référence
+
+| Capawesome Option | Capgo equivalent | Do you need to set it? |
+| --- | --- | --- |
+| `appId` | Taken from the Capgo dashboard once you create a project | Only if you use multiple projects in one binary |
+| `defaultChannel` | Channel rules managed in the dashboard/API | Optional; most teams set this server-side |
+| `autoDeleteBundles` | `autoDeletePrevious: true` (default) | Already enabled |
+| `publicKey` | Managed in Capgo console | Only if you rotate keys manually |
+| `maxVersions` / retention | Bundle retention policy | Configured centrally in Capgo (1 month default, 24 months max) |
+
+## Step 3 – Call `notifyAppReady()` (the only required hook)
+
+The old workflow introduced custom listeners (`checkForUpdates()`, `retryDownload()`, hiding the splash screen, etc.). Capgo performs those steps natively. The only API you must call is:
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+CapacitorUpdater.notifyAppReady()
+```
+
+This confirms the Application booted successfully. If the confirmation never arrives, Capgo automatically rolls Retour the Bundle—no extra JavaScript needed.
+
+**That's it—Capgo handles background checks, splash visibility, and rollbacks natively.**
+
+<details>
+<summary>Optional: run custom logic before the splash screen hides</summary>
+
+```ts
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+import { SplashScreen } from '@capacitor/splash-screen'
+
+CapacitorUpdater.addListener('appReady', () => {
+  // Run diagnostics or logging if you need to
+  SplashScreen.hide()
+})
+
+CapacitorUpdater.notifyAppReady()
+```
+
+</details>
+
+## Step 4 – Map API calls (mostly optional)
+
+In Capgo you normally let the auto-updater run; manual APIs remain Disponible if you want full control.
+
+| Capawesome Cloud | Capgo equivalent | Do you need it? |
+| --- | --- | --- |
+| `LiveUpdate.fetchLatestBundle()` | `CapacitorUpdater.getLatest()` | Only when implementing your own download workflow |
+| `LiveUpdate.downloadBundle()` | `CapacitorUpdater.download()` | Optional: native auto-update already downloads |
+| `LiveUpdate.setNextBundle()` | `CapacitorUpdater.next()` | Optional: dashboard pins bundles automatically |
+| `LiveUpdate.reload()` | `CapacitorUpdater.reload()` | Optional; Capgo enforces mandatory bundles after `notifyAppReady()` |
+| `LiveUpdate.getCurrentBundle()` | `CapacitorUpdater.current()` | Optional diagnostics |
+
+If you stick with the Natif auto-Mise à jour behaviour you can Supprimer the Capawesome JavaScript entirely.
+
+### Manual control Exemples
+
+**Download the latest bundle**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const downloadUpdate = async () => {
+  const latest = await CapacitorUpdater.getLatest()
+  if (latest?.url) {
+    const bundle = await CapacitorUpdater.download({
+      url: latest.url,
+      version: latest.version,
+    })
+    console.log('Bundle downloaded', bundle?.id)
+  }
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const downloadUpdate = async () => {
+  const result = await LiveUpdate.fetchLatestBundle()
+  if (result.downloadUrl) {
+    await LiveUpdate.downloadBundle({
+      bundleId: result.bundleId,
+      url: result.downloadUrl,
+    })
+    console.log('Bundle downloaded')
+  }
+}
+```
+
+**Set the next bundle**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const setNextBundle = async () => {
+  await CapacitorUpdater.next({ id: 'bundle-id-123' })
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const setNextBundle = async () => {
+  await LiveUpdate.setNextBundle({ bundleId: 'bundle-id-123' })
+}
+```
+
+**Apply the downloaded bundle immediately**
+
+```ts title="Capgo"
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+const applyUpdate = async () => {
+  await CapacitorUpdater.reload()
+}
+```
+
+```ts title="Capawesome Cloud"
+import { LiveUpdate } from '@capawesome/capacitor-live-update'
+
+const applyUpdate = async () => {
+  await LiveUpdate.reload()
+}
+```
+
+## Step 5 – Mise à jour strategies: how Capgo handles them
+
+Capawesome documents three strategies. Here’s how they translate:
+
+### Background Mises à jour
+- **Précédent workflow**: configure in code and schedule downloads manually.
+- **Capgo**: enabled by default (`autoUpdate: true`). No additional code required.
+
+### Always latest
+- **Previous workflow**: add an `App.resume` listener, call `download`, then `set`.
+- **Capgo**: background auto-Mise à jour already performs the Vérifier after resume. You only need the manual listener if you want a custom interval.
+
+<details>
+<summary>Optional: manual resume check</summary>
+
+```ts
+import { App } from '@capacitor/app'
+import { CapacitorUpdater } from '@capgo/capacitor-updater'
+
+App.addListener('resume', async () => {
+  const latest = await CapacitorUpdater.getLatest()
+  if (latest?.url) {
+    const downloaded = await CapacitorUpdater.download({
+      url: latest.url,
+      version: latest.version,
+    })
+    if (downloaded) {
+      await CapacitorUpdater.next({ id: downloaded.id })
+    }
+  }
+})
+```
+
+</details>
+
+### Force Mise à jour
+- **Précédent workflow**: wire prompt logic and enforce reload.
+- **Capgo**: mark the bundle as “mandatory” in the dashboard, then listen for the `majorAvailable` event (emitted after `notifyAppReady()`) to require users to upgrade inside your app.
+
+## Step 6 – Deploying Bundles
+
+If you previously relied on `capawesome live-update deploy`, Capgo offers a similar CLI workflow, and you can also automate deployments entirely via API.
+
+```bash
+# Authenticate once (stores a token in your CI environment)
+capgo login
+
+# Upload a new bundle (auto-detects platform/version)
+capgo bundle upload --path dist --channel production
+```
+
+Because Capgo tracks Bundle health automatically, you also get:
+
+- Appareil-level audit Journaux for every Installer.
+- Automatic retention (one month by default) with configurable limits up to 24 months.
+- Real-time latency metrics at [status.capgo.Application/history](https://status.capgo.Application/history).
+
+## Migration timeline
+
+- **Inventory & install**: 10 minutes (`npm install`, remove old plugin).
+- **Config & readiness**: 5 minutes (`notifyAppReady`).
+- **Sanity checks**: 15 minutes (optional manual tests or listeners).
+- **First Déploiement**: 10 minutes with Capgo CLI or CI integration.
+
+In practice teams finish in under an hour. If you provide Capawesome project details we can even Importer Canaux and Appareil lists for you.
+
+## Capgo Support
+
+- **Migration concierge**: book a session at [cal.com/team/capgo/demo](https://cal.com/team/capgo/demo).
+- **Communauté**: join the [Capgo Discord](https://discord.gg/VCXxSVjefW).
+- **Problème tracker**: [github.com/Cap-go/capacitor-updater/issues](https://github.com/Cap-go/capacitor-updater/issues).
+
+Capgo is built for long-term reliability: Natif delta Mises à jour, Chiffré Bundles, automatic Restaurations, and Analyse that do not require custom JavaScript. Once you Migrer you can Supprimer the maintenance-heavy glue and let the platform run Mises à jour automatically.

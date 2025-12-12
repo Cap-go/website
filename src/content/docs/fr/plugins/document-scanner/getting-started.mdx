@@ -1,0 +1,60 @@
+---
+title: Commencer
+description: Ajouter Natif-quality document scanning with edge detection and adjustable output formats.
+sidebar: 
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the plugin**
+   <PackageManagers pkg="@capgo/capacitor-document-scanner" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser Natif platforms**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Trigger a scan
+
+```typescript
+import {
+  DocumentScanner,
+  ResponseType,
+  ScanDocumentResponseStatus,
+} from '@capgo/capacitor-document-scanner';
+
+const result = await DocumentScanner.scanDocument({
+  croppedImageQuality: 90,
+  letUserAdjustCrop: true,
+  maxNumDocuments: 10,
+  responseType: ResponseType.ImageFilePath,
+});
+
+if (result.status === ScanDocumentResponseStatus.Success) {
+  console.log('Scanned files:', result.scannedImages);
+} else {
+  console.log('Scan cancelled by user');
+}
+```
+
+## Return base64 data
+
+```typescript
+const result = await DocumentScanner.scanDocument({
+  responseType: ResponseType.Base64,
+});
+
+const [firstPage] = result.scannedImages ?? [];
+if (firstPage) {
+  const dataUrl = `data:image/jpeg;base64,${firstPage}`;
+  // Display preview or upload to server
+}
+```
+
+## Platform requirements
+
+- **iOS**: Add `NSCameraUsageDescription` to `ios/App/App/Info.plist` explaining how you use the camera.
+- **Android**: Confirm that `CAMERA` permission is declared (Capacitor adds it automatically) and adjust `croppedImageQuality`, `letUserAdjustCrop`, and `maxNumDocuments` to match your UI.
+- **Storage**: When using `ResponseType.ImageFilePath`, move or copy the scanned files to your desired storage location before the app session ends.

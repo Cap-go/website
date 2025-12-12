@@ -1,0 +1,312 @@
+---
+title: Commencer
+description: Learn how to Installer and configure the Capacitor IVS Player plugin to integrate Amazon IVS low-latency streaming in your Application.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the package**
+   <PackageManagers pkg="@capgo/ivs-player" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser with Natif projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure the plugin**
+
+   **Basic Player Setup:**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // Create a player
+   const { playerId } = await IvsPlayer.create({
+     url: 'https://your-ivs-playback-url.m3u8',
+     autoplay: true
+   });
+
+   // Start playback
+   await IvsPlayer.play({ playerId });
+   ```
+
+   **Player Controls:**
+   ```typescript
+   // Pause playback
+   await IvsPlayer.pause({ playerId });
+
+   // Set volume
+   await IvsPlayer.setVolume({
+     playerId,
+     volume: 0.5 // 0.0 to 1.0
+   });
+
+   // Seek to position
+   await IvsPlayer.seekTo({
+     playerId,
+     position: 30 // seconds
+   });
+   ```
+
+   <Tabs>
+     <TabItem label="iOS">
+       Add to your `Info.plist`:
+       ```xml
+       <key>NSAppTransportSecurity</key>
+       <dict>
+         <key>NSAllowsArbitraryLoads</key>
+         <true/>
+       </dict>
+       ```
+     </TabItem>
+     <TabItem label="Android">
+       Add to your `AndroidManifest.xml`:
+       ```xml
+       <uses-permission android:name="android.permission.INTERNET" />
+       ```
+     </TabItem>
+   </Tabs>
+
+4. **Event handling**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   // Listen for player events
+   IvsPlayer.addListener('onState', (event) => {
+     console.log('Player state:', event.state);
+     // States: idle, buffering, ready, playing, ended
+   });
+
+   IvsPlayer.addListener('onError', (event) => {
+     console.error('Player error:', event.error);
+   });
+
+   IvsPlayer.addListener('onDuration', (event) => {
+     console.log('Video duration:', event.duration);
+   });
+
+   IvsPlayer.addListener('onProgress', (event) => {
+     console.log('Current position:', event.position);
+   });
+
+   // Listen for timed metadata
+   IvsPlayer.addListener('onMetadata', (event) => {
+     console.log('Timed metadata:', event.metadata);
+   });
+   ```
+
+5. **Advanced Utilisation**
+   ```typescript
+   import { IvsPlayer } from '@capgo/ivs-player';
+
+   export class StreamPlayer {
+     private playerId: string | null = null;
+     private listeners: any[] = [];
+
+     async initialize(streamUrl: string) {
+       // Create player with custom configuration
+       const result = await IvsPlayer.create({
+         url: streamUrl,
+         autoplay: false,
+         muted: true, // Start muted for autoplay policies
+         controls: true
+       });
+
+       this.playerId = result.playerId;
+       this.setupEventListeners();
+     }
+
+     private setupEventListeners() {
+       // State changes
+       const stateListener = IvsPlayer.addListener('onState', (event) => {
+         this.handleStateChange(event.state);
+       });
+       this.listeners.push(stateListener);
+
+       // Quality changes
+       const qualityListener = IvsPlayer.addListener('onQuality', (event) => {
+         console.log(`Quality changed to: ${event.quality.name}`);
+       });
+       this.listeners.push(qualityListener);
+
+       // Buffer updates
+       const bufferListener = IvsPlayer.addListener('onBuffer', (event) => {
+         console.log(`Buffer: ${event.percentage}%`);
+       });
+       this.listeners.push(bufferListener);
+     }
+
+     private handleStateChange(state: string) {
+       switch (state) {
+         case 'playing':
+           console.log('Stream is playing');
+           break;
+         case 'buffering':
+           console.log('Stream is buffering');
+           break;
+         case 'ended':
+           console.log('Stream ended');
+           break;
+       }
+     }
+
+     async play() {
+       if (this.playerId) {
+         await IvsPlayer.play({ playerId: this.playerId });
+       }
+     }
+
+     async pause() {
+       if (this.playerId) {
+         await IvsPlayer.pause({ playerId: this.playerId });
+       }
+     }
+
+     async setQuality(qualityName: string) {
+       if (this.playerId) {
+         await IvsPlayer.setQuality({ 
+           playerId: this.playerId, 
+           quality: qualityName 
+         });
+       }
+     }
+
+     async destroy() {
+       // Remove listeners
+       this.listeners.forEach(listener => listener.remove());
+       
+       // Destroy player
+       if (this.playerId) {
+         await IvsPlayer.destroy({ playerId: this.playerId });
+       }
+     }
+   }
+   ```
+</Steps>
+
+## API Référence
+
+### Methods
+
+#### `create(options: CreateOptions)`
+Créer a Nouveau IVS player instance.
+
+**Parameters:**
+- `options`: Player configuration
+  - `url`: string - IVS playback URL
+  - `autoplay`: boolean - Auto-start playback
+  - `muted`: boolean - Start muted
+  - `controls`: boolean - Show native controls
+
+**Returns:** `Promise<{ playerId: string }>`
+
+#### `play(options: PlayerOptions)`
+Démarrer playback.
+
+#### `pause(options: PlayerOptions)`
+Pause playback.
+
+#### `stop(options: PlayerOptions)`
+Arrêter playback and Réinitialiser position.
+
+#### `seekTo(options: SeekOptions)`
+Seek to a specific position.
+
+#### `setVolume(options: VolumeOptions)`
+Set player volume (0.0 to 1.0).
+
+#### `setQuality(options: QualityOptions)`
+Set playback quality.
+
+#### `destroy(options: PlayerOptions)`
+Destroy the player instance.
+
+### Events
+
+- `onState`: Player state changes
+- `onError`: Playback errors
+- `onDuration`: Video duration available
+- `onProgress`: Playback progress updates
+- `onQuality`: Quality changes
+- `onMetadata`: Timed metadata events
+- `onBuffer`: Buffer status updates
+
+### Interfaces
+
+```typescript
+interface CreateOptions {
+  url: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+}
+
+interface PlayerOptions {
+  playerId: string;
+}
+
+interface SeekOptions extends PlayerOptions {
+  position: number; // seconds
+}
+
+interface VolumeOptions extends PlayerOptions {
+  volume: number; // 0.0 to 1.0
+}
+
+interface QualityOptions extends PlayerOptions {
+  quality: string; // quality name
+}
+```
+
+## Platform Notes
+
+### iOS
+- Requires iOS 12.0 or later
+- Uses Natif AVPlayer with IVS extensions
+- Supports Picture-in-Picture on iPads
+
+### Android
+- Requires Android 5.0 (API level 21) or later
+- Uses Amazon IVS Player SDK
+- Hardware acceleration recommended
+
+## Common Use Cases
+
+1. **Live Streaming**: Real-time events, sports, gaming
+2. **Interactive Streaming**: Viewer polls, Q&A sessions
+3. **E-commerce**: Live shopping with product highlights
+4. **Education**: Live classes with timed content
+5. **Entertainment**: Concerts, shows with audience interaction
+
+## Best Practices
+
+1. **Network Handling**: Monitor connection quality
+   ```typescript
+   IvsPlayer.addListener('onError', (event) => {
+     if (event.error.includes('network')) {
+       // Handle network errors
+       showRetryButton();
+     }
+   });
+   ```
+
+2. **Resource Management**: Always destroy players when done
+3. **Autoplay Policies**: Démarrer muted for reliable autoplay
+4. **Quality Selection**: Let IVS handle automatic quality switching
+
+## Dépannage
+
+**Stream not playing:**
+- Verify the IVS playback URL is valid
+- Vérifier network permissions
+- Ensure the stream is live
+
+**High latency:**
+- IVS is optimized for low latency, Vérifier your encoder Paramètres
+- Verify you're using the IVS-specific playback URL
+
+**Quality issues:**
+- Allow automatic quality switching
+- Vérifier network bandwidth requirements

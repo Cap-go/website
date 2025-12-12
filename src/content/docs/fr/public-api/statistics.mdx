@@ -1,0 +1,232 @@
+---
+title: "Statistiques"
+description: "Detailed Guide to Statistiques API endpoints, providing insights into Monthly Actif Utilisateurs (MAU), storage, and bandwidth metrics for apps and organizations."
+sidebar: 
+  order: 5
+---
+
+The Statistiques endpoints provide detailed Analyse À propos your apps and organizations. You can track Monthly Actif Utilisateurs (MAU), storage Utilisation, and bandwidth consumption across different time periods. This data is essential for monitoring Application growth, resource Utilisation, and planning capacity.
+
+## Understanding the Metrics
+
+- **MAU (Monthly Actif Utilisateurs)**: Number of unique Appareils that accessed your Application in the last 30 days
+- **Storage**: Total size of all Bundles and resources stored in bytes
+- **Bandwidth**: Total data transfer for Bundle downloads in bytes
+
+## Best Practices
+
+1. **Regular Monitoring**: Vérifier Statistiques periodically to track growth and Utilisation patterns
+2. **Resource Planning**: Use storage and bandwidth metrics for capacity planning
+3. **Utilisateur Engagement**: Track MAU to understand Utilisateur engagement trends
+4. **Cost Management**: Monitor resource Utilisation to optimize costs
+
+## Endpoints
+
+### GET /Statistiques/Application/:app_id/
+
+Get Statistiques for a specific Application. This endpoint is useful for monitoring individual Application performance.
+
+#### Query Paramètres
+
+```typescript
+interface StatsQuery {
+  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date    // End date for the statistics (format: YYYY-MM-DD)
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/statistics/app/com.demo.app/?from=2024-01-01&to=2024-02-01"
+```
+
+#### Exemple Response
+
+```json
+[
+  {
+    "date": "2024-01-01",
+    "mau": 1500,
+    "storage": 536870912,  // 512MB in bytes
+    "bandwidth": 1073741824 // 1GB in bytes
+  },
+  {
+    "date": "2024-01-02",
+    "mau": 1550,
+    "storage": 537919488,  // 513MB in bytes
+    "bandwidth": 1074790400 // 1.01GB in bytes
+  }
+]
+```
+
+### GET /Statistiques/org/:org_id/
+
+Get Statistiques for a specific Organisation. Useful for monitoring Organisation-level Utilisation.
+
+#### Query Paramètres
+
+```typescript
+interface StatsQuery {
+  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date    // End date for the statistics (format: YYYY-MM-DD)
+  breakdown: boolean  // default false, optional if true it return the breakdown by app
+  noAccumulate: boolean // default false, optional if true it will not accumulate data and just return day by day result
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/statistics/org/046a36ac-e03c-4590-9257-bd6c9dba9ee8/?from=2024-01-01&to=2024-02-01"
+```
+
+#### Exemple Response
+
+```json
+[
+  {
+    "date": "2024-01-01",
+    "mau": 10000,
+    "storage": 536870912,   // 512MB in bytes
+    "bandwidth": 1073741824  // 1GB in bytes
+  },
+  {
+    "date": "2024-01-02",
+    "mau": 10200,
+    "storage": 537919488,   // 513MB in bytes
+    "bandwidth": 1074790400  // 1.01GB in bytes
+  }
+]
+```
+
+### GET /Statistiques/Utilisateur/
+
+Get aggregated Statistiques across all organizations you have access to. Perfect for overall Utilisation monitoring.
+
+#### Query Paramètres
+
+```typescript
+interface StatsQuery {
+  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date    // End date for the statistics (format: YYYY-MM-DD)
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/statistics/user/?from=2024-01-01&to=2024-02-01"
+```
+
+#### Exemple Response
+
+```json
+[
+  {
+    "date": "2024-01-01",
+    "mau": 25000,
+    "storage": 1073741824,  // 1GB in bytes
+    "bandwidth": 2147483648  // 2GB in bytes
+  },
+  {
+    "date": "2024-01-02",
+    "mau": 25500,
+    "storage": 1074790400,  // 1.01GB in bytes
+    "bandwidth": 2148532224  // 2.01GB in bytes
+  }
+]
+```
+
+### GET /Statistiques/Application/:app_id/bundle_usage
+
+Get Bundle Utilisation Statistiques for a specific Application, showing the distribution of versions among Utilisateurs over a specified period.
+
+#### Query Paramètres
+
+```typescript
+interface BundleUsageQuery {
+  from: Date  // Start date for the statistics (format: YYYY-MM-DD)
+  to: Date    // End date for the statistics (format: YYYY-MM-DD)
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/statistics/app/com.demo.app/bundle_usage?from=2024-01-01&to=2024-02-01"
+```
+
+#### Exemple Response
+
+```json
+{
+  "labels": ["2024-01-01", "2024-01-02", "2024-01-03"],
+  "datasets": [
+    {
+      "label": "1.0.0",
+      "data": [60.5, 58.2, 55.3]
+    },
+    {
+      "label": "1.0.1",
+      "data": [39.5, 41.8, 44.7]
+    }
+  ]
+}
+```
+
+## Erreur Handling
+
+Common Erreur scenarios and their responses:
+
+```json
+// Invalid body
+{
+  "status": "Invalid body",
+  "error": "Invalid date format or missing parameters"
+}
+
+// Permission denied
+{
+  "status": "You can't access this app",
+  "error": "Insufficient permissions to access statistics"
+}
+
+// Permission denied for organization
+{
+  "status": "You can't access this organization",
+  "error": "Insufficient permissions to access organization statistics"
+}
+
+// No organizations found for user statistics
+{
+  "status": "No organizations found",
+  "error": "No organizations found"
+}
+
+// Internal server error
+{
+  "status": "Cannot get app statistics",
+  "error": "Internal server error message"
+}
+```
+
+## Common Use Cases
+
+1. **Growth Tracking**: Monitor MAU growth over time
+2. **Resource Optimization**: Track storage and bandwidth Utilisation to optimize costs
+3. **Capacity Planning**: Use trends to plan for future resource needs
+4. **Utilisation Reports**: Generate periodic Utilisation reports for stakeholders
+5. **Version Distribution Analysis**: Understand how Utilisateurs are distributed across different Application versions with Bundle Utilisation Statistiques
+
+## Tips for Analysis
+
+1. **Compare Periods**: Look at month-over-month or year-over-year trends
+2. **Track Ratios**: Monitor bandwidth per Utilisateur or storage per Application
+3. **Set Alerts**: Créer alerts for unusual spikes in Utilisation
+4. **Regular Backups**: Exporter Statistiques regularly for historical analysis
+5. **Version Adoption**: Use Bundle Utilisation to track adoption rates of Nouveau versions

@@ -1,0 +1,444 @@
+---
+title: Commencer
+description: Learn how to Installer and use the Speech Recognition plugin to Ajouter voice transcription to your Capacitor Application
+sidebar: 
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the package**
+   <PackageManagers pkg="@capgo/capacitor-speech-recognition" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser with Natif projects**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+3. **Configure platform permissions** (see below)
+</Steps>
+
+## Platform Configuration
+
+### iOS
+
+Add the following keys to your app's `Info.plist` file:
+
+```xml
+<key>NSSpeechRecognitionUsageDescription</key>
+<string>We need access to speech recognition to transcribe your voice</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>We need access to your microphone to record audio for transcription</string>
+```
+
+### Android
+
+The plugin automatically adds the required `RECORD_AUDIO` permission to your `AndroidManifest.xml`. No additional configuration is needed.
+
+## Basic Utilisation
+
+### Vérifier Availability
+
+Before using speech recognition, Vérifier if it's Disponible on the Appareil:
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+const checkAvailability = async () => {
+  const { available } = await SpeechRecognition.available();
+  if (!available) {
+    console.warn('Speech recognition is not supported on this device');
+    return false;
+  }
+  return true;
+};
+```
+
+### Request Permissions
+
+Request the necessary permissions before starting recognition:
+
+```typescript
+const requestPermissions = async () => {
+  const { speechRecognition } = await SpeechRecognition.requestPermissions();
+
+  if (speechRecognition === 'granted') {
+    console.log('Permission granted');
+    return true;
+  } else {
+    console.log('Permission denied');
+    return false;
+  }
+};
+```
+
+### Démarrer Recognition
+
+Démarrer listening for speech with optional Configuration:
+
+```typescript
+// Basic usage
+await SpeechRecognition.start({
+  language: 'en-US',
+  maxResults: 3,
+  partialResults: true,
+});
+
+// With all options
+await SpeechRecognition.start({
+  language: 'en-US',
+  maxResults: 5,
+  prompt: 'Speak now...',          // Android only
+  popup: false,                     // Android only
+  partialResults: true,
+  addPunctuation: true,             // iOS 16+ only
+  allowForSilence: 2000,            // Android only, milliseconds
+});
+```
+
+### Listen for Results
+
+Subscribe to partial results while recognition is Actif:
+
+```typescript
+const partialListener = await SpeechRecognition.addListener(
+  'partialResults',
+  (event) => {
+    const transcription = event.matches?.[0];
+    console.log('Partial result:', transcription);
+  }
+);
+
+// Don't forget to remove the listener when done
+await partialListener.remove();
+```
+
+### Arrêter Recognition
+
+Arrêter listening and clean up resources:
+
+```typescript
+await SpeechRecognition.stop();
+```
+
+## Terminé Exemple
+
+Here's a Terminé Exemple showing how to use the plugin:
+
+```typescript
+import { SpeechRecognition } from '@capgo/capacitor-speech-recognition';
+
+export class VoiceRecognitionService {
+  private partialListener: any = null;
+  private isListening = false;
+
+  async initialize(): Promise<boolean> {
+    // Check availability
+    const { available } = await SpeechRecognition.available();
+    if (!available) {
+      throw new Error('Speech recognition not available');
+    }
+
+    // Request permissions
+    const { speechRecognition } = await SpeechRecognition.requestPermissions();
+    if (speechRecognition !== 'granted') {
+      throw new Error('Permission denied');
+    }
+
+    return true;
+  }
+
+  async startListening(
+    onPartialResult: (text: string) => void,
+    onFinalResult: (text: string) => void
+  ): Promise<void> {
+    if (this.isListening) {
+      console.warn('Already listening');
+      return;
+    }
+
+    try {
+      // Set up partial results listener
+      this.partialListener = await SpeechRecognition.addListener(
+        'partialResults',
+        (event) => {
+          const text = event.matches?.[0] || '';
+          onPartialResult(text);
+        }
+      );
+
+      // Start recognition
+      const result = await SpeechRecognition.start({
+        language: 'en-US',
+        maxResults: 3,
+        partialResults: true,
+        addPunctuation: true,
+      });
+
+      this.isListening = true;
+
+      // Handle final result if partialResults is false
+      if (result.matches && result.matches.length > 0) {
+        onFinalResult(result.matches[0]);
+      }
+    } catch (error) {
+      console.error('Error starting speech recognition:', error);
+      throw error;
+    }
+  }
+
+  async stopListening(): Promise<void> {
+    if (!this.isListening) {
+      return;
+    }
+
+    try {
+      await SpeechRecognition.stop();
+
+      // Clean up listener
+      if (this.partialListener) {
+        await this.partialListener.remove();
+        this.partialListener = null;
+      }
+
+      this.isListening = false;
+    } catch (error) {
+      console.error('Error stopping speech recognition:', error);
+      throw error;
+    }
+  }
+
+  async getSupportedLanguages(): Promise<string[]> {
+    const { languages } = await SpeechRecognition.getSupportedLanguages();
+    return languages;
+  }
+
+  async checkListeningState(): Promise<boolean> {
+    const { listening } = await SpeechRecognition.isListening();
+    return listening;
+  }
+}
+```
+
+## API Référence
+
+### Disponible()
+
+Checks whether the Natif speech recognition service is usable on the current Appareil.
+
+```typescript
+const result = await SpeechRecognition.available();
+// Returns: { available: boolean }
+```
+
+### Démarrer(Options?)
+
+Begins capturing audio and transcribing speech.
+
+```typescript
+interface SpeechRecognitionStartOptions {
+  language?: string;          // Locale identifier (e.g., 'en-US')
+  maxResults?: number;        // Maximum number of results (default: 5)
+  prompt?: string;            // Android only: Dialog prompt
+  popup?: boolean;            // Android only: Show system dialog
+  partialResults?: boolean;   // Stream partial results
+  addPunctuation?: boolean;   // iOS 16+ only: Add punctuation
+  allowForSilence?: number;   // Android only: Silence timeout in ms
+}
+
+const result = await SpeechRecognition.start(options);
+// Returns: { matches?: string[] }
+```
+
+### Arrêter()
+
+Stops listening and tears down Natif resources.
+
+```typescript
+await SpeechRecognition.stop();
+```
+
+### getSupportedLanguages()
+
+Gets the locales supported by the underlying recognizer.
+
+**Note**: Android 13+ devices no longer expose this list; in that case `languages` will be empty.
+
+```typescript
+const result = await SpeechRecognition.getSupportedLanguages();
+// Returns: { languages: string[] }
+```
+
+### isListening()
+
+Retourne whether the plugin is actively listening for speech.
+
+```typescript
+const result = await SpeechRecognition.isListening();
+// Returns: { listening: boolean }
+```
+
+### checkPermissions()
+
+Gets the current permission state.
+
+```typescript
+const result = await SpeechRecognition.checkPermissions();
+// Returns: { speechRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied' }
+```
+
+### requestPermissions()
+
+Requests the microphone + speech recognition permissions.
+
+```typescript
+const result = await SpeechRecognition.requestPermissions();
+// Returns: { speechRecognition: 'prompt' | 'prompt-with-rationale' | 'granted' | 'denied' }
+```
+
+## Event Listeners
+
+### partialResults
+
+Listen for partial transcription updates while `partialResults` is enabled.
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'partialResults',
+  (event: { matches: string[] }) => {
+    console.log('Partial:', event.matches?.[0]);
+  }
+);
+```
+
+### segmentResults (Android only)
+
+Listen for segmented recognition results.
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'segmentResults',
+  (event: { matches: string[] }) => {
+    console.log('Segment:', event.matches?.[0]);
+  }
+);
+```
+
+### endOfSegmentedSession (Android only)
+
+Listen for segmented session completion events.
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'endOfSegmentedSession',
+  () => {
+    console.log('Segmented session ended');
+  }
+);
+```
+
+### listeningState
+
+Listen for changes to the Natif listening state.
+
+```typescript
+const listener = await SpeechRecognition.addListener(
+  'listeningState',
+  (event: { status: 'started' | 'stopped' }) => {
+    console.log('Listening state:', event.status);
+  }
+);
+```
+
+### removeAllListeners()
+
+Removes all registered listeners.
+
+```typescript
+await SpeechRecognition.removeAllListeners();
+```
+
+## Best Practices
+
+1. **Always Vérifier availability and permissions**
+   ```typescript
+   const { available } = await SpeechRecognition.available();
+   if (!available) return;
+
+   const { speechRecognition } = await SpeechRecognition.requestPermissions();
+   if (speechRecognition !== 'granted') return;
+   ```
+
+2. **Clean up listeners**
+   Always Retirer listeners when they're no longer needed to prevent memory leaks:
+   ```typescript
+   await listener.remove();
+   // or
+   await SpeechRecognition.removeAllListeners();
+   ```
+
+3. **Handle errors gracefully**
+   ```typescript
+   try {
+     await SpeechRecognition.start({ language: 'en-US' });
+   } catch (error) {
+     console.error('Speech recognition failed:', error);
+     // Show user-friendly error message
+   }
+   ```
+
+4. **Provide visual Retour**
+   Use the `listeningState` event to show users when the app is actively listening.
+
+5. **Test with different accents and languages**
+   Speech recognition accuracy varies by language and accent. Test thoroughly with your target audience.
+
+## Platform Notes
+
+### iOS
+- Requires iOS 10.0+
+- Uses native `SFSpeechRecognizer`
+- Supports punctuation on iOS 16+
+- Requires both microphone and speech recognition permissions
+- Recognition may fail if Appareil language doesn't match requested language
+
+### Android
+- Requires Android 6.0 (API 23)+
+- Uses `SpeechRecognizer` API
+- Supports segmented sessions with configurable silence detection
+- Android 13+ doesn't expose list of supported languages
+- Some Appareils may show system recognition UI
+
+### Web
+- Limited Support via Web Speech API
+- Not all browsers Support speech recognition
+- Requires HTTPS connection
+- May have different behavior across browsers
+
+## Dépannage
+
+### Permission Denied
+If permissions are denied, Guide Utilisateurs to Application Paramètres:
+```typescript
+const { speechRecognition } = await SpeechRecognition.checkPermissions();
+if (speechRecognition === 'denied') {
+  // Show instructions to enable permissions in Settings
+}
+```
+
+### No Results Returned
+- Vérifier microphone is working
+- Ensure quiet environment
+- Verify language code matches Appareil capabilities
+- Vérifier network connection (some platforms require it)
+
+### Recognition Stops Unexpectedly
+- Use `isListening()` to check state
+- Listen to `listeningState` events
+- Implement auto-Redémarrer logic if needed
+
+## Suivant Steps
+
+- [View API Référence on GitHub](https://github.com/Cap-go/capacitor-speech-recognition#api)
+- [Signaler issues](https://github.com/Cap-go/capacitor-speech-recognition/issues)
+- [Explore Exemple Application](https://github.com/Cap-go/capacitor-speech-recognition/tree/main/Exemple)

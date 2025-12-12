@@ -1,0 +1,213 @@
+---
+title: "Commencer with Barometer"
+description: "Learn how to integrate barometric pressure sensing into your Capacitor Application"
+---
+
+This Guide will walk you through integrating the Capacitor Barometer plugin into your Application.
+
+## Installation
+
+Installer the plugin using npm:
+
+```bash
+npm install @capgo/capacitor-barometer
+npx cap sync
+```
+
+## iOS Configuration
+
+Add the following to your `Info.plist`:
+
+```xml
+<key>NSMotionUsageDescription</key>
+<string>This app uses the barometer to measure atmospheric pressure</string>
+```
+
+## Android Configuration
+
+No additional Configuration required. The plugin automatically requests necessary permissions.
+
+## Basic Utilisation
+
+### Importer the Plugin
+
+```typescript
+import { Barometer } from '@capgo/capacitor-barometer';
+```
+
+### Vérifier Sensor Availability
+
+```typescript
+const checkBarometer = async () => {
+  const { available } = await Barometer.isAvailable();
+  console.log('Barometer available:', available);
+};
+```
+
+### Démarrer Monitoring Pressure
+
+```typescript
+const startMonitoring = async () => {
+  await Barometer.start({
+    interval: 1000 // Update interval in milliseconds
+  });
+
+  console.log('Barometer monitoring started');
+};
+```
+
+### Listen to Pressure Events
+
+```typescript
+Barometer.addListener('pressureChange', (data) => {
+  console.log('Pressure (hPa):', data.pressure);
+  console.log('Relative altitude (m):', data.relativeAltitude);
+  console.log('Timestamp:', data.timestamp);
+});
+```
+
+### Get Current Reading
+
+```typescript
+const getCurrentPressure = async () => {
+  const reading = await Barometer.getCurrentReading();
+  console.log('Current pressure:', reading.pressure, 'hPa');
+  console.log('Relative altitude:', reading.relativeAltitude, 'm');
+};
+```
+
+### Arrêter Monitoring
+
+```typescript
+const stopMonitoring = async () => {
+  await Barometer.stop();
+  console.log('Barometer monitoring stopped');
+};
+```
+
+## Terminé Exemple
+
+Here's a Terminé Exemple showing barometer integration:
+
+```typescript
+import { Barometer } from '@capgo/capacitor-barometer';
+
+class BarometerService {
+  private listener: any;
+
+  async initialize() {
+    // Check availability
+    const { available } = await Barometer.isAvailable();
+    if (!available) {
+      console.error('Barometer not available on this device');
+      return;
+    }
+
+    // Start monitoring
+    await Barometer.start({ interval: 1000 });
+
+    // Add listener
+    this.listener = Barometer.addListener('pressureChange', (data) => {
+      this.handlePressureChange(data);
+    });
+  }
+
+  handlePressureChange(data: any) {
+    console.log('Pressure:', data.pressure, 'hPa');
+    console.log('Altitude:', data.relativeAltitude, 'm');
+
+    // Update UI or process data
+    this.updateDisplay(data);
+  }
+
+  updateDisplay(data: any) {
+    // Convert hPa to other units
+    const inHg = (data.pressure * 0.02953).toFixed(2);
+    const mmHg = (data.pressure * 0.750062).toFixed(1);
+
+    console.log(`Pressure: ${data.pressure.toFixed(1)} hPa`);
+    console.log(`         ${inHg} inHg`);
+    console.log(`         ${mmHg} mmHg`);
+    console.log(`Altitude: ${data.relativeAltitude.toFixed(1)} m`);
+  }
+
+  async cleanup() {
+    // Remove listener
+    if (this.listener) {
+      this.listener.remove();
+    }
+
+    // Stop monitoring
+    await Barometer.stop();
+  }
+}
+
+// Usage
+const barometerService = new BarometerService();
+barometerService.initialize();
+
+// Cleanup when done
+// barometerService.cleanup();
+```
+
+## Understanding Readings
+
+### Atmospheric Pressure
+- Measured in hectopascals (hPa) or millibars (mb)
+- Standard sea-level pressure: 1013.25 hPa
+- Higher altitude = lower pressure
+- Weather systems affect pressure readings
+
+### Relative Altitude
+- Calculated from pressure changes
+- Relative to starting Référence point
+- Accuracy: ±10-30 meters
+- Works best for short-term tracking
+
+## Best Practices
+
+1. **Vérifier Availability**: Always verify sensor availability before use
+2. **Reasonable Intervals**: Don't poll too frequently (1000ms is good)
+3. **Retirer Listeners**: Clean up listeners when not needed
+4. **Calibration**: Use known altitude for accurate readings
+5. **Battery Impact**: Monitor battery Utilisation with continuous sensing
+
+## Problèmes courants
+
+### Sensor Not Disponible
+```typescript
+try {
+  const { available } = await Barometer.isAvailable();
+  if (!available) {
+    // Fallback to GPS altitude or manual input
+    showAlternativeMethod();
+  }
+} catch (error) {
+  console.error('Barometer check failed:', error);
+}
+```
+
+### Noisy Data
+```typescript
+class PressureFilter {
+  private readings: number[] = [];
+  private maxReadings = 5;
+
+  addReading(pressure: number): number {
+    this.readings.push(pressure);
+    if (this.readings.length > this.maxReadings) {
+      this.readings.shift();
+    }
+
+    // Return moving average
+    const sum = this.readings.reduce((a, b) => a + b, 0);
+    return sum / this.readings.length;
+  }
+}
+```
+
+## Suivant Steps
+
+- Explore the [API Référence](https://github.com/Cap-go/capacitor-barometer#api) for Terminé method Documentation
+- Vérifier out the [Exemple Application](https://github.com/Cap-go/capacitor-barometer/tree/main/Exemple) for advanced Utilisation
+- See the [Tutoriel](/plugins-tutorials/capacitor-barometer) for Terminé implementation Exemples

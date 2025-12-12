@@ -1,0 +1,116 @@
+---
+title: "Commencer"
+description: "A comprehensive Guide on setting up and managing your own auto-Mise à jour server for seamless Application Mises à jour and maintenance"
+sidebar: 
+    order: 1
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+This Documentation will explain how to run your own auto-Mise à jour server.
+
+## Introduction
+
+If you find this work helpful, please consider supporting my work by becoming a [Github sponsor](https://github.com/sponsors/riderx).
+
+I made a bet to open-source all the code I built here instead of paywalling it. By opening it up instead of fighting and hiding, I believe we can make the world a better place.
+
+Furthermore, I want to focus on Capgo tooling, and make it an open and transparent business.
+
+But to make it possible, it is necessary for all of us to do our part, including you 🥹.
+
+If Capgo doesn't suit you, then pay your own price and [Retour a bootstrapped Maker](https://github.com/sponsors/riderx) on your terms.
+
+<LinkCard title="Consider Contributing" href="/docs/plugin/self-hosted/contributing/"/>
+## Fonctionnalités parity
+
+If you choose to go with your own server, you will lose the 5-min Configuration flow.\
+You need to implement all of these Fonctionnalités yourself.
+
+
+| Fonctionnalités                 | Capgo | Self hosted |
+| ------------------------ | ----- | ----------- |
+| Mises à jour                  | ✅     | 🚧         |
+| Auto revert              | ✅     | 🚧         |
+| Email alerts on fail     | ✅     | 🚧         |
+| Canaux                 | ✅     | 🚧         |
+| Canaux Override        | ✅     | 🚧         |
+| Appareil Override          | ✅     | 🚧         |
+| Canaux Paramètres        | ✅     | 🚧         |
+| Appareil Paramètres          | ✅     | 🚧         |
+| Custom ID                | ✅     | 🚧         |
+| Auto Set Canaux        | ✅     | 🚧         |
+| API Canaux             | ✅     | 🚧         |
+| Mises à jour Statistiques       | ✅     | 🚧         |
+| Fail Télécharger Statistiques | ✅     | 🚧         |
+| Application Utilisation Statistiques     | ✅     | 🚧         |
+| Mise à jour Chiffrement        | ✅     | 🚧         |
+| Differential Mises à jour     | ✅     | ❌         |
+
+:::danger
+If you send a bad Mise à jour to your Utilisateurs you can and will break their Application.
+:::
+
+> Be mindful that you can't use the Capgo cloud and your server at the same time.
+
+
+
+:::danger
+The Over-the-Air (OTA) Mise à jour Fonctionnalité is applicable only for modifications made to HTML, CSS, and JavaScript files.
+
+If you make any changes to the Natif code, such as Mises à jour to Capacitor plugins, it is mandatory to resubmit the Application to the Application Store for approval.
+:::
+
+## Choose between Auto and Manual
+In auto mode, part of the logic is handled by the Natif code, Mises à jour are decided server side, this is more secure and allows fine grain Mises à jour, partial Déploiement to one Appareil or group and more.
+
+In manual mode, all the logic is handled by the JS.
+
+
+
+<LinkCard
+	title="Auto Mise à jour"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manual"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+## Installer Capacitor updater
+
+```bash title="Install the Capacitor updater"
+npm install @capgo/capacitor-updater
+npx cap sync
+```
+
+## Prepare your Bundle
+
+To send Mises à jour to your Application, you need to zip it.
+The best way to be certain your zip is good is to use the Capgo CLI for zipping.
+```bash title="Create a bundle with your files to serve from your server"
+npx @capgo/cli@latest bundle zip
+```
+
+
+You will have to serve this zip from your server on your own.
+
+<LinkCard
+	title="Auto Mise à jour"
+	href="/docs/plugin/self-hosted/auto-update/"
+/>
+
+<LinkCard
+	title="Manual"
+	href="/docs/plugin/self-hosted/manual-update/"
+/>
+
+
+:::Remarque
+If this seems like a lot of work, try the trial Capgo Cloud.
+:::
+
+:::Remarque
+Differential Mise à jour will not work in manual Mises à jour, but it can work in auto Mise à jour, right now it's not documented as it's pretty complex process
+:::

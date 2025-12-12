@@ -1,0 +1,129 @@
+---
+title: "Problèmes connus"
+description: "Problèmes connus with Capacitor and Capgo, and our updater, this page will Aide you understand the weird Problème you have with our tool"
+sidebar: 
+  order: 7
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Ionic live reload
+
+* When you develop, if you use the Ionic live reload feature from the CLI, it will override the plugin, so you will never see your update.
+
+## Quasar live reload
+
+* It uses the same system as ionic under the hood, so you will not see your updates.
+
+## Mises à jour fail
+
+* This usually happens when large updates (> 20mb) are pushed, a big percentage of users will not get the last version.  
+In the past, Utilisateurs needed to keep the Application open until the Télécharger was done, now we use background Télécharger, but it's still limited to a few seconds.
+
+## Android
+
+### Cannot Télécharger
+
+We have seen some issues with Appareils in india, and got Utilisateur on the call, made them try different DNS servers, and it worked.
+
+So if you have the Problème, try to use a different DNS server like Cloudflare or Google DNS.
+
+Cloudflare: 1.1.1.1 and 1.0.0.1
+
+Google DNS: 8.8.8.8 and 8.8.4.4 or dns.google
+
+<LinkCard
+	title="How to Configuration a preferred DNS server on Android?"
+	href="https://www.androidpolice.com/use-preferred-dns-server-android-tutorial/"
+/>
+
+### Self Hosted
+When you are pushing a self-hosted Mise à jour, be mindful you cannot use "HTTP" endpoint as it's against the Sécurité policies of Android apps, if you still want to do it, follow this Guide:
+
+<LinkCard
+	title="How to allow all Network connection types HTTP and HTTPS in Android (9) Pie?"
+	href="https://stackoverflow.com/a/51902630/5511370"
+/>
+
+### Unzip 
+
+Unzip Problème: DEFLATED entries can have EXT descriptor
+
+If you zipped your bundle with something different than the CLI, the format or your zip could be incorrect, please use the CLI command `npx @capgo/cli zip BUNDLE_FOLDER`.
+
+This is a known Problème of Java:
+
+<LinkCard
+	title="Unzip Problème: DEFLATED entries can have EXT descriptor"
+	href="https://bugs.openjdk.org/browse/JDK-8143613"
+/>
+
+
+### Clearfix Problème
+
+* If you have issues with usesCleartextTraffic, it's because the plugin follows the good practice recommended by sonar cloud, in 90% of the cases it will work just fine, but with some plugins that causes issues.
+
+To fix it, add in `android/app/src/main/AndroidManifest.xml` in the `<application>` key :
+
+```xml
+tools:replace="android:usesCleartextTraffic"
+xmlns:tools="http://schemas.android.com/tools"
+```
+
+## iOS
+
+### Privacy manifest
+
+Add the `NSPrivacyAccessedAPICategoryUserDefaults` dictionary key to your [Privacy Manifest](https://capacitorjs.com/docs/ios/privacy-manifest) (usually `ios/App/PrivacyInfo.xcprivacy`):
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+      <!-- Add this dict entry to the array if the file already exists. -->
+      <dict>
+        <key>NSPrivacyAccessedAPIType</key>
+        <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+        <key>NSPrivacyAccessedAPITypeReasons</key>
+        <array>
+          <string>CA92.1</string>
+        </array>
+      </dict>
+    </array>
+  </dict>
+</plist>
+```
+
+We recommend to declare [`CA92.1`](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_use_of_required_reason_api#4278401) as the reason for accessing the [`UserDefaults`](https://developer.apple.com/documentation/foundation/userdefaults) API.
+
+
+### Network permissions
+
+When using local server for Test Mise à jour, the Application will ask for network permission, it's a normal behavior, it's not the case when you use a remote server.
+
+
+## Both OS
+
+When doing manual mode Mises à jour, some events are not easy to catch, for Exemple the Mise à jour fail triggers just before your JS code reloads, so you will not be able to catch it.
+
+One alternative is to list the Bundles and Vérifier Erreur stats to know if the Mise à jour fails.
+
+We need to find a better way to handle this in the future, but it's not a priority, since auto mode is the recommended way to do Mise à jour.
+
+PRs are welcome to Aide us improve this.
+
+## CLI
+
+if your CLI has troubles doing anything,
+
+Vérifier if **appId** and **appName** are present in your **capacitor.config.ts**
+
+Follow the Guide of the official doc:
+
+<LinkCard
+	title="Capacitor Configuration"
+	href="https://capacitorjs.com/docs/config"
+/>

@@ -1,0 +1,188 @@
+---
+title: Compliance
+description: "Learn À propos Capgo's privacy practices, data collection, Sécurité compliance, and how we protect your Utilisateurs' Information during Mises à jour en direct."
+sidebar: 
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Capgo is designed with privacy, Sécurité, and compliance in mind. This document explains what data is collected, how it's used, and what measures are in place to protect your Utilisateurs' privacy and ensure regulatory compliance when using Capgo's live Mise à jour service.
+
+## Data Collection Aperçu
+
+Capgo collects minimal data necessary to provide the live Mise à jour service effectively. The data collection is focused on operational requirements rather than Utilisateur tracking or Analyse.
+
+### What Data is Collected
+
+Capgo collects only the data that is necessary to provide the Mises à jour en direct Fonctionnalité. When your Application checks for Mises à jour or downloads Nouveau Bundles, the following Information is collected:
+
+- **Application ID**: A unique identifier for your Application that is used to associate the Application with the correct Compte
+- **Application Version Code**: The Version code of the Application that is used to determine which Mises à jour are compatible with the Application
+- **Application Version Name**: The Version name of the Application that is used for display purposes
+- **Platform**: The platform (iOS, Android) of the Application that is used to determine which Mises à jour are compatible with the Application
+- **Appareil ID**: A unique identifier for the Appareil that is used to deliver Mises à jour to a specific Appareil and for billing purposes. This identifier is a random string that is created when the Application is started for the first time. **Starting from plugin Version v5.10.0, v6.25.0 and v7.25.0**, the Appareil ID now persists across Application reinstalls (stored securely in Keychain on iOS and EncryptedSharedPreferences on Android) to provide better Appareil tracking while maintaining compliance with Application Store guidelines. Prior to these versions, the Appareil ID was Réinitialiser with every Application Installation
+- **Bundle ID**: The unique identifier for the Bundle that is currently installed on the Appareil
+- **Canal Name**: The name of the Canal that is selected to receive Mises à jour
+- **OS Version**: The Version of the operating system that is used to determine which Mises à jour are compatible with the Appareil
+- **Plugin Version**: The Version of the @capgo/capacitor-updater plugin that is used to deliver Mises à jour to the Appareil
+
+**Additional Technical Data:**
+- Mise à jour Vérifier timestamps
+- Télécharger Succès/failure status
+- Bundle Installation status
+- Restauration events and reasons
+- IP address (for geolocation and CDN optimization)
+
+<Aside type="note">
+You can verify the data that is collected by inspecting the source code of the @capgo/capacitor-updater plugin, which is open-source and Disponible on [GitHub](https://github.com/Cap-go/capacitor-updater). Capgo does not collect personally identifiable Information (PII) such as names, email addresses, phone numbers, or persistent Appareil identifiers that can be used to track individual Utilisateurs across apps.
+</Aside>
+
+### What Data is NOT Collected
+
+Capgo explicitly does not collect:
+
+- Personal Utilisateur Information or credentials
+- Application Utilisation Analyse or Utilisateur behavior data
+- Content from your Application or Utilisateur-generated data
+- Location data beyond general geographic region
+- Persistent Appareil identifiers for tracking
+- Biometric or sensitive personal data
+
+## Data Utilisation and Purpose
+
+The data collected by Capgo is used exclusively for:
+
+### Service Operation
+- Determining which Mises à jour are Disponible for specific Application versions
+- Optimizing content delivery through geographic CDN selection
+- Ensuring compatibility between Mises à jour and Appareil capabilities
+- Managing Mise à jour rollouts and Canal assignments
+
+### Service Improvement
+- Monitoring Mise à jour Succès rates and identifying issues
+- Optimizing Télécharger performance and reliability
+- Improving the overall Mise à jour delivery system
+- Débogage and Dépannage Mise à jour failures
+
+### Sécurité and Integrity
+- Preventing abuse and ensuring service availability
+- Validating Mise à jour authenticity and integrity
+- Protecting against malicious or corrupted Mises à jour
+- Maintaining service Sécurité and stability
+
+## Data Storage and Retention
+
+### Storage Location
+- Mise à jour Bundles and metadata are stored on secure cloud infrastructure
+- Data is distributed across multiple geographic regions for performance
+- All data transmission is Chiffré using industry-standard protocols (HTTPS/TLS)
+
+### Data Retention
+- Mise à jour Vérifier Journaux are retained for operational purposes (typically 30-90 days)
+- Bundle files are retained as long as they're assigned to Actif Canaux
+- Aggregated, non-personal metrics may be retained longer for service improvement
+- Personal data, if any, is deleted according to applicable data protection laws
+
+### Data Sécurité
+- All data is Chiffré in transit and at rest
+- Access to data is restricted to authorized personnel only
+- Regular Sécurité audits and monitoring are performed
+- Industry-standard Sécurité practices are followed
+- **SOC 2 Certification**: Capgo is currently SOC 2 Type II certified, ensuring the highest standards of Sécurité, availability, and confidentiality. View our compliance status at [trust.capgo.Application](https://trust.capgo.Application)
+- **Continuous Code Auditing**: Every commit is automatically audited by [SonarCloud](https://sonarcloud.io/summary/overall?id=Cap-go_capacitor-updater&branch=main) for the [plugin](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main) and [backend](https://sonarcloud.io/summary/overall?id=Cap-go_capgo&branch=main), ensuring code quality, Sécurité vulnerabilities detection, and maintainability
+- **Vulnerability Scanning**: Additional Sécurité scanning is performed by [Snyk](https://snyk.io/Test/github/Cap-go/capgo) to detect and remediate Sécurité vulnerabilities in dependencies
+- **Infrastructure Sécurité**: Our hosting infrastructure is continuously monitored and verified through [hosting Sécurité checks](https://hosting-checker.net/websites/api.capgo.Application)
+- **AI-Powered Code Review**: Every Tirer request is reviewed by CodeRabbit AI to catch potential issues, Sécurité concerns, and maintain code quality standards
+
+## Privacy Controls
+
+### For Application Developers
+As a Capgo Utilisateur, you have control over:
+
+- **Canal Management**: Control which Mises à jour are distributed to which Utilisateurs
+- **Data Minimization**: Configure what Appareil Information is shared
+- **Geographic Controls**: Manage where your Mises à jour are distributed
+- **Retention Paramètres**: Control how long Mise à jour data is retained
+
+### For End Utilisateurs
+Your Application Utilisateurs benefit from:
+
+- **Minimal Data Collection**: Only essential data for Mise à jour delivery is collected
+- **No Tracking**: No cross-Application or persistent Utilisateur tracking
+- **Transparency**: This privacy policy explains exactly what data is collected
+- **Sécurité**: All data transmission is Chiffré and secure
+
+## Compliance and Legal
+
+### Data Protection Regulations
+Capgo is designed to comply with major data protection regulations including:
+
+- **GDPR** (General Data Protection Regulation)
+- **CCPA** (California Consumer Privacy Act)
+- **COPPA** (Children's Online Privacy Protection Act)
+- Other applicable regional privacy laws
+
+### Application Store Compliance
+Capgo strictly adheres to Application Store guidelines and policies:
+
+- **Apple Application Store**: Complies with [Application Store Review Guidelines](https://developer.apple.com/Application-store/review/guidelines/) section 3.3.2, ensuring that Mises à jour en direct only modify the Application's behavior in ways that are consistent with the submitted Application
+- **Google Play Store**: Follows [Google Play Developer Policy](https://play.google.com/À propos/developer-content-policy/) requirements for dynamic code loading and Application Mises à jour
+- **Content Restrictions**: Mises à jour en direct cannot introduce functionality that wasn't present in the original Application submission or violate platform-specific content policies
+- **Sécurité Requirements**: All Mises à jour maintain the same Sécurité posture and permissions as the original Application
+
+### Your Responsibilities
+As an Application developer using Capgo, you should:
+
+- Include appropriate privacy disclosures in your Application's privacy policy
+- Inform Utilisateurs À propos the use of live Mise à jour services
+- Ensure compliance with applicable laws in your jurisdiction
+- Implement appropriate consent mechanisms if required
+
+<Aside type="tip">
+**No Additional Privacy Implementation Required**: Capgo is designed to be privacy-compliant by default. You don't need to implement any additional privacy controls or data handling mechanisms in your app code. The minimal data collection and privacy-by-design approach means that integrating Capgo typically doesn't require changes to your existing privacy declarations or policies.
+</Aside>
+
+## Privacy by Design
+
+Capgo follows privacy-by-design principles:
+
+### Data Minimization
+- Only collect data that is absolutely necessary for service operation
+- Avoid collecting personal or sensitive Information
+- Use aggregated and anonymized data where possible
+
+### Purpose Limitation
+- Use collected data only for the stated purposes
+- Do not repurpose data for unrelated activities
+- Maintain clear boundaries on data Utilisation
+
+### Transparency
+- Provide clear Information À propos data collection and Utilisation
+- Make privacy practices easily accessible and understandable
+- Regularly Mise à jour privacy Documentation
+
+## Contact and Questions
+
+If you have questions À propos Capgo's privacy practices or need to Signaler a privacy concern:
+
+- Review our full Privacy Policy at [capgo.Application/privacy](https://capgo.Application/privacy)
+- View our Sécurité and compliance status at [capgo.Application/trust](https://capgo.Application/trust)
+- Contact our privacy team through the Support Canaux
+- Signaler any privacy-related issues through our Sécurité Contact
+
+<Aside type="tip">
+Remember to Mise à jour your own Application's privacy policy to reflect the use of Capgo's live Mise à jour service and any data collection that may occur as part of the Mise à jour process.
+</Aside>
+
+## Best Practices for Privacy
+
+When implementing Capgo in your Application:
+
+1. **Be Transparent**: Inform Utilisateurs À propos the live Mise à jour functionality
+2. **Minimize Data**: Only Activer data collection Fonctionnalités you actually need
+3. **Secure Implementation**: Follow Sécurité best practices in your integration
+4. **Regular Reviews**: Periodically review your privacy practices and Mise à jour policies
+5. **Utilisateur Control**: Consider providing Utilisateurs with Options to control Mise à jour behavior
+
+By following these practices and understanding Capgo's privacy approach, you can provide your Utilisateurs with a secure, privacy-respecting live Mise à jour experience.

@@ -1,0 +1,156 @@
+---
+title: Dépannage
+description: "Resolve Problèmes courants encountered while using Capgo with detailed Dépannage steps and advanced Options for Télécharger and Débogage."
+sidebar: 
+  order: 5
+next: false
+prev: false
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+Here are some Problèmes courants you might encounter while using Capgo and how to resolve them.
+
+<Card title="🚀 Need Expert Help?" icon="rocket">
+  <p>
+    Stuck with a complex Problème? Our expert team is here to Aide! Get personalized Support, code reviews, and custom Solutions tailored to your specific needs.
+  </p>
+  <div style="margin-top: 1rem;">
+    <a href="/consulting/" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background-color: #2563eb; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; transition: background-color 0.2s;">
+      Get Professional Support
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="margin:0">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+    </a>
+  </div>
+</Card>
+
+### Télécharger failures
+
+If your Bundle Télécharger fails, double Vérifier:
+- Your app ID in `capacitor.config.ts` matches your app in the Capgo dashboard
+- You're running the Télécharger Commande from the root of your Capacitor project 
+- Your web assets are built and up to date
+
+#### Advanced Télécharger Options
+
+The Capgo CLI provides some additional flags to Aide with common Télécharger issues:
+
+- `--tus`: Uses the [tus resumable upload protocol](https://tus.io/) for more reliable uploads of large bundles or on poor network connections. If your bundle is over 10MB or you're on a spotty connection, consider using `--tus`:
+  ```shell
+  npx @capgo/cli@latest bundle upload --tus
+  ```
+
+- `--package-json` and `--node-modules`: Tells Capgo where to find your root `package.json` and `node_modules` if your app uses a non-standard structure like a monorepo or npm workspace. Pass the path to the root `package.json` and the `--node_modules` path:
+  ```shell
+  npx @capgo/cli@latest bundle upload --package-json=path/to/package.json --node_modules=path/to/node_modules
+  ```
+  Capgo needs this Information to correctly Bundle your Application's dependencies.
+
+You can combine these flags with other options like `--channel` as needed. See the [Capgo CLI docs](/docs/cli/overview/) for full details on the available upload options.
+
+If you're still having trouble with uploads, reach out to [Capgo Support](https://Support.capgo.Application) for further assistance.
+
+### Débogage Mises à jour
+
+If you're encountering issues with Mises à jour en direct, the Capgo Débogage Commande is a helpful tool for Dépannage. To use it:
+
+1. Run the following Commande in your project directory:
+   ```shell
+   npx @capgo/cli@latest app debug
+   ```
+
+2. Launch your Application on a Appareil or emulator and perform the action that should trigger an Mise à jour (e.g. reopening the Application after uploading a Nouveau Bundle).
+
+3. Watch the output of the Débogage Commande. It will Journal Information À propos the Mise à jour process, including:
+   - When the Application checks for an Mise à jour
+   - If an Mise à jour is found and what Version it is
+   - Télécharger and Installation progress for the Mise à jour
+   - Any errors that occur during the Mise à jour process
+
+4. Use the Débogage Journaux to identify where the Problème is occurring. For Exemple:
+   - If no Mise à jour is found, double Vérifier that your Bundle was uploaded successfully and the Application is configured to use the correct Canal.
+   - If the update downloads but doesn't install, make sure you've called `CapacitorUpdater.notifyAppReady()` and that the app was fully closed and reopened.
+   - If you see an Erreur message, look up that specific Erreur in the Capgo docs or reach out to Support for Aide.
+
+The Débogage Commande is especially useful for identifying issues with the Mise à jour Télécharger and Installation process. If the Journaux show the expected Mise à jour Version was found but not ultimately applied, focus your Dépannage on the steps after the Télécharger.
+
+### Débogage with Natif Journaux
+
+In addition to the Capgo Débogage Commande, the Natif Journaux on Android and iOS can provide valuable Dépannage Information, especially for issues on the Natif side of the Mise à jour process.
+
+#### Android Journaux
+
+To access the Android Journaux:
+
+1. Connect your Appareil or Démarrer your emulator
+2. Open Android Studio and select "View > Tool Windows > Logcat" 
+3. In the Logcat window, filter the Journaux to just your Application's process by selecting it from the dropdown at the top
+4. Look for any lines that include `Capgo` to find the SDK logs
+
+Alternatively, you can use the `adb logcat` command and grep for `Capgo` to filter the logs.
+
+The Capgo SDK will Journal key events during the Mise à jour process, such as:
+- When an Mise à jour Vérifier is initiated
+- If an Mise à jour is found and what Version it is
+- When the Mise à jour Télécharger starts and completes
+- When the Mise à jour Installation is triggered
+- Any errors that occur during the Natif Mise à jour steps
+
+Common Android-specific issues you might see in the Journaux include:
+- Network connectivity problems preventing the Mise à jour Télécharger
+- File permissions errors when saving or reading the Mise à jour Bundle
+- Out of storage space for the Mise à jour Bundle
+- Failure to Redémarrer the Application after the Mise à jour is installed
+
+#### iOS Journaux
+
+To access the iOS Journaux:
+
+1. Connect your Appareil or Démarrer your simulator
+2. Open Xcode and go to "Window > Appareils and Simulators"
+3. Select your Appareil and click on "Open Console"
+4. In the console output, look for any lines that include `Capgo` to find the SDK logs
+
+You can also use the `log stream` command in the terminal and grep for `Capgo` to filter the logs.
+
+Similar to Android, the Capgo SDK will Journal key iOS-side events:
+- Mise à jour Vérifier initiation and result
+- Télécharger Démarrer, progress, and completion
+- Installation trigger and result
+- Any errors during the Natif Mise à jour process
+
+iOS-specific issues you might identify in the Journaux include:
+- SSL certificate problems when downloading the Mise à jour
+- Application transport Sécurité blocking the Mise à jour Télécharger 
+- Insufficient storage space for the Mise à jour Bundle
+- Failure to properly extract or apply the Mise à jour Bundle
+
+On both platforms, the Natif Journaux provide a lower-level view into the Mise à jour process, with more details on the Natif implementation. They are especially useful for identifying issues that occur outside of the Capgo JavaScript layer.
+
+When Dépannage a tricky live Mise à jour problem, it's a good idea to capture both the Capgo Débogage Journaux and the Natif Journaux for a comprehensive picture of what's happening. The two Journaux together will give you the best chance of identifying and resolving the Problème.
+
+### Mises à jour not applying
+
+If you've uploaded a Bundle but aren't seeing the changes on your Appareil:
+- Make sure you've called `CapacitorUpdater.notifyAppReady()` in your app code as shown in the [quickstart](/docs/getting-started/quickstart)  
+- Vérifier that your Appareil is connected to the internet and the Capgo Débogage Journaux show the Mise à jour was downloaded
+- Try fully closing and reopening the Application, as Mises à jour are only applied on a fresh launch
+- Look for any errors in the Natif Journaux that might indicate a problem applying the Mise à jour
+
+Refer to the [deploying live updates](/docs/getting-started/deploy) guide for more details on the update process. If you're still stuck, use the `npx @capgo/cli@latest app debug` command and native logs to get more visibility into what's happening.
+
+## SDK Installation
+
+If you're having trouble installing the Capgo SDK, make sure:
+- Your Application is using a supported Version of Capacitor (4.0 or newer)
+- You've followed the [Démarrage rapide](/docs/getting-started/Démarrage rapide) steps in order, including syncing your Application after installing the SDK
+
+## CI/CD Integration 
+
+For issues with triggering Capgo uploads from your CI/CD pipeline:
+- Double Vérifier your Capgo authentication token is set up correctly 
+- Make sure you're running the Télécharger Commande after your web assets are built
+- Vérifier that the Télécharger Commande is using the correct Canal name for your target environment
+
+See the [CI/CD integration](/docs/getting-started/cicd-integration/) docs for more troubleshooting tips. You can also use the `npx @capgo/cli@latest app debug` command to confirm if your CI/CD-triggered updates are being received by the app.

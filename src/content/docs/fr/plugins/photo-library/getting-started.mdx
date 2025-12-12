@@ -1,0 +1,75 @@
+---
+title: Commencer
+description: Integrate the Natif photo gallery with pagination and media picking.
+sidebar: 
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+1. **Installer the plugin**
+   <PackageManagers pkg="@capgo/capacitor-photo-library" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+
+2. **Synchroniser platforms**
+   <PackageManagers type="exec" pkg="cap" args="sync" pkgManagers={['npm', 'pnpm', 'yarn', 'bun']} />
+</Steps>
+
+## Platform permissions
+
+- **iOS**: Update `Info.plist` with `NSPhotoLibraryUsageDescription` (and `NSPhotoLibraryAddUsageDescription` if you plan to save media).
+- **Android**: For Android 13+, declare the photo/video permissions (`READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`). Capacitor 5 handles this automatically, but double-check custom manifests.
+
+## Request access
+
+```typescript
+import { PhotoLibrary } from '@capgo/capacitor-photo-library';
+
+const { state } = await PhotoLibrary.requestAuthorization();
+if (state !== 'authorized' && state !== 'limited') {
+  throw new Error('Photo access denied');
+}
+```
+
+## Load the gallery
+
+```typescript
+import { Capacitor } from '@capacitor/core';
+
+const { assets, hasMore, nextPage } = await PhotoLibrary.getLibrary({
+  limit: 100,
+  includeAlbums: false,
+  thumbnailWidth: 256,
+  thumbnailHeight: 256,
+});
+
+const gallery = assets.map((asset) => ({
+  id: asset.id,
+  fileName: asset.fileName,
+  created: asset.creationDate,
+  thumbnailUrl: asset.thumbnail
+    ? asset.thumbnail.webPath ?? Capacitor.convertFileSrc(asset.thumbnail.path)
+    : undefined,
+  photoUrl: asset.file
+    ? asset.file.webPath ?? Capacitor.convertFileSrc(asset.file.path)
+    : undefined,
+}));
+```
+
+To fetch additional pages, call `PhotoLibrary.getLibrary({ cursor: nextPage })`.
+
+## Let Utilisateurs pick media
+
+```typescript
+const selection = await PhotoLibrary.pickMedia({
+  selectionLimit: 5,
+  includeVideos: true,
+});
+
+console.log('User selected', selection.assets.length, 'items');
+```
+
+## Clean up cached files
+
+Generated thumbnails and exports are stored in the app cache directory under `photoLibrary`. Remove them with your preferred file API when you need to reclaim storage.

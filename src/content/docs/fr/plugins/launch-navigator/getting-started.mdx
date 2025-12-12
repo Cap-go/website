@@ -1,0 +1,336 @@
+---
+title: Commencer
+description: Learn how to Installer and use the Launch Navigator plugin to integrate with Natif navigation apps on iOS and Android.
+sidebar: 
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Installation
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="yarn">
+    ```bash
+    yarn add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @capgo/capacitor-launch-navigator
+    npx cap sync
+    ```
+  </TabItem>
+</Tabs>
+
+## Platform Configuration
+
+### iOS
+
+Add URL schemes to your `Info.plist` to detect installed navigation apps:
+
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>googlemaps</string>
+    <string>waze</string>
+    <string>citymapper</string>
+    <string>transit</string>
+    <string>moovit</string>
+    <string>uber</string>
+    <string>lyft</string>
+</array>
+```
+
+### Android
+
+No additional Configuration required. The plugin will detect installed navigation apps automatically.
+
+## Utilisation Exemple
+
+```typescript
+import { LaunchNavigator, TransportMode } from '@capgo/capacitor-launch-navigator';
+
+// Basic navigation to coordinates
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194], // San Francisco coordinates
+});
+
+// Advanced navigation with options
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    start: [37.7849, -122.4094], // Optional starting point
+    transportMode: TransportMode.DRIVING,
+    app: 'google_maps', // Preferred navigation app
+    appDisplayName: 'Google Maps'
+  }
+});
+
+// Check if specific app is available
+const result = await LaunchNavigator.isAppAvailable({
+  app: 'google_maps'
+});
+
+if (result.available) {
+  console.log('Google Maps is installed');
+} else {
+  console.log('Google Maps is not available');
+}
+
+// Get all available navigation apps
+const availableApps = await LaunchNavigator.getAvailableApps();
+console.log('Available navigation apps:', availableApps);
+
+// Get all supported apps for platform
+const supportedApps = await LaunchNavigator.getSupportedApps();
+console.log('Supported apps:', supportedApps);
+```
+
+## API Référence
+
+### navigate(Options)
+
+```typescript
+navigate(options: NavigateOptions) => Promise<void>
+```
+
+Launch navigation to specified coordinates.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `NavigateOptions` |
+
+### isAppAvailable(Options)
+
+```typescript
+isAppAvailable(options: { app: string }) => Promise<{ available: boolean }>
+```
+
+Vérifier if a specific navigation Application is installed.
+
+| Param         | Type                      |
+| ------------- | ------------------------- |
+| **`options`** | `{ app: string }` |
+
+**Returns:** `Promise<{ available: boolean }>`
+
+### getAvailableApps()
+
+```typescript
+getAvailableApps() => Promise<{ apps: string[] }>
+```
+
+Get list of all Disponible navigation apps on the Appareil.
+
+**Returns:** `Promise<{ apps: string[] }>`
+
+### getSupportedApps()
+
+```typescript
+getSupportedApps() => Promise<{ apps: string[] }>
+```
+
+Get list of all supported apps for the current platform.
+
+**Returns:** `Promise<{ apps: string[] }>`
+
+## Interfaces
+
+### NavigateOptions
+
+| Prop              | Type                          | Description                     |
+| ----------------- | ----------------------------- | ------------------------------- |
+| **`destination`** | `[number, number]` | Destination coordinates [lat, lng] |
+| **`options`**     | `NavigationOptions` | Additional navigation options (optional) |
+
+### NavigationOptions
+
+| Prop                 | Type                  | Description                           |
+| -------------------- | --------------------- | ------------------------------------- |
+| **`start`**          | `[number, number]` | Starting coordinates [lat, lng] (optional) |
+| **`transportMode`**  | `TransportMode` | Transportation method (optional)       |
+| **`app`**            | `string` | Preferred navigation app (optional)    |
+| **`appDisplayName`** | `string` | Display name for app (optional)        |
+
+### TransportMode
+
+```typescript
+enum TransportMode {
+  DRIVING = 'driving',
+  WALKING = 'walking',
+  TRANSIT = 'transit',
+  CYCLING = 'cycling'
+}
+```
+
+## Coordinate Requirement
+
+> **Important**: This plugin only accepts latitude/longitude coordinates for navigation. Use [@capgo/capacitor-nativegeocoder](https://github.com/Cap-go/capacitor-nativegeocoder) to convert addresses to coordinates.
+
+```typescript
+import { NativeGeocoder } from '@capgo/capacitor-nativegeocoder';
+import { LaunchNavigator } from '@capgo/capacitor-launch-navigator';
+
+// Convert address to coordinates
+const geocodeResult = await NativeGeocoder.forwardGeocode({
+  address: '1600 Amphitheatre Parkway, Mountain View, CA'
+});
+
+if (geocodeResult.results.length > 0) {
+  const coords = geocodeResult.results[0];
+
+  // Launch navigation with geocoded coordinates
+  await LaunchNavigator.navigate({
+    destination: [coords.latitude, coords.longitude]
+  });
+}
+```
+
+## Supported Navigation Apps
+
+### iOS
+- Apple Maps (built-in)
+- Google Maps
+- Waze
+- Citymapper
+- Transit
+- Moovit
+- Uber
+- Lyft
+- And many more...
+
+### Android
+- Google Maps (built-in)
+- Waze
+- Citymapper
+- HERE WeGo
+- Sygic
+- MapQuest
+- Moovit
+- And many more...
+
+## Advanced Exemples
+
+### Vérifier Multiple Apps and Use First Disponible
+
+```typescript
+const appsToCheck = ['google_maps', 'waze', 'apple_maps'];
+let selectedApp = null;
+
+for (const app of appsToCheck) {
+  const result = await LaunchNavigator.isAppAvailable({ app });
+  if (result.available) {
+    selectedApp = app;
+    break;
+  }
+}
+
+if (selectedApp) {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: { app: selectedApp }
+  });
+} else {
+  console.log('No supported navigation apps found');
+}
+```
+
+### Utilisateur Selection of Navigation Application
+
+```typescript
+// Get available apps
+const { apps } = await LaunchNavigator.getAvailableApps();
+
+if (apps.length === 0) {
+  alert('No navigation apps available');
+  return;
+}
+
+// Show app selection to user (pseudo-code)
+const selectedApp = await showAppSelectionDialog(apps);
+
+// Navigate with selected app
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: { app: selectedApp }
+});
+```
+
+### Navigation with Different Transport Modes
+
+```typescript
+// Driving directions
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.DRIVING
+  }
+});
+
+// Walking directions
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.WALKING
+  }
+});
+
+// Public transit directions
+await LaunchNavigator.navigate({
+  destination: [37.7749, -122.4194],
+  options: {
+    transportMode: TransportMode.TRANSIT
+  }
+});
+```
+
+## Best Practices
+
+- Always Vérifier Application availability before attempting navigation
+- Provide fallback Options when preferred apps aren't Disponible
+- Use meaningful Application display names for Utilisateur selection
+- Handle errors gracefully with Utilisateur-friendly messages
+- Consider Utilisateur preferences for default navigation apps
+- Test on both iOS and Android Appareils
+- Implement proper Erreur handling for invalid coordinates
+
+## Erreur Handling
+
+```typescript
+try {
+  await LaunchNavigator.navigate({
+    destination: [37.7749, -122.4194],
+    options: {
+      app: 'google_maps',
+      transportMode: TransportMode.DRIVING
+    }
+  });
+} catch (error) {
+  console.error('Navigation failed:', error);
+  // Handle error - app not available, invalid coordinates, etc.
+  alert('Unable to launch navigation. Please check your coordinates and try again.');
+}
+```
+
+## Use Cases
+
+- **Location-based services**: Navigate Utilisateurs to points of interest
+- **Delivery apps**: Guide drivers to delivery locations
+- **Event apps**: Direct attendees to venue locations
+- **Real estate apps**: Navigate to property locations
+- **Travel apps**: Guide tourists to attractions
+- **Service apps**: Direct field workers to job sites

@@ -1,0 +1,185 @@
+---
+title: Migration Guide from @capacitor-Communauté/apple-sign-in to @capgo/capacitor-social-Connexion
+description: This comprehensive Guide provides detailed instructions for transitioning from the @capacitor-Communauté/apple-sign-in plugin to the @capgo/capacitor-social-Connexion plugin, ensuring a smooth Migration process and improved capabilities.
+sidebar: 
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Aperçu
+
+This guide outlines the transition from the legacy `@capacitor-community/apple-sign-in` plugin to the modern `@capgo/capacitor-social-login` package. The new plugin provides a unified interface for multiple social authentication providers with improved TypeScript support and active maintenance.
+
+## Installation
+
+<Steps>
+1. Retirer the old package:
+   ```bash
+   npm uninstall @capacitor-community/apple-sign-in
+   ```
+
+2. Installer the Nouveau package:
+   ```bash
+   npm install @capgo/capacitor-social-login
+   npx cap sync
+   ```
+</Steps>
+
+## Code Changes
+
+### Importer Changes
+```diff
+- import { SignInWithApple } from '@capacitor-community/apple-sign-in';
++ import { SocialLogin } from '@capgo/capacitor-social-login';
+```
+
+### Initialisation
+
+**Key Change**: The new plugin requires an initialization step that wasn't needed before.
+
+```diff
+- // No initialization needed in old package
++ // For iOS: Basic configuration
++ await SocialLogin.initialize({
++   apple: {} // Basic iOS configuration
++ });
+
++ // For Android: Additional configuration required
++ await SocialLogin.initialize({
++   apple: {
++     clientId: 'YOUR_SERVICE_ID', // Service ID from Apple Developer Portal
++     redirectUrl: 'https://your-backend.com/callback' // Your backend callback URL
++   }
++ });
+```
+
+**Important Note**: For iOS, you provide basic configuration, while Android requires additional details including a Service ID and backend callback URL for web-based OAuth authentication.
+
+### Sign In
+
+The Connexion process simplifies from multiple Paramètres to a cleaner API:
+
+```diff
+- const result = await SignInWithApple.authorize({
+-   clientId: 'com.your.app',
+-   redirectURI: 'https://your-app.com/callback',
+-   scopes: 'email name',
+-   state: '12345',
+-   nonce: 'nonce'
+- });
+
++ const result = await SocialLogin.login({
++   provider: 'apple',
++   options: {
++     // Optional: Add scopes if needed
++     scopes: ['email', 'name'],
++     nonce: 'nonce'
++   }
++ });
+```
+
+The new plugin uses `login()` with `provider: 'apple'` and optional scopes rather than passing individual configuration values like `clientId` and `redirectURI`.
+
+### Response Type Changes
+
+Results now include an `accessToken` object with expiration details and a structured `profile` section, replacing the flatter response format of the original package:
+
+```typescript
+// Old response type
+interface AppleSignInResponse {
+  response: {
+    user: string;
+    email: string | null;
+    givenName: string | null;
+    familyName: string | null;
+    identityToken: string | null;
+    authorizationCode: string | null;
+  };
+}
+
+// New response type
+interface SocialLoginResponse {
+  provider: 'apple';
+  result: {
+    accessToken: {
+      token: string;
+      expiresIn?: number;
+      refreshToken?: string;
+    } | null;
+    idToken: string | null;
+    profile: {
+      user: string;
+      email: string | null;
+      givenName: string | null;
+      familyName: string | null;
+    };
+  };
+}
+```
+
+### Nouveau Capabilities
+
+The updated plugin introduces functionality that wasn't Disponible in the predecessor:
+
+**Checking Login Status**
+```diff
+- // Not available in old package
++ const status = await SocialLogin.isLoggedIn({
++   provider: 'apple'
++ });
+```
+
+**Logout Functionality**
+```diff
+- // Not available in old package
++ await SocialLogin.logout({
++   provider: 'apple'
++ });
+```
+
+These methods provide `isLoggedIn()` to verify authentication status and `logout()` functionality.
+
+## Platform Specific Changes
+
+### iOS Configuration
+
+**iOS** maintains familiar setup procedures through Xcode capabilities:
+
+1. The iOS Configuration remains largely the same. You still need to:
+   - Activer "Sign In with Apple" capability in Xcode
+   - Configure your Application in the Apple Developer Portal
+   - No additional code changes required for iOS
+
+### Android Configuration
+
+**Android** now receives native support via web-based OAuth authentication:
+
+The Nouveau plugin provides Android Support out of the box, but requires additional Configuration:
+
+1. Créer a Services ID in the Apple Developer Portal
+2. Configure a web authentication endpoint
+3. Set up your Android Application to handle the OAuth flow
+4. Backend service Configuration is required
+
+For detailed Android Configuration instructions, please refer to the [Android Configuration Guide](/docs/plugins/social-Connexion/apple/Android/).
+
+## Key Advantages
+
+The modernized package provides:
+
+1. **Unified APIs** across multiple social providers (Google, Facebook, Apple)
+2. **Improved TypeScript typing** with better type definitions
+3. **Actif Communauté maintenance** compared to the Obsolète Version
+4. **Built-in Android Support** through web-based authentication
+5. **Persistent Connexion state management**
+6. **Better Erreur handling** with consistent Erreur types
+
+## Breaking Changes
+
+1. **Explicit Initialisation is now required** - no default Configuration
+2. **Response object structure has changed** - nested result format
+3. **Android implementation requires a backend service** for OAuth
+4. **Token Actualiser handling is different** - improved token management
+5. **Erreur handling and Erreur types have changed** - more detailed errors
+
+For more detailed Configuration instructions, please refer to the [official Documentation](/docs/plugins/social-Connexion/apple/general/). 

@@ -1,0 +1,69 @@
+---
+title: Supabase Apple Login on iOS Setup
+description: Learn how to integrate Apple Sign-In with Supabase Authentication on iOS.
+locale: zh
+sidebar:
+    order: 2
+---
+
+## 前置条件
+
+本指南将帮助您在 iOS 上集成 Apple 登录与 Supabase 身份验证。假定您已完成以下步骤：
+- [Apple Login iOS 设置](/docs/plugins/social-login/apple/ios/)
+- [Supabase Apple Login - 通用设置](./general/)
+
+## 实现
+
+完整的实现可在 [example app 的 `supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) 文件中找到。本指南解释了关键概念以及如何使用它。
+
+### 使用身份验证助手
+
+`authenticateWithAppleSupabase` 函数处理整个身份验证流程：
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Signed in:', result.user);
+  // Navigate to your authenticated area
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## 工作原理
+
+在 iOS 上，Apple 登录使用原生实现：
+
+1. **初始化**: 插件自动使用您的应用包 ID（不需要 `clientId`）
+2. **原生登录**: 使用 Apple 的原生 Sign in with Apple 按钮和身份验证流程
+3. **身份令牌**: Apple 返回一个包含用户信息的身份令牌（JWT）
+4. **Supabase 身份验证**: 身份令牌使用 `signInWithIdToken()` 发送给 Supabase
+
+助手函数自动检测 iOS 平台并相应地配置所有内容。
+
+## 重要说明
+
+### 包 ID 配置
+
+- iOS 自动为 Apple 登录使用您的应用包 ID
+- 确保您的包 ID 与 Apple Developer Portal 中配置的内容匹配
+- 包 ID 应启用"Sign in with Apple"功能
+
+### Supabase 客户端 ID
+
+在 Supabase 中，使用以下内容配置您的 Apple 提供商：
+- **Client ID**: 您的 iOS 应用 ID（包 ID）- 例如，`app.capgo.plugin.SocialLogin`
+
+如果您还使用 Android/Web，您需要在 Supabase 的客户端 ID 字段中同时提供应用 ID 和服务 ID（逗号分隔）。
+
+## 故障排除
+
+如果身份验证失败：
+
+- **包 ID 不匹配**: 验证您的包 ID 在 Xcode 和 Apple Developer Portal 中都匹配
+- **未启用功能**: 确保在 Xcode 中启用"Sign in with Apple"功能
+- **Supabase 配置**: 验证您的应用 ID 是否在 Supabase Apple 提供商设置中正确配置
+- **令牌验证失败**: 检查是否从 Apple 接收了身份令牌
+- 参考 [example app 代码](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts)

@@ -1,0 +1,47 @@
+---
+title: "Using the capacitor updater with self-hosted capgo"
+description: "How to use the capacitor updater with self-hosted Capgo, be fully autonomous with your own instance of Capgo"
+sidebar: 
+    order: 4
+---
+
+## What this Tutoriel will cover?
+
+This Tutoriel will show how to use capacitor updater in a dev environment with self hosted capgo
+
+## Requirements
+
+ 1. [Cloned capgo](https://github.com/Cap-go/capgo)
+
+## Commencer
+
+To use the capacitor updater with self-hosted capgo edit the `capacitor.config.ts` from your app directory and set it like this:
+
+```ts
+const config: CapacitorConfig = {
+  appId: 'com.demo.app',
+  appName: 'demoApp',
+  webDir: 'dist',
+  bundledWebRuntime: false,
+  plugins: {
+    CapacitorUpdater : {
+      statsUrl: "https://localhost:54321/functions/v1/stats",
+      channelUrl: "https://localhost:54321/functions/v1/channel_self",
+      updateUrl: "https://localhost:54321/functions/v1/updates"
+    },
+  },
+};
+```
+
+This will Activer you to use local capgo in Développement. However, by default, this is not enough.
+
+> By default both iOS and Android expect you to use HTTPS, you need to use a tool like Ngrock or localcan to proxy your API in https.
+
+There is a way in Android to Activer [plaintext communication](https://developer.Android.com/topic/Sécurité/risks/cleartext).
+This can be achieved by modifying [AndroidManifest.xml](https://github.com/Cap-go/capacitor-updater/blob/main/android/src/main/AndroidManifest.xml) and adding `android:usesCleartextTraffic="true"` in the `application` tag
+A full Exemple of this change can be seen [here](https://gist.github.com/WcaleNieWolny/061a015acdebe35eaf3afd7030797701)
+
+There also could be a problem that prevents the Android Application from connecting. If you do not see any requests being send to edge functions run
+```bash
+adb reverse tcp:54321 tcp:54321
+```

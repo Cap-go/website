@@ -1,0 +1,265 @@
+---
+title: "Canaux"
+description: "Guide to managing Application Mise à jour Canaux in Capgo, covering Version control, platform targeting, and Mise à jour policies."
+sidebar: 
+  order: 6
+---
+
+Canaux are the core mechanism for managing Application Mises à jour in Capgo. They allow you to control how and when your Utilisateurs receive Mises à jour, enabling Fonctionnalités like A/B Test, staged rollouts, and platform-specific Mises à jour.
+
+## Understanding Canaux
+
+A Canal represents a distribution track for your Application Mises à jour. Each Canal can be configured with specific rules and constraints:
+
+- **Version Control**: Specify which Version Utilisateurs receive
+- **Platform Targeting**: Target specific platforms (iOS/Android)
+- **Mise à jour Policies**: Control how Mises à jour are delivered
+- **Appareil Restrictions**: Manage which Appareils can access Mises à jour
+
+## Canal Configuration Options
+
+- **public**: Set as default Canal for Nouveau Appareils
+- **disableAutoUpdateUnderNative**: Prevent Mises à jour when the Appareil's Natif Application Version is newer than the Mise à jour Version Disponible in the Canal (e.g., Appareil is on Version 1.2.3, but Canal has 1.2.2)
+- **disableAutoUpdate**: Control Mise à jour behavior ("major", "minor", "version_number", "none")
+- **iOS/Android**: Activer/Désactiver for specific platforms
+- **allow_device_self_set**: Let Appareils choose their Canal
+- **allow_emulator**: Allow Mises à jour on emulator Appareils
+- **allow_dev**: Allow Mises à jour on Développement builds
+
+## Best Practices
+
+1. **Test Canal**: Maintain a Test Canal for internal validation
+2. **Staged Rollout**: Use multiple Canaux for gradual Mise à jour Déploiement
+3. **Platform Separation**: Créer separate Canaux for iOS and Android when needed
+4. **Version Control**: Use semantic versioning for clear Mise à jour paths
+
+## Endpoints
+
+### POST
+
+`https://api.capgo.app/channel/`
+
+Créer or Mise à jour a Canal Configuration.
+
+#### Request Body
+
+```typescript
+type disable_update = "major" | "minor" | "version_number" | "none"
+interface ChannelSet {
+  app_id: string
+  channel: string
+  version?: string
+  public?: boolean
+  disableAutoUpdateUnderNative?: boolean
+  disableAutoUpdate?: disable_update
+  ios?: boolean
+  android?: boolean
+  allow_device_self_set?: boolean
+  allow_emulator?: boolean
+  allow_dev?: boolean
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X POST \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "channel": "beta",
+    "version": "1.2.0",
+    "public": false,
+    "disableAutoUpdate": "minor",
+    "ios": true,
+    "android": true,
+    "allow_emulator": true
+  }' \
+  https://api.capgo.app/channel/
+```
+
+#### Succès Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### GET
+
+`https://api.capgo.app/channel/`
+
+Retrieve Canal Information. Retourne 50 Canaux per page.
+
+#### Query Paramètres
+- `app_id`: Required. The ID of your app
+- `page`: Optional. Page number for pagination
+- `channel`: Optional. Specific channel name to retrieve
+
+#### Exemple Requests
+
+```bash
+# Get all channels
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=app_123"
+
+# Get specific channel
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=app_123&channel=beta"
+
+# Get next page
+curl -H "authorization: your-api-key" \
+  "https://api.capgo.app/channel/?app_id=app_123&page=1"
+```
+
+#### Response Type
+
+```typescript
+interface Channel {
+    id: number;
+    created_at: string;
+    name: string;
+    app_id: string;
+    version: {
+        id: number,
+        name: string
+    };
+    created_by: string;
+    updated_at: string;
+    public: boolean;
+    disableAutoUpdateUnderNative: boolean;
+    disableAutoUpdate: boolean;
+    allow_emulator: boolean;
+    allow_dev: boolean;
+}
+```
+
+#### Exemple Response
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "production",
+      "app_id": "app_123",
+      "version": {
+        "id": 1,
+        "name": "1.0.0"
+      },
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "created_by": "user_123",
+      "public": true,
+      "disableAutoUpdateUnderNative": false,
+      "disableAutoUpdate": false,
+      "allow_emulator": false,
+      "allow_dev": false
+    }
+  ]
+}
+```
+
+### Supprimer
+
+`https://api.capgo.app/channel/`
+
+Supprimer a Canal. Remarque that this will affect all Appareils using this Canal.
+
+#### Query Paramètres
+
+```typescript
+interface Channel {
+  channel: string
+  app_id: string
+}
+```
+
+#### Exemple Request
+
+```bash
+curl -X DELETE \
+  -H "authorization: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "app_id": "app_123",
+    "channel": "beta"
+  }' \
+  https://api.capgo.app/channel/
+```
+
+#### Succès Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## Erreur Handling
+
+Common Erreur scenarios and their responses:
+
+```json
+// Channel not found
+{
+  "error": "Channel not found",
+  "status": "KO"
+}
+
+// Invalid version format
+{
+  "error": "Invalid version format. Use semantic versioning",
+  "status": "KO"
+}
+
+// Invalid update policy
+{
+  "error": "Invalid disableAutoUpdate value",
+  "status": "KO"
+}
+
+// Permission denied
+{
+  "error": "Insufficient permissions to manage channels",
+  "status": "KO"
+}
+```
+
+## Common Use Cases
+
+1. **Bêta Test**
+```typescript
+{
+  "app_id": "app_123",
+  "channel": "beta",
+  "version": "1.2.0-beta",
+  "public": false,
+  "allow_emulator": true,
+  "allow_dev": true
+}
+```
+
+2. **Production Rollout**
+```typescript
+{
+  "app_id": "app_123",
+  "channel": "production",
+  "version": "1.2.0",
+  "public": true,
+  "disableAutoUpdate": "minor"
+}
+```
+
+3. **Platform-Specific Mises à jour**
+```typescript
+{
+  "app_id": "app_123",
+  "channel": "ios-hotfix",
+  "version": "1.2.1",
+  "ios": true,
+  "android": false
+}
+``` 

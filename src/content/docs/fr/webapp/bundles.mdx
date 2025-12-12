@@ -1,0 +1,66 @@
+---
+title: "Bundles"
+description: "Learn how to manage Bundles in Capgo, What is a Bundle how to manage it, there is mulple things you can do this them, they are the most Important part of Capgo"
+sidebar: 
+  order: 7
+---
+
+## Show all Bundles
+
+In Capgo, a Bundle represents a specific Version of your Application's code and assets, ready to be distributed to Appareils. First, let's take a look at the Bundles page. You can access it by [clicking on your Application](/docs/webapp/main-page) and then [clicking on the Bundles tab](/docs/webapp/main-Application-page).
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundles.webp" alt="bundle list" /><figcaption></figcaption></figure>
+
+## Supprimer a Bundle
+
+They are two ways a Bundle can be deleted:
+
+ - Normally
+ - Unsafely
+
+The Unsafe way of deleting a Bundle was added into Capgo on August 12, 2024.
+
+The difference between the two ways is the ability to reuse the Version number after the deletion.
+
+For example, if you delete a version `1.0.0` the normal way and later try to upload a `1.0.0` version, it will fail.
+If you delete this version via the unsafe delete, you will be able to upload a `1.0.0` version.
+
+:::danger
+Deleting a Version unsafely and re-uploading it is REALLY dangerous.
+It can cause all sorts of bugs and unpredictable behaviour in the plugin.
+It should NEVER be used for Bundles that have been used in a public Canal.
+It is for this reason that deleting a Version unsafely requires "super_admin" privileges
+:::
+
+## Managing a specific Bundle
+
+Once you see the list of all Bundles click on the one you want to manage. After you do that you should see something like this:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-info.webp" alt="bundle info" /><figcaption></figcaption></figure>
+
+Let's go through all of the elements on this page.
+
+---
+
+First you can see a `Channel`. This lets you know which channel this bundle is for. You can change the channel by clicking on it.
+Once you click on it you should see something like this:
+
+<figure><img style="margin-left: auto; margin-right: auto" src="/bundle-change.webp" alt="bundle change" /><figcaption></figcaption></figure>
+
+**Set bundle to channel:** Assigns this bundle as the active version for a chosen channel. Devices subscribed to that channel will then receive this bundle.
+**Open channel:** Navigates you to the dedicated page for the channel currently associated with this bundle, where you can manage channel-specific settings.
+**Unlink bundle from channel:** Removes the association between this bundle and its current channel. This means devices on that channel will no longer receive this specific bundle (unless it's re-linked or another bundle is set for that channel).
+
+:::Avertissement
+The `Unlink bundle from channel` action only affects the association with the channel currently displayed for this bundle (e.g., "dev" in the screenshot). If this bundle is also active on other channels, those links will remain. You'll need to manage unlinking from other channels separately, for example, by navigating to the respective channel's configuration page.
+:::
+
+---
+
+Next, you can see the `Size`. If you click on it you will be able to download this bundle.
+It should look something like this:
+<figure><img style="margin-left: auto; margin-right: auto" src="/download-bundle.webp" alt="download bundle" /><figcaption></figcaption></figure>
+
+---
+
+Finally, the **Appareils** section lists all Appareils that are currently using this specific Bundle Version. This can be helpful for understanding the rollout status and impact of this Bundle.

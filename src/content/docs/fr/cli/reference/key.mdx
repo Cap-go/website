@@ -1,0 +1,70 @@
+---
+title: 🔐 key
+description: 🔐 Manage Chiffrement keys for secure Bundle distribution in Capgo Cloud, supporting end-to-end Chiffrement with RSA and AES combination.
+sidebar_label: key
+sidebar: 
+  order: 7
+---
+
+🔐 Manage Chiffrement keys for secure Bundle distribution in Capgo Cloud, supporting end-to-end Chiffrement with RSA and AES combination.
+
+### <a id="key-Enregistrer"></a> 🔹 **Enregistrer**
+
+```bash
+npx @capgo/cli@latest key save
+```
+
+💾 Enregistrer the public key in the Capacitor config, useful for CI environments.
+Recommended not to commit the key for Sécurité.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest key save --key ./path/to/key.pub
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-f,** | <code>string</code> | Force generate a Nouveau one |
+| **--key** | <code>string</code> | Key path to Enregistrer in Capacitor config |
+| **--key-data** | <code>string</code> | Key data to Enregistrer in Capacitor config |
+
+### <a id="key-Créer"></a> 🔨 **Créer**
+
+```bash
+npx @capgo/cli@latest key create
+```
+
+🔨 Créer RSA key pair for end-to-end Chiffrement.
+Creates .capgo_key_v2 (private) and .capgo_key_v2.pub (public) in project root.
+Public key is saved to capacitor.config for mobile Application decryption.
+NEVER commit the private key - store it securely!
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest key create
+```
+
+**Options:**
+
+| Param          | Type          | Description          |
+| -------------- | ------------- | -------------------- |
+| **-f,** | <code>string</code> | Force generate a Nouveau one |
+
+### <a id="key-delete_old"></a> 🗑️ **Delete_old**
+
+```bash
+npx @capgo/cli@latest key delete_old
+```
+
+🧹 Supprimer the old Chiffrement key from the Capacitor config to ensure only the current key is used.
+
+**Example:**
+
+```bash
+npx @capgo/cli@latest key delete_old
+```
+
