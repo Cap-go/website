@@ -36,10 +36,6 @@ next_blog: ''
 
 Capgo is ideal for quick fixes and feature tweaks, while major updates or native code changes still require manual store submissions. Combining both methods ensures [efficient and compliant app updates](https://capgo.app/blog/do-apple-allow-live-updates/).
 
-## Explore Capawesome's New Ionic Capacitor Live Update Plugin: Features & How to Get Started
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## [Capgo](https://capgo.app/) OTA vs Manual Updates: Core Differences
 
 ![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682c8ab34fa53d42207d8d4e/974242599310258c114f19dd9b6b5656.jpg)

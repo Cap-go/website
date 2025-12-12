@@ -185,7 +185,6 @@ When deciding between open-source and proprietary tools, consider factors like y
 
 ### When Open Source Makes Sense
 
-Open-source tools are a great fit for projects that need flexibility and customization. They’re especially useful for teams looking for tailored integrations and cost-efficient options. The [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater) is a good example of this approach. As Capawesome explains:
 
 > "One of the biggest advantages of Capacitor over other runtimes is the ability to deliver updates in real-time without having to resubmit your app to the app stores" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
 

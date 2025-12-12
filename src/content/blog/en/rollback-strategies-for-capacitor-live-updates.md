@@ -27,7 +27,7 @@ next_blog: ''
 
 Platforms like [Capgo](https://capgo.app/) offer fast updates (114ms for 5MB), high success rates (82%), and cost-effective solutions (from $12/month). They also support rollback automation, real-time tracking, and user segmentation, making them a reliable choice for managing live updates.
 
-| **Feature** | **Capgo** | **Capawesome** | **[Appflow](https://ionic.io/appflow/)** |
+| **Feature** | **Capgo** | **[Appflow](https://ionic.io/appflow/)** |
 | --- | --- | --- | --- |
 | Update Speed | 114ms | Standard | Standard |
 | Success Rate | 82% | Not Published | Not Published |
@@ -132,7 +132,7 @@ Your monitoring setup should include one-click rollback functionality. This allo
 
 Since Microsoft CodePush shut down in 2024, the options for managing live updates in [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) have expanded. Today’s platforms offer various tools to handle updates and rollbacks effectively. Here's how Capgo stacks up against competitors:
 
-| Feature | Capgo | Capawesome | Appflow |
+| Feature | Capgo | Appflow |
 | --- | --- | --- | --- |
 | Update Speed | 114ms (5MB bundle) | Standard | Standard |
 | Success Rate | 82% worldwide | Not published | Not published |

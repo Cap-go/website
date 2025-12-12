@@ -28,7 +28,7 @@ next_blog: ''
 
 ### OTAプラットフォームの比較:
 
-| 機能 | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
+| 機能 | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | エンドツーエンド暗号化 | あり | なし | なし |
 | ロールバック機能 | 即時 | 手動 | 手動 |
@@ -38,7 +38,6 @@ next_blog: ''
 
 ## Capacitor 2.0: 1つのコードベースからモバイルアプリとPWAを
 
-<iframe src="https://www.youtube.com/embed/8KQb4u_FqOw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## OTAアップデートのセキュリティリスク
 
@@ -175,7 +174,7 @@ Capgoは[Capacitor OTAアップデート](https://capgo.app/ja/)に対して**�
 
 Capacitorアプリ用のOTAプラットフォームを選択する際、セキュリティと信頼性が重要な要素となります。主要なプラットフォームの比較は以下の通りです:
 
-| 機能 | Capgo | AppFlow | Capawesome |
+| 機能 | Capgo | AppFlow |
 | --- | --- | --- | --- |
 | エンドツーエンド暗号化 | あり | なし | なし |
 | アップデート成功率 | 世界で82% | データ限定 | データ限定 |

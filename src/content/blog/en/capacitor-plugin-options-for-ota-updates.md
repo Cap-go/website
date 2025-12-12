@@ -9,7 +9,7 @@ created_at: 2025-04-16T02:50:46.694Z
 updated_at: 2025-11-13T20:57:27.000Z
 head_image: https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: Mobile Development
-keywords: OTA updates, Capacitor, mobile apps, app deployment, Capgo, Capawesome, Appflow, CodePush
+keywords: OTA updates, Capacitor, mobile apps, app deployment, Capgo, Appflow, CodePush
 tag: Development, Mobile, Updates
 published: true
 locale: en
@@ -28,16 +28,14 @@ next_blog: ''
 ### Top Plugins for OTA Updates:
 
 1.  **[Capgo](https://capgo.app/)**: Fast updates (5MB in 114ms), end-to-end encryption, real-time analytics, and flexible pricing (starting at $12/month).
-2.  **[Capawesome](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/live-update)**: Focused on the German market with competitive pricing and modern architecture (launched in 2024).
-3.  **[Appflow](https://ionic.io/appflow/)**: Enterprise-grade features at $6,000/year but shutting down in 2026.
-4.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: Discontinued in 2024.
+2.  **[Appflow](https://ionic.io/appflow/)**: Enterprise-grade features at $6,000/year but shutting down in 2026.
+3.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: Discontinued in 2024.
 
 ### Quick Comparison:
 
 | Plugin | Status | Key Features | Starting Price |
 | --- | --- | --- | --- |
 | **Capgo** | Active | Fast updates, encryption | $12/month |
-| **Capawesome** | Active (2024) | German market focus | Similar to Capgo |
 | **Appflow** | Sunsetting (2026) | Enterprise features | $6,000/year |
 | **CodePush** | Discontinued (2024) | Previously free | N/A |
 
@@ -61,14 +59,6 @@ Here’s what Capgo offers:
 -   **Choice of cloud or self-hosted options**
 -   **Compatibility with Capacitor 6 & 7**
 
-Other plugins also cater to specific needs and regions.
-
-### [Capawesome](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/live-update) Live Update Plugin
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/b001a5727fc0f3dc796b9522055deb7e.jpg)
-
-Introduced in 2024, Capawesome serves the German market with a focus on efficient updates and competitive pricing.
-
 ### [Appflow](https://ionic.io/appflow/) by [Ionic](https://ionicframework.com/)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/d621f8c4ec61e7471b0153517889f4cc.jpg)
@@ -88,13 +78,8 @@ Microsoft CodePush, once a popular choice, was discontinued in 2024. Developers 
 | Plugin | Status | Pricing | Key Feature |
 | --- | --- | --- | --- |
 | **Capgo** | Active | From $12/month | End-to-end encryption |
-| **Capawesome** | Active | Similar to Capgo | German market focus |
 | **Appflow** | Closing 2026 | $6,000/year | Enterprise support |
 | **CodePush** | Discontinued | Free (was) | N/A |
-
-## Explore Capawesome's New Ionic Capacitor Live Update ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Plugin Features Comparison
 
@@ -104,24 +89,24 @@ Here's a detailed look at the capabilities and limitations of various OTA plugin
 
 This table outlines key differences between active and discontinued plugins:
 
-| Feature | Capgo | Capawesome | Appflow | CodePush |
-| --- | --- | --- | --- | --- |
-| Update Speed | 114ms (5MB) | Baseline | Baseline | N/A |
-| End-to-End Encryption | ✓   | –   | –   | –   |
-| Real-time Analytics | ✓   | Limited | ✓   | N/A |
-| [Self-hosted Option](https://capgo.app/blog/self-hosted-capgo/) | ✓   | –   | –   | –   |
-| Update Success Rate | 82% | Not reported | Not reported | N/A |
-| Monthly Active Users | Up to 1M | Limited | Enterprise | N/A |
-| Storage Capacity | Up to 20GB | Basic | Enterprise | N/A |
-| Starting Price | $12/month | Similar | $6,000/year | Discontinued |
-| App Store Compliance | ✓   | ✓   | ✓   | N/A |
+| Feature | Capgo | Appflow | CodePush |
+| --- | --- | --- | --- |
+| Update Speed | 114ms (5MB) | Baseline | N/A |
+| End-to-End Encryption | ✓   | –   | –   |
+| Real-time Analytics | ✓   | ✓   | N/A |
+| [Self-hosted Option](https://capgo.app/blog/self-hosted-capgo/) | ✓   | –   | –   |
+| Update Success Rate | 82% | Not reported | N/A |
+| Monthly Active Users | Up to 1M | Enterprise | N/A |
+| Storage Capacity | Up to 20GB | Enterprise | N/A |
+| Starting Price | $12/month | $6,000/year | Discontinued |
+| App Store Compliance | ✓   | ✓   | N/A |
 
 ### Plugin Pros and Cons
 
 Each plugin has its strengths and weaknesses based on performance metrics:
 
 -   **Capgo**
-    
+
     -   **Advantages**:
         -   Supports 1.9K production apps with a 95% user update rate within 24 hours [\[1\]](https://capgo.app/).
         -   Offers up to 10TB bandwidth on pay-as-you-go plans.
@@ -129,15 +114,6 @@ Each plugin has its strengths and weaknesses based on performance metrics:
     -   **Limitations**:
         -   Premium features require higher-tier plans.
         -   Self-hosting demands technical expertise.
--   **Capawesome Live Update Plugin**
-    
-    -   **Advantages**:
-        -   Strong presence in the German market.
-        -   Competitive pricing.
-        -   Built with modern architecture (2024 launch).
-    -   **Limitations**:
-        -   Lacks many enterprise features.
-        -   Regional focus limits global support.
 -   **Appflow**
     
     -   **Advantages**:
@@ -189,7 +165,6 @@ Here’s a breakdown of the current choices:
 | Plugin | Status | Key Strengths | Best For |
 | --- | --- | --- | --- |
 | Capgo | Active | End-to-end encryption, fast updates | Teams focused on [secure updates](https://capgo.app/docs/live-updates/update-behavior/) |
-| Capawesome | Active (Since 2024) | German market focus, competitive pricing | Projects targeting Europe |
 | Appflow | Sunsetting (2026) | Enterprise-grade features | Transitioning legacy systems |
 | CodePush | Discontinued (2024) | Previously free option | N/A |
 

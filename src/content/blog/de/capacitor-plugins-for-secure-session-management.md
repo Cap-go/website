@@ -25,7 +25,6 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Multi-Provider-Authentifizierung, Token-Verwaltung und Echtzeit-Status-Updates. Ideal für schnelle Integration.
 -   **[Biometric Security Plugin](https://capgo.app/plugins/capacitor-native-biometric/)**: Fügt Fingerabdruck, Gesichtserkennung und Geräteanmeldedaten für sichere Anmeldungen hinzu.
--   **@capawesome/capacitor-secure-storage**: Verschlüsselt Daten mit iOS Keychain, Android Keystore oder AES-256. Hervorragend für die Speicherung sensibler Sitzungsdaten.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Enterprise-Lösung mit automatischer Abmeldung, biometrischer Authentifizierung und sicherem Speicher.
 -   **[Capgo](https://capgo.app/)**: Kombiniert sichere Sitzungsverwaltung mit verschlüsselten Live-Updates für nahtlose Bereitstellungen.
 
@@ -252,7 +251,7 @@ Dieser Abschnitt bietet einen vergleichenden Blick auf [Capacitor-Plugins](https
 
 Hier ist ein direkter Vergleich der wichtigsten Sicherheitsfunktionen der Plugins:
 
-| Funktion | Firebase Auth | Biometric Security | @capawesome/secure-storage | Identity Vault | Capgo |
+| Funktion | Firebase Auth | Biometric Security | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Verschlüsselungstyp** | Cloud-basiert | Hardware-Level | 256-bit AES | 256-bit AES | Ende-zu-Ende |
 | **Biometrische Unterstützung** | Begrenzt | Vollständig | Nein | Vollständig | Nein |
@@ -268,7 +267,7 @@ Die folgende Tabelle hebt die Setup-Komplexität, Plattform-Kompatibilität und 
 | --- | --- | --- | --- |
 | **Firebase Auth** | Moderat | iOS, Android | Firebase SDK |
 | **Biometric Security** | Niedrig | iOS, Android | Keine |
-| **@capawesome/secure-storage** | Niedrig | iOS, Android | Keine |
+| Niedrig | iOS, Android | Keine |
 | **Identity Vault** | Hoch | iOS, Android, Web | Auth Connect |
 | **Capgo** | Moderat | iOS, Android | Keine |
 
@@ -295,7 +294,7 @@ Jedes Plugin bietet unterschiedliche Levels der Integrationsunterstützung, wie 
 | --- | --- | --- | --- |
 | **Firebase Auth** | Native Unterstützung | Eingeschränkt | Moderat |
 | **Biometric Security** | Manuell | Vollständig | Eingeschränkt |
-| **@capawesome/secure-storage** | Manuell | Vollständig | Einfach |
+| Manuell | Vollständig | Einfach |
 | **Identity Vault** | Enterprise-Tools | Vollständig | Umfassend |
 | **Capgo** | Automatisiert | Vollständig | Umfassend |
 

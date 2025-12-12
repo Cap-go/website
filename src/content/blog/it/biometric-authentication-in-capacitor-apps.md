@@ -36,7 +36,6 @@ next_blog: ''
 -   **Strumenti chiave necessari:**
     
     -   Capacitor 3.0+.
-    -   Plugin come `@capawesome-team/capacitor-biometrics` o `capacitor-native-biometric`.
 -   **Punti principali della configurazione:**
     
     -   Aggiungere i permessi ad AndroidManifest e Info.plist.
@@ -49,13 +48,12 @@ next_blog: ''
 | --- | --- | --- | --- |
 | `@aparajita/capacitor-biometric-auth` | Capacitor 7 | Biometria nativa, credenziali dispositivo | Nuovi progetti che utilizzano Capacitor 7 |
 | `capacitor-native-biometric` | Capacitor 3, 4 | Archiviazione credenziali sicura, Keychain/Keystore | Gestione delle credenziali |
-| `@capawesome-team/capacitor-biometrics` | Tutte le versioni | Supporto biometrico e credenziali dispositivo | Opzioni di autenticazione flessibili |
+| Tutte le versioni | Supporto biometrico e credenziali dispositivo | Opzioni di autenticazione flessibili |
 
 [L'autenticazione biometrica nelle app Capacitor](https://capgo.app/plugins/capacitor-native-biometric/) è un modo sicuro e user-friendly per proteggere i dati sensibili. L'articolo completo descrive i passaggi di configurazione, esempi di codice, strategie di test e standard di sicurezza.
 
 ## Autenticazione biometrica Ionic (FaceID / Impronta digitale)
 
-<iframe src="https://www.youtube.com/embed/GGWiDj1cusE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Requisiti di configurazione
 
@@ -77,7 +75,6 @@ Scegli un [plugin biometrico](https://capgo.app/plugins/capacitor-native-biometr
 
 -   **@aparajita/capacitor-biometric-auth** per Capacitor 7
 -   **capacitor-native-biometric** per Capacitor 3 e 4
--   **@capawesome-team/capacitor-biometrics** per supporto con credenziali dispositivo aggiuntive
 
 ### Passi di configurazione Android 
 
@@ -137,7 +134,7 @@ Per iOS, dovrai seguire questi passaggi per configurare l'autenticazione biometr
 Capgo semplifica gli aggiornamenti biometrici. Configuralo in questo modo:
 
 ```typescript
-import { Biometrics } from '@capawesome-team/capacitor-biometrics';
+import { Biometrics } from '@capgo/capacitor-native-biometric';
 
 async function setupBiometricAuth() {
   try {
@@ -190,7 +187,6 @@ Mantenere aggiornata la tua API biometrica è vitale per la sicurezza e la funzi
 
 Concentrati su queste aree:
 
--   **Aggiornamenti Plugin**: Aggiorna regolarmente le dipendenze come `@capawesome-team/capacitor-biometrics`.
 -   **Modifiche Piattaforma**: Monitora gli aggiornamenti delle API LocalAuthentication di iOS e BiometricPrompt di Android.
 -   **Standard di Sicurezza**: Mantieniti allineato con gli ultimi requisiti di sicurezza biometrica.
 -   **Linee Guida Store**: Assicura la conformità con le policy di Apple App Store e Google Play per evitare problemi di invio.

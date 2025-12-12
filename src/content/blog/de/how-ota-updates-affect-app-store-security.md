@@ -166,7 +166,7 @@ Bei der Bewertung von OTA-Update-Plattformen ist es wichtig, Stabilität, Sicher
 
 ### Plattform-Funktionsmatrix
 
-| Funktion | Capgo | Capawesome | Appflow | CodePush |
+| Funktion | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | **Aktiver Status** | Aktiv seit 2022 | Aktiv seit 2024 | Schließt 2026 | Geschlossen 2024 |
 | **Ende-zu-Ende-Verschlüsselung** | Ja | Nein | Nein | Nein |

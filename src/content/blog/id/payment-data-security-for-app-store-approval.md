@@ -24,14 +24,13 @@ next_blog: ''
 **Ingin aplikasi Anda disetujui oleh Apple atau Google? Mulai dengan data pembayaran yang aman.** Toko aplikasi menuntut **enkripsi end-to-end** untuk data pembayaran guna memenuhi standar kepatuhan. Tanpa itu, aplikasi Anda bisa ditolak atau dihapus. Berikut yang perlu Anda ketahui:
 
 -   **[Capgo](https://capgo.app/)**: Menawarkan enkripsi end-to-end sejati, kontrol rollback, dan [opsi self-hosting](https://capgo.app/blog/self-hosted-capgo/). Biaya $2.600 di awal + $300/bulan.
--   **Capawesome**: Menggunakan penandatanganan kriptografis tapi kurang enkripsi penuh. Menargetkan pasar Jerman.
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: Enkripsi parsial, performa tidak konsisten, dan $6.000/tahun. Dijadwalkan pensiun pada 2026.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: Dihentikan pada 2024, tanpa enkripsi end-to-end.
 
 | **Tools** | **Enkripsi** | **Opsi Deployment** | **Biaya** | **Status** |
 | --- | --- | --- | --- | --- |
 | Capgo | End-to-end | Cloud, Self-hosted | Setup $2.600 + $300/bulan | Aktif |
-| Capawesome | Penandatanganan kriptografis | Cloud | Mirip dengan Capgo | Aktif |
+| Penandatanganan kriptografis | Cloud | Mirip dengan Capgo | Aktif |
 | Appflow | Parsial | Cloud | $6.000/tahun | Pensiun 2026 |
 | Code Push | Tidak ada | Cloud | N/A | Dihentikan 2024 |
 
@@ -39,7 +38,6 @@ next_blog: ''
 
 ## Swift Reduce, Apakah MVP Sudah Mati?, Iklan Apple, Keamanan Aplikasi dan ...
 
-<iframe src="https://www.youtube.com/embed/FsVbZftrPTQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. [Capgo](https://capgo.app/)
 
@@ -62,12 +60,6 @@ Dengan hanya mengunduh komponen yang berubah, Capgo meminimalkan risiko dan meng
 
 Selanjutnya, mari kita lihat bagaimana Capawesome menangani keamanan data pembayaran.
 
-## 2. Capawesome
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-Capawesome, diperkenalkan pada 2024 untuk pasar Jerman dan ditujukan untuk pengembang yang lebih muda, mengamankan pembaruan data pembayaran melalui penandatanganan kriptografis daripada enkripsi end-to-end penuh [\[1\]](https://capgo.app/). Selanjutnya, kita akan melihat lebih dekat bagaimana Appflow menangani keamanan data pembayaran.
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)
@@ -88,7 +80,6 @@ Berikut breakdown tools berdasarkan keamanan, kepatuhan, opsi deployment, dan bi
 
 -   **Capgo**: Menawarkan enkripsi end-to-end sejati, mematuhi standar Apple dan Google, mendukung deployment cloud dan self-hosted, terintegrasi dengan pipeline CI/CD, dan open-source. Harga termasuk biaya setup $2.600 dan sekitar $300 per bulan. Selama lima tahun, bisa menghemat hingga $26.100 dibandingkan Appflow [\[1\]](https://capgo.app/).
     
--   **Capawesome**: Menyediakan penandatanganan kriptografis tapi dengan fitur lebih sedikit. Terutama menargetkan pasar Jerman dan memiliki harga mirip dengan Capgo [\[1\]](https://capgo.app/).
     
 -   **Appflow**: Memiliki enkripsi parsial dan biaya $6.000 per tahun. Namun, dijadwalkan pensiun pada 2026 \[2\].
     

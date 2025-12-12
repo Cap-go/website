@@ -45,7 +45,7 @@ Rollback di [Capacitor](https://capacitorjs.com/) memastikan aplikasi Anda tetap
 | Platform | Tipe Rollback | Analitik | Enkripsi | Opsi Hosting | Biaya |
 | --- | --- | --- | --- | --- | --- |
 | **Capgo** | Otomatis/Manual | Ya | Ya | Fleksibel | Terjangkau |
-| Capawesome | Hanya Manual | Tidak | Tidak | Terbatas | Lebih Rendah |
+| Hanya Manual | Tidak | Tidak | Terbatas | Lebih Rendah |
 | Appflow | Otomatis/Manual | Sebagian | Tidak | Terbatas | Tinggi |
 
 Dengan pengaturan yang tepat dan alat seperti Capgo, Anda dapat memastikan pembaruan yang lancar dan dengan cepat mengatasi masalah agar aplikasi Anda tetap berjalan mulus.

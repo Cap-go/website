@@ -30,7 +30,7 @@ next_blog: ''
 
 ### OTA 플랫폼 비교:
 
-| 기능 | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| 기능 | Capgo | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | 상태 | 활성 | 활성 | 2026년 종료 예정 | 2024년 중단 |
 | 업데이트 속도 | 114ms | 일반 | 변동적 | 해당 없음 |
@@ -169,7 +169,7 @@ OTA 업데이트 가이드라인을 설정한 후, CI/CD 워크플로우와 잘 
 
 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)용 인기 OTA 플랫폼의 주요 기능 비교입니다:
 
-| 기능 | Capgo | Capawesome | Appflow | CodePush |
+| 기능 | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | 상태 | 활성 | 활성 | 2026년 종료 예정 | 2024년 중단 |
 | 시장 집중 | 글로벌 | 독일 중심 | 기업 | 레거시 |

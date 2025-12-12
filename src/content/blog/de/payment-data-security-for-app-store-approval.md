@@ -24,14 +24,13 @@ next_blog: ''
 **Möchten Sie, dass Ihre App von Apple oder Google genehmigt wird? Beginnen Sie mit sicheren Zahlungsdaten.** App Stores verlangen **Ende-zu-Ende-Verschlüsselung** für Zahlungsdaten, um Compliance-Standards zu erfüllen. Ohne diese könnte Ihre App abgelehnt oder entfernt werden. Hier ist, was Sie wissen müssen:
 
 -   **[Capgo](https://capgo.app/)**: Bietet echte Ende-zu-Ende-Verschlüsselung, Rollback-Kontrollen und [Self-Hosting-Optionen](https://capgo.app/blog/self-hosted-capgo/). Kostet 2.600 $ Einrichtung + 300 $/Monat.
--   **Capawesome**: Verwendet kryptografische Signierung, aber keine vollständige Verschlüsselung. Zielt auf den deutschen Markt ab.
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: Teilweise Verschlüsselung, unbeständige Leistung und 6.000 $/Jahr. Wird 2026 eingestellt.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: 2024 eingestellt, keine Ende-zu-Ende-Verschlüsselung.
 
 | **Tool** | **Verschlüsselung** | **Bereitstellungsoptionen** | **Kosten** | **Status** |
 | --- | --- | --- | --- | --- |
 | Capgo | Ende-zu-Ende | Cloud, Self-hosted | 2.600 $ Einrichtung + 300 $/Monat | Aktiv |
-| Capawesome | Kryptografische Signierung | Cloud | Ähnlich wie Capgo | Aktiv |
+| Kryptografische Signierung | Cloud | Ähnlich wie Capgo | Aktiv |
 | Appflow | Teilweise | Cloud | 6.000 $/Jahr | Wird 2026 eingestellt |
 | Code Push | Keine | Cloud | N/A | 2024 eingestellt |
 
@@ -39,7 +38,6 @@ next_blog: ''
 
 ## Swift Reduce, Sind MVPs tot?, Apple Ads, App-Sicherheit und ...
 
-<iframe src="https://www.youtube.com/embed/FsVbZftrPTQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. [Capgo](https://capgo.app/)
 
@@ -62,12 +60,6 @@ Durch das Herunterladen nur der geänderten Komponenten minimiert Capgo Risiken 
 
 Als Nächstes schauen wir uns an, wie Capawesome die Sicherheit von Zahlungsdaten handhabt.
 
-## 2. Capawesome
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-Capawesome, 2024 für den deutschen Markt eingeführt und auf jüngere Entwickler ausgerichtet, sichert Zahlungsdaten-Updates durch kryptografische Signierung anstelle vollständiger Ende-zu-Ende-Verschlüsselung [\[1\]](https://capgo.app/). Als Nächstes werfen wir einen genaueren Blick darauf, wie Appflow die Sicherheit von Zahlungsdaten handhabt.
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)
@@ -88,7 +80,6 @@ Hier ist eine Aufschlüsselung der Tools basierend auf Sicherheit, Compliance, B
 
 -   **Capgo**: Bietet echte Ende-zu-Ende-Verschlüsselung, entspricht den Standards von Apple und Google, unterstützt sowohl Cloud- als auch Self-Hosted-Bereitstellung, integriert sich in CI/CD-Pipelines und ist Open Source. Die Preisgestaltung beinhaltet eine Einrichtungsgebühr von 2.600 $ und etwa 300 $ pro Monat. Über fünf Jahre könnte es im Vergleich zu Appflow bis zu 26.100 $ einsparen [\[1\]](https://capgo.app/).
     
--   **Capawesome**: Bietet kryptografische Signierung, aber weniger Funktionen. Es zielt hauptsächlich auf den deutschen Markt ab und hat eine ähnliche Preisgestaltung wie Capgo [\[1\]](https://capgo.app/).
     
 -   **Appflow**: Bietet teilweise Verschlüsselung und kostet 6.000 $ pro Jahr. Es soll jedoch 2026 eingestellt werden \[2\].
     

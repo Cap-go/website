@@ -35,7 +35,7 @@ OTA-(Over-the-Air)-Updates ermöglichen [Capacitor](https://capacitorjs.com/)-Ap
 
 **Schneller Vergleich von OTA-Tools**:
 
-| Funktion | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [capacitor-app-update](https://github.com/capawesome-team/capacitor-app-update) | [Capgo](https://capgo.app/) |
+| Funktion | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [Capgo](https://capgo.app/) |
 | --- | --- | --- | --- |
 | Update-Methode | Prüfsummenvergleich | In-[App-Updates](https://capgo.app/plugins/capacitor-updater/) | JS-Bundle-Updates |
 | Performance-Einfluss | Minimal | Mittel | Niedrig |

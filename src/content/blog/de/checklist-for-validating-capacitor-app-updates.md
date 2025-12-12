@@ -30,7 +30,7 @@ next_blog: ''
 
 ### Schneller Vergleich von OTA-Tools
 
-| Funktion | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) |
+| Funktion | Capgo | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | **Startjahr** | 2022 | 2024 | Einstellung 2026 |
 | **Ende-zu-Ende-Verschlüsselung** | Ja | Nein | Nein |

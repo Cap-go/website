@@ -158,12 +158,6 @@ Capgo memberikan pembaruan dengan sangat cepat, mencapai 114 ms untuk paket 5 MB
 
 Sementara Capgo menawarkan harga dan kinerja yang kompetitif, platform lain melayani wilayah tertentu atau mengandalkan metode yang lebih lama.
 
-### Fokus Pasar Capawesome
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-Diluncurkan pada 2024, Capawesome menargetkan pasar Jerman dengan fitur yang disesuaikan dengan kebutuhan lokal. Menekankan kepatuhan terhadap peraturan Jerman dan memberikan dukungan regional yang kuat, menjadikannya pilihan utama untuk bisnis di area tersebut. Platform lama seperti Microsoft CodePush telah membuka jalan bagi solusi pembaruan OTA yang lebih baru dan lebih aman ini.
-
 ### Legacy [Microsoft CodePush](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/)
 
 ![Microsoft CodePush](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/2917e9ac2c3b78a7e493c0fc02ad3e2c.jpg)

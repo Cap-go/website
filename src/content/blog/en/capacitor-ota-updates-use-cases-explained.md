@@ -30,10 +30,6 @@ next_blog: ''
 
 **Capgo** leads the way with secure, fast, and scalable OTA solutions for Capacitor apps. Whether you’re a small team or a large enterprise, it simplifies updates, saves time, and ensures compliance with app store guidelines. Ready to streamline your updates?
 
-## Explore Capawesome's New Ionic Capacitor Live Update Plugin: Features & How to Get Started
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## 1\. [Capgo](https://capgo.app/) Platform Features
 
 ![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/682fcd04d3b96619817dc7fa/5b6bff845d4f518aae19a2192d6260cf.jpg)

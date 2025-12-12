@@ -36,7 +36,7 @@ Pembaruan OTA (Over-the-Air) memungkinkan aplikasi [Capacitor](https://capacitor
 
 **Perbandingan Singkat Alat OTA**:
 
-| Fitur | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [capacitor-app-update](https://github.com/capawesome-team/capacitor-app-update) | [Capgo](https://capgo.app/) |
+| Fitur | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [Capgo](https://capgo.app/) |
 | --- | --- | --- | --- |
 | Metode Pembaruan | Perbandingan checksum | Pembaruan-[dalam aplikasi](https://capgo.app/plugins/capacitor-updater/) | pembaruan bundel JS |
 | Dampak Kinerja | Minimal | Sedang | Rendah |

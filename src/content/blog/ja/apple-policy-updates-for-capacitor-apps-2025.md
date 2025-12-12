@@ -32,7 +32,7 @@ next_blog: ''
 
 **比較表**：
 
-| 機能 | Capgo (TEAMプラン) | [Appflow](https://ionic.io/appflow/) | Capawesome |
+| 機能 | Capgo (TEAMプラン) | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | 年間コスト | $996 | $6,000 | Capgoと同等 |
 | 暗号化 | エンドツーエンド | 基本的な署名 | 基本的な署名 |

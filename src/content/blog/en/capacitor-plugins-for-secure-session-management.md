@@ -20,7 +20,6 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Multi-provider authentication, token management, and real-time state updates. Ideal for fast integration.
 -   **[Biometric Security Plugin](https://capgo.app/plugins/capacitor-native-biometric/)**: Adds fingerprint, face recognition, and device credential support for secure logins.
--   **@capawesome/capacitor-secure-storage**: Encrypts data with iOS Keychain, Android Keystore, or AES-256. Great for storing sensitive session data.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Enterprise-grade solution with auto-logout, biometric authentication, and secure storage.
 -   **[Capgo](https://capgo.app/)**: Combines secure session management with encrypted live updates for seamless deployments.
 
@@ -45,7 +44,6 @@ Keep reading for detailed integration steps, features, and best practices to kee
 
 ![Identity Vault](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/c5fae6eb414f2040557b847eda54d313.jpg)
 
-<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1\. [Firebase Auth](https://firebase.google.com/docs/auth) for [Capacitor](https://capacitorjs.com/)
 
@@ -123,10 +121,6 @@ Version 9.0.0, released in April 2025, introduced compatibility with Capacitor 7
 To further secure sessions, developers should implement automatic session timeouts and monitor for biometric changes. If changes are detected, authentication tokens should be invalidated to prevent unauthorized access [\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta). The plugin also features a detailed error-handling system, providing feedback codes that help developers create fallback mechanisms and inform users when authentication fails [\[8\]](https://capgo.app/plugins/capacitor-native-biometric/).
 
 This plugin offers a robust solution for integrating biometric security into modern apps, ensuring both convenience and protection for users.
-
-## 3\. @capawesome/capacitor-secure-storage
-
-The **@capawesome/capacitor-secure-storage** plugin provides a way to safeguard data in Capacitor apps through platform-specific encryption techniques.
 
 ### How It Works Across Platforms
 
@@ -282,7 +276,7 @@ This section provides a comparative look at [Capacitor plugins](https://capgo.ap
 
 Here’s a side-by-side breakdown of the key security features offered by the plugins:
 
-| Feature | Firebase Auth | Biometric Security | @capawesome/secure-storage | Identity Vault | Capgo |
+| Feature | Firebase Auth | Biometric Security | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Encryption Type** | Cloud-based | Hardware-level | 256-bit AES | 256-bit AES | End-to-end |
 | **Biometric Support** | Limited | Full | No  | Full | No  |
@@ -298,7 +292,7 @@ The table below highlights the setup complexity, platform compatibility, and any
 | --- | --- | --- | --- |
 | **Firebase Auth** | Moderate | iOS, Android | Firebase SDK |
 | **Biometric Security** | Low | iOS, Android | None |
-| **@capawesome/secure-storage** | Low | iOS, Android | None |
+| Low | iOS, Android | None |
 | **Identity Vault** | High | iOS, Android, Web | Auth Connect |
 | **Capgo** | Moderate | iOS, Android | None |
 
@@ -325,7 +319,7 @@ Each plugin offers different levels of integration support, as shown below:
 | --- | --- | --- | --- |
 | **Firebase Auth** | Native Support | Limited | Moderate |
 | **Biometric Security** | Manual | Full | Limited |
-| **@capawesome/secure-storage** | Manual | Full | Easy |
+| Manual | Full | Easy |
 | **Identity Vault** | Enterprise Tools | Full | Comprehensive |
 | **Capgo** | Automated | Full | Comprehensive |
 

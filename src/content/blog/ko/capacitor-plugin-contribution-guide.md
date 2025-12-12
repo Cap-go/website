@@ -140,7 +140,6 @@ async checkPermissions(): Promise<PermissionStatus> {
 
 -   특정 사용 사례에 맞춘 집중된 인터페이스를 사용하세요.
 -   플랫폼별 변형을 위해 유니온 타입을 적용하세요.
--   런타임에 타입을 검증하기 위해 타입 가드를 구현하세요 [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### 코드 문서화
 

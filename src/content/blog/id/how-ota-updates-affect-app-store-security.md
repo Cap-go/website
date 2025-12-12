@@ -166,7 +166,7 @@ Saat mengevaluasi platform pembaruan OTA, penting untuk mempertimbangkan stabili
 
 ### Matriks Fitur Platform
 
-| Fitur | Capgo | Capawesome | Appflow | CodePush |
+| Fitur | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | **Status Aktif** | Beroperasi sejak 2022 | Beroperasi sejak 2024 | Tutup 2026 | Tutup 2024 |
 | **Enkripsi End-to-End** | Ya | Tidak | Tidak | Tidak |

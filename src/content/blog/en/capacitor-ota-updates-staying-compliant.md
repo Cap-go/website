@@ -91,10 +91,6 @@ Violating OTA update policies can result in serious consequences. Here are some 
 
 Both Apple and Google emphasize user security and experience. While Google Play offers slightly more leeway, developers should use OTA updates for minor improvements like bug fixes, content updates, or small UI tweaks. Major changes or new features should always go through the official review process to stay compliant.
 
-## Explore Capawesome's New Ionic Capacitor Live Update ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## OTA Update Guidelines
 
 To stay compliant with app store rules, it's important to follow specific guidelines when using OTA (Over-the-Air) updates for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/). These practices help ensure updates are safe and align with platform policies.

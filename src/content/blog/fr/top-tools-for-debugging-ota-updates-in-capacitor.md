@@ -26,7 +26,7 @@ Déboguer les mises à jour Over-the-Air (OTA) dans des applications [Capacitor]
 
 ### Comparaison Rapide
 
-| Fonctionnalité | Capgo | @capawesome/capacitor-live-update | Inspect.dev |
+| Fonctionnalité | Capgo | Inspect.dev |
 | --- | --- | --- | --- |
 | Gestion des Mises à jour | Avancée (chiffrement, CI/CD) | Basique (basée sur le cloud) | Non applicable |
 | [Outils de Débogage](https://capgo.app/docs/plugin/debugging/) | Contrôle de version, retour en arrière | Retour automatique | Chrome DevTools |
@@ -57,7 +57,7 @@ Les [applications Capacitor](https://capgo.app/blog/capacitor-comprehensive-guid
 | --- | --- | --- |
 | [Mises à jour Manuelles](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Contrôle total sur le processus de mise à jour, prend en charge les URLs personnalisées | Petites applications, tests |
 | Capgo | Offre un chiffrement de bout en bout, une intégration CI/CD et une assignment des utilisateurs | Applications d'entreprise |
-| @capawesome/capacitor-live-update | Gère les versions et fournit des fonctionnalités de mise à jour de base | Applications simples |
+| Gère les versions et fournit des fonctionnalités de mise à jour de base | Applications simples |
 
 Choisissez la méthode qui convient le mieux aux besoins et au flux de travail de votre application.
 
@@ -104,16 +104,6 @@ Le prix de Capgo commence à 12 $/mois pour les développeurs individuels, avec 
 
 Pour une solution plus simple, découvrez **@capawesome/capacitor-live-update**.
 
-### @capawesome/capacitor-live-update
-
-Ce plugin Capacitor est une option sans fioritures pour les mises à jour OTA, idéale pour les petites équipes ayant besoin de fonctionnalités de base sans configurations complexes.
-
-#### Fonctionnalités Clés de @capawesome/capacitor-live-update
-
-Ce plugin se concentre sur les fonctionnalités essentielles de mise à jour, comme un [système de gestion de bundles basé sur le cloud](https://capgo.app/docs/webapp/bundles/) qui prend en charge à la fois Android et iOS. Il comprend également une fonction de retour automatique, garantissant la stabilité en revenant à la dernière version fonctionnelle si une mise à jour échoue.
-
-Pour un [outil de débogage](https://capgo.app/docs/plugin/debugging/) avec des capacités multiplateformes, jetez un œil à **Inspect.dev**.
-
 ### [Inspect.dev](https://inspect.dev/)
 
 ![Inspect.dev](https://mars-images.imgix.net/seobot/screenshots/inspect.dev-9bbcb0a3366f33fde5bbabd7b9e5d36a-2025-02-20.jpg?auto=compress)
@@ -136,7 +126,7 @@ Au prix de 49 $/an après un essai gratuit de 14 jours, Inspect.dev s'intègre p
 
 Lors du choix d'un outil de débogage pour les mises à jour OTA de Capacitor, il est essentiel d'évaluer des facteurs tels que les fonctionnalités, le prix et la compatibilité. Voici un aperçu de trois options populaires :
 
-| Catégorie de Fonctionnalité | Capgo | @capawesome/capacitor-live-update | Inspect.dev |
+| Catégorie de Fonctionnalité | Capgo | Inspect.dev |
 | --- | --- | --- | --- |
 | Gestion des Mises à jour | Chiffrement de bout en bout, intégration CI/CD, mises à jour spécifiques aux utilisateurs | Gestion de bundles basique, support cloud | Non conçu pour les mises à jour OTA |
 | Outils de Débogage | Contrôle de version, support de retour en arrière | Retour automatique | Intégration Chrome DevTools |
@@ -207,4 +197,3 @@ Pour des [options de débogage supplémentaires](https://capgo.app/docs/plugin/d
 
 -   **Inspect.dev** : Un outil de débogage multiplateforme.
 -   **Capgo** : Aide à la gestion des mises à jour en direct, avec des fonctionnalités de sécurité et CI/CD intégrées.
--   **@capawesome/capacitor-live-update** : Utile pour déboguer efficacement les mises à jour en direct.

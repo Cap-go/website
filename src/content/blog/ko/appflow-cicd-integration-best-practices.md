@@ -157,12 +157,6 @@ Capgo는 글로벌 CDN을 통해 5 MB 번들을 114 ms라는 인상적인 속도
 
 Capgo가 경쟁력 있는 가격과 성능을 제공하는 반면, 다른 플랫폼들은 특정 지역을 대상으로 하거나 더 오래된 방식에 의존합니다.
 
-### Capawesome 시장 중점
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-2024년에 출시된 Capawesome은 현지 요구사항에 맞춘 기능으로 독일 시장을 타겟팅합니다. 독일 규정 준수를 강조하고 강력한 지역 지원을 제공하여 해당 지역 비즈니스의 선택으로 자리잡았습니다. Microsoft CodePush와 같은 레거시 플랫폼들은 이러한 더 새롭고 안전한 OTA 업데이트 솔루션의 길을 열었습니다.
-
 ### [Microsoft CodePush](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) 레거시
 
 ![Microsoft CodePush](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/2917e9ac2c3b78a7e493c0fc02ad3e2c.jpg)

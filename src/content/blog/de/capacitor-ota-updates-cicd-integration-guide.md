@@ -33,7 +33,7 @@ next_blog: ''
 
 ### Schneller Vergleich von OTA-Plattformen:
 
-| Funktion | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| Funktion | Capgo | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Status | Aktiv | Aktiv | Einstellung 2026 | Eingestellt 2024 |
 | Update-Geschwindigkeit | 114ms | Standard | Schwankend | N/A |
@@ -166,7 +166,7 @@ Sobald Sie Ihre OTA-Update-Richtlinien festgelegt haben, ist der nächste Schrit
 
 Hier ist eine Übersicht der wichtigsten Funktionen verschiedener OTA-Plattformen für [Capacitor Apps](https://capgo.app/blog/capacitor-comprehensive-guide/):
 
-| Funktion | Capgo | Capawesome | Appflow | CodePush |
+| Funktion | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | Status | Aktiv | Aktiv | Einstellung 2026 | Eingestellt 2024 |
 | Marktfokus | Global | Deutschland-fokussiert | Enterprise | Legacy |

@@ -22,7 +22,6 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: 다중 공급자 인증, 토큰 관리, 실시간 상태 업데이트. 빠른 통합에 이상적입니다.
 -   **[생체 보안 플러그인](https://capgo.app/plugins/capacitor-native-biometric/)**: 지문, 얼굴 인식, 기기 자격 증명 지원으로 안전한 로그인을 제공합니다.
--   **@capawesome/capacitor-secure-storage**: iOS Keychain, Android Keystore 또는 AES-256으로 데이터를 암호화합니다. 민감한 세션 데이터 저장에 적합합니다.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: 자동 로그아웃, 생체 인증, 보안 저장소를 갖춘 기업용 솔루션입니다.
 -   **[Capgo](https://capgo.app/)**: 암호화된 실시간 업데이트와 안전한 세션 관리를 결합하여 원활한 배포를 제공합니다.
 
@@ -47,7 +46,6 @@ next_blog: ''
 
 ![Identity Vault](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/c5fae6eb414f2040557b847eda54d313.jpg)
 
-<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 [계속...]
 
@@ -163,7 +161,7 @@ Capgo의 채널 시스템은 실시간 분석이 뒷받침하는 안전한 베�
 
 다음은 플러그인이 제공하는 주요 보안 기능의 나란한 분석입니다:
 
-| 기능 | Firebase Auth | Biometric Security | @capawesome/secure-storage | Identity Vault | Capgo |
+| 기능 | Firebase Auth | Biometric Security | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **암호화 유형** | 클라우드 기반 | 하드웨어 레벨 | 256-bit AES | 256-bit AES | 엔드투엔드 |
 | **생체 인증 지원** | 제한적 | 전체 | 없음 | 전체 | 없음 |
@@ -179,7 +177,7 @@ Capgo의 채널 시스템은 실시간 분석이 뒷받침하는 안전한 베�
 | --- | --- | --- | --- |
 | **Firebase Auth** | 중간 | iOS, Android | Firebase SDK |
 | **Biometric Security** | 낮음 | iOS, Android | 없음 |
-| **@capawesome/secure-storage** | 낮음 | iOS, Android | 없음 |
+| 낮음 | iOS, Android | 없음 |
 | **Identity Vault** | 높음 | iOS, Android, Web | Auth Connect |
 | **Capgo** | 중간 | iOS, Android | 없음 |
 
@@ -196,7 +194,7 @@ Capgo의 채널 시스템은 실시간 분석이 뒷받침하는 안전한 베�
 | --- | --- | --- | --- |
 | **Firebase Auth** | 네이티브 지원 | 제한적 | 보통 |
 | **생체 인증 보안** | 수동 | 전체 | 제한적 |
-| **@capawesome/secure-storage** | 수동 | 전체 | 쉬움 |
+| 수동 | 전체 | 쉬움 |
 | **Identity Vault** | 엔터프라이즈 도구 | 전체 | 포괄적 |
 | **Capgo** | 자동화 | 전체 | 포괄적 |
 

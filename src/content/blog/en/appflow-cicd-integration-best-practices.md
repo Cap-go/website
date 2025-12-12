@@ -155,12 +155,6 @@ Capgo delivers updates impressively fast, clocking in at 114 ms for 5 MB bundles
 
 While Capgo offers competitive pricing and performance, other platforms cater to specific regions or rely on older methods.
 
-### Capawesome Market Focus
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-Launched in 2024, Capawesome targets the German market with features tailored to local needs. It emphasizes compliance with German regulations and provides strong regional support, making it a go-to choice for businesses in that area. Legacy platforms like Microsoft CodePush have paved the way for these newer, more secure OTA update solutions.
-
 ### [Microsoft CodePush](https://learn.microsoft.com/en-us/appcenter/distribution/codepush/) Legacy
 
 ![Microsoft CodePush](https://assets.seobotai.com/capgo.app/67fdc56b72a40527486c1de4/2917e9ac2c3b78a7e493c0fc02ad3e2c.jpg)

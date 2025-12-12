@@ -35,10 +35,6 @@ next_blog: ''
 
 **Why it matters:** 85% of users prefer apps with frequent updates, and 80% may leave after one bad experience. Start with these methods to streamline updates, improve user retention, and safeguard your app’s reputation.
 
-## Explore Capawesome's New Ionic Capacitor Live Update Plugin: Features & How to Get Started
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Understanding Capacitor Update Mechanisms
 
 To make the most of your [Capacitor update rollouts](https://capgo.app/plugins/capacitor-updater/), it’s important to grasp how these updates differ from traditional native app updates. While native apps require full binary updates, [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/) use a hybrid setup that allows web assets to be updated independently of the native code. Let’s break down the key components that make these flexible updates possible.

@@ -36,12 +36,6 @@ next_blog: ''
 
 **Pro Tip:** Use staged rollouts to test updates on small user groups before full deployment. Capgo's tools make this process smooth and secure.
 
-## Explore Capawesome's New Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Test Environment Setup
 
 Setting up a proper test environment is key to validating OTA updates effectively.

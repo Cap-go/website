@@ -28,7 +28,7 @@ next_blog: ''
 
 ### OTA 플랫폼 빠른 비교:
 
-| 기능 | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
+| 기능 | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | 종단간 암호화 | 예 | 아니오 | 아니오 |
 | 롤백 기능 | 즉시 | 수동 | 수동 |
@@ -38,7 +38,6 @@ next_blog: ''
 
 ## Capacitor 2.0: 하나의 코드베이스로 모바일 앱과 PWA 개발
 
-<iframe src="https://www.youtube.com/embed/8KQb4u_FqOw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## OTA 업데이트의 보안 위험
 

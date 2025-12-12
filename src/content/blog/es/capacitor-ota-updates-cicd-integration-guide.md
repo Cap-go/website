@@ -34,7 +34,7 @@ next_blog: ''
 
 ### Comparación Rápida de Plataformas OTA:
 
-| Característica | Capgo | [Capawesome](https://capawesomeio/) | [Appflow](https://ionicio/appflow/) | [CodePush](https://githubcom/microsoft/code-push) |
+| Característica | Capgo | [Appflow](https://ionicio/appflow/) | [CodePush](https://githubcom/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Estado | Activo | Activo | Cierra en 2026 | Descontinuado 2024 |
 | Velocidad de Actualización | 114ms | Estándar | Fluctúa | N/A |

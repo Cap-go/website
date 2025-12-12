@@ -29,7 +29,7 @@ next_blog: ''
 
 ### Perbandingan Cepat Alat OTA
 
-| Fitur | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) |
+| Fitur | Capgo | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | **Tahun Peluncuran** | 2022 | 2024 | Berhenti 2026 |
 | **Enkripsi End-to-End** | Ya | Tidak | Tidak |
@@ -154,7 +154,7 @@ Berikut perbandingan platform OTA teratas berdasarkan keamanan, kinerja, harga, 
 
 Tabel di bawah ini memberikan gambaran umum cepat untuk membantu Anda mengidentifikasi platform terbaik untuk kebutuhan Anda:
 
-| Fitur | Capgo | Capawesome | Appflow |
+| Fitur | Capgo | Appflow |
 | --- | --- | --- | --- |
 | **Tahun Peluncuran** | 2022 | 2024 | Berhenti 2026 |
 | **Enkripsi End-to-End** | Ya[\[1\]](https://capgo.app/) | Tidak | Tidak |
@@ -169,7 +169,6 @@ Tabel di bawah ini memberikan gambaran umum cepat untuk membantu Anda mengidenti
 
 -   **Capgo**: $300/bulan
 -   **Appflow**: $6.000/tahun
--   **Capawesome**: Menyamai harga Capgo
 
 ### Integrasi dan Fitur
 

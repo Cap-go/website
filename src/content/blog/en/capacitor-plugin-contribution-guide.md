@@ -138,7 +138,6 @@ For type safety:
 
 -   Use focused interfaces tailored to specific use cases.
 -   Apply union types for platform-specific variations.
--   Implement type guards to validate types at runtime [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### Code Documentation
 

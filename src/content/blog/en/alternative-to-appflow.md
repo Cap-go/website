@@ -88,7 +88,6 @@ Join us here 👇
 ## Related Articles
 
 ### Alternative Comparisons
-- [Alternative to CapAwesome](/blog/alternative-to-capawesome/) - Compare with CapAwesome's approach
 - [Alternative to Expo EAS](/blog/alternative-to-expo/) - Comparison with Expo's update service
 - [Alternative to Voltbuilder](/blog/alternative-to-voltbuilder/) - How Capgo compares to Voltbuilder
 - [Migrating from Microsoft App Center](/blog/appcenter-migration/) - Transition guide from App Center

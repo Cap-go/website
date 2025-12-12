@@ -95,10 +95,6 @@ OTA 업데이트 정책을 위반하면 심각한 결과를 초래할 수 있습
 
 Apple과 Google은 사용자 보안과 경험을 강조합니다. Google Play는 약간의 여유를 제공하지만, 개발자는 버그 수정, 콘텐츠 업데이트, 또는 소규모 UI 조정과 같은 사소한 개선을 위해 OTA 업데이트를 사용해야 합니다. 주요 변경 사항이나 새로운 기능은 항상 공식 검토 프로세스를 거쳐야 준수가 유지됩니다.
 
-## Capawesome의 새로운 Ionic Capacitor 라이브 업데이트 탐색 중 ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## OTA 업데이트 지침
 
 앱 스토어 규칙을 준수하기 위해 [Capacitor 앱](https://capgo.app/blog/capacitor-comprehensive-guide/)에 OTA(Over-the-Air) 업데이트를 사용할 때 특정 지침을 따르는 것이 중요합니다. 이러한 관행은 업데이트가 안전하고 플랫폼 정책에 부합하도록 보장하는 데 도움이 됩니다.

@@ -22,7 +22,6 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: マルチプロバイダー認証、トークン管理、リアルタイム状態更新。迅速な統合に最適。
 -   **[生体認証セキュリティプラグイン](https://capgo.app/plugins/capacitor-native-biometric/)**: 指紋、顔認証、デバイス認証情報のサポートで安全なログインを実現。
--   **@capawesome/capacitor-secure-storage**: iOS Keychain、Android Keystore、またはAES-256で暗号化。機密セッションデータの保存に最適。
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: 自動ログアウト、生体認証、安全なストレージを備えたエンタープライズグレードのソリューション。
 -   **[Capgo](https://capgo.app/)**: 安全なセッション管理と暗号化されたライブ更新を組み合わせてシームレスなデプロイメントを実現。
 
@@ -47,7 +46,6 @@ next_blog: ''
 
 ![Identity Vault](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/c5fae6eb414f2040557b847eda54d313.jpg)
 
-<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. [Capacitor](https://capacitorjs.com/)用[Firebase Auth](https://firebase.google.com/docs/auth)
 
@@ -125,10 +123,6 @@ const options = {
 セッションをさらに保護するため、開発者は自動セッションタイムアウトを実装し、生体認証の変更を監視する必要があります。変更が検出された場合、不正アクセスを防ぐために認証トークンを無効化する必要があります[\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta)。このプラグインには詳細なエラー処理システムも備わっており、開発者がフォールバックメカニズムを作成し、認証が失敗した場合にユーザーに通知するのに役立つフィードバックコードを提供します[\[8\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics)。
 
 このプラグインは、モダンなアプリに生体認証セキュリティを統合するための堅固なソリューションを提供し、ユーザーの利便性と保護の両方を確保します。
-
-## 3. @capawesome/capacitor-secure-storage
-
-**@capawesome/capacitor-secure-storage**プラグインは、プラットフォーム固有の暗号化技術を通じてCapacitorアプリのデータを保護する方法を提供します。
 
 ### プラットフォーム別の動作
 
@@ -284,7 +278,7 @@ Capgoのチャネルシステムは、リアルタイム分析に裏付けられ
 
 以下は、プラグインが提供する主要なセキュリティ機能の比較です：
 
-| 機能 | Firebase Auth | Biometric Security | @capawesome/secure-storage | Identity Vault | Capgo |
+| 機能 | Firebase Auth | Biometric Security | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **暗号化タイプ** | クラウドベース | ハードウェアレベル | 256-bit AES | 256-bit AES | エンドツーエンド |
 | **生体認証サポート** | 限定的 | 完全 | なし | 完全 | なし |
@@ -300,7 +294,7 @@ Capgoのチャネルシステムは、リアルタイム分析に裏付けられ
 | --- | --- | --- | --- |
 | **Firebase Auth** | 中程度 | iOS、Android | Firebase SDK |
 | **Biometric Security** | 低 | iOS、Android | なし |
-| **@capawesome/secure-storage** | 低 | iOS、Android | なし |
+| 低 | iOS、Android | なし |
 | **Identity Vault** | 高 | iOS、Android、Web | Auth Connect |
 | **Capgo** | 中程度 | iOS、Android | なし |
 
@@ -327,7 +321,7 @@ Capgoのチャネルシステムは、リアルタイム分析に裏付けられ
 | --- | --- | --- | --- |
 | **Firebase Auth** | ネイティブサポート | 制限あり | 中程度 |
 | **生体認証セキュリティ** | 手動 | 完全 | 制限あり |
-| **@capawesome/secure-storage** | 手動 | 完全 | 容易 |
+| 手動 | 完全 | 容易 |
 | **Identity Vault** | エンタープライズツール | 完全 | 包括的 |
 | **Capgo** | 自動化 | 完全 | 包括的 |
 

@@ -188,7 +188,6 @@ Lors du choix entre les outils open source et propriétaires, prenez en compte d
 
 ### Quand l'Open Source fait sens
 
-Les outils open source sont parfaitement adaptés aux projets nécessitant flexibilité et personnalisation. Ils sont particulièrement utiles pour les équipes recherchant des intégrations sur mesure et des options économiques. Le [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater) est un bon exemple de cette approche. Comme l'explique Capawesome :
 
 > "L'un des plus grands avantages de Capacitor par rapport aux autres environnements d'exécution est la possibilité de délivrer des mises à jour en temps réel sans avoir à resoumettre votre application aux stores" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
 

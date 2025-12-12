@@ -140,7 +140,6 @@ async checkPermissions(): Promise<PermissionStatus> {
 
 -   特定のユースケースに合わせたフォーカスされたインターフェースを使用します。
 -   プラットフォーム固有の変種にはユニオン型を適用します。
--   実行時に型を検証するために型ガードを実装します [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md)。
 
 ### コード文書化
 

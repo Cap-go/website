@@ -22,14 +22,13 @@ next_blog: ''
 **AppleやGoogleによるアプリの承認がほしいですか？安全な支払いデータから始めましょう。** アプリストアは、コンプライアンス基準を満たすために **エンドツーエンド暗号化**を支払いデータに求めています。それがないと、アプリは拒否されたり、削除されたりする可能性があります。知っておくべきことは以下の通りです：
 
 -   **[Capgo](https://capgo.app/)**: 真のエンドツーエンド暗号化、ロールバックコントロール、および [セルフホスティングオプション](https://capgo.app/blog/self-hosted-capgo/)を提供します。初期費用は$2,600 + 月額$300です。
--   **Capawesome**: 暗号署名を使用していますが、完全な暗号化はありません。ドイツ市場をターゲットとしています。
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: 部分的な暗号化、一貫性のないパフォーマンス、年額$6,000です。2026年に廃止予定です。
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: 2024年に終了、エンドツーエンド暗号化なし。
 
 | **ツール** | **暗号化** | **展開オプション** | **費用** | **ステータス** |
 | --- | --- | --- | --- | --- |
 | Capgo | エンドツーエンド | クラウド、セルフホスト | $2,600の設定 + 月額$300 | アクティブ |
-| Capawesome | 暗号署名 | クラウド | Capgoに類似 | アクティブ |
+| 暗号署名 | クラウド | Capgoに類似 | アクティブ |
 | Appflow | 部分的 | クラウド | 年額$6,000 | 2026年に廃止予定 |
 | Code Push | なし | クラウド | 該当なし | 2024年に終了 |
 
@@ -37,7 +36,6 @@ next_blog: ''
 
 ## Swift Reduce, MVPは終わったのか？, Apple Ads, アプリセキュリティなど...
 
-<iframe src="https://www.youtube.com/embed/FsVbZftrPTQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. [Capgo](https://capgo.app/)
 
@@ -60,12 +58,6 @@ Capgoのアプローチは、アップデートデプロイメントの82%のグ
 
 次に、Capawesomeが支払いデータのセキュリティにどのように対処しているかを見ていきましょう。
 
-## 2. Capawesome
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-Capawesomeは2024年にドイツ市場向けに導入され、若い開発者をターゲットにしており、完全なエンドツーエンド暗号化ではなく暗号署名によって支払いデータのアップデートを保護します [\[1\]](https://capgo.app/) 。次は、Appflowが支払いデータのセキュリティをどのように扱うかを詳しく見ていきます。
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)
@@ -86,7 +78,6 @@ Microsoft Code Pushは、継続的な信頼性の問題とパフォーマンス�
 
 -   **Capgo**: 真のエンドツーエンド暗号化、AppleとGoogleの基準に準拠、クラウドとセルフホストの両方に対応、CI/CDパイプラインと統合、オープンソースです。料金は$2,600の設定費用と約$300の月額料を含みます。5年間で、Appflowと比較して最大$26,100を節約できます [\[1\]](https://capgo.app/) 。
     
--   **Capawesome**: 暗号署名を提供しますが、機能が少ないです。主にドイツ市場をターゲットとし、Capgoと同様の料金体系があります [\[1\]](https://capgo.app/) 。
     
 -   **Appflow**: 部分的な暗号化を特徴としており、年額$6,000の費用がかかります。しかし、2026年に廃止予定です [2]。
     

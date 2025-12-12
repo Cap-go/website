@@ -33,7 +33,7 @@ next_blog: ''
 
 ### Confronto Rapido delle Piattaforme OTA:
 
-| Funzionalità | Capgo | [Capawesome](https://capawesomeio/) | [Appflow](https://ionicio/appflow/) | [CodePush](https://githubcom/microsoft/code-push) |
+| Funzionalità | Capgo | [Appflow](https://ionicio/appflow/) | [CodePush](https://githubcom/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Stato | Attivo | Attivo | Chiusura nel 2026 | Discontinuato 2024 |
 | Velocità Aggiornamento | 114ms | Standard | Variabile | N/A |

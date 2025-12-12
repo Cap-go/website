@@ -35,21 +35,19 @@ Rollback in [Capacitor](https://capacitorjs.com/) ensures your app stays stable 
 
 ### Platform Comparison:
 
-**[Capgo](https://capgo.app/)** offers one-click rollbacks, encryption, real-time analytics, and flexible hosting. Alternatives like **Capawesome** and **[Appflow](https://ionic.io/appflow/)** lack features or come with higher costs.
 
 **Quick Comparison Table:**
 
 | Platform | Rollback Type | Analytics | Encryption | Hosting Options | Cost |
 | --- | --- | --- | --- | --- | --- |
 | **Capgo** | Auto/Manual | Yes | Yes | Flexible | Affordable |
-| Capawesome | Manual Only | No  | No  | Limited | Lower |
+| Manual Only | No  | No  | Limited | Lower |
 | Appflow | Auto/Manual | Partial | No  | Limited | High |
 
 With proper setup and tools like Capgo, you can ensure smooth updates and quickly address issues to keep your app running seamlessly.
 
 ## MAD24 304 Leveraging Atomic Upgrades with [OSTree](https://en.wikipedia.org/wiki/OSTree) for ...
 
-<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## How Rollback Works in [Capacitor](https://capacitorjs.com/)
 
@@ -156,7 +154,7 @@ Now that we've discussed rollback setup and best practices, let’s look at how 
 
 **Capgo** stands out with its **one-click rollback** to any release. It also offers **end-to-end encryption**, **real-time analytics**, advanced deployment channels, and the flexibility of both cloud-hosted and self-hosted options [\[1\]](https://capgo.app/).
 
-On the other hand, **Capawesome** falls short, lacking encryption, analytics, and hosting flexibility. Meanwhile, **Appflow** has a steep annual fee and an unclear roadmap, which can make it less attractive [\[1\]](https://capgo.app/).
+Meanwhile, **Appflow** has a steep annual fee and an unclear roadmap, which can make it less attractive [\[1\]](https://capgo.app/).
 
 When choosing a platform, key factors to weigh include **security**, the depth of analytics, deployment flexibility, and overall cost. Capgo combines rollback reliability, strong encryption, and cost-effectiveness, making it a solid option for teams of all sizes [\[1\]](https://capgo.app/).
 

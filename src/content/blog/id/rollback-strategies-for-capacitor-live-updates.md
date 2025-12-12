@@ -32,7 +32,7 @@ next_blog: ''
 
 Platform seperti [Capgo](https://capgo.app/) menawarkan pembaruan cepat (114ms untuk 5MB), tingkat keberhasilan tinggi (82%), dan solusi hemat biaya (mulai $12/bulan). Mereka juga mendukung otomatisasi rollback, pelacakan real-time, dan segmentasi pengguna, menjadikannya pilihan yang andal untuk mengelola pembaruan langsung.
 
-| **Fitur** | **Capgo** | **Capawesome** | **[Appflow](https://ionic.io/appflow/)** |
+| **Fitur** | **Capgo** | **[Appflow](https://ionic.io/appflow/)** |
 | --- | --- | --- | --- |
 | Kecepatan Update | 114ms | Standar | Standar |
 | Tingkat Keberhasilan | 82% | Tidak Dipublikasikan | Tidak Dipublikasikan |
@@ -137,7 +137,7 @@ Pengaturan pemantauan Anda harus mencakup fungsionalitas rollback satu klik. Ini
 
 Sejak Microsoft CodePush ditutup pada 2024, pilihan untuk mengelola pembaruan langsung dalam [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) telah berkembang. Platform saat ini menawarkan berbagai alat untuk menangani pembaruan dan rollback secara efektif. Berikut bagaimana Capgo dibandingkan dengan pesaing:
 
-| Fitur | Capgo | Capawesome | Appflow |
+| Fitur | Capgo | Appflow |
 | --- | --- | --- | --- |
 | Kecepatan Update | 114ms (bundle 5MB) | Standar | Standar |
 | Tingkat Keberhasilan | 82% di seluruh dunia | Tidak dipublikasikan | Tidak dipublikasikan |

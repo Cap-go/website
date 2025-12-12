@@ -25,7 +25,6 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)** : Authentification multi-fournisseurs, gestion des jetons et mises à jour d'état en temps réel. Idéal pour une intégration rapide.
 -   **[Plugin de Sécurité Biométrique](https://capgo.app/plugins/capacitor-native-biometric/)** : Ajoute la prise en charge des empreintes digitales, de la reconnaissance faciale et des identifiants de l'appareil pour des connexions sécurisées.
--   **@capawesome/capacitor-secure-storage** : Chiffre les données avec iOS Keychain, Android Keystore ou AES-256. Parfait pour stocker des données de session sensibles.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)** : Solution de niveau entreprise avec déconnexion automatique, authentification biométrique et stockage sécurisé.
 -   **[Capgo](https://capgo.app/)** : Combine la gestion sécurisée des sessions avec des mises à jour chiffrées en direct pour des déploiements fluides.
 
@@ -162,7 +161,7 @@ Cette section fournit une analyse comparative des [plugins Capacitor](https://ca
 
 Voici une comparaison côte à côte des principales fonctionnalités de sécurité offertes par les plugins :
 
-| Fonctionnalité | Firebase Auth | Sécurité biométrique | @capawesome/secure-storage | Identity Vault | Capgo |
+| Fonctionnalité | Firebase Auth | Sécurité biométrique | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Type de chiffrement** | Basé sur le cloud | Niveau matériel | AES 256 bits | AES 256 bits | Bout en bout |
 | **Support biométrique** | Limité | Complet | Non | Complet | Non |
@@ -178,7 +177,7 @@ Le tableau ci-dessous met en évidence la complexité de configuration, la compa
 | --- | --- | --- | --- |
 | **Firebase Auth** | Modérée | iOS, Android | Firebase SDK |
 | **Sécurité biométrique** | Faible | iOS, Android | Aucune |
-| **@capawesome/secure-storage** | Faible | iOS, Android | Aucune |
+| Faible | iOS, Android | Aucune |
 | **Identity Vault** | Élevée | iOS, Android, Web | Auth Connect |
 | **Capgo** | Modérée | iOS, Android | Aucune |
 
@@ -205,7 +204,7 @@ Chaque plugin offre différents niveaux de support d'intégration, comme indiqu�
 | --- | --- | --- | --- |
 | **Firebase Auth** | Support natif | Limitée | Modérée |
 | **Sécurité biométrique** | Manuelle | Complète | Limitée |
-| **@capawesome/secure-storage** | Manuelle | Complète | Facile |
+| Manuelle | Complète | Facile |
 | **Identity Vault** | Outils Enterprise | Complète | Complète |
 | **Capgo** | Automatisée | Complète | Complète |
 

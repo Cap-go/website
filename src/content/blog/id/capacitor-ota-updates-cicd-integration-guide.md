@@ -33,7 +33,7 @@ next_blog: ''
 
 ### Perbandingan Cepat Platform OTA:
 
-| Fitur | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| Fitur | Capgo | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Status | Aktif | Aktif | Tutup 2026 | Dihentikan 2024 |
 | Kecepatan Update | 114ms | Standar | Berfluktuasi | N/A |
@@ -166,7 +166,7 @@ Setelah Anda menetapkan panduan pembaruan OTA, langkah selanjutnya adalah memili
 
 Berikut perincian fitur utama di berbagai platform OTA populer untuk [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/):
 
-| Fitur | Capgo | Capawesome | Appflow | CodePush |
+| Fitur | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | Status | Aktif | Aktif | Tutup 2026 | Dihentikan 2024 |
 | Fokus Pasar | Global | Fokus Jerman | Enterprise | Legacy |

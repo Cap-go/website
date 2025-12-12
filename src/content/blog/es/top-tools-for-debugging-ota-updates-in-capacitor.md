@@ -21,12 +21,11 @@ next_blog: ''
 La depuración de actualizaciones Over-the-Air (OTA) en aplicaciones de [Capacitor](https://capacitorjs.com/) puede ser complicada, pero las herramientas adecuadas marcan una gran diferencia. Ya sea que estés gestionando conflictos de versiones, asegurando [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/), o depurando en diferentes plataformas, aquí hay tres herramientas a considerar:
 
 -   **[Capgo](https://capgo.app/)**: Actualizaciones OTA seguras con cifrado de extremo a extremo, integración CI/CD y despliegues específicos por usuario. Comienza en $12/mes.
--   **@capawesome/capacitor-live-update**: Un plugin gratuito y simple para [gestión básica](https://capgo.app/docs/plugin/cloud-mode/manual-update/) de actualizaciones OTA con reversión automática.
 -   **[Inspect.dev](https://inspect.dev/)**: Depura aplicaciones Android e iOS, incluso en Windows, con integración de [Chrome DevTools](https://developer.chrome.com/docs/devtools). Cuesta $49/año.
 
 ### Comparación Rápida
 
-| Característica | Capgo | @capawesome/capacitor-live-update | Inspect.dev |
+| Característica | Capgo | Inspect.dev |
 | --- | --- | --- | --- |
 | Gestión de Actualizaciones | Avanzada (cifrado, CI/CD) | Básica (basada en la nube) | No aplicable |
 | [Herramientas de Depuración](https://capgo.app/docs/plugin/debugging/) | Control de versiones, reversión | Reversión automática | Chrome DevTools |
@@ -57,7 +56,7 @@ Las [aplicaciones Capacitor](https://capgo.app/blog/capacitor-comprehensive-guid
 | --- | --- | --- |
 | [Actualizaciones Manuales](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Control total sobre el proceso de actualización, soporta URLs personalizadas | Aplicaciones pequeñas, pruebas |
 | Capgo | Ofrece cifrado de extremo a extremo, integración CI/CD y asignación de usuarios | Aplicaciones empresariales |
-| @capawesome/capacitor-live-update | Gestiona versiones y proporciona funcionalidad básica de actualización | Aplicaciones simples |
+| Gestiona versiones y proporciona funcionalidad básica de actualización | Aplicaciones simples |
 
 Elige el método que mejor se adapte a las necesidades y flujo de trabajo de tu aplicación.
 
@@ -102,4 +101,3 @@ Para [opciones adicionales de depuración](https://capgo.app/docs/plugin/debuggi
 
 - **Inspect.dev**: Una herramienta de depuración multiplataforma.
 - **Capgo**: Ayuda con la gestión de actualizaciones en vivo, junto con características integradas de seguridad y CI/CD.
-- **@capawesome/capacitor-live-update**: Útil para depurar actualizaciones en vivo de manera efectiva.

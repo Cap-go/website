@@ -119,7 +119,6 @@ Capgo offers a solution for teams looking to streamline version control without 
 The version control market is shifting as older services phase out. Teams now need to focus on cost, speed, and compliance when choosing a strategy. Here's a snapshot of the current options:
 
 -   **Capgo** (launched 2022): Active, starting at $12/month, supports live updates
--   **Capawesome** (launched 2024): Active, similar pricing, but with fewer update options
 -   **Appflow**: Shutting down in 2026, priced at $6,000/year [\[1\]](https://capgo.app/), offers [automated updates](https://capgo.app/docs/live-updates/update-behavior/)
 
 These tools are stepping in to fill the void left by the closure of CodePush in 2024 and the upcoming end of Appflow in 2026.

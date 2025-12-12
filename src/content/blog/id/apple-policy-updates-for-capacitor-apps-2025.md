@@ -34,7 +34,7 @@ next_blog: ''
 
 **Perbandingan Cepat**:
 
-| Fitur | Capgo (Paket TEAM) | [Appflow](https://ionicio/appflow/) | [Capawesome](https://capawesomeio/) |
+| Fitur | Capgo (Paket TEAM) | [Appflow](https://ionicio/appflow/) |
 | --- | --- | --- | --- |
 | Biaya Tahunan | $996 | $6,000 | Mirip dengan Capgo |
 | Enkripsi | End-to-end | Penandatanganan dasar | Penandatanganan dasar |
@@ -46,7 +46,6 @@ Pengembang harus bertindak sekarang untuk memastikan kepatuhan dan menghindari g
 
 ## Cara Mengintegrasikan Token Apps & Books dengan Addigy
 
-[[HTML_TAG]][[HTML_TAG]]
 
 ## Pembaruan Kebijakan Utama untuk 2025
 

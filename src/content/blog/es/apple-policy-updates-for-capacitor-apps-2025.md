@@ -33,7 +33,7 @@ next_blog: ''
 
 **Comparación Rápida**:
 
-| Característica | Capgo (Plan TEAM) | [Appflow](https://ionic.io/appflow/) | Capawesome |
+| Característica | Capgo (Plan TEAM) | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | Costo Anual | $996 | $6,000 | Similar a Capgo |
 | Cifrado | Extremo a extremo | Firma básica | Firma básica |
@@ -110,7 +110,7 @@ Estas características hacen de Capgo una opción destacada para asegurar el cum
 
 Así es como Capgo se compara con otras herramientas para gestionar actualizaciones en aplicaciones Capacitor:
 
-| Característica | Capgo (Plan TEAM) | Appflow | Capawesome |
+| Característica | Capgo (Plan TEAM) | Appflow |
 | --- | --- | --- | --- |
 | Costo Anual | $996 | $6,000 | Similar a Capgo |
 | Cifrado | Extremo a extremo | Firma básica | Firma básica |

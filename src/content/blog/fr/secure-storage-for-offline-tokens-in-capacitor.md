@@ -61,7 +61,6 @@ Lors du choix des options de stockage sécurisé pour les jetons hors ligne dans
 -   **@capacitor-community/secure-storage** : Offre un chiffrement AES-256 utilisant le trousseau iOS et le keystore Android, prend en charge [le déverrouillage biométrique](https://capgo.app/plugins/capacitor-native-biometric/) et inclut la rotation automatiques des clés.
 -   **@ionic/storage** : N'inclut pas de chiffrement intégré, nécessite un wrapper manuel pour la sécurité, et manque de fonctionnalités d'authentification biométrique.
 -   **Native SecureStorage** : Fonctionne exclusivement avec le trousseau iOS mais ne prend pas en charge Android.
--   **@capawesome/secure-storage** : Fournit un chiffrement AES-256, fonctionne entre plateformes et offre une authentification biométrique optionnelle.
 -   **@ionic-enterprise/identity-vault** : Propose un chiffrement au niveau matériel, prend en charge l'authentification biométrique et gère efficacement le cycle de vie sécurisé des jetons.
 
 ## Résumé

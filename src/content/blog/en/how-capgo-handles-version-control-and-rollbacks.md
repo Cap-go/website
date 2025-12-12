@@ -27,10 +27,6 @@ next_blog: ''
 
 Capgo supports 2,000+ apps, delivering updates to 95% of users within 24 hours. Pricing starts at **$12/month** for unlimited updates, making it a cost-effective solution for developers. Whether you're fixing bugs or rolling out features, Capgo ensures stability and speed.
 
-## Explore Capawesome's New Ionic Capacitor Live Update Plugin: Features & How to Get Started
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## How [Capgo](https://capgo.app/)'s Version Control Works
 
 ![Capgo Live Update Dashboard Interface](https://assets.seobotai.com/capgo.app/68346854d3b966198182c7d5/ae0e696178a553558fb76d876ab0786c.jpg)

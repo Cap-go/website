@@ -32,7 +32,6 @@ next_blog: ''
 
 ## Vollständiger Leitfaden für Open Source - Wie man beiträgt
 
-[[HTML_TAG]][[HTML_TAG]]
 
 ## Einrichtung der Entwicklungsumgebung
 

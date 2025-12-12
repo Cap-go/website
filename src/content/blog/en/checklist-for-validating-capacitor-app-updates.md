@@ -27,7 +27,7 @@ next_blog: ''
 
 ### Quick Comparison of OTA Tools
 
-| Feature | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) |
+| Feature | Capgo | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | **Launch Year** | 2022 | 2024 | Shutting down 2026 |
 | **End-to-End Encryption** | Yes | No  | No  |
@@ -152,7 +152,7 @@ Here's a comparison of top OTA platforms based on security, performance, pricing
 
 The table below provides a quick overview to help you identify the best platform for your needs:
 
-| Feature | Capgo | Capawesome | Appflow |
+| Feature | Capgo | Appflow |
 | --- | --- | --- | --- |
 | **Launch Year** | 2022 | 2024 | Shutting down 2026 |
 | **End-to-End Encryption** | Yes[\[1\]](https://capgo.app/) | No  | No  |
@@ -167,7 +167,6 @@ The table below provides a quick overview to help you identify the best platform
 
 -   **Capgo**: $300/month
 -   **Appflow**: $6,000/year
--   **Capawesome**: Matches Capgo's pricing
 
 ### Integration and Features
 

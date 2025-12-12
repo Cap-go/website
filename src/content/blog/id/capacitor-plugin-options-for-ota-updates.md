@@ -13,7 +13,7 @@ head_image: >-
   https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: Pengembangan Mobile
 keywords: >-
-  OTA updates, Capacitor, mobile apps, app deployment, Capgo, Capawesome,
+  OTA updates, Capacitor, mobile apps, app deployment, Capgo,
   Appflow, CodePush
 tag: 'Development, Mobile, Updates'
 published: true
@@ -41,7 +41,7 @@ next_blog: ''
 | Plugin | Status | Fitur Utama | Harga Awal |
 | --- | --- | --- | --- |
 | **Capgo** | Aktif | Pembaruan cepat, enkripsi | $12/bulan |
-| **Capawesome** | Aktif (2024) | Fokus pasar Jerman | Mirip dengan Capgo |
+| Aktif (2024) | Fokus pasar Jerman | Mirip dengan Capgo |
 | **Appflow** | Akan ditutup (2026) | Fitur enterprise | $6,000/tahun |
 | **CodePush** | Dihentikan (2024) | Sebelumnya gratis | N/A |
 
@@ -67,12 +67,6 @@ Berikut yang ditawarkan Capgo:
 
 Plugin lain juga melayani kebutuhan dan wilayah tertentu.
 
-### Plugin CapawesomeLive Update
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/b001a5727fc0f3dc796b9522055deb7e.jpg)
-
-Diperkenalkan pada 2024, Capawesome melayani pasar Jerman dengan fokus pada pembaruan efisien dan harga kompetitif.
-
 ### [Appflow](https://ionic.io/appflow/) oleh [Ionic](https://ionicframework.com/)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/d621f8c4ec61e7471b0153517889f4cc.jpg)
@@ -92,13 +86,9 @@ Microsoft CodePush, yang dulunya populer, dihentikan pada 2024. Pengembang sejak
 | Plugin | Status | Harga | Fitur Utama |
 | --- | --- | --- | --- |
 | **Capgo** | Aktif | Dari $12/bulan | Enkripsi end-to-end |
-| **Capawesome** | Aktif | Mirip dengan Capgo | Fokus pasar Jerman |
+| Aktif | Mirip dengan Capgo | Fokus pasar Jerman |
 | **Appflow** | Tutup 2026 | $6,000/tahun | Dukungan enterprise |
 | **CodePush** | Dihentikan | Gratis (dulu) | N/A |
-
-## Jelajahi Pembaruan Langsung Ionic Capacitor Terbaru Capawesome ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Perbandingan Fitur Plugin
 
@@ -108,7 +98,7 @@ Berikut tinjauan rinci tentang kemampuan dan batasan berbagai plugin OTA.
 
 Tabel ini menguraikan perbedaan utama antara plugin aktif dan yang dihentikan:
 
-| Fitur | Capgo | Capawesome | Appflow | CodePush |
+| Fitur | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | Kecepatan Pembaruan | 114ms (5MB) | Dasar | Dasar | N/A |
 | Enkripsi End-to-End | ✓ | – | – | – |
@@ -133,7 +123,6 @@ Setiap plugin memiliki kekuatan dan kelemahan berdasarkan metrik kinerja:
     -   **Keterbatasan**:
         -   Fitur premium memerlukan paket tingkat lebih tinggi.
         -   Self-hosting membutuhkan keahlian teknis.
--   **Plugin Capawesome Live Update**
     
     -   **Keunggulan**:
         -   Kehadiran kuat di pasar Jerman.
@@ -193,7 +182,7 @@ Berikut rincian pilihan saat ini:
 | Plugin | Status | Kekuatan Utama | Terbaik Untuk |
 | --- | --- | --- | --- |
 | Capgo | Aktif | Enkripsi end-to-end, pembaruan cepat | Tim yang fokus pada [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) |
-| Capawesome | Aktif (Sejak 2024) | Fokus pasar Jerman, harga kompetitif | Proyek yang menargetkan Eropa |
+| Aktif (Sejak 2024) | Fokus pasar Jerman, harga kompetitif | Proyek yang menargetkan Eropa |
 | Appflow | Akan ditutup (2026) | Fitur kelas enterprise | Transisi sistem lama |
 | CodePush | Dihentikan (2024) | Sebelumnya opsi gratis | N/A |
 

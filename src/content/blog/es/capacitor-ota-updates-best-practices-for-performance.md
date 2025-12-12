@@ -35,7 +35,7 @@ Las actualizaciones OTA (Over-the-Air) permiten que las aplicaciones de [Capacit
 
 **Comparación rápida de herramientas OTA**:
 
-| Característica | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [capacitor-app-update](https://github.com/capawesome-team/capacitor-app-update) | [Capgo](https://capgo.app/) |
+| Característica | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [Capgo](https://capgo.app/) |
 | --- | --- | --- | --- |
 | Método de actualización | Comparación de sumas de verificación | [Actualizaciones en la aplicación](https://capgo.app/plugins/capacitor-updater/) | Actualizaciones de paquetes JS |
 | Impacto en el rendimiento | Mínimo | Medio | Bajo |

@@ -163,7 +163,7 @@ When evaluating OTA update platforms, it's essential to consider stability, secu
 
 ### Platform Features Matrix
 
-| Feature | Capgo | Capawesome | Appflow | CodePush |
+| Feature | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | **Active Status** | Operating since 2022 | Operating since 2024 | Closing 2026 | Closed 2024 |
 | **End-to-End Encryption** | Yes | No  | No  | No  |

@@ -30,7 +30,7 @@ next_blog: ''
 
 ### Perbandingan Cepat Platform OTA:
 
-| Fitur | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
+| Fitur | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | Enkripsi End-to-End | Ya | Tidak  | Tidak  |
 | Kemampuan Rollback | Instan | Manual | Manual |
@@ -40,7 +40,6 @@ next_blog: ''
 
 ## Capacitor 2.0: Aplikasi seluler & PWA dari satu basis kode
 
-<iframe src="https://www.youtube.com/embed/8KQb4u_FqOw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Risiko Keamanan dalam Pembaruan OTA
 
@@ -177,7 +176,7 @@ Selanjutnya, mari kita lihat bagaimana platform OTA utama dibandingkan dalam hal
 
 Saat memilih platform OTA untuk aplikasi Capacitor, keamanan dan keandalan adalah faktor penting. Berikut adalah bagaimana beberapa platform teratas mengukur:
 
-| Fitur | Capgo | AppFlow | Capawesome |
+| Fitur | Capgo | AppFlow |
 | --- | --- | --- | --- |
 | Enkripsi End-to-End | Ya | Tidak  | Tidak  |
 | Tingkat Keberhasilan Pembaruan | 82% di seluruh dunia | Data terbatas | Data terbatas |

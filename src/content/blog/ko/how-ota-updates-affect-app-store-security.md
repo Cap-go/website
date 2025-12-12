@@ -163,7 +163,7 @@ OTA 업데이트 플랫폼을 평가할 때는 안정성, 보안 기능 및 장�
 
 ### 플랫폼 기능 매트릭스
 
-| 기능 | Capgo | Capawesome | Appflow | CodePush |
+| 기능 | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | **활성 상태**
 

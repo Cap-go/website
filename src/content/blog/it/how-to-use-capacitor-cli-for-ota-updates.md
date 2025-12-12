@@ -45,7 +45,7 @@ Gli aggiornamenti Over-The-Air (OTA) permettono di distribuire correzioni e funz
 
 ### Confronto Strumenti:
 
-| Funzionalità | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) (Chiusura nel 2026) | Microsoft CodePush (Discontinuato 2024) |
+| Funzionalità | Capgo | [Appflow](https://ionic.io/appflow/) (Chiusura nel 2026) | Microsoft CodePush (Discontinuato 2024) |
 | --- | --- | --- | --- | --- |
 | **Focus di Mercato** | Globale | Mercato Tedesco | Enterprise | - |
 | **Sicurezza** | Crittografia end-to-end | Firma base | Firma base | - |

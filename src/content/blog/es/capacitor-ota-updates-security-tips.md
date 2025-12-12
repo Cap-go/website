@@ -32,7 +32,7 @@ next_blog: ''
 
 ### Comparación Rápida de Plataformas OTA:
 
-| Característica | [Capgo](https://capgo.app/) | [AppFlow](https://ionicio/appflow/) | [Capawesome](https://cloudcapawesomeio/) |
+| Característica | [Capgo](https://capgo.app/) | [AppFlow](https://ionicio/appflow/) |
 | --- | --- | --- | --- |
 | Cifrado de Extremo a Extremo | Sí | No | No |
 | Capacidad de Reversión | Instantánea | Manual | Manual |
@@ -42,7 +42,6 @@ next_blog: ''
 
 ## Capacitor 2.0: Aplicaciones móviles y PWAs desde una base de código única
 
-[[HTML_TAG]][[HTML_TAG]]
 
 ## Riesgos de Seguridad en Actualizaciones OTA
 

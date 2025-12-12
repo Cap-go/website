@@ -41,12 +41,6 @@ next_blog: ''
 
 **Kiat Pro:** Gunakan peluncuran bertahap untuk menguji pembaruan pada kelompok pengguna kecil sebelum penerapan penuh. Alat Capgo membuat proses ini lancar dan aman.
 
-## Jelajahi Pembaruan Langsung [Capacitor](https://capacitorjs.com/) Ionic Baru dari Capawesome ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Pengaturan Lingkungan Pengujian
 
 Menyiapkan lingkungan pengujian yang tepat adalah kunci untuk memvalidasi pembaruan OTA secara efektif.

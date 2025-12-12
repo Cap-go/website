@@ -92,10 +92,6 @@ OTAアップデートポリシーに違反すると、深刻な結果を招く�
 
 AppleとGoogleの両方がユーザーのセキュリティと体験を重視しています。Google Playはやや柔軟性を提供していますが、開発者はバグ修正、コンテンツアップデート、小規模なUI調整などの軽微な改善にOTAアップデートを使用すべきです。主要な変更や新機能は、常に公式のレビュープロセスを経てコンプライアンスを維持する必要があります。
 
-## Capawesomeの新しいIonic Capacitor Live Updateを探る
-
-[[HTML_TAG]][[HTML_TAG]]
-
 ## OTAアップデートガイドライン
 
 アプリストアのルールに準拠するため、[Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/)のOTA(Over-The-Air)アップデートを使用する際は、特定のガイドラインに従うことが重要です。これらの実践により、アップデートの安全性とプラットフォームポリシーへの適合を確保できます。

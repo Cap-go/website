@@ -11,7 +11,7 @@ head_image: >-
   https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: モバイルアプリ開発
 keywords: >-
-  OTA updates, Capacitor, mobile apps, app deployment, Capgo, Capawesome,
+  OTA updates, Capacitor, mobile apps, app deployment, Capgo,
   Appflow, CodePush
 tag: 'Development, Mobile, Updates'
 published: true
@@ -39,7 +39,7 @@ next_blog: ''
 | プラグイン | ステータス | 主な機能 | 開始価格 |
 | --- | --- | --- | --- |
 | **Capgo** | アクティブ | 高速更新、暗号化 | 12ドル/月 |
-| **Capawesome** | アクティブ（2024） | ドイツ市場重視 | Capgoと同等 |
+| アクティブ（2024） | ドイツ市場重視 | Capgoと同等 |
 | **Appflow** | 終了予定（2026） | エンタープライズ機能 | 6,000ドル/年 |
 | **CodePush** | 終了（2024） | 以前は無料 | 該当なし |
 

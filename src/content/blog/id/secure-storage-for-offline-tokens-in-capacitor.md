@@ -60,7 +60,6 @@ Saat memilih opsi penyimpanan aman untuk token offline dalam aplikasi Capacitor,
 -   **@capacitor-community/secure-storage**: Menawarkan enkripsi AES-256 menggunakan iOS Keychain dan Android Keystore, mendukung [pembukaan biometrik](https://capgo.app/plugins/capacitor-native-biometric/), dan mencakup rotasi kunci otomatis.
 -   **@ionic/storage**: Tidak menyertakan enkripsi bawaan, memerlukan wrapper manual untuk keamanan, dan tidak memiliki fitur autentikasi biometrik.
 -   **Native SecureStorage**: Bekerja eksklusif dengan iOS Keychain tetapi tidak mendukung Android.
--   **@capawesome/secure-storage**: Menyediakan enkripsi AES-256, bekerja lintas platform, dan menawarkan autentikasi biometrik opsional.
 -   **@ionic-enterprise/identity-vault**: Memberikan enkripsi tingkat perangkat keras, mendukung autentikasi biometrik, dan mengelola siklus hidup token secara aman dan efektif.
 
 ## Ringkasan

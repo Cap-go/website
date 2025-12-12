@@ -37,7 +37,6 @@ next_blog: ''
 -   **Benötigte Werkzeuge:**
     
     -   Capacitor 3.0+.
-    -   Plugins wie `@capawesome-team/capacitor-biometrics` oder `capacitor-native-biometric`.
 -   **Setup-Highlights:**
     
     -   Berechtigungen zu AndroidManifest und Info.plist hinzufügen.
@@ -50,13 +49,12 @@ next_blog: ''
 | --- | --- | --- | --- |
 | `@aparajita/capacitor-biometric-auth` | Capacitor 7 | Native Biometrie, Geräte-Anmeldedaten | Neue Projekte mit Capacitor 7 |
 | `capacitor-native-biometric` | Capacitor 3, 4 | Sichere Anmeldedatenspeicherung, Keychain/Keystore | Anmeldedatenverwaltung |
-| `@capawesome-team/capacitor-biometrics` | Alle Versionen | Biometrische und Geräte-Anmeldedaten Unterstützung | Flexible Authentifizierungsoptionen |
+| Alle Versionen | Biometrische und Geräte-Anmeldedaten Unterstützung | Flexible Authentifizierungsoptionen |
 
 [Biometrische Authentifizierung in Capacitor-Apps](https://capgo.app/plugins/capacitor-native-biometric/) ist eine sichere und benutzerfreundliche Methode zum Schutz sensibler Daten. Der vollständige Artikel beschreibt Einrichtungsschritte, Code-Beispiele, Teststrategien und Sicherheitsstandards.
 
 ## Ionic Biometrische (FaceID / FingerPrint) Authentifizierung
 
-<iframe src="https://www.youtube.com/embed/GGWiDj1cusE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Setup-Anforderungen
 
@@ -78,7 +76,6 @@ Wählen Sie ein [biometrisches Plugin](https://capgo.app/plugins/capacitor-nativ
 
 -   **@aparajita/capacitor-biometric-auth** für Capacitor 7
 -   **capacitor-native-biometric** für Capacitor 3 und 4
--   **@capawesome-team/capacitor-biometrics** für Unterstützung mit zusätzlichen Geräte-Anmeldedaten
 
 ### Android-Setup-Schritte
 
@@ -148,14 +145,14 @@ Bei der Auswahl eines biometrischen Authentifizierungs-Plugins für Ihre Capacit
 | --- | --- | --- | --- |
 | @aparajita/capacitor-biometric-auth | Capacitor 7 | Native Biometrie, Geräte-Anmeldedaten, umfassende API | Neue Projekte mit Capacitor 7 |
 | capacitor-native-biometric | Capacitor 3, 4 | Sichere Anmeldedatenspeicherung, Keychain/Keystore Integration | Bestehende Projekte, die Anmeldedatenverwaltung benötigen |
-| @capawesome-team/capacitor-biometrics | Alle Versionen | Biometrische und Geräte-Anmeldedaten Authentifizierung, übersichtliche API | Projekte, die flexible Authentifizierungsoptionen benötigen |
+| Alle Versionen | Biometrische und Geräte-Anmeldedaten Authentifizierung, übersichtliche API | Projekte, die flexible Authentifizierungsoptionen benötigen |
 
 ### Authentifizierungs-Code-Beispiele
 
-So verwenden Sie das **@capawesome-team/capacitor-biometrics** Plugin für biometrische Authentifizierung:
+So verwenden Sie das **@capgo/capacitor-native-biometric** Plugin für biometrische Authentifizierung:
 
 ```typescript
-import { Biometrics } from '@capawesome-team/capacitor-biometrics';
+import { Biometrics } from '@capgo/capacitor-native-biometric';
 
 async function setupBiometricAuth() {
   try {
@@ -414,7 +411,6 @@ Die Aktualisierung Ihrer biometrischen API ist wichtig für Sicherheit und Funkt
 
 Konzentrieren Sie sich auf diese Bereiche:
 
--   **Plugin-Updates**: Aktualisieren Sie regelmäßig Abhängigkeiten wie `@capawesome-team/capacitor-biometrics`.
 -   **Plattform-Änderungen**: Verfolgen Sie Updates für iOS LocalAuthentication und Android BiometricPrompt APIs.
 -   **Sicherheitsstandards**: Bleiben Sie auf dem neuesten Stand der biometrischen Sicherheitsanforderungen.
 -   **Store-Richtlinien**: Stellen Sie die Einhaltung der Apple App Store- und Google Play-Richtlinien sicher.

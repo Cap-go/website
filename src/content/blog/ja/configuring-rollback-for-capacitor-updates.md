@@ -43,14 +43,13 @@ next_blog: ''
 | プラットフォーム | ロールバックタイプ | 分析 | 暗号化 | ホスティングオプション | コスト |
 | --- | --- | --- | --- | --- | --- |
 | **Capgo** | 自動/手動 | はい | はい | フレキシブル | 手頃 |
-| Capawesome | 手動のみ | いいえ | いいえ | 限定的 | 低い |
+| 手動のみ | いいえ | いいえ | 限定的 | 低い |
 | Appflow | 自動/手動 | 部分的 | いいえ | 限定的 | 高い |
 
 適切に設定されたツールを使用することで、スムーズなアップデートを確保し、迅速に問題に対処してアプリを途切れなく運用し続けることができます。
 
 ## MAD24 304 [OSTree](https://en.wikipedia.org/wiki/OSTree)を活用した原子アップグレードの...
 
-<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## [Capacitor](https://capacitorjs.com/)におけるロールバックの仕組み
 

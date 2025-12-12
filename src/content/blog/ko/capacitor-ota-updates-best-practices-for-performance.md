@@ -35,7 +35,7 @@ OTA(Over-the-Air) 업데이트를 통해 [Capacitor](https://capacitorjs.com/) �
 
 **OTA 도구 빠른 비교**:
 
-| 기능 | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [capacitor-app-update](https://github.com/capawesome-team/capacitor-app-update) | [Capgo](https://capgo.app/) |
+| 기능 | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [Capgo](https://capgo.app/) |
 | --- | --- | --- | --- |
 | 업데이트 방식 | 체크섬 비교 | [인앱 업데이트](https://capgo.app/plugins/capacitor-updater/) | JS 번들 업데이트 |
 | 성능 영향 | 최소 | 중간 | 낮음 |

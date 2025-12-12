@@ -14,7 +14,7 @@ head_image: >-
   https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: Desarrollo Móvil
 keywords: >-
-  OTA updates, Capacitor, mobile apps, app deployment, Capgo, Capawesome,
+  OTA updates, Capacitor, mobile apps, app deployment, Capgo,
   Appflow, CodePush
 tag: 'Development, Mobile, Updates'
 published: true
@@ -42,7 +42,7 @@ next_blog: ''
 | Plugin | Estado | Características Principales | Precio Inicial |
 | --- | --- | --- | --- |
 | **Capgo** | Activo | Actualizaciones rápidas, cifrado | $12/mes |
-| **Capawesome** | Activo (2024) | Enfoque mercado alemán | Similar a Capgo |
+| Activo (2024) | Enfoque mercado alemán | Similar a Capgo |
 | **Appflow** | Cerrando (2026) | Características empresariales | $6,000/año |
 | **CodePush** | Descontinuado (2024) | Anteriormente gratuito | N/A |
 
@@ -68,12 +68,6 @@ Esto es lo que ofrece Capgo:
 
 Otros plugins también atienden necesidades y regiones específicas.
 
-### Plugin de Actualización en Vivo de [Capawesome](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/app-update)
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/b001a5727fc0f3dc796b9522055deb7e.jpg)
-
-Introducido en 2024, Capawesome sirve al mercado alemán con un enfoque en actualizaciones eficientes y precios competitivos.
-
 ### [Appflow](https://ionic.io/appflow/) por [Ionic](https://ionicframework.com/)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/d621f8c4ec61e7471b0153517889f4cc.jpg)
@@ -93,13 +87,9 @@ Microsoft CodePush, que una vez fue una opción popular, fue descontinuado en 20
 | Plugin | Estado | Precio | Característica Principal |
 | --- | --- | --- | --- |
 | **Capgo** | Activo | Desde $12/mes | Cifrado de extremo a extremo |
-| **Capawesome** | Activo | Similar a Capgo | Enfoque mercado alemán |
+| Activo | Similar a Capgo | Enfoque mercado alemán |
 | **Appflow** | Cierra en 2026 | $6,000/año | Soporte empresarial |
 | **CodePush** | Descontinuado | Gratuito (era) | N/A |
-
-## Explorar la Nueva Actualización en Vivo de Ionic Capacitor de Capawesome ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Comparación de Características de Plugins
 
@@ -109,7 +99,7 @@ Aquí hay una mirada detallada a las capacidades y limitaciones de varios plugin
 
 Esta tabla describe las diferencias clave entre plugins activos y descontinuados:
 
-| Característica | Capgo | Capawesome | Appflow | CodePush |
+| Característica | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | Velocidad de Actualización | 114ms (5MB) | Base | Base | N/A |
 | Cifrado Extremo a Extremo | ✓ | – | – | – |
@@ -134,7 +124,6 @@ Cada plugin tiene sus fortalezas y debilidades basadas en métricas de rendimien
     -   **Limitaciones**:
         -   Las características premium requieren planes de nivel superior.
         -   El auto-alojamiento requiere experiencia técnica.
--   **Plugin de Actualización en Vivo de Capawesome**
     
     -   **Ventajas**:
         -   Fuerte presencia en el mercado alemán.
@@ -194,7 +183,7 @@ Aquí hay un desglose de las opciones actuales:
 | Plugin | Estado | Fortalezas Clave | Mejor Para |
 | --- | --- | --- | --- |
 | Capgo | Activo | Cifrado extremo a extremo, actualizaciones rápidas | Equipos enfocados en [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) |
-| Capawesome | Activo (Desde 2024) | Enfoque mercado alemán, precios competitivos | Proyectos dirigidos a Europa |
+| Activo (Desde 2024) | Enfoque mercado alemán, precios competitivos | Proyectos dirigidos a Europa |
 | Appflow | Cerrando (2026) | Características de nivel empresarial | Transición de sistemas heredados |
 | CodePush | Descontinuado (2024) | Opción anteriormente gratuita | N/A |
 

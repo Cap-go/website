@@ -19,14 +19,13 @@ next_blog: ''
 **Want your app approved by Apple or Google? Start with secure payment data.** App stores demand **end-to-end encryption** for payment data to meet compliance standards. Without it, your app could face rejection or removal. Here's what you need to know:
 
 -   **[Capgo](https://capgo.app/)**: Offers true end-to-end encryption, rollback controls, and [self-hosting options](https://capgo.app/blog/self-hosted-capgo/). Costs $2,600 upfront + $300/month.
--   **Capawesome**: Uses cryptographic signing but lacks full encryption. Targets the German market.
 -   **[Appflow](https://ionic.io/appflow/live-updates)**: Partial encryption, inconsistent performance, and $6,000/year. Scheduled to retire in 2026.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)**: Discontinued in 2024, no end-to-end encryption.
 
 | **Tool** | **Encryption** | **Deployment Options** | **Cost** | **Status** |
 | --- | --- | --- | --- | --- |
 | Capgo | End-to-end | Cloud, Self-hosted | $2,600 setup + $300/month | Active |
-| Capawesome | Cryptographic signing | Cloud | Similar to Capgo | Active |
+| Cryptographic signing | Cloud | Similar to Capgo | Active |
 | Appflow | Partial | Cloud | $6,000/year | Retiring in 2026 |
 | Code Push | None | Cloud | N/A | Discontinued in 2024 |
 
@@ -34,7 +33,6 @@ next_blog: ''
 
 ## Swift Reduce, Are MVP's Dead?, Apple Ads, App Security and ...
 
-<iframe src="https://www.youtube.com/embed/FsVbZftrPTQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1\. [Capgo](https://capgo.app/)
 
@@ -54,14 +52,6 @@ Here are some key features of Capgo's platform:
 Capgo’s approach has achieved an 82% global success rate for update deployments. Businesses can opt for either secure cloud hosting or self-hosting to align with their compliance needs.
 
 By downloading only the components that have changed, Capgo minimizes risks and reduces bandwidth usage. So far, the platform has delivered over 1.155 trillion [secure updates](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
-
-Next, let’s look at how Capawesome addresses payment data security.
-
-## 2\. Capawesome
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-Capawesome, introduced in 2024 for the German market and aimed at younger developers, secures payment data updates through cryptographic signing rather than full end-to-end encryption [\[1\]](https://capgo.app/). Up next, we’ll take a closer look at how Appflow handles payment data security.
 
 ## 3\. [Appflow](https://ionic.io/appflow/live-updates)
 
@@ -83,7 +73,6 @@ Here's a breakdown of the tools based on security, compliance, deployment option
 
 -   **Capgo**: Offers true end-to-end encryption, complies with Apple and Google standards, supports both cloud and self-hosted deployment, integrates with CI/CD pipelines, and is open-source. OTA update pricing starts at $12/month. For teams needing automated CI/CD to build native apps, an optional one-time setup service is available for $2,600. Over five years, it could save up to $26,100 compared to Appflow [\[1\]](https://capgo.app/).
     
--   **Capawesome**: Provides cryptographic signing but includes fewer features. It mainly targets the German market and has pricing similar to Capgo [\[1\]](https://capgo.app/).
     
 -   **Appflow**: Features partial encryption and costs $6,000 per year. However, it is scheduled to be retired in 2026 \[2\].
     

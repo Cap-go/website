@@ -34,7 +34,6 @@ next_blog: ''
 -   **필요한 주요 도구:**
     
     -   Capacitor 3.0+.
-    -   `@capawesome-team/capacitor-biometrics` 또는 `capacitor-native-biometric` 같은 플러그인.
 -   **설정 하이라이트:**
     
     -   AndroidManifest와 Info.plist에 권한 추가.
@@ -47,13 +46,12 @@ next_blog: ''
 | --- | --- | --- | --- |
 | `@aparajita/capacitor-biometric-auth` | Capacitor 7 | 네이티브 생체인식, 기기 자격증명 | Capacitor 7을 사용하는 새 프로젝트 |
 | `capacitor-native-biometric` | Capacitor 3, 4 | 보안 자격증명 저장, Keychain/Keystore | 자격증명 관리 |
-| `@capawesome-team/capacitor-biometrics` | 모든 버전 | 생체인식 및 기기 자격증명 지원 | 유연한 인증 옵션 |
+| 모든 버전 | 생체인식 및 기기 자격증명 지원 | 유연한 인증 옵션 |
 
 [Capacitor 앱의 생체 인증](https://capgo.app/plugins/capacitor-native-biometric/)은 민감한 데이터를 보호하는 안전하고 사용자 친화적인 방법입니다. 전체 문서에서는 설정 단계, 코드 예제, 테스트 전략 및 보안 표준에 대해 자세히 설명합니다.
 
 ## Ionic 생체 인증 (FaceID / 지문) 인증
 
-<iframe src="https://www.youtube.com/embed/GGWiDj1cusE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 설정 요구사항
 
@@ -75,7 +73,6 @@ Capacitor 버전에 따라 [생체인식 플러그인](https://capgo.app/plugins
 
 -   Capacitor 7용 **@aparajita/capacitor-biometric-auth**
 -   Capacitor 3 및 4용 **capacitor-native-biometric**
--   추가 기기 자격증명 지원을 위한 **@capawesome-team/capacitor-biometrics**
 
 ### Android 설정 단계
 
@@ -145,14 +142,14 @@ Capacitor 앱용 생체 인증 플러그인을 선택할 때는 프로젝트의 
 | --- | --- | --- | --- |
 | @aparajita/capacitor-biometric-auth | Capacitor 7 | 네이티브 생체인식, 기기 자격증명, 포괄적 API | Capacitor 7로 시작하는 새 프로젝트 |
 | capacitor-native-biometric | Capacitor 3, 4 | 보안 자격증명 저장, Keychain/Keystore 통합 | 자격증명 관리가 필요한 기존 프로젝트 |
-| @capawesome-team/capacitor-biometrics | 모든 버전 | 생체인식 및 기기 자격증명 인증, 깔끔한 API | 유연한 인증 옵션이 필요한 프로젝트 |
+| 모든 버전 | 생체인식 및 기기 자격증명 인증, 깔끔한 API | 유연한 인증 옵션이 필요한 프로젝트 |
 
 ### 인증 코드 예제
 
-**@capawesome-team/capacitor-biometrics** 플러그인을 사용한 생체 인증 방법입니다:
+**@capgo/capacitor-native-biometric** 플러그인을 사용한 생체 인증 방법입니다:
 
 ```typescript
-import { Biometrics } from '@capawesome-team/capacitor-biometrics';
+import { Biometrics } from '@capgo/capacitor-native-biometric';
 
 async function setupBiometricAuth() {
   try {
@@ -396,7 +393,6 @@ Capgo가 업데이트 관리에 훌륭한 도구인 이유는 다음과 같습�
 
 다음 영역에 집중하세요:
 
--   **플러그인 업데이트**: `@capawesome-team/capacitor-biometrics`와 같은 종속성을 정기적으로 업데이트하세요.
 -   **플랫폼 변경사항**: iOS의 LocalAuthentication과 Android의 BiometricPrompt API 업데이트를 추적하세요.
 -   **보안 표준**: 최신 생체 인증 보안 요구사항을 준수하세요.
 -   **스토어 가이드라인**: 제출 문제를 피하기 위해 Apple App Store와 Google Play 정책을 준수하세요.

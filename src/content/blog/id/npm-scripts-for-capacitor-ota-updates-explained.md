@@ -45,12 +45,6 @@ next_blog: ''
 
 Dengan platform seperti Capgo yang menawarkan pembaruan cepat (95% adopsi pengguna dalam 24 jam) dan harga terjangkau, mengelola pembaruan OTA belum pernah seefisien ini.
 
-## Jelajahi Capawesome Live Update [Capacitor](https://capacitorjs.com/) Ionic Baru ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Pengaturan Skrip npm untuk Pembaruan OTA
 
 Berikut cara mengkonfigurasi skrip npm untuk mengelola [pembaruan OTA Capacitor](https://capgo.app/ja/) secara efektif. Ini melibatkan instalasi paket yang diperlukan, menyiapkan konfigurasi, dan membuat skrip deployment.

@@ -143,7 +143,6 @@ Para la seguridad de tipos:
 
 -   Utiliza interfaces enfocadas adaptadas a casos de uso específicos.
 -   Aplica tipos de unión para variaciones específicas de la plataforma.
--   Implementa guardianes de tipo para validar tipos en tiempo de ejecución [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### Documentación del Código
 

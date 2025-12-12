@@ -93,10 +93,6 @@ Ionic has announced that Appflow will be discontinued in 2026, urging users to p
 
 > "Jumped over to @Capgo after @AppFlow hit us with a $5000 bill for the year to continue. Loving CapoGo so far. Thanks for @Capgo, it's a great product." - jermaine [\[1\]](https://capgo.app/)
 
-## Explore Capawesome's New Ionic Capacitor Live Update ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Platform Comparison
 
 Here's a practical breakdown of how these platforms perform based on their key features.

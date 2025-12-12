@@ -44,7 +44,7 @@ Over-The-Air (OTA) 업데이트를 통해 앱스토어 승인을 기다리지 �
 
 ### 도구 비교:
 
-| 기능 | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) (2026년 종료) | Microsoft CodePush (2024년 중단) |
+| 기능 | Capgo | [Appflow](https://ionic.io/appflow/) (2026년 종료) | Microsoft CodePush (2024년 중단) |
 | --- | --- | --- | --- | --- |
 | **시장 초점** | 글로벌 | 독일 시장 | 기업 | \-  |
 | **보안** | 종단간 암호화 | 기본 서명 | 기본 서명 | \-  |
@@ -55,7 +55,3 @@ Capgo는 빠른 업데이트(24시간 내 95%), 강력한 보안, CI/CD 통합�
 ### 중요한 이유:
 
 OTA 업데이트는 시간을 절약하고, 사용자 경험을 개선하며, 앱 안정성을 보장합니다. Capgo와 같은 도구를 활용하면 앱스토어 규칙을 준수하면서 빠르고 안전한 업데이트를 제공할 수 있습니다.
-
-## Capawesome의 새로운 Ionic [Capacitor](https://capacitorjs.com/) 라이브 업데이트 살펴보기 ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)

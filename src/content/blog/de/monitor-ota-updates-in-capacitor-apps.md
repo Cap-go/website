@@ -38,12 +38,6 @@ next_blog: ''
 
 Capgo hat bereits **23,5 Millionen Updates über 750 Apps** mit schnellen Downloadgeschwindigkeiten (114 ms für ein 5 MB-Paket) verwaltet. Beginnen Sie noch heute mit der Überwachung Ihrer Updates für eine reibungslosere App-Verwaltung.
 
-## Erkunden Sie Capawesome's Neues [Ionic](https://ionicframework.com/) [Capacitor](https://capacitorjs.com/) Live Update ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Einrichtung der Update-Überwachung
 
 So richten Sie die OTA-Update-Überwachung für Ihre App ein:

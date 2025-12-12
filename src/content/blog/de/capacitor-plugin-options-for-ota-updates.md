@@ -14,7 +14,7 @@ head_image: >-
   https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549-1744774247069.jpg
 head_image_alt: Mobile Entwicklung
 keywords: >-
-  OTA updates, Capacitor, mobile apps, app deployment, Capgo, Capawesome,
+  OTA updates, Capacitor, mobile apps, app deployment, Capgo,
   Appflow, CodePush
 tag: 'Development, Mobile, Updates'
 published: true
@@ -42,7 +42,7 @@ next_blog: ''
 | Plugin | Status | Hauptmerkmale | Startpreis |
 | --- | --- | --- | --- |
 | **Capgo** | Aktiv | Schnelle Updates, Verschlüsselung | 12 $/Monat |
-| **Capawesome** | Aktiv (2024) | Fokussierung auf den deutschen Markt | Ähnlich wie Capgo |
+| Aktiv (2024) | Fokussierung auf den deutschen Markt | Ähnlich wie Capgo |
 | **Appflow** | Abwicklung (2026) | Unternehmensfunktionen | 6.000 $/Jahr |
 | **CodePush** | Eingestellt (2024) | Ehemals kostenlos | N/A |
 
@@ -68,12 +68,6 @@ Hier ist, was Capgo bietet:
 
 Andere Plugins richten sich ebenfalls an spezifische Bedürfnisse und Regionen.
 
-### CapawesomeLive-Update-Plugin
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/b001a5727fc0f3dc796b9522055deb7e.jpg)
-
-Capawesome, das 2024 eingeführt wurde, bedient den deutschen Markt mit einem Fokus auf effiziente Updates und wettbewerbsfähige Preise.
-
 ### [Appflow](https://ionic.io/appflow/) von [Ionic](https://ionicframework.com/)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/67ff0458b0912f75a97f0549/d621f8c4ec61e7471b0153517889f4cc.jpg)
@@ -93,13 +87,9 @@ Microsoft CodePush, einst eine beliebte Wahl, wurde 2024 eingestellt. Entwickler
 | Plugin | Status | Preisgestaltung | Hauptmerkmal |
 | --- | --- | --- | --- |
 | **Capgo** | Aktiv | Ab 12 $/Monat | End-to-End-Verschlüsselung |
-| **Capawesome** | Aktiv | Ähnlich wie Capgo | Fokussierung auf den deutschen Markt |
+| Aktiv | Ähnlich wie Capgo | Fokussierung auf den deutschen Markt |
 | **Appflow** | Schließt 2026 | 6.000 $/Jahr | Unternehmensunterstützung |
 | **CodePush** | Eingestellt | Kostenlos (war) | N/A |
-
-## Erkunden Sie Capawesome's neues Ionic Capacitor Live Update ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Plugin-Funktionen Vergleich
 
@@ -109,7 +99,7 @@ Hier ist ein detaillierter Blick auf die Fähigkeiten und Einschränkungen der v
 
 Diese Tabelle skizziert die Hauptunterschiede zwischen aktiven und eingestellten Plugins:
 
-| Funktion | Capgo | Capawesome | Appflow | CodePush |
+| Funktion | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | Update-Geschwindigkeit | 114 ms (5 MB) | Basislinie | Basislinie | N/A |
 | End-to-End-Verschlüsselung | ✓   | –   | –   | –   |
@@ -134,7 +124,6 @@ Jedes Plugin hat seine Stärken und Schwächen basierend auf Leistungskennzahlen
     -   **Einschränkungen**:
         -   Premium-Funktionen erfordern höherstufige Pläne.
         -   Self-Hosting erfordert technische Expertise.
--   **Capawesome Live Update Plugin**
     
     -   **Vorteile**:
         -   Starke Präsenz auf dem deutschen Markt.
@@ -194,7 +183,7 @@ Hier ist eine Übersicht über die aktuellen Wahlmöglichkeiten:
 | Plugin | Status | Hauptstärken | Am besten für |
 | --- | --- | --- | --- |
 | Capgo | Aktiv | End-to-End-Verschlüsselung, schnelle Updates | Teams, die sich auf [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) konzentrieren |
-| Capawesome | Aktiv (seit 2024) | Fokussierung auf den deutschen Markt, wettbewerbsfähige Preise | Projekte, die auf Europa abzielen |
+| Aktiv (seit 2024) | Fokussierung auf den deutschen Markt, wettbewerbsfähige Preise | Projekte, die auf Europa abzielen |
 | Appflow | Abwicklung (2026) | Unternehmensfunktionen | Übergang von Legacy-Systemen |
 | CodePush | Eingestellt (2024) | Ehemals kostenlose Option | N/A |
 

@@ -166,7 +166,7 @@ Al evaluar plataformas de actualización OTA, es esencial considerar la estabili
 
 ### Matriz de Características de Plataformas
 
-| Característica | Capgo | Capawesome | Appflow | CodePush |
+| Característica | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | **Estado Activo** | Operando desde 2022 | Operando desde 2024 | Cierra en 2026 | Cerrado 2024 |
 | **Cifrado de Extremo a Extremo** | Sí | No | No | No |

@@ -26,7 +26,7 @@ next_blog: ''
 
 ### Quick Comparison of OTA Platforms:
 
-| Feature | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
+| Feature | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | End-to-End Encryption | Yes | No  | No  |
 | Rollback Capability | Instant | Manual | Manual |
@@ -36,7 +36,6 @@ next_blog: ''
 
 ## Capacitor 2.0: Mobile apps & PWAs from one codebase
 
-<iframe src="https://www.youtube.com/embed/8KQb4u_FqOw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Security Risks in OTA Updates
 
@@ -173,7 +172,7 @@ Next, let’s see how major OTA platforms compare in terms of security and perfo
 
 When choosing an OTA platform for Capacitor apps, security and reliability are critical factors. Here’s how some of the top platforms measure up:
 
-| Feature | Capgo | AppFlow | Capawesome |
+| Feature | Capgo | AppFlow |
 | --- | --- | --- | --- |
 | End-to-End Encryption | Yes | No  | No  |
 | Update Success Rate | 82% worldwide | Limited data | Limited data |

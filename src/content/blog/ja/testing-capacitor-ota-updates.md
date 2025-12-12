@@ -40,12 +40,6 @@ next_blog: ''
 
 **プロのヒント:** 完全なデプロイメントの前に、小規模なユーザーグループでアップデートをテストするために段階的なロールアウトを使用してください。Capgoのツールでこのプロセスをスムーズかつ安全に行えます。
 
-## Capawesomeの新しいIonic [Capacitor](https://capacitorjs.com/) ライブアップデート...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## テスト環境のセットアップ
 
 適切なテスト環境を設定することは、OTAアップデートを効果的に検証する上で重要です。

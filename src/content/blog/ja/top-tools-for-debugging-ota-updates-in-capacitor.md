@@ -19,12 +19,11 @@ next_blog: ''
 [Capacitor](https://capacitorjs.com/) アプリのOver-the-Air (OTA) アップデートのデバッグは難しい場合がありますが、適切なツールを使用することで大きな違いが生まれます。バージョンの競合管理、[セキュアなアップデート](https://capgo.app/docs/live-updates/update-behavior/)の確保、クロスプラットフォームでのデバッグなど、以下の3つのツールを検討してください：
 
 -   **[Capgo](https://capgo.app/)**：エンドツーエンドの暗号化、CI/CD統合、ユーザー固有のロールアウトを備えたセキュアなOTAアップデート。月額12ドルから。
--   **@capawesome/capacitor-live-update**：自動ロールバック機能を備えた基本的なOTA [アップデート管理](https://capgo.app/docs/plugin/cloud-mode/manual-update/)のための無料の simple プラグイン。
 -   **[Inspect.dev](https://inspect.dev/)**：WindowsでもAndroidとiOSの両方のアプリをデバッグ可能。[Chrome DevTools](https://developer.chrome.com/docs/devtools)統合付き。年間49ドル。
 
 ### クイック比較
 
-| 機能 | Capgo | @capawesome/capacitor-live-update | Inspect.dev |
+| 機能 | Capgo | Inspect.dev |
 | --- | --- | --- | --- |
 | アップデート管理 | 高度 (暗号化、CI/CD) | 基本 (クラウドベース) | 該当なし |
 | [デバッグツール](https://capgo.app/docs/plugin/debugging/) | バージョン管理、ロールバック | 自動ロールバック | Chrome DevTools |
@@ -55,7 +54,7 @@ next_blog: ''
 | --- | --- | --- |
 | [手動アップデート](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | アップデートプロセスの完全な制御、カスタムURL対応 | 小規模アプリ、テスト |
 | Capgo | エンドツーエンド暗号化、CI/CD統合、ユーザー割り当て | エンタープライズアプリケーション |
-| @capawesome/capacitor-live-update | バージョン管理と基本的なアップデート機能 | シンプルなアプリ |
+| バージョン管理と基本的なアップデート機能 | シンプルなアプリ |
 
 アプリのニーズとワークフローに最適な方法を選択してください。
 
@@ -98,4 +97,3 @@ iOSアプリの検査には、WindowsとChrome DevToolsに対応したInspect.de
 
 - **Inspect.dev**：クロスプラットフォームのデバッグツール
 - **Capgo**：セキュリティとCI/CD機能を備えたライブアップデート管理を支援
-- **@capawesome/capacitor-live-update**：ライブアップデートを効果的にデバッグするのに有用

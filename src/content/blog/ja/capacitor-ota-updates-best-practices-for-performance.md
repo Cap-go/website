@@ -33,7 +33,7 @@ OTA (エアー経由)アップデートにより、[Capacitor](https://capacitor
 
 **OTAツールの比較**:
 
-| 機能 | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [capacitor-app-update](https://github.com/capawesome-team/capacitor-app-update) | [Capgo](https://capgo.app/) |
+| 機能 | [capacitor-app-updater](https://www.npmjs.com/package/%40objekt%2Fcapacitor-app-updater) | [Capgo](https://capgo.app/) |
 | --- | --- | --- | --- |
 | アップデート方式 | チェックサム比較 | [アプリ内アップデート](https://capgo.app/plugins/capacitor-updater/) | JSバンドルアップデート |
 | パフォーマンスへの影響 | 最小限 | 中程度 | 低 |

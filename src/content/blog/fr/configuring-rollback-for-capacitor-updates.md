@@ -38,21 +38,19 @@ Le retour arrière dans [Capacitor](https://capacitorjs.com/) garantit que votre
 
 ### Comparaison des plateformes :
 
-**[Capgo](https://capgo.app/)** offre des retours arrière en un clic, le chiffrement, des analyses en temps réel et un hébergement flexible. Des alternatives comme **Capawesome** et **[Appflow](https://ionic.io/appflow/)** manquent de fonctionnalités ou entraînent des coûts plus élevés.
 
 **Tableau de comparaison rapide :**
 
 | Plateforme | Type de retour arrière | Analytique | Chiffrement | Options d'hébergement | Coût |
 | --- | --- | --- | --- | --- | --- |
 | **Capgo** | Auto/Manuel | Oui | Oui | Flexible | Abordable |
-| Capawesome | Manuel uniquement | Non  | Non  | Limité | Moins cher |
+| Manuel uniquement | Non  | Non  | Limité | Moins cher |
 | Appflow | Auto/Manuel | Partiel | Non  | Limité | Élevé |
 
 Avec une configuration adéquate et des outils comme Capgo, vous pouvez garantir des mises à jour fluides et résoudre rapidement les problèmes pour maintenir votre application opérationnelle sans interruption.
 
 ## MAD24 304 Profiter des mises à niveau atomiques avec [OSTree](https://en.wikipedia.org/wiki/OSTree) pour ...
 
-<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Comment fonctionne le retour arrière dans [Capacitor](https://capacitorjs.com/)
 

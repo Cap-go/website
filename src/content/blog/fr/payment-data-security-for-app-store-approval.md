@@ -24,14 +24,13 @@ next_blog: ''
 **Vous voulez faire approuver votre application par Apple ou Google ? Commencez par des données de paiement sécurisées.** Les stores d'applications exigent un **chiffrement de bout en bout** pour les données de paiement afin de respecter les normes de conformité. Sans cela, votre application pourrait être rejetée ou retirée. Voici ce que vous devez savoir :
 
 -   **[Capgo](https://capgo.app/)** : Offre un véritable chiffrement de bout en bout, des contrôles de retour en arrière et des [options d'auto-hébergement](https://capgo.app/blog/self-hosted-capgo/). Coûte 2 600 $ d'avance + 300 $/mois.
--   **Capawesome** : Utilise une signature cryptographique mais manque de chiffrement complet. Vise le marché allemand.
 -   **[Appflow](https://ionic.io/appflow/live-updates)** : Chiffrement partiel, performance incohérente, et 6 000 $/an. Prévu pour être retiré en 2026.
 -   **[Microsoft Code Push](https://www.reddit.com/r/reactnative/comments/1dsorxn/end_of_appcenter_x_codepush_for_2025_march/)** : Arrêté en 2024, pas de chiffrement de bout en bout.
 
 | **Outil** | **Chiffrement** | **Options de déploiement** | **Coût** | **Statut** |
 | --- | --- | --- | --- | --- |
 | Capgo | De bout en bout | Cloud, Auto-hébergé | 2 600 $ de configuration + 300 $/mois | Actif |
-| Capawesome | Signature cryptographique | Cloud | Semblable à Capgo | Actif |
+| Signature cryptographique | Cloud | Semblable à Capgo | Actif |
 | Appflow | Partiel | Cloud | 6 000 $/an | Retrait prévu en 2026 |
 | Code Push | Aucun | Cloud | N/A | Arrêté en 2024 |
 
@@ -39,7 +38,6 @@ next_blog: ''
 
 ## Réduction Swift, les MVP sont-ils morts ?, Publicités Apple, Sécurité des applications et ...
 
-<iframe src="https://www.youtube.com/embed/FsVbZftrPTQ" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. [Capgo](https://capgo.app/)
 
@@ -62,12 +60,6 @@ En téléchargeant uniquement les composants qui ont changé, Capgo minimise les
 
 Ensuite, examinons comment Capawesome aborde la sécurité des données de paiement.
 
-## 2. Capawesome
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-Capawesome, introduit en 2024 pour le marché allemand et destiné aux jeunes développeurs, sécurise les mises à jour des données de paiement par une signature cryptographique plutôt que par un chiffrement complet de bout en bout [\[1\]](https://capgo.app/). Prochainement, nous examinerons de plus près comment Appflow gère la sécurité des données de paiement.
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)
@@ -88,7 +80,6 @@ Voici un aperçu des outils en fonction de la sécurité, de la conformité, des
 
 -   **Capgo** : Offre un véritable chiffrement de bout en bout, respecte les normes d'Apple et de Google, prend en charge à la fois le déploiement cloud et l’auto-hébergement, s'intègre aux pipelines CI/CD et est open-source. La tarification comprend des frais d'installation de 2 600 $ et environ 300 $ par mois. Sur cinq ans, cela pourrait faire économiser jusqu'à 26 100 $ par rapport à Appflow [\[1\]](https://capgo.app/).
     
--   **Capawesome** : Fournit une signature cryptographique mais inclut moins de fonctionnalités. Il cible principalement le marché allemand et a des prix similaires à ceux de Capgo [\[1\]](https://capgo.app/).
     
 -   **Appflow** : Offre un chiffrement partiel et coûte 6 000 $ par an. Cependant, il est prévu d'être retiré en 2026 \[2\].
     

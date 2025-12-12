@@ -96,10 +96,6 @@ Melanggar kebijakan pembaruan OTA dapat mengakibatkan konsekuensi serius. Beriku
 
 Baik Apple maupun Google menekankan keamanan dan pengalaman pengguna. Meskipun Google Play menawarkan sedikit lebih banyak kelonggaran, pengembang harus menggunakan pembaruan OTA untuk perbaikan minor seperti perbaikan bug, pembaruan konten, atau perubahan UI kecil. Perubahan besar atau fitur baru harus selalu melalui proses peninjauan resmi untuk tetap patuh.
 
-## Jelajahi Pembaruan Langsung Ionic Capacitor Baru Capawesome ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Pedoman Pembaruan OTA
 
 Untuk tetap mematuhi aturan app store, penting untuk mengikuti pedoman khusus saat menggunakan pembaruan OTA (Over-The-Air) untuk [aplikasi Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Praktik ini membantu memastikan pembaruan aman dan sesuai dengan kebijakan platform.

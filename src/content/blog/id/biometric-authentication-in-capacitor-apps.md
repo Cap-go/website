@@ -37,7 +37,6 @@ next_blog: ''
 -   **Peralatan Utama yang Diperlukan:**
     
     -   Capacitor 3.0+.
-    -   Plugin seperti `@capawesome-team/capacitor-biometrics` atau `capacitor-native-biometric`.
 -   **Sorotan Pengaturan:**
     
     -   Menambahkan izin ke AndroidManifest dan Info.plist.
@@ -50,13 +49,12 @@ next_blog: ''
 | --- | --- | --- | --- |
 | `@aparajita/capacitor-biometric-auth` | Capacitor 7 | Biometrik asli, kredensial perangkat | Proyek baru menggunakan Capacitor 7 |
 | `capacitor-native-biometric` | Capacitor 3, 4 | Penyimpanan kredensial aman, Keychain/Keystore | Manajemen kredensial |
-| `@capawesome-team/capacitor-biometrics` | Semua versi | Dukungan biometrik dan kredensial perangkat | Opsi otentikasi fleksibel |
+| Semua versi | Dukungan biometrik dan kredensial perangkat | Opsi otentikasi fleksibel |
 
 [Otentikasi biometrik dalam aplikasi Capacitor](https://capgo.app/plugins/capacitor-native-biometric/) adalah cara yang aman dan ramah pengguna untuk melindungi data sensitif. Artikel lengkap merinci langkah-langkah pengaturan, contoh kode, strategi pengujian, dan standar keamanan.
 
 ## Otentikasi Biometrik Ionic (FaceID / FingerPrint)
 
-<iframe src="https://www.youtube.com/embed/GGWiDj1cusE" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Persyaratan Pengaturan
 
@@ -78,7 +76,6 @@ Pilih [plugin biometrik](https://capgo.app/plugins/capacitor-native-biometric/) 
 
 -   **@aparajita/capacitor-biometric-auth** untuk Capacitor 7
 -   **capacitor-native-biometric** untuk Capacitor 3 dan 4
--   **@capawesome-team/capacitor-biometrics** untuk dukungan dengan kredensial perangkat tambahan
 
 ### Langkah-langkah Pengaturan Android
 
@@ -139,7 +136,7 @@ Untuk iOS, Anda perlu mengikuti langkah-langkah ini untuk mengkonfigurasi otenti
 Capgo menyederhanakan pembaruan biometrik. Konfigurasikan seperti ini:
 
 ```typescript
-import { Biometrics } from '@capawesome-team/capacitor-biometrics';
+import { Biometrics } from '@capgo/capacitor-native-biometric';
 
 async function setupBiometricAuth() {
   try {
@@ -192,7 +189,6 @@ Menjaga API biometrik Anda tetap diperbarui sangat penting untuk keamanan dan fu
 
 Fokus pada area berikut:
 
--   **Pembaruan Plugin**: Rutin perbarui dependensi seperti `@capawesome-team/capacitor-biometrics`.
 -   **Perubahan Platform**: Pantau pembaruan API LocalAuthentication iOS dan BiometricPrompt Android.
 -   **Standar Keamanan**: Tetap selaras dengan persyaratan keamanan biometrik terbaru.
 -   **Panduan Store**: Pastikan kepatuhan dengan kebijakan Apple App Store dan Google Play untuk menghindari masalah pengajuan.

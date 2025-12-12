@@ -42,12 +42,6 @@ next_blog: ''
 
 **Conseil Pro :** Utilisez des déploiements progressifs pour tester les mises à jour sur de petits groupes d'utilisateurs avant un déploiement complet Les outils de Capgo rendent ce processus fluide et sécurisé
 
-## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) de [Capawesome](https://capawesomeio/) pour Ionic
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-[[HTML_TAG]][[HTML_TAG]]
-
 ## Configuration de l'environnement de test
 
 La mise en place d'un environnement de test approprié est essentielle pour valider efficacement les mises à jour OTA

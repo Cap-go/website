@@ -36,12 +36,6 @@ next_blog: ''
 
 Capgoはすでに**750のアプリで2350万のアップデートを管理**しており、高速なダウンロード速度（5MBバンドルで114ms）を実現しています。今日からアップデートを監視して、アプリ管理をスムーズに始めましょう。
 
-## Capawesomeの新しい[Ionic](https://ionicframework.com/)[Capacitor](https://capacitorjs.com/)ライブアップデートを探る…
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f079b2ebbb9dc806439988/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## アップデート監視の設定
 
 アプリのOTAアップデート監視を設定する方法は以下の通りです：

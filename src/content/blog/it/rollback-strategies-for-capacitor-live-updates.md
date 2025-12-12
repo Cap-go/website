@@ -32,7 +32,7 @@ next_blog: ''
 
 Piattaforme come [Capgo](https://capgo.app/) offrono aggiornamenti veloci (114ms per 5MB), alti tassi di successo (82%) e soluzioni convenienti (da 12$/mese). Supportano anche automazione del rollback, tracciamento in tempo reale e segmentazione utenti, rendendole una scelta affidabile per gestire gli aggiornamenti live.
 
-| **Funzionalità** | **Capgo** | **Capawesome** | **[Appflow](https://ionic.io/appflow/)** |
+| **Funzionalità** | **Capgo** | **[Appflow](https://ionic.io/appflow/)** |
 | --- | --- | --- | --- |
 | Velocità Aggiornamento | 114ms | Standard | Standard |
 | Tasso di Successo | 82% | Non Pubblicato | Non Pubblicato |

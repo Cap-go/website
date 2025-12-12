@@ -21,12 +21,11 @@ next_blog: ''
 Il debug degli aggiornamenti Over-the-Air (OTA) nelle app [Capacitor](https://capacitorjs.com/) può essere complesso, ma gli strumenti giusti fanno una grande differenza. Che tu stia gestendo conflitti di versione, garantendo [aggiornamenti sicuri](https://capgo.app/docs/live-updates/update-behavior/), o facendo debug su diverse piattaforme, ecco tre strumenti da considerare:
 
 -   **[Capgo](https://capgo.app/)**: Aggiornamenti OTA sicuri con crittografia end-to-end, integrazione CI/CD e distribuzioni specifiche per utente. Parte da 12$/mese.
--   **@capawesome/capacitor-live-update**: Un plugin gratuito e semplice per la [gestione base degli aggiornamenti](https://capgo.app/docs/plugin/cloud-mode/manual-update/) OTA con rollback automatico.
 -   **[Inspect.dev](https://inspect.dev/)**: Debug di app Android e iOS, anche su Windows, con integrazione [Chrome DevTools](https://developer.chrome.com/docs/devtools). Costa 49$/anno.
 
 ### Confronto Rapido
 
-| Funzionalità | Capgo | @capawesome/capacitor-live-update | Inspect.dev |
+| Funzionalità | Capgo | Inspect.dev |
 | --- | --- | --- | --- |
 | Gestione Aggiornamenti | Avanzata (crittografia, CI/CD) | Base (basata su cloud) | Non applicabile |
 | [Strumenti di Debug](https://capgo.app/docs/plugin/debugging/) | Controllo versione, rollback | Rollback automatico | Chrome DevTools |
@@ -57,7 +56,7 @@ Le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/) suppor
 | --- | --- | --- |
 | [Aggiornamenti Manuali](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Controllo completo sul processo di aggiornamento, supporta URL personalizzati | App più piccole, test |
 | Capgo | Offre crittografia end-to-end, integrazione CI/CD e assegnazione utenti | Applicazioni enterprise |
-| @capawesome/capacitor-live-update | Gestisce le versioni e fornisce funzionalità base di aggiornamento | App semplici |
+| Gestisce le versioni e fornisce funzionalità base di aggiornamento | App semplici |
 
 Scegli il metodo che meglio si adatta alle esigenze e al flusso di lavoro della tua app.
 
@@ -102,4 +101,3 @@ Per ulteriori [opzioni di debugging](https://capgo.app/docs/plugin/debugging/), 
 
 - **Inspect.dev**: Uno strumento di debugging multi-piattaforma.
 - **Capgo**: Aiuta nella gestione degli aggiornamenti live, con funzionalità di sicurezza e CI/CD integrate.
-- **@capawesome/capacitor-live-update**: Utile per debuggare efficacemente gli aggiornamenti live.

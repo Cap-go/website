@@ -34,7 +34,6 @@ next_blog: ''
 -   **必要な主要ツール：**
     
     -   Capacitor 3.0+。
-    -   `@capawesome-team/capacitor-biometrics`や`capacitor-native-biometric`などのプラグイン。
 -   **セットアップのポイント：**
     
     -   AndroidManifestとInfo.plistに権限を追加。
@@ -47,7 +46,7 @@ next_blog: ''
 | --- | --- | --- | --- |
 | `@aparajita/capacitor-biometric-auth` | Capacitor 7 | ネイティブ生体認証、デバイス認証情報 | Capacitor 7を使用する新規プロジェクト |
 | `capacitor-native-biometric` | Capacitor 3, 4 | 安全な認証情報保存、Keychain/Keystore | 認証情報管理 |
-| `@capawesome-team/capacitor-biometrics` | 全バージョン | 生体認証とデバイス認証情報のサポート | 柔軟な認証オプション |
+| 全バージョン | 生体認証とデバイス認証情報のサポート | 柔軟な認証オプション |
 
 [Capacitorアプリにおける生体認証](https://capgo.app/plugins/capacitor-native-biometric/)は、機密データを保護する安全でユーザーフレンドリーな方法です。完全な記事では、セットアップ手順、コード例、テスト戦略、セキュリティ基準について詳しく説明しています。
 
@@ -73,7 +72,6 @@ Capacitorバージョンに基づいて[生体認証プラグイン](https://cap
 
 -   Capacitor 7用の**@aparajita/capacitor-biometric-auth**
 -   Capacitor 3と4用の**capacitor-native-biometric**
--   追加のデバイス認証情報サポート用の**@capawesome-team/capacitor-biometrics**
 
 ### Androidセットアップ手順
 
@@ -144,14 +142,14 @@ Capacitorアプリ用の生体認証プラグインを選択する際は、プ�
 | --- | --- | --- | --- |
 | @aparajita/capacitor-biometric-auth | Capacitor 7 | ネイティブ生体認証、デバイス認証情報、包括的なAPI | Capacitor 7で始める新規プロジェクト |
 | capacitor-native-biometric | Capacitor 3, 4 | 安全な認証情報保存、Keychain/Keystore統合 | 認証情報管理が必要な既存プロジェクト |
-| @capawesome-team/capacitor-biometrics | 全バージョン | 生体認証とデバイス認証情報認証、クリーンなAPI | 柔軟な認証オプションが必要なプロジェクト |
+| 全バージョン | 生体認証とデバイス認証情報認証、クリーンなAPI | 柔軟な認証オプションが必要なプロジェクト |
 
 ### 認証コード例
 
-**@capawesome-team/capacitor-biometrics**プラグインを使用した生体認証の方法：
+**@capgo/capacitor-native-biometric**プラグインを使用した生体認証の方法：
 
 ```typescript
-import { Biometrics } from '@capawesome-team/capacitor-biometrics';
+import { Biometrics } from '@capgo/capacitor-native-biometric';
 
 async function setupBiometricAuth() {
   try {
@@ -410,7 +408,6 @@ Capgoが更新管理に優れているツールである理由:
 
 以下の分野に注目してください:
 
--   **プラグイン更新**: `@capawesome-team/capacitor-biometrics`などの依存関係を定期的に更新します。
 -   **プラットフォーム変更**: iOSのLocalAuthenticationとAndroidのBiometricPrompt APIの更新を追跡します。
 -   **セキュリティ基準**: 最新のバイオメトリックセキュリティ要件に合わせます。
 -   **ストアガイドライン**: 提出の問題を避けるため、Apple App StoreとGoogle Playのポリシーに準拠します。

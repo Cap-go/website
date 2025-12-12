@@ -166,7 +166,7 @@ Android StudioやXcodeなどのプラットフォーム固有のIDEをVS Codeと
 
 更新システムの比較は以下の通りです：
 
-| 主要メトリック | Capgo | [Appflow](https://ionic.io/appflow/) | Capawesome |
+| 主要メトリック | Capgo | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | 更新速度 | 5MBバンドルの平均配信114ms [\[1\]](https://capgo.app/) | 公開されていない | 公開されていない |
 | ユーザー採用 | 24時間以内に95% [\[1\]](https://capgo.app/) | 公開されていない | 公開されていない |

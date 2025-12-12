@@ -21,12 +21,11 @@ next_blog: ''
 Men-debug pembaruan Over-the-Air (OTA) dalam aplikasi [Capacitor](https://capacitorjs.com/) bisa rumit, tetapi alat yang tepat membuat perbedaan besar. Baik Anda mengelola konflik versi, memastikan [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/), atau men-debug lintas platform, berikut tiga alat yang perlu dipertimbangkan:
 
 -   **[Capgo](https://capgo.app/)**: Pembaruan OTA aman dengan enkripsi end-to-end, integrasi CI/CD, dan peluncuran khusus pengguna. Mulai dari $12/bulan.
--   **@capawesome/capacitor-live-update**: Plugin gratis dan sederhana untuk [manajemen pembaruan](https://capgo.app/docs/plugin/cloud-mode/manual-update/) OTA dasar dengan rollback otomatis.
 -   **[Inspect.dev](https://inspect.dev/)**: Debug aplikasi Android dan iOS, bahkan di Windows, dengan integrasi [Chrome DevTools](https://developer.chrome.com/docs/devtools). Biaya $49/tahun.
 
 ### Perbandingan Cepat
 
-| Fitur | Capgo | @capawesome/capacitor-live-update | Inspect.dev |
+| Fitur | Capgo | Inspect.dev |
 | --- | --- | --- | --- |
 | Manajemen Pembaruan | Lanjutan (enkripsi, CI/CD) | Dasar (berbasis cloud) | Tidak tersedia |
 | [Alat Debug](https://capgo.app/docs/plugin/debugging/) | Kontrol versi, rollback | Rollback otomatis | Chrome DevTools |
@@ -57,7 +56,7 @@ Setelah ini siap, saatnya mengeksplorasi opsi distribusi OTA.
 | --- | --- | --- |
 | [Pembaruan Manual](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | Kontrol penuh atas proses pembaruan, mendukung URL kustom | Aplikasi kecil, pengujian |
 | Capgo | Menawarkan enkripsi end-to-end, integrasi CI/CD, dan penugasan pengguna | Aplikasi Enterprise |
-| @capawesome/capacitor-live-update | Mengelola versi dan menyediakan fungsi pembaruan dasar | Aplikasi sederhana |
+| Mengelola versi dan menyediakan fungsi pembaruan dasar | Aplikasi sederhana |
 
 Pilih metode yang paling sesuai dengan kebutuhan dan alur kerja aplikasi Anda.
 
@@ -104,16 +103,6 @@ Harga Capgo mulai dari $12/bulan untuk pengembang solo, dengan opsi yang meningk
 
 Untuk solusi yang lebih sederhana, lihat **@capawesome/capacitor-live-update**.
 
-### @capawesome/capacitor-live-update
-
-Plugin Capacitor ini adalah opsi sederhana untuk pembaruan OTA, ideal untuk tim kecil yang membutuhkan fungsionalitas dasar tanpa konfigurasi rumit.
-
-#### Fitur Utama @capawesome/capacitor-live-update
-
-Plugin ini fokus pada fitur pembaruan esensial, seperti [sistem manajemen bundle berbasis cloud](https://capgo.app/docs/webapp/bundles/) yang mendukung Android dan iOS. Ini juga mencakup fitur rollback otomatis, memastikan stabilitas dengan kembali ke versi terakhir yang berfungsi jika pembaruan gagal.
-
-Untuk [alat debug](https://capgo.app/docs/plugin/debugging/) dengan kemampuan lintas platform, lihat **Inspect.dev**.
-
 ### [Inspect.dev](https://inspect.dev/)
 
 ![Inspect.dev](https://mars-images.imgix.net/seobot/screenshots/inspect.dev-9bbcb0a3366f33fde5bbabd7b9e5d36a-2025-02-20.jpg?auto=compress)
@@ -134,7 +123,7 @@ Dengan harga $49/tahun setelah uji coba 14 hari, Inspect.dev terintegrasi dengan
 
 Saat memilih alat debugging untuk pembaruan OTA Capacitor, penting untuk mengevaluasi faktor seperti fitur, harga, dan kompatibilitas. Berikut perincian tiga opsi populer:
 
-| Kategori Fitur | Capgo | @capawesome/capacitor-live-update | Inspect.dev |
+| Kategori Fitur | Capgo | Inspect.dev |
 | --- | --- | --- | --- |
 | Manajemen Pembaruan | Enkripsi end-to-end, integrasi CI/CD, pembaruan khusus pengguna | Manajemen bundle dasar, dukungan cloud | Tidak dirancang untuk pembaruan OTA |
 | Alat Debug | Kontrol versi, dukungan rollback | Rollback otomatis | Integrasi Chrome DevTools |
@@ -147,14 +136,12 @@ Saat memilih alat debugging untuk pembaruan OTA Capacitor, penting untuk mengeva
 
 -   **Capgo**: Ideal untuk aplikasi kecil hingga menengah, paket SOLO Capgo mencakup 2.500 pembaruan langsung dan mendukung hingga 500 pengguna per bulan. Ini memprioritaskan keamanan dan kepatuhan, membuatnya pilihan tepat untuk aplikasi yang menangani data sensitif.
     
--   **@capawesome/capacitor-live-update**: Alat ini sempurna untuk tim dengan anggaran terbatas. Ini menawarkan manajemen bundle dasar dan dukungan cloud secara gratis, menjadikannya opsi sederhana dan terjangkau untuk tim dengan kebutuhan pembaruan sederhana.
     
 -   **Inspect.dev**: Dibangun untuk debugging, Inspect.dev unggul dengan integrasi Chrome DevTools dan dukungan lintas platform. Ini sangat membantu untuk tim yang bekerja di Windows yang perlu men-debug aplikasi iOS.
     
 
 ### Cara Memutuskan?
 
--   Jika Anda memperhatikan anggaran, **@capawesome/capacitor-live-update** adalah opsi tanpa biaya dengan fitur esensial.
 -   Untuk aplikasi yang memerlukan keamanan dan kepatuhan yang kuat, **Capgo** adalah pilihan yang solid.
 -   Tim yang membutuhkan alat debugging lintas platform akan mendapat manfaat dari **Inspect.dev**.
 
@@ -179,7 +166,6 @@ Pertimbangkan prioritas teknis Anda dan sesuaikan dengan kekuatan alat:
 
 -   Untuk debugging lintas platform, **Inspect.dev** adalah pilihan yang solid.
 -   Butuh [pembaruan otomatis](https://capgo.app/docs/plugin/self-hosted/auto-update/) dengan keamanan tambahan? **Capgo** ideal.
--   Untuk manajemen pembaruan dasar, **@capawesome/capacitor-live-update** sudah cukup.
 
 **Anggaran**  
 Anggaran memainkan peran besar. **@capawesome/capacitor-live-update** adalah opsi gratis untuk kebutuhan dasar. **Capgo** menawarkan fitur lanjutan seperti otomatisasi dan keamanan dengan harga premium. **Inspect.dev** menyediakan fitur debugging khusus seharga $49 per tahun, melayani kasus penggunaan tertentu.
@@ -205,4 +191,3 @@ Untuk [opsi debugging](https://capgo.app/docs/plugin/debugging/) tambahan, jelaj
 
 -   **Inspect.dev**: Alat debugging lintas platform.
 -   **Capgo**: Membantu pengelolaan pembaruan langsung, dengan fitur keamanan dan CI/CD bawaan.
--   **@capawesome/capacitor-live-update**: Berguna untuk debug pembaruan langsung secara efektif.

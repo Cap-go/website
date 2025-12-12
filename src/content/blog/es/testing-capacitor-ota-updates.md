@@ -41,12 +41,6 @@ next_blog: ''
 
 **Consejo Pro:** Usa despliegues graduales para probar actualizaciones en grupos pequeños de usuarios antes del despliegue completo. Las herramientas de Capgo hacen este proceso fluido y seguro.
 
-## Explora las nuevas actualizaciones en vivo de Capawesome para Ionic [Capacitor](https://capacitorjs.com/) ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f9cbd22e221594daf2fc62/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Configuración del entorno de pruebas
 
 Configurar un entorno de pruebas adecuado es clave para validar efectivamente las actualizaciones OTA.

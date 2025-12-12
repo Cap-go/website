@@ -25,7 +25,6 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Autenticazione multi-provider, gestione dei token e aggiornamenti di stato in tempo reale. Ideale per un'integrazione rapida.
 -   **[Plugin Sicurezza Biometrica](https://capgo.app/plugins/capacitor-native-biometric/)**: Aggiunge supporto per impronte digitali, riconoscimento facciale e credenziali del dispositivo per accessi sicuri.
--   **@capawesome/capacitor-secure-storage**: Crittografa i dati con iOS Keychain, Android Keystore o AES-256. Ottimo per memorizzare dati sensibili di sessione.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Soluzione di livello enterprise con logout automatico, autenticazione biometrica e archiviazione sicura.
 -   **[Capgo](https://capgo.app/)**: Combina la gestione sicura delle sessioni con aggiornamenti crittografati in tempo reale per distribuzioni senza problemi.
 
@@ -179,7 +178,7 @@ Questa sezione fornisce uno sguardo comparativo ai [plugin Capacitor](https://ca
 
 Ecco un confronto fianco a fianco delle funzionalità di sicurezza chiave offerte dai plugin:
 
-| Funzionalità | Firebase Auth | Biometric Security | @capawesome/secure-storage | Identity Vault | Capgo |
+| Funzionalità | Firebase Auth | Biometric Security | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Tipo di Crittografia** | Basata su cloud | A livello hardware | AES 256-bit | AES 256-bit | End-to-end |
 | **Supporto Biometrico** | Limitato | Completo | No | Completo | No |
@@ -195,7 +194,7 @@ La tabella seguente evidenzia la complessità di configurazione, la compatibilit
 | --- | --- | --- | --- |
 | **Firebase Auth** | Moderata | iOS, Android | Firebase SDK |
 | **Biometric Security** | Bassa | iOS, Android | Nessuna |
-| **@capawesome/secure-storage** | Bassa | iOS, Android | Nessuna |
+| Bassa | iOS, Android | Nessuna |
 | **Identity Vault** | Alta | iOS, Android, Web | Auth Connect |
 | **Capgo** | Moderata | iOS, Android | Nessuna |
 
@@ -222,7 +221,7 @@ Ogni plugin offre diversi livelli di supporto all'integrazione, come mostrato di
 | --- | --- | --- | --- |
 | **Firebase Auth** | Supporto Nativo | Limitata | Moderato |
 | **Biometric Security** | Manuale | Completa | Limitato |
-| **@capawesome/secure-storage** | Manuale | Completa | Facile |
+| Manuale | Completa | Facile |
 | **Identity Vault** | Strumenti Enterprise | Completa | Completo |
 | **Capgo** | Automatizzata | Completa | Completo |
 

@@ -96,10 +96,6 @@ Violater les politiques de mise à jour OTA peut entraîner de graves conséquen
 
 À la fois Apple et Google mettent l'accent sur la sécurité et l'expérience utilisateur. Bien que Google Play offre légèrement plus de liberté, les développeurs devraient utiliser les mises à jour OTA pour des améliorations mineures comme des corrections de bugs, des mises à jour de contenu ou de petites modifications d'interface utilisateur. Les changements majeurs ou les nouvelles fonctionnalités devraient toujours passer par le processus de révision officiel pour rester conformes.
 
-## Explorez la nouvelle mise à jour en direct Ionic Capacitor de Capawesome ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Directives pour les mises à jour OTA
 
 Pour rester conforme aux règles des magasins d'applications, il est important de suivre des directives spécifiques lors de l'utilisation des mises à jour OTA (Over-the-Air) pour les [applications Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Ces pratiques aident à garantir que les mises à jour sont sécurisées et s'alignent sur les politiques de la plateforme.

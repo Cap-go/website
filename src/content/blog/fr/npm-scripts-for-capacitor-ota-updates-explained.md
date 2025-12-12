@@ -45,12 +45,6 @@ next_blog: ''
 
 Avec des plateformes comme Capgo offrant des mises à jour rapides (95% d'adoption par les utilisateurs en 24 heures) et des prix abordables, la gestion des mises à jour OTA n'a jamais été aussi efficace.
 
-## Découvrez la nouvelle mise à jour en direct [Capacitor](https://capacitorjs.com/) Ionic de Capawesome ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67fb02ab2e221594daf3f266/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Configuration des scripts npm pour les mises à jour OTA
 
 Voici comment configurer les scripts npm pour gérer efficacement les [mises à jour OTA Capacitor](https://capgo.app/ja/). Cela implique l'installation des packages nécessaires, la configuration et la création de scripts de déploiement.

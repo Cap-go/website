@@ -143,7 +143,6 @@ Untuk keamanan tipe:
 
 -   Gunakan interface yang fokus disesuaikan dengan kasus penggunaan tertentu.
 -   Terapkan tipe union untuk variasi khusus platform.
--   Implementasikan penjaga tipe untuk memvalidasi tipe saat runtime [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### Dokumentasi Kode
 

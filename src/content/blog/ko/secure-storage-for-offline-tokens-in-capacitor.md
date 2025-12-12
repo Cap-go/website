@@ -58,7 +58,6 @@ Capacitor 애플리케이션에서 오프라인 토큰을 위한 보안 저장�
 -   **@capacitor-community/secure-storage**: iOS Keychain과 Android Keystore를 사용한 AES-256 암호화 제공, [생체 잠금 해제](https://capgo.app/plugins/capacitor-native-biometric/) 지원, 자동 키 교체 포함.
 -   **@ionic/storage**: 내장 암호화 없음, 보안을 위한 수동 래퍼 필요, 생체 인증 기능 부재.
 -   **Native SecureStorage**: iOS Keychain에서만 작동하며 Android 미지원.
--   **@capawesome/secure-storage**: AES-256 암호화 제공, 크로스 플랫폼 작동, 선택적 생체 인증 제공.
 -   **@ionic-enterprise/identity-vault**: 하드웨어 수준 암호화 제공, 생체 인증 지원, 보안 토큰 수명 주기 효과적 관리.
 
 ## 요약

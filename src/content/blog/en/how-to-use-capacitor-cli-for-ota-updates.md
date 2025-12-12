@@ -40,7 +40,7 @@ Over-The-Air (OTA) updates let you deliver app fixes and features directly to us
 
 ### Tool Comparison:
 
-| Feature | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) (Shutting Down 2026) | Microsoft CodePush (Discontinued 2024) |
+| Feature | Capgo | [Appflow](https://ionic.io/appflow/) (Shutting Down 2026) | Microsoft CodePush (Discontinued 2024) |
 | --- | --- | --- | --- | --- |
 | **Market Focus** | Global | German Market | Enterprise | \-  |
 | **Security** | End-to-end encryption | Basic signing | Basic signing | \-  |
@@ -51,12 +51,6 @@ Capgo stands out with fast updates (95% within 24 hours), strong security, and C
 ### Why It Matters:
 
 OTA updates save time, improve user experience, and ensure app stability. By leveraging tools like Capgo, you can deliver fast, secure updates while staying compliant with app store rules.
-
-## Explore Capawesome's New Ionic [Capacitor](https://capacitorjs.com/) Live Update ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/67f08966ebbb9dc80643aea5/5b1313ba32c189efb1a18534f5d1b0bc.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Setup Requirements
 
@@ -171,7 +165,7 @@ OTA update tools for Capacitor apps now come with a range of features and perfor
 
 Here’s a breakdown of the top OTA update tools for Capacitor apps:
 
-| Feature | Capgo | Capawesome | Appflow | Microsoft CodePush |
+| Feature | Capgo | Appflow | Microsoft CodePush |
 | --- | --- | --- | --- | --- |
 | Status | Active | Active | Shutting down 2026 | Discontinued 2024 |
 | Market Focus | Global | German Market | Enterprise | \-  |
@@ -183,7 +177,7 @@ Here’s a breakdown of the top OTA update tools for Capacitor apps:
 
 This comparison helps developers identify the best tool for delivering [fast and secure OTA updates](https://capgo.app/blog/open-source-licecing/) in their Capacitor apps.
 
-The OTA tool landscape is changing rapidly. With Microsoft CodePush ending in 2024 and Appflow set to shut down by 2026, developers are exploring more sustainable options. Capawesome, launched in 2024, has carved out a space in the German market.
+The OTA tool landscape is changing rapidly. With Microsoft CodePush ending in 2024 and Appflow set to shut down by 2026, developers are exploring more sustainable options. launched in 2024, has carved out a space in the German market.
 
 > "Cancelled my @Appflow subscription after 4 years. Code-Push never seemed to work well, hopefully @CapGO has it figured out" - LeVar Berry [\[1\]](https://capgo.app/)
 

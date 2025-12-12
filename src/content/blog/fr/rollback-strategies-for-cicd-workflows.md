@@ -26,13 +26,12 @@ next_blog: ''
 ### Points clés :
 
 -   **Capgo** : Abordable (300 $/mois + 2 600 $ d'installation), retour en arrière en un clic, intégration GitHub/GitLab, analyses en temps réel et chiffrement.
--   **Capawesome** : Documentation limitée ; spécifique à une région (Allemagne).
 -   **Appflow** : Coûteux (6 000 $/an) ; prend en charge les instantanés mais se termine en 2026.
 -   **Microsoft CodePush** : Abandonné en 2024, laissant les développeurs d'applications hybrides à la recherche d'alternatives.
 
 ### Comparaison rapide :
 
-| Fonctionnalité | Capgo | Capawesome | Appflow | Microsoft CodePush |
+| Fonctionnalité | Capgo | Appflow | Microsoft CodePush |
 | --- | --- | --- | --- | --- |
 | Options de retour en arrière | Retour en un clic | Non documenté | Instantanés | Abandonné |
 | Intégration CI/CD | GitHub, GitLab, [Jenkins](https://www.jenkins.io/) | Non documenté | Limité | Aucune |
@@ -74,13 +73,6 @@ Capgo coûte environ 300 $ par mois, avec des frais d'installation uniques de 2 
 
 Capgo prend en charge les mises à jour partielles pour réduire l'utilisation de la bande passante et est compatible avec les versions 6 et 7 de Capacitor. Les utilisateurs peuvent choisir entre des configurations hébergées dans le cloud ou auto-hébergées.
 
-En combinant des capacités de retour en arrière rapides avec des analyses en temps réel et un suivi des erreurs, Capgo permet aux équipes de résoudre rapidement les problèmes de production et de maintenir des cycles de livraison fluides. Ensuite, nous explorerons comment la méthode de retour en arrière de Capgo se compare à l'approche régionale spécifique de Capawesome.
-
-## 2. Capawesome
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/6806ece2e572faef86999f28/04d155e1ac5e3041660c0e8da59e2e54.jpg)
-
-Les fonctionnalités de retour en arrière de Capawesome ne sont pas bien documentées ni largement discutées, rendant leur fonctionnement incertain. Ensuite, examinons comment Appflow gère les retours en arrière avec son cadre d'entreprise avancé.
 
 ## 3. [Appflow](https://ionic.io/docs/appflow)
 
@@ -104,7 +96,7 @@ Microsoft CodePush était un outil de retour en arrière CI/CD gratuit conçu po
 
 Voici une analyse des fonctionnalités de retour en arrière, de l'intégration CI/CD, de la sécurité et des prix pour quatre plateformes :
 
-| Fonctionnalité | Capgo | Capawesome | Appflow | Microsoft CodePush |
+| Fonctionnalité | Capgo | Appflow | Microsoft CodePush |
 | --- | --- | --- | --- | --- |
 | Options de retour en arrière | Retour en arrière en un clic vers n'importe quelle version précédente [\[1\]](https://capgo.app/) | – | – | Abandonné |
 | Intégration CI/CD | GitHub Actions, GitLab CI, Jenkins [\[1\]](https://capgo.app/) | – | – | – |

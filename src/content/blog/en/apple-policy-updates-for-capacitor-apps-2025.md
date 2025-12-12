@@ -28,7 +28,7 @@ next_blog: ''
 
 **Quick Comparison**:
 
-| Feature | Capgo (TEAM Plan) | [Appflow](https://ionic.io/appflow/) | Capawesome |
+| Feature | Capgo (TEAM Plan) | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | Annual Cost | $996 | $6,000 | Similar to Capgo |
 | Encryption | End-to-end | Basic signing | Basic signing |
@@ -105,7 +105,7 @@ These features make Capgo a standout choice for ensuring compliance with Apple's
 
 Here’s how Capgo stacks up against other tools for managing updates in Capacitor apps:
 
-| Feature | Capgo (TEAM Plan) | Appflow | Capawesome |
+| Feature | Capgo (TEAM Plan) | Appflow |
 | --- | --- | --- | --- |
 | Annual Cost | $996 | $6,000 | Similar to Capgo |
 | Encryption | End-to-end | Basic signing | Basic signing |

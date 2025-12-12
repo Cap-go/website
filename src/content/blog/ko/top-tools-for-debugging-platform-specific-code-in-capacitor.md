@@ -170,7 +170,7 @@ Android Studio나 Xcode와 같은 플랫폼별 IDE를 VS Code와 결합하면 �
 
 업데이트 시스템 비교는 다음과 같습니다:
 
-| 핵심 지표 | Capgo | [Appflow](https://ionic.io/appflow/) | Capawesome |
+| 핵심 지표 | Capgo | [Appflow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | 업데이트 속도 | 5MB 번들에 대해 평균 114ms 배달 [\[1\]](https://capgo.app/) | 공개되지 않음 | 공개되지 않음 |
 | 사용자 채택 | 24시간 이내 95% [\[1\]](https://capgo.app/) | 공개되지 않음 | 공개되지 않음 |

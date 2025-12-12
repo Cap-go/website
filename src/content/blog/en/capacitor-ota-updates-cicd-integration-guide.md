@@ -28,7 +28,7 @@ next_blog: ''
 
 ### Quick Comparison of OTA Platforms:
 
-| Feature | Capgo | Capawesome | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
+| Feature | Capgo | [Appflow](https://ionic.io/appflow/) | [CodePush](https://github.com/microsoft/code-push) |
 | --- | --- | --- | --- | --- |
 | Status | Active | Active | Shutting down 2026 | Discontinued 2024 |
 | Update Speed | 114ms | Standard | Fluctuates | N/A |
@@ -161,7 +161,7 @@ Once you've set your OTA update guidelines, the next step is choosing an OTA pla
 
 Here’s a breakdown of key features across popular OTA platforms for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/):
 
-| Feature | Capgo | Capawesome | Appflow | CodePush |
+| Feature | Capgo | Appflow | CodePush |
 | --- | --- | --- | --- | --- |
 | Status | Active | Active | Shutting down 2026 | Discontinued 2024 |
 | Market Focus | Global | Germany-focused | Enterprise | Legacy |

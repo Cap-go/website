@@ -24,7 +24,6 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Autentikasi multi-provider, manajemen token, dan pembaruan status real-time. Ideal untuk integrasi cepat.
 -   **[Plugin Keamanan Biometrik](https://capgo.app/plugins/capacitor-native-biometric/)**: Menambahkan dukungan sidik jari, pengenalan wajah, dan kredensial perangkat untuk login yang aman.
--   **@capawesome/capacitor-secure-storage**: Mengenkripsi data dengan iOS Keychain, Android Keystore, atau AES-256. Bagus untuk menyimpan data sesi sensitif.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Solusi kelas enterprise dengan logout otomatis, autentikasi biometrik, dan penyimpanan aman.
 -   **[Capgo](https://capgo.app/)**: Menggabungkan manajemen sesi aman dengan pembaruan terenkripsi langsung untuk penerapan yang mulus.
 
@@ -163,7 +162,7 @@ Bagian ini memberikan pandangan komparatif tentang [plugin Capacitor](https://ca
 
 Berikut perbandingan berdampingan fitur keamanan utama yang ditawarkan oleh plugin:
 
-| Fitur | Firebase Auth | Biometric Security | @capawesome/secure-storage | Identity Vault | Capgo |
+| Fitur | Firebase Auth | Biometric Security | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Tipe Enkripsi** | Berbasis cloud | Level perangkat keras | AES 256-bit | AES 256-bit | End-to-end |
 | **Dukungan Biometrik** | Terbatas | Penuh | Tidak | Penuh | Tidak |
@@ -179,7 +178,7 @@ Tabel di bawah ini menyoroti kompleksitas setup, kompatibilitas platform, dan de
 | --- | --- | --- | --- |
 | **Firebase Auth** | Sedang | iOS, Android | Firebase SDK |
 | **Biometric Security** | Rendah | iOS, Android | Tidak ada |
-| **@capawesome/secure-storage** | Rendah | iOS, Android | Tidak ada |
+| Rendah | iOS, Android | Tidak ada |
 | **Identity Vault** | Tinggi | iOS, Android, Web | Auth Connect |
 | **Capgo** | Sedang | iOS, Android | Tidak ada |
 
@@ -206,7 +205,7 @@ Setiap plugin menawarkan tingkat dukungan integrasi yang berbeda, seperti ditunj
 | --- | --- | --- | --- |
 | **Firebase Auth** | Dukungan Native | Terbatas | Sedang |
 | **Biometric Security** | Manual | Penuh | Terbatas |
-| **@capawesome/secure-storage** | Manual | Penuh | Mudah |
+| Manual | Penuh | Mudah |
 | **Identity Vault** | Perangkat Enterprise | Penuh | Komprehensif |
 | **Capgo** | Otomatis | Penuh | Komprehensif |
 

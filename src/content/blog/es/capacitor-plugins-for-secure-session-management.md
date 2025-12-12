@@ -25,7 +25,6 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Autenticación multi-proveedor, gestión de tokens y actualizaciones de estado en tiempo real. Ideal para una integración rápida.
 -   **[Plugin de Seguridad Biométrica](https://capgo.app/plugins/capacitor-native-biometric/)**: Añade soporte para huella dactilar, reconocimiento facial y credenciales del dispositivo para inicios de sesión seguros.
--   **@capawesome/capacitor-secure-storage**: Cifra datos con iOS Keychain, Android Keystore o AES-256. Excelente para almacenar datos sensibles de sesión.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Solución de nivel empresarial con cierre de sesión automático, autenticación biométrica y almacenamiento seguro.
 -   **[Capgo](https://capgo.app/)**: Combina gestión segura de sesiones con actualizaciones cifradas en vivo para despliegues sin problemas.
 
@@ -50,7 +49,6 @@ Sigue leyendo para obtener pasos detallados de integración, características y 
 
 ![Identity Vault](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/c5fae6eb414f2040557b847eda54d313.jpg)
 
-<iframe src="https://www.youtube.com/embed/DsXx7oEcOS0" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## 1. [Firebase Auth](https://firebase.google.com/docs/auth) para [Capacitor](https://capacitorjs.com/)
 
@@ -128,10 +126,6 @@ La versión 9.0.0, lanzada en abril de 2025, introdujo compatibilidad con Capaci
 Para asegurar aún más las sesiones, los desarrolladores deberían implementar tiempos de espera automáticos de sesión y monitorear cambios biométricos. Si se detectan cambios, los tokens de autenticación deberían ser invalidados para prevenir accesos no autorizados [\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta). El plugin también cuenta con un sistema detallado de manejo de errores, proporcionando códigos de retroalimentación que ayudan a los desarrolladores a crear mecanismos de respaldo e informar a los usuarios cuando falla la autenticación [\[8\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics).
 
 Este plugin ofrece una solución robusta para integrar seguridad biométrica en aplicaciones modernas, asegurando tanto conveniencia como protección para los usuarios.
-
-## 3. @capawesome/capacitor-secure-storage
-
-El plugin **@capawesome/capacitor-secure-storage** proporciona una forma de salvaguardar datos en aplicaciones Capacitor a través de técnicas de cifrado específicas de la plataforma.
 
 ### Cómo Funciona en Diferentes Plataformas
 
@@ -287,7 +281,7 @@ Esta sección proporciona una mirada comparativa a los [plugins de Capacitor](ht
 
 Aquí hay un desglose lado a lado de las características clave de seguridad ofrecidas por los plugins:
 
-| Característica | Firebase Auth | Biometric Security | @capawesome/secure-storage | Identity Vault | Capgo |
+| Característica | Firebase Auth | Biometric Security | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Tipo de Cifrado** | Basado en la nube | Nivel de hardware | AES 256-bit | AES 256-bit | Extremo a extremo |
 | **Soporte Biométrico** | Limitado | Completo | No | Completo | No |
@@ -303,7 +297,7 @@ La tabla siguiente destaca la complejidad de configuración, compatibilidad de p
 | --- | --- | --- | --- |
 | **Firebase Auth** | Moderada | iOS, Android | Firebase SDK |
 | **Biometric Security** | Baja | iOS, Android | Ninguna |
-| **@capawesome/secure-storage** | Baja | iOS, Android | Ninguna |
+| Baja | iOS, Android | Ninguna |
 | **Identity Vault** | Alta | iOS, Android, Web | Auth Connect |
 | **Capgo** | Moderada | iOS, Android | Ninguna |
 
@@ -330,7 +324,7 @@ Cada plugin ofrece diferentes niveles de soporte de integración, como se muestr
 | --- | --- | --- | --- |
 | **Firebase Auth** | Soporte Nativo | Limitada | Moderado |
 | **Biometric Security** | Manual | Completa | Limitado |
-| **@capawesome/secure-storage** | Manual | Completa | Fácil |
+| Manual | Completa | Fácil |
 | **Identity Vault** | Herramientas Empresariales | Completa | Integral |
 | **Capgo** | Automatizada | Completa | Integral |
 

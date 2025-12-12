@@ -51,12 +51,6 @@ next_blog: ''
 - 수정이 지연되고 사용자가 문제가 있는 버전에 머물게 되는 긴 문제 해결 과정.
 - 복구 작업에는 영향받은 세그먼트 식별, 업데이트 롤백, 수정사항 배포, 사용자 활동 모니터링이 필요합니다. Capgo와 같은 도구는 자동 롤백, 오류 추적, 채널 관리로 이 프로세스를 단순화합니다[\[1\]](https://capgo.app/).
 
-## Capawesome의 새로운 Ionic Capacitor 실시간 업데이트 살펴보기 ...
-
-![Capawesome Plugin Ecosystem](https://assets.seobotai.com/capgo.app/68099a379bd9ce97f26bad94/5d1ba8681722600db788c5ef0c9fe764.jpg)
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## 버전 충돌 찾기 및 분석
 
 실시간 오류를 모니터링하고 업데이트 성능을 추적하는 도구로 버전 충돌을 조기에 발견하세요.

@@ -98,10 +98,6 @@ Ionic telah mengumumkan bahwa Appflow akan dihentikan pada tahun 2026, mendesak 
 
 > "Berpindah ke @Capgo setelah @AppFlow memberi kami tagihan $5000 untuk tahun ini agar dapat terus berjalan. Menyukai CapoGo sejauh ini. Terima kasih kepada @Capgo, ini produk yang hebat." - jermaine [\[1\]](https://capgo.app/)
 
-## Jelajahi Pembaruan Langsung Ionic Capacitor Baru Capawesome ...
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Perbandingan Platform
 
 Berikut adalah rincian praktis tentang bagaimana platform ini berkinerja berdasarkan fitur kunci mereka.

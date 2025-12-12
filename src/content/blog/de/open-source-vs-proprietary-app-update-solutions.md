@@ -195,7 +195,6 @@ Bei der Entscheidung zwischen Open-Source- und proprietären Tools sollten Sie F
 
 ### Wann Open Source Sinn macht
 
-Open-Source-Tools sind ideal für Projekte, die Flexibilität und Anpassungsmöglichkeiten benötigen. Sie sind besonders nützlich für Teams, die maßgeschneiderte Integrationen und kosteneffiziente Optionen suchen. Das [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater) ist ein gutes Beispiel für diesen Ansatz. Wie Capawesome erklärt:
 
 > "Einer der größten Vorteile von Capacitor gegenüber anderen Laufzeitumgebungen ist die Möglichkeit, Updates in Echtzeit bereitzustellen, ohne die App erneut in den App Stores einreichen zu müssen" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
 

@@ -31,7 +31,7 @@ next_blog: ''
 
 ### Comparaison rapide des plateformes OTA :
 
-| Fonctionnalité | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) | Capawesome |
+| Fonctionnalité | [Capgo](https://capgo.app/) | [AppFlow](https://ionic.io/appflow/) |
 | --- | --- | --- | --- |
 | Chiffrement de bout en bout | Oui | Non | Non |
 | Capacité de restauration | Instantanée | Manuelle | Manuelle |
@@ -41,7 +41,6 @@ next_blog: ''
 
 ## Capacitor 2.0 : Applications mobiles et PWA à partir d'une seule base de code
 
-<iframe src="https://www.youtube.com/embed/8KQb4u_FqOw" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Risques de sécurité des mises à jour OTA
 
@@ -178,7 +177,7 @@ Voyons maintenant comment les principales plateformes OTA se comparent en termes
 
 Lors du choix d'une plateforme OTA pour les applications Capacitor, la sécurité et la fiabilité sont des facteurs critiques. Voici comment se comparent certaines des meilleures plateformes :
 
-| Fonctionnalité | Capgo | AppFlow | Capawesome |
+| Fonctionnalité | Capgo | AppFlow |
 | --- | --- | --- | --- |
 | Chiffrement de bout en bout | Oui | Non | Non |
 | Taux de réussite des mises à jour | 82% mondial | Données limitées | Données limitées |

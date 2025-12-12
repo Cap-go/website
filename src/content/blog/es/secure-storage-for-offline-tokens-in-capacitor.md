@@ -60,7 +60,6 @@ Al elegir opciones de almacenamiento seguro para tokens sin conexión en aplicac
 -   **@capacitor-community/secure-storage**: Ofrece cifrado AES-256 utilizando iOS Keychain y Android Keystore, admite [desbloqueo biométrico](https://capgo.app/plugins/capacitor-native-biometric/) e incluye rotación automática de claves.
 -   **@ionic/storage**: No incluye cifrado incorporado, requiere un envoltorio manual para seguridad y carece de características de autenticación biométrica.
 -   **Native SecureStorage**: Funciona exclusivamente con iOS Keychain pero no es compatible con Android.
--   **@capawesome/secure-storage**: Proporciona cifrado AES-256, funciona en múltiples plataformas y ofrece autenticación biométrica opcional.
 -   **@ionic-enterprise/identity-vault**: Ofrece cifrado a nivel de hardware, admite autenticación biométrica y gestiona eficazmente el ciclo de vida de los tokens seguros.
 
 ## Resumen

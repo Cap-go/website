@@ -45,14 +45,13 @@ Rollback en [Capacitor](https://capacitorjs.com/) garantiza que tu aplicación s
 | Plataforma  | Tipo de Rollback | Análisis | Encriptación | Opciones de Alojamiento | Costo      |
 | ----------- | -----------------| -------- | ------------ | ----------------------- | ---------- |
 | **Capgo**   | Automático/Manual | Sí      | Sí           | Flexible                | Asequible  |
-| Capawesome   | Solo Manual      | No       | No           | Limitado                | Inferior   |
+| Solo Manual      | No       | No           | Limitado                | Inferior   |
 | Appflow     | Automático/Manual | Parcial  | No           | Limitado                | Alto       |
 
 Con una configuración adecuada y herramientas como Capgo, puedes garantizar actualizaciones sin problemas y abordar rápidamente los problemas para mantener tu aplicación funcionando sin interrupciones.
 
 ## MAD24 304 Aprovechando Actualizaciones Atómicas con [OSTree](https://en.wikipedia.org/wiki/OSTree) para ...
 
-<iframe src="https://www.youtube.com/embed/XLLtgE0Klwc" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
 
 ## Cómo Funciona el Rollback en [Capacitor](https://capacitorjs.com/)
 

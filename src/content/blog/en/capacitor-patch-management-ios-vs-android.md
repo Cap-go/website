@@ -34,10 +34,6 @@ next_blog: ''
 
 Capgo stands out by reducing update times and ensuring compliance across both platforms, making it a go-to solution for developers.
 
-## Explore Capawesome's New Ionic Capacitor Live Update Plugin: Features & How to Get Started
-
-<iframe src="https://www.youtube.com/embed/pCDPwItv_ik" aria-label="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" style="width: 100%; height: 500px;" allowfullscreen></iframe>
-
 ## Platform Update Systems
 
 Building on the earlier overview, iOS and Android utilize distinct update systems, each influencing how updates are deployed and managed.
@@ -146,7 +142,7 @@ Although Capgo excels in performance, there are other options available in the m
 | --- | --- |
 | **Capgo** | Real-time updates, end-to-end encryption, and flexible deployment options |
 | **Appflow** | Enterprise-grade features with legacy infrastructure support |
-| **Capawesome** | Focused on streamlined features and strong regional expertise |
+| Focused on streamlined features and strong regional expertise |
 | **[CodePush](https://github.com/microsoft/code-push)** | Known for its basic update functionality and historical significance |
 
 ### Tool Comparison

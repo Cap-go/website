@@ -142,7 +142,6 @@ Pour la sécurité des types :
 
 -   Utilisez des interfaces spécifiques adaptées à des cas d'utilisation particuliers.
 -   Appliquez des types d'union pour les variations spécifiques aux plateformes.
--   Implémentez des gardes de type pour valider les types à l'exécution [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### Documentation de code
 
