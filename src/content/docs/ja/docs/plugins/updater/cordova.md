@@ -1,28 +1,24 @@
 ---
-title: Cordova
-description: >-
-  Exploring the potential availability of the capacitor-updater plugin for
-  Cordova and the challenges involved in its development.
+title: "Cordova"
+description: "capacitor-updater プラグインのCordova対応の可能性と開発における課題について解説します。"
 sidebar:
   order: 8
 locale: ja
 ---
 
-You've been wondering if this plugin will ever be available for Cordova.
+このプラグインがCordovaで利用可能になるのかと疑問に思っていたかもしれません。
 
-We have started a R\&D repository for that, but it's a huge amount of work.
+私たちはそのためのR&Dリポジトリを開始しましたが、膨大な作業が必要です。
 
-## Problems
+## 問題点
 
-We know we can do it but for that, we have to read all the code of Cordova codebase as we did for Capacitor, to understand how to make it work with ap Capgo features.
+実現可能であることは分かっていますが、そのためにはCapacitorで行ったように、Cordovaのコードベース全体を読み、Capgoの機能と連携させる方法を理解する必要があります。
 
-The Android version is easier to do since both use Java, but iOS needs a full rewrite because Swift is still not well-supported in Cordova
+Androidバージョンは両方ともJavaを使用しているため比較的容易ですが、iOSはSwiftがCordovaで十分にサポートされていないため、完全な書き直しが必要です。
 
-## Solution
+## 解決策
 
-In the mean time heres what you can do:
+その間にできることは以下の通りです：
 
-* [Support us](https://github.com/sponsors/cap-go) on GitHub and we can prioritize that. 
-This will need at least 1 month of work.
-* Hire us as a [Consultant](https://capgo.app/consulting/), we are used to help big companies migrate to Capacitor, it usually takes a month, and the [benefit](https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development) is huge for your team
-
+* GitHubで[私たちをサポート](https://github.com/sponsors/cap-go)していただければ、優先的に取り組むことができます。少なくとも1ヶ月の作業が必要になります。
+* 私たちを[コンサルタント](https://capgo.app/consulting/)として雇ってください。大企業のCapacitorへの移行を支援した実績があり、通常1ヶ月かかりますが、チームにとっての[メリット](https://ionic.io/resources/articles/capacitor-vs-cordova-modern-hybrid-app-development)は非常に大きいです。

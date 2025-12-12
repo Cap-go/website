@@ -1,5 +1,5 @@
 ---
-title: Auto actualización
+title: 自動更新
 description: capacitor-updaterを使用した自動更新の方法
 sidebar:
   order: 2

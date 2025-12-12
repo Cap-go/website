@@ -1,5 +1,5 @@
 ---
-title: Mise à jour hybride
+title: ハイブリッド更新
 description: 自動アップデートの更新方法
 sidebar:
   order: 3
