@@ -269,7 +269,7 @@ Aggiungi un campo "resolutions" al tuo file `package.json`:
 Per gli utenti Yarn, applica queste risoluzioni con:
 
 ```bash
-yarn install --force
+yarn add --force
 ```
 
 > "Abbiamo distribuito gli [aggiornamenti OTA di Capgo](https://console.capgo.app/resend_email) in produzione per la nostra base utenti di +5000. Stiamo osservando un funzionamento molto fluido, quasi tutti i nostri utenti sono aggiornati entro minuti dal rilascio dell'OTA su @Capgo." - colenso [\[1\]](https://capgo.app/)

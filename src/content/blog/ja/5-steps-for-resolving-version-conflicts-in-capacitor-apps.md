@@ -267,7 +267,7 @@ npm install @capacitor/core@latest @capacitor/cli@latest @capacitor/ios@latest @
 Yarnユーザーの場合、以下でこれらの解決を強制します：
 
 ```bash
-yarn install --force
+yarn add --force
 ```
 
 > "私たちは5000人以上のユーザーベースに対して本番環境で[Capgo OTAアップデート](https://console.capgo.app/resend_email)をロールアウトしました。OTAが@Capgoにデプロイされてから数分以内にほぼすべてのユーザーが最新になり、非常にスムーズな運用を実現しています。" - colenso [\[1\]](https://capgo.app/)

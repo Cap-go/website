@@ -269,7 +269,7 @@ Tambahkan field "resolutions" ke file `package.json` Anda:
 Untuk pengguna Yarn, tegakkan resolusi ini dengan:
 
 ```bash
-yarn install --force
+yarn add --force
 ```
 
 > "Kami meluncurkan [pembaruan OTA Capgo](https://console.capgo.app/resend_email) di produksi untuk basis pengguna kami +5000. Kami melihat operasi yang sangat lancar hampir semua pengguna kami up to date dalam hitungan menit setelah OTA dikerahkan ke @Capgo." - colenso [\[1\]](https://capgo.app/)
