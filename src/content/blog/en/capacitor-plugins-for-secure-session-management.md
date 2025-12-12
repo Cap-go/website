@@ -20,22 +20,23 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Multi-provider authentication, token management, and real-time state updates. Ideal for fast integration.
 -   **[Biometric Security Plugin](https://capgo.app/plugins/capacitor-native-biometric/)**: Adds fingerprint, face recognition, and device credential support for secure logins.
+-   **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)**: Securely store account information with AES-256 encryption on iOS and Android.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Enterprise-grade solution with auto-logout, biometric authentication, and secure storage.
 -   **[Capgo](https://capgo.app/)**: Combines secure session management with encrypted live updates for seamless deployments.
 
 ### Quick Comparison
 
-| Feature | Firebase Auth | Biometric Security | Secure Storage | Identity Vault | Capgo |
+| Feature | Firebase Auth | Biometric Security | Persistent Account | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Encryption Type** | Cloud-based | Hardware-level | AES-256 (iOS/Android) | AES-256 (hardware) | End-to-end encryption |
 | **Biometric Support** | Limited | Full | No  | Full | No  |
 | **Offline Capability** | Partial | Yes | Yes | Yes | Yes |
-| **Enterprise Support** | Yes | Community | Community | Yes | Yes |
+| **Enterprise Support** | Yes | Community | Yes | Yes | Yes |
 | **Setup Complexity** | Moderate | Low | Low | High | Moderate |
 
-**Need enterprise-level security?** Go for Identity Vault.  
-**Looking for fast integration?** Firebase Auth is your best bet.  
-**Want encrypted storage?** Try @capawesome/capacitor-secure-storage.  
+**Need enterprise-level security?** Go for Identity Vault.
+**Looking for fast integration?** Firebase Auth is your best bet.
+**Need encrypted account storage?** Try [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/).
 **For live updates with security?** Capgo has you covered.
 
 Keep reading for detailed integration steps, features, and best practices to keep your app safe.
@@ -49,7 +50,7 @@ Keep reading for detailed integration steps, features, and best practices to kee
 
 ![Firebase Auth](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/20003c863a77b942b90536c0e5cde156.jpg)
 
-Firebase Authentication offers a powerful way to manage secure sessions for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/). By integrating Firebase's native SDKs (Swift for iOS, Java for Android) alongside the Firebase JavaScript SDK for web, it ensures a smooth and consistent authentication experience across platforms [\[4\]](https://github.com/capawesome-team/capacitor-firebase).
+Firebase Authentication offers a powerful way to manage secure sessions for [Capacitor apps](https://capgo.app/blog/capacitor-comprehensive-guide/). By integrating Firebase's native SDKs (Swift for iOS, Java for Android) alongside the Firebase JavaScript SDK for web, it ensures a smooth and consistent authentication experience across platforms [\[4\]](https://github.com/cap-go/capacitor-firebase).
 
 Here are some of the standout security features:
 
@@ -70,7 +71,7 @@ Firebase projects are identified by API keys, but securing access depends heavil
 
 Sharathdev's December 2023 analysis highlighted that implementing token revocation during logout can significantly reduce the risk of account takeovers [\[6\]](https://medium.com/@DEVEN99/securing-firebase-authentication-mitigating-vulnerabilities-and-best-practices-593981e61b98).
 
-The plugin supports both native and web authentication flows. However, for mobile apps, native authentication is the preferred option due to WebView's inherent limitations [\[4\]](https://github.com/capawesome-team/capacitor-firebase).
+The plugin supports both native and web authentication flows. However, for mobile apps, native authentication is the preferred option due to WebView's inherent limitations [\[4\]](https://github.com/cap-go/capacitor-firebase).
 
 When compared to other session management tools, Firebase Auth stands out with its easy integration and extensive security features, making it an excellent choice for Capacitor apps that demand strong authentication capabilities.
 
@@ -106,7 +107,7 @@ To implement the plugin, you’ll need to make some platform-specific adjustment
 -   **iOS**: Add `NSFaceIDUsageDescription` to the `Info.plist` file to explain why Face ID is being used.
 -   **Android**: Include the `android.permission.USE_BIOMETRIC` permission in the `AndroidManifest.xml` file.
 
-These steps are essential for ensuring the plugin works seamlessly and aligns with secure session management strategies [\[8\]](https://capgo.app/plugins/capacitor-native-biometric/)[\[10\]](https://www.npmjs.com/package/capacitor-native-biometric).
+These steps are essential for ensuring the plugin works seamlessly and aligns with secure session management strategies [\[8\]](https://capgo.app/plugins/capacitor-native-biometric/)[\[10\]](https://www.npmjs.com/package/capgo/capacitor-native-biometric).
 
 > "Every Capacitor developer is responsible for making sure their app is following security best practices. Without proper care, major security issues can crop up which can prove extremely damaging and expensive." – Capacitor Documentation [\[1\]](https://capacitorjs.com/docs/guides/security)
 
@@ -341,7 +342,7 @@ Here’s a breakdown of recommended solutions based on different use cases:
 
 ### For Small to Medium-Sized Applications
 
-If you’re working with a smaller team and have a tight budget, **@capawesome/capacitor-secure-storage** is a solid choice. It provides secure key/value storage and has strong community support, making it a great option for basic secure session management on both iOS and Android.
+For smaller teams with tight budgets, **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)** is a solid choice. It securely stores account information using platform-native encryption (iOS Keychain and Android KeyStore), providing AES-256 encryption for basic secure session management on both iOS and Android with strong support.
 
 ### For Enterprise Applications
 

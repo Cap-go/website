@@ -74,8 +74,6 @@ Ces fonctionnalités s'intègrent parfaitement aux flux de travail CI/CD moderne
 
 Le paysage open source offre des outils fiables pour les mises à jour d'applications. [**Capgo**](https://capgo.app/) se démarque comme un choix privilégié pour les mises à jour en direct dans les applications Capacitor, offrant un chiffrement de bout en bout, une intégration CI/CD fluide et la conformité aux directives des app stores.
 
-Une autre option populaire est le plugin [**Capacitor Live Update**](https://www.npmjs.com/package/%40capacitor%2Flive-updates), qui simplifie le processus d'ajout de fonctionnalités de mise à jour en direct [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update), mais nécessite Appflow, un backend payant.
-
 ### Forces et faiblesses
 
 Peser les avantages et les inconvénients des outils open source peut vous aider à choisir la bonne solution :
@@ -231,4 +229,4 @@ Pour les organisations jonglant avec plusieurs applications ou nécessitant des 
 
 Pour mettre en œuvre avec succès la solution choisie, commencez par évaluer les exigences spécifiques de votre application. Ensuite, sélectionnez l'outil qui correspond le mieux à ces besoins et intégrez-le dans votre pipeline CI/CD tout en vous assurant qu'il est conforme aux normes de plateforme pertinentes. Une mise en œuvre réussie dépendra de l'adéquation de votre choix avec les compétences techniques de votre équipe, votre budget et votre capacité de maintenance à long terme.
 
-Le succès de votre solution de mise à jour dépendra largement de sa capacité à répondre aux demandes actuelles et à la croissance future. Que vous optiez pour des outils open source pour leurs options de personnalisation ou des plateformes propriétaires pour leur support structuré, assurez-vous que votre choix complète votre processus de développement et respecte les directives de la plateforme [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update).
+Le succès de votre solution de mise à jour dépendra largement de sa capacité à répondre aux demandes actuelles et à la croissance future. Que vous optiez pour des outils open source pour leurs options de personnalisation ou des plateformes propriétaires pour leur support structuré, assurez-vous que votre choix complète votre processus de développement et respecte les directives de la plateforme.

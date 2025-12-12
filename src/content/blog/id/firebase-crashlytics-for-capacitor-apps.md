@@ -38,13 +38,13 @@ next_blog: ''
     -   Instal Crashlytics:
         
         ```bash
-        npm install @capacitor-firebase/crashlytics && npx cap sync
+        npm install @capgo/capacitor-firebase-crashlytics && npx cap sync
         ```
         
     -   Inisialisasi Crashlytics di aplikasi Anda:
         
         ```typescript
-        import { FirebaseCrashlytics } from '@capacitor-firebase/crashlytics';
+        import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
         await FirebaseCrashlytics.initialize();
         ```
         
@@ -136,13 +136,13 @@ Setelah langkah-langkah ini selesai, Anda siap untuk melanjutkan ke bagian Insta
 Pertama, instal plugin dan [sinkronkan dengan Capacitor](https://capgo.app/plugins/capacitor-updater/):
 
 ```bash
-npm install @capacitor-firebase/crashlytics && npx cap sync
+npm install @capgo/capacitor-firebase-crashlytics && npx cap sync
 ```
 
 Kemudian, inisialisasi Crashlytics di aplikasi Anda. Tambahkan kode berikut ke `app.component.ts` atau `main.ts`:
 
 ```typescript
-import { FirebaseCrashlytics } from '@capacitor-firebase/crashlytics';
+import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 await FirebaseCrashlytics.initialize();
 ```
 

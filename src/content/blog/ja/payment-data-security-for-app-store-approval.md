@@ -56,8 +56,6 @@ Capgoのアプローチは、アップデートデプロイメントの82%のグ
 
 変更されたコンポーネントのみをダウンロードすることで、Capgoはリスクを最小限に抑え、帯域幅の使用を削減します。これまでに、プラットフォームは1.155兆以上の [安全なアップデート](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/)を提供しています。
 
-次に、Capawesomeが支払いデータのセキュリティにどのように対処しているかを見ていきましょう。
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)

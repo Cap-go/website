@@ -18,7 +18,7 @@ published: true
 locale: es
 next_blog: ''
 ---
-La depuración de actualizaciones Over-the-Air (OTA) en aplicaciones de [Capacitor](https://capacitorjs.com/) puede ser complicada, pero las herramientas adecuadas marcan una gran diferencia. Ya sea que estés gestionando conflictos de versiones, asegurando [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/), o depurando en diferentes plataformas, aquí hay tres herramientas a considerar:
+La depuración de actualizaciones Over-the-Air (OTA) en aplicaciones de [Capacitor](https://capacitorjs.com/) puede ser complicada, pero las herramientas adecuadas marcan una gran diferencia. Ya sea que estés gestionando conflictos de versiones, asegurando [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/), o depurando en diferentes plataformas, aquí hay dos herramientas esenciales a considerar:
 
 -   **[Capgo](https://capgo.app/)**: Actualizaciones OTA seguras con cifrado de extremo a extremo, integración CI/CD y despliegues específicos por usuario. Comienza en $12/mes.
 -   **[Inspect.dev](https://inspect.dev/)**: Depura aplicaciones Android e iOS, incluso en Windows, con integración de [Chrome DevTools](https://developer.chrome.com/docs/devtools). Cuesta $49/año.
@@ -26,13 +26,13 @@ La depuración de actualizaciones Over-the-Air (OTA) en aplicaciones de [Capacit
 ### Comparación Rápida
 
 | Característica | Capgo | Inspect.dev |
-| --- | --- | --- | --- |
-| Gestión de Actualizaciones | Avanzada (cifrado, CI/CD) | Básica (basada en la nube) | No aplicable |
-| [Herramientas de Depuración](https://capgo.app/docs/plugin/debugging/) | Control de versiones, reversión | Reversión automática | Chrome DevTools |
-| Soporte de Plataformas | Android, iOS | Android, iOS | Android, iOS (soporte Windows) |
-| Precio | $12/mes | Gratuito | $49/año |
+| --- | --- | --- |
+| Gestión de Actualizaciones | Avanzada (cifrado, CI/CD) | No aplicable |
+| [Herramientas de Depuración](https://capgo.app/docs/plugin/debugging/) | Control de versiones, reversión | Chrome DevTools |
+| Soporte de Plataformas | Android, iOS | Android, iOS (soporte Windows) |
+| Precio | $12/mes | $49/año |
 
-Elige según las necesidades de tu aplicación: **Capgo** para seguridad y automatización, **@capawesome/capacitor-live-update** para simplicidad, o **Inspect.dev** para depuración multiplataforma.
+Elige según las necesidades de tu aplicación: **Capgo** para seguridad y automatización, o **Inspect.dev** para depuración multiplataforma.
 
 ## Conceptos Básicos de Depuración OTA
 

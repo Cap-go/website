@@ -89,7 +89,7 @@ Inizia aggiungendo l'SDK Firebase al tuo progetto e configurandolo per le tue pi
 Esegui i seguenti comandi per installare i pacchetti Firebase necessari:
 
 ```bash
-npm install @capacitor-firebase/performance
+npm install @capgo/capacitor-firebase-performance
 npm install firebase
 ```
 
@@ -98,7 +98,7 @@ npm install firebase
 Configura Firebase nel tuo file principale dell'applicazione:
 
 ```typescript
-import { FirebasePerformance } from '@capacitor-firebase/performance';
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {

@@ -58,8 +58,6 @@ Capgos Ansatz hat eine globale Erfolgsquote von 82% bei Update-Bereitstellungen 
 
 Durch das Herunterladen nur der geänderten Komponenten minimiert Capgo Risiken und reduziert die Bandbreitennutzung. Bisher hat die Plattform über 1,155 Billionen [sichere Updates](https://capgo.app/docs/live-updates/update-behavior/) ausgeliefert [\[1\]](https://capgo.app/).
 
-Als Nächstes schauen wir uns an, wie Capawesome die Sicherheit von Zahlungsdaten handhabt.
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)

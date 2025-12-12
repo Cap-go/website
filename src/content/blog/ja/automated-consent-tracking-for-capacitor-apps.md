@@ -104,7 +104,7 @@ Capgoのようなサービスは、同意関連機能のライブ更新を可能
 
 ```typescript
 import { Plugins } from '@capacitor/core';
-import { AnalyticsConsent } from '@capacitor-firebase/analytics';
+import { AnalyticsConsent } from '@capgo/capacitor-firebase-analytics';
 import { PrivacyConsent } from '@capacitor/privacy';
 
 const { FirebaseAnalytics } = Plugins;
@@ -170,7 +170,7 @@ async function showConsentDialog() {
 ユーザーの同意に基づいて分析設定を調整します：
 
 ```typescript
-import { Analytics } from '@capacitor-firebase/analytics';
+import { Analytics } from '@capgo/capacitor-firebase-analytics';
 
 async function initializeAnalytics(userConsent) {
   if (userConsent.analytics) {

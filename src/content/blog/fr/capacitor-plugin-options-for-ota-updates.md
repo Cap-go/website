@@ -33,9 +33,8 @@ next_blog: ''
 ### Meilleurs plugins pour les mises à jour OTA :
 
 1.  **[Capgo](https://capgo.app/)** : Mises à jour rapides (5MB en 114ms), chiffrement de bout en bout, analytiques en temps réel et tarification flexible (à partir de 12$/mois).
-2.  **Capawesome* : Focalisé sur le marché allemand avec des prix compétitifs et une architecture moderne (lancé en 2024).
-3.  **[Appflow](https://ionic.io/appflow/)** : Fonctionnalités de niveau entreprise à 6 000$/an mais arrêt prévu en 2026.
-4.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)** : Abandonné en 2024.
+2.  **[Appflow](https://ionic.io/appflow/)** : Fonctionnalités de niveau entreprise à 6 000$/an mais arrêt prévu en 2026.
+3.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)** : Abandonné en 2024.
 
 ### Comparaison rapide :
 

@@ -93,7 +93,7 @@ Vous pouvez utiliser des composants pré-construits et optimisés d'Ionic Framew
 
 ## Combien de plugins Capacitor possède-t-il ?
 
-Capacitor dispose de 26 plugins principaux et de nombreux plugins créés par la communauté. Consultez [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), l'organisation [capacitor-community](https://github.com/capacitor-community/) et [Capawesome](https://github.com/capawesome-team/) pour les ressources de plugins communautaires.
+Capacitor dispose de 26 plugins principaux et de nombreux plugins créés par la communauté. Consultez [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), l'organisation [capacitor-community](https://github.com/capacitor-community/) et [Capgo](https://capgo.app/plugins/) avec 91 plugins pour les ressources de plugins communautaires.
 
 ## Existe-t-il une extension VS Code pour Capacitor ?
 

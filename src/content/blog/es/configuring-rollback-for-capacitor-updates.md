@@ -38,7 +38,7 @@ Rollback en [Capacitor](https://capacitorjs.com/) garantiza que tu aplicación s
 
 ### Comparación de Plataformas:
 
-**[Capgo](https://capgo.app/)** ofrece rollbacks con un clic, encriptación, análisis en tiempo real y opciones de alojamiento flexibles. Alternativas como **Capawesome** y **[Appflow](https://ionic.io/appflow/)** carecen de características o vienen con costos más altos.
+**[Capgo](https://capgo.app/)** ofrece rollbacks con un clic, encriptación, análisis en tiempo real y opciones de alojamiento flexibles. Alternativas como **[Appflow](https://ionic.io/appflow/)** carecen de características o vienen con costos más altos.
 
 **Tabla de Comparación Rápida:**
 
@@ -158,7 +158,7 @@ Ahora que hemos hablado sobre la configuración de rollback y las mejores práct
 
 **Capgo** se destaca con su **rollback con un clic** a cualquier lanzamiento. También ofrece **encriptación de extremo a extremo**, **análisis en tiempo real**, canales de despliegue avanzados y la flexibilidad de opciones alojadas en la nube y autohospedadas [\[1\]](https://capgo.app/).
 
-Por otro lado, **Capawesome** se queda corto, careciendo de encriptación, análisis y flexibilidad de alojamiento. Mientras tanto, **Appflow** tiene una tarifa anual elevada y una hoja de ruta poco clara, lo que puede hacerla menos atractiva [\[1\]](https://capgo.app/).
+Por otro lado, **Appflow** tiene una tarifa anual elevada y una hoja de ruta poco clara, lo que puede hacerla menos atractiva [\[1\]](https://capgo.app/).
 
 Al elegir una plataforma, los factores clave a considerar incluyen **seguridad**, la profundidad del análisis, flexibilidad de despliegue y costo general. Capgo combina confiabilidad en el rollback, fuerte encriptación y rentabilidad, haciéndola una opción sólida para equipos de todos los tamaños [\[1\]](https://capgo.app/).
 

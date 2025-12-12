@@ -22,22 +22,23 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: 다중 공급자 인증, 토큰 관리, 실시간 상태 업데이트. 빠른 통합에 이상적입니다.
 -   **[생체 보안 플러그인](https://capgo.app/plugins/capacitor-native-biometric/)**: 지문, 얼굴 인식, 기기 자격 증명 지원으로 안전한 로그인을 제공합니다.
+-   **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)**: iOS와 Android에서 AES-256 암호화를 사용하여 계정 정보를 안전하게 저장합니다.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: 자동 로그아웃, 생체 인증, 보안 저장소를 갖춘 기업용 솔루션입니다.
 -   **[Capgo](https://capgo.app/)**: 암호화된 실시간 업데이트와 안전한 세션 관리를 결합하여 원활한 배포를 제공합니다.
 
 ### 빠른 비교
 
-| 기능 | Firebase Auth | 생체 보안 | 보안 저장소 | Identity Vault | Capgo |
+| 기능 | Firebase Auth | 생체 보안 | Persistent Account | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **암호화 유형** | 클라우드 기반 | 하드웨어 수준 | AES-256 (iOS/Android) | AES-256 (하드웨어) | 종단간 암호화 |
 | **생체 인증 지원** | 제한적 | 전체 | 없음 | 전체 | 없음 |
 | **오프라인 기능** | 부분적 | 예 | 예 | 예 | 예 |
-| **기업 지원** | 예 | 커뮤니티 | 커뮤니티 | 예 | 예 |
+| **기업 지원** | 예 | 커뮤니티 | 예 | 예 | 예 |
 | **설정 복잡도** | 중간 | 낮음 | 낮음 | 높음 | 중간 |
 
-**기업 수준의 보안이 필요하신가요?** Identity Vault를 선택하세요.  
-**빠른 통합이 필요하신가요?** Firebase Auth가 최선의 선택입니다.  
-**암호화된 저장소가 필요하신가요?** @capawesome/capacitor-secure-storage를 사용해보세요.  
+**기업 수준의 보안이 필요하신가요?** Identity Vault를 선택하세요.
+**빠른 통합이 필요하신가요?** Firebase Auth가 최선의 선택입니다.
+**암호화된 계정 저장소가 필요하신가요?** [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)를 사용해보세요.
 **보안과 함께 실시간 업데이트가 필요하신가요?** Capgo가 도와드립니다.
 
 앱을 안전하게 유지하기 위한 자세한 통합 단계, 기능 및 모범 사례를 계속 읽어보세요.
@@ -216,7 +217,7 @@ Capgo의 채널 시스템은 실시간 분석이 뒷받침하는 안전한 베�
 
 ### 중소규모 애플리케이션용
 
-작은 팀과 제한된 예산으로 작업하는 경우, **@capawesome/capacitor-secure-storage**가 확실한 선택입니다. 안전한 키/값 저장소를 제공하고 강력한 커뮤니티 지원을 받고 있어 iOS와 Android 모두에서 기본적인 보안 세션 관리에 적합한 옵션입니다.
+예산이 제한된 소규모 팀의 경우, **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)** 가 탁월한 선택입니다. 플랫폼 네이티브 암호화(iOS Keychain 및 Android KeyStore)를 사용하여 계정 정보를 안전하게 저장하며, iOS와 Android 모두에서 기본적인 보안 세션 관리를 위한 AES-256 암호화를 강력한 지원과 함께 제공합니다.
 
 ### 엔터프라이즈 애플리케이션용
 

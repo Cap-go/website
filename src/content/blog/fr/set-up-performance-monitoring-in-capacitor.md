@@ -87,7 +87,7 @@ Commencez par ajouter le SDK Firebase à votre projet et le configurer pour votr
 Exécutez les commandes suivantes pour installer les packages Firebase nécessaires :
 
 ```bash
-npm install @capacitor-firebase/performance
+npm install @capgo/capacitor-firebase-performance
 npm install firebase
 ```
 
@@ -96,7 +96,7 @@ npm install firebase
 Configurez Firebase dans votre fichier d'application principal :
 
 ```typescript
-import { FirebasePerformance } from '@capacitor-firebase/performance';
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {

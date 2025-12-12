@@ -38,13 +38,13 @@ next_blog: ''
     -   Instala Crashlytics:
         
         ```bash
-        npm install @capacitor-firebase/crashlytics && npx cap sync
+        npm install @capgo/capacitor-firebase-crashlytics && npx cap sync
         ```
         
     -   Inicializa Crashlytics en tu aplicación:
         
         ```typescript
-        import { FirebaseCrashlytics } from '@capacitor-firebase/crashlytics';
+        import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
         await FirebaseCrashlytics.initialize();
         ```
         
@@ -136,13 +136,13 @@ Una vez que estos pasos estén completos, estarás listo para pasar a la secció
 Primero, instala el plugin y [sincronízalo con Capacitor](https://capgo.app/plugins/capacitor-updater/):
 
 ```bash
-npm install @capacitor-firebase/crashlytics && npx cap sync
+npm install @capgo/capacitor-firebase-crashlytics && npx cap sync
 ```
 
 Luego, inicializa Crashlytics en tu aplicación. Agrega el siguiente código a `app.component.ts` o `main.ts`:
 
 ```typescript
-import { FirebaseCrashlytics } from '@capacitor-firebase/crashlytics';
+import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
 await FirebaseCrashlytics.initialize();
 ```
 

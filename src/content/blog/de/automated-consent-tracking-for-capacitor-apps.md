@@ -107,7 +107,7 @@ Verwenden Sie mehrere Plugins zur Verwaltung von Einwilligungsaufgaben:
 
 ```typescript
 import { Plugins } from '@capacitor/core';
-import { AnalyticsConsent } from '@capacitor-firebase/analytics';
+import { AnalyticsConsent } from '@capgo/capacitor-firebase-analytics';
 import { PrivacyConsent } from '@capacitor/privacy';
 
 const { FirebaseAnalytics } = Plugins;
@@ -173,7 +173,7 @@ Sobald die Einwilligungsschnittstelle fertig ist, stellen Sie sicher, dass Ihr A
 Passen Sie Ihre Analytics-Konfiguration basierend auf der Nutzereinwilligung an:
 
 ```typescript
-import { Analytics } from '@capacitor-firebase/analytics';
+import { Analytics } from '@capgo/capacitor-firebase-analytics';
 
 async function initializeAnalytics(userConsent) {
   if (userConsent.analytics) {

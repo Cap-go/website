@@ -93,7 +93,7 @@ Anda dapat menggunakan komponen yang sudah dioptimalkan dari Ionic Framework, Qu
 
 ## Berapa banyak plugin yang dimiliki Capacitor?
 
-Capacitor memiliki 26 plugin inti dan banyak plugin yang dibangun oleh komunitas. Lihat [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), organisasi [capacitor-community](https://github.com/capacitor-community/), dan [Capawesome](https://github.com/capawesome-team/) untuk sumber daya plugin komunitas.
+Capacitor memiliki 26 plugin inti dan banyak plugin yang dibangun oleh komunitas. Lihat [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), organisasi [capacitor-community](https://github.com/capacitor-community/), dan [Capgo](https://capgo.app/plugins/) dengan 91 plugin untuk sumber daya plugin komunitas.
 
 ## Apakah ada Ekstensi VS Code untuk Capacitor?
 

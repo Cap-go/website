@@ -48,7 +48,7 @@ Sebelum memulai, pastikan Anda telah menginstal alat-alat berikut:
 | **Pengembangan iOS** | Xcode, [SwiftLint](https://github.com/realm/SwiftLint), [CocoaPods](https://cocoapods.org/) |
 | **Pengembangan Android** | Android Studio, Android SDK, JDK |
 
-Anda juga harus familiar dengan TypeScript untuk pengembangan web dan Swift (untuk iOS) atau Java/Kotlin (untuk Android) untuk tugas pengembangan native [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md)[\[2\]](https://github.com/ionic-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
+Anda juga harus familiar dengan TypeScript untuk pengembangan web dan Swift (untuk iOS) atau Java/Kotlin (untuk Android) untuk tugas pengembangan native [\[1\]]()[\[2\]](https://github.com/ionic-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### Menyiapkan Monorepo
 

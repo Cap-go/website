@@ -69,8 +69,6 @@ These features work seamlessly with modern CI/CD workflows, making app updates m
 
 The open-source landscape offers trusted tools for app updates. [**Capgo**](https://capgo.app/) stands out as a top choice for live updates in Capacitor apps, offering end-to-end encryption, smooth CI/CD integration, and compliance with app store guidelines.
 
-Another popular option is the [**Capacitor Live Update**](https://www.npmjs.com/package/%40capacitor%2Flive-updates) **plugin**, which simplifies the process of adding live update functionality [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update), but requires Appflow a paid backend.
-
 ### Strengths and Weaknesses
 
 Weighing the pros and cons of open-source tools can help you choose the right solution:
@@ -228,4 +226,4 @@ For organizations juggling multiple apps or requiring enterprise-level features,
 
 To successfully implement your chosen solution, start by assessing your app's specific requirements. Then, select the tool that aligns best with those needs and integrate it into your CI/CD pipeline while ensuring it complies with relevant platform standards. A smooth implementation will depend on how well your choice matches your team’s technical skills, budget, and capacity for long-term maintenance.
 
-The success of your update solution will largely depend on its ability to meet both current demands and future growth. Whether you opt for open-source tools for their customization options or proprietary platforms for their structured support, make sure your choice complements your development process and adheres to platform guidelines [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update).
+The success of your update solution will largely depend on its ability to meet both current demands and future growth. Whether you opt for open-source tools for their customization options or proprietary platforms for their structured support, make sure your choice complements your development process and adheres to platform guidelines.

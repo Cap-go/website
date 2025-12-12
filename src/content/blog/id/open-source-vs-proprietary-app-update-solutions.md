@@ -74,8 +74,6 @@ Fitur-fitur ini bekerja secara mulus dengan alur kerja CI/CD modern, membuat pem
 
 Lanskap open-source menawarkan alat terpercaya untuk pembaruan aplikasi. [**Capgo**](https://capgo.app/) menonjol sebagai pilihan utama untuk update langsung di aplikasi Capacitor, menawarkan enkripsi end-to-end, integrasi CI/CD yang mulus, dan kepatuhan dengan pedoman app store.
 
-Opsi populer lainnya adalah [**plugin Capacitor Live Update**](https://www.npmjs.com/package/%40capacitor%2Flive-updates), yang menyederhanakan proses penambahan fungsionalitas update langsung [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update), tetapi membutuhkan Appflow sebagai backend berbayar.
-
 ### Kelebihan dan Kelemahan
 
 Menimbang pro dan kontra dari alat open-source dapat membantu Anda memilih solusi yang tepat:
@@ -188,7 +186,7 @@ Saat memutuskan antara alat open-source dan proprietary, pertimbangkan faktor-fa
 
 ### Kapan Open Source Masuk Akal
 
-Alat open-source sangat cocok untuk proyek yang membutuhkan fleksibilitas dan kustomisasi. Alat ini sangat berguna bagi tim yang mencari integrasi yang disesuaikan dan opsi hemat biaya. [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater) adalah contoh yang baik dari pendekatan ini. Seperti yang dijelaskan Capawesome:
+Alat open-source sangat cocok untuk proyek yang membutuhkan fleksibilitas dan kustomisasi. Alat ini sangat berguna bagi tim yang mencari integrasi yang disesuaikan dan opsi hemat biaya. [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater) adalah contoh yang baik dari pendekatan ini.
 
 > "Salah satu keunggulan terbesar Capacitor dibandingkan runtime lainnya adalah kemampuan untuk memberikan pembaruan secara real-time tanpa harus mengirim ulang aplikasi Anda ke app store" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
 
@@ -232,4 +230,4 @@ Untuk organisasi yang menangani banyak aplikasi atau membutuhkan fitur tingkat e
 
 Untuk berhasil mengimplementasikan solusi yang Anda pilih, mulailah dengan menilai kebutuhan spesifik aplikasi Anda. Kemudian, pilih alat yang paling sesuai dengan kebutuhan tersebut dan integrasikan ke dalam pipeline CI/CD Anda sambil memastikan kepatuhan dengan standar platform yang relevan. Implementasi yang lancar akan bergantung pada seberapa baik pilihan Anda sesuai dengan keterampilan teknis tim, anggaran, dan kapasitas untuk pemeliharaan jangka panjang.
 
-Keberhasilan solusi pembaruan Anda akan sangat bergantung pada kemampuannya untuk memenuhi tuntutan saat ini dan pertumbuhan masa depan. Baik Anda memilih alat open-source untuk opsi kustomisasinya atau platform proprietary untuk dukungan terstrukturnya, pastikan pilihan Anda melengkapi proses pengembangan dan mematuhi pedoman platform [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update).
+Keberhasilan solusi pembaruan Anda akan sangat bergantung pada kemampuannya untuk memenuhi tuntutan saat ini dan pertumbuhan masa depan. Baik Anda memilih alat open-source untuk opsi kustomisasinya atau platform proprietary untuk dukungan terstrukturnya, pastikan pilihan Anda melengkapi proses pengembangan dan mematuhi pedoman platform.

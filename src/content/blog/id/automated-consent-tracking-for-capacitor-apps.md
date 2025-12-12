@@ -107,7 +107,7 @@ Gunakan beberapa plugin untuk menangani tugas manajemen persetujuan:
 
 ```typescript
 import { Plugins } from '@capacitor/core';
-import { AnalyticsConsent } from '@capacitor-firebase/analytics';
+import { AnalyticsConsent } from '@capgo/capacitor-firebase-analytics';
 import { PrivacyConsent } from '@capacitor/privacy';
 
 const { FirebaseAnalytics } = Plugins;
@@ -173,7 +173,7 @@ Setelah antarmuka persetujuan siap, pastikan pengaturan analitik Anda menghormat
 Sesuaikan konfigurasi analitik Anda berdasarkan persetujuan pengguna:
 
 ```typescript
-import { Analytics } from '@capacitor-firebase/analytics';
+import { Analytics } from '@capgo/capacitor-firebase-analytics';
 
 async function initializeAnalytics(userConsent) {
   if (userConsent.analytics) {

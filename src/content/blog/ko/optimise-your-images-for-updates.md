@@ -24,7 +24,7 @@ WebP는 Android와 iOS를 포함한 대부분의 주요 모바일 플랫폼과 �
 
 이미지를 WebP로 변환할 때 사용할 수 있는 몇 가지 옵션이 있습니다. 한 가지 인기 있는 옵션은 앱의 빌드 프로세스에 쉽게 통합할 수 있는 `c.webp`와 같은 명령줄 도구를 사용하는 것입니다. 다른 옵션으로는 이미지를 수동으로 변환하는 데 사용할 수 있는 [Android Studio](https://sites.google.com/a/android.com/tools/tech-docs/.webp/)에서 WebP로 변환하는 것입니다. 콘텐츠 관리 시스템(CMS)용 플러그인이나 Kraken.io와 같은 자동화된 서비스를 사용할 수도 있습니다.
 
-이미지를 WebP로 변환한 후에는 앱의 성능이 개선되었는지 확인하기 위해 테스트하는 것이 중요합니다. [Firebase Performance Monitoring 플러그인](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/performance/) 또는 다른 성능 테스트 도구를 사용하여 앱의 성능을 측정할 수 있습니다. 또한 WebP 변환이 앱의 성능에 어떤 영향을 미치는지 더 정확한 그림을 얻기 위해 다양한 기기와 네트워크에서 앱을 테스트해야 합니다.
+이미지를 WebP로 변환한 후에는 앱의 성능이 개선되었는지 확인하기 위해 테스트하는 것이 중요합니다. [Firebase Performance Monitoring 플러그인](https://github.com/cap-go/capacitor-firebase/tree/main/packages/performance/) 또는 다른 성능 테스트 도구를 사용하여 앱의 성능을 측정할 수 있습니다. 또한 WebP 변환이 앱의 성능에 어떤 영향을 미치는지 더 정확한 그림을 얻기 위해 다양한 기기와 네트워크에서 앱을 테스트해야 합니다.
 
 앱의 성능을 개선하는 것 외에도 이미지를 WebP로 변환하면 앱의 전반적인 사용자 경험에도 긍정적인 영향을 미칠 수 있습니다. 더 빠른 다운로드 시간과 적은 데이터 사용량으로 사용자는 앱에 대해 더 긍정적인 경험을 할 가능성이 높아지며, 이는 참여도와 유지율 증가로 이어질 수 있습니다.
 

@@ -25,22 +25,23 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Autenticazione multi-provider, gestione dei token e aggiornamenti di stato in tempo reale. Ideale per un'integrazione rapida.
 -   **[Plugin Sicurezza Biometrica](https://capgo.app/plugins/capacitor-native-biometric/)**: Aggiunge supporto per impronte digitali, riconoscimento facciale e credenziali del dispositivo per accessi sicuri.
+-   **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)**: Archivia in modo sicuro le informazioni dell'account con crittografia AES-256 su iOS e Android.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Soluzione di livello enterprise con logout automatico, autenticazione biometrica e archiviazione sicura.
 -   **[Capgo](https://capgo.app/)**: Combina la gestione sicura delle sessioni con aggiornamenti crittografati in tempo reale per distribuzioni senza problemi.
 
 ### Confronto Rapido
 
-| Funzionalità | Firebase Auth | Sicurezza Biometrica | Archiviazione Sicura | Identity Vault | Capgo |
+| Funzionalità | Firebase Auth | Sicurezza Biometrica | Persistent Account | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Tipo di Crittografia** | Basata su cloud | Livello hardware | AES-256 (iOS/Android) | AES-256 (hardware) | Crittografia end-to-end |
 | **Supporto Biometrico** | Limitato | Completo | No | Completo | No |
 | **Capacità Offline** | Parziale | Sì | Sì | Sì | Sì |
-| **Supporto Enterprise** | Sì | Community | Community | Sì | Sì |
+| **Supporto Enterprise** | Sì | Community | Sì | Sì | Sì |
 | **Complessità Setup** | Moderata | Bassa | Bassa | Alta | Moderata |
 
-**Hai bisogno di sicurezza a livello enterprise?** Scegli Identity Vault.  
-**Cerchi un'integrazione veloce?** Firebase Auth è la scelta migliore.  
-**Vuoi archiviazione crittografata?** Prova @capawesome/capacitor-secure-storage.  
+**Hai bisogno di sicurezza a livello enterprise?** Scegli Identity Vault.
+**Cerchi un'integrazione veloce?** Firebase Auth è la scelta migliore.
+**Hai bisogno di archiviazione account crittografata?** Prova [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/).
 **Per aggiornamenti sicuri in tempo reale?** Capgo fa al caso tuo.
 
 Continua a leggere per i passi dettagliati di integrazione, le funzionalità e le migliori pratiche per mantenere la tua app sicura.
@@ -53,7 +54,7 @@ Continua a leggere per i passi dettagliati di integrazione, le funzionalità e l
 
 ![Firebase Auth](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/20003c863a77b942b90536c0e5cde156.jpg)
 
-Firebase Authentication offre un modo potente per gestire sessioni sicure per le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Integrando gli SDK nativi di Firebase (Swift per iOS, Java per Android) insieme all'SDK JavaScript di Firebase per web, garantisce un'esperienza di autenticazione fluida e coerente su tutte le piattaforme [\[4\]](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication).
+Firebase Authentication offre un modo potente per gestire sessioni sicure per le [app Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Integrando gli SDK nativi di Firebase (Swift per iOS, Java per Android) insieme all'SDK JavaScript di Firebase per web, garantisce un'esperienza di autenticazione fluida e coerente su tutte le piattaforme [\[4\]](https://github.com/cap-go/capacitor-firebase/tree/main/packages/authentication).
 
 Ecco alcune delle caratteristiche di sicurezza più rilevanti:
 
@@ -243,7 +244,7 @@ Ecco una suddivisione delle soluzioni raccomandate in base ai diversi casi d'uso
 
 ### Per Applicazioni Piccole e Medie
 
-Se lavori con un team più piccolo e hai un budget limitato, **@capawesome/capacitor-secure-storage** è una scelta solida. Fornisce un archivio sicuro chiave/valore e ha un forte supporto della community, rendendolo un'ottima opzione per la gestione base delle sessioni sicure sia su iOS che Android.
+Per team più piccoli con budget limitati, **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)** è una scelta solida. Archivia in modo sicuro le informazioni dell'account utilizzando la crittografia nativa della piattaforma (iOS Keychain e Android KeyStore), fornendo crittografia AES-256 per la gestione di base delle sessioni sicure su iOS e Android con un forte supporto.
 
 ### Per Applicazioni Enterprise
 

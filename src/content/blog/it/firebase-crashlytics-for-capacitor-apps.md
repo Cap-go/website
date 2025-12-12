@@ -38,13 +38,13 @@ next_blog: ''
     -   Installa Crashlytics:
         
         ```bash
-        npm install @capacitor-firebase/crashlytics && npx cap sync
+        npm install @capgo/capacitor-firebase-crashlytics && npx cap sync
         ```
         
     -   Inizializza Crashlytics nella tua app:
         
         ```typescript
-        import { FirebaseCrashlytics } from '@capacitor-firebase/crashlytics';
+        import { FirebaseCrashlytics } from '@capgo/capacitor-firebase-crashlytics';
         await FirebaseCrashlytics.initialize();
         ```
         

@@ -92,7 +92,7 @@ You can use pre-baked, optimized components from Ionic Framework, Quasar, Framew
 
 ## How many plugins does Capacitor have?
 
-Capacitor has 26 core plugins and numerous community-built plugins. Check out [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), the [capacitor-community](https://github.com/capacitor-community/) organization, and [Capawesome](https://github.com/capawesome-team/) for community plugin resources.
+Capacitor has 26 core plugins and numerous community-built plugins. Check out [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), the [capacitor-community](https://github.com/capacitor-community/) organization, and [Capgo](https://capgo.app/plugins/) with 91 plugins for community plugin resources.
 
 ## Is there a VS Code Extension for Capacitor?
 

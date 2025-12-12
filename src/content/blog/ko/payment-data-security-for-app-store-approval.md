@@ -55,8 +55,6 @@ Capgo의 접근 방식은 업데이트 배포에서 82%의 전세계 성공률�
 
 변경된 구성 요소만 다운로드함으로써, Capgo는 위험을 최소화하고 대역폭 사용을 줄입니다. 지금까지 플랫폼은 1.155조 개의 [보안 업데이트](https://capgo.app/docs/live-updates/update-behavior/)를 전달했습니다 [\[1\]](https://capgo.app/).
 
-다음으로, Capawesome이 결제 데이터 보안을 어떻게 다루는지 살펴보겠습니다.
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)

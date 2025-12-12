@@ -33,9 +33,8 @@ next_blog: ''
 ### Top-Plugins für OTA-Updates:
 
 1.  **[Capgo](https://capgo.app/)**: Schnelle Updates (5 MB in 114 ms), End-to-End-Verschlüsselung, Echtzeitanalysen und flexible Preisgestaltung (ab 12 $/Monat).
-2.  **Capawesome*: Fokussiert auf den deutschen Markt mit wettbewerbsfähigen Preisen und moderner Architektur (veröffentlicht 2024).
-3.  **[Appflow](https://ionic.io/appflow/)**: Funktionen auf Unternehmensniveau für 6.000 $/Jahr, aber Einstellung 2026.
-4.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: 2024 eingestellt.
+2.  **[Appflow](https://ionic.io/appflow/)**: Funktionen auf Unternehmensniveau für 6.000 $/Jahr, aber Einstellung 2026.
+3.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: 2024 eingestellt.
 
 ### Schneller Vergleich:
 

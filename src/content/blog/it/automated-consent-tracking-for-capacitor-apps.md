@@ -107,7 +107,7 @@ Utilizza più plugin per gestire le attività di gestione del consenso:
 
 ```typescript
 import { Plugins } from '@capacitor/core';
-import { AnalyticsConsent } from '@capacitor-firebase/analytics';
+import { AnalyticsConsent } from '@capgo/capacitor-firebase-analytics';
 import { PrivacyConsent } from '@capacitor/privacy';
 
 const { FirebaseAnalytics } = Plugins;
@@ -173,7 +173,7 @@ Una volta pronta l'interfaccia di consenso, assicurati che la configurazione ana
 Regola la configurazione analytics in base al consenso dell'utente:
 
 ```typescript
-import { Analytics } from '@capacitor-firebase/analytics';
+import { Analytics } from '@capgo/capacitor-firebase-analytics';
 
 async function initializeAnalytics(userConsent) {
   if (userConsent.analytics) {

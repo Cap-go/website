@@ -90,7 +90,7 @@ Ionic Framework、Quasar、Framework7、またはKonsta UIから最適化され�
 
 ## Capacitorにはいくつのプラグインがありますか？
 
-Capacitorには26のコアプラグインと多数のコミュニティ作成プラグインがあります。コミュニティプラグインのリソースについては、[awesome-capacitor](https://github.com/riderx/awesome-capacitor/)、[capacitor-community](https://github.com/capacitor-community/)組織、および[Capawesome](https://github.com/capawesome-team/)をチェックしてください。
+Capacitorには26のコアプラグインと多数のコミュニティ作成プラグインがあります。コミュニティプラグインのリソースについては、[awesome-capacitor](https://github.com/riderx/awesome-capacitor/)、[capacitor-community](https://github.com/capacitor-community/)組織、および[Capgo](https://capgo.app/plugins/)91個のプラグインをチェックしてください。
 
 ## Capacitor用のVS Code拡張機能はありますか？
 

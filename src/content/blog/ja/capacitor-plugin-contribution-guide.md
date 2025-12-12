@@ -47,7 +47,7 @@ next_blog: ''
 | **iOS開発** | Xcode、[SwiftLint](https://github.com/realm/SwiftLint)、[CocoaPods](https://cocoapods.org/) |
 | **Android開発** | Android Studio、Android SDK、JDK |
 
-ウェブ開発にはTypeScriptに慣れ、ネイティブ開発タスクにはSwift（iOS用）またはJava/Kotlin（Android用）にも慣れておく必要があります [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md)[\[2\]](https://github.com/ionic-team/capacitor-plugins/blob/main/CONTRIBUTING.md)。
+ウェブ開発にはTypeScriptに慣れ、ネイティブ開発タスクにはSwift（iOS用）またはJava/Kotlin（Android用）にも慣れておく必要があります [\[1\]]()[\[2\]](https://github.com/ionic-team/capacitor-plugins/blob/main/CONTRIBUTING.md)。
 
 ### モノレポの設定
 

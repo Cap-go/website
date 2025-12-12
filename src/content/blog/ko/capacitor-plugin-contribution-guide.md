@@ -45,7 +45,7 @@ next_blog: ''
 | **iOS 개발** | Xcode, [SwiftLint](https://github.com/realm/SwiftLint), [CocoaPods](https://cocoapods.org/) |
 | **Android 개발** | Android Studio, Android SDK, JDK |
 
-또한 웹 개발을 위한 TypeScript와 네이티브 개발 작업을 위한 Swift(iOS) 또는 Java/Kotlin(Android)에 익숙해야 합니다 [\[1\]](https://github.com/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTING.md)[\[2\]](https://github.com/ionic-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
+또한 웹 개발을 위한 TypeScript와 네이티브 개발 작업을 위한 Swift(iOS) 또는 Java/Kotlin(Android)에 익숙해야 합니다 [\[1\]]()[\[2\]](https://github.com/ionic-team/capacitor-plugins/blob/main/CONTRIBUTING.md).
 
 ### 모노레포 설정
 

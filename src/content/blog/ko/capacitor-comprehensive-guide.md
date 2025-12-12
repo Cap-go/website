@@ -91,7 +91,7 @@ Ionic Framework, Quasar, Framework7 또는 Konsta UI의 미리 제작된 최적�
 
 ## Capacitor에는 몇 개의 플러그인이 있나요?
 
-Capacitor는 26개의 핵심 플러그인과 수많은 커뮤니티 제작 플러그인을 보유하고 있습니다. 커뮤니티 플러그인 리소스를 위해 [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), [capacitor-community](https://github.com/capacitor-community/) 조직 및 [Capawesome](https://github.com/capawesome-team/)를 확인해 보세요.
+Capacitor는 26개의 핵심 플러그인과 수많은 커뮤니티 제작 플러그인을 보유하고 있습니다. 커뮤니티 플러그인 리소스를 위해 [awesome-capacitor](https://github.com/riderx/awesome-capacitor/), [capacitor-community](https://github.com/capacitor-community/) 조직 및 [Capgo](https://capgo.app/plugins/) 91개의 플러그인을 확인해 보세요.
 
 ## Capacitor용 VS Code 확장 프로그램이 있나요?
 

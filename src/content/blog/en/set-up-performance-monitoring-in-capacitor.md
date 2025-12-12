@@ -84,7 +84,7 @@ Start by adding the Firebase SDK to your project and configuring it for your pla
 Run the following commands to install the necessary Firebase packages:
 
 ```bash
-npm install @capacitor-firebase/performance
+npm install @capgo/capacitor-firebase-performance
 npm install firebase
 ```
 
@@ -93,7 +93,7 @@ npm install firebase
 Set up Firebase in your main application file:
 
 ```typescript
-import { FirebasePerformance } from '@capacitor-firebase/performance';
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {

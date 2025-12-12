@@ -58,8 +58,6 @@ El enfoque de Capgo ha logrado una tasa de éxito global del 82% en los desplieg
 
 Al descargar solo los componentes que han cambiado, Capgo minimiza riesgos y reduce el uso de ancho de banda. Hasta ahora, la plataforma ha entregado más de 1.155 billones de [actualizaciones seguras](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
-A continuación, veamos cómo Capawesome aborda la seguridad de los datos de pago.
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)

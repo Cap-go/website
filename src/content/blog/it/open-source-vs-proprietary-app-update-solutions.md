@@ -72,8 +72,6 @@ Queste funzionalità si integrano perfettamente con i moderni flussi di lavoro C
 
 Il panorama open source offre strumenti affidabili per gli aggiornamenti delle app. [**Capgo**](https://capgo.app/) si distingue come scelta principale per gli aggiornamenti in tempo reale nelle app Capacitor, offrendo crittografia end-to-end, integrazione CI/CD fluida e conformità con le linee guida degli app store.
 
-Un'altra opzione popolare è il plugin [**Capacitor Live Update**](https://www.npmjs.com/package/%40capacitor%2Flive-updates), che semplifica il processo di aggiunta della funzionalità di aggiornamento in tempo reale [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update), ma richiede Appflow un backend a pagamento.
-
 ### Punti di Forza e Debolezze
 
 Valutare pro e contro degli strumenti open source può aiutarti a scegliere la soluzione giusta:
@@ -184,7 +182,7 @@ Quando si decide tra strumenti open source e proprietari, considera fattori come
 
 ### Quando l'Open Source Ha Senso
 
-Gli strumenti open-source sono perfetti per progetti che necessitano di flessibilità e personalizzazione. Sono particolarmente utili per i team che cercano integrazioni su misura e opzioni economicamente vantaggiose. Il [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater) è un buon esempio di questo approccio. Come spiega Capawesome:
+Gli strumenti open-source sono perfetti per progetti che necessitano di flessibilità e personalizzazione. Sono particolarmente utili per i team che cercano integrazioni su misura e opzioni economicamente vantaggiose. Il [Capacitor Live Update plugin](https://www.npmjs.com/package/@capgo/capacitor-updater) è un buon esempio di questo approccio.
 
 > "Uno dei più grandi vantaggi di Capacitor rispetto ad altri runtime è la capacità di distribuire aggiornamenti in tempo reale senza dover inviare nuovamente la tua app agli app store" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
 
@@ -228,4 +226,4 @@ Per le organizzazioni che gestiscono più app o richiedono funzionalità a livel
 
 Per implementare con successo la soluzione scelta, inizia valutando i requisiti specifici della tua app. Quindi, seleziona lo strumento che meglio si allinea con queste esigenze e integralo nella tua pipeline CI/CD assicurandoti che rispetti gli standard della piattaforma pertinenti. Un'implementazione fluida dipenderà da quanto bene la tua scelta si adatta alle competenze tecniche del team, al budget e alla capacità di manutenzione a lungo termine.
 
-Il successo della tua soluzione di aggiornamento dipenderà in gran parte dalla sua capacità di soddisfare sia le esigenze attuali che la crescita futura. Che tu opti per strumenti open-source per le loro opzioni di personalizzazione o piattaforme proprietarie per il loro supporto strutturato, assicurati che la tua scelta complementi il tuo processo di sviluppo e aderisca alle linee guida della piattaforma [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update).
+Il successo della tua soluzione di aggiornamento dipenderà in gran parte dalla sua capacità di soddisfare sia le esigenze attuali che la crescita futura. Che tu opti per strumenti open-source per le loro opzioni di personalizzazione o piattaforme proprietarie per il loro supporto strutturato, assicurati che la tua scelta complementi il tuo processo di sviluppo e aderisca alle linee guida della piattaforma.

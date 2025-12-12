@@ -24,22 +24,23 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Autentikasi multi-provider, manajemen token, dan pembaruan status real-time. Ideal untuk integrasi cepat.
 -   **[Plugin Keamanan Biometrik](https://capgo.app/plugins/capacitor-native-biometric/)**: Menambahkan dukungan sidik jari, pengenalan wajah, dan kredensial perangkat untuk login yang aman.
+-   **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)**: Menyimpan informasi akun dengan aman menggunakan enkripsi AES-256 di iOS dan Android.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Solusi kelas enterprise dengan logout otomatis, autentikasi biometrik, dan penyimpanan aman.
 -   **[Capgo](https://capgo.app/)**: Menggabungkan manajemen sesi aman dengan pembaruan terenkripsi langsung untuk penerapan yang mulus.
 
 ### Perbandingan Cepat
 
-| Fitur | Firebase Auth | Keamanan Biometrik | Penyimpanan Aman | Identity Vault | Capgo |
+| Fitur | Firebase Auth | Keamanan Biometrik | Persistent Account | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Tipe Enkripsi** | Berbasis cloud | Level perangkat keras | AES-256 (iOS/Android) | AES-256 (perangkat keras) | Enkripsi end-to-end |
 | **Dukungan Biometrik** | Terbatas | Penuh | Tidak | Penuh | Tidak |
 | **Kemampuan Offline** | Sebagian | Ya | Ya | Ya | Ya |
-| **Dukungan Enterprise** | Ya | Komunitas | Komunitas | Ya | Ya |
+| **Dukungan Enterprise** | Ya | Komunitas | Ya | Ya | Ya |
 | **Kompleksitas Pengaturan** | Sedang | Rendah | Rendah | Tinggi | Sedang |
 
-**Butuh keamanan level enterprise?** Pilih Identity Vault.  
-**Mencari integrasi cepat?** Firebase Auth adalah pilihan terbaik Anda.  
-**Ingin penyimpanan terenkripsi?** Coba @capawesome/capacitor-secure-storage.  
+**Butuh keamanan level enterprise?** Pilih Identity Vault.
+**Mencari integrasi cepat?** Firebase Auth adalah pilihan terbaik Anda.
+**Butuh penyimpanan akun terenkripsi?** Coba [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/).
 **Untuk pembaruan langsung dengan keamanan?** Capgo siap membantu Anda.
 
 Lanjutkan membaca untuk langkah-langkah integrasi detail, fitur, dan praktik terbaik untuk menjaga keamanan aplikasi Anda.
@@ -227,7 +228,7 @@ Berikut adalah pembagian solusi yang direkomendasikan berdasarkan berbagai kasus
 
 ### Untuk Aplikasi Kecil hingga Menengah
 
-Jika Anda bekerja dengan tim kecil dan memiliki anggaran terbatas, **@capawesome/capacitor-secure-storage** adalah pilihan yang tepat. Plugin ini menyediakan penyimpanan key/value yang aman dan memiliki dukungan komunitas yang kuat, menjadikannya pilihan yang bagus untuk manajemen sesi dasar yang aman di iOS dan Android.
+Untuk tim kecil dengan anggaran terbatas, **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)** adalah pilihan yang solid. Plugin ini menyimpan informasi akun dengan aman menggunakan enkripsi native platform (iOS Keychain dan Android KeyStore), menyediakan enkripsi AES-256 untuk manajemen sesi aman dasar di iOS dan Android dengan dukungan yang kuat.
 
 ### Untuk Aplikasi Enterprise
 

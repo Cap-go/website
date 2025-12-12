@@ -81,8 +81,6 @@ Diese Funktionen arbeiten nahtlos mit modernen CI/CD-Workflows zusammen und mach
 
 Die Open-Source-Landschaft bietet vertrauenswürdige Tools für App-Updates. [**Capgo**](https://capgo.app/) sticht als Top-Wahl für Live-Updates in Capacitor-Apps hervor und bietet Ende-zu-Ende-Verschlüsselung, reibungslose CI/CD-Integration und Einhaltung der App-Store-Richtlinien.
 
-Eine weitere beliebte Option ist das [**Capacitor Live Update**](https://www.npmjs.com/package/%40capacitor%2Flive-updates) **Plugin**, das den Prozess der Integration von Live-Update-Funktionalität vereinfacht [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update), aber Appflow als kostenpflichtiges Backend benötigt.
-
 ### Stärken und Schwächen
 
 Die Abwägung der Vor- und Nachteile von Open-Source-Tools kann Ihnen bei der Wahl der richtigen Lösung helfen:
@@ -238,4 +236,4 @@ Für Organisationen, die mehrere Apps verwalten oder Enterprise-Level-Funktionen
 
 Um Ihre gewählte Lösung erfolgreich zu implementieren, beginnen Sie mit der Bewertung der spezifischen Anforderungen Ihrer App. Wählen Sie dann das Tool, das am besten zu diesen Anforderungen passt, und integrieren Sie es in Ihre CI/CD-Pipeline, während Sie sicherstellen, dass es den relevanten Plattformstandards entspricht. Eine reibungslose Implementierung wird davon abhängen, wie gut Ihre Wahl zu den technischen Fähigkeiten, dem Budget und der Kapazität für langfristige Wartung Ihres Teams passt.
 
-Der Erfolg Ihrer Update-Lösung wird größtenteils von ihrer Fähigkeit abhängen, sowohl aktuelle Anforderungen als auch zukünftiges Wachstum zu erfüllen. Ob Sie sich für Open-Source-Tools wegen ihrer Anpassungsoptionen oder für proprietäre Plattformen wegen ihres strukturierten Supports entscheiden, stellen Sie sicher, dass Ihre Wahl Ihren Entwicklungsprozess ergänzt und den Plattformrichtlinien entspricht [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update).
+Der Erfolg Ihrer Update-Lösung wird größtenteils von ihrer Fähigkeit abhängen, sowohl aktuelle Anforderungen als auch zukünftiges Wachstum zu erfüllen. Ob Sie sich für Open-Source-Tools wegen ihrer Anpassungsoptionen oder für proprietäre Plattformen wegen ihres strukturierten Supports entscheiden, stellen Sie sicher, dass Ihre Wahl Ihren Entwicklungsprozess ergänzt und den Plattformrichtlinien entspricht.

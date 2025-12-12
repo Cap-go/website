@@ -58,8 +58,6 @@ L'approche de Capgo a atteint un taux de réussite mondial de 82 % pour les dép
 
 En téléchargeant uniquement les composants qui ont changé, Capgo minimise les risques et réduit l'utilisation de la bande passante. Jusqu'à présent, la plateforme a livré plus de 1,155 trillion de [mises à jour sécurisées](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
-Ensuite, examinons comment Capawesome aborde la sécurité des données de paiement.
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)

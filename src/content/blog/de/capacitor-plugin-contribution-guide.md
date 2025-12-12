@@ -48,7 +48,7 @@ Stelle vor dem Start sicher, dass du folgende Tools installiert hast:
 | **iOS-Entwicklung** | Xcode, [SwiftLint](https://githubcom/realm/SwiftLint), [CocoaPods](https://cocoapodsorg/) |
 | **Android-Entwicklung** | Android Studio, Android SDK, JDK |
 
-Du solltest auch mit TypeScript für Web-Entwicklung und entweder Swift (für iOS) oder Java/Kotlin (für Android) für native Entwicklungsaufgaben vertraut sein [\[1\]](https://githubcom/capawesome-team/capacitor-plugins/blob/main/CONTRIBUTINGmd)[\[2\]](https://githubcom/ionic-team/capacitor-plugins/blob/main/CONTRIBUTINGmd)
+Du solltest auch mit TypeScript für Web-Entwicklung und entweder Swift (für iOS) oder Java/Kotlin (für Android) für native Entwicklungsaufgaben vertraut sein [\[1\]](https://github.com/ionic-team/capacitor-plugins/blob/main/CONTRIBUTING.md)
 
 ### Einrichtung des Monorepo
 

@@ -58,8 +58,6 @@ Pendekatan Capgo telah mencapai tingkat keberhasilan global 82% untuk deployment
 
 Dengan hanya mengunduh komponen yang berubah, Capgo meminimalkan risiko dan mengurangi penggunaan bandwidth. Sejauh ini, platform telah mengirimkan lebih dari 1,155 triliun [pembaruan aman](https://capgo.app/docs/live-updates/update-behavior/) [\[1\]](https://capgo.app/).
 
-Selanjutnya, mari kita lihat bagaimana Capawesome menangani keamanan data pembayaran.
-
 ## 3. [Appflow](https://ionic.io/appflow/live-updates)
 
 ![Appflow CI/CD Platform Interface](https://assets.seobotai.com/capgo.app/6806de1de572faef86998587/f6bc7b408415ab449b606f457e137ee1.jpg)

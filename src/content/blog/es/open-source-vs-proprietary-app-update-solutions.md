@@ -73,8 +73,6 @@ Estas características funcionan sin problemas con los flujos de trabajo CI/CD m
 
 El panorama de código abierto ofrece herramientas confiables para actualizaciones de aplicaciones. [**Capgo**](https://capgo.app/) se destaca como una opción principal para actualizaciones en vivo en aplicaciones de Capacitor, ofreciendo cifrado de extremo a extremo, suave integración CI/CD y cumplimiento de las directrices de las tiendas de aplicaciones.
 
-Otra opción popular es el [**Plugin de Actualización en Vivo de Capacitor**](https://www.npmjs.com/package/%40capacitor%2Flive-updates), que simplifica el proceso de añadir funcionalidad de actualización en vivo [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update), pero requiere Appflow, un backend de pago.
-
 ### Fortalezas y Debilidades
 
 Ponderar los pros y los contras de las herramientas de código abierto puede ayudarte a elegir la solución correcta:
@@ -189,7 +187,7 @@ Al decidir entre herramientas de código abierto y propietarias, considera facto
 
 ### Cuándo Tiene Sentido el Código Abierto
 
-Las herramientas de código abierto son una excelente opción para proyectos que necesitan flexibilidad y personalización. Son especialmente útiles para equipos que buscan integraciones personalizadas y opciones rentables. El [plugin de Actualización en Vivo de Capacitor](https://www.npmjs.com/package/@capgo/capacitor-updater) es un buen ejemplo de este enfoque. Como explica Capawesome:
+Las herramientas de código abierto son una excelente opción para proyectos que necesitan flexibilidad y personalización. Son especialmente útiles para equipos que buscan integraciones personalizadas y opciones rentables. El [plugin de Actualización en Vivo de Capacitor](https://www.npmjs.com/package/@capgo/capacitor-updater) es un buen ejemplo de este enfoque.
 
 > "Una de las mayores ventajas de Capacitor sobre otros entornos de ejecución es la capacidad de entregar actualizaciones en tiempo real sin necesidad de volver a enviar tu aplicación a las tiendas de aplicaciones" [\[4\]](https://capgo.app/blog/how-live-updates-for-capacitor-work/).
 
@@ -231,4 +229,4 @@ Para organizaciones que manejan múltiples aplicaciones o requieren funciones a 
 
 Para implementar con éxito la solución elegida, comienza evaluando los requisitos específicos de tu aplicación. Luego, selecciona la herramienta que mejor se alinee con esas necesidades e intégrala en tu pipeline de CI/CD asegurando que cumpla con los estándares relevantes de la plataforma. Una implementación fluida dependerá de qué tan bien tu elección coincida con las habilidades técnicas de tu equipo, el presupuesto y la capacidad para el mantenimiento a largo plazo.
 
-El éxito de tu solución de actualización dependerá en gran medida de su capacidad para satisfacer tanto las demandas actuales como el crecimiento futuro. Ya sea que optes por herramientas de código abierto por sus opciones de personalización o plataformas propietarias por su soporte estructurado, asegúrate de que tu elección complemente tu proceso de desarrollo y cumpla con las pautas de la plataforma [\[2\]](https://www.npmjs.com/package/@capawesome/capacitor-live-update).
+El éxito de tu solución de actualización dependerá en gran medida de su capacidad para satisfacer tanto las demandas actuales como el crecimiento futuro. Ya sea que optes por herramientas de código abierto por sus opciones de personalización o plataformas propietarias por su soporte estructurado, asegúrate de que tu elección complemente tu proceso de desarrollo y cumpla con las pautas de la plataforma.

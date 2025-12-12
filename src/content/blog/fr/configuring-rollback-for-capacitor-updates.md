@@ -157,7 +157,7 @@ Maintenant que nous avons discuté de la mise en place et des meilleures pratiqu
 
 **Capgo** se démarque avec son **retour arrière en un clic** vers n'importe quelle version. Il propose également un **chiffrement de bout en bout**, des **analyses en temps réel**, des canaux de déploiement avancés, et la flexibilité d'options hébergées dans le cloud ou auto-hébergées [\[1\]](https://capgo.app/).
 
-D'un autre côté, **Capawesome** est en retrait, manquant de chiffrement, d'analytique et de flexibilité d'hébergement. Pendant ce temps, **Appflow** a des frais annuels élevés et une feuille de route peu claire, ce qui peut le rendre moins attractif [\[1\]](https://capgo.app/).
+D'un autre côté, **Appflow** a des frais annuels élevés et une feuille de route peu claire, ce qui peut le rendre moins attractif [\[1\]](https://capgo.app/).
 
 Lors du choix d'une plateforme, les facteurs clés à considérer incluent **la sécurité**, la profondeur de l'analyse, la flexibilité du déploiement et le coût global. Capgo combine fiabilité des retours arrière, forte sécurisation, et rentabilité, en faisant une option solide pour des équipes de toutes tailles [\[1\]](https://capgo.app/).
 

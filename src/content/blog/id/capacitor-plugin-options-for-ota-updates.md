@@ -32,9 +32,8 @@ next_blog: ''
 ### Plugin Terbaik untuk Pembaruan OTA:
 
 1.  **[Capgo](https://capgo.app/)**: Pembaruan cepat (5MB dalam 114ms), enkripsi end-to-end, analitik real-time, dan harga fleksibel (mulai dari $12/bulan).
-2.  **Capawesome*: Fokus pada pasar Jerman dengan harga kompetitif dan arsitektur modern (diluncurkan tahun 2024).
-3.  **[Appflow](https://ionic.io/appflow/)**: Fitur kelas enterprise seharga $6,000/tahun tetapi akan ditutup pada 2026.
-4.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: Dihentikan pada 2024.
+2.  **[Appflow](https://ionic.io/appflow/)**: Fitur kelas enterprise seharga $6,000/tahun tetapi akan ditutup pada 2026.
+3.  **[Microsoft CodePush](https://microsoft.github.io/code-push/)**: Dihentikan pada 2024.
 
 ### Perbandingan Singkat:
 

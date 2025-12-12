@@ -86,7 +86,7 @@ next_blog: ''
 필요한 Firebase 패키지를 설치하기 위해 다음 명령어를 실행하세요:
 
 ```bash
-npm install @capacitor-firebase/performance
+npm install @capgo/capacitor-firebase-performance
 npm install firebase
 ```
 
@@ -95,7 +95,7 @@ npm install firebase
 메인 애플리케이션 파일에서 Firebase를 설정하세요:
 
 ```typescript
-import { FirebasePerformance } from '@capacitor-firebase/performance';
+import { FirebasePerformance } from '@capgo/capacitor-firebase-performance';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {

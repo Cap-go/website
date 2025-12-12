@@ -16,7 +16,7 @@ published: true
 locale: ja
 next_blog: ''
 ---
-[Capacitor](https://capacitorjs.com/) アプリのOver-the-Air (OTA) アップデートのデバッグは難しい場合がありますが、適切なツールを使用することで大きな違いが生まれます。バージョンの競合管理、[セキュアなアップデート](https://capgo.app/docs/live-updates/update-behavior/)の確保、クロスプラットフォームでのデバッグなど、以下の3つのツールを検討してください：
+[Capacitor](https://capacitorjs.com/) アプリのOver-the-Air (OTA) アップデートのデバッグは難しい場合がありますが、適切なツールを使用することで大きな違いが生まれます。バージョンの競合管理、[セキュアなアップデート](https://capgo.app/docs/live-updates/update-behavior/)の確保、クロスプラットフォームでのデバッグなど、以下の2つのツールを検討してください：
 
 -   **[Capgo](https://capgo.app/)**：エンドツーエンドの暗号化、CI/CD統合、ユーザー固有のロールアウトを備えたセキュアなOTAアップデート。月額12ドルから。
 -   **[Inspect.dev](https://inspect.dev/)**：WindowsでもAndroidとiOSの両方のアプリをデバッグ可能。[Chrome DevTools](https://developer.chrome.com/docs/devtools)統合付き。年間49ドル。
@@ -24,13 +24,13 @@ next_blog: ''
 ### クイック比較
 
 | 機能 | Capgo | Inspect.dev |
-| --- | --- | --- | --- |
-| アップデート管理 | 高度 (暗号化、CI/CD) | 基本 (クラウドベース) | 該当なし |
-| [デバッグツール](https://capgo.app/docs/plugin/debugging/) | バージョン管理、ロールバック | 自動ロールバック | Chrome DevTools |
-| プラットフォームサポート | Android、iOS | Android、iOS | Android、iOS (Windows対応) |
-| 価格 | 月額12ドル | 無料 | 年間49ドル |
+| --- | --- | --- |
+| アップデート管理 | 高度 (暗号化、CI/CD) | 該当なし |
+| [デバッグツール](https://capgo.app/docs/plugin/debugging/) | バージョン管理、ロールバック | Chrome DevTools |
+| プラットフォームサポート | Android、iOS | Android、iOS (Windows対応) |
+| 価格 | 月額12ドル | 年間49ドル |
 
-アプリのニーズに応じて選択：**Capgo**はセキュリティと自動化向け、**@capawesome/capacitor-live-update**はシンプルさ重視、**Inspect.dev**はクロスプラットフォームのデバッグ向け。
+アプリのニーズに応じて選択：**Capgo**はセキュリティと自動化向け、**Inspect.dev**はクロスプラットフォームのデバッグ向け。
 
 ## OTAアップデートデバッグの基本
 
@@ -54,7 +54,6 @@ next_blog: ''
 | --- | --- | --- |
 | [手動アップデート](https://capgo.app/docs/plugin/cloud-mode/manual-update/) | アップデートプロセスの完全な制御、カスタムURL対応 | 小規模アプリ、テスト |
 | Capgo | エンドツーエンド暗号化、CI/CD統合、ユーザー割り当て | エンタープライズアプリケーション |
-| バージョン管理と基本的なアップデート機能 | シンプルなアプリ |
 
 アプリのニーズとワークフローに最適な方法を選択してください。
 

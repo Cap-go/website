@@ -25,22 +25,23 @@ next_blog: ''
 
 -   **[Firebase Auth](https://firebase.google.com/docs/auth)**: Autenticación multi-proveedor, gestión de tokens y actualizaciones de estado en tiempo real. Ideal para una integración rápida.
 -   **[Plugin de Seguridad Biométrica](https://capgo.app/plugins/capacitor-native-biometric/)**: Añade soporte para huella dactilar, reconocimiento facial y credenciales del dispositivo para inicios de sesión seguros.
+-   **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)**: Almacena información de cuenta de forma segura con cifrado AES-256 en iOS y Android.
 -   **[Identity Vault](https://ionic.io/products/identity-vault)**: Solución de nivel empresarial con cierre de sesión automático, autenticación biométrica y almacenamiento seguro.
 -   **[Capgo](https://capgo.app/)**: Combina gestión segura de sesiones con actualizaciones cifradas en vivo para despliegues sin problemas.
 
 ### Comparación Rápida
 
-| Característica | Firebase Auth | Seguridad Biométrica | Almacenamiento Seguro | Identity Vault | Capgo |
+| Característica | Firebase Auth | Seguridad Biométrica | Persistent Account | Identity Vault | Capgo |
 | --- | --- | --- | --- | --- | --- |
 | **Tipo de Cifrado** | Basado en la nube | Nivel de hardware | AES-256 (iOS/Android) | AES-256 (hardware) | Cifrado de extremo a extremo |
 | **Soporte Biométrico** | Limitado | Completo | No | Completo | No |
 | **Capacidad Offline** | Parcial | Sí | Sí | Sí | Sí |
-| **Soporte Empresarial** | Sí | Comunidad | Comunidad | Sí | Sí |
+| **Soporte Empresarial** | Sí | Comunidad | Sí | Sí | Sí |
 | **Complejidad de Configuración** | Moderada | Baja | Baja | Alta | Moderada |
 
-**¿Necesitas seguridad de nivel empresarial?** Opta por Identity Vault.  
-**¿Buscas una integración rápida?** Firebase Auth es tu mejor opción.  
-**¿Quieres almacenamiento cifrado?** Prueba @capawesome/capacitor-secure-storage.  
+**¿Necesitas seguridad de nivel empresarial?** Opta por Identity Vault.
+**¿Buscas una integración rápida?** Firebase Auth es tu mejor opción.
+**¿Necesitas almacenamiento de cuenta cifrado?** Prueba [@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/).
 **¿Para actualizaciones en vivo con seguridad?** Capgo te tiene cubierto.
 
 Sigue leyendo para obtener pasos detallados de integración, características y mejores prácticas para mantener tu aplicación segura.
@@ -54,7 +55,7 @@ Sigue leyendo para obtener pasos detallados de integración, características y 
 
 ![Firebase Auth](https://assets.seobotai.com/capgo.app/6827226c0209458b3ff58b06/20003c863a77b942b90536c0e5cde156.jpg)
 
-Firebase Authentication ofrece una potente forma de gestionar sesiones seguras para [aplicaciones Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Al integrar los SDK nativos de Firebase (Swift para iOS, Java para Android) junto con el SDK JavaScript de Firebase para web, asegura una experiencia de autenticación fluida y consistente en todas las plataformas [\[4\]](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication).
+Firebase Authentication ofrece una potente forma de gestionar sesiones seguras para [aplicaciones Capacitor](https://capgo.app/blog/capacitor-comprehensive-guide/). Al integrar los SDK nativos de Firebase (Swift para iOS, Java para Android) junto con el SDK JavaScript de Firebase para web, asegura una experiencia de autenticación fluida y consistente en todas las plataformas [\[4\]](https://github.com/cap-go/capacitor-firebase/tree/main/packages/authentication).
 
 Aquí están algunas de las características de seguridad destacadas:
 
@@ -75,13 +76,13 @@ Los proyectos de Firebase se identifican mediante claves API, pero la seguridad 
 
 El análisis de Sharathdev de diciembre de 2023 destacó que implementar la revocación de tokens durante el cierre de sesión puede reducir significativamente el riesgo de tomas de control de cuentas [\[6\]](https://medium.com/@DEVEN99/securing-firebase-authentication-mitigating-vulnerabilities-and-best-practices-593981e61b98).
 
-El plugin soporta flujos de autenticación tanto nativos como web. Sin embargo, para aplicaciones móviles, la autenticación nativa es la opción preferida debido a las limitaciones inherentes de WebView [\[4\]](https://github.com/capawesome-team/capacitor-firebase/tree/main/packages/authentication).
+El plugin soporta flujos de autenticación tanto nativos como web. Sin embargo, para aplicaciones móviles, la autenticación nativa es la opción preferida debido a las limitaciones inherentes de WebView [\[4\]](https://github.com/cap-go/capacitor-firebase/tree/main/packages/authentication).
 
 En comparación con otras herramientas de gestión de sesiones, Firebase Auth destaca por su fácil integración y extensas características de seguridad, haciéndolo una excelente elección para aplicaciones Capacitor que demandan capacidades de autenticación sólidas.
 
 ## 2. Plugin de Seguridad Biométrica
 
-El Plugin de Seguridad Biométrica de Capacitor permite a los desarrolladores integrar autenticación biométrica y credenciales del dispositivo en sus aplicaciones, asegurando sesiones de usuario seguras. Soporta varios métodos de autenticación, incluyendo [opciones biométricas](https://capgo.app/plugins/capacitor-native-biometric/) como huella dactilar, reconocimiento facial y escaneo de iris, así como credenciales del dispositivo como PINs, patrones y contraseñas. Esta funcionalidad está disponible tanto para plataformas Android como iOS [\[7\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics).
+El Plugin de Seguridad Biométrica de Capacitor permite a los desarrolladores integrar autenticación biométrica y credenciales del dispositivo en sus aplicaciones, asegurando sesiones de usuario seguras. Soporta varios métodos de autenticación, incluyendo [opciones biométricas](https://capgo.app/plugins/capacitor-native-biometric/) como huella dactilar, reconocimiento facial y escaneo de iris, así como credenciales del dispositivo como PINs, patrones y contraseñas. Esta funcionalidad está disponible tanto para plataformas Android como iOS [\[7\]]().
 
 | **Característica de Autenticación** | **Soporte iOS** | **Soporte Android** |
 | --- | --- | --- |
@@ -111,7 +112,7 @@ Para implementar el plugin, necesitarás hacer algunos ajustes específicos por 
 -   **iOS**: Añadir `NSFaceIDUsageDescription` al archivo `Info.plist` para explicar por qué se está usando Face ID.
 -   **Android**: Incluir el permiso `android.permission.USE_BIOMETRIC` en el archivo `AndroidManifest.xml`.
 
-Estos pasos son esenciales para asegurar que el plugin funcione sin problemas y se alinee con las estrategias de gestión segura de sesiones [\[8\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics)[\[10\]](https://www.npmjs.com/package/capacitor-native-biometric).
+Estos pasos son esenciales para asegurar que el plugin funcione sin problemas y se alinee con las estrategias de gestión segura de sesiones [\[8\]]()[\[10\]](https://www.npmjs.com/package/capgo/capacitor-native-biometric).
 
 > "Cada desarrollador de Capacitor es responsable de asegurarse de que su aplicación siga las mejores prácticas de seguridad. Sin el cuidado adecuado, pueden surgir problemas de seguridad importantes que pueden resultar extremadamente dañinos y costosos." – Documentación de Capacitor [\[1\]](https://capacitorjs.com/docs/guides/security)
 
@@ -123,7 +124,7 @@ La versión 9.0.0, lanzada en abril de 2025, introdujo compatibilidad con Capaci
 
 ### Medidas de Seguridad Avanzadas
 
-Para asegurar aún más las sesiones, los desarrolladores deberían implementar tiempos de espera automáticos de sesión y monitorear cambios biométricos. Si se detectan cambios, los tokens de autenticación deberían ser invalidados para prevenir accesos no autorizados [\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta). El plugin también cuenta con un sistema detallado de manejo de errores, proporcionando códigos de retroalimentación que ayudan a los desarrolladores a crear mecanismos de respaldo e informar a los usuarios cuando falla la autenticación [\[8\]](https://github.com/capawesome-team/capacitor-plugins/tree/main/packages/biometrics).
+Para asegurar aún más las sesiones, los desarrolladores deberían implementar tiempos de espera automáticos de sesión y monitorear cambios biométricos. Si se detectan cambios, los tokens de autenticación deberían ser invalidados para prevenir accesos no autorizados [\[11\]](https://ionic.io/resources/articles/ionic-mobile-app-security-trifecta). El plugin también cuenta con un sistema detallado de manejo de errores, proporcionando códigos de retroalimentación que ayudan a los desarrolladores a crear mecanismos de respaldo e informar a los usuarios cuando falla la autenticación [\[8\]]().
 
 Este plugin ofrece una solución robusta para integrar seguridad biométrica en aplicaciones modernas, asegurando tanto conveniencia como protección para los usuarios.
 
@@ -346,7 +347,7 @@ Aquí hay un desglose de soluciones recomendadas según diferentes casos de uso:
 
 ### Para Aplicaciones Pequeñas y Medianas
 
-Si estás trabajando con un equipo pequeño y tienes un presupuesto ajustado, **@capawesome/capacitor-secure-storage** es una opción sólida. Proporciona almacenamiento seguro de clave/valor y tiene un fuerte soporte de la comunidad, haciéndolo una gran opción para la gestión básica de sesiones seguras tanto en iOS como en Android.
+Para equipos más pequeños con presupuestos ajustados, **[@capgo/capacitor-persistent-account](https://capgo.app/plugins/capacitor-persistent-account/)** es una excelente opción. Almacena información de cuenta de forma segura utilizando cifrado nativo de la plataforma (iOS Keychain y Android KeyStore), proporcionando cifrado AES-256 para gestión básica de sesiones seguras en iOS y Android con sólido soporte.
 
 ### Para Aplicaciones Empresariales
 
