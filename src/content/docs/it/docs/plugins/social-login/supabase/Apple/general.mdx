@@ -1,0 +1,102 @@
+---
+title: Accesso Apple Supabase - Configurazione Generale
+description: Scopri come integrare Apple Sign-In con l'autenticazione Supabase utilizzando il plugin Capacitor Social Login.
+locale: it
+sidebar:
+    order: 1
+---
+import { Steps } from '@astrojs/starlight/components';
+
+## Panoramica
+
+Questa guida ti aiuterà a integrare Apple Sign-In con l'autenticazione Supabase. Apple Sign-In fornisce un metodo di autenticazione sicuro e incentrato sulla privacy che funziona su piattaforme iOS, Android e Web.
+
+## Prerequisiti
+
+Prima di iniziare, assicurati di avere:
+
+1. [Creato un progetto Supabase](https://database.new/)
+2. Letto la guida [Configurazione generale Apple Login](/docs/plugins/social-login/apple/general/) per configurare le credenziali OAuth di Apple
+3. Seguito le guide specifiche della piattaforma per configurare le credenziali OAuth di Apple per la tua piattaforma di destinazione:
+    - [Configurazione Android](/docs/plugins/social-login/apple/android/)
+    - [Configurazione iOS](/docs/plugins/social-login/apple/ios/)
+    - [Configurazione Web](/docs/plugins/social-login/apple/web/)
+
+    :::note
+        Prima di iniziare il tutorial Supabase, è necessario generare gli ID client per le piattaforme che intendi utilizzare.
+
+        Per iOS, l'ID client è lo stesso dell'ID app.
+        Per Android e Web, l'ID client è lo stesso dell'ID servizio.
+        Li utilizzerai al passaggio 7 di questa guida.
+    :::
+
+## Abilitazione del provider OAuth di Apple in Supabase
+
+<Steps>
+1. Vai al tuo [Dashboard Supabase](https://app.supabase.com/)
+2. Fai clic sul tuo progetto
+    <img src="/social-login-assets/supabase_project_select.webp" alt="Selettore progetto Supabase" />
+3. Vai al menu `Autenticazione`
+    <img src="/social-login-assets/supabase_authentication_menu.webp" alt="Menu autenticazione Supabase" />
+4. Fai clic sulla scheda `Provider`
+    <img src="/social-login-assets/supabase_providers_tab.webp" alt="Scheda provider Supabase" />
+5. Trova il provider `Apple`
+    <img src="/social-login-assets/supabase_apple_provider.webp" alt="Provider Apple Supabase" />
+6. Abilita il provider `Apple`
+    <img src="/social-login-assets/supabase_apple_provider_enable.webp" alt="Abilita provider Apple Supabase" />
+7. Compila la configurazione dell'ID client:
+
+    :::note
+      Se stai utilizzando Apple login per iOS, l'ID client è lo stesso dell'ID app.
+      Se stai utilizzando Apple login per Android o Web, l'ID client è lo stesso dell'ID servizio.
+      Se stai utilizzando entrambi, devi fornire sia l'ID app che l'ID servizio.
+    :::
+
+    <img src="/social-login-assets/supabase_apple_provider_client_id.webp" alt="ID client provider Apple Supabase" />
+8. Fai clic sul pulsante `Salva`
+    <img src="/social-login-assets/supabase_apple_provider_save.webp" alt="Salva provider Apple Supabase" />
+
+
+    :::note
+      **NON È NECESSARIO** configurare `Chiave segreta (per OAuth)`. Faremo un'implementazione backend personalizzata per gestire l'accesso Apple.
+    :::
+</Steps>
+
+Voilà, ora hai abilitato Apple Sign-In con l'autenticazione Supabase!
+
+## Utilizzo dell'helper di autenticazione
+
+L'implementazione completa include una funzione helper `authenticateWithAppleSupabase()` che gestisce l'intero flusso di Apple Sign-In con Supabase. Questa funzione:
+
+- Inizializza Apple Sign-In con configurazione specifica della piattaforma
+- Gestisce il flusso di autenticazione (nativo su iOS, reindirizzamento OAuth su Android/Web)
+- Estrae il token di identità da Apple
+- Accede a Supabase con il token di identità
+
+:::tip[Implementazione completa]
+L'implementazione completa è disponibile nel file [`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) dell'app di esempio.
+:::
+
+### Utilizzo di base
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Accesso effettuato:', result.user);
+  // Naviga verso la tua area autenticata
+} else {
+  console.error('Errore:', result.error);
+}
+```
+
+### Come funziona
+
+La funzione helper gestisce automaticamente le differenze specifiche della piattaforma:
+
+- **iOS**: Utilizza Apple Sign-In nativo (non è necessario l'URL di reindirizzamento, utilizza automaticamente l'ID del bundle)
+- **Android**: Utilizza il flusso di reindirizzamento OAuth con funzione edge backend (richiede l'ID servizio)
+- **Web**: Utilizza il flusso popup OAuth (richiede l'ID servizio e l'URL della pagina corrente come reindirizzamento)
+
+La funzione restituisce un token di identità da Apple, che viene quindi utilizzato per autenticarsi con Supabase utilizzando `supabase.auth.signInWithIdToken()`.

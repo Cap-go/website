@@ -11,6 +11,10 @@ sidebar:
 
 Capgo handles channels, bundle retention, rollbacks, analytics, and CLI uploads for you. Migration boils down to installing the plugin, calling `CapacitorUpdater.notifyAppReady()`, and—if desired—configuring optional manual controls. The sections below walk through each task directly.
 
+:::tip[Version Targeting Like AppFlow]
+If you relied on AppFlow's automatic version matching (delivering compatible updates based on native version), Capgo provides the same capability with enhanced control. See the [Version Targeting Guide](/docs/live-updates/version-targeting) for detailed strategies on managing updates across multiple app versions.
+:::
+
 ## Step 0 – Capture your current AppFlow setup
 
 - Note your AppFlow **App ID**, existing channels, and signing keys.
@@ -51,7 +55,7 @@ export default config
 | Ionic AppFlow setting | Capgo equivalent | Do you need to set it? |
 | --- | --- | --- |
 | `appId` | Managed in the Capgo dashboard | Automatically supplied when you create the project |
-| `channel` / `defaultChannel` | Channel rules in the dashboard/API | Optional override; defaults come from the server |
+| `channel` / `defaultChannel` | Channel rules in the dashboard/API | Optional override; defaults come from the server. See [Version Targeting](/docs/live-updates/version-targeting) for multi-version strategies |
 | `autoUpdateMethod` | `autoUpdate: true` | Enabled by default |
 | `maxVersions` | Retention policy | Configured centrally (1 month default, 24 months max) |
 | `enabled` | Not required | Capgo toggles availability per channel |
@@ -140,6 +144,24 @@ capgo bundle upload \
   --channel production     # automatically tags platform/version
 ```
 
+### Version-specific deployments (like AppFlow)
+
+If you need to target specific native versions (similar to AppFlow's native version locking):
+
+```bash
+# Only deliver to devices on native version 2.0.0 or higher
+capgo bundle upload \
+  --path dist \
+  --channel production \
+  --native-version "2.0.0"
+
+# Use channels for different major versions
+capgo bundle upload --channel v2  # for app version 2.x
+capgo bundle upload --channel v3  # for app version 3.x
+```
+
+See the [Version Targeting Guide](/docs/live-updates/version-targeting) for comprehensive strategies.
+
 Capgo automatically:
 - Keeps device-level audit logs for every install.
 - Sends proactive emails when you approach plan limits.
@@ -159,6 +181,12 @@ Yes. AppFlow live updates start at **$499/mo**. Capgo starts at **$14/mo** with 
 
 ### When should we migrate?
 Because AppFlow is now in maintenance mode, migrating sooner gives you access to ongoing Capgo innovation. We recommend switching when it fits your release schedule. Our engineering team will help you plan the changeover so your CI/CD and deployments keep running.
+
+## Additional Resources
+
+- **[Version Targeting Guide](/docs/live-updates/version-targeting)** - Deep dive into AppFlow-style version matching strategies
+- **[Breaking Changes](/docs/live-updates/breaking-changes)** - Managing major version updates with channels
+- **[Channel Management](/docs/live-updates/channels)** - Complete channel configuration reference
 
 ## Need help?
 

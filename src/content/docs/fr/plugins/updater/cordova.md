@@ -1,4 +1,5 @@
 ---
+locale: fr
 title: "Cordova"
 description: "Exploring the potential availability of the capacitor-updater plugin for Cordova and the challenges involved in its Développement."
 sidebar: 

@@ -1,4 +1,5 @@
 ---
+locale: fr
 title: "From V5 to V6"
 description: "A detailed Guide on transitioning from Version 5 to Version 6 of Capgo updater, outlining the necessary steps and considerations for a successful Mise à niveau process, ensuring compatibility with the latest Capacitor Fonctionnalités and improvements."
 sidebar: 

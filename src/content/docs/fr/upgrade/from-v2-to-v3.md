@@ -1,4 +1,5 @@
 ---
+locale: fr
 title: "From V2 to V3"
 description: "A comprehensive Guide on transitioning from Version 2 to Version 3 of Capgo updater, detailing the necessary steps and considerations for a successful Mise à niveau process"
 sidebar: 

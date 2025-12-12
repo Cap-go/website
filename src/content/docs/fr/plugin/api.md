@@ -1,4 +1,5 @@
 ---
+locale: fr
 title: "Functions and Paramètres"
 description: "All Disponible method and Paramètres of the plugin"
 sidebar: 

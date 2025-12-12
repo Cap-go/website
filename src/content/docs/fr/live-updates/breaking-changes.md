@@ -1,4 +1,5 @@
 ---
+locale: fr
 title: "Breaking Changes"
 description: "How to handle breaking changes with versioned Canaux"
 sidebar: 

@@ -1,4 +1,5 @@
 ---
+locale: fr
 title: "Chiffrement"
 description: "How to encrypt your data with Chiffrement v2, secure your Application and ensure only you can Mise à jour your Utilisateurs with your Mises à jour"
 sidebar: 

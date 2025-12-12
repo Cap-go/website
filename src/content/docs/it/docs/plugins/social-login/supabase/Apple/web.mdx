@@ -1,0 +1,96 @@
+---
+title: Accesso Apple Supabase su Web
+description: Scopri come integrare Apple Sign-In con l'autenticazione Supabase su Web.
+locale: it
+sidebar:
+    order: 4
+---
+
+## Prerequisiti
+
+Questa guida ti aiuterà a integrare Apple Sign-In con l'autenticazione Supabase su Web. Si presume che tu abbia già completato:
+- la [Configurazione Web Apple Login](/docs/plugins/social-login/apple/web/)
+- la [Configurazione generale Apple Login Supabase](./general/).
+
+## Implementazione
+
+L'implementazione completa è disponibile nel file [`supabaseAuthUtils.ts`](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) dell'app di esempio. Questa guida spiega i concetti chiave e come usarlo.
+
+### Utilizzo dell'helper di autenticazione
+
+La funzione `authenticateWithAppleSupabase` gestisce l'intero flusso di autenticazione:
+
+```typescript
+import { authenticateWithAppleSupabase } from './supabaseAuthUtils';
+
+const result = await authenticateWithAppleSupabase();
+if (result.success) {
+  console.log('Accesso effettuato:', result.user);
+  // Naviga verso la tua area autenticata
+} else {
+  console.error('Errore:', result.error);
+}
+```
+
+## Come funziona
+
+Su Web, Apple Sign-In utilizza un flusso popup OAuth:
+
+1. **Inizializzazione**: Il plugin viene inizializzato con l'ID servizio e l'URL della pagina corrente come URL di reindirizzamento
+2. **Popup OAuth**: Apre una finestra popup con la pagina OAuth di Apple
+3. **Autenticazione utente**: L'utente si autentica con Apple nel popup
+4. **Token di identità**: Apple restituisce un token di identità (JWT) contenente le informazioni dell'utente
+5. **Autenticazione Supabase**: Il token di identità viene inviato a Supabase utilizzando `signInWithIdToken()`
+
+La funzione helper rileva automaticamente la piattaforma web e configura tutto in modo appropriato.
+
+## Note importanti
+
+### Configurazione dell'ID servizio
+
+- Web richiede il tuo ID servizio Apple (lo stesso di Android)
+- L'ID servizio deve essere configurato nel portale di Apple Developer con gli URL di ritorno corretti
+- Assicurati che il tuo dominio sia aggiunto ai domini consentiti nel portale di Apple Developer
+
+### URL di reindirizzamento
+
+- Su Web, l'URL di reindirizzamento viene impostato automaticamente su `window.location.href` (URL della pagina corrente)
+- Questo deve corrispondere a uno degli URL di ritorno configurati nel portale di Apple Developer
+- Assicurati che sia l'URL con che senza barra finale siano configurati nel portale di Apple Developer
+
+### ID client Supabase
+
+In Supabase, configura il tuo provider Apple con:
+- **ID client**: L'ID servizio Apple (ad es. `com.example.app.service`)
+
+Se stai utilizzando anche iOS, dovrai fornire sia l'ID app che l'ID servizio nel campo ID client di Supabase (separati da virgola).
+
+### Aggiorna la funzione helper
+
+Quando utilizzi la funzione helper `authenticateWithAppleSupabase`, **devi** aggiornare l'ID client in modo che corrisponda all'ID servizio Apple:
+
+```typescript
+await SocialLogin.initialize({
+  apple: {
+    clientId: isIOS
+      ? undefined // iOS utilizza automaticamente l'ID del bundle
+      : 'your.service.id.here', // Il tuo ID servizio Apple per Web e Android
+    redirectUrl: redirectUrl,
+  },
+});
+```
+
+:::caution[Importante]
+Sostituisci `'your.service.id.here'` con il tuo ID servizio Apple effettivo (lo stesso valore configurato nel portale di Apple Developer).
+:::
+
+## Risoluzione dei problemi
+
+Se l'autenticazione non riesce:
+
+- **Mancata corrispondenza dell'ID servizio**: Verifica che l'ID servizio corrisponda nel portale di Apple Developer e nel tuo codice
+- **URL di ritorno non configurato**: Assicurati che l'URL della pagina corrente (con e senza barra finale) sia configurato nel portale di Apple Developer
+- **Popup bloccato**: Controlla le impostazioni del browser - alcuni browser bloccano i popup per impostazione predefinita
+- **Dominio non consentito**: Verifica che il tuo dominio sia aggiunto ai domini consentiti nel portale di Apple Developer
+- **Configurazione Supabase**: Verifica che l'ID servizio sia correttamente configurato nelle impostazioni del provider Apple di Supabase
+- Consulta il [codice dell'app di esempio](https://github.com/Cap-go/capacitor-social-login/blob/main/example-app/src/supabaseAuthUtils.ts) come riferimento

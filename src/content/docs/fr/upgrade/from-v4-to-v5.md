@@ -1,4 +1,5 @@
 ---
+locale: fr
 title: "From V4 to V5"
 description: "How to Mise à niveau from V4 to V5, of Capgo updater what are the breaking change you should take care of, it's pretty simple"
 sidebar: 
